@@ -3,23 +3,18 @@
   "content": "Room grouping",
   "content_en_sha1_hash": "e82625e8fe8d243e9111a0521eeb813b868cb67b",
   "created_at": "2026-02-19T13:36:24.882Z",
-  "updated_at": "2026-02-19T13:36:32.422Z",
+  "updated_at": "2026-04-11T21:11:26.301Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a section title within a dialog, indicating the settings related to organizing rooms into groups.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:11:26.301Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/index.tsx",
-      "line_number": 431,
+      "line_number": 381,
       "context": ")}\n \n <div className={styles.settingRoomGroups}>\n <div className={styles.roomGroups}>\n <div className={styles.title}>\n {t(\"GroupingRooms:RoomGrouping\")}\n </div>\n <ToggleButton\n className={styles.roomGroupsToggle}\n isChecked={localGroupingEnabled}\n onChange={onToggleGrouping}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/RoomGroupingDialog/index.tsx",
-      "line_number": 88,
-      "context": "visible={visible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>{t(\"GroupingRooms:RoomGrouping\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.content}>\n <div\n className={classNames(styles.searchBarContainer, styles.fadeRight, {\n [styles.searchBarContainerTablet]: !isDesktopView,",
       "module": "/packages/client"
     }
   ],

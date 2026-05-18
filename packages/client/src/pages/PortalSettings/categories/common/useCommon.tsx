@@ -31,8 +31,7 @@ import CommonStore from "SRC_DIR/store/CommonStore";
 import DefaultTemplatesStore from "SRC_DIR/store/portal-settings/DefaultTemplatesStore";
 
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { mapCulturesToArray } from "@docspace/shared/utils/common";
-import i18n from "SRC_DIR/i18n";
+import { mapCulturesToArray } from "@docspace/shared/utils/cultures";
 
 export type UseCommonProps = {
   loadBaseInfo?: (page: string) => Promise<void>;
@@ -69,7 +68,8 @@ const useCommon = ({
         | "dns-settings"
         | "configure-deep-link"
         | "welcome-page-settings"
-        | "ad-management",
+        | "ad-management"
+        | "ai-services-management",
     ) => {
       if (isLoaded) return;
 
@@ -104,7 +104,7 @@ const useCommon = ({
   }, [getDefaultTemplates]);
 
   const cultureNames = useMemo(
-    () => (cultures ? mapCulturesToArray(cultures, true, i18n) : []),
+    () => (cultures ? mapCulturesToArray(cultures, true) : []),
     [cultures],
   );
 
@@ -121,6 +121,9 @@ const useCommon = ({
 
     if (window.location.pathname.includes("ad-management"))
       actions.push(getCustomizationData("ad-management"));
+
+    if (window.location.pathname.includes("ai-services-management"))
+      actions.push(getCustomizationData("ai-services-management"));
 
     if (window.location.pathname.includes("dns-settings"))
       actions.push(getCustomizationData("dns-settings"));
@@ -159,3 +162,4 @@ const useCommon = ({
 };
 
 export default useCommon;
+

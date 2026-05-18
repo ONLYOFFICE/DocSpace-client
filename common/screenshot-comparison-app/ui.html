@@ -1,0 +1,853 @@
+<!--
+ (c) Copyright Ascensio System SIA 2009-2026
+
+ This program is a free software product.
+ You can redistribute it and/or modify it under the terms
+ of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+ Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+ to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+ any third-party rights.
+
+ This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+ of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+ the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+
+ You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+
+ The  interactive user interfaces in modified source and object code versions of the Program must
+ display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+
+ Pursuant to Section 7(b) of the License you must retain the original Product logo when
+ distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+ trademark law for use of our trademarks.
+
+ All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+ content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+ International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+-->
+ 
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Screenshot Comparison Tool</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        font-family:
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          sans-serif;
+        background: #0d1117;
+        color: #c9d1d9;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* ─── Top panel ─── */
+
+      #comparison-panel {
+        flex-shrink: 0;
+        height: 48px;
+        background: #161b22;
+        border-bottom: 1px solid #30363d;
+        display: flex;
+        align-items: center;
+        padding: 0 12px;
+        gap: 8px;
+        z-index: 10000;
+      }
+
+      .sep {
+        width: 1px;
+        height: 24px;
+        background: #30363d;
+        flex-shrink: 0;
+      }
+
+      #url-input {
+        width: 340px;
+        padding: 5px 10px;
+        border: 1px solid #30363d;
+        border-radius: 6px;
+        background: #0d1117;
+        color: #c9d1d9;
+        font-size: 13px;
+        outline: none;
+      }
+      #url-input:focus {
+        border-color: #58a6ff;
+      }
+      #url-input::placeholder {
+        color: #484f58;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 5px 12px;
+        border: 1px solid #30363d;
+        border-radius: 6px;
+        background: #21262d;
+        color: #c9d1d9;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        white-space: nowrap;
+        transition:
+          background 0.12s,
+          border-color 0.12s;
+        line-height: 20px;
+      }
+      .btn:hover {
+        background: #30363d;
+      }
+      .btn:active {
+        transform: scale(0.97);
+      }
+      .btn.primary {
+        background: #238636;
+        border-color: #2ea043;
+        color: #fff;
+      }
+      .btn.primary:hover {
+        background: #2ea043;
+      }
+      .btn.active {
+        border-color: #58a6ff;
+        background: #1f2937;
+      }
+      .btn:disabled {
+        opacity: 0.4;
+        cursor: default;
+        pointer-events: none;
+      }
+
+      .badge {
+        display: none;
+        font-size: 11px;
+        padding: 2px 6px;
+        border-radius: 10px;
+        background: #238636;
+        color: #fff;
+      }
+      .badge.visible {
+        display: inline-block;
+      }
+
+      #status-text {
+        margin-left: auto;
+        font-size: 12px;
+        color: #8b949e;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 320px;
+      }
+
+      /* ─── Error toast ─── */
+
+      #error-toast {
+        position: fixed;
+        top: 56px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 20001;
+        max-width: 720px;
+        width: max-content;
+        padding: 10px 20px;
+        border-radius: 8px;
+        background: #3d1214;
+        border: 1px solid #f8514966;
+        color: #f85149;
+        font-size: 13px;
+        line-height: 1.5;
+        display: none;
+        align-items: flex-start;
+        gap: 10px;
+        word-break: break-word;
+        white-space: normal;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      }
+      #error-toast.visible {
+        display: flex;
+      }
+      #error-toast-text {
+        flex: 1;
+      }
+      #error-toast-close {
+        background: none;
+        border: none;
+        color: #f85149;
+        cursor: pointer;
+        font-size: 16px;
+        padding: 0 2px;
+        line-height: 1;
+        flex-shrink: 0;
+      }
+
+      /* ─── Iframe ─── */
+
+      #docspace-iframe {
+        flex: 1;
+        width: 100%;
+        border: none;
+      }
+
+      /* ─── Welcome screen ─── */
+
+      #welcome {
+        position: fixed;
+        top: 48px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        color: #8b949e;
+        z-index: 5;
+        background: #0d1117;
+      }
+      #welcome.hidden {
+        display: none;
+      }
+      #welcome h2 {
+        font-size: 20px;
+        font-weight: 600;
+        color: #c9d1d9;
+      }
+      #welcome p {
+        max-width: 420px;
+        text-align: center;
+        line-height: 1.6;
+        font-size: 14px;
+      }
+
+      /* ─── Selection overlay ─── */
+
+      #selection-overlay {
+        position: fixed;
+        top: 48px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        cursor: crosshair;
+        z-index: 9999;
+        display: none;
+        background: rgba(0, 0, 0, 0.12);
+      }
+
+      #selection-box {
+        position: fixed;
+        border: 2px dashed #58a6ff;
+        background: rgba(88, 166, 255, 0.06);
+        pointer-events: none;
+        display: none;
+        z-index: 9999;
+      }
+
+      #selection-size-label {
+        position: fixed;
+        padding: 3px 8px;
+        border-radius: 4px;
+        background: rgba(0, 0, 0, 0.78);
+        color: #fff;
+        font-size: 11px;
+        pointer-events: none;
+        display: none;
+        z-index: 10000;
+        white-space: nowrap;
+      }
+
+      #selection-hint {
+        position: fixed;
+        top: 64px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10001;
+        padding: 8px 20px;
+        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.82);
+        color: #fff;
+        font-size: 13px;
+        pointer-events: none;
+        display: none;
+        white-space: nowrap;
+      }
+
+      /* ─── Result panel ─── */
+
+      #result-panel {
+        position: fixed;
+        top: 48px;
+        right: -440px;
+        bottom: 0;
+        width: 440px;
+        background: #161b22;
+        border-left: 1px solid #30363d;
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+        transition: right 0.25s ease;
+      }
+      #result-panel.visible {
+        right: 0;
+      }
+
+      .result-header {
+        padding: 14px 16px;
+        border-bottom: 1px solid #30363d;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .result-header h3 {
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .result-stats {
+        padding: 12px 16px;
+        border-bottom: 1px solid #30363d;
+        display: flex;
+        gap: 20px;
+      }
+      .stat {
+        font-size: 11px;
+        color: #8b949e;
+        line-height: 1.4;
+      }
+      .stat strong {
+        display: block;
+        font-size: 16px;
+        color: #c9d1d9;
+        font-weight: 600;
+      }
+      .stat.pass strong {
+        color: #3fb950;
+      }
+      .stat.fail strong {
+        color: #f85149;
+      }
+
+      .result-tabs {
+        display: flex;
+        border-bottom: 1px solid #30363d;
+      }
+      .result-tab {
+        flex: 1;
+        padding: 8px;
+        text-align: center;
+        font-size: 12px;
+        color: #8b949e;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        transition: color 0.12s;
+      }
+      .result-tab:hover {
+        color: #c9d1d9;
+      }
+      .result-tab.active {
+        color: #58a6ff;
+        border-bottom-color: #58a6ff;
+      }
+
+      .result-image-wrap {
+        flex: 1;
+        overflow: auto;
+        padding: 16px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+      }
+      .result-image-wrap img {
+        max-width: 100%;
+        height: auto;
+        border: 1px solid #30363d;
+        border-radius: 6px;
+      }
+
+      .result-saved {
+        padding: 10px 16px;
+        border-top: 1px solid #30363d;
+        font-size: 11px;
+        color: #8b949e;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top panel -->
+    <div id="comparison-panel">
+      <input
+        type="text"
+        id="url-input"
+        placeholder="Enter DocSpace URL and press Enter"
+        spellcheck="false"
+      />
+      <button class="btn" id="go-btn">Go</button>
+
+      <div class="sep"></div>
+
+      <button class="btn" id="load-design-btn">Load Design</button>
+      <span class="badge" id="design-badge">design.png</span>
+      <input
+        type="file"
+        id="design-file-input"
+        accept="image/png"
+        style="display: none"
+      />
+
+      <div class="sep"></div>
+
+      <button class="btn" id="select-area-btn" disabled>Select Area</button>
+      <button class="btn" id="clear-sel-btn" style="display: none">
+        Clear
+      </button>
+      <button class="btn primary" id="compare-btn" disabled>Compare</button>
+
+      <div class="sep"></div>
+
+      <button class="btn" id="result-btn" disabled>Result</button>
+
+      <span id="status-text">Enter a URL to start</span>
+    </div>
+
+    <!-- Welcome screen (shown until first navigation) -->
+    <div id="welcome">
+      <h2>Screenshot Comparison Tool</h2>
+      <p>
+        Enter a DocSpace URL above and press Enter.<br />
+        Log in, navigate to the page you need, open a modal or panel — then load
+        a Figma design and compare.
+      </p>
+    </div>
+
+    <!-- DocSpace iframe -->
+    <iframe id="docspace-iframe" src="about:blank"></iframe>
+
+    <!-- Error toast -->
+    <div id="error-toast">
+      <span id="error-toast-text"></span>
+      <button id="error-toast-close">✕</button>
+    </div>
+
+    <!-- Selection layer -->
+    <div id="selection-overlay"></div>
+    <div id="selection-box"></div>
+    <div id="selection-size-label"></div>
+    <div id="selection-hint">
+      Drag to select area &middot; Click without dragging for full page &middot;
+      Esc to cancel
+    </div>
+
+    <!-- Result side-panel -->
+    <div id="result-panel">
+      <div class="result-header">
+        <h3>Comparison Result</h3>
+        <button class="btn" id="close-result-btn" style="padding: 3px 8px">
+          ✕
+        </button>
+      </div>
+      <div class="result-stats" id="result-stats"></div>
+      <div class="result-tabs">
+        <div class="result-tab active" data-tab="diff">Diff</div>
+        <div class="result-tab" data-tab="screenshot">Screenshot</div>
+        <div class="result-tab" data-tab="design">Design</div>
+        <div class="result-tab" data-tab="overlap">Overlap</div>
+      </div>
+      <div class="result-image-wrap">
+        <img id="result-image" />
+      </div>
+      <div class="result-saved">
+        Files saved to <strong>./images/</strong>: page.png, diff.png
+      </div>
+    </div>
+
+    <script>
+      /* ═══════════════════ State ═══════════════════ */
+
+      let designBase64 = null;
+      let screenshotBase64 = null;
+      let diffBase64 = null;
+      let overlapBase64 = null;
+      let selectedClip = null;
+      let selectionMode = false;
+
+      /* ═══════════════════ Elements ═══════════════════ */
+
+      const $ = (id) => document.getElementById(id);
+
+      const urlInput = $("url-input");
+      const goBtn = $("go-btn");
+      const iframe = $("docspace-iframe");
+      const welcome = $("welcome");
+      const loadDesignBtn = $("load-design-btn");
+      const designFileInput = $("design-file-input");
+      const designBadge = $("design-badge");
+      const selectAreaBtn = $("select-area-btn");
+      const clearSelBtn = $("clear-sel-btn");
+      const compareBtn = $("compare-btn");
+      const resultBtn = $("result-btn");
+      const statusText = $("status-text");
+      const selOverlay = $("selection-overlay");
+      const selBox = $("selection-box");
+      const selSizeLabel = $("selection-size-label");
+      const selHint = $("selection-hint");
+      const resultPanel = $("result-panel");
+      const resultStats = $("result-stats");
+      const resultImage = $("result-image");
+      const closeResultBtn = $("close-result-btn");
+      const resultTabs = document.querySelectorAll(".result-tab");
+
+      const PANEL_H = 48;
+
+      const errorToast = $("error-toast");
+      const errorToastText = $("error-toast-text");
+      const errorToastClose = $("error-toast-close");
+
+      errorToastClose.addEventListener("click", () => {
+        errorToast.classList.remove("visible");
+      });
+
+      function setStatus(text) {
+        statusText.textContent = text;
+        // Hide error toast on normal status updates
+        errorToast.classList.remove("visible");
+      }
+
+      function setError(message) {
+        statusText.textContent = "Error";
+        errorToastText.textContent = message;
+        errorToast.classList.add("visible");
+        console.error("[compare]", message);
+      }
+
+      function updateButtons() {
+        const hasDesign = !!designBase64;
+        selectAreaBtn.disabled = !hasDesign;
+        compareBtn.disabled = !hasDesign;
+      }
+
+      /* ═══════════════════ Navigation ═══════════════════ */
+
+      function navigateIframe() {
+        let url = urlInput.value.trim();
+        if (!url) return;
+        if (!/^https?:\/\//i.test(url)) url = "https://" + url;
+        iframe.src = url;
+        welcome.classList.add("hidden");
+        setStatus("Loading...");
+      }
+
+      goBtn.addEventListener("click", navigateIframe);
+      urlInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") navigateIframe();
+      });
+
+      iframe.addEventListener("load", () => {
+        if (iframe.src && iframe.src !== "about:blank") {
+          setStatus(designBase64 ? "Ready to compare" : "Load a design image");
+        }
+      });
+
+      /* ═══════════════════ Load Design ═══════════════════ */
+
+      loadDesignBtn.addEventListener("click", () => designFileInput.click());
+
+      designFileInput.addEventListener("change", (e) => {
+        if (e.target.files[0]) loadDesignFile(e.target.files[0]);
+      });
+
+      async function loadDesignFile(file) {
+        if (file.type !== "image/png") {
+          setError("Only PNG files are supported");
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = async () => {
+          designBase64 = reader.result.split(",")[1];
+          designBadge.textContent = file.name;
+          designBadge.classList.add("visible");
+          updateButtons();
+          setStatus("Design loaded — select area or compare");
+
+          try {
+            const result = JSON.parse(await window.__saveDesign(designBase64));
+            if (result.error) setError("Failed to save design: " + result.error);
+          } catch (err) {
+            setError("Failed to save design: " + err.message);
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+
+      /* ═══════════════════ Area Selection ═══════════════════ */
+
+      selectAreaBtn.addEventListener("click", () => {
+        selectionMode ? exitSelectionMode() : enterSelectionMode();
+      });
+
+      clearSelBtn.addEventListener("click", () => {
+        selectedClip = null;
+        clearSelBtn.style.display = "none";
+        setStatus("Selection cleared — full page will be captured");
+      });
+
+      function enterSelectionMode() {
+        selectionMode = true;
+        selectAreaBtn.classList.add("active");
+        selectAreaBtn.textContent = "Cancel";
+        selOverlay.style.display = "block";
+        selHint.style.display = "block";
+      }
+
+      function exitSelectionMode() {
+        selectionMode = false;
+        selectAreaBtn.classList.remove("active");
+        selectAreaBtn.textContent = "Select Area";
+        selOverlay.style.display = "none";
+        selBox.style.display = "none";
+        selSizeLabel.style.display = "none";
+        selHint.style.display = "none";
+      }
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && selectionMode) exitSelectionMode();
+      });
+
+      let sx = null,
+        sy = null,
+        dragging = false;
+
+      selOverlay.addEventListener("mousedown", (e) => {
+        sx = e.clientX;
+        sy = e.clientY;
+        dragging = false;
+        selBox.style.display = "block";
+        selBox.style.left = sx + "px";
+        selBox.style.top = sy + "px";
+        selBox.style.width = "0";
+        selBox.style.height = "0";
+      });
+
+      selOverlay.addEventListener("mousemove", (e) => {
+        if (sx == null) return;
+        dragging = true;
+        const x = Math.min(e.clientX, sx);
+        const y = Math.min(e.clientY, sy);
+        const w = Math.abs(e.clientX - sx);
+        const h = Math.abs(e.clientY - sy);
+        selBox.style.left = x + "px";
+        selBox.style.top = y + "px";
+        selBox.style.width = w + "px";
+        selBox.style.height = h + "px";
+
+        selSizeLabel.textContent = w + " × " + h;
+        selSizeLabel.style.left = x + w + 8 + "px";
+        selSizeLabel.style.top = y + "px";
+        selSizeLabel.style.display = "block";
+      });
+
+      selOverlay.addEventListener("mouseup", (e) => {
+        const ex = e.clientX;
+        const ey = e.clientY;
+        selSizeLabel.style.display = "none";
+        exitSelectionMode();
+
+        if (!dragging || Math.abs(ex - sx) < 4 || Math.abs(ey - sy) < 4) {
+          selectedClip = null;
+          clearSelBtn.style.display = "none";
+          setStatus("Full page will be captured");
+          return;
+        }
+
+        selectedClip = {
+          x: Math.min(sx, ex),
+          y: Math.min(sy, ey) - PANEL_H,
+          width: Math.abs(ex - sx),
+          height: Math.abs(ey - sy),
+        };
+
+        clearSelBtn.style.display = "inline-flex";
+        setStatus(
+          "Area selected: " +
+            selectedClip.width +
+            "×" +
+            selectedClip.height +
+            " — press Compare",
+        );
+      });
+
+      /* ═══════════════════ Compare ═══════════════════ */
+
+      function getDesignDimensions() {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () =>
+            resolve({ width: img.naturalWidth, height: img.naturalHeight });
+          img.onerror = () => resolve(null);
+          img.src = "data:image/png;base64," + designBase64;
+        });
+      }
+
+      compareBtn.addEventListener("click", async () => {
+        if (!designBase64) return;
+
+        // Warn if browser zoom is not 100%.
+        // Standard DPR values: 1 (normal), 2 (Retina/HiDPI), 3 (ultra-HiDPI).
+        // Non-integer DPR indicates active browser zoom.
+        const dpr = window.devicePixelRatio;
+        const isStandardDPR = [1, 2, 3].some((d) => Math.abs(dpr - d) < 0.05);
+        if (!isStandardDPR) {
+          const nearest = Math.round(dpr);
+          const zoomPercent = Math.round((dpr / (nearest || 1)) * 100);
+          setError(
+            "Browser zoom is ~" +
+              zoomPercent +
+              "%. Set it to 100% (Cmd+0 / Ctrl+0) for accurate comparison.",
+          );
+          return;
+        }
+
+        compareBtn.disabled = true;
+        setStatus("Taking screenshot...");
+
+        try {
+          const dims = await getDesignDimensions();
+          if (!dims) {
+            setError("Could not read design image dimensions");
+            compareBtn.disabled = false;
+            return;
+          }
+          const screenshotArgs = {
+            designWidth: dims.width,
+            designHeight: dims.height,
+          };
+          if (selectedClip) {
+            screenshotArgs.clip = selectedClip;
+          }
+          const ssRaw = await window.__takeScreenshot(
+            JSON.stringify(screenshotArgs),
+          );
+          const ss = JSON.parse(ssRaw);
+
+          if (ss.error) {
+            setError(ss.error);
+            compareBtn.disabled = false;
+            return;
+          }
+
+          screenshotBase64 = ss.base64;
+          setStatus("Comparing with design...");
+
+          const cmpRaw = await window.__runComparison(
+            designBase64,
+            screenshotBase64,
+          );
+          const cmp = JSON.parse(cmpRaw);
+
+          if (cmp.error) {
+            setError(cmp.error);
+            compareBtn.disabled = false;
+            return;
+          }
+
+          diffBase64 = cmp.diffBase64;
+          overlapBase64 = cmp.overlapBase64;
+
+          const pass = parseFloat(cmp.diffPercent) <= 1;
+          let statsHtml =
+            '<div class="stat ' +
+            (pass ? "pass" : "fail") +
+            '"><strong>' +
+            cmp.diffPercent +
+            "%</strong>difference</div>" +
+            '<div class="stat"><strong>' +
+            cmp.width +
+            "×" +
+            cmp.height +
+            "</strong>size</div>" +
+            '<div class="stat"><strong>' +
+            Number(cmp.diffPixels).toLocaleString() +
+            "</strong>pixels differ</div>" +
+            '<div class="stat"><strong>' +
+            Number(cmp.totalPixels).toLocaleString() +
+            "</strong>total pixels</div>";
+
+          if (cmp.resizedFrom) {
+            statsHtml +=
+              '<div class="stat" style="flex-basis:100%;color:#d29922;font-size:12px">' +
+              "Screenshot adjusted from " +
+              cmp.resizedFrom +
+              " to " +
+              cmp.width +
+              "×" +
+              cmp.height +
+              " to match the design" +
+              "</div>";
+          }
+
+          resultStats.innerHTML = statsHtml;
+
+          showResultTab("diff");
+          resultPanel.classList.add("visible");
+          resultBtn.disabled = false;
+          setStatus(
+            pass
+              ? "Layout matches design (< 1%)"
+              : "Layout mismatch — " + cmp.diffPercent + "% difference",
+          );
+        } catch (err) {
+          setError(err.message);
+        }
+
+        compareBtn.disabled = false;
+      });
+
+      /* ═══════════════════ Result Panel ═══════════════════ */
+
+      resultBtn.addEventListener("click", () => {
+        resultPanel.classList.toggle("visible");
+      });
+
+      closeResultBtn.addEventListener("click", () => {
+        resultPanel.classList.remove("visible");
+      });
+
+      resultTabs.forEach((tab) => {
+        tab.addEventListener("click", () => showResultTab(tab.dataset.tab));
+      });
+
+      function showResultTab(name) {
+        resultTabs.forEach((t) =>
+          t.classList.toggle("active", t.dataset.tab === name),
+        );
+        const map = {
+          diff: diffBase64,
+          screenshot: screenshotBase64,
+          design: designBase64,
+          overlap: overlapBase64,
+        };
+        if (map[name]) {
+          resultImage.src = "data:image/png;base64," + map[name];
+        }
+      }
+    </script>
+  </body>
+</html>
+

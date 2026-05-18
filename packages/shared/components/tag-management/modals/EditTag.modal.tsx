@@ -81,6 +81,7 @@ export const EditTagModal = ({
           label={t("ConvertDialog:HideMessage")}
           isChecked={isChecked}
           onChange={onChangeCheckbox}
+          dataTestId="edit_tag_checkbox"
         />
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -92,6 +93,7 @@ export const EditTagModal = ({
           scale
           primary
           onClick={onSubmit}
+          testId="edit_tag_submit_button"
         />
         <Button
           className="cancel-button"
@@ -100,6 +102,7 @@ export const EditTagModal = ({
           size={ButtonSize.normal}
           scale
           onClick={onClose}
+          testId="edit_tag_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

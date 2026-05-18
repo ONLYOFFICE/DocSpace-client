@@ -26,26 +26,22 @@
 
 import Script from "next/script";
 
-let runtime = null;
+import { getStaticHash } from "@docspace/shared/utils/static-hash";
 
-try {
-  runtime = require("../../../runtime.json");
-} catch (e) {
-  console.log(e);
-}
-const hashDate = runtime ? runtime?.date : new Date().getTime();
+const browserDetectorHash = getStaticHash("browserDetector.js");
+const configHash = getStaticHash("config.json");
 
 const Scripts = () => {
   return (
     <>
       <Script
         id="browser-detector"
-        src={`/static/scripts/browserDetector.js?hash=${runtime?.checksums?.["browserDetector.js"] ?? hashDate}`}
+        src={`/static/scripts/browserDetector.js?hash=${browserDetectorHash}`}
       />
       <Script id="portal-config">
         {`
           console.log("It's LOGIN INIT");
-          fetch("/static/scripts/config.json?hash=${runtime?.checksums["config.json"] ?? hashDate}")
+          fetch("/static/scripts/config.json?hash=${configHash}")
             .then((response) => {
               if (!response.ok) {
                 throw new Error("HTTP error " + response.status);
@@ -53,11 +49,10 @@ const Scripts = () => {
               return response.json();
             })
             .then((config) => {
-              console.log(config)
               window.ClientConfig = {
                 ...config,
               };
-    
+
               if (
                 window.navigator.userAgent.includes("ZoomWebKit") ||
                 window.navigator.userAgent.includes("ZoomApps")
@@ -66,8 +61,6 @@ const Scripts = () => {
                   requestClose: true,
                 };
               }
-    
-              //console.log({ ClientConfig: window.ClientConfig });
             })
             .catch((e) => {
               console.error(e);

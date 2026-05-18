@@ -1,0 +1,78 @@
+@use "@docspace/ui-kit/styles/mixins";
+
+.floatingButton {
+  --ai-chat-button-bg-v: var(
+    --ai-chat-button-bg,
+    var(--color-primary-element)
+  );
+  --ai-chat-button-color-v: var(
+    --ai-chat-button-color,
+    var(--color-primary-element-text)
+  );
+
+  position: absolute;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0));
+  z-index: 100;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: var(--ai-chat-button-bg-v);
+  color: var(--ai-chat-button-color-v);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    bottom 0.2s ease;
+
+  &:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+
+  &[data-position="left"] {
+    left: 24px;
+  }
+
+  &[data-position="right"] {
+    right: 24px;
+  }
+
+  &[data-shift-up="true"] {
+    bottom: calc(88px + env(safe-area-inset-bottom, 0));
+  }
+
+  @include mixins.mobile {
+    &[data-position="left"] {
+      left: 16px;
+    }
+
+    &[data-position="right"] {
+      right: 16px;
+    }
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    path {
+      fill: var(--ai-chat-button-color-v);
+    }
+  }
+}
+

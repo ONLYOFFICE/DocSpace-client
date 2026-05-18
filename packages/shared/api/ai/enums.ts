@@ -24,18 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export enum RoleType {
-  UserMessage = 0,
-  AssistantMessage = 1,
-  Error = 10,
-}
+import { ServerType } from "@docspace/ui-kit/enums/ai";
 
-export enum ContentType {
-  Text = 0,
-  Tool = 1,
-  Files = 2,
-  Images = 3,
-}
+export { ServerType };
 
 export enum ProviderType {
   PortalAi = 0,
@@ -49,22 +40,6 @@ export enum ProviderType {
   Google = 8,
 }
 
-export enum EventType {
-  MessageStart = "message_start",
-  MessageStop = "message_stop",
-  NewToken = "new_token",
-  ToolCall = "tool_call",
-  ToolResult = "tool_result",
-  Error = "error",
-}
-
-export enum ServerType {
-  Custom,
-  Portal,
-  GitHub,
-  Box,
-}
-
 export enum ToolsPermission {
   Allow,
   AlwaysAllow,
@@ -74,10 +49,12 @@ export enum ToolsPermission {
 export enum WebSearchType {
   None,
   Exa,
+  PortalAi,
 }
 
 export enum KnowledgeType {
   None,
   OpenAi,
   OpenRouter,
+  PortalAi,
 }

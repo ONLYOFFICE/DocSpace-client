@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, ChangeEvent } from "react";
+import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -37,7 +38,7 @@ import { createGroup } from "@docspace/shared/api/groups";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TOnSubmit } from "@docspace/ui-kit/components/selector";
 
-import { StyledBodyContent } from "./CreateEditGroupDialog.styled";
+import styles from "./CreateEditGroupDialog.module.scss";
 import { GroupParams } from "./types";
 import GroupNameParam from "./sub-components/GroupNameParam";
 import HeadOfGroup from "./sub-components/HeadOfGroupParam";
@@ -48,9 +49,14 @@ import { SelectMembersPanel } from "./sub-components/create-components/SelectMem
 interface CreateGroupDialogProps {
   visible: boolean;
   onClose: () => void;
+  currentUserId?: string;
 }
 
-const CreateGroupDialog = ({ visible, onClose }: CreateGroupDialogProps) => {
+const CreateGroupDialog = ({
+  visible,
+  onClose,
+  currentUserId,
+}: CreateGroupDialogProps) => {
   const { t } = useTranslation([
     "Common",
     "PeopleTranslations",
@@ -156,7 +162,7 @@ const CreateGroupDialog = ({ visible, onClose }: CreateGroupDialogProps) => {
         <ModalDialog.Header>{t("Common:CreateGroup")}</ModalDialog.Header>
 
         <ModalDialog.Body>
-          <StyledBodyContent>
+          <div className={styles.bodyContent}>
             <GroupNameParam
               groupName={groupParams.groupName}
               onChangeGroupName={onChangeGroupName}
@@ -172,7 +178,7 @@ const CreateGroupDialog = ({ visible, onClose }: CreateGroupDialogProps) => {
               removeMember={removeMember}
               onShowSelectMembersPanel={onShowSelectMembersPanel}
             />
-          </StyledBodyContent>
+          </div>
         </ModalDialog.Body>
 
         <ModalDialog.Footer>
@@ -185,10 +191,7 @@ const CreateGroupDialog = ({ visible, onClose }: CreateGroupDialogProps) => {
             primary
             scale
             onClick={onCreateGroup}
-            isDisabled={
-              !groupParams.groupName ||
-              (!groupParams.groupManager && !groupParams.groupMembers.length)
-            }
+            isDisabled={!groupParams.groupName || !groupParams.groupManager}
             isLoading={isLoading}
           />
           <Button
@@ -209,6 +212,7 @@ const CreateGroupDialog = ({ visible, onClose }: CreateGroupDialogProps) => {
           onClose={onHideSelectGroupManagerPanel}
           onParentPanelClose={onClose}
           setGroupManager={setGroupManager}
+          currentUserId={currentUserId}
         />
       ) : null}
 
@@ -225,4 +229,9 @@ const CreateGroupDialog = ({ visible, onClose }: CreateGroupDialogProps) => {
   );
 };
 
-export default CreateGroupDialog;
+export default inject(
+  ({ userStore }: { userStore: { user?: { id?: string } } }) => ({
+    currentUserId: userStore.user?.id,
+  }),
+)(observer(CreateGroupDialog));
+

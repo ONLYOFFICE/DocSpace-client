@@ -123,7 +123,7 @@ const ClientRoutes = [
           {
             path: "ai-agents",
             element: (
-              <PrivateRoute>
+              <PrivateRoute requireAIServices>
                 <ViewComponent />
               </PrivateRoute>
             ),
@@ -131,7 +131,7 @@ const ClientRoutes = [
           {
             path: "ai-agents/filter",
             element: (
-              <PrivateRoute>
+              <PrivateRoute requireAIServices>
                 <ViewComponent />
               </PrivateRoute>
             ),
@@ -139,7 +139,7 @@ const ClientRoutes = [
           {
             path: "ai-agents/:agent/chat",
             element: (
-              <PrivateRoute>
+              <PrivateRoute requireAIServices>
                 <ViewComponent />
               </PrivateRoute>
             ),
@@ -147,7 +147,7 @@ const ClientRoutes = [
           {
             path: "ai-agents/:agent",
             element: (
-              <PrivateRoute>
+              <PrivateRoute requireAIServices>
                 <ViewComponent />
               </PrivateRoute>
             ),
@@ -155,7 +155,7 @@ const ClientRoutes = [
           {
             path: "ai-agents/:agent/filter",
             element: (
-              <PrivateRoute>
+              <PrivateRoute requireAIServices>
                 <ViewComponent />
               </PrivateRoute>
             ),
@@ -626,6 +626,26 @@ const ClientRoutes = [
     },
   },
   {
+    path: "/no-access",
+    async lazy() {
+      const { default: NoAccessContainer, NoAccessContainerType } =
+        await componentLoader(
+          () =>
+            import("SRC_DIR/components/EmptyContainer/NoAccessContainer"),
+        );
+
+      const Component = () => (
+        <PrivateRoute>
+          <ErrorBoundary>
+            <NoAccessContainer type={NoAccessContainerType.Account} />
+          </ErrorBoundary>
+        </PrivateRoute>
+      );
+
+      return { Component };
+    },
+  },
+  {
     path: "/error/offline",
     async lazy() {
       const { ErrorOfflineContainer } = await componentLoader(
@@ -636,6 +656,24 @@ const ClientRoutes = [
         <PrivateRoute>
           <ErrorBoundary>
             <ErrorOfflineContainer />
+          </ErrorBoundary>
+        </PrivateRoute>
+      );
+
+      return { Component };
+    },
+  },
+  {
+    path: "/billing/payment-complete",
+    async lazy() {
+      const { Component: PaymentComplete } = await componentLoader(
+        () => import("SRC_DIR/pages/PaymentComplete"),
+      );
+
+      const Component = () => (
+        <PrivateRoute>
+          <ErrorBoundary>
+            <PaymentComplete />
           </ErrorBoundary>
         </PrivateRoute>
       );

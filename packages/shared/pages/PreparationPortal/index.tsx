@@ -29,7 +29,7 @@ import classNames from "classnames";
 
 import { ErrorContainer } from "@docspace/ui-kit/components/error-container";
 import { Text } from "@docspace/ui-kit/components/text";
-import SocketHelper, { SocketEvents } from "../../utils/socket";
+import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
 import { getRestoreProgress } from "../../api/portal";
 import PreparationPortalLoader from "../../skeletons/preparation-portal";
 import { PreparationPortalProgress } from "@docspace/ui-kit/components/progress-bar";
@@ -37,6 +37,7 @@ import { PreparationPortalProgress } from "@docspace/ui-kit/components/progress-
 import { clearLocalStorage, returnToPortal } from "./PreparationPortal.utils";
 import { IPreparationPortal } from "./PreparationPortal.types";
 import styles from "./PreparationPortal.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 let requestsCount = 0;
 
@@ -151,7 +152,7 @@ export const PreparationPortal = (props: IPreparationPortal) => {
   ) : (
     <PreparationPortalProgress
       text={t("Common:PreparationPortalDescription", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       })}
       percent={percent}
     />

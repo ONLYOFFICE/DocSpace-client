@@ -30,6 +30,7 @@ import api from "@docspace/shared/api";
 import Filter from "@docspace/shared/api/people/filter";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TThirdPartyProvider } from "@docspace/shared/api/settings/types";
+import { EmployeeFullDto } from "@docspace/ui-kit/types";
 
 import {
   EmployeeStatus,
@@ -40,7 +41,7 @@ import {
 } from "@docspace/shared/enums";
 import { getUserType } from "@docspace/shared/utils/common";
 import { Nullable } from "@docspace/shared/types";
-import { getCorrectDate } from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import {
   getUserFilter,
@@ -57,7 +58,7 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
-} from "@docspace/shared/utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 import {
   downgradeUserType,
   getReassignmentProgress,
@@ -159,7 +160,7 @@ class UsersStore {
 
     makeAutoObservable(this);
 
-    const addUser = async (value: { id: string; data: TUser }) => {
+    const addUser = async (value: { id: string; data: EmployeeFullDto }) => {
       console.log(`[WS] ${SocketEvents.AddUser}, id: ${value?.id}`);
       const { id, data } = value;
 
@@ -167,7 +168,7 @@ class UsersStore {
 
       const idx = this.users.findIndex((x) => x.id === id);
 
-      const user = await api.people.getUserById(data.id);
+      const user = await api.people.getUserById(data.id!);
 
       runInAction(() => {
         if (idx === -1) {
@@ -179,7 +180,7 @@ class UsersStore {
       });
     };
 
-    const updateUser = async (value: { id: string; data: TUser }) => {
+    const updateUser = async (value: { id: string; data: EmployeeFullDto }) => {
       console.log(`[WS] ${SocketEvents.UpdateUser},id: ${value?.id}`);
 
       const { id, data } = value;
@@ -190,7 +191,7 @@ class UsersStore {
 
       if (idx === -1) return;
 
-      const user = await api.people.getUserById(data.id);
+      const user = await api.people.getUserById(data.id!);
 
       runInAction(() => {
         this.users[idx] = user;
@@ -217,7 +218,7 @@ class UsersStore {
 
     const changeMyType = async (value: {
       id: string;
-      data: TUser;
+      data: EmployeeFullDto;
       admin: string;
       hasPersonalFolder: boolean;
     }) => {
@@ -238,7 +239,7 @@ class UsersStore {
 
       const userData = { ...data, hasPersonalFolder };
 
-      setUser(userData);
+      setUser(userData as TUser);
 
       fetchTreeFolders();
 
@@ -304,30 +305,27 @@ class UsersStore {
     SocketHelper?.on(SocketEvents.DeleteGuest, deleteUser);
     SocketHelper?.on(SocketEvents.ChangeMyType, changeMyType);
 
-    SocketHelper?.on(
-      SocketEvents.UpdateGroup,
-      async (value: { id: string; data: TGroup }) => {
-        console.log(
-          `[WS] ${SocketEvents.UpdateGroup}: ${value?.id}:${value?.data}`,
-        );
-        const { contactsTab } = this;
+    SocketHelper?.on(SocketEvents.UpdateGroup, async (value) => {
+      console.log(
+        `[WS] ${SocketEvents.UpdateGroup}: ${value?.id}:${value?.data}`,
+      );
+      const { contactsTab } = this;
 
-        if (contactsTab !== "inside_group") return;
+      if (contactsTab !== "inside_group") return;
 
-        const { id, data } = value;
+      const { id, data } = value;
 
-        if (!data || !id) return;
+      if (!data || !id) return;
 
-        if (this.groupsStore!.currentGroup?.id !== id) return;
+      if (this.groupsStore!.currentGroup?.id !== id) return;
 
-        const group = await api.groups.getGroupById(id, true);
+      const group = await api.groups.getGroupById(id, true);
 
-        runInAction(() => {
-          this.users = group.members ?? [];
-          this.filter.total = this.users.length;
-        });
-      },
-    );
+      runInAction(() => {
+        this.users = group.members ?? [];
+        this.filter.total = this.users.length;
+      });
+    });
   }
 
   setContactsTab = (contactsTab: TContactsTab) => {

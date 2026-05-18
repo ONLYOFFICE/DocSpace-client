@@ -97,7 +97,7 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import { createLoader } from "@docspace/shared/utils/createLoader";
 
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
-import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
 import {
   getEmptyPersonalProgress,
   startEmptyPersonal,
@@ -109,6 +109,7 @@ import { createFolderNavigation } from "SRC_DIR/helpers/createFolderNavigation";
 import { hideInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import { OPERATIONS_NAME, CategoryType } from "@docspace/shared/constants";
+import { FileOperationStatus } from "@docspace/shared/enums";
 import { checkProtocol } from "../helpers/files-helpers";
 import FilesHeaderOptionStore from "./FilesHeaderOptionStore";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
@@ -416,6 +417,10 @@ class FilesActionStore {
 
     const filesList = [];
     await this.createFolderTree(tree, toFolderId, filesList);
+
+    if (withoutHiddenFiles.length) {
+      setPrimaryProgressBarData({ ...pbData, completed: uploaded });
+    }
 
     if (filesList.length) {
       setPrimaryProgressBarData({ ...pbData });
@@ -842,54 +847,62 @@ class FilesActionStore {
           clearActiveOperations(fileIds, folderIds);
           setDownloadItems([]);
 
+          const isCanceled = item?.status === FileOperationStatus.Canceled;
+
           if (item.url) {
             openUrl(item.url, UrlActionType.Download, true);
           }
 
-          setSecondaryProgressBarData({
-            operation: operationName,
-            alert: !item.url,
-            completed: true,
-            operationId,
-          });
+          if (!isCanceled) {
+            setSecondaryProgressBarData({
+              operation: operationName,
+              alert: !item.url,
+              completed: true,
+              operationId,
+            });
 
-          !item.url && toastr.error(translations.error, null, 0, true);
+            !item.url && toastr.error(translations.error, null, 0, true);
+          }
         },
       );
     } catch (err) {
       clearActiveOperations(fileIds, folderIds);
 
-      setSecondaryProgressBarData({
-        operation: operationName,
-        alert: true,
-        completed: true,
-        operationId,
-      });
-      const error = typeof err === "string" ? err : err?.error;
+      const isCanceled = err?.status === FileOperationStatus.Canceled;
 
-      if (error?.includes("password")) {
-        const filesIds = error.match(/\d+/g)?.map(Number) ?? [
-          fileConvertIds[0].key,
-        ];
-
-        const passwordArray = [];
-
-        downloadItems.forEach((item) => {
-          filesIds.forEach((id) => {
-            if (item.id === id) {
-              passwordArray.push(item);
-            }
-          });
+      if (!isCanceled) {
+        setSecondaryProgressBarData({
+          operation: operationName,
+          alert: true,
+          completed: true,
+          operationId,
         });
+        const error = typeof err === "string" ? err : err?.error;
 
-        toastr.error(passwordError, null, 0, true);
-        setSortedPasswordFiles({ other: [...passwordArray] });
-        setDownloadDialogVisible(true);
-        return;
+        if (error?.includes("password")) {
+          const filesIds = error.match(/\d+/g)?.map(Number) ?? [
+            fileConvertIds[0].key,
+          ];
+
+          const passwordArray = [];
+
+          downloadItems.forEach((item) => {
+            filesIds.forEach((id) => {
+              if (item.id === id) {
+                passwordArray.push(item);
+              }
+            });
+          });
+
+          toastr.error(passwordError, null, 0, true);
+          setSortedPasswordFiles({ other: [...passwordArray] });
+          setDownloadDialogVisible(true);
+          return;
+        }
+        setDownloadItems([]);
+
+        return toastr.error(err, null, 0, true);
       }
-      setDownloadItems([]);
-
-      return toastr.error(err, null, 0, true);
     }
   };
 
@@ -1118,15 +1131,27 @@ class FilesActionStore {
             operationId,
           });
         })
-        .then(() =>
+        .then(() => {
           toastr.success(
             translations?.successRemoveTemplate
               ? translations.successRemoveTemplate
               : items.length > 1
                 ? translations?.successRemoveRooms
                 : translations?.successRemoveRoom,
-          ),
-        )
+          );
+
+          const currentFolderId = this.selectedFolderStore.id;
+          if (items.includes(currentFolderId)) {
+            const { rootFolderType } = this.selectedFolderStore;
+            const categoryType = getCategoryTypeByFolderType(rootFolderType, 0);
+
+            if (categoryType === CategoryType.AIAgents) {
+              this.moveToAIAgentsPage();
+            } else {
+              this.moveToRoomsPage();
+            }
+          }
+        })
         .finally(() => {
           this.setGroupMenuBlocked(false);
           setSecondaryProgressBarData({
@@ -1247,7 +1272,13 @@ class FilesActionStore {
           pbData,
         );
 
-        if (!operationData || operationData.error || !operationData.finished) {
+        const isCanceled =
+          operationData?.status === FileOperationStatus.Canceled;
+
+        if (
+          !isCanceled &&
+          (!operationData || operationData.error || !operationData.finished)
+        ) {
           return Promise.reject(
             operationData?.error ? operationData.error : "",
           );
@@ -1484,10 +1515,12 @@ class FilesActionStore {
             const operationData =
               await this.uploadDataStore.loopFilesOperations(data, pbData);
 
+            const isCanceled =
+              operationData?.status === FileOperationStatus.Canceled;
+
             if (
-              !operationData ||
-              operationData.error ||
-              !operationData.finished
+              !isCanceled &&
+              (!operationData || operationData.error || !operationData.finished)
             ) {
               return Promise.reject(
                 operationData?.error ? operationData.error : "",
@@ -1707,6 +1740,17 @@ class FilesActionStore {
     }
   };
 
+  /**
+   * @param {{
+   *  id: number | string,
+   *  isRoom?: boolean,
+   *  isTemplate?: boolean,
+   *  isAIAgent?: boolean,
+   *  title?: string,
+   *  rootFolderType : import("@docspace/ui-kit/enums/index").FolderType
+   * }} item
+   * @returns {void}
+   */
   openLocationAction = async (item) => {
     if (this.publicRoomStore.isPublicRoom)
       return this.moveToPublicRoom(item.id);
@@ -3135,7 +3179,7 @@ class FilesActionStore {
     return this.uploadDataStore.itemOperationToFolder(operationData);
   };
 
-  onLeaveRoom = (t, isOwner = false) => {
+  onLeaveRoom = (t, isOwner = false, force = false) => {
     const { selection, setSelected, bufferSelection } = this.filesStore;
     const { user } = this.userStore;
 
@@ -3162,6 +3206,7 @@ class FilesActionStore {
     return api.rooms
       .updateRoomMemberRole(roomId, {
         invitations: [{ id: user?.id, access: ShareAccessRights.None }],
+        force,
       })
       .then(() => {
         if (!isAdmin) {

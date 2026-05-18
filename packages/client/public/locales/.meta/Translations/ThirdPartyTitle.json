@@ -3,16 +3,17 @@
   "content": "Third-party services",
   "content_en_sha1_hash": "871d2b6d2f4209a2045939948478b5ad9e16f6a2",
   "created_at": "2025-05-19T21:30:50.013Z",
-  "updated_at": "2026-02-19T13:36:32.392Z",
+  "updated_at": "2026-04-11T21:27:19.635Z",
   "comment": {
-    "text": "This translation key is used to display \"Third-party services\" as a title in various UI components, such as a link and a category name, often found in settings or configuration pages. It appears on a page that lists integration options for third-party services.",
+    "text": "This is a button label and a section title. It refers to external services that can be integrated with DocSpace.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:27.348Z"
+    "updated_at": "2026-04-11T21:27:19.635Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/index.tsx",
-      "line_number": 139,
+      "line_number": 140,
       "context": "href=\"/portal-settings/integration/third-party-services\"\n type={LinkType.page}\n noHover\n color={currentColorScheme?.main?.accent ?? undefined}\n >\n {t(\"Translations:ThirdPartyTitle\")}\n </Link>\n </Text>\n );\n \n toastr.warning(data, \"\", 5000, true, false);",
       "module": "/packages/client"
     },
@@ -33,13 +34,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"الخدمات الجهة الخارجية\" is a very literal translation. A more natural and commonly used Arabic term for 'third-party services' would be \"خدمات من جهات خارجية\" or \"خدمات من جهات خارجية\". The current phrasing feels clunky and less idiomatic.",
-          "suggestion": "خدمات من جهات خارجية"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -183,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Услуге трећих страна' is more accurate. 'Услуге' is the correct plural form of 'услуга' (service), and 'трећих страна' is the correct genitive plural form for 'third parties'. The current translation 'Услуге трећих страна' lacks proper grammatical agreement.",
-          "suggestion": "Услуге трећих страна"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -213,16 +202,16 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Dịch vụ của bên thứ ba\" is a very literal and somewhat clunky translation. A more natural and idiomatic translation would be something like \"Dịch vụ của bên ngoài\" or \"Dịch vụ từ bên thứ ba\".",
-          "suggestion": "Dịch vụ của bên ngoài"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

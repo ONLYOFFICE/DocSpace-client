@@ -80,7 +80,7 @@ const Providers = ({ children, contextData }: TProviders) => {
   const apiKey = getCookie("asc_auth_key") || "";
 
   return (
-    <ApiProvider url={apiUrl} apiKey={apiKey}>
+    <ApiProvider url={apiUrl} apiKey={apiKey} initSocket={false}>
       <ErrorBoundary>
         <TranslationProvider
           settings={settings as TTranslationProvider["settings"]}

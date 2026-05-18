@@ -43,7 +43,8 @@ import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-butt
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
 
-import { buildDataTestId, getOAuthToken } from "../../utils/common";
+import { buildDataTestId } from "../../utils/common";
+import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
 import { saveSettingsThirdParty } from "../../api/files";
 import { THIRD_PARTY_SERVICES_URL } from "../../constants";
 import { DropDownItem } from "../drop-down-item";

@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -45,24 +44,7 @@ import SessionLifetimeLoader from "../sub-components/loaders/session-lifetime-lo
 import { LearnMoreWrapper } from "../StyledSecurity";
 import useSecurity from "../useSecurity";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
-
-const MainContainer = styled.div`
-  width: 100%;
-
-  .lifetime {
-    margin-top: 16px;
-    margin-bottom: 8px;
-  }
-
-  .lifetime-input {
-    width: 100%;
-    max-width: 350px;
-  }
-
-  .save-cancel-buttons {
-    margin-top: 24px;
-  }
-`;
+import styles from "./sessionLifetime.module.scss";
 
 const SessionLifetime = (props) => {
   const {
@@ -256,7 +238,7 @@ const SessionLifetime = (props) => {
   }
 
   return (
-    <MainContainer>
+    <div className={styles.container}>
       <LearnMoreWrapper withoutExternalLink={!lifetimeSettingsUrl}>
         <Text className="learn-subtitle">
           {t("SessionLifetimeSettingDescription")}
@@ -303,11 +285,11 @@ const SessionLifetime = (props) => {
 
       {type ? (
         <>
-          <Text className="lifetime" fontSize="15px" fontWeight="600">
+          <Text className={styles.lifetime} fontSize="15px" fontWeight="600">
             {t("Lifetime")}
           </Text>
           <TextInput
-            className="lifetime-input"
+            className={styles.lifetimeInput}
             testId="session_lifetime_input"
             maxLength={4}
             isAutoFocussed={false}
@@ -321,7 +303,7 @@ const SessionLifetime = (props) => {
       ) : null}
 
       <SaveCancelButtons
-        className="save-cancel-buttons"
+        className={styles.saveCancelButtons}
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
@@ -335,7 +317,7 @@ const SessionLifetime = (props) => {
         saveButtonDataTestId="session_lifetime_save_button"
         cancelButtonDataTestId="session_lifetime_cancel_button"
       />
-    </MainContainer>
+    </div>
   );
 };
 

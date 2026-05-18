@@ -36,6 +36,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import DialogsStore from "SRC_DIR/store/DialogsStore";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type DisconnectAccountDialogProps = {
 	disconnectAccountDialogVisible?: DialogsStore["disconnectAccountDialogVisible"];
@@ -57,7 +58,7 @@ const DisconnectAccountDialog = ({
 		setDisconnectAccountDialogVisible?.(false);
 		toastr.success(
 			t("Notifications:SuccessDisconnected", {
-				serviceName: t("Common:ProviderTelegram"),
+				serviceName: getBrandName("ProviderTelegram"),
 			}),
 		);
 	};
@@ -90,12 +91,14 @@ const DisconnectAccountDialog = ({
 					scale
 					primary
 					onClick={onClickDisconnect}
+					testId="disconnect_account_dialog_submit"
 				/>
 				<Button
 					label={t("Common:CancelButton")}
 					size={ButtonSize.normal}
 					scale
 					onClick={onClose}
+					testId="disconnect_account_dialog_cancel"
 				/>
 			</ModalDialog.Footer>
 		</ModalDialog>

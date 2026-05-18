@@ -43,6 +43,13 @@ const userLng = window.navigator
 
 const lng = getCookie(LANGUAGE) || userLng;
 
+if (!window.i18n) {
+  window.i18n = { inLoad: [], loaded: {} };
+}
+
+window.i18n.instance = newInstance;
+window.i18n.t = newInstance.t.bind(newInstance);
+
 newInstance
   .use(Backend)
   .use(initReactI18next)
@@ -91,10 +98,8 @@ newInstance
     },
   })
   .then(() => {
-    if (!window.i18n) {
-      window.i18n = { inLoad: [], loaded: {} };
-    }
     window.i18n.t = newInstance.t.bind(newInstance);
+    window.i18n.instance = newInstance;
   });
 
 export default newInstance;

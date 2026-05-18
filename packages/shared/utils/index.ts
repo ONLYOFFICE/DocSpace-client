@@ -35,7 +35,6 @@ import { EmailSettings, parseAddress, parseAddresses, getParts } from "./email";
 import useId from "./useId";
 
 import { useClickOutside } from "@docspace/ui-kit/utils";
-import getCorrectDate from "./getCorrectDate";
 import { handleAnyClick } from "./event";
 import { getFormFillingTipsStorageName } from "./getFormFillingTipsStorageName";
 import { uuid, getTextColor, trimSeparator } from "@docspace/ui-kit/utils";
@@ -91,8 +90,9 @@ import { getCountTilesInRow } from "./getCountTilesInRow";
 import { getSelectFormatTranslation } from "./getSelectFormatTranslation";
 import * as userFilterUtils from "./userFilterUtils";
 import * as filterConstants from "./filterConstants";
-import { getAiProviderIcon, getServerIcon, getAiProviderLabel } from "./ai";
+import { getAiProviderIcon, getServerIconUrl, getAiProviderLabel } from "./ai";
 import { presentInArray } from "./presentInArray";
+import { removeEmojiCharacters } from "./removeEmojiCharacters";
 
 export {
   isBetaLanguage,
@@ -128,7 +128,6 @@ export {
   email,
   useId,
   useClickOutside,
-  getCorrectDate,
   handleAnyClick,
   DomHelpers,
   getLogoUrl,
@@ -146,12 +145,13 @@ export {
   userFilterUtils,
   filterConstants,
   getAiProviderIcon,
-  getServerIcon,
+  getServerIconUrl,
   getAiProviderLabel,
   uuid,
   getTextColor,
   trimSeparator,
   getTitleWithoutExtension,
+  removeEmojiCharacters,
 };
 
 export const getModalType = () => {
@@ -223,19 +223,6 @@ export const isLockedSharedRoom = (item?: TRoom) => {
   return Boolean(
     item.external && item.passwordProtected && !item.isLinkExpired,
   );
-};
-
-export const addLog = (log: string, category: "socket") => {
-  if (!window.ClientConfig?.logs?.enableLogs) return;
-
-  if (window.ClientConfig.logs.logsToConsole) console.log(log);
-  else {
-    if (!window.logs) window.logs = { socket: [] };
-
-    if (!window.logs[category]) window.logs[category] = [];
-
-    window.logs[category].push(log);
-  }
 };
 
 export const getFillingStatusLabel = (

@@ -30,6 +30,7 @@ import { useTranslation } from "react-i18next";
 import { toastr } from "@docspace/ui-kit/components";
 
 import PluginStore from "SRC_DIR/store/PluginStore";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export type UsePluginUploadProps = {
   addPlugin: PluginStore["addPlugin"];
@@ -53,7 +54,7 @@ const usePluginUpload = ({ addPlugin }: UsePluginUploadProps) => {
       if (!isPluginCompatible) {
         toastr.error(
           t("PluginIsNotCompatible", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           }),
         );
       } else {

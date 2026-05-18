@@ -24,12 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { FC } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
-import { TRoom } from "@docspace/shared/api/rooms/types";
 import { ScrollbarContext } from "@docspace/ui-kit/components/scrollbar";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
@@ -42,9 +40,7 @@ import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
 import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
 import { INFO_PANEL_LOADER_EVENT } from "@docspace/shared/constants";
 
-import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
-import PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
 
 import ItemTitle from "../../sub-components/ItemTitle";
 
@@ -59,21 +55,13 @@ import { useHistory } from "./hooks/useHistory";
 import { usePlugin } from "./hooks/usePlugin";
 import { useMembers } from "./hooks/useMembers";
 import { useShare } from "./hooks/useShare";
-import PluginStore from "SRC_DIR/store/PluginStore";
+import { useDetails } from "./hooks/useDetails";
 
-type FilesViewProps = {
-  currentView: InfoPanelView | `info_plugin-${string}`;
-  selection: TRoom | TFile | TFolder;
-
-  isArchive: boolean;
-
-  setExternalLinks?: PublicRoomStore["setExternalLinks"];
-
-  infoPanelItemsList?: PluginStore["infoPanelItemsList"];
-  infoPanelRoomSelection?: InfoPanelStore["infoPanelRoomSelection"];
-  isMembersPanelUpdating?: InfoPanelStore["isMembersPanelUpdating"];
-  setIsMembersPanelUpdating?: InfoPanelStore["setIsMembersPanelUpdating"];
-};
+import type {
+  FilesViewProps,
+  ExternalFilesViewProps,
+  InjectedFilesViewProps,
+} from "./types";
 
 const FilesView = ({
   currentView,
@@ -83,9 +71,13 @@ const FilesView = ({
 
   infoPanelItemsList,
 
+  setInfoPanelRoom,
   infoPanelRoomSelection,
   isMembersPanelUpdating,
   setIsMembersPanelUpdating,
+
+  pathParts,
+  getSelectedFolder,
 }: FilesViewProps) => {
   const { t } = useTranslation(["Common"]);
   const isThirdParty = "providerId" in selection && selection?.providerId;
@@ -119,6 +111,14 @@ const FilesView = ({
       parentRoomType === FolderType.PublicRoom
     )
       return ShareLinkService.getPrimaryLink(selection);
+  });
+
+  const { fetchRoom } = useDetails({
+    selection,
+    infoPanelRoomSelection,
+    pathParts,
+    setInfoPanelRoom,
+    getSelectedFolder,
   });
 
   const { isPlugin, infoPanelItem, isPluginHeaderVisible } = usePlugin(
@@ -196,6 +196,12 @@ const FilesView = ({
       setIsLoadingSuspense(true);
 
       if (v === InfoPanelView.infoDetails) {
+        try {
+          await fetchRoom();
+        } catch (e) {
+          console.log(e);
+        }
+
         if (currentViewRef.current !== v) return undefined;
 
         onEndAnimation();
@@ -286,6 +292,7 @@ const FilesView = ({
       abortController,
       membersAbortController,
       shareAbortController,
+      fetchRoom,
       fetchHistory,
       fetchMembers,
       fetchExternalLinks,
@@ -432,17 +439,24 @@ const FilesView = ({
 
 FilesView.displayName = "FilesView";
 
-export default inject(
-  ({ publicRoomStore, infoPanelStore, pluginStore }: TStore) => {
+export default inject<TStore, ExternalFilesViewProps, InjectedFilesViewProps>(
+  ({
+    publicRoomStore,
+    infoPanelStore,
+    pluginStore,
+    selectedFolderStore,
+  }: TStore) => {
     const { setExternalLinks } = publicRoomStore;
 
     const {
       infoPanelRoomSelection,
       isMembersPanelUpdating,
       setIsMembersPanelUpdating,
+      setInfoPanelRoom,
     } = infoPanelStore;
 
     const { infoPanelItemsList } = pluginStore;
+    const { pathParts, getSelectedFolder } = selectedFolderStore;
 
     return {
       infoPanelRoomSelection,
@@ -453,6 +467,10 @@ export default inject(
 
       isMembersPanelUpdating,
       setIsMembersPanelUpdating,
+
+      pathParts,
+      setInfoPanelRoom,
+      getSelectedFolder,
     };
   },
-)(observer(FilesView));
+)(observer(FilesView as FC<ExternalFilesViewProps>));

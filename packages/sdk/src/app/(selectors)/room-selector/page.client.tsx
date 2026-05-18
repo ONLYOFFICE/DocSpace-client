@@ -27,9 +27,9 @@
 "use client";
 
 import isNil from "lodash/isNil";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 
-import { frameCallEvent } from "@docspace/shared/utils/common";
+import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
 import { RoomsType } from "@docspace/shared/enums";
 import { getPrimaryLink } from "@docspace/shared/api/rooms";
 import { RoomSelector } from "@docspace/ui-kit/selectors/Room";
@@ -65,6 +65,10 @@ export default function RoomSelectorClient({
   useSDKConfig();
 
   useDocumentTitle("RoomSelector");
+
+  useEffect(() => {
+    frameCallEvent({ event: "onAppReady", data: { frameId: getFrameId() } });
+  }, []);
 
   const onSubmit = useCallback(async ([selectedItem]: TSelectorItem[]) => {
     const enrichedData = {

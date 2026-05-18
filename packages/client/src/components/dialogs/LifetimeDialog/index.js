@@ -76,6 +76,7 @@ const LifetimeDialogComponent = (props) => {
             label={t("ConvertDialog:HideMessage")}
             isChecked={isChecked}
             onChange={onChange}
+            dataTestId="lifetime_dialog_hide_message_checkbox"
           />
           <div className={styles.lifetimeButtons}>
             <Button
@@ -86,6 +87,7 @@ const LifetimeDialogComponent = (props) => {
               primary
               scale
               onClick={onAcceptClick}
+              testId="lifetime_dialog_ok_button"
             />
             <Button
               id="delete-file-modal_cancel"
@@ -94,6 +96,7 @@ const LifetimeDialogComponent = (props) => {
               size="normal"
               scale
               onClick={onClose}
+              testId="lifetime_dialog_cancel_button"
             />
           </div>
         </div>

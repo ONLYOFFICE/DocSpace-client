@@ -68,6 +68,8 @@ class CommonStore {
 
   isLoadedConfigureDeepLink = false;
 
+  isLoadedAiServicesManagement = false;
+
   greetingSettingsIsDefault = true;
 
   deepLinkSettings = null;
@@ -251,6 +253,10 @@ class CommonStore {
 
   setIsLoadedConfigureDeepLink = (isLoadedConfigureDeepLink) => {
     this.isLoadedConfigureDeepLink = isLoadedConfigureDeepLink;
+  };
+
+  setIsLoadedAiServicesManagement = (isLoadedAiServicesManagement) => {
+    this.isLoadedAiServicesManagement = isLoadedAiServicesManagement;
   };
 
   setIsLoadedCustomization = (isLoadedCustomization) => {

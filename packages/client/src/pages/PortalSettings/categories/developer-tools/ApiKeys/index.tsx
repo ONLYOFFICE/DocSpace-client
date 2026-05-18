@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
@@ -48,6 +49,7 @@ import DeleteApiKeyDialog from "./sub-components/DeleteApiKeyDialog";
 import ApiKeysView from "./sub-components";
 import { ApiKeysProps } from "./types";
 import styles from "./ApiKeys.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ApiKeys = (props: ApiKeysProps) => {
   const {
@@ -63,8 +65,10 @@ const ApiKeys = (props: ApiKeysProps) => {
 
   const { t, ready } = useTranslation(["Settings", "Common"]);
 
-  const [createKeyDialogIsVisible, setCreateKeyDialogIsVisible] =
-    useState(false);
+  const [searchParams] = useSearchParams();
+  const [createKeyDialogIsVisible, setCreateKeyDialogIsVisible] = useState(
+    () => searchParams.get("create") === "true",
+  );
   const [deleteKeyDialogIsVisible, setDeleteKeyDialogIsVisible] =
     useState(false);
   const [actionItem, setActionItem] = useState<TApiKey | null>(null);
@@ -154,7 +158,7 @@ const ApiKeys = (props: ApiKeysProps) => {
       >
         <Text lineHeight="20px" className={styles.apiKeysText}>
           {t("Settings:ApiKeysDescription", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           })}
         </Text>
         <Text

@@ -73,7 +73,7 @@ const LogoutAllSessionDialog = ({
             isChecked={isChecked}
             onChange={onChangeCheckbox}
             label={t("Profile:ChangePasswordAfterLoggingOut")}
-            testId="dialog_change_password_checkbox"
+            dataTestId="dialog_change_password_checkbox"
           />
         </div>
       </ModalDialog.Body>

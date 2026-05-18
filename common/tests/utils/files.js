@@ -29,6 +29,8 @@ const fs = require("fs");
 
 const BASE_DIR = process.env.BASE_DIR || path.resolve(__dirname, "../../../");
 
+const UI_KIT_PATH = path.join("libs", "ui-kit")
+
 const moduleWorkspaces = [
 	path.join("packages", "client"),
 	path.join("packages", "doceditor"),
@@ -37,12 +39,15 @@ const moduleWorkspaces = [
 	path.join("packages", "management"),
 	path.join("packages", "sdk"),
 	path.join("public", "locales"), // common
+  UI_KIT_PATH,
 ];
 
-const getWorkSpaces = () => {
-	const workspaces = moduleWorkspaces.map((ws) => path.resolve(BASE_DIR, ws));
+const getWorkSpaces = ({ excludeUiKit = false } = {}) => {
+  const workspaces = moduleWorkspaces
+    .filter((ws) => !excludeUiKit || ws !== UI_KIT_PATH)
+    .map((ws) => path.resolve(BASE_DIR, ws));
 
-	return workspaces;
+  return workspaces;
 };
 
 const getAllFiles = (dir, excludeDirs = []) => {

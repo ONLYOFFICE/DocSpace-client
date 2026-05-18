@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { observer } from "mobx-react";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import uniqueid from "lodash/uniqueId";
 
 import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
@@ -137,14 +137,10 @@ const InfiniteGrid = (props: InfiniteGridProps) => {
     return isFile ? "isFile" : "isFolder";
   };
 
-  const setTilesCount = () => {
+  const onResize = useCallback(() => {
     const newCount = getCountTilesInRow();
-    if (countTilesInRow !== newCount) setCountTilesInRow(newCount);
-  };
-
-  const onResize = () => {
-    setTilesCount();
-  };
+    setCountTilesInRow((prev) => (prev !== newCount ? newCount : prev));
+  }, []);
 
   useEffect(() => {
     onResize();
@@ -154,7 +150,7 @@ const InfiniteGrid = (props: InfiniteGridProps) => {
     return () => {
       window.removeEventListener("resize", onResize);
     };
-  });
+  }, [onResize]);
 
   if (children && React.isValidElement(children)) {
     React.Children.map(

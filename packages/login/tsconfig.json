@@ -15,8 +15,8 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "ESNext",
-    "moduleResolution": "node",
-    "rootDir": "./",
+    "moduleResolution": "bundler",
+    "rootDir": "../../",
     "baseUrl": "./",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -34,6 +34,9 @@
       "PUBLIC_DIR/*": [
         "../../public/*"
       ],
+      "@docspace/shared/*": [
+        "../shared/*"
+      ],
       "ASSETS_DIR/*": [
         "./public/*"
       ]
@@ -41,18 +44,13 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": [
-    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "next.config.js",
-    "./.next/types/**/*.ts",
-    "__tests__/.spec.ts",
-    ".next/dev/types/**/*.ts",
-    ".next\\dev/types/**/*.ts",
-    ".next\\dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    ".next"
   ]
 }

@@ -27,7 +27,7 @@
 import { useMemo, use } from "react";
 import { inject, observer } from "mobx-react";
 
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
 
 import { Context } from "@docspace/ui-kit/utils/context";
 import { FilesRowContainer as RowContainer } from "@docspace/shared/components/files-row";

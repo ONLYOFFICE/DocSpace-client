@@ -38,7 +38,6 @@ import {
 import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
 import { Guidance } from "@docspace/shared/components/guidance";
 import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
-import { AIAgentsSelector } from "@docspace/ui-kit/selectors/AIAgent";
 import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -79,10 +78,10 @@ import {
   ReducedRightsDialog,
   SocialAuthWelcomeDialog,
   EditRoomGroupsDialog,
-  RoomGroupingDialog,
   AddRoomToGroupDialog,
   PauseSubmissionsDialog,
 } from "../dialogs";
+import { AIAgentsDialog } from "../dialogs/AIAgentsDialog";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
 import RestoreRoomDialog from "../dialogs/RestoreRoomDialog";
@@ -99,6 +98,7 @@ import { FillPDFDialog } from "../dialogs/FillPDFDialog";
 import { PasswordEntryDialog } from "../dialogs/PasswordEntryDialog";
 import CloseEditIndexDialog from "../dialogs/CloseEditIndexDialog";
 import FillingStatusPanel from "../panels/FillingStatusPanel";
+import ExternalSyncDbPanel from "../panels/ExternalSyncDbPanel";
 import TemplateAccessSettingsPanel from "../panels/TemplateAccessSettingsPanel";
 import RemoveUserConfirmationDialog from "../dialogs/RemoveUserConfirmationDialog";
 import AssignRoles from "../dialogs/AssignRoles";
@@ -107,6 +107,7 @@ import ShareSelector from "../ShareSelector";
 import TemplateGallery from "../TemplateGallery";
 import InfoPanelTemplateGallery from "../TemplateGallery/InfoPanel";
 import PluginSelector from "../PluginSelector";
+import AskAIConnectDialog from "../dialogs/AskAIConnectDialog";
 
 const Panels = (props) => {
   const {
@@ -198,9 +199,9 @@ const Panels = (props) => {
     setArrRoomGroups,
     setEditRoomGroupsDialogVisible,
     arrRoomGroups,
-    roomGroupingDialogVisible,
     addRoomToGroupDialogVisible,
     pauseSubmissionsDialogVisible,
+    askAIConnectDialogVisible,
   } = props;
 
   const navigate = useNavigate();
@@ -374,7 +375,7 @@ const Panels = (props) => {
       />
     ),
     aiAgentSelectorDialogProps.visible && (
-      <AIAgentsSelector
+      <AIAgentsDialog
         key="ai-agents-selector"
         onClose={() => setAiAgentSelectorDialogProps(false, null)}
         withPadding
@@ -452,6 +453,7 @@ const Panels = (props) => {
       <CloseEditIndexDialog key="close-edit-index-dialog-dialog" />
     ),
     <FillingStatusPanel key="filling-status-panel" />,
+    <ExternalSyncDbPanel key="external-sync-db-panel" />,
     deleteVersionDialogVisible && (
       <DeleteVersionDialog key="delete-version-dialog" />
     ),
@@ -507,14 +509,14 @@ const Panels = (props) => {
         arrRoomGroups={arrRoomGroups}
       />
     ),
-    roomGroupingDialogVisible && (
-      <RoomGroupingDialog key="room-grouping-dialog" />
-    ),
     addRoomToGroupDialogVisible && (
       <AddRoomToGroupDialog key="add-room-to-group-dialog" />
     ),
     pauseSubmissionsDialogVisible && (
       <PauseSubmissionsDialog key="pause-submissions-dialog" />
+    ),
+    askAIConnectDialogVisible && (
+      <AskAIConnectDialog key="ask-ai-connect-dialog" />
     ),
   ];
 };
@@ -609,9 +611,9 @@ export default inject(
       getCovers,
       covers,
       setEditRoomGroupsDialogVisible,
-      roomGroupingDialogVisible,
       addRoomToGroupDialogVisible,
       pauseSubmissionsDialogVisible,
+      askAIConnectDialogVisible,
     } = dialogsStore;
 
     const { viewAs, setArrRoomGroups, arrRoomGroups } = filesStore;
@@ -752,9 +754,9 @@ export default inject(
       setArrRoomGroups,
       setEditRoomGroupsDialogVisible,
       arrRoomGroups,
-      roomGroupingDialogVisible,
       addRoomToGroupDialogVisible,
       pauseSubmissionsDialogVisible,
+      askAIConnectDialogVisible,
     };
   },
 )(observer(Panels));

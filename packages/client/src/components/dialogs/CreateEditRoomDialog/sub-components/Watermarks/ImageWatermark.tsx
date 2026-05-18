@@ -65,7 +65,7 @@ import { TRoomParams } from "@docspace/shared/utils/rooms";
 import { TWatermark } from "@docspace/shared/api/rooms/types";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
 
-import { StyledWatermark } from "./StyledComponent";
+import styles from "../../CreateEditRoomDialog.module.scss";
 
 const scaleOptions = [
   { key: 100, label: "100" },
@@ -269,9 +269,14 @@ const ImageWatermark = ({
   };
 
   return (
-    <StyledWatermark
-      rotate={selectedRotate.key}
-      scale={selectedScale!.key / 100}
+    <div
+      className={styles.watermark}
+      style={
+        {
+          "--watermark-rotate": `${selectedRotate.key}deg`,
+          "--watermark-scale": `${selectedScale!.key / 100}`,
+        } as React.CSSProperties
+      }
     >
       {!selectedImageUrl ? (
         <FileInput
@@ -348,7 +353,7 @@ const ImageWatermark = ({
           </div>
         </div>
       ) : null}
-    </StyledWatermark>
+    </div>
   );
 };
 

@@ -20,6 +20,8 @@
   "GetCode": "Merrni kodin",
   "GetSuitableApp": "Shkarkoni një aplikacion të përshtatshëm",
   "GetSuitableAppDescription": "Përdorni një aplikacion të përshtatshëm si Google Authenticator për <1>Android</1> dhe <4>iOS</4>, ose Authenticator për <8>Windows Phone</8>.",
+  "InviteLinkQuotaErrorBody": "Regjistrimi përmes lidhjes nuk është më i disponueshëm pasi është arritur limiti.",
+  "InviteQuotaErrorCustomizedBody": "Ju do të ridrejtoheni në faqen e <1>Hyrjes</1> në 10 sekonda.",
   "LoginRegistryButton": "Bashkohuni",
   "Newsletter": "Dua të regjistrohem në buletinin informativ {{organizationName}}",
   "PassworResetTitle": "Tani mund të krijoni një fjalëkalim të ri.",

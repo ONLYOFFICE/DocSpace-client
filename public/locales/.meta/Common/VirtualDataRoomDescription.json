@@ -3,13 +3,20 @@
   "content": "Use VDR for advanced file security and transparency. Set watermarks, automatically index and track all content, restrict downloading and copying.",
   "content_en_sha1_hash": "442334b85570c01c1f3c6137eb5b49e4dc948796",
   "created_at": "2025-05-19T21:30:49.557Z",
-  "updated_at": "2025-10-27T16:14:33.721Z",
+  "updated_at": "2026-04-12T12:07:00.104Z",
   "comment": {
-    "text": "This translation key is used to describe a virtual data room feature, explaining its purpose and key benefits. The translated text will be displayed in a UI context where users interact with this feature, such as a settings or configuration page.",
+    "text": "This is a description of the Virtual Data Room (VDR) functionality, appearing when a user selects the VDR room type. It highlights key security and transparency features like watermarks, indexing, tracking, and download/copy restrictions.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:35:10.686Z"
+    "updated_at": "2026-04-11T20:39:19.781Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/components/room-type/RoomType.utils.ts",
+      "line_number": 40,
+      "context": "switch (roomType) {\n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomDescription\");\n case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoomDescription\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomDescription\");\n case RoomsType.AIRoom:\n return t(\"Common:AIRoomDescription\");\n case RoomsType.PublicRoom:",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
       "line_number": 40,
@@ -27,18 +34,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"أثناء تعبئة وتوقيع المستندات خطوة بخطوة\" (during filling and signing documents step by step) doesn't accurately reflect the English content's focus on security and transparency. It adds an action not present in the source.",
-          "suggestion": "استخدم غرفة البيانات الافتراضية لأمان متقدم للملفات وشفافية في إدارة المحتوى."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"وارقم وتابع\" (number and follow) is a less precise translation of \"automatically index and track.\"  'Index' has specific meaning in data management.",
-          "suggestion": "ورتب وفهرس كل المحتوى تلقائيًا"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -62,18 +58,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The sentence 'Nutzen Sie den VDR für fortschrittliche Dateisicherheit und Transparenz.' could be more fluent. While grammatically correct, it's a bit clunky.",
-          "suggestion": "Verwenden Sie den VDR für fortschrittliche Dateisicherheit und Transparenz."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'und schränken Sie das Herunterladen und Kopieren ein' sounds a bit stiff. A more natural flow would be preferable.",
-          "suggestion": "und beschränken Sie das Herunterladen und Kopieren."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -115,59 +100,25 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"すべてのコンテンツを自動的にインデックス化して追跡し\" is slightly awkward and could be improved. While technically correct, it doesn't flow naturally in Japanese. '追跡' is a very direct translation of 'track' and can sound overly literal and less elegant.",
-          "suggestion": "すべてのコンテンツを自動的にインデックス化し、管理する。"
-        },
-        {
-          "type": "formatting",
-          "description": "While not incorrect, the translation lacks the strong sense of brevity often preferred in marketing materials. Consider shortening where possible to maintain impact.",
-          "suggestion": "高度なファイルセキュリティと透明性を実現するVDRを使用。透かし設定、自動インデックスと管理、ダウンロード/コピー制限。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"문서를 단계별로 작성하고 서명하는 동안\" (while writing and signing documents step by step) doesn't accurately reflect the original English content. The English focuses on file security and transparency features of the VDR, not document creation and signing.  It introduces a function that wasn't present in the original.",
-          "suggestion": "VDR을 사용하여 고급 파일 보안 및 투명성을 확보하세요. (Use VDR for advanced file security and transparency.)"
-        },
-        {
-          "type": "formatting",
-          "description": "The Korean sentence structure is slightly awkward due to the excessive use of \"그리고\" (and). It would read more naturally without it.",
-          "suggestion": "VDR을 사용하여 고급 파일 보안 및 투명성을 확보하세요. 워터마크를 설정하고, 모든 콘텐츠를 자동으로 인덱싱하고 추적하며, 다운로드 및 복사를 제한하세요."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ກ້າວຫນ້າ' (gâo nâa) which translates to 'advanced' can be slightly improved for more natural flow. While not strictly incorrect, a more commonly used synonym for 'advanced' in this context might be better.",
-          "suggestion": "Consider using 'ທີ່ດີເລີດ' (thîi dii-lert) which translates to 'excellent' or 'superior' instead of 'ກ້າວຫນ້າ' (gâo nâa) for a more natural and impactful feel."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"sovi pa solim aizpildot un parakstot dokumentus\" (step-by-step filling and signing documents) is not an accurate translation of \"Set watermarks\". It introduces an action not present in the English original. The intended meaning of 'setting watermarks' is not conveyed.",
-          "suggestion": "Izmantojiet VDR papildu failu drošībai un pārredzamībai. Iestatiet ūdenszīmes, automātiski indeksējiet un izsekojiet visu saturu, ierobežojiet lejupielādi un kopēšanu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -197,35 +148,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "“Incripționări” is not the correct translation of “watermarks.” It translates to “encryption.” Watermarks refers to visual markings on documents.",
-          "suggestion": "Adăugați filigranări"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "“Încărcarea” should be “descărcarea” to accurately reflect the English 'downloading'.",
-          "suggestion": "Restricționați descărcarea și copierea."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Use VDR' is translated as 'Используйте виртуальную комнату данных'. While technically correct, it's a bit verbose. A more natural phrasing might be 'Используйте VDR' or 'Применяйте VDR'.",
-          "suggestion": "Используйте VDR"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'advanced file security' is translated as 'эффективный контроль'. 'Effective control' doesn't fully capture the meaning of 'advanced security'.",
-          "suggestion": "повышенную безопасность"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -237,13 +166,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The abbreviation 'VDR' is translated as 'VDM'. While 'VDM' might be understood, it's not a standard Slovak abbreviation for Virtual Data Room. The original English uses 'VDR', and it's preferable to maintain consistency, especially in technical contexts.",
-          "suggestion": "Consider using 'VDR' in the Slovak translation or providing a full explanation of the abbreviation the first time it's used (e.g., 'Virtuálny dátový priestor (VDR)')."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -255,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'transparency' is translated as 'транспарентност'. While technically correct, a more natural and commonly used term in Serbian for 'transparency' in this context might be 'јасноћа' (jasnoća).",
-          "suggestion": "Consider translating 'transparency' as 'јасноћа'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -285,30 +202,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Use VDR' is somewhat awkwardly translated as 'Sử dụng VDR'. A more natural translation might be 'Áp dụng VDR' or 'Sử dụng dịch vụ VDR'.",
-          "suggestion": "Áp dụng VDR"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'minh bạch' (transparency) doesn't fully capture the nuance of advanced file security. A more contextually accurate term could be considered.",
-          "suggestion": "bảo mật nâng cao và kiểm soát truy cập"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"逐步填写和签署文档时\" (while gradually filling and signing documents) doesn't accurately reflect the original English, which focuses on the VDR's general security and transparency features, not a specific process of document completion. It introduces a process that isn't present in the source.",
-          "suggestion": "使用虚拟数据房间（VDR）以实现高级文件安全性和透明度。设置水印，自动索引并跟踪所有内容，限制下载和复制操作。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

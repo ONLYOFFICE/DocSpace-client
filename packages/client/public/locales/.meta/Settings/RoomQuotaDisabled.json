@@ -3,16 +3,17 @@
   "content": "Room quota has been successfully disabled.",
   "content_en_sha1_hash": "bc508edc6864a5a5ff719032d851c846cc501122",
   "created_at": "2025-05-19T21:30:52.442Z",
-  "updated_at": "2026-02-19T13:36:33.215Z",
+  "updated_at": "2026-04-11T21:22:34.297Z",
   "comment": {
-    "text": "This translation key is used to display a success message when room quota has been successfully disabled. It is likely used in an UI element such as a button or dialog that triggers this functionality. The text appears after attempting to disable room quota, and its translation will be shown depending on the current room quota status.",
+    "text": "Toast message. Appears after a user successfully disables the room quota setting.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:37.479Z"
+    "updated_at": "2026-04-11T21:22:34.297Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/store/CurrentQuotaStore.ts",
-      "line_number": 520,
+      "line_number": 523,
       "context": "try {\n await setDefaultRoomQuota(isEnable, +quota);\n const toastrText = isEnable\n ? t(\"RoomQuotaEnabled\")\n : t(\"RoomQuotaDisabled\");\n \n toastr.success(toastrText);\n } catch (e: unknown) {\n toastr.error(e as TData);\n }",
       "module": "/packages/shared"
     }
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'otaq' is a transliteration from 'room' and may not be the most natural-sounding word in Azerbaijani. While understandable, 'oax' or 'məkan' might be more idiomatic depending on context.",
-          "suggestion": "Consider using 'oax' or 'məkan' instead of 'otaq' if it fits the overall tone and context of the application."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -51,13 +46,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Room quota' translates more accurately to 'Limit místností' or 'Místnostní limit' in Czech, rather than 'Kvóty místností'. 'Kvóty' implies a specific type of quota, which isn't necessarily the intended meaning.",
-          "suggestion": "Limit místností byl úspěšně zakázán."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -117,18 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ກວດກາຈຳນວນຫ້ອງຖືກປິດການໃຊ້ງານຢ່າງຖືກຕ້ອງແລ້ວ' implies 'room number check' rather than 'room quota'. The focus should be on quota, not simply the number of rooms.",
-          "suggestion": "ປິດການໃຊ້ງານຈຳນວນຫ້ອງຢ່າງຖືກຕ້ອງແລ້ວ"
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure is slightly awkward. 'ຖືກປິດການໃຊ້ງານຢ່າງຖືກຕ້ອງແລ້ວ' is grammatically correct, but could be improved for flow.",
-          "suggestion": "ຈຳນວນຫ້ອງຖືກປິດການໃຊ້ງານຢ່າງຖືກຕ້ອງແລ້ວ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -146,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Limit pokoi został wyłączony' while technically correct, doesn't fully convey the meaning of 'Room quota has been successfully disabled'. 'Quota' implies a defined limit, and 'disabled' suggests it's no longer enforced. A more accurate translation would reflect this.",
-          "suggestion": "Quota pokoi została wyłączona."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -170,18 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Cotă de stocare pentru sală a fost dezactivată cu succes' is overly literal and doesn't flow naturally in Romanian. 'Sală' (room) isn't the most natural word choice in this context. A more natural translation would imply storage space or storage limit.",
-          "suggestion": "Cotă de stocare a fost dezactivată cu succes."
-        },
-        {
-          "type": "formatting",
-          "description": "The Romanian translation includes an article ('a') before 'dezactivată'. While grammatically correct, it may be more common to omit it in this type of message for conciseness.",
-          "suggestion": "Cotă de stocare pentru sală a fost dezactivată cu succes."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -193,18 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'කාමර ප්‍රමාණය සක්‍රීය කර නැහැ' literally translates to 'Room quantity deactivated'. The English phrase 'Room quota has been successfully disabled' implies that a limit on the number of rooms has been removed, not necessarily deactivated. 'Disabled' has a slightly different nuance.",
-          "suggestion": "කාමර සංඛ්‍යාව සීමාව ඉවත් කර ඇත."
-        },
-        {
-          "type": "spelling",
-          "description": "While 'කාමර' is correct for 'room', using 'සීමාව' (limit) instead of 'ප්‍රමාණය' (quantity) improves accuracy in conveying the intended meaning of 'quota'.",
-          "suggestion": "Use 'සීමාව' instead of 'ප්‍රමාණය' for greater accuracy."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -222,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Квота просторије је \" is incomplete. It lacks the concluding part of the sentence indicating the action was successful. It translates to \"Room quota is...\"",
-          "suggestion": "Квота просторије је успешно деактивирана."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -256,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

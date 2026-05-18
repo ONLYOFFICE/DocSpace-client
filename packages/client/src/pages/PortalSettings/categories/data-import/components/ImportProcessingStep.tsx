@@ -30,7 +30,7 @@ import { inject, observer } from "mobx-react";
 import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { Wrapper } from "../StyledDataImport";
+import styles from "../StyledDataImport.module.scss";
 import {
   ImportProcessingStepProps,
   InjectedImportProcessingStepProps,
@@ -101,13 +101,13 @@ const ImportProcessingStep = (props: ImportProcessingStepProps) => {
   }, []);
 
   return (
-    <Wrapper>
+    <div className={styles.wrapper}>
       <ProgressBar
         percent={percent}
         isInfiniteProgress={isVisibleProgress}
         className="data-import-progress-bar"
       />
-    </Wrapper>
+    </div>
   );
 };
 

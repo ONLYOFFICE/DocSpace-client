@@ -51,6 +51,7 @@ import type { TUser } from "@docspace/shared/api/people/types";
 
 import { useStores } from "@/hooks/useStores";
 import styles from "../dialogs.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const CreatePortalDialog = observer(
   ({
@@ -145,12 +146,12 @@ export const CreatePortalDialog = observer(
         displayType={ModalDialogType.modal}
       >
         <ModalDialog.Header>
-          {t("CreatingPortal", { productName: t("Common:ProductName") })}
+          {t("CreatingPortal", { productName: getBrandName("ProductName") })}
         </ModalDialog.Header>
         <ModalDialog.Body>
           <Text>
             {t("CreateSpaceDescription", {
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
             })}
           </Text>
           <div className={styles.createPortalInputBlock}>
@@ -160,7 +161,7 @@ export const CreatePortalDialog = observer(
               style={{ paddingBottom: "5px" }}
             >
               {t("PortalName", {
-                productName: t("Common:ProductName"),
+                productName: getBrandName("ProductName"),
               })}
             </Text>
             <TextInput
@@ -170,7 +171,7 @@ export const CreatePortalDialog = observer(
               onChange={onHandleName}
               value={name}
               hasError={!!registerError}
-              placeholder={t("EnterName")}
+              placeholder={t("EnterSpaceName")}
               isAutoFocussed
               scale
             />

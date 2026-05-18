@@ -24,18 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const isStorybook = (): boolean => {
-  if (typeof window === "undefined" || typeof document === "undefined")
-    return false;
-
-  return document.querySelector('[class^="sb-"]') !== null;
-};
-
 export const returnToPortal = (withoutTimeout = false) => {
-  if (isStorybook()) {
-    return;
-  }
-
   if (withoutTimeout) {
     window.location.replace("/");
     return;

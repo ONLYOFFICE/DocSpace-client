@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndone": "Les utilisateurs désactivés sélectionnés seront supprimés de {{productName}}. Cette action ne peut pas être annulée.",
   "ActionCannotBeUndoneGuests": "Les invités désactivés sélectionnés seront supprimés de {{productName}}. Cette action ne peut être annulée.",
+  "ActionCannotBeUndoneUsers": "Les utilisateurs désactivés sélectionnés seront supprimés de {{productName}}. Cette action ne peut pas être annulée.",
   "CannotReassignFiles": "Si vous supprimez plusieurs utilisateurs à la fois, vous ne pouvez pas réattribuer leurs fichiers à d'autres utilisateurs.",
   "DeleteGroupGuestsSuccessMessage": "Les invités ont été supprimés avec succès.",
   "DeleteGroupUsersSuccessMessage": "Les utilisateurs ont été supprimés avec succès.",

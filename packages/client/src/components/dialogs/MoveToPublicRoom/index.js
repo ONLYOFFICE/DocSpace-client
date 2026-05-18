@@ -138,6 +138,7 @@ const MoveToPublicRoomComponent = (props) => {
           scale
           onClick={onMoveTo}
           isLoading={isLoading}
+          testId="move_to_public_room_button"
         />
         <Button
           id="delete-file-modal_cancel"
@@ -147,6 +148,7 @@ const MoveToPublicRoomComponent = (props) => {
           scale
           onClick={onClose}
           isLoading={isLoading}
+          testId="move_to_public_room_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

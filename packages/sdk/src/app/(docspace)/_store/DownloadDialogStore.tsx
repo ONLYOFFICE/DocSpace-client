@@ -245,7 +245,9 @@ class DownloadDialogStore {
 }
 
 export const DownloadDialogStoreContext =
-  React.createContext<DownloadDialogStore>(new DownloadDialogStore());
+  React.createContext<DownloadDialogStore>(
+    null as unknown as DownloadDialogStore,
+  );
 
 export const DownloadDialogStoreContextProvider = ({
   children,

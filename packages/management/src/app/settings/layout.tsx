@@ -37,7 +37,7 @@ import { Tabs, type TTabItem } from "@docspace/ui-kit/components/tabs";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
-} from "@docspace/shared/utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 
 import { pathsWithoutTabs } from "@/lib/constants";
 import useAppState from "@/hooks/useAppState";

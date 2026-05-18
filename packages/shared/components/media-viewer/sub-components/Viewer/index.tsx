@@ -47,6 +47,7 @@ import { ViewerPlayer } from "../ViewerPlayer";
 import { PDFViewer } from "../PDFViewer";
 
 import type ViewerProps from "./Viewer.props";
+import { PluginViewer } from "../PluginViewer/PluginViewer";
 
 export const Viewer = (props: ViewerProps) => {
   const {
@@ -75,6 +76,7 @@ export const Viewer = (props: ViewerProps) => {
     onDownloadClick,
     onSetSelectionFile,
     generateContextMenu,
+    pluginViewerContent,
   } = props;
 
   const timerIDRef = useRef<NodeJS.Timeout>(undefined);
@@ -234,11 +236,13 @@ export const Viewer = (props: ViewerProps) => {
 
   const playlistFile = playlist[playlistPos];
 
-  const isDecodedImage =
-    isTiff(playlistFile.fileExst) || isHeic(playlistFile.fileExst);
+  const isDecodedImage = playlistFile
+    ? isTiff(playlistFile.fileExst) || isHeic(playlistFile.fileExst)
+    : false;
 
-  const isAnimatedImage =
-    isGif(playlistFile.fileExst) || isWebp(playlistFile.fileExst);
+  const isAnimatedImage = playlistFile
+    ? isGif(playlistFile.fileExst) || isWebp(playlistFile.fileExst)
+    : false;
 
   const mediaType = isPdf
     ? "PDF"
@@ -260,7 +264,10 @@ export const Viewer = (props: ViewerProps) => {
       aria-label={`${mediaType} viewer - ${title}`}
       aria-modal="true"
     >
-      {!isFullscreen && !isMobile && panelVisible && !isPdf ? (
+      {!isFullscreen &&
+      !isMobile &&
+      panelVisible &&
+      (!isPdf || pluginViewerContent) ? (
         <DesktopDetails
           title={title}
           onMaskClick={handleMaskClick}
@@ -279,7 +286,17 @@ export const Viewer = (props: ViewerProps) => {
         </>
       ) : null}
 
-      {isImage ? (
+      {pluginViewerContent ? (
+        <PluginViewer
+          pluginViewerContent={pluginViewerContent}
+          handleMaskClick={handleMaskClick}
+          onNext={onNextClick}
+          onPrev={onPrevClick}
+          isFirstItem={!isNotFirstElement}
+          isLastItem={!isNotLastElement}
+          devices={devices}
+        />
+      ) : isImage && playlistFile ? (
         <ImageViewer
           key={targetFile?.id}
           isDecodedImage={isDecodedImage}
@@ -306,7 +323,7 @@ export const Viewer = (props: ViewerProps) => {
           backgroundBlack={backgroundBlack}
           setBackgroundBlack={setBackgroundBlack}
         />
-      ) : isVideo || isAudio ? (
+      ) : (isVideo || isAudio) && playlistFile ? (
         <ViewerPlayer
           isError={isError}
           src={fileUrl}
@@ -362,3 +379,4 @@ export const Viewer = (props: ViewerProps) => {
     </div>
   );
 };
+

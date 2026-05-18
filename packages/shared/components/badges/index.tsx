@@ -327,7 +327,27 @@ const Badges = ({
         />
       )}
 
-      {item.formFillingStatus ? (
+      {item.isFillingPreparing ? (
+        <BadgeWrapper isTile={isTile}>
+          <Badge
+            noHover
+            isVersionBadge
+            className={classNames(
+              styles.versionBadge,
+              "badge-version badge-version-current tablet-badge icons-group",
+            )}
+            backgroundColor={
+              themeIsBase ? globalColors.gray : globalColors.grayDark
+            }
+            label={t("Common:Preparing")}
+            title={t("Common:Preparing")}
+            {...versionBadgeProps}
+            style={{ width: "max-content" }}
+          />
+        </BadgeWrapper>
+      ) : null}
+
+      {item.formFillingStatus && !item.isFillingPreparing ? (
         <BadgeWrapper isTile={isTile}>
           <Badge
             noHover

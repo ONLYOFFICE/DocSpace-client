@@ -32,7 +32,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { getCorrectDate } from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 
@@ -69,13 +69,13 @@ export default function withQuickButtons(WrappedComponent) {
 
       if (item?.isFavorite) {
         setFavoriteAction("remove", [item])
-          .then(() => toastr.success(t("RemovedFromFavorites")))
+          .then(() => toastr.success(t("Common:RemovedFromFavorites")))
           .catch((err) => toastr.error(err));
         return;
       }
 
       setFavoriteAction("mark", [item])
-        .then(() => toastr.success(t("MarkedAsFavorite")))
+        .then(() => toastr.success(t("Common:MarkedAsFavorite")))
         .catch((err) => toastr.error(err));
     };
 

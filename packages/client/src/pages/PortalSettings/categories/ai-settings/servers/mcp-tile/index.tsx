@@ -29,8 +29,8 @@
 import { useTranslation } from "react-i18next";
 
 import type { TServer } from "@docspace/shared/api/ai/types";
-import { useTheme } from "@docspace/ui-kit/context";
-import { getServerIcon } from "@docspace/shared/utils";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { getServerIconUrl } from "@docspace/shared/utils";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
@@ -43,6 +43,7 @@ import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.re
 import { AiTile } from "../../sub-components/ai-tile";
 
 import styles from "./MCPTile.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type MCPTileProps = {
   item: TServer;
@@ -64,7 +65,7 @@ export const MCPTile = ({
   const { t } = useTranslation(["Common", "AISettings"]);
 
   const icon =
-    item.icon?.icon48 || (getServerIcon(item.serverType, isBase) ?? "");
+    item.icon?.icon48 || (getServerIconUrl(item.serverType, isBase) ?? "");
 
   const getContextOptions = () => {
     return [
@@ -85,14 +86,14 @@ export const MCPTile = ({
 
   const name =
     item.serverType === ServerType.Portal
-      ? `${t("Common:OrganizationName")} ${t("Common:ProductName")}`
+      ? `${getBrandName("OrganizationName")} ${getBrandName("ProductName")}`
       : item.name;
 
   const description =
     item.serverType === ServerType.Portal
       ? t("AISettings:MCPProductDescription", {
-          organizationName: t("Common:OrganizationName"),
-          productName: t("Common:ProductName"),
+          organizationName: getBrandName("OrganizationName"),
+          productName: getBrandName("ProductName"),
           mcpServer: t("Common:MCPServer"),
         })
       : item.description;

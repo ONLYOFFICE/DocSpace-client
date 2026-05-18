@@ -30,7 +30,8 @@ import { useNavigate } from "react-router";
 
 import { CategoryItem } from "@docspace/ui-kit/components/category-item";
 
-import { StyledBaseQuotaComponent } from "../StyledComponent";
+import styles from "../StyledComponent.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const MobileQuotasComponent = ({ isDisabled }) => {
   const { t } = useTranslation(["Settings", "Common"]);
@@ -42,13 +43,13 @@ const MobileQuotasComponent = ({ isDisabled }) => {
   };
 
   return (
-    <StyledBaseQuotaComponent>
+    <div className={styles.baseQuotaComponent}>
       <CategoryItem
         title={t("QuotaPerRoom")}
         onClickLink={onClickLink}
         url="portal-settings/management/disk-space/quota-per-room"
         subtitle={t("SetDefaultRoomQuota", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
         })}
         isDisabled={isDisabled}
       />
@@ -57,7 +58,7 @@ const MobileQuotasComponent = ({ isDisabled }) => {
         onClickLink={onClickLink}
         url="/portal-settings/management/disk-space/quota-per-user"
         subtitle={t("UserDefaultQuotaDescription", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
           sectionName: t("Common:MyDocuments"),
         })}
         isDisabled={isDisabled}
@@ -69,13 +70,13 @@ const MobileQuotasComponent = ({ isDisabled }) => {
         onClickLink={onClickLink}
         url="/portal-settings/management/disk-space/quota-per-ai-agent"
         subtitle={t("SetDefaultAIAgentQuota", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
           aiAgents: t("Common:AIAgents"),
           aiAgent: t("Common:AIAgent"),
         })}
         isDisabled={isDisabled}
       />
-    </StyledBaseQuotaComponent>
+    </div>
   );
 };
 

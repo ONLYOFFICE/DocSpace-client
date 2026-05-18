@@ -3,28 +3,29 @@
   "content": "External link",
   "content_en_sha1_hash": "66305476ff6932547d4b8aa6c41b8e0c5f410286",
   "created_at": "2026-02-18T14:55:55.624Z",
-  "updated_at": "2026-02-19T13:36:32.760Z",
+  "updated_at": "2026-04-11T20:52:56.672Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for a setting in the JavaScript SDK presets. It refers to a link that points to an external resource or location outside of the current system.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:52:56.672Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 444,
+      "line_number": 472,
       "context": "</FilesSelectorInputWrapper>\n </ControlsGroup>\n {sharedLinks ? (\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:ExternalLink\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:PublicRoomInfo\")}</Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 605,
+      "line_number": 649,
       "context": "</FilesSelectorInputWrapper>\n </ControlsGroup>\n {sharedLinks ? (\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:ExternalLink\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:PublicRoomInfo\")}</Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 322,
+      "line_number": 365,
       "context": "</FilesSelectorInputWrapper>\n </ControlsGroup>\n {sharedLinks ? (\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:ExternalLink\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:PublicRoomInfo\")}</Text>",
       "module": "/packages/client"
     }

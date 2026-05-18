@@ -3,16 +3,17 @@
   "content": "{{aiAgent}} quota has been successfully disabled.",
   "content_en_sha1_hash": "a2dbab9c75930c08562f4e10a66ae9ba252e85dc",
   "created_at": "2025-12-19T13:03:34.327Z",
-  "updated_at": "2026-02-19T13:36:33.216Z",
+  "updated_at": "2026-04-11T21:25:53.323Z",
   "comment": {
-    "text": "This key displays a success message in a toastr notification confirming that an AI agent quota has been disabled. The message includes the name of the AI agent, retrieved from a separate translation key \"Common:AIAgent\". Translators should ensure the AI agent name is accurately localized.",
+    "text": "Toast message. Appears after successfully disabling the AI Assistant quota. `{{aiAgent}}` will be replaced with \"AI Assistant\".",
     "is_auto": true,
-    "updated_at": "2025-12-22T10:10:48.074Z"
+    "updated_at": "2026-04-11T21:25:53.323Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/store/CurrentQuotaStore.ts",
-      "line_number": 535,
+      "line_number": 538,
       "context": "try {\n await setDefaultAIAgentQuota(isEnable, +quota);\n const toastrText = isEnable\n ? t(\"AIAgentQuotaEnabled\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"AIAgentQuotaDisabled\", { aiAgent: t(\"Common:AIAgent\") });\n \n toastr.success(toastrText);\n } catch (e: unknown) {\n toastr.error(e as TData);\n }",
       "module": "/packages/shared"
     }

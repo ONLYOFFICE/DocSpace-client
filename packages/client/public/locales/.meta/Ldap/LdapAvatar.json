@@ -3,11 +3,12 @@
   "content": "Profile photo",
   "content_en_sha1_hash": "33f385bb3b7f437c44f197aa3da5da8480eef36f",
   "created_at": "2025-05-19T21:30:54.178Z",
-  "updated_at": "2025-11-19T15:02:40.906Z",
+  "updated_at": "2026-04-11T21:17:19.977Z",
   "comment": {
-    "text": "This translation key is used for a label that displays \"Profile photo\" and appears in an Avatar Editor Dialog. It is likely displayed as a title or legend for the profile photo section within this dialog, allowing users to understand its purpose.",
+    "text": "This is a label for a profile picture. It appears in the avatar editor dialog and as a field label in LDAP integration settings.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:15.221Z"
+    "updated_at": "2026-04-11T21:17:19.977Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -18,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 202,
+      "line_number": 203,
       "context": "<FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n hasError={errors.avatarAttribute}\n labelText={t(\"LdapAvatar\")}\n dataTestId=\"avatar_field_container\"\n >\n <TextInput\n name={AVATAR}\n hasError={errors.avatarAttribute}",
       "module": "/packages/client"
     }
@@ -159,13 +160,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"පැතිකඩ ඡායාරූපය\" (paticada cayarūpay) is a literal translation of 'profile photo,' a more natural and common translation in Sinhala would be something like \"පුද්ගල චිත්‍රපත\" (pugadala chitrapata) or \"පුද්ගල පැතිකඩ ඡායාරූපය\" (pugadala patikada cayarūpay). \"පැතිකඩ ඡායාරූපය\" sounds slightly formal and less conversational.",
-          "suggestion": "Consider \"පුද්ගල චිත්‍රපත\" (pugadala chitrapata) or \"පුද්ගල පැතිකඩ ඡායාරූපය\" (pugadala patikada cayarūpay)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -213,13 +208,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"个人资料照片\" is understandable, it's a bit literal and verbose. A more natural and concise translation for \"Profile photo\" would be something like \"头像\" (tou xiang).",
-          "suggestion": "头像"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

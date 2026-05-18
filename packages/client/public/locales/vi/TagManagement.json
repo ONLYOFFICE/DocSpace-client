@@ -1,0 +1,8 @@
+{
+  "ChangesToTag": "Việc thay đổi thẻ này sẽ ảnh hưởng đến tất cả các phòng nơi nó được sử dụng.",
+  "DeleteTag": "Xóa thẻ",
+  "DeleteTagCannotBeUndone": "Thao tác này không thể hoàn tác.",
+  "DeleteTagConfirmation": "Xóa thẻ này sẽ xóa nó khỏi tất cả các phòng nơi nó được sử dụng.",
+  "EditTag": "Chỉnh sửa thẻ",
+  "RemoveTag": "<1>{{tag}}</1> thẻ đã bị xóa."
+}

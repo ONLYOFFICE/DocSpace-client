@@ -8,6 +8,8 @@
   "NeedSettings": "Einstellungen müssen eingegeben werden",
   "NoPlugins": "Keine Plugins hinzugefügt",
   "NotNeedSettings": "Keine Einstellungen erforderlich",
+  "PluginCacheWarningDescription": "Plugins werden basierend auf ihrer Versionsnummer zwischengespeichert. Um sicherzustellen, dass Ihre Änderungen angewendet werden, erhöhen Sie bitte die Versionsnummer in Ihrer <1>package.json</1>-Datei, bevor Sie sie hochladen. Das System wird ein Plugin nicht aktualisieren, wenn die Version gleich bleibt.",
+  "PluginDeletedSuccessfully": "Plugin erfolgreich gelöscht",
   "PluginIsNotCompatible": "Die Plugin-SDK-Version stimmt nicht mit der {{productName}}-Version überein. Bitte aktualisieren Sie auf eine kompatible Version.",
   "PluginLoadedSuccessfully": "Plugin erfolgreich geladen",
   "PluginSamples": "Plugin-Beispiele",

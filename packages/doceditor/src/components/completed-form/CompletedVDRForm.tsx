@@ -64,9 +64,9 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
-} from "@docspace/shared/utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 import type { TFile } from "@docspace/shared/api/files/types";
-import type { TEditFileData } from "@docspace/shared/utils/socket";
+import type { TEditFileData } from "@docspace/ui-kit/utils/socket";
 import { getFolderUrl } from "./CompletedForm.helper";
 import type { CompletedVDRFormProps } from "./CompletedForm.types";
 import styles from "./completed-form.module.scss";

@@ -30,7 +30,7 @@ import classNames from "classnames";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 
-import { getCorrectDate } from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 
 import OformsStore from "SRC_DIR/store/OformsStore";
 
@@ -142,7 +142,7 @@ const Gallery = ({ gallerySelected, culture }: GalleryProps) => {
         data-testid="info_panel_gallery_description_header"
       >
         <Text fontWeight="600" fontSize="14px">
-          {t("Description")}
+          {t("DescriptionLabel")}
         </Text>
       </div>
       <Text

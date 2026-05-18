@@ -169,12 +169,12 @@
 
   box-sizing: border-box;
 
-  background: var(--accent-text);
+  background: var(--accent-main);
 
   border-radius: 16px;
 
   .text {
-    color: var(---accent-text);
+    color: var(--accent-button-text);
 
     font-weight: 600;
     font-size: 13px;
@@ -189,10 +189,10 @@
       cursor: pointer;
 
       path {
-        fill: var(--accent-text);
+        fill: var(--accent-button-text);
       }
     }
-  }    
+  }
 }
 
 .spamIcon {

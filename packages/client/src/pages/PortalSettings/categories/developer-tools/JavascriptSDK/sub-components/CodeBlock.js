@@ -25,64 +25,21 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 
 import CodeMirror, { EditorView } from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { githubLightInit, githubDarkInit } from "@uiw/codemirror-theme-github";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { injectDefaultTheme, NoUserSelect } from "@docspace/shared/utils";
 
-const StyledContainer = styled.div.attrs(injectDefaultTheme)`
-  border: 1px solid ${(props) => props.theme.plugins.borderColor};
-  border-radius: 6px;
-  max-width: 800px;
-  width: 100%;
-  overflow: hidden;
-  background-color: ${(props) => props.theme.sdkPresets.previewBackgroundColor};
-
-  .cm-scroller {
-    overflow-x: hidden;
-  }
-
-  .cm-gutters {
-    ${NoUserSelect}
-  }
-`;
+import styles from "./CodeBlock.module.scss";
 
 const CodeBlock = ({ config, scriptUrl, theme }) => {
   const configWithoutEvents = { ...config };
   delete configWithoutEvents.events;
 
-  const eventsString = config.events
-    ? `\t"events": {\n${Object.entries(config.events)
-        .map(([key, fn]) => {
-          if (fn === null) return `\t\t"${key}": null`;
-
-          const fnStr = fn.toString();
-          let formattedFn = fnStr;
-
-          if (fnStr.startsWith("function")) {
-            const match = fnStr.match(/^function\s*\w*\s*(\([^)]*\))/);
-            if (match) {
-              const params = match[1];
-              const body = fnStr.slice(fnStr.indexOf("{"));
-              formattedFn = `${params} => ${body}`;
-            }
-          }
-
-          return `\t\t"${key}": ${formattedFn}`;
-        })
-        .join(",\n")}\n\t}`
-    : null;
-
   const configString = JSON.stringify(configWithoutEvents, null, "\t");
-  const lastCommaIndex = configString.lastIndexOf("\n}");
-  const configWithEvents = eventsString
-    ? configString.slice(0, lastCommaIndex) + ",\n" + eventsString + "\n}"
-    : configString;
 
-  const codeString = `const config = ${configWithEvents}\n\nconst script = document.createElement("script");\n\nscript.setAttribute("src", "${scriptUrl}");\nscript.onload = () => window.DocSpace.SDK.init(config);\n\ndocument.body.appendChild(script);`;
+  const codeString = `const config = ${configString}\n\nconst script = document.createElement("script");\n\nscript.setAttribute("src", "${scriptUrl}");\nscript.onload = () => window.DocSpace.SDK.init(config);\n\ndocument.body.appendChild(script);`;
 
   const extensions = [javascript({ jsx: true }), EditorView.lineWrapping];
 
@@ -109,7 +66,7 @@ const CodeBlock = ({ config, scriptUrl, theme }) => {
   });
 
   return (
-    <StyledContainer dir="ltr">
+    <div className={styles.container} dir="ltr">
       <CodeMirror
         value={codeString}
         theme={theme.isBase ? baseTheme : darkTheme}
@@ -117,7 +74,7 @@ const CodeBlock = ({ config, scriptUrl, theme }) => {
         editable
         readOnly
       />
-    </StyledContainer>
+    </div>
   );
 };
 

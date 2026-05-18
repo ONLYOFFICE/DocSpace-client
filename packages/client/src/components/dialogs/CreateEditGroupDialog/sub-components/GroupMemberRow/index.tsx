@@ -33,6 +33,7 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/ui-kit/components/avatar";
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
 import {
   getUserType,
   getUserTypeTranslation,
@@ -43,7 +44,7 @@ import { EmployeeStatus, EmployeeType } from "@docspace/shared/enums";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 
-import * as Styled from "./index.styled";
+import styles from "../../CreateEditGroupDialog.module.scss";
 
 interface GroupMemberRowProps {
   groupMember: TUser;
@@ -81,7 +82,7 @@ const GroupMemberRow = ({
   };
 
   return (
-    <Styled.GroupMemberRow data-testid={dataTestId ?? "group_member_row"}>
+    <div className={styles.groupMemberRow} data-testid={dataTestId ?? "group_member_row"}>
       <Avatar
         className="avatar"
         size={AvatarSize.min}
@@ -93,7 +94,9 @@ const GroupMemberRow = ({
       />
       <div className="info" data-testid="create_edit_group_member_row_info">
         <div className="info-box">
-          <div className="name">{groupMember.displayName}</div>
+          <div className="name">
+            {Encoder.htmlDecode(groupMember.displayName ?? "")}
+          </div>
           {groupMember.status === EmployeeStatus.Pending ? (
             <StyledSendClockIcon />
           ) : null}
@@ -106,7 +109,7 @@ const GroupMemberRow = ({
         src={RemoveReactSvgUrl}
         onClick={onRemove}
       />
-    </Styled.GroupMemberRow>
+    </div>
   );
 };
 

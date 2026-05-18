@@ -28,16 +28,16 @@ import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
 
-import React from "react";
+import React, { useCallback } from "react";
 import { inject, observer } from "mobx-react";
-import styled, { useTheme } from "styled-components";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 import { Heading } from "@docspace/ui-kit/components/heading";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { TableGroupMenu } from "@docspace/ui-kit/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { mobile, tablet, desktop, isMobile } from "@docspace/shared/utils";
+import { isMobile } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
@@ -54,98 +54,23 @@ import {
   checkPropertyByLink,
 } from "../../../utils";
 import LoaderSectionHeader from "../loaderSectionHeader";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
-export const HeaderContainer = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  max-width: calc(100vw - 32px);
-  .settings-section_header {
-    display: flex;
-    align-items: center;
-    .settings-section_badge {
-      margin-inline-start: 8px;
-      cursor: auto;
-    }
+import classNames from "classnames";
 
-    .header {
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-      color: ${(props) => props.theme.client.settings.headerTitleColor};
-    }
-  }
-  .settings-section_warning {
-    margin-inline-start: 16px;
-  }
-  .action-wrapper {
-    flex-grow: 1;
+import styles from "./Header.module.scss";
 
-    .action-button {
-      margin-inline-start: auto;
-    }
-  }
+export const HeaderContainer = ({ children, className = "", ...props }) => (
+  <div className={classNames(styles.headerContainer, className)} {...props}>
+    {children}
+  </div>
+);
 
-  .arrow-button {
-    flex-shrink: 0;
-    margin-inline-end: 12px;
-
-    svg {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
-    }
-  }
-
-  @media ${tablet} {
-    h1 {
-      line-height: 61px;
-      font-size: 21px;
-    }
-  }
-
-  @media ${desktop} {
-    h1 {
-      font-size: 18px;
-      line-height: 59px !important;
-    }
-  }
-
-  @media ${mobile} {
-    h1 {
-      line-height: 53px;
-      font-size: 18px;
-    }
-  }
-
-  .tariff-bar {
-    margin-inline-start: auto;
-  }
-`;
-
-export const StyledContainer = styled.div`
-  .table-container_group-menu {
-    margin-block: 0;
-    margin-inline: -20px 0;
-    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
-
-    width: calc(100% + 40px);
-    height: 68px;
-
-    @media ${tablet} {
-      height: 61px;
-      margin-block: 0;
-      margin-inline: -16px 0;
-      width: calc(100% + 32px);
-    }
-
-    @media ${mobile} {
-      height: 52px !important;
-      margin-block: 0;
-      margin-inline: -16px 0;
-      width: calc(100% + 32px);
-    }
-  }
-`;
+export const StyledContainer = ({ children, className = "" }) => (
+  <div className={classNames(styles.styledContainer, className)}>
+    {children}
+  </div>
+);
 
 const SectionHeaderContent = (props) => {
   const {
@@ -168,7 +93,7 @@ const SectionHeaderContent = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const isOAuth = location.pathname.includes("oauth");
 
@@ -179,7 +104,7 @@ const SectionHeaderContent = (props) => {
     isHeaderVisible: false,
   });
 
-  const getArrayOfParams = () => {
+  const getArrayOfParams = useCallback(() => {
     const path = location.pathname;
     const arrayPath = path.split("/");
     const arrayOfParams = arrayPath.filter((param) => {
@@ -187,49 +112,69 @@ const SectionHeaderContent = (props) => {
     });
 
     return arrayOfParams;
-  };
+  }, [location.pathname]);
 
-  const isAvailableSettings = (key) => {
-    switch (key) {
-      case "PortalRenaming":
-        return isCustomizationAvailable;
-      case "DNSSettings":
-        return isCustomizationAvailable;
-      case "Common:RestoreBackup":
-        return isRestoreAndAutoBackupAvailable;
-      case "Common:BrandName":
-        return isCustomizationAvailable || standalone;
-      case "Common:WhiteLabel":
-        return isCustomizationAvailable || standalone;
-      case "CompanyInfoSettings":
-        return isCustomizationAvailable || standalone;
-      case "AdditionalResources":
-        return isCustomizationAvailable || standalone;
-      case "SingleSignOn:ServiceProviderSettings":
-      case "SingleSignOn:SpMetadata":
-        return isSSOAvailable;
-      case "Backup":
-        if (isNotPaidPeriod) return true;
-        return !isBackupPaid;
-      default:
-        return true;
-    }
-  };
+  const isAvailableSettings = useCallback(
+    (key) => {
+      switch (key) {
+        case "PortalRenaming":
+          return isCustomizationAvailable;
+        case "DNSSettings":
+          return isCustomizationAvailable;
+        case "Common:RestoreBackup":
+          return isRestoreAndAutoBackupAvailable;
+        case "Common:BrandName":
+          return isCustomizationAvailable || standalone;
+        case "Common:WhiteLabel":
+          return isCustomizationAvailable || standalone;
+        case "CompanyInfoSettings":
+          return isCustomizationAvailable || standalone;
+        case "AdditionalResources":
+          return isCustomizationAvailable || standalone;
+        case "SingleSignOn:ServiceProviderSettings":
+        case "SingleSignOn:SpMetadata":
+          return isSSOAvailable;
+        case "Backup":
+          if (isNotPaidPeriod) return true;
+          return !isBackupPaid;
+        default:
+          return true;
+      }
+    },
+    [
+      isCustomizationAvailable,
+      isRestoreAndAutoBackupAvailable,
+      isSSOAvailable,
+      standalone,
+      isNotPaidPeriod,
+      isBackupPaid,
+    ],
+  );
 
   React.useEffect(() => {
     if (tReady) setIsLoadedSectionHeader(true);
 
     const arrayOfParams = getArrayOfParams();
 
-    const isAiServicesPage = arrayOfParams[0] === "ai-services";
+    const serviceSubPageHeaders = {
+      "backup": "Common:Backup",
+      "ai-services": "Common:OrganizationAI",
+      "disk-storage": "Common:AdditionalDiskStorage",
+    };
 
-    if (isAiServicesPage) {
-      const header = "Services:OrganizationAI";
+    let number = 1;
+    if (window.location.href.includes("disk-storage")) number = 2;
+    const serviceSubPageHeader = serviceSubPageHeaders[arrayOfParams[number]];
+
+    if (serviceSubPageHeader) {
+      const header = serviceSubPageHeader;
       const isCategoryOrHeader = false;
 
-      header !== state.header && setState((val) => ({ ...val, header }));
-      isCategoryOrHeader !== state.isCategoryOrHeader &&
-        setState((val) => ({ ...val, isCategoryOrHeader }));
+      setState((val) => {
+        if (val.header === header && val.isCategoryOrHeader === isCategoryOrHeader)
+          return val;
+        return { ...val, header, isCategoryOrHeader };
+      });
       return;
     }
 
@@ -238,8 +183,6 @@ const SectionHeaderContent = (props) => {
     const keysCollection = key.split("-");
 
     const currKey = keysCollection.length >= 3 ? key : keysCollection[0];
-
-    // console.log(settingsTree, currKey);
 
     const header = getTKeyByKey(currKey, settingsTree);
     const isCategory = checkPropertyByLink(
@@ -257,25 +200,34 @@ const SectionHeaderContent = (props) => {
 
     const isNeedPaidIcon = !isAvailableSettings(header);
 
-    state.isNeedPaidIcon !== isNeedPaidIcon &&
-      setState((val) => ({ ...val, isNeedPaidIcon }));
-
-    header !== state.header && setState((val) => ({ ...val, header }));
-
-    isCategoryOrHeader !== state.isCategoryOrHeader &&
-      setState((val) => ({ ...val, isCategoryOrHeader }));
+    setState((val) => {
+      if (
+        val.header === header &&
+        val.isCategoryOrHeader === isCategoryOrHeader &&
+        val.isNeedPaidIcon === isNeedPaidIcon
+      )
+        return val;
+      return { ...val, header, isCategoryOrHeader, isNeedPaidIcon };
+    });
   }, [
     tReady,
     setIsLoadedSectionHeader,
     getArrayOfParams,
     isAvailableSettings,
-    state.isNeedPaidIcon,
-    state.header,
-    state.isCategoryOrHeader,
     location.pathname,
   ]);
 
   const onBackToParent = () => {
+    const isServicesSubPage =
+      location.pathname.includes("/services/disk-storage") ||
+      location.pathname.includes("/services/backup") ||
+      location.pathname.includes("/services/ai-services");
+
+    if (isServicesSubPage && location.key === "default") {
+      navigate("/portal-settings/payments/services");
+      return;
+    }
+
     navigate(-1);
   };
 
@@ -338,6 +290,10 @@ const SectionHeaderContent = (props) => {
         },
       ];
 
+  const isPaymentPage =
+    location.pathname.includes("portal-settings/payments/") &&
+    !location.pathname.includes("portal-settings/payments/services/");
+
   const translatedHeader =
     header === IMPORT_HEADER_CONST
       ? workspace === "GoogleWorkspace"
@@ -349,16 +305,18 @@ const SectionHeaderContent = (props) => {
                 organizationName: logoText,
               })
             : t("DataImport")
-      : t(header, {
-          organizationName: logoText,
-          license: t("Common:EnterpriseLicense"),
-          productName: t("Common:ProductName"),
-        });
-
-  // console.log(translatedHeader, header);
+      : !standalone && isPaymentPage
+        ? t("Common:Billing")
+        // biome-ignore lint/plugin/no-dynamic-i18n-key: header is passed from route config; underlying keys are declared as literals at callsites
+        : t(header, {
+            organizationName: logoText,
+            license: t("Common:EnterpriseLicense"),
+            productName: getBrandName("ProductName"),
+            aiServices: t("Common:AIServices"),
+          });
 
   return (
-    <StyledContainer isHeaderVisible={isHeaderVisible}>
+    <StyledContainer>
       {isHeaderVisible ? (
         <TableGroupMenu
           checkboxOptions={menuItems}
@@ -378,7 +336,9 @@ const SectionHeaderContent = (props) => {
           arrayOfParams[0] &&
           (isMobile() ||
             window.location.href.indexOf("/javascript-sdk/") > -1 ||
-            window.location.href.indexOf("/ai-services") > -1) ? (
+            window.location.href.indexOf("/ai-services") > -1 ||
+            window.location.href.indexOf("/services/backup") > -1 ||
+            window.location.href.indexOf("disk-storage") > -1) ? (
             <IconButton
               iconName={ArrowPathReactSvgUrl}
               size="17"
@@ -394,7 +354,7 @@ const SectionHeaderContent = (props) => {
               {isNeedPaidIcon ? (
                 <Badge
                   backgroundColor={
-                    theme.isBase
+                    isBase
                       ? globalColors.favoritesStatus
                       : globalColors.favoriteStatusDark
                   }
@@ -511,6 +471,8 @@ export default inject(
       "OAuth",
       "Ldap",
       "Services",
+      "Payments",
     ])(observer(SectionHeaderContent)),
   ),
 );
+

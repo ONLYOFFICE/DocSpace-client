@@ -54,20 +54,14 @@ export const PreviewBlock = ({
     "EmbeddingPanel",
     "Common",
     "Translations",
-    "SharingPanel",
     "CreateEditRoomDialog",
   ]);
 
   const [showPreview, setShowPreview] = useState(
     window.innerWidth > showPreviewThreshold,
   );
-
-  const params = showScriptParamsWithEvents
-    ? objectToGetParams(config)
-    : objectToGetParams({
-        ...config,
-        events: undefined,
-      });
+  const { events: _, ...configWithoutEvents } = config;
+  const params = objectToGetParams(configWithoutEvents);
 
   const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
 
@@ -119,7 +113,7 @@ export const PreviewBlock = ({
         type={TabsTypes.Secondary}
         onSelect={(e) => {
           setSelectedItemId(e.id);
-          loadCurrentFrame(e);
+          if (e.id === "preview") loadCurrentFrame(e);
         }}
         items={dataTabs}
         isLoading={!ready}
@@ -130,3 +124,4 @@ export const PreviewBlock = ({
     <GetCodeBlock t={t} codeBlock={codeBlock} isDisabled={isDisabled} />
   );
 };
+

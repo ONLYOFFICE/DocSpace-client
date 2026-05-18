@@ -3,17 +3,18 @@
   "content": "Add existing {{productName}} members to the room.",
   "content_en_sha1_hash": "816770fbd8f562c5be684447272d1393838bad6e",
   "created_at": "2025-05-26T07:15:53.261Z",
-  "updated_at": "2026-02-19T13:36:32.532Z",
+  "updated_at": "2026-04-11T21:14:06.566Z",
   "comment": {
-    "text": "This translation key is used to display a message that prompts users to add existing members from {{productName}} to a room. It appears in an invite panel when manually inviting members and allows users to select multiple members at once.",
+    "text": "This is an informational message displayed in the invite panel. It explains that existing {{productName}} members can be added to the current room.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:09:29.804Z"
+    "updated_at": "2026-04-11T21:14:06.566Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 658,
-      "context": "{roomId === -1\n ? t(\"InviteMembersManuallyDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : !allowInvitingGuests\n ? t(\"InviteToRoomManuallyInfoMembers\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"InviteToRoomManuallyInfoGuest\", {\n productName: t(\"Common:ProductName\"),\n })}",
+      "line_number": 659,
+      "context": "{roomId === -1\n ? t(\"InviteMembersManuallyDescription\", {\n productName: getBrandName(\"ProductName\"),\n })\n : !allowInvitingGuests\n ? t(\"InviteToRoomManuallyInfoMembers\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"InviteToRoomManuallyInfoGuest\", {\n productName: getBrandName(\"ProductName\"),\n })}",
       "module": "/packages/client"
     }
   ],

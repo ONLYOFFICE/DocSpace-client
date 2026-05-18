@@ -56,9 +56,9 @@ import {
 import {
   createPasswordHash,
   getLoginLink,
-  getOAuthToken,
   toUrlParams,
 } from "@docspace/shared/utils/common";
+import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
 import { setCookie } from "@docspace/ui-kit/utils/cookie";
 import { ButtonKeys } from "@docspace/shared/enums";
 import { TValidate } from "@docspace/ui-kit/components/email-input";
@@ -80,6 +80,7 @@ import EmailInputForm from "./_sub-components/EmailInputForm";
 import RegistrationForm from "./_sub-components/RegistrationForm";
 
 import styles from "@/components/RegisterContainer.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export type CreateUserFormProps = {
   userNameRegex: string;
@@ -118,7 +119,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
   const router = useRouter();
 
-  const organizationName = logoText || t("Common:OrganizationName");
+  const organizationName = logoText || getBrandName("OrganizationName");
 
   const currentCultureName = i18n.language;
 
@@ -641,3 +642,4 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 };
 
 export default CreateUserForm;
+

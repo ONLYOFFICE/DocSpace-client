@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -45,35 +44,7 @@ import PasswordLoader from "../sub-components/loaders/password-loader";
 import { LearnMoreWrapper } from "../StyledSecurity";
 import useSecurity from "../useSecurity";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
-
-const MainContainer = styled.div`
-  width: 100%;
-
-  .password-slider {
-    width: 160px;
-    height: 8px;
-    margin-block: 24px;
-    margin-inline: 0 16px;
-  }
-
-  .checkboxes {
-    box-sizing: border-box;
-    display: inline-block;
-    margin-top: 18px;
-    margin-bottom: 24px;
-
-    .second-checkbox {
-      margin: 8px 0;
-    }
-  }
-
-  .slider-box {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-`;
+import styles from "./passwordStrength.module.scss";
 
 const PasswordStrength = (props) => {
   const {
@@ -271,7 +242,7 @@ const PasswordStrength = (props) => {
   }
 
   return (
-    <MainContainer>
+    <div className={styles.container}>
       <LearnMoreWrapper withoutExternalLink={!passwordStrengthSettingsUrl}>
         <Text fontSize="13px" fontWeight="400">
           {t("SettingPasswordDescription")}
@@ -295,9 +266,9 @@ const PasswordStrength = (props) => {
       <Text fontSize="14px" fontWeight="600" className="length-subtitle">
         {t("PasswordMinLenght")}
       </Text>
-      <div className="slider-box">
+      <div className={styles.sliderBox}>
         <Slider
-          className="password-slider"
+          className={styles.passwordSlider}
           dataTestId="password_strength_slider"
           min="8"
           max="30"
@@ -312,7 +283,7 @@ const PasswordStrength = (props) => {
           })}
         </Text>
       </div>
-      <div className="checkboxes">
+      <div className={styles.checkboxes}>
         <Checkbox
           className="use-upper-case"
           onChange={onClickCheckbox}
@@ -322,7 +293,7 @@ const PasswordStrength = (props) => {
           dataTestId="password_strength_upper_case"
         />
         <Checkbox
-          className="use-digits second-checkbox"
+          className={`use-digits ${styles.secondCheckbox}`}
           onChange={onClickCheckbox}
           label={t("UseDigits")}
           isChecked={useDigits}
@@ -330,7 +301,7 @@ const PasswordStrength = (props) => {
           dataTestId="password_strength_digits"
         />
         <Checkbox
-          className="use-special-char second-checkbox"
+          className={`use-special-char ${styles.secondCheckbox}`}
           onChange={onClickCheckbox}
           label={t("UseSpecialChar")}
           isChecked={useSpecialSymbols}
@@ -354,7 +325,7 @@ const PasswordStrength = (props) => {
         saveButtonDataTestId="password_strength_save"
         cancelButtonDataTestId="password_strength_cancel"
       />
-    </MainContainer>
+    </div>
   );
 };
 

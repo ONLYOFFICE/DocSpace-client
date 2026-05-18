@@ -39,7 +39,7 @@ import type { TLogo } from "@docspace/ui-kit/types";
 import { Nullable, TCreatedBy } from "@docspace/shared/types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
-import { getCorrectDate } from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { getUserType } from "@docspace/shared/utils/common";
 import { LANGUAGE, SHARED_WITH_ME_PATH } from "@docspace/shared/constants";
@@ -65,8 +65,6 @@ type TSelection =
   | Array<TRoom | TFolder | TFile>;
 
 class InfoPanelStore {
-  userStore = {} as UserStore;
-
   isVisible = false;
 
   isMobileHidden = false;
@@ -95,9 +93,7 @@ class InfoPanelStore {
 
   shareChanged = false;
 
-  constructor(userStore: UserStore) {
-    this.userStore = userStore;
-
+  constructor(public userStore: UserStore) {
     makeAutoObservable(this);
   }
 
@@ -414,6 +410,13 @@ class InfoPanelStore {
     return (
       this.roomsView === InfoPanelView.infoShare ||
       this.fileView === InfoPanelView.infoShare
+    );
+  }
+
+  get isDetailsTabActive(): boolean {
+    return (
+      this.roomsView === InfoPanelView.infoDetails ||
+      this.fileView === InfoPanelView.infoDetails
     );
   }
 

@@ -24,6 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+/**
+ * Ensures the URL is absolute by prepending "/" if it has no scheme or leading slash.
+ */
+export const toAbsoluteUrl = (url: string): string =>
+  url.startsWith("http") || url.startsWith("/") ? url : `/${url}`;
+
+export const PAYMENT_ROUTES = {
+  portalPayments: `/portal-settings/payments/portal-payments`,
+  services: `/portal-settings/payments/services`,
+  aiServices: `/portal-settings/payments/services/ai-services`,
+  backup: `/portal-settings/payments/services/backup`,
+  diskStorage: `/portal-settings/payments/services/disk-storage`,
+} as const;
+
 export function getTwoDotsReplacing(translation: string) {
   const newTranslation = translation;
 

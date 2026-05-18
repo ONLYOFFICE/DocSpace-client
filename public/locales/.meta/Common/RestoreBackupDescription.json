@@ -3,16 +3,17 @@
   "content": "Use this option to restore your space from the previously saved backup file.",
   "content_en_sha1_hash": "11a400f57bd31afaba762b7268abcb9729fcb0cf",
   "created_at": "2025-05-26T07:15:46.907Z",
-  "updated_at": "2026-02-19T13:36:33.212Z",
+  "updated_at": "2026-04-13T09:20:08.284Z",
   "comment": {
-    "text": "Use this option to restore your space from a previously saved backup file. This message is used on a restore page in the UI, informing users of how to access and recover their data from a saved backup.",
+    "text": "This is a descriptive text that appears below the \"Restore backup\" heading, explaining the purpose of restoring a space from a backup file.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:04:01.723Z"
+    "updated_at": "2026-04-11T20:44:54.082Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 414,
+      "line_number": 415,
       "context": "styles.restoreDescription,\n styles.settingsUnavailable,\n \"restore-description\",\n )}\n >\n {t(\"Common:RestoreBackupDescription\")}\n </Text>\n </div>\n {radioButtonContent}\n {backupModules}",
       "module": "/packages/shared"
     }
@@ -63,7 +64,15 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Spanish translation incorrectly starts with English word 'Use' instead of the Spanish imperative verb form",
+          "suggestion": "Utilice esta opción para restaurar su espacio de la copia de seguridad guardada anteriormente.",
+          "checked_at": "2026-04-13T09:18:25.481Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -123,7 +132,15 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text says 'restore your space' but the Polish translation uses 'portalu' (portal) instead of the word for 'space'. These are different concepts in DocSpace. Additionally, the possessive 'your' (twojego) is missing from the Polish—it says 'the portal' not 'your space'.",
+          "suggestion": "Użyj tej opcji do przywrócenia twojej przestrzeni z wcześniej zapisanego pliku kopii zapasowej.",
+          "checked_at": "2026-04-13T09:19:17.649Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -199,6 +216,20 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English specifies 'your space' as the object being restored, but the Chinese translates this as '门户数据' (portal data), which is a different concept. The translation loses the possessive 'your' and changes the specific meaning of 'space' to the more general 'portal data'.",
+          "suggestion": "设置此选项，从之前保存的备份文件中恢复你的空间。",
+          "checked_at": "2026-04-13T09:20:08.283Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

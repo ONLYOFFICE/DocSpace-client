@@ -111,6 +111,9 @@ class TargetUserStore {
     if (!res.theme && this.userStore?.user?.theme)
       res.theme = this.userStore.user.theme;
 
+    if (!res.hasPersonalFolder && this.userStore?.user?.hasPersonalFolder)
+      res.hasPersonalFolder = this.userStore.user.hasPersonalFolder;
+
     this.userStore?.setUser(res);
 
     setCookie(LANGUAGE, culture, {

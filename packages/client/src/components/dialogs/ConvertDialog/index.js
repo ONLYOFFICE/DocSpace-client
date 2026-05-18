@@ -167,6 +167,7 @@ const ConvertDialogComponent = (props) => {
               onClick={onChangeRadioButton}
               spacing="12px"
               style={{ marginTop: "12px" }}
+              dataTestId="convert_dialog_file_type_radio"
             />
           </div>
         ) : null}
@@ -179,6 +180,7 @@ const ConvertDialogComponent = (props) => {
               label={t("SaveOriginalFormatMessage")}
               isChecked={storeOriginalFiles}
               onChange={onChangeFormat}
+              dataTestId="convert_dialog_save_original_checkbox"
             />
             {convertSingleFile && sortedFolder ? (
               <div
@@ -202,6 +204,7 @@ const ConvertDialogComponent = (props) => {
                 label={t("HideMessage")}
                 isChecked={hideMessage}
                 onChange={onChangeMessageVisible}
+                dataTestId="convert_dialog_hide_message_checkbox"
               />
             ) : null}
           </div>
@@ -213,6 +216,7 @@ const ConvertDialogComponent = (props) => {
               primary
               scale
               onClick={onConvert}
+              testId="convert_dialog_continue_button"
             />
             <Button
               key="CloseButton"
@@ -220,6 +224,7 @@ const ConvertDialogComponent = (props) => {
               size="normal"
               scale
               onClick={onCloseDialog}
+              testId="convert_dialog_close_button"
             />
           </div>
         </div>

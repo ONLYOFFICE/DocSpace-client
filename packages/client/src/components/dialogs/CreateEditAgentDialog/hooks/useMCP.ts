@@ -33,10 +33,11 @@ import {
 	getMCPServerById,
 	getServersListForRoom,
 } from "@docspace/shared/api/ai";
-import { getServerIcon } from "@docspace/shared/utils";
+import { getServerIconUrl } from "@docspace/shared/utils";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
 import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { ServerType } from "@docspace/shared/api/ai/enums";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const useMCP = ({
 	agentParams,
@@ -82,7 +83,7 @@ export const useMCP = ({
 					const items = res.map((item) => {
 						const name =
 							item.serverType === ServerType.Portal
-								? `${t("Common:OrganizationName")} ${t("Common:ProductName")}`
+								? `${getBrandName("OrganizationName")} ${getBrandName("ProductName")}`
 								: item.name;
 
 						return {
@@ -90,7 +91,7 @@ export const useMCP = ({
 							id: item.id,
 							label: name,
 							icon:
-								(item.icon?.icon24 || getServerIcon(item.serverType, isBase)) ??
+								(item.icon?.icon24 || getServerIconUrl(item.serverType, isBase)) ??
 								"",
 							isInputItem: false,
 							onAcceptInput: () => {},
@@ -132,7 +133,7 @@ export const useMCP = ({
 
 			const name =
 				portalMcpServer.serverType === ServerType.Portal
-					? `${t("Common:OrganizationName")} ${t("Common:ProductName")}`
+					? `${getBrandName("OrganizationName")} ${getBrandName("ProductName")}`
 					: portalMcpServer.name;
 
 			setSelectedServers([
@@ -142,7 +143,7 @@ export const useMCP = ({
 					label: name,
 					icon:
 						(portalMcpServer.icon?.icon24 ||
-							getServerIcon(portalMcpServer.serverType, isBase)) ??
+							getServerIconUrl(portalMcpServer.serverType, isBase)) ??
 						"",
 					isInputItem: false,
 					onAcceptInput: () => {},

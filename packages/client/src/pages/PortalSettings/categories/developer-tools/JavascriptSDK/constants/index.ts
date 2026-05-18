@@ -50,7 +50,11 @@ export const sdkSource = {
 
 export const defaultDimension = dimensionsModel[0];
 
-export const FILE_TYPE_CATEGORIES = [
+export type FileTypeCategory =
+  | { key: string; labelKey: string; constLabelKey?: never }
+  | { key: string; labelKey?: never; constLabelKey: string };
+
+export const FILE_TYPE_CATEGORIES: FileTypeCategory[] = [
   { key: "document", labelKey: "Common:Documents" },
   { key: "spreadsheet", labelKey: "Common:Spreadsheets" },
   { key: "presentation", labelKey: "Common:Presentations" },
@@ -58,7 +62,7 @@ export const FILE_TYPE_CATEGORIES = [
   { key: "video", labelKey: "Common:Video" },
   { key: "audio", labelKey: "Common:Audio" },
   { key: "archive", labelKey: "Common:Archives" },
-  { key: "pdf", labelKey: "PDF" },
+  { key: "pdf", constLabelKey: "PDF" },
 ];
 
 export const FILE_TYPE_EXTENSIONS = {
@@ -71,3 +75,11 @@ export const FILE_TYPE_EXTENSIONS = {
   archive: [".zip", ".rar", ".7z", ".tar", ".gz"],
   pdf: [".pdf"],
 };
+
+export const UNIT_MULTIPLIERS = {
+  kb: 1024,
+  mb: 1024 * 1024,
+  gb: 1024 * 1024 * 1024,
+} as const;
+
+export const UNIT_ORDER = ["kb", "mb", "gb"] as const;

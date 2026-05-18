@@ -28,7 +28,7 @@ import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
 
 import { DataImportProps, InjectedDataImportProps } from "./types";
 

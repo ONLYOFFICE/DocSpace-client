@@ -48,7 +48,7 @@ describe("Render room selector light", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-room-selector.png",
@@ -67,7 +67,7 @@ describe("Render room selector light", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-room-search-selector.png",
@@ -87,7 +87,7 @@ describe("Render room selector light", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-ru-room-selector.png",
@@ -108,7 +108,7 @@ describe("Render room selector light", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-header-room-selector.png",
@@ -129,7 +129,7 @@ describe("Render room selector light", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-cancel-room-selector.png",
@@ -149,7 +149,7 @@ describe("Render room selector light", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-header-search-room-selector.png",
@@ -169,7 +169,7 @@ describe("Render room selector light", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-header-ru-room-selector.png",
@@ -189,7 +189,7 @@ describe("Render room selector light", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-header-cancel-room-selector.png",
@@ -209,7 +209,7 @@ describe("Render room selector light", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-search-ru-room-selector.png",
@@ -229,7 +229,7 @@ describe("Render room selector light", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-search-cancel-room-selector.png",
@@ -249,7 +249,7 @@ describe("Render room selector light", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-ru-cancel-room-selector.png",
@@ -269,7 +269,7 @@ describe("Render room selector light", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-header-search-ru-room-selector.png",
@@ -289,7 +289,7 @@ describe("Render room selector light", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-header-search-cancel-room-selector.png",
@@ -309,7 +309,7 @@ describe("Render room selector light", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-search-ru-cancel-room-selector.png",
@@ -329,7 +329,7 @@ describe("Render room selector light", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-all-features-room-selector.png",
@@ -346,7 +346,7 @@ describe("Room selector light empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-empty-room-selector.png",
@@ -362,7 +362,7 @@ describe("Room selector light empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-empty-room-search-selector.png",
@@ -378,7 +378,7 @@ describe("Room selector light empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-empty-ru-room-selector.png",
@@ -394,7 +394,7 @@ describe("Room selector light empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-empty-header-room-selector.png",
@@ -410,7 +410,7 @@ describe("Room selector light empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-empty-cancel-room-selector.png",
@@ -425,7 +425,7 @@ describe("Room selector light empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-empty-header-search-room-selector.png",
@@ -440,7 +440,7 @@ describe("Room selector light empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-empty-header-ru-room-selector.png",
@@ -455,7 +455,7 @@ describe("Room selector light empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-empty-header-cancel-room-selector.png",
@@ -471,7 +471,7 @@ describe("Room selector light empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-empty-search-ru-room-selector.png",
@@ -487,7 +487,7 @@ describe("Room selector light empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-empty-search-cancel-room-selector.png",
@@ -503,7 +503,7 @@ describe("Room selector light empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-empty-ru-cancel-room-selector.png",
@@ -519,7 +519,7 @@ describe("Room selector light empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-empty-header-search-ru-room-selector.png",
@@ -535,7 +535,7 @@ describe("Room selector light empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-empty-header-search-cancel-room-selector.png",
@@ -551,7 +551,7 @@ describe("Room selector light empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-empty-search-ru-cancel-room-selector.png",
@@ -567,7 +567,7 @@ describe("Room selector light empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-empty-all-features-room-selector.png",
@@ -589,7 +589,7 @@ describe("Render room rtl selector light", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-ar-SA-room-selector.png",
@@ -609,7 +609,7 @@ describe("Render room rtl selector light", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-header-ar-SA-room-selector.png",
@@ -629,7 +629,7 @@ describe("Render room rtl selector light", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-search-ar-SA-room-selector.png",
@@ -649,7 +649,7 @@ describe("Render room rtl selector light", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-ar-SA-cancel-room-selector.png",
@@ -669,7 +669,7 @@ describe("Render room rtl selector light", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-header-search-ar-SA-room-selector.png",
@@ -689,7 +689,7 @@ describe("Render room rtl selector light", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-search-ar-SA-cancel-room-selector.png",
@@ -709,7 +709,7 @@ describe("Render room rtl selector light", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-all-features-ar-SA-room-selector.png",
@@ -727,7 +727,7 @@ describe("Room selector rtl light empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-empty-ar-SA-room-selector.png",
@@ -743,7 +743,7 @@ describe("Room selector rtl light empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-empty-header-ar-SA-room-selector.png",
@@ -759,7 +759,7 @@ describe("Room selector rtl light empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-empty-search-ar-SA-room-selector.png",
@@ -775,7 +775,7 @@ describe("Room selector rtl light empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-empty-ar-SA-cancel-room-selector.png",
@@ -791,7 +791,7 @@ describe("Room selector rtl light empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-empty-header-search-ar-SA-room-selector.png",
@@ -803,13 +803,15 @@ describe("Room selector rtl light empty", () => {
     baseUrl,
     port,
     clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&locale=ar-SA&cancel=true&search=true`;
 
     clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-empty-search-ar-SA-cancel-room-selector.png",
@@ -825,7 +827,7 @@ describe("Room selector rtl light empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "light-empty-all-features-ar-SA-room-selector.png",
@@ -847,7 +849,7 @@ describe("Render room selector dark", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-room-selector.png",
@@ -867,7 +869,7 @@ describe("Render room selector dark", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-room-search-selector.png",
@@ -888,7 +890,7 @@ describe("Render room selector dark", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-ru-room-selector.png",
@@ -909,7 +911,7 @@ describe("Render room selector dark", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-header-room-selector.png",
@@ -930,7 +932,7 @@ describe("Render room selector dark", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-cancel-room-selector.png",
@@ -950,7 +952,7 @@ describe("Render room selector dark", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-header-search-room-selector.png",
@@ -970,7 +972,7 @@ describe("Render room selector dark", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-header-ru-room-selector.png",
@@ -990,7 +992,7 @@ describe("Render room selector dark", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-header-cancel-room-selector.png",
@@ -1010,7 +1012,7 @@ describe("Render room selector dark", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-search-ru-room-selector.png",
@@ -1030,7 +1032,7 @@ describe("Render room selector dark", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-search-cancel-room-selector.png",
@@ -1050,7 +1052,7 @@ describe("Render room selector dark", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-ru-cancel-room-selector.png",
@@ -1070,7 +1072,7 @@ describe("Render room selector dark", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-header-search-ru-room-selector.png",
@@ -1090,7 +1092,7 @@ describe("Render room selector dark", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-header-search-cancel-room-selector.png",
@@ -1110,7 +1112,7 @@ describe("Render room selector dark", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-search-ru-cancel-room-selector.png",
@@ -1130,7 +1132,7 @@ describe("Render room selector dark", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-all-features-room-selector.png",
@@ -1148,7 +1150,7 @@ describe("Room selector dark empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-empty-room-selector.png",
@@ -1164,7 +1166,7 @@ describe("Room selector dark empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-empty-room-search-selector.png",
@@ -1180,7 +1182,7 @@ describe("Room selector dark empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-empty-ru-room-selector.png",
@@ -1196,7 +1198,7 @@ describe("Room selector dark empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-empty-header-room-selector.png",
@@ -1212,7 +1214,7 @@ describe("Room selector dark empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-empty-cancel-room-selector.png",
@@ -1228,7 +1230,7 @@ describe("Room selector dark empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-empty-header-search-room-selector.png",
@@ -1244,7 +1246,7 @@ describe("Room selector dark empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-empty-header-ru-room-selector.png",
@@ -1260,7 +1262,7 @@ describe("Room selector dark empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-empty-header-cancel-room-selector.png",
@@ -1276,7 +1278,7 @@ describe("Room selector dark empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-empty-search-ru-room-selector.png",
@@ -1292,7 +1294,7 @@ describe("Room selector dark empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-empty-search-cancel-room-selector.png",
@@ -1308,7 +1310,7 @@ describe("Room selector dark empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-empty-ru-cancel-room-selector.png",
@@ -1324,7 +1326,7 @@ describe("Room selector dark empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-empty-header-search-ru-room-selector.png",
@@ -1340,7 +1342,7 @@ describe("Room selector dark empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-empty-header-search-cancel-room-selector.png",
@@ -1356,7 +1358,7 @@ describe("Room selector dark empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-empty-search-ru-cancel-room-selector.png",
@@ -1372,7 +1374,7 @@ describe("Room selector dark empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-empty-all-features-room-selector.png",
@@ -1395,7 +1397,7 @@ describe("Render room rtl selector dark", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-ar-SA-room-selector.png",
@@ -1415,7 +1417,7 @@ describe("Render room rtl selector dark", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-header-ar-SA-room-selector.png",
@@ -1435,7 +1437,7 @@ describe("Render room rtl selector dark", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-search-ar-SA-room-selector.png",
@@ -1455,7 +1457,7 @@ describe("Render room rtl selector dark", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-ar-SA-cancel-room-selector.png",
@@ -1475,7 +1477,7 @@ describe("Render room rtl selector dark", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-header-search-ar-SA-room-selector.png",
@@ -1495,7 +1497,7 @@ describe("Render room rtl selector dark", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-search-ar-SA-cancel-room-selector.png",
@@ -1515,7 +1517,7 @@ describe("Render room rtl selector dark", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-all-features-ar-SA-room-selector.png",
@@ -1533,7 +1535,7 @@ describe("Room selector rtl dark empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-empty-ar-SA-room-selector.png",
@@ -1549,7 +1551,7 @@ describe("Room selector rtl dark empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-empty-header-ar-SA-room-selector.png",
@@ -1565,7 +1567,7 @@ describe("Room selector rtl dark empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-empty-search-ar-SA-room-selector.png",
@@ -1581,7 +1583,7 @@ describe("Room selector rtl dark empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-empty-ar-SA-cancel-room-selector.png",
@@ -1597,7 +1599,7 @@ describe("Room selector rtl dark empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-empty-header-search-ar-SA-room-selector.png",
@@ -1613,7 +1615,7 @@ describe("Room selector rtl dark empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-empty-search-ar-SA-cancel-room-selector.png",
@@ -1629,7 +1631,7 @@ describe("Room selector rtl dark empty", () => {
 
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "dark-empty-all-features-ar-SA-room-selector.png",
@@ -1651,7 +1653,7 @@ describe("Room selector custom labels", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "custom-submit-room-selector.png",
@@ -1671,7 +1673,7 @@ describe("Room selector custom labels", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "custom-cancel-room-selector.png",
@@ -1691,7 +1693,7 @@ describe("Room selector custom labels", () => {
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "custom-submit-cancel-room-selector.png",
@@ -1794,7 +1796,7 @@ describe("Room selector search actions", () => {
 
     await page.waitForTimeout(1000);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "action-search-room-selector.png",
@@ -1806,7 +1808,7 @@ describe("Room selector search actions", () => {
 
     await page.waitForTimeout(1000);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "action-empty-search-room-selector.png",
@@ -1835,7 +1837,7 @@ describe("Room selector search actions", () => {
 
     await page.waitForTimeout(1000);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "action-ar-SA-search-room-selector.png",
@@ -1846,7 +1848,7 @@ describe("Room selector search actions", () => {
 
     await page.waitForTimeout(1000);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "action-ar-SA-empty-search-room-selector.png",
@@ -1875,7 +1877,7 @@ describe("Room selector search actions", () => {
 
     await page.waitForTimeout(1000);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "action-search-dark-room-selector.png",
@@ -1886,7 +1888,7 @@ describe("Room selector search actions", () => {
 
     await page.waitForTimeout(1000);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "action-empty-dark-search-room-selector.png",
@@ -1917,7 +1919,7 @@ describe("Room selector search actions", () => {
 
     await page.waitForTimeout(1000);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "action-ar-SA-dark-search-room-selector.png",
@@ -1928,7 +1930,7 @@ describe("Room selector search actions", () => {
 
     await page.waitForTimeout(1000);
 
-    await expectScreenshot(page,[
+    await expectScreenshot(page, [
       "desktop",
       "room-selector",
       "action-ar-SA-dark-empty-search-room-selector.png",

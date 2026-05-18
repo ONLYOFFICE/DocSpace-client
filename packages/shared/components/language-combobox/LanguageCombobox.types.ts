@@ -56,4 +56,6 @@ export type ComboboxProps = {
   withBackdrop?: boolean;
   shouldShowBackdrop?: boolean;
   isDisabled?: boolean;
+  /** Show language name alongside the flag icon */
+  showLanguageName?: boolean;
 };

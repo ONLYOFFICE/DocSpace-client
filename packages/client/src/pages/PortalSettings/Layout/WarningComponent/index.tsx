@@ -36,6 +36,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 
 type InjectedProps = {
   isPayer?: boolean;
+  isPayerInfoLoaded?: boolean;
   walletCustomerEmail?: string;
   cardLinkedOnNonProfit?: boolean;
   cardLinkedOnFreeTariff?: boolean;
@@ -49,6 +50,7 @@ type InjectedProps = {
 
 const Warning = ({
   isPayer,
+  isPayerInfoLoaded,
   walletCustomerEmail,
   cardLinkedOnNonProfit,
   cardLinkedOnFreeTariff,
@@ -59,18 +61,44 @@ const Warning = ({
   isBackupServiceOn,
   isNotPaidPeriod,
 }: InjectedProps) => {
-  const { t, ready } = useTranslation(["Services", "Common"]);
+  const { t, ready } = useTranslation(["Services", "Common", "Payments"]);
   const { pathname } = useLocation();
   const [warningText, setWarningText] = React.useState<React.ReactNode>("");
 
   const onClickServiceUrl = () => {
-    const servicePageUrl = combineUrl("/portal-settings", "/services");
+    const servicePageUrl = combineUrl(
+      "/portal-settings",
+      "payments",
+      "/services",
+    );
+
+    window.DocSpace.navigate(servicePageUrl);
+  };
+
+  const onClickLearnMore = () => {
+    const servicePageUrl = combineUrl(
+      "/portal-settings",
+      "payments",
+      "/payment-method",
+    );
 
     window.DocSpace.navigate(servicePageUrl);
   };
 
   const isBackupRoute =
     typeof pathname === "string" && pathname.includes("portal-settings/backup");
+
+  const isPaymentsServiceRoute =
+    typeof pathname === "string" &&
+    pathname.includes("portal-settings/payments/services/");
+
+  const isPortalPaymentsRoute =
+    typeof pathname === "string" &&
+    pathname.includes("portal-settings/payments/portal-payments");
+
+  const isWalletRoute =
+    typeof pathname === "string" &&
+    pathname.includes("portal-settings/payments/wallet");
 
   React.useEffect(() => {
     if (!isBackupPaid || isNotPaidPeriod) return;
@@ -82,7 +110,7 @@ const Warning = ({
         <Trans
           t={t}
           i18nKey="ConnectService"
-          ns="Services"
+          ns="Common"
           components={{
             1: (
               <Link
@@ -118,7 +146,7 @@ const Warning = ({
 
       if (maxFreeBackups > 0) {
         try {
-          const backupText = t("Services:FreeBackupsPerMonth", {
+          const backupText = t("Common:FreeBackupsPerMonth", {
             value:
               backupsCount >= maxFreeBackups ? maxFreeBackups : backupsCount,
             maxValue: maxFreeBackups,
@@ -178,6 +206,35 @@ const Warning = ({
     if (warningText) setWarningText("");
   }, [isBackupRoute]);
 
+  if (
+    (isPortalPaymentsRoute || isWalletRoute || isPaymentsServiceRoute) &&
+    !isPayer
+  ) {
+    if (!isPayerInfoLoaded) return null;
+
+    return (
+      <WarningComponent
+        title={
+          <Trans
+            t={t}
+            i18nKey="OnlyPayerCanManageSection"
+            ns="Common"
+            components={{
+              1: (
+                <Link
+                  key="learn-more-link"
+                  tag="a"
+                  color="accent"
+                  onClick={onClickLearnMore}
+                />
+              ),
+            }}
+          />
+        }
+      />
+    );
+  }
+
   if (!isBackupPaid || !isBackupRoute || !warningText) return null;
 
   return <WarningComponent title={warningText} />;
@@ -196,12 +253,13 @@ export default inject(
       cardLinkedOnFreeTariff,
       isBackupServiceOn,
     } = paymentStore;
-    const { walletCustomerEmail, isNotPaidPeriod } = currentTariffStatusStore;
+    const { walletCustomerEmail, isNotPaidPeriod, isPayerInfoLoaded } =
+      currentTariffStatusStore;
     const { isBackupPaid, maxFreeBackups } = currentQuotaStore;
     const { backupsCount, isInited } = backup;
-
     return {
       isPayer,
+      isPayerInfoLoaded,
       walletCustomerEmail,
       cardLinkedOnNonProfit,
       cardLinkedOnFreeTariff,
@@ -214,3 +272,4 @@ export default inject(
     };
   },
 )(observer(Warning));
+

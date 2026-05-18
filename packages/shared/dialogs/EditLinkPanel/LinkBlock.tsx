@@ -34,6 +34,7 @@ import {
 } from "@docspace/ui-kit/components/text-input";
 
 import type { LinkBlockProps } from "./EditLinkPanel.types";
+import styles from "./EditLinkPanel.module.scss";
 
 const LinkBlock: FC<LinkBlockProps> = (props) => {
 	const { t, isLoading, linkNameValue, setLinkNameValue } = props;
@@ -43,8 +44,8 @@ const LinkBlock: FC<LinkBlockProps> = (props) => {
 	};
 
 	return (
-		<div className="edit-link_link-block">
-			<Text className="edit-link-text" fontSize="16px" fontWeight={600}>
+		<div className={styles.linkBlock}>
+			<Text className={styles.linkText} fontSize="16px" fontWeight={600}>
 				{t("Common:LinkName")}
 			</Text>
 			<TextInput

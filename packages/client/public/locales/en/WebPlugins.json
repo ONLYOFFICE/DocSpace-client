@@ -8,6 +8,7 @@
   "NeedSettings": "Need enter settings",
   "NoPlugins": "No plugins added",
   "NotNeedSettings": "Not need enter settings",
+  "PluginCacheWarningDescription": "Plugins are cached based on their version number. To ensure your changes are applied, please increment the version number in your <1>package.json</1> file before uploading. The system will not update a plugin if the version remains the same",
   "PluginDeletedSuccessfully": "Plugin deleted successfully",
   "PluginIsNotCompatible": "The plugin SDK version doesn’t match the {{productName}} version. Please update to a compatible version.",
   "PluginLoadedSuccessfully": "Plugin loaded successfully",
@@ -15,6 +16,5 @@
   "PluginSDK": "Plugin SDK",
   "PluginSDKDescription": "Using Plugin SDK you can extend your {{productName}} functionality, connect the third-party services or enhance the existing user experience. Here you can find the plugin samples with code source available on GitHub.",
   "PluginSDKInstruction": "Click the button for the detailed instructions on how to create your own plugins.",
-  "UploadDescription": "You can add plugins to extend the functionality of {{productName}} with extra features. Click Upload plugin or drop file in the ZIP archive.",
-  "PluginCacheWarningDescription": "Plugins are cached based on their version number. To ensure your changes are applied, please increment the version number in your <1>package.json</1> file before uploading. The system will not update a plugin if the version remains the same"
+  "UploadDescription": "You can add plugins to extend the functionality of {{productName}} with extra features. Click Upload plugin or drop file in the ZIP archive."
 }

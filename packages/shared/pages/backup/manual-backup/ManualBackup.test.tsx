@@ -6,7 +6,7 @@ import userEvent from "@testing-library/user-event";
 import { BackupStorageType, DeviceType, FolderType } from "../../../enums";
 import { ButtonSize } from "@docspace/ui-kit/components/button";
 import * as portalApi from "../../../api/portal";
-import * as socketModule from "../../../utils/socket";
+import * as socketModule from "@docspace/ui-kit/utils/socket";
 
 import ManualBackup from "./index";
 import { selectedStorages, mockThirdPartyAccounts } from "../mockData";
@@ -22,10 +22,13 @@ vi.mock("@docspace/ui-kit/components/toast", () => ({
   },
 }));
 
-vi.mock("@docspace/shared/utils/socket", () => ({
+vi.mock("@docspace/ui-kit/utils/socket", () => ({
   default: {
     on: vi.fn(),
     off: vi.fn(),
+  },
+  SocketEvents: {
+    BackupProgress: "BACKUP_PROGRESS",
   },
 }));
 

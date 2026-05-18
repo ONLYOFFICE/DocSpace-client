@@ -1,0 +1,29 @@
+{
+  "key_path": "CapabilityVision",
+  "content": "Vision",
+  "content_en_sha1_hash": "40b0906c4f3b5a2658a393a02faf70a3ff416418",
+  "created_at": "2026-04-23T17:24:00.298Z",
+  "updated_at": "2026-04-23T17:41:26.341Z",
+  "comment": {
+    "text": "Checkbox label in the AI settings panel used to enable or disable the model's ability to process images.",
+    "is_auto": true,
+    "updated_at": "2026-04-23T17:41:26.341Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/ModelSettingsPanel.tsx",
+      "line_number": 137,
+      "context": "productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <div className={styles.checkboxList}>\n <Checkbox\n label={t(\"AISettings:CapabilityVision\")}\n isChecked={capabilities.vision}\n onChange={() => handleCapabilityChange(\"vision\")}\n />\n <Checkbox\n label={t(\"AISettings:CapabilityToolCalling\")}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

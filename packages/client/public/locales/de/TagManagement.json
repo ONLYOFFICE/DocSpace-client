@@ -1,0 +1,8 @@
+{
+  "ChangesToTag": "Änderungen an diesem Tag wirken sich auf alle Räume aus, in denen er verwendet wird.",
+  "DeleteTag": "Tag löschen",
+  "DeleteTagCannotBeUndone": "Diese Aktion kann nicht rückgängig gemacht werden.",
+  "DeleteTagConfirmation": "Das Löschen dieses Tags entfernt es aus allen Räumen, in denen es verwendet wird.",
+  "EditTag": "Tag bearbeiten",
+  "RemoveTag": "<1>{{tag}}</1> Tag entfernt."
+}

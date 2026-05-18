@@ -3,11 +3,12 @@
   "content": "Connecting account",
   "content_en_sha1_hash": "30247ea2913e8fb4e0715cc844d2610b4a06c1ea",
   "created_at": "2025-05-26T07:15:41.509Z",
-  "updated_at": "2026-02-19T13:36:33.140Z",
+  "updated_at": "2026-04-11T20:56:39.133Z",
   "comment": {
-    "text": "\"Connecting account\" is used as a title in a reconnect storage or connecting account dialogue. It appears on the header of a ConnectDialog component when reconnecting to an account.",
+    "text": "This is a dialog title that appears when a user is in the process of connecting a new account to DocSpace.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:06:19.577Z"
+    "updated_at": "2026-04-11T20:56:39.133Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -199,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

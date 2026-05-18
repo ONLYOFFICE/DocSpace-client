@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import CheckWhiteSvgUrl from "PUBLIC_DIR/images/check.white.svg?url";
+import PlusThemeSvgUrl from "PUBLIC_DIR/images/plus.theme.svg?url";
 import LightSvgUrl from "PUBLIC_DIR/images/icons/16/light.svg?url";
 import DarkSvgUrl from "PUBLIC_DIR/images/icons/16/dark.svg?url";
 import { useState, useEffect, useCallback, useMemo } from "react";
@@ -48,14 +49,11 @@ import { isMobile, getTextColor } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/shared/enums";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { ColorPicker } from "@docspace/ui-kit/components/color-picker";
-import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+
+import classnames from "classnames";
 
 import ModalDialogDelete from "./sub-components/modalDialogDelete";
-import {
-  StyledComponent,
-  StyledTheme,
-  StyledBodyContent,
-} from "./Appearance/StyledApperance";
+import appearanceStyles from "./Appearance/StyledApperance.module.scss";
 import Loader from "./sub-components/loaderAppearance";
 import ColorSchemeDialog from "./sub-components/colorSchemeDialog";
 import Preview from "./Appearance/preview";
@@ -85,7 +83,7 @@ const Appearance = (props) => {
   const headerEditTheme = t("Settings:EditColorScheme");
 
   const checkImgHover = (
-    <ReactSVG className="check-hover" src={CheckWhiteSvgUrl} />
+    <ReactSVG className={appearanceStyles.checkHover} src={CheckWhiteSvgUrl} />
   );
 
   const [showColorSchemeDialog, setShowColorSchemeDialog] = useState(false);
@@ -150,7 +148,6 @@ const Appearance = (props) => {
         name: t("Common:LightTheme"),
         content: (
           <Preview
-            appliedColorAccent={appliedColorAccent}
             previewAccent={previewAccent}
             selectThemeId={selectThemeId}
             colorCheckImg={colorCheckImg}
@@ -164,7 +161,6 @@ const Appearance = (props) => {
         name: t("Common:DarkTheme"),
         content: (
           <Preview
-            appliedColorAccent={appliedColorAccent}
             previewAccent={previewAccent}
             selectThemeId={selectThemeId}
             colorCheckImg={colorCheckImg}
@@ -179,25 +175,9 @@ const Appearance = (props) => {
 
   const [selectedItemId, setSelectedItemId] = useState(arrayItems[0].id);
 
-  // const getSettings = () => {
-  //   const selectColorId = getFromSessionStorage("selectColorId");
-  //   const defaultColorId = selectedThemeId;
-  //   saveToSessionStorage("defaultColorId", defaultColorId);
-  //   if (selectColorId) {
-  //     setSelectThemeId(selectColorId);
-  //   } else {
-  //     setSelectThemeId(defaultColorId);
-  //   }
-  // };
-
   useEffect(() => {
-    // getSettings();
     setDocumentTitle(t("Settings:Appearance"));
   }, []);
-
-  useEffect(() => {
-    saveToSessionStorage("selectColorId", selectThemeId);
-  }, [selectThemeId]);
 
   useEffect(() => {
     return () => {
@@ -333,8 +313,6 @@ const Appearance = (props) => {
 
       setPreviewAccent(accent);
       setSelectThemeId(id);
-      saveToSessionStorage("selectColorId", id);
-      saveToSessionStorage("selectColorAccent", accent);
     },
     [appearanceTheme, setPreviewAccent, setSelectThemeId],
   );
@@ -351,10 +329,6 @@ const Appearance = (props) => {
     } catch (error) {
       toastr.error(error);
     }
-    saveToSessionStorage("selectColorId", selectThemeId);
-    saveToSessionStorage("defaultColorId", selectThemeId);
-    saveToSessionStorage("selectColorAccent", previewAccent);
-    saveToSessionStorage("defaultColorAccent", previewAccent);
   }, [selectThemeId, setIsDisabledSaveButton, getAppearanceTheme]);
 
   // Open HexColorPicker
@@ -386,12 +360,6 @@ const Appearance = (props) => {
         setSelectThemeId(appearanceTheme[0].id);
         setPreviewAccent(appearanceTheme[0].main?.accent);
       }
-
-      saveToSessionStorage("selectColorId", appearanceTheme[0].id);
-      saveToSessionStorage(
-        "selectColorAccent",
-        appearanceTheme[0].main?.accent,
-      );
 
       onCloseDialogDelete();
 
@@ -475,7 +443,6 @@ const Appearance = (props) => {
       }
 
       setCurrentColorAccent(color);
-      saveToSessionStorage("selectColorAccent", color);
 
       setOpenHexColorPickerAccent(false);
     },
@@ -592,7 +559,7 @@ const Appearance = (props) => {
       autoMaxHeight
     >
       <ModalDialog.Body>
-        <StyledBodyContent>
+        <div className={appearanceStyles.styledBodyContent}>
           <ColorPicker
             id="buttons-hex"
             onClose={onCloseHexColorPickerButtons}
@@ -602,7 +569,7 @@ const Appearance = (props) => {
             cancelButtonLabel={t("Common:CancelButton")}
             hexCodeLabel={t("Settings:HexCode")}
           />
-        </StyledBodyContent>
+        </div>
       </ModalDialog.Body>
     </ModalDialog>
   ) : (
@@ -636,7 +603,7 @@ const Appearance = (props) => {
       autoMaxHeight
     >
       <ModalDialog.Body>
-        <StyledBodyContent>
+        <div className={appearanceStyles.styledBodyContent}>
           <ColorPicker
             id="accent-hex"
             onClose={onCloseHexColorPickerAccent}
@@ -645,7 +612,7 @@ const Appearance = (props) => {
             applyButtonLabel={t("Common:ApplyButton")}
             cancelButtonLabel={t("Common:CancelButton")}
           />
-        </StyledBodyContent>
+        </div>
       </ModalDialog.Body>
     </ModalDialog>
   ) : (
@@ -691,61 +658,63 @@ const Appearance = (props) => {
         onClickDelete={onClickDeleteModal}
       />
 
-      <StyledComponent
-        colorCheckImg={colorCheckImg}
-        isShowDeleteButton={isShowDeleteButton}
+      <div
+        className={classnames(appearanceStyles.styledComponent, {
+          [appearanceStyles.showDeleteButton]: isShowDeleteButton,
+        })}
+        style={{ "--check-img-color": colorCheckImg }}
       >
-        <div className="header">{t("Common:Color")}</div>
+        <div className={appearanceStyles.header}>{t("Common:Color")}</div>
 
-        <div className="theme-standard-container">
-          <div className="theme-name">{t("Common:Standard")}</div>
+        <div className={appearanceStyles.themeStandardContainer}>
+          <div className={appearanceStyles.themeName}>{t("Common:Standard")}</div>
 
-          <div className="theme-container">
+          <div className={appearanceStyles.themeContainer}>
             {appearanceTheme.map((item) => {
               if (!item.name) return;
               return (
-                <StyledTheme
+                <div
                   key={item.name}
                   id={item.id}
-                  colorCheckImgHover={colorCheckImgHover}
-                  style={{ background: item.main?.accent }}
+                  className={appearanceStyles.styledTheme}
+                  style={{ "--check-hover-color": colorCheckImgHover, background: item.main?.accent }}
                   onClick={onColorSelection}
                   onMouseOver={onColorCheckImgHover}
                   data-testid={`appearance_standard_theme_${item.id}`}
                 >
                   {selectThemeId === item.id ? (
-                    <ReactSVG className="check-img" src={CheckWhiteSvgUrl} />
+                    <ReactSVG className={appearanceStyles.checkImg} src={CheckWhiteSvgUrl} />
                   ) : null}
 
                   {selectThemeId !== item.id ? checkImgHover : null}
-                </StyledTheme>
+                </div>
               );
             })}
           </div>
         </div>
 
         <div className="theme-custom-container">
-          <div className="theme-name">{t("Common:Custom")}</div>
+          <div className={appearanceStyles.themeName}>{t("Common:Custom")}</div>
 
-          <div className="theme-container">
-            <div className="custom-themes">
+          <div className={appearanceStyles.themeContainer}>
+            <div className={appearanceStyles.customThemes}>
               {appearanceTheme.map((item) => {
                 if (item.name) return;
                 return (
-                  <StyledTheme
+                  <div
                     key={item.id}
                     id={item.id}
-                    style={{ background: item.main?.accent }}
-                    colorCheckImgHover={colorCheckImgHover}
+                    className={appearanceStyles.styledTheme}
+                    style={{ "--check-hover-color": colorCheckImgHover, background: item.main?.accent }}
                     onClick={onColorSelection}
                     onMouseOver={onColorCheckImgHover}
                     data-testid={`appearance_custom_theme_${item.id}`}
                   >
                     {selectThemeId === item.id ? (
-                      <ReactSVG className="check-img" src={CheckWhiteSvgUrl} />
+                      <ReactSVG className={appearanceStyles.checkImg} src={CheckWhiteSvgUrl} />
                     ) : null}
                     {selectThemeId !== item.id ? checkImgHover : null}
-                  </StyledTheme>
+                  </div>
                 );
               })}
             </div>
@@ -753,8 +722,9 @@ const Appearance = (props) => {
             <div
               data-tooltip-id="theme-add"
               data-tip="tooltip"
-              className="theme-add"
+              className={appearanceStyles.themeAdd}
               data-testid="appearance_add_theme"
+              style={{ backgroundImage: `url(${PlusThemeSvgUrl})` }}
               onClick={onAddTheme}
             />
             {!abilityAddTheme ? (
@@ -785,7 +755,7 @@ const Appearance = (props) => {
           showSaveButtonDialog={showSaveButtonDialog}
           onSaveColorSchemeDialog={onSaveColorSchemeDialog}
         />
-        <div className="header preview-header">
+        <div className={classnames(appearanceStyles.header, appearanceStyles.previewHeader)}>
           {t("Common:Preview")}
           <HelpButton
             place="right"
@@ -817,7 +787,7 @@ const Appearance = (props) => {
           scaled
         />
 
-        <div className="buttons-container">
+        <div className={appearanceStyles.buttonsContainer}>
           <Button
             className="save button"
             label={t("Common:SaveButton")}
@@ -847,7 +817,7 @@ const Appearance = (props) => {
             />
           ) : null}
         </div>
-      </StyledComponent>
+      </div>
     </>
   );
 };

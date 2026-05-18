@@ -1,5 +1,4 @@
 {
-  "DeleteForeverButton": "Delete forever",
   "DeleteForeverNote": "All items from the {{sectionName}} section will be deleted forever. You won’t be able to restore them.",
   "DeleteForeverTitle": "Delete forever?",
   "SuccessEmptyAction": "{{sectionName}} section emptied"

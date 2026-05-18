@@ -31,7 +31,8 @@ import { useTranslation } from "react-i18next";
 
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
 import { Text } from "@docspace/ui-kit/components/text";
-import { getOAuthToken, getLoginLink } from "@docspace/shared/utils/common";
+import { getLoginLink } from "@docspace/shared/utils/common";
+import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
 import {
   TCapabilities,
   TThirdPartyProvider,

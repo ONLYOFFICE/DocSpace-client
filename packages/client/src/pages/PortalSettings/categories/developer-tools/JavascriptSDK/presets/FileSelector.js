@@ -24,11 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
+import { useEventLog } from "../sub-components/useEventLog";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import SDK from "@onlyoffice/docspace-sdk-js";
+
+import { EventLogBlock } from "../sub-components/EventLogBlock";
 
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { ComboBox } from "@docspace/ui-kit/components/combobox";
@@ -79,6 +82,18 @@ import {
   LabelGroup,
 } from "./StyledPresets";
 
+const FILE_SELECTOR_EVENT_TYPES = [
+  "onSelectCallback",
+  "onCloseCallback",
+  "onAppReady",
+  "onAppError",
+  "onAuthSuccess",
+  "onSignOut",
+  "onNoAccess",
+  "onNotFound",
+  "onContentReady",
+];
+
 const FileSelector = (props) => {
   const { t, fetchExternalLinks, theme, logoText } = props;
 
@@ -107,19 +122,19 @@ const FileSelector = (props) => {
   const fileOptions = [
     {
       key: FilterType.FoldersOnly,
-      label: t(`Common:Folders`),
+      label: t("Common:Folders"),
     },
     {
       key: FilterType.DocumentsOnly,
-      label: t(`Common:Documents`),
+      label: t("Common:Documents"),
     },
     {
       key: FilterType.PresentationsOnly,
-      label: t(`Common:Presentations`),
+      label: t("Common:Presentations"),
     },
     {
       key: FilterType.SpreadsheetsOnly,
-      label: t(`Common:Spreadsheets`),
+      label: t("Common:Spreadsheets"),
     },
     {
       key: FilterType.PDFForm,
@@ -131,23 +146,23 @@ const FileSelector = (props) => {
     },
     {
       key: FilterType.DiagramsOnly,
-      label: t(`Common:Diagrams`),
+      label: t("Common:Diagrams"),
     },
     {
       key: FilterType.ArchiveOnly,
-      label: t(`Common:Archives`),
+      label: t("Common:Archives"),
     },
     {
       key: FilterType.ImagesOnly,
-      label: t(`Common:Images`),
+      label: t("Common:Images"),
     },
     {
       key: FilterType.MediaOnly,
-      label: t(`Common:Media`),
+      label: t("Common:Media"),
     },
     {
       key: FilterType.FilesOnly,
-      label: t(`Common:Files`),
+      label: t("Common:Files"),
     },
   ];
 
@@ -176,23 +191,28 @@ const FileSelector = (props) => {
     isButtonMode: false,
     buttonWithLogo: true,
     events: {
-      onSelectCallback: (items) => {
-        console.log("onSelectCallback", items);
-      },
-      onCloseCallback: null,
-      onAppReady: null,
-      onAppError: (e) => console.log("onAppError", e),
-      onEditorCloseCallback: null,
-      onAuthSuccess: null,
-      onSignOut: null,
+      onSelectCallback: () => {},
+      onCloseCallback: () => {},
+      onAppReady: () => {},
+      onAppError: () => {},
+      onAuthSuccess: () => {},
+      onSignOut: () => {},
+      onNoAccess: () => {},
+      onNotFound: () => {},
+      onContentReady: () => {},
     },
   });
+
+  const [eventLog, onClearEventLog] = useEventLog(config.frameId);
 
   const fromPackage = source === sdkSource.Package;
 
   const sdkScriptUrl = getSdkScriptUrl(version);
 
-  const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
+  const sdk = useMemo(
+    () => (fromPackage ? new SDK() : window.DocSpace.SDK),
+    [fromPackage],
+  );
 
   const destroyFrame = () => {
     sdk?.frames[config.frameId]?.destroyFrame();
@@ -226,7 +246,7 @@ const FileSelector = (props) => {
     return () => {
       destroyFrame();
     };
-  });
+  }, [config]);
 
   useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
@@ -307,13 +327,21 @@ const FileSelector = (props) => {
   };
 
   const preview = (
-    <Frame
-      width={config.width.includes("px") ? config.width : undefined}
-      height={config.height.includes("px") ? config.height : undefined}
-      targetId={config.frameId}
-    >
-      <div id={config.frameId} />
-    </Frame>
+    <>
+      <Frame
+        width={config.width.includes("px") ? config.width : undefined}
+        height={config.height.includes("px") ? config.height : undefined}
+        targetId={config.frameId}
+      >
+        <div id={config.frameId} />
+      </Frame>
+      <EventLogBlock
+        t={t}
+        events={eventLog}
+        onClear={onClearEventLog}
+        eventTypes={FILE_SELECTOR_EVENT_TYPES}
+      />
+    </>
   );
 
   return (

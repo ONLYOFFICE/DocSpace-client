@@ -27,11 +27,17 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";
+
 import {
+  AGENT_ID_HEADER,
   FILTER_HEADER,
+  LIBRARY_ID_HEADER,
   LOCALE_HEADER,
   PATHNAME_HEADER,
+  ROOM_ID_HEADER,
   SHARE_KEY_HEADER,
+  STYLES_URL_HEADER,
   THEME_HEADER,
 } from "@/utils/constants";
 import { handlePublicRoomValidation } from "@/utils/middleware/handlePublicRoomValidation";
@@ -78,6 +84,37 @@ export async function proxy(request: NextRequest) {
   requestHeaders.set(THEME_HEADER, theme ?? "");
   requestHeaders.set(LOCALE_HEADER, locale ?? "");
   requestHeaders.set(SHARE_KEY_HEADER, shareKey ?? "");
+  requestHeaders.set(STYLES_URL_HEADER, searchParams.get("stylesUrl") ?? "");
+
+  if (request.nextUrl.pathname.includes("forms")) {
+    const roomId = searchParams.get("roomId") ?? "";
+    const libraryId = searchParams.get("libraryId") ?? "";
+
+    requestHeaders.set(ROOM_ID_HEADER, roomId);
+    requestHeaders.set(LIBRARY_ID_HEADER, libraryId);
+    requestHeaders.set(FILTER_HEADER, searchParams.toString());
+
+    return NextResponse.next({ request: { headers: requestHeaders } });
+  }
+
+  if (request.nextUrl.pathname.includes("personal-files")) {
+    requestHeaders.set(FILTER_HEADER, searchParams.toString());
+
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
+  }
+
+  if (request.nextUrl.pathname === "/chat") {
+    const agentId = searchParams.get("agentId") ?? "";
+
+    requestHeaders.set(AGENT_ID_HEADER, agentId);
+    requestHeaders.set(FILTER_HEADER, searchParams.toString());
+
+    return NextResponse.next({ request: { headers: requestHeaders } });
+  }
 
   if (request.nextUrl.pathname.includes("public-room")) {
     const validationResult = await handlePublicRoomValidation(
@@ -93,6 +130,25 @@ export async function proxy(request: NextRequest) {
           headers: requestHeaders,
         },
       );
+    }
+
+    if (validationResult?.anonymousSessionKeyCookie) {
+      const cookieNameValue = validationResult.anonymousSessionKeyCookie
+        .split(";")[0]
+        ?.trim();
+
+      if (cookieNameValue) {
+        const existingCookies = requestHeaders.get("cookie") || "";
+
+        if (!existingCookies.includes("anonymous_session_key=")) {
+          requestHeaders.set(
+            "cookie",
+            existingCookies
+              ? `${existingCookies}; ${cookieNameValue}`
+              : cookieNameValue,
+          );
+        }
+      }
     }
 
     requestHeaders.set(FILTER_HEADER, searchParams.toString());
@@ -129,5 +185,11 @@ export const config = {
     "/file-selector",
     "/public-room",
     "/public-room/password",
+    "/forms",
+    "/forms/:path*",
+    "/chat",
+    "/personal-files",
+    "/personal-files/:path*",
   ],
 };
+

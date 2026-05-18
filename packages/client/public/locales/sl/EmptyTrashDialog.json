@@ -1,5 +1,4 @@
 {
-  "DeleteForeverButton": "Izbriši za vedno",
   "DeleteForeverNote": "Vsi elementi iz razdelka {{sectionName}} bodo za vedno izbrisani. Ne boste jih mogli obnoviti.",
   "DeleteForeverTitle": "Izbriši za vedno?",
   "SuccessEmptyAction": "Razdelek {{sectionName}} je izpraznjen"

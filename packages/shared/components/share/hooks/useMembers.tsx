@@ -42,7 +42,7 @@ import { SHARED_MEMBERS_COUNT } from "../../../constants";
 import { ShareLinkService } from "../../../services/share-link.service";
 import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
 import type { RoomMember } from "../../../api/rooms/types";
-import SocketHelper, { SocketEvents } from "../../../utils/socket";
+import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
 
 import type { TOption } from "@docspace/ui-kit/components/combobox";
 import { TData, toastr } from "@docspace/ui-kit/components/toast";

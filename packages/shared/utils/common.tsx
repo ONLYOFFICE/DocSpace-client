@@ -27,15 +27,16 @@
 import type { Location } from "react-router";
 import find from "lodash/find";
 import { findWindows } from "windows-iana";
+import { getCultureLabel } from "../constants/cultures";
 import {
   parseToDateTime,
   startOf,
   dateDiffAbs,
 } from "@docspace/ui-kit/utils/date";
 import { isMobile } from "react-device-detect";
-import type { I18nextProviderProps } from "react-i18next";
-import sjcl from "sjcl";
 import resizeImage from "resize-image";
+import { pbkdf2 } from "@noble/hashes/pbkdf2.js";
+import { sha256 } from "@noble/hashes/sha2.js";
 
 import LoginPageSvgUrl from "PUBLIC_DIR/images/logo/loginpage.svg?url";
 import DarkLoginPageSvgUrl from "PUBLIC_DIR/images/logo/dark_loginpage.svg?url";
@@ -64,8 +65,6 @@ import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.patt
 
 import { AvatarRole } from "@docspace/ui-kit/components/avatar";
 import { ThemeKeys } from "@docspace/ui-kit/enums";
-
-import { flagsIcons } from "./image-flags";
 
 import { parseAddress } from "./email";
 
@@ -116,8 +115,6 @@ export const desktopConstants = Object.freeze({
 });
 
 let timer: null | ReturnType<typeof setTimeout> = null;
-type I18n = I18nextProviderProps["i18n"];
-
 export function changeLanguage(i18n: TI18n, currentLng = getCookie(LANGUAGE)) {
   return currentLng
     ? i18n.language !== currentLng
@@ -146,11 +143,15 @@ export function createPasswordHash(
 
   const { size, iterations, salt } = hashSettings;
 
-  let bits = sjcl.misc.pbkdf2(password, salt, iterations);
-  bits = bits.slice(0, size / 32);
-  const hash = sjcl.codec.hex.fromBits(bits);
+  const enc = new TextEncoder();
+  const derivedBytes = pbkdf2(sha256, enc.encode(password), enc.encode(salt), {
+    c: iterations,
+    dkLen: size / 8,
+  });
 
-  return hash;
+  return Array.from(derivedBytes)
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
 }
 
 export const isPublicRoom = () => {
@@ -345,7 +346,7 @@ export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {
       return t("Common:Owner");
     case EmployeeType.Admin:
       return t("Common:PortalAdmin", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       });
     case EmployeeType.RoomAdmin:
       return t("Common:RoomAdmin");
@@ -413,25 +414,27 @@ export function toCommunityHostname(hostname: string) {
 export function getProviderLabel(provider: string, t: (key: string) => string) {
   switch (provider) {
     case "apple":
-      return t("Common:ProviderApple");
+      return getBrandName("ProviderApple");
     case "google":
-      return t("Common:ProviderGoogle");
+      return getBrandName("ProviderGoogle");
     case "facebook":
-      return t("Common:ProviderFacebook");
+      return getBrandName("ProviderFacebook");
     case "twitter":
-      return t("Common:ProviderTwitter");
+      return getBrandName("ProviderTwitter");
     case "linkedin":
-      return t("Common:ProviderLinkedIn");
+      return getBrandName("ProviderLinkedIn");
     case "microsoft":
-      return t("Common:ProviderMicrosoft");
+      return getBrandName("ProviderMicrosoft");
     case "sso":
-      return t("Common:SSO");
+      return getConstName("SSO");
     case "zoom":
-      return t("Common:ProviderZoom");
+      return getBrandName("ProviderZoom");
     case "weixin":
-      return t("Common:ProviderWechat");
+      return getBrandName("ProviderWechat");
     case "sso-full":
       return t("Common:ProviderSsoSetting");
+    case "nextcloud":
+      return getBrandName("Nextcloud");
     default:
       return "";
   }
@@ -480,6 +483,10 @@ export function getProviderTranslation(
       return signUp
         ? t("Common:SignUpWithWechat")
         : t("Common:SignInWithWechat");
+    case "nextcloud":
+      return signUp
+        ? t("Common:SignUpWithNextcloud")
+        : t("Common:SignInWithNextcloud");
     default:
       return "";
   }
@@ -624,32 +631,6 @@ export function assign(
   obj[keyPath[lastKeyIndex]] = value;
 }
 
-export function getOAuthToken(
-  tokenGetterWin: Window | string | null,
-): Promise<string> {
-  return new Promise((resolve, reject) => {
-    localStorage.removeItem("code");
-    const interval: ReturnType<typeof setInterval> = setInterval(() => {
-      try {
-        const code = localStorage.getItem("code");
-        if (typeof tokenGetterWin !== "string") {
-          if (code) {
-            localStorage.removeItem("code");
-            clearInterval(interval);
-            resolve(code);
-          } else if (tokenGetterWin?.closed) {
-            clearInterval(interval);
-            reject();
-          }
-        }
-      } catch (e) {
-        clearInterval(interval);
-        reject(e);
-      }
-    }, 500);
-  });
-}
-
 export function getLoginLink(token: string, code: string) {
   return combineUrl(
     window.ClientConfig?.proxy?.url,
@@ -659,16 +640,20 @@ export function getLoginLink(token: string, code: string) {
 
 const FRAME_NAME = "frameDocSpace";
 
-const getFrameId = () => {
+export const getFrameId = () => {
   return window.self.name.replace(`${FRAME_NAME}__#`, "");
 };
 
-export const frameCallbackData = (methodReturnData: unknown) => {
+export const frameCallbackData = (
+  methodReturnData: unknown,
+  callId?: number,
+) => {
   window.parent.postMessage(
     JSON.stringify({
       type: "onMethodReturn",
       frameId: getFrameId(),
       methodReturnData,
+      ...(callId !== undefined && { callId }),
     }),
     "*",
   );
@@ -700,51 +685,35 @@ export const frameCallCommand = (
   );
 };
 
-// Done in a similar way to server code
-// https://github.com/ONLYOFFICE/DocSpace-server/blob/master/common/ASC.Common/Utils/CommonFileSizeComment.cs
-export const getPowerFromBytes = (bytes: number, maxPower = 6) => {
-  const power = Math.floor(Math.log(bytes) / Math.log(1024));
-  return power <= maxPower ? power : maxPower;
-};
+export {
+  getPowerFromBytes,
+  getSizeFromBytes,
+  getConvertedSize,
+  calculateTotalPrice,
+  truncateNumberToFraction,
+  formatCurrencyValue,
+} from "@docspace/ui-kit/billing/utils/common";
 
-export const getSizeFromBytes = (bytes: number, power: number) => {
-  const size = bytes / 1024 ** power;
-  const truncateToTwo = Math.trunc(size * 100) / 100;
-
-  return truncateToTwo;
-};
-
-export const getConvertedSize = (
-  t: (key: string) => string,
-  bytes: number,
-  withoutSizeName: boolean = false,
-) => {
-  let power = 0;
-  let resultSize = bytes;
-
-  const sizeNames = [
-    t("Common:Bytes"),
-    t("Common:Kilobyte"),
-    t("Common:Megabyte"),
-    t("Common:Gigabyte"),
-    t("Common:Terabyte"),
-    t("Common:Petabyte"),
-    t("Common:Exabyte"),
-  ];
-
-  if (bytes <= 0) return `${`0 ${t("Common:Bytes")}`}`;
-
-  if (bytes >= 1024) {
-    power = getPowerFromBytes(bytes, sizeNames.length - 1);
-    resultSize = getSizeFromBytes(bytes, power);
+export const frameHandlePing = (eventData: {
+  type?: string;
+  frameId?: string;
+}): boolean => {
+  if (eventData?.type === "ping") {
+    window.parent.postMessage(
+      JSON.stringify({
+        type: "pong",
+        frameId: getFrameId(),
+      }),
+      "*",
+    );
+    return true;
   }
-
-  if (withoutSizeName) return `${resultSize}`;
-
-  return `${resultSize} ${sizeNames[power]}`;
+  return false;
 };
 
-//
+import { getConvertedSize } from "@docspace/ui-kit/billing/utils/common";
+import { getBrandName } from "@docspace/shared/constants/brands";
+import { getConstName } from "@docspace/shared/constants/consts";
 
 export const getConvertedQuota = (
   t: (key: string) => string,
@@ -1184,49 +1153,6 @@ export const insertDataLayer = (id: string) => {
   window.dataLayer.push({ user_id: id });
 };
 
-export const mapCulturesToArray = (
-  culturesArg: string[],
-  isBetaBadge: boolean = true,
-  i18nArg?: I18n,
-) => {
-  let t = null;
-
-  if (i18nArg) {
-    t = i18nArg.getFixedT(null, "Common");
-  }
-
-  return culturesArg.map((culture, index) => {
-    let iconName = culture;
-
-    switch (culture) {
-      case "sr-Cyrl-RS":
-      case "sr-Latn-RS":
-        iconName = "sr";
-        break;
-      default:
-        break;
-    }
-
-    const icon = flagsIcons?.get(`${iconName}.react.svg`);
-
-    const cultureObj = t
-      ? {
-          key: culture,
-          label: t(`Culture_${culture}`),
-          icon,
-          ...(isBetaBadge && { isBeta: isBetaLanguage(culture) }),
-          index,
-        }
-      : {
-          key: culture,
-          icon,
-          index,
-        };
-
-    return cultureObj;
-  });
-};
-
 export const mapTimezonesToArray = (
   timezones: TTimeZone[],
 ): {
@@ -1298,7 +1224,9 @@ export const getUserTypeName = (
   if (isOwner) return t("Common:Owner");
 
   if (isPortalAdmin)
-    return t("Common:PortalAdmin", { productName: t("Common:ProductName") });
+    return t("Common:PortalAdmin", {
+      productName: getBrandName("ProductName"),
+    });
 
   if (isRoomAdmin) return t("Common:RoomAdmin");
 
@@ -1486,41 +1414,6 @@ export const getSdkScriptUrl = (version: string) => {
     : "";
 };
 
-export const calculateTotalPrice = (
-  quantity: number,
-  unitPrice: number,
-): number => {
-  return Number((quantity * unitPrice).toFixed(2));
-};
-
-export const truncateNumberToFraction = (
-  value: number,
-  digits: number = 2,
-): string => {
-  const [intPart, fracPart = ""] = value.toString().split(".");
-  const truncated = fracPart.slice(0, digits).padEnd(digits, "0");
-  return `${intPart}.${truncated}`;
-};
-
-export const formatCurrencyValue = (
-  language: string,
-  amount: number,
-  currency: string,
-  fractionDigits: number = 3,
-) => {
-  const truncatedStr = truncateNumberToFraction(amount, fractionDigits);
-  const truncated = Number(truncatedStr);
-
-  const formatter = new Intl.NumberFormat(language, {
-    style: "currency",
-    currency,
-    minimumFractionDigits: fractionDigits,
-    maximumFractionDigits: fractionDigits,
-  });
-
-  return formatter.format(truncated);
-};
-
 export const insertEditorPreloadFrame = (docServiceUrl: string) => {
   if (
     !docServiceUrl ||
@@ -1656,3 +1549,4 @@ export function splitFileAndFolderIds<T extends TFolder | TFile>(items: T[]) {
     return acc;
   }, initial);
 }
+

@@ -1,0 +1,8 @@
+{
+  "ChangesToTag": "このタグの変更は、使用されているすべてのルームに影響します。",
+  "DeleteTag": "タグを削除",
+  "DeleteTagCannotBeUndone": "この操作は元に戻せません。",
+  "DeleteTagConfirmation": "このタグを削除すると、使用されているすべてのルームから削除されます。",
+  "EditTag": "タグを編集",
+  "RemoveTag": "<1>{{tag}}</1> タグが削除されました。"
+}

@@ -41,6 +41,7 @@ import { getPluginUrl } from "SRC_DIR/helpers/plugins/utils";
 import styles from "../Plugins.module.scss";
 import { PluginItemProps } from "../Plugins.types";
 import classNames from "classnames";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PluginItem = ({
   name,
@@ -75,7 +76,7 @@ const PluginItem = ({
   };
 
   const incompatibleTooltip = t("WebPlugins:PluginIsNotCompatible", {
-    productName: t("ProductName"),
+    productName: getBrandName("ProductName"),
   });
 
   const badgeId = `plugin_version_${name}_badge`;

@@ -30,7 +30,6 @@ import {
   tfaStore,
   currentTariffStatusStore,
   currentQuotaStore,
-  paymentQuotasStore,
   settingsStore,
 } from "@docspace/shared/store";
 
@@ -105,13 +104,13 @@ const pluginStore = new PluginStore(
   settingsStore,
   selectedFolderStore,
   userStore,
+  currentTariffStatusStore,
 );
 
 const paymentStore = new PaymentStore(
   userStore,
   currentTariffStatusStore,
   currentQuotaStore,
-  paymentQuotasStore,
 );
 const servicesStore = new ServicesStore(currentTariffStatusStore, paymentStore);
 
@@ -192,6 +191,7 @@ const mediaViewerDataStore = new MediaViewerDataStore(
   filesStore,
   publicRoomStore,
   selectedFolderStore,
+  pluginStore,
 );
 
 const oformsStore = new OformsStore(settingsStore, userStore, treeFoldersStore);
@@ -385,7 +385,7 @@ const editGroupStore = new EditGroupStore(peopleStore);
 
 const brandingStore = new BrandingStore(settingsStore);
 
-const aiSettingsStore = new AISettingsStore();
+const aiSettingsStore = new AISettingsStore(settingsStore);
 
 const defaultTemplatesStore = new DefaultTemplatesStore();
 
@@ -397,7 +397,6 @@ const store = {
   tfaStore,
   currentTariffStatusStore,
   currentQuotaStore,
-  paymentQuotasStore,
   settingsStore,
 
   paymentStore,

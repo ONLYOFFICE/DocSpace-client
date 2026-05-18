@@ -78,6 +78,7 @@ import useProfileHeader from "SRC_DIR/pages/Profile/Section/Header/useProfileHea
 
 import { useContactsHeader } from "./useContacts";
 import { getWarningText } from "../getWarningText";
+import { AnalyzeResponsesButton } from "./sub-components/AnalyzeResponses";
 
 const SectionHeaderContent = (props) => {
   const {
@@ -373,6 +374,7 @@ const SectionHeaderContent = (props) => {
               label={label}
               data-key={key}
               onClick={onSelect}
+              truncateText
             />
           );
         })}
@@ -1033,6 +1035,11 @@ const SectionHeaderContent = (props) => {
               isPlusButtonVisible={isPlusButtonVisible}
               showBackButton={isProfile}
               contextMenuHeader={isProfile ? undefined : contextMenuHeader}
+              analyzeResponsesButton={
+                <AnalyzeResponsesButton
+                  className={styles.analyzeResponsesButton}
+                />
+              }
             />
             {showSignInButton ? (
               <Button
@@ -1267,7 +1274,7 @@ export default inject(
 
     const isShared = shared || navigationPath.find((r) => r.shared);
 
-    const showNavigationButton = !!((!security?.CopyLink && !isArchive) ||
+    const showNavigationButton = !!((!security?.CopySharedLink && !isArchive) ||
     isPublicRoom ||
     isSharedWithMeFolderRoot ||
     isArchive ||
@@ -1366,7 +1373,7 @@ export default inject(
       theme,
       isFrame,
       showTitle: frameConfig?.showTitle,
-      hideInfoPanel: isFrame,
+      hideInfoPanel: isFrame && !frameConfig?.infoPanelVisible,
       showMenu: frameConfig?.showMenu,
       currentDeviceType,
       insideGroupTempTitle,
@@ -1435,7 +1442,6 @@ export default inject(
     "Common",
     "Translations",
     "InfoPanel",
-    "SharingPanel",
     "Article",
     "People",
     "PeopleTranslations",

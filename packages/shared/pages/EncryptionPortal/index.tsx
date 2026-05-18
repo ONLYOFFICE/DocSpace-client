@@ -41,7 +41,7 @@ import {
   getEncryptionSettings,
 } from "../../api/settings";
 
-import SocketHelper, { SocketEvents } from "../../utils/socket";
+import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
 import { returnToPortal } from "./EncryptionPortal.utils";
 import { EncryptionPortalProps } from "./EncryptionPortal.types";
 

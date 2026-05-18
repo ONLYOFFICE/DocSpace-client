@@ -25,16 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
-import styled, { css } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { isMobile, mobile } from "@docspace/shared/utils";
+import { isMobile } from "@docspace/shared/utils";
+import styles from "../CreateEditAgentDialog.module.scss";
 
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 
-import { removeEmojiCharacters } from "SRC_DIR/helpers/utils";
+import { removeEmojiCharacters } from "@docspace/shared/utils";
 import TagHandler from "SRC_DIR/helpers/TagHandler";
 
 import ItemIcon from "../../../ItemIcon";
@@ -62,62 +62,6 @@ import RoomQuota from "SRC_DIR/components/RoomQuota";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import type { TRoom } from "@docspace/shared//api/rooms/types";
 
-const StyledSetAgentParams = styled.div<{ disableImageRescaling?: boolean }>`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 22px;
-  margin-top: 20px;
-
-  .icon-editor_text {
-    margin-bottom: 6px;
-  }
-
-  .icon-editor {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: start;
-    gap: 16px;
-
-    ${(props) =>
-      props.disableImageRescaling &&
-      css`
-        margin-bottom: 24px;
-      `};
-  }
-
-  .logo-name-container {
-    display: flex;
-    align-items: end;
-    gap: 16px;
-
-    @media ${mobile} {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .room-params-icon,
-    .react-svg-icon {
-      min-width: 64px;
-      min-height: 64px;
-      @media ${mobile} {
-        min-width: 96px;
-        min-height: 96px;
-      }
-    }
-    .room-title {
-      font-size: 32px;
-      font-weight: 700;
-      line-height: 37px;
-      user-select: none;
-      @media ${mobile} {
-        font-size: 42px;
-        line-height: 56px;
-      }
-    }
-  }
-`;
 
 type TServerCover = {
   id: string;
@@ -165,7 +109,7 @@ type setAgentParamsProps = {
   setCover?: DialogsStore["setCover"];
   isDefaultAIAgentsQuotaSet?: CurrentQuotasStore["isDefaultAIAgentsQuotaSet"];
   infoPanelSelection?: TRoom;
-  modelAliases?: TAIConfig["modelAliases"];
+  systemAiEnabled?: TAIConfig["systemAiEnabled"];
 };
 
 const setAgentParams = ({
@@ -202,7 +146,7 @@ const setAgentParams = ({
   onClickAction,
   selectedServers,
   setSelectedServers,
-  modelAliases,
+  systemAiEnabled,
 }: setAgentParamsProps) => {
   const { t } = useTranslation([
     "CreateEditRoomDialog",
@@ -484,7 +428,7 @@ const setAgentParams = ({
   const inputTitle = `${t("Common:AgentName")}:`;
 
   return (
-    <StyledSetAgentParams disableImageRescaling={disableImageRescaling}>
+    <div className={`${styles.setAgentParams}${disableImageRescaling ? ` ${styles.disableImageRescaling}` : ""}`}>
       <div className="logo-name-container">
         {element}
         <InputParam
@@ -527,7 +471,7 @@ const setAgentParams = ({
 
       <ModelSettings
         agentParams={agentParams}
-        modelAliases={modelAliases}
+        systemAiEnabled={systemAiEnabled}
         setAgentParams={setAgentParams}
       />
       <InstructionsSettings
@@ -573,7 +517,7 @@ const setAgentParams = ({
           />
         ) : null}
       </div>
-    </StyledSetAgentParams>
+    </div>
   );
 };
 
@@ -632,7 +576,8 @@ export default inject(
       isDefaultAIAgentsQuotaSet,
       infoPanelSelection,
 
-      modelAliases: aiConfig?.modelAliases,
+      systemAiEnabled: aiConfig?.systemAiEnabled,
     };
   },
 )(observer(setAgentParams));
+

@@ -9,7 +9,7 @@ RUN apt-get -y update && \
     apt-get install -yq
     
 # Install PNPM
-RUN npm install -g pnpm@10.28.2
+RUN npm install -g pnpm@10.33.0
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     fonts-noto-cjk \
@@ -74,9 +74,6 @@ COPY packages/sdk/ ./packages/sdk/
 COPY packages/shared/ ./packages/shared/
 COPY public/ ./public/
 COPY libs/ui-kit/ ./libs/ui-kit/
-
-# Run before-build script (packages/runtime.json)
-RUN pnpm run before-build
 
 # Run build:translations
 RUN pnpm --filter @docspace/sdk run build:translations

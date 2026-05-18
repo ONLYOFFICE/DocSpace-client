@@ -26,7 +26,6 @@
 
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
 
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { Text } from "@docspace/ui-kit/components/text";
@@ -37,28 +36,7 @@ import {
 	ImportCompleteStepProps,
 	InjectedImportCompleteStepProps,
 } from "../types";
-
-const Wrapper = styled.div`
-  margin: 16px 0 16px;
-  display: flex;
-  align-items: center;
-
-  .checkbox-text {
-    color: ${(props) => props.theme.client.settings.migration.subtitleColor};
-  }
-`;
-
-const InfoText = styled(Text)`
-  margin-bottom: 8px;
-  font-size: 12px;
-  color: ${(props) => props.theme.client.settings.migration.subtitleColor};
-`;
-
-const ErrorText = styled(Text)`
-  font-size: 12px;
-  color: ${(props) => props.theme.client.settings.migration.errorTextColor};
-  margin-bottom: 8px;
-`;
+import styles from "../StyledDataImport.module.scss";
 
 const ImportCompleteStep = (props: ImportCompleteStepProps) => {
 	const {
@@ -135,26 +113,26 @@ const ImportCompleteStep = (props: ImportCompleteStepProps) => {
 
 	return (
 		<>
-			<InfoText>
+			<Text className={styles.infoText}>
 				{t("Settings:ImportedUsers", {
 					selectedUsers: importResult.succeedUsers,
 					importedUsers: importResult.succeedUsers + importResult.failedUsers,
 				})}
-			</InfoText>
+			</Text>
 
 			{importResult.failedUsers > 0 ? (
-				<ErrorText>
+				<Text className={styles.errorText}>
 					{t("Settings:ErrorsWereFound", {
 						errors: importResult.failedUsers,
 					})}
-				</ErrorText>
+				</Text>
 			) : null}
 
 			{importResult.errors?.length > 0 ? (
-				<ErrorText>{t("Settings:ErrorOccuredDownloadLog")}</ErrorText>
+				<Text className={styles.errorText}>{t("Settings:ErrorOccuredDownloadLog")}</Text>
 			) : null}
 
-			<Wrapper>
+			<div className={styles.importCompleteWrapper}>
 				<Checkbox
 					label={t("Settings:SendInviteLetter")}
 					isChecked={isChecked}
@@ -170,7 +148,7 @@ const ImportCompleteStep = (props: ImportCompleteStepProps) => {
 					}
 					dataTestId="invite_letter_help_button"
 				/>
-			</Wrapper>
+			</div>
 
 			<SaveCancelButtons
 				className="save-cancel-buttons"

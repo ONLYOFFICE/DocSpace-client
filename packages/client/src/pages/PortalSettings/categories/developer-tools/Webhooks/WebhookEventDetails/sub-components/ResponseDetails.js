@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import json_beautifier from "csvjson-json_beautifier";
@@ -38,51 +37,7 @@ import { isMobile } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { isJSON } from "@docspace/shared/utils/json";
 
-const DetailsWrapper = styled.div`
-  width: 100%;
-
-  .textareaBody {
-    height: 50vh !important;
-  }
-
-  .mt-7 {
-    margin-top: 7px;
-  }
-
-  .mt-16 {
-    margin-top: 16px;
-  }
-
-  .mb-4 {
-    margin-bottom: 4px;
-  }
-`;
-
-const LargePayloadStub = styled.div`
-  box-sizing: border-box;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  width: 100%;
-  max-width: 1200px;
-  padding: 12px 10px;
-  margin-top: 4px;
-
-  background: ${(props) => props.theme.client.settings.webhooks.background};
-  border: ${(props) => props.theme.client.settings.webhooks.border};
-  border-radius: 3px;
-
-  ${
-		isMobile() &&
-		css`
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    row-gap: 16px;
-  `
-	}
-`;
+import styles from "../WebhookEventDetails.styled.module.scss";
 
 const ResponseDetails = ({ eventDetails }) => {
 	const responsePayload = eventDetails.responsePayload?.trim();
@@ -109,7 +64,7 @@ const ResponseDetails = ({ eventDetails }) => {
 	};
 
 	return (
-		<DetailsWrapper>
+		<div className={styles.messageDetailsWrapper}>
 			<Text as="h3" fontWeight={600} className="mb-4 mt-7">
 				{t("ResponsePostHeader")}
 			</Text>
@@ -134,7 +89,7 @@ const ResponseDetails = ({ eventDetails }) => {
 				{t("ResponsePostBody")}
 			</Text>
 			{responsePayload.length > 4000 || numberOfLines > 100 ? (
-				<LargePayloadStub>
+				<div className={styles.largePayloadStub}>
 					<Text fontWeight={600} color={globalColors.lightGrayDark}>
 						{t("PayloadIsTooLarge")}
 					</Text>
@@ -145,7 +100,7 @@ const ResponseDetails = ({ eventDetails }) => {
 						label={t("ViewRawPayload")}
 						scale={isMobile()}
 					/>
-				</LargePayloadStub>
+				</div>
 			) : responsePayload === "" ? (
 				<Textarea isDisabled />
 			) : isJSON(responsePayload) ? (
@@ -168,7 +123,7 @@ const ResponseDetails = ({ eventDetails }) => {
 					copyInfoText={t("ResponseBodyCopied")}
 				/>
 			)}
-		</DetailsWrapper>
+		</div>
 	);
 };
 

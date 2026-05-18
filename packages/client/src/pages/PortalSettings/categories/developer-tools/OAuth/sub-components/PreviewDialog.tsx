@@ -26,7 +26,6 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { useTheme } from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
 
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
@@ -39,17 +38,14 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { generatePKCEPair } from "@docspace/shared/utils/oauth";
 import { AuthenticationMethod } from "@docspace/shared/enums";
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import OnlyofficeLight from "PUBLIC_DIR/images/onlyoffice.light.react.svg";
 import OnlyofficeDark from "PUBLIC_DIR/images/onlyoffice.dark.react.svg";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
-import {
-  StyledContainer,
-  StyledPreviewContainer,
-  StyledBlocksContainer,
-} from "../OAuth.styled";
+import styles from "../OAuth.styled.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const htmlBlock = `<body>
     <button id="docspace-button" class="docspace-button">
@@ -96,7 +92,7 @@ const styleBlock = `<style>
         cursor: pointer;
         color: ${globalColors.black};
     }
-	
+
 	.docspace-button:active {
 		background-color: ${globalColors.grayLight};
 		color: ${globalColors.black};
@@ -130,14 +126,14 @@ const PreviewDialog = ({
   client,
 }: PreviewDialogProps) => {
   const { t } = useTranslation(["OAuth", "Common", "Webhooks"]);
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const [codeVerifier, setCodeVerifier] = React.useState("");
   const [codeChallenge, setCodeChallenge] = React.useState("");
 
   const onClose = () => setPreviewDialogVisible?.(false);
 
-  const icon = theme.isBase ? OnlyofficeLight : OnlyofficeDark;
+  const icon = isBase ? OnlyofficeLight : OnlyofficeDark;
 
   const scopesString = client?.scopes.join(" ");
 
@@ -195,8 +191,8 @@ const PreviewDialog = ({
     >
       <ModalDialog.Header>{t("OAuth:AuthButton")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledContainer>
-          <StyledPreviewContainer>
+        <div className={styles.styledContainer}>
+          <div className={styles.styledPreviewContainer}>
             <SocialButton
               className="social-button"
               label={
@@ -204,7 +200,7 @@ const PreviewDialog = ({
                   t={t}
                   ns="OAuth"
                   i18nKey="SignIn"
-                  values={{ productName: t("Common:ProductName") }}
+                  values={{ productName: getBrandName("ProductName") }}
                 />
               }
               IconComponent={icon}
@@ -213,8 +209,8 @@ const PreviewDialog = ({
               }}
               dataTestId="social_OAuth_button"
             />
-          </StyledPreviewContainer>
-          <StyledBlocksContainer>
+          </div>
+          <div className={styles.styledBlocksContainer}>
             <div className="block-container">
               <Text fontWeight={600} lineHeight="20px" fontSize="13px">
                 HTML
@@ -278,8 +274,8 @@ const PreviewDialog = ({
                 />
               </div>
             ) : null}
-          </StyledBlocksContainer>
-        </StyledContainer>
+          </div>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -294,18 +290,11 @@ const PreviewDialog = ({
   );
 };
 
-export default inject(
-  ({
-    oauthStore,
-  }: {
-    settingsStore: SettingsStore;
-    oauthStore: OAuthStore;
-  }) => {
-    const { setPreviewDialogVisible, bufferSelection } = oauthStore;
+export default inject(({ oauthStore }: { oauthStore: OAuthStore }) => {
+  const { setPreviewDialogVisible, bufferSelection } = oauthStore;
 
-    return {
-      setPreviewDialogVisible,
-      client: bufferSelection,
-    };
-  },
-)(observer(PreviewDialog));
+  return {
+    setPreviewDialogVisible,
+    client: bufferSelection,
+  };
+})(observer(PreviewDialog));

@@ -45,5 +45,6 @@
   "HotkeysUploadFile": "Télécharger le fichier",
   "HotkeysUploadingObjects": "Chargement d'éléments",
   "HotkeysZoomIn": "Zoom avan",
-  "HotkeysZoomOut": "Zoom arrière"
+  "HotkeysZoomOut": "Zoom arrière",
+  "OpenContextMenu": "Ouvrir le menu contextuel"
 }

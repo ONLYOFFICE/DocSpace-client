@@ -36,13 +36,14 @@ import { isMobile } from "@docspace/ui-kit/utils/device";
 
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import StyledLdapPage from "./styled-components/StyledLdapPage";
+import StyledLdapPage from "./styled-containers/StyledLdapPage";
 
 import ToggleLDAP from "./sub-components/ToggleLDAP";
 import { SyncContainerSection } from "./sub-components/SyncContainer";
 import LdapMobileView from "./sub-components/LdapMobileView";
 import { SettingsContainerSection } from "./sub-components/SettingsContainer";
 import LdapLoader from "./sub-components/LdapLoader";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const LDAP = ({
 	ldapSettingsUrl,
@@ -92,7 +93,7 @@ const LDAP = ({
 					i18nKey="LdapIntegrationDescription"
 					ns="Ldap"
 					values={{
-						productName: t("Common:ProductName"),
+						productName: getBrandName("ProductName"),
 						sectionName: t("Common:Contacts"),
 						link,
 					}}

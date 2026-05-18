@@ -35,7 +35,7 @@ import {
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
 
 import { EncryptionStatus } from "@docspace/shared/enums";
 

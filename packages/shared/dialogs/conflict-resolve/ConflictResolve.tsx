@@ -118,8 +118,8 @@ const ConflictResolve = (props: ConflictResolveProps) => {
       visible={visible}
       isLoading={isLoading}
       displayType={ModalDialogType.modal}
-      data-test-id="conflict-resolve-dialog"
       aria-labelledby="conflict-resolve-header"
+      dataTestId="conflict_resolve_dialog"
     >
       <ModalDialog.Header data-test-id="conflict-resolve-header">
         {headerLabel}

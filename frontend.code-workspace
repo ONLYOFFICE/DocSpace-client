@@ -36,151 +36,54 @@
   "settings": {
     "window.zoomLevel": 0,
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "biomejs.biome",
     "VsCodeTaskButtons.tasks": [
-      {
-        "label": "Server (Aspire)",
-        "tasks": [
-          {
-            "label": "Apire : run CE (Community Edition)",
-            "task": "Backend | run CE (Aspire)",
-            "tooltip": "🛠️ Start the \"backend aspire CE\" task"
-          },
-          {
-            "label": "Apire : run EE (Enterprise Edition)",
-            "task": "Backend | run EE (Aspire)",
-            "tooltip": "🛠️ Start the \"backend aspire EE\" task"
-          },
-          {
-            "label": "Apire : run DE (Developer Edition)",
-            "task": "Backend | run DE (Aspire)",
-            "tooltip": "🛠️ Start the \"backend aspire DE\" task"
-          },
-          {
-            "label": "Apire : run SAAS",
-            "task": "Backend | run SAAS (Aspire)",
-            "tooltip": "🛠️ Start the \"backend aspire SAAS\" task"
-          },
-          {
-            "label": "Apire : clear Docker artifacts",
-            "task": "Backend | clear Aspire (Docker)",
-            "tooltip": "🛠️ Start the \"backend aspire clear Docker\" task"
-          }
-        ],
-        "tooltip": "🛠️ Server tasks (Apire)"
-      },
       {
         "label": "Server",
         "tasks": [
           {
-            "label": "Docker : Build-CE",
-            "task": "Backend | build CE",
-            "tooltip": "🛠️ Start the \"backend docker build CE\" task"
+            "label": "Aspire : run CE (Community Edition) - frontend-dev",
+            "task": "Backend | run CE (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire CE\" task"
           },
           {
-            "label": "Docker : Run-CE (skip build)",
-            "task": "Backend | run CE",
-            "tooltip": "🛠️ Start the \"backend docker run CE\" task"
+            "label": "Aspire : run CE (Community Edition) - development",
+            "task": "Backend | run CE - full (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire CE\" task"
           },
           {
-            "label": "Docker : Build-EE",
-            "task": "Backend | build EE",
-            "tooltip": "🛠️ Start the \"backend docker build EE\" task"
+            "label": "Aspire : run EE (Enterprise Edition) - frontend-dev",
+            "task": "Backend | run EE (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire EE\" task"
           },
           {
-            "label": "Docker : Run-EE (skip build)",
-            "task": "Backend | run EE",
-            "tooltip": "🛠️ Start the \"backend docker run EE\" task"
+            "label": "Aspire : run EE (Enterprise Edition) - development",
+            "task": "Backend | run EE - full (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire EE\" task"
           },
           {
-            "label": "Docker : ReBuild-EE",
-            "task": "Backend | rebuild EE",
-            "tooltip": "🛠️ Start the \"backend docker rebuild EE\" task"
+            "label": "Aspire : run DE (Developer Edition) - frontend-dev",
+            "task": "Backend | run DE (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire DE\" task"
           },
           {
-            "label": "Docker : Build-EE + dnsmasq",
-            "task": "Backend | build EE + dnsmasq",
-            "tooltip": "🛠️ Start the \"backend docker build EE + dnsmasq\" task"
+            "label": "Aspire : run DE (Developer Edition) - development",
+            "task": "Backend | run DE - full (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire DE development profile (SKIP_CLIENT)\" task"
           },
           {
-            "label": "Docker : Build-EE + identity",
-            "task": "Backend | build EE + identity",
-            "tooltip": "🛠️ Start the \"backend docker build EE + identity\" task"
+            "label": "Aspire : run SAAS - frontend-dev",
+            "task": "Backend | run SAAS (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire SAAS\" task"
           },
           {
-            "label": "Docker : Build-EE + dnsmasq + identity",
-            "task": "Backend | build EE + dnsmasq + identity",
-            "tooltip": "🛠️ Start the \"backend docker build EE + dnsmasq + identity\" task"
+            "label": "Aspire : run SAAS - development",
+            "task": "Backend | run SAAS - full (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire SAAS - full\" task"
           },
           {
-            "label": "Docker : Build-DE",
-            "task": "Backend | build DE",
-            "tooltip": "🛠️ Start the \"backend docker build DE\" task"
-          },
-          {
-            "label": "Docker : Run-DE (skip build)",
-            "task": "Backend | run DE",
-            "tooltip": "🛠️ Start the \"backend docker build DE\" task"
-          },
-          {
-            "label": "Docker : ReBuild-DE",
-            "task": "Backend | rebuild DE",
-            "tooltip": "🛠️ Start the \"backend docker rebuild DE\" task"
-          },
-          {
-            "label": "Docker : Build-DE + dnsmasq",
-            "task": "Backend | build DE + dnsmasq",
-            "tooltip": "🛠️ Start the \"backend docker build DE + dnsmasq\" task"
-          },
-          {
-            "label": "Docker : Build-DE + identity",
-            "task": "Backend | build DE + identity",
-            "tooltip": "🛠️ Start the \"backend docker build DE + identity\" task"
-          },
-          {
-            "label": "Docker : Build-DE + dnsmasq + identity",
-            "task": "Backend | build DE + dnsmasq + identity",
-            "tooltip": "🛠️ Start the \"backend docker build DE + dnsmasq + identity\" task"
-          },
-          {
-            "label": "Docker : Build-SAAS + dnsmasq",
-            "task": "Backend | build SAAS + dnsmasq",
-            "tooltip": "🛠️ Start the \"backend docker build SAAS + dnsmasq\" task"
-          },
-          {
-            "label": "Docker : Run-SAAS + dnsmasq (skip build)",
-            "task": "Backend | run SAAS + dnsmasq",
-            "tooltip": "🛠️ Start the \"backend docker build SAAS + dnsmasq\" task"
-          },
-          {
-            "label": "Docker : Build-SAAS + dnsmasq + identity",
-            "task": "Backend | build SAAS + dnsmasq + identity",
-            "tooltip": "🛠️ Start the \"backend docker build SAAS + dnsmasq + identity\" task"
-          },
-          {
-            "label": "Docker : ReBuild-SAAS + dnsmasq",
-            "task": "Backend | rebuild SAAS + dnsmasq",
-            "tooltip": "🛠️ Start the \"backend docker rebuild SAAS + dnsmasq\" task"
-          },
-          {
-            "label": "Docker : Clear",
-            "task": "Backend | clear",
-            "tooltip": "🛠️ Start the \"backend docker clear\" task"
-          },
-          {
-            "label": "Docker : Stop",
-            "task": "Backend | stop",
-            "tooltip": "🛠️ Start the \"backend docker stop\" task"
-          },
-          {
-            "label": "Docker : Start",
-            "task": "Backend | start",
-            "tooltip": "🛠️ Start the \"backend docker start\" task"
-          },
-          {
-            "label": "Docker : Restart",
-            "task": "Backend | restart",
-            "tooltip": "🛠️ Start the \"backend docker restart\" task"
+            "label": "Aspire : clear Docker artifacts",
+            "task": "Backend | clear Aspire (Docker)",
+            "tooltip": "🛠️ Start the \"backend aspire clear Docker\" task"
           }
         ],
         "tooltip": "🛠️ Server tasks"
@@ -224,6 +127,11 @@
             "tooltip": "🛠️ Start the \"frontend start\" task"
           },
           {
+            "label": "Start:sdk",
+            "task": "Frontend | start:sdk",
+            "tooltip": "🛠️ Start the \"frontend sdk start\" task"
+          },
+          {
             "label": "Start prod",
             "task": "Frontend | start-prod",
             "tooltip": "🛠️ Start the \"frontend start production\" task"
@@ -234,6 +142,11 @@
             "tooltip": "🛠️ Start the \"frontend start production\" task"
           },
           {
+            "label": "Start prod:sdk",
+            "task": "Frontend | start-prod:sdk",
+            "tooltip": "🛠️ Start the \"frontend sdk start production\" task"
+          },
+          {
             "label": "Deploy",
             "task": "Frontend | deploy",
             "tooltip": "🛠️ Start the \"frontend deploy\" task"
@@ -242,6 +155,11 @@
             "label": "Start storybook",
             "task": "Frontend | storybook",
             "tooltip": "🛠️ Start the \"frontend start storybook\" task"
+          },
+          {
+            "label": "Start storybook (ui-kit)",
+            "task": "Frontend | storybook (ui-kit)",
+            "tooltip": "🛠️ Start the \"ui-kit storybook\" task"
           },
           {
             "label": "Start storybook prod",
@@ -290,6 +208,11 @@
             "tooltip": "🛠️ Start the \"Test | Jest:translations\" task"
           },
           {
+            "label": "Test translations: clear wrong values",
+            "task": "Test | Jest:translations:clear-wrong",
+            "tooltip": "🛠️ Run translation tests with CLEAR_WRONG_VALUES=true — clears bad variables, tags and forbidden values"
+          },
+          {
             "label": "Test images (common)",
             "task": "Test | Jest:images",
             "tooltip": "🛠️ Start the \"Test | Jest:images\" task"
@@ -318,6 +241,11 @@
             "label": "Test unit",
             "task": "Test | Jest:unit",
             "tooltip": "🛠️ Start the \"Test | Jest:unit\" task"
+          },
+          {
+            "label": "Test unit:ui-kit",
+            "task": "Test | Jest:unit:ui-kit",
+            "tooltip": "🛠️ Start the \"Test | Jest:unit:ui-kit\" task"
           }
         ],
         "tooltip": "🛠️ Client tests tasks"
@@ -344,6 +272,16 @@
             "label": "Client E2E update screenshots",
             "task": "Test | Test e2e docker update-screenshots (client)",
             "tooltip": "🛠️ Start the \"update e2e screenshots (client)\" task"
+          },
+          {
+            "label": "Client E2E dev docker",
+            "task": "Test | Test e2e docker dev (client)",
+            "tooltip": "🛠️ Start the \"dev e2e tests in docker (rebuild from sources)\" task"
+          },
+          {
+            "label": "Client E2E dev update screenshots",
+            "task": "Test | Test e2e docker dev update-screenshots (client)",
+            "tooltip": "🛠️ Start the \"dev update e2e screenshots (client)\" task"
           },
           {
             "label": "Client E2E clear docker",
@@ -376,6 +314,16 @@
             "tooltip": "🛠️ Start the \"update e2e screenshots (login)\" task"
           },
           {
+            "label": "Login E2E dev docker",
+            "task": "Test | Test e2e docker dev (login)",
+            "tooltip": "🛠️ Start the \"dev e2e tests in docker (rebuild from sources)\" task"
+          },
+          {
+            "label": "Login E2E dev update screenshots",
+            "task": "Test | Test e2e docker dev update-screenshots (login)",
+            "tooltip": "🛠️ Start the \"dev update e2e screenshots (login)\" task"
+          },
+          {
             "label": "Login E2E clear docker",
             "task": "Test | Test e2e docker clear (login)",
             "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
@@ -404,6 +352,16 @@
             "label": "SDK E2E update screenshots",
             "task": "Test | Test e2e docker update-screenshots (SDK)",
             "tooltip": "🛠️ Start the \"update e2e screenshots (SDK)\" task"
+          },
+          {
+            "label": "SDK E2E dev docker",
+            "task": "Test | Test e2e docker dev (SDK)",
+            "tooltip": "🛠️ Start the \"dev e2e tests in docker (rebuild from sources)\" task"
+          },
+          {
+            "label": "SDK E2E dev update screenshots",
+            "task": "Test | Test e2e docker dev update-screenshots (SDK)",
+            "tooltip": "🛠️ Start the \"dev update e2e screenshots (SDK)\" task"
           },
           {
             "label": "SDK E2E clear docker",
@@ -436,6 +394,16 @@
             "tooltip": "🛠️ Start the \"update e2e screenshots (management)\" task"
           },
           {
+            "label": "Management E2E dev docker",
+            "task": "Test | Test e2e docker dev (management)",
+            "tooltip": "🛠️ Start the \"dev e2e tests in docker (rebuild from sources)\" task"
+          },
+          {
+            "label": "Management E2E dev update screenshots",
+            "task": "Test | Test e2e docker dev update-screenshots (management)",
+            "tooltip": "🛠️ Start the \"dev update e2e screenshots (management)\" task"
+          },
+          {
             "label": "Management E2E clear docker",
             "task": "Test | Test e2e docker clear (management)",
             "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
@@ -464,6 +432,16 @@
             "label": "Editor E2E update screenshots",
             "task": "Test | Test e2e docker update-screenshots (editor)",
             "tooltip": "🛠️ Start the \"update e2e screenshots (editor)\" task"
+          },
+          {
+            "label": "Editor E2E dev docker",
+            "task": "Test | Test e2e docker dev (editor)",
+            "tooltip": "🛠️ Start the \"dev e2e tests in docker (rebuild from sources)\" task"
+          },
+          {
+            "label": "Editor E2E dev update screenshots",
+            "task": "Test | Test e2e docker dev update-screenshots (editor)",
+            "tooltip": "🛠️ Start the \"dev update e2e screenshots (editor)\" task"
           },
           {
             "label": "Editor E2E clear docker",
@@ -516,6 +494,67 @@
             "tooltip": "🛠️ Remove unified E2E Docker image and volumes"
           },
         ]
+      },
+      {
+        "label": "Tools",
+        "tasks": [
+          {
+            "label": "Translation Stats",
+            "task": "Translation App | translation stats",
+            "tooltip": "📊 Show translation statistics (keys, coverage, size per language)"
+          },
+          {
+            "label": "Translation Stats (Markdown)",
+            "task": "Translation App | translation stats (Markdown)",
+            "tooltip": "📄 Generate translation-stats.md report"
+          },
+          {
+            "label": "Translation App : Start (with metadata)",
+            "task": "Translation App | start",
+            "tooltip": "🌐 Start translation app (backend + frontend + generate metadata)"
+          },
+          {
+            "label": "Translation App : Start (skip meta)",
+            "task": "Translation App | start (skip meta)",
+            "tooltip": "⚡ Start translation app quickly — skip metadata generation"
+          },
+          {
+            "label": "Verify Translations (fast, no LLM)",
+            "task": "Translation App | verify translations (no LLM)",
+            "tooltip": "🔍 Run deterministic checks: variables, tags, scripts, brackets — instant"
+          },
+          {
+            "label": "Verify Translations (LLM)",
+            "task": "Translation App | verify translations (LLM)",
+            "tooltip": "🤖 Run full LLM-based spell-check verification (slow)"
+          },
+          {
+            "label": "Verify Translations (LLM + recheck)",
+            "task": "Translation App | verify translations (LLM + recheck)",
+            "tooltip": "🔄 Re-verify only keys with existing issues in .meta (fast, targeted)"
+          },
+          {
+            "label": "Update Metadata",
+            "task": "Translation App | update metadata",
+            "tooltip": "🔄 Regenerate all .meta files (generate-metadata + save-meta-keys-usage + auto-comments)"
+          },
+          {
+            "label": "Clear Meta Issues",
+            "task": "Translation App | clear meta issues",
+            "tooltip": "🗑️ Reset all ai_spell_check_issues in .meta files to empty"
+          },
+          {
+            "label": "──────────────────────",
+            "task": "separator",
+            "tooltip": ""
+          },
+          {
+            "label": "Screenshot Comparison : Start",
+            "task": "Screenshot Comparison | start",
+            "tooltip": "🖼️ Start screenshot comparison tool"
+          }
+        ],
+        "tooltip": "🛠️ Common tools"
       }
     ],
     "licenser.author": "Ascensio System SIA",
@@ -569,13 +608,16 @@
     "javascript.format.enable": true,
     "typescript.format.enable": true,
     "[javascript]": {
-      "editor.defaultFormatter": "biomejs.biome"
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[typescript]": {
-      "editor.defaultFormatter": "biomejs.biome"
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[typescriptreact]": {
-      "editor.defaultFormatter": "biomejs.biome"
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "editor.codeActionsOnSave": {
       "source.organizeImports.biome": "never",

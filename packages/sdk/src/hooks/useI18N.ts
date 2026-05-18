@@ -49,7 +49,11 @@ const useI18N = ({ settings, user, locale }: UseI18NProps) => {
 
   React.useEffect(() => {
     if (!settings?.timezone) return;
+    const prev = window.timezone;
     window.timezone = settings.timezone;
+    return () => {
+      window.timezone = prev;
+    };
   }, [settings?.timezone]);
 
   React.useEffect(() => {

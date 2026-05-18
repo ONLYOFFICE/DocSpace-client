@@ -40,161 +40,163 @@ import { withTranslation } from "react-i18next";
 import styles from "./DeleteLink.module.scss";
 
 const DeleteLinkDialogComponent = (props) => {
-	const {
-		t,
-		link,
-		visible,
-		setIsVisible,
-		tReady,
-		item,
-		deleteExternalLink,
-		isPublicRoomType,
-		isFormRoom,
-		isCustomRoom,
-	} = props;
+  const {
+    t,
+    link,
+    visible,
+    setIsVisible,
+    tReady,
+    item,
+    deleteExternalLink,
+    isPublicRoomType,
+    isFormRoom,
+    isCustomRoom,
+  } = props;
 
-	const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-	const onClose = () => {
-		setIsVisible(false);
-	};
+  const onClose = () => {
+    setIsVisible(false);
+  };
 
-	const onDelete = () => {
-		setIsLoading(true);
+  const onDelete = () => {
+    setIsLoading(true);
 
-		const newLink = JSON.parse(JSON.stringify(link));
-		newLink.access = 0;
+    const newLink = JSON.parse(JSON.stringify(link));
+    newLink.access = 0;
 
-		ShareLinkService.editLink(item, newLink)
-			.then((res) => {
-				deleteExternalLink(res, newLink.sharedTo.id);
+    ShareLinkService.editLink(item, newLink)
+      .then((res) => {
+        deleteExternalLink(res, newLink.sharedTo.id);
 
-				if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {
-					toastr.success(t("Common:GeneralLinkRevokedAndCreatedSuccessfully"));
-				} else toastr.success(t("Files:LinkDeletedSuccessfully"));
-			})
-			.catch((err) => {
-				console.log(err);
-				toastr.error(err.response?.data?.error.message);
-			})
-			.finally(() => {
-				setIsLoading(false);
-				onClose();
-			});
-	};
+        if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {
+          toastr.success(t("Common:GeneralLinkRevokedAndCreatedSuccessfully"));
+        } else toastr.success(t("Files:LinkDeletedSuccessfully"));
+      })
+      .catch((err) => {
+        console.log(err);
+        toastr.error(err.response?.data?.error.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+        onClose();
+      });
+  };
 
-	const onKeyUp = (e) => {
-		if (e.keyCode === 27) onClose();
-		if (e.keyCode === 13 || e.which === 13) onDelete();
-	};
+  const onKeyUp = (e) => {
+    if (e.keyCode === 27) onClose();
+    if (e.keyCode === 13 || e.which === 13) onDelete();
+  };
 
-	useEffect(() => {
-		document.addEventListener("keyup", onKeyUp, false);
+  useEffect(() => {
+    document.addEventListener("keyup", onKeyUp, false);
 
-		return () => {
-			document.removeEventListener("keyup", onKeyUp, false);
-		};
-	}, []);
+    return () => {
+      document.removeEventListener("keyup", onKeyUp, false);
+    };
+  }, []);
 
-	const getDescription = () => {
-		if (link.sharedTo.primary) {
-			if (isCustomRoom) return t("Files:RevokeSharedLinkDescriptionCustomRoom");
+  const getDescription = () => {
+    if (link.sharedTo.primary) {
+      if (isCustomRoom) return t("Files:RevokeSharedLinkDescriptionCustomRoom");
 
-			if (isFormRoom) return t("Files:RevokeSharedLinkDescriptionFormRoom");
+      if (isFormRoom) return t("Files:RevokeSharedLinkDescriptionFormRoom");
 
-			if (isPublicRoomType)
-				return t("Files:RevokeSharedLinkDescriptionPublicRoom");
-		}
+      if (isPublicRoomType)
+        return t("Files:RevokeSharedLinkDescriptionPublicRoom");
+    }
 
-		if (isPublicRoomType || isCustomRoom)
-			return t("Files:DeleteSharedCustomPublic");
+    if (isPublicRoomType || isCustomRoom)
+      return t("Files:DeleteSharedCustomPublic");
 
-		return t("Files:DeleteSharedLink");
-	};
+    return t("Files:DeleteSharedLink");
+  };
 
-	return (
-		<ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
-			<ModalDialog.Header>
-				{link.sharedTo.primary && (isPublicRoomType || isFormRoom)
-					? t("Common:RevokeLink")
-					: t("Files:DeleteLink")}
-			</ModalDialog.Header>
-			<ModalDialog.Body>
-				<div
-					className={classNames(styles.container, "modal-dialog-content-body")}
-				>
-					<Text lineHeight="20px">{getDescription()}</Text>
-					{link.sharedTo.primary ? (
-						<Text lineHeight="20px">{t("Files:ActionCannotUndone")}</Text>
-					) : null}
-				</div>
-			</ModalDialog.Body>
-			<ModalDialog.Footer>
-				<Button
-					id="delete-file-modal_submit"
-					key="OKButton"
-					label={
-						link.sharedTo.primary && (isPublicRoomType || isFormRoom)
-							? t("Common:RevokeLink")
-							: t("Files:DeleteLink")
-					}
-					size="normal"
-					primary
-					scale
-					onClick={onDelete}
-					isLoading={isLoading}
-				/>
-				<Button
-					id="delete-file-modal_cancel"
-					key="CancelButton"
-					label={t("Common:CancelButton")}
-					size="normal"
-					scale
-					onClick={onClose}
-					isDisabled={isLoading}
-				/>
-			</ModalDialog.Footer>
-		</ModalDialog>
-	);
+  return (
+    <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
+      <ModalDialog.Header>
+        {link.sharedTo.primary && (isPublicRoomType || isFormRoom)
+          ? t("Common:RevokeLink")
+          : t("Files:DeleteLink")}
+      </ModalDialog.Header>
+      <ModalDialog.Body>
+        <div
+          className={classNames(styles.container, "modal-dialog-content-body")}
+        >
+          <Text lineHeight="20px">{getDescription()}</Text>
+          {link.sharedTo.primary ? (
+            <Text lineHeight="20px">{t("Files:ActionCannotUndone")}</Text>
+          ) : null}
+        </div>
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          id="delete-file-modal_submit"
+          key="OKButton"
+          label={
+            link.sharedTo.primary && (isPublicRoomType || isFormRoom)
+              ? t("Common:RevokeLink")
+              : t("Files:DeleteLink")
+          }
+          size="normal"
+          primary
+          scale
+          onClick={onDelete}
+          isLoading={isLoading}
+          testId="delete_link_dialog_ok_button"
+        />
+        <Button
+          id="delete-file-modal_cancel"
+          key="CancelButton"
+          label={t("Common:CancelButton")}
+          size="normal"
+          scale
+          onClick={onClose}
+          isDisabled={isLoading}
+          testId="delete_link_dialog_cancel_button"
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
+  );
 };
 
 const DeleteLinkDialog = withTranslation(["Common", "Files"])(
-	DeleteLinkDialogComponent,
+  DeleteLinkDialogComponent,
 );
 
 export default inject(
-	/**
-	 * @param {TStore} param0
-	 * @returns
-	 */
-	({ dialogsStore, publicRoomStore, selectedFolderStore }) => {
-		const {
-			deleteLinkDialogVisible: visible,
-			setDeleteLinkDialogVisible: setIsVisible,
-			linkParams,
-		} = dialogsStore;
-		const { deleteExternalLink, setPublicRoomKey, updateUrlKeyForCustomRoom } =
-			publicRoomStore;
-		const { isRootFolder } = selectedFolderStore;
-		const item = linkParams.item;
+  /**
+   * @param {TStore} param0
+   * @returns
+   */
+  ({ dialogsStore, publicRoomStore, selectedFolderStore }) => {
+    const {
+      deleteLinkDialogVisible: visible,
+      setDeleteLinkDialogVisible: setIsVisible,
+      linkParams,
+    } = dialogsStore;
+    const { deleteExternalLink, setPublicRoomKey, updateUrlKeyForCustomRoom } =
+      publicRoomStore;
+    const { isRootFolder } = selectedFolderStore;
+    const item = linkParams.item;
 
-		const isFormRoom = item.roomType === RoomsType.FormRoom;
-		const isCustomRoom = item.roomType === RoomsType.CustomRoom;
-		const isPublicRoomType = item.roomType === RoomsType.PublicRoom;
+    const isFormRoom = item.roomType === RoomsType.FormRoom;
+    const isCustomRoom = item.roomType === RoomsType.CustomRoom;
+    const isPublicRoomType = item.roomType === RoomsType.PublicRoom;
 
-		return {
-			linkParams,
-			visible,
-			setIsVisible,
-			item,
-			link: linkParams.link,
-			deleteExternalLink,
-			isFormRoom,
-			isCustomRoom,
-			isPublicRoomType,
-			setPublicRoomKey,
-			isRootFolder,
-			updateUrlKeyForCustomRoom,
-		};
-	},
+    return {
+      linkParams,
+      visible,
+      setIsVisible,
+      item,
+      link: linkParams.link,
+      deleteExternalLink,
+      isFormRoom,
+      isCustomRoom,
+      isPublicRoomType,
+      setPublicRoomKey,
+      isRootFolder,
+      updateUrlKeyForCustomRoom,
+    };
+  },
 )(observer(DeleteLinkDialog));

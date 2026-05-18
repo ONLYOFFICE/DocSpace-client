@@ -138,7 +138,7 @@ class TableStore {
 
   lastOpenedRecentColumnIsEnabled = true;
 
-  authorShareWithMeColumnIsEnabled = true;
+  authorShareWithMeColumnIsEnabled = false;
 
   sharedByShareWithMeColumnIsEnabled = true;
 

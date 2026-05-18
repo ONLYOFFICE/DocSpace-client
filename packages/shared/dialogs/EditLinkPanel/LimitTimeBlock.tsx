@@ -33,6 +33,8 @@ import { subtractFromDate, now } from "@docspace/ui-kit/utils/date";
 
 import ToggleBlock from "./ToggleBlock";
 import type { LimitTimeBlockProps } from "./EditLinkPanel.types";
+import styles from "./EditLinkPanel.module.scss";
+import { getConstName } from "@docspace/shared/constants/consts";
 
 const LimitTimeBlock: FC<LimitTimeBlockProps> = (props) => {
   const id = useId();
@@ -82,11 +84,11 @@ const LimitTimeBlock: FC<LimitTimeBlockProps> = (props) => {
         onChange={onChange}
         openDate={new Date()}
         initialDate={expirationDate}
-        className="public-room_date-picker"
+        className={styles.datePicker}
         selectDateText={t("Common:SelectDate")}
         dataTestId="edit_link_panel_date_time_picker"
         useMaxTime
-        translations={{ AM: t("Common:AM"), PM: t("Common:PM") }}
+        translations={{ AM: t("Common:AM"), PM: getConstName("PM") }}
       />
     </ToggleBlock>
   );

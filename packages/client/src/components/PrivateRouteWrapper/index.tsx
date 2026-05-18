@@ -52,6 +52,8 @@ const PrivateRouteWrapper = ({
   displayAbout,
   limitedAccessDevToolsForUsers,
   standalone,
+  requireAIServices,
+  aiServicesEnabled,
 }: Partial<PrivateRouteProps>) => {
   return (
     <PrivateRoute
@@ -76,6 +78,8 @@ const PrivateRouteWrapper = ({
       displayAbout={displayAbout!}
       limitedAccessDevToolsForUsers={limitedAccessDevToolsForUsers!}
       standalone={standalone!}
+      requireAIServices={requireAIServices}
+      aiServicesEnabled={aiServicesEnabled!}
     >
       {children}
     </PrivateRoute>
@@ -104,6 +108,7 @@ export default inject<TStore>(
       displayAbout,
       limitedAccessDevToolsForUsers,
       standalone,
+      aiServicesEnabled,
     } = settingsStore;
 
     return {
@@ -126,6 +131,7 @@ export default inject<TStore>(
 
       limitedAccessDevToolsForUsers,
       standalone,
+      aiServicesEnabled,
     };
   },
 )(observer(PrivateRouteWrapper));

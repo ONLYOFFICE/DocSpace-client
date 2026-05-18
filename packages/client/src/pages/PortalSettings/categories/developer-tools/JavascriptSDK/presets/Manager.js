@@ -24,13 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import { useEventLog } from "../sub-components/useEventLog";
 import { useNavigate } from "react-router";
 
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import SDK from "@onlyoffice/docspace-sdk-js";
+
+import { EventLogBlock } from "../sub-components/EventLogBlock";
 
 import LeftMenuUrl from "PUBLIC_DIR/images/sdk-presets_left-menu.react.svg?url";
 import TitleUrl from "PUBLIC_DIR/images/sdk-presets_title.react.svg?url";
@@ -92,6 +95,21 @@ import {
   SelectedItemsContainer,
   CheckboxGroup,
 } from "./StyledPresets";
+import { getBrandName } from "@docspace/shared/constants/brands";
+
+const MANAGER_EVENT_TYPES = [
+  "onAppReady",
+  "onAppError",
+  "onAuthSuccess",
+  "onSignOut",
+  "onNoAccess",
+  "onNotFound",
+  "onContentReady",
+  "onEditorCloseCallback",
+  "onEditorOpen",
+  "onDownload",
+  "onFileManagerClick",
+];
 
 const Manager = (props) => {
   const { t, fetchExternalLinks, theme, currentColorScheme } = props;
@@ -168,13 +186,31 @@ const Manager = (props) => {
       search: "",
       withSubfolders: false,
     },
+    events: {
+      onAppReady: () => {},
+      onAppError: () => {},
+      onAuthSuccess: () => {},
+      onSignOut: () => {},
+      onNoAccess: () => {},
+      onNotFound: () => {},
+      onContentReady: () => {},
+      onEditorCloseCallback: () => {},
+      onEditorOpen: () => {},
+      onDownload: () => {},
+      onFileManagerClick: () => {},
+    },
   });
+
+  const [eventLog, onClearEventLog] = useEventLog(config.frameId);
 
   const fromPackage = source === sdkSource.Package;
 
   const sdkScriptUrl = getSdkScriptUrl(version);
 
-  const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
+  const sdk = useMemo(
+    () => (fromPackage ? new SDK() : window.DocSpace.SDK),
+    [fromPackage],
+  );
 
   const destroyFrame = () => {
     sdk?.frames[config.frameId]?.destroyFrame();
@@ -208,7 +244,7 @@ const Manager = (props) => {
     return () => {
       destroyFrame();
     };
-  });
+  }, [config]);
 
   useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
@@ -382,21 +418,29 @@ const Manager = (props) => {
   const redirectToSelectedRoom = () => navigateRoom(config.id);
 
   const preview = (
-    <Frame
-      width={config.width.includes("px") ? config.width : undefined}
-      height={config.height.includes("px") ? config.height : undefined}
-      targetId={config.frameId}
-    >
-      <div id={config.frameId} />
-    </Frame>
+    <>
+      <Frame
+        width={config.width.includes("px") ? config.width : undefined}
+        height={config.height.includes("px") ? config.height : undefined}
+        targetId={config.frameId}
+      >
+        <div id={config.frameId} />
+      </Frame>
+      <EventLogBlock
+        t={t}
+        events={eventLog}
+        onClear={onClearEventLog}
+        eventTypes={MANAGER_EVENT_TYPES}
+      />
+    </>
   );
 
   return (
     <PresetWrapper
       description={t("CustomDescription", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       })}
-      header={t("CreateSamplePortal", { productName: t("Common:ProductName") })}
+      header={t("CreateSamplePortal", { productName: getBrandName("ProductName") })}
     >
       <Container>
         <PreviewBlock
@@ -568,7 +612,7 @@ const Manager = (props) => {
                     <TooltipContent
                       title={t("Header")}
                       description={t("HeaderDescription", {
-                        productName: t("Common:ProductName"),
+                        productName: getBrandName("ProductName"),
                       })}
                       img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
                     />

@@ -1,8 +1,8 @@
 {
-    "EditTag": "Edit tag",
-    "ChangesToTag": "Changes to this tag will affect all rooms where it is used.",
-    "DeleteTag": "Delete tag",
-    "DeleteTagConfirmation": "Deleting this tag will remove it from all rooms where it is used.",
-    "DeleteTagCannotBeUndone": "This action cannot be undone.",
-    "RemoveTag": "<1>{{tag}}</1> tag removed."
+  "ChangesToTag": "Changes to this tag will affect all rooms where it is used.",
+  "DeleteTag": "Delete tag",
+  "DeleteTagCannotBeUndone": "This action cannot be undone.",
+  "DeleteTagConfirmation": "Deleting this tag will remove it from all rooms where it is used.",
+  "EditTag": "Edit tag",
+  "RemoveTag": "<1>{{tag}}</1> tag removed."
 }

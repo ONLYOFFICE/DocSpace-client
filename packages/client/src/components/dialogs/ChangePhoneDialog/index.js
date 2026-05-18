@@ -73,6 +73,7 @@ class ChangePhoneDialogComponent extends React.Component {
 						primary
 						onClick={this.onChangePhone}
 						isLoading={isRequestRunning}
+						testId="change_phone_send_button"
 					/>
 				</ModalDialog.Footer>
 			</ModalDialog>

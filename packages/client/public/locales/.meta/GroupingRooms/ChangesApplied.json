@@ -3,22 +3,23 @@
   "content": "Changes have been applied",
   "content_en_sha1_hash": "f4112032e9cf9ff29acbe1d84af4f5855b2a8d4a",
   "created_at": "2026-02-19T13:36:24.871Z",
-  "updated_at": "2026-02-19T13:36:32.421Z",
+  "updated_at": "2026-04-11T21:11:41.321Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a toast message confirming that changes made to room groups or their icons have been successfully saved.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:11:41.321Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/index.tsx",
-      "line_number": 249,
+      "line_number": 244,
       "context": "if (isViewingThisGroup && fetchRooms) {\n await fetchRooms(null, roomsFilter, false, false, false);\n }\n \n toastr.success(t(\"GroupingRooms:ChangesApplied\"));\n }\n } catch (error) {\n toastr.error(error as Error);\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/sub-components/GroupIconDialog.tsx",
-      "line_number": 146,
+      "line_number": 151,
       "context": "await updateGroupIcon(editingGroupId, iconId);\n }\n \n await getAllRoomGroups();\n \n toastr.success(t(\"GroupingRooms:ChangesApplied\"));\n onClose();\n } catch (error: unknown) {\n let message = \"\";\n \n if (axios.isAxiosError(error)) {",
       "module": "/packages/client"
     }

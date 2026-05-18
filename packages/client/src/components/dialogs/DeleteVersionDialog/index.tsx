@@ -101,6 +101,7 @@ const DeleteVersionDialogComponent: React.FC<DeleteVersionDialogProps> = (
           primary
           scale
           onClick={onDelete}
+          testId="delete_version_dialog_submit"
         />
         <Button
           id="delete-version-modal_cancel"
@@ -109,6 +110,7 @@ const DeleteVersionDialogComponent: React.FC<DeleteVersionDialogProps> = (
           size={ButtonSize.normal}
           scale
           onClick={onClose}
+          testId="delete_version_dialog_cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>

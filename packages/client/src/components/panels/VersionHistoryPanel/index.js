@@ -62,11 +62,12 @@ class PureVersionHistoryPanel extends React.Component {
         visible={visible}
         onClose={this.onClose}
         displayType={ModalDialogType.aside}
+        dataTestId="version_history_panel"
       >
         <ModalDialog.Header>
           {versions ? versions[0].title : ""}
         </ModalDialog.Header>
-        <ModalDialog.Body>
+        <ModalDialog.Body data-testid="version_history_panel_body">
           <SectionBodyContent onClose={this.onClose} />
 
           {showProgressBar ? (

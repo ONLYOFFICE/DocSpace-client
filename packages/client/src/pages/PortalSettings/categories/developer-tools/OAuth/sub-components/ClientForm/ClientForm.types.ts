@@ -66,6 +66,7 @@ export interface ClientFormProps {
   scopeList?: TScope[];
 
   fetchScopes?: () => Promise<void>;
+  fetchClients?: OAuthStore["fetchClients"];
 
   resetDialogVisible?: boolean;
   setResetDialogVisible?: (value: boolean) => void;

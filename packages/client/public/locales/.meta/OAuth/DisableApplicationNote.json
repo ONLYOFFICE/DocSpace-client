@@ -3,11 +3,12 @@
   "content": "<strong>Note:</strong> All users will be required to complete the consent screen again",
   "content_en_sha1_hash": "79de04dd4df6dd917e94f59629ef71056115210d",
   "created_at": "2025-10-27T16:14:28.569Z",
-  "updated_at": "2026-02-19T13:36:32.792Z",
+  "updated_at": "2026-04-11T21:19:00.566Z",
   "comment": {
-    "text": "This key displays a note within a dialog informing users that they will need to re-consent after disabling an application. It appears as a helpful reminder to users during the application disabling process. The text clarifies the impact of disabling an OAuth application.",
+    "text": "This is a note displayed in a confirmation dialog when disabling an OAuth application. It informs the user that all users will need to re-consent after the application is disabled.",
     "is_auto": true,
-    "updated_at": "2025-10-27T18:00:09.699Z"
+    "updated_at": "2026-04-11T21:19:00.566Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

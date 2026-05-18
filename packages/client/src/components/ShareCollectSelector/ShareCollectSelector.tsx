@@ -26,7 +26,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import isUndefined from "lodash/isUndefined";
+import isNil from "lodash/isNil";
 
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
@@ -65,6 +65,7 @@ const ShareCollectSelector = inject<TStore>(
     uploadDataStore,
     infoPanelStore,
     filesStore,
+    contextOptionsStore,
   }) => {
     const { currentDeviceType } = settingsStore;
     const { conflictResolveDialogVisible, setAssignRolesDialogData } =
@@ -77,6 +78,9 @@ const ShareCollectSelector = inject<TStore>(
     const { setSelected } = filesStore;
 
     const { getIcon } = filesSettingsStore;
+
+    const { startFillingInFormRoom } = contextOptionsStore;
+
     return {
       currentDeviceType,
       conflictResolveDialogVisible,
@@ -89,6 +93,7 @@ const ShareCollectSelector = inject<TStore>(
       setSelected,
       openFileAction,
       setAssignRolesDialogData,
+      startFillingInFormRoom,
     };
   },
 )(
@@ -111,6 +116,7 @@ const ShareCollectSelector = inject<TStore>(
       onCloseActionProp,
       onCancel,
       setAssignRolesDialogData,
+      startFillingInFormRoom,
     }: ShareCollectSelectorProps & InjectShareCollectSelectorProps) => {
       const { t } = useTranslation(["Common"]);
       const [withInfoBar, onCloseInfoBar] = useSelectorInfoBar();
@@ -182,31 +188,40 @@ const ShareCollectSelector = inject<TStore>(
           if (conflicts.length) {
             setConflictDialogData(conflicts, operationData);
             setIsRequestRunning(false);
-          } else {
-            setIsRequestRunning(false);
-            onCloseAndDeselectAction();
+            return;
+          }
 
-            openFileAction(selectedFolder, t);
+          setIsRequestRunning(false);
+          onCloseAndDeselectAction();
 
-            const result = await itemOperationToFolder(operationData).catch(
-              (error) => {
-                console.error(error);
-              },
-            );
+          openFileAction(selectedFolder, t);
 
-            if (
-              result &&
-              !isUndefined(result.files) &&
-              result.files.length === 1 &&
-              createDefineRoomType === RoomsType.VirtualDataRoom
-            ) {
-              const [resultFile] = result.files;
+          const result = await itemOperationToFolder(operationData).catch(
+            (error) => {
+              console.error(error);
+            },
+          );
+
+          const hasFile =
+            result && !isNil(result.files) && result.files.length === 1;
+
+          if (!hasFile) return;
+
+          const [resultFile] = result.files ?? [];
+
+          switch (createDefineRoomType) {
+            case RoomsType.FormRoom:
+              await startFillingInFormRoom(resultFile);
+              break;
+            case RoomsType.VirtualDataRoom:
               setAssignRolesDialogData(
                 true,
                 selectedTreeNode.title,
                 resultFile,
               );
-            }
+              break;
+            default:
+              console.error("Unhandled room type");
           }
         } catch (e: unknown) {
           toastr.error(e as TData);

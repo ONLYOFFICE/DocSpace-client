@@ -47,7 +47,7 @@ import ShareDialogHeader from "./ShareDialog.header";
 import type { SharingDialogProps } from "./ShareDialog.types";
 
 import styles from "./ShareDialog.module.scss";
-import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
 
 const SharingDialog = ({
   fileInfo,

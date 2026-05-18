@@ -1,15 +1,14 @@
 {
   "AuthViaNTLM": "ກວດສອບ ຜ່ານ NTLM",
-  "EnableSSL": "ເປີດໃຊ້ SSL",
+  "EnableSMTPSSL": "ເປີດໃຊ້ SSL",
   "EnterDomain": "ໃສ່ໂດເມນ",
-  "EnterEmail": "ໃສ່ອີເມວ",
-  "EnterLogin": "ເຂົ້າ​ສູ່​ລະ​ບົບ",
-  "EnterPort": "ເຂົ້າຜອດ",
-  "Host": "ເຈົ້າພາບ",
-  "HostLogin": "ເຂົ້າສູ່ລະບົບແບບເຈົ້າພາບ",
+  "EnterLogin": "ປ້ອນຊື່ເຂົ້າໃຊ້",
+  "EnterPort": "ປ້ອນພອດ",
+  "Host": "ໂຮສ",
+  "HostLogin": "ເຂົ້າສູ່ລະບົບຂອງໂຮສ",
   "HostPassword": "ລະຫັດເຈົ້າພາບ",
-  "Port": "ຜອດຶ",
-  "SenderDisplayName": "ຊື່ຜູ້ສົ່ງ",
+  "Port": "ພອດ",
+  "SenderDisplayName": "ຊື່ສະແດງຂອງຜູ້ສົ່ງ",
   "SenderEmailAddress": "ທີ່ຢູ່ອີເມວຂອງຜູ້ສົ່ງ",
   "SendTestMail": "ສົ່ງອີເມວທົດສອບ"
 }

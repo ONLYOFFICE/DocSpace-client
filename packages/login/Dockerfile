@@ -9,7 +9,7 @@ RUN apt-get -y update && \
     apt-get install -yq
     
 # Install PNPM
-RUN npm install -g pnpm@10.28.2
+RUN npm install -g pnpm@10.33.0
 
 WORKDIR /app
 
@@ -47,9 +47,6 @@ COPY packages/login/ ./packages/login/
 COPY packages/shared/ ./packages/shared/
 COPY public/ ./public/
 COPY libs/ui-kit/ ./libs/ui-kit/
-
-# Run before-build script (packages/runtime.json)
-RUN pnpm run before-build
 
 # Run build:translations
 RUN pnpm --filter @docspace/login run build:translations

@@ -27,7 +27,7 @@
 import { makeAutoObservable } from "mobx";
 
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
 import {
   FolderType,
   RoomsType,
@@ -143,11 +143,9 @@ class SelectedFolderStore {
 
   rootFolderId: number = 0;
 
-  private settingsStore: SettingsStore = {} as SettingsStore;
-
   security: TFolderSecurity | TRoomSecurity | null = null;
 
-  type = null;
+  type: Nullable<FolderType> = null;
 
   inRoom = false;
 
@@ -195,9 +193,14 @@ class SelectedFolderStore {
 
   parentShared: boolean = false;
 
-  constructor(settingsStore: SettingsStore) {
+  sendFormToExternalDB: boolean = false;
+
+  saveFormAsXLSX: boolean = false;
+
+  originalFormId: Nullable<number> = null;
+
+  constructor(protected settingsStore: SettingsStore) {
     makeAutoObservable(this);
-    this.settingsStore = settingsStore;
   }
 
   getSelectedFolder: () => TSelectedFolder = () => {
@@ -266,6 +269,9 @@ class SelectedFolderStore {
       isRoomStorageQuotaExceeded: this.isRoomStorageQuotaExceeded,
       roomUsedSpace: this.roomUsedSpace,
       roomQuotaLimit: this.roomQuotaLimit,
+      sendFormToExternalDB: this.sendFormToExternalDB,
+      saveFormAsXLSX: this.saveFormAsXLSX,
+      originalFormId: this.originalFormId,
     };
   };
 
@@ -327,6 +333,9 @@ class SelectedFolderStore {
     this.parentShared = false;
     this.ownedBy = null;
     this.sharedBy = null;
+    this.sendFormToExternalDB = false;
+    this.saveFormAsXLSX = false;
+    this.originalFormId = null;
   };
 
   setFilesCount = (filesCount: number) => {

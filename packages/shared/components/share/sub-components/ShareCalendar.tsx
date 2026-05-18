@@ -26,7 +26,7 @@
 
 import { now, addToDate } from "@docspace/ui-kit/utils/date";
 
-import { useIsMobile } from "../../../hooks/useIsMobile";
+import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
 
 import { Calendar } from "@docspace/ui-kit/components/calendar";
 import { DropDown } from "@docspace/ui-kit/components/drop-down";

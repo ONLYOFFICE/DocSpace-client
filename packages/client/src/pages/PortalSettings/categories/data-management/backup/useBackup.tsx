@@ -57,7 +57,7 @@ export type UseBackupProps = {
 
   isBackupPaid?: CurrentQuotasStore["isBackupPaid"];
   maxFreeBackups?: CurrentQuotasStore["maxFreeBackups"];
-  setServiceQuota?: PaymentStore["setServiceQuota"];
+  handleServiceQuota?: PaymentStore["handleServiceQuota"];
   fetchPayerInfo?: CurrentTariffStatusStore["fetchPayerInfo"];
   setBackupsCount?: BackupStore["setBackupsCount"];
   setIsInited?: BackupStore["setIsInited"];
@@ -83,7 +83,7 @@ const useBackup = ({
 
   isBackupPaid,
   maxFreeBackups,
-  setServiceQuota,
+  handleServiceQuota,
   fetchPayerInfo,
   setBackupsCount,
   setIsInited,
@@ -142,7 +142,7 @@ const useBackup = ({
           );
         }
 
-        optionalRequests.push(setServiceQuota?.());
+        optionalRequests.push(handleServiceQuota?.());
         optionalRequests.push(fetchPayerInfo?.());
       }
 
@@ -175,7 +175,7 @@ const useBackup = ({
     setStorageRegions,
     setBackupsCount,
     setIsInited,
-    setServiceQuota,
+    handleServiceQuota,
     fetchPayerInfo,
     setIsEmptyContentBeforeLoader,
   ]);
@@ -217,7 +217,7 @@ const useBackup = ({
             ),
           );
         }
-        optionalRequests.push(setServiceQuota?.());
+        optionalRequests.push(handleServiceQuota?.());
         optionalRequests.push(fetchPayerInfo?.());
       }
 
@@ -265,7 +265,7 @@ const useBackup = ({
     setDefaultOptions,
     setBackupsCount,
     setIsInited,
-    setServiceQuota,
+    handleServiceQuota,
     fetchPayerInfo,
     setErrorInformation,
   ]);
@@ -335,3 +335,4 @@ const useBackup = ({
 };
 
 export default useBackup;
+

@@ -26,42 +26,20 @@
 
 "use client";
 
-import { useCallback, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useCallback, useEffect } from "react";
 
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
-import { Dropzone as DropzoneComponent } from "@docspace/ui-kit/components/dropzone";
-import UploadSvgUrl from "PUBLIC_DIR/images/upload.svg?url";
-import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { frameCallEvent } from "@docspace/shared/utils/common";
-import {
-  finalizeUploadSession,
-  startUploadSession,
-  uploadChunkParallel,
-} from "@docspace/shared/api/files";
-import { TFilesSettings } from "@docspace/shared/api/files/types";
+import { Uploader } from "@docspace/ui-kit/uploader";
+import type {
+  UploadProgressData,
+  UploaderFilesSettings,
+} from "@docspace/ui-kit/uploader/Uploader.types";
+import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
-import type { TFileWithOptionalLastModifiedDate } from "./_types";
-import {
-  isEmptyDirectoryFile,
-  attachParentFolderId,
-  runWithConcurrency,
-  createChunks,
-  parseSizeLimit,
-} from "./_utils";
-import styles from "./Uploader.module.scss";
-import { getErrorMessage } from "@/utils";
-import {
-  DEFAULT_CHUNK_UPLOAD_SIZE,
-  DEFAULT_MAX_UPLOAD_FILES_COUNT,
-  DEFAULT_MAX_UPLOAD_THREAD_COUNT,
-} from "@/utils/constants";
-
 export type UploaderClientProps = {
-  filesSettings?: TFilesSettings;
+  filesSettings?: UploaderFilesSettings;
   accept: string;
   shortText: string;
   fullText?: string;
@@ -90,243 +68,57 @@ export default function UploaderClient({
   useSDKConfig();
   useDocumentTitle("Uploader");
 
-  const { t } = useTranslation(["Common"]);
-
-  const folderTargetId = +(baseConfig?.targetId ?? 0);
-
-  const chunkUploadSize =
-    filesSettings?.chunkUploadSize || DEFAULT_CHUNK_UPLOAD_SIZE;
-  const maxUploadThreadCount =
-    filesSettings?.maxUploadThreadCount || DEFAULT_MAX_UPLOAD_THREAD_COUNT;
-  const maxUploadFilesCount =
-    filesSettings?.maxUploadFilesCount || DEFAULT_MAX_UPLOAD_FILES_COUNT;
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [uploadPercent, setUploadPercent] = useState(0);
-
-  const uploadFiles = useCallback(async (rawFiles: File[]) => {
-    const prepared = await attachParentFolderId(rawFiles, folderTargetId);
-
-    const onlyFiles = prepared.filter((f) => !isEmptyDirectoryFile(f));
-
-    const uploadedFiles: unknown[] = [];
-
-    const totalBytes = onlyFiles.reduce((sum, f) => sum + f.size, 0);
-    let uploadedBytes = 0;
-
-    setUploadPercent(0);
-
-    await runWithConcurrency(onlyFiles, maxUploadFilesCount, async (file) => {
-      const targetFolderId = file.parentFolderId ?? folderTargetId;
-
-      const session = await startUploadSession(
-        targetFolderId,
-        file.name,
-        file.size,
-        "",
-        false,
-        (file as TFileWithOptionalLastModifiedDate).lastModifiedDate ??
-          file.lastModified,
-        true,
-      );
-
-      const chunks = createChunks(file, chunkUploadSize);
-      let uploadedChunks = 0;
-
-      frameCallEvent({
-        event: "onUploadProgress",
-        data: {
-          sessionId: session.id,
-          fileName: file.name,
-          uploadedChunks: 0,
-          totalChunks: chunks.length,
-          percent: 0,
-        },
-      });
-
-      await runWithConcurrency(chunks, maxUploadThreadCount, async (chunk) => {
-        await uploadChunkParallel(
-          targetFolderId,
-          session.id,
-          chunk.index,
-          chunk.data,
-        );
-
-        uploadedChunks += 1;
-        uploadedBytes += chunk.size;
-        const filePercent = Math.round((uploadedChunks / chunks.length) * 100);
-        const overallPercent = Math.round((uploadedBytes / totalBytes) * 100);
-
-        setUploadPercent(overallPercent);
-
-        frameCallEvent({
-          event: "onUploadProgress",
-          data: {
-            sessionId: session.id,
-            fileName: file.name,
-            uploadedChunks,
-            totalChunks: chunks.length,
-            percent: filePercent,
-          },
-        });
-      });
-
-      const result = await finalizeUploadSession(targetFolderId, session.id);
-      uploadedFiles.push(result);
-    });
-
-    return uploadedFiles;
+  useEffect(() => {
+    frameCallEvent({ event: "onAppReady", data: { frameId: getFrameId() } });
   }, []);
 
-  const onDrop = useCallback(
-    async (acceptedFiles: File[]) => {
-      if (!acceptedFiles.length) return;
+  const handleUploadProgress = useCallback((data: UploadProgressData) => {
+    frameCallEvent({
+      event: "onUploadProgress",
+      data,
+    });
+  }, []);
 
-      const maxPerUploadBytes = parseSizeLimit(baseConfig?.maxPerUploadSize);
+  const handleUploadSuccess = useCallback((data: unknown[]) => {
+    frameCallEvent({
+      event: "onUploadSuccess",
+      data,
+    });
+  }, []);
 
-      if (maxPerUploadBytes) {
-        const oversizedFiles = acceptedFiles.filter(
-          (file) => file.size > maxPerUploadBytes,
-        );
-
-        if (oversizedFiles.length > 0) {
-          const maxSizeFormatted = baseConfig?.maxPerUploadSize?.toUpperCase();
-          const isFolderUpload = baseConfig?.isFolderUpload ?? false;
-
-          if (isFolderUpload) {
-            toastr.error(
-              t("Common:FolderSizeExceedsLimit", { maxSize: maxSizeFormatted }),
-            );
-          } else {
-            toastr.error(
-              t("Common:FileSizeExceedsLimit", { maxSize: maxSizeFormatted }),
-            );
-          }
-          return;
-        }
-      }
-
-      if (baseConfig?.isMultipleUpload && baseConfig?.maxTotalUploadSize) {
-        const maxTotalBytes = parseSizeLimit(baseConfig.maxTotalUploadSize);
-
-        if (maxTotalBytes) {
-          const totalSize = acceptedFiles.reduce(
-            (sum, file) => sum + file.size,
-            0,
-          );
-
-          if (totalSize > maxTotalBytes) {
-            const maxTotalFormatted =
-              baseConfig.maxTotalUploadSize.toUpperCase();
-            const isFolderUpload = baseConfig?.isFolderUpload ?? false;
-
-            if (isFolderUpload) {
-              toastr.error(
-                t("Common:FoldersSizeExceedsLimit", {
-                  maxSize: maxTotalFormatted,
-                }),
-              );
-            } else {
-              toastr.error(
-                t("Common:FilesSizeExceedsLimit", {
-                  maxSize: maxTotalFormatted,
-                }),
-              );
-            }
-            return;
-          }
-        }
-      }
-
-      setIsLoading(true);
-
-      try {
-        const uploadedFiles = await uploadFiles(acceptedFiles);
-        const folderUrl = `${window.location.origin}/rooms/personal/filter?folder=${folderTargetId}`;
-
-        toastr.success(
-          <>
-            {t("Common:ItemsSuccessfullyUploaded", {
-              count: acceptedFiles.length,
-            })}
-            <br />
-            <a
-              href={folderUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "inherit", textDecoration: "underline" }}
-            >
-              {t("Common:Open")}
-            </a>
-          </>,
-          t("Common:Done"),
-        );
-
-        frameCallEvent({
-          event: "onUploadSuccess",
-          data: uploadedFiles,
-        });
-      } catch (err) {
-        const message = getErrorMessage(err) || t("Common:UnexpectedError");
-        toastr.error(message);
-
-        frameCallEvent({
-          event: "onUploadError",
-          data: { error: message },
-        });
-      } finally {
-        setIsLoading(false);
-      }
+  const handleUploadError = useCallback(
+    (data: { error: string; rejectedFiles?: unknown[] }) => {
+      frameCallEvent({
+        event: "onUploadError",
+        data,
+      });
     },
-    [t, uploadFiles],
+    [],
   );
 
-  const getSecondaryText = () => {
-    if (baseConfig?.secondaryText) {
-      return baseConfig.secondaryText;
-    }
-
-    const isFolderUpload = baseConfig?.isFolderUpload ?? false;
-    const isMultipleUpload = baseConfig?.isMultipleUpload ?? true;
-
-    if (isFolderUpload && isMultipleUpload) {
-      return t("Common:DropzoneFoldersSecondary");
-    }
-    if (isFolderUpload && !isMultipleUpload) {
-      return t("Common:DropzoneFolderSecondary");
-    }
-    if (!isFolderUpload && isMultipleUpload) {
-      return t("Common:DropzoneFilesSecondary");
-    }
-    return t("Common:DropzoneTitleSecondary");
+  const getFolderUrl = (folderId: string | number) => {
+    return `${window.location.origin}/rooms/personal/filter?folder=${folderId}`;
   };
 
   return (
-    <DropzoneComponent
-      isDisabled={isLoading}
-      isLoading={isLoading}
-      uploadPercent={uploadPercent}
+    <Uploader
+      accept={accept}
+      shortText={shortText}
+      fullText={fullText}
+      badgeValue={badgeValue}
+      filesSettings={filesSettings}
+      targetId={baseConfig?.targetId}
+      linkMainText={baseConfig?.linkMainText}
+      secondaryText={baseConfig?.secondaryText}
+      extensionsText={baseConfig?.extensionsText}
       isFolderUpload={baseConfig?.isFolderUpload}
       isMultipleUpload={baseConfig?.isMultipleUpload}
-      onSingleUploadError={() => {
-        toastr.warning(t("Common:SingleUploadWarning"));
-      }}
-      onDrop={onDrop}
-      accept={accept}
-      getFilesFromEvent={getFilesFromEvent}
-      linkMainText={baseConfig?.linkMainText ?? t("Common:Upload")}
-      linkSecondaryText={getSecondaryText()}
-      exstsText={
-        (baseConfig?.extensionsText ?? shortText)
-          ? shortText
-          : t("Common:AnyFiles")
-      }
-      fullExstsText={fullText}
-      formatsPlusBadgeValue={badgeValue}
-      dataTestId="sdk-uploader"
-      icon={UploadSvgUrl}
-      className={`${styles.dropzoneWrapper} ${styles.dropzoneCentered}`}
-      loaderClassName={styles.dropzoneLoader}
+      maxPerUploadSize={baseConfig?.maxPerUploadSize}
+      maxTotalUploadSize={baseConfig?.maxTotalUploadSize}
+      getFolderUrl={getFolderUrl}
+      onUploadProgress={handleUploadProgress}
+      onUploadSuccess={handleUploadSuccess}
+      onUploadError={handleUploadError}
     />
   );
 }

@@ -43,13 +43,19 @@ export const IconDisplay: FC<IconDisplayProps> = ({ option }) => {
     <TooltipContainer
       as="div"
       className={styles.iconContainer}
-      title={option.title || option.label}
+      title={
+        option.title ||
+        (typeof option.label === "string" ? option.label : undefined)
+      }
     >
       <div className={styles.wrapper}>
         <img
           src={EmptyIcon}
           className={styles.iconImg}
-          alt={option.title || option.label}
+          alt={
+            option.title ||
+            (typeof option.label === "string" ? option.label : undefined)
+          }
         />
         <ReactSVG className={styles.icon} src={option.icon as string} />
       </div>

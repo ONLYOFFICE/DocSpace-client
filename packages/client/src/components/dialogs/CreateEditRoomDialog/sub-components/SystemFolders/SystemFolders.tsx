@@ -26,27 +26,30 @@
 
 import React from "react";
 
-import {
-  SystemFoldersTitle,
-  SystemFoldersHeader,
-  SystemFoldersDescription,
-  SystemFoldersToggleButton,
-} from "./SystemFolders.styled";
+import { Text } from "@docspace/ui-kit/components/text";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+
+import styles from "../../CreateEditRoomDialog.module.scss";
 
 import type SystemFoldersProps from "./SystemFolders.props";
 
 const SystemFolders = ({ t }: SystemFoldersProps) => {
   return (
     <section>
-      <SystemFoldersHeader>
-        <SystemFoldersTitle>
+      <div className={styles.systemFoldersHeader}>
+        <Text className={styles.systemFoldersTitle}>
           {t("CreateEditRoomDialog:PublicRoomSystemFoldersTitle")}
-        </SystemFoldersTitle>
-        <SystemFoldersToggleButton isChecked isDisabled onChange={() => {}} />
-      </SystemFoldersHeader>
-      <SystemFoldersDescription>
+        </Text>
+        <ToggleButton
+          className={styles.systemFoldersToggleButton}
+          isChecked
+          isDisabled
+          onChange={() => {}}
+        />
+      </div>
+      <Text className={styles.systemFoldersDescription}>
         {t("CreateEditRoomDialog:PublicRoomSystemFoldersDescription")}
-      </SystemFoldersDescription>
+      </Text>
     </section>
   );
 };

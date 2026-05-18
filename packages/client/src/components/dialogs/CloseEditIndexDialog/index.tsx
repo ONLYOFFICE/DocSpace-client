@@ -85,12 +85,14 @@ const CloseEditIndexDialog = ({
           scale
           primary
           onClick={onClickContinue}
+          testId="close_edit_index_dialog_continue"
         />
         <Button
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}
           scale
           onClick={onClose}
+          testId="close_edit_index_dialog_cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>

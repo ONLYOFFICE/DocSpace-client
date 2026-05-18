@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndone": "Os usuários desabilitados selecionados serão removidos do {{productName}}. Essa ação não pode ser desfeita.",
   "ActionCannotBeUndoneGuests": "Os hóspedes com deficiência selecionados serão removidos de {{productName}}. Esta ação não pode ser desfeita.",
+  "ActionCannotBeUndoneUsers": "Os usuários desabilitados selecionados serão removidos do {{productName}}. Essa ação não pode ser desfeita.",
   "CannotReassignFiles": "Se você excluir vários usuários de uma vez, não poderá reatribuir seus arquivos a outros usuários.",
   "DeleteGroupGuestsSuccessMessage": "Os convidados foram excluídos com sucesso.",
   "DeleteGroupUsersSuccessMessage": "Os utilizadores foram eliminados com êxito.",

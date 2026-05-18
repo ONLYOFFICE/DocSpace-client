@@ -52,9 +52,11 @@ import { useShareFormDialog } from "@/hooks/useShareFormDialog";
 import useAssignRolesDialog from "@/hooks/useAssignRolesDialog";
 import useChangeLinkTypeDialog from "@/hooks/useChangeLinkTypeDialog";
 import { FolderType } from "@docspace/shared/enums";
+import { useDisconnectUsers } from "@/hooks/useDisconnectUsers";
 import { getPersonalFolderTree } from "@docspace/shared/api/files";
 import FillingStatusDialog from "./filling-status-dialog";
 import Editor from "./Editor";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ErrorContainer = dynamic(
   () => import("@docspace/ui-kit/components/error-container").then(m => ({ default: m.ErrorContainer })),
@@ -229,15 +231,16 @@ const Root = ({
     onSDKRequestSharingSettings,
   } = useShareDialog(config, openShareFormDialog, fileInfo?.rootFolderType);
 
+  const { disconnectUsers, onStartFilling } = useDisconnectUsers();
+
   const {
     roles,
-    onStartFilling,
     inviteUserToRoom,
     roleMappingPanelVisible,
     setRoleMappingPanelVisible,
     onOpenRoleMappingPanel,
     onSubmitFormRoleMapping,
-  } = useRoleMappingPanel(fileInfo, roomId);
+  } = useRoleMappingPanel(fileInfo, roomId, disconnectUsers);
 
   useUpdateSearchParamId(fileId, hash);
   const {
@@ -299,7 +302,7 @@ const Root = ({
     shareFormDialogVisible,
   ]);
 
-  const organizationName = settings?.logoText || t("Common:OrganizationName");
+  const organizationName = settings?.logoText || getBrandName("OrganizationName");
 
   React.useEffect(() => {
     if (user?.isVisitor) return;
@@ -362,6 +365,7 @@ const Root = ({
           onOpenRoleMappingPanel={onOpenRoleMappingPanel}
           setFillingStatusDialogVisible={setFillingStatusDialogVisible}
           openShareFormDialog={openShareFormDialog}
+          disconnectUsers={disconnectUsers}
           onStartFilling={onStartFilling}
         />
       ) : null}

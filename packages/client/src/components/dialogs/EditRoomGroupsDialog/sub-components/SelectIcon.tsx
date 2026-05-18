@@ -64,6 +64,7 @@ export const SelectIcon = ({
                     : undefined,
                 } as React.CSSProperties
               }
+              data-testid={`select_icon_${icon.id}`}
             >
               <ReactSVG
                 src={`data:image/svg+xml;utf8,${encodeURIComponent(icon.data)}`}

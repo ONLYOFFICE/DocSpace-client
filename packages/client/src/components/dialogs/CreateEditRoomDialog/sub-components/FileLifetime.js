@@ -1,52 +1,10 @@
 import { useState, useEffect } from "react";
-import styled from "styled-components";
-import { capitalize } from "lodash";
+import capitalize from "lodash/capitalize";
 import { Text } from "@docspace/ui-kit/components/text";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { ComboBox } from "@docspace/ui-kit/components/combobox";
-import { mobile } from "@docspace/ui-kit/utils/device";
 
-const StyledFileLifetime = styled.div`
-  margin-top: 12px;
-
-  .virtual-data-room_file-lifetime_body {
-    display: flex;
-    align-items: center;
-
-    @media ${mobile} {
-      display: block;
-    }
-
-    .virtual-data-room_file-lifetime_date {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-
-      @media ${mobile} {
-        gap: 8px;
-      }
-    }
-
-    .virtual-data-room_file-lifetime_input {
-      min-width: 150px;
-
-      @media ${mobile} {
-        width: 165px;
-      }
-    }
-
-    .virtual-data-room_file-lifetime_combo-box {
-      margin-inline-end: 16px;
-      width: 92px;
-      min-width: 92px;
-
-      @media ${mobile} {
-        margin-inline-end: 0px;
-        width: 165px;
-      }
-    }
-  }
-`;
+import styles from "../CreateEditRoomDialog.module.scss";
 
 const FileLifetime = ({ t, roomParams, setRoomParams }) => {
   const lifetime = roomParams.lifetime ?? {
@@ -148,7 +106,7 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
   };
 
   return (
-    <StyledFileLifetime className="virtual-data-room_file-lifetime">
+    <div className={`${styles.fileLifetime} virtual-data-room_file-lifetime`}>
       <Text fontWeight={600} fontSize="13px">
         {t("FilesOlderThan")}
       </Text>
@@ -172,24 +130,28 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
             isDisabled={isLoading}
             showDisabledItems
             selectedOption={selectedDate}
-            scaledOptions
+            manualWidth="auto"
+            style={{ minWidth: "200px" }}
             onSelect={onSelectDate}
             directionY="bottom"
             dataTestId="virtual_data_room_file_lifetime_period_combobox"
           />
         </div>
         <ComboBox
+          className="virtual-data-room_file-lifetime_delete-combo-box"
           options={deleteOptions}
           isDisabled={isLoading}
           showDisabledItems
           selectedOption={selectedDelete}
           scale
+          scaledOptions
+          textOverflow
           onSelect={onSelectDelete}
           directionY="bottom"
           dataTestId="virtual_data_room_file_lifetime_delete_combobox"
         />
       </div>
-    </StyledFileLifetime>
+    </div>
   );
 };
 

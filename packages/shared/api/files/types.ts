@@ -24,25 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { TFile } from "@docspace/ui-kit/types";
+
 import type {
   TAvailableShareRights,
   TCreatedBy,
   TPathParts,
 } from "../../types";
 import type {
+  DistributedTaskStatus,
   EmployeeActivationStatus,
   EmployeeStatus,
   FileFillingFormStatus,
-  FileStatus,
-  FileType,
+  FileOperationStatus,
   FillingFormStatusHistory,
   FolderType,
   RoomsType,
   ShareAccessRights,
-  VectorizationStatus,
 } from "../../enums";
 import type { TUser } from "../people/types";
 import type { TRoom } from "../rooms/types";
+
+export type { TFile };
 
 export type TFileViewAccessibility = {
   CanConvert: boolean;
@@ -77,6 +80,9 @@ export type TFileSecurity = {
   SubmitToFormGallery: boolean;
   StopFilling?: boolean;
   ResetFilling?: boolean;
+  StartFilling?: boolean;
+  FillingStatus?: boolean;
+  OpenForm?: boolean;
   EditForm: boolean;
   Comment: boolean;
   CreateRoomFrom: boolean;
@@ -84,82 +90,12 @@ export type TFileSecurity = {
   Embed: boolean;
   Vectorization: boolean;
   AskAi?: boolean;
+  UpdateXlsx?: boolean;
 };
 
 export type TShareSettings = {
   ExternalLink?: number;
   PrimaryExternalLink?: number;
-};
-
-type TDimensions = {
-  width: number;
-  height: number;
-};
-
-export type TFile = {
-  isFile?: boolean;
-  access: ShareAccessRights;
-  canShare: boolean;
-  comment: string;
-  contentLength: string;
-  created: string;
-  createdBy: TCreatedBy;
-  denyDownload?: boolean;
-  denySharing?: boolean;
-  fileExst: string;
-  fileStatus: FileStatus;
-  fileType: FileType;
-  folderId: number;
-  id: number;
-  parentRoomType?: FolderType;
-  shareSettings?: TShareSettings;
-  mute: boolean;
-  parentShared?: boolean;
-  pureContentLength: number;
-  rootFolderId: number;
-  rootFolderType: FolderType;
-  security: TFileSecurity;
-  shared: boolean;
-  thumbnailStatus: number;
-  title: string;
-  updated: string;
-  updatedBy: TCreatedBy;
-  sharedBy?: TCreatedBy;
-  ownedBy?: TCreatedBy;
-  version: number;
-  versionGroup: number;
-  viewAccessibility: TFileViewAccessibility;
-  viewUrl: string;
-  webUrl: string;
-  shortWebUrl: string;
-  availableShareRights?: TAvailableShareRights;
-  providerId?: number;
-  providerKey?: string;
-  providerItem?: boolean;
-  thumbnailUrl?: string;
-  expired?: string;
-  isForm?: boolean;
-  isFolder?: boolean;
-  formFillingStatus?: FileFillingFormStatus;
-  startFilling?: boolean;
-  fileEntryType: number;
-  hasDraft?: boolean;
-  order?: string;
-  lockedBy?: string;
-  originId?: number;
-  originRoomId?: number;
-  originRoomTitle?: string;
-  originTitle?: string;
-  requestToken?: string;
-  isFavorite?: boolean;
-  vectorizationStatus?: VectorizationStatus;
-  expirationDate?: string;
-  sharedForUser?: boolean;
-  external?: boolean;
-  isLinkExpired?: boolean;
-  dimensions?: TDimensions;
-  editingBy?: Record<string, string>;
-  activeEditors?: Record<string, string>;
 };
 
 export type TOpenEditRequest = {
@@ -215,6 +151,8 @@ export type TFolderSecurity = {
   Embed: boolean;
   ChangeOwner: boolean;
   IndexExport: boolean;
+  UpdateXlsx?: boolean;
+  AnalyzeResponses?: boolean;
 };
 
 export type TFolder = {
@@ -259,6 +197,7 @@ export type TFolder = {
   sharedForUser?: boolean;
   isLinkExpired?: boolean;
   external?: boolean;
+  originalFormId?: number;
 };
 
 export type TGetFolderPath = TFolder[];
@@ -292,6 +231,7 @@ export type TOperation = {
   id: string;
   processed: string;
   progress: number;
+  status?: FileOperationStatus;
   url?: string;
   files?: TFile[];
 };
@@ -590,4 +530,16 @@ export type TDefaultTemplate = {
   fileTitle?: string;
   fileSize?: number;
   viewUrl?: string;
+};
+
+export type UpdateXlsxResponse = {
+  form: TFile;
+  isNewFile: boolean;
+  task: {
+    id: string;
+    percentage: number;
+    isCompleted: boolean;
+    status: DistributedTaskStatus;
+    error: string;
+  };
 };

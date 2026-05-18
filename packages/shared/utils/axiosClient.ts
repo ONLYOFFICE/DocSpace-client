@@ -34,6 +34,7 @@ import axios, {
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
 import { combineUrl } from "./combineUrl";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix, timeout: apiTimeout } = apiConf;
@@ -78,6 +79,8 @@ class AxiosClient {
   paymentsURL = "";
 
   client: AxiosInstance | null = null;
+
+  authToken: string | null = null;
 
   constructor() {
     if (typeof window !== "undefined") this.initCSR();
@@ -136,6 +139,14 @@ class AxiosClient {
         if (publicRoomKey) {
           config.headers = config.headers || {};
           config.headers["Request-Token"] = publicRoomKey;
+          config.headers["Authorization"] = `Bearer ${publicRoomKey}`;
+        } else {
+          const cookie = getCookie("asc_auth_key");
+          const token = cookie || this.authToken;
+          if (token) {
+            config.headers = config.headers || {};
+            config.headers["Authorization"] = token;
+          }
         }
 
         return config;
@@ -170,6 +181,10 @@ class AxiosClient {
     });
 
     this.client = axios.create(axiosConfig);
+  };
+
+  setAuthToken = (token: string | null) => {
+    this.authToken = token;
   };
 
   setWithCredentialsStatus = (state: boolean) => {
@@ -339,3 +354,4 @@ class AxiosClient {
 }
 
 export default AxiosClient;
+

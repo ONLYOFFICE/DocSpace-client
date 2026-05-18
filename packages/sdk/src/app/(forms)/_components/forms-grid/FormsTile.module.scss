@@ -1,0 +1,47 @@
+@use "@docspace/ui-kit/styles/mixins";
+
+.foldersGrid,
+.filesGrid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(var(--tile-min-width, clamp(216px, 13.4vw, 360px)), 1fr)
+  );
+  grid-gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-inline-start: 1px;
+  padding-inline: var(--tile-grid-padding-inline, 0);
+}
+
+.foldersGrid {
+  @include mixins.mobile {
+    grid-template-columns: 1fr;
+    grid-gap: 8px;
+  }
+}
+
+.filesGrid {
+  @include mixins.mobile {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 16px;
+  }
+}
+
+.tile {
+  [class*="iconContainer"] {
+    pointer-events: none;
+
+    &:hover {
+      background: transparent !important;
+
+      [class*="icon"] {
+        display: flex !important;
+      }
+    }
+  }
+
+  [class*="checkbox"] {
+    display: none !important;
+  }
+}

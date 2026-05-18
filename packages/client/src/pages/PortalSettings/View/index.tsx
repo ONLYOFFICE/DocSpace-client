@@ -39,44 +39,45 @@ import { Component as Backup } from "../categories/data-management";
 import RestoreBackup from "../categories/data-management/backup/restore-backup";
 import { Component as Integration } from "../categories/integration";
 import { Component as DataImport } from "../categories/data-import";
-import { Component as DeveloperTools } from "../categories/developer-tools";
 import { Component as DeleteData } from "../categories/delete-data";
 import { Component as StorageManagement } from "../categories/storage-management";
 import { Component as Payments } from "../categories/payments";
 import { Component as Bonus } from "../../Bonus";
-import { Component as Services } from "../categories/services";
 import { Component as AISettings } from "../categories/ai-settings";
-import AiPage from "../categories/services/sub-components/AITools/AiPage";
 
 import useSecurity from "../categories/security/useSecurity";
 import useBackup from "../categories/data-management/backup/useBackup";
 import useIntegration from "../categories/integration/useIntegration";
-import useDeveloperTools from "../categories/developer-tools/useDeveloperTools";
 import useDeleteData from "../categories/delete-data/useDeleteData";
 import useCommon from "../categories/common/useCommon";
 import useDataImport from "../categories/data-import/useDataImport";
 import usePayments from "../categories/payments/usePayments";
-import useServices from "../categories/services/useServices";
 import useAiSettings from "../categories/ai-settings/useAiSettings";
 import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettingsProps";
 import { isMainSectionChange } from "../utils/isMainSectionChange";
 import { TView, ViewProps } from "./View.types";
+import { Component as ServicesPage } from "../categories/payments/ServicesPage";
 
 const getViewFromPathname = (pathname: string): TView => {
   if (pathname.includes("customization")) return "customization";
   if (pathname.includes("security")) return "security";
   if (pathname.includes("restore")) return "restore";
-  if (pathname.includes("backup")) return "backup";
+  if (pathname.includes("backup") && !pathname.includes("services"))
+    return "backup";
   if (pathname.includes("integration")) return "integration";
   if (pathname.includes("data-import")) return "data-import";
   if (pathname.includes("management")) return "management";
-  if (pathname.includes("developer-tools")) return "developer-tools";
   if (pathname.includes("delete-data")) return "delete-data";
-  if (pathname.includes("payments")) return "payments";
-  if (pathname.includes("bonus")) return "bonus";
+  if (pathname.includes("backup")) return "backup-service";
+  if (pathname.includes("disk-storage")) return "disk-storage";
   if (pathname.includes("ai-services")) return "ai-services";
-  if (pathname.includes("services")) return "services";
+
+  if (pathname.includes("payments")) return "payments";
+
+  if (pathname.includes("bonus")) return "bonus";
+
   if (pathname.includes("ai-settings")) return "ai-settings";
+
   return "";
 };
 
@@ -102,7 +103,6 @@ const View = ({
   ldapStore,
   common,
   paymentStore,
-  servicesStore,
   currentTariffStatusStore,
   defaultTemplatesStore,
 
@@ -147,7 +147,6 @@ const View = ({
     ldapStore,
     common,
     paymentStore,
-    servicesStore,
     currentTariffStatusStore,
     defaultTemplatesStore,
   });
@@ -159,14 +158,9 @@ const View = ({
     ...defaultProps.integration,
   });
   const { getDataImportInitialValue } = useDataImport(defaultProps.dataImport);
-  const { getDeveloperToolsInitialValue } = useDeveloperTools(
-    defaultProps.developerTools,
-  );
   const { getDeleteDataInitialValue } = useDeleteData(defaultProps.deleteData);
   const { getPaymentsInitialValue } = usePayments(defaultProps.payment);
-  const { getServicesInitialValue, getAiServiceInitialValue } = useServices(
-    defaultProps.services,
-  );
+
   const { getAiSettingsInitialValue } = useAiSettings({
     fetchAIProviders,
     initDefaultProvider,
@@ -238,10 +232,23 @@ const View = ({
         const isSameSectionClick =
           previousPath && !isMainSectionChanged && currentPath === previousPath;
 
+        const view = getViewFromPathname(currentPath);
+
+        // Handles sub-page navigation within "payments" (e.g. /payments/services → /payments/services/disk-storage).
+        // TODO: consider making this generic — check `view !== currentView` for all sections.
+        const isPaymentsSubPageChange =
+          !isMainSectionChanged &&
+          previousPath?.includes("payments") &&
+          view !== currentView;
+
         prevPathRef.current = currentPath;
 
-        // Only proceed with data loading if it's a main section change
-        if (!isMainSectionChanged && !isSameSectionClick) {
+        // Only proceed with data loading if it's a main section change or a view change within payments sub-pages
+        if (
+          !isMainSectionChanged &&
+          !isSameSectionClick &&
+          !isPaymentsSubPageChange
+        ) {
           if (requestId === activeRequestIdRef.current) {
             setIsLoading(false);
           }
@@ -251,7 +258,6 @@ const View = ({
         clearAbortControllerArrRef.current();
 
         setIsLoading(true);
-        const view = getViewFromPathname(currentPath);
 
         switch (view) {
           case "customization":
@@ -275,9 +281,6 @@ const View = ({
           case "management":
             await init();
             break;
-          case "developer-tools":
-            await getDeveloperToolsInitialValue();
-            break;
           case "delete-data":
             await getDeleteDataInitialValue();
             break;
@@ -286,13 +289,6 @@ const View = ({
             break;
           case "bonus":
             await standaloneInit(t);
-            break;
-          case "services":
-            await getServicesInitialValue();
-            break;
-
-          case "ai-services":
-            await getAiServiceInitialValue();
             break;
 
           case "ai-settings":
@@ -330,13 +326,15 @@ const View = ({
       {currentView === "integration" ? <Integration /> : null}
       {currentView === "data-import" ? <DataImport /> : null}
       {currentView === "management" ? <StorageManagement /> : null}
-      {currentView === "developer-tools" ? <DeveloperTools /> : null}
       {currentView === "delete-data" ? <DeleteData /> : null}
       {currentView === "payments" ? <Payments /> : null}
       {currentView === "bonus" ? <Bonus /> : null}
-      {currentView === "services" ? <Services /> : null}
-      {currentView === "ai-services" ? <AiPage /> : null}
       {currentView === "ai-settings" ? <AISettings /> : null}
+      {currentView === "ai-services" ||
+      currentView === "backup-service" ||
+      currentView === "disk-storage" ? (
+        <ServicesPage />
+      ) : null}
     </LoaderWrapper>
   );
 };
@@ -361,7 +359,6 @@ export const ViewComponent = inject(
     storageManagement,
     ldapStore,
     paymentStore,
-    servicesStore,
     currentTariffStatusStore,
     aiSettingsStore,
     defaultTemplatesStore,
@@ -402,7 +399,6 @@ export const ViewComponent = inject(
       ldapStore,
       common,
       paymentStore,
-      servicesStore,
       currentTariffStatusStore,
       ssoFormStore: ssoStore,
       defaultTemplatesStore,
@@ -421,3 +417,4 @@ export const ViewComponent = inject(
     };
   },
 )(observer(View));
+

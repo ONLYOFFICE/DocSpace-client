@@ -55,6 +55,7 @@ const EditorsTooltipMobile = ({
         className={styles.mobileContainer}
         style={{ height: `${height}px` }}
         data-testid="editors-tooltip-mobile"
+        onClick={(e) => e.stopPropagation()}
       >
         <Scrollbar autoHide={false}>
           <div className={styles.tooltipHeader}>

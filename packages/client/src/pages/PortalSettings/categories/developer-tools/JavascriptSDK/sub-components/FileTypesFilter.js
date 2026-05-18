@@ -28,6 +28,8 @@ import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { Text } from "@docspace/ui-kit/components/text";
 
+import { getConstName } from "@docspace/shared/constants/consts";
+
 import { FILE_TYPE_CATEGORIES, FILE_TYPE_EXTENSIONS } from "../constants";
 
 import {
@@ -92,7 +94,12 @@ export const FileTypesFilter = (props) => {
           <Checkbox
             key={category.key}
             className="checkbox"
-            label={t(category.labelKey)}
+            label={
+              category.constLabelKey
+                ? getConstName(category.constLabelKey)
+                // biome-ignore lint/plugin/no-dynamic-i18n-key: labelKey literals on FILE_TYPE_CATEGORIES are captured by the locales scanner
+                : t(category.labelKey)
+            }
             onChange={() => onChangeCategoryCheckbox(category.key)}
             isChecked={isCategorySelected(category.key)}
             dataTestId={`${category.key}_checkbox`}

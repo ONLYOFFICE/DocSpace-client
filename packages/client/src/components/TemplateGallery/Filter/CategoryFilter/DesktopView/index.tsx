@@ -48,7 +48,10 @@ const CategoryFilterDesktop: React.FC<CategoryFilterDesktopProps> = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [hoveredSub, setHoveredSub] = useState<string | null>(null);
 
-  const onOpenDropdown = () => setIsOpen(true);
+  const onOpenDropdown = () => {
+    setIsOpen((prev) => !prev);
+    if (isOpen) setHoveredSub(null);
+  };
   const onCloseDropdown = () => {
     setIsOpen(false);
     setHoveredSub(null);

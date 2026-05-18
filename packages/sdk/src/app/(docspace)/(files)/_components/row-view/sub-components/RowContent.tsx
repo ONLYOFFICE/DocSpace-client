@@ -37,7 +37,7 @@ import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
 import { FilesRowContent } from "@docspace/shared/components/files-row";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
-import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { SortByFieldName } from "@docspace/shared/enums";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
@@ -132,7 +132,13 @@ const RowContent = observer(
         </div>
 
         {mainInfo ? (
-          <Text fontSize="12px" fontWeight={400} className="row_update-text">
+          <Text
+            containerMinWidth="200px"
+            containerWidth="15%"
+            fontSize="12px"
+            fontWeight={400}
+            className="row_update-text"
+          >
             {mainInfo}
           </Text>
         ) : (

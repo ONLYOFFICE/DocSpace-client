@@ -384,6 +384,7 @@ const EditRoomGroupsDialog = ({
                 className={styles.roomGroupsToggle}
                 isChecked={localGroupingEnabled}
                 onChange={onToggleGrouping}
+                dataTestId="toggle_room_groups_button"
               />
             </div>
 
@@ -397,6 +398,7 @@ const EditRoomGroupsDialog = ({
             label={t("GroupingRooms:CreateNewGroup")}
             isDisabled={!localGroupingEnabled}
             tabIndex={localGroupingEnabled ? 0 : -1}
+            testId="create_new_group_button"
           />
           <div className={styles.addedGroups}>{renderGroupItems()}</div>
         </ModalDialog.Body>
@@ -411,11 +413,13 @@ const EditRoomGroupsDialog = ({
               scale
               isLoading={isSaving}
               isDisabled={isSaving}
+              testId="save_grouping_changes_button"
             />
             <Button
               label={t("Common:CancelButton")}
               size={ButtonSize.normal}
               onClick={onCancelGroupingChange}
+              testId="cancel_grouping_changes_button"
               scale
             />
           </ModalDialog.Footer>

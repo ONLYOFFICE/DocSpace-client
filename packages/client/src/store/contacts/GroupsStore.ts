@@ -40,7 +40,7 @@ import {
   setUserFilter,
 } from "@docspace/shared/utils/userFilterUtils";
 import { FILTER_GROUPS } from "@docspace/shared/utils/filterConstants";
-import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
 
 import api from "@docspace/shared/api";
 
@@ -103,7 +103,7 @@ class GroupsStore {
 
     SocketHelper?.on(
       SocketEvents.AddGroup,
-      async (value: { id: string; data: TGroup }) => {
+      async (value) => {
         const { contactsTab } = this.peopleStore.usersStore;
 
         if (contactsTab !== "groups") return;
@@ -133,7 +133,7 @@ class GroupsStore {
 
     SocketHelper?.on(
       SocketEvents.UpdateGroup,
-      async (value: { id: string; data: TGroup }) => {
+      async (value) => {
         const { contactsTab } = this.peopleStore.usersStore;
 
         const { id, data } = value;

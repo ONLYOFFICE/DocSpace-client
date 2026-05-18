@@ -31,10 +31,15 @@ import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
 import {
-  getTriggerTranslate,
-  isTriggerDisabled,
-  triggersList,
+  getTriggerTranslate
 } from "../Webhooks.helpers";
+import styles from "../Webhooks.styled.module.scss";
+
+type TWebhookTrigger = {
+  name: string;
+  id: number;
+  available: boolean;
+};
 
 type TProps = {
   isDisabled: boolean;
@@ -42,7 +47,7 @@ type TProps = {
   toggleTrigger: (value: bigint) => void;
   triggerAll: boolean;
   onChange: (value: string) => void;
-  disabledTriggers?: bigint[];
+  webhookTriggers?: TWebhookTrigger[];
 };
 
 const TriggersForm = ({
@@ -51,13 +56,17 @@ const TriggersForm = ({
   toggleTrigger,
   triggerAll,
   onChange,
-  disabledTriggers,
+  webhookTriggers = [],
 }: TProps) => {
   const { t } = useTranslation(["Webhooks", "Files", "Common"]);
 
+  const individualTriggers = webhookTriggers.filter(
+    (trigger) => trigger.id !== 0,
+  );
+
   return (
-    <div style={{ marginTop: "22px" }}>
-      <Text fontWeight={600} style={{ marginBottom: "10px" }}>
+    <div className={styles.triggersWrapper}>
+      <Text fontWeight={600} className={styles.triggersTitle}>
         {t("EventToTriggerThisWebhook")}
       </Text>
       <RadioButtonGroup
@@ -88,28 +97,19 @@ const TriggersForm = ({
       />
       {!triggerAll ? (
         <div
-          style={{
-            display: "grid",
-            gap: "8px",
-            gridTemplateColumns: "repeat(2, 1fr)",
-            marginTop: "10px",
-            marginInlineStart: "24px",
-          }}
+          className={styles.triggersCheckboxGroup}
           data-testid="triggers_form_checkbox_group"
         >
-          {triggersList.map((value) => {
-            const isCheckboxDisabled = isTriggerDisabled(
-              value,
-              disabledTriggers,
-            );
+          {individualTriggers.map((trigger) => {
+            const value = BigInt(trigger.id);
             return (
               <Checkbox
-                key={value.toString()}
-                label={getTriggerTranslate(Number(value), t)}
+                key={trigger.id}
+                label={getTriggerTranslate(trigger.id, t)}
                 isChecked={(triggers & value) !== 0n}
                 onChange={() => toggleTrigger(value)}
-                isDisabled={isCheckboxDisabled}
-                dataTestId={`triggers_form_checkbox_${value}`}
+                isDisabled={!trigger.available}
+                dataTestId={`triggers_form_checkbox_${trigger.id}`}
               />
             );
           })}
@@ -120,3 +120,4 @@ const TriggersForm = ({
 };
 
 export default TriggersForm;
+

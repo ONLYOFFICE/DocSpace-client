@@ -42,7 +42,7 @@ import { StatusMessage } from "@docspace/ui-kit/components/status-message";
 import SocketHelper, {
   SocketEvents,
   TSocketListener,
-} from "../../../utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 import { OPERATIONS_NAME } from "../../../constants";
 import { OperationsProgressButton } from "@docspace/ui-kit/components/operations-progress-button";
 import DataBackupLoader from "../../../skeletons/backup/DataBackup";
@@ -335,7 +335,7 @@ const ManualBackup = ({
     setErrorMessage("");
     setBackupProgressError("");
     setBackupProgressWarning("");
-    
+
     const storageParams = getStorageParams(
       isCheckedThirdPartyStorage,
       selectedFolder,
@@ -701,3 +701,4 @@ const ManualBackup = ({
 };
 
 export default ManualBackup;
+

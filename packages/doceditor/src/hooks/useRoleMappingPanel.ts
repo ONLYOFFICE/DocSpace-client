@@ -24,9 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback } from "react";
 
-import { EDITOR_ID } from "@docspace/shared/constants";
 import { setRoomSecurity } from "@docspace/shared/api/rooms";
 import type { Invitation } from "@docspace/shared/dialogs/role-mapping/RoleMappingPanel.types";
 import type {
@@ -41,11 +40,10 @@ import type { TFormRole } from "../types";
 export const useRoleMappingPanel = (
   file: TFile | undefined,
   roomId: string | undefined,
+  launchFillingAsync: () => Promise<void>,
 ) => {
   const [roles, setRoles] = useState<TFormRole[]>([]);
   const [roleMappingPanelVisible, setRoleMappingPanelVisible] = useState(false);
-
-  const resolveRef = useRef<() => void>(undefined);
 
   const inviteUserToRoom = useCallback(
     (rId: string, invitations: Invitation[]) => {
@@ -64,14 +62,7 @@ export const useRoleMappingPanel = (
     async (data: TFormRoleMappingRequest) => {
       try {
         await formRoleMapping(data);
-        const docEditor =
-          typeof window !== "undefined" &&
-          window.DocEditor?.instances[EDITOR_ID];
-
-        await new Promise<void>((resolve) => {
-          resolveRef.current = resolve;
-          docEditor?.startFilling(true);
-        });
+        await launchFillingAsync();
 
         const searchParams = new URLSearchParams();
 
@@ -89,15 +80,8 @@ export const useRoleMappingPanel = (
         toastr.error(error as Error);
       }
     },
-    [file, roomId],
+    [file, roomId, launchFillingAsync],
   );
-
-  const onStartFilling = useCallback(() => {
-    console.log("Call onStartFilling");
-
-    resolveRef.current?.();
-    resolveRef.current = undefined;
-  }, []);
 
   const onOpenRoleMappingPanel = useCallback((r: TFormRole[]) => {
     setRoles(r);
@@ -106,7 +90,6 @@ export const useRoleMappingPanel = (
 
   return {
     roles,
-    onStartFilling,
     inviteUserToRoom,
     onSubmitFormRoleMapping,
     onOpenRoleMappingPanel,

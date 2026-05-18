@@ -1,8 +1,9 @@
 const fastify = require("fastify");
 const cors = require("@fastify/cors");
-const socketioServer = require("fastify-socket.io");
+const { Server: SocketIOServer } = require("socket.io");
 const { serverConfig } = require("./config/config");
 const { initializeMetadata } = require("./startup/initMetadata");
+const { abortCurrentTranslation } = require("./routes/ollama");
 
 // Initialize Fastify with logger
 const server = fastify(serverConfig);
@@ -15,21 +16,30 @@ async function registerPlugins() {
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   });
 
-  // Socket.IO
-  await server.register(socketioServer, {
-    cors: {
-      origin: "*",
-      methods: ["GET", "POST"],
-    },
-  });
+  // Socket.IO - decorate with null first so routes can reference it,
+  // then attach to the HTTP server once Fastify is ready
+  server.decorate("io", null);
 
-  // Setup Socket.IO events
-  server.ready().then(() => {
-    server.io.on("connection", (socket) => {
+  server.addHook("onReady", async () => {
+    const io = new SocketIOServer(server.server, {
+      cors: {
+        origin: "*",
+        methods: ["GET", "POST"],
+      },
+    });
+
+    server.io = io;
+
+    io.on("connection", (socket) => {
       console.log("Client connected:", socket.id);
 
       socket.on("disconnect", () => {
         console.log("Client disconnected:", socket.id);
+      });
+
+      socket.on("translation:debug:stop", () => {
+        console.log("Stop requested by client:", socket.id);
+        abortCurrentTranslation();
       });
     });
   });

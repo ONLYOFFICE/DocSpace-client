@@ -205,6 +205,12 @@ export const enum PageType {
   restore = "restore",
   integration = "integration",
   developerTools = "developerTools",
+  devToolsOverview = "devToolsOverview",
+  devToolsJavascriptSdk = "devToolsJavascriptSdk",
+  devToolsPluginSdk = "devToolsPluginSdk",
+  devToolsWebhooks = "devToolsWebhooks",
+  devToolsOAuth = "devToolsOAuth",
+  devToolsApiKeys = "devToolsApiKeys",
   portalDeletion = "portalDeletion",
   payments = "payments",
   bonus = "bonus",
@@ -215,21 +221,6 @@ export const enum PageType {
   groups = "groups",
   guests = "guests",
   aiSettings = "aiSettings",
-}
-
-export const enum ShareRights {
-  None = "None",
-  ReadWrite = "ReadWrite",
-  Read = "Read",
-  Restrict = "Restrict",
-  Varies = "Varies",
-  Review = "Review",
-  Comment = "Comment",
-  FillForms = "FillForms",
-  CustomFilter = "CustomFilter",
-  RoomManager = "RoomManager",
-  Editing = "Editing",
-  ContentCreator = "ContentCreator",
 }
 
 export const enum ConflictResolveType {
@@ -274,22 +265,6 @@ export const enum TenantTrustedDomainsType {
   None = 0,
   Custom = 1,
   All = 2,
-}
-
-/**
- * Enum for file status.
- * @readonly
- */
-export const enum FileStatus {
-  None = 0,
-  IsEditing = 1,
-  IsNew = 2,
-  IsConverting = 4,
-  IsOriginal = 8,
-  IsEditingAlone = 16,
-  IsFavorite = 32,
-  IsTemplate = 64,
-  IsFillFormDraft = 128,
 }
 
 /**
@@ -359,14 +334,6 @@ export const enum TariffState {
   NotPaid = 3,
 }
 
-/**
- * Enum for theme keys.
- * @readonly
- */
-export const enum PortalFeaturesLimitations {
-  Limitless = -1,
-  Unavailable = 0,
-}
 
 /**
  * Enum for payment method status.
@@ -506,6 +473,14 @@ export const enum ExportRoomIndexTaskStatus {
   Failed = 4,
 }
 
+export const enum FileOperationStatus {
+  Created = 0,
+  Running = 1,
+  Completed = 2,
+  Canceled = 3,
+  Failed = 4,
+}
+
 export enum FileExtensions {
   PDF = "pdf",
   DOC = "doc",
@@ -636,6 +611,11 @@ export enum WebhookTriggers {
   RoomDeleted = 33554432,
   RoomRestored = 67108864,
   RoomCopied = 134217728,
+  AgentCreated = 2147483648,
+  AgentUpdated = 4294967296,
+  AgentDeleted = 8589934592,
+  FileDownloaded = 17179869184,
+  FolderDownloaded = 34359738368,
 }
 
 export enum RoomSecurityError {

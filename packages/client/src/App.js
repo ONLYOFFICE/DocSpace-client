@@ -85,7 +85,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <MobxProvider {...store}>
-        <ApiProvider url={apiUrl} apiKey={apiKey}>
+        <ApiProvider url={apiUrl} apiKey={apiKey} initSocket={false}>
           <I18nextProvider i18n={i18n}>
             <ThemeProvider>
               <ErrorBoundary>

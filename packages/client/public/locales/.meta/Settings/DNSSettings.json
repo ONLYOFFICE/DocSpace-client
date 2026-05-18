@@ -3,29 +3,30 @@
   "content": "DNS Settings",
   "content_en_sha1_hash": "7f2a7680272773297fb8efa578de3f25d6399c36",
   "created_at": "2025-05-19T21:30:51.213Z",
-  "updated_at": "2026-02-19T13:36:32.704Z",
+  "updated_at": "2026-04-13T14:59:05.833Z",
   "comment": {
-    "text": "DNS Settings displays the title and subtitle for a DNS settings category in the portal settings customization page. This text is used to label a navigation link that allows users to access their DNS settings.",
+    "text": "This is the title for a section in the portal settings where users can configure DNS settings. It appears as a clickable link in the navigation menu and as the heading of the DNS settings page.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:20.762Z"
+    "updated_at": "2026-04-11T21:24:31.100Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 82,
+      "line_number": 83,
       "context": "subtitle={t(\"CustomTitlesSettingsNavDescription\")}\n url=\"/portal-settings/customization/general/welcome-page-settings\"\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"DNSSettings\")}\n subtitle={t(\"DNSSettingsNavDescription\")}\n url=\"/portal-settings/customization/general/dns-settings\"\n onClickLink={onClickLink}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Common:Paid\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/dns-settings.js",
-      "line_number": 58,
-      "context": "const toggleStyle = {\n position: \"static\",\n };\n \n const textInputProps = {\n id: \"textInputContainerDNSSettings\",\n testId: \"customization_dns_settings_text_input\",\n className: \"dns-textarea\",\n scale: true,\n tabIndex: 8,\n };",
+      "line_number": 131,
+      "context": "setIsCustomizationView(false);\n }\n }, [isMobileDevice, setIsCustomizationView]);\n \n useEffect(() => {\n setDocumentTitle(t(\"DNSSettings\"));\n \n const checkScroll = checkScrollSettingsBlock();\n checkInnerWidth();\n window.addEventListener(\"resize\", checkInnerWidth);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/dns-settings.js",
-      "line_number": 58,
-      "context": "const toggleStyle = {\n position: \"static\",\n };\n \n const textInputProps = {\n id: \"textInputContainerDNSSettings\",\n testId: \"customization_dns_settings_text_input\",\n className: \"dns-textarea\",\n scale: true,\n tabIndex: 8,\n };",
+      "line_number": 131,
+      "context": "setIsCustomizationView(false);\n }\n }, [isMobileDevice, setIsCustomizationView]);\n \n useEffect(() => {\n setDocumentTitle(t(\"DNSSettings\"));\n \n const checkScroll = checkScrollSettingsBlock();\n checkInnerWidth();\n window.addEventListener(\"resize\", checkInnerWidth);",
       "module": "/packages/client"
     },
     {
@@ -45,25 +46,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'إعدادات نظام أسماء النطاقات' is a literal translation of 'DNS Settings' but may not be the most natural or commonly used phrasing in Saudi Arabian Arabic. While technically correct, it's a bit formal for a settings menu.",
-          "suggestion": "Consider a more user-friendly translation like 'إعدادات DNS' or 'إعدادات خادم DNS'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'DNS Parametrləri' is understandable, a more accurate and commonly used translation of 'DNS Settings' in Azerbaijani would be 'DNS Tənzimləmələri'. 'Parametrləri' implies parameters, whereas 'Tənzimləmələri' directly translates to 'settings'.",
-          "suggestion": "DNS Tənzimləmələri"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -183,18 +172,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation \"ව.නා.ප. සැකසුම්\" is not a standard or easily understood translation of \"DNS Settings\". It appears to be an abbreviation that is not widely recognized.",
-          "suggestion": "තොරතුරු පද්ධති සැකසුම් (Thoranithu Paddathi Sakesum) or ඩී.එන්.එස්. සැකසුම් (DNS Sakesum) would be more accurate and understandable translations. 'Sakesum' is a common suffix for 'Settings' in Sinhala."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of abbreviations (. in 'ව.නා.ප.') is unusual and makes the translation harder to read. It is unclear what these abbreviations represent.",
-          "suggestion": "Remove the abbreviations and use the full Sinhala words."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -212,25 +190,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'DNS подешавања' is a functional but slightly awkward translation of 'DNS Settings'. A more natural translation might be 'Подешавања ДНС' or 'DNS подешења'.",
-          "suggestion": "Подешавања ДНС"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The translation 'DNS podešavanja' contains a typo. 'podešavanja' should be 'po podešavanjima'.",
-          "suggestion": "DNS podešavanja -> DNS po podešavanjima"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -252,6 +218,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

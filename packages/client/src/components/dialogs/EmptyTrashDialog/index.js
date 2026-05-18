@@ -103,12 +103,13 @@ const EmptyTrashDialogComponent = (props) => {
         <Button
           id="empty-archive_delete-submit"
           key="OKButton"
-          label={t("DeleteForeverButton")}
+          label={t("Common:DeleteForeverButton")}
           size="normal"
           primary
           onClick={onEmptyTrash}
           isLoading={isLoading}
           scale
+          testId="empty_trash_dialog_submit"
         />
         <Button
           id="empty-archive_delete-cancel"
@@ -118,6 +119,7 @@ const EmptyTrashDialogComponent = (props) => {
           onClick={onClose}
           isLoading={isLoading}
           scale
+          testId="empty_trash_dialog_cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>

@@ -47,12 +47,10 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
   children,
   roomTags,
   fetchedTags,
-  canCreate,
-  canEdit,
-  canRemove,
-  canSearch,
-  canBindTag,
+  access,
 }) => {
+  const canCreate = access.canCreate || false;
+
   const [searchValue, setSearchValue] = useState("");
   const deferredSearchValue = useDeferredValue(searchValue);
 
@@ -67,10 +65,12 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
 
     const filtered = searchFilter(tags, search);
 
-    const showCreateTag = filtered.every((tag) => tag.label.trim() !== search);
+    const showCreateTag = Boolean(
+      canCreate && filtered.every((tag) => tag.label.trim() !== search),
+    );
 
     return [filtered, showCreateTag];
-  }, [tags, deferredSearchValue]);
+  }, [tags, deferredSearchValue, canCreate]);
 
   const clearSearch = useCallback(() => {
     setSearchValue("");
@@ -86,24 +86,16 @@ export const TagManagementProvider: React.FC<TagManagementProviderProps> = ({
       showCreateTag,
       setSearchValue,
       clearSearch,
-      canCreate,
-      canEdit,
-      canRemove,
-      canSearch,
-      canBindTag,
+      access,
     }),
     [
-      fetchedTags,
       searchValue,
       deferredSearchValue,
       filteredTags,
       showCreateTag,
       clearSearch,
-      canCreate,
-      canEdit,
-      canRemove,
-      canSearch,
-      canBindTag,
+      access,
+      tags,
     ],
   );
 

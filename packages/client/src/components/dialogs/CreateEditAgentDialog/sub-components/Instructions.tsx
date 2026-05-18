@@ -82,6 +82,7 @@ const InstructionsSettings = ({
 					heightTextArea={144}
 					placeholder={t("InstructionsDescriptionAgentExample")}
 					tabIndex={2}
+					dataTestId="create_agent_instructions_textarea"
 				/>
 			</div>
 		</StyledParam>

@@ -90,6 +90,7 @@ export type TPaymentQuota = {
   nonProfit: boolean;
   free: boolean;
   trial: boolean;
+  serviceName?: string;
   features: TPaymentFeature[];
   usersQuota: {
     defaultQuota: number;

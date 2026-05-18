@@ -29,7 +29,8 @@ import React from "react";
 import { TTranslation } from "@docspace/shared/types";
 import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
 
-import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
+import { getOAuthValidationCodeTranslation } from "../ClientForm.utils";
+import styles from "../ClientForm.styled.module.scss";
 
 import BlockHeader from "./BlockHeader";
 import InputGroup from "./InputGroup";
@@ -44,6 +45,7 @@ interface SupportBlockProps {
 
   isEdit: boolean;
   errorFields: string[];
+  serverFieldErrors?: Record<string, string>;
   onBlur?: (name: string) => void;
   requiredErrorFields: string[];
 }
@@ -57,6 +59,7 @@ const SupportBlock = ({
 
   isEdit,
   errorFields,
+  serverFieldErrors,
   onBlur,
   requiredErrorFields,
 }: SupportBlockProps) => {
@@ -72,9 +75,9 @@ const SupportBlock = ({
   const termsError = errorFields.includes("terms_url");
 
   return (
-    <StyledBlock>
+    <div className={styles.styledBlock}>
       <BlockHeader header={t("SupportAndLegalInfo")} />
-      <StyledInputBlock>
+      <div className={styles.styledInputBlock}>
         <InputGroup
           label={t("PrivacyPolicyURL")}
           name="policy_url"
@@ -82,7 +85,10 @@ const SupportBlock = ({
           value={policyUrlValue}
           error={
             policyError
-              ? `${t("ErrorWrongURL")}: ${window.location.origin}`
+              ? getOAuthValidationCodeTranslation(
+                  t,
+                  serverFieldErrors?.["policy_url"] ?? "ErrorWrongURL",
+                )
               : t("ThisRequiredField")
           }
           onChange={onChange}
@@ -100,7 +106,10 @@ const SupportBlock = ({
           value={termsUrlValue}
           error={
             termsError
-              ? `${t("ErrorWrongURL")}: ${window.location.origin}`
+              ? getOAuthValidationCodeTranslation(
+                  t,
+                  serverFieldErrors?.["terms_url"] ?? "ErrorWrongURL",
+                )
               : t("ThisRequiredField")
           }
           onChange={onChange}
@@ -111,8 +120,8 @@ const SupportBlock = ({
           onBlur={onBlur}
           dataTestId="terms_url_input_group"
         />
-      </StyledInputBlock>
-    </StyledBlock>
+      </div>
+    </div>
   );
 };
 

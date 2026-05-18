@@ -37,6 +37,7 @@ import { ownerChange } from "@docspace/shared/api/settings";
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import styles from "../confirm.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type ChangeOwnerFormProps = {
   newOwner?: string;
@@ -82,7 +83,7 @@ const ChangeOwnerForm = ({ newOwner }: ChangeOwnerFormProps) => {
   return isOwnerChanged ? (
     <Text>
       {t("ConfirmOwnerPortalSuccessMessage", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       })}
     </Text>
   ) : (
@@ -90,7 +91,7 @@ const ChangeOwnerForm = ({ newOwner }: ChangeOwnerFormProps) => {
       <Text className="subtitle">
         {t("ConfirmOwnerPortalTitle", {
           newOwner,
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
         })}
       </Text>
       <div className={styles.buttonsWrapper}>

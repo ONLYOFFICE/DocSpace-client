@@ -55,6 +55,7 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "@docspace/shared/constants";
 import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
 import { openMembersTab, showInfoPanel } from "SRC_DIR/helpers/info-panel";
+import { modelCache } from "SRC_DIR/components/dialogs/CreateEditAgentDialog/sub-components/modelCache";
 
 import FilesStore from "./FilesStore";
 import ClientLoadingStore from "./ClientLoadingStore";
@@ -374,6 +375,8 @@ class CreateEditRoomStore {
 
       if (successToast)
         toastr.success(successToast as unknown as React.ReactNode);
+
+      modelCache.clear();
     } catch (err) {
       toastr.error(err as string);
     } finally {

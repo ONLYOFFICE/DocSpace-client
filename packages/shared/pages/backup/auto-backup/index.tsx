@@ -44,7 +44,7 @@ import { StatusMessage } from "@docspace/ui-kit/components/status-message";
 import SocketHelper, {
   SocketEvents,
   type TSocketListener,
-} from "../../../utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 import { getBackupProgressInfo } from "../../../utils/common";
 import { useStateCallback } from "../../../hooks/useStateCallback";
 import type { Nullable, Option } from "../../../types";
@@ -61,6 +61,7 @@ import { ThirdPartyStorageModule } from "./sub-components/ThirdPartyStorageModul
 import { useDefaultOptions } from "./hooks";
 import type { AutomaticBackupProps } from "./AutoBackup.types";
 import styles from "./AutoBackup.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const hoursArray = Array(24)
   .fill(null)
@@ -419,7 +420,7 @@ const AutomaticBackup = ({
           )}
         >
           {t("Common:AutoBackupDescription", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           })}
         </Text>
         {!isManagement ? (
@@ -700,3 +701,4 @@ const AutomaticBackup = ({
 };
 
 export default AutomaticBackup;
+

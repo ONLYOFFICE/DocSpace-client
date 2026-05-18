@@ -125,3 +125,8 @@ vi.mock("../utils/image-helpers", () => ({
 
 global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder;
+
+// @tanem/svg-injector uses SVGSVGElement which jsdom doesn't provide
+if (typeof SVGSVGElement === "undefined") {
+  global.SVGSVGElement = class SVGSVGElement {} as unknown as typeof SVGSVGElement;
+}

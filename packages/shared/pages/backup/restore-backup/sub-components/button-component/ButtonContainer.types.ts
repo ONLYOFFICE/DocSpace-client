@@ -34,6 +34,7 @@ import type { TUploadBackup } from "../../../../../api/files/types";
 export interface ButtonContainerProps {
   t: TTranslation;
   buttonSize: ButtonSize;
+  standalone: boolean;
   isConfirmed: boolean;
   isNotification: boolean;
   navigate: (path: string) => void;

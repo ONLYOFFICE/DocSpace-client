@@ -36,9 +36,9 @@ import { getAuthProviders } from "@docspace/shared/api/settings";
 import { unlinkOAuth, linkOAuth } from "@docspace/shared/api/people";
 import {
   getProviderTranslation,
-  getOAuthToken,
   getLoginLink,
 } from "@docspace/shared/utils/common";
+import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
 import { PROVIDERS_DATA } from "@docspace/shared/constants";
 import { AuthStore } from "@docspace/shared/store/AuthStore";
 

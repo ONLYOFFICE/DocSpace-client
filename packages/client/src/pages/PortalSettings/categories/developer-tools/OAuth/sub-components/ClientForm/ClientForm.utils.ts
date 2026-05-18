@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TTranslation } from "@docspace/shared/types";
+
 export function isValidUrl(url: string, withoutParams?: boolean) {
   try {
     const newUrl = new URL(url);
@@ -32,5 +34,22 @@ export function isValidUrl(url: string, withoutParams?: boolean) {
     return false;
   } catch {
     return false;
+  }
+}
+
+export function getOAuthValidationCodeTranslation(
+  t: TTranslation,
+  code: string,
+): string {
+  switch (code) {
+    case "ErrorWrongURL":
+      return `${t("ErrorWrongURL")}: ${window.location.origin}`;
+    case "ErrorName":
+      return `${t("ErrorName")} 3`;
+
+    case "EmptyFieldError":
+      return t("Common:EmptyFieldError");
+    default:
+      return t("Common:Error");
   }
 }

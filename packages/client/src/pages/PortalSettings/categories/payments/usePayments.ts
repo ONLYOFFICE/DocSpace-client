@@ -31,15 +31,11 @@ import PaymentStore from "SRC_DIR/store/PaymentStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 export type UsePaymentsProps = {
-  initPayments?: PaymentStore["init"];
   initPaymentsStandalone?: PaymentStore["standaloneInit"];
-  walletInit?: PaymentStore["walletInit"];
   standalone?: SettingsStore["standalone"];
 };
 
 const usePayments = ({
-  initPayments,
-  walletInit,
   initPaymentsStandalone,
   standalone,
 }: UsePaymentsProps) => {
@@ -48,31 +44,22 @@ const usePayments = ({
   const getPortalPaymentsData = useCallback(async () => {
     if (standalone) {
       await initPaymentsStandalone?.(t);
-    } else {
-      await initPayments?.(t);
     }
-  }, [initPayments, t]);
-
-  const getWalletData = useCallback(async () => {
-    await walletInit?.(t);
-  }, [walletInit]);
+  }, [t]);
 
   const getPaymentsInitialValue = React.useCallback(async () => {
     const actions = [];
     if (window.location.pathname.includes("portal-payments"))
       actions.push(getPortalPaymentsData());
 
-    if (window.location.pathname.includes("wallet"))
-      actions.push(getWalletData());
-
     await Promise.all(actions);
-  }, [getPortalPaymentsData, getWalletData]);
+  }, [getPortalPaymentsData]);
 
   return {
     getPortalPaymentsData,
-    getWalletData,
     getPaymentsInitialValue,
   };
 };
 
 export default usePayments;
+

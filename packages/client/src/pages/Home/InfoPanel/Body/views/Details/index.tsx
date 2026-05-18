@@ -48,6 +48,8 @@ import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 
+import { FormInfo } from "./sub-components/FormInfo";
+
 import DetailsHelper from "./Details.utils";
 
 import commonStyles from "../../helpers/Common.module.scss";
@@ -303,6 +305,7 @@ const Details = ({
           );
         })}
       </div>
+      <FormInfo selection={selection} />
     </>
   );
 };

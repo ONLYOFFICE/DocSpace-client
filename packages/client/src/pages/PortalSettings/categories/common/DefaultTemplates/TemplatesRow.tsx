@@ -41,11 +41,11 @@ import { TDefaultTemplateItem } from "@docspace/shared/types";
 import { UrlActionType } from "@docspace/shared/enums";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import {
-  getCorrectDate,
   getTitleWithoutExtension,
   getUpperCaseExtension,
 } from "@docspace/shared/utils";
 import { getConvertedSize } from "@docspace/shared/utils/common";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { LANGUAGE } from "@docspace/shared/constants";
 
 import FilesSelector from "SRC_DIR/components/FilesSelector";
@@ -53,6 +53,7 @@ import { ResetTemplateDialog } from "SRC_DIR/components/dialogs";
 
 import { TFile } from "./TemplatesRow.types";
 import styles from "./DefaultTemplates.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type Props = {
   item: TDefaultTemplateItem;
@@ -89,7 +90,7 @@ const TemplatesRow = ({
       {
         key: "upload-from-docspace",
         label: t("EmptyView:UploadFromPortalTitle", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
         }),
         onClick: () => setIsSelectorVisible(true),
         disabled: false,
@@ -215,6 +216,7 @@ const TemplatesRow = ({
       <ContextMenuButton
         className={styles.contextMenuButton}
         directionX="left"
+        directionY="both"
         getData={getOptions}
       />
       {isSelectorVisible ? (

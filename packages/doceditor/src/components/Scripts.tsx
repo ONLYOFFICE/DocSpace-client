@@ -26,23 +26,34 @@
 
 import Script from "next/script";
 
-import runtime from "../../../runtime.json";
+import { getStaticHash } from "@docspace/shared/utils/static-hash";
 
-const hashDate = runtime?.date;
+const browserDetectorHash = getStaticHash("browserDetector.js");
+const configHash = getStaticHash("config.json");
 
 const Scripts = () => {
   return (
     <>
       <Script
         id="browser-detector"
-        // strategy="beforeInteractive"
-        src={`/static/scripts/browserDetector.js?hash=${runtime?.checksums?.["browserDetector.js"] ?? hashDate}`}
+        src={`/static/scripts/browserDetector.js?hash=${browserDetectorHash}`}
       />
 
       <Script id="portal-config" strategy="beforeInteractive">
         {`
           console.log("It's DocEditor INIT");
-          fetch("/static/scripts/config.json?hash=${runtime?.checksums["config.json"] ?? hashDate}")
+
+          // Mark as frame when loaded with a share/key token so the
+          // axiosClient 401 handler does not redirect to login.
+          (function() {
+            var sp = new URLSearchParams(window.location.search);
+            if (sp.has("share") || sp.has("key")) {
+              window.ClientConfig = window.ClientConfig || {};
+              window.ClientConfig.isFrame = true;
+            }
+          })();
+
+          fetch("/static/scripts/config.json?hash=${configHash}")
             .then((response) => {
               if (!response.ok) {
                 throw new Error("HTTP error " + response.status);
@@ -50,11 +61,11 @@ const Scripts = () => {
               return response.json();
             })
             .then((config) => {
-              console.log(config)
               window.ClientConfig = {
+                ...window.ClientConfig,
                 ...config,
               };
-    
+
               if (
                 window.navigator.userAgent.includes("ZoomWebKit") ||
                 window.navigator.userAgent.includes("ZoomApps")
@@ -64,12 +75,11 @@ const Scripts = () => {
                   requestClose: true,
                 };
               }
-    
-              //console.log({ ClientConfig: window.ClientConfig });
             })
             .catch((e) => {
-              console.error(e);
+              console.error("Failed to load config:", e);
               window.ClientConfig = {
+                ...window.ClientConfig,
                 errorOnLoad: e,
               };
             });

@@ -48,7 +48,6 @@ export const getDialogContent = (
   isAIAgent,
   isAIAgentsFolderRoot,
   unsubscribe,
-  isAIAgentChatDelete,
 ) => {
   if (!selection) return null;
 
@@ -90,23 +89,6 @@ export const getDialogContent = (
     );
   }
 
-  if (isAIAgentChatDelete.visible) {
-    return (
-      <>
-        <Trans
-          t={t}
-          i18nKey="DeleteAIChatDescription"
-          ns="DeleteDialog"
-          values={{ chatName: isAIAgentChatDelete.itemName }}
-          components={{
-            1: <Text key="chat-title" fontWeight={400} as="span" />,
-          }}
-        ></Trans>{" "}
-        {t("Common:WantToContinue")}
-      </>
-    );
-  }
-
   if (isTemplate) {
     return isSingle ? (
       <Trans
@@ -124,7 +106,7 @@ export const getDialogContent = (
   if (isRoomDelete) {
     return isSingle ? (
       <>
-        <Trans t={t} i18nKey="DeleteRoom" ns="DeleteDialog">
+        <Trans t={t} i18nKey="DeleteRoomConfirm" ns="DeleteDialog">
           The room <strong>\"{{ roomName: selection[0]?.title }}\"</strong>
           will be permanently deleted. All data and user accesses will be lost.
         </Trans>{" "}
@@ -148,7 +130,7 @@ export const getDialogContent = (
     if (isSingle) {
       return (
         <>
-          <Trans t={t} i18nKey="DeleteItemForever" ns="DeleteDialog">
+          <Trans t={t} i18nKey="DeleteItemForeverConfirm" ns="DeleteDialog">
             You are about to delete{" "}
             <strong>{{ name: selection[0]?.title }}</strong>.
           </Trans>{" "}

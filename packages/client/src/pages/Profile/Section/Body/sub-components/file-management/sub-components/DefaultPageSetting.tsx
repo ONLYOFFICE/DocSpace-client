@@ -35,6 +35,7 @@ import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
 import { EmployeeType, FolderType } from "@docspace/shared/enums";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { UserStore } from "@docspace/shared/store/UserStore";
+import { isMobile } from "@docspace/shared/utils";
 
 type Props = {
   defaultFolderType?: SettingsStore["defaultFolderType"];
@@ -112,7 +113,7 @@ const StartPageSettingComponent = ({
   return (
     <div className="default-page-setting">
       <Text lineHeight="20px" fontWeight={600}>
-        {t("FilesSettings:StartPageSettingTitle")}
+        {t("FilesSettings:DefaultHomepage")}
       </Text>
       <ComboBox
         options={startPageOptions}
@@ -121,6 +122,9 @@ const StartPageSettingComponent = ({
         scaled={false}
         scaledOptions
         displaySelectedOption
+        isDefaultMode={!isMobile()}
+        dataTestId="default_homepage_combobox"
+        dropDownTestId="default_homepage_combobox_dropdown"
       />
     </div>
   );
@@ -135,3 +139,4 @@ export const DefaultPageSetting = inject(
     return { defaultFolderType, updateDefaultFolderType, userType };
   },
 )(observer(StartPageSettingComponent));
+

@@ -42,6 +42,7 @@ import { TValidate } from "@docspace/ui-kit/components/email-input";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.left.react.svg?url";
 
 import { DEFAULT_EMAIL_TEXT } from "@/utils/constants";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 interface IEmailContainer {
 	emailFromInvitation?: string;
@@ -109,7 +110,7 @@ const EmailContainer = ({
 						defaults={DEFAULT_EMAIL_TEXT}
 						values={{
 							email: emailFromInvitation,
-							productName: t("Common:ProductName"),
+							productName: getBrandName("ProductName"),
 						}}
 						components={{
 							1: (
@@ -135,6 +136,7 @@ const EmailContainer = ({
 			hasError={isEmailErrorShow}
 			errorMessage={
 				errorText
+					// biome-ignore lint/plugin/no-dynamic-i18n-key: errorText is a runtime-provided key fragment composed with "Common:" prefix
 					? t(`Common:${errorText}`, errorText)
 					: t("Common:RequiredField")
 			} // TODO: Add wrong login server error

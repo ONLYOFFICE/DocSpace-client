@@ -36,8 +36,10 @@ import TogetherAiSvgUrl from "PUBLIC_DIR/images/ai-providers/together_ai.svg?url
 import XaiSvgUrl from "PUBLIC_DIR/images/ai-providers/xai.svg?url";
 
 import { ProviderType } from "../../api/ai/enums";
+import { getLogoUrl } from "../common";
+import { WhiteLabelLogoType } from "../../enums";
 
-export const getAiProviderIcon = (type: ProviderType) => {
+export const getAiProviderIcon = (type: ProviderType, isBase?: boolean) => {
   switch (type) {
     case ProviderType.Anthropic:
       return AnthropicSvgUrl;
@@ -55,7 +57,10 @@ export const getAiProviderIcon = (type: ProviderType) => {
       return XaiSvgUrl;
     case ProviderType.Google:
       return GoogleSvgUrl;
+    case ProviderType.PortalAi:
+      return "/logo.ashx?logotype=3";
     default:
-      return null;
+      return "/logo.ashx?logotype=3";
   }
 };
+

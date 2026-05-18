@@ -1,7 +1,6 @@
 {
   "CancellaionNotification": "Նորից չցուցադրել չեղարկման ծանուցումը",
-  "DisplayFileExtension": "Ցուցադրել ֆայլի ընդլայնումը ֆայլի անվան կողքին",
-  "OpenSameTab": "Նույն ներդիրում բացեք {{organizationName}} խմբագիրը",
-  "OriginalCopy": "Պահպանել ֆայլի պատճենը նաև բնօրինակ ձևաչափով",
-  "TrashMoveConfirmation": "Ցուցադրել ծանուցումը՝ տարրերը {{sectionName}} տեղափոխելիս"
+  "DefaultHomepage": "Ստանդարտ գլխավոր էջ",
+  "GroupByRooms": "Խմբավորել ըստ սենյակների",
+  "OpenSameTab": "Նույն ներդիրում բացեք {{organizationName}} խմբագիրը"
 }

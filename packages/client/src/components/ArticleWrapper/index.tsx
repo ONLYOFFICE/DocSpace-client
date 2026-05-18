@@ -30,12 +30,15 @@ import { useNavigate } from "react-router";
 import { Article, ArticleProps } from "@docspace/ui-kit/components/article";
 import { getUserType } from "@docspace/shared/utils/common";
 
+import { useSectionNavigation } from "../../contexts/SectionNavigationContext";
+
 import ArticlePluginItems from "./ArticlePluginItems/ArticlePluginItems";
 
 const ArticleWrapper = (props: ArticleProps) => {
   const navigate = useNavigate();
+  const { navigateBack } = useSectionNavigation();
 
-  return <Article {...props} navigate={navigate} />;
+  return <Article {...props} navigate={navigate} onBack={navigateBack} />;
 };
 
 export default inject<TStore>(
@@ -65,7 +68,7 @@ export default inject<TStore>(
 
     const { email, displayName } = user || {};
 
-    const isAdmin = user?.isAdmin;
+    const isAdmin = user?.isAdmin || user?.isOwner;
 
     const { isPrimaryProgressVisbile } = primaryProgressDataStore;
     const { isSecondaryProgressVisbile } = secondaryProgressDataStore;

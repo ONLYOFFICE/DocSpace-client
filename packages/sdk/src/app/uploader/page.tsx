@@ -28,6 +28,7 @@ import { getFilesSettings } from "@/api/files";
 import { logger } from "../../../logger.mjs";
 
 import UploaderClient from "./page.client";
+import type { UploaderFilesSettings } from "@docspace/ui-kit/uploader/Uploader.types";
 import { formatExtensions } from "./_utils";
 
 export default async function Page({
@@ -47,7 +48,7 @@ export default async function Page({
     }),
   );
 
-  const filesSettings = await getFilesSettings();
+  const filesSettings = (await getFilesSettings()) as UploaderFilesSettings;
 
   const { accept, shortText, fullText, badgeValue } = formatExtensions(
     baseConfig?.acceptExtensions,

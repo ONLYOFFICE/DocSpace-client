@@ -34,84 +34,86 @@ import { useState } from "react";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 type Props = {
-	setRemoveUserConfirmation: (
-		visible: boolean,
-		callback?: () => Promise<void>,
-	) => void;
-	removeUserConfirmation: {
-		visible: boolean;
-		callback: () => Promise<void> | null;
-	};
+  setRemoveUserConfirmation: (
+    visible: boolean,
+    callback?: () => Promise<void>,
+  ) => void;
+  removeUserConfirmation: {
+    visible: boolean;
+    callback: () => Promise<void> | null;
+  };
 };
 
 const RemoveUserConfirmationDialog = ({
-	removeUserConfirmation,
-	setRemoveUserConfirmation,
+  removeUserConfirmation,
+  setRemoveUserConfirmation,
 }: Props) => {
-	const { t, ready } = useTranslation(["People", "Common"]);
+  const { t, ready } = useTranslation(["People", "Common"]);
 
-	const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-	const onClose = () => {
-		if (isLoading) return;
-		setRemoveUserConfirmation(false);
-	};
+  const onClose = () => {
+    if (isLoading) return;
+    setRemoveUserConfirmation(false);
+  };
 
-	const onDelete = async () => {
-		if (removeUserConfirmation.callback) {
-			try {
-				setIsLoading(true);
-				await removeUserConfirmation.callback();
-			} catch (error) {
-				toastr.error(error as Error);
-				console.error(error);
-			} finally {
-				setIsLoading(false);
-				onClose();
-			}
-		}
-	};
+  const onDelete = async () => {
+    if (removeUserConfirmation.callback) {
+      try {
+        setIsLoading(true);
+        await removeUserConfirmation.callback();
+      } catch (error) {
+        toastr.error(error as Error);
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+        onClose();
+      }
+    }
+  };
 
-	return (
-		<ModalDialog
-			isLoading={!ready}
-			visible={removeUserConfirmation.visible}
-			onClose={onClose}
-		>
-			<ModalDialog.Header>{t("People:RemoveUser")}</ModalDialog.Header>
-			<ModalDialog.Body>
-				<Text>{t("People:RemoveUserConfirmationText")}</Text>
-			</ModalDialog.Body>
-			<ModalDialog.Footer>
-				<Button
-					id="delete-file-modal_submit"
-					key="OKButton"
-					label={t("Common:Remove")}
-					size={ButtonSize.normal}
-					primary
-					scale
-					onClick={onDelete}
-					isLoading={isLoading}
-				/>
-				<Button
-					id="delete-file-modal_cancel"
-					key="CancelButton"
-					label={t("Common:CancelButton")}
-					size={ButtonSize.normal}
-					scale
-					onClick={onClose}
-					isLoading={isLoading}
-				/>
-			</ModalDialog.Footer>
-		</ModalDialog>
-	);
+  return (
+    <ModalDialog
+      isLoading={!ready}
+      visible={removeUserConfirmation.visible}
+      onClose={onClose}
+    >
+      <ModalDialog.Header>{t("People:RemoveUser")}</ModalDialog.Header>
+      <ModalDialog.Body>
+        <Text>{t("People:RemoveUserConfirmationText")}</Text>
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          id="delete-file-modal_submit"
+          key="OKButton"
+          label={t("Common:Remove")}
+          size={ButtonSize.normal}
+          primary
+          scale
+          onClick={onDelete}
+          isLoading={isLoading}
+          testId="remove_user_confirmation_dialog_ok_button"
+        />
+        <Button
+          id="delete-file-modal_cancel"
+          key="CancelButton"
+          label={t("Common:CancelButton")}
+          size={ButtonSize.normal}
+          scale
+          onClick={onClose}
+          isLoading={isLoading}
+          testId="remove_user_confirmation_dialog_cancel_button"
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
+  );
 };
 
 export default inject<TStore>(({ dialogsStore }) => {
-	const { setRemoveUserConfirmation, removeUserConfirmation } = dialogsStore;
+  const { setRemoveUserConfirmation, removeUserConfirmation } = dialogsStore;
 
-	return {
-		setRemoveUserConfirmation,
-		removeUserConfirmation,
-	};
+  return {
+    setRemoveUserConfirmation,
+    removeUserConfirmation,
+  };
 })(observer(RemoveUserConfirmationDialog as React.FC));

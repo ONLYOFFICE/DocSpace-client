@@ -45,7 +45,7 @@ import {
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
-} from "@docspace/shared/utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 
 import {
   isLockedSharedRoom,
@@ -237,8 +237,6 @@ class FilesStore {
   isErrorRoomNotAvailable = false;
 
   isErrorAIAgentNotAvailable = false;
-
-  isErrorAccountNotAvailable = false;
 
   roomsController = null;
 
@@ -978,10 +976,6 @@ class FilesStore {
     this.isErrorAIAgentNotAvailable = state;
   };
 
-  setIsErrorAccountNotAvailable = (state) => {
-    this.isErrorAccountNotAvailable = state;
-  };
-
   setTempActionFilesIds = (tempActionFilesIds) => {
     this.tempActionFilesIds = tempActionFilesIds;
   };
@@ -1573,9 +1567,13 @@ class FilesStore {
 
       if (fileType === "file") {
         if (this.activeFiles.findIndex((f) => f.id == id) === -1) {
-          newSelections.push(
-            this.filesList.find((f) => f.id == id && !f.isFolder),
+          const selectableFile = this.filesList.find(
+            (f) => f.id == id && !f.isFolder,
           );
+
+          if (selectableFile) {
+            newSelections.push(selectableFile);
+          }
         }
       } else if (this.activeFolders.findIndex((f) => f.id == id) === -1) {
         const selectableFolder = this.filesList.find(
@@ -1842,7 +1840,11 @@ class FilesStore {
           filterData.searchArea = SearchArea.Active;
           const newUrl = getCategoryUrl(CategoryType.Chat, folderId);
 
-          history.pushState(null, "", `${newUrl}?${filterData.toUrlParams()}`);
+          history.replaceState(
+            null,
+            "",
+            `${newUrl}?${filterData.toUrlParams()}`,
+          );
         }
 
         if (newTotal > 0) {
@@ -2339,6 +2341,7 @@ class FilesStore {
 
               const isFiltered =
                 subjectId ||
+                filter.subjectOwnerId ||
                 filterValue ||
                 type ||
                 filter.provider ||
@@ -2509,6 +2512,7 @@ class FilesStore {
 
               const isFiltered =
                 subjectId ||
+                filter.subjectOwnerId ||
                 filterValue ||
                 type ||
                 filter.provider ||
@@ -2754,7 +2758,12 @@ class FilesStore {
 
       const extsCustomFilter =
         this.filesSettingsStore?.extsWebCustomFilterEditing || EMPTY_ARRAY;
+      const extsWebEdited =
+        this.filesSettingsStore?.extsWebEdited || EMPTY_ARRAY;
       const isExtsCustomFilter = extsCustomFilter.includes(item.fileExst);
+      const isExtsWebEdited = extsWebEdited.includes(item.fileExst);
+      const canShowCustomFilter =
+        canSetUpCustomFilter && isExtsCustomFilter && isExtsWebEdited;
 
       const isSharedWithMeFolderSection =
         this.treeFoldersStore.sharedWithMeFolderId === item.rootFolderId &&
@@ -2772,6 +2781,7 @@ class FilesStore {
         "pdf-view",
         "make-form",
         "edit-pdf",
+        "update-xlsx-data",
         "separator0",
         "ask-ai",
         "separator6",
@@ -2843,6 +2853,10 @@ class FilesStore {
         ]);
       }
 
+      if (!item.security?.UpdateXlsx) {
+        fileOptions = removeOptions(fileOptions, ["update-xlsx-data"]);
+      }
+
       if (this.publicRoomStore.isPublicRoom) {
         fileOptions = removeOptions(fileOptions, [
           "separator0",
@@ -2878,7 +2892,7 @@ class FilesStore {
         ]);
       }
 
-      if (!canSetUpCustomFilter || !isExtsCustomFilter) {
+      if (!canShowCustomFilter) {
         fileOptions = removeOptions(fileOptions, ["custom-filter"]);
       }
 
@@ -3432,6 +3446,7 @@ class FilesStore {
       "select",
       "open",
       // "separator0",
+      "update-xlsx-data",
       "sharing-settings",
       "copy-shared-link",
       "manage-links",
@@ -3463,6 +3478,10 @@ class FilesStore {
 
     if (item.external && item.isLinkExpired) {
       folderOptions = ["select", "separator0", "remove-shared-folder-or-file"];
+    }
+
+    if (!item.security?.UpdateXlsx) {
+      folderOptions = removeOptions(folderOptions, ["update-xlsx-data"]);
     }
 
     if (!isSharedWithMeFolderSection) {
@@ -5135,6 +5154,7 @@ class FilesStore {
 
     const {
       subjectId,
+      subjectOwnerId,
       filterValue,
       type,
       withSubfolders: withRoomsSubfolders,
@@ -5163,6 +5183,7 @@ class FilesStore {
           withRoomsSubfolders ||
           searchInContentRooms ||
           subjectId ||
+          subjectOwnerId ||
           tags ||
           withoutTags ||
           quotaFilter

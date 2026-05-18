@@ -2,6 +2,12 @@
 setlocal enabledelayedexpansion
 REM Translation App Runner for Windows
 REM This script runs both the backend and frontend of the translation app
+REM Usage: run.translation-app.bat [--skip-meta]
+
+set SKIP_META=false
+for %%a in (%*) do (
+    if "%%a"=="--skip-meta" set SKIP_META=true
+)
 
 echo Starting Translation App...
 echo.
@@ -40,25 +46,29 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
-echo Running scripts...
-cd /d "%BACKEND_DIR%"
+if "%SKIP_META%"=="true" (
+    echo Skipping .meta files generation (--skip-meta)
+) else (
+    echo Running scripts...
+    cd /d "%BACKEND_DIR%"
 
-call npm run generate-metadata
-if %errorlevel% neq 0 (
-    echo Failed to run generate-metadata.
-    exit /b 1
-)
+    call npm run generate-metadata
+    if %errorlevel% neq 0 (
+        echo Failed to run generate-metadata.
+        exit /b 1
+    )
 
-call npm run save-meta-keys-usage
-if %errorlevel% neq 0 (
-    echo Failed to run save-meta-keys-usage.
-    exit /b 1
-)
+    call npm run save-meta-keys-usage
+    if %errorlevel% neq 0 (
+        echo Failed to run save-meta-keys-usage.
+        exit /b 1
+    )
 
-call npm run generate-auto-comments-metadata
-if %errorlevel% neq 0 (
-    echo Failed to run generate-auto-comments-metadata.
-    exit /b 1
+    call npm run generate-auto-comments-metadata
+    if %errorlevel% neq 0 (
+        echo Failed to run generate-auto-comments-metadata.
+        exit /b 1
+    )
 )
 
 echo.

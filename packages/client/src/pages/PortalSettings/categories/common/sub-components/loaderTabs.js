@@ -24,28 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { mobileMore } from "@docspace/shared/utils";
 
-const StyledLoader = styled.div`
-  margin-top: -4px;
-
-  .loader {
-    padding-inline-end: 4px;
-  }
-
-  @media ${mobileMore} {
-    margin-top: -9px;
-  }
-`;
+import styles from "./loaderTabs.module.scss";
 
 const LoaderTabs = () => {
   return (
-    <StyledLoader>
-      <RectangleSkeleton width="100px" height="28px" className="loader" />
+    <div className={styles.loader}>
+      <RectangleSkeleton
+        width="100px"
+        height="28px"
+        className={styles.loaderItem}
+      />
       <RectangleSkeleton width="100px" height="28px" />
-    </StyledLoader>
+    </div>
   );
 };
 

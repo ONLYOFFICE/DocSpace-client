@@ -161,12 +161,6 @@ class DialogsStore {
 
   isRoomDelete = false;
 
-  isAIAgentChatDelete = {
-    visible: false,
-    itemName: "",
-    onDeleteAction: () => {},
-  };
-
   convertItem = null;
 
   formCreationInfo = null;
@@ -347,13 +341,18 @@ class DialogsStore {
 
   openInCreateMode = false;
 
-  roomGroupingDialogVisible = false;
-
   addRoomToGroupDialogVisible = false;
 
   addRoomToGroupId = null;
 
   pauseSubmissionsDialogVisible = false;
+
+  askAIConnectDialogVisible = false;
+
+  /**
+   * @type {((res: string) => void) | null}
+   */
+  askAIConnectDialogCallback = null;
 
   /**
    * @type {(res:boolean)=>void | null}
@@ -361,6 +360,13 @@ class DialogsStore {
   pauseSubmissionsDialogCallback = null;
 
   roomGroups = [];
+
+  syncDbData = {
+    operationId: null,
+    forms: [],
+  };
+
+  isSyncDbPanelVisible = false;
 
   constructor(
     authStore,
@@ -402,10 +408,6 @@ class DialogsStore {
       file:
         file === null ? null : (file ?? this.aiAgentSelectorDialogProps.file),
     };
-  };
-
-  setIsAIAgentChatDelete = ({ visible, itemName, onDeleteAction }) => {
-    this.isAIAgentChatDelete = { visible, itemName, onDeleteAction };
   };
 
   setEditRoomDialogProps = (props) => {
@@ -1146,10 +1148,6 @@ class DialogsStore {
     this.openInCreateMode = openInCreateMode;
   };
 
-  setRoomGroupingDialogVisible = (visible) => {
-    this.roomGroupingDialogVisible = visible;
-  };
-
   setAddRoomToGroupDialogVisible = (visible, groupId = null) => {
     this.addRoomToGroupDialogVisible = visible;
     this.addRoomToGroupId = groupId;
@@ -1188,6 +1186,19 @@ class DialogsStore {
 
   deleteRoomGroup = async (groupId) => {
     await deleteRoomGroup(groupId);
+  };
+
+  setAskAIConnectDialogVisible = (visible, callback = null) => {
+    this.askAIConnectDialogVisible = visible;
+    this.askAIConnectDialogCallback = callback;
+  };
+
+  setSyncDbForms = (data) => {
+    this.syncDbData = data;
+  };
+
+  setIsSyncDbPanelVisible = (visible) => {
+    this.isSyncDbPanelVisible = visible;
   };
 }
 

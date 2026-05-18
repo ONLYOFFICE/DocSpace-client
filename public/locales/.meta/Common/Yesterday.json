@@ -3,11 +3,12 @@
   "content": "Yesterday",
   "content_en_sha1_hash": "da24830f1f7072d55862afb6969c1a4c433ac056",
   "created_at": "2025-05-19T21:30:49.639Z",
-  "updated_at": "2026-02-19T13:36:32.281Z",
+  "updated_at": "2026-04-12T08:18:57.520Z",
   "comment": {
-    "text": "This translation key is used to display a generic date phrase indicating \"yesterday\" when comparing two dates in a week-by-week or month-to-month context. It appears on a component that displays historical data, such as a calendar or information panel, and is triggered when the current date matches the previous date.",
+    "text": "This is a short label indicating the previous day. It appears in the \"New Files\" panel and in the file history to categorize recent activity.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:26:30.483Z"
+    "updated_at": "2026-04-11T20:38:44.760Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -21,12 +22,6 @@
       "line_number": 71,
       "context": "const halfYearAgo = subtractFromDate(currentDate, 6, \"months\");\n const yesterday = subtractFromDate(currentDate, 1, \"days\");\n \n if (isAfter(given, weekAgo)) {\n if (isSameDay(currentDate, given)) return t(\"Common:Today\");\n if (isSameDay(yesterday, given)) return t(\"Common:Yesterday\");\n \n const weekday = getWeekdayName(given.weekday, \"long\", locale);\n return weekday.charAt(0).toUpperCase() + weekday.slice(1);\n }",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/shared/components/chat/utils/index.ts",
-      "line_number": 104,
-      "context": "export const getChateTranslationDate = (t: TTranslation, value: string) => {\n return value === \"today\"\n ? t(\"Common:Today\")\n : value === \"yesterday\"\n ? t(\"Common:Yesterday\")\n : \"\";\n };\n \n /**\n * Formats a JavaScript object into a nicely formatted JSON string with markdown code block syntax",
-      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -123,13 +118,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation \"어제\" is Korean, not Latvian. 'Yesterday' in Latvian is 'Vakar'.",
-          "suggestion": "Vakar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

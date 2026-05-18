@@ -35,6 +35,10 @@ $font-family-base:
 
 @use "../../../../public/css/fonts.css";
 
+body.no-select {
+  user-select: none;
+}
+
 html,
 body {
   height: 100%;

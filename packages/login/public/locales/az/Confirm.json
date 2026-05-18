@@ -20,6 +20,8 @@
   "GetCode": "Kodu əldə edin",
   "GetSuitableApp": "Uyğun bir proqram əldə edin",
   "GetSuitableAppDescription": "Google Authenticator kimi uyğun bir proqramdan <1>Android</1> və <4>iOS</4> cihazları üçün, və ya Authenticator <8>Windows Phone</8> üçün istifadə edin.",
+  "InviteLinkQuotaErrorBody": "Limit aşıldığı üçün link vasitəsilə qeydiyyat artıq mümkün deyil.",
+  "InviteQuotaErrorCustomizedBody": "Siz 10 saniyə ərzində <1>Giriş</1> səhifəsinə yönləndiriləcəksiniz.",
   "LoginRegistryButton": "Qoşulun",
   "Newsletter": "{{organizationName}} xəbər bülleteninə abunə olmaq istəyirəm",
   "PassworResetTitle": "İndi yeni şifrə yarada bilərsiniz.",

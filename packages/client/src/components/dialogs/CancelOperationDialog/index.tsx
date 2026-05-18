@@ -102,12 +102,13 @@ const CancelOperationDialog: React.FC<ICancelOperationDialogProps> = ({
             label={t("Common:DontShowMessage")}
             isChecked={isChecked}
             onChange={onChangeCheckbox}
+            dataTestId="cancel_operation_dont_show_checkbox"
           />
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
-        <Button label={t("Common:Yes")} onClick={onConfirm} primary scale />
-        <Button label={t("Common:No")} onClick={onClose} scale />
+        <Button label={t("Common:Yes")} onClick={onConfirm} primary scale testId="cancel_operation_yes_button" />
+        <Button label={t("Common:No")} onClick={onClose} scale testId="cancel_operation_no_button" />
       </ModalDialog.Footer>
     </ModalDialog>
   );

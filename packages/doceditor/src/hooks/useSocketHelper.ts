@@ -31,7 +31,7 @@ import React from "react";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
-} from "@docspace/shared/utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { FolderType } from "@docspace/shared/enums";
 import { EDITOR_ID } from "@docspace/shared/constants";

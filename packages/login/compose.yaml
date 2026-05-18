@@ -15,3 +15,50 @@ services:
       - ../shared/__mocks__:/app/packages/shared/__mocks__
       - ./playwright.config.ts:/app/packages/login/playwright.config.ts
       - ../../playwright-report/login:/app/playwright-report/login
+  # Dev mode: mount source code so you can iterate without rebuilding the image.
+  # Rebuilds dist inside the container on each run.
+  tests-dev:
+    image: login-tests
+    ports:
+      - "5111:5111"
+    entrypoint: ["/bin/bash", "/app/packages/login/dev-entrypoint.sh"]
+    volumes:
+      # Source code
+      - ../../packages/login/src:/app/packages/login/src
+      - ../../packages/login/public:/app/packages/login/public
+      - ../../packages/login/next.config.js:/app/packages/login/next.config.js
+      - ../../packages/login/tsconfig.json:/app/packages/login/tsconfig.json
+      - ../../packages/login/scripts:/app/packages/login/scripts
+      - ../../packages/login/dev-entrypoint.sh:/app/packages/login/dev-entrypoint.sh
+      # Shared sources
+      - ../../packages/shared/api:/app/packages/shared/api
+      - ../../packages/shared/components:/app/packages/shared/components
+      - ../../packages/shared/constants:/app/packages/shared/constants
+      - ../../packages/shared/dialogs:/app/packages/shared/dialogs
+      - ../../packages/shared/enums:/app/packages/shared/enums
+      - ../../packages/shared/hooks:/app/packages/shared/hooks
+      - ../../packages/shared/pages:/app/packages/shared/pages
+      - ../../packages/shared/selectors:/app/packages/shared/selectors
+      - ../../packages/shared/skeletons:/app/packages/shared/skeletons
+      - ../../packages/shared/store:/app/packages/shared/store
+      - ../../packages/shared/themes:/app/packages/shared/themes
+      - ../../packages/shared/types:/app/packages/shared/types
+      - ../../packages/shared/utils:/app/packages/shared/utils
+      # UI-kit sources
+      - ../../libs/ui-kit/components:/app/libs/ui-kit/components
+      - ../../libs/ui-kit/assets:/app/libs/ui-kit/assets
+      - ../../libs/ui-kit/constants:/app/libs/ui-kit/constants
+      - ../../libs/ui-kit/context:/app/libs/ui-kit/context
+      - ../../libs/ui-kit/enums:/app/libs/ui-kit/enums
+      - ../../libs/ui-kit/hooks:/app/libs/ui-kit/hooks
+      - ../../libs/ui-kit/styles:/app/libs/ui-kit/styles
+      - ../../libs/ui-kit/types:/app/libs/ui-kit/types
+      - ../../libs/ui-kit/utils:/app/libs/ui-kit/utils
+      # Public assets
+      - ../../public:/app/public
+      # Tests, mocks, config
+      - ./__tests__:/app/packages/login/__tests__
+      - ../../packages/shared/__mocks__:/app/packages/shared/__mocks__
+      - ./playwright.config.ts:/app/packages/login/playwright.config.ts
+      # Reports output
+      - ../../playwright-report/login:/app/playwright-report/login

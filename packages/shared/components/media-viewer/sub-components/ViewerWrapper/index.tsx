@@ -66,6 +66,7 @@ const ViewerWrapper = memo(
       onDeleteClick,
       onDownloadClick,
       onSetSelectionFile,
+      pluginViewerContent,
     } = props;
 
     // const { interfaceDirection } = useTheme();
@@ -192,6 +193,7 @@ const ViewerWrapper = memo(
         onDownloadClick={onDownloadClick}
         onSetSelectionFile={onSetSelectionFile}
         generateContextMenu={generateContextMenu}
+        pluginViewerContent={pluginViewerContent}
       />
     );
   },
@@ -201,3 +203,4 @@ const ViewerWrapper = memo(
 ViewerWrapper.displayName = "ViewerWrapper";
 
 export { ViewerWrapper };
+

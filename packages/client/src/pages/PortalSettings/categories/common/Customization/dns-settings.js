@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useEffect, useCallback } from "react";
-import { useTheme } from "styled-components";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { withTranslation } from "react-i18next";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { TextInput } from "@docspace/ui-kit/components/text-input";

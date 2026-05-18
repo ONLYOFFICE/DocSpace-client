@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import { useEventLog } from "../sub-components/useEventLog";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
@@ -36,6 +37,7 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 
 import SDK from "@onlyoffice/docspace-sdk-js";
+import { EventLogBlock } from "../sub-components/EventLogBlock";
 
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
 import { WidthSetter } from "../sub-components/WidthSetter";
@@ -65,6 +67,17 @@ import {
   FilesSelectorInputWrapper,
 } from "./StyledPresets";
 
+const VIEWER_EVENT_TYPES = [
+  "onAppReady",
+  "onAppError",
+  "onAuthSuccess",
+  "onSignOut",
+  "onNoAccess",
+  "onNotFound",
+  "onContentReady",
+  "onEditorCloseCallback",
+];
+
 const Viewer = (props) => {
   const { t, theme } = props;
 
@@ -82,13 +95,28 @@ const Viewer = (props) => {
     height: `${defaultSize.height}${defaultDimension.label}`,
     frameId: "ds-frame",
     init: false,
+    events: {
+      onAppReady: () => {},
+      onAppError: () => {},
+      onAuthSuccess: () => {},
+      onSignOut: () => {},
+      onNoAccess: () => {},
+      onNotFound: () => {},
+      onContentReady: () => {},
+      onEditorCloseCallback: () => {},
+    },
   });
+
+  const [eventLog, onClearEventLog] = useEventLog(config.frameId);
 
   const fromPackage = source === sdkSource.Package;
 
   const sdkScriptUrl = getSdkScriptUrl(version);
 
-  const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
+  const sdk = useMemo(
+    () => (fromPackage ? new SDK() : window.DocSpace.SDK),
+    [fromPackage],
+  );
 
   const destroyFrame = () => {
     sdk?.frames[config.frameId]?.destroyFrame();
@@ -129,7 +157,7 @@ const Viewer = (props) => {
     return () => {
       destroyFrame();
     };
-  });
+  }, [config]);
 
   const onChangeFileId = async (file) => {
     const newConfig = {
@@ -151,29 +179,37 @@ const Viewer = (props) => {
   };
 
   const preview = (
-    <Frame
-      width={
-        config.id !== undefined && config.width.includes("px")
-          ? config.width
-          : undefined
-      }
-      height={
-        config.id !== undefined && config.height.includes("px")
-          ? config.height
-          : undefined
-      }
-      targetId={config.frameId}
-    >
-      {config.id !== undefined ? (
-        <div id={config.frameId} />
-      ) : (
-        <EmptyIframeContainer
-          text={t("FilePreview")}
-          width="100%"
-          height="100%"
-        />
-      )}
-    </Frame>
+    <>
+      <Frame
+        width={
+          config.id !== undefined && config.width.includes("px")
+            ? config.width
+            : undefined
+        }
+        height={
+          config.id !== undefined && config.height.includes("px")
+            ? config.height
+            : undefined
+        }
+        targetId={config.frameId}
+      >
+        {config.id !== undefined ? (
+          <div id={config.frameId} />
+        ) : (
+          <EmptyIframeContainer
+            text={t("FilePreview")}
+            width="100%"
+            height="100%"
+          />
+        )}
+      </Frame>
+      <EventLogBlock
+        t={t}
+        events={eventLog}
+        onClear={onClearEventLog}
+        eventTypes={VIEWER_EVENT_TYPES}
+      />
+    </>
   );
 
   return (

@@ -48,16 +48,17 @@ import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 
 import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 import { modelCache } from "./modelCache";
+import { ProviderType } from "@docspace/shared/api/ai/enums";
 
 type ModelSettingsProps = {
   agentParams: TAgentParams;
-  modelAliases?: TAIConfig["modelAliases"];
+  systemAiEnabled?: TAIConfig["systemAiEnabled"];
   setAgentParams: (value: Partial<TAgentParams>) => void;
 };
 
 const ModelSettings = ({
   agentParams,
-  modelAliases,
+  systemAiEnabled,
   setAgentParams,
 }: ModelSettingsProps) => {
   const { t } = useTranslation(["AIRoom", "Common"]);
@@ -82,6 +83,10 @@ const ModelSettings = ({
 
   const [isProvidersLoading, setIsProvidersLoading] = React.useState(false);
   const [isProvidersFetched, setIsProvidersFetched] = React.useState(false);
+  const [isModelsLoading, setIsModelsLoading] = React.useState(false);
+  const [isModelsFetched, setIsModelsFetched] = React.useState(false);
+  const [hasProviderBeenSwitched, setHasProviderBeenSwitched] =
+    React.useState(false);
 
   const prevSelectedModel = React.useRef<TModel | null>(null);
 
@@ -118,10 +123,17 @@ const ModelSettings = ({
           getDefaultProvider(),
         ]);
 
-        const enabledProviders = p.filter((pr) => !pr.needReset);
+        const enabledProviders = p
+          .filter((pr) => !pr.needReset)
+          .filter(
+            (pr) =>
+              pr.type !== ProviderType.PortalAi ||
+              (pr.type === ProviderType.PortalAi && systemAiEnabled),
+          );
         setProviders(enabledProviders);
         modelCache.setProviders(p);
         modelCache.setDefaultProvider(defaultProvider);
+        modelCache.setAiServiceEnable(systemAiEnabled ?? false);
 
         setIsProvidersFetched(true);
 
@@ -150,7 +162,11 @@ const ModelSettings = ({
       }
     };
 
-    if (modelCache.getProviders()) return;
+    if (
+      modelCache.getProviders() &&
+      systemAiEnabled === modelCache.isAiServiceEnable()
+    )
+      return;
 
     if (providers.length || isProvidersLoading || isProvidersFetched) return;
 
@@ -160,6 +176,7 @@ const ModelSettings = ({
     providers.length,
     isProvidersLoading,
     isProvidersFetched,
+    systemAiEnabled,
   ]);
 
   React.useEffect(() => {
@@ -176,15 +193,14 @@ const ModelSettings = ({
 
           if (!model) {
             const preferredModel = m.find((mo) => mo.modelId === defaultModel);
-            setSelectedModel(preferredModel || m[0]);
-
+            setSelectedModel(preferredModel || m[0] || null);
             return;
           }
 
           setSelectedModel(model);
         } else {
           const preferredModel = m.find((mo) => mo.modelId === defaultModel);
-          setSelectedModel(preferredModel || m[0]);
+          setSelectedModel(preferredModel || m[0] || null);
         }
       } catch (e) {
         toastr.error(e as string);
@@ -210,7 +226,7 @@ const ModelSettings = ({
         if (model) {
           setSelectedModel(model);
         } else {
-          setSelectedModel(cachedModels[0]);
+          setSelectedModel(cachedModels[0] ?? null);
         }
       } else {
         const preferredModelId =
@@ -220,15 +236,24 @@ const ModelSettings = ({
 
         const preferredModel =
           cachedModels.find((mo) => mo.modelId === preferredModelId) ??
-          cachedModels[0];
+          cachedModels[0] ??
+          null;
 
         setSelectedModel(preferredModel);
       }
+
+      setIsModelsLoading(false);
+      setIsModelsFetched(true);
       return;
     }
 
     setSelectedModel(null);
-    fetchModels();
+    setIsModelsLoading(true);
+    setIsModelsFetched(false);
+    fetchModels().finally(() => {
+      setIsModelsLoading(false);
+      setIsModelsFetched(true);
+    });
   }, [selectedProvider?.id]);
 
   const providerOptions = React.useMemo(() => {
@@ -261,6 +286,9 @@ const ModelSettings = ({
       setSelectedProvider(provider);
       setSelectedModel(null);
       setError(null);
+      setIsModelsLoading(true);
+      setIsModelsFetched(false);
+      setHasProviderBeenSwitched(true);
     },
     [providers, selectedProvider.id],
   );
@@ -269,22 +297,22 @@ const ModelSettings = ({
     return models.map((model) => ({
       key: model.modelId,
       value: model.modelId,
-      label: modelAliases?.[model.modelId] ?? model.modelId,
+      label: model.alias ?? model.modelId,
     }));
-  }, [models, modelAliases]);
+  }, [models]);
 
   const modelSelectedOptions = React.useMemo(() => {
     return selectedModel
       ? {
           key: selectedModel.modelId,
           value: selectedModel.modelId,
-          label: modelAliases?.[selectedModel.modelId] ?? selectedModel.modelId,
+          label: selectedModel.alias ?? selectedModel.modelId,
         }
       : {
           key: "empty-selected-option",
-          label: t("Common:NoModelsFound"),
+          label: isModelsLoading ? "" : t("Common:NoModelsFound"),
         };
-  }, [selectedModel, modelAliases, t]);
+  }, [selectedModel, isModelsLoading, t]);
 
   const onSelectModel = React.useCallback(
     (option: TOption) => {
@@ -322,12 +350,19 @@ const ModelSettings = ({
     prevSelectedModel.current = selectedModel;
   }, [selectedModel, setAgentParams, error]);
 
+  const isModelLoading =
+    isModelsLoading ||
+    (!isModelsFetched &&
+      !selectedModel?.modelId &&
+      !error &&
+      !hasProviderBeenSwitched);
+
   return (
     <StyledParam increaseGap>
       <div className=" set_room_params-info">
         <div>
           <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
-            {t("Model", {
+            {t("AIProviderAndModel", {
               aiProvider: t("Common:AIProvider"),
             })}
           </Text>
@@ -375,31 +410,31 @@ const ModelSettings = ({
               onSelect={onSelectProvider}
               scaled
               scaledOptions
+              dropDownMaxHeight={providerOptions.length > 7 ? 300 : undefined}
               noBorder={false}
               className={classNames("ai-combobox provider-combobox", {
                 "has-error": !!error,
               })}
               displaySelectedOption
+              dataTestId="create_agent_provider_combobox"
             />
           </FieldContainer>
         )}
-        {!selectedModel && !error ? (
-          <RectangleSkeleton width="100%" height="32px" />
-        ) : (
-          <ComboBox
-            options={modelOptions}
-            selectedOption={modelSelectedOptions}
-            onSelect={onSelectModel}
-            scaled
-            scaledOptions
-            dropDownMaxHeight={modelOptions.length > 7 ? 300 : undefined}
-            isDefaultMode
-            className="ai-combobox"
-            displaySelectedOption
-            dropDownClassName="not-selectable"
-            isDisabled={!!error}
-          />
-        )}
+        <ComboBox
+          options={modelOptions}
+          selectedOption={modelSelectedOptions}
+          onSelect={onSelectModel}
+          scaled
+          scaledOptions
+          dropDownMaxHeight={modelOptions.length > 7 ? 300 : undefined}
+          isDefaultMode
+          className="ai-combobox"
+          displaySelectedOption
+          dropDownClassName="not-selectable"
+          isDisabled={!!error || isModelLoading || !models.length}
+          isLoading={isModelLoading}
+          dataTestId="create_agent_model_combobox"
+        />
       </div>
     </StyledParam>
   );

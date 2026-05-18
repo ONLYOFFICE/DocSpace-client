@@ -27,8 +27,8 @@
 import { makeAutoObservable } from "mobx";
 
 import type { Nullable } from "@docspace/shared/types";
-import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
-import type { TChatPlaylistImage } from "@docspace/shared/components/chat/Chat.types";
+import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
+import type { TChatPlaylistImage } from "@docspace/ui-kit/ai-agent/chat/Chat.types";
 
 class AiRoomStore {
   roomId: Nullable<number> = null;

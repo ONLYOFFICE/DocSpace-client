@@ -40,7 +40,7 @@ import {
 } from "@docspace/ui-kit/components/text-input";
 import { PasswordInput } from "@docspace/ui-kit/components/password-input";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { getOAuthToken } from "../../utils/common";
+import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
 import { saveSettingsThirdParty } from "../../api/files";
 import type { ConnectDialogProps } from "./ConnectDialog.types";
 

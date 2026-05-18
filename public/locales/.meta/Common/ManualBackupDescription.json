@@ -3,16 +3,17 @@
   "content": "Use this option if you want to get all data contained in the space as a file.",
   "content_en_sha1_hash": "72b06ec623764ca1cdcbbdbe125f16fc48240dee",
   "created_at": "2025-05-26T07:15:44.992Z",
-  "updated_at": "2026-02-19T13:36:33.209Z",
+  "updated_at": "2026-04-11T20:48:59.124Z",
   "comment": {
-    "text": "Use this option to download all data contained within a space as a file. This setting is typically found on backup and restore options in a space management interface.",
+    "text": "This is a description displayed on the manual backup page, explaining that this option allows users to download all space data as a file.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:04:40.443Z"
+    "updated_at": "2026-04-11T20:48:59.124Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 446,
+      "line_number": 447,
       "context": "className={classNames(\n styles.backupModulesDescription,\n \"backup_modules-description\",\n )}\n >\n {t(\"Common:ManualBackupDescription\")}\n </Text>\n {!isManagement ? (\n <Link\n className={classNames(styles.linkLearnMore, \"link-learn-more\")}\n href={dataBackupUrl}",
       "module": "/packages/shared"
     }
@@ -199,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

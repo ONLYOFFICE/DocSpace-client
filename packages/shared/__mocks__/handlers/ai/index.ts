@@ -32,6 +32,7 @@ import {
   aiProvidersDeleteHandler,
   aiProvidersPostHandler,
   aiProvidersPutHandler,
+  aiProvidersPreviewHandler,
 } from "./providers";
 import {
   aiServerHandler,
@@ -44,7 +45,7 @@ import {
   aiServersDeleteHandler,
   aiServersAvailableHandler,
 } from "./servers";
-import { aiChatHandler, aiChatPutHandler } from "./chat";
+import { aiChatHandler, aiChatPutHandler, aiChatDeleteHandler } from "./chat";
 import {
   aiChatMessagesExportHandler,
   aiChatMessagesHandler,
@@ -52,7 +53,10 @@ import {
 import { aiMessagesExportHandler } from "./messages";
 import { aiProvidersAvailableHandler } from "./providersAvailable";
 import { aiRoomsChatsHandler, aiRoomsChatsStreamHandler } from "./roomsChats";
-import { aiRoomsChatsConfigHandler } from "./roomsChatsConfig";
+import {
+  aiRoomsChatsConfigHandler,
+  aiRoomsChatsConfigPutHandler,
+} from "./roomsChatsConfig";
 import { aiRoomsServersHandler } from "./roomsServers";
 import {
   aiVectorizationGetHandler,
@@ -69,6 +73,7 @@ export {
   aiProvidersDeleteHandler,
   aiProvidersPostHandler,
   aiProvidersPutHandler,
+  aiProvidersPreviewHandler,
   aiServerHandler,
   aiServersGetHandler,
   aiServersPostHandler,
@@ -76,6 +81,7 @@ export {
   aiServersAvailableHandler,
   aiChatHandler,
   aiChatPutHandler,
+  aiChatDeleteHandler,
   aiChatMessagesExportHandler,
   aiChatMessagesHandler,
   aiMessagesExportHandler,
@@ -83,6 +89,7 @@ export {
   aiRoomsChatsHandler,
   aiRoomsChatsStreamHandler,
   aiRoomsChatsConfigHandler,
+  aiRoomsChatsConfigPutHandler,
   aiRoomsServersHandler,
   aiVectorizationGetHandler,
   aiVectorizationPutHandler,
@@ -101,6 +108,7 @@ export const aiHandlers = (port: string) => [
   aiProvidersDeleteHandler(port),
   aiProvidersPostHandler(port),
   aiProvidersPutHandler(port),
+  aiProvidersPreviewHandler(port),
   aiServersGetHandler(port),
   aiServersPostHandler(port),
   aiServersDeleteHandler(port),
@@ -110,6 +118,7 @@ export const aiHandlers = (port: string) => [
   aiChatMessagesHandler(port),
   aiChatHandler(port),
   aiChatPutHandler(port),
+  aiChatDeleteHandler(port),
   aiMessagesExportHandler(port),
   aiProvidersAvailableHandler(port),
   aiRoomsChatsHandler(port),

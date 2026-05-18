@@ -1,0 +1,189 @@
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+.oAuthContainer {
+  width: 100%;
+
+  :global(.ec-subheading) {
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  :global(.guide-link) {
+    color: var(--webhooks-link-color);
+    margin-bottom: 20px;
+
+    &:hover {
+      color: var(--webhooks-link-color);
+    }
+  }
+}
+
+.styledContainer {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 16px;
+}
+
+.styledPreviewContainer {
+  width: 100%;
+  height: 152px;
+  box-sizing: border-box;
+  border: var(--oauth-preview-border);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  :global(.social-button) {
+    max-width: fit-content;
+    padding: 11px 16px;
+    box-sizing: border-box;
+    display: flex;
+    gap: 16px;
+
+    :global(.iconWrapper) {
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
+
+.styledBlocksContainer {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  :global(.block-container) {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+.styledInfoContainer {
+  width: 100%;
+  height: fit-content;
+  box-sizing: border-box;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+
+  :global(.client-block) {
+    width: 100%;
+    height: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+
+    :global(.client-block__info) {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+
+      :global(.client-block__info-logo) {
+        width: 32px;
+        height: 32px;
+        max-width: 32px;
+        max-height: 32px;
+        border-radius: 3px;
+      }
+    }
+  }
+
+  :global(.description) {
+    max-height: var(--description-max-height, 100%);
+    overflow: hidden;
+    margin-bottom: var(--description-margin-bottom, 0);
+  }
+
+  :global(.desc-link) {
+    color: var(--oauth-info-desc-link-color);
+  }
+
+  :global(.block-header) {
+    margin-top: 20px;
+    margin-bottom: 12px;
+    color: var(--oauth-info-block-header-color);
+  }
+
+  :global(.creator-block) {
+    margin: 8px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+  :global(.privacy-block) {
+    display: flex;
+
+    :global(.separator) {
+      display: inline-block;
+      margin-top: 2px;
+      height: 16px;
+      width: 1px;
+      margin: 0 8px;
+      background: var(--oauth-info-separator-color);
+    }
+  }
+
+  :global(.property-tag_list) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+
+    :global(.property-tag) {
+      max-width: 195px;
+      margin: 0;
+      background: var(--info-panel-tag-bg);
+
+      p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
+
+.styledGenerateDevelopTokenContainer {
+  :global(.dates) {
+    margin-top: 16px;
+    margin-bottom: 0;
+  }
+}

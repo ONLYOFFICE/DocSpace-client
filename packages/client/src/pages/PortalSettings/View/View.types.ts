@@ -32,13 +32,14 @@ export type TView =
   | "integration"
   | "data-import"
   | "management"
-  | "developer-tools"
   | "delete-data"
   | "payments"
   | "bonus"
   | "services"
   | "ai-settings"
   | "ai-services"
+  | "backup-service"
+  | "disk-storage"
   | "";
 
 export type ViewProps = {

@@ -40,7 +40,7 @@ This repository contains the **frontend** for [ONLYOFFICE DocSpace](https://gith
 - **State Management:** MobX 6
 - **Styling:** CSS/SASS, Styled-Components 5
 - **Internationalization:** i18next
-- **Bundler:** Webpack 5
+- **Bundler:** Vite 6 (client), Webpack 5 (Next.js apps)
 - **Server Rendering:** Next.js
 - **Testing:** Vitest, Playwright
 - **Linting:** Biome
@@ -74,7 +74,7 @@ packages/
 - Third-party integrations
 - Settings and preferences
 
-**Tech Stack:** Webpack 5, React 19, MobX 6
+**Tech Stack:** Vite 6, React 19, MobX 6
 **Entry Point:** `packages/client/src/index.tsx`
 
 #### `@docspace/login` - Authentication
@@ -87,7 +87,7 @@ packages/
 - Password reset and recovery
 - User registration (when enabled)
 
-**Tech Stack:** Webpack 5, React 19
+**Tech Stack:** Next.js, React 19
 **Entry Point:** `packages/login/src/index.tsx`
 
 #### `@docspace/doceditor` - Document Editor
@@ -100,7 +100,7 @@ packages/
 - Editor plugins support
 - Mobile-responsive interface
 
-**Tech Stack:** Webpack 5, React 19, ONLYOFFICE Docs API
+**Tech Stack:** Next.js, React 19, ONLYOFFICE Docs API
 **Entry Point:** `packages/doceditor/src/index.tsx`
 
 #### `@docspace/management` - Admin Panel
@@ -113,7 +113,7 @@ packages/
 - Tenant management (SaaS mode)
 - Usage statistics
 
-**Tech Stack:** Webpack 5, React 19
+**Tech Stack:** Next.js, React 19
 **Entry Point:** `packages/management/src/index.tsx`
 
 #### `@docspace/sdk` - JavaScript SDK
@@ -153,7 +153,7 @@ packages/shared/
 ### Build System
 
 - **Build Tool:** Nx with custom executors
-- **Module Bundler:** Webpack 5 (apps), Rollup (SDK)
+- **Module Bundler:** Vite 6 (client), Next.js/Webpack (login, doceditor, management), Rollup (SDK)
 - **Cache:** Nx computation caching for fast rebuilds
 - **Parallel Builds:** All packages can build independently
 

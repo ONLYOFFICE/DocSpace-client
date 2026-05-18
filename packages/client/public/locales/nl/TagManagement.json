@@ -1,0 +1,8 @@
+{
+  "ChangesToTag": "Wijzigingen aan deze tag zullen alle ruimtes beïnvloeden waar deze wordt gebruikt.",
+  "DeleteTag": "Verwijder tag",
+  "DeleteTagCannotBeUndone": "Deze actie kan niet ongedaan gemaakt worden.",
+  "DeleteTagConfirmation": "Het verwijderen van deze tag verwijdert deze uit alle kamers waar deze wordt gebruikt.",
+  "EditTag": "Tag bewerken",
+  "RemoveTag": "<1>{{tag}}</1> tag verwijderd."
+}

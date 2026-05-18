@@ -43,11 +43,6 @@ export const resetSessionStorage = () => {
   const timezoneDefaultFromSessionStorage =
     getFromSessionStorage("timezoneDefault");
 
-  const selectColorId = getFromSessionStorage("selectColorId");
-  const defaultColorId = getFromSessionStorage("defaultColorId");
-  const selectColorAccent = getFromSessionStorage("selectColorAccent");
-  const defaultColorAccent = getFromSessionStorage("defaultColorAccent");
-
   const currentPasswordSettings = getFromSessionStorage(
     "currentPasswordSettings",
   );
@@ -92,11 +87,6 @@ export const resetSessionStorage = () => {
   const defaultCompanySettingsFromSessionStorage = getFromSessionStorage(
     "defaultCompanySettings",
   );
-  const additionalSettings = getFromSessionStorage("additionalSettings");
-  const defaultAdditionalSettings = getFromSessionStorage(
-    "defaultAdditionalSettings",
-  );
-
   if (portalNameFromSessionStorage !== portalNameDefaultFromSessionStorage) {
     saveToSessionStorage("portalName", "none");
     saveToSessionStorage("errorValue", null);
@@ -159,14 +149,5 @@ export const resetSessionStorage = () => {
       "companySettings",
       defaultCompanySettingsFromSessionStorage,
     );
-  }
-  if (additionalSettings !== defaultAdditionalSettings) {
-    saveToSessionStorage("additionalSettings", defaultAdditionalSettings);
-  }
-  if (selectColorId !== defaultColorId) {
-    saveToSessionStorage("selectColorId", defaultColorId);
-  }
-  if (selectColorAccent !== defaultColorAccent) {
-    saveToSessionStorage("selectColorAccent", defaultColorAccent);
   }
 };

@@ -29,20 +29,20 @@
 
 .editRoomGroupsDialog {
   :global {
+    // !important overrides modal component default padding/margin.
     .modal-body {
-      margin-inline-end: 0px !important;
-      padding: 0px !important;
+      margin-inline-end: 0 !important;
+      padding: 0 !important;
     }
   }
 
+  // !important overrides modal component default padding/margin.
   :global(#modal-scroll > .scroll-wrapper > .scroller > .scroll-body) {
-    padding-inline-end: 0px !important;
+    padding-inline-end: 0 !important;
   }
 
   .infoBar {
     &:global(.public-room-bar) {
-      margin: 16px;
-      margin-bottom: 0;
       margin: 17px 15px 0 16px;
 
       path {
@@ -64,8 +64,9 @@
   }
 
   .settingRoomGroups {
-    padding: 20px 9px 20px 16px;
     border-bottom: 1px solid $gray-light-mid;
+
+    @include mixins.logical-padding(20px, 9px, 20px, 16px);
   }
 
   .roomGroups {
@@ -102,7 +103,8 @@
   .group {
     display: flex;
     justify-content: space-between;
-    padding: 17px 20px 17px 28px;
+
+    @include mixins.logical-padding(17px, 20px, 17px, 28px);
 
     &.groupDisabled {
       opacity: 0.5;
@@ -283,7 +285,7 @@
       justify-content: center;
       align-items: center;
       margin-bottom: 16px;
-      padding-right: 16px;
+      padding-inline-end: 16px;
     }
 
     .color-select-container {
@@ -329,7 +331,7 @@
       }
 
       .room-logo-container {
-        padding-right: 0px;
+        padding-inline-end: 0;
       }
 
       .icon-select-container {

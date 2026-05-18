@@ -31,90 +31,24 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
-
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
 import { Badge } from "@docspace/ui-kit/components/badge";
 
 import { Button } from "@docspace/ui-kit/components/button";
-import { isMobile, NoUserSelect } from "@docspace/shared/utils";
+import { isMobile } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import ConsumerItem from "./sub-components/consumerItem";
 import ConsumerModalDialog from "./sub-components/consumerModalDialog";
+import ExternalDbModal from "./sub-components/ExternalDbModal";
+
+const EXTERNAL_DB_CONSUMER_NAME = "externaldb";
 
 import ThirdPartyLoader from "./sub-components/thirdPartyLoader";
-
-const RootContainer = styled.div`
-  box-sizing: border-box;
-  max-width: 700px;
-  width: 100%;
-
-  .third-party-link {
-    font-weight: 600;
-  }
-
-  .third-party-box {
-    margin: 8px 0 20px 0;
-  }
-
-  .third-party-description {
-    line-height: 20px;
-    color: ${(props) => props.theme.client.settings.common.descriptionColor};
-  }
-
-  .paid-badge {
-    cursor: auto;
-  }
-
-  .consumers-list-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(293px, 1fr));
-    gap: 20px;
-  }
-
-  .consumer-item-wrapper {
-    box-sizing: border-box;
-    border: ${(props) =>
-      props.theme.client.settings.integration.separatorBorder};
-
-    border-radius: 6px;
-    min-height: 116px;
-    padding-block: 12px 8px;
-    padding-inline: 20px 12px;
-
-    .integration-image {
-      ${NoUserSelect}
-    }
-  }
-
-  .request-block {
-    margin-bottom: 20px;
-    padding: 32px 46px;
-    display: flex;
-    gap: 24px;
-    align-items: center;
-
-    @media (max-width: 882px) {
-      flex-direction: column;
-      align-items: baseline;
-    }
-  }
-
-  .business-plan {
-    grid-column: 1 / -1;
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    margin-bottom: -4px;
-
-    .paid-badge {
-      cursor: auto;
-    }
-  }
-`;
+import styles from "./ThirdPartyServicesSettings.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 class ThirdPartyServices extends React.Component {
   constructor(props) {
@@ -167,6 +101,19 @@ class ThirdPartyServices extends React.Component {
     setSelectedConsumer(e.currentTarget.dataset.consumer);
   };
 
+  handleSaveExternalDb = async (data) => {
+    const { updateConsumerProps, selectedConsumer } = this.props;
+
+    await updateConsumerProps({
+      name: selectedConsumer.name,
+      props: Object.entries(data).map(([name, value]) => ({
+        name,
+        value: String(value),
+      })),
+    });
+    this.onModalClose();
+  };
+
   render() {
     const {
       t,
@@ -181,6 +128,9 @@ class ThirdPartyServices extends React.Component {
       logoText,
       tReady,
       standalone,
+      selectedConsumer,
+      feedbackAndSupportUrl,
+      portalSettingsUrl,
     } = this.props;
     const { dialogVisible, isLoading } = this.state;
     const { onModalClose, onModalOpen, setConsumer, onChangeLoading } = this;
@@ -202,14 +152,14 @@ class ThirdPartyServices extends React.Component {
         {!consumers.length || !tReady ? (
           <ThirdPartyLoader />
         ) : (
-          <RootContainer className="RootContainer">
-            <Text className="third-party-description">
+          <div className={styles.rootContainer}>
+            <Text className={styles.thirdPartyDescription}>
               {t("AuthorizationKeysInfo")}
             </Text>
-            <div className="third-party-box">
+            <div className={styles.thirdPartyBox}>
               {integrationSettingsUrl ? (
                 <Link
-                  className="third-party-link"
+                  className={styles.thirdPartyLink}
                   color={currentColorScheme.main?.accent}
                   isHovered
                   target="_blank"
@@ -220,15 +170,15 @@ class ThirdPartyServices extends React.Component {
                 </Link>
               ) : null}
             </div>
-            <div className="consumer-item-wrapper request-block">
+            <div className={`${styles.consumerItemWrapper} ${styles.requestBlock}`}>
               <img
-                className="integration-image"
+                className={styles.integrationImage}
                 src={imgSrc}
                 alt="integration_icon"
               />
               <Text>
                 {t("IntegrationRequest", {
-                  productName: t("Common:ProductName"),
+                  productName: getBrandName("ProductName"),
                   organizationName: logoText,
                 })}
               </Text>
@@ -242,10 +192,10 @@ class ThirdPartyServices extends React.Component {
                 testId="submit_request_team_button"
               />
             </div>
-            <div className="consumers-list-container">
+            <div className={styles.consumersListContainer}>
               {freeConsumers.map((consumer) => (
                 <div
-                  className="consumer-item-wrapper"
+                  className={styles.consumerItemWrapper}
                   key={consumer.name}
                   data-testid={`${consumer.name}_item`}
                 >
@@ -265,12 +215,12 @@ class ThirdPartyServices extends React.Component {
                 </div>
               ))}
               {!isThirdPartyAvailable ? (
-                <div className="business-plan">
+                <div className={styles.businessPlan}>
                   <Text fontSize="16px" fontWeight={700}>
                     {t("IncludedInBusiness")}
                   </Text>
                   <Badge
-                    className="paid-badge"
+                    className={styles.paidBadge}
                     backgroundColor={
                       theme.isBase
                         ? globalColors.favoritesStatus
@@ -284,7 +234,7 @@ class ThirdPartyServices extends React.Component {
               ) : null}
               {paidConsumers.map((consumer) => (
                 <div
-                  className="consumer-item-wrapper"
+                  className={styles.consumerItemWrapper}
                   key={consumer.name}
                   data-testid={`consumer_${consumer.name}_item`}
                 >
@@ -304,18 +254,31 @@ class ThirdPartyServices extends React.Component {
                 </div>
               ))}
             </div>
-          </RootContainer>
+          </div>
         )}
         {dialogVisible ? (
-          <ConsumerModalDialog
-            t={t}
-            i18n={i18n}
-            dialogVisible={dialogVisible}
-            isLoading={isLoading}
-            onModalClose={onModalClose}
-            onChangeLoading={onChangeLoading}
-            updateConsumerProps={updateConsumerProps}
-          />
+          selectedConsumer?.name === EXTERNAL_DB_CONSUMER_NAME ? (
+            <ExternalDbModal
+              visible={dialogVisible}
+              onClose={onModalClose}
+              onSave={this.handleSaveExternalDb}
+              selectedConsumer={selectedConsumer}
+              isLoading={isLoading}
+              t={t}
+              feedbackAndSupportUrl={feedbackAndSupportUrl}
+              portalSettingsUrl={portalSettingsUrl}
+            />
+          ) : (
+            <ConsumerModalDialog
+              t={t}
+              i18n={i18n}
+              dialogVisible={dialogVisible}
+              isLoading={isLoading}
+              onModalClose={onModalClose}
+              onChangeLoading={onChangeLoading}
+              updateConsumerProps={updateConsumerProps}
+            />
+          )
         ) : null}
       </>
     );
@@ -329,6 +292,7 @@ ThirdPartyServices.propTypes = {
   integrationSettingsUrl: PropTypes.string,
   updateConsumerProps: PropTypes.func.isRequired,
   setSelectedConsumer: PropTypes.func.isRequired,
+  selectedConsumer: PropTypes.object,
 };
 
 export default inject(({ setup, settingsStore, currentQuotaStore }) => {
@@ -339,6 +303,8 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     companyInfoSettingsData,
     logoText,
     standalone,
+    feedbackAndSupportUrl,
+    portalSettingsUrl,
   } = settingsStore;
   const {
     integration,
@@ -347,7 +313,7 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     fetchAndSetConsumers,
     openThirdPartyModal,
   } = setup;
-  const { consumers } = integration;
+  const { consumers, selectedConsumer } = integration;
   const { isThirdPartyAvailable } = currentQuotaStore;
 
   return {
@@ -363,5 +329,8 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     logoText,
     openThirdPartyModal,
     standalone,
+    selectedConsumer,
+    feedbackAndSupportUrl,
+    portalSettingsUrl,
   };
 })(withTranslation(["Settings", "Common"])(observer(ThirdPartyServices)));

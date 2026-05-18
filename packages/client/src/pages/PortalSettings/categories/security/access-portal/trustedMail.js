@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -45,18 +44,7 @@ import { isValidDomainName } from "@docspace/shared/utils/email";
 import TrustedMailLoader from "../sub-components/loaders/trusted-mail-loader";
 import UserFields from "../sub-components/user-fields";
 import { LearnMoreWrapper } from "../StyledSecurity";
-
-const MainContainer = styled.div`
-  width: 100%;
-
-  .box {
-    margin-bottom: 11px;
-  }
-
-  .save-cancel-buttons {
-    margin-top: 24px;
-  }
-`;
+import styles from "./trustedMail.module.scss";
 
 const TrustedMail = (props) => {
   const {
@@ -271,7 +259,7 @@ const TrustedMail = (props) => {
   }
 
   return (
-    <MainContainer>
+    <div className={styles.container}>
       <LearnMoreWrapper withoutExternalLink={!trustedMailDomainSettingsUrl}>
         <Text fontSize="13px" fontWeight="400">
           {t("TrustedMailSettingDescription")}
@@ -294,7 +282,7 @@ const TrustedMail = (props) => {
       </LearnMoreWrapper>
 
       <RadioButtonGroup
-        className="box"
+        className={styles.box}
         fontSize="13px"
         fontWeight="400"
         name="group"
@@ -343,7 +331,7 @@ const TrustedMail = (props) => {
       ) : null}
 
       <SaveCancelButtons
-        className="save-cancel-buttons"
+        className={styles.saveCancelButtons}
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
@@ -358,7 +346,7 @@ const TrustedMail = (props) => {
         cancelButtonDataTestId="trusted_mail_cancel_button"
         saveButtonDataTestId="trusted_mail_save_button"
       />
-    </MainContainer>
+    </div>
   );
 };
 

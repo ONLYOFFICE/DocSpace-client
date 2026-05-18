@@ -1,5 +1,4 @@
 {
-  "DeleteForeverButton": "Obriši zauvek",
   "DeleteForeverNote": "Svi elementi iz odeljka {{sectionName}} biće trajno izbrisani. Nećete moći da ih vratite.",
   "DeleteForeverTitle": "Obrisati zauvek?",
   "SuccessEmptyAction": "Odeljak {{sectionName}} je ispražnjen"

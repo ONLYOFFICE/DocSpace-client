@@ -110,7 +110,9 @@ const EditRoomDialog = ({
       isAvailable === templateIsAvailable &&
       prevParams.modelId === currentParams.modelId &&
       prevParams.providerId === currentParams.providerId &&
-      prevParams.prompt === currentParams.prompt
+      prevParams.prompt === currentParams.prompt &&
+      prevParams.sendFormToExternalDB === currentParams.sendFormToExternalDB &&
+      prevParams.saveFormAsXLSX === currentParams.saveFormAsXLSX
     );
   };
 

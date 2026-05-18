@@ -70,6 +70,7 @@ const ChangeQuotaDialog = (props) => {
 					isLoading={isLoading}
 					isDisabled={initialSize == size || size.trim() === ""}
 					scale
+					testId="change_quota_dialog_submit"
 				/>
 				<Button
 					label={t("Common:CancelButton")}
@@ -77,6 +78,7 @@ const ChangeQuotaDialog = (props) => {
 					onClick={onCloseClick}
 					isDisabled={isLoading}
 					scale
+					testId="change_quota_dialog_cancel"
 				/>
 			</ModalDialog.Footer>
 		</ModalDialog>

@@ -17,7 +17,6 @@
   "InviteViaLinkDescriptionAgentMembers": "{{productName}}メンバー向けに、エージェント内での自己認証用ユニバーサルリンクを作成する。",
   "InviteViaLinkDescriptionRoomGuest": "ゲストとしてルームで自己認証を行うためのユニバーサルリンクを作成する",
   "InviteViaLinkDescriptionRoomMembers": "{{productName}} メンバー用のユニバーサルリンクを作成し、ルームで自己認証を行えるようにする",
-  "LinkCopySuccess": "リンクがコピーされました",
   "SendInvitation": "招待を送信する",
   "UserAgentMaxAvailableRoleWarning": "ゲストおよびユーザーはエージェント管理者として割り当てられません。指定された役割には、ルーム管理者および{{productName}}管理者のみが適任です。",
   "UserMaxAvailableRoleWarning": "ゲストおよびユーザーはルーム管理者に指定できません。ルーム管理者および{{productName}}管理者だけが、その役割に適しています。",

@@ -25,9 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TLogo } from "@docspace/ui-kit/types";
+import type { TAIRoomChatSettings } from "@docspace/ui-kit/types/ai";
 
 import type { TFile, TFolder, TShareSettings } from "../files/types";
 import type {
+  DistributedTaskStatus,
   ExportRoomIndexTaskStatus,
   FolderType,
   LinkSharingEntityType,
@@ -42,6 +44,8 @@ import type {
 } from "../../types";
 import type { TUser } from "../people/types";
 import type { TGroup } from "../groups/types";
+
+export type { TAIRoomChatSettings };
 
 export type TRoomSecurity = {
   ChangeOwner: boolean;
@@ -85,17 +89,6 @@ export type TWatermark = {
   scale?: number;
   image?: File | string;
   isImage?: boolean;
-};
-
-export type TMultimodal = { image: { formats: string[] } };
-
-export type TAIRoomChatSettings = {
-  prompt: string;
-  providerId: number;
-  modelId: string;
-  internal: boolean;
-  modelAlias?: string;
-  multimodal?: TMultimodal;
 };
 
 export type TRoom = {
@@ -142,6 +135,8 @@ export type TRoom = {
   shareSettings?: TShareSettings;
   availableShareRights?: TAvailableShareRights;
   path?: TPathParts[];
+  sendFormToExternalDB?: boolean;
+  saveFormAsXLSX?: boolean;
 };
 
 export type TGetRooms = {
@@ -408,4 +403,13 @@ export type TFeedAction<T = TFeedData> = {
 export type TFeed = {
   total: number;
   items: TFeedAction[];
+};
+
+export type ExternalSyncDB = {
+  id: string;
+  forms: { id: number; title: string; success: boolean; error?: string }[];
+  error?: string;
+  isCompleted: boolean;
+  percentage: number;
+  status: DistributedTaskStatus;
 };

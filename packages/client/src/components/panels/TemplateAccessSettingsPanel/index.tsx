@@ -39,8 +39,10 @@ import {
 	ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Text } from "@docspace/ui-kit/components/text";
+import { Heading } from "@docspace/ui-kit/components/heading";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import {
 	getRoomMembers,
@@ -52,20 +54,11 @@ import { TRoom } from "@docspace/shared/api/rooms/types";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 
-import {
-	StyledBlock,
-	StyledSubHeader,
-	StyledToggleButton,
-	StyledDescription,
-	StyledBody,
-	StyledTemplateAccessSettingsContainer,
-	StyledTemplateAccessSettingsHeader,
-	StyledTemplateAccessSettingsBody,
-	StyledTemplateAccessSettingsFooter,
-} from "./StyledInvitePanel";
+import styles from "./TemplateAccessSettingsPanel.module.scss";
 import TemplateAccessSelector from "../../TemplateAccessSelector";
 import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type TemplateAccessSettingsContainer =
 	| {
@@ -313,8 +306,8 @@ const TemplateAccessSettingsPanel = ({
 	);
 
 	const TemplateAccessSettingsContent = (
-		<StyledTemplateAccessSettingsContainer>
-			<StyledTemplateAccessSettingsHeader>
+		<div className={styles.container}>
+			<div className={styles.header}>
 				<IconButton
 					className="arrow-button"
 					iconName={ArrowPathReactSvgUrl}
@@ -325,7 +318,7 @@ const TemplateAccessSettingsPanel = ({
 					dataTestId="template_access_settings_back_button"
 				/>
 				<Text fontSize="21px" fontWeight={700} className="header-component">
-					{t("Files:AccessSettings")}
+					{t("Files:AccessSettingsTitle")}
 				</Text>
 				<IconButton
 					size={17}
@@ -336,27 +329,31 @@ const TemplateAccessSettingsPanel = ({
 					isStroke
 					dataTestId="template_access_settings_close_button"
 				/>
-			</StyledTemplateAccessSettingsHeader>
+			</div>
 			<Scrollbar>
-				<StyledTemplateAccessSettingsBody>
-					<StyledBlock>
-						<StyledSubHeader $inline>
+				<div className={styles.settingsBody}>
+					<div className={styles.block}>
+						<Heading
+							className={styles.subHeaderInline}
+							fontSize="16px"
+							fontWeight={700}
+						>
 							{t("Files:TemplateAvailable")}
 
-							<StyledToggleButton
-								className="invite-via-link"
+							<ToggleButton
+								className={`invite-via-link ${styles.toggleButton}`}
 								isChecked={isAvailable}
 								onChange={onAvailableChange}
 								dataTestId="template_access_settings_available"
 							/>
-						</StyledSubHeader>
-						<StyledDescription>
+						</Heading>
+						<Text className={styles.description}>
 							{t("Files:TemplateAvailableDescription", {
-								productName: t("Common:ProductName"),
+								productName: getBrandName("ProductName"),
 							})}
-						</StyledDescription>
-					</StyledBlock>
-					<StyledBody isDisabled={isAvailable}>
+						</Text>
+					</div>
+					<div className={isAvailable ? styles.bodyDisabled : styles.body}>
 						<InviteInput
 							inviteItems={accessItems}
 							setInviteItems={setAccessItemsAction}
@@ -365,9 +362,13 @@ const TemplateAccessSettingsPanel = ({
 							roomId={templateId}
 						/>
 
-						<StyledSubHeader className="invite-input-text">
+						<Heading
+							className={`${styles.subHeader} invite-input-text`}
+							fontSize="16px"
+							fontWeight={700}
+						>
 							{t("Files:AccessToTemplate")}
-						</StyledSubHeader>
+						</Heading>
 						{hasInvitedUsers ? (
 							<ItemsList
 								t={t}
@@ -377,11 +378,11 @@ const TemplateAccessSettingsPanel = ({
 								isDisabled={isAvailable}
 							/>
 						) : null}
-					</StyledBody>
-				</StyledTemplateAccessSettingsBody>
+					</div>
+				</div>
 			</Scrollbar>
 
-			<StyledTemplateAccessSettingsFooter>
+			<div className={styles.footer}>
 				<Button
 					className="send-invitation"
 					scale
@@ -401,8 +402,8 @@ const TemplateAccessSettingsPanel = ({
 					label={t("Common:CancelButton")}
 					testId="template_access_settings_footer_cancel_button"
 				/>
-			</StyledTemplateAccessSettingsFooter>
-		</StyledTemplateAccessSettingsContainer>
+			</div>
+		</div>
 	);
 
 	return !isContainer ? (
@@ -431,27 +432,31 @@ const TemplateAccessSettingsPanel = ({
 				) : null}
 			</ModalDialog.Container>
 
-			<ModalDialog.Header>{t("Files:AccessSettings")}</ModalDialog.Header>
+			<ModalDialog.Header>{t("Files:AccessSettingsTitle")}</ModalDialog.Header>
 			<ModalDialog.Body>
 				<>
-					<StyledBlock>
-						<StyledSubHeader $inline>
+					<div className={styles.block}>
+						<Heading
+							className={styles.subHeaderInline}
+							fontSize="16px"
+							fontWeight={700}
+						>
 							{t("Files:TemplateAvailable")}
 
-							<StyledToggleButton
-								className="invite-via-link"
+							<ToggleButton
+								className={`invite-via-link ${styles.toggleButton}`}
 								isChecked={isAvailable}
 								onChange={onAvailableChange}
 								dataTestId="template_access_settings_modal_available"
 							/>
-						</StyledSubHeader>
-						<StyledDescription>
+						</Heading>
+						<Text className={styles.description}>
 							{t("Files:TemplateAvailableDescription", {
-								productName: t("Common:ProductName"),
+								productName: getBrandName("ProductName"),
 							})}
-						</StyledDescription>
-					</StyledBlock>
-					<StyledBody isDisabled={isAvailable}>
+						</Text>
+					</div>
+					<div className={isAvailable ? styles.bodyDisabled : styles.body}>
 						<InviteInput
 							inviteItems={accessItems}
 							setInviteItems={setAccessItemsAction}
@@ -459,9 +464,13 @@ const TemplateAccessSettingsPanel = ({
 							isDisabled={isAvailable}
 							roomId={templateId}
 						/>
-						<StyledSubHeader className="invite-input-text">
+						<Heading
+							className={`${styles.subHeader} invite-input-text`}
+							fontSize="16px"
+							fontWeight={700}
+						>
 							{t("Files:AccessToTemplate")}
-						</StyledSubHeader>
+						</Heading>
 						{hasInvitedUsers ? (
 							<ItemsList
 								t={t}
@@ -471,7 +480,7 @@ const TemplateAccessSettingsPanel = ({
 								isDisabled={isAvailable}
 							/>
 						) : null}
-					</StyledBody>
+					</div>
 				</>
 			</ModalDialog.Body>
 			<ModalDialog.Footer>

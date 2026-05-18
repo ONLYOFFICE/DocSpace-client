@@ -27,7 +27,6 @@
 import React, { useEffect } from "react";
 import { now, parseToDateTime, formatDate, formatDateLocalized, isBefore, isAfter } from "@docspace/ui-kit/utils/date";
 import { Outlet, useLocation } from "react-router";
-import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
@@ -36,7 +35,7 @@ import { toast as toastify } from "react-toastify";
 import SocketHelper, {
   SocketEvents,
   SocketCommands,
-} from "@docspace/shared/utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 import { Portal } from "@docspace/ui-kit/components/portal";
 import { SnackBar } from "@docspace/ui-kit/components/snackbar";
 import { Toast, toastr, ToastType } from "@docspace/ui-kit/components/toast";
@@ -63,8 +62,10 @@ import IndicatorLoader from "./components/IndicatorLoader";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import useCreateFileError from "./Hooks/useCreateFileError";
+import { SectionNavigationProvider } from "./contexts/SectionNavigationContext";
 
 import ReactSmartBanner from "./components/SmartBanner";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const Shell = ({ page = "home", ...rest }) => {
   const {
@@ -97,9 +98,8 @@ const Shell = ({ page = "home", ...rest }) => {
     standalone,
     isGuest,
     setSocialAuthWelcomeDialogVisible,
+    getAIConfig,
   } = rest;
-
-  const theme = useTheme();
 
   useCreateFileError({
     setPortalTariff,
@@ -110,7 +110,7 @@ const Shell = ({ page = "home", ...rest }) => {
   const { t, ready } = useTranslation(["Common", "SmartBanner"]);
 
   useEffect(() => {
-    if (!logoText) setLogoText(t("Common:OrganizationName"));
+    if (!logoText) setLogoText(getBrandName("OrganizationName"));
   }, [logoText, setLogoText]);
 
   useEffect(() => {
@@ -141,6 +141,14 @@ const Shell = ({ page = "home", ...rest }) => {
     SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "QUOTA",
       individual: true,
+    });
+
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: "change-web-plugin",
+    });
+
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: "change-ai-config",
     });
   }, []);
 
@@ -228,6 +236,18 @@ const Shell = ({ page = "home", ...rest }) => {
       SocketHelper?.off(SocketEvents.LogoutSession, callback);
     };
   }, [userLoginEventId, userId]);
+
+  useEffect(() => {
+    const handleAiConfigChanged = () => {
+      getAIConfig?.();
+    };
+
+    SocketHelper?.on(SocketEvents.ChangeAiConfig, handleAiConfigChanged);
+
+    return () => {
+      SocketHelper?.off(SocketEvents.ChangeAiConfig, handleAiConfigChanged);
+    };
+  }, [getAIConfig]);
 
   let snackTimer = null;
   let fbInterval = null;
@@ -323,7 +343,7 @@ const Shell = ({ page = "home", ...rest }) => {
       headerText: t("Attention"),
       text: `${t("BarMaintenanceDescription", {
         targetDate,
-        productName: `${logoText} ${t("Common:ProductName")}`,
+        productName: `${logoText} ${getBrandName("ProductName")}`,
       })} ${t("BarMaintenanceDisclaimer")}`,
       isMaintenance: true,
       onAction: () => {
@@ -506,27 +526,29 @@ const Shell = ({ page = "home", ...rest }) => {
   const isMobileOnly = currentDeviceType === DeviceType.mobile;
 
   return (
-    <Layout>
-      {toast}
-      <RootTooltip />
-      {isMobileOnly && !isFrame ? (
-        <ReactSmartBanner t={t} ready={ready} />
-      ) : null}
-      {withoutNavMenu ? null : <NavMenu />}
-      <IndicatorLoader />
-      <ScrollToTop />
-      <DialogsWrapper t={t} />
-
-      <Main isDesktop={isDesktop}>
-        {!isMobileOnly && !isFrame ? (
+    <SectionNavigationProvider>
+      <Layout>
+        {toast}
+        <RootTooltip />
+        {isMobileOnly && !isFrame ? (
           <ReactSmartBanner t={t} ready={ready} />
         ) : null}
-        {barTypeInFrame !== "none" ? <MainBar /> : null}
-        <div className="main-container">
-          <Outlet />
-        </div>
-      </Main>
-    </Layout>
+        {withoutNavMenu ? null : <NavMenu />}
+        <IndicatorLoader />
+        <ScrollToTop />
+        <DialogsWrapper t={t} />
+
+        <Main isDesktop={isDesktop}>
+          {!isMobileOnly && !isFrame ? (
+            <ReactSmartBanner t={t} ready={ready} />
+          ) : null}
+          {barTypeInFrame !== "none" ? <MainBar /> : null}
+          <div className="main-container">
+            <Outlet />
+          </div>
+        </Main>
+      </Layout>
+    </SectionNavigationProvider>
   );
 };
 
@@ -568,6 +590,7 @@ const ShellWrapper = inject(
       logoText,
       setLogoText,
       standalone,
+      getAIConfig,
     } = settingsStore;
 
     const isBase = settingsStore.theme.isBase;
@@ -628,7 +651,7 @@ const ShellWrapper = inject(
       userId: userStore?.user?.id,
       userLoginEventId: userStore?.user?.loginEventId,
       isOwner: userStore?.user?.isOwner,
-      isAdmin: userStore?.user?.isAdmin,
+      isAdmin: userStore?.user?.isAdmin || userStore?.user?.isOwner,
       isGuest: userStore?.user?.isVisitor,
       registrationDate: userStore?.user?.registrationDate,
 
@@ -645,6 +668,7 @@ const ShellWrapper = inject(
       setLogoText,
       standalone,
       setSocialAuthWelcomeDialogVisible,
+      getAIConfig,
     };
   },
 )(observer(Shell));

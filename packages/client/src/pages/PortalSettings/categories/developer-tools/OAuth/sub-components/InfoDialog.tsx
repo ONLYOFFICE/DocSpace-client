@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
 import { ScopeList } from "@docspace/shared/utils/oauth/scope-list";
-import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import {
   ModalDialog,
@@ -53,7 +53,7 @@ import { Tag } from "@docspace/ui-kit/components/tag";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 
-import { StyledInfoContainer } from "../OAuth.styled";
+import styles from "../OAuth.styled.module.scss";
 
 interface InfoDialogProps {
   visible: boolean;
@@ -125,9 +125,15 @@ const InfoDialog = ({
     >
       <ModalDialog.Header>{t("Common:Info")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledInfoContainer
-          showDescription={showDescription}
-          withShowText={withShowText}
+        <div
+          className={styles.styledInfoContainer}
+          style={
+            {
+              "--description-max-height":
+                !showDescription && withShowText ? "100px" : "100%",
+              "--description-margin-bottom": withShowText ? "4px" : "0",
+            } as React.CSSProperties
+          }
         >
           <div className="client-block">
             <div className="client-block__info">
@@ -186,7 +192,7 @@ const InfoDialog = ({
                 fontWeight="600"
                 truncate
               >
-                {t("Common:Description")}
+                {t("Common:DescriptionLabel")}
               </Text>
 
               <Text
@@ -352,7 +358,7 @@ const InfoDialog = ({
               </Text>
             </>
           ) : null}
-        </StyledInfoContainer>
+        </div>
       </ModalDialog.Body>
     </ModalDialog>
   );

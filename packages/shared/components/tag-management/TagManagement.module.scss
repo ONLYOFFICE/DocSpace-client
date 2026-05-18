@@ -227,7 +227,7 @@
 
 .input[data-size="base"] {
   padding: 4px 0px;
-  flex-grow: 0;
+  flex: 0 0 auto;
 }
 
 .checkCross {
@@ -279,4 +279,11 @@
   padding-block-end: 16px;
   font-size: 13px;
   line-height: 20px;
+}
+
+.roomName {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0px;
 }

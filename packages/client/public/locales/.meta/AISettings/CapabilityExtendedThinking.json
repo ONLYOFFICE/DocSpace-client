@@ -1,0 +1,29 @@
+{
+  "key_path": "CapabilityExtendedThinking",
+  "content": "Extended thinking",
+  "content_en_sha1_hash": "d2421f6736da794561a9a472415d674e249b27c3",
+  "created_at": "2026-04-23T17:24:00.294Z",
+  "updated_at": "2026-04-23T17:42:09.693Z",
+  "comment": {
+    "text": "Checkbox label in the AI model settings panel used to enable or disable the extended thinking capability.",
+    "is_auto": true,
+    "updated_at": "2026-04-23T17:42:09.693Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/ModelSettingsPanel.tsx",
+      "line_number": 147,
+      "context": "label={t(\"AISettings:CapabilityToolCalling\")}\n isChecked={capabilities.toolCalling}\n onChange={() => handleCapabilityChange(\"toolCalling\")}\n />\n <Checkbox\n label={t(\"AISettings:CapabilityExtendedThinking\")}\n isChecked={capabilities.thinking}\n onChange={() => handleCapabilityChange(\"thinking\")}\n />\n </div>\n </FieldContainer>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

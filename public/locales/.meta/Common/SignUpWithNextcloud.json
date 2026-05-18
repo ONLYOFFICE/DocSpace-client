@@ -1,0 +1,29 @@
+{
+  "key_path": "SignUpWithNextcloud",
+  "content": "Sign up with Nextcloud",
+  "content_en_sha1_hash": "d1fa8bbbbc2dcf798fd1ccf4668c5add48372476",
+  "created_at": "2026-04-23T17:23:52.504Z",
+  "updated_at": "2026-04-23T17:37:07.435Z",
+  "comment": {
+    "text": "Button label used in the registration flow to create an account using Nextcloud credentials.",
+    "is_auto": true,
+    "updated_at": "2026-04-23T17:37:07.435Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/utils/common.tsx",
+      "line_number": 488,
+      "context": "return signUp\n ? t(\"Common:SignUpWithWechat\")\n : t(\"Common:SignInWithWechat\");\n case \"nextcloud\":\n return signUp\n ? t(\"Common:SignUpWithNextcloud\")\n : t(\"Common:SignInWithNextcloud\");\n default:\n return \"\";\n }\n }",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

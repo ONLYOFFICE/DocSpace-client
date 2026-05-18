@@ -3,11 +3,12 @@
   "content": "Before",
   "content_en_sha1_hash": "74f39697ac328c6325ce068b6aaca626abc0bf63",
   "created_at": "2025-05-19T21:30:49.670Z",
-  "updated_at": "2026-02-19T13:36:32.826Z",
+  "updated_at": "2026-04-11T21:29:21.758Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Before\" in a filter dialog component. It likely appears on a date picker input field within the FilterDialog, allowing users to select a time frame that occurred before a specified delivery date.",
+    "text": "This is a label for a date/time input field in a filter dialog, indicating the upper bound for a time range.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:09.611Z"
+    "updated_at": "2026-04-11T21:29:21.758Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -99,13 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'마감' translates to 'deadline' or 'closing date' in English, not 'before'. It doesn't accurately reflect the meaning of 'Before' in this context.",
-          "suggestion": "Consider alternatives such as '이전' (before, prior) or '사전' (pre-)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -205,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

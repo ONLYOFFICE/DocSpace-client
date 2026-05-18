@@ -34,7 +34,7 @@ import { getBackupProgressInfo } from "../../../utils/common";
 import SocketHelper, {
   SocketEvents,
   TSocketListener,
-} from "../../../utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
@@ -61,6 +61,7 @@ import {
 } from "./RestoreBackup.constants";
 import type { RestoreBackupProps } from "./RestoreBackup.types";
 import styles from "./RestoreBackup.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const RestoreBackup = (props: RestoreBackupProps) => {
   const {
@@ -367,7 +368,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
         )}
       >
         {t("Common:RestoreBackupWarningText", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
         })}
       </Text>
       {!standalone ? (
@@ -379,7 +380,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
           )}
         >
           {t("Common:RestoreBackupResetInfoWarningText", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           })}
         </Text>
       ) : null}
@@ -469,6 +470,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
         dataTestId="user_agreement_checkbox"
       />
       <ButtonContainer
+        standalone={standalone}
         setErrorInformation={setErrorInformation}
         isConfirmed={checkboxState.confirmation}
         isNotification={checkboxState.notification}

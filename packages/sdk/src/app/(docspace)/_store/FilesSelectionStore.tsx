@@ -146,7 +146,9 @@ export class FilesSelectionStore {
 }
 
 export const FilesSelectionStoreContext =
-  React.createContext<FilesSelectionStore>(new FilesSelectionStore());
+  React.createContext<FilesSelectionStore>(
+    null as unknown as FilesSelectionStore,
+  );
 
 export const FilesSelectionStoreContextProvider = ({
   children,

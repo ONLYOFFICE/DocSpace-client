@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { observer } from "mobx-react";
 
 import { retryWebhook } from "@docspace/shared/api/settings";
@@ -39,78 +38,18 @@ import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import { Heading } from "@docspace/ui-kit/components/heading";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
-import { tablet, mobile } from "@docspace/shared/utils";
 import { useTranslation } from "react-i18next";
 
-const HeaderContainer = styled.div`
-  position: sticky;
-  top: 0;
-  background-color: ${(props) => props.theme.backgroundColor};
-  z-index: 310;
-  display: flex;
-  align-items: center;
-  max-width: calc(100vw - 32px);
-  min-height: 69px;
-
-  @media ${tablet} {
-    margin-top: -5px;
-    margin-bottom: 5px;
-  }
-  @media ${mobile} {
-    margin-top: 0;
-    justify-content: space-between;
-  }
-
-  .headerNavigation {
-    display: flex;
-    align-items: center;
-  }
-
-  .arrow-button {
-    margin-inline-end: 18.5px;
-
-    @media ${tablet} {
-      padding-block: 8px;
-      padding-inline: 8px 0;
-
-      margin-inline-start: -8px;
-    }
-    @media ${mobile} {
-      margin-inline-end: 13px;
-    }
-
-    svg {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
-    }
-  }
-
-  .headline {
-    font-size: 18px;
-    margin-inline-end: 16px;
-
-    @media ${tablet} {
-      font-size: 21px;
-    }
-
-    @media ${mobile} {
-      font-size: 18px;
-    }
-  }
-`;
+import styles from "../WebhookEventDetails.styled.module.scss";
 
 const DetailsNavigationHeader = () => {
   const { id, eventId } = useParams();
 
   const { t } = useTranslation(["Webhooks", "Common"]);
   const navigate = useNavigate();
-  const location = useLocation();
 
   const onBack = () => {
-    const path = location.pathname.includes("/portal-settings")
-      ? "/portal-settings"
-      : "";
-    navigate(`${path}/developer-tools/webhooks/${id}`);
+    navigate(`/developer-tools/webhooks/${id}`);
   };
 
   const handleRetryEvent = async () => {
@@ -119,7 +58,7 @@ const DetailsNavigationHeader = () => {
   };
 
   return (
-    <HeaderContainer>
+    <div className={styles.headerContainer}>
       <div className="headerNavigation">
         <IconButton
           iconName={ArrowPathReactSvgUrl}
@@ -140,7 +79,7 @@ const DetailsNavigationHeader = () => {
         isFill
         onClick={handleRetryEvent}
       />
-    </HeaderContainer>
+    </div>
   );
 };
 

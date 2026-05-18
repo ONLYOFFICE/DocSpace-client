@@ -43,3 +43,4 @@ export const DELETE_TAG_MODAL_ID = "delete-tag-modal";
 
 export const EDIT_CANCELLED = Symbol("EDIT_CANCELLED");
 export const DELETE_CANCELLED = Symbol("DELETE_CANCELLED");
+export const EDIT_TAG_FORM_NAME = "edit-tag-form";

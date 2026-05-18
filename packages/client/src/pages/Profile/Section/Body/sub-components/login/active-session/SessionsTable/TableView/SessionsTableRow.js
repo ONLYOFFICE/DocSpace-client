@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import RemoveSessionSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
@@ -100,7 +100,7 @@ const SessionsTableRow = (props) => {
               {country}
               {country && city ? ", " : null}
               {city}
-              <span className="divider" />
+              {ip ? <span className={styles.rowDivider} /> : null}
             </>
           ) : null}
           {ip}
@@ -136,3 +136,4 @@ export default inject(({ setup, settingsStore, userStore }) => {
     setPlatformModalData,
   };
 })(observer(SessionsTableRow));
+

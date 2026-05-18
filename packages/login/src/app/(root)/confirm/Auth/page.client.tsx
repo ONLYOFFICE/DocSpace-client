@@ -72,12 +72,17 @@ const AuthHandler = () => {
 
         replaced.current = true;
 
+        const confirmData: { Email: string; Key: string; First?: boolean } = {
+          Email: email,
+          Key: key,
+        };
+
+        if (first === "true") {
+          confirmData.First = true;
+        }
+
         const res = await loginWithConfirmKey({
-          ConfirmData: {
-            Email: email,
-            Key: key,
-            First: first,
-          },
+          ConfirmData: confirmData,
         });
 
         frameCallEvent({ event: "onAuthSuccess" });
@@ -145,7 +150,7 @@ const AuthHandler = () => {
           errorMessage = knownError;
         }
 
-        frameCallEvent({ event: "onAppError", data: error });
+        frameCallEvent({ event: "onAppError", data: errorMessage });
         replaced.current = false;
         toastr.error(errorMessage);
       }

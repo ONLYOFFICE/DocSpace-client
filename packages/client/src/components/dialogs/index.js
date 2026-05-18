@@ -71,13 +71,11 @@ import CancelOperationDialog from "./CancelOperationDialog";
 import FormFillingTipsDialog from "./FormFillingTipsDialog";
 import ReducedRightsDialog from "./ReducedRightsDialog";
 import SocialAuthWelcomeDialog from "./SocialAuthWelcomeDialog";
-import StorageTariffDeactiveted from "./StorageTariffDeactiveted";
 import ConnectAccountDialog from "./ConnectAccountDialog";
 import DisconnectAccountDialog from "./DisconnectAccountDialog";
 import CreateAgentDialog from "./CreateEditAgentDialog/CreateAgentDialog";
 import ResetTemplateDialog from "./ResetTemplateDialog";
 import EditRoomGroupsDialog from "./EditRoomGroupsDialog";
-import RoomGroupingDialog from "./RoomGroupingDialog";
 import AddRoomToGroupDialog from "./AddRoomToGroupDialog";
 import PauseSubmissionsDialog from "./PauseSubmissionsDialog";
 
@@ -129,13 +127,12 @@ export {
   FormFillingTipsDialog,
   ReducedRightsDialog,
   SocialAuthWelcomeDialog,
-  StorageTariffDeactiveted,
   ConnectAccountDialog,
   DisconnectAccountDialog,
   CreateAgentDialog,
   ResetTemplateDialog,
   EditRoomGroupsDialog,
-  RoomGroupingDialog,
   AddRoomToGroupDialog,
   PauseSubmissionsDialog,
 };
+

@@ -82,7 +82,11 @@ describe("TagManagementProvider", () => {
     const fetchedTags = ["tag3", "tag4"];
 
     render(
-      <TagManagementProvider roomTags={roomTags} fetchedTags={fetchedTags}>
+      <TagManagementProvider
+        roomTags={roomTags}
+        fetchedTags={fetchedTags}
+        access={{}}
+      >
         <TestComponent />
       </TagManagementProvider>,
     );
@@ -99,7 +103,11 @@ describe("TagManagementProvider", () => {
     const fetchedTags = ["tag3"];
 
     render(
-      <TagManagementProvider roomTags={roomTags} fetchedTags={fetchedTags}>
+      <TagManagementProvider
+        roomTags={roomTags}
+        fetchedTags={fetchedTags}
+        access={{}}
+      >
         <TestComponent />
       </TagManagementProvider>,
     );
@@ -115,7 +123,11 @@ describe("TagManagementProvider", () => {
     const fetchedTags: string[] = [];
 
     render(
-      <TagManagementProvider roomTags={roomTags} fetchedTags={fetchedTags}>
+      <TagManagementProvider
+        roomTags={roomTags}
+        fetchedTags={fetchedTags}
+        access={{}}
+      >
         <TestComponent />
       </TagManagementProvider>,
     );
@@ -132,7 +144,11 @@ describe("TagManagementProvider", () => {
     const fetchedTags: string[] = [];
 
     render(
-      <TagManagementProvider roomTags={roomTags} fetchedTags={fetchedTags}>
+      <TagManagementProvider
+        roomTags={roomTags}
+        fetchedTags={fetchedTags}
+        access={{}}
+      >
         <TestComponent />
       </TagManagementProvider>,
     );
@@ -156,7 +172,11 @@ describe("TagManagementProvider", () => {
     const fetchedTags: string[] = [];
 
     render(
-      <TagManagementProvider roomTags={roomTags} fetchedTags={fetchedTags}>
+      <TagManagementProvider
+        roomTags={roomTags}
+        fetchedTags={fetchedTags}
+        access={{}}
+      >
         <TestComponent />
       </TagManagementProvider>,
     );
@@ -177,7 +197,11 @@ describe("TagManagementProvider", () => {
     const fetchedTags: string[] = [];
 
     render(
-      <TagManagementProvider roomTags={roomTags} fetchedTags={fetchedTags}>
+      <TagManagementProvider
+        roomTags={roomTags}
+        fetchedTags={fetchedTags}
+        access={{ canCreate: true }}
+      >
         <TestComponent />
       </TagManagementProvider>,
     );
@@ -196,7 +220,11 @@ describe("TagManagementProvider", () => {
     const fetchedTags: string[] = [];
 
     render(
-      <TagManagementProvider roomTags={roomTags} fetchedTags={fetchedTags}>
+      <TagManagementProvider
+        roomTags={roomTags}
+        fetchedTags={fetchedTags}
+        access={{ canCreate: true }}
+      >
         <TestComponent />
       </TagManagementProvider>,
     );
@@ -214,7 +242,11 @@ describe("TagManagementProvider", () => {
     const fetchedTags: string[] = [];
 
     render(
-      <TagManagementProvider roomTags={roomTags} fetchedTags={fetchedTags}>
+      <TagManagementProvider
+        roomTags={roomTags}
+        fetchedTags={fetchedTags}
+        access={{}}
+      >
         <TestComponent />
       </TagManagementProvider>,
     );
@@ -225,7 +257,7 @@ describe("TagManagementProvider", () => {
 
   it("handles empty room tags and fetched tags", () => {
     render(
-      <TagManagementProvider roomTags={[]} fetchedTags={[]}>
+      <TagManagementProvider roomTags={[]} fetchedTags={[]} access={{}}>
         <TestComponent />
       </TagManagementProvider>,
     );
@@ -240,7 +272,11 @@ describe("TagManagementProvider", () => {
     const fetchedTags: string[] = [];
 
     render(
-      <TagManagementProvider roomTags={roomTags} fetchedTags={fetchedTags}>
+      <TagManagementProvider
+        roomTags={roomTags}
+        fetchedTags={fetchedTags}
+        access={{}}
+      >
         <TestComponent />
       </TagManagementProvider>,
     );
@@ -261,7 +297,11 @@ describe("TagManagementProvider", () => {
     const fetchedTags: string[] = [];
 
     render(
-      <TagManagementProvider roomTags={roomTags} fetchedTags={fetchedTags}>
+      <TagManagementProvider
+        roomTags={roomTags}
+        fetchedTags={fetchedTags}
+        access={{}}
+      >
         <TestComponent />
       </TagManagementProvider>,
     );
@@ -281,7 +321,11 @@ describe("TagManagementProvider", () => {
     const fetchedTags = ["tag2", "tag3"];
 
     render(
-      <TagManagementProvider roomTags={roomTags} fetchedTags={fetchedTags}>
+      <TagManagementProvider
+        roomTags={roomTags}
+        fetchedTags={fetchedTags}
+        access={{}}
+      >
         <TestComponent />
       </TagManagementProvider>,
     );

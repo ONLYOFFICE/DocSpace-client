@@ -284,7 +284,7 @@ class ProfileActionsStore {
     this.setIsDebugDialogVisible(true);
   };
 
-  getActions = () => {
+  getActions = (t = i18n.t.bind(i18n)) => {
     const {
       enablePlugins,
       standalone,
@@ -313,7 +313,7 @@ class ProfileActionsStore {
         ? {
             key: "user-menu-settings",
             icon: CatalogSettingsReactSvgUrl,
-            label: i18n.t("Common:Settings"),
+            label: t("Common:Settings"),
             onClick: (obj) => this.onSettingsClick("/portal-settings", obj),
             url: SETTINGS_URL,
             preventNewTab: true,
@@ -340,7 +340,7 @@ class ProfileActionsStore {
             key: "spaces-management-settings",
             id: "spaces",
             icon: SpacesReactSvgUrl,
-            label: i18n.t("Common:Spaces"),
+            label: t("Common:Spaces"),
             onClick: this.onSpacesClick,
             url: SPACES_URL,
             preventNewTab: true,
@@ -354,7 +354,7 @@ class ProfileActionsStore {
                     },
                     {
                       key: "spaces-management",
-                      label: i18n.t("Common:SpaceManagement"),
+                      label: t("Common:SpaceManagement"),
                       onClick: this.onSpacesClick,
                     },
                   ]
@@ -374,7 +374,7 @@ class ProfileActionsStore {
       hotkeys = {
         key: "user-menu-hotkeys",
         icon: HotkeysReactSvgUrl,
-        label: i18n.t("Common:Hotkeys"),
+        label: t("Common:Hotkeys"),
         onClick: (e) => this.onHotkeysClick(e),
         url: `${window.location.pathname}?action=hotkeys`,
         preventNewTab: true,
@@ -393,7 +393,7 @@ class ProfileActionsStore {
       liveChat = {
         key: "user-menu-live-chat",
         icon: LiveChatReactSvgUrl,
-        label: i18n.t("Common:LiveChat"),
+        label: t("Common:LiveChat"),
         onClick: () => this.onLiveChatClick(t),
         checked: this.isShowLiveChat,
         withToggle: true,
@@ -406,7 +406,7 @@ class ProfileActionsStore {
       bookTraining = {
         key: "user-menu-book-training",
         icon: BookTrainingReactSvgUrl,
-        label: i18n.t("Common:BookTraining"),
+        label: t("Common:BookTraining"),
         onClick: this.onBookTraining,
       };
     }
@@ -417,7 +417,7 @@ class ProfileActionsStore {
       about = {
         key: "user-menu-about",
         icon: InfoOutlineReactSvgUrl,
-        label: i18n.t("Common:AboutCompanyTitle"),
+        label: t("Common:AboutCompanyTitle"),
         onClick: (e) => this.onAboutClick(e),
         url: `${window.location.pathname}?action=about`,
       };
@@ -428,7 +428,7 @@ class ProfileActionsStore {
         ? {
             key: "user-menu-accounts",
             icon: CatalogAccountsReactSvgUrl,
-            label: i18n.t("Common:Contacts"),
+            label: t("Common:Contacts"),
             onClick: (obj) =>
               this.onAccountsClick(PEOPLE_ROUTE_WITH_FILTER, obj),
             url: PEOPLE_ROUTE_WITH_FILTER,
@@ -448,7 +448,7 @@ class ProfileActionsStore {
       !isNotPaidPeriod && {
         key: "user-menu-profile",
         icon: ProfileReactSvgUrl,
-        label: i18n.t("Common:Profile"),
+        label: t("Common:Profile"),
         onClick: (obj) => this.onProfileClick(obj),
         url: PROFILE_SELF_URL,
         preventNewTab: true,
@@ -461,7 +461,7 @@ class ProfileActionsStore {
         !isCommunity && {
           key: "user-menu-payments",
           icon: PaymentsReactSvgUrl,
-          label: i18n.t("Common:PaymentsTitle"),
+          label: standalone ? t("Common:PaymentsTitle") : t("Common:Billing"),
           onClick: (obj) => this.onPaymentsClick(obj),
           additionalElement: <TariffBar />,
           url: PAYMENTS_URL,
@@ -474,7 +474,7 @@ class ProfileActionsStore {
       helpCenterEnabled && {
         key: "user-menu-help-center",
         icon: HelpCenterReactSvgUrl,
-        label: i18n.t("Common:HelpCenter"),
+        label: t("Common:HelpCenter"),
         onClick: this.onHelpCenterClick,
         url: this.settingsStore.helpCenterDomain || "#",
         preventNewTab: true,
@@ -494,7 +494,7 @@ class ProfileActionsStore {
       feedbackAndSupportEnabled && {
         key: "user-menu-support",
         icon: EmailReactSvgUrl,
-        label: i18n.t("Common:FeedbackAndSupport"),
+        label: t("Common:FeedbackAndSupport"),
         onClick: this.onSupportClick,
         url: this.settingsStore.feedbackAndSupportUrl || "#",
         preventNewTab: true,
@@ -502,7 +502,7 @@ class ProfileActionsStore {
       feedbackAndSupportEnabled && {
         key: "user-menu-suggest-feature",
         icon: LampReactSvgUrl,
-        label: i18n.t("Common:SuggestFeature"),
+        label: t("Common:SuggestFeature"),
         onClick: this.onSuggestFeatureClick,
         url: this.settingsStore.suggestFeatureUrl || "#",
         preventNewTab: true,
@@ -515,8 +515,8 @@ class ProfileActionsStore {
       actions.push({
         key: "user-menu-logout",
         icon: LogoutReactSvgUrl,
-        label: i18n.t("Common:LogoutButton"),
-        onClick: () => this.onLogoutClick(i18n.t),
+        label: t("Common:LogoutButton"),
+        onClick: () => this.onLogoutClick(t),
         isButton: true,
       });
     }

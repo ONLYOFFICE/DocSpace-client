@@ -85,6 +85,7 @@ import HelpCenterReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import AISvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
+import spreadsheetUrl from "PUBLIC_DIR/images/icons/16/spreadsheet.svg?url";
 import DotsHorizontalUrl from "PUBLIC_DIR/images/icons/16/dots-horizontal.react.svg?url";
 
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
@@ -118,7 +119,8 @@ import {
   connectedCloudsTypeTitleTranslation,
   removeOptions,
 } from "SRC_DIR/helpers/filesUtils";
-import { getOAuthToken } from "@docspace/shared/utils/common";
+import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
+import { OPERATIONS_NAME } from "@docspace/ui-kit/constants";
 import {
   RoomsType,
   Events,
@@ -148,6 +150,7 @@ import {
 } from "@docspace/shared/constants";
 import {
   isFile as isFileUtil,
+  isFolder,
   isFolder as isFolderUtil,
   isRoom as isRoomUtil,
 } from "@docspace/shared/utils/typeGuards";
@@ -161,7 +164,11 @@ import {
   showInfoPanel,
 } from "SRC_DIR/helpers/info-panel";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
+import { XlsxUpdateService } from "@docspace/shared/services/xlsx-update.service";
 import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
+import { getBrandName } from "@docspace/shared/constants/brands";
+import { getRoomInfo } from "@docspace/shared/api/rooms";
+import { SKIP_AI_MODAL_KEY } from "SRC_DIR/components/dialogs/AskAIConnectDialog";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -466,8 +473,8 @@ class ContextOptionsStore {
       .setFavoriteAction(action, items)
       .then(() =>
         action === "mark"
-          ? toastr.success(t("MarkedAsFavorite"))
-          : toastr.success(t("RemovedFromFavorites")),
+          ? toastr.success(t("Common:MarkedAsFavorite"))
+          : toastr.success(t("Common:RemovedFromFavorites")),
       )
       .catch((err) => toastr.error(err));
   };
@@ -1001,9 +1008,10 @@ class ContextOptionsStore {
     this.filesActionsStore.onCreateRoomFromTemplate(item);
   };
 
-  onEditRoomTemplate = (item) => {
+  onEditRoomTemplate = (item, cb) => {
     const event = new Event(Events.ROOM_EDIT);
     event.item = { ...item, isEdit: true };
+    event.cb = cb;
     window.dispatchEvent(event);
   };
 
@@ -1178,6 +1186,7 @@ class ContextOptionsStore {
             label: value.label,
             icon: value.icon,
             onClick,
+            placement: value.placement,
           };
 
           const processedItems = [];
@@ -1209,6 +1218,24 @@ class ContextOptionsStore {
 
     return pluginItems;
   };
+
+  placePlugins(result, pluginItems) {
+    const newResult = [...result];
+    const placementPlugins = pluginItems.filter((p) => p.placement);
+
+    placementPlugins.forEach((option) => {
+      if (option.placement === "top") {
+        newResult.splice(0, 0, option);
+      }
+
+      if (option.placement === "topLast") {
+        const firstSepIdx = newResult.findIndex((o) => o.isSeparator);
+        const insertAt = firstSepIdx !== -1 ? firstSepIdx : newResult.length;
+        newResult.splice(insertAt, 0, option);
+      }
+    });
+    return newResult;
+  }
 
   onClickInviteUsers = (roomId, roomType) => {
     const { isGracePeriod } = this.currentTariffStatusStore;
@@ -1406,7 +1433,6 @@ class ContextOptionsStore {
   };
 
   onCreateTemplate = async () => {
-    this.oformsStore.setTemplateGalleryVisible(false);
     this.oformsStore.setIsVisibleInfoPanelTemplateGallery(false);
 
     const event = new Event(Events.CREATE);
@@ -1572,7 +1598,53 @@ class ContextOptionsStore {
     downloadAction("", selectedFolder).catch((err) => toastr.error(err));
   };
 
-  createMenuGroup = (options, groupConfig, t) => {
+  onSyncXlsxData = async (item, t) => {
+    const { clearSecondaryProgressData, setSecondaryProgressBarData } =
+      this.filesActionsStore.uploadDataStore.secondaryProgressDataStore;
+
+    try {
+      const response = await XlsxUpdateService.start(item.id, isFolder(item));
+
+      if (!response) return;
+
+      const { form, task, isNewFile } = response;
+
+      if (task.isCompleted) {
+        XlsxUpdateService.assertTaskSucceeded(task);
+      } else {
+        const basePayload = {
+          operationId: task.id,
+          operation: OPERATIONS_NAME.other,
+        };
+
+        setSecondaryProgressBarData({ ...basePayload, percent: 0 });
+
+        await XlsxUpdateService.poll(form.id, task.id, (progress) => {
+          setSecondaryProgressBarData({
+            ...basePayload,
+            percent: progress?.percentage ?? 100,
+            completed: progress?.isCompleted ?? true,
+          });
+        }).catch((error) => {
+          clearSecondaryProgressData(task.id, OPERATIONS_NAME.other);
+          throw error;
+        });
+      }
+
+      const messageVar = { formName: form.title };
+
+      toastr.success(
+        isNewFile
+          ? t("Common:SpreadsheetGenerated", messageVar)
+          : t("Common:SpreadsheetUpdated", messageVar),
+      );
+    } catch (error) {
+      toastr.error(error);
+      console.error(error);
+    }
+  };
+
+  createMenuGroup = (options, groupConfig) => {
     const {
       groupKey,
       groupLabel,
@@ -1628,7 +1700,7 @@ class ContextOptionsStore {
         ? {
             id: `option_${groupKey}`,
             key: groupKey,
-            label: t(groupLabel),
+            label: groupLabel,
             icon: groupIcon,
             items: groupItems,
           }
@@ -1795,6 +1867,66 @@ class ContextOptionsStore {
         openTab();
       },
     };
+  };
+
+  _resolveRoom = async () => {
+    const { infoPanelRoom } = this.infoPanelStore;
+    const selectedFolder = this.selectedFolderStore.getSelectedFolder();
+
+    if (infoPanelRoom) return infoPanelRoom;
+    if (selectedFolder.isRoom) return selectedFolder;
+
+    const roomPath = selectedFolder.pathParts.find((path) => path.roomType);
+    if (!roomPath) return null;
+
+    const [room = null] = this.filesStore.getFilesListItems([
+      await getRoomInfo(roomPath.id),
+    ]);
+    return room;
+  };
+
+  _syncInfoPanelRoom = (newRoom) => {
+    const { infoPanelStore } = this;
+    if (infoPanelStore.isVisible && infoPanelStore.isDetailsTabActive) {
+      infoPanelStore.setInfoPanelRoom(newRoom);
+    }
+  };
+
+  askAI = async (item) => {
+    const skipAi = JSON.parse(localStorage.getItem(SKIP_AI_MODAL_KEY) ?? "false");
+
+    if (item.parentRoomType !== FolderType.FormRoom || skipAi) {
+      this.filesActionsStore.askAIAction(item);
+      return;
+    }
+
+    const { addActiveItems } = this.filesStore;
+    const { clearActiveOperations } = this.uploadDataStore;
+    const { endLoader, startLoader } = createLoader();
+
+    try {
+      startLoader(() => addActiveItems([item.id], null));
+
+      const room = await this._resolveRoom();
+      if (!room) return;
+
+      if (room.sendFormToExternalDB || !room.security?.EditRoom) {
+        this.filesActionsStore.askAIAction(item);
+        return;
+      }
+
+      this.dialogsStore.setAskAIConnectDialogVisible(true, (action) => {
+        if (action === "connect") {
+          this.onEditRoomTemplate(room, this._syncInfoPanelRoom);
+        } else if (action === "continue") {
+          this.filesActionsStore.askAIAction(item);
+        }
+      });
+    } catch (error) {
+      toastr.error(error);
+    } finally {
+      endLoader(() => clearActiveOperations([item.id]));
+    }
   };
 
   getFilesContextOptions = (item, t, isInfoPanel, isHeader) => {
@@ -2013,6 +2145,14 @@ class ContextOptionsStore {
           Boolean(item.external && item.isLinkExpired),
       },
       {
+        id: "option_sync_xlsx_data",
+        key: "update-xlsx-data",
+        label: t("Common:SyncXlsxData"),
+        icon: spreadsheetUrl,
+        onClick: () => this.onSyncXlsxData(item, t),
+        disabled: false,
+      },
+      {
         id: "option_fill-form",
         key: "fill-form",
         label: t("Common:FillFormButton"),
@@ -2149,7 +2289,8 @@ class ContextOptionsStore {
         onClick: () => this.onCopyLink(item, t),
         disabled: item.isTemplate
           ? false
-          : (isPublicRoomType && hasShareLinkRights) ||
+          : (!item.isRoom && item.canShare) ||
+            (isPublicRoomType && hasShareLinkRights) ||
             Boolean(
               item.external && (item.isLinkExpired || item.passwordProtected),
             ),
@@ -2159,7 +2300,7 @@ class ContextOptionsStore {
         key: "ask-ai",
         label: t("Common:AskAI"),
         icon: AISvgUrl,
-        onClick: () => this.filesActionsStore.askAIAction(item),
+        onClick: () => this.askAI(item),
         disabled: false,
       },
       {
@@ -2245,7 +2386,7 @@ class ContextOptionsStore {
       {
         id: "option_access-settings",
         key: "access-settings",
-        label: t("AccessSettings"),
+        label: t("AccessSettingsTitle"),
         icon: PersonReactSvgUrl,
         onClick: () => this.onOpenTemplateAccessOptions(),
         disabled: !isTemplateOwner,
@@ -2383,7 +2524,7 @@ class ContextOptionsStore {
         id: "option_link-for-portal-users",
         key: "link-for-portal-users",
         label: t("LinkForPortalUsers", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
         }),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onClickLinkForPortal(item, t),
@@ -2408,7 +2549,7 @@ class ContextOptionsStore {
       {
         id: "option_change-room-owner",
         key: "change-room-owner",
-        label: t("Files:ChangeTheRoomOwner"),
+        label: t("Files:ChangeRoomOwner"),
         icon: ReconnectSvgUrl,
         onClick: this.onChangeRoomOwner,
         disabled: isAIAgent,
@@ -2432,9 +2573,9 @@ class ContextOptionsStore {
         onClick: () => this.onSetUpCustomFilter(item, t),
         disabled: Boolean(
           !isRoomAdmin &&
-            item.customFilterEnabled &&
-            item.customFilterEnabledBy &&
-            item.customFilterEnabledBy !== this.userStore?.user?.displayName,
+          item.customFilterEnabled &&
+          item.customFilterEnabledBy &&
+          item.customFilterEnabledBy !== this.userStore?.user?.displayName,
         ),
       },
       {
@@ -2468,7 +2609,7 @@ class ContextOptionsStore {
       {
         id: "option_mark-as-favorite",
         key: "mark-as-favorite",
-        label: t("MarkAsFavorite"),
+        label: t("Common:MarkAsFavorite"),
         icon: FavoritesReactSvgUrl,
         onClick: () => this.onClickFavorite("mark", [item], t),
         disabled: false,
@@ -2487,7 +2628,10 @@ class ContextOptionsStore {
         label: t("Common:RemoveFromList"),
         icon: CircleCrossSvgUrl,
         onClick: () => this.onRemoveSharedFilesOrFolder([item]),
-        disabled: this.userStore?.user?.isAdmin || !item.external,
+        disabled:
+          this.userStore?.user?.isAdmin ||
+          this.userStore?.user?.isOwner ||
+          !item.external,
       },
       {
         id: "option_download-as",
@@ -2588,7 +2732,7 @@ class ContextOptionsStore {
       {
         id: "option_remove-from-favorites",
         key: "remove-from-favorites",
-        label: t("RemoveFromFavorites"),
+        label: t("Common:RemoveFromFavorites"),
         icon: FavoritesFillReactSvgUrl,
         onClick: () => this.onClickFavorite("remove", [item], t),
         disabled: false,
@@ -2601,7 +2745,7 @@ class ContextOptionsStore {
           : isAIAgent
             ? t("DeleteAgent")
             : item.isTemplate
-              ? t("Files:DeleteTemplate")
+              ? t("Files:DeleteTemplateAction")
               : item.isRoom
                 ? t("Common:DeleteRoom")
                 : t("Common:Delete"),
@@ -2652,9 +2796,8 @@ class ContextOptionsStore {
     const pluginItems = this.onLoadPlugins(item);
 
     if (pluginItems.length > 0) {
-      if (pluginItems.length === 1) {
-        const plugin = pluginItems[0];
-        options.splice(1, 0, {
+      pluginItems.forEach((plugin) => {
+        options.push({
           id: `option_${plugin.key}`,
           key: plugin.key,
           label: plugin.label,
@@ -2663,16 +2806,7 @@ class ContextOptionsStore {
           onClick: plugin.onClick,
           items: plugin.items,
         });
-      } else {
-        options.splice(1, 0, {
-          id: "option_plugin-actions",
-          key: "plugin_actions",
-          label: t("Common:Actions"),
-          icon: PluginActionsSvgUrl,
-          disabled: false,
-          items: this.onLoadPlugins(item),
-        });
-      }
+      });
     }
 
     const { isCollaborator } = this.userStore?.user || {
@@ -2687,7 +2821,7 @@ class ContextOptionsStore {
 
     let minItemsCount = 3;
     if (item.isAIAgent && item.inRoom) {
-      if (this.userStore?.user?.isAdmin) {
+      if (this.userStore?.user?.isAdmin || this.userStore?.user?.isOwner) {
         if (
           item.access === ShareAccessRights.RoomManager ||
           item.access === ShareAccessRights.None
@@ -2702,23 +2836,32 @@ class ContextOptionsStore {
       }
     }
 
+    const showInfoOption = newOptions.find(
+      (option) => option.key === "show-info",
+    );
+    const showVersionHistoryOption = newOptions.find(
+      (option) => option.key === "show-version-history",
+    );
+
+    const moreOptionsItemKeys = [
+      [
+        { key: "save-as-template" },
+        { key: "duplicate-room" },
+        { key: "download" },
+        { key: "room-info" },
+        { key: "embedding-settings" },
+        { key: "reconnect-storage" },
+        { key: "export-room-index" },
+      ],
+      [{ key: "change-room-owner" }, { key: "change-agent-owner" }],
+    ];
+
     const menuGroupsConfig = [
       {
         groupKey: "more-options",
         groupLabel: t("Common:MoreOptions"),
         groupIcon: DotsHorizontalUrl,
-        itemKeys: [
-          [
-            { key: "save-as-template" },
-            { key: "duplicate-room" },
-            { key: "download" },
-            { key: "room-info" },
-            { key: "embedding-settings" },
-            { key: "reconnect-storage" },
-            { key: "export-room-index" },
-          ],
-          [{ key: "change-room-owner" }, { key: "change-agent-owner" }],
-        ],
+        itemKeys: moreOptionsItemKeys,
         needsGrouping: true,
         minItemsCount,
       },
@@ -2771,13 +2914,6 @@ class ContextOptionsStore {
       });
     }
 
-    const showInfoOption = newOptions.find(
-      (option) => option.key === "show-info",
-    );
-    const showVersionHistoryOption = newOptions.find(
-      (option) => option.key === "show-version-history",
-    );
-
     if (showInfoOption && showVersionHistoryOption) {
       menuGroupsConfig.push({
         groupKey: "info",
@@ -2789,9 +2925,6 @@ class ContextOptionsStore {
             { key: "show-info" },
             { key: "embedding-settings" },
           ],
-          pluginItems.map((plug) => {
-            return { key: plug.key };
-          }),
         ],
         needsGrouping: true,
         minItemsCount: 1,
@@ -2805,7 +2938,6 @@ class ContextOptionsStore {
       const { group, keysToRemove: groupKeysToRemove } = this.createMenuGroup(
         newOptions,
         configItem,
-        t,
       );
       if (group) {
         menuGroups.push(group);
@@ -2849,6 +2981,50 @@ class ContextOptionsStore {
       resultOptions.splice(insertIndex, 0, ...menuGroups);
     }
 
+    if (pluginItems.length > 0) {
+      const pluginKeys = pluginItems.map((p) => p.key);
+
+      // Remove all plugin items from resultOptions first
+      for (let i = resultOptions.length - 1; i >= 0; i--) {
+        if (pluginKeys.includes(resultOptions[i].key))
+          resultOptions.splice(i, 1);
+      }
+
+      const defaultPlugins = pluginItems.filter((p) => !p.placement);
+
+      // default — existing "more-options" logic unchanged
+      if (defaultPlugins.length > 0) {
+        const moreOptionsGroup =
+          resultOptions.find((o) => o.key === "more-options") ||
+          resultOptions.find((o) => o.key === "info");
+        if (moreOptionsGroup) {
+          moreOptionsGroup.items.push({
+            key: "separator-before-plugins",
+            isSeparator: true,
+          });
+          defaultPlugins.forEach((p) => moreOptionsGroup.items.push(p));
+        } else {
+          const externalLinkIdx = resultOptions.findIndex(
+            (o) => o.key === "external-link",
+          );
+          const roomMembersLinkIdx = resultOptions.findIndex(
+            (o) => o.key === "link-for-room-members",
+          );
+          const menuIdx =
+            externalLinkIdx !== -1 ? externalLinkIdx : roomMembersLinkIdx;
+          const pluginInsertIdx = menuIdx !== -1 ? menuIdx + 1 : 1;
+
+          resultOptions.splice(pluginInsertIdx, 0, {
+            id: "option_more-options",
+            key: "more-options",
+            label: t("Common:MoreOptions"),
+            icon: DotsHorizontalUrl,
+            items: defaultPlugins,
+          });
+        }
+      }
+    }
+
     const downloadGroupIndex = resultOptions.findIndex(
       (option) => option.key === "download",
     );
@@ -2860,7 +3036,14 @@ class ContextOptionsStore {
       const groups = item.isFolder
         ? [
             ["select", "open", "mark-read", "open-location"],
-            ["share", "move", "copy-to", "download", "rename"],
+            [
+              "update-xlsx-data",
+              "share",
+              "move",
+              "copy-to",
+              "download",
+              "rename",
+            ],
             ["mark-as-favorite", "show-info"],
             ["restore"],
             ["remove-from-favorites", "remove-shared-folder-or-file", "delete"],
@@ -2880,7 +3063,15 @@ class ContextOptionsStore {
             ],
             ["filling-status", "reset-and-start-filling"],
             ["ask-ai"],
-            ["share", "move", "copy-to", "download", "edit-index", "rename"],
+            [
+              "update-xlsx-data",
+              "share",
+              "move",
+              "copy-to",
+              "download",
+              "edit-index",
+              "rename",
+            ],
             [
               "mark-as-favorite",
               "block-unblock-version",
@@ -2903,6 +3094,7 @@ class ContextOptionsStore {
 
       groups.forEach((group) => {
         const groupItems = [];
+
         group.forEach((key) => {
           const option = items.find((opt) => opt.key === key);
           if (option) groupItems.push(option);
@@ -2943,7 +3135,10 @@ class ContextOptionsStore {
         }
       });
 
-      return trimSeparator(result);
+      // Insert plugin items according to their placement
+      const newResult = this.placePlugins(result, pluginItems);
+
+      return trimSeparator(newResult);
     }
 
     if (downloadGroupIndex !== -1 && moveIndex !== -1) {
@@ -2962,7 +3157,9 @@ class ContextOptionsStore {
       }
     }
 
-    return trimSeparator(resultOptions);
+    const newResult = this.placePlugins(resultOptions, pluginItems);
+
+    return trimSeparator(newResult);
   };
 
   getGroupContextOptions = (t) => {
@@ -3379,7 +3576,7 @@ class ContextOptionsStore {
           className: "main-button_drop-down",
           icon: ActionsUploadReactSvgUrl,
           label: t("Common:FromPortal", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           }),
           key: "personal_upload-from-docspace",
           onClick: () =>
@@ -3499,14 +3696,14 @@ class ContextOptionsStore {
 
     const uploadFiles = {
       key: "upload-files",
-      label: t("Article:UploadFiles"),
+      label: t("Common:UploadFiles"),
       onClick: () => this.onUploadAction("file"),
       icon: ActionsUploadReactSvgUrl,
     };
 
     const uploadFolder = {
       key: "upload-folder",
-      label: t("Article:UploadFolder"),
+      label: t("Common:UploadFolder"),
       onClick: () => this.onUploadAction("folder"),
       icon: ActionsUploadReactSvgUrl,
     };
@@ -3548,7 +3745,7 @@ class ContextOptionsStore {
           className: "main-button_drop-down",
           icon: MoveReactSvgUrl,
           label: t("EmptyView:UploadFromPortalTitle", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           }),
           onClick: this.onShowAiKnowledgeSelectFileDialog,
           key: "upload-files-product",
@@ -3597,7 +3794,6 @@ class ContextOptionsStore {
             uploadFiles,
             showUploadFolder ? uploadFolder : null,
           ];
-
     if (
       !isAIAgents() &&
       mainButtonItemsList &&
@@ -3626,7 +3822,6 @@ class ContextOptionsStore {
 
     return options;
   };
-
   getModel = (item, t) => {
     const { selection } = this.filesStore;
 

@@ -46,3 +46,11 @@ export const request = <T>(
 export const setWithCredentialsStatus = (state: boolean) => {
   return client.setWithCredentialsStatus(state);
 };
+
+export const setAuthToken = (token: string | null) => {
+  client.setAuthToken(token);
+};
+
+export const getAuthToken = (): string | null => {
+  return client.authToken;
+};

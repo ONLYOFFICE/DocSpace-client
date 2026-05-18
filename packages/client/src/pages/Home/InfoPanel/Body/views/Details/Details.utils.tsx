@@ -28,8 +28,7 @@ import React from "react";
 import { decode } from "he";
 import type { TFunction } from "i18next";
 
-import { getCorrectDate } from "@docspace/shared/utils";
-
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { Link } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
 
@@ -71,7 +70,12 @@ const link = (txt: React.ReactNode, onClick: () => void) => (
   </Link>
 );
 
-const tagList = (tags: string[], id: number, access: ShareAccessRights) => (
+const tagList = (
+  tags: string[],
+  id: number,
+  access: ShareAccessRights,
+  title: string,
+) => (
   <div className="property-tag_list" data-testid="info_panel_details_tag_list">
     <TagManagement
       id={id}
@@ -80,6 +84,7 @@ const tagList = (tags: string[], id: number, access: ShareAccessRights) => (
       className="tags"
       columnCount={-1}
       access={access}
+      roomName={title}
     />
   </div>
 );
@@ -203,6 +208,9 @@ class DetailsHelper {
                 "Author",
               "sharedBy" in this.item && this.item.sharedBy && "Shared by",
               this.item.access && "Access level",
+              "externalDbTableName" in this.item &&
+                this.item.externalDbTableName &&
+                "externalDbTableName",
               "Comments",
             ]
     ).filter((nP) => nP) as string[];
@@ -255,6 +263,8 @@ class DetailsHelper {
         return this.t("Files:SharedBy");
       case "Access level":
         return this.t("Files:AccessLevel");
+      case "externalDbTableName":
+        return this.t("Files:TableName");
 
       case "Storage":
         if ("usedSpace" in this.item && this.item.usedSpace !== undefined) {
@@ -324,9 +334,16 @@ class DetailsHelper {
         return this.getAuthorDecoration("sharedBy");
       case "Access level":
         return this.getItemAccessLevel();
+      case "externalDbTableName":
+        return this.getExternalDbTableName();
       default:
         break;
     }
+  };
+
+  getExternalDbTableName = () => {
+    if (!("externalDbTableName" in this.item)) return null;
+    return text(this.item.externalDbTableName);
   };
 
   getItemAccessLevel = () => {
@@ -441,7 +458,12 @@ class DetailsHelper {
 
   getItemTags = () => {
     if ("tags" in this.item)
-      return tagList(this.item.tags, this.item.id, this.item.access);
+      return tagList(
+        this.item.tags,
+        this.item.id,
+        this.item.access,
+        this.item.title,
+      );
   };
 
   getQuotaItem = () => {

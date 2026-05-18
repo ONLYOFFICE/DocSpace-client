@@ -26,6 +26,7 @@
 
 import { EditorProps, TGoBack } from "@/types";
 import { useTranslation } from "react-i18next";
+import { FolderType } from "@docspace/ui-kit/enums";
 
 const useGoBackAndClose = (
   fileInfo: EditorProps["fileInfo"],
@@ -52,12 +53,14 @@ const useGoBackAndClose = (
       }
     )?.FileLocation; // t("FileLocation");
 
+    const withoutGoBackText = sdkConfig?.withoutGoBackText;
+
     if (editorGoBack === false || user?.isVisitor || !user) {
       console.log("goBack", goBack);
     } else if (editorGoBack === "event") {
       goBack = {
         requestClose: true,
-        text: openFileLocationText,
+        text: withoutGoBackText ? undefined : openFileLocationText,
         blank: openOnNewPage,
       };
     } else {
@@ -76,6 +79,10 @@ const useGoBackAndClose = (
         goBack.url = goBackUrl;
       }
     }
+  }
+
+  if (fileInfo?.rootFolderType === FolderType.DefaultTemplates) {
+    goBack.url = `${window.location.origin}/portal-settings/customization/default-templates`;
   }
 
   let showClose =

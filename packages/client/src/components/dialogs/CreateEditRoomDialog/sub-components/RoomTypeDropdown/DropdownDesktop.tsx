@@ -25,53 +25,26 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useState, useRef } from "react";
-import styled from "styled-components";
 
 import RoomType from "@docspace/shared/components/room-type";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
-import { injectDefaultTheme } from "@docspace/shared/utils";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { Backdrop } from "@docspace/ui-kit/components";
 import { RoomsType } from "@docspace/shared/enums";
 
-const StyledDropdownDesktop = styled.div.attrs(injectDefaultTheme)<{
-  isOpen: boolean;
-  heightReady: boolean;
-}>`
-  max-width: 100%;
-  position: relative;
-
-  ${(props) => (!props.isOpen || !props.heightReady) && "display: none"};
-
-  .dropdown-content {
-    background: ${(props) =>
-      props.theme.createEditRoomDialog.roomTypeDropdown.desktop.background};
-    border: 1px solid
-      ${(props) =>
-        props.theme.createEditRoomDialog.roomTypeDropdown.desktop.borderColor};
-    margin-top: 4px;
-    overflow: visible;
-    z-index: 400;
-    top: 0;
-
-    inset-inline-start: 0;
-    box-sizing: border-box;
-    width: 100%;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    padding: 6px 0;
-    box-shadow: 0px 12px 40px ${globalColors.popupShadow};
-    border-radius: 6px;
-  }
-`;
+import styles from "../../CreateEditRoomDialog.module.scss";
 
 type DropdownDesktopProps = {
   open: boolean;
   chooseRoomType: (roomType: RoomsType) => void;
+  onClose: () => void;
 };
 
-const DropdownDesktop = ({ open, chooseRoomType }: DropdownDesktopProps) => {
+const DropdownDesktop = ({
+  open,
+  chooseRoomType,
+  onClose,
+}: DropdownDesktopProps) => {
   const [heightList, setHeightList] = useState<number | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -138,15 +111,23 @@ const DropdownDesktop = ({ open, chooseRoomType }: DropdownDesktopProps) => {
   );
 
   return (
-    <StyledDropdownDesktop
-      className="dropdown-content-wrapper"
-      isOpen={open}
-      heightReady={typeof heightList === "number"}
-    >
-      <div className="dropdown-content" ref={dropdownRef}>
-        {content}
+    <>
+      <Backdrop
+        visible={open}
+        onClick={onClose}
+        withBackground={false}
+        withoutBackground
+        isAside
+        zIndex={400}
+      />
+      <div
+        className={`${styles.dropdownDesktop}${open && typeof heightList === "number" ? ` ${styles.isOpen}` : ""} dropdown-content-wrapper`}
+      >
+        <div className="dropdown-content" ref={dropdownRef}>
+          {content}
+        </div>
       </div>
-    </StyledDropdownDesktop>
+    </>
   );
 };
 

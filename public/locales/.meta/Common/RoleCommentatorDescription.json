@@ -3,28 +3,29 @@
   "content": "Operations with existing files: viewing, commenting.",
   "content_en_sha1_hash": "ce4731d6a339d2e7324665f3b5fc839d54a12c0e",
   "created_at": "2025-05-19T21:30:47.993Z",
-  "updated_at": "2026-02-19T13:36:33.111Z",
+  "updated_at": "2026-04-13T08:51:20.150Z",
   "comment": {
-    "text": "This translation key is used to display a description for comments made by users with access as a commentator. It appears in UI elements related to commenting on files and shares, such as dialogs or buttons, guiding the user on their role and permissions.",
+    "text": "This is a description of the \"Commentator\" role, explaining that users with this role can view and comment on existing files. It appears in sharing settings and access options.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:38.579Z"
+    "updated_at": "2026-04-11T20:44:37.823Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 189,
+      "line_number": 190,
       "context": "label: t(\"Common:RoleReviewer\"),\n icon: AccessReviewReactSvgUrl,\n },\n [ShareRights.Comment]: {\n access: ShareAccessRights.Comment,\n description: t(\"Common:RoleCommentatorDescription\"),\n key: \"commenting\",\n label: t(\"Commentator\"),\n icon: AccessCommentReactSvgUrl,\n },\n [ShareRights.Read]: {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 189,
+      "line_number": 190,
       "context": "label: t(\"Common:RoleReviewer\"),\n icon: AccessReviewReactSvgUrl,\n },\n [ShareRights.Comment]: {\n access: ShareAccessRights.Comment,\n description: t(\"Common:RoleCommentatorDescription\"),\n key: \"commenting\",\n label: t(\"Commentator\"),\n icon: AccessCommentReactSvgUrl,\n },\n [ShareRights.Read]: {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 228,
+      "line_number": 229,
       "context": "type: EmployeeType.User,\n },\n commentator: {\n key: \"commentator\",\n label: t(\"Common:RoleCommentator\"),\n description: t(\"Common:RoleCommentatorDescription\"),\n access: ShareAccessRights.Comment,\n type: EmployeeType.User,\n },\n viewer: {\n key: \"viewer\",",
       "module": "/packages/shared"
     }
@@ -39,18 +40,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Operations with existing files' is translated as 'العمليات المتاحة على الملفات الحالية'. While understandable, a more accurate translation reflecting 'Operations' could be 'إجراءات' or 'وظائف'. 'العمليات المتاحة' implies available operations, which isn't the direct meaning.",
-          "suggestion": "إجراءات على الملفات الحالية"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the translation could benefit from a more natural flow and punctuation to align better with common Arabic usage. Consider adding a colon after 'الحالية' to mirror the English structure.",
-          "suggestion": "إجراءات على الملفات الحالية: العرض والتعليق."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -104,18 +94,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Գործողություններ գոյություն ունեցող ֆայլերով՝ դիտում, մեկնաբանում։\" is a literal translation and not a natural-sounding expression in Armenian. The phrase 'գործողություններ գոյություն ունեցող ֆայլերով' is clunky.",
-          "suggestion": "A more natural translation would be something like \"գործողություններ առկա ֆայլերի հետ՝ դիտում, մեկնաբանություն։\" or \"առկա ֆայլերի հետ գործողություններ՝ դիտում, մեկնաբանություն։\""
-        },
-        {
-          "type": "formatting",
-          "description": "The comma after \"դիտում\" creates an awkward pause. While grammatically correct, it's not typical in this context.",
-          "suggestion": "Remove the comma after \"դիտում\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -139,13 +118,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation \"ການສະແດງຄວາມຄິດເຫັນ\" is a literal translation of \"commenting\" but might sound a bit formal or stilted in this context. A more natural phrasing might be preferred.",
-          "suggestion": "Consider a more colloquial or contextually appropriate phrasing for 'commenting,' such as 'ການຕີຄຳເຫັນ' or 'ການເີ້ຊີ້ຟ້າຽນຄຳເຫັນ'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -193,13 +166,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'අදහස් දැක්වීම්' (adahas dekivim) is a valid translation for 'commenting,' but could be slightly more natural. Consider 'අදහස් පළ කිරීම්' (adahas pala kirim) for a more common phrasing.",
-          "suggestion": "අදහස් පළ කිරීම්"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -217,13 +184,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Операције' (Operacije) translates to 'Operations', but in this context, a more natural translation would be 'Radnje' or 'Поступаци'. While 'Операције' isn't strictly incorrect, it sounds overly formal for a user-facing description.",
-          "suggestion": "Радње са постојећим датотекама: прегледање, коментарисање."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -255,11 +216,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation '支持的文件操作：查看、评论。' implies 'supported file operations', which is not necessarily the meaning of 'Operations with existing files'. A more accurate translation would emphasize working *on* existing files.",
-          "suggestion": "现有文件操作：查看、评论。"
+          "type": "missing_content",
+          "description": "The phrase 'with existing files' from the English text is absent in the Chinese translation. The English specifically qualifies that these operations apply only to existing files, which is a critical detail for understanding the Commentator role's limitations. The Chinese '支持的文件操作' (supported file operations) does not convey this important scope qualifier.",
+          "suggestion": "现有文件的操作：查看、评论。",
+          "checked_at": "2026-04-13T08:51:20.149Z",
+          "checked_by": "claude-code/haiku"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

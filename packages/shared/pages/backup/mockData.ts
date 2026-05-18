@@ -303,11 +303,13 @@ export const useMockScheduleProps = () => {
   const [selectedPeriodNumber, setSelectedPeriodNumber] = useState("0");
 
   const handleWeekdayChange = (option: TOption) => {
-    setSelectedWeekdayLabel(option?.label || selectedWeekdayLabel);
+    setSelectedWeekdayLabel(
+      (option?.label as string) || selectedWeekdayLabel,
+    );
   };
 
   const handleTimeChange = (option: TOption) => {
-    setSelectedHour(option?.label || selectedHour);
+    setSelectedHour((option?.label as string) || selectedHour);
   };
 
   const handleMaxCopiesChange = (option: TOption) => {
@@ -317,12 +319,14 @@ export const useMockScheduleProps = () => {
   };
 
   const handlePeriodChange = (option: TOption) => {
-    setSelectedPeriodLabel(option?.label || selectedPeriodLabel);
+    setSelectedPeriodLabel(
+      (option?.label as string) || selectedPeriodLabel,
+    );
     setSelectedPeriodNumber(option?.key.toString() || selectedPeriodNumber);
   };
 
   const handleMonthNumberChange = (option: TOption) => {
-    setSelectedMonthDay(option?.label || selectedMonthDay);
+    setSelectedMonthDay((option?.label as string) || selectedMonthDay);
   };
 
   const handleToggle = () => {

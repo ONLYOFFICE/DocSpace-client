@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { cookies, headers } from "next/headers";
-import Script from "next/script";
 
 import { getSelectorsByUserAgent } from "react-device-detect";
 
@@ -41,7 +40,7 @@ import { logger } from "@/../logger.mjs";
 import { RootPageProps } from "@/types";
 import Root from "@/components/Root";
 import FilePassword from "@/components/file-password";
-import { TFrameConfig } from "@docspace/shared/types/Frame";
+import type { TFrameConfig, TFrameTheme } from "@docspace/shared/types/Frame";
 
 const initialSearchParams: Awaited<RootPageProps["searchParams"]> = {
   fileId: undefined,
@@ -51,6 +50,7 @@ const initialSearchParams: Awaited<RootPageProps["searchParams"]> = {
   action: undefined,
   share: undefined,
   editorType: undefined,
+  withoutGoBackText: undefined,
   withTool: undefined,
 };
 
@@ -70,21 +70,26 @@ async function Page(props: RootPageProps) {
     theme,
     is_file,
     editorGoBack,
+    withoutGoBackText,
     isSDK,
     withTool,
   } = searchParams ?? initialSearchParams;
 
-  const baseSdkConfig: TFrameConfig & { is_file?: boolean; isSDK?: boolean } = {
+  const baseSdkConfig: TFrameConfig & {
+    is_file?: boolean;
+    isSDK?: boolean;
+    withoutGoBackText?: boolean;
+  } = {
     frameId: "",
-    mode: "",
     src: "",
     editorCustomization: { uiTheme: theme },
     editorGoBack,
+    withoutGoBackText,
     editorType,
     id: fileId,
     locale,
     requestToken: share,
-    theme,
+    theme: theme as TFrameTheme,
     is_file,
     isSDK,
   };
@@ -147,7 +152,9 @@ async function Page(props: RootPageProps) {
     }
   }
 
-  const deepLinkSettings = isSDK ? null : await getDeepLinkSettings();
+  const isEmbedded = editorType === "embedded";
+  const deepLinkSettings =
+    isSDK || isEmbedded ? null : await getDeepLinkSettings();
 
   if (data.error?.status === "not-found" && error) {
     data.error.message = error;
@@ -183,11 +190,7 @@ async function Page(props: RootPageProps) {
   return (
     <>
       {url ? (
-        <Script
-          id="onlyoffice-api-script"
-          strategy="beforeInteractive"
-          src={docApiUrl}
-        />
+        <script id="onlyoffice-api-script" async src={docApiUrl} />
       ) : null}
       <Root
         {...data}

@@ -28,7 +28,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useTheme } from "styled-components";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 
@@ -44,7 +44,7 @@ import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Secti
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
-} from "@docspace/shared/utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 
 import config from "../../../../../package.json";
 
@@ -78,7 +78,7 @@ const DataManagementWrapper = (props) => {
 
   const [currentTabId, setCurrentTabId] = useState();
 
-  const { interfaceDirection } = useTheme();
+  const { interfaceDirection } = useInterfaceDirection();
   const directionTooltip = interfaceDirection === "rtl" ? "left" : "right";
 
   const defaultProps = createDefaultHookSettingsProps({

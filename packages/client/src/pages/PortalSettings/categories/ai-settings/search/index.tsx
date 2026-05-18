@@ -35,7 +35,7 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
-import { WebSearchType } from "@docspace/shared/api/ai/enums";
+import { ProviderType, WebSearchType } from "@docspace/shared/api/ai/enums";
 import { PasswordInput } from "@docspace/ui-kit/components/password-input";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -48,6 +48,7 @@ import generalStyles from "../AISettings.module.scss";
 import styles from "./Search.module.scss";
 import { ResetWebSearchDialog } from "./dialogs/reset";
 import { SearchLoader } from "./SearchLoader";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type TSearchProps = {
   webSearchInitied?: AISettingsStore["webSearchInitied"];
@@ -55,8 +56,10 @@ type TSearchProps = {
   restoreWebSearch?: AISettingsStore["restoreWebSearch"];
   updateWebSearch?: AISettingsStore["updateWebSearch"];
   hasAIProviders?: AISettingsStore["hasAIProviders"];
+  aiProviders?: AISettingsStore["aiProviders"];
   webSearchSettingsUrl?: SettingsStore["webSearchSettingsUrl"];
   getAIConfig?: SettingsStore["getAIConfig"];
+  aiConfig?: SettingsStore["aiConfig"];
 };
 
 const FAKE_KEY_VALUE = "0000000000000000";
@@ -66,8 +69,10 @@ const SearchComponent = ({
   webSearchConfig,
   updateWebSearch,
   hasAIProviders,
+  aiProviders,
   webSearchSettingsUrl,
   getAIConfig,
+  aiConfig,
 }: TSearchProps) => {
   const { t } = useTranslation(["Common", "AISettings", "Settings"]);
 
@@ -81,6 +86,8 @@ const SearchComponent = ({
   const [selectedOption, setSelectedOption] = React.useState<WebSearchType>(
     () => {
       if (webSearchConfig?.type === WebSearchType.Exa) return WebSearchType.Exa;
+      if (webSearchConfig?.type === WebSearchType.PortalAi)
+        return WebSearchType.PortalAi;
 
       return WebSearchType.None;
     },
@@ -125,14 +132,40 @@ const SearchComponent = ({
     getAIConfig?.();
   };
 
+  const hasSystemProvider = aiProviders?.some(
+    (p) => p.type === ProviderType.PortalAi,
+  );
+  const isSystemProviderDisabled =
+    hasSystemProvider && !aiConfig?.systemAiEnabled;
+
   const items = React.useMemo(() => {
-    return [
-      {
-        key: WebSearchType.Exa,
-        label: "Exa",
-      },
-    ];
-  }, []);
+    const options: TOption[] = [];
+
+    if (hasSystemProvider) {
+      options.push({
+        key: WebSearchType.PortalAi,
+        label: isSystemProviderDisabled
+          ? `ONLYOFFICE AI (${t("Common:ActivationRequired")})`
+          : "ONLYOFFICE AI",
+        disabled: isSystemProviderDisabled,
+        withExternalLink: isSystemProviderDisabled,
+        externalLinkPath: isSystemProviderDisabled
+          ? "/portal-settings/payments/services"
+          : undefined,
+        onExternalLinkClick: isSystemProviderDisabled
+          ? () =>
+              window.DocSpace?.navigate("/portal-settings/payments/services")
+          : undefined,
+      });
+    }
+
+    options.push({
+      key: WebSearchType.Exa,
+      label: "Exa",
+    });
+
+    return options;
+  }, [hasSystemProvider, isSystemProviderDisabled, t]);
 
   const selectedItem = React.useMemo(() => {
     return items.find((item) => item.key === selectedOption);
@@ -146,6 +179,8 @@ const SearchComponent = ({
 
     setSelectedOption(() => {
       if (webSearchConfig?.type === WebSearchType.Exa) return WebSearchType.Exa;
+      if (webSearchConfig?.type === WebSearchType.PortalAi)
+        return WebSearchType.PortalAi;
 
       return WebSearchType.None;
     });
@@ -153,8 +188,10 @@ const SearchComponent = ({
 
   if (!webSearchInitied) return <SearchLoader />;
 
-  const isSaveDisabled =
-    !value || selectedOption === WebSearchType.None || isKeyHidden;
+  const isPortalAiSelected = selectedOption === WebSearchType.PortalAi;
+  const isSaveDisabled = isPortalAiSelected
+    ? webSearchConfig?.type === WebSearchType.PortalAi
+    : !value || selectedOption === WebSearchType.None || isKeyHidden;
 
   const tooltipId = "tooltip-web-search";
 
@@ -175,7 +212,7 @@ const SearchComponent = ({
         <Text className={generalStyles.description}>
           {t("AISettings:SearchDescription", {
             webSearch: t("Common:WebSearchAI"),
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
             aiChats: t("Common:AIChats"),
           })}
         </Text>
@@ -203,6 +240,8 @@ const SearchComponent = ({
           >
             <ComboBox
               options={items}
+              showDisabledItems
+              scaledOptions={hasSystemProvider}
               selectedOption={
                 selectedItem ?? ({ label: t("Common:SelectAction") } as TOption)
               }
@@ -217,46 +256,48 @@ const SearchComponent = ({
               dropDownTestId="web-search-engine-dropdown"
             />
           </FieldContainer>
-          <FieldContainer
-            labelVisible
-            isVertical
-            labelText={t("AISettings:APIKey")}
-            removeMargin
-          >
-            {isKeyHidden ? (
-              <div
-                className={styles.aiBanner}
-                data-testid="web-search-key-hidden-banner"
-              >
-                <Text fontSize="12px" fontWeight={400} lineHeight="16px">
-                  {t("AISettings:WebSearchKeyHiddenDescription")}
-                </Text>
-              </div>
-            ) : (
-              <>
-                <PasswordInput
-                  className={styles.passwordInput}
-                  placeholder={t("AISettings:EnterKey")}
-                  inputValue={value}
-                  onChange={onChange}
-                  scale
-                  isSimulateType
-                  isFullWidth
-                  isDisableTooltip
-                  isDisabled={
-                    isKeyHidden || selectedOption === WebSearchType.None
-                  }
-                  autoComplete="off"
-                  testId="web-search-key-input"
-                />
-                <Text className={styles.hiddenKeyDescription}>
-                  {t("AISettings:WebSearchKeyDescription", {
-                    webSearch: t("Common:WebSearchAI"),
-                  })}
-                </Text>
-              </>
-            )}
-          </FieldContainer>
+          {selectedOption !== WebSearchType.PortalAi ? (
+            <FieldContainer
+              labelVisible
+              isVertical
+              labelText={t("AISettings:APIKey")}
+              removeMargin
+            >
+              {isKeyHidden ? (
+                <div
+                  className={styles.aiBanner}
+                  data-testid="web-search-key-hidden-banner"
+                >
+                  <Text fontSize="12px" fontWeight={400} lineHeight="16px">
+                    {t("AISettings:WebSearchKeyHiddenDescription")}
+                  </Text>
+                </div>
+              ) : (
+                <>
+                  <PasswordInput
+                    className={styles.passwordInput}
+                    placeholder={t("AISettings:EnterKey")}
+                    inputValue={value}
+                    onChange={onChange}
+                    scale
+                    isSimulateType
+                    isFullWidth
+                    isDisableTooltip
+                    isDisabled={
+                      isKeyHidden || selectedOption === WebSearchType.None
+                    }
+                    autoComplete="off"
+                    testId="web-search-key-input"
+                  />
+                  <Text className={styles.hiddenKeyDescription}>
+                    {t("AISettings:WebSearchKeyDescription", {
+                      webSearch: t("Common:WebSearchAI"),
+                    })}
+                  </Text>
+                </>
+              )}
+            </FieldContainer>
+          ) : null}
         </div>
         <div className={styles.buttonContainer}>
           <Button
@@ -300,8 +341,10 @@ export const Search = inject(({ aiSettingsStore, settingsStore }: TStore) => {
     webSearchConfig: aiSettingsStore.webSearchConfig,
     updateWebSearch: aiSettingsStore.updateWebSearch,
     hasAIProviders: aiSettingsStore.hasAIProviders,
+    aiProviders: aiSettingsStore.aiProviders,
     webSearchSettingsUrl: settingsStore.webSearchSettingsUrl,
     getAIConfig: settingsStore.getAIConfig,
+    aiConfig: settingsStore.aiConfig,
   };
 })(observer(SearchComponent));
 

@@ -27,7 +27,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { getCorrectDate } from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { LANGUAGE } from "@docspace/shared/constants";

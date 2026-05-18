@@ -24,8 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
+
+import styles from "./FieldMapping.module.scss";
 import { useTranslation } from "react-i18next";
 
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
@@ -34,20 +35,6 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { SSO_GIVEN_NAME, SSO_SN, SSO_EMAIL } from "SRC_DIR/helpers/constants";
 import SsoFormField from "./sub-components/SsoFormField";
 
-const StyledWrapper = styled.div`
-  .icon-button {
-    padding: 0 5px;
-  }
-
-  .attribute-matching-box {
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    font-size: 14px;
-    margin: 24px 0 16px 0;
-  }
-`;
 
 const FieldMapping = (props) => {
   const { t } = useTranslation(["SingleSignOn", "Common"]);
@@ -61,8 +48,8 @@ const FieldMapping = (props) => {
   } = props;
 
   return (
-    <StyledWrapper>
-      <div className="attribute-matching-box">
+    <div className={styles.styledWrapper}>
+      <div className={styles.attributeMatchingBox}>
         <Text as="h2" fontSize="15px" fontWeight={600}>
           {t("AttributeMatching")}
         </Text>
@@ -133,7 +120,7 @@ const FieldMapping = (props) => {
         value={phone}
         hasError={phoneHasError}
   /> */}
-    </StyledWrapper>
+    </div>
   );
 };
 

@@ -1,9 +1,10 @@
 import React from "react";
-import { describe, it, expect, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { ButtonSize } from "@docspace/ui-kit/components/button";
+import { startRestore } from "../../../api/portal";
 
 import { RestoreBackup } from "./index";
 import {
@@ -14,13 +15,17 @@ import {
   mockConnectedAccount,
 } from "../mockData";
 
-vi.mock("@docspace/shared/utils/socket", () => ({
+vi.mock("@docspace/ui-kit/utils/socket", () => ({
   default: {
     on: vi.fn(),
     off: vi.fn(),
+    emit: vi.fn(),
   },
   SocketEvents: {
     BackupProgress: "BACKUP_PROGRESS",
+  },
+  SocketCommands: {
+    RestoreBackup: "RESTORE_BACKUP",
   },
 }));
 
@@ -133,6 +138,10 @@ const defaultProps = {
 };
 
 describe("RestoreBackup", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   it("renders without errors", () => {
     render(<RestoreBackup {...defaultProps} />);
     expect(screen.getByTestId("restore-backup")).toBeInTheDocument();
@@ -199,6 +208,85 @@ describe("RestoreBackup", () => {
     await user.click(backupListText);
 
     expect(screen.getByTestId("backup-list-modal")).toBeInTheDocument();
+  });
+
+  it("opens standalone restore confirmation modal and gates confirm by checkbox", async () => {
+    render(
+      <RestoreBackup
+        {...defaultProps}
+        standalone
+        downloadingProgress={100}
+        restoreResource="backup.tar.gz"
+      />,
+    );
+
+    const user = userEvent.setup();
+
+    const restoreButton = screen.getByTestId("restore_backup_button");
+    await user.click(restoreButton);
+
+    expect(
+      screen.getByTestId("restore_backup_confirm_modal"),
+    ).toBeInTheDocument();
+
+    const confirmButton = screen.getByTestId("restore_backup_confirm_button");
+    expect(confirmButton).toBeDisabled();
+
+    const confirmCheckbox = screen.getByTestId(
+      "restore_backup_confirm_checkbox",
+    );
+    await user.click(confirmCheckbox);
+
+    expect(confirmButton).toBeEnabled();
+  });
+
+  it("closes standalone restore confirmation modal on cancel", async () => {
+    render(
+      <RestoreBackup
+        {...defaultProps}
+        standalone
+        downloadingProgress={100}
+        restoreResource="backup.tar.gz"
+      />,
+    );
+
+    const user = userEvent.setup();
+
+    await user.click(screen.getByTestId("restore_backup_button"));
+    await user.click(screen.getByTestId("restore_backup_cancel_button"));
+
+    expect(screen.getByTestId("restore_backup_confirm_dialog")).not.toHaveClass(
+      "modalActive",
+    );
+  });
+
+  it("uses the existing restore flow after standalone confirmation", async () => {
+    const navigate = vi.fn();
+    const setTenantStatus = vi.fn();
+
+    render(
+      <RestoreBackup
+        {...defaultProps}
+        standalone
+        navigate={navigate}
+        setTenantStatus={setTenantStatus}
+        downloadingProgress={100}
+        restoreResource="backup.tar.gz"
+      />,
+    );
+
+    const user = userEvent.setup();
+
+    await user.click(screen.getByLabelText("Common:RoomsModule"));
+    await user.click(screen.getByTestId("restore_backup_button"));
+    await user.click(screen.getByTestId("restore_backup_confirm_checkbox"));
+    await user.click(screen.getByTestId("restore_backup_confirm_button"));
+
+    await waitFor(() => {
+      expect(vi.mocked(startRestore)).toHaveBeenCalledTimes(1);
+      expect(setTenantStatus).toHaveBeenCalled();
+      expect(navigate).toHaveBeenCalledWith("/preparation-portal");
+    });
   });
 
   it("disables all interactive elements when isEnableRestore is false", () => {

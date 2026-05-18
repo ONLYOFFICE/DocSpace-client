@@ -3,23 +3,18 @@
   "content": "Items in {{sectionName}} are automatically deleted after 30 days.",
   "content_en_sha1_hash": "72740d2f13fab9038a1cf3a73558f696ef70b1af",
   "created_at": "2025-06-02T10:19:23.448Z",
-  "updated_at": "2025-12-17T07:49:07.880Z",
+  "updated_at": "2026-04-11T21:07:53.226Z",
   "comment": {
-    "text": "This translation key is used to display a warning message indicating that items in a specific section are automatically deleted after 30 days. It appears in the UI as part of a header on the Home page and in certain warnings, informing users about the auto-deletion policy for their files or personal folders.",
+    "text": "This is a warning message displayed in the Recycle Bin section. It informs users that items in the Recycle Bin are automatically deleted after 30 days. `{{sectionName}}` will be replaced with the localized name of the Recycle Bin.",
     "is_auto": true,
-    "updated_at": "2025-06-02T10:21:39.647Z"
+    "updated_at": "2026-04-11T21:07:53.226Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 856,
-      "context": ");\n \n const badgeLabel = showTemplateBadge ? t(\"Files:Template\") : \"\";\n \n const warningText = isRecycleBinFolder\n ? t(\"TrashAutoDeleteWarning\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n : isPersonalReadOnly\n ? t(\"PersonalFolderErasureWarning\")\n : \"\";",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Home/Section/Warning/index.tsx",
-      "line_number": 50,
-      "context": "const { t } = useTranslation([\"Files\", \"Common\"]);\n \n if (currentDeviceType === DeviceType.desktop) return null;\n \n const warningText = isRecycleBinFolder\n ? t(\"TrashAutoDeleteWarning\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n : isPersonalReadOnly\n ? t(\"PersonalFolderErasureWarning\")\n : \"\";",
+      "file_path": "/packages/client/src/pages/Home/Section/getWarningText.tsx",
+      "line_number": 51,
+      "context": "isRoomStorageQuotaExceeded,\n roomUsedSpace,\n roomQuotaLimit,\n }: GetWarningTextParams): React.ReactNode => {\n if (isRecycleBinFolder) {\n return t(\"TrashAutoDeleteWarning\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n }\n \n if (isPersonalReadOnly) {",
       "module": "/packages/client"
     }
   ],

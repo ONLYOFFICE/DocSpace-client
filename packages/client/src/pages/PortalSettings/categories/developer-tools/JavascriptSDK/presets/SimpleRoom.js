@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import { useEventLog } from "../sub-components/useEventLog";
 import { withTranslation } from "react-i18next";
 import { Label } from "@docspace/ui-kit/components/label";
 import { Text } from "@docspace/ui-kit/components/text";
@@ -32,6 +33,8 @@ import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import RoomsSelectorInput from "SRC_DIR/components/RoomsSelectorInput";
 import { inject, observer } from "mobx-react";
 import SDK from "@onlyoffice/docspace-sdk-js";
+
+import { EventLogBlock } from "../sub-components/EventLogBlock";
 
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
@@ -80,6 +83,20 @@ import {
   CheckboxGroup,
 } from "./StyledPresets";
 
+const SIMPLE_ROOM_EVENT_TYPES = [
+  "onAppReady",
+  "onAppError",
+  "onAuthSuccess",
+  "onSignOut",
+  "onNoAccess",
+  "onNotFound",
+  "onContentReady",
+  "onEditorCloseCallback",
+  "onEditorOpen",
+  "onDownload",
+  "onFileManagerClick",
+];
+
 const SimpleRoom = (props) => {
   const { t, fetchExternalLinks, currentColorScheme, theme } = props;
   const navigate = useNavigate();
@@ -115,13 +132,31 @@ const SimpleRoom = (props) => {
       search: "",
       withSubfolders: false,
     },
+    events: {
+      onAppReady: () => {},
+      onAppError: () => {},
+      onAuthSuccess: () => {},
+      onSignOut: () => {},
+      onNoAccess: () => {},
+      onNotFound: () => {},
+      onContentReady: () => {},
+      onEditorCloseCallback: () => {},
+      onEditorOpen: () => {},
+      onDownload: () => {},
+      onFileManagerClick: () => {},
+    },
   });
+
+  const [eventLog, onClearEventLog] = useEventLog(config.frameId);
 
   const fromPackage = source === sdkSource.Package;
 
   const sdkScriptUrl = getSdkScriptUrl(version);
 
-  const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
+  const sdk = useMemo(
+    () => (fromPackage ? new SDK() : window.DocSpace.SDK),
+    [fromPackage],
+  );
 
   const destroyFrame = () => {
     sdk?.frames[config.frameId]?.destroyFrame();
@@ -155,7 +190,7 @@ const SimpleRoom = (props) => {
     return () => {
       destroyFrame();
     };
-  });
+  }, [config]);
 
   useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
@@ -244,29 +279,37 @@ const SimpleRoom = (props) => {
   const redirectToSelectedRoom = () => navigateRoom(config.id);
 
   const preview = (
-    <Frame
-      width={
-        config.id !== undefined && config.width.includes("px")
-          ? config.width
-          : undefined
-      }
-      height={
-        config.id !== undefined && config.height.includes("px")
-          ? config.height
-          : undefined
-      }
-      targetId={config.frameId}
-    >
-      {config.id !== undefined ? (
-        <div id={config.frameId} />
-      ) : (
-        <EmptyIframeContainer
-          text={t("RoomPreview")}
-          width="100%"
-          height="100%"
-        />
-      )}
-    </Frame>
+    <>
+      <Frame
+        width={
+          config.id !== undefined && config.width.includes("px")
+            ? config.width
+            : undefined
+        }
+        height={
+          config.id !== undefined && config.height.includes("px")
+            ? config.height
+            : undefined
+        }
+        targetId={config.frameId}
+      >
+        {config.id !== undefined ? (
+          <div id={config.frameId} />
+        ) : (
+          <EmptyIframeContainer
+            text={t("RoomPreview")}
+            width="100%"
+            height="100%"
+          />
+        )}
+      </Frame>
+      <EventLogBlock
+        t={t}
+        events={eventLog}
+        onClear={onClearEventLog}
+        eventTypes={SIMPLE_ROOM_EVENT_TYPES}
+      />
+    </>
   );
 
   return (

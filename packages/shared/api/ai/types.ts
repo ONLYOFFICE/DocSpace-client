@@ -24,23 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TCreatedBy, TPathParts } from "../../types";
+import type { TPathParts } from "../../types";
 import type { TFile, TFolder } from "../files/types";
 import type { TRoom } from "../rooms/types";
+import { KnowledgeType, ProviderType, WebSearchType } from "./enums";
+
 import {
-  ContentType,
-  KnowledgeType,
-  ProviderType,
-  RoleType,
-  ServerType,
-  WebSearchType,
-} from "./enums";
+  TMessage,
+  TChat,
+  TAIConfig,
+  TMCPTool,
+  TServer,
+  TModelCapabilities,
+} from "@docspace/ui-kit/types/ai";
+
+export type { TMessage, TChat, TAIConfig, TMCPTool, TServer, TModelCapabilities };
 
 export type TCreateAiProvider = {
   type: ProviderType;
   title: string;
   key: string;
   url: string;
+  modelSettings?: TModelSettingsItem[];
 };
 
 export type TAiProvider = {
@@ -58,6 +63,7 @@ export type TUpdateAiProvider = {
   title?: TCreateAiProvider["title"];
   key?: TCreateAiProvider["key"];
   url?: TCreateAiProvider["url"];
+  modelSettings?: TModelSettingsItem[];
 };
 
 export type TDeleteAiProviders = { ids: TAiProvider["id"][] };
@@ -68,101 +74,19 @@ export type TModel = {
   providerId: TAiProvider["id"];
   providerTitle: TAiProvider["title"];
   modelId: string;
+  alias?: string;
+  capabilities?: TModelCapabilities;
+  price?: {
+    prompt: number;
+    completion: number;
+  };
+  currency?: {
+    code: string;
+    symbol: string;
+  };
 };
 
 export type TModelList = TModel[];
-
-export type TChat = {
-  id: string;
-  title: string;
-  createdOn: string;
-  modifiedOn: string;
-  createdBy: TCreatedBy;
-};
-
-export type TToolCallResultSourceData = {
-  title: string;
-  text: string;
-  fileId?: number;
-  url?: string; // external page url
-  relativeUrl?: string; // knowledge doc url
-  faviconUrl?: string;
-};
-
-export type TToolCallResultSource = {
-  data: TToolCallResultSourceData | TToolCallResultSourceData[];
-  error?: string;
-};
-
-export type TToolCallContent = {
-  type: ContentType.Tool;
-  arguments: Record<string, unknown>;
-  name: string;
-  result?: Record<string, unknown> | TToolCallResultSource;
-  callId?: string;
-  mcpServerInfo?: {
-    serverId: string;
-    serverName: string;
-    serverType: ServerType;
-    icon: {
-      icon48: string;
-      icon32: string;
-      icon24: string;
-      icon16: string;
-    };
-  };
-  managed?: boolean;
-};
-
-export type TContent =
-  | {
-      type: ContentType.Text;
-      text: string;
-    }
-  | TToolCallContent
-  | {
-      type: ContentType.Files;
-      id: number;
-      title: string;
-      extension: string;
-    }
-  | {
-      type: ContentType.Images;
-      id: number;
-      url: string;
-      fileType: number;
-    };
-
-export type TMessage = {
-  role: RoleType;
-  contents: TContent[];
-  createdOn: string;
-  id?: number;
-};
-
-export type TMCPTool = {
-  name: string;
-  enabled: boolean;
-};
-
-export type TServer = {
-  id: string;
-  name: string;
-  serverType: ServerType;
-  description?: string;
-  icon?: {
-    icon48: string;
-    icon32: string;
-    icon24: string;
-    icon16: string;
-  };
-  enabled?: boolean;
-  connected?: boolean;
-  headers: Record<string, string>;
-  endpoint: string;
-  authorizationEndpoint?: string;
-  needReset?: boolean;
-};
 
 export type TVectorizeOperation = {
   error: string;
@@ -200,26 +124,6 @@ export type KnowledgeConfig = {
   type: KnowledgeType;
   key?: string;
   needReset?: boolean;
-};
-
-export type TAIConfig = {
-  vectorizationEnabled: boolean;
-  vectorizationNeedReset?: boolean;
-  webSearchEnabled: boolean;
-  webSearchNeedReset?: boolean;
-  knowledgeSearchToolName: string;
-  webSearchToolName: string;
-  webCrawlingToolName: string;
-  aiReady: boolean;
-  aiReadyNeedReset?: boolean;
-  embeddingModel: string;
-  portalMcpServerId: string;
-
-  generateDocxToolName?: string;
-  generateFormToolName?: string;
-  generatePresentationToolName?: string;
-
-  modelAliases: Record<string, string>;
 };
 
 export type TAgent = TRoom;
@@ -265,10 +169,46 @@ export type TEditAgentData = Partial<TCreateAgentData>;
 export type TDefaultProvider = {
   providerId: TAiProvider["id"];
   providerTitle: TAiProvider["title"];
+  providerType?: ProviderType;
   defaultModel: TModel["modelId"];
+  defaultModelAlias?: string;
 };
 
 export type TUpdateDefaultProviderData = {
   providerId: TAiProvider["id"];
   defaultModel: TModel["modelId"];
+};
+
+export type TModelSettingsItem = {
+  modelId: string;
+  isEnabled: boolean;
+  alias?: string;
+  capabilities?: TModelCapabilities;
+};
+
+export type TModelSettingsDto = {
+  id: string;
+  alias?: string;
+  isEnabled: boolean;
+  isRecommended: boolean;
+  capabilities: TModelCapabilities;
+};
+
+export type TProviderModelInfo = {
+  modelId: string;
+  displayName: string;
+  isRecommended: boolean;
+  capabilities: TModelCapabilities;
+};
+
+export type TSelectedModelData = {
+  modelId: string;
+  displayName?: string;
+  capabilities?: TModelCapabilities;
+};
+
+export type TPreviewModelsRequest = {
+  type: ProviderType;
+  key: string;
+  url?: string;
 };

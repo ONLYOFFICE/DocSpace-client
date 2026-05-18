@@ -74,7 +74,7 @@ const GroupItem = ({
   };
 
   return (
-    <div className={styles.addedGroups}>
+    <div className={styles.addedGroups} data-testid={`group_item_${group.id}`}>
       <div
         className={`${styles.group} ${disabled ? styles.groupDisabled : ""}`}
       >
@@ -85,6 +85,7 @@ const GroupItem = ({
           style={disabled ? { cursor: "default" } : undefined}
           tabIndex={disabled ? -1 : 0}
           role="button"
+          data-testid={`group_item_${group.id}_button`}
         >
           <div className={styles.iconGroup}>
             {iconData && (
@@ -110,6 +111,7 @@ const GroupItem = ({
             onKeyDown={(e) => onKeyDown(e, handleEditClick)}
             isDisabled={disabled}
             tabIndex={disabled ? -1 : 0}
+            dataTestId="edit_group_icon_button"
           />
           <IconButton
             className="delete_icon"
@@ -119,6 +121,7 @@ const GroupItem = ({
             onKeyDown={(e) => onKeyDown(e, handleDeleteClick)}
             isDisabled={disabled}
             tabIndex={disabled ? -1 : 0}
+            dataTestId="delete_group_icon_button"
           />
         </div>
       </div>

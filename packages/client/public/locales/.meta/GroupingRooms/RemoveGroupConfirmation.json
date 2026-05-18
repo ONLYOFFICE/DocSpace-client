@@ -3,11 +3,12 @@
   "content": "You are about to delete group of rooms. Are you sure you want to proceed?",
   "content_en_sha1_hash": "60a7a487a3c026128ad30e11eb402c509ed6a6dc",
   "created_at": "2026-02-19T13:36:24.881Z",
-  "updated_at": "2026-02-19T13:36:32.423Z",
+  "updated_at": "2026-04-11T21:11:29.087Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a confirmation message displayed in a dialog box when a user attempts to delete a group of rooms. It asks the user to confirm their action.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:11:29.087Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

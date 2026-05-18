@@ -44,6 +44,7 @@ export interface PrivateRouteProps
       | "baseDomain"
       | "displayAbout"
       | "limitedAccessDevToolsForUsers"
+      | "aiServicesEnabled"
     >,
     Pick<CurrentTariffStatusStore, "isNotPaidPeriod">,
     Pick<UserStore, "user"> {
@@ -54,6 +55,7 @@ export interface PrivateRouteProps
   isCommunity?: boolean;
   isEnterprise?: boolean;
   standalone: boolean;
+  requireAIServices?: boolean;
 }
 
 export interface PublicRouteProps

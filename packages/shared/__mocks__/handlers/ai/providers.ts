@@ -29,6 +29,7 @@ import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_AI_PROVIDERS = "ai/providers/available";
 export const PATH_AI_PROVIDERS_LIST = "ai/providers";
+export const PATH_AI_PROVIDERS_MODELS_PREVIEW = "ai/providers/models/preview";
 
 const successList = {
   response: [
@@ -179,6 +180,34 @@ const successUpdate = {
   statusCode: 200,
 };
 
+const successPreview = {
+  response: [
+    {
+      id: "claude-opus-4-5-20251101",
+      alias: "Claude Opus 4.5",
+      isEnabled: true,
+      isRecommended: true,
+      capabilities: {},
+    },
+    {
+      id: "claude-sonnet-4-5-20250929",
+      alias: "Claude Sonnet 4.5",
+      isEnabled: true,
+      isRecommended: false,
+      capabilities: {},
+    },
+    {
+      id: "claude-haiku-4-5-20251001",
+      alias: "Claude Haiku 4.5",
+      isEnabled: true,
+      isRecommended: false,
+      capabilities: {},
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 export const aiProvidersResolver = ({
   isEmpty,
   needReset,
@@ -207,6 +236,17 @@ export const aiProvidersDeleteResolver = () => {
 
 export const aiProvidersPutResolver = () => {
   return new Response(JSON.stringify(successUpdate));
+};
+
+export const aiProvidersPreviewResolver = () => {
+  return new Response(JSON.stringify(successPreview));
+};
+
+export const aiProvidersPreviewHandler = (port: string) => {
+  return http.post(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_PROVIDERS_MODELS_PREVIEW}`,
+    () => aiProvidersPreviewResolver(),
+  );
 };
 
 export const aiProvidersPostHandler = (port: string) => {

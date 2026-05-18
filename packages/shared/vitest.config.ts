@@ -99,6 +99,7 @@ export default defineConfig({
 
   resolve: {
     alias: {
+      "@docspace/shared": path.resolve(__dirname, "."),
       PUBLIC_DIR: path.resolve(__dirname, "../../public"),
       "PUBLIC_DIR/scripts/config.json": path.resolve(
         __dirname,

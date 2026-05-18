@@ -28,6 +28,7 @@ import { useMemo } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import ProfileActions from "./profile-actions";
 
@@ -41,7 +42,8 @@ const HeaderNav = ({
   getActions,
   hideProfileMenu,
 }) => {
-  const userActions = useMemo(() => getActions(), [getActions]);
+  const { t } = useTranslation(["Common"]);
+  const userActions = useMemo(() => getActions(t), [getActions, t]);
 
   return (
     <nav className={classNames(styles.nav, "profileMenuIcon", "hidingHeader")}>
@@ -62,6 +64,10 @@ HeaderNav.displayName = "HeaderNav";
 HeaderNav.propTypes = {
   user: PropTypes.object,
   isAuthenticated: PropTypes.bool,
+  userIsUpdate: PropTypes.bool,
+  setUserIsUpdate: PropTypes.func,
+  getActions: PropTypes.func,
+  hideProfileMenu: PropTypes.bool,
 };
 
 export default inject(({ authStore, profileActionsStore, userStore }) => {

@@ -27,7 +27,7 @@
  */
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
-import { KnowledgeType } from "@docspace/shared/api/ai/enums";
+import { KnowledgeType, ProviderType } from "@docspace/shared/api/ai/enums";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
@@ -53,6 +53,7 @@ type TKnowledgeProps = {
   knowledgeConfig?: AISettingsStore["knowledgeConfig"];
   updateKnowledge?: AISettingsStore["updateKnowledge"];
   hasAIProviders?: AISettingsStore["hasAIProviders"];
+  aiProviders?: AISettingsStore["aiProviders"];
   getAIConfig?: SettingsStore["getAIConfig"];
   aiConfig?: SettingsStore["aiConfig"];
   knowledgeSettingsUrl?: SettingsStore["knowledgeSettingsUrl"];
@@ -65,6 +66,7 @@ const KnowledgeComponent = ({
   knowledgeConfig,
   updateKnowledge,
   hasAIProviders,
+  aiProviders,
   getAIConfig,
   aiConfig,
   knowledgeSettingsUrl,
@@ -83,6 +85,7 @@ const KnowledgeComponent = ({
     const initial: Record<KnowledgeType, string> = {
       [KnowledgeType.OpenAi]: "",
       [KnowledgeType.OpenRouter]: "",
+      [KnowledgeType.PortalAi]: "",
       [KnowledgeType.None]: "",
     };
 
@@ -104,6 +107,9 @@ const KnowledgeComponent = ({
       if (knowledgeConfig?.type === KnowledgeType.OpenRouter)
         return KnowledgeType.OpenRouter;
 
+      if (knowledgeConfig?.type === KnowledgeType.PortalAi)
+        return KnowledgeType.PortalAi;
+
       return KnowledgeType.None;
     },
   );
@@ -124,6 +130,7 @@ const KnowledgeComponent = ({
     setValuesByProvider({
       [KnowledgeType.OpenAi]: "",
       [KnowledgeType.OpenRouter]: "",
+      [KnowledgeType.PortalAi]: "",
       [KnowledgeType.None]: "",
     });
     setSelectedOption(KnowledgeType.None);
@@ -155,8 +162,34 @@ const KnowledgeComponent = ({
     setSaveRequestRunning(false);
   };
 
+  const hasSystemProvider = aiProviders?.some(
+    (p) => p.type === ProviderType.PortalAi,
+  );
+  const isSystemProviderDisabled =
+    hasSystemProvider && !aiConfig?.systemAiEnabled;
+
   const items = React.useMemo(() => {
-    return [
+    const options: TOption[] = [];
+
+    if (hasSystemProvider) {
+      options.push({
+        key: KnowledgeType.PortalAi,
+        label: isSystemProviderDisabled
+          ? `ONLYOFFICE AI (${t("Common:ActivationRequired")})`
+          : "ONLYOFFICE AI",
+        disabled: isSystemProviderDisabled,
+        withExternalLink: isSystemProviderDisabled,
+        externalLinkPath: isSystemProviderDisabled
+          ? "/portal-settings/payments/services"
+          : undefined,
+        onExternalLinkClick: isSystemProviderDisabled
+          ? () =>
+              window.DocSpace?.navigate("/portal-settings/payments/services")
+          : undefined,
+      });
+    }
+
+    options.push(
       {
         key: KnowledgeType.OpenAi,
         label: "OpenAI",
@@ -165,8 +198,10 @@ const KnowledgeComponent = ({
         key: KnowledgeType.OpenRouter,
         label: "OpenRouter",
       },
-    ];
-  }, []);
+    );
+
+    return options;
+  }, [hasSystemProvider, isSystemProviderDisabled, t]);
 
   const selectedItem = React.useMemo(() => {
     return items.find((item) => item.key === selectedOption);
@@ -194,14 +229,19 @@ const KnowledgeComponent = ({
       if (knowledgeConfig?.type === KnowledgeType.OpenRouter)
         return KnowledgeType.OpenRouter;
 
+      if (knowledgeConfig?.type === KnowledgeType.PortalAi)
+        return KnowledgeType.PortalAi;
+
       return KnowledgeType.None;
     });
   }, [knowledgeConfig]);
 
   if (!knowledgeInitied) return <KnowledgeLoader />;
 
-  const isSaveDisabled =
-    !currentValue || selectedOption === KnowledgeType.None || isKeyHidden;
+  const isPortalAiSelected = selectedOption === KnowledgeType.PortalAi;
+  const isSaveDisabled = isPortalAiSelected
+    ? knowledgeConfig?.type === KnowledgeType.PortalAi
+    : !currentValue || selectedOption === KnowledgeType.None || isKeyHidden;
 
   const tooltipId = "tooltip-web-search";
 
@@ -247,6 +287,8 @@ const KnowledgeComponent = ({
           >
             <ComboBox
               options={items}
+              showDisabledItems
+              scaledOptions={hasSystemProvider}
               selectedOption={
                 selectedItem ?? ({ label: t("Common:SelectAction") } as TOption)
               }
@@ -261,44 +303,46 @@ const KnowledgeComponent = ({
               dropDownTestId="knowledge-provider-dropdown"
             />
           </FieldContainer>
-          <FieldContainer
-            labelVisible
-            isVertical
-            labelText={t("AISettings:APIKey")}
-            removeMargin
-          >
-            {isKeyHidden ? (
-              <div
-                className={styles.aiBanner}
-                data-testid="knowledge-key-hidden-banner"
-              >
-                <Text fontSize="12px" fontWeight={400} lineHeight="16px">
-                  {t("AISettings:WebSearchKeyHiddenDescription")}
-                </Text>
-              </div>
-            ) : (
-              <>
-                <PasswordInput
-                  className={styles.passwordInput}
-                  placeholder={t("AISettings:EnterKey")}
-                  inputValue={currentValue}
-                  onChange={onChange}
-                  scale
-                  isSimulateType
-                  isFullWidth
-                  isDisableTooltip
-                  isDisabled={
-                    isKeyHidden || selectedOption === KnowledgeType.None
-                  }
-                  autoComplete="off"
-                  testId="knowledge-key-input"
-                />
-                <Text className={styles.hiddenKeyDescription}>
-                  {t("AISettings:KnowledgeKeyDescription")}
-                </Text>
-              </>
-            )}
-          </FieldContainer>
+          {selectedOption !== KnowledgeType.PortalAi ? (
+            <FieldContainer
+              labelVisible
+              isVertical
+              labelText={t("AISettings:APIKey")}
+              removeMargin
+            >
+              {isKeyHidden ? (
+                <div
+                  className={styles.aiBanner}
+                  data-testid="knowledge-key-hidden-banner"
+                >
+                  <Text fontSize="12px" fontWeight={400} lineHeight="16px">
+                    {t("AISettings:WebSearchKeyHiddenDescription")}
+                  </Text>
+                </div>
+              ) : (
+                <>
+                  <PasswordInput
+                    className={styles.passwordInput}
+                    placeholder={t("AISettings:EnterKey")}
+                    inputValue={currentValue}
+                    onChange={onChange}
+                    scale
+                    isSimulateType
+                    isFullWidth
+                    isDisableTooltip
+                    isDisabled={
+                      isKeyHidden || selectedOption === KnowledgeType.None
+                    }
+                    autoComplete="off"
+                    testId="knowledge-key-input"
+                  />
+                  <Text className={styles.hiddenKeyDescription}>
+                    {t("AISettings:KnowledgeKeyDescription")}
+                  </Text>
+                </>
+              )}
+            </FieldContainer>
+          ) : null}
         </div>
         <div className={styles.buttonContainer}>
           <Button
@@ -343,6 +387,7 @@ export const Knowledge = inject(
       knowledgeConfig: aiSettingsStore.knowledgeConfig,
       updateKnowledge: aiSettingsStore.updateKnowledge,
       hasAIProviders: aiSettingsStore.hasAIProviders,
+      aiProviders: aiSettingsStore.aiProviders,
       getAIConfig: settingsStore.getAIConfig,
       aiConfig: settingsStore.aiConfig,
       knowledgeSettingsUrl: settingsStore.knowledgeSettingsUrl,

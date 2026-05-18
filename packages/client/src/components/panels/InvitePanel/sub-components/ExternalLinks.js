@@ -33,7 +33,7 @@ import { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
-import { getCorrectDate } from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
@@ -58,6 +58,7 @@ import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
 import { deleteInviteLink } from "@docspace/shared/api/portal";
 import { now, parseToDateTime, isAfter } from "@docspace/ui-kit/utils/date";
 import { LANGUAGE } from "@docspace/shared/constants";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ExternalLinks = ({
   t,
@@ -170,18 +171,18 @@ const ExternalLinks = ({
   const description =
     roomId === -1
       ? t("InviteViaLinkDescriptionAccounts", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
         })
       : roomType === RoomsType.AIRoom
         ? allowInvitingGuests
           ? t("InviteViaLinkDescriptionAgentGuest")
           : t("InviteViaLinkDescriptionAgentMembers", {
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
             })
         : allowInvitingGuests
           ? t("InviteViaLinkDescriptionRoomGuest")
           : t("InviteViaLinkDescriptionRoomMembers", {
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
             });
 
   return (

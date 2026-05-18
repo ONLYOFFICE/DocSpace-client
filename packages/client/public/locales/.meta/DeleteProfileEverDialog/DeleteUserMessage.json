@@ -3,16 +3,17 @@
   "content": "{{userCaption}} <1>{{user}}</1> will be deleted. This action cannot be undone.",
   "content_en_sha1_hash": "e425610a088ab7fe9a49f77ab58e47425c2a0dda",
   "created_at": "2025-06-30T12:20:12.974Z",
-  "updated_at": "2025-06-30T12:20:47.275Z",
+  "updated_at": "2026-04-11T21:06:01.575Z",
   "comment": {
-    "text": "This translation key is used for a confirmation message that will be displayed when deleting a user's profile. It informs the user that their account will be deleted and that this action cannot be undone, typically appearing in a dialog box or alert.",
+    "text": "This is a warning message displayed in a dialog when a user is about to be deleted. It informs the user that the action is irreversible and includes the `{{userCaption}}` (e.g., \"Guest\" or \"User\") and the `{{user}}`'s display name.",
     "is_auto": true,
-    "updated_at": "2025-06-30T12:20:47.275Z"
+    "updated_at": "2026-04-11T21:06:01.575Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 94,
+      "line_number": 95,
       "context": "? warningMessageReassign\n : warningMessageMyDocuments;\n \n const deleteMessage = (\n <Trans\n i18nKey=\"DeleteUserMessage\"\n ns=\"DeleteProfileEverDialog\"\n t={t as TFunction}\n values={{\n userCaption: onlyGuests ? t(\"Common:Guest\") : t(\"Common:User\"),\n user: users[0].displayName,",
       "module": "/packages/client"
     }

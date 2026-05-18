@@ -31,6 +31,23 @@
   width: 100%;
   min-height: 33px;
 
+  .analyzeResponsesButton {
+    padding: 6px 10px;
+    height: 32px;
+    min-width: 35px;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    span {
+      font-size: 13px;
+      @include mixins.truncate;
+    }
+
+    :global(.icon) {
+      flex-shrink: 0;
+    }
+  }
+
   :global(.table-container_group-menu) {
     margin-block: 0;
     margin-inline: -20px 0;
@@ -154,5 +171,22 @@
         }
       }
     }
+  }
+}
+
+:global(#control-buttons-container) {
+  container: buttons / inline-size;
+}
+
+@container buttons (width < 300px) {
+  .analyzeResponsesButton {
+    span {
+      display: none;
+    }
+  }
+
+  .headerContainer:has(.analyzeResponsesButton)
+    :global(.header-container .navigation_button) {
+    margin: 0;
   }
 }

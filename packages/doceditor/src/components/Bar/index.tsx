@@ -27,7 +27,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { SnackBar } from "@docspace/ui-kit/components/snackbar";
-import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 interface QuotaInfo {
   header: string;
@@ -69,10 +70,10 @@ const Bar: React.FC<BarProps> = ({ quotaExceededScope }) => {
             : t("YourFurtherEditsNotSaved"),
           header: initial
             ? t("PortalQuotaReached", {
-                productName: t("ProductName"),
+                productName: getBrandName("ProductName"),
               })
             : t("PortalQuotaLimitWarning", {
-                productName: t("ProductName"),
+                productName: getBrandName("ProductName"),
               }),
         };
     }

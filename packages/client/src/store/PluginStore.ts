@@ -31,6 +31,7 @@ import cloneDeep from "lodash/cloneDeep";
 import api from "@docspace/shared/api";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
+import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TData, toastr } from "@docspace/ui-kit/components/toast";
 import type {
@@ -43,6 +44,10 @@ import type { ModalDialogProps } from "@docspace/ui-kit/components/modal-dialog"
 import type { TTranslation } from "@docspace/shared/types";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import SocketHelper, {
+  SocketEvents,
+  TChangeWebPluginData,
+} from "@docspace/ui-kit/utils/socket";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
@@ -67,6 +72,7 @@ import type {
   IframeWindow,
   TPlugin,
   IPostMessageCallbackMessage,
+  IMediaViewerClient,
 } from "SRC_DIR/helpers/plugins/types";
 
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
@@ -80,6 +86,7 @@ import {
 
 import type SelectedFolderStore from "./SelectedFolderStore";
 import type { TSelectorProps } from "SRC_DIR/components/PluginSelector/types";
+import { SocketCommands } from "@docspace/ui-kit/utils/socket";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix } = apiConf;
@@ -104,6 +111,8 @@ class PluginStore {
   private selectedFolderStore: SelectedFolderStore = {} as SelectedFolderStore;
 
   private userStore: UserStore = {} as UserStore;
+
+  private currentTariffStatusStore: CurrentTariffStatusStore | null = null;
 
   plugins: TPlugin[] = [];
 
@@ -150,17 +159,55 @@ class PluginStore {
 
   needPageReload = false;
 
+  pluginMediaViewerVisible = false;
+
+  pluginMediaViewerProps: null | IMediaViewerClient = null;
+
   constructor(
     settingsStore: SettingsStore,
     selectedFolderStore: SelectedFolderStore,
     userStore: UserStore,
+    currentTariffStatusStore: CurrentTariffStatusStore,
   ) {
     this.settingsStore = settingsStore;
     this.selectedFolderStore = selectedFolderStore;
     this.userStore = userStore;
+    this.currentTariffStatusStore = currentTariffStatusStore;
 
     makeAutoObservable(this);
+
+    // Subscribe to plugin state changes via WebSocket
+    this.wsChangeWebPlugin();
   }
+
+  wsChangeWebPlugin = () => {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: "change-web-plugin",
+    });
+
+    SocketHelper?.on(
+      SocketEvents.ChangeWebPlugin,
+      this.handlePluginStateChange,
+    );
+  };
+
+  handlePluginStateChange = (data: TChangeWebPluginData) => {
+    const { webPluginName, enabled } = data;
+
+    runInAction(() => {
+      const plugin = this.plugins.find((p) => p.name === webPluginName);
+
+      if (!plugin) return;
+
+      plugin.enabled = enabled;
+
+      if (enabled) {
+        this.activatePlugin(webPluginName);
+      } else {
+        this.deactivatePlugin(webPluginName);
+      }
+    });
+  };
 
   dispatchMessage = ({
     message,
@@ -193,6 +240,8 @@ class PluginStore {
       addPluginFloatingOperations: this.addPluginFloatingOperations,
       removePluginFloatingOperations: this.removePluginFloatingOperations,
       updatePluginFloatingOperations: this.updatePluginFloatingOperations,
+      setPluginMediaViewerVisible: this.setPluginMediaViewerVisible,
+      setPluginMediaViewerProps: this.setPluginMediaViewerProps,
     });
   };
 
@@ -251,6 +300,18 @@ class PluginStore {
   removePluginFloatingOperations = (id: string) => {
     this.pluginFloatingOperationsButtons.delete(id);
   };
+
+  setPluginMediaViewerVisible = (value: boolean) => {
+    this.pluginMediaViewerVisible = value;
+  };
+
+  setPluginMediaViewerProps = (value: null | IMediaViewerClient) => {
+    this.pluginMediaViewerProps = value;
+  };
+
+  get isNotPaidPeriod() {
+    return this.currentTariffStatusStore?.isNotPaidPeriod;
+  }
 
   get pluginFloatingOperationsArray(): IFloatingOperationsButtonClient[] {
     return Array.from(this.pluginFloatingOperationsButtons.values());
@@ -320,6 +381,8 @@ class PluginStore {
   };
 
   initPlugins = async () => {
+    if (this.isNotPaidPeriod) return;
+
     const frame = document.createElement("iframe");
     frame.id = "plugin-iframe";
     frame.width = "0px";
@@ -337,6 +400,8 @@ class PluginStore {
   };
 
   updatePlugins = async (fromList?: boolean) => {
+    if (this.isNotPaidPeriod) return;
+
     const abortController = new AbortController();
     this.settingsStore.addAbortControllers(abortController);
 
@@ -779,9 +844,9 @@ class PluginStore {
 
   getContextMenuKeysByType = (
     type: PluginFileType,
-    fileExst: string,
-    security: TRoomSecurity | TFolderSecurity,
-    itemSecurity: TFileSecurity | TRoomSecurity | TFolderSecurity,
+    fileExst?: string,
+    security?: TRoomSecurity | TFolderSecurity,
+    itemSecurity?: TFileSecurity | TRoomSecurity | TFolderSecurity,
   ) => {
     if (this.contextMenuItems.size === 0) return;
 
@@ -1032,7 +1097,6 @@ class PluginStore {
 
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
-    const storeId = this.selectedFolderStore.id;
 
     Array.from(items).forEach(([key, value]) => {
       const correctUserType = value.usersType
@@ -1047,13 +1111,36 @@ class PluginStore {
 
       const newItems: IMainButtonItemClient[] = [];
 
+      const createMainButtonClickHandler = (
+        item: IMainButtonItem,
+        pluginName: string,
+      ) => {
+        return async () => {
+          const storeId = this.selectedFolderStore.id;
+          // Support both new onItemClick and deprecated onClick for backward compatibility
+          const onClickCallback = item.onItemClick || item.onClick;
+
+          if (!onClickCallback) return;
+
+          if (!storeId) return;
+
+          let message: IMessage | void;
+
+          if (item.onItemClick) {
+            message = await item.onItemClick(storeId);
+          } else {
+            message = await item.onClick?.(storeId as number);
+          }
+
+          this.dispatchMessage({ message, pluginName });
+        };
+      };
+
+      const storeId = this.selectedFolderStore.id;
+
       if (value.items && storeId) {
         value.items.forEach((i) => {
-          const onClick = async () => {
-            const message = await i.onClick?.(storeId);
-
-            this.dispatchMessage({ message, pluginName: plugin.name });
-          };
+          const onClick = createMainButtonClickHandler(i, plugin.name);
 
           const { items: _, ...rest } = i;
 
@@ -1066,16 +1153,7 @@ class PluginStore {
         });
       }
 
-      const onClick = async () => {
-        if (!value.onClick) return;
-        const currStoreId = this.selectedFolderStore.id;
-
-        if (!currStoreId) return;
-
-        const message = await value.onClick(currStoreId);
-
-        this.dispatchMessage({ message, pluginName: plugin.name });
-      };
+      const onClick = createMainButtonClickHandler(value, plugin.name);
 
       this.mainButtonItems.set(key, {
         ...value,

@@ -108,12 +108,14 @@ const ConnectAccountDialog = ({
 					scale
 					primary
 					onClick={onClickConnect}
+					testId="connect_account_dialog_submit"
 				/>
 				<Button
 					label={t("Common:CancelButton")}
 					size={ButtonSize.normal}
 					scale
 					onClick={onClose}
+					testId="connect_account_dialog_cancel"
 				/>
 			</ModalDialog.Footer>
 		</ModalDialog>

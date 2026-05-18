@@ -602,6 +602,7 @@ export default inject(
         roomsFilter?.filterValue ||
         roomsFilter?.type ||
         roomsFilter?.subjectId ||
+        roomsFilter?.subjectOwnerId ||
         roomsFilter?.provider ||
         roomsFilter?.quotaFilter ||
         (roomsFilter?.tags && roomsFilter?.tags.length > 0) ||

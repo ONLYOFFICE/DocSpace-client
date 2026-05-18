@@ -59,7 +59,7 @@ import("./logger.mjs").then(({ logger }) => {
       }
     })
       .once("error", (err) => {
-        logger.error(`url: ${req.url}, error: ${err} Error occurred handling`);
+        logger.error(`error: ${err} Server error`);
         process.exit(1);
       })
       .listen(port, () => {

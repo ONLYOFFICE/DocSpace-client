@@ -45,7 +45,9 @@ class FilesSettingsStore {
 }
 
 export const FilesSettingsStoreContext =
-  React.createContext<FilesSettingsStore>(new FilesSettingsStore());
+  React.createContext<FilesSettingsStore>(
+    null as unknown as FilesSettingsStore,
+  );
 
 export const FilesSettingsStoreContextProvider = ({
   children,

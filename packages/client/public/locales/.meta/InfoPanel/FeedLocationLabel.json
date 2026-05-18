@@ -3,11 +3,12 @@
   "content": "Folder «{{folderTitle}}»",
   "content_en_sha1_hash": "eec9f9820b33c08ccac5b304980df7ffbeef680e",
   "created_at": "2025-05-19T21:30:54.780Z",
-  "updated_at": "2025-12-17T07:49:07.855Z",
+  "updated_at": "2026-04-11T21:13:45.741Z",
   "comment": {
-    "text": "The FeedLocationLabel translation key is used to display a descriptive text for folder information on the HistoryBlockContent component. The text refers to the folder title and appears in a main text area when reorder folders are enabled or section views are selected.",
+    "text": "This is a label indicating the location of an item within a folder. It appears in the activity feed or information panel, showing the name of the folder (`{{folderTitle}}`) where an action occurred.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:09.579Z"
+    "updated_at": "2026-04-11T21:13:45.741Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -93,13 +94,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Japanese translation includes a space before the « character, which may not be consistent with the original English content's intended formatting.",
-          "suggestion": "Remove the space before the « character. Resulting in: «{{folderTitle}}»フォルダ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -123,13 +118,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English term 'Folder' is translated as 'Map' in Dutch. While 'Map' can sometimes be used, 'Folder' more accurately reflects the meaning of a folder in this context.",
-          "suggestion": "Ordner «{{folderTitle}}»"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -165,18 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"«{{folderTitle}}» බහාලුම\" uses 'බහාලුම' (bahaluma) which translates to 'dump' or 'heap'. A more appropriate translation for 'Folder' would be 'ඡායාරුප ඇසුර' (chayaruhapa asura) or 'ගොනුව' (gonuwa).",
-          "suggestion": "«{{folderTitle}}» ඡායාරුප ඇසුර"
-        },
-        {
-          "type": "formatting",
-          "description": "The Sinhala translation retains the surrounding quotes («») like the English, which might not be standard practice in Sinhala. Consider removing them or using different quote styles.",
-          "suggestion": "«{{folderTitle}}» ගොනුව"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -194,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Cyrillic transcription of 'Folder' is correct, but the surrounding quotation marks remain the same as in the English version. While not strictly incorrect, maintaining consistency with Serbian conventions would improve the result. Serbian often uses double angle brackets « » for titles.",
-          "suggestion": "Фолдер «{{folderTitle}}» should ideally be translated as «{{folderTitle}}» if consistency is preferred."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -212,13 +184,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The English content uses «» (left-right quotation marks). The Turkish translation also uses «» which may not be the standard Turkish quotation mark (which is generally “”). While not strictly incorrect, using standard Turkish quotation marks would be more consistent.",
-          "suggestion": "Consider replacing «» with “”. Example: “{{folderTitle}}” klasörü"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

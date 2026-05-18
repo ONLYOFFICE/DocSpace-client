@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 // import SecuritySvgUrl from "PUBLIC_DIR/images/security.svg?url";
-import styled from "styled-components";
 import { Trans } from "react-i18next";
 import { TFunction } from "i18next";
 
@@ -33,14 +32,9 @@ import { TRoomStorageLocation } from "@docspace/shared/utils/rooms";
 
 import { connectedCloudsTypeTitleTranslation as getProviderTypeTitle } from "SRC_DIR/helpers/filesUtils";
 
-import PermanentSetting from "./PermanentSetting";
+import styles from "../../CreateEditRoomDialog.module.scss";
 
-const StyledPermanentSettings = styled.div<{ displayNone: boolean }>`
-  display: ${(props) => (props.displayNone ? "none" : "flex")};
-  flex-direction: row;
-  gap: 8px;
-  margin-top: -12px;
-`;
+import PermanentSetting from "./PermanentSetting";
 
 type PermanentSettingsProps = {
   t: TFunction;
@@ -58,7 +52,9 @@ const PermanentSettings = ({
   const thirdpartyPath = "";
 
   return (
-    <StyledPermanentSettings displayNone={!isThirdparty}>
+    <div
+      className={`${styles.permanentSettings}${!isThirdparty ? ` ${styles.displayNone}` : ""}`}
+    >
       {isThirdparty ? (
         <PermanentSetting
           type="storageLocation"
@@ -80,7 +76,7 @@ const PermanentSettings = ({
           }
         />
       ) : null}
-    </StyledPermanentSettings>
+    </div>
   );
 };
 

@@ -1,0 +1,29 @@
+{
+  "key_path": "FormRoomGoToCompleteFolder",
+  "content": "Go to Complete folder",
+  "content_en_sha1_hash": "65f480b3429202c19ae2e1eec1bdb3348aca62f7",
+  "created_at": "2026-05-08T13:10:42.379Z",
+  "updated_at": "2026-05-08T19:46:45.003Z",
+  "comment": {
+    "text": "Button label in the InfoPanel that navigates the user to the \"Complete\" folder.",
+    "is_auto": true,
+    "updated_at": "2026-05-08T13:15:04.426Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/CollectionCard.tsx",
+      "line_number": 88,
+      "context": "return (\n <>\n <ActionButton\n id=\"complete-folder\"\n label={t(\"InfoPanel:FormRoomGoToCompleteFolder\")}\n icon={<FolderSvg />}\n onClick={() => onGoToCompleteFolder(selection)}\n disabled={!selection.resultsFolderId}\n />\n {!selection.resultsFolderId ? (",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -24,56 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-const StyledLoader = styled.div`
-  padding-inline-end: 8px;
-
-  .header {
-    width: 273px;
-    margin-bottom: 16px;
-  }
-
-  .description {
-    margin-bottom: 8px;
-  }
-
-  .link {
-    margin-bottom: 20px;
-  }
-
-  .checkboxs {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 50px;
-  }
-
-  .buttons {
-    width: calc(100% - 32px);
-    position: absolute;
-    bottom: 16px;
-  }
-`;
+import styles from "./tfa-loader.module.scss";
 
 const TfaLoader = () => {
   return (
-    <StyledLoader>
-      <RectangleSkeleton className="header" height="37px" />
-      <RectangleSkeleton className="description" height="40px" />
-      <div className="link">
+    <div className={styles.loader}>
+      <RectangleSkeleton className={styles.header} height="37px" />
+      <RectangleSkeleton className={styles.description} height="40px" />
+      <div className={styles.link}>
         <RectangleSkeleton height="20px" width="57px" />
       </div>
 
-      <div className="checkboxs">
+      <div className={styles.checkboxs}>
         <RectangleSkeleton height="20px" />
         <RectangleSkeleton height="20px" />
         <RectangleSkeleton height="20px" />
       </div>
 
-      <RectangleSkeleton className="buttons" height="40px" />
-    </StyledLoader>
+      <RectangleSkeleton className={styles.buttons} height="40px" />
+    </div>
   );
 };
 

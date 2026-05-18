@@ -3,11 +3,12 @@
   "content": "The Server-side encryption algorithm used when storing this object in S3.",
   "content_en_sha1_hash": "5d5c634f9a40979a80d716a3c7dd5683bb5800a3",
   "created_at": "2025-05-26T07:15:40.425Z",
-  "updated_at": "2026-02-19T13:36:33.073Z",
+  "updated_at": "2026-04-11T20:59:18.116Z",
   "comment": {
-    "text": "The \"AmazonSSETip\" translation key is used to display the server-side encryption algorithm name when storing objects in Amazon S3. It appears as a tooltip in the settings dialog. Translators should provide the English phrase that describes this encryption method.",
+    "text": "This is a tooltip that appears when the user hovers over the \"Server-side encryption\" setting in the Amazon S3 backup configuration. It explains what the setting does.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:07:51.705Z"
+    "updated_at": "2026-04-11T20:59:18.116Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -199,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

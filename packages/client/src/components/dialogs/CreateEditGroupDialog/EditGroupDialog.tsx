@@ -42,7 +42,7 @@ import { TUser } from "@docspace/shared/api/people/types";
 
 import EditGroupStore from "SRC_DIR/store/contacts/EditGroupStore";
 
-import { StyledBodyContent } from "./CreateEditGroupDialog.styled";
+import styles from "./CreateEditGroupDialog.module.scss";
 import GroupNameParam from "./sub-components/GroupNameParam";
 import HeadOfGroup from "./sub-components/HeadOfGroupParam";
 import MembersParam from "./sub-components/MembersParam";
@@ -67,7 +67,7 @@ type InjectedProps = Pick<
   | "title"
   | "setTitle"
   | "hasChanges"
->;
+> & { currentUserId?: string };
 
 type EditGroupDialogProps = {
   group: TGroup;
@@ -99,6 +99,7 @@ const EditGroupDialog = ({
     title,
     setTitle,
     hasChanges,
+    currentUserId,
   } = injectedProps!;
 
   const { t } = useTranslation(["PeopleTranslations", "Common"]);
@@ -193,7 +194,7 @@ const EditGroupDialog = ({
         </ModalDialog.Header>
 
         <ModalDialog.Body>
-          <StyledBodyContent>
+          <div className={styles.bodyContent}>
             {showLoader ? (
               <BodyLoader />
             ) : (
@@ -226,7 +227,7 @@ const EditGroupDialog = ({
                 </>
               )
             )}
-          </StyledBodyContent>
+          </div>
         </ModalDialog.Body>
 
         <ModalDialog.Footer>
@@ -263,6 +264,7 @@ const EditGroupDialog = ({
             addManager(user);
             setSelectGroupMangerPanelIsVisible(false);
           }}
+          currentUserId={currentUserId}
         />
       ) : null}
 
@@ -280,9 +282,30 @@ const EditGroupDialog = ({
   );
 };
 
-export default inject<{ editGroupStore: EditGroupStore }>(
-  ({ editGroupStore }) => {
-    const {
+export default inject<{
+  editGroupStore: EditGroupStore;
+  userStore: { user?: { id?: string } };
+}>(({ editGroupStore, userStore }) => {
+  const {
+    initGroupData,
+    resetGroupData,
+    isInit,
+    loadMembers,
+    manager,
+    addManager,
+    removeManager,
+    members,
+    addMembers,
+    removeMember,
+    currentTotal,
+    submitChanges,
+    title,
+    setTitle,
+    hasChanges,
+  } = editGroupStore;
+
+  return {
+    injectedProps: {
       initGroupData,
       resetGroupData,
       isInit,
@@ -298,26 +321,7 @@ export default inject<{ editGroupStore: EditGroupStore }>(
       title,
       setTitle,
       hasChanges,
-    } = editGroupStore;
-
-    return {
-      injectedProps: {
-        initGroupData,
-        resetGroupData,
-        isInit,
-        loadMembers,
-        manager,
-        addManager,
-        removeManager,
-        members,
-        addMembers,
-        removeMember,
-        currentTotal,
-        submitChanges,
-        title,
-        setTitle,
-        hasChanges,
-      },
-    };
-  },
-)(observer(EditGroupDialog));
+      currentUserId: userStore.user?.id,
+    },
+  };
+})(observer(EditGroupDialog));

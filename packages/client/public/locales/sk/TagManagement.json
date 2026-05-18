@@ -1,0 +1,8 @@
+{
+  "ChangesToTag": "Zmeny tohto značky ovplyvnia všetky miestnosti, kde je použitá.",
+  "DeleteTag": "Vymazať tag",
+  "DeleteTagCannotBeUndone": "Túto akciu nemožno vrátiť späť.",
+  "DeleteTagConfirmation": "Odstránenie tohto značky ju odstráni zo všetkých miestností, kde je použitá.",
+  "EditTag": "Upraviť tag",
+  "RemoveTag": "<1>{{tag}}</1> tag odstránený."
+}

@@ -133,7 +133,7 @@ test.describe("AI agents", () => {
 
     await btn.click();
 
-    const asideHeader = page.getByTestId("aside-header");
+    const asideHeader = page.getByTestId("aside-header").last();
 
     await expect(asideHeader).toBeVisible();
   });
@@ -159,15 +159,15 @@ test.describe("AI agents", () => {
 
     await mainBtn.click();
 
-    const asideHeader = page.getByTestId("aside-header");
+    const asideHeader = page.getByTestId("aside-header").last();
 
     await expect(asideHeader).toBeVisible();
     await expect(page.getByText("Claude AI").first()).toBeVisible();
     await expect(page.getByText("Claude Opus 4.5").first()).toBeVisible();
     await expect(page.getByText("ONLYOFFICE DocSpace").first()).toBeVisible();
 
-    const providerCombobox = page.getByTestId("combobox").first();
-    const modelsCombobox = page.getByTestId("combobox").nth(1);
+    const providerCombobox = page.getByTestId("create_agent_provider_combobox");
+    const modelsCombobox = page.getByTestId("create_agent_model_combobox");
 
     await expect(providerCombobox).toBeVisible();
     await expect(modelsCombobox).toBeVisible();
@@ -220,7 +220,7 @@ test.describe("AI agents", () => {
 
     expect(inputValue).toBe(inputName);
 
-    const instructionInput = page.getByTestId("textarea");
+    const instructionInput = page.getByTestId("create_agent_instructions_textarea");
 
     const instructionValue = "Instruction for AI agent";
 

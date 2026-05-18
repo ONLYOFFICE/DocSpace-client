@@ -3,17 +3,18 @@
   "content": "Delivery date",
   "content_en_sha1_hash": "1093fae5fbc2f03091a8f32f8add755d266e6d58",
   "created_at": "2025-05-19T21:30:49.690Z",
-  "updated_at": "2026-02-19T13:36:32.825Z",
+  "updated_at": "2026-04-13T14:59:05.874Z",
   "comment": {
-    "text": "The \"DeliveryDate\" translation key is used to display the date related to deliveries. It appears in a filter dialog within the application, allowing users to select and manage dates. Translators should provide an alternative text for this date format as it may vary across languages.",
+    "text": "This is a label for a date picker input field, allowing users to select a delivery date for filtering webhook history.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:07.675Z"
+    "updated_at": "2026-04-11T21:29:17.003Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/DeliveryDatePicker.js",
-      "line_number": 138,
-      "context": ") : null}\n </div>\n );\n };\n \n const DeliveryDatePicker = ({\n filters,\n setFilters,\n isApplied,\n setIsApplied,\n }) => {",
+      "line_number": 237,
+      "context": "}, []);\n \n return (\n <>\n <Text fontWeight={600} fontSize=\"15px\">\n {t(\"DeliveryDate\")}\n </Text>\n <Selectors ref={selectorRef}>\n {filters.deliveryDate ? (\n <SelectedDateTime\n isTimeEqual={isTimeEqual}",
       "module": "/packages/client"
     }
   ],
@@ -93,25 +94,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While '配信日' (Haisinbi) can technically mean 'delivery date' in some contexts, it more commonly translates to 'release date' or 'distribution date' in relation to digital content. 'Delivery date' in the context of physical goods or scheduled deliveries would be better translated using different terminology.",
-          "suggestion": "Consider using a translation more accurately conveying the meaning of 'delivery date,' such as '納品日' (Nappinbi) for physical goods or '配達予定日' (Haitatsu yotei bi) for a scheduled delivery date."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation \"전송 날짜\" (jeonseong naljja) translates to 'transmission date' or 'sending date', not 'delivery date'. It doesn't convey the intended meaning of when the goods will be delivered.",
-          "suggestion": "배송 날짜 (baesong naljja)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -159,13 +148,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Russian translation \"Дата отправки\" translates to \"Shipping date\" or \"Dispatch date\", not \"Delivery date\". While related, they are not equivalent.",
-          "suggestion": "Дата доставки"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -189,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Датум доставе\" is not the most natural or accurate translation of \"Delivery date\". While \"Датум\" is correct for \"date\", \"доставe\" is an incomplete or incorrect form related to delivery. It lacks the proper verb construction to accurately convey 'delivery'.",
-          "suggestion": "A more appropriate translation would be \"Датум доставе\" (Datum dostave) or \"Рок доставе\" (Rok dostave).  \"Рок доставе\" directly translates to 'delivery deadline' and is commonly used."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -219,25 +196,19 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Vietnamese translation \"Ngày gửi\" translates to \"Sending date\" or \"Dispatch date\", not \"Delivery date\". It doesn't accurately convey the meaning of \"Delivery date\".",
-          "suggestion": "Ngày giao hàng"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"传递日期\" (chuan di ri qi) literally translates to \"transmission date\" or \"delivery date\", but \"传递\" (chuan di) emphasizes the act of transmitting rather than the date of delivery itself. It doesn't quite capture the intended meaning of 'Delivery date'.",
-          "suggestion": "Consider using a more direct translation like \"交付日期\" (jia chu ri qi) which means 'delivery date' or 'handover date', or \"送达日期\" (song da ri qi) which means 'date of delivery'."
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

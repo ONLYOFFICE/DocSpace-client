@@ -1,0 +1,29 @@
+{
+  "key_path": "Capabilities",
+  "content": "Capabilities",
+  "content_en_sha1_hash": "ca09c54bff74a82bae543ebe259f7452ee8c5293",
+  "created_at": "2026-04-23T17:24:00.289Z",
+  "updated_at": "2026-04-23T17:42:49.210Z",
+  "comment": {
+    "text": "Field label in the AI model settings panel used to identify the section for model features.",
+    "is_auto": true,
+    "updated_at": "2026-04-23T17:42:49.210Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/ModelSettingsPanel.tsx",
+      "line_number": 124,
+      "context": "/>\n <Text className={styles.hint}>{t(\"AISettings:ModelNameHint\")}</Text>\n </FieldContainer>\n \n <FieldContainer\n labelText={t(\"AISettings:Capabilities\")}\n labelVisible\n isVertical\n removeMargin\n className={styles.capabilitiesField}\n >",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

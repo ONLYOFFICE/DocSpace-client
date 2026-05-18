@@ -87,6 +87,7 @@ const Editor = ({
   onOpenRoleMappingPanel,
   setFillingStatusDialogVisible,
   openShareFormDialog,
+  disconnectUsers,
   onStartFilling,
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
@@ -138,6 +139,7 @@ const Editor = ({
     onOpenRoleMappingPanel,
     shareKey,
     generationToolCallState,
+    disconnectUsers,
   });
 
   useInit({
@@ -322,7 +324,14 @@ const Editor = ({
         width: "100%",
       }}
     >
-      <div style={{ height: "auto", overflow: "visible" }}>
+      <div
+        style={{
+          height: "auto",
+          overflow: "visible",
+          position: "relative",
+          zIndex: 1000,
+        }}
+      >
         <Bar quotaExceededScope={config?.quotaExceededScope} />
       </div>
       <DocumentEditor

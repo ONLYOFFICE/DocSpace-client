@@ -66,6 +66,7 @@ type ItemData = {
   isFavorite?: boolean;
   isAIAgent?: boolean;
   startFilling?: boolean;
+  isFillingPreparing?: boolean;
 };
 
 export type BadgesProps = {

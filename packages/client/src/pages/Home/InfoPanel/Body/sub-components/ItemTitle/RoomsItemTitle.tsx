@@ -102,7 +102,6 @@ const RoomsItemHeader = ({
     "Common",
     "Translations",
     "InfoPanel",
-    "SharingPanel",
     "RoomLogoCover",
   ]);
 
@@ -180,7 +179,7 @@ const RoomsItemHeader = ({
   };
 
   const addUserTitle = isTemplate
-    ? t("Files:AccessSettings")
+    ? t("Files:AccessSettingsTitle")
     : t("Common:InviteContacts");
 
   const onSearchClick = () => setShowSearchBlock?.(true);
@@ -319,3 +318,4 @@ export default inject(
     };
   },
 )(observer(RoomsItemHeader));
+

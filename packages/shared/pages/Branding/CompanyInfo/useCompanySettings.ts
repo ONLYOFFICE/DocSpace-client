@@ -26,7 +26,7 @@
 
 import React, { useCallback, useState } from "react";
 
-import { isEqual } from "lodash";
+import isEqual from "lodash/isEqual";
 import { ICompanySettings, IUseCompanySettings } from "./CompanyInfo.types";
 
 const errors = {

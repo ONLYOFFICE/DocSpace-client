@@ -31,21 +31,20 @@ import { useTranslation } from "react-i18next";
 
 import { setLanguageForUnauthorized } from "@docspace/shared/utils/common";
 import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
-import { DeviceType } from "@docspace/shared/enums";
 import { Nullable } from "@docspace/shared/types";
 import { TPortalCultures } from "@docspace/shared/api/settings/types";
 import { classNames } from "@docspace/shared/utils";
 
-import useDeviceType from "@/hooks/useDeviceType";
-
 type TLanguageComboboxWrapper = {
   initialCultures?: TPortalCultures;
   className?: string;
+  isMobileView?: boolean;
 };
 
 const LanguageComboboxWrapper = ({
   initialCultures,
   className,
+  isMobileView = false,
 }: TLanguageComboboxWrapper) => {
   const { i18n } = useTranslation(["Login", "Common"]);
   const currentCulture = i18n.language;
@@ -64,9 +63,6 @@ const LanguageComboboxWrapper = ({
     setLanguageForUnauthorized(key);
   };
 
-  const { currentDeviceType } = useDeviceType();
-  const isMobileView = currentDeviceType === DeviceType.mobile;
-
   if (!cultures) return null;
 
   return (
@@ -77,6 +73,7 @@ const LanguageComboboxWrapper = ({
       selectedCulture={currentCulture}
       withBorder={!isMobileView}
       isMobileView={isMobileView}
+      showLanguageName={!isMobileView}
     />
   );
 };

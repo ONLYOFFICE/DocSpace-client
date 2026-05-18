@@ -72,12 +72,12 @@ test.describe("Profile > Keys Management", () => {
       'input[name="passphrase"], #passphrase input',
     );
     await expect(passphraseInput.first()).toBeVisible({ timeout: 5_000 });
-    await passphraseInput.first().fill("correct horse battery staple");
+    await passphraseInput.first().fill("Test-Horse-Battery-Staple-99!");
 
     const confirmInput = page.locator(
       'input[name="confirmPassphrase"], #confirmPassphrase input',
     );
-    await confirmInput.first().fill("correct horse battery staple");
+    await confirmInput.first().fill("Test-Horse-Battery-Staple-99!");
 
     const passphraseDialog = page.getByRole("dialog");
     await passphraseDialog

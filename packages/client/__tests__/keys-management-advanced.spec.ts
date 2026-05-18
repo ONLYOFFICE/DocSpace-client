@@ -39,13 +39,15 @@ import {
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 const TEST_USER_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
-const KNOWN_PASSPHRASE = "test correct horse battery staple";
+// Both passphrases must satisfy PASSPHRASE_SETTINGS in PassphraseModal:
+// length ≥ 12, uppercase, digits, special characters.
+const KNOWN_PASSPHRASE = "Test-Horse-Battery-Staple-99!";
 const KNOWN_MNEMONIC =
   "abandon abandon abandon abandon abandon abandon " +
   "abandon abandon abandon abandon abandon abandon " +
   "abandon abandon abandon abandon abandon abandon " +
   "abandon abandon abandon abandon abandon art";
-const NEW_PASSPHRASE = "fresh forest river mountain";
+const NEW_PASSPHRASE = "Fresh-Forest-River-Mountain-77!";
 
 async function realEnvelope() {
   const kp = await generateIdentityKeyPair();
@@ -125,11 +127,14 @@ test.describe("Keys management — advanced flows", () => {
 
     const putReq = await putPromise;
     const body = putReq.postDataJSON() as {
+      id: string;
       publicKey: string;
       privateKeyEnc: string;
-      update: boolean;
     };
-    expect(body.update).toBe(true);
+    // Sprint 1: recovery now targets the existing key by id (server's
+    // ReplaceKey is keyed by Guid). Sprint 2: the `update: true` cruft in
+    // the body was dropped — server uses the HTTP method to choose replace.
+    expect(body.id).toBeTruthy();
     expect(body.publicKey).toBe(envelope.publicKey);
     expect(body.privateKeyEnc).not.toBe(envelope.privateKeyEnc);
     expect(body.privateKeyEnc.length).toBeGreaterThan(20);
@@ -248,11 +253,15 @@ test.describe("Keys management — advanced flows", () => {
       .click();
 
     const body = (await putPromise).postDataJSON() as {
+      id: string;
       publicKey: string;
       privateKeyEnc: string;
-      update: boolean;
     };
-    expect(body.update).toBe(true);
+    // Sprint 1: rotation now targets the existing key by id, so PUT replaces
+    // the right entry on the server (server's ReplaceKey is keyed by id).
+    // Sprint 2: the `update: true` cruft in the body was dropped — server
+    // uses the HTTP method (POST vs PUT) to choose replace=false vs true.
+    expect(body.id).toBeTruthy();
     expect(body.publicKey).toBe(envelope.publicKey);
     expect(body.privateKeyEnc).not.toBe(envelope.privateKeyEnc);
   });

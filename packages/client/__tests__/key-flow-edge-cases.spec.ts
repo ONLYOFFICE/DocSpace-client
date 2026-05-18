@@ -37,7 +37,9 @@ import { BASE_URL } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import { bootstrapEncryption } from "./fixtures/encryption-helpers";
 
-const STRONG_PASSPHRASE = "test correct horse battery staple";
+// Must satisfy PASSPHRASE_SETTINGS in PassphraseModal:
+// length ≥ 12, uppercase, digits, special characters.
+const STRONG_PASSPHRASE = "Test-Horse-Battery-Staple-99!";
 
 test.describe("Keys management — edge cases", () => {
   test.beforeEach(({ mockRequest }) => {

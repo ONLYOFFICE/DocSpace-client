@@ -123,7 +123,9 @@ const buildFileDto = (
   record: EncryptedFileRecord,
   roomId: number,
   ownerId: string,
+  port?: string,
 ) => {
+  const downloadOrigin = port ? `${BASE_URL}:${port}` : BASE_URL;
   const dotIdx = record.serverTitle.lastIndexOf(".");
   const fileExst = dotIdx > 0 ? record.serverTitle.slice(dotIdx) : "";
   const creator = {
@@ -160,8 +162,8 @@ const buildFileDto = (
     encrypted: record.encrypted,
     thumbnailStatus: 1,
     thumbnailUrl: "",
-    viewUrl: `${BASE_URL}/api/2.0/files/file/${record.id}/download`,
-    webUrl: `${BASE_URL}/api/2.0/files/file/${record.id}/download`,
+    viewUrl: `${downloadOrigin}/api/2.0/files/file/${record.id}/download`,
+    webUrl: `${downloadOrigin}/api/2.0/files/file/${record.id}/download`,
     shortWebUrl: "",
     created: new Date().toISOString(),
     updated: new Date().toISOString(),
@@ -286,7 +288,7 @@ export const encryptedFilesHandlers = (
 
       const all = Array.from(files.values());
       return okResponse({
-        files: all.map((f) => buildFileDto(f, roomId, ownerId)),
+        files: all.map((f) => buildFileDto(f, roomId, ownerId, port)),
         folders: [],
         current: buildFolderDto(roomId),
         pathParts: [{ id: roomId, title: "Private Room" }],
@@ -537,6 +539,7 @@ export const encryptedFilesHandlers = (
               files.get(id) as EncryptedFileRecord,
               session.folderId,
               ownerId,
+              port,
             ),
           });
         }

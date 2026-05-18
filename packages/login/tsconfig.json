@@ -16,6 +16,7 @@
     "esModuleInterop": true,
     "module": "ESNext",
     "moduleResolution": "bundler",
+    "customConditions": ["source"],
     "rootDir": "../../",
     "baseUrl": "./",
     "resolveJsonModule": true,

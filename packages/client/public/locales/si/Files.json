@@ -207,7 +207,6 @@
   "TooltipElementsCopyMessage": "අංග {{element}} පිටපත් කරන්න",
   "TooltipElementsMoveMessage": "අංග {{element}} ගෙනයන්න",
   "TrashAutoDeleteWarning": "{{sectionName}} හි ඇති අයිතම දින 30කට පසු ස්වයංක්‍රීයව මකා දමනු ලැබේ.",
-  "TrashFunctionalityDescription": "මකා දැමූ සියලුම ගොනු '{{sectionName}}' වෙත ගෙන යනු ලැබේ. වැරදීමකින් මකා දැමූ ගොනු ප්‍රතිසාධනය කරන්න හෝ ස්ථිරවම මකා දමන්න. '{{sectionName}}' හි ඇති ගොනු දින 30 කට පසු ස්වයංක්‍රීයව මකා දමනු ලැබේ. '{{sectionName}}' වෙතින් මකා දැමූ ගොනු තවදුරටත් ප්‍රතිසාධනය කළ නොහැකි බව කරුණාවෙන් සලකන්න.",
   "UnarchivedRoomAction": "'{{name}}' කාමරය අසංරක්‍ෂිතයි.",
   "UnarchivedRoomsAction": "කාමර අසංරක්‍ෂිතයි.",
   "Unpin": "ගළවන්න",

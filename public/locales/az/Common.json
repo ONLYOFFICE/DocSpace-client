@@ -1611,5 +1611,13 @@
   "YourName": "Adınız",
   "YourPrice": "Qiymətiniz",
   "YourTurn": "Sizin növbəniz",
-  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq."
+  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq.",
+  "EmptyShareTitle": "Hələlik ortaq hesab olunan məhsul yoxdur",
+  "EmptyFavoritesTitle": "Hələ ki sevimli hec nə yoxdur",
+  "NoRecentFilesHereYet": "Hələlik burada yeni fayl yoxdur",
+  "EmptyShareDescription": "Burada, digər {{productName}} üzvləri ilə sizinlə paylaşdıqları faylları və qovluqları tapacaqsınız. Öz fayllarınız və otaqın məzmunu burada göstərilmir.",
+  "EmptyFavoritesDescription": "Ulduzlaq fayl və qovluqları, onlar asan əldə edilə bilən və çatdırılabilən olsunlar.",
+  "EmptyRecentDescription": "Bu bölməyə portalda açılan bütün son tərzələr düşür. Fayllar 90 gün ərzində saxlanılır.",
+  "TrashFunctionalityDescription": "Silinmiş bütün fayllar '{{sectionName}}' bölməsinə köçürülür. Yanlış silinmiş faylları bərpa edin və ya onları daimi olaraq silin. '{{sectionName}}' bölməsindəki fayllar 30 gün sonra avtomatik olaraq silinir. Xahiş edirik, '{{sectionName}}' bölməsindən silinən faylları daha sonra bərpa etmək mümkün deyil.",
+  "DefaultFolderDescription": "Faylları bura atın və ya yenilərini yaradın."
 }

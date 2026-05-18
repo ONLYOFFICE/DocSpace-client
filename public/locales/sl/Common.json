@@ -1611,5 +1611,13 @@
   "YourName": "Vaše ime",
   "YourPrice": "Vaša cena",
   "YourTurn": "Vi ste na vrsti",
-  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala."
+  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala.",
+  "EmptyShareTitle": "Še ni skupnih elementov.",
+  "EmptyFavoritesTitle": "Še ni priljubljenih.",
+  "NoRecentFilesHereYet": "Še ni nobenih nedavnih datotek tukaj.",
+  "EmptyShareDescription": "Tukaj boste našli datoteke in mape, ki jih je z vami delili drugi člani {{productName}}. Vaše datoteke in vsebina sobe tukaj niso prikazane.",
+  "EmptyFavoritesDescription": "Označite datoteke in mape, da jih boste lahko zlahka dostopali in imeli na dosegu roke.",
+  "EmptyRecentDescription": "Vse nedavne datoteke, odprte v portalu, se znajdejo v tem razdelku. Datoteke so shranjene 90 dni.",
+  "TrashFunctionalityDescription": "Vse izbrisane datoteke so prestavljene v '{{sectionName}}'. Obnovite datoteke, ki ste jih po nesreči izbrisali, ali jih trajno izbrišite. Datoteke v '{{sectionName}}' se samodejno izbrišejo po 30 dneh. Upoštevajte, da datotek, izbrisanih iz '{{sectionName}}', ne moremo več obnoviti.",
+  "DefaultFolderDescription": "Tukaj spustite datoteke ali ustvarite nove."
 }

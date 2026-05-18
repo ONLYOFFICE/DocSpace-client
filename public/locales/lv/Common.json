@@ -1611,5 +1611,13 @@
   "YourName": "Jūsu vārds",
   "YourPrice": "Jūsu cena",
   "YourTurn": "Jūsu kārta",
-  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides."
+  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides.",
+  "EmptyShareTitle": "Vēl nav kopīgu vienumus.",
+  "EmptyFavoritesTitle": "Vēl nav iecienītāko.",
+  "NoRecentFilesHereYet": "Šeit vēl nav neseno failu.",
+  "EmptyShareDescription": "Šeit jūs atradīsiet failus un mapes, kuras citi {{productName}} dalībnieki ar jums dalījušies. Jūsu pašu faili un istabenes saturs šeit neparādās.",
+  "EmptyFavoritesDescription": "Noņem zvaigznītes failiem un mapēm, lai tie būtu viegli pieejami un rokas stienī.",
+  "EmptyRecentDescription": "Visi nesen atvērtie faili portālā nonāk šajā sadaļā. Faili tiek glabāti 90 dienas.",
+  "TrashFunctionalityDescription": "Visi dzēstie faili tiek pārvietoti uz '{{sectionName}}'. Atjaunojiet nejauši dzēstos failus vai izdzēsiet tos pavisam. Faili '{{sectionName}}' tiek automātiski dzēsti pēc 30 dienām. Lūdzu, ņemiet vērā, ka faili, kas izdzēsti no '{{sectionName}}', vairs nevar tikt atjaunoti.",
+  "DefaultFolderDescription": "Nometiet failus šeit vai izveidojiet jaunus."
 }

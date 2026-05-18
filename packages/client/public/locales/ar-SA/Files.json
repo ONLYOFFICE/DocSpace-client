@@ -207,7 +207,6 @@
   "TooltipElementsCopyMessage": "انسخ {{element}} العناصر",
   "TooltipElementsMoveMessage": "انقل عناصر {{element}}",
   "TrashAutoDeleteWarning": "يتم حذف العناصر الموجودة في {{sectionName}} تلقائيًا بعد 30 يومًا.",
-  "TrashFunctionalityDescription": "يتم نقل جميع الملفات المحذوفة إلى '{{sectionName}}'. يمكنكم استعادة الملفات المحذوفة عن طريق الخطأ أو حذفها نهائيًا. يتم حذف الملفات الموجودة في '{{sectionName}}' تلقائيًا بعد 30 يومًا. يرجى ملاحظة أنه لا يمكن استعادة الملفات المحذوفة من '{{sectionName}}' مرة أخرى.",
   "UnarchivedRoomAction": "تم إخراج الغرفة \"{{name}}\" من الأرشيف.",
   "UnarchivedRoomsAction": "الغرف غير مؤرشفة.",
   "Unpin": "إلغاء التثبيت",

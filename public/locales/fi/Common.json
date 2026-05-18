@@ -1611,5 +1611,13 @@
   "YourName": "Nimesi",
   "YourPrice": "Hintasi",
   "YourTurn": "Sinun vuorosi",
-  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen."
+  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen.",
+  "EmptyShareTitle": "Yhteisiä kohteita ei ole vielä.",
+  "EmptyFavoritesTitle": "Ei suosikkeja vielä",
+  "NoRecentFilesHereYet": "Ei viimeaikaisia tiedostoja vielä täällä",
+  "EmptyShareDescription": "Täältä löydät tiedostot ja kansiot, jotka muut {{productName}}-jäsenet ovat jakaneet sinulle. Omia tiedostojasi ja huoneen sisältöä ei näytetä täällä.",
+  "EmptyFavoritesDescription": "Tähdellä voit merkitä tiedostot ja kansiot, jotta ne pysyvät helposti saatavilla ja ulottuvilla.",
+  "EmptyRecentDescription": "Kaikki hiljattain avatut tiedostot portaalissa päätyvät tähän osioon. Tiedostot säilytetään 90 päivän ajan.",
+  "TrashFunctionalityDescription": "Kaikki poistetut tiedostot siirretään '{{sectionName}}' -osioon. Palauta vahingossa poistetut tiedostot tai poista ne pysyvästi. '{{sectionName}}' -osiossa olevat tiedostot poistetaan automaattisesti 30 päivän kuluttua. Huomioithan, että '{{sectionName}}' -osiosta poistetut tiedostot eivät ole enää palautettavissa.",
+  "DefaultFolderDescription": "Raahaa tiedostot tähän tai luo uusia."
 }

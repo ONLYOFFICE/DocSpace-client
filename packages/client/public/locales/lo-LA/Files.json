@@ -207,7 +207,6 @@
   "TooltipElementsCopyMessage": "ຄັດລອກ {{element}} ອົງປະກອບ",
   "TooltipElementsMoveMessage": "ຍ້າຍ {{element}} ອົງປະກອບ",
   "TrashAutoDeleteWarning": "ລາຍການໃນ {{sectionName}} ຈະຖືກລຶບໂດຍອັດຕະໂນມັດຫຼັງຈາກ 30 ມື້.",
-  "TrashFunctionalityDescription": "ໄຟລ໌ທີ່ຖືກລຶບທັງໝົດຖືກຍ້າຍໄປທີ່ '{{sectionName}}'. ຟື້ນ​ຟູ​ໄຟລ​໌​ທີ່​ຖືກ​ລົບ​ໂດຍ​ຄວາມ​ຜິດ​ພາດ​ຫຼື​ລຶບ​ພວກ​ເຂົາ​ຢ່າງ​ຖາ​ວອນ​. ໄຟລ໌ໃນ '{{sectionName}}' ຈະຖືກລຶບໂດຍອັດຕະໂນມັດຫຼັງຈາກ 30 ມື້. ກະລຸນາຮັບຊາບວ່າໄຟລ໌ທີ່ຖືກລຶບອອກຈາກ '{{sectionName}}' ບໍ່ສາມາດກູ້ຄືນໄດ້ອີກຕໍ່ໄປ.",
   "UnarchivedRoomAction": "ຫ້ອງ '{{name}}' ບໍ່ໄດ້ຖືກເກັບໄວ້.",
   "UnarchivedRoomsAction": "ຫ້ອງຖືກຍົກເລີກການຈັດເກັບ.",
   "Unpin": "ຖອນປັກໝຸດ",

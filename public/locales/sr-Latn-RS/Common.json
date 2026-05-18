@@ -1611,5 +1611,13 @@
   "YourName": "Vaše ime",
   "YourPrice": "Vaša cena",
   "YourTurn": "Vaš red",
-  "YouWillBeContacted": "Prodajni tim će vas kontaktirati nakon kreiranja zahteva."
+  "YouWillBeContacted": "Prodajni tim će vas kontaktirati nakon kreiranja zahteva.",
+  "EmptyShareTitle": "Još nema deljenih stavki",
+  "EmptyFavoritesTitle": "Još nema omiljenih",
+  "NoRecentFilesHereYet": "Nema nedavnih fajlova ovde još",
+  "EmptyShareDescription": "Ovde ćeš pronaći fajlove i foldere koje su drugi {{productName}} članovi podelili sa tobom. Tvoji sopstveni fajlovi i sadržaj soba se ovde ne prikazuju.",
+  "EmptyFavoritesDescription": "Označi fajlove i foldere zvezdicom da ih zadržiš lako dostupnim i pri ruci.",
+  "EmptyRecentDescription": "Svi nedavno otvoreni fajlovi u portalu završavaju u ovom odeljku. Fajlovi se čuvaju 90 dana",
+  "TrashFunctionalityDescription": "Svi obrisani fajlovi se premeštaju u '{{sectionName}}'. Vrati fajlove obrisane greškom ili ih trajno obriši. Fajlovi u '{{sectionName}}' se automatski brišu nakon 30 dana. Imaj na umu da fajlovi obrisani iz '{{sectionName}}' više ne mogu biti vraćeni.",
+  "DefaultFolderDescription": "Povucite fajlove ovde ili kreirajte nove."
 }

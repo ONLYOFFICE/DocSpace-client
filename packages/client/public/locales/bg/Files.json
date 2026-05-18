@@ -207,7 +207,6 @@
   "TooltipElementsCopyMessage": "Копирай {{element}} елемента",
   "TooltipElementsMoveMessage": "Премести {{element}} елемента",
   "TrashAutoDeleteWarning": "Елементите в {{sectionName}} се изтриват автоматично след 30 дни.",
-  "TrashFunctionalityDescription": "Всички изтрити файлове са преместени в '{{sectionName}}'. Възстановете файлове, изтрити по погрешка, или ги изтрийте окончателно. Файловете в '{{sectionName}}' се изтриват автоматично след 30 дни. Моля, обърнете внимание, че файловете, изтрити от '{{sectionName}}', не могат да бъдат възстановени повече.",
   "UnarchivedRoomAction": "Стаята '{{name}}' е изкарана от архива.",
   "UnarchivedRoomsAction": "Стаите са изкарани от архива.",
   "Unpin": "Откачване",

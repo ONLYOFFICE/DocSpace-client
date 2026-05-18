@@ -207,7 +207,6 @@
   "TooltipElementsCopyMessage": "Zkopírovat prvky {{element}}",
   "TooltipElementsMoveMessage": "Přesunout prvky {{element}}",
   "TrashAutoDeleteWarning": "Položky v {{sectionName}} jsou automaticky smazány po 30 dnech.",
-  "TrashFunctionalityDescription": "Všechny smazané soubory jsou přesunuty do složky '{{sectionName}}'. Obnovte soubory smazané omylem nebo je trvale smažte. Soubory ve složce '{{sectionName}}' jsou automaticky mazány po 30 dnech. Upozorňujeme, že soubory smazané ze složky '{{sectionName}}' nelze obnovit.",
   "UnarchivedRoomAction": "Místnost '{{name}}' není archivována.",
   "UnarchivedRoomsAction": "Místnosti nejsou archivovány.",
   "Unpin": "Odepnout",

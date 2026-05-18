@@ -207,7 +207,6 @@
   "TooltipElementsCopyMessage": "Kopiraj {{element}} elemente",
   "TooltipElementsMoveMessage": "Premakni {{element}} elemente",
   "TrashAutoDeleteWarning": "Predmeti v {{sectionName}} so samodejno izbrisani po 30 dneh.",
-  "TrashFunctionalityDescription": "Vse izbrisane datoteke so prestavljene v '{{sectionName}}'. Obnovite datoteke, ki ste jih po nesreči izbrisali, ali jih trajno izbrišite. Datoteke v '{{sectionName}}' se samodejno izbrišejo po 30 dneh. Upoštevajte, da datotek, izbrisanih iz '{{sectionName}}', ne moremo več obnoviti.",
   "UnarchivedRoomAction": "Soba '{{name}}' ni arhivirana.",
   "UnarchivedRoomsAction": "Sobe niso arhivirane.",
   "Unpin": "Odpni",

@@ -1611,5 +1611,13 @@
   "YourName": "Tên của bạn",
   "YourPrice": "Giá của bạn",
   "YourTurn": "Phiên của bạn",
-  "YouWillBeContacted": "Đội ngũ kinh doanh sẽ liên hệ với bạn sau khi tạo yêu cầu."
+  "YouWillBeContacted": "Đội ngũ kinh doanh sẽ liên hệ với bạn sau khi tạo yêu cầu.",
+  "EmptyShareTitle": "Hiện tại chưa có mục nào được chia sẻ.",
+  "EmptyFavoritesTitle": "Chưa có mục yêu thích nào cả",
+  "NoRecentFilesHereYet": "Chưa có tệp nào gần đây cả.",
+  "EmptyShareDescription": "Đây là nơi bạn sẽ tìm thấy các tệp và thư mục mà các thành viên {{productName}} khác đã chia sẻ với bạn. Nội dung tệp và phòng của riêng bạn sẽ không hiển thị ở đây.",
+  "EmptyFavoritesDescription": "Đánh dấu sao vào các tệp và thư mục để giữ chúng dễ dàng truy cập và luôn trong tầm tay.",
+  "EmptyRecentDescription": "Tất cả các tệp gần đây được mở trong cổng thông tin sẽ xuất hiện ở phần này. Các tệp được lưu trữ trong 90 ngày.",
+  "TrashFunctionalityDescription": "Tất cả các tệp đã xóa được chuyển đến '{{sectionName}}'. Khôi phục các tệp bị xóa nhầm hoặc xóa chúng vĩnh viễn. Các tệp trong '{{sectionName}}' sẽ tự động bị xóa sau 30 ngày. Xin lưu ý, các tệp đã bị xóa khỏi '{{sectionName}}' sẽ không thể khôi phục được nữa.",
+  "DefaultFolderDescription": "Thả tập tin vào đây hoặc tạo tập tin mới."
 }

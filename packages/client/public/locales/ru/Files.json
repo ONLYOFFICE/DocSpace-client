@@ -207,7 +207,6 @@
   "TooltipElementsCopyMessage": "Скопировать {{element}} элементов",
   "TooltipElementsMoveMessage": "Переместить {{element}} элементов",
   "TrashAutoDeleteWarning": "Элементы в разделе \"{{sectionName}}\" автоматически удаляются через 30 дней.",
-  "TrashFunctionalityDescription": "Все удаленные файлы перемещаются в раздел \"{{sectionName}}\". Восстановите файлы, удаленные по ошибке, или удалите их навсегда. Файлы в разделе \"{{sectionName}}\" автоматически удаляются через 30 дней. Обратите внимание, что файлы, удаленные из раздела \"{{sectionName}}\", не могут быть восстановлены.",
   "UnarchivedRoomAction": "Комната '{{name}}' разархивирована.",
   "UnarchivedRoomsAction": "Комнаты разархивированы.",
   "Unpin": "Открепить",

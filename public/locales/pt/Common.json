@@ -1611,5 +1611,13 @@
   "YourName": "O seu nome",
   "YourPrice": "O seu preço",
   "YourTurn": "A sua vez",
-  "YouWillBeContacted": "A equipa de vendas entrará em contacto consigo depois de criar o pedido."
+  "YouWillBeContacted": "A equipa de vendas entrará em contacto consigo depois de criar o pedido.",
+  "EmptyShareTitle": "Ainda não existem itens compartilhados.",
+  "EmptyFavoritesTitle": "Ainda não há favoritos.",
+  "NoRecentFilesHereYet": "Ainda não há arquivos recentes aqui.",
+  "EmptyShareDescription": "Aqui você encontrará arquivos e pastas que outros membros do {{productName}} compartilharam com você. Seus próprios arquivos e conteúdo da sala não são exibidos aqui.",
+  "EmptyFavoritesDescription": "Arquive arquivos e pastas para mantê-los facilmente acessíveis e ao seu alcance.",
+  "EmptyRecentDescription": "Todos os arquivos recentes abertos no portal acabam nesta seção. Os arquivos são armazenados por 90 dias.",
+  "TrashFunctionalityDescription": "Todos os arquivos eliminados são movidos para '{{sectionName}}'. Restaure arquivos eliminados por engano ou exclua-os permanentemente. Os arquivos em '{{sectionName}}' são excluídos automaticamente após 30 dias. Observe que os arquivos eliminados de '{{sectionName}}' não podem ser restaurados novamente.",
+  "DefaultFolderDescription": "Solte arquivos aqui ou crie novos."
 }

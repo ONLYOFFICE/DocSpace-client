@@ -1611,5 +1611,13 @@
   "YourName": "Vaše meno",
   "YourPrice": "Vaša cena",
   "YourTurn": "Ste na rade",
-  "YouWillBeContacted": "Po vytvorení požiadavky vás bude kontaktovať predajný tím."
+  "YouWillBeContacted": "Po vytvorení požiadavky vás bude kontaktovať predajný tím.",
+  "EmptyShareTitle": "Zatiaľ nie sú zdieľané žiadne položky.",
+  "EmptyFavoritesTitle": "Zatiaľ nemám žiadne obľúbené položky.",
+  "NoRecentFilesHereYet": "Zatiaľ tu nie sú žiadne nedávne súbory.",
+  "EmptyShareDescription": "Tu nájdete súbory a priečinky, ktoré s vami zdieľali ostatní členovia {{productName}}. Vaše vlastné súbory a obsah miestnosti sa tu nezobrazujú.",
+  "EmptyFavoritesDescription": "Označte súbory a priečinky, aby ste ich mali ľahko prístupné a na dosahu.",
+  "EmptyRecentDescription": "Všetky nedávno otvorené súbory v portáli sa zobrazujú v tejto sekcii. Súbory sú uložené 90 dní.",
+  "TrashFunctionalityDescription": "Všetky odstránené súbory sú presunuté do ‘{{sectionName}}’. Obnovte súbory odstránené náhodou alebo ich trvale zmažte. Súbory v ‘{{sectionName}}’ sú automaticky zmazané po 30 dňoch. Upozorňujeme, že súbory odstránené z ‘{{sectionName}}’ už nie je možné obnoviť.",
+  "DefaultFolderDescription": "Vložte sem súbory alebo vytvorte nové."
 }

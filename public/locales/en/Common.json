@@ -1611,5 +1611,13 @@
   "YourName": "Your name",
   "YourPrice": "Your price",
   "YourTurn": "Your turn",
-  "YouWillBeContacted": "The sales team will contact you after creating the request."
+  "YouWillBeContacted": "The sales team will contact you after creating the request.",
+  "EmptyShareTitle": "There are no shared items yet",
+  "EmptyFavoritesTitle": "No favorites yet",
+  "NoRecentFilesHereYet": "No recent files here yet",
+  "EmptyShareDescription": "Here you'll find files and folders that other {{productName}} members shared with you. Your own files and room content are not shown here.",
+  "EmptyFavoritesDescription": "Star files and folders to keep them easily accessible and within reach.",
+  "EmptyRecentDescription": "All recent files opened in the portal end up in this section. Files are stored for 90 days",
+  "TrashFunctionalityDescription": "All deleted files are moved to '{{sectionName}}'. Restore files deleted by mistake or delete them permanently. Files in '{{sectionName}}' are automatically deleted after 30 days. Please note, that the files deleted from the '{{sectionName}}' cannot be restored any longer.",
+  "DefaultFolderDescription": "Drop files here or create new ones."
 }

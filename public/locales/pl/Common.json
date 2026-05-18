@@ -1611,5 +1611,13 @@
   "YourName": "Twoje imię",
   "YourPrice": "Twoja cena",
   "YourTurn": "Twoja kolej",
-  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby."
+  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby.",
+  "EmptyShareTitle": "Nie ma jeszcze żadnych współdzielonych elementów.",
+  "EmptyFavoritesTitle": "Nie ma jeszcze ulubionych.",
+  "NoRecentFilesHereYet": "Brak ostatnich plików tutaj jeszcze",
+  "EmptyShareDescription": "Tutaj znajdziesz pliki i foldery, które inni członkowie {{productName}} udostępnili Tobie. Twoje własne pliki i zawartość pokoi nie są tutaj widoczne.",
+  "EmptyFavoritesDescription": "Oznacz gwiazdką pliki i foldery, aby utrzymać je w łatwo dostępnym miejscu i na wyciągnięcie ręki.",
+  "EmptyRecentDescription": "Wszystkie ostatnio otwierane pliki w portalu trafiają do tej sekcji. Pliki są przechowywane przez 90 dni.",
+  "TrashFunctionalityDescription": "Wszystkie usunięte pliki są przenoszone do '{{sectionName}}'. Przywróć pliki usunięte przez pomyłkę lub usuń je na stałe. Pliki w '{{sectionName}}' są automatycznie usuwane po 30 dniach. Należy pamiętać, że pliki usunięte z '{{sectionName}}' nie mogą być już przywrócone.",
+  "DefaultFolderDescription": "Upuść pliki tutaj lub utwórz nowe."
 }

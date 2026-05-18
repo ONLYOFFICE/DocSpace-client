@@ -1611,5 +1611,13 @@
   "YourName": "Uw naam",
   "YourPrice": "Uw prijs",
   "YourTurn": "Uw beurt",
-  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag."
+  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag.",
+  "EmptyShareTitle": "Er zijn nog geen gedeelde items.",
+  "EmptyFavoritesTitle": "Nog geen favorieten",
+  "NoRecentFilesHereYet": "Nog geen recente bestanden hier.",
+  "EmptyShareDescription": "Hier vind je bestanden en mappen die andere {{productName}}-leden met je hebben gedeeld. Je eigen bestanden en kamerinhoud worden hier niet weergegeven.",
+  "EmptyFavoritesDescription": "Sterren bestanden en mappen om ze gemakkelijk toegankelijk en binnen handbereik te houden.",
+  "EmptyRecentDescription": "Alle recent geopend bestanden in het portaal komen in dit gedeelte terecht. Bestanden worden 90 dagen bewaard.",
+  "TrashFunctionalityDescription": "Alle verwijderde bestanden worden verplaatst naar '{{sectionName}}'. Herstel per ongeluk verwijderde bestanden of verwijder ze permanent. Bestanden in '{{sectionName}}' worden automatisch verwijderd na 30 dagen. Let op, de bestanden die uit '{{sectionName}}' zijn verwijderd, kunnen niet meer worden hersteld.",
+  "DefaultFolderDescription": "Sleep bestanden hierheen of maak nieuwe aan."
 }

@@ -1611,5 +1611,13 @@
   "YourName": "お名前",
   "YourPrice": "価格",
   "YourTurn": "あなたの番です",
-  "YouWillBeContacted": "リクエスト作成後、営業担当よりご連絡させていただきます。"
+  "YouWillBeContacted": "リクエスト作成後、営業担当よりご連絡させていただきます。",
+  "EmptyShareTitle": "まだ共有アイテムはありません",
+  "EmptyFavoritesTitle": "お気に入りはまだありません",
+  "NoRecentFilesHereYet": "最近のファイルはまだありません",
+  "EmptyShareDescription": "ここでは、他の{{productName}}メンバーがあなたと共有したファイルやフォルダーを見つけることができます。あなた自身のファイルやルームの内容はここには表示されません。",
+  "EmptyFavoritesDescription": "スターを付けたファイルやフォルダは、簡単にアクセスできるように手の届く範囲に保ちます。",
+  "EmptyRecentDescription": "ポータルで開かれたすべての最近のファイルはこのセクションに表示されます。ファイルは90日間保存されます。",
+  "TrashFunctionalityDescription": "すべての削除されたファイルは「{{sectionName}}」に移動されます。誤って削除されたファイルを復元するか、完全に削除してください。「{{sectionName}}」にあるファイルは、30日後に自動的に削除されます。「{{sectionName}}」から削除されたファイルはもはや復元できないことにご注意ください。",
+  "DefaultFolderDescription": "ここにファイルをドロップするか、新しいファイルを作成してください。"
 }

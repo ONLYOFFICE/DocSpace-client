@@ -1611,5 +1611,13 @@
   "YourName": "Emri juaj",
   "YourPrice": "Çmimi juaj",
   "YourTurn": "Radha jote",
-  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës."
+  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës.",
+  "EmptyShareTitle": "Nuk ka artikuj të ndarë ende.",
+  "EmptyFavoritesTitle": "Nuk ka asnjë të preferuar ende",
+  "NoRecentFilesHereYet": "Nuk ka skedarë të fundit ende.",
+  "EmptyShareDescription": "Këtu do të gjeni skedarë dhe dosje të ndara me ju nga anëtarët e tjerë të {{productName}}. Skedarët tuaj dhe përmbajtja e dhomës suaj nuk shfaqen këtu.",
+  "EmptyFavoritesDescription": "Yllëzo skedarët dhe dosjet për t’i pasur lehtësisht të arritshme.",
+  "EmptyRecentDescription": "Të gjithë skedarët e fundit të hapur në portal shfaqen në këtë seksion. Skedarët ruhen për 90 ditë.",
+  "TrashFunctionalityDescription": "Të gjithë skedarët e fshirë zhvendosen te '{{sectionName}}'. Rikthe skedarët e fshirë gabimisht ose fshiji përgjithmonë. Skedarët në '{{sectionName}}' fshihen automatikisht pas 30 ditësh. Kujdes: Skedarët e fshirë nga '{{sectionName}}' nuk mund të rikuperohen më.",
+  "DefaultFolderDescription": "Hidhni skedarët këtu ose krijoni të rinj."
 }

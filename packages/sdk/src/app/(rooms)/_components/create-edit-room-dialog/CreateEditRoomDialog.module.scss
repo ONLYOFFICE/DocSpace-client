@@ -40,3 +40,16 @@
 	flex-wrap: wrap;
 	gap: 4px;
 }
+
+.ownerSection {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.ownerDisplay {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: 4px;
+}

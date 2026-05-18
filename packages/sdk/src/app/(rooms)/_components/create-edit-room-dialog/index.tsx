@@ -43,28 +43,59 @@ import {
 import { Text } from "@docspace/ui-kit/components/text";
 import { Tag } from "@docspace/ui-kit/components/tag";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import {
+  Avatar,
+  AvatarSize,
+  AvatarRole,
+} from "@docspace/ui-kit/components/avatar";
 import { AvatarEditorDialog } from "@docspace/ui-kit/components/avatar-editor-dialog";
+import { RoomLogoCoverDialog } from "@docspace/ui-kit/components/room-logo-cover-dialog";
 import { ROOM_ACTION_KEYS } from "@docspace/ui-kit/constants";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { calculateRoomLogoParams } from "@docspace/ui-kit/utils";
 import type { TImage } from "@docspace/ui-kit/components/image-editor";
-import type { Nullable } from "@docspace/shared/types";
+import type { ICover } from "@docspace/ui-kit/components/room-logo-cover-dialog";
+import type { Nullable, TCreatedBy } from "@docspace/shared/types";
 import { RoomsType } from "@docspace/shared/enums";
 import api from "@docspace/shared/api";
 
+import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
+
 import UploadSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import DeleteSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
+import PencilSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 
 import styles from "./CreateEditRoomDialog.module.scss";
 
-type CreateRoomDialogProps = {
-  visible: boolean;
-  onClose: () => void;
+type EditableRoom = {
+  id: number;
+  title: string;
+  tags?: string[];
+  roomLogo?: string;
+  roomIconColor?: string;
+  createdBy?: TCreatedBy;
 };
 
-const CreateRoomDialog = ({ visible, onClose }: CreateRoomDialogProps) => {
-  const { t } = useTranslation(["Common", "RoomLogoCover"]);
+type CreateEditRoomDialogProps = {
+  visible: boolean;
+  onClose: () => void;
+  room?: EditableRoom;
+};
+
+const CreateEditRoomDialog = ({
+  visible,
+  onClose,
+  room,
+}: CreateEditRoomDialogProps) => {
+  const { t } = useTranslation([
+    "Common",
+    "RoomLogoCover",
+    "Files",
+    "CreateEditRoomDialog",
+  ]);
   const router = useRouter();
+  const dialogsStore = useDialogsStore();
+  const isEdit = !!room;
 
   const [name, setName] = React.useState("");
   const [tags, setTags] = React.useState<string[]>([]);
@@ -77,8 +108,15 @@ const CreateRoomDialog = ({ visible, onClose }: CreateRoomDialogProps) => {
   });
   const [cropperVisible, setCropperVisible] = React.useState(false);
   const [previewUrl, setPreviewUrl] = React.useState<string | null>(null);
+  const [logoChanged, setLogoChanged] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [hasNameError, setHasNameError] = React.useState(false);
+
+  const [coverDialogVisible, setCoverDialogVisible] = React.useState(false);
+  const [selectedColor, setSelectedColor] = React.useState<string | undefined>(
+    undefined,
+  );
+  const [selectedCover, setSelectedCover] = React.useState<ICover | null>(null);
 
   const randomColor = React.useMemo(
     () =>
@@ -89,17 +127,35 @@ const CreateRoomDialog = ({ visible, onClose }: CreateRoomDialogProps) => {
   );
 
   React.useEffect(() => {
-    if (!visible) {
-      setName("");
-      setTags([]);
-      setTagInputValue("");
-      setCropperImage({ x: 0.5, y: 0.5, zoom: 1, uploadedFile: undefined });
-      setPreviewUrl(null);
-      setCropperVisible(false);
-      setIsLoading(false);
-      setHasNameError(false);
-    }
-  }, [visible]);
+    if (visible) dialogsStore.getCovers();
+  }, [visible, dialogsStore]);
+
+  React.useEffect(() => {
+    setName(room?.title ?? "");
+    setTags(room?.tags ?? []);
+    setTagInputValue("");
+    setCropperImage({ x: 0.5, y: 0.5, zoom: 1, uploadedFile: undefined });
+    setPreviewUrl(room?.roomLogo ?? null);
+    setCropperVisible(false);
+    setIsLoading(false);
+    setHasNameError(false);
+    setLogoChanged(false);
+    setSelectedColor(room?.roomIconColor ?? undefined);
+    setSelectedCover(null);
+    setCoverDialogVisible(false);
+  }, [visible]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const onOpenCoverDialog = () => {
+    setCoverDialogVisible(true);
+  };
+
+  const onApplyCover = (color: string, cover: ICover | null) => {
+    setSelectedColor(color.replace("#", ""));
+    setSelectedCover(cover);
+    setPreviewUrl(null);
+    setLogoChanged(true);
+    setCoverDialogVisible(false);
+  };
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -145,6 +201,8 @@ const CreateRoomDialog = ({ visible, onClose }: CreateRoomDialogProps) => {
   const onCropperSave = (_image: TImage, preview: string) => {
     setCropperImage(_image);
     setPreviewUrl(preview);
+    setSelectedCover(null);
+    setLogoChanged(true);
     setCropperVisible(false);
   };
 
@@ -153,7 +211,11 @@ const CreateRoomDialog = ({ visible, onClose }: CreateRoomDialogProps) => {
   const onDeleteLogo = React.useCallback(() => {
     setCropperImage({ x: 0.5, y: 0.5, zoom: 1, uploadedFile: undefined });
     setPreviewUrl(null);
+    setSelectedCover(null);
+    setLogoChanged(true);
   }, []);
+
+  const hasCoverOrPreview = !!(previewUrl || selectedCover);
 
   const model = React.useMemo(() => {
     type UploadItem = {
@@ -162,34 +224,79 @@ const CreateRoomDialog = ({ visible, onClose }: CreateRoomDialogProps) => {
       icon: string;
       onClick: (ref?: React.RefObject<Nullable<HTMLInputElement>>) => void;
     };
-    type DeleteItem = {
+    type ActionItem = {
       key: string;
       label: string;
       icon: string;
       onClick: () => void;
     };
 
-    const items: (UploadItem | DeleteItem)[] = [
+    const items: (UploadItem | ActionItem)[] = [
       {
         key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_UPLOAD,
-        label: t("Common:Upload"),
+        label: t("RoomLogoCover:UploadPicture"),
         icon: UploadSvgUrl,
         onClick: (ref?: React.RefObject<Nullable<HTMLInputElement>>) =>
           ref?.current?.click(),
       },
     ];
 
-    if (previewUrl) {
+    if (hasCoverOrPreview) {
       items.push({
         key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_DELETE,
         label: t("Common:Delete"),
         icon: DeleteSvgUrl,
         onClick: onDeleteLogo,
       });
+    } else {
+      items.push({
+        key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_CUSTOMIZE_COVER,
+        label: t("RoomLogoCover:CustomizeCover"),
+        icon: PencilSvgUrl,
+        onClick: onOpenCoverDialog,
+      });
     }
 
     return items;
-  }, [previewUrl, t, onDeleteLogo]);
+  }, [hasCoverOrPreview, t, onDeleteLogo]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const buildLogoParams = async () => {
+    if (!(cropperImage.uploadedFile instanceof File) || !previewUrl)
+      return undefined;
+
+    const file = cropperImage.uploadedFile;
+    const objectUrl = URL.createObjectURL(file);
+    const formData = new FormData();
+    formData.append("0", file);
+
+    const [response, img] = await Promise.all([
+      api.rooms.uploadRoomLogo(formData) as Promise<{ data?: string }>,
+      new Promise<HTMLImageElement>((resolve, reject) => {
+        const el = new Image();
+        el.onload = () => {
+          URL.revokeObjectURL(objectUrl);
+          resolve(el);
+        };
+        el.onerror = () => {
+          URL.revokeObjectURL(objectUrl);
+          reject();
+        };
+        el.src = objectUrl;
+      }),
+    ]);
+
+    if (!response?.data) return undefined;
+
+    return {
+      tmpFile: response.data,
+      ...calculateRoomLogoParams(
+        img,
+        cropperImage.x,
+        cropperImage.y,
+        cropperImage.zoom,
+      ),
+    };
+  };
 
   const onSave = async () => {
     const trimmedName = name.trim();
@@ -200,59 +307,42 @@ const CreateRoomDialog = ({ visible, onClose }: CreateRoomDialogProps) => {
 
     setIsLoading(true);
     try {
-      let logo:
-        | {
-            tmpFile: string;
-            x: number;
-            y: number;
-            width: number;
-            height: number;
-          }
-        | undefined;
+      if (isEdit) {
+        const logo = logoChanged ? await buildLogoParams() : undefined;
+        await api.rooms.editRoom(room.id, {
+          title: trimmedName,
+          tags,
+          ...(logoChanged && logo ? { logo } : {}),
+        });
 
-      if (cropperImage.uploadedFile instanceof File && previewUrl) {
-        const file = cropperImage.uploadedFile;
-        const objectUrl = URL.createObjectURL(file);
-        const formData = new FormData();
-        formData.append("0", file);
-        const [response, img] = await Promise.all([
-          api.rooms.uploadRoomLogo(formData) as Promise<{ data?: string }>,
-          new Promise<HTMLImageElement>((resolve, reject) => {
-            const el = new Image();
-            el.onload = () => {
-              URL.revokeObjectURL(objectUrl);
-              resolve(el);
-            };
-            el.onerror = () => {
-              URL.revokeObjectURL(objectUrl);
-              reject();
-            };
-            el.src = objectUrl;
-          }),
-        ]);
-
-        if (response?.data) {
-          logo = {
-            tmpFile: response.data,
-            ...calculateRoomLogoParams(
-              img,
-              cropperImage.x,
-              cropperImage.y,
-              cropperImage.zoom,
-            ),
-          };
+        if (logoChanged && (selectedCover || !logo)) {
+          await api.rooms.setRoomCover(room.id, {
+            color: selectedColor ?? globalColors.logoColors[0].replace("#", ""),
+            cover: selectedCover?.id ?? "",
+          });
         }
+      } else {
+        const logo = await buildLogoParams();
+        const newRoom = (await api.rooms.createRoom({
+          roomType: RoomsType.CustomRoom,
+          title: trimmedName,
+          ...(tags.length && { tags }),
+          ...(logo && { logo }),
+        })) as { id?: number };
+
+        if (selectedCover && newRoom?.id) {
+          const colorForApi =
+            selectedColor ?? globalColors.logoColors[0].replace("#", "");
+          await api.rooms.setRoomCover(newRoom.id, {
+            color: colorForApi,
+            cover: selectedCover.id,
+          });
+        }
+
+        router.refresh();
       }
 
-      await api.rooms.createRoom({
-        roomType: RoomsType.CustomRoom,
-        title: trimmedName,
-        ...(tags.length && { tags }),
-        ...(logo && { logo }),
-      });
-
       onClose();
-      router.refresh();
     } catch (e) {
       console.error(e);
     } finally {
@@ -260,9 +350,22 @@ const CreateRoomDialog = ({ visible, onClose }: CreateRoomDialogProps) => {
     }
   };
 
-  const isEmptyIcon = !name && !previewUrl;
-  const showDefault = !previewUrl && !!name;
+  const roomIconLogo = React.useMemo(() => {
+    if (previewUrl) return previewUrl;
+    if (selectedCover)
+      return {
+        cover: selectedCover,
+      } as unknown as import("@docspace/ui-kit/types").TLogo;
+    return undefined;
+  }, [previewUrl, selectedCover]);
 
+  const iconColor = selectedColor ?? randomColor;
+  const hasAnyLogoConfig = !!(previewUrl || selectedCover || selectedColor);
+  const isEmptyIcon = !name && !hasAnyLogoConfig;
+  const showDefault = !hasCoverOrPreview && (!!name || !!selectedColor);
+  const withEditing = !isEmptyIcon;
+
+  const initialCoverColor = selectedColor ? `#${selectedColor}` : undefined;
   return (
     <>
       <ModalDialog
@@ -271,19 +374,21 @@ const CreateRoomDialog = ({ visible, onClose }: CreateRoomDialogProps) => {
         visible={visible}
         onClose={onClose}
       >
-        <ModalDialog.Header>{t("Common:CreateRoom")}</ModalDialog.Header>
+        <ModalDialog.Header>
+          {isEdit ? t("Files:EditRoom") : t("Common:CreateRoom")}
+        </ModalDialog.Header>
 
         <ModalDialog.Body>
           <div className={styles.body}>
             <div className={styles.logoNameRow}>
               <RoomIcon
                 title={name}
-                color={randomColor}
+                color={iconColor}
                 size="64px"
                 radius="12px"
-                logo={previewUrl ?? undefined}
+                logo={roomIconLogo}
                 showDefault={showDefault}
-                withEditing={!isEmptyIcon}
+                withEditing={withEditing}
                 model={model}
                 onChangeFile={onChangeFile}
                 isEmptyIcon={isEmptyIcon}
@@ -349,12 +454,36 @@ const CreateRoomDialog = ({ visible, onClose }: CreateRoomDialogProps) => {
                 isDisabled={isLoading}
               />
             </div>
+
+            {isEdit && room.createdBy ? (
+              <div className={styles.ownerSection}>
+                <Text fontWeight={600} fontSize="13px">
+                  {t("Files:RoomOwner")}:
+                </Text>
+                <div className={styles.ownerDisplay}>
+                  <Avatar
+                    size={AvatarSize.base}
+                    role={AvatarRole.none}
+                    isDefaultSource={room.createdBy.hasAvatar}
+                    source={
+                      room.createdBy.hasAvatar
+                        ? room.createdBy.avatar
+                        : room.createdBy.avatarSmall
+                    }
+                    userName={room.createdBy.displayName}
+                  />
+                  <Text fontWeight={600} fontSize="13px">
+                    {room.createdBy.displayName}
+                  </Text>
+                </div>
+              </div>
+            ) : null}
           </div>
         </ModalDialog.Body>
 
         <ModalDialog.Footer>
           <Button
-            label={t("Common:Create")}
+            label={isEdit ? t("Common:SaveButton") : t("Common:Create")}
             size={ButtonSize.normal}
             primary
             scale
@@ -371,6 +500,7 @@ const CreateRoomDialog = ({ visible, onClose }: CreateRoomDialogProps) => {
           />
         </ModalDialog.Footer>
       </ModalDialog>
+
       <AvatarEditorDialog
         t={t}
         visible={cropperVisible}
@@ -381,9 +511,20 @@ const CreateRoomDialog = ({ visible, onClose }: CreateRoomDialogProps) => {
         onChangeImage={onChangeImage}
         onChangeFile={onCropperChangeFile}
       />
+
+      <RoomLogoCoverDialog
+        t={t}
+        visible={coverDialogVisible}
+        covers={dialogsStore.covers}
+        title={name}
+        initialColor={initialCoverColor}
+        initialCover={selectedCover}
+        onClose={() => setCoverDialogVisible(false)}
+        onApply={onApplyCover}
+      />
     </>
   );
 };
 
-export default CreateRoomDialog;
+export default CreateEditRoomDialog;
 

@@ -29,11 +29,17 @@
 import React from "react";
 import { makeAutoObservable } from "mobx";
 
+import api from "@docspace/shared/api";
+import type { ICover } from "@docspace/ui-kit/components/room-logo-cover-dialog";
+
 import { type SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
 
 class DialogsStore {
   // [[dialogName, visible]]
   dialogs = new Map<SDKDialogs, boolean>();
+
+  covers: ICover[] = [];
+  coversLoaded = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -49,6 +55,21 @@ class DialogsStore {
 
   isDialogOpen = (name: SDKDialogs) => {
     return this.dialogs.get(name) || false;
+  };
+
+  setCovers = (covers: ICover[]) => {
+    this.covers = covers;
+    this.coversLoaded = true;
+  };
+
+  getCovers = async () => {
+    if (this.coversLoaded) return;
+    try {
+      const res = (await api.rooms.getRoomCovers()) as ICover[];
+      this.setCovers(Array.isArray(res) ? res : []);
+    } catch {
+      // ignore
+    }
   };
 }
 

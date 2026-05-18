@@ -145,6 +145,20 @@ describe("EncryptionContext / EncryptionProvider", () => {
       renderTree();
       expect(latest.isUnlocked).toBe(true);
     });
+
+    it("exposes publicKey from the active envelope (or null when missing)", () => {
+      renderTree({ userKeys: null });
+      expect(latest.publicKey).toBeNull();
+
+      renderTree({
+        userKeys: {
+          publicKey: "pub-base64",
+          privateKeyEnc: "enc-blob",
+          userId: "user-42",
+        } as EncryptionUserKeys,
+      });
+      expect(latest.publicKey).toBe("pub-base64");
+    });
   });
 
   describe("requireIdentity()", () => {

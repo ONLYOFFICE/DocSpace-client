@@ -63,6 +63,7 @@ const User = ({
   setEditGroupMembersDialogVisible,
   setRemoveUserConfirmation,
   isAIAgentsFolderRoot,
+  getActiveUploadCountForRoom,
 }: UserProps) => {
   const { t } = useTranslation([
     "InfoPanel",
@@ -191,6 +192,20 @@ const User = ({
     const isRemoval = option.access === ShareAccessRights.None;
     const isPrivateRoom = room.private;
     if (isRemoval && isPrivateRoom) {
+      // Block revoke while uploads to this room are still in flight: the
+      // upload finalizer wraps the new file's DEK for every current member,
+      // so revoking mid-batch would let the removed user keep access to the
+      // files that finish after the revoke API call returns.
+      const activeUploads = getActiveUploadCountForRoom?.(room.id) ?? 0;
+      if (activeUploads > 0) {
+        toastr.warning(
+          t("Common:CannotRemoveMemberWhileUploads", {
+            count: activeUploads,
+          }),
+        );
+        return;
+      }
+
       return setRemoveUserConfirmation!(
         true,
         async () => {
@@ -225,19 +240,23 @@ const User = ({
   );
 };
 
-export default inject(({ dialogsStore, treeFoldersStore }: TStore) => {
-  const {
-    setEditMembersGroup,
-    setEditGroupMembersDialogVisible,
-    setRemoveUserConfirmation,
-  } = dialogsStore;
+export default inject(
+  ({ dialogsStore, treeFoldersStore, uploadDataStore }: TStore) => {
+    const {
+      setEditMembersGroup,
+      setEditGroupMembersDialogVisible,
+      setRemoveUserConfirmation,
+    } = dialogsStore;
 
-  const { isAIAgentsFolderRoot } = treeFoldersStore;
+    const { isAIAgentsFolderRoot } = treeFoldersStore;
+    const { getActiveUploadCountForRoom } = uploadDataStore;
 
-  return {
-    setEditMembersGroup,
-    setEditGroupMembersDialogVisible,
-    setRemoveUserConfirmation,
-    isAIAgentsFolderRoot,
-  };
-})(observer(User));
+    return {
+      setEditMembersGroup,
+      setEditGroupMembersDialogVisible,
+      setRemoveUserConfirmation,
+      isAIAgentsFolderRoot,
+      getActiveUploadCountForRoom,
+    };
+  },
+)(observer(User));

@@ -121,6 +121,12 @@
   margin-bottom: 12px;
 }
 
+.keyItemBadges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .keyItemActions {
   display: flex;
   align-items: center;
@@ -168,4 +174,23 @@
 .keyIdText {
   font-family: "Roboto Mono", monospace;
   font-size: 12px;
+}
+
+.resetSection {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid var(--divider-color);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.resetHint {
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.resetButton {
+  align-self: flex-start;
 }

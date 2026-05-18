@@ -63,6 +63,12 @@ export type EncryptionContextValue = {
   hasConfiguredKey: boolean;
   isUnlocking: boolean;
   unlockError: string | null;
+  /**
+   * Active envelope's public key (base64). Exposed so callers can flag the
+   * "current device" key inside lists of multiple registered identities.
+   * Null when no envelope is configured for this device.
+   */
+  publicKey: string | null;
   unlock: (passphrase: string) => Promise<boolean>;
   lock: () => void;
   getIdentity: () => IdentityKeyPair | null;
@@ -336,12 +342,15 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     setUnlockError(null);
   }, []);
 
+  const publicKey = userKeys?.publicKey ?? null;
+
   const value = useMemo<EncryptionContextValue>(
     () => ({
       isUnlocked,
       hasConfiguredKey,
       isUnlocking,
       unlockError,
+      publicKey,
       unlock,
       lock,
       getIdentity,
@@ -354,6 +363,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       hasConfiguredKey,
       isUnlocking,
       unlockError,
+      publicKey,
       unlock,
       lock,
       getIdentity,

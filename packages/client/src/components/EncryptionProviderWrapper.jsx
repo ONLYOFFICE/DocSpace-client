@@ -26,6 +26,8 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
+import { Trans, useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
 
 import {
   EncryptionProvider,
@@ -33,6 +35,8 @@ import {
 } from "@docspace/shared/context/encryption";
 import { PassphraseDialog } from "@docspace/shared/dialogs/passphrase-dialog";
 import { KeyChangeDialog } from "@docspace/shared/dialogs/key-change-dialog";
+import { Link } from "@docspace/ui-kit/components/link";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 const FilenameRecoveryEffect = inject(({ filesStore }) => ({
   recover: filesStore?.recoverEncryptedFilenamesForCurrentView,
@@ -42,6 +46,60 @@ const FilenameRecoveryEffect = inject(({ filesStore }) => ({
     React.useEffect(() => {
       if (isUnlocked && recover) recover();
     }, [isUnlocked, recover]);
+    return null;
+  }),
+);
+
+const DEVICE_SETUP_HINT_SESSION_KEY = "encryption-device-setup-hint-shown";
+
+// Onboarding nudge: when a user lands inside a private room on a device
+// that has no identity configured (per-device-identity by design — keys
+// don't roam), surface a one-time toast with a deep link to
+// Profile → Keys management. Per-session via sessionStorage so it doesn't
+// re-appear on every folder switch but does come back next session if the
+// user dismissed without acting.
+const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
+  isPrivate: selectedFolderStore?.private,
+}))(
+  observer(({ isPrivate }) => {
+    const { hasConfiguredKey } = useEncryption();
+    const { t } = useTranslation(["Common"]);
+    const navigate = useNavigate();
+
+    React.useEffect(() => {
+      if (!isPrivate || hasConfiguredKey) return;
+      try {
+        if (sessionStorage.getItem(DEVICE_SETUP_HINT_SESSION_KEY) === "1")
+          return;
+        sessionStorage.setItem(DEVICE_SETUP_HINT_SESSION_KEY, "1");
+      } catch {
+        // sessionStorage can throw in private-mode Safari; fall through and
+        // show the toast anyway — better one extra surface than none at all.
+      }
+
+      toastr.info(
+        <Trans
+          i18nKey="Common:EncryptionDeviceSetupHint"
+          t={t}
+          components={[
+            <Link
+              key="setup"
+              tag="a"
+              isHovered
+              color="accent"
+              onClick={() => {
+                toastr.clear();
+                navigate("/profile/keys-management");
+              }}
+            />,
+          ]}
+        />,
+        null,
+        30000,
+        true,
+      );
+    }, [isPrivate, hasConfiguredKey, t, navigate]);
+
     return null;
   }),
 );
@@ -74,6 +132,7 @@ const EncryptionProviderWrapper = ({ userKeys, children }) => {
       KeyChangeDialog={KeyChangeDialog}
     >
       <FilenameRecoveryEffect />
+      <DeviceSetupHintEffect />
       {children}
     </EncryptionProvider>
   );

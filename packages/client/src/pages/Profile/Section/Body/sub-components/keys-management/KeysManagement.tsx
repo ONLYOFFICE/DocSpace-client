@@ -46,6 +46,7 @@ import { useImportKeyFlow } from "./flows/useImportKeyFlow";
 import { useRecoverKeyFlow } from "./flows/useRecoverKeyFlow";
 import { useDeleteKeyFlow } from "./flows/useDeleteKeyFlow";
 import { useRotatePassphraseFlow } from "./flows/useRotatePassphraseFlow";
+import { useResetKeysFlow } from "./flows/useResetKeysFlow";
 
 import styles from "./KeysManagement.module.scss";
 
@@ -88,13 +89,15 @@ const KeysManagement = ({
   });
   const remove = useDeleteKeyFlow({ refreshKeysFromServer });
   const rotate = useRotatePassphraseFlow({ userId, refreshKeysFromServer });
+  const reset = useResetKeysFlow({ encryptionKeys, refreshKeysFromServer });
 
   const busy =
     generate.isPending ||
     importFlow.isPending ||
     remove.isPending ||
     rotate.isPending ||
-    recover.isPending;
+    recover.isPending ||
+    reset.isPending;
 
   const handleExport = useCallback(
     async (keyData: TEncryptionKeyPair) => {
@@ -172,11 +175,27 @@ const KeysManagement = ({
         </div>
         {hasKeys ? <AutoLockSetting /> : null}
       </div>
+      {reset.available ? (
+        <div className={styles.resetSection}>
+          <span className={styles.resetHint}>
+            {t("Common:ResetEncryptionKeysHint")}
+          </span>
+          <Button
+            className={styles.resetButton}
+            size={ButtonSize.small}
+            onClick={reset.request}
+            label={t("Common:ResetEncryptionKeysCta")}
+            isLoading={reset.isPending}
+            isDisabled={busy}
+          />
+        </div>
+      ) : null}
       {generate.modals}
       {importFlow.modals}
       {recover.modals}
       {remove.modals}
       {rotate.modals}
+      {reset.modals}
     </div>
   );
 };

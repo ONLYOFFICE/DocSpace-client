@@ -73,7 +73,10 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
-import { isQuotaError } from "@docspace/shared/utils/uploadErrors";
+import {
+  countActiveUploadsForRoom,
+  isQuotaError,
+} from "@docspace/shared/utils/uploadErrors";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { FileOperationStatus } from "@docspace/shared/enums";
 import { Link } from "@docspace/ui-kit/components/link";
@@ -406,6 +409,15 @@ class UploadDataStore {
         (file) => !(file.action === "converted" && file.fileInfo?.id === id),
       );
     });
+  };
+
+  // Count uploads whose destination folder is `roomId` (matches a room root
+  // when files are uploaded directly into it). Used by InfoPanel to block
+  // member revoke in encrypted rooms while a batch is still in flight —
+  // re-wrap of an in-progress file would otherwise race the revoke API and
+  // re-grant the revoked user access to the new content.
+  getActiveUploadCountForRoom = (roomId) => {
+    return countActiveUploadsForRoom(this.files, roomId);
   };
 
   selectUploadedFile = (file) => {

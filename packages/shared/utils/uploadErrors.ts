@@ -109,3 +109,39 @@ export const isQuotaError = (error: unknown): boolean => {
 
   return QUOTA_MESSAGE_PATTERNS.some((pattern) => message.includes(pattern));
 };
+
+export interface UploadQueueItem {
+  toFolderId?: string | number | null;
+  action?: string;
+  error?: unknown;
+  cancel?: boolean;
+}
+
+/**
+ * Counts how many files in the upload queue are still in flight against a
+ * given destination folder id (room root for the common case). Used by the
+ * InfoPanel to block member revoke in encrypted rooms while a batch is in
+ * progress — the upload finalizer wraps the new file's DEK for every current
+ * member, so revoking mid-batch would let the removed user keep access to
+ * files that finish after the revoke API returns.
+ */
+export const countActiveUploadsForRoom = (
+  files: ReadonlyArray<UploadQueueItem>,
+  roomId: string | number | null | undefined,
+): number => {
+  if (roomId === null || roomId === undefined) return 0;
+  const target = String(roomId);
+  return files.reduce((acc, file) => {
+    if (String(file.toFolderId ?? "") !== target) return acc;
+    if (file.cancel) return acc;
+    if (file.error) return acc;
+    const action = file.action;
+    if (
+      action === "uploaded" ||
+      action === "convert" ||
+      action === "converted"
+    )
+      return acc;
+    return acc + 1;
+  }, 0);
+};

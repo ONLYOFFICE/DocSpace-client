@@ -38,6 +38,7 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
+import { useEncryption } from "@docspace/shared/context/encryption";
 import { getPublicKeyFingerprint } from "@docspace/shared/services/encryption/identity";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
@@ -50,6 +51,7 @@ type KeyItemProps = {
   onRotate: (keyData: TEncryptionKeyPair) => void;
   isDeleting: boolean;
   deletingKeyId: string | null;
+  isCurrentDevice: boolean;
 };
 
 const KeyItem: React.FC<KeyItemProps> = ({
@@ -59,6 +61,7 @@ const KeyItem: React.FC<KeyItemProps> = ({
   onRotate,
   isDeleting,
   deletingKeyId,
+  isCurrentDevice,
 }) => {
   const { t } = useTranslation(["Common"]);
   const [fingerprint, setFingerprint] = useState<string>("");
@@ -97,10 +100,18 @@ const KeyItem: React.FC<KeyItemProps> = ({
   return (
     <div className={styles.keyItem}>
       <div className={styles.keyItemHeader}>
-        <Badge
-          label={t("Common:Active")}
-          backgroundColor={globalColors.secondGreen}
-        />
+        <div className={styles.keyItemBadges}>
+          <Badge
+            label={t("Common:Active")}
+            backgroundColor={globalColors.secondGreen}
+          />
+          {isCurrentDevice ? (
+            <Badge
+              label={t("Common:ThisDevice")}
+              backgroundColor={globalColors.lightBlueMain}
+            />
+          ) : null}
+        </div>
         <div className={styles.keyItemActions}>
           <IconButton
             className={styles.actionButton}
@@ -189,6 +200,7 @@ export const KeysList: React.FC<KeysListProps> = ({
   deletingKeyId,
 }) => {
   const { t } = useTranslation(["Common"]);
+  const { publicKey: currentPublicKey } = useEncryption();
 
   if (!keys || keys.length === 0) {
     return (
@@ -219,6 +231,9 @@ export const KeysList: React.FC<KeysListProps> = ({
             onRotate={onRotate}
             isDeleting={isDeleting}
             deletingKeyId={deletingKeyId}
+            isCurrentDevice={
+              !!currentPublicKey && key.publicKey === currentPublicKey
+            }
           />
         ))}
       </div>

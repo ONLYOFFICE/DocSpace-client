@@ -26,7 +26,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import { isQuotaError } from "./uploadErrors";
+import { countActiveUploadsForRoom, isQuotaError } from "./uploadErrors";
 
 describe("isQuotaError", () => {
   it("matches HTTP 507 on response", () => {
@@ -105,5 +105,63 @@ describe("isQuotaError", () => {
 
   it("ignores non-string status fields", () => {
     expect(isQuotaError({ status: "507" })).toBe(false);
+  });
+});
+
+describe("countActiveUploadsForRoom", () => {
+  const queued = (toFolderId: string | number, overrides = {}) => ({
+    toFolderId,
+    action: "upload",
+    error: null,
+    cancel: false,
+    ...overrides,
+  });
+
+  it("returns 0 when roomId is null or undefined", () => {
+    expect(countActiveUploadsForRoom([queued(42)], null)).toBe(0);
+    expect(countActiveUploadsForRoom([queued(42)], undefined)).toBe(0);
+  });
+
+  it("returns 0 for an empty queue", () => {
+    expect(countActiveUploadsForRoom([], 42)).toBe(0);
+  });
+
+  it("counts queued and in-flight uploads against the matching room", () => {
+    const files = [queued(42), queued(42), queued(99)];
+    expect(countActiveUploadsForRoom(files, 42)).toBe(2);
+    expect(countActiveUploadsForRoom(files, 99)).toBe(1);
+  });
+
+  it("matches roomId across number vs string", () => {
+    expect(countActiveUploadsForRoom([queued("42")], 42)).toBe(1);
+    expect(countActiveUploadsForRoom([queued(42)], "42")).toBe(1);
+  });
+
+  it("skips uploaded / converted / convert actions", () => {
+    const files = [
+      queued(42, { action: "uploaded" }),
+      queued(42, { action: "converted" }),
+      queued(42, { action: "convert" }),
+      queued(42),
+    ];
+    expect(countActiveUploadsForRoom(files, 42)).toBe(1);
+  });
+
+  it("skips cancelled or errored files (they need an explicit retry)", () => {
+    const files = [
+      queued(42, { cancel: true }),
+      queued(42, { error: "boom" }),
+      queued(42, { error: "" }),
+      queued(42),
+    ];
+    expect(countActiveUploadsForRoom(files, 42)).toBe(2);
+  });
+
+  it("skips files with missing toFolderId", () => {
+    const files = [
+      queued(42),
+      { action: "upload", error: null, cancel: false },
+    ];
+    expect(countActiveUploadsForRoom(files, 42)).toBe(1);
   });
 });

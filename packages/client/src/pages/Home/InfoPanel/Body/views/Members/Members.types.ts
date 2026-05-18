@@ -138,6 +138,8 @@ export type UserProps = {
   setEditMembersGroup?: DialogsStore["setEditMembersGroup"];
   setEditGroupMembersDialogVisible?: DialogsStore["setEditGroupMembersDialogVisible"];
   setRemoveUserConfirmation?: DialogsStore["setRemoveUserConfirmation"];
+
+  getActiveUploadCountForRoom?: (roomId: string | number) => number;
 };
 
 export type LinkRowProps = {

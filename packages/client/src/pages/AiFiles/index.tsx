@@ -32,6 +32,7 @@ import SdkIframe from "SRC_DIR/components/SdkIframe";
 const SECTION_TO_PATH: Record<string, string> = {
   recent: "/sdk/personal-files/recent",
   favorites: "/sdk/personal-files/favorites",
+  "shared-with-me": "/sdk/personal-files/shared-with-me",
   trash: "/sdk/personal-files/trash",
   settings: "/sdk/personal-files/settings",
 };

@@ -1179,8 +1179,6 @@
   "RenewSubscriptionPlanName": "Gia hạn gói dịch vụ {{planName}}",
   "RenewTheLicense": "Gia hạn giấy phép",
   "RepeatInvitation": "Lặp lại lời mời",
-  "ReplaceKey": "Thay thế khoá mã hoá",
-  "ReplaceKeyWarning": "Cảnh báo: Việc thay thế khoá mã hoá sẽ khiến các tập tin đã được mã hoá trước đây không thể truy cập được trừ khi bạn có bản sao lưu của khoá cũ. Bạn có chắc chắn muốn tiếp tục không?",
   "ReportSaveLocation": "Báo cáo sẽ được lưu vào {{sectionName}}",
   "RequestDetails": "Xin vui lòng mô tả chi tiết yêu cầu của bạn tại đây.",
   "RequiredField": "Trường bắt buộc",

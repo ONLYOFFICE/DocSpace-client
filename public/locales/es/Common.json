@@ -1179,8 +1179,6 @@
   "RenewSubscriptionPlanName": "Renovar suscripción al plan {{planName}}",
   "RenewTheLicense": "Renovar la licencia",
   "RepeatInvitation": "Repetir invitación",
-  "ReplaceKey": "Reemplazar clave de cifrado",
-  "ReplaceKeyWarning": "Advertencia: Reemplazar su clave de cifrado hará que los archivos cifrados anteriormente sean inaccesibles a menos que tenga una copia de seguridad de la clave antigua. ¿Está seguro de que desea continuar?",
   "ReportSaveLocation": "El informe se guardará en {{sectionName}}",
   "RequestDetails": "Por favor, describa aquí los detalles de su solicitud.",
   "RequiredField": "Campo obligatorio",

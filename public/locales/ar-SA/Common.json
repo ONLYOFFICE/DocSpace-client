@@ -1179,8 +1179,6 @@
   "RenewSubscriptionPlanName": "تجديد الاشتراك في خطة {{planName}}",
   "RenewTheLicense": "تجديد الترخيص",
   "RepeatInvitation": "تكرار الدعوة",
-  "ReplaceKey": "استبدال مفتاح التشفير",
-  "ReplaceKeyWarning": "تحذير: سيؤدي استبدال مفتاح التشفير إلى جعل الملفات المشفرة سابقاً غير قابلة للوصول ما لم يكن لديك نسخة احتياطية من المفتاح القديم. هل أنت متأكد أنك تريد المتابعة؟",
   "ReportSaveLocation": "سيتم حفظ التقرير في {{sectionName}}",
   "RequestDetails": "يرجى وصف تفاصيل طلبك هنا.",
   "RequiredField": "الحقل مطلوب",

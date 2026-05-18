@@ -1179,8 +1179,6 @@
   "RenewSubscriptionPlanName": "Odnów subskrypcję planu {{planName}}",
   "RenewTheLicense": "Odnowić licencję",
   "RepeatInvitation": "Ponów zaproszenie",
-  "ReplaceKey": "Zastąp klucz szyfrowania",
-  "ReplaceKeyWarning": "Uwaga: Zastąpienie klucza szyfrowania spowoduje, że wcześniej zaszyfrowane pliki staną się niedostępne, chyba że posiadasz kopię zapasową starego klucza. Czy na pewno chcesz kontynuować?",
   "ReportSaveLocation": "Raport zostanie zapisany w {{sectionName}}",
   "RequestDetails": "Dokładnie opisz swoją prośbę tutaj.",
   "RequiredField": "Pole wymagane",

@@ -1179,8 +1179,6 @@
   "RenewSubscriptionPlanName": "Reînnoiți abonamentul {{planName}}",
   "RenewTheLicense": "Renovați licența",
   "RepeatInvitation": "Repetare invitaţie",
-  "ReplaceKey": "Înlocuire cheie de criptare",
-  "ReplaceKeyWarning": "Avertisment: Înlocuirea cheii de criptare va face fișierele criptate anterior inaccesibile dacă nu aveți o copie de rezervă a cheii vechi. Sigur doriți să continuați?",
   "ReportSaveLocation": "Raportul va fi salvat în {{sectionName}}",
   "RequestDetails": "Descrieţi detaliile solicitării dvs. aici.",
   "RequiredField": "Câmp obligatoriu",

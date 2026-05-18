@@ -1179,8 +1179,6 @@
   "RenewSubscriptionPlanName": "Verleng abonnement op {{planName}} plan",
   "RenewTheLicense": "Verleng de licentie",
   "RepeatInvitation": "Uitnodiging herhalen",
-  "ReplaceKey": "Versleutelingssleutel vervangen",
-  "ReplaceKeyWarning": "Waarschuwing: Het vervangen van uw versleutelingssleutel maakt eerder versleutelde bestanden ontoegankelijk tenzij u een back-up heeft van de oude sleutel. Weet u zeker dat u wilt doorgaan?",
   "ReportSaveLocation": "Het rapport wordt opgeslagen in {{sectionName}}",
   "RequestDetails": "Beschrijf hier de details van uw aanvraag.",
   "RequiredField": "Verplicht veld",

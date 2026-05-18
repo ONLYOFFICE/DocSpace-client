@@ -1179,8 +1179,6 @@
   "RenewSubscriptionPlanName": "将订阅更新至{{planName}}版本",
   "RenewTheLicense": "续订许可证",
   "RepeatInvitation": "重复邀请",
-  "ReplaceKey": "替换加密密钥",
-  "ReplaceKeyWarning": "警告：替换加密密钥将导致之前加密的文件无法访问，除非您备份了旧密钥。确定要继续吗？",
   "ReportSaveLocation": "报告将保存至{{sectionName}}",
   "RequestDetails": "请在此详细描述您的需求。",
   "RequiredField": "必要字段",

@@ -1179,8 +1179,6 @@
   "RenewSubscriptionPlanName": "{{planName}} Plan abunəliyini yeniləyin",
   "RenewTheLicense": "Lisenziyanı yeniləyin",
   "RepeatInvitation": "Dəvəti təkrarlayın",
-  "ReplaceKey": "Şifrələmə açarını əvəz edin",
-  "ReplaceKeyWarning": "Diqqət: Şifrələmə açarınızı əvəz etmək, köhnə açarın ehtiyat nüsxəsi olmadıqca əvvəlcədən şifrəli faylları əlçatmaz edəcək. Davam etmək istədiyinizə əminsiniz?",
   "ReportSaveLocation": "Hesabat {{sectionName}} bölməsində qeyd ediləcək",
   "RequestDetails": "Lütfən, sorğunuzun təfərrüatlarını burada təsvir edin.",
   "RequiredField": "Tələb olunan sahə",

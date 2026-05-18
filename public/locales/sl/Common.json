@@ -1179,8 +1179,6 @@
   "RenewSubscriptionPlanName": "Obnovi naročnino na {{planName}} paket",
   "RenewTheLicense": "Obnovite licenco",
   "RepeatInvitation": "Ponovi povabilo",
-  "ReplaceKey": "Zamenjaj šifrirni ključ",
-  "ReplaceKeyWarning": "Opozorilo: Zamenjava šifrirnega ključa bo naredila predhodno šifrirane datoteke nedostopne, razen če imate varnostno kopijo starega ključa. Ali ste prepričani, da želite nadaljevati?",
   "ReportSaveLocation": "Poročilo bo shranjeno v {{sectionName}}",
   "RequestDetails": "Tukaj opiši podrobnosti svoje zahteve.",
   "RequiredField": "Obvezno polje",

@@ -1179,8 +1179,6 @@
   "RenewSubscriptionPlanName": "Uusi tilaus {{planName}} ohjelmaan",
   "RenewTheLicense": "Uudista lisenssi",
   "RepeatInvitation": "Lähetä kutsu uudelleen",
-  "ReplaceKey": "Korvaa salausavain",
-  "ReplaceKeyWarning": "Varoitus: Salausavaimen korvaaminen tekee aiemmin salatut tiedostot käyttökelvottomiksi, ellei sinulla ole varmuuskopiota vanhasta avaimesta. Haluatko varmasti jatkaa?",
   "ReportSaveLocation": "Raportti tallennetaan {{sectionName}}-osioon",
   "RequestDetails": "Ole hyvä ja kuvaile pyyntösi yksityiskohdat tässä.",
   "RequiredField": "Pakollinen kenttä",

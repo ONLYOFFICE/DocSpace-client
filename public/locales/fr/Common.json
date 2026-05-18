@@ -1179,8 +1179,6 @@
   "RenewSubscriptionPlanName": "Renouveler l’abonnement au plan tarifaire {{planName}}",
   "RenewTheLicense": "Renouveler la licence",
   "RepeatInvitation": "Renouveler l’invitation",
-  "ReplaceKey": "Remplacer la clé de chiffrement",
-  "ReplaceKeyWarning": "Avertissement : le remplacement de votre clé de chiffrement rendra les fichiers précédemment chiffrés inaccessibles, sauf si vous disposez d'une sauvegarde de l'ancienne clé. Voulez-vous vraiment continuer ?",
   "ReportSaveLocation": "Le rapport sera enregistré dans {{sectionName}}",
   "RequestDetails": "Veuillez décrire ici les détails de votre demande.",
   "RequiredField": "Champ obligatoire",

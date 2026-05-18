@@ -1179,8 +1179,6 @@
   "RenewSubscriptionPlanName": "{{planName}} සැලසුමට දායකත්‍වය අළුත් කරන්න",
   "RenewTheLicense": "බලපත්‍රය අලුත් කරන්න",
   "RepeatInvitation": "ආරාධනය නැවතත්",
-  "ReplaceKey": "සංකේතාංකන යතුර ප්‍රතිස්ථාපනය කරන්න",
-  "ReplaceKeyWarning": "අවවාදය: ඔබගේ සංකේතාංකන යතුර ප්‍රතිස්ථාපනය කිරීමෙන් ඔබ සතුව පැරණි යතුරේ උපස්ථ පිටපතක් නොමැති නම් කලින් සංකේතාංකනය කළ ගොනු ප්‍රවේශ කළ නොහැකි වනු ඇත. ඔබට ඉදිරියට යාමට අවශ්‍යද?",
   "ReportSaveLocation": "Poročilo bo shranjeno v {{sectionName}}",
   "RequestDetails": "ඔබගේ ඉල්ලීම මෙහි විස්තර කරන්න.",
   "RequiredField": "අනිවාර්ය ක්ෂේත්‍රයකි",

@@ -1179,8 +1179,6 @@
   "RenewSubscriptionPlanName": "{{planName}} 요금제 구독 갱신",
   "RenewTheLicense": "라이선스 갱신",
   "RepeatInvitation": "초대 반복",
-  "ReplaceKey": "암호화 키 교체",
-  "ReplaceKeyWarning": "경고: 암호화 키를 교체하면 이전에 암호화된 파일에 이전 키의 백업이 없는 한 접근할 수 없게 됩니다. 계속하시겠습니까?",
   "ReportSaveLocation": "보고서가 {{sectionName}}(으)로 저장됩니다",
   "RequestDetails": "여기에 요청 세부 사항을 기재하세요.",
   "RequiredField": "필수 항목입니다",

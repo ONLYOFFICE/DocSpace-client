@@ -1179,8 +1179,6 @@
   "RenewSubscriptionPlanName": "Abonnement des {{planName}}-Plans erneuern",
   "RenewTheLicense": "Lizenz erneuern",
   "RepeatInvitation": "Einladung wiederholen",
-  "ReplaceKey": "Verschlüsselungsschlüssel ersetzen",
-  "ReplaceKeyWarning": "Warnung: Das Ersetzen Ihres Verschlüsselungsschlüssels macht zuvor verschlüsselte Dateien unzugänglich, sofern Sie keine Sicherungskopie des alten Schlüssels haben. Möchten Sie wirklich fortfahren?",
   "ReportSaveLocation": "Der Bericht wird unter {{sectionName}} gespeichert",
   "RequestDetails": "Bitte beschreiben Sie hier die Details Ihrer Anfrage.",
   "RequiredField": "Pflichtfeld",

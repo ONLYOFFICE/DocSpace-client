@@ -1179,8 +1179,6 @@
   "RenewSubscriptionPlanName": "{{planName}}プランの契約を更新する",
   "RenewTheLicense": "ライセンスを更新する",
   "RepeatInvitation": "もう一度招待する",
-  "ReplaceKey": "暗号化キーの置き換え",
-  "ReplaceKeyWarning": "警告：暗号化キーを置き換えると、古いキーのバックアップがない限り、以前に暗号化されたファイルにアクセスできなくなります。続行してよろしいですか？",
   "ReportSaveLocation": "レポートは {{sectionName}} に保存されます",
   "RequestDetails": "ご要望内容をこちらにご記入ください。",
   "RequiredField": "必須項目",

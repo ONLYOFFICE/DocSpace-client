@@ -84,6 +84,7 @@ import {
   updateRoomGroupIconHandler,
 } from "./roomGroups";
 import { encryptedFilesHandlers } from "./encryptedFiles";
+import { privateRoomListHandler } from "./privateRoomList";
 
 export { TypeFolder } from "./folder";
 export { TypeRoomList } from "./roomList";
@@ -96,6 +97,10 @@ export {
   type EncryptedFilesHandlerHandle,
   type EncryptedFilesHandlerOptions,
 } from "./encryptedFiles";
+export {
+  privateRoomListHandler,
+  type PrivateRoomListOptions,
+} from "./privateRoomList";
 
 export {
   foldersTreeHandler,

@@ -129,7 +129,7 @@ test.describe("Private room — create", () => {
     expect(stored.title).toBe("Test private room");
   });
 
-  test("creation is allowed even without configured encryption keys", async ({
+  test("blocks creation without encryption keys and shows a toast", async ({
     page,
     mockRequest,
     baseUrl,
@@ -140,6 +140,10 @@ test.describe("Private room — create", () => {
 
     mockRequest.use(
       roomListHandler(TEST_PORT, TypeRoomList.IsDefault),
+      ...privacyroomKeysHandlers(TEST_PORT, {
+        initial: [],
+        userId: TEST_USER_ID,
+      }),
       createPrivateRoomHandler(TEST_PORT, { handle: roomHandle }),
     );
 
@@ -157,19 +161,22 @@ test.describe("Private room — create", () => {
     await expect(titleInput).toBeVisible({ timeout: 5000 });
     await titleInput.fill("Keyless private room");
 
-    const postPromise = page.waitForRequest(
-      (req) => req.method() === "POST" && req.url().endsWith("/files/rooms"),
-    );
+    let postSent = false;
+    page.on("request", (req) => {
+      if (req.method() === "POST" && req.url().endsWith("/files/rooms")) {
+        postSent = true;
+      }
+    });
+
     await page.getByTestId("create_room_dialog_save").click();
 
-    const body = (await postPromise).postDataJSON() as { private: boolean };
-    expect(body.private).toBe(true);
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: /encryption keys|Set up your encryption/i });
+    await expect(toast).toBeVisible({ timeout: 10000 });
 
-    await expect
-      .poll(() => roomHandle.current?.getPrivateRooms().length ?? 0, {
-        timeout: 5000,
-      })
-      .toBe(1);
+    expect(postSent).toBe(false);
+    expect(roomHandle.current?.getPrivateRooms() ?? []).toHaveLength(0);
   });
 
   test("cancel button does NOT post to /files/rooms", async ({

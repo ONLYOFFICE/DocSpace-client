@@ -556,6 +556,7 @@
   "EncryptionKeyGenerated": "Şifreleme anahtarı başarıyla oluşturuldu",
   "EncryptionKeyImported": "Şifreleme anahtarı başarıyla içe aktarıldı",
   "EncryptionKeys": "Şifreleme anahtarları",
+  "EncryptionKeysRequiredForPrivateRoom": "Özel oda oluşturmadan önce Profil bölümünde şifreleme anahtarlarınızı ayarlayın.",
   "EncryptionKeysNotConfigured": "Bu cihazda şifreleme anahtarları yapılandırılmamış. Şifrelenmiş dosyalarla çalışmak için Profil ayarlarından anahtarlarınızı kurun.",
   "EncryptionKeysReload": "Şifreleme anahtarları yeniden girilmelidir",
   "EncryptionLocked": "Şifreleme kilitli",

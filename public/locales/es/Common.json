@@ -556,6 +556,7 @@
   "EncryptionKeyGenerated": "Clave de cifrado generada correctamente",
   "EncryptionKeyImported": "Clave de cifrado importada correctamente",
   "EncryptionKeys": "Claves de cifrado",
+  "EncryptionKeysRequiredForPrivateRoom": "Configure sus claves de cifrado en el Perfil antes de crear una sala privada.",
   "EncryptionKeysNotConfigured": "Las claves de cifrado no están configuradas en este dispositivo. Configure sus claves en los ajustes de Perfil para trabajar con archivos cifrados.",
   "EncryptionKeysReload": "Las claves de cifrado deben ser introducidas de nuevo",
   "EncryptionLocked": "Cifrado bloqueado",

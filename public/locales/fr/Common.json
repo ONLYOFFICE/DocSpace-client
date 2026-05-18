@@ -556,6 +556,7 @@
   "EncryptionKeyGenerated": "Clé de chiffrement générée avec succès",
   "EncryptionKeyImported": "Clé de chiffrement importée avec succès",
   "EncryptionKeys": "Clés de chiffrement",
+  "EncryptionKeysRequiredForPrivateRoom": "Configurez vos clés de chiffrement dans le Profil avant de créer une salle privée.",
   "EncryptionKeysNotConfigured": "Les clés de chiffrement ne sont pas configurées sur cet appareil. Configurez vos clés dans les paramètres du profil pour travailler avec les fichiers chiffrés.",
   "EncryptionKeysReload": "Les clés de chiffrement doivent être saisies à nouveau",
   "EncryptionLocked": "Chiffrement verrouillé",

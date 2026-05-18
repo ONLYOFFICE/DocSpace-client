@@ -50,6 +50,9 @@ export type PreparedUpload = {
 
 const ENCRYPTABLE_ROOM_TYPES: RoomsType[] = [RoomsType.CustomRoom];
 
+const ENCRYPTED_UPLOAD_NAME_RE =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}(\.[a-z0-9]+)?$/;
+
 export function isEncryptableRoomType(roomType: RoomsType): boolean {
   return ENCRYPTABLE_ROOM_TYPES.includes(roomType);
 }
@@ -63,6 +66,14 @@ export function shouldEncryptUpload(
 
 function newUuid(): string {
   return globalThis.crypto.randomUUID();
+}
+
+export function assertEncryptedUploadName(name: string): void {
+  if (!ENCRYPTED_UPLOAD_NAME_RE.test(name)) {
+    throw new Error(
+      `Encrypted upload name does not match UUID format: ${JSON.stringify(name)}`,
+    );
+  }
 }
 
 export async function prepareEncryptedUpload(
@@ -89,12 +100,14 @@ export async function prepareEncryptedUpload(
   });
 
   const ext = getFileExtension(file.name);
+  const uploadFileName = `${newUuid()}${ext}`;
+  assertEncryptedUploadName(uploadFileName);
 
   return {
     data: encryptedBlob,
     encrypted: true,
     dek,
-    uploadFileName: `${newUuid()}${ext}`,
+    uploadFileName,
     originalFileType: file.type || "application/octet-stream",
     originalFileSize: file.size,
     originalFileName: file.name,

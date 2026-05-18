@@ -556,6 +556,7 @@
   "EncryptionKeyGenerated": "Chiave di cifratura generata con successo",
   "EncryptionKeyImported": "Chiave di cifratura importata con successo",
   "EncryptionKeys": "Chiavi di cifratura",
+  "EncryptionKeysRequiredForPrivateRoom": "Configura le tue chiavi di crittografia nel Profilo prima di creare una stanza privata.",
   "EncryptionKeysNotConfigured": "Le chiavi di cifratura non sono configurate su questo dispositivo. Configurare le chiavi nelle impostazioni del profilo per lavorare con i file cifrati.",
   "EncryptionKeysReload": "Le chiavi di crittografia devono essere reinserite",
   "EncryptionLocked": "Cifratura bloccata",

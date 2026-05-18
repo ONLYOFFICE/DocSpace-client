@@ -556,6 +556,7 @@
   "EncryptionKeyGenerated": "Salausavain luotu onnistuneesti",
   "EncryptionKeyImported": "Salausavain tuotu onnistuneesti",
   "EncryptionKeys": "Salausavaimet",
+  "EncryptionKeysRequiredForPrivateRoom": "Määritä salausavaimet profiilissa ennen yksityisen huoneen luomista.",
   "EncryptionKeysNotConfigured": "Salausavaimia ei ole määritetty tällä laitteella. Määritä avaimesi Profiiliasetuksissa käyttääksesi salattuja tiedostoja.",
   "EncryptionKeysReload": "Salausavaimet on syötettävä uudelleen",
   "EncryptionLocked": "Salaus lukittu",

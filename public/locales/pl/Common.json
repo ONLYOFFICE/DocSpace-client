@@ -556,6 +556,7 @@
   "EncryptionKeyGenerated": "Klucz szyfrowania został pomyślnie wygenerowany",
   "EncryptionKeyImported": "Klucz szyfrowania został pomyślnie zaimportowany",
   "EncryptionKeys": "Klucze szyfrowania",
+  "EncryptionKeysRequiredForPrivateRoom": "Skonfiguruj klucze szyfrowania w Profilu przed utworzeniem pokoju prywatnego.",
   "EncryptionKeysNotConfigured": "Klucze szyfrowania nie są skonfigurowane na tym urządzeniu. Skonfiguruj swoje klucze w ustawieniach Profilu, aby pracować z zaszyfrowanymi plikami.",
   "EncryptionKeysReload": "Klucze szyfrowania muszą zostać wpisane ponownie",
   "EncryptionLocked": "Szyfrowanie zablokowane",

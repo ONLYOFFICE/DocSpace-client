@@ -556,6 +556,7 @@
   "EncryptionKeyGenerated": "Šifrovací kľúč bol úspešne vygenerovaný",
   "EncryptionKeyImported": "Šifrovací kľúč bol úspešne importovaný",
   "EncryptionKeys": "Šifrovacie kľúče",
+  "EncryptionKeysRequiredForPrivateRoom": "Pred vytvorením súkromnej miestnosti si v Profile nastavte šifrovacie kľúče.",
   "EncryptionKeysNotConfigured": "Šifrovacie kľúče nie sú nakonfigurované na tomto zariadení. Nastavte svoje kľúče v nastaveniach profilu, aby ste mohli pracovať so zašifrovanými súbormi.",
   "EncryptionKeysReload": "Šifrovacie kľúče je potrebné zadať znova",
   "EncryptionLocked": "Šifrovanie zamknuté",

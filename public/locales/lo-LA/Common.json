@@ -556,6 +556,7 @@
   "EncryptionKeyGenerated": "ສ້າງກຸນແຈເຂົ້າລະຫັດສຳເລັດ",
   "EncryptionKeyImported": "ນຳເຂົ້າກຸນແຈເຂົ້າລະຫັດສຳເລັດ",
   "EncryptionKeys": "ກຸນແຈເຂົ້າລະຫັດ",
+  "EncryptionKeysRequiredForPrivateRoom": "ຕັ້ງຄ່າຄີເຂົ້າລະຫັດຂອງທ່ານໃນໂປຣໄຟລ໌ກ່ອນສ້າງຫ້ອງສ່ວນຕົວ.",
   "EncryptionKeysNotConfigured": "ກຸນແຈເຂົ້າລະຫັດຍັງບໍ່ຖືກຕັ້ງຄ່າໃນອຸປະກອນນີ້. ຕັ້ງຄ່າກຸນແຈໃນການຕັ້ງຄ່າໂປຣໄຟລ໌ເພື່ອເຮັດວຽກກັບໄຟລ໌ທີ່ເຂົ້າລະຫັດ.",
   "EncryptionKeysReload": "ຕ້ອງປ້ອນກະແສລະຫັດເຂົ້າໃໝ່",
   "EncryptionLocked": "ການເຂົ້າລະຫັດຖືກລັອກ",

@@ -556,6 +556,7 @@
   "EncryptionKeyGenerated": "Şifrələmə açarı uğurla yaradıldı",
   "EncryptionKeyImported": "Şifrələmə açarı uğurla idxal edildi",
   "EncryptionKeys": "Şifrələmə açarları",
+  "EncryptionKeysRequiredForPrivateRoom": "Şəxsi otaq yaratmadan əvvəl Profildə şifrələmə açarlarınızı qurun.",
   "EncryptionKeysNotConfigured": "Şifrələmə açarları bu cihazda qurulmayıb. Şifrəli fayllarla işləmək üçün Profil parametrlərindən açarlarınızı qurun.",
   "EncryptionKeysReload": "Şifrələmə düymələri yenidən daxil edilməlidir",
   "EncryptionLocked": "Şifrələmə kilidləndi",

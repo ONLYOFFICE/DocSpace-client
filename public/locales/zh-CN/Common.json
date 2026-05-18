@@ -556,6 +556,7 @@
   "EncryptionKeyGenerated": "加密密钥已成功生成",
   "EncryptionKeyImported": "加密密钥已成功导入",
   "EncryptionKeys": "加密密钥",
+  "EncryptionKeysRequiredForPrivateRoom": "在创建私密房间之前，请先在个人资料中设置加密密钥。",
   "EncryptionKeysNotConfigured": "此设备上未配置加密密钥。请在个人资料设置中设置密钥以使用加密文件。",
   "EncryptionKeysReload": "必须重新输入加密密钥",
   "EncryptionLocked": "加密已锁定",

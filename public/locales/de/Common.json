@@ -556,6 +556,7 @@
   "EncryptionKeyGenerated": "Verschlüsselungsschlüssel erfolgreich generiert",
   "EncryptionKeyImported": "Verschlüsselungsschlüssel erfolgreich importiert",
   "EncryptionKeys": "Verschlüsselungsschlüssel",
+  "EncryptionKeysRequiredForPrivateRoom": "Richten Sie Ihre Verschlüsselungsschlüssel im Profil ein, bevor Sie einen privaten Raum erstellen.",
   "EncryptionKeysNotConfigured": "Verschlüsselungsschlüssel sind auf diesem Gerät nicht konfiguriert. Richten Sie Ihre Schlüssel in den Profileinstellungen ein, um mit verschlüsselten Dateien arbeiten zu können.",
   "EncryptionKeysReload": "Verschlüsselungsschlüssel müssen erneut eingegeben werden",
   "EncryptionLocked": "Verschlüsselung gesperrt",

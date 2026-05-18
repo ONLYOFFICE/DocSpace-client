@@ -556,6 +556,7 @@
   "EncryptionKeyGenerated": "Šifrirni ključ je bil uspešno ustvarjen",
   "EncryptionKeyImported": "Šifrirni ključ je bil uspešno uvožen",
   "EncryptionKeys": "Šifrirni ključi",
+  "EncryptionKeysRequiredForPrivateRoom": "Pred ustvarjanjem zasebne sobe nastavite šifrirne ključe v Profilu.",
   "EncryptionKeysNotConfigured": "Šifrirni ključi niso nastavljeni na tej napravi. Nastavite ključe v nastavitvah profila za delo s šifriranimi datotekami.",
   "EncryptionKeysReload": "Ključe za šifriranje je potrebno znova vnesti",
   "EncryptionLocked": "Šifriranje je zaklenjeno",

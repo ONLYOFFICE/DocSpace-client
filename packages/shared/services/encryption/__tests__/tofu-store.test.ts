@@ -486,7 +486,7 @@ describe("TofuStore — per-operation IndexedDB error paths", () => {
     vi.stubGlobal("indexedDB", {
       open(name: string, _v: number): MockOpenRequest {
         const req = new MockOpenRequest();
-        let entry = (mockIDB as unknown as {
+        const entry = (mockIDB as unknown as {
           open(name: string, v: number): MockOpenRequest;
           // biome-ignore lint/suspicious/noExplicitAny: reuse the success-path open and swap DB
         }).open(name, _v) as any;

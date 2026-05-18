@@ -556,6 +556,7 @@
   "EncryptionKeyGenerated": "暗号化キーを正常に生成しました",
   "EncryptionKeyImported": "暗号化キーを正常にインポートしました",
   "EncryptionKeys": "暗号化キー",
+  "EncryptionKeysRequiredForPrivateRoom": "プライベートルームを作成する前に、プロフィールで暗号化キーを設定してください。",
   "EncryptionKeysNotConfigured": "このデバイスに暗号化キーが設定されていません。プロフィール設定でキーを設定して、暗号化ファイルを操作してください。",
   "EncryptionKeysReload": "暗号化キーの再入力が必要",
   "EncryptionLocked": "暗号化がロックされています",

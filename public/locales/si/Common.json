@@ -556,6 +556,7 @@
   "EncryptionKeyGenerated": "සංකේතාංකන යතුර සාර්ථකව ජනනය කෙරිණි",
   "EncryptionKeyImported": "සංකේතාංකන යතුර සාර්ථකව ආනයනය කෙරිණි",
   "EncryptionKeys": "සංකේතාංකන යතුරු",
+  "EncryptionKeysRequiredForPrivateRoom": "පුද්ගලික කාමරයක් සෑදීමට පෙර පැතිකඩ තුළ ඔබේ සංකේතන යතුරු සකසන්න.",
   "EncryptionKeysNotConfigured": "සංකේතාංකන යතුරු මෙම උපකරණයේ වින්‍යාස කර නොමැත. සංකේතාංකිත ගොනු සමඟ කටයුතු කිරීමට පැතිකඩ සැකසුම් වල ඔබගේ යතුරු සකසන්න.",
   "EncryptionKeysReload": "සංකේතන යතුරු නැවත ඇතුළත් කළ යුතුය",
   "EncryptionLocked": "සංකේතාංකනය අගුළු දමා ඇත",

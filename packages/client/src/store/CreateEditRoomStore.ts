@@ -596,6 +596,24 @@ class CreateEditRoomStore {
     const isPrivateRoom = isPrivate || type === RoomsTypePrivate;
     const serverRoomType = isPrivateRoom ? RoomsType.CustomRoom : type;
 
+    if (isPrivateRoom) {
+      const userStore = this.filesStore!.userStore;
+      let keys = userStore?.encryptionKeys;
+
+      if (!keys || keys.length === 0) {
+        try {
+          keys = (await userStore?.getEncryptionKeys?.()) ?? null;
+        } catch {
+          keys = null;
+        }
+      }
+
+      if (!keys || keys.length === 0) {
+        toastr.error(t("Common:EncryptionKeysRequiredForPrivateRoom"));
+        return;
+      }
+    }
+
     const createRoomData = {
       roomId,
       roomType: serverRoomType,

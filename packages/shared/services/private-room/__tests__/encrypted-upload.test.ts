@@ -28,6 +28,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { RoomsType } from "../../../enums";
 import {
+  assertEncryptedUploadName,
   createEncryptedFormData,
   estimateEncryptedUploadSize,
   isEncryptableRoomType,
@@ -214,6 +215,87 @@ describe("encryptedUpload", () => {
         onProgress: (p) => progress.push(p),
       });
       expect(progress).toEqual([0.5, 1]);
+    });
+  });
+
+  describe("assertEncryptedUploadName", () => {
+    it("accepts uuid + lowercase extension", () => {
+      expect(() =>
+        assertEncryptedUploadName(
+          "12345678-1234-1234-1234-123456789abc.docx",
+        ),
+      ).not.toThrow();
+    });
+
+    it("accepts uuid with no extension", () => {
+      expect(() =>
+        assertEncryptedUploadName("12345678-1234-1234-1234-123456789abc"),
+      ).not.toThrow();
+    });
+
+    it("accepts alphanumeric extensions like .mp4 / .7z", () => {
+      expect(() =>
+        assertEncryptedUploadName(
+          "12345678-1234-1234-1234-123456789abc.mp4",
+        ),
+      ).not.toThrow();
+      expect(() =>
+        assertEncryptedUploadName(
+          "12345678-1234-1234-1234-123456789abc.7z",
+        ),
+      ).not.toThrow();
+    });
+
+    it("rejects plaintext filenames", () => {
+      expect(() => assertEncryptedUploadName("Q4-Report.docx")).toThrow(
+        /UUID format/,
+      );
+    });
+
+    it("rejects uppercase hex in the uuid", () => {
+      expect(() =>
+        assertEncryptedUploadName(
+          "12345678-1234-1234-1234-123456789ABC.docx",
+        ),
+      ).toThrow();
+    });
+
+    it("rejects uppercase extensions (getFileExtension lowercases — uppercase indicates a regression)", () => {
+      expect(() =>
+        assertEncryptedUploadName(
+          "12345678-1234-1234-1234-123456789abc.DOCX",
+        ),
+      ).toThrow();
+    });
+
+    it("rejects extra path segments / directory traversal", () => {
+      expect(() =>
+        assertEncryptedUploadName(
+          "../12345678-1234-1234-1234-123456789abc.docx",
+        ),
+      ).toThrow();
+      expect(() =>
+        assertEncryptedUploadName(
+          "12345678-1234-1234-1234-123456789abc/file.docx",
+        ),
+      ).toThrow();
+    });
+
+    it("rejects empty string", () => {
+      expect(() => assertEncryptedUploadName("")).toThrow();
+    });
+
+    it("is wired into prepareEncryptedUpload (smoke)", async () => {
+      const file = makeFile("normal.txt", 4);
+      const result = await prepareEncryptedUpload({
+        file,
+        folderId: 0,
+        roomType: RoomsType.CustomRoom,
+        isPrivate: true,
+      });
+      expect(() =>
+        assertEncryptedUploadName(result.uploadFileName),
+      ).not.toThrow();
     });
   });
 

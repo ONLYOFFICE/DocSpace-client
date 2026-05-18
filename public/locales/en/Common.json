@@ -1561,6 +1561,7 @@
   "DownloadWithoutDecryption": "Download without decryption",
   "EncryptionError": "An error occurred during the encryption operation",
   "EncryptionKeysNotConfigured": "Encryption keys are not configured on this device. Set up your keys in Profile settings to work with encrypted files.",
+  "EncryptionKeysRequiredForPrivateRoom": "Set up your encryption keys in Profile before creating a private room.",
   "EncryptionKeyDeleted": "Encryption key deleted successfully",
   "EncryptionKeyExported": "Encryption key exported successfully",
   "EncryptionKeyGenerated": "Encryption key generated successfully",

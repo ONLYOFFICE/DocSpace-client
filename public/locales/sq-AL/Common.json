@@ -556,6 +556,7 @@
   "EncryptionKeyGenerated": "Çelësi i enkriptimit u gjenerua me sukses",
   "EncryptionKeyImported": "Çelësi i enkriptimit u importua me sukses",
   "EncryptionKeys": "Çelësa enkriptimi",
+  "EncryptionKeysRequiredForPrivateRoom": "Vendosni çelësat e kriptimit në Profil para se të krijoni një dhomë private.",
   "EncryptionKeysNotConfigured": "Çelësat e enkriptimit nuk janë konfiguruar në këtë pajisje. Konfiguroni çelësat tuaj në cilësimet e Profilit për të punuar me skedarët e enkriptuar.",
   "EncryptionKeysReload": "Çelësat e enkriptimit duhet të rifuten",
   "EncryptionLocked": "Enkriptimi i bllokuar",

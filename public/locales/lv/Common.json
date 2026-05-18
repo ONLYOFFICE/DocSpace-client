@@ -556,6 +556,7 @@
   "EncryptionKeyGenerated": "Šifrēšanas atslēga veiksmīgi ģenerēta",
   "EncryptionKeyImported": "Šifrēšanas atslēga veiksmīgi importēta",
   "EncryptionKeys": "Šifrēšanas atslēgas",
+  "EncryptionKeysRequiredForPrivateRoom": "Pirms privātas istabas izveides iestatiet šifrēšanas atslēgas profilā.",
   "EncryptionKeysNotConfigured": "Šifrēšanas atslēgas nav konfigurētas šajā ierīcē. Iestatiet savas atslēgas Profila iestatījumos, lai strādātu ar šifrētajiem failiem.",
   "EncryptionKeysReload": "Šifrēšanas atslēgas jāievada atkārtoti",
   "EncryptionLocked": "Šifrēšana bloķēta",

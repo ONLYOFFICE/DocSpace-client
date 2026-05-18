@@ -47,7 +47,14 @@ vi.mock("../../../services/encryption/identity", () => ({
   unlockWithPassphrase: vi.fn(),
 }));
 
+vi.mock("../../../services/encryption/auto-lock-preference", () => ({
+  getAutoLockTimeoutSeconds: vi.fn(() => 0),
+  setAutoLockTimeoutSeconds: vi.fn(),
+  AUTO_LOCK_OPTIONS: [],
+}));
+
 import { unlockWithPassphrase } from "../../../services/encryption/identity";
+import { getAutoLockTimeoutSeconds } from "../../../services/encryption/auto-lock-preference";
 
 const dummyKeyPair: IdentityKeyPair = {
   publicKey: new Uint8Array(32).fill(1),
@@ -288,6 +295,96 @@ describe("EncryptionContext / EncryptionProvider", () => {
       });
       expect(latest.isUnlocked).toBe(false);
       expect(SecretStorage.hasUnlocked("user-42")).toBe(false);
+    });
+  });
+
+  describe("auto-lock on idle inactivity", () => {
+    afterEach(() => {
+      vi.useRealTimers();
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(0);
+    });
+
+    it("locks after configured timeout when no activity arrives", () => {
+      vi.useFakeTimers();
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+      expect(latest.isUnlocked).toBe(true);
+
+      act(() => {
+        vi.advanceTimersByTime(60_000);
+      });
+
+      expect(latest.isUnlocked).toBe(false);
+      expect(SecretStorage.hasUnlocked("user-42")).toBe(false);
+    });
+
+    it("activity resets the timer (no lock if event arrives before timeout)", () => {
+      vi.useFakeTimers();
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+
+      act(() => {
+        vi.advanceTimersByTime(45_000);
+        document.dispatchEvent(new Event("keydown"));
+        vi.advanceTimersByTime(45_000);
+      });
+
+      expect(latest.isUnlocked).toBe(true);
+
+      act(() => {
+        vi.advanceTimersByTime(60_000);
+      });
+      expect(latest.isUnlocked).toBe(false);
+    });
+
+    it("does not register listeners when timeoutSeconds is 0 (off)", () => {
+      vi.useFakeTimers();
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(0);
+      const addSpy = vi.spyOn(document, "addEventListener");
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+
+      const idleEvents = addSpy.mock.calls.filter(([type]) =>
+        ["mousedown", "keydown", "scroll", "touchstart", "click"].includes(
+          type as string,
+        ),
+      );
+      expect(idleEvents).toHaveLength(0);
+      addSpy.mockRestore();
+    });
+
+    it("does not register listeners when not unlocked", () => {
+      vi.useFakeTimers();
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
+      const addSpy = vi.spyOn(document, "addEventListener");
+      renderTree({ userKeys: null });
+
+      const idleEvents = addSpy.mock.calls.filter(([type]) =>
+        ["mousedown", "keydown", "scroll", "touchstart", "click"].includes(
+          type as string,
+        ),
+      );
+      expect(idleEvents).toHaveLength(0);
+      addSpy.mockRestore();
+    });
+
+    it("cleanup removes idle listeners on unmount", () => {
+      vi.useFakeTimers();
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      const removeSpy = vi.spyOn(document, "removeEventListener");
+      const tree = renderTree();
+      tree.unmount();
+
+      const removed = removeSpy.mock.calls.filter(([type]) =>
+        ["mousedown", "keydown", "scroll", "touchstart", "click"].includes(
+          type as string,
+        ),
+      );
+      expect(removed).toHaveLength(5);
+      removeSpy.mockRestore();
     });
   });
 

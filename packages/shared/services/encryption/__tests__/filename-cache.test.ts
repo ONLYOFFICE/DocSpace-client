@@ -193,4 +193,52 @@ describe("filenameCache", () => {
       expect(listener).toHaveBeenCalledWith("1");
     });
   });
+
+  describe("storage read/remove failure paths (soft-fail)", () => {
+    afterEach(() => {
+      vi.restoreAllMocks();
+    });
+
+    it("getCachedEncryptedFilename returns null when getItem throws", () => {
+      sessionStorage.setItem("encfn:7", "real-name.docx");
+      vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
+        throw new Error("SecurityError");
+      });
+      expect(getCachedEncryptedFilename(7)).toBeNull();
+    });
+
+    it("forgetEncryptedFilename does not throw when removeItem throws", () => {
+      vi.spyOn(Storage.prototype, "removeItem").mockImplementation(() => {
+        throw new Error("SecurityError");
+      });
+      expect(() => forgetEncryptedFilename(1)).not.toThrow();
+    });
+
+    it("clearEncryptedFilenameCache does not throw when iteration throws", () => {
+      sessionStorage.setItem("encfn:1", "a");
+      sessionStorage.setItem("encfn:2", "b");
+      vi.spyOn(Storage.prototype, "key").mockImplementation(() => {
+        throw new Error("SecurityError");
+      });
+      expect(() => clearEncryptedFilenameCache()).not.toThrow();
+    });
+  });
+
+  describe("subscribe with faulty listener", () => {
+    it("a throwing listener does not block other listeners during notify", () => {
+      const good = vi.fn();
+      const bad = vi.fn(() => {
+        throw new Error("listener bug");
+      });
+      const good2 = vi.fn();
+      subscribeFilenameCache(good);
+      subscribeFilenameCache(bad);
+      subscribeFilenameCache(good2);
+
+      expect(() => rememberEncryptedFilename(1, "x.txt")).not.toThrow();
+      expect(good).toHaveBeenCalledWith("1");
+      expect(bad).toHaveBeenCalled();
+      expect(good2).toHaveBeenCalledWith("1");
+    });
+  });
 });

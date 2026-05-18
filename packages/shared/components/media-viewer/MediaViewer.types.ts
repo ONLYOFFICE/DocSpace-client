@@ -113,6 +113,13 @@ export type MediaViewerProps = {
   isPublicFile?: boolean;
   /** User ID for encrypted file decryption. */
   userId?: string;
+  /**
+   * Current room id, used as a fallback for fetching room-member public keys
+   * during decryption. `file.originRoomId` is only set when a file was moved
+   * out of its room (Recent/Trash views); for files opened inside their home
+   * private room we need the room context from the caller's navigation state.
+   */
+  currentRoomId?: number | string | null;
   /** Callback when decryption fails. */
   onDecryptionError?: (error: string) => void;
   /** List of playlists. */

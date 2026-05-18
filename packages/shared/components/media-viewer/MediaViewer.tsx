@@ -81,6 +81,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     isPublicFile = false,
     autoPlay = false,
     userId,
+    currentRoomId,
     onDecryptionError,
 
     t,
@@ -558,12 +559,16 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       TiffAbortSignalRef.current?.abort();
       HeicAbortSignalRef.current?.abort();
       setFileUrl(undefined);
+      // `originRoomId` is set only for files moved out of a room (Recent /
+      // Trash views). For files opened inside their home private room it is
+      // undefined, so we fall back to the caller-provided currentRoomId from
+      // the navigation context.
       const fileForRoom = files.find((file) => file.id === fileId);
       fetchAndDecryptFile(
         src,
         fileId,
         currentTitle,
-        fileForRoom?.originRoomId ?? null,
+        fileForRoom?.originRoomId ?? currentRoomId ?? null,
       );
     } else if (!isTiff(extension) && !isHeic(extension)) {
       TiffAbortSignalRef.current?.abort();
@@ -599,6 +604,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     fileId,
     currentTitle,
     isEncrypted,
+    currentRoomId,
     setBufferSelection,
     onEmptyPlaylistError,
     fetchAndSetTiffDataURL,

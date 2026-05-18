@@ -27,7 +27,6 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
 
 import {
   EncryptionProvider,
@@ -64,7 +63,6 @@ const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
   observer(({ isPrivate }) => {
     const { hasConfiguredKey } = useEncryption();
     const { t } = useTranslation(["Common"]);
-    const navigate = useNavigate();
 
     React.useEffect(() => {
       if (!isPrivate || hasConfiguredKey) return;
@@ -77,6 +75,11 @@ const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
         // show the toast anyway — better one extra surface than none at all.
       }
 
+      // NOTE: EncryptionProviderWrapper is mounted OUTSIDE <RouterProvider>
+      // in App.js, so useNavigate() throws "may be used only in the context
+      // of a <Router> component" and tears down the whole render tree —
+      // this used to crash Profile entirely. window.location.href is a
+      // full page transition into Profile, which is the intended UX anyway.
       toastr.info(
         <Trans
           i18nKey="Common:EncryptionDeviceSetupHint"
@@ -89,7 +92,7 @@ const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
               color="accent"
               onClick={() => {
                 toastr.clear();
-                navigate("/profile/keys-management");
+                window.location.href = "/profile/keys-management";
               }}
             />,
           ]}
@@ -98,7 +101,7 @@ const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
         30000,
         true,
       );
-    }, [isPrivate, hasConfiguredKey, t, navigate]);
+    }, [isPrivate, hasConfiguredKey, t]);
 
     return null;
   }),

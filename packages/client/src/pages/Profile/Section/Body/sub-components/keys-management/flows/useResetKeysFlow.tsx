@@ -112,9 +112,9 @@ export function useResetKeysFlow({
     }
   }, [encryptionKeys, isPending, refreshKeysFromServer, t]);
 
-  const modals = (
+  const modals = confirming ? (
     <ResetKeysConfirmDialog
-      visible={confirming}
+      visible
       onConfirm={onConfirm}
       onCancel={() => {
         if (isPending) return;
@@ -122,7 +122,7 @@ export function useResetKeysFlow({
       }}
       isPending={isPending}
     />
-  );
+  ) : null;
 
   return { request, isPending, available: hasKeys, modals };
 }

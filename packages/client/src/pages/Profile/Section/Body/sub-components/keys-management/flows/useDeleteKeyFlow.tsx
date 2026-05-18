@@ -77,15 +77,15 @@ export function useDeleteKeyFlow({
     }
   }, [confirming, refreshKeysFromServer, t]);
 
-  const modals = (
+  const modals = confirming !== null ? (
     <ConfirmationModal
-      visible={confirming !== null}
+      visible
       title={t("Common:DeleteKey")}
       message={t("Common:DeleteKeyWarning")}
       onConfirm={onConfirm}
       onCancel={() => setConfirming(null)}
     />
-  );
+  ) : null;
 
   return { request, isPending, pendingId, modals };
 }

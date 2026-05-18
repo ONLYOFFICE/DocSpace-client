@@ -133,13 +133,15 @@ export function useGenerateKeyFlow({
 
   const modals = (
     <>
-      <ConfirmationModal
-        visible={step === "confirm-replace"}
-        title={t("Common:ReplaceKey")}
-        message={t("Common:ReplaceKeyWarning")}
-        onConfirm={() => setStep("passphrase")}
-        onCancel={reset}
-      />
+      {step === "confirm-replace" ? (
+        <ConfirmationModal
+          visible
+          title={t("Common:ReplaceKey")}
+          message={t("Common:ReplaceKeyWarning")}
+          onConfirm={() => setStep("passphrase")}
+          onCancel={reset}
+        />
+      ) : null}
       {step === "passphrase" ? (
         <PassphraseModal
           visible

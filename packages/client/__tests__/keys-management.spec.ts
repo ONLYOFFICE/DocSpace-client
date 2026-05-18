@@ -60,7 +60,10 @@ test.describe("Profile > Keys Management", () => {
 
     await page.goto(`${baseUrl}/profile/keys-management`);
 
-    const generateBtn = page.getByRole("button", { name: "Generate new key" });
+    const generateBtn = page.getByRole("button", {
+      name: "Generate new key",
+      exact: true,
+    });
     await expect(generateBtn).toBeVisible({ timeout: 15_000 });
     await generateBtn.click();
 
@@ -155,11 +158,16 @@ test.describe("Profile > Keys Management", () => {
     );
 
     await page.goto(`${baseUrl}/profile/keys-management`);
-    const generateBtn = page.getByRole("button", { name: "Generate new key" });
+    const generateBtn = page.getByRole("button", {
+      name: "Generate new key",
+      exact: true,
+    });
     await expect(generateBtn).toBeVisible({ timeout: 15_000 });
     await generateBtn.click();
 
-    const dialog = page.getByRole("dialog");
+    const dialog = page
+      .getByRole("dialog")
+      .filter({ hasText: "Create passphrase" });
     await expect(dialog).toBeVisible({ timeout: 5_000 });
     await dialog.getByRole("button", { name: "Cancel" }).click();
     await expect(dialog).toBeHidden();

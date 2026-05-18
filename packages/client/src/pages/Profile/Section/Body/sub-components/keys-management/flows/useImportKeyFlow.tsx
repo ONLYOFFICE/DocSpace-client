@@ -169,13 +169,15 @@ export function useImportKeyFlow({
           isLoading={isPending}
         />
       ) : null}
-      <ConfirmationModal
-        visible={step === "confirm-replace"}
-        title={t("Common:ReplaceKey")}
-        message={t("Common:ReplaceKeyWarning")}
-        onConfirm={onConfirmReplace}
-        onCancel={reset}
-      />
+      {step === "confirm-replace" ? (
+        <ConfirmationModal
+          visible
+          title={t("Common:ReplaceKey")}
+          message={t("Common:ReplaceKeyWarning")}
+          onConfirm={onConfirmReplace}
+          onCancel={reset}
+        />
+      ) : null}
     </>
   );
 

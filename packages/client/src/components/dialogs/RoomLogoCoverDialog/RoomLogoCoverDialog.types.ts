@@ -55,11 +55,13 @@ interface IRoomCoverDialogProps {
 
 export interface RoomLogoCoverProps {
   isBaseTheme?: boolean;
-  logo?: ILogo;
   title?: string;
   covers?: ICover[] | undefined;
-  setCover: (color: string, icon: string | ICover) => void;
-  cover: ILogoCover;
+  logoColor?: string;
+  logoCover?: ICover | null;
+  coverColor?: string;
+  coverId?: string;
+  withSelection?: boolean;
   setRoomCoverDialogProps: (params: IRoomCoverDialogProps) => void;
   roomCoverDialogProps: IRoomCoverDialogProps;
   forwardedRef?: React.ForwardedRef<HTMLDivElement>;
@@ -72,6 +74,7 @@ export interface RoomLogoCoverProps {
 }
 
 export type CoverDialogProps = RoomLogoCoverProps & {
+  setCover: (color: string, icon: string | ICover) => void;
   setRoomLogoCover: VoidFunction;
   covers?: ICover[] | undefined;
   getCovers: VoidFunction;

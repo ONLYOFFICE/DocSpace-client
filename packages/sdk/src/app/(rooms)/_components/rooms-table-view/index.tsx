@@ -41,7 +41,10 @@ import { useIsServer } from "@docspace/shared/hooks/useIsServer";
 import type { Nullable, TSortBy } from "@docspace/shared/types";
 import type { IndexRange } from "react-virtualized";
 
-import type { TFolderItem, TFileItem } from "@/app/(docspace)/_hooks/useItemList";
+import type {
+  TFolderItem,
+  TFileItem,
+} from "@/app/(docspace)/_hooks/useItemList";
 
 import { RoomsTableViewRow } from "./RoomsTableViewRow";
 
@@ -59,6 +62,7 @@ type RoomsTableViewProps = {
   onSort: (sortBy: string, sortDirection: string) => void;
   timezone: string;
   fetchMoreFiles: (params: IndexRange) => Promise<void>;
+  onEditRoom?: (item: TFolderItem | TFileItem) => void;
 };
 
 const RoomsTableView = ({
@@ -70,6 +74,7 @@ const RoomsTableView = ({
   onSort,
   timezone,
   fetchMoreFiles,
+  onEditRoom,
 }: RoomsTableViewProps) => {
   const { t } = useTranslation(["Common", "Files"]);
   const isSSR = useIsServer();
@@ -197,6 +202,7 @@ const RoomsTableView = ({
             item={item}
             timezone={timezone}
             lastColumn={lastColumn}
+            onEditRoom={onEditRoom}
           />
         ))}
       </TableBody>
@@ -205,3 +211,4 @@ const RoomsTableView = ({
 };
 
 export default observer(RoomsTableView);
+

@@ -41,27 +41,40 @@ import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionSt
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
-import useContextMenuModel from "@/app/(docspace)/_hooks/useContextMenuModel";
-import { ShareContext } from "@/app/(docspace)/_contexts/ShareContext";
-import { InfoContext } from "@/app/(docspace)/_contexts/InfoContext";
-import { DeleteContext } from "@/app/(docspace)/_contexts/DeleteContext";
-import { FileOperationsContext } from "@/app/(docspace)/_contexts/FileOperationsContext";
-import { RenameContext } from "@/app/(docspace)/_contexts/RenameContext";
 import { generateFilesItemValue } from "@/app/(docspace)/(files)/_utils";
+import useRoomContextMenuModel from "../../_hooks/useRoomContextMenuModel";
 
-import type { TFolderItem, TFileItem } from "@/app/(docspace)/_hooks/useItemList";
+import type {
+  TFolderItem,
+  TFileItem,
+} from "@/app/(docspace)/_hooks/useItemList";
 
 import styles from "@/app/(docspace)/(files)/_components/table-view/TableView.module.scss";
+
+function getRoomIconLogo(item: TFolderItem | TFileItem) {
+  if (!("isRoom" in item) || !item.isRoom) return item.icon;
+  const logo = item.roomLogo;
+  if (!logo) return undefined;
+  if (logo.cover) return logo;
+  return logo.large || logo.medium || logo.original || undefined;
+}
 
 type RoomsTableViewRowProps = {
   item: TFolderItem | TFileItem;
   index: number;
   timezone: string;
   lastColumn: string;
+  onEditRoom?: (item: TFolderItem | TFileItem) => void;
 };
 
 const RoomsTableViewRow = observer(
-  ({ item, index, timezone, lastColumn }: RoomsTableViewRowProps) => {
+  ({
+    item,
+    index,
+    timezone,
+    lastColumn,
+    onEditRoom,
+  }: RoomsTableViewRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
 
@@ -71,24 +84,7 @@ const RoomsTableViewRow = observer(
     const { t, i18n } = useTranslation(["Common"]);
     const { openFile } = useFilesActions({ t });
     const { openFolder } = useFolderActions({ t });
-    const onShareClick = React.useContext(ShareContext);
-    const onInfoClick = React.useContext(InfoContext);
-    const deleteCtx = React.useContext(DeleteContext);
-    const fileOpsCtx = React.useContext(FileOperationsContext);
-    const renameCtx = React.useContext(RenameContext);
-
-    const { getContextMenuModel } = useContextMenuModel({
-      item: observableItem,
-      onShareClick: onShareClick ?? undefined,
-      onInfoClick: onInfoClick ?? undefined,
-      onDeleteClick: deleteCtx?.deleteItem,
-      onCopyClick: fileOpsCtx?.copyItem,
-      onMoveClick: fileOpsCtx?.moveItem,
-      onDuplicateClick: fileOpsCtx?.duplicateItem,
-      onRestoreClick: fileOpsCtx?.restoreItem,
-      onRenameClick: renameCtx?.renameItem,
-    });
-
+    const { getContextModel } = useRoomContextMenuModel(onEditRoom);
     const isChecked = filesSelectionStore.isCheckedItem(item);
     const value = generateFilesItemValue(item, false, index);
 
@@ -144,29 +140,22 @@ const RoomsTableViewRow = observer(
 
     const quickButtonsNode = (
       <div className={styles.quickButtonsContainer}>
-        <QuickButtons
-          t={t}
-          item={itemSnapshot}
-          viewAs="table"
-        />
+        <QuickButtons t={t} item={itemSnapshot} viewAs="table" />
       </div>
     );
 
-    const contextMenuModel = getContextMenuModel(true);
+    const contextMenuModel = getContextModel(item, true);
 
     return (
       <TableRow
         className={classNames({ "table-row-selected": isChecked })}
         checked={isChecked}
         contextOptions={contextMenuModel}
-        getContextModel={getContextMenuModel}
+        getContextModel={() => getContextModel(item, true)}
         onClick={onRowClick}
         onDoubleClick={onRowDoubleClick}
         selectionProp={{
-          className: classNames(
-            "files-item",
-            "table-container_file-name-cell",
-          ),
+          className: classNames("files-item", "table-container_file-name-cell"),
           value,
         }}
         fileContextClick={(isRightClick?: boolean) => {
@@ -186,9 +175,7 @@ const RoomsTableViewRow = observer(
           >
             <div className="table-container_element">
               <RoomIcon
-                logo={
-                  "isRoom" in item && item.isRoom ? item.roomLogo : item.icon
-                }
+                logo={getRoomIconLogo(item)}
                 color={
                   "isRoom" in item && item.isRoom
                     ? item.roomIconColor
@@ -238,3 +225,4 @@ const RoomsTableViewRow = observer(
 );
 
 export { RoomsTableViewRow };
+

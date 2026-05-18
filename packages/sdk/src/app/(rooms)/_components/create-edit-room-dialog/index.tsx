@@ -28,7 +28,6 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useRouter } from "next/navigation";
 
 import {
   ModalDialog,
@@ -42,12 +41,12 @@ import {
 } from "@docspace/ui-kit/components/text-input";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Tag } from "@docspace/ui-kit/components/tag";
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import {
   Avatar,
-  AvatarSize,
   AvatarRole,
+  AvatarSize,
 } from "@docspace/ui-kit/components/avatar";
+import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { AvatarEditorDialog } from "@docspace/ui-kit/components/avatar-editor-dialog";
 import { RoomLogoCoverDialog } from "@docspace/ui-kit/components/room-logo-cover-dialog";
 import { ROOM_ACTION_KEYS } from "@docspace/ui-kit/constants";
@@ -65,6 +64,8 @@ import UploadSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import DeleteSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import PencilSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 
+import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
+
 import styles from "./CreateEditRoomDialog.module.scss";
 
 type EditableRoom = {
@@ -73,6 +74,7 @@ type EditableRoom = {
   tags?: string[];
   roomLogo?: string;
   roomIconColor?: string;
+  roomCover?: ICover;
   createdBy?: TCreatedBy;
 };
 
@@ -80,25 +82,23 @@ type CreateEditRoomDialogProps = {
   visible: boolean;
   onClose: () => void;
   room?: EditableRoom;
+  onRoomEdited?: (roomId: number) => void;
 };
 
 const CreateEditRoomDialog = ({
   visible,
   onClose,
   room,
+  onRoomEdited,
 }: CreateEditRoomDialogProps) => {
-  const { t } = useTranslation([
-    "Common",
-    "RoomLogoCover",
-    "Files",
-    "CreateEditRoomDialog",
-  ]);
-  const router = useRouter();
+  const { t } = useTranslation(["Common", "Files", "RoomLogoCover"]);
+  const refreshRooms = React.useContext(RoomsRefreshContext);
   const dialogsStore = useDialogsStore();
+
   const isEdit = !!room;
 
-  const [name, setName] = React.useState("");
-  const [tags, setTags] = React.useState<string[]>([]);
+  const [name, setName] = React.useState(room?.title ?? "");
+  const [tags, setTags] = React.useState<string[]>(room?.tags ?? []);
   const [tagInputValue, setTagInputValue] = React.useState("");
   const [cropperImage, setCropperImage] = React.useState<TImage>({
     x: 0.5,
@@ -107,7 +107,9 @@ const CreateEditRoomDialog = ({
     uploadedFile: undefined,
   });
   const [cropperVisible, setCropperVisible] = React.useState(false);
-  const [previewUrl, setPreviewUrl] = React.useState<string | null>(null);
+  const [previewUrl, setPreviewUrl] = React.useState<string | null>(
+    room?.roomLogo ?? null,
+  );
   const [logoChanged, setLogoChanged] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [hasNameError, setHasNameError] = React.useState(false);
@@ -116,13 +118,17 @@ const CreateEditRoomDialog = ({
   const [selectedColor, setSelectedColor] = React.useState<string | undefined>(
     undefined,
   );
-  const [selectedCover, setSelectedCover] = React.useState<ICover | null>(null);
+  const [selectedCover, setSelectedCover] = React.useState<ICover | null>(
+    room?.roomCover ?? null,
+  );
 
   const randomColor = React.useMemo(
     () =>
+      room?.roomIconColor ??
       globalColors.logoColors[
         Math.floor(Math.random() * globalColors.logoColors.length)
       ].replace("#", ""),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
 
@@ -141,7 +147,7 @@ const CreateEditRoomDialog = ({
     setHasNameError(false);
     setLogoChanged(false);
     setSelectedColor(room?.roomIconColor ?? undefined);
-    setSelectedCover(null);
+    setSelectedCover(room?.roomCover ?? null);
     setCoverDialogVisible(false);
   }, [visible]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -241,19 +247,19 @@ const CreateEditRoomDialog = ({
       },
     ];
 
+    items.push({
+      key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_CUSTOMIZE_COVER,
+      label: t("RoomLogoCover:CustomizeCover"),
+      icon: PencilSvgUrl,
+      onClick: onOpenCoverDialog,
+    });
+
     if (hasCoverOrPreview) {
       items.push({
         key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_DELETE,
         label: t("Common:Delete"),
         icon: DeleteSvgUrl,
         onClick: onDeleteLogo,
-      });
-    } else {
-      items.push({
-        key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_CUSTOMIZE_COVER,
-        label: t("RoomLogoCover:CustomizeCover"),
-        icon: PencilSvgUrl,
-        onClick: onOpenCoverDialog,
       });
     }
 
@@ -321,6 +327,8 @@ const CreateEditRoomDialog = ({
             cover: selectedCover?.id ?? "",
           });
         }
+
+        onRoomEdited?.(room.id);
       } else {
         const logo = await buildLogoParams();
         const newRoom = (await api.rooms.createRoom({
@@ -339,9 +347,8 @@ const CreateEditRoomDialog = ({
           });
         }
 
-        router.refresh();
+        refreshRooms?.();
       }
-
       onClose();
     } catch (e) {
       console.error(e);
@@ -392,7 +399,7 @@ const CreateEditRoomDialog = ({
                 model={model}
                 onChangeFile={onChangeFile}
                 isEmptyIcon={isEmptyIcon}
-                dataTestId="create_room_icon"
+                dataTestId="create_edit_room_icon"
               />
               <div className={styles.nameInputWrapper}>
                 <Text
@@ -425,19 +432,6 @@ const CreateEditRoomDialog = ({
               <Text fontWeight={600} fontSize="13px">
                 {t("Common:Tags")}:
               </Text>
-              {tags.length > 0 ? (
-                <div className={styles.tagsList}>
-                  {tags.map((tag) => (
-                    <Tag
-                      key={tag}
-                      tag={tag}
-                      label={tag}
-                      isNewTag
-                      onDelete={onDeleteTag}
-                    />
-                  ))}
-                </div>
-              ) : null}
               <TextInput
                 type={InputType.text}
                 scale
@@ -453,6 +447,19 @@ const CreateEditRoomDialog = ({
                 }}
                 isDisabled={isLoading}
               />
+              {tags.length > 0 ? (
+                <div className={styles.tagsList}>
+                  {tags.map((tag) => (
+                    <Tag
+                      key={tag}
+                      tag={tag}
+                      label={tag}
+                      isNewTag
+                      onDelete={onDeleteTag}
+                    />
+                  ))}
+                </div>
+              ) : null}
             </div>
 
             {isEdit && room.createdBy ? (

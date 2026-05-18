@@ -38,7 +38,7 @@ import type {
   TFolder,
 } from "@docspace/shared/api/files/types";
 import type { TSettings } from "@docspace/shared/api/settings/types";
-import type { TSortBy } from "@docspace/shared/types";
+import type { TSortBy, TCreatedBy } from "@docspace/shared/types";
 import { DeviceType } from "@docspace/shared/enums";
 
 import { PAGE_COUNT } from "@/utils/constants";
@@ -58,6 +58,8 @@ import RowView from "@/app/(docspace)/(files)/_components/row-view";
 import TileView from "@/app/(docspace)/(files)/_components/tile-view";
 import RoomsTableView from "../rooms-table-view";
 import EmptyView from "../empty-view";
+import CreateEditRoomDialog from "../create-edit-room-dialog";
+import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
 import useResetSelectionClick from "@/app/(docspace)/(files)/_components/list/hooks/useResetSelectionClick";
 
 type RoomsListProps = {
@@ -128,6 +130,31 @@ const RoomsList = ({
   const [total, setTotal] = React.useState<number>(totalProp);
   const [hasNextPage, setHasNextPage] = React.useState<boolean>(
     filesList.length < total,
+  );
+
+  const [editingRoom, setEditingRoom] = React.useState<
+    (TFolderItem | TFileItem) | null
+  >(null);
+
+  const onEditRoom = React.useCallback((item: TFolderItem | TFileItem) => {
+    setEditingRoom(item);
+  }, []);
+
+  const refreshSingleRoom = React.useCallback(
+    async (roomId: number) => {
+      try {
+        const updatedRoom = await api.rooms.getRoomInfo(roomId);
+        const updatedItem = convertFolderToItem(
+          updatedRoom as unknown as TFolder,
+        );
+        setFilesList((prev) =>
+          prev.map((item) => (item.id === roomId ? updatedItem : item)),
+        );
+      } catch {
+        // ignore
+      }
+    },
+    [convertFolderToItem],
   );
 
   const requestRunning = React.useRef(false);
@@ -264,12 +291,12 @@ const RoomsList = ({
   const visibleItems =
     filesListStore.items.length > 0 ? filesListStore.items : filesList;
 
+  let content: React.ReactNode;
+  console.log("visibleItems", visibleItems, "filesViewAs", filesViewAs);
   if (visibleItems.length === 0) {
-    return <EmptyView isFiltered={!!filter.filterValue} />;
-  }
-
-  if (filesViewAs === "tile") {
-    return (
+    content = <EmptyView isFiltered={!!filter.filterValue} />;
+  } else if (filesViewAs === "tile") {
+    content = (
       <TileView
         items={visibleItems}
         currentFolderId={String(current.id)}
@@ -279,10 +306,8 @@ const RoomsList = ({
         getIcon={getIcon}
       />
     );
-  }
-
-  if (filesViewAs === "table") {
-    return (
+  } else if (filesViewAs === "table") {
+    content = (
       <RoomsTableView
         total={total}
         items={visibleItems}
@@ -301,20 +326,49 @@ const RoomsList = ({
         }}
         timezone={timezone}
         fetchMoreFiles={fetchMoreRooms}
+        onEditRoom={onEditRoom}
+      />
+    );
+  } else {
+    content = (
+      <RowView
+        total={total}
+        items={visibleItems}
+        hasMoreFiles={hasNextPage}
+        filterSortBy={filter.sortBy as TSortBy}
+        timezone={timezone}
+        displayFileExtension={false}
+        fetchMoreFiles={fetchMoreRooms}
       />
     );
   }
 
+  const editingRoomData = editingRoom
+    ? (() => {
+        const folder = editingRoom as TFolderItem;
+        const logo = folder.roomLogo;
+        return {
+          id: folder.id,
+          title: folder.title,
+          tags: (folder as unknown as { tags?: string[] }).tags,
+          roomLogo: logo?.cover ? undefined : (logo?.large ?? logo?.medium),
+          roomIconColor: folder.roomIconColor,
+          roomCover: logo?.cover,
+          createdBy: folder.createdBy as TCreatedBy | undefined,
+        };
+      })()
+    : undefined;
+
   return (
-    <RowView
-      total={total}
-      items={visibleItems}
-      hasMoreFiles={hasNextPage}
-      filterSortBy={filter.sortBy as TSortBy}
-      timezone={timezone}
-      displayFileExtension={false}
-      fetchMoreFiles={fetchMoreRooms}
-    />
+    <RoomsRefreshContext.Provider value={fetchCurrentRooms}>
+      {content}
+      <CreateEditRoomDialog
+        visible={!!editingRoom}
+        onClose={() => setEditingRoom(null)}
+        room={editingRoomData}
+        onRoomEdited={refreshSingleRoom}
+      />
+    </RoomsRefreshContext.Provider>
   );
 };
 

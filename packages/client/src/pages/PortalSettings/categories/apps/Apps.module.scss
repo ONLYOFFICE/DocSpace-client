@@ -63,6 +63,14 @@
     width: 22px;
     height: 22px;
   }
+
+  &[data-enabled="true"] {
+    background-color: color-mix(in srgb, var(--accent-main) 15%, transparent);
+
+    svg path {
+      fill: var(--accent-main);
+    }
+  }
 }
 
 .info {

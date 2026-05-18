@@ -105,7 +105,9 @@ const Apps = ({
 
           return (
             <div key={app.id} className={styles.item}>
-              <span className={styles.icon}>{app.icon}</span>
+              <span className={styles.icon} data-enabled={enabled}>
+                {app.icon}
+              </span>
               <div className={styles.info}>
                 <Text as="p" className={styles.title} isBold>
                   {app.title}

@@ -44,11 +44,6 @@ import { peopleHandler } from "./people";
 import { peopleListHandler, peopleListAccessDeniedHandler } from "./list";
 import { themeProviderHandler } from "./theme";
 import { userPhotoHandler } from "./userPhoto";
-import { roomMembersSearchHandler } from "./roomMembersSearch";
-export type {
-  RoomMemberSearchEntry,
-  RoomMembersSearchOptions,
-} from "./roomMembersSearch";
 
 export {
   selfHandler,
@@ -69,7 +64,6 @@ export {
   themeProviderHandler,
   userPhotoHandler,
   userExistsHandler,
-  roomMembersSearchHandler,
 };
 
 export const peopleHandlers = (port: string) => [

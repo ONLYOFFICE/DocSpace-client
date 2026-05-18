@@ -38,6 +38,7 @@
   "TermsAndConditions": "Al continuar, usted entiende y acepta nuestros <1>Términos y condiciones</1> y <2>Declaración de privacidad</2>.",
   "TfaSubTitle": "Siga estos sencillos pasos para seguir trabajando en este {{productName}}:",
   "TfaTitle": "Autenticación de dos factores habilitada para un acceso seguro",
+  "UserAlreadyInvited": "Ya ha sido invitado. Por favor, complete el registro utilizando el enlace del correo electrónico.",
   "VerifyConnection": "Verifique la conexión",
   "VerifyConnectionDescription": "Introduzca el código de 6 dígitos generado por su aplicación de autenticación en el campo siguiente para terminar la configuración."
 }

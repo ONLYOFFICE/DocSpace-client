@@ -38,6 +38,7 @@
   "TermsAndConditions": "Pokračovaním beriete na vedomie a súhlasíte s našimi <1>Všeobecnými obchodnými podmienkami</1> a <2>Vyhlásením o ochrane osobných údajov</2>.",
   "TfaSubTitle": "Postupujte podľa jednoduchých krokov, aby ste mohli pokračovať v práci v tomto {{productName}}:",
   "TfaTitle": "Dvojfaktorové overenie povolené pre bezpečný prístup",
+  "UserAlreadyInvited": "Už ste boli pozvaní. Prosím, dokončite registráciu pomocou odkazu z e-mailu.",
   "VerifyConnection": "Overte spojenie",
   "VerifyConnectionDescription": "Zadajte 6-ciferný kód vygenerovaný vašou autentifikačnou aplikáciou do poľa nižšie, aby ste dokončili nastavenie."
 }

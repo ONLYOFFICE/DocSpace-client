@@ -38,6 +38,7 @@
   "TermsAndConditions": "Indem Sie fortfahren, bestätigen Sie, dass Sie unsere <1>Allgemeinen Geschäftsbedingungen</1> und <2>Datenschutzerklärung</2> verstanden haben und damit einverstanden sind.",
   "TfaSubTitle": "Befolgen Sie diese einfachen Schritte, um mit {{productName}} weiterzuarbeiten:",
   "TfaTitle": "Zwei-Faktor-Authentifizierung für sicheren Zugriff aktiviert",
+  "UserAlreadyInvited": "Sie wurden bereits eingeladen. Bitte schließen Sie die Registrierung über den Link aus der E-Mail ab.",
   "VerifyConnection": "Verbindung bestätigen",
   "VerifyConnectionDescription": "Geben Sie den von Ihrer Authentifizierungs-App generierten sechsstelligen Code in das Feld unten ein, um die Einrichtung abzuschließen."
 }

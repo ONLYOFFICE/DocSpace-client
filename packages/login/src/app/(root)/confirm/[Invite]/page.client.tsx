@@ -69,7 +69,7 @@ import {
 } from "@docspace/shared/utils/common";
 import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
 import { setCookie } from "@docspace/ui-kit/utils/cookie";
-import { ButtonKeys } from "@docspace/shared/enums";
+import { ButtonKeys, EmployeeStatus } from "@docspace/shared/enums";
 import { TValidate } from "@docspace/ui-kit/components/email-input";
 import { TCreateUserData, TError } from "@/types";
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
@@ -160,6 +160,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   const [isPasswordErrorShow, setIsPasswordErrorShow] = useState(false);
 
   const [registrationForm, setRegistrationForm] = useState(!!emailFromLink);
+
+  const [isContinueBlocked, setIsContinueBlocked] = useState(false);
 
   const focusInput = () => {
     if (inputRef.current) {
@@ -270,8 +272,21 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     try {
       const userExists = await checkUserExists(email, headerKey);
 
-      if (!userExists) {
+      if (!userExists.exists) {
         setRegistrationForm(true);
+        setIsLoading(false);
+        return;
+      }
+
+      // Backend returns EmployeeStatus (UserExistsResponseDto.Status), not
+      // EmployeeActivationStatus. EmployeeStatus.Pending (4) marks an invited
+      // user who has not completed registration — see the codebase convention
+      // (UsersStore, contacts utils, InfoPanel Users view, etc).
+      if (userExists.status === EmployeeStatus.Pending) {
+        setEmailValid(false);
+        setIsEmailErrorShow(true);
+        setEmailErrorText(t("Confirm:UserAlreadyInvited"));
+        setIsContinueBlocked(true);
         setIsLoading(false);
         return;
       }
@@ -323,7 +338,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
           typeof knownError === "object"
             ? knownError?.response?.data?.error?.message
             : "";
-        setEmailErrorText(errorInvite);
+        // biome-ignore lint/plugin/no-dynamic-i18n-key: errorInvite is a runtime-provided i18n key from backend
+        setEmailErrorText(errorInvite ? t(`Common:${errorInvite}`) : "");
       }
     }
 
@@ -437,7 +453,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       console.error("confirm error", errorMessage);
       toastr.error(errorMessage);
       setIsEmailErrorShow(true);
-      setEmailErrorText(errorMessage);
+      // biome-ignore lint/plugin/no-dynamic-i18n-key: errorMessage is a runtime-provided i18n key from backend
+      setEmailErrorText(errorMessage ? t(`Common:${errorMessage}`) : "");
       setEmailValid(false);
       setIsLoading(false);
     }
@@ -446,6 +463,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
     setIsEmailErrorShow(false);
+    setIsContinueBlocked(false);
   };
 
   const onChangeFname = (e: ChangeEvent<HTMLInputElement>) => {
@@ -562,7 +580,9 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
   const onValidateEmail = (result: TValidate): undefined => {
     setEmailValid(result.isValid);
-    setEmailErrorText(result.errors?.[0] ?? "");
+    const errorKey = result.errors?.[0];
+    // biome-ignore lint/plugin/no-dynamic-i18n-key: errorKey is a runtime-provided i18n key from email validator
+    setEmailErrorText(errorKey ? t(`Common:${errorKey}`) : "");
   };
 
   const onClickBack = () => {
@@ -592,6 +612,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
           emailValid={emailValid}
           emailFromLink={emailFromLink}
           emailErrorText={emailErrorText}
+          isContinueDisabled={isContinueBlocked}
           onContinue={onContinue}
           onChange={onChangeEmail}
           onValidate={onValidateEmail}

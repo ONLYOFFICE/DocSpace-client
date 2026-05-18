@@ -52,6 +52,7 @@ type EmailInputFormProps = {
   emailValid: boolean;
   emailFromLink: string;
   emailErrorText?: string;
+  isContinueDisabled?: boolean;
   onContinue(): Promise<void>;
   onChange(e: ChangeEvent<HTMLInputElement>): void;
   onValidate(result: TValidate): undefined;
@@ -67,6 +68,7 @@ const EmailInputForm = ({
   emailValid,
   emailErrorText,
   emailFromLink,
+  isContinueDisabled,
 
   onContinue,
   onChange,
@@ -85,13 +87,9 @@ const EmailInputForm = ({
         className="form-field"
         isVertical
         labelVisible={false}
+        errorMessageWidth="100%"
         hasError={isEmailErrorShow ? !emailValid : undefined}
-        errorMessage={
-          emailErrorText
-            // biome-ignore lint/plugin/no-dynamic-i18n-key: errorText is a runtime-provided key fragment composed with "Common:" prefix
-            ? t(`Common:${emailErrorText}`)
-            : t("Common:RequiredField")
-        }
+        errorMessage={emailErrorText ?? t("Common:RequiredField")}
         dataTestId="email_field_container"
       >
         <EmailInput
@@ -122,7 +120,7 @@ const EmailInputForm = ({
         scale
         label={t("Common:ContinueButton")}
         tabIndex={1}
-        isDisabled={isLoading}
+        isDisabled={isLoading || isContinueDisabled}
         isLoading={isLoading}
         onClick={onContinue}
         testId="email_continue_button"

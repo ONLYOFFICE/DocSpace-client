@@ -38,6 +38,7 @@
   "TermsAndConditions": "继续操作即表示您已理解并同意我们的<1>服务条款</1>和<2>隐私声明</2>。",
   "TfaSubTitle": "请按照简单的步骤继续使用此{{productName}}：",
   "TfaTitle": "启用双重身份验证以确保安全访问",
+  "UserAlreadyInvited": "您已被邀请。请使用电子邮件中的链接完成注册。",
   "VerifyConnection": "验证连接",
   "VerifyConnectionDescription": "请在下方输入身份验证器应用生成的6位验证码以完成设置。"
 }

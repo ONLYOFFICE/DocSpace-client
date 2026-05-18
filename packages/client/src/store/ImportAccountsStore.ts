@@ -321,13 +321,15 @@ class ImportAccountsStore {
 
   changeEmail = (key: string, email: string) => {
     checkUserExists(email)
-      .then((userExists) => {
+      .then((res) => {
+        // status is intentionally ignored: an existing email is a duplicate
+        // regardless of the user's activation status (Active/Pending/Disabled).
         runInAction(() => {
           this.users = {
             ...this.users,
             withoutEmail: this.users.withoutEmail.map((user) =>
               user.key === key
-                ? { ...user, email, isDuplicate: userExists }
+                ? { ...user, email, isDuplicate: res.exists }
                 : user,
             ),
           };
@@ -587,3 +589,4 @@ class ImportAccountsStore {
 }
 
 export default ImportAccountsStore;
+

@@ -3,7 +3,7 @@
   "content": "Continue",
   "content_en_sha1_hash": "2e02623966f9391facf6eaefc8b079ed5b630bee",
   "created_at": "2025-05-19T21:30:43.691Z",
-  "updated_at": "2026-05-15T14:00:06.634Z",
+  "updated_at": "2026-05-18T17:47:04.623Z",
   "comment": {
     "text": "This is the label for a button that allows users to proceed with an action, such as confirming a service, closing an editor without saving, or initiating a file conversion.",
     "is_auto": true,
@@ -67,8 +67,8 @@
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/EmailInputForm.tsx",
-      "line_number": 123,
-      "context": "id=\"email-continue\"\n className=\"login-continue-button\"\n primary\n size={ButtonSize.medium}\n scale\n label={t(\"Common:ContinueButton\")}\n tabIndex={1}\n isDisabled={isLoading}\n isLoading={isLoading}\n onClick={onContinue}\n testId=\"email_continue_button\"",
+      "line_number": 121,
+      "context": "id=\"email-continue\"\n className=\"login-continue-button\"\n primary\n size={ButtonSize.medium}\n scale\n label={t(\"Common:ContinueButton\")}\n tabIndex={1}\n isDisabled={isLoading || isContinueDisabled}\n isLoading={isLoading}\n onClick={onContinue}\n testId=\"email_continue_button\"",
       "module": "/packages/login"
     },
     {

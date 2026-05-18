@@ -170,7 +170,7 @@ export const getFolderDescription = (
       }),
     )
     .with([P._, DefaultFolderType, P.when(isAdmin)], () =>
-      t("EmptyView:DefaultFolderDescription"),
+      t("Common:DefaultFolderDescription"),
     )
     .with([P._, DefaultFolderType, P.when(isUser)], () =>
       t("Common:UserEmptyDescription"),
@@ -294,16 +294,16 @@ export const getRootDescription = (
       </>
     ))
     .with([FolderType.USER, P.when(() => security?.Create)], () =>
-      t("EmptyView:DefaultFolderDescription"),
+      t("Common:DefaultFolderDescription"),
     )
     .with([FolderType.SHARE, P._], () =>
-      t("EmptyView:EmptyShareDescription", {
+      t("Common:EmptyShareDescription", {
         productName: getBrandName("ProductName"),
       }),
     )
-    .with([FolderType.Recent, P._], () => t("EmptyView:EmptyRecentDescription"))
+    .with([FolderType.Recent, P._], () => t("Common:EmptyRecentDescription"))
     .with([FolderType.Favorites, P._], () =>
-      t("EmptyView:EmptyFavoritesDescription"),
+      t("Common:EmptyFavoritesDescription"),
     )
     .with([FolderType.Archive, ShareAccessRights.None], () =>
       t("Files:ArchiveEmptyScreen", {
@@ -314,7 +314,7 @@ export const getRootDescription = (
       t("Files:ArchiveEmptyScreenUser"),
     )
     .with([FolderType.TRASH, P._], () =>
-      t("Files:TrashFunctionalityDescription", {
+      t("Common:TrashFunctionalityDescription", {
         sectionName: t("Common:TrashSection"),
       }),
     )
@@ -430,9 +430,9 @@ export const getRootTitle = (
     .with([FolderType.USER, ShareAccessRights.None], () =>
       t("Common:EmptyScreenFolder"),
     )
-    .with([FolderType.SHARE, P._], () => t("EmptyView:EmptyShareTitle"))
-    .with([FolderType.Favorites, P._], () => t("EmptyView:EmptyFavoritesTitle"))
-    .with([FolderType.Recent, P._], () => t("EmptyView:NoRecentFilesHereYet"))
+    .with([FolderType.SHARE, P._], () => t("Common:EmptyShareTitle"))
+    .with([FolderType.Favorites, P._], () => t("Common:EmptyFavoritesTitle"))
+    .with([FolderType.Recent, P._], () => t("Common:NoRecentFilesHereYet"))
     .with([FolderType.Archive, P._], () => t("Files:ArchiveEmptyScreenHeader"))
     .with([FolderType.TRASH, P._], () => t("Common:EmptyScreenFolder"))
     .otherwise(() => "");

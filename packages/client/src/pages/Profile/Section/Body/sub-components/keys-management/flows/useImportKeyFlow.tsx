@@ -34,20 +34,16 @@ import {
   unlockWithPassphrase,
 } from "@docspace/shared/services/encryption/identity";
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
-import {
-  setEncryptionKeys,
-  updateEncryptionKeys,
-} from "@docspace/shared/api/privacy";
+import { setActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
+import { setEncryptionKeys } from "@docspace/shared/api/privacy";
 import type { SerializedIdentity } from "@docspace/shared/services/encryption/types";
 
-import { ConfirmationModal } from "../modals/ConfirmationModal";
 import { PassphraseModal } from "../modals/PassphraseModal";
 
-type Step = "idle" | "passphrase" | "confirm-replace";
+type Step = "idle" | "passphrase";
 
 type Deps = {
   userId: string | undefined;
-  hasKeys: boolean;
   refreshKeysFromServer: () => Promise<void>;
 };
 
@@ -60,7 +56,6 @@ export type ImportKeyFlow = {
 
 export function useImportKeyFlow({
   userId,
-  hasKeys,
   refreshKeysFromServer,
 }: Deps): ImportKeyFlow {
   const { t } = useTranslation(["Common"]);
@@ -107,18 +102,17 @@ export function useImportKeyFlow({
       setIsPending(true);
       try {
         const kp = await unlockWithPassphrase(imported, passphrase);
-        if (hasKeys) {
-          setStep("confirm-replace");
-        } else {
-          await setEncryptionKeys({
-            publicKey: imported.publicKey,
-            privateKeyEnc: imported.privateKeyEnc,
-          });
-          SecretStorage.cacheUnlocked(userId, kp);
-          await refreshKeysFromServer();
-          toastr.success(t("Common:EncryptionKeyImported"));
-          reset();
-        }
+        const id = crypto.randomUUID();
+        await setEncryptionKeys({
+          id,
+          publicKey: imported.publicKey,
+          privateKeyEnc: imported.privateKeyEnc,
+        });
+        setActiveKeyId(userId, id);
+        SecretStorage.cacheUnlocked(userId, kp);
+        await refreshKeysFromServer();
+        toastr.success(t("Common:EncryptionKeyImported"));
+        reset();
       } catch (error) {
         toastr.error(t("Common:InvalidPassphrase"));
         console.error("Import passphrase verification failed:", error);
@@ -126,27 +120,8 @@ export function useImportKeyFlow({
         setIsPending(false);
       }
     },
-    [imported, userId, hasKeys, refreshKeysFromServer, t, reset],
+    [imported, userId, refreshKeysFromServer, t, reset],
   );
-
-  const onConfirmReplace = useCallback(async () => {
-    if (!imported || !userId) return;
-    try {
-      await updateEncryptionKeys({
-        publicKey: imported.publicKey,
-        privateKeyEnc: imported.privateKeyEnc,
-      });
-      // Force a fresh unlock so cache can't diverge from the new envelope.
-      SecretStorage.lock();
-      await refreshKeysFromServer();
-      toastr.success(t("Common:EncryptionKeyImported"));
-    } catch (error) {
-      toastr.error(t("Common:EncryptionError"));
-      console.error("Key replacement failed:", error);
-    } finally {
-      reset();
-    }
-  }, [imported, userId, refreshKeysFromServer, t, reset]);
 
   const fileInput = (
     <input
@@ -167,15 +142,6 @@ export function useImportKeyFlow({
           onCancel={reset}
           isNew={false}
           isLoading={isPending}
-        />
-      ) : null}
-      {step === "confirm-replace" ? (
-        <ConfirmationModal
-          visible
-          title={t("Common:ReplaceKey")}
-          message={t("Common:ReplaceKeyWarning")}
-          onConfirm={onConfirmReplace}
-          onCancel={reset}
         />
       ) : null}
     </>

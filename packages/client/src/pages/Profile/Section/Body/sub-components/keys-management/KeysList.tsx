@@ -104,11 +104,13 @@ const KeyItem: React.FC<KeyItemProps> = ({
           <Badge
             label={t("Common:Active")}
             backgroundColor={globalColors.secondGreen}
+            maxWidth="none"
           />
           {isCurrentDevice ? (
             <Badge
               label={t("Common:ThisDevice")}
               backgroundColor={globalColors.lightBlueMain}
+              maxWidth="none"
             />
           ) : null}
         </div>
@@ -208,6 +210,7 @@ export const KeysList: React.FC<KeysListProps> = ({
         <Badge
           label={t("Common:NoKey")}
           backgroundColor={globalColors.mainOrange}
+          maxWidth="none"
         />
         <Text fontSize="13px" color={globalColors.gray}>
           {t("Common:NoEncryptionKey")}

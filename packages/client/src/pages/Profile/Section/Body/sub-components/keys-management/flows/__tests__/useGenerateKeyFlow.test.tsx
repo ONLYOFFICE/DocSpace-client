@@ -28,23 +28,11 @@ import { act, render } from "@testing-library/react";
 import { useEffect } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-// Modal mocks capture props on mount and clear them on unmount, so stale
-// props from a prior render don't satisfy assertions made after reset().
 const captured = {
-  confirmation: null as Record<string, unknown> | null,
   passphrase: null as Record<string, unknown> | null,
   recovery: null as Record<string, unknown> | null,
 };
 
-vi.mock("../../modals/ConfirmationModal", () => ({
-  ConfirmationModal: (props: Record<string, unknown>) => {
-    captured.confirmation = props;
-    useEffect(() => () => {
-      captured.confirmation = null;
-    }, []);
-    return null;
-  },
-}));
 vi.mock("../../modals/PassphraseModal", () => ({
   PassphraseModal: (props: Record<string, unknown>) => {
     captured.passphrase = props;
@@ -80,7 +68,9 @@ vi.mock("@docspace/shared/services/encryption/secret-storage", () => ({
 }));
 vi.mock("@docspace/shared/api/privacy", () => ({
   setEncryptionKeys: vi.fn(),
-  updateEncryptionKeys: vi.fn(),
+}));
+vi.mock("@docspace/shared/context/encryption", () => ({
+  useEncryption: () => ({ suspendAutoLock: () => () => {} }),
 }));
 
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -90,10 +80,7 @@ import {
 } from "@docspace/shared/services/encryption/identity";
 import { generateRecoveryMnemonic } from "@docspace/shared/services/encryption/recovery";
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
-import {
-  setEncryptionKeys,
-  updateEncryptionKeys,
-} from "@docspace/shared/api/privacy";
+import { setEncryptionKeys } from "@docspace/shared/api/privacy";
 
 import {
   useGenerateKeyFlow,
@@ -103,7 +90,6 @@ import {
 let latest: GenerateKeyFlow;
 const Harness = (deps: {
   userId: string | undefined;
-  hasKeys: boolean;
   refreshKeysFromServer: () => Promise<void>;
 }) => {
   latest = useGenerateKeyFlow(deps);
@@ -126,13 +112,11 @@ const happyMocks = () => {
     privateKeyEnc: "enc-base64",
   });
   vi.mocked(setEncryptionKeys).mockResolvedValue(undefined as never);
-  vi.mocked(updateEncryptionKeys).mockResolvedValue(undefined as never);
 };
 
 describe("useGenerateKeyFlow", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    captured.confirmation = null;
     captured.passphrase = null;
     captured.recovery = null;
   });
@@ -141,42 +125,20 @@ describe("useGenerateKeyFlow", () => {
     vi.useRealTimers();
   });
 
-  describe("entry branch (hasKeys gate)", () => {
-    it("goes straight to passphrase when the user has no existing key", () => {
+  describe("entry branch", () => {
+    it("opens the passphrase modal regardless of existing keys", () => {
       render(
-        <Harness
-          userId="42"
-          hasKeys={false}
-          refreshKeysFromServer={vi.fn()}
-        />,
+        <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
       );
       act(() => latest.request());
       expect(captured.passphrase).not.toBeNull();
-      expect(captured.confirmation).toBeNull();
-    });
-
-    it("shows confirm-replace BEFORE passphrase when the user already has a key", () => {
-      render(
-        <Harness
-          userId="42"
-          hasKeys
-          refreshKeysFromServer={vi.fn()}
-        />,
-      );
-      act(() => latest.request());
-      expect(captured.confirmation?.visible).toBe(true);
-      expect(captured.passphrase).toBeNull();
     });
   });
 
   describe("onPassphraseSubmit", () => {
     it("toasts an error and does NOT generate keys when userId is undefined", async () => {
       render(
-        <Harness
-          userId={undefined}
-          hasKeys={false}
-          refreshKeysFromServer={vi.fn()}
-        />,
+        <Harness userId={undefined} refreshKeysFromServer={vi.fn()} />,
       );
       act(() => latest.request());
 
@@ -194,11 +156,7 @@ describe("useGenerateKeyFlow", () => {
     it("advances to recovery-display on successful keypair generation", async () => {
       happyMocks();
       render(
-        <Harness
-          userId="42"
-          hasKeys={false}
-          refreshKeysFromServer={vi.fn()}
-        />,
+        <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
       );
       act(() => latest.request());
 
@@ -218,11 +176,7 @@ describe("useGenerateKeyFlow", () => {
         new Error("rng failure"),
       );
       render(
-        <Harness
-          userId="42"
-          hasKeys={false}
-          refreshKeysFromServer={vi.fn()}
-        />,
+        <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
       );
       act(() => latest.request());
 
@@ -237,12 +191,12 @@ describe("useGenerateKeyFlow", () => {
     });
   });
 
-  describe("onRecoveryConfirm — API branch (hasKeys decides endpoint)", () => {
-    it("calls setEncryptionKeys for a new user (hasKeys=false)", async () => {
+  describe("onRecoveryConfirm", () => {
+    it("calls setEncryptionKeys with a fresh UUID and the serialized payload", async () => {
       happyMocks();
       const refresh = vi.fn().mockResolvedValue(undefined);
       render(
-        <Harness userId="42" hasKeys={false} refreshKeysFromServer={refresh} />,
+        <Harness userId="42" refreshKeysFromServer={refresh} />,
       );
       act(() => latest.request());
       await act(async () => {
@@ -255,39 +209,21 @@ describe("useGenerateKeyFlow", () => {
       });
 
       expect(setEncryptionKeys).toHaveBeenCalledTimes(1);
-      expect(updateEncryptionKeys).not.toHaveBeenCalled();
-      expect(setEncryptionKeys).toHaveBeenCalledWith({
-        publicKey: "pub-base64",
-        privateKeyEnc: "enc-base64",
-      });
-    });
-
-    it("calls updateEncryptionKeys (NOT setEncryptionKeys) when replacing", async () => {
-      happyMocks();
-      render(
-        <Harness userId="42" hasKeys refreshKeysFromServer={vi.fn()} />,
+      expect(setEncryptionKeys).toHaveBeenCalledWith(
+        expect.objectContaining({
+          publicKey: "pub-base64",
+          privateKeyEnc: "enc-base64",
+          id: expect.stringMatching(
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
+          ),
+        }),
       );
-      act(() => latest.request());
-      act(() => {
-        (captured.confirmation!.onConfirm as () => void)();
-      });
-      await act(async () => {
-        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
-          "secret",
-        );
-      });
-      await act(async () => {
-        await (captured.recovery!.onConfirm as () => Promise<void>)();
-      });
-
-      expect(updateEncryptionKeys).toHaveBeenCalledTimes(1);
-      expect(setEncryptionKeys).not.toHaveBeenCalled();
     });
 
     it("invokes serializeIdentity with the generated recovery mnemonic", async () => {
       happyMocks();
       render(
-        <Harness userId="42" hasKeys={false} refreshKeysFromServer={vi.fn()} />,
+        <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
       );
       act(() => latest.request());
       await act(async () => {
@@ -320,7 +256,7 @@ describe("useGenerateKeyFlow", () => {
       });
 
       render(
-        <Harness userId="42" hasKeys={false} refreshKeysFromServer={refresh} />,
+        <Harness userId="42" refreshKeysFromServer={refresh} />,
       );
       act(() => latest.request());
       await act(async () => {
@@ -340,7 +276,7 @@ describe("useGenerateKeyFlow", () => {
       vi.mocked(setEncryptionKeys).mockRejectedValueOnce(new Error("500"));
 
       render(
-        <Harness userId="42" hasKeys={false} refreshKeysFromServer={vi.fn()} />,
+        <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
       );
       act(() => latest.request());
       await act(async () => {

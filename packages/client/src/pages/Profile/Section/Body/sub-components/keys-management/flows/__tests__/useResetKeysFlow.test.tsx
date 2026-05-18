@@ -72,6 +72,7 @@ const keys = (ids: string[]): TEncryptionKeyPair[] =>
 
 let latest: ResetKeysFlow;
 const Harness = (deps: {
+  userId?: string;
   encryptionKeys?: TEncryptionKeyPair[] | null;
   refreshKeysFromServer: () => Promise<void>;
 }) => {

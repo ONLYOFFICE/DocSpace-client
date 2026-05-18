@@ -73,9 +73,6 @@ export const privacyroomKeysHandlers = (
   const userId =
     opts.userId ?? "66faa6e4-f133-11ea-b126-00ffeec8b4ef"; // matches successSelf
 
-  // Per-factory counter so parallel test runs don't collide on key ids.
-  let keyIdCounter = state.length + 1;
-
   if (opts.handle) {
     opts.handle.current = {
       getKeys: () => [...state],
@@ -93,38 +90,45 @@ export const privacyroomKeysHandlers = (
 
     http.post(base, async ({ request }) => {
       const body = (await request.json()) as {
+        id?: string;
         publicKey: string;
         privateKeyEnc: string;
       };
       requests.push({ method: "POST", url: base, body });
-      // Production server replaces the user's envelope on POST.
-      state.length = 0;
-      state.push({
-        id: String(keyIdCounter++),
-        userId,
-        publicKey: body.publicKey,
-        privateKeyEnc: body.privateKeyEnc,
-        date: new Date().toISOString(),
-      });
-      return okResponse({ isSet: true });
+      const id = body.id ?? "00000000-0000-0000-0000-000000000000";
+      const existingIdx = state.findIndex((k) => k.id === id);
+      if (existingIdx === -1) {
+        state.push({
+          id,
+          userId,
+          publicKey: body.publicKey,
+          privateKeyEnc: body.privateKeyEnc,
+          date: new Date().toISOString(),
+        });
+      }
+      return okResponse(state);
     }),
 
     http.put(base, async ({ request }) => {
       const body = (await request.json()) as {
+        id?: string;
         publicKey: string;
         privateKeyEnc: string;
         update: boolean;
       };
       requests.push({ method: "PUT", url: base, body });
-      state.length = 0;
-      state.push({
-        id: String(keyIdCounter++),
-        userId,
-        publicKey: body.publicKey,
-        privateKeyEnc: body.privateKeyEnc,
-        date: new Date().toISOString(),
-      });
-      return okResponse({ isSet: true });
+      const id = body.id ?? "00000000-0000-0000-0000-000000000000";
+      const existingIdx = state.findIndex((k) => k.id === id);
+      if (existingIdx !== -1) {
+        state[existingIdx] = {
+          id,
+          userId,
+          publicKey: body.publicKey,
+          privateKeyEnc: body.privateKeyEnc,
+          date: new Date().toISOString(),
+        };
+      }
+      return okResponse(state);
     }),
 
     http.delete(`${base}/:keyId`, ({ params }) => {

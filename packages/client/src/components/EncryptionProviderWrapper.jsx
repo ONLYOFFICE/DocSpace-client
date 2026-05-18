@@ -32,6 +32,7 @@ import {
   EncryptionProvider,
   useEncryption,
 } from "@docspace/shared/context/encryption";
+import { getActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
 import {
   registerGhostStateHandler,
   clearGhostStateHandler,
@@ -170,15 +171,22 @@ const EncryptionProviderWrapper = ({ userKeys, children }) => {
 // encryptionKeys[].userId is sometimes blank in the server response; use userStore.user.id instead.
 export default inject(({ userStore }) => {
   const keys = userStore?.encryptionKeys;
-  const firstKey = keys && keys.length > 0 ? keys[0] : null;
   const ownerId = userStore?.user?.id;
+  const ownerIdStr = ownerId ? String(ownerId) : undefined;
+
+  let chosen = null;
+  if (keys && keys.length > 0) {
+    const preferredId = getActiveKeyId(ownerIdStr);
+    chosen =
+      (preferredId && keys.find((k) => k.id === preferredId)) || keys[0];
+  }
 
   const userKeys =
-    firstKey && ownerId
+    chosen && ownerIdStr
       ? {
-          publicKey: firstKey.publicKey,
-          privateKeyEnc: firstKey.privateKeyEnc,
-          userId: String(ownerId),
+          publicKey: chosen.publicKey,
+          privateKeyEnc: chosen.privateKeyEnc,
+          userId: ownerIdStr,
         }
       : null;
 

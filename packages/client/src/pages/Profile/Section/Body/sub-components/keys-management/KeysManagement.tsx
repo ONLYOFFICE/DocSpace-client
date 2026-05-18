@@ -75,10 +75,9 @@ const KeysManagement = ({
     }
   }, [setUserEncryptionKeys]);
 
-  const generate = useGenerateKeyFlow({ userId, hasKeys, refreshKeysFromServer });
+  const generate = useGenerateKeyFlow({ userId, refreshKeysFromServer });
   const importFlow = useImportKeyFlow({
     userId,
-    hasKeys,
     refreshKeysFromServer,
   });
   const recover = useRecoverKeyFlow({
@@ -86,9 +85,13 @@ const KeysManagement = ({
     encryptionKeys,
     refreshKeysFromServer,
   });
-  const remove = useDeleteKeyFlow({ refreshKeysFromServer });
+  const remove = useDeleteKeyFlow({ userId, refreshKeysFromServer });
   const rotate = useRotatePassphraseFlow({ userId, refreshKeysFromServer });
-  const reset = useResetKeysFlow({ encryptionKeys, refreshKeysFromServer });
+  const reset = useResetKeysFlow({
+    userId,
+    encryptionKeys,
+    refreshKeysFromServer,
+  });
 
   const busy =
     generate.isPending ||

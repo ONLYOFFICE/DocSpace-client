@@ -30,11 +30,16 @@ import { useTranslation } from "react-i18next";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
+import {
+  clearActiveKeyId,
+  getActiveKeyId,
+} from "@docspace/shared/services/encryption/active-key-preference";
 import { deleteEncryptionKey } from "@docspace/shared/api/privacy";
 
 import { ConfirmationModal } from "../modals/ConfirmationModal";
 
 type Deps = {
+  userId?: string;
   refreshKeysFromServer: () => Promise<void>;
 };
 
@@ -46,6 +51,7 @@ export type DeleteKeyFlow = {
 };
 
 export function useDeleteKeyFlow({
+  userId,
   refreshKeysFromServer,
 }: Deps): DeleteKeyFlow {
   const { t } = useTranslation(["Common"]);
@@ -64,6 +70,9 @@ export function useDeleteKeyFlow({
     setConfirming(null);
     try {
       await deleteEncryptionKey(confirming);
+      if (getActiveKeyId(userId) === confirming) {
+        clearActiveKeyId(userId);
+      }
       SecretStorage.lock();
       await refreshKeysFromServer();
       toastr.success(t("Common:EncryptionKeyDeleted"));
@@ -74,7 +83,7 @@ export function useDeleteKeyFlow({
       setIsPending(false);
       setPendingId(null);
     }
-  }, [confirming, refreshKeysFromServer, t]);
+  }, [confirming, userId, refreshKeysFromServer, t]);
 
   const modals = confirming !== null ? (
     <ConfirmationModal

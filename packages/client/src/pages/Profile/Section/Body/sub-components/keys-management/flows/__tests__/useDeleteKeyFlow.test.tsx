@@ -63,7 +63,10 @@ import {
 } from "../useDeleteKeyFlow";
 
 let latest: DeleteKeyFlow;
-const Harness = (deps: { refreshKeysFromServer: () => Promise<void> }) => {
+const Harness = (deps: {
+  userId?: string;
+  refreshKeysFromServer: () => Promise<void>;
+}) => {
   latest = useDeleteKeyFlow(deps);
   return <>{latest.modals}</>;
 };

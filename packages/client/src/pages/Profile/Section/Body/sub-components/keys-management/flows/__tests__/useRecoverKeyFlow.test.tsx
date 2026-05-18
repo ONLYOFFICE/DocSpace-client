@@ -265,6 +265,7 @@ describe("useRecoverKeyFlow", () => {
         { recoveryMnemonic: "twelve words" },
       );
       expect(updateEncryptionKeys).toHaveBeenCalledWith({
+        id: "1",
         publicKey: "pub-new",
         privateKeyEnc: "enc-new",
       });

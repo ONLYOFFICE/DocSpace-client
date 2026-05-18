@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export type TPrivacyRoomRequest = {
+  id?: string;
   publicKey: string;
   privateKeyEnc: string;
   update?: boolean;

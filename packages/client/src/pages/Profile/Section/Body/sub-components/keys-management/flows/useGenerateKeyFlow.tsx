@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useCallback, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -35,21 +35,18 @@ import {
 } from "@docspace/shared/services/encryption/identity";
 import { generateRecoveryMnemonic } from "@docspace/shared/services/encryption/recovery";
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
-import {
-  setEncryptionKeys,
-  updateEncryptionKeys,
-} from "@docspace/shared/api/privacy";
+import { setActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
+import { setEncryptionKeys } from "@docspace/shared/api/privacy";
+import { useEncryption } from "@docspace/shared/context/encryption";
 import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
 
-import { ConfirmationModal } from "../modals/ConfirmationModal";
 import { PassphraseModal } from "../modals/PassphraseModal";
 import { RecoveryPhraseDisplayModal } from "../modals/RecoveryPhraseDisplayModal";
 
-type Step = "idle" | "confirm-replace" | "passphrase" | "recovery-display";
+type Step = "idle" | "passphrase" | "recovery-display";
 
 type Deps = {
   userId: string | undefined;
-  hasKeys: boolean;
   refreshKeysFromServer: () => Promise<void>;
 };
 
@@ -61,15 +58,20 @@ export type GenerateKeyFlow = {
 
 export function useGenerateKeyFlow({
   userId,
-  hasKeys,
   refreshKeysFromServer,
 }: Deps): GenerateKeyFlow {
   const { t } = useTranslation(["Common"]);
+  const { suspendAutoLock } = useEncryption();
   const [step, setStep] = useState<Step>("idle");
   const [isPending, setIsPending] = useState(false);
   const [keyPair, setKeyPair] = useState<IdentityKeyPair | null>(null);
   const [passphrase, setPassphrase] = useState<string | null>(null);
   const [mnemonic, setMnemonic] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (step !== "recovery-display") return undefined;
+    return suspendAutoLock();
+  }, [step, suspendAutoLock]);
 
   const reset = useCallback(() => {
     setStep("idle");
@@ -79,8 +81,8 @@ export function useGenerateKeyFlow({
   }, []);
 
   const request = useCallback(() => {
-    setStep(hasKeys ? "confirm-replace" : "passphrase");
-  }, [hasKeys]);
+    setStep("passphrase");
+  }, []);
 
   const onPassphraseSubmit = useCallback(
     async (input: string) => {
@@ -115,10 +117,12 @@ export function useGenerateKeyFlow({
         recoveryMnemonic: mnemonic,
       });
       const payload = {
+        id: crypto.randomUUID(),
         publicKey: serialized.publicKey,
         privateKeyEnc: serialized.privateKeyEnc,
       };
-      await (hasKeys ? updateEncryptionKeys(payload) : setEncryptionKeys(payload));
+      await setEncryptionKeys(payload);
+      setActiveKeyId(userId, payload.id);
       SecretStorage.cacheUnlocked(userId, keyPair);
       await refreshKeysFromServer();
       toastr.success(t("Common:EncryptionKeyGenerated"));
@@ -129,19 +133,10 @@ export function useGenerateKeyFlow({
       setIsPending(false);
       reset();
     }
-  }, [keyPair, passphrase, mnemonic, userId, hasKeys, refreshKeysFromServer, reset, t]);
+  }, [keyPair, passphrase, mnemonic, userId, refreshKeysFromServer, reset, t]);
 
   const modals = (
     <>
-      {step === "confirm-replace" ? (
-        <ConfirmationModal
-          visible
-          title={t("Common:ReplaceKey")}
-          message={t("Common:ReplaceKeyWarning")}
-          onConfirm={() => setStep("passphrase")}
-          onCancel={reset}
-        />
-      ) : null}
       {step === "passphrase" ? (
         <PassphraseModal
           visible

@@ -34,6 +34,11 @@ import {
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Text } from "@docspace/ui-kit/components/text";
+import {
+  InputSize,
+  InputType,
+  TextInput,
+} from "@docspace/ui-kit/components/text-input";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import {
   pickQuizPositions,
@@ -205,19 +210,19 @@ export const RecoveryPhraseDisplayModal: React.FC<
                   >
                     {t("Common:RecoveryQuizWordLabel", { number: pos + 1 })}
                   </label>
-                  <input
+                  <TextInput
                     id={`quiz-input-${idx}`}
                     name={`quiz-input-${idx}`}
-                    type="text"
+                    type={InputType.text}
+                    size={InputSize.base}
+                    scale
                     autoComplete="off"
                     autoCorrect="off"
                     autoCapitalize="off"
                     spellCheck={false}
-                    className={`${styles.quizInput} ${
-                      quizError ? styles.quizInputError : ""
-                    }`}
                     value={answers[idx] ?? ""}
-                    disabled={isLoading}
+                    isDisabled={isLoading}
+                    hasError={!!quizError}
                     onChange={(e) => updateAnswer(idx, e.target.value)}
                     tabIndex={idx + 1}
                   />

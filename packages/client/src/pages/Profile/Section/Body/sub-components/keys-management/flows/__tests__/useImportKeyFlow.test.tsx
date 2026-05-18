@@ -29,19 +29,9 @@ import { useEffect } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const captured = {
-  confirmation: null as Record<string, unknown> | null,
   passphrase: null as Record<string, unknown> | null,
 };
 
-vi.mock("../../modals/ConfirmationModal", () => ({
-  ConfirmationModal: (props: Record<string, unknown>) => {
-    captured.confirmation = props;
-    useEffect(() => () => {
-      captured.confirmation = null;
-    }, []);
-    return null;
-  },
-}));
 vi.mock("../../modals/PassphraseModal", () => ({
   PassphraseModal: (props: Record<string, unknown>) => {
     captured.passphrase = props;
@@ -65,7 +55,6 @@ vi.mock("@docspace/shared/services/encryption/secret-storage", () => ({
 }));
 vi.mock("@docspace/shared/api/privacy", () => ({
   setEncryptionKeys: vi.fn(),
-  updateEncryptionKeys: vi.fn(),
 }));
 
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -74,10 +63,7 @@ import {
   unlockWithPassphrase,
 } from "@docspace/shared/services/encryption/identity";
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
-import {
-  setEncryptionKeys,
-  updateEncryptionKeys,
-} from "@docspace/shared/api/privacy";
+import { setEncryptionKeys } from "@docspace/shared/api/privacy";
 
 import {
   useImportKeyFlow,
@@ -87,7 +73,6 @@ import {
 let latest: ImportKeyFlow;
 const Harness = (deps: {
   userId: string | undefined;
-  hasKeys: boolean;
   refreshKeysFromServer: () => Promise<void>;
 }) => {
   latest = useImportKeyFlow(deps);
@@ -109,8 +94,6 @@ const dummyKeyPair = {
   privateKey: new Uint8Array(32),
 };
 
-// jsdom has no DataTransfer/FileList constructors — install a FileList-shaped
-// object directly; the hook only reads `event.target.files?.[0]`.
 const fireFileChosen = (file?: File) => {
   const input = document.querySelector<HTMLInputElement>("input[type=file]");
   if (!input) throw new Error("file input not in DOM");
@@ -134,24 +117,18 @@ const happyImport = () => {
     dummyKeyPair as any,
   );
   vi.mocked(setEncryptionKeys).mockResolvedValue(undefined as never);
-  vi.mocked(updateEncryptionKeys).mockResolvedValue(undefined as never);
 };
 
 describe("useImportKeyFlow", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    captured.confirmation = null;
     captured.passphrase = null;
   });
 
   describe("file selection", () => {
     it("does nothing when the user cancels the file picker (no file selected)", async () => {
       render(
-        <Harness
-          userId="42"
-          hasKeys={false}
-          refreshKeysFromServer={vi.fn()}
-        />,
+        <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
       );
       await act(async () => {
         fireFileChosen(undefined);
@@ -165,11 +142,7 @@ describe("useImportKeyFlow", () => {
         new Error("Not a DocSpace identity file"),
       );
       render(
-        <Harness
-          userId="42"
-          hasKeys={false}
-          refreshKeysFromServer={vi.fn()}
-        />,
+        <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
       );
       await act(async () => {
         fireFileChosen(new File(["{}"], "key.json", { type: "application/json" }));
@@ -181,11 +154,7 @@ describe("useImportKeyFlow", () => {
     it("advances to passphrase step on successful import", async () => {
       happyImport();
       render(
-        <Harness
-          userId="42"
-          hasKeys={false}
-          refreshKeysFromServer={vi.fn()}
-        />,
+        <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
       );
       await act(async () => {
         fireFileChosen(new File(["{}"], "key.json"));
@@ -194,12 +163,12 @@ describe("useImportKeyFlow", () => {
     });
   });
 
-  describe("onPassphraseSubmit — new user (hasKeys=false)", () => {
-    it("uploads via setEncryptionKeys and caches the unlocked identity", async () => {
+  describe("onPassphraseSubmit", () => {
+    it("uploads via setEncryptionKeys with a fresh UUID and caches the unlocked identity", async () => {
       happyImport();
       const refresh = vi.fn().mockResolvedValue(undefined);
       render(
-        <Harness userId="42" hasKeys={false} refreshKeysFromServer={refresh} />,
+        <Harness userId="42" refreshKeysFromServer={refresh} />,
       );
       await act(async () => {
         fireFileChosen(new File(["{}"], "key.json"));
@@ -211,16 +180,19 @@ describe("useImportKeyFlow", () => {
       });
 
       expect(unlockWithPassphrase).toHaveBeenCalledTimes(1);
-      expect(setEncryptionKeys).toHaveBeenCalledWith({
-        publicKey: dummyImported.publicKey,
-        privateKeyEnc: dummyImported.privateKeyEnc,
-      });
+      expect(setEncryptionKeys).toHaveBeenCalledWith(
+        expect.objectContaining({
+          publicKey: dummyImported.publicKey,
+          privateKeyEnc: dummyImported.privateKeyEnc,
+          id: expect.stringMatching(
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
+          ),
+        }),
+      );
       expect(SecretStorage.cacheUnlocked).toHaveBeenCalledWith(
         "42",
         dummyKeyPair,
       );
-      expect(updateEncryptionKeys).not.toHaveBeenCalled();
-      expect(SecretStorage.lock).not.toHaveBeenCalled();
     });
 
     it("toasts InvalidPassphrase and stays in passphrase step on unlock failure", async () => {
@@ -233,7 +205,7 @@ describe("useImportKeyFlow", () => {
       );
 
       render(
-        <Harness userId="42" hasKeys={false} refreshKeysFromServer={vi.fn()} />,
+        <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
       );
       await act(async () => {
         fireFileChosen(new File(["{}"], "key.json"));
@@ -248,13 +220,13 @@ describe("useImportKeyFlow", () => {
       expect(captured.passphrase).not.toBeNull();
       expect(setEncryptionKeys).not.toHaveBeenCalled();
     });
-  });
 
-  describe("onPassphraseSubmit — existing user (hasKeys=true)", () => {
-    it("opens the confirm-replace dialog (does NOT call updateEncryptionKeys yet)", async () => {
+    it("does NOT cache identity when setEncryptionKeys fails", async () => {
       happyImport();
+      vi.mocked(setEncryptionKeys).mockRejectedValueOnce(new Error("network"));
+
       render(
-        <Harness userId="42" hasKeys refreshKeysFromServer={vi.fn()} />,
+        <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
       );
       await act(async () => {
         fireFileChosen(new File(["{}"], "key.json"));
@@ -265,67 +237,7 @@ describe("useImportKeyFlow", () => {
         );
       });
 
-      expect(unlockWithPassphrase).toHaveBeenCalledTimes(1);
-      expect(updateEncryptionKeys).not.toHaveBeenCalled();
-      expect(setEncryptionKeys).not.toHaveBeenCalled();
-      expect(captured.confirmation?.visible).toBe(true);
-    });
-  });
-
-  describe("onConfirmReplace — UX ordering regression guard", () => {
-    it("locks SecretStorage AFTER updateEncryptionKeys succeeds", async () => {
-      happyImport();
-      const callOrder: string[] = [];
-      vi.mocked(updateEncryptionKeys).mockImplementationOnce((async () => {
-        callOrder.push("api");
-      }) as never);
-      vi.mocked(SecretStorage.lock).mockImplementationOnce(() => {
-        callOrder.push("lock");
-      });
-      const refresh = vi.fn().mockImplementation(async () => {
-        callOrder.push("refresh");
-      });
-
-      render(
-        <Harness userId="42" hasKeys refreshKeysFromServer={refresh} />,
-      );
-      await act(async () => {
-        fireFileChosen(new File(["{}"], "key.json"));
-      });
-      await act(async () => {
-        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
-          "secret",
-        );
-      });
-      await act(async () => {
-        await (captured.confirmation!.onConfirm as () => Promise<void>)();
-      });
-
-      expect(callOrder).toEqual(["api", "lock", "refresh"]);
-    });
-
-    it("does NOT lock when updateEncryptionKeys fails", async () => {
-      happyImport();
-      vi.mocked(updateEncryptionKeys).mockRejectedValueOnce(
-        new Error("network"),
-      );
-
-      render(
-        <Harness userId="42" hasKeys refreshKeysFromServer={vi.fn()} />,
-      );
-      await act(async () => {
-        fireFileChosen(new File(["{}"], "key.json"));
-      });
-      await act(async () => {
-        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
-          "secret",
-        );
-      });
-      await act(async () => {
-        await (captured.confirmation!.onConfirm as () => Promise<void>)();
-      });
-
-      expect(SecretStorage.lock).not.toHaveBeenCalled();
+      expect(SecretStorage.cacheUnlocked).not.toHaveBeenCalled();
       expect(toastr.error).toHaveBeenCalledTimes(1);
     });
   });

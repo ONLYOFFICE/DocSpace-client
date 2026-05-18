@@ -35,6 +35,7 @@ import {
 } from "@docspace/shared/services/encryption/identity";
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import { InvalidRecoveryPhraseError } from "@docspace/shared/services/encryption/errors";
+import { setActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
 import { updateEncryptionKeys } from "@docspace/shared/api/privacy";
 import type {
   IdentityKeyPair,
@@ -118,15 +119,19 @@ export function useRecoverKeyFlow({
   const onNewPassphrase = useCallback(
     async (newPassphrase: string) => {
       if (!keyPair || !mnemonic || !userId) return;
+      const targetId = encryptionKeys?.[0]?.id;
+      if (!targetId) return;
       setIsPending(true);
       try {
         const serialized = await serializeIdentity(keyPair, newPassphrase, {
           recoveryMnemonic: mnemonic,
         });
         await updateEncryptionKeys({
+          id: targetId,
           publicKey: serialized.publicKey,
           privateKeyEnc: serialized.privateKeyEnc,
         });
+        setActiveKeyId(userId, targetId);
         SecretStorage.cacheUnlocked(userId, keyPair);
         await refreshKeysFromServer();
         toastr.success(t("Common:RecoveryPhraseRestored"));
@@ -138,7 +143,7 @@ export function useRecoverKeyFlow({
         reset();
       }
     },
-    [keyPair, mnemonic, userId, refreshKeysFromServer, reset, t],
+    [keyPair, mnemonic, userId, encryptionKeys, refreshKeysFromServer, reset, t],
   );
 
   const modals = (

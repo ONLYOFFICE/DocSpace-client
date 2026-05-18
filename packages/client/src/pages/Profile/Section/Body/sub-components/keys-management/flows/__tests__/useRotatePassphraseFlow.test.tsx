@@ -165,6 +165,7 @@ describe("useRotatePassphraseFlow", () => {
       "new",
     );
     expect(updateEncryptionKeys).toHaveBeenCalledWith({
+      id: dummyKey.id,
       publicKey: "pub-new",
       privateKeyEnc: "enc-new",
     });

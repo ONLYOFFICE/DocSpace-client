@@ -53,6 +53,16 @@ type PassphraseModalProps = {
 
 const MIN_LENGTH = PASSPHRASE_MIN_LENGTH;
 
+const PASSPHRASE_SETTINGS = {
+  minLength: MIN_LENGTH,
+  upperCase: true,
+  digits: true,
+  specSymbols: true,
+  digitsRegexStr: "(?=.*\\d)",
+  upperCaseRegexStr: "(?=.*[A-Z])",
+  specSymbolsRegexStr: "(?=.*[\\x21-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7E])",
+} as const;
+
 export const PassphraseModal: React.FC<PassphraseModalProps> = ({
   visible,
   onSubmit,
@@ -66,29 +76,21 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
   const [passphrase, setPassphrase] = useState("");
   const [confirmPassphrase, setConfirmPassphrase] = useState("");
   const [error, setError] = useState("");
+  const [rulesPassed, setRulesPassed] = useState(false);
 
   useEffect(() => {
     if (visible) {
       setPassphrase("");
       setConfirmPassphrase("");
       setError("");
+      setRulesPassed(false);
       setTimeout(() => inputRef.current?.focus(), 100);
     }
   }, [visible]);
 
   const handleSubmit = useCallback(() => {
-    if (passphrase.length < MIN_LENGTH) {
-      setError(t("Common:PassphraseTooShort", { length: MIN_LENGTH }));
-      return;
-    }
-
     if (isNew && !isPassphraseAcceptable(passphrase)) {
       setError(t("Common:PassphraseWeak"));
-      return;
-    }
-
-    if (isNew && passphrase !== confirmPassphrase) {
-      setError(t("Common:PassphraseMismatch"));
       return;
     }
 
@@ -96,7 +98,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
     setPassphrase("");
     setConfirmPassphrase("");
     setError("");
-  }, [passphrase, confirmPassphrase, isNew, onSubmit, t]);
+  }, [passphrase, isNew, onSubmit, t]);
 
   const handleCancel = useCallback(() => {
     setPassphrase("");
@@ -105,9 +107,9 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
     onCancel();
   }, [onCancel]);
 
-  const isValid =
-    passphrase.length >= MIN_LENGTH &&
-    (!isNew || passphrase === confirmPassphrase);
+  const isValid = isNew
+    ? rulesPassed && passphrase === confirmPassphrase
+    : passphrase.length >= MIN_LENGTH;
 
   const isDisabled = !isValid || isLoading;
 
@@ -152,7 +154,17 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
               placeholder={t("Common:Passphrase")}
               scale
               size={InputSize.base}
-              simpleView
+              simpleView={!isNew}
+              isFullWidth
+              passwordSettings={PASSPHRASE_SETTINGS}
+              onValidateInput={(progressScore) => setRulesPassed(progressScore)}
+              tooltipPasswordTitle={`${t("Common:PassphraseLimitMessage")}:`}
+              tooltipPasswordLength={`${t(
+                "Common:PasswordMinimumLength",
+              )}: ${MIN_LENGTH}`}
+              tooltipPasswordDigits={t("Common:PasswordLimitDigits")}
+              tooltipPasswordCapital={t("Common:PasswordLimitUpperCase")}
+              tooltipPasswordSpecial={t("Common:PasswordLimitSpecialSymbols")}
               isDisabled={isLoading}
               hasError={!!error}
               autoComplete="new-password"

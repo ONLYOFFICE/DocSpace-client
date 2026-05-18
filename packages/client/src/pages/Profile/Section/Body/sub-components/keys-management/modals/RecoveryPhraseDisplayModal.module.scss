@@ -104,26 +104,6 @@
   font-weight: 600;
 }
 
-.quizInput {
-  padding: 8px 10px;
-  border: 1px solid var(--input-border-color);
-  border-radius: 4px;
-  background: var(--input-block-bg);
-  color: var(--input-color);
-  font-family: "Roboto Mono", monospace;
-  font-size: 13px;
-  width: 100%;
-
-  &:focus-visible {
-    outline: 2px solid var(--accent-main);
-    outline-offset: 1px;
-  }
-
-  &.quizInputError {
-    border-color: var(--status-error);
-  }
-}
-
 .quizError {
   color: var(--status-error);
   font-size: 12px;

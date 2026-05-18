@@ -73,6 +73,7 @@ export type EncryptionContextValue = {
   requireIdentity: () => Promise<IdentityKeyPair | null>;
   resolveKeyMismatch: (info: KeyMismatchInfo) => Promise<KeyMismatchDecision>;
   clearError: () => void;
+  suspendAutoLock: () => () => void;
 };
 
 type EncryptionProviderProps = {
@@ -114,9 +115,20 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
   const [isUnlocking, setIsUnlocking] = useState(false);
   const [unlockError, setUnlockError] = useState<string | null>(null);
   const [showPassphraseDialog, setShowPassphraseDialog] = useState(false);
+  const [autoLockSuspendCount, setAutoLockSuspendCount] = useState(0);
   const pendingResolveRef = useRef<
     ((kp: IdentityKeyPair | null) => void) | null
   >(null);
+
+  const suspendAutoLock = useCallback((): (() => void) => {
+    setAutoLockSuspendCount((c) => c + 1);
+    let released = false;
+    return () => {
+      if (released) return;
+      released = true;
+      setAutoLockSuspendCount((c) => Math.max(0, c - 1));
+    };
+  }, []);
 
   const [keyChangeRequest, setKeyChangeRequest] =
     useState<KeyMismatchInfo | null>(null);
@@ -223,6 +235,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
 
   useEffect(() => {
     if (typeof document === "undefined") return undefined;
+    if (autoLockSuspendCount > 0) return undefined;
     const handler = () => {
       if (document.visibilityState === "hidden") {
         SecretStorage.lock();
@@ -233,10 +246,11 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     return () => {
       document.removeEventListener("visibilitychange", handler);
     };
-  }, []);
+  }, [autoLockSuspendCount]);
 
   useEffect(() => {
     if (!isUnlocked) return undefined;
+    if (autoLockSuspendCount > 0) return undefined;
     if (typeof document === "undefined" || typeof window === "undefined") {
       return undefined;
     }
@@ -273,7 +287,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
         document.removeEventListener(ev, resetTimer);
       }
     };
-  }, [isUnlocked]);
+  }, [isUnlocked, autoLockSuspendCount]);
 
   const resolveKeyMismatch = useCallback(
     async (info: KeyMismatchInfo): Promise<KeyMismatchDecision> => {
@@ -351,6 +365,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       requireIdentity,
       resolveKeyMismatch,
       clearError,
+      suspendAutoLock,
     }),
     [
       isUnlocked,
@@ -364,6 +379,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       requireIdentity,
       resolveKeyMismatch,
       clearError,
+      suspendAutoLock,
     ],
   );
 

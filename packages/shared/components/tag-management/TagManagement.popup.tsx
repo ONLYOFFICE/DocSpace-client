@@ -69,6 +69,7 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
   access,
   onDeleteTag,
   onEditTag,
+  onTagsChanged,
   roomName,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -148,12 +149,17 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
             roomTags={roomTags}
             access={access}
           >
-            <TagManagementFilter roomId={roomId} roomName={roomName} />
+            <TagManagementFilter
+              roomId={roomId}
+              roomName={roomName}
+              onTagsChanged={onTagsChanged}
+            />
             <TagManagementContent
               roomId={roomId}
               onEditTag={onEditTag}
               onDeleteTag={onDeleteTag}
               onSelectTag={onSelectTag}
+              onTagsChanged={onTagsChanged}
             />
           </TagManagementProvider>
         ))

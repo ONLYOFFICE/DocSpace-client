@@ -36,6 +36,11 @@ import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
+import {
+  TagManagement,
+  type AccessTagManagement,
+} from "@docspace/shared/components/tag-management";
+import type { TagClickEvent } from "@docspace/ui-kit/components/tag";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
@@ -65,6 +70,7 @@ type RoomsTableViewRowProps = {
   timezone: string;
   lastColumn: string;
   onEditRoom?: (item: TFolderItem | TFileItem) => void;
+  onTagsChanged?: (id: number) => void;
 };
 
 const RoomsTableViewRow = observer(
@@ -74,6 +80,7 @@ const RoomsTableViewRow = observer(
     timezone,
     lastColumn,
     onEditRoom,
+    onTagsChanged,
   }: RoomsTableViewRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
@@ -87,14 +94,35 @@ const RoomsTableViewRow = observer(
     const { getContextModel } = useRoomContextMenuModel(onEditRoom);
     const isChecked = filesSelectionStore.isCheckedItem(item);
     const value = generateFilesItemValue(item, false, index);
+    const [isHovered, setIsHovered] = React.useState(false);
 
     const roomItem = item as TFolderItem & {
       tags?: string[];
       createdBy?: { displayName?: string };
+      security?: { EditRoom?: boolean };
     };
 
-    const tags = roomItem.tags?.join(", ") ?? "";
+    const roomTags = roomItem.tags ?? [];
     const owner = roomItem.createdBy?.displayName ?? "";
+    const hasEditAccess = !!roomItem.security?.EditRoom;
+
+    const tagAccess: AccessTagManagement = {
+      canCreate: hasEditAccess,
+      canBindTag: hasEditAccess,
+      canSearch: hasEditAccess,
+      canEdit: false,
+      canRemove: false,
+    };
+
+    const onSelectTag = React.useCallback((_tag: TagClickEvent) => {}, []);
+
+    // TEMPORARY: refresh the room after tag bind/unbind/create via callback.
+    // Replace with WebSocket MODIFY_FOLDER subscription once sockets are
+    // enabled in the SDK (initSocket={false} in providers).
+    const onRoomTagsChanged = React.useCallback(() => {
+      onTagsChanged?.(item.id as number);
+    }, [item.id, onTagsChanged]);
+
     const lastActivity = getCorrectDate(
       i18n.language || "",
       item.updated,
@@ -154,6 +182,8 @@ const RoomsTableViewRow = observer(
         getContextModel={() => getContextModel(item, true)}
         onClick={onRowClick}
         onDoubleClick={onRowDoubleClick}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         selectionProp={{
           className: classNames("files-item", "table-container_file-name-cell"),
           value,
@@ -202,7 +232,16 @@ const RoomsTableViewRow = observer(
         <TableCell
           className={lastColumn === "Tags" ? styles.lastCell : undefined}
         >
-          <span className={styles.secondaryCell}>{tags}</span>
+          <TagManagement
+            id={item.id}
+            tags={roomTags}
+            columnCount={2}
+            isActive={isHovered || isChecked}
+            access={tagAccess}
+            roomName={item.title}
+            onSelectTag={onSelectTag}
+            onTagsChanged={onRoomTagsChanged}
+          />
           {lastColumn === "Tags" ? quickButtonsNode : null}
         </TableCell>
         <TableCell

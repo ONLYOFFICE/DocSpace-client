@@ -54,6 +54,7 @@ import styles from "./TagManagement.module.scss";
 export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
   roomId,
   roomName,
+  onTagsChanged,
 }) => {
   const { t } = useTranslation("Common");
   const isMobile = useIsMobile();
@@ -101,13 +102,22 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
     createTag.mutate(trimmedValue, {
       onSuccess: () => {
         setTags(updatedTags);
+        onTagsChanged?.();
       },
       onError: (error) => {
         console.error("Failed to create tag:", error);
         toastr.error(error);
       },
     });
-  }, [searchValue, tags, clearSearch, createTag, setTags, showCreateTag]);
+  }, [
+    searchValue,
+    tags,
+    clearSearch,
+    createTag,
+    setTags,
+    showCreateTag,
+    onTagsChanged,
+  ]);
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {

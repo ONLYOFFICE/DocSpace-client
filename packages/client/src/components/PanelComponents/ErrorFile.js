@@ -41,11 +41,19 @@ const ErrorFile = ({
   const { isRTL } = useInterfaceDirection();
   const placeTooltip = isRTL ? "right" : "left";
 
+  const tooltipContent = item.isQuotaError
+    ? t("QuotaExceededTooltip")
+    : item.error || t("UploadingError");
+
+  const retryLabel = item.isQuotaError
+    ? t("RetryAfterQuotaUpgrade")
+    : t("Retry");
+
   return (
     <div
       className="upload_panel-icon"
       data-tooltip-id="system-tooltip"
-      data-tooltip-content={item.error || t("UploadingError")}
+      data-tooltip-content={tooltipContent}
       data-tooltip-place={placeTooltip}
     >
       <StyledLoadErrorIcon size="medium" />
@@ -55,7 +63,7 @@ const ErrorFile = ({
           fontWeight="600"
           onClick={onRetryClick}
         >
-          {t("Retry")}
+          {retryLabel}
         </Text>
       ) : null}
       {item.needPassword ? (

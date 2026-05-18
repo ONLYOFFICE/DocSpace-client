@@ -73,6 +73,7 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
+import { isQuotaError } from "@docspace/shared/utils/uploadErrors";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { FileOperationStatus } from "@docspace/shared/enums";
 import { Link } from "@docspace/ui-kit/components/link";
@@ -180,6 +181,8 @@ class UploadDataStore {
   totalErrorsCount = 0;
 
   finishUploadFilesCalled = false;
+
+  quotaErrorRaised = false;
 
   constructor(
     settingsStore,
@@ -455,6 +458,7 @@ class UploadDataStore {
     this.isUploadingAndConversion = false;
     this.isUploading = false;
     this.asyncUploadObj = {};
+    this.quotaErrorRaised = false;
   };
 
   clearUploadedFiles = () => {
@@ -514,6 +518,7 @@ class UploadDataStore {
 
     this.setUploadData(newUploadData);
     this.uploadedFilesHistory = newHistory;
+    this.quotaErrorRaised = false;
 
     this.primaryProgressDataStore.setPrimaryProgressBarData({
       operation: OPERATIONS_NAME.upload,
@@ -1859,14 +1864,19 @@ class UploadDataStore {
 
     retryFile.action = "upload";
     retryFile.error = "";
+    retryFile.isQuotaError = false;
     retryFile.inAction = false;
     retryFile.percent = 0;
 
     retryFileUploaded.action = "upload";
     retryFileUploaded.error = "";
+    retryFileUploaded.isQuotaError = false;
     retryFileUploaded.inAction = false;
     retryFileUploaded.errorShown = false;
     retryFileUploaded.percent = 0;
+
+    // Allow the batch to re-arm if user retries a quota-flagged file.
+    this.quotaErrorRaised = false;
 
     if (this.uploaded) {
       const newUploadData = {
@@ -1889,6 +1899,57 @@ class UploadDataStore {
     }
 
     this.parallelUploading([retryFile], t);
+  };
+
+  retryQuotaFailedFiles = (t) => {
+    const failed = this.files.filter((f) => f.isQuotaError);
+    if (failed.length === 0) return;
+
+    this.quotaErrorRaised = false;
+    failed.forEach((retryFile) => {
+      const fileIndex = this.files.findIndex(
+        (f) => f.uniqueId === retryFile.uniqueId,
+      );
+      const historyIndex = this.uploadedFilesHistory.findIndex(
+        (f) => f.uniqueId === retryFile.uniqueId,
+      );
+      if (fileIndex === -1) return;
+      this.files[fileIndex].action = "upload";
+      this.files[fileIndex].error = "";
+      this.files[fileIndex].isQuotaError = false;
+      this.files[fileIndex].inAction = false;
+      this.files[fileIndex].percent = 0;
+      if (historyIndex > -1) {
+        this.uploadedFilesHistory[historyIndex].action = "upload";
+        this.uploadedFilesHistory[historyIndex].error = "";
+        this.uploadedFilesHistory[historyIndex].isQuotaError = false;
+        this.uploadedFilesHistory[historyIndex].inAction = false;
+        this.uploadedFilesHistory[historyIndex].errorShown = false;
+        this.uploadedFilesHistory[historyIndex].percent = 0;
+      }
+    });
+
+    if (this.uploaded) {
+      const newUploadData = {
+        filesSize: this.convertFilesSize,
+        uploadedFiles: this.uploadedFiles,
+        percent: this.percent,
+        uploaded: false,
+      };
+      this.setUploadData(newUploadData);
+      this.primaryProgressDataStore.setPrimaryProgressBarData({
+        completed: false,
+        percent: this.percent,
+        operation: OPERATIONS_NAME.upload,
+        alert: false,
+        showPanel: this.setUploadPanelVisible,
+      });
+    }
+
+    const retryFiles = this.files.filter((f) =>
+      failed.some((rf) => rf.uniqueId === f.uniqueId),
+    );
+    this.parallelUploading(retryFiles, t);
   };
 
   startUploadFiles = async (t, createNewIfExist = true) => {
@@ -2090,13 +2151,47 @@ class UploadDataStore {
           errorMessage = error;
         }
 
+        const isQuota = isQuotaError(error);
+
         runInAction(() => {
           this.files[indexOfFile].error = errorMessage;
+          this.files[indexOfFile].isQuotaError = isQuota;
           const fileIndex = this.uploadedFilesHistory.findIndex(
             (f) => f.uniqueId === this.files[indexOfFile].uniqueId,
           );
-          if (fileIndex > -1)
+          if (fileIndex > -1) {
             this.uploadedFilesHistory[fileIndex].error = errorMessage;
+            this.uploadedFilesHistory[fileIndex].isQuotaError = isQuota;
+          }
+
+          // Quota is a batch-fatal condition: every still-queued upload will
+          // hit the same error. Short-circuit them now so users see the full
+          // failure state and only need a single retry after upgrading.
+          if (isQuota && !this.quotaErrorRaised) {
+            this.quotaErrorRaised = true;
+            const currentUniqueId = this.files[indexOfFile].uniqueId;
+            this.files.forEach((queued, idx) => {
+              if (
+                queued.uniqueId === currentUniqueId ||
+                queued.inAction ||
+                queued.error ||
+                queued.cancel ||
+                queued.action !== "upload"
+              )
+                return;
+
+              this.files[idx].error = errorMessage;
+              this.files[idx].isQuotaError = true;
+              this.files[idx].inAction = true;
+              const historyIndex = this.uploadedFilesHistory.findIndex(
+                (h) => h.uniqueId === queued.uniqueId,
+              );
+              if (historyIndex > -1) {
+                this.uploadedFilesHistory[historyIndex].error = errorMessage;
+                this.uploadedFilesHistory[historyIndex].isQuotaError = true;
+              }
+            });
+          }
         });
 
         // const index = error?.chunkIndex ?? 0;
@@ -2129,10 +2224,14 @@ class UploadDataStore {
 
         this.currentUploadNumber -= 1;
 
-        const nextFileIndex = this.files.findIndex((f) => !f.inAction);
+        // Skip launching a next session when quota has been raised: every
+        // remaining file is already flagged with the same error.
+        if (!this.quotaErrorRaised) {
+          const nextFileIndex = this.files.findIndex((f) => !f.inAction);
 
-        if (nextFileIndex !== -1) {
-          this.startSessionFunc(nextFileIndex, t, createNewIfExist);
+          if (nextFileIndex !== -1) {
+            this.startSessionFunc(nextFileIndex, t, createNewIfExist);
+          }
         }
 
         return Promise.resolve();
@@ -2198,6 +2297,37 @@ class UploadDataStore {
     });
 
     console.log("Errors: ", totalErrorsCount);
+
+    const hasQuotaError = filesWithErrors.some((f) => f.isQuotaError);
+
+    if (hasQuotaError) {
+      toastr.error(
+        <Trans
+          i18nKey="UploadPanel:QuotaExceededDuringUpload"
+          t={t}
+          values={{
+            uploaded: filesWithoutErrors.length,
+            total: filesWithoutErrors.length + filesWithAllErrors,
+          }}
+          components={[
+            <Link
+              key="a"
+              tag="a"
+              isHovered
+              color="accent"
+              onClick={() => {
+                toastr.clear();
+                this.setUploadPanelVisible(true);
+              }}
+            />,
+          ]}
+        />,
+        null,
+        60000,
+        true,
+      );
+      return;
+    }
 
     if (totalErrorsCount > 1) {
       toastr.error(t("UploadPanel:UploadingError"));

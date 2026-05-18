@@ -264,4 +264,96 @@ describe("identity", () => {
       expect(DEFAULT_ARGON2_PARAMS.p).toBe(4);
     });
   });
+
+  describe("envelope validation (corrupted input)", () => {
+    it("serializeIdentity rejects wrong-size public key", async () => {
+      const bad = { publicKey: new Uint8Array(16), privateKey: kp.privateKey };
+      await expect(
+        serializeIdentity(bad, "secret", { argon2Params: FAST_PARAMS }),
+      ).rejects.toBeInstanceOf(InvalidFormatError);
+    });
+
+    it("serializeIdentity rejects wrong-size private key", async () => {
+      const bad = { publicKey: kp.publicKey, privateKey: new Uint8Array(16) };
+      await expect(
+        serializeIdentity(bad, "secret", { argon2Params: FAST_PARAMS }),
+      ).rejects.toBeInstanceOf(InvalidFormatError);
+    });
+
+    it("unlockWithPassphrase rejects truncated envelope (header bytes only)", async () => {
+      const truncated = {
+        publicKey: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        privateKeyEnc: "AA==",
+      };
+      await expect(
+        unlockWithPassphrase(truncated, "secret"),
+      ).rejects.toBeInstanceOf(InvalidFormatError);
+    });
+
+    it("unlockWithPassphrase rejects KDF id corruption", async () => {
+      const { base64ToUint8Array, arrayBufferToBase64 } = await import(
+        "../utils"
+      );
+      const ser = await serializeIdentity(kp, "secret", {
+        argon2Params: FAST_PARAMS,
+      });
+      const bytes = base64ToUint8Array(ser.privateKeyEnc);
+      bytes[8] = 0xff;
+      await expect(
+        unlockWithPassphrase(
+          { publicKey: ser.publicKey, privateKeyEnc: arrayBufferToBase64(bytes) },
+          "secret",
+        ),
+      ).rejects.toBeInstanceOf(InvalidFormatError);
+    });
+
+    it("unlockWithPassphrase rejects zero argon2 params", async () => {
+      const { base64ToUint8Array, arrayBufferToBase64 } = await import(
+        "../utils"
+      );
+      const ser = await serializeIdentity(kp, "secret", {
+        argon2Params: FAST_PARAMS,
+      });
+      const bytes = base64ToUint8Array(ser.privateKeyEnc);
+      bytes[9] = 0;
+      bytes[10] = 0;
+      await expect(
+        unlockWithPassphrase(
+          { publicKey: ser.publicKey, privateKeyEnc: arrayBufferToBase64(bytes) },
+          "secret",
+        ),
+      ).rejects.toBeInstanceOf(InvalidFormatError);
+    });
+  });
+
+  describe("importIdentityFromFile", () => {
+    it("propagates FileReader.onerror", async () => {
+      const mockBlob: Partial<Blob> = {};
+      const fakeFile = mockBlob as File;
+
+      const original = global.FileReader;
+      class FakeFileReader {
+        result: string | null = null;
+        error: DOMException | null = null;
+        onload: (() => void) | null = null;
+        onerror: (() => void) | null = null;
+        readAsText(_f: Blob) {
+          queueMicrotask(() => {
+            this.error = new DOMException("read failed", "NotReadableError");
+            this.onerror?.();
+          });
+        }
+      }
+      // biome-ignore lint/suspicious/noExplicitAny: simple swap for test
+      (global as any).FileReader = FakeFileReader;
+
+      try {
+        await expect(importIdentityFromFile(fakeFile)).rejects.toBeInstanceOf(
+          DOMException,
+        );
+      } finally {
+        global.FileReader = original;
+      }
+    });
+  });
 });

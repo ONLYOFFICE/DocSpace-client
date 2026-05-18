@@ -32,6 +32,7 @@ import { wrapDEK, unwrapDEK, inspectWrap } from "../hpke";
 import {
   AuthenticationError,
   InvalidFormatError,
+  UnsupportedSuiteError,
   UnsupportedVersionError,
 } from "../errors";
 import { type IdentityKeyPair, USER_ID_BYTES } from "../types";
@@ -322,5 +323,131 @@ describe("hpke wrapDEK / unwrapDEK", () => {
 describe("USER_ID_BYTES constant", () => {
   it("equals 16", () => {
     expect(USER_ID_BYTES).toBe(16);
+  });
+});
+
+describe("hpke input validation (size checks)", () => {
+  let alice: IdentityKeyPair;
+  let bob: IdentityKeyPair;
+
+  beforeAll(async () => {
+    alice = await generateIdentityKeyPair();
+    bob = await generateIdentityKeyPair();
+  });
+
+  it("rejects wrong-size DEK (not 32 bytes)", async () => {
+    await expect(
+      wrapDEK({
+        dek: new Uint8Array(31),
+        senderPrivateKey: alice.privateKey,
+        senderPublicKey: alice.publicKey,
+        senderUserId: ALICE_ID,
+        recipientPublicKey: bob.publicKey,
+        recipientUserId: BOB_ID,
+        fileId: 1,
+      }),
+    ).rejects.toBeInstanceOf(InvalidFormatError);
+  });
+
+  it("rejects wrong-size sender public key", async () => {
+    await expect(
+      wrapDEK({
+        dek: generateDEK(),
+        senderPrivateKey: alice.privateKey,
+        senderPublicKey: new Uint8Array(16),
+        senderUserId: ALICE_ID,
+        recipientPublicKey: bob.publicKey,
+        recipientUserId: BOB_ID,
+        fileId: 1,
+      }),
+    ).rejects.toBeInstanceOf(InvalidFormatError);
+  });
+
+  it("rejects wrong-size sender private key", async () => {
+    await expect(
+      wrapDEK({
+        dek: generateDEK(),
+        senderPrivateKey: new Uint8Array(16),
+        senderPublicKey: alice.publicKey,
+        senderUserId: ALICE_ID,
+        recipientPublicKey: bob.publicKey,
+        recipientUserId: BOB_ID,
+        fileId: 1,
+      }),
+    ).rejects.toBeInstanceOf(InvalidFormatError);
+  });
+
+  it("rejects wrong-size recipient public key", async () => {
+    await expect(
+      wrapDEK({
+        dek: generateDEK(),
+        senderPrivateKey: alice.privateKey,
+        senderPublicKey: alice.publicKey,
+        senderUserId: ALICE_ID,
+        recipientPublicKey: new Uint8Array(16),
+        recipientUserId: BOB_ID,
+        fileId: 1,
+      }),
+    ).rejects.toBeInstanceOf(InvalidFormatError);
+  });
+
+  it("rejects wrong-size recipient private key on unwrap", async () => {
+    const wrapped = await wrapDEK({
+      dek: generateDEK(),
+      senderPrivateKey: alice.privateKey,
+      senderPublicKey: alice.publicKey,
+      senderUserId: ALICE_ID,
+      recipientPublicKey: bob.publicKey,
+      recipientUserId: BOB_ID,
+      fileId: 1,
+    });
+    await expect(
+      unwrapDEK({
+        wrapped,
+        recipientPrivateKey: new Uint8Array(16),
+        recipientUserId: BOB_ID,
+        expectedSenderPublicKey: alice.publicKey,
+        expectedSenderUserId: ALICE_ID,
+        fileId: 1,
+      }),
+    ).rejects.toBeInstanceOf(InvalidFormatError);
+  });
+
+  it("rejects unsupported suite id in wrap blob", async () => {
+    const wrapped = await wrapDEK({
+      dek: generateDEK(),
+      senderPrivateKey: alice.privateKey,
+      senderPublicKey: alice.publicKey,
+      senderUserId: ALICE_ID,
+      recipientPublicKey: bob.publicKey,
+      recipientUserId: BOB_ID,
+      fileId: 1,
+    });
+    const bytes = base64ToUint8Array(wrapped);
+    bytes[5] = 0x99;
+    const broken = arrayBufferToBase64(bytes);
+
+    await expect(
+      unwrapDEK({
+        wrapped: broken,
+        recipientPrivateKey: bob.privateKey,
+        recipientUserId: BOB_ID,
+        expectedSenderPublicKey: alice.publicKey,
+        expectedSenderUserId: ALICE_ID,
+        fileId: 1,
+      }),
+    ).rejects.toBeInstanceOf(UnsupportedSuiteError);
+  });
+
+  it("inspectWrap rejects truncated blob", () => {
+    expect(() => inspectWrap("aGVsbG8=")).toThrow(InvalidFormatError);
+  });
+
+  it("inspectWrap rejects wrong magic bytes", () => {
+    const fakeBlob = new Uint8Array(112);
+    fakeBlob.fill(0xff);
+    expect(() => inspectWrap(arrayBufferToBase64(fakeBlob))).toThrow(
+      InvalidFormatError,
+    );
   });
 });

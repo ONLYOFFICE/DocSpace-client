@@ -91,7 +91,7 @@ describe("useResetKeysFlow", () => {
     );
     expect(latest.available).toBe(false);
     act(() => latest.request());
-    expect(captured.dialog?.visible).toBe(false);
+    expect(captured.dialog).toBeNull();
   });
 
   it("keeps the dialog hidden until request() is called", () => {
@@ -102,7 +102,7 @@ describe("useResetKeysFlow", () => {
       />,
     );
     expect(latest.available).toBe(true);
-    expect(captured.dialog?.visible).toBe(false);
+    expect(captured.dialog).toBeNull();
   });
 
   it("opens the dialog when request() fires", () => {
@@ -178,7 +178,7 @@ describe("useResetKeysFlow", () => {
     });
 
     expect(latest.isPending).toBe(false);
-    expect(captured.dialog?.visible).toBe(false);
+    expect(captured.dialog).toBeNull();
   });
 
   it("uses ORDERING: deletes → lock → refresh", async () => {
@@ -214,17 +214,16 @@ describe("useResetKeysFlow", () => {
     );
   });
 
-  it("does nothing when confirm fires with an empty key list", async () => {
+  it("does nothing when confirm fires with an empty key list", () => {
     render(
       <Harness
         encryptionKeys={[]}
         refreshKeysFromServer={vi.fn().mockResolvedValue(undefined)}
       />,
     );
-    await act(async () => {
-      await (captured.dialog!.onConfirm as () => Promise<void>)();
-    });
-
+    expect(captured.dialog).toBeNull();
+    act(() => latest.request());
+    expect(captured.dialog).toBeNull();
     expect(deleteEncryptionKey).not.toHaveBeenCalled();
     expect(SecretStorage.lock).not.toHaveBeenCalled();
   });

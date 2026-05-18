@@ -152,7 +152,7 @@ describe("useGenerateKeyFlow", () => {
       );
       act(() => latest.request());
       expect(captured.passphrase).not.toBeNull();
-      expect(captured.confirmation?.visible).toBe(false);
+      expect(captured.confirmation).toBeNull();
     });
 
     it("shows confirm-replace BEFORE passphrase when the user already has a key", () => {

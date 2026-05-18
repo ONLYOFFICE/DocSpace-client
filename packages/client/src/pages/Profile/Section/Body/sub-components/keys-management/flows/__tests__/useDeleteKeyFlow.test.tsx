@@ -76,7 +76,7 @@ describe("useDeleteKeyFlow", () => {
 
   it("keeps confirmation hidden until request() is called", () => {
     render(<Harness refreshKeysFromServer={vi.fn()} />);
-    expect(captured.confirmation?.visible).toBe(false);
+    expect(captured.confirmation).toBeNull();
   });
 
   it("shows the confirmation dialog when request(keyId) fires", () => {
@@ -149,11 +149,9 @@ describe("useDeleteKeyFlow", () => {
     expect(callOrder).toEqual(["api", "lock", "refresh"]);
   });
 
-  it("does nothing on confirm when there is no confirming target (defensive)", async () => {
+  it("does nothing on confirm when there is no confirming target (defensive)", () => {
     render(<Harness refreshKeysFromServer={vi.fn()} />);
-    await act(async () => {
-      await (captured.confirmation!.onConfirm as () => Promise<void>)();
-    });
+    expect(captured.confirmation).toBeNull();
     expect(deleteEncryptionKey).not.toHaveBeenCalled();
   });
 });

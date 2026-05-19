@@ -103,7 +103,7 @@ const RoomsLayout = observer(
         {
           id: "custom-room",
           icon: <CreateCustomRoomIllustrationIcon />,
-          label: t("Common:CustomRoomTitle"),
+          label: t("Common:NewRoom"),
           onClick: createCustomRoom,
         },
         {
@@ -121,7 +121,7 @@ const RoomsLayout = observer(
         {
           id: "actions_create-custom-room",
           key: "custom-room",
-          label: t("Common:CustomRoomTitle"),
+          label: t("Common:NewRoom"),
           icon: CreateRoomReactSvgUrl,
           onClick: createCustomRoom,
         },
@@ -193,3 +193,4 @@ const RoomsLayout = observer(
 );
 
 export default RoomsLayout;
+

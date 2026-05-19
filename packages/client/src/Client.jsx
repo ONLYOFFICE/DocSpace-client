@@ -62,10 +62,15 @@ const ClientArticle = React.memo(
     isInfoPanelVisible,
     isAccountsArticle,
     isDeveloperToolsArticle,
+    forceNewArticle,
   }) => {
     const isLegacyMode = localStorage.getItem("useDocSpace") === "old";
-    const useLegacyArticle =
-      isAccountsArticle || isDeveloperToolsArticle;
+    const useLegacyArticle = isAccountsArticle || isDeveloperToolsArticle;
+
+    console.log("forceNewArticle", forceNewArticle);
+    if (forceNewArticle && !useLegacyArticle) {
+      return <NewArticle />;
+    }
 
     if (!isLegacyMode && !useLegacyArticle) {
       return <NewArticle />;
@@ -181,6 +186,9 @@ const ClientContent = (props) => {
       location.state?.fromUrl?.includes("/accounts"));
   const isDeveloperToolsArticle =
     location.pathname.includes("/developer-tools");
+  const isNewArticle =
+    location.pathname.startsWith("/ai-files") ||
+    location.pathname.startsWith("/ai-forms");
   const withMainButton =
     isAccountsArticle || isDeveloperToolsArticle
       ? currentDeviceType !== DeviceType.desktop
@@ -200,6 +208,7 @@ const ClientContent = (props) => {
             showArticleLoader={showArticleLoader}
             isAccountsArticle={isAccountsArticle}
             isDeveloperToolsArticle={isDeveloperToolsArticle}
+            forceNewArticle={isNewArticle}
           />
         )
       ) : (
@@ -211,6 +220,7 @@ const ClientContent = (props) => {
           showArticleLoader={showArticleLoader}
           isAccountsArticle={isAccountsArticle}
           isDeveloperToolsArticle={isDeveloperToolsArticle}
+          forceNewArticle={isNewArticle}
         />
       )}
       <Outlet />
@@ -286,3 +296,4 @@ export const Client = inject(
     };
   },
 )(withTranslation("Common")(observer(ClientContent)));
+

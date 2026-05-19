@@ -86,7 +86,7 @@ const CreateAgentDialog = ({
   }, []);
 
   const startAgentParams = React.useMemo(
-    () => getStartAgentParams(title),
+    () => getStartAgentParams(title ?? ""),
     [title],
   );
 

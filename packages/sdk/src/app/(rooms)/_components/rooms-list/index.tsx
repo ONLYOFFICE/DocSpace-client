@@ -54,9 +54,9 @@ import useItemList, {
   TFileItem,
 } from "@/app/(docspace)/_hooks/useItemList";
 
-import RowView from "@/app/(docspace)/(files)/_components/row-view";
 import TileView from "@/app/(docspace)/(files)/_components/tile-view";
 import RoomsTableView from "../rooms-table-view";
+import RoomsRowView from "../rooms-row-view";
 import EmptyView from "../empty-view";
 import CreateEditRoomDialog from "../create-edit-room-dialog";
 import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
@@ -332,14 +332,15 @@ const RoomsList = ({
     );
   } else {
     content = (
-      <RowView
+      <RoomsRowView
         total={total}
         items={visibleItems}
         hasMoreFiles={hasNextPage}
         filterSortBy={filter.sortBy as TSortBy}
         timezone={timezone}
-        displayFileExtension={false}
         fetchMoreFiles={fetchMoreRooms}
+        onEditRoom={onEditRoom}
+        onRoomChanged={refreshSingleRoom}
       />
     );
   }

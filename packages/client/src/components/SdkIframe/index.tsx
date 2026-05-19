@@ -24,15 +24,83 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
+
 import styles from "./SdkIframe.module.scss";
+
+type SdkFrameEvent = { event?: string; data?: unknown };
+
+export type SdkIframeHandle = {
+  call: (methodName: string, data?: unknown) => void;
+};
 
 type SdkIframeProps = {
   src: string;
   title: string;
+  onNavigate?: (section: string) => void;
+  apiRef?: React.MutableRefObject<SdkIframeHandle | null>;
 };
 
-export const SdkIframe = ({ src, title }: SdkIframeProps) => (
-  <iframe className={styles.iframe} src={src} title={title} />
-);
+export const SdkIframe = ({
+  src,
+  title,
+  onNavigate,
+  apiRef,
+}: SdkIframeProps) => {
+  const iframeRef = React.useRef<HTMLIFrameElement | null>(null);
+
+  React.useEffect(() => {
+    if (!apiRef) return undefined;
+    apiRef.current = {
+      call: (methodName, data) => {
+        const target = iframeRef.current?.contentWindow;
+        if (!target) return;
+        target.postMessage(
+          JSON.stringify({ data: { methodName, data } }),
+          "*",
+        );
+      },
+    };
+    return () => {
+      apiRef.current = null;
+    };
+  }, [apiRef]);
+
+  React.useEffect(() => {
+    if (!onNavigate) return undefined;
+
+    const handler = (e: MessageEvent) => {
+      if (e.source !== iframeRef.current?.contentWindow) return;
+
+      let payload: { type?: string; eventReturnData?: SdkFrameEvent };
+      try {
+        payload =
+          typeof e.data === "string" ? JSON.parse(e.data) : (e.data as never);
+      } catch {
+        return;
+      }
+
+      if (payload?.type !== "onEventReturn") return;
+      const eventData = payload.eventReturnData;
+      if (eventData?.event !== "onNavigate") return;
+
+      const section = (eventData.data as { section?: string } | undefined)
+        ?.section;
+      if (typeof section === "string") onNavigate(section);
+    };
+
+    window.addEventListener("message", handler);
+    return () => window.removeEventListener("message", handler);
+  }, [onNavigate]);
+
+  return (
+    <iframe
+      ref={iframeRef}
+      className={styles.iframe}
+      src={src}
+      title={title}
+    />
+  );
+};
 
 export default SdkIframe;

@@ -1601,5 +1601,7 @@
   "DisableNotifications": "Bildirimleri devre dışı bırak",
   "EditRoom": "Oda düzenle",
   "ChangeRoomOwner": "Oda Sahibi Değiştir",
-  "MoveToArchive": "Arşive taşı"
+  "MoveToArchive": "Arşive taşı",
+  "PinToTop": "En üste sabitle",
+  "AIAgentPinLimitMessage": "En üste 10'dan fazla {{aiAgents}} sabitleyemezsiniz. Sabitlenmiş olanlardan bazılarını sabitlemeyi kaldırın."
 }

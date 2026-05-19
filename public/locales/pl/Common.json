@@ -1601,5 +1601,7 @@
   "DisableNotifications": "Wyłącz powiadomienia",
   "EditRoom": "Pokój do edytowania",
   "ChangeRoomOwner": "Zmień właściciela pokoju",
-  "MoveToArchive": "Przenieś do archiwum"
+  "MoveToArchive": "Przenieś do archiwum",
+  "PinToTop": "Przypnij u góry",
+  "AIAgentPinLimitMessage": "Nie można przypiąć więcej niż 10 {{aiAgents}} do góry. Odpięć niektórych, które są obecnie przypięte."
 }

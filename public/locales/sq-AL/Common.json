@@ -1601,5 +1601,7 @@
   "DisableNotifications": "Çaktivizoni njoftimet",
   "EditRoom": "Redaktoni dhomën",
   "ChangeRoomOwner": "Zëvendëso Pronësin e Dhomës",
-  "MoveToArchive": "Lëvizni në arkiv"
+  "MoveToArchive": "Lëvizni në arkiv",
+  "PinToTop": "Gozhdoni",
+  "AIAgentPinLimitMessage": "Nuk mund të fiksoni më shumë se 10 {{aiAgents}} në krye. Hiqni fiksimin nga disa që janë fiksuar aktualisht."
 }

@@ -1616,5 +1616,7 @@
   "DisableNotifications": "Disable notifications",
   "EditRoom": "Edit room",
   "ChangeRoomOwner": "Change Room Owner",
-  "MoveToArchive": "Move to archive"
+  "MoveToArchive": "Move to archive",
+  "PinToTop": "Pin to top",
+  "AIAgentPinLimitMessage": "You can't pin more than 10 {{aiAgents}} to the top. Unpin some that are currently pinned."
 }

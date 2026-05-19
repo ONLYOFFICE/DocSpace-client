@@ -1601,5 +1601,7 @@
   "DisableNotifications": "Onemogući notifikacije",
   "EditRoom": "Uredi sobu",
   "ChangeRoomOwner": "Promena vlasnika sobe",
-  "MoveToArchive": "Pomeri u arhivu"
+  "MoveToArchive": "Pomeri u arhivu",
+  "PinToTop": "Zakači na vrh",
+  "AIAgentPinLimitMessage": "Ne možete pričvrstiti više od 10 {{aiAgents}} na vrh. Od pričvrstite neke koji su trenutno pričvršćeni."
 }

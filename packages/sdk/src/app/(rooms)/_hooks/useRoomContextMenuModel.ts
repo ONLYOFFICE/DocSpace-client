@@ -116,7 +116,7 @@ export default function useRoomContextMenuModel(
         {
           id: room.pinned ? "option_unpin" : "option_pin",
           key: room.pinned ? "unpin" : "pin",
-          label: room.pinned ? t("Files:Unpin") : t("Files:PinToTop"),
+          label: room.pinned ? t("Common:Unpin") : t("Common:PinToTop"),
           icon: room.pinned ? UnpinReactSvgUrl : PinReactSvgUrl,
           onClick: handlePin,
           disabled: !room.security?.Pin,

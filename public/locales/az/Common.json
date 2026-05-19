@@ -1601,5 +1601,7 @@
   "DisableNotifications": "Bildirişləri söndürün",
   "EditRoom": "Otağı redaktə edin",
   "ChangeRoomOwner": "Otaq Sahibini Dəyiş",
-  "MoveToArchive": "Arxivə köçürün"
+  "MoveToArchive": "Arxivə köçürün",
+  "PinToTop": "Yuxarıya sabitləyin",
+  "AIAgentPinLimitMessage": "10-dan çoxunu {{aiAgents}} yuxarıya yapışdıra bilməzsiniz. Hazırda yapışdırılmış bəzilərini yapışdırmaqdan çıxarın."
 }

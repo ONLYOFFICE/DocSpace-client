@@ -1601,5 +1601,7 @@
   "DisableNotifications": "تعطيل التنبيهات",
   "EditRoom": "تعديل الغرفة",
   "ChangeRoomOwner": "تغيير مالك الغرفة",
-  "MoveToArchive": "انقل إلى الأرشيف"
+  "MoveToArchive": "انقل إلى الأرشيف",
+  "PinToTop": "تثبيت في أعلى الصفحة",
+  "AIAgentPinLimitMessage": "لا يمكن تثبيت أكثر من 10 {{aiAgents}} في الأعلى. قم بإلغاء تثبيت بعض العناصر المثبتة حاليًا."
 }

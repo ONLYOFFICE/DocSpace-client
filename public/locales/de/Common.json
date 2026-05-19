@@ -1601,5 +1601,7 @@
   "DisableNotifications": "Benachrichtigungen deaktivieren",
   "EditRoom": "Raum bearbeiten",
   "ChangeRoomOwner": "Raum-Besitzer ändern",
-  "MoveToArchive": "Ins Archiv verschieben"
+  "MoveToArchive": "Ins Archiv verschieben",
+  "PinToTop": "Oben anstecken",
+  "AIAgentPinLimitMessage": "Sie können nicht mehr als 10 {{aiAgents}} oben anheften. Entfernen Sie einige, die derzeit angeheftet sind."
 }

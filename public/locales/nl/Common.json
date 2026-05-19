@@ -1601,5 +1601,7 @@
   "DisableNotifications": "Meldingen uitschakelen",
   "EditRoom": "Bewerk kamer",
   "ChangeRoomOwner": "Wijzig de eigenaar van de ruimte",
-  "MoveToArchive": "Verplaatsen naar archief"
+  "MoveToArchive": "Verplaatsen naar archief",
+  "PinToTop": "Bovenaan pinnen",
+  "AIAgentPinLimitMessage": "U kunt meer dan 10 {{aiAgents}} bovenaan pinnen. Pinneer enkele die momenteel zijn gepind."
 }

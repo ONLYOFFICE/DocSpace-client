@@ -1601,5 +1601,7 @@
   "DisableNotifications": "Выключить уведомления",
   "EditRoom": "Изменить комнату",
   "ChangeRoomOwner": "Сменить владельца комнаты",
-  "MoveToArchive": "Переместить в архив"
+  "MoveToArchive": "Переместить в архив",
+  "PinToTop": "Закрепить наверху",
+  "AIAgentPinLimitMessage": "Вы не можете закрепить более 10 {{aiAgents}}. Открепите некоторые из закрепленных."
 }

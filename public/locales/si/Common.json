@@ -1601,5 +1601,7 @@
   "DisableNotifications": "දැනුම්දීම් අබල කරන්න",
   "EditRoom": "කාමරය සංස්කරණය",
   "ChangeRoomOwner": "කාමර හිමියා වෙනස් කරන්න",
-  "MoveToArchive": "සංරක්‍ෂිතයට ගෙනයන්න"
+  "MoveToArchive": "සංරක්‍ෂිතයට ගෙනයන්න",
+  "PinToTop": "මුදුනට අමුණන්න",
+  "AIAgentPinLimitMessage": "ඔබට 10 කට වඩා {{aiAgents}} ඉහළට පින් කිරීමට නොහැකිය. දැනට පින් කළ ඒවායින් සමහරක් අලවා ගන්න."
 }

@@ -1601,5 +1601,7 @@
   "DisableNotifications": "通知をオフする",
   "EditRoom": "ルームを編集する",
   "ChangeRoomOwner": "部屋の所有者を変更",
-  "MoveToArchive": "アーカイブに移動する"
+  "MoveToArchive": "アーカイブに移動する",
+  "PinToTop": "上部に固定",
+  "AIAgentPinLimitMessage": "{{aiAgents}}をトップに10個以上ピン留めすることはできません。現在ピン留めされているものをいくつか解除してください。"
 }

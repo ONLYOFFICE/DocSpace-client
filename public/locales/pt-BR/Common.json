@@ -1601,5 +1601,7 @@
   "DisableNotifications": "Desativar as notificações",
   "EditRoom": "Editar sala",
   "ChangeRoomOwner": "Mudar Proprietário da Sala",
-  "MoveToArchive": "Mover para arquivo"
+  "MoveToArchive": "Mover para arquivo",
+  "PinToTop": "Fixar no topo",
+  "AIAgentPinLimitMessage": "Você não pode fixar mais de 10 {{aiAgents}} no topo. Desfixe alguns que estão fixados atualmente."
 }

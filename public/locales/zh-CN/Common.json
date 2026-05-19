@@ -1601,5 +1601,7 @@
   "DisableNotifications": "禁用消息通知",
   "EditRoom": "编辑房间",
   "ChangeRoomOwner": "更改房间所有者",
-  "MoveToArchive": "移动至存档"
+  "MoveToArchive": "移动至存档",
+  "PinToTop": "置顶",
+  "AIAgentPinLimitMessage": "您最多只能将 10 个 {{aiAgents}} 固定在顶部。请取消固定一些当前已固定的项目。"
 }

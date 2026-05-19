@@ -1601,5 +1601,7 @@
   "DisableNotifications": "Онемогући нотификације",
   "EditRoom": "Уреди собу",
   "ChangeRoomOwner": "Промени власника собе",
-  "MoveToArchive": "Помери у архиву"
+  "MoveToArchive": "Помери у архиву",
+  "PinToTop": "Закачи на врх",
+  "AIAgentPinLimitMessage": "Не можете прикрепити більше ніж 10 {{aiAgents}} до верха. Відкрепіть деякі, які зараз прикріплені."
 }

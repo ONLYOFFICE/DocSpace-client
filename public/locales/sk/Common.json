@@ -1601,5 +1601,7 @@
   "DisableNotifications": "Vypnúť upozornenia",
   "EditRoom": "Upraviť miestnosť",
   "ChangeRoomOwner": "Zmeniť vlastníka miestnosti",
-  "MoveToArchive": "Presunúť do archívu"
+  "MoveToArchive": "Presunúť do archívu",
+  "PinToTop": "Pripnúť hore",
+  "AIAgentPinLimitMessage": "Nemôžete pripínať viac ako 10 {{aiAgents}} na vrch. Odpínajte niektoré, ktoré sú momentálne pripnuté."
 }

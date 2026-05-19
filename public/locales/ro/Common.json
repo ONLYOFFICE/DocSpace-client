@@ -1601,5 +1601,7 @@
   "DisableNotifications": "Dezactivare notificări",
   "EditRoom": "Editare sală",
   "ChangeRoomOwner": "Schimbă Proprietarul Camerei",
-  "MoveToArchive": "Mutare în arhivă"
+  "MoveToArchive": "Mutare în arhivă",
+  "PinToTop": "Fixare sus",
+  "AIAgentPinLimitMessage": "Nu puteți pini mai mult de 10 {{aiAgents}} în partea de sus. Depiniți unele care sunt în prezent pinate."
 }

@@ -1601,5 +1601,7 @@
   "DisableNotifications": "Onemogoči obvestila",
   "EditRoom": "Uredi sobo",
   "ChangeRoomOwner": "Zamenjajte lastnika sobe",
-  "MoveToArchive": "Premakni v arhiv"
+  "MoveToArchive": "Premakni v arhiv",
+  "PinToTop": "Pripni na vrh",
+  "AIAgentPinLimitMessage": "Ne morete pritrditi več kot 10 {{aiAgents}} na vrh. Odprtje nekaj, ki so trenutno pritrdinjene."
 }

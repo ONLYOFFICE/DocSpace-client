@@ -1601,5 +1601,7 @@
   "DisableNotifications": "Disattiva notifiche",
   "EditRoom": "Modifica la stanza",
   "ChangeRoomOwner": "Cambia proprietario della stanza",
-  "MoveToArchive": "Sposta in archivio"
+  "MoveToArchive": "Sposta in archivio",
+  "PinToTop": "Fissa in alto",
+  "AIAgentPinLimitMessage": "Non è possibile fissare più di 10 {{aiAgents}} in cima. Sfilate alcuni che sono attualmente fissati."
 }

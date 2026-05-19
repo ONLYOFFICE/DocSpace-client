@@ -11,7 +11,7 @@
   "NotPossibleRoomRestoring": "Imposibil de restaurat această sală deoarece limita maximă de săli permisă de planul dvs. actual a fost atinsă.",
   "NumberOfRoomsAccordingToTariff": "Limita de săli permisă conform planului dvs tarifar: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Limita de administratori permisă conform planului dvs tarifar: {{currentValue}}/{{maxValue}}",
-  "PlanPaymentOverdue": "Nu puteți adăuga utilizatori noi, crea camere noi sau agenți AI. Pl-ul {{planName}} a depășit termenul de plată.",
+  "PlanPaymentOverdue": "Nu puteți adăuga utilizatori noi, crea camere noi sau agenți IA. Pl-ul {{planName}} a depășit termenul de plată.",
   "RoomsQuotaAlmostExhausted": "Cota spațiului de stocare aproape epuizată. ",
   "UsersQuotaAlmostExhausted": "Cota spațiului de stocare pentru utilizatorii cu plată aproape epuizată."
 }

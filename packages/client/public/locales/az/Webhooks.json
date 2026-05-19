@@ -1,6 +1,6 @@
 {
-  "AgentCreated": "AI Agent Yaradıldı",
-  "AgentDeleted": "AI Agent Silinmiş",
+  "AgentCreated": "AI Agent yaradıldı",
+  "AgentDeleted": "AI Agent silinmiş",
   "AgentUpdated": "AI Agent yeniləndi",
   "Before": "Əvvəl",
   "CreateWebhook": "Webhook yaradın",

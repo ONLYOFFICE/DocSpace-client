@@ -1,7 +1,7 @@
 {
-  "AgentCreated": "Agent AI creat",
+  "AgentCreated": "Agent IA a fost creat",
   "AgentDeleted": "Agentul AI a fost șters",
-  "AgentUpdated": "Agentul AI Actualizat",
+  "AgentUpdated": "Agentul AI a fost actualizat",
   "Before": "Înainte",
   "CreateWebhook": "Creează un webhook",
   "DeleteHint": "Webhook-ul va fi șters definitiv.\nAceastă acțiune nu poate fi anulată.",

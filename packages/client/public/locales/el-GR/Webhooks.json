@@ -1,7 +1,7 @@
 {
   "AgentCreated": "Δημιουργήθηκε ο AI Agent",
   "AgentDeleted": "Διαγράφηκε το AI Agent",
-  "AgentUpdated": "AI Agent Ενημερώθηκε",
+  "AgentUpdated": "AI Agent ενημερώθηκε",
   "Before": "Πριν από",
   "CreateWebhook": "Δημιουργία webhook",
   "DeleteHint": "Το webhook θα διαγραφεί μόνιμα.\nΔεν θα μπορείτε να αναιρέσετε αυτήν την ενέργεια.",

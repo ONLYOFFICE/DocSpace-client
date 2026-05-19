@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import AiSvg from "@docspace/ui-kit/assets/icons/16/AI.svg";
-import AIAgentsSelector from "@docspace/ui-kit/selectors/AIAgent";
+import { AIAgentsSelector } from "@docspace/ui-kit/selectors/AIAgent";
 import { Link } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Events } from "@docspace/ui-kit/enums";

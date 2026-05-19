@@ -1609,10 +1609,29 @@ class UploadDataStore {
             publicKeyId || "",
             currentFileData.dek,
           ).catch((error) => {
+            // Surface HTTP details — when the server rejects PUT
+            // /files/{id}/access (e.g. 403 for non-owners) the file ends up
+            // encrypted with zero envelopes, which is otherwise invisible.
             console.error(
               "[ENCRYPTION] Failed to set file encryption keys:",
+              {
+                fileId,
+                status: error?.response?.status,
+                data: error?.response?.data,
+                message: error?.message,
+              },
               error,
             );
+            try {
+              toastr.error(
+                getI18n().t("Common:EncryptionUploadWrapFailed", {
+                  defaultValue:
+                    "Encryption sealing failed for the uploaded file. It may not be openable. See console for details.",
+                }),
+              );
+            } catch {
+              // toastr not available — error is already in console
+            }
           });
         }
       }

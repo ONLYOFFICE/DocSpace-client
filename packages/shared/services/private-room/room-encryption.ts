@@ -29,7 +29,7 @@ import {
   getFileEncryptionAccess,
   setFileEncryptionKeys,
 } from "../../api/files";
-import { getRoomEncryptionKeys } from "../../api/privacy";
+import { getRoomEncryptionKeys, getFilePublicKeys } from "../../api/privacy";
 import {
   unwrapDekForCurrentUser,
   wrapDekForRecipients,
@@ -309,6 +309,206 @@ export async function addMembersToEncryptedRoom(
         reason,
       });
     }
+  }
+
+  return { fileResults, skippedMembers };
+}
+
+/**
+ * Re-wraps existing file DEKs for any current room member whose public key
+ * is registered server-side but who has no envelope on one or more files.
+ *
+ * Use case: a user is invited to a private room before they have registered
+ * their encryption keypair. `addMembersToEncryptedRoom` skips them at invite
+ * time (reason "no-key"). Once they later register a key, their new uploads
+ * work, but pre-existing files remain inaccessible. This function backfills
+ * those missing envelopes per-file.
+ *
+ * Recipient discovery uses the file-level endpoint `getFilePublicKeys` —
+ * the same one the upload pipeline uses successfully. The room-level
+ * `getRoomEncryptionKeys` is intentionally NOT consulted for recipient
+ * selection because in practice it can lag behind file-level access state.
+ * Room member keys are still loaded once for HPKE-Auth sender verification.
+ *
+ * Pass an `onKeyChange` that auto-refuses if you want a fully silent run
+ * (recommended for background invocations triggered by navigation).
+ */
+export async function backfillEncryptedFilesForRoomMembers(
+  roomId: number,
+  options: RoomEncryptionOptions,
+): Promise<AddMembersResult> {
+  const fileResults: FileEncryptionOpResult[] = [];
+  const { currentUserId, identity, onProgress, onKeyChange } = options;
+
+  const encryptedFiles = await getEncryptedFilesInRoom(roomId);
+  if (encryptedFiles.length === 0) {
+    return { fileResults, skippedMembers: [] };
+  }
+
+  // For HPKE-Auth sender verification we need a pool of known room-member
+  // public keys (the sender of each existing wrap must be in here). Union
+  // the room-level and file-level endpoints to maximise coverage.
+  const { list: roomMemberKeys } = await loadRoomMemberKeys(roomId);
+  const senderKeyByUserId = new Map<string, string>();
+  for (const k of roomMemberKeys) senderKeyByUserId.set(k.userId, k.publicKey);
+
+  const verifiedCache = new Map<string, string | null>();
+  const skippedReasons = new Map<string, SkippedMemberReason>();
+
+  const verifyAndCache = async (
+    userId: string,
+    candidate: string,
+  ): Promise<string | null> => {
+    const cached = verifiedCache.get(userId);
+    if (cached !== undefined) return cached;
+    const result = await verifyUserPublicKey(
+      userId,
+      currentUserId,
+      undefined,
+      onKeyChange,
+      candidate,
+    );
+    const pk = result.kind === "ok" ? result.publicKey : null;
+    verifiedCache.set(userId, pk);
+    if (result.kind !== "ok") skippedReasons.set(userId, result.kind);
+    return pk;
+  };
+
+  onProgress?.(0, encryptedFiles.length);
+
+  for (let i = 0; i < encryptedFiles.length; i++) {
+    const file = encryptedFiles[i];
+    try {
+      const [filePublicKeys, info] = await Promise.all([
+        getFilePublicKeys(file.id),
+        getFileEncryptionAccess(file.id),
+      ]);
+
+      if (!info?.fileKeys || info.fileKeys.length === 0) {
+        fileResults.push({
+          fileId: file.id,
+          success: false,
+          error: "no encryption keys for file",
+        });
+        continue;
+      }
+
+      const existingIds = new Set(
+        info.fileKeys.map((k) => String(k.userId)),
+      );
+
+      const candidates: { userId: string; publicKey: string }[] = [];
+      if (Array.isArray(filePublicKeys)) {
+        for (const pk of filePublicKeys) {
+          if (!pk?.userId || !pk?.publicKey) continue;
+          const uid = String(pk.userId);
+          if (uid === String(currentUserId)) continue;
+          if (existingIds.has(uid)) continue;
+          candidates.push({ userId: uid, publicKey: pk.publicKey });
+          // Also feed into sender verification map for any future iterations.
+          if (!senderKeyByUserId.has(uid)) {
+            senderKeyByUserId.set(uid, pk.publicKey);
+          }
+        }
+      }
+
+      if (candidates.length === 0) {
+        fileResults.push({ fileId: file.id, success: true });
+        continue;
+      }
+
+      const recipients: RoomMemberPublicKey[] = [];
+      for (const c of candidates) {
+        const pk = await verifyAndCache(c.userId, c.publicKey);
+        if (pk) recipients.push({ userId: c.userId, publicKey: pk });
+      }
+
+      if (recipients.length === 0) {
+        fileResults.push({ fileId: file.id, success: true });
+        continue;
+      }
+
+      let dek: Uint8Array;
+      try {
+        dek = await unwrapDekForCurrentUser({
+          fileKeys: info.fileKeys,
+          roomMemberKeys: Array.from(senderKeyByUserId).map(
+            ([userId, publicKey]) => ({ userId, publicKey }),
+          ),
+          currentUserId,
+          currentIdentity: identity,
+          fileId: file.id,
+        });
+      } catch (e) {
+        fileResults.push({
+          fileId: file.id,
+          success: false,
+          error: e instanceof Error ? e.message : "unwrap failed",
+        });
+        continue;
+      }
+
+      let newKeys: ServerAccessKeyDto[];
+      try {
+        newKeys = await wrapDekForRecipients({
+          dek,
+          senderIdentity: identity,
+          senderUserId: currentUserId,
+          recipients,
+          fileId: file.id,
+        });
+      } finally {
+        wipeDek(dek);
+      }
+
+      const allKeys: ServerAccessKeyDto[] = [
+        ...info.fileKeys.map((k) => ({
+          userId: k.userId,
+          publicKeyId: k.publicKeyId || "",
+          privateKeyEnc: k.privateKeyEnc,
+        })),
+        ...newKeys,
+      ];
+      try {
+        await setFileEncryptionKeys(file.id, allKeys);
+        fileResults.push({ fileId: file.id, success: true });
+      } catch (e) {
+        const err = e as {
+          response?: { status?: number; data?: unknown };
+          message?: string;
+        };
+        const status = err?.response?.status;
+        console.error(
+          "[ENCRYPTION] setFileEncryptionKeys failed (backfill)",
+          {
+            fileId: file.id,
+            status,
+            data: err?.response?.data,
+            message: err?.message,
+          },
+        );
+        fileResults.push({
+          fileId: file.id,
+          success: false,
+          error:
+            e instanceof Error
+              ? `${e.message}${status ? ` (HTTP ${status})` : ""}`
+              : "PUT /files/{id}/access failed",
+        });
+      }
+    } catch (error) {
+      fileResults.push({
+        fileId: file.id,
+        success: false,
+        error: error instanceof Error ? error.message : "unknown error",
+      });
+    }
+    onProgress?.(i + 1, encryptedFiles.length);
+  }
+
+  const skippedMembers: SkippedRoomMember[] = [];
+  for (const [id, reason] of skippedReasons) {
+    skippedMembers.push({ id, reason });
   }
 
   return { fileResults, skippedMembers };

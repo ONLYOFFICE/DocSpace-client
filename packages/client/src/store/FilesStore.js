@@ -80,6 +80,7 @@ import {
 } from "@docspace/shared/services/encryption/filename-cache";
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import { recoverEncryptedFilenames } from "@docspace/shared/services/private-room/encrypted-filename-recovery";
+import { backfillEncryptedFilesForRoomMembers } from "@docspace/shared/services/private-room/room-encryption";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getI18n } from "react-i18next";
@@ -276,6 +277,8 @@ class FilesStore {
   highlightFile = {};
 
   thumbnails = new Set();
+
+  _backfilledEncryptedRooms = new Set();
 
   movingInProgress = false;
 
@@ -1874,6 +1877,17 @@ class FilesStore {
               getI18n().t("Common:EncryptionKeysNotConfigured"),
             );
           }
+
+          // The room id may differ from data.current.id when navigating into
+          // a sub-folder: pathParts[1] is the room, current is the sub-folder.
+          const resolvedRoomId =
+            data.pathParts?.[1]?.id ?? data.current.id;
+          // Backfill envelopes for members who registered their keypair after
+          // being invited (their old files are otherwise locked out).
+          this.maybeBackfillEncryptedRoom(
+            resolvedRoomId,
+            data.current.security,
+          );
         }
 
         if (
@@ -3971,6 +3985,68 @@ class FilesStore {
       identity,
       roomId,
     );
+  };
+
+  maybeBackfillEncryptedRoom = (roomId, security) => {
+    if (!roomId) return;
+    // Only room managers/admins backfill — they're the likely "inviter" with
+    // unwrap access. Regular members may not even have the DEK to re-share.
+    if (!security?.EditRoom) {
+      console.info(
+        "[ENCRYPTION] Backfill skipped for room",
+        roomId,
+        "— no EditRoom permission",
+      );
+      return;
+    }
+
+    if (this._backfilledEncryptedRooms.has(roomId)) return;
+
+    const userId = this.userStore?.user?.id;
+    if (!userId) return;
+
+    const identity = SecretStorage.getCached(String(userId));
+    if (!identity) {
+      console.info(
+        "[ENCRYPTION] Backfill skipped for room",
+        roomId,
+        "— identity not unlocked yet (will retry on next entry)",
+      );
+      return;
+    }
+
+    this._backfilledEncryptedRooms.add(roomId);
+    console.info("[ENCRYPTION] Starting backfill sweep for room", roomId);
+
+    void backfillEncryptedFilesForRoomMembers(roomId, {
+      currentUserId: String(userId),
+      identity,
+      // Background sweep: don't surprise the user with a TOFU prompt.
+      // Mismatches are skipped silently and re-considered next session.
+      onKeyChange: async () => "refuse",
+    })
+      .then(({ fileResults, skippedMembers }) => {
+        const wrappedFiles = fileResults.filter((r) => r.success).length;
+        const failedFiles = fileResults.filter((r) => !r.success).length;
+        console.info(
+          "[ENCRYPTION] Backfill done for room",
+          roomId,
+          "— files processed:",
+          wrappedFiles,
+          "failed:",
+          failedFiles,
+          "skipped members:",
+          skippedMembers.length,
+        );
+      })
+      .catch((error) => {
+        this._backfilledEncryptedRooms.delete(roomId);
+        console.error(
+          "[ENCRYPTION] Backfill failed for room",
+          roomId,
+          error,
+        );
+      });
   };
 
   renameFolder = (folderId, title) => {

@@ -463,7 +463,10 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
 
         const identity = await requireUnlock(String(userId));
         if (!identity) {
-          throw new Error("Encryption key not available");
+          // User dismissed the passphrase dialog without unlocking — close
+          // the viewer instead of leaving it stuck on a loader/error frame.
+          onClose?.();
+          return;
         }
 
         const response = await fetch(src, {
@@ -545,7 +548,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
         setIsDecrypting(false);
       }
     },
-    [userId, onDecryptionError],
+    [userId, onClose, onDecryptionError],
   );
 
   useEffect(() => {

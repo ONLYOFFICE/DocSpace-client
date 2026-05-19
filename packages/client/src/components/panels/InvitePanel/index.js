@@ -51,7 +51,10 @@ import {
 } from "@docspace/shared/enums";
 import { LOADER_TIMEOUT, OPERATIONS_NAME } from "@docspace/shared/constants";
 import uniqueid from "lodash/uniqueId";
-import { addMembersToEncryptedRoom } from "@docspace/shared/services/private-room/room-encryption";
+import {
+  addMembersToEncryptedRoom,
+  backfillEncryptedFilesForRoomMembers,
+} from "@docspace/shared/services/private-room/room-encryption";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 
 import { Button } from "@docspace/ui-kit/components/button";
@@ -543,6 +546,20 @@ const InvitePanel = ({
             } else if (skippedMembers.length === 0) {
               toastr.success(t("Common:UsersInvited"));
             }
+
+            // Silent follow-up: also re-wrap for any previously-invited
+            // members who registered their keypair after the fact (their old
+            // files would otherwise stay locked out indefinitely).
+            void backfillEncryptedFilesForRoomMembers(roomId, {
+              currentUserId: String(currentUserId),
+              identity,
+              onKeyChange: async () => "refuse",
+            }).catch((error) => {
+              console.error(
+                "[ENCRYPTION] Post-invite backfill failed:",
+                error,
+              );
+            });
           })
           .catch((error) => {
             console.error(

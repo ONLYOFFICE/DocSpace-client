@@ -139,3 +139,66 @@ global.TextDecoder = TextDecoder;
 if (typeof SVGSVGElement === "undefined") {
   global.SVGSVGElement = class SVGSVGElement {} as unknown as typeof SVGSVGElement;
 }
+
+// ---------------------------------------------------------------------------
+// Silent-failure guard for `[ENCRYPTION] ...` console.error
+// ---------------------------------------------------------------------------
+// The encryption wrap chain (UploadDataStore, room-encryption) historically
+// caught all errors and only console.error-ed them. Vitest does not fail on
+// console.error by default, so a silent server rejection (e.g. 403 on
+// PUT /files/{id}/access) used to slip through tests.
+//
+// This guard captures every console.error call whose formatted output contains
+// "[ENCRYPTION]" and fails the test in afterEach unless it was explicitly
+// whitelisted via `allowConsoleError(/pattern/ | "substring")`.
+import { beforeEach as _beforeEach, afterEach as _afterEach } from "vitest";
+
+const unexpectedEncryptionErrors: string[] = [];
+const allowedErrorPatterns: (RegExp | string)[] = [];
+
+const originalConsoleError = console.error.bind(console);
+console.error = (...args: unknown[]) => {
+  const formatted = args
+    .map((a) => {
+      if (a instanceof Error) return `${a.message} ${a.stack ?? ""}`;
+      if (typeof a === "string") return a;
+      try {
+        return JSON.stringify(a);
+      } catch {
+        return String(a);
+      }
+    })
+    .join(" ");
+  if (formatted.includes("[ENCRYPTION]")) {
+    const allowed = allowedErrorPatterns.some((p) =>
+      typeof p === "string" ? formatted.includes(p) : p.test(formatted),
+    );
+    if (!allowed) {
+      unexpectedEncryptionErrors.push(formatted);
+    }
+  }
+  originalConsoleError(...args);
+};
+
+(globalThis as Record<string, unknown>).allowConsoleError = (
+  matcher: RegExp | string,
+) => {
+  allowedErrorPatterns.push(matcher);
+};
+
+_beforeEach(() => {
+  unexpectedEncryptionErrors.length = 0;
+  allowedErrorPatterns.length = 0;
+});
+
+_afterEach(() => {
+  if (unexpectedEncryptionErrors.length > 0) {
+    const messages = unexpectedEncryptionErrors.slice();
+    unexpectedEncryptionErrors.length = 0;
+    throw new Error(
+      "Unexpected `[ENCRYPTION]` console.error in test (silent-failure guard):\n  " +
+        messages.join("\n  ") +
+        "\nIf this is intentional, call `allowConsoleError(/pattern/)` at the start of the test.",
+    );
+  }
+});

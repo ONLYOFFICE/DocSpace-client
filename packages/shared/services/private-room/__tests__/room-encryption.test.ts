@@ -37,15 +37,22 @@ import type {
 import { arrayBufferToBase64 } from "../../encryption/utils";
 import {
   addMembersToEncryptedRoom,
+  backfillEncryptedFilesForRoomMembers,
   revokeMemberFromEncryptedRoom,
   rotateOwnIdentityForRoom,
   validateMembersForEncryption,
 } from "../room-encryption";
 
+declare global {
+  // eslint-disable-next-line no-var
+  var allowConsoleError: (matcher: RegExp | string) => void;
+}
+
 const getFolderMock = vi.fn();
 const getFileEncryptionAccessMock = vi.fn();
 const setFileEncryptionKeysMock = vi.fn();
 const getRoomEncryptionKeysMock = vi.fn();
+const getFilePublicKeysMock = vi.fn();
 
 vi.mock("../../../api/files", () => ({
   getFolder: (...args: unknown[]) => getFolderMock(...args),
@@ -58,6 +65,7 @@ vi.mock("../../../api/files", () => ({
 vi.mock("../../../api/privacy", () => ({
   getRoomEncryptionKeys: (...args: unknown[]) =>
     getRoomEncryptionKeysMock(...args),
+  getFilePublicKeys: (...args: unknown[]) => getFilePublicKeysMock(...args),
 }));
 
 vi.mock("../../../api/files/filter", () => {
@@ -462,6 +470,210 @@ describe("addMembersToEncryptedRoom", () => {
     expect(result.fileResults.every((r) => r.success)).toBe(true);
     expect(progress[0]).toEqual([0, 2]);
     expect(progress.at(-1)).toEqual([2, 2]);
+  });
+
+  it("reports the file as failed (NOT silent) when server rejects setFileEncryptionKeys", async () => {
+    // Server-side rule: `EditAccess` is hardcoded `false` for files inside a
+    // private room except for the room owner (FileSecurity.cs:1743 in the
+    // .NET backend). A non-owner caller — or any caller hitting an unrelated
+    // server error — must surface the failure via `fileResults`, not be
+    // silently swallowed. This test pins that contract.
+    allowConsoleError(/setFileEncryptionKeys failed/);
+
+    getFolderMock.mockResolvedValue({
+      files: singleFile(FILE_ID),
+      folders: [],
+    });
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: aliceOwnWrap,
+      userKeys: [],
+    });
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+
+    const httpError = new Error("Request failed") as Error & {
+      response?: { status?: number; data?: unknown };
+    };
+    httpError.response = { status: 403, data: { error: "Forbidden" } };
+    setFileEncryptionKeysMock.mockRejectedValue(httpError);
+
+    const result = await addMembersToEncryptedRoom(
+      ROOM_ID,
+      [{ id: BOB, displayName: "Bob" }],
+      { currentUserId: ALICE, identity: alice },
+    );
+
+    expect(result.fileResults).toHaveLength(1);
+    expect(result.fileResults[0]?.success).toBe(false);
+    expect(result.fileResults[0]?.error).toBeDefined();
+    // Caller can see something went wrong on the wire — not just a no-op.
+    expect(result.fileResults[0]?.error?.toLowerCase()).toMatch(
+      /request failed|forbidden|403|failed/,
+    );
+  });
+});
+
+describe("backfillEncryptedFilesForRoomMembers", () => {
+  let alice: IdentityKeyPair;
+  let bob: IdentityKeyPair;
+  let dek: Uint8Array;
+  let aliceOwnWrap: ServerAccessKeyDto[];
+
+  beforeEach(async () => {
+    alice = await generateIdentityKeyPair();
+    bob = await generateIdentityKeyPair();
+    dek = generateDEK();
+
+    aliceOwnWrap = await wrapDekForRecipients({
+      dek,
+      senderIdentity: alice,
+      senderUserId: ALICE,
+      recipients: [{ userId: ALICE, publicKey: pubB64(alice) }],
+      fileId: FILE_ID,
+    });
+
+    getFolderMock.mockReset();
+    getFileEncryptionAccessMock.mockReset();
+    setFileEncryptionKeysMock.mockReset();
+    setFileEncryptionKeysMock.mockResolvedValue({});
+    getRoomEncryptionKeysMock.mockReset();
+    getFilePublicKeysMock.mockReset();
+
+    resetMockIDB();
+    resetTofuStores();
+    vi.stubGlobal("indexedDB", mockIDB);
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it("returns empty result when there are no encrypted files", async () => {
+    getFolderMock.mockResolvedValue({ files: [], folders: [] });
+
+    const result = await backfillEncryptedFilesForRoomMembers(ROOM_ID, {
+      currentUserId: ALICE,
+      identity: alice,
+    });
+
+    expect(result.fileResults).toEqual([]);
+    expect(result.skippedMembers).toEqual([]);
+    expect(getFilePublicKeysMock).not.toHaveBeenCalled();
+  });
+
+  it("uses getFilePublicKeys (NOT getRoomEncryptionKeys) for recipient discovery", async () => {
+    // Regression: an earlier implementation used /privacyroom/{roomId}/access,
+    // which in some server states returns only the owner. The file-level
+    // /files/file/{fileId}/publickeys endpoint is the same one the upload
+    // pipeline uses successfully and must be the source of truth here.
+    getFolderMock.mockResolvedValue({
+      files: singleFile(FILE_ID),
+      folders: [],
+    });
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: aliceOwnWrap,
+      userKeys: [],
+    });
+    // Room-level endpoint LIES and returns only Alice.
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+    ]);
+    // File-level endpoint tells the truth — Bob is here.
+    getFilePublicKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+
+    const result = await backfillEncryptedFilesForRoomMembers(ROOM_ID, {
+      currentUserId: ALICE,
+      identity: alice,
+    });
+
+    expect(result.fileResults).toEqual([{ fileId: FILE_ID, success: true }]);
+    expect(getFilePublicKeysMock).toHaveBeenCalledWith(FILE_ID);
+    expect(setFileEncryptionKeysMock).toHaveBeenCalledTimes(1);
+    const [, keysPosted] = setFileEncryptionKeysMock.mock.calls[0];
+    expect(
+      (keysPosted as ServerAccessKeyDto[]).map((k) => String(k.userId)).sort(),
+    ).toEqual([ALICE, BOB].sort());
+  });
+
+  it("is a no-op for files where every getFilePublicKeys user already has an envelope", async () => {
+    const aliceAndBobWraps = await wrapDekForRecipients({
+      dek,
+      senderIdentity: alice,
+      senderUserId: ALICE,
+      recipients: [
+        { userId: ALICE, publicKey: pubB64(alice) },
+        { userId: BOB, publicKey: pubB64(bob) },
+      ],
+      fileId: FILE_ID,
+    });
+    getFolderMock.mockResolvedValue({
+      files: singleFile(FILE_ID),
+      folders: [],
+    });
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: aliceAndBobWraps,
+      userKeys: [],
+    });
+    getFilePublicKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+
+    const result = await backfillEncryptedFilesForRoomMembers(ROOM_ID, {
+      currentUserId: ALICE,
+      identity: alice,
+    });
+
+    expect(result.fileResults).toEqual([{ fileId: FILE_ID, success: true }]);
+    expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
+  });
+
+  it("reports the file as failed (NOT silent) when server rejects setFileEncryptionKeys", async () => {
+    // Symmetric to the addMembersToEncryptedRoom guard above. Any HTTP error
+    // on `PUT /files/{id}/access` must surface in `fileResults`, never just
+    // logged-and-forgotten.
+    allowConsoleError(/setFileEncryptionKeys failed/);
+
+    getFolderMock.mockResolvedValue({
+      files: singleFile(FILE_ID),
+      folders: [],
+    });
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: aliceOwnWrap,
+      userKeys: [],
+    });
+    getFilePublicKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+
+    const httpError = new Error("Request failed") as Error & {
+      response?: { status?: number; data?: unknown };
+    };
+    httpError.response = { status: 403, data: { error: "Forbidden" } };
+    setFileEncryptionKeysMock.mockRejectedValue(httpError);
+
+    const result = await backfillEncryptedFilesForRoomMembers(ROOM_ID, {
+      currentUserId: ALICE,
+      identity: alice,
+    });
+
+    expect(result.fileResults).toHaveLength(1);
+    expect(result.fileResults[0]?.success).toBe(false);
+    expect(result.fileResults[0]?.error).toContain("HTTP 403");
   });
 });
 

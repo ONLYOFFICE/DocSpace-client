@@ -3,7 +3,7 @@
   "content": "Files and folders uploaded by admins will appeared here.",
   "content_en_sha1_hash": "eccdca0f20c32ad17dffa7f5520072fef3017029",
   "created_at": "2025-05-19T21:30:49.465Z",
-  "updated_at": "2026-05-15T14:00:06.602Z",
+  "updated_at": "2026-05-19T19:03:33.055Z",
   "comment": {
     "text": "This text appears in an empty folder view for a regular user, indicating that files and folders uploaded by administrators will be displayed there.",
     "is_auto": true,
@@ -14,19 +14,19 @@
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
       "line_number": 176,
-      "context": ")\n .with([P._, DefaultFolderType, P.when(isAdmin)], () =>\n t(\"EmptyView:DefaultFolderDescription\"),\n )\n .with([P._, DefaultFolderType, P.when(isUser)], () =>\n t(\"Common:UserEmptyDescription\"),\n )\n .otherwise(() => \"\");\n };\n \n export const getRoomDescription = (",
+      "context": ")\n .with([P._, DefaultFolderType, P.when(isAdmin)], () =>\n t(\"Common:DefaultFolderDescription\"),\n )\n .with([P._, DefaultFolderType, P.when(isUser)], () =>\n t(\"Common:UserEmptyDescription\"),\n )\n .otherwise(() => \"\");\n };\n \n export const getRoomDescription = (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
       "line_number": 176,
-      "context": ")\n .with([P._, DefaultFolderType, P.when(isAdmin)], () =>\n t(\"EmptyView:DefaultFolderDescription\"),\n )\n .with([P._, DefaultFolderType, P.when(isUser)], () =>\n t(\"Common:UserEmptyDescription\"),\n )\n .otherwise(() => \"\");\n };\n \n export const getRoomDescription = (",
+      "context": ")\n .with([P._, DefaultFolderType, P.when(isAdmin)], () =>\n t(\"Common:DefaultFolderDescription\"),\n )\n .with([P._, DefaultFolderType, P.when(isUser)], () =>\n t(\"Common:UserEmptyDescription\"),\n )\n .otherwise(() => \"\");\n };\n \n export const getRoomDescription = (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/empty-view/EmptyView.helpers.tsx",
-      "line_number": 52,
-      "context": "</>\n );\n };\n \n export const getDescription = (t: TTranslation) => {\n return t(\"Common:UserEmptyDescription\");\n };",
+      "line_number": 123,
+      "context": ");\n }\n };\n \n export const getDescription = (t: TTranslation) => {\n return t(\"Common:UserEmptyDescription\");\n };",
       "module": "/packages/sdk"
     }
   ],

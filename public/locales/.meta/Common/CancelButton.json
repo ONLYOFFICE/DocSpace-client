@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2026-05-15T16:22:24.015Z",
+  "updated_at": "2026-05-19T19:03:33.062Z",
   "comment": {
     "text": "This is the label for a button that dismisses a dialog or cancels an action, such as deleting a chat, renaming a chat, or adding an attachment.",
     "is_auto": true,
@@ -595,13 +595,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/index.tsx",
-      "line_number": 244,
+      "line_number": 311,
       "context": "onClick={handleInstallClick}\n />\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n onClick={onClose}\n />\n </>\n );\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/index.tsx",
-      "line_number": 244,
+      "line_number": 311,
       "context": "onClick={handleInstallClick}\n />\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n onClick={onClose}\n />\n </>\n );\n }",
       "module": "/packages/client"
     },

@@ -3,7 +3,7 @@
   "content": "No findings",
   "content_en_sha1_hash": "ab5062b935491263fcc3318d6d8d558b82d2b044",
   "created_at": "2025-05-19T21:30:46.827Z",
-  "updated_at": "2026-05-15T14:00:06.591Z",
+  "updated_at": "2026-05-19T19:03:33.052Z",
   "comment": {
     "text": "This is a title displayed in an empty state view when no items are found after applying a filter or search.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/empty-view/index.tsx",
-      "line_number": 32,
-      "context": "const isRoot = current.parentId === current.rootFolderId;\n const { isBase: isBaseTheme } = useTheme();\n \n const title = isFiltered\n ? t(\"Common:NoFindingsFound\")\n : isRoot\n ? getRootTitle(t)\n : getTitle(t);\n const description = isFiltered\n ? t(\"Common:EmptyFilterFilesDescription\")",
+      "line_number": 36,
+      "context": "const { isBase: isBaseTheme } = useTheme();\n \n const rootFolderType = current.rootFolderType;\n \n const title = isFiltered\n ? t(\"Common:NoFindingsFound\")\n : isRoot\n ? getRootTitle(t, rootFolderType)\n : getTitle(t);\n const description = isFiltered\n ? t(\"Common:EmptyFilterFilesDescription\")",
       "module": "/packages/sdk"
     }
   ],

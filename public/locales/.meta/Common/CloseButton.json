@@ -3,7 +3,7 @@
   "content": "Close",
   "content_en_sha1_hash": "bbfa773e5a63a5ea58c9b6207e608ca0120e592a",
   "created_at": "2025-05-19T21:30:43.485Z",
-  "updated_at": "2026-05-15T16:22:24.035Z",
+  "updated_at": "2026-05-19T19:03:33.073Z",
   "comment": {
     "text": "This is the label for a button that closes a dialog window, such as a conversion dialog, a password dialog, or a \"Get Code\" dialog.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/index.tsx",
-      "line_number": 267,
-      "context": "return (\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CloseButton\")}\n onClick={onClose}\n />\n );\n }\n return (",
+      "line_number": 334,
+      "context": "return (\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CloseButton\")}\n onClick={onClose}\n />\n );\n }\n // installing",
       "module": "/packages/client"
     },
     {

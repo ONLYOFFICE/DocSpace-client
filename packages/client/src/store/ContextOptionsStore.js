@@ -1525,7 +1525,7 @@ class ContextOptionsStore {
       {
         id: "option_unmute-room",
         key: "unmute-room",
-        label: t("EnableNotifications"),
+        label: t("Common:EnableNotifications"),
         icon: UnmuteReactSvgUrl,
         onClick: () => this.onClickMute("unmute", item, t),
         disabled: !canMute,
@@ -1533,7 +1533,7 @@ class ContextOptionsStore {
       {
         id: "option_mute-room",
         key: "mute-room",
-        label: t("DisableNotifications"),
+        label: t("Common:DisableNotifications"),
         icon: MuteReactSvgUrl,
         onClick: () => this.onClickMute("mute", item, t),
         disabled: !canMute,
@@ -1893,7 +1893,9 @@ class ContextOptionsStore {
   };
 
   askAI = async (item) => {
-    const skipAi = JSON.parse(localStorage.getItem(SKIP_AI_MODAL_KEY) ?? "false");
+    const skipAi = JSON.parse(
+      localStorage.getItem(SKIP_AI_MODAL_KEY) ?? "false",
+    );
 
     if (item.parentRoomType !== FolderType.FormRoom || skipAi) {
       this.filesActionsStore.askAIAction(item);
@@ -2260,7 +2262,7 @@ class ContextOptionsStore {
       {
         id: "option_edit-room",
         key: "edit-room",
-        label: t("EditRoom"),
+        label: t("Common:EditRoom"),
         icon: SettingsReactSvgUrl,
         onClick: () => this.onClickEditRoom(item),
         disabled: false,
@@ -2549,7 +2551,7 @@ class ContextOptionsStore {
       {
         id: "option_change-room-owner",
         key: "change-room-owner",
-        label: t("Files:ChangeRoomOwner"),
+        label: t("Common:ChangeRoomOwner"),
         icon: ReconnectSvgUrl,
         onClick: this.onChangeRoomOwner,
         disabled: isAIAgent,
@@ -2712,7 +2714,7 @@ class ContextOptionsStore {
       {
         id: "option_archive-room",
         key: "archive-room",
-        label: t("MoveToArchive"),
+        label: t("Common:MoveToArchive"),
         icon: RoomArchiveSvgUrl,
         onClick: () => this.onClickArchive("archive"),
         disabled: false,
@@ -3214,7 +3216,7 @@ class ContextOptionsStore {
       if (canArchiveRoom) {
         archiveOptions = {
           key: "archive-room",
-          label: t("MoveToArchive"),
+          label: t("Common:MoveToArchive"),
           icon: RoomArchiveSvgUrl,
           onClick: (e) => this.onClickArchive("archive"),
           disabled: false,
@@ -3839,3 +3841,4 @@ class ContextOptionsStore {
 }
 
 export default ContextOptionsStore;
+

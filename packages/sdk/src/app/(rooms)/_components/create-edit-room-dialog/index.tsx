@@ -382,7 +382,7 @@ const CreateEditRoomDialog = ({
         onClose={onClose}
       >
         <ModalDialog.Header>
-          {isEdit ? t("Files:EditRoom") : t("Common:CreateRoom")}
+          {isEdit ? t("Common:EditRoom") : t("Common:CreateRoom")}
         </ModalDialog.Header>
 
         <ModalDialog.Body>

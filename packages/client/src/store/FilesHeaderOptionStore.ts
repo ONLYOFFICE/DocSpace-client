@@ -365,7 +365,7 @@ export default class FilesHeaderOptionStore {
         return {
           id: "menu-archive",
           key: "archive",
-          label: t("MoveToArchive"),
+          label: t("Common:MoveToArchive"),
           iconUrl: RoomArchiveSvgUrl,
           onClick: this.archiveHandle,
           disabled: false,
@@ -487,3 +487,4 @@ export default class FilesHeaderOptionStore {
     }
   };
 }
+

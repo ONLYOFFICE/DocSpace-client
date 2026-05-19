@@ -26,7 +26,7 @@
 
 "use client";
 
-import { ArticleItemPure } from "@docspace/ui-kit/components/article/item/ArticleItem";
+import { ArticleItemPure } from "@docspace/ui-kit/components/article/item";
 
 type SidebarNavItemProps = {
   id: string;

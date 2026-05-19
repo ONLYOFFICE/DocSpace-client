@@ -161,7 +161,6 @@ const AiAgentDetailPage = ({
 
       {dialogsStore.createAgentDialogVisible ? (
         <CreateAgentEvent
-          title=""
           visible={dialogsStore.createAgentDialogVisible}
           onClose={() => dialogsStore.setCreateAgentDialogVisible(false)}
         />

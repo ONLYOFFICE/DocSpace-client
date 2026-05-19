@@ -41,7 +41,7 @@ import styles from "./TagInput.module.scss";
 
 type TagInputProps = {
   t: TFunction;
-  title: string;
+  title?: string;
   tagHandler: TagHandler;
   setIsScrollLocked: (value: boolean) => void;
   isDisabled: boolean;

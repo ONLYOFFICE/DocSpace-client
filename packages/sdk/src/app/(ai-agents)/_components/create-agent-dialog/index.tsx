@@ -48,7 +48,7 @@ import { modelCache } from "./sub-components/modelCache";
 
 type CreateAgentDialogProps = {
   visible: boolean;
-  title: string;
+  title?: string;
   onClose: VoidFunction;
   onCreate: (params: TAgentParams) => void;
   fetchedTags: string[];

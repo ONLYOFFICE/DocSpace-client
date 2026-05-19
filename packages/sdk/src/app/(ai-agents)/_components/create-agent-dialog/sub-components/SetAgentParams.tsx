@@ -403,7 +403,6 @@ const SetAgentParams = ({
 
       <TagInput
         t={t}
-        title=""
         tagHandler={tagHandler}
         setIsScrollLocked={setIsScrollLocked}
         isDisabled={isDisabled}

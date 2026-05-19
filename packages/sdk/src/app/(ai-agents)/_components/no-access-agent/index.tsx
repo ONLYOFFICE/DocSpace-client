@@ -67,7 +67,7 @@ const NoAccessAgent = () => {
       })}
       description={t("AIRoom:AIAgentAccessRedirectNote", {
         sectionName: t("Common:AIAgents", { defaultValue: "AI Agents" }),
-        defaultValue: "Redirecting to {{sectionName}}…",
+        defaultValue: "Redirecting to {{sectionName}}...",
       })}
       icon={
         isBase ? <ManageAccessRightsLightIcon /> : <ManageAccessRightsDarkIcon />

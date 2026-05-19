@@ -154,7 +154,6 @@ const AgentsListPage = ({ initialSearch }: Props) => {
 
       {dialogsStore.createAgentDialogVisible ? (
         <CreateAgentEvent
-          title=""
           visible={dialogsStore.createAgentDialogVisible}
           onClose={() => dialogsStore.setCreateAgentDialogVisible(false)}
         />

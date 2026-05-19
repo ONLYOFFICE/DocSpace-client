@@ -42,7 +42,7 @@ import {
 import CreateAgentDialog from "../create-agent-dialog";
 
 type Props = {
-  title: string;
+  title?: string;
   visible: boolean;
   onClose: VoidFunction;
   portalMcpServerId?: string;

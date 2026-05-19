@@ -219,13 +219,17 @@ const RoomsTableViewRow = observer(
     );
 
     const contextMenuModel = getContextModel(item, true);
+    const getRowContextModel = React.useCallback(
+      () => getContextModel(item, true),
+      [getContextModel, item],
+    );
 
     return (
       <TableRow
         className={classNames({ "table-row-selected": isChecked })}
         checked={isChecked}
         contextOptions={contextMenuModel}
-        getContextModel={() => getContextModel(item, true)}
+        getContextModel={getRowContextModel}
         onClick={onRowClick}
         onDoubleClick={onRowDoubleClick}
         onMouseEnter={() => setIsHovered(true)}

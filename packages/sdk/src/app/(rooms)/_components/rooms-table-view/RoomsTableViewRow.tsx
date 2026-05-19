@@ -36,11 +36,14 @@ import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
+import Badges from "@docspace/shared/components/badges";
 import {
   TagManagement,
   type AccessTagManagement,
 } from "@docspace/shared/components/tag-management";
 import type { TagClickEvent } from "@docspace/ui-kit/components/tag";
+import api from "@docspace/shared/api";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
@@ -48,6 +51,7 @@ import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import { generateFilesItemValue } from "@/app/(docspace)/(files)/_utils";
 import useRoomContextMenuModel from "../../_hooks/useRoomContextMenuModel";
+import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
 
 import type {
   TFolderItem,
@@ -70,7 +74,7 @@ type RoomsTableViewRowProps = {
   timezone: string;
   lastColumn: string;
   onEditRoom?: (item: TFolderItem | TFileItem) => void;
-  onTagsChanged?: (id: number) => void;
+  onRoomChanged?: (id: number) => void;
 };
 
 const RoomsTableViewRow = observer(
@@ -80,7 +84,7 @@ const RoomsTableViewRow = observer(
     timezone,
     lastColumn,
     onEditRoom,
-    onTagsChanged,
+    onRoomChanged,
   }: RoomsTableViewRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
@@ -91,7 +95,11 @@ const RoomsTableViewRow = observer(
     const { t, i18n } = useTranslation(["Common"]);
     const { openFile } = useFilesActions({ t });
     const { openFolder } = useFolderActions({ t });
-    const { getContextModel } = useRoomContextMenuModel(onEditRoom);
+    const { getContextModel } = useRoomContextMenuModel(
+      onEditRoom,
+      onRoomChanged,
+    );
+    const refreshRooms = React.useContext(RoomsRefreshContext);
     const isChecked = filesSelectionStore.isCheckedItem(item);
     const value = generateFilesItemValue(item, false, index);
     const [isHovered, setIsHovered] = React.useState(false);
@@ -99,12 +107,17 @@ const RoomsTableViewRow = observer(
     const roomItem = item as TFolderItem & {
       tags?: string[];
       createdBy?: { displayName?: string };
-      security?: { EditRoom?: boolean };
+      security?: { EditRoom?: boolean; Pin?: boolean; Mute?: boolean };
+      pinned?: boolean;
+      mute?: boolean;
+      isRoom?: boolean;
     };
 
     const roomTags = roomItem.tags ?? [];
     const owner = roomItem.createdBy?.displayName ?? "";
     const hasEditAccess = !!roomItem.security?.EditRoom;
+    const canUnpin = !!roomItem.security?.Pin;
+    const canMute = !!roomItem.security?.Mute;
 
     const tagAccess: AccessTagManagement = {
       canCreate: hasEditAccess,
@@ -120,8 +133,28 @@ const RoomsTableViewRow = observer(
     // Replace with WebSocket MODIFY_FOLDER subscription once sockets are
     // enabled in the SDK (initSocket={false} in providers).
     const onRoomTagsChanged = React.useCallback(() => {
-      onTagsChanged?.(item.id as number);
-    }, [item.id, onTagsChanged]);
+      onRoomChanged?.(item.id as number);
+    }, [item.id, onRoomChanged]);
+
+    const onUnpinClick = React.useCallback(async () => {
+      if (!canUnpin) return;
+      try {
+        await api.rooms.unpinRoom(item.id);
+        refreshRooms?.();
+      } catch {
+        toastr.error(t("Common:UnexpectedError"));
+      }
+    }, [canUnpin, item.id, refreshRooms, t]);
+
+    const onUnmuteClick = React.useCallback(async () => {
+      if (!canMute) return;
+      try {
+        await api.settings.muteRoomNotification(item.id, false);
+        onRoomChanged?.(item.id as number);
+      } catch {
+        toastr.error(t("Common:UnexpectedError"));
+      }
+    }, [canMute, item.id, refreshRooms, t]);
 
     const lastActivity = getCorrectDate(
       i18n.language || "",
@@ -165,6 +198,19 @@ const RoomsTableViewRow = observer(
     );
 
     const itemSnapshot = { ...observableItem };
+
+    const badgesNode = (
+      <div className={styles.inlineBadges}>
+        <Badges
+          t={t}
+          item={itemSnapshot}
+          viewAs="table"
+          showNew={false}
+          onUnpinClick={onUnpinClick}
+          onUnmuteClick={onUnmuteClick}
+        />
+      </div>
+    );
 
     const quickButtonsNode = (
       <div className={styles.quickButtonsContainer}>
@@ -227,6 +273,7 @@ const RoomsTableViewRow = observer(
           <span className={styles.nameCellText} onClick={onNameClick}>
             {item.title}
           </span>
+          {badgesNode}
           {lastColumn === "Name" ? quickButtonsNode : null}
         </TableCell>
         <TableCell

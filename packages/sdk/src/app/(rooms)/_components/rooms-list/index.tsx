@@ -327,7 +327,7 @@ const RoomsList = ({
         timezone={timezone}
         fetchMoreFiles={fetchMoreRooms}
         onEditRoom={onEditRoom}
-        onTagsChanged={refreshSingleRoom}
+        onRoomChanged={refreshSingleRoom}
       />
     );
   } else {

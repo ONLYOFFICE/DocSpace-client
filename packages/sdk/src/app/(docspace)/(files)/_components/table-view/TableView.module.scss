@@ -191,3 +191,19 @@
   z-index: 1;
   position: relative;
 }
+
+.inlineBadges {
+  display: flex;
+  align-items: center;
+  margin-inline-start: 16px;
+
+  :global(.badges) {
+    display: flex;
+    align-items: center;
+  }
+
+  :global(.badge) {
+    cursor: pointer;
+    margin-inline-end: 8px;
+  }
+}

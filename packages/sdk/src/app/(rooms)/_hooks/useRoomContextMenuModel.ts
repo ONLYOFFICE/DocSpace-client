@@ -40,6 +40,8 @@ import DuplicateReactSvgUrl from "PUBLIC_DIR/images/icons/16/duplicate.react.svg
 import OwnerReactSvgUrl from "PUBLIC_DIR/images/file.actions.owner.react.svg?url";
 import EditRoomReactSvgUrl from "PUBLIC_DIR/images/settings.react.svg?url";
 import MoreOptionsReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
+import MuteReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
+import UnmuteReactSvgUrl from "PUBLIC_DIR/images/unmute.react.svg?url";
 
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import useDownloadActions from "@/app/(docspace)/_hooks/useDownloadActions";
@@ -53,16 +55,19 @@ import { RoomsRefreshContext } from "../_contexts/RoomsRefreshContext";
 
 type TRoomItem = TFolderItem & {
   pinned?: boolean;
+  mute?: boolean;
   security?: {
     Pin?: boolean;
     ChangeOwner?: boolean;
     Download?: boolean;
     EditRoom?: boolean;
+    Mute?: boolean;
   };
 };
 
 export default function useRoomContextMenuModel(
   onEditRoom?: (item: TRoomItem) => void,
+  onRoomChanged?: (id: number) => void,
 ) {
   const { t } = useTranslation(["Common", "Files"]);
   const refreshRooms = useContext(RoomsRefreshContext);
@@ -85,6 +90,11 @@ export default function useRoomContextMenuModel(
       const handleArchive = async () => {
         await api.rooms.archiveRoom(room.id);
         refreshRooms?.();
+      };
+
+      const handleMute = async () => {
+        await api.settings.muteRoomNotification(room.id, !room.mute);
+        onRoomChanged?.(room.id);
       };
 
       const mainItems: ContextMenuModel[] = [
@@ -111,6 +121,17 @@ export default function useRoomContextMenuModel(
           onClick: handlePin,
           disabled: !room.security?.Pin,
         },
+        {
+          id: room.mute ? "option_unmute-room" : "option_mute-room",
+          key: room.mute ? "unmute-room" : "mute-room",
+          label: room.mute
+            ? t("Files:EnableNotifications")
+            : t("Files:DisableNotifications"),
+          icon: room.mute ? UnmuteReactSvgUrl : MuteReactSvgUrl,
+          onClick: handleMute,
+          disabled: !room.security?.Mute,
+        },
+        { key: "separator-mute", isSeparator: true },
         {
           id: "option_edit-room",
           key: "edit-room",
@@ -162,7 +183,7 @@ export default function useRoomContextMenuModel(
 
       return mainItems;
     },
-    [t, openFolder, downloadAction, refreshRooms, onEditRoom],
+    [t, openFolder, downloadAction, refreshRooms, onEditRoom, onRoomChanged],
   );
 
   const getSelectionContextMenuModel = useCallback((): ContextMenuModel[] => {

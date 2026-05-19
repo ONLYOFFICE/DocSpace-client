@@ -32,9 +32,8 @@ import { observer } from "mobx-react";
 import { MemoryRouter } from "react-router";
 
 import { BillingRoot } from "@docspace/ui-kit/billing";
-import AiPaywallPage from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPaywallPage";
-import AiPageLoader from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPageLoader";
-import { useServicesStore } from "@docspace/ui-kit/billing/store/ServicesStoreProvider";
+import { AiPaywallPage, AiPageLoader } from "@docspace/ui-kit/billing/services/pages";
+import { useServicesStore } from "@docspace/ui-kit/billing/store";
 import { AI_TOOLS, AI_ENUM } from "@docspace/ui-kit/billing/constants";
 import type { TPaymentConfig } from "@docspace/ui-kit/billing/types";
 import { toastr } from "@docspace/ui-kit/components/toast";

@@ -38,7 +38,7 @@ import {
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Text } from "@docspace/ui-kit/components/text";
-import PeopleSelector from "@docspace/ui-kit/selectors/People";
+import { PeopleSelector } from "@docspace/ui-kit/selectors/People";
 import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
 
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";

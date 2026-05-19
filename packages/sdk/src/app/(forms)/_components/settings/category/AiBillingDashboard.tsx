@@ -29,7 +29,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import AiPage from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPage";
+import { AiPage } from "@docspace/ui-kit/billing/services/pages";
 import { PaymentMethod } from "@docspace/ui-kit/billing";
 import { getBrandName } from "@docspace/shared/constants/brands";
 

@@ -1603,5 +1603,9 @@
   "ChangeRoomOwner": "Zamenjajte lastnika sobe",
   "MoveToArchive": "Premakni v arhiv",
   "PinToTop": "Pripni na vrh",
-  "AIAgentPinLimitMessage": "Ne morete pritrditi več kot 10 {{aiAgents}} na vrh. Odprtje nekaj, ki so trenutno pritrdinjene."
+  "AIAgentPinLimitMessage": "Ne morete pritrditi več kot 10 {{aiAgents}} na vrh. Odprtje nekaj, ki so trenutno pritrdinjene.",
+  "UploadPicture": "Naloži sliko",
+  "CustomizeCover": "Prilagodite naslovnico",
+  "ChangeTheRoomOwner": "Spremeni lastnika sobe",
+  "RoomOwner": "Lastnik sobe"
 }

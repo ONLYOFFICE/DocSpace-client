@@ -1603,5 +1603,9 @@
   "ChangeRoomOwner": "Mainīt istabas īpašnieku",
   "MoveToArchive": "Pārvietot uz arhīvu",
   "PinToTop": "Piespraust augšā",
-  "AIAgentPinLimitMessage": "Jūs nevarat fiksēt vairāk par 10 {{aiAgents}} uz augšdaļas. Atvienojiet dažus, kas pašlaik ir fiksēti."
+  "AIAgentPinLimitMessage": "Jūs nevarat fiksēt vairāk par 10 {{aiAgents}} uz augšdaļas. Atvienojiet dažus, kas pašlaik ir fiksēti.",
+  "UploadPicture": "Augšupielādēt fotoattēlu",
+  "CustomizeCover": "Pielāgot galveno vāka foto",
+  "ChangeTheRoomOwner": "Mainiet telpas īpašnieku",
+  "RoomOwner": "Telpas īpašnieks"
 }

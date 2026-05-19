@@ -1603,5 +1603,9 @@
   "ChangeRoomOwner": "Сменить владельца комнаты",
   "MoveToArchive": "Переместить в архив",
   "PinToTop": "Закрепить наверху",
-  "AIAgentPinLimitMessage": "Вы не можете закрепить более 10 {{aiAgents}}. Открепите некоторые из закрепленных."
+  "AIAgentPinLimitMessage": "Вы не можете закрепить более 10 {{aiAgents}}. Открепите некоторые из закрепленных.",
+  "UploadPicture": "Загрузить картинку",
+  "CustomizeCover": "Настроить обложку",
+  "ChangeTheRoomOwner": "Изменить владельца комнаты",
+  "RoomOwner": "Владелец комнаты"
 }

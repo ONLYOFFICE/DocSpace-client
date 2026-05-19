@@ -1603,5 +1603,9 @@
   "ChangeRoomOwner": "කාමර හිමියා වෙනස් කරන්න",
   "MoveToArchive": "සංරක්‍ෂිතයට ගෙනයන්න",
   "PinToTop": "මුදුනට අමුණන්න",
-  "AIAgentPinLimitMessage": "ඔබට 10 කට වඩා {{aiAgents}} ඉහළට පින් කිරීමට නොහැකිය. දැනට පින් කළ ඒවායින් සමහරක් අලවා ගන්න."
+  "AIAgentPinLimitMessage": "ඔබට 10 කට වඩා {{aiAgents}} ඉහළට පින් කිරීමට නොහැකිය. දැනට පින් කළ ඒවායින් සමහරක් අලවා ගන්න.",
+  "UploadPicture": "පින්තුරයක් උඩුගත කරන්න",
+  "CustomizeCover": "කවරය සකසන්න",
+  "ChangeTheRoomOwner": "කාමරයේ හිමිකරු වෙනස් කරන්න",
+  "RoomOwner": "කාමරයේ හිමිකරු"
 }

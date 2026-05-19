@@ -150,7 +150,7 @@ class TargetUserStore {
   getProfileModel = (t: TFunction) => {
     return [
       {
-        label: t("RoomLogoCover:UploadPicture"),
+        label: t("Common:UploadPicture"),
         icon: UploadSvgUrl,
         key: AvatarActionKeys.PROFILE_AVATAR_UPLOAD,
         onClick: (ref: React.RefObject<HTMLDivElement>) => ref.current?.click(),
@@ -252,3 +252,4 @@ class TargetUserStore {
 }
 
 export default TargetUserStore;
+

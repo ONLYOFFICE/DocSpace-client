@@ -1603,5 +1603,9 @@
   "ChangeRoomOwner": "Změnit vlastníka místnosti",
   "MoveToArchive": "Přesunout do archivu",
   "PinToTop": "Připnout na začátek",
-  "AIAgentPinLimitMessage": "Nemůžete připevnit více než 10 {{aiAgents}} na vrchol. Odpřipevněte některé, které jsou aktuálně připevněny."
+  "AIAgentPinLimitMessage": "Nemůžete připevnit více než 10 {{aiAgents}} na vrchol. Odpřipevněte některé, které jsou aktuálně připevněny.",
+  "UploadPicture": "Nahrát obrázek",
+  "CustomizeCover": "Přizpůsobení krytu",
+  "ChangeTheRoomOwner": "Změna vlastníka místnosti",
+  "RoomOwner": "Majitel místnosti"
 }

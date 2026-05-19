@@ -67,7 +67,7 @@ const ChangeRoomOwner = ({
   return (
     <div>
       <Text className="change-owner-label" fontWeight={600} fontSize="13px">
-        {isAgent ? t("Common:AgentOwner") : t("Files:RoomOwner")}
+        {isAgent ? t("Common:AgentOwner") : t("Common:RoomOwner")}
       </Text>
 
       <div className={styles.changeOwnerDisplayWrapper}>
@@ -114,3 +114,4 @@ export default inject(({ settingsStore, userStore }: TStore) => ({
   currentUserId: userStore.user?.id,
   currentColorScheme: settingsStore.currentColorScheme,
 }))(observer(ChangeRoomOwner));
+

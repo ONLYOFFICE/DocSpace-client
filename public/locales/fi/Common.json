@@ -1603,5 +1603,9 @@
   "ChangeRoomOwner": "Vaihda huoneen omistaja",
   "MoveToArchive": "Siirrä arkistoon",
   "PinToTop": "Kiinnitä yläreunaan",
-  "AIAgentPinLimitMessage": "Et voi kiinnittää yli 10 {{aiAgents}} ylös. Irrota joitakin, jotka on tällä hetkellä kiinnitetty."
+  "AIAgentPinLimitMessage": "Et voi kiinnittää yli 10 {{aiAgents}} ylös. Irrota joitakin, jotka on tällä hetkellä kiinnitetty.",
+  "UploadPicture": "Lataa kuva",
+  "CustomizeCover": "Mukauta kansi",
+  "ChangeTheRoomOwner": "Vaihda Huoneen Omistaja",
+  "RoomOwner": "Huoneen omistaja"
 }

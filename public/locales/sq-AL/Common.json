@@ -1603,5 +1603,9 @@
   "ChangeRoomOwner": "Zëvendëso Pronësin e Dhomës",
   "MoveToArchive": "Lëvizni në arkiv",
   "PinToTop": "Gozhdoni",
-  "AIAgentPinLimitMessage": "Nuk mund të fiksoni më shumë se 10 {{aiAgents}} në krye. Hiqni fiksimin nga disa që janë fiksuar aktualisht."
+  "AIAgentPinLimitMessage": "Nuk mund të fiksoni më shumë se 10 {{aiAgents}} në krye. Hiqni fiksimin nga disa që janë fiksuar aktualisht.",
+  "UploadPicture": "Ngarkoni foto",
+  "CustomizeCover": "Personalizoni kapakun",
+  "ChangeTheRoomOwner": "Ndryshoni pronarin e dhomës",
+  "RoomOwner": "Pronari i dhomës"
 }

@@ -1603,5 +1603,9 @@
   "ChangeRoomOwner": "Raum-Besitzer ändern",
   "MoveToArchive": "Ins Archiv verschieben",
   "PinToTop": "Oben anstecken",
-  "AIAgentPinLimitMessage": "Sie können nicht mehr als 10 {{aiAgents}} oben anheften. Entfernen Sie einige, die derzeit angeheftet sind."
+  "AIAgentPinLimitMessage": "Sie können nicht mehr als 10 {{aiAgents}} oben anheften. Entfernen Sie einige, die derzeit angeheftet sind.",
+  "UploadPicture": "Bild hochladen",
+  "CustomizeCover": "Cover anpassen",
+  "ChangeTheRoomOwner": "Raumbesitzer ändern",
+  "RoomOwner": "Raumbesitzer"
 }

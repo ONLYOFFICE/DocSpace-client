@@ -1603,5 +1603,9 @@
   "ChangeRoomOwner": "Oda Sahibi Değiştir",
   "MoveToArchive": "Arşive taşı",
   "PinToTop": "En üste sabitle",
-  "AIAgentPinLimitMessage": "En üste 10'dan fazla {{aiAgents}} sabitleyemezsiniz. Sabitlenmiş olanlardan bazılarını sabitlemeyi kaldırın."
+  "AIAgentPinLimitMessage": "En üste 10'dan fazla {{aiAgents}} sabitleyemezsiniz. Sabitlenmiş olanlardan bazılarını sabitlemeyi kaldırın.",
+  "UploadPicture": "Resim yükle",
+  "CustomizeCover": "Kapağı özelleştir",
+  "ChangeTheRoomOwner": "Oda Sahibini Değiştir",
+  "RoomOwner": "Oda sahibi"
 }

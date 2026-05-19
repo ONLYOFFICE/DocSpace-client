@@ -1603,5 +1603,9 @@
   "ChangeRoomOwner": "Cambiar propietario de la sala",
   "MoveToArchive": "Mover a archivo",
   "PinToTop": "Anclar al principio",
-  "AIAgentPinLimitMessage": "No puede anclar más de 10 {{aiAgents}} en la parte superior. Desancle algunos que estén actualmente anclados."
+  "AIAgentPinLimitMessage": "No puede anclar más de 10 {{aiAgents}} en la parte superior. Desancle algunos que estén actualmente anclados.",
+  "UploadPicture": "Subir imagen",
+  "CustomizeCover": "Personalizar la portada",
+  "ChangeTheRoomOwner": "Cambiar el propietario de la sala",
+  "RoomOwner": "Propietario de la sala"
 }

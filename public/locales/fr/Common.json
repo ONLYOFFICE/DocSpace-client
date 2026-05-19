@@ -1603,5 +1603,9 @@
   "ChangeRoomOwner": "Changer le propriétaire de la salle",
   "MoveToArchive": "Déplacer dans l’archive",
   "PinToTop": "Épingler en haut de page",
-  "AIAgentPinLimitMessage": "Vous ne pouvez pas épingler plus de 10 {{aiAgents}} en haut. Dépinglez certains qui sont actuellement épinglés."
+  "AIAgentPinLimitMessage": "Vous ne pouvez pas épingler plus de 10 {{aiAgents}} en haut. Dépinglez certains qui sont actuellement épinglés.",
+  "UploadPicture": "Téléverser l'image",
+  "CustomizeCover": "Personnaliser la couverture",
+  "ChangeTheRoomOwner": "Changer le propriétaire de la salle",
+  "RoomOwner": "Propriétaire de la salle"
 }

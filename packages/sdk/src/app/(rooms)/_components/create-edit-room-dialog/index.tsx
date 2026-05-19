@@ -240,7 +240,7 @@ const CreateEditRoomDialog = ({
     const items: (UploadItem | ActionItem)[] = [
       {
         key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_UPLOAD,
-        label: t("RoomLogoCover:UploadPicture"),
+        label: t("Common:UploadPicture"),
         icon: UploadSvgUrl,
         onClick: (ref?: React.RefObject<Nullable<HTMLInputElement>>) =>
           ref?.current?.click(),
@@ -249,7 +249,7 @@ const CreateEditRoomDialog = ({
 
     items.push({
       key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_CUSTOMIZE_COVER,
-      label: t("RoomLogoCover:CustomizeCover"),
+      label: t("Common:CustomizeCover"),
       icon: PencilSvgUrl,
       onClick: onOpenCoverDialog,
     });
@@ -465,7 +465,7 @@ const CreateEditRoomDialog = ({
             {isEdit && room.createdBy ? (
               <div className={styles.ownerSection}>
                 <Text fontWeight={600} fontSize="13px">
-                  {t("Files:RoomOwner")}:
+                  {t("Common:RoomOwner")}:
                 </Text>
                 <div className={styles.ownerDisplay}>
                   <Avatar

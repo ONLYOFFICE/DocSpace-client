@@ -1603,5 +1603,9 @@
   "ChangeRoomOwner": "Zmeniť vlastníka miestnosti",
   "MoveToArchive": "Presunúť do archívu",
   "PinToTop": "Pripnúť hore",
-  "AIAgentPinLimitMessage": "Nemôžete pripínať viac ako 10 {{aiAgents}} na vrch. Odpínajte niektoré, ktoré sú momentálne pripnuté."
+  "AIAgentPinLimitMessage": "Nemôžete pripínať viac ako 10 {{aiAgents}} na vrch. Odpínajte niektoré, ktoré sú momentálne pripnuté.",
+  "UploadPicture": "Nahrať obrázok",
+  "CustomizeCover": "Prispôsobiť kryt",
+  "ChangeTheRoomOwner": "Zmeniť vlastníka miestnosti",
+  "RoomOwner": "Majiteľ miestnosti"
 }

@@ -1063,7 +1063,7 @@ class DialogsStore {
   getLogoCoverModel = (t, hasImage, onDelete) => {
     return [
       {
-        label: t("RoomLogoCover:UploadPicture"),
+        label: t("Common:UploadPicture"),
         icon: UploadSvgUrl,
         key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_UPLOAD,
         onClick: (ref) => ref.current.click(),
@@ -1077,7 +1077,7 @@ class DialogsStore {
             onClick: onDelete ? onDelete() : () => this.deleteRoomLogo(),
           }
         : {
-            label: t("RoomLogoCover:CustomizeCover"),
+            label: t("Common:CustomizeCover"),
             icon: PenSvgUrl,
             key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_CUSTOMIZE_COVER,
             onClick: () => this.setRoomLogoCoverDialogVisible(true),
@@ -1203,3 +1203,4 @@ class DialogsStore {
 }
 
 export default DialogsStore;
+

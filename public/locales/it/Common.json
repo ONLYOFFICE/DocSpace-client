@@ -1603,5 +1603,9 @@
   "ChangeRoomOwner": "Cambia proprietario della stanza",
   "MoveToArchive": "Sposta in archivio",
   "PinToTop": "Fissa in alto",
-  "AIAgentPinLimitMessage": "Non è possibile fissare più di 10 {{aiAgents}} in cima. Sfilate alcuni che sono attualmente fissati."
+  "AIAgentPinLimitMessage": "Non è possibile fissare più di 10 {{aiAgents}} in cima. Sfilate alcuni che sono attualmente fissati.",
+  "UploadPicture": "Carica immagine",
+  "CustomizeCover": "Personalizza cover",
+  "ChangeTheRoomOwner": "Cambia il proprietario della stanza",
+  "RoomOwner": "Proprietario della stanza"
 }

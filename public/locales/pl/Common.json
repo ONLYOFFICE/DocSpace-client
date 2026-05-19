@@ -1603,5 +1603,9 @@
   "ChangeRoomOwner": "Zmień właściciela pokoju",
   "MoveToArchive": "Przenieś do archiwum",
   "PinToTop": "Przypnij u góry",
-  "AIAgentPinLimitMessage": "Nie można przypiąć więcej niż 10 {{aiAgents}} do góry. Odpięć niektórych, które są obecnie przypięte."
+  "AIAgentPinLimitMessage": "Nie można przypiąć więcej niż 10 {{aiAgents}} do góry. Odpięć niektórych, które są obecnie przypięte.",
+  "UploadPicture": "Dodaj obraz",
+  "CustomizeCover": "Dostosuj okładkę",
+  "ChangeTheRoomOwner": "Zmień właściciela pokoju",
+  "RoomOwner": "Właściciel pokoju"
 }

@@ -1603,5 +1603,9 @@
   "ChangeRoomOwner": "Promena vlasnika sobe",
   "MoveToArchive": "Pomeri u arhivu",
   "PinToTop": "Zakači na vrh",
-  "AIAgentPinLimitMessage": "Ne možete pričvrstiti više od 10 {{aiAgents}} na vrh. Od pričvrstite neke koji su trenutno pričvršćeni."
+  "AIAgentPinLimitMessage": "Ne možete pričvrstiti više od 10 {{aiAgents}} na vrh. Od pričvrstite neke koji su trenutno pričvršćeni.",
+  "UploadPicture": "Učitaj sliku",
+  "CustomizeCover": "Prilagodi naslovnicu",
+  "ChangeTheRoomOwner": "Promeni Vlasnika sobe",
+  "RoomOwner": "Vlasnik sobe"
 }

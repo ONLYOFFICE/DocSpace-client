@@ -1603,5 +1603,9 @@
   "ChangeRoomOwner": "Schimbă Proprietarul Camerei",
   "MoveToArchive": "Mutare în arhivă",
   "PinToTop": "Fixare sus",
-  "AIAgentPinLimitMessage": "Nu puteți pini mai mult de 10 {{aiAgents}} în partea de sus. Depiniți unele care sunt în prezent pinate."
+  "AIAgentPinLimitMessage": "Nu puteți pini mai mult de 10 {{aiAgents}} în partea de sus. Depiniți unele care sunt în prezent pinate.",
+  "UploadPicture": "Încărcare imagine",
+  "CustomizeCover": "Particularizare copertă",
+  "ChangeTheRoomOwner": "Schimbați proprietarul sălii",
+  "RoomOwner": "Proprietarul sălii"
 }

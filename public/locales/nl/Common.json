@@ -1603,5 +1603,9 @@
   "ChangeRoomOwner": "Wijzig de eigenaar van de ruimte",
   "MoveToArchive": "Verplaatsen naar archief",
   "PinToTop": "Bovenaan pinnen",
-  "AIAgentPinLimitMessage": "U kunt meer dan 10 {{aiAgents}} bovenaan pinnen. Pinneer enkele die momenteel zijn gepind."
+  "AIAgentPinLimitMessage": "U kunt meer dan 10 {{aiAgents}} bovenaan pinnen. Pinneer enkele die momenteel zijn gepind.",
+  "UploadPicture": "Afbeelding uploaden",
+  "CustomizeCover": "Omslag aanpassen",
+  "ChangeTheRoomOwner": "De Eigenaar Van De Kamer Wijzigen",
+  "RoomOwner": "Kamer eigenaar"
 }

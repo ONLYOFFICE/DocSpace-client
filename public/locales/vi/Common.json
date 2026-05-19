@@ -1603,5 +1603,9 @@
   "ChangeRoomOwner": "Thay đổi Chủ sở hữu Phòng",
   "MoveToArchive": "Di chuyển đến sao lưu",
   "PinToTop": "Ghim lên đầu trang",
-  "AIAgentPinLimitMessage": "Bạn không thể ghim quá 10 {{aiAgents}} lên đầu. Vui lòng bỏ ghim một số mục đang được ghim."
+  "AIAgentPinLimitMessage": "Bạn không thể ghim quá 10 {{aiAgents}} lên đầu. Vui lòng bỏ ghim một số mục đang được ghim.",
+  "UploadPicture": "Tải hình ảnh lên",
+  "CustomizeCover": "Tùy chỉnh mặt ngoài",
+  "ChangeTheRoomOwner": "Thay đổi Chủ sở hữu Phòng",
+  "RoomOwner": "Chủ sở hữu phòng"
 }

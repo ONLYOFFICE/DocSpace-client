@@ -1603,5 +1603,9 @@
   "ChangeRoomOwner": "방 소유자 변경",
   "MoveToArchive": "아카이브로 이동",
   "PinToTop": "상단에 고정",
-  "AIAgentPinLimitMessage": "{{aiAgents}}를 상단에 10개 이상 고정할 수 없습니다. 현재 고정된 일부를 고정 해제하십시오."
+  "AIAgentPinLimitMessage": "{{aiAgents}}를 상단에 10개 이상 고정할 수 없습니다. 현재 고정된 일부를 고정 해제하십시오.",
+  "UploadPicture": "사진 업로드",
+  "CustomizeCover": "커버 사용자 지정",
+  "ChangeTheRoomOwner": "방 소유자 변경",
+  "RoomOwner": "방 소유자"
 }

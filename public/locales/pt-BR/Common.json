@@ -1603,5 +1603,9 @@
   "ChangeRoomOwner": "Mudar Proprietário da Sala",
   "MoveToArchive": "Mover para arquivo",
   "PinToTop": "Fixar no topo",
-  "AIAgentPinLimitMessage": "Você não pode fixar mais de 10 {{aiAgents}} no topo. Desfixe alguns que estão fixados atualmente."
+  "AIAgentPinLimitMessage": "Você não pode fixar mais de 10 {{aiAgents}} no topo. Desfixe alguns que estão fixados atualmente.",
+  "UploadPicture": "Carregar foto",
+  "CustomizeCover": "Personalizar a capa",
+  "ChangeTheRoomOwner": "Alterar o proprietário da sala",
+  "RoomOwner": "Proprietário da sala"
 }

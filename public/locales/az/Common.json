@@ -1603,5 +1603,9 @@
   "ChangeRoomOwner": "Otaq Sahibini Dəyiş",
   "MoveToArchive": "Arxivə köçürün",
   "PinToTop": "Yuxarıya sabitləyin",
-  "AIAgentPinLimitMessage": "10-dan çoxunu {{aiAgents}} yuxarıya yapışdıra bilməzsiniz. Hazırda yapışdırılmış bəzilərini yapışdırmaqdan çıxarın."
+  "AIAgentPinLimitMessage": "10-dan çoxunu {{aiAgents}} yuxarıya yapışdıra bilməzsiniz. Hazırda yapışdırılmış bəzilərini yapışdırmaqdan çıxarın.",
+  "UploadPicture": "Şəkil yükləyin",
+  "CustomizeCover": "Örtüyü fərdiləşdirin",
+  "ChangeTheRoomOwner": "Otaq Sahibini dəyişdirin",
+  "RoomOwner": "Otaq sahibi"
 }

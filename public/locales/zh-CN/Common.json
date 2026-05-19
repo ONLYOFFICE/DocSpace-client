@@ -1603,5 +1603,9 @@
   "ChangeRoomOwner": "更改房间所有者",
   "MoveToArchive": "移动至存档",
   "PinToTop": "置顶",
-  "AIAgentPinLimitMessage": "您最多只能将 10 个 {{aiAgents}} 固定在顶部。请取消固定一些当前已固定的项目。"
+  "AIAgentPinLimitMessage": "您最多只能将 10 个 {{aiAgents}} 固定在顶部。请取消固定一些当前已固定的项目。",
+  "UploadPicture": "上传图片",
+  "CustomizeCover": "自定义封面",
+  "ChangeTheRoomOwner": "更改房间所有者",
+  "RoomOwner": "房间所有者"
 }

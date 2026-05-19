@@ -1,6 +1,5 @@
 {
   "AddCertificate": "Lisää sertifikaatti",
-  "AdvancedSettings": "Lisäasetukset",
   "AdvancedSettingsTooltip": "Piilota oletustodennussivu ja ohjaa automaattisesti SSO-palveluun.",
   "AttributeMatching": "Atribuuttien kartoitus",
   "AttributeMatchingTooltip": "Kertakirjautumisattribuuttien vastaavuus Tilit-osion merkintöjen kanssa.",
@@ -11,7 +10,6 @@
   "DownloadMetadataXML": "Lataa SP-metadata XML",
   "Encryption": "Salaus",
   "GenerateCertificate": "Luo Uusi Itse-allekirjoitettu Todistus",
-  "Hide": "Piilota",
   "HideAdditionalParameters": "Piilota lisäasetukset",
   "HideAuthPage": "Piilota todennussivu",
   "idpAuthRequest": "Varmenna todennusvastausten allekirjoitus",
@@ -32,7 +30,6 @@
   "ProviderURLTooltip": "Identiteetin tarjoajan entiteetti Id (Myöntäjän URL)",
   "ServiceProviderSettings": "{{organizationName}} SP Asetukset",
   "ServiceProviderSettingsDescription": "Määritä Palveluntarjoajan asetukset ja lisää SP-sertifikaatit kertakirjautumista varten.",
-  "Show": "Näytä",
   "ShowAdditionalParameters": "Näytä lisäasetukset",
   "Signing": "Allekirjoitus",
   "SigningAndEncryption": "Allekirjoitus ja salaus",

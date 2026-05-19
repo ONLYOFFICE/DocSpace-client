@@ -1,6 +1,5 @@
 {
   "AddCertificate": "Pridať certifikát",
-  "AdvancedSettings": "Rozšírené nastavenia",
   "AdvancedSettingsTooltip": "Skryť predvolenú autorizačnú stránku a automaticky presmerovať na službu SSO.",
   "AttributeMatching": "Mapovanie atribútov",
   "AttributeMatchingTooltip": "Zhodovanie atribútov Single Sign-On so záznammi v sekcii „Účty“.",
@@ -11,7 +10,6 @@
   "DownloadMetadataXML": "Stiahnuť SP metadáta XML",
   "Encryption": "Šifrovanie",
   "GenerateCertificate": "Vygenerujte nový certifikát s vlastným podpisom",
-  "Hide": "Skryť",
   "HideAdditionalParameters": "Skryť rozšírené nastavenia",
   "HideAuthPage": "Skryť autorizačnú stránku",
   "idpAuthRequest": "Kontrola podpisu overovacích odpovedí",
@@ -32,7 +30,6 @@
   "ProviderURLTooltip": "Identifikátor entity poskytovateľa identity (URL vydavateľa)",
   "ServiceProviderSettings": "Nastavenia {{organizationName}} SP",
   "ServiceProviderSettingsDescription": "Nakonfigurujte nastavenia poskytovateľa služieb a pridajte certifikáty SP pre jednotné prihlásenie.",
-  "Show": "Zobraziť",
   "ShowAdditionalParameters": "Zobraziť rozšírené nastavenia",
   "Signing": "Podpisovanie",
   "SigningAndEncryption": "Podpisovanie a šifrovanie",

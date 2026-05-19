@@ -228,7 +228,6 @@
   "QuotasDescription": "Aqui você pode definir a cota de armazenamento para usuários e salas.",
   "Recalculate": "Recalcular",
   "RegisterApp": "Registrar aplicativo",
-  "ResetSettings": "Redefinir configurações",
   "ResetTemplateDescription": "Tem certeza de que deseja redefinir o estado atual do modelo para o seu estado padrão? Você não poderá desfazer esta ação.",
   "ResetToDefault": "Redefinir para o padrão",
   "RestAPI": "API REST",

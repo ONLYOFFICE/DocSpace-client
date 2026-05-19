@@ -228,7 +228,6 @@
   "QuotasDescription": "Burada, kullanıcılar ve odalar için depolama kotası ayarlayabilirsiniz.",
   "Recalculate": "Yeniden hesapla",
   "RegisterApp": "Uygulama kaydet",
-  "ResetSettings": "Ayarları sıfırla",
   "ResetTemplateDescription": "Boşluğun mevcut durumunu varsayılan durumuna sıfırlamak istediğinizden emin misiniz? Bu işlemi geri alamayacaksınız.",
   "ResetToDefault": "Varsayılana sıfırla",
   "RestAPI": "REST API",

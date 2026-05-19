@@ -49,9 +49,11 @@ import { ActiveItemsStoreContextProvider } from "@/app/(docspace)/_store/ActiveI
 
 import type { TViewAs } from "@docspace/shared/types";
 
+import { AiChatPanelStoreContextProvider } from "./AiChatStore";
 import { DocsSettingsStoreContextProvider } from "./DocsSettingsStore";
 import { DocsUserStoreContextProvider } from "./DocsUserStore";
 import { InfoPanelStoreContextProvider } from "./InfoPanelStore";
+import PersonalFilesAiAgentProviders from "../_components/ai-agent-providers";
 
 export const DocsStoreProviders = ({
   children,
@@ -73,7 +75,11 @@ export const DocsStoreProviders = ({
                       <DocsSettingsStoreContextProvider>
                         <DocsUserStoreContextProvider>
                           <InfoPanelStoreContextProvider>
-                            {children}
+                            <AiChatPanelStoreContextProvider>
+                              <PersonalFilesAiAgentProviders>
+                                {children}
+                              </PersonalFilesAiAgentProviders>
+                            </AiChatPanelStoreContextProvider>
                           </InfoPanelStoreContextProvider>
                         </DocsUserStoreContextProvider>
                       </DocsSettingsStoreContextProvider>

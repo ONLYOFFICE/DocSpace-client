@@ -12,4 +12,6 @@ export type HeaderProps = {
   isInfoPanelVisible?: boolean;
   onToggleInfoPanel?: () => void;
   headerOffset?: number;
+  /** Optional button rendered inside Navigation's control buttons area. */
+  aiChatButton?: React.ReactNode;
 };

@@ -71,6 +71,7 @@ const Header = ({
   isInfoPanelVisible = false,
   onToggleInfoPanel,
   headerOffset = 0,
+  aiChatButton,
 }: HeaderProps) => {
   const searchParams = useSearchParams();
 
@@ -98,7 +99,9 @@ const Header = ({
     onRestoreClick: isTrashSection ? fileOpsCtx?.restoreItem : undefined,
     onCopySelectedClick: !isTrashSection ? fileOpsCtx?.copyItems : undefined,
     onMoveSelectedClick: !isTrashSection ? fileOpsCtx?.moveItems : undefined,
-    onRestoreSelectedClick: isTrashSection ? fileOpsCtx?.restoreItems : undefined,
+    onRestoreSelectedClick: isTrashSection
+      ? fileOpsCtx?.restoreItems
+      : undefined,
   });
   const { getHeaderMenu, onCheckboxChange } = useHeaderMenu();
 
@@ -238,6 +241,7 @@ const Header = ({
             hideInfoPanel={() => {}}
             clearTrash={() => {}}
             showFolderInfo={() => {}}
+            aiChatButton={aiChatButton}
           />
         </div>
       )}

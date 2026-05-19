@@ -62,6 +62,10 @@ import {
   importIdentityFromFile,
   unlockWithPassphrase,
 } from "@docspace/shared/services/encryption/identity";
+import {
+  InvalidFormatError,
+  WebCryptoUnavailableError,
+} from "@docspace/shared/services/encryption/errors";
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import { setEncryptionKeys } from "@docspace/shared/api/privacy";
 
@@ -137,9 +141,9 @@ describe("useImportKeyFlow", () => {
       expect(captured.passphrase).toBeNull();
     });
 
-    it("toasts the raw error message when importIdentityFromFile throws", async () => {
+    it("toasts the invalid-key-file message when importIdentityFromFile throws InvalidFormatError", async () => {
       vi.mocked(importIdentityFromFile).mockRejectedValueOnce(
-        new Error("Not a DocSpace identity file"),
+        new InvalidFormatError("not a v2 DocSpace identity file"),
       );
       render(
         <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
@@ -147,7 +151,25 @@ describe("useImportKeyFlow", () => {
       await act(async () => {
         fireFileChosen(new File(["{}"], "key.json", { type: "application/json" }));
       });
-      expect(toastr.error).toHaveBeenCalledWith("Not a DocSpace identity file");
+      expect(toastr.error).toHaveBeenCalledWith(
+        "Common:EncryptionInvalidKeyFile",
+      );
+      expect(captured.passphrase).toBeNull();
+    });
+
+    it("toasts the HTTPS-required message when importIdentityFromFile throws WebCryptoUnavailableError", async () => {
+      vi.mocked(importIdentityFromFile).mockRejectedValueOnce(
+        new WebCryptoUnavailableError(),
+      );
+      render(
+        <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
+      );
+      await act(async () => {
+        fireFileChosen(new File(["{}"], "key.json", { type: "application/json" }));
+      });
+      expect(toastr.error).toHaveBeenCalledWith(
+        "Common:EncryptionRequiresHttps",
+      );
       expect(captured.passphrase).toBeNull();
     });
 

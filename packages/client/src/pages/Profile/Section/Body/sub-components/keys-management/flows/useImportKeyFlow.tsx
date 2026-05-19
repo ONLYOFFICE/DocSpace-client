@@ -36,9 +36,12 @@ import {
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import { setActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
 import { setEncryptionKeys } from "@docspace/shared/api/privacy";
+import { InvalidPassphraseError } from "@docspace/shared/services/encryption/errors";
 import type { SerializedIdentity } from "@docspace/shared/services/encryption/types";
 
 import { PassphraseModal } from "../modals/PassphraseModal";
+
+import { getEncryptionErrorMessage } from "./getEncryptionErrorMessage";
 
 type Step = "idle" | "passphrase";
 
@@ -83,9 +86,7 @@ export function useImportKeyFlow({
         setImported(data);
         setStep("passphrase");
       } catch (error) {
-        toastr.error(
-          error instanceof Error ? error.message : t("Common:EncryptionError"),
-        );
+        toastr.error(getEncryptionErrorMessage(t, error));
         console.error("Key import failed:", error);
         setImported(null);
       } finally {
@@ -114,7 +115,11 @@ export function useImportKeyFlow({
         toastr.success(t("Common:EncryptionKeyImported"));
         reset();
       } catch (error) {
-        toastr.error(t("Common:InvalidPassphrase"));
+        const message =
+          error instanceof InvalidPassphraseError
+            ? t("Common:InvalidPassphrase")
+            : getEncryptionErrorMessage(t, error);
+        toastr.error(message);
         console.error("Import passphrase verification failed:", error);
       } finally {
         setIsPending(false);

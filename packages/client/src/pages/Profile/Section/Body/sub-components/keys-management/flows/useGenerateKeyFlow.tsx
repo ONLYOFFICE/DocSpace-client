@@ -43,6 +43,8 @@ import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types
 import { PassphraseModal } from "../modals/PassphraseModal";
 import { RecoveryPhraseDisplayModal } from "../modals/RecoveryPhraseDisplayModal";
 
+import { getEncryptionErrorMessage } from "./getEncryptionErrorMessage";
+
 type Step = "idle" | "passphrase" | "recovery-display";
 
 type Deps = {
@@ -99,7 +101,7 @@ export function useGenerateKeyFlow({
         setMnemonic(m);
         setStep("recovery-display");
       } catch (error) {
-        toastr.error(t("Common:EncryptionError"));
+        toastr.error(getEncryptionErrorMessage(t, error));
         console.error("Key/mnemonic generation failed:", error);
         reset();
       } finally {
@@ -127,7 +129,7 @@ export function useGenerateKeyFlow({
       await refreshKeysFromServer();
       toastr.success(t("Common:EncryptionKeyGenerated"));
     } catch (error) {
-      toastr.error(t("Common:EncryptionError"));
+      toastr.error(getEncryptionErrorMessage(t, error));
       console.error("Key generation upload failed:", error);
     } finally {
       setIsPending(false);

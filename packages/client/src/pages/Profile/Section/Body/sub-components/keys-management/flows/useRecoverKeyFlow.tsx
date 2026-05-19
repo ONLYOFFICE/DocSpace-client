@@ -46,6 +46,8 @@ import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 import { PassphraseModal } from "../modals/PassphraseModal";
 import { RecoveryPhraseInputModal } from "../modals/RecoveryPhraseInputModal";
 
+import { getEncryptionErrorMessage } from "./getEncryptionErrorMessage";
+
 type Step = "idle" | "phrase" | "new-passphrase";
 
 type Deps = {
@@ -120,7 +122,7 @@ export function useRecoverKeyFlow({
         setStep("new-passphrase");
       } catch (e) {
         console.error("Recovery unlock failed:", e);
-        setError(t("Common:EncryptionError"));
+        setError(getEncryptionErrorMessage(t, e));
       } finally {
         setIsPending(false);
       }
@@ -146,7 +148,7 @@ export function useRecoverKeyFlow({
         await refreshKeysFromServer();
         toastr.success(t("Common:RecoveryPhraseRestored"));
       } catch (e) {
-        toastr.error(t("Common:EncryptionError"));
+        toastr.error(getEncryptionErrorMessage(t, e));
         console.error("Recovery re-encrypt failed:", e);
       } finally {
         setIsPending(false);

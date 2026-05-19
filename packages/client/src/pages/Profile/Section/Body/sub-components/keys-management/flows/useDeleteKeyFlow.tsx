@@ -38,6 +38,8 @@ import { deleteEncryptionKey } from "@docspace/shared/api/privacy";
 
 import { ConfirmationModal } from "../modals/ConfirmationModal";
 
+import { getEncryptionErrorMessage } from "./getEncryptionErrorMessage";
+
 type Deps = {
   userId?: string;
   refreshKeysFromServer: () => Promise<void>;
@@ -77,7 +79,7 @@ export function useDeleteKeyFlow({
       await refreshKeysFromServer();
       toastr.success(t("Common:EncryptionKeyDeleted"));
     } catch (error) {
-      toastr.error(t("Common:EncryptionError"));
+      toastr.error(getEncryptionErrorMessage(t, error));
       console.error("Key deletion failed:", error);
     } finally {
       setIsPending(false);

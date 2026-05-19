@@ -49,6 +49,7 @@ import { useRecoverKeyFlow } from "./flows/useRecoverKeyFlow";
 import { useDeleteKeyFlow } from "./flows/useDeleteKeyFlow";
 import { useRotatePassphraseFlow } from "./flows/useRotatePassphraseFlow";
 import { useResetKeysFlow } from "./flows/useResetKeysFlow";
+import { getEncryptionErrorMessage } from "./flows/getEncryptionErrorMessage";
 
 import styles from "./KeysManagement.module.scss";
 
@@ -135,7 +136,7 @@ const KeysManagement = ({
         URL.revokeObjectURL(url);
         toastr.success(t("Common:EncryptionKeyExported"));
       } catch (error) {
-        toastr.error(t("Common:EncryptionError"));
+        toastr.error(getEncryptionErrorMessage(t, error));
         console.error("Key export failed:", error);
       }
     },

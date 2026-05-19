@@ -1609,5 +1609,6 @@
   "ChangeTheRoomOwner": "Zmień właściciela pokoju",
   "RoomOwner": "Właściciel pokoju",
   "LeftAndAppointNewOwner": "Opuszczono pokój i wyznaczono nowego właściciela",
-  "AppointNewOwner": "Wyznaczono nowego właściciela."
+  "AppointNewOwner": "Wyznaczono nowego właściciela.",
+  "PeopleSelectorInfo": "Tylko administrator pokoju lub administrator {{productName}} może zostać właścicielem pokoju"
 }

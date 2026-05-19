@@ -77,8 +77,6 @@ const ChangeRoomOwnerDialog = ({
   const headerLabel = t("Common:ChangeTheRoomOwner");
   const infoText = t("Common:PeopleSelectorInfo", {
     productName: getBrandName("ProductName"),
-    defaultValue:
-      "Only a room admin or a {{productName}} admin can become the owner of the room",
   });
 
   const onSubmit: TOnSubmit = async (users, _access, _name, isLeaveChecked) => {
@@ -108,9 +106,7 @@ const ChangeRoomOwnerDialog = ({
   const checkboxProps = ownerIsCurrentUser
     ? {
         withFooterCheckbox: true as const,
-        footerCheckboxLabel: t("Common:LeaveTheRoom", {
-          defaultValue: "Leave the room",
-        }),
+        footerCheckboxLabel: t("Common:LeaveTheRoom"),
         isChecked: false,
       }
     : {};

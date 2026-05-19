@@ -1609,5 +1609,6 @@
   "ChangeTheRoomOwner": "تغيير مالك الغرفة",
   "RoomOwner": "مالك الغرفة",
   "LeftAndAppointNewOwner": "لقد قمت بمغادرة الغرفة وتعيين مالك جديد",
-  "AppointNewOwner": "لقد قمت بتعيين مالك جديد"
+  "AppointNewOwner": "لقد قمت بتعيين مالك جديد",
+  "PeopleSelectorInfo": "يمكن فقط لمسؤول الغرفة أو مسؤول {{productName}} أن يصبح مالك الغرفة"
 }

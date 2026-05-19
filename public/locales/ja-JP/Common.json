@@ -1609,5 +1609,6 @@
   "ChangeTheRoomOwner": "ルーム所有者の変更",
   "RoomOwner": "ルームの所有者",
   "LeftAndAppointNewOwner": "あなた退室し、新しい所有者を任命しました。",
-  "AppointNewOwner": "新しい所有者を任命されました。"
+  "AppointNewOwner": "新しい所有者を任命されました。",
+  "PeopleSelectorInfo": "ルーム管理者または{{productName}}管理者のみがルーム所有者になることができます。"
 }

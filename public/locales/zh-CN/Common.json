@@ -1609,5 +1609,6 @@
   "ChangeTheRoomOwner": "更改房间所有者",
   "RoomOwner": "房间所有者",
   "LeftAndAppointNewOwner": "您已退出房间并指定了新的所有者",
-  "AppointNewOwner": "您已指定一个新的所有者。"
+  "AppointNewOwner": "您已指定一个新的所有者。",
+  "PeopleSelectorInfo": "只有房间管理员或{{productName}}管理员才能成为房间的所有者"
 }

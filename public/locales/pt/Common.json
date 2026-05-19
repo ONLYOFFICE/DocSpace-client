@@ -1609,5 +1609,6 @@
   "ChangeTheRoomOwner": "Alterar o proprietário da sala",
   "RoomOwner": "Proprietário da sala",
   "LeftAndAppointNewOwner": "Você saiu da sala e nomeou um novo proprietário",
-  "AppointNewOwner": "Você nomeou um novo proprietário."
+  "AppointNewOwner": "Você nomeou um novo proprietário.",
+  "PeopleSelectorInfo": "Somente um administrador da sala ou administrador do {{productName}} pode se tornar o proprietário da sala"
 }

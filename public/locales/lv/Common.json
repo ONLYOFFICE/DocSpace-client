@@ -1609,5 +1609,6 @@
   "ChangeTheRoomOwner": "Mainiet telpas īpašnieku",
   "RoomOwner": "Telpas īpašnieks",
   "LeftAndAppointNewOwner": "Jūs atstājāt telpi un iecēlāt jaunu īpašnieku",
-  "AppointNewOwner": "Jūs iecēlāt jaunu īpašnieku."
+  "AppointNewOwner": "Jūs iecēlāt jaunu īpašnieku.",
+  "PeopleSelectorInfo": "Par telpas īpašnieku var kļūt tikai telpas administrators vai {{productName}} administrators"
 }

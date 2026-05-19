@@ -1609,5 +1609,6 @@
   "ChangeTheRoomOwner": "Oda Sahibini Değiştir",
   "RoomOwner": "Oda sahibi",
   "LeftAndAppointNewOwner": "Odadan ayrıldınız ve yeni bir sahip atadınız",
-  "AppointNewOwner": "Yeni bir sahip atadınız."
+  "AppointNewOwner": "Yeni bir sahip atadınız.",
+  "PeopleSelectorInfo": "Sadece bir oda yöneticisi veya bir {{productName}} yöneticisi odanın sahibi olabilir"
 }

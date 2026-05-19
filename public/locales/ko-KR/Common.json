@@ -1609,5 +1609,6 @@
   "ChangeTheRoomOwner": "방 소유자 변경",
   "RoomOwner": "방 소유자",
   "LeftAndAppointNewOwner": "방을 나왔으며 새로운 소유자를 지정했습니다.",
-  "AppointNewOwner": "새로운 소유자를 지정하셨습니다."
+  "AppointNewOwner": "새로운 소유자를 지정하셨습니다.",
+  "PeopleSelectorInfo": "방 관리자 또는 {{productName}} 관리자만 방 소유자가 될 수 있습니다"
 }

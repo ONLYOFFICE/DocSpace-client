@@ -96,7 +96,7 @@ const ChangeRoomOwner = (props) => {
     ? t("Files:ChangeAgentOwnerSelectorInfo", {
         productName: getBrandName("ProductName"),
       })
-    : t("CreateEditRoomDialog:PeopleSelectorInfo", {
+    : t("Common:PeopleSelectorInfo", {
         productName: getBrandName("ProductName"),
       });
 
@@ -199,3 +199,4 @@ export default inject(
     ),
   ),
 );
+

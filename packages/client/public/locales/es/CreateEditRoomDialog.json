@@ -24,7 +24,6 @@
   "NeedMoreIntegrationsDescription": "Use webhooks para enviar datos a su propio sistema, o conecte formularios a miles de servicios a través de Zapier.",
   "NoDatabaseConnections": "No hay conexiones a base de datos configuradas",
   "NoDatabaseConnectionsRoomAdmin": "Las conexiones a bases de datos son configuradas por un administrador. Una vez que se haya configurado una base de datos, podrá habilitar la exportación aquí.",
-  "PeopleSelectorInfo": "Sólo un administrador de sala o un administrador de {{productName}} puede convertirse en el propietario de la sala",
   "Position": "Posición",
   "PublicRoomBarDescription": "Esta sala está disponible para cualquier persona que tenga el enlace. El acceso para usuarios externos se proporciona en función del tipo de permisos de acceso seleccionados.",
   "PublicRoomSystemFoldersDescription": "Las carpetas del sistema almacenan copias de formularios en diferentes etapas de finalización. Los formularios que se están completando se almacenan en la carpeta En progreso y los formularios completados se almacenan en la carpeta Completado.",

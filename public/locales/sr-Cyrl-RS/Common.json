@@ -1609,5 +1609,6 @@
   "ChangeTheRoomOwner": "Промени Власника собе",
   "RoomOwner": "Власник собе",
   "LeftAndAppointNewOwner": "Напустили сте собу и именовали новог власника",
-  "AppointNewOwner": "Поставили сте новог власника."
+  "AppointNewOwner": "Поставили сте новог власника.",
+  "PeopleSelectorInfo": "Само админ собе или {{productName}} админ могу да постану власници собе"
 }

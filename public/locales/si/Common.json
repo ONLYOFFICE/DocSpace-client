@@ -1609,5 +1609,6 @@
   "ChangeTheRoomOwner": "කාමරයේ හිමිකරු වෙනස් කරන්න",
   "RoomOwner": "කාමරයේ හිමිකරු",
   "LeftAndAppointNewOwner": "ඔබ කාමරය හැරගොස් නව හිමිකරුවෙකු පත් කර ඇත",
-  "AppointNewOwner": "ඔබ නව හිමිකරුවෙකු පත් කර ඇත."
+  "AppointNewOwner": "ඔබ නව හිමිකරුවෙකු පත් කර ඇත.",
+  "PeopleSelectorInfo": "පමණක් රූම් පරිපාලක හෝ {{productName}} පරිපාලකයෙකුට කාමරයේ හිමිකරුවෙකු විය හැක."
 }

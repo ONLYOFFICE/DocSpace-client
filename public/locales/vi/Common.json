@@ -1609,5 +1609,6 @@
   "ChangeTheRoomOwner": "Thay đổi Chủ sở hữu Phòng",
   "RoomOwner": "Chủ sở hữu phòng",
   "LeftAndAppointNewOwner": "Bạn đã rời khỏi phòng và chỉ định một chủ sở hữu mới",
-  "AppointNewOwner": "Bạn đã chỉ định chủ sở hữu mới."
+  "AppointNewOwner": "Bạn đã chỉ định chủ sở hữu mới.",
+  "PeopleSelectorInfo": "Chỉ quản trị viên phòng hoặc quản trị viên {{productName}} mới có thể trở thành chủ sở hữu của phòng"
 }

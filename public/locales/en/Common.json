@@ -1624,5 +1624,6 @@
   "ChangeTheRoomOwner": "Change the Room Owner",
   "RoomOwner": "Room owner",
   "LeftAndAppointNewOwner": "You have left the room and appointed a new owner",
-  "AppointNewOwner": "You have appointed a new owner."
+  "AppointNewOwner": "You have appointed a new owner.",
+  "PeopleSelectorInfo": "Only a room admin or a {{productName}} admin can become the owner of the room"
 }

@@ -1609,5 +1609,6 @@
   "ChangeTheRoomOwner": "Zmeniť vlastníka miestnosti",
   "RoomOwner": "Majiteľ miestnosti",
   "LeftAndAppointNewOwner": "Opustili ste miestnosť a určili ste nového vlastníka",
-  "AppointNewOwner": "Vymenovali ste nového vlastníka."
+  "AppointNewOwner": "Vymenovali ste nového vlastníka.",
+  "PeopleSelectorInfo": "Vlastníkom miestnosti sa môže stať iba administrátor miestnosti alebo administrátor priestoru {{productName}}."
 }

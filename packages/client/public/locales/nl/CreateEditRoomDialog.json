@@ -24,7 +24,6 @@
   "NeedMoreIntegrationsDescription": "Gebruik webhooks om gegevens naar uw eigen systeem te sturen, of verbind formulieren met duizenden diensten via Zapier.",
   "NoDatabaseConnections": "Geen databaseverbindingen geconfigureerd",
   "NoDatabaseConnectionsRoomAdmin": "Databaseverbindingen worden door een beheerder geconfigureerd. Zodra een database is ingesteld, kunt u de export hier inschakelen.",
-  "PeopleSelectorInfo": "Alleen een kamer beheerder of een {{productName}} beheerder kan de eigenaar van de kamer worden.",
   "Position": "Positie",
   "PublicRoomBarDescription": "Deze kamer is voor iedereen met de link beschikbaar. Toegang voor externe gebruikers is afhankelijk van het geselecteerde type toegangsrechten.",
   "PublicRoomSystemFoldersDescription": "In systeemmappen worden kopieën van formulieren in verschillende stadia van voltooiing opgeslagen. Formulieren die worden ingevuld, worden opgeslagen in de map In behandeling, en voltooide formulieren worden opgeslagen in de map Voltooid.",

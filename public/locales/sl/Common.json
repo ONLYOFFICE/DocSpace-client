@@ -1609,5 +1609,6 @@
   "ChangeTheRoomOwner": "Spremeni lastnika sobe",
   "RoomOwner": "Lastnik sobe",
   "LeftAndAppointNewOwner": "Zapustili ste sobo in določili novega lastnika",
-  "AppointNewOwner": "Imenovali ste novega lastnika."
+  "AppointNewOwner": "Imenovali ste novega lastnika.",
+  "PeopleSelectorInfo": "Samo skrbnik sobe ali skrbnik {{productName}} lahko postaneta lastnika sobe"
 }

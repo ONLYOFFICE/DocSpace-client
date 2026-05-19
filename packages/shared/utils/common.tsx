@@ -692,7 +692,7 @@ export {
   calculateTotalPrice,
   truncateNumberToFraction,
   formatCurrencyValue,
-} from "@docspace/ui-kit/billing/utils/common";
+} from "@docspace/ui-kit/billing/utils";
 
 export const frameHandlePing = (eventData: {
   type?: string;
@@ -711,7 +711,7 @@ export const frameHandlePing = (eventData: {
   return false;
 };
 
-import { getConvertedSize } from "@docspace/ui-kit/billing/utils/common";
+import { getConvertedSize } from "@docspace/ui-kit/billing/utils";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import { getConstName } from "@docspace/shared/constants/consts";
 

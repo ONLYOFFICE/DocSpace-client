@@ -13,21 +13,8 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  cursor: pointer;
 }
 
 .select {
-  max-width: 240px;
-  padding: 6px 10px;
-  border: 1px solid var(--input-border-color);
-  border-radius: 4px;
-  background: var(--input-block-bg);
-  color: var(--input-color);
-  font-size: 13px;
-  cursor: pointer;
-
-  &:focus-visible {
-    outline: 2px solid var(--accent-main);
-    outline-offset: 1px;
-  }
+  align-self: flex-start;
 }

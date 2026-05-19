@@ -11,10 +11,16 @@
 // warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE.
 // For details, see the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
 
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
+import {
+  ComboBox,
+  ComboBoxSize,
+  type TOption,
+} from "@docspace/ui-kit/components/combobox";
+import { isMobile } from "@docspace/shared/utils";
 import {
   type AutoLockPresetId,
   getCurrentAutoLockPresetId,
@@ -29,37 +35,51 @@ export const AutoLockSetting = () => {
     getCurrentAutoLockPresetId(),
   );
 
-  const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLSelectElement>) => {
-      const next = e.target.value as AutoLockPresetId;
-      setAutoLockPreset(next);
-      setPresetId(next);
-    },
-    [],
+  const options = useMemo<TOption[]>(
+    () => [
+      { key: "off", label: t("Common:AutoLockOff") },
+      { key: "5m", label: t("Common:AutoLock5m") },
+      { key: "15m", label: t("Common:AutoLock15m") },
+      { key: "30m", label: t("Common:AutoLock30m") },
+      { key: "1h", label: t("Common:AutoLock1h") },
+    ],
+    [t],
   );
+
+  const selectedOption = useMemo(
+    () => options.find((o) => o.key === presetId) ?? options[0],
+    [options, presetId],
+  );
+
+  const handleSelect = useCallback((option: TOption) => {
+    const next = option.key as AutoLockPresetId;
+    setAutoLockPreset(next);
+    setPresetId(next);
+  }, []);
 
   return (
     <div className={styles.container}>
-      <label htmlFor="autoLockTimeout" className={styles.label}>
+      <div className={styles.label}>
         <Text fontSize="13px" fontWeight={600}>
           {t("Common:AutoLockLabel")}
         </Text>
         <Text fontSize="12px" color="var(--text-secondary)">
           {t("Common:AutoLockHint")}
         </Text>
-      </label>
-      <select
-        id="autoLockTimeout"
+      </div>
+      <ComboBox
         className={styles.select}
-        value={presetId}
-        onChange={handleChange}
-      >
-        <option value="off">{t("Common:AutoLockOff")}</option>
-        <option value="5m">{t("Common:AutoLock5m")}</option>
-        <option value="15m">{t("Common:AutoLock15m")}</option>
-        <option value="30m">{t("Common:AutoLock30m")}</option>
-        <option value="1h">{t("Common:AutoLock1h")}</option>
-      </select>
+        options={options}
+        selectedOption={selectedOption}
+        onSelect={handleSelect}
+        size={ComboBoxSize.content}
+        scaled={false}
+        scaledOptions
+        displaySelectedOption
+        isDefaultMode={!isMobile()}
+        dataTestId="auto_lock_timeout_combobox"
+        dropDownTestId="auto_lock_timeout_combobox_dropdown"
+      />
     </div>
   );
 };

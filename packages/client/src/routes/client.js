@@ -46,6 +46,7 @@ import { DefaultPageRedirect } from "SRC_DIR/pages/Home/DefaultPageRedirect";
 import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
+import ProtectedAppRoute from "../components/ProtectedAppRoute";
 
 import { profileClientRoutes, generalClientRoutes } from "./general";
 import { contactsRoutes } from "./contacts";
@@ -360,9 +361,11 @@ const ClientRoutes = [
 
           const Component = () => (
             <PrivateRoute>
-              <ErrorBoundary>
-                <AiFiles />
-              </ErrorBoundary>
+              <ProtectedAppRoute appId="ai-files">
+                <ErrorBoundary>
+                  <AiFiles />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
             </PrivateRoute>
           );
 
@@ -378,9 +381,11 @@ const ClientRoutes = [
 
           const Component = () => (
             <PrivateRoute>
-              <ErrorBoundary>
-                <AiForms />
-              </ErrorBoundary>
+              <ProtectedAppRoute appId="ai-forms">
+                <ErrorBoundary>
+                  <AiForms />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
             </PrivateRoute>
           );
 

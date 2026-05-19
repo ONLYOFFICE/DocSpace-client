@@ -33,7 +33,7 @@ import { MemoryRouter } from "react-router";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { BillingRoot, Wallet, PaymentMethod } from "@docspace/ui-kit/billing";
-import AdditionalStoragePage from "@docspace/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage";
+import { AdditionalStoragePage } from "@docspace/ui-kit/billing/services/pages";
 import type { TPaymentConfig } from "@docspace/ui-kit/billing/types";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import { useDocsUserStore } from "../../../_store/DocsUserStore";

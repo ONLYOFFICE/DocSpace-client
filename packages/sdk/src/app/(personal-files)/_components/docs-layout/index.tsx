@@ -38,13 +38,13 @@ import type {
 import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TPathParts } from "@docspace/shared/types";
 import { FolderType, DeviceType } from "@docspace/shared/enums";
-import FilesSelector from "@docspace/ui-kit/selectors/Files";
+import { FilesSelector } from "@docspace/ui-kit/selectors/Files";
 import type {
   FilesSelectorProps,
   FolderDtoInteger,
   TSelectedFileInfo,
   FileEntryDtoIntegerAllOfSecurity,
-} from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+} from "@docspace/ui-kit/selectors/Files";
 import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 

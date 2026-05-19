@@ -32,7 +32,7 @@ import { useTranslation } from "react-i18next";
 import { MainButton } from "@docspace/ui-kit/components/main-button";
 import { MainButtonMobile } from "@docspace/ui-kit/components/main-button-mobile";
 import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
-import type { ActionOption, ButtonOption } from "@docspace/ui-kit/components/main-button-mobile/MainButtonMobile.types";
+import type { ActionOption, ButtonOption } from "@docspace/ui-kit/components/main-button-mobile";
 
 import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";

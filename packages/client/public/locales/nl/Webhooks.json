@@ -1,7 +1,7 @@
 {
-  "AgentCreated": "AI Agent Gecreëerd",
-  "AgentDeleted": "AI Agent Verwijderd",
-  "AgentUpdated": "AI Agent Bijgewerkt",
+  "AgentCreated": "AI Agent gecreëerd",
+  "AgentDeleted": "AI Agent verwijderd",
+  "AgentUpdated": "AI Agent bijgewerkt",
   "Before": "Voor",
   "CreateWebhook": "Webhook aanmaken",
   "DeleteHint": "De webhook wordt definitief verwijderd.\nU kunt deze actie niet ongedaan maken.",

@@ -101,7 +101,7 @@
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} sera masqué pour tous les utilisateurs (l'historique des interactions sera conservé).",
   "DisableAiServicesBalance": "Votre solde restant (<1>{{balance}}</1>) restera sur votre compte et sera disponible pour utilisation si vous choisissez de réactiver {{aiServices}} à l'avenir.",
   "DisableAiServicesConfirm": "Vous pouvez réactiver {{aiServices}} à tout moment. Êtes-vous sûr de vouloir continuer ?",
-  "DisableAiServicesDescription": "En désactivant {{organizationName}} AI, les changements suivants prendront effet :",
+  "DisableAiServicesDescription": "En désactivant {{organizationName}} IA, les changements suivants prendront effet :",
   "DisableAiServicesServicesDisabled": "Les services payants {{aiServices}} seront désactivés.",
   "DisableAiServicesSettingsHidden": "La section {{aiSettings}} sera supprimée de {{productName}}.",
   "DisableEmailDescription": "Si cette case est cochée, les utilisateurs de {{sectionName}} n'auront pas besoin de vérifier leur adresse électronique après la première autorisation dans {{productName}}.",

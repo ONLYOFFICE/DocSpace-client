@@ -11,7 +11,7 @@
   "NotPossibleRoomRestoring": "Այս սենյակի վերականգնումը հնարավոր չէ, քանի որ ձեր ընթացիկ պլանում ներառված սենյակների քանակի սահմանաչափը սպառվել է:",
   "NumberOfRoomsAccordingToTariff": "Սենյակների քանակն ըստ ձեր սակագնային պլանի՝ {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Ադմինիստրատորների թիվը՝ ըստ ձեր սակագնային պլանի՝ {{currentValue}}/{{maxValue}}",
-  "PlanPaymentOverdue": "Հնարավոր չէ ավելացնել նոր օգտատերեր, ստեղծել նոր սենյակներ կամ AI գործակիցներ։ {{planName}} պլանի վճարումը ուշացել է։",
+  "PlanPaymentOverdue": "Հնարավոր չէ ավելացնել նոր օգտատերեր, ստեղծել նոր սենյակներ կամ ԱԲ-գործակիցներ։ {{planName}} պլանի վճարումը ուշացել է։",
   "RoomsQuotaAlmostExhausted": "Սենյակների քվոտան գրեթե սպառվել է։",
   "UsersQuotaAlmostExhausted": "Վճարովի օգտատերերի քվոտան գրեթե սպառվել է։"
 }

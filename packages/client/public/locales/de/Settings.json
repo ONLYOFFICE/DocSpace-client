@@ -101,7 +101,7 @@
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} wird für alle Benutzer ausgeblendet (der Interaktionsverlauf bleibt erhalten).",
   "DisableAiServicesBalance": "Ihr verbleibendes Guthaben (<1>{{balance}}</1>) bleibt auf Ihrem Konto und steht Ihnen für die Nutzung zur Verfügung, falls Sie {{aiServices}} in Zukunft wieder aktivieren möchten.",
   "DisableAiServicesConfirm": "Sie können {{aiServices}} jederzeit wieder aktivieren. Sind Sie sicher, dass Sie fortfahren möchten?",
-  "DisableAiServicesDescription": "Durch Deaktivierung von {{organizationName}} AI treten folgende Änderungen in Kraft:",
+  "DisableAiServicesDescription": "Durch Deaktivierung von {{organizationName}} KI treten folgende Änderungen in Kraft:",
   "DisableAiServicesServicesDisabled": "Die kostenpflichtigen {{aiServices}} werden deaktiviert.",
   "DisableAiServicesSettingsHidden": "Der Abschnitt {{aiSettings}} wird aus {{productName}} entfernt.",
   "DisableEmailDescription": "Wenn dieses Kontrollkästchen aktiviert ist, müssen {{sectionName}}-Benutzer ihre E-Mail nach der ersten Autorisierung in {{productName}} nicht bestätigen.",

@@ -292,7 +292,7 @@ const RoomsList = ({
     filesListStore.items.length > 0 ? filesListStore.items : filesList;
 
   let content: React.ReactNode;
-  console.log("visibleItems", visibleItems, "filesViewAs", filesViewAs);
+
   if (visibleItems.length === 0) {
     content = <EmptyView isFiltered={!!filter.filterValue} />;
   } else if (filesViewAs === "tile") {

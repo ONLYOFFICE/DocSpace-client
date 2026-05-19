@@ -40,8 +40,8 @@ import type { TPathParts } from "@docspace/shared/types";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
 import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
 import {
-  CreateRoomIcon,
-  UseTemplateIcon,
+  CreateCustomRoomIllustrationIcon,
+  UseRoomTemplateIllustrationIcon,
 } from "@docspace/ui-kit/components/quick-actions/icons";
 import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 
@@ -99,13 +99,13 @@ const RoomsLayout = observer(
       () => [
         {
           id: "custom-room",
-          icon: <CreateRoomIcon />,
+          icon: <CreateCustomRoomIllustrationIcon />,
           label: t("Common:CustomRoomTitle"),
           onClick: createCustomRoom,
         },
         {
           id: "use-template",
-          icon: <UseTemplateIcon />,
+          icon: <UseRoomTemplateIllustrationIcon />,
           label: t("Common:UseTemplate"),
           disabled: true,
         },

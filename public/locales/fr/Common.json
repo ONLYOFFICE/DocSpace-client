@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "Dossiers déplacés vers {{sectionName}}.",
   "FoldersCopiedNotify": "Dossiers copiés.",
   "FoldersRemovedNotify": "Dossiers supprimés.",
-  "OpenLocation": "Ouvrir un emplacement "
+  "OpenLocation": "Ouvrir un emplacement ",
+  "EnableNotifications": "Activer les notifications",
+  "DisableNotifications": "Désactiver les notifications",
+  "EditRoom": "Modifier la salle",
+  "ChangeRoomOwner": "Changer le propriétaire de la salle",
+  "MoveToArchive": "Déplacer dans l’archive"
 }

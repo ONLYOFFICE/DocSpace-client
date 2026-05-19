@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "Mapes pārvietotas uz {{sectionName}}.",
   "FoldersCopiedNotify": "Mapes ir kopētas.",
   "FoldersRemovedNotify": "Mapes ir noņemtas.",
-  "OpenLocation": "Atvērt atrašanās vietu"
+  "OpenLocation": "Atvērt atrašanās vietu",
+  "EnableNotifications": "Aktivizēt paziņojumus",
+  "DisableNotifications": "Atspējot paziņojumus",
+  "EditRoom": "Rediģēt telpu",
+  "ChangeRoomOwner": "Mainīt istabas īpašnieku",
+  "MoveToArchive": "Pārvietot uz arhīvu"
 }

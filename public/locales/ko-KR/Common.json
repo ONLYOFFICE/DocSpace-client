@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "폴더가 {{sectionName}}으로 이동되었습니다.",
   "FoldersCopiedNotify": "폴더가 복사되었습니다.",
   "FoldersRemovedNotify": "폴더가 제거되었습니다.",
-  "OpenLocation": "위치 열기"
+  "OpenLocation": "위치 열기",
+  "EnableNotifications": "알림 활성화",
+  "DisableNotifications": "알림 비활성화",
+  "EditRoom": "방 편집",
+  "ChangeRoomOwner": "방 소유자 변경",
+  "MoveToArchive": "아카이브로 이동"
 }

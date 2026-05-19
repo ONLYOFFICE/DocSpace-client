@@ -1611,5 +1611,10 @@
   "FoldersTrashMoveCompleted": "Folders moved to {{sectionName}}.",
   "FoldersCopiedNotify": "Folders copied.",
   "FoldersRemovedNotify": "Folders removed.",
-  "OpenLocation": "Open location"
+  "OpenLocation": "Open location",
+  "EnableNotifications": "Enable notifications",
+  "DisableNotifications": "Disable notifications",
+  "EditRoom": "Edit room",
+  "ChangeRoomOwner": "Change Room Owner",
+  "MoveToArchive": "Move to archive"
 }

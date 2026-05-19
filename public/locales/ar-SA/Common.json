@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "تم نقل المجلدات إلى {{sectionName}}.",
   "FoldersCopiedNotify": "تم نسخ المجلدات.",
   "FoldersRemovedNotify": "تمت إزالة المجلدات.",
-  "OpenLocation": "افتح الموقع"
+  "OpenLocation": "افتح الموقع",
+  "EnableNotifications": "تفعيل الاشعارات",
+  "DisableNotifications": "تعطيل التنبيهات",
+  "EditRoom": "تعديل الغرفة",
+  "ChangeRoomOwner": "تغيير مالك الغرفة",
+  "MoveToArchive": "انقل إلى الأرشيف"
 }

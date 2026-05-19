@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "Các thư mục đã được chuyển đến {{sectionName}}.",
   "FoldersCopiedNotify": "Đã sao chép các thư mục.",
   "FoldersRemovedNotify": "Đã xóa các thư mục.",
-  "OpenLocation": "Vị trí mở"
+  "OpenLocation": "Vị trí mở",
+  "EnableNotifications": "Bật thông báo",
+  "DisableNotifications": "Tắt thông báo",
+  "EditRoom": "Chỉnh sửa phòng",
+  "ChangeRoomOwner": "Thay đổi Chủ sở hữu Phòng",
+  "MoveToArchive": "Di chuyển đến sao lưu"
 }

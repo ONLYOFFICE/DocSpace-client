@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "Papqalar {{sectionName}} bölməsinə köçürüldü.",
   "FoldersCopiedNotify": "Qovluqlar kopyalandı.",
   "FoldersRemovedNotify": "Qovluqlar silindi.",
-  "OpenLocation": "Qovluğu açmaq"
+  "OpenLocation": "Qovluğu açmaq",
+  "EnableNotifications": "Bildirişləri aktivləşdirin",
+  "DisableNotifications": "Bildirişləri söndürün",
+  "EditRoom": "Otağı redaktə edin",
+  "ChangeRoomOwner": "Otaq Sahibini Dəyiş",
+  "MoveToArchive": "Arxivə köçürün"
 }

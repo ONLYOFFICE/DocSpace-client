@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "Dosjet u zhvendosën te {{sectionName}}.",
   "FoldersCopiedNotify": "Dosjet u kopjuan.",
   "FoldersRemovedNotify": "Dosjet u fshinë.",
-  "OpenLocation": "Hapni venddodhjen"
+  "OpenLocation": "Hapni venddodhjen",
+  "EnableNotifications": "Aktivizoni njoftimet",
+  "DisableNotifications": "Çaktivizoni njoftimet",
+  "EditRoom": "Redaktoni dhomën",
+  "ChangeRoomOwner": "Zëvendëso Pronësin e Dhomës",
+  "MoveToArchive": "Lëvizni në arkiv"
 }

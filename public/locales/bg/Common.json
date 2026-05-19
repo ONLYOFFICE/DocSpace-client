@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "Папките са преместени в {{sectionName}}.",
   "FoldersCopiedNotify": "Копирани папки.",
   "FoldersRemovedNotify": "Премахнати папки.",
-  "OpenLocation": "Отвори локация"
+  "OpenLocation": "Отвори локация",
+  "EnableNotifications": "Активирайте известията",
+  "DisableNotifications": "Деактивиране на известията",
+  "EditRoom": "Редактиране на стая",
+  "ChangeRoomOwner": "Промяна на собственика на стаята",
+  "MoveToArchive": "Преместване в архив"
 }

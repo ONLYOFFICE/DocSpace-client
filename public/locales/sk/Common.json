@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "Zložky presunuté do {{sectionName}}.",
   "FoldersCopiedNotify": "Priečinky skopírované.",
   "FoldersRemovedNotify": "Priečinky odstránené.",
-  "OpenLocation": "Otvoriť umiestnenie"
+  "OpenLocation": "Otvoriť umiestnenie",
+  "EnableNotifications": "Vypnúť upozornenia",
+  "DisableNotifications": "Vypnúť upozornenia",
+  "EditRoom": "Upraviť miestnosť",
+  "ChangeRoomOwner": "Zmeniť vlastníka miestnosti",
+  "MoveToArchive": "Presunúť do archívu"
 }

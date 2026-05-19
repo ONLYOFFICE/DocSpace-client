@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "Klasörler {{sectionName}}'e taşındı.",
   "FoldersCopiedNotify": "Klasörler kopyalandı.",
   "FoldersRemovedNotify": "Klasörler kaldırıldı.",
-  "OpenLocation": "Konumu aç"
+  "OpenLocation": "Konumu aç",
+  "EnableNotifications": "Bildirimleri etkinleştir",
+  "DisableNotifications": "Bildirimleri devre dışı bırak",
+  "EditRoom": "Oda düzenle",
+  "ChangeRoomOwner": "Oda Sahibi Değiştir",
+  "MoveToArchive": "Arşive taşı"
 }

@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "ෆෝල්ඩර {{sectionName}} වෙත ගෙන යන ලදී.",
   "FoldersCopiedNotify": "ෆෝල්ඩර් පිටපත් කරන ලදී.",
   "FoldersRemovedNotify": "ෆෝල්ඩර් ඉවත් කර ඇත.",
-  "OpenLocation": "ස්ථානය අරින්න"
+  "OpenLocation": "ස්ථානය අරින්න",
+  "EnableNotifications": "දැනුම්දීම් සබල කරන්න",
+  "DisableNotifications": "දැනුම්දීම් අබල කරන්න",
+  "EditRoom": "කාමරය සංස්කරණය",
+  "ChangeRoomOwner": "කාමර හිමියා වෙනස් කරන්න",
+  "MoveToArchive": "සංරක්‍ෂිතයට ගෙනයන්න"
 }

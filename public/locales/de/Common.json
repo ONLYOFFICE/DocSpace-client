@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "Ordner nach {{sectionName}} verschoben.",
   "FoldersCopiedNotify": "Ordner kopiert.",
   "FoldersRemovedNotify": "Ordner entfernt.",
-  "OpenLocation": "Ordner öffnen"
+  "OpenLocation": "Ordner öffnen",
+  "EnableNotifications": "Benachrichtigungen einschalten",
+  "DisableNotifications": "Benachrichtigungen deaktivieren",
+  "EditRoom": "Raum bearbeiten",
+  "ChangeRoomOwner": "Raum-Besitzer ändern",
+  "MoveToArchive": "Ins Archiv verschieben"
 }

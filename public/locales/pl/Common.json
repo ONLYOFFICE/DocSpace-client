@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "Foldery przeniesiono do {{sectionName}}.",
   "FoldersCopiedNotify": "Katalogi zostały skopiowane.",
   "FoldersRemovedNotify": "Katalogi zostały usunięte.",
-  "OpenLocation": "Otwórz lokalizację"
+  "OpenLocation": "Otwórz lokalizację",
+  "EnableNotifications": "Włącz powiadomienia",
+  "DisableNotifications": "Wyłącz powiadomienia",
+  "EditRoom": "Pokój do edytowania",
+  "ChangeRoomOwner": "Zmień właściciela pokoju",
+  "MoveToArchive": "Przenieś do archiwum"
 }

@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "ໂຟນເດີຖືກຍ້າຍໄປ {{sectionName}}.",
   "FoldersCopiedNotify": "ໄຟລ໌ຖືກກ໊ອບ ໝົດແລ້ວ.",
   "FoldersRemovedNotify": "ໂຟນເດີຖືກລຶບອອກແລ້ວ",
-  "OpenLocation": "ເປີດສະຖານທີ່"
+  "OpenLocation": "ເປີດສະຖານທີ່",
+  "EnableNotifications": "ເປີດໃຊ້ການແຈ້ງເຕືອນ",
+  "DisableNotifications": "ປິດການແຈ້ງເຕືອນ",
+  "EditRoom": "ແກ້ໄຂຫ້ອງ",
+  "ChangeRoomOwner": "ປ່ຽນເຈົ້າຂອງຫ້ອງ",
+  "MoveToArchive": "ຍ້າຍໄປບ່ອນຊັບມ້ຽນ"
 }

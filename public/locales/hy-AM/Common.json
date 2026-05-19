@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "Թղթապանակները տեղափոխվեցին {{sectionName}}։",
   "FoldersCopiedNotify": "Թղթապանակները պատճենված են:",
   "FoldersRemovedNotify": "Թղթապանակները հեռացվել են:",
-  "OpenLocation": "Բացել տեղադրությունը"
+  "OpenLocation": "Բացել տեղադրությունը",
+  "EnableNotifications": "Միացնել ծանուցումները",
+  "DisableNotifications": "Անջատել ծանուցումները",
+  "EditRoom": "Խմբագրել սենյակը",
+  "ChangeRoomOwner": "Փոխել սենյակի սեփականատիրոջը",
+  "MoveToArchive": "Տեղափոխել արխիվ"
 }

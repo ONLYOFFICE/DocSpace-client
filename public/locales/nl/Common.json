@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "Folders verplaatst naar {{sectionName}}.",
   "FoldersCopiedNotify": "Mappen gekopieerd.",
   "FoldersRemovedNotify": "Mappen verwijderd.",
-  "OpenLocation": "Open locatie"
+  "OpenLocation": "Open locatie",
+  "EnableNotifications": "Meldingen inschakelen",
+  "DisableNotifications": "Meldingen uitschakelen",
+  "EditRoom": "Bewerk kamer",
+  "ChangeRoomOwner": "Wijzig de eigenaar van de ruimte",
+  "MoveToArchive": "Verplaatsen naar archief"
 }

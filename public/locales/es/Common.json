@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "Carpetas movidas a {{sectionName}}.",
   "FoldersCopiedNotify": "Carpetas copiadas.",
   "FoldersRemovedNotify": "Carpetas eliminadas.",
-  "OpenLocation": "Abrir ubicación"
+  "OpenLocation": "Abrir ubicación",
+  "EnableNotifications": "Habilitar notificaciones",
+  "DisableNotifications": "Deshabilitar notificaciones",
+  "EditRoom": "Editar sala",
+  "ChangeRoomOwner": "Cambiar propietario de la sala",
+  "MoveToArchive": "Mover a archivo"
 }

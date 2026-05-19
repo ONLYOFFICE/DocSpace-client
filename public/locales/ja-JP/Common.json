@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "フォルダーが{{sectionName}}に移動されました。",
   "FoldersCopiedNotify": "フォルダがコピーされました。",
   "FoldersRemovedNotify": "フォルダが削除されました。",
-  "OpenLocation": "オープンロケーション"
+  "OpenLocation": "オープンロケーション",
+  "EnableNotifications": "通知をオンにする",
+  "DisableNotifications": "通知をオフする",
+  "EditRoom": "ルームを編集する",
+  "ChangeRoomOwner": "部屋の所有者を変更",
+  "MoveToArchive": "アーカイブに移動する"
 }

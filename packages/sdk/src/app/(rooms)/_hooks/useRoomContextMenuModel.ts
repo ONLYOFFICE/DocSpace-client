@@ -125,8 +125,8 @@ export default function useRoomContextMenuModel(
           id: room.mute ? "option_unmute-room" : "option_mute-room",
           key: room.mute ? "unmute-room" : "mute-room",
           label: room.mute
-            ? t("Files:EnableNotifications")
-            : t("Files:DisableNotifications"),
+            ? t("Common:EnableNotifications")
+            : t("Common:DisableNotifications"),
           icon: room.mute ? UnmuteReactSvgUrl : MuteReactSvgUrl,
           onClick: handleMute,
           disabled: !room.security?.Mute,
@@ -135,7 +135,7 @@ export default function useRoomContextMenuModel(
         {
           id: "option_edit-room",
           key: "edit-room",
-          label: t("Files:EditRoom"),
+          label: t("Common:EditRoom"),
           icon: EditRoomReactSvgUrl,
           onClick: () => onEditRoom?.(room),
           disabled: !room.security?.EditRoom,
@@ -165,7 +165,7 @@ export default function useRoomContextMenuModel(
             {
               id: "option_change-room-owner",
               key: "change-room-owner",
-              label: t("Files:ChangeRoomOwner"),
+              label: t("Common:ChangeRoomOwner"),
               icon: OwnerReactSvgUrl,
               disabled: !room.security?.ChangeOwner,
             },
@@ -175,7 +175,7 @@ export default function useRoomContextMenuModel(
         {
           id: "option_move-to-archive",
           key: "move-to-archive",
-          label: t("Files:MoveToArchive"),
+          label: t("Common:MoveToArchive"),
           icon: RoomArchiveSvgUrl,
           onClick: handleArchive,
         },

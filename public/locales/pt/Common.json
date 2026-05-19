@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "Pastas movidas para {{sectionName}}.",
   "FoldersCopiedNotify": "Pastas copiadas.",
   "FoldersRemovedNotify": "Pastas removidas.",
-  "OpenLocation": "Abrir a localização"
+  "OpenLocation": "Abrir a localização",
+  "EnableNotifications": "Permitir notificações",
+  "DisableNotifications": "Desativar notificações",
+  "EditRoom": "Editar sala",
+  "ChangeRoomOwner": "Alterar Proprietário da Sala",
+  "MoveToArchive": "Mover para o arquivo"
 }

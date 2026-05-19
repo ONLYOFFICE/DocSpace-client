@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "Mape so bile prestavljene v {{sectionName}}.",
   "FoldersCopiedNotify": "Mape kopirane.",
   "FoldersRemovedNotify": "Mape odstranjene.",
-  "OpenLocation": "Odpri lokacijo"
+  "OpenLocation": "Odpri lokacijo",
+  "EnableNotifications": "Omogoči obvestila",
+  "DisableNotifications": "Onemogoči obvestila",
+  "EditRoom": "Uredi sobo",
+  "ChangeRoomOwner": "Zamenjajte lastnika sobe",
+  "MoveToArchive": "Premakni v arhiv"
 }

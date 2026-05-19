@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "Folderi premešteni u {{sectionName}}.",
   "FoldersCopiedNotify": "Folderi su kopirani.",
   "FoldersRemovedNotify": "Folderi su uklonjeni.",
-  "OpenLocation": "Otvori lokaciju"
+  "OpenLocation": "Otvori lokaciju",
+  "EnableNotifications": "Omogući notifikacije",
+  "DisableNotifications": "Onemogući notifikacije",
+  "EditRoom": "Uredi sobu",
+  "ChangeRoomOwner": "Promena vlasnika sobe",
+  "MoveToArchive": "Pomeri u arhivu"
 }

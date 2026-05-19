@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "Μεταφέρθηκαν οι φάκελοι στο {{sectionName}}.",
   "FoldersCopiedNotify": "Οι φάκελοι αντιγράφηκαν.",
   "FoldersRemovedNotify": "Αφαίρεση φακέλων.",
-  "OpenLocation": "Ανοιχτή τοποθεσία"
+  "OpenLocation": "Ανοιχτή τοποθεσία",
+  "EnableNotifications": "Ενεργοποίηση ειδοποιήσεων",
+  "DisableNotifications": "Απενεργοποίηση ειδοποιήσεων",
+  "EditRoom": "Επεξεργασία δωματίου",
+  "ChangeRoomOwner": "Αλλαγή Ιδιοκτήτη Κτομίας",
+  "MoveToArchive": "Μετακίνηση στο αρχείο"
 }

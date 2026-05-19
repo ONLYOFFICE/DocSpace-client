@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "Foldere au fost mutate în {{sectionName}}.",
   "FoldersCopiedNotify": "Foldere au fost copiate.",
   "FoldersRemovedNotify": "Foldere au fost eliminate.",
-  "OpenLocation": "Accesează locația"
+  "OpenLocation": "Accesează locația",
+  "EnableNotifications": "Activare notificări",
+  "DisableNotifications": "Dezactivare notificări",
+  "EditRoom": "Editare sală",
+  "ChangeRoomOwner": "Schimbă Proprietarul Camerei",
+  "MoveToArchive": "Mutare în arhivă"
 }

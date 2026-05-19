@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "文件夹已移至{{sectionName}}。",
   "FoldersCopiedNotify": "文件夹已复制。",
   "FoldersRemovedNotify": "文件夹已删除。",
-  "OpenLocation": "打开位置"
+  "OpenLocation": "打开位置",
+  "EnableNotifications": "启用消息通知",
+  "DisableNotifications": "禁用消息通知",
+  "EditRoom": "编辑房间",
+  "ChangeRoomOwner": "更改房间所有者",
+  "MoveToArchive": "移动至存档"
 }

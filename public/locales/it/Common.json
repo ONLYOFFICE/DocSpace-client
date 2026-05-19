@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "Cartelle spostate in {{sectionName}}.",
   "FoldersCopiedNotify": "Cartelle copiate.",
   "FoldersRemovedNotify": "Cartelle rimosse.",
-  "OpenLocation": "Apri posizione"
+  "OpenLocation": "Apri posizione",
+  "EnableNotifications": "Abilita le notifiche",
+  "DisableNotifications": "Disattiva notifiche",
+  "EditRoom": "Modifica la stanza",
+  "ChangeRoomOwner": "Cambia proprietario della stanza",
+  "MoveToArchive": "Sposta in archivio"
 }

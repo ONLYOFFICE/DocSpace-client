@@ -1596,5 +1596,10 @@
   "FoldersTrashMoveCompleted": "Kansiot siirretty {{sectionName}}.",
   "FoldersCopiedNotify": "Kansiot kopioitu.",
   "FoldersRemovedNotify": "Kansiot poistettu.",
-  "OpenLocation": "Avaa sijainti"
+  "OpenLocation": "Avaa sijainti",
+  "EnableNotifications": "Salli ilmoitukset",
+  "DisableNotifications": "Poista ilmoitukset käytöstä",
+  "EditRoom": "Muokkaa huonetta",
+  "ChangeRoomOwner": "Vaihda huoneen omistaja",
+  "MoveToArchive": "Siirrä arkistoon"
 }

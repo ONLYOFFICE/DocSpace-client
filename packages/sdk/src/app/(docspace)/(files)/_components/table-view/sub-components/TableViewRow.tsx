@@ -35,7 +35,7 @@ import { TableRow } from "@docspace/ui-kit/components/table";
 import { TableCell } from "@docspace/ui-kit/components/table";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 

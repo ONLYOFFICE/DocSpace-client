@@ -37,7 +37,7 @@ import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import DuplicateReactSvgUrl from "PUBLIC_DIR/images/icons/16/duplicate.react.svg?url";
-import OwnerReactSvgUrl from "PUBLIC_DIR/images/file.actions.owner.react.svg?url";
+import ReconnectSvgUrl from "PUBLIC_DIR/images/reconnect.svg?url";
 import EditRoomReactSvgUrl from "PUBLIC_DIR/images/settings.react.svg?url";
 import MoreOptionsReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import MuteReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
@@ -166,7 +166,7 @@ export default function useRoomContextMenuModel(
               id: "option_change-room-owner",
               key: "change-room-owner",
               label: t("Common:ChangeRoomOwner"),
-              icon: OwnerReactSvgUrl,
+              icon: ReconnectSvgUrl,
               disabled: !room.security?.ChangeOwner,
             },
           ],

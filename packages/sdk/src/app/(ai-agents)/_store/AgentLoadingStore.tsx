@@ -40,11 +40,7 @@ class AgentLoadingStore {
     makeAutoObservable(this);
   }
 
-  setIsSectionBodyLoading = (
-    isSectionBodyLoading: boolean,
-    withTimer = true,
-  ) => {
-    void withTimer;
+  setIsSectionBodyLoading = (isSectionBodyLoading: boolean) => {
     this.isSectionBodyLoading = isSectionBodyLoading;
     this.showBodyLoader = isSectionBodyLoading;
   };

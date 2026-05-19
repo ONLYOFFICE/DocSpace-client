@@ -24,33 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// Slim port of client SetAgentParams.tsx. The full client form depends on
-// client-only components/stores that do not exist in SDK (TagHandler,
-// TagInput, ItemIcon, InputParam, AvatarEditorDialog, ChangeRoomOwner,
-// RoomQuota, DialogsStore cover model, InfoPanelStore icon resolver,
-// AvatarEditorDialogStore upload flow). To keep the SDK route group focused
-// and isolated we render the core fields only: name, model, instructions,
-// MCP. Visuals (logo/cover editor, tag input, owner change, quota toggle)
-// can be reintroduced once the corresponding SDK utilities are ported.
-
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import {
-  TextInput,
-  InputSize,
-  InputType,
-} from "@docspace/ui-kit/components/text-input";
-import { isMobile } from "@docspace/shared/utils";
-import { removeEmojiCharacters } from "@docspace/shared/utils";
-
-import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { isMobile, removeEmojiCharacters } from "@docspace/shared/utils";
+import type { TLogo } from "@docspace/ui-kit/types";
+import type {
+  TAgentIconParams,
+  TAgentParams,
+} from "@docspace/shared/utils/aiAgents";
+import type { TAgent } from "@docspace/shared/api/ai/types";
 import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
 
+import type TagHandler from "../../../_helpers/TagHandler";
+import TagInput from "../../tag-input";
+import InputParam from "../../create-edit-dialog-params/InputParam";
+import AvatarEditorDialog from "../../avatar-editor-dialog";
+import {
+  useAgentDialogsStore,
+  useAgentsQuotaStore,
+  useAvatarEditorStore,
+} from "../../../_store";
+
+import RoomQuota from "../../room-quota";
+import ChangeRoomOwner from "../../change-room-owner";
 import ModelSettings from "./Model";
 import InstructionsSettings from "./Instructions";
 import MCPSettings from "./MCP";
@@ -60,7 +62,8 @@ import styles from "./SetAgentParams.module.scss";
 type SetAgentParamsProps = {
   agentParams: TAgentParams;
   setAgentParams: (value: Partial<TAgentParams>) => void;
-  setIsScrollLocked?: (value: boolean) => void;
+  tagHandler: TagHandler;
+  setIsScrollLocked: (value: boolean) => void;
   isEdit?: boolean;
   isDisabled: boolean;
   isValidTitle: boolean;
@@ -68,40 +71,180 @@ type SetAgentParamsProps = {
   isWrongTitle: boolean;
   setIsWrongTitle: (value: boolean) => void;
   onKeyUp: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onOwnerChange?: () => void;
   portalMcpServerId?: string;
   onClickAction?: () => void;
   selectedServers?: TSelectorItem[];
   setSelectedServers?: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
   folderFormValidation?: RegExp;
+  maxImageUploadSize?: number;
+  selection?: TAgent;
 };
 
 const SetAgentParams = ({
   agentParams,
   setAgentParams,
+  tagHandler,
+  setIsScrollLocked,
+  isEdit,
   isDisabled,
   isValidTitle,
   setIsValidTitle,
   isWrongTitle,
   setIsWrongTitle,
   onKeyUp,
+  onOwnerChange,
   portalMcpServerId,
   onClickAction,
   selectedServers,
   setSelectedServers,
   folderFormValidation,
+  maxImageUploadSize,
+  selection,
 }: SetAgentParamsProps) => {
-  const { t } = useTranslation([
-    "CreateEditRoomDialog",
-    "Translations",
-    "Common",
-  ]);
+  const { t } = useTranslation(["Common"]);
 
-  const [title, setTitle] = React.useState(agentParams.title);
+  const dialogsStore = useAgentDialogsStore();
+  const avatarEditorStore = useAvatarEditorStore();
+  const quotaStore = useAgentsQuotaStore();
+
+  const { isDefaultAIAgentsQuotaSet, defaultAIAgentsQuota } = quotaStore;
+
+  const {
+    cover,
+    covers,
+    setCover,
+    setRoomCoverDialogProps,
+    roomCoverDialogProps,
+    roomLogoCoverDialogVisible,
+    getLogoCoverModel,
+  } = dialogsStore;
+
+  const {
+    avatarEditorDialogVisible,
+    setAvatarEditorDialogVisible,
+    uploadFile,
+    clearUploadedFile,
+  } = avatarEditorStore;
+
+  const [previewIcon, setPreviewIcon] = useState<string | null>(
+    agentParams.previewIcon ?? null,
+  );
+  const [horizontalOrientation, setHorizontalOrientation] = useState(false);
+  const [disableImageRescaling, setDisableImageRescaling] = useState(!!isEdit);
+  const [previewTitle, setPreviewTitle] = useState<string>(
+    selection?.title ?? "",
+  );
+  const [createAgentTitle, setCreateAgentTitle] = useState(agentParams.title);
+
+  const originalIconRef = React.useRef({
+    icon: agentParams.icon,
+    previewIcon: agentParams.previewIcon,
+    iconWasUpdated: agentParams.iconWasUpdated,
+  });
+
+  const checkWidth = () => {
+    setHorizontalOrientation(!isMobile());
+  };
+
+  React.useEffect(() => {
+    checkWidth();
+    window.addEventListener("resize", checkWidth);
+    return () => window.removeEventListener("resize", checkWidth);
+  }, []);
+
+  React.useEffect(() => {
+    if (agentParams.previewIcon !== previewIcon) {
+      setAgentParams({ previewIcon });
+    }
+    // Mirror client deps — sync only when previewIcon changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [previewIcon, agentParams.previewIcon]);
+
+  const getCoverLogo = () => {
+    if (cover) {
+      setPreviewIcon(null);
+    }
+
+    if (cover && cover.cover) {
+      const currentCoverData = covers?.filter(
+        (item) => item.id === cover.cover,
+      )[0]?.data;
+
+      return { ...cover, data: currentCoverData };
+    }
+
+    return null;
+  };
+
+  const currentCover = React.useMemo(getCoverLogo, [cover, covers]);
+
+  React.useEffect(() => {
+    setRoomCoverDialogProps?.({
+      ...roomCoverDialogProps,
+      title: previewTitle,
+    });
+    // Run once on mount — same as client.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const randomColor = React.useMemo(
+    () =>
+      globalColors.logoColors[
+        Math.floor(Math.random() * globalColors.logoColors.length)
+      ].replace("#", ""),
+    [],
+  );
+
+  const currentIcon = selection
+    ? selection?.logo?.large
+      ? selection?.logo?.large
+      : selection?.logo?.cover
+        ? selection?.logo
+        : undefined
+    : undefined;
+
+  const onChangeIcon = (icon: TAgentIconParams) => {
+    if (!icon.uploadedFile !== disableImageRescaling)
+      setDisableImageRescaling(!icon.uploadedFile);
+
+    setAgentParams({ icon, iconWasUpdated: true });
+  };
+
+  const onChangeFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    originalIconRef.current = {
+      icon: agentParams.icon,
+      previewIcon: agentParams.previewIcon,
+      iconWasUpdated: agentParams.iconWasUpdated,
+    };
+
+    const uploadedFile = await uploadFile(t, e);
+    if (!uploadedFile) return;
+
+    setAgentParams({
+      icon: { ...agentParams.icon, uploadedFile },
+      iconWasUpdated: true,
+    });
+
+    onChangeIcon({ ...agentParams.icon, uploadedFile });
+  };
+
+  const onCloseAvatarEditor = () => {
+    setPreviewIcon(originalIconRef.current.previewIcon ?? null);
+    setAvatarEditorDialogVisible(false);
+
+    clearUploadedFile();
+
+    setAgentParams({
+      icon: originalIconRef.current.icon,
+      previewIcon: originalIconRef.current.previewIcon,
+      iconWasUpdated: originalIconRef.current.iconWasUpdated,
+    });
+  };
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsValidTitle(true);
     let newValue = e.target.value;
-
     newValue = removeEmojiCharacters(newValue);
 
     if (folderFormValidation && newValue.match(folderFormValidation)) {
@@ -110,49 +253,171 @@ const SetAgentParams = ({
       setIsWrongTitle(false);
     }
 
-    setTitle(newValue);
+    if (isEdit) {
+      setPreviewTitle(newValue);
+    } else {
+      setCreateAgentTitle(newValue);
+    }
+
+    setRoomCoverDialogProps?.({
+      ...roomCoverDialogProps,
+      title: newValue,
+    });
+
     setAgentParams({ title: newValue });
+
+    if (!cover && !previewIcon && !isEdit) {
+      setCover(`#${randomColor}`, "");
+    }
   };
 
-  return (
-    <div className={styles.setAgentParams}>
-      <div className={styles.logoNameContainer}>
-        <RoomIcon
-          title={title}
-          showDefault
-          size={isMobile() ? "96px" : "64px"}
-          radius={isMobile() ? "18px" : "12px"}
-          className="room-params-icon"
-        />
+  const onSaveAvatar = () => {
+    setAvatarEditorDialogVisible(false);
+    setCover();
+  };
 
-        <FieldContainer
-          isVertical
-          labelText={`${t("Common:AgentName")}:`}
-          isRequired
-          hasError={!isValidTitle || isWrongTitle}
+  const onDeleteAvatar = () => {
+    if (previewIcon) setPreviewIcon(null);
+    else setCover(`#${randomColor}`, "");
+
+    setAgentParams({
+      icon: {
+        uploadedFile: null,
+        tmpFile: "",
+        x: 0.5,
+        y: 0.5,
+        zoom: 1,
+      },
+      iconWasUpdated: false,
+    });
+  };
+
+  const hasImage = isEdit
+    ? !!(
+        agentParams.iconWasUpdated ||
+        (agentParams.icon.uploadedFile && selection?.logo?.original)
+      )
+    : false;
+  const model = getLogoCoverModel(t, hasImage);
+
+  const isEditRoomModel = model?.map((item) =>
+    item.key === "create_edit_room_delete"
+      ? { ...item, onClick: onDeleteAvatar }
+      : item,
+  );
+
+  const isEmptyIcon =
+    createAgentTitle || cover?.color
+      ? false
+      : avatarEditorDialogVisible
+        ? true
+        : previewIcon
+          ? false
+          : !createAgentTitle;
+
+  const roomIconLogo = currentCover
+    ? { cover: currentCover }
+    : !avatarEditorDialogVisible && previewIcon;
+
+  const itemIconLogo = currentCover
+    ? { cover: currentCover }
+    : avatarEditorDialogVisible
+      ? currentIcon
+      : previewIcon || currentIcon;
+
+  const showDefault =
+    cover && cover.cover
+      ? false
+      : (!previewIcon && !selection?.logo?.cover && !selection?.logo?.large) ||
+        !!cover?.color;
+
+  // Edit mode shows current room icon with editing menu; Create mode shows
+  // an empty icon based on the typed title / chosen cover.
+  const element = isEdit ? (
+    <RoomIcon
+      title={previewTitle}
+      className="room-params-icon"
+      logo={itemIconLogo as unknown as TLogo}
+      showDefault={showDefault}
+      color={cover ? cover.color : selection?.logo?.color}
+      size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
+      radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
+      withEditing
+      model={isEditRoomModel}
+      onChangeFile={onChangeFile}
+      dataTestId="create_edit_agent_icon"
+    />
+  ) : (
+    <RoomIcon
+      title={createAgentTitle}
+      showDefault={
+        cover && cover.cover ? false : !previewIcon || avatarEditorDialogVisible
+      }
+      size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
+      radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
+      imgClassName="react-svg-icon"
+      model={model}
+      className="room-params-icon"
+      isEmptyIcon={
+        !currentCover || roomLogoCoverDialogVisible ? isEmptyIcon : false
+      }
+      color={cover ? cover.color : randomColor}
+      logo={roomIconLogo as unknown as TLogo}
+      withEditing={
+        (!!previewIcon && !avatarEditorDialogVisible) ||
+        !!createAgentTitle ||
+        (!!currentCover && !roomLogoCoverDialogVisible) ||
+        !!cover?.color
+      }
+      onChangeFile={onChangeFile}
+      dataTestId="create_edit_agent_icon"
+    />
+  );
+
+  return (
+    <div
+      className={`${styles.setAgentParams}${disableImageRescaling ? ` ${styles.disableImageRescaling}` : ""}`}
+    >
+      <div className={styles.logoNameContainer}>
+        {element}
+
+        <InputParam
+          id="shared_agent-name"
+          title={`${t("Common:AgentName")}:`}
+          placeholder={t("Common:EnterName")}
+          value={agentParams.title}
+          onChange={onChangeName}
+          isDisabled={isDisabled}
+          isValidTitle={isValidTitle}
+          isWrongTitle={isWrongTitle}
           errorMessage={
             isWrongTitle
               ? t("Common:ContainsSpecCharacter")
               : t("Common:RequiredField")
           }
-          style={{ flex: 1 }}
-        >
-          <TextInput
-            id="shared_agent-name"
-            type={InputType.text}
-            value={title}
-            onChange={onChangeName}
-            scale
-            isDisabled={isDisabled}
-            size={InputSize.base}
-            placeholder={t("Common:EnterName")}
-            onKeyUp={onKeyUp}
-            isAutoFocussed
-            hasError={!isValidTitle || isWrongTitle}
-            testId="create_edit_agent_input"
-          />
-        </FieldContainer>
+          onKeyUp={onKeyUp}
+          isAutoFocussed
+          dataTestId="create_edit_agent_input"
+        />
       </div>
+
+      <TagInput
+        t={t}
+        title=""
+        tagHandler={tagHandler}
+        setIsScrollLocked={setIsScrollLocked}
+        isDisabled={isDisabled}
+        dataTestId="create_edit_agent_tags_input"
+      />
+
+      {isEdit && agentParams.agentOwner ? (
+        <ChangeRoomOwner
+          canChangeOwner={!!agentParams.canChangeAgentOwner}
+          roomOwner={agentParams.agentOwner}
+          onOwnerChange={onOwnerChange}
+          isAgent
+        />
+      ) : null}
 
       <ModelSettings
         agentParams={agentParams}
@@ -172,8 +437,43 @@ const SetAgentParams = ({
         selectedServers={selectedServers}
         setSelectedServers={setSelectedServers}
       />
+
+      {isDefaultAIAgentsQuotaSet ? (
+        <RoomQuota
+          setRoomParams={setAgentParams}
+          roomParams={agentParams}
+          defaultQuota={defaultAIAgentsQuota}
+          isEdit={isEdit}
+          isLoading={isDisabled}
+          isAgent
+        />
+      ) : null}
+
+      {avatarEditorDialogVisible ? (
+        <AvatarEditorDialog
+          isDisabled={isDisabled}
+          image={
+            {
+              ...agentParams.icon,
+              uploadedFile: agentParams.icon.uploadedFile ?? undefined,
+            } as unknown as Parameters<typeof AvatarEditorDialog>[0]["image"]
+          }
+          setPreview={(p: string) => setPreviewIcon(p)}
+          onChangeImage={(img) =>
+            onChangeIcon(img as unknown as TAgentIconParams)
+          }
+          onClose={onCloseAvatarEditor}
+          onSave={onSaveAvatar}
+          onChangeFile={onChangeFile}
+          classNameWrapperImageCropper="icon-editor"
+          disableImageRescaling={disableImageRescaling}
+          visible={!!agentParams.icon.uploadedFile}
+          maxImageSize={maxImageUploadSize}
+          dataTestId="create_edit_agent_avatar_editor"
+        />
+      ) : null}
     </div>
   );
 };
 
-export default SetAgentParams;
+export default observer(SetAgentParams);

@@ -33,20 +33,14 @@ import { useTranslation } from "react-i18next";
 
 import { Tabs, type TTabItem } from "@docspace/ui-kit/components/tabs";
 
-import {
-  useAiRoomStore,
-  useAgentLoadingStore,
-  type AiRoomTab,
-} from "../../_store";
+import { useAiRoomStore, type AiRoomTab } from "../../_store";
 
 const AiRoomTabs = () => {
   const router = useRouter();
-  const { t } = useTranslation(["AIRoom", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   const aiRoomStore = useAiRoomStore();
-  const loadingStore = useAgentLoadingStore();
-  const { currentTab, roomId, setCurrentTab, setKnowledgeId, setResultId } =
-    aiRoomStore;
+  const { currentTab, roomId, setCurrentTab } = aiRoomStore;
 
   // Clear `chat` query param on unmount — port of the original AiRoomTabs
   // cleanup so the URL doesn't keep a stale chat id around after navigation.
@@ -68,21 +62,17 @@ const AiRoomTabs = () => {
     const id = tab.id as AiRoomTab;
     setCurrentTab(id);
 
-    setKnowledgeId(null);
-    setResultId(null);
-    if (id !== "chat") {
-      loadingStore.setIsSectionBodyLoading(true, false);
-    }
+    // Don't touch knowledgeId/resultId here — they're owned by the parent
+    // page effect (folder discovery), and AgentFilesList renders its own
+    // per-slot loader, so a global section-body loader isn't needed either.
+    if (!roomId) return;
 
-    // Preserve unknown query params, drop tab-specific state (fileId only
-    // makes sense for the result tab — leaving it on the URL would cause
-    // the page hydration effect to re-select the file after the user
-    // explicitly switched tabs).
+    // Preserve unknown query params; drop fileId for non-result tabs so the
+    // page hydration effect doesn't re-select a stale file.
     const params = new URLSearchParams(window.location.search);
     params.set("tab", id);
-    if (roomId) params.set("roomId", String(roomId));
     if (id !== "result") params.delete("fileId");
-    router.push(`/ai-agents?${params.toString()}`);
+    router.push(`/ai-agents/${roomId}?${params.toString()}`);
   };
 
   // AIRoom namespace is not bundled in SDK i18n (Common-only). Pass
@@ -91,17 +81,17 @@ const AiRoomTabs = () => {
   const items: TTabItem[] = [
     {
       id: "chat",
-      name: t("AIRoom:AIChat", { defaultValue: "AI Chat" }),
+      name: t("Common:AIChat", { defaultValue: "AI Chat" }),
       content: null,
     },
     {
       id: "knowledge",
-      name: t("AIRoom:Knowledge", { defaultValue: "Knowledge base" }),
+      name: t("Common:Knowledge", { defaultValue: "Knowledge base" }),
       content: null,
     },
     {
       id: "result",
-      name: t("AIRoom:ResultStorage", { defaultValue: "Result Storage" }),
+      name: t("Common:ResultStorage", { defaultValue: "Result Storage" }),
       content: null,
     },
   ];

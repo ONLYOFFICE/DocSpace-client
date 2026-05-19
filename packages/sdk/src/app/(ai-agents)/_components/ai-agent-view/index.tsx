@@ -31,7 +31,14 @@ import { observer } from "mobx-react";
 import dynamic from "next/dynamic";
 
 import NoAgentItem from "../no-agent-item";
-import { useAiRoomStore } from "../../_store";
+import NoAccessAgent from "../no-access-agent";
+import AgentFilesList from "../agent-files-list";
+import {
+  useAiRoomStore,
+  useAgentLoadingStore,
+  useAgentsAIConfigStore,
+  useAgentsUserStore,
+} from "../../_store";
 
 import styles from "./AIAgentView.module.scss";
 
@@ -43,7 +50,22 @@ const NewChat = dynamic(() => import("@docspace/ui-kit/ai-agent/new-chat"), {
 
 const AiAgentView = () => {
   const aiRoomStore = useAiRoomStore();
-  const { currentTab, roomId } = aiRoomStore;
+  const loadingStore = useAgentLoadingStore();
+  const aiConfigStore = useAgentsAIConfigStore();
+  const userStore = useAgentsUserStore();
+
+  const {
+    currentTab,
+    roomId,
+    knowledgeId,
+    resultId,
+    isErrorAIAgentNotAvailable,
+  } = aiRoomStore;
+
+  // SDK analogue of `accessRightsStore.canUseChat`: chat requires a
+  // configured AI provider and a non-visitor user.
+  const canUseChat =
+    aiConfigStore.aiReady && !!userStore.user && !userStore.user.isVisitor;
 
   // No room selected — show a no-agent placeholder (ported from client
   // NoAgentItem.tsx in InfoPanel).
@@ -51,25 +73,37 @@ const AiAgentView = () => {
     return <NoAgentItem />;
   }
 
-  // Mirror client AIAgentView: keep NewChat mounted across tab switches
-  // via React 19 <Activity>, and render a file-list placeholder for
-  // knowledge/result (the SDK does not ship SectionBodyContent).
+  // Agent fetch failed / no access — match client `NoAccessContainer`
+  // (Agent variant). Suppressed while the body loader is on, so we don't
+  // flash the error during the initial fetch.
+  if (
+    currentTab === "chat" &&
+    isErrorAIAgentNotAvailable &&
+    !loadingStore.showBodyLoader
+  ) {
+    return <NoAccessAgent />;
+  }
+
+  const hasNoAccessToChat = !canUseChat && !loadingStore.showBodyLoader;
+  const shouldRenderChat =
+    !hasNoAccessToChat &&
+    (!isErrorAIAgentNotAvailable || loadingStore.showBodyLoader);
+
   return (
     <>
-      <Activity mode={currentTab === "chat" ? "visible" : "hidden"}>
-        <div className={styles.aiAgentChat}>
-          <NewChat />
-        </div>
-      </Activity>
+      {shouldRenderChat ? (
+        <Activity mode={currentTab === "chat" ? "visible" : "hidden"}>
+          <div className={styles.aiAgentChat}>
+            <NewChat />
+          </div>
+        </Activity>
+      ) : null}
 
-      {currentTab !== "chat" ? (
-        <div style={{ padding: 16, color: "var(--text-color)" }}>
-          {currentTab === "knowledge"
-            ? "Knowledge files"
-            : "Result storage"}
-          &nbsp;— файловый список появится после переноса SectionBodyContent
-          в SDK.
-        </div>
+      {currentTab === "knowledge" ? (
+        <AgentFilesList folderId={knowledgeId} slot="knowledge" />
+      ) : null}
+      {currentTab === "result" ? (
+        <AgentFilesList folderId={resultId} slot="result" />
       ) : null}
     </>
   );

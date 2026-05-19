@@ -29,6 +29,8 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 
+import type { TAgent } from "@docspace/shared/api/ai/types";
+
 import {
   useCreateEditAgentStore,
   useAgentDialogsStore,
@@ -55,6 +57,21 @@ export const useAiAgentsPageInit = (options: Options = {}) => {
   const loadingStore = useAgentLoadingStore();
   const aiRoomStore = useAiRoomStore();
 
+  // Stabilize the closures passed to `configure` so the effect below only
+  // re-runs when its meaningful inputs change — navigation alone (the
+  // router object can flip identity per render) used to retrigger
+  // configure every render.
+  const navigateToAgent = React.useCallback(
+    (_agent: TAgent, urlPath: string) => {
+      router.push(urlPath);
+    },
+    [router],
+  );
+
+  const clearModelCache = React.useCallback(() => {
+    modelCache.clear();
+  }, []);
+
   React.useEffect(() => {
     createEditAgentStore.configure({
       dialogsStore,
@@ -63,10 +80,8 @@ export const useAiAgentsPageInit = (options: Options = {}) => {
       aiRoomStore,
       isDefaultAgentsQuotaSet: options.isDefaultAgentsQuotaSet,
       isDefaultRoomsQuotaSet: options.isDefaultRoomsQuotaSet,
-      navigateToAgent: (_agent, urlPath) => {
-        router.push(urlPath);
-      },
-      clearModelCache: () => modelCache.clear(),
+      navigateToAgent,
+      clearModelCache,
     });
   }, [
     createEditAgentStore,
@@ -76,7 +91,8 @@ export const useAiAgentsPageInit = (options: Options = {}) => {
     aiRoomStore,
     options.isDefaultAgentsQuotaSet,
     options.isDefaultRoomsQuotaSet,
-    router,
+    navigateToAgent,
+    clearModelCache,
   ]);
 };
 

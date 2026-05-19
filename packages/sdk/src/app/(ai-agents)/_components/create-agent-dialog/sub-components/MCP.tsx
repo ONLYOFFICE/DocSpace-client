@@ -58,14 +58,14 @@ const MCPSettings = ({
   selectedServers,
   setSelectedServers,
 }: MCPSettingsProps) => {
-  const { t } = useTranslation(["AIRoom", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   return (
     <StyledParam increaseGap>
       <div className=" set_room_params-info">
         <div>
           <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
-            {t("AIRoom:MCP", { defaultValue: "MCP tools for this room" })}
+            {t("Common:MCP", { defaultValue: "MCP tools for this room" })}
           </Text>
           <Text
             fontSize="12px"
@@ -74,7 +74,7 @@ const MCPSettings = ({
             className="set_room_params-info-description"
             noSelect
           >
-            {t("AIRoom:MCPDescriptionServers", {
+            {t("Common:MCPDescriptionServers", {
               mcpServers: t("Common:MCPSettingTitle"),
               defaultValue:
                 "Use MCP servers connected by the administrator to enhance the chat with AI.",

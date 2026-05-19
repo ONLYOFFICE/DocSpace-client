@@ -177,7 +177,7 @@ class CreateEditAgentStore {
         ...logoParamsData,
       } as TAgentLogo;
     } catch (err) {
-      toastr.error(err as string);
+      toastr.error(err instanceof Error ? err.message : String(err));
       return undefined;
     }
   };
@@ -245,7 +245,11 @@ class CreateEditAgentStore {
         } satisfies TAgentLogo;
       }
     } catch (e) {
-      toastr.error(e as string);
+      toastr.error(e instanceof Error ? e.message : String(e));
+      // Don't fall through to editAIAgent — the editAgentParams would be
+      // missing the user's logo change, putting the agent into an
+      // inconsistent state.
+      return;
     }
 
     try {
@@ -279,16 +283,16 @@ class CreateEditAgentStore {
 
       if (requests.length) await Promise.all(requests);
     } catch (e) {
-      toastr.error(e as string);
+      toastr.error(e instanceof Error ? e.message : String(e));
     }
   };
 
   onCreateAgent = async (
     t: TFunction,
     successToast: React.ReactNode = null,
-  ) => {
+  ): Promise<TAgent | null> => {
     const deps = this.deps;
-    if (!deps || !this.agentParams) return;
+    if (!deps || !this.agentParams) return null;
 
     const { dialogsStore } = deps;
     const isDefaultRoomsQuotaSet = !!deps.isDefaultRoomsQuotaSet;
@@ -350,13 +354,18 @@ class CreateEditAgentStore {
 
       if (icon.uploadedFile && typeof icon.uploadedFile !== "string") {
         const agentLogo = await this.getAgentLogo(icon);
-        if (agentLogo) createAgentData.logo = agentLogo;
+        if (!agentLogo) {
+          // Logo upload failed — toast already shown inside getAgentLogo.
+          // Bail rather than create the agent without the requested logo.
+          return null;
+        }
+        createAgentData.logo = agentLogo;
       }
 
       const agent = await createAIAgent(createAgentData);
       if ((agent as unknown as { errorMsg?: string }).errorMsg) {
         toastr.error((agent as unknown as { errorMsg: string }).errorMsg);
-        return;
+        return null;
       }
 
       dialogsStore.setIsNewRoomByCurrentUser(true);
@@ -370,8 +379,11 @@ class CreateEditAgentStore {
       if (successToast) toastr.success(successToast);
 
       deps.clearModelCache?.();
+
+      return agent;
     } catch (err) {
-      toastr.error(err as string);
+      toastr.error(err instanceof Error ? err.message : String(err));
+      return null;
     } finally {
       this.setIsLoading(false);
       this.onClose?.();
@@ -388,12 +400,9 @@ class CreateEditAgentStore {
     deps.aiRoomStore.setRoomId(Number(agent.id));
     deps.aiRoomStore.setCurrentTab("chat");
 
-    // SDK has a single /ai-agents page — encode the agent via query params
-    // instead of the client's CategoryType-based path.
-    const params = new URLSearchParams();
-    params.set("roomId", String(agent.id));
-    params.set("tab", "chat");
-    const urlPath = `/ai-agents?${params.toString()}`;
+    // Detail page derives roomId from the [agentId] path param; the tab
+    // selection is carried via the only remaining query param.
+    const urlPath = `/ai-agents/${agent.id}?tab=chat`;
 
     deps.navigateToAgent?.(agent, urlPath);
   };

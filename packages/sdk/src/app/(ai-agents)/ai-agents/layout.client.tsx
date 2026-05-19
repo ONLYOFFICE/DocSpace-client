@@ -28,8 +28,10 @@
 
 import React from "react";
 import dynamic from "next/dynamic";
+import { observer } from "mobx-react";
 
 import { setAuthToken } from "@docspace/shared/api/client";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import type { TFilesSettings } from "@docspace/shared/api/files/types";
 import type { TUser } from "@docspace/shared/api/people/types";
@@ -38,6 +40,13 @@ import type { TDefaultProvider } from "@docspace/shared/api/ai/types";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { useAiRoomStore } from "../_store/AiRoomStore";
+import { useAgentsUserStore } from "../_store/AgentsUserStore";
+import {
+  useAgentDialogsStore,
+  useAgentsListStore,
+} from "../_store";
+import DeleteAgentDialog from "../_components/delete-agent-dialog";
+import LeaveAgentDialog from "../_components/leave-agent-dialog";
 import useOpenResultFile from "../_hooks/useOpenResultFile";
 
 // @onlyoffice/ai-chat (consumed transitively by AiAgentProviders) touches
@@ -64,11 +73,71 @@ type AiAgentsShellProps = {
   children: React.ReactNode;
 };
 
+const AgentLifecycleDialogs = observer(() => {
+  const dialogsStore = useAgentDialogsStore();
+  const listStore = useAgentsListStore();
+  const userStore = useAgentsUserStore();
+
+  const { deleteAgentDialogState, leaveAgentDialogState } = dialogsStore;
+
+  return (
+    <>
+      {deleteAgentDialogState.visible && deleteAgentDialogState.agent ? (
+        <DeleteAgentDialog
+          visible
+          agentName={deleteAgentDialogState.agent.title}
+          onClose={() => dialogsStore.setDeleteAgentDialogVisible(false)}
+          onConfirm={() => {
+            const agent = deleteAgentDialogState.agent;
+            if (!agent) return;
+            dialogsStore.setDeleteAgentDialogVisible(false);
+            void listStore.deleteAgent(agent.id).catch((e) => {
+              toastr.error(e instanceof Error ? e.message : String(e));
+            });
+          }}
+        />
+      ) : null}
+
+      {leaveAgentDialogState.visible && leaveAgentDialogState.agent ? (
+        <LeaveAgentDialog
+          visible
+          isOwner={leaveAgentDialogState.isOwner}
+          onClose={() => dialogsStore.setLeaveAgentDialogVisible(false)}
+          onConfirm={() => {
+            const agent = leaveAgentDialogState.agent;
+            const currentUserId = userStore.user?.id;
+            if (!agent || !currentUserId) return;
+            dialogsStore.setLeaveAgentDialogVisible(false);
+            // Owner path requires the dedicated Change-Owner flow (not yet
+            // ported); treat the OK click as a no-op apart from closing.
+            if (leaveAgentDialogState.isOwner) return;
+            void listStore.leaveAgent(agent.id, currentUserId).catch((e) => {
+              toastr.error(e instanceof Error ? e.message : String(e));
+            });
+          }}
+        />
+      ) : null}
+    </>
+  );
+});
+
 const AiAgentsShell = ({ commonData, children }: AiAgentsShellProps) => {
   const { sdkConfig } = useSDKConfig();
   const { isBase } = useTheme();
   const aiRoomStore = useAiRoomStore();
+  const userStore = useAgentsUserStore();
   const openResultFile = useOpenResultFile();
+
+  // Hydrate the current user once — needed by the filter ("me" substitution,
+  // selected-tag rendering for Owner/Contacts) without an extra round-trip.
+  const hydratedUser = React.useRef(false);
+  React.useEffect(() => {
+    if (hydratedUser.current) return;
+    if (commonData.user) {
+      hydratedUser.current = true;
+      userStore.setUser(commonData.user);
+    }
+  }, [commonData.user, userStore]);
 
   const language =
     sdkConfig?.locale || commonData.user?.cultureName || "en";
@@ -123,6 +192,7 @@ const AiAgentsShell = ({ commonData, children }: AiAgentsShellProps) => {
       closeEditorPanel={closeEditorPanel}
     >
       {children}
+      <AgentLifecycleDialogs />
     </AiAgentProviders>
   );
 };

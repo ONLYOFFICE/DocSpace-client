@@ -34,9 +34,14 @@ import {
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Button } from "@docspace/ui-kit/components/button";
-import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
+import type {
+  TAgentParams,
+  TAgentTagsParams,
+} from "@docspace/shared/utils/aiAgents";
+import type { TAgent } from "@docspace/shared/api/ai/types";
 import MCPServersSelector from "@docspace/ui-kit/selectors/MCPServers";
 
+import TagHandler from "../../_helpers/TagHandler";
 import SetAgentParams from "./sub-components/SetAgentParams";
 import { useMCP } from "./hooks/useMCP";
 import { modelCache } from "./sub-components/modelCache";
@@ -45,24 +50,32 @@ type EditAgentDialogProps = {
   visible: boolean;
   onClose: VoidFunction;
   onSave: (params: TAgentParams) => void;
+  onOwnerChange?: () => void;
   isLoading: boolean;
   isInitLoading: boolean;
   fetchedAgentParams: TAgentParams;
+  fetchedTags: string[];
   hasCover: boolean;
   folderFormValidation?: RegExp;
+  selection?: TAgent;
+  maxImageUploadSize?: number;
 };
 
 const EditAgentDialog = ({
   visible,
   onClose,
   onSave,
+  onOwnerChange,
   isLoading,
   fetchedAgentParams,
+  fetchedTags,
   isInitLoading,
   hasCover,
+  selection,
+  maxImageUploadSize,
   folderFormValidation,
 }: EditAgentDialogProps) => {
-  const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
+  const { t } = useTranslation(["Common"]);
 
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isValidTitle, setIsValidTitle] = useState(true);
@@ -132,6 +145,17 @@ const EditAgentDialog = ({
     setAgentParams: setAgentParamsAction,
   });
 
+  const setAgentTags = React.useCallback(
+    (newTags: TAgentTagsParams[]) =>
+      setAgentParams((value) => ({ ...value, tags: newTags })),
+    [],
+  );
+
+  const tagHandler = React.useMemo(
+    () => new TagHandler(agentParams.tags, setAgentTags, fetchedTags),
+    [agentParams.tags, setAgentTags, fetchedTags],
+  );
+
   const onEditRoom = () => {
     if (!agentParams.title.trim()) {
       setIsValidTitle(false);
@@ -143,7 +167,7 @@ const EditAgentDialog = ({
 
   const onKeyUpHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (isWrongTitle) return;
-    if (e.keyCode === 13) onEditRoom();
+    if (e.key === "Enter") onEditRoom();
   };
 
   const onCloseAction = () => {
@@ -177,9 +201,12 @@ const EditAgentDialog = ({
 
       <ModalDialog.Body>
         <SetAgentParams
+          tagHandler={tagHandler}
           agentParams={agentParams}
           setAgentParams={setAgentParamsAction}
           setIsScrollLocked={setIsScrollLocked}
+          selection={selection}
+          maxImageUploadSize={maxImageUploadSize}
           isEdit
           isDisabled={isLoading}
           isValidTitle={isValidTitle}
@@ -187,6 +214,7 @@ const EditAgentDialog = ({
           setIsValidTitle={setIsValidTitle}
           setIsWrongTitle={setIsWrongTitle}
           onKeyUp={onKeyUpHandler}
+          onOwnerChange={onOwnerChange}
           onClickAction={onClickAction}
           selectedServers={selectedServers}
           setSelectedServers={setSelectedServers}

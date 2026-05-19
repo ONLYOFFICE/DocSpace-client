@@ -36,6 +36,8 @@ import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
 import {
   useCreateEditAgentStore,
   useAgentDialogsStore,
+  useAgentTagsStore,
+  useAgentsQuotaStore,
 } from "../../_store";
 import CreateAgentDialog from "../create-agent-dialog";
 
@@ -45,6 +47,7 @@ type Props = {
   onClose: VoidFunction;
   portalMcpServerId?: string;
   folderFormValidation?: RegExp;
+  maxImageUploadSize?: number;
 };
 
 const CreateAgentEvent = ({
@@ -53,11 +56,14 @@ const CreateAgentEvent = ({
   onClose,
   portalMcpServerId = "",
   folderFormValidation,
+  maxImageUploadSize,
 }: Props) => {
-  const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
+  const { t } = useTranslation(["Common"]);
 
   const createEditAgentStore = useCreateEditAgentStore();
   const dialogsStore = useAgentDialogsStore();
+  const tagsStore = useAgentTagsStore();
+  const quotaStore = useAgentsQuotaStore();
 
   const { useProfilesStore, useThreadsStore } = useStores();
   const api = useApi();
@@ -70,6 +76,20 @@ const CreateAgentEvent = ({
       : profiles.find((p) => p.modelId === agentParams.modelId);
 
     const threadTitle = agentParams.title || t("Common:NewAgent");
+
+    // Create the agent first — only spin up the thread on success so a
+    // failed agent create can't leave an orphan thread behind.
+    createEditAgentStore.setAgentParams({
+      ...agentParams,
+      logo: agentParams.logo,
+    });
+    createEditAgentStore.setOnClose(onClose);
+    const createdAgent = await createEditAgentStore.onCreateAgent(t);
+
+    // Skip thread creation if agent creation failed — otherwise we leave an
+    // orphan thread pointing to nothing.
+    if (!createdAgent) return;
+
     const thread = await api.threads.create({
       title: threadTitle,
       profileId: baseProfile?.id,
@@ -77,13 +97,6 @@ const CreateAgentEvent = ({
     await insertThread(thread.threadId, threadTitle, {
       profileId: baseProfile?.id,
     });
-
-    createEditAgentStore.setAgentParams({
-      ...agentParams,
-      logo: agentParams.logo,
-    });
-    createEditAgentStore.setOnClose(onClose);
-    createEditAgentStore.onCreateAgent(t);
   };
 
   // Sync the dialogs-store flag with the mounted state of this wrapper
@@ -91,11 +104,16 @@ const CreateAgentEvent = ({
   // already true; cleanup ensures the flag goes back to false on unmount).
   useEffect(() => {
     dialogsStore.setCreateAgentDialogVisible(true);
+    // Fetch portal tags + room covers so the TagInput dropdown and avatar
+    // cover picker have something to render without a flash of empty state.
+    void tagsStore.fetchTags();
+    void dialogsStore.getCovers().catch(() => undefined);
+    void quotaStore.fetchPortalQuota();
     return () => {
       dialogsStore.setCreateAgentDialogVisible(false);
       dialogsStore.clearCoverProps();
     };
-  }, [dialogsStore]);
+  }, [dialogsStore, tagsStore, quotaStore]);
 
   if (!visible) return null;
 
@@ -105,9 +123,11 @@ const CreateAgentEvent = ({
       visible={visible}
       onClose={onClose}
       onCreate={onCreate}
+      fetchedTags={tagsStore.tags}
       isLoading={createEditAgentStore.isLoading}
       portalMcpServerId={portalMcpServerId}
       folderFormValidation={folderFormValidation}
+      maxImageUploadSize={maxImageUploadSize}
     />
   );
 };

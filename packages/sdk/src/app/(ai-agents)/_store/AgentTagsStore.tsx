@@ -36,27 +36,46 @@ class AgentTagsStore {
 
   isLoading = false;
 
+  isLoaded = false;
+
+  private inflight: Promise<unknown> | null = null;
+
   constructor() {
     makeAutoObservable(this);
   }
 
-  fetchTags = async () => {
-    if (this.isLoading) return;
-    this.isLoading = true;
-    try {
-      const tags = await api.rooms.getTags();
-      runInAction(() => {
-        this.tags = Array.isArray(tags) ? tags : [];
-      });
-    } catch {
-      runInAction(() => {
-        this.tags = [];
-      });
-    } finally {
-      runInAction(() => {
-        this.isLoading = false;
-      });
+  fetchTags = async (): Promise<void> => {
+    if (this.isLoaded) return;
+    const pending = this.inflight;
+    if (pending !== null) {
+      await pending;
+      return;
     }
+
+    runInAction(() => {
+      this.isLoading = true;
+    });
+
+    this.inflight = Promise.resolve(api.rooms.getTags())
+      .then((tags) => {
+        runInAction(() => {
+          this.tags = Array.isArray(tags) ? tags : [];
+          this.isLoaded = true;
+        });
+      })
+      .catch(() => {
+        runInAction(() => {
+          this.tags = [];
+        });
+      })
+      .finally(() => {
+        runInAction(() => {
+          this.isLoading = false;
+        });
+        this.inflight = null;
+      });
+
+    await this.inflight;
   };
 }
 

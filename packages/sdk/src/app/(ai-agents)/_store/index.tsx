@@ -26,6 +26,14 @@
 
 "use client";
 
+// Store fetcher conventions:
+// - Read-only fetchers (Tags, AIConfig, Quota) use inflight-promise de-dup
+//   so concurrent callers share one in-flight request and idempotent re-mounts
+//   skip the round-trip.
+// - List/search fetchers (AgentsListStore, AISettingsStore.checkUnavailableProviders)
+//   use AbortController because their results are cancellable and the
+//   in-flight request can be invalidated by a newer filter.
+
 import React from "react";
 
 import { AgentLoadingStoreContextProvider } from "./AgentLoadingStore";
@@ -34,6 +42,12 @@ import { AvatarEditorStoreContextProvider } from "./AvatarEditorStore";
 import { AgentDialogsStoreContextProvider } from "./AgentDialogsStore";
 import { AiRoomStoreContextProvider } from "./AiRoomStore";
 import { CreateEditAgentStoreContextProvider } from "./CreateEditAgentStore";
+import { AgentsListStoreContextProvider } from "./AgentsListStore";
+import { AgentsUserStoreContextProvider } from "./AgentsUserStore";
+import { AgentsQuotaStoreContextProvider } from "./AgentsQuotaStore";
+import { AgentsAIConfigStoreContextProvider } from "./AgentsAIConfigStore";
+import { AISettingsStoreContextProvider } from "./AISettingsStore";
+import { AgentFilesStoreContextProvider } from "./AgentFilesStore";
 
 export const AiAgentsStoreProviders = ({
   children,
@@ -47,7 +61,19 @@ export const AiAgentsStoreProviders = ({
           <AgentDialogsStoreContextProvider>
             <AiRoomStoreContextProvider>
               <CreateEditAgentStoreContextProvider>
-                {children}
+                <AgentsUserStoreContextProvider>
+                  <AgentsQuotaStoreContextProvider>
+                    <AgentsAIConfigStoreContextProvider>
+                      <AISettingsStoreContextProvider>
+                        <AgentFilesStoreContextProvider>
+                          <AgentsListStoreContextProvider>
+                            {children}
+                          </AgentsListStoreContextProvider>
+                        </AgentFilesStoreContextProvider>
+                      </AISettingsStoreContextProvider>
+                    </AgentsAIConfigStoreContextProvider>
+                  </AgentsQuotaStoreContextProvider>
+                </AgentsUserStoreContextProvider>
               </CreateEditAgentStoreContextProvider>
             </AiRoomStoreContextProvider>
           </AgentDialogsStoreContextProvider>
@@ -64,3 +90,10 @@ export { useAgentDialogsStore } from "./AgentDialogsStore";
 export { useAiRoomStore } from "./AiRoomStore";
 export type { AiRoomTab } from "./AiRoomStore";
 export { useCreateEditAgentStore } from "./CreateEditAgentStore";
+export { useAgentsListStore } from "./AgentsListStore";
+export type { AgentsViewAs } from "./AgentsListStore";
+export { useAgentsUserStore } from "./AgentsUserStore";
+export { useAgentsQuotaStore } from "./AgentsQuotaStore";
+export { useAgentsAIConfigStore } from "./AgentsAIConfigStore";
+export { useAISettingsStore } from "./AISettingsStore";
+export { useAgentFilesStore } from "./AgentFilesStore";

@@ -54,10 +54,9 @@ export const useOpenResultFile = () => {
       loadingStore.setIsSectionBodyLoading(true);
 
       const params = new URLSearchParams();
-      params.set("roomId", String(roomId));
       params.set("tab", "result");
       params.set("fileId", String(fileId));
-      router.push(`/ai-agents?${params.toString()}`);
+      router.push(`/ai-agents/${roomId}?${params.toString()}`);
     },
     [aiRoomStore, loadingStore, router],
   );

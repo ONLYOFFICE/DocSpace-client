@@ -24,10 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import AiAgentsPage from "./page.client";
+import AiAgentDetailPage from "./page.client";
 
 export const dynamic = "force-dynamic";
 
+type Params = Promise<{ agentId: string }>;
 type SearchParams = Promise<Record<string, string | undefined>>;
 
 const parseNumericId = (raw: string | undefined): number | null => {
@@ -36,21 +37,23 @@ const parseNumericId = (raw: string | undefined): number | null => {
   return Number.isFinite(value) ? value : null;
 };
 
-export default async function AiAgents({
+export default async function AiAgentDetail({
+  params,
   searchParams,
 }: {
+  params: Params;
   searchParams: SearchParams;
 }) {
-  const params = await searchParams;
-  const roomId = parseNumericId(params.roomId);
+  const { agentId } = await params;
+  const sp = await searchParams;
+
+  const roomId = parseNumericId(agentId);
   const initialTab =
-    params.tab === "knowledge" || params.tab === "result"
-      ? params.tab
-      : "chat";
-  const initialResultFileId = parseNumericId(params.fileId);
+    sp.tab === "knowledge" || sp.tab === "result" ? sp.tab : "chat";
+  const initialResultFileId = parseNumericId(sp.fileId);
 
   return (
-    <AiAgentsPage
+    <AiAgentDetailPage
       roomId={roomId}
       initialTab={initialTab}
       initialResultFileId={initialResultFileId}

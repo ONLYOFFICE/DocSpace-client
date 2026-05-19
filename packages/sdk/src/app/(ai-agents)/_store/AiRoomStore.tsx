@@ -45,6 +45,8 @@ class AiRoomStore {
 
   selectedResultFileId: Nullable<number> = null;
 
+  isErrorAIAgentNotAvailable = false;
+
   aiPlaylistImages: TChatPlaylistImage[] = [];
 
   constructor() {
@@ -74,6 +76,10 @@ class AiRoomStore {
 
   setResultId = (resultId: Nullable<number>) => {
     this.resultId = resultId;
+  };
+
+  setIsErrorAIAgentNotAvailable = (value: boolean) => {
+    this.isErrorAIAgentNotAvailable = value;
   };
 
   get isChatTab() {

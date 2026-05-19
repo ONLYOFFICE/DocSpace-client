@@ -44,7 +44,7 @@ const InstructionsSettings = ({
   agentParams,
   setAgentParams,
 }: InstructionsSettingsProps) => {
-  const { t } = useTranslation(["AIRoom", "Common"]);
+  const { t } = useTranslation(["Common"]);
   const [value, setValue] = React.useState(agentParams.prompt || "");
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -64,7 +64,7 @@ const InstructionsSettings = ({
       <div className=" set_room_params-info">
         <div>
           <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
-            {t("AIRoom:AIInstructions", { defaultValue: "AI Instructions" })}
+            {t("Common:AIInstructions", { defaultValue: "AI Instructions" })}
           </Text>
           <Text
             fontSize="12px"
@@ -73,7 +73,7 @@ const InstructionsSettings = ({
             className="set_room_params-info-description"
             noSelect
           >
-            {t("AIRoom:InstructionsDescriptionAgent", {
+            {t("Common:InstructionsDescriptionAgent", {
               aiAgent: t("Common:AIAgent"),
               defaultValue:
                 "Describe how the AI agent should behave and respond. Define its role, tone, and main tasks.",
@@ -84,7 +84,7 @@ const InstructionsSettings = ({
           value={value}
           onChange={handleChange}
           heightTextArea={144}
-          placeholder={t("AIRoom:InstructionsDescriptionAgentExample", {
+          placeholder={t("Common:InstructionsDescriptionAgentExample", {
             defaultValue:
               "Example: You are an AI assistant that helps with writing and editing.",
           })}

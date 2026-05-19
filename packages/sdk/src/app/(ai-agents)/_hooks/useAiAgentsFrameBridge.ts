@@ -27,21 +27,30 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 
 import {
   frameCallEvent,
+  frameCallbackData,
   frameHandlePing,
   getFrameId,
 } from "@docspace/shared/utils/common";
 
+import { useAiRoomStore } from "../_store";
+
 /**
- * Reports lifecycle events to the parent iframe (onAppReady, onNavigate).
- * Minimal bridge by analogy with (forms)/_hooks usage in FormsShell.
+ * Reports lifecycle events to the parent iframe (onAppReady, onNavigate)
+ * and handles incoming postMessage commands from the parent — ports the
+ * three Shell.jsx callbacks (getAgentRoomId / openResultFile /
+ * closeEditorPanel) into a postMessage protocol used by the SDK embedder.
  */
 export const useAiAgentsFrameBridge = (
   isReady: boolean,
-  currentTab: string,
+  currentTab: string | null,
 ) => {
+  const router = useRouter();
+  const aiRoomStore = useAiRoomStore();
+
   const appReadySent = React.useRef(false);
   React.useEffect(() => {
     if (isReady && !appReadySent.current) {
@@ -64,24 +73,77 @@ export const useAiAgentsFrameBridge = (
     }
   }, [currentTab]);
 
-  // Minimal handler — currently just consumes ping messages so the parent
-  // can detect the frame is alive. Extend as new postMessage commands arise.
   React.useEffect(() => {
     const handler = (e: MessageEvent) => {
+      // SDK iframes are embedded by arbitrary third-party origins (that is
+      // the entire point of the SDK), so we intentionally do not validate
+      // `event.origin` here — same posture as the (forms) layout bridge.
+      // We only filter by `e.source === window.parent` to ignore messages
+      // posted by other windows / unrelated postMessage senders.
       if (window.self === window.parent || e.source !== window.parent) return;
-      let eventData: { type?: string; frameId?: string } | undefined;
+      let eventData: Record<string, unknown> | undefined;
       try {
-        eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+        eventData =
+          typeof e.data === "string"
+            ? JSON.parse(e.data)
+            : (e.data as Record<string, unknown>);
       } catch {
         return;
       }
-      if (eventData) frameHandlePing(eventData);
+      if (!eventData) return;
+      if (frameHandlePing(eventData)) return;
+
+      const dataEnvelope = eventData?.data as
+        | Record<string, unknown>
+        | undefined;
+      const methodName = dataEnvelope?.methodName as string | undefined;
+      const callId = dataEnvelope?.callId as number | undefined;
+      const payload = dataEnvelope?.data as Record<string, unknown> | undefined;
+
+      // Mirror Shell.jsx callbacks (lines 703–727).
+      if (methodName === "getAgentRoomId") {
+        frameCallbackData({ roomId: aiRoomStore.roomId }, callId);
+        return;
+      }
+
+      if (methodName === "openResultFile") {
+        const fileIdRaw = payload?.fileId;
+        const fileId =
+          typeof fileIdRaw === "number"
+            ? fileIdRaw
+            : typeof fileIdRaw === "string"
+              ? Number(fileIdRaw)
+              : NaN;
+        const roomId = aiRoomStore.roomId;
+        if (!roomId || !Number.isFinite(fileId)) {
+          frameCallbackData({ error: "Invalid roomId or fileId" }, callId);
+          return;
+        }
+        aiRoomStore.setCurrentTab("result");
+        aiRoomStore.setSelectedResultFileId(fileId);
+        router.replace(`/ai-agents/${roomId}?tab=result&fileId=${fileId}`);
+        frameCallbackData({ roomId, fileId }, callId);
+        return;
+      }
+
+      if (methodName === "closeEditorPanel") {
+        aiRoomStore.setSelectedResultFileId(null);
+        frameCallbackData({ ok: true }, callId);
+        return;
+      }
+
+      // Unknown method — reply with an error so the parent frame's pending
+      // promise resolves instead of hanging forever.
+      if (methodName !== undefined) {
+        frameCallbackData({ error: "unknown method", methodName }, callId);
+      }
     };
+
     window.addEventListener("message", handler, false);
     return () => {
       window.removeEventListener("message", handler, false);
     };
-  }, []);
+  }, [router, aiRoomStore]);
 };
 
 export default useAiAgentsFrameBridge;

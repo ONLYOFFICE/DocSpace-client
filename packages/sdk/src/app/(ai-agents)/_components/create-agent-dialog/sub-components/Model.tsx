@@ -43,7 +43,7 @@ type ModelSettingsProps = {
 };
 
 const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
-  const { t } = useTranslation(["AIRoom", "Common"]);
+  const { t } = useTranslation(["Common"]);
   const { useProfilesStore } = useStores();
   const profiles = useProfilesStore((s) => s.profiles);
   const defaultProfile = useProfilesStore((s) => s.defaultProfile);
@@ -114,7 +114,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
       <div className=" set_room_params-info">
         <div>
           <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
-            {t("AIRoom:AIProviderAndModel", {
+            {t("Common:AIProviderAndModel", {
               aiProvider: t("Common:AIProvider"),
               defaultValue: "AI provider and model",
             })}
@@ -126,7 +126,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
             className="set_room_params-info-description"
             noSelect
           >
-            {t("AIRoom:ModelDescription", {
+            {t("Common:ModelDescription", {
               aiProvider: t("Common:AIProvider"),
               defaultValue:
                 "Select the AI provider and model to be used in this room.",
@@ -142,7 +142,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
             <Trans
               t={t}
               i18nKey="ResponseQualityNode"
-              ns="AIRoom"
+              ns="Common"
               components={{
                 1: <span key="1" style={{ fontWeight: 600 }} />,
               }}

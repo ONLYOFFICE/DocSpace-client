@@ -27,12 +27,50 @@
 "use client";
 
 import React from "react";
+import type { TFunction } from "i18next";
 import { makeAutoObservable } from "mobx";
 
 import type { TAgent } from "@docspace/shared/api/ai/types";
 import type { Nullable } from "@docspace/shared/types";
+import {
+  getRoomCovers,
+  setRoomCover,
+  removeLogoFromRoom,
+} from "@docspace/shared/api/rooms";
+import { ROOM_ACTION_KEYS } from "@docspace/shared/constants";
+
+import TrashIconSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
+import PenSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
+import UploadSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 
 export type AgentCover = { cover: string; color: string } | null;
+
+export type TServerCover = { id: string; data: string };
+
+export type RoomCoverDialogProps = {
+  icon?: Nullable<string>;
+  color?: Nullable<string>;
+  title?: Nullable<string>;
+  withoutIcon?: boolean;
+  withSelection?: boolean;
+  customColor?: Nullable<string>;
+};
+
+export type LogoCoverMenuItem = {
+  label: string;
+  icon: string;
+  key: string;
+  onClick: ((ref?: React.RefObject<HTMLInputElement | null>) => void) | (() => void);
+};
+
+const defaultCoverDialogProps: RoomCoverDialogProps = {
+  icon: null,
+  color: null,
+  title: null,
+  withoutIcon: true,
+  withSelection: true,
+  customColor: null,
+};
 
 class AgentDialogsStore {
   createAgentDialogVisible = false;
@@ -43,7 +81,28 @@ class AgentDialogsStore {
 
   editingAgent: Nullable<TAgent> = null;
 
+  deleteAgentDialogState: { visible: boolean; agent: Nullable<TAgent> } = {
+    visible: false,
+    agent: null,
+  };
+
+  leaveAgentDialogState: {
+    visible: boolean;
+    agent: Nullable<TAgent>;
+    isOwner: boolean;
+  } = { visible: false, agent: null, isOwner: false };
+
+  // Cover model — ports client DialogsStore cover/covers/setCover bag, used
+  // by the agent create/edit dialog to render the cover picker.
   cover: AgentCover = null;
+
+  covers: Nullable<TServerCover[]> = null;
+
+  roomLogoCoverDialogVisible = false;
+
+  roomCoverDialogProps: RoomCoverDialogProps = { ...defaultCoverDialogProps };
+
+  coverSelection: Nullable<TAgent> = null;
 
   isNewRoomByCurrentUser = false;
 
@@ -64,16 +123,118 @@ class AgentDialogsStore {
     this.aiAgentsDialogVisible = visible;
   };
 
-  setCover = (cover: AgentCover) => {
-    this.cover = cover;
+  setDeleteAgentDialogVisible = (
+    visible: boolean,
+    agent: TAgent | null = null,
+  ) => {
+    this.deleteAgentDialogState = { visible, agent };
   };
 
-  clearCoverProps = () => {
-    this.cover = null;
+  setLeaveAgentDialogVisible = (
+    visible: boolean,
+    agent: TAgent | null = null,
+    isOwner: boolean = false,
+  ) => {
+    this.leaveAgentDialogState = { visible, agent, isOwner };
   };
 
   setIsNewRoomByCurrentUser = (value: boolean) => {
     this.isNewRoomByCurrentUser = value;
+  };
+
+  setCovers = (covers: Nullable<TServerCover[]>) => {
+    this.covers = covers;
+  };
+
+  setRoomLogoCoverDialogVisible = (visible: boolean) => {
+    this.roomLogoCoverDialogVisible = visible;
+  };
+
+  setRoomCoverDialogProps = (props: RoomCoverDialogProps) => {
+    this.roomCoverDialogProps = props;
+  };
+
+  clearCoverProps = () => {
+    this.cover = null;
+    this.setRoomCoverDialogProps({ ...defaultCoverDialogProps });
+  };
+
+  setCover = (color?: string, icon?: { id?: string } | string) => {
+    if (!color) {
+      this.cover = null;
+      return;
+    }
+
+    const newColor = color.replace("#", "");
+    const newIcon = typeof icon === "string" ? "" : (icon?.id ?? "");
+    this.cover = { color: newColor, cover: newIcon };
+
+    this.setRoomCoverDialogProps({
+      ...this.roomCoverDialogProps,
+      icon: null,
+      color: null,
+      withoutIcon: true,
+    });
+  };
+
+  setCoverSelection = (selection: Nullable<TAgent>) => {
+    this.coverSelection = selection;
+  };
+
+  setRoomLogoCover = async (roomId?: TAgent["id"]) => {
+    const id = roomId ?? this.coverSelection?.id;
+    if (!id) return;
+
+    await setRoomCover(id, this.cover);
+
+    this.setRoomCoverDialogProps({
+      ...this.roomCoverDialogProps,
+      withSelection: true,
+    });
+    this.setCover();
+  };
+
+  deleteRoomLogo = async () => {
+    if (!this.coverSelection) return;
+    await removeLogoFromRoom(this.coverSelection.id);
+  };
+
+  getLogoCoverModel = (
+    t: TFunction,
+    hasImage: boolean,
+    onDelete?: () => () => void,
+  ): LogoCoverMenuItem[] => {
+    return [
+      {
+        label: t("Common:UploadPicture", {
+          defaultValue: "Upload picture",
+        }),
+        icon: UploadSvgUrl,
+        key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_UPLOAD,
+        onClick: (ref?: React.RefObject<HTMLInputElement | null>) =>
+          ref?.current?.click(),
+      },
+      hasImage
+        ? {
+            label: t("Common:Delete", { defaultValue: "Delete" }),
+            icon: TrashIconSvgUrl,
+            key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_DELETE,
+            onClick: onDelete ? onDelete() : () => this.deleteRoomLogo(),
+          }
+        : {
+            label: t("Common:CustomizeCover", {
+              defaultValue: "Customize cover",
+            }),
+            icon: PenSvgUrl,
+            key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_CUSTOMIZE_COVER,
+            onClick: () => this.setRoomLogoCoverDialogVisible(true),
+          },
+    ];
+  };
+
+  getCovers = async () => {
+    const response = await getRoomCovers();
+    this.setCovers(response as TServerCover[]);
   };
 }
 

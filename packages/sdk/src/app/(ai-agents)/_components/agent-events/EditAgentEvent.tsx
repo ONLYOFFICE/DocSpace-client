@@ -41,6 +41,7 @@ import {
   useCreateEditAgentStore,
   useAgentDialogsStore,
   useAgentTagsStore,
+  useAgentsQuotaStore,
 } from "../../_store";
 
 type Props = {
@@ -49,40 +50,64 @@ type Props = {
   item: TAgent;
   isDefaultAIAgentsQuotaSet?: boolean;
   folderFormValidation?: RegExp;
+  maxImageUploadSize?: number;
 };
 
 const EditAgentEvent = ({
   visible,
   onClose,
   item,
-  isDefaultAIAgentsQuotaSet = false,
   folderFormValidation,
+  maxImageUploadSize,
 }: Props) => {
-  const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
+  const { t } = useTranslation(["Common"]);
 
   const createEditAgentStore = useCreateEditAgentStore();
   const dialogsStore = useAgentDialogsStore();
   const tagsStore = useAgentTagsStore();
+  const quotaStore = useAgentsQuotaStore();
 
   const [isLoading, setIsLoading] = useState(false);
   const [isInitLoading, setIsInitLoading] = useState(false);
 
+  const isMountedRef = React.useRef(true);
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
+
   const fetchedAgentParams = getFetchedAgentParams(
     item,
-    isDefaultAIAgentsQuotaSet,
+    quotaStore.isDefaultAIAgentsQuotaSet,
   );
 
   const onSave = async (agentParams: TAgentParams) => {
-    setIsLoading(true);
+    if (isMountedRef.current) setIsLoading(true);
     await createEditAgentStore.onSaveEditAgent(t, agentParams, item);
-    setIsLoading(false);
+    if (isMountedRef.current) setIsLoading(false);
     onClose();
   };
 
   useEffect(() => {
-    setIsInitLoading(true);
-    tagsStore.fetchTags().finally(() => setIsInitLoading(false));
-  }, [tagsStore]);
+    if (isMountedRef.current) setIsInitLoading(true);
+    // Fetch tags + covers + portal quota in parallel so the dialog has
+    // everything it needs to render avatar/cover picker + quota toggle
+    // without flashing empty state.
+    Promise.all([
+      tagsStore.fetchTags(),
+      dialogsStore.getCovers().catch(() => undefined),
+      quotaStore.fetchPortalQuota(),
+    ]).finally(() => {
+      if (isMountedRef.current) setIsInitLoading(false);
+    });
+    // Hydrate cover selection so deleteRoomLogo can target the current agent.
+    dialogsStore.setCoverSelection(item);
+    // Re-fetch only when the agent identity changes — not on every parent
+    // re-render that passes a new `item` reference for the same agent.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tagsStore, dialogsStore, quotaStore, item.id]);
 
   if (!visible) return null;
 
@@ -91,11 +116,14 @@ const EditAgentEvent = ({
       visible={visible}
       onClose={onClose}
       fetchedAgentParams={fetchedAgentParams}
+      fetchedTags={tagsStore.tags}
       onSave={onSave}
       isLoading={isLoading}
       isInitLoading={isInitLoading}
       hasCover={!!dialogsStore.cover}
       folderFormValidation={folderFormValidation}
+      selection={item}
+      maxImageUploadSize={maxImageUploadSize}
     />
   );
 };

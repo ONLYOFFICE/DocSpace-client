@@ -27,19 +27,44 @@
 "use client";
 
 import React from "react";
+import type { TFunction } from "i18next";
 import { makeAutoObservable } from "mobx";
+import resizeImage from "resize-image";
 
 import api from "@docspace/shared/api";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
+import {
+  ONE_MEGABYTE,
+  COMPRESSION_RATIO,
+  NO_COMPRESSION_RATIO,
+} from "@docspace/shared/constants";
 import type { Nullable } from "@docspace/shared/types";
 
 export type UploadedLogoResponse = {
   responseData: { data: string };
 };
 
+export type TImageState = {
+  uploadedFile: Nullable<File>;
+  x: number;
+  y: number;
+  zoom: number;
+};
+
+// Port of client AvatarEditorDialogStore — manages uploaded avatar file +
+// image-cropper state + visibility flag for the editor modal.
 class AvatarEditorStore {
   uploadedFile: Nullable<File> = null;
 
-  previewImage: Nullable<string> = null;
+  image: TImageState = {
+    uploadedFile: null,
+    x: 0.5,
+    y: 0.5,
+    zoom: 1,
+  };
+
+  avatarEditorDialogVisible = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -47,17 +72,23 @@ class AvatarEditorStore {
 
   setUploadedFile = (file: Nullable<File>) => {
     this.uploadedFile = file;
-
-    if (this.previewImage) {
-      URL.revokeObjectURL(this.previewImage);
-    }
-    this.previewImage = file ? URL.createObjectURL(file) : null;
   };
 
-  clear = () => {
-    if (this.previewImage) URL.revokeObjectURL(this.previewImage);
+  clearUploadedFile = () => {
     this.uploadedFile = null;
-    this.previewImage = null;
+  };
+
+  setImage = (image: TImageState) => {
+    this.image = { ...image, uploadedFile: this.uploadedFile };
+  };
+
+  setAvatarEditorDialogVisible = (visible: boolean) => {
+    this.avatarEditorDialogVisible = visible;
+  };
+
+  // Legacy aliases — kept for the previous SDK callers (CreateEditAgentStore).
+  clear = () => {
+    this.uploadedFile = null;
   };
 
   getUploadedLogoData = async (): Promise<UploadedLogoResponse> => {
@@ -72,9 +103,118 @@ class AvatarEditorStore {
 
     const responseData = await api.rooms.uploadRoomLogo(formData);
 
+    // Mirror client: reset image+file after upload so a subsequent edit
+    // does not double-submit the same buffer.
+    this.setImage({ uploadedFile: null, x: 0.5, y: 0.5, zoom: 1 });
+    this.setUploadedFile(null);
+
     return {
       responseData: responseData as { data: string },
     };
+  };
+
+  onChangeFile = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+    t: TFunction,
+  ) => {
+    const uploadedFile = await this.uploadFile(t, e);
+    this.setImage({ ...this.image, uploadedFile: uploadedFile ?? null });
+  };
+
+  uploadFile = async (
+    t: TFunction,
+    e: React.ChangeEvent<HTMLInputElement>,
+  ): Promise<File | undefined> => {
+    const files = (await getFilesFromEvent(e)) as File[];
+    const uploadedFile = await this.uploadFileToImageEditor(t, files[0]);
+
+    if (uploadedFile) {
+      this.setUploadedFile(uploadedFile);
+      this.setImage({ ...this.image, uploadedFile });
+      this.setAvatarEditorDialogVisible(true);
+    }
+
+    return uploadedFile;
+  };
+
+  // Compress recursively until the file fits under ONE_MEGABYTE — port of
+  // client AvatarEditorDialogStore.resizeRecursiveAsync.
+  private resizeRecursiveAsync = async (
+    img: { width: number; height: number },
+    canvas: HTMLCanvasElement,
+    compressionRatio: number = COMPRESSION_RATIO,
+    depth = 0,
+  ): Promise<File> => {
+    const data = resizeImage.resize(
+      canvas,
+      img.width / compressionRatio,
+      img.height / compressionRatio,
+      resizeImage.JPEG,
+    );
+
+    const file = await fetch(data)
+      .then((res) => res.blob())
+      .then(
+        (blob) =>
+          new File([blob], "File name", {
+            type: "image/jpg",
+          }),
+      );
+
+    if (file.size < ONE_MEGABYTE) return file;
+
+    if (depth > 5) {
+      throw new Error("recursion depth exceeded");
+    }
+
+    return this.resizeRecursiveAsync(
+      img,
+      canvas,
+      compressionRatio + 1,
+      depth + 1,
+    );
+  };
+
+  private uploadFileToImageEditor = async (
+    t: TFunction,
+    file: File,
+  ): Promise<File | undefined> => {
+    let imageBitMap: ImageBitmap | undefined;
+    try {
+      imageBitMap = await createImageBitmap(file);
+
+      const width = imageBitMap.width;
+      const height = imageBitMap.height;
+
+      const canvas = resizeImage.resize2Canvas(imageBitMap, width, height);
+
+      return await this.resizeRecursiveAsync(
+        { width, height },
+        canvas,
+        file.size > ONE_MEGABYTE ? COMPRESSION_RATIO : NO_COMPRESSION_RATIO,
+      )
+        .then((f) => {
+          if (f instanceof File) return f;
+          return undefined;
+        })
+        .catch((error: unknown) => {
+          if (
+            error instanceof Error &&
+            error.message === "recursion depth exceeded"
+          ) {
+            toastr.error(t("Common:SizeImageLarge"));
+          }
+          return undefined;
+        });
+    } catch (error) {
+      console.error(error);
+      toastr.error(t("Common:NotSupportedFormat"));
+      return undefined;
+    } finally {
+      // Release the decoded bitmap from memory once we are done with it
+      // (the canvas already holds a copy of the pixel data).
+      imageBitMap?.close();
+    }
   };
 }
 

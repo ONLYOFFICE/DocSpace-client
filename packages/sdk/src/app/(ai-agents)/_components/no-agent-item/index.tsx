@@ -39,7 +39,7 @@ import styles from "./NoAgentItem.module.scss";
 
 const NoAgentItem = () => {
   const { isBase } = useTheme();
-  const { t } = useTranslation(["InfoPanel", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   const imageSrc = isBase
     ? InfoPanelRoomEmptyScreenSvgUrl
@@ -53,16 +53,17 @@ const NoAgentItem = () => {
       )}
     >
       <div className="no-thumbnail-img-wrapper">
+        {/* biome-ignore lint/performance/noImgElement: static SVG asset; next/image is unnecessary here */}
         <img
           src={imageSrc}
-          alt={t("InfoPanel:NoAgent", {
+          alt={t("Common:NoAgent", {
             aiAgent: t("Common:AIAgent"),
             defaultValue: "No AI agent",
           })}
         />
       </div>
       <Text className="no-item-text" textAlign="center">
-        {t("InfoPanel:AIAgentsEmptyScreenTent", {
+        {t("Common:AIAgentsEmptyScreenTent", {
           aiAgents: t("Common:AIAgents"),
           defaultValue: "Select an AI agent to start working with it.",
         })}

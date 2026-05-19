@@ -37,9 +37,11 @@ import {
 import {
   getStartAgentParams,
   type TAgentParams,
+  type TAgentTagsParams,
 } from "@docspace/shared/utils/aiAgents";
 import MCPServersSelector from "@docspace/ui-kit/selectors/MCPServers";
 
+import TagHandler from "../../_helpers/TagHandler";
 import SetAgentParams from "./sub-components/SetAgentParams";
 import { useMCP } from "./hooks/useMCP";
 import { modelCache } from "./sub-components/modelCache";
@@ -49,9 +51,11 @@ type CreateAgentDialogProps = {
   title: string;
   onClose: VoidFunction;
   onCreate: (params: TAgentParams) => void;
+  fetchedTags: string[];
   isLoading: boolean;
   portalMcpServerId: string;
   folderFormValidation?: RegExp;
+  maxImageUploadSize?: number;
 };
 
 const CreateAgentDialog = ({
@@ -59,9 +63,11 @@ const CreateAgentDialog = ({
   title,
   onClose,
   onCreate,
+  fetchedTags,
   isLoading,
   portalMcpServerId,
   folderFormValidation,
+  maxImageUploadSize,
 }: CreateAgentDialogProps) => {
   const { t } = useTranslation("Common");
 
@@ -110,6 +116,17 @@ const CreateAgentDialog = ({
     portalMcpServerId,
   });
 
+  const setAgentTags = React.useCallback(
+    (newTags: TAgentTagsParams[]) =>
+      setAgentParams((value) => ({ ...value, tags: newTags })),
+    [],
+  );
+
+  const tagHandler = React.useMemo(
+    () => new TagHandler(agentParams.tags, setAgentTags, fetchedTags),
+    [agentParams.tags, setAgentTags, fetchedTags],
+  );
+
   const isAgentTitleChanged = agentParams?.title?.trim() === "";
   const isModelSelected = !!agentParams?.modelId;
 
@@ -127,7 +144,7 @@ const CreateAgentDialog = ({
 
   const onKeyUpHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (isWrongTitle || !isModelSelected) return;
-    if (e.keyCode === 13) onCreateAgent();
+    if (e.key === "Enter") onCreateAgent();
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -178,6 +195,7 @@ const CreateAgentDialog = ({
 
       <ModalDialog.Body>
         <SetAgentParams
+          tagHandler={tagHandler}
           agentParams={agentParams}
           setAgentParams={setAgentParamsAction}
           setIsScrollLocked={setIsScrollLocked}
@@ -192,6 +210,7 @@ const CreateAgentDialog = ({
           selectedServers={selectedServers}
           setSelectedServers={setSelectedServers}
           folderFormValidation={folderFormValidation}
+          maxImageUploadSize={maxImageUploadSize}
         />
       </ModalDialog.Body>
 

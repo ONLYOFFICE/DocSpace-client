@@ -3,7 +3,7 @@
   "content": "File creation error. The wrong password was entered.",
   "content_en_sha1_hash": "8c1a8930c8907bb5ffc784744a5fb3bb0511e5b5",
   "created_at": "2025-05-19T21:30:56.872Z",
-  "updated_at": "2026-04-11T21:04:17.008Z",
+  "updated_at": "2026-05-15T14:00:06.581Z",
   "comment": {
     "text": "This is an error message displayed in a toast notification when a user attempts to create a file but provides an incorrect password.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/Hooks/useCreateFileError.ts",
-      "line_number": 73,
+      "line_number": 82,
       "context": "const error = JSON.parse(createError);\n \n if (error?.fileInfo?.password) {\n toastr.error(\n t(\"ConvertPasswordDialog:CreationError\"),\n t(\"Common:Warning\"),\n );\n } else {\n toastr.error(t(\"Translations:FileProtected\"), t(\"Common:Warning\"));\n }",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

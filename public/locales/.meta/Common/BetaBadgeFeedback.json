@@ -3,7 +3,7 @@
   "content": "If you have found a bug, please submit it via <1>forum</1> or contact us at <3>{{supportEmail}}</3>.",
   "content_en_sha1_hash": "8a2cd9231eb08c1160d462e751f9b72dd0d858cf",
   "created_at": "2025-05-19T21:30:43.272Z",
-  "updated_at": "2026-04-11T20:58:21.201Z",
+  "updated_at": "2026-05-15T14:00:06.927Z",
   "comment": {
     "text": "This is a message providing feedback instructions for a beta feature. It appears when a user clicks on a beta badge and includes a link to a forum (`<1>`) and an email address (`{{supportEmail}}`) for reporting issues.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/beta-badge/index.tsx",
-      "line_number": 62,
+      "line_number": 71,
       "context": "})}\n {!withOutFeedbackLink ? (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"BetaBadgeFeedback\"\n values={{\n supportEmail: documentationEmail,\n }}\n components={{\n 1: (",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

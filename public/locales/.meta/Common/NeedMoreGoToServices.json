@@ -3,7 +3,7 @@
   "content": "Need more? Go to the <1>Services</1>",
   "content_en_sha1_hash": "4261636c8382f1071446fa0820c94b82fd61734e",
   "created_at": "2026-04-10T13:53:42.734Z",
-  "updated_at": "2026-04-11T20:48:18.134Z",
+  "updated_at": "2026-05-15T14:00:06.993Z",
   "comment": {
     "text": "This is a tooltip message that appears when a user hovers over an icon, suggesting they visit the \"Services\" page for more options. The `<1>Services</1>` tag represents a clickable link to that page.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/BenefitsContainer.tsx",
-      "line_number": 60,
-      "context": "className=\"payment-tooltip\"\n offsetRight={0}\n iconName={HelpReactSvgUrl}\n tooltipContent={\n <CommonTrans\n i18nKey=\"NeedMoreGoToServices\"\n \n components={{\n 1: (\n <Link\n key=\"contact-payer-link\"",
+      "line_number": 69,
+      "context": "className=\"payment-tooltip\"\n offsetRight={0}\n iconNode={<HelpReactSvg />}\n tooltipContent={\n <CommonTrans\n i18nKey=\"NeedMoreGoToServices\"\n components={{\n 1: (\n <Link\n key=\"contact-payer-link\"\n tag=\"a\"",
       "module": "/libs/ui-kit"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

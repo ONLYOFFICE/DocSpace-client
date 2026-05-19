@@ -3,7 +3,7 @@
   "content": "Room administration and archiving, user invitation and management. Several admins can be assigned to the room.",
   "content_en_sha1_hash": "fcf79ad90b7d19194bb1754fbe16c0cc2c3a8dc2",
   "created_at": "2026-04-10T13:53:43.179Z",
-  "updated_at": "2026-04-13T08:04:49.218Z",
+  "updated_at": "2026-05-15T14:00:06.993Z",
   "comment": {
     "text": "This is a descriptive text providing details about the Room Manager feature. It appears below the \"RoomAdmin\" label within a help section, explaining its functionalities like administration, archiving, and user management.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
-      "line_number": 89,
+      "line_number": 97,
       "context": "productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <br />\n <Text isBold>{t(\"RoomAdmin\")}</Text>\n <Text>{t(\"RoomManagerDescription\")}</Text>\n </>\n }\n dataTestId=\"admin_accounts_help_button\"\n />\n );",
       "module": "/libs/ui-kit"
     }

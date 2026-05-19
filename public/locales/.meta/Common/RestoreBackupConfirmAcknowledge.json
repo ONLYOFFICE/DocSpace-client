@@ -3,7 +3,7 @@
   "content": "I acknowledge that all current data will be overwritten.",
   "content_en_sha1_hash": "b4aee762103e3c14cbc5c340aec124b45758e322",
   "created_at": "2026-03-20T09:07:35.064Z",
-  "updated_at": "2026-04-13T09:26:51.880Z",
+  "updated_at": "2026-05-15T14:00:06.963Z",
   "comment": {
     "text": "This is the label for a checkbox in a confirmation modal. It appears when restoring a backup, and the user must check it to acknowledge that current data will be overwritten.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/restore-confirm-modal/index.tsx",
-      "line_number": 99,
+      "line_number": 108,
       "context": "<Checkbox\n name=\"restoreBackupConfirmAcknowledge\"\n className={styles.restoreBackupConfirmCheckbox}\n onChange={onChangeRestoreAcknowledged}\n isChecked={isRestoreAcknowledged}\n label={t(\"Common:RestoreBackupConfirmAcknowledge\")}\n dataTestId=\"restore_backup_confirm_checkbox\"\n />\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
       "module": "/packages/shared"
     }
@@ -165,7 +165,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

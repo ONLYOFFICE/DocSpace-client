@@ -3,7 +3,7 @@
   "content": "Adding credits will automatically enable {{organizationName}} AI and make models available to all users. Continue?",
   "content_en_sha1_hash": "62cddbbb2dcb39e4d51592f64bbe20c7da91f478",
   "created_at": "2026-04-10T13:53:44.141Z",
-  "updated_at": "2026-05-08T13:10:45.734Z",
+  "updated_at": "2026-05-15T15:49:17.113Z",
   "comment": {
     "text": "This is the body text of a confirmation dialog. It appears when a user is about to add credits to enable AI features for their organization, informing them that doing so will make AI models available to all users. `{{organizationName}}` will be replaced with the name of the user's organization.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 406,
+      "line_number": 437,
       "context": "<ConfirmationDialog\n visible={isTopUpConfirmVisible}\n onClose={onCloseTopUpConfirm}\n onConfirm={onConfirmTopUp}\n title={t(\"ServiceIsDisabled\")}\n bodyText={t(\"AddCreditsToEnableAI\", { organizationName: logoText })}\n />\n ) : null}\n </div>\n );\n };",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

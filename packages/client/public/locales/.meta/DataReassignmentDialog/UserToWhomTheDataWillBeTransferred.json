@@ -3,7 +3,7 @@
   "content": "User to whom the data will be transferred",
   "content_en_sha1_hash": "fe4396241789d8911d893243f547d3759bb39988",
   "created_at": "2025-05-19T21:30:56.762Z",
-  "updated_at": "2026-04-11T21:05:02.045Z",
+  "updated_at": "2026-05-15T14:00:06.668Z",
   "comment": {
     "text": "This is a descriptive label appearing in a data reassignment dialog. It clarifies that the user selected in the dialog will be the new owner of the data being transferred.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/NewOwner.js",
-      "line_number": 75,
+      "line_number": 84,
       "context": "<div className={styles.peopleSelectorInfo}>\n <Text className={styles.newOwner}>\n {t(\"DataReassignmentDialog:NewDataOwner\")}\n </Text>\n <Text className={styles.description}>\n {t(\"DataReassignmentDialog:UserToWhomTheDataWillBeTransferred\")}\n </Text>\n </div>\n \n <ChoiceNewOwner\n t={t}",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

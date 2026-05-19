@@ -3,7 +3,7 @@
   "content": "Room preview",
   "content_en_sha1_hash": "e69a2be31a217a622021d1d51a30ac2ff1bd2bdc",
   "created_at": "2025-05-19T21:30:54.632Z",
-  "updated_at": "2026-04-11T21:14:48.951Z",
+  "updated_at": "2026-05-15T14:00:06.804Z",
   "comment": {
     "text": "This is a placeholder text displayed within an empty iframe. It indicates that a room preview would normally appear here, but is currently unavailable.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 300,
+      "line_number": 309,
       "context": ">\n {config.id !== undefined ? (\n <div id={config.frameId} />\n ) : (\n <EmptyIframeContainer\n text={t(\"RoomPreview\")}\n width=\"100%\"\n height=\"100%\"\n />\n )}\n </Frame>",
       "module": "/packages/client"
     }

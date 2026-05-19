@@ -3,7 +3,7 @@
   "content": "Once approved, the shared guest will be added to your Guests list in {{sectionName}}.",
   "content_en_sha1_hash": "53ade9db446a8314d8f155257ef6e87bca066eb8",
   "created_at": "2025-06-02T10:19:12.506Z",
-  "updated_at": "2026-04-11T20:51:24.889Z",
+  "updated_at": "2026-05-15T14:00:06.910Z",
   "comment": {
     "text": "This is a descriptive text displayed to a guest user. It informs them that upon approval, they will be added to the host's guest list, with `{{sectionName}}` being the name of the section where the guest list is located (e.g., \"Contacts\").",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/GuestShareLink/page.client.tsx",
-      "line_number": 101,
+      "line_number": 110,
       "context": "onClick={onDenyInvite}\n testId=\"deny_button\"\n />\n </div>\n <Text fontSize=\"12px\" fontWeight=\"400\" className=\"guest-info\">\n {t(\"Common:GuestApprovalNote\", { sectionName: t(\"Common:Contacts\") })}\n </Text>\n </FormWrapper>\n );\n };",
       "module": "/packages/login"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

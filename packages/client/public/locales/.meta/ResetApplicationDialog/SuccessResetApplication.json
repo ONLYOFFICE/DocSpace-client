@@ -3,7 +3,7 @@
   "content": "Application settings for authentication have been successfully reset.",
   "content_en_sha1_hash": "04485034a5d6d72d584937bd147b79bc74b54daa",
   "created_at": "2025-05-19T21:30:53.329Z",
-  "updated_at": "2026-04-11T21:20:56.805Z",
+  "updated_at": "2026-05-15T14:00:06.693Z",
   "comment": {
     "text": "This is a toast message confirming that the application settings for two-factor authentication have been successfully reset. It appears after a user initiates the reset process.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ResetApplicationDialog/index.js",
-      "line_number": 41,
+      "line_number": 50,
       "context": "const resetApp = async () => {\n onClose && onClose();\n try {\n const res = await resetTfaApp(id);\n toastr.success(t(\"SuccessResetApplication\"));\n \n if (res) window.location.replace(res);\n } catch (e) {\n toastr.error(e);\n }",
       "module": "/packages/client"
     }

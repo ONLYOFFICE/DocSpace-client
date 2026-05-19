@@ -3,7 +3,7 @@
   "content": "Sort order",
   "content_en_sha1_hash": "5601af90fba7fe38466b58c08c018711849b8855",
   "created_at": "2025-05-19T21:30:54.692Z",
-  "updated_at": "2026-04-13T14:59:05.858Z",
+  "updated_at": "2026-05-15T14:00:06.803Z",
   "comment": {
     "text": "This is a label for a dropdown menu or radio button group that allows users to select the order in which items are sorted (e.g., ascending or descending).",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 702,
+      "line_number": 711,
       "context": "dataTestId=\"sort_by_combobox\"\n dropDownTestId=\"sort_by_dropdown\"\n />\n </ControlsGroup>\n <ControlsGroup>\n <Label className=\"label\" text={t(\"SortOrder\")} />\n <ComboBox\n onSelect={onChangeSortOrder}\n options={dataSortOrder}\n scaled\n selectedOption={sortOrder}",
       "module": "/packages/client"
     }

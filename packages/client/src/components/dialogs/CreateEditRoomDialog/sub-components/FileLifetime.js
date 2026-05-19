@@ -1,48 +1,10 @@
 import { useState, useEffect } from "react";
-import styled from "styled-components";
 import capitalize from "lodash/capitalize";
 import { Text } from "@docspace/ui-kit/components/text";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { ComboBox } from "@docspace/ui-kit/components/combobox";
 
-const StyledFileLifetime = styled.div`
-  margin-top: 12px;
-
-  .virtual-data-room_file-lifetime_body {
-    display: block;
-
-    .virtual-data-room_file-lifetime_date {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .virtual-data-room_file-lifetime_input {
-      min-width: 0;
-    }
-
-    .virtual-data-room_file-lifetime_combo-box {
-      min-width: 0;
-
-      .combo-button-label {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-    }
-
-    .virtual-data-room_file-lifetime_delete-combo-box {
-      width: 100%;
-
-      .combo-button-label {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-    }
-  }
-`;
+import styles from "../CreateEditRoomDialog.module.scss";
 
 const FileLifetime = ({ t, roomParams, setRoomParams }) => {
   const lifetime = roomParams.lifetime ?? {
@@ -144,7 +106,7 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
   };
 
   return (
-    <StyledFileLifetime className="virtual-data-room_file-lifetime">
+    <div className={`${styles.fileLifetime} virtual-data-room_file-lifetime`}>
       <Text fontWeight={600} fontSize="13px">
         {t("FilesOlderThan")}
       </Text>
@@ -189,7 +151,7 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
           dataTestId="virtual_data_room_file_lifetime_delete_combobox"
         />
       </div>
-    </StyledFileLifetime>
+    </div>
   );
 };
 

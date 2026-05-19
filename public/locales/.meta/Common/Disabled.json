@@ -3,7 +3,7 @@
   "content": "Disabled",
   "content_en_sha1_hash": "f4f4473df8cb59f0a369aebee3d1509adc0151c6",
   "created_at": "2025-05-19T21:30:44.535Z",
-  "updated_at": "2026-04-13T14:59:05.782Z",
+  "updated_at": "2026-05-15T14:00:06.711Z",
   "comment": {
     "text": "This label indicates that a user account, a setting, or a feature is inactive or turned off. It appears in various contexts, such as user lists, radio button options, or status indicators.",
     "is_auto": true,
@@ -13,49 +13,49 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/People/index.tsx",
-      "line_number": 129,
+      "line_number": 134,
       "context": "disableDisabledUsers && status === EmployeeStatus.Terminated;\n \n const disabledText = isInvited\n ? (disabledInvitedText ?? t(\"Invited\"))\n : isDisabled\n ? t(\"Disabled\")\n : \"\";\n \n const avatarRole = getUserAvatarRoleByType(role);\n \n const i: TSelectorItem = {",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 437,
+      "line_number": 446,
       "context": "<Text\n className={classNames(styles.searchItemText, {\n [styles.isInfo]: true,\n })}\n >\n {t(\"Common:Disabled\")}\n </Text>\n ) : null}\n </DropDownItem>\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
-      "line_number": 190,
+      "line_number": 199,
       "context": "spacing=\"8px\"\n dataTestId=\"administrator_message_radio_button_group\"\n options={[\n {\n id: \"admin-message-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"disabled\",\n dataTestId: \"administrator_message_disabled\",\n },\n {\n id: \"admin-message-enable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/devToolsAccess.tsx",
-      "line_number": 225,
+      "line_number": 234,
       "context": "spacing=\"8px\"\n dataTestId=\"developer_tools_access_radio_button\"\n options={[\n {\n id: \"dev-tools-access-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"true\",\n dataTestId: \"developer_tools_access_disabled\",\n },\n {\n id: \"dev-tools-access-enable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 290,
+      "line_number": 299,
       "context": "spacing=\"8px\"\n dataTestId=\"ip_security_radio_button_group\"\n options={[\n {\n id: \"ip-security-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"disabled\",\n dataTestId: \"ip_security_disabled\",\n },\n {\n id: \"ip-security-enable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
-      "line_number": 271,
+      "line_number": 280,
       "context": "spacing=\"8px\"\n dataTestId=\"session_lifetime_radio_button_group\"\n options={[\n {\n id: \"session-lifetime-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"disabled\",\n dataTestId: \"session_lifetime_disabled\",\n },\n {\n id: \"session-lifetime-enable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 268,
+      "line_number": 277,
       "context": "spacing=\"8px\"\n dataTestId=\"tfa_radio_button_group\"\n options={[\n {\n id: \"tfa-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"none\",\n dataTestId: \"tfa_radio_button_disabled\",\n },\n // TODO: hide while 2fa by sms is not working\n /* {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/trustedMail.js",
-      "line_number": 294,
+      "line_number": 303,
       "context": "orientation=\"vertical\"\n spacing=\"8px\"\n options={[\n {\n id: \"trusted-mail-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"0\",\n dataTestId: \"trusted_mail_disabled\",\n },\n {\n id: \"any-domains\",",
       "module": "/packages/client"
     }
@@ -191,7 +191,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

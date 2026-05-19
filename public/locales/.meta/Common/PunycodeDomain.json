@@ -3,7 +3,7 @@
   "content": "Punycode domains are not supported",
   "content_en_sha1_hash": "53c39d1bf2e61c3a67827abbd0537b665c47fc09",
   "created_at": "2025-05-19T21:30:47.678Z",
-  "updated_at": "2026-04-23T17:24:01.690Z",
+  "updated_at": "2026-05-15T14:00:06.639Z",
   "comment": {
     "text": "Error text displayed when a user attempts to use a Punycode domain in an email address or domain input field.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
-      "line_number": 129,
+      "line_number": 138,
       "context": "case ErrorKeys.IncorrectDomain:\n return t(\"IncorrectDomain\");\n case ErrorKeys.DomainIpAddress:\n return t(\"DomainIpAddress\");\n case ErrorKeys.PunycodeDomain:\n return t(\"PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:\n return t(\"PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
-      "line_number": 133,
+      "line_number": 142,
       "context": "case ErrorKeys.IncorrectDomain:\n return t(\"Common:IncorrectDomain\");\n case ErrorKeys.DomainIpAddress:\n return t(\"Common:DomainIpAddress\");\n case ErrorKeys.PunycodeDomain:\n return t(\"Common:PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:\n return t(\"Common:PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 187,
+      "line_number": 196,
       "context": "case ErrorKeys.IncorrectEmail:\n return t(\"Common:IncorrectDomain\");\n case ErrorKeys.DomainIpAddress:\n return t(\"Common:DomainIpAddress\");\n case ErrorKeys.PunycodeDomain:\n return t(\"Common:PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:\n return t(\"Common:PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:",
       "module": "/packages/shared"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

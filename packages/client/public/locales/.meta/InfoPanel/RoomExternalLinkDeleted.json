@@ -3,7 +3,7 @@
   "content": "Link <1>«{{linkTitle}}»</1> deleted.",
   "content_en_sha1_hash": "7cea2e32f802fb146ced190da8dbe579760bc862",
   "created_at": "2025-05-19T21:30:54.914Z",
-  "updated_at": "2026-04-13T14:59:05.797Z",
+  "updated_at": "2026-05-15T14:00:06.737Z",
   "comment": {
     "text": "This is a toast message displayed in the activity feed when an external link to a room has been deleted. `{{linkTitle}}` is the title of the deleted link, and `<1>` is used to bold the link title.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 280,
+      "line_number": 289,
       "context": "case FeedActionKeys.RoomExternalLinkDeleted:\n return (\n <Trans\n t={t}\n ns=\"InfoPanel\"\n i18nKey=\"RoomExternalLinkDeleted\"\n values={{\n linkTitle: (feed.data as TFeedData).title,\n }}\n components={{\n 1: (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 245,
+      "line_number": 254,
       "context": "case FeedActionKeys.RoomExternalLinkDeleted:\n return (\n <Trans\n t={t as TFunction}\n ns=\"InfoPanel\"\n i18nKey=\"RoomExternalLinkDeleted\"\n values={{\n linkTitle: feed.data.title,\n }}\n components={{ 1: <strong title={feed.data.title} /> }}\n />",
       "module": "/packages/client"
     }

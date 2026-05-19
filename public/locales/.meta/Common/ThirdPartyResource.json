@@ -3,7 +3,7 @@
   "content": "Third-party resource",
   "content_en_sha1_hash": "001907b089c0c5b90b1c10187b7bc68cca254fae",
   "created_at": "2025-05-26T07:15:48.793Z",
-  "updated_at": "2026-04-12T15:44:55.186Z",
+  "updated_at": "2026-05-15T14:00:06.751Z",
   "comment": {
     "text": "This is a label for a filter option or a radio button. It refers to external resources not hosted directly within DocSpace, such as files from third-party cloud storage.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1377,
+      "line_number": 1386,
       "context": "});\n \n filterOptions.push({\n key: FilterGroups.roomFilterProviderType,\n group: FilterGroups.roomFilterProviderType,\n label: t(\"Common:ThirdPartyResource\"),\n isHeader: true,\n isLast: true,\n });\n \n filterOptions.push(...thirdPartyOptions);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 545,
+      "line_number": 554,
       "context": "<div className={styles.modules}>\n <RadioButton\n {...commonRadioButtonProps}\n id=\"third-party-resource\"\n label={t(\"Common:ThirdPartyResource\")}\n name={`${BackupStorageType.ResourcesModuleType}`}\n isChecked={isCheckedThirdParty}\n isDisabled={isLoadingData}\n testId=\"auto_backup_resource_radio_button\"\n />",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 584,
+      "line_number": 593,
       "context": "[styles.isDisabled]: additionalDisabled,\n })}\n >\n <RadioButton\n id=\"third-party-resource\"\n label={t(\"Common:ThirdPartyResource\")}\n name={THIRD_PARTY_RESOURCE}\n key={2}\n isChecked={isCheckedThirdParty}\n isDisabled={additionalDisabled}\n {...commonRadioButtonProps}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 234,
+      "line_number": 243,
       "context": "label: t(\"Common:RoomsModule\"),\n },\n {\n id: \"third-party-resource\",\n value: DISK_SPACE,\n label: t(\"Common:ThirdPartyResource\"),\n },\n {\n id: \"third-party-storage\",\n value: STORAGE_SPACE,\n label: t(\"Common:ThirdPartyStorage\"),",
       "module": "/packages/shared"
     }
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

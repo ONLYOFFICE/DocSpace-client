@@ -3,7 +3,7 @@
   "content": "New PDF form",
   "content_en_sha1_hash": "816b1bfcda481c3a942fc4c6236e3a5e93454429",
   "created_at": "2025-05-19T21:30:46.763Z",
-  "updated_at": "2026-04-27T12:45:07.475Z",
+  "updated_at": "2026-05-15T14:00:06.718Z",
   "comment": {
     "text": "This text labels a new PDF form, appearing as a default name in a creation dialog and when generating a new PDF form file.",
     "is_auto": true,
@@ -13,61 +13,61 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 85,
+      "line_number": 94,
       "context": "case \"xlsx\":\n return i18n.t(\"Common:NewSpreadsheet\");\n case \"pptx\":\n return i18n.t(\"Common:NewPresentation\");\n case \"pdf\":\n return i18n.t(\"Common:NewPDFForm\");\n default:\n return i18n.t(\"Common:NewFolder\");\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/hooks/useEditorEvents.ts",
-      "line_number": 427,
+      "line_number": 436,
       "context": "break;\n case \"pptx\":\n fileName = t(\"Common:NewPresentation\");\n break;\n case \"pdf\":\n fileName = t(\"Common:NewPDFForm\");\n break;\n default:\n break;\n }",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/create-form-dialog/index.tsx",
-      "line_number": 54,
+      "line_number": 63,
       "context": "isCreating,\n onClose,\n onSave,\n }: CreateFormDialogProps) => {\n const { t } = useTranslation([\"Common\"]);\n const [name, setName] = React.useState(t(\"Common:NewPDFForm\"));\n const [hasError, setHasError] = React.useState(false);\n const inputRef = React.useRef<HTMLInputElement>(null);\n \n React.useEffect(() => {\n if (visible) {",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/create-form-dialog/index.tsx",
-      "line_number": 54,
+      "line_number": 63,
       "context": "isCreating,\n onClose,\n onSave,\n }: CreateFormDialogProps) => {\n const { t } = useTranslation([\"Common\"]);\n const [name, setName] = React.useState(t(\"Common:NewPDFForm\"));\n const [hasError, setHasError] = React.useState(false);\n const inputRef = React.useRef<HTMLInputElement>(null);\n \n React.useEffect(() => {\n if (visible) {",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/create-form-dialog/index.tsx",
-      "line_number": 54,
+      "line_number": 63,
       "context": "isCreating,\n onClose,\n onSave,\n }: CreateFormDialogProps) => {\n const { t } = useTranslation([\"Common\"]);\n const [name, setName] = React.useState(t(\"Common:NewPDFForm\"));\n const [hasError, setHasError] = React.useState(false);\n const inputRef = React.useRef<HTMLInputElement>(null);\n \n React.useEffect(() => {\n if (visible) {",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/forms-header/index.tsx",
-      "line_number": 311,
+      "line_number": 320,
       "context": "onClick: onUploadFiles,\n },\n {\n id: \"create-blank-form\",\n key: \"create-blank-form\",\n label: t(\"Common:NewPDFForm\"),\n icon: FormPlusReactSvgUrl,\n onClick: onCreateBlankForm,\n },\n ];\n }, [formsSettingsStore.folderSecurity, t, onUploadFiles, onCreateBlankForm]);",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/create-file-dialog/index.tsx",
-      "line_number": 62,
+      "line_number": 71,
       "context": "case \"xlsx\":\n return t(\"Common:Spreadsheet\");\n case \"pptx\":\n return t(\"Common:Presentation\");\n case \"pdf\":\n return t(\"Common:NewPDFForm\");\n case \"folder\":\n return t(\"Common:Folder\");\n }\n };",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/main-button/index.tsx",
-      "line_number": 108,
+      "line_number": 117,
       "context": "onClick: () => openCreateDialog(\"pptx\"),\n },\n {\n id: \"actions_new-form\",\n key: \"pdf\",\n label: t(\"Common:NewPDFForm\"),\n icon: FormBlankReactSvgUrl,\n onClick: () => openCreateDialog(\"pdf\"),\n },\n {\n id: \"actions_new-folder\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/main-button/index.tsx",
-      "line_number": 108,
+      "line_number": 117,
       "context": "onClick: () => openCreateDialog(\"pptx\"),\n },\n {\n id: \"actions_new-form\",\n key: \"pdf\",\n label: t(\"Common:NewPDFForm\"),\n icon: FormBlankReactSvgUrl,\n onClick: () => openCreateDialog(\"pdf\"),\n },\n {\n id: \"actions_new-folder\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useDocsActions.ts",
-      "line_number": 60,
+      "line_number": 69,
       "context": "case \"xlsx\":\n return t(\"Common:NewSpreadsheet\");\n case \"pptx\":\n return t(\"Common:NewPresentation\");\n case \"pdf\":\n return t(\"Common:NewPDFForm\");\n case \"folder\":\n return t(\"Common:NewFolder\");\n }\n };",
       "module": "/packages/sdk"
     }
@@ -203,7 +203,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

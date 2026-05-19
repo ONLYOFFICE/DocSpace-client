@@ -3,7 +3,7 @@
   "content": "Info panel",
   "content_en_sha1_hash": "700658d503d6d7ee04433b62d51c26c408f588da",
   "created_at": "2025-05-19T21:30:45.909Z",
-  "updated_at": "2026-05-08T13:10:45.610Z",
+  "updated_at": "2026-05-15T14:00:06.753Z",
   "comment": {
     "text": "This is a label for a button or menu item that opens a panel displaying information about the currently selected item or folder.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 994,
+      "line_number": 1003,
       "context": ": undefined,\n actions: isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Common:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n }}\n withMenu={withMenu}\n onPlusClick={onPlusClick}\n isEmptyPage={isEmptyPage}\n isRoom={isCurrentRoom || isContactsPage || isProfile}",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

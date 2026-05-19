@@ -3,7 +3,7 @@
   "content": "List models",
   "content_en_sha1_hash": "fcea2380f80ac02ee600cfef4265aa1519b96122",
   "created_at": "2026-04-23T17:24:00.346Z",
-  "updated_at": "2026-04-23T17:41:07.159Z",
+  "updated_at": "2026-05-15T14:00:06.763Z",
   "comment": {
     "text": "Label for the list of selected AI models in the AI provider settings, appearing as a required field.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/SelectedModelsList.tsx",
-      "line_number": 62,
+      "line_number": 69,
       "context": "<Text\n className={styles.selectedModelsLabel}\n fontWeight={600}\n fontSize=\"13px\"\n >\n {t(\"AISettings:ListModels\")}\n <span className={styles.requiredMark}>{\" *\"}</span>\n </Text>\n <div\n className={classNames(styles.selectedModelsContainer, {\n [styles.selectedModelsError]: hasError,",
       "module": "/packages/client"
     }

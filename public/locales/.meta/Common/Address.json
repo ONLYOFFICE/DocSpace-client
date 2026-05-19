@@ -3,7 +3,7 @@
   "content": "Address",
   "content_en_sha1_hash": "d70f93df5e8f9b55be44fbeee9d203972e3383d4",
   "created_at": "2025-05-19T21:30:42.924Z",
-  "updated_at": "2026-04-11T21:00:57.677Z",
+  "updated_at": "2026-05-15T14:00:06.924Z",
   "comment": {
     "text": "This is a label for a text input field where users enter a company's physical location. It also appears as a label for the company's address in an \"About\" dialog.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/about-dialog/About.content.tsx",
-      "line_number": 212,
+      "line_number": 221,
       "context": "<div className={classNames(styles.row, \"row\")}>\n <Text\n className={classNames(styles.addressTitle, \"address-title\")}\n fontSize=\"13px\"\n >\n {t(\"Common:Address\")}:{\" \"}\n </Text>\n <Text\n className={classNames(\n styles.addressTitle,\n styles.selectEl,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 278,
+      "line_number": 287,
       "context": "/>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerAddress\"\n className=\"field-container-width\"\n labelText={t(\"Common:Address\")}\n isVertical\n >\n <TextInput\n id=\"textInputContainerAddress\"\n testId=\"company_info_settings_address_input\"",
       "module": "/packages/shared"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

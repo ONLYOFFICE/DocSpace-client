@@ -3,7 +3,7 @@
   "content": "No guests found",
   "content_en_sha1_hash": "b91968e9823bf736346896bcc6a5923a94d5c5b3",
   "created_at": "2025-05-19T21:30:46.891Z",
-  "updated_at": "2026-05-08T13:10:45.606Z",
+  "updated_at": "2026-05-15T14:00:06.748Z",
   "comment": {
     "text": "This is an empty state message displayed when no guest users are found after applying a filter in the people or contacts section.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/People/index.tsx",
-      "line_number": 776,
+      "line_number": 781,
       "context": ": t(\"GroupsNotFoundDescription\"))\n }\n searchEmptyScreenImage={emptyScreenImage}\n searchEmptyScreenHeader={\n activeTabId === GUESTS_TAB_ID\n ? t(\"NotFoundGuestsFilter\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"NotFoundMembers\")\n : t(\"NotFoundGroups\")\n }\n searchEmptyScreenDescription={",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreen.tsx",
-      "line_number": 86,
+      "line_number": 95,
       "context": "const isEmptyGroup = contactsTab === \"inside_group\";\n const isEmptyGuests = contactsTab === \"guests\";\n \n const title = isEmptyGuests\n ? isFiltered\n ? t(\"Common:NotFoundGuestsFilter\")\n : t(\"Common:NotFoundGuests\")\n : t(\"Common:NotFoundMembers\");\n \n const description = isEmptyGuests\n ? isFiltered",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

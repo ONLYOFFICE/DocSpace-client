@@ -3,7 +3,7 @@
   "content": "All users will be added with User permissions only. To be able to add further admins, <1>click here</1> to upgrade your tariff plan.",
   "content_en_sha1_hash": "f52118031145b1b303d8cb66d6ba78031074a132",
   "created_at": "2025-05-19T21:30:54.154Z",
-  "updated_at": "2026-04-11T21:17:27.086Z",
+  "updated_at": "2026-05-15T14:00:06.617Z",
   "comment": {
     "text": "This is an error message displayed in a toast or banner. It informs administrators that they cannot add more administrators due to tariff plan limitations and provides a link (`<1>`) to upgrade the plan.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 112,
+      "line_number": 121,
       "context": "return t(\"UserTariffReached\", { productName: getBrandName(\"ProductName\") });\n \n return (\n <Trans\n t={t}\n i18nKey=\"UserTariffReachedForAdmins\"\n values={{\n productName: getBrandName(\"ProductName\"),\n }}\n components={{\n 1: (",
       "module": "/packages/client"
     }

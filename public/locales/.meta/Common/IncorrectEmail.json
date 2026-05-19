@@ -3,7 +3,7 @@
   "content": "Incorrect email",
   "content_en_sha1_hash": "86ff68d5318bfa2b6198c429d79f7c00583764a9",
   "created_at": "2025-05-19T21:30:45.855Z",
-  "updated_at": "2026-04-13T14:59:05.748Z",
+  "updated_at": "2026-05-15T14:00:06.637Z",
   "comment": {
     "text": "Error text indicating that the entered email address is not in a valid format. It appears when a user submits an email field with an invalid entry.",
     "is_auto": true,
@@ -13,31 +13,31 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
-      "line_number": 139,
+      "line_number": 148,
       "context": "case ErrorKeys.SpacesInLocalPart:\n return t(\"SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"MaxLengthExceeded\");\n case ErrorKeys.IncorrectEmail:\n return t(\"IncorrectEmail\");\n case ErrorKeys.ManyEmails:\n return t(\"ManyEmails\");\n case ErrorKeys.EmptyEmail:\n return t(\"EmptyEmail\");\n default:",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
-      "line_number": 110,
+      "line_number": 119,
       "context": "const { isEmailValid, email, emailErrors } = this.state;\n const { t, user } = this.props;\n \n if (email.trim() === \"\") {\n return this.setState({\n errorMessage: t(\"Common:IncorrectEmail\"),\n hasError: true,\n });\n }\n \n if (isEmailValid) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
-      "line_number": 110,
+      "line_number": 119,
       "context": "const { isEmailValid, email, emailErrors } = this.state;\n const { t, user } = this.props;\n \n if (email.trim() === \"\") {\n return this.setState({\n errorMessage: t(\"Common:IncorrectEmail\"),\n hasError: true,\n });\n }\n \n if (isEmailValid) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/CustomSettings.js",
-      "line_number": 237,
+      "line_number": 246,
       "context": "<FieldContainer\n className=\"smtp-settings_input\"\n isVertical\n place=\"top\"\n hasError={errors[SENDER_EMAIL_ADDRESS]}\n errorMessage={t(\"Common:IncorrectEmail\")}\n dataTestId=\"smtp_sender_email_container\"\n >\n <EmailInput\n name={SENDER_EMAIL_ADDRESS}\n isDisabled={isLoading}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 79,
+      "line_number": 88,
       "context": "case \"ErrorInvalidActivationLink\":\n return t(\"Errors:ErrorInvalidActivationLink\");\n case \"ErrorConfirmURLError\":\n return t(\"Errors:ErrorConfirmURLError\");\n case \"ErrorNotCorrectEmail\":\n return t(\"Common:IncorrectEmail\");\n case \"LoginWithBruteForce\":\n return t(\"Errors:LoginWithBruteForce\");\n case \"RecaptchaInvalid\":\n return t(\"Errors:RecaptchaInvalid\");\n case \"LoginWithAccountNotFound\":",
       "module": "/packages/login"
     }
@@ -173,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

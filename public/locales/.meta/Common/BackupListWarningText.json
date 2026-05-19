@@ -3,7 +3,7 @@
   "content": "If you delete any items from the list, their corresponding files will also be deleted. This action cannot be undone. To delete all the files use the link:",
   "content_en_sha1_hash": "a76a370dbddd6f072c3b10f98c0952d3c93070ad",
   "created_at": "2025-05-26T07:15:40.749Z",
-  "updated_at": "2026-04-12T07:14:23.217Z",
+  "updated_at": "2026-05-15T14:00:06.962Z",
   "comment": {
     "text": "This is a warning message displayed in a dialog box when managing backup lists. It informs the user that deleting items from the list will also delete the corresponding files, and this action is irreversible. It also provides a link to delete all files.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 247,
+      "line_number": 256,
       "context": "styles.backupRestoreDialogHeader,\n \"backup-restore_dialog-header\",\n )}\n >\n <Text fontSize=\"12px\" style={{ marginBottom: \"10px\" }}>\n {t(\"Common:BackupListWarningText\")}\n </Text>\n <Link\n id=\"delete-backups\"\n onClick={onCleanBackupList}\n fontWeight={600}",
       "module": "/packages/shared"
     }
@@ -157,7 +157,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

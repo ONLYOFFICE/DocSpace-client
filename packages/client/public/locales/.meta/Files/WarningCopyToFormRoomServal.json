@@ -3,7 +3,7 @@
   "content": "Copying several files to the Form Filling room is not supported. Copy one {{ organizationName }} PDF form at a time.",
   "content_en_sha1_hash": "c41a7dc0f7c8436d7ace7999b3a1273bbaa2c047",
   "created_at": "2025-05-19T21:30:56.331Z",
-  "updated_at": "2026-04-11T21:07:37.516Z",
+  "updated_at": "2026-05-15T14:00:06.608Z",
   "comment": {
     "text": "Error message displayed when a user attempts to copy multiple files into a Form Filling room. It informs the user that only one {{organizationName}} PDF form can be copied at a time.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesSelector/index.tsx",
-      "line_number": 243,
+      "line_number": 252,
       "context": "const option = { organizationName: getBrandName(\"OrganizationName\") };\n \n if (isCopy)\n return several\n ? t(\"Files:WarningCopyToFormRoomServal\", option)\n : t(\"Common:WarningCopyToFormRoom\", option);\n \n if (isMove)\n return several\n ? t(\"Files:WarningMoveToFormRoomServal\", option)",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

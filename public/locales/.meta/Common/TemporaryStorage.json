@@ -3,7 +3,7 @@
   "content": "Temporary storage",
   "content_en_sha1_hash": "d90c9723bbf93c4c8895c55a1d770e8294c92b66",
   "created_at": "2025-05-26T07:15:48.746Z",
-  "updated_at": "2026-04-12T16:01:54.273Z",
+  "updated_at": "2026-05-15T14:00:06.961Z",
   "comment": {
     "text": "This is a radio button label for an option to store data temporarily. It appears within a backup settings interface.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 473,
+      "line_number": 482,
       "context": "})}\n >\n <RadioButton\n key={0}\n id=\"temporary-storage\"\n label={t(\"Common:TemporaryStorage\")}\n name={TEMPORARY_STORAGE}\n isChecked={isCheckedTemporaryStorage}\n isDisabled={isCreateButtonDisabled}\n {...commonRadioButtonProps}\n testId=\"temporary_storage_radio_button\"",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

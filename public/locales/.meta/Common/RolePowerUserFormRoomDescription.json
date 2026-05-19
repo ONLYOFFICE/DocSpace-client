@@ -3,7 +3,7 @@
   "content": "Users can upload forms to the room and have full access to the Complete and In Process folders.",
   "content_en_sha1_hash": "9849e1297fdc864b5fce1c89ec6168c9f10bf41d",
   "created_at": "2025-05-19T21:30:48.077Z",
-  "updated_at": "2026-04-13T08:31:13.210Z",
+  "updated_at": "2026-05-15T14:00:06.968Z",
   "comment": {
     "text": "This is a description of the \"Power User\" role within a form room. It explains the permissions granted to users with this role, specifically their ability to upload forms and access certain folders.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 84,
+      "line_number": 93,
       "context": "};\n \n const getUserDescription = (roomType: RoomsType, t: TTranslation) => {\n switch (roomType) {\n case RoomsType.FormRoom:\n return t(\"Common:RolePowerUserFormRoomDescription\");\n case RoomsType.AIRoom:\n return t(\"Common:RoleAIAgentContentCreatorDescription\");\n case None:\n return (\n <Trans",
       "module": "/packages/shared"
     }
@@ -173,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

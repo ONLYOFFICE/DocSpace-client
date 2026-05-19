@@ -3,7 +3,7 @@
   "content": "Quantity",
   "content_en_sha1_hash": "44f6af6945544c0bab016a9160df6abb0cefcb60",
   "created_at": "2026-03-20T09:07:38.532Z",
-  "updated_at": "2026-04-13T14:59:05.860Z",
+  "updated_at": "2026-05-15T14:00:06.807Z",
   "comment": {
     "text": "Table header or section header for a numerical value. It indicates a count or amount of items.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TableView/TableHeader.tsx",
-      "line_number": 84,
+      "line_number": 93,
       "context": "enable: true,\n resizable: true,\n minWidth: 120,\n },\n {\n key: \"Quantity\",\n title: t(\"Quantity\"),\n enable: true,\n resizable: true,\n minWidth: 150,\n },",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
-      "line_number": 477,
+      "line_number": 486,
       "context": "dataTestId=\"upload_mode_radiobutton_group\"\n />\n </ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"Common:Quantity\")}</CategorySubHeader>\n <RadioButtonGroup\n orientation=\"vertical\"\n options={uploadQuantityOptions}\n name=\"uploadQuantity\"\n selected={uploadQuantity}",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

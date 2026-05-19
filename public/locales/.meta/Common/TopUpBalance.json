@@ -3,7 +3,7 @@
   "content": "Top up balance",
   "content_en_sha1_hash": "c9ec141fc5fcaffb8be65dc754acb82e2c543f06",
   "created_at": "2026-04-10T13:53:43.598Z",
-  "updated_at": "2026-04-13T14:59:06.030Z",
+  "updated_at": "2026-05-15T14:00:07.022Z",
   "comment": {
     "text": "Button label. This button allows users to add funds to their account balance.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
-      "line_number": 191,
+      "line_number": 200,
       "context": "/>\n \n <Button\n size={isMobile ? ButtonSize.normal : ButtonSize.small}\n primary\n label={t(\"TopUpBalance\")}\n onClick={onOpen}\n isDisabled={!canUpdateTariff || isNotPaidPeriod}\n scale={isMobile}\n className={classNames(styles.topUpButton, {\n [styles.isMobileButton]: isMobile,",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

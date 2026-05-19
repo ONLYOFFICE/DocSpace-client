@@ -3,7 +3,7 @@
   "content": "My draft",
   "content_en_sha1_hash": "b5235c7a4454a54323265ceb2c24783fd196a731",
   "created_at": "2025-05-19T21:30:43.216Z",
-  "updated_at": "2026-04-11T20:58:30.876Z",
+  "updated_at": "2026-05-15T14:00:06.926Z",
   "comment": {
     "text": "This text appears as a badge label and tooltip, indicating that a document is a user's personal draft. It also serves as a status label for a file filling form.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 376,
+      "line_number": 383,
       "context": "\"badge-version badge-version-current tablet-badge icons-group\",\n )}\n backgroundColor={\n themeIsBase ? globalColors.gray : globalColors.grayDark\n }\n label={t(\"Common:BadgeMyDraftTitle\")}\n title={t(\"Common:BadgeMyDraftTitle\")}\n {...versionBadgeProps}\n style={{\n width: \"max-content\",\n }}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 376,
+      "line_number": 383,
       "context": "\"badge-version badge-version-current tablet-badge icons-group\",\n )}\n backgroundColor={\n themeIsBase ? globalColors.gray : globalColors.grayDark\n }\n label={t(\"Common:BadgeMyDraftTitle\")}\n title={t(\"Common:BadgeMyDraftTitle\")}\n {...versionBadgeProps}\n style={{\n width: \"max-content\",\n }}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 234,
+      "line_number": 243,
       "context": "status: FileFillingFormStatus | undefined,\n t: TTranslation,\n ) => {\n switch (status) {\n case FileFillingFormStatus.Draft:\n return t(\"Common:BadgeMyDraftTitle\");\n case FileFillingFormStatus.YourTurn:\n return t(\"Common:YourTurn\");\n case FileFillingFormStatus.InProgress:\n return t(\"Common:InProgress\");\n case FileFillingFormStatus.Stopped:",
       "module": "/packages/shared"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

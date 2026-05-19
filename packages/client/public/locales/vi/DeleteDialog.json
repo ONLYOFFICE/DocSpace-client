@@ -17,7 +17,7 @@
   "DeleteItemsSharedNote": "Xin lưu ý rằng nếu bạn đã chia sẻ chúng với ai đó, chúng sẽ không khả dụng. ",
   "DeleteRoomConfirm": "Phòng <strong>\"{{roomName}}\"</strong> sẽ bị xóa vĩnh viễn. Tất cả dữ liệu và quyền truy cập của người dùng sẽ bị mất.",
   "DeleteRooms": "Các <strong>phòng đã chọn ({{count}})</strong> sẽ bị xóa vĩnh viễn. Tất cả dữ liệu và quyền truy cập của người dùng sẽ bị mất.",
-  "DeleteRoomsTitle": "Xóa phòng này chứ?",
+  "DeleteRoomsTitle": "Xóa những phòng này?",
   "DeleteRoomTitle": "Xóa phòng này?",
   "DeleteRoomWarning": "Tôi hiểu những hậu quả và muốn xóa phòng.",
   "DeleteTemplate": "Bạn có thực sự muốn xóa phòng mẫu <1>«{{templateName}}»</1> không? Không thể khôi phục mẫu.",

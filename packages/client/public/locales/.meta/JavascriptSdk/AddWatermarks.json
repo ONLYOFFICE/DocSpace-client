@@ -3,7 +3,7 @@
   "content": "Add watermarks to documents",
   "content_en_sha1_hash": "22034bd673fd6d7cd91245241c5115556634de93",
   "created_at": "2025-05-19T21:30:54.353Z",
-  "updated_at": "2026-04-11T21:16:21.653Z",
+  "updated_at": "2026-05-15T14:00:06.800Z",
   "comment": {
     "text": "This is a section header in the Developer Tools settings, indicating the options for adding watermarks to documents.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
-      "line_number": 298,
+      "line_number": 307,
       "context": "<RowContainer>\n <Checkbox label={t(\"FeedbackAndSupportLink\")} onChange={() => {}} isChecked />\n <Text color=\"gray\">({t(\"InLeftPanel\")})</Text>\n </RowContainer>\n </InterfaceElements>\n <CategorySubHeader>{t(\"AddWatermarks\")}</CategorySubHeader>\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"SelectImage\")} />\n </LabelGroup>\n <FilesSelectorInputWrapper>",
       "module": "/packages/client"
     }

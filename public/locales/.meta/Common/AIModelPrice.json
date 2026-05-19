@@ -3,7 +3,7 @@
   "content": "{{inputPrice}}/M input tokens | {{outputPrice}}/M output tokens",
   "content_en_sha1_hash": "59fd5325bfe26e9733559605cfce51d27cfe98de",
   "created_at": "2026-04-10T13:53:44.328Z",
-  "updated_at": "2026-05-08T13:10:45.615Z",
+  "updated_at": "2026-05-15T14:00:06.761Z",
   "comment": {
     "text": "This text displays the pricing for AI model usage, showing the cost per million input tokens and output tokens. `{{inputPrice}}` and `{{outputPrice}}` are numerical values representing these costs.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/ai-service/PricingBillingBody.tsx",
-      "line_number": 361,
+      "line_number": 350,
       "context": "({model.provider})\n </Text>\n ) : null}\n </div>\n <Text className={styles.payForItemTextMuted}>\n {t(\"AIModelPrice\", {\n inputPrice: safeFormatAiModelsCurrency(\n model?.price?.prompt ?? 0,\n ),\n outputPrice: safeFormatAiModelsCurrency(\n model?.price?.completion ?? 0,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/DefaultProvider.tsx",
-      "line_number": 220,
+      "line_number": 227,
       "context": "const isSelected = m.modelId === selectedModelId;\n const safeFormat = (v: number) =>\n formatAiModelsCurrency ? formatAiModelsCurrency(v) : String(v);\n const priceLabel =\n m.price != null\n ? t(\"Common:AIModelPrice\", {\n inputPrice: safeFormat(m.price.prompt),\n outputPrice: safeFormat(m.price.completion),\n })\n : null;",
       "module": "/packages/client"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

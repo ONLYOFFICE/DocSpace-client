@@ -3,7 +3,7 @@
   "content": "After a user successfully authorizes an application, the authorization server will redirect the user back to the application with sensitive information.",
   "content_en_sha1_hash": "afaa35bc3fc5ef0500f3ea3dbb1af9d5c894b1d2",
   "created_at": "2025-05-19T21:30:53.988Z",
-  "updated_at": "2026-04-11T21:18:32.862Z",
+  "updated_at": "2026-05-15T14:00:06.821Z",
   "comment": {
     "text": "This is the tooltip text for a help button next to the \"Redirect URLs\" input field. It explains the purpose of redirect URLs in the OAuth authorization flow.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/OAuthBlock.tsx",
-      "line_number": 73,
+      "line_number": 82,
       "context": "label={t(\"RedirectsURLS\")}\n placeholder={t(\"EnterURL\")}\n name=\"redirect_uris\"\n onAdd={changeValue}\n currentValue={redirectUrisValue}\n helpButtonText={t(\"RedirectsURLSHelpButton\")}\n isDisabled={isEdit}\n hasError={requiredErrorFields.includes(\"redirect_uris\")}\n dataTestId=\"redirect_uris\"\n />\n <MultiInputGroup",
       "module": "/packages/client"
     }

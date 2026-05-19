@@ -38,6 +38,7 @@
   "TermsAndConditions": "Door verder te gaan, gaat u akkoord met onze <1>Algemene voorwaarden</1> en <2>Privacyverklaring</2>.",
   "TfaSubTitle": "Volg eenvoudige stappen om verder te werken in dit {{productName}}:",
   "TfaTitle": "Tweefactorauthenticatie ingeschakeld voor veilige toegang",
+  "UserAlreadyInvited": "U bent al uitgenodigd. Voltooi de registratie via de link in de e-mail.",
   "VerifyConnection": "Verifieer de verbinding",
   "VerifyConnectionDescription": "Voer de 6-cijferige code die door uw authenticator-app is gegenereerd, in het veld hieronder in om de instelling te voltooien."
 }

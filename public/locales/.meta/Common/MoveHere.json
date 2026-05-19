@@ -3,7 +3,7 @@
   "content": "Move here",
   "content_en_sha1_hash": "d6f5b75c92e201012666c9d9865972c786decb4e",
   "created_at": "2025-05-19T21:30:46.622Z",
-  "updated_at": "2026-05-08T13:10:45.508Z",
+  "updated_at": "2026-05-15T14:00:06.612Z",
   "comment": {
     "text": "This is a button label that appears in file selection dialogs, indicating that the selected files or folders will be moved to the current location.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 85,
+      "line_number": 94,
       "context": "isRestore?: boolean,\n isFormRoom?: boolean,\n isSelectFolder?: boolean,\n ) => {\n if (isRestore) return t(\"Common:RestoreHere\");\n if (isMove) return t(\"Common:MoveHere\");\n if (isCopy && !isEditorDialog) return t(\"Common:CopyHere\");\n if (isRestoreAll) return t(\"Common:RestoreHere\");\n if (isSelect || isFormRoom || isSelectFolder) return t(\"Common:SelectAction\");\n \n if (filterParam === FilesSelectorFilterTypes.DOCX) return t(\"Common:Create\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx",
-      "line_number": 102,
+      "line_number": 111,
       "context": "filesFilter: string;\n };\n \n const getSubmitLabel = (mode: SelectorMode, t: (key: string) => string) => {\n if (mode === \"copy\") return t(\"Common:CopyHere\");\n if (mode === \"move\") return t(\"Common:MoveHere\");\n return t(\"Common:RestoreHere\");\n };\n \n const DocsLayoutInner = observer(({\n folders,",
       "module": "/packages/sdk"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

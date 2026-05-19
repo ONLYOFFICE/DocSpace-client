@@ -24,37 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+@use "../dialog-params-layout" as *;
 
-export const Header = styled.div`
-  width: 100%;
-  padding: 8px 0 12px;
-
-  color: ${(props) =>
-    props.theme.createEditRoomDialog.commonParam.descriptionColor};
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 16px;
-
-  &.membersHeader {
-    padding-top: 20px;
-  }
-`;
-
-export const AddMembersButton = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 8px;
-  width: max-content;
-  height: 32px;
-  cursor: pointer;
-  margin: 8px 0;
-
-  .label {
-    font-size: 13px;
-    font-weight: 600;
-    line-height: 20px;
-    color: ${(props) => props.theme.createEditGroupDialog.textColor};
-  }
-`;
+.setAgentParams {
+  @include dialog-params-layout;
+}

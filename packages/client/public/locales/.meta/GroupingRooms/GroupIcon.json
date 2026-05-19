@@ -3,7 +3,7 @@
   "content": "Group icon",
   "content_en_sha1_hash": "66f3a4d02a73eb8e3fdad08e1b4716889ed1506c",
   "created_at": "2026-02-19T13:36:24.877Z",
-  "updated_at": "2026-04-11T21:11:33.513Z",
+  "updated_at": "2026-05-15T14:00:06.682Z",
   "comment": {
     "text": "This is the title of a dialog window where users can select an icon for a group of rooms.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/sub-components/GroupIconDialog.tsx",
-      "line_number": 235,
+      "line_number": 244,
       "context": "withBodyScroll\n backdropVisible={false}\n displayType={isMobile() ? ModalDialogType.aside : ModalDialogType.modal}\n onClose={onClose}\n >\n <ModalDialog.Header>{t(\"GroupingRooms:GroupIcon\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.name}>\n <Text\n fontWeight={600}\n fontSize=\"13px\"",
       "module": "/packages/client"
     }

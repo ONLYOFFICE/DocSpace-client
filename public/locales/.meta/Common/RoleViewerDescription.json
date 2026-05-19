@@ -3,7 +3,7 @@
   "content": "File viewing.",
   "content_en_sha1_hash": "e8e372e441f865b8c8a7f1c1fcc3ad023e1beccf",
   "created_at": "2025-09-29T18:22:08.790Z",
-  "updated_at": "2026-04-13T08:17:10.855Z",
+  "updated_at": "2026-05-15T14:00:06.934Z",
   "comment": {
     "text": "This is a short description displayed next to the \"Viewer\" role option in sharing settings. It explains the permissions associated with the Viewer role.",
     "is_auto": true,
@@ -13,37 +13,37 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 197,
+      "line_number": 206,
       "context": "label: t(\"Commentator\"),\n icon: AccessCommentReactSvgUrl,\n },\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"Common:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n [ShareRights.FillForms]: {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 197,
+      "line_number": 206,
       "context": "label: t(\"Commentator\"),\n icon: AccessCommentReactSvgUrl,\n },\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"Common:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n [ShareRights.FillForms]: {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 197,
+      "line_number": 206,
       "context": "label: t(\"Commentator\"),\n icon: AccessCommentReactSvgUrl,\n },\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"Common:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n [ShareRights.FillForms]: {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 197,
+      "line_number": 206,
       "context": "label: t(\"Commentator\"),\n icon: AccessCommentReactSvgUrl,\n },\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"Common:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n [ShareRights.FillForms]: {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 197,
+      "line_number": 206,
       "context": "label: t(\"Commentator\"),\n icon: AccessCommentReactSvgUrl,\n },\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"Common:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n [ShareRights.FillForms]: {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 239,
+      "line_number": 248,
       "context": "key: \"viewer\",\n label: t(\"Common:RoleViewer\"),\n description:\n roomType === RoomsType.AIRoom\n ? t(\"Common:RoleAIAgentViewerDescription\")\n : t(\"Common:RoleViewerDescription\"),\n access: ShareAccessRights.ReadOnly,\n type: EmployeeType.User,\n },\n };",
       "module": "/packages/shared"
     }
@@ -179,7 +179,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

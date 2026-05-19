@@ -3,7 +3,7 @@
   "content": "Disconnect",
   "content_en_sha1_hash": "ed28e0686e1251ba046f582a3e9ec02470a5e78d",
   "created_at": "2025-05-19T21:30:44.562Z",
-  "updated_at": "2026-05-08T13:10:45.579Z",
+  "updated_at": "2026-05-15T14:00:06.681Z",
   "comment": {
     "text": "This is a button label. It appears in various contexts: to disconnect an AI agent from a server, to disconnect a user account, or to disconnect a third-party folder.",
     "is_auto": true,
@@ -13,31 +13,31 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/tools-settings/index.tsx",
-      "line_number": 551,
+      "line_number": 558,
       "context": "{server.name}\n </Text>\n </div>\n <Button\n label={\n server.connected ? t(\"Disconnect\") : t(\"Connect\")\n }\n size={ButtonSize.small}\n onClick={() => {\n if (server.connected) {\n disconnectServerAction(server.id);",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DisconnectAccountDialog/index.tsx",
-      "line_number": 89,
+      "line_number": 98,
       "context": "})}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:Disconnect\")}\n size={ButtonSize.normal}\n scale\n primary\n onClick={onClickDisconnect}\n testId=\"disconnect_account_dialog_submit\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2744,
+      "line_number": 2753,
       "context": "},\n {\n id: \"option_delete\",\n key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : isAIAgent\n ? t(\"DeleteAgent\")\n : item.isTemplate\n ? t(\"Files:DeleteTemplateAction\")\n : item.isRoom",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/direct-third-party-connection/DirectThirdPartyConnection.tsx",
-      "line_number": 241,
+      "line_number": 250,
       "context": "icon: RefreshReactSvgUrl,\n dataTestId: \"connection_settings_option\",\n },\n {\n key: \"Disconnect-settings\",\n label: t(\"Common:Disconnect\"),\n onClick: onDisconnect,\n disabled: false,\n icon: AccessNoneReactSvgUrl,\n dataTestId: \"disconnect_settings_option\",\n },",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 452,
+      "line_number": 461,
       "context": "signUp = false,\n ) {\n const providerLabel = getProviderLabel(provider, t);\n \n if (linked) {\n return `${t(\"Common:Disconnect\")} ${providerLabel}`;\n }\n \n switch (provider) {\n case \"apple\":\n return signUp ? t(\"Common:SignUpWithApple\") : t(\"Common:SignInWithApple\");",
       "module": "/packages/shared"
     }
@@ -173,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

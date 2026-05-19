@@ -3,7 +3,7 @@
   "content": "Overview",
   "content_en_sha1_hash": "0efc2e6be4c23b9a513d7ce0dcff8ed80e8912e7",
   "created_at": "2026-04-03T21:51:36.622Z",
-  "updated_at": "2026-04-11T21:23:08.213Z",
+  "updated_at": "2026-05-15T14:00:06.584Z",
   "comment": {
     "text": "This is a navigation item label for the \"Overview\" section within the developer tools. It appears as a short label in a list of developer tool categories.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/Body/DeveloperToolsItems.tsx",
-      "line_number": 49,
+      "line_number": 58,
       "context": "const items = [\n {\n id: \"devtools-overview\",\n path: \"/developer-tools/overview\",\n pageType: PageType.devToolsOverview,\n // t(\"Settings:Overview\") - already translated in the parent component\n translationKey: \"Settings:Overview\",\n },\n {\n id: \"devtools-javascript-sdk\",\n path: \"/developer-tools/javascript-sdk\",",
       "module": "/packages/client"
     }

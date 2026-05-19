@@ -3,7 +3,7 @@
   "content": "Developer",
   "content_en_sha1_hash": "7e08ebec5e6f80a136fa4076e041dd0c811a5e70",
   "created_at": "2025-05-19T21:30:44.508Z",
-  "updated_at": "2026-04-11T20:55:12.298Z",
+  "updated_at": "2026-05-15T14:00:06.955Z",
   "comment": {
     "text": "This is a short label for a developer license, used as a noun within sentences describing payment and subscription options. It appears in banners and descriptions related to activating or renewing licenses.",
     "is_auto": true,
@@ -13,31 +13,31 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/common/BenefitsContainer.tsx",
-      "line_number": 55,
+      "line_number": 64,
       "context": "const { t } = useTranslation([\"Common\", \"Settings\"]);\n \n const title = isEnterprise\n ? t(\"ActivateToProBannerHeaderTrial\", {\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n })\n : t(\"UpgradeToProBannerHeader\");\n \n const features = () => {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/EnterpriseContainer.tsx",
-      "line_number": 68,
+      "line_number": 77,
       "context": "<Text fontWeight={700} fontSize=\"16px\">\n {!isLifetimeLicense\n ? t(\"RenewTheLicense\")\n : t(\"ActivateRenewSubscriptionHeader\", {\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n })}\n </Text>\n \n <TariffTitleContainer",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
-      "line_number": 166,
+      "line_number": 175,
       "context": "i18nKey=\"ActivateTariffDescrUsers\"\n values={{\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n editingCount: usersStatistics.totalUsers ?? 0,\n limit: usersStatistics.limitUsers ?? 0,\n }}\n t={t}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
-      "line_number": 166,
+      "line_number": 175,
       "context": "i18nKey=\"ActivateTariffDescrUsers\"\n values={{\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n editingCount: usersStatistics.totalUsers ?? 0,\n limit: usersStatistics.limitUsers ?? 0,\n }}\n t={t}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TrialContainer.tsx",
-      "line_number": 59,
+      "line_number": 68,
       "context": "return (\n <div className={styles.enterpriseComponent}>\n <Text fontWeight={700} fontSize=\"16px\">\n {t(\"ActivateSwithToProHeader\", {\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n })}\n </Text>\n \n <TariffTitleContainer",
       "module": "/packages/shared"
     }
@@ -173,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

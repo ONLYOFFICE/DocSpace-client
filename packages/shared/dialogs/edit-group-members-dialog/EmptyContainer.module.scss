@@ -24,32 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-
-export const SystemFoldersTitle = styled(Text)`
-  font-weight: 600;
-  line-height: 20px;
-`;
-
-export const SystemFoldersDescription = styled(Text)`
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
-  color: ${(props) =>
-    props.theme.createEditRoomDialog.roomType.dropdownItem.descriptionText};
-`;
-
-export const SystemFoldersHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  margin-bottom: 2px;
-`;
-
-export const SystemFoldersToggleButton = styled(ToggleButton)`
-  width: 30px;
-  height: 16px;
-`;
+.emptyScreen {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 45px 3px 0;
+}

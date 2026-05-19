@@ -3,7 +3,7 @@
   "content": "Deleting this server will revoke access for all users, and its settings will be permanently erased.\n To use the server again, you will need to set it up from scratch.",
   "content_en_sha1_hash": "01d29ba65106eb3fcd98ec0f792271f233334690",
   "created_at": "2025-10-27T16:14:31.652Z",
-  "updated_at": "2026-04-11T21:02:55.192Z",
+  "updated_at": "2026-05-15T14:00:06.766Z",
   "comment": {
     "text": "This is the body text of a confirmation dialog that appears when a user attempts to delete an AI server. It explains the consequences of deleting the server.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/delete/index.tsx",
-      "line_number": 74,
+      "line_number": 83,
       "context": "return (\n <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>\n <ModalDialog.Header>{t(\"AISettings:DeleteServer\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"AISettings:DeleteServerDescription\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}",
       "module": "/packages/client"
     }
@@ -24,6 +24,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     }
   }
 }

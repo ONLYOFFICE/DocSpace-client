@@ -3,7 +3,7 @@
   "content": "This section will display the forms in progress.",
   "content_en_sha1_hash": "9787e97adb0311eb2060676dcb01b86b91b4e08d",
   "created_at": "2025-05-19T21:30:55.561Z",
-  "updated_at": "2026-04-11T21:09:51.327Z",
+  "updated_at": "2026-05-15T14:00:06.601Z",
   "comment": {
     "text": "This text appears in an empty folder view within the \"Forms\" section. It informs the user that forms currently being worked on will be displayed here once they exist.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 142,
+      "line_number": 151,
       "context": "return match([parentRoomType, folderType, access])\n .with([P._, FolderType.Done, P._], () =>\n t(\"Files:EmptyFormFolderDoneDescriptionText\"),\n )\n .with([P._, FolderType.InProgress, P._], () =>\n t(\"Files:EmptyFormFolderProgressDescriptionText\"),\n )\n .with([P._, FolderType.SubFolderDone, P._], () =>\n t(\"Files:EmptyFormSubFolderDoneDescriptionText\"),\n )\n .with([P._, FolderType.SubFolderInProgress, P._], () =>",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

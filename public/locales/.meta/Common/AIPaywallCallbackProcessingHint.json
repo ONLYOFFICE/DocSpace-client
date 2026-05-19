@@ -1,0 +1,29 @@
+{
+  "key_path": "AIPaywallCallbackProcessingHint",
+  "content": "We're loading credits and activating AI features. This usually takes a few seconds.",
+  "content_en_sha1_hash": "6b5629447cf98f88b99731c46b773b5f60e8cfa0",
+  "created_at": "2026-05-15T13:59:45.960Z",
+  "updated_at": "2026-05-15T14:07:39.748Z",
+  "comment": {
+    "text": "Subtext on the AI paywall completion page, informing the user that credits are being loaded and AI features are being activated.",
+    "is_auto": true,
+    "updated_at": "2026-05-15T14:07:39.748Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
+      "line_number": 147,
+      "context": "<div className={styles.heroText}>\n <Text fontSize=\"20px\" fontWeight={700} className={styles.title}>\n {t(\"AIPaywallCallbackProcessing\")}\n </Text>\n <Text fontSize=\"13px\" lineHeight=\"18px\" className={styles.hint}>\n {t(\"AIPaywallCallbackProcessingHint\")}\n </Text>\n </div>\n \n <div className={styles.keepOpenCallout} role=\"status\">\n <InfoIcon",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

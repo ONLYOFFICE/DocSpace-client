@@ -3,7 +3,7 @@
   "content": "Send again",
   "content_en_sha1_hash": "9fafcfcc8089c0d4519f16a47cf411b0b51890a7",
   "created_at": "2025-05-19T21:30:53.377Z",
-  "updated_at": "2026-04-11T21:20:37.394Z",
+  "updated_at": "2026-05-15T14:00:06.880Z",
   "comment": {
     "text": "This is the label for a button that allows a user to resend a verification email or similar communication.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 531,
+      "line_number": 540,
       "context": "<ReactSVG\n className={styles.sendAgainIcon}\n src={SendClockReactSvgUrl}\n />\n <Text className={styles.sendAgainText} fontWeight={600}>\n {t(\"SendAgain\")}\n </Text>\n </div>\n ) : null}\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 531,
+      "line_number": 540,
       "context": "<ReactSVG\n className={styles.sendAgainIcon}\n src={SendClockReactSvgUrl}\n />\n <Text className={styles.sendAgainText} fontWeight={600}>\n {t(\"SendAgain\")}\n </Text>\n </div>\n ) : null}\n </div>",
       "module": "/packages/client"
     }

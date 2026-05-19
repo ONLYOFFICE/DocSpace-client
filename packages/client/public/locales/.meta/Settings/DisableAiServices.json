@@ -3,7 +3,7 @@
   "content": "Disable {{aiServices}}",
   "content_en_sha1_hash": "ff9221e8d16c8a8a5865acce6a73670a6019e447",
   "created_at": "2026-03-26T08:26:46.833Z",
-  "updated_at": "2026-04-13T14:59:05.769Z",
+  "updated_at": "2026-05-15T14:00:06.680Z",
   "comment": {
     "text": "This is the title of a confirmation dialog. It appears when a user attempts to disable AI services, asking them to confirm the action. `{{aiServices}}` will be replaced with the name of the AI services being disabled.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DisableAiServicesDialog/index.js",
-      "line_number": 73,
+      "line_number": 82,
       "context": "displayType=\"modal\"\n autoMaxHeight\n data-testid=\"disable_ai_services_dialog\"\n >\n <ModalDialog.Header>\n {t(\"DisableAiServices\", {\n aiServices: t(\"Common:AIServices\"),\n })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text",
       "module": "/packages/client"
     }

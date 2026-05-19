@@ -2,6 +2,8 @@
 
 /* NEXT COLORS MUST BE REWRITE, BECAUSE IT iS USING INSIDE COMPONENTS AND DUPLICATE */
 .light {
+  --param-description-color: #{$gray};
+
   // Input colors
   --input-bg: #{$white};
   --input-color: #{$black};
@@ -41,6 +43,8 @@
 }
 
 .dark {
+  --param-description-color: #{$gray};
+
   --input-bg: #{$dark-gray-light};
   --input-color: #{$white};
   --input-border-focus: #{$white};

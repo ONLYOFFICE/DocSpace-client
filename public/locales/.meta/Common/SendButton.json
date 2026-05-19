@@ -3,7 +3,7 @@
   "content": "Send",
   "content_en_sha1_hash": "9bc2575c3930437e80555f78757b783c842e8e66",
   "created_at": "2025-05-19T21:30:48.532Z",
-  "updated_at": "2026-04-23T17:24:01.693Z",
+  "updated_at": "2026-05-15T14:00:06.641Z",
   "comment": {
     "text": "This is the label for a button that initiates an action, such as sending a request or confirming a change (e.g., email or password).",
     "is_auto": true,
@@ -13,55 +13,55 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
-      "line_number": 250,
+      "line_number": 259,
       "context": "</FieldContainer>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"send-button\"\n label={isLoading ? t(\"Sending\") : t(\"SendButton\")}\n size={ButtonSize.normal}\n primary\n onClick={onSendRequest}\n isLoading={isLoading}\n isDisabled={isLoading}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
-      "line_number": 218,
+      "line_number": 227,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"send\"\n key=\"ChangeEmailSendBtn\"\n label={t(\"Common:SendButton\")}\n size=\"normal\"\n scale\n primary\n onClick={this.onValidateEmail}\n isLoading={isRequestRunning}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePasswordDialog/index.js",
-      "line_number": 127,
+      "line_number": 136,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"send\"\n key=\"ChangePasswordSendBtn\"\n label={t(\"Common:SendButton\")}\n size=\"normal\"\n scale\n primary\n onClick={this.onSendPasswordChangeInstructions}\n isLoading={isRequestRunning}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePhoneDialog/index.js",
-      "line_number": 70,
+      "line_number": 79,
       "context": "<Text>{t(\"MobilePhoneEraseDescription\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"ChangePhoneSendBtn\"\n label={t(\"Common:SendButton\")}\n size=\"normal\"\n scale\n primary\n onClick={this.onChangePhone}\n isLoading={isRequestRunning}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteSelfProfileDialog/index.js",
-      "line_number": 96,
+      "line_number": 105,
       "context": "</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"DeleteSelfSendBtn\"\n label={t(\"Common:SendButton\")}\n size=\"normal\"\n scale\n primary\n onClick={this.onDeleteSelfProfileInstructions}\n isLoading={isRequestRunning}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/SendInviteDialog/index.js",
-      "line_number": 94,
+      "line_number": 103,
       "context": "<Text>{t(\"SendInviteAgainDialogMessage\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"send-inite-again-modal_submit\"\n label={t(\"Common:SendButton\")}\n size=\"normal\"\n scale\n primary\n onClick={this.onSendInvite}\n isLoading={isRequestRunning}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/ForgotPasswordModalDialog.tsx",
-      "line_number": 260,
+      "line_number": 269,
       "context": "<Button\n id=\"forgot-password-modal_send\"\n className=\"modal-dialog-button\"\n key=\"ForgotSendBtn\"\n label={\n isLoading ? t(\"Common:LoadingProcessing\") : t(\"Common:SendButton\")\n }\n size={ButtonSize.normal}\n scale\n primary\n onClick={onSendPasswordInstructions}",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/shared/components/report-dialog/index.tsx",
-      "line_number": 156,
+      "line_number": 165,
       "context": "</div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n key=\"SendButton\"\n onClick={onClickSend}\n label={t(\"SendButton\")}\n size={ButtonSize.normal}\n scale={currentDeviceType === DeviceType.mobile}\n data-id=\"send-report\"",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog.tsx",
-      "line_number": 350,
+      "line_number": 359,
       "context": "isDisabled={loading}\n key=\"RecoverySendBtn\"\n size={ButtonSize.normal}\n id=\"recover-access-modal_send\"\n className={styles.recoverButtonDialog}\n label={loading ? t(\"Common:Sending\") : t(\"Common:SendButton\")}\n onClick={onSendRecoverRequest}\n aria-label=\"Send recover request\"\n testId=\"recover_access_modal_submit_button\"\n />\n <Button",
       "module": "/packages/shared"
     }
@@ -197,7 +197,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

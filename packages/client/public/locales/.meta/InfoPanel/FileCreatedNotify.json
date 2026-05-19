@@ -3,7 +3,7 @@
   "content": "File created.",
   "content_en_sha1_hash": "1cbf9d9e44da87617f2a6b43738a8655e9a3d7fb",
   "created_at": "2025-05-19T21:30:54.798Z",
-  "updated_at": "2026-04-11T21:13:39.410Z",
+  "updated_at": "2026-05-15T14:00:06.732Z",
   "comment": {
     "text": "This is a toast message displayed in the activity feed when a new file is created.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 51,
+      "line_number": 60,
       "context": "const count = feed.related.length + 1;\n \n const getFeedTranslation = (): React.ReactNode => {\n switch (feed.action.key) {\n case FeedActionKeys.FileCreated:\n return t(\"InfoPanel:FileCreatedNotify\");\n case FeedActionKeys.FileUploaded:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileUploadedCount\", {\n count,\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 45,
+      "line_number": 54,
       "context": ") => {\n const count = feed.related.length + 1;\n \n switch (feed.action.key) {\n case FeedActionKeys.FileCreated:\n return t(\"InfoPanel:FileCreatedNotify\");\n case FeedActionKeys.FileUploaded:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileUploadedCount\", {\n count,\n });",
       "module": "/packages/client"
     }

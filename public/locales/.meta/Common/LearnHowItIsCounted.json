@@ -3,7 +3,7 @@
   "content": "Learn how it is counted",
   "content_en_sha1_hash": "a89a5c65b6b953fa6ae8051a31d64dea72c7a0e7",
   "created_at": "2025-09-19T15:39:09.524Z",
-  "updated_at": "2026-04-11T20:50:18.747Z",
+  "updated_at": "2026-05-15T14:00:06.942Z",
   "comment": {
     "text": "This is a link label within a dialog. It appears next to user statistics and, when clicked, directs the user to a FAQ page explaining how those statistics are calculated.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/UserStatisticsDialog/index.tsx",
-      "line_number": 83,
+      "line_number": 92,
       "context": "target={LinkTarget.blank}\n href={docspaceFaqUrl}\n fontWeight={600}\n dataTestId=\"learn_how_counted_link\"\n >\n {t(\"LearnHowItIsCounted\")}\n </Link>\n ) : null}\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

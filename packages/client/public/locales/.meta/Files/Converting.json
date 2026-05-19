@@ -3,7 +3,7 @@
   "content": "Converting",
   "content_en_sha1_hash": "3bcef0a610e933857faac2e83c490abb8af3cab1",
   "created_at": "2025-05-19T21:30:55.347Z",
-  "updated_at": "2026-04-11T21:10:17.409Z",
+  "updated_at": "2026-05-15T14:00:06.721Z",
   "comment": {
     "text": "This is a status message indicating that a file is currently being converted. It appears as a short label.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 288,
+      "line_number": 297,
       "context": "case upload:\n if (progress > 0 && progress < 100)\n return i18n.t(\"Files:UploadingProgress\", { progress });\n return i18n.t(\"Files:Uploading\");\n case convert:\n return i18n.t(\"Files:Converting\");\n case deleteVersionFile:\n return i18n.t(\"Files:DeletingVersion\");\n \n default:\n return i18n.t(\"Files:OtherProcesses\");",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

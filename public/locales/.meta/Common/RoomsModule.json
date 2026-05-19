@@ -3,7 +3,7 @@
   "content": "Backup room",
   "content_en_sha1_hash": "d713be356f0517828e717778afb3cc8136c8c476",
   "created_at": "2025-05-26T07:15:47.386Z",
-  "updated_at": "2026-04-13T07:46:02.780Z",
+  "updated_at": "2026-05-15T14:00:06.960Z",
   "comment": {
     "text": "This is a radio button label or an option in a dropdown menu. It refers to the \"Rooms\" module within DocSpace, indicating that the backup or restore operation will apply to rooms.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 494,
+      "line_number": 503,
       "context": "<div className={styles.modules}>\n <RadioButton\n key={0}\n {...commonRadioButtonProps}\n id=\"backup-room\"\n label={t(\"Common:RoomsModule\")}\n name={`${BackupStorageType.DocumentModuleType}`}\n isChecked={isCheckedDocuments}\n isDisabled={isLoadingData}\n testId=\"auto_backup_room_radio_button\"\n />",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 540,
+      "line_number": 549,
       "context": "[styles.isDisabled]: additionalDisabled,\n })}\n >\n <RadioButton\n id=\"backup-room\"\n label={t(\"Common:RoomsModule\")}\n name={DOCUMENTS}\n key={1}\n isChecked={isCheckedDocuments}\n isDisabled={additionalDisabled}\n {...commonRadioButtonProps}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 229,
+      "line_number": 238,
       "context": "options={[\n { id: \"local-file\", value: LOCAL_FILE, label: t(\"Common:LocalFile\") },\n {\n id: \"backup-room\",\n value: BACKUP_ROOM,\n label: t(\"Common:RoomsModule\"),\n },\n {\n id: \"third-party-resource\",\n value: DISK_SPACE,\n label: t(\"Common:ThirdPartyResource\"),",
       "module": "/packages/shared"
     }
@@ -185,7 +185,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

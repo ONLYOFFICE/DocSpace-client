@@ -3,7 +3,7 @@
   "content": "Delivery",
   "content_en_sha1_hash": "9631af52c66f1a5cd964380b009c74efdee01947",
   "created_at": "2025-05-19T21:30:49.687Z",
-  "updated_at": "2026-04-11T21:29:17.811Z",
+  "updated_at": "2026-05-15T14:00:06.832Z",
   "comment": {
     "text": "Table column header. It indicates the status of a webhook delivery attempt.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/WebhookHistoryTable/HistoryTableView/HistoryTableHeader.js",
-      "line_number": 105,
+      "line_number": 114,
       "context": "enable: true,\n resizable: true,\n onChange: onColumnChange,\n },\n {\n key: \"Delivery\",\n title: t(\"Delivery\"),\n enable: true,\n resizable: true,\n onChange: onColumnChange,\n },",
       "module": "/packages/client"
     }

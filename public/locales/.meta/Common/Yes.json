@@ -3,7 +3,7 @@
   "content": "Yes",
   "content_en_sha1_hash": "5397e0583f14f6c88de06b1ef28f460a1fb5b0ae",
   "created_at": "2025-05-19T21:30:49.630Z",
-  "updated_at": "2026-05-08T13:10:45.528Z",
+  "updated_at": "2026-05-15T14:00:06.637Z",
   "comment": {
     "text": "This is a button label. It confirms an action, such as canceling a storage plan, an operation, or an upload process.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanCancel.tsx",
-      "line_number": 159,
+      "line_number": 168,
       "context": "<StorageWarning />\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OkButton\"\n label={t(\"Yes\")}\n size={ButtonSize.normal}\n primary\n onClick={handleStoragePlanChange}\n isLoading={isLoading}\n testId=\"storage_plan_cancel_ok_button\"",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CancelOperationDialog/index.tsx",
-      "line_number": 110,
+      "line_number": 119,
       "context": "dataTestId=\"cancel_operation_dont_show_checkbox\"\n />\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button label={t(\"Common:Yes\")} onClick={onConfirm} primary scale testId=\"cancel_operation_yes_button\" />\n <Button label={t(\"Common:No\")} onClick={onClose} scale testId=\"cancel_operation_no_button\" />\n </ModalDialog.Footer>\n </ModalDialog>\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CancelUploadDialog/index.js",
-      "line_number": 63,
+      "line_number": 72,
       "context": "<ModalDialog visible={visible} onClose={onClose} displayType=\"modal\">\n <ModalDialog.Header>{t(\"Common:Confirmation\")}</ModalDialog.Header>\n <ModalDialog.Body>{modalBodyText}</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:Yes\")}\n size=\"normal\"\n scale\n primary\n onClick={onCancelProcess}\n isLoading={loading}",
       "module": "/packages/client"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "In a Form Filling room, the main link is valid for an unlimited time period.",
   "content_en_sha1_hash": "a03b622671c86c517f663bdce63318868e8f0750",
   "created_at": "2025-08-26T11:15:03.468Z",
-  "updated_at": "2026-04-11T20:49:49.774Z",
+  "updated_at": "2026-05-15T14:00:06.940Z",
   "comment": {
     "text": "This is a descriptive text displayed in a dialog. It informs the user that the main link for a Form Filling room has no time limit.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
-      "line_number": 409,
+      "line_number": 418,
       "context": "const isParentPublicRoom =\n !isRoom(item) && item.parentRoomType === FolderType.PublicRoom;\n \n if (isFormRoom || isParentFormRoom)\n return t(\"Common:LimitTimeBlockFormRoomDescription\");\n if (isPublic || isParentPublicRoom)\n return t(\"Common:LimitTimeBlockPublicRoomDescription\");\n \n return \"\";\n }",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

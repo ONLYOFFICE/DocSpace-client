@@ -3,7 +3,7 @@
   "content": "Move panel to right",
   "content_en_sha1_hash": "8451f33b8b900e73a17d3637cb8336ab72454a2b",
   "created_at": "2026-03-20T09:07:32.956Z",
-  "updated_at": "2026-05-08T13:10:45.716Z",
+  "updated_at": "2026-05-15T14:00:06.976Z",
   "comment": {
     "text": "This is a tooltip text for an icon button. It instructs the user that clicking the button will move the panel to the right side of the screen.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-panel/index.tsx",
-      "line_number": 231,
+      "line_number": 240,
       "context": "onClick={handleTogglePosition}\n tooltipId=\"move-panel-tooltip\"\n tooltipContent={\n panelPosition === \"right\"\n ? t(\"Common:MovePanelLeft\")\n : t(\"Common:MovePanelRight\")\n }\n />\n <IconButton\n iconName={CrossReactSvgUrl}\n size={17}",
       "module": "/packages/sdk"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

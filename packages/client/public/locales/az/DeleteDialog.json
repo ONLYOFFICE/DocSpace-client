@@ -17,7 +17,7 @@
   "DeleteItemsSharedNote": "Nəzərə alın ki, əgər onları kiminləsə paylaşmısınızsa, onlar əlçatan olmayacaq.",
   "DeleteRoomConfirm": "Otaq <strong>\"{{roomName}}\"</strong> daimi şəkildə silinəcəkdir. Bütün məlumatlar və istifadəçi girişləri itiriləcəkdir.",
   "DeleteRooms": "Seçilmiş <strong>otaqlar ({{count}})</strong> daimi olaraq silinəcək. Bütün məlumatlar və istifadəçi girişi itəcək.",
-  "DeleteRoomsTitle": "Bu otağı silmək istəyirsiniz?",
+  "DeleteRoomsTitle": "Bu otaqları sil?",
   "DeleteRoomTitle": "Bu otağı sil?",
   "DeleteRoomWarning": "Mən nəticələri başa düşürəm və otağı silmək istəyirəm.",
   "DeleteTemplate": "<1>«{{templateName}}»</1> şablon otağını silmək istədiyinizdən əminsiniz? Şablonu bərpa etmək mümkün deyil.",

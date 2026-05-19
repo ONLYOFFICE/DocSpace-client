@@ -17,7 +17,7 @@
   "DeleteItemsSharedNote": "Upozorňujeme, že pokud jste je s někým sdíleli, stanou se nedostupnými.",
   "DeleteRoomConfirm": "Pokoj <strong>{{roomName}}</strong> bude trvale smazán. Všechna data a přístupy uživatelů budou ztraceny.",
   "DeleteRooms": "Vybrané <strong>místnosti ({{count}})</strong> budou trvale odstraněny. Všechna data a přístup uživatelů budou ztraceny.",
-  "DeleteRoomsTitle": "Smazat tuto místnost?",
+  "DeleteRoomsTitle": "Smazat tyto místnosti?",
   "DeleteRoomTitle": "Smazat tuto místnost?",
   "DeleteRoomWarning": "Rozumím následkům a chci smazat pokoj.",
   "DeleteTemplate": "Opravdu chcete odstranit místnost šablony <1>\"{{templateName}}\"</1>? Šablonu nelze obnovit.",

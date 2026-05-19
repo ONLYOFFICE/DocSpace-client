@@ -3,7 +3,7 @@
   "content": "Commentator",
   "content_en_sha1_hash": "9f6fd4869ea0279d99dd0d5720e1bd5b70d03dec",
   "created_at": "2025-05-19T21:30:43.550Z",
-  "updated_at": "2026-04-13T14:59:05.936Z",
+  "updated_at": "2026-05-15T14:00:06.934Z",
   "comment": {
     "text": "This is a label for a user role in sharing settings. It identifies a user with commenting permissions.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 192,
+      "line_number": 201,
       "context": "},\n [ShareRights.Comment]: {\n access: ShareAccessRights.Comment,\n description: t(\"Common:RoleCommentatorDescription\"),\n key: \"commenting\",\n label: t(\"Commentator\"),\n icon: AccessCommentReactSvgUrl,\n },\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

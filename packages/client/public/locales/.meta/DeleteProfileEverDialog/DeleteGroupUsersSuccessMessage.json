@@ -3,7 +3,7 @@
   "content": "Users have been successfully deleted.",
   "content_en_sha1_hash": "0b8d1ecbad94423f2b385b43d0a78311aaa1eb8f",
   "created_at": "2025-05-19T21:30:56.656Z",
-  "updated_at": "2026-04-11T21:06:07.868Z",
+  "updated_at": "2026-05-15T14:00:06.677Z",
   "comment": {
     "text": "This is a toast message confirming the successful deletion of selected users from a group.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/index.tsx",
-      "line_number": 169,
+      "line_number": 178,
       "context": "removeUsers(ids)\n .then(() => {\n toastr.success(\n isGuests\n ? t(\"DeleteGroupGuestsSuccessMessage\")\n : t(\"DeleteGroupUsersSuccessMessage\"),\n );\n })\n .catch((error) => toastr.error(error))\n .finally(() => {\n onClose();",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

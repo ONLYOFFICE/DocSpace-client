@@ -3,7 +3,7 @@
   "content": "File restored",
   "content_en_sha1_hash": "fee819996fcbfcc915c66348fa0bee7d60dc5640",
   "created_at": "2025-05-19T21:30:49.731Z",
-  "updated_at": "2026-04-13T14:59:05.877Z",
+  "updated_at": "2026-05-15T14:00:06.833Z",
   "comment": {
     "text": "This is a toast message indicating that a file has been successfully restored. It appears briefly after a user restores a file.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
-      "line_number": 57,
+      "line_number": 66,
       "context": "case WebhookTriggers.FileTrashed:\n return t(\"FileTrashed\");\n case WebhookTriggers.FileDeleted:\n return t(\"FileDeleted\");\n case WebhookTriggers.FileRestored:\n return t(\"FileRestored\");\n case WebhookTriggers.FileCopied:\n return t(\"FileCopied\");\n case WebhookTriggers.FileMoved:\n return t(\"FileMoved\");\n case WebhookTriggers.FolderCreated:",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Select in {{productName}}",
   "content_en_sha1_hash": "d73134a92300cde91d78997ee3c6f3a0d411a352",
   "created_at": "2025-10-27T16:14:31.669Z",
-  "updated_at": "2026-04-11T21:01:56.506Z",
+  "updated_at": "2026-05-15T14:00:06.654Z",
   "comment": {
     "text": "Button label. This button allows users to select an item within the specified product. `{{productName}}` is the name of the product (e.g., \"DocSpace\").",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Knowledge.tsx",
-      "line_number": 83,
+      "line_number": 92,
       "context": "onClick={onClickAction}\n />\n <Button\n size={ButtonSize.small}\n icon={<ReactSVG className=\"ai-button-icon\" src={MoveReactSvgUrl} />}\n label={t(\"KnowledgeSelectIn\", {\n productName: getBrandName(\"ProductName\"),\n })}\n scale\n filled\n onClick={onClickAction}",
       "module": "/packages/client"
     }
@@ -24,6 +24,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     }
   }
 }

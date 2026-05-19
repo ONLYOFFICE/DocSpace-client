@@ -3,7 +3,7 @@
   "content": "REST API",
   "content_en_sha1_hash": "cec9f3739c3e2f0e0437a3141590dfba60bb4e1b",
   "created_at": "2026-04-03T21:51:36.577Z",
-  "updated_at": "2026-04-11T21:22:38.122Z",
+  "updated_at": "2026-05-15T14:00:06.816Z",
   "comment": {
     "text": "This is a card title in the Developer Tools settings, labeling the section for managing REST API access.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 79,
+      "line_number": 88,
       "context": "<Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">{t(\"Settings:DeveloperToolsDescription\", { organizationName: getBrandName(\"OrganizationName\"), productName: getBrandName(\"ProductName\") })}</Text>\n </div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}\n description={t(\"Settings:RestAPIDescription\", { organizationName: getBrandName(\"OrganizationName\"), productName: getBrandName(\"ProductName\") })}\n url={apiBasicLink}\n color={globalColors.lightBlueMain}\n linkTitle={t(\"Common:LearnMore\")}\n isBlank",
       "module": "/packages/client"
     }

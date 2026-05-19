@@ -3,7 +3,7 @@
   "content": "KB",
   "content_en_sha1_hash": "315b39a0fc19fb45d146c17b813d46c7acb0b872",
   "created_at": "2025-05-19T21:30:46.020Z",
-  "updated_at": "2026-04-13T14:59:05.858Z",
+  "updated_at": "2026-05-15T14:00:06.804Z",
   "comment": {
     "text": "This is a unit of measurement for file size, appearing as a short label in dropdowns and lists. It represents 1024 bytes.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/utils/common.ts",
-      "line_number": 51,
+      "line_number": 60,
       "context": "let power = 0;\n let resultSize = bytes;\n \n const sizeNames = [\n t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),\n t(\"Common:Exabyte\"),",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
-      "line_number": 102,
+      "line_number": 111,
       "context": "const [uploadMode, setUploadMode] = useState(\"files\");\n const [uploadQuantity, setUploadQuantity] = useState(\"single\");\n const [perFileSize, setPerFileSize] = useState({ value: \"25\", unit: \"mb\" });\n const [totalSize, setTotalSize] = useState({ value: \"100\", unit: \"mb\" });\n const fileSizeUnits = [\n { key: \"kb\", label: t(\"Common:Kilobyte\") },\n { key: \"mb\", label: t(\"Common:Megabyte\") },\n { key: \"gb\", label: t(\"Common:Gigabyte\") },\n ];\n \n const defaultSizeUnit = fileSizeUnits[1];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/quota-form/index.tsx",
-      "line_number": 89,
+      "line_number": 98,
       "context": "return 2;\n };\n \n const getOptions = (t: TTranslation) => [\n { key: 0, label: t(\"Common:Bytes\") },\n { key: 1, label: t(\"Common:Kilobyte\") },\n { key: 2, label: t(\"Common:Megabyte\") },\n { key: 3, label: t(\"Common:Gigabyte\") },\n { key: 4, label: t(\"Common:Terabyte\") },\n ];",
       "module": "/packages/shared"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

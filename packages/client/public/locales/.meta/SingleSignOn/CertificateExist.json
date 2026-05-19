@@ -3,7 +3,7 @@
   "content": "Certificate with same action type already exists",
   "content_en_sha1_hash": "9973f20d2024018f1ead9a6896ef807f27346f7c",
   "created_at": "2025-05-19T21:30:50.070Z",
-  "updated_at": "2026-04-13T14:59:05.919Z",
+  "updated_at": "2026-05-15T14:00:06.900Z",
   "comment": {
     "text": "This is an error message displayed when a user attempts to add a certificate with an action type (e.g., signing, encryption) that is already associated with an existing certificate.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/SsoFormStore.js",
-      "line_number": 833,
+      "line_number": 842,
       "context": "action: this.spAction,\n },\n ];\n \n if (this.checkSpCertificateExist()) {\n toastr.error(t(\"CertificateExist\"));\n return;\n }\n \n this.isCertificateLoading = true;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/SsoFormStore.js",
-      "line_number": 833,
+      "line_number": 842,
       "context": "action: this.spAction,\n },\n ];\n \n if (this.checkSpCertificateExist()) {\n toastr.error(t(\"CertificateExist\"));\n return;\n }\n \n this.isCertificateLoading = true;",
       "module": "/packages/client"
     }

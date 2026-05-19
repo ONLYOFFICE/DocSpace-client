@@ -3,7 +3,7 @@
   "content": "Disable",
   "content_en_sha1_hash": "9a7d4e0687b14e2b7cda406900b802782cd50a62",
   "created_at": "2025-05-19T21:30:44.526Z",
-  "updated_at": "2026-04-11T20:55:07.740Z",
+  "updated_at": "2026-05-15T14:00:06.646Z",
   "comment": {
     "text": "This is a button label or option label. It indicates an action to turn off or deactivate a feature, user, or setting.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 187,
+      "line_number": 196,
       "context": "bodyText += isGuests\n ? t(\"DisableGuestsGeneralDescription\")\n : t(\"DisableGeneralDescription\");\n \n buttonLabelSave = isGuests\n ? t(\"Common:Disable\")\n : t(\"PeopleTranslations:DisableUserButton\");\n } else {\n header = onlyOneUser\n ? isGuests\n ? t(\"EnableGuest\")",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ad-management.tsx",
-      "line_number": 189,
+      "line_number": 198,
       "context": "orientation=\"vertical\"\n spacing=\"8px\"\n options={[\n {\n id: \"disable\",\n label: t(\"Common:Disable\"),\n value: 0,\n dataTestId: \"ad_management_disable\",\n },\n {\n id: \"enable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 266,
+      "line_number": 275,
       "context": "value: \"true\",\n dataTestId: \"ai_services_management_enable\",\n },\n {\n id: \"disabled\",\n label: t(\"Common:Disable\"),\n value: \"false\",\n dataTestId: \"ai_services_management_disabled\",\n },\n ]}\n selected={type.toString()}",
       "module": "/packages/client"
     },
@@ -173,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -1,0 +1,29 @@
+{
+  "key_path": "AIPaywallEnableButton",
+  "content": "Top up AI balance — ${{price}}",
+  "content_en_sha1_hash": "f142b634c469d219a6ed49975b484fc9aa178e34",
+  "created_at": "2026-05-15T13:59:46.059Z",
+  "updated_at": "2026-05-15T14:04:31.640Z",
+  "comment": {
+    "text": "Button label for initiating an AI balance top-up, containing the variable `${{price}}` which represents the selected amount.",
+    "is_auto": true,
+    "updated_at": "2026-05-15T14:04:31.640Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallPage.tsx",
+      "line_number": 325,
+      "context": "label={\n waitingPhase === \"payment\"\n ? t(\"AIPaywallWaitingPayment\")\n : waitingPhase === \"topup\"\n ? t(\"AIPaywallWaitingTopUp\")\n : t(\"AIPaywallEnableButton\", { price: selectedAmount })\n }\n onClick={onEnableAI}\n scale\n isDisabled={isWaiting}\n testId=\"enable_ai_button\"",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

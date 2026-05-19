@@ -3,7 +3,7 @@
   "content": "Authenticator application configuration will be reset.",
   "content_en_sha1_hash": "ffbed1b3d21982dae035e132087888bf52daaf37",
   "created_at": "2025-05-19T21:30:53.322Z",
-  "updated_at": "2026-04-11T21:20:58.407Z",
+  "updated_at": "2026-05-15T14:00:06.693Z",
   "comment": {
     "text": "This is a sentence in a dialog body, informing the user that the authenticator application's configuration will be reset.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ResetApplicationDialog/index.js",
-      "line_number": 53,
+      "line_number": 62,
       "context": "return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"ResetApplicationTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"ResetApplicationDescription\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"ResetSendBtn\"\n label={t(\"Common:ResetApplication\")}",
       "module": "/packages/client"
     }

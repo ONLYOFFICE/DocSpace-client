@@ -17,7 +17,7 @@
   "DeleteItemsSharedNote": "Należy pamiętać, że jeśli zostały komuś udostępnione, staną się niedostępne.",
   "DeleteRoomConfirm": "Pokój <strong>{{roomName}}</strong> zostanie trwale usunięty. Wszystkie dane i uprawnienia użytkowników zostaną utracone.",
   "DeleteRooms": "Wybrane <strong>pokoje ({{count}})</strong> zostaną trwale usunięte. Wszystkie dane i dostęp użytkowników zostaną utracone.",
-  "DeleteRoomsTitle": "Czy usunąć ten pokój?",
+  "DeleteRoomsTitle": "Usunąć te pokoje?",
   "DeleteRoomTitle": "Usunąć ten pokój?",
   "DeleteRoomWarning": "Rozumiem konsekwencje i chcę usunąć pokój.",
   "DeleteTemplate": "Czy na pewno chcesz usunąć pokój szablonu <1>«{{templateName}}»</1>? Szablonu nie można będzie przywrócić.",

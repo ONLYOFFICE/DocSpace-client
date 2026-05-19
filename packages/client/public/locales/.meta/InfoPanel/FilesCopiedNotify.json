@@ -3,7 +3,7 @@
   "content": "Files copied.",
   "content_en_sha1_hash": "9bab25397cd16a5f1461f06dc1004411ecc74e27",
   "created_at": "2025-05-19T21:30:54.792Z",
-  "updated_at": "2026-04-11T21:13:32.469Z",
+  "updated_at": "2026-05-15T14:00:06.734Z",
   "comment": {
     "text": "This is a toast message displayed after a file or files have been successfully copied. It appears briefly to confirm the action.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 94,
+      "line_number": 103,
       "context": "}\n if (hasRelatedItems)\n return t(\"InfoPanel:FileCopiedCount\", {\n count,\n });\n return t(\"InfoPanel:FilesCopiedNotify\");\n case FeedActionKeys.FileDeleted:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 88,
+      "line_number": 97,
       "context": "}\n if (hasRelatedItems)\n return t(\"InfoPanel:FileCopiedCount\", {\n count,\n });\n return t(\"InfoPanel:FilesCopiedNotify\");\n case FeedActionKeys.FileDeleted:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });",
       "module": "/packages/client"
     }

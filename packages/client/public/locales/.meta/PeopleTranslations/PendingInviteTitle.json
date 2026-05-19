@@ -3,7 +3,7 @@
   "content": "Pending invite",
   "content_en_sha1_hash": "4c0cead4ed08558db964b020a52ab1b4c0661e30",
   "created_at": "2025-05-19T21:30:53.487Z",
-  "updated_at": "2026-04-11T21:20:10.210Z",
+  "updated_at": "2026-05-15T14:00:06.716Z",
   "comment": {
     "text": "This is a status label indicating that an invitation to join the workspace has been sent but not yet accepted. It appears in user lists and filters.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/contacts/utils.ts",
-      "line_number": 202,
+      "line_number": 211,
       "context": ") => {\n switch (item) {\n case \"active\":\n return t(\"Common:Active\");\n case \"pending\":\n return t(\"PeopleTranslations:PendingInviteTitle\");\n case \"disabled\":\n return t(\"PeopleTranslations:DisabledEmployeeStatus\");\n case \"all\":\n return t(\"Common:All\");\n default:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 123,
+      "line_number": 132,
       "context": "let label = \"\";\n \n switch (userSelection.status) {\n case EmployeeStatus.Pending:\n label = t(\"PeopleTranslations:PendingInviteTitle\");\n break;\n \n case EmployeeStatus.Disabled:\n label = t(\"PeopleTranslations:DisabledEmployeeStatus\");\n break;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 361,
+      "line_number": 370,
       "context": "switch (key) {\n case EmployeeStatus.Active:\n label = t(\"Common:Active\");\n break;\n case EmployeeStatus.Pending:\n label = t(\"PeopleTranslations:PendingInviteTitle\");\n break;\n case EmployeeStatus.Disabled:\n label = t(\"PeopleTranslations:DisabledEmployeeStatus\");\n break;\n default:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 361,
+      "line_number": 370,
       "context": "switch (key) {\n case EmployeeStatus.Active:\n label = t(\"Common:Active\");\n break;\n case EmployeeStatus.Pending:\n label = t(\"PeopleTranslations:PendingInviteTitle\");\n break;\n case EmployeeStatus.Disabled:\n label = t(\"PeopleTranslations:DisabledEmployeeStatus\");\n break;\n default:",
       "module": "/packages/client"
     }

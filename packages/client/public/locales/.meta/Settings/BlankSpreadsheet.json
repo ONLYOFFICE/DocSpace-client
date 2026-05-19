@@ -3,7 +3,7 @@
   "content": "Blank Spreadsheet",
   "content_en_sha1_hash": "a5da75f1bb925b30f2f1c319c42d7a11feb6f0e3",
   "created_at": "2026-02-18T14:56:25.425Z",
-  "updated_at": "2026-04-11T21:25:28.375Z",
+  "updated_at": "2026-05-15T14:00:06.902Z",
   "comment": {
     "text": "This is a label for a template option. It appears when a user is selecting a new spreadsheet template to create a blank spreadsheet.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/portal-settings/DefaultTemplatesStore.ts",
-      "line_number": 71,
+      "line_number": 80,
       "context": "getTitleByExt = (ext: string) => {\n switch (ext) {\n case \".docx\":\n return i18n.t(\"Settings:BlankDocument\");\n case \".xlsx\":\n return i18n.t(\"Settings:BlankSpreadsheet\");\n case \".pptx\":\n return i18n.t(\"Settings:BlankPresentation\");\n case \".pdf\":\n return i18n.t(\"Settings:BlankForm\");\n }",
       "module": "/packages/client"
     }

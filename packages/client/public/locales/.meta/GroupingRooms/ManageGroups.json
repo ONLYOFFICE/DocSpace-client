@@ -3,7 +3,7 @@
   "content": "Manage groups",
   "content_en_sha1_hash": "6dfa1bd335caf9c3ebe6f91b30002645fcc98302",
   "created_at": "2026-02-19T13:36:24.879Z",
-  "updated_at": "2026-04-11T21:11:31.429Z",
+  "updated_at": "2026-05-15T14:00:06.591Z",
   "comment": {
     "text": "This is a button label. It allows users to access a page or dialog where they can create, edit, or delete groups of rooms.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyRoomGroupContainer.tsx",
-      "line_number": 59,
+      "line_number": 68,
       "context": ");\n \n const options: EmptyViewOptionsType = [\n {\n key: \"manage-groups\",\n title: t(\"GroupingRooms:ManageGroups\"),\n icon: <PencilIcon width={12} height={12} />,\n onClick: onManageGroups,\n type: \"action\",\n },\n ];",
       "module": "/packages/client"
     }

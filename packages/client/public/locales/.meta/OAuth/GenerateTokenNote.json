@@ -3,7 +3,7 @@
   "content": "<strong>Note:</strong> If you generate a new token, the previous one will no longer be valid.",
   "content_en_sha1_hash": "f521006595ab27df60cadaa644588ccfca4ed058",
   "created_at": "2025-05-19T21:30:53.897Z",
-  "updated_at": "2026-04-11T21:18:49.974Z",
+  "updated_at": "2026-05-15T14:00:06.825Z",
   "comment": {
     "text": "This is a note displayed in a dialog box when a user is about to generate a new developer token, warning them that the old token will become invalid.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/GenerateDeveloperTokenDialog.tsx",
-      "line_number": 197,
+      "line_number": 206,
       "context": "</Text>\n <Text style={{ marginBottom: \"16px\" }}>\n {t(\"OAuth:GenerateTokenScope\")}\n </Text>{\" \"}\n <Text>\n <Trans t={t} i18nKey=\"GenerateTokenNote\" ns=\"OAuth\" />\n </Text>\n </>\n ) : (\n <>\n <Text style={{ marginBottom: \"16px\" }}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/GenerateDeveloperTokenDialog.tsx",
-      "line_number": 197,
+      "line_number": 206,
       "context": "</Text>\n <Text style={{ marginBottom: \"16px\" }}>\n {t(\"OAuth:GenerateTokenScope\")}\n </Text>{\" \"}\n <Text>\n <Trans t={t} i18nKey=\"GenerateTokenNote\" ns=\"OAuth\" />\n </Text>\n </>\n ) : (\n <>\n <Text style={{ marginBottom: \"16px\" }}>",
       "module": "/packages/client"
     }

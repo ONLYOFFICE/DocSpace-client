@@ -3,7 +3,7 @@
   "content": "This file is accessible via a shared link from its parent folder, but you can create a custom external link with specific permissions.",
   "content_en_sha1_hash": "21b1fc46186eef68a1016e49be49251201770088",
   "created_at": "2025-08-26T11:15:03.874Z",
-  "updated_at": "2026-04-11T20:52:52.223Z",
+  "updated_at": "2026-05-15T14:00:06.938Z",
   "comment": {
     "text": "This is the body text of an informational message displayed in the Share Info Bar for a file. It informs the user that the file is accessible through a shared link of its parent folder, but a custom external link can still be created for it.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/sub-components/ShareInfoBar.tsx",
-      "line_number": 60,
+      "line_number": 69,
       "context": "headerText: isFolder\n ? t(\"Common:FolderAvailableViaParentFolderLinkTitle\")\n : t(\"Common:FileAvailableViaParentFolderLinkTitle\"),\n bodyText: isFolder\n ? t(\"Common:FolderAvailableViaParentFolderLinkDescription\")\n : t(\"Common:FileAvailableViaParentFolderLinkDescription\"),\n iconName: FolderIcon,\n };\n }\n \n return {",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

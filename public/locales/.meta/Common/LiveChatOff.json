@@ -3,7 +3,7 @@
   "content": "Live chat was successfully disconnected",
   "content_en_sha1_hash": "ae2a6017f6a674929d0c42e27c69de090c46cd8b",
   "created_at": "2025-05-19T21:30:46.244Z",
-  "updated_at": "2026-04-11T20:49:24.474Z",
+  "updated_at": "2026-05-15T14:00:06.896Z",
   "comment": {
     "text": "This is a toast message confirming that the live chat widget has been successfully hidden or disconnected.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 227,
+      "line_number": 236,
       "context": "this.setStateLiveChat(isShow);\n \n zendeskAPI.addChanges(\"webWidget\", isShow ? \"show\" : \"hide\");\n \n toastr.success(isShow ? t(\"LiveChatOn\") : t(\"LiveChatOff\"));\n };\n \n onSupportClick = () => {\n const supportUrl = this.settingsStore.feedbackAndSupportUrl;",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

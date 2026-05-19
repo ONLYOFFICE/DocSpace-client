@@ -3,7 +3,7 @@
   "content": "Inviter",
   "content_en_sha1_hash": "3c7ec332618c13ff995265101cc14ca416ddf331",
   "created_at": "2025-05-19T21:30:46.002Z",
-  "updated_at": "2026-04-11T20:50:31.617Z",
+  "updated_at": "2026-05-15T14:00:06.745Z",
   "comment": {
     "text": "This is a label for a filter option and a tooltip. It identifies the user who invited another user to the DocSpace.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 280,
+      "line_number": 289,
       "context": "{isGuests && userSelection.createdBy?.displayName ? (\n <>\n <Text\n tooltipFitToContent\n className={styles.infoField}\n title={t(\"Common:Inviter\")}\n >\n {t(\"Common:Inviter\")}\n </Text>\n <Text\n tooltipFitToContent",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 280,
+      "line_number": 289,
       "context": "{isGuests && userSelection.createdBy?.displayName ? (\n <>\n <Text\n tooltipFitToContent\n className={styles.infoField}\n title={t(\"Common:Inviter\")}\n >\n {t(\"Common:Inviter\")}\n </Text>\n <Text\n tooltipFitToContent",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 651,
+      "line_number": 660,
       "context": "const inviterItems = [\n {\n key: FilterGroups.filterInviter,\n group: FilterGroups.filterInviter,\n label: t(\"Common:Inviter\"),\n isHeader: true,\n },\n {\n id: \"filter_group-without-group\",\n key: FilterKeys.me,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 651,
+      "line_number": 660,
       "context": "const inviterItems = [\n {\n key: FilterGroups.filterInviter,\n group: FilterGroups.filterInviter,\n label: t(\"Common:Inviter\"),\n isHeader: true,\n },\n {\n id: \"filter_group-without-group\",\n key: FilterKeys.me,",
       "module": "/packages/client"
     }
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

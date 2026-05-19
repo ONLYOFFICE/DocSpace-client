@@ -3,7 +3,7 @@
   "content": "Your additional storage subscription has been deactivated due to non-payment",
   "content_en_sha1_hash": "d95e5887fc80daff26ead869b2eb0182bf416e2c",
   "created_at": "2026-04-10T13:53:43.376Z",
-  "updated_at": "2026-04-13T14:59:06.010Z",
+  "updated_at": "2026-05-15T14:00:06.992Z",
   "comment": {
     "text": "This is an error message displayed in a dialog box. It informs the user that their additional storage subscription has been deactivated because of a missed payment.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/dialogs/StorageTariffDeactivated.tsx",
-      "line_number": 107,
+      "line_number": 116,
       "context": "<Text fontSize=\"21px\" isBold>\n {t(\"Warning\")}\n </Text>\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontWeight={600}>{t(\"StorageTariffDeactivated\")}</Text>\n <br />\n <Text as=\"span\">\n <CommonTrans\n i18nKey=\"PreviousPlan\"",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

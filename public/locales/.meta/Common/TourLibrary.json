@@ -3,7 +3,7 @@
   "content": "Browse ready-made form templates. Pick a template to quickly create a new form without starting from scratch.",
   "content_en_sha1_hash": "df9fd1d4ad5d94192e9157b922ee24c897722f3e",
   "created_at": "2026-03-31T15:18:26.797Z",
-  "updated_at": "2026-04-23T17:24:02.164Z",
+  "updated_at": "2026-05-15T14:00:06.984Z",
   "comment": {
     "text": "This is the content of a tooltip that appears during a product tour. It describes the \"Library\" section, which allows users to browse and select pre-made form templates to create new forms quickly.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
-      "line_number": 304,
+      "line_number": 313,
       "context": "showLibrary &&\n navSectionStep(\n \"library\",\n t(\"Common:Library\"),\n t(\n \"Common:TourLibrary\",\n \"Browse ready-made form templates. Pick a template to quickly create a new form without starting from scratch.\",\n ),\n showMenu,\n callbacks,\n ),",
       "module": "/packages/sdk"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Logo for {{diagramViewer}}",
   "content_en_sha1_hash": "f6a6697f656c59d4a9d875fbb7376590e8dc156d",
   "created_at": "2025-08-11T10:23:37.743Z",
-  "updated_at": "2026-04-11T20:49:09.677Z",
+  "updated_at": "2026-05-15T14:00:06.953Z",
   "comment": {
     "text": "This is a label for an image upload field, indicating where the uploaded logo will be displayed. The `{{diagramViewer}}` variable will be replaced with the name of the diagram viewer application.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 565,
+      "line_number": 574,
       "context": "<Text\n fontSize=\"15px\"\n fontWeight=\"600\"\n className=\"settings_unavailable\"\n >\n {t(\"LogoForViewer\", { diagramViewer: t(\"Common:DiagramViewer\") })} (\n {logoUrls[14].size.width}x{logoUrls[14].size.height})\n </Text>\n <div className={styles.logosWrapper}>\n <Logo\n name={logoUrls[14].name}",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

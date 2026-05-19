@@ -3,7 +3,7 @@
   "content": "Plugin disabled",
   "content_en_sha1_hash": "8e970c1c58b98cecd2d9a7629625b1d70321a419",
   "created_at": "2025-05-19T21:30:47.380Z",
-  "updated_at": "2026-04-12T04:25:06.680Z",
+  "updated_at": "2026-05-15T14:00:06.896Z",
   "comment": {
     "text": "This is a toast message that appears when a user successfully disables a plugin.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/PluginStore.ts",
-      "line_number": 708,
+      "line_number": 717,
       "context": "if (status) {\n if (t) toastr.success(t(\"Common:PluginEnabled\"));\n this.activatePlugin(name);\n } else {\n if (t) toastr.success(t(\"Common:PluginDisabled\"));\n this.deactivatePlugin(name);\n }\n \n return plugin;\n } catch (e) {",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

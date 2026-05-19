@@ -3,7 +3,7 @@
   "content": "Do not share your API key with others or expose it in the browser or other client-side code.",
   "content_en_sha1_hash": "0f6d896cc685ae0a76c5eb9007fc9fc99f03c8da",
   "created_at": "2025-05-19T21:30:50.552Z",
-  "updated_at": "2026-04-11T21:25:39.560Z",
+  "updated_at": "2026-05-15T14:00:06.791Z",
   "comment": {
     "text": "This is a descriptive text displayed on the API Keys settings page, warning users about the security implications of sharing their API keys.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
-      "line_number": 170,
+      "line_number": 179,
       "context": "className={classNames(\n styles.apiKeysText,\n styles.apiKeysDescriptionText,\n )}\n >\n {t(\"Settings:ApiKeysShareDescription\")}\n </Text>\n \n <Text\n className={classNames(styles.apiKeysText, styles.apiKeysUsageText)}\n >",
       "module": "/packages/client"
     }

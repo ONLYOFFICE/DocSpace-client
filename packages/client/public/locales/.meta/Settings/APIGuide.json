@@ -3,7 +3,7 @@
   "content": "API Guide",
   "content_en_sha1_hash": "95bf0e870e2f1145571690754754b56cb523c59b",
   "created_at": "2025-05-19T21:30:50.490Z",
-  "updated_at": "2026-04-11T21:25:47.744Z",
+  "updated_at": "2026-05-15T14:00:06.791Z",
   "comment": {
     "text": "This is the label for a link that opens the API Guide in a new browser tab.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
-      "line_number": 187,
+      "line_number": 196,
       "context": "fontSize=\"13px\"\n fontWeight={600}\n onClick={() => window.open(apiKeysUrl, \"_blank\")}\n dataTestId=\"api_guide_link\"\n >\n {t(\"Settings:APIGuide\")}\n </Link>\n ) : null}\n </div>\n <div>\n {error ? (",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Provide access to the folder and set the permission levels.",
   "content_en_sha1_hash": "85cdb69a150659c5463be79cc84498e6c5fe9ad6",
   "created_at": "2025-08-26T11:15:01.383Z",
-  "updated_at": "2026-04-12T20:42:51.701Z",
+  "updated_at": "2026-05-15T14:00:06.938Z",
   "comment": {
     "text": "This is a descriptive sentence appearing in an information bar when sharing a folder. It explains that users can grant access and define permission levels for the folder.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/sub-components/ShareInfoBar.tsx",
-      "line_number": 70,
+      "line_number": 79,
       "context": "return {\n headerText: isFolder\n ? t(\"Common:ShareFolder\")\n : t(\"Common:ShareDocument\"),\n bodyText: isFolder\n ? t(\"Common:ShareFolderDescription\")\n : t(\"Common:ShareDocumentDescription\"),\n iconName: InfoIcon,\n onClose: () => setVisibleBar(false),\n };\n }, [parentShared, isFolder, t, setVisibleBar]);",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

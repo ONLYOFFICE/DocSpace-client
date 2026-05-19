@@ -3,7 +3,7 @@
   "content": "Share a room",
   "content_en_sha1_hash": "5eb174893a160f631d6a1b98d5edac2d11bea95c",
   "created_at": "2025-05-19T21:30:56.536Z",
-  "updated_at": "2026-04-11T21:06:39.135Z",
+  "updated_at": "2026-05-15T14:00:06.598Z",
   "comment": {
     "text": "This is the title for an option to share a room, appearing within an empty view container.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 322,
+      "line_number": 331,
       "context": ");\n \n const inviteUser = isTemplateFolder ? templateAccess : inviteUserOption;\n \n const shareFillingRoom = {\n title: t(\"EmptyView:ShareOptionTitle\"),\n description: t(\"EmptyView:ShareOptionDescription\"),\n icon: <SharedIcon />,\n key: \"share-room\",\n onClick: actions.createAndCopySharedLink,\n disabled: !security?.EditAccess || isFrame,",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

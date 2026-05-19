@@ -3,7 +3,7 @@
   "content": "Change Room Owner",
   "content_en_sha1_hash": "cad0e5b2fd954532208a53537047b60125201513",
   "created_at": "2026-03-31T15:18:39.227Z",
-  "updated_at": "2026-05-08T13:10:45.671Z",
+  "updated_at": "2026-05-15T14:00:06.889Z",
   "comment": {
     "text": "This is a button label that, when clicked, allows the current room owner to transfer ownership of the room to another user.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2552,
+      "line_number": 2561,
       "context": "disabled: false,\n },\n {\n id: \"option_change-room-owner\",\n key: \"change-room-owner\",\n label: t(\"Files:ChangeRoomOwner\"),\n icon: ReconnectSvgUrl,\n onClick: this.onChangeRoomOwner,\n disabled: isAIAgent,\n },\n {",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

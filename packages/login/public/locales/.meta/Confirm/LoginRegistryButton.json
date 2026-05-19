@@ -3,7 +3,7 @@
   "content": "Join",
   "content_en_sha1_hash": "e0d73143de80d17e82de2e017ac156ca3b9c4e01",
   "created_at": "2025-05-19T21:30:57.370Z",
-  "updated_at": "2026-04-11T21:30:13.392Z",
+  "updated_at": "2026-05-15T14:00:06.909Z",
   "comment": {
     "text": "This is the label for a button that allows a user to complete the registration process and join the platform.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/Activation/page.client.tsx",
-      "line_number": 292,
+      "line_number": 301,
       "context": "<Button\n scale\n className=\"confirm-button\"\n primary\n size={ButtonSize.medium}\n label={t(\"LoginRegistryButton\")}\n tabIndex={5}\n onClick={onSubmit}\n isDisabled={isLoading}\n testId=\"signup_button\"\n />",
       "module": "/packages/login"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.470988Z"
+      "approved_at": "2026-05-15T15:04:54.629887Z"
     },
     "si": {
       "ai_translated": false,

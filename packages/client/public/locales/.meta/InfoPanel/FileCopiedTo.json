@@ -3,7 +3,7 @@
   "content": "Files copied to «{{folderTitle}}»",
   "content_en_sha1_hash": "efc9d1eb35c4eee0ddc64e6c32501869b672aac8",
   "created_at": "2025-05-19T21:30:54.796Z",
-  "updated_at": "2026-04-11T21:13:40.527Z",
+  "updated_at": "2026-05-15T14:00:06.734Z",
   "comment": {
     "text": "This is a toast message that appears after a file has been successfully copied. `{{folderTitle}}` is the name of the destination folder.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 86,
+      "line_number": 95,
       "context": "return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:\n if (\"fromParentTitle\" in feed.data && feed.data.fromParentTitle) {\n return t(\"InfoPanel:FileCopiedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"InfoPanel:FileCopiedCount\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 80,
+      "line_number": 89,
       "context": "return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:\n if (feed.data.fromParentTitle) {\n return t(\"InfoPanel:FileCopiedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"InfoPanel:FileCopiedCount\", {",
       "module": "/packages/client"
     }

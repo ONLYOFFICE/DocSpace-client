@@ -3,7 +3,7 @@
   "content": "Viewing, editing, filling, commenting.",
   "content_en_sha1_hash": "2f4698df4bc2ecd3fe34b86347039a84e03d9045",
   "created_at": "2025-09-29T18:22:03.303Z",
-  "updated_at": "2026-04-11T20:54:24.761Z",
+  "updated_at": "2026-05-15T14:00:06.936Z",
   "comment": {
     "text": "This is a short description of permissions for a PDF form. It appears in a share dialog, indicating that the user can view, edit, fill, and comment on the form.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 736,
+      "line_number": 745,
       "context": "{\n fileType: FileType.PDF,\n access: ShareAccessRights.Editing,\n isForm: true,\n },\n () => t(\"Common:EditingDescriptionPDFForm\"),\n )\n .with(\n {\n fileType: FileType.PDF,\n access: ShareAccessRights.FormFilling,",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

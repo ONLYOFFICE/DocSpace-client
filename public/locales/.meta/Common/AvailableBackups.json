@@ -3,7 +3,7 @@
   "content": "Available backups",
   "content_en_sha1_hash": "5c9223bba6d463bb9dd117c8f3a534fa5dbb4a24",
   "created_at": "2026-04-10T13:53:41.932Z",
-  "updated_at": "2026-05-08T13:10:45.735Z",
+  "updated_at": "2026-05-15T14:00:07.007Z",
   "comment": {
     "text": "This is a label indicating the number of backups available to the user. It appears as a short label in a card on the backup page.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
-      "line_number": 183,
+      "line_number": 197,
       "context": "<div className={styles.backupsCard}>\n <div className={styles.backupsHeader}>\n <Text fontWeight=\"700\" fontSize=\"14px\">\n {isFreeTariff && !isBackupServiceOn\n ? t(\"PaidBackupDisabled\")\n : t(\"AvailableBackups\")}\n </Text>\n </div>\n \n {!isFreeTariff ? (\n <div className={styles.freeBackupsAmountContainer}>",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

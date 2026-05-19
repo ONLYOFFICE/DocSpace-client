@@ -3,7 +3,7 @@
   "content": "Internal server error",
   "content_en_sha1_hash": "fbb5b2a6d5252a4f6e3d33341268fab223c77c30",
   "created_at": "2025-05-19T21:30:57.305Z",
-  "updated_at": "2026-04-11T21:30:45.234Z",
+  "updated_at": "2026-05-15T14:00:06.923Z",
   "comment": {
     "text": "This is an error message displayed to the user when an unexpected issue occurs on the server during an SSO login attempt.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 101,
+      "line_number": 110,
       "context": "case \"SsoSettingsCantCreateUser\":\n return t(\"Errors:SsoSettingsCantCreateUser\");\n case \"SsoSettingsUserTerminated\":\n return t(\"Errors:SsoSettingsUserTerminated\");\n case \"SsoError\":\n return t(\"Errors:SsoError\");\n case \"SsoAuthFailed\":\n return t(\"Errors:SsoAuthFailed\");\n case \"SsoAttributesNotFound\":\n return t(\"Errors:SsoAttributesNotFound\");\n case \"QuotaPaidUserLimitError\":",
       "module": "/packages/login"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.470988Z"
+      "approved_at": "2026-05-15T15:04:54.629887Z"
     },
     "si": {
       "ai_translated": false,

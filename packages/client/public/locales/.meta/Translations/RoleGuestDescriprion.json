@@ -3,7 +3,7 @@
   "content": "Guests can access the rooms they have been invited to, as well as create and edit documents if they have been assigned the appropriate roles in the room.",
   "content_en_sha1_hash": "b91549ed2598a81dcae1328a0ba18a24e2e5e876",
   "created_at": "2025-05-19T21:30:50.001Z",
-  "updated_at": "2026-04-11T21:48:29.436Z",
+  "updated_at": "2026-05-15T14:00:06.969Z",
   "comment": {
     "text": "This is a description of the \"Guest\" user role, displayed in a tooltip or information panel. It explains the permissions guests have within rooms.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/getUserTypeDescription.tsx",
-      "line_number": 90,
+      "line_number": 99,
       "context": "aiAgent: t(\"Common:AIAgent\"),\n }}\n />\n );\n \n return t(\"Translations:RoleGuestDescriprion\");\n };",
       "module": "/packages/shared"
     }

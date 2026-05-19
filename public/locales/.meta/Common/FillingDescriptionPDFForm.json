@@ -3,7 +3,7 @@
   "content": "Viewing, filling.",
   "content_en_sha1_hash": "4c0c1fb84d1dd5019ebf978003edb0a20e04ce98",
   "created_at": "2025-09-29T18:22:04.277Z",
-  "updated_at": "2026-04-11T20:52:31.949Z",
+  "updated_at": "2026-05-15T14:00:06.936Z",
   "comment": {
     "text": "This text describes the permissions for a PDF form. It appears as a short label indicating that the user can view and fill out the form.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 744,
+      "line_number": 753,
       "context": "{\n fileType: FileType.PDF,\n access: ShareAccessRights.FormFilling,\n isForm: true,\n },\n () => t(\"Common:FillingDescriptionPDFForm\"),\n )\n .with(\n {\n fileType: FileType.PDF,\n access: ShareAccessRights.DenyAccess,",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Top up wallet",
   "content_en_sha1_hash": "155fb560e348142a6331187a877f862f8cc8df81",
   "created_at": "2026-04-10T13:53:43.673Z",
-  "updated_at": "2026-05-08T13:10:45.740Z",
+  "updated_at": "2026-05-15T14:00:07.018Z",
   "comment": {
     "text": "Dialog title for a modal window where users can add funds to their wallet.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/top-up-balance/TopUpModal.tsx",
-      "line_number": 112,
+      "line_number": 121,
       "context": "onClose={() => onClose(false)}\n displayType={ModalDialogType.aside}\n {...headerProps}\n withBodyScroll\n >\n <ModalDialog.Header>{t(\"TopUpWallet\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.modalBody}>\n <WalletInfo balance={balanceValue} />\n <PaymentMethod\n walletCustomerEmail={walletCustomerEmail!}",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

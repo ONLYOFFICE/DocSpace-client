@@ -207,7 +207,6 @@
   "TooltipElementsCopyMessage": "Cópia {{element}} elementos",
   "TooltipElementsMoveMessage": "Mover {{element}} elementos",
   "TrashAutoDeleteWarning": "Os itens em {{sectionName}} são excluídos automaticamente após 30 dias.",
-  "TrashFunctionalityDescription": "Todos os arquivos excluídos serão movidos para '{{sectionName}}'. Restaure arquivos excluídos por engano ou exclua-os permanentemente. Os arquivos em '{{sectionName}}' serão excluídos automaticamente após 30 dias. Observe que os arquivos excluídos de '{{sectionName}}' não poderão mais ser restaurados.",
   "UnarchivedRoomAction": "A sala '{{name}}' foi desarquivada.",
   "UnarchivedRoomsAction": "As salas são desarquivadas.",
   "Unpin": "Desafixar",

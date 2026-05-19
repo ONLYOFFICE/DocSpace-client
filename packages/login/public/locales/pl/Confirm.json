@@ -38,6 +38,7 @@
   "TermsAndConditions": "Kontynuując, użytkownik potwierdza, że rozumie i wyraża zgodę na warunki naszego <1>Regulaminu użytkowania</1> oraz <2>Polityki prywatności</2>.",
   "TfaSubTitle": "Postępuj zgodnie z prostymi krokami, aby kontynuować pracę w tym {{productName}}:",
   "TfaTitle": "Uwierzytelnianie dwuskładnikowe włączone dla bezpiecznego dostępu",
+  "UserAlreadyInvited": "Zostałeś już zaproszony. Prosimy o dokończenie rejestracji przy użyciu linku z wiadomości e-mail.",
   "VerifyConnection": "Zweryfikuj połączenie",
   "VerifyConnectionDescription": "Wprowadź 6-cyfrowy kod wygenerowany przez Twoją aplikację uwierzytelniającą do pola poniżej, aby zakończyć konfigurację."
 }

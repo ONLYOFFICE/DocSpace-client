@@ -71,8 +71,12 @@ export default function useContextMenuModel({
   const { openFolder, copyFolderLink } = useFolderActions({ t });
   const { openFile, copyFileLink } = useFilesActions({ t });
   const { downloadAction, downloadAsAction } = useDownloadActions();
-  const { markAsFavorite, removeFromFavorites, removeFromRecent } =
-    useFavoritesActions({ t });
+  const {
+    markAsFavorite,
+    removeFromFavorites,
+    removeFromRecent,
+    removeFromSharedWithMe,
+  } = useFavoritesActions({ t });
 
   const getSelectItem = useCallback(
     (i: TFileItem | TFolderItem) => {
@@ -265,6 +269,20 @@ export default function useContextMenuModel({
       };
     },
     [t, removeFromRecent],
+  );
+
+  const getRemoveFromSharedWithMeItem = useCallback(
+    (i: TFileItem | TFolderItem) => {
+      return {
+        id: "menu-remove-from-shared-with-me",
+        key: "remove-from-shared-with-me",
+        label: t("Common:RemoveFromList"),
+        icon: RemoveOutlineSvgUrl,
+        onClick: () => removeFromSharedWithMe(i),
+        disabled: false,
+      };
+    },
+    [t, removeFromSharedWithMe],
   );
 
   const getShareItem = useCallback(
@@ -636,6 +654,11 @@ export default function useContextMenuModel({
         favoritesGroup.push(getRemoveFromRecentItem(item as TFileItem));
 
       if (
+        contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.removeFromSharedWithMe)
+      )
+        deleteGroup.push(getRemoveFromSharedWithMeItem(item!));
+
+      if (
         contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.delete) ||
         contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.deletePermanently)
       )
@@ -671,6 +694,7 @@ export default function useContextMenuModel({
       getMarkAsFavoriteItem,
       getRemoveFromFavoritesItem,
       getRemoveFromRecentItem,
+      getRemoveFromSharedWithMeItem,
       getShareItem,
       getCopyItem,
       getDuplicateItem,

@@ -207,7 +207,6 @@
   "TooltipElementsCopyMessage": "Kopiraj {{element}} elemente",
   "TooltipElementsMoveMessage": "Pomeri {{element}} elemente",
   "TrashAutoDeleteWarning": "Stavke u {{sectionName}} se automatski brišu nakon 30 dana.",
-  "TrashFunctionalityDescription": "Svi obrisani fajlovi se premeštaju u '{{sectionName}}'. Vrati fajlove obrisane greškom ili ih trajno obriši. Fajlovi u '{{sectionName}}' se automatski brišu nakon 30 dana. Imaj na umu da fajlovi obrisani iz '{{sectionName}}' više ne mogu biti vraćeni.",
   "UnarchivedRoomAction": "Soba '{{name}}' je nearhivirana.",
   "UnarchivedRoomsAction": "Sobe su nearhivirane.",
   "Unpin": "Otkači",

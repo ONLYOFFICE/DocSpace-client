@@ -30,7 +30,10 @@ import { useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
-import type { NavMenuGroup, NavMenuItem } from "@docspace/ui-kit/components/nav-menu";
+import type {
+  NavMenuGroup,
+  NavMenuItem,
+} from "@docspace/ui-kit/components/nav-menu";
 import { DeviceType } from "@docspace/shared/enums";
 import type { TUser } from "@docspace/shared/api/people/types";
 
@@ -40,6 +43,7 @@ import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
 import CatalogAiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
 import CatalogFavoritesReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.favorites.react.svg?url";
+import CatalogSharedReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.shared.outline.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 import CatalogSettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import CatalogRestoreReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-restore.svg?url";
@@ -61,6 +65,7 @@ const PATH_TO_PARENT_ID: Record<string, string> = {
 };
 
 const AI_FILES_SECTION_TO_ID: Record<string, string> = {
+  "shared-with-me": "ai-files-shared-with-me",
   recent: "ai-files-recent",
   favorites: "ai-files-favorites",
   trash: "ai-files-trash",
@@ -70,6 +75,7 @@ const AI_FILES_SECTION_TO_ID: Record<string, string> = {
 const AI_FORMS_SECTION_TO_ID: Record<string, string> = {
   "in-progress": "ai-forms-in-progress",
   "completed-forms": "ai-forms-completed",
+  library: "ai-forms-library",
   settings: "ai-forms-settings",
 };
 
@@ -137,6 +143,12 @@ const NewArticle = ({
       children: aiFilesEnabled
         ? [
             {
+              id: "ai-files-shared-with-me",
+              label: t("Common:SharedWithMe"),
+              icon: CatalogSharedReactSvgUrl,
+              onClick: () => navigate("/ai-files?section=shared-with-me"),
+            },
+            {
               id: "ai-files-recent",
               label: t("Common:Recent"),
               icon: CatalogRestoreReactSvgUrl,
@@ -200,6 +212,12 @@ const NewArticle = ({
               label: t("Common:CompletedForms"),
               icon: FormGalleryReactSvgUrl,
               onClick: () => navigate("/ai-forms?section=completed-forms"),
+            },
+            {
+              id: "ai-forms-library",
+              label: t("Common:Library"),
+              icon: FormGalleryReactSvgUrl,
+              onClick: () => navigate("/ai-forms?section=library"),
             },
             {
               id: "ai-forms-settings",
@@ -301,3 +319,4 @@ const NewArticleConnected = inject<TStore>(
 )(observer(NewArticle));
 
 export default NewArticleConnected;
+

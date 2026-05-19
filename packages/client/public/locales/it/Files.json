@@ -207,7 +207,6 @@
   "TooltipElementsCopyMessage": "Copia {{element}} elementi",
   "TooltipElementsMoveMessage": "Sposta {{element}} elementi",
   "TrashAutoDeleteWarning": "Gli elementi in {{sectionName}} vengono eliminati automaticamente dopo 30 giorni.",
-  "TrashFunctionalityDescription": "Tutti i file eliminati vengono spostati in '{{sectionName}}'. Ripristina i file eliminati per errore o eliminali definitivamente. I file in '{{sectionName}}' vengono eliminati automaticamente dopo 30 giorni. Nota: i file eliminati da '{{sectionName}}' non possono essere recuperati.",
   "UnarchivedRoomAction": "La stanza '{{name}}' è stata rimossa dall'archivio.",
   "UnarchivedRoomsAction": "Le stanze non sono state archiviate.",
   "Unpin": "Rimuovi pin",

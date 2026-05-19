@@ -207,7 +207,6 @@
   "TooltipElementsCopyMessage": "Պատճենել {{element}} տարրեր",
   "TooltipElementsMoveMessage": "Տեղափոխել {{element}} տարրեր",
   "TrashAutoDeleteWarning": "{{sectionName}} բաժնի տարրերը ավտոմատ ջնջվում են 30 օրից։",
-  "TrashFunctionalityDescription": "Բոլոր ջնջված ֆայլերը տեղափոխվում են «{{sectionName}}»։ Վերականգնեք սխալմամբ ջնջված ֆայլերը կամ ջնջեք դրանք վերջնականապես։ «{{sectionName}}»-ում գտնվող ֆայլերը ավտոմատ ջնջվում են 30 օրից։ Խնդրում ենք նկատի ունենալ, որ «{{sectionName}}»-ից ջնջված ֆայլերն այլևս հնարավոր չէ վերականգնել։",
   "UnarchivedRoomAction": "'{{name}}' սենյակը հանված է արխիվից:",
   "UnarchivedRoomsAction": "Սենյակները արխիվացված են։",
   "Unpin": "Ապամրացնել",

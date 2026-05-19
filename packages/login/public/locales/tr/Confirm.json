@@ -38,6 +38,7 @@
   "TermsAndConditions": "Devam ederek, <1>Şartlar ve koşullar</1> ve <2>Gizlilik bildirimimizi</2> anlıyor ve kabul ediyor olduğunuzu beyan etmiş olursunuz.",
   "TfaSubTitle": "Bu {{productName}}'de çalışmaya devam etmek için basit adımları izleyin:",
   "TfaTitle": "İki faktörlü kimlik doğrulama, güvenli erişim için etkinleştirildi",
+  "UserAlreadyInvited": "Zaten davet edildiniz. Lütfen e-postadaki bağlantıyı kullanarak kaydınızı tamamlayın.",
   "VerifyConnection": "Bağlantıyı doğrula",
   "VerifyConnectionDescription": "Aşağıdaki alana, kimlik doğrulama uygulamanız tarafından oluşturulan 6 haneli kodu girerek kurulumu tamamlayın."
 }

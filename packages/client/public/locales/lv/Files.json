@@ -207,7 +207,6 @@
   "TooltipElementsCopyMessage": "Kopēt {{element}} elementus",
   "TooltipElementsMoveMessage": "Pārvietot {{element}} elementus",
   "TrashAutoDeleteWarning": "{{sectionName}} sadaļā esoši vienumi tiek automātiski dzēsti pēc 30 dienām.",
-  "TrashFunctionalityDescription": "Visi dzēstie faili tiek pārvietoti uz '{{sectionName}}'. Atjaunojiet nejauši dzēstos failus vai izdzēsiet tos pavisam. Faili '{{sectionName}}' tiek automātiski dzēsti pēc 30 dienām. Lūdzu, ņemiet vērā, ka faili, kas izdzēsti no '{{sectionName}}', vairs nevar tikt atjaunoti.",
   "UnarchivedRoomAction": "Telpa '{{name}}' nav arhivēta.",
   "UnarchivedRoomsAction": "Telpas nav arhivētas.",
   "Unpin": "Atspraust",

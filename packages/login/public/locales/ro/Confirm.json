@@ -38,6 +38,7 @@
   "TermsAndConditions": "Dacă continuați, acceptați că sunteți de acord cu <1>Termenii si conditiile de utilizare</1> și <2>Politica de confidentialitate</2> a companiei.",
   "TfaSubTitle": "Urmați aceste pașii simpli pentru a continua să lucrați în acest {{productName}}:",
   "TfaTitle": "Autentificarea cu doi factori este activată pentru accesul securizat",
+  "UserAlreadyInvited": "Ați fost deja invitat. Vă rugăm să finalizați înregistrarea folosind linkul din e-mail.",
   "VerifyConnection": "Verificați conexiunea",
   "VerifyConnectionDescription": "Introduceți codul din 6 cifre generat de aplicația dvs de autentificare în câmpul de mai jos pentru a finaliza configurarea."
 }

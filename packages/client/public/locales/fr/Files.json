@@ -207,7 +207,6 @@
   "TooltipElementsCopyMessage": "Copier {{element}} des éléments",
   "TooltipElementsMoveMessage": "Déplacer les éléments {{element}}",
   "TrashAutoDeleteWarning": "Les éléments dans {{sectionName}} sont automatiquement supprimés après 30 jours.",
-  "TrashFunctionalityDescription": "Tous les fichiers supprimés sont déplacés vers « {{sectionName}} ». Restaurez les fichiers supprimés par erreur ou supprimez-les définitivement. Les fichiers dans « {{sectionName}} » sont automatiquement supprimés après 30 jours. Veuillez noter que les fichiers supprimés de « {{sectionName}} » ne peuvent plus être restaurés.",
   "UnarchivedRoomAction": "La salle '{{name}}' n'est plus archivée.",
   "UnarchivedRoomsAction": "Les salles ne sont plus archivées.",
   "Unpin": "Désépingler",

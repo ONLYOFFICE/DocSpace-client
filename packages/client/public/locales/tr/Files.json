@@ -207,7 +207,6 @@
   "TooltipElementsCopyMessage": "{{element}} öğelerini kopyala",
   "TooltipElementsMoveMessage": "{{element}} öğelerini taşı",
   "TrashAutoDeleteWarning": "{{sectionName}}'deki öğeler 30 gün sonra otomatik olarak silinir.",
-  "TrashFunctionalityDescription": "Tüm silinen dosyalar '{{sectionName}}' bölümüne taşınır. Yanlışlıkla silinen dosyaları geri yükleyin veya kalıcı olarak silin. '{{sectionName}}' bölümündeki dosyalar 30 gün sonra otomatik olarak silinir. Lütfen, '{{sectionName}}' bölümünden silinen dosyaların artık geri getirilemeyeceğini unutmayın.",
   "UnarchivedRoomAction": "'{{name}}' odası arşivden çıkarıldı.",
   "UnarchivedRoomsAction": "Odalar arşivden çıkarıldı.",
   "Unpin": "Sabitlemeyi kaldır",

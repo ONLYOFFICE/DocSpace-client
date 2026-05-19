@@ -207,7 +207,6 @@
   "TooltipElementsCopyMessage": "{{element}} elementlərini köçürmək",
   "TooltipElementsMoveMessage": "{{element}} elementinin yerdəyişməsi",
   "TrashAutoDeleteWarning": "{{sectionName}} bölməsinin əşyaları 30 gün sonra avtomatik olaraq silinir.",
-  "TrashFunctionalityDescription": "Silinmiş bütün fayllar '{{sectionName}}' bölməsinə köçürülür. Yanlış silinmiş faylları bərpa edin və ya onları daimi olaraq silin. '{{sectionName}}' bölməsindəki fayllar 30 gün sonra avtomatik olaraq silinir. Xahiş edirik, '{{sectionName}}' bölməsindən silinən faylları daha sonra bərpa etmək mümkün deyil.",
   "UnarchivedRoomAction": "'{{name}}' otağı arxivdən çıxarıldı.",
   "UnarchivedRoomsAction": "Otaqlar arxivdən çıxarıldı.",
   "Unpin": "Sabitləmədən çıxarın",

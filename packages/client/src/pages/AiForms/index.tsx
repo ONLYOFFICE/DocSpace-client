@@ -36,6 +36,7 @@ import type { AiFormsSettings } from "SRC_DIR/pages/Dashboard/utils";
 const SECTION_TO_PATH: Record<string, string> = {
   "in-progress": "/sdk/forms/in-progress",
   "completed-forms": "/sdk/forms/completed-forms",
+  library: "/sdk/forms/library",
   settings: "/sdk/forms/settings",
 };
 

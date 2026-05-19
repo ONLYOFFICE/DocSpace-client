@@ -86,7 +86,13 @@ test("link invite email render", async ({ page, baseUrl }) => {
   ]);
 });
 
-test("link invite login render", async ({ page, baseUrl }) => {
+test("link invite login render", async ({
+  page,
+  baseUrl,
+  port,
+  clientRequestInterceptor,
+}) => {
+  clientRequestInterceptor.use(userExistsHandler(port, true));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input-invite").fill("mail@mail.com");
@@ -175,7 +181,13 @@ test("link invite email error", async ({
   ]);
 });
 
-test("link invite login success", async ({ page, baseUrl }) => {
+test("link invite login success", async ({
+  page,
+  baseUrl,
+  port,
+  clientRequestInterceptor,
+}) => {
+  clientRequestInterceptor.use(userExistsHandler(port, true));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input-invite").fill("mail@mail.com");

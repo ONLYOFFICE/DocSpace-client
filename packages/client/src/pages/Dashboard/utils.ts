@@ -49,4 +49,5 @@ export const makeCreateUrl = (
 
 export type AiFormsSettings = {
   roomId: number;
+  libraryId?: number;
 };

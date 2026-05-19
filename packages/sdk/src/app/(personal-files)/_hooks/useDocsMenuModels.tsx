@@ -29,6 +29,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
+import { getConstName } from "@docspace/shared/constants/consts";
 import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 import type {
   ActionOption,
@@ -194,7 +195,7 @@ export function useDocsMenuModels({
       {
         id: "quick-pdf",
         icon: <BlankPdfIcon />,
-        label: t("Common:NewPDFForm"),
+        label: getConstName("PDF"),
         onClick: () => openCreateDialog("pdf"),
       },
     ],

@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { NavMenu } from "@docspace/ui-kit/components/nav-menu";
@@ -37,6 +36,7 @@ import articleStyles from "@docspace/ui-kit/components/article/Article.module.sc
 import { DeviceType } from "@docspace/shared/enums";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { ArticleProfileProps } from "@docspace/ui-kit/components/article";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import CollapseButton from "./CollapseButton";
 import FooterMenu from "./FooterMenu";
@@ -67,8 +67,7 @@ const AppsSidebar = ({
   toggleArticleOpen,
 }: AppsSidebarProps) => {
   const { t } = useTranslation(["Common"]);
-  const theme = useTheme() as { isBase?: boolean };
-  const isBase = theme?.isBase ?? true;
+  const isBase = useTheme();
   const isMobile = currentDeviceType === DeviceType.mobile;
   const collapseLabel = showText
     ? t("Common:HideArticleMenu")
@@ -96,60 +95,60 @@ const AppsSidebar = ({
   return (
     <>
       <div
-      id="article-container"
-      className={`${articleStyles.article} ${styles.articleFlex}`}
-      data-show-text={showText ? "true" : "false"}
-      data-open={articleOpen ? "true" : "false"}
-      data-sidebar-open={articleOpen ? "true" : "false"}
-      data-with-main-button="false"
-    >
-      {!isMobile && (
-        <div
-          className={`${articleStyles.articleHeader} ${styles.header}`}
-          data-show-text={showText ? "true" : "false"}
-        >
-          <a href="/" className={styles.logoWrapper}>
-            <img
-              className={showText ? styles.logoFull : styles.logoBurger}
-              src={showText ? fullLogo : burgerLogo}
-              alt="portal logo"
-            />
-          </a>
-        </div>
-      )}
-
-      <Scrollbar
-        className={`article-body__scrollbar ${styles.scrollbar}`}
-        scrollClass="article-scroller"
+        id="article-container"
+        className={`${articleStyles.article} ${styles.articleFlex}`}
+        data-show-text={showText ? "true" : "false"}
+        data-open={articleOpen ? "true" : "false"}
+        data-sidebar-open={articleOpen ? "true" : "false"}
+        data-with-main-button="false"
       >
-        <NavMenu
-          groups={groups}
-          activeItemId={activeId}
-          defaultExpandedId={defaultExpandedId}
-          iconOnly={!showText}
-        />
-      </Scrollbar>
-
-      <div className={styles.bottom}>
-        <div className={styles.footer}>
-          <FooterMenu showText={showText} />
-        </div>
-
-        <CollapseButton
-          showText={showText}
-          toggleShowText={toggleShowText}
-          label={collapseLabel}
-        />
-
-        {user && !isMobile ? (
-          <div className={styles.profileBlockWrapper}>
-            <ProfileBlock
-              user={user as unknown as ArticleProfileProps["user"]}
-              showText={showText}
-            />
+        {!isMobile && (
+          <div
+            className={`${articleStyles.articleHeader} ${styles.header}`}
+            data-show-text={showText ? "true" : "false"}
+          >
+            <a href="/" className={styles.logoWrapper}>
+              <img
+                className={showText ? styles.logoFull : styles.logoBurger}
+                src={showText ? fullLogo : burgerLogo}
+                alt="portal logo"
+              />
+            </a>
           </div>
-        ) : null}
-      </div>
+        )}
+
+        <Scrollbar
+          className={`article-body__scrollbar ${styles.scrollbar}`}
+          scrollClass="article-scroller"
+        >
+          <NavMenu
+            groups={groups}
+            activeItemId={activeId}
+            defaultExpandedId={defaultExpandedId}
+            iconOnly={!showText}
+          />
+        </Scrollbar>
+
+        <div className={styles.bottom}>
+          <div className={styles.footer}>
+            <FooterMenu showText={showText} />
+          </div>
+
+          <CollapseButton
+            showText={showText}
+            toggleShowText={toggleShowText}
+            label={collapseLabel}
+          />
+
+          {user && !isMobile ? (
+            <div className={styles.profileBlockWrapper}>
+              <ProfileBlock
+                user={user as unknown as ArticleProfileProps["user"]}
+                showText={showText}
+              />
+            </div>
+          ) : null}
+        </div>
       </div>
       {isMobile && articleOpen && (
         <Backdrop
@@ -164,3 +163,4 @@ const AppsSidebar = ({
 };
 
 export default AppsSidebar;
+

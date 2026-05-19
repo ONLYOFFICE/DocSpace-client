@@ -207,7 +207,6 @@
   "TooltipElementsCopyMessage": "Kopioi {{element}} elementit",
   "TooltipElementsMoveMessage": "Siirrä {{element}} elementit",
   "TrashAutoDeleteWarning": "{{sectionName}} -osiossa olevat kohteet poistetaan automaattisesti 30 päivän kuluttua.",
-  "TrashFunctionalityDescription": "Kaikki poistetut tiedostot siirretään '{{sectionName}}' -osioon. Palauta vahingossa poistetut tiedostot tai poista ne pysyvästi. '{{sectionName}}' -osiossa olevat tiedostot poistetaan automaattisesti 30 päivän kuluttua. Huomioithan, että '{{sectionName}}' -osiosta poistetut tiedostot eivät ole enää palautettavissa.",
   "UnarchivedRoomAction": "Huone '{{name}}' on arkistoimaton.",
   "UnarchivedRoomsAction": "Huoneet ovat arkistoimattomia.",
   "Unpin": "Irrota",

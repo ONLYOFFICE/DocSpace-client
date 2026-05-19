@@ -207,7 +207,6 @@
   "TooltipElementsCopyMessage": "Kopjoni elementet {{element}}",
   "TooltipElementsMoveMessage": "Lëvizni elementet {{element}}",
   "TrashAutoDeleteWarning": "Artikujt në {{sectionName}} fshihen automatikisht pas 30 ditësh.",
-  "TrashFunctionalityDescription": "Të gjithë skedarët e fshirë zhvendosen te '{{sectionName}}'. Rikthe skedarët e fshirë gabimisht ose fshiji përgjithmonë. Skedarët në '{{sectionName}}' fshihen automatikisht pas 30 ditësh. Kujdes: Skedarët e fshirë nga '{{sectionName}}' nuk mund të rikuperohen më.",
   "UnarchivedRoomAction": "Dhoma '{{name}}' është e paarkivuar.",
   "UnarchivedRoomsAction": "Dhomat janë të paarkivuara.",
   "Unpin": "Zhgozhdoni",

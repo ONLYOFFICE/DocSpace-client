@@ -38,6 +38,7 @@
   "TermsAndConditions": "Với việc tiếp tục, bạn hiểu và đồng ý với <1>Điều khoản và điều kiện</1> và <2> Tuyên bố về quyền riêng tư </2> của chúng tôi.",
   "TfaSubTitle": "Làm theo các bước đơn giản để tiếp tục làm việc trong {{productName}} này:",
   "TfaTitle": "Xác thực hai yếu tố đã được kích hoạt để có quyền truy cập an toàn",
+  "UserAlreadyInvited": "Bạn đã được mời. Vui lòng hoàn tất đăng ký bằng liên kết trong email.",
   "VerifyConnection": "Xác minh kết nối",
   "VerifyConnectionDescription": "Nhập mã 6 chữ số được tạo bởi ứng dụng xác thực của bạn vào trường bên dưới để hoàn tất thiết lập."
 }

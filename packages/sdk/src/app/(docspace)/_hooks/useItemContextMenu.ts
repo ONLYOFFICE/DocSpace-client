@@ -9,6 +9,7 @@ type UseItemContextMenuProps = {
   isRecentSection?: boolean;
   isTrashSection?: boolean;
   isDocsSection?: boolean;
+  isShareSection?: boolean;
 };
 
 export default function useItemContextMenu({
@@ -16,6 +17,7 @@ export default function useItemContextMenu({
   isRecentSection = false,
   isTrashSection = false,
   isDocsSection = false,
+  isShareSection = false,
 }: UseItemContextMenuProps = {}) {
   const getFilesContextMenu = useCallback((
     file: TFile,
@@ -23,6 +25,50 @@ export default function useItemContextMenu({
   ) => {
     const effectiveIsRecentSection = overrides?.isRecentSection ?? isRecentSection;
     const effectiveIsFavoritesSection = overrides?.isFavoritesSection ?? isFavoritesSection;
+
+    if (isShareSection) {
+      const shareModel = new Set<AVAILABLE_CONTEXT_ITEMS>([
+        AVAILABLE_CONTEXT_ITEMS.select,
+        AVAILABLE_CONTEXT_ITEMS.fillForm,
+        AVAILABLE_CONTEXT_ITEMS.edit,
+        AVAILABLE_CONTEXT_ITEMS.editPDF,
+        AVAILABLE_CONTEXT_ITEMS.preview,
+        AVAILABLE_CONTEXT_ITEMS.openPDF,
+        AVAILABLE_CONTEXT_ITEMS.view,
+        AVAILABLE_CONTEXT_ITEMS.pdfView,
+        AVAILABLE_CONTEXT_ITEMS.download,
+        AVAILABLE_CONTEXT_ITEMS.downloadAs,
+      ]);
+
+      const isPdfFile = file.fileExst === ".pdf";
+      const shouldFill = file.viewAccessibility.WebRestrictedEditing;
+      const canFill = file.security?.FillForms;
+      const canEdit = file.security.Edit && file.viewAccessibility.WebEdit;
+      const canPlay =
+        file.viewAccessibility.ImageView || file.viewAccessibility.MediaView;
+
+      if (!file.security.Download) shareModel.delete(AVAILABLE_CONTEXT_ITEMS.download);
+      if (!file.viewAccessibility.CanConvert)
+        shareModel.delete(AVAILABLE_CONTEXT_ITEMS.downloadAs);
+      if (!file.viewAccessibility.WebView)
+        shareModel.delete(AVAILABLE_CONTEXT_ITEMS.preview);
+      if (!isPdfFile || (shouldFill && canFill))
+        shareModel.delete(AVAILABLE_CONTEXT_ITEMS.openPDF);
+      if (!isPdfFile) shareModel.delete(AVAILABLE_CONTEXT_ITEMS.pdfView);
+      if (!canPlay) shareModel.delete(AVAILABLE_CONTEXT_ITEMS.view);
+      if (!isPdfFile || !file.security.EditForm || file.startFilling || !file.isForm)
+        shareModel.delete(AVAILABLE_CONTEXT_ITEMS.editPDF);
+      if (!(shouldFill && canFill) || !file.isForm)
+        shareModel.delete(AVAILABLE_CONTEXT_ITEMS.fillForm);
+      if (canPlay || !canEdit) shareModel.delete(AVAILABLE_CONTEXT_ITEMS.edit);
+
+      if (file.security.Copy) shareModel.add(AVAILABLE_CONTEXT_ITEMS.copy);
+      shareModel.add(AVAILABLE_CONTEXT_ITEMS.removeFromSharedWithMe);
+      shareModel.add(AVAILABLE_CONTEXT_ITEMS.showInfo);
+
+      return Array.from(shareModel);
+    }
+
     const model = new Set([
       AVAILABLE_CONTEXT_ITEMS.select,
       AVAILABLE_CONTEXT_ITEMS.fillForm,
@@ -104,9 +150,21 @@ export default function useItemContextMenu({
     }
 
     return Array.from(model);
-  }, [isFavoritesSection, isRecentSection, isTrashSection, isDocsSection]);
+  }, [isFavoritesSection, isRecentSection, isTrashSection, isDocsSection, isShareSection]);
 
   const getFoldersContextMenu = useCallback((folder: TFolder) => {
+    if (isShareSection) {
+      const items: AVAILABLE_CONTEXT_ITEMS[] = [
+        AVAILABLE_CONTEXT_ITEMS.select,
+        AVAILABLE_CONTEXT_ITEMS.open,
+      ];
+      if (folder.security.Download) items.push(AVAILABLE_CONTEXT_ITEMS.download);
+      if (folder.security.Copy) items.push(AVAILABLE_CONTEXT_ITEMS.copy);
+      items.push(AVAILABLE_CONTEXT_ITEMS.removeFromSharedWithMe);
+      items.push(AVAILABLE_CONTEXT_ITEMS.showInfo);
+      return items;
+    }
+
     const items = [
       AVAILABLE_CONTEXT_ITEMS.select,
       AVAILABLE_CONTEXT_ITEMS.open,
@@ -141,7 +199,7 @@ export default function useItemContextMenu({
     }
 
     return items;
-  }, [isTrashSection, isDocsSection]);
+  }, [isTrashSection, isDocsSection, isShareSection]);
 
   return { getFilesContextMenu, getFoldersContextMenu };
 }

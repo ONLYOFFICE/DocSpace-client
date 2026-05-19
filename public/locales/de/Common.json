@@ -1610,5 +1610,8 @@
   "RoomOwner": "Raumbesitzer",
   "LeftAndAppointNewOwner": "Sie haben den Raum verlassen und einen neuen Verantwortlichen ernannt",
   "AppointNewOwner": "Sie haben einen neuen Besitzer ernannt.",
-  "PeopleSelectorInfo": "Nur ein Raumadministrator oder ein {{productName}}-Administrator kann Besitzer des Raums werden"
+  "PeopleSelectorInfo": "Nur ein Raumadministrator oder ein {{productName}}-Administrator kann Besitzer des Raums werden",
+  "AIAgentsUnpinned": "{{aiAgents}} nicht angeheftet",
+  "LeaveTheRoom": "Raum verlassen",
+  "AssignOwner": "Besitzer zuweisen"
 }

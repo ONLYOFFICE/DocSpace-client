@@ -1610,5 +1610,8 @@
   "RoomOwner": "Власник собе",
   "LeftAndAppointNewOwner": "Напустили сте собу и именовали новог власника",
   "AppointNewOwner": "Поставили сте новог власника.",
-  "PeopleSelectorInfo": "Само админ собе или {{productName}} админ могу да постану власници собе"
+  "PeopleSelectorInfo": "Само админ собе или {{productName}} админ могу да постану власници собе",
+  "AIAgentsUnpinned": "{{aiAgents}} неприкачен",
+  "LeaveTheRoom": "Напусти собу",
+  "AssignOwner": "Додели Власника"
 }

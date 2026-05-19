@@ -1610,5 +1610,8 @@
   "RoomOwner": "Собственик на стая",
   "LeftAndAppointNewOwner": "Напуснахте стаята и назначихте нов собственик",
   "AppointNewOwner": "Назначили сте нов собственик.",
-  "PeopleSelectorInfo": "Само администратор на стая или {{productName}} администратор може да стане собственик на стаята"
+  "PeopleSelectorInfo": "Само администратор на стая или {{productName}} администратор може да стане собственик на стаята",
+  "AIAgentsUnpinned": "{{aiAgents}} незакрепен",
+  "LeaveTheRoom": "Напусни стаята",
+  "AssignOwner": "Назначете Собственик"
 }

@@ -1610,5 +1610,8 @@
   "RoomOwner": "Huoneen omistaja",
   "LeftAndAppointNewOwner": "Olet poistunut huoneesta ja nimittänyt uuden omistajan",
   "AppointNewOwner": "Olet nimittänyt uuden omistajan.",
-  "PeopleSelectorInfo": "Vain huoneen järjestelmänvalvojasta tai {{productName}}:n järjestelmänvalvojasta voi tulla huoneen omistaja."
+  "PeopleSelectorInfo": "Vain huoneen järjestelmänvalvojasta tai {{productName}}:n järjestelmänvalvojasta voi tulla huoneen omistaja.",
+  "AIAgentsUnpinned": "{{aiAgents}} kiinnittelemättä",
+  "LeaveTheRoom": "Poistu huoneesta",
+  "AssignOwner": "Määritä omistaja"
 }

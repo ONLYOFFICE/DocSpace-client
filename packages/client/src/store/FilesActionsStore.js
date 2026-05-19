@@ -3196,7 +3196,7 @@ class FilesActionStore {
     const isRoot = this.selectedFolderStore.isRootFolder;
 
     const roomSuccessText = isOwner
-      ? t("Files:LeftAndAppointNewOwner")
+      ? t("Common:LeftAndAppointNewOwner")
       : t("Files:YouLeftTheRoom");
     const agentSuccessText = isOwner
       ? t("Files:LeftAgentAndAppointNewOwner")

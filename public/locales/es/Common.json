@@ -1610,5 +1610,8 @@
   "RoomOwner": "Propietario de la sala",
   "LeftAndAppointNewOwner": "Ha salido de la sala y ha asignado un nuevo propietario",
   "AppointNewOwner": "Ha asignado un nuevo propietario.",
-  "PeopleSelectorInfo": "Sólo un administrador de sala o un administrador de {{productName}} puede convertirse en el propietario de la sala"
+  "PeopleSelectorInfo": "Sólo un administrador de sala o un administrador de {{productName}} puede convertirse en el propietario de la sala",
+  "AIAgentsUnpinned": "{{aiAgents}} sin anclar",
+  "LeaveTheRoom": "Salir de la sala",
+  "AssignOwner": "Asignar propietario"
 }

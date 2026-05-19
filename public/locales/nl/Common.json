@@ -1610,5 +1610,8 @@
   "RoomOwner": "Kamer eigenaar",
   "LeftAndAppointNewOwner": "U heeft de kamer verlaten en een nieuwe eigenaar aangesteld",
   "AppointNewOwner": "U heeft een nieuwe eigenaar aangesteld.",
-  "PeopleSelectorInfo": "Alleen een kamer beheerder of een {{productName}} beheerder kan de eigenaar van de kamer worden."
+  "PeopleSelectorInfo": "Alleen een kamer beheerder of een {{productName}} beheerder kan de eigenaar van de kamer worden.",
+  "AIAgentsUnpinned": "{{aiAgents}} niet vastgepind",
+  "LeaveTheRoom": "Verlaat de kamer",
+  "AssignOwner": "Eigenaar Toewijzen"
 }

@@ -1610,5 +1610,8 @@
   "RoomOwner": "ເຈົ້າຂອງຫ້ອງ",
   "LeftAndAppointNewOwner": "ທ່ານໄດ້ອອກຈາກຫ້ອງແລະແຕ່ງຕັ້ງເຈົ້າຂອງໃຫມ່",
   "AppointNewOwner": "ທ່ານໄດ້ແຕ່ງຕັ້ງເຈົ້າຂອງໃຫມ່.",
-  "PeopleSelectorInfo": "ພຽງແຕ່ຜູ້ບໍລິຫານຫ້ອງ ຫຼື ຜູ້ບໍລິຫານ {{productName}} ເທົ່ານັ້ນທີ່ຈະສາມາດກາຍເປັນເຈົ້າຂອງຫ້ອງໄດ້"
+  "PeopleSelectorInfo": "ພຽງແຕ່ຜູ້ບໍລິຫານຫ້ອງ ຫຼື ຜູ້ບໍລິຫານ {{productName}} ເທົ່ານັ້ນທີ່ຈະສາມາດກາຍເປັນເຈົ້າຂອງຫ້ອງໄດ້",
+  "AIAgentsUnpinned": "{{aiAgents}} ບໍ່ໄດ້ປິ່ນ",
+  "LeaveTheRoom": "ອອກຈາກຫ້ອງ",
+  "AssignOwner": "ມອບໝາຍເຈົ້າຂອງ"
 }

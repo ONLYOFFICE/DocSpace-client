@@ -1610,5 +1610,8 @@
   "RoomOwner": "Majitel místnosti",
   "LeftAndAppointNewOwner": "Opustili jste místnost a určili nového majitele.",
   "AppointNewOwner": "Jmenovali jste nového majitele.",
-  "PeopleSelectorInfo": "Vlastníkem místnosti se může stát pouze správce místnosti nebo správce prostoru {{productName}}"
+  "PeopleSelectorInfo": "Vlastníkem místnosti se může stát pouze správce místnosti nebo správce prostoru {{productName}}",
+  "AIAgentsUnpinned": "{{aiAgents}} neukotvené",
+  "LeaveTheRoom": "Opusťte místnost",
+  "AssignOwner": "Přiřazení vlastníka"
 }

@@ -1610,5 +1610,8 @@
   "RoomOwner": "Pronari i dhomës",
   "LeftAndAppointNewOwner": "Ju keni lënë dhomën dhe keni emëruar një pronar të ri",
   "AppointNewOwner": "Ju keni emëruar një pronar të ri.",
-  "PeopleSelectorInfo": "Vetëm një administrator i dhomës ose një administrator {{productName}} mund të bëhet pronari i dhomës."
+  "PeopleSelectorInfo": "Vetëm një administrator i dhomës ose një administrator {{productName}} mund të bëhet pronari i dhomës.",
+  "AIAgentsUnpinned": "{{aiAgents}} të fiksuara",
+  "LeaveTheRoom": "Lini dhomën",
+  "AssignOwner": "Caktoni pronarin"
 }

@@ -1610,5 +1610,8 @@
   "RoomOwner": "Telpas īpašnieks",
   "LeftAndAppointNewOwner": "Jūs atstājāt telpi un iecēlāt jaunu īpašnieku",
   "AppointNewOwner": "Jūs iecēlāt jaunu īpašnieku.",
-  "PeopleSelectorInfo": "Par telpas īpašnieku var kļūt tikai telpas administrators vai {{productName}} administrators"
+  "PeopleSelectorInfo": "Par telpas īpašnieku var kļūt tikai telpas administrators vai {{productName}} administrators",
+  "AIAgentsUnpinned": "{{aiAgents}} nepivienoti",
+  "LeaveTheRoom": "Pamest telpu",
+  "AssignOwner": "Piešķirt īpašnieku"
 }

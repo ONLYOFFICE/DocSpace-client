@@ -90,7 +90,7 @@ const ChangeRoomOwner = (props) => {
 
   const headerLabel = isAIAgent
     ? t("Files:ChangeTheAgentOwner")
-    : t("Files:ChangeTheRoomOwner");
+    : t("Common:ChangeTheRoomOwner");
 
   const infoText = isAIAgent
     ? t("Files:ChangeAgentOwnerSelectorInfo", {

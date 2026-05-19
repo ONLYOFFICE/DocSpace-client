@@ -1610,5 +1610,8 @@
   "RoomOwner": "Proprietarul sălii",
   "LeftAndAppointNewOwner": "Dvs ați părăsit sala și ați desemnat un nou proprietar",
   "AppointNewOwner": "Ați desemnat un nou proprietar.",
-  "PeopleSelectorInfo": "Numai administratorul sălii sau administratorul spaţiului {{productName}} poate deveni proprietar al sălii"
+  "PeopleSelectorInfo": "Numai administratorul sălii sau administratorul spaţiului {{productName}} poate deveni proprietar al sălii",
+  "AIAgentsUnpinned": "{{aiAgents}} fără pining",
+  "LeaveTheRoom": "Părăsește sala",
+  "AssignOwner": "Desemnare Proprietar"
 }

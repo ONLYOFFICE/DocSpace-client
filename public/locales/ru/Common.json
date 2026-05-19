@@ -1610,5 +1610,8 @@
   "RoomOwner": "Владелец комнаты",
   "LeftAndAppointNewOwner": "Вы покинули комнату и назначили нового владельца",
   "AppointNewOwner": "Вы назначили нового владельца.",
-  "PeopleSelectorInfo": "Владельцем комнаты может стать только администратор комнаты или администратор {{productName}}."
+  "PeopleSelectorInfo": "Владельцем комнаты может стать только администратор комнаты или администратор {{productName}}.",
+  "AIAgentsUnpinned": "{{aiAgents}} откреплены",
+  "LeaveTheRoom": "Покинуть комнату",
+  "AssignOwner": "Назначить владельца"
 }

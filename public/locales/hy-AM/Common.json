@@ -1610,5 +1610,8 @@
   "RoomOwner": "Սենյակի սեփականատեր",
   "LeftAndAppointNewOwner": "Դուք դուրս եք եկել սենյակից և նոր սեփականատեր եք նշանակել",
   "AppointNewOwner": "Դուք նոր սեփականատեր եք նշանակել։",
-  "PeopleSelectorInfo": "Սենյակի սեփականատեր կարող է դառնալ միայն սենյակի ադմինը կամ {{productName}}-ի ադմինը"
+  "PeopleSelectorInfo": "Սենյակի սեփականատեր կարող է դառնալ միայն սենյակի ադմինը կամ {{productName}}-ի ադմինը",
+  "AIAgentsUnpinned": "{{aiAgents}} չմուտքագրված",
+  "LeaveTheRoom": "Լքել սենյակը",
+  "AssignOwner": "Նշանակել սեփականատիրոջ"
 }

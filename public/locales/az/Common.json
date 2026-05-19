@@ -1610,5 +1610,8 @@
   "RoomOwner": "Otaq sahibi",
   "LeftAndAppointNewOwner": "Otaqdan çıxdınız və yeni sahibi təyin etdiniz",
   "AppointNewOwner": "Siz yeni sahib təyin etdiniz.",
-  "PeopleSelectorInfo": "Yalnız otaq administratoru və ya {{productName}} administratoru otağın sahibi ola bilər"
+  "PeopleSelectorInfo": "Yalnız otaq administratoru və ya {{productName}} administratoru otağın sahibi ola bilər",
+  "AIAgentsUnpinned": "{{aiAgents}} pinlənməmiş",
+  "LeaveTheRoom": "Otağı tərk edin",
+  "AssignOwner": "Sahibi təyin edin"
 }

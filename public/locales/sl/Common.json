@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "Samo skrbnik sobe ali skrbnik {{productName}} lahko postaneta lastnika sobe",
   "AIAgentsUnpinned": "{{aiAgents}} brez prikritja",
   "LeaveTheRoom": "Zapusti sobo",
-  "AssignOwner": "Dodeli lastnika"
+  "AssignOwner": "Dodeli lastnika",
+  "Unpin": "Odpni"
 }

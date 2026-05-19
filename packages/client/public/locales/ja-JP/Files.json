@@ -196,7 +196,6 @@
   "TrashFunctionalityDescription": "すべての削除されたファイルは「{{sectionName}}」に移動されます。誤って削除されたファイルを復元するか、完全に削除してください。「{{sectionName}}」にあるファイルは、30日後に自動的に削除されます。「{{sectionName}}」から削除されたファイルはもはや復元できないことにご注意ください。",
   "UnarchivedRoomAction": "ルーム '{{name}}' はアーカイブが解除されました。",
   "UnarchivedRoomsAction": "ルームはアーカイブが解除されました。",
-  "Unpin": "固定の削除",
   "Uploading": "アップロード中",
   "UploadingProgress": "アップロード中：{{progress}}%",
   "UserLimitDescription": "この招待リンクから参加できるユーザー数を定義してください。",

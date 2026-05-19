@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "ພຽງແຕ່ຜູ້ບໍລິຫານຫ້ອງ ຫຼື ຜູ້ບໍລິຫານ {{productName}} ເທົ່ານັ້ນທີ່ຈະສາມາດກາຍເປັນເຈົ້າຂອງຫ້ອງໄດ້",
   "AIAgentsUnpinned": "{{aiAgents}} ບໍ່ໄດ້ປິ່ນ",
   "LeaveTheRoom": "ອອກຈາກຫ້ອງ",
-  "AssignOwner": "ມອບໝາຍເຈົ້າຂອງ"
+  "AssignOwner": "ມອບໝາຍເຈົ້າຂອງ",
+  "Unpin": "ຖອນປັກໝຸດ"
 }

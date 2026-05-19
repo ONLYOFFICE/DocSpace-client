@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "Vain huoneen järjestelmänvalvojasta tai {{productName}}:n järjestelmänvalvojasta voi tulla huoneen omistaja.",
   "AIAgentsUnpinned": "{{aiAgents}} kiinnittelemättä",
   "LeaveTheRoom": "Poistu huoneesta",
-  "AssignOwner": "Määritä omistaja"
+  "AssignOwner": "Määritä omistaja",
+  "Unpin": "Irrota"
 }

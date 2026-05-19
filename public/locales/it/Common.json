@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "Solo un amministratore della stanza o un amministratore di {{productName}} può diventare il proprietario della stanza",
   "AIAgentsUnpinned": "{{aiAgents}} non fissati",
   "LeaveTheRoom": "Lascia la stanza",
-  "AssignOwner": "Assegna proprietario"
+  "AssignOwner": "Assegna proprietario",
+  "Unpin": "Rimuovi pin"
 }

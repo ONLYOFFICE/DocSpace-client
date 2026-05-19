@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "Само админ собе или {{productName}} админ могу да постану власници собе",
   "AIAgentsUnpinned": "{{aiAgents}} неприкачен",
   "LeaveTheRoom": "Напусти собу",
-  "AssignOwner": "Додели Власника"
+  "AssignOwner": "Додели Власника",
+  "Unpin": "Откачи"
 }

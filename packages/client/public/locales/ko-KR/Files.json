@@ -196,7 +196,6 @@
   "TrashFunctionalityDescription": "삭제된 모든 파일은 '{{sectionName}}'으로 이동됩니다. 실수로 삭제된 파일을 복원하거나 영구적으로 삭제할 수 있습니다. '{{sectionName}}'에 있는 파일은 30일 후 자동으로 삭제됩니다. '{{sectionName}}'에서 삭제된 파일은 더 이상 복원할 수 없다는 점을 유념해 주십시오.",
   "UnarchivedRoomAction": "'{{name}}' 방의 아카이브가 취소되었습니다.",
   "UnarchivedRoomsAction": "방의 아카이브가 취소되었습니다.",
-  "Unpin": "고정 해제",
   "Uploading": "업로드 중",
   "UploadingProgress": "업로드 중: {{progress}}%",
   "UserLimitDescription": "이 초대 링크를 통해 참여할 수 있는 사용자 수를 정의하세요.",

@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "Vetëm një administrator i dhomës ose një administrator {{productName}} mund të bëhet pronari i dhomës.",
   "AIAgentsUnpinned": "{{aiAgents}} të fiksuara",
   "LeaveTheRoom": "Lini dhomën",
-  "AssignOwner": "Caktoni pronarin"
+  "AssignOwner": "Caktoni pronarin",
+  "Unpin": "Zhgozhdoni"
 }

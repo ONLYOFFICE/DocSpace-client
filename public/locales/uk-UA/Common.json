@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "Власником кімнати може стати лише адміністратор кімнати або адміністратор простору  {{productName}}",
   "AIAgentsUnpinned": "{{aiAgents}} незакріплені",
   "LeaveTheRoom": "Залишити кімнату",
-  "AssignOwner": "Призначити власника"
+  "AssignOwner": "Призначити власника",
+  "Unpin": "Відкріпити"
 }

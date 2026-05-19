@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "Sadece bir oda yöneticisi veya bir {{productName}} yöneticisi odanın sahibi olabilir",
   "AIAgentsUnpinned": "Sabitlenmemiş {{aiAgents}}",
   "LeaveTheRoom": "Odadan ayrıl",
-  "AssignOwner": "Sahip Ata"
+  "AssignOwner": "Sahip Ata",
+  "Unpin": "Sabitlemeyi kaldır"
 }

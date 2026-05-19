@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "Chỉ quản trị viên phòng hoặc quản trị viên {{productName}} mới có thể trở thành chủ sở hữu của phòng",
   "AIAgentsUnpinned": "{{aiAgents}} không ghim",
   "LeaveTheRoom": "Rời khỏi phòng",
-  "AssignOwner": "Chỉ định Chủ sở hữu"
+  "AssignOwner": "Chỉ định Chủ sở hữu",
+  "Unpin": "Bỏ ghim"
 }

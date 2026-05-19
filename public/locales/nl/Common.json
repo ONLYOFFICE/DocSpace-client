@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "Alleen een kamer beheerder of een {{productName}} beheerder kan de eigenaar van de kamer worden.",
   "AIAgentsUnpinned": "{{aiAgents}} niet vastgepind",
   "LeaveTheRoom": "Verlaat de kamer",
-  "AssignOwner": "Eigenaar Toewijzen"
+  "AssignOwner": "Eigenaar Toewijzen",
+  "Unpin": "Unpin"
 }

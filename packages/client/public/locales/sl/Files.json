@@ -196,7 +196,6 @@
   "TrashFunctionalityDescription": "Vse izbrisane datoteke so prestavljene v '{{sectionName}}'. Obnovite datoteke, ki ste jih po nesreči izbrisali, ali jih trajno izbrišite. Datoteke v '{{sectionName}}' se samodejno izbrišejo po 30 dneh. Upoštevajte, da datotek, izbrisanih iz '{{sectionName}}', ne moremo več obnoviti.",
   "UnarchivedRoomAction": "Soba '{{name}}' ni arhivirana.",
   "UnarchivedRoomsAction": "Sobe niso arhivirane.",
-  "Unpin": "Odpni",
   "Uploading": "Nalaganje",
   "UploadingProgress": "Nalaganje: {{progress}}%",
   "UserLimitDescription": "Definirajte število uporabnikov, ki lahko pridružijo preko te povezave za vabljenje.",

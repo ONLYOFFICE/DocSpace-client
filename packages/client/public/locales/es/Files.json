@@ -196,7 +196,6 @@
   "TrashFunctionalityDescription": "Todos los archivos eliminados se mueven a «{{sectionName}}». Restaure los archivos eliminados por error o elimínelos de forma permanente. Los archivos de «{{sectionName}}» se eliminan automáticamente después de 30 días. Por favor, tenga en cuenta que los archivos eliminados de «{{sectionName}}» ya no se pueden restaurar.",
   "UnarchivedRoomAction": "La sala '{{name}}' está desarchivada.",
   "UnarchivedRoomsAction": "Las salas están desarchivadas.",
-  "Unpin": "Desanclar",
   "Uploading": "Cargando",
   "UploadingProgress": "Cargando: {{progress}}%",
   "UserLimitDescription": "Define el número de usuarios que pueden unirse a través de este enlace de invitación.",

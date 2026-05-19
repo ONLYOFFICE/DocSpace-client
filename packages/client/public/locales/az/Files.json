@@ -196,7 +196,6 @@
   "TrashFunctionalityDescription": "Silinmiş bütün fayllar '{{sectionName}}' bölməsinə köçürülür. Yanlış silinmiş faylları bərpa edin və ya onları daimi olaraq silin. '{{sectionName}}' bölməsindəki fayllar 30 gün sonra avtomatik olaraq silinir. Xahiş edirik, '{{sectionName}}' bölməsindən silinən faylları daha sonra bərpa etmək mümkün deyil.",
   "UnarchivedRoomAction": "'{{name}}' otağı arxivdən çıxarıldı.",
   "UnarchivedRoomsAction": "Otaqlar arxivdən çıxarıldı.",
-  "Unpin": "Sabitləmədən çıxarın",
   "Uploading": "Yüklənir",
   "UploadingProgress": "Yüklənir: {{progress}}%",
   "UserLimitDescription": "Bu dəvət linki vasitəsilə qoşula biləcək istifadəçi sayını müəyyən edin.",

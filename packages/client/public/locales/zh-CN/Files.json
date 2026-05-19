@@ -196,7 +196,6 @@
   "TrashFunctionalityDescription": "所有已删除的文件都将移至'{{sectionName}}'。您可以恢复误删的文件，或将其永久删除。'{{sectionName}}'中的文件将在30天后自动删除。请注意，从'{{sectionName}}'中删除的文件将无法恢复。",
   "UnarchivedRoomAction": "房间 '{{name}}' 已取消存档。",
   "UnarchivedRoomsAction": "房间已取消存档。",
-  "Unpin": "取消置顶",
   "Uploading": "上传中",
   "UploadingProgress": "上传中：{{progress}}%",
   "UserLimitDescription": "设置通过此邀请链接可加入的用户数量。",

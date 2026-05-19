@@ -102,7 +102,7 @@ const ChangeRoomOwner = (props) => {
 
   const footerCheckboxLabel = isAIAgent
     ? t("Files:LeaveTheAgent")
-    : t("Files:LeaveTheRoom");
+    : t("Common:LeaveTheRoom");
 
   const selectorComponent = (
     <PeopleSelector
@@ -110,7 +110,7 @@ const ChangeRoomOwner = (props) => {
       onCancel={handleClosePanel}
       cancelButtonLabel=""
       disableSubmitButton={false}
-      submitButtonLabel={showBackButton ? "" : t("Files:AssignOwner")}
+      submitButtonLabel={showBackButton ? "" : t("Common:AssignOwner")}
       onSubmit={onChangeRoomOwner}
       withHeader
       headerProps={{

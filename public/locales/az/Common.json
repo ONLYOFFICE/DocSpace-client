@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "Yalnız otaq administratoru və ya {{productName}} administratoru otağın sahibi ola bilər",
   "AIAgentsUnpinned": "{{aiAgents}} pinlənməmiş",
   "LeaveTheRoom": "Otağı tərk edin",
-  "AssignOwner": "Sahibi təyin edin"
+  "AssignOwner": "Sahibi təyin edin",
+  "Unpin": "Sabitləmədən çıxarın"
 }

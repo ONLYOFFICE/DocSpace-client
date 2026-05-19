@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "Par telpas īpašnieku var kļūt tikai telpas administrators vai {{productName}} administrators",
   "AIAgentsUnpinned": "{{aiAgents}} nepivienoti",
   "LeaveTheRoom": "Pamest telpu",
-  "AssignOwner": "Piešķirt īpašnieku"
+  "AssignOwner": "Piešķirt īpašnieku",
+  "Unpin": "Atspraust"
 }

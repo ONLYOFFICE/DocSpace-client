@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "Seul l'administrateur d'une salle ou l'administrateur de {{productName}} peut devenir le propriétaire d'une salle",
   "AIAgentsUnpinned": "{{aiAgents}} non épinglé",
   "LeaveTheRoom": "Quitter la salle",
-  "AssignOwner": "Attribuer un propriétaire"
+  "AssignOwner": "Attribuer un propriétaire",
+  "Unpin": "Désépingler"
 }

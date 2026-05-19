@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "Nur ein Raumadministrator oder ein {{productName}}-Administrator kann Besitzer des Raums werden",
   "AIAgentsUnpinned": "{{aiAgents}} nicht angeheftet",
   "LeaveTheRoom": "Raum verlassen",
-  "AssignOwner": "Besitzer zuweisen"
+  "AssignOwner": "Besitzer zuweisen",
+  "Unpin": "Entpinnen"
 }

@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "Numai administratorul sălii sau administratorul spaţiului {{productName}} poate deveni proprietar al sălii",
   "AIAgentsUnpinned": "{{aiAgents}} fără pining",
   "LeaveTheRoom": "Părăsește sala",
-  "AssignOwner": "Desemnare Proprietar"
+  "AssignOwner": "Desemnare Proprietar",
+  "Unpin": "Anulare fixare"
 }

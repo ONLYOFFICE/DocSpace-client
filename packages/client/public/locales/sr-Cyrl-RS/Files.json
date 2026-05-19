@@ -196,7 +196,6 @@
   "TrashFunctionalityDescription": "Сви обрисани фајлови се премештају у '{{sectionName}}'. Врати фајлове обрисане грешком или их трајно обриши. Фајлови у '{{sectionName}}' се аутоматски бришу након 30 дана. Имај на уму да фајлови обрисани из '{{sectionName}}' више не могу бити враћени.",
   "UnarchivedRoomAction": "Соба '{{name}}' је неархивирана.",
   "UnarchivedRoomsAction": "Собе су неархивиране.",
-  "Unpin": "Откачи",
   "Uploading": "Отпремање",
   "UploadingProgress": "Отпремање : {{progress}}%.",
   "UserLimitDescription": "Дефинишите број корисника који може приствити преко овог позивљивског линка.",

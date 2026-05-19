@@ -1628,5 +1628,6 @@
   "PeopleSelectorInfo": "Only a room admin or a {{productName}} admin can become the owner of the room",
   "AIAgentsUnpinned": "{{aiAgents}} unpinned",
   "LeaveTheRoom": "Leave the room",
-  "AssignOwner": "Assign Owner"
+  "AssignOwner": "Assign Owner",
+  "Unpin": "Unpin"
 }

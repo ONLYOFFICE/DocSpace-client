@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "Само администратор на стая или {{productName}} администратор може да стане собственик на стаята",
   "AIAgentsUnpinned": "{{aiAgents}} незакрепен",
   "LeaveTheRoom": "Напусни стаята",
-  "AssignOwner": "Назначете Собственик"
+  "AssignOwner": "Назначете Собственик",
+  "Unpin": "Откачване"
 }

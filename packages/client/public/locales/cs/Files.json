@@ -196,7 +196,6 @@
   "TrashFunctionalityDescription": "Všechny smazané soubory jsou přesunuty do složky '{{sectionName}}'. Obnovte soubory smazané omylem nebo je trvale smažte. Soubory ve složce '{{sectionName}}' jsou automaticky mazány po 30 dnech. Upozorňujeme, že soubory smazané ze složky '{{sectionName}}' nelze obnovit.",
   "UnarchivedRoomAction": "Místnost '{{name}}' není archivována.",
   "UnarchivedRoomsAction": "Místnosti nejsou archivovány.",
-  "Unpin": "Odepnout",
   "Uploading": "Nahrávání",
   "UploadingProgress": "Nahrávání: {{progress}}%",
   "UserLimitDescription": "Definujte počet uživatelů, kteří se mohou připojit pomocí tohoto invitačního odkazu.",

@@ -76,7 +76,7 @@ const LeaveRoomDialog = (props) => {
 
   const titleText = isAIAgent
     ? t("Files:LeaveTheAgent")
-    : t("Files:LeaveTheRoom");
+    : t("Common:LeaveTheRoom");
 
   const roomDescription = isRoomOwner
     ? t("Files:LeaveRoomDescription")
@@ -91,7 +91,7 @@ const LeaveRoomDialog = (props) => {
   const showFormFillingWarning = isFormFiller && !isAIAgent && !isRoomOwner;
 
   const okButtonLabel = isRoomOwner
-    ? t("Files:AssignOwner")
+    ? t("Common:AssignOwner")
     : showFormFillingWarning
       ? t("Files:LeaveButton")
       : t("Common:OKButton");
@@ -159,8 +159,7 @@ export default inject(
 
     const isRoomOwner = folderItem?.createdBy?.id === user.id;
     const isAIAgent = folderItem?.isAIAgent;
-    const isFormFiller =
-      folderItem?.access === ShareAccessRights.FormFilling;
+    const isFormFiller = folderItem?.access === ShareAccessRights.FormFilling;
 
     return {
       visible,
@@ -173,3 +172,4 @@ export default inject(
     };
   },
 )(observer(withTranslation(["Common", "Files"])(LeaveRoomDialog)));
+

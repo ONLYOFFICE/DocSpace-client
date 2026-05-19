@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "ルーム管理者または{{productName}}管理者のみがルーム所有者になることができます。",
   "AIAgentsUnpinned": "ピン留めされていない {{aiAgents}}",
   "LeaveTheRoom": "退室する",
-  "AssignOwner": "所有者の割り当て"
+  "AssignOwner": "所有者の割り当て",
+  "Unpin": "固定の削除"
 }

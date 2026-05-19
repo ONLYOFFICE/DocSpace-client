@@ -196,7 +196,6 @@
   "TrashFunctionalityDescription": "Alle verwijderde bestanden worden verplaatst naar '{{sectionName}}'. Herstel per ongeluk verwijderde bestanden of verwijder ze permanent. Bestanden in '{{sectionName}}' worden automatisch verwijderd na 30 dagen. Let op, de bestanden die uit '{{sectionName}}' zijn verwijderd, kunnen niet meer worden hersteld.",
   "UnarchivedRoomAction": "De kamer '{{name}}' is niet meer gearchiveerd.",
   "UnarchivedRoomsAction": "De kamers zijn niet meer gearchiveerd.",
-  "Unpin": "Unpin",
   "Uploading": "Uploaden",
   "UploadingProgress": "Uploaden: {{progress}}%",
   "UserLimitDescription": "Definieer het aantal gebruikers dat via deze uitnodigingslink kan deelnemen.",

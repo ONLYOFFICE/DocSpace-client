@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "只有房间管理员或{{productName}}管理员才能成为房间的所有者",
   "AIAgentsUnpinned": "未置顶的 {{aiAgents}}",
   "LeaveTheRoom": "退出房间",
-  "AssignOwner": "分配所有者"
+  "AssignOwner": "分配所有者",
+  "Unpin": "取消置顶"
 }

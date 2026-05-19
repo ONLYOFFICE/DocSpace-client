@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "يمكن فقط لمسؤول الغرفة أو مسؤول {{productName}} أن يصبح مالك الغرفة",
   "AIAgentsUnpinned": "{{aiAgents}} غير مثبت",
   "LeaveTheRoom": "مغادرة الغرفة",
-  "AssignOwner": "تعيين مالك"
+  "AssignOwner": "تعيين مالك",
+  "Unpin": "إلغاء التثبيت"
 }

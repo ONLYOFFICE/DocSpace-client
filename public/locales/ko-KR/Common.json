@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "방 관리자 또는 {{productName}} 관리자만 방 소유자가 될 수 있습니다",
   "AIAgentsUnpinned": "{{aiAgents}} 고정 해제",
   "LeaveTheRoom": "방 나가기",
-  "AssignOwner": "소유자 할당"
+  "AssignOwner": "소유자 할당",
+  "Unpin": "고정 해제"
 }

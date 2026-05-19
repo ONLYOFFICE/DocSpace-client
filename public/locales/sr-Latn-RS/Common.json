@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "Samo admin sobe ili {{productName}} admin mogu da postanu vlasnici sobe",
   "AIAgentsUnpinned": "{{aiAgents}} otkopčeno",
   "LeaveTheRoom": "Napusti sobu",
-  "AssignOwner": "Dodeli Vlasnika"
+  "AssignOwner": "Dodeli Vlasnika",
+  "Unpin": "Otkači"
 }

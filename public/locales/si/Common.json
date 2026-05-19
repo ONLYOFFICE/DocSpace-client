@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "පමණක් රූම් පරිපාලක හෝ {{productName}} පරිපාලකයෙකුට කාමරයේ හිමිකරුවෙකු විය හැක.",
   "AIAgentsUnpinned": "{{aiAgents}} අමුණා නැත",
   "LeaveTheRoom": "කාමරය හැරයන්න",
-  "AssignOwner": "හිමිකරුවෙක් පත් කරන්න"
+  "AssignOwner": "හිමිකරුවෙක් පත් කරන්න",
+  "Unpin": "ගළවන්න"
 }

@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "Vlastníkem místnosti se může stát pouze správce místnosti nebo správce prostoru {{productName}}",
   "AIAgentsUnpinned": "{{aiAgents}} neukotvené",
   "LeaveTheRoom": "Opusťte místnost",
-  "AssignOwner": "Přiřazení vlastníka"
+  "AssignOwner": "Přiřazení vlastníka",
+  "Unpin": "Odepnout"
 }

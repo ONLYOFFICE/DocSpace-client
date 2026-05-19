@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "Tylko administrator pokoju lub administrator {{productName}} może zostać właścicielem pokoju",
   "AIAgentsUnpinned": "{{aiAgents}} nieprzypięte",
   "LeaveTheRoom": "Opuść pokój",
-  "AssignOwner": "Przypisz właściciela"
+  "AssignOwner": "Przypisz właściciela",
+  "Unpin": "Odepnij"
 }

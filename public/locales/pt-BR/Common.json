@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "Somente um administrador da sala ou administrador do {{productName}} pode se tornar o proprietário da sala",
   "AIAgentsUnpinned": "{{aiAgents}} sem fixar",
   "LeaveTheRoom": "Saia da sala",
-  "AssignOwner": "Proprietário da sala"
+  "AssignOwner": "Proprietário da sala",
+  "Unpin": "Desafixar"
 }

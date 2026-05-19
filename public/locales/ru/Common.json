@@ -1613,5 +1613,6 @@
   "PeopleSelectorInfo": "Владельцем комнаты может стать только администратор комнаты или администратор {{productName}}.",
   "AIAgentsUnpinned": "{{aiAgents}} откреплены",
   "LeaveTheRoom": "Покинуть комнату",
-  "AssignOwner": "Назначить владельца"
+  "AssignOwner": "Назначить владельца",
+  "Unpin": "Открепить"
 }

@@ -196,7 +196,6 @@
   "TrashFunctionalityDescription": "Kaikki poistetut tiedostot siirretään '{{sectionName}}' -osioon. Palauta vahingossa poistetut tiedostot tai poista ne pysyvästi. '{{sectionName}}' -osiossa olevat tiedostot poistetaan automaattisesti 30 päivän kuluttua. Huomioithan, että '{{sectionName}}' -osiosta poistetut tiedostot eivät ole enää palautettavissa.",
   "UnarchivedRoomAction": "Huone '{{name}}' on arkistoimaton.",
   "UnarchivedRoomsAction": "Huoneet ovat arkistoimattomia.",
-  "Unpin": "Irrota",
   "Uploading": "Ladataan",
   "UploadingProgress": "Ladataan: {{progress}}%",
   "UserLimitDescription": "Määritä käyttäjien määrä, jotka voivat liittyä tämän kutsu-/linkin kautta.",

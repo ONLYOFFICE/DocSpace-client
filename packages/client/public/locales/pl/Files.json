@@ -196,7 +196,6 @@
   "TrashFunctionalityDescription": "Wszystkie usunięte pliki są przenoszone do '{{sectionName}}'. Przywróć pliki usunięte przez pomyłkę lub usuń je na stałe. Pliki w '{{sectionName}}' są automatycznie usuwane po 30 dniach. Należy pamiętać, że pliki usunięte z '{{sectionName}}' nie mogą być już przywrócone.",
   "UnarchivedRoomAction": "Pokój '{{name}}' został przywrócony z archiwum.",
   "UnarchivedRoomsAction": "Pokoje zostały przywrócone z archiwum.",
-  "Unpin": "Odepnij",
   "Uploading": "Wysyłanie",
   "UploadingProgress": "Wysyłanie: {{progress}}%",
   "UserLimitDescription": "Zdefiniuj liczbę użytkowników, którzy mogą dołączyć za pomocą tego linku zaproszenia.",

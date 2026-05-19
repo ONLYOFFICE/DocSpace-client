@@ -196,7 +196,6 @@
   "TrashFunctionalityDescription": "Alle gelöschten Dateien werden nach '{{sectionName}}' verschoben. Stellen Sie versehentlich gelöschte Dateien wieder her oder löschen Sie sie dauerhaft. Dateien in '{{sectionName}}' werden nach 30 Tagen automatisch gelöscht. Bitte beachten Sie, dass die aus '{{sectionName}}' gelöschten Dateien nicht mehr wiederhergestellt werden können.",
   "UnarchivedRoomAction": "Der Raum '{{name}}' ist nicht archiviert.",
   "UnarchivedRoomsAction": "Die Räume sind nicht archiviert.",
-  "Unpin": "Entpinnen",
   "Uploading": "Hochladen",
   "UploadingProgress": "Hochladen: {{progress}} %",
   "UserLimitDescription": "Legen Sie die Anzahl der Benutzer fest, die über diesen Einladungslink beitreten können.",

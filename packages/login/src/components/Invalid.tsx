@@ -33,7 +33,7 @@ import { useRouter } from "next/navigation";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
+import ErrorContainer from "@docspace/ui-kit/components/error-container";
 
 import {
   getMessageFromKey,

@@ -31,7 +31,7 @@ import { useTranslation, Trans } from "react-i18next";
 import { useRouter } from "next/navigation";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
+import ErrorContainer from "@docspace/ui-kit/components/error-container";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 
 const InviteLinkError = ({ isExpired }: { isExpired?: boolean }) => {

@@ -3,7 +3,7 @@
   "content": "Each code can be used once. You can get new codes anytime. Only codes which were generated last are valid.",
   "content_en_sha1_hash": "fbb4ee162a45e47df6c0367b76595ee590514885",
   "created_at": "2025-05-19T21:30:57.032Z",
-  "updated_at": "2026-04-11T21:03:18.380Z",
+  "updated_at": "2026-05-15T14:00:06.636Z",
   "comment": {
     "text": "This is a descriptive text within the \"Backup Codes\" dialog, providing instructions on how to use the generated backup codes for account access.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/BackupCodesDialog/index.js",
-      "line_number": 87,
+      "line_number": 96,
       "context": "<div id=\"backup-codes-print-content\">\n <Text className=\"backup-codes-description-one\" lineHeight=\"20px\">\n {t(\"BackupCodesDescription\")}\n </Text>\n <Text className=\"backup-codes-description-two\" lineHeight=\"20px\">\n {t(\"BackupCodesSecondDescription\")}\n </Text>\n \n <Text\n className={styles.backupCodesCounter}\n fontWeight={600}",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

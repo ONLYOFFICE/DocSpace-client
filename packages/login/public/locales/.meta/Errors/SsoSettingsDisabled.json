@@ -3,7 +3,7 @@
   "content": "Single sign-on is disabled",
   "content_en_sha1_hash": "389c1b2a152f3b998ef97aafc11a5af93e69a5ad",
   "created_at": "2025-05-19T21:30:57.309Z",
-  "updated_at": "2026-04-11T21:30:43.658Z",
+  "updated_at": "2026-05-15T14:00:06.922Z",
   "comment": {
     "text": "Error text displayed when a user attempts to log in via SSO, but the SSO feature has been disabled by an administrator.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 89,
+      "line_number": 98,
       "context": "case \"LoginWithAccountNotFound\":\n return t(\"Errors:LoginWithAccountNotFound\");\n case \"InvalidUsernameOrPassword\":\n return t(\"Errors:InvalidUsernameOrPassword\");\n case \"SsoSettingsDisabled\":\n return t(\"Errors:SsoSettingsDisabled\");\n case \"ErrorNotAllowedOption\":\n return t(\"Errors:ErrorNotAllowedOption\");\n case \"SsoSettingsEmptyToken\":\n return t(\"Errors:SsoSettingsEmptyToken\");\n case \"SsoSettingsNotValidToken\":",
       "module": "/packages/login"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.470988Z"
+      "approved_at": "2026-05-15T15:04:54.629887Z"
     },
     "si": {
       "ai_translated": false,

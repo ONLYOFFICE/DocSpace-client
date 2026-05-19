@@ -3,7 +3,7 @@
   "content": "Right panel collapsed",
   "content_en_sha1_hash": "abe48a9ab885b3e2aa26172a01e02da3e777858c",
   "created_at": "2025-05-19T21:30:54.621Z",
-  "updated_at": "2026-04-11T21:14:52.125Z",
+  "updated_at": "2026-05-15T14:00:06.799Z",
   "comment": {
     "text": "This is a checkbox label in the Developer Tools settings. It indicates whether the right panel of the editor is collapsed by default.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
-      "line_number": 279,
+      "line_number": 288,
       "context": "{/* <InterfaceElements>\n <Label className=\"label\">{t(\"InterfaceElements\")}</Label>\n <Checkbox\n className=\"checkbox\"\n label={t(\"RightPanelCollapsed\")}\n onChange={() => {}}\n isChecked\n />\n <Checkbox\n className=\"checkbox\"",
       "module": "/packages/client"
     }

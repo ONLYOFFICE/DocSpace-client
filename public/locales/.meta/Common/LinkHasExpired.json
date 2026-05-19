@@ -3,7 +3,7 @@
   "content": "The link you followed has expired.",
   "content_en_sha1_hash": "6adda4f7fd5f80e95e77211ab0f5b7ab26d04a11",
   "created_at": "2025-05-19T21:30:46.189Z",
-  "updated_at": "2026-04-11T20:49:39.558Z",
+  "updated_at": "2026-05-15T14:00:06.959Z",
   "comment": {
     "text": "This is an error message displayed when a user tries to access a shared link that is no longer valid.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/PublicRoom/PublicRoomError/index.tsx",
-      "line_number": 44,
+      "line_number": 51,
       "context": "const headerText = isInvalid\n ? t(\"Common:InvalidLink\")\n : t(\"Common:ExpiredLink\");\n const bodyText = isInvalid\n ? t(\"Common:LinkDoesNotExist\")\n : t(\"Common:LinkHasExpired\");\n \n useEffect(() => {\n frameCallCommand(\"setIsLoaded\");\n frameCallEvent({ event: isInvalid ? \"onNotFound\" : \"onNoAccess\" });\n }, [isInvalid]);",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

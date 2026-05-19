@@ -3,7 +3,7 @@
   "content": "Knowledge base",
   "content_en_sha1_hash": "70cd2e748fd8d867b9e8c7a55f97c1f3930136f7",
   "created_at": "2025-12-17T07:49:06.312Z",
-  "updated_at": "2026-04-23T17:24:01.731Z",
+  "updated_at": "2026-05-15T14:00:06.654Z",
   "comment": {
     "text": "This is a tab label or section title. It refers to a knowledge base feature within the AI Room or Portal Settings.",
     "is_auto": true,
@@ -13,37 +13,37 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Knowledge.tsx",
-      "line_number": 51,
+      "line_number": 60,
       "context": "return (\n <StyledParam increaseGap>\n <div className=\" set_room_params-info\">\n <div>\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} noSelect>\n {t(\"Knowledge\")}\n </Text>\n <Text\n fontSize=\"12px\"\n lineHeight=\"16px\"\n fontWeight={400}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Tabs/AiRoomTabs/index.tsx",
-      "line_number": 137,
+      "line_number": 146,
       "context": "name: t(\"AIChat\"),\n content: null,\n },\n {\n id: \"knowledge\",\n name: t(\"Knowledge\"),\n content: null,\n },\n {\n id: \"result\",\n name: t(\"ResultStorage\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 135,
+      "line_number": 144,
       "context": "currentTabId === \"providers\"\n ? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);\n \n const serversData = [",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 135,
+      "line_number": 144,
       "context": "currentTabId === \"providers\"\n ? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);\n \n const serversData = [",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 256,
+      "line_number": 263,
       "context": "className={generalStyles.search}\n data-tooltip-id={tooltipId}\n data-tooltip-content={\n !hasAIProviders\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"AIRoom:Knowledge\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }\n >",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 517,
+      "line_number": 526,
       "context": "},\n {\n id: \"portal-settings_catalog-ai-settings-knowledge\",\n key: \"7-3\",\n link: \"knowledge\",\n tKey: \"AIRoom:Knowledge\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     }
@@ -54,6 +54,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     }
   }
 }

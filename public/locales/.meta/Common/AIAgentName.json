@@ -3,7 +3,7 @@
   "content": "AI Agent: {{AgentName}}",
   "content_en_sha1_hash": "614985a909a5ac3847fb1e51c41ba81d4699fbf7",
   "created_at": "2026-04-13T14:58:59.737Z",
-  "updated_at": "2026-04-13T14:59:33.644Z",
+  "updated_at": "2026-05-15T14:00:07.021Z",
   "comment": {
     "text": "Label in transaction history rows and tables that displays the AI agent involved, formatted as “AI Agent: {{AgentName}}”. The placeholder {{AgentName}} is replaced with the agent’s title.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/RowView/RowBody.tsx",
-      "line_number": 106,
+      "line_number": 115,
       "context": "];\n \n if (serviceName === AI_TOOLS && transaction.agentTitle) {\n children.push(\n <Text key=\"source\" fontWeight={600} fontSize=\"11px\">\n {t(\"AIAgentName\", { AgentName: transaction.agentTitle })}\n </Text>,\n );\n }\n \n if (transaction.participantDisplayName) {",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TableView/TableBody.tsx",
-      "line_number": 84,
+      "line_number": 93,
       "context": "</TableCell>\n {serviceName === AI_TOOLS ? (\n <TableCell>\n <Text fontWeight={600} fontSize=\"11px\">\n {transaction.agentTitle\n ? t(\"AIAgentName\", { AgentName: transaction.agentTitle })\n : \"—\"}\n </Text>\n </TableCell>\n ) : null}\n <TableCell>",
       "module": "/libs/ui-kit"
     }
@@ -30,6 +30,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     }
   }
 }

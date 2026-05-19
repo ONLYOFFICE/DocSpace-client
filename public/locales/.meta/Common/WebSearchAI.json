@@ -3,7 +3,7 @@
   "content": "Web search",
   "content_en_sha1_hash": "381ceddd75a893f19764c7e4cf9cd12c0f6e88c3",
   "created_at": "2025-11-21T08:21:51.294Z",
-  "updated_at": "2026-04-23T17:24:01.915Z",
+  "updated_at": "2026-05-15T14:00:06.759Z",
   "comment": {
     "text": "This is a noun used in various contexts, such as a tooltip, a page title, and a toast message, referring to the web search functionality within the AI settings.",
     "is_auto": true,
@@ -13,61 +13,61 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/tools-settings/index.tsx",
-      "line_number": 397,
+      "line_number": 404,
       "context": "<Text>{t(\"ExtendedThinkingNotSupported\")}</Text>\n ) : (\n <>\n <Text>\n {t(\"ConnectWebSearch\", {\n webSearch: t(\"WebSearchAI\"),\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n {isAdmin && goToWebSearchSettings ? (\n <Link",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 133,
+      "line_number": 142,
       "context": "React.useEffect(() => {\n const title =\n currentTabId === \"providers\"\n ? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 133,
+      "line_number": 142,
       "context": "React.useEffect(() => {\n const title =\n currentTabId === \"providers\"\n ? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/dialogs/reset/index.tsx",
-      "line_number": 64,
+      "line_number": 73,
       "context": "try {\n await restoreWebSearch?.();\n toastr.success(\n t(\"AISettings:WebSearchDisabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n onSuccess?.();\n getAIConfig?.();\n } catch (error) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/dialogs/reset/index.tsx",
-      "line_number": 64,
+      "line_number": 73,
       "context": "try {\n await restoreWebSearch?.();\n toastr.success(\n t(\"AISettings:WebSearchDisabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n onSuccess?.();\n getAIConfig?.();\n } catch (error) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 124,
+      "line_number": 131,
       "context": "try {\n await updateWebSearch?.(true, selectedOption, value);\n \n toastr.success(\n t(\"AISettings:WebSearchEnabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n } catch (e) {\n console.error(e);\n toastr.error(e as string);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 124,
+      "line_number": 131,
       "context": "try {\n await updateWebSearch?.(true, selectedOption, value);\n \n toastr.success(\n t(\"AISettings:WebSearchEnabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n } catch (e) {\n console.error(e);\n toastr.error(e as string);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 124,
+      "line_number": 131,
       "context": "try {\n await updateWebSearch?.(true, selectedOption, value);\n \n toastr.success(\n t(\"AISettings:WebSearchEnabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n } catch (e) {\n console.error(e);\n toastr.error(e as string);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 124,
+      "line_number": 131,
       "context": "try {\n await updateWebSearch?.(true, selectedOption, value);\n \n toastr.success(\n t(\"AISettings:WebSearchEnabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n } catch (e) {\n console.error(e);\n toastr.error(e as string);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 124,
+      "line_number": 131,
       "context": "try {\n await updateWebSearch?.(true, selectedOption, value);\n \n toastr.success(\n t(\"AISettings:WebSearchEnabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n } catch (e) {\n console.error(e);\n toastr.error(e as string);",
       "module": "/packages/client"
     }
@@ -203,7 +203,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

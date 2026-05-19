@@ -3,7 +3,7 @@
   "content": "Cancel button text",
   "content_en_sha1_hash": "619520053dee4d51223c942aa13fe5635deaa4f0",
   "created_at": "2025-05-19T21:30:54.379Z",
-  "updated_at": "2026-04-11T21:16:12.626Z",
+  "updated_at": "2026-05-15T14:00:06.808Z",
   "comment": {
     "text": "This is the placeholder text for an input field where users can customize the label for a \"Cancel\" button.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/CancelTextInput.js",
-      "line_number": 51,
+      "line_number": 60,
       "context": "debouncedSetConfig(e.target.value);\n };\n \n return (\n <>\n <Label className=\"label\" text={t(\"CancelButtonText\")} />\n <TextInput\n scale\n onChange={onChangeCancelLabel}\n placeholder={t(\"Common:CancelButton\")}\n value={value}",
       "module": "/packages/client"
     }

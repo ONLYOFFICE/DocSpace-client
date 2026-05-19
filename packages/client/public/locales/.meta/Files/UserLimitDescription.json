@@ -3,7 +3,7 @@
   "content": "Define the number of users who can join via this invite link.",
   "content_en_sha1_hash": "086c1b8ed3b79f32d0c7beecd67d15d20687f99f",
   "created_at": "2026-02-19T13:36:27.542Z",
-  "updated_at": "2026-04-11T21:07:47.575Z",
+  "updated_at": "2026-05-15T14:00:06.712Z",
   "comment": {
     "text": "This is a descriptive text explaining the purpose of the \"User limit\" setting for an invite link. It appears below the \"User limit\" checkbox in the link settings panel.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/LinkSettingsPanel/index.tsx",
-      "line_number": 204,
+      "line_number": 213,
       "context": "<Text\n fontSize=\"12px\"\n fontWeight={400}\n className={styles.linkSettingsDescriptionText}\n >\n {t(\"Files:UserLimitDescription\")}\n </Text>\n \n {userLimitIsChecked ? (\n <div className={styles.userLimitInputBlock}>\n <div className={styles.userLimitInputBlockText}>",
       "module": "/packages/client"
     }
@@ -24,6 +24,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     }
   }
 }

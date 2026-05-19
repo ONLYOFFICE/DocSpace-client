@@ -3,7 +3,7 @@
   "content": "EB",
   "content_en_sha1_hash": "6f1133307673bd2fca81f068c0a87d849203cc59",
   "created_at": "2025-05-19T21:30:45.205Z",
-  "updated_at": "2026-04-13T14:59:06.030Z",
+  "updated_at": "2026-05-15T14:00:07.022Z",
   "comment": {
     "text": "This is a short label for the Exabyte unit of digital information, used in a list of storage units.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/utils/common.ts",
-      "line_number": 56,
+      "line_number": 65,
       "context": "t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),\n t(\"Common:Exabyte\"),\n ];\n \n if (bytes <= 0) return `${`0 ${t(\"Bytes\")}`}`;\n \n if (bytes >= 1024) {",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

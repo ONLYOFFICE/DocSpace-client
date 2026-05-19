@@ -3,7 +3,7 @@
   "content": "Company info settings",
   "content_en_sha1_hash": "192f2a8a9bec6d013a113f97fc1ce9b3cdd0c794",
   "created_at": "2025-05-26T07:15:41.404Z",
-  "updated_at": "2026-04-11T20:56:54.284Z",
+  "updated_at": "2026-05-15T14:00:06.874Z",
   "comment": {
     "text": "This is a page title and a navigation link label for the section where users can configure their company's information within the ONLYOFFICE DocSpace settings.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 131,
+      "line_number": 140,
       "context": "{\n id: \"portal-settings_catalog-company-info-settings\",\n key: \"0-1-2\",\n icon: \"\",\n link: \"company-info\",\n tKey: \"Common:CompanyInfoSettings\",\n },\n {\n id: \"portal-settings_catalog-additional-resources\",\n key: \"0-1-3\",\n icon: \"\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/management/src/lib/index.ts",
-      "line_number": 63,
+      "line_number": 72,
       "context": "case \"payments\":\n return { key: t(\"Common:PaymentsTitle\"), isSubPage: false };\n case \"white-label\":\n return { key: t(\"Common:WhiteLabel\"), isSubPage: true };\n case \"company-info\":\n return { key: t(\"Common:CompanyInfoSettings\"), isSubPage: true };\n case \"additional-resources\":\n return { key: t(\"Common:AdditionalResources\"), isSubPage: true };\n case \"brand-name\":\n return { key: t(\"Common:BrandName\"), isSubPage: true };\n case \"bonus\":",
       "module": "/packages/management"
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 150,
+      "line_number": 159,
       "context": "{t(\"BrandingSectionDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </div>\n <div className={classNames(styles.header, \"header\")}>\n {t(\"CompanyInfoSettings\")}\n </div>\n <div className={classNames(styles.description, \"description\")}>\n {isSettingPaid ? (\n <Trans\n t={t}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
-      "line_number": 70,
+      "line_number": 79,
       "context": "badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}\n />\n {displayAbout ? (\n <CategoryItem\n title={t(\"CompanyInfoSettings\")}\n subtitle={t(\"BrandingSectionDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n url={`${baseUrl}/branding/company-info`}\n withPaidBadge={!isSettingPaid}",
       "module": "/packages/shared"
     }
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

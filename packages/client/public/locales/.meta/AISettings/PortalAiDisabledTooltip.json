@@ -3,7 +3,7 @@
   "content": "To use {{productName}} AI provider, make sure to connect an AI service first.",
   "content_en_sha1_hash": "54887a797b21d57396ba9e68757d778adb52303f",
   "created_at": "2026-03-20T09:07:44.479Z",
-  "updated_at": "2026-05-08T13:10:45.614Z",
+  "updated_at": "2026-05-15T14:00:06.761Z",
   "comment": {
     "text": "This is a tooltip that appears when the ONLYOFFICE AI provider is disabled. It informs the user that they need to connect an AI service to use the AI provider. `{{productName}}` is a variable representing the product's brand name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/DefaultProvider.tsx",
-      "line_number": 117,
+      "line_number": 124,
       "context": "aiProviders?.length === 1 && aiProviders[0].type === ProviderType.PortalAi;\n const isDisabled = isOnlySystemProvider && !aiConfig?.systemAiEnabled;\n \n const getTooltipContent = () => (\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"AISettings:PortalAiDisabledTooltip\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n );",
       "module": "/packages/client"
     }
@@ -24,6 +24,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     }
   }
 }

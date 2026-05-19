@@ -3,7 +3,7 @@
   "content": "PDFs",
   "content_en_sha1_hash": "8c85c119d1cd8e0acfc82505e49fce77f2339f5f",
   "created_at": "2025-12-22T09:40:07.684Z",
-  "updated_at": "2026-04-12T04:37:23.266Z",
+  "updated_at": "2026-05-15T14:00:06.631Z",
   "comment": {
     "text": "This is a tab label in a file gallery, allowing users to filter and view only PDF documents.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/TemplateGallery/index.tsx",
-      "line_number": 91,
+      "line_number": 100,
       "context": "),\n onClick: async () => await resetFilters(FILE_EXTENSIONS.PPTX),\n },\n {\n id: TAB_IDS.FORMS,\n name: t(\"Common:PDFs\"),\n content: (\n <TilesContainer ext={FILE_EXTENSIONS.PDF} isShowInitSkeleton={false} />\n ),\n onClick: async () => await resetFilters(FILE_EXTENSIONS.PDF),\n },",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

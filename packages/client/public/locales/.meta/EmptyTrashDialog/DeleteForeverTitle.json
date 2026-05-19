@@ -3,7 +3,7 @@
   "content": "Delete forever?",
   "content_en_sha1_hash": "0e0027aade000ea790cb5c39b96cbcc240beec7d",
   "created_at": "2025-05-19T21:30:56.571Z",
-  "updated_at": "2026-04-11T21:06:28.725Z",
+  "updated_at": "2026-05-15T14:00:06.673Z",
   "comment": {
     "text": "This is the title of a confirmation dialog that appears when a user attempts to permanently delete items from the Recycle Bin.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 217,
+      "line_number": 226,
       "context": "if (isRoomDelete) {\n if (selection.length > 1) return t(\"DeleteRoomsTitle\");\n return t(\"DeleteRoomTitle\");\n }\n \n if (isRecycleBinFolder) return t(\"EmptyTrashDialog:DeleteForeverTitle\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:Confirmation\");\n \n if (unsubscribe) return t(\"Common:RemoveFromList\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/EmptyTrashDialog/index.js",
-      "line_number": 98,
+      "line_number": 107,
       "context": "isLoading={!tReady}\n visible={visible}\n onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>{t(\"DeleteForeverTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{description}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

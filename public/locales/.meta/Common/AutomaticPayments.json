@@ -3,7 +3,7 @@
   "content": "Automatic payments",
   "content_en_sha1_hash": "0d1f62072cabc5b7f051e3f49621066de8ced2c3",
   "created_at": "2026-04-10T13:53:41.891Z",
-  "updated_at": "2026-04-13T14:59:06.026Z",
+  "updated_at": "2026-05-15T14:00:07.019Z",
   "comment": {
     "text": "This is a label for a checkbox or toggle switch that enables or disables automatic payments for a user's account.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
-      "line_number": 332,
+      "line_number": 341,
       "context": "[styles.noMargin]: noMargin,\n })}\n >\n <div className={styles.autoPaymentHeader}>\n <Text isBold fontSize=\"16px\">\n {t(\"AutomaticPayments\")}\n </Text>\n <ToggleButton\n isChecked={isAutomaticPaymentsEnabled}\n onChange={onToggleClick}\n className={styles.toggleButton}",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

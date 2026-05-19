@@ -3,7 +3,7 @@
   "content": "Confirmation",
   "content_en_sha1_hash": "3424edc2354c7c55f6eb740b673d349b02d27c8d",
   "created_at": "2025-05-19T21:30:43.625Z",
-  "updated_at": "2026-05-08T13:10:45.527Z",
+  "updated_at": "2026-05-15T14:00:06.636Z",
   "comment": {
     "text": "This is the title of a confirmation dialog. It appears when the AI assistant wants to open a file or use a tool, prompting the user to confirm the action.",
     "is_auto": true,
@@ -13,73 +13,73 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/open-file-confirm-dialog/index.tsx",
-      "line_number": 86,
+      "line_number": 93,
       "context": "autoMaxHeight\n closeOnBackdropClick={false}\n data-testid=\"open-file-confirm-dialog\"\n >\n <ModalDialog.Header>\n {t(\"Confirmation\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.toolCallManage}>\n <Text>{t(\"AIWouldLikeToOpenFile\")}</Text>",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/tool-call-confirm-dialog/index.tsx",
-      "line_number": 106,
+      "line_number": 113,
       "context": "autoMaxHeight\n closeOnBackdropClick={false}\n data-testid=\"tool-call-confirm-dialog\"\n >\n <ModalDialog.Header>\n {t(\"Confirmation\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.toolCallManage}>\n <Text>{t(\"AIWouldLikeToUseThisTool\")}</Text>",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/index.tsx",
-      "line_number": 171,
+      "line_number": 180,
       "context": "const confirmationDialogContent: Record<\n string,\n { title: string; body: string | React.ReactNode[] }\n > = {\n [BACKUP_SERVICE]: {\n title: t(\"Confirmation\"),\n body: !isCurrentConfirmState\n ? t(\"EnableBackupConfirm\", {\n productName: getBrandName(\"ProductName\"),\n })\n : isFreeTariff",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/index.tsx",
-      "line_number": 171,
+      "line_number": 180,
       "context": "const confirmationDialogContent: Record<\n string,\n { title: string; body: string | React.ReactNode[] }\n > = {\n [BACKUP_SERVICE]: {\n title: t(\"Confirmation\"),\n body: !isCurrentConfirmState\n ? t(\"EnableBackupConfirm\", {\n productName: getBrandName(\"ProductName\"),\n })\n : isFreeTariff",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 186,
+      "line_number": 208,
       "context": "}\n };\n \n const confirmationDialogContent = isAiToolsServiceOn\n ? {\n title: t(\"Confirmation\"),\n body: [\n t(\"DisableAIToolsConfirm\", {\n organizationName: logoText,\n }),\n <CommonTrans",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 186,
+      "line_number": 208,
       "context": "}\n };\n \n const confirmationDialogContent = isAiToolsServiceOn\n ? {\n title: t(\"Confirmation\"),\n body: [\n t(\"DisableAIToolsConfirm\", {\n organizationName: logoText,\n }),\n <CommonTrans",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
-      "line_number": 117,
+      "line_number": 130,
       "context": "setIsLoading(false);\n }\n };\n \n const confirmationDialogContent = {\n title: t(\"Confirmation\"),\n \n body: !isBackupServiceOn\n ? t(\"EnableBackupConfirm\", {\n productName: getBrandName(\"ProductName\"),\n })",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CancelOperationDialog/index.tsx",
-      "line_number": 90,
+      "line_number": 99,
       "context": "? t(\"Common:CancelUploadingProcess\")\n : t(\"Common:CancelCurrentProcess\");\n \n return (\n <ModalDialog visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"Common:Confirmation\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{bodyText}</Text>\n <div\n style={{\n display: \"flex\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CancelUploadDialog/index.js",
-      "line_number": 59,
+      "line_number": 68,
       "context": "cancelMigration();\n };\n \n return (\n <ModalDialog visible={visible} onClose={onClose} displayType=\"modal\">\n <ModalDialog.Header>{t(\"Common:Confirmation\")}</ModalDialog.Header>\n <ModalDialog.Body>{modalBodyText}</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:Yes\")}\n size=\"normal\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 220,
+      "line_number": 229,
       "context": "}\n \n if (isRecycleBinFolder) return t(\"EmptyTrashDialog:DeleteForeverTitle\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:Confirmation\");\n \n if (unsubscribe) return t(\"Common:RemoveFromList\");\n \n return t(\"Common:SectionMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ResetConfirmationDialog/ResetConfirmationModal.js",
-      "line_number": 44,
+      "line_number": 53,
       "context": "contentHeight=\"100%\"\n displayType=\"modal\"\n onClose={closeResetModal}\n visible={confirmationResetModal}\n >\n <ModalDialog.Header>{t(\"Common:Confirmation\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <Text>{t(\"Common:ConfirmationText\")}</Text>\n </ModalDialog.Body>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/management/src/app/settings/encrypt-data/EncryptWarningDialog.tsx",
-      "line_number": 77,
+      "line_number": 86,
       "context": "visible={encryptWarningDialogVisible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>{t(\"Common:Confirmation\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {status === EncryptionStatus.Decrypted\n ? t(\"EncryptWarningDialogContent\")\n : t(\"DecryptWarningDialogContent\")}",
       "module": "/packages/management"
     }
@@ -215,7 +215,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

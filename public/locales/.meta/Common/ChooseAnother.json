@@ -3,7 +3,7 @@
   "content": "Choose another",
   "content_en_sha1_hash": "49adb486e24ab06f21e867eaa412afef67f497a6",
   "created_at": "2025-05-19T21:30:43.438Z",
-  "updated_at": "2026-04-11T20:57:19.154Z",
+  "updated_at": "2026-05-15T14:00:07.029Z",
   "comment": {
     "text": "This is the text for a button that allows users to select a different image in the image cropper.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/components/image-editor/ImageCropper/index.tsx",
-      "line_number": 153,
+      "line_number": 162,
       "context": "/>\n </div>\n <div\n className={styles.iconCropperChangeButton}\n onClick={() => inputFilesElement.current?.click()}\n title={t(\"Common:ChooseAnother\")}\n data-testid=\"change_image_button\"\n >\n <RefreshReactSvg />\n <div className={styles.iconCropperChangeButtonText}>\n {t(\"Common:ChooseAnother\")}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/components/image-editor/ImageCropper/index.tsx",
-      "line_number": 153,
+      "line_number": 162,
       "context": "/>\n </div>\n <div\n className={styles.iconCropperChangeButton}\n onClick={() => inputFilesElement.current?.click()}\n title={t(\"Common:ChooseAnother\")}\n data-testid=\"change_image_button\"\n >\n <RefreshReactSvg />\n <div className={styles.iconCropperChangeButtonText}>\n {t(\"Common:ChooseAnother\")}",
       "module": "/libs/ui-kit"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

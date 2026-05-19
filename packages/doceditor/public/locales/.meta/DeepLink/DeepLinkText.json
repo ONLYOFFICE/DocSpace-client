@@ -3,7 +3,7 @@
   "content": "You can open the document on the portal or in the mobile application",
   "content_en_sha1_hash": "56d7d86fe4eaefe22b74bf7fe71b0fb2c86ea739",
   "created_at": "2025-05-19T21:30:57.138Z",
-  "updated_at": "2026-04-11T21:29:49.359Z",
+  "updated_at": "2026-05-15T14:00:06.907Z",
   "comment": {
     "text": "This is a descriptive text displayed below a deep link. It informs the user that a document can be opened either on the portal or in the mobile application.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/deep-link/index.tsx",
-      "line_number": 138,
+      "line_number": 147,
       "context": "</Text>\n </div>\n <Text>\n {isOpenInAppOnly\n ? t(\"DeepLink:DeepLinkOnlyAppText\")\n : t(\"DeepLink:DeepLinkText\")}\n </Text>\n </div>\n <div className={styles.actionsWrapper}>\n {!isOpenInAppOnly ? (\n <Checkbox",
       "module": "/packages/doceditor"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.452785Z"
+      "approved_at": "2026-05-15T15:04:54.611151Z"
     },
     "si": {
       "ai_translated": false,

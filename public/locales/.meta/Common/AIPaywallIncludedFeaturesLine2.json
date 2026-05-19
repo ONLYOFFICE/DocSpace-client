@@ -1,0 +1,29 @@
+{
+  "key_path": "AIPaywallIncludedFeaturesLine2",
+  "content": "OCR · Error checking · Knowledge base · Web search",
+  "content_en_sha1_hash": "605317859c855b5950355d3e164d11636c7c6771",
+  "created_at": "2026-05-15T13:59:46.102Z",
+  "updated_at": "2026-05-15T14:03:08.739Z",
+  "comment": {
+    "text": "A line of text in the AI paywall features block, listing specific AI capabilities separated by middle dots.",
+    "is_auto": true,
+    "updated_at": "2026-05-15T14:03:08.739Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallPage.tsx",
+      "line_number": 346,
+      "context": "<div className={styles.featuresBlock}>\n <Text fontSize=\"12px\" className={styles.featuresLine}>\n {t(\"AIPaywallIncludedFeaturesLine1\")}\n </Text>\n <Text fontSize=\"12px\" className={styles.featuresLine}>\n {t(\"AIPaywallIncludedFeaturesLine2\")}\n </Text>\n </div>\n \n <div className={styles.pricingRow}>\n <Link",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

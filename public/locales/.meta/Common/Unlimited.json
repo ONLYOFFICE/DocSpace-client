@@ -3,7 +3,7 @@
   "content": "Unlimited",
   "content_en_sha1_hash": "b8bef37b7153b5665e94cf9b212c8708eb06db1f",
   "created_at": "2025-05-19T21:30:49.415Z",
-  "updated_at": "2026-04-23T17:24:01.677Z",
+  "updated_at": "2026-05-15T14:00:06.625Z",
   "comment": {
     "text": "This is a label for an option in a dropdown or a button that indicates a feature or setting has no limits.",
     "is_auto": true,
@@ -13,31 +13,31 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/SpaceQuota/index.js",
-      "line_number": 62,
+      "line_number": 71,
       "context": "{\n id: \"info-account-quota_no-quota\",\n key: \"no-quota\",\n label:\n item?.quotaLimit === -1\n ? t(\"Common:Unlimited\")\n : t(\"Common:DisableQuota\"),\n action: \"no-quota\",\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/SpaceQuota/index.js",
-      "line_number": 62,
+      "line_number": 71,
       "context": "{\n id: \"info-account-quota_no-quota\",\n key: \"no-quota\",\n label:\n item?.quotaLimit === -1\n ? t(\"Common:Unlimited\")\n : t(\"Common:DisableQuota\"),\n action: \"no-quota\",\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 253,
+      "line_number": 262,
       "context": "label: severalDays,\n onClick: () => setSevenDays(),\n },\n {\n key: \"unlimited\",\n label: t(\"Common:Unlimited\"),\n onClick: () => setUnlimited(),\n },\n {\n key: \"custom\",\n label: t(\"Common:Custom\"),",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/sub-components/ExpiredComboBox.tsx",
-      "line_number": 141,
+      "line_number": 150,
       "context": "{{ date }}\n </LinkWithDropdown>\n </Trans>\n );\n }\n const date = t(\"Common:Unlimited\").toLowerCase();\n \n return (\n <Trans t={t} i18nKey=\"LinkIsValid\" ns=\"Common\">\n The link is valid for\n <LinkWithDropdown",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 723,
+      "line_number": 732,
       "context": "export const getConvertedQuota = (\n t: (key: string) => string,\n bytes: number,\n withoutSizeName: boolean = false,\n ) => {\n if (bytes === -1) return t(\"Common:Unlimited\");\n return getConvertedSize(t, bytes, withoutSizeName);\n };\n \n export const getSpaceQuotaAsText = (\n t: (key: string) => string,",
       "module": "/packages/shared"
     }
@@ -173,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

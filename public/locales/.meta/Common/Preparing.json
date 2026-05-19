@@ -3,7 +3,7 @@
   "content": "Preparing",
   "content_en_sha1_hash": "96a9b7cdbe400c8b44756e76d158b85eb3370995",
   "created_at": "2025-10-27T16:14:24.376Z",
-  "updated_at": "2026-04-13T14:59:05.931Z",
+  "updated_at": "2026-05-15T14:00:06.926Z",
   "comment": {
     "text": "This is a short label displayed on a badge, indicating that a form or other item is currently being prepared or processed.",
     "is_auto": true,
@@ -13,31 +13,31 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/forms-grid/FormStatusBadge.tsx",
-      "line_number": 60,
+      "line_number": 69,
       "context": "<Badge\n noHover\n isVersionBadge\n backgroundColor={globalColors.gray}\n color={globalColors.white}\n label={t(\"Common:Preparing\")}\n title={t(\"Common:Preparing\")}\n borderRadius=\"50px\"\n fontSize=\"9px\"\n fontWeight={800}\n maxWidth=\"max-content\"",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/forms-grid/FormStatusBadge.tsx",
-      "line_number": 60,
+      "line_number": 69,
       "context": "<Badge\n noHover\n isVersionBadge\n backgroundColor={globalColors.gray}\n color={globalColors.white}\n label={t(\"Common:Preparing\")}\n title={t(\"Common:Preparing\")}\n borderRadius=\"50px\"\n fontSize=\"9px\"\n fontWeight={800}\n maxWidth=\"max-content\"",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 342,
+      "line_number": 349,
       "context": "\"badge-version badge-version-current tablet-badge icons-group\",\n )}\n backgroundColor={\n themeIsBase ? globalColors.gray : globalColors.grayDark\n }\n label={t(\"Common:Preparing\")}\n title={t(\"Common:Preparing\")}\n {...versionBadgeProps}\n style={{ width: \"max-content\" }}\n />\n </BadgeWrapper>",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 342,
+      "line_number": 349,
       "context": "\"badge-version badge-version-current tablet-badge icons-group\",\n )}\n backgroundColor={\n themeIsBase ? globalColors.gray : globalColors.grayDark\n }\n label={t(\"Common:Preparing\")}\n title={t(\"Common:Preparing\")}\n {...versionBadgeProps}\n style={{ width: \"max-content\" }}\n />\n </BadgeWrapper>",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 342,
+      "line_number": 349,
       "context": "\"badge-version badge-version-current tablet-badge icons-group\",\n )}\n backgroundColor={\n themeIsBase ? globalColors.gray : globalColors.grayDark\n }\n label={t(\"Common:Preparing\")}\n title={t(\"Common:Preparing\")}\n {...versionBadgeProps}\n style={{ width: \"max-content\" }}\n />\n </BadgeWrapper>",
       "module": "/packages/shared"
     }
@@ -173,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

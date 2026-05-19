@@ -3,7 +3,7 @@
   "content": "View",
   "content_en_sha1_hash": "69bd4ef9fbd0894a22759c3766b859defbdedbc8",
   "created_at": "2025-05-19T21:30:49.521Z",
-  "updated_at": "2026-05-08T13:10:45.514Z",
+  "updated_at": "2026-05-15T14:00:06.625Z",
   "comment": {
     "text": "This is a button label or menu item for viewing content. It can appear as a standalone button on a smart banner or as a menu option in a context menu.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/SmartBanner/index.js",
-      "line_number": 98,
+      "line_number": 107,
       "context": "<SmartBanner\n title={t(\"SmartBanner:SmartBannerAppName\", {\n organizationName: logoText,\n })}\n author=\"Ascensio System SIA\"\n button={t(\"Common:View\")}\n force={force}\n onClose={() => setIsBannerVisible(false)}\n onInstall={() => setIsBannerVisible(false)}\n storeText={storeText}\n price={priceText}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1868,
+      "line_number": 1877,
       "context": "onSearch={onSearch}\n onClearFilter={onClearFilter}\n getSelectedInputValue={getSelectedInputValue}\n filterHeader={t(\"Common:AdvancedFilter\")}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n isFavoritesFolder={isFavoritesFolder}\n isPersonalRoom={isPersonalRoom}\n isRooms={isRooms}\n removeSelectedItem={removeSelectedItem}\n clearAll={clearAll}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2233,
+      "line_number": 2242,
       "context": "key: \"view\",\n label:\n this.treeFoldersStore.isRecentFolder ||\n this.treeFoldersStore.isFavoritesFolder\n ? t(\"Open\")\n : t(\"Common:View\"),\n icon: EyeReactSvgUrl,\n onClick: (fileId) => this.onMediaFileClick(fileId, item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/index.tsx",
-      "line_number": 104,
+      "line_number": 113,
       "context": "userId=\"\"\n isRecentFolder\n currentDeviceType={currentDeviceType}\n filterHeader={t(\"Common:AdvancedFilter\")}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n filterTitle={t(\"Files:Filter\")}\n sortByTitle={t(\"Common:SortBy\")}\n selectorLabel=\"\"\n isIndexing={false}\n initSearchValue={initSearchValue}",
       "module": "/packages/sdk"
     },
@@ -43,13 +43,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
-      "line_number": 251,
+      "line_number": 260,
       "context": "}\n : null,\n view: {\n id: \"option_view\",\n key: \"view\",\n label: t(\"Common:View\"),\n icon: EyeReactSvgUrl,\n onClick: () => openForm(file, \"view\"),\n disabled: false,\n },\n separator1: makeSeparator(\"separator1\"),",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 359,
+      "line_number": 368,
       "context": "case ShareAccessRights.Review:\n return t(\"Common:Review\");\n case ShareAccessRights.Comment:\n return t(\"Common:Comment\");\n case ShareAccessRights.ReadOnly:\n return t(\"Common:View\");\n case ShareAccessRights.FormFilling:\n return t(\"Common:FillOut\");\n default:\n return \"\";\n }",
       "module": "/packages/shared"
     }
@@ -185,7 +185,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

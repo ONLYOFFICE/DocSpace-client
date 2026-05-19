@@ -3,7 +3,7 @@
   "content": "Take advantage of vast word processing functionality.",
   "content_en_sha1_hash": "722e0e14c0c91f4013c10e4fad822951b0ab6b0d",
   "created_at": "2025-05-19T21:30:56.447Z",
-  "updated_at": "2026-04-11T21:07:24.940Z",
+  "updated_at": "2026-05-15T14:00:06.599Z",
   "comment": {
     "text": "This is a descriptive sentence appearing below the \"Create Document\" button in an empty folder view. It highlights the benefits of creating a new document.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 341,
+      "line_number": 350,
       "context": "disabled: isFrame,\n };\n \n const createDoc = {\n title: t(\"EmptyView:CreateDocument\"),\n description: t(\"EmptyView:CreateDocumentDescription\"),\n icon: <CreateNewFormIcon />,\n key: \"create-doc-option\",\n onClick: () => actions.onCreate(\"docx\"),\n disabled: !security?.Create,\n };",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

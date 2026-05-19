@@ -3,7 +3,7 @@
   "content": "Your further edits may not be saved.",
   "content_en_sha1_hash": "3dbfb8cd57bf68171c29e8fb98b89ce9f2c8182b",
   "created_at": "2026-02-18T14:56:21.766Z",
-  "updated_at": "2026-04-24T09:18:49.947Z",
+  "updated_at": "2026-05-15T14:00:06.902Z",
   "comment": {
     "text": "This is a warning message displayed in a bar at the top of the document editor. It appears when a user's storage quota is exceeded, indicating that subsequent changes might not be saved.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/Bar/index.tsx",
-      "line_number": 56,
+      "line_number": 65,
       "context": "switch (type) {\n case \"room\":\n return {\n description: initial\n ? t(\"EditingUnavailable\")\n : t(\"YourFurtherEditsNotSaved\"),\n header: initial ? t(\"RoomQuotaReached\") : t(\"RoomQuotaLimitWarning\"),\n };\n case \"user\":\n return {\n description: initial",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/components/Bar/index.tsx",
-      "line_number": 56,
+      "line_number": 65,
       "context": "switch (type) {\n case \"room\":\n return {\n description: initial\n ? t(\"EditingUnavailable\")\n : t(\"YourFurtherEditsNotSaved\"),\n header: initial ? t(\"RoomQuotaReached\") : t(\"RoomQuotaLimitWarning\"),\n };\n case \"user\":\n return {\n description: initial",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/components/Bar/index.tsx",
-      "line_number": 56,
+      "line_number": 65,
       "context": "switch (type) {\n case \"room\":\n return {\n description: initial\n ? t(\"EditingUnavailable\")\n : t(\"YourFurtherEditsNotSaved\"),\n header: initial ? t(\"RoomQuotaReached\") : t(\"RoomQuotaLimitWarning\"),\n };\n case \"user\":\n return {\n description: initial",
       "module": "/packages/doceditor"
     }
@@ -169,7 +169,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null,
+      "approved_at": "2026-05-15T15:04:54.259137Z",
       "ai_spell_check_verified_at": "2026-04-24T09:16:49.139Z",
       "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
       "ai_spell_check_verified_hash": "acc2be28ee296f1b"

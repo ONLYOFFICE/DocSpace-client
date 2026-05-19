@@ -3,7 +3,7 @@
   "content": "File management",
   "content_en_sha1_hash": "5cdd155bb48d903d911fae98b21437d3fcd9e39d",
   "created_at": "2026-04-03T21:51:34.670Z",
-  "updated_at": "2026-04-23T17:24:02.046Z",
+  "updated_at": "2026-05-15T14:00:06.877Z",
   "comment": {
     "text": "This is a navigation item label for a section within user settings, allowing users to manage their files.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/index.tsx",
-      "line_number": 176,
+      "line_number": 185,
       "context": "await getNotificationsData();\n },\n },\n {\n id: \"file-management\",\n name: t?.(\"Common:FileManagement\"),\n content: <FileManagement />,\n onClick: async () => {\n await getFileManagementData();\n },\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/index.tsx",
-      "line_number": 84,
+      "line_number": 93,
       "context": "},\n ]\n : []),\n {\n id: \"file-management\",\n name: t(\"Common:FileManagement\"),\n content: wrapContent(<FileManagement />),\n },\n {\n id: \"interface-theme\",\n name: t(\"Common:InterfaceTheme\"),",
       "module": "/packages/sdk"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

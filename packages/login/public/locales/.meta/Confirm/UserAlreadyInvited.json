@@ -1,0 +1,29 @@
+{
+  "key_path": "UserAlreadyInvited",
+  "content": "You have already been invited. Please complete the registration using the link from the email.",
+  "content_en_sha1_hash": "3739bbf51e202c1eceedd90f05fb39a7ac1b4584",
+  "created_at": "2026-05-18T17:47:03.804Z",
+  "updated_at": "2026-05-18T17:47:32.457Z",
+  "comment": {
+    "text": "Error text displayed below the email input field when the entered email is already associated with a pending invitation.",
+    "is_auto": true,
+    "updated_at": "2026-05-18T17:47:32.457Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/page.client.tsx",
+      "line_number": 288,
+      "context": "// user who has not completed registration — see the codebase convention\n // (UsersStore, contacts utils, InfoPanel Users view, etc).\n if (userExists.status === EmployeeStatus.Pending) {\n setEmailValid(false);\n setIsEmailErrorShow(true);\n setEmailErrorText(t(\"Confirm:UserAlreadyInvited\"));\n setIsContinueBlocked(true);\n setIsLoading(false);\n return;\n }",
+      "module": "/packages/login"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

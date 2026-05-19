@@ -3,7 +3,7 @@
   "content": "The spreadsheet for {{formName}} is updated based on all completed copies",
   "content_en_sha1_hash": "4be0b13403a659dab5f344211d9a7b95cd5b84f8",
   "created_at": "2026-04-23T17:23:52.790Z",
-  "updated_at": "2026-05-08T13:10:45.665Z",
+  "updated_at": "2026-05-15T14:00:06.885Z",
   "comment": {
     "text": "Success toast message appearing when an existing spreadsheet is updated using data from all completed copies. The {{formName}} variable represents the form's title.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1639,
+      "line_number": 1648,
       "context": "const messageVar = { formName: form.title };\n \n toastr.success(\n isNewFile\n ? t(\"Common:SpreadsheetGenerated\", messageVar)\n : t(\"Common:SpreadsheetUpdated\", messageVar),\n );\n } catch (error) {\n toastr.error(error);\n console.error(error);\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsActions.ts",
-      "line_number": 243,
+      "line_number": 252,
       "context": "const messageVar = { formName: form.title };\n toastr.success(\n isNewFile\n ? t(\"Common:SpreadsheetGenerated\", messageVar)\n : t(\"Common:SpreadsheetUpdated\", messageVar),\n );\n } catch (error) {\n if (progressStarted) progressStore.error();\n toastr.error(error as string);\n console.error(error);",
       "module": "/packages/sdk"
     }

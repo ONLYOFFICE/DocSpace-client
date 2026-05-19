@@ -3,7 +3,7 @@
   "content": "How can I help?",
   "content_en_sha1_hash": "5b11cc3aac825f2a416fd66b58fdcfa9162d9875",
   "created_at": "2025-11-13T14:52:47.256Z",
-  "updated_at": "2026-04-11T21:00:32.017Z",
+  "updated_at": "2026-05-15T14:00:06.989Z",
   "comment": {
     "text": "This is a placeholder text displayed in an empty AI chat window, prompting the user to start a conversation.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/empty-screen/index.tsx",
-      "line_number": 52,
+      "line_number": 59,
       "context": "dataTestId=\"chat-empty-screen\"\n >\n {isLoading ? (\n <RectangleSkeleton height=\"24px\" width=\"140px\" borderRadius=\"3px\" />\n ) : (\n emptyScreenText ?? t(\"AIChatOfferHelp\")\n )}\n </Text>\n );\n };",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Enable the AI agent to automatically process submitted forms, extract data, and assist with form review.",
   "content_en_sha1_hash": "6c8ebbb9fa4c3bc7f6686a2bec80502f5977b4cd",
   "created_at": "2026-03-31T15:18:26.627Z",
-  "updated_at": "2026-04-23T17:24:02.165Z",
+  "updated_at": "2026-05-15T14:00:06.984Z",
   "comment": {
     "text": "This is a tooltip or explanatory text for a setting. It describes the functionality of the AI agent feature, which automates form processing and data extraction.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
-      "line_number": 325,
+      "line_number": 334,
       "context": "showSettings &&\n settingsStep(\n \"ai-agent\",\n t(\"Common:AIAgent\"),\n t(\n \"Common:TourAiAgent\",\n \"Enable the AI agent to automatically process submitted forms, extract data, and assist with form review.\",\n ),\n callbacks,\n ),\n showSettings &&",
       "module": "/packages/sdk"
     }
@@ -157,7 +157,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "To register, enter your email address and click Send request. A message with a link to activate your account will be sent to the specified address.",
   "content_en_sha1_hash": "cdd8bdf8b53883670489773a82a81b4a59176cc8",
   "created_at": "2025-05-19T21:30:57.259Z",
-  "updated_at": "2026-04-11T21:31:05.818Z",
+  "updated_at": "2026-05-15T14:00:06.921Z",
   "comment": {
     "text": "This is a paragraph of text displayed in the registration dialog, providing instructions to the user after they have selected their domain.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/components/Register/sub-components/RegisterModalDialog.tsx",
-      "line_number": 103,
+      "line_number": 112,
       "context": "<ModalDialog.Header>{t(\"RegisterTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.modalContainer}>\n <Text key=\"text-body\" isBold={false} fontSize=\"13px\">\n {getDomainsBlock()}\n {t(\"RegisterTextBodyAfterDomainsList\")}\n </Text>\n \n <FieldContainer\n className={styles.emailRegField}\n key=\"e-mail\"",
       "module": "/packages/login"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.470988Z"
+      "approved_at": "2026-05-15T15:04:54.629887Z"
     },
     "si": {
       "ai_translated": false,

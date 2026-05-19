@@ -3,7 +3,7 @@
   "content": "External link",
   "content_en_sha1_hash": "66305476ff6932547d4b8aa6c41b8e0c5f410286",
   "created_at": "2026-02-18T14:55:55.624Z",
-  "updated_at": "2026-04-11T20:52:56.672Z",
+  "updated_at": "2026-05-15T14:00:06.801Z",
   "comment": {
     "text": "This is a label for a setting in the JavaScript SDK presets. It refers to a link that points to an external resource or location outside of the current system.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 472,
+      "line_number": 481,
       "context": "</FilesSelectorInputWrapper>\n </ControlsGroup>\n {sharedLinks ? (\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:ExternalLink\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:PublicRoomInfo\")}</Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 649,
+      "line_number": 658,
       "context": "</FilesSelectorInputWrapper>\n </ControlsGroup>\n {sharedLinks ? (\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:ExternalLink\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:PublicRoomInfo\")}</Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 365,
+      "line_number": 374,
       "context": "</FilesSelectorInputWrapper>\n </ControlsGroup>\n {sharedLinks ? (\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:ExternalLink\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:PublicRoomInfo\")}</Text>",
       "module": "/packages/client"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

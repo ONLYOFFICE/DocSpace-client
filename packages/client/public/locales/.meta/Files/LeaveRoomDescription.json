@@ -3,7 +3,7 @@
   "content": "You are the owner of this room. Before you leave the room, you must transfer the owner's role to another user.",
   "content_en_sha1_hash": "7fad132658521906219ad21519aa804777ae5ed8",
   "created_at": "2025-05-19T21:30:55.732Z",
-  "updated_at": "2026-04-23T17:24:01.830Z",
+  "updated_at": "2026-05-15T14:00:06.688Z",
   "comment": {
     "text": "This is a dialog message that appears when a room owner attempts to leave their room. It informs them that they must transfer ownership before leaving.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
-      "line_number": 82,
+      "line_number": 91,
       "context": "const titleText = isAIAgent\n ? t(\"Files:LeaveTheAgent\")\n : t(\"Files:LeaveTheRoom\");\n \n const roomDescription = isRoomOwner\n ? t(\"Files:LeaveRoomDescription\")\n : t(\"Files:WantLeaveRoom\");\n \n const agentDescription = isRoomOwner\n ? t(\"Files:LeaveAgentDescription\")\n : t(\"Files:WantLeaveAgent\");",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

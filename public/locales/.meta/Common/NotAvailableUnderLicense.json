@@ -3,7 +3,7 @@
   "content": "Not available under this license",
   "content_en_sha1_hash": "fc7d2762ca5286b81d400f0c8ae1c6279cc8c56a",
   "created_at": "2025-05-26T07:15:45.537Z",
-  "updated_at": "2026-04-11T20:47:49.489Z",
+  "updated_at": "2026-05-15T14:00:06.952Z",
   "comment": {
     "text": "This is a short text label displayed when a feature or option is unavailable due to the current license. It indicates that the user's license does not permit access to the displayed item.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/NotAvailable.tsx",
-      "line_number": 44,
+      "line_number": 53,
       "context": "return (\n <div className={styles.notAvailableWrapper}>\n <ReactSVG className={styles.lockIcon} src={LockedReactSvgUrl} />\n <Text fontSize=\"12px\" fontWeight=\"600\">\n {t(\"NotAvailableUnderLicense\")}\n </Text>\n </div>\n );\n };",
       "module": "/packages/shared"
     }
@@ -143,7 +143,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "sk": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Select all",
   "content_en_sha1_hash": "913afff1faf79724f1f685fe8b1e36a729123ca2",
   "created_at": "2025-05-19T21:30:46.332Z",
-  "updated_at": "2026-04-11T20:49:05.382Z",
+  "updated_at": "2026-05-15T14:00:07.031Z",
   "comment": {
     "text": "This is the tooltip text for a checkbox in a table header. It allows users to select or deselect all items in the table.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/components/table/table-group-menu/TableGroupMenu.tsx",
-      "line_number": 129,
+      "line_number": 138,
       "context": "\"table-container_group-menu-checkbox\",\n )}\n onChange={onCheckboxChange}\n isChecked={isChecked}\n isIndeterminate={isIndeterminate}\n title={t(\"MainHeaderSelectAll\")}\n />\n )}\n \n {withComboBox ? (\n <ComboBox",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

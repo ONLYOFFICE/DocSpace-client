@@ -3,7 +3,7 @@
   "content": "{{price}}*, <1>per token</1>",
   "content_en_sha1_hash": "427d3256b8a93cb1ecb3673f024958b5b0f36c1f",
   "created_at": "2026-04-10T13:53:44.606Z",
-  "updated_at": "2026-04-11T20:59:49.841Z",
+  "updated_at": "2026-05-15T14:00:07.017Z",
   "comment": {
     "text": "This is a pricing label indicating the cost of AI service usage. It displays the price per token, where `{{price}}` is a numerical value and `<1>per token</1>` is a phrase.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/panels/ai-service/PricingBillingBody.tsx",
-      "line_number": 240,
-      "context": "</div>\n <Text className={styles.pricingRowPrice}>\n <Text fontWeight=\"600\" as=\"span\">\n <CommonTrans\n \n i18nKey=\"AIPricingPricePerTokens\"\n components={{\n 1: (\n <Text\n fontSize=\"12px\"\n as=\"span\"",
+      "line_number": 231,
+      "context": ") : null}\n </div>\n <Text className={styles.pricingRowPrice}>\n <Text fontWeight=\"600\" as=\"span\">\n <CommonTrans\n i18nKey=\"AIPricingPricePerTokens\"\n components={{\n 1: (\n <Text\n fontSize=\"12px\"\n as=\"span\"",
       "module": "/libs/ui-kit"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

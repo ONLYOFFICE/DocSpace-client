@@ -3,7 +3,7 @@
   "content": "Reassign data to another user",
   "content_en_sha1_hash": "2bf522106a72613d54369c00781f888c09915907",
   "created_at": "2025-05-19T21:30:56.676Z",
-  "updated_at": "2026-04-11T21:05:57.736Z",
+  "updated_at": "2026-05-15T14:00:06.648Z",
   "comment": {
     "text": "This is a link label within a dialog. It allows an administrator to reassign a user's data to another user before deleting the original user's profile.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
-      "line_number": 181,
+      "line_number": 190,
       "context": "fontSize=\"13px\"\n fontWeight={600}\n isHovered\n onClick={() => onClickReassignData()}\n >\n {t(\"DeleteProfileEverDialog:ReassignDataToAnotherUser\")}\n </Link>\n ) : null}\n </>\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 177,
+      "line_number": 186,
       "context": "fontWeight={600}\n isHovered\n onClick={onClickReassignData}\n dataTestId=\"dialog_reassign_data_link\"\n >\n {t(\"DeleteProfileEverDialog:ReassignDataToAnotherUser\")}\n </Link>\n ) : null}\n </>\n );\n };",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

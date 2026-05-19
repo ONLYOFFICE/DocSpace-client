@@ -3,7 +3,7 @@
   "content": "To use manage connection, you need to connect {{mcpServers}} inside room settings",
   "content_en_sha1_hash": "8b74de859fa41700ee1ba0cad31c4cff054d2a67",
   "created_at": "2025-12-18T11:15:07.721Z",
-  "updated_at": "2026-04-23T17:24:02.170Z",
+  "updated_at": "2026-05-15T14:00:06.989Z",
   "comment": {
     "text": "This is a tooltip message that appears when the \"Manage connection\" option is disabled. It informs the user that they need to connect to {{mcpServers}} (which is a placeholder for \"MCP servers\") within the room settings to enable this feature.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/tools-settings/index.tsx",
-      "line_number": 454,
+      "line_number": 461,
       "context": "},\n iconNode: <ManageConnectionsReactSvg />,\n disabled: !showManageConnectionItem,\n getTooltipContent: () => (\n <Text>\n {t(\"ConnectMCPServers\", {\n mcpServers: t(\"MCPSettingTitle\"),\n })}\n </Text>\n ),\n },",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

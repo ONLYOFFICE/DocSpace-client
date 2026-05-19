@@ -3,7 +3,7 @@
   "content": "Today",
   "content_en_sha1_hash": "24345a14377fd821d3932f4e82f6431640955b0b",
   "created_at": "2025-05-19T21:30:49.316Z",
-  "updated_at": "2026-04-12T15:29:39.607Z",
+  "updated_at": "2026-05-15T14:00:06.620Z",
   "comment": {
     "text": "This label indicates the current day. It appears in date displays, such as the \"New Files\" panel and file history.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/NewFilesBadge/sub-components/NewFilesPanelItemDate.tsx",
-      "line_number": 50,
+      "line_number": 59,
       "context": "const getTitle = () => {\n const now = new Date();\n const enteredDate = new Date(date);\n \n if (now.setHours(0, 0, 0, 0) === enteredDate.setHours(0, 0, 0, 0)) {\n return t(\"Today\");\n }\n \n now.setDate(now.getDate() - 1);\n \n if (now.getDate() === enteredDate.getDate()) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/index.tsx",
-      "line_number": 70,
+      "line_number": 79,
       "context": "const weekAgo = subtractFromDate(currentDate, 1, \"weeks\");\n const halfYearAgo = subtractFromDate(currentDate, 6, \"months\");\n const yesterday = subtractFromDate(currentDate, 1, \"days\");\n \n if (isAfter(given, weekAgo)) {\n if (isSameDay(currentDate, given)) return t(\"Common:Today\");\n if (isSameDay(yesterday, given)) return t(\"Common:Yesterday\");\n \n const weekday = getWeekdayName(given.weekday, \"long\", locale);\n return weekday.charAt(0).toUpperCase() + weekday.slice(1);\n }",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

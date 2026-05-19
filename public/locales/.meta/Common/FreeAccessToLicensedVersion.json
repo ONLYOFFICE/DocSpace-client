@@ -3,7 +3,7 @@
   "content": "Free access to {{license}} solution",
   "content_en_sha1_hash": "67e196ff367f561eecc1cb56cec37845211b879f",
   "created_at": "2025-05-19T21:30:45.567Z",
-  "updated_at": "2026-04-11T20:51:55.720Z",
+  "updated_at": "2026-05-15T14:00:06.875Z",
   "comment": {
     "text": "This is a menu item label in the portal settings. It indicates a section offering free access to a specific ONLYOFFICE solution, where `{{license}}` will be replaced by the name of that solution (e.g., \"DocSpace Enterprise\").",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 601,
+      "line_number": 610,
       "context": "{\n id: \"portal-settings_catalog-portal-bonus\",\n key: \"11-0\",\n icon: \"\",\n link: \"\",\n tKey: \"Common:FreeAccessToLicensedVersion\",\n isCategory: true,\n },\n ],\n },\n ];",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

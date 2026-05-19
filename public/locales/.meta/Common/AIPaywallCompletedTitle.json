@@ -1,0 +1,29 @@
+{
+  "key_path": "AIPaywallCompletedTitle",
+  "content": "Setting up your AI service",
+  "content_en_sha1_hash": "59fa6a87fffd50b4ea5e3829d1456989d45afff5",
+  "created_at": "2026-05-15T13:59:46.048Z",
+  "updated_at": "2026-05-15T14:04:53.905Z",
+  "comment": {
+    "text": "Heading in a status block on the AI tools paywall page, appearing when the AI service setup process is finished.",
+    "is_auto": true,
+    "updated_at": "2026-05-15T14:04:53.905Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallPage.tsx",
+      "line_number": 288,
+      "context": "{waitingPhase === \"completed\" ? (\n <div className={styles.completedBlock} role=\"status\">\n <div className={styles.completedBadge} aria-hidden=\"true\" />\n <Text fontSize=\"14px\" fontWeight={600}>\n {t(\"AIPaywallCompletedTitle\")}\n </Text>\n <Text fontSize=\"12px\" className={styles.completedHint}>\n {t(\"AIPaywallCompletedHint\")}\n </Text>\n </div>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

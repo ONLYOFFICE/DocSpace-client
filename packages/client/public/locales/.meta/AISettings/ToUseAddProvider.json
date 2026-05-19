@@ -3,7 +3,7 @@
   "content": "To use {{value}}, make sure to connect at least one {{aiProvider}} first.",
   "content_en_sha1_hash": "7ac37664b2a8a6b4459dada1c0cb3184e8fd4a9b",
   "created_at": "2025-12-17T14:56:14.846Z",
-  "updated_at": "2026-04-11T21:02:16.102Z",
+  "updated_at": "2026-05-15T14:00:06.760Z",
   "comment": {
     "text": "This is a tooltip text that appears when a user tries to use an AI-powered feature (like AI Knowledge, Web Search AI, or an MCP server) without having any AI providers connected. It informs the user that they need to connect an AI provider first. `{{value}}` is the name of the feature, and `{{aiProvider}}` is the general term for an AI provider.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 255,
+      "line_number": 262,
       "context": "<div\n className={generalStyles.search}\n data-tooltip-id={tooltipId}\n data-tooltip-content={\n !hasAIProviders\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"AIRoom:Knowledge\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 205,
+      "line_number": 212,
       "context": "<div\n className={generalStyles.search}\n data-tooltip-id={tooltipId}\n data-tooltip-content={\n !hasAIProviders\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"Common:WebSearchAI\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/index.tsx",
-      "line_number": 259,
+      "line_number": 266,
       "context": "className={styles.addProviderButton}\n onClick={showAddDialog}\n isDisabled={isMCPActionsDisabled}\n tooltipText={\n isMCPActionsDisabled\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"Common:MCPServer\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/mcp-tile/index.tsx",
-      "line_number": 108,
+      "line_number": 115,
       "context": "icon={\n <MCPIcon title={item.name} imgSrc={icon} size={MCPIconSize.Large} />\n }\n tooltipText={\n disableActions\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"Common:MCPServer\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }",
       "module": "/packages/client"
     }
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

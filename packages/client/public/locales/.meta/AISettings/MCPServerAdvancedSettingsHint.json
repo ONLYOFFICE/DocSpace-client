@@ -3,7 +3,7 @@
   "content": "Use this section to pass additional HTTP headers, like authorization tokens.",
   "content_en_sha1_hash": "46c659582b45fa6a31881287056e904b1042ed91",
   "created_at": "2025-11-13T07:58:04.572Z",
-  "updated_at": "2026-04-23T17:24:01.923Z",
+  "updated_at": "2026-05-15T14:00:06.766Z",
   "comment": {
     "text": "This is a hint text displayed below a \"Show advanced settings\" link. It explains the purpose of the advanced settings section for AI server configuration, which is to add HTTP headers.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useAdvancedSettings.tsx",
-      "line_number": 131,
+      "line_number": 140,
       "context": ": t(\"SingleSignOn:Show\")}\n </Link>\n </div>\n {showAdvancedSettings ? (\n <Text className={baseParamsStyles.fieldHint}>\n {t(\"AISettings:MCPServerAdvancedSettingsHint\")}\n </Text>\n ) : null}\n </div>\n {showAdvancedSettings ? (\n <div>",
       "module": "/packages/client"
     }
@@ -24,6 +24,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     }
   }
 }

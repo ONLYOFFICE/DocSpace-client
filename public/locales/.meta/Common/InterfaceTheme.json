@@ -3,7 +3,7 @@
   "content": "Interface theme",
   "content_en_sha1_hash": "f47f8ed32464b7b3aa479c8638758420470a60e9",
   "created_at": "2026-04-03T21:51:34.678Z",
-  "updated_at": "2026-04-23T17:24:02.046Z",
+  "updated_at": "2026-05-15T14:00:06.877Z",
   "comment": {
     "text": "This is a label for a setting that allows users to change the visual theme of the interface.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/index.tsx",
-      "line_number": 184,
+      "line_number": 193,
       "context": "await getFileManagementData();\n },\n },\n {\n id: \"interface-theme\",\n name: t?.(\"Common:InterfaceTheme\"),\n content: <InterfaceTheme />,\n onClick: () => {},\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/index.tsx",
-      "line_number": 89,
+      "line_number": 98,
       "context": "name: t(\"Common:FileManagement\"),\n content: wrapContent(<FileManagement />),\n },\n {\n id: \"interface-theme\",\n name: t(\"Common:InterfaceTheme\"),\n content: wrapContent(<InterfaceTheme />),\n },\n ],\n [t, isPending, canSeeBilling],\n );",
       "module": "/packages/sdk"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "The guest has been successfully deleted",
   "content_en_sha1_hash": "13429d56b528f8b805da3b8af5aff71a716917b2",
   "created_at": "2025-05-19T21:30:56.678Z",
-  "updated_at": "2026-04-11T21:05:56.770Z",
+  "updated_at": "2026-05-15T14:00:06.676Z",
   "comment": {
     "text": "This is a toast message confirming the successful deletion of a guest user. It appears briefly after a guest's profile has been removed.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/index.tsx",
-      "line_number": 137,
+      "line_number": 146,
       "context": "await Promise.all(actions);\n })\n .then(() => {\n toastr.success(\n isGuests\n ? t(\"SuccessfullyDeleteGuestInfoMessage\")\n : t(\"SuccessfullyDeleteUserInfoMessage\"),\n );\n })\n .catch((error) => toastr.error(error))\n .finally(() => {",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

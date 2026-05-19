@@ -3,7 +3,7 @@
   "content": "General",
   "content_en_sha1_hash": "9239ee2cda84eca4c3440e2a7b50148af67da3d4",
   "created_at": "2025-05-19T21:30:48.597Z",
-  "updated_at": "2026-04-12T21:06:10.105Z",
+  "updated_at": "2026-05-15T14:00:06.755Z",
   "comment": {
     "text": "This is a label for a category in the portal settings. It refers to the general settings for the portal.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/index.tsx",
-      "line_number": 108,
+      "line_number": 117,
       "context": ");\n \n const data = [\n {\n id: \"general\",\n name: t(\"Common:SettingsGeneral\"),\n content: <Customization />,\n onClick: async () => {\n clearAbortControllerArr();\n await getCustomizationData();\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 195,
+      "line_number": 204,
       "context": "switch (tKey) {\n case \"AccessRights\":\n return t(\"Common:AccessRights\");\n case \"Customization\":\n return t(\"Customization\");\n case \"SettingsGeneral\":\n return t(\"SettingsGeneral\");\n case \"StudioTimeLanguageSettings\":\n return t(\"StudioTimeLanguageSettings\");\n case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 50,
+      "line_number": 59,
       "context": "{\n id: \"portal-settings_catalog-general\",\n key: \"0-0\",\n icon: \"\",\n link: \"general\",\n tKey: \"SettingsGeneral\",\n isCategory: true,\n children: [\n {\n id: \"portal-settings_catalog-language-and-time-zone\",\n key: \"0-0-0\",",
       "module": "/packages/client"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

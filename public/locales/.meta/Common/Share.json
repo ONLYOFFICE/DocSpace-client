@@ -3,7 +3,7 @@
   "content": "Share",
   "content_en_sha1_hash": "09ca55ca52d207f2cc1d9339e0226a88e9e96e2f",
   "created_at": "2025-05-19T21:30:48.615Z",
-  "updated_at": "2026-05-08T13:10:45.513Z",
+  "updated_at": "2026-05-15T14:00:06.624Z",
   "comment": {
     "text": "This is a button label that initiates the sharing process for a file or document.",
     "is_auto": true,
@@ -13,49 +13,49 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/ShareFormPanel/index.js",
-      "line_number": 89,
+      "line_number": 98,
       "context": "() => [\n {\n id: \"quick-sharing\",\n title: t(\"Common:QuickSharing\"),\n description: t(\"Common:ShareTheOriginalFormForFillingOut\"),\n buttonLabel: t(\"Common:Share\"),\n onClick: onClickShareFile,\n icon: <ShareSvg />,\n },\n {\n id: \"form-data-collection\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/SharedButton.js",
-      "line_number": 62,
+      "line_number": 71,
       "context": "return (\n <Text\n className=\"share-button\"\n as=\"span\"\n title={t(\"Share\")}\n fontSize=\"12px\"\n fontWeight={600}\n color={color}\n display=\"inline-flex\"\n onClick={onClickShare}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/SharedButton.js",
-      "line_number": 62,
+      "line_number": 71,
       "context": "return (\n <Text\n className=\"share-button\"\n as=\"span\"\n title={t(\"Share\")}\n fontSize=\"12px\"\n fontWeight={600}\n color={color}\n display=\"inline-flex\"\n onClick={onClickShare}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/headerGeneral.tsx",
-      "line_number": 112,
+      "line_number": 121,
       "context": "} else if (id === InfoPanelView.infoHistory) {\n name = t(\"InfoPanel:SubmenuHistory\");\n } else if (id === InfoPanelView.infoDetails) {\n name = t(\"InfoPanel:SubmenuDetails\");\n } else if (id === InfoPanelView.infoShare) {\n name = t(\"Common:Share\");\n } else {\n const key = id.replace(\"info_plugin-\", \"\");\n name =\n infoPanelItemsList.find((item) => item.key === key)?.value.subMenu\n .name ?? id;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2873,
+      "line_number": 2882,
       "context": "];\n \n if (!item.isRoom) {\n menuGroupsConfig.push({\n groupKey: \"share\",\n groupLabel: t(\"Common:Share\"),\n groupIcon: ShareReactSvgUrl,\n itemKeys: [\n [\n { key: \"link-for-room-members\" },\n { key: \"copy-shared-link\" },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareDialog/ShareDialog.tsx",
-      "line_number": 179,
+      "line_number": 188,
       "context": "/>\n ) : null}\n </>\n </ModalDialog.Container>\n \n <ModalDialog.Header>{t(\"Common:Share\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <section className={styles.shareContainer}>\n <div className=\"share-file_body\">\n <ShareDialogHeader\n file={fileInfo}",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 174,
+      "line_number": 183,
       "context": "const cards = [\n {\n id: \"quick-sharing\",\n title: t(\"Common:QuickSharing\"),\n description: t(\"Common:ShareTheOriginalFormForFillingOut\"),\n buttonLabel: t(\"Common:Share\"),\n onClick: onClickShareFile,\n icon: <ShareSvg />,\n disabled: !file.canShare,\n },\n {",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 174,
+      "line_number": 183,
       "context": "const cards = [\n {\n id: \"quick-sharing\",\n title: t(\"Common:QuickSharing\"),\n description: t(\"Common:ShareTheOriginalFormForFillingOut\"),\n buttonLabel: t(\"Common:Share\"),\n onClick: onClickShareFile,\n icon: <ShareSvg />,\n disabled: !file.canShare,\n },\n {",
       "module": "/packages/doceditor"
     },
@@ -67,7 +67,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/info-panel/index.tsx",
-      "line_number": 130,
+      "line_number": 139,
       "context": "onClose={onClose}\n />\n ) : null}\n </ModalDialog.Container>\n \n <ModalDialog.Header>{t(\"Common:Share\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {selection ? (\n <Share\n infoPanelSelection={selection}\n fileLinkProps={filesLink}",
       "module": "/packages/sdk"
     }
@@ -203,7 +203,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

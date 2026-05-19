@@ -3,7 +3,7 @@
   "content": "Store responses as structured data. Enable database sync in room settings to unlock AI-powered analysis with Ask AI.",
   "content_en_sha1_hash": "92f1a03338d1079f16cb5043a573fb613d883a91",
   "created_at": "2026-05-08T13:10:42.362Z",
-  "updated_at": "2026-05-08T19:46:45.002Z",
+  "updated_at": "2026-05-15T14:00:06.729Z",
   "comment": {
     "text": "Informational text in the Form Room info panel that appears when the external database is not enabled, explaining how to enable AI-powered analysis via database sync.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/AICard.tsx",
-      "line_number": 130,
+      "line_number": 139,
       "context": "}}\n />\n );\n }\n \n return t(\"InfoPanel:FormRoomAINotConnectedDescription\");\n }, [t, aiConnected, isFile, isDone, aiReady, externalDbEnabled, isAdmin]);\n \n const renderAction = () => {\n if (aiConnected) {\n if (isFormFile(selection) && selection.security?.AskAi) {",
       "module": "/packages/client"
     }

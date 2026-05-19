@@ -3,7 +3,7 @@
   "content": "Take a tour",
   "content_en_sha1_hash": "b245023902dcb919c6f7e365c884a616fd86bd76",
   "created_at": "2026-03-31T15:18:27.035Z",
-  "updated_at": "2026-04-23T17:24:02.160Z",
+  "updated_at": "2026-05-15T14:00:06.983Z",
   "comment": {
     "text": "This is the label for a button that starts a guided tour of the application's features.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/welcome-tour-dialog/index.tsx",
-      "line_number": 148,
+      "line_number": 157,
       "context": "</div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n {canTakeTour && (\n <Button\n label={t(\"Common:WelcomeStartTour\", \"Take a tour\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onStart}\n />",
       "module": "/packages/sdk"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

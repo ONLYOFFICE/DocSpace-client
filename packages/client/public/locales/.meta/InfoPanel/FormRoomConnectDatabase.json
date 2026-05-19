@@ -3,7 +3,7 @@
   "content": "Connect a database in Integrations to analyze form data with Ask AI, create charts, and uncover insights.",
   "content_en_sha1_hash": "b7f70acf0379964b335b3253ee081d04ebe2f438",
   "created_at": "2026-05-08T13:10:42.382Z",
-  "updated_at": "2026-05-08T19:46:45.002Z",
+  "updated_at": "2026-05-15T14:00:06.728Z",
   "comment": {
     "text": "Informational text in the Info Panel that appears when external database integration is disabled, instructing the user to connect a database to enable AI-driven data analysis and charting.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/AICard.tsx",
-      "line_number": 113,
+      "line_number": 122,
       "context": "/>\n );\n }\n \n if (!externalDbEnabled) {\n if (isAdmin) return t(\"InfoPanel:FormRoomConnectDatabase\");\n \n return (\n <Trans\n t={t}\n ns=\"InfoPanel\"",
       "module": "/packages/client"
     }

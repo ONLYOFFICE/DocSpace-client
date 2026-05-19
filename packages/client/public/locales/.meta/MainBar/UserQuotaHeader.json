@@ -3,7 +3,7 @@
   "content": "The number of admins is about to be exceeded: {{currentValue}} / {{maxValue}}",
   "content_en_sha1_hash": "cfbe475775f7fdcd33e5b43e8c95a551800b31e1",
   "created_at": "2025-05-19T21:30:54.145Z",
-  "updated_at": "2026-04-11T21:17:31.403Z",
+  "updated_at": "2026-05-15T14:00:06.618Z",
   "comment": {
     "text": "This is a header for a quota bar, indicating that the number of users is approaching the limit. `{{currentValue}}` is the current number of users, and `{{maxValue}}` is the maximum allowed.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 272,
+      "line_number": 281,
       "context": "header: t(\"StorageLimitHeader\", { currentValue, maxValue }),\n description: getTenantCustomQuota(),\n };\n case QuotaBarTypes.UsersTariff:\n return {\n header: t(\"UserQuotaHeader\", { currentValue, maxValue }),\n description: getUserTariffAlmostLimit(),\n };\n case QuotaBarTypes.UsersTariffLimit:\n return {\n header: t(\"UserTariffLimitHeader\", { currentValue, maxValue }),",
       "module": "/packages/client"
     }

@@ -1,0 +1,29 @@
+{
+  "key_path": "AIPaywallCallbackGoToBilling",
+  "content": "Go to AI services",
+  "content_en_sha1_hash": "da965608b475ce2eb3ffe6e69d3d3583a6471291",
+  "created_at": "2026-05-15T13:59:45.917Z",
+  "updated_at": "2026-05-15T14:08:58.313Z",
+  "comment": {
+    "text": "Button label on the AI paywall completion page that redirects the user to the AI services section.",
+    "is_auto": true,
+    "updated_at": "2026-05-15T14:08:58.313Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
+      "line_number": 252,
+      "context": "<div className={styles.actions}>\n <Button\n size={ButtonSize.normal}\n primary\n scale\n label={t(\"AIPaywallCallbackGoToBilling\")}\n onClick={onGoToBillingClick}\n testId=\"ai_paywall_go_to_billing_button\"\n />\n </div>\n </>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "Connected",
   "content_en_sha1_hash": "c2f9b7b4897f03f94abf92294c9ca46fea62360b",
   "created_at": "2026-03-20T09:07:38.583Z",
-  "updated_at": "2026-05-08T19:46:45.003Z",
+  "updated_at": "2026-05-15T14:00:06.730Z",
   "comment": {
     "text": "A short label indicating that a connection to an external database has been successfully established.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/ConnectedBadge.tsx",
-      "line_number": 41,
+      "line_number": 50,
       "context": "const { t } = useTranslation([\"Common\"]);\n \n return (\n <Text fontSize=\"12px\" fontWeight={600} className={styles.connectedBadge}>\n <TickSvg />\n {t(\"Common:Connected\")}\n </Text>\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/sub-components/ExternalDbModal/ExternalDbModal.tsx",
-      "line_number": 202,
+      "line_number": 212,
       "context": "tabIndex={0}\n />\n {match(connected)\n .with(true, () => (\n <Text className={styles.connectedText}>\n {t(\"Common:Connected\")}\n </Text>\n ))\n .with(false, () => (\n <Text className={styles.connectionFailedText}>\n {t(\"Common:ConnectionFailed\")}",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

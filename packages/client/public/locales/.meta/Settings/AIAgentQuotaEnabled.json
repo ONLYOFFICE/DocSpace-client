@@ -3,7 +3,7 @@
   "content": "{{aiAgent}} quota has been successfully enabled.",
   "content_en_sha1_hash": "20c6168f345ce2475276018960151e13d2ae30ee",
   "created_at": "2025-12-19T13:03:34.338Z",
-  "updated_at": "2026-04-11T21:25:52.485Z",
+  "updated_at": "2026-05-15T14:00:06.964Z",
   "comment": {
     "text": "This is a toast message confirming that the AI Agent quota has been successfully enabled. The `{{aiAgent}}` variable will be replaced with the localized term for \"AI Agent\".",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/store/CurrentQuotaStore.ts",
-      "line_number": 537,
+      "line_number": 546,
       "context": "const isEnable = +quota !== -1;\n \n try {\n await setDefaultAIAgentQuota(isEnable, +quota);\n const toastrText = isEnable\n ? t(\"AIAgentQuotaEnabled\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"AIAgentQuotaDisabled\", { aiAgent: t(\"Common:AIAgent\") });\n \n toastr.success(toastrText);\n } catch (e: unknown) {\n toastr.error(e as TData);",
       "module": "/packages/shared"
     }

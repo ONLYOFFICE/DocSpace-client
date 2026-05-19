@@ -3,7 +3,7 @@
   "content": "Now you can create a new password.",
   "content_en_sha1_hash": "f9c8b3b6fa375c17d32d673a51e5ccfc8b276b9b",
   "created_at": "2025-05-19T21:30:57.374Z",
-  "updated_at": "2026-04-23T17:24:02.090Z",
+  "updated_at": "2026-05-15T14:00:06.910Z",
   "comment": {
     "text": "This is a subtitle displayed on the password reset page, informing the user that they can now set a new password.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PasswordChange/page.client.tsx",
-      "line_number": 141,
+      "line_number": 150,
       "context": "return (\n <>\n <div className=\"password-form\">\n <Text fontSize=\"16px\" fontWeight=\"600\" className=\"subtitle\">\n {t(\"PassworResetTitle\")}\n </Text>\n <FieldContainer\n isVertical\n labelVisible={false}\n hasError={isPasswordErrorShow ? !passwordValid : undefined}",
       "module": "/packages/login"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.470988Z"
+      "approved_at": "2026-05-15T15:04:54.629887Z"
     },
     "si": {
       "ai_translated": false,

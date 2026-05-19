@@ -3,7 +3,7 @@
   "content": "This user account is loaded from LDAP. If you need to change the user name and email address, or disable a user, refer to the LDAP directory.",
   "content_en_sha1_hash": "c6c9f4030007d68e41bd8f5af7b73dfdf15d63b7",
   "created_at": "2025-05-19T21:30:53.478Z",
-  "updated_at": "2026-04-11T21:20:14.271Z",
+  "updated_at": "2026-05-15T14:00:06.744Z",
   "comment": {
     "text": "This is a tooltip that appears when hovering over an LDAP badge next to a user's name, explaining that the user account is managed via LDAP.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/ItemTitle.tsx",
-      "line_number": 202,
+      "line_number": 211,
       "context": ") : null}\n \n {isLDAP ? (\n <div\n data-tooltip-id=\"system-tooltip\"\n data-tooltip-content={t(\"PeopleTranslations:LDAPAccountTooltip\")}\n data-tooltip-place=\"bottom\"\n >\n <Badge\n className={styles.ldapBadge}\n label={getConstName(\"LDAP\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 466,
+      "line_number": 475,
       "context": "fontSize=\"9px\"\n fontWeight={800}\n noHover\n />\n <Tooltip anchorSelect={`div[id='ldap-badge-profile'] div`}>\n {t(\"PeopleTranslations:LDAPAccountTooltip\")}\n </Tooltip>\n </>\n ) : null}\n \n {!profile!.isSSO && !profile!.isLDAP ? (",
       "module": "/packages/client"
     }

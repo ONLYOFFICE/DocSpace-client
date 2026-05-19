@@ -3,7 +3,7 @@
   "content": "Groups added.",
   "content_en_sha1_hash": "b5a565f02102919ca707ad4dfe829242fca68461",
   "created_at": "2025-05-19T21:30:54.921Z",
-  "updated_at": "2026-04-13T14:59:05.798Z",
+  "updated_at": "2026-05-15T14:00:06.738Z",
   "comment": {
     "text": "This is a message displayed in the activity feed when one or more groups have been added to a room.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 336,
+      "line_number": 345,
       "context": "case FeedActionKeys.RoomGroupAdded:\n if (hasRelatedItems)\n return t(\"InfoPanel:RoomGroupAddedCount\", {\n count,\n });\n return t(\"InfoPanel:RoomGroupAdded\");\n case FeedActionKeys.RoomUpdateAccessForGroup:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomGroupRemove:\n return t(\"InfoPanel:RoomGroupRemove\");\n case FeedActionKeys.RoomWatermarkSet:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 280,
+      "line_number": 289,
       "context": "case FeedActionKeys.RoomGroupAdded:\n if (hasRelatedItems)\n return t(\"InfoPanel:RoomGroupAddedCount\", {\n count,\n });\n return t(\"InfoPanel:RoomGroupAdded\");\n case FeedActionKeys.RoomUpdateAccessForGroup:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomGroupRemove:\n return t(\"InfoPanel:RoomGroupRemove\");\n case FeedActionKeys.RoomWatermarkSet:",
       "module": "/packages/client"
     }

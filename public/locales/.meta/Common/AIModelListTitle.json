@@ -3,7 +3,7 @@
   "content": "Model list",
   "content_en_sha1_hash": "662fb55ae4a21097f773c6fb1a8ae041b3bc4cea",
   "created_at": "2026-04-10T13:53:44.314Z",
-  "updated_at": "2026-04-11T21:00:07.808Z",
+  "updated_at": "2026-05-15T14:00:07.017Z",
   "comment": {
     "text": "This is a section title for a list of AI models. It appears on the billing page to label the section displaying available AI models.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/panels/ai-service/PricingBillingBody.tsx",
-      "line_number": 310,
-      "context": "</Text>\n </div>\n \n <div className={styles.modelListSection}>\n <Text className={styles.modelListTitle}>\n {t(\"AIModelListTitle\")}\n </Text>\n \n <Text className={styles.payForItemTextMuted}>\n <CommonTrans",
+      "line_number": 300,
+      "context": "</Text>\n </div>\n \n <div className={styles.modelListSection}>\n <Text className={styles.modelListTitle}>\n {t(\"AIModelListTitle\")}\n </Text>\n \n <Text className={styles.payForItemTextMuted}>\n <CommonTrans\n i18nKey=\"AIPricingFeeNoteUsage\"",
       "module": "/libs/ui-kit"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

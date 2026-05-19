@@ -3,7 +3,7 @@
   "content": "Share & collect",
   "content_en_sha1_hash": "39376ae6d9b8a7366e97fa2bb58d1d646af34823",
   "created_at": "2025-05-19T21:30:48.624Z",
-  "updated_at": "2026-04-23T17:24:01.676Z",
+  "updated_at": "2026-05-15T14:00:06.623Z",
   "comment": {
     "text": "This is a dialog title or button label that initiates the process of sharing a document and collecting data through a fillable form. It appears when a user wants to share a document for data collection.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/FillPDFDialog/FillPDFDialog.tsx",
-      "line_number": 91,
+      "line_number": 100,
       "context": "const container = (\n <ShareCollectSelector\n file={data}\n visible={isVisibleSelectFormRoomDialog}\n headerProps={{\n headerLabel: t(\"Common:ShareAndCollect\"),\n withoutBorder: false,\n onCloseClick: onClose,\n withoutBackButton: false,\n onBackClick: onCloseSelectionFormRoom,\n }}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/ShareCollectSelector/ShareCollectSelector.tsx",
-      "line_number": 298,
+      "line_number": 307,
       "context": "withBreadCrumbs\n withoutBackButton={false}\n withCancelButton\n currentFolderId=\"\"\n headerProps={{\n headerLabel: t(\"Common:ShareAndCollect\"),\n onCloseClick: onClose,\n ...headerProps,\n }}\n rootFolderType={file.rootFolderType as unknown as SdkFolderType}\n createDefineRoomType={createDefineRoomType}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/hooks/useShareFormDialog.ts",
-      "line_number": 66,
+      "line_number": 75,
       "context": "setShareFormDialogVisible(true);\n setShareFormDialogData({ ...updateAccessLink });\n }, []);\n \n const onClickFormRoom = useCallback(() => {\n onSDKRequestStartFilling(t(\"Common:ShareAndCollect\"));\n }, [onSDKRequestStartFilling, t]);\n \n const onClickVirtualDataRoom = useCallback(() => {\n onSDKRequestStartFilling(\n t(\"Common:ShareAndCollect\"),",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/hooks/useShareFormDialog.ts",
-      "line_number": 66,
+      "line_number": 75,
       "context": "setShareFormDialogVisible(true);\n setShareFormDialogData({ ...updateAccessLink });\n }, []);\n \n const onClickFormRoom = useCallback(() => {\n onSDKRequestStartFilling(t(\"Common:ShareAndCollect\"));\n }, [onSDKRequestStartFilling, t]);\n \n const onClickVirtualDataRoom = useCallback(() => {\n onSDKRequestStartFilling(\n t(\"Common:ShareAndCollect\"),",
       "module": "/packages/doceditor"
     }
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

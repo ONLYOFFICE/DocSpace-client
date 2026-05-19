@@ -1,0 +1,35 @@
+{
+  "key_path": "OperationStopped",
+  "content": "The operation has been stopped",
+  "content_en_sha1_hash": "d43b5b82a0f14e0c0a3cf6e82572023a823202fa",
+  "created_at": "2026-05-15T15:37:28.613Z",
+  "updated_at": "2026-05-15T15:38:15.876Z",
+  "comment": {
+    "text": "Success toast message appearing when a secondary operation is successfully cancelled or terminated.",
+    "is_auto": true,
+    "updated_at": "2026-05-15T15:38:15.876Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/SecondaryProgressDataStore.js",
+      "line_number": 491,
+      "context": "const item = op.items.find((i) => i.operationId === operationId);\n if (!item || !item.serverOperationId || item.completed) return;\n \n const terminated = await this.terminateItem(operation, item);\n if (terminated) {\n toastr.success(i18n.t(\"Common:OperationStopped\"));\n }\n };\n \n cancelSecondaryOperation = async () => {\n const activeOperations = this.secondaryOperationsArray.filter(",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/SecondaryProgressDataStore.js",
+      "line_number": 491,
+      "context": "const item = op.items.find((i) => i.operationId === operationId);\n if (!item || !item.serverOperationId || item.completed) return;\n \n const terminated = await this.terminateItem(operation, item);\n if (terminated) {\n toastr.success(i18n.t(\"Common:OperationStopped\"));\n }\n };\n \n cancelSecondaryOperation = async () => {\n const activeOperations = this.secondaryOperationsArray.filter(",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

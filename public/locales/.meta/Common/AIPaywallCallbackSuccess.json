@@ -1,0 +1,29 @@
+{
+  "key_path": "AIPaywallCallbackSuccess",
+  "content": "You're all set",
+  "content_en_sha1_hash": "0efcdd2e7fb2715ae81736d899d68ddadef56183",
+  "created_at": "2026-05-15T13:59:46.008Z",
+  "updated_at": "2026-05-15T14:06:04.731Z",
+  "comment": {
+    "text": "Page title on the AI tools subscription completion screen, appearing after a successful payment callback.",
+    "is_auto": true,
+    "updated_at": "2026-05-15T14:06:04.731Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
+      "line_number": 215,
+      "context": "<CheckIcon />\n </div>\n \n <div className={styles.successHero}>\n <Text fontSize=\"20px\" fontWeight={700} className={styles.title}>\n {t(\"AIPaywallCallbackSuccess\")}\n </Text>\n <Text as=\"span\" className={styles.successAmount}>\n +{formattedAmount}\n </Text>\n <Text fontSize=\"13px\" lineHeight=\"18px\" className={styles.hint}>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

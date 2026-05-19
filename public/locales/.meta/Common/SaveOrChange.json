@@ -3,7 +3,7 @@
   "content": "Please eliminate the mismatch in the conflicting parameter to proceed or keep your active pricing plan.",
   "content_en_sha1_hash": "e14f7d4dcf13a0d0425ac585f4cff62e9d7a024f",
   "created_at": "2025-05-19T21:30:56.603Z",
-  "updated_at": "2026-04-11T21:06:15.244Z",
+  "updated_at": "2026-05-15T14:00:06.991Z",
   "comment": {
     "text": "This is an error message displayed in a dialog when a user attempts to change their pricing plan but there's a conflict with existing parameters. It instructs the user to resolve the conflict or retain their current plan.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/dialogs/ChangePricingPlanDialog.tsx",
-      "line_number": 111,
+      "line_number": 120,
       "context": "{planUsersLimitations}\n <br />\n {storagePlanLimitations}\n \n <Text fontSize=\"13px\" className={styles.saveOrChange}>\n {t(\"SaveOrChange\")}\n </Text>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

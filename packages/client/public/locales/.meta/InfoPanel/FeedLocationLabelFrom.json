@@ -3,7 +3,7 @@
   "content": "from «{{folderTitle}}»",
   "content_en_sha1_hash": "c58dc609957293a736a05503a3a164ba2805e034",
   "created_at": "2025-05-19T21:30:54.782Z",
-  "updated_at": "2026-04-11T21:13:44.798Z",
+  "updated_at": "2026-05-15T14:00:06.732Z",
   "comment": {
     "text": "This is a short label indicating the source of an item, appearing as part of a sentence. `{{folderTitle}}` is the name of the folder the item originated from.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/MainTextFolderInfo.tsx",
-      "line_number": 95,
+      "line_number": 104,
       "context": ": isSection\n ? t(\"FeedLocationSectionLabel\", { folderTitle: parentTitle })\n : t(\"FeedLocationRoomLabel\", { folderTitle: parentTitle });\n \n const sourceDestination = isFromFolder\n ? t(\"FeedLocationLabelFrom\", { folderTitle: fromParentTitle })\n : t(\"FeedLocationRoomLabel\", { folderTitle: parentTitle });\n \n const className = isFromFolder ? \"source-folder-label\" : \"folder-label\";\n \n return (",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Room managers can manage the assigned rooms, invite new users and assign roles below their level.",
   "content_en_sha1_hash": "28087aa15e7b634a0bac2753dc18b692629d85a8",
   "created_at": "2025-05-19T21:30:48.123Z",
-  "updated_at": "2026-04-13T08:19:53.914Z",
+  "updated_at": "2026-05-15T14:00:06.968Z",
   "comment": {
     "text": "This is a description of the \"Room Manager\" role, displayed when viewing user roles or permissions. It explains the capabilities of a user assigned this role.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 77,
+      "line_number": 86,
       "context": "agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ) as unknown as string;\n default:\n return t(\"Common:RoleRoomManagerDescription\");\n }\n };\n \n const getUserDescription = (roomType: RoomsType, t: TTranslation) => {\n switch (roomType) {",
       "module": "/packages/shared"
     }
@@ -157,7 +157,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

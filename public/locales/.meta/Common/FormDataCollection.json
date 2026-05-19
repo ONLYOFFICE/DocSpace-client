@@ -3,7 +3,7 @@
   "content": "Form data collection",
   "content_en_sha1_hash": "3d5d135c8ecaa49feb2eb2292d2853c68b62d6ea",
   "created_at": "2025-05-19T21:30:45.482Z",
-  "updated_at": "2026-04-11T20:52:08.675Z",
+  "updated_at": "2026-05-15T14:00:06.683Z",
   "comment": {
     "text": "This is a title for a feature that allows users to collect data using forms. It appears in dialogs and panels related to sharing or creating forms.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/FillPDFDialog/FillPDFDialog.tsx",
-      "line_number": 114,
+      "line_number": 123,
       "context": "onClick: openEditorFill,\n icon: <FillOutYourselfIcon />,\n },\n {\n id: \"form-data-collection\",\n title: t(\"Common:FormDataCollection\"),\n description: t(\"Common:FormDataCollectionDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: () => openSelector(RoomsType.FormRoom),\n icon: <FormDataCollectionIcon />,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/ShareFormPanel/index.js",
-      "line_number": 95,
+      "line_number": 104,
       "context": "onClick: onClickShareFile,\n icon: <ShareSvg />,\n },\n {\n id: \"form-data-collection\",\n title: t(\"Common:FormDataCollection\"),\n description: t(\"Common:FormDataCollectionDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 195,
+      "line_number": 204,
       "context": "// HACK: Hide share option for rooms — remove after implementation is ready\n disabled: !file.canShare || file.rootFolderType === FolderType.Rooms,\n },\n {\n id: \"form-room\",\n title: t(\"Common:FormDataCollection\"),\n description: t(\"Common:FormDataCollectionDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },",
       "module": "/packages/doceditor"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

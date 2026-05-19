@@ -3,7 +3,7 @@
   "content": "Show File Actions",
   "content_en_sha1_hash": "5f4d732bf49f42d2b52ab6682a11f986c01135a6",
   "created_at": "2026-02-18T14:56:21.929Z",
-  "updated_at": "2026-04-13T14:59:05.788Z",
+  "updated_at": "2026-05-15T14:00:06.722Z",
   "comment": {
     "text": "This is a tooltip for a button that opens a context menu with actions for a file or folder.",
     "is_auto": true,
@@ -13,31 +13,31 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/components/tiles/file-tile/index.tsx",
-      "line_number": 375,
+      "line_number": 384,
       "context": "displayType={ContextMenuButtonDisplayType.toggle}\n onClick={(e) => {\n e.stopPropagation();\n onContextMenu(e);\n }}\n title={t(\"TitleShowActions\")}\n />\n ) : (\n <div className=\"expandButton\" />\n )}\n <ContextMenu",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/components/tiles/folder-tile/index.tsx",
-      "line_number": 321,
+      "line_number": 330,
       "context": "displayType={ContextMenuButtonDisplayType.toggle}\n onClick={(e) => {\n e.stopPropagation();\n onContextMenu(e);\n }}\n title={t(\"TitleShowActions\")}\n />\n ) : (\n <div className=\"expandButton\" />\n )}\n <ContextMenu",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/ContextButton.tsx",
-      "line_number": 138,
+      "line_number": 147,
       "context": "id=\"info-options\"\n className=\"expandButton\"\n title={\n \"isFolder\" in selection && selection.isFolder\n ? t(\"Common:TitleShowFolderActions\")\n : t(\"Common:TitleShowActions\")\n }\n onClick={onContextMenu}\n getData={getData}\n directionX=\"right\"\n displayType={ContextMenuButtonDisplayType.toggle}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/ItemTitle.tsx",
-      "line_number": 128,
+      "line_number": 137,
       "context": "dataTestId=\"info_panel_gallery_context_menu\"\n />\n <ContextMenuButton\n id=\"info-options\"\n className=\"expandButton\"\n title={t(\"Common:TitleShowActions\")}\n onClick={onClickContextMenu}\n getData={onGetContextOptions}\n directionX=\"right\"\n displayType={ContextMenuButtonDisplayType.toggle}\n testId=\"info_panel_gallery_context_menu_button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableRow.js",
-      "line_number": 313,
+      "line_number": 322,
       "context": "showHotkeyBorder={showHotkeyBorder ? !isTutorialEnabled : false}\n displayFileExtension={displayFileExtension}\n title={\n item.isFolder\n ? t(\"Common:TitleShowFolderActions\")\n : t(\"Common:TitleShowActions\")\n }\n isRoom={item.isRoom}\n isHighlight={isHighlight}\n hideColumns={hideColumns}\n badgeUrl={badgeUrl}",
       "module": "/packages/client"
     }
@@ -173,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

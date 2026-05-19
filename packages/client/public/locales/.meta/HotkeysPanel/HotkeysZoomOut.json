@@ -3,7 +3,7 @@
   "content": "Zoom out",
   "content_en_sha1_hash": "a4ae4b24a1f5369c2bff61abdbc221170e4b27d8",
   "created_at": "2025-05-19T21:30:55.105Z",
-  "updated_at": "2026-04-11T21:11:45.607Z",
+  "updated_at": "2026-05-15T14:00:06.705Z",
   "comment": {
     "text": "This is a label in the hotkeys panel, indicating the keyboard shortcut for decreasing the zoom level of the document.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/PreviewActionsBlock.js",
-      "line_number": 60,
+      "line_number": 69,
       "context": "<Text {...keyTextStyles}>+ {t(\"Common:Or\")} =</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"HotkeysZoomOut\")}</Text>\n <Text {...keyTextStyles}>-</Text>\n </>\n </Row>\n </>\n );",
       "module": "/packages/client"
     }

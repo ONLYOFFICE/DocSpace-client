@@ -3,7 +3,7 @@
   "content": "Select specific users from {{productName}} and invite them to fill out the original form.",
   "content_en_sha1_hash": "3be65286af53e08e26a1e63c3c611aff14f48e44",
   "created_at": "2025-09-23T07:24:16.886Z",
-  "updated_at": "2026-04-12T19:53:42.672Z",
+  "updated_at": "2026-05-15T14:00:06.904Z",
   "comment": {
     "text": "This is the description text for the \"Share with users\" option within a sharing dialog. It explains that users can be selected from the portal to share the document with. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 184,
+      "line_number": 193,
       "context": "{\n id: \"share-with-users\",\n title: t(\"Common:ShareWithPortalUsers\", {\n productName: getBrandName(\"ProductName\"),\n }),\n description: t(\"Common:ShareWithPortalUsersDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n buttonLabel: t(\"Common:Share\"),\n onClick: shareFileToUsers,\n icon: <ShareFileToUsersIcon />,",
       "module": "/packages/doceditor"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "<1>{{displayName}}</1> invites you to join the room <1>{{roomName}}</1> for secure document collaboration.",
   "content_en_sha1_hash": "a562c988747a5f073b4f2c0e05a5d2508c3d523a",
   "created_at": "2025-05-19T21:30:45.954Z",
-  "updated_at": "2026-04-11T20:50:36.056Z",
+  "updated_at": "2026-05-15T14:00:06.917Z",
   "comment": {
     "text": "This is a greeting message displayed to a user who has been invited to a room. It informs them that `displayName` has invited them to the room `roomName` for secure document collaboration.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingCreateUserContainer/index.tsx",
-      "line_number": 91,
+      "line_number": 100,
       "context": "if (roomData?.title) {\n return (\n <Trans\n {...commonProps}\n i18nKey=\"InvitationToRoom\"\n defaults={DEFAULT_ROOM_TEXT}\n values={{\n displayName,\n ...(roomData.title\n ? { roomName: roomData.title }",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingLoginContainer.tsx",
-      "line_number": 77,
+      "line_number": 86,
       "context": "}, [loginData]);\n \n const { type, roomName, displayName, spaceAddress } = invitationLinkData;\n \n const keyProp = roomName\n ? { tKey: \"InvitationToRoom\" }\n : { tKey: \"InvitationToPortal\" };\n \n const renderEmailChangeContent = () => {\n if (!(emailChange && type !== \"invitation\")) return null;",
       "module": "/packages/login"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

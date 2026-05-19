@@ -3,7 +3,7 @@
   "content": "Download applications",
   "content_en_sha1_hash": "0d743c2d5f83f1161e2d1c296b8b2d29e8c3d12b",
   "created_at": "2025-05-19T21:30:44.653Z",
-  "updated_at": "2026-04-11T20:54:44.420Z",
+  "updated_at": "2026-05-15T14:00:07.023Z",
   "comment": {
     "text": "This is a button label that, when clicked, reveals a list of applications available for download.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/components/article/sub-components/Apps.tsx",
-      "line_number": 73,
+      "line_number": 82,
       "context": "fontSize=\"11px\"\n noSelect\n lineHeight=\"12px\"\n fontWeight={600}\n >\n {t(\"DownloadApps\")}\n </Text>\n <div className=\"download-app-list\">\n {downloaddesktopUrl ? (\n <IconButton\n className={styles.windowsIcon}",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

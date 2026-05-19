@@ -3,7 +3,7 @@
   "content": "SMTP Settings",
   "content_en_sha1_hash": "52ff101f3a7156bd8a868fbddda28dc2f4dfb972",
   "created_at": "2025-05-19T21:30:52.745Z",
-  "updated_at": "2026-04-11T21:22:04.893Z",
+  "updated_at": "2026-05-15T14:00:06.853Z",
   "comment": {
     "text": "This is a section title within the portal settings, referring to the configuration options for Simple Mail Transfer Protocol.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/index.js",
-      "line_number": 116,
+      "line_number": 125,
       "context": "await getThirdPartyData();\n },\n },\n {\n id: \"smtp-settings\",\n name: t(\"Settings:SMTPSettings\"),\n content: <SMTPSettings />,\n onClick: async () => {\n clearAbortControllerArr();\n await getSMTPSettingsData();\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/index.js",
-      "line_number": 51,
+      "line_number": 60,
       "context": "\"Common\",\n \"UploadPanel\",\n ]);\n \n useEffect(() => {\n if (ready) setDocumentTitle(t(\"Settings:SMTPSettings\"));\n }, [ready]);\n \n if (showPortalSettingsLoader || !ready) return <SettingsSMTPSkeleton />;\n \n return (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 421,
+      "line_number": 430,
       "context": "{\n id: \"portal-settings_catalog-smtp-settings\",\n key: \"4-5\",\n icon: \"\",\n link: \"smtp-settings\",\n tKey: \"SMTPSettings\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-ai-settings\",\n key: \"4-6\",",
       "module": "/packages/client"
     }

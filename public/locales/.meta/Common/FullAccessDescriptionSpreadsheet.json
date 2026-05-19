@@ -3,7 +3,7 @@
   "content": "Sharing, editing, commenting and renaming.",
   "content_en_sha1_hash": "3f487e1b3f61bbc134665933d4d4b44e8ae092f7",
   "created_at": "2025-09-29T18:22:04.749Z",
-  "updated_at": "2026-04-11T20:51:41.912Z",
+  "updated_at": "2026-05-15T14:00:06.935Z",
   "comment": {
     "text": "Tooltip text describing the full access permissions for a spreadsheet file. It appears when hovering over the \"Full Access\" option in sharing settings.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 660,
+      "line_number": 669,
       "context": "FileType.PDF,\n ),\n access: ShareAccessRights.FullAccess,\n isForm: P.not(true),\n },\n () => t(\"Common:FullAccessDescriptionSpreadsheet\"),\n )\n .with(\n {\n fileType: P.union(\n FileType.Spreadsheet,",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

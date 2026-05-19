@@ -3,7 +3,7 @@
   "content": "The grace period is active <1>from {{fromDate}} to {{byDate}}</1> (days remaining: {{delayDaysCount}}).",
   "content_en_sha1_hash": "6493a5523794932a22a1b54895e6649750a537eb",
   "created_at": "2026-03-31T15:18:33.645Z",
-  "updated_at": "2026-04-11T21:19:43.680Z",
+  "updated_at": "2026-05-15T14:00:06.685Z",
   "comment": {
     "text": "This is a message displayed in a dialog warning about an active grace period for a quota. It informs the user about the start and end dates of the grace period (`fromDate`, `byDate`) and the number of remaining days (`delayDaysCount`).",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
-      "line_number": 125,
+      "line_number": 134,
       "context": "</Text>\n <br />\n <Text as=\"div\">\n {standalone ? (\n <Trans\n i18nKey=\"GracePeriodActive\"\n ns=\"Payments\"\n t={t}\n values={{\n fromDate,\n byDate,",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Use the {{organizationName}} {{productName}} API for authorization and actions like file access and more.",
   "content_en_sha1_hash": "74eb0caf53cd3f8add35b45bf9820d0ed697da8b",
   "created_at": "2026-04-03T21:51:36.605Z",
-  "updated_at": "2026-04-11T21:23:11.489Z",
+  "updated_at": "2026-05-15T14:00:06.817Z",
   "comment": {
     "text": "This is the description for the OAuth card on the Developer Tools page. It explains that the OAuth API allows third-party applications to access user data and perform actions within DocSpace. `{{organizationName}}` is the name of the organization, and `{{productName}}` is the name of the product (e.g., ONLYOFFICE DocSpace).",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 113,
+      "line_number": 122,
       "context": "linkTitle={t(\"Webhooks:CreateWebhook\")}\n />\n <Card\n icon={<OAuthSvg />}\n title={t(\"OAuth:OAuth\")}\n description={t(\"Settings:OAuthDescription\", { organizationName: getBrandName(\"OrganizationName\"), productName: getBrandName(\"ProductName\") })}\n url=\"/developer-tools/oauth/create\"\n color={globalColors.purple}\n linkTitle={t(\"Settings:RegisterApp\")}\n />\n <Card",
       "module": "/packages/client"
     }

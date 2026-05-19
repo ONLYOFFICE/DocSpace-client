@@ -3,7 +3,7 @@
   "content": "Enable automatic indexing to index files and folders by serial number. Sorting by number will be set as default for all users.",
   "content_en_sha1_hash": "6f5d6b18806c6e849ff261231c92aab80a0fe2d9",
   "created_at": "2025-05-19T21:30:56.781Z",
-  "updated_at": "2026-04-11T21:04:55.137Z",
+  "updated_at": "2026-05-15T15:37:40.190Z",
   "comment": {
     "text": "This is the body text for a toggle switch in the \"Create/Edit Room\" dialog. It explains that enabling automatic indexing will organize files and folders by serial number and set numerical sorting as the default for all users.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/VirtualDataRoomBlock.js",
-      "line_number": 138,
-      "context": "return (\n <StyledVirtualDataRoomBlock>\n <Block\n headerText={t(\"AutomaticIndexing\")}\n bodyText={t(\"AutomaticIndexingDescription\")}\n onChange={onChangeAutomaticIndexing}\n isDisabled={false}\n isChecked={roomParams.indexing}\n dataTestId=\"virtual_data_room_automatic_indexing\"\n />",
+      "line_number": 114,
+      "context": "return (\n <div className={styles.virtualDataRoomBlock}>\n <Block\n headerText={t(\"AutomaticIndexing\")}\n bodyText={t(\"AutomaticIndexingDescription\")}\n onChange={onChangeAutomaticIndexing}\n isDisabled={false}\n isChecked={roomParams.indexing}\n dataTestId=\"virtual_data_room_automatic_indexing\"\n />",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

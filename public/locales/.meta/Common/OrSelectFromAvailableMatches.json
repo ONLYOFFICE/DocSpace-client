@@ -3,7 +3,7 @@
   "content": "Or select from available matches",
   "content_en_sha1_hash": "633f60fd49ce09fbe6101a2105a2a42fcd63e968",
   "created_at": "2026-02-19T13:36:18.693Z",
-  "updated_at": "2026-04-27T12:45:07.547Z",
+  "updated_at": "2026-05-15T14:00:06.939Z",
   "comment": {
     "text": "This is a short phrase displayed within a tag management filter. It appears when a user is creating a new tag, suggesting they can choose from existing tags instead.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/tag-management/TagManagement.filter.tsx",
-      "line_number": 194,
+      "line_number": 203,
       "context": "fontSize=\"12px\"\n lineHeight=\"16px\"\n noSelect\n >\n {showCreateTag\n ? t(\"Common:OrSelectFromAvailableMatches\")\n : t(\"Common:SelectAnOptionOrCreateOne\")}\n </Text>\n ) : null}\n </>\n );",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

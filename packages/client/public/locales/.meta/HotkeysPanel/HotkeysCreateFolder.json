@@ -3,7 +3,7 @@
   "content": "Create folder",
   "content_en_sha1_hash": "e59f63fa517890d45d5ab20a380fe68f2302ef67",
   "created_at": "2025-05-19T21:30:55.036Z",
-  "updated_at": "2026-04-11T21:12:20.035Z",
+  "updated_at": "2026-05-15T14:00:06.704Z",
   "comment": {
     "text": "This is a label in the hotkeys panel, indicating the keyboard shortcut for creating a new folder.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/CreationBlock.js",
-      "line_number": 66,
+      "line_number": 75,
       "context": "<Text {...keyTextStyles}>{`${AltKey} + Shift + o`}</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"HotkeysCreateFolder\")}</Text>\n <Text {...keyTextStyles}>Shift + f</Text>\n </>\n </Row>\n \n <Row className={styles.hotkeysRow}>",
       "module": "/packages/client"
     }

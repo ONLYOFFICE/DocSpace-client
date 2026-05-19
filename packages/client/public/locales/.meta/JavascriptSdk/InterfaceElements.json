@@ -3,7 +3,7 @@
   "content": "Interface elements",
   "content_en_sha1_hash": "664ca787f30b4553416fc2fd6e29813dbe80ffc7",
   "created_at": "2025-05-19T21:30:54.535Z",
-  "updated_at": "2026-04-13T14:59:05.778Z",
+  "updated_at": "2026-05-15T14:00:06.701Z",
   "comment": {
     "text": "This is a section header in the JavaScript SDK settings, labeling a group of options related to the visual components of the interface.",
     "is_auto": true,
@@ -13,37 +13,37 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 514,
+      "line_number": 523,
       "context": "<Text\n className={styles.embeddingPanelHeaderText}\n fontSize=\"15px\"\n fontWeight={600}\n >\n {t(\"JavascriptSdk:InterfaceElements\")}\n </Text>\n \n <div className={styles.embeddingPanelCheckboxContainer}>\n <CheckboxElement\n label={t(\"Common:Title\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
-      "line_number": 276,
+      "line_number": 285,
       "context": "defaultFrameId={config.frameId}\n setConfig={setConfig}\n />\n \n {/* <InterfaceElements>\n <Label className=\"label\">{t(\"InterfaceElements\")}</Label>\n <Checkbox\n className=\"checkbox\"\n label={t(\"RightPanelCollapsed\")}\n onChange={() => {}}\n isChecked",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 398,
+      "line_number": 407,
       "context": "setConfig={setConfig}\n />\n </ControlsSection>\n \n <ControlsSection>\n <Label className=\"label\">{t(\"InterfaceElements\")}</Label>\n \n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Subtitle\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 484,
+      "line_number": 493,
       "context": "setConfig={setConfig}\n />\n </ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"InterfaceElements\")}</CategorySubHeader>\n \n <CheckboxGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
-      "line_number": 296,
+      "line_number": 305,
       "context": "setConfig={setConfig}\n />\n </ControlsSection>\n \n <ControlsSection>\n <Label className=\"label\">{t(\"InterfaceElements\")}</Label>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Search\")}\n onChange={toggleWithSearch}\n isChecked={config.withSearch}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 418,
+      "line_number": 427,
       "context": "setConfig={setConfig}\n />\n </ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"InterfaceElements\")}</CategorySubHeader>\n \n <CheckboxGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"",
       "module": "/packages/client"
     }

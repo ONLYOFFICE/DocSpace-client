@@ -3,7 +3,7 @@
   "content": "User’s Files",
   "content_en_sha1_hash": "8c601cb8c42483a78013375e2d836fca2adaf2ed",
   "created_at": "2025-05-19T21:30:53.154Z",
-  "updated_at": "2026-04-11T21:21:24.533Z",
+  "updated_at": "2026-05-15T14:00:06.782Z",
   "comment": {
     "text": "This is a label for a section in the data export settings, referring to files owned by a specific user.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 146,
+      "line_number": 155,
       "context": "serviceName=\"Nextcloud\"\n usersExportDetails={{\n name: t(\"InfoPanel:Users\"),\n }}\n personalExportDetails={{\n name: t(\"Settings:UsersFiles\"),\n }}\n sharedFilesAndFoldersExportDetails={{\n name: t(\"Settings:SharedFilesAndFoldersDetails\"),\n }}\n />",
       "module": "/packages/client"
     }

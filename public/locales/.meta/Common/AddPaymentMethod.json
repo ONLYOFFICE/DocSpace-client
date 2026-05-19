@@ -3,7 +3,7 @@
   "content": "Add payment method",
   "content_en_sha1_hash": "0b2386ed404bc961486196ff481a3604415e357f",
   "created_at": "2026-04-10T13:53:41.777Z",
-  "updated_at": "2026-05-08T13:10:45.728Z",
+  "updated_at": "2026-05-15T14:00:06.995Z",
   "comment": {
     "text": "This is a button label or link text that allows users to add a payment method for billing purposes. It appears in billing-related sections of the application.",
     "is_auto": true,
@@ -13,43 +13,43 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/PriceCalculation.tsx",
-      "line_number": 188,
+      "line_number": 197,
       "context": "onClick={goLinkCard}\n fontWeight={600}\n textDecoration=\"underline\"\n color=\"accent\"\n >\n {t(\"AddPaymentMethod\")}\n </Link>\n </div>\n </div>\n ) : null}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
-      "line_number": 198,
+      "line_number": 207,
       "context": "fontWeight={600}\n style={{ textDecoration: \"underline\" }}\n data-testid=\"add_payment_method_link\"\n color=\"accent\"\n >\n {t(\"AddPaymentMethod\")}\n </Link>\n </>\n ) : (\n t(\"ErrorNotification\")\n );",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
-      "line_number": 186,
+      "line_number": 197,
       "context": "{isAlreadyPaid && isStripePortalAvailable ? (\n <div className={styles.buttonWrapper}>\n <Button\n label={\n walletCustomerStatusNotActive\n ? t(\"AddPaymentMethod\")\n : t(\"GoToStripe\")\n }\n size={ButtonSize.small}\n primary\n onClick={",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
-      "line_number": 186,
+      "line_number": 197,
       "context": "{isAlreadyPaid && isStripePortalAvailable ? (\n <div className={styles.buttonWrapper}>\n <Button\n label={\n walletCustomerStatusNotActive\n ? t(\"AddPaymentMethod\")\n : t(\"GoToStripe\")\n }\n size={ButtonSize.small}\n primary\n onClick={",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/PaymentMethod.tsx",
-      "line_number": 135,
+      "line_number": 144,
       "context": "className={classNames({\n [styles.disabledLink]: isDisabled || isLoading,\n })}\n >\n {walletCustomerStatusNotActive\n ? t(\"AddPaymentMethod\")\n : t(\"GoToStripe\")}\n </Link>\n ) : null}\n </div>",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/PaymentMethod.tsx",
-      "line_number": 135,
+      "line_number": 144,
       "context": "className={classNames({\n [styles.disabledLink]: isDisabled || isLoading,\n })}\n >\n {walletCustomerStatusNotActive\n ? t(\"AddPaymentMethod\")\n : t(\"GoToStripe\")}\n </Link>\n ) : null}\n </div>",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
-      "line_number": 236,
+      "line_number": 245,
       "context": "as=\"span\"\n onClick={goLinkCard}\n fontWeight={600}\n textDecoration=\"underline\"\n >\n {t(\"AddPaymentMethod\")}\n </Link>\n ) : null}\n </div>\n ) : (\n <AutoPaymentInfo onOpen={onOpenLink} />",
       "module": "/libs/ui-kit"
     }
@@ -185,7 +185,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

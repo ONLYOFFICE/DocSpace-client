@@ -3,7 +3,7 @@
   "content": "Don't display cancellation notification again",
   "content_en_sha1_hash": "537727f09456ab87cd615e057378ddfcf8cdf4b9",
   "created_at": "2025-05-19T21:30:55.169Z",
-  "updated_at": "2026-04-11T21:10:56.177Z",
+  "updated_at": "2026-05-15T14:00:06.878Z",
   "comment": {
     "text": "This is a checkbox label. It allows the user to disable future notifications about canceling an operation.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.tsx",
-      "line_number": 191,
+      "line_number": 200,
       "context": ")}\n onChange={onChangeCancellationNotification}\n isChecked={hideConfirmCancelOperation}\n dataTestId=\"cancelletion_notification_toggle_button\"\n />\n <Text>{t(\"CancellaionNotification\")}</Text>\n </div>\n <div className={styles.toggleBtnWrapper}>\n <ToggleButton\n className={classNames(\"room-grouping\", styles.toggleBtn)}\n onChange={onChangeRoomGrouping}",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

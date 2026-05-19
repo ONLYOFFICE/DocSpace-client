@@ -3,7 +3,7 @@
   "content": "Extend selection down",
   "content_en_sha1_hash": "da6dc8dcf677a977da4fadd6d15a1e42c52974c7",
   "created_at": "2025-05-19T21:30:55.049Z",
-  "updated_at": "2026-04-11T21:12:13.764Z",
+  "updated_at": "2026-05-15T14:00:06.706Z",
   "comment": {
     "text": "This is a hotkey description in the Hotkeys panel. It describes the action of extending the current selection downwards.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/SelectionBlock.js",
-      "line_number": 66,
+      "line_number": 75,
       "context": "<Text {...keyTextStyles}>l {t(\"Common:Or\")} →</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"HotkeysExtendSelectionDown\")}</Text>\n <Text {...keyTextStyles}>Shift + ↓</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>",
       "module": "/packages/client"
     }

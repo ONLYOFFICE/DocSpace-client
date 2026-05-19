@@ -3,7 +3,7 @@
   "content": "This room is available to anyone with the link. External users will have Form Filler permission for all the files.",
   "content_en_sha1_hash": "71456b52b18baef0b2e68e4d7a533ffa05a20307",
   "created_at": "2025-05-19T21:30:56.804Z",
-  "updated_at": "2026-04-11T21:04:44.653Z",
+  "updated_at": "2026-05-15T14:00:06.743Z",
   "comment": {
     "text": "This is a descriptive text displayed in a banner within the \"Create/Edit Room\" dialog. It informs the user that the room is accessible via a link and external users will have \"Form Filler\" permissions for all files.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.tsx",
-      "line_number": 373,
+      "line_number": 382,
       "context": "? t(\"Files:RoomAvailableViaSharedLink\")\n : t(\"Files:RoomAvailableViaExternalLink\")\n }\n bodyText={\n isFormRoom\n ? t(\"CreateEditRoomDialog:FormRoomBarDescription\")\n : t(\"CreateEditRoomDialog:PublicRoomBarDescription\")\n }\n />\n </div>\n ) : null}",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

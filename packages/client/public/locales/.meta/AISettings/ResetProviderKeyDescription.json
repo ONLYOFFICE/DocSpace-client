@@ -3,7 +3,7 @@
   "content": "The API key is displayed only once upon saving and is then hidden for security purposes. If it is reset, a new key must be provided; otherwise, AI features, including the chat, will be unavailable.",
   "content_en_sha1_hash": "2072fcf008381498bb30dcdbbe3208fac363d4a2",
   "created_at": "2025-10-27T16:14:31.661Z",
-  "updated_at": "2026-04-23T17:24:01.921Z",
+  "updated_at": "2026-05-15T14:00:06.764Z",
   "comment": {
     "text": "This is a hint text displayed when an API key is hidden, explaining that resetting it will generate a new key and disable AI features if not updated.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
-      "line_number": 527,
+      "line_number": 534,
       "context": "removeMargin\n >\n {isKeyInputHidden ? (\n <div className={styles.resetKeyBlock}>\n <div className={styles.resetKeyHint}>\n {t(\"AISettings:ResetProviderKeyDescription\")}\n </div>\n <Link\n type={LinkType.action}\n fontWeight={600}\n lineHeight=\"20px\"",
       "module": "/packages/client"
     }
@@ -24,6 +24,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     }
   }
 }

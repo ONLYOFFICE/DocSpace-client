@@ -3,7 +3,7 @@
   "content": "Copy {{element}}",
   "content_en_sha1_hash": "ed0ee7f92937e2893de3d1552b5c943e15bf62a7",
   "created_at": "2025-05-19T21:30:56.251Z",
-  "updated_at": "2026-04-11T21:07:55.592Z",
+  "updated_at": "2026-05-15T14:00:06.590Z",
   "comment": {
     "text": "This is a tooltip message that appears when a user drags and copies a single file or folder. `{{element}}` will be replaced with the name of the file or folder being copied.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/DragTooltip/DragTooltip.js",
-      "line_number": 102,
+      "line_number": 111,
       "context": "}, [title, iconOfDraggedFile]);\n \n const tooltipLabel = tooltipOptions\n ? operationName === \"copy\"\n ? isSingleItem\n ? t(\"TooltipElementCopyMessage\", { element: filesCount })\n : t(\"TooltipElementsCopyMessage\", { element: filesCount })\n : isSingleItem\n ? renderFileMoveTooltip()\n : t(\"TooltipElementsMoveMessage\", { element: filesCount })\n : t(\"\");",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

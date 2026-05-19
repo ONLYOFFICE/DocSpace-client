@@ -3,7 +3,7 @@
   "content": "If you enable this guest, they will be able to log in to {{productName}} again.",
   "content_en_sha1_hash": "40d29b7770b25502992afe7db84af1b6cf72f9e2",
   "created_at": "2025-05-19T21:30:56.964Z",
-  "updated_at": "2026-04-11T21:03:42.369Z",
+  "updated_at": "2026-05-15T14:00:06.647Z",
   "comment": {
     "text": "This is the body text of a confirmation dialog that appears when enabling a single guest user. It informs the user that the guest will regain login access to the platform. `{{productName}}` is the name of the product.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 200,
+      "line_number": 209,
       "context": "? t(\"EnableGuests\")\n : t(\"EnableUsers\");\n \n bodyText = onlyOneUser\n ? isGuests\n ? t(\"EnableGuestDescription\", { productName: getBrandName(\"ProductName\") })\n : t(\"EnableUserDescription\", { productName: getBrandName(\"ProductName\") })\n : isGuests\n ? t(\"EnableGuestsDescription\", { productName: getBrandName(\"ProductName\") })\n : t(\"EnableUsersDescription\", { productName: getBrandName(\"ProductName\") });",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Add a tag",
   "content_en_sha1_hash": "a8212f9bf639eb29d1e9572a9b9325ec8febbb76",
   "created_at": "2025-05-19T21:30:56.838Z",
-  "updated_at": "2026-04-11T21:04:28.988Z",
+  "updated_at": "2026-05-15T14:00:06.626Z",
   "comment": {
     "text": "This is a placeholder text for an input field where users can type to add a tag. It appears when the input field is empty.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/TagInput/index.tsx",
-      "line_number": 134,
+      "line_number": 143,
       "context": ">\n <InputParam\n ref={inputRef}\n id=\"shared_tags-input\"\n title={title ? `${title}:` : `${t(\"Common:Tags\")}:`}\n placeholder={t(\"TagsPlaceholder\")}\n value={tagInput}\n onChange={onTagInputChange}\n onFocus={handleFocus}\n onBlur={handleBlur}\n isDisabled={isDisabled}",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

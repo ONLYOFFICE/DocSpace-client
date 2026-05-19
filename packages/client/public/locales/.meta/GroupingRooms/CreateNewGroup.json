@@ -3,7 +3,7 @@
   "content": "Create a new group",
   "content_en_sha1_hash": "26593ae8f545458050883f21804ef72cc52b439a",
   "created_at": "2026-02-19T13:36:24.871Z",
-  "updated_at": "2026-04-11T21:11:39.826Z",
+  "updated_at": "2026-05-15T14:00:06.681Z",
   "comment": {
     "text": "This is the label for a button that allows users to create a new group for organizing rooms.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/index.tsx",
-      "line_number": 398,
+      "line_number": 407,
       "context": "</Text>\n </div>\n <AddButton\n onClick={onClickCreateNewGroup}\n className={styles.selectorAddButton}\n label={t(\"GroupingRooms:CreateNewGroup\")}\n isDisabled={!localGroupingEnabled}\n tabIndex={localGroupingEnabled ? 0 : -1}\n testId=\"create_new_group_button\"\n />\n <div className={styles.addedGroups}>{renderGroupItems()}</div>",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "You are about to remove a user from the room. Please note that this user is actively participating in form completion. If you proceed, any forms they are involved in will be halted at their step.",
   "content_en_sha1_hash": "04db0ec5cc3cc59fd4ba3bde67bf871fb252d45c",
   "created_at": "2025-05-19T21:30:53.554Z",
-  "updated_at": "2026-04-11T21:19:48.714Z",
+  "updated_at": "2026-05-15T14:00:06.693Z",
   "comment": {
     "text": "This is the body text of a confirmation dialog that appears when a user attempts to remove another user who is actively involved in form completion. It warns that removing the user will halt their ongoing form processes.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/RemoveUserConfirmationDialog/index.tsx",
-      "line_number": 83,
+      "line_number": 92,
       "context": "visible={removeUserConfirmation.visible}\n onClose={onClose}\n >\n <ModalDialog.Header>{t(\"People:RemoveUser\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"People:RemoveUserConfirmationText\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"delete-file-modal_submit\"\n key=\"OKButton\"",
       "module": "/packages/client"
     }

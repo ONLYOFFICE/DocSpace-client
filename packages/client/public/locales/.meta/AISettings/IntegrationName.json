@@ -3,7 +3,7 @@
   "content": "Integration name",
   "content_en_sha1_hash": "f28419904f21e4ead21f3c80d3ff939d87dfb4c7",
   "created_at": "2025-10-27T16:14:31.644Z",
-  "updated_at": "2026-04-11T21:02:48.685Z",
+  "updated_at": "2026-05-15T14:00:06.767Z",
   "comment": {
     "text": "This is a label for an input field where the user enters the name of an AI integration. It appears in the AI settings section.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useBaseParams.tsx",
-      "line_number": 120,
+      "line_number": 129,
       "context": "const baseParamsError = !name || !url || !description || hasError;\n \n const baseParamsComponent = (\n <>\n <FieldContainer\n labelText={t(\"AISettings:IntegrationName\")}\n isRequired\n isVertical\n removeMargin\n labelVisible\n errorMessage={nameError}",
       "module": "/packages/client"
     }
@@ -24,6 +24,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     }
   }
 }

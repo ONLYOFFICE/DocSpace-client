@@ -1,0 +1,29 @@
+{
+  "key_path": "AIPaywallCallbackKeepOpen",
+  "content": "Please keep this tab open until the process completes.",
+  "content_en_sha1_hash": "2b54f3d2825057fc6128c2e5c559af4715d9b38d",
+  "created_at": "2026-05-15T13:59:45.928Z",
+  "updated_at": "2026-05-15T14:08:39.454Z",
+  "comment": {
+    "text": "Informational text within a status callout on the AI paywall completion page, instructing the user to remain on the current tab.",
+    "is_auto": true,
+    "updated_at": "2026-05-15T14:08:39.454Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
+      "line_number": 156,
+      "context": "<div className={styles.keepOpenCallout} role=\"status\">\n <InfoIcon\n className={styles.keepOpenCalloutIcon}\n aria-hidden=\"true\"\n />\n <span>{t(\"AIPaywallCallbackKeepOpen\")}</span>\n </div>\n \n <ol className={styles.timeline}>\n {steps.map((label, index) => {\n const state =",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

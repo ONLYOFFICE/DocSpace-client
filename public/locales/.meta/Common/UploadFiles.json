@@ -3,7 +3,7 @@
   "content": "Upload files",
   "content_en_sha1_hash": "41aca16f905ad31d0eec695b710915a4892e116f",
   "created_at": "2026-04-03T21:51:34.730Z",
-  "updated_at": "2026-05-08T13:10:45.492Z",
+  "updated_at": "2026-05-15T14:00:06.585Z",
   "comment": {
     "text": "This is a button label that initiates the process of uploading files to the system.",
     "is_auto": true,
@@ -13,31 +13,31 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 392,
+      "line_number": 401,
       "context": "const newUploadActions = [\n {\n id: \"actions_upload-files\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:UploadFiles\"),\n onClick: onUploadFileClick,\n key: \"upload-files\",\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Knowledge.tsx",
-      "line_number": 74,
+      "line_number": 83,
       "context": "<ReactSVG\n className=\"ai-button-icon\"\n src={ActionsUploadReactSvgUrl}\n />\n }\n label={t(\"Common:UploadFiles\")}\n scale\n filled\n filledStroke\n onClick={onClickAction}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3699,
+      "line_number": 3708,
       "context": "icon: CatalogFolderReactSvgUrl,\n };\n \n const uploadFiles = {\n key: \"upload-files\",\n label: t(\"Common:UploadFiles\"),\n onClick: () => this.onUploadAction(\"file\"),\n icon: ActionsUploadReactSvgUrl,\n };\n \n const uploadFolder = {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/main-button/index.tsx",
-      "line_number": 126,
+      "line_number": 135,
       "context": "isSeparator: true,\n },\n {\n id: \"actions_upload-files\",\n key: \"upload-files\",\n label: t(\"Common:UploadFiles\"),\n icon: ActionsUploadReactSvgUrl,\n onClick: onUploadFiles,\n },\n {\n id: \"actions_upload-folder\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/main-button/index.tsx",
-      "line_number": 126,
+      "line_number": 135,
       "context": "isSeparator: true,\n },\n {\n id: \"actions_upload-files\",\n key: \"upload-files\",\n label: t(\"Common:UploadFiles\"),\n icon: ActionsUploadReactSvgUrl,\n onClick: onUploadFiles,\n },\n {\n id: \"actions_upload-folder\",",
       "module": "/packages/sdk"
     }
@@ -173,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

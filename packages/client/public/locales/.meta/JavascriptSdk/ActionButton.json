@@ -3,7 +3,7 @@
   "content": "Action button",
   "content_en_sha1_hash": "81156442640c6af1ec3dd4728dd68a78bc720a31",
   "created_at": "2025-05-19T21:30:54.343Z",
-  "updated_at": "2026-04-13T14:59:05.857Z",
+  "updated_at": "2026-05-15T14:00:06.803Z",
   "comment": {
     "text": "This is a label for a UI element that represents an action button within the JavaScript SDK presets.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 557,
+      "line_number": 566,
       "context": "/>\n </LabelGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"ActionButton\")}\n onChange={toggleActionButton}\n isChecked={!config.disableActionButton}\n dataTestId=\"action_button_checkbox\"\n />\n <HelpButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 557,
+      "line_number": 566,
       "context": "/>\n </LabelGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"ActionButton\")}\n onChange={toggleActionButton}\n isChecked={!config.disableActionButton}\n dataTestId=\"action_button_checkbox\"\n />\n <HelpButton",
       "module": "/packages/client"
     }

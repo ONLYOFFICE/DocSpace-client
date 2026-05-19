@@ -3,7 +3,7 @@
   "content": "The subsection allows you to browse through the list of the latest changes (creation, modification, deletion etc.) made by users to the entities (rooms, opportunities, files etc.) within your {{productName}}.",
   "content_en_sha1_hash": "14dcf30f13f317e2c76ba01c199429d2e0ccc37a",
   "created_at": "2025-05-19T21:30:50.592Z",
-  "updated_at": "2026-04-11T21:25:37.059Z",
+  "updated_at": "2026-05-15T14:00:06.870Z",
   "comment": {
     "text": "This is the descriptive text displayed in an empty state for the Audit Trail section of the portal settings. It explains what the audit trail feature does, with `{{productName}}` being replaced by the product's brand name.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 89,
+      "line_number": 98,
       "context": "};\n \n if (auditTrailUsers.length === 0) {\n return (\n <EmptyScreenContainer\n descriptionText={t(\"AuditSubheader\", {\n productName: getBrandName(\"ProductName\"),\n })}\n imageSrc={\n theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 89,
+      "line_number": 98,
       "context": "};\n \n if (auditTrailUsers.length === 0) {\n return (\n <EmptyScreenContainer\n descriptionText={t(\"AuditSubheader\", {\n productName: getBrandName(\"ProductName\"),\n })}\n imageSrc={\n theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl\n }",
       "module": "/packages/client"
     }

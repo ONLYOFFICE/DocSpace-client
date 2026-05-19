@@ -3,7 +3,7 @@
   "content": "File updated.",
   "content_en_sha1_hash": "7251f176a4d35c681a5ea6f7875b303dc87be63f",
   "created_at": "2025-05-19T21:30:54.974Z",
-  "updated_at": "2026-04-11T21:12:29.789Z",
+  "updated_at": "2026-05-15T14:00:06.733Z",
   "comment": {
     "text": "This is a toast message that appears when a user successfully updates a file.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 59,
+      "line_number": 68,
       "context": "return t(\"InfoPanel:FileUploadedCount\", {\n count,\n });\n return t(\"InfoPanel:FilesAddedNotify\");\n case FeedActionKeys.UserFileUpdated:\n return t(\"InfoPanel:UserFileUpdated\");\n case FeedActionKeys.FileConverted:\n return t(\"InfoPanel:FileConverted\");\n case FeedActionKeys.FileRenamed:\n return t(\"InfoPanel:FileRenamedNotify\");\n case FeedActionKeys.FileMoved:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 53,
+      "line_number": 62,
       "context": "return t(\"InfoPanel:FileUploadedCount\", {\n count,\n });\n return t(\"InfoPanel:FilesAddedNotify\");\n case FeedActionKeys.UserFileUpdated:\n return t(\"InfoPanel:UserFileUpdated\");\n case FeedActionKeys.FileConverted:\n return t(\"InfoPanel:FileConverted\");\n case FeedActionKeys.FileRenamed:\n return t(\"InfoPanel:FileRenamedNotify\");\n case FeedActionKeys.FileMoved:",
       "module": "/packages/client"
     }

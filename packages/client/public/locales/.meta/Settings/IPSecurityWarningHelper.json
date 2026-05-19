@@ -3,7 +3,7 @@
   "content": "First, you need to specify your current IP or the IP range your current IP address belongs to, otherwise your space access will be blocked right after you save the settings. The space owner will have the space access from any IP address.",
   "content_en_sha1_hash": "25490f5125cf44c29790cae04b3c1e1a30e87500",
   "created_at": "2025-05-19T21:30:51.742Z",
-  "updated_at": "2026-04-11T21:23:37.897Z",
+  "updated_at": "2026-05-15T14:00:06.868Z",
   "comment": {
     "text": "This is a warning message displayed to users when configuring IP security settings. It informs them that they must specify their IP address or range to avoid being locked out of their space, and clarifies that the space owner is exempt from this restriction.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 331,
+      "line_number": 340,
       "context": "<>\n <Text fontSize=\"16px\" fontWeight=\"700\" className={styles.warningText}>\n {t(\"Common:Warning\")}\n </Text>\n <Text className={styles.ipSecurityWarning}>\n {t(\"IPSecurityWarningHelper\")}\n </Text>\n </>\n ) : null}\n \n <SaveCancelButtons",
       "module": "/packages/client"
     }

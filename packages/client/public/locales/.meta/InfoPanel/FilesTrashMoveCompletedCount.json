@@ -3,7 +3,7 @@
   "content": "Files moved to {{sectionName}} ({{count}}).",
   "content_en_sha1_hash": "2b1c2e68c3a7c2b4aa1c2a2ebfce3d48a2269252",
   "created_at": "2025-06-02T10:19:22.110Z",
-  "updated_at": "2026-04-11T21:13:28.612Z",
+  "updated_at": "2026-05-15T14:00:06.733Z",
   "comment": {
     "text": "This is a toast message indicating that multiple files have been moved to the trash. `{{sectionName}}` will be \"Trash\" and `{{count}}` is the number of files.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 77,
+      "line_number": 86,
       "context": "count,\n });\n return t(\"InfoPanel:FilesMovedNotify\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 71,
+      "line_number": 80,
       "context": "count,\n });\n return t(\"InfoPanel:FilesMovedNotify\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "The AI service is turned off, preventing this agent from processing chats or performing tasks. To restore full functionality, enable AI features in the {{productName}} settings.",
   "content_en_sha1_hash": "3701608d9d13b0f9a0ae4b7a8e7ac16d12d3d769",
   "created_at": "2025-11-03T12:10:17.296Z",
-  "updated_at": "2026-04-11T20:54:07.025Z",
+  "updated_at": "2026-05-15T14:00:06.991Z",
   "comment": {
     "text": "This is an error message displayed to a SaaS administrator when the AI service is disabled, explaining that the AI agent cannot process chats or perform tasks. It includes the `{{productName}}` variable for the product's brand name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-no-access-screen/index.tsx",
-      "line_number": 80,
+      "line_number": 89,
       "context": "},\n ),\n )\n // saas admin\n .with([false, true], () =>\n t(\"EmptyChatAIDisabledSaasAdminDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n )\n // standalone/saas user\n .with([P._, false], () =>",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

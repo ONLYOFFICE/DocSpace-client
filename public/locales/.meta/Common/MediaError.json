@@ -3,7 +3,7 @@
   "content": "Media URL could not be loaded",
   "content_en_sha1_hash": "424dfd762048f75672a8f07db850ecfde8feaa14",
   "created_at": "2025-05-19T21:30:46.408Z",
-  "updated_at": "2026-04-11T20:48:51.147Z",
+  "updated_at": "2026-05-15T14:00:06.931Z",
   "comment": {
     "text": "This is an error message displayed in the media viewer when a media file (image, video, audio) cannot be loaded from its URL.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/media-viewer/MediaViewer.tsx",
-      "line_number": 512,
+      "line_number": 521,
       "context": "onNextClick={nextMedia}\n contextModel={getContextModel}\n onDeleteClick={onDeleteMediaMedia}\n onSetSelectionFile={onSetSelectionFile}\n onDownloadClick={onDownloadMedia}\n errorTitle={t(\"Common:MediaError\")}\n pluginViewerContent={pluginViewerContent}\n />\n ) : undefined;\n };",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

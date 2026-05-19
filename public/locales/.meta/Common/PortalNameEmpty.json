@@ -3,7 +3,7 @@
   "content": "Account name is empty",
   "content_en_sha1_hash": "bc7fcc32b6bbe8a24d9fe8f945809e85db12bdce",
   "created_at": "2025-05-26T07:15:46.227Z",
-  "updated_at": "2026-04-23T17:24:01.924Z",
+  "updated_at": "2026-05-15T14:00:06.772Z",
   "comment": {
     "text": "Error text. This message appears when a user attempts to save an empty name for their DocSpace account.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 243,
+      "line_number": 252,
       "context": "const onValidateInput = (value) => {\n const validDomain = new RegExp(domainValidator.regex);\n \n switch (true) {\n case value === \"\":\n setErrorValue(t(\"PortalNameEmpty\"));\n saveToSessionStorage(\"errorValue\", t(\"PortalNameEmpty\"));\n break;\n case value.length < domainValidator.minLength ||\n value.length > domainValidator.maxLength:\n setErrorValue(",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 243,
+      "line_number": 252,
       "context": "const onValidateInput = (value) => {\n const validDomain = new RegExp(domainValidator.regex);\n \n switch (true) {\n case value === \"\":\n setErrorValue(t(\"PortalNameEmpty\"));\n saveToSessionStorage(\"errorValue\", t(\"PortalNameEmpty\"));\n break;\n case value.length < domainValidator.minLength ||\n value.length > domainValidator.maxLength:\n setErrorValue(",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 216,
+      "line_number": 225,
       "context": "t: TTranslation,\n ) => {\n const validName = new RegExp(nameValidator.regex);\n switch (true) {\n case value === \"\":\n return setError(t(\"Common:PortalNameEmpty\"));\n case value.length < nameValidator.minLength ||\n value.length > nameValidator.maxLength:\n return setError(\n t(\"Common:PortalNameLength\", {\n minLength: nameValidator.minLength.toString(),",
       "module": "/packages/shared"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

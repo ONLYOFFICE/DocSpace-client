@@ -1,0 +1,29 @@
+{
+  "key_path": "AIPaywallWaitingTopUp",
+  "content": "Topping up your balance...",
+  "content_en_sha1_hash": "90f6f59e401e21112383cf9cf3c9fb6405ae3e08",
+  "created_at": "2026-05-15T13:59:46.147Z",
+  "updated_at": "2026-05-15T14:01:51.987Z",
+  "comment": {
+    "text": "Button label displayed during the waiting phase of a balance top-up process for AI tools.",
+    "is_auto": true,
+    "updated_at": "2026-05-15T14:01:51.987Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallPage.tsx",
+      "line_number": 324,
+      "context": "primary\n label={\n waitingPhase === \"payment\"\n ? t(\"AIPaywallWaitingPayment\")\n : waitingPhase === \"topup\"\n ? t(\"AIPaywallWaitingTopUp\")\n : t(\"AIPaywallEnableButton\", { price: selectedAmount })\n }\n onClick={onEnableAI}\n scale\n isDisabled={isWaiting}",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

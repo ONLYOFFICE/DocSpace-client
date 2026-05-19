@@ -3,7 +3,7 @@
   "content": "Reload page",
   "content_en_sha1_hash": "37614e96d9e32dc327e92508fa0e8ec4ca3d2c51",
   "created_at": "2025-05-19T21:30:47.790Z",
-  "updated_at": "2026-04-12T03:03:06.238Z",
+  "updated_at": "2026-05-15T14:00:06.592Z",
   "comment": {
     "text": "This is a button label that reloads the current page, typically used in error states or when content needs to be refreshed.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyServerErrorContainer.tsx",
-      "line_number": 50,
+      "line_number": 59,
       "context": "const options = [\n {\n to: \"\",\n key: \"reload\",\n title: t(\"Common:ReloadPage\"),\n description: t(\"Common:ReloadPage\"),\n icon: <ReloadArrowsSvg />,\n onClick: () => window.location.reload(),\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyServerErrorContainer.tsx",
-      "line_number": 50,
+      "line_number": 59,
       "context": "const options = [\n {\n to: \"\",\n key: \"reload\",\n title: t(\"Common:ReloadPage\"),\n description: t(\"Common:ReloadPage\"),\n icon: <ReloadArrowsSvg />,\n onClick: () => window.location.reload(),\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/errors/Error520.tsx",
-      "line_number": 113,
+      "line_number": 122,
       "context": "fontWeight={600}\n type={LinkType.action}\n onClick={onReloadClick}\n color={currentColorScheme?.main?.accent ?? undefined}\n >\n {t(\"ReloadPage\")}\n </Link>\n </ErrorContainer>\n \n <ReportDialog\n user={user}",
       "module": "/packages/shared"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

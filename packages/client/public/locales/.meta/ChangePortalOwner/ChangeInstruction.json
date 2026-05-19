@@ -3,7 +3,7 @@
   "content": "To change the {{productName}} owner, please choose the name of the new owner below.",
   "content_en_sha1_hash": "bd9c11115488261945b3053d9085f2005e0ece2d",
   "created_at": "2025-05-19T21:30:56.984Z",
-  "updated_at": "2026-04-11T21:03:33.221Z",
+  "updated_at": "2026-05-15T14:00:06.644Z",
   "comment": {
     "text": "This is a descriptive text within a dialog box. It instructs the user on how to change the owner of the {{productName}} (e.g., \"DocSpace\") by selecting a new owner.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 184,
+      "line_number": 193,
       "context": ">\n {t(\"NewPortalOwner\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n <Text\n className={styles.description}\n title={t(\"ChangeInstruction\", {\n productName: getBrandName(\"ProductName\"),\n })}\n >\n {t(\"ChangeInstruction\", { productName: getBrandName(\"ProductName\") })}\n </Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 184,
+      "line_number": 193,
       "context": ">\n {t(\"NewPortalOwner\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n <Text\n className={styles.description}\n title={t(\"ChangeInstruction\", {\n productName: getBrandName(\"ProductName\"),\n })}\n >\n {t(\"ChangeInstruction\", { productName: getBrandName(\"ProductName\") })}\n </Text>",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

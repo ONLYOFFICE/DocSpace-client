@@ -3,7 +3,7 @@
   "content": "Once the limit is reached, all users will be added with User permissions only. To be able to add further admins, contact the {{productName}} administrator to upgrade the tariff plan.",
   "content_en_sha1_hash": "cda48bdc25989133f4955c0489449ec589848282",
   "created_at": "2025-05-19T21:30:54.146Z",
-  "updated_at": "2026-04-11T21:17:30.645Z",
+  "updated_at": "2026-05-15T14:00:06.616Z",
   "comment": {
     "text": "This is a toast message displayed to administrators when their user tariff limit is almost reached. It informs them that new users will be added with \"User\" permissions only and advises contacting the {{productName}} administrator to upgrade the tariff plan.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 82,
+      "line_number": 91,
       "context": ");\n };\n \n const getUserTariffAlmostLimit = () => {\n if (!isAdmin)\n return t(\"UserTariffAlmostReached\", {\n productName: getBrandName(\"ProductName\"),\n });\n \n return (\n <Trans",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Single file",
   "content_en_sha1_hash": "4d4d157f11950a226e57589fb3c26e686110fd7c",
   "created_at": "2026-03-20T09:07:42.373Z",
-  "updated_at": "2026-04-11T21:14:31.131Z",
+  "updated_at": "2026-05-15T14:00:06.805Z",
   "comment": {
     "text": "This is a radio button label for an uploader setting. It indicates that only one file can be uploaded at a time.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
-      "line_number": 172,
+      "line_number": 181,
       "context": "const uploadQuantityOptions = [\n {\n value: \"single\",\n label: (\n <LabelGroup>\n {isFolderMode ? t(\"SingleFolder\") : t(\"SingleFile\")}\n <HelpButton\n offsetRight={0}\n size={12}\n place=\"right\"\n tooltipContent={",
       "module": "/packages/client"
     }

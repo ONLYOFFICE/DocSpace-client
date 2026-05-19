@@ -1607,5 +1607,7 @@
   "UploadPicture": "පින්තුරයක් උඩුගත කරන්න",
   "CustomizeCover": "කවරය සකසන්න",
   "ChangeTheRoomOwner": "කාමරයේ හිමිකරු වෙනස් කරන්න",
-  "RoomOwner": "කාමරයේ හිමිකරු"
+  "RoomOwner": "කාමරයේ හිමිකරු",
+  "LeftAndAppointNewOwner": "ඔබ කාමරය හැරගොස් නව හිමිකරුවෙකු පත් කර ඇත",
+  "AppointNewOwner": "ඔබ නව හිමිකරුවෙකු පත් කර ඇත."
 }

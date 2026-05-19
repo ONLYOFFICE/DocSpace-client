@@ -1607,5 +1607,7 @@
   "UploadPicture": "Încărcare imagine",
   "CustomizeCover": "Particularizare copertă",
   "ChangeTheRoomOwner": "Schimbați proprietarul sălii",
-  "RoomOwner": "Proprietarul sălii"
+  "RoomOwner": "Proprietarul sălii",
+  "LeftAndAppointNewOwner": "Dvs ați părăsit sala și ați desemnat un nou proprietar",
+  "AppointNewOwner": "Ați desemnat un nou proprietar."
 }

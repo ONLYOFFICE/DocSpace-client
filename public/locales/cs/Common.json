@@ -1607,5 +1607,7 @@
   "UploadPicture": "Nahrát obrázek",
   "CustomizeCover": "Přizpůsobení krytu",
   "ChangeTheRoomOwner": "Změna vlastníka místnosti",
-  "RoomOwner": "Majitel místnosti"
+  "RoomOwner": "Majitel místnosti",
+  "LeftAndAppointNewOwner": "Opustili jste místnost a určili nového majitele.",
+  "AppointNewOwner": "Jmenovali jste nového majitele."
 }

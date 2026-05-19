@@ -1607,5 +1607,7 @@
   "UploadPicture": "上传图片",
   "CustomizeCover": "自定义封面",
   "ChangeTheRoomOwner": "更改房间所有者",
-  "RoomOwner": "房间所有者"
+  "RoomOwner": "房间所有者",
+  "LeftAndAppointNewOwner": "您已退出房间并指定了新的所有者",
+  "AppointNewOwner": "您已指定一个新的所有者。"
 }

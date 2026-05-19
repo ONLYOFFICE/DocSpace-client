@@ -1622,5 +1622,7 @@
   "UploadPicture": "Upload picture",
   "CustomizeCover": "Customize cover",
   "ChangeTheRoomOwner": "Change the Room Owner",
-  "RoomOwner": "Room owner"
+  "RoomOwner": "Room owner",
+  "LeftAndAppointNewOwner": "You have left the room and appointed a new owner",
+  "AppointNewOwner": "You have appointed a new owner."
 }

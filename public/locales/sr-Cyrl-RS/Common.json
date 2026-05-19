@@ -1607,5 +1607,7 @@
   "UploadPicture": "Учитај слику",
   "CustomizeCover": "Прилагоди насловницу",
   "ChangeTheRoomOwner": "Промени Власника собе",
-  "RoomOwner": "Власник собе"
+  "RoomOwner": "Власник собе",
+  "LeftAndAppointNewOwner": "Напустили сте собу и именовали новог власника",
+  "AppointNewOwner": "Поставили сте новог власника."
 }

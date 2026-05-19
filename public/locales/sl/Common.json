@@ -1607,5 +1607,7 @@
   "UploadPicture": "Naloži sliko",
   "CustomizeCover": "Prilagodite naslovnico",
   "ChangeTheRoomOwner": "Spremeni lastnika sobe",
-  "RoomOwner": "Lastnik sobe"
+  "RoomOwner": "Lastnik sobe",
+  "LeftAndAppointNewOwner": "Zapustili ste sobo in določili novega lastnika",
+  "AppointNewOwner": "Imenovali ste novega lastnika."
 }

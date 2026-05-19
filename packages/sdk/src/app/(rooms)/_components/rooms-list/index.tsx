@@ -38,6 +38,7 @@ import type {
   TFolder,
 } from "@docspace/shared/api/files/types";
 import type { TSettings } from "@docspace/shared/api/settings/types";
+import type { TUser } from "@docspace/shared/api/people/types";
 import type { TSortBy, TCreatedBy } from "@docspace/shared/types";
 import { DeviceType } from "@docspace/shared/enums";
 
@@ -57,6 +58,7 @@ import useItemList, {
 import TileView from "@/app/(docspace)/(files)/_components/tile-view";
 import RoomsTableView from "../rooms-table-view";
 import RoomsRowView from "../rooms-row-view";
+import ChangeRoomOwnerDialog from "../change-room-owner-dialog";
 import EmptyView from "../empty-view";
 import CreateEditRoomDialog from "../create-edit-room-dialog";
 import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
@@ -70,6 +72,7 @@ type RoomsListProps = {
   portalSettings: TSettings;
   total: number;
   current: TFolder;
+  user?: TUser;
 };
 
 const RoomsList = ({
@@ -80,6 +83,7 @@ const RoomsList = ({
   portalSettings,
   total: totalProp,
   current,
+  user,
 }: RoomsListProps) => {
   const timezone = portalSettings.timezone;
   const searchParams = useSearchParams();
@@ -136,8 +140,16 @@ const RoomsList = ({
     (TFolderItem | TFileItem) | null
   >(null);
 
+  const [changingOwnerRoom, setChangingOwnerRoom] = React.useState<
+    (TFolderItem | TFileItem) | null
+  >(null);
+
   const onEditRoom = React.useCallback((item: TFolderItem | TFileItem) => {
     setEditingRoom(item);
+  }, []);
+
+  const onChangeOwner = React.useCallback((item: TFolderItem | TFileItem) => {
+    setChangingOwnerRoom(item);
   }, []);
 
   const refreshSingleRoom = React.useCallback(
@@ -327,6 +339,7 @@ const RoomsList = ({
         timezone={timezone}
         fetchMoreFiles={fetchMoreRooms}
         onEditRoom={onEditRoom}
+        onChangeOwner={onChangeOwner}
         onRoomChanged={refreshSingleRoom}
       />
     );
@@ -340,6 +353,7 @@ const RoomsList = ({
         timezone={timezone}
         fetchMoreFiles={fetchMoreRooms}
         onEditRoom={onEditRoom}
+        onChangeOwner={onChangeOwner}
         onRoomChanged={refreshSingleRoom}
       />
     );
@@ -370,6 +384,18 @@ const RoomsList = ({
         room={editingRoomData}
         onRoomEdited={refreshSingleRoom}
       />
+      {changingOwnerRoom ? (
+        <ChangeRoomOwnerDialog
+          visible
+          onClose={() => setChangingOwnerRoom(null)}
+          roomId={changingOwnerRoom.id as number}
+          roomOwnerId={
+            (changingOwnerRoom as TFolderItem).createdBy?.id ?? undefined
+          }
+          currentUserId={user?.id}
+          onChanged={refreshSingleRoom}
+        />
+      ) : null}
     </RoomsRefreshContext.Provider>
   );
 };

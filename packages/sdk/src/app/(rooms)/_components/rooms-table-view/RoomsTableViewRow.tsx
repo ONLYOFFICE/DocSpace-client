@@ -74,6 +74,7 @@ type RoomsTableViewRowProps = {
   timezone: string;
   lastColumn: string;
   onEditRoom?: (item: TFolderItem | TFileItem) => void;
+  onChangeOwner?: (item: TFolderItem | TFileItem) => void;
   onRoomChanged?: (id: number) => void;
 };
 
@@ -84,6 +85,7 @@ const RoomsTableViewRow = observer(
     timezone,
     lastColumn,
     onEditRoom,
+    onChangeOwner,
     onRoomChanged,
   }: RoomsTableViewRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
@@ -98,6 +100,7 @@ const RoomsTableViewRow = observer(
     const { getContextModel } = useRoomContextMenuModel(
       onEditRoom,
       onRoomChanged,
+      onChangeOwner,
     );
     const refreshRooms = React.useContext(RoomsRefreshContext);
     const isChecked = filesSelectionStore.isCheckedItem(item);

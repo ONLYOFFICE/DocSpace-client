@@ -44,6 +44,7 @@ const RoomsRowView = ({
   timezone,
   fetchMoreFiles,
   onEditRoom,
+  onChangeOwner,
   onRoomChanged,
 }: RoomsRowViewProps) => {
   const isSSR = useIsServer();
@@ -68,6 +69,7 @@ const RoomsRowView = ({
           timezone={timezone}
           isSSR={isSSR}
           onEditRoom={onEditRoom}
+          onChangeOwner={onChangeOwner}
           onRoomChanged={onRoomChanged}
         />
       ))}

@@ -104,6 +104,7 @@ export default function RoomsPage({
         filesSettings={filesSettings}
         portalSettings={portalSettings}
         filesFilter={filesFilter}
+        user={user}
       />
     </OpenFolderContext.Provider>
   );

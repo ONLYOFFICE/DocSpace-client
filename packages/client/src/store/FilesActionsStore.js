@@ -3267,7 +3267,7 @@ class FilesActionStore {
         }
 
         if (isLeaveChecked) await this.onLeaveRoom(t);
-        else toastr.success(t("Files:AppointNewOwner"));
+        else toastr.success(t("Common:AppointNewOwner"));
       })
       .catch((e) => toastr.error(e))
       .finally(() => {
@@ -3966,3 +3966,4 @@ class FilesActionStore {
 }
 
 export default FilesActionStore;
+

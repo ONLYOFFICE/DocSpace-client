@@ -1607,5 +1607,7 @@
   "UploadPicture": "画像のアップロード",
   "CustomizeCover": "カバーをカスタマイズする",
   "ChangeTheRoomOwner": "ルーム所有者の変更",
-  "RoomOwner": "ルームの所有者"
+  "RoomOwner": "ルームの所有者",
+  "LeftAndAppointNewOwner": "あなた退室し、新しい所有者を任命しました。",
+  "AppointNewOwner": "新しい所有者を任命されました。"
 }

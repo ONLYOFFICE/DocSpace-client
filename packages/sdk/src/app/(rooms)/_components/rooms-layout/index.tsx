@@ -36,6 +36,7 @@ import type {
   TFolder,
 } from "@docspace/shared/api/files/types";
 import type { TSettings } from "@docspace/shared/api/settings/types";
+import type { TUser } from "@docspace/shared/api/people/types";
 import type { TPathParts } from "@docspace/shared/types";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
 import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
@@ -71,6 +72,7 @@ type RoomsLayoutProps = {
   filesSettings: TFilesSettings;
   portalSettings: TSettings;
   filesFilter: string;
+  user?: TUser;
 };
 
 const RoomsLayout = observer(
@@ -83,6 +85,7 @@ const RoomsLayout = observer(
     filesSettings,
     portalSettings,
     filesFilter,
+    user,
   }: RoomsLayoutProps) => {
     const { t } = useTranslation(["Common"]);
     const { isEmptyList } = useSettingsStore();
@@ -171,6 +174,7 @@ const RoomsLayout = observer(
                 portalSettings={portalSettings}
                 filesFilter={filesFilter}
                 current={current}
+                user={user}
               />
             }
             isEmptyPage={isEmptyList}

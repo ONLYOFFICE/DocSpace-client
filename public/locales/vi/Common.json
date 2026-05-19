@@ -1607,5 +1607,7 @@
   "UploadPicture": "Tải hình ảnh lên",
   "CustomizeCover": "Tùy chỉnh mặt ngoài",
   "ChangeTheRoomOwner": "Thay đổi Chủ sở hữu Phòng",
-  "RoomOwner": "Chủ sở hữu phòng"
+  "RoomOwner": "Chủ sở hữu phòng",
+  "LeftAndAppointNewOwner": "Bạn đã rời khỏi phòng và chỉ định một chủ sở hữu mới",
+  "AppointNewOwner": "Bạn đã chỉ định chủ sở hữu mới."
 }

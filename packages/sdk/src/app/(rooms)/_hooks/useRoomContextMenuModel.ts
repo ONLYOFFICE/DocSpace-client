@@ -68,6 +68,7 @@ type TRoomItem = TFolderItem & {
 export default function useRoomContextMenuModel(
   onEditRoom?: (item: TRoomItem) => void,
   onRoomChanged?: (id: number) => void,
+  onChangeOwner?: (item: TRoomItem) => void,
 ) {
   const { t } = useTranslation(["Common", "Files"]);
   const refreshRooms = useContext(RoomsRefreshContext);
@@ -167,6 +168,7 @@ export default function useRoomContextMenuModel(
               key: "change-room-owner",
               label: t("Common:ChangeRoomOwner"),
               icon: ReconnectSvgUrl,
+              onClick: () => onChangeOwner?.(room),
               disabled: !room.security?.ChangeOwner,
             },
           ],
@@ -183,7 +185,15 @@ export default function useRoomContextMenuModel(
 
       return mainItems;
     },
-    [t, openFolder, downloadAction, refreshRooms, onEditRoom, onRoomChanged],
+    [
+      t,
+      openFolder,
+      downloadAction,
+      refreshRooms,
+      onEditRoom,
+      onRoomChanged,
+      onChangeOwner,
+    ],
   );
 
   const getSelectionContextMenuModel = useCallback((): ContextMenuModel[] => {

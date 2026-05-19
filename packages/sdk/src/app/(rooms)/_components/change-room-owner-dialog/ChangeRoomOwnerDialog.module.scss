@@ -24,38 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { Nullable, TSortBy } from "@docspace/shared/types";
-import type { IndexRange } from "react-virtualized";
+.changeRoomOwner {
+  display: contents;
 
-import type {
-  TFileItem,
-  TFolderItem,
-} from "@/app/(docspace)/_hooks/useItemList";
+  .changeOwnerPeopleSelector {
+    overflow: visible;
+  }
 
-export type RoomsRowContentProps = {
-  item: TFolderItem | TFileItem;
-  filterSortBy: Nullable<TSortBy>;
-  timezone: string;
-  badgesComponent?: React.ReactNode;
-};
+  &.withFooterCheckbox {
+    :global(.arrow-button) {
+      display: none;
+    }
 
-export type RoomsRowProps = RoomsRowContentProps & {
-  index: number;
-  isSSR: boolean;
-  onEditRoom?: (item: TFolderItem | TFileItem) => void;
-  onChangeOwner?: (item: TFolderItem | TFileItem) => void;
-  onRoomChanged?: (id: number) => void;
-};
+    :global(.selector_body) {
+      height: calc(((100% - 16px) - 111px) - 54px);
+    }
 
-export type RoomsRowViewProps = Pick<
-  RoomsRowContentProps,
-  "filterSortBy" | "timezone"
-> & {
-  total: number;
-  hasMoreFiles: boolean;
-  items: (TFolderItem | TFileItem)[];
-  fetchMoreFiles: (params: IndexRange) => Promise<void>;
-  onEditRoom?: (item: TFolderItem | TFileItem) => void;
-  onChangeOwner?: (item: TFolderItem | TFileItem) => void;
-  onRoomChanged?: (id: number) => void;
-};
+    :global(.selector_footer) {
+      height: 110px;
+      min-height: 110px;
+      max-height: 110px;
+    }
+
+    :global(.selector_footer-checkbox) {
+      padding: 17px 0 1px 0;
+    }
+  }
+}

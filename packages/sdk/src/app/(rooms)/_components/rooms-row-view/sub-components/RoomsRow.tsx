@@ -64,6 +64,7 @@ const RoomsRow = observer(
     timezone,
     isSSR,
     onEditRoom,
+    onChangeOwner,
     onRoomChanged,
   }: RoomsRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
@@ -78,6 +79,7 @@ const RoomsRow = observer(
     const { getContextModel } = useRoomContextMenuModel(
       onEditRoom,
       onRoomChanged,
+      onChangeOwner,
     );
     const refreshRooms = React.useContext(RoomsRefreshContext);
 

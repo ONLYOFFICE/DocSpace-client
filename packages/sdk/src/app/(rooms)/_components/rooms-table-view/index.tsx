@@ -63,6 +63,7 @@ type RoomsTableViewProps = {
   timezone: string;
   fetchMoreFiles: (params: IndexRange) => Promise<void>;
   onEditRoom?: (item: TFolderItem | TFileItem) => void;
+  onChangeOwner?: (item: TFolderItem | TFileItem) => void;
   onRoomChanged?: (id: number) => void;
 };
 
@@ -76,6 +77,7 @@ const RoomsTableView = ({
   timezone,
   fetchMoreFiles,
   onEditRoom,
+  onChangeOwner,
   onRoomChanged,
 }: RoomsTableViewProps) => {
   const { t } = useTranslation(["Common", "Files"]);
@@ -205,6 +207,7 @@ const RoomsTableView = ({
             timezone={timezone}
             lastColumn={lastColumn}
             onEditRoom={onEditRoom}
+            onChangeOwner={onChangeOwner}
             onRoomChanged={onRoomChanged}
           />
         ))}

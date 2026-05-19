@@ -104,7 +104,7 @@ export const ModelSettingsPanel = ({
       <ModalDialog.Body>
         <div className={styles.body}>
           <FieldContainer
-            labelText={t("Common:ModelName")}
+            labelText={t("AISettings:ModelName")}
             labelVisible
             isVertical
             removeMargin
@@ -117,34 +117,34 @@ export const ModelSettingsPanel = ({
               scale
               testId="model-name-input"
             />
-            <Text className={styles.hint}>{t("Common:ModelNameHint")}</Text>
+            <Text className={styles.hint}>{t("AISettings:ModelNameHint")}</Text>
           </FieldContainer>
 
           <FieldContainer
-            labelText={t("Common:Capabilities")}
+            labelText={t("AISettings:Capabilities")}
             labelVisible
             isVertical
             removeMargin
             className={styles.capabilitiesField}
           >
             <Text className={styles.capabilitiesDescription}>
-              {t("Common:CapabilitiesDescription", {
+              {t("AISettings:CapabilitiesDescription", {
                 productName: getBrandName("ProductName"),
               })}
             </Text>
             <div className={styles.checkboxList}>
               <Checkbox
-                label={t("Common:CapabilityVision")}
+                label={t("AISettings:CapabilityVision")}
                 isChecked={capabilities.vision}
                 onChange={() => handleCapabilityChange("vision")}
               />
               <Checkbox
-                label={t("Common:CapabilityToolCalling")}
+                label={t("AISettings:CapabilityToolCalling")}
                 isChecked={capabilities.toolCalling}
                 onChange={() => handleCapabilityChange("toolCalling")}
               />
               <Checkbox
-                label={t("Common:CapabilityExtendedThinking")}
+                label={t("AISettings:CapabilityExtendedThinking")}
                 isChecked={capabilities.thinking}
                 onChange={() => handleCapabilityChange("thinking")}
               />

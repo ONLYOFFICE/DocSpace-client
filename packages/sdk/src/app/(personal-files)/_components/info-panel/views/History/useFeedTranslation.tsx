@@ -50,7 +50,7 @@ export const useFeedTranslation = (
       case FeedActionKeys.FileUploaded:
         return t("Common:FilesAddedNotify");
       case FeedActionKeys.UserFileUpdated:
-        return t("Common:UserFileUpdated");
+        return t("InfoPanel:UserFileUpdated");
       case FeedActionKeys.FileConverted:
         return t("Common:FileConverted");
       case FeedActionKeys.FileRenamed:

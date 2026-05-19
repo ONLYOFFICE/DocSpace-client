@@ -64,7 +64,7 @@ const InstructionsSettings = ({
       <div className=" set_room_params-info">
         <div>
           <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
-            {t("Common:AIInstructions", { defaultValue: "AI Instructions" })}
+            {t("AIRoom:AIInstructions", { defaultValue: "AI Instructions" })}
           </Text>
           <Text
             fontSize="12px"
@@ -73,7 +73,7 @@ const InstructionsSettings = ({
             className="set_room_params-info-description"
             noSelect
           >
-            {t("Common:InstructionsDescriptionAgent", {
+            {t("AIRoom:InstructionsDescriptionAgent", {
               aiAgent: t("Common:AIAgent"),
               defaultValue:
                 "Describe how the AI agent should behave and respond. Define its role, tone, and main tasks.",
@@ -84,7 +84,7 @@ const InstructionsSettings = ({
           value={value}
           onChange={handleChange}
           heightTextArea={144}
-          placeholder={t("Common:InstructionsDescriptionAgentExample", {
+          placeholder={t("AIRoom:InstructionsDescriptionAgentExample", {
             defaultValue:
               "Example: You are an AI assistant that helps with writing and editing.",
           })}

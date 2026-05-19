@@ -112,8 +112,8 @@ export const useAgentContextOptions = () => {
           id: isPinned ? "option_unpin-room" : "option_pin-room",
           key: isPinned ? "unpin-room" : "pin-room",
           label: isPinned
-            ? t("Common:Unpin", { defaultValue: "Unpin" })
-            : t("Common:Pin", { defaultValue: "Pin" }),
+            ? t("Files:Unpin", { defaultValue: "Unpin" })
+            : t("Files:Pin", { defaultValue: "Pin" }),
           icon: isPinned ? UnpinReactSvgUrl : PinReactSvgUrl,
           onClick: () => {
             void listStore.togglePinAgent(agent).catch((e) => {
@@ -161,7 +161,7 @@ export const useAgentContextOptions = () => {
         items.push({
           id: "option_delete",
           key: "delete",
-          label: t("Common:DeleteAgent", { defaultValue: "Delete agent" }),
+          label: t("Files:DeleteAgent", { defaultValue: "Delete agent" }),
           icon: TrashReactSvgUrl,
           onClick: () => {
             dialogsStore.setDeleteAgentDialogVisible(true, agent);

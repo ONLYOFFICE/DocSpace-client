@@ -49,7 +49,7 @@ const KnowledgeSettings = () => {
       <div className=" set_room_params-info">
         <div>
           <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
-            {t("Common:Knowledge", { defaultValue: "Knowledge base" })}
+            {t("AIRoom:Knowledge", { defaultValue: "Knowledge base" })}
           </Text>
           <Text
             fontSize="12px"
@@ -58,7 +58,7 @@ const KnowledgeSettings = () => {
             className="set_room_params-info-description"
             noSelect
           >
-            {t("Common:KnowledgeDescription", {
+            {t("AIRoom:KnowledgeDescription", {
               productName: getBrandName("ProductName"),
               defaultValue:
                 "Upload files to provide better context for the chat.",
@@ -85,7 +85,7 @@ const KnowledgeSettings = () => {
             icon={
               <ReactSVG className="ai-button-icon" src={MoveReactSvgUrl} />
             }
-            label={t("Common:KnowledgeSelectIn", {
+            label={t("AIRoom:KnowledgeSelectIn", {
               productName: getBrandName("ProductName"),
               defaultValue: "Select files",
             })}

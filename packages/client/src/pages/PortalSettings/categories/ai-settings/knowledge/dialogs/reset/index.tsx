@@ -68,7 +68,7 @@ const ResetKnowledgeDialogComponent = ({
 
     try {
       await restoreKnowledge?.();
-      toastr.success(t("Common:KnowledgeDisabledSuccess"));
+      toastr.success(t("AISettings:KnowledgeDisabledSuccess"));
       onSuccess?.();
       getAIConfig?.();
     } catch (error) {

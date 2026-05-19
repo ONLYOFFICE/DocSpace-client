@@ -88,7 +88,7 @@ export const AiProviderTile = ({
   const getErrorTooltipContent = () => {
     return (
       <Text fontSize="12px" lineHeight="16px">
-        {t("Common:ProviderUnavailableError", {
+        {t("AISettings:ProviderUnavailableError", {
           aiProvider: t("Common:AIProvider"),
         })}
       </Text>

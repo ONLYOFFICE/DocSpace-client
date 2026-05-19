@@ -69,11 +69,11 @@ const AgentsEmptyView = () => {
 
   const title = aiReady
     ? isVisitor
-      ? t("Common:EmptyAIAgentsUserTitle", {
+      ? t("EmptyView:EmptyAIAgentsUserTitle", {
           aiAgents: t("Common:AIAgents", { defaultValue: "AI Agents" }),
           defaultValue: "No {{aiAgents}} yet",
         })
-      : t("Common:EmptyAIAgentsTitle", {
+      : t("EmptyView:EmptyAIAgentsTitle", {
           aiAgent: t("Common:AIAgent", { defaultValue: "AI Agent" }),
           defaultValue: "Create your first {{aiAgent}}",
         })
@@ -85,22 +85,22 @@ const AgentsEmptyView = () => {
           defaultValue: "Configure {{aiProvider}} to start",
         })
       : isAdminOrOwner
-        ? t("Common:EmptyAIAgentsAIDisabledSaasAdminTitle", {
+        ? t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminTitle", {
             defaultValue: "AI agents are unavailable",
           })
-        : t("Common:EmptyAIAgentsAIDisabledUserTitle", {
+        : t("EmptyView:EmptyAIAgentsAIDisabledUserTitle", {
             aiAgents: t("Common:AIAgents", { defaultValue: "AI Agents" }),
             defaultValue: "{{aiAgents}} are unavailable",
           });
 
   const description = aiReady
     ? isVisitor
-      ? t("Common:EmptyAIAgentsAIEnabledUserDescription", {
+      ? t("EmptyView:EmptyAIAgentsAIEnabledUserDescription", {
           aiAgents: t("Common:AIAgents", { defaultValue: "AI Agents" }),
           defaultValue:
             "{{aiAgents}} will appear here once an admin creates them.",
         })
-      : t("Common:EmptyAIAgentsDescription", {
+      : t("EmptyView:EmptyAIAgentsDescription", {
           mcpServer: t("Common:MCPServer", { defaultValue: "MCP server" }),
           defaultValue:
             "Set up an agent with model, instructions and an {{mcpServer}} to get started.",
@@ -113,13 +113,13 @@ const AgentsEmptyView = () => {
             "Configure an AI provider in {{productName}} settings to unlock {{aiChats}}.",
         })
       : isAdminOrOwner
-        ? t("Common:EmptyAIAgentsAIDisabledSaasAdminDescription", {
+        ? t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminDescription", {
             productName: getBrandName("ProductName"),
             aiAgents: t("Common:AIAgents", { defaultValue: "AI Agents" }),
             defaultValue:
               "{{aiAgents}} are not yet enabled in this {{productName}} portal.",
           })
-        : t("Common:EmptyAIAgentsAIDisabledDescription", {
+        : t("EmptyView:EmptyAIAgentsAIDisabledDescription", {
             productName: getBrandName("ProductName"),
             aiAgents: t("Common:AIAgents", { defaultValue: "AI Agents" }),
             defaultValue:
@@ -139,7 +139,7 @@ const AgentsEmptyView = () => {
             title: t("Common:CreateNewAIAgent", {
               defaultValue: "Create a new AI agent",
             }),
-            description: t("Common:CreateAIAgentDescription", {
+            description: t("EmptyView:CreateAIAgentDescription", {
               aiAgent: t("Common:AIAgent", { defaultValue: "AI Agent" }),
               defaultValue: "Set up a new {{aiAgent}} from scratch.",
             }),

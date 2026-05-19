@@ -52,7 +52,7 @@ const DeleteDialogComponent = ({ onClose, serverId }: DeleteDialogProps) => {
   const onSubmitAction = async () => {
     try {
       await deleteMCP?.(serverId);
-      toastr.success(t("Common:ServerRemovedSuccess"));
+      toastr.success(t("AISettings:ServerRemovedSuccess"));
     } catch (error) {
       console.error(error);
       toastr.error(error instanceof Error ? error.message : String(error));
@@ -64,9 +64,9 @@ const DeleteDialogComponent = ({ onClose, serverId }: DeleteDialogProps) => {
 
   return (
     <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>
-      <ModalDialog.Header>{t("Common:DeleteServer")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("AISettings:DeleteServer")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text>{t("Common:DeleteServerDescription")}</Text>
+        <Text>{t("AISettings:DeleteServerDescription")}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

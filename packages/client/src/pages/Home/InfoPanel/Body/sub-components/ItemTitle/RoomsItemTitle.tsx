@@ -111,7 +111,6 @@ const RoomsItemHeader = ({
     "Common",
     "Translations",
     "InfoPanel",
-    "RoomLogoCover",
   ]);
 
   const [showSearchBlock, setShowSearchBlock] = useState(false);

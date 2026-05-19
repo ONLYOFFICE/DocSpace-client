@@ -260,7 +260,7 @@ class DetailsHelper {
         return this.t("Files:Index");
 
       case "Versions":
-        return this.t("Common:Versions");
+        return this.t("InfoPanel:Versions");
       case "Comments":
         return this.t("Common:Comments");
       case "Tags":

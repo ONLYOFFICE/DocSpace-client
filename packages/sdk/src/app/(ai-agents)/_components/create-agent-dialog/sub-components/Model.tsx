@@ -114,7 +114,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
       <div className=" set_room_params-info">
         <div>
           <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
-            {t("Common:AIProviderAndModel", {
+            {t("AIRoom:AIProviderAndModel", {
               aiProvider: t("Common:AIProvider"),
               defaultValue: "AI provider and model",
             })}
@@ -126,7 +126,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
             className="set_room_params-info-description"
             noSelect
           >
-            {t("Common:ModelDescription", {
+            {t("AIRoom:ModelDescription", {
               aiProvider: t("Common:AIProvider"),
               defaultValue:
                 "Select the AI provider and model to be used in this room.",

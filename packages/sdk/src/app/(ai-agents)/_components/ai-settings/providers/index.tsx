@@ -173,7 +173,7 @@ const AIProviderComponent = () => {
         className={styles.description}
         dataTestId="provider-section-description"
       >
-        {t("Common:AIProviderSettingDescription", {
+        {t("AISettings:AIProviderSettingDescription", {
           productName: getBrandName("ProductName"),
           aiChats: t("Common:AIChats"),
         })}
@@ -195,7 +195,7 @@ const AIProviderComponent = () => {
         testId="add-provider-button"
         primary
         size={ButtonSize.small}
-        label={t("Common:AddAIProvider", {
+        label={t("AISettings:AddAIProvider", {
           aiProvider: t("Common:AIProvider"),
         })}
         scale={false}

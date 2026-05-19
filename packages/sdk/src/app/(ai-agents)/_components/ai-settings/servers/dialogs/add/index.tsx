@@ -96,7 +96,7 @@ const AddMCPDialogComponent = ({ onClose }: AddMCPDialogProps) => {
 
     try {
       await addNewMCP?.(data);
-      toastr.success(t("Common:ServerAddedSuccess"));
+      toastr.success(t("AISettings:ServerAddedSuccess"));
       onClose();
     } catch (e) {
       console.error(e);
@@ -126,7 +126,7 @@ const AddMCPDialogComponent = ({ onClose }: AddMCPDialogProps) => {
         >
           <div className={styles.connectDocspace}>
             <Text className={styles.connectDocspaceDescription}>
-              {t("Common:ConnectProductToYourDataAndTools", {
+              {t("AISettings:ConnectProductToYourDataAndTools", {
                 productName: getBrandName("ProductName"),
               })}
             </Text>

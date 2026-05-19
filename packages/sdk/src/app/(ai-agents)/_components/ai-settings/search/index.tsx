@@ -115,7 +115,7 @@ const SearchComponent = () => {
       await updateWebSearch?.(true, selectedOption, value);
 
       toastr.success(
-        t("Common:WebSearchEnabledSuccess", {
+        t("AISettings:WebSearchEnabledSuccess", {
           webSearch: t("Common:WebSearchAI"),
         }),
       );
@@ -196,7 +196,7 @@ const SearchComponent = () => {
         data-tooltip-id={tooltipId}
         data-tooltip-content={
           !hasAIProviders
-            ? t("Common:ToUseAddProvider", {
+            ? t("AISettings:ToUseAddProvider", {
                 value: t("Common:WebSearchAI"),
                 aiProvider: t("Common:AIProvider"),
               })
@@ -204,7 +204,7 @@ const SearchComponent = () => {
         }
       >
         <Text className={generalStyles.description}>
-          {t("Common:SearchDescription", {
+          {t("AISettings:SearchDescription", {
             webSearch: t("Common:WebSearchAI"),
             productName: getBrandName("ProductName"),
             aiChats: t("Common:AIChats"),
@@ -227,7 +227,7 @@ const SearchComponent = () => {
           <FieldContainer
             labelVisible
             isVertical
-            labelText={t("Common:SearchEngine", {
+            labelText={t("AISettings:SearchEngine", {
               webSearch: t("Common:WebSearchAI"),
             })}
             removeMargin
@@ -254,7 +254,7 @@ const SearchComponent = () => {
             <FieldContainer
               labelVisible
               isVertical
-              labelText={t("Common:APIKey")}
+              labelText={t("AISettings:APIKey")}
               removeMargin
             >
               {isKeyHidden ? (
@@ -263,14 +263,14 @@ const SearchComponent = () => {
                   data-testid="web-search-key-hidden-banner"
                 >
                   <Text fontSize="12px" fontWeight={400} lineHeight="16px">
-                    {t("Common:WebSearchKeyHiddenDescription")}
+                    {t("AISettings:WebSearchKeyHiddenDescription")}
                   </Text>
                 </div>
               ) : (
                 <>
                   <PasswordInput
                     className={styles.passwordInput}
-                    placeholder={t("Common:EnterKey")}
+                    placeholder={t("AISettings:EnterKey")}
                     inputValue={value}
                     onChange={onChange}
                     scale
@@ -284,7 +284,7 @@ const SearchComponent = () => {
                     testId="web-search-key-input"
                   />
                   <Text className={styles.hiddenKeyDescription}>
-                    {t("Common:WebSearchKeyDescription", {
+                    {t("AISettings:WebSearchKeyDescription", {
                       webSearch: t("Common:WebSearchAI"),
                     })}
                   </Text>

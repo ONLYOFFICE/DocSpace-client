@@ -211,7 +211,7 @@ export const ModelSelectorPopup = ({
     <>
       <div className={styles.sectionHeader}>
         <Text className={styles.sectionTitle}>
-          {t("Common:SelectModels")}
+          {t("AISettings:SelectModels")}
         </Text>
       </div>
       {[...recommended, ...other].map((model) => (
@@ -231,10 +231,10 @@ export const ModelSelectorPopup = ({
         <>
           <div className={styles.sectionHeader}>
             <Text className={styles.sectionTitle}>
-              {t("Common:RecommendedModels")}
+              {t("AISettings:RecommendedModels")}
             </Text>
             <HelpButton
-              tooltipContent={t("Common:RecommendedModelsTooltip", {
+              tooltipContent={t("AISettings:RecommendedModelsTooltip", {
                 productName: getBrandName("ProductName"),
               })}
               place="bottom"
@@ -262,10 +262,10 @@ export const ModelSelectorPopup = ({
             )}
           >
             <Text className={styles.sectionTitle}>
-              {t("Common:OtherModels")}
+              {t("AISettings:OtherModels")}
             </Text>
             <HelpButton
-              tooltipContent={t("Common:OtherModelsTooltip")}
+              tooltipContent={t("AISettings:OtherModelsTooltip")}
               place="bottom"
               size={12}
             />

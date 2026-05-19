@@ -102,7 +102,7 @@ export const useIcon = (initialValue?: string) => {
   const iconComponent = (
     <FieldContainer
       className={styles.iconContainer}
-      labelText={t("Common:ServiceIcon")}
+      labelText={t("AISettings:ServiceIcon")}
       isVertical
       labelVisible
       removeMargin
@@ -120,7 +120,7 @@ export const useIcon = (initialValue?: string) => {
               onClick={onDeleteIcon}
               className={styles.deleteImageLink}
             >
-              {t("Common:DeleteImage")}
+              {t("AISettings:DeleteImage")}
             </Link>
           </>
         ) : (

@@ -58,7 +58,7 @@ const DeleteAgentDialog = ({ visible, onClose, onConfirm, agentName }: Props) =>
       displayType={ModalDialogType.modal}
       onClose={onClose}
     >
-      <ModalDialog.Header>{t("Common:DeleteAIAgentTitle")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("DeleteDialog:DeleteAIAgentTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>
           <Trans

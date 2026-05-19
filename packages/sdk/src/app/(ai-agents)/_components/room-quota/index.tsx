@@ -66,20 +66,20 @@ const RoomQuota = ({
       label={t("Common:StorageQuota", { defaultValue: "Storage quota" })}
       description={
         isAgent
-          ? t("Common:StorageDescriptionAgent", {
+          ? t("CreateEditRoomDialog:StorageDescriptionAgent", {
               defaultValue:
                 "Set a storage quota for this agent. When the limit is reached, new files cannot be uploaded.",
             })
-          : t("Common:StorageDescription", {
+          : t("CreateEditRoomDialog:StorageDescription", {
               defaultValue: "Set a storage quota for this room.",
             })
       }
       checkboxLabel={
         isAgent
-          ? t("Common:DisableRoomQuotaAgent", {
+          ? t("CreateEditRoomDialog:DisableRoomQuotaAgent", {
               defaultValue: "Disable storage quota for this agent",
             })
-          : t("Common:DisableRoomQuota", {
+          : t("CreateEditRoomDialog:DisableRoomQuota", {
               defaultValue: "Disable storage quota",
             })
       }

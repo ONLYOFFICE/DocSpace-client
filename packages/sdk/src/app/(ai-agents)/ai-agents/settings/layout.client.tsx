@@ -111,7 +111,7 @@ const SettingsLayoutClient = ({ children }: { children: React.ReactNode }) => {
         },
         {
           id: "knowledge",
-          name: t("Common:Knowledge"),
+          name: t("AIRoom:Knowledge"),
           content: children,
         },
       ]

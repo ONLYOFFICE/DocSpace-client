@@ -67,7 +67,7 @@ const DisableDialogComponent = ({
 
     try {
       await updateMCPStatus?.(serverId, false);
-      toastr.success(t("Common:ServerDisabledSuccess"));
+      toastr.success(t("AISettings:ServerDisabledSuccess"));
     } catch (error) {
       console.error(error);
       toastr.error(error as string);
@@ -80,7 +80,7 @@ const DisableDialogComponent = ({
   return (
     <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>
       <ModalDialog.Header>
-        {t("Common:DisableMCPServer")}
+        {t("AISettings:DisableMCPServer")}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <Text>

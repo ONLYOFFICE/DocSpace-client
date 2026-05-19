@@ -170,7 +170,7 @@ export const getFolderDescription = (
       }),
     )
     .with([P._, DefaultFolderType, P.when(isAdmin)], () =>
-      t("Common:DefaultFolderDescription"),
+      t("EmptyView:DefaultFolderDescription"),
     )
     .with([P._, DefaultFolderType, P.when(isUser)], () =>
       t("Common:UserEmptyDescription"),
@@ -294,7 +294,7 @@ export const getRootDescription = (
       </>
     ))
     .with([FolderType.USER, P.when(() => security?.Create)], () =>
-      t("Common:DefaultFolderDescription"),
+      t("EmptyView:DefaultFolderDescription"),
     )
     .with([FolderType.SHARE, P._], () =>
       t("Common:EmptyShareDescription", {
@@ -303,7 +303,7 @@ export const getRootDescription = (
     )
     .with([FolderType.Recent, P._], () => t("Common:EmptyRecentDescription"))
     .with([FolderType.Favorites, P._], () =>
-      t("Common:EmptyFavoritesDescription"),
+      t("EmptyView:EmptyFavoritesDescription"),
     )
     .with([FolderType.Archive, ShareAccessRights.None], () =>
       t("Files:ArchiveEmptyScreen", {
@@ -431,7 +431,7 @@ export const getRootTitle = (
       t("Common:EmptyScreenFolder"),
     )
     .with([FolderType.SHARE, P._], () => t("Common:EmptyShareTitle"))
-    .with([FolderType.Favorites, P._], () => t("Common:EmptyFavoritesTitle"))
+    .with([FolderType.Favorites, P._], () => t("EmptyView:EmptyFavoritesTitle"))
     .with([FolderType.Recent, P._], () => t("Common:NoRecentFilesHereYet"))
     .with([FolderType.Archive, P._], () => t("Files:ArchiveEmptyScreenHeader"))
     .with([FolderType.TRASH, P._], () => t("Common:EmptyScreenFolder"))

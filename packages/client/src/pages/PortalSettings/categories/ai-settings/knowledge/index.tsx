@@ -159,7 +159,7 @@ const KnowledgeComponent = ({
     try {
       await updateKnowledge?.(selectedOption, currentValue);
 
-      toastr.success(t("Common:KnowledgeEnabledSuccess"));
+      toastr.success(t("AISettings:KnowledgeEnabledSuccess"));
     } catch (e) {
       console.error(e);
       toastr.error(e as string);
@@ -259,15 +259,15 @@ const KnowledgeComponent = ({
         data-tooltip-id={tooltipId}
         data-tooltip-content={
           !hasAIProviders
-            ? t("Common:ToUseAddProvider", {
-                value: t("Common:Knowledge"),
+            ? t("AISettings:ToUseAddProvider", {
+                value: t("AIRoom:Knowledge"),
                 aiProvider: t("Common:AIProvider"),
               })
             : undefined
         }
       >
         <Text className={generalStyles.description}>
-          {t("Common:KnowledgeSettingsDescription", {
+          {t("AISettings:KnowledgeSettingsDescription", {
             modelName: aiConfig?.embeddingModel || "text-embedding-3-small",
             aiAgents: t("Common:AIAgents"),
           })}
@@ -289,7 +289,7 @@ const KnowledgeComponent = ({
           <FieldContainer
             labelVisible
             isVertical
-            labelText={t("Common:Provider")}
+            labelText={t("AISettings:Provider")}
             removeMargin
           >
             <ComboBox
@@ -314,7 +314,7 @@ const KnowledgeComponent = ({
             <FieldContainer
               labelVisible
               isVertical
-              labelText={t("Common:APIKey")}
+              labelText={t("AISettings:APIKey")}
               removeMargin
             >
               {isKeyHidden ? (
@@ -323,14 +323,14 @@ const KnowledgeComponent = ({
                   data-testid="knowledge-key-hidden-banner"
                 >
                   <Text fontSize="12px" fontWeight={400} lineHeight="16px">
-                    {t("Common:WebSearchKeyHiddenDescription")}
+                    {t("AISettings:WebSearchKeyHiddenDescription")}
                   </Text>
                 </div>
               ) : (
                 <>
                   <PasswordInput
                     className={styles.passwordInput}
-                    placeholder={t("Common:EnterKey")}
+                    placeholder={t("AISettings:EnterKey")}
                     inputValue={currentValue}
                     onChange={onChange}
                     scale
@@ -344,7 +344,7 @@ const KnowledgeComponent = ({
                     testId="knowledge-key-input"
                   />
                   <Text className={styles.hiddenKeyDescription}>
-                    {t("Common:KnowledgeKeyDescription")}
+                    {t("AISettings:KnowledgeKeyDescription")}
                   </Text>
                 </>
               )}

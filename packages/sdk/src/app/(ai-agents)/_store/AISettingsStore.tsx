@@ -490,7 +490,7 @@ class AISettingsStore {
       });
 
       this.setDefaultProvider(newDefaultProvider);
-      toastr.success(t("Common:DefaultProviderSetSuccess"));
+      toastr.success(t("AISettings:DefaultProviderSetSuccess"));
     } catch (e) {
       toastr.error(e instanceof Error ? e.message : String(e));
       console.error(e);

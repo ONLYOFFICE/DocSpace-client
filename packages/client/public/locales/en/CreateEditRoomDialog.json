@@ -34,6 +34,7 @@
   "RootFolderLabel": "Root folder",
   "StorageDescription": "Storage quota set per room. You can change this value or turn off storage limit.",
   "StorageDescriptionAgent": "Storage quota set per agent. You can change this value or turn off storage limit.",
+  "TagsPlaceholder": "Add a tag",
   "ThirdPartyStorageComboBoxPlaceholder": "Select storage",
   "ThirdPartyStorageNoStorageAlert": "Before, you need to connect the corresponding service in the “Integration” section. Otherwise, the connection will not be possible.",
   "ThirdPartyStoragePermanentSettingDescription": "Files are stored in a third-party {{thirdpartyTitle}} storage in the \"{{thirdpartyFolderName}}\" folder.\n<strong>{{thirdpartyPath}}</strong>",

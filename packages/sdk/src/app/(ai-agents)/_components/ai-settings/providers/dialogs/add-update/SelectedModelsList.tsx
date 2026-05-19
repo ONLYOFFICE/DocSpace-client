@@ -59,7 +59,7 @@ export const SelectedModelsList = ({
         fontWeight={600}
         fontSize="13px"
       >
-        {t("Common:ListModels")}
+        {t("AISettings:ListModels")}
         <span className={styles.requiredMark}>{" *"}</span>
       </Text>
       <div
@@ -79,7 +79,7 @@ export const SelectedModelsList = ({
         >
           <Tag
             tag="add-model"
-            label={t("Common:SelectModels")}
+            label={t("AISettings:SelectModels")}
             icon={PlusIcon}
             withLabel={false}
             className="add-model-tag"
@@ -98,7 +98,7 @@ export const SelectedModelsList = ({
       </div>
       {hasError ? (
         <Text className={styles.selectedModelsErrorText} fontSize="12px">
-          {t("Common:SelectAtLeastOneModel")}
+          {t("AISettings:SelectAtLeastOneModel")}
         </Text>
       ) : null}
     </div>

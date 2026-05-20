@@ -67,6 +67,9 @@ const RoomsRow = observer(
     onChangeOwner,
     onRoomChanged,
     onRestoreRoom,
+    onDeleteRoom,
+    onDeleteSelected,
+    onRestoreSelected,
     isArchive,
   }: RoomsRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
@@ -84,6 +87,9 @@ const RoomsRow = observer(
       onChangeOwner,
       isArchive,
       onRestoreRoom,
+      onDeleteRoom,
+      onDeleteSelected,
+      onRestoreSelected,
     );
     const refreshRooms = React.useContext(RoomsRefreshContext);
 
@@ -143,18 +149,15 @@ const RoomsRow = observer(
       <QuickButtons t={t} item={observableItem} viewAs="row" />
     );
 
-    const onContextClick = (isRightMouseButtonClick?: boolean) => {
-      if (isRightMouseButtonClick && filesSelectionStore.selection.length > 1) {
-        return;
-      }
-
+    const onContextClick = () => {
+      if (filesSelectionStore.isCheckedItem(item)) return;
       filesSelectionStore.setSelection([]);
       filesSelectionStore.setBufferSelection(item);
     };
 
-    const contextMenuModel = getContextModel(item, true);
+    const contextMenuModel = getContextModel(item);
     const getRowContextModel = React.useCallback(
-      () => getContextModel(item, true),
+      () => getContextModel(item),
       [getContextModel, item],
     );
 

@@ -1617,5 +1617,10 @@
   "Unpin": "Odpni",
   "ArchiveEmptyScreenHeader": "Tukaj še ni arhiviranih sob",
   "ArchiveEmptyScreen": "Sobe, ki jih ne uporabljate, lahko kadar koli arhivirate in obnovite v svojem {{productName}} ali pa jih trajno izbrišete. Te sobe bodo prikazane tukaj.",
-  "GoToMyRooms": "Pojdi na sobe"
+  "GoToMyRooms": "Pojdi na sobe",
+  "DeleteRoomTitle": "Ali izbrisati to sobo?",
+  "DeleteRoomConfirm": "Prostor <strong>{{roomName}}</strong> bo trajno izbrisan. Vsi podatki in uporabniški dostopi bodo izgubljeni.",
+  "DeleteRoomWarning": "Razumem posledice in želim izbrisati sobo.",
+  "DeleteRooms": "Izbrane <strong>sobe ({{count}})</strong> bodo trajno izbrisane. Vse podatke in uporabniški dostop boste izgubili.",
+  "DeleteRoomsTitle": "Ali izbrisati te sobe?"
 }

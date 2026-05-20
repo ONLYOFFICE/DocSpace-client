@@ -1617,5 +1617,10 @@
   "Unpin": "Bỏ ghim",
   "ArchiveEmptyScreenHeader": "Chưa có phòng sao lưu nào ở đây",
   "ArchiveEmptyScreen": "Bạn có thể sao lưu các phòng bạn không sử dụng và khôi phục chúng trong {{productName}} của bạn bất cứ lúc nào hoặc xóa chúng vĩnh viễn. Những phòng này sẽ xuất hiện ở đây.",
-  "GoToMyRooms": "Vào Phòng của tôi"
+  "GoToMyRooms": "Vào Phòng của tôi",
+  "DeleteRoomTitle": "Xóa phòng này?",
+  "DeleteRoomConfirm": "Phòng <strong>\"{{roomName}}\"</strong> sẽ bị xóa vĩnh viễn. Tất cả dữ liệu và quyền truy cập của người dùng sẽ bị mất.",
+  "DeleteRoomWarning": "Tôi hiểu những hậu quả và muốn xóa phòng.",
+  "DeleteRooms": "Các <strong>phòng đã chọn ({{count}})</strong> sẽ bị xóa vĩnh viễn. Tất cả dữ liệu và quyền truy cập của người dùng sẽ bị mất.",
+  "DeleteRoomsTitle": "Xóa những phòng này?"
 }

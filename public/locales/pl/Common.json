@@ -1617,5 +1617,10 @@
   "Unpin": "Odepnij",
   "ArchiveEmptyScreenHeader": "Brak zarchiwizowanych pokoi",
   "ArchiveEmptyScreen": "Możesz archiwizować pokoje, których nie używasz i przywracać je do {{productName}} w dowolnej chwili lub usuwać na stałe. Pokoje te pojawią się tutaj.",
-  "GoToMyRooms": "Przejdź do pokoi"
+  "GoToMyRooms": "Przejdź do pokoi",
+  "DeleteRoomTitle": "Usunąć ten pokój?",
+  "DeleteRoomConfirm": "Pokój <strong>{{roomName}}</strong> zostanie trwale usunięty. Wszystkie dane i uprawnienia użytkowników zostaną utracone.",
+  "DeleteRoomWarning": "Rozumiem konsekwencje i chcę usunąć pokój.",
+  "DeleteRooms": "Wybrane <strong>pokoje ({{count}})</strong> zostaną trwale usunięte. Wszystkie dane i dostęp użytkowników zostaną utracone.",
+  "DeleteRoomsTitle": "Usunąć te pokoje?"
 }

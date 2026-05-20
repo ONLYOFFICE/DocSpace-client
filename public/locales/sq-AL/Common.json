@@ -1617,5 +1617,10 @@
   "Unpin": "Zhgozhdoni",
   "ArchiveEmptyScreenHeader": "Nuk ka ende dhoma të arkivuara këtu",
   "ArchiveEmptyScreen": "Mund t'i arkivoni dhomat që nuk i përdorni dhe t'i rivendosni në {{productName}} në çdo moment ose t'i fshini përgjithmonë. Këto dhoma do të shfaqen këtu.",
-  "GoToMyRooms": "Shkoni te dhomat"
+  "GoToMyRooms": "Shkoni te dhomat",
+  "DeleteRoomTitle": "Dëshironi të fshini këtë dhomë?",
+  "DeleteRoomConfirm": "Dhoma <strong>\"{{roomName}}\"</strong> do të fshihet përgjithmonë. Të gjitha të dhënat dhe akseset e përdoruesve do të humbasin.",
+  "DeleteRoomWarning": "I kuptoj pasojat dhe dua të fshij dhomën",
+  "DeleteRooms": "Dhoma(t) e zgjedhura <strong>({{count}})</strong> do të fshihen përgjithmonë. Të gjitha të dhënat dhe qasja e përdoruesve do të humbasin.",
+  "DeleteRoomsTitle": "Dëshironi të fshini këto dhoma?"
 }

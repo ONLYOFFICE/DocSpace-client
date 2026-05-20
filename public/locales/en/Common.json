@@ -1632,5 +1632,10 @@
   "Unpin": "Unpin",
   "ArchiveEmptyScreenHeader": "No archived rooms here yet",
   "ArchiveEmptyScreen": "You can archive rooms you don’t use and restore them in your {{productName}} at any moment or delete them permanently. These rooms will appear here.",
-  "GoToMyRooms": "Go to rooms"
+  "GoToMyRooms": "Go to rooms",
+  "DeleteRoomTitle": "Delete this room?",
+  "DeleteRoomConfirm": "The room <strong>\"{{roomName}}\"</strong> will be permanently deleted. All data and user accesses will be lost.",
+  "DeleteRoomWarning": "I understand the consequences and want to delete the room",
+  "DeleteRooms": "The selected <strong>rooms ({{count}})</strong> will be permanently deleted. All data and user access will be lost.",
+  "DeleteRoomsTitle": "Delete these rooms?"
 }

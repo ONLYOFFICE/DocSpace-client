@@ -79,6 +79,9 @@ type RoomsTableViewRowProps = {
   onChangeOwner?: (item: TFolderItem | TFileItem) => void;
   onRoomChanged?: (id: number) => void;
   onRestoreRoom?: (item: TFolderItem | TFileItem) => void;
+  onDeleteRoom?: (item: TFolderItem | TFileItem) => void;
+  onDeleteSelected?: (items: (TFolderItem | TFileItem)[]) => void;
+  onRestoreSelected?: (items: (TFolderItem | TFileItem)[]) => void;
   isArchive?: boolean;
 };
 
@@ -92,6 +95,9 @@ const RoomsTableViewRow = observer(
     onChangeOwner,
     onRoomChanged,
     onRestoreRoom,
+    onDeleteRoom,
+    onDeleteSelected,
+    onRestoreSelected,
     isArchive,
   }: RoomsTableViewRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
@@ -111,6 +117,9 @@ const RoomsTableViewRow = observer(
       onChangeOwner,
       isArchive,
       onRestoreRoom,
+      onDeleteRoom,
+      onDeleteSelected,
+      onRestoreSelected,
     );
     const refreshRooms = React.useContext(RoomsRefreshContext);
     const isChecked = filesSelectionStore.isCheckedItem(item);
@@ -231,9 +240,9 @@ const RoomsTableViewRow = observer(
       </div>
     );
 
-    const contextMenuModel = getContextModel(item, true);
+    const contextMenuModel = getContextModel(item);
     const getRowContextModel = React.useCallback(
-      () => getContextModel(item, true),
+      () => getContextModel(item),
       [getContextModel, item],
     );
 
@@ -251,8 +260,8 @@ const RoomsTableViewRow = observer(
           className: classNames("files-item", "table-container_file-name-cell"),
           value,
         }}
-        fileContextClick={(isRightClick?: boolean) => {
-          if (isRightClick && filesSelectionStore.selection.length > 1) return;
+        fileContextClick={() => {
+          if (filesSelectionStore.isCheckedItem(item)) return;
           filesSelectionStore.setSelection([]);
           filesSelectionStore.setBufferSelection(item);
         }}

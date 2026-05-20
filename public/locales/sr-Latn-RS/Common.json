@@ -1617,5 +1617,10 @@
   "Unpin": "Otkači",
   "ArchiveEmptyScreenHeader": "Nema arhiviranih soba ovde još",
   "ArchiveEmptyScreen": "Možete da arhivirate sobe koje ne koristite i da ih povratite u svoj {{productName}} u bilo kom trenutku ili da ih trajno obrišete. Ove sobe će se pojaviti ovde.",
-  "GoToMyRooms": "Idi u sobe"
+  "GoToMyRooms": "Idi u sobe",
+  "DeleteRoomTitle": "Obrisati ovu sobu?",
+  "DeleteRoomConfirm": "Soba <strong>\"{{roomName}}\"</strong> će biti trajno obrisana. Svi podaci i pristupi korisnika će biti izgubljeni.",
+  "DeleteRoomWarning": "Razumem posledice i želim da obrišem sobu",
+  "DeleteRooms": "Izabrane <strong>sobe ({{count}})</strong> će biti trajno obrisane. Svi podaci i pristup korisnika biće izgubljeni.",
+  "DeleteRoomsTitle": "Obrisati ove sobe?"
 }

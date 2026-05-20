@@ -1617,5 +1617,10 @@
   "Unpin": "Odopnúť",
   "ArchiveEmptyScreenHeader": "Zatiaľ tu nie sú žiadne archivované miestnosti",
   "ArchiveEmptyScreen": "Miestnosti, ktoré nepoužívate, môžete kedykoľvek archivovať a obnoviť vo svojom {{productName}} alebo ich natrvalo vymazať. Tieto miestnosti sa objavia tu.",
-  "GoToMyRooms": "Prejdite do miestnosti"
+  "GoToMyRooms": "Prejdite do miestnosti",
+  "DeleteRoomTitle": "Zmazať túto miestnosť?",
+  "DeleteRoomConfirm": "Miestnosť <strong>\"{{roomName}}\"</strong> bude trvale odstránená. Všetky dáta a prístupy používateľov budú stratené.",
+  "DeleteRoomWarning": "Rozumiem následky a chcem zmazať miestnosť.",
+  "DeleteRooms": "Vybrané <strong>miestnosti ({{count}})</strong> budú trvalo odstránené. Všetky údaje a prístup používateľov budú stratené.",
+  "DeleteRoomsTitle": "Zmazať tieto miestnosti?"
 }

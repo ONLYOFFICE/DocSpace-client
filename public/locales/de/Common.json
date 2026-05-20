@@ -1617,5 +1617,10 @@
   "Unpin": "Entpinnen",
   "ArchiveEmptyScreenHeader": "Noch keine archivierten Räume hier",
   "ArchiveEmptyScreen": "Sie können Räume, die Sie nicht benutzen, archivieren und jederzeit in Ihrem {{productName}} wiederherstellen oder dauerhaft löschen. Diese Räume werden hier angezeigt.",
-  "GoToMyRooms": "Zu Räume"
+  "GoToMyRooms": "Zu Räume",
+  "DeleteRoomTitle": "Raum löschen?",
+  "DeleteRoomConfirm": "Der Raum <strong>\"{{roomName}}\"</strong> wird dauerhaft gelöscht. Alle Daten und Benutzerzugriffe gehen verloren.",
+  "DeleteRoomWarning": "Ich verstehe die Konsequenzen und möchte den Raum löschen.",
+  "DeleteRooms": "Die ausgewählten <strong>Räume ({{count}})</strong> werden dauerhaft gelöscht. Alle Daten und Benutzerzugriffe gehen verloren.",
+  "DeleteRoomsTitle": "Diese Räume löschen?"
 }

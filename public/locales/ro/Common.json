@@ -1617,5 +1617,10 @@
   "Unpin": "Anulare fixare",
   "ArchiveEmptyScreenHeader": "Nicio sală arhivată deocamdată aici",
   "ArchiveEmptyScreen": "Puteţi arhiva sălile pe care nu le folosiţi şi le restaurați în {{productName}} în orice moment sau puteţi opta să le ştergeţi definitiv. Aceste săli vor apărea aici.",
-  "GoToMyRooms": "Salt la Sălile"
+  "GoToMyRooms": "Salt la Sălile",
+  "DeleteRoomTitle": "Doriți să ștergeți această sală?",
+  "DeleteRoomConfirm": "Sala <strong>\"{{roomName}}\"</strong> va fi ștearsă definitiv. Toate datele  și conectările utilizatorilor se vor pierde.",
+  "DeleteRoomWarning": "Confirm că înțeleg efectele și doresc să șterg sala",
+  "DeleteRooms": "<strong>Săli ({{count}})</strong> selectate vor fi șterse permanent. Toate datele și accesul utilizatorilor vor fi pierdute.",
+  "DeleteRoomsTitle": "Doriți să ștergeți aceste săli?"
 }

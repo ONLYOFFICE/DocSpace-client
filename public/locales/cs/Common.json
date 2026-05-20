@@ -1617,5 +1617,10 @@
   "Unpin": "Odepnout",
   "ArchiveEmptyScreenHeader": "Zatím zde nejsou žádné archivované místnosti",
   "ArchiveEmptyScreen": "Nepoužívané místnosti můžete archivovat a kdykoli je obnovit v prostoru {{productName}} nebo je trvale odstranit. Tyto místnosti se zobrazí zde.",
-  "GoToMyRooms": "Přejít do sekce místnosti"
+  "GoToMyRooms": "Přejít do sekce místnosti",
+  "DeleteRoomTitle": "Smazat tuto místnost?",
+  "DeleteRoomConfirm": "Pokoj <strong>{{roomName}}</strong> bude trvale smazán. Všechna data a přístupy uživatelů budou ztraceny.",
+  "DeleteRoomWarning": "Rozumím následkům a chci smazat pokoj.",
+  "DeleteRooms": "Vybrané <strong>místnosti ({{count}})</strong> budou trvale odstraněny. Všechna data a přístup uživatelů budou ztraceny.",
+  "DeleteRoomsTitle": "Smazat tyto místnosti?"
 }

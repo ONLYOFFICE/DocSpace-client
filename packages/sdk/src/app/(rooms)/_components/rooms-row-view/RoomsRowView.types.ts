@@ -46,6 +46,9 @@ export type RoomsRowProps = RoomsRowContentProps & {
   onChangeOwner?: (item: TFolderItem | TFileItem) => void;
   onRoomChanged?: (id: number) => void;
   onRestoreRoom?: (item: TFolderItem | TFileItem) => void;
+  onDeleteRoom?: (item: TFolderItem | TFileItem) => void;
+  onDeleteSelected?: (items: (TFolderItem | TFileItem)[]) => void;
+  onRestoreSelected?: (items: (TFolderItem | TFileItem)[]) => void;
   isArchive?: boolean;
 };
 
@@ -61,5 +64,8 @@ export type RoomsRowViewProps = Pick<
   onChangeOwner?: (item: TFolderItem | TFileItem) => void;
   onRoomChanged?: (id: number) => void;
   onRestoreRoom?: (item: TFolderItem | TFileItem) => void;
+  onDeleteRoom?: (item: TFolderItem | TFileItem) => void;
+  onDeleteSelected?: (items: (TFolderItem | TFileItem)[]) => void;
+  onRestoreSelected?: (items: (TFolderItem | TFileItem)[]) => void;
   isArchive?: boolean;
 };

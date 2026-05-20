@@ -1617,5 +1617,10 @@
   "Unpin": "Sabitlemeyi kaldır",
   "ArchiveEmptyScreenHeader": "Burada henüz arşivlenmiş oda yok",
   "ArchiveEmptyScreen": "Kullanmadığınız odaları dilediğiniz zaman arşivleyip {{productName}}'inize geri yükleyebilir veya kalıcı olarak silebilirsiniz. Bu odalar burada görünecektir.",
-  "GoToMyRooms": "Odalarıma git"
+  "GoToMyRooms": "Odalarıma git",
+  "DeleteRoomTitle": "Bu odayı sil?",
+  "DeleteRoomConfirm": "Oda <strong>\"{{roomName}}\"</strong> kalıcı olarak silinecektir. Tüm veriler ve kullanıcı erişimleri kaybolacaktır.",
+  "DeleteRoomWarning": "Sonuçların farkındayım ve odayı silmek istiyorum",
+  "DeleteRooms": "Seçilen <strong>odalar ({{count}})</strong> kalıcı olarak silinecektir. Tüm veriler ve kullanıcı erişimi kaybolacaktır.",
+  "DeleteRoomsTitle": "Bu odaları sil?"
 }

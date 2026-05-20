@@ -1617,5 +1617,10 @@
   "Unpin": "고정 해제",
   "ArchiveEmptyScreenHeader": "아직 여기에 아카이브 방이 없습니다",
   "ArchiveEmptyScreen": "사용하지 않는 방을 아카이브하고 {{productName}}에서 언제든지 복원하거나 영구적으로 삭제할 수 있습니다. 이러한 방이 여기에 표시됩니다.",
-  "GoToMyRooms": "내 방으로 이동"
+  "GoToMyRooms": "내 방으로 이동",
+  "DeleteRoomTitle": "이 방 삭제하시겠습니까?",
+  "DeleteRoomConfirm": "방 <strong>\"{{roomName}}\"</strong>은 영구적으로 삭제됩니다. 모든 데이터 및 사용자 접근 권한은 사라집니다.",
+  "DeleteRoomWarning": "결과를 이해하며 방을 삭제하고 싶습니다.",
+  "DeleteRooms": "선택한 <strong>방({{count}})</strong>이 영구적으로 삭제됩니다. 모든 데이터와 사용자 액세스가 손실됩니다.",
+  "DeleteRoomsTitle": "이 방들을 삭제하시겠습니까?"
 }

@@ -64,6 +64,7 @@ import ChangeRoomOwnerDialog from "../change-room-owner-dialog";
 import EmptyView from "../empty-view";
 import CreateEditRoomDialog from "../create-edit-room-dialog";
 import RestoreRoomDialog from "../restore-room-dialog";
+import DeleteRoomDialog from "../delete-room-dialog";
 import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
 import useResetSelectionClick from "@/app/(docspace)/(files)/_components/list/hooks/useResetSelectionClick";
 
@@ -186,6 +187,60 @@ const RoomsList = ({
       }
     },
     [activeItemsStore, filesListStore],
+  );
+
+  const onRestoreSelected = React.useCallback(
+    async (items: (TFolderItem | TFileItem)[]) => {
+      if (!items.length) return;
+      const ids = items.map((item) => item.id as number);
+      activeItemsStore.addActiveItems([], ids);
+      try {
+        await Promise.all(ids.map((id) => api.rooms.unarchiveRoom(id)));
+        for (const id of ids) filesListStore.removeItem(id);
+        setTotal((prev) => Math.max(0, prev - ids.length));
+        setSelection([]);
+        setBufferSelection(null);
+      } catch (e) {
+        toastr.error(e as Error);
+      } finally {
+        activeItemsStore.removeActiveItems([], ids);
+      }
+    },
+    [activeItemsStore, filesListStore, setSelection, setBufferSelection],
+  );
+
+  const [deletingItems, setDeletingItems] = React.useState<
+    (TFolderItem | TFileItem)[] | null
+  >(null);
+
+  const onDeleteRoom = React.useCallback((item: TFolderItem | TFileItem) => {
+    setDeletingItems([item]);
+  }, []);
+
+  const onDeleteSelected = React.useCallback(
+    (items: (TFolderItem | TFileItem)[]) => {
+      if (!items.length) return;
+      setDeletingItems(items);
+    },
+    [],
+  );
+
+  const deleteRooms = React.useCallback(
+    async (roomIds: number[]) => {
+      activeItemsStore.addActiveItems([], roomIds);
+      try {
+        await api.files.removeFiles(roomIds, [], false, true, true);
+        for (const id of roomIds) filesListStore.removeItem(id);
+        setTotal((prev) => Math.max(0, prev - roomIds.length));
+        setSelection([]);
+        setBufferSelection(null);
+      } catch (e) {
+        toastr.error(e as Error);
+      } finally {
+        activeItemsStore.removeActiveItems([], roomIds);
+      }
+    },
+    [activeItemsStore, filesListStore, setSelection, setBufferSelection],
   );
 
   const refreshSingleRoom = React.useCallback(
@@ -379,6 +434,9 @@ const RoomsList = ({
         onChangeOwner={onChangeOwner}
         onRoomChanged={refreshSingleRoom}
         onRestoreRoom={onRestoreRoom}
+        onDeleteRoom={onDeleteRoom}
+        onDeleteSelected={onDeleteSelected}
+        onRestoreSelected={onRestoreSelected}
         isArchive={isArchive}
       />
     );
@@ -395,6 +453,9 @@ const RoomsList = ({
         onChangeOwner={onChangeOwner}
         onRoomChanged={refreshSingleRoom}
         onRestoreRoom={onRestoreRoom}
+        onDeleteRoom={onDeleteRoom}
+        onDeleteSelected={onDeleteSelected}
+        onRestoreSelected={onRestoreSelected}
         isArchive={isArchive}
       />
     );
@@ -443,6 +504,17 @@ const RoomsList = ({
           onClose={() => setRestoringRoom(null)}
           roomType={(restoringRoom as TFolderItem).roomType}
           onConfirm={() => restoreRoom(restoringRoom.id as number)}
+        />
+      ) : null}
+      {deletingItems && deletingItems.length > 0 ? (
+        <DeleteRoomDialog
+          visible
+          onClose={() => setDeletingItems(null)}
+          roomName={deletingItems[0].title}
+          count={deletingItems.length}
+          onConfirm={() =>
+            deleteRooms(deletingItems.map((item) => item.id as number))
+          }
         />
       ) : null}
     </RoomsRefreshContext.Provider>

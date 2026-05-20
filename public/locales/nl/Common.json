@@ -1617,5 +1617,10 @@
   "Unpin": "Unpin",
   "ArchiveEmptyScreenHeader": "Er zijn hier nog geen gearchiveerde kamers",
   "ArchiveEmptyScreen": "U kunt ruimtes die u niet gebruikt archiveren en op elk moment in uw {{productName}} herstellen of definitief verwijderen. Deze kamers worden hier weergegeven.",
-  "GoToMyRooms": "Ga naar kamers"
+  "GoToMyRooms": "Ga naar kamers",
+  "DeleteRoomTitle": "Deze kamer verwijderen?",
+  "DeleteRoomConfirm": "De kamer <strong>{{roomName}}</strong> wordt permanent verwijderd. Alle data en gebruikersrechten gaan verloren.",
+  "DeleteRoomWarning": "Ik begrijp de gevolgen en wil de kamer verwijderen.",
+  "DeleteRooms": "De geselecteerde <strong>kamers ({{count}})</strong> worden permanent verwijderd. Alle data en gebruikers toegang zullen verloren gaan.",
+  "DeleteRoomsTitle": "Deze kamers verwijderen?"
 }

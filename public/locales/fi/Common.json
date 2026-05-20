@@ -1617,5 +1617,10 @@
   "Unpin": "Irrota",
   "ArchiveEmptyScreenHeader": "Ei vielä arkistoituja huoneita täällä",
   "ArchiveEmptyScreen": "Voit arkistoida huoneita, joita et käytä ja palauttaa niitä {{productName}}-esi milloin tahansa tai poistaa ne lopullisesti. Nämä huoneet ilmestyvät tähän. ",
-  "GoToMyRooms": "Mene huoneisiin"
+  "GoToMyRooms": "Mene huoneisiin",
+  "DeleteRoomTitle": "Poistetaanko tämä huone?",
+  "DeleteRoomConfirm": "Huone <strong>\"{{roomName}}\"</strong> poistetaan pysyvästi. Kaikki tiedot ja käyttäjäoikeudet menetetään.",
+  "DeleteRoomWarning": "Ymmärrän seuraukset ja haluan poistaa huoneen.",
+  "DeleteRooms": "Valitut <strong>huoneet ({{count}})</strong> poistetaan pysyvästi. Kaikki data ja käyttäjien pääsy menetetään.",
+  "DeleteRoomsTitle": "Poistetaanko nämä huoneet?"
 }

@@ -73,6 +73,9 @@ export default function useRoomContextMenuModel(
   onChangeOwner?: (item: TRoomItem) => void,
   isArchive?: boolean,
   onRestoreRoom?: (item: TRoomItem) => void,
+  onDeleteRoom?: (item: TRoomItem) => void,
+  onDeleteSelected?: (items: TRoomItem[]) => void,
+  onRestoreSelected?: (items: TRoomItem[]) => void,
 ) {
   const { t } = useTranslation(["Common", "Files"]);
   const refreshRooms = useContext(RoomsRefreshContext);
@@ -94,11 +97,6 @@ export default function useRoomContextMenuModel(
 
       const handleArchive = async () => {
         await api.rooms.archiveRoom(room.id);
-        refreshRooms?.();
-      };
-
-      const handleDelete = async () => {
-        await api.rooms.deleteRoom(room.id);
         refreshRooms?.();
       };
 
@@ -145,7 +143,7 @@ export default function useRoomContextMenuModel(
             key: "delete-room",
             label: t("Common:DeleteRoom"),
             icon: TrashReactSvgUrl,
-            onClick: handleDelete,
+            onClick: () => onDeleteRoom?.(room),
           },
         ];
       }
@@ -246,12 +244,38 @@ export default function useRoomContextMenuModel(
       onRoomChanged,
       onChangeOwner,
       onRestoreRoom,
+      onDeleteRoom,
       isArchive,
       filesSelectionStore,
     ],
   );
 
   const getSelectionContextMenuModel = useCallback((): ContextMenuModel[] => {
+    if (isArchive) {
+      return [
+        {
+          id: "option_unarchive-rooms",
+          key: "unarchive-rooms",
+          label: t("Common:Restore"),
+          icon: MoveReactSvgUrl,
+          onClick: () =>
+            onRestoreSelected?.(
+              filesSelectionStore.selection as TRoomItem[],
+            ),
+        },
+        {
+          id: "option_delete-rooms",
+          key: "delete-rooms",
+          label: t("Common:DeleteRoom"),
+          icon: TrashReactSvgUrl,
+          onClick: () =>
+            onDeleteSelected?.(
+              filesSelectionStore.selection as TRoomItem[],
+            ),
+        },
+      ];
+    }
+
     return [
       {
         id: "option_download",
@@ -261,7 +285,14 @@ export default function useRoomContextMenuModel(
         onClick: () => downloadAction(),
       },
     ];
-  }, [t, downloadAction]);
+  }, [
+    t,
+    downloadAction,
+    isArchive,
+    onDeleteSelected,
+    onRestoreSelected,
+    filesSelectionStore,
+  ]);
 
   const getContextModel = useCallback(
     (item: TFolderItem | TFileItem, skipSelect = false) => {

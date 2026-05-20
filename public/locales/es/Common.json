@@ -1617,5 +1617,10 @@
   "Unpin": "Desanclar",
   "ArchiveEmptyScreenHeader": "Todavía no hay salas archivadas aquí",
   "ArchiveEmptyScreen": "Puede archivar las salas que no utiliza y restaurarlas en su {{productName}} en cualquier momento o eliminarlas definitivamente. Estas salas aparecerán aquí.",
-  "GoToMyRooms": "Ir a Salas"
+  "GoToMyRooms": "Ir a Salas",
+  "DeleteRoomTitle": "¿Eliminar esta sala?",
+  "DeleteRoomConfirm": "La sala <strong>«{{roomName}}»</strong> se eliminará de forma permanente. Se perderán todos los datos y accesos de los usuarios.",
+  "DeleteRoomWarning": "Entiendo las consecuencias y deseo eliminar la sala.",
+  "DeleteRooms": "Las <strong>salas seleccionadas ({{count}})</strong> se eliminarán permanentemente. Se perderán todos los datos y el acceso de los usuarios.",
+  "DeleteRoomsTitle": "¿Eliminar estas salas?"
 }

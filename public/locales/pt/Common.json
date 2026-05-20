@@ -1617,5 +1617,10 @@
   "Unpin": "Desafixar",
   "ArchiveEmptyScreenHeader": "Ainda não tem qualquer sala arquivada",
   "ArchiveEmptyScreen": "Pode arquivar salas que não utiliza e restaurá-las no seu {{productName}} a qualquer momento ou apagá-las permanentemente. Estas salas aparecerão aqui.",
-  "GoToMyRooms": "Ir para As Minhas Salas"
+  "GoToMyRooms": "Ir para As Minhas Salas",
+  "DeleteRoomTitle": "Apagar este quarto?",
+  "DeleteRoomConfirm": "A sala <strong>{{roomName}}</strong> será excluída permanentemente. Todos os dados e acessos de usuário serão perdidos.",
+  "DeleteRoomWarning": "Eu compreendo as consequências e quero excluir o espaço.",
+  "DeleteRooms": "As <strong>salas selecionadas ({{count}})</strong> serão permanentemente excluídas. Todos os dados e o acesso dos usuários serão perdidos.",
+  "DeleteRoomsTitle": "Apagar estas salas?"
 }

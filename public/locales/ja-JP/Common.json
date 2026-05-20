@@ -1617,5 +1617,10 @@
   "Unpin": "固定の削除",
   "ArchiveEmptyScreenHeader": "アーカイブ済みのルームがありません",
   "ArchiveEmptyScreen": "使わないルームはアーカイブして、いつでも{{productName}}に復元したり、永久に削除することができます。そのルームはここに表示されます。",
-  "GoToMyRooms": "「ルーム」へ"
+  "GoToMyRooms": "「ルーム」へ",
+  "DeleteRoomTitle": "このルームを削除しますか？",
+  "DeleteRoomConfirm": "<strong>「{{roomName}}」</strong> ルームは永久に削除されます。すべてのデータとユーザーアクセスが失われます。",
+  "DeleteRoomWarning": "私は上記の説明を理解しており、ルームを削除したいです",
+  "DeleteRooms": "選択された<strong>ルーム ({{count}}</strong>) は完全に削除されます。すべてのデータとユーザーアクセス権は失われます。",
+  "DeleteRoomsTitle": "これらのルームを削除しますか？"
 }

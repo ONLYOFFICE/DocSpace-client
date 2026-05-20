@@ -1617,5 +1617,10 @@
   "Unpin": "Atspraust",
   "ArchiveEmptyScreenHeader": "Šeit vēl nav nevienas arhivētas telpas",
   "ArchiveEmptyScreen": "Jūs jebkurā brīdī varat arhivēt neizmantotās telpas un atjaunot tās savā {{productName}} vai neatgriezeniski izdzēst. Šeit parādīsies šīs telpas.",
-  "GoToMyRooms": "Doties uz telpas"
+  "GoToMyRooms": "Doties uz telpas",
+  "DeleteRoomTitle": "Dzēst šo istabu?",
+  "DeleteRoomConfirm": "Istaba <strong>\"{{roomName}}\"</strong> tiks izdzēsta pavisam. Visi dati un lietotāju piekļuves tiks zaudēti.",
+  "DeleteRoomWarning": "Es saprotu sekmes un vēlos dzēst istabu.",
+  "DeleteRooms": "Atlasītās <strong>telpas ({{count}})</strong> tiks neatgriezeniski dzēstas. Visi dati un lietotāju piekļuve tiks zaudēta.",
+  "DeleteRoomsTitle": "Dzēst šīs istabas?"
 }

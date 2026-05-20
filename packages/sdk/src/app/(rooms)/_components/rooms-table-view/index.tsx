@@ -64,6 +64,7 @@ type RoomsTableViewProps = {
   fetchMoreFiles: (params: IndexRange) => Promise<void>;
   onEditRoom?: (item: TFolderItem | TFileItem) => void;
   onChangeOwner?: (item: TFolderItem | TFileItem) => void;
+  onTagClick?: (tag: string) => void;
   onRoomChanged?: (id: number) => void;
   onRestoreRoom?: (item: TFolderItem | TFileItem) => void;
   onDeleteRoom?: (item: TFolderItem | TFileItem) => void;
@@ -85,6 +86,7 @@ const RoomsTableView = ({
   fetchMoreFiles,
   onEditRoom,
   onChangeOwner,
+  onTagClick,
   onRoomChanged,
   onRestoreRoom,
   onDeleteRoom,
@@ -222,6 +224,7 @@ const RoomsTableView = ({
             lastColumn={lastColumn}
             onEditRoom={onEditRoom}
             onChangeOwner={onChangeOwner}
+            onTagClick={onTagClick}
             onRoomChanged={onRoomChanged}
             onRestoreRoom={onRestoreRoom}
             onDeleteRoom={onDeleteRoom}

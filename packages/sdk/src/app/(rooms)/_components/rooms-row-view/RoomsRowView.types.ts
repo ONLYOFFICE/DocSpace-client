@@ -44,6 +44,7 @@ export type RoomsRowProps = RoomsRowContentProps & {
   isSSR: boolean;
   onEditRoom?: (item: TFolderItem | TFileItem) => void;
   onChangeOwner?: (item: TFolderItem | TFileItem) => void;
+  onTagClick?: (tag: string) => void;
   onRoomChanged?: (id: number) => void;
   onRestoreRoom?: (item: TFolderItem | TFileItem) => void;
   onDeleteRoom?: (item: TFolderItem | TFileItem) => void;
@@ -64,6 +65,7 @@ export type RoomsRowViewProps = Pick<
   fetchMoreFiles: (params: IndexRange) => Promise<void>;
   onEditRoom?: (item: TFolderItem | TFileItem) => void;
   onChangeOwner?: (item: TFolderItem | TFileItem) => void;
+  onTagClick?: (tag: string) => void;
   onRoomChanged?: (id: number) => void;
   onRestoreRoom?: (item: TFolderItem | TFileItem) => void;
   onDeleteRoom?: (item: TFolderItem | TFileItem) => void;

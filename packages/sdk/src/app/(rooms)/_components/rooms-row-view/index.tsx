@@ -45,6 +45,7 @@ const RoomsRowView = ({
   fetchMoreFiles,
   onEditRoom,
   onChangeOwner,
+  onTagClick,
   onRoomChanged,
   onRestoreRoom,
   onDeleteRoom,
@@ -77,6 +78,7 @@ const RoomsRowView = ({
           isSSR={isSSR}
           onEditRoom={onEditRoom}
           onChangeOwner={onChangeOwner}
+          onTagClick={onTagClick}
           onRoomChanged={onRoomChanged}
           onRestoreRoom={onRestoreRoom}
           onDeleteRoom={onDeleteRoom}

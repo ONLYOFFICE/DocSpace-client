@@ -65,6 +65,7 @@ const RoomsRow = observer(
     isSSR,
     onEditRoom,
     onChangeOwner,
+    onTagClick: _onTagClick,
     onRoomChanged,
     onRestoreRoom,
     onDeleteRoom,

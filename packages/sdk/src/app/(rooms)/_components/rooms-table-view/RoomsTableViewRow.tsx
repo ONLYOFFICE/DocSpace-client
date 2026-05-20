@@ -77,6 +77,7 @@ type RoomsTableViewRowProps = {
   lastColumn: string;
   onEditRoom?: (item: TFolderItem | TFileItem) => void;
   onChangeOwner?: (item: TFolderItem | TFileItem) => void;
+  onTagClick?: (tag: string) => void;
   onRoomChanged?: (id: number) => void;
   onRestoreRoom?: (item: TFolderItem | TFileItem) => void;
   onDeleteRoom?: (item: TFolderItem | TFileItem) => void;
@@ -95,6 +96,7 @@ const RoomsTableViewRow = observer(
     lastColumn,
     onEditRoom,
     onChangeOwner,
+    onTagClick,
     onRoomChanged,
     onRestoreRoom,
     onDeleteRoom,
@@ -155,7 +157,12 @@ const RoomsTableViewRow = observer(
       canRemove: false,
     };
 
-    const onSelectTag = React.useCallback((_tag: TagClickEvent) => {}, []);
+    const onSelectTag = React.useCallback(
+      (tag: TagClickEvent) => {
+        if (tag?.label) onTagClick?.(tag.label);
+      },
+      [onTagClick],
+    );
 
     // TEMPORARY: refresh the room after tag bind/unbind/create via callback.
     // Replace with WebSocket MODIFY_FOLDER subscription once sockets are

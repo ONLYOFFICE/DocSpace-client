@@ -141,6 +141,15 @@ const RoomsList = ({
     if (sp.get("sortOrder"))
       f.sortOrder = sp.get("sortOrder") as typeof f.sortOrder;
     if (sp.get("search")) f.filterValue = sp.get("search");
+    const tagsRaw = sp.get("tags");
+    if (tagsRaw) {
+      try {
+        const parsed = JSON.parse(tagsRaw);
+        if (Array.isArray(parsed) && parsed.length > 0) f.tags = parsed;
+      } catch {
+        // ignore
+      }
+    }
     return f;
   });
 
@@ -178,7 +187,20 @@ const RoomsList = ({
     setChangingOwnerRoom(item);
   }, []);
 
-  const onRestoreRoom = React.useCallback((item: TFolderItem | TFileItem) => {
+  const onTagClick = React.useCallback(
+    (tag: string) => {
+      const sp = new URLSearchParams(window.location.search);
+      sp.set("tags", JSON.stringify([tag]));
+      sp.delete("page");
+      window.history.pushState(null, "", `?${sp.toString()}`);
+      fetchCurrentRooms();
+    },
+    // fetchCurrentRooms reads URL at call time, so dependency is intentional
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );  
+
+const onRestoreRoom = React.useCallback((item: TFolderItem | TFileItem) => {
     setRestoringItems([item]);
   }, []);
 
@@ -397,6 +419,15 @@ const RoomsList = ({
     if (sp.get("sortOrder"))
       newFilter.sortOrder = sp.get("sortOrder") as typeof newFilter.sortOrder;
     if (sp.get("search")) newFilter.filterValue = sp.get("search");
+    const tagsRaw = sp.get("tags");
+    if (tagsRaw) {
+      try {
+        const parsed = JSON.parse(tagsRaw);
+        if (Array.isArray(parsed) && parsed.length > 0) newFilter.tags = parsed;
+      } catch {
+        // ignore
+      }
+    }
     newFilter.page = 0;
     newFilter.pageCount = PAGE_COUNT;
 
@@ -539,6 +570,7 @@ const RoomsList = ({
         fetchMoreFiles={fetchMoreRooms}
         onEditRoom={onEditRoom}
         onChangeOwner={onChangeOwner}
+        onTagClick={onTagClick}
         onRoomChanged={refreshSingleRoom}
         onRestoreRoom={onRestoreRoom}
         onDeleteRoom={onDeleteRoom}
@@ -560,6 +592,7 @@ const RoomsList = ({
         fetchMoreFiles={fetchMoreRooms}
         onEditRoom={onEditRoom}
         onChangeOwner={onChangeOwner}
+        onTagClick={onTagClick}
         onRoomChanged={refreshSingleRoom}
         onRestoreRoom={onRestoreRoom}
         onDeleteRoom={onDeleteRoom}

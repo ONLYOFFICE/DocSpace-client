@@ -139,6 +139,14 @@ export default function useItemContextMenu({
       if (file.security.Move) model.add(AVAILABLE_CONTEXT_ITEMS.moveTo);
     }
 
+    if (!isTrashSection && file.security?.ReadHistory) {
+      model.add(AVAILABLE_CONTEXT_ITEMS.showVersionHistory);
+    }
+
+    if (!isTrashSection && file.security?.Lock) {
+      model.add(AVAILABLE_CONTEXT_ITEMS.blockUnblockVersion);
+    }
+
     model.add(AVAILABLE_CONTEXT_ITEMS.showInfo);
 
     if (file.security.Delete) {

@@ -52,6 +52,7 @@ import type { TViewAs } from "@docspace/shared/types";
 import { DocsSettingsStoreContextProvider } from "./DocsSettingsStore";
 import { DocsUserStoreContextProvider } from "./DocsUserStore";
 import { InfoPanelStoreContextProvider } from "./InfoPanelStore";
+import { VersionHistoryStoreContextProvider } from "./VersionHistoryStore";
 
 export const DocsStoreProviders = ({
   children,
@@ -73,7 +74,9 @@ export const DocsStoreProviders = ({
                       <DocsSettingsStoreContextProvider>
                         <DocsUserStoreContextProvider>
                           <InfoPanelStoreContextProvider>
-                            {children}
+                            <VersionHistoryStoreContextProvider>
+                              {children}
+                            </VersionHistoryStoreContextProvider>
                           </InfoPanelStoreContextProvider>
                         </DocsUserStoreContextProvider>
                       </DocsSettingsStoreContextProvider>

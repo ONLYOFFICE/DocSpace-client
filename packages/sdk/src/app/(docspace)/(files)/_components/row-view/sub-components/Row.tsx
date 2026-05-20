@@ -62,6 +62,8 @@ import { InfoContext } from "../../../../_contexts/InfoContext";
 import { DeleteContext } from "../../../../_contexts/DeleteContext";
 import { FileOperationsContext } from "../../../../_contexts/FileOperationsContext";
 import { RenameContext } from "../../../../_contexts/RenameContext";
+import { VersionHistoryContext } from "../../../../_contexts/VersionHistoryContext";
+import type { TFileItem } from "../../../../_hooks/useItemList";
 import { generateFilesItemValue } from "../../../_utils";
 
 import { RowContent } from "./RowContent";
@@ -95,6 +97,7 @@ const Row = observer(
     const deleteCtx = React.useContext(DeleteContext);
     const fileOpsCtx = React.useContext(FileOperationsContext);
     const renameCtx = React.useContext(RenameContext);
+    const onShowVersionHistory = React.useContext(VersionHistoryContext);
 
     const { getContextMenuModel } = useContextMenuModel({
       item: observableItem,
@@ -106,6 +109,7 @@ const Row = observer(
       onDuplicateClick: fileOpsCtx?.duplicateItem,
       onRestoreClick: fileOpsCtx?.restoreItem,
       onRenameClick: renameCtx?.renameItem,
+      onShowVersionHistoryClick: onShowVersionHistory ?? undefined,
     });
 
     const element = (
@@ -134,6 +138,11 @@ const Row = observer(
           }
         }}
         onClickFavorite={onClickFavorite}
+        onShowVersionHistory={
+          !observableItem.isFolder && onShowVersionHistory
+            ? () => onShowVersionHistory(observableItem as TFileItem)
+            : undefined
+        }
       />
     );
 

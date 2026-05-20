@@ -1,0 +1,113 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+.body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.empty,
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 0;
+}
+
+.empty {
+  color: var(--text-tertiary);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  border-bottom: 1px solid var(--row-border);
+
+  :global(.row_content) {
+    padding-block: 13px 12px;
+    padding-inline-end: 0;
+    height: auto;
+    display: block;
+  }
+
+  :global(.row_context-menu-wrapper) {
+    align-self: flex-start;
+    margin-top: 6px;
+  }
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.rowContent {
+  width: 100%;
+  min-width: 0;
+}
+
+.rowHeader {
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  max-width: 350px;
+}
+
+.badge {
+  margin-inline: 0 16px;
+  flex-shrink: 0;
+}
+
+.versionLinkBox {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  margin: -2px 0 0 0;
+  width: 100%;
+  min-width: 0;
+}
+
+.versionDate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 4px;
+}
+
+.contentLength {
+  display: block;
+  margin-inline-start: auto;
+  flex-shrink: 0;
+  padding-inline-start: 8px;
+}
+
+.commentWrapper {
+  box-sizing: border-box;
+  display: flex;
+  margin-inline-start: 72px;
+  margin-top: 4px;
+  white-space: normal;
+}
+
+.commentText {
+  color: var(--files-version-history-comment-color);
+  margin-top: 5px;
+  word-break: break-word;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  white-space: inherit;
+}

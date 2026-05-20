@@ -170,6 +170,53 @@
   min-width: 0;
 }
 
+.badgesContainer {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-inline-start: 8px;
+
+  :global(.badges) {
+    display: flex;
+    align-items: center;
+    margin-inline-end: 12px;
+  }
+
+  :global(.badges):last-child {
+    margin-inline-end: 0;
+  }
+
+  :global(.badge) {
+    cursor: pointer;
+    margin-inline-end: 8px;
+  }
+
+  :global(.badge-version) {
+    width: max-content;
+    margin-block: 0 -2px;
+    margin-inline: -2px 5px;
+
+    & > div {
+      padding-block: 0;
+      padding-inline: 4px 3.3px;
+
+      p {
+        letter-spacing: 0.5px;
+        font-size: 9px;
+        font-weight: 800;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  :global(.badge-new-version) {
+    width: max-content;
+  }
+}
+
 .quickButtonsContainer {
   display: flex;
   justify-content: flex-end;

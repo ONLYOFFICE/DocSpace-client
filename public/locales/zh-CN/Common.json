@@ -1614,5 +1614,8 @@
   "AIAgentsUnpinned": "未置顶的 {{aiAgents}}",
   "LeaveTheRoom": "退出房间",
   "AssignOwner": "分配所有者",
-  "Unpin": "取消置顶"
+  "Unpin": "取消置顶",
+  "ArchiveEmptyScreenHeader": "暂无已存档房间",
+  "ArchiveEmptyScreen": " 您可以随时存档不使用的房间并在{{productName}}中恢复它们，也可以永久删除它们。这些房间将显示在此处。",
+  "GoToMyRooms": "转到房间"
 }

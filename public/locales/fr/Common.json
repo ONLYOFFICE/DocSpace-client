@@ -1614,5 +1614,8 @@
   "AIAgentsUnpinned": "{{aiAgents}} non épinglé",
   "LeaveTheRoom": "Quitter la salle",
   "AssignOwner": "Attribuer un propriétaire",
-  "Unpin": "Désépingler"
+  "Unpin": "Désépingler",
+  "ArchiveEmptyScreenHeader": "Il n’y a pas encore de salles archivées ici",
+  "ArchiveEmptyScreen": "Vous pouvez archiver les salles que vous n’utilisez pas et les restaurer dans votre {{productName}} à tout moment ou les supprimer définitivement. Ces salles apparaîtront ici.",
+  "GoToMyRooms": "Aller dans les salles"
 }

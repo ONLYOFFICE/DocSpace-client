@@ -1614,5 +1614,8 @@
   "AIAgentsUnpinned": "{{aiAgents}} 고정 해제",
   "LeaveTheRoom": "방 나가기",
   "AssignOwner": "소유자 할당",
-  "Unpin": "고정 해제"
+  "Unpin": "고정 해제",
+  "ArchiveEmptyScreenHeader": "아직 여기에 아카이브 방이 없습니다",
+  "ArchiveEmptyScreen": "사용하지 않는 방을 아카이브하고 {{productName}}에서 언제든지 복원하거나 영구적으로 삭제할 수 있습니다. 이러한 방이 여기에 표시됩니다.",
+  "GoToMyRooms": "내 방으로 이동"
 }

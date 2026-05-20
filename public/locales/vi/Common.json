@@ -1614,5 +1614,8 @@
   "AIAgentsUnpinned": "{{aiAgents}} không ghim",
   "LeaveTheRoom": "Rời khỏi phòng",
   "AssignOwner": "Chỉ định Chủ sở hữu",
-  "Unpin": "Bỏ ghim"
+  "Unpin": "Bỏ ghim",
+  "ArchiveEmptyScreenHeader": "Chưa có phòng sao lưu nào ở đây",
+  "ArchiveEmptyScreen": "Bạn có thể sao lưu các phòng bạn không sử dụng và khôi phục chúng trong {{productName}} của bạn bất cứ lúc nào hoặc xóa chúng vĩnh viễn. Những phòng này sẽ xuất hiện ở đây.",
+  "GoToMyRooms": "Vào Phòng của tôi"
 }

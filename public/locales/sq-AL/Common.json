@@ -1614,5 +1614,8 @@
   "AIAgentsUnpinned": "{{aiAgents}} të fiksuara",
   "LeaveTheRoom": "Lini dhomën",
   "AssignOwner": "Caktoni pronarin",
-  "Unpin": "Zhgozhdoni"
+  "Unpin": "Zhgozhdoni",
+  "ArchiveEmptyScreenHeader": "Nuk ka ende dhoma të arkivuara këtu",
+  "ArchiveEmptyScreen": "Mund t'i arkivoni dhomat që nuk i përdorni dhe t'i rivendosni në {{productName}} në çdo moment ose t'i fshini përgjithmonë. Këto dhoma do të shfaqen këtu.",
+  "GoToMyRooms": "Shkoni te dhomat"
 }

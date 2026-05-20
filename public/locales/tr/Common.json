@@ -1614,5 +1614,8 @@
   "AIAgentsUnpinned": "Sabitlenmemiş {{aiAgents}}",
   "LeaveTheRoom": "Odadan ayrıl",
   "AssignOwner": "Sahip Ata",
-  "Unpin": "Sabitlemeyi kaldır"
+  "Unpin": "Sabitlemeyi kaldır",
+  "ArchiveEmptyScreenHeader": "Burada henüz arşivlenmiş oda yok",
+  "ArchiveEmptyScreen": "Kullanmadığınız odaları dilediğiniz zaman arşivleyip {{productName}}'inize geri yükleyebilir veya kalıcı olarak silebilirsiniz. Bu odalar burada görünecektir.",
+  "GoToMyRooms": "Odalarıma git"
 }

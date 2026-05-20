@@ -32,32 +32,39 @@ import { useTranslation } from "react-i18next";
 import { EmptyView as EmptyViewComponent } from "@docspace/shared/components/empty-view";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 import EmptyRoomsRootLightIcon from "PUBLIC_DIR/images/emptyview/empty.rooms.root.light.svg";
 import EmptyRoomsRootDarkIcon from "PUBLIC_DIR/images/emptyview/empty.rooms.root.dark.svg";
+import EmptyArchiveLightIcon from "PUBLIC_DIR/images/emptyview/empty.archive.light.svg";
+import EmptyArchiveDarkIcon from "PUBLIC_DIR/images/emptyview/empty.archive.dark.svg";
 import EmptyFilterRoomsLightIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.light.svg";
 import EmptyFilterRoomsDarkIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.dark.svg";
 import ClearEmptyFilterSvg from "PUBLIC_DIR/images/clear.empty.filter.svg";
+import FolderReactSvg from "PUBLIC_DIR/images/folder.react.svg";
 
 type RoomsEmptyViewProps = {
   isFiltered: boolean;
+  isArchive?: boolean;
 };
 
-const RoomsEmptyView = ({ isFiltered }: RoomsEmptyViewProps) => {
+const RoomsEmptyView = ({ isFiltered, isArchive }: RoomsEmptyViewProps) => {
   const { t } = useTranslation(["Common"]);
   const { isBase: isBaseTheme } = useTheme();
 
-  const icon = isFiltered ? (
-    isBaseTheme ? (
-      <EmptyFilterRoomsLightIcon />
-    ) : (
-      <EmptyFilterRoomsDarkIcon />
-    )
-  ) : isBaseTheme ? (
-    <EmptyRoomsRootLightIcon />
-  ) : (
-    <EmptyRoomsRootDarkIcon />
-  );
+  const getIcon = () => {
+    if (isFiltered) {
+      return isBaseTheme ? (
+        <EmptyFilterRoomsLightIcon />
+      ) : (
+        <EmptyFilterRoomsDarkIcon />
+      );
+    }
+    if (isArchive) {
+      return isBaseTheme ? <EmptyArchiveLightIcon /> : <EmptyArchiveDarkIcon />;
+    }
+    return isBaseTheme ? <EmptyRoomsRootLightIcon /> : <EmptyRoomsRootDarkIcon />;
+  };
 
   const onResetFilter = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
@@ -78,22 +85,45 @@ const RoomsEmptyView = ({ isFiltered }: RoomsEmptyViewProps) => {
     },
   ];
 
+  const archiveOptions = [
+    {
+      key: "empty-view-go-to-rooms",
+      to: "/rooms",
+      description: t("Common:GoToMyRooms"),
+      icon: <FolderReactSvg />,
+      isNext: true,
+    },
+  ];
+
+  const getTitle = () => {
+    if (isFiltered) return t("Common:NoFindingsFound2");
+    if (isArchive) return t("Common:ArchiveEmptyScreenHeader");
+    return t("Common:EmptyRoomsHeader");
+  };
+
+  const getDescription = () => {
+    if (isFiltered) return t("Common:EmptyFilterRoomsDescription");
+    if (isArchive)
+      return t("Common:ArchiveEmptyScreen", {
+        productName: getBrandName("ProductName"),
+      });
+    return t("Common:EmptyRoomsDescriptionText", {
+      sectionName: t("Common:Rooms"),
+    });
+  };
+
+  const getOptions = () => {
+    if (isFiltered) return filterOptions;
+    if (isArchive) return archiveOptions;
+    return [];
+  };
+
   return (
     <EmptyViewComponent
-      icon={icon}
-      title={
-        isFiltered
-          ? t("Common:NoFindingsFound2")
-          : t("Common:EmptyRoomsHeader")
-      }
-      description={
-        isFiltered
-          ? t("Common:EmptyFilterRoomsDescription")
-          : t("Common:EmptyRoomsDescriptionText", {
-              sectionName: t("Common:Rooms"),
-            })
-      }
-      options={isFiltered ? filterOptions : []}
+      icon={getIcon()}
+      title={getTitle()}
+      description={getDescription()}
+      options={getOptions()}
     />
   );
 };

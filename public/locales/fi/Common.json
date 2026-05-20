@@ -1614,5 +1614,8 @@
   "AIAgentsUnpinned": "{{aiAgents}} kiinnittelemättä",
   "LeaveTheRoom": "Poistu huoneesta",
   "AssignOwner": "Määritä omistaja",
-  "Unpin": "Irrota"
+  "Unpin": "Irrota",
+  "ArchiveEmptyScreenHeader": "Ei vielä arkistoituja huoneita täällä",
+  "ArchiveEmptyScreen": "Voit arkistoida huoneita, joita et käytä ja palauttaa niitä {{productName}}-esi milloin tahansa tai poistaa ne lopullisesti. Nämä huoneet ilmestyvät tähän. ",
+  "GoToMyRooms": "Mene huoneisiin"
 }

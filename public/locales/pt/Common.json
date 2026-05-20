@@ -1614,5 +1614,8 @@
   "AIAgentsUnpinned": "{{aiAgents}} sem fixar",
   "LeaveTheRoom": "Saia da sala",
   "AssignOwner": "Atribuir proprietário",
-  "Unpin": "Desafixar"
+  "Unpin": "Desafixar",
+  "ArchiveEmptyScreenHeader": "Ainda não tem qualquer sala arquivada",
+  "ArchiveEmptyScreen": "Pode arquivar salas que não utiliza e restaurá-las no seu {{productName}} a qualquer momento ou apagá-las permanentemente. Estas salas aparecerão aqui.",
+  "GoToMyRooms": "Ir para As Minhas Salas"
 }

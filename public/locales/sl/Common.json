@@ -1614,5 +1614,8 @@
   "AIAgentsUnpinned": "{{aiAgents}} brez prikritja",
   "LeaveTheRoom": "Zapusti sobo",
   "AssignOwner": "Dodeli lastnika",
-  "Unpin": "Odpni"
+  "Unpin": "Odpni",
+  "ArchiveEmptyScreenHeader": "Tukaj še ni arhiviranih sob",
+  "ArchiveEmptyScreen": "Sobe, ki jih ne uporabljate, lahko kadar koli arhivirate in obnovite v svojem {{productName}} ali pa jih trajno izbrišete. Te sobe bodo prikazane tukaj.",
+  "GoToMyRooms": "Pojdi na sobe"
 }

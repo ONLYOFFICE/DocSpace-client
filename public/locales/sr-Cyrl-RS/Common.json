@@ -1614,5 +1614,8 @@
   "AIAgentsUnpinned": "{{aiAgents}} неприкачен",
   "LeaveTheRoom": "Напусти собу",
   "AssignOwner": "Додели Власника",
-  "Unpin": "Откачи"
+  "Unpin": "Откачи",
+  "ArchiveEmptyScreenHeader": "Нема архивираних соба овде још",
+  "ArchiveEmptyScreen": "Можете да архивирате собе које не користите и да их повратите у свој {{productName}} у било ком тренутку или да их трајно обришете. Ове собе ц́е се појавити овде.",
+  "GoToMyRooms": "Иди у собе"
 }

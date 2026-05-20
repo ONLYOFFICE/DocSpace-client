@@ -1614,5 +1614,8 @@
   "AIAgentsUnpinned": "{{aiAgents}} غير مثبت",
   "LeaveTheRoom": "مغادرة الغرفة",
   "AssignOwner": "تعيين مالك",
-  "Unpin": "إلغاء التثبيت"
+  "Unpin": "إلغاء التثبيت",
+  "ArchiveEmptyScreenHeader": "لا توجد غرف مؤرشفة هنا حتى الآن",
+  "ArchiveEmptyScreen": "يمكنك أرشفة الغرف التي لا تستخدمها واستعادتها في {{productName}} في أي لحظة أو حذفها نهائيًا. ستظهر هذه الغرف هنا.",
+  "GoToMyRooms": "اذهب إلى الغرف"
 }

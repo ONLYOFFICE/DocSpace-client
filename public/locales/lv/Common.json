@@ -1614,5 +1614,8 @@
   "AIAgentsUnpinned": "{{aiAgents}} nepivienoti",
   "LeaveTheRoom": "Pamest telpu",
   "AssignOwner": "Piešķirt īpašnieku",
-  "Unpin": "Atspraust"
+  "Unpin": "Atspraust",
+  "ArchiveEmptyScreenHeader": "Šeit vēl nav nevienas arhivētas telpas",
+  "ArchiveEmptyScreen": "Jūs jebkurā brīdī varat arhivēt neizmantotās telpas un atjaunot tās savā {{productName}} vai neatgriezeniski izdzēst. Šeit parādīsies šīs telpas.",
+  "GoToMyRooms": "Doties uz telpas"
 }

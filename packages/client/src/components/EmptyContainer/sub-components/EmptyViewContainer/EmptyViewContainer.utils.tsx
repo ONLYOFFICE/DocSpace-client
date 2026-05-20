@@ -297,7 +297,7 @@ export const getRootDescription = (
       t("EmptyView:EmptyFavoritesDescription"),
     )
     .with([FolderType.Archive, ShareAccessRights.None], () =>
-      t("Files:ArchiveEmptyScreen", {
+      t("Common:ArchiveEmptyScreen", {
         productName: getBrandName("ProductName"),
       }),
     )
@@ -789,3 +789,4 @@ export const helperOptions = (
     createUploadFromDeviceOption,
   };
 };
+

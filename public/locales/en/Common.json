@@ -1629,5 +1629,8 @@
   "AIAgentsUnpinned": "{{aiAgents}} unpinned",
   "LeaveTheRoom": "Leave the room",
   "AssignOwner": "Assign Owner",
-  "Unpin": "Unpin"
+  "Unpin": "Unpin",
+  "ArchiveEmptyScreenHeader": "No archived rooms here yet",
+  "ArchiveEmptyScreen": "You can archive rooms you don’t use and restore them in your {{productName}} at any moment or delete them permanently. These rooms will appear here.",
+  "GoToMyRooms": "Go to rooms"
 }

@@ -1614,5 +1614,8 @@
   "AIAgentsUnpinned": "{{aiAgents}} niet vastgepind",
   "LeaveTheRoom": "Verlaat de kamer",
   "AssignOwner": "Eigenaar Toewijzen",
-  "Unpin": "Unpin"
+  "Unpin": "Unpin",
+  "ArchiveEmptyScreenHeader": "Er zijn hier nog geen gearchiveerde kamers",
+  "ArchiveEmptyScreen": "U kunt ruimtes die u niet gebruikt archiveren en op elk moment in uw {{productName}} herstellen of definitief verwijderen. Deze kamers worden hier weergegeven.",
+  "GoToMyRooms": "Ga naar kamers"
 }

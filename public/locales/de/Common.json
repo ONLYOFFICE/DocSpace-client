@@ -1614,5 +1614,8 @@
   "AIAgentsUnpinned": "{{aiAgents}} nicht angeheftet",
   "LeaveTheRoom": "Raum verlassen",
   "AssignOwner": "Besitzer zuweisen",
-  "Unpin": "Entpinnen"
+  "Unpin": "Entpinnen",
+  "ArchiveEmptyScreenHeader": "Noch keine archivierten Räume hier",
+  "ArchiveEmptyScreen": "Sie können Räume, die Sie nicht benutzen, archivieren und jederzeit in Ihrem {{productName}} wiederherstellen oder dauerhaft löschen. Diese Räume werden hier angezeigt.",
+  "GoToMyRooms": "Zu Räume"
 }

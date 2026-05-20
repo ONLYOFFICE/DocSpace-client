@@ -1614,5 +1614,8 @@
   "AIAgentsUnpinned": "{{aiAgents}} sem fixar",
   "LeaveTheRoom": "Saia da sala",
   "AssignOwner": "Proprietário da sala",
-  "Unpin": "Desafixar"
+  "Unpin": "Desafixar",
+  "ArchiveEmptyScreenHeader": "Ainda não há salas arquivadas aqui",
+  "ArchiveEmptyScreen": "Você pode arquivar salas que não usa e restaurá-las em seu {{productName}} a qualquer momento ou excluí-las permanentemente. Esses quartos aparecerão aqui.",
+  "GoToMyRooms": "Ir para minhas salas"
 }

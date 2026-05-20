@@ -1614,5 +1614,8 @@
   "AIAgentsUnpinned": "{{aiAgents}} pinlənməmiş",
   "LeaveTheRoom": "Otağı tərk edin",
   "AssignOwner": "Sahibi təyin edin",
-  "Unpin": "Sabitləmədən çıxarın"
+  "Unpin": "Sabitləmədən çıxarın",
+  "ArchiveEmptyScreenHeader": "Burada hələ arxivləşdirilmiş otaqlar yoxdur",
+  "ArchiveEmptyScreen": "Siz {{productName}}-də istifadə etmədiyiniz otaqları arxivləşdirə və bərpa edə və ya istənilən vaxt onları həmişəlik silə bilərsiniz. Bu otaqlar burada görünəcək.",
+  "GoToMyRooms": "Otaqlarım bölməsinə keçin"
 }

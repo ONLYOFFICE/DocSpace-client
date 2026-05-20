@@ -1614,5 +1614,8 @@
   "AIAgentsUnpinned": "{{aiAgents}} neprinutené",
   "LeaveTheRoom": "Opustiť miestnosť",
   "AssignOwner": "Prideliť vlastníka",
-  "Unpin": "Odopnúť"
+  "Unpin": "Odopnúť",
+  "ArchiveEmptyScreenHeader": "Zatiaľ tu nie sú žiadne archivované miestnosti",
+  "ArchiveEmptyScreen": "Miestnosti, ktoré nepoužívate, môžete kedykoľvek archivovať a obnoviť vo svojom {{productName}} alebo ich natrvalo vymazať. Tieto miestnosti sa objavia tu.",
+  "GoToMyRooms": "Prejdite do miestnosti"
 }

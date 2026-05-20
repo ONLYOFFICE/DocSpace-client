@@ -1614,5 +1614,8 @@
   "AIAgentsUnpinned": "{{aiAgents}} non fissati",
   "LeaveTheRoom": "Lascia la stanza",
   "AssignOwner": "Assegna proprietario",
-  "Unpin": "Rimuovi pin"
+  "Unpin": "Rimuovi pin",
+  "ArchiveEmptyScreenHeader": "Non ci sono ancora stanze archiviate qui",
+  "ArchiveEmptyScreen": "Puoi archiviare le stanze che non usi e ripristinarle nel tuo {{productName}} in qualsiasi momento o eliminarle definitivamente. Queste stanze appariranno qui.",
+  "GoToMyRooms": "Vai alle stanze"
 }

@@ -1614,5 +1614,8 @@
   "AIAgentsUnpinned": "ピン留めされていない {{aiAgents}}",
   "LeaveTheRoom": "退室する",
   "AssignOwner": "所有者の割り当て",
-  "Unpin": "固定の削除"
+  "Unpin": "固定の削除",
+  "ArchiveEmptyScreenHeader": "アーカイブ済みのルームがありません",
+  "ArchiveEmptyScreen": "使わないルームはアーカイブして、いつでも{{productName}}に復元したり、永久に削除することができます。そのルームはここに表示されます。",
+  "GoToMyRooms": "「ルーム」へ"
 }

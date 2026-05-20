@@ -1614,5 +1614,8 @@
   "AIAgentsUnpinned": "{{aiAgents}} sin anclar",
   "LeaveTheRoom": "Salir de la sala",
   "AssignOwner": "Asignar propietario",
-  "Unpin": "Desanclar"
+  "Unpin": "Desanclar",
+  "ArchiveEmptyScreenHeader": "Todavía no hay salas archivadas aquí",
+  "ArchiveEmptyScreen": "Puede archivar las salas que no utiliza y restaurarlas en su {{productName}} en cualquier momento o eliminarlas definitivamente. Estas salas aparecerán aquí.",
+  "GoToMyRooms": "Ir a Salas"
 }

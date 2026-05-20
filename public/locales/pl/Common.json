@@ -1614,5 +1614,8 @@
   "AIAgentsUnpinned": "{{aiAgents}} nieprzypięte",
   "LeaveTheRoom": "Opuść pokój",
   "AssignOwner": "Przypisz właściciela",
-  "Unpin": "Odepnij"
+  "Unpin": "Odepnij",
+  "ArchiveEmptyScreenHeader": "Brak zarchiwizowanych pokoi",
+  "ArchiveEmptyScreen": "Możesz archiwizować pokoje, których nie używasz i przywracać je do {{productName}} w dowolnej chwili lub usuwać na stałe. Pokoje te pojawią się tutaj.",
+  "GoToMyRooms": "Przejdź do pokoi"
 }

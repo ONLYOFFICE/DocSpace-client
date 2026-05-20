@@ -441,7 +441,7 @@
   "DashboardInstallStepUploadLibraryProgress": "{{percent}}% ladattu",
   "DashboardInstallTitle": "Asenna {{module}}",
   "DashboardModulesBannerText": "Jokainen sovellus on lisensoitu erikseen — asenna vain työnkulkuusi sopivat",
-  "DashboardModulesSubtitle": "Laajenna DocSpace-tilan Premium-moduuleilla",
+  "DashboardModulesSubtitle": "Laajenna {{productName}}-tilan Premium-moduuleilla",
   "DataBackup": "Tietojen varmuuskopiointi",
   "DatabaseHost": "Palvelin",
   "DatabaseName": "Tietokannan nimi",

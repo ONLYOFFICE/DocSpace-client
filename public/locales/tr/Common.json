@@ -441,7 +441,7 @@
   "DashboardInstallStepUploadLibraryProgress": "{{percent}}% yüklendi",
   "DashboardInstallTitle": "{{module}} yükle",
   "DashboardModulesBannerText": "Her uygulama ayrı ayrı lisanslanır — yalnızca iş akışınıza uyan uygulamaları yükleyin",
-  "DashboardModulesSubtitle": "DocSpace'i premium modüllerle genişletin",
+  "DashboardModulesSubtitle": "{{productName}}'i premium modüllerle genişletin",
   "DataBackup": "Veri yedekleme",
   "DatabaseHost": "Sunucu",
   "DatabaseName": "Veritabanı adı",

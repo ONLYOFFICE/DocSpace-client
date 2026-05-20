@@ -441,7 +441,7 @@
   "DashboardInstallStepUploadLibraryProgress": "{{percent}}% تم التحميل",
   "DashboardInstallTitle": "تثبيت {{module}}",
   "DashboardModulesBannerText": "كل تطبيق مرخَّص بشكل منفصل — ثبِّت فقط ما يناسب سير عملك",
-  "DashboardModulesSubtitle": "وسِّع DocSpace باستخدام الوحدات المميزة",
+  "DashboardModulesSubtitle": "وسِّع {{productName}} باستخدام الوحدات المميزة",
   "DataBackup": "النسخ الاحتياطي للبيانات",
   "DatabaseHost": "المستضيف",
   "DatabaseName": "اسم قاعدة البيانات",

@@ -38,6 +38,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import { TwoStateToggle } from "@docspace/ui-kit/components/two-state-toggle";
 import { getPersonalFolderTree } from "@docspace/shared/api/files";
 import { getConstName } from "@docspace/shared/constants/consts";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 import {
   BlankPdfIcon,
@@ -208,7 +209,9 @@ const Dashboard = ({
           {t("Common:Modules")}
         </Text>
         <Text as="p" className={styles.sectionSubtitle}>
-          {t("Common:DashboardModulesSubtitle")}
+          {t("Common:DashboardModulesSubtitle", {
+              productName: getBrandName("ProductName"),
+            })}
         </Text>
 
         <div

@@ -441,7 +441,7 @@
   "DashboardInstallStepUploadLibraryProgress": "{{percent}}% naloženo",
   "DashboardInstallTitle": "Namesti {{module}}",
   "DashboardModulesBannerText": "Vsaka aplikacija je licencirana ločeno — namestite samo tisto, kar ustreza vašemu delovnemu toku",
-  "DashboardModulesSubtitle": "Razširite DocSpace s premium moduli",
+  "DashboardModulesSubtitle": "Razširite {{productName}} s premium moduli",
   "DataBackup": "Varnostno kopiranje podatkov",
   "DatabaseHost": "Gostitelj",
   "DatabaseName": "Ime baze podatkov",

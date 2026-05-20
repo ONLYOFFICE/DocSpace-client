@@ -71,12 +71,7 @@ const BASE_LANGUAGES = [
 ];
 
 const forbiddenElements = ["ONLYOFFICE", "DOCSPACE"];
-const skipForbiddenKeys = [
-  "OrganizationName",
-  "ProductName",
-  "ProductEditorsName",
-  "OnlyofficeDesktopEditors",
-];
+const skipForbiddenKeys = [];
 
 // Brand/product keys and constants — injected at runtime, not in JSON locale files.
 // Skip these in per-language completeness and forbidden-elements checks.
@@ -364,7 +359,7 @@ beforeAll(() => {
 
     moduleFolders.push({
       path: wsPath,
-      isCommon: wsPath.includes("public/locales"),
+      isCommon: wsPath.includes(path.join("public", "locales")),
       availableLanguages: t?.languages,
       appliedJsTranslationKeys: j?.translationKeys,
     });
@@ -894,10 +889,8 @@ describe("Locales Tests", () => {
     let i = 0;
     const forbiddenEntries = [];
 
-    moduleFolders.forEach((module) => {
-      if (!module.availableLanguages || module.isCommon) return;
-
-      module.availableLanguages.forEach((lng) => {
+    const checkLanguages = (languages) => {
+      languages.forEach((lng) => {
         const translationItems = lng.translations
           .filter((elem) => !skipForbiddenKeys.includes(elem.key))
           .filter((f) => {
@@ -923,7 +916,14 @@ describe("Locales Tests", () => {
           forbiddenEntries.push({ filePath: lng.path, key: t.key });
         });
       });
+    };
+
+    moduleFolders.forEach((module) => {
+      if (!module.availableLanguages) return;
+      checkLanguages(module.availableLanguages);
     });
+
+    checkLanguages(commonTranslations);
 
     clearWrongKeys(forbiddenEntries, "forbidden value keys");
 

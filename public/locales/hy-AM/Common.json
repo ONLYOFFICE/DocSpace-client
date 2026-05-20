@@ -441,7 +441,7 @@
   "DashboardInstallStepUploadLibraryProgress": "{{percent}}% բեռնված է",
   "DashboardInstallTitle": "Տեղադրել {{module}}",
   "DashboardModulesBannerText": "Յուրաքանչյուր հավելված լիցենզավորվում է առանձին — տեղադրեք միայն ձեր աշխատանքային հոսքին հարմար հավելվածները",
-  "DashboardModulesSubtitle": "Ընդլայնեք ձեր DocSpace-ը պրեմիում մոդուլներով",
+  "DashboardModulesSubtitle": "Ընդլայնեք ձեր {{productName}}-ը պրեմիում մոդուլներով",
   "DataBackup": "Տվյալների կրկնօրինակում",
   "DatabaseHost": "Հյուրընկալող",
   "DatabaseName": "Տվյալների բազայի անվանումը",

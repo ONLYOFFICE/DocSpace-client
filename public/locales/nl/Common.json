@@ -441,7 +441,7 @@
   "DashboardInstallStepUploadLibraryProgress": "{{percent}}% geüpload",
   "DashboardInstallTitle": "{{module}} installeren",
   "DashboardModulesBannerText": "Elke app wordt afzonderlijk gelicentieerd — installeer alleen wat bij uw workflow past",
-  "DashboardModulesSubtitle": "Breid DocSpace uit met premium modules",
+  "DashboardModulesSubtitle": "Breid {{productName}} uit met premium modules",
   "DataBackup": "Data backup",
   "DatabaseHost": "Host",
   "DatabaseName": "Database naam",

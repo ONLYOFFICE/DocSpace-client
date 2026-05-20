@@ -441,7 +441,7 @@
   "DashboardInstallStepUploadLibraryProgress": "{{percent}}% アップロード済み",
   "DashboardInstallTitle": "{{module}}をインストール",
   "DashboardModulesBannerText": "各アプリは個別にライセンスされています — ワークフローに合ったものだけをインストールしてください",
-  "DashboardModulesSubtitle": "プレミアムモジュールでDocSpaceを拡張する",
+  "DashboardModulesSubtitle": "プレミアムモジュールで{{productName}}を拡張する",
   "DataBackup": "データのバックアップ",
   "DatabaseHost": "ホスト",
   "DatabaseName": "データベース名",

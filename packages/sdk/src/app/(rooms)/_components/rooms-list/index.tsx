@@ -81,6 +81,8 @@ type RoomsListProps = {
   current: TFolder;
   user?: TUser;
   isArchive?: boolean;
+  createDialogVisible?: boolean;
+  onCloseCreateDialog?: () => void;
 };
 
 const RoomsList = ({
@@ -93,6 +95,8 @@ const RoomsList = ({
   current,
   user,
   isArchive,
+  createDialogVisible,
+  onCloseCreateDialog,
 }: RoomsListProps) => {
   const timezone = portalSettings.timezone;
   const searchParams = useSearchParams();
@@ -592,6 +596,10 @@ const RoomsList = ({
         onClose={() => setEditingRoom(null)}
         room={editingRoomData}
         onRoomEdited={refreshSingleRoom}
+      />
+      <CreateEditRoomDialog
+        visible={!!createDialogVisible}
+        onClose={() => onCloseCreateDialog?.()}
       />
       {changingOwnerRoom ? (
         <ChangeRoomOwnerDialog

@@ -59,7 +59,6 @@ import useFrameHeaderConfig from "@/hooks/useFrameHeaderConfig";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 
 import RoomsList from "../rooms-list";
-import CreateRoomDialog from "../create-edit-room-dialog";
 
 import styles from "./RoomsLayout.module.scss";
 
@@ -98,6 +97,10 @@ const RoomsLayout = observer(
 
     const createCustomRoom = React.useCallback(() => {
       setIsCreateRoomDialogVisible(true);
+    }, []);
+
+    const closeCreateRoomDialog = React.useCallback(() => {
+      setIsCreateRoomDialogVisible(false);
     }, []);
 
     const quickActionItems = React.useMemo<QuickActionItem[]>(
@@ -180,6 +183,8 @@ const RoomsLayout = observer(
                 current={current}
                 user={user}
                 isArchive={isArchive}
+                createDialogVisible={isCreateRoomDialogVisible}
+                onCloseCreateDialog={closeCreateRoomDialog}
               />
             }
             isEmptyPage={isEmptyList}
@@ -188,10 +193,6 @@ const RoomsLayout = observer(
           <SelectionArea />
           <DeviceTypeObserver />
         </RootScrollbar>
-        <CreateRoomDialog
-          visible={isCreateRoomDialogVisible}
-          onClose={() => setIsCreateRoomDialogVisible(false)}
-        />
       </div>
     );
   },

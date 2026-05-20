@@ -101,7 +101,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const storeItem = filesListStore.items.find((i) => i.id === item.id);
   const observableItem = storeItem ?? item;
 
-  const { openFile } = useFilesActions({ t });
+  const { openFile, lockFile } = useFilesActions({ t });
   const { openFolder } = useFolderActions({ t });
   const onShareClick = React.useContext(ShareContext);
   const onInfoClick = React.useContext(InfoContext);
@@ -181,6 +181,12 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
     }
   };
 
+  const onClickLock = () => {
+    if (!observableItem.isFolder) {
+      lockFile(observableItem as TFileItem);
+    }
+  };
+
   const badgesComponent = (
     <Badges
       t={t}
@@ -194,6 +200,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
         }
       }}
       onClickFavorite={onClickFavorite}
+      onClickLock={onClickLock}
       onShowVersionHistory={
         !observableItem.isFolder && onShowVersionHistory
           ? () => onShowVersionHistory(observableItem as TFileItem)
@@ -213,6 +220,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
       viewAs="tile"
       onClickDownload={() => downloadAction(observableItem)}
       onClickFavorite={onClickFavorite}
+      onClickLock={onClickLock}
       onClickShare={onShareClick ? handleShareClick : undefined}
       openShareTab={onShareClick ? handleShareClick : undefined}
     />

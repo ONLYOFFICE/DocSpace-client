@@ -13,6 +13,7 @@ import { useMediaViewerStore } from "@/app/(docspace)/_store/MediaViewerStore";
 
 import { OpenFileContext } from "../_contexts/OpenFileContext";
 import { useFilesSettingsStore } from "../_store/FilesSettingsStore";
+import { useFilesListStore } from "../_store/FilesListStore";
 import { useSettingsStore } from "../_store/SettingsStore";
 
 type UseFilesActionsProps = { t: TTranslation };
@@ -22,6 +23,7 @@ export default function useFilesActions({ t }: UseFilesActionsProps) {
   const { filesSettings } = useFilesSettingsStore();
   const { shareKey } = useSettingsStore();
   const { setMediaViewerData } = useMediaViewerStore();
+  const filesListStore = useFilesListStore();
   const openFileOverride = React.useContext(OpenFileContext);
 
   const openFile = React.useCallback(
@@ -103,5 +105,20 @@ export default function useFilesActions({ t }: UseFilesActionsProps) {
     [t],
   );
 
-  return { openFile, copyFileLink };
+  const lockFile = React.useCallback(
+    async (file: TFileItem) => {
+      const nextLocked = !file.locked;
+      try {
+        await api.files.lockFile(file.id as number, nextLocked);
+        filesListStore.updateItemLocked(file.id, nextLocked);
+      } catch (error) {
+        toastr.error(
+          error instanceof Error ? error.message : String(error),
+        );
+      }
+    },
+    [filesListStore],
+  );
+
+  return { openFile, copyFileLink, lockFile };
 }

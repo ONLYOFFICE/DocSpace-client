@@ -18,6 +18,7 @@ export enum AVAILABLE_CONTEXT_ITEMS {
   share = "share",
   showInfo = "show-info",
   showVersionHistory = "show-version-history",
+  blockUnblockVersion = "block-unblock-version",
   copy = "copy",
   duplicate = "duplicate",
   moveTo = "move-to",

@@ -79,7 +79,7 @@ const TableViewRow = observer(
 
     const { t, i18n } = useTranslation(["Common"]);
     const { isBase } = useTheme();
-    const { openFile } = useFilesActions({ t });
+    const { openFile, lockFile } = useFilesActions({ t });
     const { openFolder } = useFolderActions({ t });
     const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });
     const onShareClick = React.useContext(ShareContext);
@@ -161,6 +161,12 @@ const TableViewRow = observer(
       }
     }, [observableItem, markAsFavorite, removeFromFavorites]);
 
+    const onClickLock = React.useCallback(() => {
+      if (!observableItem.isFolder) {
+        lockFile(observableItem as TFileItem);
+      }
+    }, [observableItem, lockFile]);
+
     const handleShareClick = React.useCallback(() => {
       onShareClick?.(observableItem);
     }, [onShareClick, observableItem]);
@@ -184,6 +190,7 @@ const TableViewRow = observer(
             }
           }}
           onClickFavorite={onClickFavorite}
+          onClickLock={onClickLock}
           onShowVersionHistory={
             !observableItem.isFolder && onShowVersionHistory
               ? () => onShowVersionHistory(observableItem as TFileItem)
@@ -200,6 +207,7 @@ const TableViewRow = observer(
           item={itemSnapshot}
           viewAs="table"
           onClickFavorite={onClickFavorite}
+          onClickLock={onClickLock}
           onClickShare={onShareClick ? handleShareClick : undefined}
           openShareTab={onShareClick ? handleShareClick : undefined}
         />

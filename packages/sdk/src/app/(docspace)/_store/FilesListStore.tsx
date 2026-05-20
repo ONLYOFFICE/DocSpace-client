@@ -63,6 +63,11 @@ class FilesListStore {
     if (item) item.isFavorite = isFavorite;
   };
 
+  updateItemLocked = (id: number | string, locked: boolean) => {
+    const item = this.items.find((i) => i.id === id);
+    if (item && "locked" in item) item.locked = locked;
+  };
+
   removeItem = (id: number | string) => {
     this.items = this.items.filter((i) => i.id !== id);
   };

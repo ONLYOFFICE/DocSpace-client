@@ -24,6 +24,7 @@ import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
 import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
+import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 
 import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
 import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
@@ -72,7 +73,7 @@ export default function useContextMenuModel({
   const filesSelectionStore = useFilesSelectionStore();
 
   const { openFolder, copyFolderLink } = useFolderActions({ t });
-  const { openFile, copyFileLink } = useFilesActions({ t });
+  const { openFile, copyFileLink, lockFile } = useFilesActions({ t });
   const { downloadAction, downloadAsAction } = useDownloadActions();
   const {
     markAsFavorite,
@@ -356,6 +357,20 @@ export default function useContextMenuModel({
       };
     },
     [t, onShowVersionHistoryClick],
+  );
+
+  const getBlockUnblockVersionItem = useCallback(
+    (i: TFileItem) => {
+      return {
+        id: "option_block-unblock-version",
+        key: "block-unblock-version",
+        label: i.locked ? t("Common:UnblockFile") : t("Common:BlockFile"),
+        icon: LockedReactSvgUrl,
+        onClick: () => lockFile(i),
+        disabled: false,
+      };
+    },
+    [t, lockFile],
   );
 
   const getShowInfoItem = useCallback(
@@ -659,6 +674,12 @@ export default function useContextMenuModel({
       )
         actionGroup.push(getShowVersionHistoryItem(item as TFileItem));
 
+      if (
+        contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.blockUnblockVersion) &&
+        !("isFolder" in item! && item!.isFolder)
+      )
+        actionGroup.push(getBlockUnblockVersionItem(item as TFileItem));
+
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.showInfo))
         actionGroup.push(getShowInfoItem(item!));
 
@@ -726,6 +747,7 @@ export default function useContextMenuModel({
       getRestoreItem,
       getShowInfoItem,
       getShowVersionHistoryItem,
+      getBlockUnblockVersionItem,
       getDeleteItem,
       getHeaderContextMenuModel,
       getGroupContextMenuModel,

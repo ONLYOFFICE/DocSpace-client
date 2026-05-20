@@ -34,3 +34,4 @@
  */
 
 export { DocsChatHeaderPanel } from "./AiChatHeaderPanel";
+export { DocsChatBody } from "./DocsChatBody";

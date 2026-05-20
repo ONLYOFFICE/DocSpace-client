@@ -33,43 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect } from "react";
 import { observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import { AiChatPanelBody } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
 
-import { AiChatPanelHeader } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
-import { useStores } from "@docspace/ui-kit/ai-agent/providers";
-
-import { useAiChatPanelStore } from "../../_store/AiChatStore";
-
-export const DocsChatHeaderPanel = observer(() => {
-  const { toggleFullscreen, isFullscreen, setFullscreen, close } =
-    useAiChatPanelStore();
-  const { t } = useTranslation(["Common"]);
-
-  const stores = useStores();
-  const currentPage = stores.useRouter((s) => s.currentPage);
-  const goToChat = stores.useRouter((s) => s.goToChat);
-  const isSettingsPage = currentPage === "settings";
-
-  useEffect(() => {
-    if (isSettingsPage && !isFullscreen) {
-      setFullscreen(true);
-    }
-  }, [isSettingsPage, isFullscreen, setFullscreen]);
-
-  const handleClose = () => {
-    goToChat();
-    close();
-  };
-
-  return (
-    <AiChatPanelHeader
-      title={t("Common:AIChatButton")}
-      onClose={handleClose}
-      isFullscreen={isFullscreen}
-      onToggleFullscreen={toggleFullscreen}
-      isFullscreenToggleDisabled={isSettingsPage}
-    />
-  );
+export const DocsChatBody = observer(() => {
+  return <AiChatPanelBody />;
 });
+

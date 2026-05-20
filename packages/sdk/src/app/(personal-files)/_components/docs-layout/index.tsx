@@ -58,11 +58,6 @@ import type {
 import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
-import {
-  AiChatPanelHeader,
-  AiChatPanelBody,
-} from "@docspace/ui-kit/ai-agent/ai-chat-panel";
-
 import { SectionWrapper } from "@/app/(docspace)/_components/section";
 import Header from "@/app/(docspace)/_components/header";
 import useFrameHeaderConfig from "@/hooks/useFrameHeaderConfig";
@@ -109,6 +104,7 @@ import {
 import styles from "./DocsLayout.module.scss";
 import PersonalFilesAiAgentProviders from "../ai-agent-providers";
 import { DocsChatHeaderPanel } from "../ai-chat-panel/AiChatHeaderPanel";
+import { DocsChatBody } from "../ai-chat-panel/DocsChatBody";
 import AiChatTrigger from "../ai-chat-panel/AiChatTrigger";
 import { useAiChatPanelStore } from "../../_store/AiChatStore";
 
@@ -367,7 +363,7 @@ const DocsLayout = observer(
                             }
                             infoPanelBodyContent={
                               isAiChatPanelVisible ? (
-                                <AiChatPanelBody />
+                                <DocsChatBody />
                               ) : (
                                 <DocsInfoPanelBody />
                               )
@@ -375,6 +371,7 @@ const DocsLayout = observer(
                             isInfoPanelVisible={
                               infoPanelStore.isVisible || isAiChatPanelVisible
                             }
+                            infoPanelWithoutScroll={isAiChatPanelVisible}
                             setIsInfoPanelVisible={setIsInfoPanelVisible}
                             isEmptyPage={isEmptyList}
                             filesFilter={filesFilter}

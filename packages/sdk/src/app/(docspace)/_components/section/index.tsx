@@ -53,6 +53,7 @@ type SectionProps = {
   infoPanelHeaderContent?: React.ReactNode;
   infoPanelBodyContent?: React.ReactNode;
   isInfoPanelVisible?: boolean;
+  infoPanelWithoutScroll?: boolean;
   setIsInfoPanelVisible?: (visible: boolean) => void;
 
   isEmptyPage: boolean;
@@ -71,6 +72,7 @@ export const SectionWrapper = observer(
     infoPanelHeaderContent,
     infoPanelBodyContent,
     isInfoPanelVisible,
+    infoPanelWithoutScroll,
     setIsInfoPanelVisible,
     isEmptyPage,
     filesFilter,
@@ -94,9 +96,7 @@ export const SectionWrapper = observer(
 
     const isEmptyList = settingsStore.isEmptyList || isEmptyPage;
 
-    const showInfoPanel = !!(
-      infoPanelHeaderContent || infoPanelBodyContent
-    );
+    const showInfoPanel = !!(infoPanelHeaderContent || infoPanelBodyContent);
 
     return (
       <Section
@@ -107,6 +107,7 @@ export const SectionWrapper = observer(
         currentDeviceType={currentDeviceType}
         isInfoPanelAvailable={showInfoPanel}
         isInfoPanelVisible={isInfoPanelVisible}
+        infoPanelWithoutScroll={infoPanelWithoutScroll}
         setIsInfoPanelVisible={setIsInfoPanelVisible}
         canDisplay={showInfoPanel}
       >
@@ -118,7 +119,9 @@ export const SectionWrapper = observer(
 
         <Section.SectionBody>{sectionBodyContent}</Section.SectionBody>
 
-        <Section.InfoPanelHeader>{infoPanelHeaderContent}</Section.InfoPanelHeader>
+        <Section.InfoPanelHeader>
+          {infoPanelHeaderContent}
+        </Section.InfoPanelHeader>
         <Section.InfoPanelBody>{infoPanelBodyContent}</Section.InfoPanelBody>
       </Section>
     );

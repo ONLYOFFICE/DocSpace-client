@@ -121,6 +121,7 @@ const NewArticle = ({
   });
 
   const isAdminOrOwner = (user?.isAdmin ?? false) || (user?.isOwner ?? false);
+  const canCreateForms = !(user?.isVisitor ?? false) && !(user?.isCollaborator ?? false);
 
   const activeId = React.useMemo(() => {
     const section = new URLSearchParams(location.search).get("section") ?? "";
@@ -221,12 +222,16 @@ const NewArticle = ({
               icon: FormGalleryReactSvgUrl,
               onClick: () => navigate("/ai-forms?section=completed-forms"),
             },
-            {
-              id: "ai-forms-library",
-              label: t("Common:Library"),
-              icon: FormGalleryReactSvgUrl,
-              onClick: () => navigate("/ai-forms?section=library"),
-            },
+            ...(canCreateForms
+              ? [
+                  {
+                    id: "ai-forms-library",
+                    label: t("Common:Library"),
+                    icon: FormGalleryReactSvgUrl,
+                    onClick: () => navigate("/ai-forms?section=library"),
+                  },
+                ]
+              : []),
             ...(isAdminOrOwner
               ? [
                   {
@@ -287,6 +292,7 @@ const NewArticle = ({
     t,
     navigate,
     isAdminOrOwner,
+    canCreateForms,
     aiFilesEnabled,
     aiFormsEnabled,
     aiRoomsEnabled,

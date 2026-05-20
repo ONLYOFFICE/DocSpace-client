@@ -59,6 +59,7 @@ import styles from "./Dashboard.module.scss";
 interface DashboardProps {
   firstName?: string;
   pricingUrl?: string;
+  isAdminOrOwner: boolean;
   isAppEnabled: (id: string) => boolean;
   activate: (id: string) => Promise<boolean>;
   ensureAppsLoaded: () => void;
@@ -67,6 +68,7 @@ interface DashboardProps {
 const Dashboard = ({
   firstName,
   pricingUrl,
+  isAdminOrOwner,
   isAppEnabled,
   activate,
   ensureAppsLoaded,
@@ -176,14 +178,16 @@ const Dashboard = ({
     return <Navigate to="/dashboard" replace />;
   }
 
-  const moduleItems: ModuleItem[] = appsCatalog.map((app) => ({
-    id: app.id,
-    icon: app.icon,
-    title: app.title,
-    description: app.description,
-    installed: app.alwaysOn ? true : isAppEnabled(app.id),
-    href: app.href,
-  }));
+  const moduleItems: ModuleItem[] = appsCatalog
+    .map((app) => ({
+      id: app.id,
+      icon: app.icon,
+      title: app.title,
+      description: app.description,
+      installed: app.alwaysOn ? true : isAppEnabled(app.id),
+      href: app.href,
+    }))
+    .filter((mod) => isAdminOrOwner || mod.installed);
 
   return (
     <div className={styles.dashboard}>
@@ -208,46 +212,50 @@ const Dashboard = ({
         <Text as="h2" className={styles.sectionTitle}>
           {t("Common:Modules")}
         </Text>
-        <Text as="p" className={styles.sectionSubtitle}>
-          {t("Common:DashboardModulesSubtitle", {
+        {isAdminOrOwner && (
+          <Text as="p" className={styles.sectionSubtitle}>
+            {t("Common:DashboardModulesSubtitle", {
               productName: getBrandName("ProductName"),
             })}
-        </Text>
+          </Text>
+        )}
 
-        <div
-          className={styles.modulesBanner}
-          style={
-            {
-              "--modules-banner-bg": `url('${BgPatternGreenUrl}')`,
-            } as React.CSSProperties
-          }
-        >
-          <div className={styles.modulesBannerText}>
-            <Text as="p" className={styles.modulesBannerTitle}>
-              {t("Common:DashboardModulesBannerText")}
-            </Text>
-            <div className={styles.modulesBannerTags}>
-              <Text as="span" className={styles.modulesBannerTag}>
-                {t("Common:NoBundlesRequired")}
+        {isAdminOrOwner && (
+          <div
+            className={styles.modulesBanner}
+            style={
+              {
+                "--modules-banner-bg": `url('${BgPatternGreenUrl}')`,
+              } as React.CSSProperties
+            }
+          >
+            <div className={styles.modulesBannerText}>
+              <Text as="p" className={styles.modulesBannerTitle}>
+                {t("Common:DashboardModulesBannerText")}
               </Text>
-              <Text as="span" className={styles.modulesBannerTag}>
-                {t("Common:AddOrRemoveAnytime")}
-              </Text>
-              <Text as="span" className={styles.modulesBannerTag}>
-                {t("Common:PayPerModule")}
-              </Text>
+              <div className={styles.modulesBannerTags}>
+                <Text as="span" className={styles.modulesBannerTag}>
+                  {t("Common:NoBundlesRequired")}
+                </Text>
+                <Text as="span" className={styles.modulesBannerTag}>
+                  {t("Common:AddOrRemoveAnytime")}
+                </Text>
+                <Text as="span" className={styles.modulesBannerTag}>
+                  {t("Common:PayPerModule")}
+                </Text>
+              </div>
             </div>
+            <Button
+              className={styles.modulesPricingBtn}
+              label={t("Common:SeePricing")}
+              size={ButtonSize.small}
+              isDisabled={!pricingUrl}
+              onClick={() => {
+                if (pricingUrl) window.open(pricingUrl, "_blank");
+              }}
+            />
           </div>
-          <Button
-            className={styles.modulesPricingBtn}
-            label={t("Common:SeePricing")}
-            size={ButtonSize.small}
-            isDisabled={!pricingUrl}
-            onClick={() => {
-              if (pricingUrl) window.open(pricingUrl, "_blank");
-            }}
-          />
-        </div>
+        )}
 
         <div className={styles.modulesGrid}>
           {moduleItems.map((mod) => (
@@ -272,6 +280,8 @@ const Dashboard = ({
 const DashboardConnected = inject<TStore>(
   ({ userStore, settingsStore, appsStore }) => ({
     firstName: userStore.user?.firstName,
+    isAdminOrOwner:
+      (userStore.user?.isAdmin ?? false) || (userStore.user?.isOwner ?? false),
     pricingUrl: settingsStore.docspacePricesUrl,
     isAppEnabled: appsStore.isEnabled,
     activate: appsStore.activate,

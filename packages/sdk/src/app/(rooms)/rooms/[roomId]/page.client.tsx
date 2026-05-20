@@ -110,6 +110,7 @@ export default function RoomFilesPage({
         portalSettings={portalSettings}
         filesFilter={filesFilter}
         withoutFavorite
+        editorBasePath="/editor"
       />
     </OpenFolderContext.Provider>
   );

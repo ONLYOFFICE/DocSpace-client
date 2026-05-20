@@ -24,45 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import CreateEditorPage from "./page.client";
 
-import React from "react";
-import { useRouter } from "next/navigation";
-
-import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
-
-import EditorIframe from "@/app/(docspace)/_components/editor-iframe";
-
-type EditorPageProps = {
-  fileId: string;
-  action?: string;
+type CreateEditorPageProps = {
+  searchParams: Promise<{
+    parentId?: string;
+    fileTitle?: string;
+    returnTo?: string;
+  }>;
 };
 
-export default function EditorPage({ fileId, action }: EditorPageProps) {
-  const router = useRouter();
+export default async function CreateEditor({
+  searchParams,
+}: CreateEditorPageProps) {
+  const { parentId = "", fileTitle = "", returnTo } = await searchParams;
 
-  const path = React.useMemo(() => {
-    const params = new URLSearchParams();
-    params.set("fileId", fileId);
-    params.set("editorGoBack", "event");
-    if (action) params.set("action", action);
-    return `/doceditor?${params.toString()}`;
-  }, [fileId, action]);
-
-  const onClose = React.useCallback(() => {
-    router.replace("/personal-files");
-  }, [router]);
-
-  const onReady = React.useCallback(() => {
-    frameCallEvent({
-      event: "onAppReady",
-      data: { frameId: getFrameId() },
-    });
-    frameCallEvent({
-      event: "onEditorOpen",
-      data: { fileId, action: action ?? null },
-    });
-  }, [fileId, action]);
-
-  return <EditorIframe path={path} onClose={onClose} onReady={onReady} />;
+  return (
+    <CreateEditorPage
+      parentId={parentId}
+      fileTitle={fileTitle}
+      returnTo={returnTo}
+    />
+  );
 }

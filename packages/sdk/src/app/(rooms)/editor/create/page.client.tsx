@@ -29,40 +29,33 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 
-import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
-
 import EditorIframe from "@/app/(docspace)/_components/editor-iframe";
 
-type EditorPageProps = {
-  fileId: string;
-  action?: string;
+type CreateEditorPageProps = {
+  parentId: string;
+  fileTitle: string;
+  returnTo?: string;
 };
 
-export default function EditorPage({ fileId, action }: EditorPageProps) {
+export default function CreateEditorPage({
+  parentId,
+  fileTitle,
+  returnTo,
+}: CreateEditorPageProps) {
   const router = useRouter();
 
   const path = React.useMemo(() => {
     const params = new URLSearchParams();
-    params.set("fileId", fileId);
+    params.set("parentId", parentId);
+    params.set("fileTitle", fileTitle);
     params.set("editorGoBack", "event");
-    if (action) params.set("action", action);
-    return `/doceditor?${params.toString()}`;
-  }, [fileId, action]);
+    params.set("withoutGoBackText", "true");
+    return `/doceditor/create?${params.toString()}`;
+  }, [parentId, fileTitle]);
 
   const onClose = React.useCallback(() => {
-    router.replace("/personal-files");
-  }, [router]);
+    router.replace(returnTo || "/rooms");
+  }, [router, returnTo]);
 
-  const onReady = React.useCallback(() => {
-    frameCallEvent({
-      event: "onAppReady",
-      data: { frameId: getFrameId() },
-    });
-    frameCallEvent({
-      event: "onEditorOpen",
-      data: { fileId, action: action ?? null },
-    });
-  }, [fileId, action]);
-
-  return <EditorIframe path={path} onClose={onClose} onReady={onReady} />;
+  return <EditorIframe path={path} onClose={onClose} />;
 }

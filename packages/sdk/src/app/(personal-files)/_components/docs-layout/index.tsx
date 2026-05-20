@@ -28,7 +28,7 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import type {
   TFile,
@@ -108,6 +108,13 @@ type DocsLayoutProps = {
    * Used for rooms internals and trash.
    */
   withoutFavorite?: boolean;
+  /**
+   * Base path used to navigate to the editor route. Defaults to
+   * "/personal-files/editor". When provided (e.g., "/editor" for rooms), the
+   * current pathname is appended as a `returnTo` query parameter so the editor
+   * page can navigate back to the originating section.
+   */
+  editorBasePath?: string;
 };
 
 const getSubmitLabel = (mode: SelectorMode, t: (key: string) => string) => {
@@ -126,6 +133,7 @@ const DocsLayout = observer(({
   portalSettings,
   filesFilter,
   withoutFavorite,
+  editorBasePath,
 }: DocsLayoutProps) => {
   const { t } = useTranslation(["Common"]);
   const { isEmptyList } = useSettingsStore();
@@ -133,6 +141,7 @@ const DocsLayout = observer(({
   const infoPanelStore = useInfoPanelStore();
   const { sdkConfig } = useSDKConfig();
   const router = useRouter();
+  const pathname = usePathname();
 
   const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
 
@@ -143,7 +152,7 @@ const DocsLayout = observer(({
   const isActionButtonEnabled =
     (isMyDocuments || isInRooms) && !sdkConfig?.disableActionButton;
 
-  const docsActions = useDocsActions();
+  const docsActions = useDocsActions({ editorBasePath });
   const {
     uploadFilesToFolder,
     openCreateDialog,
@@ -234,12 +243,19 @@ const DocsLayout = observer(({
 
   const openFileHandler = React.useCallback(
     (file: TFileItem, preview?: boolean) => {
-      const url = preview
-        ? `/personal-files/editor/${file.id}?action=view`
-        : `/personal-files/editor/${file.id}`;
+      const basePath = editorBasePath ?? "/personal-files/editor";
+      const params = new URLSearchParams();
+      if (preview) params.set("action", "view");
+      if (editorBasePath && pathname) {
+        params.set("returnTo", pathname);
+      }
+      const qs = params.toString();
+      const url = qs
+        ? `${basePath}/${file.id}?${qs}`
+        : `${basePath}/${file.id}`;
       router.push(url);
     },
-    [router],
+    [router, editorBasePath, pathname],
   );
 
   const shareHandler = React.useCallback(

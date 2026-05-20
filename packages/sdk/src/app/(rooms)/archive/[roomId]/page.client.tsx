@@ -110,6 +110,7 @@ export default function ArchiveRoomFilesPage({
         portalSettings={portalSettings}
         filesFilter={filesFilter}
         withoutFavorite
+        editorBasePath="/editor"
       />
     </OpenFolderContext.Provider>
   );

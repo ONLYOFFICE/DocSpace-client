@@ -90,6 +90,7 @@ export default function TrashPage({
       portalSettings={portalSettings}
       filesFilter={filesFilter}
       withoutFavorite
+      editorBasePath="/editor"
     />
   );
 }

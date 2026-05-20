@@ -36,9 +36,14 @@ import EditorIframe from "@/app/(docspace)/_components/editor-iframe";
 type EditorPageProps = {
   fileId: string;
   action?: string;
+  returnTo?: string;
 };
 
-export default function EditorPage({ fileId, action }: EditorPageProps) {
+export default function EditorPage({
+  fileId,
+  action,
+  returnTo,
+}: EditorPageProps) {
   const router = useRouter();
 
   const path = React.useMemo(() => {
@@ -50,8 +55,8 @@ export default function EditorPage({ fileId, action }: EditorPageProps) {
   }, [fileId, action]);
 
   const onClose = React.useCallback(() => {
-    router.replace("/personal-files");
-  }, [router]);
+    router.replace(returnTo || "/rooms");
+  }, [router, returnTo]);
 
   const onReady = React.useCallback(() => {
     frameCallEvent({

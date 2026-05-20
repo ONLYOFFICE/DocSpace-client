@@ -52,7 +52,7 @@ export type BootstrapOptions = {
 };
 
 // Must satisfy PASSPHRASE_SETTINGS in PassphraseModal:
-// length ≥ 12, uppercase, digits, special characters.
+// length >= 12, uppercase, digits, special characters.
 const DEFAULT_PASSPHRASE = "Test-Horse-Battery-Staple-99!";
 
 export async function bootstrapEncryption(

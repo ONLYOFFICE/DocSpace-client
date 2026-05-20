@@ -60,7 +60,7 @@ export async function generateRecoveryMnemonic(): Promise<string> {
   const hash = await subtle.digest("SHA-256", entropy as BufferSource);
   const checksumByte = new Uint8Array(hash)[0];
 
-  // entropy(32) || checksum(1) = 264 bits = 24 × 11 bits.
+  // entropy(32) || checksum(1) = 264 bits = 24 * 11 bits.
   const bits = new Uint8Array(33);
   bits.set(entropy);
   bits[32] = checksumByte;

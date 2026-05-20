@@ -49,7 +49,7 @@ import { expect, test, TEST_PORT } from "./fixtures/base";
 
 const TEST_USER_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
 // Both passphrases must satisfy PASSPHRASE_SETTINGS in PassphraseModal:
-// length ≥ 12, uppercase, digits, special characters.
+// length >= 12, uppercase, digits, special characters.
 const KNOWN_PASSPHRASE = "Test-Horse-Battery-Staple-99!";
 const KNOWN_MNEMONIC =
   "abandon abandon abandon abandon abandon abandon " +

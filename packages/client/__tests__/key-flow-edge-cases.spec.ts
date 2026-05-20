@@ -47,7 +47,7 @@ import { expect, test, TEST_PORT } from "./fixtures/base";
 import { bootstrapEncryption } from "./fixtures/encryption-helpers";
 
 // Must satisfy PASSPHRASE_SETTINGS in PassphraseModal:
-// length ≥ 12, uppercase, digits, special characters.
+// length >= 12, uppercase, digits, special characters.
 const STRONG_PASSPHRASE = "Test-Horse-Battery-Staple-99!";
 
 test.describe("Keys management — edge cases", () => {

@@ -299,7 +299,7 @@ export function resetTofuStores(): void {
 }
 
 // Mismatch resolver - lives in the React context (shows a modal); helpers
-// without React access call the registered handler. No handler ⇒ refuse.
+// without React access call the registered handler. No handler => refuse.
 
 export type KeyMismatchInfo = {
   userId: string;

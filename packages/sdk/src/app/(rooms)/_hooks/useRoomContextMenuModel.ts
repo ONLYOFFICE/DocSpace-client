@@ -76,6 +76,8 @@ export default function useRoomContextMenuModel(
   onDeleteRoom?: (item: TRoomItem) => void,
   onDeleteSelected?: (items: TRoomItem[]) => void,
   onRestoreSelected?: (items: TRoomItem[]) => void,
+  onArchiveRoom?: (item: TRoomItem) => void,
+  onArchiveSelected?: (items: TRoomItem[]) => void,
 ) {
   const { t } = useTranslation(["Common", "Files"]);
   const refreshRooms = useContext(RoomsRefreshContext);
@@ -92,11 +94,6 @@ export default function useRoomContextMenuModel(
         } else {
           await api.rooms.pinRoom(room.id);
         }
-        refreshRooms?.();
-      };
-
-      const handleArchive = async () => {
-        await api.rooms.archiveRoom(room.id);
         refreshRooms?.();
       };
 
@@ -229,7 +226,14 @@ export default function useRoomContextMenuModel(
           key: "move-to-archive",
           label: t("Common:MoveToArchive"),
           icon: RoomArchiveSvgUrl,
-          onClick: handleArchive,
+          onClick: () => onArchiveRoom?.(room),
+        },
+        {
+          id: "option_delete-room",
+          key: "delete-room",
+          label: t("Common:DeleteRoom"),
+          icon: TrashReactSvgUrl,
+          onClick: () => onDeleteRoom?.(room),
         },
       ];
 
@@ -245,6 +249,7 @@ export default function useRoomContextMenuModel(
       onChangeOwner,
       onRestoreRoom,
       onDeleteRoom,
+      onArchiveRoom,
       isArchive,
       filesSelectionStore,
     ],
@@ -284,6 +289,25 @@ export default function useRoomContextMenuModel(
         icon: DownloadReactSvgUrl,
         onClick: () => downloadAction(),
       },
+      { key: "separator-archive-selected", isSeparator: true },
+      {
+        id: "option_archive-rooms",
+        key: "archive-rooms",
+        label: t("Common:MoveToArchive"),
+        icon: RoomArchiveSvgUrl,
+        onClick: () =>
+          onArchiveSelected?.(
+            filesSelectionStore.selection as TRoomItem[],
+          ),
+      },
+      {
+        id: "option_delete-rooms",
+        key: "delete-rooms",
+        label: t("Common:DeleteRoom"),
+        icon: TrashReactSvgUrl,
+        onClick: () =>
+          onDeleteSelected?.(filesSelectionStore.selection as TRoomItem[]),
+      },
     ];
   }, [
     t,
@@ -291,6 +315,7 @@ export default function useRoomContextMenuModel(
     isArchive,
     onDeleteSelected,
     onRestoreSelected,
+    onArchiveSelected,
     filesSelectionStore,
   ]);
 

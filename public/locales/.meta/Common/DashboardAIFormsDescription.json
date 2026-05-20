@@ -1,26 +1,20 @@
 {
-  "key_path": "DefaultFolderDescription",
-  "content": "Drop files here or create new ones.",
-  "content_en_sha1_hash": "b7cdc5efa37d7e19706293b7a41a3d3e01cbcb1a",
-  "created_at": "2025-05-19T21:30:56.470Z",
-  "updated_at": "2026-05-15T14:00:06.602Z",
+  "key_path": "DashboardAIFormsDescription",
+  "content": "Build forms, collect responses, and manage structured data — all in one place.",
+  "content_en_sha1_hash": "56b6eeb9fab754e2b0d2b35a1cd02457b7cc040e",
+  "created_at": "2026-05-19T19:03:13.736Z",
+  "updated_at": "2026-05-19T19:32:23.703Z",
   "comment": {
-    "text": "This is a placeholder text displayed in an empty folder to instruct users on how to add content.",
+    "text": "Description for the AI Forms app entry in the apps catalog, summarizing its main features.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:07:13.878Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-05-19T19:32:23.703Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 173,
-      "context": "t(\"EmptyView:FormFolderDefaultDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n )\n .with([P._, DefaultFolderType, P.when(isAdmin)], () =>\n t(\"EmptyView:DefaultFolderDescription\"),\n )\n .with([P._, DefaultFolderType, P.when(isUser)], () =>\n t(\"Common:UserEmptyDescription\"),\n )\n .otherwise(() => \"\");",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 173,
-      "context": "t(\"EmptyView:FormFolderDefaultDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n )\n .with([P._, DefaultFolderType, P.when(isAdmin)], () =>\n t(\"EmptyView:DefaultFolderDescription\"),\n )\n .with([P._, DefaultFolderType, P.when(isUser)], () =>\n t(\"Common:UserEmptyDescription\"),\n )\n .otherwise(() => \"\");",
+      "file_path": "/packages/client/src/helpers/apps-catalog.tsx",
+      "line_number": 72,
+      "context": "},\n {\n id: \"ai-forms\",\n icon: <CatalogDocumentsIcon />,\n title: t(\"Common:DashboardAIFormsTitle\"),\n description: t(\"Common:DashboardAIFormsDescription\"),\n href: \"/ai-forms\",\n supported: true,\n alwaysOn: false,\n },\n {",
       "module": "/packages/client"
     }
   ],
@@ -155,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:53.938772Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

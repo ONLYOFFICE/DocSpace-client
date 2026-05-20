@@ -3,7 +3,7 @@
   "content": "Settings",
   "content_en_sha1_hash": "c7f73bb54d928922c3838bb789ee9fb8a5b1eb37",
   "created_at": "2025-05-19T21:30:48.587Z",
-  "updated_at": "2026-05-15T16:22:23.996Z",
+  "updated_at": "2026-05-19T19:03:33.049Z",
   "comment": {
     "text": "This is a label for a button or a title for a dialog, indicating a section or action related to configuration options.",
     "is_auto": true,
@@ -31,13 +31,13 @@
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 159,
+      "line_number": 171,
       "context": "icon: CatalogTrashReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=trash\"),\n },\n {\n id: \"ai-files-settings\",\n label: t(\"Common:Settings\"),\n icon: CatalogSettingsReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=settings\"),\n },\n ]\n : undefined,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 159,
+      "line_number": 171,
       "context": "icon: CatalogTrashReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=trash\"),\n },\n {\n id: \"ai-files-settings\",\n label: t(\"Common:Settings\"),\n icon: CatalogSettingsReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=settings\"),\n },\n ]\n : undefined,",
       "module": "/packages/client"
     },
@@ -61,7 +61,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/apps/index.tsx",
-      "line_number": 126,
+      "line_number": 134,
       "context": "isDisabled={app.alwaysOn}\n onChange={() => handleToggle(app.id, !enabled, app.supported)}\n />\n <Button\n className={styles.settingsBtn}\n label={t(\"Common:Settings\")}\n size={ButtonSize.small}\n isDisabled={!app.href || !enabled}\n onClick={() => {\n if (app.href) navigate(`${app.href}?section=settings`);\n }}",
       "module": "/packages/client"
     },

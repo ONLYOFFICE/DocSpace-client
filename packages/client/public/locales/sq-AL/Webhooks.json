@@ -1,7 +1,7 @@
 {
-  "AgentCreated": "Agjent AI Krijuar",
-  "AgentDeleted": "Agjenti AI u fshi",
-  "AgentUpdated": "Agjenti AI i Përditësuar",
+  "AgentCreated": "Agjent IA krijuar",
+  "AgentDeleted": "Agjenti IA u fshi",
+  "AgentUpdated": "Agjenti IA i përditësuar",
   "Before": "Përpara",
   "CreateWebhook": "Krijoni një webhook",
   "DeleteHint": "Webhook-u do të fshihet përgjithmonë.\nNuk do të mund ta zhbëni këtë veprim.",

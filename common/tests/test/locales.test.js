@@ -2511,6 +2511,42 @@ describe("Locales Tests", () => {
     expect(errorsCount, message).toBe(0);
   });
 
+  it("UnicodeEscapedValuesTest: Verify that translation files use readable Unicode characters instead of \\uXXXX escape sequences.", () => {
+    // JSON files must store non-ASCII characters directly in UTF-8, not as \uXXXX
+    // escape sequences. Escaped forms are invisible in code review, harder to spot
+    // translation errors in, and typically produced by json.dumps() without
+    // ensure_ascii=False or similar tooling mistakes.
+    const unicodeEscapePattern = /\\u[0-9a-fA-F]{4}/;
+
+    let message =
+      "Next translation files contain \\uXXXX escape sequences instead of readable Unicode characters.\r\n" +
+      "Re-save the file in UTF-8 with unescaped characters (e.g. ensure_ascii=False in Python).\r\n\r\n";
+    let errorsCount = 0;
+    let i = 0;
+
+    translationFiles.forEach((file) => {
+      const rawContent = fs.readFileSync(file.path, "utf8");
+
+      if (!unicodeEscapePattern.test(rawContent)) return;
+
+      const escapedLines = rawContent
+        .split("\n")
+        .map((line, idx) => ({ line, lineNo: idx + 1 }))
+        .filter(({ line }) => unicodeEscapePattern.test(line))
+        .slice(0, 3)
+        .map(
+          ({ line, lineNo }) =>
+            `    line ${lineNo}: ${line.trim().substring(0, 80)}`,
+        )
+        .join("\r\n");
+
+      message += `${++i}. ${file.language}/${file.fileName}\r\n${escapedLines}\r\n\r\n`;
+      errorsCount++;
+    });
+
+    expect(errorsCount, message).toBe(0);
+  });
+
   it("DuplicateKeysAcrossNamespacesTest: Verify that the same translation key does not appear in multiple namespaces.", () => {
     // Duplicate keys across namespaces cause confusion: it's unclear which
     // translation is actually used, and changes to one copy may not propagate

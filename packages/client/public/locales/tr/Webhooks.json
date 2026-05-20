@@ -1,7 +1,7 @@
 {
-  "AgentCreated": "Yapay Zeka Ajanı Oluşturuldu",
-  "AgentDeleted": "Yapay Zeka Ajanı Silindi",
-  "AgentUpdated": "Yapay Zeka Aracısı Güncellendi",
+  "AgentCreated": "Yapay Zeka Ajanı oluşturuldu",
+  "AgentDeleted": "Yapay Zeka Ajanı silindi",
+  "AgentUpdated": "Yapay Zeka Aracısı güncellendi",
   "Before": "Önce",
   "CreateWebhook": "Webhook oluştur",
   "DeleteHint": "Webhook kalıcı olarak silinecek.\nBu işlemi geri alamazsınız.",

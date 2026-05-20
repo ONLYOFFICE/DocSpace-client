@@ -3,7 +3,7 @@
   "content": "Spreadsheet",
   "content_en_sha1_hash": "cc6fdf1b0963eceb567d2f5b641f4950751636eb",
   "created_at": "2025-05-19T21:30:48.999Z",
-  "updated_at": "2026-05-15T16:22:23.999Z",
+  "updated_at": "2026-05-19T19:03:33.050Z",
   "comment": {
     "text": "This is a button label or menu item for creating a new spreadsheet, or a label within a conversion dialog. It refers to the file type.",
     "is_auto": true,
@@ -49,19 +49,19 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useDocsMenuModels.tsx",
-      "line_number": 79,
+      "line_number": 80,
       "context": "onClick: () => openCreateDialog(\"docx\"),\n },\n {\n id: \"actions_new-spreadsheet\",\n key: \"xlsx\",\n label: t(\"Common:Spreadsheet\"),\n icon: SpreadsheetReactSvgUrl,\n onClick: () => openCreateDialog(\"xlsx\"),\n },\n {\n id: \"actions_new-presentation\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useDocsMenuModels.tsx",
-      "line_number": 79,
+      "line_number": 80,
       "context": "onClick: () => openCreateDialog(\"docx\"),\n },\n {\n id: \"actions_new-spreadsheet\",\n key: \"xlsx\",\n label: t(\"Common:Spreadsheet\"),\n icon: SpreadsheetReactSvgUrl,\n onClick: () => openCreateDialog(\"xlsx\"),\n },\n {\n id: \"actions_new-presentation\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useDocsMenuModels.tsx",
-      "line_number": 79,
+      "line_number": 80,
       "context": "onClick: () => openCreateDialog(\"docx\"),\n },\n {\n id: \"actions_new-spreadsheet\",\n key: \"xlsx\",\n label: t(\"Common:Spreadsheet\"),\n icon: SpreadsheetReactSvgUrl,\n onClick: () => openCreateDialog(\"xlsx\"),\n },\n {\n id: \"actions_new-presentation\",",
       "module": "/packages/sdk"
     },

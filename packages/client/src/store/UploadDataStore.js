@@ -61,17 +61,14 @@ import {
   setFileEncryptionKeys,
   getFileEncryptionAccess,
 } from "@docspace/shared/api/files";
-import { getFilePublicKeys } from "@docspace/shared/api/privacy";
-import {
-  unwrapDekForCurrentUser,
-  wrapDekForRecipients,
-} from "@docspace/shared/services/encryption/room-file-access";
+import { getRoomEncryptionKeys } from "@docspace/shared/api/privacy";
+import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
 import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import {
-  getTofuStore,
-  getKeyMismatchHandler,
-} from "@docspace/shared/services/encryption/tofu-store";
+  getActiveKeyId,
+  selectActiveKey,
+} from "@docspace/shared/services/encryption/active-key-preference";
 import { rememberEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
@@ -256,11 +253,11 @@ class UploadDataStore {
     publicKeyBase64,
     publicKeyId,
     dek,
+    roomId,
   ) => {
     try {
       const identity = await requireUnlock(currentUserId);
       if (!identity) {
-        wipeDek(dek);
         throw new Error(
           "Encryption identity is locked — cannot wrap DEK for upload",
         );
@@ -279,63 +276,58 @@ class UploadDataStore {
         fileId,
       });
       await setFileEncryptionKeys(fileId, ownWraps);
-      await this.encryptKeysForRoomMembers(fileId, currentUserId);
+      await this.encryptKeysForRoomMembers(
+        fileId,
+        currentUserId,
+        roomId,
+        dek,
+        identity,
+      );
     } finally {
       wipeDek(dek);
     }
   };
 
-  encryptKeysForRoomMembers = async (fileId, currentUserId) => {
+  encryptKeysForRoomMembers = async (
+    fileId,
+    currentUserId,
+    roomId,
+    dek,
+    identity,
+  ) => {
     try {
+      if (!roomId) {
+        console.error(
+          "[ENCRYPTION] encryptKeysForRoomMembers called without roomId",
+        );
+        return;
+      }
+      if (!dek || !identity) {
+        console.error(
+          "[ENCRYPTION] encryptKeysForRoomMembers called without dek/identity",
+        );
+        return;
+      }
       const [publicKeys, encryptionInfo] = await Promise.all([
-        getFilePublicKeys(fileId),
+        getRoomEncryptionKeys(roomId),
         getFileEncryptionAccess(fileId),
       ]);
 
-      const existingFileKeys = encryptionInfo.fileKeys;
-      if (!existingFileKeys || existingFileKeys.length === 0) return;
-
-      const existingKeyUserIds = new Set(
-        existingFileKeys.map((k) => String(k.userId)),
+      const existingFileKeys = encryptionInfo.fileKeys ?? [];
+      const existingKeyPairs = new Set(
+        existingFileKeys.map(
+          (k) => `${String(k.userId)}:${k.publicKeyId || ""}`,
+        ),
       );
 
-      // Each recipient's pubkey is TOFU-checked; mismatches go through the
-      // registered handler and only proceed if the user accepts.
-      const tofu = getTofuStore(String(currentUserId));
-      const mismatchHandler = getKeyMismatchHandler();
       const recipients = [];
       if (Array.isArray(publicKeys)) {
         for (const pk of publicKeys) {
           if (!pk.publicKey || !pk.userId) continue;
           const uid = String(pk.userId);
           if (uid === String(currentUserId)) continue;
-          if (existingKeyUserIds.has(uid)) continue;
-
-          const result = await tofu.checkKey(uid, pk.publicKey);
-          if (result.kind === "mismatch") {
-            if (!mismatchHandler) {
-              // No handler ⇒ skip; the recipient can request access later.
-              continue;
-            }
-            let decision;
-            try {
-              decision = await mismatchHandler({
-                userId: uid,
-                knownKey: result.known.publicKey,
-                newKey: result.submitted,
-                knownFirstSeenAt: result.known.firstSeenAt,
-                knownLastSeenAt: result.known.lastSeenAt,
-              });
-            } catch (e) {
-              console.error(
-                "[ENCRYPTION] Key mismatch resolver threw:",
-                e,
-              );
-              continue;
-            }
-            if (decision !== "accept") continue;
-            await tofu.acceptKey(uid, pk.publicKey);
-          }
+          const pairKey = `${uid}:${pk.id || ""}`;
+          if (existingKeyPairs.has(pairKey)) continue;
 
           recipients.push({
             userId: uid,
@@ -346,47 +338,13 @@ class UploadDataStore {
       }
       if (recipients.length === 0) return;
 
-      const identity = await requireUnlock(String(currentUserId));
-      if (!identity) return;
-
-      const roomMemberKeys = Array.isArray(publicKeys)
-        ? publicKeys
-            .filter((k) => k.userId && k.publicKey)
-            .map((k) => ({
-              userId: String(k.userId),
-              publicKey: k.publicKey,
-            }))
-        : [];
-
-      let dek;
-      try {
-        dek = await unwrapDekForCurrentUser({
-          fileKeys: existingFileKeys,
-          roomMemberKeys,
-          currentUserId: String(currentUserId),
-          currentIdentity: identity,
-          fileId,
-        });
-      } catch (error) {
-        console.error(
-          "[ENCRYPTION] Failed to unwrap own DEK for re-wrap:",
-          error,
-        );
-        return;
-      }
-
-      let newKeys;
-      try {
-        newKeys = await wrapDekForRecipients({
-          dek,
-          senderIdentity: identity,
-          senderUserId: String(currentUserId),
-          recipients,
-          fileId,
-        });
-      } finally {
-        wipeDek(dek);
-      }
+      const newKeys = await wrapDekForRecipients({
+        dek,
+        senderIdentity: identity,
+        senderUserId: String(currentUserId),
+        recipients,
+        fileId,
+      });
 
       if (newKeys.length > 0) {
         const allKeys = [
@@ -415,11 +373,16 @@ class UploadDataStore {
       return { publicKey: null, userId: null, publicKeyId: null };
     }
 
-    const primaryKey = keys[0];
+    const userIdStr = String(userId);
+    const activeKey = selectActiveKey(keys, getActiveKeyId(userIdStr));
+    if (!activeKey) {
+      return { publicKey: null, userId: null, publicKeyId: null };
+    }
+
     return {
-      publicKey: primaryKey?.publicKey || null,
-      userId: String(userId),
-      publicKeyId: primaryKey?.id || null,
+      publicKey: activeKey.publicKey || null,
+      userId: userIdStr,
+      publicKeyId: activeKey.id || null,
     };
   };
 
@@ -1362,6 +1325,12 @@ class UploadDataStore {
 
     const toFolderId = folderId || this.selectedFolderStore.id;
 
+    const encryptionRoomId =
+      this.selectedFolderStore.navigationPath?.find((r) => r.isRoom)?.id ??
+      (this.selectedFolderStore.isRoom
+        ? this.selectedFolderStore.id
+        : null);
+
     if (this.uploaded) {
       this.files = this.files.filter((f) => f.action !== "upload" || f.error);
       this.filesSize = 0;
@@ -1401,6 +1370,7 @@ class UploadDataStore {
         cancel: false,
         needConvert,
         encrypted: file.encrypted,
+        encryptionRoomId,
         percent: 0,
       };
 
@@ -1625,12 +1595,14 @@ class UploadDataStore {
           if (orphanDek) wipeDek(orphanDek);
         } else {
           const dekForWrap = takeFileDek(currentFileData);
+          const roomIdForWrap = currentFileData?.encryptionRoomId ?? null;
           this.wrapForSelfThenRoom(
             fileId,
             String(userId),
             publicKey,
             publicKeyId || "",
             dekForWrap,
+            roomIdForWrap,
           ).catch((error) => {
             const wrapMessage =
               getI18n().t("Common:EncryptionUploadWrapFailed");

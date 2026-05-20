@@ -70,43 +70,60 @@ export async function unwrapDekForCurrentUser(params: {
     );
   }
 
-  const myEntry = fileKeys.find(
+  const myEntries = fileKeys.filter(
     (k) => String(k.userId) === String(currentUserId),
   );
-  if (!myEntry) {
+  if (myEntries.length === 0) {
     throw new NoAccessError(currentUserId);
   }
 
-  const inspection = inspectWrap(myEntry.privateKeyEnc);
-  const senderUserId = inspection.senderUserId;
+  let lastError: unknown = null;
+  for (const myEntry of myEntries) {
+    const inspection = inspectWrap(myEntry.privateKeyEnc);
+    const senderUserId = inspection.senderUserId;
 
-  const senderEntry = roomMemberKeys.find(
-    (k) => String(k.userId) === String(senderUserId),
-  );
-  if (!senderEntry) {
-    throw new AuthenticationError(
-      `wrap claims sender ${senderUserId} but no public key was provided`,
+    const senderEntry = roomMemberKeys.find(
+      (k) => String(k.userId) === String(senderUserId),
     );
+    if (!senderEntry) {
+      lastError = new AuthenticationError(
+        `wrap claims sender ${senderUserId} but no public key was provided`,
+      );
+      continue;
+    }
+
+    try {
+      await verifySenderKeyAgainstTofu(
+        currentUserId,
+        senderUserId,
+        senderEntry.publicKey,
+        onKeyChange,
+        senderDisplayName,
+      );
+    } catch (e) {
+      lastError = e;
+      continue;
+    }
+
+    const senderPubBytes = decodeBase64(senderEntry.publicKey);
+
+    try {
+      return await unwrapDEK({
+        wrapped: myEntry.privateKeyEnc,
+        recipientPrivateKey: currentIdentity.privateKey,
+        recipientUserId: currentUserId,
+        expectedSenderPublicKey: senderPubBytes,
+        expectedSenderUserId: senderUserId,
+        fileId,
+      });
+    } catch (e) {
+      lastError = e;
+    }
   }
 
-  await verifySenderKeyAgainstTofu(
-    currentUserId,
-    senderUserId,
-    senderEntry.publicKey,
-    onKeyChange,
-    senderDisplayName,
-  );
-
-  const senderPubBytes = decodeBase64(senderEntry.publicKey);
-
-  return unwrapDEK({
-    wrapped: myEntry.privateKeyEnc,
-    recipientPrivateKey: currentIdentity.privateKey,
-    recipientUserId: currentUserId,
-    expectedSenderPublicKey: senderPubBytes,
-    expectedSenderUserId: senderUserId,
-    fileId,
-  });
+  throw lastError instanceof Error
+    ? lastError
+    : new AuthenticationError("unwrap failed for all matching fileKeys");
 }
 
 async function verifySenderKeyAgainstTofu(

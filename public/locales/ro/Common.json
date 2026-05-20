@@ -441,7 +441,7 @@
   "DashboardInstallStepUploadLibraryProgress": "{{percent}}% încărcat",
   "DashboardInstallTitle": "Instalare {{module}}",
   "DashboardModulesBannerText": "Fiecare aplicație este licențiată separat — instalați doar ce se potrivește fluxului dvs. de lucru",
-  "DashboardModulesSubtitle": "Extindeți DocSpace cu module premium",
+  "DashboardModulesSubtitle": "Extindeți {{productName}} cu module premium",
   "DataBackup": "Copiere de rezervă a datelor",
   "DatabaseHost": "Gazdă",
   "DatabaseName": "Numele bazei de date",

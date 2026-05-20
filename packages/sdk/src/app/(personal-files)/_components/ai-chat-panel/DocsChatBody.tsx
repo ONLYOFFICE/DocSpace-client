@@ -36,7 +36,7 @@
 import { observer } from "mobx-react";
 import { AiChatPanelBody } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
 
-export const DocsChatBody = observer(() => {
+export const DocsChatBodyPanel = observer(() => {
   return <AiChatPanelBody />;
 });
 

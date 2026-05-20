@@ -441,7 +441,7 @@
   "DashboardInstallStepUploadLibraryProgress": "Đã tải lên {{percent}}%",
   "DashboardInstallTitle": "Cài đặt {{module}}",
   "DashboardModulesBannerText": "Mỗi ứng dụng được cấp phép riêng — chỉ cài đặt những gì phù hợp với quy trình làm việc của bạn",
-  "DashboardModulesSubtitle": "Mở rộng DocSpace với các mô-đun cao cấp",
+  "DashboardModulesSubtitle": "Mở rộng {{productName}} với các mô-đun cao cấp",
   "DataBackup": "Sao lưu dữ liệu",
   "DatabaseHost": "Host",
   "DatabaseName": "Tên cơ sở dữ liệu",

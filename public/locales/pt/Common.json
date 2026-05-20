@@ -441,7 +441,7 @@
   "DashboardInstallStepUploadLibraryProgress": "{{percent}}% carregado",
   "DashboardInstallTitle": "Instalar {{module}}",
   "DashboardModulesBannerText": "Cada aplicação é licenciada separadamente — instale apenas o que se adequa ao seu fluxo de trabalho",
-  "DashboardModulesSubtitle": "Expanda o DocSpace com módulos premium",
+  "DashboardModulesSubtitle": "Expanda o {{productName}} com módulos premium",
   "DataBackup": "Cópia de segurança dos dados",
   "DatabaseHost": "Anfitrião",
   "DatabaseName": "Nome do banco de dados",

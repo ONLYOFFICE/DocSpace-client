@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) Ascensio System SIA, 2009-2026
  *
  * This program is a free software product. You can redistribute it and/or
@@ -33,6 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export { DocsChatHeaderPanel } from "./AiChatHeaderPanel";
-export { DocsChatBodyPanel } from "./DocsChatBody";
-export { default as AiChatTrigger } from "./AiChatTrigger";
+import React from "react";
+
+import type { TFileItem } from "../_hooks/useItemList";
+
+export const VersionHistoryContext = React.createContext<
+  ((item: TFileItem) => void) | null
+>(null);

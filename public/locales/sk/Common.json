@@ -441,7 +441,7 @@
   "DashboardInstallStepUploadLibraryProgress": "{{percent}}% nahraté",
   "DashboardInstallTitle": "Nainštalovať {{module}}",
   "DashboardModulesBannerText": "Každá aplikácia je licencovaná samostatne — inštalujte iba to, čo vyhovuje vášmu pracovnému postupu",
-  "DashboardModulesSubtitle": "Rozšírte DocSpace o prémiové moduly",
+  "DashboardModulesSubtitle": "Rozšírte {{productName}} o prémiové moduly",
   "DataBackup": "Zálohovanie dát",
   "DatabaseHost": "Host",
   "DatabaseName": "Názov databázy",

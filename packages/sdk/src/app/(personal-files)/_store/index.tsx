@@ -54,6 +54,7 @@ import { DocsSettingsStoreContextProvider } from "./DocsSettingsStore";
 import { DocsUserStoreContextProvider } from "./DocsUserStore";
 import { InfoPanelStoreContextProvider } from "./InfoPanelStore";
 import PersonalFilesAiAgentProviders from "../_components/ai-agent-providers";
+import { VersionHistoryStoreContextProvider } from "./VersionHistoryStore";
 
 export const DocsStoreProviders = ({
   children,
@@ -75,11 +76,13 @@ export const DocsStoreProviders = ({
                       <DocsSettingsStoreContextProvider>
                         <DocsUserStoreContextProvider>
                           <InfoPanelStoreContextProvider>
-                            <AiChatPanelStoreContextProvider>
-                              <PersonalFilesAiAgentProviders>
-                                {children}
-                              </PersonalFilesAiAgentProviders>
-                            </AiChatPanelStoreContextProvider>
+                            <VersionHistoryStoreContextProvider>
+                              <AiChatPanelStoreContextProvider>
+                                <PersonalFilesAiAgentProviders>
+                                  {children}
+                                </PersonalFilesAiAgentProviders>
+                              </AiChatPanelStoreContextProvider>
+                            </VersionHistoryStoreContextProvider>
                           </InfoPanelStoreContextProvider>
                         </DocsUserStoreContextProvider>
                       </DocsSettingsStoreContextProvider>

@@ -441,7 +441,7 @@
   "DashboardInstallStepUploadLibraryProgress": "{{percent}}% augšupielādēts",
   "DashboardInstallTitle": "Instalēt {{module}}",
   "DashboardModulesBannerText": "Katra lietotne tiek licencēta atsevišķi — instalējiet tikai to, kas atbilst jūsu darbplūsmai",
-  "DashboardModulesSubtitle": "Paplašiniet DocSpace ar premium moduļiem",
+  "DashboardModulesSubtitle": "Paplašiniet {{productName}} ar premium moduļiem",
   "DataBackup": "Datu dublēšana",
   "DatabaseHost": "Hosts",
   "DatabaseName": "Datubāzes nosaukums",

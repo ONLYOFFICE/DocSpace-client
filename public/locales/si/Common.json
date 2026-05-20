@@ -441,7 +441,7 @@
   "DashboardInstallStepUploadLibraryProgress": "{{percent}}% උඩුගත කෙරිණි",
   "DashboardInstallTitle": "{{module}} ස්ථාපනය කරන්න",
   "DashboardModulesBannerText": "සෑම යෙදුමක්ම වෙන වෙනම බලපත්‍ර දෙනු ලැබේ — ඔබේ කාර්ය ප්‍රවාහයට ගැළපෙන දේ පමණක් ස්ථාපනය කරන්න",
-  "DashboardModulesSubtitle": "ප්‍රිමියම් මොඩියුල සමඟ DocSpace පුළුල් කරන්න",
+  "DashboardModulesSubtitle": "ප්‍රිමියම් මොඩියුල සමඟ {{productName}} පුළුල් කරන්න",
   "DataBackup": "දත්ත උපස්ථය",
   "DatabaseHost": "සත්කාරකය",
   "DatabaseName": "දත්ත සමුදායේ නම",

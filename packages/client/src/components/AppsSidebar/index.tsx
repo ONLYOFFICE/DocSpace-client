@@ -67,7 +67,7 @@ const AppsSidebar = ({
   toggleArticleOpen,
 }: AppsSidebarProps) => {
   const { t } = useTranslation(["Common"]);
-  const isBase = useTheme();
+  const { isBase } = useTheme();
   const isMobile = currentDeviceType === DeviceType.mobile;
   const collapseLabel = showText
     ? t("Common:HideArticleMenu")

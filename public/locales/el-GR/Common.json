@@ -441,7 +441,7 @@
   "DashboardInstallStepUploadLibraryProgress": "{{percent}}% μεταφορτώθηκε",
   "DashboardInstallTitle": "Εγκατάσταση {{module}}",
   "DashboardModulesBannerText": "Κάθε εφαρμογή αδειοδοτείται ξεχωριστά — εγκαταστήστε μόνο ό,τι ταιριάζει στη ροή εργασίας σας",
-  "DashboardModulesSubtitle": "Επεκτείνετε το DocSpace με premium λειτουργικές μονάδες",
+  "DashboardModulesSubtitle": "Επεκτείνετε το {{productName}} με premium λειτουργικές μονάδες",
   "DataBackup": "Δημιουργία αντιγράφων ασφαλείας δεδομένων",
   "DatabaseHost": "Host",
   "DatabaseName": "Όνομα βάσης δεδομένων",

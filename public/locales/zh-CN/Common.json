@@ -441,7 +441,7 @@
   "DashboardInstallStepUploadLibraryProgress": "已上传 {{percent}}%",
   "DashboardInstallTitle": "安装{{module}}",
   "DashboardModulesBannerText": "每个应用单独授权 — 仅安装适合您工作流程的应用",
-  "DashboardModulesSubtitle": "通过高级模块扩展您的DocSpace",
+  "DashboardModulesSubtitle": "通过高级模块扩展您的{{productName}}",
   "DataBackup": "数据备份",
   "DatabaseHost": "主机",
   "DatabaseName": "数据库名称",

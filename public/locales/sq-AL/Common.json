@@ -441,7 +441,7 @@
   "DashboardInstallStepUploadLibraryProgress": "{{percent}}% ngarkuar",
   "DashboardInstallTitle": "Instalo {{module}}",
   "DashboardModulesBannerText": "Çdo aplikacion licencohet veçmas — instaloni vetëm ato që i përshtaten fluksit tuaj të punës",
-  "DashboardModulesSubtitle": "Zgjeroni DocSpace me module premium",
+  "DashboardModulesSubtitle": "Zgjeroni {{productName}} me module premium",
   "DataBackup": "Rezerva e të dhënave",
   "DatabaseHost": "Pritës",
   "DatabaseName": "Emri i bazës së dhënave",

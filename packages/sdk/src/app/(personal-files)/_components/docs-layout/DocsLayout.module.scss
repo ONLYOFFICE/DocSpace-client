@@ -8,7 +8,7 @@
   overflow: hidden;
 }
 
-.aiChatPanelFullscreen {
+.root[data-layout-mode="ai-fullscreen"] {
   --info-panel-width: 100vw;
   --info-panel-tablet-width: 100vw;
 

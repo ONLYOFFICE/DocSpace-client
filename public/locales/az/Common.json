@@ -441,7 +441,7 @@
   "DashboardInstallStepUploadLibraryProgress": "{{percent}}% yükləndi",
   "DashboardInstallTitle": "{{module}} quraşdırın",
   "DashboardModulesBannerText": "Hər tətbiq ayrıca lisenziyalanır — yalnız iş axınınıza uyğun olanı quraşdırın",
-  "DashboardModulesSubtitle": "DocSpace-i premium modullarla genişləndirin",
+  "DashboardModulesSubtitle": "{{productName}}-i premium modullarla genişləndirin",
   "DataBackup": "Məlumatların yedəklənməsi",
   "DatabaseHost": "Ev sahibi",
   "DatabaseName": "Verilənlər bazasının adı",

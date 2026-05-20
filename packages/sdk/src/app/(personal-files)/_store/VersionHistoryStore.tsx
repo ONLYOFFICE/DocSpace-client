@@ -36,69 +36,74 @@
 "use client";
 
 import React from "react";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction, toJS } from "mobx";
 
-import { FolderType } from "@docspace/shared/enums";
+import type { TFile } from "@docspace/shared/api/files/types";
+import { getFileVersionInfo } from "@docspace/shared/api/files";
 
-import { TFileItem, TFolderItem } from "../_hooks/useItemList";
-
-class FilesListStore {
-  items: (TFileItem | TFolderItem)[] = [];
-  rootFolderType: FolderType | null = null;
+class VersionHistoryStore {
+  isVisible: boolean = false;
+  file: TFile | null = null;
+  versions: TFile[] | null = null;
+  isLoading: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setItems = (items?: (TFileItem | TFolderItem)[]) => {
-    this.items = items || [];
+  open = (file: TFile) => {
+    this.file = toJS(file);
+    this.isVisible = true;
+    this.versions = null;
+    void this.fetchVersions(file.id, file.requestToken);
   };
 
-  setRootFolderType = (type: FolderType) => {
-    this.rootFolderType = type;
+  close = () => {
+    this.isVisible = false;
+    this.file = null;
+    this.versions = null;
+    this.isLoading = false;
   };
 
-  updateItemFavorite = (id: number | string, isFavorite: boolean) => {
-    const item = this.items.find((i) => i.id === id);
-    if (item) item.isFavorite = isFavorite;
+  fetchVersions = async (fileId: number, requestToken?: string) => {
+    this.isLoading = true;
+    try {
+      const res = await getFileVersionInfo(fileId, requestToken);
+      runInAction(() => {
+        this.versions = res;
+      });
+    } finally {
+      runInAction(() => {
+        this.isLoading = false;
+      });
+    }
   };
-
-  updateItemLocked = (id: number | string, locked: boolean) => {
-    const item = this.items.find((i) => i.id === id);
-    if (item && "locked" in item) item.locked = locked;
-  };
-
-  removeItem = (id: number | string) => {
-    this.items = this.items.filter((i) => i.id !== id);
-  };
-
-  updateItemTitle = (id: number | string, title: string) => {
-    const item = this.items.find((i) => i.id === id);
-    if (item) item.title = title;
-  };
-
-  get itemsCount() {
-    return this.items.length;
-  }
 }
 
-export const FilesListStoreContext = React.createContext<FilesListStore>(
-  new FilesListStore(),
-);
+export const VersionHistoryStoreContext =
+  React.createContext<VersionHistoryStore>(
+    null as unknown as VersionHistoryStore,
+  );
 
-export const FilesListStoreContextProvider = ({
+export const VersionHistoryStoreContextProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const store = React.useMemo(() => new FilesListStore(), []);
+  const store = React.useMemo(() => new VersionHistoryStore(), []);
   return (
-    <FilesListStoreContext.Provider value={store}>
+    <VersionHistoryStoreContext.Provider value={store}>
       {children}
-    </FilesListStoreContext.Provider>
+    </VersionHistoryStoreContext.Provider>
   );
 };
 
-export const useFilesListStore = () => {
-  return React.useContext(FilesListStoreContext);
+export const useVersionHistoryStore = () => {
+  const store = React.useContext(VersionHistoryStoreContext);
+  if (!store) {
+    throw new Error(
+      "useVersionHistoryStore must be used within a VersionHistoryStoreContextProvider",
+    );
+  }
+  return store;
 };

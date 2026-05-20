@@ -29,9 +29,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import HistoryItemLoader from "@docspace/shared/skeletons/info-panel/body/views/HistoryItemLoader";
+
+import { NoHistory } from "../EmptyStates";
 import {
   formatDate,
   getWeekdayName,
@@ -49,11 +50,7 @@ import { useHistory } from "./useHistory";
 import HistoryBlock from "./HistoryBlock";
 import styles from "./History.module.scss";
 
-const getRelativeDateDay = (
-  t: TTranslation,
-  date: string,
-  locale: string,
-) => {
+const getRelativeDateDay = (t: TTranslation, date: string, locale: string) => {
   const given = parseToDateTime(date);
   if (!given) return "";
 
@@ -148,11 +145,7 @@ const History = ({ selection }: HistoryProps) => {
   if (showLoading) return <InfoPanelViewLoader view="history" />;
 
   if (!history.length && !(isLoading || isFirstLoading)) {
-    return (
-      <div className={styles.noHistory}>
-        <Text fontSize="13px">{t("Common:NoHistory")}</Text>
-      </div>
-    );
+    return <NoHistory />;
   }
 
   return (
@@ -182,3 +175,4 @@ const History = ({ selection }: HistoryProps) => {
 };
 
 export default History;
+

@@ -38,6 +38,7 @@
   "ChangeRoomOwner": "Changer le propriétaire de la salle",
   "ChangeTheAgentOwner": "Modifier le propriétaire de l'agent",
   "ChangeTheRoomOwner": "Changer le propriétaire de la salle",
+  "CompressingFiles": "Compression des fichiers",
   "Conversion": "Conversion",
   "Converting": "Conversion",
   "CopyFolderItem": "Le dossier <2>{{title}}</2> a été copié avec succès dans <1>{{folderName}}</1>",

@@ -38,6 +38,7 @@
   "ChangeRoomOwner": "Změnit vlastníka místnosti",
   "ChangeTheAgentOwner": "Změnit vlastníka agenta",
   "ChangeTheRoomOwner": "Změna vlastníka místnosti",
+  "CompressingFiles": "Komprimace souborů",
   "Conversion": "Převod",
   "Converting": "Probíhá převod",
   "CopyFolderItem": "Složka <2>{{title}}</2> byla úspěšně zkopírována do <1>{{folderName}}</1>.",

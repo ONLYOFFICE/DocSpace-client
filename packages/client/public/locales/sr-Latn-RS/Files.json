@@ -38,6 +38,7 @@
   "ChangeRoomOwner": "Promena vlasnika sobe",
   "ChangeTheAgentOwner": "Promenite vlasnika agenta",
   "ChangeTheRoomOwner": "Promeni Vlasnika sobe",
+  "CompressingFiles": "Kompresovanje datoteka",
   "Conversion": "Konverzija",
   "Converting": "Konvertovanje",
   "CopyFolderItem": "Folder <2>{{title}}</2> uspešno kopiran u <1>{{folderName}}</1>.",

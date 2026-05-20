@@ -38,6 +38,7 @@
   "ChangeRoomOwner": "Zmień właściciela pokoju",
   "ChangeTheAgentOwner": "Zmień właściciela agenta",
   "ChangeTheRoomOwner": "Zmień właściciela pokoju",
+  "CompressingFiles": "Kompresowanie plików",
   "Conversion": "Konwersja",
   "Converting": "Konwertowanie",
   "CopyFolderItem": "Pomyślnie skopiowano katalog <2>{{title}}</2> do katalogu <1>{{folderName}}</1>",

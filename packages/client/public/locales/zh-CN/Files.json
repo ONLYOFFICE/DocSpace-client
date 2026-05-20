@@ -38,6 +38,7 @@
   "ChangeRoomOwner": "更改房间所有者",
   "ChangeTheAgentOwner": "更改智能体所有者",
   "ChangeTheRoomOwner": "更改房间所有者",
+  "CompressingFiles": "正在压缩文件",
   "Conversion": "转换",
   "Converting": "转换中",
   "CopyFolderItem": "文件夹<2>{{title}}</2>已成功复制到<1>{{folderName}}</1>",

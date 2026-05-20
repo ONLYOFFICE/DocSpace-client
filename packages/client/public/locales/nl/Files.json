@@ -38,6 +38,7 @@
   "ChangeRoomOwner": "Wijzig de eigenaar van de ruimte",
   "ChangeTheAgentOwner": "Wijzig de agent eigenaar",
   "ChangeTheRoomOwner": "De Eigenaar Van De Kamer Wijzigen",
+  "CompressingFiles": "Bestanden comprimeren",
   "Conversion": "Conversie",
   "Converting": "Omzetten",
   "CopyFolderItem": "De map <2>{{title}}</2> is met succes gekopieerd naar <1>{{folderName}}</1>.",

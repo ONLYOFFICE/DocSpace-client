@@ -38,6 +38,7 @@
   "ChangeRoomOwner": "Αλλαγή Ιδιοκτήτη Κτομίας",
   "ChangeTheAgentOwner": "Αλλαγή του ιδιοκτήτη του πράκτορα",
   "ChangeTheRoomOwner": "Αλλαγή του ιδιοκτήτη δωματίου",
+  "CompressingFiles": "Συμπίεση αρχείων",
   "Conversion": "Μετατροπή",
   "Converting": "Γίνεται μετατροπή",
   "CopyFolderItem": "Ο φάκελος <2>{{title}}</2> αντιγράφηκε επιτυχώς στον <1>{{folderName}}</1>",

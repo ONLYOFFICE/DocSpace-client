@@ -38,6 +38,7 @@
   "ChangeRoomOwner": "ປ່ຽນເຈົ້າຂອງຫ້ອງ",
   "ChangeTheAgentOwner": "ປ່ຽນເຈົ້າຂອງຕົວແທນ",
   "ChangeTheRoomOwner": "ປ່ຽນເຈົ້າຂອງຫ້ອງ",
+  "CompressingFiles": "ກຳລັງບີບອັດໄຟລ໌",
   "Conversion": "ການປ່ຽນແປງ",
   "Converting": "ປ່ຽນ​ຮູບ​ແບບ",
   "CopyFolderItem": "ໄຟລ໌ <2>{{title}}</2> ຖືກສໍາເນົາສູ່ <1>{{folderName}}</1> ຢ່າງສໍາເລັດແລ້ວ",

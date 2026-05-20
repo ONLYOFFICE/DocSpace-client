@@ -38,6 +38,7 @@
   "ChangeRoomOwner": "Промяна на собственика на стаята",
   "ChangeTheAgentOwner": "Променете собственика на агента",
   "ChangeTheRoomOwner": "Променете Собственика на Стаята",
+  "CompressingFiles": "Компресиране на файлове",
   "Conversion": "Преобразуване",
   "Converting": "Преобразуване",
   "CopyFolderItem": "Папката <2>{{title}}</2> е успешно копирана в <1>{{folderName}}</1>",

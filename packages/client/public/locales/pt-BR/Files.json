@@ -38,6 +38,7 @@
   "ChangeRoomOwner": "Mudar Proprietário da Sala",
   "ChangeTheAgentOwner": "Alterar o proprietário do agente",
   "ChangeTheRoomOwner": "Alterar o proprietário da sala",
+  "CompressingFiles": "Compactando arquivos",
   "Conversion": "Conversão",
   "Converting": "Convertendo",
   "CopyFolderItem": "A pasta <2>{{title}}</2> foi copiada com sucesso para <1>{{folderName}}</1>",

@@ -38,6 +38,7 @@
   "ChangeRoomOwner": "Zmeniť vlastníka miestnosti",
   "ChangeTheAgentOwner": "Zmeniť vlastníka agenta",
   "ChangeTheRoomOwner": "Zmeniť vlastníka miestnosti",
+  "CompressingFiles": "Komprimácia súborov",
   "Conversion": "Konverzia",
   "Converting": "Konvertovanie",
   "CopyFolderItem": "Priečinok <2>{{title}}</2> bol úspešne skopírovaný do <1>{{folderName}}</1>",

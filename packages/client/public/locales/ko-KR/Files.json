@@ -38,6 +38,7 @@
   "ChangeRoomOwner": "방 소유자 변경",
   "ChangeTheAgentOwner": "에이전트 소유자 변경",
   "ChangeTheRoomOwner": "방 소유자 변경",
+  "CompressingFiles": "파일 압축 중",
   "Conversion": "변환",
   "Converting": "변환 중",
   "CopyFolderItem": "<2>{{title}}</2> 폴더가 <1>{{folderName}}</1>에 복사되었습니다",

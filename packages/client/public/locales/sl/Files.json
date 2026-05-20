@@ -38,6 +38,7 @@
   "ChangeRoomOwner": "Zamenjajte lastnika sobe",
   "ChangeTheAgentOwner": "Spremenite lastnika agenta",
   "ChangeTheRoomOwner": "Spremeni lastnika sobe",
+  "CompressingFiles": "Stiskanje datotek",
   "Conversion": "Pretvorba",
   "Converting": "Pretvarjanje",
   "CopyFolderItem": "Mapa <2>{{title}}</2> je bila uspešno kopirana v <1>{{folderName}}</1>",

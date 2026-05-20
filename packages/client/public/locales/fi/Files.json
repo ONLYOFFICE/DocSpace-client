@@ -38,6 +38,7 @@
   "ChangeRoomOwner": "Vaihda huoneen omistaja",
   "ChangeTheAgentOwner": "Vaihda agentin omistaja",
   "ChangeTheRoomOwner": "Vaihda Huoneen Omistaja",
+  "CompressingFiles": "Pakataan tiedostoja",
   "Conversion": "Muuntaminen",
   "Converting": "Muuntaminen",
   "CopyFolderItem": "Kansio <2>{{title}}</2> onnistuneesti kopioitu <1>{{folderName}}</1> :n",

@@ -38,6 +38,7 @@
   "ChangeRoomOwner": "කාමර හිමියා වෙනස් කරන්න",
   "ChangeTheAgentOwner": "නියෝජිත හිමිකරු වෙනස් කරන්න",
   "ChangeTheRoomOwner": "කාමරයේ හිමිකරු වෙනස් කරන්න",
+  "CompressingFiles": "ගොනු සම්පීඩනය කරමින්",
   "Conversion": "පරිවර්තනය",
   "Converting": "පරිවර්තනය කිරීම",
   "CopyFolderItem": "ෆෝල්ඩරය <2>{{title}}</2> සාර්ථකව <1>{{folderName}}</1> වෙතට පිටපත් කරන ලදී.",

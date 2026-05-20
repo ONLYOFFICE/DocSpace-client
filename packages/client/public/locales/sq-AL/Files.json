@@ -38,6 +38,7 @@
   "ChangeRoomOwner": "Zëvendëso Pronësin e Dhomës",
   "ChangeTheAgentOwner": "Ndryshoni pronarin e agjentit",
   "ChangeTheRoomOwner": "Ndryshoni pronarin e dhomës",
+  "CompressingFiles": "Po kompresohen skedarët",
   "Conversion": "Konvertim",
   "Converting": "Konvertim",
   "CopyFolderItem": "Folderi <2>{{title}}</2> është kopjuar me sukses në <1>{{folderName}}</1>",

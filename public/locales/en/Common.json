@@ -1638,5 +1638,6 @@
   "DeleteRoomWarning": "I understand the consequences and want to delete the room",
   "DeleteRooms": "The selected <strong>rooms ({{count}})</strong> will be permanently deleted. All data and user access will be lost.",
   "DeleteRoomsTitle": "Delete these rooms?",
-  "RestoreRooms": "Are you sure you want to restore rooms?"
+  "RestoreRooms": "Are you sure you want to restore rooms?",
+  "RestoreRoom": "Are you sure you want to restore a room?"
 }

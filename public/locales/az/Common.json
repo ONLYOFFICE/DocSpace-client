@@ -1623,5 +1623,6 @@
   "DeleteRoomWarning": "Mən nəticələri başa düşürəm və otağı silmək istəyirəm.",
   "DeleteRooms": "Seçilmiş <strong>otaqlar ({{count}})</strong> daimi olaraq silinəcək. Bütün məlumatlar və istifadəçi girişi itəcək.",
   "DeleteRoomsTitle": "Bu otaqları sil?",
-  "RestoreRooms": "Otaqları bərpa etmək istədiyinizə əminsiniz?"
+  "RestoreRooms": "Otaqları bərpa etmək istədiyinizə əminsiniz?",
+  "RestoreRoom": "Otağı bərpa etmək istədiyinizə əminsiniz?"
 }

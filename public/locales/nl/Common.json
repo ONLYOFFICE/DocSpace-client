@@ -1623,5 +1623,6 @@
   "DeleteRoomWarning": "Ik begrijp de gevolgen en wil de kamer verwijderen.",
   "DeleteRooms": "De geselecteerde <strong>kamers ({{count}})</strong> worden permanent verwijderd. Alle data en gebruikers toegang zullen verloren gaan.",
   "DeleteRoomsTitle": "Deze kamers verwijderen?",
-  "RestoreRooms": "Weet u zeker dat u kamers wilt herstellen?"
+  "RestoreRooms": "Weet u zeker dat u kamers wilt herstellen?",
+  "RestoreRoom": "Weet u zeker dat u een kamer wilt herstellen?"
 }

@@ -1623,5 +1623,6 @@
   "DeleteRoomWarning": "Rozumiem konsekwencje i chcę usunąć pokój.",
   "DeleteRooms": "Wybrane <strong>pokoje ({{count}})</strong> zostaną trwale usunięte. Wszystkie dane i dostęp użytkowników zostaną utracone.",
   "DeleteRoomsTitle": "Usunąć te pokoje?",
-  "RestoreRooms": "Czy na pewno chcesz przywrócić pokoje?"
+  "RestoreRooms": "Czy na pewno chcesz przywrócić pokoje?",
+  "RestoreRoom": "Czy na pewno chcesz przywrócić pokój?"
 }

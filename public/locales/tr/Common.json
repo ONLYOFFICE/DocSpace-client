@@ -1623,5 +1623,6 @@
   "DeleteRoomWarning": "Sonuçların farkındayım ve odayı silmek istiyorum",
   "DeleteRooms": "Seçilen <strong>odalar ({{count}})</strong> kalıcı olarak silinecektir. Tüm veriler ve kullanıcı erişimi kaybolacaktır.",
   "DeleteRoomsTitle": "Bu odaları sil?",
-  "RestoreRooms": "Odaları geri yüklemek istediğinizden emin misiniz?"
+  "RestoreRooms": "Odaları geri yüklemek istediğinizden emin misiniz?",
+  "RestoreRoom": "Bir odayı geri yüklemek istediğinizden emin misiniz?"
 }

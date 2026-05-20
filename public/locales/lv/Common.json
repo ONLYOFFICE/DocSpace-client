@@ -1623,5 +1623,6 @@
   "DeleteRoomWarning": "Es saprotu sekmes un vēlos dzēst istabu.",
   "DeleteRooms": "Atlasītās <strong>telpas ({{count}})</strong> tiks neatgriezeniski dzēstas. Visi dati un lietotāju piekļuve tiks zaudēta.",
   "DeleteRoomsTitle": "Dzēst šīs istabas?",
-  "RestoreRooms": "Vai tiešām vēlaties atjaunot telpas?"
+  "RestoreRooms": "Vai tiešām vēlaties atjaunot telpas?",
+  "RestoreRoom": "Vai tiešām vēlaties atjaunot telpu?"
 }

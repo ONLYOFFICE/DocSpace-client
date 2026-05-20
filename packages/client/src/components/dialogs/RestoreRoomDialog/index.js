@@ -83,8 +83,8 @@ const RestoreRoomDialogComponent = (props) => {
     if (restoreAll) return t("ArchiveDialog:RestoreAllRooms");
 
     return items.length > 1
-      ? t("ArchiveDialog:RestoreRooms")
-      : t("ArchiveDialog:RestoreRoom");
+      ? t("Common:RestoreRooms")
+      : t("Common:RestoreRoom");
   };
 
   const description = getDescription();
@@ -163,3 +163,4 @@ export default inject(
     };
   },
 )(observer(RestoreRoomDialog));
+

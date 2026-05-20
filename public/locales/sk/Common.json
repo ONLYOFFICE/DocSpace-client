@@ -1623,5 +1623,6 @@
   "DeleteRoomWarning": "Rozumiem následky a chcem zmazať miestnosť.",
   "DeleteRooms": "Vybrané <strong>miestnosti ({{count}})</strong> budú trvalo odstránené. Všetky údaje a prístup používateľov budú stratené.",
   "DeleteRoomsTitle": "Zmazať tieto miestnosti?",
-  "RestoreRooms": "Naozaj chcete obnoviť miestnosti?"
+  "RestoreRooms": "Naozaj chcete obnoviť miestnosti?",
+  "RestoreRoom": "Naozaj chcete obnoviť miestnosť?"
 }

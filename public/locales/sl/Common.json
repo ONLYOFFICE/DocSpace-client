@@ -1623,5 +1623,6 @@
   "DeleteRoomWarning": "Razumem posledice in želim izbrisati sobo.",
   "DeleteRooms": "Izbrane <strong>sobe ({{count}})</strong> bodo trajno izbrisane. Vse podatke in uporabniški dostop boste izgubili.",
   "DeleteRoomsTitle": "Ali izbrisati te sobe?",
-  "RestoreRooms": "Ali ste prepričani, da želite obnoviti sobe?"
+  "RestoreRooms": "Ali ste prepričani, da želite obnoviti sobe?",
+  "RestoreRoom": "Ali ste prepričani, da želite obnoviti sobo?"
 }

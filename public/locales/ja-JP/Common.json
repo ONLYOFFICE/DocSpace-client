@@ -1623,5 +1623,6 @@
   "DeleteRoomWarning": "私は上記の説明を理解しており、ルームを削除したいです",
   "DeleteRooms": "選択された<strong>ルーム ({{count}}</strong>) は完全に削除されます。すべてのデータとユーザーアクセス権は失われます。",
   "DeleteRoomsTitle": "これらのルームを削除しますか？",
-  "RestoreRooms": "このままルームの復元を続けますか？"
+  "RestoreRooms": "このままルームの復元を続けますか？",
+  "RestoreRoom": "このままルームの復元を続けますか？"
 }

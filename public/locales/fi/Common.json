@@ -1623,5 +1623,6 @@
   "DeleteRoomWarning": "Ymmärrän seuraukset ja haluan poistaa huoneen.",
   "DeleteRooms": "Valitut <strong>huoneet ({{count}})</strong> poistetaan pysyvästi. Kaikki data ja käyttäjien pääsy menetetään.",
   "DeleteRoomsTitle": "Poistetaanko nämä huoneet?",
-  "RestoreRooms": "Haluatko varmasti palauttaa huoneet?"
+  "RestoreRooms": "Haluatko varmasti palauttaa huoneet?",
+  "RestoreRoom": "Haluatko varmasti palauttaa huoneen?"
 }

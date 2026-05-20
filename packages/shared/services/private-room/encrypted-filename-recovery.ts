@@ -30,7 +30,10 @@ import {
   getCachedEncryptedFilename,
   rememberEncryptedFilename,
 } from "../encryption/filename-cache";
-import { unwrapDekForCurrentUser } from "../encryption/room-file-access";
+import {
+  unwrapDekForCurrentUser,
+  type RoomMemberPublicKey,
+} from "../encryption/room-file-access";
 import { reportPotentialGhostState } from "../encryption/ghost-state-notifier";
 import {
   decryptFileNameRaw,

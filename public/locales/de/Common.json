@@ -1626,5 +1626,8 @@
   "RestoreRooms": "Sind Sie sicher, dass Sie die Räume wiederherstellen wollen?",
   "RestoreRoom": "Sind Sie sicher, dass Sie einen Raum wiederherstellen wollen?",
   "ArchiveRoom": "Sie möchten einen Raum archivieren.",
-  "ArchiveRooms": "Sie möchten Räume archivieren."
+  "ArchiveRooms": "Sie möchten Räume archivieren.",
+  "WantToRestoreTheRoom": "Alle externen Links in diesem Raum werden aktiv und der Inhalt ist für jeden mit dem Link zugänglich. Möchten Sie den Raum wiederherstellen?",
+  "WantToRestoreTheRooms": "Alle externen Links in wiederhergestellten Räumen werden aktiv und ihre Inhalte sind für alle mit den Raumlinks zugänglich. Möchten Sie die Räume wiederherstellen?",
+  "RestoreAllRooms": "Sind Sie sicher, dass Sie alle Räume wiederherstellen wollen?"
 }

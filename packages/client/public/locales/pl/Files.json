@@ -205,8 +205,6 @@
   "WaitOperation": "Poczekaj na zakończenie bieżącej operacji",
   "WantLeaveAgent": "Czy naprawdę chcesz opuścić tego agenta? Będziesz mógł do niego ponownie dołączyć za pośrednictwem nowego zaproszenia od administratora agenta.",
   "WantLeaveRoom": "Czy na pewno chcesz opuścić ten pokój? Będziesz w stanie ponownie do niego dołączyć po otrzymaniu nowego zaproszenia od administratora pokoju.",
-  "WantToRestoreTheRoom": "Wszystkie linki zewnętrzne w tym pokoju staną się aktywne, a jego zawartość będzie dostępna dla wszystkich użytkowników posiadających link. Czy chcesz przywrócić pokój?",
-  "WantToRestoreTheRooms": "Wszystkie linki zewnętrzne w przywróconych pokojach staną się aktywne, a ich zawartość będzie dostępna dla wszystkich użytkowników posiadających linki do pokoi. Czy chcesz przywrócić pokoje?",
   "WarningCopyToFormRoomServal": "Kopiowanie kilku plików do Pokoju do wypełniania formularzy nie jest obsługiwane. Kopiuj po jednym formularzu PDF {{ organizationName }} na raz.",
   "WarningMoveToFormRoom": "Plik nie może zostać przeniesiony do tego pokoju. Spróbuj przenieść formularz PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Przenoszenie kilku plików do Pokoju do wypełniania formularzy nie jest obsługiwane. Przenoś po jednym formularzu PDF {{ organizationName }} na raz.",

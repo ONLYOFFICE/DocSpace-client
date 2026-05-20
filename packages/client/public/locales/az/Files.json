@@ -205,8 +205,6 @@
   "WaitOperation": "Cari əməliyyatın tamamlanmasını gözləyin",
   "WantLeaveAgent": "Bu agentdən həqiqətən ayrılmaq istəyirsiniz? Agent admin tərəfindən göndərilən yeni dəvət vasitəsilə yenidən qoşulmaq imkanınız olacaq.",
   "WantLeaveRoom": "Bu otağı tərk etmək istədiyinə əminsən? Otaq administratorunun yeni dəvəti ilə yenidən qoşula biləcəksiniz.",
-  "WantToRestoreTheRoom": "Bu otaqdakı bütün xarici keçidlər aktiv olacaq və onun məzmunu keçidi olan hər kəs üçün əlçatan olacaq. Otağı bərpa etmək istəyirsiniz?",
-  "WantToRestoreTheRooms": "Bərpa edilmiş otaqlardakı bütün xarici keçidlər aktiv olacaq və onların məzmunu otaq keçidləri olan hər kəs üçün əlçatan olacaq. Otaqları bərpa etmək istəyirsiniz?",
   "WarningCopyToFormRoomServal": "Forma Doldurma otağına çoxsaylı faylların nüsxələnməsi dəstəklənmir. {{ organizationName }} PDF formalarını bir-bir nüsxələyin.",
   "WarningMoveToFormRoom": "Fayl bu otağa köçürülə bilməz. {{ organizationName }} PDF formasını köçürməyə cəhd edin.",
   "WarningMoveToFormRoomServal": "Birdən çox faylın Forma Doldurma otağına köçürülməsi dəstəklənmir. Eyni anda bir {{organizationName }} PDF formasını köçürün.",

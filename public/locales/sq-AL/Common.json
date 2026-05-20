@@ -1626,5 +1626,8 @@
   "RestoreRooms": "A jeni të sigurt që doni të rindizni disa dhoma?",
   "RestoreRoom": "A jeni i sigurt që dëshironi të rindizni një dhomë?",
   "ArchiveRoom": "Ju jeni duke arkivuar një dhomë.",
-  "ArchiveRooms": "Ju jeni duke arkivuar disa dhoma."
+  "ArchiveRooms": "Ju jeni duke arkivuar disa dhoma.",
+  "WantToRestoreTheRoom": "Të gjitha lidhjet e ndara në këtë dhomë do të bëhen aktive dhe përmbajtja e saj do të jetë e disponueshme për të gjithë me lidhjen. Dëshironi të rivendosni dhomën?",
+  "WantToRestoreTheRooms": "Të gjitha lidhjet e ndara në dhomat e restauruara do të bëhen aktive dhe përmbajtja e tyre do të jetë e disponueshme për të gjithë me lidhjet e dhomës. Dëshiron të restaurosh dhomat?",
+  "RestoreAllRooms": "A jeni të sigurt që doni të rindizni të gjitha dhomat?"
 }

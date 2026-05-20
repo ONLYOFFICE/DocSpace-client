@@ -1626,5 +1626,8 @@
   "RestoreRooms": "Vai tiešām vēlaties atjaunot telpas?",
   "RestoreRoom": "Vai tiešām vēlaties atjaunot telpu?",
   "ArchiveRoom": "Jūs gatavojaties arhivēt telpu.",
-  "ArchiveRooms": "Jūs gatavojaties arhivēt telpas."
+  "ArchiveRooms": "Jūs gatavojaties arhivēt telpas.",
+  "WantToRestoreTheRoom": "Visas ārējās saites šajā telpā kļūs aktīvas, un tās saturs būs pieejams ikvienam, kam ir saite. Vai vēlaties atjaunot telpu?",
+  "WantToRestoreTheRooms": "Visas ārējās saites atjaunotajās telpās kļūs aktīvas, un to saturs būs pieejams ikvienam, kam ir telpas saites. Vai vēlaties atjaunot telpas?",
+  "RestoreAllRooms": "Vai tiešām vēlaties atjaunot visas telpas?"
 }

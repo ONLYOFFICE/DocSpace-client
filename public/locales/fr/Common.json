@@ -1626,5 +1626,8 @@
   "RestoreRooms": "Souhaitez-vous vraiment restaurer les salles ?",
   "RestoreRoom": "Souhaitez-vous vraiment restaurer une salle ?",
   "ArchiveRoom": "Vous êtes sur le point d’archiver une salle.",
-  "ArchiveRooms": "Vous êtes sur le point d’archiver des salles."
+  "ArchiveRooms": "Vous êtes sur le point d’archiver des salles.",
+  "WantToRestoreTheRoom": "Tous les liens externes de cette salle deviendront actifs et son contenu sera accessible à tous les utilisateurs disposant du lien. Voulez-vous restaurer la salle ?",
+  "WantToRestoreTheRooms": "Tous les liens externes des salles restaurées deviendront actifs et leur contenu sera accessible à tous ceux qui possèdent les liens de la salle. Voulez-vous restaurer les salles ?",
+  "RestoreAllRooms": "Souhaitez-vous vraiment restaurer toutes les salles ?"
 }

@@ -75,7 +75,7 @@ const ArchiveDialogComponent = (props) => {
   }, []);
 
   const getDescription = () => {
-    if (restoreAll) return t("ArchiveDialog:RestoreAllRooms");
+    if (restoreAll) return t("Common:RestoreAllRooms");
 
     return items.length > 1
       ? `${t("Common:ArchiveRooms")} ${t("Common:WantToContinue")}`

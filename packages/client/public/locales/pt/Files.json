@@ -205,8 +205,6 @@
   "WaitOperation": "Aguarde a conclusão da operação atual",
   "WantLeaveAgent": "Você realmente deseja sair deste agente? Você poderá se juntar a ele novamente através de um novo convite por um administrador de agente.",
   "WantLeaveRoom": "Você realmente quer sair desta sala? Você poderá participar novamente por meio de um novo convite de um administrador da sala.",
-  "WantToRestoreTheRoom": "Todos os links externos desta sala ficarão ativos e seu conteúdo estará disponível para todos que possuem o link. Você quer restaurar a sala?",
-  "WantToRestoreTheRooms": "Todos os links externos nas salas restauradas ficarão ativos e seu conteúdo estará disponível para todos com os links das salas. Quer restaurar as salas?",
   "WarningCopyToFormRoomServal": "Não há suporte para copiar vários arquivos para a sala de preenchimento de formulários. Copie um formulário PDF {{ organizationName }} de cada vez.",
   "WarningMoveToFormRoom": "O ficheiro não pode ser movido para esta sala. Tente mover o formulário PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Não há suporte para mover vários arquivos para a sala de preenchimento de formulários. Mova um formulário PDF {{ organizationName }} de cada vez.",

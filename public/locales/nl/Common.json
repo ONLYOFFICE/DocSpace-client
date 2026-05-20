@@ -1626,5 +1626,8 @@
   "RestoreRooms": "Weet u zeker dat u kamers wilt herstellen?",
   "RestoreRoom": "Weet u zeker dat u een kamer wilt herstellen?",
   "ArchiveRoom": "U staat op het punt een kamer te archiveren.",
-  "ArchiveRooms": "U staat op het punt kamers te archiveren."
+  "ArchiveRooms": "U staat op het punt kamers te archiveren.",
+  "WantToRestoreTheRoom": "Alle externe links in deze ruimte worden actief en het materiaal is beschikbaar voor iedereen die de link gebruikt. Wilt u de kamer herstellen?",
+  "WantToRestoreTheRooms": "Alle externe links in herstelde kamers zullen actief worden, en hun materiaal zal beschikbaar zijn voor iedereen met een link naar de kamer. Wilt u de kamers herstellen?",
+  "RestoreAllRooms": "Weet u zeker dat u alle kamers wilt herstellen?"
 }

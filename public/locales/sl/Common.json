@@ -1626,5 +1626,8 @@
   "RestoreRooms": "Ali ste prepričani, da želite obnoviti sobe?",
   "RestoreRoom": "Ali ste prepričani, da želite obnoviti sobo?",
   "ArchiveRoom": "Arhivirali boste sobo.",
-  "ArchiveRooms": "Arhivirali boste sobe."
+  "ArchiveRooms": "Arhivirali boste sobe.",
+  "WantToRestoreTheRoom": "Vse zunanje povezave v tej sobi bodo postale aktivne, njena vsebina pa bo na voljo vsem s povezavo. Ali želite obnoviti sobo?",
+  "WantToRestoreTheRooms": "Vse zunanje povezave v obnovljenih sobah bodo postale aktivne, njihova vsebina pa bo na voljo vsem s povezavami do sob. Ali želite obnoviti sobe?",
+  "RestoreAllRooms": "Ali ste prepričani, da želite obnoviti vse sobe?"
 }

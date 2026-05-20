@@ -205,8 +205,6 @@
   "WaitOperation": "Aşteptaţi finalizarea operaţiunii curente",
   "WantLeaveAgent": "Doriți să părăsiți acest agent? You will be able to join it again via new invitation by an agent admin.",
   "WantLeaveRoom": "Doriți să părăsiți această sală? Veți putea să vă alăturați din nou prin intermediul unei noi invitații de la administratorul sălii.",
-  "WantToRestoreTheRoom": "Toate link-urile externe din această sală vor deveni active și tot conținutul vor fi disponibil tuturor pe link-ul. Doriți să restaurați această sală?",
-  "WantToRestoreTheRooms": "Toate link-urile partajate către sălile restaurate vor deveni active, iar conținutul lor va fi disponibil pentru toți utilizatorii care au link-urile către sălile. Doriți să restaurați sălile?",
   "WarningCopyToFormRoomServal": "Copierea mai multor fișiere în Sala de completare a formularelor nu este acceptată. Copiați câte un formular PDF {{ organizationName }}.",
   "WarningMoveToFormRoom": "Imposibil de mutat fișierul în acestă sală. Încercați să deplasați formularul PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Deplasarea mai multor fișiere în Sala de completare a formularelor nu este acceptată. Deplasați câte un formular PDF  {{ organizationName }}.",

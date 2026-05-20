@@ -1626,5 +1626,8 @@
   "RestoreRooms": "Sigur doriţi să restaurați sălile?",
   "RestoreRoom": "Sigur doriţi să restaurați o sală?",
   "ArchiveRoom": "Sunteţi pe cale să arhivați o sală.",
-  "ArchiveRooms": "Sunteţi pe cale să arhivați săli."
+  "ArchiveRooms": "Sunteţi pe cale să arhivați săli.",
+  "WantToRestoreTheRoom": "Toate link-urile externe din această sală vor deveni active și tot conținutul vor fi disponibil tuturor pe link-ul. Doriți să restaurați această sală?",
+  "WantToRestoreTheRooms": "Toate link-urile partajate către sălile restaurate vor deveni active, iar conținutul lor va fi disponibil pentru toți utilizatorii care au link-urile către sălile. Doriți să restaurați sălile?",
+  "RestoreAllRooms": "Sigur doriţi să restaurați toate sălile?"
 }

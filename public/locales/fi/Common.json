@@ -1626,5 +1626,8 @@
   "RestoreRooms": "Haluatko varmasti palauttaa huoneet?",
   "RestoreRoom": "Haluatko varmasti palauttaa huoneen?",
   "ArchiveRoom": "Olet arkistoimassa huonetta.",
-  "ArchiveRooms": "Olet arkistoimassa huoneita."
+  "ArchiveRooms": "Olet arkistoimassa huoneita.",
+  "WantToRestoreTheRoom": "Kaikki ulkoiset linkit tässä huoneessa tulevat aktiivisiksi ja kaikki sen sisältö on saatavilla kaikille linkin kautta. Haluatko palauttaa huoneen?",
+  "WantToRestoreTheRooms": "Kaikki ulkoiset linkit palautetuista huoneissa tulevat aktiivisiksi ja niiden sisältö saataville kaikille, joilla on huoneen linkit. Haluatko palauttaa huoneet?",
+  "RestoreAllRooms": "Haluatko varmasti palauttaa kaikki huoneet?"
 }

@@ -1626,5 +1626,8 @@
   "RestoreRooms": "Jste si jistí, že chcete obnovit místnosti?",
   "RestoreRoom": "Jste si jistí, že chcete obnovit místnost?",
   "ArchiveRoom": "Chystáte se archivovat místnost.",
-  "ArchiveRooms": "Chystáte se archivovat místnosti."
+  "ArchiveRooms": "Chystáte se archivovat místnosti.",
+  "WantToRestoreTheRoom": "Všechny externí odkazy v této místnosti se stanou aktivními a její obsah bude dostupný všem, kteří na ni odkazují. Chcete místnost obnovit?",
+  "WantToRestoreTheRooms": "Všechny externí odkazy v obnovených místnostech se stanou aktivními a jejich obsah bude dostupný všem, kteří mají odkazy na místnosti. Chcete místnosti obnovit?",
+  "RestoreAllRooms": "Určitě chcete obnovit všechny místnosti?"
 }

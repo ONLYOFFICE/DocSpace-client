@@ -424,7 +424,7 @@ export const getRootTitle = (
     .with([FolderType.SHARE, P._], () => t("EmptyView:EmptyShareTitle"))
     .with([FolderType.Favorites, P._], () => t("EmptyView:EmptyFavoritesTitle"))
     .with([FolderType.Recent, P._], () => t("EmptyView:NoRecentFilesHereYet"))
-    .with([FolderType.Archive, P._], () => t("Files:ArchiveEmptyScreenHeader"))
+    .with([FolderType.Archive, P._], () => t("Common:ArchiveEmptyScreenHeader"))
     .with([FolderType.TRASH, P._], () => t("Common:EmptyScreenFolder"))
     .otherwise(() => "");
 };

@@ -205,8 +205,6 @@
   "WaitOperation": "Wait for the current operation to complete",
   "WantLeaveAgent": "Do you really want to leave this agent? You will be able to join it again via new invitation by an agent admin.",
   "WantLeaveRoom": "Do you really want to leave this room? You will be able to join it again via new invitation by a room admin.",
-  "WantToRestoreTheRoom": "All shared links in this room will become active, and its contents will be available to everyone with the link. Do you want to restore the room?",
-  "WantToRestoreTheRooms": "All shared links in restored rooms will become active, and their contents will be available to everyone with the room links. Do you want to restore the rooms?",
   "WarningCopyToFormRoomServal": "Copying several files to the Form Filling room is not supported. Copy one {{ organizationName }} PDF form at a time.",
   "WarningMoveToFormRoom": "The file cannot be moved to this room. Please try to move the {{ organizationName }} PDF form.",
   "WarningMoveToFormRoomServal": "Moving several files to the Form Filling room is not supported. Move one {{ organizationName }} PDF form at a time.",

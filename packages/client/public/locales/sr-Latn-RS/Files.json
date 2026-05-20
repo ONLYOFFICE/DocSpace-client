@@ -205,8 +205,6 @@
   "WaitOperation": "Sačekaj da se trenutna operacija završi",
   "WantLeaveAgent": "Da li stvarno želite da napustite ovog agenta? Moći ćete da mu se ponovo pridružite putem novog poziva administratora agenta.",
   "WantLeaveRoom": "Da li zaista želite da napustite ovu sobu? Moći ćete da joj se pridružite ponovo putem nove pozivnice od administratora sobe.",
-  "WantToRestoreTheRoom": "Svi deljeni linkovi u ovoj sobi će postati aktivni, a njen sadržaj će biti dostupan svima sa linkom. Da li želite da obnovite sobu?",
-  "WantToRestoreTheRooms": "Svi deljeni linkovi u obnovljenim sobama će postati aktivni, a njihov sadržaj će biti dostupan svima sa linkom sobe. Da li želite da obnovite sobe?",
   "WarningCopyToFormRoomServal": "Kopiranje više fajlova u sobu za popunjavanje obrazaca nije podržano. Kopirajte jedan {{ organizationName }} PDF obrazac u isto vreme.",
   "WarningMoveToFormRoom": "Fajl ne može biti premesten u ovu sobu. Pokušajte da premestite {{ organizationName }} PDF obrazac.",
   "WarningMoveToFormRoomServal": "Premještanje više fajlova u sobu za popunjavanje obrazaca nije podržano. Premestite jedan {{ organizationName }} PDF obrazac u isto vreme.",

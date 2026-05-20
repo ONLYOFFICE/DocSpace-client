@@ -1626,5 +1626,8 @@
   "RestoreRooms": "Odaları geri yüklemek istediğinizden emin misiniz?",
   "RestoreRoom": "Bir odayı geri yüklemek istediğinizden emin misiniz?",
   "ArchiveRoom": "Bir odayı arşivlemek üzeresiniz.",
-  "ArchiveRooms": "Odaları arşivlemek üzeresiniz."
+  "ArchiveRooms": "Odaları arşivlemek üzeresiniz.",
+  "WantToRestoreTheRoom": "Bu odadaki tüm harici bağlantılar etkin hale gelecek ve içeriği, bağlantıya sahip olan herkesin kullanımına açık olacaktır. Odayı restore etmek istiyor musunuz?",
+  "WantToRestoreTheRooms": "Geri yüklenen odalardaki tüm dış bağlantılar aktif hale gelecek ve içerikleri, oda bağlantılarına sahip olan herkesin kullanımına açık olacaktır. Odaları restore etmek istiyor musunuz?",
+  "RestoreAllRooms": "Tüm odaları geri yüklemek istediğinizden emin misiniz?"
 }

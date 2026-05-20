@@ -1641,5 +1641,8 @@
   "RestoreRooms": "Are you sure you want to restore rooms?",
   "RestoreRoom": "Are you sure you want to restore a room?",
   "ArchiveRoom": "You are about to archive a room.",
-  "ArchiveRooms": "You are about to archive rooms."
+  "ArchiveRooms": "You are about to archive rooms.",
+  "WantToRestoreTheRoom": "All shared links in this room will become active, and its contents will be available to everyone with the link. Do you want to restore the room?",
+  "WantToRestoreTheRooms": "All shared links in restored rooms will become active, and their contents will be available to everyone with the room links. Do you want to restore the rooms?",
+  "RestoreAllRooms": "Are you sure you want to restore all rooms?"
 }

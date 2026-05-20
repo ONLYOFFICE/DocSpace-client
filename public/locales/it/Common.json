@@ -1626,5 +1626,8 @@
   "RestoreRooms": "Sei sicuro di voler ripristinare le stanze?",
   "RestoreRoom": "Sei sicuro di voler ripristinare la stanza?",
   "ArchiveRoom": "Stai per archiviare una stanza.",
-  "ArchiveRooms": "Stai per archiviare le stanze."
+  "ArchiveRooms": "Stai per archiviare le stanze.",
+  "WantToRestoreTheRoom": "Tutti i link esterni in questa stanza diventeranno attivi e i suoi contenuti saranno disponibili a chiunque abbia il collegamento. Vuoi ripristinare la stanza?",
+  "WantToRestoreTheRooms": "Tutti i link esterni nelle stanze ripristinate diventeranno attivi e i loro contenuti saranno disponibili a chiunque abbia i link alle stanze. Vuoi ripristinare le stanze?",
+  "RestoreAllRooms": "Sei sicuro di voler ripristinare tutte le stanze?"
 }

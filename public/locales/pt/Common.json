@@ -1626,5 +1626,8 @@
   "RestoreRooms": "Tem a certeza que quer restaurar as salas?",
   "RestoreRoom": "Tem a certeza que quer restaurar a sala?",
   "ArchiveRoom": "Está prestes a arquivar uma sala.",
-  "ArchiveRooms": "Está prestes a arquivar várias salas."
+  "ArchiveRooms": "Está prestes a arquivar várias salas.",
+  "WantToRestoreTheRoom": "Todos os links externos desta sala ficarão ativos e seu conteúdo estará disponível para todos que possuem o link. Você quer restaurar a sala?",
+  "WantToRestoreTheRooms": "Todos os links externos nas salas restauradas ficarão ativos e seu conteúdo estará disponível para todos com os links das salas. Quer restaurar as salas?",
+  "RestoreAllRooms": "Tem a certeza que quer restaurar todas as salas?"
 }

@@ -1626,5 +1626,8 @@
   "RestoreRooms": "确定要恢复房间吗？",
   "RestoreRoom": "确定要恢复房间吗？",
   "ArchiveRoom": "您即将存档房间。",
-  "ArchiveRooms": "您即将存档房间。"
+  "ArchiveRooms": "您即将存档房间。",
+  "WantToRestoreTheRoom": "此房间的所有外部链接都会变为活动状态，所有拥有此链接的人都可以访问房间内容。要还原房间吗？",
+  "WantToRestoreTheRooms": "恢复房间后，其所有的共享链接都将重新生效，并且拥有房间链接的人都可以访问其内容。 您确定恢复房间吗？",
+  "RestoreAllRooms": "确定要恢复所有房间吗？"
 }

@@ -1626,5 +1626,8 @@
   "RestoreRooms": "Czy na pewno chcesz przywrócić pokoje?",
   "RestoreRoom": "Czy na pewno chcesz przywrócić pokój?",
   "ArchiveRoom": "Zamierzasz zarchiwizować pokój.",
-  "ArchiveRooms": "Zamierzasz zarchiwizować pokoje."
+  "ArchiveRooms": "Zamierzasz zarchiwizować pokoje.",
+  "WantToRestoreTheRoom": "Wszystkie linki zewnętrzne w tym pokoju staną się aktywne, a jego zawartość będzie dostępna dla wszystkich użytkowników posiadających link. Czy chcesz przywrócić pokój?",
+  "WantToRestoreTheRooms": "Wszystkie linki zewnętrzne w przywróconych pokojach staną się aktywne, a ich zawartość będzie dostępna dla wszystkich użytkowników posiadających linki do pokoi. Czy chcesz przywrócić pokoje?",
+  "RestoreAllRooms": "Czy na pewno chcesz przywrócić wszystkie pokoje?"
 }

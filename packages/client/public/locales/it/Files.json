@@ -205,8 +205,6 @@
   "WaitOperation": "Attendi il completamento dell'operazione corrente",
   "WantLeaveAgent": "Vuoi davvero lasciare questo agente? Potrai unirti di nuovo tramite un nuovo invito da parte di un amministratore dell’agente.",
   "WantLeaveRoom": "Vuoi lasciare questa stanza? Potrai unirti nuovamente tramite un nuovo invito da parte di un amministratore della sala.",
-  "WantToRestoreTheRoom": "Tutti i link esterni in questa stanza diventeranno attivi e i suoi contenuti saranno disponibili a chiunque abbia il collegamento. Vuoi ripristinare la stanza?",
-  "WantToRestoreTheRooms": "Tutti i link esterni nelle stanze ripristinate diventeranno attivi e i loro contenuti saranno disponibili a chiunque abbia i link alle stanze. Vuoi ripristinare le stanze?",
   "WarningCopyToFormRoomServal": "La copia di più file nella stanza di compilazione dei moduli non è supportata. Copia un modulo PDF {{ organizationName }} alla volta.",
   "WarningMoveToFormRoom": "Non è possibile spostare il file in questa stanza. Provare a spostare un modulo PDF {{ organizationName }} alla volta.",
   "WarningMoveToFormRoomServal": "Lo spostamento di più file nella stanza di compilazione dei moduli non è supportato. Sposta un modulo PDF {{ organizationName }} alla volta.",

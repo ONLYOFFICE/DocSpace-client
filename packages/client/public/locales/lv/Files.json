@@ -205,8 +205,6 @@
   "WaitOperation": "Uzgaidiet, līdz tiks pabeigta pašreizējā darbība",
   "WantLeaveAgent": "Vai tiešām vēlaties atstāt šo aģentu? Jūs varēsiet pievienoties tam atkal, saņemot jaunu aicinājumu no aģenta administratora.",
   "WantLeaveRoom": "Vai tiešām vēlaties atstāt šo telpu? Jūs varēsiet tai atkal pievienoties, izmantojot jaunu telpas administratora ielūgumu.",
-  "WantToRestoreTheRoom": "Visas ārējās saites šajā telpā kļūs aktīvas, un tās saturs būs pieejams ikvienam, kam ir saite. Vai vēlaties atjaunot telpu?",
-  "WantToRestoreTheRooms": "Visas ārējās saites atjaunotajās telpās kļūs aktīvas, un to saturs būs pieejams ikvienam, kam ir telpas saites. Vai vēlaties atjaunot telpas?",
   "WarningCopyToFormRoomServal": "Vairāku failu kopēšana uz veidlapu aizpildīšanas telpu netiek atbalstīta. Vienlaikus kopējiet vienu {{ organizationName }} PDF veidlapu.",
   "WarningMoveToFormRoom": "Failu nevar pārvietot uz šo telpu. Mēģiniet pārvietot {{ organizationName }} PDF veidlapu.",
   "WarningMoveToFormRoomServal": "Vairāku failu pārvietošana uz veidlapu aizpildīšanas telpu netiek atbalstīta. Vienlaikus pārvietojiet vienu {{ organizationName }} PDF veidlapu.",

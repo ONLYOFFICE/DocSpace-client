@@ -205,8 +205,6 @@
   "WaitOperation": "Prisni që operacioni aktual të përfundojë",
   "WantLeaveAgent": "Dëshiron vërtet të largohesh nga ky agjent? Do të jesh në gjendje t'i bashkohesh përsëri nëpërmjet një ftese të re nga një administrator agjenti.",
   "WantLeaveRoom": "Dëshiron vërtet të largohesh nga kjo dhomë? Do të mund t'i bashkohesh sërish me ftesë të re nga një administrator i dhomës.",
-  "WantToRestoreTheRoom": "Të gjitha lidhjet e ndara në këtë dhomë do të bëhen aktive dhe përmbajtja e saj do të jetë e disponueshme për të gjithë me lidhjen. Dëshironi të rivendosni dhomën?",
-  "WantToRestoreTheRooms": "Të gjitha lidhjet e ndara në dhomat e restauruara do të bëhen aktive dhe përmbajtja e tyre do të jetë e disponueshme për të gjithë me lidhjet e dhomës. Dëshiron të restaurosh dhomat?",
   "WarningCopyToFormRoomServal": "Kopjimi i disa skedarëve në dhomën e plotësimit të formularit nuk mbështetet. Kopjo një formë PDF {{ organizationName }} në të njëjtën kohë.",
   "WarningMoveToFormRoom": "Skedari nuk mund të zhvendoset në këtë dhomë. Ju lutemi provoni të zhvendosni formularin PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Zhvendosja e disa skedarëve në dhomën e plotësimit të formularit nuk mbështetet. Lëvizni një formular PDF {{ organizationName }} në të njëjtën kohë.",

@@ -1626,5 +1626,8 @@
   "RestoreRooms": "Bạn có chắc chắn muốn khôi phục các phòng không?",
   "RestoreRoom": "Bạn có chắc chắn muốn khôi phục phòng không?",
   "ArchiveRoom": "Bạn sắp sao lưu một phòng.",
-  "ArchiveRooms": "Bạn sắp sao lưu các phòng."
+  "ArchiveRooms": "Bạn sắp sao lưu các phòng.",
+  "WantToRestoreTheRoom": "Tất cả các liên kết bên ngoài trong phòng này sẽ hoạt động và nội dung của nó sẽ khả dụng cho tất cả mọi người có liên kết. Bạn có muốn khôi phục phòng không?",
+  "WantToRestoreTheRooms": "Tất cả các liên kết bên ngoài trong các phòng được khôi phục sẽ hoạt động, và nội dung của chúng sẽ khả dụng cho tất cả mọi người có liên kết phòng. Bạn có muốn khôi phục phòng không?",
+  "RestoreAllRooms": "Bạn có chắc chắn muốn khôi phục tất cả các phòng không?"
 }

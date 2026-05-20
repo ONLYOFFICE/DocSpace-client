@@ -1626,5 +1626,8 @@
   "RestoreRooms": "Otaqları bərpa etmək istədiyinizə əminsiniz?",
   "RestoreRoom": "Otağı bərpa etmək istədiyinizə əminsiniz?",
   "ArchiveRoom": "Otağı arxivləşdirmək üzrəsiniz.",
-  "ArchiveRooms": "Otaqları arxivləşdirmək üzrəsiniz."
+  "ArchiveRooms": "Otaqları arxivləşdirmək üzrəsiniz.",
+  "WantToRestoreTheRoom": "Bu otaqdakı bütün xarici keçidlər aktiv olacaq və onun məzmunu keçidi olan hər kəs üçün əlçatan olacaq. Otağı bərpa etmək istəyirsiniz?",
+  "WantToRestoreTheRooms": "Bərpa edilmiş otaqlardakı bütün xarici keçidlər aktiv olacaq və onların məzmunu otaq keçidləri olan hər kəs üçün əlçatan olacaq. Otaqları bərpa etmək istəyirsiniz?",
+  "RestoreAllRooms": "Bütün otaqları bərpa etmək istədiyinizə əminsiniz?"
 }

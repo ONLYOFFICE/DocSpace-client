@@ -205,8 +205,6 @@
   "WaitOperation": "Warten, bis der aktuelle Vorgang abgeschlossen ist",
   "WantLeaveAgent": "Möchten Sie diesen Agenten wirklich verlassen? Sie können ihm über eine neue Einladung eines Agentenadministrators wieder beitreten.",
   "WantLeaveRoom": "Willst du diesen Raum wirklich verlassen? Du kannst ihn wieder betreten, wenn du eine neue Einladung von einem Raumadministrator erhältst.",
-  "WantToRestoreTheRoom": "Alle externen Links in diesem Raum werden aktiv und der Inhalt ist für jeden mit dem Link zugänglich. Möchten Sie den Raum wiederherstellen?",
-  "WantToRestoreTheRooms": "Alle externen Links in wiederhergestellten Räumen werden aktiv und ihre Inhalte sind für alle mit den Raumlinks zugänglich. Möchten Sie die Räume wiederherstellen?",
   "WarningCopyToFormRoomServal": "Das Kopieren mehrerer Dateien in den Raum zum Ausfüllen von Formularen wird nicht unterstützt. Kopieren Sie jeweils ein {{ organizationName }} PDF-Formular.",
   "WarningMoveToFormRoom": "Die Datei kann nicht in diesen Raum verschoben werden. Bitte versuchen Sie, das PDF-Formular {{ organizationName }} zu verschieben.",
   "WarningMoveToFormRoomServal": "Das Verschieben mehrerer Dateien in den Raum zum Ausfüllen von Formularen wird nicht unterstützt. Verschieben Sie jeweils ein {{ organizationName }} PDF-Formular.",

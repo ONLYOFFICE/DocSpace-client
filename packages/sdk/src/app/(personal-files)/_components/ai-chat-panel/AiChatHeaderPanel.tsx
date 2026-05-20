@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -52,15 +52,23 @@ export const DocsChatHeaderPanel = observer(() => {
   const goToChat = stores.useRouter((s) => s.goToChat);
   const isSettingsPage = currentPage === "settings";
 
+  const forcedFullscreenRef = useRef(false);
+
   useEffect(() => {
     if (isSettingsPage && !isFullscreen) {
       setFullscreen(true);
+      forcedFullscreenRef.current = true;
+      return;
+    }
+    if (!isSettingsPage && forcedFullscreenRef.current) {
+      setFullscreen(false);
+      forcedFullscreenRef.current = false;
     }
   }, [isSettingsPage, isFullscreen, setFullscreen]);
 
   const handleClose = () => {
     goToChat();
-    close();
+    if (!isSettingsPage) close();
   };
 
   return (

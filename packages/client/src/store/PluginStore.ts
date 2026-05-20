@@ -700,8 +700,6 @@ class PluginStore {
       if (typeof status !== "boolean")
         currentStatus = oldPlugin?.enabled || false;
 
-      currentSettings = currentStatus ? settings : "";
-
       const plugin = await api.plugins.updatePlugin(
         name,
         currentStatus,
@@ -743,7 +741,6 @@ class PluginStore {
     if (!plugin) return;
 
     plugin.enabled = false;
-    plugin.settings = "";
 
     this.uninstallPluginCss(plugin);
 

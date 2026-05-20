@@ -46,6 +46,7 @@ const RoomsRowView = ({
   onEditRoom,
   onChangeOwner,
   onRoomChanged,
+  isArchive,
 }: RoomsRowViewProps) => {
   const isSSR = useIsServer();
 
@@ -71,6 +72,7 @@ const RoomsRowView = ({
           onEditRoom={onEditRoom}
           onChangeOwner={onChangeOwner}
           onRoomChanged={onRoomChanged}
+          isArchive={isArchive}
         />
       ))}
     </FilesRowContainer>

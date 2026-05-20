@@ -66,6 +66,7 @@ const RoomsRow = observer(
     onEditRoom,
     onChangeOwner,
     onRoomChanged,
+    isArchive,
   }: RoomsRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
@@ -80,6 +81,7 @@ const RoomsRow = observer(
       onEditRoom,
       onRoomChanged,
       onChangeOwner,
+      isArchive,
     );
     const refreshRooms = React.useContext(RoomsRefreshContext);
 

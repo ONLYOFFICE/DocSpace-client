@@ -40,7 +40,7 @@ import type {
 import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TSortBy, TCreatedBy } from "@docspace/shared/types";
-import { DeviceType } from "@docspace/shared/enums";
+import { DeviceType, RoomSearchArea } from "@docspace/shared/enums";
 
 import { PAGE_COUNT } from "@/utils/constants";
 
@@ -73,6 +73,7 @@ type RoomsListProps = {
   total: number;
   current: TFolder;
   user?: TUser;
+  isArchive?: boolean;
 };
 
 const RoomsList = ({
@@ -84,6 +85,7 @@ const RoomsList = ({
   total: totalProp,
   current,
   user,
+  isArchive,
 }: RoomsListProps) => {
   const timezone = portalSettings.timezone;
   const searchParams = useSearchParams();
@@ -114,7 +116,10 @@ const RoomsList = ({
   });
 
   const [filter, setFilter] = React.useState<RoomsFilter>(() => {
-    const f = RoomsFilter.getDefault();
+    const f = RoomsFilter.getDefault(
+      undefined,
+      isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
+    );
     const sp = new URLSearchParams(filesFilter);
     if (sp.get("page")) f.page = Number(sp.get("page"));
     if (sp.get("pageCount")) f.pageCount = Number(sp.get("pageCount"));
@@ -190,7 +195,10 @@ const RoomsList = ({
 
     requestRunning.current = true;
 
-    const newFilter = RoomsFilter.getDefault();
+    const newFilter = RoomsFilter.getDefault(
+      undefined,
+      isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
+    );
     const sp = new URLSearchParams(window.location.search);
     if (sp.get("page")) newFilter.page = Number(sp.get("page"));
     if (sp.get("sortBy"))
@@ -243,6 +251,7 @@ const RoomsList = ({
     convertFileToItem,
     navigationStore,
     setRootFolderType,
+    isArchive,
   ]);
 
   const fetchMoreRooms = React.useCallback(async () => {
@@ -341,6 +350,7 @@ const RoomsList = ({
         onEditRoom={onEditRoom}
         onChangeOwner={onChangeOwner}
         onRoomChanged={refreshSingleRoom}
+        isArchive={isArchive}
       />
     );
   } else {
@@ -355,6 +365,7 @@ const RoomsList = ({
         onEditRoom={onEditRoom}
         onChangeOwner={onChangeOwner}
         onRoomChanged={refreshSingleRoom}
+        isArchive={isArchive}
       />
     );
   }

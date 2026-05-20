@@ -31,7 +31,7 @@ import SdkIframe from "SRC_DIR/components/SdkIframe";
 
 const SECTION_TO_PATH: Record<string, string> = {
   rooms: "/sdk/rooms",
-  archive: "/sdk/rooms",
+  archive: "/sdk/archive",
   trash: "/sdk/rooms",
   settings: "/sdk/rooms",
 };
@@ -45,3 +45,4 @@ export const AiRooms = () => {
 };
 
 export default AiRooms;
+

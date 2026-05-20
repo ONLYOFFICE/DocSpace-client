@@ -45,6 +45,7 @@ export type RoomsRowProps = RoomsRowContentProps & {
   onEditRoom?: (item: TFolderItem | TFileItem) => void;
   onChangeOwner?: (item: TFolderItem | TFileItem) => void;
   onRoomChanged?: (id: number) => void;
+  isArchive?: boolean;
 };
 
 export type RoomsRowViewProps = Pick<
@@ -58,4 +59,5 @@ export type RoomsRowViewProps = Pick<
   onEditRoom?: (item: TFolderItem | TFileItem) => void;
   onChangeOwner?: (item: TFolderItem | TFileItem) => void;
   onRoomChanged?: (id: number) => void;
+  isArchive?: boolean;
 };

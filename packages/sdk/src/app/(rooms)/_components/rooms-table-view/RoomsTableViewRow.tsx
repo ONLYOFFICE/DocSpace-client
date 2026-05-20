@@ -76,6 +76,7 @@ type RoomsTableViewRowProps = {
   onEditRoom?: (item: TFolderItem | TFileItem) => void;
   onChangeOwner?: (item: TFolderItem | TFileItem) => void;
   onRoomChanged?: (id: number) => void;
+  isArchive?: boolean;
 };
 
 const RoomsTableViewRow = observer(
@@ -87,6 +88,7 @@ const RoomsTableViewRow = observer(
     onEditRoom,
     onChangeOwner,
     onRoomChanged,
+    isArchive,
   }: RoomsTableViewRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
@@ -101,6 +103,7 @@ const RoomsTableViewRow = observer(
       onEditRoom,
       onRoomChanged,
       onChangeOwner,
+      isArchive,
     );
     const refreshRooms = React.useContext(RoomsRefreshContext);
     const isChecked = filesSelectionStore.isCheckedItem(item);

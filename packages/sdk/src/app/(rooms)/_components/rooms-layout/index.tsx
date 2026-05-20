@@ -73,6 +73,7 @@ type RoomsLayoutProps = {
   portalSettings: TSettings;
   filesFilter: string;
   user?: TUser;
+  isArchive?: boolean;
 };
 
 const RoomsLayout = observer(
@@ -86,6 +87,7 @@ const RoomsLayout = observer(
     portalSettings,
     filesFilter,
     user,
+    isArchive,
   }: RoomsLayoutProps) => {
     const { t } = useTranslation(["Common"]);
     const { isEmptyList } = useSettingsStore();
@@ -105,6 +107,7 @@ const RoomsLayout = observer(
           icon: <CreateCustomRoomIllustrationIcon />,
           label: t("Common:NewRoom"),
           onClick: createCustomRoom,
+          disabled: isArchive,
         },
         {
           id: "use-template",
@@ -113,7 +116,7 @@ const RoomsLayout = observer(
           disabled: true,
         },
       ],
-      [t, createCustomRoom],
+      [t, createCustomRoom, isArchive],
     );
 
     const mainButtonModel = React.useMemo<ContextMenuModel[]>(
@@ -161,6 +164,7 @@ const RoomsLayout = observer(
                     isDropdown: true,
                     model: mainButtonModel,
                     text: t("Common:New"),
+                    isDisabled: isArchive,
                   }}
                 />
               </>
@@ -175,6 +179,7 @@ const RoomsLayout = observer(
                 filesFilter={filesFilter}
                 current={current}
                 user={user}
+                isArchive={isArchive}
               />
             }
             isEmptyPage={isEmptyList}

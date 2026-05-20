@@ -62,6 +62,7 @@ const List = ({
   shareKey,
   total: totalProp,
   current,
+  withoutFavorite,
 }: ListProps) => {
   const timezone = portalSettings.timezone;
   const displayFileExtension = filesSettings.displayFileExtension;
@@ -101,6 +102,7 @@ const List = ({
     isRecentSection: rootFolderType === FolderType.Recent,
     isTrashSection: rootFolderType === FolderType.TRASH,
     isDocsSection: rootFolderType === FolderType.USER,
+    withoutFavorite,
   });
 
   const [filter, setFilter] = React.useState<FilesFilter>(

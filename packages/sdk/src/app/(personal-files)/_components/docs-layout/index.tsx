@@ -103,6 +103,11 @@ type DocsLayoutProps = {
   filesSettings: TFilesSettings;
   portalSettings: TSettings;
   filesFilter: string;
+  /**
+   * Temporary flag: hide "Add to favorites" in file/folder context menus.
+   * Used for rooms internals and trash.
+   */
+  withoutFavorite?: boolean;
 };
 
 const getSubmitLabel = (mode: SelectorMode, t: (key: string) => string) => {
@@ -120,6 +125,7 @@ const DocsLayout = observer(({
   filesSettings,
   portalSettings,
   filesFilter,
+  withoutFavorite,
 }: DocsLayoutProps) => {
   const { t } = useTranslation(["Common"]);
   const { isEmptyList } = useSettingsStore();
@@ -305,6 +311,7 @@ const DocsLayout = observer(({
                           portalSettings={portalSettings}
                           filesFilter={filesFilter}
                           current={current}
+                          withoutFavorite={withoutFavorite}
                         />
                       }
                       infoPanelHeaderContent={<DocsInfoPanelHeader />}

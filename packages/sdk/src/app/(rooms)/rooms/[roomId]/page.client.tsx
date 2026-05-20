@@ -109,6 +109,7 @@ export default function RoomFilesPage({
         filesSettings={filesSettings}
         portalSettings={portalSettings}
         filesFilter={filesFilter}
+        withoutFavorite
       />
     </OpenFolderContext.Provider>
   );

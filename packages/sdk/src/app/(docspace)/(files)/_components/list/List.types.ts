@@ -41,4 +41,5 @@ export type ListProps = {
   current: TFolder;
 
   shareKey?: string;
+  withoutFavorite?: boolean;
 };

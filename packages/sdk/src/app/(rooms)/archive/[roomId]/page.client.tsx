@@ -109,6 +109,7 @@ export default function ArchiveRoomFilesPage({
         filesSettings={filesSettings}
         portalSettings={portalSettings}
         filesFilter={filesFilter}
+        withoutFavorite
       />
     </OpenFolderContext.Provider>
   );

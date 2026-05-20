@@ -89,6 +89,7 @@ export default function TrashPage({
       filesSettings={filesSettings}
       portalSettings={portalSettings}
       filesFilter={filesFilter}
+      withoutFavorite
     />
   );
 }

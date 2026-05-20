@@ -108,7 +108,9 @@ const Header = ({
   const id = current?.id;
 
   const isRoomsFolder = pathParts?.[0]?.id === rootFolderId;
-  const isInRoomsContext = pathParts?.[0]?.folderType === FolderType.Rooms;
+  const isInRoomsContext =
+    pathParts?.[0]?.folderType === FolderType.Rooms ||
+    pathParts?.[0]?.folderType === FolderType.Archive;
 
   const navigationItems: TNavigationItem[] = useMemo(() => {
     if (!pathParts) return [];

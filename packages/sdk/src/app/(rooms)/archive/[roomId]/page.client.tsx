@@ -38,11 +38,10 @@ import type { TUser } from "@docspace/shared/api/people/types";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import { OpenFolderContext } from "@/app/(docspace)/_contexts/OpenFolderContext";
+import { useDocsPageInit } from "../../../(personal-files)/_hooks/useDocsPageInit";
+import DocsLayout from "../../../(personal-files)/_components/docs-layout";
 
-import { useDocsPageInit } from "../../(personal-files)/_hooks/useDocsPageInit";
-import RoomsLayout from "../_components/rooms-layout";
-
-type ArchivePageProps = {
+type ArchiveRoomFilesPageProps = {
   authToken: string;
   filesSettings: TFilesSettings;
   folderData: TGetFolder;
@@ -51,15 +50,16 @@ type ArchivePageProps = {
   user?: TUser;
 };
 
-export default function ArchivePage({
+export default function ArchiveRoomFilesPage({
   authToken,
   filesSettings,
   folderData,
   portalSettings,
   filesFilter,
   user,
-}: ArchivePageProps) {
+}: ArchiveRoomFilesPageProps) {
   const router = useRouter();
+
   const isReady = useDocsPageInit({
     authToken,
     filesSettings,
@@ -67,12 +67,17 @@ export default function ArchivePage({
     user,
   });
 
-  const openRoom = React.useCallback(
-    (roomId: number | string) => {
-      router.push(`/archive/${roomId}`);
-      return true;
+  const roomsRootId = folderData.pathParts?.[0]?.id;
+
+  const handleOpenFolder = React.useCallback(
+    (folderId: number | string) => {
+      if (roomsRootId !== undefined && folderId === roomsRootId) {
+        router.push("/archive");
+        return true;
+      }
+      return false;
     },
-    [router],
+    [router, roomsRootId],
   );
 
   if (!isReady) {
@@ -94,8 +99,8 @@ export default function ArchivePage({
   const { folders, files, total, current, pathParts } = folderData;
 
   return (
-    <OpenFolderContext.Provider value={openRoom}>
-      <RoomsLayout
+    <OpenFolderContext.Provider value={handleOpenFolder}>
+      <DocsLayout
         folders={folders}
         files={files}
         total={total}
@@ -104,8 +109,6 @@ export default function ArchivePage({
         filesSettings={filesSettings}
         portalSettings={portalSettings}
         filesFilter={filesFilter}
-        user={user}
-        isArchive
       />
     </OpenFolderContext.Provider>
   );

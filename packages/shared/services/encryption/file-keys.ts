@@ -35,12 +35,14 @@ import { DecryptionError } from "./errors";
 import { getRandomBytes, zeroBuffer } from "./utils";
 import {
   decryptChunked,
+  decryptChunkedFromBlob,
   decryptFileNameRaw,
   encryptChunked,
   encryptFileNameRaw,
   getDSE3HeaderSize,
   isDSE3Format,
   parseDSE3Header,
+  parseDSE3HeaderFromBlob,
 } from "./streaming-encryption";
 import { rememberEncryptedFilename } from "./filename-cache";
 
@@ -119,6 +121,40 @@ export async function decryptFile(
 
   const data = await decryptChunked(
     bytes,
+    dek,
+    header,
+    headerSize,
+    options.onProgress,
+  );
+  return { data, fileName };
+}
+
+export async function decryptFileFromBlob(
+  encrypted: Blob,
+  dek: Uint8Array,
+  options: DecryptFileOptions = {},
+): Promise<DecryptFileResult> {
+  const magic = new Uint8Array(await encrypted.slice(0, 4).arrayBuffer());
+  if (!isDSE3Format(magic)) {
+    throw new DecryptionError("not a DSE3 v2 file");
+  }
+
+  const { header, headerSize } = await parseDSE3HeaderFromBlob(encrypted);
+
+  let fileName: string | null = null;
+  if (header.encryptedName) {
+    fileName = await decryptFileNameRaw(
+      header.encryptedName,
+      dek,
+      header.fileNonce,
+    );
+    if (fileName && options.cacheFilenameForFileId) {
+      rememberEncryptedFilename(options.cacheFilenameForFileId, fileName);
+    }
+  }
+
+  const data = await decryptChunkedFromBlob(
+    encrypted,
     dek,
     header,
     headerSize,

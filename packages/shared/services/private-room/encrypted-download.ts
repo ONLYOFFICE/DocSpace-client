@@ -26,14 +26,14 @@
 
 import { Zip, ZipPassThrough } from "fflate";
 
-import { decryptFile } from "../encryption/file-keys";
+import { decryptFile, decryptFileFromBlob } from "../encryption/file-keys";
 import { unwrapDekForCurrentUser } from "../encryption/room-file-access";
 import { reportPotentialGhostState } from "../encryption/ghost-state-notifier";
 import type { RoomMemberPublicKey } from "../encryption/room-file-access";
 import type { IdentityKeyPair, ServerAccessKeyDto } from "../encryption/types";
 
 export type DecryptConfig = {
-  encryptedData: ArrayBuffer;
+  encryptedData: ArrayBuffer | Blob;
   fileId: number;
   fileKeys: ServerAccessKeyDto[];
   roomMemberKeys: RoomMemberPublicKey[];
@@ -63,11 +63,16 @@ export async function decryptDownloadedFile(
       fileId: config.fileId,
     });
 
-    const { data: decryptedBlob, fileName: decryptedName } = await decryptFile(
-      config.encryptedData,
-      dek,
-      { onProgress: config.onProgress, cacheFilenameForFileId: config.fileId },
-    );
+    const { data: decryptedBlob, fileName: decryptedName } =
+      config.encryptedData instanceof Blob
+        ? await decryptFileFromBlob(config.encryptedData, dek, {
+            onProgress: config.onProgress,
+            cacheFilenameForFileId: config.fileId,
+          })
+        : await decryptFile(config.encryptedData, dek, {
+            onProgress: config.onProgress,
+            cacheFilenameForFileId: config.fileId,
+          });
 
     const finalName = decryptedName || config.originalFileName;
     const decryptedFile = new File([decryptedBlob], finalName, {
@@ -109,7 +114,7 @@ export async function downloadAndDecryptFile(
       return { success: false, error: "Failed to read response stream" };
     }
 
-    const chunks: Uint8Array[] = [];
+    let chunks: Uint8Array[] | null = [];
     let loaded = 0;
     while (true) {
       const { done, value } = await reader.read();
@@ -121,15 +126,11 @@ export async function downloadAndDecryptFile(
       }
     }
 
-    const encryptedData = new Uint8Array(loaded);
-    let offset = 0;
-    for (const chunk of chunks) {
-      encryptedData.set(chunk, offset);
-      offset += chunk.length;
-    }
+    const encryptedBlob = new Blob(chunks as BlobPart[]);
+    chunks = null;
 
     return await decryptDownloadedFile({
-      encryptedData: encryptedData.buffer,
+      encryptedData: encryptedBlob,
       fileId: config.fileId,
       fileKeys: config.fileKeys,
       roomMemberKeys: config.roomMemberKeys,

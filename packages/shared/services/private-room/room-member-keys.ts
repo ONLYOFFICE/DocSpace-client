@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,26 +24,37 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export type PassphraseDialogProps = {
-  visible: boolean;
-  isNewPassphrase?: boolean;
-  error?: string | null;
-  isLoading?: boolean;
-  onSubmit: (passphrase: string) => Promise<void>;
-  onCancel: () => void;
-  title?: string;
-  description?: string;
-  minLength?: number;
-  requireStrong?: boolean;
-};
+import { getRoomEncryptionKeys } from "../../api/privacy";
+import type { RoomMemberPublicKey } from "../encryption/room-file-access";
 
-export type PassphraseFormState = {
-  passphrase: string;
-  confirmPassphrase: string;
-  localError: string;
-};
+export async function loadRoomMemberKeys(
+  roomId: number | string,
+): Promise<{
+  keyByUserId: Map<string, string>;
+  list: RoomMemberPublicKey[];
+}> {
+  const keys = await getRoomEncryptionKeys(roomId);
+  const keyByUserId = new Map<string, string>();
+  const list: RoomMemberPublicKey[] = [];
+  if (Array.isArray(keys)) {
+    for (const k of keys) {
+      if (!k?.userId || !k?.publicKey) continue;
+      const id = String(k.userId);
+      keyByUserId.set(id, k.publicKey);
+      list.push({ userId: id, publicKey: k.publicKey });
+    }
+  }
+  return { keyByUserId, list };
+}
 
-export type {
-  PassphraseStrength,
-  PassphraseStrengthResult as StrengthCheckResult,
-} from "@docspace/shared/services/encryption/passphrase-strength";
+export async function loadRoomMemberKeysSafe(
+  roomId: number | string | null | undefined,
+): Promise<RoomMemberPublicKey[]> {
+  if (!roomId && roomId !== 0) return [];
+  try {
+    const { list } = await loadRoomMemberKeys(roomId);
+    return list;
+  } catch {
+    return [];
+  }
+}

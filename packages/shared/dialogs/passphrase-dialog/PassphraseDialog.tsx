@@ -47,6 +47,7 @@ import {
   checkPassphraseStrength,
   type PassphraseStrength,
 } from "@docspace/shared/services/encryption/passphrase-strength";
+import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 
 import type {
   PassphraseDialogProps,
@@ -108,7 +109,6 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
     passphrase: "",
     confirmPassphrase: "",
     localError: "",
-    showPassword: false,
   });
 
   const strengthResult = useMemo(() => {
@@ -122,7 +122,6 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
         passphrase: "",
         confirmPassphrase: "",
         localError: "",
-        showPassword: false,
       });
       setTimeout(() => inputRef.current?.focus(), 100);
     }
@@ -166,8 +165,7 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
     } catch (error) {
       setState((prev: PassphraseFormState) => ({
         ...prev,
-        localError:
-          error instanceof Error ? error.message : t("Common:UnknownError"),
+        localError: getEncryptionErrorMessage(t, error),
       }));
     }
   }, [state.passphrase, validatePassphrase, onSubmit, t]);
@@ -199,7 +197,6 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
       passphrase: "",
       confirmPassphrase: "",
       localError: "",
-      showPassword: false,
     });
     onCancel();
   }, [onCancel]);

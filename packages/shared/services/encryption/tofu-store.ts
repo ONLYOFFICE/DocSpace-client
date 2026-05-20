@@ -55,7 +55,8 @@ function warnUnavailableOnce(): void {
   warnedUnavailable = true;
   if (typeof console !== "undefined") {
     console.warn(
-      "TofuStore: IndexedDB is unavailable; key-change detection disabled.",
+      "TofuStore: IndexedDB is unavailable; falling back to in-memory state. " +
+        "Key-change detection works for the current session only.",
     );
   }
 }
@@ -65,11 +66,18 @@ export class TofuStore {
 
   private dbPromise: Promise<IDBDatabase | null> | null = null;
 
+  private memoryStore: Map<string, TofuRecord> | null = null;
+
   constructor(scopeId: string) {
     if (!scopeId) {
       throw new Error("TofuStore: scopeId is required");
     }
     this.scopeId = scopeId;
+  }
+
+  private getMemoryStore(): Map<string, TofuRecord> {
+    if (!this.memoryStore) this.memoryStore = new Map();
+    return this.memoryStore;
   }
 
   private openDB(): Promise<IDBDatabase | null> {
@@ -95,12 +103,14 @@ export class TofuStore {
         if (typeof console !== "undefined") {
           console.error("TofuStore: open failed", req.error);
         }
+        warnUnavailableOnce();
         resolve(null);
       };
       req.onblocked = () => {
         if (typeof console !== "undefined") {
           console.warn("TofuStore: open blocked");
         }
+        warnUnavailableOnce();
         resolve(null);
       };
     });
@@ -109,7 +119,9 @@ export class TofuStore {
 
   private async getRecord(userId: string): Promise<TofuRecord | null> {
     const db = await this.openDB();
-    if (!db) return null;
+    if (!db) {
+      return this.getMemoryStore().get(userId) ?? null;
+    }
     return new Promise<TofuRecord | null>((resolve) => {
       try {
         const tx = db.transaction(STORE_NAME, "readonly");
@@ -128,7 +140,10 @@ export class TofuStore {
 
   private async putRecord(record: TofuRecord): Promise<void> {
     const db = await this.openDB();
-    if (!db) return;
+    if (!db) {
+      this.getMemoryStore().set(record.userId, record);
+      return;
+    }
     return new Promise<void>((resolve) => {
       try {
         const tx = db.transaction(STORE_NAME, "readwrite");
@@ -144,7 +159,10 @@ export class TofuStore {
 
   private async deleteRecord(userId: string): Promise<void> {
     const db = await this.openDB();
-    if (!db) return;
+    if (!db) {
+      this.getMemoryStore().delete(userId);
+      return;
+    }
     return new Promise<void>((resolve) => {
       try {
         const tx = db.transaction(STORE_NAME, "readwrite");
@@ -220,7 +238,9 @@ export class TofuStore {
 
   async list(): Promise<TofuRecord[]> {
     const db = await this.openDB();
-    if (!db) return [];
+    if (!db) {
+      return Array.from(this.getMemoryStore().values());
+    }
     return new Promise<TofuRecord[]>((resolve) => {
       try {
         const tx = db.transaction(STORE_NAME, "readonly");
@@ -236,7 +256,10 @@ export class TofuStore {
 
   async clear(): Promise<void> {
     const db = await this.openDB();
-    if (!db) return;
+    if (!db) {
+      this.getMemoryStore().clear();
+      return;
+    }
     return new Promise<void>((resolve) => {
       try {
         const tx = db.transaction(STORE_NAME, "readwrite");

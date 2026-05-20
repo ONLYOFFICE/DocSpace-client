@@ -11,7 +11,10 @@
 // warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE.
 // For details, see the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
 
-export const AUTO_LOCK_TIMEOUT_KEY = "encryption-auto-lock-timeout-seconds";
+export const AUTO_LOCK_TIMEOUT_KEY_PREFIX = "encryption-auto-lock-timeout:";
+const LEGACY_AUTO_LOCK_TIMEOUT_KEY = "encryption-auto-lock-timeout-seconds";
+
+export const AUTO_LOCK_TIMEOUT_KEY = LEGACY_AUTO_LOCK_TIMEOUT_KEY;
 
 export const AUTO_LOCK_PRESETS = [
   { id: "off", seconds: 0 },
@@ -27,6 +30,19 @@ export const DEFAULT_AUTO_LOCK_SECONDS = 0;
 
 const MAX_AUTO_LOCK_SECONDS = 24 * 60 * 60;
 
+let currentScopeUserId: string | null = null;
+
+export function setAutoLockScope(userId: string | null): void {
+  const next = userId && userId.length > 0 ? String(userId) : null;
+  currentScopeUserId = next;
+}
+
+function storageKey(): string {
+  return currentScopeUserId
+    ? `${AUTO_LOCK_TIMEOUT_KEY_PREFIX}${currentScopeUserId}`
+    : LEGACY_AUTO_LOCK_TIMEOUT_KEY;
+}
+
 function readStorage(): Storage | null {
   try {
     if (typeof window === "undefined") return null;
@@ -39,7 +55,14 @@ function readStorage(): Storage | null {
 export function getAutoLockTimeoutSeconds(): number {
   const storage = readStorage();
   if (!storage) return DEFAULT_AUTO_LOCK_SECONDS;
-  const raw = storage.getItem(AUTO_LOCK_TIMEOUT_KEY);
+  let raw = storage.getItem(storageKey());
+  if (raw === null && currentScopeUserId !== null) {
+    raw = storage.getItem(LEGACY_AUTO_LOCK_TIMEOUT_KEY);
+    if (raw !== null) {
+      storage.setItem(storageKey(), raw);
+      storage.removeItem(LEGACY_AUTO_LOCK_TIMEOUT_KEY);
+    }
+  }
   if (raw === null) return DEFAULT_AUTO_LOCK_SECONDS;
   const parsed = Number.parseInt(raw, 10);
   if (!Number.isFinite(parsed) || parsed < 0) return DEFAULT_AUTO_LOCK_SECONDS;
@@ -54,7 +77,7 @@ export function setAutoLockTimeoutSeconds(seconds: number): void {
     0,
     Math.min(MAX_AUTO_LOCK_SECONDS, Math.floor(seconds)),
   );
-  storage.setItem(AUTO_LOCK_TIMEOUT_KEY, String(clamped));
+  storage.setItem(storageKey(), String(clamped));
 }
 
 export function setAutoLockPreset(id: AutoLockPresetId): void {

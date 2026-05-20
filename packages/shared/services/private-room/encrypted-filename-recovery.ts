@@ -25,22 +25,19 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { getFileEncryptionAccess } from "../../api/files";
-import { getRoomEncryptionKeys } from "../../api/privacy";
 import { wipeDek } from "../encryption/file-keys";
 import {
   getCachedEncryptedFilename,
   rememberEncryptedFilename,
 } from "../encryption/filename-cache";
-import {
-  unwrapDekForCurrentUser,
-  type RoomMemberPublicKey,
-} from "../encryption/room-file-access";
+import { unwrapDekForCurrentUser } from "../encryption/room-file-access";
 import { reportPotentialGhostState } from "../encryption/ghost-state-notifier";
 import {
   decryptFileNameRaw,
   parseDSE3Header,
 } from "../encryption/streaming-encryption";
 import type { IdentityKeyPair } from "../encryption/types";
+import { loadRoomMemberKeysSafe } from "./room-member-keys";
 
 export type RecoveryCandidate = {
   id: number;
@@ -106,20 +103,6 @@ async function recoverOne(
   }
 }
 
-async function loadRoomMemberKeys(
-  roomId: number | string,
-): Promise<RoomMemberPublicKey[]> {
-  try {
-    const keys = await getRoomEncryptionKeys(roomId);
-    if (!Array.isArray(keys)) return [];
-    return keys
-      .filter((k) => k.userId && k.publicKey)
-      .map((k) => ({ userId: String(k.userId), publicKey: k.publicKey }));
-  } catch {
-    return [];
-  }
-}
-
 export async function recoverEncryptedFilenames(
   candidates: RecoveryCandidate[],
   userId: string,
@@ -129,7 +112,7 @@ export async function recoverEncryptedFilenames(
   if (candidates.length === 0) return;
   if (roomId === null || roomId === undefined) return;
 
-  const roomMemberKeys = await loadRoomMemberKeys(roomId);
+  const roomMemberKeys = await loadRoomMemberKeysSafe(roomId);
   if (roomMemberKeys.length === 0) return;
 
   const queue = candidates.slice();

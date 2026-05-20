@@ -39,12 +39,16 @@ import type { IdentityKeyPair } from "../../encryption/types";
 
 vi.mock("../../encryption/file-keys", () => ({
   decryptFile: vi.fn(),
+  decryptFileFromBlob: vi.fn(),
 }));
 vi.mock("../../encryption/room-file-access", () => ({
   unwrapDekForCurrentUser: vi.fn(),
 }));
 
-import { decryptFile } from "../../encryption/file-keys";
+import {
+  decryptFile,
+  decryptFileFromBlob,
+} from "../../encryption/file-keys";
 import { unwrapDekForCurrentUser } from "../../encryption/room-file-access";
 
 const dummyIdentity: IdentityKeyPair = {
@@ -328,7 +332,7 @@ describe("encryptedDownload", () => {
       vi.mocked(unwrapDekForCurrentUser).mockResolvedValueOnce(
         new Uint8Array(32),
       );
-      vi.mocked(decryptFile).mockResolvedValueOnce({
+      vi.mocked(decryptFileFromBlob).mockResolvedValueOnce({
         data: new Blob([new Uint8Array([9])]),
         fileName: "ok.docx",
       });
@@ -374,7 +378,7 @@ describe("encryptedDownload", () => {
       vi.mocked(unwrapDekForCurrentUser).mockResolvedValueOnce(
         new Uint8Array(32),
       );
-      vi.mocked(decryptFile).mockResolvedValueOnce({
+      vi.mocked(decryptFileFromBlob).mockResolvedValueOnce({
         data: new Blob([new Uint8Array([42, 43])]),
         fileName: "decrypted.bin",
       });

@@ -99,6 +99,31 @@ const removeDuplicate = (items) => {
   });
 };
 
+const dekByFileEntry = new WeakMap();
+
+function setFileDek(entry, dek) {
+  if (!entry) return;
+  const previous = dekByFileEntry.get(entry);
+  if (previous && previous !== dek) {
+    wipeDek(previous);
+  }
+  dekByFileEntry.set(entry, dek);
+}
+
+function takeFileDek(entry) {
+  if (!entry) return null;
+  const dek = dekByFileEntry.get(entry);
+  if (dek) {
+    dekByFileEntry.delete(entry);
+    return dek;
+  }
+  return null;
+}
+
+function hasFileDek(entry) {
+  return !!entry && dekByFileEntry.has(entry);
+}
+
 const getConversationProgress = async (fileId) => {
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -467,7 +492,6 @@ class UploadDataStore {
   };
 
   clearUploadData = () => {
-    console.log("clearUploadData");
     this.files = [];
     this.filesToConversion = [];
     this.uploadedFilesHistory = [];
@@ -487,8 +511,6 @@ class UploadDataStore {
   };
 
   clearUploadedFiles = () => {
-    console.log("clearUploadedFiles");
-
     const uploadData = {
       filesSize: 0,
       uploadedFiles: 0,
@@ -1589,7 +1611,7 @@ class UploadDataStore {
       });
 
       const currentFileData = this.files[indexOfFile];
-      if (currentFileData?.encrypted && currentFileData?.dek) {
+      if (currentFileData?.encrypted && hasFileDek(currentFileData)) {
         if (currentFileData.file?.name) {
           rememberEncryptedFilename(fileId, currentFileData.file.name);
         }
@@ -1599,38 +1621,42 @@ class UploadDataStore {
           console.error(
             "[ENCRYPTION] Cannot wrap DEK: encryption keys missing for current user",
           );
+          const orphanDek = takeFileDek(currentFileData);
+          if (orphanDek) wipeDek(orphanDek);
         } else {
-          // Wrap own slot, then the rest of the room. Must run after the
-          // server assigns fileId — the wrap's AAD binds to it.
+          const dekForWrap = takeFileDek(currentFileData);
           this.wrapForSelfThenRoom(
             fileId,
             String(userId),
             publicKey,
             publicKeyId || "",
-            currentFileData.dek,
+            dekForWrap,
           ).catch((error) => {
-            // Surface HTTP details — when the server rejects PUT
-            // /files/{id}/access (e.g. 403 for non-owners) the file ends up
-            // encrypted with zero envelopes, which is otherwise invisible.
+            const wrapMessage =
+              getI18n().t("Common:EncryptionUploadWrapFailed");
             console.error(
-              "[ENCRYPTION] Failed to set file encryption keys:",
+              "[ENCRYPTION] Failed to set file encryption keys",
               {
                 fileId,
                 status: error?.response?.status,
-                data: error?.response?.data,
                 message: error?.message,
               },
-              error,
             );
-            try {
-              toastr.error(
-                getI18n().t("Common:EncryptionUploadWrapFailed", {
-                  defaultValue:
-                    "Encryption sealing failed for the uploaded file. It may not be openable. See console for details.",
-                }),
+            runInAction(() => {
+              if (this.files[indexOfFile]) {
+                this.files[indexOfFile].error = wrapMessage;
+              }
+              const historyIndex = this.uploadedFilesHistory.findIndex(
+                (f) => f.uniqueId === this.files[indexOfFile]?.uniqueId,
               );
+              if (historyIndex > -1) {
+                this.uploadedFilesHistory[historyIndex].error = wrapMessage;
+              }
+            });
+            try {
+              toastr.error(wrapMessage);
             } catch {
-              // toastr not available — error is already in console
+              //
             }
           });
         }
@@ -2106,11 +2132,64 @@ class UploadDataStore {
           uploadDEK = prepared.dek;
           isEncrypted = true;
 
-          this.files[indexOfFile].dek = uploadDEK;
+          setFileDek(this.files[indexOfFile], uploadDEK);
           this.files[indexOfFile].encrypted = true;
         }
       } catch (error) {
-        console.error("Encryption failed:", error);
+        console.error("[ENCRYPTION] prepareFileForEncryptedUpload failed", {
+          uniqueId: this.files[indexOfFile]?.uniqueId,
+          message: error?.message,
+        });
+        const orphanDek = takeFileDek(this.files[indexOfFile]);
+        if (orphanDek) wipeDek(orphanDek);
+        const errorMessage = getI18n().t("Common:EncryptionPrepareFailed");
+        runInAction(() => {
+          if (this.files[indexOfFile]) {
+            this.files[indexOfFile].error = errorMessage;
+            this.files[indexOfFile].percent = 0;
+          }
+          const historyIndex = this.uploadedFilesHistory.findIndex(
+            (f) => f.uniqueId === this.files[indexOfFile]?.uniqueId,
+          );
+          if (historyIndex > -1) {
+            this.uploadedFilesHistory[historyIndex].error = errorMessage;
+            this.uploadedFilesHistory[historyIndex].percent = 0;
+          }
+        });
+        try {
+          toastr.error(errorMessage);
+        } catch {
+          //
+        }
+        const newPercent = this.getFilesPercent();
+        this.percent = newPercent;
+        this.primaryProgressDataStore.setPrimaryProgressBarData({
+          operation: OPERATIONS_NAME.upload,
+          percent: newPercent,
+          alert: true,
+        });
+        this.currentUploadNumber -= 1;
+        const nextFileIndex = this.files.findIndex((f) => !f.inAction);
+        if (nextFileIndex !== -1) {
+          this.startSessionFunc(nextFileIndex, t, createNewIfExist);
+        } else {
+          const allFilesIsUploaded =
+            this.files.findIndex(
+              (f) =>
+                f.action !== "uploaded" &&
+                f.action !== "convert" &&
+                f.action !== "converted" &&
+                !f.error &&
+                !f.cancel,
+            ) === -1;
+          if (allFilesIsUploaded && !this.finishUploadFilesCalled) {
+            this.finishUploadFilesCalled = true;
+            if (!this.filesToConversion.length) {
+              this.finishUploadFiles(t, !!this.tempConversionFiles?.length);
+            }
+          }
+        }
+        return;
       }
     }
 
@@ -2175,6 +2254,9 @@ class UploadDataStore {
         );
       })
       .catch((error) => {
+        const orphanDek = takeFileDek(this.files[indexOfFile]);
+        if (orphanDek) wipeDek(orphanDek);
+
         if (this.files[indexOfFile] === undefined) {
           this.primaryProgressDataStore.setPrimaryProgressBarData({
             operation: OPERATIONS_NAME.upload,
@@ -2287,14 +2369,6 @@ class UploadDataStore {
               this.uploaded = true;
               this.asyncUploadObj = {};
             });
-            const uploadedFiles = this.files.filter(
-              (x) => x.action === "uploaded",
-            );
-            const totalErrorsCount = sumBy(uploadedFiles, (f) =>
-              f.error ? 1 : 0,
-            );
-            if (totalErrorsCount > 0)
-              console.log("Upload errors: ", totalErrorsCount);
           }
         }
       });
@@ -2325,8 +2399,6 @@ class UploadDataStore {
     this.uploadedFilesHistory.forEach((f) => {
       f.errorShown = true;
     });
-
-    console.log("Errors: ", totalErrorsCount);
 
     const hasQuotaError = filesWithErrors.some((f) => f.isQuotaError);
 
@@ -2774,7 +2846,7 @@ class UploadDataStore {
         replace: true,
       });
     } catch (e) {
-      console.log(e);
+      console.error("[UploadDataStore] navigate failed:", e);
     }
   };
 

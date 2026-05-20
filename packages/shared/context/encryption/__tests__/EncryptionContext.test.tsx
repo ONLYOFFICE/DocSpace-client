@@ -50,6 +50,7 @@ vi.mock("../../../services/encryption/identity", () => ({
 vi.mock("../../../services/encryption/auto-lock-preference", () => ({
   getAutoLockTimeoutSeconds: vi.fn(() => 0),
   setAutoLockTimeoutSeconds: vi.fn(),
+  setAutoLockScope: vi.fn(),
   AUTO_LOCK_OPTIONS: [],
 }));
 
@@ -260,7 +261,7 @@ describe("EncryptionContext / EncryptionProvider", () => {
         await captured.passphrase!.onSubmit("wrong");
       });
       expect(captured.passphrase).not.toBeNull();
-      expect(captured.passphrase?.error).toContain("auth tag mismatch");
+      expect(captured.passphrase?.error).toBe("Common:EncryptionError");
 
       // Race against a real timer (not Promise.resolve), so sentinel wins
       // only if `promised` is still pending after real time passes.
@@ -496,7 +497,7 @@ describe("EncryptionContext / EncryptionProvider", () => {
       expect(SecretStorage.hasUnlocked("user-42")).toBe(true);
     });
 
-    it("unlock() surfaces the error and does NOT cache on failure", async () => {
+    it("unlock() surfaces a translated error and does NOT cache on failure", async () => {
       vi.mocked(unlockWithPassphrase).mockRejectedValueOnce(
         new Error("auth tag mismatch"),
       );
@@ -506,7 +507,7 @@ describe("EncryptionContext / EncryptionProvider", () => {
         ok = await latest.unlock("wrong");
       });
       expect(ok).toBe(false);
-      expect(latest.unlockError).toContain("auth tag mismatch");
+      expect(latest.unlockError).toBe("Common:EncryptionError");
       expect(SecretStorage.hasUnlocked("user-42")).toBe(false);
     });
   });

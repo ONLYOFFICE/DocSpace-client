@@ -24,30 +24,4 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TFunction } from "i18next";
-
-import {
-  InvalidFormatError,
-  UnsupportedSuiteError,
-  UnsupportedVersionError,
-  WebCryptoUnavailableError,
-} from "@docspace/shared/services/encryption/errors";
-
-export function getEncryptionErrorMessage(
-  t: TFunction,
-  error: unknown,
-): string {
-  if (error instanceof WebCryptoUnavailableError) {
-    return t("Common:EncryptionRequiresHttps");
-  }
-  if (error instanceof InvalidFormatError) {
-    return t("Common:EncryptionInvalidKeyFile");
-  }
-  if (
-    error instanceof UnsupportedVersionError ||
-    error instanceof UnsupportedSuiteError
-  ) {
-    return t("Common:EncryptionUnsupportedKeyVersion");
-  }
-  return t("Common:EncryptionError");
-}
+export { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";

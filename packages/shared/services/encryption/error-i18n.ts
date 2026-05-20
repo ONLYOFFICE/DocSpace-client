@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,26 +24,56 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export type PassphraseDialogProps = {
-  visible: boolean;
-  isNewPassphrase?: boolean;
-  error?: string | null;
-  isLoading?: boolean;
-  onSubmit: (passphrase: string) => Promise<void>;
-  onCancel: () => void;
-  title?: string;
-  description?: string;
-  minLength?: number;
-  requireStrong?: boolean;
-};
+import type { TFunction } from "i18next";
 
-export type PassphraseFormState = {
-  passphrase: string;
-  confirmPassphrase: string;
-  localError: string;
-};
+import {
+  AuthenticationError,
+  CryptoError,
+  DecryptionError,
+  InvalidFormatError,
+  InvalidPassphraseError,
+  InvalidRecoveryPhraseError,
+  KeyNotFoundError,
+  NoAccessError,
+  UnsupportedSuiteError,
+  UnsupportedVersionError,
+  WebCryptoUnavailableError,
+} from "./errors";
 
-export type {
-  PassphraseStrength,
-  PassphraseStrengthResult as StrengthCheckResult,
-} from "@docspace/shared/services/encryption/passphrase-strength";
+export function getEncryptionErrorMessage(
+  t: TFunction,
+  error: unknown,
+): string {
+  if (error instanceof WebCryptoUnavailableError) {
+    return t("Common:EncryptionRequiresHttps");
+  }
+  if (error instanceof InvalidPassphraseError) {
+    return t("Common:InvalidPassphrase");
+  }
+  if (error instanceof InvalidRecoveryPhraseError) {
+    return t("Common:InvalidRecoveryPhrase");
+  }
+  if (error instanceof InvalidFormatError) {
+    return t("Common:EncryptionInvalidKeyFile");
+  }
+  if (
+    error instanceof UnsupportedVersionError ||
+    error instanceof UnsupportedSuiteError
+  ) {
+    return t("Common:EncryptionUnsupportedKeyVersion");
+  }
+  if (error instanceof NoAccessError) {
+    return t("Common:NoAccessToEncryptedFile");
+  }
+  if (error instanceof KeyNotFoundError) {
+    return t("Common:NoEncryptionKey");
+  }
+  if (
+    error instanceof AuthenticationError ||
+    error instanceof DecryptionError ||
+    error instanceof CryptoError
+  ) {
+    return t("Common:EncryptionError");
+  }
+  return t("Common:EncryptionError");
+}

@@ -16,16 +16,19 @@ import { describe, it, expect, beforeEach } from "vitest";
 import {
   AUTO_LOCK_PRESETS,
   AUTO_LOCK_TIMEOUT_KEY,
+  AUTO_LOCK_TIMEOUT_KEY_PREFIX,
   DEFAULT_AUTO_LOCK_SECONDS,
   getAutoLockTimeoutSeconds,
   getCurrentAutoLockPresetId,
   setAutoLockPreset,
+  setAutoLockScope,
   setAutoLockTimeoutSeconds,
 } from "../auto-lock-preference";
 
 describe("auto-lock preference storage", () => {
   beforeEach(() => {
     window.localStorage.clear();
+    setAutoLockScope(null);
   });
 
   it("returns default (0) when nothing is stored", () => {
@@ -96,5 +99,42 @@ describe("auto-lock preference storage", () => {
       "30m",
       "1h",
     ]);
+  });
+});
+
+describe("auto-lock preference scoping", () => {
+  beforeEach(() => {
+    window.localStorage.clear();
+    setAutoLockScope(null);
+  });
+
+  it("uses a userId-scoped key when a scope is active", () => {
+    setAutoLockScope("user-A");
+    setAutoLockTimeoutSeconds(1800);
+    expect(
+      window.localStorage.getItem(`${AUTO_LOCK_TIMEOUT_KEY_PREFIX}user-A`),
+    ).toBe("1800");
+    expect(window.localStorage.getItem(AUTO_LOCK_TIMEOUT_KEY)).toBeNull();
+  });
+
+  it("isolates two users on the same browser", () => {
+    setAutoLockScope("user-A");
+    setAutoLockTimeoutSeconds(300);
+    setAutoLockScope("user-B");
+    expect(getAutoLockTimeoutSeconds()).toBe(DEFAULT_AUTO_LOCK_SECONDS);
+    setAutoLockTimeoutSeconds(3600);
+    expect(getAutoLockTimeoutSeconds()).toBe(3600);
+    setAutoLockScope("user-A");
+    expect(getAutoLockTimeoutSeconds()).toBe(300);
+  });
+
+  it("migrates a pre-existing legacy value into the scoped slot on first read", () => {
+    window.localStorage.setItem(AUTO_LOCK_TIMEOUT_KEY, "900");
+    setAutoLockScope("user-A");
+    expect(getAutoLockTimeoutSeconds()).toBe(900);
+    expect(
+      window.localStorage.getItem(`${AUTO_LOCK_TIMEOUT_KEY_PREFIX}user-A`),
+    ).toBe("900");
+    expect(window.localStorage.getItem(AUTO_LOCK_TIMEOUT_KEY)).toBeNull();
   });
 });

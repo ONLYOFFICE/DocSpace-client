@@ -140,6 +140,18 @@ if (typeof SVGSVGElement === "undefined") {
   global.SVGSVGElement = class SVGSVGElement {} as unknown as typeof SVGSVGElement;
 }
 
+if (typeof Blob !== "undefined" && !Blob.prototype.arrayBuffer) {
+  // biome-ignore lint/suspicious/noExplicitAny: polyfilling missing DOM API
+  (Blob.prototype as any).arrayBuffer = function arrayBuffer() {
+    return new Promise<ArrayBuffer>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as ArrayBuffer);
+      reader.onerror = () => reject(reader.error);
+      reader.readAsArrayBuffer(this);
+    });
+  };
+}
+
 // ---------------------------------------------------------------------------
 // Silent-failure guard for `[ENCRYPTION] ...` console.error
 // ---------------------------------------------------------------------------

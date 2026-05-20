@@ -57,7 +57,7 @@ import {
   enableCustomFilter,
   getFileEncryptionAccess,
 } from "@docspace/shared/api/files";
-import { getRoomEncryptionKeys } from "@docspace/shared/api/privacy";
+import { loadRoomMemberKeysSafe } from "@docspace/shared/services/private-room/room-member-keys";
 import {
   Events,
   ExportRoomIndexTaskStatus,
@@ -1008,25 +1008,14 @@ class FilesActionStore {
   };
 
   loadRoomMemberKeysFor = async (roomId) => {
-    if (!roomId) return [];
-    try {
-      const keys = await getRoomEncryptionKeys(roomId);
-      if (!Array.isArray(keys)) return [];
-      return keys
-        .filter((k) => k.userId && k.publicKey)
-        .map((k) => ({ userId: String(k.userId), publicKey: k.publicKey }));
-    } catch {
-      return [];
-    }
+    return loadRoomMemberKeysSafe(roomId);
   };
 
   downloadEncryptedFile = async (file) => {
     const { encryptionKeys, user } = this.userStore;
 
     if (!encryptionKeys || encryptionKeys.length === 0) {
-      toastr.error(
-        "You need to set up encryption keys to download encrypted files.",
-      );
+      toastr.error(i18n.t("Common:EncryptionKeysNotConfigured"));
       return Promise.resolve();
     }
 
@@ -1104,7 +1093,10 @@ class FilesActionStore {
       if (result.success && result.file) {
         triggerFileDownload(result.file);
       } else {
-        toastr.error(result.error || "Failed to decrypt file");
+        if (result.error) {
+          console.error("[ENCRYPTION] downloadEncryptedFile:", result.error);
+        }
+        toastr.error(i18n.t("Common:EncryptionDownloadFailed"));
       }
     } catch (error) {
       setSecondaryProgressBarData({
@@ -1115,9 +1107,8 @@ class FilesActionStore {
         operationId,
       });
 
-      toastr.error(
-        error.message || "An error occurred while downloading the file",
-      );
+      console.error("[ENCRYPTION] downloadEncryptedFile threw:", error);
+      toastr.error(i18n.t("Common:EncryptionDownloadFailed"));
     }
 
     return Promise.resolve();
@@ -1127,9 +1118,7 @@ class FilesActionStore {
     const { encryptionKeys, user } = this.userStore;
 
     if (!encryptionKeys || encryptionKeys.length === 0) {
-      toastr.error(
-        "You need to set up encryption keys to download encrypted files.",
-      );
+      toastr.error(i18n.t("Common:EncryptionKeysNotConfigured"));
       return;
     }
 
@@ -1286,9 +1275,8 @@ class FilesActionStore {
         operationId,
       });
 
-      toastr.error(
-        error.message || "An error occurred while downloading encrypted files",
-      );
+      console.error("[ENCRYPTION] downloadEncryptedFilesAsZip threw:", error);
+      toastr.error(i18n.t("Common:EncryptionDownloadFailed"));
     }
   };
 

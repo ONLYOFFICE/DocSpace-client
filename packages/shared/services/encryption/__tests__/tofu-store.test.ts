@@ -305,7 +305,7 @@ describe("TofuStore", () => {
   });
 });
 
-describe("TofuStore — IndexedDB unavailable (soft-fail)", () => {
+describe("TofuStore — IndexedDB unavailable (in-memory fallback)", () => {
   beforeEach(() => {
     resetTofuStores();
     vi.stubGlobal("indexedDB", undefined);
@@ -315,23 +315,30 @@ describe("TofuStore — IndexedDB unavailable (soft-fail)", () => {
     vi.unstubAllGlobals();
   });
 
-  it("checkKey returns first-seen even though nothing is persisted", async () => {
+  it("detects key mismatch within a session even when IDB is unavailable", async () => {
     const tofu = new TofuStore("alice");
     const a = await tofu.checkKey("bob", "PK_BOB_1");
     expect(a.kind).toBe("first-seen");
-    // Nothing was persisted, so a second call again returns first-seen
-    // (and not mismatch). This matches the doc'd "no TOFU" baseline.
-    const b = await tofu.checkKey("bob", "PK_BOB_2");
-    expect(b.kind).toBe("first-seen");
+    const b = await tofu.checkKey("bob", "PK_BOB_1");
+    expect(b.kind).toBe("match");
+    const c = await tofu.checkKey("bob", "PK_BOB_2");
+    expect(c.kind).toBe("mismatch");
   });
 
-  it("list/clear/forget/markVerified/acceptKey are safe no-ops", async () => {
+  it("list/forget/markVerified/clear/acceptKey operate on the in-memory store", async () => {
     const tofu = new TofuStore("alice");
     expect(await tofu.list()).toEqual([]);
-    await tofu.clear();
-    await tofu.forget("bob");
-    await tofu.markVerified("bob");
     await tofu.acceptKey("bob", "PK_BOB_1");
+    const after = await tofu.list();
+    expect(after).toHaveLength(1);
+    expect(after[0].publicKey).toBe("PK_BOB_1");
+    await tofu.markVerified("bob");
+    expect((await tofu.list())[0].verifiedAt).not.toBeNull();
+    await tofu.forget("bob");
+    expect(await tofu.list()).toEqual([]);
+    await tofu.acceptKey("bob", "PK_BOB_1");
+    await tofu.clear();
+    expect(await tofu.list()).toEqual([]);
   });
 });
 
@@ -347,6 +354,7 @@ describe("TofuStore — IndexedDB open failure modes", () => {
 
   it("checkKey survives indexedDB.open onerror (Safari private mode, quota exceeded)", async () => {
     const errSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    vi.spyOn(console, "warn").mockImplementation(() => {});
     vi.stubGlobal("indexedDB", {
       open: () => {
         const req = new MockOpenRequest();
@@ -359,8 +367,12 @@ describe("TofuStore — IndexedDB open failure modes", () => {
     });
 
     const tofu = new TofuStore("alice");
-    const result = await tofu.checkKey("bob", "PK_BOB_1");
-    expect(result.kind).toBe("first-seen");
+    const first = await tofu.checkKey("bob", "PK_BOB_1");
+    expect(first.kind).toBe("first-seen");
+    const same = await tofu.checkKey("bob", "PK_BOB_1");
+    expect(same.kind).toBe("match");
+    const swap = await tofu.checkKey("bob", "PK_BOB_2");
+    expect(swap.kind).toBe("mismatch");
     expect(errSpy).toHaveBeenCalled();
   });
 
@@ -375,13 +387,16 @@ describe("TofuStore — IndexedDB open failure modes", () => {
     });
 
     const tofu = new TofuStore("alice");
-    const result = await tofu.checkKey("bob", "PK_BOB_1");
-    expect(result.kind).toBe("first-seen");
+    const first = await tofu.checkKey("bob", "PK_BOB_1");
+    expect(first.kind).toBe("first-seen");
+    const swap = await tofu.checkKey("bob", "PK_BOB_2");
+    expect(swap.kind).toBe("mismatch");
     expect(warnSpy).toHaveBeenCalled();
   });
 
-  it("list returns empty array after open failure", async () => {
+  it("list starts empty after open failure but reflects subsequent writes", async () => {
     vi.spyOn(console, "error").mockImplementation(() => {});
+    vi.spyOn(console, "warn").mockImplementation(() => {});
     vi.stubGlobal("indexedDB", {
       open: () => {
         const req = new MockOpenRequest();
@@ -395,6 +410,8 @@ describe("TofuStore — IndexedDB open failure modes", () => {
 
     const tofu = new TofuStore("alice");
     expect(await tofu.list()).toEqual([]);
+    await tofu.checkKey("bob", "PK_BOB_1");
+    expect(await tofu.list()).toHaveLength(1);
   });
 });
 

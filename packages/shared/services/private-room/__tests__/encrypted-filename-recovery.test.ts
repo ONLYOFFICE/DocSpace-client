@@ -291,10 +291,7 @@ describe("encryptedFilenameRecovery", () => {
       ROOM_ID,
     );
 
-    // recoverEncryptedFilenames awaits getRoomEncryptionKeys before spawning
-    // workers, so we need to drain the microtask queue before observing the cap.
-    await Promise.resolve();
-    await Promise.resolve();
+    for (let i = 0; i < 4; i++) await Promise.resolve();
 
     expect(inFlight).toBe(5);
     expect(maxInFlight).toBe(5);

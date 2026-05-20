@@ -51,7 +51,7 @@ import { isNullOrUndefined } from "../../utils/typeGuards";
 import { ViewerWrapper } from "./sub-components/ViewerWrapper";
 
 import { getFileEncryptionAccess } from "../../api/files";
-import { getRoomEncryptionKeys } from "../../api/privacy";
+import { loadRoomMemberKeysSafe } from "../../services/private-room/room-member-keys";
 import { decryptFile } from "../../services/encryption/file-keys";
 import {
   unwrapDekForCurrentUser,
@@ -449,19 +449,25 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       roomId: number | string | null | undefined,
     ) => {
       EncryptedAbortSignalRef.current?.abort();
-      EncryptedAbortSignalRef.current = new AbortController();
+      const controller = new AbortController();
+      EncryptedAbortSignalRef.current = controller;
       setIsDecrypting(true);
+
+      const { signal } = controller;
+      const isStale = () => signal.aborted;
 
       try {
         if (!userId) {
           throw new Error("User ID not available for decryption");
         }
         const encryptionInfo = await getFileEncryptionAccess(fileId);
+        if (isStale()) return;
         if (!encryptionInfo?.fileKeys) {
           throw new Error("You don't have access to decrypt this file");
         }
 
         const identity = await requireUnlock(String(userId));
+        if (isStale()) return;
         if (!identity) {
           // User dismissed the passphrase dialog without unlocking — close
           // the viewer instead of leaving it stuck on a loader/error frame.
@@ -469,32 +475,18 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
           return;
         }
 
-        const response = await fetch(src, {
-          signal: EncryptedAbortSignalRef.current?.signal,
-        });
+        const response = await fetch(src, { signal });
 
         if (!response.ok) {
           throw new Error(`Failed to fetch file: ${response.status}`);
         }
 
         const encryptedData = await response.arrayBuffer();
+        if (isStale()) return;
 
-        let roomMemberKeys: RoomMemberPublicKey[] = [];
-        if (roomId !== null && roomId !== undefined) {
-          try {
-            const keys = await getRoomEncryptionKeys(roomId);
-            if (Array.isArray(keys)) {
-              roomMemberKeys = keys
-                .filter((k) => k.userId && k.publicKey)
-                .map((k) => ({
-                  userId: String(k.userId),
-                  publicKey: k.publicKey,
-                }));
-            }
-          } catch {
-            roomMemberKeys = [];
-          }
-        }
+        const roomMemberKeys: RoomMemberPublicKey[] =
+          await loadRoomMemberKeysSafe(roomId);
+        if (isStale()) return;
 
         const dek = await unwrapDekForCurrentUser({
           fileKeys: encryptionInfo.fileKeys,
@@ -503,12 +495,14 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
           currentIdentity: identity,
           fileId,
         });
+        if (isStale()) return;
 
         // Decrypt file (DSE3 format is self-describing)
         const { data: decryptedBlob, fileName: decryptedName } =
           await decryptFile(encryptedData, dek, {
             cacheFilenameForFileId: fileId,
           });
+        if (isStale()) return;
 
         // Use decrypted name from DSE3 header for extension detection
         const displayName = decryptedName || title;
@@ -537,6 +531,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
         const typedBlob = new Blob([decryptedBlob], { type: mimeType });
         setFileUrl(URL.createObjectURL(typedBlob));
       } catch (error) {
+        if (isStale()) return;
         if (error instanceof Error) {
           if (error.name === "AbortError") {
             return;
@@ -545,7 +540,9 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
           onDecryptionError?.(error.message);
         }
       } finally {
-        setIsDecrypting(false);
+        if (EncryptedAbortSignalRef.current === controller) {
+          setIsDecrypting(false);
+        }
       }
     },
     [userId, onClose, onDecryptionError],
@@ -556,6 +553,13 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       TiffAbortSignalRef.current?.abort();
       HeicAbortSignalRef.current?.abort();
       EncryptedAbortSignalRef.current?.abort();
+      if (
+        prevBlobUrlRef.current &&
+        prevBlobUrlRef.current.startsWith("blob:")
+      ) {
+        URL.revokeObjectURL(prevBlobUrlRef.current);
+        prevBlobUrlRef.current = null;
+      }
     };
   }, []);
 

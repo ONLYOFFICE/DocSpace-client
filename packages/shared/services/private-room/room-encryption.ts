@@ -29,7 +29,7 @@ import {
   getFileEncryptionAccess,
   setFileEncryptionKeys,
 } from "../../api/files";
-import { getRoomEncryptionKeys, getFilePublicKeys } from "../../api/privacy";
+import { getFilePublicKeys } from "../../api/privacy";
 import {
   unwrapDekForCurrentUser,
   wrapDekForRecipients,
@@ -41,6 +41,7 @@ import {
   getKeyMismatchHandler,
   type KeyMismatchResolver,
 } from "../encryption/tofu-store";
+import { loadRoomMemberKeys } from "./room-member-keys";
 import FilesFilter from "../../api/files/filter";
 import type { TFile } from "../../api/files/types";
 import type { IdentityKeyPair, ServerAccessKeyDto } from "../encryption/types";
@@ -101,24 +102,6 @@ async function getEncryptedFilesInRoom(roomId: number): Promise<TFile[]> {
     page++;
   }
   return allFiles;
-}
-
-async function loadRoomMemberKeys(
-  roomId: number,
-): Promise<{
-  keyByUserId: Map<string, string>;
-  list: RoomMemberPublicKey[];
-}> {
-  const keys = await getRoomEncryptionKeys(roomId);
-  const keyByUserId = new Map<string, string>();
-  const list: RoomMemberPublicKey[] = [];
-  for (const k of keys) {
-    if (!k?.userId || !k?.publicKey) continue;
-    const id = String(k.userId);
-    keyByUserId.set(id, k.publicKey);
-    list.push({ userId: id, publicKey: k.publicKey });
-  }
-  return { keyByUserId, list };
 }
 
 type VerifiedKeyResult =
@@ -657,6 +640,15 @@ export async function rotateOwnIdentityForRoom(
     }
     onProgress?.(i + 1, encryptedFiles.length);
   }
+
+  if (results.some((r) => r.success)) {
+    const tofu = getTofuStore(currentUserId);
+    await tofu.acceptKey(
+      currentUserId,
+      base64FromBytes(newIdentity.publicKey),
+    );
+  }
+
   return results;
 }
 

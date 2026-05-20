@@ -30,6 +30,22 @@
 
 const KEY_PREFIX = "encfn:";
 
+let currentScopeUserId: string | null = null;
+
+export function setFilenameCacheScope(userId: string | null): void {
+  const next = userId && userId.length > 0 ? String(userId) : null;
+  if (currentScopeUserId !== next) {
+    clearEncryptedFilenameCache();
+  }
+  currentScopeUserId = next;
+}
+
+function storageKey(fileId: number | string): string {
+  return currentScopeUserId
+    ? `${KEY_PREFIX}${currentScopeUserId}:${fileId}`
+    : `${KEY_PREFIX}${fileId}`;
+}
+
 function safeStorage(): Storage | null {
   try {
     if (typeof sessionStorage === "undefined") return null;
@@ -73,7 +89,7 @@ export function rememberEncryptedFilename(
     return;
   }
   try {
-    s.setItem(`${KEY_PREFIX}${fileId}`, originalName);
+    s.setItem(storageKey(fileId), originalName);
   } catch {
     // storage full / disabled - degrade silently
   }
@@ -87,7 +103,7 @@ export function getCachedEncryptedFilename(
   const s = safeStorage();
   if (!s) return null;
   try {
-    return s.getItem(`${KEY_PREFIX}${fileId}`);
+    return s.getItem(storageKey(fileId));
   } catch {
     return null;
   }
@@ -98,7 +114,7 @@ export function forgetEncryptedFilename(fileId: number | string): void {
   const s = safeStorage();
   if (!s) return;
   try {
-    s.removeItem(`${KEY_PREFIX}${fileId}`);
+    s.removeItem(storageKey(fileId));
   } catch {
     //
   }

@@ -340,6 +340,108 @@ export async function encryptChunked(
   return new Blob(parts, { type: "application/octet-stream" });
 }
 
+export async function parseDSE3HeaderFromBlob(
+  blob: Blob,
+): Promise<{ header: DSE3Header; headerSize: number }> {
+  if (blob.size < DSE3_FIXED_HEADER_SIZE) {
+    throw new InvalidFormatError("data too short for DSE3 header");
+  }
+  const fixed = new Uint8Array(
+    await blob.slice(0, DSE3_FIXED_HEADER_SIZE).arrayBuffer(),
+  );
+  const nameLen = readUint16BE(fixed, 15 + DSE3_FILE_NONCE_SIZE);
+  const totalHeaderSize = DSE3_FIXED_HEADER_SIZE + nameLen;
+  if (blob.size < totalHeaderSize) {
+    throw new InvalidFormatError("data too short for encrypted name");
+  }
+  const headerBytes =
+    nameLen === 0
+      ? fixed
+      : new Uint8Array(
+          await blob.slice(0, totalHeaderSize).arrayBuffer(),
+        );
+  const header = parseDSE3Header(headerBytes);
+  return { header, headerSize: totalHeaderSize };
+}
+
+export async function decryptChunkedFromBlob(
+  blob: Blob,
+  dek: Uint8Array,
+  header: DSE3Header,
+  headerSize: number,
+  onProgress?: ProgressCallback,
+): Promise<Blob> {
+  const subtle = getCrypto();
+  const aesKey = await importDek(dek, ["decrypt"]);
+
+  const parts: ArrayBuffer[] = [];
+  let cursor = headerSize;
+
+  for (let i = 0; i < header.chunkCount; i++) {
+    if (cursor + AES_GCM_IV_SIZE > blob.size) {
+      throw new InvalidFormatError(`chunk ${i}: unexpected end reading IV`);
+    }
+    const iv = new Uint8Array(
+      await blob.slice(cursor, cursor + AES_GCM_IV_SIZE).arrayBuffer(),
+    );
+    cursor += AES_GCM_IV_SIZE;
+
+    let ciphertextSize: number;
+    if (i < header.chunkCount - 1) {
+      ciphertextSize = header.chunkPlaintextSize + AES_GCM_TAG_SIZE;
+    } else {
+      ciphertextSize = blob.size - cursor;
+      if (ciphertextSize < AES_GCM_TAG_SIZE) {
+        throw new InvalidFormatError(
+          `chunk ${i}: final ciphertext too short for tag`,
+        );
+      }
+      const maxFinal = header.chunkPlaintextSize + AES_GCM_TAG_SIZE;
+      if (ciphertextSize > maxFinal) {
+        throw new InvalidFormatError(
+          `chunk ${i}: trailing bytes after final chunk`,
+        );
+      }
+    }
+
+    if (cursor + ciphertextSize > blob.size) {
+      throw new InvalidFormatError(
+        `chunk ${i}: unexpected end reading ciphertext`,
+      );
+    }
+
+    const ciphertext = await blob
+      .slice(cursor, cursor + ciphertextSize)
+      .arrayBuffer();
+    cursor += ciphertextSize;
+
+    const aad = buildChunkAad(header.fileNonce, header.chunkCount, i);
+    try {
+      const pt = await subtle.decrypt(
+        {
+          name: "AES-GCM",
+          iv: iv as BufferSource,
+          additionalData: aad as BufferSource,
+          tagLength: AES_GCM_TAG_SIZE * 8,
+        },
+        aesKey,
+        ciphertext,
+      );
+      parts.push(pt);
+    } catch {
+      throw new DecryptionError(
+        `chunk ${i} failed — data may be corrupted or tampered`,
+      );
+    }
+    onProgress?.((i + 1) / header.chunkCount);
+  }
+
+  if (cursor !== blob.size) {
+    throw new InvalidFormatError("trailing bytes after last chunk");
+  }
+  return new Blob(parts);
+}
+
 export async function decryptChunked(
   data: ArrayBuffer | Uint8Array,
   dek: Uint8Array,

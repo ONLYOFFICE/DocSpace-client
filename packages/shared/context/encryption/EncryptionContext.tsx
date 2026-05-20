@@ -34,13 +34,17 @@ import React, {
   useRef,
   type ReactNode,
 } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   SecretStorage,
   registerUnlockHandler,
   unregisterUnlockHandler,
 } from "../../services/encryption/secret-storage";
-import { getAutoLockTimeoutSeconds } from "../../services/encryption/auto-lock-preference";
+import {
+  getAutoLockTimeoutSeconds,
+  setAutoLockScope,
+} from "../../services/encryption/auto-lock-preference";
 import {
   registerKeyMismatchHandler,
   unregisterKeyMismatchHandler,
@@ -48,6 +52,8 @@ import {
   type KeyMismatchDecision,
 } from "../../services/encryption/tofu-store";
 import { unlockWithPassphrase } from "../../services/encryption/identity";
+import { setFilenameCacheScope } from "../../services/encryption/filename-cache";
+import { getEncryptionErrorMessage } from "../../services/encryption/error-i18n";
 import type {
   IdentityKeyPair,
   SerializedIdentity,
@@ -111,6 +117,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
   PassphraseDialog,
   KeyChangeDialog,
 }) => {
+  const { t } = useTranslation("Common");
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [isUnlocking, setIsUnlocking] = useState(false);
   const [unlockError, setUnlockError] = useState<string | null>(null);
@@ -145,9 +152,13 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       pendingResolveRef.current?.(null);
       pendingResolveRef.current = null;
       SecretStorage.lock();
+      setFilenameCacheScope(null);
+      setAutoLockScope(null);
       return;
     }
     setIsUnlocked(SecretStorage.hasUnlocked(userKeys.userId));
+    setFilenameCacheScope(userKeys.userId);
+    setAutoLockScope(userKeys.userId);
   }, [hasConfiguredKey, userKeys?.publicKey, userKeys?.userId]);
 
   useEffect(() => {
@@ -159,7 +170,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
   const unlock = useCallback(
     async (passphrase: string): Promise<boolean> => {
       if (!userKeys?.privateKeyEnc || !userKeys?.userId) {
-        setUnlockError("No encryption keys configured");
+        setUnlockError(t("Common:EncryptionKeysNotConfigured"));
         return false;
       }
       setIsUnlocking(true);
@@ -176,15 +187,13 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
         setIsUnlocked(true);
         return true;
       } catch (error) {
-        const message =
-          error instanceof Error ? error.message : "Decryption failed";
-        setUnlockError(message);
+        setUnlockError(getEncryptionErrorMessage(t, error));
         return false;
       } finally {
         setIsUnlocking(false);
       }
     },
-    [userKeys],
+    [userKeys, t],
   );
 
   const lock = useCallback(() => {

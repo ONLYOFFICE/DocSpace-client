@@ -641,7 +641,7 @@ export async function rotateOwnIdentityForRoom(
     onProgress?.(i + 1, encryptedFiles.length);
   }
 
-  if (results.some((r) => r.success)) {
+  if (results.every((r) => r.success)) {
     const tofu = getTofuStore(currentUserId);
     await tofu.acceptKey(
       currentUserId,

@@ -3654,7 +3654,7 @@ class FilesStore {
     //   ]);
     // }
 
-    if (isPrivacyFolder) {
+    if (isPrivacyFolder || item.private) {
       folderOptions = removeOptions(folderOptions, [
         "sharing-settings",
         "copy-shared-link",

@@ -52,7 +52,10 @@ import {
   type KeyMismatchDecision,
 } from "../../services/encryption/tofu-store";
 import { unlockWithPassphrase } from "../../services/encryption/identity";
-import { setFilenameCacheScope } from "../../services/encryption/filename-cache";
+import {
+  clearEncryptedFilenameCache,
+  setFilenameCacheScope,
+} from "../../services/encryption/filename-cache";
 import { getEncryptionErrorMessage } from "../../services/encryption/error-i18n";
 import type {
   IdentityKeyPair,
@@ -198,6 +201,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
 
   const lock = useCallback(() => {
     SecretStorage.lock();
+    clearEncryptedFilenameCache();
     setIsUnlocked(false);
   }, []);
 
@@ -248,6 +252,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     const handler = () => {
       if (document.visibilityState === "hidden") {
         SecretStorage.lock();
+        clearEncryptedFilenameCache();
         setIsUnlocked(false);
       }
     };
@@ -271,6 +276,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     let timerId: ReturnType<typeof setTimeout> | null = null;
     const lockNow = () => {
       SecretStorage.lock();
+      clearEncryptedFilenameCache();
       setIsUnlocked(false);
     };
     const resetTimer = () => {

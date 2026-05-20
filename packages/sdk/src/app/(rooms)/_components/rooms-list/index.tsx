@@ -48,6 +48,8 @@ import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useNavigationStore } from "@/app/(docspace)/_store/NavigationStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
+import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 import useItemList, {
@@ -61,6 +63,7 @@ import RoomsRowView from "../rooms-row-view";
 import ChangeRoomOwnerDialog from "../change-room-owner-dialog";
 import EmptyView from "../empty-view";
 import CreateEditRoomDialog from "../create-edit-room-dialog";
+import RestoreRoomDialog from "../restore-room-dialog";
 import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
 import useResetSelectionClick from "@/app/(docspace)/(files)/_components/list/hooks/useResetSelectionClick";
 
@@ -93,9 +96,10 @@ const RoomsList = ({
   const { setIsEmptyList, filesViewAs, setFilesViewAs, currentDeviceType } =
     useSettingsStore();
   const filesListStore = useFilesListStore();
-  const { setItems, setRootFolderType } = filesListStore;
+  const { setRootFolderType } = filesListStore;
   const { setSelection, setBufferSelection } = useFilesSelectionStore();
   const navigationStore = useNavigationStore();
+  const activeItemsStore = useActiveItemsStore();
 
   useResetSelectionClick({ setSelection, setBufferSelection });
 
@@ -130,15 +134,18 @@ const RoomsList = ({
     return f;
   });
 
-  const [filesList, setFilesList] = React.useState<(TFolderItem | TFileItem)[]>(
-    [
+  const initRef = React.useRef(false);
+  if (!initRef.current) {
+    initRef.current = true;
+    filesListStore.setItems([
       ...folders.map(convertFolderToItem),
       ...files.map((file) => convertFileToItem(file)),
-    ],
-  );
+    ]);
+  }
+
   const [total, setTotal] = React.useState<number>(totalProp);
   const [hasNextPage, setHasNextPage] = React.useState<boolean>(
-    filesList.length < total,
+    filesListStore.items.length < total,
   );
 
   const [editingRoom, setEditingRoom] = React.useState<
@@ -146,6 +153,10 @@ const RoomsList = ({
   >(null);
 
   const [changingOwnerRoom, setChangingOwnerRoom] = React.useState<
+    (TFolderItem | TFileItem) | null
+  >(null);
+
+  const [restoringRoom, setRestoringRoom] = React.useState<
     (TFolderItem | TFileItem) | null
   >(null);
 
@@ -157,6 +168,26 @@ const RoomsList = ({
     setChangingOwnerRoom(item);
   }, []);
 
+  const onRestoreRoom = React.useCallback((item: TFolderItem | TFileItem) => {
+    setRestoringRoom(item);
+  }, []);
+
+  const restoreRoom = React.useCallback(
+    async (roomId: number) => {
+      activeItemsStore.addActiveItems([], [roomId]);
+      try {
+        await api.rooms.unarchiveRoom(roomId);
+        filesListStore.removeItem(roomId);
+        setTotal((prev) => Math.max(0, prev - 1));
+      } catch (e) {
+        toastr.error(e as Error);
+      } finally {
+        activeItemsStore.removeActiveItems([], [roomId]);
+      }
+    },
+    [activeItemsStore, filesListStore],
+  );
+
   const refreshSingleRoom = React.useCallback(
     async (roomId: number) => {
       try {
@@ -164,14 +195,12 @@ const RoomsList = ({
         const updatedItem = convertFolderToItem(
           updatedRoom as unknown as TFolder,
         );
-        setFilesList((prev) =>
-          prev.map((item) => (item.id === roomId ? updatedItem : item)),
-        );
+        filesListStore.replaceItem(roomId, updatedItem);
       } catch {
         // ignore
       }
     },
-    [convertFolderToItem],
+    [convertFolderToItem, filesListStore],
   );
 
   const requestRunning = React.useRef(false);
@@ -236,7 +265,7 @@ const RoomsList = ({
 
       setIsEmptyList(newItems.length === 0);
 
-      setFilesList(newItems);
+      filesListStore.setItems(newItems);
       setTotal(newTotal);
       setHasNextPage(newTotal > newItems.length);
       setFilter(newFilter);
@@ -252,6 +281,7 @@ const RoomsList = ({
     navigationStore,
     setRootFolderType,
     isArchive,
+    filesListStore,
   ]);
 
   const fetchMoreRooms = React.useCallback(async () => {
@@ -277,21 +307,22 @@ const RoomsList = ({
         ...newFiles.map((f) => convertFileToItem(f)),
       ];
 
-      let hasNext = false;
-      setFilesList((val) => {
-        const newVal = [...val, ...newItems];
-        hasNext = newTotal > newVal.length;
-        return newVal;
-      });
+      filesListStore.appendItems(newItems);
       setTotal(newTotal);
-      setHasNextPage(hasNext);
+      setHasNextPage(newTotal > filesListStore.items.length);
       setFilter(filter);
     } catch (e) {
       if (!controller.signal.aborted) throw e;
     } finally {
       requestRunning.current = false;
     }
-  }, [filter, hasNextPage, convertFolderToItem, convertFileToItem]);
+  }, [
+    filter,
+    hasNextPage,
+    convertFolderToItem,
+    convertFileToItem,
+    filesListStore,
+  ]);
 
   React.useEffect(() => {
     if (!isInit.current || requestRunning.current) {
@@ -302,20 +333,17 @@ const RoomsList = ({
   }, [searchParams, fetchCurrentRooms]);
 
   React.useEffect(() => {
-    setItems(filesList);
-  }, [filesList, setItems]);
-
-  React.useEffect(() => {
     setRootFolderType(current.rootFolderType);
   }, [current.rootFolderType, setRootFolderType]);
 
-  const visibleItems =
-    filesListStore.items.length > 0 ? filesListStore.items : filesList;
+  const visibleItems = filesListStore.items;
 
   let content: React.ReactNode;
 
   if (visibleItems.length === 0) {
-    content = <EmptyView isFiltered={!!filter.filterValue} />;
+    content = (
+      <EmptyView isFiltered={!!filter.filterValue} isArchive={isArchive} />
+    );
   } else if (filesViewAs === "tile") {
     content = (
       <TileView
@@ -350,6 +378,7 @@ const RoomsList = ({
         onEditRoom={onEditRoom}
         onChangeOwner={onChangeOwner}
         onRoomChanged={refreshSingleRoom}
+        onRestoreRoom={onRestoreRoom}
         isArchive={isArchive}
       />
     );
@@ -365,6 +394,7 @@ const RoomsList = ({
         onEditRoom={onEditRoom}
         onChangeOwner={onChangeOwner}
         onRoomChanged={refreshSingleRoom}
+        onRestoreRoom={onRestoreRoom}
         isArchive={isArchive}
       />
     );
@@ -405,6 +435,14 @@ const RoomsList = ({
           }
           currentUserId={user?.id}
           onChanged={refreshSingleRoom}
+        />
+      ) : null}
+      {restoringRoom ? (
+        <RestoreRoomDialog
+          visible
+          onClose={() => setRestoringRoom(null)}
+          roomType={(restoringRoom as TFolderItem).roomType}
+          onConfirm={() => restoreRoom(restoringRoom.id as number)}
         />
       ) : null}
     </RoomsRefreshContext.Provider>

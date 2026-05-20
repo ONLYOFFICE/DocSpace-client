@@ -134,9 +134,7 @@ const ChangeRoomOwnerDialog = ({
             onCancel={onClose}
             cancelButtonLabel=""
             disableSubmitButton={false}
-            submitButtonLabel={t("Common:AssignOwner", {
-              defaultValue: "Assign Owner",
-            })}
+            submitButtonLabel={t("Common:AssignOwner")}
             onSubmit={onSubmit}
             withHeader
             headerProps={{

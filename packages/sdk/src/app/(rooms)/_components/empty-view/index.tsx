@@ -27,12 +27,13 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import { EmptyView as EmptyViewComponent } from "@docspace/shared/components/empty-view";
-import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
 
 import EmptyRoomsRootLightIcon from "PUBLIC_DIR/images/emptyview/empty.rooms.root.light.svg";
 import EmptyRoomsRootDarkIcon from "PUBLIC_DIR/images/emptyview/empty.rooms.root.dark.svg";
@@ -51,6 +52,7 @@ type RoomsEmptyViewProps = {
 const RoomsEmptyView = ({ isFiltered, isArchive }: RoomsEmptyViewProps) => {
   const { t } = useTranslation(["Common"]);
   const { isBase: isBaseTheme } = useTheme();
+  const router = useRouter();
 
   const getIcon = () => {
     if (isFiltered) {
@@ -85,12 +87,20 @@ const RoomsEmptyView = ({ isFiltered, isArchive }: RoomsEmptyViewProps) => {
     },
   ];
 
+  const onGoToRooms = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) => {
+    e.preventDefault();
+    router.push("/rooms");
+  };
+
   const archiveOptions = [
     {
       key: "empty-view-go-to-rooms",
-      to: "/rooms",
+      to: "",
       description: t("Common:GoToMyRooms"),
       icon: <FolderReactSvg />,
+      onClick: onGoToRooms,
       isNext: true,
     },
   ];

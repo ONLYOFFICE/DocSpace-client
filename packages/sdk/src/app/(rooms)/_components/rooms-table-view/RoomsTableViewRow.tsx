@@ -34,6 +34,7 @@ import { useTranslation } from "react-i18next";
 import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import Badges from "@docspace/shared/components/badges";
@@ -47,6 +48,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
+import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import { generateFilesItemValue } from "@/app/(docspace)/(files)/_utils";
@@ -76,6 +78,7 @@ type RoomsTableViewRowProps = {
   onEditRoom?: (item: TFolderItem | TFileItem) => void;
   onChangeOwner?: (item: TFolderItem | TFileItem) => void;
   onRoomChanged?: (id: number) => void;
+  onRestoreRoom?: (item: TFolderItem | TFileItem) => void;
   isArchive?: boolean;
 };
 
@@ -88,10 +91,13 @@ const RoomsTableViewRow = observer(
     onEditRoom,
     onChangeOwner,
     onRoomChanged,
+    onRestoreRoom,
     isArchive,
   }: RoomsTableViewRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
+    const { isItemActive } = useActiveItemsStore();
+    const inProgress = isItemActive(item);
 
     const storeItem = filesListStore.items.find((i) => i.id === item.id);
     const observableItem = storeItem ?? item;
@@ -104,6 +110,7 @@ const RoomsTableViewRow = observer(
       onRoomChanged,
       onChangeOwner,
       isArchive,
+      onRestoreRoom,
     );
     const refreshRooms = React.useContext(RoomsRefreshContext);
     const isChecked = filesSelectionStore.isCheckedItem(item);
@@ -260,18 +267,22 @@ const RoomsTableViewRow = observer(
             onClick={(e) => e.stopPropagation()}
           >
             <div className="table-container_element">
-              <RoomIcon
-                logo={getRoomIconLogo(item)}
-                color={
-                  "isRoom" in item && item.isRoom
-                    ? item.roomIconColor
-                    : undefined
-                }
-                title={item.title}
-                showDefault={
-                  "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
-                }
-              />
+              {inProgress ? (
+                <Loader color="" size="20px" type={LoaderTypes.track} />
+              ) : (
+                <RoomIcon
+                  logo={getRoomIconLogo(item)}
+                  color={
+                    "isRoom" in item && item.isRoom
+                      ? item.roomIconColor
+                      : undefined
+                  }
+                  title={item.title}
+                  showDefault={
+                    "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
+                  }
+                />
+              )}
             </div>
             <Checkbox
               className="table-container_row-checkbox"

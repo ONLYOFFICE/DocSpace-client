@@ -45,6 +45,14 @@ class FilesListStore {
     this.items = items || [];
   };
 
+  appendItems = (items: (TFileItem | TFolderItem)[]) => {
+    this.items = [...this.items, ...items];
+  };
+
+  replaceItem = (id: number | string, item: TFileItem | TFolderItem) => {
+    this.items = this.items.map((i) => (i.id === id ? item : i));
+  };
+
   setRootFolderType = (type: FolderType) => {
     this.rootFolderType = type;
   };

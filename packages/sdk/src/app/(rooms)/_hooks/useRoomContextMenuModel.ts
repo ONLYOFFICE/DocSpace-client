@@ -72,6 +72,7 @@ export default function useRoomContextMenuModel(
   onRoomChanged?: (id: number) => void,
   onChangeOwner?: (item: TRoomItem) => void,
   isArchive?: boolean,
+  onRestoreRoom?: (item: TRoomItem) => void,
 ) {
   const { t } = useTranslation(["Common", "Files"]);
   const refreshRooms = useContext(RoomsRefreshContext);
@@ -93,11 +94,6 @@ export default function useRoomContextMenuModel(
 
       const handleArchive = async () => {
         await api.rooms.archiveRoom(room.id);
-        refreshRooms?.();
-      };
-
-      const handleUnarchive = async () => {
-        await api.rooms.unarchiveRoom(room.id);
         refreshRooms?.();
       };
 
@@ -142,7 +138,7 @@ export default function useRoomContextMenuModel(
             key: "unarchive-room",
             label: t("Common:Restore"),
             icon: MoveReactSvgUrl,
-            onClick: handleUnarchive,
+            onClick: () => onRestoreRoom?.(room),
           },
           {
             id: "option_delete-room",
@@ -249,6 +245,7 @@ export default function useRoomContextMenuModel(
       onEditRoom,
       onRoomChanged,
       onChangeOwner,
+      onRestoreRoom,
       isArchive,
       filesSelectionStore,
     ],

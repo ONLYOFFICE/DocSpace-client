@@ -1624,5 +1624,7 @@
   "DeleteRooms": "<strong>Săli ({{count}})</strong> selectate vor fi șterse permanent. Toate datele și accesul utilizatorilor vor fi pierdute.",
   "DeleteRoomsTitle": "Doriți să ștergeți aceste săli?",
   "RestoreRooms": "Sigur doriţi să restaurați sălile?",
-  "RestoreRoom": "Sigur doriţi să restaurați o sală?"
+  "RestoreRoom": "Sigur doriţi să restaurați o sală?",
+  "ArchiveRoom": "Sunteţi pe cale să arhivați o sală.",
+  "ArchiveRooms": "Sunteţi pe cale să arhivați săli."
 }

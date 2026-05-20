@@ -1624,5 +1624,7 @@
   "DeleteRooms": "Le <strong>stanze selezionate ({{count}})</strong> verranno eliminate definitivamente. Tutti i dati e l'accesso degli utenti andranno persi.",
   "DeleteRoomsTitle": "Eliminare queste stanze?",
   "RestoreRooms": "Sei sicuro di voler ripristinare le stanze?",
-  "RestoreRoom": "Sei sicuro di voler ripristinare la stanza?"
+  "RestoreRoom": "Sei sicuro di voler ripristinare la stanza?",
+  "ArchiveRoom": "Stai per archiviare una stanza.",
+  "ArchiveRooms": "Stai per archiviare le stanze."
 }

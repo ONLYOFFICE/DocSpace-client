@@ -78,8 +78,8 @@ const ArchiveDialogComponent = (props) => {
     if (restoreAll) return t("ArchiveDialog:RestoreAllRooms");
 
     return items.length > 1
-      ? `${t("ArchiveDialog:ArchiveRooms")} ${t("Common:WantToContinue")}`
-      : `${t("ArchiveDialog:ArchiveRoom")} ${t("Common:WantToContinue")}`;
+      ? `${t("Common:ArchiveRooms")} ${t("Common:WantToContinue")}`
+      : `${t("Common:ArchiveRoom")} ${t("Common:WantToContinue")}`;
   };
 
   const description = getDescription();
@@ -167,3 +167,4 @@ export default inject(
     };
   },
 )(observer(ArchiveDialog));
+

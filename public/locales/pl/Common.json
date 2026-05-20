@@ -1624,5 +1624,7 @@
   "DeleteRooms": "Wybrane <strong>pokoje ({{count}})</strong> zostaną trwale usunięte. Wszystkie dane i dostęp użytkowników zostaną utracone.",
   "DeleteRoomsTitle": "Usunąć te pokoje?",
   "RestoreRooms": "Czy na pewno chcesz przywrócić pokoje?",
-  "RestoreRoom": "Czy na pewno chcesz przywrócić pokój?"
+  "RestoreRoom": "Czy na pewno chcesz przywrócić pokój?",
+  "ArchiveRoom": "Zamierzasz zarchiwizować pokój.",
+  "ArchiveRooms": "Zamierzasz zarchiwizować pokoje."
 }

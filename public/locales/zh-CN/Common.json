@@ -1624,5 +1624,7 @@
   "DeleteRooms": "所选的 <strong>房间 ({{count}})</strong> 将被永久删除。所有数据和用户访问权限都将丢失。",
   "DeleteRoomsTitle": "确定删除这些房间吗？",
   "RestoreRooms": "确定要恢复房间吗？",
-  "RestoreRoom": "确定要恢复房间吗？"
+  "RestoreRoom": "确定要恢复房间吗？",
+  "ArchiveRoom": "您即将存档房间。",
+  "ArchiveRooms": "您即将存档房间。"
 }

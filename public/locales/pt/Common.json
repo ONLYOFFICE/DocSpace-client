@@ -1624,5 +1624,7 @@
   "DeleteRooms": "As <strong>salas selecionadas ({{count}})</strong> serão permanentemente excluídas. Todos os dados e o acesso dos usuários serão perdidos.",
   "DeleteRoomsTitle": "Apagar estas salas?",
   "RestoreRooms": "Tem a certeza que quer restaurar as salas?",
-  "RestoreRoom": "Tem a certeza que quer restaurar a sala?"
+  "RestoreRoom": "Tem a certeza que quer restaurar a sala?",
+  "ArchiveRoom": "Está prestes a arquivar uma sala.",
+  "ArchiveRooms": "Está prestes a arquivar várias salas."
 }

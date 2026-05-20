@@ -1624,5 +1624,7 @@
   "DeleteRooms": "Valitut <strong>huoneet ({{count}})</strong> poistetaan pysyvästi. Kaikki data ja käyttäjien pääsy menetetään.",
   "DeleteRoomsTitle": "Poistetaanko nämä huoneet?",
   "RestoreRooms": "Haluatko varmasti palauttaa huoneet?",
-  "RestoreRoom": "Haluatko varmasti palauttaa huoneen?"
+  "RestoreRoom": "Haluatko varmasti palauttaa huoneen?",
+  "ArchiveRoom": "Olet arkistoimassa huonetta.",
+  "ArchiveRooms": "Olet arkistoimassa huoneita."
 }

@@ -1624,5 +1624,7 @@
   "DeleteRooms": "Vybrané <strong>místnosti ({{count}})</strong> budou trvale odstraněny. Všechna data a přístup uživatelů budou ztraceny.",
   "DeleteRoomsTitle": "Smazat tyto místnosti?",
   "RestoreRooms": "Jste si jistí, že chcete obnovit místnosti?",
-  "RestoreRoom": "Jste si jistí, že chcete obnovit místnost?"
+  "RestoreRoom": "Jste si jistí, že chcete obnovit místnost?",
+  "ArchiveRoom": "Chystáte se archivovat místnost.",
+  "ArchiveRooms": "Chystáte se archivovat místnosti."
 }

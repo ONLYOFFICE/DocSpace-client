@@ -1639,5 +1639,7 @@
   "DeleteRooms": "The selected <strong>rooms ({{count}})</strong> will be permanently deleted. All data and user access will be lost.",
   "DeleteRoomsTitle": "Delete these rooms?",
   "RestoreRooms": "Are you sure you want to restore rooms?",
-  "RestoreRoom": "Are you sure you want to restore a room?"
+  "RestoreRoom": "Are you sure you want to restore a room?",
+  "ArchiveRoom": "You are about to archive a room.",
+  "ArchiveRooms": "You are about to archive rooms."
 }

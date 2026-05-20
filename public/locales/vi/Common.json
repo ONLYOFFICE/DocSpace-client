@@ -1624,5 +1624,7 @@
   "DeleteRooms": "Các <strong>phòng đã chọn ({{count}})</strong> sẽ bị xóa vĩnh viễn. Tất cả dữ liệu và quyền truy cập của người dùng sẽ bị mất.",
   "DeleteRoomsTitle": "Xóa những phòng này?",
   "RestoreRooms": "Bạn có chắc chắn muốn khôi phục các phòng không?",
-  "RestoreRoom": "Bạn có chắc chắn muốn khôi phục phòng không?"
+  "RestoreRoom": "Bạn có chắc chắn muốn khôi phục phòng không?",
+  "ArchiveRoom": "Bạn sắp sao lưu một phòng.",
+  "ArchiveRooms": "Bạn sắp sao lưu các phòng."
 }

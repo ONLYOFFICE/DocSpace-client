@@ -1624,5 +1624,7 @@
   "DeleteRooms": "De geselecteerde <strong>kamers ({{count}})</strong> worden permanent verwijderd. Alle data en gebruikers toegang zullen verloren gaan.",
   "DeleteRoomsTitle": "Deze kamers verwijderen?",
   "RestoreRooms": "Weet u zeker dat u kamers wilt herstellen?",
-  "RestoreRoom": "Weet u zeker dat u een kamer wilt herstellen?"
+  "RestoreRoom": "Weet u zeker dat u een kamer wilt herstellen?",
+  "ArchiveRoom": "U staat op het punt een kamer te archiveren.",
+  "ArchiveRooms": "U staat op het punt kamers te archiveren."
 }

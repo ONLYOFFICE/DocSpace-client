@@ -1624,5 +1624,7 @@
   "DeleteRooms": "Die ausgewählten <strong>Räume ({{count}})</strong> werden dauerhaft gelöscht. Alle Daten und Benutzerzugriffe gehen verloren.",
   "DeleteRoomsTitle": "Diese Räume löschen?",
   "RestoreRooms": "Sind Sie sicher, dass Sie die Räume wiederherstellen wollen?",
-  "RestoreRoom": "Sind Sie sicher, dass Sie einen Raum wiederherstellen wollen?"
+  "RestoreRoom": "Sind Sie sicher, dass Sie einen Raum wiederherstellen wollen?",
+  "ArchiveRoom": "Sie möchten einen Raum archivieren.",
+  "ArchiveRooms": "Sie möchten Räume archivieren."
 }

@@ -11,7 +11,7 @@
   "NotPossibleRoomRestoring": "Non è possibile ripristinare la stanza poiché è stato raggiunto il limite del numero di stanze incluse nel piano attuale.",
   "NumberOfRoomsAccordingToTariff": "Numero di stanze in base al tuo piano tariffario: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Numero di amministratori in base al tuo piano tariffario: {{currentValue}}/{{maxValue}}",
-  "PlanPaymentOverdue": "Non è possibile aggiungere nuovi utenti, creare nuove stanze o agenti AI. Pagamento del piano {{planName}} scaduto.",
+  "PlanPaymentOverdue": "Non è possibile aggiungere nuovi utenti, creare nuove stanze o agenti IA. Pagamento del piano {{planName}} scaduto.",
   "RoomsQuotaAlmostExhausted": "La quota di stanze è quasi esaurita.",
   "UsersQuotaAlmostExhausted": "La quota di utenti a pagamento è quasi esaurita."
 }

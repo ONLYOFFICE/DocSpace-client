@@ -20,7 +20,7 @@
   "AIAgentQuotaDisabled": "{{aiAgent}} квота је успешно онемогућена.",
   "AIAgentQuotaEnabled": "{{aiAgent}} квота је успешно активирана.",
   "AiServicesManagement": "Управљање {{aiServices}}",
-  "AiServicesManagementDescription": "Контролишите активацију АИ функција кроз уреднике {{productName}} и {{organizationName}}. Када је искључено, секција {{aiSettings}} ће бити скривена, {{aiAgents}} неће бити доступни свим корисницима (са очуваном историјом), а плаћени {{organizationName}} {{aiServices}} више неће бити доступни. Међутим, историја свих интеракција са АИ биће безбедно сачувана и потпуно враћена приликом поново активирања {{aiServices}}.",
+  "AiServicesManagementDescription": "Контролишите активацију AI функција кроз уреднике {{productName}} и {{organizationName}}. Када је искључено, секција {{aiSettings}} ће бити скривена, {{aiAgents}} неће бити доступни свим корисницима (са очуваном историјом), а плаћени {{organizationName}} {{aiServices}} више неће бити доступни. Међутим, историја свих интеракција са AI биће безбедно сачувана и потпуно враћена приликом поново активирања {{aiServices}}.",
   "AISettings": "AI подешавања",
   "AllDomains": "Било који домен",
   "APIGuide": "API водич",

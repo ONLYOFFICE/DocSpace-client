@@ -13,7 +13,7 @@
   "EmptyResultsTitle": "Aún no hay resultados.",
   "EmptyResultsViewerDescription": "Verá los resultados de la actividad de {{aiChat}} de otros usuarios aquí una vez que estén disponibles.",
   "InstructionsDescriptionAgent": "Describa cómo debe comportarse y responder {{aiAgent}}. Defina su rol, tono y tareas principales.",
-  "InstructionsDescriptionAgentExample": "Ejemplo: \"Eres un asistente de relaciones públicas de AI que ayuda a redactar y editar comunicados de prensa. Mantén un tono profesional, seguro y cercano a los medios de comunicación. Resalta claramente los mensajes clave, evita la jerga y mantén el texto conciso y atractivo.\"",
+  "InstructionsDescriptionAgentExample": "Ejemplo: \"Eres un asistente de relaciones públicas de IA que ayuda a redactar y editar comunicados de prensa. Mantén un tono profesional, seguro y cercano a los medios de comunicación. Resalta claramente los mensajes clave, evita la jerga y mantén el texto conciso y atractivo.\"",
   "Knowledge": "Base de conocimientos",
   "KnowledgeDescription": "Suba archivos de su ordenador o {{productName}} para proporcionar un mejor contexto a la conversación. Nota: parte o la totalidad del contenido subido puede quedar expuesto durante la conversación.",
   "KnowledgeSelectIn": "Seleccionar en {{productName}}",

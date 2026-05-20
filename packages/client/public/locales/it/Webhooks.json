@@ -1,7 +1,7 @@
 {
-  "AgentCreated": "Agente AI creato",
-  "AgentDeleted": "Agente AI eliminato",
-  "AgentUpdated": "Agente AI Aggiornato",
+  "AgentCreated": "Agente IA creato",
+  "AgentDeleted": "Agente IA eliminato",
+  "AgentUpdated": "Agente IA aggiornato",
   "Before": "Prima",
   "CreateWebhook": "Crea webhook",
   "DeleteHint": "Il webhook verrà eliminato definitivamente.\nNon potrai annullare questa azione.",

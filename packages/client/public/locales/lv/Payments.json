@@ -11,7 +11,7 @@
   "NotPossibleRoomRestoring": "Nav iespējams atjaunot šo telpu, jo ir sasniegts jūsu pašreizējā plānā iekļauto telpu skaita ierobežojums.",
   "NumberOfRoomsAccordingToTariff": "Telpu skaits saskaņā ar jūsu tarifu plānu: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Administratoru skaits saskaņā ar jūsu tarifu plānu: {{currentValue}}/{{maxValue}}",
-  "PlanPaymentOverdue": "Nav iespējams pievienot jaunu lietotāju, izveidot jaunas telpas vai AI agentus. {{planName}} plāna maksājums ir palikt.",
+  "PlanPaymentOverdue": "Nav iespējams pievienot jaunu lietotāju, izveidot jaunas telpas vai MI agentus. {{planName}} plāna maksājums ir palikt.",
   "RoomsQuotaAlmostExhausted": "Telpu kvota ir gandrīz izsmelta.",
   "UsersQuotaAlmostExhausted": "Maksas lietotāju kvota ir gandrīz izsmelta."
 }

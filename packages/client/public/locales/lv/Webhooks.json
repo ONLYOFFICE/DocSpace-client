@@ -1,7 +1,7 @@
 {
-  "AgentCreated": "AI Agent izveidots",
-  "AgentDeleted": "AI aģents izdzēsts",
-  "AgentUpdated": "AI Agent atjaunināts",
+  "AgentCreated": "MI aģents izveidots",
+  "AgentDeleted": "MI aģents izdzēsts",
+  "AgentUpdated": "MI aģents atjaunināts",
   "Before": "Pirms",
   "CreateWebhook": "Izveidojiet tīmekļa aizķeri",
   "DeleteHint": "Tīmekļa aizķere tiks neatgriezeniski izdzēsta.\nŠo darbību nevarēs atsaukt.",

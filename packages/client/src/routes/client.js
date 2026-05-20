@@ -392,6 +392,26 @@ const ClientRoutes = [
           return { Component };
         },
       },
+      {
+        path: "/ai-arbiter",
+        async lazy() {
+          const { AiArbiter } = await componentLoader(
+            () => import("SRC_DIR/pages/AiArbiter"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ProtectedAppRoute appId="ai-arbiter">
+                <ErrorBoundary>
+                  <AiArbiter />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
     ],
   },
   {

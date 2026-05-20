@@ -31,8 +31,9 @@ import CatalogFolderIcon from "@docspace/ui-kit/assets/icons/16/catalog.folder.r
 import CatalogRoomsIcon from "@docspace/ui-kit/assets/icons/16/catalog.rooms.react.svg";
 import CatalogDocumentsIcon from "@docspace/ui-kit/assets/icons/16/catalog.documents.react.svg";
 import AiAgentsIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
+import CatalogAiArbiterIcon from "@docspace/ui-kit/assets/icons/16/catalog.ai-arbiter.react.svg";
 
-export type AppId = "ai-files" | "ai-rooms" | "ai-forms" | "ai-agents";
+export type AppId = "ai-files" | "ai-rooms" | "ai-forms" | "ai-agents" | "ai-arbiter";
 
 export type AppCatalogItem = {
   id: AppId;
@@ -80,6 +81,15 @@ export const useAppsCatalog = (): AppCatalogItem[] => {
       title: t("Common:DashboardAIChatAgentsTitle"),
       description: t("Common:DashboardAIChatAgentsDescription"),
       supported: false,
+      alwaysOn: false,
+    },
+    {
+      id: "ai-arbiter",
+      icon: <CatalogAiArbiterIcon />,
+      title: t("Common:DashboardAIArbiterTitle"),
+      description: t("Common:DashboardAIArbiterDescription"),
+      href: "/ai-arbiter",
+      supported: true,
       alwaysOn: false,
     },
   ];

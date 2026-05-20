@@ -131,10 +131,8 @@ class AppsStore {
   // Source of truth for "has this app been configured": always asks the
   // server, so a stale local cache cannot trigger a duplicate install flow.
   needsSetupAsync = async (id: string): Promise<boolean> => {
-    if (id === "ai-forms") {
-      const settings = await this.fetchAppSettings<{ roomId?: number }>(
-        "ai-forms",
-      );
+    if (id === "ai-forms" || id === "ai-arbiter") {
+      const settings = await this.fetchAppSettings<{ roomId?: number }>(id);
       return !settings?.roomId;
     }
     const settings = await this.fetchAppSettings(id);
@@ -175,6 +173,16 @@ class AppsStore {
   uninstallAiForms = async () => {
     await this.enable("ai-forms", false);
     await this.saveSettings("ai-forms", null);
+  };
+
+  installAiArbiter = async (roomId: number) => {
+    await this.saveSettings("ai-arbiter", { roomId });
+    await this.enable("ai-arbiter", true);
+  };
+
+  uninstallAiArbiter = async () => {
+    await this.enable("ai-arbiter", false);
+    await this.saveSettings("ai-arbiter", null);
   };
 
   // Re-enable a previously configured app without recreating its resources.

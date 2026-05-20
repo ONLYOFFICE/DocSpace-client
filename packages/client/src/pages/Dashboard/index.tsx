@@ -54,6 +54,7 @@ import { useAppsCatalog, type AppId } from "SRC_DIR/helpers/apps-catalog";
 import { ModuleCard, type ModuleItem } from "./ModuleCard";
 import { getGreetingKey, makeCreateUrl, NEW_FILE_NAMES } from "./utils";
 import { InstallAiFormsDialog } from "./InstallModuleDialog";
+import { InstallAiArbiterDialog } from "./InstallAiArbiterDialog";
 import styles from "./Dashboard.module.scss";
 
 interface DashboardProps {
@@ -76,6 +77,7 @@ const Dashboard = ({
   const [searchParams] = useSearchParams();
   const [myFolderId, setMyFolderId] = React.useState<number | null>(null);
   const [installDialogVisible, setInstallDialogVisible] = React.useState(false);
+  const [arbiterDialogVisible, setArbiterDialogVisible] = React.useState(false);
 
   React.useEffect(() => {
     ensureAppsLoaded();
@@ -135,26 +137,45 @@ const Dashboard = ({
   const appsCatalog = useAppsCatalog();
 
   const handleInstall = async (modId: AppId) => {
-    if (modId !== "ai-forms") {
-      toastr.info(t("Common:UnderDevelopment"));
+    if (modId === "ai-forms") {
+      try {
+        const activated = await activate("ai-forms");
+        if (activated) {
+          navigate("/ai-forms");
+        } else {
+          setInstallDialogVisible(true);
+        }
+      } catch (err) {
+        console.error("Failed to activate ai-forms", err);
+        toastr.error(t("Common:SomethingWentWrong"));
+      }
       return;
     }
-    try {
-      const activated = await activate("ai-forms");
-      if (activated) {
-        navigate("/ai-forms");
-      } else {
-        setInstallDialogVisible(true);
+    if (modId === "ai-arbiter") {
+      try {
+        const activated = await activate("ai-arbiter");
+        if (activated) {
+          navigate("/ai-arbiter");
+        } else {
+          setArbiterDialogVisible(true);
+        }
+      } catch (err) {
+        console.error("Failed to activate ai-arbiter", err);
+        toastr.error(t("Common:SomethingWentWrong"));
       }
-    } catch (err) {
-      console.error("Failed to activate ai-forms", err);
-      toastr.error(t("Common:SomethingWentWrong"));
+      return;
     }
+    toastr.info(t("Common:UnderDevelopment"));
   };
 
   const handleInstalled = () => {
     setInstallDialogVisible(false);
     navigate("/ai-forms");
+  };
+
+  const handleArbiterInstalled = () => {
+    setArbiterDialogVisible(false);
+    navigate("/ai-arbiter");
   };
 
   const greetingName = firstName ? `, ${firstName}` : "";
@@ -264,6 +285,11 @@ const Dashboard = ({
         visible={installDialogVisible}
         onClose={() => setInstallDialogVisible(false)}
         onInstalled={handleInstalled}
+      />
+      <InstallAiArbiterDialog
+        visible={arbiterDialogVisible}
+        onClose={() => setArbiterDialogVisible(false)}
+        onInstalled={handleArbiterInstalled}
       />
     </div>
   );

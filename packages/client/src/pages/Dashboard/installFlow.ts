@@ -110,6 +110,44 @@ const uploadLibraryFromSdk = async (
   return libraryId;
 };
 
+export const AI_ARBITER_ROOM_TITLE = "AI Arbiter";
+
+export type AiArbiterInstallStepId = "create-room" | "invite-everyone";
+
+export const AI_ARBITER_INSTALL_STEPS: AiArbiterInstallStepId[] = [
+  "create-room",
+  "invite-everyone",
+];
+
+export interface InstallAiArbiterResult {
+  roomId: number;
+}
+
+export const installAiArbiterModule = async (
+  onStep: (step: AiArbiterInstallStepId) => void,
+  signal?: AbortSignal,
+): Promise<InstallAiArbiterResult> => {
+  onStep("create-room");
+  const room = (await createRoom({
+    title: AI_ARBITER_ROOM_TITLE,
+    roomType: RoomsType.CustomRoom,
+  })) as TRoom;
+
+  onStep("invite-everyone");
+  await setRoomSecurity(room.id, {
+    invitations: [
+      {
+        id: EVERYONE_GROUP_ID,
+        access: ShareAccessRights.Read,
+      },
+    ],
+    notify: false,
+    message: "",
+  });
+
+  return { roomId: room.id };
+};
+
 export const installAiFormsModule = async (
   onStep: (step: AiFormsInstallStepId) => void,
   onLibraryProgress: (p: LibraryUploadProgress) => void = () => {},

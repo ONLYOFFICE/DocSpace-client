@@ -38,6 +38,7 @@ import { DeviceType } from "@docspace/shared/enums";
 import type { TUser } from "@docspace/shared/api/people/types";
 
 import { InstallAiFormsDialog } from "SRC_DIR/pages/Dashboard/InstallModuleDialog";
+import { InstallAiArbiterDialog } from "SRC_DIR/pages/Dashboard/InstallAiArbiterDialog";
 
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
@@ -50,6 +51,7 @@ import CatalogRestoreReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settin
 import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url";
+import CatalogAiArbiterReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-arbiter.react.svg?url";
 
 import AppsSidebar from "../AppsSidebar";
 import { useSidebarShowText } from "../AppsSidebar/useSidebarShowText";
@@ -58,10 +60,12 @@ const AI_FILES_ID = "ai-files";
 const AI_FORMS_ID = "ai-forms";
 const AI_ROOMS_ID = "ai-rooms";
 const AI_AGENTS_ID = "ai-agents";
+const AI_ARBITER_ID = "ai-arbiter";
 
 const PATH_TO_PARENT_ID: Record<string, string> = {
   "/ai-files": AI_FILES_ID,
   "/ai-forms": AI_FORMS_ID,
+  "/ai-arbiter": AI_ARBITER_ID,
 };
 
 const AI_FILES_SECTION_TO_ID: Record<string, string> = {
@@ -87,6 +91,7 @@ type NewArticleProps = {
   aiFormsEnabled: boolean;
   aiRoomsEnabled: boolean;
   aiAgentsEnabled: boolean;
+  aiArbiterEnabled: boolean;
   activate: (id: string) => Promise<boolean>;
   ensureAppsLoaded: () => void;
   toggleArticleOpen: () => void;
@@ -100,6 +105,7 @@ const NewArticle = ({
   aiFormsEnabled,
   aiRoomsEnabled,
   aiAgentsEnabled,
+  aiArbiterEnabled,
   activate,
   ensureAppsLoaded,
   toggleArticleOpen,
@@ -108,6 +114,7 @@ const NewArticle = ({
   const location = useLocation();
   const navigate = useNavigate();
   const [installDialogVisible, setInstallDialogVisible] = React.useState(false);
+  const [arbiterDialogVisible, setArbiterDialogVisible] = React.useState(false);
 
   React.useEffect(() => {
     ensureAppsLoaded();
@@ -243,11 +250,37 @@ const NewArticle = ({
       onClick: underDevelopment,
     };
 
+    const handleAiArbiterClick = async () => {
+      if (aiArbiterEnabled) {
+        navigate("/ai-arbiter");
+        return;
+      }
+      try {
+        const activated = await activate("ai-arbiter");
+        if (activated) {
+          navigate("/ai-arbiter");
+        } else {
+          setArbiterDialogVisible(true);
+        }
+      } catch (err) {
+        console.error("Failed to activate ai-arbiter", err);
+        toastr.error(t("Common:SomethingWentWrong"));
+      }
+    };
+
+    const aiArbiterItem: NavMenuItem = {
+      id: AI_ARBITER_ID,
+      label: t("Common:DashboardAIArbiterTitle"),
+      icon: CatalogAiArbiterReactSvgUrl,
+      onClick: handleAiArbiterClick,
+    };
+
     const all: { item: NavMenuItem; enabled: boolean }[] = [
       { item: aiFilesItem, enabled: aiFilesEnabled },
       { item: aiFormsItem, enabled: aiFormsEnabled },
       { item: aiRoomsItem, enabled: aiRoomsEnabled },
       { item: aiAgentsItem, enabled: aiAgentsEnabled },
+      { item: aiArbiterItem, enabled: aiArbiterEnabled },
     ];
 
     const enabled = all.filter((x) => x.enabled).map((x) => x.item);
@@ -276,7 +309,9 @@ const NewArticle = ({
     aiFormsEnabled,
     aiRoomsEnabled,
     aiAgentsEnabled,
+    aiArbiterEnabled,
     activate,
+    setArbiterDialogVisible,
   ]);
 
   return (
@@ -299,6 +334,14 @@ const NewArticle = ({
           navigate("/ai-forms");
         }}
       />
+      <InstallAiArbiterDialog
+        visible={arbiterDialogVisible}
+        onClose={() => setArbiterDialogVisible(false)}
+        onInstalled={() => {
+          setArbiterDialogVisible(false);
+          navigate("/ai-arbiter");
+        }}
+      />
     </>
   );
 };
@@ -313,6 +356,7 @@ const NewArticleConnected = inject<TStore>(
     aiFormsEnabled: appsStore.isEnabled("ai-forms"),
     aiRoomsEnabled: appsStore.isEnabled("ai-rooms"),
     aiAgentsEnabled: appsStore.isEnabled("ai-agents"),
+    aiArbiterEnabled: appsStore.isEnabled("ai-arbiter"),
     activate: appsStore.activate,
     ensureAppsLoaded: appsStore.ensureLoaded,
   }),

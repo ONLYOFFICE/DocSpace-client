@@ -47,7 +47,7 @@ import {
   unwrapDekForCurrentUser,
   wrapDekForRecipients,
 } from "../../encryption/room-file-access";
-import { resetTofuStores } from "../../encryption/tofu-store";
+import { getTofuStore, resetTofuStores } from "../../encryption/tofu-store";
 import { arrayBufferToBase64 } from "../../encryption/utils";
 import type { IdentityKeyPair } from "../../encryption/types";
 
@@ -193,6 +193,130 @@ describe("rotateOwnIdentityForRoom — integration via MSW", () => {
       .filter((r) => r.method === "PUT");
     expect(puts).toHaveLength(1);
     expect(puts[0].url).toMatch(/\/files\/555\/access$/);
+  });
+
+  it("pins new identity to TOFU only when all files are re-wrapped", async () => {
+    const aliceOld = await generateIdentityKeyPair();
+    const aliceNew = await generateIdentityKeyPair();
+    const dek = generateDEK();
+
+    const fileIds = [601, 602];
+
+    const wraps = await Promise.all(
+      fileIds.map((fileId) =>
+        wrapDekForRecipients({
+          dek,
+          senderIdentity: aliceOld,
+          senderUserId: ALICE_ID,
+          recipients: [{ userId: ALICE_ID, publicKey: pubB64(aliceOld) }],
+          fileId,
+        }),
+      ),
+    );
+
+    filesHandle.current!.setFiles(
+      fileIds.map((id, idx) => ({
+        id,
+        title: `file-${id}.docx`,
+        encrypted: true,
+        fileKeys: wraps[idx],
+      })),
+    );
+    accessHandle.current!.setRoomKeys(ROOM_ID, [
+      {
+        id: "1",
+        userId: ALICE_ID,
+        publicKey: pubB64(aliceOld),
+        privateKeyEnc: "",
+      },
+    ]);
+
+    const result = await rotateOwnIdentityForRoom(ROOM_ID, {
+      currentUserId: ALICE_ID,
+      oldIdentity: aliceOld,
+      newIdentity: aliceNew,
+    });
+
+    expect(result).toEqual([
+      { fileId: 601, success: true },
+      { fileId: 602, success: true },
+    ]);
+
+    const tofuResult = await getTofuStore(ALICE_ID).checkKey(
+      ALICE_ID,
+      pubB64(aliceNew),
+    );
+    expect(tofuResult.kind).toBe("match");
+  });
+
+  it("does not pin new identity to TOFU when at least one file fails", async () => {
+    const aliceOld = await generateIdentityKeyPair();
+    const aliceNew = await generateIdentityKeyPair();
+    const aliceOther = await generateIdentityKeyPair();
+    const dek = generateDEK();
+
+    const goodFileId = 701;
+    const badFileId = 702;
+
+    const goodWrap = await wrapDekForRecipients({
+      dek,
+      senderIdentity: aliceOld,
+      senderUserId: ALICE_ID,
+      recipients: [{ userId: ALICE_ID, publicKey: pubB64(aliceOld) }],
+      fileId: goodFileId,
+    });
+
+    const badWrap = await wrapDekForRecipients({
+      dek,
+      senderIdentity: aliceOld,
+      senderUserId: ALICE_ID,
+      recipients: [{ userId: ALICE_ID, publicKey: pubB64(aliceOther) }],
+      fileId: badFileId,
+    });
+
+    filesHandle.current!.setFiles([
+      {
+        id: goodFileId,
+        title: "good.docx",
+        encrypted: true,
+        fileKeys: goodWrap,
+      },
+      {
+        id: badFileId,
+        title: "bad.docx",
+        encrypted: true,
+        fileKeys: badWrap,
+      },
+    ]);
+    accessHandle.current!.setRoomKeys(ROOM_ID, [
+      {
+        id: "1",
+        userId: ALICE_ID,
+        publicKey: pubB64(aliceOld),
+        privateKeyEnc: "",
+      },
+    ]);
+
+    const result = await rotateOwnIdentityForRoom(ROOM_ID, {
+      currentUserId: ALICE_ID,
+      oldIdentity: aliceOld,
+      newIdentity: aliceNew,
+    });
+
+    expect(result.find((r) => r.fileId === goodFileId)!.success).toBe(true);
+    expect(result.find((r) => r.fileId === badFileId)!.success).toBe(false);
+
+    const tofuResult = await getTofuStore(ALICE_ID).checkKey(
+      ALICE_ID,
+      pubB64(aliceNew),
+    );
+    expect(tofuResult.kind).not.toBe("match");
+
+    const puts = filesHandle.current!
+      .getRequests()
+      .filter((r) => r.method === "PUT");
+    expect(puts).toHaveLength(1);
+    expect(puts[0].url).toMatch(new RegExp(`/files/${goodFileId}/access$`));
   });
 
   it("reports failure when old identity cannot unwrap, leaves ACL intact", async () => {

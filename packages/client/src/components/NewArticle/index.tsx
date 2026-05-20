@@ -83,6 +83,7 @@ type NewArticleProps = {
   user?: TUser | null;
   currentDeviceType: DeviceType;
   articleOpen: boolean;
+  isNotPaidPeriod: boolean;
   aiFilesEnabled: boolean;
   aiFormsEnabled: boolean;
   aiRoomsEnabled: boolean;
@@ -96,6 +97,7 @@ const NewArticle = ({
   user,
   currentDeviceType,
   articleOpen,
+  isNotPaidPeriod,
   aiFilesEnabled,
   aiFormsEnabled,
   aiRoomsEnabled,
@@ -117,6 +119,8 @@ const NewArticle = ({
     storageKey: "home_showSidebarText",
     currentDeviceType,
   });
+
+  const isAdminOrOwner = (user?.isAdmin ?? false) || (user?.isOwner ?? false);
 
   const activeId = React.useMemo(() => {
     const section = new URLSearchParams(location.search).get("section") ?? "";
@@ -166,12 +170,16 @@ const NewArticle = ({
               icon: CatalogTrashReactSvgUrl,
               onClick: () => navigate("/ai-files?section=trash"),
             },
-            {
-              id: "ai-files-settings",
-              label: t("Common:Settings"),
-              icon: CatalogSettingsReactSvgUrl,
-              onClick: () => navigate("/ai-files?section=settings"),
-            },
+            ...(isAdminOrOwner
+              ? [
+                  {
+                    id: "ai-files-settings",
+                    label: t("Common:Settings"),
+                    icon: CatalogSettingsReactSvgUrl,
+                    onClick: () => navigate("/ai-files?section=settings"),
+                  },
+                ]
+              : []),
           ]
         : undefined,
     };
@@ -219,12 +227,16 @@ const NewArticle = ({
               icon: FormGalleryReactSvgUrl,
               onClick: () => navigate("/ai-forms?section=library"),
             },
-            {
-              id: "ai-forms-settings",
-              label: t("Common:Settings"),
-              icon: CatalogSettingsReactSvgUrl,
-              onClick: () => navigate("/ai-forms?section=settings"),
-            },
+            ...(isAdminOrOwner
+              ? [
+                  {
+                    id: "ai-forms-settings",
+                    label: t("Common:Settings"),
+                    icon: CatalogSettingsReactSvgUrl,
+                    onClick: () => navigate("/ai-forms?section=settings"),
+                  },
+                ]
+              : []),
           ]
         : undefined,
     };
@@ -253,15 +265,17 @@ const NewArticle = ({
     const enabled = all.filter((x) => x.enabled).map((x) => x.item);
     const available = all.filter((x) => !x.enabled).map((x) => x.item);
 
+    const hasAvailableGroup = isAdminOrOwner && available.length > 0;
+
     const result: NavMenuGroup[] = [];
     if (enabled.length > 0) {
       result.push({
         id: "enabled",
-        label: t("Common:EnabledApps"),
+        label: hasAvailableGroup ? t("Common:EnabledApps") : undefined,
         items: enabled,
       });
     }
-    if (available.length > 0) {
+    if (hasAvailableGroup) {
       result.push({
         id: "available",
         label: t("Common:AvailableApps"),
@@ -272,6 +286,7 @@ const NewArticle = ({
   }, [
     t,
     navigate,
+    isAdminOrOwner,
     aiFilesEnabled,
     aiFormsEnabled,
     aiRoomsEnabled,
@@ -288,6 +303,7 @@ const NewArticle = ({
         toggleShowText={toggleShowText}
         currentDeviceType={currentDeviceType}
         user={user}
+        isNotPaidPeriod={isNotPaidPeriod}
         articleOpen={articleOpen}
         toggleArticleOpen={toggleArticleOpen}
       />
@@ -304,11 +320,12 @@ const NewArticle = ({
 };
 
 const NewArticleConnected = inject<TStore>(
-  ({ userStore, settingsStore, appsStore }) => ({
+  ({ userStore, settingsStore, appsStore, currentTariffStatusStore }) => ({
     user: userStore.user,
     currentDeviceType: settingsStore.currentDeviceType,
     articleOpen: settingsStore.articleOpen,
     toggleArticleOpen: settingsStore.toggleArticleOpen,
+    isNotPaidPeriod: currentTariffStatusStore.isNotPaidPeriod,
     aiFilesEnabled: appsStore.isEnabled("ai-files"),
     aiFormsEnabled: appsStore.isEnabled("ai-forms"),
     aiRoomsEnabled: appsStore.isEnabled("ai-rooms"),

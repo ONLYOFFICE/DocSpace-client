@@ -1622,5 +1622,6 @@
   "DeleteRoomConfirm": "Dhoma <strong>\"{{roomName}}\"</strong> do të fshihet përgjithmonë. Të gjitha të dhënat dhe akseset e përdoruesve do të humbasin.",
   "DeleteRoomWarning": "I kuptoj pasojat dhe dua të fshij dhomën",
   "DeleteRooms": "Dhoma(t) e zgjedhura <strong>({{count}})</strong> do të fshihen përgjithmonë. Të gjitha të dhënat dhe qasja e përdoruesve do të humbasin.",
-  "DeleteRoomsTitle": "Dëshironi të fshini këto dhoma?"
+  "DeleteRoomsTitle": "Dëshironi të fshini këto dhoma?",
+  "RestoreRooms": "A jeni të sigurt që doni të rindizni disa dhoma?"
 }

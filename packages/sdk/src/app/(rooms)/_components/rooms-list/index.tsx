@@ -29,6 +29,7 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { useSearchParams } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
@@ -40,7 +41,7 @@ import type {
 import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TSortBy, TCreatedBy } from "@docspace/shared/types";
-import { DeviceType, RoomSearchArea } from "@docspace/shared/enums";
+import { DeviceType, FolderType, RoomSearchArea } from "@docspace/shared/enums";
 
 import { PAGE_COUNT } from "@/utils/constants";
 
@@ -157,8 +158,8 @@ const RoomsList = ({
     (TFolderItem | TFileItem) | null
   >(null);
 
-  const [restoringRoom, setRestoringRoom] = React.useState<
-    (TFolderItem | TFileItem) | null
+  const [restoringItems, setRestoringItems] = React.useState<
+    (TFolderItem | TFileItem)[] | null
   >(null);
 
   const onEditRoom = React.useCallback((item: TFolderItem | TFileItem) => {
@@ -170,32 +171,43 @@ const RoomsList = ({
   }, []);
 
   const onRestoreRoom = React.useCallback((item: TFolderItem | TFileItem) => {
-    setRestoringRoom(item);
+    setRestoringItems([item]);
   }, []);
 
-  const restoreRoom = React.useCallback(
-    async (roomId: number) => {
-      activeItemsStore.addActiveItems([], [roomId]);
-      try {
-        await api.rooms.unarchiveRoom(roomId);
-        filesListStore.removeItem(roomId);
-        setTotal((prev) => Math.max(0, prev - 1));
-      } catch (e) {
-        toastr.error(e as Error);
-      } finally {
-        activeItemsStore.removeActiveItems([], [roomId]);
-      }
+  const onRestoreSelected = React.useCallback(
+    (items: (TFolderItem | TFileItem)[]) => {
+      if (!items.length) return;
+      setRestoringItems(items);
     },
-    [activeItemsStore, filesListStore],
+    [],
   );
 
-  const onRestoreSelected = React.useCallback(
-    async (items: (TFolderItem | TFileItem)[]) => {
-      if (!items.length) return;
-      const ids = items.map((item) => item.id as number);
+  const restoreRooms = React.useCallback(
+    async (ids: number[]) => {
+      if (!ids.length) return;
       activeItemsStore.addActiveItems([], ids);
+      const opId = operationsStore.startOperation(
+        "move",
+        t("Common:MoveToOperation"),
+      );
+      let opAlert = false;
       try {
-        await Promise.all(ids.map((id) => api.rooms.unarchiveRoom(id)));
+        const tree = await api.files.getFoldersTree();
+        const roomsFolderId = (
+          tree as unknown as { rootFolderType: number; id: number }[]
+        ).find((f) => f.rootFolderType === FolderType.Rooms)?.id;
+        if (roomsFolderId == null) {
+          throw new Error("Rooms folder not found");
+        }
+        await api.files.moveToFolder(
+          roomsFolderId,
+          ids,
+          [],
+          0,
+          false,
+          false,
+          true,
+        );
         for (const id of ids) filesListStore.removeItem(id);
         setTotal((prev) => Math.max(0, prev - ids.length));
         setSelection([]);
@@ -240,7 +252,12 @@ const RoomsList = ({
         activeItemsStore.removeActiveItems([], roomIds);
       }
     },
-    [activeItemsStore, filesListStore, setSelection, setBufferSelection],
+    [
+      activeItemsStore,
+      filesListStore,
+      setSelection,
+      setBufferSelection,
+    ],
   );
 
   const refreshSingleRoom = React.useCallback(
@@ -498,12 +515,15 @@ const RoomsList = ({
           onChanged={refreshSingleRoom}
         />
       ) : null}
-      {restoringRoom ? (
+      {restoringItems && restoringItems.length > 0 ? (
         <RestoreRoomDialog
           visible
-          onClose={() => setRestoringRoom(null)}
-          roomType={(restoringRoom as TFolderItem).roomType}
-          onConfirm={() => restoreRoom(restoringRoom.id as number)}
+          onClose={() => setRestoringItems(null)}
+          roomType={(restoringItems[0] as TFolderItem).roomType}
+          count={restoringItems.length}
+          onConfirm={() =>
+            restoreRooms(restoringItems.map((item) => item.id as number))
+          }
         />
       ) : null}
       {deletingItems && deletingItems.length > 0 ? (

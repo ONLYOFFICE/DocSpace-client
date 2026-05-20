@@ -1622,5 +1622,6 @@
   "DeleteRoomConfirm": "Otaq <strong>\"{{roomName}}\"</strong> daimi şəkildə silinəcəkdir. Bütün məlumatlar və istifadəçi girişləri itiriləcəkdir.",
   "DeleteRoomWarning": "Mən nəticələri başa düşürəm və otağı silmək istəyirəm.",
   "DeleteRooms": "Seçilmiş <strong>otaqlar ({{count}})</strong> daimi olaraq silinəcək. Bütün məlumatlar və istifadəçi girişi itəcək.",
-  "DeleteRoomsTitle": "Bu otaqları sil?"
+  "DeleteRoomsTitle": "Bu otaqları sil?",
+  "RestoreRooms": "Otaqları bərpa etmək istədiyinizə əminsiniz?"
 }

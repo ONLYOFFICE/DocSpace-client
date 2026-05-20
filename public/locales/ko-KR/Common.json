@@ -1622,5 +1622,6 @@
   "DeleteRoomConfirm": "방 <strong>\"{{roomName}}\"</strong>은 영구적으로 삭제됩니다. 모든 데이터 및 사용자 접근 권한은 사라집니다.",
   "DeleteRoomWarning": "결과를 이해하며 방을 삭제하고 싶습니다.",
   "DeleteRooms": "선택한 <strong>방({{count}})</strong>이 영구적으로 삭제됩니다. 모든 데이터와 사용자 액세스가 손실됩니다.",
-  "DeleteRoomsTitle": "이 방들을 삭제하시겠습니까?"
+  "DeleteRoomsTitle": "이 방들을 삭제하시겠습니까?",
+  "RestoreRooms": "정말로 방을 복원하시겠습니까?"
 }

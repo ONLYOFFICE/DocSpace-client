@@ -1622,5 +1622,6 @@
   "DeleteRoomConfirm": "La salle <strong>« {{roomName}} »</strong> sera définitivement supprimée. Toutes les données et les accès utilisateurs seront perdus.",
   "DeleteRoomWarning": "Je comprends les conséquences et souhaite supprimer la salle",
   "DeleteRooms": "Les <strong>salles sélectionnées ({{count}})</strong> seront définitivement supprimées. Toutes les données et tous les accès utilisateurs seront perdus.",
-  "DeleteRoomsTitle": "Supprimer ces salles ?"
+  "DeleteRoomsTitle": "Supprimer ces salles ?",
+  "RestoreRooms": "Souhaitez-vous vraiment restaurer les salles ?"
 }

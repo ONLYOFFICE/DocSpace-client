@@ -41,6 +41,7 @@ type RestoreRoomDialogProps = {
   visible: boolean;
   onClose: () => void;
   roomType?: number;
+  count?: number;
   onConfirm: () => void;
 };
 
@@ -48,9 +49,11 @@ const RestoreRoomDialog = ({
   visible,
   onClose,
   roomType,
+  count = 1,
   onConfirm,
 }: RestoreRoomDialogProps) => {
   const { t } = useTranslation(["Common"]);
+  const isSingle = count <= 1;
 
   const handleConfirm = React.useCallback(() => {
     onConfirm();
@@ -70,6 +73,13 @@ const RestoreRoomDialog = ({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [visible, onKeyDown]);
 
+  const getBody = () => {
+    if (!isSingle) return t("Common:RestoreRooms");
+    if (roomType === RoomsType.PublicRoom)
+      return t("Common:WantToRestoreTheRoom");
+    return t("Common:RestoreRoom");
+  };
+
   return (
     <ModalDialog
       visible={visible}
@@ -78,11 +88,7 @@ const RestoreRoomDialog = ({
     >
       <ModalDialog.Header>{t("Common:Restore")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text>
-          {roomType === RoomsType.PublicRoom
-            ? t("Common:WantToRestoreTheRoom")
-            : t("Common:RestoreRoom")}
-        </Text>
+        <Text>{getBody()}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

@@ -1622,5 +1622,6 @@
   "DeleteRoomConfirm": "A sala <strong>\"{{roomName}}\"</strong> será excluída permanentemente. Todos os dados e acessos dos usuários serão perdidos.",
   "DeleteRoomWarning": "Entendo as consequências e quero apagar a sala",
   "DeleteRooms": "As <strong>salas selecionadas ({{count}})</strong> serão permanentemente excluídas. Todos os dados e o acesso dos usuários serão perdidos.",
-  "DeleteRoomsTitle": "Excluir estas salas?"
+  "DeleteRoomsTitle": "Excluir estas salas?",
+  "RestoreRooms": "Tem certeza de que deseja restaurar os quartos?"
 }

@@ -1622,5 +1622,6 @@
   "DeleteRoomConfirm": "De kamer <strong>{{roomName}}</strong> wordt permanent verwijderd. Alle data en gebruikersrechten gaan verloren.",
   "DeleteRoomWarning": "Ik begrijp de gevolgen en wil de kamer verwijderen.",
   "DeleteRooms": "De geselecteerde <strong>kamers ({{count}})</strong> worden permanent verwijderd. Alle data en gebruikers toegang zullen verloren gaan.",
-  "DeleteRoomsTitle": "Deze kamers verwijderen?"
+  "DeleteRoomsTitle": "Deze kamers verwijderen?",
+  "RestoreRooms": "Weet u zeker dat u kamers wilt herstellen?"
 }

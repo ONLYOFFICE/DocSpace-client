@@ -1622,5 +1622,6 @@
   "DeleteRoomConfirm": "Pokoj <strong>{{roomName}}</strong> bude trvale smazán. Všechna data a přístupy uživatelů budou ztraceny.",
   "DeleteRoomWarning": "Rozumím následkům a chci smazat pokoj.",
   "DeleteRooms": "Vybrané <strong>místnosti ({{count}})</strong> budou trvale odstraněny. Všechna data a přístup uživatelů budou ztraceny.",
-  "DeleteRoomsTitle": "Smazat tyto místnosti?"
+  "DeleteRoomsTitle": "Smazat tyto místnosti?",
+  "RestoreRooms": "Jste si jistí, že chcete obnovit místnosti?"
 }

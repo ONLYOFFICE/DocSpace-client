@@ -1622,5 +1622,6 @@
   "DeleteRoomConfirm": "Phòng <strong>\"{{roomName}}\"</strong> sẽ bị xóa vĩnh viễn. Tất cả dữ liệu và quyền truy cập của người dùng sẽ bị mất.",
   "DeleteRoomWarning": "Tôi hiểu những hậu quả và muốn xóa phòng.",
   "DeleteRooms": "Các <strong>phòng đã chọn ({{count}})</strong> sẽ bị xóa vĩnh viễn. Tất cả dữ liệu và quyền truy cập của người dùng sẽ bị mất.",
-  "DeleteRoomsTitle": "Xóa những phòng này?"
+  "DeleteRoomsTitle": "Xóa những phòng này?",
+  "RestoreRooms": "Bạn có chắc chắn muốn khôi phục các phòng không?"
 }

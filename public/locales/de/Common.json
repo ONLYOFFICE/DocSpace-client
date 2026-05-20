@@ -1622,5 +1622,6 @@
   "DeleteRoomConfirm": "Der Raum <strong>\"{{roomName}}\"</strong> wird dauerhaft gelöscht. Alle Daten und Benutzerzugriffe gehen verloren.",
   "DeleteRoomWarning": "Ich verstehe die Konsequenzen und möchte den Raum löschen.",
   "DeleteRooms": "Die ausgewählten <strong>Räume ({{count}})</strong> werden dauerhaft gelöscht. Alle Daten und Benutzerzugriffe gehen verloren.",
-  "DeleteRoomsTitle": "Diese Räume löschen?"
+  "DeleteRoomsTitle": "Diese Räume löschen?",
+  "RestoreRooms": "Sind Sie sicher, dass Sie die Räume wiederherstellen wollen?"
 }

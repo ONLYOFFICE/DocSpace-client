@@ -1622,5 +1622,6 @@
   "DeleteRoomConfirm": "Pokój <strong>{{roomName}}</strong> zostanie trwale usunięty. Wszystkie dane i uprawnienia użytkowników zostaną utracone.",
   "DeleteRoomWarning": "Rozumiem konsekwencje i chcę usunąć pokój.",
   "DeleteRooms": "Wybrane <strong>pokoje ({{count}})</strong> zostaną trwale usunięte. Wszystkie dane i dostęp użytkowników zostaną utracone.",
-  "DeleteRoomsTitle": "Usunąć te pokoje?"
+  "DeleteRoomsTitle": "Usunąć te pokoje?",
+  "RestoreRooms": "Czy na pewno chcesz przywrócić pokoje?"
 }

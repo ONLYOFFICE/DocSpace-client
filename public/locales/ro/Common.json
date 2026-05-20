@@ -1622,5 +1622,6 @@
   "DeleteRoomConfirm": "Sala <strong>\"{{roomName}}\"</strong> va fi ștearsă definitiv. Toate datele  și conectările utilizatorilor se vor pierde.",
   "DeleteRoomWarning": "Confirm că înțeleg efectele și doresc să șterg sala",
   "DeleteRooms": "<strong>Săli ({{count}})</strong> selectate vor fi șterse permanent. Toate datele și accesul utilizatorilor vor fi pierdute.",
-  "DeleteRoomsTitle": "Doriți să ștergeți aceste săli?"
+  "DeleteRoomsTitle": "Doriți să ștergeți aceste săli?",
+  "RestoreRooms": "Sigur doriţi să restaurați sălile?"
 }

@@ -50,6 +50,7 @@ import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionSt
 import { useNavigationStore } from "@/app/(docspace)/_store/NavigationStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
+import { useRoomsOperationsStore } from "../../_store/RoomsOperationsStore";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
@@ -66,6 +67,7 @@ import EmptyView from "../empty-view";
 import CreateEditRoomDialog from "../create-edit-room-dialog";
 import RestoreRoomDialog from "../restore-room-dialog";
 import DeleteRoomDialog from "../delete-room-dialog";
+import MoveToArchiveDialog from "../move-to-archive-dialog";
 import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
 import useResetSelectionClick from "@/app/(docspace)/(files)/_components/list/hooks/useResetSelectionClick";
 
@@ -102,6 +104,8 @@ const RoomsList = ({
   const { setSelection, setBufferSelection } = useFilesSelectionStore();
   const navigationStore = useNavigationStore();
   const activeItemsStore = useActiveItemsStore();
+  const operationsStore = useRoomsOperationsStore();
+  const { t } = useTranslation(["Common"]);
 
   useResetSelectionClick({ setSelection, setBufferSelection });
 
@@ -213,12 +217,85 @@ const RoomsList = ({
         setSelection([]);
         setBufferSelection(null);
       } catch (e) {
+        opAlert = true;
         toastr.error(e as Error);
       } finally {
         activeItemsStore.removeActiveItems([], ids);
+        operationsStore.finishOperation(opId, opAlert);
       }
     },
-    [activeItemsStore, filesListStore, setSelection, setBufferSelection],
+    [
+      activeItemsStore,
+      operationsStore,
+      filesListStore,
+      setSelection,
+      setBufferSelection,
+      t,
+    ],
+  );
+
+  const [archivingItems, setArchivingItems] = React.useState<
+    (TFolderItem | TFileItem)[] | null
+  >(null);
+
+  const onArchiveRoom = React.useCallback((item: TFolderItem | TFileItem) => {
+    setArchivingItems([item]);
+  }, []);
+
+  const onArchiveSelected = React.useCallback(
+    (items: (TFolderItem | TFileItem)[]) => {
+      if (!items.length) return;
+      setArchivingItems(items);
+    },
+    [],
+  );
+
+  const archiveRooms = React.useCallback(
+    async (ids: number[]) => {
+      if (!ids.length) return;
+      activeItemsStore.addActiveItems([], ids);
+      const opId = operationsStore.startOperation(
+        "move",
+        t("Common:MoveToOperation"),
+      );
+      let opAlert = false;
+      try {
+        const tree = await api.files.getFoldersTree();
+        const archiveFolderId = (
+          tree as unknown as { rootFolderType: number; id: number }[]
+        ).find((f) => f.rootFolderType === FolderType.Archive)?.id;
+        if (archiveFolderId == null) {
+          throw new Error("Archive folder not found");
+        }
+        await api.files.moveToFolder(
+          archiveFolderId,
+          ids,
+          [],
+          0,
+          false,
+          false,
+          true,
+        );
+        for (const id of ids) filesListStore.removeItem(id);
+        setTotal((prev) => Math.max(0, prev - ids.length));
+        setSelection([]);
+        setBufferSelection(null);
+      } catch (e) {
+        opAlert = true;
+        toastr.error(e as Error);
+      } finally {
+        activeItemsStore.removeActiveItems([], ids);
+        operationsStore.finishOperation(opId, opAlert);
+      }
+    },
+    [
+      activeItemsStore,
+      operationsStore,
+      filesListStore,
+      setSelection,
+      setBufferSelection,
+      t,
+    ],
   );
 
   const [deletingItems, setDeletingItems] = React.useState<
@@ -240,6 +317,11 @@ const RoomsList = ({
   const deleteRooms = React.useCallback(
     async (roomIds: number[]) => {
       activeItemsStore.addActiveItems([], roomIds);
+      const opId = operationsStore.startOperation(
+        "deletePermanently",
+        t("Common:DeletePermanently"),
+      );
+      let opAlert = false;
       try {
         await api.files.removeFiles(roomIds, [], false, true, true);
         for (const id of roomIds) filesListStore.removeItem(id);
@@ -247,16 +329,20 @@ const RoomsList = ({
         setSelection([]);
         setBufferSelection(null);
       } catch (e) {
+        opAlert = true;
         toastr.error(e as Error);
       } finally {
         activeItemsStore.removeActiveItems([], roomIds);
+        operationsStore.finishOperation(opId, opAlert);
       }
     },
     [
       activeItemsStore,
+      operationsStore,
       filesListStore,
       setSelection,
       setBufferSelection,
+      t,
     ],
   );
 
@@ -454,6 +540,8 @@ const RoomsList = ({
         onDeleteRoom={onDeleteRoom}
         onDeleteSelected={onDeleteSelected}
         onRestoreSelected={onRestoreSelected}
+        onArchiveRoom={onArchiveRoom}
+        onArchiveSelected={onArchiveSelected}
         isArchive={isArchive}
       />
     );
@@ -473,6 +561,8 @@ const RoomsList = ({
         onDeleteRoom={onDeleteRoom}
         onDeleteSelected={onDeleteSelected}
         onRestoreSelected={onRestoreSelected}
+        onArchiveRoom={onArchiveRoom}
+        onArchiveSelected={onArchiveSelected}
         isArchive={isArchive}
       />
     );
@@ -534,6 +624,16 @@ const RoomsList = ({
           count={deletingItems.length}
           onConfirm={() =>
             deleteRooms(deletingItems.map((item) => item.id as number))
+          }
+        />
+      ) : null}
+      {archivingItems && archivingItems.length > 0 ? (
+        <MoveToArchiveDialog
+          visible
+          onClose={() => setArchivingItems(null)}
+          count={archivingItems.length}
+          onConfirm={() =>
+            archiveRooms(archivingItems.map((item) => item.id as number))
           }
         />
       ) : null}

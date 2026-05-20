@@ -70,6 +70,8 @@ const RoomsRow = observer(
     onDeleteRoom,
     onDeleteSelected,
     onRestoreSelected,
+    onArchiveRoom,
+    onArchiveSelected,
     isArchive,
   }: RoomsRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
@@ -90,6 +92,8 @@ const RoomsRow = observer(
       onDeleteRoom,
       onDeleteSelected,
       onRestoreSelected,
+      onArchiveRoom,
+      onArchiveSelected,
     );
     const refreshRooms = React.useContext(RoomsRefreshContext);
 

@@ -50,6 +50,8 @@ const RoomsRowView = ({
   onDeleteRoom,
   onDeleteSelected,
   onRestoreSelected,
+  onArchiveRoom,
+  onArchiveSelected,
   isArchive,
 }: RoomsRowViewProps) => {
   const isSSR = useIsServer();
@@ -80,6 +82,8 @@ const RoomsRowView = ({
           onDeleteRoom={onDeleteRoom}
           onDeleteSelected={onDeleteSelected}
           onRestoreSelected={onRestoreSelected}
+          onArchiveRoom={onArchiveRoom}
+          onArchiveSelected={onArchiveSelected}
           isArchive={isArchive}
         />
       ))}

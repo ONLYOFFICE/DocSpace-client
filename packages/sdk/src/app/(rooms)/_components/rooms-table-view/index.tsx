@@ -69,6 +69,8 @@ type RoomsTableViewProps = {
   onDeleteRoom?: (item: TFolderItem | TFileItem) => void;
   onDeleteSelected?: (items: (TFolderItem | TFileItem)[]) => void;
   onRestoreSelected?: (items: (TFolderItem | TFileItem)[]) => void;
+  onArchiveRoom?: (item: TFolderItem | TFileItem) => void;
+  onArchiveSelected?: (items: (TFolderItem | TFileItem)[]) => void;
   isArchive?: boolean;
 };
 
@@ -88,6 +90,8 @@ const RoomsTableView = ({
   onDeleteRoom,
   onDeleteSelected,
   onRestoreSelected,
+  onArchiveRoom,
+  onArchiveSelected,
   isArchive,
 }: RoomsTableViewProps) => {
   const { t } = useTranslation(["Common", "Files"]);
@@ -223,6 +227,8 @@ const RoomsTableView = ({
             onDeleteRoom={onDeleteRoom}
             onDeleteSelected={onDeleteSelected}
             onRestoreSelected={onRestoreSelected}
+            onArchiveRoom={onArchiveRoom}
+            onArchiveSelected={onArchiveSelected}
             isArchive={isArchive}
           />
         ))}

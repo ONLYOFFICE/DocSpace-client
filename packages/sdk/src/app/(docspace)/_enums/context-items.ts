@@ -17,6 +17,7 @@ export enum AVAILABLE_CONTEXT_ITEMS {
   removeFromSharedWithMe = "remove-from-shared-with-me",
   share = "share",
   showInfo = "show-info",
+  showVersionHistory = "show-version-history",
   copy = "copy",
   duplicate = "duplicate",
   moveTo = "move-to",

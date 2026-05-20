@@ -66,6 +66,7 @@ import { InfoContext } from "@/app/(docspace)/_contexts/InfoContext";
 import { DeleteContext } from "@/app/(docspace)/_contexts/DeleteContext";
 import { FileOperationsContext } from "@/app/(docspace)/_contexts/FileOperationsContext";
 import { RenameContext } from "@/app/(docspace)/_contexts/RenameContext";
+import { VersionHistoryContext } from "@/app/(docspace)/_contexts/VersionHistoryContext";
 
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import type { TileProps } from "../TileView.types";
@@ -107,6 +108,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const deleteCtx = React.useContext(DeleteContext);
   const fileOpsCtx = React.useContext(FileOperationsContext);
   const renameCtx = React.useContext(RenameContext);
+  const onShowVersionHistory = React.useContext(VersionHistoryContext);
   const { getContextMenuModel } = useContextMenuModel({
     item: observableItem,
     onShareClick: onShareClick ?? undefined,
@@ -117,6 +119,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
     onDuplicateClick: fileOpsCtx?.duplicateItem,
     onRestoreClick: fileOpsCtx?.restoreItem,
     onRenameClick: renameCtx?.renameItem,
+    onShowVersionHistoryClick: onShowVersionHistory ?? undefined,
   });
   const { downloadAction } = useDownloadActions();
   const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });
@@ -191,6 +194,11 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
         }
       }}
       onClickFavorite={onClickFavorite}
+      onShowVersionHistory={
+        !observableItem.isFolder && onShowVersionHistory
+          ? () => onShowVersionHistory(observableItem as TFileItem)
+          : undefined
+      }
     />
   );
 

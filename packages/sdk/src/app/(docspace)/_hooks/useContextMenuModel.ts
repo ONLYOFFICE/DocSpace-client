@@ -23,6 +23,7 @@ import DuplicateReactSvgUrl from "PUBLIC_DIR/images/icons/16/duplicate.react.svg
 import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
 import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
+import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
 
 import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
 import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
@@ -47,6 +48,7 @@ type UseContextMenuModelProps = {
   onCopySelectedClick?: (items: (TFileItem | TFolderItem)[]) => void;
   onMoveSelectedClick?: (items: (TFileItem | TFolderItem)[]) => void;
   onRestoreSelectedClick?: (items: (TFileItem | TFolderItem)[]) => void;
+  onShowVersionHistoryClick?: (item: TFileItem) => void;
 };
 
 export default function useContextMenuModel({
@@ -63,6 +65,7 @@ export default function useContextMenuModel({
   onCopySelectedClick,
   onMoveSelectedClick,
   onRestoreSelectedClick,
+  onShowVersionHistoryClick,
 }: UseContextMenuModelProps) {
   const { t } = useTranslation(["Common"]);
 
@@ -339,6 +342,20 @@ export default function useContextMenuModel({
       };
     },
     [t, onMoveClick],
+  );
+
+  const getShowVersionHistoryItem = useCallback(
+    (i: TFileItem) => {
+      return {
+        id: "option_show-version-history",
+        key: "show-version-history",
+        label: t("Common:ShowVersionHistory"),
+        icon: HistoryFinalizedReactSvgUrl,
+        onClick: () => onShowVersionHistoryClick?.(i),
+        disabled: !onShowVersionHistoryClick,
+      };
+    },
+    [t, onShowVersionHistoryClick],
   );
 
   const getShowInfoItem = useCallback(
@@ -636,6 +653,12 @@ export default function useContextMenuModel({
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.restore))
         actionGroup.push(getRestoreItem(item!));
 
+      if (
+        contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.showVersionHistory) &&
+        !("isFolder" in item! && item!.isFolder)
+      )
+        actionGroup.push(getShowVersionHistoryItem(item as TFileItem));
+
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.showInfo))
         actionGroup.push(getShowInfoItem(item!));
 
@@ -702,6 +725,7 @@ export default function useContextMenuModel({
       getRenameItem,
       getRestoreItem,
       getShowInfoItem,
+      getShowVersionHistoryItem,
       getDeleteItem,
       getHeaderContextMenuModel,
       getGroupContextMenuModel,

@@ -74,6 +74,7 @@ import { InfoContext } from "@/app/(docspace)/_contexts/InfoContext";
 import { DeleteContext } from "@/app/(docspace)/_contexts/DeleteContext";
 import { FileOperationsContext } from "@/app/(docspace)/_contexts/FileOperationsContext";
 import { RenameContext } from "@/app/(docspace)/_contexts/RenameContext";
+import { VersionHistoryContext } from "@/app/(docspace)/_contexts/VersionHistoryContext";
 import type {
   TFileItem,
   TFolderItem,
@@ -84,7 +85,9 @@ import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
 import CreateFileDialog from "../create-file-dialog";
+import VersionHistoryPanel from "../version-history-panel";
 import { InfoPanelView, useInfoPanelStore } from "../../_store/InfoPanelStore";
+import { useVersionHistoryStore } from "../../_store/VersionHistoryStore";
 import useDocsActions from "../../_hooks/useDocsActions";
 import { useDocsMenuModels } from "../../_hooks/useDocsMenuModels";
 import useTrashActions from "../../_hooks/useTrashActions";
@@ -135,6 +138,7 @@ const DocsLayout = observer(
     const { isEmptyList } = useSettingsStore();
     const { rootFolderType } = useFilesListStore();
     const infoPanelStore = useInfoPanelStore();
+    const versionHistoryStore = useVersionHistoryStore();
     const { sdkConfig } = useSDKConfig();
     const router = useRouter();
 
@@ -259,6 +263,13 @@ const DocsLayout = observer(
       [infoPanelStore],
     );
 
+    const versionHistoryHandler = React.useCallback(
+      (item: TFileItem) => {
+        versionHistoryStore.open(item as TFile);
+      },
+      [versionHistoryStore],
+    );
+
     return (
       <OpenFileContext.Provider value={openFileHandler}>
         <InfoContext.Provider value={infoHandler}>
@@ -266,6 +277,7 @@ const DocsLayout = observer(
             <DeleteContext.Provider value={deleteHandler}>
               <RenameContext.Provider value={renameHandler}>
                 <FileOperationsContext.Provider value={fileOperationsHandler}>
+                  <VersionHistoryContext.Provider value={versionHistoryHandler}>
                   <div className={styles.root} style={frameHeaderVars}>
                     <DropZone
                       onFilesDropped={uploadFilesToFolder}
@@ -347,6 +359,7 @@ const DocsLayout = observer(
                       </RootScrollbar>
                     </DropZone>
                     <InfoPanelEditLinkDialog />
+                    <VersionHistoryPanel />
                     <CreateFileDialog
                       visible={dialogVisible}
                       type={dialogType}
@@ -447,6 +460,7 @@ const DocsLayout = observer(
                       onSave={confirmRename}
                     />
                   </div>
+                  </VersionHistoryContext.Provider>
                 </FileOperationsContext.Provider>
               </RenameContext.Provider>
             </DeleteContext.Provider>

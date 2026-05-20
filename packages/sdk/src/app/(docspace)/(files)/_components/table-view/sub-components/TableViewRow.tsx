@@ -44,9 +44,11 @@ import { TableRow } from "@docspace/ui-kit/components/table";
 import { TableCell } from "@docspace/ui-kit/components/table";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
+import Badges from "@docspace/shared/components/badges";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
@@ -59,6 +61,8 @@ import { InfoContext } from "../../../../_contexts/InfoContext";
 import { DeleteContext } from "../../../../_contexts/DeleteContext";
 import { FileOperationsContext } from "../../../../_contexts/FileOperationsContext";
 import { RenameContext } from "../../../../_contexts/RenameContext";
+import { VersionHistoryContext } from "../../../../_contexts/VersionHistoryContext";
+import type { TFileItem } from "../../../../_hooks/useItemList";
 import { generateFilesItemValue } from "../../../_utils";
 import getTitleWithoutExt from "../../../../_utils/get-title-without-ext";
 
@@ -74,6 +78,7 @@ const TableViewRow = observer(
     const observableItem = storeItem ?? item;
 
     const { t, i18n } = useTranslation(["Common"]);
+    const { isBase } = useTheme();
     const { openFile } = useFilesActions({ t });
     const { openFolder } = useFolderActions({ t });
     const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });
@@ -82,6 +87,7 @@ const TableViewRow = observer(
     const deleteCtx = React.useContext(DeleteContext);
     const fileOpsCtx = React.useContext(FileOperationsContext);
     const renameCtx = React.useContext(RenameContext);
+    const onShowVersionHistory = React.useContext(VersionHistoryContext);
 
     const { getContextMenuModel } = useContextMenuModel({
       item: observableItem,
@@ -93,6 +99,7 @@ const TableViewRow = observer(
       onDuplicateClick: fileOpsCtx?.duplicateItem,
       onRestoreClick: fileOpsCtx?.restoreItem,
       onRenameClick: renameCtx?.renameItem,
+      onShowVersionHistoryClick: onShowVersionHistory ?? undefined,
     });
 
     const isChecked = filesSelectionStore.isCheckedItem(item);
@@ -163,6 +170,29 @@ const TableViewRow = observer(
     // the update (same proxy ref would short-circuit to true).
     const itemSnapshot = { ...observableItem };
 
+    const badgesNode = (
+      <div className={styles.badgesContainer}>
+        <Badges
+          t={t}
+          themeIsBase={isBase}
+          item={observableItem}
+          viewAs="table"
+          showNew={false}
+          onFilesClick={() => {
+            if (!observableItem.isFolder) {
+              openFile(observableItem);
+            }
+          }}
+          onClickFavorite={onClickFavorite}
+          onShowVersionHistory={
+            !observableItem.isFolder && onShowVersionHistory
+              ? () => onShowVersionHistory(observableItem as TFileItem)
+              : undefined
+          }
+        />
+      </div>
+    );
+
     const quickButtonsNode = (
       <div className={styles.quickButtonsContainer}>
         <QuickButtons
@@ -221,6 +251,7 @@ const TableViewRow = observer(
               <span className={styles.nameCellExst}>{item.fileExst}</span>
             ) : null}
           </span>
+          {badgesNode}
           {lastColumn === "Name" ? quickButtonsNode : null}
         </TableCell>
         <TableCell className={lastColumn === "Modified" ? styles.lastCell : undefined}>

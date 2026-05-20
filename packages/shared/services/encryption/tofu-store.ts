@@ -36,6 +36,8 @@
 // IndexedDB-backed TOFU store for peer X25519 public keys.
 // Per-scopeId DB (one per logged-in user). Soft-fails when IDB is unavailable.
 
+import { base64ToUint8Array } from "./utils";
+
 export type TofuRecord = {
   userId: string;
   publicKey: string;
@@ -56,6 +58,23 @@ const DB_VERSION = 1;
 function getIDB(): IDBFactory | null {
   if (typeof indexedDB === "undefined") return null;
   return indexedDB;
+}
+
+function constantTimeEqual(a: Uint8Array, b: Uint8Array): boolean {
+  if (a.byteLength !== b.byteLength) return false;
+  let diff = 0;
+  for (let i = 0; i < a.byteLength; i++) {
+    diff |= a[i] ^ b[i];
+  }
+  return diff === 0;
+}
+
+function keysEqual(a: string, b: string): boolean {
+  try {
+    return constantTimeEqual(base64ToUint8Array(a), base64ToUint8Array(b));
+  } catch {
+    return false;
+  }
 }
 
 let warnedUnavailable = false;
@@ -208,7 +227,7 @@ export class TofuStore {
       return { kind: "first-seen" };
     }
 
-    if (existing.publicKey === publicKey) {
+    if (keysEqual(existing.publicKey, publicKey)) {
       const updated: TofuRecord = { ...existing, lastSeenAt: now };
       await this.putRecord(updated);
       return { kind: "match", record: updated };

@@ -184,20 +184,20 @@ describe("TofuStore", () => {
 
   it("records first-seen on a brand-new userId", async () => {
     const tofu = new TofuStore("alice");
-    const result = await tofu.checkKey("bob", "PK_BOB_1");
+    const result = await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
     expect(result.kind).toBe("first-seen");
 
     const list = await tofu.list();
     expect(list).toHaveLength(1);
     expect(list[0].userId).toBe("bob");
-    expect(list[0].publicKey).toBe("PK_BOB_1");
+    expect(list[0].publicKey).toBe("PKBOBABCDEFGHIJK");
     expect(list[0].verifiedAt).toBeNull();
     expect(list[0].firstSeenAt).toBe(list[0].lastSeenAt);
   });
 
   it("returns match + bumps lastSeenAt on identical key", async () => {
     const tofu = new TofuStore("alice");
-    const before = await tofu.checkKey("bob", "PK_BOB_1");
+    const before = await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
     expect(before.kind).toBe("first-seen");
 
     const t0 = await tofu.list();
@@ -206,7 +206,7 @@ describe("TofuStore", () => {
     // small delay so lastSeenAt advances
     await new Promise((r) => setTimeout(r, 5));
 
-    const result = await tofu.checkKey("bob", "PK_BOB_1");
+    const result = await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
     expect(result.kind).toBe("match");
     if (result.kind !== "match") return;
     expect(result.record.firstSeenAt).toBe(firstSeenAt);
@@ -215,37 +215,37 @@ describe("TofuStore", () => {
 
   it("returns mismatch without overwriting when key changes", async () => {
     const tofu = new TofuStore("alice");
-    await tofu.checkKey("bob", "PK_BOB_1");
+    await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
 
-    const result = await tofu.checkKey("bob", "PK_BOB_2");
+    const result = await tofu.checkKey("bob", "PKBOBABCDEFGHIJL");
     expect(result.kind).toBe("mismatch");
     if (result.kind !== "mismatch") return;
-    expect(result.known.publicKey).toBe("PK_BOB_1");
-    expect(result.submitted).toBe("PK_BOB_2");
+    expect(result.known.publicKey).toBe("PKBOBABCDEFGHIJK");
+    expect(result.submitted).toBe("PKBOBABCDEFGHIJL");
 
     // Stored record is still the original key.
     const list = await tofu.list();
-    expect(list[0].publicKey).toBe("PK_BOB_1");
+    expect(list[0].publicKey).toBe("PKBOBABCDEFGHIJK");
   });
 
   it("acceptKey overwrites the record and resets verifiedAt", async () => {
     const tofu = new TofuStore("alice");
-    await tofu.checkKey("bob", "PK_BOB_1");
+    await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
     await tofu.markVerified("bob");
     const verifiedRecord = (await tofu.list())[0];
     expect(verifiedRecord.verifiedAt).not.toBeNull();
     const originalFirstSeen = verifiedRecord.firstSeenAt;
 
-    await tofu.acceptKey("bob", "PK_BOB_2");
+    await tofu.acceptKey("bob", "PKBOBABCDEFGHIJL");
 
     const list = await tofu.list();
-    expect(list[0].publicKey).toBe("PK_BOB_2");
+    expect(list[0].publicKey).toBe("PKBOBABCDEFGHIJL");
     expect(list[0].verifiedAt).toBeNull();
     // firstSeenAt is preserved across an acceptKey.
     expect(list[0].firstSeenAt).toBe(originalFirstSeen);
 
     // Subsequent check with the new key now matches.
-    const result = await tofu.checkKey("bob", "PK_BOB_2");
+    const result = await tofu.checkKey("bob", "PKBOBABCDEFGHIJL");
     expect(result.kind).toBe("match");
   });
 
@@ -258,20 +258,20 @@ describe("TofuStore", () => {
 
   it("forget removes the record", async () => {
     const tofu = new TofuStore("alice");
-    await tofu.checkKey("bob", "PK_BOB_1");
+    await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
     await tofu.forget("bob");
     const list = await tofu.list();
     expect(list).toHaveLength(0);
 
     // After forget, the next check is again first-seen.
-    const result = await tofu.checkKey("bob", "PK_BOB_1");
+    const result = await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
     expect(result.kind).toBe("first-seen");
   });
 
   it("clear wipes the entire scope", async () => {
     const tofu = new TofuStore("alice");
-    await tofu.checkKey("bob", "PK_BOB_1");
-    await tofu.checkKey("carol", "PK_CAROL_1");
+    await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
+    await tofu.checkKey("carol", "PKCAROLABCDEFGHI");
     expect((await tofu.list()).length).toBe(2);
     await tofu.clear();
     expect((await tofu.list()).length).toBe(0);
@@ -281,15 +281,15 @@ describe("TofuStore", () => {
     const aliceStore = new TofuStore("alice");
     const eveStore = new TofuStore("eve");
 
-    await aliceStore.checkKey("bob", "PK_BOB_1");
+    await aliceStore.checkKey("bob", "PKBOBABCDEFGHIJK");
 
     // Eve has never seen bob, so she gets first-seen with HER chosen key.
-    const result = await eveStore.checkKey("bob", "PK_BOB_DIFFERENT");
+    const result = await eveStore.checkKey("bob", "PKBOBDIFFERENTAB");
     expect(result.kind).toBe("first-seen");
 
     // Alice's record is untouched by Eve's session.
     const aliceList = await aliceStore.list();
-    expect(aliceList[0].publicKey).toBe("PK_BOB_1");
+    expect(aliceList[0].publicKey).toBe("PKBOBABCDEFGHIJK");
   });
 
   it("getTofuStore reuses the same instance for one scopeId", () => {
@@ -326,26 +326,26 @@ describe("TofuStore — IndexedDB unavailable (in-memory fallback)", () => {
 
   it("detects key mismatch within a session even when IDB is unavailable", async () => {
     const tofu = new TofuStore("alice");
-    const a = await tofu.checkKey("bob", "PK_BOB_1");
+    const a = await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
     expect(a.kind).toBe("first-seen");
-    const b = await tofu.checkKey("bob", "PK_BOB_1");
+    const b = await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
     expect(b.kind).toBe("match");
-    const c = await tofu.checkKey("bob", "PK_BOB_2");
+    const c = await tofu.checkKey("bob", "PKBOBABCDEFGHIJL");
     expect(c.kind).toBe("mismatch");
   });
 
   it("list/forget/markVerified/clear/acceptKey operate on the in-memory store", async () => {
     const tofu = new TofuStore("alice");
     expect(await tofu.list()).toEqual([]);
-    await tofu.acceptKey("bob", "PK_BOB_1");
+    await tofu.acceptKey("bob", "PKBOBABCDEFGHIJK");
     const after = await tofu.list();
     expect(after).toHaveLength(1);
-    expect(after[0].publicKey).toBe("PK_BOB_1");
+    expect(after[0].publicKey).toBe("PKBOBABCDEFGHIJK");
     await tofu.markVerified("bob");
     expect((await tofu.list())[0].verifiedAt).not.toBeNull();
     await tofu.forget("bob");
     expect(await tofu.list()).toEqual([]);
-    await tofu.acceptKey("bob", "PK_BOB_1");
+    await tofu.acceptKey("bob", "PKBOBABCDEFGHIJK");
     await tofu.clear();
     expect(await tofu.list()).toEqual([]);
   });
@@ -376,11 +376,11 @@ describe("TofuStore — IndexedDB open failure modes", () => {
     });
 
     const tofu = new TofuStore("alice");
-    const first = await tofu.checkKey("bob", "PK_BOB_1");
+    const first = await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
     expect(first.kind).toBe("first-seen");
-    const same = await tofu.checkKey("bob", "PK_BOB_1");
+    const same = await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
     expect(same.kind).toBe("match");
-    const swap = await tofu.checkKey("bob", "PK_BOB_2");
+    const swap = await tofu.checkKey("bob", "PKBOBABCDEFGHIJL");
     expect(swap.kind).toBe("mismatch");
     expect(errSpy).toHaveBeenCalled();
   });
@@ -396,9 +396,9 @@ describe("TofuStore — IndexedDB open failure modes", () => {
     });
 
     const tofu = new TofuStore("alice");
-    const first = await tofu.checkKey("bob", "PK_BOB_1");
+    const first = await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
     expect(first.kind).toBe("first-seen");
-    const swap = await tofu.checkKey("bob", "PK_BOB_2");
+    const swap = await tofu.checkKey("bob", "PKBOBABCDEFGHIJL");
     expect(swap.kind).toBe("mismatch");
     expect(warnSpy).toHaveBeenCalled();
   });
@@ -419,7 +419,7 @@ describe("TofuStore — IndexedDB open failure modes", () => {
 
     const tofu = new TofuStore("alice");
     expect(await tofu.list()).toEqual([]);
-    await tofu.checkKey("bob", "PK_BOB_1");
+    await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
     expect(await tofu.list()).toHaveLength(1);
   });
 });
@@ -536,17 +536,17 @@ describe("TofuStore — per-operation IndexedDB error paths", () => {
     installFlakyIDB("get");
     const tofu = new TofuStore("alice");
     // checkKey internally calls getRecord — when read fails, treat as first-seen
-    const result = await tofu.checkKey("bob", "PK_BOB_1");
+    const result = await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
     expect(result.kind).toBe("first-seen");
   });
 
   it("putRecord resolves silently when write fires onerror", async () => {
     installFlakyIDB("put");
     const tofu = new TofuStore("alice");
-    await expect(tofu.checkKey("bob", "PK_BOB_1")).resolves.toEqual({
+    await expect(tofu.checkKey("bob", "PKBOBABCDEFGHIJK")).resolves.toEqual({
       kind: "first-seen",
     });
-    await expect(tofu.acceptKey("bob", "PK_BOB_NEW")).resolves.toBeUndefined();
+    await expect(tofu.acceptKey("bob", "PKBOBNEWABCDEFGH")).resolves.toBeUndefined();
   });
 
   it("deleteRecord resolves silently when delete fires onerror", async () => {

@@ -1633,5 +1633,11 @@
   "CustomFilterDisabled": "所选文件的自定义过滤器已禁用",
   "CustomFilterEnable": "启用自定义过滤器",
   "CustomFilterEnabled": "所选文件的自定义过滤器已启用",
-  "Uploading": "上传中"
+  "Uploading": "上传中",
+  "DocumentConversionTitle": "文件转换",
+  "ConversionXmlMessage": "您打开的文档文件将被转换为 Office Open XML 格式（docx 或 xlsx），以提高查看和编辑速度。",
+  "OpenFileMessage": "您打开的文本文档将被转换为Office Open XML格式，以便快速查看并编辑。",
+  "SelectFileType": "请选择一个文件类型：",
+  "SaveOriginalFormatMessage": "以原始格式保存文件副本",
+  "FailedToConvert": "转换失败"
 }

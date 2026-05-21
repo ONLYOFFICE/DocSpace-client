@@ -1633,5 +1633,11 @@
   "CustomFilterDisabled": "Pielāgotais filtrs atlasītajam failam ir deaktivēts",
   "CustomFilterEnable": "Iespējot pielāgoto filtru",
   "CustomFilterEnabled": "Pielāgotais filtrs atlasītajam failam ir aktivēts",
-  "Uploading": "Augšupielādē"
+  "Uploading": "Augšupielādē",
+  "DocumentConversionTitle": "Dokumenta konvertēšana",
+  "ConversionXmlMessage": "Atvērtais dokuments tiks konvertēts Office Open XML formātā (docx vai xlsx) ātrākai skatīšanai un rediģēšanai.",
+  "OpenFileMessage": "Dokumentu fails jūs atverat tiks konvertēts Office Open XML formātā ātrākai apskatei un rediģēšanai.",
+  "SelectFileType": "Izvēlieties faila veidu:",
+  "SaveOriginalFormatMessage": "Saglabājiet faila kopiju sākotnējā formātā",
+  "FailedToConvert": "Neizdevās konvertēt"
 }

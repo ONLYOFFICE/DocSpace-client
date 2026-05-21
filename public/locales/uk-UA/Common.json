@@ -1633,5 +1633,11 @@
   "CustomFilterDisabled": "Спеціальний фільтр для обраного файлу вимкнено",
   "CustomFilterEnable": "Увімкнути спеціальний фільтр",
   "CustomFilterEnabled": "Спеціальний фільтр для обраного файлу увімкнено",
-  "Uploading": "Передавання"
+  "Uploading": "Передавання",
+  "DocumentConversionTitle": "Перетворення документів",
+  "ConversionXmlMessage": "Документ, який ви відкриваєте, буде конвертовано у формат Office Open XML (docx або xlsx) для швидшого перегляду та редагування.",
+  "OpenFileMessage": "Для швидшого перегляду та редагування файл документа, який ви відкриваєте, буде перетворено у формат Office Open XML.",
+  "SelectFileType": "Виберіть тип файлу:",
+  "SaveOriginalFormatMessage": "Зберегти копію файлу в оригінальному форматі",
+  "FailedToConvert": "Не вдалося перетворити"
 }

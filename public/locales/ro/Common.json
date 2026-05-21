@@ -1633,5 +1633,11 @@
   "CustomFilterDisabled": "Filtru particularizat pentru utilizatorul selectat este dezactivat",
   "CustomFilterEnable": "Activare Filtru particularizat",
   "CustomFilterEnabled": "Filtru particularizat pentru utilizatorul selectat este activat",
-  "Uploading": "Încărcare"
+  "Uploading": "Încărcare",
+  "DocumentConversionTitle": "Conversie document",
+  "ConversionXmlMessage": "Fișierul pe care îl deschideți va fi convertit în formatul Office Open XML (docx sau xlsx) pentru vizualizare și editare mai rapidă.",
+  "OpenFileMessage": "Fişierul pe care îl deschideţi va fi convertit în formatul Office Open XML pentru vizualizare şi editare rapidă.",
+  "SelectFileType": "Selectați tip de fișier:",
+  "SaveOriginalFormatMessage": "Salvează copia în formatul original",
+  "FailedToConvert": "Nereuşită la conversie"
 }

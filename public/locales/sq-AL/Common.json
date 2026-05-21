@@ -1633,5 +1633,11 @@
   "CustomFilterDisabled": "Filtri i personalizuar për skedarin e zgjedhur është çaktivizuar",
   "CustomFilterEnable": "Aktivizoni filtrin e personalizuar",
   "CustomFilterEnabled": "Filtri i personalizuar për skedarin e zgjedhur është aktivizuar",
-  "Uploading": "Ngarkimi"
+  "Uploading": "Ngarkimi",
+  "DocumentConversionTitle": "Konvertimi i dokumentit",
+  "ConversionXmlMessage": "Skedari që hapani dë të konvertohet në formatin Office Open XML (docx ose xlsx) për shikim dhe redaktim më të shpejtë.",
+  "OpenFileMessage": "Skedari i dokumentit që hapni do të konvertohet në formatin Office Open XML për shikim dhe redaktim të shpejtë.",
+  "SelectFileType": "Ju lutem zgjidhni një lloj skedari",
+  "SaveOriginalFormatMessage": "Ruani kopjen e skedarit në formatin origjinal",
+  "FailedToConvert": "Konvertimi dështoi"
 }

@@ -1633,5 +1633,11 @@
   "CustomFilterDisabled": "ຕົວປ່ຽນແສງຄຳຕັ້ງຕາມຄວາມຕ້ອງການ ສຳລັບເອກະສານທີ່ເລືອກຖືກປິດການໃຊ້ງານ",
   "CustomFilterEnable": "ເປີດໃຊ້ຕົວປ່ຽນແກ້ແບບປົກກະຕິ",
   "CustomFilterEnabled": "ຕົວປ່ຽນແກ້ແບບປົກກະຕິສໍາລັບເອກະສານທີ່ເລືອກແມ່ນເປີດໃຊ້ງານແລ້ວ",
-  "Uploading": "ການອັບໂຫຼດ"
+  "Uploading": "ການອັບໂຫຼດ",
+  "DocumentConversionTitle": "ການແປງເອກະສານ",
+  "ConversionXmlMessage": "ເອກະສານທີ່ທ່ານເປີດຈະຖືກປ່ຽນເປັນຮູບແບບ Office Open XML (docx ຫຼື xlsx) ເພື່ອຄວາມສະຫງ່າງາມໃນການເບິ່ງແລະການແກ້ໄຂໃຫ້ໄວຂຶ້ນ.",
+  "OpenFileMessage": "ໄຟລ໌ເອກະສານທີ່ທ່ານເປີດຈະຖືກປ່ຽນເປັນຮູບແບບ Office Open XML ສໍາລັບການເບິ່ງ ແລະແກ້ໄຂໄດ້ໄວ.",
+  "SelectFileType": "ກະລຸນາເລືອກປະເພດ​ເອກະສານ:",
+  "SaveOriginalFormatMessage": "ບັນທຶກໄຟລ໌ສຳເນົາໃນຮູບແບບຕົ້ນສະບັບ",
+  "FailedToConvert": "ລົ້ມເຫລວໃນການແປງ"
 }

@@ -1633,5 +1633,11 @@
   "CustomFilterDisabled": "Bộ lọc tùy chỉnh cho tệp đã chọn đã tắt",
   "CustomFilterEnable": "Bật Bộ lọc tùy chỉnh",
   "CustomFilterEnabled": "Bộ lọc tùy chỉnh cho tệp đã chọn đã bật",
-  "Uploading": "Đang tải lên"
+  "Uploading": "Đang tải lên",
+  "DocumentConversionTitle": "Chuyển đổi tài liệu",
+  "ConversionXmlMessage": "Tài liệu bạn mở sẽ được chuyển đổi sang định dạng Office Open XML (docx hoặc xlsx) để xem và chỉnh sửa nhanh hơn.",
+  "OpenFileMessage": "Tài liệu bạn mở sẽ được chuyển sang định dạng Office Open XML giúp sửa và xem nhanh hơn.",
+  "SelectFileType": "Vui lòng chọn một loại tập tin:",
+  "SaveOriginalFormatMessage": "Lưu bản sao tệp ở định dạng gốc",
+  "FailedToConvert": "Không thể chuyển đổi"
 }

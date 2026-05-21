@@ -1633,5 +1633,11 @@
   "CustomFilterDisabled": "Seçili dosya için Özel Filtre devre dışı",
   "CustomFilterEnable": "Özel Filtre'yi etkinleştir",
   "CustomFilterEnabled": "Seçili dosya için Özel Filtre etkin",
-  "Uploading": "Yükleniyor"
+  "Uploading": "Yükleniyor",
+  "DocumentConversionTitle": "Belge dönüştürme",
+  "ConversionXmlMessage": "Açtığınız belge, daha hızlı görüntüleme ve düzenleme için Office Open XML biçimine (docx veya xlsx) dönüştürülecektir.",
+  "OpenFileMessage": "Açtığınız dosya daha hızlı görüntüleme ve düzenleme için Office Open XML formatına çevrilecektir.",
+  "SelectFileType": "Lütfen bir dosya türü seçin:",
+  "SaveOriginalFormatMessage": "Dosya kopyasını orijinal türünde kaydet",
+  "FailedToConvert": "Dönüştürülemedi"
 }

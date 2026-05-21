@@ -1633,5 +1633,11 @@
   "CustomFilterDisabled": "تم تعطيل الفِلتر المخصص للملف المحدد",
   "CustomFilterEnable": "تمكين الفِلتر المخصص",
   "CustomFilterEnabled": "تم تمكين الفِلتر المخصص للملف المحدد",
-  "Uploading": "جارٍ التحميل"
+  "Uploading": "جارٍ التحميل",
+  "DocumentConversionTitle": "تحويل المستند",
+  "ConversionXmlMessage": "سيتم تحويل المستند الذي تفتحه إلى تنسيق\" Office Open XML\" (docx أو xlsx) لعرض وتحرير أسرع.",
+  "OpenFileMessage": "سيتم تحويل ملف المستند الذي تفتحه إلى صيغةOffice Open XML لعرضه وتحريره بسرعة.",
+  "SelectFileType": "يرجى اختيار نوع الملف:",
+  "SaveOriginalFormatMessage": "احفظ نسخة الملف بالتنسيق الأصلي",
+  "FailedToConvert": "فشل التحويل"
 }

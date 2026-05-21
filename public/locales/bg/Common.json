@@ -1633,5 +1633,11 @@
   "CustomFilterDisabled": "Персонализиран филтър за избрания файл е деактивиран",
   "CustomFilterEnable": "Активиране на Персонализиран филтър",
   "CustomFilterEnabled": "Персонализиран филтър за избрания файл е активиран",
-  "Uploading": "Качване"
+  "Uploading": "Качване",
+  "DocumentConversionTitle": "Конвертиране на документи",
+  "ConversionXmlMessage": "Документът, който отваряте, ще бъде конвертиран във формат Office Open XML (docx или xlsx) за по-бърз преглед и редактиране.",
+  "OpenFileMessage": "Файлът с документи, който отваряте, ще бъде преобразуван в Office Open XML формат за бързо гледане и редактиране.",
+  "SelectFileType": "Моля, изберете тип на файла:",
+  "SaveOriginalFormatMessage": "Запази копието на файла в оригиналния формат",
+  "FailedToConvert": "Конвертирането не беше успешно"
 }

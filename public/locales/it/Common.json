@@ -1633,5 +1633,11 @@
   "CustomFilterDisabled": "Filtro personalizzato disabilitato per il file selezionato",
   "CustomFilterEnable": "Abilita filtro personalizzato",
   "CustomFilterEnabled": "Filtro personalizzato abilitato per il file selezionato",
-  "Uploading": "Caricamento in corso"
+  "Uploading": "Caricamento in corso",
+  "DocumentConversionTitle": "Conversione di documenti",
+  "ConversionXmlMessage": "Il file aperto verrà convertito nel formato Office Open XML (docx o xlsx) per una più rapida visualizzazione e modifica.",
+  "OpenFileMessage": "Il documento che apri viene convertito nel formato Office Open XML per la visualizzazione e la modifica più rapide.",
+  "SelectFileType": "Seleziona un tipo di file:",
+  "SaveOriginalFormatMessage": "Salva una copia del file in formato originale",
+  "FailedToConvert": "Impossibile convertire"
 }

@@ -1633,5 +1633,11 @@
   "CustomFilterDisabled": "Vlastní filtr pro vybraný soubor deaktivován",
   "CustomFilterEnable": "Povolit Vlastní filtr",
   "CustomFilterEnabled": "Vlastní filtr pro vybraný soubor aktivován",
-  "Uploading": "Nahrávání"
+  "Uploading": "Nahrávání",
+  "DocumentConversionTitle": "Konverze dokumentů",
+  "ConversionXmlMessage": "Otevřený dokument bude převeden do formátu Office Open XML (docx nebo xlsx) pro rychlejší prohlížení a úpravy.",
+  "OpenFileMessage": "Dokument bude konvertován do Office Open XML formátu pro rychlejší náhled a editaci.",
+  "SelectFileType": "Vyberte typ souboru:",
+  "SaveOriginalFormatMessage": "Uložit kopii souboru v původním formátu",
+  "FailedToConvert": "Konverze se nezdařila"
 }

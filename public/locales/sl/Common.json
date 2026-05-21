@@ -1633,5 +1633,11 @@
   "CustomFilterDisabled": "Prilagojen filter za izbrano datoteko onemogočen",
   "CustomFilterEnable": "Omogočite prilagojen filter",
   "CustomFilterEnabled": "Prilagojen filter za izbrano datoteko omogočen",
-  "Uploading": "Nalaganje"
+  "Uploading": "Nalaganje",
+  "DocumentConversionTitle": "Konverzija dokumenta",
+  "ConversionXmlMessage": "Dokument, ki ga odprete, bo pretvorjen v format Office Open XML (docx ali xlsx) za hitrejši ogled in urejanje.",
+  "OpenFileMessage": "Dokument, ki ga boste odprli, bo pretvorjen v format Office Open XML za hitrejše gledanje in urejanje.",
+  "SelectFileType": "Izberi vrsto datoteke:",
+  "SaveOriginalFormatMessage": "Shranite kopijo datoteke v izvirni obliki",
+  "FailedToConvert": "Konverzija ni uspela"
 }

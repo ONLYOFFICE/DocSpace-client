@@ -1633,5 +1633,11 @@
   "CustomFilterDisabled": "Ընտրված ֆայլի անհատական ֆիլտրն անջատված է",
   "CustomFilterEnable": "Միացնել Հատուկ ֆիլտրը",
   "CustomFilterEnabled": "Հատուկ ֆիլտրն ընտրված ֆայլի համար միացված է",
-  "Uploading": "Վերբեռնում"
+  "Uploading": "Վերբեռնում",
+  "DocumentConversionTitle": "Փաստաթղթի փոխարկում",
+  "ConversionXmlMessage": "Ձեր բացած փաստաթղթի ֆայլը կվերածվի Office Open XML ձևաչափի (docx կամ xlsx)՝ ավելի արագ դիտելու և խմբագրելու համար:",
+  "OpenFileMessage": "Ձեր բացած փաստաթղթի ֆայլը կվերածվի Office Open XML ձևաչափի՝ արագ դիտման և խմբագրման համար:",
+  "SelectFileType": "Խնդրում ենք ընտրել ֆայլի տեսակը՝",
+  "SaveOriginalFormatMessage": "Պահպանել ֆայլի պատճենը սկզբնական ձևաչափով",
+  "FailedToConvert": "Փոխարկման ձախողում"
 }

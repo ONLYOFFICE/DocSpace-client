@@ -1633,5 +1633,11 @@
   "CustomFilterDisabled": "Benutzerdefinierter Filter für die ausgewählte Datei deaktiviert",
   "CustomFilterEnable": "Benutzerdefinierter Filter aktivieren",
   "CustomFilterEnabled": "Benutzerdefinierter Filter für die ausgewählte Datei aktiviert",
-  "Uploading": "Hochladen"
+  "Uploading": "Hochladen",
+  "DocumentConversionTitle": "Konvertierung von Dokumenten",
+  "ConversionXmlMessage": "Die Datei, die Sie öffnen, wird für eine schnellere Anzeige und Bearbeitung in das Office Open XML-Format (docx oder xlsx) konvertiert.",
+  "OpenFileMessage": "Das Dokument, das Sie öffnen möchten, wird ins Office-Open-XML-Format für eine schnelle Durchsicht und Bearbeitung umgewandelt.",
+  "SelectFileType": "Bitte wählen Sie einen Dateityp:",
+  "SaveOriginalFormatMessage": "Kopie dieser Datei im Originalformat speichern",
+  "FailedToConvert": "Konvertierung fehlgeschlagen"
 }

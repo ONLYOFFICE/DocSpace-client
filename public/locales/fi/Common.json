@@ -1633,5 +1633,11 @@
   "CustomFilterDisabled": "Mukautettu suodatin valitulle tiedostolle pois käytöstä",
   "CustomFilterEnable": "Ota mukautettu suodatin käyttöön",
   "CustomFilterEnabled": "Mukautettu suodatin valitulle tiedostolle käytössä",
-  "Uploading": "Ladataan"
+  "Uploading": "Ladataan",
+  "DocumentConversionTitle": "Dokumentin muuntaminen",
+  "ConversionXmlMessage": "Asiakirja, jonka avaat muutetaan Office Open XML-muotoon (docx tai xlsx) nopeamman katselun ja muokkaamisen saavuttamiseksi.",
+  "OpenFileMessage": "Avaamasi asiakirja muunnetaan Office Open XML muotoon nopeampaa katselua ja muokkausta varten.",
+  "SelectFileType": "Ole hyvä ja valitse tiedostotyyppi:",
+  "SaveOriginalFormatMessage": "Tallenna kopio tiedostosta alkuperäisessä muodossa",
+  "FailedToConvert": "Muuntaminen epäonnistui"
 }

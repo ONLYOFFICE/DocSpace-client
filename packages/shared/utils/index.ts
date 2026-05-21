@@ -64,7 +64,7 @@ import {
   INFO_PANEL_WIDTH,
   isMobileDevice,
 } from "@docspace/ui-kit/utils/device";
-import commonIconsStyles, {
+import {
   IconSizeType,
   isIconSizeType,
 } from "@docspace/ui-kit/utils/common-icons-style";
@@ -117,7 +117,6 @@ export {
   isArrayEqual,
   getBannerAttribute,
   classNames,
-  commonIconsStyles,
   IconSizeType,
   isIconSizeType,
   size,

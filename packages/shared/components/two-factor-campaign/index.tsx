@@ -34,7 +34,7 @@
  */
 
 import React from "react";
-import { useTheme } from "styled-components";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import NextStepReactSvg from "PUBLIC_DIR/images/arrow.right.react.svg?url";
 import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 import { useTwoFactorCampaignBanner } from "../../hooks/useTwoFactorCampaignBanner";
@@ -57,8 +57,7 @@ export const TwoFactorCampaignBanner: React.FC<
 	TwoFactorCampaignBannerProps
 > = ({ tfaEnabled, currentColorScheme, withCampaign = false, style }) => {
 	const { isRTL } = useInterfaceDirection();
-	const theme = useTheme();
-	const isBaseTheme = theme.isBase;
+	const { isBase: isBaseTheme } = useTheme();
 
 	const { navigateTo2FA, loginHistoryTranslates, loginHistoryConfig } =
 		useTwoFactorCampaignBanner(isBaseTheme, currentColorScheme);

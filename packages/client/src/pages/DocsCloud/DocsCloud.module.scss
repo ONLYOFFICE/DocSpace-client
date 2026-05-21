@@ -24,10 +24,29 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export {
-  InstallModuleDialog,
-  type InstallModuleDialogProps,
-  type InstallStep,
-} from "./InstallModuleDialog";
-export { InstallAiFormsDialog } from "./InstallAiFormsDialog";
-export { InstallDocsCloudDialog } from "./InstallDocsCloudDialog";
+.docsCloud {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 12px;
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.title {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 28px;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.description {
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--text-disable-color);
+  margin: 0;
+  max-width: 400px;
+}

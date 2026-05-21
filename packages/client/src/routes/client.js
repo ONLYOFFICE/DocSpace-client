@@ -392,6 +392,26 @@ const ClientRoutes = [
           return { Component };
         },
       },
+      {
+        path: "/docs-cloud",
+        async lazy() {
+          const { DocsCloud } = await componentLoader(
+            () => import("SRC_DIR/pages/DocsCloud"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ProtectedAppRoute appId="docs-cloud">
+                <ErrorBoundary>
+                  <DocsCloud />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
     ],
   },
   {

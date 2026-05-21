@@ -24,10 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export {
-  InstallModuleDialog,
-  type InstallModuleDialogProps,
-  type InstallStep,
-} from "./InstallModuleDialog";
-export { InstallAiFormsDialog } from "./InstallAiFormsDialog";
-export { InstallDocsCloudDialog } from "./InstallDocsCloudDialog";
+import { useTranslation } from "react-i18next";
+
+import { Text } from "@docspace/ui-kit/components/text";
+
+import styles from "./DocsCloud.module.scss";
+
+const DocsCloudComponent = () => {
+  const { t } = useTranslation(["Common"]);
+
+  return (
+    <div className={styles.docsCloud}>
+      <Text as="h1" className={styles.title}>
+        {t("Common:DocsCloud")}
+      </Text>
+      <Text as="p" className={styles.description}>
+        {t("Common:DocsCloudDescription")}
+      </Text>
+    </div>
+  );
+};
+
+export const DocsCloud = DocsCloudComponent;
+
+export default DocsCloudComponent;

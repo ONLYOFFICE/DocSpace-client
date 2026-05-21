@@ -131,8 +131,8 @@ const Manager = (props) => {
     { key: "AZ", label: t("Common:Title") },
     { key: "Type", label: t("Common:Type") },
     { key: "Size", label: t("Common:Size") },
-    { key: "DateAndTimeCreation", label: t("Files:ByCreation") },
-    { key: "Author", label: t("Files:ByAuthor") },
+    { key: "DateAndTimeCreation", label: t("Common:ByCreation") },
+    { key: "Author", label: t("Common:ByAuthor") },
   ];
 
   const dataSortOrder = [
@@ -449,7 +449,9 @@ const Manager = (props) => {
       description={t("CustomDescription", {
         productName: getBrandName("ProductName"),
       })}
-      header={t("CreateSamplePortal", { productName: getBrandName("ProductName") })}
+      header={t("CreateSamplePortal", {
+        productName: getBrandName("ProductName"),
+      })}
     >
       <Container>
         <PreviewBlock
@@ -802,3 +804,4 @@ export const Component = inject(({ settingsStore, publicRoomStore }) => {
     "Translations",
   ])(observer(Manager)),
 );
+

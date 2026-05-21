@@ -33,30 +33,59 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { Nullable, TSortBy } from "@docspace/shared/types";
-import type { IndexRange } from "react-virtualized";
+import React from "react";
+import { decode } from "he";
+import { useTranslation } from "react-i18next";
 
-import type { TFileItem, TFolderItem } from "../../../_hooks/useItemList";
+import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png?url";
 
-export type TableViewRowProps = {
-  item: TFolderItem | TFileItem;
-  index: number;
-  timezone: string;
-  displayFileExtension: boolean;
-  hideColumns?: boolean;
-  lastColumn: string;
-  currentUserId?: string;
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/ui-kit/components/avatar";
+import { Text } from "@docspace/ui-kit/components/text";
+import type { TCreatedBy } from "@docspace/shared/types";
+
+import styles from "./AuthorCell.module.scss";
+
+type AuthorCellProps = {
+  fileOwner: string;
+  createdBy: TCreatedBy;
 };
 
-export type TableViewProps = {
-  total: number;
-  items: (TFolderItem | TFileItem)[];
-  hasMoreFiles: boolean;
-  filterSortBy: Nullable<TSortBy>;
-  filterSortOrder: string;
-  onSort: (sortBy: string, sortDirection: string) => void;
-  timezone: string;
-  displayFileExtension: boolean;
-  fetchMoreFiles: (params: IndexRange) => Promise<void>;
-  currentUserId?: string;
+const AuthorCell = ({ fileOwner, createdBy }: AuthorCellProps) => {
+  const { t } = useTranslation(["Common"]);
+
+  const { avatarSmall, hasAvatar, isAnonim } = createdBy;
+
+  const avatarSource = hasAvatar ? avatarSmall : DefaultUserPhotoSize32PngUrl;
+
+  const name = React.useMemo(
+    () => (isAnonim ? t("Common:Anonymous") : decode(fileOwner)),
+    [fileOwner, isAnonim, t],
+  );
+
+  return (
+    <div className={`${styles.styledAuthorCell} author-cell`}>
+      <Avatar
+        size={AvatarSize.min}
+        source={avatarSource}
+        className="author-avatar-cell"
+        role={AvatarRole.user}
+        userName={name}
+      />
+      <Text
+        fontSize="12px"
+        fontWeight={600}
+        className={styles.styledText}
+        title={name}
+        truncate
+      >
+        {name}
+      </Text>
+    </div>
+  );
 };
+
+export default React.memo(AuthorCell);

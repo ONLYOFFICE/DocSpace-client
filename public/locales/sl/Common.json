@@ -1639,5 +1639,8 @@
   "OpenFileMessage": "Dokument, ki ga boste odprli, bo pretvorjen v format Office Open XML za hitrejše gledanje in urejanje.",
   "SelectFileType": "Izberi vrsto datoteke:",
   "SaveOriginalFormatMessage": "Shranite kopijo datoteke v izvirni obliki",
-  "FailedToConvert": "Konverzija ni uspela"
+  "FailedToConvert": "Konverzija ni uspela",
+  "ByAuthor": "Avtor",
+  "ByCreation": "Ustvarjeno",
+  "ByLastModified": "Popravljeno"
 }

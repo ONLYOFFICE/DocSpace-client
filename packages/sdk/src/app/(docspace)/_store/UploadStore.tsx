@@ -144,10 +144,16 @@ class UploadStore {
   };
 
   clearFinished = () => {
+    const finishedBytes = this.items
+      .filter((i) => i.status !== "uploading")
+      .reduce((sum, i) => sum + i.fileSize, 0);
     this.items = this.items.filter((i) => i.status === "uploading");
     if (this.items.length === 0) {
       this.uploadedBytes = 0;
       this.totalBytes = 0;
+    } else {
+      this.totalBytes = Math.max(0, this.totalBytes - finishedBytes);
+      this.uploadedBytes = Math.min(this.totalBytes, this.uploadedBytes);
     }
   };
 

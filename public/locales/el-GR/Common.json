@@ -1639,5 +1639,8 @@
   "OpenFileMessage": "Το αρχείο εγγράφου που ανοίγετε θα μετατραπεί σε μορφή Office Open XML για γρήγορη προβολή και επεξεργασία.",
   "SelectFileType": "Επιλέξτε έναν τύπο αρχείου:",
   "SaveOriginalFormatMessage": "Αποθηκεύστε το αντίγραφο του αρχείου στην αρχική μορφή",
-  "FailedToConvert": "Η μετατροπή απέτυχε"
+  "FailedToConvert": "Η μετατροπή απέτυχε",
+  "ByAuthor": "Δημιουργός",
+  "ByCreation": "Δημιουργήθηκε",
+  "ByLastModified": "Τροποποιήθηκε"
 }

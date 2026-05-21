@@ -1639,5 +1639,8 @@
   "OpenFileMessage": "Skedari i dokumentit që hapni do të konvertohet në formatin Office Open XML për shikim dhe redaktim të shpejtë.",
   "SelectFileType": "Ju lutem zgjidhni një lloj skedari",
   "SaveOriginalFormatMessage": "Ruani kopjen e skedarit në formatin origjinal",
-  "FailedToConvert": "Konvertimi dështoi"
+  "FailedToConvert": "Konvertimi dështoi",
+  "ByAuthor": "Autor",
+  "ByCreation": "Krijuar",
+  "ByLastModified": "Modifikuar"
 }

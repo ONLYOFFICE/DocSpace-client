@@ -1639,5 +1639,8 @@
   "OpenFileMessage": "당신이 열 문서 파일을 빠르게 확인하고 수정할 Office Open XML 형식 로 변환됩니다.",
   "SelectFileType": "파일 유형을 선택하세요:",
   "SaveOriginalFormatMessage": "파일 복사본을 원본 형식으로 저장",
-  "FailedToConvert": "변환에 실패했습니다"
+  "FailedToConvert": "변환에 실패했습니다",
+  "ByAuthor": "생성자",
+  "ByCreation": "생성일",
+  "ByLastModified": "수정일"
 }

@@ -33,30 +33,20 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { Nullable, TSortBy } from "@docspace/shared/types";
-import type { IndexRange } from "react-virtualized";
+.styledAuthorCell {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
 
-import type { TFileItem, TFolderItem } from "../../../_hooks/useItemList";
+  :global(.author-avatar-cell) {
+    width: 16px;
+    min-width: 16px;
+    height: 16px;
+    margin-inline-end: 8px;
+  }
+}
 
-export type TableViewRowProps = {
-  item: TFolderItem | TFileItem;
-  index: number;
-  timezone: string;
-  displayFileExtension: boolean;
-  hideColumns?: boolean;
-  lastColumn: string;
-  currentUserId?: string;
-};
-
-export type TableViewProps = {
-  total: number;
-  items: (TFolderItem | TFileItem)[];
-  hasMoreFiles: boolean;
-  filterSortBy: Nullable<TSortBy>;
-  filterSortOrder: string;
-  onSort: (sortBy: string, sortDirection: string) => void;
-  timezone: string;
-  displayFileExtension: boolean;
-  fetchMoreFiles: (params: IndexRange) => Promise<void>;
-  currentUserId?: string;
-};
+.styledText {
+  display: inline-block;
+  margin-inline-end: 12px;
+}

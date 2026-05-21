@@ -1639,5 +1639,8 @@
   "OpenFileMessage": "Datoteka dokumenta koju otvorite biće konvertovana u Office Open XML format radi brzog pregleda i uređivanja.",
   "SelectFileType": "Molimo odaberite tip fajla:",
   "SaveOriginalFormatMessage": "Sačuvaj kopiju datoteke u originalnom formatu",
-  "FailedToConvert": "Neuspešno konvertovanje"
+  "FailedToConvert": "Neuspešno konvertovanje",
+  "ByAuthor": "Autor",
+  "ByCreation": "Kreirano",
+  "ByLastModified": "Modifikovano"
 }

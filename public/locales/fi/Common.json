@@ -1639,5 +1639,8 @@
   "OpenFileMessage": "Avaamasi asiakirja muunnetaan Office Open XML muotoon nopeampaa katselua ja muokkausta varten.",
   "SelectFileType": "Ole hyvä ja valitse tiedostotyyppi:",
   "SaveOriginalFormatMessage": "Tallenna kopio tiedostosta alkuperäisessä muodossa",
-  "FailedToConvert": "Muuntaminen epäonnistui"
+  "FailedToConvert": "Muuntaminen epäonnistui",
+  "ByAuthor": "Tekijä",
+  "ByCreation": "Luotu",
+  "ByLastModified": "Muokattu"
 }

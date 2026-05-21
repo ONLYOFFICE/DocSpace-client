@@ -1639,5 +1639,8 @@
   "OpenFileMessage": "Il documento che apri viene convertito nel formato Office Open XML per la visualizzazione e la modifica più rapide.",
   "SelectFileType": "Seleziona un tipo di file:",
   "SaveOriginalFormatMessage": "Salva una copia del file in formato originale",
-  "FailedToConvert": "Impossibile convertire"
+  "FailedToConvert": "Impossibile convertire",
+  "ByAuthor": "Autore",
+  "ByCreation": "Creato",
+  "ByLastModified": "Modificato"
 }

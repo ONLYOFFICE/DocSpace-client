@@ -67,7 +67,6 @@ const ClientArticle = React.memo(
     const isLegacyMode = localStorage.getItem("useDocSpace") === "old";
     const useLegacyArticle = isAccountsArticle || isDeveloperToolsArticle;
 
-    console.log("forceNewArticle", forceNewArticle);
     if (forceNewArticle && !useLegacyArticle) {
       return <NewArticle />;
     }

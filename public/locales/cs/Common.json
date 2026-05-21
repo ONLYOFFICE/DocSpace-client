@@ -1639,5 +1639,8 @@
   "OpenFileMessage": "Dokument bude konvertován do Office Open XML formátu pro rychlejší náhled a editaci.",
   "SelectFileType": "Vyberte typ souboru:",
   "SaveOriginalFormatMessage": "Uložit kopii souboru v původním formátu",
-  "FailedToConvert": "Konverze se nezdařila"
+  "FailedToConvert": "Konverze se nezdařila",
+  "ByAuthor": "Autor",
+  "ByCreation": "Vytvořeno",
+  "ByLastModified": "Upraveno"
 }

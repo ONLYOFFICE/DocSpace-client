@@ -1639,5 +1639,8 @@
   "OpenFileMessage": "Das Dokument, das Sie öffnen möchten, wird ins Office-Open-XML-Format für eine schnelle Durchsicht und Bearbeitung umgewandelt.",
   "SelectFileType": "Bitte wählen Sie einen Dateityp:",
   "SaveOriginalFormatMessage": "Kopie dieser Datei im Originalformat speichern",
-  "FailedToConvert": "Konvertierung fehlgeschlagen"
+  "FailedToConvert": "Konvertierung fehlgeschlagen",
+  "ByAuthor": "Verfasser",
+  "ByCreation": "Erstellt",
+  "ByLastModified": "Verändert"
 }

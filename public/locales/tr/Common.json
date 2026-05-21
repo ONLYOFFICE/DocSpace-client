@@ -1639,5 +1639,8 @@
   "OpenFileMessage": "Açtığınız dosya daha hızlı görüntüleme ve düzenleme için Office Open XML formatına çevrilecektir.",
   "SelectFileType": "Lütfen bir dosya türü seçin:",
   "SaveOriginalFormatMessage": "Dosya kopyasını orijinal türünde kaydet",
-  "FailedToConvert": "Dönüştürülemedi"
+  "FailedToConvert": "Dönüştürülemedi",
+  "ByAuthor": "Yazar",
+  "ByCreation": "Oluşturuldu",
+  "ByLastModified": "Değiştirilmiş"
 }

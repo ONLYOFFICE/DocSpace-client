@@ -75,6 +75,7 @@ import { DeleteContext } from "@/app/(docspace)/_contexts/DeleteContext";
 import { FileOperationsContext } from "@/app/(docspace)/_contexts/FileOperationsContext";
 import { RenameContext } from "@/app/(docspace)/_contexts/RenameContext";
 import { VersionHistoryContext } from "@/app/(docspace)/_contexts/VersionHistoryContext";
+import { ConvertContext } from "@/app/(docspace)/_contexts/ConvertContext";
 import type {
   TFileItem,
   TFolderItem,
@@ -85,6 +86,7 @@ import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
 import CreateFileDialog from "../create-file-dialog";
+import ConvertDialog from "../convert-dialog";
 import VersionHistoryPanel from "../version-history-panel";
 import { InfoPanelView, useInfoPanelStore } from "../../_store/InfoPanelStore";
 import { useVersionHistoryStore } from "../../_store/VersionHistoryStore";
@@ -93,6 +95,8 @@ import { useDocsMenuModels } from "../../_hooks/useDocsMenuModels";
 import useTrashActions from "../../_hooks/useTrashActions";
 import useFileOperations from "../../_hooks/useFileOperations";
 import useRenameActions from "../../_hooks/useRenameActions";
+import useConvertActions from "../../_hooks/useConvertActions";
+import { useDocsSettingsStore } from "../../_store/DocsSettingsStore";
 import type { SelectorMode } from "../../_hooks/useFileOperations";
 import { useDocsFrameBridge } from "../../_hooks/useDocsFrameBridge";
 import DropZone from "../drop-zone";
@@ -243,7 +247,7 @@ const DocsLayout = observer(
       ],
     );
 
-    const openFileHandler = React.useCallback(
+    const openFileInEditor = React.useCallback(
       (file: TFileItem, preview?: boolean) => {
         const url = preview
           ? `/personal-files/editor/${file.id}?action=view`
@@ -251,6 +255,32 @@ const DocsLayout = observer(
         router.push(url);
       },
       [router],
+    );
+
+    const {
+      convertDialogVisible,
+      convertTarget,
+      isConverting,
+      convertProgress,
+      requestConvert,
+      closeConvertDialog,
+      confirmConvert,
+      onChangeStoreOriginal,
+    } = useConvertActions();
+
+    const docsSettingsStore = useDocsSettingsStore();
+    const storeOriginalFiles =
+      docsSettingsStore.filesSettings?.storeOriginalFiles ?? false;
+
+    const openFileHandler = React.useCallback(
+      (file: TFileItem, preview?: boolean) => {
+        if (!preview && file.viewAccessibility?.MustConvert) {
+          requestConvert(file);
+          return;
+        }
+        openFileInEditor(file, preview);
+      },
+      [openFileInEditor, requestConvert],
     );
 
     const shareHandler = React.useCallback(
@@ -284,6 +314,7 @@ const DocsLayout = observer(
               <RenameContext.Provider value={renameHandler}>
                 <FileOperationsContext.Provider value={fileOperationsHandler}>
                   <VersionHistoryContext.Provider value={versionHistoryHandler}>
+                  <ConvertContext.Provider value={requestConvert}>
                   <div className={styles.root} style={frameHeaderVars}>
                     <DropZone
                       onFilesDropped={uploadFilesToFolder}
@@ -469,6 +500,14 @@ const DocsLayout = observer(
                         onClick={() => uploadStore.setPanelVisible(true)}
                       />
                     )}
+                    {convertProgress && (
+                      <FloatingButton
+                        icon="refresh"
+                        percent={convertProgress.percent}
+                        completed={convertProgress.completed}
+                        alert={convertProgress.alert}
+                      />
+                    )}
                     <UploadPanel />
                     <RenameDialog
                       visible={renameDialogVisible}
@@ -477,7 +516,17 @@ const DocsLayout = observer(
                       onClose={closeRenameDialog}
                       onSave={confirmRename}
                     />
+                    <ConvertDialog
+                      visible={convertDialogVisible}
+                      fileExst={convertTarget?.fileExst ?? ""}
+                      storeOriginalFiles={storeOriginalFiles}
+                      isConverting={isConverting}
+                      onChangeStoreOriginal={onChangeStoreOriginal}
+                      onClose={closeConvertDialog}
+                      onConfirm={confirmConvert}
+                    />
                   </div>
+                  </ConvertContext.Provider>
                   </VersionHistoryContext.Provider>
                 </FileOperationsContext.Provider>
               </RenameContext.Provider>

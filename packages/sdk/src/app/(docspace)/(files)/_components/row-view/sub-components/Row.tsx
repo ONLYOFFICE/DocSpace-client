@@ -64,6 +64,7 @@ import { DeleteContext } from "../../../../_contexts/DeleteContext";
 import { FileOperationsContext } from "../../../../_contexts/FileOperationsContext";
 import { RenameContext } from "../../../../_contexts/RenameContext";
 import { VersionHistoryContext } from "../../../../_contexts/VersionHistoryContext";
+import { ConvertContext } from "../../../../_contexts/ConvertContext";
 import type { TFileItem } from "../../../../_hooks/useItemList";
 import { generateFilesItemValue } from "../../../_utils";
 
@@ -104,6 +105,7 @@ const Row = observer(
     const fileOpsCtx = React.useContext(FileOperationsContext);
     const renameCtx = React.useContext(RenameContext);
     const onShowVersionHistory = React.useContext(VersionHistoryContext);
+    const onConvert = React.useContext(ConvertContext);
 
     const { getContextMenuModel } = useContextMenuModel({
       item: observableItem,
@@ -152,6 +154,11 @@ const Row = observer(
         }}
         onClickFavorite={onClickFavorite}
         onClickLock={onClickLock}
+        setConvertDialogVisible={
+          !observableItem.isFolder && onConvert
+            ? () => onConvert(observableItem as TFileItem)
+            : undefined
+        }
         onShowVersionHistory={
           !observableItem.isFolder && onShowVersionHistory
             ? () => onShowVersionHistory(observableItem as TFileItem)

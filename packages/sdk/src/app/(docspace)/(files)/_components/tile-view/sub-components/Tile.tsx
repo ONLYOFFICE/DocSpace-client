@@ -67,6 +67,7 @@ import { DeleteContext } from "@/app/(docspace)/_contexts/DeleteContext";
 import { FileOperationsContext } from "@/app/(docspace)/_contexts/FileOperationsContext";
 import { RenameContext } from "@/app/(docspace)/_contexts/RenameContext";
 import { VersionHistoryContext } from "@/app/(docspace)/_contexts/VersionHistoryContext";
+import { ConvertContext } from "@/app/(docspace)/_contexts/ConvertContext";
 
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import type { TileProps } from "../TileView.types";
@@ -109,6 +110,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const fileOpsCtx = React.useContext(FileOperationsContext);
   const renameCtx = React.useContext(RenameContext);
   const onShowVersionHistory = React.useContext(VersionHistoryContext);
+  const onConvert = React.useContext(ConvertContext);
   const { getContextMenuModel } = useContextMenuModel({
     item: observableItem,
     onShareClick: onShareClick ?? undefined,
@@ -206,6 +208,11 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
       }}
       onClickFavorite={onClickFavorite}
       onClickLock={onClickLock}
+      setConvertDialogVisible={
+        !observableItem.isFolder && onConvert
+          ? () => onConvert(observableItem as TFileItem)
+          : undefined
+      }
       onShowVersionHistory={
         !observableItem.isFolder && onShowVersionHistory
           ? () => onShowVersionHistory(observableItem as TFileItem)

@@ -70,9 +70,12 @@ export async function* parseArbiterStream(
               string,
               unknown
             >;
-            yield { type: eventType, ...payload } as SseEvent;
+            const ev = { type: eventType, ...payload } as SseEvent;
+            yield ev;
+            if (ev.type === "message_stop") {
+              return;
+            }
           } catch {
-            // malformed SSE data — skip
           }
           eventType = "";
           dataLines.length = 0;

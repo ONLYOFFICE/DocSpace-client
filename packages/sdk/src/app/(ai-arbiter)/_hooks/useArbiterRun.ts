@@ -38,12 +38,18 @@
 import { useCallback, useRef } from "react";
 
 import type { AgentSummary } from "@/types/arbiter";
-import { buildArbiterPrompt, type ExpertAnswer } from "../_utils/arbiterPrompts";
+import {
+  buildArbiterPrompt,
+  type ExpertAnswer,
+} from "../_utils/arbiterPrompts";
 import { streamArbiterChat } from "../_utils/parseArbiterStream";
 import { useAiArbiterAgentsStore } from "../_store/AiArbiterAgentsStore";
 import { useAiArbiterRunStore } from "../_store/AiArbiterRunStore";
 
-type OnEventFn = (panelId: string, ev: import("@/types/arbiter").SseEvent) => void;
+type OnEventFn = (
+  panelId: string,
+  ev: import("@/types/arbiter").SseEvent,
+) => void;
 
 async function consumeExpert(
   panelId: string,
@@ -87,8 +93,8 @@ export default function useArbiterRun() {
   const abortRef = useRef<AbortController | null>(null);
 
   const run = useCallback(async () => {
-    const { expertAgents, arbiterAgent } = agentsStore;
-    if (!arbiterAgent || expertAgents.length === 0) return;
+    const { experts, arbiter } = agentsStore;
+    if (!arbiter || experts.length === 0) return;
 
     const question = runStore.question.trim();
     if (!question) return;
@@ -97,7 +103,7 @@ export default function useArbiterRun() {
       ? [runStore.attachedFile.id]
       : undefined;
 
-    runStore.initPanels(expertAgents, arbiterAgent);
+    runStore.initPanels(experts, arbiter);
     runStore.setRunStatus("running");
 
     abortRef.current = new AbortController();
@@ -107,7 +113,7 @@ export default function useArbiterRun() {
 
     try {
       const expertAnswers = await Promise.all(
-        expertAgents.map((expert, i) =>
+        experts.map((expert, i) =>
           consumeExpert(
             `expert-${i}`,
             expert,
@@ -128,7 +134,7 @@ export default function useArbiterRun() {
       );
 
       for await (const ev of streamArbiterChat(
-        arbiterAgent.id,
+        arbiter.id,
         arbiterPrompt,
         signal,
         fileIds,

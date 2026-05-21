@@ -33,42 +33,54 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-"use client";
+export const TAG_NAMESPACE = "ai-arbiter";
+export const TAG_WIZARD = "ai-arbiter:wizard";
+export const TAG_EXPERT = "ai-arbiter:expert";
+export const TAG_ARBITER = "ai-arbiter:arbiter";
 
-import { useLayoutEffect, useRef, useState } from "react";
+const SESSION_PREFIX = "ai-arbiter:session:";
 
-import { setAuthToken } from "@docspace/shared/api/client";
+export function sessionTag(sessionId: string): string {
+  return `${SESSION_PREFIX}${sessionId}`;
+}
 
-import type { ArbiterCommonData } from "@/types/arbiter";
+export function wizardTags(): string[] {
+  return [TAG_NAMESPACE, TAG_WIZARD];
+}
 
-import { useAiArbiterAgentsStore } from "../_store/AiArbiterAgentsStore";
+export function expertTags(sessionId: string): string[] {
+  return [TAG_NAMESPACE, TAG_EXPERT, sessionTag(sessionId)];
+}
 
-export default function useInitArbiterStores(
-  commonData: ArbiterCommonData,
-): boolean {
-  const agentsStore = useAiArbiterAgentsStore();
-  const [isReady, setIsReady] = useState(false);
-  const initialised = useRef(false);
+export function arbiterTags(sessionId: string): string[] {
+  return [TAG_NAMESPACE, TAG_ARBITER, sessionTag(sessionId)];
+}
 
-  useLayoutEffect(() => {
-    if (initialised.current) return;
-    initialised.current = true;
+export function isWizardTag(tag: string): boolean {
+  return tag === TAG_WIZARD;
+}
 
-    agentsStore.setUserId(commonData.userId);
+export function isExpertTag(tag: string): boolean {
+  return tag === TAG_EXPERT;
+}
 
-    if (commonData.activePanel) {
-      agentsStore.setActivePanel(commonData.activePanel);
+export function isArbiterTag(tag: string): boolean {
+  return tag === TAG_ARBITER;
+}
+
+export function isSessionTag(tag: string): boolean {
+  return tag.startsWith(SESSION_PREFIX);
+}
+
+export function extractSessionId(
+  tags: readonly string[] | undefined,
+): string | null {
+  if (!tags) return null;
+  for (const tag of tags) {
+    if (isSessionTag(tag)) {
+      const sid = tag.slice(SESSION_PREFIX.length);
+      if (sid) return sid;
     }
-
-    if (commonData.authToken) {
-      const secure =
-        window.location.protocol === "https:" ? "; Secure" : "";
-      document.cookie = `asc_auth_key=${commonData.authToken}; path=/; SameSite=Lax${secure}`;
-      setAuthToken(commonData.authToken);
-    }
-
-    setIsReady(true);
-  }, []);
-
-  return isReady;
+  }
+  return null;
 }

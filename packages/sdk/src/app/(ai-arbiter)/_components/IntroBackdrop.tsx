@@ -35,40 +35,40 @@
 
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import React from "react";
 
-import { setAuthToken } from "@docspace/shared/api/client";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
-import type { ArbiterCommonData } from "@/types/arbiter";
+import AiAgentsLightIllustration from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
+import AiAgentsDarkIllustration from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";
 
-import { useAiArbiterAgentsStore } from "../_store/AiArbiterAgentsStore";
+import styles from "./IntroBackdrop.module.scss";
 
-export default function useInitArbiterStores(
-  commonData: ArbiterCommonData,
-): boolean {
-  const agentsStore = useAiArbiterAgentsStore();
-  const [isReady, setIsReady] = useState(false);
-  const initialised = useRef(false);
+type IntroBackdropProps = {
+  onStart?: () => void;
+};
 
-  useLayoutEffect(() => {
-    if (initialised.current) return;
-    initialised.current = true;
-
-    agentsStore.setUserId(commonData.userId);
-
-    if (commonData.activePanel) {
-      agentsStore.setActivePanel(commonData.activePanel);
-    }
-
-    if (commonData.authToken) {
-      const secure =
-        window.location.protocol === "https:" ? "; Secure" : "";
-      document.cookie = `asc_auth_key=${commonData.authToken}; path=/; SameSite=Lax${secure}`;
-      setAuthToken(commonData.authToken);
-    }
-
-    setIsReady(true);
-  }, []);
-
-  return isReady;
+export function IntroBackdrop({ onStart }: IntroBackdropProps) {
+  const { isBase } = useTheme();
+  return (
+    <div className={styles.introBackdrop}>
+      <div className={styles.introIllustration} aria-hidden="true">
+        {isBase ? <AiAgentsLightIllustration /> : <AiAgentsDarkIllustration />}
+      </div>
+      <p className={styles.introTitle}>AI Arbiter</p>
+      <p className={styles.introDescription}>
+        Multiple AI experts answer your question in parallel; an arbiter
+        synthesises their answers into a single weighted reply.
+      </p>
+      {onStart ? (
+        <button
+          type="button"
+          className={styles.startBtn}
+          onClick={onStart}
+        >
+          Start setup wizard
+        </button>
+      ) : null}
+    </div>
+  );
 }

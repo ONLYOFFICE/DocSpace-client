@@ -33,42 +33,26 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-"use client";
+.nonAdminBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 100%;
+  padding: 32px;
+  text-align: center;
+  color: var(--text-secondary-color, #888);
+}
 
-import { useLayoutEffect, useRef, useState } from "react";
+.nonAdminTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-color, #333);
+}
 
-import { setAuthToken } from "@docspace/shared/api/client";
-
-import type { ArbiterCommonData } from "@/types/arbiter";
-
-import { useAiArbiterAgentsStore } from "../_store/AiArbiterAgentsStore";
-
-export default function useInitArbiterStores(
-  commonData: ArbiterCommonData,
-): boolean {
-  const agentsStore = useAiArbiterAgentsStore();
-  const [isReady, setIsReady] = useState(false);
-  const initialised = useRef(false);
-
-  useLayoutEffect(() => {
-    if (initialised.current) return;
-    initialised.current = true;
-
-    agentsStore.setUserId(commonData.userId);
-
-    if (commonData.activePanel) {
-      agentsStore.setActivePanel(commonData.activePanel);
-    }
-
-    if (commonData.authToken) {
-      const secure =
-        window.location.protocol === "https:" ? "; Secure" : "";
-      document.cookie = `asc_auth_key=${commonData.authToken}; path=/; SameSite=Lax${secure}`;
-      setAuthToken(commonData.authToken);
-    }
-
-    setIsReady(true);
-  }, []);
-
-  return isReady;
+.nonAdminText {
+  max-width: 480px;
+  font-size: 14px;
+  line-height: 1.5;
 }

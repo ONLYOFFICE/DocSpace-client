@@ -33,42 +33,65 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-"use client";
+import type { SseEvent } from "./sseEvent";
 
-import { useLayoutEffect, useRef, useState } from "react";
+export async function* parseSseStream(
+  stream: ReadableStream<Uint8Array>,
+): AsyncGenerator<SseEvent> {
+  const reader = stream.getReader();
+  const decoder = new TextDecoder();
+  let buffer = "";
 
-import { setAuthToken } from "@docspace/shared/api/client";
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
 
-import type { ArbiterCommonData } from "@/types/arbiter";
+      buffer += decoder.decode(value, { stream: true });
 
-import { useAiArbiterAgentsStore } from "../_store/AiArbiterAgentsStore";
+      const blocks = buffer.split(/\r?\n\r?\n/);
+      buffer = blocks.pop() ?? "";
 
-export default function useInitArbiterStores(
-  commonData: ArbiterCommonData,
-): boolean {
-  const agentsStore = useAiArbiterAgentsStore();
-  const [isReady, setIsReady] = useState(false);
-  const initialised = useRef(false);
-
-  useLayoutEffect(() => {
-    if (initialised.current) return;
-    initialised.current = true;
-
-    agentsStore.setUserId(commonData.userId);
-
-    if (commonData.activePanel) {
-      agentsStore.setActivePanel(commonData.activePanel);
+      for (const block of blocks) {
+        const ev = parseEventBlock(block);
+        if (!ev) continue;
+        yield ev;
+        if (ev.type === "message_stop") {
+          return;
+        }
+      }
     }
 
-    if (commonData.authToken) {
-      const secure =
-        window.location.protocol === "https:" ? "; Secure" : "";
-      document.cookie = `asc_auth_key=${commonData.authToken}; path=/; SameSite=Lax${secure}`;
-      setAuthToken(commonData.authToken);
+    if (buffer.trim()) {
+      const ev = parseEventBlock(buffer);
+      if (ev) yield ev;
     }
+  } finally {
+    reader.releaseLock();
+  }
+}
 
-    setIsReady(true);
-  }, []);
+function parseEventBlock(block: string): SseEvent | null {
+  let eventType = "";
+  const dataLines: string[] = [];
 
-  return isReady;
+  for (const line of block.split(/\r?\n/)) {
+    if (!line || line.startsWith(":")) {
+      continue;
+    }
+    if (line.startsWith("event:")) {
+      eventType = line.slice(6).trim();
+    } else if (line.startsWith("data:")) {
+      dataLines.push(line.slice(5).trim());
+    }
+  }
+
+  if (!eventType || dataLines.length === 0) return null;
+
+  try {
+    const payload = JSON.parse(dataLines.join("\n")) as Record<string, unknown>;
+    return { type: eventType, ...payload } as SseEvent;
+  } catch {
+    return null;
+  }
 }

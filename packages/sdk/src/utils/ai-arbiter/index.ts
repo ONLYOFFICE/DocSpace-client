@@ -33,42 +33,63 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-"use client";
+export { WIZARD_SYSTEM_PROMPT } from "./wizardPrompt";
 
-import { useLayoutEffect, useRef, useState } from "react";
+export type {
+  AgentConfig,
+  ArbiterConfig,
+  ExpertConfig,
+  Tone,
+  ValidationIssue,
+  ValidationResult,
+} from "./agentConfig";
+export { TONES, validateAgentConfig } from "./agentConfig";
 
-import { setAuthToken } from "@docspace/shared/api/client";
+export type { ExtractResult } from "./extractWizardConfig";
+export { extractWizardConfig } from "./extractWizardConfig";
 
-import type { ArbiterCommonData } from "@/types/arbiter";
+export type { ChipParseResult } from "./parseChips";
+export { parseChips } from "./parseChips";
 
-import { useAiArbiterAgentsStore } from "../_store/AiArbiterAgentsStore";
+export type { BuildContext } from "./buildExpertPrompt";
+export { buildExpertPrompt } from "./buildExpertPrompt";
+export { buildArbiterAgentPrompt } from "./buildArbiterAgentPrompt";
 
-export default function useInitArbiterStores(
-  commonData: ArbiterCommonData,
-): boolean {
-  const agentsStore = useAiArbiterAgentsStore();
-  const [isReady, setIsReady] = useState(false);
-  const initialised = useRef(false);
+export {
+  TAG_ARBITER,
+  TAG_EXPERT,
+  TAG_NAMESPACE,
+  TAG_WIZARD,
+  arbiterTags,
+  expertTags,
+  extractSessionId,
+  isArbiterTag,
+  isExpertTag,
+  isSessionTag,
+  isWizardTag,
+  sessionTag,
+  wizardTags,
+} from "./tags";
 
-  useLayoutEffect(() => {
-    if (initialised.current) return;
-    initialised.current = true;
+export type {
+  ActivePanel,
+  ActivePanelOf,
+  AgentModelRef,
+  DefaultProviderRef,
+  ProvisionContext,
+  ProvisionProgress,
+  ProvisionResult,
+} from "./provision";
+export {
+  cleanupOrphanAgents,
+  ensureWizardAgent,
+  findActivePanel,
+  findWizardAgent,
+  provisionPanel,
+  selectActivePanel,
+  tearDownPanel,
+} from "./provision";
 
-    agentsStore.setUserId(commonData.userId);
-
-    if (commonData.activePanel) {
-      agentsStore.setActivePanel(commonData.activePanel);
-    }
-
-    if (commonData.authToken) {
-      const secure =
-        window.location.protocol === "https:" ? "; Secure" : "";
-      document.cookie = `asc_auth_key=${commonData.authToken}; path=/; SameSite=Lax${secure}`;
-      setAuthToken(commonData.authToken);
-    }
-
-    setIsReady(true);
-  }, []);
-
-  return isReady;
-}
+export type { SseEvent } from "./sseEvent";
+export { parseSseStream } from "./parseSseStream";
+export { streamContinueChat, streamStartChat } from "./streamingChat";

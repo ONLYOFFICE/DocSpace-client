@@ -33,42 +33,42 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-"use client";
+const CHIP_LINE_PATTERN = /^\s*\[\[OPTIONS\]\]\s*:?\s*(.+?)\s*$/i;
+const MAX_OPTION_LEN = 60;
+const MAX_OPTIONS = 6;
 
-import { useLayoutEffect, useRef, useState } from "react";
+export type ChipParseResult = {
+  displayText: string;
+  options: string[];
+};
 
-import { setAuthToken } from "@docspace/shared/api/client";
+export function parseChips(text: string): ChipParseResult {
+  if (!text) return { displayText: text, options: [] };
 
-import type { ArbiterCommonData } from "@/types/arbiter";
+  const lines = text.split(/\r?\n/);
+  for (let i = lines.length - 1; i >= 0; i--) {
+    const m = lines[i].match(CHIP_LINE_PATTERN);
+    if (!m) continue;
 
-import { useAiArbiterAgentsStore } from "../_store/AiArbiterAgentsStore";
+    const options = m[1]
+      .split("|")
+      .map((s) => s.trim())
+      .filter((s) => s.length > 0 && s.length <= MAX_OPTION_LEN)
+      .slice(0, MAX_OPTIONS);
 
-export default function useInitArbiterStores(
-  commonData: ArbiterCommonData,
-): boolean {
-  const agentsStore = useAiArbiterAgentsStore();
-  const [isReady, setIsReady] = useState(false);
-  const initialised = useRef(false);
-
-  useLayoutEffect(() => {
-    if (initialised.current) return;
-    initialised.current = true;
-
-    agentsStore.setUserId(commonData.userId);
-
-    if (commonData.activePanel) {
-      agentsStore.setActivePanel(commonData.activePanel);
+    if (options.length === 0) {
+      return { displayText: text, options: [] };
     }
 
-    if (commonData.authToken) {
-      const secure =
-        window.location.protocol === "https:" ? "; Secure" : "";
-      document.cookie = `asc_auth_key=${commonData.authToken}; path=/; SameSite=Lax${secure}`;
-      setAuthToken(commonData.authToken);
+    const remaining = [...lines.slice(0, i), ...lines.slice(i + 1)];
+    while (
+      remaining.length > 0 &&
+      remaining[remaining.length - 1].trim() === ""
+    ) {
+      remaining.pop();
     }
+    return { displayText: remaining.join("\n"), options };
+  }
 
-    setIsReady(true);
-  }, []);
-
-  return isReady;
+  return { displayText: text, options: [] };
 }

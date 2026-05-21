@@ -40,6 +40,13 @@ export type AgentSummary = {
   modelId: string;
   prompt: string;
   providerId: number;
+  tags?: string[];
+};
+
+export type ActivePanelSummary = {
+  sessionId: string;
+  arbiter: AgentSummary;
+  experts: AgentSummary[];
 };
 
 export type PanelStatus =
@@ -89,11 +96,10 @@ export type SseEvent =
     };
 
 export type ArbiterCommonData = {
-  agents: AgentSummary[];
+  activePanel: ActivePanelSummary | null;
   authToken: string;
+  userId: string | null;
 };
 
 export const ARBITER_PANEL_ID = "arbiter";
-export const MAX_EXPERTS = 12;
-export const ARBITER_SELECTION_KEY = "aiarbiter-selection";
 export const ARBITER_PENDING_FILE_KEY = "aiarbiter-pending-file";

@@ -36,18 +36,9 @@ import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import CheckIcon from "@docspace/ui-kit/assets/check.react.svg";
 import DangerIcon from "@docspace/ui-kit/assets/danger.toast.react.svg";
-import InfoIcon from "@docspace/ui-kit/assets/info.outline.react.svg";
-import CatalogRoomsIcon from "@docspace/ui-kit/assets/icons/16/catalog.rooms.react.svg";
-import PeopleIcon from "@docspace/ui-kit/assets/icons/16/people.react.svg";
 import CatalogAiArbiterIcon from "@docspace/ui-kit/assets/icons/16/catalog.ai-arbiter.react.svg";
 import AiAgentsLightIllustration from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
 import AiAgentsDarkIllustration from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";
-
-import {
-  AI_ARBITER_INSTALL_STEPS,
-  installAiArbiterModule,
-  type AiArbiterInstallStepId,
-} from "../installFlow";
 
 import styles from "../InstallModuleDialog/InstallModuleDialog.module.scss";
 
@@ -55,107 +46,50 @@ type InstallAiArbiterDialogProps = {
   visible: boolean;
   onClose: () => void;
   onInstalled: () => void;
-  installAiArbiter?: (roomId: number) => Promise<void>;
-  uninstallAiArbiter?: () => Promise<void>;
+  installAiArbiter?: () => Promise<void>;
 };
 
-type Phase = "confirm" | "installing" | "done" | "failed";
+type Phase = "confirm" | "done" | "failed";
 
 const InstallAiArbiterDialogComponent = ({
   visible,
   onClose,
   onInstalled,
   installAiArbiter,
-  uninstallAiArbiter,
 }: InstallAiArbiterDialogProps) => {
   const { t } = useTranslation(["Common"]);
   const { isBase } = useTheme();
   const [phase, setPhase] = React.useState<Phase>("confirm");
-  const [stepIndex, setStepIndex] = React.useState(0);
-  const abortRef = React.useRef<AbortController | null>(null);
-  const cancelledRef = React.useRef(false);
+  const [isPending, setIsPending] = React.useState(false);
 
   const handleInstallClick = React.useCallback(async () => {
-    setPhase("installing");
-    setStepIndex(0);
-
-    abortRef.current = new AbortController();
-    cancelledRef.current = false;
-
+    setIsPending(true);
     try {
-      const { roomId } = await installAiArbiterModule(
-        (stepId) => {
-          const idx = AI_ARBITER_INSTALL_STEPS.indexOf(stepId);
-          if (idx >= 0) setStepIndex(idx);
-        },
-        abortRef.current.signal,
-      );
-
-      if (cancelledRef.current) return;
-
-      await installAiArbiter?.(roomId);
-
-      setStepIndex(AI_ARBITER_INSTALL_STEPS.length);
+      await installAiArbiter?.();
       setPhase("done");
     } catch (err) {
-      if (cancelledRef.current) return;
       console.error("AI Arbiter install failed", err);
       setPhase("failed");
       toastr.error(t("Common:DashboardInstallFailed"));
     } finally {
-      abortRef.current = null;
+      setIsPending(false);
     }
   }, [installAiArbiter, t]);
-
-  const handleCancelInstalling = React.useCallback(async () => {
-    cancelledRef.current = true;
-    abortRef.current?.abort();
-    try {
-      await uninstallAiArbiter?.();
-    } catch (err) {
-      console.error("AI Arbiter cleanup after cancel failed", err);
-    }
-    toastr.info(t("Common:DashboardInstallCancelled"));
-    onClose();
-  }, [onClose, uninstallAiArbiter, t]);
 
   React.useEffect(() => {
     if (!visible) {
       setPhase("confirm");
-      setStepIndex(0);
+      setIsPending(false);
     }
   }, [visible]);
 
-  const inProgress = phase === "installing";
   const moduleTitle = t("Common:DashboardAIArbiterTitle");
 
-  const stepLabels: Record<AiArbiterInstallStepId, string> = {
-    "create-room": t("Common:DashboardArbiterInstallStepCreateRoom"),
-    "invite-everyone": t("Common:DashboardArbiterInstallStepInviteEveryone"),
-  };
-
-  const stepDescriptions: Record<AiArbiterInstallStepId, string> = {
-    "create-room": t("Common:DashboardArbiterInstallStepCreateRoomDescription"),
-    "invite-everyone": t(
-      "Common:DashboardArbiterInstallStepInviteEveryoneDescription",
-    ),
-  };
-
   const confirmBullets: {
-    icon: typeof CatalogRoomsIcon;
+    icon: typeof CatalogAiArbiterIcon;
     title: string;
     description: string;
   }[] = [
-    {
-      icon: CatalogRoomsIcon,
-      title: t("Common:DashboardArbiterInstallBulletRoom"),
-      description: t("Common:DashboardArbiterInstallBulletRoomDescription"),
-    },
-    {
-      icon: PeopleIcon,
-      title: t("Common:DashboardArbiterInstallBulletTeam"),
-      description: t("Common:DashboardArbiterInstallBulletTeamDescription"),
-    },
     {
       icon: CatalogAiArbiterIcon,
       title: t("Common:DashboardArbiterInstallBulletAI"),
@@ -197,49 +131,6 @@ const InstallAiArbiterDialogComponent = ({
     </div>
   );
 
-  const renderInstallingBody = () => (
-    <div className={styles.installingBody}>
-      <div className={styles.keepOpenCallout} role="status">
-        <InfoIcon className={styles.keepOpenCalloutIcon} aria-hidden="true" />
-        <span>{t("Common:DashboardInstallKeepOpen")}</span>
-      </div>
-
-      <ol className={styles.timeline}>
-        {AI_ARBITER_INSTALL_STEPS.map((id, idx) => {
-          const state =
-            idx < stepIndex ? "done" : idx === stepIndex ? "active" : "pending";
-          const isLast = idx === AI_ARBITER_INSTALL_STEPS.length - 1;
-          return (
-            <li key={id} className={styles.timelineItem} data-state={state}>
-              {!isLast ? (
-                <Text
-                  className={styles.timelineConnector}
-                  aria-hidden="true"
-                  as="span"
-                />
-              ) : null}
-              <Text
-                className={styles.timelineDot}
-                aria-hidden="true"
-                as="span"
-              >
-                {state === "done" ? <CheckIcon /> : null}
-              </Text>
-              <div className={styles.timelineLabelWrap}>
-                <Text className={styles.timelineLabel} as="span">
-                  {stepLabels[id]}
-                </Text>
-                <Text className={styles.timelineCounter} as="span">
-                  {stepDescriptions[id]}
-                </Text>
-              </div>
-            </li>
-          );
-        })}
-      </ol>
-    </div>
-  );
-
   const renderDoneBody = () => (
     <div className={styles.doneBody}>
       <div
@@ -278,12 +169,14 @@ const InstallAiArbiterDialogComponent = ({
             size={ButtonSize.normal}
             label={t("Common:Install")}
             onClick={handleInstallClick}
+            isDisabled={isPending}
           />
           <Button
             scale
             size={ButtonSize.normal}
             label={t("Common:CancelButton")}
             onClick={onClose}
+            isDisabled={isPending}
           />
         </>
       );
@@ -299,23 +192,13 @@ const InstallAiArbiterDialogComponent = ({
         />
       );
     }
-    if (phase === "failed") {
-      return (
-        <Button
-          primary
-          scale
-          size={ButtonSize.normal}
-          label={t("Common:CloseButton")}
-          onClick={onClose}
-        />
-      );
-    }
     return (
       <Button
+        primary
         scale
         size={ButtonSize.normal}
-        label={t("Common:CancelButton")}
-        onClick={handleCancelInstalling}
+        label={t("Common:CloseButton")}
+        onClick={onClose}
       />
     );
   };
@@ -328,19 +211,16 @@ const InstallAiArbiterDialogComponent = ({
     return t("Common:DashboardInstallTitle", { module: moduleTitle });
   };
 
-  const handleModalClose = inProgress ? handleCancelInstalling : onClose;
-
   return (
     <ModalDialog
       visible={visible}
-      onClose={handleModalClose}
+      onClose={onClose}
       isLarge
       autoMaxHeight
     >
       <ModalDialog.Header>{getHeader()}</ModalDialog.Header>
       <ModalDialog.Body>
         {phase === "confirm" ? renderConfirmBody() : null}
-        {phase === "installing" ? renderInstallingBody() : null}
         {phase === "done" ? renderDoneBody() : null}
         {phase === "failed" ? renderFailedBody() : null}
       </ModalDialog.Body>
@@ -351,7 +231,6 @@ const InstallAiArbiterDialogComponent = ({
 
 export const InstallAiArbiterDialog = inject<TStore>(({ appsStore }) => ({
   installAiArbiter: appsStore.installAiArbiter,
-  uninstallAiArbiter: appsStore.uninstallAiArbiter,
 }))(observer(InstallAiArbiterDialogComponent));
 
 export default InstallAiArbiterDialog;

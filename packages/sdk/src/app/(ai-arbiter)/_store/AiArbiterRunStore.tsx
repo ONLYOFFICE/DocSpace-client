@@ -86,7 +86,6 @@ class AiArbiterRunStore {
         this.attachedFile = { id: parsed.id, name: parsed.name };
       }
     } catch {
-      // ignore
     }
   });
 

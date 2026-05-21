@@ -41,6 +41,7 @@ import type { AgentSummary } from "@/types/arbiter";
 type AgentFolder = {
   id: number;
   title?: string;
+  tags?: string[];
   chatSettings?: {
     providerId?: number;
     modelId?: string;
@@ -49,12 +50,15 @@ type AgentFolder = {
   };
 };
 
-export async function getAiAgents(): Promise<AgentSummary[]> {
+export async function getAiAgents(subjectId?: string): Promise<AgentSummary[]> {
   logger.debug("Start GET /ai/agents");
 
   try {
+    const params = new URLSearchParams({ count: "100" });
+    if (subjectId) params.set("subjectId", subjectId);
+
     const [req] = await createRequest(
-      ["/ai/agents?count=100"],
+      [`/ai/agents?${params.toString()}`],
       [["", ""]],
       "GET",
     );
@@ -75,6 +79,7 @@ export async function getAiAgents(): Promise<AgentSummary[]> {
       modelId: f.chatSettings?.modelId ?? "",
       prompt: f.chatSettings?.prompt ?? "",
       providerId: f.chatSettings?.providerId ?? 0,
+      tags: f.tags,
     }));
   } catch (error) {
     logger.error(`Error in getAiAgents: ${error}`);

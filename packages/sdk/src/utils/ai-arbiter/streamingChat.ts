@@ -33,42 +33,42 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-"use client";
+import { sendMessageToChat, startNewChat } from "@docspace/shared/api/ai";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { parseSseStream } from "./parseSseStream";
+import type { SseEvent } from "./sseEvent";
 
-import { setAuthToken } from "@docspace/shared/api/client";
+function abortControllerFromSignal(signal?: AbortSignal): AbortController {
+  const ac = new AbortController();
+  if (!signal) return ac;
+  if (signal.aborted) {
+    ac.abort();
+    return ac;
+  }
+  signal.addEventListener("abort", () => ac.abort(), { once: true });
+  return ac;
+}
 
-import type { ArbiterCommonData } from "@/types/arbiter";
+export async function* streamStartChat(
+  roomId: number | string,
+  message: string,
+  files: string[] | undefined,
+  signal?: AbortSignal,
+): AsyncGenerator<SseEvent> {
+  const ac = abortControllerFromSignal(signal);
+  const body = await startNewChat(roomId, message, files ?? [], ac);
+  if (!body) throw new Error("startNewChat returned empty response body");
+  yield* parseSseStream(body);
+}
 
-import { useAiArbiterAgentsStore } from "../_store/AiArbiterAgentsStore";
-
-export default function useInitArbiterStores(
-  commonData: ArbiterCommonData,
-): boolean {
-  const agentsStore = useAiArbiterAgentsStore();
-  const [isReady, setIsReady] = useState(false);
-  const initialised = useRef(false);
-
-  useLayoutEffect(() => {
-    if (initialised.current) return;
-    initialised.current = true;
-
-    agentsStore.setUserId(commonData.userId);
-
-    if (commonData.activePanel) {
-      agentsStore.setActivePanel(commonData.activePanel);
-    }
-
-    if (commonData.authToken) {
-      const secure =
-        window.location.protocol === "https:" ? "; Secure" : "";
-      document.cookie = `asc_auth_key=${commonData.authToken}; path=/; SameSite=Lax${secure}`;
-      setAuthToken(commonData.authToken);
-    }
-
-    setIsReady(true);
-  }, []);
-
-  return isReady;
+export async function* streamContinueChat(
+  chatId: string,
+  message: string,
+  files: string[] | undefined,
+  signal?: AbortSignal,
+): AsyncGenerator<SseEvent> {
+  const ac = abortControllerFromSignal(signal);
+  const body = await sendMessageToChat(chatId, message, files ?? [], ac);
+  if (!body) throw new Error("sendMessageToChat returned empty response body");
+  yield* parseSseStream(body);
 }

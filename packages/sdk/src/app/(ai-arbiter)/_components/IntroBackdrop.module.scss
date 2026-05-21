@@ -33,42 +33,68 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-"use client";
+.introBackdrop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 100%;
+  width: 100%;
+  padding: 32px;
+  text-align: center;
+  background:
+    radial-gradient(
+      circle at 50% 30%,
+      color-mix(in srgb, var(--accent-color, #4e9df5) 8%, transparent),
+      transparent 60%
+    ),
+    var(--background-color, #fafafa);
+}
 
-import { useLayoutEffect, useRef, useState } from "react";
+.introIllustration {
+  margin-bottom: 8px;
+  opacity: 0.9;
 
-import { setAuthToken } from "@docspace/shared/api/client";
+  svg {
+    width: 140px;
+    height: 140px;
+  }
+}
 
-import type { ArbiterCommonData } from "@/types/arbiter";
+.introTitle {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-color, #333);
+  margin: 0;
+}
 
-import { useAiArbiterAgentsStore } from "../_store/AiArbiterAgentsStore";
+.introDescription {
+  max-width: 520px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-color-2, #666);
+  margin: 0;
+}
 
-export default function useInitArbiterStores(
-  commonData: ArbiterCommonData,
-): boolean {
-  const agentsStore = useAiArbiterAgentsStore();
-  const [isReady, setIsReady] = useState(false);
-  const initialised = useRef(false);
+.startBtn {
+  margin-top: 16px;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent-color, #4e9df5);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
 
-  useLayoutEffect(() => {
-    if (initialised.current) return;
-    initialised.current = true;
+  &:hover {
+    background: var(--accent-hover, #2e82e0);
+  }
 
-    agentsStore.setUserId(commonData.userId);
-
-    if (commonData.activePanel) {
-      agentsStore.setActivePanel(commonData.activePanel);
-    }
-
-    if (commonData.authToken) {
-      const secure =
-        window.location.protocol === "https:" ? "; Secure" : "";
-      document.cookie = `asc_auth_key=${commonData.authToken}; path=/; SameSite=Lax${secure}`;
-      setAuthToken(commonData.authToken);
-    }
-
-    setIsReady(true);
-  }, []);
-
-  return isReady;
+  &:focus-visible {
+    outline: 2px solid var(--accent-color, #4e9df5);
+    outline-offset: 2px;
+  }
 }

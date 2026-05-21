@@ -36,108 +36,46 @@
 "use client";
 
 import React from "react";
-import { makeAutoObservable, computed } from "mobx";
+import { computed, makeAutoObservable } from "mobx";
 
-import {
-  MAX_EXPERTS,
-  ARBITER_SELECTION_KEY,
-  type AgentSummary,
-} from "@/types/arbiter";
+import type { ActivePanelSummary, AgentSummary } from "@/types/arbiter";
 
 class AiArbiterAgentsStore {
-  agents: AgentSummary[] = [];
-  expertIds: number[] = [];
-  arbiterId: number | null = null;
+  experts: AgentSummary[] = [];
+  arbiter: AgentSummary | null = null;
+  sessionId: string | null = null;
+  userId: string | null = null;
 
   constructor() {
     makeAutoObservable(this, {
-      expertAgents: computed,
-      arbiterAgent: computed,
       canRun: computed,
+      hasPanel: computed,
     });
-    this.loadPersistedSelection();
   }
 
-  setAgents = (agents: AgentSummary[]) => {
-    this.agents = agents;
+  setUserId = (id: string | null) => {
+    this.userId = id;
   };
 
-  addExpert = (id: number) => {
-    if (this.expertIds.includes(id) || this.expertIds.length >= MAX_EXPERTS)
-      return;
-    if (id === this.arbiterId) return;
-    this.expertIds = [...this.expertIds, id];
-    this.persistSelection();
+  setActivePanel = (panel: ActivePanelSummary) => {
+    this.experts = panel.experts;
+    this.arbiter = panel.arbiter;
+    this.sessionId = panel.sessionId;
   };
 
-  removeExpert = (id: number) => {
-    this.expertIds = this.expertIds.filter((e) => e !== id);
-    this.persistSelection();
+  clearActivePanel = () => {
+    this.experts = [];
+    this.arbiter = null;
+    this.sessionId = null;
   };
 
-  setArbiterId = (id: number | null) => {
-    this.arbiterId = id;
-    if (id !== null) {
-      this.expertIds = this.expertIds.filter((e) => e !== id);
-    }
-    this.persistSelection();
-  };
-
-  get expertAgents(): AgentSummary[] {
-    return this.expertIds
-      .map((id) => this.agents.find((a) => a.id === id))
-      .filter((a): a is AgentSummary => a !== undefined);
-  }
-
-  get arbiterAgent(): AgentSummary | undefined {
-    return this.arbiterId != null
-      ? this.agents.find((a) => a.id === this.arbiterId)
-      : undefined;
+  get hasPanel(): boolean {
+    return this.arbiter !== null;
   }
 
   get canRun(): boolean {
-    return this.expertIds.length > 0 && this.arbiterId !== null;
+    return this.arbiter !== null && this.experts.length > 0;
   }
-
-  isAgentUnavailable = (agent: AgentSummary): boolean => {
-    return !agent.modelId || !agent.modelAlias;
-  };
-
-  private loadPersistedSelection = () => {
-    if (typeof window === "undefined") return;
-    try {
-      const raw = localStorage.getItem(ARBITER_SELECTION_KEY);
-      if (!raw) return;
-      const parsed = JSON.parse(raw) as {
-        expertIds?: unknown;
-        arbiterId?: unknown;
-      };
-      const expertIds = Array.isArray(parsed.expertIds)
-        ? parsed.expertIds.filter((x): x is number => typeof x === "number")
-        : [];
-      const arbiterId =
-        typeof parsed.arbiterId === "number" ? parsed.arbiterId : null;
-      this.expertIds = expertIds.slice(0, MAX_EXPERTS);
-      this.arbiterId = arbiterId;
-    } catch {
-      // ignore parse errors
-    }
-  };
-
-  private persistSelection = () => {
-    if (typeof window === "undefined") return;
-    try {
-      localStorage.setItem(
-        ARBITER_SELECTION_KEY,
-        JSON.stringify({
-          expertIds: this.expertIds,
-          arbiterId: this.arbiterId,
-        }),
-      );
-    } catch {
-      // ignore storage errors
-    }
-  };
 }
 
 export const AiArbiterAgentsStoreContext =

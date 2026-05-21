@@ -33,42 +33,22 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-"use client";
-
-import { useLayoutEffect, useRef, useState } from "react";
-
-import { setAuthToken } from "@docspace/shared/api/client";
-
-import type { ArbiterCommonData } from "@/types/arbiter";
-
-import { useAiArbiterAgentsStore } from "../_store/AiArbiterAgentsStore";
-
-export default function useInitArbiterStores(
-  commonData: ArbiterCommonData,
-): boolean {
-  const agentsStore = useAiArbiterAgentsStore();
-  const [isReady, setIsReady] = useState(false);
-  const initialised = useRef(false);
-
-  useLayoutEffect(() => {
-    if (initialised.current) return;
-    initialised.current = true;
-
-    agentsStore.setUserId(commonData.userId);
-
-    if (commonData.activePanel) {
-      agentsStore.setActivePanel(commonData.activePanel);
+export type SseEvent =
+  | { type: "message_start"; chatId: string; error?: string | null }
+  | { type: "new_token"; text: string }
+  | { type: "reasoning"; text: string }
+  | {
+      type: "tool_call";
+      callId: string;
+      name: string;
+      arguments: unknown;
+      managed?: boolean;
     }
-
-    if (commonData.authToken) {
-      const secure =
-        window.location.protocol === "https:" ? "; Secure" : "";
-      document.cookie = `asc_auth_key=${commonData.authToken}; path=/; SameSite=Lax${secure}`;
-      setAuthToken(commonData.authToken);
-    }
-
-    setIsReady(true);
-  }, []);
-
-  return isReady;
-}
+  | { type: "tool_result"; callId: string; result: unknown }
+  | { type: "message_stop"; messageId: number }
+  | {
+      type: "error";
+      message: string;
+      errorCode?: string;
+      details?: unknown;
+    };

@@ -71,6 +71,7 @@ const List = ({
   shareKey,
   total: totalProp,
   current,
+  currentUserId,
 }: ListProps) => {
   const timezone = portalSettings.timezone;
   const displayFileExtension = filesSettings.displayFileExtension;
@@ -337,6 +338,7 @@ const List = ({
         timezone={timezone}
         displayFileExtension={displayFileExtension}
         fetchMoreFiles={fetchMoreFiles}
+        currentUserId={currentUserId}
       />
     );
   }

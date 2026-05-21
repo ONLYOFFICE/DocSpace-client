@@ -70,9 +70,17 @@ import getTitleWithoutExt from "../../../../_utils/get-title-without-ext";
 
 import type { TableViewRowProps } from "../TableView.types";
 import styles from "../TableView.module.scss";
+import AuthorCell from "./AuthorCell";
 
 const TableViewRow = observer(
-  ({ item, index, timezone, displayFileExtension, lastColumn }: TableViewRowProps) => {
+  ({
+    item,
+    index,
+    timezone,
+    displayFileExtension,
+    lastColumn,
+    currentUserId,
+  }: TableViewRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
     const { filesSettings } = useFilesSettingsStore();
@@ -123,6 +131,21 @@ const TableViewRow = observer(
       "LT",
       timezone ?? "UTC",
     );
+
+    const createdDate = getCorrectDate(
+      i18n.language || "",
+      item.created,
+      "L",
+      "LT",
+      timezone ?? "UTC",
+    );
+
+    const fileOwner =
+      item.createdBy &&
+      ((currentUserId && currentUserId === item.createdBy.id
+        ? t("Common:MeLabel")
+        : item.createdBy.displayName) ??
+        "");
 
     const fileSize = "contentLength" in item ? item.contentLength : "";
     const fileType =
@@ -275,6 +298,19 @@ const TableViewRow = observer(
           </span>
           {badgesNode}
           {lastColumn === "Name" ? quickButtonsNode : null}
+        </TableCell>
+        <TableCell className={lastColumn === "Author" ? styles.lastCell : undefined}>
+          {item.createdBy ? (
+            <AuthorCell
+              fileOwner={fileOwner || ""}
+              createdBy={item.createdBy}
+            />
+          ) : null}
+          {lastColumn === "Author" ? quickButtonsNode : null}
+        </TableCell>
+        <TableCell className={lastColumn === "Created" ? styles.lastCell : undefined}>
+          <span className={styles.secondaryCell} suppressHydrationWarning>{createdDate}</span>
+          {lastColumn === "Created" ? quickButtonsNode : null}
         </TableCell>
         <TableCell className={lastColumn === "Modified" ? styles.lastCell : undefined}>
           <span className={styles.secondaryCell} suppressHydrationWarning>{modifiedDate}</span>

@@ -97,6 +97,7 @@ import useFileOperations from "../../_hooks/useFileOperations";
 import useRenameActions from "../../_hooks/useRenameActions";
 import useConvertActions from "../../_hooks/useConvertActions";
 import { useDocsSettingsStore } from "../../_store/DocsSettingsStore";
+import { useDocsUserStore } from "../../_store/DocsUserStore";
 import type { SelectorMode } from "../../_hooks/useFileOperations";
 import { useDocsFrameBridge } from "../../_hooks/useDocsFrameBridge";
 import DropZone from "../drop-zone";
@@ -145,6 +146,7 @@ const DocsLayout = observer(
     const { rootFolderType } = useFilesListStore();
     const infoPanelStore = useInfoPanelStore();
     const versionHistoryStore = useVersionHistoryStore();
+    const docsUserStore = useDocsUserStore();
     const { sdkConfig } = useSDKConfig();
     const router = useRouter();
 
@@ -372,6 +374,7 @@ const DocsLayout = observer(
                               portalSettings={portalSettings}
                               filesFilter={filesFilter}
                               current={current}
+                              currentUserId={docsUserStore.user?.id}
                             />
                           }
                           infoPanelHeaderContent={<DocsInfoPanelHeader />}

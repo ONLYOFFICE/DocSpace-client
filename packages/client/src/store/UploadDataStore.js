@@ -315,7 +315,7 @@ class UploadDataStore {
       canceled: true,
       alert: true,
       label: i18n.t("Common:CanceledOperation", {
-        operationName: i18n.t("Files:Uploading"),
+        operationName: i18n.t("Common:Uploading"),
       }),
     });
 
@@ -2366,3 +2366,4 @@ class UploadDataStore {
 }
 
 export default UploadDataStore;
+

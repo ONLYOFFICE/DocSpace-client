@@ -129,7 +129,7 @@ class UploadPanelComponent extends React.Component {
     const visible = uploadPanelVisible;
 
     const title = isUploading
-      ? t("Files:Uploading")
+      ? t("Common:Uploading")
       : isUploadingAndConversion
         ? t("UploadingAndConversion")
         : t("Files:Conversion");
@@ -152,7 +152,7 @@ class UploadPanelComponent extends React.Component {
   }
 }
 
-const UploadPanel = withTranslation(["UploadPanel", "Files"])(
+const UploadPanel = withTranslation(["UploadPanel", "Files", "Common"])(
   withLoader(UploadPanelComponent)(<DialogAsideSkeleton isPanel />),
 );
 
@@ -209,3 +209,4 @@ export default inject(({ settingsStore, uploadDataStore }) => {
     uploadPercent,
   };
 })(observer(UploadPanel));
+

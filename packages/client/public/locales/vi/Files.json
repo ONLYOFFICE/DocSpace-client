@@ -206,7 +206,6 @@
   "UnarchivedRoomAction": "Phòng '{{name}}' chưa được sao lưu.",
   "UnarchivedRoomsAction": "Các phòng chưa được sao lưu.",
   "Unpin": "Bỏ ghim",
-  "Uploading": "Đang tải lên",
   "UploadingProgress": "Đang tải lên: {{progress}}%",
   "UserLimitDescription": "Thiết lập số lượng người dùng có thể tham gia qua liên kết mời này.",
   "UsersJoined": "Người dùng đã tham gia:",

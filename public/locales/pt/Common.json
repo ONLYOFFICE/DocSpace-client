@@ -1632,5 +1632,6 @@
   "CustomFilterDisable": "Elimine o template",
   "CustomFilterDisabled": "Filtro personalizado para o arquivo selecionado desativado",
   "CustomFilterEnable": "Ativar Filtro Personalizado",
-  "CustomFilterEnabled": "Filtro personalizado para o arquivo selecionado ativado"
+  "CustomFilterEnabled": "Filtro personalizado para o arquivo selecionado ativado",
+  "Uploading": "Fazendo upload"
 }

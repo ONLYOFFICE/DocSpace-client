@@ -1632,5 +1632,6 @@
   "CustomFilterDisable": "Onemogućite prilagođeni filter",
   "CustomFilterDisabled": "Prilagođeni filter za izabranu datoteku je onemogućen",
   "CustomFilterEnable": "Omogućite prilagođeni filter",
-  "CustomFilterEnabled": "Prilagođeni filter za izabranu datoteku je omogućen"
+  "CustomFilterEnabled": "Prilagođeni filter za izabranu datoteku je omogućen",
+  "Uploading": "Otpremanje"
 }

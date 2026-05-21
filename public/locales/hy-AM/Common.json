@@ -1632,5 +1632,6 @@
   "CustomFilterDisable": "Անջատել Հատուկ ֆիլտրը",
   "CustomFilterDisabled": "Ընտրված ֆայլի անհատական ֆիլտրն անջատված է",
   "CustomFilterEnable": "Միացնել Հատուկ ֆիլտրը",
-  "CustomFilterEnabled": "Հատուկ ֆիլտրն ընտրված ֆայլի համար միացված է"
+  "CustomFilterEnabled": "Հատուկ ֆիլտրն ընտրված ֆայլի համար միացված է",
+  "Uploading": "Վերբեռնում"
 }

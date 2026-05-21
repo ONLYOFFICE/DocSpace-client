@@ -1632,5 +1632,6 @@
   "CustomFilterDisable": "Odstrániť šablónu",
   "CustomFilterDisabled": "Vlastný filter pre vybraný súbor deaktivovaný",
   "CustomFilterEnable": "Povoliť vlastný filter",
-  "CustomFilterEnabled": "Vlastný filter pre vybraný súbor aktivovaný"
+  "CustomFilterEnabled": "Vlastný filter pre vybraný súbor aktivovaný",
+  "Uploading": "Nahrávanie"
 }

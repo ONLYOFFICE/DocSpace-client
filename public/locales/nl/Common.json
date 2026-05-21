@@ -1632,5 +1632,6 @@
   "CustomFilterDisable": "Verwijder sjabloon",
   "CustomFilterDisabled": "Aangepast filter voor geselecteerd bestand uitgeschakeld",
   "CustomFilterEnable": "Aangepast filter inschakelen",
-  "CustomFilterEnabled": "Aangepast filter voor geselecteerd bestand ingeschakeld"
+  "CustomFilterEnabled": "Aangepast filter voor geselecteerd bestand ingeschakeld",
+  "Uploading": "Uploaden"
 }

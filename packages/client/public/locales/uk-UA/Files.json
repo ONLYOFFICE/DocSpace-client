@@ -206,7 +206,6 @@
   "UnarchivedRoomAction": "Кімнату '{{name}}' розархівовано.",
   "UnarchivedRoomsAction": "Кімнати розархівовано.",
   "Unpin": "Відкріпити",
-  "Uploading": "Передавання",
   "UploadingProgress": "Передавання: {{progress}}%",
   "UserLimitDescription": "Визначте кількість користувачів, які можуть приєднатися за цим посиланням запрошення.",
   "UsersJoined": "Користувачі приєдналися:",

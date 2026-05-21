@@ -206,7 +206,6 @@
   "UnarchivedRoomAction": "The room '{{name}}' is unarchived.",
   "UnarchivedRoomsAction": "The rooms are unarchived.",
   "Unpin": "Unpin",
-  "Uploading": "Uploading",
   "UploadingProgress": "Uploading: {{progress}}%",
   "UserLimitDescription": "Define the number of users who can join via this invite link.",
   "UsersJoined": "Users joined:",

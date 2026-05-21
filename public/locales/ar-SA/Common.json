@@ -1632,5 +1632,6 @@
   "CustomFilterDisable": "تعطيل الفلتر المخصص",
   "CustomFilterDisabled": "تم تعطيل الفِلتر المخصص للملف المحدد",
   "CustomFilterEnable": "تمكين الفِلتر المخصص",
-  "CustomFilterEnabled": "تم تمكين الفِلتر المخصص للملف المحدد"
+  "CustomFilterEnabled": "تم تمكين الفِلتر المخصص للملف المحدد",
+  "Uploading": "جارٍ التحميل"
 }

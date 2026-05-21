@@ -206,7 +206,6 @@
   "UnarchivedRoomAction": "Der Raum '{{name}}' ist nicht archiviert.",
   "UnarchivedRoomsAction": "Die Räume sind nicht archiviert.",
   "Unpin": "Entpinnen",
-  "Uploading": "Hochladen",
   "UploadingProgress": "Hochladen: {{progress}} %",
   "UserLimitDescription": "Legen Sie die Anzahl der Benutzer fest, die über diesen Einladungslink beitreten können.",
   "UsersJoined": "Benutzer beigetreten:",

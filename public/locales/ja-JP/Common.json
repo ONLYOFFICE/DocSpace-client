@@ -1632,5 +1632,6 @@
   "CustomFilterDisable": "カスタムフィルターを無効化",
   "CustomFilterDisabled": "選択したファイルのカスタムフィルターが無効になりました",
   "CustomFilterEnable": "カスタムフィルターを有効化",
-  "CustomFilterEnabled": "選択したファイルのカスタムフィルターが有効になりました"
+  "CustomFilterEnabled": "選択したファイルのカスタムフィルターが有効になりました",
+  "Uploading": "アップロード中"
 }

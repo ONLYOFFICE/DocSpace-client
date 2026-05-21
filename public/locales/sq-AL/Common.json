@@ -1632,5 +1632,6 @@
   "CustomFilterDisable": "Çaktivizo filtrin e personalizuar",
   "CustomFilterDisabled": "Filtri i personalizuar për skedarin e zgjedhur është çaktivizuar",
   "CustomFilterEnable": "Aktivizoni filtrin e personalizuar",
-  "CustomFilterEnabled": "Filtri i personalizuar për skedarin e zgjedhur është aktivizuar"
+  "CustomFilterEnabled": "Filtri i personalizuar për skedarin e zgjedhur është aktivizuar",
+  "Uploading": "Ngarkimi"
 }

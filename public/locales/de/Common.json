@@ -1632,5 +1632,6 @@
   "CustomFilterDisable": "Benutzerdefinierten Filter deaktivieren",
   "CustomFilterDisabled": "Benutzerdefinierter Filter für die ausgewählte Datei deaktiviert",
   "CustomFilterEnable": "Benutzerdefinierter Filter aktivieren",
-  "CustomFilterEnabled": "Benutzerdefinierter Filter für die ausgewählte Datei aktiviert"
+  "CustomFilterEnabled": "Benutzerdefinierter Filter für die ausgewählte Datei aktiviert",
+  "Uploading": "Hochladen"
 }

@@ -1632,5 +1632,6 @@
   "CustomFilterDisable": "Dezactivare Filtru particularizat",
   "CustomFilterDisabled": "Filtru particularizat pentru utilizatorul selectat este dezactivat",
   "CustomFilterEnable": "Activare Filtru particularizat",
-  "CustomFilterEnabled": "Filtru particularizat pentru utilizatorul selectat este activat"
+  "CustomFilterEnabled": "Filtru particularizat pentru utilizatorul selectat este activat",
+  "Uploading": "Încărcare"
 }

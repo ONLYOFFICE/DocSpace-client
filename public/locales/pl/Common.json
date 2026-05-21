@@ -1632,5 +1632,6 @@
   "CustomFilterDisable": "Usuń szablon",
   "CustomFilterDisabled": "Niestandardowy filtr dla wybranego pliku wyłączony",
   "CustomFilterEnable": "Włącz niestandardowy filtr",
-  "CustomFilterEnabled": "Niestandardowy filtr dla wybranego pliku włączony"
+  "CustomFilterEnabled": "Niestandardowy filtr dla wybranego pliku włączony",
+  "Uploading": "Wysyłanie"
 }

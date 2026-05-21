@@ -43,6 +43,7 @@ import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
 import CatalogAiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
 import CatalogFavoritesReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.favorites.react.svg?url";
+import CatalogSharedReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.shared.outline.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 import CatalogArchiveReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.archive.react.svg?url";
 import CatalogSettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
@@ -66,6 +67,7 @@ const PATH_TO_PARENT_ID: Record<string, string> = {
 };
 
 const AI_FILES_SECTION_TO_ID: Record<string, string> = {
+  "shared-with-me": "ai-files-shared-with-me",
   recent: "ai-files-recent",
   favorites: "ai-files-favorites",
   trash: "ai-files-trash",
@@ -75,6 +77,7 @@ const AI_FILES_SECTION_TO_ID: Record<string, string> = {
 const AI_FORMS_SECTION_TO_ID: Record<string, string> = {
   "in-progress": "ai-forms-in-progress",
   "completed-forms": "ai-forms-completed",
+  library: "ai-forms-library",
   settings: "ai-forms-settings",
 };
 
@@ -89,10 +92,12 @@ type NewArticleProps = {
   user?: TUser | null;
   currentDeviceType: DeviceType;
   articleOpen: boolean;
+  isNotPaidPeriod: boolean;
   aiFilesEnabled: boolean;
   aiFormsEnabled: boolean;
   aiRoomsEnabled: boolean;
   aiAgentsEnabled: boolean;
+  activate: (id: string) => Promise<boolean>;
   ensureAppsLoaded: () => void;
   toggleArticleOpen: () => void;
 };
@@ -101,10 +106,12 @@ const NewArticle = ({
   user,
   currentDeviceType,
   articleOpen,
+  isNotPaidPeriod,
   aiFilesEnabled,
   aiFormsEnabled,
   aiRoomsEnabled,
   aiAgentsEnabled,
+  activate,
   ensureAppsLoaded,
   toggleArticleOpen,
 }: NewArticleProps) => {
@@ -121,6 +128,9 @@ const NewArticle = ({
     storageKey: "home_showSidebarText",
     currentDeviceType,
   });
+
+  const isAdminOrOwner = (user?.isAdmin ?? false) || (user?.isOwner ?? false);
+  const canCreateForms = !(user?.isVisitor ?? false) && !(user?.isCollaborator ?? false);
 
   const activeId = React.useMemo(() => {
     const section = new URLSearchParams(location.search).get("section") ?? "";
@@ -150,6 +160,12 @@ const NewArticle = ({
       children: aiFilesEnabled
         ? [
             {
+              id: "ai-files-shared-with-me",
+              label: t("Common:SharedWithMe"),
+              icon: CatalogSharedReactSvgUrl,
+              onClick: () => navigate("/ai-files?section=shared-with-me"),
+            },
+            {
               id: "ai-files-recent",
               label: t("Common:Recent"),
               icon: CatalogRestoreReactSvgUrl,
@@ -167,23 +183,43 @@ const NewArticle = ({
               icon: CatalogTrashReactSvgUrl,
               onClick: () => navigate("/ai-files?section=trash"),
             },
-            {
-              id: "ai-files-settings",
-              label: t("Common:Settings"),
-              icon: CatalogSettingsReactSvgUrl,
-              onClick: () => navigate("/ai-files?section=settings"),
-            },
+            ...(isAdminOrOwner
+              ? [
+                  {
+                    id: "ai-files-settings",
+                    label: t("Common:Settings"),
+                    icon: CatalogSettingsReactSvgUrl,
+                    onClick: () => navigate("/ai-files?section=settings"),
+                  },
+                ]
+              : []),
           ]
         : undefined,
+    };
+
+    const handleAiFormsClick = async () => {
+      if (aiFormsEnabled) {
+        navigate("/ai-forms");
+        return;
+      }
+      try {
+        const activated = await activate("ai-forms");
+        if (activated) {
+          navigate("/ai-forms");
+        } else {
+          setInstallDialogVisible(true);
+        }
+      } catch (err) {
+        console.error("Failed to activate ai-forms", err);
+        toastr.error(t("Common:SomethingWentWrong"));
+      }
     };
 
     const aiFormsItem: NavMenuItem = {
       id: AI_FORMS_ID,
       label: t("Common:DashboardAIFormsTitle"),
       icon: FormFileReactSvgUrl,
-      onClick: aiFormsEnabled
-        ? () => navigate("/ai-forms")
-        : () => setInstallDialogVisible(true),
+      onClick: handleAiFormsClick,
       children: aiFormsEnabled
         ? [
             {
@@ -198,12 +234,26 @@ const NewArticle = ({
               icon: FormGalleryReactSvgUrl,
               onClick: () => navigate("/ai-forms?section=completed-forms"),
             },
-            {
-              id: "ai-forms-settings",
-              label: t("Common:Settings"),
-              icon: CatalogSettingsReactSvgUrl,
-              onClick: () => navigate("/ai-forms?section=settings"),
-            },
+            ...(canCreateForms
+              ? [
+                  {
+                    id: "ai-forms-library",
+                    label: t("Common:Library"),
+                    icon: FormGalleryReactSvgUrl,
+                    onClick: () => navigate("/ai-forms?section=library"),
+                  },
+                ]
+              : []),
+            ...(isAdminOrOwner
+              ? [
+                  {
+                    id: "ai-forms-settings",
+                    label: t("Common:Settings"),
+                    icon: CatalogSettingsReactSvgUrl,
+                    onClick: () => navigate("/ai-forms?section=settings"),
+                  },
+                ]
+              : []),
           ]
         : undefined,
     };
@@ -256,15 +306,17 @@ const NewArticle = ({
     const enabled = all.filter((x) => x.enabled).map((x) => x.item);
     const available = all.filter((x) => !x.enabled).map((x) => x.item);
 
+    const hasAvailableGroup = isAdminOrOwner && available.length > 0;
+
     const result: NavMenuGroup[] = [];
     if (enabled.length > 0) {
       result.push({
         id: "enabled",
-        label: t("Common:EnabledApps"),
+        label: hasAvailableGroup ? t("Common:EnabledApps") : undefined,
         items: enabled,
       });
     }
-    if (available.length > 0) {
+    if (hasAvailableGroup) {
       result.push({
         id: "available",
         label: t("Common:AvailableApps"),
@@ -275,10 +327,13 @@ const NewArticle = ({
   }, [
     t,
     navigate,
+    isAdminOrOwner,
+    canCreateForms,
     aiFilesEnabled,
     aiFormsEnabled,
     aiRoomsEnabled,
     aiAgentsEnabled,
+    activate,
   ]);
 
   return (
@@ -290,6 +345,7 @@ const NewArticle = ({
         toggleShowText={toggleShowText}
         currentDeviceType={currentDeviceType}
         user={user}
+        isNotPaidPeriod={isNotPaidPeriod}
         articleOpen={articleOpen}
         toggleArticleOpen={toggleArticleOpen}
       />
@@ -306,15 +362,17 @@ const NewArticle = ({
 };
 
 const NewArticleConnected = inject<TStore>(
-  ({ userStore, settingsStore, appsStore }) => ({
+  ({ userStore, settingsStore, appsStore, currentTariffStatusStore }) => ({
     user: userStore.user,
     currentDeviceType: settingsStore.currentDeviceType,
     articleOpen: settingsStore.articleOpen,
     toggleArticleOpen: settingsStore.toggleArticleOpen,
+    isNotPaidPeriod: currentTariffStatusStore.isNotPaidPeriod,
     aiFilesEnabled: appsStore.isEnabled("ai-files"),
     aiFormsEnabled: appsStore.isEnabled("ai-forms"),
     aiRoomsEnabled: appsStore.isEnabled("ai-rooms"),
     aiAgentsEnabled: appsStore.isEnabled("ai-agents"),
+    activate: appsStore.activate,
     ensureAppsLoaded: appsStore.ensureLoaded,
   }),
 )(observer(NewArticle));

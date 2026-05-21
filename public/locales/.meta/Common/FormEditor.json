@@ -3,7 +3,7 @@
   "content": "Form Editor",
   "content_en_sha1_hash": "be7d294a7b97e4587686a9c35179cf9a2a75ad9a",
   "created_at": "2026-03-20T09:07:30.934Z",
-  "updated_at": "2026-04-23T17:24:02.135Z",
+  "updated_at": "2026-05-15T14:00:06.976Z",
   "comment": {
     "text": "This is the title of the iframe that contains the form editor interface. It appears when a user is creating or editing a form.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/forms-editor/index.tsx",
-      "line_number": 277,
+      "line_number": 286,
       "context": "className={\n isIframeLoaded ? styles.editorIframe : styles.editorIframeHidden\n }\n allow=\"autoplay; camera; microphone; display-capture; clipboard-write\"\n referrerPolicy=\"no-referrer\"\n title={t(\"Common:FormEditor\")}\n />\n )}\n </div>\n );\n };",
       "module": "/packages/sdk"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

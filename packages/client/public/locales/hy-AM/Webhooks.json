@@ -1,7 +1,7 @@
 {
-  "AgentCreated": "AI Գործակից ստեղծվեց",
-  "AgentDeleted": "AI Agent-ը ջնջվեց",
-  "AgentUpdated": "AI Agent-ը թարմացվեց",
+  "AgentCreated": "ԱԲ-Գործակից ստեղծվեց",
+  "AgentDeleted": "ԱԲ-Գործակից-ը ջնջվեց",
+  "AgentUpdated": "ԱԲ-Գործակից-ը թարմացվեց",
   "Before": "Նախքան",
   "CreateWebhook": "Ստեղծեք վեբ կեռիկ",
   "DeleteHint": "Webhook-ը ընդմիշտ կջնջվի:\nԴուք չեք կարողանա հետարկել այս գործողությունը:",

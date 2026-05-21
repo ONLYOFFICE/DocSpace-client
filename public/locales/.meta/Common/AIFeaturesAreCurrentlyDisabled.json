@@ -3,7 +3,7 @@
   "content": "AI features are currently disabled",
   "content_en_sha1_hash": "6adeffc685fa3ba4cb9a4a3d009c17fcc6414f1f",
   "created_at": "2025-11-03T12:10:13.543Z",
-  "updated_at": "2026-04-11T21:00:26.092Z",
+  "updated_at": "2026-05-15T14:00:06.988Z",
   "comment": {
     "text": "This is an informational message displayed in the chat interface or on a screen when AI features are unavailable. It informs the user that AI functionality is currently turned off.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-info-block/index.tsx",
-      "line_number": 58,
+      "line_number": 65,
       "context": "});\n \n return (\n <PublicRoomBar\n className={styles.chatInfoBlock}\n headerText={t(\"AIFeaturesAreCurrentlyDisabled\")}\n bodyText={bodyText}\n iconName={<InfoIcon />}\n dataTestId=\"chat-info-block\"\n />\n );",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-no-access-screen/index.tsx",
-      "line_number": 65,
+      "line_number": 74,
       "context": "const title =\n isPortalAdmin && standalone\n ? t(\"EmptyAIAgentsAIDisabledStandaloneAdminTitle\", {\n aiProvider: t(\"AIProvider\"),\n })\n : t(\"AIFeaturesAreCurrentlyDisabled\");\n \n const description = match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>\n t(",
       "module": "/libs/ui-kit"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "All",
   "content_en_sha1_hash": "6a72085653e4c5be8c7640c868ef787cbcf063d1",
   "created_at": "2025-05-19T21:30:42.972Z",
-  "updated_at": "2026-04-11T20:59:32.055Z",
+  "updated_at": "2026-05-15T14:00:06.716Z",
   "comment": {
     "text": "This is a label for a filter option or a tab. It represents a selection that includes all available items or permissions, as opposed to a restricted or specific subset.",
     "is_auto": true,
@@ -13,31 +13,31 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/contacts/utils.ts",
-      "line_number": 206,
+      "line_number": 215,
       "context": "case \"pending\":\n return t(\"PeopleTranslations:PendingInviteTitle\");\n case \"disabled\":\n return t(\"PeopleTranslations:DisabledEmployeeStatus\");\n case \"all\":\n return t(\"Common:All\");\n default:\n return \"\";\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 186,
+      "line_number": 195,
       "context": "const permissionsList = getPermissionsList();\n \n const tabsItems = [\n {\n id: \"all\",\n name: t(\"Common:All\"),\n content: null,\n },\n {\n id: \"restricted\",\n name: t(\"Common:Restricted\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/utils.ts",
-      "line_number": 117,
+      "line_number": 126,
       "context": "key: \"all\" | \"readonly\" | \"restricted\",\n t: TTranslation,\n ) => {\n switch (key) {\n case \"all\":\n return t(\"Common:All\");\n case \"readonly\":\n return t(\"Common:ReadOnly\");\n case \"restricted\":\n return t(\"Common:Restricted\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/utils.ts",
-      "line_number": 117,
+      "line_number": 126,
       "context": "key: \"all\" | \"readonly\" | \"restricted\",\n t: TTranslation,\n ) => {\n switch (key) {\n case \"all\":\n return t(\"Common:All\");\n case \"readonly\":\n return t(\"Common:ReadOnly\");\n case \"restricted\":\n return t(\"Common:Restricted\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 312,
+      "line_number": 321,
       "context": "t: TTranslation,\n key: FilterType | RoomsType | string,\n ) => {\n switch (key) {\n case \"all\":\n return t(\"Common:All\");\n case FilterType.FoldersOnly:\n return t(\"Common:Folders\");\n case FilterType.DocumentsOnly:\n return t(\"Common:Documents\");\n case FilterType.PresentationsOnly:",
       "module": "/packages/shared"
     }

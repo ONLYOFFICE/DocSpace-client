@@ -3,7 +3,7 @@
   "content": "The invitation will be sent again to the selected users with the 'Pending' status.",
   "content_en_sha1_hash": "55886668778f3f617d123dd0f693ab2a77946f58",
   "created_at": "2025-05-19T21:30:53.268Z",
-  "updated_at": "2026-04-11T21:21:13.999Z",
+  "updated_at": "2026-05-15T14:00:06.695Z",
   "comment": {
     "text": "This is a message in a confirmation dialog. It informs the user that invitations will be resent to users whose previous invitations are still pending.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SendInviteDialog/index.js",
-      "line_number": 88,
+      "line_number": 97,
       "context": ">\n <ModalDialog.Header>\n {t(\"PeopleTranslations:SendInviteAgain\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"SendInviteAgainDialog\")}</Text>\n <Text>{t(\"SendInviteAgainDialogMessage\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"send-inite-again-modal_submit\"",
       "module": "/packages/client"
     }

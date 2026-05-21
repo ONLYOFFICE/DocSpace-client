@@ -1,19 +1,19 @@
 {
   "key_path": "DeleteRoomsTitle",
-  "content": "Delete this room?",
-  "content_en_sha1_hash": "efa9534b795643580e429b3ae955bc0e86472b24",
-  "created_at": "2026-03-31T15:18:41.884Z",
-  "updated_at": "2026-04-11T21:05:33.820Z",
+  "content": "Delete these rooms?",
+  "content_en_sha1_hash": "c967f45320fc05a009dc2435460fcd31e741161b",
+  "created_at": "2026-05-15T14:00:05.314Z",
+  "updated_at": "2026-05-15T14:10:19.934Z",
   "comment": {
-    "text": "This is the title of a confirmation dialog that appears when a user attempts to delete multiple rooms.",
+    "text": "Dialog title used for confirmation when multiple rooms are selected for deletion.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:05:33.820Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-05-15T14:10:19.934Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 213,
+      "line_number": 222,
       "context": "if (isTemplate) {\n return `${t(\"Files:DeleteTemplateAction\")}?`;\n }\n \n if (isRoomDelete) {\n if (selection.length > 1) return t(\"DeleteRoomsTitle\");\n return t(\"DeleteRoomTitle\");\n }\n \n if (isRecycleBinFolder) return t(\"EmptyTrashDialog:DeleteForeverTitle\");",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

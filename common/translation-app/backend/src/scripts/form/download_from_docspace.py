@@ -389,6 +389,17 @@ def extract_project_and_language_from_filename(filename: str) -> Tuple[Optional[
     return None, None
 
 
+def _key_exists_in_dict(data: dict, key: str) -> bool:
+    """Check if a dotted key path exists in a nested dict."""
+    parts = key.split('.')
+    current = data
+    for part in parts:
+        if not isinstance(current, dict) or part not in current:
+            return False
+        current = current[part]
+    return True
+
+
 def save_translations_to_locales(
     translations: Dict[str, Dict[str, Dict[str, Any]]],
     project_name: str,
@@ -424,6 +435,16 @@ def save_translations_to_locales(
     for namespace, keys in translations.items():
         file_path = lang_path / f"{namespace}.json"
 
+        # Load English reference to filter out deleted keys
+        en_file_path = project_path / "en" / f"{namespace}.json"
+        en_data: dict = {}
+        if en_file_path.exists():
+            try:
+                with open(en_file_path, 'r', encoding='utf-8') as f:
+                    en_data = json.load(f)
+            except json.JSONDecodeError:
+                pass  # If unreadable, allow all keys (safe fallback)
+
         # Load existing translations
         existing_data = {}
         if file_path.exists():
@@ -439,6 +460,12 @@ def save_translations_to_locales(
         for key, data in keys.items():
             target_value = data.get('target', '')
             is_confirmed = data.get('confirmed', False)
+
+            # Skip keys that no longer exist in the English source
+            if en_data and not _key_exists_in_dict(en_data, key):
+                print(f"    ⚠ Skipping deleted key: {namespace}:{key}")
+                skipped_count += 1
+                continue
 
             # Skip if not confirmed and only_confirmed is True
             if only_confirmed and not is_confirmed:
@@ -513,9 +540,23 @@ def save_translations_to_metadata(
         if not namespace_meta_path.exists() and not dry_run:
             namespace_meta_path.mkdir(parents=True, exist_ok=True)
 
+        # Load English reference to filter out deleted keys
+        en_file_path = project_path / "en" / f"{namespace}.json"
+        en_data: dict = {}
+        if en_file_path.exists():
+            try:
+                with open(en_file_path, 'r', encoding='utf-8') as f:
+                    en_data = json.load(f)
+            except json.JSONDecodeError:
+                pass
+
         for key, data in keys.items():
             target_value = data.get('target', '')
             is_confirmed = data.get('confirmed', False)
+
+            # Skip keys that no longer exist in the English source
+            if en_data and not _key_exists_in_dict(en_data, key):
+                continue
 
             # Skip empty translations
             if not target_value or not target_value.strip():

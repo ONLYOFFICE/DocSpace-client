@@ -3,7 +3,7 @@
   "content": "Only a room admin or a {{productName}} admin can become the owner of the room",
   "content_en_sha1_hash": "8ede5abe2c677bff3d329bb01b0c44bc63d58938",
   "created_at": "2025-05-19T21:30:56.817Z",
-  "updated_at": "2026-05-08T13:10:45.585Z",
+  "updated_at": "2026-05-15T14:00:06.700Z",
   "comment": {
     "text": "This is an informational message displayed in a people selector. It explains who is eligible to become the owner of a room, with `{{productName}}` being replaced by the product's brand name.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 531,
+      "line_number": 538,
       "context": "headerLabel: t(\"ListContacts\"),\n }}\n filter={() => filter(withoutRoleFilter)}\n {...infoProps}\n emptyScreenHeader={t(\"NotFoundMembers\")}\n emptyScreenDescription={t(\"PeopleSelectorInfo\", {\n productName: getBrandName(\"ProductName\"),\n })}\n />\n ) : null;",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 99,
+      "line_number": 108,
       "context": "const infoText = isAIAgent\n ? t(\"Files:ChangeAgentOwnerSelectorInfo\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"CreateEditRoomDialog:PeopleSelectorInfo\", {\n productName: getBrandName(\"ProductName\"),\n });\n \n const footerCheckboxLabel = isAIAgent\n ? t(\"Files:LeaveTheAgent\")",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

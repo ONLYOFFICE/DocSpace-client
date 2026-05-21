@@ -3,7 +3,7 @@
   "content": "Save here",
   "content_en_sha1_hash": "2f59885d38dc68521d61e5eb75fd8f19891f7b1e",
   "created_at": "2025-05-19T21:30:48.310Z",
-  "updated_at": "2026-04-13T02:32:12.366Z",
+  "updated_at": "2026-05-15T14:00:06.612Z",
   "comment": {
     "text": "This is a button label that appears in file selection dialogs, allowing the user to save a file to the currently displayed folder.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 94,
+      "line_number": 103,
       "context": "if (filterParam === FilesSelectorFilterTypes.DOCX) return t(\"Common:Create\");\n // if (filterParam === FilesSelectorFilterTypes.DOCXF) return t(\"Common:SubmitToGallery\");\n if (filterParam) return t(\"Common:SaveButton\");\n \n return t(\"Common:SaveHereButton\");\n };\n \n export const getIsDisabled = (\n isFirstLoad: boolean,\n isSelectedParentFolder: boolean,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/components/SelectFolderDialog.tsx",
-      "line_number": 91,
+      "line_number": 100,
       "context": "withoutBackButton\n withCancelButton\n disabledItems={[]}\n disabledFolderType={FolderType.ResultStorage as SdkFolderType}\n onSubmit={onSubmit}\n submitButtonLabel={t(\"Common:SaveHereButton\")}\n submitButtonId=\"select-file-modal-submit\"\n footerInputHeader={t(\"Common:FileName\")}\n currentFooterInputValue={titleSelectorFolder}\n footerCheckboxLabel={t(\"Common:OpenSavedDocument\")}\n isPanelVisible={isVisible}",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/shared/components/files-selector-input/FilesSelector.helpers.ts",
-      "line_number": 58,
+      "line_number": 67,
       "context": "if (isSelect || isSelectFolder) return t(\"Common:SelectAction\");\n \n if (filterParam === FilesSelectorFilterTypes.DOCX) return t(\"Common:Create\");\n if (filterParam) return t(\"Common:SaveButton\");\n \n return t(\"Common:SaveHereButton\");\n };\n \n export const getIsDisabled = (\n isFirstLoad: boolean,\n isSelectedParentFolder: boolean,",
       "module": "/packages/shared"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

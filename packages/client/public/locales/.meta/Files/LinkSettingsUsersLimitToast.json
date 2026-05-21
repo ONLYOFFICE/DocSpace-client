@@ -3,7 +3,7 @@
   "content": "Registration via the link is no longer available since the limit has been exceeded.",
   "content_en_sha1_hash": "f23309f56f14eac0c18f5ca0a8c7af1411e7e338",
   "created_at": "2026-02-19T13:36:27.582Z",
-  "updated_at": "2026-04-11T21:09:07.472Z",
+  "updated_at": "2026-05-15T14:00:06.709Z",
   "comment": {
     "text": "This appears when the user limit for registration via a shared link has been reached, indicating that further registrations are not possible.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
-      "line_number": 327,
+      "line_number": 336,
       "context": "<HelpButton\n place=\"right\"\n iconNode={<ButtonAlertIcon />}\n tooltipContent={\n <>\n <Text>{t(\"Files:LinkSettingsUsersLimitToast\")}</Text>\n <Text>\n {t(\"Files:LinkSettingsUsersLimitToastDescription\")}\n </Text>\n </>\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/LinkSettingsPanel/index.tsx",
-      "line_number": 237,
+      "line_number": 246,
       "context": "{showUsersLimitWarning ? (\n <HelpButton\n place=\"right\"\n iconNode={<ButtonAlertIcon />}\n tooltipContent={\n <Text>{t(\"Files:LinkSettingsUsersLimitToast\")}</Text>\n }\n className={styles.linkSettingsHelpButton}\n />\n ) : null}\n </div>",
       "module": "/packages/client"
     }
@@ -30,6 +30,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     }
   }
 }

@@ -3,7 +3,7 @@
   "content": "<1 day",
   "content_en_sha1_hash": "96d213784a1611112253ee714571c9ff72ac1aca",
   "created_at": "2026-04-10T13:53:45.329Z",
-  "updated_at": "2026-05-08T13:10:45.736Z",
+  "updated_at": "2026-05-15T14:00:07.010Z",
   "comment": {
     "text": "This is a short label indicating that the remaining time until storage expiry is less than one day. It appears in the order summary section of the billing panel.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
-      "line_number": 182,
+      "line_number": 191,
       "context": "daysUntilStorageExpiry > 1\n ? Duration.fromObject(\n { days: daysUntilStorageExpiry },\n { locale: language },\n ).toHuman()\n : t(\"LessThanOneDay\");\n \n return (\n <div className={styles.orderSummaryWrapper}>\n <Text fontWeight=\"700\" fontSize=\"16px\">\n {t(\"OrderSummary\")}",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

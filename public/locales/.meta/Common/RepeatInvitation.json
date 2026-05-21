@@ -3,7 +3,7 @@
   "content": "Repeat invitation",
   "content_en_sha1_hash": "478aa7782da483f4ed5158c15cf5ef9cae159576",
   "created_at": "2025-05-19T21:30:47.863Z",
-  "updated_at": "2026-04-12T02:47:43.668Z",
+  "updated_at": "2026-05-15T14:00:06.938Z",
   "comment": {
     "text": "This is the tooltip text for an icon button. It appears when a user hovers over the button to resend an invitation to a DocSpace member.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/sub-components/User.tsx",
-      "line_number": 161,
+      "line_number": 170,
       "context": "</Text>\n \n {showInviteIcon ? (\n <IconButton\n className=\"icon\"\n title={t(\"Common:RepeatInvitation\")}\n iconName={EmailPlusReactSvgUrl}\n isFill\n onClick={onRepeatInvitation}\n size={16}\n data-testid=\"info_panel_members_repeat_invitation_button\"",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Log in to continue",
   "content_en_sha1_hash": "4d9fbae80d6981cfcad6ccaac1c77a8b467ea3fe",
   "created_at": "2025-05-19T21:30:57.245Z",
-  "updated_at": "2026-04-11T21:31:13.288Z",
+  "updated_at": "2026-05-15T14:00:06.919Z",
   "comment": {
     "text": "This is part of a toast message displayed after a user successfully confirms their email address. It prompts the user to log in to proceed.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/components/LoginForm/index.tsx",
-      "line_number": 354,
+      "line_number": 363,
       "context": "sessionStorage.removeItem(\"confirmedData\");\n }\n \n if (email && ready && !emailConfirmedToastShown.current) {\n const messageEmailConfirmed = t(\"MessageEmailConfirmed\");\n const messageAuthorize = t(\"MessageAuthorize\");\n const text = `${messageEmailConfirmed} ${messageAuthorize}`;\n \n toastr.success(text);\n emailConfirmedToastShown.current = true;\n }",
       "module": "/packages/login"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.470988Z"
+      "approved_at": "2026-05-15T15:04:54.629887Z"
     },
     "si": {
       "ai_translated": false,

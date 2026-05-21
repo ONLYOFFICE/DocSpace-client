@@ -28,6 +28,15 @@
 	}
 }
 
+.root :global(.layout-progress-bar_wrapper) {
+	@include mixins.tablet-and-below {
+		position: absolute;
+		z-index: 300;
+		inset-inline-end: 16px;
+		bottom: 16px;
+	}
+}
+
 .sectionArea {
 	position: relative;
 	flex-grow: 1;

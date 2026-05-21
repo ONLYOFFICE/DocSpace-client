@@ -3,7 +3,7 @@
   "content": "Learn more about {{license}} Edition on the <1>official website</1>",
   "content_en_sha1_hash": "62cad8c148a203ce2ed7a69d5c5c57a129dd8912",
   "created_at": "2025-05-26T07:15:49.119Z",
-  "updated_at": "2026-04-12T13:38:32.041Z",
+  "updated_at": "2026-05-15T14:00:06.958Z",
   "comment": {
     "text": "This is a short informational message displayed in a banner, encouraging users to learn more about a specific ONLYOFFICE edition. `{{license}}` will be replaced with the name of the edition (e.g., \"Enterprise\"). `<1></1>` is a tag for a clickable link to the official website.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/common/ContactContainer.tsx",
-      "line_number": 61,
+      "line_number": 70,
       "context": "className={styles.contactComponent}\n >\n <div className={styles.paymentsContact}>\n <Text className={styles.text} fontWeight={600}>\n <Trans\n i18nKey=\"UpgradeToProBannerInformationAboutShort\"\n ns=\"Common\"\n t={t}\n values={{ license: t(\"Common:EnterpriseLicense\") }}\n components={{\n 1: (",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

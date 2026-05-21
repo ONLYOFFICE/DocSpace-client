@@ -38,6 +38,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import { TwoStateToggle } from "@docspace/ui-kit/components/two-state-toggle";
 import { getPersonalFolderTree } from "@docspace/shared/api/files";
 import { getConstName } from "@docspace/shared/constants/consts";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 import {
   BlankPdfIcon,
@@ -46,40 +47,30 @@ import {
   CreateSpreadsheetIcon,
 } from "@docspace/ui-kit/components/quick-actions/icons";
 
-import CatalogFolderIcon from "@docspace/ui-kit/assets/icons/16/catalog.folder.react.svg";
-import CatalogRoomsIcon from "@docspace/ui-kit/assets/icons/16/catalog.rooms.react.svg";
-import CatalogDocumentsIcon from "@docspace/ui-kit/assets/icons/16/catalog.documents.react.svg";
-import AiAgentsIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
-
 import BgPatternGreenUrl from "PUBLIC_DIR/images/background.pattern.green.react.svg?url";
 
+import { useAppsCatalog, type AppId } from "SRC_DIR/helpers/apps-catalog";
+
 import { ModuleCard, type ModuleItem } from "./ModuleCard";
-import {
-  type DashboardModuleId,
-  getGreetingKey,
-  makeCreateUrl,
-  NEW_FILE_NAMES,
-} from "./utils";
+import { getGreetingKey, makeCreateUrl, NEW_FILE_NAMES } from "./utils";
 import { InstallAiFormsDialog } from "./InstallModuleDialog";
 import styles from "./Dashboard.module.scss";
 
 interface DashboardProps {
   firstName?: string;
   pricingUrl?: string;
-  aiFilesEnabled: boolean;
-  aiFormsEnabled: boolean;
-  aiRoomsEnabled: boolean;
-  aiAgentsEnabled: boolean;
+  isAdminOrOwner: boolean;
+  isAppEnabled: (id: string) => boolean;
+  activate: (id: string) => Promise<boolean>;
   ensureAppsLoaded: () => void;
 }
 
 const Dashboard = ({
   firstName,
   pricingUrl,
-  aiFilesEnabled,
-  aiFormsEnabled,
-  aiRoomsEnabled,
-  aiAgentsEnabled,
+  isAdminOrOwner,
+  isAppEnabled,
+  activate,
   ensureAppsLoaded,
 }: DashboardProps) => {
   const { t } = useTranslation(["Common"]);
@@ -143,12 +134,24 @@ const Dashboard = ({
     [t, myFolderId],
   );
 
-  const handleInstall = (modId: DashboardModuleId) => {
-    if (modId === "ai-forms") {
-      setInstallDialogVisible(true);
+  const appsCatalog = useAppsCatalog();
+
+  const handleInstall = async (modId: AppId) => {
+    if (modId !== "ai-forms") {
+      toastr.info(t("Common:UnderDevelopment"));
       return;
     }
-    toastr.info(t("Common:UnderDevelopment"));
+    try {
+      const activated = await activate("ai-forms");
+      if (activated) {
+        navigate("/ai-forms");
+      } else {
+        setInstallDialogVisible(true);
+      }
+    } catch (err) {
+      console.error("Failed to activate ai-forms", err);
+      toastr.error(t("Common:SomethingWentWrong"));
+    }
   };
 
   const handleInstalled = () => {
@@ -175,38 +178,16 @@ const Dashboard = ({
     return <Navigate to="/dashboard" replace />;
   }
 
-  const moduleItems: ModuleItem[] = [
-    {
-      id: "ai-files",
-      icon: <CatalogFolderIcon />,
-      title: t("Common:DashboardAIFilesTitle"),
-      description: t("Common:DashboardAIFilesDescription"),
-      installed: aiFilesEnabled,
-      href: "/ai-files",
-    },
-    {
-      id: "ai-rooms",
-      icon: <CatalogRoomsIcon />,
-      title: t("Common:DashboardAIRoomsTitle"),
-      description: t("Common:DashboardAIRoomsDescription"),
-      installed: aiRoomsEnabled,
-    },
-    {
-      id: "ai-forms",
-      icon: <CatalogDocumentsIcon />,
-      title: t("Common:DashboardAIFormsTitle"),
-      description: t("Common:DashboardAIFormsDescription"),
-      installed: aiFormsEnabled,
-      href: "/ai-forms",
-    },
-    {
-      id: "ai-agents",
-      icon: <AiAgentsIcon />,
-      title: t("Common:DashboardAIChatAgentsTitle"),
-      description: t("Common:DashboardAIChatAgentsDescription"),
-      installed: aiAgentsEnabled,
-    },
-  ];
+  const moduleItems: ModuleItem[] = appsCatalog
+    .map((app) => ({
+      id: app.id,
+      icon: app.icon,
+      title: app.title,
+      description: app.description,
+      installed: app.alwaysOn ? true : isAppEnabled(app.id),
+      href: app.href,
+    }))
+    .filter((mod) => isAdminOrOwner || mod.installed);
 
   return (
     <div className={styles.dashboard}>
@@ -231,51 +212,57 @@ const Dashboard = ({
         <Text as="h2" className={styles.sectionTitle}>
           {t("Common:Modules")}
         </Text>
-        <Text as="p" className={styles.sectionSubtitle}>
-          {t("Common:DashboardModulesSubtitle")}
-        </Text>
+        {isAdminOrOwner && (
+          <Text as="p" className={styles.sectionSubtitle}>
+            {t("Common:DashboardModulesSubtitle", {
+              productName: getBrandName("ProductName"),
+            })}
+          </Text>
+        )}
 
-        <div
-          className={styles.modulesBanner}
-          style={
-            {
-              "--modules-banner-bg": `url('${BgPatternGreenUrl}')`,
-            } as React.CSSProperties
-          }
-        >
-          <div className={styles.modulesBannerText}>
-            <Text as="p" className={styles.modulesBannerTitle}>
-              {t("Common:DashboardModulesBannerText")}
-            </Text>
-            <div className={styles.modulesBannerTags}>
-              <Text as="span" className={styles.modulesBannerTag}>
-                {t("Common:NoBundlesRequired")}
+        {isAdminOrOwner && (
+          <div
+            className={styles.modulesBanner}
+            style={
+              {
+                "--modules-banner-bg": `url('${BgPatternGreenUrl}')`,
+              } as React.CSSProperties
+            }
+          >
+            <div className={styles.modulesBannerText}>
+              <Text as="p" className={styles.modulesBannerTitle}>
+                {t("Common:DashboardModulesBannerText")}
               </Text>
-              <Text as="span" className={styles.modulesBannerTag}>
-                {t("Common:AddOrRemoveAnytime")}
-              </Text>
-              <Text as="span" className={styles.modulesBannerTag}>
-                {t("Common:PayPerModule")}
-              </Text>
+              <div className={styles.modulesBannerTags}>
+                <Text as="span" className={styles.modulesBannerTag}>
+                  {t("Common:NoBundlesRequired")}
+                </Text>
+                <Text as="span" className={styles.modulesBannerTag}>
+                  {t("Common:AddOrRemoveAnytime")}
+                </Text>
+                <Text as="span" className={styles.modulesBannerTag}>
+                  {t("Common:PayPerModule")}
+                </Text>
+              </div>
             </div>
+            <Button
+              className={styles.modulesPricingBtn}
+              label={t("Common:SeePricing")}
+              size={ButtonSize.small}
+              isDisabled={!pricingUrl}
+              onClick={() => {
+                if (pricingUrl) window.open(pricingUrl, "_blank");
+              }}
+            />
           </div>
-          <Button
-            className={styles.modulesPricingBtn}
-            label={t("Common:SeePricing")}
-            size={ButtonSize.small}
-            isDisabled={!pricingUrl}
-            onClick={() => {
-              if (pricingUrl) window.open(pricingUrl, "_blank");
-            }}
-          />
-        </div>
+        )}
 
         <div className={styles.modulesGrid}>
           {moduleItems.map((mod) => (
             <ModuleCard
               key={mod.id}
               mod={mod}
-              onInstall={() => handleInstall(mod.id as DashboardModuleId)}
+              onInstall={() => handleInstall(mod.id as AppId)}
             />
           ))}
         </div>
@@ -293,11 +280,11 @@ const Dashboard = ({
 const DashboardConnected = inject<TStore>(
   ({ userStore, settingsStore, appsStore }) => ({
     firstName: userStore.user?.firstName,
+    isAdminOrOwner:
+      (userStore.user?.isAdmin ?? false) || (userStore.user?.isOwner ?? false),
     pricingUrl: settingsStore.docspacePricesUrl,
-    aiFilesEnabled: appsStore.isEnabled("ai-files"),
-    aiFormsEnabled: appsStore.isEnabled("ai-forms"),
-    aiRoomsEnabled: appsStore.isEnabled("ai-rooms"),
-    aiAgentsEnabled: appsStore.isEnabled("ai-agents"),
+    isAppEnabled: appsStore.isEnabled,
+    activate: appsStore.activate,
     ensureAppsLoaded: appsStore.ensureLoaded,
   }),
 )(observer(Dashboard));

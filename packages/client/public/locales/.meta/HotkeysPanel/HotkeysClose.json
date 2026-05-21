@@ -3,7 +3,7 @@
   "content": "Close/Undo action",
   "content_en_sha1_hash": "f35d7016328d50eb3048f8ac879c03bc5d042b61",
   "created_at": "2025-05-19T21:30:55.031Z",
-  "updated_at": "2026-04-11T21:12:23.243Z",
+  "updated_at": "2026-05-15T14:00:06.705Z",
   "comment": {
     "text": "This text describes the action performed by a hotkey. It appears in the hotkeys panel and indicates that the hotkey closes or undoes an action.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/PreviewActionsBlock.js",
-      "line_number": 42,
+      "line_number": 51,
       "context": "<Text {...keyTextStyles}>Shift + c</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"HotkeysClose\")}</Text>\n <Text {...keyTextStyles}>Esc</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>",
       "module": "/packages/client"
     }

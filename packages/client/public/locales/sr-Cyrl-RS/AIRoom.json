@@ -1,7 +1,7 @@
 {
   "AgentInViewModeWarning": "Ви налазитесь у режиму <strong>само за преглед</strong> за овог {{aiAgent}}. Можете видети резултате {{aiChat}} активности других корисника.",
   "AIAgentAccessRedirectNote": "Аутоматски ћете бити враћени на {{sectionName}} одељак за 5 секунди.",
-  "AIChat": "ВИ разговор",
+  "AIChat": "AI разговор",
   "AIInstructions": "AI инструкције",
   "AIProviderAndModel": "{{aiProvider}} и модел",
   "CreateChat": "Креирајте ћаскање",

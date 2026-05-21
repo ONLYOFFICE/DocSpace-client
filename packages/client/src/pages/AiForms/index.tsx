@@ -29,39 +29,145 @@ import { inject, observer } from "mobx-react";
 import { useSearchParams } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import SdkIframe from "SRC_DIR/components/SdkIframe";
+
+import SdkIframe, {
+  type SdkIframeHandle,
+} from "SRC_DIR/components/SdkIframe";
+import { InstallAiFormsDialog } from "SRC_DIR/pages/Dashboard/InstallModuleDialog";
 import type { AiFormsSettings } from "SRC_DIR/pages/Dashboard/utils";
 
 const SECTION_TO_PATH: Record<string, string> = {
   "in-progress": "/sdk/forms/in-progress",
   "completed-forms": "/sdk/forms/completed-forms",
+  library: "/sdk/forms/library",
   settings: "/sdk/forms/settings",
+};
+
+const HOST_SECTIONS = new Set([
+  "in-progress",
+  "completed-forms",
+  "library",
+  "settings",
+]);
+
+const SECTION_TO_SDK: Record<string, string> = {
+  "": "my-forms",
+  "in-progress": "in-progress",
+  "completed-forms": "completed-forms",
+  library: "library",
+  settings: "settings",
 };
 
 type AiFormsProps = {
   roomId: number | null;
   ensureAppsLoaded: () => void;
+  fetchAppSettings: <T extends Record<string, unknown>>(
+    id: string,
+  ) => Promise<T | null>;
 };
 
-const AiForms = ({ roomId, ensureAppsLoaded }: AiFormsProps) => {
+const AiForms = ({
+  roomId,
+  ensureAppsLoaded,
+  fetchAppSettings,
+}: AiFormsProps) => {
   const { t } = useTranslation(["Common"]);
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [settingsChecked, setSettingsChecked] = React.useState(false);
+  const [showSetupDialog, setShowSetupDialog] = React.useState(false);
+  const iframeRef = React.useRef<SdkIframeHandle | null>(null);
+  const lastSdkSectionRef = React.useRef<string | null>(null);
+  const initialSrcRef = React.useRef<string | null>(null);
+
+  const searchParamsRef = React.useRef(searchParams);
+  searchParamsRef.current = searchParams;
+  const setSearchParamsRef = React.useRef(setSearchParams);
+  setSearchParamsRef.current = setSearchParams;
+
+  const handleSdkNavigate = React.useCallback((nextSection: string) => {
+    lastSdkSectionRef.current = nextSection;
+    const sp = searchParamsRef.current;
+    const current = sp.get("section") ?? "";
+    const target = HOST_SECTIONS.has(nextSection) ? nextSection : "";
+    if (current === target) return;
+
+    const next = new URLSearchParams(sp);
+    if (target) next.set("section", target);
+    else next.delete("section");
+    setSearchParamsRef.current(next, { replace: true });
+  }, []);
+
+  const hostSection = searchParams.get("section") ?? "";
+  const sdkSection = SECTION_TO_SDK[hostSection] ?? "my-forms";
+
+  React.useEffect(() => {
+    if (lastSdkSectionRef.current === sdkSection) return;
+    iframeRef.current?.call("navigateSection", { section: sdkSection });
+  }, [sdkSection]);
 
   React.useEffect(() => {
     ensureAppsLoaded();
   }, [ensureAppsLoaded]);
 
-  const section = searchParams.get("section") ?? "";
-  const basePath = SECTION_TO_PATH[section] ?? "/sdk/forms/my-forms";
-  const src = roomId !== null ? `${basePath}?roomId=${roomId}` : basePath;
-  return <SdkIframe src={src} title={t("Common:DashboardAIFormsTitle")} />;
+  // Always verify configuration against the server before deciding whether
+  // to open the install flow — the cache may be empty on direct navigation.
+  React.useEffect(() => {
+    let cancelled = false;
+    fetchAppSettings<AiFormsSettings>("ai-forms")
+      .catch(() => null)
+      .then((settings) => {
+        if (cancelled) return;
+        setShowSetupDialog(!settings?.roomId);
+        setSettingsChecked(true);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [fetchAppSettings]);
+
+  const handleSetupComplete = () => {
+    setShowSetupDialog(false);
+  };
+
+  if (!settingsChecked) return null;
+
+  if (roomId === null) {
+    return (
+      <>
+        <InstallAiFormsDialog
+          visible={showSetupDialog}
+          onClose={handleSetupComplete}
+          onInstalled={handleSetupComplete}
+          skipConfirm={true}
+        />
+      </>
+    );
+  }
+
+  if (initialSrcRef.current === null) {
+    const basePath = SECTION_TO_PATH[hostSection] ?? "/sdk/forms/my-forms";
+    const params = new URLSearchParams({ showMenu: "false" });
+    if (roomId !== null) params.set("roomId", String(roomId));
+    initialSrcRef.current = `${basePath}?${params}`;
+  }
+
+  return (
+    <SdkIframe
+      apiRef={iframeRef}
+      src={initialSrcRef.current}
+      title={t("Common:DashboardAIFormsTitle")}
+      onNavigate={handleSdkNavigate}
+    />
+  );
 };
 
 const AiFormsConnected = inject<TStore>(({ appsStore }) => ({
   roomId: appsStore.getSettings<AiFormsSettings>("ai-forms")?.roomId ?? null,
   ensureAppsLoaded: appsStore.ensureLoaded,
+  fetchAppSettings: appsStore.fetchAppSettings,
 }))(observer(AiForms));
 
 export { AiFormsConnected as AiForms };
 
 export default AiFormsConnected;
+

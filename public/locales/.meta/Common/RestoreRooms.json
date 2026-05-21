@@ -3,7 +3,7 @@
   "content": "Are you sure you want to restore rooms?",
   "content_en_sha1_hash": "7af07531b9775b705e2ba1b5184a2bf685879a24",
   "created_at": "2025-05-19T21:30:57.063Z",
-  "updated_at": "2026-04-11T21:03:11.055Z",
+  "updated_at": "2026-05-15T14:00:06.694Z",
   "comment": {
     "text": "This is a confirmation dialog message asking the user if they want to restore multiple rooms from the archive. It appears when more than one room is selected for restoration.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/RestoreRoomDialog/index.js",
-      "line_number": 86,
+      "line_number": 95,
       "context": "}\n \n if (restoreAll) return t(\"ArchiveDialog:RestoreAllRooms\");\n \n return items.length > 1\n ? t(\"ArchiveDialog:RestoreRooms\")\n : t(\"ArchiveDialog:RestoreRoom\");\n };\n \n const description = getDescription();",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

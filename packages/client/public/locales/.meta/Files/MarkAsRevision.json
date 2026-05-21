@@ -3,7 +3,7 @@
   "content": "Mark as revision",
   "content_en_sha1_hash": "81c16fba6a6aa6f91ca729e449a37cbfbe71b54e",
   "created_at": "2025-05-19T21:30:55.809Z",
-  "updated_at": "2026-04-11T21:09:04.718Z",
+  "updated_at": "2026-05-15T14:00:06.883Z",
   "comment": {
     "text": "This is a tooltip that appears when hovering over a version in the version history. It indicates that clicking the version will mark it as a revision.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionRow.js",
-      "line_number": 287,
+      "line_number": 296,
       "context": "//  {...onClickProp}\n t={t}\n title={\n index > 0\n ? isVersion\n ? t(\"Files:MarkAsRevision\")\n : t(\"Files:MarkAsVersion\")\n : \"\"\n }\n />\n <div className=\"version-link-box\">",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

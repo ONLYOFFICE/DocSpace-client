@@ -38,6 +38,7 @@
   "TermsAndConditions": "Z nadaljevanjem soglašate in razumete ter se strinjate z našimi <1>Pogoji in določili</1> in z <2>Izjavo o zasebnosti</2>.",
   "TfaSubTitle": "Sledite preprostim korakom za nadaljevanje dela v tem {{productName}}:",
   "TfaTitle": "Omogočena je dvofaktorska avtentikacija za varno dostopanje.",
+  "UserAlreadyInvited": "Že ste bili povabljeni. Prosimo, dokončajte registracijo z uporabo povezave iz e-pošte.",
   "VerifyConnection": "Preverite povezavo",
   "VerifyConnectionDescription": "Vnesite 6-mestno kodo, ki jo je ustvarila vaša aplikacija za preverjanje identitete, v polje spodaj, da dokončate nastavitev."
 }

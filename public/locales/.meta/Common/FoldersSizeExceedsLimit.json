@@ -3,7 +3,7 @@
   "content": "The folders are too large. The maximum size is {{maxSize}}.",
   "content_en_sha1_hash": "36a84a2493a3ca52895aa1ab4381da18c86d2dde",
   "created_at": "2026-03-20T09:07:38.573Z",
-  "updated_at": "2026-04-23T17:24:02.191Z",
+  "updated_at": "2026-05-15T14:00:07.043Z",
   "comment": {
     "text": "This is a toast message that appears when a user attempts to upload folders exceeding the maximum allowed size. It informs the user about the size limit, with `{{maxSize}}` representing the maximum total upload size.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/uploader/index.tsx",
-      "line_number": 288,
+      "line_number": 297,
       "context": "if (limitExceeded) {\n const maxTotalFormatted = maxTotalUploadSize.toUpperCase();\n \n if (isFolderMode) {\n toastr.error(\n getCommonTranslation(\"FoldersSizeExceedsLimit\", {\n maxSize: maxTotalFormatted,\n }),\n );\n } else {\n toastr.error(",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

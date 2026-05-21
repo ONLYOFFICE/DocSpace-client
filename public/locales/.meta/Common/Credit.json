@@ -3,7 +3,7 @@
   "content": "Credit",
   "content_en_sha1_hash": "8a45d339a638ac247a1574d733c588c338c1cb6e",
   "created_at": "2026-04-10T13:53:42.309Z",
-  "updated_at": "2026-05-08T13:10:45.741Z",
+  "updated_at": "2026-05-15T14:00:07.020Z",
   "comment": {
     "text": "This is a label indicating a transaction type, specifically a credit. It appears in transaction history to show funds added to an account.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 132,
+      "line_number": 140,
       "context": "label: t(\"AllTransactions\"),\n dataTestId: \"all_transactions_option\",\n },\n {\n key: \"credit\",\n label: t(\"Credit\"),\n dataTestId: \"credit_transactions_option\",\n },\n {\n key: \"debit\",\n label: t(\"Debit\"),",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

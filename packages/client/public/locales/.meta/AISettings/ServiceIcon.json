@@ -3,7 +3,7 @@
   "content": "Service icon",
   "content_en_sha1_hash": "526f71c83fa3a61bc0402835ab6cfcbb7f83a24f",
   "created_at": "2025-10-27T16:14:31.643Z",
-  "updated_at": "2026-04-11T21:02:17.774Z",
+  "updated_at": "2026-05-15T14:00:06.768Z",
   "comment": {
     "text": "Label for an input field where the user can upload or change an icon associated with a service.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useIcon.tsx",
-      "line_number": 105,
+      "line_number": 114,
       "context": "const onDeleteIcon = () => setIcon(\"\");\n \n const iconComponent = (\n <FieldContainer\n className={styles.iconContainer}\n labelText={t(\"AISettings:ServiceIcon\")}\n isVertical\n labelVisible\n removeMargin\n >\n <div className={styles.iconBlock} data-testid=\"set-mcp-icon\">",
       "module": "/packages/client"
     }
@@ -24,6 +24,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     }
   }
 }

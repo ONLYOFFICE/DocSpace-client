@@ -3,7 +3,7 @@
   "content": "The email activation instructions have been sent to the <1>{{email}}</1> email address.",
   "content_en_sha1_hash": "aa4f7df17201a00f6afc20fdd488e286f298c970",
   "created_at": "2025-05-19T21:30:53.547Z",
-  "updated_at": "2026-04-11T21:19:50.731Z",
+  "updated_at": "2026-05-15T14:00:06.721Z",
   "comment": {
     "text": "This is a toast message confirming that email activation instructions have been sent. It appears after a user requests activation and includes the `{{email}}` variable, which is the email address where the instructions were sent.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/people-helpers.js",
-      "line_number": 50,
+      "line_number": 59,
       "context": "export const showEmailActivationToast = (email, t) => {\n // console.log(\"showEmailActivationToast\", { email });\n toastr.success(\n <Trans\n i18nKey=\"MessageEmailActivationInstuctionsSentOnEmail\"\n t={t}\n ns=\"People\"\n defaults=\"The email activation instructions have been sent to the <strong>{{email}}</strong> email address\"\n values={{ email }}\n components={{ 1: <strong /> }}",
       "module": "/packages/client"
     }

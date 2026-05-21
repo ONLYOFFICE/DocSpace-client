@@ -35,6 +35,7 @@
   "ApiKeysShareDescription": "API anahtarınızı başkalarıyla paylaşmayın veya tarayıcı ya da istemci tarafı kodda açık hale getirmeyin.",
   "ApiKeyViewUsage": "şurada her bir API anahtarının kullanımını görüntüleyin",
   "Appearance": "Görünüm",
+  "AppsDescription": "{{productName}} uygulamanızda hangi uygulamaların kullanılabileceğini yönetin. Etkin uygulamalar, bunlara erişimi olan kullanıcılar için ana menüde görünecektir.",
   "AuditSubheader": "Alt bölüm, kullanıcılar tarafından {{productName}}'inizdeki varlıklarda (odalar, fırsatlar, dosyalar vb.) yapılan en son değişikliklerin (oluşturma, değiştirme, silme vb.) listesine göz atmanıza olanak tanır.",
   "AuditTrailNav": "Denetim İzleme",
   "AuthorizationKeysInfo": "Yetkilendirme Anahtarları ile üçüncü parti hizmetleri alanınıza bağlayabilirsiniz. Facebook, Google veya LinkedIn ile kolayca giriş yapın. Dropbox, OneDrive ve diğer hesapları ekleyerek orada saklanan dosyalarla çalışın.",

@@ -3,7 +3,7 @@
   "content": "Last update",
   "content_en_sha1_hash": "cf1b91677c424704e7d3a429fb90869242e87885",
   "created_at": "2025-12-22T09:40:17.990Z",
-  "updated_at": "2026-04-11T21:13:02.870Z",
+  "updated_at": "2026-05-15T14:00:06.731Z",
   "comment": {
     "text": "This is a label in the information panel, indicating the date and time of the last modification of a selected file or folder.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/index.tsx",
-      "line_number": 175,
+      "line_number": 184,
       "context": "<div\n className=\"property\"\n data-testid=\"info_panel_gallery_date_modified_property\"\n >\n <Text className={classNames(styles.select, \"property-title\")}>\n {t(\"InfoPanel:LastUpdateInfo\")}\n </Text>\n <Text className={classNames(styles.select, \"property-content\")}>\n {getCorrectDate(\n culture ?? \"en\",\n gallerySelected.attributes.updatedAt,",
       "module": "/packages/client"
     }

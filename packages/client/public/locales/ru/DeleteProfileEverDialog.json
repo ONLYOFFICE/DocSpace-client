@@ -1,9 +1,9 @@
 {
   "ActionCannotBeUndoneGuests": "Выбранные отключенные гости будут удалены из {{productName}}. Это действие не может быть отменено.",
-  "ActionCannotBeUndoneUsers": "Выбранные отключенные пользователи будут удалены из {{productName}}. Это действие необратимо.",
+  "ActionCannotBeUndoneUsers": "Выбранные отключенные пользователи будут удалены из {{productName}}. Это действие не может быть отменено.",
   "CannotReassignFiles": "Если вы удалите нескольких пользователей одновременно, вы не сможете переназначить их файлы другим пользователям.",
   "DeleteGroupGuestsSuccessMessage": "Гости успешно удалены.",
-  "DeleteGroupUsersSuccessMessage": "Пользователи были успешно удалены.",
+  "DeleteGroupUsersSuccessMessage": "Пользователи успешно удалены.",
   "DeleteGuest": "Удалить гостя",
   "DeleteGuests": "Удалить гостей",
   "DeletePersonalDataApplicable": "*Применимо для выбранных пользователей, у которых есть такие файлы и папки.",

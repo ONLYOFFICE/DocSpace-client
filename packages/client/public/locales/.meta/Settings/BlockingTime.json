@@ -3,7 +3,7 @@
   "content": "Blocking time (sec)",
   "content_en_sha1_hash": "490a942a08ee42cd63c3e4b0cf291fa362e24a10",
   "created_at": "2025-05-19T21:30:50.711Z",
-  "updated_at": "2026-04-13T14:59:05.896Z",
+  "updated_at": "2026-05-15T14:00:06.865Z",
   "comment": {
     "text": "This is a label for an input field in the portal security settings. It specifies the duration, in seconds, for which a user will be blocked after too many failed login attempts.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/bruteForceProtection.js",
-      "line_number": 325,
+      "line_number": 334,
       "context": "</FieldContainer>\n \n <FieldContainer\n className=\"input-container\"\n labelVisible\n labelText={t(\"BlockingTime\")}\n isVertical\n place=\"top\"\n hasError={hasErrorBlockingTime}\n errorMessage={t(\"ErrorMessageBruteForceProtection\")}\n >",
       "module": "/packages/client"
     }

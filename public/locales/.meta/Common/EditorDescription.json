@@ -3,7 +3,7 @@
   "content": "Operations with existing files: viewing, editing, reviewing, commenting.",
   "content_en_sha1_hash": "d807d26f4ad8fddbb60ec38ee75f1527ce00f6bc",
   "created_at": "2025-09-23T07:24:16.839Z",
-  "updated_at": "2026-04-11T20:54:19.467Z",
+  "updated_at": "2026-05-15T14:00:06.936Z",
   "comment": {
     "text": "This is a description of the \"Editor\" access rights, explaining what actions users with these rights can perform on files.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 820,
+      "line_number": 829,
       "context": "},\n [ShareRights.Editing]: {\n access: ShareAccessRights.Editing,\n key: \"editor\",\n label: t(\"Common:Editing\"),\n description: t(\"Common:EditorDescription\"),\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n key: \"review\",\n label: t(\"Common:Review\"),",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

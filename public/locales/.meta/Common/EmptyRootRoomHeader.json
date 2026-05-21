@@ -3,7 +3,7 @@
   "content": "Welcome to {{productName}}",
   "content_en_sha1_hash": "aca54bc00694fe8488fc161e8a78ca1ec1a29e4c",
   "created_at": "2025-05-19T21:30:44.886Z",
-  "updated_at": "2026-04-11T20:53:47.459Z",
+  "updated_at": "2026-05-19T19:03:33.058Z",
   "comment": {
     "text": "This is a dialog title or header text displayed on an empty root room screen. It welcomes the user to the product, with `{{productName}}` being replaced by the application's brand name.",
     "is_auto": true,
@@ -13,20 +13,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SocialAuthWelcomeDialog/index.tsx",
-      "line_number": 96,
-      "context": "transition: \"opacity 0.3s ease-in-out\",\n visibility: showDialog ? \"visible\" : \"hidden\",\n }}\n >\n <ModalDialog.Header>\n {t(\"Common:EmptyRootRoomHeader\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBodyContent>",
+      "line_number": 93,
+      "context": "transition: \"opacity 0.3s ease-in-out\",\n visibility: showDialog ? \"visible\" : \"hidden\",\n }}\n >\n <ModalDialog.Header>\n {t(\"Common:EmptyRootRoomHeader\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.bodyContent}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 411,
+      "line_number": 420,
       "context": "ShareAccessRights.Editing,\n ShareAccessRights.ReadOnly,\n ),\n ],\n () =>\n t(\"Common:EmptyRootRoomHeader\", {\n productName: getBrandName(\"ProductName\"),\n }),\n )\n .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>\n t(\"EmptyView:EmptyRootRoomUserTitle\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/empty-view/EmptyView.helpers.tsx",
-      "line_number": 16,
-      "context": "export const getTitle = (t: TTranslation) => {\n return t(\"Common:EmptyScreenFolder\");\n };\n \n export const getRootTitle = (t: TTranslation) => {\n return t(\"Common:EmptyRootRoomHeader\", {\n productName: getBrandName(\"ProductName\"),\n });\n };\n \n export const getIcon = (isBaseTheme: boolean) => {",
+      "line_number": 42,
+      "context": "case FolderType.TRASH:\n return t(\"Common:EmptyScreenFolder\");\n case FolderType.USER:\n return t(\"Common:EmptyScreenFolder\");\n default:\n return t(\"Common:EmptyRootRoomHeader\", {\n productName: getBrandName(\"ProductName\"),\n });\n }\n };",
       "module": "/packages/sdk"
     }
   ],
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

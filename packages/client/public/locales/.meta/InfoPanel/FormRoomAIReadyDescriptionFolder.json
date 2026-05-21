@@ -3,7 +3,7 @@
   "content": "Responses from forms are stored here in a connected database. To analyze data with AI, open a specific form and click 'Ask AI'.",
   "content_en_sha1_hash": "6ac799a0811539bfb72862e4a2003c41a4a131f5",
   "created_at": "2026-05-08T13:10:42.357Z",
-  "updated_at": "2026-05-08T19:46:45.002Z",
+  "updated_at": "2026-05-15T14:00:06.728Z",
   "comment": {
     "text": "Informational text in the Info Panel explaining where form responses are stored and how to use the AI analysis feature.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/AICard.tsx",
-      "line_number": 85,
+      "line_number": 94,
       "context": "</span>\n );\n \n const description = useMemo(() => {\n if (aiConnected) {\n if (isDone) return t(\"InfoPanel:FormRoomAIReadyDescriptionFolder\");\n if (isFile) return t(\"InfoPanel:FormRoomAIReadyDescriptionFile\");\n return t(\"InfoPanel:FormRoomAIReadyDescriptionRoom\");\n }\n \n if (!aiReady) {",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "AI capabilities are currently turned off, which means this agent can’t process chats or tasks. To get back on track, ask your {{productName}} admin to enable AI features.",
   "content_en_sha1_hash": "b586f9691b5442ebacd7e527ad626e87d0309aa8",
   "created_at": "2025-11-03T12:10:13.557Z",
-  "updated_at": "2026-04-11T21:00:27.019Z",
+  "updated_at": "2026-05-15T14:00:06.987Z",
   "comment": {
     "text": "This is an informational message displayed to a regular user when AI capabilities are disabled. It informs them that the AI agent cannot process chats or tasks and advises them to contact their {{productName}} admin to enable AI features.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-info-block/index.tsx",
-      "line_number": 44,
+      "line_number": 51,
       "context": "standalone,\n isPortalAdmin,\n }: ChatInfoBlockProps) => {\n const t = useCommonTranslation();\n const bodyText = !isPortalAdmin\n ? t(\"AIDisabledInfoBlockUserDescription\", {\n productName: getBrandName(\"ProductName\"),\n })\n : standalone\n ? t(\"AIDisabledInfoBlockAdminStandaloneDescription\", {\n productName: getBrandName(\"ProductName\"),",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

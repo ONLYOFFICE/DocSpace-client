@@ -38,6 +38,7 @@
   "TermsAndConditions": "Duke vazhduar, ju kuptoni dhe pranoni <1>Termat dhe kushtet</1> dhe <2>Deklarata e privatësisë</2>.",
   "TfaSubTitle": "Ndiqni hapat e thjeshtë për të vazhduar punën në {{productName}}:",
   "TfaTitle": "Autentifikimi me dy faktorë u aktivizua për akses të sigurt",
+  "UserAlreadyInvited": "Tashmë jeni ftuar. Ju lutemi plotësoni regjistrimin duke përdorur lidhjen nga emaili.",
   "VerifyConnection": "Verifikoni lidhjen",
   "VerifyConnectionDescription": "Futni kodin 6-shifror të gjeneruar nga aplikacioni juaj në fushën më poshtë për të përfunduar konfigurimin."
 }

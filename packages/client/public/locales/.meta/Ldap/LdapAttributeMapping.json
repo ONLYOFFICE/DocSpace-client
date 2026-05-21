@@ -3,7 +3,7 @@
   "content": "Attribute mapping",
   "content_en_sha1_hash": "27eab1836ffd4c37244c32f6e2d3186e58553f97",
   "created_at": "2025-05-19T21:30:54.168Z",
-  "updated_at": "2026-04-11T21:17:23.260Z",
+  "updated_at": "2026-05-15T14:00:06.844Z",
   "comment": {
     "text": "This is a section heading on the LDAP settings page. It labels the area where administrators configure how LDAP attributes are mapped to user properties within DocSpace.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 124,
+      "line_number": 133,
       "context": "return (\n <>\n <div className=\"ldap_attribute-mapping-text\">\n <Text fontWeight={600} fontSize=\"14px\">\n {t(\"LdapAttributeMapping\")}\n </Text>\n <HelpButton\n dataTestId=\"attribute_mapping_help_button\"\n tooltipContent={t(\"LdapAdvancedSettingsTooltip\")}\n />",
       "module": "/packages/client"
     }

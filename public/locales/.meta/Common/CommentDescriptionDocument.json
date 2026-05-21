@@ -3,7 +3,7 @@
   "content": "Viewing, commenting.",
   "content_en_sha1_hash": "ab9aa20a7e063b2cbc480a49ae304dcd35fda871",
   "created_at": "2025-09-29T18:22:01.476Z",
-  "updated_at": "2026-04-11T20:57:00.330Z",
+  "updated_at": "2026-05-15T14:00:06.935Z",
   "comment": {
     "text": "This is a short description of access rights for a document. It appears in the sharing settings to indicate that a user has permission to view and add comments to the document.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 639,
+      "line_number": 648,
       "context": "{ fileType: FileType.Document, access: ShareAccessRights.Review },\n () => t(\"Common:ReviewDescriptionDocument\"),\n )\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.Comment },\n () => t(\"Common:CommentDescriptionDocument\"),\n )\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.ReadOnly },\n () => t(\"Common:RoleViewerDescription\"),\n )",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

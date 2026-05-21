@@ -3,7 +3,7 @@
   "content": "images",
   "content_en_sha1_hash": "19f49d852660fe0a079cbf95c3efb34ba88de911",
   "created_at": "2025-05-19T21:30:57.130Z",
-  "updated_at": "2026-04-11T21:29:53.721Z",
+  "updated_at": "2026-05-15T14:00:06.903Z",
   "comment": {
     "text": "This is a short noun label for a file type. It appears in a file selection dialog to indicate that only image files will be displayed.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/SelectFileDialog.tsx",
-      "line_number": 61,
+      "line_number": 70,
       "context": "const getFileTypeTranslation = React.useCallback(() => {\n switch (fileTypeDetection.filterParam) {\n case FilesSelectorFilterTypes.XLSX:\n return t?.(\"Editor:MailMergeFileType\") ?? \"\";\n case FilesSelectorFilterTypes.IMG:\n return t?.(\"Editor:ImageFileType\") ?? \"\";\n case FilesSelectorFilterTypes.DOCX:\n return t?.(\"Editor:DocumentsFileType\") ?? \"\";\n default:\n return \"\";\n }",
       "module": "/packages/doceditor"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.452785Z"
+      "approved_at": "2026-05-15T15:04:54.611151Z"
     },
     "si": {
       "ai_translated": false,

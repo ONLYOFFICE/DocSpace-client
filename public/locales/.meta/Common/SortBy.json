@@ -3,7 +3,7 @@
   "content": "Sort by",
   "content_en_sha1_hash": "a2a5bdeca9391be1e0cdff1c19895bae7fadc2c2",
   "created_at": "2025-05-19T21:30:48.943Z",
-  "updated_at": "2026-04-12T18:00:44.550Z",
+  "updated_at": "2026-05-15T14:00:06.630Z",
   "comment": {
     "text": "This is a label for a dropdown menu or button that allows users to choose the order in which items are displayed. It appears as a short label.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/TemplateGallery/Filter/SortFilter/index.tsx",
-      "line_number": 97,
+      "line_number": 106,
       "context": "withBackground={false}\n />\n \n <div\n className={styles.sortButton}\n title={t(\"Common:SortBy\")}\n onClick={onToggleCombobox}\n >\n <ComboBox\n id=\"comboBoxSort\"\n tabIndex={1}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1875,
+      "line_number": 1884,
       "context": "isPersonalRoom={isPersonalRoom}\n isRooms={isRooms}\n removeSelectedItem={removeSelectedItem}\n clearAll={clearAll}\n filterTitle={t(\"Filter\")}\n sortByTitle={t(\"Common:SortBy\")}\n clearSearch={clearSearch}\n setClearSearch={setClearSearch}\n onSortButtonClick={onSortButtonClick}\n currentDeviceType={currentDeviceType}\n userId={userId}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 689,
+      "line_number": 698,
       "context": "</ColumnContainer>\n <ControlsGroup>\n <SearchTerm t={t} config={config} setConfig={setConfig} />\n </ControlsGroup>\n <ControlsGroup>\n <Label className=\"label\" text={t(\"Common:SortBy\")} />\n <ComboBox\n onSelect={onChangeSortBy}\n options={dataSortBy}\n scaled\n selectedOption={sortBy}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/index.tsx",
-      "line_number": 106,
+      "line_number": 115,
       "context": "currentDeviceType={currentDeviceType}\n filterHeader={t(\"Common:AdvancedFilter\")}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n filterTitle={t(\"Files:Filter\")}\n sortByTitle={t(\"Common:SortBy\")}\n selectorLabel=\"\"\n isIndexing={false}\n initSearchValue={initSearchValue}\n initSelectedFilterData={initSelectedFilterData}\n renderSelector={renderFilterSelector}",
       "module": "/packages/sdk"
     }
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

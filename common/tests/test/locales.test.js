@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { describe, it, expect, beforeAll } from "vitest";
 const fs = require("fs");
@@ -62,12 +71,7 @@ const BASE_LANGUAGES = [
 ];
 
 const forbiddenElements = ["ONLYOFFICE", "DOCSPACE"];
-const skipForbiddenKeys = [
-  "OrganizationName",
-  "ProductName",
-  "ProductEditorsName",
-  "OnlyofficeDesktopEditors",
-];
+const skipForbiddenKeys = [];
 
 // Brand/product keys and constants — injected at runtime, not in JSON locale files.
 // Skip these in per-language completeness and forbidden-elements checks.
@@ -355,7 +359,7 @@ beforeAll(() => {
 
     moduleFolders.push({
       path: wsPath,
-      isCommon: wsPath.includes("public/locales"),
+      isCommon: wsPath.includes(path.join("public", "locales")),
       availableLanguages: t?.languages,
       appliedJsTranslationKeys: j?.translationKeys,
     });
@@ -885,10 +889,8 @@ describe("Locales Tests", () => {
     let i = 0;
     const forbiddenEntries = [];
 
-    moduleFolders.forEach((module) => {
-      if (!module.availableLanguages || module.isCommon) return;
-
-      module.availableLanguages.forEach((lng) => {
+    const checkLanguages = (languages) => {
+      languages.forEach((lng) => {
         const translationItems = lng.translations
           .filter((elem) => !skipForbiddenKeys.includes(elem.key))
           .filter((f) => {
@@ -914,7 +916,14 @@ describe("Locales Tests", () => {
           forbiddenEntries.push({ filePath: lng.path, key: t.key });
         });
       });
+    };
+
+    moduleFolders.forEach((module) => {
+      if (!module.availableLanguages) return;
+      checkLanguages(module.availableLanguages);
     });
+
+    checkLanguages(commonTranslations);
 
     clearWrongKeys(forbiddenEntries, "forbidden value keys");
 
@@ -2497,6 +2506,42 @@ describe("Locales Tests", () => {
           `   Key: "${key}"\r\n\r\n`;
         errorsCount++;
       });
+    });
+
+    expect(errorsCount, message).toBe(0);
+  });
+
+  it("UnicodeEscapedValuesTest: Verify that translation files use readable Unicode characters instead of \\uXXXX escape sequences.", () => {
+    // JSON files must store non-ASCII characters directly in UTF-8, not as \uXXXX
+    // escape sequences. Escaped forms are invisible in code review, harder to spot
+    // translation errors in, and typically produced by json.dumps() without
+    // ensure_ascii=False or similar tooling mistakes.
+    const unicodeEscapePattern = /\\u[0-9a-fA-F]{4}/;
+
+    let message =
+      "Next translation files contain \\uXXXX escape sequences instead of readable Unicode characters.\r\n" +
+      "Re-save the file in UTF-8 with unescaped characters (e.g. ensure_ascii=False in Python).\r\n\r\n";
+    let errorsCount = 0;
+    let i = 0;
+
+    translationFiles.forEach((file) => {
+      const rawContent = fs.readFileSync(file.path, "utf8");
+
+      if (!unicodeEscapePattern.test(rawContent)) return;
+
+      const escapedLines = rawContent
+        .split("\n")
+        .map((line, idx) => ({ line, lineNo: idx + 1 }))
+        .filter(({ line }) => unicodeEscapePattern.test(line))
+        .slice(0, 3)
+        .map(
+          ({ line, lineNo }) =>
+            `    line ${lineNo}: ${line.trim().substring(0, 80)}`,
+        )
+        .join("\r\n");
+
+      message += `${++i}. ${file.language}/${file.fileName}\r\n${escapedLines}\r\n\r\n`;
+      errorsCount++;
     });
 
     expect(errorsCount, message).toBe(0);

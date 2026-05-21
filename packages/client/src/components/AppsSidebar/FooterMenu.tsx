@@ -38,50 +38,76 @@ const EMPTY_LINK = { path: "", state: {} };
 
 type FooterMenuProps = {
   showText: boolean;
+  isAdmin: boolean;
+  isOwner: boolean;
+  isVisitor: boolean;
+  isCollaborator: boolean;
+  isNotPaidPeriod: boolean;
 };
 
-const FooterMenu = ({ showText }: FooterMenuProps) => {
+const FooterMenu = ({
+  showText,
+  isAdmin,
+  isOwner,
+  isVisitor,
+  isCollaborator,
+  isNotPaidPeriod,
+}: FooterMenuProps) => {
   const navigate = useNavigate();
   const { t } = useTranslation(["Common"]);
 
+  const isAdminOrOwner = isAdmin || isOwner;
+  const showContacts = !isNotPaidPeriod && !isVisitor && !isCollaborator;
+  const showBilling = isAdminOrOwner && !isNotPaidPeriod;
+  const showDeveloperTools = isAdminOrOwner;
+  const showSettings = isAdminOrOwner && !isNotPaidPeriod;
+
   return (
     <>
-      <ArticleItem
-        key="contacts"
-        text={t("Common:Contacts")}
-        title={t("Common:Contacts")}
-        icon={ContactsIconUrl}
-        showText={showText}
-        linkData={EMPTY_LINK}
-        onClick={() => navigate("/accounts/people")}
-      />
-      <ArticleItem
-        key="billing"
-        text={t("Common:Billing")}
-        title={t("Common:Billing")}
-        icon={BillingIconUrl}
-        showText={showText}
-        linkData={EMPTY_LINK}
-        onClick={() => navigate("/portal-settings/payments/portal-payments")}
-      />
-      <ArticleItem
-        key="developer-tools"
-        text={t("Common:DeveloperTools")}
-        title={t("Common:DeveloperTools")}
-        icon={DeveloperIconUrl}
-        showText={showText}
-        linkData={EMPTY_LINK}
-        onClick={() => navigate("/developer-tools/overview")}
-      />
-      <ArticleItem
-        key="settings"
-        text={t("Common:Settings")}
-        title={t("Common:Settings")}
-        icon={SettingsIconUrl}
-        showText={showText}
-        linkData={EMPTY_LINK}
-        onClick={() => navigate("/portal-settings")}
-      />
+      {showContacts && (
+        <ArticleItem
+          key="contacts"
+          text={t("Common:Contacts")}
+          title={t("Common:Contacts")}
+          icon={ContactsIconUrl}
+          showText={showText}
+          linkData={EMPTY_LINK}
+          onClick={() => navigate("/accounts/people")}
+        />
+      )}
+      {showBilling && (
+        <ArticleItem
+          key="billing"
+          text={t("Common:Billing")}
+          title={t("Common:Billing")}
+          icon={BillingIconUrl}
+          showText={showText}
+          linkData={EMPTY_LINK}
+          onClick={() => navigate("/portal-settings/payments/portal-payments")}
+        />
+      )}
+      {showDeveloperTools && (
+        <ArticleItem
+          key="developer-tools"
+          text={t("Common:DeveloperTools")}
+          title={t("Common:DeveloperTools")}
+          icon={DeveloperIconUrl}
+          showText={showText}
+          linkData={EMPTY_LINK}
+          onClick={() => navigate("/developer-tools/overview")}
+        />
+      )}
+      {showSettings && (
+        <ArticleItem
+          key="settings"
+          text={t("Common:Settings")}
+          title={t("Common:Settings")}
+          icon={SettingsIconUrl}
+          showText={showText}
+          linkData={EMPTY_LINK}
+          onClick={() => navigate("/portal-settings")}
+        />
+      )}
     </>
   );
 };

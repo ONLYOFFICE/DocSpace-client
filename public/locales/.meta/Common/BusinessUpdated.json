@@ -3,7 +3,7 @@
   "content": "{{planName}} plan updated",
   "content_en_sha1_hash": "d072992aaddc06db95b3109b8a055ea6d40dc9e2",
   "created_at": "2026-04-10T13:53:42.147Z",
-  "updated_at": "2026-05-08T13:10:45.729Z",
+  "updated_at": "2026-05-15T14:00:06.996Z",
   "comment": {
     "text": "This is a toast message confirming that a user's subscription plan has been successfully updated. `{{planName}}` will be replaced with the name of the updated plan (e.g., \"Business\", \"Enterprise\").",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
-      "line_number": 110,
+      "line_number": 119,
       "context": "useState(false);\n \n const resetIntervalSuccess = () => {\n intervalId &&\n toastr.success(\n t(\"BusinessUpdated\", { planName: currentTariffPlanTitle }),\n );\n clearInterval(intervalId);\n intervalId = undefined;\n setIsLoading(false);\n };",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

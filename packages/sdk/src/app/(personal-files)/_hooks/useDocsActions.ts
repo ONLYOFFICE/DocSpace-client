@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 "use client";
 
@@ -42,6 +51,7 @@ import { useTranslation } from "react-i18next";
 
 import { useNavigationStore } from "@/app/(docspace)/_store/NavigationStore";
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
+import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
 
 import type { CreateFileDialogType } from "../_components/create-file-dialog";
 
@@ -80,6 +90,7 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
   const pathname = usePathname();
   const navigationStore = useNavigationStore();
   const { filesSettings } = useFilesSettingsStore();
+  const uploadStore = useUploadStore();
   const { t } = useTranslation(["Common"]);
 
   const editorBasePath = options?.editorBasePath;
@@ -188,9 +199,38 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
         filesSettings?.maxUploadThreadCount ?? DEFAULT_UPLOAD_THREADS;
 
       const fileArray = Array.from(files);
+      if (fileArray.length === 0) return;
 
-      try {
-        await runWithConcurrency(fileArray, 2, async (file: File) => {
+      const taggedFiles = fileArray.map((file) => ({
+        file,
+        uniqueId:
+          typeof crypto !== "undefined" && "randomUUID" in crypto
+            ? crypto.randomUUID()
+            : `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+      }));
+
+      uploadStore.startBatch(
+        taggedFiles.map(({ file, uniqueId }) => ({
+          uniqueId,
+          fileName: file.name,
+          fileSize: file.size,
+          folderId,
+        })),
+      );
+
+      let anySuccess = false;
+
+      await runWithConcurrency(taggedFiles, 2, async ({ file, uniqueId }) => {
+        const item = uploadStore.items.find((i) => i.uniqueId === uniqueId);
+        if (!item) return;
+        const signal = item.abortController.signal;
+
+        if (signal.aborted) {
+          uploadStore.setItemCancelled(uniqueId);
+          return;
+        }
+
+        try {
           const session = await startUploadSession(
             folderId,
             file.name,
@@ -201,30 +241,58 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
             true,
           );
 
-          const chunks = createChunks(file, chunkSize);
+          if (signal.aborted) {
+            uploadStore.setItemCancelled(uniqueId);
+            return;
+          }
 
-          await runWithConcurrency(
-            chunks,
-            maxThreads,
-            async (chunk: { index: number; data: FormData; size: number }) => {
-              await uploadChunkParallel(
-                folderId,
-                session.id,
-                chunk.index,
-                chunk.data,
-              );
-            },
-          );
+          const chunks = createChunks(file, chunkSize);
+          let uploadedChunks = 0;
+
+          await runWithConcurrency(chunks, maxThreads, async (chunk) => {
+            if (signal.aborted) return;
+
+            await uploadChunkParallel(
+              folderId,
+              session.id,
+              chunk.index,
+              chunk.data,
+            );
+
+            if (signal.aborted) return;
+
+            uploadedChunks += 1;
+            uploadStore.addUploadedBytes(chunk.size);
+            uploadStore.updateItemProgress(
+              uniqueId,
+              Math.round((uploadedChunks / chunks.length) * 100),
+            );
+          });
+
+          if (signal.aborted) {
+            uploadStore.setItemCancelled(uniqueId);
+            return;
+          }
 
           await finalizeUploadSession(folderId, session.id);
-        });
+          uploadStore.setItemUploaded(uniqueId);
+          anySuccess = true;
+        } catch (error) {
+          if (signal.aborted) {
+            uploadStore.setItemCancelled(uniqueId);
+            return;
+          }
+          const message =
+            error instanceof Error ? error.message : String(error);
+          uploadStore.setItemError(uniqueId, message);
+        }
+      });
 
+      if (anySuccess) {
         router.refresh();
-      } catch (error) {
-        toastr.error(error instanceof Error ? error.message : String(error));
       }
     },
-    [getFolderId, filesSettings, router],
+    [getFolderId, filesSettings, router, uploadStore],
   );
 
   const onUploadFiles = useCallback(() => {

@@ -3,7 +3,7 @@
   "content": "You are about to move <strong>files ({{filesCount}})</strong> to {{trashSection}}.",
   "content_en_sha1_hash": "72a77c49883d04edfed07e946b1b55dc78b43806",
   "created_at": "2025-10-01T15:20:12.139Z",
-  "updated_at": "2026-04-13T14:59:05.764Z",
+  "updated_at": "2026-05-15T14:00:06.671Z",
   "comment": {
     "text": "This is a confirmation message in a dialog box. It informs the user that they are about to move a specified number of files to the trash. `{{filesCount}}` is the number of files, and `{{trashSection}}` is the name of the trash section (e.g., \"Trash\").",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 253,
+      "line_number": 262,
       "context": "}\n \n if (filesCount) {\n return (\n <>\n <Trans t={t} i18nKey=\"DeleteFiles\" ns=\"DeleteDialog\">\n You are about to move <strong>files ({{ filesCount }})</strong> to\n {{ trashSection: t(\"Common:TrashSection\") }}.{\" \"}\n </Trans>{\" \"}\n {!isThirdParty ? t(\"FilesDeletedAfter\") : null}{\" \"}\n {t(\"Common:WantToContinue\")}",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

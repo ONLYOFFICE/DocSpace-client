@@ -3,7 +3,7 @@
   "content": "You will keep your full {{amount}} access until the end of your paid billing period. If your storage exceeds the new limit at the start of the next period, you’ll be charged for the actual usage, rounded to the nearest {{storageUnit}}.",
   "content_en_sha1_hash": "32799d345243115a080aa782c29618e9a3dc44f4",
   "created_at": "2026-04-10T13:53:44.085Z",
-  "updated_at": "2026-04-13T14:59:06.023Z",
+  "updated_at": "2026-05-15T14:00:07.013Z",
   "comment": {
     "text": "This is a warning message displayed to users about changes to their storage plan. It informs them about continued access until the billing period ends and potential charges if usage exceeds the new limit. `{{amount}}` is a numerical value (e.g., \"10 GB\"), and `{{storageUnit}}` is a unit of storage (e.g., \"GB\").",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StorageWarning.tsx",
-      "line_number": 78,
+      "line_number": 87,
       "context": "<Text fontWeight={600}>{t(\"Important\")}</Text>\n )}\n </div>\n \n <Text>\n {t(\"StorageWarning\", {\n amount: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n storageUnit: t(\"Gigabyte\"),\n })}\n </Text>",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

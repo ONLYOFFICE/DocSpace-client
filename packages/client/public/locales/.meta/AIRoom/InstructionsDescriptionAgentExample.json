@@ -3,7 +3,7 @@
   "content": "Example: “You are an AI PR assistant that helps write and edit press releases. Maintain a professional, confident, and media-friendly tone. Highlight key messages clearly, avoid jargon, and keep the text concise and engaging.”",
   "content_en_sha1_hash": "61cc7c5dec4338ac127087c95422c8df8a730b55",
   "created_at": "2025-11-13T14:53:09.553Z",
-  "updated_at": "2026-04-11T21:01:59.174Z",
+  "updated_at": "2026-05-15T14:00:06.654Z",
   "comment": {
     "text": "This is a placeholder text for a textarea where users input instructions for an AI agent. It provides an example of how to phrase these instructions.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Instructions.tsx",
-      "line_number": 83,
+      "line_number": 92,
       "context": "</div>\n <Textarea\n value={value}\n onChange={handleChange}\n heightTextArea={144}\n placeholder={t(\"InstructionsDescriptionAgentExample\")}\n tabIndex={2}\n dataTestId=\"create_agent_instructions_textarea\"\n />\n </div>\n </StyledParam>",
       "module": "/packages/client"
     }
@@ -24,6 +24,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     }
   }
 }

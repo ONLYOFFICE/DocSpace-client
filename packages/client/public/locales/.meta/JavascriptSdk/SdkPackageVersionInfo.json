@@ -3,7 +3,7 @@
   "content": "For connect as package version always latest",
   "content_en_sha1_hash": "5e947424d3ab60873c23b5cd4edaf7c28787daa1",
   "created_at": "2025-05-19T21:30:54.650Z",
-  "updated_at": "2026-04-11T21:14:44.034Z",
+  "updated_at": "2026-05-15T14:00:06.815Z",
   "comment": {
     "text": "This is a tooltip that explains why the option to select a specific SDK package version is disabled. It indicates that the connection will always use the latest package version.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/VersionSelector.tsx",
-      "line_number": 99,
+      "line_number": 108,
       "context": "{disabled ? (\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"SdkPackageVersionInfo\")}</Text>\n }\n />\n ) : null}\n </LabelGroup>\n <ComboBox",
       "module": "/packages/client"
     }

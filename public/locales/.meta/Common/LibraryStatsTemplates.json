@@ -3,7 +3,7 @@
   "content": "{{count}} templates available in {{language}}",
   "content_en_sha1_hash": "f606522655b8534cbc5dce042034cee409567bbc",
   "created_at": "2026-03-31T15:18:15.032Z",
-  "updated_at": "2026-04-11T20:50:10.234Z",
+  "updated_at": "2026-05-15T14:00:06.980Z",
   "comment": {
     "text": "This is a label displaying the number of available templates in a specific language. `{{count}}` is the number of templates, and `{{language}}` is the language name (e.g., \"English\").",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/library-landing/StatsBar.tsx",
-      "line_number": 58,
+      "line_number": 67,
       "context": "<div className={styles.statsCards}>\n <div className={styles.statsCard}>\n <span className={styles.statsNumber}>{templatesCount}</span>\n <span className={styles.statsLabel}>\n {t(\"Common:LibraryStatsTemplates\", {\n count: templatesCount,\n language,\n })}\n </span>\n </div>",
       "module": "/packages/sdk"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

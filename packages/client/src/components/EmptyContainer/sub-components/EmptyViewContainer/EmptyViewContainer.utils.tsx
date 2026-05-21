@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { match, P } from "ts-pattern";
 
@@ -161,7 +170,7 @@ export const getFolderDescription = (
       }),
     )
     .with([P._, DefaultFolderType, P.when(isAdmin)], () =>
-      t("EmptyView:DefaultFolderDescription"),
+      t("Common:DefaultFolderDescription"),
     )
     .with([P._, DefaultFolderType, P.when(isUser)], () =>
       t("Common:UserEmptyDescription"),
@@ -285,16 +294,16 @@ export const getRootDescription = (
       </>
     ))
     .with([FolderType.USER, P.when(() => security?.Create)], () =>
-      t("EmptyView:DefaultFolderDescription"),
+      t("Common:DefaultFolderDescription"),
     )
     .with([FolderType.SHARE, P._], () =>
-      t("EmptyView:EmptyShareDescription", {
+      t("Common:EmptyShareDescription", {
         productName: getBrandName("ProductName"),
       }),
     )
-    .with([FolderType.Recent, P._], () => t("EmptyView:EmptyRecentDescription"))
+    .with([FolderType.Recent, P._], () => t("Common:EmptyRecentDescription"))
     .with([FolderType.Favorites, P._], () =>
-      t("EmptyView:EmptyFavoritesDescription"),
+      t("Common:EmptyFavoritesDescription"),
     )
     .with([FolderType.Archive, ShareAccessRights.None], () =>
       t("Common:ArchiveEmptyScreen", {
@@ -305,7 +314,7 @@ export const getRootDescription = (
       t("Files:ArchiveEmptyScreenUser"),
     )
     .with([FolderType.TRASH, P._], () =>
-      t("Files:TrashFunctionalityDescription", {
+      t("Common:TrashFunctionalityDescription", {
         sectionName: t("Common:TrashSection"),
       }),
     )
@@ -421,9 +430,9 @@ export const getRootTitle = (
     .with([FolderType.USER, ShareAccessRights.None], () =>
       t("Common:EmptyScreenFolder"),
     )
-    .with([FolderType.SHARE, P._], () => t("EmptyView:EmptyShareTitle"))
-    .with([FolderType.Favorites, P._], () => t("EmptyView:EmptyFavoritesTitle"))
-    .with([FolderType.Recent, P._], () => t("EmptyView:NoRecentFilesHereYet"))
+    .with([FolderType.SHARE, P._], () => t("Common:EmptyShareTitle"))
+    .with([FolderType.Favorites, P._], () => t("Common:EmptyFavoritesTitle"))
+    .with([FolderType.Recent, P._], () => t("Common:NoRecentFilesHereYet"))
     .with([FolderType.Archive, P._], () => t("Common:ArchiveEmptyScreenHeader"))
     .with([FolderType.TRASH, P._], () => t("Common:EmptyScreenFolder"))
     .otherwise(() => "");

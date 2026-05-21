@@ -3,7 +3,7 @@
   "content": "Recipients from the form",
   "content_en_sha1_hash": "83bbf535962d24d5f87410be92858dee26395713",
   "created_at": "2025-10-13T13:22:10.851Z",
-  "updated_at": "2026-04-12T03:16:19.953Z",
+  "updated_at": "2026-05-15T14:00:06.949Z",
   "comment": {
     "text": "This is a section title within a dialog. It labels a list of recipients who have filled out a form, allowing the user to manage their roles.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/role-mapping/RoleMappingPanel.tsx",
-      "line_number": 370,
+      "line_number": 379,
       "context": "<p\n className={classNames(styles.title, {\n [styles.titleMargin]: !infoBarVisible,\n })}\n >\n {t(\"Common:RecipientsFromTheForm\")}\n </p>\n <FillingRoleSelector\n roles={roles}\n onSelect={onSelect}\n removeUserFromRole={removeUserFromRole}",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

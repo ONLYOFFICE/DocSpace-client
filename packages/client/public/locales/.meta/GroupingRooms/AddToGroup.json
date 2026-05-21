@@ -3,7 +3,7 @@
   "content": "Add to group",
   "content_en_sha1_hash": "4f5edc11fcbd69e78441b7cca0b512ee4b1fdbdb",
   "created_at": "2026-02-19T13:36:24.870Z",
-  "updated_at": "2026-05-08T13:10:45.670Z",
+  "updated_at": "2026-05-15T14:00:06.888Z",
   "comment": {
     "text": "This is a button label in a context menu or header. It allows users to add a selected room or file to an existing group.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2463,
+      "line_number": 2472,
       "context": "disabled: false,\n },\n {\n id: \"option_add-to-group\",\n key: \"add-to-group\",\n label: t(\"GroupingRooms:AddToGroup\"),\n icon: AddToGroupReactSvgUrl,\n items: this.dialogsStore.roomGroups.map((group) => {\n let groupIcon = CreateGroupReactSvgUrl;\n if (typeof group.icon === \"string\" && group.icon) {\n groupIcon = group.icon;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2463,
+      "line_number": 2472,
       "context": "disabled: false,\n },\n {\n id: \"option_add-to-group\",\n key: \"add-to-group\",\n label: t(\"GroupingRooms:AddToGroup\"),\n icon: AddToGroupReactSvgUrl,\n items: this.dialogsStore.roomGroups.map((group) => {\n let groupIcon = CreateGroupReactSvgUrl;\n if (typeof group.icon === \"string\" && group.icon) {\n groupIcon = group.icon;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 329,
+      "line_number": 338,
       "context": "case \"add-to-group\":\n if (!this.isAvailableOption(\"add-to-group\")) return null;\n return {\n id: \"menu-add-to-group\",\n key: \"add-to-group\",\n label: t(\"GroupingRooms:AddToGroup\"),\n iconUrl: AddToGroupReactSvgUrl,\n withDropDown: true,\n fixedDropdownStyles: true,\n options: this.dialogsStore.roomGroups?.map((group) => {\n let groupIcon: string = CreateGroupReactSvgUrl;",
       "module": "/packages/client"
     }

@@ -57,7 +57,12 @@ export const ModuleCard = ({ mod, onInstall }: ModuleCardProps) => {
 
   return (
     <div className={styles.moduleCard}>
-      <span className={styles.moduleIcon}>{mod.icon}</span>
+      <span
+        className={styles.moduleIcon}
+        data-installed={mod.installed}
+      >
+        {mod.icon}
+      </span>
       <div className={styles.moduleInfo}>
         <Text as="p" className={styles.moduleTitle} isBold>
           {mod.title}

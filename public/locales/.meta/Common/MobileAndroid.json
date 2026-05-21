@@ -3,7 +3,7 @@
   "content": "Get {{organizationName}} Documents on Google Play",
   "content_en_sha1_hash": "83f79085a2fb2d5efa055d36fc04645c91a6887d",
   "created_at": "2025-05-19T21:30:46.548Z",
-  "updated_at": "2026-04-11T20:48:40.561Z",
+  "updated_at": "2026-05-15T14:00:07.023Z",
   "comment": {
     "text": "This is a button label for downloading the Android app. It appears on the download page, with `{{organizationName}}` replaced by the product's name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/components/article/sub-components/Apps.tsx",
-      "line_number": 122,
+      "line_number": 131,
       "context": "className={styles.androidIcon}\n onClick={() => window.open(officeforandroidUrl)}\n iconNode={<AndroidReactSvgUrl />}\n size={32}\n isFill\n title={t(\"MobileAndroid\", {\n organizationName: logoText,\n })}\n />\n ) : null}",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

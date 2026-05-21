@@ -3,7 +3,7 @@
   "content": "Access rights changed",
   "content_en_sha1_hash": "cdefb979afa2c5e08443d77985f7b5d925f6b122",
   "created_at": "2025-10-03T13:19:11.191Z",
-  "updated_at": "2026-04-11T21:01:34.458Z",
+  "updated_at": "2026-05-15T14:00:06.744Z",
   "comment": {
     "text": "This is a toast message confirming that a user's access permissions to a document or room have been successfully updated.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/User.tsx",
-      "line_number": 134,
+      "line_number": 143,
       "context": "notify: true,\n sharingMessage: \"\",\n force,\n })\n .then(async (item) => {\n toastr.success(t(\"Common:AccessRightsChanged\"));\n \n if (item?.error === RoomSecurityError.FormRoleBlockingDeletion) {\n return setRemoveUserConfirmation!(true, async () => {\n await updateRole(option, true);\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/hooks/useMembers.tsx",
-      "line_number": 229,
+      "line_number": 238,
       "context": "const newMember = newShareItems.find(\n (item) => item.sharedTo.id === member.id,\n );\n \n if (newMember) {\n toastr.success(t(\"Common:AccessRightsChanged\"));\n setMembers((prev) =>\n prev.map((item) =>\n item.sharedTo.id === member.id ? newMember : item,\n ),\n );",
       "module": "/packages/shared"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.390474Z"
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

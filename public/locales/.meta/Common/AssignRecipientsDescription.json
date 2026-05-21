@@ -3,7 +3,7 @@
   "content": "The form was successfully submitted to {{roomName}}. Assign recipient roles to the chosen users to enable form filling. Do you want to proceed now or get back to it later?",
   "content_en_sha1_hash": "c88f7efd58dd5b1fb5dc72749d4d0da3498a1d92",
   "created_at": "2025-10-13T13:21:58.757Z",
-  "updated_at": "2026-04-11T20:58:59.948Z",
+  "updated_at": "2026-05-15T14:00:06.944Z",
   "comment": {
     "text": "This is the body text of a modal dialog that appears after a form is submitted, prompting the user to assign recipient roles. It includes a variable `{{roomName}}` for the name of the room where the form was submitted.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/assign-roles-dialog/index.tsx",
-      "line_number": 56,
+      "line_number": 65,
       "context": "onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"Common:AssignRecipients\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {t(\"Common:AssignRecipientsDescription\", { roomName })}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n onClick={onSubmit}",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

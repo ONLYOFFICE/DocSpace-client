@@ -25,23 +25,27 @@ const EmptyView = ({
 }: EmptyViewProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const isRoot = current.parentId === current.rootFolderId;
+  const isRoot =
+    current.id === current.rootFolderId ||
+    current.parentId === current.rootFolderId;
   const { isBase: isBaseTheme } = useTheme();
+
+  const rootFolderType = current.rootFolderType;
 
   const title = isFiltered
     ? t("Common:NoFindingsFound")
     : isRoot
-      ? getRootTitle(t)
+      ? getRootTitle(t, rootFolderType)
       : getTitle(t);
   const description = isFiltered
     ? t("Common:EmptyFilterFilesDescription")
     : isRoot
-      ? getRootDescription(t)
+      ? getRootDescription(t, rootFolderType)
       : getDescription(t);
   const icon = isFiltered
     ? getFilterIcon(isBaseTheme)
     : isRoot
-      ? getRootIcon(isBaseTheme)
+      ? getRootIcon(isBaseTheme, rootFolderType)
       : getIcon(isBaseTheme);
 
   const onResetFilter = (

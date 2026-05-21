@@ -3,7 +3,7 @@
   "content": "Create blank form template",
   "content_en_sha1_hash": "02874ddd5e01e99c422ca4ea2510d696e82ff091",
   "created_at": "2025-05-19T21:30:55.038Z",
-  "updated_at": "2026-04-11T21:12:19.261Z",
+  "updated_at": "2026-05-15T14:00:06.704Z",
   "comment": {
     "text": "This is a hotkey description in the Hotkeys panel. It describes the action of creating a blank form template.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/CreationBlock.js",
-      "line_number": 54,
+      "line_number": 63,
       "context": "<Text {...keyTextStyles}>Shift + p</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"HotkeysCreateForm\")}</Text>\n <Text {...keyTextStyles}>Shift + o</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>",
       "module": "/packages/client"
     }

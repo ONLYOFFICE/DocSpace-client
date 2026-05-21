@@ -3,7 +3,7 @@
   "content": "The grace period is active <1>from {{fromDate}} to {{byDate}}</1> (days remaining: <2>{{delayDaysCount}}</2>). During this time, admins are not able to create new rooms or add new users. Once the grace period ends, {{productName}} will become unavailable until a new license is activated.",
   "content_en_sha1_hash": "1ef45c8fce4ffdeee6f5d8c375aec7bd7d430cf2",
   "created_at": "2026-03-20T09:07:32.071Z",
-  "updated_at": "2026-04-11T20:49:53.825Z",
+  "updated_at": "2026-05-15T14:00:06.957Z",
   "comment": {
     "text": "This is an informational message displayed when a license's grace period is active. It informs the user about the grace period's duration ({{fromDate}}, {{byDate}}, {{delayDaysCount}}) and the restrictions it imposes, as well as the consequences of its expiration ({{productName}}).",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
-      "line_number": 202,
+      "line_number": 211,
       "context": "const getSubDescription = () => {\n if (!isLifetimeLicense && isGracePeriod) {\n return (\n <Text className={styles.gracePeriodInfo} fontSize=\"14px\">\n <Trans\n i18nKey=\"LicenseGracePeriodActivatedInfo\"\n ns=\"Common\"\n t={t}\n values={{\n fromDate: paymentDate,\n byDate: gracePeriodEndDate,",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

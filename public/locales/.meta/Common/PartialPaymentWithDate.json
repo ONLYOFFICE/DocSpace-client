@@ -3,7 +3,7 @@
   "content": "Today, you're only paying for the selected amount of {{storageUnit}} for the remaining days until your billing date ({{startDate}} to {{endDate}}).",
   "content_en_sha1_hash": "a8e4956ca35dc7bdbe4ed44ed3e8ee229fba5f1f",
   "created_at": "2026-04-10T13:53:42.874Z",
-  "updated_at": "2026-05-08T13:10:45.736Z",
+  "updated_at": "2026-05-15T14:00:07.010Z",
   "comment": {
     "text": "This is a sentence displayed in the billing summary when a user makes a partial payment for additional storage. It informs the user that they are paying for a prorated amount of storage until their next billing date. `{{storageUnit}}` will be a unit of storage (e.g., \"Gigabyte\"), `{{startDate}}` is the current date, and `{{endDate}}` is the billing date.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
-      "line_number": 156,
+      "line_number": 165,
       "context": "<Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",\n ),\n endDate: storageExpiryDate,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/PlanUpgradePreview.tsx",
-      "line_number": 87,
+      "line_number": 96,
       "context": "return (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", { storageUnit: t(\"Gigabyte\") })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",\n ),\n endDate: storageExpiryDate,",
       "module": "/libs/ui-kit"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

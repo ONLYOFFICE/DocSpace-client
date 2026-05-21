@@ -3,7 +3,7 @@
   "content": "Invite members by email",
   "content_en_sha1_hash": "25be32bc4914ade0794cba6ad711881458da0fcf",
   "created_at": "2025-05-19T21:30:54.725Z",
-  "updated_at": "2026-04-11T21:14:08.907Z",
+  "updated_at": "2026-05-15T14:00:06.711Z",
   "comment": {
     "text": "This is a placeholder text for an input field. It appears in the \"Invite Members\" panel, prompting the user to enter email addresses to invite new members.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 720,
+      "line_number": 729,
       "context": "className=\"invite-input\"\n scale\n onChange={onChange}\n placeholder={\n roomId === -1\n ? t(\"InviteMembersSearchPlaceholder\")\n : !allowInvitingGuests\n ? t(\"InviteToRoomAddPlaceholder\")\n : t(\"InviteToRoomSearchPlaceholder\")\n }\n value={inputValue}",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "You can't use the same email address",
   "content_en_sha1_hash": "f85d5552131bdd2fc625627ca72a0cb482f3e288",
   "created_at": "2025-05-19T21:30:48.291Z",
-  "updated_at": "2026-04-13T07:38:57.574Z",
+  "updated_at": "2026-05-15T14:00:06.639Z",
   "comment": {
     "text": "Error text displayed when a user attempts to change their email address to the one they are currently using.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
-      "line_number": 118,
+      "line_number": 127,
       "context": "}\n \n if (isEmailValid) {\n const sameEmailError = email.toLowerCase() === user.email.toLowerCase();\n if (sameEmailError) {\n this.setState({ errorMessage: t(\"Common:SameEmail\"), hasError: true });\n } else {\n this.setState({ errorMessage: \"\", hasError: false });\n this.onSendEmailChangeInstructions();\n }\n } else {",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

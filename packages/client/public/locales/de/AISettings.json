@@ -45,7 +45,7 @@
   "ModelNameHint": "Verwenden Sie einen Namen, der Ihnen hilft, dieses Modell zu identifizieren.",
   "OtherModels": "Andere Modelle",
   "OtherModelsTooltip": "Einige Modelle unterstützen bestimmte Aktionen oder Funktionen möglicherweise nicht",
-  "PortalAiDisabledTooltip": "Um den {{productName}} AI Provider zu verwenden, stellen Sie bitte zunächst eine Verbindung zu einem AI-Dienst her.",
+  "PortalAiDisabledTooltip": "Um den {{productName}} KI-Anbieter zu verwenden, stellen Sie bitte zunächst eine Verbindung zu einem KI-Dienst her.",
   "Provider": "Anbieter",
   "ProviderAddedSuccess": "{{aiProvider}} wurde erfolgreich hinzugefügt",
   "ProviderKey": "Schlüssel",

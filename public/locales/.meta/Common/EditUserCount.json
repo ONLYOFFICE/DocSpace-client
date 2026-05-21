@@ -3,7 +3,7 @@
   "content": "{{count}} {{productName}} users",
   "content_en_sha1_hash": "bae40159efb2f2263adf84c6e57307ea8d807a8a",
   "created_at": "2025-09-19T15:39:07.642Z",
-  "updated_at": "2026-04-11T20:54:17.054Z",
+  "updated_at": "2026-05-15T14:00:06.943Z",
   "comment": {
     "text": "This string displays the number of users with editing permissions. It appears within a dialog showing user statistics, where `{{count}}` is the number of users and `{{productName}}` is the product's brand name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/UserStatisticsDialog/sub-components/UserStatisticsInfo.tsx",
-      "line_number": 45,
+      "line_number": 54,
       "context": "const percentEditing = Math.round((totalUsers / limitUsers) * 100);\n \n const detailedEditInfo = () => {\n const portalUsersText = portalUsers\n ? t(\"EditUserCount\", {\n count: portalUsers,\n productName: getBrandName(\"ProductName\"),\n })\n : null;",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

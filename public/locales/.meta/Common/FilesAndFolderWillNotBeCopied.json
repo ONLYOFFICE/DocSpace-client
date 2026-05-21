@@ -3,7 +3,7 @@
   "content": "Files and folder will not be copied",
   "content_en_sha1_hash": "66648e8a0c6d0b325af25f71b0d660b44211a56d",
   "created_at": "2025-05-19T21:30:45.297Z",
-  "updated_at": "2026-04-23T17:24:01.722Z",
+  "updated_at": "2026-05-15T14:00:06.651Z",
   "comment": {
     "text": "This is a message displayed in a conflict resolution dialog. It informs the user that selected files and folders will not be copied due to a conflict.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
-      "line_number": 313,
+      "line_number": 322,
       "context": "const getSkipDescription = () => {\n return isFileDialog\n ? t(\"Common:SkipDescription\")\n : isFolderDialog\n ? t(\"Common:SkipFolderDescription\")\n : t(\"Common:FilesAndFolderWillNotBeCopied\");\n };\n \n const onCloseConflictDialog = () => {\n if (isUploadConflict) {\n cancelUploadAction();",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

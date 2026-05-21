@@ -3,7 +3,7 @@
   "content": "Administration",
   "content_en_sha1_hash": "b8be3d1264310c3b8c848d4b90d5206179a40cc4",
   "created_at": "2025-05-19T21:30:54.760Z",
-  "updated_at": "2026-04-11T21:13:54.841Z",
+  "updated_at": "2026-05-15T14:00:06.730Z",
   "comment": {
     "text": "This is a label for a section or category in the InfoPanel and Share dialogs, representing administrators or administrative roles.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/FilesView/hooks/useMembers.ts",
-      "line_number": 100,
+      "line_number": 109,
       "context": "list: TMemberTuple;\n extra?: Partial<TTitleMember>;\n }[] = [\n {\n key: TInfoPanelMemberType.administrators,\n label: t(\"InfoPanel:Administration\"),\n list: administrators,\n },\n {\n key: TInfoPanelMemberType.groups,\n label: t(\"Common:Groups\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 564,
+      "line_number": 573,
       "context": "owner.push(member);\n } else if (access === ShareAccessRights.RoomManager || isOwner) {\n if (administrators.length === 0) {\n administrators.push({\n id: \"administrators\",\n displayName: t(\"InfoPanel:Administration\"),\n isTitle: true,\n } satisfies TTitleShare);\n }\n \n administrators.push(member);",
       "module": "/packages/shared"
     }

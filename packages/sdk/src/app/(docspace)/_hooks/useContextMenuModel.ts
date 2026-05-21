@@ -23,6 +23,9 @@ import DuplicateReactSvgUrl from "PUBLIC_DIR/images/icons/16/duplicate.react.svg
 import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
 import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
+import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
+import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
+import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
 
 import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
 import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
@@ -47,6 +50,7 @@ type UseContextMenuModelProps = {
   onCopySelectedClick?: (items: (TFileItem | TFolderItem)[]) => void;
   onMoveSelectedClick?: (items: (TFileItem | TFolderItem)[]) => void;
   onRestoreSelectedClick?: (items: (TFileItem | TFolderItem)[]) => void;
+  onShowVersionHistoryClick?: (item: TFileItem) => void;
 };
 
 export default function useContextMenuModel({
@@ -63,16 +67,21 @@ export default function useContextMenuModel({
   onCopySelectedClick,
   onMoveSelectedClick,
   onRestoreSelectedClick,
+  onShowVersionHistoryClick,
 }: UseContextMenuModelProps) {
   const { t } = useTranslation(["Common"]);
 
   const filesSelectionStore = useFilesSelectionStore();
 
   const { openFolder, copyFolderLink } = useFolderActions({ t });
-  const { openFile, copyFileLink } = useFilesActions({ t });
+  const { openFile, copyFileLink, lockFile, changeCustomFilter } = useFilesActions({ t });
   const { downloadAction, downloadAsAction } = useDownloadActions();
-  const { markAsFavorite, removeFromFavorites, removeFromRecent } =
-    useFavoritesActions({ t });
+  const {
+    markAsFavorite,
+    removeFromFavorites,
+    removeFromRecent,
+    removeFromSharedWithMe,
+  } = useFavoritesActions({ t });
 
   const getSelectItem = useCallback(
     (i: TFileItem | TFolderItem) => {
@@ -267,6 +276,20 @@ export default function useContextMenuModel({
     [t, removeFromRecent],
   );
 
+  const getRemoveFromSharedWithMeItem = useCallback(
+    (i: TFileItem | TFolderItem) => {
+      return {
+        id: "menu-remove-from-shared-with-me",
+        key: "remove-from-shared-with-me",
+        label: t("Common:RemoveFromList"),
+        icon: RemoveOutlineSvgUrl,
+        onClick: () => removeFromSharedWithMe(i),
+        disabled: false,
+      };
+    },
+    [t, removeFromSharedWithMe],
+  );
+
   const getShareItem = useCallback(
     (i: TFileItem | TFolderItem) => {
       return {
@@ -321,6 +344,50 @@ export default function useContextMenuModel({
       };
     },
     [t, onMoveClick],
+  );
+
+  const getShowVersionHistoryItem = useCallback(
+    (i: TFileItem) => {
+      return {
+        id: "option_show-version-history",
+        key: "show-version-history",
+        label: t("Common:ShowVersionHistory"),
+        icon: HistoryFinalizedReactSvgUrl,
+        onClick: () => onShowVersionHistoryClick?.(i),
+        disabled: !onShowVersionHistoryClick,
+      };
+    },
+    [t, onShowVersionHistoryClick],
+  );
+
+  const getBlockUnblockVersionItem = useCallback(
+    (i: TFileItem) => {
+      return {
+        id: "option_block-unblock-version",
+        key: "block-unblock-version",
+        label: i.locked ? t("Common:UnblockFile") : t("Common:BlockFile"),
+        icon: LockedReactSvgUrl,
+        onClick: () => lockFile(i),
+        disabled: false,
+      };
+    },
+    [t, lockFile],
+  );
+
+  const getCustomFilterItem = useCallback(
+    (i: TFileItem) => {
+      return {
+        id: "option_custom-filter",
+        key: "custom-filter",
+        label: i.customFilterEnabled
+          ? t("Common:CustomFilterDisable")
+          : t("Common:CustomFilterEnable"),
+        icon: CustomFilterReactSvgUrl,
+        onClick: () => changeCustomFilter(i),
+        disabled: false,
+      };
+    },
+    [t, changeCustomFilter],
   );
 
   const getShowInfoItem = useCallback(
@@ -618,6 +685,24 @@ export default function useContextMenuModel({
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.restore))
         actionGroup.push(getRestoreItem(item!));
 
+      if (
+        contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.showVersionHistory) &&
+        !("isFolder" in item! && item!.isFolder)
+      )
+        actionGroup.push(getShowVersionHistoryItem(item as TFileItem));
+
+      if (
+        contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.blockUnblockVersion) &&
+        !("isFolder" in item! && item!.isFolder)
+      )
+        actionGroup.push(getBlockUnblockVersionItem(item as TFileItem));
+
+      if (
+        contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.customFilter) &&
+        !("isFolder" in item! && item!.isFolder)
+      )
+        actionGroup.push(getCustomFilterItem(item as TFileItem));
+
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.showInfo))
         actionGroup.push(getShowInfoItem(item!));
 
@@ -634,6 +719,11 @@ export default function useContextMenuModel({
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.removeFromRecent))
         favoritesGroup.push(getRemoveFromRecentItem(item as TFileItem));
+
+      if (
+        contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.removeFromSharedWithMe)
+      )
+        deleteGroup.push(getRemoveFromSharedWithMeItem(item!));
 
       if (
         contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.delete) ||
@@ -671,6 +761,7 @@ export default function useContextMenuModel({
       getMarkAsFavoriteItem,
       getRemoveFromFavoritesItem,
       getRemoveFromRecentItem,
+      getRemoveFromSharedWithMeItem,
       getShareItem,
       getCopyItem,
       getDuplicateItem,
@@ -678,6 +769,9 @@ export default function useContextMenuModel({
       getRenameItem,
       getRestoreItem,
       getShowInfoItem,
+      getShowVersionHistoryItem,
+      getBlockUnblockVersionItem,
+      getCustomFilterItem,
       getDeleteItem,
       getHeaderContextMenuModel,
       getGroupContextMenuModel,

@@ -3,7 +3,7 @@
   "content": "Only one file or folder can be uploaded at a time. Please select a single item.",
   "content_en_sha1_hash": "63b4f45591cb340cb91684a43b8f62d464ad4164",
   "created_at": "2026-03-20T09:07:38.492Z",
-  "updated_at": "2026-05-08T13:10:45.746Z",
+  "updated_at": "2026-05-15T14:00:07.045Z",
   "comment": {
     "text": "This is a toast message that appears when a user attempts to upload multiple files or folders simultaneously, but the system is configured to only allow single uploads. It informs the user about the limitation and advises them to select only one item.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/uploader/index.tsx",
-      "line_number": 425,
+      "line_number": 434,
       "context": "isLoading={isLoading}\n uploadPercent={uploadPercent}\n isFolderUpload={isFolderUpload}\n isMultipleUpload={isMultipleUpload}\n onSingleUploadError={() => {\n toastr.warning(getCommonTranslation(\"SingleUploadWarning\"), null);\n }}\n onDrop={onDrop}\n onDropRejected={onDropRejected}\n accept={accept}\n linkMainText={linkMainText ?? getCommonTranslation(\"Upload\")}",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

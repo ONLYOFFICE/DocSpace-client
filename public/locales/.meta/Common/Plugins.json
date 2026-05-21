@@ -3,7 +3,7 @@
   "content": "Plugins",
   "content_en_sha1_hash": "ab2e26dd8b8868a3969cb3321e0c983c0d9d67d4",
   "created_at": "2025-05-19T21:30:47.398Z",
-  "updated_at": "2026-04-12T04:22:52.270Z",
+  "updated_at": "2026-05-15T14:00:06.852Z",
   "comment": {
     "text": "This is a label for a section or category within the portal settings, referring to the functionality for managing plugins.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/index.js",
-      "line_number": 142,
+      "line_number": 151,
       "context": "}\n \n if (enablePlugins) {\n const pluginLabel = (\n <div style={{ boxSizing: \"border-box\", display: \"flex\", gap: \"8px\" }}>\n {t(\"Common:Plugins\")}\n </div>\n );\n \n data.splice(2, 0, {\n id: \"plugins\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/index.tsx",
-      "line_number": 71,
+      "line_number": 80,
       "context": "const { onDrop, showCacheWarning, handleCloseCacheWarning } = usePluginUpload(\n { addPlugin },\n );\n \n useEffect(() => {\n setDocumentTitle(t(\"Common:Plugins\"));\n }, [t]);\n \n return (\n <>\n {showPortalSettingsLoader ||",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 405,
+      "line_number": 414,
       "context": "{\n id: \"portal-settings_catalog-plugins\",\n key: \"4-3\",\n icon: \"\",\n link: \"plugins\",\n tKey: \"Plugins\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-document-service\",\n key: \"4-4\",",
       "module": "/packages/client"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

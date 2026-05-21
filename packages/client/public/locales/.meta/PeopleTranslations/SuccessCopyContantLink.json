@@ -3,7 +3,7 @@
   "content": "Contact link copied successfully. The link is <strong>valid for 7 days.</strong>",
   "content_en_sha1_hash": "5619f1f14069c03b91d2f3f6bab2a6c1a01e91af",
   "created_at": "2025-05-19T21:30:53.522Z",
-  "updated_at": "2026-04-13T14:59:05.788Z",
+  "updated_at": "2026-05-15T14:00:06.721Z",
   "comment": {
     "text": "Toast message. Appears after a contact link is successfully copied, informing the user about the link's validity period. The \"7 days\" part is emphasized.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/people-helpers.js",
-      "line_number": 62,
+      "line_number": 71,
       "context": ");\n };\n \n export const showSuccessCopyContantLink = (t) => {\n toastr.success(\n <Trans t={t} i18nKey=\"SuccessCopyContantLink\" ns=\"PeopleTranslations\" />,\n );\n };",
       "module": "/packages/client"
     }

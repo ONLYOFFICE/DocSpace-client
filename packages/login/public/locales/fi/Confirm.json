@@ -38,6 +38,7 @@
   "TermsAndConditions": "Jatkamalla ymmärrät ja hyväksyt <1>Ehdot</1> ja <2>Tietosuojalausunnon</2>.",
   "TfaSubTitle": "Noudata yksinkertaisia ohjeita jatkaaksesi työtä tässä {{productName}}:ssa:",
   "TfaTitle": "Kaksivaiheinen tunnistautuminen käytössä turvallisen pääsyn varmistamiseksi",
+  "UserAlreadyInvited": "Sinut on jo kutsuttu. Viimeistele rekisteröityminen sähköpostin linkillä.",
   "VerifyConnection": "Tarkista yhteys",
   "VerifyConnectionDescription": "Syötä alla olevaan kenttään authenticator-sovelluksesi luoma 6-numeroinen koodi suorittaaksesi asetuksen loppuun."
 }

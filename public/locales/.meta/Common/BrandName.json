@@ -3,7 +3,7 @@
   "content": "Brand name",
   "content_en_sha1_hash": "6b4b8b5df0e218b10da0dadc07407d9783d4e3ad",
   "created_at": "2025-05-26T07:15:41.010Z",
-  "updated_at": "2026-04-13T14:59:05.903Z",
+  "updated_at": "2026-05-15T14:00:06.874Z",
   "comment": {
     "text": "This is a label for a section in the portal settings where users can configure the brand name displayed within the application. It appears as a navigation link and a page title.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 117,
+      "line_number": 126,
       "context": "{\n id: \"portal-settings_catalog-brand-name\",\n key: \"0-1-0\",\n icon: \"\",\n link: \"brand-name\",\n tKey: \"Common:BrandName\",\n },\n {\n id: \"portal-settings_catalog-white-label\",\n key: \"0-1-1\",\n icon: \"\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/management/src/lib/index.ts",
-      "line_number": 67,
+      "line_number": 76,
       "context": "case \"company-info\":\n return { key: t(\"Common:CompanyInfoSettings\"), isSubPage: true };\n case \"additional-resources\":\n return { key: t(\"Common:AdditionalResources\"), isSubPage: true };\n case \"brand-name\":\n return { key: t(\"Common:BrandName\"), isSubPage: true };\n case \"bonus\":\n return { key: t(\"Common:Bonus\"), isSubPage: false };\n default:\n return { key: t(\"Common:Spaces\"), isSubPage: false };\n }",
       "module": "/packages/management"
     },
     {
       "file_path": "/packages/shared/pages/Branding/BrandName/index.tsx",
-      "line_number": 137,
+      "line_number": 146,
       "context": ">\n {showNotAvailable ? <NotAvailable /> : null}\n \n <div className={classNames(styles.headerContainer, \"header-container\")}>\n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"BrandName\")}\n </Text>\n \n {!isSettingPaid && !standalone ? (\n <Badge\n className={classNames(styles.paidBadge, \"paid-badge\")}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
-      "line_number": 53,
+      "line_number": 62,
       "context": "const { t } = useTranslation(\"Common\");\n \n return (\n <div className={styles.mobileView}>\n <CategoryItem\n title={t(\"BrandName\")}\n subtitle={t(\"BrandNameSubtitleMobile\")}\n url={`${baseUrl}/branding/brand-name`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}",
       "module": "/packages/shared"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "sk": {
       "ai_translated": false,

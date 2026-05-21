@@ -3,7 +3,7 @@
   "content": "We will transfer shared files and rooms created by contact.",
   "content_en_sha1_hash": "4c763ae72ab73b9a43fee32552151f57d344ded9",
   "created_at": "2025-10-03T13:19:28.237Z",
-  "updated_at": "2026-04-11T21:05:12.688Z",
+  "updated_at": "2026-05-15T14:00:06.668Z",
   "comment": {
     "text": "This is a sentence in a dialog box, explaining that shared files and rooms created by a specific contact will be transferred.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Description.js",
-      "line_number": 43,
+      "line_number": 52,
       "context": "return (\n <div className={classNames(styles.availableList, \"list-container\")}>\n <Text className={styles.listItem}>\n {noRoomFilesToMove\n ? t(\"RoomsOnlyReassignment\")\n : t(\"DescriptionDataReassignment\")}\n </Text>\n <Text className={styles.listItem}>{t(\"NoteDataReassignment\")}</Text>\n \n {dataReassignmentUrl ? (\n <Link",
       "module": "/packages/client"
     }
@@ -24,6 +24,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     }
   }
 }

@@ -3,7 +3,7 @@
   "content": "Sorry, the resource cannot be found.",
   "content_en_sha1_hash": "d4e3df2d7bea3293966c553952c59e1ed35b47f7",
   "created_at": "2025-05-19T21:30:45.054Z",
-  "updated_at": "2026-04-11T20:53:24.286Z",
+  "updated_at": "2026-05-15T14:00:06.929Z",
   "comment": {
     "text": "This is an error message displayed when a requested resource or page cannot be found.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/errors/Error404.tsx",
-      "line_number": 36,
+      "line_number": 45,
       "context": "const Error404 = () => {\n const t = useCommonTranslation();\n const ready = getTranslationReady();\n \n return ready && <ErrorContainer headerText={t(\"Error404Text\")} />;\n };\n \n export default Error404;",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/shared/components/errors/Error404.tsx",
-      "line_number": 38,
+      "line_number": 47,
       "context": "import ErrorContainer from \"@docspace/ui-kit/components/error-container/ErrorContainer\";\n \n const Error404 = () => {\n const { t, ready } = useTranslation([\"Common\"]);\n \n return ready && <ErrorContainer headerText={t(\"Error404Text\")} />;\n };\n \n export default Error404;",
       "module": "/packages/shared"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

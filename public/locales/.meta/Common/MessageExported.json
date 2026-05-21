@@ -3,7 +3,7 @@
   "content": "Message exported to file: <1>{{fileName}}</1>",
   "content_en_sha1_hash": "ab92a01d2527086a1e79c6bc2ac3c304fee54796",
   "created_at": "2025-10-27T16:14:24.189Z",
-  "updated_at": "2026-04-11T20:48:42.441Z",
+  "updated_at": "2026-05-15T14:00:06.991Z",
   "comment": {
     "text": "This is a toast message that appears after a message has been successfully exported. `{{fileName}}` is the name of the exported file, and `<1></1>` is a link to open the file.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/buttons/index.tsx",
-      "line_number": 128,
+      "line_number": 135,
       "context": "handleFileOpen(resultFile.id!.toString());\n }\n \n const toastMsg = (\n <CommonTrans\n i18nKey=\"MessageExported\"\n values={{ fileName }}\n components={{\n 1: (\n <Link\n type={LinkType.action}",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

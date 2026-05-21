@@ -3,7 +3,7 @@
   "content": "Use this button to upload existing PDF forms or create new ones from scratch.",
   "content_en_sha1_hash": "33fc5544ea2ecd5cba567840fcf0d4af6a3244fe",
   "created_at": "2026-03-31T15:18:26.833Z",
-  "updated_at": "2026-04-23T17:24:02.162Z",
+  "updated_at": "2026-05-15T14:00:06.983Z",
   "comment": {
     "text": "This is a tooltip for a button. It explains that the button allows users to upload existing PDF forms or create new ones.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
-      "line_number": 240,
+      "line_number": 249,
       "context": "callbacks,\n ),\n canCreate && {\n target: '[data-testid=\"plus-button\"]',\n content: t(\n \"Common:TourPlusButton\",\n \"Use this button to upload existing PDF forms or create new ones from scratch.\",\n ),\n title: t(\"Common:TourPlusButtonTitle\", \"Add forms\"),\n data: { page: \"/forms/my-forms\" } satisfies TourStepData,\n skipBeacon: true,",
       "module": "/packages/sdk"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

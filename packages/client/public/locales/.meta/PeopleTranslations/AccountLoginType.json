@@ -3,7 +3,7 @@
   "content": "Account login type",
   "content_en_sha1_hash": "861989cfa261ace5361fae74f1927e459e118d69",
   "created_at": "2025-05-19T21:30:53.451Z",
-  "updated_at": "2026-04-11T21:20:21.116Z",
+  "updated_at": "2026-05-15T14:00:06.752Z",
   "comment": {
     "text": "This is a label for a filter option in the contacts list, allowing users to filter contacts by their account login type (e.g., SSO).",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 626,
+      "line_number": 635,
       "context": "const accountLoginTypeItems = [\n {\n key: \"filter-login-type\",\n group: \"filter-login-type\",\n label: t(\"PeopleTranslations:AccountLoginType\"),\n isHeader: true,\n isLast: true,\n },\n {\n key: AccountLoginType.SSO,",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Available in {{count}} countries",
   "content_en_sha1_hash": "d69aedcd2f5c84bd66d6c2613c7df606cce06360",
   "created_at": "2026-03-31T15:18:15.055Z",
-  "updated_at": "2026-04-11T20:50:11.670Z",
+  "updated_at": "2026-05-15T14:00:06.980Z",
   "comment": {
     "text": "This is a short label displaying the number of countries where the library is available. The `{{count}}` variable represents this number.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/library-landing/StatsBar.tsx",
-      "line_number": 68,
+      "line_number": 77,
       "context": "</div>\n \n <div className={styles.statsCard}>\n <span className={styles.statsNumber}>{countriesCount}</span>\n <span className={styles.statsLabel}>\n {t(\"Common:LibraryStatsCountries\", { count: countriesCount })}\n </span>\n </div>\n </div>\n </section>\n );",
       "module": "/packages/sdk"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

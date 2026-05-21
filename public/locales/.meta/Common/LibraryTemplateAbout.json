@@ -3,7 +3,7 @@
   "content": "About this template",
   "content_en_sha1_hash": "459be0f10e4ee77078f691e32a06cf1bd1695964",
   "created_at": "2026-03-31T15:18:15.135Z",
-  "updated_at": "2026-04-23T17:24:02.167Z",
+  "updated_at": "2026-05-15T14:00:06.986Z",
   "comment": {
     "text": "This is a section title displayed above a description of the selected template in the template library.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(forms)/forms/library/[langId]/[categoryId]/template/[templateId]/page.client.tsx",
-      "line_number": 342,
+      "line_number": 351,
       "context": "primary\n />\n \n <div className={styles.description}>\n <h3 className={styles.sectionTitle}>\n {t(\"Common:LibraryTemplateAbout\")}\n </h3>\n <p className={styles.descriptionText}>\n {t(\"Common:LibraryTemplateAboutText\")}\n </p>\n </div>",
       "module": "/packages/sdk"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

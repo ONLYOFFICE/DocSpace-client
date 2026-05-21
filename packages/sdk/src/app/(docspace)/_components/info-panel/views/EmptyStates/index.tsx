@@ -34,6 +34,8 @@ import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/emptyview/empty.files.info.light.svg?url";
 import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.files.info.dark.svg?url";
+import EmptyHistorySvgUrl from "PUBLIC_DIR/images/emptyview/empty.history.light.svg?url";
+import EmptyHistorySvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.history.dark.svg?url";
 
 import styles from "./EmptyStates.module.scss";
 
@@ -48,6 +50,21 @@ export const NoItem = () => {
       {/* biome-ignore lint/performance/noImgElement: static SVG via ?url import */}
       <img className={styles.image} src={imgSrc} alt="No item" />
       <Text className={styles.text}>{t("Common:FilesEmptyScreenText")}</Text>
+    </div>
+  );
+};
+
+export const NoHistory = () => {
+  const { t } = useTranslation(["Common"]);
+  const { isBase } = useTheme();
+
+  const imgSrc = isBase ? EmptyHistorySvgUrl : EmptyHistorySvgDarkUrl;
+
+  return (
+    <div className={styles.noItemContainer}>
+      {/* biome-ignore lint/performance/noImgElement: static SVG via ?url import */}
+      <img className={styles.image} src={imgSrc} alt="No history" />
+      <Text className={styles.text}>{t("Common:NoHistory")}</Text>
     </div>
   );
 };

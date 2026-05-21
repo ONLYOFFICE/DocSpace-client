@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 "use client";
 
@@ -65,13 +74,21 @@ import { InfoContext } from "@/app/(docspace)/_contexts/InfoContext";
 import { DeleteContext } from "@/app/(docspace)/_contexts/DeleteContext";
 import { FileOperationsContext } from "@/app/(docspace)/_contexts/FileOperationsContext";
 import { RenameContext } from "@/app/(docspace)/_contexts/RenameContext";
-import type { TFileItem, TFolderItem } from "@/app/(docspace)/_hooks/useItemList";
+import { VersionHistoryContext } from "@/app/(docspace)/_contexts/VersionHistoryContext";
+import { ConvertContext } from "@/app/(docspace)/_contexts/ConvertContext";
+import type {
+  TFileItem,
+  TFolderItem,
+} from "@/app/(docspace)/_hooks/useItemList";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
 import CreateFileDialog from "../create-file-dialog";
+import ConvertDialog from "../convert-dialog";
+import VersionHistoryPanel from "../version-history-panel";
+import { useVersionHistoryStore } from "../../_store/VersionHistoryStore";
 import {
   InfoPanelView,
   useInfoPanelStore,
@@ -81,11 +98,16 @@ import { useDocsMenuModels } from "../../_hooks/useDocsMenuModels";
 import useTrashActions from "../../_hooks/useTrashActions";
 import useFileOperations from "../../_hooks/useFileOperations";
 import useRenameActions from "../../_hooks/useRenameActions";
+import useConvertActions from "../../_hooks/useConvertActions";
+import { useDocsSettingsStore } from "../../_store/DocsSettingsStore";
+import { useDocsUserStore } from "../../_store/DocsUserStore";
 import type { SelectorMode } from "../../_hooks/useFileOperations";
 import { useDocsFrameBridge } from "../../_hooks/useDocsFrameBridge";
 import DropZone from "../drop-zone";
 import DeleteDialog from "../delete-dialog";
 import RenameDialog from "../rename-dialog";
+import UploadPanel from "../upload-panel";
+import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
 import {
   InfoPanelBody as DocsInfoPanelBody,
   InfoPanelHeader as DocsInfoPanelHeader,
@@ -123,127 +145,138 @@ const getSubmitLabel = (mode: SelectorMode, t: (key: string) => string) => {
   return t("Common:RestoreHere");
 };
 
-const DocsLayout = observer(({
-  folders,
-  files,
-  total,
-  current,
-  pathParts,
-  filesSettings,
-  portalSettings,
-  filesFilter,
-  withoutFavorite,
-  editorBasePath,
-}: DocsLayoutProps) => {
-  const { t } = useTranslation(["Common"]);
-  const { isEmptyList } = useSettingsStore();
-  const { rootFolderType } = useFilesListStore();
-  const infoPanelStore = useInfoPanelStore();
-  const { sdkConfig } = useSDKConfig();
-  const router = useRouter();
-  const pathname = usePathname();
+const DocsLayout = observer(
+  ({
+    folders,
+    files,
+    total,
+    current,
+    pathParts,
+    filesSettings,
+    portalSettings,
+    filesFilter,
+ 	withoutFavorite,
+    editorBasePath,
+  }: DocsLayoutProps) => {
+    const { t } = useTranslation(["Common"]);
+    const { isEmptyList } = useSettingsStore();
+    const { rootFolderType } = useFilesListStore();
+    const infoPanelStore = useInfoPanelStore();
+    const versionHistoryStore = useVersionHistoryStore();
+    const docsUserStore = useDocsUserStore();
+    const { sdkConfig } = useSDKConfig();
+    const router = useRouter();
 
-  const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
+    const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
 
-  const isMyDocuments = rootFolderType === FolderType.USER;
-  const isInRooms =
+    const isMyDocuments = rootFolderType === FolderType.USER;
+  	const isInRooms =
     rootFolderType === FolderType.Rooms ||
     rootFolderType === FolderType.Archive;
-  const isActionButtonEnabled =
+     const isActionButtonEnabled =
     (isMyDocuments || isInRooms) && !sdkConfig?.disableActionButton;
-
-  const docsActions = useDocsActions({ editorBasePath });
-  const {
-    uploadFilesToFolder,
-    openCreateDialog,
-    closeCreateDialog,
-    onSaveCreate,
-    dialogVisible,
-    dialogType,
-    isCreating,
-    onUploadFiles,
-    onUploadFolder,
-  } = docsActions;
 
   const { desktopModel, quickActionItems } = useDocsMenuModels({
     openCreateDialog,
     onUploadFiles,
     onUploadFolder,
   });
+    const docsActions = useDocsActions();
+    const {
+      uploadFilesToFolder,
+      openCreateDialog,
+      closeCreateDialog,
+      onSaveCreate,
+      dialogVisible,
+      dialogType,
+      isCreating,
+      onUploadFiles,
+      onUploadFolder,
+    } = docsActions;
 
-  useDocsFrameBridge({ isReady: true, uploadFilesToFolder });
-  const {
-    isTrash,
-    requestDeleteItem,
-    requestDelete,
-    deleteDialogVisible,
-    deleteDialogItemCount,
-    isDeleting,
-    closeDeleteDialog,
-    confirmDelete,
-  } = useTrashActions();
+    const { desktopModel, quickActionItems } = useDocsMenuModels({
+      openCreateDialog,
+      onUploadFiles,
+      onUploadFolder,
+    });
 
-  const {
-    renameDialogVisible,
-    renameInitialName,
-    isRenaming,
-    requestRename,
-    closeRenameDialog,
-    confirmRename,
-  } = useRenameActions();
+    useDocsFrameBridge({ isReady: true, uploadFilesToFolder });
 
-  const {
-    selectorDialogVisible,
-    selectorMode,
-    foldersTree,
-    selectorInitData,
-    disabledItems,
-    operationProgress,
-    requestCopy,
-    requestCopyItems,
-    requestMove,
-    requestMoveItems,
-    requestRestore,
-    requestRestoreItems,
-    requestDuplicate,
-    closeSelectorDialog,
-    confirmOperation,
-  } = useFileOperations();
+    const uploadStore = useUploadStore();
 
-  const deleteHandler = React.useMemo(
-    () => ({ deleteItem: requestDeleteItem, deleteItems: requestDelete }),
-    [requestDeleteItem, requestDelete],
-  );
+    const {
+      renameDialogVisible,
+      renameInitialName,
+      isRenaming,
+      requestRename,
+      closeRenameDialog,
+      confirmRename,
+    } = useRenameActions();
 
-  const renameHandler = React.useMemo(
-    () => ({ renameItem: requestRename }),
-    [requestRename],
-  );
-
-  const fileOperationsHandler = React.useMemo(
-    () => ({
-      copyItem: requestCopy,
-      moveItem: requestMove,
-      duplicateItem: requestDuplicate,
-      restoreItem: requestRestore,
-      copyItems: requestCopyItems,
-      moveItems: requestMoveItems,
-      restoreItems: requestRestoreItems,
-    }),
-    [
+    const {
+      selectorDialogVisible,
+      selectorMode,
+      foldersTree,
+      selectorInitData,
+      disabledItems,
+      operationProgress,
+      trackOperation,
       requestCopy,
       requestCopyItems,
       requestMove,
       requestMoveItems,
-      requestDuplicate,
       requestRestore,
       requestRestoreItems,
-    ],
-  );
+      requestDuplicate,
+      closeSelectorDialog,
+      confirmOperation,
+    } = useFileOperations();
 
-  const openFileHandler = React.useCallback(
-    (file: TFileItem, preview?: boolean) => {
-      const basePath = editorBasePath ?? "/personal-files/editor";
+    const {
+      isTrash,
+      requestDeleteItem,
+      requestDelete,
+      deleteDialogVisible,
+      deleteDialogItemCount,
+      isDeleting,
+      closeDeleteDialog,
+      confirmDelete,
+    } = useTrashActions(trackOperation);
+
+    const deleteHandler = React.useMemo(
+      () => ({ deleteItem: requestDeleteItem, deleteItems: requestDelete }),
+      [requestDeleteItem, requestDelete],
+    );
+
+    const renameHandler = React.useMemo(
+      () => ({ renameItem: requestRename }),
+      [requestRename],
+    );
+
+    const fileOperationsHandler = React.useMemo(
+      () => ({
+        copyItem: requestCopy,
+        moveItem: requestMove,
+        duplicateItem: requestDuplicate,
+        restoreItem: requestRestore,
+        copyItems: requestCopyItems,
+        moveItems: requestMoveItems,
+        restoreItems: requestRestoreItems,
+      }),
+      [
+        requestCopy,
+        requestCopyItems,
+        requestMove,
+        requestMoveItems,
+        requestDuplicate,
+        requestRestore,
+        requestRestoreItems,
+      ],
+    );
+
+    const openFileInEditor = React.useCallback(
+      (file: TFileItem, preview?: boolean) => {
+  	 const basePath = editorBasePath ?? "/personal-files/editor";
       const params = new URLSearchParams();
       if (preview) params.set("action", "view");
       if (editorBasePath && pathname) {
@@ -254,209 +287,290 @@ const DocsLayout = observer(({
         ? `${basePath}/${file.id}?${qs}`
         : `${basePath}/${file.id}`;
       router.push(url);
-    },
-    [router, editorBasePath, pathname],
-  );
+      },
+      [router, editorBasePath, pathname],
+    );
 
-  const shareHandler = React.useCallback(
-    (item: TFileItem | TFolderItem) => {
-      infoPanelStore.open(item);
-      infoPanelStore.setView(InfoPanelView.infoShare);
-    },
-    [infoPanelStore],
-  );
+    const {
+      convertDialogVisible,
+      convertTarget,
+      isConverting,
+      convertProgress,
+      requestConvert,
+      closeConvertDialog,
+      confirmConvert,
+      onChangeStoreOriginal,
+    } = useConvertActions();
 
-  const infoHandler = React.useCallback(
-    (item: TFileItem | TFolderItem) => {
-      infoPanelStore.open(item);
-      infoPanelStore.setView(InfoPanelView.infoDetails);
-    },
-    [infoPanelStore],
-  );
+    const docsSettingsStore = useDocsSettingsStore();
+    const storeOriginalFiles =
+      docsSettingsStore.filesSettings?.storeOriginalFiles ?? false;
 
-  return (
-    <OpenFileContext.Provider value={openFileHandler}>
-     <InfoContext.Provider value={infoHandler}>
-      <ShareContext.Provider value={shareHandler}>
-        <DeleteContext.Provider value={deleteHandler}>
-          <RenameContext.Provider value={renameHandler}>
-            <FileOperationsContext.Provider value={fileOperationsHandler}>
-              <div className={styles.root} style={frameHeaderVars}>
-                <DropZone onFilesDropped={uploadFilesToFolder} disabled={!isMyDocuments}>
-                  <RootScrollbar>
-                    <SectionWrapper
-                      sectionHeaderContent={
-                        <Header
-                          current={current}
-                          pathParts={pathParts}
-                          isEmptyList={isEmptyList}
-                          isInfoPanelVisible={sdkConfig?.infoPanelVisible ? infoPanelStore.isVisible : false}
-                          onToggleInfoPanel={sdkConfig?.infoPanelVisible ? infoPanelStore.toggle : undefined}
-                          headerOffset={headerOffset}
-                        />
-                      }
-                      sectionFilterContent={
-                        <>
-                          {isActionButtonEnabled && (
-                            <QuickActions
-                              items={quickActionItems}
-                              className={styles.quickActions}
+    const openFileHandler = React.useCallback(
+      (file: TFileItem, preview?: boolean) => {
+        if (!preview && file.viewAccessibility?.MustConvert) {
+          requestConvert(file);
+          return;
+        }
+        openFileInEditor(file, preview);
+      },
+      [openFileInEditor, requestConvert],
+    );
+    const shareHandler = React.useCallback(
+      (item: TFileItem | TFolderItem) => {
+        infoPanelStore.open(item);
+        infoPanelStore.setView(InfoPanelView.infoShare);
+      },
+      [infoPanelStore],
+    );
+
+    const infoHandler = React.useCallback(
+      (item: TFileItem | TFolderItem) => {
+        infoPanelStore.open(item);
+        infoPanelStore.setView(InfoPanelView.infoDetails);
+      },
+      [infoPanelStore],
+    );
+
+    const versionHistoryHandler = React.useCallback(
+      (item: TFileItem) => {
+        versionHistoryStore.open(item as TFile);
+      },
+      [versionHistoryStore],
+    );
+
+    return (
+      <OpenFileContext.Provider value={openFileHandler}>
+        <InfoContext.Provider value={infoHandler}>
+          <ShareContext.Provider value={shareHandler}>
+            <DeleteContext.Provider value={deleteHandler}>
+              <RenameContext.Provider value={renameHandler}>
+                <FileOperationsContext.Provider value={fileOperationsHandler}>
+                  <VersionHistoryContext.Provider value={versionHistoryHandler}>
+                  <ConvertContext.Provider value={requestConvert}>
+                  <div className={styles.root} style={frameHeaderVars}>
+                    <DropZone
+                      onFilesDropped={uploadFilesToFolder}
+                      disabled={!isMyDocuments}
+                    >
+                      <RootScrollbar>
+                        <SectionWrapper
+                          sectionHeaderContent={
+                            <Header
+                              current={current}
+                              pathParts={pathParts}
+                              isEmptyList={isEmptyList}
+                              isInfoPanelVisible={
+                                sdkConfig?.infoPanelVisible
+                                  ? infoPanelStore.isVisible
+                                  : false
+                              }
+                              onToggleInfoPanel={
+                                sdkConfig?.infoPanelVisible
+                                  ? infoPanelStore.toggle
+                                  : undefined
+                              }
+                              headerOffset={headerOffset}
                             />
-                          )}
-                          <Filter
-                            filesFilter={filesFilter}
-                            showMainButton={isActionButtonEnabled}
-                            mainButtonProps={
-                              isActionButtonEnabled
-                                ? {
-                                    isDropdown: true,
-                                    model: desktopModel,
-                                    text: t("Common:New"),
-                                  }
-                                : undefined
+                          }
+                          sectionFilterContent={
+                            <>
+                              {isActionButtonEnabled && (
+                                <QuickActions
+                                  items={quickActionItems}
+                                  className={styles.quickActions}
+                                />
+                              )}
+                              <Filter
+                                filesFilter={filesFilter}
+                                showMainButton={isActionButtonEnabled}
+                                mainButtonProps={
+                                  isActionButtonEnabled
+                                    ? {
+                                        isDropdown: true,
+                                        model: desktopModel,
+                                        text: t("Common:New"),
+                                      }
+                                    : undefined
+                                }
+                              />
+                            </>
+                          }
+                          sectionBodyContent={
+                            <List
+                              total={total}
+                              folders={folders}
+                              files={files}
+                              filesSettings={filesSettings}
+                              portalSettings={portalSettings}
+                              filesFilter={filesFilter}
+                              current={current}
+                              currentUserId={docsUserStore.user?.id}
+                            />
+                          }
+                          infoPanelHeaderContent={<DocsInfoPanelHeader />}
+                          infoPanelBodyContent={<DocsInfoPanelBody />}
+                          isInfoPanelVisible={infoPanelStore.isVisible}
+                          setIsInfoPanelVisible={(v: boolean) => {
+                            if (v) {
+                              if (!infoPanelStore.isVisible) {
+                                infoPanelStore.toggle();
+                              }
+                            } else {
+                              infoPanelStore.close();
                             }
-                          />
-                        </>
-                      }
-                      sectionBodyContent={
-                        <List
-                          total={total}
-                          folders={folders}
-                          files={files}
-                          filesSettings={filesSettings}
-                          portalSettings={portalSettings}
+                          }}
+                          isEmptyPage={isEmptyList}
                           filesFilter={filesFilter}
-                          current={current}
-                          withoutFavorite={withoutFavorite}
                         />
-                      }
-                      infoPanelHeaderContent={<DocsInfoPanelHeader />}
-                      infoPanelBodyContent={<DocsInfoPanelBody />}
-                      isInfoPanelVisible={infoPanelStore.isVisible}
-                      setIsInfoPanelVisible={infoPanelStore.setVisible}
-                      isEmptyPage={isEmptyList}
-                      filesFilter={filesFilter}
+                        <SelectionArea />
+                        <FilesMediaViewer filesSettings={filesSettings} />
+                        <DeviceTypeObserver />
+                        <Dialogs />
+                      </RootScrollbar>
+                    </DropZone>
+                    <InfoPanelEditLinkDialog />
+                    <VersionHistoryPanel />
+                    <CreateFileDialog
+                      visible={dialogVisible}
+                      type={dialogType}
+                      isCreating={isCreating}
+                      onClose={closeCreateDialog}
+                      onSave={onSaveCreate}
                     />
-                    <SelectionArea />
-                    <FilesMediaViewer filesSettings={filesSettings} />
-                    <DeviceTypeObserver />
-                    <Dialogs />
-                  </RootScrollbar>
-                </DropZone>
-                <InfoPanelEditLinkDialog />
-                <CreateFileDialog
-                  visible={dialogVisible}
-                  type={dialogType}
-                  isCreating={isCreating}
-                  onClose={closeCreateDialog}
-                  onSave={onSaveCreate}
-                />
-                <DeleteDialog
-                  visible={deleteDialogVisible}
-                  isLoading={isDeleting}
-                  itemCount={deleteDialogItemCount}
-                  isTrash={isTrash}
-                  onClose={closeDeleteDialog}
-                  onConfirm={confirmDelete}
-                />
-                {selectorDialogVisible && selectorInitData && (
-                  <FilesSelector
-                    isPanelVisible={selectorDialogVisible}
-                    embedded={false}
-                    currentDeviceType={DeviceType.desktop}
-                    currentFolderId={selectorInitData.currentFolderId}
-                    rootFolderType={
-                      selectorInitData.rootFolderType as unknown as Parameters<
-                        typeof FilesSelector
-                      >[0]["rootFolderType"]
-                    }
-                    treeFolders={
-                      (foldersTree ?? []) as unknown as FolderDtoInteger[]
-                    }
-                    filesSettings={
-                      filesSettings as unknown as NonNullable<
-                        FilesSelectorProps["filesSettings"]
-                      >
-                    }
-                    isUserOnly={selectorMode !== "restore"}
-                    isRoomsOnly={false}
-                    isThirdParty={false}
-                    openRoot={selectorMode === "restore"}
-                    withInit
-                    initItems={
-                      selectorInitData.items as unknown as FolderDtoInteger[]
-                    }
-                    initBreadCrumbs={selectorInitData.breadCrumbs}
-                    initSelectedItemType="files"
-                    initSelectedItemId={selectorInitData.currentFolderId}
-                    initSearchValue={null}
-                    initTotal={selectorInitData.total}
-                    initHasNextPage={selectorInitData.hasNextPage}
-                    submitButtonLabel={getSubmitLabel(selectorMode, t)}
-                    cancelButtonLabel={t("Common:CancelButton")}
-                    withCancelButton
-                    withBreadCrumbs
-                    withSearch
-                    withCreate={false}
-                    withFooterInput={false}
-                    withFooterCheckbox={false}
-                    withoutBackButton
-                    footerInputHeader=""
-                    currentFooterInputValue=""
-                    footerCheckboxLabel=""
-                    descriptionText=""
-                    disabledItems={disabledItems}
-                    getFilesArchiveError={() => ""}
-                    getIsDisabled={(
-                      isFirstLoad: boolean,
-                      _isSelectedParentFolder: boolean,
-                      _selectedItemId:
-                        | string
-                        | number
-                        | undefined,
-                      _selectedItemType:
-                        | "rooms"
-                        | "files"
-                        | "agents"
-                        | undefined,
-                      isRoot: boolean,
-                    ) => isFirstLoad || isRoot}
-                    onCancel={closeSelectorDialog}
-                    onSubmit={(
-                      selectedItemId:
-                        | string
-                        | number
-                        | undefined,
-                    ) => {
-                      if (selectedItemId !== undefined) {
-                        confirmOperation(selectedItemId as number);
-                      }
-                    }}
-                  />
-                )}
-                {operationProgress && (
-                  <FloatingButton
-                    icon={operationProgress.icon}
-                    percent={operationProgress.percent}
-                    completed={operationProgress.completed}
-                    alert={operationProgress.alert}
-                  />
-                )}
-                <RenameDialog
-                  visible={renameDialogVisible}
-                  initialName={renameInitialName}
-                  isRenaming={isRenaming}
-                  onClose={closeRenameDialog}
-                  onSave={confirmRename}
-                />
-              </div>
-            </FileOperationsContext.Provider>
-          </RenameContext.Provider>
-        </DeleteContext.Provider>
-      </ShareContext.Provider>
-     </InfoContext.Provider>
-    </OpenFileContext.Provider>
-  );
-});
+                    <DeleteDialog
+                      visible={deleteDialogVisible}
+                      isLoading={isDeleting}
+                      itemCount={deleteDialogItemCount}
+                      isTrash={isTrash}
+                      onClose={closeDeleteDialog}
+                      onConfirm={confirmDelete}
+                    />
+                    {selectorDialogVisible && selectorInitData && (
+                      <FilesSelector
+                        isPanelVisible={selectorDialogVisible}
+                        embedded={false}
+                        currentDeviceType={DeviceType.desktop}
+                        currentFolderId={selectorInitData.currentFolderId}
+                        rootFolderType={
+                          selectorInitData.rootFolderType as unknown as Parameters<
+                            typeof FilesSelector
+                          >[0]["rootFolderType"]
+                        }
+                        treeFolders={
+                          (foldersTree ?? []) as unknown as FolderDtoInteger[]
+                        }
+                        filesSettings={
+                          filesSettings as unknown as NonNullable<
+                            FilesSelectorProps["filesSettings"]
+                          >
+                        }
+                        isUserOnly={selectorMode !== "restore"}
+                        isRoomsOnly={false}
+                        isThirdParty={false}
+                        openRoot={selectorMode === "restore"}
+                        withInit
+                        initItems={
+                          selectorInitData.items as unknown as FolderDtoInteger[]
+                        }
+                        initBreadCrumbs={selectorInitData.breadCrumbs}
+                        initSelectedItemType="files"
+                        initSelectedItemId={selectorInitData.currentFolderId}
+                        initSearchValue={null}
+                        initTotal={selectorInitData.total}
+                        initHasNextPage={selectorInitData.hasNextPage}
+                        submitButtonLabel={getSubmitLabel(selectorMode, t)}
+                        cancelButtonLabel={t("Common:CancelButton")}
+                        withCancelButton
+                        withBreadCrumbs
+                        withSearch
+                        withCreate={false}
+                        withFooterInput={false}
+                        withFooterCheckbox={false}
+                        withoutBackButton
+                        footerInputHeader=""
+                        currentFooterInputValue=""
+                        footerCheckboxLabel=""
+                        descriptionText=""
+                        disabledItems={disabledItems}
+                        getFilesArchiveError={() => ""}
+                        getIsDisabled={(
+                          isFirstLoad: boolean,
+                          _isSelectedParentFolder: boolean,
+                          _selectedItemId: string | number | undefined,
+                          _selectedItemType:
+                            | "rooms"
+                            | "files"
+                            | "agents"
+                            | undefined,
+                          isRoot: boolean,
+                        ) => isFirstLoad || isRoot}
+                        onCancel={closeSelectorDialog}
+                        onSubmit={(
+                          selectedItemId: string | number | undefined,
+                        ) => {
+                          if (selectedItemId !== undefined) {
+                            confirmOperation(selectedItemId as number);
+                          }
+                        }}
+                      />
+                    )}
+                    {operationProgress && (
+                      <FloatingButton
+                        icon={operationProgress.icon}
+                        percent={operationProgress.percent}
+                        completed={operationProgress.completed}
+                        alert={operationProgress.alert}
+                      />
+                    )}
+                    {uploadStore.hasItems && (
+                      <FloatingButton
+                        icon="upload"
+                        percent={uploadStore.percent}
+                        completed={
+                          uploadStore.uploaded && uploadStore.errorsCount === 0
+                        }
+                        alert={uploadStore.errorsCount > 0}
+                        onClick={() => uploadStore.setPanelVisible(true)}
+                      />
+                    )}
+                    {convertProgress && (
+                      <FloatingButton
+                        icon="refresh"
+                        percent={convertProgress.percent}
+                        completed={convertProgress.completed}
+                        alert={convertProgress.alert}
+                      />
+                    )}
+                    <UploadPanel />
+                    <RenameDialog
+                      visible={renameDialogVisible}
+                      initialName={renameInitialName}
+                      isRenaming={isRenaming}
+                      onClose={closeRenameDialog}
+                      onSave={confirmRename}
+                    />
+                    <ConvertDialog
+                      visible={convertDialogVisible}
+                      fileExst={convertTarget?.fileExst ?? ""}
+                      storeOriginalFiles={storeOriginalFiles}
+                      isConverting={isConverting}
+                      onChangeStoreOriginal={onChangeStoreOriginal}
+                      onClose={closeConvertDialog}
+                      onConfirm={confirmConvert}
+                    />
+                  </div>
+                  </ConvertContext.Provider>
+                  </VersionHistoryContext.Provider>
+                </FileOperationsContext.Provider>
+              </RenameContext.Provider>
+            </DeleteContext.Provider>
+          </ShareContext.Provider>
+        </InfoContext.Provider>
+      </OpenFileContext.Provider>
+    );
+  },
+);
 
 export default DocsLayout;
+

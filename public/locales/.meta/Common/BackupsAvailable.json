@@ -3,7 +3,7 @@
   "content": "Backups available — {{currency}} per backup",
   "content_en_sha1_hash": "e2a78439853ed5a4b9a70f0f6054dfb56d0a9b3f",
   "created_at": "2026-04-10T13:53:44.806Z",
-  "updated_at": "2026-04-23T17:24:02.176Z",
+  "updated_at": "2026-05-15T15:49:17.110Z",
   "comment": {
     "text": "This is a label indicating the cost of available backups. It appears when the backup service is active and shows the price per backup, with `{{currency}}` representing the formatted currency value.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 193,
+      "line_number": 218,
       "context": "if (isBackupServiceOn && availableBackupsCount === 0) {\n return t(\"BackupsNotAvailable\");\n }\n \n if (isBackupServiceOn) {\n return t(\"BackupsAvailable\", {\n currency: formatWalletCurrency(priceValue!, 2),\n });\n }\n \n return t(\"PerBackup\", {",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

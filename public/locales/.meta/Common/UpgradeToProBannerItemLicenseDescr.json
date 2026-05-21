@@ -3,7 +3,7 @@
   "content": "+ 1-year subscription for functionality and security updates.",
   "content_en_sha1_hash": "bf909f01efdd41c4e5073f4e8f004d859d3df47c",
   "created_at": "2025-05-26T07:15:49.243Z",
-  "updated_at": "2026-04-12T13:20:48.428Z",
+  "updated_at": "2026-05-15T14:00:06.958Z",
   "comment": {
     "text": "This is a description for a banner item, detailing a benefit of upgrading to a Pro plan. It explains that the upgrade includes a one-year subscription for updates.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/common/BenefitsContainer.tsx",
-      "line_number": 102,
+      "line_number": 111,
       "context": "};\n \n const lifetimeLicense = {\n imag: LifetimeLicenseReactSvgUrl,\n title: t(\"UpgradeToProBannerItemLicenseHeader\"),\n description: t(\"UpgradeToProBannerItemLicenseDescr\"),\n };\n \n const scalabilityClustering = {\n imag: ScalabilityReactSvgUrl,\n title: t(\"UpgradeToProBannerItemScalabilityHeader\"),",
       "module": "/packages/shared"
     }
@@ -157,7 +157,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

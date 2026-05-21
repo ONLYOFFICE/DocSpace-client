@@ -208,6 +208,7 @@ const RoomsTableViewRow = observer(
     );
 
     const onRowClick = React.useCallback(() => {
+      if (filesSelectionStore.isCheckedItem(item)) return;
       filesSelectionStore.setSelection([]);
       filesSelectionStore.setBufferSelection(item);
     }, [filesSelectionStore, item]);
@@ -261,7 +262,9 @@ const RoomsTableViewRow = observer(
 
     return (
       <TableRow
-        className={classNames({ "table-row-selected": isChecked })}
+        className={classNames("files-item", {
+          "table-row-selected": isChecked,
+        })}
         checked={isChecked}
         contextOptions={contextMenuModel}
         getContextModel={getRowContextModel}

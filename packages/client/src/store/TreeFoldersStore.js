@@ -289,12 +289,6 @@ class TreeFoldersStore {
     );
   }
 
-  get privacyFolder() {
-    return this.treeFolders.find(
-      (x) => x.rootFolderType === FolderType.Privacy,
-    );
-  }
-
   get commonFolder() {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.COMMON);
   }
@@ -382,9 +376,8 @@ class TreeFoldersStore {
 
   get isPrivacyFolder() {
     return (
-      this.privacyFolder &&
-      this.privacyFolder.rootFolderType ===
-        this.selectedFolderStore.rootFolderType
+      this.selectedFolderStore.private === true &&
+      this.selectedFolderStore.rootFolderType === FolderType.Rooms
     );
   }
 

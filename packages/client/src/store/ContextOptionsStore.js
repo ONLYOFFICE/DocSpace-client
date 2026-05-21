@@ -729,17 +729,33 @@ class ContextOptionsStore {
   };
 
   onClickDownload = (item, t) => {
-    const { viewUrl, isFolder } = item;
+    const { viewUrl, isFolder, encrypted } = item;
     const isFile = !isFolder;
 
     const { openUrl } = this.settingsStore;
     const { downloadAction } = this.filesActionsStore;
 
-    isFile
-      ? openUrl(viewUrl, UrlActionType.Download)
-      : downloadAction(t("Common:ArchivingData"), item).catch((err) =>
-          toastr.error(err),
-        );
+    if (isFile && encrypted) {
+      downloadAction("", item).catch((err) => toastr.error(err));
+    } else if (isFile) {
+      openUrl(viewUrl, UrlActionType.Download);
+    } else {
+      downloadAction(t("Common:ArchivingData"), item).catch((err) =>
+        toastr.error(err),
+      );
+    }
+  };
+
+  onClickDownloadEncrypted = (item, t) => {
+    const { openUrl } = this.settingsStore;
+
+    if (item.isFolder || item.roomType) {
+      return this.filesActionsStore
+        .downloadFiles([], [item.id], { label: t("Common:ArchivingData") })
+        .catch((err) => toastr.error(err));
+    }
+
+    openUrl(item.viewUrl, UrlActionType.Download);
   };
 
   onClickDownloadAs = () => {
@@ -2450,6 +2466,14 @@ class ContextOptionsStore {
           Boolean(item.external && item.isLinkExpired),
       },
       {
+        id: "option_download-encrypted",
+        key: "download-encrypted",
+        label: t("Common:DownloadWithoutDecryption"),
+        icon: DownloadReactSvgUrl,
+        onClick: () => this.onClickDownloadEncrypted(item, t),
+        disabled: !item.security?.Download,
+      },
+      {
         id: "option_room-info",
         key: "room-info",
         label: item.isAIAgent ? t("Common:AgentInfo") : t("Common:RoomInfo"),
@@ -2901,7 +2925,11 @@ class ContextOptionsStore {
       (option) => option.key === "download-as",
     );
 
-    if (downloadOption && downloadAsOption) {
+    const downloadEncryptedOption = newOptions.find(
+      (option) => option.key === "download-encrypted",
+    );
+
+    if (downloadOption && (downloadAsOption || downloadEncryptedOption)) {
       const originalDownloadOption = {
         ...downloadOption,
         key: "download-original",
@@ -2913,11 +2941,15 @@ class ContextOptionsStore {
         originalDownloadOption,
       ];
 
+      const downloadItemKeys = ["download-original"];
+      if (downloadEncryptedOption) downloadItemKeys.push("download-encrypted");
+      if (downloadAsOption) downloadItemKeys.push("download-as");
+
       menuGroupsConfig.push({
         groupKey: "download",
         groupLabel: downloadOption.label,
         groupIcon: downloadOption.icon,
-        itemKeys: ["download-original", "download-as"],
+        itemKeys: downloadItemKeys,
         needsGrouping: false,
         minItemsCount: 1,
       });
@@ -2956,7 +2988,7 @@ class ContextOptionsStore {
       }
     });
 
-    if (downloadOption && downloadAsOption) {
+    if (downloadOption && (downloadAsOption || downloadEncryptedOption)) {
       keysToRemove.push("download-original");
     }
 
@@ -3772,6 +3804,12 @@ class ContextOptionsStore {
 
     const showUploadFolder = !(isMobile || isTablet);
 
+    const privateFolderActions = [
+      createNewFolder,
+      { key: "separator", isSeparator: true },
+      uploadFiles,
+    ];
+
     const options = isAIAgentsFolder
       ? [
           {
@@ -3792,22 +3830,25 @@ class ContextOptionsStore {
                 icon: CatalogRoomsReactSvgUrl,
               },
             ]
-        : [
-            createNewDoc,
-            createNewSpreadsheet,
-            createNewPresentation,
-            ...formActions,
-            createNewFolder,
-            ...templateGallery,
-            { key: "separator", isSeparator: true },
-            uploadFiles,
-            showUploadFolder ? uploadFolder : null,
-          ];
+        : isPrivacyFolder
+          ? privateFolderActions
+          : [
+              createNewDoc,
+              createNewSpreadsheet,
+              createNewPresentation,
+              ...formActions,
+              createNewFolder,
+              ...templateGallery,
+              { key: "separator", isSeparator: true },
+              uploadFiles,
+              showUploadFolder ? uploadFolder : null,
+            ];
     if (
       !isAIAgents() &&
       mainButtonItemsList &&
       enablePlugins &&
-      !isRoomsFolder
+      !isRoomsFolder &&
+      !isPrivacyFolder
     ) {
       const pluginItems = [];
 

@@ -97,8 +97,9 @@ const ClientContent = (props) => {
     isAuthenticated,
     user,
     isEncryption,
-    encryptionKeys,
-    setEncryptionKeys,
+    legacyEncryptionKeys,
+    setLegacyEncryptionKeys,
+    updateLegacyEncryptionKeys,
     isLoaded,
     isDesktop,
     showMenu,
@@ -134,26 +135,28 @@ const ClientContent = (props) => {
       regDesktop(
         user,
         isEncryption,
-        encryptionKeys,
-        setEncryptionKeys,
+        legacyEncryptionKeys,
+        setLegacyEncryptionKeys,
+        updateLegacyEncryptionKeys,
         isEditor,
         null,
         t,
       );
-      //   console.log(
-      //     "%c%s",
-      //     "color: green; font: 1.2em bold;",
-      //     "Current keys is: ",
-      //     encryptionKeys
-      //   );
+      console.log(
+        "%c%s",
+        "color: green; font: 1.2em bold;",
+        "Current keys is: ",
+        legacyEncryptionKeys,
+      );
     }
   }, [
     t,
     isAuthenticated,
     user,
     isEncryption,
-    encryptionKeys,
-    setEncryptionKeys,
+    legacyEncryptionKeys,
+    setLegacyEncryptionKeys,
+    updateLegacyEncryptionKeys,
     isLoaded,
     isDesktop,
   ]);
@@ -223,8 +226,9 @@ export const Client = inject(
       frameConfig,
       isFrame,
       isDesktopClient,
-      encryptionKeys,
-      setEncryptionKeys,
+      legacyEncryptionKeys,
+      setLegacyEncryptionKeys,
+      updateLegacyEncryptionKeys,
       isEncryptionSupport,
       enablePlugins,
       isDesktopClientInit,
@@ -256,7 +260,7 @@ export const Client = inject(
       showMenu: frameConfig?.showMenu,
       user: userStore.user,
       isAuthenticated: authStore.isAuthenticated,
-      encryptionKeys,
+      legacyEncryptionKeys,
       isEncryption: isEncryptionSupport,
       isLoaded: authStore.isLoaded && clientLoadingStore.isLoaded,
       setIsLoaded: clientLoadingStore.setIsLoaded,
@@ -264,7 +268,8 @@ export const Client = inject(
       setIsFilterLoading: setIsSectionFilterLoading,
       setIsHeaderLoading: setIsSectionHeaderLoading,
       isLoading,
-      setEncryptionKeys,
+      setLegacyEncryptionKeys,
+      updateLegacyEncryptionKeys,
       showArticleLoader,
       loadClientInfo: async () => {
         const actions = [];

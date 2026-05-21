@@ -75,7 +75,7 @@ class PrimaryProgressDataStore {
       if (progressInfo.alert) {
         this.setNeedErrorChecking(true, operation);
       }
-      if (!operationObject.canceled) {
+      if (!progressInfo.label && !operationObject.canceled) {
         if (progressInfo.percent > 0 && !progressInfo.completed) {
           progressInfo.label = getOperationsProgressTitle(
             operation,

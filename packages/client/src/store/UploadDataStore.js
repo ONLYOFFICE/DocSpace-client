@@ -38,8 +38,12 @@ import { getI18n, Trans } from "react-i18next";
 import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 import uniqueid from "lodash/uniqueId";
 import sumBy from "lodash/sumBy";
-import { ConflictResolveType } from "@docspace/shared/enums";
+import { ConflictResolveType, RoomsType } from "@docspace/shared/enums";
 import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
+import {
+  prepareEncryptedUpload,
+  shouldEncryptUpload,
+} from "@docspace/shared/services/private-room/encrypted-upload";
 import {
   getFileInfo,
   getFolderInfo,
@@ -54,7 +58,18 @@ import {
   moveToFolder,
   fileCopyAs,
   checkIsFileExist,
+  setFileEncryptionKeys,
+  getFileEncryptionAccess,
 } from "@docspace/shared/api/files";
+import { getRoomEncryptionKeys } from "@docspace/shared/api/privacy";
+import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
+import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
+import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
+import {
+  getActiveKeyId,
+  selectActiveKey,
+} from "@docspace/shared/services/encryption/active-key-preference";
+import { rememberEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 
@@ -64,6 +79,10 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
+import {
+  countActiveUploadsForRoom,
+  isQuotaError,
+} from "@docspace/shared/utils/uploadErrors";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { FileOperationStatus } from "@docspace/shared/enums";
 import { Link } from "@docspace/ui-kit/components/link";
@@ -76,6 +95,31 @@ const removeDuplicate = (items) => {
     return true;
   });
 };
+
+const dekByFileEntry = new WeakMap();
+
+function setFileDek(entry, dek) {
+  if (!entry) return;
+  const previous = dekByFileEntry.get(entry);
+  if (previous && previous !== dek) {
+    wipeDek(previous);
+  }
+  dekByFileEntry.set(entry, dek);
+}
+
+function takeFileDek(entry) {
+  if (!entry) return null;
+  const dek = dekByFileEntry.get(entry);
+  if (dek) {
+    dekByFileEntry.delete(entry);
+    return dek;
+  }
+  return null;
+}
+
+function hasFileDek(entry) {
+  return !!entry && dekByFileEntry.has(entry);
+}
 
 const getConversationProgress = async (fileId) => {
   const promise = new Promise((resolve, reject) => {
@@ -113,6 +157,10 @@ class UploadDataStore {
   filesSettingsStore;
 
   aiRoomStore;
+
+  userStore;
+
+  encryptionEnabled = false;
 
   files = [];
 
@@ -168,6 +216,8 @@ class UploadDataStore {
 
   finishUploadFilesCalled = false;
 
+  quotaErrorRaised = false;
+
   constructor(
     settingsStore,
     treeFoldersStore,
@@ -178,6 +228,7 @@ class UploadDataStore {
     dialogsStore,
     filesSettingsStore,
     aiRoomStore,
+    userStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -189,7 +240,174 @@ class UploadDataStore {
     this.dialogsStore = dialogsStore;
     this.filesSettingsStore = filesSettingsStore;
     this.aiRoomStore = aiRoomStore;
+    this.userStore = userStore;
   }
+
+  setEncryptionEnabled = (enabled) => {
+    this.encryptionEnabled = enabled;
+  };
+
+  wrapForSelfThenRoom = async (
+    fileId,
+    currentUserId,
+    publicKeyBase64,
+    publicKeyId,
+    dek,
+    roomId,
+  ) => {
+    try {
+      const identity = await requireUnlock(currentUserId);
+      if (!identity) {
+        throw new Error(
+          "Encryption identity is locked — cannot wrap DEK for upload",
+        );
+      }
+      const ownWraps = await wrapDekForRecipients({
+        dek,
+        senderIdentity: identity,
+        senderUserId: currentUserId,
+        recipients: [
+          {
+            userId: currentUserId,
+            publicKey: publicKeyBase64,
+            publicKeyId,
+          },
+        ],
+        fileId,
+      });
+      await setFileEncryptionKeys(fileId, ownWraps);
+      await this.encryptKeysForRoomMembers(
+        fileId,
+        currentUserId,
+        roomId,
+        dek,
+        identity,
+      );
+    } finally {
+      wipeDek(dek);
+    }
+  };
+
+  encryptKeysForRoomMembers = async (
+    fileId,
+    currentUserId,
+    roomId,
+    dek,
+    identity,
+  ) => {
+    try {
+      if (!roomId) {
+        console.error(
+          "[ENCRYPTION] encryptKeysForRoomMembers called without roomId",
+        );
+        return;
+      }
+      if (!dek || !identity) {
+        console.error(
+          "[ENCRYPTION] encryptKeysForRoomMembers called without dek/identity",
+        );
+        return;
+      }
+      const [publicKeys, encryptionInfo] = await Promise.all([
+        getRoomEncryptionKeys(roomId),
+        getFileEncryptionAccess(fileId),
+      ]);
+
+      const existingFileKeys = encryptionInfo.fileKeys ?? [];
+      const existingKeyPairs = new Set(
+        existingFileKeys.map(
+          (k) => `${String(k.userId)}:${k.publicKeyId || ""}`,
+        ),
+      );
+
+      const recipients = [];
+      if (Array.isArray(publicKeys)) {
+        for (const pk of publicKeys) {
+          if (!pk.publicKey || !pk.userId) continue;
+          const uid = String(pk.userId);
+          if (uid === String(currentUserId)) continue;
+          const pairKey = `${uid}:${pk.id || ""}`;
+          if (existingKeyPairs.has(pairKey)) continue;
+
+          recipients.push({
+            userId: uid,
+            publicKey: pk.publicKey,
+            publicKeyId: pk.id || "",
+          });
+        }
+      }
+      if (recipients.length === 0) return;
+
+      const newKeys = await wrapDekForRecipients({
+        dek,
+        senderIdentity: identity,
+        senderUserId: String(currentUserId),
+        recipients,
+        fileId,
+      });
+
+      if (newKeys.length > 0) {
+        const allKeys = [
+          ...existingFileKeys.map((k) => ({
+            userId: k.userId,
+            publicKeyId: k.publicKeyId || "",
+            privateKeyEnc: k.privateKeyEnc,
+          })),
+          ...newKeys,
+        ];
+        await setFileEncryptionKeys(fileId, allKeys);
+      }
+    } catch (error) {
+      console.error(
+        "[ENCRYPTION] Failed to encrypt keys for room members:",
+        error,
+      );
+    }
+  };
+
+  getUserEncryptionKeys = () => {
+    const keys = this.userStore?.encryptionKeys;
+    const userId = this.userStore?.user?.id;
+
+    if (!Array.isArray(keys) || keys.length === 0 || !userId) {
+      return { publicKey: null, userId: null, publicKeyId: null };
+    }
+
+    const userIdStr = String(userId);
+    const activeKey = selectActiveKey(keys, getActiveKeyId(userIdStr));
+    if (!activeKey) {
+      return { publicKey: null, userId: null, publicKeyId: null };
+    }
+
+    return {
+      publicKey: activeKey.publicKey || null,
+      userId: userIdStr,
+      publicKeyId: activeKey.id || null,
+    };
+  };
+
+  shouldEncryptCurrentUpload = () => {
+    const { roomType, private: isPrivate } = this.selectedFolderStore;
+    const { publicKey, userId } = this.getUserEncryptionKeys();
+    return shouldEncryptUpload(roomType, isPrivate) && !!publicKey && !!userId;
+  };
+
+  prepareFileForEncryptedUpload = async (file, folderId, onProgress) => {
+    const overrideCtx = file?.uploadContext;
+    const roomType =
+      overrideCtx?.roomType ?? this.selectedFolderStore.roomType;
+    const isPrivate =
+      overrideCtx && "isPrivate" in overrideCtx
+        ? overrideCtx.isPrivate
+        : this.selectedFolderStore.private;
+    return prepareEncryptedUpload({
+      file,
+      folderId,
+      roomType: roomType || RoomsType.CustomRoom,
+      isPrivate: isPrivate || false,
+      onProgress,
+    });
+  };
 
   removeFiles = (fileIds) => {
     fileIds.forEach((id) => {
@@ -197,6 +415,10 @@ class UploadDataStore {
         (file) => !(file.action === "converted" && file.fileInfo?.id === id),
       );
     });
+  };
+
+  getActiveUploadCountForRoom = (roomId) => {
+    return countActiveUploadsForRoom(this.files, roomId);
   };
 
   selectUploadedFile = (file) => {
@@ -233,7 +455,6 @@ class UploadDataStore {
   };
 
   clearUploadData = () => {
-    console.log("clearUploadData");
     this.files = [];
     this.filesToConversion = [];
     this.uploadedFilesHistory = [];
@@ -249,11 +470,10 @@ class UploadDataStore {
     this.isUploadingAndConversion = false;
     this.isUploading = false;
     this.asyncUploadObj = {};
+    this.quotaErrorRaised = false;
   };
 
   clearUploadedFiles = () => {
-    console.log("clearUploadedFiles");
-
     const uploadData = {
       filesSize: 0,
       uploadedFiles: 0,
@@ -308,6 +528,7 @@ class UploadDataStore {
 
     this.setUploadData(newUploadData);
     this.uploadedFilesHistory = newHistory;
+    this.quotaErrorRaised = false;
 
     this.primaryProgressDataStore.setPrimaryProgressBarData({
       operation: OPERATIONS_NAME.upload,
@@ -1104,6 +1325,12 @@ class UploadDataStore {
 
     const toFolderId = folderId || this.selectedFolderStore.id;
 
+    const encryptionRoomId =
+      this.selectedFolderStore.navigationPath?.find((r) => r.isRoom)?.id ??
+      (this.selectedFolderStore.isRoom
+        ? this.selectedFolderStore.id
+        : null);
+
     if (this.uploaded) {
       this.files = this.files.filter((f) => f.action !== "upload" || f.error);
       this.filesSize = 0;
@@ -1143,6 +1370,7 @@ class UploadDataStore {
         cancel: false,
         needConvert,
         encrypted: file.encrypted,
+        encryptionRoomId,
         percent: 0,
       };
 
@@ -1351,6 +1579,60 @@ class UploadDataStore {
           this.startSessionFunc(nextFileIndex, t, createNewIfExist);
         }
       });
+
+      const currentFileData = this.files[indexOfFile];
+      if (currentFileData?.encrypted && hasFileDek(currentFileData)) {
+        if (currentFileData.file?.name) {
+          rememberEncryptedFilename(fileId, currentFileData.file.name);
+        }
+
+        const { publicKey, userId, publicKeyId } = this.getUserEncryptionKeys();
+        if (!userId || !publicKey) {
+          console.error(
+            "[ENCRYPTION] Cannot wrap DEK: encryption keys missing for current user",
+          );
+          const orphanDek = takeFileDek(currentFileData);
+          if (orphanDek) wipeDek(orphanDek);
+        } else {
+          const dekForWrap = takeFileDek(currentFileData);
+          const roomIdForWrap = currentFileData?.encryptionRoomId ?? null;
+          this.wrapForSelfThenRoom(
+            fileId,
+            String(userId),
+            publicKey,
+            publicKeyId || "",
+            dekForWrap,
+            roomIdForWrap,
+          ).catch((error) => {
+            const wrapMessage =
+              getI18n().t("Common:EncryptionUploadWrapFailed");
+            console.error(
+              "[ENCRYPTION] Failed to set file encryption keys",
+              {
+                fileId,
+                status: error?.response?.status,
+                message: error?.message,
+              },
+            );
+            runInAction(() => {
+              if (this.files[indexOfFile]) {
+                this.files[indexOfFile].error = wrapMessage;
+              }
+              const historyIndex = this.uploadedFilesHistory.findIndex(
+                (f) => f.uniqueId === this.files[indexOfFile]?.uniqueId,
+              );
+              if (historyIndex > -1) {
+                this.uploadedFilesHistory[historyIndex].error = wrapMessage;
+              }
+            });
+            try {
+              toastr.error(wrapMessage);
+            } catch {
+              //
+            }
+          });
+        }
+      }
 
       if (fileInfo.version > 2) {
         this.filesStore.setHighlightFile({
@@ -1624,14 +1906,18 @@ class UploadDataStore {
 
     retryFile.action = "upload";
     retryFile.error = "";
+    retryFile.isQuotaError = false;
     retryFile.inAction = false;
     retryFile.percent = 0;
 
     retryFileUploaded.action = "upload";
     retryFileUploaded.error = "";
+    retryFileUploaded.isQuotaError = false;
     retryFileUploaded.inAction = false;
     retryFileUploaded.errorShown = false;
     retryFileUploaded.percent = 0;
+
+    this.quotaErrorRaised = false;
 
     if (this.uploaded) {
       const newUploadData = {
@@ -1654,6 +1940,57 @@ class UploadDataStore {
     }
 
     this.parallelUploading([retryFile], t);
+  };
+
+  retryQuotaFailedFiles = (t) => {
+    const failed = this.files.filter((f) => f.isQuotaError);
+    if (failed.length === 0) return;
+
+    this.quotaErrorRaised = false;
+    failed.forEach((retryFile) => {
+      const fileIndex = this.files.findIndex(
+        (f) => f.uniqueId === retryFile.uniqueId,
+      );
+      const historyIndex = this.uploadedFilesHistory.findIndex(
+        (f) => f.uniqueId === retryFile.uniqueId,
+      );
+      if (fileIndex === -1) return;
+      this.files[fileIndex].action = "upload";
+      this.files[fileIndex].error = "";
+      this.files[fileIndex].isQuotaError = false;
+      this.files[fileIndex].inAction = false;
+      this.files[fileIndex].percent = 0;
+      if (historyIndex > -1) {
+        this.uploadedFilesHistory[historyIndex].action = "upload";
+        this.uploadedFilesHistory[historyIndex].error = "";
+        this.uploadedFilesHistory[historyIndex].isQuotaError = false;
+        this.uploadedFilesHistory[historyIndex].inAction = false;
+        this.uploadedFilesHistory[historyIndex].errorShown = false;
+        this.uploadedFilesHistory[historyIndex].percent = 0;
+      }
+    });
+
+    if (this.uploaded) {
+      const newUploadData = {
+        filesSize: this.convertFilesSize,
+        uploadedFiles: this.uploadedFiles,
+        percent: this.percent,
+        uploaded: false,
+      };
+      this.setUploadData(newUploadData);
+      this.primaryProgressDataStore.setPrimaryProgressBarData({
+        completed: false,
+        percent: this.percent,
+        operation: OPERATIONS_NAME.upload,
+        alert: false,
+        showPanel: this.setUploadPanelVisible,
+      });
+    }
+
+    const retryFiles = this.files.filter((f) =>
+      failed.some((rf) => rf.uniqueId === f.uniqueId),
+    );
+    this.parallelUploading(retryFiles, t);
   };
 
   startUploadFiles = async (t, createNewIfExist = true) => {
@@ -1681,7 +2018,7 @@ class UploadDataStore {
     this.parallelUploading(notUploadedFiles, t, createNewIfExist);
   };
 
-  startSessionFunc = (indexOfFile, t, createNewIfExist = true) => {
+  startSessionFunc = async (indexOfFile, t, createNewIfExist = true) => {
     const { isAIRoom } = this.selectedFolderStore;
     const { knowledgeId } = this.aiRoomStore;
     if (!this.uploaded && this.files.length === 0) {
@@ -1713,23 +2050,133 @@ class UploadDataStore {
     }
 
     const { chunkUploadSize } = this.filesSettingsStore;
+    const overrideCtx = item.file?.uploadContext;
+    const roomType = overrideCtx?.roomType ?? this.selectedFolderStore.roomType;
+    const isPrivate =
+      overrideCtx && "isPrivate" in overrideCtx
+        ? overrideCtx.isPrivate
+        : this.selectedFolderStore.private;
 
     const { file, toFolderId /* , action */ } = item;
-    const chunks =
-      file.size === 0
-        ? 1
-        : Math.ceil(file.size / chunkUploadSize, chunkUploadSize);
-    const fileName = file.name;
-    const fileSize = file.size;
+    let fileToUpload = file;
+    // Replaced with the obfuscated upload name for encrypted uploads.
+    let fileName = file.name;
 
     const actualFolderId = isAIRoom ? knowledgeId : toFolderId;
+
+    let uploadDEK = null; // raw DEK for wrapping after upload
+    let isEncrypted = file.encrypted || false;
+
+    const { publicKey, userId } = this.getUserEncryptionKeys();
+    const shouldEncrypt =
+      shouldEncryptUpload(roomType, isPrivate) && !!publicKey && !!userId;
+
+    if (shouldEncrypt && !isEncrypted) {
+      try {
+        const prepared = await this.prepareFileForEncryptedUpload(
+          file,
+          toFolderId,
+          (progress) => {
+            const fileIndex = this.uploadedFilesHistory.findIndex(
+              (f) => f.uniqueId === this.files[indexOfFile].uniqueId,
+            );
+            if (fileIndex > -1) {
+              this.uploadedFilesHistory[fileIndex].percent = Math.floor(
+                progress * 20,
+              );
+            }
+            const newPercent = this.getFilesPercent();
+            this.percent = newPercent;
+            this.primaryProgressDataStore.setPrimaryProgressBarData({
+              operation: OPERATIONS_NAME.upload,
+              percent: newPercent,
+              label: getI18n().t("Files:Encrypting"),
+            });
+          },
+        );
+
+        if (prepared.encrypted) {
+          fileName = prepared.uploadFileName;
+          fileToUpload = new File([prepared.data], prepared.uploadFileName, {
+            type: "application/octet-stream",
+            lastModified: file.lastModified,
+          });
+          uploadDEK = prepared.dek;
+          isEncrypted = true;
+
+          setFileDek(this.files[indexOfFile], uploadDEK);
+          this.files[indexOfFile].encrypted = true;
+        }
+      } catch (error) {
+        console.error("[ENCRYPTION] prepareFileForEncryptedUpload failed", {
+          uniqueId: this.files[indexOfFile]?.uniqueId,
+          message: error?.message,
+        });
+        const orphanDek = takeFileDek(this.files[indexOfFile]);
+        if (orphanDek) wipeDek(orphanDek);
+        const errorMessage = getI18n().t("Common:EncryptionPrepareFailed");
+        runInAction(() => {
+          if (this.files[indexOfFile]) {
+            this.files[indexOfFile].error = errorMessage;
+            this.files[indexOfFile].percent = 0;
+          }
+          const historyIndex = this.uploadedFilesHistory.findIndex(
+            (f) => f.uniqueId === this.files[indexOfFile]?.uniqueId,
+          );
+          if (historyIndex > -1) {
+            this.uploadedFilesHistory[historyIndex].error = errorMessage;
+            this.uploadedFilesHistory[historyIndex].percent = 0;
+          }
+        });
+        try {
+          toastr.error(errorMessage);
+        } catch {
+          //
+        }
+        const newPercent = this.getFilesPercent();
+        this.percent = newPercent;
+        this.primaryProgressDataStore.setPrimaryProgressBarData({
+          operation: OPERATIONS_NAME.upload,
+          percent: newPercent,
+          alert: true,
+        });
+        this.currentUploadNumber -= 1;
+        const nextFileIndex = this.files.findIndex((f) => !f.inAction);
+        if (nextFileIndex !== -1) {
+          this.startSessionFunc(nextFileIndex, t, createNewIfExist);
+        } else {
+          const allFilesIsUploaded =
+            this.files.findIndex(
+              (f) =>
+                f.action !== "uploaded" &&
+                f.action !== "convert" &&
+                f.action !== "converted" &&
+                !f.error &&
+                !f.cancel,
+            ) === -1;
+          if (allFilesIsUploaded && !this.finishUploadFilesCalled) {
+            this.finishUploadFilesCalled = true;
+            if (!this.filesToConversion.length) {
+              this.finishUploadFiles(t, !!this.tempConversionFiles?.length);
+            }
+          }
+        }
+        return;
+      }
+    }
+
+    const fileSize = fileToUpload.size;
+    const chunks =
+      fileSize === 0
+        ? 1
+        : Math.ceil(fileSize / chunkUploadSize, chunkUploadSize);
 
     return startUploadSession(
       actualFolderId,
       fileName,
       fileSize,
       "", // relativePath,
-      file.encrypted,
+      isEncrypted,
       file.lastModifiedDate,
       createNewIfExist,
     )
@@ -1744,7 +2191,7 @@ class UploadDataStore {
         while (chunk < chunks) {
           const offset = chunk * chunkUploadSize;
           const formData = new FormData();
-          formData.append("file", file.slice(offset, offset + chunkUploadSize));
+          formData.append("file", fileToUpload.slice(offset, offset + chunkUploadSize));
           requestsDataArray.push(formData);
           chunk++;
         }
@@ -1779,6 +2226,9 @@ class UploadDataStore {
         );
       })
       .catch((error) => {
+        const orphanDek = takeFileDek(this.files[indexOfFile]);
+        if (orphanDek) wipeDek(orphanDek);
+
         if (this.files[indexOfFile] === undefined) {
           this.primaryProgressDataStore.setPrimaryProgressBarData({
             operation: OPERATIONS_NAME.upload,
@@ -1798,22 +2248,45 @@ class UploadDataStore {
           errorMessage = error;
         }
 
+        const isQuota = isQuotaError(error);
+
         runInAction(() => {
           this.files[indexOfFile].error = errorMessage;
+          this.files[indexOfFile].isQuotaError = isQuota;
           const fileIndex = this.uploadedFilesHistory.findIndex(
             (f) => f.uniqueId === this.files[indexOfFile].uniqueId,
           );
-          if (fileIndex > -1)
+          if (fileIndex > -1) {
             this.uploadedFilesHistory[fileIndex].error = errorMessage;
+            this.uploadedFilesHistory[fileIndex].isQuotaError = isQuota;
+          }
+
+          if (isQuota && !this.quotaErrorRaised) {
+            this.quotaErrorRaised = true;
+            const currentUniqueId = this.files[indexOfFile].uniqueId;
+            this.files.forEach((queued, idx) => {
+              if (
+                queued.uniqueId === currentUniqueId ||
+                queued.inAction ||
+                queued.error ||
+                queued.cancel ||
+                queued.action !== "upload"
+              )
+                return;
+
+              this.files[idx].error = errorMessage;
+              this.files[idx].isQuotaError = true;
+              this.files[idx].inAction = true;
+              const historyIndex = this.uploadedFilesHistory.findIndex(
+                (h) => h.uniqueId === queued.uniqueId,
+              );
+              if (historyIndex > -1) {
+                this.uploadedFilesHistory[historyIndex].error = errorMessage;
+                this.uploadedFilesHistory[historyIndex].isQuotaError = true;
+              }
+            });
+          }
         });
-
-        // const index = error?.chunkIndex ?? 0;
-
-        // const uploadedSize = error?.isFinalize
-        //   ? 0
-        //   : fileSize <= chunkUploadSize
-        //     ? fileSize
-        //     : fileSize - index * chunkUploadSize;
 
         const newPercent = this.getFilesPercent();
         this.percent = newPercent;
@@ -1837,10 +2310,12 @@ class UploadDataStore {
 
         this.currentUploadNumber -= 1;
 
-        const nextFileIndex = this.files.findIndex((f) => !f.inAction);
+        if (!this.quotaErrorRaised) {
+          const nextFileIndex = this.files.findIndex((f) => !f.inAction);
 
-        if (nextFileIndex !== -1) {
-          this.startSessionFunc(nextFileIndex, t, createNewIfExist);
+          if (nextFileIndex !== -1) {
+            this.startSessionFunc(nextFileIndex, t, createNewIfExist);
+          }
         }
 
         return Promise.resolve();
@@ -1866,14 +2341,6 @@ class UploadDataStore {
               this.uploaded = true;
               this.asyncUploadObj = {};
             });
-            const uploadedFiles = this.files.filter(
-              (x) => x.action === "uploaded",
-            );
-            const totalErrorsCount = sumBy(uploadedFiles, (f) =>
-              f.error ? 1 : 0,
-            );
-            if (totalErrorsCount > 0)
-              console.log("Upload errors: ", totalErrorsCount);
           }
         }
       });
@@ -1905,7 +2372,36 @@ class UploadDataStore {
       f.errorShown = true;
     });
 
-    console.log("Errors: ", totalErrorsCount);
+    const hasQuotaError = filesWithErrors.some((f) => f.isQuotaError);
+
+    if (hasQuotaError) {
+      toastr.error(
+        <Trans
+          i18nKey="UploadPanel:QuotaExceededDuringUpload"
+          t={t}
+          values={{
+            uploaded: filesWithoutErrors.length,
+            total: filesWithoutErrors.length + filesWithAllErrors,
+          }}
+          components={[
+            <Link
+              key="a"
+              tag="a"
+              isHovered
+              color="accent"
+              onClick={() => {
+                toastr.clear();
+                this.setUploadPanelVisible(true);
+              }}
+            />,
+          ]}
+        />,
+        null,
+        60000,
+        true,
+      );
+      return;
+    }
 
     if (totalErrorsCount > 1) {
       toastr.error(t("UploadPanel:UploadingError"));
@@ -2322,7 +2818,7 @@ class UploadDataStore {
         replace: true,
       });
     } catch (e) {
-      console.log(e);
+      console.error("[UploadDataStore] navigate failed:", e);
     }
   };
 

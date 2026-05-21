@@ -264,6 +264,7 @@ const uploadDataStore = new UploadDataStore(
   dialogsStore,
   filesSettingsStore,
   aiRoomStore,
+  userStore,
 );
 
 const filesActionsStore = new FilesActionsStore(

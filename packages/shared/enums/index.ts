@@ -35,6 +35,11 @@
 
 export * from "@docspace/ui-kit/enums";
 
+import type { RoomsType } from "@docspace/ui-kit/enums";
+
+/** Private room type (extends RoomsType enum from ui-kit) */
+export const RoomsTypePrivate = 13 as RoomsType;
+
 export const enum ScopeType {
   read = "read",
   write = "write",

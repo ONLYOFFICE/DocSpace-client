@@ -140,6 +140,51 @@ if (typeof SVGSVGElement === "undefined") {
   global.SVGSVGElement = class SVGSVGElement {} as unknown as typeof SVGSVGElement;
 }
 
+// Node.js 22+ exposes a built-in `localStorage` that lacks standard Web Storage
+// methods (clear, setItem, etc.), which shadows the jsdom implementation.
+// Provide a spec-compliant in-memory Storage mock so that tests calling
+// `vi.spyOn(Storage.prototype, ...)` work correctly.
+class MockStorage {
+  store: Record<string, string> = {};
+
+  getItem(key: string): string | null {
+    return key in this.store ? this.store[key] : null;
+  }
+
+  setItem(key: string, value: string): void {
+    this.store[key] = String(value);
+  }
+
+  removeItem(key: string): void {
+    delete this.store[key];
+  }
+
+  clear(): void {
+    this.store = {};
+  }
+
+  key(index: number): string | null {
+    return Object.keys(this.store)[index] ?? null;
+  }
+
+  get length(): number {
+    return Object.keys(this.store).length;
+  }
+}
+
+Object.defineProperty(globalThis, "Storage", {
+  value: MockStorage,
+  writable: true,
+});
+Object.defineProperty(globalThis, "localStorage", {
+  value: new MockStorage(),
+  writable: true,
+});
+Object.defineProperty(globalThis, "sessionStorage", {
+  value: new MockStorage(),
+  writable: true,
+});
+
 if (typeof Blob !== "undefined" && !Blob.prototype.arrayBuffer) {
   // biome-ignore lint/suspicious/noExplicitAny: polyfilling missing DOM API
   (Blob.prototype as any).arrayBuffer = function arrayBuffer() {

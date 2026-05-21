@@ -1635,7 +1635,6 @@
   "RoomLogoChanged": "ສັນຍາລັກຖືກປ່ຽນແລ້ວ",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> ຫ້ອງຖືກສ້າງແລ້ວ",
   "RoomRenamed": "ຫ້ອງ <1>«{{oldRoomTitle}}»</1> ປ່ຽນຊື່ເປັນ <2>«{{roomTitle}}»</2>",
-  "RoomArchived": "ຫ້ອງຖືກເກັບເຂົ້າບັງຄັບແລ້ວ",
   "RoomToArchiveMove": "ຍ້າຍຫ້ອງໄປ {{sectionName}} ແລ້ວ",
   "RoomFromArchiveRestore": "ຟື້ນຄືນຫ້ອງຈາກ {{sectionName}}",
   "RoomChangeOwner": "ເຈົ້າຂອງຫ້ອງປ່ຽນແປງ."

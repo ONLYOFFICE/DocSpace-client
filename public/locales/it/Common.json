@@ -1635,7 +1635,6 @@
   "RoomLogoChanged": "L'icona è cambiata",
   "HistoryRoomCreated": " <1>«{{roomTitle}}»</1> stanza creata",
   "RoomRenamed": "Stanza <1>«{{oldRoomTitle}}»</1> rinominata <2>«{{roomTitle}}»</2>",
-  "RoomArchived": "Stanza archiviata",
   "RoomToArchiveMove": "Stanza spostata in {{sectionName}}",
   "RoomFromArchiveRestore": "Stanza ripristinata da {{sectionName}}",
   "RoomChangeOwner": "Il proprietario della stanza è stato modificato."

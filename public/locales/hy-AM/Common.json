@@ -1635,7 +1635,6 @@
   "RoomLogoChanged": "Պատկերակը փոխվել է",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> ստեղծված սենյակ",
   "RoomRenamed": "Սենյակը <1>«{{oldRoomTitle}}»</1> վերանվանվել է <2>«{{roomTitle}}»</2>",
-  "RoomArchived": "Սենյակը արխիվացվել է",
   "RoomToArchiveMove": "Սենյակը տեղափոխվեց {{sectionName}}։",
   "RoomFromArchiveRestore": "Սենյակը վերականգնվեց {{sectionName}} բաժնից",
   "RoomChangeOwner": "Սենակի տերը փոխվեց։"

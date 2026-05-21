@@ -1635,7 +1635,6 @@
   "RoomLogoChanged": "Simge değişti",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> odası oluşturuldu",
   "RoomRenamed": "Oda <1>«{{oldRoomTitle}}»</1> <2>«{{roomTitle}}»</2> olarak yeniden adlandırıldı",
-  "RoomArchived": "Oda arşivlendi",
   "RoomToArchiveMove": "Oda {{sectionName}} bölümüne taşındı",
   "RoomFromArchiveRestore": "{{sectionName}}'den kurtarılan oda",
   "RoomChangeOwner": "Oda sahibi değişti."

@@ -1635,7 +1635,6 @@
   "RoomLogoChanged": "アイコンが変更されました",
   "HistoryRoomCreated": "<1>「{{roomTitle}}」</1>ルームが作成されました。",
   "RoomRenamed": "ルーム名<1>«{{oldRoomTitle}}»</1>を<2>«{{roomTitle}}»</2>に変更されました。",
-  "RoomArchived": "ルームがアーカイブされました",
   "RoomToArchiveMove": "ルームが{{sectionName}}に移動しました",
   "RoomFromArchiveRestore": "{{sectionName}}から回復したルーム",
   "RoomChangeOwner": "ルームのオーナーが変更されました。"

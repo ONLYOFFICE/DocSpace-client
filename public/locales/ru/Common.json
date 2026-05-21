@@ -1635,7 +1635,6 @@
   "RoomLogoChanged": "Иконка изменена",
   "HistoryRoomCreated": "Комната <1>«{{roomTitle}}»</1> создана",
   "RoomRenamed": "Комната <1>«{{oldRoomTitle}}»</1> переименована в <2>«{{roomTitle}}»</2>",
-  "RoomArchived": "Комната архивирована",
   "RoomToArchiveMove": "Комната перемещена в раздел {{sectionName}}",
   "RoomFromArchiveRestore": "Комната восстановлена из раздела {{sectionName}}",
   "RoomChangeOwner": "Изменился владелец комнаты."

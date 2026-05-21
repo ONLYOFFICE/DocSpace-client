@@ -1635,7 +1635,6 @@
   "RoomLogoChanged": "Ikona promenjena",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> prostorija je kreirana",
   "RoomRenamed": "Prostorija <1>«{{oldRoomTitle}}»</1> preimenovana na <2>«{{roomTitle}}»</2>",
-  "RoomArchived": "Soba arhivirana",
   "RoomToArchiveMove": "Soba premeštena u {{sectionName}}",
   "RoomFromArchiveRestore": "Soba oporavljena iz {{sectionName}}",
   "RoomChangeOwner": "Vlasnik sobe je promenjen."

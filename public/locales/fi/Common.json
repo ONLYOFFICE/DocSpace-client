@@ -1635,7 +1635,6 @@
   "RoomLogoChanged": "Kuvake muutettu",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> huone luotu",
   "RoomRenamed": "Huone <1>«{{oldRoomTitle}}»</1> nimetty uudelleen <2>«{{roomTitle}}»</2>",
-  "RoomArchived": "Huone arkistoitu",
   "RoomToArchiveMove": "Huone siirretty {{sectionName}} -kohtaan",
   "RoomFromArchiveRestore": "Huone palautettu {{sectionName}}-sta",
   "RoomChangeOwner": "Huoneen omistaja vaihtui."

@@ -1635,7 +1635,6 @@
   "RoomLogoChanged": "아이콘이 변경되었습니다",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> 룸이 생성되었습니다",
   "RoomRenamed": "<1>«{{oldRoomTitle}}»</1> 룸의 이름이 <2>«{{roomTitle}}»</2> 룸으로 변경되었습니다",
-  "RoomArchived": "룸이 아카이브되었습니다",
   "RoomToArchiveMove": "방이 {{sectionName}}으로 이동되었습니다.",
   "RoomFromArchiveRestore": "{{sectionName}}에서 복구된 방",
   "RoomChangeOwner": "방 주인이 변경되었습니다."

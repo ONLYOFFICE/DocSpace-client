@@ -1635,7 +1635,6 @@
   "RoomLogoChanged": "Icoon aangepast",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> kamer aangemaakt",
   "RoomRenamed": "Kamer <1>«{{oldRoomTitle}}»</1> hernoemd naar <2>«{{roomTitle}}»</2>",
-  "RoomArchived": "Kamer gearchiveerd",
   "RoomToArchiveMove": "Room verplaatst naar {{sectionName}}",
   "RoomFromArchiveRestore": "Ruimte teruggevonden uit {{sectionName}}",
   "RoomChangeOwner": "Kamer eigenaar gewijzigd."

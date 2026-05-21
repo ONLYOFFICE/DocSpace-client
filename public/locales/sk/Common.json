@@ -1635,7 +1635,6 @@
   "RoomLogoChanged": "Ikonka zmenená",
   "HistoryRoomCreated": "Miestnosť <1>«{{roomTitle}}»</1> vytvorená",
   "RoomRenamed": "Miestnosť <1>«{{oldRoomTitle}}»</1> premenovaná na <2>«{{roomTitle}}»</2>",
-  "RoomArchived": "Miestnosť archivovaná",
   "RoomToArchiveMove": "Miestnosť presunutá do {{sectionName}}",
   "RoomFromArchiveRestore": "Miestnosť obnovená z {{sectionName}}",
   "RoomChangeOwner": "Vlastník miestnosti bol zmenený."

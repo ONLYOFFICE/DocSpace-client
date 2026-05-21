@@ -1635,7 +1635,6 @@
   "RoomLogoChanged": "අයිකනය වෙනස් විය",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> කාමරය සාදා ගන්නා ලදි",
   "RoomRenamed": "කාමරය <1>«{{oldRoomTitle}}»</1> <2>«{{roomTitle}}»</2> ලෙස නැවත නම් කරන ලදී",
-  "RoomArchived": "කාමරය සංරක්ෂිතයි",
   "RoomToArchiveMove": "කාමරය {{sectionName}} වෙත ගෙන යන ලදී",
   "RoomFromArchiveRestore": "කාමරය {{sectionName}} වෙතින් ලබා ගන්නා ලදී",
   "RoomChangeOwner": "කාමර හිමිකරු වෙනස් විය."

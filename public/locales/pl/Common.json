@@ -1635,7 +1635,6 @@
   "RoomLogoChanged": "Ikona została zmieniona",
   "HistoryRoomCreated": "Pokój <1>«{{roomTitle}}»</1> został utworzony",
   "RoomRenamed": "Nazwa pokoju <1>«{{oldRoomTitle}}»</1> została zmieniona na <2>«{{roomTitle}}»</2>",
-  "RoomArchived": "Pokój został zarchiwizowany",
   "RoomToArchiveMove": "Pokój przeniesiony do {{sectionName}}",
   "RoomFromArchiveRestore": "Pokój odzyskano z {{sectionName}}",
   "RoomChangeOwner": "Właściciel pokoju został zmieniony."

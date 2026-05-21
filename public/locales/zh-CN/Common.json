@@ -1635,7 +1635,6 @@
   "RoomLogoChanged": "图标已更改",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1>房间已创建",
   "RoomRenamed": "房间<1>«{{oldRoomTitle}}»</1>已重命名为<2>«{{roomTitle}}»</2>",
-  "RoomArchived": "房间已归档",
   "RoomToArchiveMove": "房间已移至{{sectionName}}",
   "RoomFromArchiveRestore": "房间已从{{sectionName}}恢复",
   "RoomChangeOwner": "房间所有者已更改。"

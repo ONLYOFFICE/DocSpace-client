@@ -1635,7 +1635,6 @@
   "RoomLogoChanged": "Το εικονίδιο άλλαξε",
   "HistoryRoomCreated": "Το δωμάτιο <1>«{{roomTitle}}»</1> δημιουργήθηκε",
   "RoomRenamed": "Το δωμάτιο <1>«{{oldRoomTitle}}»</1> μετονομάστηκε σε <2>«{{roomTitle}}»</2>",
-  "RoomArchived": "Το δωμάτιο αρχειοθετήθηκε",
   "RoomToArchiveMove": "Δωμάτιο μεταφέρθηκε στο {{sectionName}}",
   "RoomFromArchiveRestore": "Χώρος αποκαταστάθηκε από το {{sectionName}}",
   "RoomChangeOwner": "Ο ιδιοκτήτης του δωματίου άλλαξε."

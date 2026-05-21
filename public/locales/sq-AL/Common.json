@@ -1635,7 +1635,6 @@
   "RoomLogoChanged": "Ikona ka ndryshuar",
   "HistoryRoomCreated": "Dhoma <1>«{{roomTitle}}»</1> u krijua",
   "RoomRenamed": "Dhoma<1>«{{oldRoomTitle}}»</1> u riemërua në<2>«{{roomTitle}}»</2>",
-  "RoomArchived": "Dhoma u arkivua",
   "RoomToArchiveMove": "Dhoma u zhvendos te {{sectionName}}",
   "RoomFromArchiveRestore": "Dhoma u rikuperua nga {{sectionName}}",
   "RoomChangeOwner": "Pronari i dhomës u ndryshua."

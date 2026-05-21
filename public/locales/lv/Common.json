@@ -1635,7 +1635,6 @@
   "RoomLogoChanged": "Ikona ir mainīta",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> telpa ir izveidota",
   "RoomRenamed": "Telpa ir <1>«{{oldRoomTitle}}»</1> pārdēvēta par <2>«{{roomTitle}}»</2>",
-  "RoomArchived": "Telpa arhivēta",
   "RoomToArchiveMove": "Istaba pārvietota uz {{sectionName}}",
   "RoomFromArchiveRestore": "Istaba atgūta no {{sectionName}}",
   "RoomChangeOwner": "Īpašnieks telpā mainīts."

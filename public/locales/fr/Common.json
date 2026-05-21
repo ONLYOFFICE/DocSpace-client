@@ -1635,7 +1635,6 @@
   "RoomLogoChanged": "Icône modifiée",
   "HistoryRoomCreated": "Salle  <1>«{{roomTitle}}»</1> créée",
   "RoomRenamed": "Salle <1>«{{oldRoomTitle}}»</1> renommée en <2>«{{roomTitle}}»</2>",
-  "RoomArchived": "Salle archivée",
   "RoomToArchiveMove": "Salle déplacée vers {{sectionName}}",
   "RoomFromArchiveRestore": "Salle récupérée depuis {{sectionName}}",
   "RoomChangeOwner": "Le propriétaire de la salle a été modifié."

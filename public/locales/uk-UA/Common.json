@@ -1635,7 +1635,6 @@
   "RoomLogoChanged": "Піктограму змінено",
   "HistoryRoomCreated": "Кімнату <1>«{{roomTitle}}»</1> створено",
   "RoomRenamed": "Кімнату <1>«{{oldRoomTitle}}»</1> перейменовано в <2>«{{roomTitle}}»</2>",
-  "RoomArchived": "Кімнату архівовано",
   "RoomToArchiveMove": "Кімната перенесена до {{sectionName}}",
   "RoomFromArchiveRestore": "Кімната відновлена з {{sectionName}}",
   "RoomChangeOwner": "Власник кімнати змінено."

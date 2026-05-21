@@ -1650,7 +1650,6 @@
   "RoomLogoChanged": "Icon changed",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> room created",
   "RoomRenamed": "Room <1>«{{oldRoomTitle}}»</1> renamed to <2>«{{roomTitle}}»</2>",
-  "RoomArchived": "Room archived",
   "RoomToArchiveMove": "Room moved to {{sectionName}}",
   "RoomFromArchiveRestore": "Room recovered from {{sectionName}}",
   "RoomChangeOwner": "Room owner changed."

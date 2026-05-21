@@ -1635,7 +1635,6 @@
   "RoomLogoChanged": "Pictograma a fost schimbată",
   "HistoryRoomCreated": "Sala <1>«{{roomTitle}}»</1> a fost creată",
   "RoomRenamed": "Sala <1>«{{oldRoomTitle}}»</1> a fost redenumită <2>«{{roomTitle}}»</2>",
-  "RoomArchived": "Camera a fost arhivată",
   "RoomToArchiveMove": "Sala a fost mutată în {{sectionName}}",
   "RoomFromArchiveRestore": "Sală a fost recuperată din {{sectionName}}",
   "RoomChangeOwner": "Proprietarul sălii a fost schimbat."

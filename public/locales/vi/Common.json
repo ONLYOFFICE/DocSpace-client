@@ -1635,7 +1635,6 @@
   "RoomLogoChanged": "Đã thay đổi biểu tượng",
   "HistoryRoomCreated": "Đã tạo phòng <1>«{{roomTitle}}»</1> ",
   "RoomRenamed": "Phòng <1>«{{oldRoomTitle}}»</1> được đổi tên thành <2>«{{roomTitle}}»</2>",
-  "RoomArchived": "Phòng đã được lưu trữ",
   "RoomToArchiveMove": "Đã chuyển phòng đến {{sectionName}}",
   "RoomFromArchiveRestore": "Phòng được phục hồi từ {{sectionName}}",
   "RoomChangeOwner": "Chủ phòng đã thay đổi."

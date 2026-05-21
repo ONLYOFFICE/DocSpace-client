@@ -1628,5 +1628,9 @@
   "YourName": "Vaše meno",
   "YourPrice": "Vaša cena",
   "YourTurn": "Ste na rade",
-  "YouWillBeContacted": "Po vytvorení požiadavky vás bude kontaktovať predajný tím."
+  "YouWillBeContacted": "Po vytvorení požiadavky vás bude kontaktovať predajný tím.",
+  "CustomFilterDisable": "Odstrániť šablónu",
+  "CustomFilterDisabled": "Vlastný filter pre vybraný súbor deaktivovaný",
+  "CustomFilterEnable": "Povoliť vlastný filter",
+  "CustomFilterEnabled": "Vlastný filter pre vybraný súbor aktivovaný"
 }

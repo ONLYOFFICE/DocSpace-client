@@ -1628,5 +1628,9 @@
   "YourName": "Uw naam",
   "YourPrice": "Uw prijs",
   "YourTurn": "Uw beurt",
-  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag."
+  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag.",
+  "CustomFilterDisable": "Verwijder sjabloon",
+  "CustomFilterDisabled": "Aangepast filter voor geselecteerd bestand uitgeschakeld",
+  "CustomFilterEnable": "Aangepast filter inschakelen",
+  "CustomFilterEnabled": "Aangepast filter voor geselecteerd bestand ingeschakeld"
 }

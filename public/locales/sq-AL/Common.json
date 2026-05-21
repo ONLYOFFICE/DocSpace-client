@@ -1628,5 +1628,9 @@
   "YourName": "Emri juaj",
   "YourPrice": "Çmimi juaj",
   "YourTurn": "Radha jote",
-  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës."
+  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës.",
+  "CustomFilterDisable": "Çaktivizo filtrin e personalizuar",
+  "CustomFilterDisabled": "Filtri i personalizuar për skedarin e zgjedhur është çaktivizuar",
+  "CustomFilterEnable": "Aktivizoni filtrin e personalizuar",
+  "CustomFilterEnabled": "Filtri i personalizuar për skedarin e zgjedhur është aktivizuar"
 }

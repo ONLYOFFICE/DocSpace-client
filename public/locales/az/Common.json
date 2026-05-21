@@ -1628,5 +1628,9 @@
   "YourName": "Adınız",
   "YourPrice": "Qiymətiniz",
   "YourTurn": "Sizin növbəniz",
-  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq."
+  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq.",
+  "CustomFilterDisable": "Şablonu silin",
+  "CustomFilterDisabled": "Seçilmiş fayl üçün Xüsusi filtr deaktiv edildi",
+  "CustomFilterEnable": "Xüsusi filtri aktivləşdirin",
+  "CustomFilterEnabled": "Seçilmiş fayl üçün Xüsusi filtr aktiv edildi"
 }

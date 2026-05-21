@@ -1628,5 +1628,9 @@
   "YourName": "اسمك",
   "YourPrice": "سعرك",
   "YourTurn": "دوركم الآن",
-  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب."
+  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب.",
+  "CustomFilterDisable": "تعطيل الفلتر المخصص",
+  "CustomFilterDisabled": "تم تعطيل الفِلتر المخصص للملف المحدد",
+  "CustomFilterEnable": "تمكين الفِلتر المخصص",
+  "CustomFilterEnabled": "تم تمكين الفِلتر المخصص للملف المحدد"
 }

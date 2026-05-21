@@ -1628,5 +1628,9 @@
   "YourName": "Jūsu vārds",
   "YourPrice": "Jūsu cena",
   "YourTurn": "Jūsu kārta",
-  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides."
+  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides.",
+  "CustomFilterDisable": "Dzēst veidni",
+  "CustomFilterDisabled": "Pielāgotais filtrs atlasītajam failam ir deaktivēts",
+  "CustomFilterEnable": "Iespējot pielāgoto filtru",
+  "CustomFilterEnabled": "Pielāgotais filtrs atlasītajam failam ir aktivēts"
 }

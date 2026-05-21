@@ -1628,5 +1628,9 @@
   "YourName": "ඔබගේ නම",
   "YourPrice": "ඔබගේ මිල",
   "YourTurn": "ඔබේ වාරය.",
-  "YouWillBeContacted": "ඉල්ලීම සෑදීමෙන් පසු අලෙවි කණ්ඩායම ඔබව සම්බන්ධ කර ගනු ඇත."
+  "YouWillBeContacted": "ඉල්ලීම සෑදීමෙන් පසු අලෙවි කණ්ඩායම ඔබව සම්බන්ධ කර ගනු ඇත.",
+  "CustomFilterDisable": "අභිරුචි පෙරහන අක්‍රීය කරන්න",
+  "CustomFilterDisabled": "Prilagojen filter za izbrano datoteko onemogočen",
+  "CustomFilterEnable": "අභිමත පෙරහන සක්‍රිය කරන්න",
+  "CustomFilterEnabled": "Prilagojen filter za izbrano datoteko omogočen"
 }

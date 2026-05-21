@@ -1628,5 +1628,9 @@
   "YourName": "Numele dvs.",
   "YourPrice": "Preţul dvs.",
   "YourTurn": "Acum e rândul dvs.",
-  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării."
+  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării.",
+  "CustomFilterDisable": "Dezactivare Filtru particularizat",
+  "CustomFilterDisabled": "Filtru particularizat pentru utilizatorul selectat este dezactivat",
+  "CustomFilterEnable": "Activare Filtru particularizat",
+  "CustomFilterEnabled": "Filtru particularizat pentru utilizatorul selectat este activat"
 }

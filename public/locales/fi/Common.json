@@ -1628,5 +1628,9 @@
   "YourName": "Nimesi",
   "YourPrice": "Hintasi",
   "YourTurn": "Sinun vuorosi",
-  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen."
+  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen.",
+  "CustomFilterDisable": "Poista malli",
+  "CustomFilterDisabled": "Mukautettu suodatin valitulle tiedostolle pois käytöstä",
+  "CustomFilterEnable": "Ota mukautettu suodatin käyttöön",
+  "CustomFilterEnabled": "Mukautettu suodatin valitulle tiedostolle käytössä"
 }

@@ -1628,5 +1628,9 @@
   "YourName": "Adınız",
   "YourPrice": "Ücret",
   "YourTurn": "Sıra sizde",
-  "YouWillBeContacted": "Satış ekibi, talebi oluşturduktan sonra sizinle iletişime geçecektir."
+  "YouWillBeContacted": "Satış ekibi, talebi oluşturduktan sonra sizinle iletişime geçecektir.",
+  "CustomFilterDisable": "Özel filtreyi devre dışı bırak",
+  "CustomFilterDisabled": "Seçili dosya için Özel Filtre devre dışı",
+  "CustomFilterEnable": "Özel Filtre'yi etkinleştir",
+  "CustomFilterEnabled": "Seçili dosya için Özel Filtre etkin"
 }

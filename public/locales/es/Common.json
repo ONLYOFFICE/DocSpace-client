@@ -1628,5 +1628,9 @@
   "YourName": "Su nombre",
   "YourPrice": "Su precio",
   "YourTurn": "Su turno",
-  "YouWillBeContacted": "El equipo de ventas se pondrá en contacto con usted después de crear la solicitud."
+  "YouWillBeContacted": "El equipo de ventas se pondrá en contacto con usted después de crear la solicitud.",
+  "CustomFilterDisable": "Deshabilitar Filtro personalizado",
+  "CustomFilterDisabled": "El Filtro personalizado para el archivo seleccionado se ha deshabilitado",
+  "CustomFilterEnable": "Habilitar Filtro personalizado",
+  "CustomFilterEnabled": "El Filtro personalizado para el archivo seleccionado se ha habilitado"
 }

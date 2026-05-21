@@ -1628,5 +1628,9 @@
   "YourName": "O seu nome",
   "YourPrice": "O seu preço",
   "YourTurn": "A sua vez",
-  "YouWillBeContacted": "A equipa de vendas entrará em contacto consigo depois de criar o pedido."
+  "YouWillBeContacted": "A equipa de vendas entrará em contacto consigo depois de criar o pedido.",
+  "CustomFilterDisable": "Elimine o template",
+  "CustomFilterDisabled": "Filtro personalizado para o arquivo selecionado desativado",
+  "CustomFilterEnable": "Ativar Filtro Personalizado",
+  "CustomFilterEnabled": "Filtro personalizado para o arquivo selecionado ativado"
 }

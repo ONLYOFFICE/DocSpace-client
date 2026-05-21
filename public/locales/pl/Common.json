@@ -1628,5 +1628,9 @@
   "YourName": "Twoje imię",
   "YourPrice": "Twoja cena",
   "YourTurn": "Twoja kolej",
-  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby."
+  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby.",
+  "CustomFilterDisable": "Usuń szablon",
+  "CustomFilterDisabled": "Niestandardowy filtr dla wybranego pliku wyłączony",
+  "CustomFilterEnable": "Włącz niestandardowy filtr",
+  "CustomFilterEnabled": "Niestandardowy filtr dla wybranego pliku włączony"
 }

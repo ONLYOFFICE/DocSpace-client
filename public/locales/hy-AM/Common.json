@@ -1641,5 +1641,9 @@
   "YourName": "Ձեր անունը",
   "YourPrice": "Ձեր գինը",
   "YourTurn": "Ձեր հերթն է",
-  "orContinueWith": "կամ շարունակել"
+  "orContinueWith": "կամ շարունակել",
+  "CustomFilterDisable": "Անջատել Հատուկ ֆիլտրը",
+  "CustomFilterDisabled": "Ընտրված ֆայլի անհատական ֆիլտրն անջատված է",
+  "CustomFilterEnable": "Միացնել Հատուկ ֆիլտրը",
+  "CustomFilterEnabled": "Հատուկ ֆիլտրն ընտրված ֆայլի համար միացված է"
 }

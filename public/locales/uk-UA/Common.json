@@ -1641,5 +1641,9 @@
   "YourName": "Ваше ім’я",
   "YourPrice": "Ваша ціна",
   "YourTurn": "Ваша черга",
-  "orContinueWith": "або продовжте з"
+  "orContinueWith": "або продовжте з",
+  "CustomFilterDisable": "Вимкнути користувацький фільтр",
+  "CustomFilterDisabled": "Спеціальний фільтр для обраного файлу вимкнено",
+  "CustomFilterEnable": "Увімкнути спеціальний фільтр",
+  "CustomFilterEnabled": "Спеціальний фільтр для обраного файлу увімкнено"
 }

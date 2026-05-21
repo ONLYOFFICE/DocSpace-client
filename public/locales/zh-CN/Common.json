@@ -1641,5 +1641,9 @@
   "YourName": "您的姓名",
   "YourPrice": "您的价格",
   "YourTurn": "轮到您了",
-  "orContinueWith": "或选择"
+  "orContinueWith": "或选择",
+  "CustomFilterDisable": "禁用自定义过滤器",
+  "CustomFilterDisabled": "所选文件的自定义过滤器已禁用",
+  "CustomFilterEnable": "启用自定义过滤器",
+  "CustomFilterEnabled": "所选文件的自定义过滤器已启用"
 }

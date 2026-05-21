@@ -52,6 +52,7 @@ import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
+import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
 
 import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
 import useFavoritesActions from "@/app/(docspace)/_hooks/useFavoritesActions";
@@ -82,7 +83,12 @@ const Row = observer(
   }: RowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
+    const { filesSettings } = useFilesSettingsStore();
     const { isItemActive } = useActiveItemsStore();
+    const isExtsCustomFilter =
+      "fileExst" in item
+        ? (filesSettings?.extsWebCustomFilterEditing ?? []).includes(item.fileExst)
+        : false;
 
     // Use the observable item from MobX store so isFavorite changes are reactive
     const storeItem = filesListStore.items.find((i) => i.id === item.id);
@@ -90,7 +96,7 @@ const Row = observer(
 
     const { t } = useTranslation(["Common"]);
     const { isBase } = useTheme();
-    const { openFile } = useFilesActions({ t });
+    const { openFile, lockFile } = useFilesActions({ t });
     const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });
     const onShareClick = React.useContext(ShareContext);
     const onInfoClick = React.useContext(InfoContext);
@@ -124,6 +130,12 @@ const Row = observer(
       }
     };
 
+    const onClickLock = () => {
+      if (!observableItem.isFolder) {
+        lockFile(observableItem as TFileItem);
+      }
+    };
+
     const badgesComponent = (
       <Badges
         className={styles.badgesComponent}
@@ -132,12 +144,14 @@ const Row = observer(
         item={observableItem}
         viewAs="row"
         showNew={false}
+        isExtsCustomFilter={isExtsCustomFilter}
         onFilesClick={() => {
           if (!observableItem.isFolder) {
             openFile(observableItem);
           }
         }}
         onClickFavorite={onClickFavorite}
+        onClickLock={onClickLock}
         onShowVersionHistory={
           !observableItem.isFolder && onShowVersionHistory
             ? () => onShowVersionHistory(observableItem as TFileItem)
@@ -156,6 +170,7 @@ const Row = observer(
         item={observableItem}
         viewAs="row"
         onClickFavorite={onClickFavorite}
+        onClickLock={onClickLock}
         onClickShare={onShareClick ? handleShareClick : undefined}
         openShareTab={onShareClick ? handleShareClick : undefined}
       />

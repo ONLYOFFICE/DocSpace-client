@@ -1641,5 +1641,9 @@
   "YourName": "Το όνομά σας",
   "YourPrice": "Η τιμή σας",
   "YourTurn": "Η σειρά σας",
-  "orContinueWith": "ή συνεχίστε με"
+  "orContinueWith": "ή συνεχίστε με",
+  "CustomFilterDisable": "Διαγραφή προτύπου",
+  "CustomFilterDisabled": "Απενεργοποιημένο προσαρμοσμένο φίλτρο για το επιλεγμένο αρχείο",
+  "CustomFilterEnable": "Ενεργοποίηση προσαρμοσμένου φίλτρου",
+  "CustomFilterEnabled": "Ενεργοποιημένο προσαρμοσμένο φίλτρο για το επιλεγμένο αρχείο"
 }

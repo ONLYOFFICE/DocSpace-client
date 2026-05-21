@@ -1641,5 +1641,9 @@
   "YourName": "Twoje imię",
   "YourPrice": "Twoja cena",
   "YourTurn": "Twoja kolej",
-  "orContinueWith": "lub kontynuuj z"
+  "orContinueWith": "lub kontynuuj z",
+  "CustomFilterDisable": "Usuń szablon",
+  "CustomFilterDisabled": "Niestandardowy filtr dla wybranego pliku wyłączony",
+  "CustomFilterEnable": "Włącz niestandardowy filtr",
+  "CustomFilterEnabled": "Niestandardowy filtr dla wybranego pliku włączony"
 }

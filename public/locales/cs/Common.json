@@ -1641,5 +1641,9 @@
   "YourName": "Vaše jméno",
   "YourPrice": "Vaše cena",
   "YourTurn": "Jste na řadě",
-  "orContinueWith": "nebo pokračovat pomocí"
+  "orContinueWith": "nebo pokračovat pomocí",
+  "CustomFilterDisable": "Odstranění šablony",
+  "CustomFilterDisabled": "Vlastní filtr pro vybraný soubor deaktivován",
+  "CustomFilterEnable": "Povolit Vlastní filtr",
+  "CustomFilterEnabled": "Vlastní filtr pro vybraný soubor aktivován"
 }

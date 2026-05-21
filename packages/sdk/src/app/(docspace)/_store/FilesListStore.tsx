@@ -68,6 +68,11 @@ class FilesListStore {
     if (item && "locked" in item) item.locked = locked;
   };
 
+  updateItemCustomFilter = (id: number | string, enabled: boolean) => {
+    const item = this.items.find((i) => i.id === id);
+    if (item && "customFilterEnabled" in item) item.customFilterEnabled = enabled;
+  };
+
   removeItem = (id: number | string) => {
     this.items = this.items.filter((i) => i.id !== id);
   };

@@ -1641,5 +1641,9 @@
   "YourName": "お名前",
   "YourPrice": "価格",
   "YourTurn": "あなたの番です",
-  "orContinueWith": "または次で続行"
+  "orContinueWith": "または次で続行",
+  "CustomFilterDisable": "カスタムフィルターを無効化",
+  "CustomFilterDisabled": "選択したファイルのカスタムフィルターが無効になりました",
+  "CustomFilterEnable": "カスタムフィルターを有効化",
+  "CustomFilterEnabled": "選択したファイルのカスタムフィルターが有効になりました"
 }

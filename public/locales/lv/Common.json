@@ -1641,5 +1641,9 @@
   "YourName": "Jūsu vārds",
   "YourPrice": "Jūsu cena",
   "YourTurn": "Jūsu kārta",
-  "orContinueWith": "vai turpināt ar"
+  "orContinueWith": "vai turpināt ar",
+  "CustomFilterDisable": "Dzēst veidni",
+  "CustomFilterDisabled": "Pielāgotais filtrs atlasītajam failam ir deaktivēts",
+  "CustomFilterEnable": "Iespējot pielāgoto filtru",
+  "CustomFilterEnabled": "Pielāgotais filtrs atlasītajam failam ir aktivēts"
 }

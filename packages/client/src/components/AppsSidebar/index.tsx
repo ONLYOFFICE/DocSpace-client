@@ -51,6 +51,7 @@ export type AppsSidebarProps = {
   toggleShowText: () => void;
   currentDeviceType: DeviceType;
   user?: TUser | null;
+  isNotPaidPeriod?: boolean;
   articleOpen?: boolean;
   toggleArticleOpen?: () => void;
 };
@@ -63,6 +64,7 @@ const AppsSidebar = ({
   toggleShowText,
   currentDeviceType,
   user,
+  isNotPaidPeriod = false,
   articleOpen = true,
   toggleArticleOpen,
 }: AppsSidebarProps) => {
@@ -87,6 +89,11 @@ const AppsSidebar = ({
     "",
     true,
   );
+
+  const isAdmin = user?.isAdmin ?? false;
+  const isOwner = user?.isOwner ?? false;
+  const isVisitor = user?.isVisitor ?? false;
+  const isCollaborator = user?.isCollaborator ?? false;
 
   const handleBackdropClick = () => {
     toggleArticleOpen?.();
@@ -131,7 +138,14 @@ const AppsSidebar = ({
 
         <div className={styles.bottom}>
           <div className={styles.footer}>
-            <FooterMenu showText={showText} />
+            <FooterMenu
+              showText={showText}
+              isAdmin={isAdmin}
+              isOwner={isOwner}
+              isVisitor={isVisitor}
+              isCollaborator={isCollaborator}
+              isNotPaidPeriod={isNotPaidPeriod}
+            />
           </div>
 
           <CollapseButton

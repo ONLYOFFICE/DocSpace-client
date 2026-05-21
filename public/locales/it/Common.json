@@ -1641,5 +1641,9 @@
   "YourName": "Il tuo nome",
   "YourPrice": "Il tuo prezzo",
   "YourTurn": "Il tuo turno",
-  "orContinueWith": "o continua con"
+  "orContinueWith": "o continua con",
+  "CustomFilterDisable": "Disabilita filtro personalizzato",
+  "CustomFilterDisabled": "Filtro personalizzato disabilitato per il file selezionato",
+  "CustomFilterEnable": "Abilita filtro personalizzato",
+  "CustomFilterEnabled": "Filtro personalizzato abilitato per il file selezionato"
 }

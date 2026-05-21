@@ -1641,5 +1641,9 @@
   "YourName": "اسمك",
   "YourPrice": "سعرك",
   "YourTurn": "دوركم الآن",
-  "orContinueWith": "أو الاستمرار مع"
+  "orContinueWith": "أو الاستمرار مع",
+  "CustomFilterDisable": "تعطيل الفلتر المخصص",
+  "CustomFilterDisabled": "تم تعطيل الفِلتر المخصص للملف المحدد",
+  "CustomFilterEnable": "تمكين الفِلتر المخصص",
+  "CustomFilterEnabled": "تم تمكين الفِلتر المخصص للملف المحدد"
 }

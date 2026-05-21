@@ -1641,5 +1641,9 @@
   "YourName": "ඔබගේ නම",
   "YourPrice": "ඔබගේ මිල",
   "YourTurn": "ඔබේ වාරය.",
-  "orContinueWith": "හෝ මෙය මගින් ඉදිරියට යන්න"
+  "orContinueWith": "හෝ මෙය මගින් ඉදිරියට යන්න",
+  "CustomFilterDisable": "අභිරුචි පෙරහන අක්‍රීය කරන්න",
+  "CustomFilterDisabled": "Prilagojen filter za izbrano datoteko onemogočen",
+  "CustomFilterEnable": "අභිමත පෙරහන සක්‍රිය කරන්න",
+  "CustomFilterEnabled": "Prilagojen filter za izbrano datoteko omogočen"
 }

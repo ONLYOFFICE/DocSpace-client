@@ -1641,5 +1641,9 @@
   "YourName": "Adınız",
   "YourPrice": "Qiymətiniz",
   "YourTurn": "Sizin növbəniz",
-  "orContinueWith": "və ya ilə davam edin"
+  "orContinueWith": "və ya ilə davam edin",
+  "CustomFilterDisable": "Şablonu silin",
+  "CustomFilterDisabled": "Seçilmiş fayl üçün Xüsusi filtr deaktiv edildi",
+  "CustomFilterEnable": "Xüsusi filtri aktivləşdirin",
+  "CustomFilterEnabled": "Seçilmiş fayl üçün Xüsusi filtr aktiv edildi"
 }

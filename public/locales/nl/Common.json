@@ -1641,5 +1641,9 @@
   "YourName": "Uw naam",
   "YourPrice": "Uw prijs",
   "YourTurn": "Uw beurt",
-  "orContinueWith": "of ga verder met"
+  "orContinueWith": "of ga verder met",
+  "CustomFilterDisable": "Verwijder sjabloon",
+  "CustomFilterDisabled": "Aangepast filter voor geselecteerd bestand uitgeschakeld",
+  "CustomFilterEnable": "Aangepast filter inschakelen",
+  "CustomFilterEnabled": "Aangepast filter voor geselecteerd bestand ingeschakeld"
 }

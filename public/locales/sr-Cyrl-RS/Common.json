@@ -1641,5 +1641,9 @@
   "YourName": "Ваше име",
   "YourPrice": "Ваша цена",
   "YourTurn": "Ваш ред",
-  "orContinueWith": "или настави са"
+  "orContinueWith": "или настави са",
+  "CustomFilterDisable": "Онемогућите прилагођени филтер",
+  "CustomFilterDisabled": "Прилагођени филтер за изабрану датотеку је онемогућен",
+  "CustomFilterEnable": "Омогућите прилагођени филтер",
+  "CustomFilterEnabled": "Прилагођени филтер за изабрану датотеку је омогућен"
 }

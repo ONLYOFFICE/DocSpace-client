@@ -1641,5 +1641,9 @@
   "YourName": "Vaše ime",
   "YourPrice": "Vaša cena",
   "YourTurn": "Vi ste na vrsti",
-  "orContinueWith": "ali nadaljujte z"
+  "orContinueWith": "ali nadaljujte z",
+  "CustomFilterDisable": "Onemogoči prilagojeni filter",
+  "CustomFilterDisabled": "Prilagojen filter za izbrano datoteko onemogočen",
+  "CustomFilterEnable": "Omogočite prilagojen filter",
+  "CustomFilterEnabled": "Prilagojen filter za izbrano datoteko omogočen"
 }

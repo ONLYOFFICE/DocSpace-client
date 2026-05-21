@@ -19,6 +19,7 @@ export enum AVAILABLE_CONTEXT_ITEMS {
   showInfo = "show-info",
   showVersionHistory = "show-version-history",
   blockUnblockVersion = "block-unblock-version",
+  customFilter = "custom-filter",
   copy = "copy",
   duplicate = "duplicate",
   moveTo = "move-to",

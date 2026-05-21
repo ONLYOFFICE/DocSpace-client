@@ -1641,5 +1641,9 @@
   "YourName": "Ihr Name",
   "YourPrice": "Ihr Preis",
   "YourTurn": "Jetzt sind Sie dran",
-  "orContinueWith": "oder weiter mit"
+  "orContinueWith": "oder weiter mit",
+  "CustomFilterDisable": "Benutzerdefinierten Filter deaktivieren",
+  "CustomFilterDisabled": "Benutzerdefinierter Filter für die ausgewählte Datei deaktiviert",
+  "CustomFilterEnable": "Benutzerdefinierter Filter aktivieren",
+  "CustomFilterEnabled": "Benutzerdefinierter Filter für die ausgewählte Datei aktiviert"
 }

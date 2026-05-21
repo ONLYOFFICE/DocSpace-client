@@ -53,6 +53,7 @@ const RoomsRowView = ({
   onRestoreSelected,
   onArchiveRoom,
   onArchiveSelected,
+  onInfoRoom,
   isArchive,
 }: RoomsRowViewProps) => {
   const isSSR = useIsServer();
@@ -86,6 +87,7 @@ const RoomsRowView = ({
           onRestoreSelected={onRestoreSelected}
           onArchiveRoom={onArchiveRoom}
           onArchiveSelected={onArchiveSelected}
+          onInfoRoom={onInfoRoom}
           isArchive={isArchive}
         />
       ))}

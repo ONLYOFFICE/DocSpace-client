@@ -75,7 +75,7 @@ import CreateFileDialog from "../create-file-dialog";
 import {
   InfoPanelView,
   useInfoPanelStore,
-} from "../../_store/InfoPanelStore";
+} from "@/app/(docspace)/_store/InfoPanelStore";
 import useDocsActions from "../../_hooks/useDocsActions";
 import { useDocsMenuModels } from "../../_hooks/useDocsMenuModels";
 import useTrashActions from "../../_hooks/useTrashActions";
@@ -90,7 +90,7 @@ import {
   InfoPanelBody as DocsInfoPanelBody,
   InfoPanelHeader as DocsInfoPanelHeader,
   InfoPanelEditLinkDialog,
-} from "../info-panel";
+} from "@/app/(docspace)/_components/info-panel";
 
 import styles from "./DocsLayout.module.scss";
 
@@ -333,15 +333,7 @@ const DocsLayout = observer(({
                       infoPanelHeaderContent={<DocsInfoPanelHeader />}
                       infoPanelBodyContent={<DocsInfoPanelBody />}
                       isInfoPanelVisible={infoPanelStore.isVisible}
-                      setIsInfoPanelVisible={(v: boolean) => {
-                        if (v) {
-                          if (!infoPanelStore.isVisible) {
-                            infoPanelStore.toggle();
-                          }
-                        } else {
-                          infoPanelStore.close();
-                        }
-                      }}
+                      setIsInfoPanelVisible={infoPanelStore.setVisible}
                       isEmptyPage={isEmptyList}
                       filesFilter={filesFilter}
                     />

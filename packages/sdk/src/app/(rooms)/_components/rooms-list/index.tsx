@@ -50,6 +50,10 @@ import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionSt
 import { useNavigationStore } from "@/app/(docspace)/_store/NavigationStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
+import {
+  InfoPanelView,
+  useInfoPanelStore,
+} from "@/app/(docspace)/_store/InfoPanelStore";
 import { useRoomsOperationsStore } from "../../_store/RoomsOperationsStore";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
@@ -109,7 +113,13 @@ const RoomsList = ({
   const navigationStore = useNavigationStore();
   const activeItemsStore = useActiveItemsStore();
   const operationsStore = useRoomsOperationsStore();
+  const infoPanelStore = useInfoPanelStore();
   const { t } = useTranslation(["Common"]);
+
+  const onInfoRoom = React.useCallback((item: TFolderItem | TFileItem) => {
+    infoPanelStore.open(item);
+    infoPanelStore.setView(InfoPanelView.infoDetails);
+  }, []);
 
   useResetSelectionClick({ setSelection, setBufferSelection });
 
@@ -198,9 +208,9 @@ const RoomsList = ({
     // fetchCurrentRooms reads URL at call time, so dependency is intentional
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
-  );  
+  );
 
-const onRestoreRoom = React.useCallback((item: TFolderItem | TFileItem) => {
+  const onRestoreRoom = React.useCallback((item: TFolderItem | TFileItem) => {
     setRestoringItems([item]);
   }, []);
 
@@ -578,6 +588,7 @@ const onRestoreRoom = React.useCallback((item: TFolderItem | TFileItem) => {
         onRestoreSelected={onRestoreSelected}
         onArchiveRoom={onArchiveRoom}
         onArchiveSelected={onArchiveSelected}
+        onInfoRoom={onInfoRoom}
         isArchive={isArchive}
       />
     );
@@ -600,6 +611,7 @@ const onRestoreRoom = React.useCallback((item: TFolderItem | TFileItem) => {
         onRestoreSelected={onRestoreSelected}
         onArchiveRoom={onArchiveRoom}
         onArchiveSelected={onArchiveSelected}
+        onInfoRoom={onInfoRoom}
         isArchive={isArchive}
       />
     );

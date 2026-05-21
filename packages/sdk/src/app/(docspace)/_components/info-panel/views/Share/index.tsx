@@ -24,27 +24,52 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
+import React from "react";
+import { observer } from "mobx-react";
+
+import Share from "@docspace/shared/components/share";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
-import {
-  InfoPanelView,
-  type InfoPanelViewType,
-} from "../../../_store/InfoPanelStore";
+import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
+import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
+import { useShareData } from "@/app/(personal-files)/_hooks/useShareData";
 
-export function getAvailableTabs(
-  selection: TFile | TFolder | null,
-): InfoPanelViewType[] {
-  if (!selection) return [InfoPanelView.infoDetails];
+type ShareViewProps = {
+  selection: TFile | TFolder;
+};
 
-  const tabs: InfoPanelViewType[] = [];
+const ShareView = observer(({ selection }: ShareViewProps) => {
+  const infoPanelStore = useInfoPanelStore();
+  const docsUserStore = useDocsUserStore();
 
-  const canShare = "canShare" in selection && selection.canShare;
+  const {
+    shareChanged,
+    setShareChanged,
+    setEditLinkPanelIsVisible,
+    setLinkParams,
+    setEmbeddingPanelData,
+  } = infoPanelStore;
 
-  if (canShare) {
-    tabs.push(InfoPanelView.infoShare);
-  }
+  const { filesLink } = useShareData({ selection });
 
-  tabs.push(InfoPanelView.infoHistory, InfoPanelView.infoDetails);
+  const selfId = docsUserStore.user?.id ?? "";
 
-  return tabs;
-}
+  return (
+    <Share
+      infoPanelSelection={selection}
+      fileLinkProps={filesLink}
+      selfId={selfId}
+      shareChanged={shareChanged}
+      setShareChanged={setShareChanged}
+      setEditLinkPanelIsVisible={setEditLinkPanelIsVisible}
+      setLinkParams={setLinkParams}
+      setEmbeddingPanelData={setEmbeddingPanelData}
+      disabledSharedUser
+      hideLinkTypeSelector
+    />
+  );
+});
+
+export default ShareView;

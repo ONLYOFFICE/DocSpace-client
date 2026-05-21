@@ -31,12 +31,17 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
+import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { FileType } from "@docspace/shared/enums";
 import { createThumbnails } from "@docspace/shared/api/files";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
-import { useDocsSettingsStore } from "../../../../_store/DocsSettingsStore";
+import {
+  getRoomIconLogo,
+  type RoomIconFields,
+} from "@/app/(docspace)/_utils/getRoomIconLogo";
+import { useDocsSettingsStore } from "@/app/(personal-files)/_store/DocsSettingsStore";
 
 import DetailsHelper, { type DetailsProperty } from "./Details.utils";
 
@@ -45,9 +50,10 @@ import styles from "./Details.module.scss";
 
 type DetailsProps = {
   selection: TFile | TFolder;
+  onTagsChanged?: () => void;
 };
 
-const Details = observer(({ selection }: DetailsProps) => {
+const Details = observer(({ selection, onTagsChanged }: DetailsProps) => {
   const { t, i18n } = useTranslation(["Common"]);
 
   const docsSettingsStore = useDocsSettingsStore();
@@ -65,6 +71,8 @@ const Details = observer(({ selection }: DetailsProps) => {
       t,
       item: selection,
       culture: i18n.language,
+      tagListClassName: styles.tagList,
+      onTagsChanged,
     });
     setItemProperties(helper.getPropertyList());
 
@@ -90,18 +98,32 @@ const Details = observer(({ selection }: DetailsProps) => {
   const onThumbnailError = () => setIsThumbnailError(true);
 
   const isFolder = "isFolder" in selection && selection.isFolder;
+  const isRoom = "isRoom" in selection && Boolean(selection.isRoom);
   const fileExst = "fileExst" in selection ? selection.fileExst : "";
 
   const iconUrl =
-    "thumbnailUrl" in selection &&
-    selection.thumbnailUrl &&
-    !isThumbnailError ? null : getIcon(isFolder ? undefined : fileExst, 96);
+    "thumbnailUrl" in selection && selection.thumbnailUrl && !isThumbnailError
+      ? null
+      : getIcon(isFolder ? undefined : fileExst, 96);
+
+  const roomItem = selection as TFolder & RoomIconFields;
+  const roomIconLogo = isRoom ? getRoomIconLogo(roomItem) : undefined;
 
   return (
     <>
-      {"thumbnailUrl" in selection &&
-      selection.thumbnailUrl &&
-      !isThumbnailError ? (
+      {isRoom ? (
+        <div className={styles.noThumbnail}>
+          <RoomIcon
+            logo={roomIconLogo}
+            color={roomItem.roomIconColor}
+            title={selection.title}
+            showDefault={!roomItem.hasRoomImage}
+            size="96px"
+          />
+        </div>
+      ) : "thumbnailUrl" in selection &&
+        selection.thumbnailUrl &&
+        !isThumbnailError ? (
         <div className={styles.thumbnail}>
           {/* biome-ignore lint/performance/noImgElement: authenticated same-origin thumbnail with immutable caching; next/image proxy is not applicable */}
           <img
@@ -141,3 +163,4 @@ const Details = observer(({ selection }: DetailsProps) => {
 });
 
 export default Details;
+

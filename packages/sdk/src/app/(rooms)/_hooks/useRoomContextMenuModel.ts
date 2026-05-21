@@ -39,6 +39,7 @@ import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?u
 import DuplicateReactSvgUrl from "PUBLIC_DIR/images/icons/16/duplicate.react.svg?url";
 import ReconnectSvgUrl from "PUBLIC_DIR/images/reconnect.svg?url";
 import EditRoomReactSvgUrl from "PUBLIC_DIR/images/settings.react.svg?url";
+import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import MoreOptionsReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import MuteReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
 import UnmuteReactSvgUrl from "PUBLIC_DIR/images/unmute.react.svg?url";
@@ -78,6 +79,7 @@ export default function useRoomContextMenuModel(
   onRestoreSelected?: (items: TRoomItem[]) => void,
   onArchiveRoom?: (item: TRoomItem) => void,
   onArchiveSelected?: (items: TRoomItem[]) => void,
+  onInfoRoom?: (item: TRoomItem) => void,
 ) {
   const { t } = useTranslation(["Common", "Files"]);
   const refreshRooms = useContext(RoomsRefreshContext);
@@ -209,6 +211,13 @@ export default function useRoomContextMenuModel(
               icon: DuplicateReactSvgUrl,
               disabled: true,
             },
+            {
+              id: "option_room-info",
+              key: "room-info",
+              label: t("Common:RoomInfo"),
+              icon: InfoOutlineReactSvgUrl,
+              onClick: () => onInfoRoom?.(room),
+            },
             { key: "separator-owner", isSeparator: true },
             {
               id: "option_change-room-owner",
@@ -250,6 +259,7 @@ export default function useRoomContextMenuModel(
       onRestoreRoom,
       onDeleteRoom,
       onArchiveRoom,
+      onInfoRoom,
       isArchive,
       filesSelectionStore,
     ],
@@ -264,9 +274,7 @@ export default function useRoomContextMenuModel(
           label: t("Common:Restore"),
           icon: MoveReactSvgUrl,
           onClick: () =>
-            onRestoreSelected?.(
-              filesSelectionStore.selection as TRoomItem[],
-            ),
+            onRestoreSelected?.(filesSelectionStore.selection as TRoomItem[]),
         },
         {
           id: "option_delete-rooms",
@@ -274,9 +282,7 @@ export default function useRoomContextMenuModel(
           label: t("Common:DeleteRoom"),
           icon: TrashReactSvgUrl,
           onClick: () =>
-            onDeleteSelected?.(
-              filesSelectionStore.selection as TRoomItem[],
-            ),
+            onDeleteSelected?.(filesSelectionStore.selection as TRoomItem[]),
         },
       ];
     }
@@ -296,9 +302,7 @@ export default function useRoomContextMenuModel(
         label: t("Common:MoveToArchive"),
         icon: RoomArchiveSvgUrl,
         onClick: () =>
-          onArchiveSelected?.(
-            filesSelectionStore.selection as TRoomItem[],
-          ),
+          onArchiveSelected?.(filesSelectionStore.selection as TRoomItem[]),
       },
       {
         id: "option_delete-rooms",

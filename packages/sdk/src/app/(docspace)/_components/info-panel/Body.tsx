@@ -44,7 +44,11 @@ import { NoItem, SeveralItems } from "./views/EmptyStates";
 
 import commonStyles from "./helpers/Common.module.scss";
 
-const InfoPanelBody = observer(() => {
+type InfoPanelBodyProps = {
+  onTagsChanged?: () => void;
+};
+
+const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
   const infoPanelStore = useInfoPanelStore();
   const filesSelectionStore = useFilesSelectionStore();
   const { selection, fileView, isVisible } = infoPanelStore;
@@ -97,7 +101,7 @@ const InfoPanelBody = observer(() => {
       return <ShareView selection={selection} />;
     if (currentView === InfoPanelView.infoHistory)
       return <History selection={selection} />;
-    return <Details selection={selection} />;
+    return <Details selection={selection} onTagsChanged={onTagsChanged} />;
   };
 
   return (

@@ -38,6 +38,7 @@ import type {
 import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TPathParts } from "@docspace/shared/types";
+import api from "@docspace/shared/api";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
 import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
 import {
@@ -57,8 +58,14 @@ import { DeviceTypeObserver } from "@/app/(docspace)/_components/DeviceTypeObser
 import RootScrollbar from "@/app/(docspace)/_components/RootScrollbar";
 import useFrameHeaderConfig from "@/hooks/useFrameHeaderConfig";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
+import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
 import RoomsList from "../rooms-list";
+import {
+  InfoPanelBody as DocsInfoPanelBody,
+  InfoPanelHeader as DocsInfoPanelHeader,
+} from "@/app/(docspace)/_components/info-panel";
+import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
 
 import styles from "./RoomsLayout.module.scss";
 
@@ -91,6 +98,32 @@ const RoomsLayout = observer(
     const { t } = useTranslation(["Common"]);
     const { isEmptyList } = useSettingsStore();
     const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
+    const infoPanelStore = useInfoPanelStore();
+    const filesListStore = useFilesListStore();
+
+    // Re-fetch the room after tags are bound/unbound inside the info panel and
+    // update both the panel's selection (so Tags row refreshes) and the room
+    // entry in the files list store (so the table/row view updates).
+    const onInfoPanelTagsChanged = React.useCallback(async () => {
+      const sel = infoPanelStore.selection;
+      if (!sel || !("isRoom" in sel) || !sel.isRoom) return;
+      try {
+        const updated = (await api.rooms.getRoomInfo(
+          sel.id,
+        )) as unknown as TFolder;
+        infoPanelStore.setSelection({ ...updated, isRoom: true } as TFolder);
+        const existing = filesListStore.items.find((i) => i.id === sel.id);
+        if (existing) {
+          const merged = {
+            ...existing,
+            ...(updated as unknown as Record<string, unknown>),
+          } as unknown as typeof existing;
+          filesListStore.replaceItem(sel.id, merged);
+        }
+      } catch {
+        // ignore
+      }
+    }, [infoPanelStore, filesListStore]);
 
     const [isCreateRoomDialogVisible, setIsCreateRoomDialogVisible] =
       React.useState(false);
@@ -152,6 +185,8 @@ const RoomsLayout = observer(
                 pathParts={pathParts}
                 isEmptyList={isEmptyList}
                 headerOffset={headerOffset}
+                isInfoPanelVisible={infoPanelStore.isVisible}
+                onToggleInfoPanel={infoPanelStore.toggle}
               />
             }
             sectionFilterContent={
@@ -187,6 +222,12 @@ const RoomsLayout = observer(
                 onCloseCreateDialog={closeCreateRoomDialog}
               />
             }
+            infoPanelHeaderContent={<DocsInfoPanelHeader />}
+            infoPanelBodyContent={
+              <DocsInfoPanelBody onTagsChanged={onInfoPanelTagsChanged} />
+            }
+            isInfoPanelVisible={infoPanelStore.isVisible}
+            setIsInfoPanelVisible={infoPanelStore.setVisible}
             isEmptyPage={isEmptyList}
             filesFilter={filesFilter}
           />

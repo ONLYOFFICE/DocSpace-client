@@ -24,52 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
-
-import React from "react";
-import { observer } from "mobx-react";
-
-import Share from "@docspace/shared/components/share";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
-import { useInfoPanelStore } from "../../../../_store/InfoPanelStore";
-import { useDocsUserStore } from "../../../../_store/DocsUserStore";
-import { useShareData } from "../../../../_hooks/useShareData";
+import {
+  InfoPanelView,
+  type InfoPanelViewType,
+} from "../../../_store/InfoPanelStore";
 
-type ShareViewProps = {
-  selection: TFile | TFolder;
-};
+export function getAvailableTabs(
+  selection: TFile | TFolder | null,
+): InfoPanelViewType[] {
+  if (!selection) return [InfoPanelView.infoDetails];
 
-const ShareView = observer(({ selection }: ShareViewProps) => {
-  const infoPanelStore = useInfoPanelStore();
-  const docsUserStore = useDocsUserStore();
+  const isRoom = "isRoom" in selection && Boolean(selection.isRoom);
+  if (isRoom) {
+    return [InfoPanelView.infoHistory, InfoPanelView.infoDetails];
+  }
 
-  const {
-    shareChanged,
-    setShareChanged,
-    setEditLinkPanelIsVisible,
-    setLinkParams,
-    setEmbeddingPanelData,
-  } = infoPanelStore;
+  const tabs: InfoPanelViewType[] = [];
 
-  const { filesLink } = useShareData({ selection });
+  const canShare = "canShare" in selection && selection.canShare;
 
-  const selfId = docsUserStore.user?.id ?? "";
+  if (canShare) {
+    tabs.push(InfoPanelView.infoShare);
+  }
 
-  return (
-    <Share
-      infoPanelSelection={selection}
-      fileLinkProps={filesLink}
-      selfId={selfId}
-      shareChanged={shareChanged}
-      setShareChanged={setShareChanged}
-      setEditLinkPanelIsVisible={setEditLinkPanelIsVisible}
-      setLinkParams={setLinkParams}
-      setEmbeddingPanelData={setEmbeddingPanelData}
-      disabledSharedUser
-      hideLinkTypeSelector
-    />
-  );
-});
+  tabs.push(InfoPanelView.infoHistory, InfoPanelView.infoDetails);
 
-export default ShareView;
+  return tabs;
+}

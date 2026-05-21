@@ -55,7 +55,7 @@ import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder-location.react.s
 
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
-import { useDocsSettingsStore } from "../../../../_store/DocsSettingsStore";
+import { useDocsSettingsStore } from "@/app/(personal-files)/_store/DocsSettingsStore";
 
 import { useFeedTranslation } from "./useFeedTranslation";
 import { getFeedInfo } from "./FeedInfo";
@@ -99,7 +99,7 @@ const HistoryBlock = ({ feed, isLastEntity, dataTestId }: HistoryBlockProps) => 
     (feedInfo.targetType === "file" || feedInfo.targetType === "folder");
 
   const isFolder = feedInfo?.targetType === "folder";
-  const data = feed.data as TFeedData;
+  const data = (feed.data ?? {}) as TFeedData;
   const rawTitle = data.title || data.newTitle || "";
   const itemTitle = nameWithoutExtension(rawTitle);
   const fileExst = isFolder ? "" : getFileExtension(rawTitle);

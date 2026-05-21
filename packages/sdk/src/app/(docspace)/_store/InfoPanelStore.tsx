@@ -74,6 +74,14 @@ class InfoPanelStore {
     this.isVisible = !this.isVisible;
   };
 
+  setVisible = (visible: boolean) => {
+    if (visible) {
+      this.isVisible = true;
+    } else {
+      this.close();
+    }
+  };
+
   setSelection = (item: TFile | TFolder | null) => {
     this.selection = item ? toJS(item) : null;
   };

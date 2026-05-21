@@ -30,8 +30,38 @@ import { decode } from "he";
 import { Text } from "@docspace/ui-kit/components/text";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
+import {
+  TagManagement,
+  type AccessTagManagement,
+} from "@docspace/shared/components/tag-management";
 import type { TCreatedBy, TTranslation } from "@docspace/shared/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+
+const tagList = (
+  tags: string[],
+  id: number | string,
+  access: AccessTagManagement,
+  title: string,
+  tagListClassName: string,
+  onTagsChanged?: () => void,
+) => (
+  <div
+    className={`property-tag_list ${tagListClassName}`}
+    data-testid="info_panel_details_tag_list"
+  >
+    <TagManagement
+      id={id}
+      isActive
+      tags={tags}
+      className="tags"
+      columnCount={-1}
+      access={access}
+      roomName={title}
+      onSelectTag={() => {}}
+      onTagsChanged={onTagsChanged}
+    />
+  </div>
+);
 
 type DetailsItem = TFile | TFolder;
 
@@ -57,6 +87,8 @@ type DetailsHelperProps = {
   t: TTranslation;
   item: DetailsItem;
   culture: string;
+  tagListClassName: string;
+  onTagsChanged?: () => void;
 };
 
 export type DetailsProperty = {
@@ -69,11 +101,15 @@ class DetailsHelper {
   t: TTranslation;
   item: DetailsItem;
   culture: string;
+  tagListClassName: string;
+  onTagsChanged?: () => void;
 
   constructor(props: DetailsHelperProps) {
     this.t = props.t;
     this.item = props.item;
     this.culture = props.culture;
+    this.tagListClassName = props.tagListClassName;
+    this.onTagsChanged = props.onTagsChanged;
   }
 
   getPropertyList = (): DetailsProperty[] => {
@@ -87,7 +123,19 @@ class DetailsHelper {
   };
 
   private getNeededProperties = (): (string | false | undefined)[] => {
+    const isRoom = "isRoom" in this.item && Boolean(this.item.isRoom);
     const isFolder = "isFolder" in this.item && this.item.isFolder;
+
+    if (isRoom) {
+      return [
+        "Owner",
+        "Content",
+        "Date modified",
+        "Last modified by",
+        "Creation date",
+        "Tags",
+      ];
+    }
 
     if (isFolder) {
       return [
@@ -120,6 +168,8 @@ class DetailsHelper {
         return this.t("Common:Type");
       case "File extension":
         return this.t("Common:FileExtension");
+      case "Tags":
+        return this.t("Common:Tags");
       case "Content":
         return this.t("Common:Content");
       case "Size":
@@ -153,6 +203,8 @@ class DetailsHelper {
         return this.getItemType();
       case "File extension":
         return this.getItemFileExtention();
+      case "Tags":
+        return this.getItemTags();
       case "Content":
         return this.getItemContent();
       case "Size":
@@ -171,6 +223,30 @@ class DetailsHelper {
   private getItemType = () => {
     if ("fileType" in this.item) return text(getFileTypeName(this.item.fileType, this.t));
     return text(getFileTypeName("", this.t));
+  };
+
+  private getItemTags = () => {
+    const room = this.item as TFolder & {
+      tags?: string[];
+      security?: { EditRoom?: boolean };
+    };
+    const tags = Array.isArray(room.tags) ? room.tags : [];
+    const hasEditAccess = !!room.security?.EditRoom;
+    const access: AccessTagManagement = {
+      canCreate: hasEditAccess,
+      canBindTag: hasEditAccess,
+      canSearch: hasEditAccess,
+      canEdit: false,
+      canRemove: false,
+    };
+    return tagList(
+      tags,
+      room.id,
+      access,
+      room.title,
+      this.tagListClassName,
+      this.onTagsChanged,
+    );
   };
 
   private getItemFileExtention = () => {

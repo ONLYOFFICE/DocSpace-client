@@ -52,6 +52,7 @@ import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import { generateFilesItemValue } from "@/app/(docspace)/(files)/_utils";
+import { getRoomIconLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
 import useRoomContextMenuModel from "../../_hooks/useRoomContextMenuModel";
 import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
 
@@ -61,14 +62,6 @@ import type {
 } from "@/app/(docspace)/_hooks/useItemList";
 
 import styles from "@/app/(docspace)/(files)/_components/table-view/TableView.module.scss";
-
-function getRoomIconLogo(item: TFolderItem | TFileItem) {
-  if (!("isRoom" in item) || !item.isRoom) return item.icon;
-  const logo = item.roomLogo;
-  if (!logo) return undefined;
-  if (logo.cover) return logo;
-  return logo.large || logo.medium || logo.original || undefined;
-}
 
 type RoomsTableViewRowProps = {
   item: TFolderItem | TFileItem;
@@ -85,6 +78,7 @@ type RoomsTableViewRowProps = {
   onRestoreSelected?: (items: (TFolderItem | TFileItem)[]) => void;
   onArchiveRoom?: (item: TFolderItem | TFileItem) => void;
   onArchiveSelected?: (items: (TFolderItem | TFileItem)[]) => void;
+  onInfoRoom?: (item: TFolderItem | TFileItem) => void;
   isArchive?: boolean;
 };
 
@@ -104,6 +98,7 @@ const RoomsTableViewRow = observer(
     onRestoreSelected,
     onArchiveRoom,
     onArchiveSelected,
+    onInfoRoom,
     isArchive,
   }: RoomsTableViewRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
@@ -128,6 +123,7 @@ const RoomsTableViewRow = observer(
       onRestoreSelected,
       onArchiveRoom,
       onArchiveSelected,
+      onInfoRoom,
     );
     const refreshRooms = React.useContext(RoomsRefreshContext);
     const isChecked = filesSelectionStore.isCheckedItem(item);

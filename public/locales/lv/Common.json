@@ -1639,5 +1639,8 @@
   "OpenFileMessage": "Dokumentu fails jūs atverat tiks konvertēts Office Open XML formātā ātrākai apskatei un rediģēšanai.",
   "SelectFileType": "Izvēlieties faila veidu:",
   "SaveOriginalFormatMessage": "Saglabājiet faila kopiju sākotnējā formātā",
-  "FailedToConvert": "Neizdevās konvertēt"
+  "FailedToConvert": "Neizdevās konvertēt",
+  "ByAuthor": "Autors",
+  "ByCreation": "Izveidots",
+  "ByLastModified": "Modificēts"
 }

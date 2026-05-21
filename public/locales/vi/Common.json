@@ -1639,5 +1639,8 @@
   "OpenFileMessage": "Tài liệu bạn mở sẽ được chuyển sang định dạng Office Open XML giúp sửa và xem nhanh hơn.",
   "SelectFileType": "Vui lòng chọn một loại tập tin:",
   "SaveOriginalFormatMessage": "Lưu bản sao tệp ở định dạng gốc",
-  "FailedToConvert": "Không thể chuyển đổi"
+  "FailedToConvert": "Không thể chuyển đổi",
+  "ByAuthor": "Tác giả",
+  "ByCreation": "Đã tạo",
+  "ByLastModified": "Đã sửa đổi"
 }

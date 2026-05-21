@@ -1639,5 +1639,8 @@
   "OpenFileMessage": "開いた文書ファイルは、より高速に表示、編集するようにOffice Open XML形式に変換されます。",
   "SelectFileType": "ファイルの種類を選択してください：",
   "SaveOriginalFormatMessage": "コピーしたファイルを元のフォーマットで保存する",
-  "FailedToConvert": "変換に失敗しました"
+  "FailedToConvert": "変換に失敗しました",
+  "ByAuthor": "作成者",
+  "ByCreation": "作成",
+  "ByLastModified": "変更"
 }

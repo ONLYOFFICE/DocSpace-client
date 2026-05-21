@@ -1639,5 +1639,8 @@
   "OpenFileMessage": "سيتم تحويل ملف المستند الذي تفتحه إلى صيغةOffice Open XML لعرضه وتحريره بسرعة.",
   "SelectFileType": "يرجى اختيار نوع الملف:",
   "SaveOriginalFormatMessage": "احفظ نسخة الملف بالتنسيق الأصلي",
-  "FailedToConvert": "فشل التحويل"
+  "FailedToConvert": "فشل التحويل",
+  "ByAuthor": "مؤلف",
+  "ByCreation": "تم انشاءه",
+  "ByLastModified": "تم تعديله"
 }

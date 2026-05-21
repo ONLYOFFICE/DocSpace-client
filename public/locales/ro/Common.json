@@ -1639,5 +1639,8 @@
   "OpenFileMessage": "Fişierul pe care îl deschideţi va fi convertit în formatul Office Open XML pentru vizualizare şi editare rapidă.",
   "SelectFileType": "Selectați tip de fișier:",
   "SaveOriginalFormatMessage": "Salvează copia în formatul original",
-  "FailedToConvert": "Nereuşită la conversie"
+  "FailedToConvert": "Nereuşită la conversie",
+  "ByAuthor": "Autor",
+  "ByCreation": "A fost creat la",
+  "ByLastModified": "Modificat"
 }

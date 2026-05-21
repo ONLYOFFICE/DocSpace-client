@@ -1639,5 +1639,8 @@
   "OpenFileMessage": "Ձեր բացած փաստաթղթի ֆայլը կվերածվի Office Open XML ձևաչափի՝ արագ դիտման և խմբագրման համար:",
   "SelectFileType": "Խնդրում ենք ընտրել ֆայլի տեսակը՝",
   "SaveOriginalFormatMessage": "Պահպանել ֆայլի պատճենը սկզբնական ձևաչափով",
-  "FailedToConvert": "Փոխարկման ձախողում"
+  "FailedToConvert": "Փոխարկման ձախողում",
+  "ByAuthor": "Հեղինակ",
+  "ByCreation": "Ստեղծված",
+  "ByLastModified": "Փոփոխված"
 }

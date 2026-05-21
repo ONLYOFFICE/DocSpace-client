@@ -1639,5 +1639,8 @@
   "OpenFileMessage": "Для швидшого перегляду та редагування файл документа, який ви відкриваєте, буде перетворено у формат Office Open XML.",
   "SelectFileType": "Виберіть тип файлу:",
   "SaveOriginalFormatMessage": "Зберегти копію файлу в оригінальному форматі",
-  "FailedToConvert": "Не вдалося перетворити"
+  "FailedToConvert": "Не вдалося перетворити",
+  "ByAuthor": "Автор",
+  "ByCreation": "Створено",
+  "ByLastModified": "Змінено"
 }

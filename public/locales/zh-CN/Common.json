@@ -1639,5 +1639,8 @@
   "OpenFileMessage": "您打开的文本文档将被转换为Office Open XML格式，以便快速查看并编辑。",
   "SelectFileType": "请选择一个文件类型：",
   "SaveOriginalFormatMessage": "以原始格式保存文件副本",
-  "FailedToConvert": "转换失败"
+  "FailedToConvert": "转换失败",
+  "ByAuthor": "作者",
+  "ByCreation": "创建日期",
+  "ByLastModified": "修改日期"
 }

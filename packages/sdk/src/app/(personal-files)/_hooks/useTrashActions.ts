@@ -47,8 +47,9 @@ import type {
   TFileItem,
   TFolderItem,
 } from "@/app/(docspace)/_hooks/useItemList";
+import type { TrackOperation } from "./useFileOperations";
 
-export default function useTrashActions() {
+export default function useTrashActions(trackOperation?: TrackOperation) {
   const filesListStore = useFilesListStore();
   const filesSelectionStore = useFilesSelectionStore();
 
@@ -90,22 +91,46 @@ export default function useTrashActions() {
       .filter((i) => i.isFolder)
       .map((i) => i.id as number);
     const immediately = isTrash;
+    const itemsToRemove = pendingDeleteItems;
 
     setIsDeleting(true);
     try {
-      await removeFiles(folderIds, fileIds, false, immediately);
-      for (const item of pendingDeleteItems) {
-        filesListStore.removeItem(item.id);
-      }
-      filesSelectionStore.setSelection();
+      const operations = await removeFiles(
+        folderIds,
+        fileIds,
+        false,
+        immediately,
+      );
       setDeleteDialogVisible(false);
       setPendingDeleteItems([]);
+
+      const opId = operations?.[0]?.id;
+      const icon = immediately ? "deletePermanently" : "trash";
+
+      const onComplete = () => {
+        for (const item of itemsToRemove) {
+          filesListStore.removeItem(item.id);
+        }
+        filesSelectionStore.setSelection();
+      };
+
+      if (opId && trackOperation) {
+        await trackOperation(opId, icon, onComplete);
+      } else {
+        onComplete();
+      }
     } catch (error) {
       toastr.error(error instanceof Error ? error.message : String(error));
     } finally {
       setIsDeleting(false);
     }
-  }, [isTrash, filesListStore, filesSelectionStore, pendingDeleteItems]);
+  }, [
+    isTrash,
+    filesListStore,
+    filesSelectionStore,
+    pendingDeleteItems,
+    trackOperation,
+  ]);
 
   return {
     isTrash,

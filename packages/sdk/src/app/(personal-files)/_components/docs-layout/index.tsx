@@ -168,16 +168,6 @@ const DocsLayout = observer(
     });
 
     useDocsFrameBridge({ isReady: true, uploadFilesToFolder });
-    const {
-      isTrash,
-      requestDeleteItem,
-      requestDelete,
-      deleteDialogVisible,
-      deleteDialogItemCount,
-      isDeleting,
-      closeDeleteDialog,
-      confirmDelete,
-    } = useTrashActions();
 
     const {
       renameDialogVisible,
@@ -195,6 +185,7 @@ const DocsLayout = observer(
       selectorInitData,
       disabledItems,
       operationProgress,
+      trackOperation,
       requestCopy,
       requestCopyItems,
       requestMove,
@@ -205,6 +196,17 @@ const DocsLayout = observer(
       closeSelectorDialog,
       confirmOperation,
     } = useFileOperations();
+
+    const {
+      isTrash,
+      requestDeleteItem,
+      requestDelete,
+      deleteDialogVisible,
+      deleteDialogItemCount,
+      isDeleting,
+      closeDeleteDialog,
+      confirmDelete,
+    } = useTrashActions(trackOperation);
 
     const deleteHandler = React.useMemo(
       () => ({ deleteItem: requestDeleteItem, deleteItems: requestDelete }),

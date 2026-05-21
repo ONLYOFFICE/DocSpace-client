@@ -1645,5 +1645,6 @@
   "CustomFilterDisable": "Disable Custom filter",
   "CustomFilterDisabled": "Custom filter for the selected file disabled",
   "CustomFilterEnable": "Enable Custom filter",
-  "CustomFilterEnabled": "Custom filter for the selected file enabled"
+  "CustomFilterEnabled": "Custom filter for the selected file enabled",
+  "Uploading": "Uploading"
 }

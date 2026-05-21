@@ -206,7 +206,6 @@
   "UnarchivedRoomAction": "ルーム '{{name}}' はアーカイブが解除されました。",
   "UnarchivedRoomsAction": "ルームはアーカイブが解除されました。",
   "Unpin": "固定の削除",
-  "Uploading": "アップロード中",
   "UploadingProgress": "アップロード中：{{progress}}%",
   "UserLimitDescription": "この招待リンクから参加できるユーザー数を定義してください。",
   "UsersJoined": "参加ユーザー:",

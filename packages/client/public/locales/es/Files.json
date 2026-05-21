@@ -206,7 +206,6 @@
   "UnarchivedRoomAction": "La sala '{{name}}' está desarchivada.",
   "UnarchivedRoomsAction": "Las salas están desarchivadas.",
   "Unpin": "Desanclar",
-  "Uploading": "Cargando",
   "UploadingProgress": "Cargando: {{progress}}%",
   "UserLimitDescription": "Define el número de usuarios que pueden unirse a través de este enlace de invitación.",
   "UsersJoined": "Usuarios unidos:",

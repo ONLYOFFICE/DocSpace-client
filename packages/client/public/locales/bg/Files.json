@@ -206,7 +206,6 @@
   "UnarchivedRoomAction": "Стаята '{{name}}' е изкарана от архива.",
   "UnarchivedRoomsAction": "Стаите са изкарани от архива.",
   "Unpin": "Откачване",
-  "Uploading": "Качване",
   "UploadingProgress": "Качване: {{progress}}%",
   "UserLimitDescription": "Определете броя на потребителите, които могат да се присъединят чрез тази покана.",
   "UsersJoined": "Потребители присъединиха:",

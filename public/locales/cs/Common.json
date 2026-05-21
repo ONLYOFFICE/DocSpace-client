@@ -1645,5 +1645,6 @@
   "CustomFilterDisable": "Odstranění šablony",
   "CustomFilterDisabled": "Vlastní filtr pro vybraný soubor deaktivován",
   "CustomFilterEnable": "Povolit Vlastní filtr",
-  "CustomFilterEnabled": "Vlastní filtr pro vybraný soubor aktivován"
+  "CustomFilterEnabled": "Vlastní filtr pro vybraný soubor aktivován",
+  "Uploading": "Nahrávání"
 }

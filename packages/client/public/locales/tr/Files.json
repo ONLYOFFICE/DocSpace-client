@@ -206,7 +206,6 @@
   "UnarchivedRoomAction": "'{{name}}' odası arşivden çıkarıldı.",
   "UnarchivedRoomsAction": "Odalar arşivden çıkarıldı.",
   "Unpin": "Sabitlemeyi kaldır",
-  "Uploading": "Yükleniyor",
   "UploadingProgress": "Yükleniyor: %{{progress}}",
   "UserLimitDescription": "Bu davet bağlantısı aracılığıyla katılabilecek kullanıcı sayısını tanımlayın.",
   "UsersJoined": "Kullanıcılar katıldı:",

@@ -206,7 +206,6 @@
   "UnarchivedRoomAction": "تم إخراج الغرفة \"{{name}}\" من الأرشيف.",
   "UnarchivedRoomsAction": "الغرف غير مؤرشفة.",
   "Unpin": "إلغاء التثبيت",
-  "Uploading": "جارٍ التحميل",
   "UploadingProgress": "جارٍ التحميل: {{progress}}٪",
   "UserLimitDescription": "حدد عدد المستخدمين الذين يمكنهم الانضمام عبر رابط الدعوة هذا.",
   "UsersJoined": "انضمّ المستخدمون:",

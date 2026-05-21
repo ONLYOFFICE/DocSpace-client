@@ -206,7 +206,6 @@
   "UnarchivedRoomAction": "Miestnosť '{{name}}' bola rozbalená z archívu.",
   "UnarchivedRoomsAction": "Miestnosti nie sú archivované.",
   "Unpin": "Odopnúť",
-  "Uploading": "Nahrávanie",
   "UploadingProgress": "Nahrávanie: {{progress}}%",
   "UserLimitDescription": "Definujte počet používateľov, ktorí sa môžu pripojiť cez tento invitačný odkaz.",
   "UsersJoined": "Používatelia prišli:",

@@ -1645,5 +1645,6 @@
   "CustomFilterDisable": "Deshabilitar Filtro personalizado",
   "CustomFilterDisabled": "El Filtro personalizado para el archivo seleccionado se ha deshabilitado",
   "CustomFilterEnable": "Habilitar Filtro personalizado",
-  "CustomFilterEnabled": "El Filtro personalizado para el archivo seleccionado se ha habilitado"
+  "CustomFilterEnabled": "El Filtro personalizado para el archivo seleccionado se ha habilitado",
+  "Uploading": "Cargando"
 }

@@ -206,7 +206,6 @@
   "UnarchivedRoomAction": "房间 '{{name}}' 已取消存档。",
   "UnarchivedRoomsAction": "房间已取消存档。",
   "Unpin": "取消置顶",
-  "Uploading": "上传中",
   "UploadingProgress": "上传中：{{progress}}%",
   "UserLimitDescription": "设置通过此邀请链接可加入的用户数量。",
   "UsersJoined": "用户已加入：",

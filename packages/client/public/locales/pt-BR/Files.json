@@ -206,7 +206,6 @@
   "UnarchivedRoomAction": "A sala '{{name}}' foi desarquivada.",
   "UnarchivedRoomsAction": "As salas são desarquivadas.",
   "Unpin": "Desafixar",
-  "Uploading": "Enviando",
   "UploadingProgress": "Enviando: {{progress}}%",
   "UserLimitDescription": "Defina o número de usuários que podem entrar por meio deste link de convite.",
   "UsersJoined": "Usuários adicionados:",

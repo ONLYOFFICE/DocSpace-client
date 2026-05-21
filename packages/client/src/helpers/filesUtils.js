@@ -292,7 +292,7 @@ export const getOperationsProgressTitle = (type, progress) => {
     case upload:
       if (progress > 0 && progress < 100)
         return i18n.t("Files:UploadingProgress", { progress });
-      return i18n.t("Files:Uploading");
+      return i18n.t("Common:Uploading");
     case convert:
       return i18n.t("Files:Converting");
     case deleteVersionFile:
@@ -302,3 +302,4 @@ export const getOperationsProgressTitle = (type, progress) => {
       return i18n.t("Files:OtherProcesses");
   }
 };
+

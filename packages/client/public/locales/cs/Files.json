@@ -206,7 +206,6 @@
   "UnarchivedRoomAction": "Místnost '{{name}}' není archivována.",
   "UnarchivedRoomsAction": "Místnosti nejsou archivovány.",
   "Unpin": "Odepnout",
-  "Uploading": "Nahrávání",
   "UploadingProgress": "Nahrávání: {{progress}}%",
   "UserLimitDescription": "Definujte počet uživatelů, kteří se mohou připojit pomocí tohoto invitačního odkazu.",
   "UsersJoined": "Uživatelé přidali:",

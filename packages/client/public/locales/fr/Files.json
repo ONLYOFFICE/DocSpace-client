@@ -206,7 +206,6 @@
   "UnarchivedRoomAction": "La salle '{{name}}' n'est plus archivée.",
   "UnarchivedRoomsAction": "Les salles ne sont plus archivées.",
   "Unpin": "Désépingler",
-  "Uploading": "Téléchargement",
   "UploadingProgress": "Téléchargement : {{progress}}%",
   "UserLimitDescription": "Définir le nombre d'utilisateurs pouvant rejoindre via ce lien d'invitation.",
   "UsersJoined": "Utilisateurs inscrits :",

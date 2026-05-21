@@ -1645,5 +1645,6 @@
   "CustomFilterDisable": "Dzēst veidni",
   "CustomFilterDisabled": "Pielāgotais filtrs atlasītajam failam ir deaktivēts",
   "CustomFilterEnable": "Iespējot pielāgoto filtru",
-  "CustomFilterEnabled": "Pielāgotais filtrs atlasītajam failam ir aktivēts"
+  "CustomFilterEnabled": "Pielāgotais filtrs atlasītajam failam ir aktivēts",
+  "Uploading": "Augšupielādē"
 }

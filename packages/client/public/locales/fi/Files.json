@@ -206,7 +206,6 @@
   "UnarchivedRoomAction": "Huone '{{name}}' on arkistoimaton.",
   "UnarchivedRoomsAction": "Huoneet ovat arkistoimattomia.",
   "Unpin": "Irrota",
-  "Uploading": "Ladataan",
   "UploadingProgress": "Ladataan: {{progress}}%",
   "UserLimitDescription": "Määritä käyttäjien määrä, jotka voivat liittyä tämän kutsu-/linkin kautta.",
   "UsersJoined": "Käyttäjät liittyi:",

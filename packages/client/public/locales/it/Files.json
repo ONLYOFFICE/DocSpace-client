@@ -206,7 +206,6 @@
   "UnarchivedRoomAction": "La stanza '{{name}}' è stata rimossa dall'archivio.",
   "UnarchivedRoomsAction": "Le stanze non sono state archiviate.",
   "Unpin": "Rimuovi pin",
-  "Uploading": "Caricamento in corso",
   "UploadingProgress": "Caricamento: {{progress}}%",
   "UserLimitDescription": "Definisci il numero di utenti che possono unirsi tramite questo link di invito.",
   "UsersJoined": "Utenti uniti:",

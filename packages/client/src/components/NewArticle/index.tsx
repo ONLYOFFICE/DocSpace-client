@@ -30,7 +30,10 @@ import { useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
-import type { NavMenuGroup, NavMenuItem } from "@docspace/ui-kit/components/nav-menu";
+import type {
+  NavMenuGroup,
+  NavMenuItem,
+} from "@docspace/ui-kit/components/nav-menu";
 import { DeviceType } from "@docspace/shared/enums";
 import type { TUser } from "@docspace/shared/api/people/types";
 
@@ -209,15 +212,11 @@ const NewArticle = ({
       id: AI_ROOMS_ID,
       label: t("Common:DashboardAIRoomsTitle"),
       icon: CatalogRoomsReactSvgUrl,
-      onClick: aiRoomsEnabled ? () => navigate("/ai-rooms") : underDevelopment,
+      onClick: aiRoomsEnabled
+        ? () => navigate("/ai-rooms?section=rooms")
+        : underDevelopment,
       children: aiRoomsEnabled
         ? [
-            {
-              id: "ai-rooms-rooms",
-              label: t("Common:Rooms"),
-              icon: CatalogRoomsReactSvgUrl,
-              onClick: () => navigate("/ai-rooms?section=rooms"),
-            },
             {
               id: "ai-rooms-archive",
               label: t("Common:Archive"),
@@ -321,3 +320,4 @@ const NewArticleConnected = inject<TStore>(
 )(observer(NewArticle));
 
 export default NewArticleConnected;
+

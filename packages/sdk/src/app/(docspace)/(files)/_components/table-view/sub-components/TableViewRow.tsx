@@ -52,6 +52,7 @@ import Badges from "@docspace/shared/components/badges";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
+import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
 import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import useFavoritesActions from "@/app/(docspace)/_hooks/useFavoritesActions";
@@ -73,6 +74,11 @@ const TableViewRow = observer(
   ({ item, index, timezone, displayFileExtension, lastColumn }: TableViewRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
+    const { filesSettings } = useFilesSettingsStore();
+    const isExtsCustomFilter =
+      "fileExst" in item
+        ? (filesSettings?.extsWebCustomFilterEditing ?? []).includes(item.fileExst)
+        : false;
 
     const storeItem = filesListStore.items.find((i) => i.id === item.id);
     const observableItem = storeItem ?? item;
@@ -184,6 +190,7 @@ const TableViewRow = observer(
           item={observableItem}
           viewAs="table"
           showNew={false}
+          isExtsCustomFilter={isExtsCustomFilter}
           onFilesClick={() => {
             if (!observableItem.isFolder) {
               openFile(observableItem);

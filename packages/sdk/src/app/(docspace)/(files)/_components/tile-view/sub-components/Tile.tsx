@@ -126,6 +126,10 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const { isItemActive } = useActiveItemsStore();
 
   const displayFileExtension = Boolean(filesSettings?.displayFileExtension);
+  const isExtsCustomFilter =
+    "fileExst" in item
+      ? (filesSettings?.extsWebCustomFilterEditing ?? []).includes(item.fileExst)
+      : false;
   const temporaryIcon = getTemporaryIcon(item, getIcon);
   const isChecked = isCheckedItem(item);
   const inProgress = isItemActive(item);
@@ -194,6 +198,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
       item={observableItem}
       viewAs="tile"
       showNew={false}
+      isExtsCustomFilter={isExtsCustomFilter}
       onFilesClick={() => {
         if (!observableItem.isFolder) {
           openFile(observableItem);

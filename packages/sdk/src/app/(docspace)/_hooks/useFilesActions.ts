@@ -120,5 +120,25 @@ export default function useFilesActions({ t }: UseFilesActionsProps) {
     [filesListStore],
   );
 
-  return { openFile, copyFileLink, lockFile };
+  const changeCustomFilter = React.useCallback(
+    async (file: TFileItem) => {
+      const nextEnabled = !file.customFilterEnabled;
+      try {
+        await api.files.enableCustomFilter(file.id as number, nextEnabled);
+        filesListStore.updateItemCustomFilter(file.id, nextEnabled);
+        toastr.success(
+          nextEnabled
+            ? t("Common:CustomFilterEnabled")
+            : t("Common:CustomFilterDisabled"),
+        );
+      } catch (error) {
+        toastr.error(
+          error instanceof Error ? error.message : String(error),
+        );
+      }
+    },
+    [filesListStore, t],
+  );
+
+  return { openFile, copyFileLink, lockFile, changeCustomFilter };
 }

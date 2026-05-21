@@ -1902,7 +1902,9 @@ class ContextOptionsStore {
   };
 
   askAI = async (item) => {
-    const skipAi = JSON.parse(localStorage.getItem(SKIP_AI_MODAL_KEY) ?? "false");
+    const skipAi = JSON.parse(
+      localStorage.getItem(SKIP_AI_MODAL_KEY) ?? "false",
+    );
 
     if (item.parentRoomType !== FolderType.FormRoom || skipAi) {
       this.filesActionsStore.askAIAction(item);
@@ -2047,7 +2049,7 @@ class ContextOptionsStore {
       {
         id: "option_move-or-copy",
         key: "move",
-        label: t("MoveOrCopy"),
+        label: t("Common:MoveOrCopy"),
         icon: CopyReactSvgUrl,
         items: [
           {
@@ -3848,3 +3850,4 @@ class ContextOptionsStore {
 }
 
 export default ContextOptionsStore;
+

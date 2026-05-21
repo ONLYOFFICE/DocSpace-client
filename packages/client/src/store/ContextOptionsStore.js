@@ -2578,8 +2578,8 @@ class ContextOptionsStore {
         id: "option_custom-filter",
         key: "custom-filter",
         label: item.customFilterEnabled
-          ? t("Files:CustomFilterDisable")
-          : t("Files:CustomFilterEnable"),
+          ? t("Common:CustomFilterDisable")
+          : t("Common:CustomFilterEnable"),
         icon: CustomFilterReactSvgUrl,
         onClick: () => this.onSetUpCustomFilter(item, t),
         disabled: Boolean(

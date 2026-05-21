@@ -29,15 +29,14 @@
 import React from "react";
 import { observer } from "mobx-react";
 import dynamic from "next/dynamic";
-import { useTranslation } from "react-i18next";
 
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
-import {
-  QuickActions,
-  type QuickActionItem,
-} from "@docspace/ui-kit/components/quick-actions";
-import { CreateAgentIcon } from "@docspace/ui-kit/components/quick-actions/icons";
-import type { MainButtonProps } from "@docspace/ui-kit/components/main-button/MainButton.types";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+  type TOptSocket,
+} from "@docspace/ui-kit/utils/socket";
+import type { TAgent, TAIConfig } from "@docspace/shared/api/ai/types";
 
 import {
   useAgentsListStore,
@@ -48,10 +47,7 @@ import useAiAgentsPageInit from "../_hooks/useAiAgentsPageInit";
 import useAiAgentsFrameBridge from "../_hooks/useAiAgentsFrameBridge";
 
 import AgentsList from "../_components/agents-list";
-import AgentsFilter from "../_components/agents-filter";
-import AgentsHeader from "../_components/agents-header";
-import useFrameHeaderConfig from "@/hooks/useFrameHeaderConfig";
-import styles from "../_components/agents-list/AgentsList.module.scss";
+import type { AgentsListSection } from "../_components/agents-section-empty-view";
 
 const CreateAgentEvent = dynamic(
   () => import("../_components/agent-events/CreateAgentEvent"),
@@ -64,10 +60,23 @@ const EditAgentEvent = dynamic(
 
 type Props = {
   initialSearch: string;
+  section?: AgentsListSection;
+  initialAgents?: TAgent[];
+  initialTotal?: number;
+  initialRootFolderId?: number | null;
+  initialAIConfig?: TAIConfig | null;
 };
 
-const AgentsListPage = ({ initialSearch }: Props) => {
-  const { t } = useTranslation(["Common"]);
+export type { AgentsListSection };
+
+const AgentsListPage = ({
+  initialSearch,
+  section,
+  initialAgents,
+  initialTotal,
+  initialRootFolderId,
+  initialAIConfig,
+}: Props) => {
   const store = useAgentsListStore();
   const dialogsStore = useAgentDialogsStore();
   const aiConfigStore = useAgentsAIConfigStore();
@@ -75,87 +84,133 @@ const AgentsListPage = ({ initialSearch }: Props) => {
   useAiAgentsPageInit();
   useAiAgentsFrameBridge(true, null);
 
-  const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
+  // Synchronously hydrate the list + AI config stores from SSR data so the
+  // first render already has everything — no client fetch on mount, no
+  // loader flash. Subsequent updates are driven by AgentsFilter callbacks
+  // (which call store.fetchAgents) and socket-driven refetches below.
+  //
+  // If SSR data is missing (e.g. the server-side fetch failed / 401), we
+  // fall through to the client-side fetch in the useEffect below — keeps
+  // the page usable even when SSR can't authenticate.
+  const ssrHydrated = React.useRef(false);
+  if (!ssrHydrated.current && initialAgents !== undefined && initialAIConfig) {
+    ssrHydrated.current = true;
+    const filter = store.filter.clone();
+    if (initialSearch) filter.filterValue = initialSearch;
+    filter.total = initialTotal ?? 0;
+    store.setFilter(filter);
+    store.setAgents(initialAgents, initialTotal ?? 0);
+    if (initialRootFolderId != null) store.setRootFolderId(initialRootFolderId);
+    store.setIsLoading(false);
+    aiConfigStore.setAIConfig(initialAIConfig);
+  }
 
-  // Initial fetch — seeds the list using the default RoomsFilter; subsequent
-  // changes are driven by AgentsFilter callbacks (which call store.fetchAgents).
+  // Fallback client-side initial fetch — runs only if SSR didn't hydrate
+  // (initialAgents/initialAIConfig undefined or null). Same behavior as
+  // before SSR was added.
   const didInit = React.useRef(false);
   React.useEffect(() => {
-    if (didInit.current) return;
+    if (didInit.current || ssrHydrated.current) return;
     didInit.current = true;
     const filter = store.filter.clone();
     if (initialSearch) filter.filterValue = initialSearch;
-    store.fetchAgents(filter);
-    // Drive the EmptyView copy: pulls aiReady from /ai/config so the
-    // "AI disabled" branch can fire when the portal has no provider.
-    void aiConfigStore.fetchAIConfig();
+    void Promise.all([
+      store.fetchAgents(filter),
+      aiConfigStore.fetchAIConfig(),
+    ]);
   }, [initialSearch, store, aiConfigStore]);
 
-  const onCreate = React.useCallback(() => {
-    dialogsStore.setCreateAgentDialogVisible(true);
-  }, [dialogsStore]);
+  // Live-refresh the list when an agent is created/updated/deleted (either
+  // from the current tab or another). Mirrors client FilesStore handling of
+  // `s:modify-folder` — subscribes to the AI-agents root `DIR-{id}` room and
+  // refetches on matching events. Debounced so a burst (bulk delete) collapses
+  // into one refetch.
+  const rootFolderId = store.rootFolderId;
+  React.useEffect(() => {
+    if (rootFolderId == null) return;
 
-  const quickActionItems = React.useMemo<QuickActionItem[]>(
-    () => [
-      {
-        id: "quick-new-agent",
-        icon: <CreateAgentIcon />,
-        label: t("Common:NewAgent", { defaultValue: "New agent" }),
-        onClick: onCreate,
-      },
-    ],
-    [t, onCreate],
-  );
+    const room = `DIR-${rootFolderId}`;
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: room,
+      individual: true,
+    });
 
-  // AI Agents folder uses a plain primary action (no dropdown), matching
-  // client `article/MainButton/index.js` ("isAIAgentsFolder" branch — a single
-  // primary <Button> with label `Common:NewAgent`).
-  const mainButtonProps = React.useMemo<MainButtonProps>(
-    () => ({
-      isDropdown: false,
-      model: [],
-      onAction: onCreate,
-      text: t("Common:NewAgent", { defaultValue: "New agent" }),
-    }),
-    [t, onCreate],
-  );
+    let pending: number | null = null;
+    const refetch = () => {
+      if (pending !== null) return;
+      pending = window.setTimeout(() => {
+        pending = null;
+        void store.fetchAgents();
+      }, 200);
+    };
+
+    const handler = (opt?: TOptSocket) => {
+      if (!opt?.data) return;
+      let data: { folderId?: number; parentId?: number; id?: number };
+      try {
+        data = JSON.parse(opt.data);
+      } catch {
+        return;
+      }
+      const matches =
+        data.folderId === rootFolderId ||
+        data.parentId === rootFolderId ||
+        data.id === rootFolderId;
+      if (!matches) return;
+      if (
+        opt.cmd === "create" ||
+        opt.cmd === "update" ||
+        opt.cmd === "delete"
+      ) {
+        refetch();
+      }
+    };
+
+    // ChangedQuotaUsedValue — mirrors client FilesStore: when the portal
+    // emits a room-feature quota update, refetch the list (the iframe path
+    // is the only one this fires on in the client too).
+    const quotaHandler = (res?: TOptSocket) => {
+      if (res && (res as { featureId?: string }).featureId === "room") {
+        refetch();
+      }
+    };
+
+    SocketHelper?.on(SocketEvents.ModifyFolder, handler);
+    SocketHelper?.on(SocketEvents.ChangedQuotaUsedValue, quotaHandler);
+
+    return () => {
+      if (pending !== null) window.clearTimeout(pending);
+      SocketHelper?.off(SocketEvents.ModifyFolder, handler);
+      SocketHelper?.off(SocketEvents.ChangedQuotaUsedValue, quotaHandler);
+
+      SocketHelper?.emit(SocketCommands.Unsubscribe, {
+        roomParts: room,
+        individual: true,
+      });
+    };
+  }, [rootFolderId, store]);
 
   return (
-    <div className={styles.root} style={frameHeaderVars}>
-      <div className={styles.scroll}>
-        <div className={styles.headerWrap}>
-          <AgentsHeader
-            title={t("Common:AIAgents", { defaultValue: "AI Agents" })}
-            isEmptyList={!store.isLoading && store.agents.length === 0}
-            headerOffset={headerOffset}
-          />
+    <>
+      {store.isLoading || !aiConfigStore.isLoaded ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            padding: 32,
+          }}
+        >
+          <Loader type={LoaderTypes.dualRing} size="40px" />
         </div>
-        <QuickActions
-          items={quickActionItems}
-          className={styles.quickActions}
-        />
-
-        <AgentsFilter showMainButton mainButtonProps={mainButtonProps} />
-
-        {store.isLoading ? (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              padding: 32,
-            }}
-          >
-            <Loader type={LoaderTypes.dualRing} size="40px" />
-          </div>
-        ) : (
-          <AgentsList agents={store.agents} />
-        )}
-      </div>
+      ) : (
+        <AgentsList agents={store.agents} section={section} />
+      )}
 
       {dialogsStore.createAgentDialogVisible ? (
         <CreateAgentEvent
           visible={dialogsStore.createAgentDialogVisible}
           onClose={() => dialogsStore.setCreateAgentDialogVisible(false)}
+          portalMcpServerId={aiConfigStore.aiConfig?.portalMcpServerId}
         />
       ) : null}
 
@@ -166,8 +221,9 @@ const AgentsListPage = ({ initialSearch }: Props) => {
           item={dialogsStore.editingAgent}
         />
       ) : null}
-    </div>
+    </>
   );
 };
 
 export default observer(AgentsListPage);
+

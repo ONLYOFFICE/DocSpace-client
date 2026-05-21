@@ -27,17 +27,25 @@
 "use client";
 
 import React from "react";
+import { observer } from "mobx-react";
 import { notFound } from "next/navigation";
+
+import BillingForm from "@/app/(personal-files)/_components/settings/category/BillingForm";
 
 import { AIProvider } from "../../../_components/ai-settings/providers";
 import { MCPServers } from "../../../_components/ai-settings/servers";
 import { Search } from "../../../_components/ai-settings/search";
 import { Knowledge } from "../../../_components/ai-settings/knowledge";
+import { useAgentsUserStore } from "../../../_store/AgentsUserStore";
 
 type Props = { tab: string };
 
-const TabClient = ({ tab }: Props) => {
+const TabClient = observer(({ tab }: Props) => {
+  const { user } = useAgentsUserStore();
+
   switch (tab) {
+    case "billing":
+      return <BillingForm user={user} />;
     case "providers":
       return <AIProvider />;
     case "servers":
@@ -49,6 +57,6 @@ const TabClient = ({ tab }: Props) => {
     default:
       notFound();
   }
-};
+});
 
 export default TabClient;

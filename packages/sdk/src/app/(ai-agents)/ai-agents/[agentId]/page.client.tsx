@@ -44,7 +44,6 @@ import useAiAgentsPageInit from "../../_hooks/useAiAgentsPageInit";
 import useAiAgentsFrameBridge from "../../_hooks/useAiAgentsFrameBridge";
 import useAiRoomSocket from "../../_hooks/useAiRoomSocket";
 
-import AiRoomTabs from "../../_components/ai-room-tabs";
 import AiAgentView from "../../_components/ai-agent-view";
 
 const CreateAgentEvent = dynamic(
@@ -98,6 +97,10 @@ const AiAgentDetailPage = ({
     // until the new getFolder() resolves (visible flash on fast nav).
     aiRoomStore.setKnowledgeId(null);
     aiRoomStore.setResultId(null);
+    // Clear the previous agent's title — the @header parallel route reads
+    // from `aiRoomStore.title` and would otherwise flash the stale name
+    // while getAIAgent resolves.
+    aiRoomStore.setTitle("");
     loadingStore.setIsSectionBodyLoading(true);
     // Capture the room id this effect was started for — every async write
     // back into the store is guarded against it, so a fast switch between
@@ -108,9 +111,10 @@ const AiAgentDetailPage = ({
 
     void api.ai
       .getAIAgent(roomId)
-      .then(async () => {
+      .then(async (agent) => {
         if (isStale()) return;
         aiRoomStore.setIsErrorAIAgentNotAvailable(false);
+        aiRoomStore.setTitle(agent?.title ?? "");
         // Discover the agent's Knowledge / ResultStorage subfolders so the
         // corresponding tabs can list their files. Matches the client
         // FilesStore flow where folder.type drives setKnowledgeId/setResultId.
@@ -146,18 +150,8 @@ const AiAgentDetailPage = ({
   }, [roomId, aiRoomStore, loadingStore]);
 
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <AiRoomTabs />
-      <div style={{ flex: 1, minHeight: 0, display: "flex" }}>
-        <AiAgentView />
-      </div>
+    <>
+      <AiAgentView />
 
       {dialogsStore.createAgentDialogVisible ? (
         <CreateAgentEvent
@@ -175,7 +169,7 @@ const AiAgentDetailPage = ({
           item={dialogsStore.editingAgent}
         />
       ) : null}
-    </div>
+    </>
   );
 };
 

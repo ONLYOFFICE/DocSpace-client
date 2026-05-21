@@ -32,7 +32,12 @@ import { makeAutoObservable, runInAction } from "mobx";
 import api from "@docspace/shared/api";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { RoomSearchArea, ShareAccessRights } from "@docspace/shared/enums";
+import { muteRoomNotification } from "@docspace/shared/api/settings";
+import { downloadFiles } from "@docspace/shared/api/files";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import type { TAgent } from "@docspace/shared/api/ai/types";
+
+type TFunction = (key: string, options?: Record<string, unknown>) => string;
 
 export type AgentsViewAs = "tile" | "row" | "table";
 
@@ -41,14 +46,33 @@ class AgentsListStore {
 
   total = 0;
 
+  // Resolved from `getAIAgents().current.id` — needed to subscribe to the
+  // `DIR-{id}` socket room so list refreshes when an agent is created /
+  // updated / deleted in another tab.
+  rootFolderId: number | null = null;
+
   filter: RoomsFilter = RoomsFilter.getDefault(
     undefined,
     RoomSearchArea.AIAgents,
   );
 
-  isLoading = false;
+  // Default to `true` so the page renders a Loader from first paint until
+  // the initial `fetchAgents` resolves. Without this, the brief gap between
+  // mount and the first `setIsLoading(true)` would flash the EmptyView (with
+  // the wrong "AI not available" copy when aiConfig hasn't loaded yet).
+  isLoading = true;
 
   viewAs: AgentsViewAs = "tile";
+
+  // Multi-selection — IDs of currently selected agents. Mirrors client
+  // FilesStore.selection semantics: kebab-driven `Select` toggles a single
+  // id; consumer UI (header group menu etc.) can be added later.
+  selectedAgentIds: Set<TAgent["id"]> = new Set();
+
+  // Single-item kebab-buffered selection — when the context menu opens on an
+  // agent that isn't part of the active selection, it goes here so actions
+  // like "Download" target one item without committing to multi-select.
+  bufferSelectionId: TAgent["id"] | null = null;
 
   private abort: AbortController | null = null;
 
@@ -57,8 +81,44 @@ class AgentsListStore {
   // server.
   private pinInFlight = new Set<TAgent["id"]>();
 
+  // Per-agent in-flight set for mute toggles — same reasoning as pin.
+  private muteInFlight = new Set<TAgent["id"]>();
+
   constructor() {
     makeAutoObservable(this);
+  }
+
+  // Selection API — mirrors client `FilesStore.setSelection` /
+  // `toggleSelection`. Pure state mutators; consumers handle navigation.
+  isSelected = (id: TAgent["id"]) => this.selectedAgentIds.has(id);
+
+  toggleAgentSelection = (agent: TAgent) => {
+    const id = agent.id;
+    const next = new Set(this.selectedAgentIds);
+    if (next.has(id)) next.delete(id);
+    else next.add(id);
+    this.selectedAgentIds = next;
+  };
+
+  setSelection = (ids: Iterable<TAgent["id"]>) => {
+    this.selectedAgentIds = new Set(ids);
+  };
+
+  selectAll = () => {
+    this.selectedAgentIds = new Set(this.agents.map((a) => a.id));
+  };
+
+  clearSelection = () => {
+    this.selectedAgentIds = new Set();
+    this.bufferSelectionId = null;
+  };
+
+  setBufferSelection = (id: TAgent["id"] | null) => {
+    this.bufferSelectionId = id;
+  };
+
+  get selectedAgents(): TAgent[] {
+    return this.agents.filter((a) => this.selectedAgentIds.has(a.id));
   }
 
   setAgents = (agents: TAgent[], total: number) => {
@@ -70,12 +130,74 @@ class AgentsListStore {
     this.filter = filter;
   };
 
+  setRootFolderId = (id: number | null) => {
+    this.rootFolderId = id;
+  };
+
   setIsLoading = (value: boolean) => {
     this.isLoading = value;
   };
 
   setViewAs = (value: AgentsViewAs) => {
     this.viewAs = value;
+  };
+
+  // Mute / unmute room notifications — mirrors client
+  // `FilesActionsStore.setMuteAction` (without the tree-folder counter math
+  // since the SDK doesn't render a tree). Optimistic flip + toast on success;
+  // revert on error.
+  toggleMuteAgent = async (agent: TAgent, t: TFunction) => {
+    const id = agent.id;
+    if (this.muteInFlight.has(id)) return;
+    this.muteInFlight.add(id);
+
+    const wasMuted = !!agent.mute;
+    const muteStatus = !wasMuted;
+
+    runInAction(() => {
+      this.agents = this.agents.map((a) =>
+        a.id === id ? { ...a, mute: muteStatus } : a,
+      );
+    });
+
+    try {
+      await muteRoomNotification(id, muteStatus);
+      toastr.success(
+        t(
+          muteStatus
+            ? "Common:AIAgentNotificationsDisabled"
+            : "Common:AIAgentNotificationsEnabled",
+          {
+            aiAgent: t("Common:AIAgent", { defaultValue: "AI agent" }),
+            defaultValue: muteStatus
+              ? "AI agent notifications disabled"
+              : "AI agent notifications enabled",
+          },
+        ),
+      );
+    } catch (e) {
+      runInAction(() => {
+        this.agents = this.agents.map((a) =>
+          a.id === id ? { ...a, mute: wasMuted } : a,
+        );
+      });
+      toastr.error(e instanceof Error ? e.message : String(e));
+    } finally {
+      this.muteInFlight.delete(id);
+    }
+  };
+
+  // Download — mirrors client `FilesActionsStore.downloadAction` for a room
+  // (folder-shaped item): hand the agent id to the bulk-download endpoint.
+  // The shared `downloadFiles(fileIds, folderIds, shareKey)` signature takes
+  // an optional share key as the 3rd arg, NOT a label — pass empty. Progress
+  // is server-side; SDK doesn't yet host the operations progress UI.
+  downloadAgent = async (agent: TAgent) => {
+    try {
+      await downloadFiles([], [agent.id], "");
+    } catch (e) {
+      toastr.error(e instanceof Error ? e.message : String(e));
+    }
   };
 
   togglePinAgent = async (agent: TAgent) => {
@@ -149,6 +271,7 @@ class AgentsListStore {
         this.agents = data.folders;
         this.total = data.total;
         this.filter = filterData;
+        if (data.current?.id != null) this.rootFolderId = data.current.id;
       });
     } catch (e) {
       if (!controller.signal.aborted) throw e;

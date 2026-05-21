@@ -79,6 +79,13 @@ const AI_FORMS_SECTION_TO_ID: Record<string, string> = {
   settings: "ai-forms-settings",
 };
 
+const AI_AGENTS_SECTION_TO_ID: Record<string, string> = {
+  recent: "ai-agents-recent",
+  favorites: "ai-agents-favorites",
+  trash: "ai-agents-trash",
+  settings: "ai-agents-settings",
+};
+
 type NewArticleProps = {
   user?: TUser | null;
   currentDeviceType: DeviceType;
@@ -131,6 +138,9 @@ const NewArticle = ({
     if (location.pathname.startsWith("/ai-forms")) {
       return AI_FORMS_SECTION_TO_ID[section] ?? AI_FORMS_ID;
     }
+    if (location.pathname.startsWith("/ai-agents")) {
+      return AI_AGENTS_SECTION_TO_ID[section] ?? AI_AGENTS_ID;
+    }
     for (const [path, id] of Object.entries(PATH_TO_PARENT_ID)) {
       if (location.pathname.startsWith(path)) return id;
     }
@@ -170,6 +180,7 @@ const NewArticle = ({
               label: t("Common:TrashSection"),
               icon: CatalogTrashReactSvgUrl,
               onClick: () => navigate("/ai-files?section=trash"),
+              withTopSeparator: true,
             },
             ...(isAdminOrOwner
               ? [
@@ -253,11 +264,58 @@ const NewArticle = ({
       onClick: underDevelopment,
     };
 
+    const handleAiAgentsClick = async () => {
+      if (aiAgentsEnabled) {
+        navigate("/ai-agents");
+        return;
+      }
+      try {
+        const activated = await activate("ai-agents");
+        if (activated) {
+          navigate("/ai-agents");
+        } else {
+          toastr.error(t("Common:SomethingWentWrong"));
+        }
+      } catch (err) {
+        console.error("Failed to activate ai-agents", err);
+        toastr.error(t("Common:SomethingWentWrong"));
+      }
+    };
+
     const aiAgentsItem: NavMenuItem = {
       id: AI_AGENTS_ID,
       label: t("Common:DashboardAIChatAgentsTitle"),
       icon: CatalogAiAgentsReactSvgUrl,
-      onClick: underDevelopment,
+      onClick: handleAiAgentsClick,
+      children: aiAgentsEnabled
+        ? [
+            {
+              id: "ai-agents-recent",
+              label: t("Common:Recent"),
+              icon: CatalogRestoreReactSvgUrl,
+              onClick: () => navigate("/ai-agents?section=recent"),
+            },
+            {
+              id: "ai-agents-favorites",
+              label: t("Common:Favorites"),
+              icon: CatalogFavoritesReactSvgUrl,
+              onClick: () => navigate("/ai-agents?section=favorites"),
+            },
+            {
+              id: "ai-agents-trash",
+              label: t("Common:TrashSection"),
+              icon: CatalogTrashReactSvgUrl,
+              onClick: () => navigate("/ai-agents?section=trash"),
+              withTopSeparator: true,
+            },
+            {
+              id: "ai-agents-settings",
+              label: t("Common:Settings"),
+              icon: CatalogSettingsReactSvgUrl,
+              onClick: () => navigate("/ai-agents?section=settings"),
+            },
+          ]
+        : undefined,
     };
 
     const all: { item: NavMenuItem; enabled: boolean }[] = [

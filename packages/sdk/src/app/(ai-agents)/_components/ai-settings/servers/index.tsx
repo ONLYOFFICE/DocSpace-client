@@ -168,7 +168,7 @@ const MCPServersComponent = ({ standalone }: MCPServersProps) => {
 
     try {
       await updateMCPStatus?.(id, enabled);
-      toastr.success(t("AISettings:ServerEnabledSuccess"));
+      toastr.success(t("Common:ServerEnabledSuccess"));
     } catch (e) {
       console.error(e);
       toastr.error(e instanceof Error ? e.message : String(e));
@@ -221,7 +221,7 @@ const MCPServersComponent = ({ standalone }: MCPServersProps) => {
   return (
     <div className={styles.mcpServers}>
       <Text className={styles.description}>
-        {t("AISettings:MCPSettingsDescription", {
+        {t("Common:MCPSettingsDescription", {
           mcpServers: t("Common:MCPSettingTitle"),
           aiChats: t("Common:AIChats"),
         })}
@@ -242,7 +242,7 @@ const MCPServersComponent = ({ standalone }: MCPServersProps) => {
       <Button
         primary
         size={ButtonSize.small}
-        label={t("AISettings:AddMCPServer", {
+        label={t("Common:AddMCPServer", {
           mcpServer: t("Common:MCPServer"),
         })}
         scale={false}
@@ -251,7 +251,7 @@ const MCPServersComponent = ({ standalone }: MCPServersProps) => {
         isDisabled={isMCPActionsDisabled}
         tooltipText={
           isMCPActionsDisabled
-            ? t("AISettings:ToUseAddProvider", {
+            ? t("Common:ToUseAddProvider", {
                 value: t("Common:MCPServer"),
                 aiProvider: t("Common:AIProvider"),
               })
@@ -261,7 +261,7 @@ const MCPServersComponent = ({ standalone }: MCPServersProps) => {
       />
 
       <MCPList
-        headingText={t("AISettings:CustomMCPListTitle")}
+        headingText={t("Common:CustomMCPListTitle")}
         mcpServers={customMCPServers}
         showHeading={showMCPHeadings}
         onMCPToggle={onMCPToggle}
@@ -272,7 +272,7 @@ const MCPServersComponent = ({ standalone }: MCPServersProps) => {
       />
 
       <MCPList
-        headingText={t("AISettings:SystemMCPListTitle")}
+        headingText={t("Common:SystemMCPListTitle")}
         mcpServers={systemMCPServers}
         showHeading={showMCPHeadings}
         onMCPToggle={onMCPToggle}

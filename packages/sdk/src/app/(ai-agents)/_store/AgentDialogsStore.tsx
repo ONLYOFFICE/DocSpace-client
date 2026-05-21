@@ -92,6 +92,22 @@ class AgentDialogsStore {
     isOwner: boolean;
   } = { visible: false, agent: null, isOwner: false };
 
+  // Mirrors client `DialogsStore.invitePanelOptions`. `roomId` is the agent
+  // id; `defaultAccess` is the ShareAccessRights-level the new members get
+  // (undefined → server-side default). `hideSelector=true` hides the role
+  // picker step (unused in SDK so far).
+  invitePanelOptions: {
+    visible: boolean;
+    roomId: Nullable<TAgent["id"]>;
+    hideSelector: boolean;
+    defaultAccess: number | undefined;
+  } = {
+    visible: false,
+    roomId: null,
+    hideSelector: false,
+    defaultAccess: undefined,
+  };
+
   // Cover model — ports client DialogsStore cover/covers/setCover bag, used
   // by the agent create/edit dialog to render the cover picker.
   cover: AgentCover = null;
@@ -136,6 +152,20 @@ class AgentDialogsStore {
     isOwner: boolean = false,
   ) => {
     this.leaveAgentDialogState = { visible, agent, isOwner };
+  };
+
+  setInvitePanelOptions = (options: {
+    visible: boolean;
+    roomId?: Nullable<TAgent["id"]>;
+    hideSelector?: boolean;
+    defaultAccess?: number;
+  }) => {
+    this.invitePanelOptions = {
+      visible: options.visible,
+      roomId: options.roomId ?? null,
+      hideSelector: options.hideSelector ?? false,
+      defaultAccess: options.defaultAccess,
+    };
   };
 
   setIsNewRoomByCurrentUser = (value: boolean) => {

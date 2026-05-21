@@ -61,11 +61,11 @@ const NoAccessAgent = () => {
 
   return (
     <EmptyView
-      title={t("AIRoom:NoAccessAIAgentTitle", {
+      title={t("Common:NoAccessAIAgentTitle", {
         aiAgent: t("Common:AIAgent", { defaultValue: "AI Agent" }),
         defaultValue: "You don't have access to this {{aiAgent}}",
       })}
-      description={t("AIRoom:AIAgentAccessRedirectNote", {
+      description={t("Common:AIAgentAccessRedirectNote", {
         sectionName: t("Common:AIAgents", { defaultValue: "AI Agents" }),
         defaultValue: "Redirecting to {{sectionName}}...",
       })}

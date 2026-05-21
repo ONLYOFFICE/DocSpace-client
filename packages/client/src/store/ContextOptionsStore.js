@@ -1508,7 +1508,7 @@ class ContextOptionsStore {
       {
         id: "option_pin-room",
         key: "pin-room",
-        label: t("PinToTop"),
+        label: t("Common:PinToTop"),
         icon: PinReactSvgUrl,
         onClick: () => this.onClickPin("pin", item.id, t, item.isAIAgent),
         disabled:
@@ -1518,7 +1518,7 @@ class ContextOptionsStore {
       {
         id: "option_unpin-room",
         key: "unpin-room",
-        label: t("Unpin"),
+        label: t("Common:Unpin"),
         icon: UnpinReactSvgUrl,
         onClick: () => this.onClickPin("unpin", item.id, t, item.isAIAgent),
         disabled:
@@ -1534,7 +1534,7 @@ class ContextOptionsStore {
       {
         id: "option_unmute-room",
         key: "unmute-room",
-        label: t("EnableNotifications"),
+        label: t("Common:EnableNotifications"),
         icon: UnmuteReactSvgUrl,
         onClick: () => this.onClickMute("unmute", item, t),
         disabled: !canMute,
@@ -1542,7 +1542,7 @@ class ContextOptionsStore {
       {
         id: "option_mute-room",
         key: "mute-room",
-        label: t("DisableNotifications"),
+        label: t("Common:DisableNotifications"),
         icon: MuteReactSvgUrl,
         onClick: () => this.onClickMute("mute", item, t),
         disabled: !canMute,
@@ -2754,7 +2754,7 @@ class ContextOptionsStore {
         label: isRootThirdPartyFolder
           ? t("Common:Disconnect")
           : isAIAgent
-            ? t("DeleteAgent")
+            ? t("Common:DeleteAgent")
             : item.isTemplate
               ? t("Files:DeleteTemplateAction")
               : item.isRoom
@@ -3209,14 +3209,14 @@ class ContextOptionsStore {
       const pinOption = isPinOption
         ? {
             key: "pin-room",
-            label: t("PinToTop"),
+            label: t("Common:PinToTop"),
             icon: PinReactSvgUrl,
             onClick: () => pinRooms(t),
             disabled: false,
           }
         : {
             key: "unpin-room",
-            label: t("Unpin"),
+            label: t("Common:Unpin"),
             icon: UnpinReactSvgUrl,
             onClick: () => unpinRooms(t),
             disabled: false,

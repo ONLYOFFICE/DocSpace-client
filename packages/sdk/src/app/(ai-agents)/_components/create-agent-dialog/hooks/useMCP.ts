@@ -160,12 +160,18 @@ export const useMCP = ({
           placeholder: "",
         },
       ]);
+
+      // The portal MCP server is filtered out of `mcpServers` (see effect
+      // above) and is instead represented by the `attachDefaultTools` flag.
+      // Seed it to true so a user who never opens the MCP selector still
+      // gets the portal tools attached on Create.
+      setAgentParams({ attachDefaultTools: true });
     };
 
     if (portalMcpServerId) {
       initBaseMcpServers();
     }
-  }, [portalMcpServerId, isBase, t]);
+  }, [portalMcpServerId, isBase, t, setAgentParams]);
 
   const initSelectedServers = React.useMemo(() => {
     return selectedServers.map((i) => i.id?.toString() || "");

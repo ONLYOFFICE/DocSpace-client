@@ -48,6 +48,9 @@ import { AgentsQuotaStoreContextProvider } from "./AgentsQuotaStore";
 import { AgentsAIConfigStoreContextProvider } from "./AgentsAIConfigStore";
 import { AISettingsStoreContextProvider } from "./AISettingsStore";
 import { AgentFilesStoreContextProvider } from "./AgentFilesStore";
+import { AgentInfoPanelStoreContextProvider } from "./AgentInfoPanelStore";
+import { RecentFilesStoreContextProvider } from "./RecentFilesStore";
+import { FavoritesFilesStoreContextProvider } from "./FavoritesFilesStore";
 
 export const AiAgentsStoreProviders = ({
   children,
@@ -66,9 +69,15 @@ export const AiAgentsStoreProviders = ({
                     <AgentsAIConfigStoreContextProvider>
                       <AISettingsStoreContextProvider>
                         <AgentFilesStoreContextProvider>
-                          <AgentsListStoreContextProvider>
-                            {children}
-                          </AgentsListStoreContextProvider>
+                          <RecentFilesStoreContextProvider>
+                            <FavoritesFilesStoreContextProvider>
+                              <AgentInfoPanelStoreContextProvider>
+                                <AgentsListStoreContextProvider>
+                                  {children}
+                                </AgentsListStoreContextProvider>
+                              </AgentInfoPanelStoreContextProvider>
+                            </FavoritesFilesStoreContextProvider>
+                          </RecentFilesStoreContextProvider>
                         </AgentFilesStoreContextProvider>
                       </AISettingsStoreContextProvider>
                     </AgentsAIConfigStoreContextProvider>
@@ -97,3 +106,8 @@ export { useAgentsQuotaStore } from "./AgentsQuotaStore";
 export { useAgentsAIConfigStore } from "./AgentsAIConfigStore";
 export { useAISettingsStore } from "./AISettingsStore";
 export { useAgentFilesStore } from "./AgentFilesStore";
+export { useRecentFilesStore } from "./RecentFilesStore";
+export { useFavoritesFilesStore } from "./FavoritesFilesStore";
+export type { default as AliasFilesStore, AliasViewAs } from "./AliasFilesStore";
+export { useAgentInfoPanelStore } from "./AgentInfoPanelStore";
+export type { AgentInfoPanelView } from "./AgentInfoPanelStore";

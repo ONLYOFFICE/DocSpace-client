@@ -137,19 +137,22 @@ const Dashboard = ({
   const appsCatalog = useAppsCatalog();
 
   const handleInstall = async (modId: AppId) => {
-    if (modId !== "ai-forms") {
+    if (modId !== "ai-forms" && modId !== "ai-agents") {
       toastr.info(t("Common:UnderDevelopment"));
       return;
     }
+    const targetHref = modId === "ai-forms" ? "/ai-forms" : "/ai-agents";
     try {
-      const activated = await activate("ai-forms");
+      const activated = await activate(modId);
       if (activated) {
-        navigate("/ai-forms");
-      } else {
+        navigate(targetHref);
+      } else if (modId === "ai-forms") {
         setInstallDialogVisible(true);
+      } else {
+        toastr.error(t("Common:SomethingWentWrong"));
       }
     } catch (err) {
-      console.error("Failed to activate ai-forms", err);
+      console.error(`Failed to activate ${modId}`, err);
       toastr.error(t("Common:SomethingWentWrong"));
     }
   };

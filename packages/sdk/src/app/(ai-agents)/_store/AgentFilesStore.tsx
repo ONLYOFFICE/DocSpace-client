@@ -35,23 +35,32 @@ import type { TFile } from "@docspace/shared/api/files/types";
 
 // One store, two slots (knowledge / result). Avoids spinning up two
 // providers for tabs that never co-exist on screen.
-type Slot = "knowledge" | "result";
+type Slot = "knowledge" | "result" | "recent";
 
 class AgentFilesStore {
-  files: Record<Slot, TFile[]> = { knowledge: [], result: [] };
+  files: Record<Slot, TFile[]> = {
+    knowledge: [],
+    result: [],
+    recent: [],
+  };
 
-  isLoading: Record<Slot, boolean> = { knowledge: false, result: false };
+  isLoading: Record<Slot, boolean> = {
+    knowledge: false,
+    result: false,
+    recent: false,
+  };
 
   private aborts: Record<Slot, AbortController | null> = {
     knowledge: null,
     result: null,
+    recent: null,
   };
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  fetch = async (slot: Slot, folderId: number) => {
+  fetch = async (slot: Slot, folderId: number | string) => {
     this.aborts[slot]?.abort();
     const controller = new AbortController();
     this.aborts[slot] = controller;

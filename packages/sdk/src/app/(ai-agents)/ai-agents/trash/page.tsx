@@ -24,32 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import AgentsListPage from "../page.client";
 
-import dynamic from "next/dynamic";
+export const dynamic = "force-dynamic";
 
-// NewChat → @onlyoffice/ai-chat touches `document` at module load; keep it
-// client-only so this panel can be statically imported anywhere without
-// breaking SSR.
-const NewChat = dynamic(() => import("@docspace/ui-kit/ai-agent/new-chat"), {
-  ssr: false,
-});
+type SearchParams = Promise<Record<string, string | undefined>>;
 
-// Slim wrapper around NewChat for the info-panel side-view. Mirrors
-// client/src/pages/Home/InfoPanel/Body/views/AIChat/index.tsx — kept here so
-// the AIAgents route group can render a chat-only side panel without pulling
-// the entire AI room view.
-const AiChatPanel = () => (
-  <div
-    style={{
-      flex: 1,
-      minHeight: 0,
-      display: "flex",
-      flexDirection: "column",
-    }}
-  >
-    <NewChat />
-  </div>
-);
-
-export default AiChatPanel;
+export default async function AgentsTrash({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}) {
+  const sp = await searchParams;
+  const initialSearch = sp.search ?? "";
+  return <AgentsListPage initialSearch={initialSearch} section="trash" />;
+}

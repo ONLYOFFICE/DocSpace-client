@@ -56,6 +56,17 @@ const AgentsEmptyView = () => {
   const { t } = useTranslation(["Common"]);
   const { isBase } = useTheme();
 
+  // Defer theme-dependent rendering until the client has mounted. The server
+  // doesn't know the theme (it's negotiated client-side via THEME_HEADER), so
+  // a direct `isBase ? Light : Dark` swap mismatches hydration when the
+  // resolved theme isn't the default. Mount-gating forces the SSR + first
+  // client render to share one branch (light), then upgrades on next render.
+  const [mounted, setMounted] = React.useState(false);
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+  const useLightIcon = !mounted || isBase;
+
   const userStore = useAgentsUserStore();
   const aiConfigStore = useAgentsAIConfigStore();
   const dialogsStore = useAgentDialogsStore();
@@ -126,7 +137,11 @@ const AgentsEmptyView = () => {
               "Ask your portal admin to enable {{aiAgents}} in {{productName}}.",
           });
 
-  const icon = isBase ? <EmptyAIAgentsLightIcon /> : <EmptyAIAgentsDarkIcon />;
+  const icon = useLightIcon ? (
+    <EmptyAIAgentsLightIcon />
+  ) : (
+    <EmptyAIAgentsDarkIcon />
+  );
 
   // Actions: AI-enabled + admin → [createAIAgent]. AI-disabled + admin path
   // (goToAIProviderSettings) is not surfaced in the SDK because the SDK

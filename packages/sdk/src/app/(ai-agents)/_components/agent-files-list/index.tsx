@@ -39,10 +39,10 @@ import { useAgentFilesStore } from "../../_store";
 import { formatCreated } from "../../_helpers/formatCreated";
 import styles from "./AgentFilesList.module.scss";
 
-type Slot = "knowledge" | "result";
+type Slot = "knowledge" | "result" | "recent";
 
 type Props = {
-  folderId: number | null;
+  folderId: number | string | null;
   slot: Slot;
 };
 
@@ -64,6 +64,16 @@ const AgentFilesList = ({ folderId, slot }: Props) => {
   React.useEffect(() => {
     if (!folderId) return;
     void store.fetch(slot, folderId);
+
+    // Recent (and other server-side aliases like @favorites) is a virtual
+    // aggregation — the portal never emits `s:modify-folder` for it. Mirror
+    // client TreeFoldersStore.listenTreeFolders which skips FolderType.Recent
+    // from socket subscriptions and just relies on the initial fetch.
+    if (typeof folderId !== "number") {
+      return () => {
+        store.cancelFetch(slot);
+      };
+    }
 
     // Live-refresh on socket file/folder mutations within this DIR-{id}.
     // Mirrors client FilesStore's s:modify-folder handler — debounced so a

@@ -69,7 +69,7 @@ const DeleteDialogComponent = ({
       getAIConfig?.();
 
       toastr.success(
-        t("AISettings:ProviderRemovedSuccess", {
+        t("Common:ProviderRemovedSuccess", {
           aiProvider: t("Common:AIProvider"),
         }),
       );
@@ -85,7 +85,7 @@ const DeleteDialogComponent = ({
   const bodyText = showDefaultProviderWarning ? (
     <Trans
       t={t}
-      i18nKey="AISettings:DeleteDefaultProviderDescription"
+      i18nKey="Common:DeleteDefaultProviderDescription"
       values={{ aiProvider: t("Common:AIProvider") }}
       components={{
         1: (
@@ -97,13 +97,13 @@ const DeleteDialogComponent = ({
       }}
     />
   ) : (
-    t("AISettings:DeleteProviderDescription")
+    t("Common:DeleteProviderDescription")
   );
 
   return (
     <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>
       <ModalDialog.Header>
-        {t("AISettings:DeleteProvider", {
+        {t("Common:DeleteProvider", {
           aiProvider: t("Common:AIProvider"),
         })}
       </ModalDialog.Header>

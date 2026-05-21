@@ -27,5 +27,8 @@
 import { redirect } from "next/navigation";
 
 export default function SettingsRoot() {
-  redirect("/ai-agents/settings/servers");
+  // Billing is the first visible tab for admins/owners (most common case).
+  // If the current viewer is a regular user, the client layout bounces them
+  // off /billing onto the next allowed tab.
+  redirect("/ai-agents/settings/billing");
 }

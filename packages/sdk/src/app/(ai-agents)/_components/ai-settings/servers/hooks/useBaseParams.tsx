@@ -117,7 +117,7 @@ export const useBaseParams = (initialValues?: {
 	const baseParamsComponent = (
 		<>
 			<FieldContainer
-				labelText={t("AISettings:IntegrationName")}
+				labelText={t("Common:IntegrationName")}
 				isRequired
 				isVertical
 				removeMargin
@@ -144,11 +144,11 @@ export const useBaseParams = (initialValues?: {
 				>
 					{hasError
 						? `${t("Common:AllowedCharacters")}: ${ALLOWED_MCP_CHARACTERS}`
-						: t("AISettings:ProviderNameInputHint")}
+						: t("Common:ProviderNameInputHint")}
 				</Text>
 			</FieldContainer>
 			<FieldContainer
-				labelText={t("AISettings:IntegrationURL")}
+				labelText={t("Common:IntegrationURL")}
 				isRequired
 				isVertical
 				removeMargin
@@ -167,7 +167,7 @@ export const useBaseParams = (initialValues?: {
 					testId="mcp-url-input"
 				/>
 				<Text className={styles.fieldHint}>
-					{t("AISettings:MCPServerIntegrationURLHint", {
+					{t("Common:MCPServerIntegrationURLHint", {
 						mcpServer: t("Common:MCPServer"),
 					})}
 				</Text>
@@ -190,7 +190,7 @@ export const useBaseParams = (initialValues?: {
 					dataTestId="mcp-description-textarea"
 				/>
 				<Text className={styles.fieldHint}>
-					{t("AISettings:MCPServerDescriptionHint")}
+					{t("Common:MCPServerDescriptionHint")}
 				</Text>
 			</FieldContainer>
 		</>

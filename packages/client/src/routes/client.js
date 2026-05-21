@@ -131,46 +131,6 @@ const ClientRoutes = [
             ),
           },
           {
-            path: "ai-agents",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/filter",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/:agent/chat",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/:agent",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/:agent/filter",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
             path: "recent",
             element: (
               <PrivateRoute>
@@ -386,6 +346,24 @@ const ClientRoutes = [
                   <AiForms />
                 </ErrorBoundary>
               </ProtectedAppRoute>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
+        path: "/ai-agents",
+        async lazy() {
+          const { AiAgents } = await componentLoader(
+            () => import("SRC_DIR/pages/AiAgents"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ErrorBoundary>
+                <AiAgents />
+              </ErrorBoundary>
             </PrivateRoute>
           );
 

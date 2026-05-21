@@ -31,6 +31,9 @@
   max-width: 700px;
 }
 
+// `.settingsRoot` / `.settingsScroll` / `.settingsHeaderWrap` removed —
+// Section in (ai-agents)/layout.client.tsx provides the page chrome.
+
 .aiProvider,
 .mcpServers,
 .search {

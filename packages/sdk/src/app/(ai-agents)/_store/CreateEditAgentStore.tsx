@@ -321,8 +321,8 @@ class CreateEditAgentStore {
       ...(quotaLimit && { quota: Number(quotaLimit) }),
       ...logoCover,
       ...(tagsToAddList.length && { tags: tagsToAddList }),
-      ...((prompt || modelId) && {
-        chatSettings: { prompt, modelId } satisfies TChatSettings,
+      ...((prompt || modelId || providerId) && {
+        chatSettings: { prompt, modelId, providerId } satisfies TChatSettings,
       }),
       ...(typeof attachDefaultTools === "boolean" && { attachDefaultTools }),
     };

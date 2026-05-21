@@ -106,7 +106,7 @@ const DefaultProviderComponent = ({ aiConfig }: DefaultProviderProps) => {
 
   const getTooltipContent = () => (
     <Text fontSize="12px" lineHeight="16px">
-      {t("AISettings:PortalAiDisabledTooltip", {
+      {t("Common:PortalAiDisabledTooltip", {
         productName: getBrandName("ProductName"),
       })}
     </Text>
@@ -344,10 +344,10 @@ const DefaultProviderComponent = ({ aiConfig }: DefaultProviderProps) => {
           lineHeight="22px"
           fontSize="16px"
         >
-          {t("AISettings:DefaultProviderTitle")}
+          {t("Common:DefaultProviderTitle")}
         </Heading>
         <Text className={styles.description} lineHeight="20px">
-          {t("AISettings:DefaultProviderDescription", {
+          {t("Common:DefaultProviderDescription", {
             aiProvider: t("Common:AIProvider"),
             aiAgents: t("Common:AIAgents"),
             productName: getBrandName("ProductName"),
@@ -358,7 +358,7 @@ const DefaultProviderComponent = ({ aiConfig }: DefaultProviderProps) => {
           <FieldContainer
             labelVisible
             isVertical
-            labelText={t("AISettings:Provider")}
+            labelText={t("Common:Provider")}
             removeMargin
             hasError={!!defaultProviderModelsError}
             errorMessage={defaultProviderModelsError || ""}
@@ -387,7 +387,7 @@ const DefaultProviderComponent = ({ aiConfig }: DefaultProviderProps) => {
           <FieldContainer
             labelVisible
             isVertical
-            labelText={t("AISettings:Model")}
+            labelText={t("Common:Model")}
             removeMargin
           >
             {isSystemProviderSelected ? (

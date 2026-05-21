@@ -62,15 +62,23 @@ export const useAiAgentsFrameBridge = (
     }
   }, [isReady]);
 
-  const prevTab = React.useRef(currentTab);
+  // Notify the parent on every (re)mount of an ai-agents page and on tab
+  // changes, so its address bar can mirror the iframe's location. We read
+  // `window.location` inside the effect instead of using `usePathname()` /
+  // `useSearchParams()` — that keeps the hook signature identical to the
+  // pre-bridge version (avoiding HMR-driven "order of Hooks changed"
+  // warnings) and is sufficient here because list-detail-list navigation
+  // remounts the consuming page component, re-firing this effect.
   React.useEffect(() => {
-    if (prevTab.current !== currentTab) {
-      prevTab.current = currentTab;
-      frameCallEvent({
-        event: "onNavigate",
-        data: { section: currentTab },
-      });
-    }
+    if (typeof window === "undefined") return;
+    frameCallEvent({
+      event: "onNavigate",
+      data: {
+        section: currentTab,
+        pathname: window.location.pathname,
+        search: window.location.search,
+      },
+    });
   }, [currentTab]);
 
   React.useEffect(() => {

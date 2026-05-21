@@ -1,17 +1,13 @@
 @use "@docspace/ui-kit/styles/mixins";
 
-.root {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	height: 100dvh;
-	position: relative;
-	overflow: hidden;
-}
+// `.root`, `.scroll`, `.headerWrap` removed — Section now provides the page
+// chrome (full-height column, side padding, scroll container, sticky
+// header). See (ai-agents)/layout.client.tsx.
 
-// Mirror DocsLayout — ui-kit Navigation's internal title block padding
-// (the same global selector used in personal-files).
-.root :global([class*="Navigation_box"]) {
+// Navigation_box top padding tweak (originally scoped to .root) — keep it
+// global within ai-agents because Section's SectionHeader renders the same
+// Navigation element.
+:global(.ai-agents-section) :global([class*="Navigation_box"]) {
 	padding-top: var(--nav-dropbox-padding-top, 18px);
 
 	@include mixins.tablet-and-below {
@@ -21,37 +17,6 @@
 	@include mixins.mobile {
 		padding-top: var(--nav-dropbox-padding-top, 10px) !important;
 	}
-}
-
-// Mirrors ui-kit Section "paddingStyles" mixin for the left edge so the
-// (ai-agents) page lines up with (personal-files) at all breakpoints.
-// Right padding is symmetric here (Section uses 3px on desktop only because
-// the scrollbar steals the remaining inline space; we use a body-scroll
-// container so the symmetric value reads correctly).
-.scroll {
-	flex: 1;
-	min-height: 0;
-	overflow: auto;
-	padding-block: 19px 16px;
-	padding-inline: 20px;
-	outline: none;
-
-	@include mixins.tablet-and-below {
-		padding-block: 0 16px;
-		padding-inline: 24px;
-	}
-
-	@include mixins.mobile {
-		padding-inline: 24px;
-	}
-}
-
-// Title typography is provided by ui-kit <Navigation> via AgentsHeader.
-
-.headerWrap {
-	// Tighten the gap between Navigation title and QuickActions — Navigation
-	// internally already adds its own padding-top via Navigation_box.
-	margin-bottom: 16px;
 }
 
 .quickActions {
@@ -87,27 +52,6 @@
 	padding: 2px;
 }
 
-.viewBtn {
-	border: none;
-	background: transparent;
-	color: var(--text-color);
-	border-radius: 3px;
-	padding: 4px 10px;
-	cursor: pointer;
-	font-size: 12px;
-	line-height: 18px;
-	font-weight: 600;
-
-	&:hover {
-		background: var(--quick-buttons-color);
-	}
-
-	&.active {
-		background: var(--main-button-text);
-		color: var(--main-button-color);
-	}
-}
-
 .empty {
 	display: flex;
 	flex-direction: column;
@@ -119,7 +63,9 @@
 	opacity: 0.7;
 }
 
-/* Tile mode */
+/* Tile mode — grid override applied to ui-kit TileContainer.
+ * RoomTile provides its own bg, frame, icon and kebab; we only set the
+ * grid container layout here. */
 
 .tilesGrid {
 	display: grid;
@@ -127,145 +73,20 @@
 	gap: 16px;
 }
 
-.tile {
+/* Tile top-content slot — title link + meta line stacked vertically. */
+.tileBody {
 	display: flex;
 	flex-direction: column;
-	gap: 12px;
-	padding: 16px;
-	border: 1px solid var(--quick-buttons-color);
-	border-radius: 6px;
-	background: var(--background-color);
-	cursor: pointer;
-	transition:
-		border-color 120ms ease,
-		box-shadow 120ms ease,
-		transform 120ms ease;
-	text-align: start;
-
-	&:hover {
-		border-color: var(--main-button-text);
-		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-		transform: translateY(-1px);
-	}
-}
-
-.tileHeader {
-	display: flex;
-	align-items: center;
-	gap: 12px;
-}
-
-.tileAvatar {
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	background: var(--quick-buttons-color);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-weight: 600;
-	color: var(--text-color);
-	overflow: hidden;
-	flex-shrink: 0;
-
-	img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-}
-
-.tileTitle {
-	font-weight: 600;
-	font-size: 14px;
-	color: var(--text-color);
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	flex: 1;
+	gap: 4px;
+	min-width: 0;
 }
 
 .tileMeta {
-	font-size: 12px;
 	color: var(--text-color);
 	opacity: 0.65;
 }
 
-/* Row mode */
-
-.rowList {
-	display: flex;
-	flex-direction: column;
-}
-
-.row {
-	display: flex;
-	align-items: center;
-	gap: 12px;
-	padding: 10px 16px;
-	cursor: pointer;
-	border-bottom: 1px solid var(--quick-buttons-color);
-
-	&:hover {
-		background: var(--quick-buttons-color);
-	}
-}
-
-.rowTitle {
-	flex: 1;
-	font-weight: 600;
-	font-size: 14px;
-	color: var(--text-color);
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-.rowMeta {
-	font-size: 12px;
-	color: var(--text-color);
-	opacity: 0.65;
-	flex-shrink: 0;
-}
-
-/* Table mode — visually mirrors personal-files */
-
-.tableWrap {
-	width: 100%;
-}
-
-.table {
-	width: 100%;
-	border-collapse: collapse;
-	font-size: 13px;
-	color: var(--text-color);
-}
-
-.table thead th {
-	font-weight: 600;
-	font-size: 12px;
-	text-align: start;
-	padding: 10px 12px;
-	color: var(--text-color);
-	opacity: 0.65;
-	border-bottom: 1px solid var(--quick-buttons-color);
-	white-space: nowrap;
-}
-
-.table tbody td {
-	padding: 12px;
-	border-bottom: 1px solid var(--quick-buttons-color);
-	vertical-align: middle;
-}
-
-.tableRow {
-	cursor: pointer;
-
-	&:hover {
-		background: var(--quick-buttons-color);
-	}
-}
-
+/* Table mode — RoomIcon + title link in the first cell. */
 .tableTitleCell {
 	display: flex;
 	align-items: center;
@@ -273,50 +94,12 @@
 	min-width: 0;
 }
 
-.tableAvatar {
-	width: 32px;
-	height: 32px;
-	border-radius: 6px;
-	background: var(--quick-buttons-color);
+/* Table mode — owner avatar + display name. */
+.tableOwnerCell {
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	font-weight: 600;
-	color: var(--text-color);
-	overflow: hidden;
-	flex-shrink: 0;
-	font-size: 12px;
-
-	img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-}
-
-.tableTitle {
-	font-weight: 600;
-	color: var(--text-color);
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-.tileMenu,
-.rowMenu {
-	margin-inline-start: auto;
-	display: inline-flex;
-	align-items: center;
-}
-
-.tableActionsHead {
-	width: 40px;
-}
-
-.tableActionsCell {
-	width: 40px;
-	text-align: end;
-	cursor: default;
+	gap: 8px;
+	min-width: 0;
 }
 
 .loadMore {

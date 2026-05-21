@@ -55,8 +55,8 @@ class AgentsAIConfigStore {
     return this.aiConfig?.aiReady ?? false;
   }
 
-  fetchAIConfig = async (): Promise<void> => {
-    if (this.isLoaded) return;
+  fetchAIConfig = async (options?: { force?: boolean }): Promise<void> => {
+    if (this.isLoaded && !options?.force) return;
     const pending = this.inflight;
     if (pending !== null) {
       await pending;

@@ -37,6 +37,8 @@ export type AiRoomTab = "chat" | "knowledge" | "result";
 class AiRoomStore {
   roomId: Nullable<number> = null;
 
+  title: string = "";
+
   knowledgeId: Nullable<number> = null;
 
   resultId: Nullable<number> = null;
@@ -59,6 +61,10 @@ class AiRoomStore {
 
   setRoomId = (roomId: Nullable<number>) => {
     this.roomId = roomId;
+  };
+
+  setTitle = (title: string) => {
+    this.title = title;
   };
 
   setCurrentTab = (currentTab: AiRoomTab) => {

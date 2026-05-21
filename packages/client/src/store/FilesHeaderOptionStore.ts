@@ -315,7 +315,7 @@ export default class FilesHeaderOptionStore {
         return {
           id: "menu-unpin",
           key: "unpin",
-          label: t("Unpin"),
+          label: t("Common:Unpin"),
           iconUrl: UnpinReactSvgUrl,
           onClick: this.unpinHandle,
           disabled: false,

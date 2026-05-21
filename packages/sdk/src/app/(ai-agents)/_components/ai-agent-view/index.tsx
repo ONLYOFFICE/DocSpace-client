@@ -42,9 +42,9 @@ import {
 
 import styles from "./AIAgentView.module.scss";
 
-// NewChat pulls @onlyoffice/ai-chat at module load, which touches `document`
-// at the top of the file and crashes Next.js SSR. Load it client-only.
-const NewChat = dynamic(() => import("@docspace/ui-kit/ai-agent/new-chat"), {
+// Legacy Chat (`ui-kit/ai-agent/chat`) — kept as the chat UX for AI agents
+// after the new-chat package was removed.
+const Chat = dynamic(() => import("@docspace/ui-kit/ai-agent/chat"), {
   ssr: false,
 });
 
@@ -94,7 +94,15 @@ const AiAgentView = () => {
       {shouldRenderChat ? (
         <Activity mode={currentTab === "chat" ? "visible" : "hidden"}>
           <div className={styles.aiAgentChat}>
-            <NewChat />
+            <Chat
+              agentId={roomId}
+              selectedModel=""
+              standalone
+              allowAttachFiles
+              allowSelectChat
+              width="100%"
+              height="100%"
+            />
           </div>
         </Activity>
       ) : null}

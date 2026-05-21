@@ -81,17 +81,17 @@ const AiRoomTabs = () => {
   const items: TTabItem[] = [
     {
       id: "chat",
-      name: t("AIRoom:AIChat", { defaultValue: "AI Chat" }),
+      name: t("Common:AIChat", { defaultValue: "AI Chat" }),
       content: null,
     },
     {
       id: "knowledge",
-      name: t("AIRoom:Knowledge", { defaultValue: "Knowledge base" }),
+      name: t("Common:Knowledge", { defaultValue: "Knowledge base" }),
       content: null,
     },
     {
       id: "result",
-      name: t("AIRoom:ResultStorage", { defaultValue: "Result Storage" }),
+      name: t("Common:ResultStorage", { defaultValue: "Result Storage" }),
       content: null,
     },
   ];

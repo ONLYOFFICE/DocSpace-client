@@ -59,10 +59,15 @@ const AgentsEmptyFilter = () => {
     void store.fetchAgents(next);
   };
 
+  // `isNext: true` keeps EmptyViewOption on the ui-kit Link branch instead
+  // of LinkRouter — SDK runs under Next.js, not react-router, so the
+  // shared EmptyView's `LinkRouter={Link from "react-router"}` would crash
+  // with "Cannot destructure property 'basename'" if it ever rendered.
   const options: EmptyViewOptionsType = [
     {
       key: "empty-view-filter",
       to: "",
+      isNext: true,
       description: t("Common:ClearFilter", { defaultValue: "Clear filter" }),
       icon: <ClearEmptyFilterSvg />,
       onClick: onReset,

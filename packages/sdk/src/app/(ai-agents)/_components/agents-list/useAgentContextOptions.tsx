@@ -27,49 +27,164 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import type { TAgent } from "@docspace/shared/api/ai/types";
 
-import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
-import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
-import ReconnectSvgUrl from "PUBLIC_DIR/images/reconnect.svg?url";
-import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
+import CheckBoxReactSvgUrl from "PUBLIC_DIR/images/check-box.react.svg?url";
+import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import PinReactSvgUrl from "PUBLIC_DIR/images/pin.react.svg?url";
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
+import MuteReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
+import UnmuteReactSvgUrl from "PUBLIC_DIR/images/unmute.react.svg?url";
+import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
+import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
+import DotsHorizontalUrl from "PUBLIC_DIR/images/icons/16/dots-horizontal.react.svg?url";
+import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
+import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
+import ReconnectSvgUrl from "PUBLIC_DIR/images/reconnect.svg?url";
 import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
 import {
   useAgentsListStore,
   useAgentDialogsStore,
   useAgentsUserStore,
+  useAgentInfoPanelStore,
 } from "../../_store";
 
 const buildAgentLink = (agent: TAgent) =>
   `${window.location.origin}/ai-agents/${agent.id}`;
 
 /**
- * Builds the per-agent context menu — mirrors the AI-agent-specific
- * branches of client `ContextOptionsStore.getFilesContextOptions`
- * (edit-agent / copy-link / change-owner / delete). Items the SDK can't
- * surface (room-info, leave-room, invite, ask-AI, etc.) are intentionally
- * omitted.
+ * Builds the per-agent context menu — 1-to-1 with the client
+ * `ContextOptionsStore.getFilesContextOptions` AI-agent branch
+ * (ContextOptionsStore.js:2136-2802). Items, order, icons, separators and
+ * keys are aligned so QA visual diff against the client kebab is "no diff".
+ *
+ * "More options" entries (Download / Agent info / Change owner) are nested
+ * via `ContextMenuType.items` — ui-kit supports recursive submenus.
  */
 export const useAgentContextOptions = () => {
+  const router = useRouter();
   const { t } = useTranslation(["Common"]);
   const listStore = useAgentsListStore();
   const dialogsStore = useAgentDialogsStore();
   const userStore = useAgentsUserStore();
+  const infoPanelStore = useAgentInfoPanelStore();
 
   return React.useCallback(
     (agent: TAgent): ContextMenuModel[] => {
       const sec = agent.security;
+      const currentUserId = userStore.user?.id;
 
+      // ----- Submenu under "More options" -----
+      const moreOptionsItems: ContextMenuModel[] = [];
+
+      // Download
+      if (sec?.Download) {
+        moreOptionsItems.push({
+          id: "option_download",
+          key: "download",
+          label: t("Common:Download", { defaultValue: "Download" }),
+          icon: DownloadReactSvgUrl,
+          onClick: () => {
+            void listStore.downloadAgent(agent);
+            toastr.success(
+              t("Common:ArchivingData", { defaultValue: "Archiving data" }),
+            );
+          },
+        });
+      }
+
+      // Agent info
+      moreOptionsItems.push({
+        id: "option_room-info",
+        key: "room-info",
+        label: t("Common:AgentInfo", { defaultValue: "Agent info" }),
+        icon: InfoOutlineReactSvgUrl,
+        onClick: () => infoPanelStore.showInfoPanel(agent, "details"),
+      });
+
+      // Change owner
+      if (sec?.ChangeOwner) {
+        moreOptionsItems.push({
+          id: "option_change-room-owner",
+          key: "change-agent-owner",
+          label: t("Common:OwnerChange", { defaultValue: "Change owner" }),
+          icon: ReconnectSvgUrl,
+          // Route to the agent edit dialog (which embeds the inline
+          // ChangeRoomOwner control). The standalone "Change Room Owner"
+          // dialog is not yet ported into the SDK.
+          onClick: () => dialogsStore.setEditAgentDialogVisible(true, agent),
+        });
+      }
+
+      // ----- Top-level items -----
       const items: ContextMenuModel[] = [];
 
-      // edit-agent
+      // 1. Select
+      items.push({
+        id: "option_select",
+        key: "select",
+        label: t("Common:SelectAction", { defaultValue: "Select" }),
+        icon: CheckBoxReactSvgUrl,
+        onClick: () => listStore.toggleAgentSelection(agent),
+      });
+
+      // 2. Open
+      items.push({
+        id: "option_open",
+        key: "open",
+        label: t("Common:Open", { defaultValue: "Open" }),
+        icon: FolderReactSvgUrl,
+        onClick: () => router.push(`/ai-agents/${agent.id}?tab=chat`),
+      });
+
+      items.push({ key: "separator0", isSeparator: true });
+
+      // 3. Pin / Unpin
+      if (sec?.Pin) {
+        const isPinned = !!agent.pinned;
+        items.push({
+          id: isPinned ? "option_unpin-room" : "option_pin-room",
+          key: isPinned ? "unpin-room" : "pin-room",
+          label: isPinned
+            ? t("Common:Unpin", { defaultValue: "Unpin" })
+            : t("Common:PinToTop", { defaultValue: "Pin to top" }),
+          icon: isPinned ? UnpinReactSvgUrl : PinReactSvgUrl,
+          onClick: () => {
+            void listStore.togglePinAgent(agent).catch((e) => {
+              toastr.error(e instanceof Error ? e.message : String(e));
+            });
+          },
+        });
+      }
+
+      // 4. Disable / Enable notifications (mute)
+      if (sec?.Mute && agent.inRoom) {
+        const isMuted = !!agent.mute;
+        items.push({
+          id: isMuted ? "option_unmute-room" : "option_mute-room",
+          key: isMuted ? "unmute-room" : "mute-room",
+          label: isMuted
+            ? t("Common:EnableNotifications", {
+                defaultValue: "Enable notifications",
+              })
+            : t("Common:DisableNotifications", {
+                defaultValue: "Disable notifications",
+              }),
+          icon: isMuted ? UnmuteReactSvgUrl : MuteReactSvgUrl,
+          onClick: () => listStore.toggleMuteAgent(agent, t),
+        });
+      }
+
+      items.push({ key: "separator1", isSeparator: true });
+
+      // 5. Edit Agent
       if (sec?.EditRoom !== false) {
         items.push({
           id: "option_edit-agent",
@@ -80,7 +195,14 @@ export const useAgentContextOptions = () => {
         });
       }
 
-      // copy-link
+      // 6. Invite contacts — intentionally omitted in the SDK menu.
+      //    The client InvitePanel pulls in too many client-only deps
+      //    (AccessSelector, LinkSettingsPanel, withCultureNames, ~7 store
+      //    fields across 5 stores) and ~60 locale keys spread over 4
+      //    namespaces. We don't surface a half-broken stub — the entry is
+      //    dropped until the panel can be ported in full.
+
+      // 7. Copy link
       if (sec?.CopyLink !== false) {
         items.push({
           id: "option_link-for-room-members",
@@ -105,31 +227,29 @@ export const useAgentContextOptions = () => {
         });
       }
 
-      // pin / unpin
-      if (sec?.Pin) {
-        const isPinned = !!agent.pinned;
+      // 8. More options (nested) — only show when there's at least one
+      // sub-item to surface.
+      if (moreOptionsItems.length > 0) {
         items.push({
-          id: isPinned ? "option_unpin-room" : "option_pin-room",
-          key: isPinned ? "unpin-room" : "pin-room",
-          label: isPinned
-            ? t("Files:Unpin", { defaultValue: "Unpin" })
-            : t("Files:Pin", { defaultValue: "Pin" }),
-          icon: isPinned ? UnpinReactSvgUrl : PinReactSvgUrl,
-          onClick: () => {
-            void listStore.togglePinAgent(agent).catch((e) => {
-              toastr.error(e instanceof Error ? e.message : String(e));
-            });
-          },
+          id: "option_more-options",
+          key: "more-options",
+          label: t("Common:MoreOptions", { defaultValue: "More options" }),
+          icon: DotsHorizontalUrl,
+          items: moreOptionsItems,
         });
       }
 
-      // leave-room (only when current user is a non-owner member of the room)
-      const currentUserId = userStore.user?.id;
-      if (currentUserId && agent.inRoom && !agent.security?.EditRoom) {
+      items.push({ key: "separator5", isSeparator: true });
+
+      // 9. Leave the agent — only when the viewer is a non-owner member of
+      // the room.
+      if (currentUserId && agent.inRoom && !sec?.EditRoom) {
         items.push({
           id: "option_leave-room",
           key: "leave-room",
-          label: t("Common:LeaveTheAgent", { defaultValue: "Leave the agent" }),
+          label: t("Common:LeaveTheAgent", {
+            defaultValue: "Leave the agent",
+          }),
           icon: LeaveRoomSvgUrl,
           onClick: () => {
             const isOwner = agent.createdBy?.id === currentUserId;
@@ -138,40 +258,20 @@ export const useAgentContextOptions = () => {
         });
       }
 
-      // change-agent-owner — SDK doesn't ship the standalone dialog; route
-      // to the agent edit dialog (which embeds the inline ChangeRoomOwner
-      // control) as a reasonable bridge.
-      if (sec?.ChangeOwner) {
-        items.push({
-          id: "option_change-room-owner",
-          key: "change-agent-owner",
-          label: t("Common:OwnerChange", {
-            defaultValue: "Change owner",
-          }),
-          icon: ReconnectSvgUrl,
-          onClick: () => dialogsStore.setEditAgentDialogVisible(true, agent),
-        });
-      }
-
-      // delete
+      // 10. Delete agent
       if (sec?.Delete) {
-        if (items.length > 0) {
-          items.push({ key: "agent-context-separator", isSeparator: true });
-        }
         items.push({
           id: "option_delete",
           key: "delete",
-          label: t("Files:DeleteAgent", { defaultValue: "Delete agent" }),
+          label: t("Common:DeleteAgent", { defaultValue: "Delete agent" }),
           icon: TrashReactSvgUrl,
-          onClick: () => {
-            dialogsStore.setDeleteAgentDialogVisible(true, agent);
-          },
+          onClick: () => dialogsStore.setDeleteAgentDialogVisible(true, agent),
         });
       }
 
       return items;
     },
-    [t, dialogsStore, listStore, userStore],
+    [t, dialogsStore, listStore, userStore, infoPanelStore, router],
   );
 };
 

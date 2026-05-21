@@ -29,7 +29,6 @@
 import { useEffect } from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useApi, useStores } from "@docspace/ui-kit/ai-agent/providers";
 
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
 
@@ -65,38 +64,13 @@ const CreateAgentEvent = ({
   const tagsStore = useAgentTagsStore();
   const quotaStore = useAgentsQuotaStore();
 
-  const { useProfilesStore, useThreadsStore } = useStores();
-  const api = useApi();
-  const profiles = useProfilesStore((s) => s.profiles);
-  const insertThread = useThreadsStore((s) => s.insertThread);
-
   const onCreate = async (agentParams: TAgentParams) => {
-    const baseProfile = agentParams.profileId
-      ? profiles.find((p) => p.id === agentParams.profileId)
-      : profiles.find((p) => p.modelId === agentParams.modelId);
-
-    const threadTitle = agentParams.title || t("Common:NewAgent");
-
-    // Create the agent first — only spin up the thread on success so a
-    // failed agent create can't leave an orphan thread behind.
     createEditAgentStore.setAgentParams({
       ...agentParams,
       logo: agentParams.logo,
     });
     createEditAgentStore.setOnClose(onClose);
-    const createdAgent = await createEditAgentStore.onCreateAgent(t);
-
-    // Skip thread creation if agent creation failed — otherwise we leave an
-    // orphan thread pointing to nothing.
-    if (!createdAgent) return;
-
-    const thread = await api.threads.create({
-      title: threadTitle,
-      profileId: baseProfile?.id,
-    });
-    await insertThread(thread.threadId, threadTitle, {
-      profileId: baseProfile?.id,
-    });
+    await createEditAgentStore.onCreateAgent(t);
   };
 
   // Sync the dialogs-store flag with the mounted state of this wrapper

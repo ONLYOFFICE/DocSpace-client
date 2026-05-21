@@ -1,28 +1,6 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 //
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+// SPDX-License-Identifier: AGPL-3.0-only
 
 "use client";
 
@@ -30,29 +8,48 @@ import React, { useMemo } from "react";
 import classnames from "classnames";
 
 import Navigation from "@docspace/ui-kit/components/navigation";
+import type {
+  TNavigationItem,
+  TOnNavigationItemClick,
+} from "@docspace/ui-kit/components/navigation/Navigation.types";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
 
 import useDeviceType from "@/hooks/useDeviceType";
+import useFrameHeaderConfig from "@/hooks/useFrameHeaderConfig";
 
-// Thin agents-only header. Mirrors (docspace)/_components/header structure
-// (same SectionHeader.module.scss + ui-kit <Navigation>) so the title
-// typography, vertical alignment and frame-header offset match
-// (personal-files) 1-to-1, without pulling docspace's NavigationStore /
-// FilesSelectionStore / FilesListStore (the AI-agents list is flat — no
-// breadcrumbs, no selection state, no folder traversal).
+// Thin agents-only wrapper around ui-kit <Navigation>. Same shape as
+// client/Home Section/Header but trimmed to the props the AI-agents flow
+// actually uses — no FilesStore / NavigationStore / SelectedFolderStore
+// dependency.
+//
+// Pass `navigationItems` to render the breadcrumb chain (path-parts). The
+// items array is ordered from the IMMEDIATE PARENT to the root, like the
+// client's `navigationPath` — so for an agent at `/ai-agents/123`, the
+// single parent entry is `{ id: "ai-agents", title: "AI Agents", … }`.
+//
+// `onBackToParentFolder` is the back-arrow handler (defaults to navigating
+// to the first item in `navigationItems`); `onClickFolder` fires when the
+// user clicks a specific breadcrumb item.
 
 type AgentsHeaderProps = {
   title: string;
   isEmptyList?: boolean;
-  headerOffset?: number;
+  navigationItems?: TNavigationItem[];
+  onBackToParentFolder?: () => void;
+  onClickFolder?: TOnNavigationItemClick;
 };
 
 const AgentsHeader = ({
   title,
   isEmptyList = false,
-  headerOffset = 0,
+  navigationItems = [],
+  onBackToParentFolder,
+  onClickFolder,
 }: AgentsHeaderProps) => {
   const { currentDeviceType } = useDeviceType();
+  const { headerOffset } = useFrameHeaderConfig();
+
+  const isRootFolder = navigationItems.length === 0;
 
   const { outerOffsetStyle, innerOffsetStyle } = useMemo(() => {
     if (!headerOffset) {
@@ -73,24 +70,40 @@ const AgentsHeader = ({
 
   const noop = React.useCallback(() => {}, []);
 
+  const handleClickFolder = React.useCallback<TOnNavigationItemClick>(
+    (id, isRootRoom, isRootTemplates) => {
+      if (onClickFolder) onClickFolder(id, isRootRoom, isRootTemplates);
+      else if (onBackToParentFolder) onBackToParentFolder();
+    },
+    [onClickFolder, onBackToParentFolder],
+  );
+
+  const handleBack = React.useCallback(() => {
+    if (onBackToParentFolder) onBackToParentFolder();
+    else if (navigationItems.length > 0 && onClickFolder) {
+      const first = navigationItems[0];
+      onClickFolder(first.id, first.isRootRoom, first.isRootTemplates);
+    }
+  }, [navigationItems, onBackToParentFolder, onClickFolder]);
+
   return (
     <div className={classnames(styles.headerContainer)} style={outerOffsetStyle}>
       <div className="header-container" style={innerOffsetStyle}>
         <Navigation
           showText
-          isRootFolder
+          isRootFolder={isRootFolder}
           canCreate={false}
           title={title}
           rootRoomTitle=""
           isDesktop={false}
-          navigationItems={[]}
+          navigationItems={navigationItems}
           getContextOptionsPlus={() => []}
           getContextOptionsFolder={() => []}
-          onClickFolder={noop}
+          onClickFolder={handleClickFolder}
           isTrashFolder={false}
           isEmptyPage={isEmptyList}
           isEmptyFilesList={isEmptyList}
-          onBackToParentFolder={noop}
+          onBackToParentFolder={handleBack}
           showRootFolderTitle={false}
           withMenu={false}
           currentDeviceType={currentDeviceType}

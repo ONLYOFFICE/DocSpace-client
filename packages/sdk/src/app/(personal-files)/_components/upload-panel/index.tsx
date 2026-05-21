@@ -43,9 +43,7 @@ const UploadPanel = observer(() => {
     uploadStore.cancelItem(uniqueId);
   };
 
-  const title = uploadStore.isUploading
-    ? t("Common:Uploading")
-    : t("Common:Uploaded");
+  const title = t("Common:Uploading");
 
   return (
     <ModalDialog
@@ -68,7 +66,6 @@ const UploadPanel = observer(() => {
               size={17}
               onClick={onClear}
               className={styles.clearButton}
-              title={t("Common:Clear")}
             />
           ) : null}
         </span>

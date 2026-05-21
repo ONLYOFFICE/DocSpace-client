@@ -48,7 +48,6 @@ const FileRow = observer(({ item, onCancel }: FileRowProps) => {
 
   const isDone = item.status === "uploaded";
   const isError = item.status === "error";
-  const isCancelled = item.status === "cancelled";
   const showProgress = item.status === "uploading";
 
   return (
@@ -94,10 +93,6 @@ const FileRow = observer(({ item, onCancel }: FileRowProps) => {
           >
             {t("Common:Error")}
           </Link>
-        ) : isCancelled ? (
-          <Text fontSize="12px" className={styles.cancelledText}>
-            {t("Common:Cancelled")}
-          </Text>
         ) : (
           <>
             {item.percent >= 0 ? (

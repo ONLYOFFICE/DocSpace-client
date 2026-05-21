@@ -267,7 +267,7 @@ class DetailsHelper {
         return this.t("Common:Tags");
 
       case "Author":
-        return this.t("Files:ByAuthor");
+        return this.t("Common:ByAuthor");
       case "Shared by":
         return this.t("Files:SharedBy");
       case "Access level":
@@ -491,3 +491,4 @@ class DetailsHelper {
 }
 
 export default DetailsHelper;
+

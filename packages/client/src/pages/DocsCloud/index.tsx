@@ -26,22 +26,23 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import EmptyScreenLightUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.light.svg?url";
+import EmptyScreenDarkUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.dark.svg?url";
 
-import styles from "./DocsCloud.module.scss";
+import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 const DocsCloudComponent = () => {
   const { t } = useTranslation(["Common"]);
+  const { isBase } = useTheme();
 
   return (
-    <div className={styles.docsCloud}>
-      <Text as="h1" className={styles.title}>
-        {t("Common:DocsCloud")}
-      </Text>
-      <Text as="p" className={styles.description}>
-        {t("Common:DocsCloudDescription")}
-      </Text>
-    </div>
+    <EmptyScreenContainer
+      imageSrc={isBase ? EmptyScreenLightUrl : EmptyScreenDarkUrl}
+      imageAlt={t("Common:DocsCloud")}
+      headerText={t("Common:DocsCloud")}
+      descriptionText={t("Common:DocsCloudDescription")}
+    />
   );
 };
 

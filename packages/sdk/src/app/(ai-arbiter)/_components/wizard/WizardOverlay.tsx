@@ -67,6 +67,8 @@ import {
 
 import type { AgentSummary } from "@/types/arbiter";
 
+import SEEDS_RAW from "./seeds.json";
+
 import { useAiArbiterAgentsStore } from "../../_store/AiArbiterAgentsStore";
 
 import { ChatPhase } from "./ChatPhase";
@@ -91,29 +93,7 @@ type Props = {
   onClose: () => void;
 };
 
-const SEEDS: Record<string, string> = {
-  en: "Hi, let's begin.",
-  ru: "Привет, начнём.",
-  de: "Hallo, fangen wir an.",
-  es: "Hola, empecemos.",
-  fr: "Bonjour, commençons.",
-  it: "Ciao, iniziamo.",
-  pt: "Olá, vamos começar.",
-  "pt-BR": "Olá, vamos começar.",
-  "hy-AM": "Բարև, սկսենք.",
-  ja: "こんにちは、始めましょう。",
-  "ja-JP": "こんにちは、始めましょう。",
-  "ko-KR": "안녕하세요, 시작하겠습니다.",
-  ro: "Salut, să începem.",
-  "sr-Cyrl-RS": "Здраво, почнимо.",
-  "sr-Latn-RS": "Zdravo, počnimo.",
-  "zh-CN": "你好，开始吧。",
-  uk: "Привіт, почнемо.",
-  "uk-UA": "Привіт, почнемо.",
-  pl: "Cześć, zaczynajmy.",
-  tr: "Merhaba, başlayalım.",
-  nl: "Hoi, laten we beginnen.",
-};
+const SEEDS: Record<string, string> = SEEDS_RAW;
 
 function buildSeedMessage(language: string | undefined): string {
   if (!language) return SEEDS.en;
@@ -166,7 +146,7 @@ function updateProgressItems(
 }
 
 export const WizardOverlay = observer(({ visible, onClose }: Props) => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation(["Common"]);
   const seedMessage = React.useMemo(
     () => buildSeedMessage(i18n.language),
     [i18n.language],
@@ -376,7 +356,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
     } catch (err) {
       if (ac.signal.aborted) {
         setPhase("preview");
-        toastr.info("Setup cancelled.");
+        toastr.info(t("Common:ArbiterSetupCancelled"));
       } else {
         const msg = err instanceof Error ? err.message : String(err);
         setErrorMessage(msg);
@@ -417,7 +397,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
     <div className={styles.bootstrapBody}>
       <div className={styles.spinner} aria-hidden="true" />
       <Text as="p" className={styles.bootstrapText}>
-        Preparing your setup wizard…
+        Preparing your setup wizard...
       </Text>
     </div>
   );
@@ -482,7 +462,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
               <div className={styles.previewItemBody}>
                 <span className={styles.previewItemTitle}>{e.role_title}</span>
                 <span className={styles.previewItemMeta}>
-                  {e.domain_expertise.slice(0, 3).join(" · ")}
+                  {e.domain_expertise.slice(0, 3).join(" • ")}
                 </span>
               </div>
               <div className={styles.previewItemModel}>
@@ -519,7 +499,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
   const renderProvisioning = () => (
     <div className={styles.provisioningBody}>
       <Text as="p" className={styles.provisioningIntro}>
-        Creating your agents…
+        Creating your agents...
       </Text>
       <ol className={styles.provisioningList}>
         {provisioningItems.map((it) => (
@@ -529,7 +509,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
             data-status={it.status}
           >
             <span className={styles.provisioningStatus} aria-hidden="true">
-              {it.status === "done" ? "✓" : "·"}
+              {it.status === "done" ? "•" : "•"}
             </span>
             <span className={styles.provisioningLabel}>{it.label}</span>
           </li>
@@ -603,13 +583,13 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
               primary
               scale
               size={ButtonSize.normal}
-              label="Proceed"
+              label={t("Common:ArbiterProceed")}
               onClick={handleProceed}
             />
             <Button
               scale
               size={ButtonSize.normal}
-              label="Back"
+              label={t("Common:Back")}
               onClick={handleBackToChat}
             />
           </>
@@ -619,7 +599,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
           <Button
             scale
             size={ButtonSize.normal}
-            label="Cancel"
+            label={t("Common:CancelButton")}
             onClick={handleCancelProvisioning}
           />
         );
@@ -629,7 +609,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
             primary
             scale
             size={ButtonSize.normal}
-            label="Open AI Arbiter"
+            label={t("Common:ArbiterOpenAiArbiter")}
             onClick={handleOpen}
           />
         );
@@ -640,13 +620,13 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
               primary
               scale
               size={ButtonSize.normal}
-              label="Retry"
+              label={t("Common:ArbiterRetry")}
               onClick={handleRetry}
             />
             <Button
               scale
               size={ButtonSize.normal}
-              label="Close"
+              label={t("Common:CloseButton")}
               onClick={onClose}
             />
           </>

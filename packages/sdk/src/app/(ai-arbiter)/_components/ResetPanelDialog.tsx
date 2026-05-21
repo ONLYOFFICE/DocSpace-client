@@ -36,6 +36,7 @@
 "use client";
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
@@ -56,6 +57,7 @@ export function ResetPanelDialog({
   onCancel,
   onConfirm,
 }: ResetPanelDialogProps) {
+  const { t } = useTranslation(["Common"]);
   const [phase, setPhase] = React.useState<Phase>("confirm");
   const [error, setError] = React.useState<string | null>(null);
 
@@ -93,7 +95,7 @@ export function ResetPanelDialog({
             } and arbiter, then start a new setup conversation. The setup wizard itself will be preserved. This cannot be undone.`}
           </Text>
         ) : null}
-        {phase === "deleting" ? <Text as="p">Removing agents…</Text> : null}
+        {phase === "deleting" ? <Text as="p">Removing agents...</Text> : null}
         {phase === "failed" ? (
           <Text as="p">
             {`Failed to reset: ${error ?? "unknown error"}`}
@@ -107,13 +109,13 @@ export function ResetPanelDialog({
               primary
               scale
               size={ButtonSize.normal}
-              label="Yes, reset everything"
+              label={t("Common:ArbiterYesResetEverything")}
               onClick={handleConfirm}
             />
             <Button
               scale
               size={ButtonSize.normal}
-              label="Cancel"
+              label={t("Common:CancelButton")}
               onClick={onCancel}
             />
           </>
@@ -122,7 +124,7 @@ export function ResetPanelDialog({
           <Button
             scale
             size={ButtonSize.normal}
-            label="Working…"
+            label={t("Common:ArbiterWorking")}
             isDisabled
           />
         ) : null}
@@ -131,7 +133,7 @@ export function ResetPanelDialog({
             primary
             scale
             size={ButtonSize.normal}
-            label="Close"
+            label={t("Common:CloseButton")}
             onClick={onCancel}
           />
         ) : null}

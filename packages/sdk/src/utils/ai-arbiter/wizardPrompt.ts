@@ -43,7 +43,7 @@ const PROLOG = [
   'several AI experts answer the user\'s question independently and a final',
   '"arbiter" agent synthesizes their answers into one weighted reply.',
   "",
-  "Your job: design a panel of expert agents (2–7 experts) plus one arbiter,",
+  "Your job: design a panel of expert agents (2-7 experts) plus one arbiter,",
   "tuned to the user's specific domain. Aim to keep the conversation within",
   "five focused turns by asking ONE targeted question per turn — this is",
   "your internal pacing budget, not something to convey to the user. Do NOT",

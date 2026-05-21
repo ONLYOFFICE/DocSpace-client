@@ -36,6 +36,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import type { AttachedFile } from "@/types/arbiter";
 import styles from "./FilePicker.module.scss";
@@ -61,6 +62,7 @@ type FilePickerProps = {
 };
 
 export function FilePicker({ disabled, onSelect }: FilePickerProps) {
+  const { t } = useTranslation(["Common"]);
   const [selectorUrl, setSelectorUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const onSelectRef = useRef(onSelect);
@@ -124,9 +126,9 @@ export function FilePicker({ disabled, onSelect }: FilePickerProps) {
         className={styles.attachBtn}
         disabled={disabled || loading}
         onClick={handleOpen}
-        title="Attach a file"
+        title={t("Common:ArbiterAttachFile")}
       >
-        {loading ? "…" : "📎"}
+        {loading ? "..." : ""}
       </button>
 
       {selectorUrl && (
@@ -143,7 +145,7 @@ export function FilePicker({ disabled, onSelect }: FilePickerProps) {
             <iframe
               className={styles.iframe}
               src={selectorUrl}
-              title="Select file"
+              title={t("Common:SelectFile")}
             />
           </div>
         </div>

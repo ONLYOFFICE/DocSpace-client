@@ -43,14 +43,14 @@ import type { AgentSummary } from "@/types/arbiter";
 import styles from "./ArbiterApp.module.scss";
 
 const AVATAR_COLORS = [
-  "#4e9df5",
-  "#52c41a",
-  "#fa8c16",
-  "#722ed1",
-  "#eb2f96",
-  "#13c2c2",
-  "#f5222d",
-  "#096dd9",
+  "rgb(78, 157, 245)",
+  "rgb(82, 196, 26)",
+  "rgb(250, 140, 22)",
+  "rgb(114, 46, 209)",
+  "rgb(235, 47, 150)",
+  "rgb(19, 194, 194)",
+  "rgb(245, 34, 45)",
+  "rgb(9, 109, 217)",
 ];
 
 function agentColor(title: string): string {

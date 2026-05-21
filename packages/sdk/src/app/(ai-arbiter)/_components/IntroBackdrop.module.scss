@@ -46,10 +46,10 @@
   background:
     radial-gradient(
       circle at 50% 30%,
-      color-mix(in srgb, var(--accent-color, #4e9df5) 8%, transparent),
+      color-mix(in srgb, var(--accent-color) 8%, transparent),
       transparent 60%
     ),
-    var(--background-color, #fafafa);
+    var(--background-color);
 }
 
 .introIllustration {
@@ -65,7 +65,7 @@
 .introTitle {
   font-size: 22px;
   font-weight: 600;
-  color: var(--text-color, #333);
+  color: var(--text-color);
   margin: 0;
 }
 
@@ -73,7 +73,7 @@
   max-width: 520px;
   font-size: 14px;
   line-height: 1.5;
-  color: var(--text-color-2, #666);
+  color: var(--text-color-2);
   margin: 0;
 }
 
@@ -82,19 +82,19 @@
   padding: 10px 24px;
   border: none;
   border-radius: 8px;
-  background: var(--accent-color, #4e9df5);
-  color: #fff;
+  background: var(--accent-color);
+  color: white;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.15s;
 
   &:hover {
-    background: var(--accent-hover, #2e82e0);
+    background: var(--accent-hover);
   }
 
   &:focus-visible {
-    outline: 2px solid var(--accent-color, #4e9df5);
+    outline: 2px solid var(--accent-color);
     outline-offset: 2px;
   }
 }

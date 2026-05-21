@@ -41,15 +41,15 @@ import styles from "./Wizard.module.scss";
 import type { ChatMessage } from "./useWizardChat";
 
 function inferPreparingStage(text: string): string {
-  if (!text) return "Analyzing your answers…";
+  if (!text) return "Analyzing your answers...";
   const roleMatches = text.match(/"role_title"\s*:/g);
   const roleCount = roleMatches ? roleMatches.length : 0;
   if (text.includes('"arbiter"')) {
-    if (text.trimEnd().endsWith("}")) return "Finalizing your panel…";
-    return "Composing the arbiter…";
+    if (text.trimEnd().endsWith("}")) return "Finalizing your panel...";
+    return "Composing the arbiter...";
   }
-  if (roleCount > 0) return `Designing expert ${roleCount}…`;
-  return "Analyzing your answers…";
+  if (roleCount > 0) return `Designing expert ${roleCount}...`;
+  return "Analyzing your answers...";
 }
 
 function PreparingProgress({ text }: { text: string }) {
@@ -130,7 +130,7 @@ export function ChatPhase({
     <div className={styles.chatLayout}>
       <div className={styles.messagesScroll} ref={scrollRef}>
         {visible.length === 0 ? (
-          <div className={styles.chatPlaceholder}>Starting setup…</div>
+          <div className={styles.chatPlaceholder}>Starting setup...</div>
         ) : (
           visible.map((m) => {
             if (m.role === "wizard" && m.pendingConfig) {
@@ -180,7 +180,7 @@ export function ChatPhase({
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Type your reply…"
+          placeholder="Type your reply..."
           disabled={isStreaming}
           rows={3}
         />

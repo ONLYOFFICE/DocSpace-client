@@ -37,6 +37,7 @@
 
 import React from "react";
 import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { tearDownPanel } from "@/utils/ai-arbiter";
@@ -55,6 +56,7 @@ import { WizardOverlay } from "../_components/wizard/WizardOverlay";
 import styles from "../_components/ArbiterApp.module.scss";
 
 const AiArbiterPage = observer(() => {
+  const { t } = useTranslation(["Common"]);
   const agentsStore = useAiArbiterAgentsStore();
   const runStore = useAiArbiterRunStore();
   const { run, stop } = useArbiterRun();
@@ -85,7 +87,7 @@ const AiArbiterPage = observer(() => {
     await tearDownPanel(sessionId, userId);
     agentsStore.clearActivePanel();
     setResetDialogVisible(false);
-    toastr.success("Configuration reset.");
+    toastr.success(t("Common:ArbiterConfigurationReset"));
   };
 
   if (!hasPanel || !arbiter) {
@@ -123,7 +125,7 @@ const AiArbiterPage = observer(() => {
             value={question}
             onChange={(e) => runStore.setQuestion(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Ask a question… (Ctrl+Enter to run)"
+            placeholder="Ask a question... (Ctrl+Enter to run)"
             disabled={isRunning}
             rows={3}
           />
@@ -151,7 +153,7 @@ const AiArbiterPage = observer(() => {
 
           {attachedFile && (
             <span className={styles.fileChip}>
-              📎 {attachedFile.name}
+              {attachedFile.name}
               {!isRunning && (
                 <button
                   className={styles.fileChipRemove}
@@ -159,7 +161,7 @@ const AiArbiterPage = observer(() => {
                   onClick={() => runStore.setAttachedFile(null)}
                   aria-label="Remove file"
                 >
-                  ×
+                  x
                 </button>
               )}
             </span>
@@ -167,7 +169,7 @@ const AiArbiterPage = observer(() => {
 
           {runStatus !== "idle" && (
             <span className={styles.statusText}>
-              {runStatus === "running" && "Running…"}
+              {runStatus === "running" && "Running..."}
               {runStatus === "done" && "Done"}
               {runStatus === "error" && "Error"}
               {runStatus === "aborted" && "Stopped"}

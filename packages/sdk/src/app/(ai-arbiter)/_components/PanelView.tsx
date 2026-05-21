@@ -44,7 +44,7 @@ import styles from "./ArbiterApp.module.scss";
 
 const STATUS_LABELS: Record<PanelState["status"], string> = {
   idle: "",
-  streaming: "Running…",
+  streaming: "Running...",
   done: "Done",
   error: "Error",
   aborted: "Stopped",
@@ -100,7 +100,7 @@ export const PanelView = observer(
               data-collapsed={isCollapsed ? "true" : "false"}
               aria-hidden="true"
             >
-              ▾
+              v
             </span>
           )}
         </div>
@@ -119,7 +119,7 @@ export const PanelView = observer(
                       type="button"
                       onClick={() => setShowReasoning((s) => !s)}
                     >
-                      {showReasoning ? "▾ Hide reasoning" : "▸ Show reasoning"}
+                      {showReasoning ? "v Hide reasoning" : "> Show reasoning"}
                     </button>
                     {showReasoning && (
                       <pre className={styles.reasoningText}>
@@ -131,7 +131,7 @@ export const PanelView = observer(
               </>
             ) : (
               <p className={styles.placeholderText}>
-                {status === "idle" ? "Waiting…" : ""}
+                {status === "idle" ? "Waiting..." : ""}
               </p>
             )}
           </div>

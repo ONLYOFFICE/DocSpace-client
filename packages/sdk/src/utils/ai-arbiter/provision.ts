@@ -107,7 +107,7 @@ export type ActivePanel = {
 };
 
 function truncateTitle(s: string): string {
-  return s.length <= TITLE_MAX ? s : `${s.slice(0, TITLE_MAX - 1)}…`;
+  return s.length <= TITLE_MAX ? s : `${s.slice(0, TITLE_MAX - 1)}...`;
 }
 
 function makeAgentFilter(tag: string, userId: string): RoomsFilter {

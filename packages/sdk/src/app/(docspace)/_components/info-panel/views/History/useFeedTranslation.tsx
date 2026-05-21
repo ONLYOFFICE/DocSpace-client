@@ -27,7 +27,8 @@
 "use client";
 
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 
 import {
   TFeedAction,
@@ -35,6 +36,8 @@ import {
   RoomMember,
   TFeedData,
 } from "@docspace/shared/api/rooms/types";
+
+import { HistoryText } from "./HistoryText";
 
 export const useFeedTranslation = (
   feed: TFeedAction<TFeedData | RoomMember>,
@@ -89,6 +92,53 @@ export const useFeedTranslation = (
         return t("Common:FoldersCopiedNotify");
       case FeedActionKeys.FolderDeleted:
         return t("Common:FoldersRemovedNotify");
+      case FeedActionKeys.RoomCreated: {
+        const title = (feed.data as TFeedData).title;
+        return (
+          <Trans
+            t={t as TFunction}
+            ns="Common"
+            i18nKey="HistoryRoomCreated"
+            values={{ roomTitle: title }}
+            components={{ 1: <HistoryText title={title ?? ""} /> }}
+          />
+        );
+      }
+      case FeedActionKeys.RoomRenamed: {
+        const oldTitle = (feed.data as TFeedData).oldTitle;
+        const newTitle = (feed.data as TFeedData).newTitle;
+        return (
+          <Trans
+            t={t as TFunction}
+            ns="Common"
+            i18nKey="RoomRenamed"
+            values={{ oldRoomTitle: oldTitle, roomTitle: newTitle }}
+            components={{
+              1: <HistoryText title={oldTitle ?? ""} />,
+              2: <HistoryText title={newTitle ?? ""} />,
+            }}
+          />
+        );
+      }
+      case FeedActionKeys.RoomArchived:
+        return t("Common:RoomToArchiveMove", {
+          sectionName: t("Common:Archive"),
+        });
+      case FeedActionKeys.RoomUnarchived:
+        return t("Common:RoomFromArchiveRestore", {
+          sectionName: t("Common:Archive"),
+        });
+      case FeedActionKeys.AddedRoomTags:
+        return t("Common:AddedRoomTags");
+      case FeedActionKeys.DeletedRoomTags:
+        return t("Common:DeletedRoomTags");
+      case FeedActionKeys.RoomLogoCreated:
+      case FeedActionKeys.RoomColorChanged:
+      case FeedActionKeys.RoomCoverChanged:
+      case FeedActionKeys.RoomLogoDeleted:
+        return t("Common:RoomLogoChanged");
+      case FeedActionKeys.RoomChangeOwner:
+        return t("Common:RoomChangeOwner");
       default:
         return feed.action.key ?? "";
     }
@@ -96,3 +146,4 @@ export const useFeedTranslation = (
 
   return { getFeedTranslation, count, hasRelatedItems };
 };
+

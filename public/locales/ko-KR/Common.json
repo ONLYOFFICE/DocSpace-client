@@ -1629,5 +1629,14 @@
   "ArchiveRooms": "방을 아카이브하려고 합니다.",
   "WantToRestoreTheRoom": "이 방의 모든 외부 링크가 활성화되고 링크를 가진 모든 사람이 해당 콘텐츠를 사용할 수 있게 됩니다. 방을 복원하시겠습니까?",
   "WantToRestoreTheRooms": "복원된 방의 모든 외부 링크가 활성화되고 해당 콘텐츠는 방 링크를 가진 모든 사람이 사용할 수 있게 됩니다. 방을 복원하시겠습니까?",
-  "RestoreAllRooms": "정말로 모든 방을 복원하시겠습니까?"
+  "RestoreAllRooms": "정말로 모든 방을 복원하시겠습니까?",
+  "AddedRoomTags": "태그가 추가되었습니다.",
+  "DeletedRoomTags": "태그가 제거되었습니다.",
+  "RoomLogoChanged": "아이콘이 변경되었습니다",
+  "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> 룸이 생성되었습니다",
+  "RoomRenamed": "<1>«{{oldRoomTitle}}»</1> 룸의 이름이 <2>«{{roomTitle}}»</2> 룸으로 변경되었습니다",
+  "RoomArchived": "룸이 아카이브되었습니다",
+  "RoomToArchiveMove": "방이 {{sectionName}}으로 이동되었습니다.",
+  "RoomFromArchiveRestore": "{{sectionName}}에서 복구된 방",
+  "RoomChangeOwner": "방 주인이 변경되었습니다."
 }

@@ -1629,5 +1629,14 @@
   "ArchiveRooms": "Sunteţi pe cale să arhivați săli.",
   "WantToRestoreTheRoom": "Toate link-urile externe din această sală vor deveni active și tot conținutul vor fi disponibil tuturor pe link-ul. Doriți să restaurați această sală?",
   "WantToRestoreTheRooms": "Toate link-urile partajate către sălile restaurate vor deveni active, iar conținutul lor va fi disponibil pentru toți utilizatorii care au link-urile către sălile. Doriți să restaurați sălile?",
-  "RestoreAllRooms": "Sigur doriţi să restaurați toate sălile?"
+  "RestoreAllRooms": "Sigur doriţi să restaurați toate sălile?",
+  "AddedRoomTags": "Etichete adăugate.",
+  "DeletedRoomTags": "Etichete eliminate.",
+  "RoomLogoChanged": "Pictograma a fost schimbată",
+  "HistoryRoomCreated": "Sala <1>«{{roomTitle}}»</1> a fost creată",
+  "RoomRenamed": "Sala <1>«{{oldRoomTitle}}»</1> a fost redenumită <2>«{{roomTitle}}»</2>",
+  "RoomArchived": "Camera a fost arhivată",
+  "RoomToArchiveMove": "Sala a fost mutată în {{sectionName}}",
+  "RoomFromArchiveRestore": "Sală a fost recuperată din {{sectionName}}",
+  "RoomChangeOwner": "Proprietarul sălii a fost schimbat."
 }

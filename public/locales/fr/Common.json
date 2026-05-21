@@ -1629,5 +1629,14 @@
   "ArchiveRooms": "Vous êtes sur le point d’archiver des salles.",
   "WantToRestoreTheRoom": "Tous les liens externes de cette salle deviendront actifs et son contenu sera accessible à tous les utilisateurs disposant du lien. Voulez-vous restaurer la salle ?",
   "WantToRestoreTheRooms": "Tous les liens externes des salles restaurées deviendront actifs et leur contenu sera accessible à tous ceux qui possèdent les liens de la salle. Voulez-vous restaurer les salles ?",
-  "RestoreAllRooms": "Souhaitez-vous vraiment restaurer toutes les salles ?"
+  "RestoreAllRooms": "Souhaitez-vous vraiment restaurer toutes les salles ?",
+  "AddedRoomTags": "Tags ajoutés.",
+  "DeletedRoomTags": "Tags supprimés.",
+  "RoomLogoChanged": "Icône modifiée",
+  "HistoryRoomCreated": "Salle  <1>«{{roomTitle}}»</1> créée",
+  "RoomRenamed": "Salle <1>«{{oldRoomTitle}}»</1> renommée en <2>«{{roomTitle}}»</2>",
+  "RoomArchived": "Salle archivée",
+  "RoomToArchiveMove": "Salle déplacée vers {{sectionName}}",
+  "RoomFromArchiveRestore": "Salle récupérée depuis {{sectionName}}",
+  "RoomChangeOwner": "Le propriétaire de la salle a été modifié."
 }

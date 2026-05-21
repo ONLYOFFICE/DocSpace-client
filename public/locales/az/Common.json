@@ -1629,5 +1629,14 @@
   "ArchiveRooms": "Otaqları arxivləşdirmək üzrəsiniz.",
   "WantToRestoreTheRoom": "Bu otaqdakı bütün xarici keçidlər aktiv olacaq və onun məzmunu keçidi olan hər kəs üçün əlçatan olacaq. Otağı bərpa etmək istəyirsiniz?",
   "WantToRestoreTheRooms": "Bərpa edilmiş otaqlardakı bütün xarici keçidlər aktiv olacaq və onların məzmunu otaq keçidləri olan hər kəs üçün əlçatan olacaq. Otaqları bərpa etmək istəyirsiniz?",
-  "RestoreAllRooms": "Bütün otaqları bərpa etmək istədiyinizə əminsiniz?"
+  "RestoreAllRooms": "Bütün otaqları bərpa etmək istədiyinizə əminsiniz?",
+  "AddedRoomTags": "Teqlər əlavə edildi.",
+  "DeletedRoomTags": "Teqlər silindi.",
+  "RoomLogoChanged": "İşarə dəyişdi",
+  "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> otaq yaradıldı",
+  "RoomRenamed": "Otağın <1>«{{oldRoomTitle}}»</1> adı <2>«{{roomTitle}}»</2> olaraq dəyişdirildi",
+  "RoomArchived": "Otaq arxivləşdirildi",
+  "RoomToArchiveMove": "Otaq {{sectionName}} bölməsinə köçürüldü",
+  "RoomFromArchiveRestore": "{{sectionName}} bölməsindən bərpa edilmiş otaq",
+  "RoomChangeOwner": "Otağın sahibi dəyişdi."
 }

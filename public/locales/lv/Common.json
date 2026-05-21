@@ -1629,5 +1629,14 @@
   "ArchiveRooms": "Jūs gatavojaties arhivēt telpas.",
   "WantToRestoreTheRoom": "Visas ārējās saites šajā telpā kļūs aktīvas, un tās saturs būs pieejams ikvienam, kam ir saite. Vai vēlaties atjaunot telpu?",
   "WantToRestoreTheRooms": "Visas ārējās saites atjaunotajās telpās kļūs aktīvas, un to saturs būs pieejams ikvienam, kam ir telpas saites. Vai vēlaties atjaunot telpas?",
-  "RestoreAllRooms": "Vai tiešām vēlaties atjaunot visas telpas?"
+  "RestoreAllRooms": "Vai tiešām vēlaties atjaunot visas telpas?",
+  "AddedRoomTags": "Pievienotas atzīmes.",
+  "DeletedRoomTags": "Atzīmes ir noņemtas.",
+  "RoomLogoChanged": "Ikona ir mainīta",
+  "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> telpa ir izveidota",
+  "RoomRenamed": "Telpa ir <1>«{{oldRoomTitle}}»</1> pārdēvēta par <2>«{{roomTitle}}»</2>",
+  "RoomArchived": "Telpa arhivēta",
+  "RoomToArchiveMove": "Istaba pārvietota uz {{sectionName}}",
+  "RoomFromArchiveRestore": "Istaba atgūta no {{sectionName}}",
+  "RoomChangeOwner": "Īpašnieks telpā mainīts."
 }

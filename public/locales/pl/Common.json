@@ -1629,5 +1629,14 @@
   "ArchiveRooms": "Zamierzasz zarchiwizować pokoje.",
   "WantToRestoreTheRoom": "Wszystkie linki zewnętrzne w tym pokoju staną się aktywne, a jego zawartość będzie dostępna dla wszystkich użytkowników posiadających link. Czy chcesz przywrócić pokój?",
   "WantToRestoreTheRooms": "Wszystkie linki zewnętrzne w przywróconych pokojach staną się aktywne, a ich zawartość będzie dostępna dla wszystkich użytkowników posiadających linki do pokoi. Czy chcesz przywrócić pokoje?",
-  "RestoreAllRooms": "Czy na pewno chcesz przywrócić wszystkie pokoje?"
+  "RestoreAllRooms": "Czy na pewno chcesz przywrócić wszystkie pokoje?",
+  "AddedRoomTags": "Tagi zostały dodane.",
+  "DeletedRoomTags": "Tagi zostały usunięte.",
+  "RoomLogoChanged": "Ikona została zmieniona",
+  "HistoryRoomCreated": "Pokój <1>«{{roomTitle}}»</1> został utworzony",
+  "RoomRenamed": "Nazwa pokoju <1>«{{oldRoomTitle}}»</1> została zmieniona na <2>«{{roomTitle}}»</2>",
+  "RoomArchived": "Pokój został zarchiwizowany",
+  "RoomToArchiveMove": "Pokój przeniesiony do {{sectionName}}",
+  "RoomFromArchiveRestore": "Pokój odzyskano z {{sectionName}}",
+  "RoomChangeOwner": "Właściciel pokoju został zmieniony."
 }

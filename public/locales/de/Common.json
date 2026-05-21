@@ -1629,5 +1629,14 @@
   "ArchiveRooms": "Sie möchten Räume archivieren.",
   "WantToRestoreTheRoom": "Alle externen Links in diesem Raum werden aktiv und der Inhalt ist für jeden mit dem Link zugänglich. Möchten Sie den Raum wiederherstellen?",
   "WantToRestoreTheRooms": "Alle externen Links in wiederhergestellten Räumen werden aktiv und ihre Inhalte sind für alle mit den Raumlinks zugänglich. Möchten Sie die Räume wiederherstellen?",
-  "RestoreAllRooms": "Sind Sie sicher, dass Sie alle Räume wiederherstellen wollen?"
+  "RestoreAllRooms": "Sind Sie sicher, dass Sie alle Räume wiederherstellen wollen?",
+  "AddedRoomTags": "Tags hinzugefügt.",
+  "DeletedRoomTags": "Tags entfernt.",
+  "RoomLogoChanged": "Icon geändert",
+  "HistoryRoomCreated": " <1>«{{roomTitle}}»</1> Raum erstellt",
+  "RoomRenamed": "Raum <1>«{{oldRoomTitle}}»</1> umbenannt in <2>«{{roomTitle}}»</2>",
+  "RoomArchived": "Raum archiviert",
+  "RoomToArchiveMove": "Raum nach {{sectionName}} verschoben",
+  "RoomFromArchiveRestore": "Raum von {{sectionName}} wiederhergestellt",
+  "RoomChangeOwner": "Besitzer des Raums geändert."
 }

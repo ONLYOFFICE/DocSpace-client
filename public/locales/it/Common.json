@@ -1629,5 +1629,14 @@
   "ArchiveRooms": "Stai per archiviare le stanze.",
   "WantToRestoreTheRoom": "Tutti i link esterni in questa stanza diventeranno attivi e i suoi contenuti saranno disponibili a chiunque abbia il collegamento. Vuoi ripristinare la stanza?",
   "WantToRestoreTheRooms": "Tutti i link esterni nelle stanze ripristinate diventeranno attivi e i loro contenuti saranno disponibili a chiunque abbia i link alle stanze. Vuoi ripristinare le stanze?",
-  "RestoreAllRooms": "Sei sicuro di voler ripristinare tutte le stanze?"
+  "RestoreAllRooms": "Sei sicuro di voler ripristinare tutte le stanze?",
+  "AddedRoomTags": "Tag aggiunti.",
+  "DeletedRoomTags": "Tag rimossi.",
+  "RoomLogoChanged": "L'icona è cambiata",
+  "HistoryRoomCreated": " <1>«{{roomTitle}}»</1> stanza creata",
+  "RoomRenamed": "Stanza <1>«{{oldRoomTitle}}»</1> rinominata <2>«{{roomTitle}}»</2>",
+  "RoomArchived": "Stanza archiviata",
+  "RoomToArchiveMove": "Stanza spostata in {{sectionName}}",
+  "RoomFromArchiveRestore": "Stanza ripristinata da {{sectionName}}",
+  "RoomChangeOwner": "Il proprietario della stanza è stato modificato."
 }

@@ -33,7 +33,10 @@ import {
   RoomMember,
   TFeedData,
 } from "@docspace/shared/api/rooms/types";
-import { humanizeDuration, type DurationUnit } from "@docspace/ui-kit/utils/date";
+import {
+  humanizeDuration,
+  type DurationUnit,
+} from "@docspace/ui-kit/utils/date";
 
 import { HistoryText } from "../HistoryText";
 
@@ -191,7 +194,7 @@ export const useFeedTranslation = (
         return (
           <Trans
             t={t}
-            ns="InfoPanel"
+            ns="Common"
             i18nKey="HistoryRoomCreated"
             values={{ roomTitle: (feed.data as TFeedData).title }}
             components={{
@@ -225,7 +228,7 @@ export const useFeedTranslation = (
         return (
           <Trans
             t={t}
-            ns="InfoPanel"
+            ns="Common"
             i18nKey="RoomRenamed"
             values={{
               oldRoomTitle: (feed.data as TFeedData).oldTitle,
@@ -248,15 +251,15 @@ export const useFeedTranslation = (
           />
         );
       case FeedActionKeys.AddedRoomTags:
-        return t("InfoPanel:AddedRoomTags");
+        return t("Common:AddedRoomTags");
       case FeedActionKeys.DeletedRoomTags:
-        return t("InfoPanel:DeletedRoomTags");
+        return t("Common:DeletedRoomTags");
       case FeedActionKeys.RoomLogoCreated:
       case FeedActionKeys.RoomColorChanged:
       case FeedActionKeys.RoomCoverChanged:
-        return t("InfoPanel:RoomLogoChanged");
+        return t("Common:RoomLogoChanged");
       case FeedActionKeys.RoomLogoDeleted:
-        return t("InfoPanel:RoomLogoChanged");
+        return t("Common:RoomLogoChanged");
       case FeedActionKeys.RoomExternalLinkCreated:
         return t("InfoPanel:RoomExternalLinkCreated");
       case FeedActionKeys.RoomExternalLinkRenamed:
@@ -377,11 +380,11 @@ export const useFeedTranslation = (
       case FeedActionKeys.RoomDenyDownloadDisabled:
         return t("InfoPanel:RoomDenyDownloadDisabled");
       case FeedActionKeys.RoomArchived:
-        return t("InfoPanel:RoomToArchiveMove", {
+        return t("Common:RoomToArchiveMove", {
           sectionName: t("Common:Archive"),
         });
       case FeedActionKeys.RoomUnarchived:
-        return t("InfoPanel:RoomFromArchiveRestore", {
+        return t("Common:RoomFromArchiveRestore", {
           sectionName: t("Common:Archive"),
         });
       case FeedActionKeys.RoomIndexExportSaved:
@@ -389,7 +392,7 @@ export const useFeedTranslation = (
           sectionName: t("Common:MyDocuments"),
         });
       case FeedActionKeys.RoomChangeOwner:
-        return t("InfoPanel:RoomChangeOwner");
+        return t("Common:RoomChangeOwner");
       case FeedActionKeys.FormSubmit:
         return t("InfoPanel:FilledOutForm");
       case FeedActionKeys.FormOpenedForFilling:
@@ -418,3 +421,4 @@ export const useFeedTranslation = (
 
   return { getFeedTranslation };
 };
+

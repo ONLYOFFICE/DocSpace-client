@@ -1629,5 +1629,14 @@
   "ArchiveRooms": "Olet arkistoimassa huoneita.",
   "WantToRestoreTheRoom": "Kaikki ulkoiset linkit tässä huoneessa tulevat aktiivisiksi ja kaikki sen sisältö on saatavilla kaikille linkin kautta. Haluatko palauttaa huoneen?",
   "WantToRestoreTheRooms": "Kaikki ulkoiset linkit palautetuista huoneissa tulevat aktiivisiksi ja niiden sisältö saataville kaikille, joilla on huoneen linkit. Haluatko palauttaa huoneet?",
-  "RestoreAllRooms": "Haluatko varmasti palauttaa kaikki huoneet?"
+  "RestoreAllRooms": "Haluatko varmasti palauttaa kaikki huoneet?",
+  "AddedRoomTags": "Tägit lisätty.",
+  "DeletedRoomTags": "Tägit poistettu.",
+  "RoomLogoChanged": "Kuvake muutettu",
+  "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> huone luotu",
+  "RoomRenamed": "Huone <1>«{{oldRoomTitle}}»</1> nimetty uudelleen <2>«{{roomTitle}}»</2>",
+  "RoomArchived": "Huone arkistoitu",
+  "RoomToArchiveMove": "Huone siirretty {{sectionName}} -kohtaan",
+  "RoomFromArchiveRestore": "Huone palautettu {{sectionName}}-sta",
+  "RoomChangeOwner": "Huoneen omistaja vaihtui."
 }

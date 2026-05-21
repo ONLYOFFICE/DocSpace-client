@@ -1629,5 +1629,14 @@
   "ArchiveRooms": "このルームをアーカイブしようとしています。",
   "WantToRestoreTheRoom": "このルームの全ての外部リンクは有効になり、その内容はリンクを持つ全ての人が利用できるようになります。このルームを復元しますか？",
   "WantToRestoreTheRooms": "復元されたルームの共有リンクは全て有効になり、ルームのリンクを持つ全員がその内容を利用できるようになります。ルームを復元しますか？",
-  "RestoreAllRooms": "このまますべてのルームの復元を続けますか？"
+  "RestoreAllRooms": "このまますべてのルームの復元を続けますか？",
+  "AddedRoomTags": "タグが追加されました。",
+  "DeletedRoomTags": "タグが削除されました。",
+  "RoomLogoChanged": "アイコンが変更されました",
+  "HistoryRoomCreated": "<1>「{{roomTitle}}」</1>ルームが作成されました。",
+  "RoomRenamed": "ルーム名<1>«{{oldRoomTitle}}»</1>を<2>«{{roomTitle}}»</2>に変更されました。",
+  "RoomArchived": "ルームがアーカイブされました",
+  "RoomToArchiveMove": "ルームが{{sectionName}}に移動しました",
+  "RoomFromArchiveRestore": "{{sectionName}}から回復したルーム",
+  "RoomChangeOwner": "ルームのオーナーが変更されました。"
 }

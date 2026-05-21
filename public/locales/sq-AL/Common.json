@@ -1629,5 +1629,14 @@
   "ArchiveRooms": "Ju jeni duke arkivuar disa dhoma.",
   "WantToRestoreTheRoom": "Të gjitha lidhjet e ndara në këtë dhomë do të bëhen aktive dhe përmbajtja e saj do të jetë e disponueshme për të gjithë me lidhjen. Dëshironi të rivendosni dhomën?",
   "WantToRestoreTheRooms": "Të gjitha lidhjet e ndara në dhomat e restauruara do të bëhen aktive dhe përmbajtja e tyre do të jetë e disponueshme për të gjithë me lidhjet e dhomës. Dëshiron të restaurosh dhomat?",
-  "RestoreAllRooms": "A jeni të sigurt që doni të rindizni të gjitha dhomat?"
+  "RestoreAllRooms": "A jeni të sigurt që doni të rindizni të gjitha dhomat?",
+  "AddedRoomTags": "Etiketat e shtuara.",
+  "DeletedRoomTags": "Etiketat u fshinë.",
+  "RoomLogoChanged": "Ikona ka ndryshuar",
+  "HistoryRoomCreated": "Dhoma <1>«{{roomTitle}}»</1> u krijua",
+  "RoomRenamed": "Dhoma<1>«{{oldRoomTitle}}»</1> u riemërua në<2>«{{roomTitle}}»</2>",
+  "RoomArchived": "Dhoma u arkivua",
+  "RoomToArchiveMove": "Dhoma u zhvendos te {{sectionName}}",
+  "RoomFromArchiveRestore": "Dhoma u rikuperua nga {{sectionName}}",
+  "RoomChangeOwner": "Pronari i dhomës u ndryshua."
 }

@@ -1629,5 +1629,14 @@
   "ArchiveRooms": "Odaları arşivlemek üzeresiniz.",
   "WantToRestoreTheRoom": "Bu odadaki tüm harici bağlantılar etkin hale gelecek ve içeriği, bağlantıya sahip olan herkesin kullanımına açık olacaktır. Odayı restore etmek istiyor musunuz?",
   "WantToRestoreTheRooms": "Geri yüklenen odalardaki tüm dış bağlantılar aktif hale gelecek ve içerikleri, oda bağlantılarına sahip olan herkesin kullanımına açık olacaktır. Odaları restore etmek istiyor musunuz?",
-  "RestoreAllRooms": "Tüm odaları geri yüklemek istediğinizden emin misiniz?"
+  "RestoreAllRooms": "Tüm odaları geri yüklemek istediğinizden emin misiniz?",
+  "AddedRoomTags": "Etiketler eklendi.",
+  "DeletedRoomTags": "Etiketler kaldırıldı.",
+  "RoomLogoChanged": "Simge değişti",
+  "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> odası oluşturuldu",
+  "RoomRenamed": "Oda <1>«{{oldRoomTitle}}»</1> <2>«{{roomTitle}}»</2> olarak yeniden adlandırıldı",
+  "RoomArchived": "Oda arşivlendi",
+  "RoomToArchiveMove": "Oda {{sectionName}} bölümüne taşındı",
+  "RoomFromArchiveRestore": "{{sectionName}}'den kurtarılan oda",
+  "RoomChangeOwner": "Oda sahibi değişti."
 }

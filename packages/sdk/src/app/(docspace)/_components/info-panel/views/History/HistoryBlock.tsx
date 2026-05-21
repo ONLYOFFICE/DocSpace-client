@@ -48,10 +48,13 @@ import type {
   TFeedData,
   RoomMember,
 } from "@docspace/shared/api/rooms/types";
+import { FeedActionKeys } from "@docspace/shared/api/rooms/types";
+import type { TUser } from "@docspace/shared/api/people/types";
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import DefaultUserAvatarSmall from "PUBLIC_DIR/images/default_user_photo_size_32-32.png?url";
 import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder-location.react.svg?url";
+import SortDescReactSvg from "PUBLIC_DIR/images/sort.desc.react.svg";
 
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
@@ -80,7 +83,11 @@ const nameWithoutExtension = (title?: string) => {
   return split.length <= 2 ? split[0] : title.slice(0, indexPoint);
 };
 
-const HistoryBlock = ({ feed, isLastEntity, dataTestId }: HistoryBlockProps) => {
+const HistoryBlock = ({
+  feed,
+  isLastEntity,
+  dataTestId,
+}: HistoryBlockProps) => {
   const { t, i18n } = useTranslation(["Common"]);
   const { initiator, date } = feed;
 
@@ -109,9 +116,15 @@ const HistoryBlock = ({ feed, isLastEntity, dataTestId }: HistoryBlockProps) => 
     : "";
 
   const canOpenLocation =
-    isFileOrFolder &&
-    !!data.parentId &&
-    feedInfo.actionType !== "delete";
+    isFileOrFolder && !!data.parentId && feedInfo.actionType !== "delete";
+
+  const isChangeOwner = feed.action.key === FeedActionKeys.RoomChangeOwner;
+  const memberData = (feed.data ?? {}) as unknown as {
+    owner?: TUser;
+    oldOwner?: TUser;
+  };
+  const oldOwner = isChangeOwner ? memberData.oldOwner : undefined;
+  const newOwner = isChangeOwner ? memberData.owner : undefined;
 
   const onOpenLocation = () => {
     if (!data.parentId) return;
@@ -146,6 +159,17 @@ const HistoryBlock = ({ feed, isLastEntity, dataTestId }: HistoryBlockProps) => 
           </div>
           <Text className="date">{getDateTime(date, i18n.language)}</Text>
         </div>
+        {isChangeOwner && oldOwner && newOwner ? (
+          <div className={styles.historyChangeOwner}>
+            <Text as="span" className="name" title={oldOwner.displayName ?? ""}>
+              {decode(oldOwner.displayName ?? "")}
+            </Text>
+            <SortDescReactSvg className="arrow" />
+            <Text as="span" className="name" title={newOwner.displayName ?? ""}>
+              {decode(newOwner.displayName ?? "")}
+            </Text>
+          </div>
+        ) : null}
         <span className={classNames("message", styles.historyBlockMessage)}>
           <span className="main-message">
             <Text className="name">
@@ -188,3 +212,4 @@ const HistoryBlock = ({ feed, isLastEntity, dataTestId }: HistoryBlockProps) => 
 };
 
 export default HistoryBlock;
+

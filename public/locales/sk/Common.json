@@ -1629,5 +1629,14 @@
   "ArchiveRooms": "Chystáte sa archivovať miestnosti.",
   "WantToRestoreTheRoom": "Všetky externé odkazy v tejto miestnosti sa stanú aktívnymi a jej obsah bude dostupný pre všetkých, ktorí majú na ňu odkaz. Chcete miestnosť obnoviť?",
   "WantToRestoreTheRooms": "Všetky externé odkazy v obnovených miestnostiach sa stanú aktívnymi a ich obsah bude dostupný pre každého, kto má odkaz na miestnosť. Chcete obnoviť miestnosti?",
-  "RestoreAllRooms": "Naozaj chcete obnoviť všetky miestnosti?"
+  "RestoreAllRooms": "Naozaj chcete obnoviť všetky miestnosti?",
+  "AddedRoomTags": "Tagy pridané.",
+  "DeletedRoomTags": "Tagy odstránené.",
+  "RoomLogoChanged": "Ikonka zmenená",
+  "HistoryRoomCreated": "Miestnosť <1>«{{roomTitle}}»</1> vytvorená",
+  "RoomRenamed": "Miestnosť <1>«{{oldRoomTitle}}»</1> premenovaná na <2>«{{roomTitle}}»</2>",
+  "RoomArchived": "Miestnosť archivovaná",
+  "RoomToArchiveMove": "Miestnosť presunutá do {{sectionName}}",
+  "RoomFromArchiveRestore": "Miestnosť obnovená z {{sectionName}}",
+  "RoomChangeOwner": "Vlastník miestnosti bol zmenený."
 }

@@ -1629,5 +1629,14 @@
   "ArchiveRooms": "Spremate se da arhivirate sobe.",
   "WantToRestoreTheRoom": "Svi deljeni linkovi u ovoj sobi će postati aktivni, a njen sadržaj će biti dostupan svima sa linkom. Da li želite da obnovite sobu?",
   "WantToRestoreTheRooms": "Svi deljeni linkovi u obnovljenim sobama će postati aktivni, a njihov sadržaj će biti dostupan svima sa linkom sobe. Da li želite da obnovite sobe?",
-  "RestoreAllRooms": "Da li ste sigurni da želite da povratite sve sobe?"
+  "RestoreAllRooms": "Da li ste sigurni da želite da povratite sve sobe?",
+  "AddedRoomTags": "Tagovi dodati.",
+  "DeletedRoomTags": "Tagovi uklonjeni.",
+  "RoomLogoChanged": "Ikona promenjena",
+  "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> prostorija je kreirana",
+  "RoomRenamed": "Prostorija <1>«{{oldRoomTitle}}»</1> preimenovana na <2>«{{roomTitle}}»</2>",
+  "RoomArchived": "Soba arhivirana",
+  "RoomToArchiveMove": "Soba premeštena u {{sectionName}}",
+  "RoomFromArchiveRestore": "Soba oporavljena iz {{sectionName}}",
+  "RoomChangeOwner": "Vlasnik sobe je promenjen."
 }

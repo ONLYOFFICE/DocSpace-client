@@ -196,3 +196,25 @@
   color: var(--info-panel-subtitle-color);
   font-size: 13px;
 }
+
+.historyChangeOwner {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+
+  :global(.name) {
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 600;
+  }
+
+  :global(.arrow) {
+    flex-shrink: 0;
+    width: 12px;
+    height: 12px;
+    transform: rotate(-90deg);
+  }
+}

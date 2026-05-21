@@ -98,6 +98,8 @@ import { useDocsFrameBridge } from "../../_hooks/useDocsFrameBridge";
 import DropZone from "../drop-zone";
 import DeleteDialog from "../delete-dialog";
 import RenameDialog from "../rename-dialog";
+import UploadPanel from "../upload-panel";
+import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
 import {
   InfoPanelBody as DocsInfoPanelBody,
   InfoPanelHeader as DocsInfoPanelHeader,
@@ -168,6 +170,8 @@ const DocsLayout = observer(
     });
 
     useDocsFrameBridge({ isReady: true, uploadFilesToFolder });
+
+    const uploadStore = useUploadStore();
 
     const {
       renameDialogVisible,
@@ -454,6 +458,18 @@ const DocsLayout = observer(
                         alert={operationProgress.alert}
                       />
                     )}
+                    {uploadStore.hasItems && (
+                      <FloatingButton
+                        icon="upload"
+                        percent={uploadStore.percent}
+                        completed={
+                          uploadStore.uploaded && uploadStore.errorsCount === 0
+                        }
+                        alert={uploadStore.errorsCount > 0}
+                        onClick={() => uploadStore.setPanelVisible(true)}
+                      />
+                    )}
+                    <UploadPanel />
                     <RenameDialog
                       visible={renameDialogVisible}
                       initialName={renameInitialName}

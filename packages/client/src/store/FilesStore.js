@@ -74,8 +74,16 @@ import {
   frameCallEvent,
   getCategoryType,
 } from "@docspace/shared/utils/common";
+import {
+  getCachedEncryptedFilename,
+  subscribeFilenameCache,
+} from "@docspace/shared/services/encryption/filename-cache";
+import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
+import { recoverEncryptedFilenames } from "@docspace/shared/services/private-room/encrypted-filename-recovery";
+import { backfillEncryptedFilesForRoomMembers } from "@docspace/shared/services/private-room/room-encryption";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { getI18n } from "react-i18next";
 import config from "PACKAGE_FILE";
 import {
   LOADER_TIMEOUT,
@@ -165,6 +173,9 @@ class FilesStore {
   indexingStore;
 
   pluginStore;
+
+  // MobX dependency for getFilesListItems so a cache write triggers re-render.
+  encryptedFilenameCacheVersion = 0;
 
   privateViewAs =
     !isDesktop() && storageViewAs !== "tile" ? "row" : storageViewAs || "table";
@@ -267,6 +278,8 @@ class FilesStore {
 
   thumbnails = new Set();
 
+  _backfilledEncryptedRooms = new Set();
+
   movingInProgress = false;
 
   createNewFilesQueue = new Queue({
@@ -319,6 +332,13 @@ class FilesStore {
     this.settingsStore = settingsStore;
     this.indexingStore = indexingStore;
     this.aiRoomStore = aiRoomStore;
+
+    // Singleton lifetime; never unsubscribed.
+    subscribeFilenameCache(() => {
+      runInAction(() => {
+        this.encryptedFilenameCacheVersion += 1;
+      });
+    });
 
     SocketHelper?.on(SocketEvents.ChangedQuotaUsedValue, (res) => {
       const { isFrame } = this.settingsStore;
@@ -1245,6 +1265,12 @@ class FilesStore {
       if (isDesktopClient) {
         requests.push(getIsEncryptionSupport(), getEncryptionKeys());
       }
+
+      if (this.userStore?.getEncryptionKeys) {
+        requests.push(
+          this.userStore.getEncryptionKeys().catch(() => {}),
+        );
+      }
     }
     requests.push(getFilesSettings());
 
@@ -1307,6 +1333,8 @@ class FilesStore {
     }
 
     this.files = files;
+
+    this.recoverEncryptedFilenamesForCurrentView();
 
     if (roomPartsToSub.length > 0) {
       SocketHelper?.emit(SocketCommands.Subscribe, {
@@ -1836,9 +1864,30 @@ class FilesStore {
           (data.current.roomType === RoomsType.PublicRoom ||
             data.current.roomType === RoomsType.FormRoom ||
             data.current.roomType === RoomsType.CustomRoom) &&
-          !this.publicRoomStore.isPublicRoom
+          !this.publicRoomStore.isPublicRoom &&
+          !data.current.private
         ) {
           await this.publicRoomStore.getExternalLinks(data.current.id);
+        }
+
+        if (data.current.private) {
+          const keys = this.userStore?.encryptionKeys;
+          if (!Array.isArray(keys) || keys.length === 0) {
+            toastr.warning(
+              getI18n().t("Common:EncryptionKeysNotConfigured"),
+            );
+          }
+
+          // The room id may differ from data.current.id when navigating into
+          // a sub-folder: pathParts[1] is the room, current is the sub-folder.
+          const resolvedRoomId =
+            data.pathParts?.[1]?.id ?? data.current.id;
+          // Backfill envelopes for members who registered their keypair after
+          // being invited (their old files are otherwise locked out).
+          this.maybeBackfillEncryptedRoom(
+            resolvedRoomId,
+            data.current.security,
+          );
         }
 
         if (
@@ -2717,6 +2766,7 @@ class FilesStore {
       isArchiveFolder,
       isRecentFolder,
       isFavoritesFolder,
+      isPrivacyFolder,
     } = this.treeFoldersStore;
     const { security } = this.selectedFolderStore;
 
@@ -3048,13 +3098,58 @@ class FilesStore {
 
       if (isEncrypted) {
         fileOptions = removeOptions(fileOptions, [
-          "open",
           "link-for-room-members",
-          // "link-for-portal-users",
-          // "external-link",
+          "sharing-settings",
+          "copy-shared-link",
+          "manage-links",
+          "copy-general-link",
           "send-by-email",
+          "create-room",
+          "create-room-separator",
+          "ask-ai",
+          "separator6",
+          "make-form",
+          "submit-to-gallery",
+          "separator-SubmitToGallery",
+          "docu-sign",
+          "custom-filter",
+          "update-xlsx-data",
+          "vectorization",
+          "embedding-settings",
+          "convert",
+          "download-as",
           "mark-as-favorite",
+          "rename",
+          "edit-index",
+          "show-version-history",
         ]);
+
+        fileOptions.push("download-encrypted");
+
+        const userKeys = this.userStore?.encryptionKeys;
+        const hasEncryptionKeys =
+          Array.isArray(userKeys) && userKeys.length > 0;
+
+        if (!hasEncryptionKeys) {
+          fileOptions = removeOptions(fileOptions, [
+            "fill-form",
+            "edit",
+            "open-pdf",
+            "edit-pdf",
+            "pdf-view",
+            "preview",
+            "view",
+            "download",
+            "filling-status",
+            "start-filling",
+            "reset-and-start-filling",
+            "separate-stop-filling",
+            "stop-filling",
+            "block-unblock-version",
+            "version",
+            "finalize-version",
+          ]);
+        }
       }
 
       // if (isFavoritesFolder || isRecentFolder) {
@@ -3135,19 +3230,6 @@ class FilesStore {
       if (this.publicRoomStore.isPublicRoom || !canEmbed) {
         fileOptions = removeOptions(fileOptions, ["embedding-settings"]);
       }
-
-      // if (isPrivacyFolder) {
-      //   fileOptions = removeOptions(fileOptions, [
-      //     "preview",
-      //     "view",
-      //     "separator0",
-      //     "download-as",
-      //   ]);
-
-      //   // if (!isDesktopClient) {
-      //   //   fileOptions = removeOptions(fileOptions, ["sharing-settings"]);
-      //   // }
-      // }
 
       fileOptions = removeSeparator(fileOptions);
 
@@ -3268,7 +3350,9 @@ class FilesStore {
       return agentOptions;
     }
     if (isRoom) {
-      const canInviteUserInRoom = item.security?.EditAccess;
+      const canInviteUserInRoom = item.private
+        ? item.security?.EditRoom
+        : item.security?.EditAccess;
       const canRemoveRoom = item.security?.Delete;
 
       const canArchiveRoom = item.security?.Move;
@@ -3311,6 +3395,7 @@ class FilesStore {
         "separator1",
         "duplicate-room",
         "download",
+        "download-encrypted",
         "change-room-owner",
         "archive-room",
         "unarchive-room",
@@ -3318,6 +3403,10 @@ class FilesStore {
         "delete",
         "remove-shared-room",
       ];
+
+      if (!item.private) {
+        roomOptions = removeOptions(roomOptions, ["download-encrypted"]);
+      }
 
       if (!item.external) {
         roomOptions = removeOptions(roomOptions, ["remove-shared-room"]);
@@ -3336,6 +3425,20 @@ class FilesStore {
 
       if (!isPublicRoomType || this.publicRoomStore.isPublicRoom) {
         roomOptions = removeOptions(roomOptions, ["external-link"]);
+      }
+
+      if (item.private) {
+        roomOptions = removeOptions(roomOptions, [
+          "external-link",
+          "link-for-room-members",
+          "embedding-settings",
+          "edit-index",
+          "export-room-index",
+          "short-tour",
+          "save-as-template",
+          "duplicate-room",
+          "download",
+        ]);
       }
 
       if (!canEditRoom) {
@@ -3551,11 +3654,20 @@ class FilesStore {
     //   ]);
     // }
 
-    // if (isPrivacyFolder) {
-    //   folderOptions = removeOptions(folderOptions, [
-    //     // "sharing-settings",
-    //   ]);
-    // }
+    if (isPrivacyFolder || item.private) {
+      folderOptions = removeOptions(folderOptions, [
+        "sharing-settings",
+        "copy-shared-link",
+        "manage-links",
+        "link-for-room-members",
+        "create-room-separator",
+        "create-room",
+        "mark-as-favorite",
+        "remove-from-favorites",
+        "edit-index",
+        "rename",
+      ]);
+    }
 
     if (isRecycleBinFolder) {
       folderOptions = removeOptions(folderOptions, [
@@ -3854,6 +3966,89 @@ class FilesStore {
       .then((file) => this.setFile(file));
   };
 
+  recoverEncryptedFilenamesForCurrentView = () => {
+    const userId = this.userStore?.user?.id;
+    if (!userId) return;
+    const identity = SecretStorage.getCached(String(userId));
+    if (!identity) return;
+    const candidates = (this.files ?? [])
+      .filter((f) => f.encrypted && f.id && f.viewUrl)
+      .map((f) => ({ id: f.id, viewUrl: f.viewUrl }));
+    if (candidates.length === 0) return;
+    const roomId =
+      this.selectedFolderStore.navigationPath.find((r) => r.isRoom)?.id ??
+      (this.selectedFolderStore.isRoom ? this.selectedFolderStore.id : null);
+    if (!roomId) return;
+    void recoverEncryptedFilenames(
+      candidates,
+      String(userId),
+      identity,
+      roomId,
+    );
+  };
+
+  maybeBackfillEncryptedRoom = (roomId, security) => {
+    if (!roomId) return;
+    // Only room managers/admins backfill — they're the likely "inviter" with
+    // unwrap access. Regular members may not even have the DEK to re-share.
+    if (!security?.EditRoom) {
+      console.info(
+        "[ENCRYPTION] Backfill skipped for room",
+        roomId,
+        "— no EditRoom permission",
+      );
+      return;
+    }
+
+    if (this._backfilledEncryptedRooms.has(roomId)) return;
+
+    const userId = this.userStore?.user?.id;
+    if (!userId) return;
+
+    const identity = SecretStorage.getCached(String(userId));
+    if (!identity) {
+      console.info(
+        "[ENCRYPTION] Backfill skipped for room",
+        roomId,
+        "— identity not unlocked yet (will retry on next entry)",
+      );
+      return;
+    }
+
+    this._backfilledEncryptedRooms.add(roomId);
+    console.info("[ENCRYPTION] Starting backfill sweep for room", roomId);
+
+    void backfillEncryptedFilesForRoomMembers(roomId, {
+      currentUserId: String(userId),
+      identity,
+      // Background sweep: don't surprise the user with a TOFU prompt.
+      // Mismatches are skipped silently and re-considered next session.
+      onKeyChange: async () => "refuse",
+    })
+      .then(({ fileResults, skippedMembers }) => {
+        const wrappedFiles = fileResults.filter((r) => r.success).length;
+        const failedFiles = fileResults.filter((r) => !r.success).length;
+        console.info(
+          "[ENCRYPTION] Backfill done for room",
+          roomId,
+          "— files processed:",
+          wrappedFiles,
+          "failed:",
+          failedFiles,
+          "skipped members:",
+          skippedMembers.length,
+        );
+      })
+      .catch((error) => {
+        this._backfilledEncryptedRooms.delete(roomId);
+        console.error(
+          "[ENCRYPTION] Backfill failed for room",
+          roomId,
+          error,
+        );
+      });
+  };
+
   renameFolder = (folderId, title) => {
     return api.files.renameFolder(folderId, title).then((folder) => {
       this.setFolder(folder);
@@ -4079,6 +4274,7 @@ class FilesStore {
         id,
         logo,
         locked,
+        private: isPrivateRoom,
         originId,
         originFolderId,
         originRoomId,
@@ -4252,6 +4448,11 @@ class FilesStore {
 
       const isForm = fileExst === ".oform";
 
+      // `void` registers the MobX dep — background cache writes re-render.
+      void this.encryptedFilenameCacheVersion;
+      const displayTitle =
+        encrypted && id ? getCachedEncryptedFilename(id) || title : title;
+
       return {
         access,
         daysRemaining: autoDelete && getDaysRemaining(autoDelete),
@@ -4273,6 +4474,7 @@ class FilesStore {
         defaultRoomIcon,
         id,
         isFolder,
+        isPrivateRoom: !!isPrivateRoom,
         logo,
         locked,
         lockedBy,
@@ -4284,7 +4486,7 @@ class FilesStore {
         rootFolderId,
         // selectedItem,
         shared,
-        title,
+        title: displayTitle,
         updated,
         updatedBy,
         version,

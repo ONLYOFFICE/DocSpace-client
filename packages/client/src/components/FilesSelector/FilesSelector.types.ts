@@ -103,6 +103,12 @@ export type FilesSelectorProps = TSelectorHeader & {
 	setSelected: (selected: "close" | "none", clearBuffer?: boolean) => void;
 	setConflictDialogData: (conflicts: unknown, operationData: unknown) => void;
 	itemOperationToFolder: (operationData: unknown) => Promise<void>;
+	copyEncryptedFilesToFolder: (
+		items: TFile[],
+		destFolderId: string | number,
+		destInfo: { private?: boolean; rootFolderId?: number; roomType?: number },
+	) => Promise<void>;
+	sourceIsPrivate?: boolean;
 	clearActiveOperations: (
 		folderIds: string[] | number[],
 		fileIds: string[] | number[],

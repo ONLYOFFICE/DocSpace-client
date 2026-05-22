@@ -1,5 +1,5 @@
 import { TTranslation } from "../../types";
-import { RoomsType } from "../../enums";
+import { RoomsType, RoomsTypePrivate } from "../../enums";
 
 export const getRoomTypeTitleTranslation = (
   t: TTranslation,
@@ -21,6 +21,8 @@ export const getRoomTypeTitleTranslation = (
       return t("Common:PublicRoom");
     case RoomsType.FormRoom:
       return t("Common:FormFilingRoomTitle");
+    case RoomsTypePrivate:
+      return t("Common:PrivateRoomTitle");
     default:
       return "";
   }
@@ -46,6 +48,8 @@ export const getRoomTypeDescriptionTranslation = (
       return t("Common:PublicRoomInfo");
     case RoomsType.FormRoom:
       return t("Common:FormFilingRoomInfo");
+    case RoomsTypePrivate:
+      return t("Common:PrivateRoomDescription");
     default:
       return "";
   }

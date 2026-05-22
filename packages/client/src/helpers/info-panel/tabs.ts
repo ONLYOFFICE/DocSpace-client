@@ -128,12 +128,17 @@ export function getAvailableInfoPanelTabs({
 
   const tabs: InfoPanelViewType[] = [];
 
+  const isPrivateItem =
+    ("private" in selection && selection.private === true) ||
+    ("encrypted" in selection && selection.encrypted === true);
+
   if (useRoomsView) {
     tabs.push(InfoPanelView.infoMembers);
   } else if (
     "canShare" in selection &&
     selection.canShare &&
-    !isRoomUtil(selection)
+    !isRoomUtil(selection) &&
+    !isPrivateItem
   ) {
     tabs.push(InfoPanelView.infoShare);
   }

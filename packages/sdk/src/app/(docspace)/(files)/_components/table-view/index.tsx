@@ -67,6 +67,7 @@ const TableView = ({
   displayFileExtension,
   fetchMoreFiles,
   currentUserId,
+  infoPanelVisible,
 }: TableViewProps) => {
   const { t } = useTranslation(["Common", "Files"]);
   const isSSR = useIsServer();
@@ -192,6 +193,7 @@ const TableView = ({
         sortingVisible
         showSettings
         settingsTitle={t("Files:TableSettingsTitle")}
+        infoPanelVisible={infoPanelVisible}
       />
       <TableBody
         columnStorageName={COLUMN_STORAGE_NAME}
@@ -202,6 +204,7 @@ const TableView = ({
         itemCount={total}
         itemHeight={48}
         useReactWindow={!isSSR}
+        infoPanelVisible={infoPanelVisible}
       >
         {items.map((item, index) => (
           <TableViewRow

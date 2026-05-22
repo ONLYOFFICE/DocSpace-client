@@ -263,7 +263,7 @@ const Badges = ({
   const getTooltipContent = () => (
     <>
       <Text fontSize="12px" fontWeight={400} noSelect>
-        {t("CustomFilterEnableDiscription")}
+        {t("Common:CustomFilterEnableDiscription")}
       </Text>
       {customFilterExternalLink ? (
         <Link
@@ -639,3 +639,4 @@ const Badges = ({
 };
 
 export default React.memo(Badges, equal);
+

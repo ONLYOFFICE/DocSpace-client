@@ -49,7 +49,13 @@ import {
   ShareAccessRights,
   RoomsType,
 } from "@docspace/shared/enums";
-import { LOADER_TIMEOUT } from "@docspace/shared/constants";
+import { LOADER_TIMEOUT, OPERATIONS_NAME } from "@docspace/shared/constants";
+import uniqueid from "lodash/uniqueId";
+import {
+  addMembersToEncryptedRoom,
+  backfillEncryptedFilesForRoomMembers,
+} from "@docspace/shared/services/private-room/room-encryption";
+import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 
 import { Button } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -115,6 +121,7 @@ const InvitePanel = ({
   hasGuests,
   culture,
   currentUserId,
+  setSecondaryProgressBarData,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
     roomId !== -1,
@@ -268,8 +275,12 @@ const InvitePanel = ({
   }, [allowInvitingGuests]);
 
   useEffect(() => {
+    if (selectedRoom?.private) {
+      setShowGuestsTab(false);
+      return;
+    }
     if (typeof hasGuests === "boolean") setShowGuestsTab(hasGuests);
-  }, [hasGuests]);
+  }, [hasGuests, selectedRoom?.private]);
 
   useEffect(() => {
     if (roomId === -1) {
@@ -426,6 +437,27 @@ const InvitePanel = ({
     try {
       setIsLoading(true);
       const isRooms = roomId !== -1;
+      const isPrivateInvite = isRooms && !!selectedRoom?.private;
+
+      const newMembers = isPrivateInvite
+        ? inviteItems
+            .filter((item) => item.id && !item.isGroup)
+            .map((item) => ({
+              id: item.id,
+              displayName: item.displayName || item.email,
+            }))
+        : [];
+
+      let identity = null;
+      if (isPrivateInvite && newMembers.length > 0) {
+        identity = await requireUnlock(String(currentUserId));
+        if (!identity) {
+          setIsLoading(false);
+          toastr.error(t("Common:EncryptionLockedAddMembers"));
+          return;
+        }
+      }
+
       const result = !isRooms
         ? await api.people.inviteUsers(data)
         : await api.rooms.setRoomSecurity(roomId, data);
@@ -436,10 +468,115 @@ const InvitePanel = ({
       setIsLoading(false);
 
       onClose();
-      toastr.success(t("Common:UsersInvited"));
+
+      if (!isPrivateInvite) {
+        toastr.success(t("Common:UsersInvited"));
+      }
 
       if (result?.warning) {
         toastr.warning(result?.warning);
+      }
+
+      if (isPrivateInvite && identity && newMembers.length > 0) {
+        const operationId = uniqueid("operation_");
+
+        setSecondaryProgressBarData({
+          operation: OPERATIONS_NAME.roomReencryption,
+          percent: 0,
+          operationId,
+        });
+
+        addMembersToEncryptedRoom(roomId, newMembers, {
+          currentUserId: String(currentUserId),
+          identity,
+          onProgress: (processed, total) => {
+            const percent = Math.floor((processed / total) * 100);
+            setSecondaryProgressBarData({
+              operation: OPERATIONS_NAME.roomReencryption,
+              percent,
+              operationId,
+            });
+          },
+        })
+          .then(({ fileResults, skippedMembers }) => {
+            const failures = fileResults.filter((r) => !r.success);
+            const hasAlert =
+              failures.length > 0 || skippedMembers.length > 0;
+            setSecondaryProgressBarData({
+              operation: OPERATIONS_NAME.roomReencryption,
+              percent: 100,
+              completed: true,
+              alert: hasAlert,
+              operationId,
+            });
+
+            if (skippedMembers.length > 0) {
+              const formatName = (m) =>
+                m.displayName ||
+                newMembers.find((n) => n.id === m.id)?.displayName ||
+                m.id;
+              const noKeyNames = skippedMembers
+                .filter((m) => m.reason === "no-key")
+                .map(formatName);
+              const mismatchNames = skippedMembers
+                .filter((m) => m.reason === "key-mismatch-refused")
+                .map(formatName);
+              if (noKeyNames.length > 0) {
+                toastr.warning(
+                  t("Common:EncryptedSkippedNoKeys", {
+                    users: noKeyNames.join(", "),
+                  }),
+                );
+              }
+              if (mismatchNames.length > 0) {
+                toastr.warning(
+                  t("Common:EncryptedSkippedKeyMismatch", {
+                    users: mismatchNames.join(", "),
+                  }),
+                );
+              }
+            }
+
+            if (failures.length > 0) {
+              toastr.warning(
+                t("Common:EncryptedReencryptPartialFailure", {
+                  count: failures.length,
+                }),
+              );
+            } else if (skippedMembers.length === 0) {
+              toastr.success(t("Common:UsersInvited"));
+            }
+
+            // Silent follow-up: also re-wrap for any previously-invited
+            // members who registered their keypair after the fact (their old
+            // files would otherwise stay locked out indefinitely).
+            void backfillEncryptedFilesForRoomMembers(roomId, {
+              currentUserId: String(currentUserId),
+              identity,
+              onKeyChange: async () => "refuse",
+            }).catch((error) => {
+              console.error(
+                "[ENCRYPTION] Post-invite backfill failed:",
+                error,
+              );
+            });
+          })
+          .catch((error) => {
+            console.error(
+              "Failed to re-encrypt file keys for new members:",
+              error,
+            );
+            toastr.error(t("Common:EncryptedReencryptFailed"));
+            setSecondaryProgressBarData({
+              operation: OPERATIONS_NAME.roomReencryption,
+              percent: 100,
+              completed: true,
+              alert: true,
+              operationId,
+            });
+          });
+      } else if (isPrivateInvite) {
+        toastr.success(t("Common:UsersInvited"));
       }
 
       updateInfoPanelMembers();
@@ -704,28 +841,32 @@ const InvitePanel = ({
     }
   };
 
+  const isPrivateRoom = !!selectedRoom?.private;
+
   const bodyInvitePanel = useMemo(() => {
     return (
       <div style={{ display: "contents" }} ref={invitePanelBodyRef}>
-        <ExternalLinks
-          t={t}
-          shareLinks={shareLinks}
-          setShareLinks={setShareLinks}
-          getInfo={getInfo}
-          roomType={roomType}
-          onChangeExternalLinksVisible={onChangeExternalLinksVisible}
-          externalLinksVisible={externalLinksVisible}
-          setActiveLink={setActiveLink}
-          activeLink={activeLink}
-          isMobileView={isMobileView}
-          setLinkSettingsPanelVisible={setLinkSettingsPanelVisible}
-          onSelectAccess={onSelectAccess}
-          copyLink={copyLink}
-          editLink={editLink}
-          isLinksToggling={isLinksToggling}
-          setIsLinksToggling={setIsLinksToggling}
-          setInviteContactsLink={setInviteContactsLink}
-        />
+        {isPrivateRoom ? null : (
+          <ExternalLinks
+            t={t}
+            shareLinks={shareLinks}
+            setShareLinks={setShareLinks}
+            getInfo={getInfo}
+            roomType={roomType}
+            onChangeExternalLinksVisible={onChangeExternalLinksVisible}
+            externalLinksVisible={externalLinksVisible}
+            setActiveLink={setActiveLink}
+            activeLink={activeLink}
+            isMobileView={isMobileView}
+            setLinkSettingsPanelVisible={setLinkSettingsPanelVisible}
+            onSelectAccess={onSelectAccess}
+            copyLink={copyLink}
+            editLink={editLink}
+            isLinksToggling={isLinksToggling}
+            setIsLinksToggling={setIsLinksToggling}
+            setInviteContactsLink={setInviteContactsLink}
+          />
+        )}
 
         <InviteInput
           t={t}
@@ -740,6 +881,7 @@ const InvitePanel = ({
           setInputValue={setInputValue}
           usersList={usersList}
           setUsersList={setUsersList}
+          isPrivateRoom={isPrivateRoom}
         />
         {hasInvitedUsers ? (
           <ItemsList
@@ -768,6 +910,7 @@ const InvitePanel = ({
     hasInvitedUsers,
     invitePanelBodyRef,
     setInviteContactsLink,
+    isPrivateRoom,
   ]);
 
   const closeUsersPanel = () => {
@@ -891,7 +1034,7 @@ const InvitePanel = ({
             onAccessRightsChange={() => {}}
             isMultiSelect
             disableDisabledUsers
-            withGroups
+            withGroups={!isPrivateRoom}
             roomId={roomId}
             isAgent={roomType === RoomsType.AIRoom}
             disableInvitedUsers={invitedUsersArray}
@@ -1016,6 +1159,7 @@ export default inject(
     currentQuotaStore,
     userStore,
     peopleStore,
+    uploadDataStore,
   }) => {
     const { theme, standalone, allowInvitingGuests, checkGuests, hasGuests } =
       settingsStore;
@@ -1069,6 +1213,8 @@ export default inject(
       hasGuests,
       culture,
       currentUserId: userStore.user.id,
+      setSecondaryProgressBarData:
+        uploadDataStore.secondaryProgressDataStore.setSecondaryProgressBarData,
     };
   },
 )(

@@ -127,6 +127,7 @@ const FilesTableRow = memo((props) => {
       icon={item.icon}
       fileExst={item.fileExst}
       isRoom={item.isRoom}
+      isPrivateRoom={item.isPrivateRoom}
       title={item.title}
       showDefault={
         !(!!item?.logo?.cover || !!item?.logo?.medium) ? item.isRoom : null
@@ -136,6 +137,7 @@ const FilesTableRow = memo((props) => {
       isArchive={item.isArchive}
       isTemplate={item.isTemplate}
       badgeUrl={badgeUrl}
+      encrypted={item.encrypted}
       className={classNames({
         "icon-with-index-column": isIndexing,
       })}

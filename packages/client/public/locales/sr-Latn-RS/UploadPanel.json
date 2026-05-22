@@ -1,6 +1,10 @@
 {
   "HideInput": "Sakrij",
+  "QuotaExceededDuringUpload": "<0>{{uploaded}} od {{total}}</0> otpremljeno. Prekoračena kvota za skladištenje — <1>pogledajte detalje</1>.",
+  "QuotaExceededTooltip": "Prekoračena kvota za skladištenje. Oslobodite prostor ili nadogradite plan, pa pokušajte ponovo.",
   "Ready": "Gotovo",
+  "RetryAfterQuotaUpgrade": "Ponovi nakon nadogradnje kvote",
+  "RetryUpload": "Ponovi",
   "UploadingAndConversion": "Otpremanje i konverzija",
   "UploadingError": "Greška prilikom otpremanja"
 }

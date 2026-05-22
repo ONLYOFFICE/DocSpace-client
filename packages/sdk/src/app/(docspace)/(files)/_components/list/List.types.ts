@@ -51,4 +51,5 @@ export type ListProps = {
   currentUserId?: string;
 
   shareKey?: string;
+  infoPanelVisible?: boolean;
 };

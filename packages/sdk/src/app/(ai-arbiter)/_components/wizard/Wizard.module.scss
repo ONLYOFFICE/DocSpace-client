@@ -42,14 +42,14 @@
 }
 
 .bootstrapText {
-  color: var(--text-secondary-color);
+  color: var(--text-disable-color);
 }
 
 .spinner {
   width: 40px;
   height: 40px;
-  border: 3px solid var(--border-color);
-  border-top-color: var(--accent-color);
+  border: 3px solid var(--dialogs-border-color);
+  border-top-color: var(--main-button-background-color);
   border-radius: 50%;
   animation: spin 0.9s linear infinite;
 }
@@ -77,7 +77,7 @@
 }
 
 .chatPlaceholder {
-  color: var(--text-color-2);
+  color: var(--text-disable-color);
   font-style: italic;
   padding: 16px;
   text-align: center;
@@ -88,7 +88,7 @@
   max-width: 78%;
   padding: 10px 14px;
   border-radius: 16px 16px 4px 16px;
-  background: color-mix(in srgb, var(--accent-color) 12%, transparent);
+  background: color-mix(in srgb, var(--main-button-background-color) 12%, transparent);
   color: var(--text-color);
   font-size: 14px;
   line-height: 1.5;
@@ -111,7 +111,7 @@
 .bubbleError {
   margin-top: 6px;
   font-size: 12px;
-  color: var(--danger-color);
+  color: var(--input-error-color);
 }
 
 .caret {
@@ -134,9 +134,9 @@
   align-self: stretch;
   max-width: 100%;
   padding: 14px 16px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--dialogs-border-color);
   border-radius: 12px;
-  background: color-mix(in srgb, var(--accent-color) 4%, transparent);
+  background: color-mix(in srgb, var(--main-button-background-color) 4%, transparent);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -158,7 +158,7 @@
 
 .preparingStage {
   font-size: 12px;
-  color: var(--text-color-2);
+  color: var(--text-disable-color);
   white-space: nowrap;
 }
 
@@ -166,7 +166,7 @@
   position: relative;
   height: 4px;
   border-radius: 2px;
-  background: color-mix(in srgb, var(--accent-color) 14%, transparent);
+  background: color-mix(in srgb, var(--main-button-background-color) 14%, transparent);
   overflow: hidden;
 }
 
@@ -179,7 +179,7 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    var(--accent-color) 50%,
+    var(--main-button-background-color) 50%,
     transparent 100%
   );
   animation: preparing-slide 1.4s ease-in-out infinite;
@@ -204,7 +204,7 @@
 }
 
 .chip {
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--dialogs-border-color);
   background: transparent;
   color: var(--text-color);
   border-radius: 16px;
@@ -218,13 +218,13 @@
     color 0.15s;
 
   &:hover {
-    border-color: var(--accent-color);
-    background: color-mix(in srgb, var(--accent-color) 8%, transparent);
-    color: var(--accent-color);
+    border-color: var(--main-button-background-color);
+    background: color-mix(in srgb, var(--main-button-background-color) 8%, transparent);
+    color: var(--main-button-background-color);
   }
 
   &:focus-visible {
-    outline: 2px solid var(--accent-color);
+    outline: 2px solid var(--main-button-background-color);
     outline-offset: 2px;
   }
 }
@@ -232,13 +232,13 @@
 .chatInputRow {
   position: relative;
   flex: 0 0 auto;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--dialogs-border-color);
   border-radius: 12px;
   background: var(--input-bg);
   transition: border-color 0.15s;
 
   &:focus-within {
-    border-color: var(--accent-color);
+    border-color: var(--main-button-background-color);
   }
 }
 
@@ -257,7 +257,7 @@
   box-sizing: border-box;
 
   &::placeholder {
-    color: var(--text-muted);
+    color: var(--text-disable-color);
   }
 
   &:disabled {
@@ -290,18 +290,18 @@
 }
 
 .chatSendBtn {
-  background: var(--accent-color);
+  background: var(--main-button-background-color);
 
   &:hover:not(:disabled) {
-    background: var(--accent-hover);
+    background: var(--main-button-background-color);
   }
 }
 
 .chatStopBtn {
-  background: var(--danger-color);
+  background: var(--input-error-color);
 
   &:hover {
-    background: var(--danger-hover);
+    background: var(--input-error-color);
   }
 }
 
@@ -310,17 +310,21 @@
 }
 
 .previewIntro {
-  margin-bottom: 14px;
+  margin: 0 0 14px;
   font-size: 14px;
   line-height: 1.5;
+}
+
+.previewScroll {
+  margin-bottom: 14px;
 }
 
 .previewList {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin: 0 0 14px;
-  padding: 0;
+  margin: 0;
+  padding: 4px;
   list-style: none;
 }
 
@@ -330,9 +334,9 @@
   justify-content: space-between;
   gap: 12px;
   padding: 10px 12px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--dialogs-border-color);
   border-radius: 8px;
-  background: var(--card-bg);
+  background: var(--input-bg);
 }
 
 .previewItemBody {
@@ -353,8 +357,8 @@
 }
 
 .previewItemArbiter {
-  border-color: var(--arbiter-border);
-  background: var(--arbiter-bg);
+  border-color: var(--main-button-background-color);
+  background: var(--input-bg);
 }
 
 .previewItemTitle {
@@ -364,18 +368,18 @@
 
 .previewItemMeta {
   font-size: 12px;
-  color: var(--text-secondary-color);
+  color: var(--text-disable-color);
 }
 
 .previewFootnote {
   font-size: 12px;
-  color: var(--text-secondary-color);
+  color: var(--text-disable-color);
 }
 
 .previewModelLabel {
   font-size: 11px;
   font-weight: 400;
-  color: var(--text-color-3);
+  color: var(--text-disable-color);
   letter-spacing: 0.02em;
 }
 
@@ -410,7 +414,7 @@
   border-radius: 6px;
 
   &[data-status="active"] {
-    background: var(--hover-bg);
+    background: var(--selector-item-hover-background);
   }
 }
 
@@ -421,19 +425,19 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: var(--badge-bg);
-  color: var(--text-secondary-color);
+  background: var(--input-bg);
+  color: var(--text-disable-color);
   font-weight: 700;
   font-size: 12px;
   flex-shrink: 0;
 
   [data-status="done"] & {
-    background: var(--success-color);
+    background: var(--status-icon-color-positive);
     color: white;
   }
 
   [data-status="active"] & {
-    background: var(--accent-color);
+    background: var(--main-button-background-color);
     color: white;
     animation: pulse 1s ease-in-out infinite;
   }
@@ -472,11 +476,11 @@
   color: white;
 
   &[data-status="success"] {
-    background: var(--success-color);
+    background: var(--status-icon-color-positive);
   }
 
   &[data-status="error"] {
-    background: var(--danger-color);
+    background: var(--input-error-color);
   }
 }
 
@@ -486,5 +490,5 @@
 
 .statusError {
   font-size: 13px;
-  color: var(--danger-color);
+  color: var(--input-error-color);
 }

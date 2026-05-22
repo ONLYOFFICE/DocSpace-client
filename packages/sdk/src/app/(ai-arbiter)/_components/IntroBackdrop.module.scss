@@ -46,7 +46,7 @@
   background:
     radial-gradient(
       circle at 50% 30%,
-      color-mix(in srgb, var(--accent-color) 8%, transparent),
+      color-mix(in srgb, var(--main-button-background-color) 8%, transparent),
       transparent 60%
     ),
     var(--background-color);
@@ -73,7 +73,7 @@
   max-width: 520px;
   font-size: 14px;
   line-height: 1.5;
-  color: var(--text-color-2);
+  color: var(--text-disable-color);
   margin: 0;
 }
 
@@ -82,7 +82,7 @@
   padding: 10px 24px;
   border: none;
   border-radius: 8px;
-  background: var(--accent-color);
+  background: var(--main-button-background-color);
   color: white;
   font-size: 13px;
   font-weight: 600;
@@ -90,11 +90,11 @@
   transition: background 0.15s;
 
   &:hover {
-    background: var(--accent-hover);
+    background: var(--main-button-background-color);
   }
 
   &:focus-visible {
-    outline: 2px solid var(--accent-color);
+    outline: 2px solid var(--main-button-background-color);
     outline-offset: 2px;
   }
 }

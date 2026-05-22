@@ -46,6 +46,7 @@ import {
   type TOption,
 } from "@docspace/ui-kit/components/combobox";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
@@ -441,7 +442,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
           size={ComboBoxSize.base}
           scaled
           scaledOptions
-          isDefaultMode={false}
+          directionY="both"
           displaySelectedOption
         />
       );
@@ -456,42 +457,52 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
           <strong>{pendingConfig.domain}</strong>.
         </Text>
 
-        <ul className={styles.previewList}>
-          {pendingConfig.experts.map((e, i) => (
-            <li key={e.role_title} className={styles.previewItem}>
+        <Scrollbar
+          className={styles.previewScroll}
+          style={{ maxHeight: "calc(70vh - 200px)" }}
+          translateContentSizeYToHolder
+          paddingInlineEnd="0"
+          autoHide
+        >
+          <ul className={styles.previewList}>
+            {pendingConfig.experts.map((e, i) => (
+              <li key={e.role_title} className={styles.previewItem}>
+                <div className={styles.previewItemBody}>
+                  <span className={styles.previewItemTitle}>
+                    {e.role_title}
+                  </span>
+                  <span className={styles.previewItemMeta}>
+                    {e.domain_expertise.slice(0, 3).join(" • ")}
+                  </span>
+                </div>
+                <div className={styles.previewItemModel}>
+                  <span className={styles.previewModelLabel}>Model</span>
+                  {renderModelControl(expertModelIds[i] ?? "", (v) =>
+                    setExpertModelIds((prev) => {
+                      const next = [...prev];
+                      next[i] = v;
+                      return next;
+                    }),
+                  )}
+                </div>
+              </li>
+            ))}
+            <li
+              className={`${styles.previewItem} ${styles.previewItemArbiter}`}
+            >
               <div className={styles.previewItemBody}>
-                <span className={styles.previewItemTitle}>{e.role_title}</span>
+                <span className={styles.previewItemTitle}>Arbiter</span>
                 <span className={styles.previewItemMeta}>
-                  {e.domain_expertise.slice(0, 3).join(" • ")}
+                  Synthesizes expert answers
                 </span>
               </div>
               <div className={styles.previewItemModel}>
                 <span className={styles.previewModelLabel}>Model</span>
-                {renderModelControl(expertModelIds[i] ?? "", (v) =>
-                  setExpertModelIds((prev) => {
-                    const next = [...prev];
-                    next[i] = v;
-                    return next;
-                  }),
-                )}
+                {renderModelControl(arbiterModelId, setArbiterModelId)}
               </div>
             </li>
-          ))}
-          <li
-            className={`${styles.previewItem} ${styles.previewItemArbiter}`}
-          >
-            <div className={styles.previewItemBody}>
-              <span className={styles.previewItemTitle}>Arbiter</span>
-              <span className={styles.previewItemMeta}>
-                Synthesizes expert answers
-              </span>
-            </div>
-            <div className={styles.previewItemModel}>
-              <span className={styles.previewModelLabel}>Model</span>
-              {renderModelControl(arbiterModelId, setArbiterModelId)}
-            </div>
-          </li>
-        </ul>
+          </ul>
+        </Scrollbar>
       </div>
     );
   };

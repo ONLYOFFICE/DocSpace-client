@@ -40,7 +40,7 @@
   height: 100%;
   overflow: hidden;
   background: var(--background-color);
-  font-family: var(--font-family-base, system-ui, sans-serif);
+  font-family: var(--font-family);
   font-size: 13px;
   color: var(--text-color);
 }
@@ -55,9 +55,9 @@
   gap: 6px;
   padding: 6px 12px;
   border-radius: 16px;
-  border: 1px solid var(--border-color);
-  background: var(--card-bg);
-  color: var(--text-color-2);
+  border: 1px solid var(--dialogs-border-color);
+  background: var(--input-bg);
+  color: var(--text-disable-color);
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
@@ -69,11 +69,11 @@
 
   &:hover {
     color: var(--text-color);
-    border-color: var(--accent-color);
+    border-color: var(--main-button-background-color);
   }
 
   &:focus-visible {
-    outline: 2px solid var(--accent-color);
+    outline: 2px solid var(--main-button-background-color);
     outline-offset: 2px;
   }
 }
@@ -81,7 +81,7 @@
 .inputArea {
   flex: 0 0 auto;
   padding: 16px 20px 12px;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--dialogs-border-color);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -96,7 +96,7 @@
 .textarea {
   flex: 1;
   resize: none;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--dialogs-border-color);
   border-radius: 6px;
   padding: 10px 12px;
   font-family: inherit;
@@ -111,11 +111,11 @@
   transition: border-color 0.15s;
 
   &:focus {
-    border-color: var(--accent-color);
+    border-color: var(--main-button-background-color);
   }
 
   &::placeholder {
-    color: var(--text-muted);
+    color: var(--text-disable-color);
   }
 }
 
@@ -125,7 +125,7 @@
   padding: 0 16px;
   border-radius: 6px;
   border: none;
-  background: var(--accent-color);
+  background: var(--main-button-background-color);
   color: white;
   font-size: 13px;
   font-weight: 600;
@@ -134,7 +134,7 @@
   transition: background 0.15s, opacity 0.15s;
 
   &:hover:not(:disabled) {
-    background: var(--accent-hover);
+    background: var(--main-button-background-color);
   }
 
   &:disabled {
@@ -145,10 +145,10 @@
 
 .stopBtn {
   composes: runBtn;
-  background: var(--danger-color);
+  background: var(--input-error-color);
 
   &:hover:not(:disabled) {
-    background: var(--danger-hover);
+    background: var(--input-error-color);
   }
 }
 
@@ -165,10 +165,10 @@
   gap: 4px;
   padding: 3px 8px 3px 6px;
   border-radius: 12px;
-  background: var(--chip-bg);
-  color: var(--chip-color);
+  background: var(--input-bg);
+  color: var(--main-button-background-color);
   font-size: 12px;
-  border: 1px solid var(--chip-border);
+  border: 1px solid var(--dialogs-border-color);
 }
 
 .fileChipRemove {
@@ -188,7 +188,7 @@
 
 .statusText {
   font-size: 12px;
-  color: var(--text-muted);
+  color: var(--text-disable-color);
   margin-left: auto;
 }
 
@@ -198,14 +198,14 @@
   gap: 8px;
   flex-wrap: wrap;
   padding: 10px 20px;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--dialogs-border-color);
   align-items: center;
 }
 
 .pickerLabel {
   font-size: 12px;
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--text-disable-color);
   text-transform: uppercase;
   letter-spacing: 0.04em;
   white-space: nowrap;
@@ -217,17 +217,17 @@
   gap: 6px;
   padding: 4px 8px 4px 10px;
   border-radius: 14px;
-  background: var(--tag-bg);
+  background: var(--input-bg);
   font-size: 12px;
-  border: 1px solid var(--tag-border);
+  border: 1px solid var(--dialogs-border-color);
   cursor: default;
 }
 
 .agentTagArbiter {
   composes: agentTag;
-  background: var(--arbiter-bg);
-  border-color: var(--arbiter-border);
-  color: var(--arbiter-color);
+  background: var(--input-bg);
+  border-color: var(--main-button-background-color);
+  color: var(--main-button-background-color);
 }
 
 .agentTagRemove {
@@ -236,11 +236,11 @@
   background: transparent;
   padding: 0;
   cursor: pointer;
-  color: var(--text-muted);
+  color: var(--text-disable-color);
   line-height: 1;
 
   &:hover {
-    color: var(--danger-color);
+    color: var(--input-error-color);
   }
 }
 
@@ -250,16 +250,16 @@
   gap: 4px;
   padding: 4px 10px;
   border-radius: 14px;
-  border: 1px dashed var(--border-color);
+  border: 1px dashed var(--dialogs-border-color);
   background: transparent;
   font-size: 12px;
   cursor: pointer;
-  color: var(--text-muted);
+  color: var(--text-disable-color);
   transition: border-color 0.15s, color 0.15s;
 
   &:hover {
-    border-color: var(--accent-color);
-    color: var(--accent-color);
+    border-color: var(--main-button-background-color);
+    color: var(--main-button-background-color);
   }
 }
 
@@ -272,8 +272,8 @@
   top: calc(100% + 4px);
   left: 0;
   min-width: 240px;
-  background: var(--dropdown-bg);
-  border: 1px solid var(--border-color);
+  background: var(--input-bg);
+  border: 1px solid var(--dialogs-border-color);
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   z-index: 100;
@@ -290,7 +290,7 @@
   transition: background 0.1s;
 
   &:hover:not(.dropdownItemDisabled) {
-    background: var(--hover-bg);
+    background: var(--selector-item-hover-background);
   }
 }
 
@@ -302,8 +302,8 @@
 .dropdownItemBadge {
   margin-left: auto;
   font-size: 11px;
-  color: var(--text-muted);
-  background: var(--badge-bg);
+  color: var(--text-disable-color);
+  background: var(--input-bg);
   border-radius: 8px;
   padding: 1px 6px;
 }
@@ -339,29 +339,29 @@
 .emptyHint {
   padding: 48px 24px;
   text-align: center;
-  color: var(--text-muted);
+  color: var(--text-disable-color);
   font-size: 14px;
   line-height: 1.6;
 }
 
 .panel {
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--dialogs-border-color);
   border-radius: 10px;
   overflow: hidden;
-  background: var(--card-bg);
+  background: var(--input-bg);
   transition: box-shadow 0.15s;
 
   &[data-status="streaming"] {
-    border-color: var(--accent-color);
+    border-color: var(--main-button-background-color);
     box-shadow: 0 0 0 2px rgba(78, 157, 245, 0.15);
   }
 
   &[data-status="done"] {
-    border-color: var(--success-color);
+    border-color: var(--status-icon-color-positive);
   }
 
   &[data-status="error"] {
-    border-color: var(--danger-color);
+    border-color: var(--input-error-color);
   }
 
   &[data-status="aborted"] {
@@ -374,16 +374,16 @@
   align-items: center;
   gap: 8px;
   padding: 10px 12px;
-  background: var(--panel-header-bg);
-  border-bottom: 1px solid var(--border-color);
+  background: var(--input-bg);
+  border-bottom: 1px solid var(--dialogs-border-color);
   cursor: pointer;
   user-select: none;
 }
 
 .panelHeaderArbiter {
   composes: panelHeader;
-  background: var(--arbiter-header-bg);
-  border-color: var(--arbiter-border);
+  background: var(--input-bg);
+  border-color: var(--main-button-background-color);
   cursor: default;
 }
 
@@ -398,7 +398,7 @@
 
 .panelModel {
   font-size: 11px;
-  color: var(--text-muted);
+  color: var(--text-disable-color);
   white-space: nowrap;
 }
 
@@ -420,7 +420,7 @@
   }
 
   &[data-status="error"] {
-    background: white0f0;
+    background: var(--input-error-color);
     color: rgb(196, 61, 61);
   }
 
@@ -459,27 +459,27 @@
 
 .placeholderText {
   composes: streamingText;
-  color: var(--text-muted);
+  color: var(--text-disable-color);
 }
 
 .errorBox {
-  background: white0f0;
+  background: var(--input-error-color);
   border: 1px solid rgb(255, 206, 206);
   border-radius: 6px;
   padding: 10px 12px;
   font-size: 12px;
-  color: var(--danger-color);
+  color: var(--input-error-color);
 }
 
 .reasoningSection {
   margin-top: 10px;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--dialogs-border-color);
   padding-top: 8px;
 }
 
 .reasoningToggle {
   font-size: 12px;
-  color: var(--text-muted);
+  color: var(--text-disable-color);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -495,7 +495,7 @@
   white-space: pre-wrap;
   word-break: break-word;
   font-size: 12px;
-  color: var(--text-muted);
+  color: var(--text-disable-color);
   font-style: italic;
 }
 
@@ -504,7 +504,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--accent-color);
+  background: var(--main-button-background-color);
   animation: pulse 1s ease-in-out infinite;
 }
 
@@ -516,14 +516,14 @@
 .arbiterSectionTitle {
   font-size: 12px;
   font-weight: 700;
-  color: var(--text-muted);
+  color: var(--text-disable-color);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 8px;
 }
 
 .loadingHint {
-  color: var(--text-muted);
+  color: var(--text-disable-color);
   font-size: 13px;
   text-align: center;
   padding: 32px 0;

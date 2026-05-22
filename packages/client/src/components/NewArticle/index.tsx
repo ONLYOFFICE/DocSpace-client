@@ -90,6 +90,8 @@ const AI_FORMS_SECTION_TO_ID: Record<string, string> = {
 
 const AI_ROOMS_SECTION_TO_ID: Record<string, string> = {
   rooms: "ai-rooms-rooms",
+  recent: "ai-rooms-recent",
+  favorites: "ai-rooms-favorites",
   archive: "ai-rooms-archive",
   trash: "ai-rooms-trash",
   settings: "ai-rooms-settings",
@@ -313,6 +315,18 @@ const NewArticle = ({
       children: aiRoomsEnabled
         ? [
             {
+              id: "ai-rooms-favorites",
+              label: t("Common:Favorites"),
+              icon: CatalogFavoritesReactSvgUrl,
+              onClick: () => navigate("/ai-rooms?section=favorites"),
+            },
+            {
+              id: "ai-rooms-recent",
+              label: t("Common:Recent"),
+              icon: CatalogRestoreReactSvgUrl,
+              onClick: () => navigate("/ai-rooms?section=recent"),
+            },
+            {
               id: "ai-rooms-archive",
               label: t("Common:Archive"),
               icon: CatalogArchiveReactSvgUrl,
@@ -343,8 +357,8 @@ const NewArticle = ({
 
     const all: { item: NavMenuItem; enabled: boolean }[] = [
       { item: aiFilesItem, enabled: aiFilesEnabled },
-      { item: aiFormsItem, enabled: aiFormsEnabled },
       { item: aiRoomsItem, enabled: aiRoomsEnabled },
+      { item: aiFormsItem, enabled: aiFormsEnabled },
       { item: aiAgentsItem, enabled: aiAgentsEnabled },
       { item: docsCloudItem, enabled: docsCloudEnabled },
     ];
@@ -413,7 +427,7 @@ const NewArticle = ({
           navigate("/docs-cloud");
         }}
       />
- 	  <EnableAiRoomsDialog
+      <EnableAiRoomsDialog
         visible={enableAiRoomsVisible}
         isLoading={enableAiRoomsLoading}
         onClose={() => setEnableAiRoomsVisible(false)}

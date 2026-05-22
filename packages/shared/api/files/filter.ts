@@ -200,6 +200,8 @@ class FilesFilter {
 
   location: FilterLocation | null = null;
 
+  parentId: number | string | null = null;
+
   static getDefault(
     options: {
       pageCount?: number;
@@ -420,6 +422,7 @@ class FilesFilter {
       searchArea,
       location,
       sharedBy,
+      parentId: this.parentId,
     };
 
     const str = toUrlParams(dtoFilter, true);

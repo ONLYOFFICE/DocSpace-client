@@ -24,25 +24,53 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { inject, observer } from "mobx-react";
 import { useSearchParams } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import SdkIframe from "SRC_DIR/components/SdkIframe";
 
-const SECTION_TO_PATH: Record<string, string> = {
-  rooms: "/sdk/rooms",
-  archive: "/sdk/archive",
-  trash: "/sdk/trash",
-  settings: "/sdk/settings",
+type AiRoomsProps = {
+  roomsFolderId?: number | null;
 };
 
-export const AiRooms = () => {
+const getSrc = (section: string, roomsFolderId?: number | null): string => {
+  const parentIdParam =
+    roomsFolderId != null ? `?parentId=${roomsFolderId}` : "";
+
+  switch (section) {
+    case "rooms":
+      return "/sdk/rooms";
+    case "favorites":
+      return `/sdk/personal-files/favorites${parentIdParam}`;
+    case "recent":
+      return `/sdk/personal-files/recent${parentIdParam}`;
+    case "archive":
+      return "/sdk/archive";
+    case "trash":
+      return "/sdk/trash";
+    case "settings":
+      return "/sdk/settings";
+    default:
+      return "/sdk/rooms";
+  }
+};
+
+const AiRooms = ({ roomsFolderId }: AiRoomsProps) => {
   const { t } = useTranslation(["Common"]);
   const [searchParams] = useSearchParams();
   const section = searchParams.get("section") ?? "";
-  const src = SECTION_TO_PATH[section] ?? "/sdk/rooms";
-  return <SdkIframe src={src} title={t("Common:DashboardAIRoomsTitle")} />;
+  return (
+    <SdkIframe
+      src={getSrc(section, roomsFolderId)}
+      title={t("Common:DashboardAIRoomsTitle")}
+    />
+  );
 };
 
-export default AiRooms;
+const AiRoomsConnected = inject<TStore>(({ treeFoldersStore }) => ({
+  roomsFolderId: treeFoldersStore.roomsFolderId,
+}))(observer(AiRooms));
 
+export { AiRoomsConnected as AiRooms };
+export default AiRoomsConnected;

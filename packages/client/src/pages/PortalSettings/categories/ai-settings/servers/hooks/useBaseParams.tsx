@@ -56,7 +56,7 @@ export const useBaseParams = (initialValues?: {
 	url?: string;
 	description?: string;
 }) => {
-	const { t } = useTranslation(["AISettings", "Common", "OAuth"]);
+	const { t } = useTranslation(["Common", "OAuth"]);
 
 	const [name, setName] = React.useState(initialValues?.name || "");
 	const [url, setUrl] = React.useState(initialValues?.url || "");
@@ -93,7 +93,7 @@ export const useBaseParams = (initialValues?: {
 		if (descriptionError) setDescriptionError("");
 	};
 
-	const requiredError = t("OAuth:ThisRequiredField");
+	const requiredError = t("Common:ThisRequiredField");
 
 	const getBaseParams = () => {
 		if (!name) {
@@ -170,7 +170,7 @@ export const useBaseParams = (initialValues?: {
 					size={InputSize.base}
 					value={url}
 					onChange={(e) => onChangeUrl(e.target.value)}
-					placeholder={t("OAuth:EnterURL")}
+					placeholder={t("Common:EnterURL")}
 					scale
 					hasError={!!urlError}
 					testId="mcp-url-input"
@@ -194,7 +194,7 @@ export const useBaseParams = (initialValues?: {
 					heightTextArea={64}
 					value={description}
 					onChange={(e) => onChangeDescription(e.target.value)}
-					placeholder={t("OAuth:EnterDescription")}
+					placeholder={t("Common:EnterDescription")}
 					maxLength={256}
 					dataTestId="mcp-description-textarea"
 				/>

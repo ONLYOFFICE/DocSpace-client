@@ -74,7 +74,7 @@ export const ModelSettingsPanel = ({
   onSave,
   onClose,
 }: ModelSettingsPanelProps) => {
-  const { t } = useTranslation(["AISettings", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   const [displayName, setDisplayName] = useState(model.displayName);
   const [capabilities, setCapabilities] = useState<TModelCapabilities>({

@@ -69,7 +69,7 @@ export const MCPTile = ({
   disableActions,
 }: MCPTileProps) => {
   const { isBase } = useTheme();
-  const { t } = useTranslation(["Common", "AISettings"]);
+  const { t } = useTranslation(["Common"]);
 
   const icon =
     item.icon?.icon48 || (getServerIconUrl(item.serverType, isBase) ?? "");

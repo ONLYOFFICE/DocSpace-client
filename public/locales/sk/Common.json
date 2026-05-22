@@ -1662,5 +1662,9 @@
   "AIAgentsUnpinned": "{{aiAgents}} neprinutené",
   "AIAgentUnpinned": "{{aiAgent}} neodpínané",
   "TagsPlaceholder": "Pridať tag",
-  "CreateTagOption": "Vytvoriť značku"
+  "CreateTagOption": "Vytvoriť značku",
+  "Unpin": "Odopnúť",
+  "PinToTop": "Pripnúť hore",
+  "DisableNotifications": "Vypnúť upozornenia",
+  "EnableNotifications": "Vypnúť upozornenia"
 }

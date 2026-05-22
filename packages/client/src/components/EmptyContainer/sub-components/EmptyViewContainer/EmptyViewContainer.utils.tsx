@@ -170,7 +170,7 @@ export const getFolderDescription = (
       }),
     )
     .with([P._, DefaultFolderType, P.when(isAdmin)], () =>
-      t("EmptyView:DefaultFolderDescription"),
+      t("Common:DefaultFolderDescription"),
     )
     .with([P._, DefaultFolderType, P.when(isUser)], () =>
       t("Common:UserEmptyDescription"),
@@ -191,10 +191,10 @@ export const getRoomDescription = (
 
 const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {
   return isUser(access)
-    ? t("EmptyView:EmptyAIAgentsUserTitle", {
+    ? t("Common:EmptyAIAgentsUserTitle", {
         aiAgents: t("Common:AIAgents"),
       })
-    : t("EmptyView:EmptyAIAgentsTitle", {
+    : t("Common:EmptyAIAgentsTitle", {
         aiAgent: t("Common:AIAgent"),
       });
 };
@@ -211,10 +211,10 @@ const getAIAgentsAIDisabledTitle = (
       }),
     )
     .with([false, true], () =>
-      t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminTitle"),
+      t("Common:EmptyAIAgentsAIDisabledSaasAdminTitle"),
     )
     .otherwise(() =>
-      t("EmptyView:EmptyAIAgentsAIDisabledUserTitle", {
+      t("Common:EmptyAIAgentsAIDisabledUserTitle", {
         aiAgents: t("Common:AIAgents"),
       }),
     );
@@ -233,13 +233,13 @@ const getAIAgentsAIDisabledDescription = (
       }),
     )
     .with([false, true], () =>
-      t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminDescription", {
+      t("Common:EmptyAIAgentsAIDisabledSaasAdminDescription", {
         productName: getBrandName("ProductName"),
         aiAgents: t("Common:AIAgents"),
       }),
     )
     .otherwise(() =>
-      t("EmptyView:EmptyAIAgentsAIDisabledDescription", {
+      t("Common:EmptyAIAgentsAIDisabledDescription", {
         productName: getBrandName("ProductName"),
         aiAgents: t("Common:AIAgents"),
       }),
@@ -251,10 +251,10 @@ const getAIAgentsAIEnabledDescription = (
   access: AccessType,
 ) => {
   return isUser(access)
-    ? t("EmptyView:EmptyAIAgentsAIEnabledUserDescription", {
+    ? t("Common:EmptyAIAgentsAIEnabledUserDescription", {
         aiAgents: t("Common:AIAgents"),
       })
-    : t("EmptyView:EmptyAIAgentsDescription", {
+    : t("Common:EmptyAIAgentsDescription", {
         mcpServer: t("Common:MCPServer"),
       });
 };
@@ -294,7 +294,7 @@ export const getRootDescription = (
       </>
     ))
     .with([FolderType.USER, P.when(() => security?.Create)], () =>
-      t("EmptyView:DefaultFolderDescription"),
+      t("Common:DefaultFolderDescription"),
     )
     .with([FolderType.SHARE, P._], () =>
       t("Common:EmptyShareDescription", {
@@ -303,7 +303,7 @@ export const getRootDescription = (
     )
     .with([FolderType.Recent, P._], () => t("Common:EmptyRecentDescription"))
     .with([FolderType.Favorites, P._], () =>
-      t("EmptyView:EmptyFavoritesDescription"),
+      t("Common:EmptyFavoritesDescription"),
     )
     .with([FolderType.Archive, ShareAccessRights.None], () =>
       t("Files:ArchiveEmptyScreen", {
@@ -431,7 +431,7 @@ export const getRootTitle = (
       t("Common:EmptyScreenFolder"),
     )
     .with([FolderType.SHARE, P._], () => t("Common:EmptyShareTitle"))
-    .with([FolderType.Favorites, P._], () => t("EmptyView:EmptyFavoritesTitle"))
+    .with([FolderType.Favorites, P._], () => t("Common:EmptyFavoritesTitle"))
     .with([FolderType.Recent, P._], () => t("Common:NoRecentFilesHereYet"))
     .with([FolderType.Archive, P._], () => t("Files:ArchiveEmptyScreenHeader"))
     .with([FolderType.TRASH, P._], () => t("Common:EmptyScreenFolder"))

@@ -216,7 +216,7 @@ class ContactsConextOptionsStore {
             id: "option_change-owner",
             key: option,
             icon: RefreshReactSvgUrl,
-            label: t("Translations:OwnerChange"),
+            label: t("Common:OwnerChange"),
             onClick: () => this.toggleChangeOwnerDialog(),
           };
         case "room-list":

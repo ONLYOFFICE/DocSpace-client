@@ -45,7 +45,7 @@ export const getRootTitle = (
     case FolderType.SHARE:
       return t("Common:EmptyShareTitle");
     case FolderType.Favorites:
-      return t("EmptyView:EmptyFavoritesTitle");
+      return t("Common:EmptyFavoritesTitle");
     case FolderType.Recent:
       return t("Common:NoRecentFilesHereYet");
     case FolderType.TRASH:
@@ -113,7 +113,7 @@ export const getRootDescription = (
         productName: getBrandName("ProductName"),
       });
     case FolderType.Favorites:
-      return t("EmptyView:EmptyFavoritesDescription");
+      return t("Common:EmptyFavoritesDescription");
     case FolderType.Recent:
       return t("Common:EmptyRecentDescription");
     case FolderType.TRASH:
@@ -121,7 +121,7 @@ export const getRootDescription = (
         sectionName: t("Common:TrashSection"),
       });
     case FolderType.USER:
-      return t("EmptyView:DefaultFolderDescription");
+      return t("Common:DefaultFolderDescription");
     default:
       return (
         <>

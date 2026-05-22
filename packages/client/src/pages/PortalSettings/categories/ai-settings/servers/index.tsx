@@ -137,7 +137,7 @@ const MCPServersComponent = ({
   mcpServersInitied,
   mcpServersSettingsUrl,
 }: MCPServersProps) => {
-  const { t } = useTranslation(["Common", "AISettings"]);
+  const { t } = useTranslation(["Common"]);
   const [addDialogVisible, setAddDialogVisible] = useState(false);
   const [deleteDialogData, setDeleteDialogData] =
     useState<DisableDeleteDialogData>({

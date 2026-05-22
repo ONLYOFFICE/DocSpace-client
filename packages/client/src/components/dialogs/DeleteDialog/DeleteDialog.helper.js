@@ -90,7 +90,7 @@ export const getDialogContent = (
         <Trans
           t={t}
           i18nKey="DeleteAIAgentDescription"
-          ns="DeleteDialog"
+          ns="Common"
           values={{ agentName: selection[0]?.title }}
         />{" "}
         {t("Common:WantToContinue")}

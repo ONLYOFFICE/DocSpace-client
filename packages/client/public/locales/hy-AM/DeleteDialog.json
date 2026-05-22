@@ -1,7 +1,4 @@
 {
-  "DeleteAIAgentDescription": "Գործակալ <strong>\"{{agentName}}\"</strong>-ը ընդմիշտ կջնջվի։ Բոլոր տվյալները և օգտատիրոջ մուտքի իրավունքները կկորչեն։",
-  "DeleteAIAgentTitle": "Ջնջե՞լ այս գործակալին։",
-  "DeleteAIAgentWarning": "Ես հասկանում եմ հետևանքները և ցանկանում եմ հեռացնել գործակալին",
   "DeleteAllGroupDescription": "Ընտրված խմբերը կջնջվեն: Խմբերի օգտատերերը չեն հեռացվի {{productName}}-ից: Վստա՞հ եք, որ ցանկանում եք շարունակել:",
   "DeleteAllGroupsTitle": "Ջնջել խմբերը",
   "DeleteFiles": "Դուք պատրաստվում եք տեղափոխել <strong>ֆայլեր ({{filesCount}})</strong> {{trashSection}}։",

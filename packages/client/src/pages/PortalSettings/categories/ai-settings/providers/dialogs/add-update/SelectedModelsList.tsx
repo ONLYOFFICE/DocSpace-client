@@ -57,7 +57,7 @@ export const SelectedModelsList = ({
   hasError,
   addButtonRef,
 }: SelectedModelsListProps) => {
-  const { t } = useTranslation(["AISettings"]);
+  const { t } = useTranslation([]);
 
   return (
     <div className={styles.selectedModelsField}>

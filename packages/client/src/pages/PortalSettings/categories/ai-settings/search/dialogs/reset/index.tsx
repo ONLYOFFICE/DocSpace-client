@@ -59,7 +59,7 @@ const ResetWebSearchDialogComponent = ({
   restoreWebSearch,
   getAIConfig,
 }: ResetWebSearchDialogProps) => {
-  const { t } = useTranslation(["AISettings", "Common", "OAuth", "Settings"]);
+  const { t } = useTranslation(["Common", "OAuth", "Settings"]);
 
   const [loading, setLoading] = React.useState(false);
 
@@ -86,7 +86,7 @@ const ResetWebSearchDialogComponent = ({
 
   return (
     <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>
-      <ModalDialog.Header>{t("Settings:ResetSettings")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:ResetSettings")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>
           {t("Common:ResetWebSearchDescription", {
@@ -99,7 +99,7 @@ const ResetWebSearchDialogComponent = ({
         <Button
           primary
           size={ButtonSize.normal}
-          label={t("OAuth:Reset")}
+          label={t("Common:Reset")}
           scale
           onClick={onSubmitAction}
           isLoading={loading}

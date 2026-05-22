@@ -3208,7 +3208,7 @@ class FilesActionStore {
       ? t("Files:LeftAndAppointNewOwner")
       : t("Files:YouLeftTheRoom");
     const agentSuccessText = isOwner
-      ? t("Files:LeftAgentAndAppointNewOwner")
+      ? t("Common:LeftAgentAndAppointNewOwner")
       : t("Files:YouLeftTheAgent");
     const successText = isAIAgent ? agentSuccessText : roomSuccessText;
 

@@ -128,10 +128,10 @@ const DeleteDialogComponent = (props) => {
   const onDeleteRoom = async () => {
     const translations = {
       successRemoveRoom: isAIAgent
-        ? t("Files:AgentRemoved")
+        ? t("Common:AgentRemoved")
         : t("Files:RoomRemoved"),
       successRemoveRooms: isAIAgent
-        ? t("Files:AgentsRemoved")
+        ? t("Common:AgentsRemoved")
         : t("Files:RoomsRemoved"),
     };
 
@@ -211,7 +211,7 @@ const DeleteDialogComponent = (props) => {
 
   const getDialogTitle = () => {
     if (isAIAgent) {
-      return t("DeleteDialog:DeleteAIAgentTitle");
+      return t("Common:DeleteAIAgentTitle");
     }
 
     if (isTemplate) {

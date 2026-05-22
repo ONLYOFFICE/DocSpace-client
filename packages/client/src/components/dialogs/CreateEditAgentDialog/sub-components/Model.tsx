@@ -70,7 +70,7 @@ const ModelSettings = ({
   systemAiEnabled,
   setAgentParams,
 }: ModelSettingsProps) => {
-  const { t } = useTranslation(["AIRoom", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   const [providers, setProviders] = React.useState<TAiProvider[]>([]);
   const [models, setModels] = React.useState<TModel[]>([]);
@@ -396,7 +396,7 @@ const ModelSettings = ({
             <Trans
               t={t}
               i18nKey="ResponseQualityNode"
-              ns="AIRoom"
+              ns="Common"
               components={{
                 1: <span style={{ fontWeight: 600 }} />,
               }}

@@ -131,7 +131,7 @@ class DetailsHelper {
       case "Creation date":
         return this.t("Common:CreationDate");
       case "Versions":
-        return this.t("InfoPanel:Versions");
+        return this.t("Common:Versions");
       default:
         return propertyId;
     }

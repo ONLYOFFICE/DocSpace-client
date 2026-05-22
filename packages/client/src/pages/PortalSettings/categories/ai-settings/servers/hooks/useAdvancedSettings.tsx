@@ -54,7 +54,7 @@ export const useAdvancedSettings = (
   initialValues?: Record<string, string>,
   needReset?: boolean,
 ) => {
-  const { t } = useTranslation(["Common", "AISettings", "SingleSignOn"]);
+  const { t } = useTranslation(["Common", "SingleSignOn"]);
   const [showAdvancedSettings, setShowAdvancedSettings] = useState(
     !!initialValues || needReset,
   );
@@ -122,7 +122,7 @@ export const useAdvancedSettings = (
       <div>
         <div className={addEditStyles.advancedSettings}>
           <Text fontSize="16px" lineHeight="22px" fontWeight={700}>
-            {t("SingleSignOn:AdvancedSettings")}
+            {t("Common:AdvancedSettings")}
           </Text>
           <Link
             onClick={() => setShowAdvancedSettings(!showAdvancedSettings)}
@@ -131,8 +131,8 @@ export const useAdvancedSettings = (
             data-testid="mcp-headers-block-toggle"
           >
             {showAdvancedSettings
-              ? t("SingleSignOn:Hide")
-              : t("SingleSignOn:Show")}
+              ? t("Common:Hide")
+              : t("Common:Show")}
           </Link>
         </div>
         {showAdvancedSettings ? (

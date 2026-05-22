@@ -487,7 +487,7 @@ export default class FilesHeaderOptionStore {
         if (!this.isAvailableOption("vectorization")) return null;
         return {
           id: "menu-vectorization",
-          label: t("Files:Vectorization"),
+          label: t("Common:Vectorization"),
           iconUrl: RefreshReactSvgUrl,
           onClick: this.retryVectorization,
         };

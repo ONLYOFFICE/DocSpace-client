@@ -112,7 +112,7 @@ const DefaultProviderComponent = ({
     };
   };
 
-  const { t } = useTranslation(["Common", "AISettings", "Services"]);
+  const { t } = useTranslation(["Common", "Services"]);
   const tooltipId = useId();
 
   const isOnlySystemProvider =

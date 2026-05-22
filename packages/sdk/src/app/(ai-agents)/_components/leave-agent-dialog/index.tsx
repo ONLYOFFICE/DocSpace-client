@@ -59,11 +59,11 @@ const LeaveAgentDialog = ({
 
   const description = isOwner
     ? t("Common:LeaveAgentDescription")
-    : t("Files:WantLeaveAgent");
+    : t("Common:WantLeaveAgent");
 
   const okLabel = isOwner
-    ? t("Files:AssignOwner")
-    : t("Files:LeaveButton");
+    ? t("Common:AssignOwner")
+    : t("Common:LeaveButton");
 
   return (
     <ModalDialog

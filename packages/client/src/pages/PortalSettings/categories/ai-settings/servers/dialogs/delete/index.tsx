@@ -59,7 +59,7 @@ const DeleteDialogComponent = ({
   serverId,
   deleteMCP,
 }: DeleteDialogProps) => {
-  const { t } = useTranslation(["AISettings", "Common", "OAuth"]);
+  const { t } = useTranslation(["Common", "OAuth"]);
 
   const [loading, setLoading] = React.useState(false);
 

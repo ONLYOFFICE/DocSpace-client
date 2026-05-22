@@ -70,7 +70,7 @@ export const AiProviderTile = ({
   enabled = true,
   dataTestId = "ai-provider-tile",
 }: AiProviderTileProps) => {
-  const { t } = useTranslation(["Common", "AISettings"]);
+  const { t } = useTranslation(["Common"]);
 
   const icon = getAiProviderIcon(item.type) ?? "";
   const companyLabel = getAiProviderLabel(item.type, t, enabled);

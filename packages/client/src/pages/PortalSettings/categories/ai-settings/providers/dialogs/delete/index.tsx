@@ -64,7 +64,7 @@ const DeleteDialogComponent = ({
   getAIConfig,
   showDefaultProviderWarning,
 }: Props) => {
-  const { t } = useTranslation(["Common", "AISettings"]);
+  const { t } = useTranslation(["Common"]);
 
   const [loading, setLoading] = React.useState(false);
 

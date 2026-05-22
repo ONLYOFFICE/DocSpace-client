@@ -69,7 +69,7 @@ const ResetTemplateDialog = ({
         <Button
           testId="reset-button"
           id="reset-button"
-          label={t("OAuth:Reset")}
+          label={t("Common:Reset")}
           onClick={onReset}
           primary
           scale

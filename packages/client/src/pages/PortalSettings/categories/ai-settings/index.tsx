@@ -105,7 +105,7 @@ const AiSettings = ({
   initDefaultProvider,
   showPortalSettingsLoader,
 }: TAiSettingsProps) => {
-  const { t, ready } = useTranslation(["Common", "AISettings", "AIRoom"]);
+  const { t, ready } = useTranslation(["Common"]);
 
   const { initAIProviders, initMCPServers, initWebSearch, initKnowledge } =
     useAiSettings({

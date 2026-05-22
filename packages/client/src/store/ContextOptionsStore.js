@@ -2212,7 +2212,7 @@ class ContextOptionsStore {
       {
         id: "option_vectorization",
         key: "vectorization",
-        label: t("Files:Vectorization"),
+        label: t("Common:Vectorization"),
         icon: RefreshReactSvgUrl,
         onClick: () => this.filesActionsStore.retryVectorization([item]),
         disabled: !item.security?.Vectorization,
@@ -2526,7 +2526,7 @@ class ContextOptionsStore {
       {
         id: "option_owner-change",
         key: "owner-change",
-        label: t("Translations:OwnerChange"),
+        label: t("Common:OwnerChange"),
         icon: FileActionsOwnerReactSvgUrl,
         onClick: this.onOwnerChange,
         disabled: false,
@@ -2705,7 +2705,7 @@ class ContextOptionsStore {
       {
         id: "option_change-room-owner",
         key: "change-agent-owner",
-        label: t("Translations:OwnerChange"),
+        label: t("Common:OwnerChange"),
         icon: ReconnectSvgUrl,
         onClick: this.onChangeRoomOwner,
         disabled: !isAIAgent,
@@ -3377,7 +3377,7 @@ class ContextOptionsStore {
       },
       {
         key: "vectorization",
-        label: t("Files:Vectorization"),
+        label: t("Common:Vectorization"),
         icon: RefreshReactSvgUrl,
         onClick: () => this.filesActionsStore.retryVectorization(selection),
         disabled: !canRetryVectorization,

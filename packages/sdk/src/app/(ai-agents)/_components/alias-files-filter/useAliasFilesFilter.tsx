@@ -172,7 +172,7 @@ export default function useAliasFilesFilter(config: AliasFilterConfig) {
           {
             key: FilterGroups.filterAuthor,
             group: FilterGroups.filterAuthor,
-            label: t("Files:ByAuthor", { defaultValue: "Author" }),
+            label: t("Common:ByAuthor", { defaultValue: "Author" }),
             isHeader: true,
             isLast: false,
           },
@@ -378,7 +378,7 @@ export default function useAliasFilesFilter(config: AliasFilterConfig) {
         key: isMe ? FilterKeys.me : authorRaw,
         group: FilterGroups.filterAuthor,
         label,
-        selectedLabel: `${t("Files:ByAuthor", { defaultValue: "Author" })}: ${label}`,
+        selectedLabel: `${t("Common:ByAuthor", { defaultValue: "Author" })}: ${label}`,
       });
     }
 
@@ -411,7 +411,7 @@ export default function useAliasFilesFilter(config: AliasFilterConfig) {
         key: isMe ? FilterKeys.me : authorRaw,
         group: FilterGroups.filterAuthor,
         label,
-        selectedLabel: `${t("Files:ByAuthor", { defaultValue: "Author" })}: ${label}`,
+        selectedLabel: `${t("Common:ByAuthor", { defaultValue: "Author" })}: ${label}`,
       });
     }
     return out;

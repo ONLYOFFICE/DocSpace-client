@@ -130,7 +130,7 @@ const AddUpdateDialogComponent = ({
   initialModels,
   getAIConfig,
 }: AddEditDialogProps) => {
-  const { t } = useTranslation(["Common", "AISettings", "OAuth", "Webhooks"]);
+  const { t } = useTranslation(["Common", "OAuth", "Webhooks"]);
   const submitButtonRef = useRef<HTMLButtonElement>(null);
 
   const providerOptions = useMemo(
@@ -511,7 +511,7 @@ const AddUpdateDialogComponent = ({
                 value={providerUrl}
                 onChange={(e) => setProviderUrl(e.target.value)}
                 scale
-                placeholder={t("OAuth:EnterURL")}
+                placeholder={t("Common:EnterURL")}
                 isDisabled={
                   isRequestRunning ||
                   selectedOption.key !== ProviderType.OpenAiCompatible
@@ -541,7 +541,7 @@ const AddUpdateDialogComponent = ({
                     onClick={onResetKey}
                     dataTestId="provider-reset-key-link"
                   >
-                    {t("Webhooks:ResetKey")}
+                    {t("Common:ResetKey")}
                   </Link>
                 </div>
               ) : (

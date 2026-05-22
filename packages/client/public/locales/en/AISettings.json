@@ -1,4 +1,0 @@
-{
-  "DisableServerDescription": "If you block this server, it will no longer be available to users, but its settings will remain intact. \nUnblocking it later may require users to reauthorize, depending on the provider's requirements.",
-  "ResetKnowledgeDescription": "This action will remove the configured API key and disable document indexing for the knowledge base. Adding new documents to the knowledge base and working with them will be unavailable until a new key is provided."
-}

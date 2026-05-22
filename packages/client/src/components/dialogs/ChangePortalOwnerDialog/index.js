@@ -165,7 +165,7 @@ const ChangePortalOwnerDialog = ({
           />
         </ModalDialog.Container>
       ) : null}
-      <ModalDialog.Header>{t("Translations:OwnerChange")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:OwnerChange")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.ownerInfo}>
           <Avatar className="avatar" role="owner" source={avatar} size="big" />

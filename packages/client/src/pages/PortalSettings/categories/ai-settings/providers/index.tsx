@@ -109,7 +109,7 @@ const AIProviderComponent = ({
   hasAIProviders,
   aiConfig,
 }: AIProviderProps) => {
-  const { t } = useTranslation(["Common", "AISettings"]);
+  const { t } = useTranslation(["Common"]);
   const [addDialogVisible, setaddDialogVisible] = useState(false);
   const [updateDialogData, setUpdateDialogData] = useState<TUpdateDialogData>({
     visible: false,

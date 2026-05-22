@@ -60,7 +60,7 @@ export const AgentInfoPanelBody = observer(() => {
     },
     {
       id: "history" as AgentInfoPanelView,
-      name: t("InfoPanel:SubmenuHistory", { defaultValue: "History" }),
+      name: t("Common:SubmenuHistory", { defaultValue: "History" }),
       content: null,
       onClick: () => setView("history"),
     },

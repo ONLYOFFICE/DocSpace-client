@@ -71,9 +71,9 @@ const InfoPanelHeader = observer(() => {
     if (id === InfoPanelView.infoShare) {
       name = t("Common:Share");
     } else if (id === InfoPanelView.infoHistory) {
-      name = t("InfoPanel:SubmenuHistory");
+      name = t("Common:SubmenuHistory");
     } else {
-      name = t("InfoPanel:SubmenuDetails");
+      name = t("Common:SubmenuDetails");
     }
 
     return { id, name, onClick: () => setView(id), content: null };

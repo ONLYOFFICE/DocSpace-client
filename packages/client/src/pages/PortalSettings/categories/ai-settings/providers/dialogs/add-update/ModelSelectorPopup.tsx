@@ -152,7 +152,7 @@ export const ModelSelectorPopup = ({
   onEditModel,
   onClose,
 }: ModelSelectorPopupProps) => {
-  const { t } = useTranslation(["AISettings", "Common"]);
+  const { t } = useTranslation(["Common"]);
   const isMobileHardware = isMobileDevice();
 
   const [windowSize, setWindowSize] = useState(() => ({

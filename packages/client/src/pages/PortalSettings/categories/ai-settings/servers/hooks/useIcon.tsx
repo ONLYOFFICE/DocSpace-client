@@ -47,7 +47,7 @@ import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import styles from "../styles/AddEditDialog.module.scss";
 
 export const useIcon = (initialValue?: string) => {
-  const { t } = useTranslation(["AISettings", "OAuth"]);
+  const { t } = useTranslation(["OAuth"]);
 
   const [icon, setIcon] = React.useState(initialValue || "");
 
@@ -132,7 +132,7 @@ export const useIcon = (initialValue?: string) => {
             </Link>
           </>
         ) : (
-          <AddButton label={t("OAuth:SelectNewImage")} onClick={onClick} />
+          <AddButton label={t("Common:SelectNewImage")} onClick={onClick} />
         )}
       </div>
       <input

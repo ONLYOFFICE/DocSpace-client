@@ -76,7 +76,7 @@ const ChangeRoomOwner = ({
   return (
     <div>
       <Text className="change-owner-label" fontWeight={600} fontSize="13px">
-        {isAgent ? t("Common:AgentOwner") : t("Files:RoomOwner")}
+        {isAgent ? t("Common:AgentOwner") : t("Common:RoomOwner")}
       </Text>
 
       <div className={styles.changeOwnerDisplayWrapper}>

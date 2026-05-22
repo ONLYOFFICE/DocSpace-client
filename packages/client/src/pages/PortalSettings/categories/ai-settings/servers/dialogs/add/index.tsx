@@ -67,7 +67,7 @@ const AddMCPDialogComponent = ({
   addNewMCP,
   mcpServersSettingsUrl,
 }: AddMCPDialogProps) => {
-  const { t } = useTranslation(["Common", "AISettings"]);
+  const { t } = useTranslation(["Common"]);
   const submitButtonRef = useRef<HTMLButtonElement>(null);
 
   const [loading, setLoading] = React.useState(false);

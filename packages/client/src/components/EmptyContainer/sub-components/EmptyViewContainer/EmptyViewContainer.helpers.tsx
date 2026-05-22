@@ -132,7 +132,7 @@ export const getDescription = (
             fontSize="12px"
             style={{ display: "block", marginTop: "8px" }}
           >
-            {t("AIRoom:EmptyKnowledgeDescriptionActions")}
+            {t("Common:EmptyKnowledgeDescriptionActions")}
           </Text>
         </>
       );
@@ -193,11 +193,11 @@ export const getTitle = (
   const isNotAdmin = isUser(access);
 
   if (isAIRoom) {
-    if (isKnowledgeTab) return t("AIRoom:EmptyKnowledgeTitle");
+    if (isKnowledgeTab) return t("Common:EmptyKnowledgeTitle");
 
     if (isResultsTab)
       return security && "UseChat" in security && security.UseChat
-        ? t("AIRoom:EmptyResultsTitle")
+        ? t("Common:EmptyResultsTitle")
         : t("Common:NothingToShowYet");
   }
 
@@ -389,8 +389,8 @@ export const getOptions = (
   };
 
   const createAIAgent = {
-    title: t("EmptyView:CreateNewAIAgent"),
-    description: t("EmptyView:CreateAIAgentDescription", {
+    title: t("Common:CreateNewAIAgent"),
+    description: t("Common:CreateAIAgentDescription", {
       aiAgent: t("Common:AIAgent"),
     }),
     icon: <CreateAIAgentIcon />,
@@ -540,7 +540,7 @@ export const getOptions = (
         {
           ...actions.onGoToPersonal(),
           icon: <PersonIcon />,
-          description: t("Files:GoToSection", {
+          description: t("Common:GoToSection", {
             sectionName: t("Common:MyDocuments"),
           }),
           key: "empty-view-trash-goto-personal",
@@ -567,7 +567,7 @@ export const getOptions = (
 
       const uploadFilesFromDevice = createUploadFromDeviceOption(
         t("EmptyView:UploadDeviceOptionTitle"),
-        t("AIRoom:UploadFilesDevice"),
+        t("Common:UploadFilesDevice"),
         "file",
       );
 
@@ -578,7 +578,7 @@ export const getOptions = (
       return [
         {
           key: "open-chat",
-          title: t("AIRoom:CreateChat"),
+          title: t("Common:CreateChat"),
           icon: <CreateChatIcon />,
           onClick: () => {
             const filesFilter = FilesFilter.getFilter(window.location);

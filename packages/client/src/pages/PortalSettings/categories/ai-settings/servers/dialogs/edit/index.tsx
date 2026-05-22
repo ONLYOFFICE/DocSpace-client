@@ -70,7 +70,7 @@ const EditMCPDialogComponent = ({
   updateMCP,
   mcpServersSettingsUrl,
 }: EditDialogProps) => {
-  const { t } = useTranslation(["AISettings", "Common", "OAuth"]);
+  const { t } = useTranslation(["Common", "OAuth"]);
   const submitButtonRef = useRef<HTMLButtonElement>(null);
 
   const [loading, setLoading] = React.useState(false);

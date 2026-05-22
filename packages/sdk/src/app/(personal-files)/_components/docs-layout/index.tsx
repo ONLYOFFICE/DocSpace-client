@@ -166,6 +166,7 @@ const DocsLayout = observer(
     const docsUserStore = useDocsUserStore();
     const { sdkConfig } = useSDKConfig();
     const router = useRouter();
+    const pathname = usePathname();
 
     const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
 
@@ -176,11 +177,6 @@ const DocsLayout = observer(
      const isActionButtonEnabled =
     (isMyDocuments || isInRooms) && !sdkConfig?.disableActionButton;
 
-  const { desktopModel, quickActionItems } = useDocsMenuModels({
-    openCreateDialog,
-    onUploadFiles,
-    onUploadFolder,
-  });
     const docsActions = useDocsActions();
     const {
       uploadFilesToFolder,

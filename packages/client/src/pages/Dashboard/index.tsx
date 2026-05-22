@@ -37,6 +37,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { TwoStateToggle } from "@docspace/ui-kit/components/two-state-toggle";
 import { getPersonalFolderTree } from "@docspace/shared/api/files";
+import { setAppEnabled } from "@docspace/shared/api/apps";
 import { getConstName } from "@docspace/shared/constants/consts";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
@@ -137,21 +138,33 @@ const Dashboard = ({
   const appsCatalog = useAppsCatalog();
 
   const handleInstall = async (modId: AppId) => {
-    if (modId !== "ai-forms") {
-      toastr.info(t("Common:UnderDevelopment"));
+    if (modId === "ai-forms") {
+      try {
+        const activated = await activate("ai-forms");
+        if (activated) {
+          navigate("/ai-forms");
+        } else {
+          setInstallDialogVisible(true);
+        }
+      } catch (err) {
+        console.error("Failed to activate ai-forms", err);
+        toastr.error(t("Common:SomethingWentWrong"));
+      }
       return;
     }
-    try {
-      const activated = await activate("ai-forms");
-      if (activated) {
-        navigate("/ai-forms");
-      } else {
-        setInstallDialogVisible(true);
+
+    if (modId === "ai-rooms") {
+      try {
+        await setAppEnabled("ai-rooms", true);
+        navigate("/ai-rooms");
+      } catch (err) {
+        console.error("Failed to enable ai-rooms", err);
+        toastr.error(t("Common:SomethingWentWrong"));
       }
-    } catch (err) {
-      console.error("Failed to activate ai-forms", err);
-      toastr.error(t("Common:SomethingWentWrong"));
+      return;
     }
+
+    toastr.info(t("Common:UnderDevelopment"));
   };
 
   const handleInstalled = () => {

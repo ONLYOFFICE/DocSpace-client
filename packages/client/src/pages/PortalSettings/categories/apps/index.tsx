@@ -33,6 +33,7 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { setAppEnabled } from "@docspace/shared/api/apps";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -88,6 +89,10 @@ const Apps = ({
         } else {
           await uninstallAiForms?.();
         }
+        return;
+      }
+      if (id === "ai-rooms") {
+        await setAppEnabled("ai-rooms", next);
         return;
       }
       await enable?.(id, next);

@@ -62,7 +62,8 @@ export const useAppsCatalog = (): AppCatalogItem[] => {
       icon: <CatalogRoomsIcon />,
       title: t("Common:DashboardAIRoomsTitle"),
       description: t("Common:DashboardAIRoomsDescription"),
-      supported: false,
+      href: "/ai-rooms",
+      supported: true,
       alwaysOn: false,
     },
     {

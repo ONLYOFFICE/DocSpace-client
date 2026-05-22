@@ -1766,6 +1766,7 @@
   "CustomFilterDisabled": "تم تعطيل الفِلتر المخصص للملف المحدد",
   "CustomFilterEnable": "تمكين الفِلتر المخصص",
   "CustomFilterEnabled": "تم تمكين الفِلتر المخصص للملف المحدد",
+  "CustomFilterEnableDiscription": "الفِلتر المخصص مفعّل لهذا الجدول. سيتمكن المستخدمون الذين فتحوا الملف من تخصيص عرض البيانات في الجدول.",
   "Uploading": "جارٍ التحميل",
   "DocumentConversionTitle": "تحويل المستند",
   "ConversionXmlMessage": "سيتم تحويل المستند الذي تفتحه إلى تنسيق\" Office Open XML\" (docx أو xlsx) لعرض وتحرير أسرع.",

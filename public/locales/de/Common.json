@@ -1766,6 +1766,7 @@
   "CustomFilterDisabled": "Benutzerdefinierter Filter für die ausgewählte Datei deaktiviert",
   "CustomFilterEnable": "Benutzerdefinierter Filter aktivieren",
   "CustomFilterEnabled": "Benutzerdefinierter Filter für die ausgewählte Datei aktiviert",
+  "CustomFilterEnableDiscription": "Für diese Tabelle ist ein benutzerdefinierter Filter aktiviert. Benutzer, die die Datei geöffnet haben, können die Datenanzeige in der Tabelle personalisieren.",
   "Uploading": "Hochladen",
   "DocumentConversionTitle": "Konvertierung von Dokumenten",
   "ConversionXmlMessage": "Die Datei, die Sie öffnen, wird für eine schnellere Anzeige und Bearbeitung in das Office Open XML-Format (docx oder xlsx) konvertiert.",

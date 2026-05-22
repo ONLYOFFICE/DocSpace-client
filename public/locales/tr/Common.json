@@ -1766,6 +1766,7 @@
   "CustomFilterDisabled": "Seçili dosya için Özel Filtre devre dışı",
   "CustomFilterEnable": "Özel Filtre'yi etkinleştir",
   "CustomFilterEnabled": "Seçili dosya için Özel Filtre etkin",
+  "CustomFilterEnableDiscription": "Bu tablo için Özel Filtre etkinleştirilmiştir. Dosyayı açan kullanıcılar, tablodaki veri görünümünü kişiselleştirebilir.",
   "Uploading": "Yükleniyor",
   "DocumentConversionTitle": "Belge dönüştürme",
   "ConversionXmlMessage": "Açtığınız belge, daha hızlı görüntüleme ve düzenleme için Office Open XML biçimine (docx veya xlsx) dönüştürülecektir.",

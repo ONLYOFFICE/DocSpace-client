@@ -1766,6 +1766,7 @@
   "CustomFilterDisabled": "Filtri i personalizuar për skedarin e zgjedhur është çaktivizuar",
   "CustomFilterEnable": "Aktivizoni filtrin e personalizuar",
   "CustomFilterEnabled": "Filtri i personalizuar për skedarin e zgjedhur është aktivizuar",
+  "CustomFilterEnableDiscription": "Filtri i personalizuar është aktivizuar për këtë tabelë. Përdoruesit që hapën skedarin do të mund të personalizojnë shfaqjen e të dhënave në tabelë.",
   "Uploading": "Ngarkimi",
   "DocumentConversionTitle": "Konvertimi i dokumentit",
   "ConversionXmlMessage": "Skedari që hapani dë të konvertohet në formatin Office Open XML (docx ose xlsx) për shikim dhe redaktim më të shpejtë.",

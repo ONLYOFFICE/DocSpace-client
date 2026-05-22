@@ -1766,6 +1766,7 @@
   "CustomFilterDisabled": "Niestandardowy filtr dla wybranego pliku wyłączony",
   "CustomFilterEnable": "Włącz niestandardowy filtr",
   "CustomFilterEnabled": "Niestandardowy filtr dla wybranego pliku włączony",
+  "CustomFilterEnableDiscription": "Niestandardowy filtr jest włączony dla tej tabeli. Użytkownicy, którzy otworzyli plik, będą mogli personalizować sposób wyświetlania danych w tabeli.",
   "Uploading": "Wysyłanie",
   "DocumentConversionTitle": "Konwersja dokumentów",
   "ConversionXmlMessage": "Otwierany dokument zostanie przekonwertowany do formatu Office Open XML (docx lub xlsx), aby umożliwić Ci szybsze przeglądanie i edycję.",

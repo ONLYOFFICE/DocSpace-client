@@ -1766,6 +1766,7 @@
   "CustomFilterDisabled": "Vlastní filtr pro vybraný soubor deaktivován",
   "CustomFilterEnable": "Povolit Vlastní filtr",
   "CustomFilterEnabled": "Vlastní filtr pro vybraný soubor aktivován",
+  "CustomFilterEnableDiscription": "Pro tuto tabulku je povolen Vlastní filtr. Uživatelé, kteří otevřeli soubor, si budou moci přizpůsobit zobrazení dat v tabulce.",
   "Uploading": "Nahrávání",
   "DocumentConversionTitle": "Konverze dokumentů",
   "ConversionXmlMessage": "Otevřený dokument bude převeden do formátu Office Open XML (docx nebo xlsx) pro rychlejší prohlížení a úpravy.",

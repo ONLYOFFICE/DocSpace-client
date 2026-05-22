@@ -1766,6 +1766,7 @@
   "CustomFilterDisabled": "選択したファイルのカスタムフィルターが無効になりました",
   "CustomFilterEnable": "カスタムフィルターを有効化",
   "CustomFilterEnabled": "選択したファイルのカスタムフィルターが有効になりました",
+  "CustomFilterEnableDiscription": "このテーブルではカスタムフィルターが有効です。ファイルを開いたユーザーは、テーブル内のデータ表示を個人用に設定できます。",
   "Uploading": "アップロード中",
   "DocumentConversionTitle": "ドキュメントの変換",
   "ConversionXmlMessage": "開いたファイルは、より高速な表示と編集が可能なOffice Open XML形式（docxまたはxlsx）に変換されます。",

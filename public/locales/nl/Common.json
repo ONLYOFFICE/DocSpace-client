@@ -1766,6 +1766,7 @@
   "CustomFilterDisabled": "Aangepast filter voor geselecteerd bestand uitgeschakeld",
   "CustomFilterEnable": "Aangepast filter inschakelen",
   "CustomFilterEnabled": "Aangepast filter voor geselecteerd bestand ingeschakeld",
+  "CustomFilterEnableDiscription": "Aangepast filter is ingeschakeld voor deze tabel. Gebruikers die het bestand hebben geopend, kunnen de gegevensweergave in de tabel personaliseren.",
   "Uploading": "Uploaden",
   "DocumentConversionTitle": "Documenten omzetten",
   "ConversionXmlMessage": "Het document dat u opent, wordt omgezet naar het Office Open XML formaat (docx of xlsx) zodat u het sneller kunt bekijken en bewerken.",

@@ -1766,6 +1766,7 @@
   "CustomFilterDisabled": "Filtro personalizado para o arquivo selecionado desativado",
   "CustomFilterEnable": "Ativar filtro personalizado",
   "CustomFilterEnabled": "Filtro personalizado para o arquivo selecionado ativado",
+  "CustomFilterEnableDiscription": "O filtro personalizado está ativado para essa tabela. Os usuários que abriram o arquivo poderão personalizar a exibição de dados na tabela.",
   "Uploading": "Enviando",
   "DocumentConversionTitle": "Conversão de documentos",
   "ConversionXmlMessage": "O arquivo que você abrir será convertido para o formato Office Open XML (docx ou xlsx) para visualização e edição mais rápidas.",

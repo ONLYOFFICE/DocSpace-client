@@ -1766,6 +1766,7 @@
   "CustomFilterDisabled": "Prilagođeni filter za izabranu datoteku je onemogućen",
   "CustomFilterEnable": "Omogućite prilagođeni filter",
   "CustomFilterEnabled": "Prilagođeni filter za izabranu datoteku je omogućen",
+  "CustomFilterEnableDiscription": "Prilagođeni filter je omogućen za ovu tabelu. Korisnici koji su otvorili datoteku moći će da personalizuju prikaz podataka u tabeli.",
   "Uploading": "Otpremanje",
   "DocumentConversionTitle": "Konverzija dokumenta",
   "ConversionXmlMessage": "Dokument koji otvarate će biti konvertovan u Office Open XML format (docx ili xlsx) za brži pregled i uređivanje.",

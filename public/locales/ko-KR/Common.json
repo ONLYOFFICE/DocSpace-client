@@ -1766,6 +1766,7 @@
   "CustomFilterDisabled": "선택한 파일에 대한 사용자 지정 필터 비활성화됨",
   "CustomFilterEnable": "사용자 지정 필터 활성화",
   "CustomFilterEnabled": "선택한 파일에 대한 사용자 지정 필터 활성화됨",
+  "CustomFilterEnableDiscription": "이 테이블에 사용자 지정 필터가 활성화되었습니다. 파일을 연 사용자는 테이블에서 데이터 표시를 개인화할 수 있습니다.",
   "Uploading": "업로드 중",
   "DocumentConversionTitle": "문서 변환",
   "ConversionXmlMessage": "여는 문서는 더 빠르게 확인하고 편집할 수 있도록 Office Open XML 형식(docx 또는 xlsx)으로 변환됩니다.",

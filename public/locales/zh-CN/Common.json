@@ -1766,6 +1766,7 @@
   "CustomFilterDisabled": "所选文件的自定义过滤器已禁用",
   "CustomFilterEnable": "启用自定义过滤器",
   "CustomFilterEnabled": "所选文件的自定义过滤器已启用",
+  "CustomFilterEnableDiscription": "该表已启用自定义过滤器。打开文件的用户可以个性化表格中的数据显示。",
   "Uploading": "上传中",
   "DocumentConversionTitle": "文件转换",
   "ConversionXmlMessage": "您打开的文档文件将被转换为 Office Open XML 格式（docx 或 xlsx），以提高查看和编辑速度。",

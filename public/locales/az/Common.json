@@ -1766,6 +1766,7 @@
   "CustomFilterDisabled": "Seçilmiş fayl üçün Xüsusi filtr deaktiv edildi",
   "CustomFilterEnable": "Xüsusi filtri aktivləşdirin",
   "CustomFilterEnabled": "Seçilmiş fayl üçün Xüsusi filtr aktiv edildi",
+  "CustomFilterEnableDiscription": "Bu cədvəl üçün Xüsusi filtr aktivdir. Faylı açan istifadəçilər cədvəldə məlumatların göstərilməsini fərdiləşdirə bilərlər.",
   "Uploading": "Yüklənir",
   "DocumentConversionTitle": "Sənədin çevrilməsi",
   "ConversionXmlMessage": "Açdığınız sənəd daha sürətli baxmaq və redaktə etmək üçün Office Open XML formatına (docx və ya xlsx) çevriləcək.",

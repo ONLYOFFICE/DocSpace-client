@@ -1766,6 +1766,7 @@
   "CustomFilterDisabled": "Mukautettu suodatin valitulle tiedostolle pois käytöstä",
   "CustomFilterEnable": "Ota mukautettu suodatin käyttöön",
   "CustomFilterEnabled": "Mukautettu suodatin valitulle tiedostolle käytössä",
+  "CustomFilterEnableDiscription": "Mukautettu suodatin on käytössä tässä taulukossa. Tiedoston avanneet käyttäjät voivat mukauttaa tietojen näyttöä taulukossa.",
   "Uploading": "Ladataan",
   "DocumentConversionTitle": "Dokumentin muuntaminen",
   "ConversionXmlMessage": "Asiakirja, jonka avaat muutetaan Office Open XML-muotoon (docx tai xlsx) nopeamman katselun ja muokkaamisen saavuttamiseksi.",

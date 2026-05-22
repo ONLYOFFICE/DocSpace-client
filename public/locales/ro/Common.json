@@ -1766,6 +1766,7 @@
   "CustomFilterDisabled": "Filtru particularizat pentru utilizatorul selectat este dezactivat",
   "CustomFilterEnable": "Activare Filtru particularizat",
   "CustomFilterEnabled": "Filtru particularizat pentru utilizatorul selectat este activat",
+  "CustomFilterEnableDiscription": "Filtru particularizat este activ pentru acest tabel. Utilizatorii care au deschis acest fișier pot particulariza afișarea datelor din tabel.",
   "Uploading": "Încărcare",
   "DocumentConversionTitle": "Conversie document",
   "ConversionXmlMessage": "Fișierul pe care îl deschideți va fi convertit în formatul Office Open XML (docx sau xlsx) pentru vizualizare și editare mai rapidă.",

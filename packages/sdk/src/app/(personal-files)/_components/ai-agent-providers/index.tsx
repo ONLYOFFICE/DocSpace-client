@@ -30,6 +30,7 @@ import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
+import { useTheme } from "@docspace/ui-kit";
 import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
 
 import { useAiChatPanelStore } from "../../_store/AiChatStore";
@@ -42,14 +43,21 @@ const PersonalFilesAiAgentProviders = observer(
   ({ children }: PersonalFilesAiAgentProvidersProps) => {
     const { i18n } = useTranslation();
     const aiChatStore = useAiChatPanelStore();
+    const { isBase } = useTheme();
 
     const getAgentRoomId = React.useCallback(
       () => aiChatStore.agentId,
       [aiChatStore],
     );
 
+    const theme = isBase ? "light" : "dark";
+
     return (
-      <AiAgentProviders locale={i18n.language} getAgentRoomId={getAgentRoomId}>
+      <AiAgentProviders
+        theme={theme}
+        locale={i18n.language}
+        getAgentRoomId={getAgentRoomId}
+      >
         {children}
       </AiAgentProviders>
     );

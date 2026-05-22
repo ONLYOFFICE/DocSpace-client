@@ -72,6 +72,7 @@ const List = ({
   total: totalProp,
   current,
   currentUserId,
+  infoPanelVisible,
 }: ListProps) => {
   const timezone = portalSettings.timezone;
   const displayFileExtension = filesSettings.displayFileExtension;
@@ -343,6 +344,7 @@ const List = ({
         displayFileExtension={displayFileExtension}
         fetchMoreFiles={fetchMoreFiles}
         currentUserId={currentUserId}
+        infoPanelVisible={infoPanelVisible}
       />
     );
   }

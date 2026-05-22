@@ -59,4 +59,5 @@ export type TableViewProps = {
   displayFileExtension: boolean;
   fetchMoreFiles: (params: IndexRange) => Promise<void>;
   currentUserId?: string;
+  infoPanelVisible?: boolean;
 };

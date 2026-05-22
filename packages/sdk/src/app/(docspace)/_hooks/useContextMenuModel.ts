@@ -26,6 +26,7 @@ import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url
 import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
+import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 
 import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
 import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
@@ -73,8 +74,9 @@ export default function useContextMenuModel({
 
   const filesSelectionStore = useFilesSelectionStore();
 
-  const { openFolder, copyFolderLink } = useFolderActions({ t });
-  const { openFile, copyFileLink, lockFile, changeCustomFilter } = useFilesActions({ t });
+  const { openFolder, copyFolderLink, openLocation } = useFolderActions({ t });
+  const { openFile, copyFileLink, lockFile, changeCustomFilter } =
+    useFilesActions({ t });
   const { downloadAction, downloadAsAction } = useDownloadActions();
   const {
     markAsFavorite,
@@ -109,6 +111,24 @@ export default function useContextMenuModel({
       };
     },
     [t, openFolder],
+  );
+
+  const getOpenLocationItem = useCallback(
+    (i: TFileItem | TFolderItem) => {
+      const isFile = "folderId" in i;
+      const locationId = isFile ? i.folderId : i.parentId;
+      const search = isFile ? i.title.replace(i.fileExst ?? "", "") : i.title;
+
+      return {
+        id: "option_open-location",
+        key: "open-location",
+        label: t("Common:OpenLocation"),
+        icon: FolderLocationReactSvgUrl,
+        onClick: () => openLocation(locationId, i.id, search),
+        disabled: false,
+      };
+    },
+    [t, openLocation],
   );
 
   const getPreviewItem = useCallback(
@@ -448,9 +468,7 @@ export default function useContextMenuModel({
   );
 
   const getGroupCopyItem = useCallback(() => {
-    const canCopy = filesSelectionStore.selection.every(
-      (i) => i.security.Copy,
-    );
+    const canCopy = filesSelectionStore.selection.every((i) => i.security.Copy);
     return {
       id: "option_copy",
       key: "copy",
@@ -464,9 +482,7 @@ export default function useContextMenuModel({
   }, [t, onCopySelectedClick, filesSelectionStore.selection]);
 
   const getGroupMoveItem = useCallback(() => {
-    const canMove = filesSelectionStore.selection.every(
-      (i) => i.security.Move,
-    );
+    const canMove = filesSelectionStore.selection.every((i) => i.security.Move);
     return {
       id: "option_move-to",
       key: "move-to",
@@ -536,7 +552,19 @@ export default function useContextMenuModel({
     }
 
     return items;
-  }, [filesSelectionStore.selection, getDownloadAsItem, getDownloadItem, getGroupCopyItem, getGroupMoveItem, getGroupRestoreItem, getGroupDeleteItem, onCopySelectedClick, onMoveSelectedClick, onRestoreSelectedClick, onDeleteSelectedClick]);
+  }, [
+    filesSelectionStore.selection,
+    getDownloadAsItem,
+    getDownloadItem,
+    getGroupCopyItem,
+    getGroupMoveItem,
+    getGroupRestoreItem,
+    getGroupDeleteItem,
+    onCopySelectedClick,
+    onMoveSelectedClick,
+    onRestoreSelectedClick,
+    onDeleteSelectedClick,
+  ]);
 
   const getHeaderContextMenuModel = useCallback(() => {
     const base = getGroupContextMenuModel();
@@ -552,7 +580,8 @@ export default function useContextMenuModel({
       const deleteIndex = base.findLastIndex(
         (i) => i.key === "delete" || i.key === "delete-permanently",
       );
-      const deleteItem = deleteIndex >= 0 ? base.splice(deleteIndex, 1)[0] : null;
+      const deleteItem =
+        deleteIndex >= 0 ? base.splice(deleteIndex, 1)[0] : null;
 
       const favItem = singleFile.isFavorite
         ? getRemoveFromFavoritesItem(singleFile)
@@ -560,7 +589,11 @@ export default function useContextMenuModel({
 
       base.push(favItem);
 
-      if (singleFile.contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.removeFromRecent)) {
+      if (
+        singleFile.contextOptions.includes(
+          AVAILABLE_CONTEXT_ITEMS.removeFromRecent,
+        )
+      ) {
         base.push(getRemoveFromRecentItem(singleFile));
       }
 
@@ -618,6 +651,9 @@ export default function useContextMenuModel({
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.open))
         openGroup.push(getOpenItem(item!));
+
+      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.openLocation))
+        openGroup.push(getOpenLocationItem(item!));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.view))
         openGroup.push(getViewItem(item as TFileItem));
@@ -750,6 +786,7 @@ export default function useContextMenuModel({
       item,
       getSelectItem,
       getOpenItem,
+      getOpenLocationItem,
       getViewItem,
       getOpenPDFItem,
       getFillFormItem,
@@ -782,3 +819,4 @@ export default function useContextMenuModel({
 
   return { getContextMenuModel, getHeaderContextMenuModel };
 }
+

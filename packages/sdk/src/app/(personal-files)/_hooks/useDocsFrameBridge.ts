@@ -44,10 +44,12 @@ import {
   frameHandlePing,
   getFrameId,
 } from "@docspace/shared/utils/common";
+import { FolderType } from "@docspace/shared/enums";
 
 import { DocsSection, DOCS_SECTION_FOLDER_ALIAS } from "@/types/docs";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { PAGE_COUNT } from "@/utils/constants";
+import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
 type UseDocsFrameBridgeParams = {
   isReady: boolean;
@@ -60,6 +62,25 @@ const SETTINGS_PATH = "/personal-files/settings";
 const VALID_SECTIONS: ReadonlySet<string> = new Set(
   Object.values(DocsSection),
 );
+
+const sectionFromRootFolderType = (
+  rootFolderType: FolderType | null,
+): string | null => {
+  switch (rootFolderType) {
+    case FolderType.USER:
+      return DocsSection.MyDocuments;
+    case FolderType.Favorites:
+      return DocsSection.Favorites;
+    case FolderType.Recent:
+      return DocsSection.Recent;
+    case FolderType.SHARE:
+      return DocsSection.SharedWithMe;
+    case FolderType.TRASH:
+      return DocsSection.Trash;
+    default:
+      return null;
+  }
+};
 
 const sectionFromPathnameAndFolder = (
   pathname: string,
@@ -116,9 +137,12 @@ export const useDocsFrameBridge = ({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { rootFolderType } = useFilesListStore();
 
   const rootFolder = searchParams.get("folder");
-  const activeSection = sectionFromPathnameAndFolder(pathname, rootFolder);
+  const activeSection =
+    sectionFromRootFolderType(rootFolderType) ??
+    sectionFromPathnameAndFolder(pathname, rootFolder);
 
   const appReadySent = React.useRef(false);
   React.useEffect(() => {

@@ -64,7 +64,7 @@ export type { HeaderProps };
 
 const Header = ({
   current,
-  pathParts,
+  pathParts: pathPartsProp,
   isEmptyList,
   showTitle = true,
   onBurgerClick,
@@ -113,6 +113,8 @@ const Header = ({
   const title = current?.title;
   const rootFolderId = current?.rootFolderId;
   const id = current?.id;
+
+  const pathParts = filesListStore.pathParts ?? pathPartsProp;
 
   const isRoomsFolder = pathParts?.[0]?.id === rootFolderId;
 

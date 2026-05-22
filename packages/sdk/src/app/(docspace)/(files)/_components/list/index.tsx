@@ -81,7 +81,7 @@ const List = ({
   const { setIsEmptyList, filesViewAs, setFilesViewAs, currentDeviceType } =
     useSettingsStore();
   const filesListStore = useFilesListStore();
-  const { setItems, setRootFolderType } = filesListStore;
+  const { setItems, setRootFolderType, setPathParts } = filesListStore;
   const { setSelection, setBufferSelection } = useFilesSelectionStore();
   const navigationStore = useNavigationStore();
 
@@ -171,6 +171,7 @@ const List = ({
         folders: newFolders,
         total: newTotal,
         current: newCurrent,
+        pathParts: newPathParts,
       } = res;
 
       if (newCurrent?.id) {
@@ -185,6 +186,8 @@ const List = ({
         setRootFolderType(newCurrent.rootFolderType);
         rootFolderTypeRef.current = newCurrent.rootFolderType;
       }
+
+      setPathParts(newPathParts ?? null);
 
       const newItems = [
         ...newFolders.map(convertFolderToItem),
@@ -215,6 +218,7 @@ const List = ({
     navigationStore,
     setCurrentFolderId,
     setRootFolderType,
+    setPathParts,
   ]);
 
   const fetchMoreFiles = React.useCallback(async () => {

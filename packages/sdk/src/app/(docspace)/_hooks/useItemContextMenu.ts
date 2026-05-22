@@ -133,6 +133,10 @@ export default function useItemContextMenu({
       model.add(AVAILABLE_CONTEXT_ITEMS.removeFromRecent);
     }
 
+    if (effectiveIsFavoritesSection || effectiveIsRecentSection) {
+      model.add(AVAILABLE_CONTEXT_ITEMS.openLocation);
+    }
+
     if (isTrashSection) {
       model.add(AVAILABLE_CONTEXT_ITEMS.restore);
     } else {
@@ -203,6 +207,10 @@ export default function useItemContextMenu({
       items.push(AVAILABLE_CONTEXT_ITEMS.markAsFavorite);
     }
 
+    if (isFavoritesSection || isRecentSection) {
+      items.push(AVAILABLE_CONTEXT_ITEMS.openLocation);
+    }
+
     if (isTrashSection) {
       items.push(AVAILABLE_CONTEXT_ITEMS.restore);
     } else {
@@ -224,7 +232,7 @@ export default function useItemContextMenu({
     }
 
     return items;
-  }, [isTrashSection, isDocsSection, isShareSection]);
+  }, [isTrashSection, isDocsSection, isShareSection, isFavoritesSection, isRecentSection]);
 
   return { getFilesContextMenu, getFoldersContextMenu };
 }

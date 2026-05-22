@@ -53,7 +53,7 @@ import { useAppsCatalog, type AppId } from "SRC_DIR/helpers/apps-catalog";
 
 import { ModuleCard, type ModuleItem } from "./ModuleCard";
 import { getGreetingKey, makeCreateUrl, NEW_FILE_NAMES } from "./utils";
-import { InstallAiFormsDialog } from "./InstallModuleDialog";
+import { InstallAiFormsDialog, InstallDocsCloudDialog } from "./InstallModuleDialog";
 import styles from "./Dashboard.module.scss";
 
 interface DashboardProps {
@@ -78,6 +78,7 @@ const Dashboard = ({
   const [searchParams] = useSearchParams();
   const [myFolderId, setMyFolderId] = React.useState<number | null>(null);
   const [installDialogVisible, setInstallDialogVisible] = React.useState(false);
+  const [docsCloudDialogVisible, setDocsCloudDialogVisible] = React.useState(false);
 
   React.useEffect(() => {
     ensureAppsLoaded();
@@ -137,26 +138,41 @@ const Dashboard = ({
   const appsCatalog = useAppsCatalog();
 
   const handleInstall = async (modId: AppId) => {
-    if (modId !== "ai-forms") {
-      toastr.info(t("Common:UnderDevelopment"));
+    if (modId === "ai-forms") {
+      try {
+        const activated = await activate("ai-forms");
+        if (activated) {
+          navigate("/ai-forms");
+        } else {
+          setInstallDialogVisible(true);
+        }
+      } catch (err) {
+        console.error("Failed to activate ai-forms", err);
+        toastr.error(t("Common:SomethingWentWrong"));
+      }
       return;
     }
-    try {
-      const activated = await activate("ai-forms");
-      if (activated) {
-        navigate("/ai-forms");
+
+    if (modId === "docs-cloud") {
+      if (isAppEnabled("docs-cloud")) {
+        navigate("/docs-cloud");
       } else {
-        setInstallDialogVisible(true);
+        setDocsCloudDialogVisible(true);
       }
-    } catch (err) {
-      console.error("Failed to activate ai-forms", err);
-      toastr.error(t("Common:SomethingWentWrong"));
+      return;
     }
+
+    toastr.info(t("Common:UnderDevelopment"));
   };
 
   const handleInstalled = () => {
     setInstallDialogVisible(false);
     navigate("/ai-forms");
+  };
+
+  const handleDocsCloudInstalled = () => {
+    setDocsCloudDialogVisible(false);
+    navigate("/docs-cloud");
   };
 
   const greetingName = firstName ? `, ${firstName}` : "";
@@ -273,6 +289,12 @@ const Dashboard = ({
         onClose={() => setInstallDialogVisible(false)}
         onInstalled={handleInstalled}
       />
+
+      <InstallDocsCloudDialog
+        visible={docsCloudDialogVisible}
+        onClose={() => setDocsCloudDialogVisible(false)}
+        onInstalled={handleDocsCloudInstalled}
+      />
     </div>
   );
 };
@@ -292,4 +314,3 @@ const DashboardConnected = inject<TStore>(
 export { DashboardConnected as Dashboard };
 
 export default DashboardConnected;
-

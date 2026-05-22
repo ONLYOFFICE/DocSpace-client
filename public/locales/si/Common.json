@@ -1817,5 +1817,7 @@
   "RoomRenamed": "කාමරය <1>«{{oldRoomTitle}}»</1> <2>«{{roomTitle}}»</2> ලෙස නැවත නම් කරන ලදී",
   "RoomToArchiveMove": "කාමරය {{sectionName}} වෙත ගෙන යන ලදී",
   "RoomFromArchiveRestore": "කාමරය {{sectionName}} වෙතින් ලබා ගන්නා ලදී",
-  "RoomChangeOwner": "කාමර හිමිකරු වෙනස් විය."
+  "RoomChangeOwner": "කාමර හිමිකරු වෙනස් විය.",
+  "EnableAiRoomsTitle": "AI කාමර සක්‍රිය කරන්නද?",
+  "EnableAiRoomsDescription": "ගොනු සංවිධානය කිරීමට සහ කණ්ඩායම් හෝ සේවාදායකයින් සමඟ සහයෝගිතාවට අභිමත කළ හැකි කාර්ය ඉඩ. එක් එක් ව්‍යාපෘතිය සඳහා සකස් කළ ප්‍රවේශ අයිතිවාසිකම් සහ පරිසරයන් සකසන්න."
 }

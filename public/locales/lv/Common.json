@@ -1817,5 +1817,7 @@
   "RoomRenamed": "Telpa ir <1>«{{oldRoomTitle}}»</1> pārdēvēta par <2>«{{roomTitle}}»</2>",
   "RoomToArchiveMove": "Istaba pārvietota uz {{sectionName}}",
   "RoomFromArchiveRestore": "Istaba atgūta no {{sectionName}}",
-  "RoomChangeOwner": "Īpašnieks telpā mainīts."
+  "RoomChangeOwner": "Īpašnieks telpā mainīts.",
+  "EnableAiRoomsTitle": "Aktivizēt MI telpas?",
+  "EnableAiRoomsDescription": "Pielāgojamas darba telpas failu organizēšanai un sadarbībai ar komandām vai klientiem. Iestatiet pielāgotas piekļuves tiesības un vides katram projektam."
 }

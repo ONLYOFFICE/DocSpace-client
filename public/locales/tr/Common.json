@@ -1817,5 +1817,7 @@
   "RoomRenamed": "Oda <1>«{{oldRoomTitle}}»</1> <2>«{{roomTitle}}»</2> olarak yeniden adlandırıldı",
   "RoomToArchiveMove": "Oda {{sectionName}} bölümüne taşındı",
   "RoomFromArchiveRestore": "{{sectionName}}'den kurtarılan oda",
-  "RoomChangeOwner": "Oda sahibi değişti."
+  "RoomChangeOwner": "Oda sahibi değişti.",
+  "EnableAiRoomsTitle": "AI odaları etkinleştirilsin mi?",
+  "EnableAiRoomsDescription": "Dosyaları düzenlemek ve ekipler veya müşterilerle iş birliği yapmak için özelleştirilebilir çalışma alanları. Her proje için özel erişim hakları ve ortamları belirleyin."
 }

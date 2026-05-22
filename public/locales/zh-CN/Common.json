@@ -1817,5 +1817,7 @@
   "RoomRenamed": "房间<1>«{{oldRoomTitle}}»</1>已重命名为<2>«{{roomTitle}}»</2>",
   "RoomToArchiveMove": "房间已移至{{sectionName}}",
   "RoomFromArchiveRestore": "房间已从{{sectionName}}恢复",
-  "RoomChangeOwner": "房间所有者已更改。"
+  "RoomChangeOwner": "房间所有者已更改。",
+  "EnableAiRoomsTitle": "启用 AI 房间？",
+  "EnableAiRoomsDescription": "可定制的工作空间，用于组织文件以及与团队或客户协作。为每个项目设置专属的访问权限和环境。"
 }

@@ -1817,5 +1817,7 @@
   "RoomRenamed": "Místnost <1>«{{oldRoomTitle}}»</1> přejmenována na <2>«{{roomTitle}}»</2>",
   "RoomToArchiveMove": "Pokoj přesunut do {{sectionName}}",
   "RoomFromArchiveRestore": "Místnost obnovena z {{sectionName}}",
-  "RoomChangeOwner": "Majitel místnosti se změnil."
+  "RoomChangeOwner": "Majitel místnosti se změnil.",
+  "EnableAiRoomsTitle": "Aktivovat AI místnosti?",
+  "EnableAiRoomsDescription": "Přizpůsobitelné pracovní prostory pro organizaci souborů a spolupráci s týmy nebo klienty. Nastavte přizpůsobená přístupová práva a prostředí pro každý projekt."
 }

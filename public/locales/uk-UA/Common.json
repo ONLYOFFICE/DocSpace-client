@@ -1817,5 +1817,7 @@
   "RoomRenamed": "Кімнату <1>«{{oldRoomTitle}}»</1> перейменовано в <2>«{{roomTitle}}»</2>",
   "RoomToArchiveMove": "Кімната перенесена до {{sectionName}}",
   "RoomFromArchiveRestore": "Кімната відновлена з {{sectionName}}",
-  "RoomChangeOwner": "Власник кімнати змінено."
+  "RoomChangeOwner": "Власник кімнати змінено.",
+  "EnableAiRoomsTitle": "Активувати ШІ-кімнати?",
+  "EnableAiRoomsDescription": "Налаштовувані робочі простори для організації файлів та співпраці з командами чи клієнтами. Встановлюйте індивідуальні права доступу та середовища для кожного проєкту."
 }

@@ -1776,5 +1776,7 @@
   "FailedToConvert": "변환에 실패했습니다",
   "ByAuthor": "생성자",
   "ByCreation": "생성일",
-  "ByLastModified": "수정일"
+  "ByLastModified": "수정일",
+  "EnableAiRoomsTitle": "AI 방을 활성화하시겠습니까?",
+  "EnableAiRoomsDescription": "파일을 정리하고 팀이나 클라이언트와 협업할 수 있는 사용자 지정 가능한 작업 공간입니다. 각 프로젝트에 맞는 액세스 권한과 환경을 설정하세요."
 }

@@ -1817,5 +1817,7 @@
   "RoomRenamed": "Nazwa pokoju <1>«{{oldRoomTitle}}»</1> została zmieniona na <2>«{{roomTitle}}»</2>",
   "RoomToArchiveMove": "Pokój przeniesiony do {{sectionName}}",
   "RoomFromArchiveRestore": "Pokój odzyskano z {{sectionName}}",
-  "RoomChangeOwner": "Właściciel pokoju został zmieniony."
+  "RoomChangeOwner": "Właściciel pokoju został zmieniony.",
+  "EnableAiRoomsTitle": "Włączyć Pokoje AI?",
+  "EnableAiRoomsDescription": "Konfigurowalne obszary robocze do organizowania plików i współpracy z zespołami lub klientami. Ustaw dostosowane prawa dostępu i środowiska dla każdego projektu."
 }

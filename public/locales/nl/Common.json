@@ -1817,5 +1817,7 @@
   "RoomRenamed": "Kamer <1>«{{oldRoomTitle}}»</1> hernoemd naar <2>«{{roomTitle}}»</2>",
   "RoomToArchiveMove": "Room verplaatst naar {{sectionName}}",
   "RoomFromArchiveRestore": "Ruimte teruggevonden uit {{sectionName}}",
-  "RoomChangeOwner": "Kamer eigenaar gewijzigd."
+  "RoomChangeOwner": "Kamer eigenaar gewijzigd.",
+  "EnableAiRoomsTitle": "AI-kamers inschakelen?",
+  "EnableAiRoomsDescription": "Aanpasbare werkruimtes voor het organiseren van bestanden en samenwerken met teams of klanten. Stel aangepaste toegangsrechten en omgevingen in voor elk project."
 }

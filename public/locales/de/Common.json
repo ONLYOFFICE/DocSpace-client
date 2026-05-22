@@ -1817,5 +1817,7 @@
   "RoomRenamed": "Raum <1>«{{oldRoomTitle}}»</1> umbenannt in <2>«{{roomTitle}}»</2>",
   "RoomToArchiveMove": "Raum nach {{sectionName}} verschoben",
   "RoomFromArchiveRestore": "Raum von {{sectionName}} wiederhergestellt",
-  "RoomChangeOwner": "Besitzer des Raums geändert."
+  "RoomChangeOwner": "Besitzer des Raums geändert.",
+  "EnableAiRoomsTitle": "KI-Räume aktivieren?",
+  "EnableAiRoomsDescription": "Anpassbare Arbeitsbereiche zur Organisation von Dateien und für die Zusammenarbeit mit Teams oder Kunden. Legen Sie für jedes Projekt maßgeschneiderte Zugriffsrechte und Umgebungen fest."
 }

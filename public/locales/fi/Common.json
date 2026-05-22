@@ -1817,5 +1817,7 @@
   "RoomRenamed": "Huone <1>«{{oldRoomTitle}}»</1> nimetty uudelleen <2>«{{roomTitle}}»</2>",
   "RoomToArchiveMove": "Huone siirretty {{sectionName}} -kohtaan",
   "RoomFromArchiveRestore": "Huone palautettu {{sectionName}}-sta",
-  "RoomChangeOwner": "Huoneen omistaja vaihtui."
+  "RoomChangeOwner": "Huoneen omistaja vaihtui.",
+  "EnableAiRoomsTitle": "Otetaanko AI-huoneet käyttöön?",
+  "EnableAiRoomsDescription": "Mukautettavat työtilat tiedostojen järjestämiseen ja yhteistyöhön tiimien tai asiakkaiden kanssa. Aseta räätälöidyt käyttöoikeudet ja ympäristöt jokaiselle projektille."
 }

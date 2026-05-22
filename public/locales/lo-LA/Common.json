@@ -1817,5 +1817,7 @@
   "RoomRenamed": "ຫ້ອງ <1>«{{oldRoomTitle}}»</1> ປ່ຽນຊື່ເປັນ <2>«{{roomTitle}}»</2>",
   "RoomToArchiveMove": "ຍ້າຍຫ້ອງໄປ {{sectionName}} ແລ້ວ",
   "RoomFromArchiveRestore": "ຟື້ນຄືນຫ້ອງຈາກ {{sectionName}}",
-  "RoomChangeOwner": "ເຈົ້າຂອງຫ້ອງປ່ຽນແປງ."
+  "RoomChangeOwner": "ເຈົ້າຂອງຫ້ອງປ່ຽນແປງ.",
+  "EnableAiRoomsTitle": "ເປີດໃຊ້ຫ້ອງ AI ບໍ?",
+  "EnableAiRoomsDescription": "ພື້ນທີ່ເຮັດວຽກທີ່ສາມາດປັບແຕ່ງໄດ້ສຳລັບການຈັດການເອກະສານ ແລະ ການເຮັດວຽກຮ່ວມກັນກັບທີມ ຫຼື ລູກຄ້າ. ກຳນົດສິດການເຂົ້າເຖິງ ແລະ ສະພາບແວດລ້ອມທີ່ເໝາະສົມສຳລັບແຕ່ລະໂຄງການ."
 }

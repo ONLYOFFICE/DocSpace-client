@@ -1817,5 +1817,7 @@
   "RoomRenamed": "Phòng <1>«{{oldRoomTitle}}»</1> được đổi tên thành <2>«{{roomTitle}}»</2>",
   "RoomToArchiveMove": "Đã chuyển phòng đến {{sectionName}}",
   "RoomFromArchiveRestore": "Phòng được phục hồi từ {{sectionName}}",
-  "RoomChangeOwner": "Chủ phòng đã thay đổi."
+  "RoomChangeOwner": "Chủ phòng đã thay đổi.",
+  "EnableAiRoomsTitle": "Bật phòng AI?",
+  "EnableAiRoomsDescription": "Không gian làm việc tùy chỉnh để tổ chức tệp và cộng tác với các nhóm hoặc khách hàng. Thiết lập quyền truy cập và môi trường phù hợp cho từng dự án."
 }

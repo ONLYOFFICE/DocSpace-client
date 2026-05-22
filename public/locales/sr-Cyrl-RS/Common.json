@@ -1817,5 +1817,7 @@
   "RoomRenamed": "Просторија <1>«{{oldRoomTitle}}»</1> преименована на <2>«{{roomTitle}}»</2>",
   "RoomToArchiveMove": "Соба премештена у {{sectionName}}",
   "RoomFromArchiveRestore": "Соба опорављена из {{sectionName}}",
-  "RoomChangeOwner": "Соба је промењен власник."
+  "RoomChangeOwner": "Соба је промењен власник.",
+  "EnableAiRoomsTitle": "Активирати АИ собе?",
+  "EnableAiRoomsDescription": "Прилагодљиви радни простори за организовање датотека и сарадњу са тимовима или клијентима. Поставите прилагођена права приступа и окружења за сваки пројекат."
 }

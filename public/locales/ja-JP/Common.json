@@ -1817,5 +1817,7 @@
   "RoomRenamed": "ルーム名<1>«{{oldRoomTitle}}»</1>を<2>«{{roomTitle}}»</2>に変更されました。",
   "RoomToArchiveMove": "ルームが{{sectionName}}に移動しました",
   "RoomFromArchiveRestore": "{{sectionName}}から回復したルーム",
-  "RoomChangeOwner": "ルームのオーナーが変更されました。"
+  "RoomChangeOwner": "ルームのオーナーが変更されました。",
+  "EnableAiRoomsTitle": "AIルームを有効にしますか？",
+  "EnableAiRoomsDescription": "ファイルを整理し、チームやクライアントと共同作業できるカスタマイズ可能なワークスペースです。プロジェクトごとに最適なアクセス権限と環境を設定できます。"
 }

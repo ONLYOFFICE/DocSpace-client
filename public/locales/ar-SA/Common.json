@@ -1819,5 +1819,7 @@
   "RoomRenamed": "Room <1>«{{oldRoomTitle}}»</1> تم تغيير اسمها إلى <2>«{{roomTitle}}»</2>",
   "RoomToArchiveMove": "تم نقل الغرفة إلى {{sectionName}}",
   "RoomFromArchiveRestore": "تم استرداد الغرفة من {{sectionName}}",
-  "RoomChangeOwner": "تم تغيير مالك الغرفة."
+  "RoomChangeOwner": "تم تغيير مالك الغرفة.",
+  "EnableAiRoomsTitle": "تمكين غرف الذكاء الاصطناعي؟",
+  "EnableAiRoomsDescription": "مساحات عمل قابلة للتخصيص لتنظيم الملفات والتعاون مع الفرق أو العملاء. حدد أذونات الوصول والبيئات المخصصة لكل مشروع."
 }

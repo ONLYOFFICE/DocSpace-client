@@ -1817,5 +1817,7 @@
   "RoomRenamed": "Stanza <1>«{{oldRoomTitle}}»</1> rinominata <2>«{{roomTitle}}»</2>",
   "RoomToArchiveMove": "Stanza spostata in {{sectionName}}",
   "RoomFromArchiveRestore": "Stanza ripristinata da {{sectionName}}",
-  "RoomChangeOwner": "Il proprietario della stanza è stato modificato."
+  "RoomChangeOwner": "Il proprietario della stanza è stato modificato.",
+  "EnableAiRoomsTitle": "Abilitare Stanze IA?",
+  "EnableAiRoomsDescription": "Spazi di lavoro personalizzabili per organizzare file e collaborare con team o clienti. Imposta diritti di accesso e ambienti su misura per ogni progetto."
 }

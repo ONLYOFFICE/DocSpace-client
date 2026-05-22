@@ -1817,5 +1817,7 @@
   "RoomRenamed": "Dhoma<1>«{{oldRoomTitle}}»</1> u riemërua në<2>«{{roomTitle}}»</2>",
   "RoomToArchiveMove": "Dhoma u zhvendos te {{sectionName}}",
   "RoomFromArchiveRestore": "Dhoma u rikuperua nga {{sectionName}}",
-  "RoomChangeOwner": "Pronari i dhomës u ndryshua."
+  "RoomChangeOwner": "Pronari i dhomës u ndryshua.",
+  "EnableAiRoomsTitle": "Aktivizoni dhomat IA?",
+  "EnableAiRoomsDescription": "Hapësira pune të personalizueshme për organizimin e skedarëve dhe bashkëpunimin me ekipet ose klientët. Vendosni të drejta aksesi dhe mjedise të përshtatura për çdo projekt."
 }

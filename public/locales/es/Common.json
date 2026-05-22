@@ -1817,5 +1817,7 @@
   "RoomRenamed": "La sala  <1>«{{oldRoomTitle}}»</1> ha cambiado de nombre a <2>«{{roomTitle}}»</2>",
   "RoomToArchiveMove": "Sala movida a {{sectionName}}",
   "RoomFromArchiveRestore": "Sala recuperada de {{sectionName}}",
-  "RoomChangeOwner": "El propietario de la sala ha cambiado."
+  "RoomChangeOwner": "El propietario de la sala ha cambiado.",
+  "EnableAiRoomsTitle": "¿Activar Salas de IA?",
+  "EnableAiRoomsDescription": "Espacios de trabajo personalizables para organizar archivos y colaborar con equipos o clientes. Configure derechos de acceso y entornos a medida para cada proyecto."
 }

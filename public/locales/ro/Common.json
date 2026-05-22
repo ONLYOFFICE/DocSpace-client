@@ -1817,5 +1817,7 @@
   "RoomRenamed": "Sala <1>«{{oldRoomTitle}}»</1> a fost redenumită <2>«{{roomTitle}}»</2>",
   "RoomToArchiveMove": "Sala a fost mutată în {{sectionName}}",
   "RoomFromArchiveRestore": "Sală a fost recuperată din {{sectionName}}",
-  "RoomChangeOwner": "Proprietarul sălii a fost schimbat."
+  "RoomChangeOwner": "Proprietarul sălii a fost schimbat.",
+  "EnableAiRoomsTitle": "Activați sălile IA?",
+  "EnableAiRoomsDescription": "Spații de lucru personalizabile pentru organizarea fișierelor și colaborarea cu echipe sau clienți. Setați drepturi de acces și medii personalizate pentru fiecare proiect."
 }

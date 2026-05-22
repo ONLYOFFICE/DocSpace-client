@@ -1817,5 +1817,7 @@
   "RoomRenamed": "Miestnosť <1>«{{oldRoomTitle}}»</1> premenovaná na <2>«{{roomTitle}}»</2>",
   "RoomToArchiveMove": "Miestnosť presunutá do {{sectionName}}",
   "RoomFromArchiveRestore": "Miestnosť obnovená z {{sectionName}}",
-  "RoomChangeOwner": "Vlastník miestnosti bol zmenený."
+  "RoomChangeOwner": "Vlastník miestnosti bol zmenený.",
+  "EnableAiRoomsTitle": "Aktivovať AI miestnosti?",
+  "EnableAiRoomsDescription": "Prispôsobiteľné pracovné priestory na organizáciu súborov a spoluprácu s tímami alebo klientmi. Nastavte prispôsobené prístupové práva a prostredia pre každý projekt."
 }

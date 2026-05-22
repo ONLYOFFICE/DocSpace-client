@@ -41,6 +41,7 @@ import {
   InstallAiFormsDialog,
   InstallDocsCloudDialog,
 } from "SRC_DIR/pages/Dashboard/InstallModuleDialog";
+import { EnableAiRoomsDialog } from "SRC_DIR/pages/Dashboard/EnableAiRoomsDialog";
 
 import CatalogDocumentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";

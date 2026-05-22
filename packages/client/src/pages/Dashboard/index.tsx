@@ -57,6 +57,7 @@ import {
   InstallAiFormsDialog,
   InstallDocsCloudDialog,
 } from "./InstallModuleDialog";
+import { EnableAiRoomsDialog } from "./EnableAiRoomsDialog";
 import styles from "./Dashboard.module.scss";
 
 interface DashboardProps {

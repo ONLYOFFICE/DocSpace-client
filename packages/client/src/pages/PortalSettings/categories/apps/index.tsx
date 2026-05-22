@@ -43,6 +43,7 @@ import {
   InstallAiFormsDialog,
   InstallDocsCloudDialog,
 } from "../../../Dashboard/InstallModuleDialog";
+import { EnableAiRoomsDialog } from "../../../Dashboard/EnableAiRoomsDialog";
 
 import styles from "./Apps.module.scss";
 

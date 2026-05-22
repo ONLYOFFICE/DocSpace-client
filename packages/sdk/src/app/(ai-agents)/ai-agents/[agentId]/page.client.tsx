@@ -38,6 +38,8 @@ import {
   useAiRoomStore,
   useAgentDialogsStore,
   useAgentLoadingStore,
+  useKnowledgeFilesStore,
+  useResultFilesStore,
 } from "../../_store";
 import type { AiRoomTab } from "../../_store";
 import useAiAgentsPageInit from "../../_hooks/useAiAgentsPageInit";
@@ -69,6 +71,8 @@ const AiAgentDetailPage = ({
   const aiRoomStore = useAiRoomStore();
   const dialogsStore = useAgentDialogsStore();
   const loadingStore = useAgentLoadingStore();
+  const knowledgeFilesStore = useKnowledgeFilesStore();
+  const resultFilesStore = useResultFilesStore();
 
   useAiAgentsPageInit();
   useAiAgentsFrameBridge(true, aiRoomStore.currentTab);
@@ -88,66 +92,76 @@ const AiAgentDetailPage = ({
 
   // Fetch the agent — if it 404s or the user has no access, flip the
   // not-available flag so AiAgentView falls back to <NoAccessAgent />.
+  // Mirrors client `FilesStore.fetchFiles`: a single getFolder call yields
+  // both the agent's metadata (data.current.title) and its Knowledge /
+  // ResultStorage subfolders. AbortController cancels in-flight requests
+  // when the user fast-switches between agents — the aborted promise
+  // rejects and the catch path skips the not-available flag.
   React.useEffect(() => {
     if (!roomId) return;
-    let cancelled = false;
     aiRoomStore.setIsErrorAIAgentNotAvailable(false);
-    // Clear the previous agent's folder IDs immediately — without this,
-    // AiAgentView keeps rendering the old agent's knowledge/result files
-    // until the new getFolder() resolves (visible flash on fast nav).
+    // Clear the previous agent's folder IDs / title immediately — without
+    // this, the @header slot would flash the stale name and AiAgentView
+    // would keep rendering the old agent's knowledge/result files until
+    // the new getFolder() resolves.
     aiRoomStore.setKnowledgeId(null);
     aiRoomStore.setResultId(null);
-    // Clear the previous agent's title — the @header parallel route reads
-    // from `aiRoomStore.title` and would otherwise flash the stale name
-    // while getAIAgent resolves.
     aiRoomStore.setTitle("");
     loadingStore.setIsSectionBodyLoading(true);
-    // Capture the room id this effect was started for — every async write
-    // back into the store is guarded against it, so a fast switch between
-    // agents can't have an in-flight response from the previous agent
-    // clobber the new agent's state.
-    const requestedRoomId = roomId;
-    const isStale = () => cancelled || aiRoomStore.roomId !== requestedRoomId;
 
-    void api.ai
-      .getAIAgent(roomId)
-      .then(async (agent) => {
-        if (isStale()) return;
-        aiRoomStore.setIsErrorAIAgentNotAvailable(false);
-        aiRoomStore.setTitle(agent?.title ?? "");
-        // Discover the agent's Knowledge / ResultStorage subfolders so the
-        // corresponding tabs can list their files. Matches the client
-        // FilesStore flow where folder.type drives setKnowledgeId/setResultId.
-        try {
-          const folderData = await api.files.getFolder(
-            roomId,
-            FilesFilter.getDefault(),
-          );
-          if (isStale()) return;
-          const knowledge = folderData.folders.find(
-            (f) => f.type === FolderType.Knowledge,
-          );
-          const result = folderData.folders.find(
-            (f) => f.type === FolderType.ResultStorage,
-          );
-          aiRoomStore.setKnowledgeId(knowledge ? knowledge.id : null);
-          aiRoomStore.setResultId(result ? result.id : null);
-        } catch {
-          // Tab file lists will show "no folder configured" — chat tab
-          // remains usable, so we don't escalate to NoAccessAgent.
-        }
+    const controller = new AbortController();
+
+    void api.files
+      .getFolder(roomId, FilesFilter.getDefault(), controller.signal)
+      .then((data) => {
+        aiRoomStore.setTitle(data.current?.title ?? "");
+        const knowledge = data.folders.find(
+          (f) => f.type === FolderType.Knowledge,
+        );
+        const result = data.folders.find(
+          (f) => f.type === FolderType.ResultStorage,
+        );
+        aiRoomStore.setKnowledgeId(knowledge ? knowledge.id : null);
+        aiRoomStore.setResultId(result ? result.id : null);
       })
-      .catch(() => {
-        if (isStale()) return;
+      .catch((err) => {
+        if (controller.signal.aborted) return;
+        if (err?.name === "CanceledError" || err?.code === "ERR_CANCELED")
+          return;
         aiRoomStore.setIsErrorAIAgentNotAvailable(true);
       })
       .finally(() => {
-        if (!isStale()) loadingStore.setIsSectionBodyLoading(false);
+        if (!controller.signal.aborted)
+          loadingStore.setIsSectionBodyLoading(false);
       });
+
     return () => {
-      cancelled = true;
+      controller.abort();
     };
   }, [roomId, aiRoomStore, loadingStore]);
+
+  // Reset Knowledge / Result file stores immediately on roomId change so
+  // the previous agent's files don't flash inside the tabs while the new
+  // ids are still being discovered.
+  React.useEffect(() => {
+    knowledgeFilesStore.reset();
+    resultFilesStore.reset();
+  }, [roomId, knowledgeFilesStore, resultFilesStore]);
+
+  // Once knowledge / result folder ids are resolved, point the per-tab
+  // stores at the new folder. `setFolder` aborts in-flight requests,
+  // clears state, and re-fetches in one call.
+  React.useEffect(() => {
+    if (aiRoomStore.knowledgeId) {
+      knowledgeFilesStore.setFolder(aiRoomStore.knowledgeId);
+    }
+  }, [aiRoomStore.knowledgeId, knowledgeFilesStore]);
+
+  React.useEffect(() => {
+    if (aiRoomStore.resultId) {
+      resultFilesStore.setFolder(aiRoomStore.resultId);
+    }
+  }, [aiRoomStore.resultId, resultFilesStore]);
 
   return (
     <>

@@ -67,6 +67,7 @@ export const SettingsTabs = observer(function SettingsTabs() {
       selectedItemId={currentTabId}
       onSelect={onSelect}
       stickyTop="0"
+      withoutStickyIntend
     />
   );
 });

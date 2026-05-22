@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// Shared "created date" formatter used by AgentsList and AgentFilesList.
+// Shared "created date" formatter used by AgentsList.
 // Falls back to empty string on undefined/invalid input so callers can render
 // the result unchecked.
 export const formatCreated = (created: string | undefined) => {

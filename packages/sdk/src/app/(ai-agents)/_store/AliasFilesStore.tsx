@@ -35,7 +35,7 @@ class AliasFilesStore {
 
   viewAs: AliasViewAs = "row";
 
-  readonly alias: string;
+  alias: string;
 
   readonly categoryType: CategoryValue;
 
@@ -46,11 +46,46 @@ class AliasFilesStore {
     this.categoryType = categoryType;
     this.filter = FilesFilter.getDefault({ categoryType });
     // FilesFilter.getDefault only sets `folder` for Recent/SharedWithMe/
-    // Favorite — Trash (and any future alias) falls through to DEFAULT_FOLDER
-    // (`@my`). Pin it explicitly so the alias never leaks `@my` to fetchers.
-    this.filter.folder = alias;
+    // Favorite — Trash, AIAgents, and any future alias fall through to
+    // DEFAULT_FOLDER (`@my`). Pin explicitly so the alias never leaks `@my`.
+    if (alias) this.filter.folder = alias;
     makeAutoObservable<this, "abort">(this, { abort: false });
   }
+
+  // Swap the underlying folder — used by per-agent stores (Knowledge /
+  // Result) whose folderId is only known after the parent agent loads and
+  // changes when the user switches between agents. Resets list state +
+  // filter + aborts in-flight requests, then re-fetches.
+  setFolder = (folderId: string | number) => {
+    const next = String(folderId);
+    if (this.alias === next) return;
+    this.alias = next;
+    this.abort?.abort();
+    this.abort = null;
+    const filter = FilesFilter.getDefault({ categoryType: this.categoryType });
+    filter.folder = next;
+    this.files = [];
+    this.folders = [];
+    this.current = null;
+    this.total = 0;
+    this.filter = filter;
+    void this.fetch(filter);
+  };
+
+  // Clear list state without refetching. Used when the parent agent
+  // unmounts / changes — keeps the store alive for the next swap but
+  // prevents the stale agent's files from flashing on switch.
+  reset = () => {
+    this.alias = "";
+    this.abort?.abort();
+    this.abort = null;
+    this.files = [];
+    this.folders = [];
+    this.current = null;
+    this.total = 0;
+    this.filter = FilesFilter.getDefault({ categoryType: this.categoryType });
+    this.isLoading = false;
+  };
 
   setIsLoading = (value: boolean) => {
     this.isLoading = value;

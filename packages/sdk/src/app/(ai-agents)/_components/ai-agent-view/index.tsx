@@ -32,12 +32,14 @@ import dynamic from "next/dynamic";
 
 import NoAgentItem from "../no-agent-item";
 import NoAccessAgent from "../no-access-agent";
-import AgentFilesList from "../agent-files-list";
+import AliasFilesList from "../alias-files-list";
 import {
   useAiRoomStore,
   useAgentLoadingStore,
   useAgentsAIConfigStore,
   useAgentsUserStore,
+  useKnowledgeFilesStore,
+  useResultFilesStore,
 } from "../../_store";
 
 import styles from "./AIAgentView.module.scss";
@@ -109,11 +111,11 @@ const AiAgentView = () => {
         </Activity>
       ) : null}
 
-      {currentTab === "knowledge" ? (
-        <AgentFilesList folderId={knowledgeId} slot="knowledge" />
+      {currentTab === "knowledge" && knowledgeId ? (
+        <AliasFilesList useStore={useKnowledgeFilesStore} />
       ) : null}
-      {currentTab === "result" ? (
-        <AgentFilesList folderId={resultId} slot="result" />
+      {currentTab === "result" && resultId ? (
+        <AliasFilesList useStore={useResultFilesStore} />
       ) : null}
     </>
   );

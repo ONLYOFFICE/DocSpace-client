@@ -42,6 +42,7 @@ import {
   AgentInfoPanelBody,
   AgentInfoPanelHeader,
 } from "./_components/info-panel";
+import { AgentsCommonDataProvider } from "./_store/AgentsCommonDataContext";
 
 // Imported only for side effects: cross-route CSS overrides that need to
 // out-rank per-page chunks in the cascade.
@@ -132,9 +133,13 @@ const SectionShell = observer(
     const isInfoVisible = infoPanel.isVisible && !!infoPanel.currentAgent;
 
     // The agent detail page hosts the chat (or a result file viewer), which
-    // owns its scroll and must fill the section height. Mirrors client
-    // Home/index.js — toggle `fullHeightBody` + `withoutFooter`, leave
-    // `withBodyScroll` at its default.
+    // owns its scroll and must fill the section height. The SDK doesn't
+    // have the client's outer MainLayout chain, so wrapping SectionBody in
+    // a custom Scrollbar (`withBodyScroll: true`) collapses the chat: the
+    // scroll-body is content-sized and the chat's `height: 100%` has no
+    // definite parent to resolve against. Disable `withBodyScroll` here so
+    // SectionBody renders as a non-scrolling flex-column anchor and toggle
+    // `fullHeightBody` + `withoutFooter` to let the chat fill the section.
     const isAgentDetail = /\/ai-agents\/(?!settings(?:$|\/)|recent$|favorites$|trash$)[^/]+$/.test(
       pathname,
     );
@@ -158,7 +163,7 @@ const SectionShell = observer(
             if (!visible) infoPanel.hide();
           }}
           canDisplay={isInfoVisible}
-          withBodyScroll
+          withBodyScroll={!isAgentDetail}
           fullHeightBody={isAgentDetail}
           withoutFooter={isAgentDetail}
           uploadFiles={false}
@@ -252,11 +257,18 @@ export default function AiAgentsRootLayout({
         <DocspaceFilesLayout
           initSettingsStoreData={{ viewAs: commonData.initialViewAs }}
         >
-          <AiAgentsBootstrap commonData={commonData}>
-            <SectionShell header={header} filter={filter} submenu={submenu}>
-              {children}
-            </SectionShell>
-          </AiAgentsBootstrap>
+          <AgentsCommonDataProvider
+            value={{
+              filesSettings: commonData.filesSettings ?? null,
+              portalSettings: commonData.portalSettings ?? null,
+            }}
+          >
+            <AiAgentsBootstrap commonData={commonData}>
+              <SectionShell header={header} filter={filter} submenu={submenu}>
+                {children}
+              </SectionShell>
+            </AiAgentsBootstrap>
+          </AgentsCommonDataProvider>
         </DocspaceFilesLayout>
       </AiAgentsStoreProviders>
     </main>

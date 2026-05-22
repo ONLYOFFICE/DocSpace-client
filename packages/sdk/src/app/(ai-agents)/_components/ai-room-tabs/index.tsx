@@ -63,8 +63,8 @@ const AiRoomTabs = () => {
     setCurrentTab(id);
 
     // Don't touch knowledgeId/resultId here — they're owned by the parent
-    // page effect (folder discovery), and AgentFilesList renders its own
-    // per-slot loader, so a global section-body loader isn't needed either.
+    // page effect (folder discovery), and each tab's AliasFilesList drives
+    // its own store/loader, so a global section-body loader isn't needed.
     if (!roomId) return;
 
     // Preserve unknown query params; drop fileId for non-result tabs so the
@@ -103,6 +103,7 @@ const AiRoomTabs = () => {
       items={items}
       onSelect={onSelect}
       withAnimation
+      withoutStickyIntend
     />
   );
 };

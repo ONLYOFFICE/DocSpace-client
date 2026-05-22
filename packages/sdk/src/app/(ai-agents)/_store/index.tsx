@@ -49,11 +49,12 @@ import { AgentsUserStoreContextProvider } from "./AgentsUserStore";
 import { AgentsQuotaStoreContextProvider } from "./AgentsQuotaStore";
 import { AgentsAIConfigStoreContextProvider } from "./AgentsAIConfigStore";
 import { AISettingsStoreContextProvider } from "./AISettingsStore";
-import { AgentFilesStoreContextProvider } from "./AgentFilesStore";
 import { AgentInfoPanelStoreContextProvider } from "./AgentInfoPanelStore";
 import { RecentFilesStoreContextProvider } from "./RecentFilesStore";
 import { FavoritesFilesStoreContextProvider } from "./FavoritesFilesStore";
 import { TrashFilesStoreContextProvider } from "./TrashFilesStore";
+import { KnowledgeFilesStoreContextProvider } from "./KnowledgeFilesStore";
+import { ResultFilesStoreContextProvider } from "./ResultFilesStore";
 
 export const AiAgentsStoreProviders = ({
   children,
@@ -73,19 +74,21 @@ export const AiAgentsStoreProviders = ({
                   <AgentsQuotaStoreContextProvider>
                     <AgentsAIConfigStoreContextProvider>
                       <AISettingsStoreContextProvider>
-                        <AgentFilesStoreContextProvider>
-                          <RecentFilesStoreContextProvider>
-                            <FavoritesFilesStoreContextProvider>
-                              <TrashFilesStoreContextProvider>
-                                <AgentInfoPanelStoreContextProvider>
-                                  <AgentsListStoreContextProvider>
-                                    {children}
-                                  </AgentsListStoreContextProvider>
-                                </AgentInfoPanelStoreContextProvider>
-                              </TrashFilesStoreContextProvider>
-                            </FavoritesFilesStoreContextProvider>
-                          </RecentFilesStoreContextProvider>
-                        </AgentFilesStoreContextProvider>
+                        <RecentFilesStoreContextProvider>
+                          <FavoritesFilesStoreContextProvider>
+                            <TrashFilesStoreContextProvider>
+                              <KnowledgeFilesStoreContextProvider>
+                                <ResultFilesStoreContextProvider>
+                                  <AgentInfoPanelStoreContextProvider>
+                                    <AgentsListStoreContextProvider>
+                                      {children}
+                                    </AgentsListStoreContextProvider>
+                                  </AgentInfoPanelStoreContextProvider>
+                                </ResultFilesStoreContextProvider>
+                              </KnowledgeFilesStoreContextProvider>
+                            </TrashFilesStoreContextProvider>
+                          </FavoritesFilesStoreContextProvider>
+                        </RecentFilesStoreContextProvider>
                       </AISettingsStoreContextProvider>
                     </AgentsAIConfigStoreContextProvider>
                   </AgentsQuotaStoreContextProvider>
@@ -112,10 +115,11 @@ export { useAgentsUserStore } from "./AgentsUserStore";
 export { useAgentsQuotaStore } from "./AgentsQuotaStore";
 export { useAgentsAIConfigStore } from "./AgentsAIConfigStore";
 export { useAISettingsStore } from "./AISettingsStore";
-export { useAgentFilesStore } from "./AgentFilesStore";
 export { useRecentFilesStore } from "./RecentFilesStore";
 export { useFavoritesFilesStore } from "./FavoritesFilesStore";
 export { useTrashFilesStore } from "./TrashFilesStore";
+export { useKnowledgeFilesStore } from "./KnowledgeFilesStore";
+export { useResultFilesStore } from "./ResultFilesStore";
 export type { default as AliasFilesStore, AliasViewAs } from "./AliasFilesStore";
 export { useAgentInfoPanelStore } from "./AgentInfoPanelStore";
 export type { AgentInfoPanelView } from "./AgentInfoPanelStore";

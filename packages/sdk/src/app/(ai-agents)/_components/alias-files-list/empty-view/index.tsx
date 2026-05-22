@@ -36,12 +36,12 @@ const EmptyView = ({
     ? t("Common:NoFindingsFound")
     : isRoot
       ? getRootTitle(t, rootFolderType)
-      : getTitle(t);
+      : getTitle(t, current.type);
   const description = isFiltered
     ? t("Common:EmptyFilterFilesDescription")
     : isRoot
       ? getRootDescription(t, rootFolderType)
-      : getDescription(t);
+      : getDescription(t, current.type);
   const icon = isFiltered
     ? getFilterIcon(isBaseTheme)
     : isRoot

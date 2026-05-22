@@ -27,6 +27,7 @@ import useItemList from "@/app/(docspace)/_hooks/useItemList";
 import useFilesSocket from "@/app/(docspace)/_hooks/useFilesSocket";
 
 import type { AliasFilesStore } from "../../_store";
+import { useAgentsCommonData } from "../../_store/AgentsCommonDataContext";
 
 import RowView from "./row-view";
 import TileView from "./tile-view";
@@ -36,19 +37,24 @@ import useResetSelectionClick from "./hooks/useResetSelectionClick";
 
 // Files-alias body — fully isolated from `(docspace)/(files)/_components/list`.
 // Drives the row/tile/table views directly from the per-alias
-// `AliasFilesStore` (Recent / Favorites / …) so refetches never re-resolve
-// the folder from `window.location` (which would fall back to `@my` under
-// `/ai-agents/*` routes — that was the original bug).
+// `AliasFilesStore` (Recent / Favorites / Trash) so refetches never
+// re-resolve the folder from `window.location` (which would fall back to
+// `@my` under `/ai-agents/*` routes — that was the original bug).
+//
+// The same view-layer also backs per-agent Knowledge / Result subfolder
+// stores. Those routes have no SSR pre-fetch, so `folders`/`files`/`current`
+// /`total`/`filesFilter` are optional: when omitted the store is expected
+// to be populated client-side via `setFolder` before mount.
 
 type Props = {
   useStore: () => AliasFilesStore;
-  folders: TFolder[];
-  files: TFile[];
-  current: TFolder;
-  total: number;
-  filesSettings: TFilesSettings;
-  portalSettings: TSettings;
-  filesFilter: string;
+  folders?: TFolder[];
+  files?: TFile[];
+  current?: TFolder;
+  total?: number;
+  filesSettings?: TFilesSettings;
+  portalSettings?: TSettings;
+  filesFilter?: string;
 };
 
 const AliasFilesList = ({
@@ -62,9 +68,13 @@ const AliasFilesList = ({
   filesFilter,
 }: Props) => {
   const store = useStore();
+  const commonData = useAgentsCommonData();
 
-  const timezone = portalSettings.timezone;
-  const displayFileExtension = filesSettings.displayFileExtension;
+  const effectiveFilesSettings = filesSettings ?? commonData.filesSettings;
+  const effectivePortalSettings = portalSettings ?? commonData.portalSettings;
+  const timezone = effectivePortalSettings?.timezone ?? "UTC";
+  const displayFileExtension =
+    effectiveFilesSettings?.displayFileExtension ?? false;
 
   const { setIsEmptyList, filesViewAs, setFilesViewAs, currentDeviceType } =
     useSettingsStore();
@@ -77,20 +87,24 @@ const AliasFilesList = ({
 
   // Hydrate the AliasFilesStore once from SSR data so the first paint
   // matches what the server rendered. Subsequent fetches are owned by the
-  // store (filter changes → store.apply → store.fetch).
+  // store (filter changes → store.apply → store.fetch). For routes with
+  // no SSR pre-fetch (Knowledge / Result), skip hydration and let the
+  // store handle its own data lifecycle (setFolder + fetch).
   const hydrated = React.useRef(false);
-  if (!hydrated.current) {
+  if (!hydrated.current && files !== undefined && current !== undefined) {
     hydrated.current = true;
-    const initialFilter = FilesFilter.getFilter({
-      search: `?${filesFilter}`,
-      pathname: "",
-    } as Location);
+    const initialFilter = filesFilter
+      ? FilesFilter.getFilter({
+          search: `?${filesFilter}`,
+          pathname: "",
+        } as Location)
+      : null;
     runInAction(() => {
       store.hydrate({
         files,
-        folders,
+        folders: folders ?? [],
         current,
-        total,
+        total: total ?? 0,
         filter: initialFilter ?? store.filter,
       });
     });
@@ -103,12 +117,19 @@ const AliasFilesList = ({
     else if (!isDesktop && filesViewAs === "table") setFilesViewAs("row");
   }, [currentDeviceType, filesViewAs, setFilesViewAs]);
 
-  const rootFolderType = filesListStore.rootFolderType ?? current.rootFolderType;
+  const rootFolderType =
+    filesListStore.rootFolderType ??
+    store.current?.rootFolderType ??
+    current?.rootFolderType ??
+    null;
   React.useEffect(() => {
-    setRootFolderType(current.rootFolderType);
-  }, [current.rootFolderType, setRootFolderType]);
+    const next = store.current?.rootFolderType ?? current?.rootFolderType;
+    if (next !== undefined) setRootFolderType(next);
+  }, [store.current?.rootFolderType, current?.rootFolderType, setRootFolderType]);
 
-  const { getIcon } = useItemIcon({ filesSettings });
+  const { getIcon } = useItemIcon({
+    filesSettings: effectiveFilesSettings ?? undefined,
+  });
 
   const { convertFileToItem, convertFolderToItem } = useItemList({
     getIcon,
@@ -164,20 +185,27 @@ const AliasFilesList = ({
     [store],
   );
 
+  const folderId = store.current?.id ?? current?.id ?? 0;
+
   useFilesSocket(
-    portalSettings.socketUrl ?? "",
-    store.current?.id ?? current.id,
+    effectivePortalSettings?.socketUrl ?? "",
+    folderId,
     () => store.fetch(),
   );
 
   const visibleItems = filesListStore.items.length > 0 ? filesListStore.items : items;
-  const folderId = store.current?.id ?? current.id;
-  const hasNextPage = total > items.length;
+  const effectiveTotal = total ?? store.total;
+  const hasNextPage = effectiveTotal > items.length;
+  const currentFolder = store.current ?? current ?? null;
+
+  if (!currentFolder) {
+    return null;
+  }
 
   if (visibleItems.length === 0) {
     return (
       <EmptyView
-        current={store.current ?? current}
+        current={currentFolder}
         folderId={String(folderId)}
         isFiltered={store.filter.isFiltered()}
       />
@@ -200,7 +228,7 @@ const AliasFilesList = ({
   if (filesViewAs === "table") {
     return (
       <TableView
-        total={total}
+        total={effectiveTotal}
         items={visibleItems}
         hasMoreFiles={hasNextPage}
         filterSortBy={store.filter.sortBy as TSortBy | null}
@@ -215,7 +243,7 @@ const AliasFilesList = ({
 
   return (
     <RowView
-      total={total}
+      total={effectiveTotal}
       items={visibleItems}
       hasMoreFiles={hasNextPage}
       filterSortBy={store.filter.sortBy as TSortBy | null}

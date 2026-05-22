@@ -19,8 +19,22 @@ import EmptyFilterFilesLightIcon from "PUBLIC_DIR/images/emptyFilter/empty.filte
 import EmptyFilterFilesDarkIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter.files.dark.svg";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
-export const getTitle = (t: TTranslation) => {
-  return t("Common:EmptyScreenFolder");
+export const getTitle = (
+  t: TTranslation,
+  folderType?: FolderType | null,
+) => {
+  switch (folderType) {
+    case FolderType.Knowledge:
+      return t("Common:EmptyKnowledgeTitle", {
+        defaultValue: "No files uploaded yet",
+      });
+    case FolderType.ResultStorage:
+      return t("Common:EmptyResultsTitle", {
+        defaultValue: "No results yet",
+      });
+    default:
+      return t("Common:EmptyScreenFolder");
+  }
 };
 
 export const getRootTitle = (
@@ -119,6 +133,24 @@ export const getRootDescription = (
   }
 };
 
-export const getDescription = (t: TTranslation) => {
-  return t("Common:UserEmptyDescription");
+export const getDescription = (
+  t: TTranslation,
+  folderType?: FolderType | null,
+) => {
+  switch (folderType) {
+    case FolderType.Knowledge:
+      return t("Common:EmptyKnowledgeDescription", {
+        defaultValue:
+          "Files uploaded here will be indexed and used as context in the {{aiChat}} tab. Add files (up to 10 MB each) to ask AI questions, generate content, or collaborate on information.",
+        aiChat: t("Common:AIChat"),
+      });
+    case FolderType.ResultStorage:
+      return t("Common:EmptyResultsDescription", {
+        defaultValue:
+          "Files generated in {{aiChat}} will appear here automatically. Whenever you generate content, start a chat, or send a message with output, the result will be saved in this section.",
+        aiChat: t("Common:AIChat"),
+      });
+    default:
+      return t("Common:UserEmptyDescription");
+  }
 };

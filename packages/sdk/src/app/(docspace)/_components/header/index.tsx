@@ -134,10 +134,14 @@ const Header = ({
     return items.reverse();
   }, [pathParts]);
 
+  const prevIdRef = React.useRef<typeof id>(id);
+
   useEffect(() => {
     navigationStore.setNavigationItems(navigationItems);
     if (id !== undefined) navigationStore.setCurrentFolderId(id);
-    if (title !== undefined) navigationStore.setCurrentTitle(title);
+    if (title !== undefined && (navigationStore.currentTitle === null || prevIdRef.current !== id))
+      navigationStore.setCurrentTitle(title);
+    prevIdRef.current = id;
     navigationStore.setCurrentIsRootRoom(isRoomsFolder);
   }, [title, navigationItems, navigationStore, id, isRoomsFolder]);
 

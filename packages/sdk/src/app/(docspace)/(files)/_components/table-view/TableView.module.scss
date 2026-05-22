@@ -241,7 +241,7 @@
 
 // Last cell hosting quick buttons: allow badges to overflow
 .lastCell {
-  overflow: visible !important;
+  // overflow: visible !important;
   z-index: 1;
   position: relative;
 }

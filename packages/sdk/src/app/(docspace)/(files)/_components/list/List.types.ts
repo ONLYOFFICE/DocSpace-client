@@ -52,4 +52,6 @@ export type ListProps = {
 
   shareKey?: string;
   withoutFavorite?: boolean;
+  infoPanelVisible?: boolean;
 };
+

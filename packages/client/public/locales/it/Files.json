@@ -35,7 +35,6 @@
   "CreateNewFolderInStorage": "Crea una nuova cartella nell'archivio",
   "CreateNewLink": "Crea nuovo link",
   "CreateTemplate": "Crea modello",
-  "CustomFilterEnable": "Abilita filtro personalizzato",
   "CustomFilterEnableDiscription": "Il filtro personalizzato è attivo per questa tabella. Gli utenti che aprono il file potranno personalizzare la visualizzazione dei dati nella tabella.",
   "DaysRemaining": "Giorni rimanenti: {{daysRemaining}}",
   "DeleteAgent": "Elimina agente",

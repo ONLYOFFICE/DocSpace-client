@@ -35,7 +35,6 @@
   "CreateNewFolderInStorage": "Vytvoření nové složky v úložišti",
   "CreateNewLink": "Kopírování hesla",
   "CreateTemplate": "Vytvořit šablonu",
-  "CustomFilterEnable": "Povolit Vlastní filtr",
   "CustomFilterEnableDiscription": "Pro tuto tabulku je povolen Vlastní filtr. Uživatelé, kteří otevřeli soubor, si budou moci přizpůsobit zobrazení dat v tabulce.",
   "DaysRemaining": "Zbývající dny: {{daysRemaining}}",
   "DeleteAgent": "Smazat agenta",

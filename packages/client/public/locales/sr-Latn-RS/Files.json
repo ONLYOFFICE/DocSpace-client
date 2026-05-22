@@ -35,7 +35,6 @@
   "CreateNewFolderInStorage": "Kreiraj novi folder u skladištu",
   "CreateNewLink": "Kreiraj novi link",
   "CreateTemplate": "Kreiraj šablon",
-  "CustomFilterEnable": "Omogućite prilagođeni filter",
   "CustomFilterEnableDiscription": "Prilagođeni filter je omogućen za ovu tabelu. Korisnici koji su otvorili datoteku moći će da personalizuju prikaz podataka u tabeli.",
   "DaysRemaining": "Dani preostali: {{daysRemaining}}",
   "DeleteAgent": "Obrišite agenta",

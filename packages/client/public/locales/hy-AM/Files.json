@@ -35,7 +35,6 @@
   "CreateNewFolderInStorage": "Ստեղծել նոր թղթապանակ պահեստում",
   "CreateNewLink": "Ստեղծեք նոր հղում",
   "CreateTemplate": "Ստեղծել կաղապար",
-  "CustomFilterEnable": "Միացնել Հատուկ ֆիլտրը",
   "CustomFilterEnableDiscription": "Հատուկ ֆիլտրը միացված է այս աղյուսակի համար: Ֆայլը բացած օգտատերերը կկարողանան անհատականացնել տվյալների ցուցադրումը աղյուսակում:",
   "DaysRemaining": "Մնացած օր: {{daysRemaining}}",
   "DeleteAgent": "Ջնջել գործակալին",

@@ -35,7 +35,6 @@
   "CreateNewFolderInStorage": "ආචයනයේ නව බහාලුමක් සාදන්න",
   "CreateNewLink": "නව සබැඳියක් සාදන්න",
   "CreateTemplate": "පාඨමාලාව නිර්මාණය කරන්න",
-  "CustomFilterEnable": "අභිමත පෙරහන සක්‍රිය කරන්න",
   "CustomFilterEnableDiscription": "මෙ වගුව සඳහා අභියෝගිත පෙරහන (Custom) සක්‍රිය කර ඇත ගොුව විෘත පරිශීලකයින්ට වගුවේ දත්ත ප්‍රදර්ශනය පුද්ගලීකරණය කිරීමට හැකි වනු ඇත.",
   "DaysRemaining": "ඉතිරි දවස් ගණන: {{daysRemaining}}",
   "DeleteAgent": "නියෝජිතයා මකන්න",

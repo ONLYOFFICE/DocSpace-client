@@ -35,7 +35,6 @@
   "CreateNewFolderInStorage": "Створити нову папку в сховищі",
   "CreateNewLink": "Створити нове посилання",
   "CreateTemplate": "Створити шаблон",
-  "CustomFilterEnable": "Увімкнути спеціальний фільтр",
   "CustomFilterEnableDiscription": "Для цієї таблиці увімкнено спеціальний фільтр. Користувачі, які відкрили файл, зможуть налаштувати відображення даних у таблиці.",
   "DaysRemaining": "Залишилося днів: {{daysRemaining}}",
   "DeleteAgent": "Видалити агента",

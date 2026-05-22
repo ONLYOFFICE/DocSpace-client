@@ -35,7 +35,6 @@
   "CreateNewFolderInStorage": "Ustvari novo mapo v pomnilniku",
   "CreateNewLink": "Ustvari novo povezavo",
   "CreateTemplate": "Ustvari predlogo",
-  "CustomFilterEnable": "Omogočite prilagojen filter",
   "CustomFilterEnableDiscription": "Prilagojen filter je omogočen za to tabelo. Uporabniki, ki so odprli datoteko, lahko prilagodijo prikaz podatkov v tabeli.",
   "DaysRemaining": "Preostali dnevi: {{daysRemaining}}",
   "DeleteAgent": "Izbriši agenta",

@@ -35,7 +35,6 @@
   "CreateNewFolderInStorage": "Создать новую папку в хранилище",
   "CreateNewLink": "Создать новую ссылку",
   "CreateTemplate": "Создать шаблон",
-  "CustomFilterEnable": "Включить пользовательский фильтр",
   "CustomFilterEnableDiscription": "Для этой таблицы включен пользовательский фильтр. Пользователи, открывшие файл, смогут настроить отображение данных в таблице.",
   "DaysRemaining": "Дней осталось: {{daysRemaining}}",
   "DeleteAgent": "Удалить агента",

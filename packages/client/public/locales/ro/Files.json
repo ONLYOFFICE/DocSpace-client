@@ -35,7 +35,6 @@
   "CreateNewFolderInStorage": "Crearea unui folder nou în stocarea",
   "CreateNewLink": "Creați un link nou",
   "CreateTemplate": "Creare șablon",
-  "CustomFilterEnable": "Activare Filtru particularizat",
   "CustomFilterEnableDiscription": "Filtru particularizat este activ pentru acest tabel. Utilizatorii care au deschis acest fișier pot particulariza afișarea datelor din tabel.",
   "DaysRemaining": "Zile rămase: {{daysRemaining}}",
   "DeleteAgent": "Ștergere agent",

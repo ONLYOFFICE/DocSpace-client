@@ -35,7 +35,6 @@
   "CreateNewFolderInStorage": "Креирај нови фолдер у складишту",
   "CreateNewLink": "Креирај нови линк",
   "CreateTemplate": "Креирај шаблон",
-  "CustomFilterEnable": "Омогућите прилагођени филтер",
   "CustomFilterEnableDiscription": "Прилагођени филтер је омогућен за ову табелу. Корисници који су отворили датотеку моћи ће да персонализују приказ података у табели.",
   "DaysRemaining": "Дани преостали: {{daysRemaining}}",
   "DeleteAgent": "Обришите агента",

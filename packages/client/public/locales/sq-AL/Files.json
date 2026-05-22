@@ -35,7 +35,6 @@
   "CreateNewFolderInStorage": "Krijoni një dosje të re në ruajtje",
   "CreateNewLink": "Krijoni një lidhje të re",
   "CreateTemplate": "Krijo model",
-  "CustomFilterEnable": "Aktivizoni filtrin e personalizuar",
   "CustomFilterEnableDiscription": "Filtri i personalizuar është aktivizuar për këtë tabelë. Përdoruesit që hapën skedarin do të mund të personalizojnë shfaqjen e të dhënave në tabelë.",
   "DaysRemaining": "Ditët e mbetura: {{daysRemaining}}",
   "DeleteAgent": "Fshij agjentin",

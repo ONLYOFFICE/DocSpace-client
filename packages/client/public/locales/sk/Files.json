@@ -35,7 +35,6 @@
   "CreateNewFolderInStorage": "Vytvoriť nový priečinok v úložisku",
   "CreateNewLink": "Vytvoriť nový odkaz",
   "CreateTemplate": "Vytvoriť šablónu",
-  "CustomFilterEnable": "Povoliť vlastný filter",
   "CustomFilterEnableDiscription": "Pre túto tabuľku je povolený vlastný filter. Používatelia, ktorí otvorili súbor, si budú môcť prispôsobiť zobrazenie údajov v tabuľke.",
   "DaysRemaining": "Zostávajúce dni: {{daysRemaining}}",
   "DeleteAgent": "Vymazať agenta",

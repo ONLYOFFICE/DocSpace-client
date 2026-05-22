@@ -35,7 +35,6 @@
   "CreateNewFolderInStorage": "ストレージに新しいフォルダを作成する",
   "CreateNewLink": "新しいリンクを作成する",
   "CreateTemplate": "テンプレートを作成",
-  "CustomFilterEnable": "カスタムフィルターを有効化",
   "CustomFilterEnableDiscription": "このテーブルではカスタムフィルターが有効です。ファイルを開いたユーザーは、テーブル内のデータ表示を個人用に設定できます。",
   "DaysRemaining": "残りの日数：{{daysRemaining}}",
   "DeleteAgent": "エージェントを削除",

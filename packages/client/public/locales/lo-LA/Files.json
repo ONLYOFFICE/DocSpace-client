@@ -35,7 +35,6 @@
   "CreateNewFolderInStorage": "ສ້າງໂຟນເດີໃຫມ່ໃນບ່ອນເກັບຂໍ້ມູນ",
   "CreateNewLink": "ສ້າງລິ້ງໃໝ່",
   "CreateTemplate": "ສ້າງແມ່ແບບ",
-  "CustomFilterEnable": "ເປີດໃຊ້ຕົວປ່ຽນແກ້ແບບປົກກະຕິ",
   "CustomFilterEnableDiscription": "ເຄື່ອງກວດກາຕາມຄວາມຕ້ອງການໄດ້ຮັບການເປີດໃຊ້ສໍາລັບຕາຕະລາງນີ້. ຜູ້ໃຊ້​ທີ່ເປີດເອກະສານ​ຈະສາມາດປັບແກ້ການສະແດງຂໍ້ມູນໃນຕາຕະລາງໄດ້.",
   "DaysRemaining": "ມື້ທີ່ຍັງເຫຼືອ: {{daysRemaining}}",
   "DeleteAgent": "ລຶບຕົວແທນ",

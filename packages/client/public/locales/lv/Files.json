@@ -35,7 +35,6 @@
   "CreateNewFolderInStorage": "Izveidot jaunu mapi krātuvē",
   "CreateNewLink": "Izveidot jaunu saiti",
   "CreateTemplate": "Izveidot veidni",
-  "CustomFilterEnable": "Iespējot pielāgoto filtru",
   "CustomFilterEnableDiscription": "Šai tabulai ir ieslēgts pielāgotais filtrs. Lietotāji, kas atvēruši failu, varēs pielāgot datu attēlojumu tabulā.",
   "DaysRemaining": "Atlikušās dienas: {{daysRemaining}}",
   "DeleteAgent": "Dzēst aģentu",

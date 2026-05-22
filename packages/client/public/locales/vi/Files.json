@@ -35,7 +35,6 @@
   "CreateNewFolderInStorage": "Tạo một thư mục mới trong lưu trữ",
   "CreateNewLink": "Tạo liên kết mới",
   "CreateTemplate": "Tạo mẫu",
-  "CustomFilterEnable": "Bật Bộ lọc tùy chỉnh",
   "CustomFilterEnableDiscription": "Bộ lọc tùy chỉnh đã được bật cho bảng này. Người dùng đã mở tệp sẽ có thể tùy chỉnh cách hiển thị dữ liệu trong bảng.",
   "DaysRemaining": "Số ngày còn lại: {{daysRemaining}}",
   "DeleteAgent": "Xóa bỏ tác nhân",

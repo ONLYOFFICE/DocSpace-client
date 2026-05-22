@@ -35,7 +35,6 @@
   "CreateNewFolderInStorage": "Depolama alanında yeni bir klasör oluştur",
   "CreateNewLink": "Yeni bağlantı oluştur",
   "CreateTemplate": "Şablon oluştur",
-  "CustomFilterEnable": "Özel Filtre'yi etkinleştir",
   "CustomFilterEnableDiscription": "Bu tablo için Özel Filtre etkinleştirilmiştir. Dosyayı açan kullanıcılar, tablodaki veri görünümünü kişiselleştirebilir.",
   "DaysRemaining": "Kalan gün sayısı: {{daysRemaining}}",
   "DeleteAgent": "Ajanı sil",

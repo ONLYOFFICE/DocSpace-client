@@ -35,7 +35,6 @@
   "CreateNewFolderInStorage": "Luo muistiin uusi kansio",
   "CreateNewLink": "Kopioi salasana",
   "CreateTemplate": "Luo malli",
-  "CustomFilterEnable": "Ota mukautettu suodatin käyttöön",
   "CustomFilterEnableDiscription": "Mukautettu suodatin on käytössä tässä taulukossa. Tiedoston avanneet käyttäjät voivat mukauttaa tietojen näyttöä taulukossa.",
   "DaysRemaining": "Päiviä jäljellä: {{daysRemaining}}",
   "DeleteAgent": "Poista agentti",

@@ -35,7 +35,6 @@
   "CreateNewFolderInStorage": "Create a new folder in the storage",
   "CreateNewLink": "Create new link",
   "CreateTemplate": "Create template",
-  "CustomFilterEnable": "Enable Custom filter",
   "CustomFilterEnableDiscription": "Custom filter is enabled for this table. Users who opened the file will be able to personalize the data display in the table.",
   "DaysRemaining": "Days remaining: {{daysRemaining}}",
   "DeleteAgent": "Delete agent",

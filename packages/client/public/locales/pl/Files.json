@@ -35,7 +35,6 @@
   "CreateNewFolderInStorage": "Utwórz nowy katalog w pamięci",
   "CreateNewLink": "Utwórz nowy link",
   "CreateTemplate": "Utwórz szablon",
-  "CustomFilterEnable": "Włącz niestandardowy filtr",
   "CustomFilterEnableDiscription": "Niestandardowy filtr jest włączony dla tej tabeli. Użytkownicy, którzy otworzyli plik, będą mogli personalizować sposób wyświetlania danych w tabeli.",
   "DaysRemaining": "Pozostało dni: {{daysRemaining}}",
   "DeleteAgent": "Usuń agenta",

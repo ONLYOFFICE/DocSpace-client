@@ -35,7 +35,6 @@
   "CreateNewFolderInStorage": "Maak een nieuwe map aan in de opslag",
   "CreateNewLink": "Nieuwe link aanmaken",
   "CreateTemplate": "Maak sjabloon",
-  "CustomFilterEnable": "Aangepast filter inschakelen",
   "CustomFilterEnableDiscription": "Aangepast filter is ingeschakeld voor deze tabel. Gebruikers die het bestand hebben geopend, kunnen de gegevensweergave in de tabel personaliseren.",
   "DaysRemaining": "Aantal resterende dagen: {{daysRemaining}}",
   "DeleteAgent": "Agent verwijderen",

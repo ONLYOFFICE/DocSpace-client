@@ -35,7 +35,6 @@
   "CreateNewFolderInStorage": "Neuen Ordner im Speicher erstellen",
   "CreateNewLink": "Neuen Link erstellen",
   "CreateTemplate": "Vorlage erstellen",
-  "CustomFilterEnable": "Benutzerdefinierter Filter aktivieren",
   "CustomFilterEnableDiscription": "Für diese Tabelle ist ein benutzerdefinierter Filter aktiviert. Benutzer, die die Datei geöffnet haben, können die Datenanzeige in der Tabelle personalisieren.",
   "DaysRemaining": "Verbleibende Tage: {{daysRemaining}}",
   "DeleteAgent": "Agenten löschen",

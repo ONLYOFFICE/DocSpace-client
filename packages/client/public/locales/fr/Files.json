@@ -35,7 +35,6 @@
   "CreateNewFolderInStorage": "Créer un nouveau dossier dans le stockage",
   "CreateNewLink": "Créer un nouveau lien",
   "CreateTemplate": "Créer un modèle",
-  "CustomFilterEnable": "Activer le filtre personnalisé",
   "CustomFilterEnableDiscription": "Un filtre personnalisé est activé pour ce tableau. Les utilisateurs qui ont ouvert le fichier pourront personnaliser l’affichage des données dans le tableau.",
   "DaysRemaining": "Jours restants : {{daysRemaining}}",
   "DeleteAgent": "Supprimer l'agent",

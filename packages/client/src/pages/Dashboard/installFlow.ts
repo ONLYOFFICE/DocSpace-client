@@ -110,6 +110,38 @@ const uploadLibraryFromSdk = async (
   return libraryId;
 };
 
+type DocsCloudInstallStepId =
+  | "check-requirements"
+  | "connect-cloud"
+  | "configure-editor"
+  | "activate-features";
+
+const delay = (ms: number, signal?: AbortSignal): Promise<void> =>
+  new Promise((resolve, reject) => {
+    const id = setTimeout(resolve, ms);
+    signal?.addEventListener("abort", () => {
+      clearTimeout(id);
+      reject(new DOMException("Aborted", "AbortError"));
+    });
+  });
+
+export const installDocsCloudModule = async (
+  onStep: (step: DocsCloudInstallStepId) => void,
+  signal?: AbortSignal,
+): Promise<void> => {
+  onStep("check-requirements");
+  await delay(1200, signal);
+
+  onStep("connect-cloud");
+  await delay(2000, signal);
+
+  onStep("configure-editor");
+  await delay(1500, signal);
+
+  onStep("activate-features");
+  await delay(1000, signal);
+};
+
 export const installAiFormsModule = async (
   onStep: (step: AiFormsInstallStepId) => void,
   onLibraryProgress: (p: LibraryUploadProgress) => void = () => {},

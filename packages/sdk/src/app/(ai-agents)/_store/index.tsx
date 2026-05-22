@@ -36,6 +36,8 @@
 
 import React from "react";
 
+import type { TUser } from "@docspace/shared/api/people/types";
+
 import { AgentLoadingStoreContextProvider } from "./AgentLoadingStore";
 import { AgentTagsStoreContextProvider } from "./AgentTagsStore";
 import { AvatarEditorStoreContextProvider } from "./AvatarEditorStore";
@@ -55,8 +57,10 @@ import { TrashFilesStoreContextProvider } from "./TrashFilesStore";
 
 export const AiAgentsStoreProviders = ({
   children,
+  initialUser,
 }: {
   children: React.ReactNode;
+  initialUser?: TUser | null;
 }) => {
   return (
     <AgentLoadingStoreContextProvider>
@@ -65,7 +69,7 @@ export const AiAgentsStoreProviders = ({
           <AgentDialogsStoreContextProvider>
             <AiRoomStoreContextProvider>
               <CreateEditAgentStoreContextProvider>
-                <AgentsUserStoreContextProvider>
+                <AgentsUserStoreContextProvider initialUser={initialUser}>
                   <AgentsQuotaStoreContextProvider>
                     <AgentsAIConfigStoreContextProvider>
                       <AISettingsStoreContextProvider>

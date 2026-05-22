@@ -4,29 +4,14 @@
 
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import AgentsHeader from "../../../_components/agents-header";
 
+// Settings sits at the same catalog level as Recent / Favorites / Trash —
+// root-level entries with no breadcrumb chain and no back arrow. Path-parts
+// are reserved for agent detail pages.
 export default function SettingsHeader() {
-  const router = useRouter();
   const { t } = useTranslation(["Common"]);
-
-  const goToList = () => router.push("/ai-agents");
-
-  return (
-    <AgentsHeader
-      title={t("Common:Settings")}
-      navigationItems={[
-        {
-          id: "ai-agents",
-          title: t("Common:AIAgents", { defaultValue: "AI Agents" }),
-          isRootRoom: true,
-        },
-      ]}
-      onBackToParentFolder={goToList}
-      onClickFolder={() => goToList()}
-    />
-  );
+  return <AgentsHeader title={t("Common:Settings")} />;
 }

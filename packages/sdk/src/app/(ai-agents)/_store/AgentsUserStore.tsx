@@ -34,7 +34,8 @@ import type { TUser } from "@docspace/shared/api/people/types";
 class AgentsUserStore {
   user: TUser | null = null;
 
-  constructor() {
+  constructor(initialUser?: TUser | null) {
+    this.user = initialUser ?? null;
     makeAutoObservable(this);
   }
 
@@ -53,10 +54,22 @@ const Ctx = React.createContext<AgentsUserStore | null>(null);
 
 export const AgentsUserStoreContextProvider = ({
   children,
+  initialUser,
 }: {
   children: React.ReactNode;
+  initialUser?: TUser | null;
 }) => {
-  const store = React.useMemo(() => new AgentsUserStore(), []);
+  // Pre-hydrate from SSR data at construction time so the very first render
+  // of any descendant (Settings tabs strip etc.) sees the user — observer
+  // re-renders triggered from a later useLayoutEffect hydration aren't
+  // reliable in submenu/parallel-route slots and would land after paint.
+  const store = React.useMemo(
+    () => new AgentsUserStore(initialUser ?? null),
+    // initialUser is read once at mount; subsequent updates flow through
+    // userStore.setUser (see AiAgentsBootstrap).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
   return <Ctx.Provider value={store}>{children}</Ctx.Provider>;
 };
 

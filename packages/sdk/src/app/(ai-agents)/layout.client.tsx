@@ -248,7 +248,7 @@ export default function AiAgentsRootLayout({
 }: Props) {
   return (
     <main style={{ width: "100%", height: "100%", overflow: "hidden" }}>
-      <AiAgentsStoreProviders>
+      <AiAgentsStoreProviders initialUser={commonData.user ?? null}>
         <DocspaceFilesLayout
           initSettingsStoreData={{ viewAs: commonData.initialViewAs }}
         >

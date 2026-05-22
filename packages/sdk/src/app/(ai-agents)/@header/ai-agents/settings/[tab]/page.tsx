@@ -4,29 +4,13 @@
 
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import AgentsHeader from "../../../../_components/agents-header";
 
+// Settings/[tab] shares the same header treatment as /settings — no
+// breadcrumb, no back arrow. See ../page.tsx for the rationale.
 export default function SettingsTabHeader() {
-  const router = useRouter();
   const { t } = useTranslation(["Common"]);
-
-  const goToList = () => router.push("/ai-agents");
-
-  return (
-    <AgentsHeader
-      title={t("Common:Settings")}
-      navigationItems={[
-        {
-          id: "ai-agents",
-          title: t("Common:AIAgents", { defaultValue: "AI Agents" }),
-          isRootRoom: true,
-        },
-      ]}
-      onBackToParentFolder={goToList}
-      onClickFolder={() => goToList()}
-    />
-  );
+  return <AgentsHeader title={t("Common:Settings")} />;
 }

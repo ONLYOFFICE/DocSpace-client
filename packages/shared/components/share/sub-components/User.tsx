@@ -36,7 +36,6 @@
 import { decode } from "he";
 import { useId, useState } from "react";
 import classNames from "classnames";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { isMobileOnly, isMobile } from "react-device-detect";
 
@@ -87,7 +86,6 @@ export const User = ({
 	onSelectOption,
 }: UserProps) => {
 	const id = useId();
-	const theme = useTheme();
 	const { t } = useTranslation(["Common"]);
 
 	const [isLoading, setIsLoading] = useState(false);
@@ -234,7 +232,7 @@ export const User = ({
 							fontWeight={400}
 							fontSize="12px"
 							truncate
-							color={theme.infoPanel.members.subtitleColor}
+							color="var(--info-panel-members-subtitle-color)"
 							dir="auto"
 						>
 							{`${typeLabel} | ${(user as TUser).email}`}

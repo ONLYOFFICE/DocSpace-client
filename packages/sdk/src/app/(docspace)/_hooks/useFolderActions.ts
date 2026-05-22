@@ -9,6 +9,7 @@ import { TTranslation } from "@docspace/shared/types";
 import { OpenFolderContext } from "../_contexts/OpenFolderContext";
 import { useNavigationStore } from "../_store/NavigationStore";
 import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
+import { useFilesListStore } from "../_store/FilesListStore";
 import { useSettingsStore } from "../_store/SettingsStore";
 
 type UseFolderActionsProps = { t: TTranslation };
@@ -21,6 +22,7 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
     setCurrentIsRootRoom,
   } = useNavigationStore();
   const { setSelection } = useFilesSelectionStore();
+  const { setHighlightFileId } = useFilesListStore();
   const { shareKey } = useSettingsStore();
   const openFolderOverride = React.useContext(OpenFolderContext);
 
@@ -55,6 +57,34 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
     ],
   );
 
+  const openLocation = React.useCallback(
+    (folderId: number | string, fileId: number | string, search: string) => {
+      const filter = FilesFilter.getDefault();
+
+      filter.folder = folderId.toString();
+      filter.search = search;
+
+      const filterUrl = `?${shareKey ? `key=${shareKey}&` : ""}${filter.toUrlParams()}`;
+
+      setCurrentFolderId(folderId);
+      setCurrentTitle("");
+      setCurrentIsRootRoom(false);
+      setSelection([]);
+
+      window.history.pushState({}, "", `${window.location.pathname}${filterUrl}`);
+
+      setHighlightFileId(fileId);
+    },
+    [
+      shareKey,
+      setCurrentFolderId,
+      setCurrentTitle,
+      setCurrentIsRootRoom,
+      setSelection,
+      setHighlightFileId,
+    ],
+  );
+
   const copyFolderLink = React.useCallback(
     async (itemId: number) => {
       const itemLink = await api.files.getFolderLink(itemId);
@@ -64,5 +94,5 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
     [t],
   );
 
-  return { openFolder, copyFolderLink };
+  return { openFolder, openLocation, copyFolderLink };
 }

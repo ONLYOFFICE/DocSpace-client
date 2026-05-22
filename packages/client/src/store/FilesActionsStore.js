@@ -55,7 +55,9 @@ import {
   reorderIndex,
   deleteVersionFile,
   enableCustomFilter,
+  getFileEncryptionAccess,
 } from "@docspace/shared/api/files";
+import { loadRoomMemberKeysSafe } from "@docspace/shared/services/private-room/room-member-keys";
 import {
   Events,
   ExportRoomIndexTaskStatus,
@@ -86,6 +88,22 @@ import {
   FILTER_ARCHIVE_DOCUMENTS,
   FILTER_ROOM_DOCUMENTS,
 } from "@docspace/shared/utils/filterConstants";
+
+import {
+  downloadAndDecryptFile,
+  downloadAndDecryptFileToBuffer,
+  createZipFromBuffers,
+  deduplicateFileNames,
+  triggerFileDownload,
+} from "@docspace/shared/services/private-room/encrypted-download";
+import {
+  decryptEncryptedItemToFile,
+  addCopySuffix,
+  tagFileForCopy,
+} from "@docspace/shared/services/private-room/encrypted-copy";
+import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
+import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
+
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
@@ -119,7 +137,7 @@ import { hideInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import { OPERATIONS_NAME, CategoryType } from "@docspace/shared/constants";
 import { FileOperationStatus } from "@docspace/shared/enums";
-import { checkProtocol } from "../helpers/files-helpers";
+import i18n from "../i18n";
 import FilesHeaderOptionStore from "./FilesHeaderOptionStore";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 
@@ -575,6 +593,7 @@ class FilesActionStore {
               );
 
               this.uploadDataStore.removeFiles(fileIds);
+              fileIds.forEach((id) => forgetEncryptedFilename(id));
             }
 
             if (currentFolderId) {
@@ -915,7 +934,7 @@ class FilesActionStore {
     }
   };
 
-  downloadAction = (label, item) => {
+  downloadAction = async (label, item) => {
     const { bufferSelection } = this.filesStore;
     const { openUrl } = this.settingsStore;
     const { id, isFolder } = this.selectedFolderStore;
@@ -937,14 +956,24 @@ class FilesActionStore {
     const items = [];
 
     if (selection.length === 1 && selection[0].fileExst && !downloadAsArchive) {
-      openUrl(selection[0].viewUrl, UrlActionType.Download);
+      const file = selection[0];
+
+      if (file.encrypted) {
+        return this.downloadEncryptedFile(file);
+      }
+
+      openUrl(file.viewUrl, UrlActionType.Download);
       return Promise.resolve();
     }
+
+    const encryptedFiles = [];
 
     selection.forEach((elem) => {
       if (!elem.fileExst && elem.isFolder) {
         folderIds.push(elem.id);
         items.push({ id: elem.id });
+      } else if (elem.encrypted) {
+        encryptedFiles.push(elem);
       } else {
         fileIds.push(elem.id);
         items.push({ id: elem.id, fileExst: elem.fileExst });
@@ -952,9 +981,303 @@ class FilesActionStore {
     });
 
     this.setGroupMenuBlocked(true);
-    return this.downloadFiles(fileIds, folderIds, label).finally(() =>
+
+    const promises = [];
+
+    if (encryptedFiles.length > 0) {
+      promises.push(this.downloadEncryptedFilesAsZip(encryptedFiles));
+    }
+
+    if (fileIds.length > 0 || folderIds.length > 0) {
+      promises.push(this.downloadFiles(fileIds, folderIds, label));
+    }
+
+    return Promise.all(promises).finally(() =>
       this.setGroupMenuBlocked(false),
     );
+  };
+
+  resolveRoomIdForFile = (file) => {
+    if (file?.originRoomId) return file.originRoomId;
+    const navRoom = this.selectedFolderStore.navigationPath?.find(
+      (r) => r.isRoom,
+    );
+    if (navRoom?.id) return navRoom.id;
+    if (this.selectedFolderStore.isRoom) return this.selectedFolderStore.id;
+    return null;
+  };
+
+  loadRoomMemberKeysFor = async (roomId) => {
+    return loadRoomMemberKeysSafe(roomId);
+  };
+
+  downloadEncryptedFile = async (file) => {
+    const { encryptionKeys, user } = this.userStore;
+
+    if (!encryptionKeys || encryptionKeys.length === 0) {
+      toastr.error(i18n.t("Common:EncryptionKeysNotConfigured"));
+      return Promise.resolve();
+    }
+
+    const userId = user?.id;
+    if (!userId) {
+      return Promise.resolve();
+    }
+
+    const { setSecondaryProgressBarData } =
+      this.uploadDataStore.secondaryProgressDataStore;
+    const operationId = uniqueid("operation_");
+
+    try {
+      const encryptionInfo = await getFileEncryptionAccess(file.id);
+
+      if (!encryptionInfo || !encryptionInfo.fileKeys) {
+        return Promise.resolve();
+      }
+      const hasOwnEntry = encryptionInfo.fileKeys.some(
+        (k) => String(k.userId) === String(userId),
+      );
+      if (!hasOwnEntry) {
+        return Promise.resolve();
+      }
+
+      const identity = await requireUnlock(String(userId));
+      if (!identity) {
+        return Promise.resolve();
+      }
+
+      const roomId = this.resolveRoomIdForFile(file);
+      const roomMemberKeys = await this.loadRoomMemberKeysFor(roomId);
+
+      setSecondaryProgressBarData({
+        operation: OPERATIONS_NAME.download,
+        percent: 0,
+        operationId,
+      });
+
+      const result = await downloadAndDecryptFile({
+        downloadUrl: file.viewUrl,
+        fileId: file.id,
+        fileKeys: encryptionInfo.fileKeys,
+        roomMemberKeys,
+        userId: String(userId),
+        identity,
+        originalFileName: file.title,
+        originalFileType: file.contentType || "application/octet-stream",
+        onDownloadProgress: (progress) => {
+          setSecondaryProgressBarData({
+            operation: OPERATIONS_NAME.download,
+            percent: Math.floor(progress * 70),
+            label: i18n.t("Files:Downloading"),
+            operationId,
+          });
+        },
+        onProgress: (progress) => {
+          setSecondaryProgressBarData({
+            operation: OPERATIONS_NAME.download,
+            percent: 70 + Math.floor(progress * 30),
+            label: i18n.t("Files:Decrypting"),
+            operationId,
+          });
+        },
+      });
+
+      setSecondaryProgressBarData({
+        operation: OPERATIONS_NAME.download,
+        percent: 100,
+        completed: true,
+        alert: !result.success,
+        operationId,
+      });
+
+      if (result.success && result.file) {
+        triggerFileDownload(result.file);
+      } else {
+        if (result.error) {
+          console.error("[ENCRYPTION] downloadEncryptedFile:", result.error);
+        }
+        toastr.error(i18n.t("Common:EncryptionDownloadFailed"));
+      }
+    } catch (error) {
+      setSecondaryProgressBarData({
+        operation: OPERATIONS_NAME.download,
+        percent: 100,
+        completed: true,
+        alert: true,
+        operationId,
+      });
+
+      console.error("[ENCRYPTION] downloadEncryptedFile threw:", error);
+      toastr.error(i18n.t("Common:EncryptionDownloadFailed"));
+    }
+
+    return Promise.resolve();
+  };
+
+  downloadEncryptedFilesAsZip = async (encryptedFiles) => {
+    const { encryptionKeys, user } = this.userStore;
+
+    if (!encryptionKeys || encryptionKeys.length === 0) {
+      toastr.error(i18n.t("Common:EncryptionKeysNotConfigured"));
+      return;
+    }
+
+    const userId = user?.id;
+    if (!userId) return;
+
+    const { setSecondaryProgressBarData } =
+      this.uploadDataStore.secondaryProgressDataStore;
+    const operationId = uniqueid("operation_");
+
+    try {
+      const identity = await requireUnlock(String(userId));
+      if (!identity) {
+        return;
+      }
+
+      const fileNames = deduplicateFileNames(
+        encryptedFiles.map((f) => f.title),
+      );
+      const totalFiles = encryptedFiles.length;
+      const results = [];
+      const failures = [];
+      const roomMemberKeysCache = new Map();
+
+      setSecondaryProgressBarData({
+        operation: OPERATIONS_NAME.download,
+        percent: 0,
+        operationId,
+      });
+
+      for (let i = 0; i < totalFiles; i++) {
+        const file = encryptedFiles[i];
+        const fileName = fileNames[i];
+        const fileShare = 100 / totalFiles;
+        const fileBase = fileShare * i;
+
+        try {
+          setSecondaryProgressBarData({
+            operation: OPERATIONS_NAME.download,
+            percent: Math.floor(fileBase),
+            label: `${i18n.t("Files:Downloading")} (${i + 1}/${totalFiles})`,
+            operationId,
+          });
+
+          const encryptionInfo = await getFileEncryptionAccess(file.id);
+
+          if (!encryptionInfo?.fileKeys) {
+            failures.push(fileName);
+            continue;
+          }
+
+          const hasOwnEntry = encryptionInfo.fileKeys.some(
+            (k) => String(k.userId) === String(userId),
+          );
+          if (!hasOwnEntry) {
+            failures.push(fileName);
+            continue;
+          }
+
+          const roomId = this.resolveRoomIdForFile(file);
+          let roomMemberKeys = roomMemberKeysCache.get(String(roomId));
+          if (!roomMemberKeys) {
+            roomMemberKeys = await this.loadRoomMemberKeysFor(roomId);
+            roomMemberKeysCache.set(String(roomId), roomMemberKeys);
+          }
+
+          const result = await downloadAndDecryptFileToBuffer({
+            downloadUrl: file.viewUrl,
+            fileId: file.id,
+            fileKeys: encryptionInfo.fileKeys,
+            roomMemberKeys,
+            userId: String(userId),
+            identity,
+            originalFileName: fileName,
+            originalFileType: file.contentType || "application/octet-stream",
+            onDownloadProgress: (progress) => {
+              setSecondaryProgressBarData({
+                operation: OPERATIONS_NAME.download,
+                percent: Math.floor(fileBase + progress * fileShare * 0.6),
+                label: `${i18n.t("Files:Downloading")} (${i + 1}/${totalFiles})`,
+                operationId,
+              });
+            },
+            onProgress: (progress) => {
+              setSecondaryProgressBarData({
+                operation: OPERATIONS_NAME.download,
+                percent: Math.floor(
+                  fileBase + fileShare * 0.6 + progress * fileShare * 0.3,
+                ),
+                label: `${i18n.t("Files:Decrypting")} (${i + 1}/${totalFiles})`,
+                operationId,
+              });
+            },
+          });
+
+          if (result.success && result.data) {
+            results.push({ name: result.fileName, data: result.data });
+          } else {
+            failures.push(fileName);
+          }
+        } catch {
+          failures.push(fileName);
+        }
+      }
+
+      if (results.length === 0) {
+        setSecondaryProgressBarData({
+          operation: OPERATIONS_NAME.download,
+          percent: 100,
+          completed: true,
+          alert: true,
+          operationId,
+        });
+        toastr.error(i18n.t("Files:DecryptAllFailed"));
+        return;
+      }
+
+      setSecondaryProgressBarData({
+        operation: OPERATIONS_NAME.download,
+        percent: 95,
+        label: i18n.t("Files:CompressingFiles"),
+        operationId,
+      });
+
+      const zipData = createZipFromBuffers(results);
+      const zipBlob = new Blob([zipData], { type: "application/zip" });
+
+      triggerFileDownload(zipBlob, "Files.zip");
+
+      setSecondaryProgressBarData({
+        operation: OPERATIONS_NAME.download,
+        percent: 100,
+        completed: true,
+        alert: failures.length > 0,
+        operationId,
+      });
+
+      if (failures.length > 0) {
+        toastr.warning(
+          i18n.t("Files:DecryptPartialFailed", {
+            fileNames: failures.join(", "),
+          }),
+          null,
+          0,
+          true,
+        );
+      }
+    } catch (error) {
+      setSecondaryProgressBarData({
+        operation: OPERATIONS_NAME.download,
+        percent: 100,
+        completed: true,
+        alert: true,
+        operationId,
+      });
+
+      console.error("[ENCRYPTION] downloadEncryptedFilesAsZip threw:", error);
+      toastr.error(i18n.t("Common:EncryptionDownloadFailed"));
+    }
   };
 
   completeAction = async (selectedItem, type) => {
@@ -1122,6 +1445,7 @@ class FilesActionStore {
 
         this.updateFilesAfterDelete(operationId, operation);
         this.filesStore.removeFiles([itemId], null, null, destFolderId);
+        forgetEncryptedFilename(itemId);
       });
     }
     if (isRoom) {
@@ -1234,6 +1558,10 @@ class FilesActionStore {
   };
 
   duplicateAction = async (item) => {
+    if (item.fileExst && item.encrypted) {
+      return this.duplicateEncryptedFile(item);
+    }
+
     const { setSecondaryProgressBarData } =
       this.uploadDataStore.secondaryProgressDataStore;
     const { clearActiveOperations } = this.uploadDataStore;
@@ -1314,6 +1642,84 @@ class FilesActionStore {
         clearActiveOperations(fileIds, folderIds);
         this.setGroupMenuBlocked(false);
       });
+  };
+
+  duplicateEncryptedFile = async (item) => {
+    return this.copyEncryptedFilesToFolder([item], item.folderId, {
+      private: true,
+      roomType: this.selectedFolderStore.roomType ?? RoomsType.CustomRoom,
+    });
+  };
+
+  copyEncryptedFilesToFolder = async (items, destFolderId, destInfo) => {
+    const { user, encryptionKeys } = this.userStore;
+
+    if (!encryptionKeys || encryptionKeys.length === 0) {
+      toastr.error(i18n.t("Common:EncryptionKeysNotConfigured"));
+      return;
+    }
+
+    const userId = user?.id;
+    if (!userId) return;
+
+    const identity = await requireUnlock(String(userId));
+    if (!identity) {
+      toastr.error(i18n.t("Common:EncryptionLockedAddMembers"));
+      return;
+    }
+
+    const sameRoomRoot =
+      destInfo?.private === true &&
+      destInfo?.rootFolderId === this.selectedFolderStore.rootFolderId;
+
+    const destContext = {
+      roomType: destInfo?.roomType ?? RoomsType.CustomRoom,
+      isPrivate: !!sameRoomRoot,
+    };
+
+    const filesToUpload = [];
+    const failed = [];
+
+    for (const item of items) {
+      try {
+        const sourceRoomId = this.resolveRoomIdForFile(item);
+        const decryptedFile = await decryptEncryptedItemToFile(
+          item,
+          String(userId),
+          identity,
+          sourceRoomId,
+        );
+
+        const newName = sameRoomRoot
+          ? addCopySuffix(decryptedFile.name)
+          : decryptedFile.name;
+        const tagged = tagFileForCopy(
+          new File([decryptedFile], newName, { type: decryptedFile.type }),
+          destFolderId,
+          destContext,
+        );
+        filesToUpload.push(tagged);
+      } catch (error) {
+        console.error(
+          `[ENCRYPTION] client copy failed for file ${item.id}:`,
+          error,
+        );
+        failed.push(item.title);
+      }
+    }
+
+    if (filesToUpload.length > 0) {
+      this.uploadDataStore.startUpload(filesToUpload, destFolderId, i18n.t);
+    }
+
+    if (failed.length > 0) {
+      toastr.error(
+        i18n.t("Common:EncryptedCopyFailed", {
+          defaultValue: "Failed to copy encrypted files: {{names}}",
+          names: failed.join(", "),
+        }),
+      );
+    }
   };
 
   getItemsInfo = (items) => {
@@ -2735,8 +3141,7 @@ class FilesActionStore {
   };
 
   openItemAction = async (item, t, e) => {
-    const { openDocEditor, isPrivacyFolder, setSelection, categoryType } =
-      this.filesStore;
+    const { openDocEditor, setSelection, categoryType } = this.filesStore;
     const { currentDeviceType, frameConfig, isFrame } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
@@ -2765,10 +3170,7 @@ class FilesActionStore {
     const canWebEdit = item.viewAccessibility?.WebEdit;
     const canViewedDocs = item.viewAccessibility?.WebView;
 
-    const { id, viewUrl, fileStatus, encrypted, isFolder, webUrl, isRoom } =
-      item;
-    if (encrypted && isPrivacyFolder) return checkProtocol(item.id, true);
-
+    const { id, viewUrl, fileStatus, isFolder, webUrl, isRoom } = item;
     if (isRecycleBinFolder || isLoading) return;
 
     if (isFolder || isRoom) {

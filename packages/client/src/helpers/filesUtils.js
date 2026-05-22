@@ -246,6 +246,7 @@ export const getOperationsProgressTitle = (type, progress) => {
     upload,
     convert,
     deleteVersionFile,
+    roomReencryption,
   } = OPERATIONS_NAME;
   switch (type) {
     case trash:
@@ -272,6 +273,8 @@ export const getOperationsProgressTitle = (type, progress) => {
       return i18n.t("Files:Converting");
     case deleteVersionFile:
       return i18n.t("Files:DeletingVersion");
+    case roomReencryption:
+      return i18n.t("Files:ReEncryptingFiles");
 
     default:
       return i18n.t("Files:OtherProcesses");

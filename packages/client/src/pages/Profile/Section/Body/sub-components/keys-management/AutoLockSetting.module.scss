@@ -1,0 +1,20 @@
+// (c) Copyright Ascensio System SIA 2009-2026
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid var(--divider-color);
+  margin-top: 16px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.select {
+  align-self: flex-start;
+}

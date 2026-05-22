@@ -1,6 +1,7 @@
 export enum AVAILABLE_CONTEXT_ITEMS {
   select = "select",
   open = "open",
+  openLocation = "open-location",
   openPDF = "open-pdf",
   fillForm = "fill-form",
   edit = "edit",

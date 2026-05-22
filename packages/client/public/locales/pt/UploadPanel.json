@@ -1,6 +1,10 @@
 {
   "HideInput": "Esconder",
+  "QuotaExceededDuringUpload": "<0>{{uploaded}} de {{total}}</0> carregados. Quota de armazenamento excedida — <1>ver detalhes</1>.",
+  "QuotaExceededTooltip": "Quota de armazenamento excedida. Liberte espaço ou atualize o seu plano e tente novamente.",
   "Ready": "Concluído",
+  "RetryAfterQuotaUpgrade": "Tentar novamente após atualizar a quota",
+  "RetryUpload": "Tentar novamente",
   "UploadingAndConversion": "Upload & Conversão",
   "UploadingError": "Erro de upload"
 }

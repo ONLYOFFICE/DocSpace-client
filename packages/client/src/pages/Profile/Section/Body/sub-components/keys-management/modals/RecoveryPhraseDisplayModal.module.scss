@@ -1,0 +1,132 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.description {
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.warningBox {
+  padding: 12px;
+  background-color: var(--toast-warning-bg);
+  border-radius: 4px;
+  border-left: 3px solid var(--status-warning);
+}
+
+.wordsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  background: var(--row-background-color);
+  border-radius: 8px;
+  border: 1px solid var(--divider-color);
+  user-select: all;
+}
+
+.wordsRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.wordCell {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-family: "Roboto Mono", monospace;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.wordIndex {
+  color: var(--text-secondary);
+  font-size: 11px;
+  min-width: 18px;
+  text-align: right;
+}
+
+.wordText {
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.checkboxRow {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 4px;
+}
+
+.quizContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quizQuestion {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.quizLabel {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.quizError {
+  color: var(--status-error);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.quizBackLink {
+  margin-top: 4px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--accent-main);
+  cursor: pointer;
+  font-size: 13px;
+  text-decoration: underline;
+  align-self: flex-start;
+}

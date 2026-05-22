@@ -115,6 +115,8 @@ const FilesSelectorWrapper = ({
   setConflictDialogData,
   checkFileConflicts,
   itemOperationToFolder,
+  copyEncryptedFilesToFolder,
+  sourceIsPrivate,
   clearActiveOperations,
   setSelected,
   setMoveToPanelVisible,
@@ -268,6 +270,19 @@ const FilesSelectorWrapper = ({
     };
   }, [selection, isCopy, isMove, isFormRoom, t]);
 
+  const encryptedInSelection = React.useMemo(
+    () =>
+      (selection as Array<TFile | TFolder>).filter(
+        (it) =>
+          "fileExst" in it && it.fileExst && (it as TFile).encrypted === true,
+      ) as TFile[],
+    [selection],
+  );
+  const hasEncryptedInSelection = encryptedInSelection.length > 0;
+
+  const showEncryptedTransferBanner =
+    !!(isCopy || isMove) && hasEncryptedInSelection && !!sourceIsPrivate;
+
   const onAccept = async (
     selectedItemId: string | number | undefined,
     folderTitle: string,
@@ -278,6 +293,64 @@ const FilesSelectorWrapper = ({
     selectedTreeNode: TFolder,
     selectedFileInfo: TSelectedFileInfo,
   ) => {
+    if (isCopy && !isEditorDialog && hasEncryptedInSelection) {
+      const destInfo = {
+        private:
+          (selectedTreeNode as unknown as { private?: boolean })?.private ===
+          true,
+        rootFolderId: (selectedTreeNode as unknown as { rootFolderId?: number })
+          ?.rootFolderId,
+        roomType: (selectedTreeNode as unknown as { roomType?: number })
+          ?.roomType,
+      };
+
+      const regularFileIds: number[] = [];
+      const folderIds: number[] = [];
+      for (const item of selection) {
+        if (
+          ("fileExst" in item && item.fileExst) ||
+          ("contentLength" in item && item.contentLength)
+        ) {
+          if ((item as TFile).encrypted) continue;
+          regularFileIds.push(item.id);
+        } else if (item.id === selectedItemId) {
+          toastr.error(t("Common:MoveToFolderMessage"));
+        } else {
+          folderIds.push(item.id);
+        }
+      }
+
+      if (selectedItemId != null) {
+        await copyEncryptedFilesToFolder(
+          encryptedInSelection,
+          selectedItemId,
+          destInfo,
+        );
+      }
+
+      if (regularFileIds.length || folderIds.length) {
+        const operationData = {
+          destFolderId: selectedItemId,
+          destFolderInfo: selectedTreeNode,
+          folderIds,
+          fileIds: regularFileIds,
+          deleteAfter: false,
+          isCopy,
+          folderTitle,
+          itemsCount: regularFileIds.length + folderIds.length,
+        };
+        try {
+          await itemOperationToFolder(operationData);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      setIsRequestRunning(false);
+      onCloseAndDeselectAction();
+      return;
+    }
+
     if ((isMove || isCopy || isRestore || isRestoreAll) && !isEditorDialog) {
       const fileIds: number[] = [];
       const folderIds: number[] = [];
@@ -526,6 +599,20 @@ const FilesSelectorWrapper = ({
       isMultiSelect={isMultiSelect}
       disableBySecurity={disableBySecurity}
       isPortalView={isPortalView}
+      withInfoBar={showEncryptedTransferBanner}
+      infoBarData={
+        showEncryptedTransferBanner
+          ? {
+              title: t("Common:EncryptedTransferBannerTitle", {
+                defaultValue: "Encrypted files",
+              }),
+              description: t("Common:EncryptedTransferBannerDescription", {
+                defaultValue:
+                  "If you move or copy encrypted files outside this private room, they will be saved in decrypted form.",
+              }),
+            }
+          : undefined
+      }
     />
   );
 };
@@ -567,11 +654,16 @@ export default inject(
       id: selectedId,
       parentId,
       rootFolderType,
+      private: sourceIsPrivate,
       shared,
     } = selectedFolderStore;
 
-    const { setConflictDialogData, checkFileConflicts, setSelectedItems } =
-      filesActionsStore;
+    const {
+      setConflictDialogData,
+      checkFileConflicts,
+      setSelectedItems,
+      copyEncryptedFilesToFolder,
+    } = filesActionsStore;
     const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
 
     const { treeFolders, roomsFolderId } = treeFoldersStore;
@@ -701,6 +793,8 @@ export default inject(
       setSelectedItems,
       setInfoPanelIsMobileHidden,
       includeFolder,
+      copyEncryptedFilesToFolder,
+      sourceIsPrivate,
 
       setMoveToPublicRoomVisible,
       setBackupToPublicRoomVisible,

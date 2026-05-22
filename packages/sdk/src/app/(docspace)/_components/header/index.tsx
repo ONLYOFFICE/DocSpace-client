@@ -64,7 +64,7 @@ export type { HeaderProps };
 
 const Header = ({
   current,
-  pathParts,
+  pathParts: pathPartsProp,
   isEmptyList,
   showTitle = true,
   onBurgerClick,
@@ -116,6 +116,8 @@ const Header = ({
   const rootFolderId = current?.rootFolderId;
   const id = current?.id;
 
+  const pathParts = filesListStore.pathParts ?? pathPartsProp;
+
   const isRoomsFolder = pathParts?.[0]?.id === rootFolderId;
   const isInRoomsContext =
     pathParts?.[0]?.folderType === FolderType.Rooms ||
@@ -137,10 +139,14 @@ const Header = ({
     return items.reverse();
   }, [pathParts, isInRoomsContext]);
 
+  const prevIdRef = React.useRef<typeof id>(id);
+
   useEffect(() => {
     navigationStore.setNavigationItems(navigationItems);
     if (id !== undefined) navigationStore.setCurrentFolderId(id);
-    if (title !== undefined) navigationStore.setCurrentTitle(title);
+    if (title !== undefined && (navigationStore.currentTitle === null || prevIdRef.current !== id))
+      navigationStore.setCurrentTitle(title);
+    prevIdRef.current = id;
     navigationStore.setCurrentIsRootRoom(isRoomsFolder);
   }, [title, navigationItems, navigationStore, id, isRoomsFolder]);
 

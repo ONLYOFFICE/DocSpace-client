@@ -261,3 +261,19 @@
     margin-inline-end: 8px;
   }
 }
+
+.isHighlight {
+  :global(.table-container_cell) {
+    animation: Highlight 2s 1;
+  }
+}
+
+@keyframes Highlight {
+  0% {
+    background: var(--files-section-animation-color);
+  }
+
+  100% {
+    background: none;
+  }
+}

@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { TFile } from "@docspace/ui-kit/types";
+import type { TFile as TFileBase } from "@docspace/ui-kit/types";
 
 import type {
   TAvailableShareRights,
@@ -54,7 +54,28 @@ import type {
 import type { TUser } from "../people/types";
 import type { TRoom } from "../rooms/types";
 
-export type { TFile };
+export type TFile = TFileBase & {
+  encrypted?: boolean;
+};
+
+export type TFileEncryptionInfo = {
+  userKeys: Array<{
+    id: string;
+    userId: string;
+    publicKey: string;
+    privateKeyEnc: string;
+    date: string;
+    cryptoEngineId: string;
+  }>;
+  fileKeys: Array<{
+    userId: string;
+    publicKeyId: string;
+    privateKeyEnc: string;
+    tenantId?: number;
+    fileId?: number;
+    createOn?: string;
+  }>;
+};
 
 export type TFileViewAccessibility = {
   CanConvert: boolean;

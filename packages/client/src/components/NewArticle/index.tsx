@@ -38,6 +38,7 @@ import { DeviceType } from "@docspace/shared/enums";
 import type { TUser } from "@docspace/shared/api/people/types";
 
 import { InstallAiFormsDialog } from "SRC_DIR/pages/Dashboard/InstallModuleDialog";
+import { EnableAiRoomsDialog } from "SRC_DIR/pages/Dashboard/EnableAiRoomsDialog";
 
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
@@ -98,6 +99,7 @@ type NewArticleProps = {
   aiRoomsEnabled: boolean;
   aiAgentsEnabled: boolean;
   activate: (id: string) => Promise<boolean>;
+  enable: (id: string, enabled: boolean) => Promise<unknown>;
   ensureAppsLoaded: () => void;
   toggleArticleOpen: () => void;
 };
@@ -112,6 +114,7 @@ const NewArticle = ({
   aiRoomsEnabled,
   aiAgentsEnabled,
   activate,
+  enable,
   ensureAppsLoaded,
   toggleArticleOpen,
 }: NewArticleProps) => {
@@ -119,6 +122,22 @@ const NewArticle = ({
   const location = useLocation();
   const navigate = useNavigate();
   const [installDialogVisible, setInstallDialogVisible] = React.useState(false);
+  const [enableAiRoomsVisible, setEnableAiRoomsVisible] = React.useState(false);
+  const [enableAiRoomsLoading, setEnableAiRoomsLoading] = React.useState(false);
+
+  const handleConfirmEnableAiRooms = async () => {
+    setEnableAiRoomsLoading(true);
+    try {
+      await enable("ai-rooms", true);
+      setEnableAiRoomsVisible(false);
+      navigate("/ai-rooms?section=rooms");
+    } catch (err) {
+      console.error("Failed to enable ai-rooms", err);
+      toastr.error(t("Common:SomethingWentWrong"));
+    } finally {
+      setEnableAiRoomsLoading(false);
+    }
+  };
 
   React.useEffect(() => {
     ensureAppsLoaded();
@@ -264,7 +283,7 @@ const NewArticle = ({
       icon: CatalogRoomsReactSvgUrl,
       onClick: aiRoomsEnabled
         ? () => navigate("/ai-rooms?section=rooms")
-        : underDevelopment,
+        : () => setEnableAiRoomsVisible(true),
       children: aiRoomsEnabled
         ? [
             {
@@ -357,6 +376,12 @@ const NewArticle = ({
           navigate("/ai-forms");
         }}
       />
+      <EnableAiRoomsDialog
+        visible={enableAiRoomsVisible}
+        isLoading={enableAiRoomsLoading}
+        onClose={() => setEnableAiRoomsVisible(false)}
+        onConfirm={handleConfirmEnableAiRooms}
+      />
     </>
   );
 };
@@ -373,6 +398,7 @@ const NewArticleConnected = inject<TStore>(
     aiRoomsEnabled: appsStore.isEnabled("ai-rooms"),
     aiAgentsEnabled: appsStore.isEnabled("ai-agents"),
     activate: appsStore.activate,
+    enable: appsStore.enable,
     ensureAppsLoaded: appsStore.ensureLoaded,
   }),
 )(observer(NewArticle));

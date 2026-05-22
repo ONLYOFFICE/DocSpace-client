@@ -37,7 +37,6 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { TwoStateToggle } from "@docspace/ui-kit/components/two-state-toggle";
 import { getPersonalFolderTree } from "@docspace/shared/api/files";
-import { setAppEnabled } from "@docspace/shared/api/apps";
 import { getConstName } from "@docspace/shared/constants/consts";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
@@ -55,6 +54,7 @@ import { useAppsCatalog, type AppId } from "SRC_DIR/helpers/apps-catalog";
 import { ModuleCard, type ModuleItem } from "./ModuleCard";
 import { getGreetingKey, makeCreateUrl, NEW_FILE_NAMES } from "./utils";
 import { InstallAiFormsDialog } from "./InstallModuleDialog";
+import { EnableAiRoomsDialog } from "./EnableAiRoomsDialog";
 import styles from "./Dashboard.module.scss";
 
 interface DashboardProps {
@@ -63,6 +63,7 @@ interface DashboardProps {
   isAdminOrOwner: boolean;
   isAppEnabled: (id: string) => boolean;
   activate: (id: string) => Promise<boolean>;
+  enable: (id: string, enabled: boolean) => Promise<unknown>;
   ensureAppsLoaded: () => void;
 }
 
@@ -72,6 +73,7 @@ const Dashboard = ({
   isAdminOrOwner,
   isAppEnabled,
   activate,
+  enable,
   ensureAppsLoaded,
 }: DashboardProps) => {
   const { t } = useTranslation(["Common"]);
@@ -79,6 +81,8 @@ const Dashboard = ({
   const [searchParams] = useSearchParams();
   const [myFolderId, setMyFolderId] = React.useState<number | null>(null);
   const [installDialogVisible, setInstallDialogVisible] = React.useState(false);
+  const [enableAiRoomsVisible, setEnableAiRoomsVisible] = React.useState(false);
+  const [enableAiRoomsLoading, setEnableAiRoomsLoading] = React.useState(false);
 
   React.useEffect(() => {
     ensureAppsLoaded();
@@ -154,17 +158,25 @@ const Dashboard = ({
     }
 
     if (modId === "ai-rooms") {
-      try {
-        await setAppEnabled("ai-rooms", true);
-        navigate("/ai-rooms");
-      } catch (err) {
-        console.error("Failed to enable ai-rooms", err);
-        toastr.error(t("Common:SomethingWentWrong"));
-      }
+      setEnableAiRoomsVisible(true);
       return;
     }
 
     toastr.info(t("Common:UnderDevelopment"));
+  };
+
+  const handleConfirmEnableAiRooms = async () => {
+    setEnableAiRoomsLoading(true);
+    try {
+      await enable("ai-rooms", true);
+      setEnableAiRoomsVisible(false);
+      navigate("/ai-rooms");
+    } catch (err) {
+      console.error("Failed to enable ai-rooms", err);
+      toastr.error(t("Common:SomethingWentWrong"));
+    } finally {
+      setEnableAiRoomsLoading(false);
+    }
   };
 
   const handleInstalled = () => {
@@ -286,6 +298,13 @@ const Dashboard = ({
         onClose={() => setInstallDialogVisible(false)}
         onInstalled={handleInstalled}
       />
+
+      <EnableAiRoomsDialog
+        visible={enableAiRoomsVisible}
+        isLoading={enableAiRoomsLoading}
+        onClose={() => setEnableAiRoomsVisible(false)}
+        onConfirm={handleConfirmEnableAiRooms}
+      />
     </div>
   );
 };
@@ -298,6 +317,7 @@ const DashboardConnected = inject<TStore>(
     pricingUrl: settingsStore.docspacePricesUrl,
     isAppEnabled: appsStore.isEnabled,
     activate: appsStore.activate,
+    enable: appsStore.enable,
     ensureAppsLoaded: appsStore.ensureLoaded,
   }),
 )(observer(Dashboard));

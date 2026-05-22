@@ -33,7 +33,6 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { setAppEnabled } from "@docspace/shared/api/apps";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -41,6 +40,7 @@ import { useAppsCatalog } from "SRC_DIR/helpers/apps-catalog";
 import AppsStore from "SRC_DIR/store/AppsStore";
 
 import { InstallAiFormsDialog } from "../../../Dashboard/InstallModuleDialog";
+import { EnableAiRoomsDialog } from "../../../Dashboard/EnableAiRoomsDialog";
 
 import styles from "./Apps.module.scss";
 
@@ -63,6 +63,8 @@ const Apps = ({
   const navigate = useNavigate();
   const apps = useAppsCatalog();
   const [installDialogVisible, setInstallDialogVisible] = React.useState(false);
+  const [enableAiRoomsVisible, setEnableAiRoomsVisible] = React.useState(false);
+  const [enableAiRoomsLoading, setEnableAiRoomsLoading] = React.useState(false);
 
   useEffect(() => {
     ensureLoaded?.();
@@ -71,6 +73,19 @@ const Apps = ({
   useEffect(() => {
     if (ready) setDocumentTitle(t("OAuth:Apps"));
   }, [ready, t]);
+
+  const handleConfirmEnableAiRooms = async () => {
+    setEnableAiRoomsLoading(true);
+    try {
+      await enable?.("ai-rooms", true);
+      setEnableAiRoomsVisible(false);
+    } catch (err) {
+      console.error("Failed to enable ai-rooms", err);
+      toastr.error(t("Common:SomethingWentWrong"));
+    } finally {
+      setEnableAiRoomsLoading(false);
+    }
+  };
 
   const handleToggle = async (
     id: string,
@@ -92,7 +107,11 @@ const Apps = ({
         return;
       }
       if (id === "ai-rooms") {
-        await setAppEnabled("ai-rooms", next);
+        if (next) {
+          setEnableAiRoomsVisible(true);
+        } else {
+          await enable?.("ai-rooms", false);
+        }
         return;
       }
       await enable?.(id, next);
@@ -156,6 +175,13 @@ const Apps = ({
           setInstallDialogVisible(false);
           navigate("/ai-forms");
         }}
+      />
+
+      <EnableAiRoomsDialog
+        visible={enableAiRoomsVisible}
+        isLoading={enableAiRoomsLoading}
+        onClose={() => setEnableAiRoomsVisible(false)}
+        onConfirm={handleConfirmEnableAiRooms}
       />
     </div>
   );

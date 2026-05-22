@@ -1817,5 +1817,7 @@
   "RoomRenamed": "Room <1>«{{oldRoomTitle}}»</1> renamed to <2>«{{roomTitle}}»</2>",
   "RoomToArchiveMove": "Room moved to {{sectionName}}",
   "RoomFromArchiveRestore": "Room recovered from {{sectionName}}",
-  "RoomChangeOwner": "Room owner changed."
+  "RoomChangeOwner": "Room owner changed.",
+  "EnableAiRoomsTitle": "Enable AI Rooms?",
+  "EnableAiRoomsDescription": "Customizable workspaces for organizing files and collaborating with teams or clients. Set tailored access rights and environments for each project."
 }

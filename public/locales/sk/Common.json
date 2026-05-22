@@ -1808,7 +1808,7 @@
   "CustomFilterDisabled": "Vlastný filter pre vybraný súbor deaktivovaný",
   "CustomFilterEnable": "Povoliť vlastný filter",
   "CustomFilterEnabled": "Vlastný filter pre vybraný súbor aktivovaný",
-  "CustomFilterEnableDiscription": "Pre túto tabuľku je povolený vlastný filter. Používatelia, ktorí otvorili súbor, si budú môcť prispôsobiť zobrazenie údajov v tabuľke.",
+  "CustomFilterEnableDiscription": "Pre túto tabuľku je povolený vlastný filter. Používatelia, ktorí otvorili súbor, si budú môcť prispôsobiť zobrazenie údajov v tabuľke.",
   "Uploading": "Nahrávanie",
   "DocumentConversionTitle": "Konvertovanie dokumentov",
   "ConversionXmlMessage": "Dokument, ktorý otvárate, bude konvertovaný do formátu Office Open XML (docx alebo xlsx), aby ste ho mohli prezerať a upravovať rýchlejšie.",
@@ -1818,5 +1818,9 @@
   "FailedToConvert": "Nepodarilo sa konvertovať",
   "ByAuthor": "Autor",
   "ByCreation": "Vytvorené",
-  "ByLastModified": "Upravené"
+  "ByLastModified": "Upravené",
+  "AssignOwner": "Prideliť vlastníka",
+  "DeleteAgent": "Vymazať agenta",
+  "LeaveButton": "Odísť",
+  "WantLeaveAgent": "Skutočne chcete opustiť tohto agenta? Budete ho môcť opätovne pridať prostredníctvom novej pozvánky od administrátora agenta."
 }

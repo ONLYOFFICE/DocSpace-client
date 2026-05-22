@@ -1926,5 +1926,9 @@
   "ThisDevice": "Šī ierīce",
   "UseOnThisDevice": "Lietot šajā ierīcē",
   "UseRecoveryPhrase": "Izmantot atkopšanas frāzi",
-  "CustomFilterEnableDiscription": "Šai tabulai ir ieslēgts pielāgotais filtrs. Lietotāji, kas atvēruši failu, varēs pielāgot datu attēlojumu tabulā."
+  "CustomFilterEnableDiscription": "Šai tabulai ir ieslēgts pielāgotais filtrs. Lietotāji, kas atvēruši failu, varēs pielāgot datu attēlojumu tabulā.",
+  "AssignOwner": "Piešķirt īpašnieku",
+  "DeleteAgent": "Dzēst aģentu",
+  "LeaveButton": "Iziet",
+  "WantLeaveAgent": "Vai tiešām vēlaties atstāt šo aģentu? Jūs varēsiet pievienoties tam atkal, saņemot jaunu aicinājumu no aģenta administratora."
 }

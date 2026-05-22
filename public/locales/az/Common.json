@@ -1926,5 +1926,9 @@
   "ThisDevice": "Bu cihaz",
   "UseOnThisDevice": "Bu cihazda istifadə et",
   "UseRecoveryPhrase": "Bərpa ifadəsindən istifadə edin",
-  "CustomFilterEnableDiscription": "Bu cədvəl üçün Xüsusi filtr aktivdir. Faylı açan istifadəçilər cədvəldə məlumatların göstərilməsini fərdiləşdirə bilərlər."
+  "CustomFilterEnableDiscription": "Bu cədvəl üçün Xüsusi filtr aktivdir. Faylı açan istifadəçilər cədvəldə məlumatların göstərilməsini fərdiləşdirə bilərlər.",
+  "AssignOwner": "Sahibi təyin edin",
+  "DeleteAgent": "Agenti sil",
+  "LeaveButton": "Çıx",
+  "WantLeaveAgent": "Bu agentdən həqiqətən ayrılmaq istəyirsiniz? Agent admin tərəfindən göndərilən yeni dəvət vasitəsilə yenidən qoşulmaq imkanınız olacaq."
 }

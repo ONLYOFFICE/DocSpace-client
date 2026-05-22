@@ -1926,5 +1926,9 @@
   "ThisDevice": "Cet appareil",
   "UseOnThisDevice": "Utiliser sur cet appareil",
   "UseRecoveryPhrase": "Utiliser la phrase de récupération",
-  "CustomFilterEnableDiscription": "Un filtre personnalisé est activé pour ce tableau. Les utilisateurs qui ont ouvert le fichier pourront personnaliser l’affichage des données dans le tableau."
+  "CustomFilterEnableDiscription": "Un filtre personnalisé est activé pour ce tableau. Les utilisateurs qui ont ouvert le fichier pourront personnaliser l’affichage des données dans le tableau.",
+  "AssignOwner": "Attribuer un propriétaire",
+  "DeleteAgent": "Supprimer l'agent",
+  "LeaveButton": "Quitter",
+  "WantLeaveAgent": "Voulez-vous vraiment quitter cet agent ? Vous pourrez le rejoindre à nouveau via une nouvelle invitation envoyée par un administrateur de l'agent"
 }

@@ -1926,5 +1926,9 @@
   "ThisDevice": "Dieses Gerät",
   "UseOnThisDevice": "Auf diesem Gerät verwenden",
   "UseRecoveryPhrase": "Wiederherstellungsphrase verwenden",
-  "CustomFilterEnableDiscription": "Für diese Tabelle ist ein benutzerdefinierter Filter aktiviert. Benutzer, die die Datei geöffnet haben, können die Datenanzeige in der Tabelle personalisieren."
+  "CustomFilterEnableDiscription": "Für diese Tabelle ist ein benutzerdefinierter Filter aktiviert. Benutzer, die die Datei geöffnet haben, können die Datenanzeige in der Tabelle personalisieren.",
+  "AssignOwner": "Besitzer zuweisen",
+  "DeleteAgent": "Agenten löschen",
+  "LeaveButton": "Verlassen",
+  "WantLeaveAgent": "Möchten Sie diesen Agenten wirklich verlassen? Sie können ihm über eine neue Einladung eines Agentenadministrators wieder beitreten."
 }

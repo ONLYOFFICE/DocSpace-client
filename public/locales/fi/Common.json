@@ -1926,5 +1926,9 @@
   "ThisDevice": "Tämä laite",
   "UseOnThisDevice": "Käytä tällä laitteella",
   "UseRecoveryPhrase": "Käytä palautuslausetta",
-  "CustomFilterEnableDiscription": "Mukautettu suodatin on käytössä tässä taulukossa. Tiedoston avanneet käyttäjät voivat mukauttaa tietojen näyttöä taulukossa."
+  "CustomFilterEnableDiscription": "Mukautettu suodatin on käytössä tässä taulukossa. Tiedoston avanneet käyttäjät voivat mukauttaa tietojen näyttöä taulukossa.",
+  "AssignOwner": "Määritä omistaja",
+  "DeleteAgent": "Poista agentti",
+  "LeaveButton": "Poistu",
+  "WantLeaveAgent": "Haluatko todella poistaa tämän agentin? Voit liittyä siihen uudelleen agentin adminin lähettämän uuden kutsun kautta."
 }

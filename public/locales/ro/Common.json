@@ -1926,5 +1926,9 @@
   "ThisDevice": "Acest dispozitiv",
   "UseOnThisDevice": "Folosește pe acest dispozitiv",
   "UseRecoveryPhrase": "Utilizați fraza de recuperare",
-  "CustomFilterEnableDiscription": "Filtru particularizat este activ pentru acest tabel. Utilizatorii care au deschis acest fișier pot particulariza afișarea datelor din tabel."
+  "CustomFilterEnableDiscription": "Filtru particularizat este activ pentru acest tabel. Utilizatorii care au deschis acest fișier pot particulariza afișarea datelor din tabel.",
+  "AssignOwner": "Desemnare Proprietar",
+  "DeleteAgent": "Ștergere agent",
+  "LeaveButton": "Ieșire",
+  "WantLeaveAgent": "Doriți să părăsiți acest agent? You will be able to join it again via new invitation by an agent admin."
 }

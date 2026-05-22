@@ -1926,5 +1926,9 @@
   "ThisDevice": "Toto zařízení",
   "UseOnThisDevice": "Použít na tomto zařízení",
   "UseRecoveryPhrase": "Použít obnovovací frázi",
-  "CustomFilterEnableDiscription": "Pro tuto tabulku je povolen Vlastní filtr. Uživatelé, kteří otevřeli soubor, si budou moci přizpůsobit zobrazení dat v tabulce."
+  "CustomFilterEnableDiscription": "Pro tuto tabulku je povolen Vlastní filtr. Uživatelé, kteří otevřeli soubor, si budou moci přizpůsobit zobrazení dat v tabulce.",
+  "AssignOwner": "Přiřazení vlastníka",
+  "DeleteAgent": "Smazat agenta",
+  "LeaveButton": "Odejít",
+  "WantLeaveAgent": "Opravdu chcete opustit tohoto agenta? Budete se moci znovu připojit prostřednictvím nové pozvánky od administrátora agenta."
 }

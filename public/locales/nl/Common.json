@@ -1926,5 +1926,9 @@
   "ThisDevice": "Dit apparaat",
   "UseOnThisDevice": "Op dit apparaat gebruiken",
   "UseRecoveryPhrase": "Herstelzin gebruiken",
-  "CustomFilterEnableDiscription": "Aangepast filter is ingeschakeld voor deze tabel. Gebruikers die het bestand hebben geopend, kunnen de gegevensweergave in de tabel personaliseren."
+  "CustomFilterEnableDiscription": "Aangepast filter is ingeschakeld voor deze tabel. Gebruikers die het bestand hebben geopend, kunnen de gegevensweergave in de tabel personaliseren.",
+  "AssignOwner": "Eigenaar Toewijzen",
+  "DeleteAgent": "Agent verwijderen",
+  "LeaveButton": "Verlaten",
+  "WantLeaveAgent": "Wil je deze agent echt verlaten? Je kunt er via een nieuwe uitnodiging door een agent admin weer bij aansluiten."
 }

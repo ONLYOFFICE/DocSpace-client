@@ -1926,5 +1926,9 @@
   "ThisDevice": "Bu cihaz",
   "UseOnThisDevice": "Bu cihazda kullan",
   "UseRecoveryPhrase": "Kurtarma ifadesini kullan",
-  "CustomFilterEnableDiscription": "Bu tablo için Özel Filtre etkinleştirilmiştir. Dosyayı açan kullanıcılar, tablodaki veri görünümünü kişiselleştirebilir."
+  "CustomFilterEnableDiscription": "Bu tablo için Özel Filtre etkinleştirilmiştir. Dosyayı açan kullanıcılar, tablodaki veri görünümünü kişiselleştirebilir.",
+  "AssignOwner": "Sahip Ata",
+  "DeleteAgent": "Ajanı sil",
+  "LeaveButton": "Ayrıl",
+  "WantLeaveAgent": "Bu ajanı gerçekten terk etmek istediğinizden emin misiniz? Bir ajan yöneticisi tarafından yeni davetiye ile tekrar katılabilirsiniz."
 }

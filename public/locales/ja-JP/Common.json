@@ -1926,5 +1926,9 @@
   "ThisDevice": "このデバイス",
   "UseOnThisDevice": "このデバイスで使用",
   "UseRecoveryPhrase": "リカバリーフレーズを使用",
-  "CustomFilterEnableDiscription": "このテーブルではカスタムフィルターが有効です。ファイルを開いたユーザーは、テーブル内のデータ表示を個人用に設定できます。"
+  "CustomFilterEnableDiscription": "このテーブルではカスタムフィルターが有効です。ファイルを開いたユーザーは、テーブル内のデータ表示を個人用に設定できます。",
+  "AssignOwner": "所有者の割り当て",
+  "DeleteAgent": "エージェントを削除",
+  "LeaveButton": "退出",
+  "WantLeaveAgent": "このエージェントを本当に離れますか？エージェント管理者の新規招待により、再度参加することが可能になります。"
 }

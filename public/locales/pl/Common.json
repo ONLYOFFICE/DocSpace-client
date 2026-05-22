@@ -1926,5 +1926,9 @@
   "ThisDevice": "To urządzenie",
   "UseOnThisDevice": "Użyj na tym urządzeniu",
   "UseRecoveryPhrase": "Użyj frazy odzyskiwania",
-  "CustomFilterEnableDiscription": "Niestandardowy filtr jest włączony dla tej tabeli. Użytkownicy, którzy otworzyli plik, będą mogli personalizować sposób wyświetlania danych w tabeli."
+  "CustomFilterEnableDiscription": "Niestandardowy filtr jest włączony dla tej tabeli. Użytkownicy, którzy otworzyli plik, będą mogli personalizować sposób wyświetlania danych w tabeli.",
+  "AssignOwner": "Przypisz właściciela",
+  "DeleteAgent": "Usuń agenta",
+  "LeaveButton": "Opuść",
+  "WantLeaveAgent": "Czy naprawdę chcesz opuścić tego agenta? Będziesz mógł do niego ponownie dołączyć za pośrednictwem nowego zaproszenia od administratora agenta."
 }

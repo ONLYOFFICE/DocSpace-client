@@ -1926,5 +1926,9 @@
   "ThisDevice": "Thiết bị này",
   "UseOnThisDevice": "Sử dụng trên thiết bị này",
   "UseRecoveryPhrase": "Sử dụng cụm từ khôi phục",
-  "CustomFilterEnableDiscription": "Bộ lọc tùy chỉnh đã được bật cho bảng này. Người dùng đã mở tệp sẽ có thể tùy chỉnh cách hiển thị dữ liệu trong bảng."
+  "CustomFilterEnableDiscription": "Bộ lọc tùy chỉnh đã được bật cho bảng này. Người dùng đã mở tệp sẽ có thể tùy chỉnh cách hiển thị dữ liệu trong bảng.",
+  "AssignOwner": "Chỉ định Chủ sở hữu",
+  "DeleteAgent": "Xóa bỏ tác nhân",
+  "LeaveButton": "Rời khỏi",
+  "WantLeaveAgent": "Bạn có chắc chắn muốn rời khỏi agent này không? Bạn có thể tham gia lại thông qua lời mời mới từ quản trị viên agent."
 }

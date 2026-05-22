@@ -1926,5 +1926,9 @@
   "ThisDevice": "Este dispositivo",
   "UseOnThisDevice": "Usar en este dispositivo",
   "UseRecoveryPhrase": "Usar frase de recuperación",
-  "CustomFilterEnableDiscription": "El Filtro personalizado está habilitado para esta tabla. Los usuarios que han abierto el archivo podrán personalizar la visualización de los datos en la tabla."
+  "CustomFilterEnableDiscription": "El Filtro personalizado está habilitado para esta tabla. Los usuarios que han abierto el archivo podrán personalizar la visualización de los datos en la tabla.",
+  "AssignOwner": "Asignar propietario",
+  "DeleteAgent": "Eliminar agente",
+  "LeaveButton": "Salir",
+  "WantLeaveAgent": "¿Realmente desea abandonar este agente? Puede volver a unirse a él a través de una nueva invitación de un administrador del agente."
 }

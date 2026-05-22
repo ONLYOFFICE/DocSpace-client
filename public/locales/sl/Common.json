@@ -1926,5 +1926,9 @@
   "ThisDevice": "Ta naprava",
   "UseOnThisDevice": "Uporabi na tej napravi",
   "UseRecoveryPhrase": "Uporabi obnovitveno frazo",
-  "CustomFilterEnableDiscription": "Prilagojen filter je omogočen za to tabelo. Uporabniki, ki so odprli datoteko, lahko prilagodijo prikaz podatkov v tabeli."
+  "CustomFilterEnableDiscription": "Prilagojen filter je omogočen za to tabelo. Uporabniki, ki so odprli datoteko, lahko prilagodijo prikaz podatkov v tabeli.",
+  "AssignOwner": "Dodeli lastnika",
+  "DeleteAgent": "Izbriši agenta",
+  "LeaveButton": "Zapusti",
+  "WantLeaveAgent": "Res želite resno zapustiti tega agenta? Se ga boste lahko ponovno pridobili prek nove povabilnice agenta skrbnika."
 }

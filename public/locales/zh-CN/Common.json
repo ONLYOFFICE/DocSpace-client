@@ -1926,5 +1926,9 @@
   "ThisDevice": "此设备",
   "UseOnThisDevice": "在此设备上使用",
   "UseRecoveryPhrase": "使用恢复短语",
-  "CustomFilterEnableDiscription": "该表已启用自定义过滤器。打开文件的用户可以个性化表格中的数据显示。"
+  "CustomFilterEnableDiscription": "该表已启用自定义过滤器。打开文件的用户可以个性化表格中的数据显示。",
+  "AssignOwner": "分配所有者",
+  "DeleteAgent": "删除智能体",
+  "LeaveButton": "离开",
+  "WantLeaveAgent": "确定要离开此智能体吗？您可以通过智能体管理员的新邀请重新加入。"
 }

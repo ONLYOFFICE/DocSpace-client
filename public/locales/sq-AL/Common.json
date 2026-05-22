@@ -1926,5 +1926,9 @@
   "ThisDevice": "Kjo pajisje",
   "UseOnThisDevice": "Përdor në këtë pajisje",
   "UseRecoveryPhrase": "Përdorni frazën e rikuperimit",
-  "CustomFilterEnableDiscription": "Filtri i personalizuar është aktivizuar për këtë tabelë. Përdoruesit që hapën skedarin do të mund të personalizojnë shfaqjen e të dhënave në tabelë."
+  "CustomFilterEnableDiscription": "Filtri i personalizuar është aktivizuar për këtë tabelë. Përdoruesit që hapën skedarin do të mund të personalizojnë shfaqjen e të dhënave në tabelë.",
+  "AssignOwner": "Caktoni pronarin",
+  "DeleteAgent": "Fshij agjentin",
+  "LeaveButton": "Largohu",
+  "WantLeaveAgent": "Dëshiron vërtet të largohesh nga ky agjent? Do të jesh në gjendje t'i bashkohesh përsëri nëpërmjet një ftese të re nga një administrator agjenti."
 }

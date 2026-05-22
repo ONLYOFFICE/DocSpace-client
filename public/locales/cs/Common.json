@@ -1628,5 +1628,19 @@
   "YourName": "Vaše jméno",
   "YourPrice": "Vaše cena",
   "YourTurn": "Jste na řadě",
-  "YouWillBeContacted": "Po vytvoření požadavku vás bude kontaktovat prodejní tým."
+  "YouWillBeContacted": "Po vytvoření požadavku vás bude kontaktovat prodejní tým.",
+  "CustomFilterDisable": "Odstranění šablony",
+  "CustomFilterDisabled": "Vlastní filtr pro vybraný soubor deaktivován",
+  "CustomFilterEnable": "Povolit Vlastní filtr",
+  "CustomFilterEnabled": "Vlastní filtr pro vybraný soubor aktivován",
+  "Uploading": "Nahrávání",
+  "DocumentConversionTitle": "Konverze dokumentů",
+  "ConversionXmlMessage": "Otevřený dokument bude převeden do formátu Office Open XML (docx nebo xlsx) pro rychlejší prohlížení a úpravy.",
+  "OpenFileMessage": "Dokument bude konvertován do Office Open XML formátu pro rychlejší náhled a editaci.",
+  "SelectFileType": "Vyberte typ souboru:",
+  "SaveOriginalFormatMessage": "Uložit kopii souboru v původním formátu",
+  "FailedToConvert": "Konverze se nezdařila",
+  "ByAuthor": "Autor",
+  "ByCreation": "Vytvořeno",
+  "ByLastModified": "Upraveno"
 }

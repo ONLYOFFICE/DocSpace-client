@@ -25,6 +25,7 @@ import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
+import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
 
 import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
 import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
@@ -73,7 +74,7 @@ export default function useContextMenuModel({
   const filesSelectionStore = useFilesSelectionStore();
 
   const { openFolder, copyFolderLink } = useFolderActions({ t });
-  const { openFile, copyFileLink, lockFile } = useFilesActions({ t });
+  const { openFile, copyFileLink, lockFile, changeCustomFilter } = useFilesActions({ t });
   const { downloadAction, downloadAsAction } = useDownloadActions();
   const {
     markAsFavorite,
@@ -371,6 +372,22 @@ export default function useContextMenuModel({
       };
     },
     [t, lockFile],
+  );
+
+  const getCustomFilterItem = useCallback(
+    (i: TFileItem) => {
+      return {
+        id: "option_custom-filter",
+        key: "custom-filter",
+        label: i.customFilterEnabled
+          ? t("Common:CustomFilterDisable")
+          : t("Common:CustomFilterEnable"),
+        icon: CustomFilterReactSvgUrl,
+        onClick: () => changeCustomFilter(i),
+        disabled: false,
+      };
+    },
+    [t, changeCustomFilter],
   );
 
   const getShowInfoItem = useCallback(
@@ -680,6 +697,12 @@ export default function useContextMenuModel({
       )
         actionGroup.push(getBlockUnblockVersionItem(item as TFileItem));
 
+      if (
+        contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.customFilter) &&
+        !("isFolder" in item! && item!.isFolder)
+      )
+        actionGroup.push(getCustomFilterItem(item as TFileItem));
+
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.showInfo))
         actionGroup.push(getShowInfoItem(item!));
 
@@ -748,6 +771,7 @@ export default function useContextMenuModel({
       getShowInfoItem,
       getShowVersionHistoryItem,
       getBlockUnblockVersionItem,
+      getCustomFilterItem,
       getDeleteItem,
       getHeaderContextMenuModel,
       getGroupContextMenuModel,

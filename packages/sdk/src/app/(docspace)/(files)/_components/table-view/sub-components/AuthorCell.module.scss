@@ -33,14 +33,20 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { css } from "styled-components";
+.styledAuthorCell {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
 
-export const NoUserSelect = css`
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-  -ms-user-select: none;
-  -khtml-user-select: none;
-`;
+  :global(.author-avatar-cell) {
+    width: 16px;
+    min-width: 16px;
+    height: 16px;
+    margin-inline-end: 8px;
+  }
+}
+
+.styledText {
+  display: inline-block;
+  margin-inline-end: 12px;
+}

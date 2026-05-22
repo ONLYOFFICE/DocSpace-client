@@ -1628,5 +1628,19 @@
   "YourName": "お名前",
   "YourPrice": "価格",
   "YourTurn": "あなたの番です",
-  "YouWillBeContacted": "リクエスト作成後、営業担当よりご連絡させていただきます。"
+  "YouWillBeContacted": "リクエスト作成後、営業担当よりご連絡させていただきます。",
+  "CustomFilterDisable": "カスタムフィルターを無効化",
+  "CustomFilterDisabled": "選択したファイルのカスタムフィルターが無効になりました",
+  "CustomFilterEnable": "カスタムフィルターを有効化",
+  "CustomFilterEnabled": "選択したファイルのカスタムフィルターが有効になりました",
+  "Uploading": "アップロード中",
+  "DocumentConversionTitle": "ドキュメントの変換",
+  "ConversionXmlMessage": "開いたファイルは、より高速な表示と編集が可能なOffice Open XML形式（docxまたはxlsx）に変換されます。",
+  "OpenFileMessage": "開いた文書ファイルは、より高速に表示、編集するようにOffice Open XML形式に変換されます。",
+  "SelectFileType": "ファイルの種類を選択してください：",
+  "SaveOriginalFormatMessage": "コピーしたファイルを元のフォーマットで保存する",
+  "FailedToConvert": "変換に失敗しました",
+  "ByAuthor": "作成者",
+  "ByCreation": "作成",
+  "ByLastModified": "変更"
 }

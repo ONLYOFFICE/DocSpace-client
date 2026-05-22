@@ -1628,5 +1628,19 @@
   "YourName": "Su nombre",
   "YourPrice": "Su precio",
   "YourTurn": "Su turno",
-  "YouWillBeContacted": "El equipo de ventas se pondrá en contacto con usted después de crear la solicitud."
+  "YouWillBeContacted": "El equipo de ventas se pondrá en contacto con usted después de crear la solicitud.",
+  "CustomFilterDisable": "Deshabilitar Filtro personalizado",
+  "CustomFilterDisabled": "El Filtro personalizado para el archivo seleccionado se ha deshabilitado",
+  "CustomFilterEnable": "Habilitar Filtro personalizado",
+  "CustomFilterEnabled": "El Filtro personalizado para el archivo seleccionado se ha habilitado",
+  "Uploading": "Cargando",
+  "DocumentConversionTitle": "Conversión de documentos",
+  "ConversionXmlMessage": "El archivo que usted abra se convertirá al formato Office Open XML (docx o xlsx) para una visualización y edición más rápidas.",
+  "OpenFileMessage": "El archivo de documento que abra se convertirá al formato Office Open XML para su rápida visualización y edición.",
+  "SelectFileType": "Por favor, seleccione un tipo de archivo:",
+  "SaveOriginalFormatMessage": "Guardar la copia del archivo en el formato original",
+  "FailedToConvert": "Error al convertir",
+  "ByAuthor": "Autor",
+  "ByCreation": "Creado",
+  "ByLastModified": "Modificado"
 }

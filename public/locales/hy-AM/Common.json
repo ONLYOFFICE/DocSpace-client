@@ -1628,5 +1628,19 @@
   "YourName": "Ձեր անունը",
   "YourPrice": "Ձեր գինը",
   "YourTurn": "Ձեր հերթն է",
-  "YouWillBeContacted": "Վաճառքի թիմը կկապվի ձեզ հետ հարցումը ստեղծելուց հետո:"
+  "YouWillBeContacted": "Վաճառքի թիմը կկապվի ձեզ հետ հարցումը ստեղծելուց հետո:",
+  "CustomFilterDisable": "Անջատել Հատուկ ֆիլտրը",
+  "CustomFilterDisabled": "Ընտրված ֆայլի անհատական ֆիլտրն անջատված է",
+  "CustomFilterEnable": "Միացնել Հատուկ ֆիլտրը",
+  "CustomFilterEnabled": "Հատուկ ֆիլտրն ընտրված ֆայլի համար միացված է",
+  "Uploading": "Վերբեռնում",
+  "DocumentConversionTitle": "Փաստաթղթի փոխարկում",
+  "ConversionXmlMessage": "Ձեր բացած փաստաթղթի ֆայլը կվերածվի Office Open XML ձևաչափի (docx կամ xlsx)՝ ավելի արագ դիտելու և խմբագրելու համար:",
+  "OpenFileMessage": "Ձեր բացած փաստաթղթի ֆայլը կվերածվի Office Open XML ձևաչափի՝ արագ դիտման և խմբագրման համար:",
+  "SelectFileType": "Խնդրում ենք ընտրել ֆայլի տեսակը՝",
+  "SaveOriginalFormatMessage": "Պահպանել ֆայլի պատճենը սկզբնական ձևաչափով",
+  "FailedToConvert": "Փոխարկման ձախողում",
+  "ByAuthor": "Հեղինակ",
+  "ByCreation": "Ստեղծված",
+  "ByLastModified": "Փոփոխված"
 }

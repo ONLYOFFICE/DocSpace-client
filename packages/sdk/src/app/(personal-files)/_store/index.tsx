@@ -46,6 +46,7 @@ import { MediaViewerStoreContextProvider } from "@/app/(docspace)/_store/MediaVi
 import { DialogsStoreContextProvider } from "@/app/(docspace)/_store/DialogsStore";
 import { DownloadDialogStoreContextProvider } from "@/app/(docspace)/_store/DownloadDialogStore";
 import { ActiveItemsStoreContextProvider } from "@/app/(docspace)/_store/ActiveItemsStore";
+import { UploadStoreContextProvider } from "@/app/(docspace)/_store/UploadStore";
 
 import type { TViewAs } from "@docspace/shared/types";
 
@@ -73,19 +74,21 @@ export const DocsStoreProviders = ({
                 <DialogsStoreContextProvider>
                   <DownloadDialogStoreContextProvider>
                     <ActiveItemsStoreContextProvider>
-                      <DocsSettingsStoreContextProvider>
-                        <DocsUserStoreContextProvider>
-                          <InfoPanelStoreContextProvider>
-                            <VersionHistoryStoreContextProvider>
-                              <AiChatPanelStoreContextProvider>
-                                <PersonalFilesAiAgentProviders>
-                                  {children}
-                                </PersonalFilesAiAgentProviders>
-                              </AiChatPanelStoreContextProvider>
-                            </VersionHistoryStoreContextProvider>
-                          </InfoPanelStoreContextProvider>
-                        </DocsUserStoreContextProvider>
-                      </DocsSettingsStoreContextProvider>
+                      <UploadStoreContextProvider>
+                        <DocsSettingsStoreContextProvider>
+                          <DocsUserStoreContextProvider>
+                            <InfoPanelStoreContextProvider>
+                              <VersionHistoryStoreContextProvider>
+                                <AiChatPanelStoreContextProvider>
+                                  <PersonalFilesAiAgentProviders>
+                                    {children}
+                                  </PersonalFilesAiAgentProviders>
+                                </AiChatPanelStoreContextProvider>
+                              </VersionHistoryStoreContextProvider>
+                            </InfoPanelStoreContextProvider>
+                          </DocsUserStoreContextProvider>
+                        </DocsSettingsStoreContextProvider>
+                      </UploadStoreContextProvider>
                     </ActiveItemsStoreContextProvider>
                   </DownloadDialogStoreContextProvider>
                 </DialogsStoreContextProvider>

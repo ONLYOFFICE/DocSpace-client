@@ -1628,5 +1628,19 @@
   "YourName": "ඔබගේ නම",
   "YourPrice": "ඔබගේ මිල",
   "YourTurn": "ඔබේ වාරය.",
-  "YouWillBeContacted": "ඉල්ලීම සෑදීමෙන් පසු අලෙවි කණ්ඩායම ඔබව සම්බන්ධ කර ගනු ඇත."
+  "YouWillBeContacted": "ඉල්ලීම සෑදීමෙන් පසු අලෙවි කණ්ඩායම ඔබව සම්බන්ධ කර ගනු ඇත.",
+  "CustomFilterDisable": "අභිරුචි පෙරහන අක්‍රීය කරන්න",
+  "CustomFilterDisabled": "Prilagojen filter za izbrano datoteko onemogočen",
+  "CustomFilterEnable": "අභිමත පෙරහන සක්‍රිය කරන්න",
+  "CustomFilterEnabled": "Prilagojen filter za izbrano datoteko omogočen",
+  "Uploading": "ඉහල් කිරීම",
+  "DocumentConversionTitle": "ලේඛනය හැරවීම",
+  "ConversionXmlMessage": "ඔබ විවෘත කරන ගොනුව වේගවත් නැරඹීම සහ සංස්කරණය කිරීම සඳහා Office Open XML ආකෘතියට (docx හෝ xlsx) පරිවර්තනය කෙරේ.",
+  "OpenFileMessage": "ඔබ විවෘත කරන ලේඛන ගොනුව ඉක්මනින් බැලීම සහ සංස්කරණය සඳහා ඔෆිස් විවෘත XML ආකෘතියට හරවනු ලැබේ.",
+  "SelectFileType": "ෆයිල් වර්ගයක් තෝරා ගන්න:",
+  "SaveOriginalFormatMessage": "ගොනුවේ පිටපත මුල් ආකෘතියෙන් සුරකින්න",
+  "FailedToConvert": "හැරවීමට අසමත් විය",
+  "ByAuthor": "කර්තෘ",
+  "ByCreation": "සෑදුවේ",
+  "ByLastModified": "සංශෝධිතයි"
 }

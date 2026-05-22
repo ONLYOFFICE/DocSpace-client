@@ -45,6 +45,7 @@ export type TableViewRowProps = {
   displayFileExtension: boolean;
   hideColumns?: boolean;
   lastColumn: string;
+  currentUserId?: string;
 };
 
 export type TableViewProps = {
@@ -57,4 +58,5 @@ export type TableViewProps = {
   timezone: string;
   displayFileExtension: boolean;
   fetchMoreFiles: (params: IndexRange) => Promise<void>;
+  currentUserId?: string;
 };

@@ -1,0 +1,119 @@
+/*
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+.uploadBody {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.headerActions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.clearButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fileRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 48px;
+  padding-block: 8px;
+  padding-inline-end: 16px;
+
+  &.fileRowError .fileNameText {
+    color: var(--files-panels-upload-color);
+  }
+}
+
+.fileIconWrap {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline-end: 8px;
+}
+
+.fileIcon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+
+  &.iconError {
+    filter: grayscale(1);
+  }
+}
+
+.fileName {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.fileNameText {
+  line-height: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fileExt {
+  color: var(--files-panels-upload-color);
+}
+
+.actionsWrapper {
+  flex: 0 0 auto;
+  display: flex;
+  margin-inline-start: auto;
+  padding-inline-start: 16px;
+  align-items: center;
+}
+
+.percentText {
+  margin-inline-start: 16px;
+  color: var(--files-panels-upload-progress-color);
+}
+
+.closeButton {
+  margin-inline-start: 16px;
+}
+
+.checkButton {
+  margin-inline-start: 16px;
+  width: 16px;
+  height: 16px;
+
+  path {
+    fill: var(--files-panels-upload-positive-status-color);
+  }
+}
+
+.errorText {
+  color: var(--files-panels-upload-color);
+  margin-inline-start: 16px;
+  text-decoration: underline dashed;
+  cursor: default;
+}
+
+.cancelledText {
+  color: var(--files-panels-upload-color);
+  margin-inline-start: 16px;
+}
+
+.progressWrap {
+  position: absolute;
+  inset-inline: 48px 16px;
+  bottom: 0;
+}

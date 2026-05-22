@@ -52,6 +52,7 @@ import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
+import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
 
 import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
 import useFavoritesActions from "@/app/(docspace)/_hooks/useFavoritesActions";
@@ -63,6 +64,7 @@ import { DeleteContext } from "../../../../_contexts/DeleteContext";
 import { FileOperationsContext } from "../../../../_contexts/FileOperationsContext";
 import { RenameContext } from "../../../../_contexts/RenameContext";
 import { VersionHistoryContext } from "../../../../_contexts/VersionHistoryContext";
+import { ConvertContext } from "../../../../_contexts/ConvertContext";
 import type { TFileItem } from "../../../../_hooks/useItemList";
 import { generateFilesItemValue } from "../../../_utils";
 
@@ -82,7 +84,12 @@ const Row = observer(
   }: RowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
+    const { filesSettings } = useFilesSettingsStore();
     const { isItemActive } = useActiveItemsStore();
+    const isExtsCustomFilter =
+      "fileExst" in item
+        ? (filesSettings?.extsWebCustomFilterEditing ?? []).includes(item.fileExst)
+        : false;
 
     // Use the observable item from MobX store so isFavorite changes are reactive
     const storeItem = filesListStore.items.find((i) => i.id === item.id);
@@ -90,7 +97,7 @@ const Row = observer(
 
     const { t } = useTranslation(["Common"]);
     const { isBase } = useTheme();
-    const { openFile } = useFilesActions({ t });
+    const { openFile, lockFile } = useFilesActions({ t });
     const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });
     const onShareClick = React.useContext(ShareContext);
     const onInfoClick = React.useContext(InfoContext);
@@ -98,6 +105,7 @@ const Row = observer(
     const fileOpsCtx = React.useContext(FileOperationsContext);
     const renameCtx = React.useContext(RenameContext);
     const onShowVersionHistory = React.useContext(VersionHistoryContext);
+    const onConvert = React.useContext(ConvertContext);
 
     const { getContextMenuModel } = useContextMenuModel({
       item: observableItem,
@@ -124,6 +132,12 @@ const Row = observer(
       }
     };
 
+    const onClickLock = () => {
+      if (!observableItem.isFolder) {
+        lockFile(observableItem as TFileItem);
+      }
+    };
+
     const badgesComponent = (
       <Badges
         className={styles.badgesComponent}
@@ -132,12 +146,19 @@ const Row = observer(
         item={observableItem}
         viewAs="row"
         showNew={false}
+        isExtsCustomFilter={isExtsCustomFilter}
         onFilesClick={() => {
           if (!observableItem.isFolder) {
             openFile(observableItem);
           }
         }}
         onClickFavorite={onClickFavorite}
+        onClickLock={onClickLock}
+        setConvertDialogVisible={
+          !observableItem.isFolder && onConvert
+            ? () => onConvert(observableItem as TFileItem)
+            : undefined
+        }
         onShowVersionHistory={
           !observableItem.isFolder && onShowVersionHistory
             ? () => onShowVersionHistory(observableItem as TFileItem)
@@ -156,6 +177,7 @@ const Row = observer(
         item={observableItem}
         viewAs="row"
         onClickFavorite={onClickFavorite}
+        onClickLock={onClickLock}
         onClickShare={onShareClick ? handleShareClick : undefined}
         openShareTab={onShareClick ? handleShareClick : undefined}
       />

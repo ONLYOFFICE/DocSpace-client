@@ -1628,5 +1628,19 @@
   "YourName": "Ваше име",
   "YourPrice": "Ваша цена",
   "YourTurn": "Ваш ред",
-  "YouWillBeContacted": "Продајни тим ће вас контактирати након креирања захтева."
+  "YouWillBeContacted": "Продајни тим ће вас контактирати након креирања захтева.",
+  "CustomFilterDisable": "Онемогућите прилагођени филтер",
+  "CustomFilterDisabled": "Прилагођени филтер за изабрану датотеку је онемогућен",
+  "CustomFilterEnable": "Омогућите прилагођени филтер",
+  "CustomFilterEnabled": "Прилагођени филтер за изабрану датотеку је омогућен",
+  "Uploading": "Отпремање",
+  "DocumentConversionTitle": "Конверзија документа",
+  "ConversionXmlMessage": "Документ који отварате ће бити конвертован у Office Open XML формат (docx или xlsx) за бржи преглед и уређивање.",
+  "OpenFileMessage": "Датотека документа коју отворите биц́е конвертована у Office Open XML формат ради брзог прегледа и уређивања.",
+  "SelectFileType": "Молимо одаберите тип фајла:",
+  "SaveOriginalFormatMessage": "Сачувај копију датотеке у оригиналном формату",
+  "FailedToConvert": "Неуспешно конвертовање",
+  "ByAuthor": "Аутор",
+  "ByCreation": "Креирано",
+  "ByLastModified": "Модификовано"
 }

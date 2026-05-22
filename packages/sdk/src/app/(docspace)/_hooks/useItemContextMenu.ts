@@ -3,6 +3,7 @@ import { useCallback } from "react";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
+import { useFilesSettingsStore } from "../_store/FilesSettingsStore";
 
 type UseItemContextMenuProps = {
   isFavoritesSection?: boolean;
@@ -19,6 +20,8 @@ export default function useItemContextMenu({
   isDocsSection = false,
   isShareSection = false,
 }: UseItemContextMenuProps = {}) {
+  const { filesSettings } = useFilesSettingsStore();
+
   const getFilesContextMenu = useCallback((
     file: TFile,
     overrides?: { isRecentSection?: boolean; isFavoritesSection?: boolean },
@@ -147,6 +150,20 @@ export default function useItemContextMenu({
       model.add(AVAILABLE_CONTEXT_ITEMS.blockUnblockVersion);
     }
 
+    const extsCustomFilter = filesSettings?.extsWebCustomFilterEditing ?? [];
+    const extsWebEdited = filesSettings?.extsWebEdited ?? [];
+    const isExtsCustomFilter = extsCustomFilter.includes(file.fileExst);
+    const isExtsWebEdited = extsWebEdited.includes(file.fileExst);
+
+    if (
+      !isTrashSection &&
+      file.security?.CustomFilter &&
+      isExtsCustomFilter &&
+      isExtsWebEdited
+    ) {
+      model.add(AVAILABLE_CONTEXT_ITEMS.customFilter);
+    }
+
     model.add(AVAILABLE_CONTEXT_ITEMS.showInfo);
 
     if (file.security.Delete) {
@@ -158,7 +175,7 @@ export default function useItemContextMenu({
     }
 
     return Array.from(model);
-  }, [isFavoritesSection, isRecentSection, isTrashSection, isDocsSection, isShareSection]);
+  }, [isFavoritesSection, isRecentSection, isTrashSection, isDocsSection, isShareSection, filesSettings?.extsWebCustomFilterEditing, filesSettings?.extsWebEdited]);
 
   const getFoldersContextMenu = useCallback((folder: TFolder) => {
     if (isShareSection) {

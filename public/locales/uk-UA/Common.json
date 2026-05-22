@@ -1628,5 +1628,19 @@
   "YourName": "Ваше ім’я",
   "YourPrice": "Ваша ціна",
   "YourTurn": "Ваша черга",
-  "YouWillBeContacted": "Після створення запиту з вами зв’яжеться відділ продажів."
+  "YouWillBeContacted": "Після створення запиту з вами зв’яжеться відділ продажів.",
+  "CustomFilterDisable": "Вимкнути користувацький фільтр",
+  "CustomFilterDisabled": "Спеціальний фільтр для обраного файлу вимкнено",
+  "CustomFilterEnable": "Увімкнути спеціальний фільтр",
+  "CustomFilterEnabled": "Спеціальний фільтр для обраного файлу увімкнено",
+  "Uploading": "Передавання",
+  "DocumentConversionTitle": "Перетворення документів",
+  "ConversionXmlMessage": "Документ, який ви відкриваєте, буде конвертовано у формат Office Open XML (docx або xlsx) для швидшого перегляду та редагування.",
+  "OpenFileMessage": "Для швидшого перегляду та редагування файл документа, який ви відкриваєте, буде перетворено у формат Office Open XML.",
+  "SelectFileType": "Виберіть тип файлу:",
+  "SaveOriginalFormatMessage": "Зберегти копію файлу в оригінальному форматі",
+  "FailedToConvert": "Не вдалося перетворити",
+  "ByAuthor": "Автор",
+  "ByCreation": "Створено",
+  "ByLastModified": "Змінено"
 }

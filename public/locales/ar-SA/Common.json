@@ -1628,5 +1628,19 @@
   "YourName": "اسمك",
   "YourPrice": "سعرك",
   "YourTurn": "دوركم الآن",
-  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب."
+  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب.",
+  "CustomFilterDisable": "تعطيل الفلتر المخصص",
+  "CustomFilterDisabled": "تم تعطيل الفِلتر المخصص للملف المحدد",
+  "CustomFilterEnable": "تمكين الفِلتر المخصص",
+  "CustomFilterEnabled": "تم تمكين الفِلتر المخصص للملف المحدد",
+  "Uploading": "جارٍ التحميل",
+  "DocumentConversionTitle": "تحويل المستند",
+  "ConversionXmlMessage": "سيتم تحويل المستند الذي تفتحه إلى تنسيق\" Office Open XML\" (docx أو xlsx) لعرض وتحرير أسرع.",
+  "OpenFileMessage": "سيتم تحويل ملف المستند الذي تفتحه إلى صيغةOffice Open XML لعرضه وتحريره بسرعة.",
+  "SelectFileType": "يرجى اختيار نوع الملف:",
+  "SaveOriginalFormatMessage": "احفظ نسخة الملف بالتنسيق الأصلي",
+  "FailedToConvert": "فشل التحويل",
+  "ByAuthor": "مؤلف",
+  "ByCreation": "تم انشاءه",
+  "ByLastModified": "تم تعديله"
 }

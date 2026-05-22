@@ -1628,5 +1628,19 @@
   "YourName": "ຊື່​ຂອງ​ເຈົ້າ",
   "YourPrice": "ລາຄາຂອງເຈົ້າ",
   "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
-  "YouWillBeContacted": "ທີມງານຂາຍຈະຕິດຕໍ່ທ່ານຫຼັງຈາກສ້າງຄໍາຮ້ອງຂໍ."
+  "YouWillBeContacted": "ທີມງານຂາຍຈະຕິດຕໍ່ທ່ານຫຼັງຈາກສ້າງຄໍາຮ້ອງຂໍ.",
+  "CustomFilterDisable": "ປິດການນໍາໃຊ້ຕົວປ່ຽນແກ້ແບບປັບແກ້ຕາມຄວາມຕ້ອງການ",
+  "CustomFilterDisabled": "ຕົວປ່ຽນແສງຄຳຕັ້ງຕາມຄວາມຕ້ອງການ ສຳລັບເອກະສານທີ່ເລືອກຖືກປິດການໃຊ້ງານ",
+  "CustomFilterEnable": "ເປີດໃຊ້ຕົວປ່ຽນແກ້ແບບປົກກະຕິ",
+  "CustomFilterEnabled": "ຕົວປ່ຽນແກ້ແບບປົກກະຕິສໍາລັບເອກະສານທີ່ເລືອກແມ່ນເປີດໃຊ້ງານແລ້ວ",
+  "Uploading": "ການອັບໂຫຼດ",
+  "DocumentConversionTitle": "ການແປງເອກະສານ",
+  "ConversionXmlMessage": "ເອກະສານທີ່ທ່ານເປີດຈະຖືກປ່ຽນເປັນຮູບແບບ Office Open XML (docx ຫຼື xlsx) ເພື່ອຄວາມສະຫງ່າງາມໃນການເບິ່ງແລະການແກ້ໄຂໃຫ້ໄວຂຶ້ນ.",
+  "OpenFileMessage": "ໄຟລ໌ເອກະສານທີ່ທ່ານເປີດຈະຖືກປ່ຽນເປັນຮູບແບບ Office Open XML ສໍາລັບການເບິ່ງ ແລະແກ້ໄຂໄດ້ໄວ.",
+  "SelectFileType": "ກະລຸນາເລືອກປະເພດ​ເອກະສານ:",
+  "SaveOriginalFormatMessage": "ບັນທຶກໄຟລ໌ສຳເນົາໃນຮູບແບບຕົ້ນສະບັບ",
+  "FailedToConvert": "ລົ້ມເຫລວໃນການແປງ",
+  "ByAuthor": "ຜູ້ຂຽນ",
+  "ByCreation": "ສ້າງ",
+  "ByLastModified": "ແກ້ໄຂ"
 }

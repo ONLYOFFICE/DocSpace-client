@@ -1628,5 +1628,19 @@
   "YourName": "Adınız",
   "YourPrice": "Qiymətiniz",
   "YourTurn": "Sizin növbəniz",
-  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq."
+  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq.",
+  "CustomFilterDisable": "Şablonu silin",
+  "CustomFilterDisabled": "Seçilmiş fayl üçün Xüsusi filtr deaktiv edildi",
+  "CustomFilterEnable": "Xüsusi filtri aktivləşdirin",
+  "CustomFilterEnabled": "Seçilmiş fayl üçün Xüsusi filtr aktiv edildi",
+  "Uploading": "Yüklənir",
+  "DocumentConversionTitle": "Sənədin çevrilməsi",
+  "ConversionXmlMessage": "Açdığınız sənəd daha sürətli baxmaq və redaktə etmək üçün Office Open XML formatına (docx və ya xlsx) çevriləcək.",
+  "OpenFileMessage": "Açdığınız sənəd faylı tez baxmaq və redaktə etmək üçün Office Open XML formatına çevriləcək.",
+  "SelectFileType": "Lütfən, fayl növü seçin:",
+  "SaveOriginalFormatMessage": "Faylın nüsxəsini orijinal formatda yadda saxla",
+  "FailedToConvert": "Çevrilmə uğursuz oldu",
+  "ByAuthor": "Müəllif",
+  "ByCreation": "Yaradıldı",
+  "ByLastModified": "Dəyişdirilib"
 }

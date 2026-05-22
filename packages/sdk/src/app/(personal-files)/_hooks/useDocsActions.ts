@@ -51,6 +51,7 @@ import { useTranslation } from "react-i18next";
 
 import { useNavigationStore } from "@/app/(docspace)/_store/NavigationStore";
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
+import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
 
 import type { CreateFileDialogType } from "../_components/create-file-dialog";
 
@@ -79,6 +80,7 @@ export default function useDocsActions() {
   const router = useRouter();
   const navigationStore = useNavigationStore();
   const { filesSettings } = useFilesSettingsStore();
+  const uploadStore = useUploadStore();
   const { t } = useTranslation(["Common"]);
 
   const inputFilesRef = useRef<HTMLInputElement | null>(null);
@@ -176,9 +178,38 @@ export default function useDocsActions() {
         filesSettings?.maxUploadThreadCount ?? DEFAULT_UPLOAD_THREADS;
 
       const fileArray = Array.from(files);
+      if (fileArray.length === 0) return;
 
-      try {
-        await runWithConcurrency(fileArray, 2, async (file: File) => {
+      const taggedFiles = fileArray.map((file) => ({
+        file,
+        uniqueId:
+          typeof crypto !== "undefined" && "randomUUID" in crypto
+            ? crypto.randomUUID()
+            : `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+      }));
+
+      uploadStore.startBatch(
+        taggedFiles.map(({ file, uniqueId }) => ({
+          uniqueId,
+          fileName: file.name,
+          fileSize: file.size,
+          folderId,
+        })),
+      );
+
+      let anySuccess = false;
+
+      await runWithConcurrency(taggedFiles, 2, async ({ file, uniqueId }) => {
+        const item = uploadStore.items.find((i) => i.uniqueId === uniqueId);
+        if (!item) return;
+        const signal = item.abortController.signal;
+
+        if (signal.aborted) {
+          uploadStore.setItemCancelled(uniqueId);
+          return;
+        }
+
+        try {
           const session = await startUploadSession(
             folderId,
             file.name,
@@ -189,30 +220,58 @@ export default function useDocsActions() {
             true,
           );
 
-          const chunks = createChunks(file, chunkSize);
+          if (signal.aborted) {
+            uploadStore.setItemCancelled(uniqueId);
+            return;
+          }
 
-          await runWithConcurrency(
-            chunks,
-            maxThreads,
-            async (chunk: { index: number; data: FormData; size: number }) => {
-              await uploadChunkParallel(
-                folderId,
-                session.id,
-                chunk.index,
-                chunk.data,
-              );
-            },
-          );
+          const chunks = createChunks(file, chunkSize);
+          let uploadedChunks = 0;
+
+          await runWithConcurrency(chunks, maxThreads, async (chunk) => {
+            if (signal.aborted) return;
+
+            await uploadChunkParallel(
+              folderId,
+              session.id,
+              chunk.index,
+              chunk.data,
+            );
+
+            if (signal.aborted) return;
+
+            uploadedChunks += 1;
+            uploadStore.addUploadedBytes(chunk.size);
+            uploadStore.updateItemProgress(
+              uniqueId,
+              Math.round((uploadedChunks / chunks.length) * 100),
+            );
+          });
+
+          if (signal.aborted) {
+            uploadStore.setItemCancelled(uniqueId);
+            return;
+          }
 
           await finalizeUploadSession(folderId, session.id);
-        });
+          uploadStore.setItemUploaded(uniqueId);
+          anySuccess = true;
+        } catch (error) {
+          if (signal.aborted) {
+            uploadStore.setItemCancelled(uniqueId);
+            return;
+          }
+          const message =
+            error instanceof Error ? error.message : String(error);
+          uploadStore.setItemError(uniqueId, message);
+        }
+      });
 
+      if (anySuccess) {
         router.refresh();
-      } catch (error) {
-        toastr.error(error instanceof Error ? error.message : String(error));
       }
     },
-    [getFolderId, filesSettings, router],
+    [getFolderId, filesSettings, router, uploadStore],
   );
 
   const onUploadFiles = useCallback(() => {

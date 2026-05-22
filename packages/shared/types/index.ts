@@ -195,12 +195,6 @@ export type SelectedStorageType = {
   current?: unknown;
 };
 
-declare module "styled-components" {
-  export interface DefaultTheme extends TTheme {
-    currentColorScheme?: TColorScheme;
-  }
-}
-
 export interface StaticImageData {
   src: string;
   height: number;

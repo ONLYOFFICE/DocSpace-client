@@ -1628,5 +1628,19 @@
   "YourName": "Twoje imię",
   "YourPrice": "Twoja cena",
   "YourTurn": "Twoja kolej",
-  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby."
+  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby.",
+  "CustomFilterDisable": "Usuń szablon",
+  "CustomFilterDisabled": "Niestandardowy filtr dla wybranego pliku wyłączony",
+  "CustomFilterEnable": "Włącz niestandardowy filtr",
+  "CustomFilterEnabled": "Niestandardowy filtr dla wybranego pliku włączony",
+  "Uploading": "Wysyłanie",
+  "DocumentConversionTitle": "Konwersja dokumentów",
+  "ConversionXmlMessage": "Otwierany dokument zostanie przekonwertowany do formatu Office Open XML (docx lub xlsx), aby umożliwić Ci szybsze przeglądanie i edycję.",
+  "OpenFileMessage": "Otwarty plik dokumentu zostanie przekonwertowany do formatu Office Open XML w celu szybszego przeglądania i edycji.",
+  "SelectFileType": "Wybierz typ pliku:",
+  "SaveOriginalFormatMessage": "Zapisz kopię pliku w oryginalnym formacie",
+  "FailedToConvert": "Nie udało się przekonwertować",
+  "ByAuthor": "Autor",
+  "ByCreation": "Utworzono",
+  "ByLastModified": "Zmodyfikowano"
 }

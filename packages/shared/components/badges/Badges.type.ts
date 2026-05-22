@@ -74,6 +74,7 @@ type ItemData = {
   isAIAgent?: boolean;
   startFilling?: boolean;
   isFillingPreparing?: boolean;
+  encrypted?: boolean;
 };
 
 export type BadgesProps = {

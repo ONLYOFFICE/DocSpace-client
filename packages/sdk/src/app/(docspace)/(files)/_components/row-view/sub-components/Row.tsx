@@ -208,7 +208,7 @@ const Row = observer(
         isIndexEditingMode={false}
         isIndexUpdated={false}
         showHotkeyBorder={false}
-        isHighlight={false}
+        isHighlight={filesListStore.highlightFileId === item.id}
         className={classNames(styles.rowWrapper, "row-wrapper")}
       >
         <DragAndDrop

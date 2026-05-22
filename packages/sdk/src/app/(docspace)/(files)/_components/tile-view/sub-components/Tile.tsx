@@ -241,7 +241,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const commonTileProps = {
     item,
     contextOptions: contextMenuModel,
-    isHighlight: false,
+    isHighlight: filesListStore.highlightFileId === item.id,
     checked: isChecked,
     isActive: false,
     inProgress,

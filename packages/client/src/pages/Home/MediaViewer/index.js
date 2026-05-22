@@ -53,6 +53,7 @@ const FilesMediaViewer = (props) => {
     currentPostionIndex,
     visible,
     currentMediaFileId,
+    currentRoomId,
     deleteItemAction,
     setMediaViewerData,
 
@@ -109,6 +110,7 @@ const FilesMediaViewer = (props) => {
     pluginContextMenuItemsList,
     getContextMenuKeysByType,
     dispatchMessage,
+    userId,
   } = props;
 
   const navigate = useNavigate();
@@ -365,6 +367,8 @@ const FilesMediaViewer = (props) => {
               pluginViewerContent={pluginContent}
               pluginFileId={pluginMediaViewerProps?.fileId}
               pluginTitle={pluginMediaViewerProps?.title}
+              userId={userId}
+              currentRoomId={currentRoomId}
             />
           </>
         }
@@ -387,6 +391,8 @@ export default inject(
     settingsStore,
     publicRoomStore,
     aiRoomStore,
+    userStore,
+    selectedFolderStore,
   }) => {
     const { currentDeviceType, openUrl } = settingsStore;
     const {
@@ -531,6 +537,10 @@ export default inject(
       pluginContextMenuItemsList: contextMenuItemsList,
       getContextMenuKeysByType,
       dispatchMessage,
+      userId: userStore?.user?.id ? String(userStore.user.id) : undefined,
+      currentRoomId:
+        selectedFolderStore?.navigationPath?.find((r) => r.isRoom)?.id ??
+        (selectedFolderStore?.isRoom ? selectedFolderStore.id : null),
     };
   },
 )(withTranslation(["Files", "Translations"])(observer(FilesMediaViewer)));

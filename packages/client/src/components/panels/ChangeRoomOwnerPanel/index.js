@@ -33,17 +33,26 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 import PeopleSelector from "@docspace/ui-kit/selectors/People";
 import { withTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
-import { EmployeeType, EmployeeStatus } from "@docspace/shared/enums";
+import {
+  EmployeeType,
+  EmployeeStatus,
+  MembersSubjectType,
+} from "@docspace/shared/enums";
+import { getUserList } from "@docspace/shared/api/people";
+import { getRoomMembers } from "@docspace/shared/api/rooms";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { validateMembersForEncryption } from "@docspace/shared/services/private-room/room-encryption";
 import styles from "./ChangeRoomOwnerPanel.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
@@ -61,6 +70,8 @@ const ChangeRoomOwner = (props) => {
     useModal = true,
     isAIAgent,
     updateInfoPanelMembers,
+    roomId,
+    isPrivateRoom,
   } = props;
 
   const handleClosePanel = () => {
@@ -75,12 +86,44 @@ const ChangeRoomOwner = (props) => {
     newFooterInputValue,
     isChecked,
   ) => {
-    if (showBackButton) {
-      onOwnerChange && onOwnerChange(user[0]);
-    } else {
-      await changeRoomOwner(t, user[0]?.id, isChecked);
-      updateInfoPanelMembers();
+    const candidate = user[0];
+    if (!candidate?.id) {
+      handleClosePanel();
+      return;
     }
+
+    if (showBackButton) {
+      onOwnerChange && onOwnerChange(candidate);
+      handleClosePanel();
+      return;
+    }
+
+    if (isPrivateRoom && roomId) {
+      const { skipped } = await validateMembersForEncryption(
+        Number(roomId),
+        [candidate.id],
+        String(userId),
+        undefined,
+        { [candidate.id]: candidate.label || candidate.displayName },
+      );
+      if (skipped.length > 0) {
+        const reason = skipped[0].reason;
+        const name =
+          skipped[0].displayName ||
+          candidate.label ||
+          candidate.displayName ||
+          candidate.id;
+        toastr.error(
+          reason === "no-key"
+            ? t("Common:EncryptedChangeOwnerNoKeys", { user: name })
+            : t("Common:EncryptedChangeOwnerKeyMismatch", { user: name }),
+        );
+        return;
+      }
+    }
+
+    await changeRoomOwner(t, candidate.id, isChecked);
+    updateInfoPanelMembers();
     handleClosePanel();
   };
 
@@ -94,6 +137,58 @@ const ChangeRoomOwner = (props) => {
     newFilter.employeeStatus = EmployeeStatus.Active;
     return newFilter;
   }, []);
+
+  const baseExclude = useMemo(
+    () => (isPrivateRoom && userId ? [userId] : []),
+    [isPrivateRoom, userId],
+  );
+
+  const [excludeItems, setExcludeItems] = useState(baseExclude);
+  const [excludeReady, setExcludeReady] = useState(!isPrivateRoom);
+
+  useEffect(() => {
+    setExcludeItems(baseExclude);
+    setExcludeReady(!isPrivateRoom);
+
+    if (!isPrivateRoom || !roomId) return undefined;
+
+    const controller = new AbortController();
+    let cancelled = false;
+
+    const adminsFilter = Filter.getDefault();
+    adminsFilter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
+    adminsFilter.employeeStatus = EmployeeStatus.Active;
+    adminsFilter.pageCount = 100;
+
+    Promise.all([
+      getRoomMembers(roomId, { count: 100 }, controller.signal),
+      getUserList(adminsFilter, controller.signal),
+    ])
+      .then(([members, admins]) => {
+        if (cancelled) return;
+        const memberIds = new Set(
+          (members?.items ?? [])
+            .filter((m) => m?.subjectType === MembersSubjectType.User)
+            .map((m) => m?.sharedTo?.id)
+            .filter(Boolean),
+        );
+        const nonMemberAdmins = (admins?.items ?? [])
+          .map((a) => a.id)
+          .filter((id) => id && !memberIds.has(id));
+        const merged = new Set([...baseExclude, ...nonMemberAdmins]);
+        setExcludeItems([...merged]);
+        setExcludeReady(true);
+      })
+      .catch(() => {
+        if (cancelled) return;
+        setExcludeReady(true);
+      });
+
+    return () => {
+      cancelled = true;
+      controller.abort();
+    };
+  }, [isPrivateRoom, roomId, baseExclude]);
 
   const ownerIsCurrentUser = roomOwnerId === userId;
 
@@ -113,7 +208,7 @@ const ChangeRoomOwner = (props) => {
     ? t("Files:LeaveTheAgent")
     : t("Files:LeaveTheRoom");
 
-  const selectorComponent = (
+  const selectorComponent = excludeReady ? (
     <PeopleSelector
       withCancelButton
       onCancel={handleClosePanel}
@@ -136,6 +231,9 @@ const ChangeRoomOwner = (props) => {
       filterUserId={roomOwnerId}
       currentUserId={userId}
       disableDisabledUsers
+      excludeItems={
+        isPrivateRoom && excludeItems.length ? excludeItems : undefined
+      }
       withInfo
       infoText={infoText}
       emptyScreenHeader={t("Common:NotFoundMembers")}
@@ -143,6 +241,10 @@ const ChangeRoomOwner = (props) => {
       className={styles.changeOwnerPeopleSelector}
       data-test-id="change_owner_people_selector"
     />
+  ) : (
+    <div className={styles.changeOwnerLoader}>
+      <Loader type={LoaderTypes.track} />
+    </div>
   );
 
   return useModal ? (
@@ -199,6 +301,8 @@ export default inject(
       userId: id,
       isAIAgent: room?.isAIAgent,
       updateInfoPanelMembers,
+      roomId: room?.id,
+      isPrivateRoom: !!(room?.isPrivateRoom ?? room?.private),
     };
   },
 )(

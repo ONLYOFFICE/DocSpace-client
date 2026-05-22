@@ -257,6 +257,7 @@ const TableViewRow = observer(
       <TableRow
         className={classNames({
           "table-row-selected": isChecked,
+          [styles.isHighlight]: filesListStore.highlightFileId === item.id,
         })}
         checked={isChecked}
         contextOptions={contextMenuModel}

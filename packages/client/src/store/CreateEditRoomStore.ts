@@ -42,7 +42,7 @@ import api from "@docspace/shared/api";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { FolderType, RoomsType, RoomsTypePrivate } from "@docspace/shared/enums";
 import { CategoryType } from "@docspace/shared/constants";
 import {
   createTemplate,
@@ -574,6 +574,7 @@ class CreateEditRoomStore {
       prompt,
       providerId,
       modelId,
+      isPrivate,
       saveFormAsXLSX,
       sendFormToExternalDB,
     } = roomParams;
@@ -598,9 +599,34 @@ class CreateEditRoomStore {
             color: (logo as { color: string }).color,
           }
         : null;
+
+    // RoomsTypePrivate (13) is a client-only virtual type for UI.
+    // Server expects CustomRoom (5) with private: true flag.
+    const isPrivateRoom = isPrivate || type === RoomsTypePrivate;
+    const serverRoomType = isPrivateRoom ? RoomsType.CustomRoom : type;
+
+    if (isPrivateRoom) {
+      const userStore = this.filesStore!.userStore;
+      let keys = userStore?.encryptionKeys;
+
+      if (!keys || keys.length === 0) {
+        try {
+          keys = (await userStore?.getEncryptionKeys?.()) ?? null;
+        } catch {
+          keys = null;
+        }
+      }
+
+      if (!keys || keys.length === 0) {
+        toastr.error(t("Common:EncryptionKeysRequiredForPrivateRoom"));
+        return;
+      }
+    }
+
     const createRoomData = {
       roomId,
-      roomType: type,
+      roomType: serverRoomType,
+      private: isPrivateRoom,
       title: title || t("Common:NewRoom"),
       ...(isThirdPartyRoom && {
         createAsNewFolder: createAsNewFolder ?? true,

@@ -12,7 +12,7 @@ import type {
 import type { TSettings } from "@docspace/shared/api/settings/types";
 
 import AliasFilesList from "../../_components/alias-files-list";
-import { useRecentFilesStore } from "../../_store";
+import { useTrashFilesStore } from "../../_store";
 
 type Props = {
   folders: TFolder[];
@@ -24,10 +24,8 @@ type Props = {
   filesFilter: string;
 };
 
-// Bail out if any of the required SSR pieces failed to load — `List` needs
-// them all (filesSettings drives icon resolution, portalSettings drives the
-// socket URL, `current` drives the EmptyView branch).
-export default function RecentPage({
+// See recent/page.client.tsx for the bail-out rationale.
+export default function TrashPage({
   current,
   filesSettings,
   portalSettings,
@@ -36,7 +34,7 @@ export default function RecentPage({
   if (!current || !filesSettings || !portalSettings) return null;
   return (
     <AliasFilesList
-      useStore={useRecentFilesStore}
+      useStore={useTrashFilesStore}
       current={current}
       filesSettings={filesSettings}
       portalSettings={portalSettings}

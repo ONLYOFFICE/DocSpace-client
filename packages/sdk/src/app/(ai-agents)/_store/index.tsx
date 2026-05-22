@@ -51,6 +51,7 @@ import { AgentFilesStoreContextProvider } from "./AgentFilesStore";
 import { AgentInfoPanelStoreContextProvider } from "./AgentInfoPanelStore";
 import { RecentFilesStoreContextProvider } from "./RecentFilesStore";
 import { FavoritesFilesStoreContextProvider } from "./FavoritesFilesStore";
+import { TrashFilesStoreContextProvider } from "./TrashFilesStore";
 
 export const AiAgentsStoreProviders = ({
   children,
@@ -71,11 +72,13 @@ export const AiAgentsStoreProviders = ({
                         <AgentFilesStoreContextProvider>
                           <RecentFilesStoreContextProvider>
                             <FavoritesFilesStoreContextProvider>
-                              <AgentInfoPanelStoreContextProvider>
-                                <AgentsListStoreContextProvider>
-                                  {children}
-                                </AgentsListStoreContextProvider>
-                              </AgentInfoPanelStoreContextProvider>
+                              <TrashFilesStoreContextProvider>
+                                <AgentInfoPanelStoreContextProvider>
+                                  <AgentsListStoreContextProvider>
+                                    {children}
+                                  </AgentsListStoreContextProvider>
+                                </AgentInfoPanelStoreContextProvider>
+                              </TrashFilesStoreContextProvider>
                             </FavoritesFilesStoreContextProvider>
                           </RecentFilesStoreContextProvider>
                         </AgentFilesStoreContextProvider>
@@ -108,6 +111,7 @@ export { useAISettingsStore } from "./AISettingsStore";
 export { useAgentFilesStore } from "./AgentFilesStore";
 export { useRecentFilesStore } from "./RecentFilesStore";
 export { useFavoritesFilesStore } from "./FavoritesFilesStore";
+export { useTrashFilesStore } from "./TrashFilesStore";
 export type { default as AliasFilesStore, AliasViewAs } from "./AliasFilesStore";
 export { useAgentInfoPanelStore } from "./AgentInfoPanelStore";
 export type { AgentInfoPanelView } from "./AgentInfoPanelStore";

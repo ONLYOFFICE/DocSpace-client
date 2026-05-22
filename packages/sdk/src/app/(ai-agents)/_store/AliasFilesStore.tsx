@@ -9,7 +9,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import type { TFile } from "@docspace/shared/api/files/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { CategoryType } from "@docspace/shared/constants";
 
 export type AliasViewAs = "tile" | "row" | "table";
@@ -22,6 +22,10 @@ type CategoryValue = (typeof CategoryType)[keyof typeof CategoryType];
 // has `folder` pre-pinned to the alias) and a per-alias viewAs.
 class AliasFilesStore {
   files: TFile[] = [];
+
+  folders: TFolder[] = [];
+
+  current: TFolder | null = null;
 
   total = 0;
 
@@ -41,6 +45,10 @@ class AliasFilesStore {
     this.alias = alias;
     this.categoryType = categoryType;
     this.filter = FilesFilter.getDefault({ categoryType });
+    // FilesFilter.getDefault only sets `folder` for Recent/SharedWithMe/
+    // Favorite — Trash (and any future alias) falls through to DEFAULT_FOLDER
+    // (`@my`). Pin it explicitly so the alias never leaks `@my` to fetchers.
+    this.filter.folder = alias;
     makeAutoObservable<this, "abort">(this, { abort: false });
   }
 
@@ -48,8 +56,16 @@ class AliasFilesStore {
     this.isLoading = value;
   };
 
-  hydrate = (data: { files: TFile[]; total: number; filter: FilesFilter }) => {
+  hydrate = (data: {
+    files: TFile[];
+    folders?: TFolder[];
+    current?: TFolder | null;
+    total: number;
+    filter: FilesFilter;
+  }) => {
     this.files = data.files;
+    this.folders = data.folders ?? [];
+    this.current = data.current ?? null;
     this.total = data.total;
     this.filter = data.filter;
     this.isLoading = false;
@@ -81,6 +97,7 @@ class AliasFilesStore {
     // last set, but a stray FilesFilter.getDefault() without categoryType
     // would reset folder to undefined and break this fetch.
     if (!filterData.folder) filterData.folder = this.alias;
+    filterData.page = 0;
 
     this.abort?.abort();
     const controller = new AbortController();
@@ -96,6 +113,45 @@ class AliasFilesStore {
       if (controller.signal.aborted) return;
       runInAction(() => {
         this.files = data.files;
+        this.folders = data.folders ?? [];
+        this.current = data.current ?? this.current;
+        this.total = data.total;
+        this.filter = filterData;
+      });
+    } catch (e) {
+      if (!controller.signal.aborted) throw e;
+    } finally {
+      if (!controller.signal.aborted) this.setIsLoading(false);
+    }
+  };
+
+  // Append next page — drives infinite scroll in row/tile/table views.
+  // Reuses the same abort slot as `fetch` so a fresh filter change cancels
+  // any in-flight pagination request.
+  fetchMore = async () => {
+    if (this.isLoading) return;
+    const loaded = this.folders.length + this.files.length;
+    if (loaded >= this.total) return;
+
+    const filterData = this.filter.clone();
+    filterData.page = (filterData.page ?? 0) + 1;
+    if (!filterData.folder) filterData.folder = this.alias;
+
+    this.abort?.abort();
+    const controller = new AbortController();
+    this.abort = controller;
+
+    this.setIsLoading(true);
+    try {
+      const data = await api.files.getFolder(
+        filterData.folder,
+        filterData,
+        controller.signal,
+      );
+      if (controller.signal.aborted) return;
+      runInAction(() => {
+        this.folders = [...this.folders, ...(data.folders ?? [])];
+        this.files = [...this.files, ...(data.files ?? [])];
         this.total = data.total;
         this.filter = filterData;
       });

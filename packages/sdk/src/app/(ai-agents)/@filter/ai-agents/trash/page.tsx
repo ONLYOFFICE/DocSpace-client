@@ -4,14 +4,20 @@
 
 "use client";
 
-import { observer } from "mobx-react";
+import AliasFilesFilter from "../../../_components/alias-files-filter";
+import { useTrashFilesStore } from "../../../_store";
 
-import AgentsFilter from "../../../_components/agents-filter";
-import { useAgentsAIConfigStore } from "../../../_store";
-
-export default observer(function SectionFilter() {
-  const aiConfigStore = useAgentsAIConfigStore();
-  const aiUnavailable = aiConfigStore.isLoaded && !aiConfigStore.aiReady;
-  if (aiUnavailable) return null;
-  return <AgentsFilter showMainButton={false} />;
-});
+// Trash-specific config: full Type group (including Folders / Files /
+// Archives like Favorites, since deleted items can be any type), Author
+// hidden (every trashed item belongs to the current user).
+export default function TrashFilter() {
+  return (
+    <AliasFilesFilter
+      config={{
+        useStore: useTrashFilesStore,
+        includeFoldersFilesArchivesInType: true,
+        hideAuthor: true,
+      }}
+    />
+  );
+}

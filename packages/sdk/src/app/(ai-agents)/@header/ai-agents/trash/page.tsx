@@ -8,12 +8,13 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import AgentsHeader from "../../../_components/agents-header";
-import { useAgentsListStore } from "../../../_store";
+import { useTrashFilesStore } from "../../../_store";
 
 export default observer(function TrashHeader() {
   const { t } = useTranslation(["Common"]);
-  const store = useAgentsListStore();
-  const isEmpty = !store.isLoading && store.agents.length === 0;
+  const store = useTrashFilesStore();
+  const isEmpty =
+    !store.isLoading && store.files.length === 0 && store.folders.length === 0;
   return (
     <AgentsHeader title={t("Common:TrashSection")} isEmptyList={isEmpty} />
   );

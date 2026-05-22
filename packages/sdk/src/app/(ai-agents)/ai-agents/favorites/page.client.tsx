@@ -12,6 +12,7 @@ import type {
 import type { TSettings } from "@docspace/shared/api/settings/types";
 
 import AliasFilesList from "../../_components/alias-files-list";
+import { useFavoritesFilesStore } from "../../_store";
 
 type Props = {
   folders: TFolder[];
@@ -33,6 +34,7 @@ export default function FavoritesPage({
   if (!current || !filesSettings || !portalSettings) return null;
   return (
     <AliasFilesList
+      useStore={useFavoritesFilesStore}
       current={current}
       filesSettings={filesSettings}
       portalSettings={portalSettings}

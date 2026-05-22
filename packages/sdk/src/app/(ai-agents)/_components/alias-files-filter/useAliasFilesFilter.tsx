@@ -52,6 +52,11 @@ export type AliasFilterConfig = {
   // Not consumed by FilterComponent (no such prop) — kept for readability
   // at call sites and future-proofing the alias config.
   isFavoritesFolder?: boolean;
+  // Hide the Author group entirely — used by Trash where every item is
+  // owned by the current user, so author filtering is meaningless. Mirrors
+  // client `Home/Section/Filter/getFilterCommonOptions` which omits the
+  // group for the trash section.
+  hideAuthor?: boolean;
 };
 
 export default function useAliasFilesFilter(config: AliasFilterConfig) {
@@ -161,23 +166,25 @@ export default function useAliasFilesFilter(config: AliasFilterConfig) {
   );
 
   const getFilterData = React.useCallback(async (): Promise<TItem[]> => {
-    const authorOptions: TItem[] = [
-      {
-        key: FilterGroups.filterAuthor,
-        group: FilterGroups.filterAuthor,
-        label: t("Files:ByAuthor", { defaultValue: "Author" }),
-        isHeader: true,
-        isLast: false,
-      },
-      {
-        id: "filter_author-me",
-        key: FilterKeys.me,
-        group: FilterGroups.filterAuthor,
-        label: t("Common:MeLabel", { defaultValue: "Me" }),
-      },
-    ];
+    const authorOptions: TItem[] = config.hideAuthor
+      ? []
+      : [
+          {
+            key: FilterGroups.filterAuthor,
+            group: FilterGroups.filterAuthor,
+            label: t("Files:ByAuthor", { defaultValue: "Author" }),
+            isHeader: true,
+            isLast: false,
+          },
+          {
+            id: "filter_author-me",
+            key: FilterKeys.me,
+            group: FilterGroups.filterAuthor,
+            label: t("Common:MeLabel", { defaultValue: "Me" }),
+          },
+        ];
 
-    if (!isCollaborator && !isVisitor) {
+    if (!config.hideAuthor && !isCollaborator && !isVisitor) {
       authorOptions.push({
         id: "filter_author-user",
         key: FilterKeys.user,
@@ -285,8 +292,20 @@ export default function useAliasFilesFilter(config: AliasFilterConfig) {
       },
     );
 
+    // Author-less aliases (Trash) need the Type header to be the last group
+    // header — flip `isLast` on the Type header when Author is hidden.
+    if (config.hideAuthor) {
+      typeOptions[0] = { ...typeOptions[0], isLast: true };
+    }
+
     return [...authorOptions, ...typeOptions];
-  }, [t, isCollaborator, isVisitor, config.includeFoldersFilesArchivesInType]);
+  }, [
+    t,
+    isCollaborator,
+    isVisitor,
+    config.includeFoldersFilesArchivesInType,
+    config.hideAuthor,
+  ]);
 
   // Maps a stored FilterType code back to its label — used to populate the
   // chip that appears under the filter bar after a type is picked.

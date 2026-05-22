@@ -37,6 +37,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { TwoStateToggle } from "@docspace/ui-kit/components/two-state-toggle";
 import { getPersonalFolderTree } from "@docspace/shared/api/files";
+import { setAppEnabled } from "@docspace/shared/api/apps";
 import { getConstName } from "@docspace/shared/constants/consts";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
@@ -53,7 +54,10 @@ import { useAppsCatalog, type AppId } from "SRC_DIR/helpers/apps-catalog";
 
 import { ModuleCard, type ModuleItem } from "./ModuleCard";
 import { getGreetingKey, makeCreateUrl, NEW_FILE_NAMES } from "./utils";
-import { InstallAiFormsDialog, InstallDocsCloudDialog } from "./InstallModuleDialog";
+import {
+  InstallAiFormsDialog,
+  InstallDocsCloudDialog,
+} from "./InstallModuleDialog";
 import styles from "./Dashboard.module.scss";
 
 interface DashboardProps {
@@ -78,7 +82,8 @@ const Dashboard = ({
   const [searchParams] = useSearchParams();
   const [myFolderId, setMyFolderId] = React.useState<number | null>(null);
   const [installDialogVisible, setInstallDialogVisible] = React.useState(false);
-  const [docsCloudDialogVisible, setDocsCloudDialogVisible] = React.useState(false);
+  const [docsCloudDialogVisible, setDocsCloudDialogVisible] =
+    React.useState(false);
 
   React.useEffect(() => {
     ensureAppsLoaded();
@@ -158,6 +163,17 @@ const Dashboard = ({
         navigate("/docs-cloud");
       } else {
         setDocsCloudDialogVisible(true);
+      }
+      return;
+    }
+
+    if (modId === "ai-rooms") {
+      try {
+        await setAppEnabled("ai-rooms", true);
+        navigate("/ai-rooms");
+      } catch (err) {
+        console.error("Failed to enable ai-rooms", err);
+        toastr.error(t("Common:SomethingWentWrong"));
       }
       return;
     }
@@ -314,3 +330,4 @@ const DashboardConnected = inject<TStore>(
 export { DashboardConnected as Dashboard };
 
 export default DashboardConnected;
+

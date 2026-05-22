@@ -33,6 +33,7 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { setAppEnabled } from "@docspace/shared/api/apps";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -67,7 +68,8 @@ const Apps = ({
   const navigate = useNavigate();
   const apps = useAppsCatalog();
   const [installDialogVisible, setInstallDialogVisible] = React.useState(false);
-  const [docsCloudDialogVisible, setDocsCloudDialogVisible] = React.useState(false);
+  const [docsCloudDialogVisible, setDocsCloudDialogVisible] =
+    React.useState(false);
 
   useEffect(() => {
     ensureLoaded?.();
@@ -103,6 +105,10 @@ const Apps = ({
         } else {
           await uninstallDocsCloud?.();
         }
+      }
+
+      if (id === "ai-rooms") {
+        await setAppEnabled("ai-rooms", next);
         return;
       }
       await enable?.(id, next);
@@ -189,3 +195,4 @@ export const Component = inject(({ appsStore }: TStore) => ({
 }))(observer(Apps));
 
 export default Component;
+

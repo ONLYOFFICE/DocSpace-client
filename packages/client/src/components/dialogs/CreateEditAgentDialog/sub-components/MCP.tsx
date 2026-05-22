@@ -72,7 +72,11 @@ const MCPSettings = ({
       <div className=" set_room_params-info">
         <div>
           <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
+<<<<<<< HEAD
             {t("MCP")}
+=======
+            {t("Common:MCP")}
+>>>>>>> ce64b5778f4 (Dedupe AIRoom/AISettings translation keys against Common namespace)
           </Text>
           <Text
             fontSize="12px"
@@ -81,7 +85,11 @@ const MCPSettings = ({
             className="set_room_params-info-description"
             noSelect
           >
+<<<<<<< HEAD
             {t("MCPDescriptionServers", {
+=======
+            {t("Common:MCPDescriptionServers", {
+>>>>>>> ce64b5778f4 (Dedupe AIRoom/AISettings translation keys against Common namespace)
               mcpServers: t("Common:MCPSettingTitle"),
             })}
           </Text>

@@ -125,7 +125,7 @@ export const getDescription = (
       return (
         <>
           {t("AIRoom:EmptyKnowledgeDescription", {
-            aiChat: t("AIRoom:AIChat"),
+            aiChat: t("Common:AIChat"),
           })}
           <Text
             as="span"
@@ -140,10 +140,10 @@ export const getDescription = (
     if (isResultsTab)
       return security && "UseChat" in security && security.UseChat
         ? t("AIRoom:EmptyResultsDescription", {
-            aiChat: t("AIRoom:AIChat"),
+            aiChat: t("Common:AIChat"),
           })
         : t("AIRoom:EmptyResultsViewerDescription", {
-            aiChat: t("AIRoom:AIChat"),
+            aiChat: t("Common:AIChat"),
           });
   }
 
@@ -590,7 +590,7 @@ export const getOptions = (
             window.DocSpace.navigate(`${path}?${filesFilter.toUrlParams()}`);
           },
           description: t("AIRoom:CreateChatDescription", {
-            aiChat: t("AIRoom:AIChat"),
+            aiChat: t("Common:AIChat"),
           }),
           disabled: !canUseChat,
         },

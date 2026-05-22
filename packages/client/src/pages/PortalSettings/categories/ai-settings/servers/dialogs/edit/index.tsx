@@ -133,7 +133,7 @@ const EditMCPDialogComponent = ({
     try {
       await updateMCP?.(server.id, updateData);
 
-      toastr.success(t("AISettings:ServerUpdatedSuccess"));
+      toastr.success(t("Common:ServerUpdatedSuccess"));
 
       onClose();
     } catch (e) {
@@ -164,7 +164,7 @@ const EditMCPDialogComponent = ({
         >
           <div className={styles.connectDocspace}>
             <Text className={styles.connectDocspaceDescription}>
-              {t("AISettings:ConnectProductToYourDataAndTools", {
+              {t("Common:ConnectProductToYourDataAndTools", {
                 productName: getBrandName("ProductName"),
               })}
             </Text>

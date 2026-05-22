@@ -66,6 +66,7 @@ const InstructionsSettings = ({
     });
   }, [value, agentParams.prompt, setAgentParams]);
 
+<<<<<<< HEAD
   return (
     <StyledParam increaseGap>
       <div className=" set_room_params-info">
@@ -96,6 +97,38 @@ const InstructionsSettings = ({
       </div>
     </StyledParam>
   );
+=======
+	return (
+		<StyledParam increaseGap>
+			<div className=" set_room_params-info">
+				<div>
+					<Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
+						{t("Common:AIInstructions")}
+					</Text>
+					<Text
+						fontSize="12px"
+						lineHeight="16px"
+						fontWeight={400}
+						className="set_room_params-info-description"
+						noSelect
+					>
+						{t("Common:InstructionsDescriptionAgent", {
+							aiAgent: t("Common:AIAgent"),
+						})}
+					</Text>
+				</div>
+				<Textarea
+					value={value}
+					onChange={handleChange}
+					heightTextArea={144}
+					placeholder={t("Common:InstructionsDescriptionAgentExample")}
+					tabIndex={2}
+					dataTestId="create_agent_instructions_textarea"
+				/>
+			</div>
+		</StyledParam>
+	);
+>>>>>>> ce64b5778f4 (Dedupe AIRoom/AISettings translation keys against Common namespace)
 };
 
 export default InstructionsSettings;

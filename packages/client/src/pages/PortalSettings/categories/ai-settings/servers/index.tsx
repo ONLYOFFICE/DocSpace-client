@@ -180,7 +180,7 @@ const MCPServersComponent = ({
 
     try {
       await updateMCPStatus?.(id, enabled);
-      toastr.success(t("AISettings:ServerEnabledSuccess"));
+      toastr.success(t("Common:ServerEnabledSuccess"));
     } catch (e) {
       console.error(e);
       toastr.error(e as TData);
@@ -233,7 +233,7 @@ const MCPServersComponent = ({
   return (
     <div className={styles.mcpServers}>
       <Text className={styles.description}>
-        {t("AISettings:MCPSettingsDescription", {
+        {t("Common:MCPSettingsDescription", {
           mcpServers: t("Common:MCPSettingTitle"),
           aiChats: t("Common:AIChats"),
         })}
@@ -254,7 +254,7 @@ const MCPServersComponent = ({
       <Button
         primary
         size={ButtonSize.small}
-        label={t("AISettings:AddMCPServer", {
+        label={t("Common:AddMCPServer", {
           mcpServer: t("Common:MCPServer"),
         })}
         scale={false}
@@ -263,7 +263,7 @@ const MCPServersComponent = ({
         isDisabled={isMCPActionsDisabled}
         tooltipText={
           isMCPActionsDisabled
-            ? t("AISettings:ToUseAddProvider", {
+            ? t("Common:ToUseAddProvider", {
                 value: t("Common:MCPServer"),
                 aiProvider: t("Common:AIProvider"),
               })
@@ -273,7 +273,7 @@ const MCPServersComponent = ({
       />
 
       <MCPList
-        headingText={t("AISettings:CustomMCPListTitle")}
+        headingText={t("Common:CustomMCPListTitle")}
         mcpServers={customMCPServers}
         showHeading={showMCPHeadings}
         onMCPToggle={onMCPToggle}
@@ -284,7 +284,7 @@ const MCPServersComponent = ({
       />
 
       <MCPList
-        headingText={t("AISettings:SystemMCPListTitle")}
+        headingText={t("Common:SystemMCPListTitle")}
         mcpServers={systemMCPServers}
         showHeading={showMCPHeadings}
         onMCPToggle={onMCPToggle}

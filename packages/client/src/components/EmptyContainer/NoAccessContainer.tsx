@@ -145,10 +145,10 @@ const NoAccessContainer = (props: Props) => {
     // TODO: for AI agents
     case NoAccessContainerType.Agent:
       emptyViewProps = {
-        title: t("AIRoom:NoAccessAIAgentTitle", {
+        title: t("Common:NoAccessAIAgentTitle", {
           aiAgent: t("Common:AIAgent"),
         }),
-        description: t("AIRoom:AIAgentAccessRedirectNote", {
+        description: t("Common:AIAgentAccessRedirectNote", {
           sectionName: t("Common:AIAgents"),
         }),
         icon: theme.isBase ? (

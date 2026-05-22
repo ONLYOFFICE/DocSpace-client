@@ -52,6 +52,7 @@ const KnowledgeSettings = () => {
 
   const onClickAction = () => toastr.info(t("Common:WorkInProgress"));
 
+<<<<<<< HEAD
   return (
     <StyledParam increaseGap>
       <div className=" set_room_params-info">
@@ -100,6 +101,56 @@ const KnowledgeSettings = () => {
       </div>
     </StyledParam>
   );
+=======
+	return (
+		<StyledParam increaseGap>
+			<div className=" set_room_params-info">
+				<div>
+					<Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
+						{t("Common:Knowledge")}
+					</Text>
+					<Text
+						fontSize="12px"
+						lineHeight="16px"
+						fontWeight={400}
+						className="set_room_params-info-description"
+						noSelect
+					>
+						{t("Common:KnowledgeDescription", {
+							productName: getBrandName("ProductName"),
+						})}
+					</Text>
+				</div>
+				<div className="ai-button-group">
+					<Button
+						size={ButtonSize.small}
+						icon={
+							<ReactSVG
+								className="ai-button-icon"
+								src={ActionsUploadReactSvgUrl}
+							/>
+						}
+						label={t("Common:UploadFiles")}
+						scale
+						filled
+						filledStroke
+						onClick={onClickAction}
+					/>
+					<Button
+						size={ButtonSize.small}
+						icon={<ReactSVG className="ai-button-icon" src={MoveReactSvgUrl} />}
+						label={t("Common:KnowledgeSelectIn", {
+							productName: getBrandName("ProductName"),
+						})}
+						scale
+						filled
+						onClick={onClickAction}
+					/>
+				</div>
+			</div>
+		</StyledParam>
+	);
+>>>>>>> ce64b5778f4 (Dedupe AIRoom/AISettings translation keys against Common namespace)
 };
 
 export default KnowledgeSettings;

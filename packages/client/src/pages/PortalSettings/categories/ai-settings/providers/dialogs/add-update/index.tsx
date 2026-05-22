@@ -366,7 +366,7 @@ const AddUpdateDialogComponent = ({
 
         await addAIProvider?.(data);
         toastr.success(
-          t("AISettings:ProviderAddedSuccess", {
+          t("Common:ProviderAddedSuccess", {
             aiProvider: t("Common:AIProvider"),
           }),
         );
@@ -393,7 +393,7 @@ const AddUpdateDialogComponent = ({
 
         await updateAIProvider?.(providerData.id, data);
         toastr.success(
-          t("AISettings:ProviderUpdatedSuccess", {
+          t("Common:ProviderUpdatedSuccess", {
             aiProvider: t("Common:AIProvider"),
           }),
         );
@@ -461,7 +461,7 @@ const AddUpdateDialogComponent = ({
             }
           >
             <FieldContainer
-              labelText={t("AISettings:Provider")}
+              labelText={t("Common:Provider")}
               labelVisible
               isVertical
               removeMargin
@@ -489,17 +489,17 @@ const AddUpdateDialogComponent = ({
                 value={providerTitle}
                 onChange={(e) => setProviderTitle(e.target.value)}
                 scale
-                placeholder={t("AISettings:EnterLabel")}
+                placeholder={t("Common:EnterLabel")}
                 isDisabled={isRequestRunning}
                 testId="provider-title-input"
               />
               <Text className={styles.fieldHint}>
-                {t("AISettings:ProviderNameInputHint")}
+                {t("Common:ProviderNameInputHint")}
               </Text>
             </FieldContainer>
 
             <FieldContainer
-              labelText={t("AISettings:ProviderURL")}
+              labelText={t("Common:ProviderURL")}
               labelVisible
               isVertical
               removeMargin
@@ -519,11 +519,11 @@ const AddUpdateDialogComponent = ({
                 testId="provider-url-input"
               />
               <Text className={styles.fieldHint}>
-                {t("AISettings:ProviderURLInputHint")}
+                {t("Common:ProviderURLInputHint")}
               </Text>
             </FieldContainer>
             <FieldContainer
-              labelText={t("AISettings:ProviderKey")}
+              labelText={t("Common:ProviderKey")}
               labelVisible
               isVertical
               removeMargin
@@ -531,7 +531,7 @@ const AddUpdateDialogComponent = ({
               {isKeyInputHidden ? (
                 <div className={styles.resetKeyBlock}>
                   <div className={styles.resetKeyHint}>
-                    {t("AISettings:ResetProviderKeyDescription")}
+                    {t("Common:ResetProviderKeyDescription")}
                   </div>
                   <Link
                     type={LinkType.action}
@@ -552,7 +552,7 @@ const AddUpdateDialogComponent = ({
                     onChange={(_, value) => setProviderKey(value ?? "")}
                     isFullWidth
                     isDisableTooltip
-                    placeholder={t("AISettings:EnterKey")}
+                    placeholder={t("Common:EnterKey")}
                     isDisabled={isRequestRunning}
                     isSimulateType
                     autoComplete="off"
@@ -564,7 +564,7 @@ const AddUpdateDialogComponent = ({
                       [styles.fieldHintError]: providerData?.needReset,
                     })}
                   >
-                    {t("AISettings:ProviderKeyInputHint", {
+                    {t("Common:ProviderKeyInputHint", {
                       aiProvider: t("Common:AIProvider"),
                     })}
                   </Text>

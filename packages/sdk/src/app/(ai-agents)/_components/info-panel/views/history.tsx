@@ -37,7 +37,10 @@ import styles from "../InfoPanel.module.scss";
 const labelFor = (
   key: FeedActionKeys,
   data: TFeedAction["data"] | undefined,
-  t: (k: string, opts?: { defaultValue: string }) => string,
+  t: (
+    k: string,
+    opts?: Record<string, unknown> & { defaultValue?: string },
+  ) => string,
 ): string => {
   const title = (data?.title || data?.newTitle || data?.oldTitle || "") as string;
   const oldTitle = (data?.oldTitle || "") as string;
@@ -45,7 +48,10 @@ const labelFor = (
   switch (key) {
     case FeedActionKeys.AgentCreated:
     case FeedActionKeys.RoomCreated:
-      return t("Common:HistoryAgentCreated", { defaultValue: "Agent created" });
+      return t("InfoPanel:HistoryAgentCreated", {
+        roomTitle: title,
+        defaultValue: "Agent created",
+      });
     case FeedActionKeys.AgentRenamed:
     case FeedActionKeys.RoomRenamed:
       return t("Common:HistoryAgentRenamed", {
@@ -140,7 +146,7 @@ const labelFor = (
 };
 
 const HistoryView = observer(() => {
-  const { t, i18n } = useTranslation(["Common"]);
+  const { t, i18n } = useTranslation(["Common", "InfoPanel"]);
   const { currentAgent } = useAgentInfoPanelStore();
   const culture = i18n.language || "en";
 

@@ -55,7 +55,7 @@ export type AliasFilterConfig = {
 };
 
 export default function useAliasFilesFilter(config: AliasFilterConfig) {
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common", "Files"]);
   const store = config.useStore();
   const userStore = useAgentsUserStore();
   const settingsStore = useSettingsStore();
@@ -165,7 +165,7 @@ export default function useAliasFilesFilter(config: AliasFilterConfig) {
       {
         key: FilterGroups.filterAuthor,
         group: FilterGroups.filterAuthor,
-        label: t("Common:ByAuthor", { defaultValue: "Author" }),
+        label: t("Files:ByAuthor", { defaultValue: "Author" }),
         isHeader: true,
         isLast: false,
       },
@@ -359,7 +359,7 @@ export default function useAliasFilesFilter(config: AliasFilterConfig) {
         key: isMe ? FilterKeys.me : authorRaw,
         group: FilterGroups.filterAuthor,
         label,
-        selectedLabel: `${t("Common:ByAuthor", { defaultValue: "Author" })}: ${label}`,
+        selectedLabel: `${t("Files:ByAuthor", { defaultValue: "Author" })}: ${label}`,
       });
     }
 
@@ -392,7 +392,7 @@ export default function useAliasFilesFilter(config: AliasFilterConfig) {
         key: isMe ? FilterKeys.me : authorRaw,
         group: FilterGroups.filterAuthor,
         label,
-        selectedLabel: `${t("Common:ByAuthor", { defaultValue: "Author" })}: ${label}`,
+        selectedLabel: `${t("Files:ByAuthor", { defaultValue: "Author" })}: ${label}`,
       });
     }
     return out;

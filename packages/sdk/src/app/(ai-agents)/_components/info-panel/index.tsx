@@ -46,7 +46,7 @@ export const AgentInfoPanelHeader = observer(() => {
  * `<Section.InfoPanelBody>`.
  */
 export const AgentInfoPanelBody = observer(() => {
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common", "InfoPanel"]);
   const { currentAgent, view, setView } = useAgentInfoPanelStore();
 
   if (!currentAgent) return null;
@@ -60,7 +60,7 @@ export const AgentInfoPanelBody = observer(() => {
     },
     {
       id: "history" as AgentInfoPanelView,
-      name: t("Common:History", { defaultValue: "History" }),
+      name: t("InfoPanel:SubmenuHistory", { defaultValue: "History" }),
       content: null,
       onClick: () => setView("history"),
     },

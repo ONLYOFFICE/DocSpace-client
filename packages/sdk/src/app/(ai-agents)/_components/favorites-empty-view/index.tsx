@@ -37,8 +37,8 @@ const FavoritesEmptyView = () => {
   return (
     <EmptyView
       icon={icon}
-      title={t("Common:NoFavoritesHereYet", {
-        defaultValue: "No favorites here yet",
+      title={t("EmptyView:EmptyFavoritesTitle", {
+        defaultValue: "No favorites yet",
       })}
       description={t("EmptyView:EmptyFavoritesDescription", {
         defaultValue:

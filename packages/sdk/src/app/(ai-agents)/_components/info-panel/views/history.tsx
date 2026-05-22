@@ -45,102 +45,64 @@ const labelFor = (
   const title = (data?.title || data?.newTitle || data?.oldTitle || "") as string;
   const oldTitle = (data?.oldTitle || "") as string;
 
+  // All translation keys below are the same ones client's
+  // `useFeedTranslation.tsx` uses — no duplicates, no SDK-only invented
+  // strings. Trans-style placeholders (e.g. `<1>«{{roomTitle}}»</1>`) are
+  // rendered as plain text here because this view is a simple list; the
+  // `«{{roomTitle}}»` substring is what the user sees.
   switch (key) {
     case FeedActionKeys.AgentCreated:
-    case FeedActionKeys.RoomCreated:
-      return t("InfoPanel:HistoryAgentCreated", {
-        roomTitle: title,
-        defaultValue: "Agent created",
-      });
+      return t("InfoPanel:HistoryAgentCreated", { roomTitle: title });
     case FeedActionKeys.AgentRenamed:
+      return t("InfoPanel:AgentRenamed", {
+        oldRoomTitle: oldTitle,
+        roomTitle: title,
+      });
+    case FeedActionKeys.RoomCreated:
+      return t("InfoPanel:HistoryRoomCreated", { roomTitle: title });
     case FeedActionKeys.RoomRenamed:
-      return t("Common:HistoryAgentRenamed", {
-        defaultValue: oldTitle
-          ? `Renamed «${oldTitle}» → «${title}»`
-          : "Renamed agent",
+      return t("InfoPanel:RoomRenamed", {
+        oldRoomTitle: oldTitle,
+        roomTitle: title,
       });
     case FeedActionKeys.RoomChangeOwner:
-      return t("Common:HistoryOwnerChanged", {
-        defaultValue: "Owner changed",
-      });
+      return t("InfoPanel:RoomChangeOwner");
     case FeedActionKeys.RoomCreateUser:
-      return t("Common:HistoryMemberAdded", {
-        defaultValue: title ? `Added member: ${title}` : "Member added",
-      });
+      return t("Common:RoomCreateUser");
     case FeedActionKeys.RoomRemoveUser:
-      return t("Common:HistoryMemberRemoved", {
-        defaultValue: title ? `Removed member: ${title}` : "Member removed",
-      });
+      return t("InfoPanel:RoomRemoveUser");
     case FeedActionKeys.RoomUpdateAccessForUser:
-      return t("Common:HistoryAccessChanged", {
-        defaultValue: title ? `Access changed: ${title}` : "Access changed",
-      });
-    case FeedActionKeys.RoomGroupAdded:
-      return t("Common:HistoryGroupAdded", {
-        defaultValue: title ? `Group added: ${title}` : "Group added",
-      });
-    case FeedActionKeys.RoomGroupRemove:
-      return t("Common:HistoryGroupRemoved", {
-        defaultValue: title ? `Group removed: ${title}` : "Group removed",
-      });
     case FeedActionKeys.RoomUpdateAccessForGroup:
-      return t("Common:HistoryGroupAccessChanged", {
-        defaultValue: title
-          ? `Group access changed: ${title}`
-          : "Group access changed",
-      });
+      return t("InfoPanel:RoomUpdateAccess");
+    case FeedActionKeys.RoomGroupAdded:
+      return t("InfoPanel:RoomGroupAdded");
+    case FeedActionKeys.RoomGroupRemove:
+      return t("InfoPanel:RoomGroupRemove");
     case FeedActionKeys.AddedRoomTags:
-      return t("Common:HistoryTagsAdded", {
-        defaultValue: "Tags added",
-      });
+      return t("InfoPanel:AddedRoomTags");
     case FeedActionKeys.DeletedRoomTags:
-      return t("Common:HistoryTagsRemoved", {
-        defaultValue: "Tags removed",
-      });
+      return t("InfoPanel:DeletedRoomTags");
     case FeedActionKeys.RoomLogoCreated:
     case FeedActionKeys.RoomColorChanged:
     case FeedActionKeys.RoomCoverChanged:
-      return t("Common:HistoryAppearanceUpdated", {
-        defaultValue: "Appearance updated",
-      });
     case FeedActionKeys.RoomLogoDeleted:
-      return t("Common:HistoryLogoRemoved", {
-        defaultValue: "Logo removed",
-      });
+      return t("InfoPanel:RoomLogoChanged");
     case FeedActionKeys.FileCreated:
     case FeedActionKeys.FileUploaded:
-      return t("Common:HistoryFileAdded", {
-        defaultValue: title ? `Added file: ${title}` : "File added",
-      });
+      return t("Common:FileCreatedNotify");
     case FeedActionKeys.FileDeleted:
     case FeedActionKeys.FileMovedToTrash:
-      return t("Common:HistoryFileDeleted", {
-        defaultValue: title ? `Deleted file: ${title}` : "File deleted",
-      });
+      return t("Common:FilesRemovedNotify");
     case FeedActionKeys.FileRenamed:
-      return t("Common:HistoryFileRenamed", {
-        defaultValue: oldTitle
-          ? `File renamed «${oldTitle}» → «${title}»`
-          : title
-            ? `File renamed: ${title}`
-            : "File renamed",
-      });
+      return t("Common:FileRenamedNotify");
     case FeedActionKeys.FolderCreated:
-      return t("Common:HistoryFolderAdded", {
-        defaultValue: title ? `Added folder: ${title}` : "Folder added",
-      });
+      return t("Common:FolderCreatedNotify");
     case FeedActionKeys.FolderDeleted:
     case FeedActionKeys.FolderMovedToTrash:
-      return t("Common:HistoryFolderDeleted", {
-        defaultValue: title ? `Deleted folder: ${title}` : "Folder deleted",
-      });
+      return t("Common:FoldersRemovedNotify");
     case FeedActionKeys.FolderRenamed:
-      return t("Common:HistoryFolderRenamed", {
-        defaultValue: title ? `Folder renamed: ${title}` : "Folder renamed",
-      });
+      return t("Common:FolderRenamedNotify");
     default:
-      // unknown / irrelevant for agents — still show something so the
-      // event isn't lost in QA
       return key;
   }
 };
@@ -198,8 +160,8 @@ const HistoryView = observer(() => {
     return (
       <div className={styles.emptyState}>
         <Text fontSize="13px">
-          {t("Common:EmptyHistoryDescription", {
-            defaultValue: "No history yet",
+          {t("InfoPanel:HistoryEmptyScreenText", {
+            defaultValue: "Activity history will be shown here",
           })}
         </Text>
       </div>

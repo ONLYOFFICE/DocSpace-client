@@ -82,8 +82,12 @@ export function useImportKeyFlow({
   }, []);
 
   const request = useCallback(() => {
+    if (!globalThis.crypto?.subtle) {
+      toastr.error(t("Common:EncryptionRequiresHttps"));
+      return;
+    }
     fileInputRef.current?.click();
-  }, []);
+  }, [t]);
 
   const onFileChosen = useCallback(
     async (event: React.ChangeEvent<HTMLInputElement>) => {

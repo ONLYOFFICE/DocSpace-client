@@ -166,6 +166,7 @@ const KeysManagement = ({
       <div className={styles.contentBody}>
         <div className={styles.inputGroup}>
           <Button
+            primary
             size={ButtonSize.small}
             onClick={generate.request}
             label={t("Common:GenerateNewKey")}
@@ -174,7 +175,6 @@ const KeysManagement = ({
           />
           <div className={styles.buttonsSeparator}>{t("Common:Or")}</div>
           <Button
-            primary
             size={ButtonSize.small}
             onClick={importFlow.request}
             label={t("Common:ImportKey")}

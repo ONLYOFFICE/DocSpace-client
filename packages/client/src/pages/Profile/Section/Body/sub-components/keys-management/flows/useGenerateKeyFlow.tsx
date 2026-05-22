@@ -92,8 +92,12 @@ export function useGenerateKeyFlow({
   }, []);
 
   const request = useCallback(() => {
+    if (!globalThis.crypto?.subtle) {
+      toastr.error(t("Common:EncryptionRequiresHttps"));
+      return;
+    }
     setStep("passphrase");
-  }, []);
+  }, [t]);
 
   const onPassphraseSubmit = useCallback(
     async (input: string) => {

@@ -43,6 +43,7 @@ import {
 } from "@docspace/shared/utils/rooms";
 import { Text } from "@docspace/ui-kit/components/text";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
+import { UserStore } from "@docspace/shared/store/UserStore";
 import { RoomsType } from "@docspace/shared/enums";
 import { TFolder } from "@docspace/shared/api/files/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";
@@ -93,6 +94,8 @@ type CreateRoomEventProps = {
   selectionItems: FilesStore["selection"];
 
   isDefaultRoomsQuotaSet: CurrentQuotasStore["isDefaultRoomsQuotaSet"];
+
+  encryptionKeys: UserStore["encryptionKeys"];
 };
 
 const CreateRoomEvent = ({
@@ -126,6 +129,7 @@ const CreateRoomEvent = ({
   getThirdPartyIcon,
   isDefaultRoomsQuotaSet,
   item,
+  encryptionKeys,
 }: CreateRoomEventProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
   const [fetchedTags, setFetchedTags] = useState<string[]>([]);
@@ -218,6 +222,7 @@ const CreateRoomEvent = ({
       setSelectedRoomType={setSelectedRoomType}
       getThirdPartyIcon={getThirdPartyIcon}
       isDefaultRoomsQuotaSet={isDefaultRoomsQuotaSet}
+      encryptionKeys={encryptionKeys}
       {...roomParams}
     />
   );
@@ -232,6 +237,7 @@ export default inject(
     filesStore,
     filesActionsStore,
     currentQuotaStore,
+    userStore,
   }: TStore) => {
     const { fetchTags } = tagsStore;
     const { selections } = filesStore;
@@ -266,6 +272,8 @@ export default inject(
 
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
+    const { encryptionKeys } = userStore;
+
     const selectionItems = selections;
 
     return {
@@ -292,6 +300,7 @@ export default inject(
       setProcessCreatingRoomFromData,
       getThirdPartyIcon,
       isDefaultRoomsQuotaSet,
+      encryptionKeys,
     };
   },
 )(observer(CreateRoomEvent));

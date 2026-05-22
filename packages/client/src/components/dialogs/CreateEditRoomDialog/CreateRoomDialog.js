@@ -42,8 +42,9 @@ import {
 } from "@docspace/shared/utils/rooms";
 import { Button } from "@docspace/ui-kit/components/button";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import RoomSelector from "@docspace/ui-kit/selectors/Room";
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, RoomsTypePrivate } from "@docspace/shared/enums";
 
 import TagHandler from "../../../helpers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
@@ -71,6 +72,7 @@ const CreateRoomDialog = ({
   getThirdPartyIcon,
   isDefaultRoomsQuotaSet,
   fetchedRoomParams,
+  encryptionKeys,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isOauthWindowOpen, setIsOauthWindowOpen] = useState(false);
@@ -116,6 +118,17 @@ const CreateRoomDialog = ({
   const tagHandler = new TagHandler(roomParams.tags, setRoomTags, fetchedTags);
 
   const setRoomType = (newRoomType) => {
+    if (newRoomType === RoomsTypePrivate) {
+      if (!globalThis.crypto?.subtle) {
+        toastr.error(t("Common:EncryptionRequiresHttps"));
+        return;
+      }
+      if (!encryptionKeys || encryptionKeys.length === 0) {
+        toastr.error(t("Common:NoEncryptionKey"));
+        return;
+      }
+    }
+
     const additionalParams = getRoomCreationAdditionalParams(newRoomType);
 
     setSelectedRoomType(newRoomType);

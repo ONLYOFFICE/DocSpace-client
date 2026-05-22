@@ -24,10 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export {
-  InstallModuleDialog,
-  type InstallModuleDialogProps,
-  type InstallStep,
-} from "./InstallModuleDialog";
-export { InstallAiFormsDialog } from "./InstallAiFormsDialog";
-export { InstallDocsCloudDialog } from "./InstallDocsCloudDialog";
+import { useTranslation } from "react-i18next";
+
+import EmptyScreenLightUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.light.svg?url";
+import EmptyScreenDarkUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.dark.svg?url";
+
+import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+
+const DocsCloudComponent = () => {
+  const { t } = useTranslation(["Common"]);
+  const { isBase } = useTheme();
+
+  return (
+    <EmptyScreenContainer
+      imageSrc={isBase ? EmptyScreenLightUrl : EmptyScreenDarkUrl}
+      imageAlt={t("Common:DocsCloud")}
+      headerText={t("Common:DocsCloud")}
+      descriptionText={t("Common:DocsCloudDescription")}
+    />
+  );
+};
+
+export const DocsCloud = DocsCloudComponent;
+
+export default DocsCloudComponent;

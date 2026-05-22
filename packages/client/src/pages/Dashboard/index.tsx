@@ -53,8 +53,10 @@ import { useAppsCatalog, type AppId } from "SRC_DIR/helpers/apps-catalog";
 
 import { ModuleCard, type ModuleItem } from "./ModuleCard";
 import { getGreetingKey, makeCreateUrl, NEW_FILE_NAMES } from "./utils";
-import { InstallAiFormsDialog } from "./InstallModuleDialog";
-import { EnableAiRoomsDialog } from "./EnableAiRoomsDialog";
+import {
+  InstallAiFormsDialog,
+  InstallDocsCloudDialog,
+} from "./InstallModuleDialog";
 import styles from "./Dashboard.module.scss";
 
 interface DashboardProps {
@@ -81,6 +83,8 @@ const Dashboard = ({
   const [searchParams] = useSearchParams();
   const [myFolderId, setMyFolderId] = React.useState<number | null>(null);
   const [installDialogVisible, setInstallDialogVisible] = React.useState(false);
+  const [docsCloudDialogVisible, setDocsCloudDialogVisible] =
+    React.useState(false);
   const [enableAiRoomsVisible, setEnableAiRoomsVisible] = React.useState(false);
   const [enableAiRoomsLoading, setEnableAiRoomsLoading] = React.useState(false);
 
@@ -157,6 +161,15 @@ const Dashboard = ({
       return;
     }
 
+    if (modId === "docs-cloud") {
+      if (isAppEnabled("docs-cloud")) {
+        navigate("/docs-cloud");
+      } else {
+        setDocsCloudDialogVisible(true);
+      }
+      return;
+    }
+
     if (modId === "ai-rooms") {
       setEnableAiRoomsVisible(true);
       return;
@@ -182,6 +195,11 @@ const Dashboard = ({
   const handleInstalled = () => {
     setInstallDialogVisible(false);
     navigate("/ai-forms");
+  };
+
+  const handleDocsCloudInstalled = () => {
+    setDocsCloudDialogVisible(false);
+    navigate("/docs-cloud");
   };
 
   const greetingName = firstName ? `, ${firstName}` : "";
@@ -299,7 +317,12 @@ const Dashboard = ({
         onInstalled={handleInstalled}
       />
 
-      <EnableAiRoomsDialog
+      <InstallDocsCloudDialog
+        visible={docsCloudDialogVisible}
+        onClose={() => setDocsCloudDialogVisible(false)}
+        onInstalled={handleDocsCloudInstalled}
+      />
+ <EnableAiRoomsDialog
         visible={enableAiRoomsVisible}
         isLoading={enableAiRoomsLoading}
         onClose={() => setEnableAiRoomsVisible(false)}

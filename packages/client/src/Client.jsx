@@ -190,7 +190,9 @@ const ClientContent = (props) => {
     location.pathname.includes("/developer-tools");
   const isNewArticle =
     location.pathname.startsWith("/ai-files") ||
+    location.pathname.startsWith("/ai-rooms") ||
     location.pathname.startsWith("/ai-forms") ||
+    location.pathname.startsWith("/ai-agents") ||
     location.pathname.startsWith("/docs-cloud");
   const withMainButton =
     isAccountsArticle || isDeveloperToolsArticle

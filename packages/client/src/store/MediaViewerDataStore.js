@@ -411,6 +411,7 @@ class MediaViewerDataStore {
         fileExst: this.currentItem.fileInfo.fileExst,
         fileStatus: this.currentItem.fileInfo.fileStatus,
         canShare: this.currentItem.fileInfo.canShare,
+        encrypted: this.currentItem.fileInfo.encrypted || false,
       });
 
       return playlist;
@@ -436,6 +437,7 @@ class MediaViewerDataStore {
             version: file.version,
             thumbnailUrl:
               !file.providerItem && file.thumbnailUrl ? file.thumbnailUrl : "",
+            encrypted: file.encrypted || false,
           });
 
           const thumbnailIsNotCreated =
@@ -466,6 +468,7 @@ class MediaViewerDataStore {
           !this.previewFile.providerItem && this.previewFile.thumbnailUrl
             ? this.previewFile.thumbnailUrl
             : "",
+        encrypted: this.previewFile.encrypted || false,
       });
 
       if (this.previewFile.viewAccessibility.ImageView) {

@@ -466,8 +466,10 @@ export default inject(
     const isFormRoom = roomType === RoomsType.FormRoom;
     const isPublicRoom = roomType === RoomsType.PublicRoom;
     const isCustomRoom = roomType === RoomsType.CustomRoom;
+    const isPrivateRoom = !!infoPanelRoomSelection?.private;
 
-    const isPublicRoomType = isPublicRoom || isCustomRoom || isFormRoom;
+    const isPublicRoomType =
+      !isPrivateRoom && (isPublicRoom || isCustomRoom || isFormRoom);
 
     const { isRootFolder } = selectedFolderStore;
 

@@ -521,7 +521,6 @@ export default function withFileActions(WrappedFileItem) {
       }
 
       const dragIsDisabled =
-        isPrivacyFolder ||
         isRecycleBinFolder ||
         isRoomsFolder ||
         isArchiveFolder ||

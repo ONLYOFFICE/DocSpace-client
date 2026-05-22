@@ -85,6 +85,7 @@ import {
   EmployeeType,
   EmployeeTypeString,
   UrlActionType,
+  RoomsTypePrivate,
 } from "../enums";
 import {
   CategoryType,
@@ -1040,10 +1041,13 @@ export function tryParseArray(str: string) {
   }
 }
 
-export const RoomsTypeValues = Object.values(RoomsType).filter(
-  (item): item is number =>
-    typeof item === "number" && item !== RoomsType.AIRoom,
-);
+export const RoomsTypeValues = [
+  ...Object.values(RoomsType).filter(
+    (item): item is number =>
+      typeof item === "number" && item !== RoomsType.AIRoom,
+  ),
+  RoomsTypePrivate,
+];
 
 export const RoomsTypes = RoomsTypeValues.reduce<Record<number, number>>(
   (acc, current) => {

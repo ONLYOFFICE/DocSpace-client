@@ -130,7 +130,9 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const displayFileExtension = Boolean(filesSettings?.displayFileExtension);
   const isExtsCustomFilter =
     "fileExst" in item
-      ? (filesSettings?.extsWebCustomFilterEditing ?? []).includes(item.fileExst)
+      ? (filesSettings?.extsWebCustomFilterEditing ?? []).includes(
+          item.fileExst,
+        )
       : false;
   const temporaryIcon = getTemporaryIcon(item, getIcon);
   const isChecked = isCheckedItem(item);
@@ -173,8 +175,6 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
       color={"isRoom" in item && item.isRoom ? item.roomIconColor : undefined}
       title={item.title}
       showDefault={"isRoom" in item && item.isRoom ? !item.hasRoomImage : false}
-      size="96px"
-      radius="16px"
     />
   );
 
@@ -293,3 +293,4 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
 };
 
 export default observer(Tile);
+

@@ -63,7 +63,7 @@ import useItemList, {
   TFileItem,
 } from "@/app/(docspace)/_hooks/useItemList";
 
-import TileView from "@/app/(docspace)/(files)/_components/tile-view";
+import RoomsTileView from "../rooms-tile-view";
 import RoomsTableView from "../rooms-table-view";
 import RoomsRowView from "../rooms-row-view";
 import ChangeRoomOwnerDialog from "../change-room-owner-dialog";
@@ -549,13 +549,24 @@ const RoomsList = ({
     );
   } else if (filesViewAs === "tile") {
     content = (
-      <TileView
+      <RoomsTileView
         items={visibleItems}
         currentFolderId={String(current.id)}
         hasMoreFiles={hasNextPage}
         fetchMoreFiles={fetchMoreRooms}
         filesLength={visibleItems.length}
-        getIcon={getIcon}
+        onEditRoom={onEditRoom}
+        onChangeOwner={onChangeOwner}
+        onTagClick={onTagClick}
+        onRoomChanged={refreshSingleRoom}
+        onRestoreRoom={onRestoreRoom}
+        onDeleteRoom={onDeleteRoom}
+        onDeleteSelected={onDeleteSelected}
+        onRestoreSelected={onRestoreSelected}
+        onArchiveRoom={onArchiveRoom}
+        onArchiveSelected={onArchiveSelected}
+        onInfoRoom={onInfoRoom}
+        isArchive={isArchive}
       />
     );
   } else if (filesViewAs === "table") {

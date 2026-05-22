@@ -131,7 +131,8 @@ const NewArticle = ({
   });
 
   const isAdminOrOwner = (user?.isAdmin ?? false) || (user?.isOwner ?? false);
-  const canCreateForms = !(user?.isVisitor ?? false) && !(user?.isCollaborator ?? false);
+  const canCreateForms =
+    !(user?.isVisitor ?? false) && !(user?.isCollaborator ?? false);
 
   const activeId = React.useMemo(() => {
     const section = new URLSearchParams(location.search).get("section") ?? "";
@@ -286,11 +287,11 @@ const NewArticle = ({
     };
 
     const all: { item: NavMenuItem; enabled: boolean }[] = [
-      { item: docsCloudItem, enabled: docsCloudEnabled },
       { item: aiFilesItem, enabled: aiFilesEnabled },
       { item: aiFormsItem, enabled: aiFormsEnabled },
       { item: aiRoomsItem, enabled: aiRoomsEnabled },
       { item: aiAgentsItem, enabled: aiAgentsEnabled },
+      { item: docsCloudItem, enabled: docsCloudEnabled },
     ];
 
     const enabled = all.filter((x) => x.enabled).map((x) => x.item);

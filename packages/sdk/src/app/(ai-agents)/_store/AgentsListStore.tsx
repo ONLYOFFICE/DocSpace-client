@@ -162,19 +162,19 @@ class AgentsListStore {
 
     try {
       await muteRoomNotification(id, muteStatus);
-      toastr.success(
-        t(
-          muteStatus
-            ? "Common:AIAgentNotificationsDisabled"
-            : "Common:AIAgentNotificationsEnabled",
-          {
-            aiAgent: t("Common:AIAgent", { defaultValue: "AI agent" }),
-            defaultValue: muteStatus
-              ? "AI agent notifications disabled"
-              : "AI agent notifications enabled",
-          },
-        ),
-      );
+      const aiAgent = t("Common:AIAgent", { defaultValue: "AI agent" });
+      // Two literal keys instead of a dynamic ternary so the i18n usage
+      // scanner can see both at static analysis time.
+      const message = muteStatus
+        ? t("Common:AIAgentNotificationsDisabled", {
+            aiAgent,
+            defaultValue: "AI agent notifications disabled",
+          })
+        : t("Common:AIAgentNotificationsEnabled", {
+            aiAgent,
+            defaultValue: "AI agent notifications enabled",
+          });
+      toastr.success(message);
     } catch (e) {
       runInAction(() => {
         this.agents = this.agents.map((a) =>

@@ -100,6 +100,8 @@ const AiAgentView = () => {
               standalone
               allowAttachFiles
               allowSelectChat
+              attachmentFile={null}
+              clearAttachmentFile={() => {}}
               width="100%"
               height="100%"
             />

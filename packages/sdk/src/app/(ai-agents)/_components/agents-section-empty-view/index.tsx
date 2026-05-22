@@ -81,6 +81,7 @@ const AgentsSectionEmptyView = ({ section }: AgentsSectionEmptyViewProps) => {
             defaultValue:
               "Agents you've recently chatted with will appear here.",
           })}
+          options={null}
         />
       );
     }
@@ -100,6 +101,7 @@ const AgentsSectionEmptyView = ({ section }: AgentsSectionEmptyViewProps) => {
             defaultValue:
               "Star agents to keep them easily accessible and within reach.",
           })}
+          options={null}
         />
       );
     }
@@ -120,6 +122,7 @@ const AgentsSectionEmptyView = ({ section }: AgentsSectionEmptyViewProps) => {
             defaultValue:
               "All deleted agents are moved to '{{sectionName}}'. Restore agents deleted by mistake or delete them permanently. Items in '{{sectionName}}' are automatically deleted after 30 days.",
           })}
+          options={null}
         />
       );
     }

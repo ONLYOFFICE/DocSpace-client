@@ -124,7 +124,7 @@ export const getDescription = (
     if (isKnowledgeTab)
       return (
         <>
-          {t("AIRoom:EmptyKnowledgeDescription", {
+          {t("Common:EmptyKnowledgeDescription", {
             aiChat: t("Common:AIChat"),
           })}
           <Text
@@ -139,10 +139,10 @@ export const getDescription = (
 
     if (isResultsTab)
       return security && "UseChat" in security && security.UseChat
-        ? t("AIRoom:EmptyResultsDescription", {
+        ? t("Common:EmptyResultsDescription", {
             aiChat: t("Common:AIChat"),
           })
-        : t("AIRoom:EmptyResultsViewerDescription", {
+        : t("Common:EmptyResultsViewerDescription", {
             aiChat: t("Common:AIChat"),
           });
   }
@@ -557,7 +557,7 @@ export const getOptions = (
         t("EmptyView:UploadFromPortalTitle", {
           productName: getBrandName("ProductName"),
         }),
-        t("AIRoom:UploadFilesPortal", {
+        t("Common:UploadFilesPortal", {
           sectionNameFirst: t("Common:MyDocuments"),
           sectionNameSecond: t("Common:Rooms"),
         }),
@@ -589,7 +589,7 @@ export const getOptions = (
 
             window.DocSpace.navigate(`${path}?${filesFilter.toUrlParams()}`);
           },
-          description: t("AIRoom:CreateChatDescription", {
+          description: t("Common:CreateChatDescription", {
             aiChat: t("Common:AIChat"),
           }),
           disabled: !canUseChat,

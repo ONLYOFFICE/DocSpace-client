@@ -42,7 +42,10 @@ const labelFor = (
     opts?: Record<string, unknown> & { defaultValue?: string },
   ) => string,
 ): string => {
-  const title = (data?.title || data?.newTitle || data?.oldTitle || "") as string;
+  const title = (data?.title ||
+    data?.newTitle ||
+    data?.oldTitle ||
+    "") as string;
   const oldTitle = (data?.oldTitle || "") as string;
 
   // All translation keys below are the same ones client's
@@ -59,14 +62,14 @@ const labelFor = (
         roomTitle: title,
       });
     case FeedActionKeys.RoomCreated:
-      return t("InfoPanel:HistoryRoomCreated", { roomTitle: title });
+      return t("Common:HistoryRoomCreated", { roomTitle: title });
     case FeedActionKeys.RoomRenamed:
-      return t("InfoPanel:RoomRenamed", {
+      return t("Common:RoomRenamed", {
         oldRoomTitle: oldTitle,
         roomTitle: title,
       });
     case FeedActionKeys.RoomChangeOwner:
-      return t("InfoPanel:RoomChangeOwner");
+      return t("Common:RoomChangeOwner");
     case FeedActionKeys.RoomCreateUser:
       return t("Common:RoomCreateUser");
     case FeedActionKeys.RoomRemoveUser:
@@ -79,14 +82,14 @@ const labelFor = (
     case FeedActionKeys.RoomGroupRemove:
       return t("InfoPanel:RoomGroupRemove");
     case FeedActionKeys.AddedRoomTags:
-      return t("InfoPanel:AddedRoomTags");
+      return t("Common:AddedRoomTags");
     case FeedActionKeys.DeletedRoomTags:
-      return t("InfoPanel:DeletedRoomTags");
+      return t("Common:DeletedRoomTags");
     case FeedActionKeys.RoomLogoCreated:
     case FeedActionKeys.RoomColorChanged:
     case FeedActionKeys.RoomCoverChanged:
     case FeedActionKeys.RoomLogoDeleted:
-      return t("InfoPanel:RoomLogoChanged");
+      return t("Common:RoomLogoChanged");
     case FeedActionKeys.FileCreated:
     case FeedActionKeys.FileUploaded:
       return t("Common:FileCreatedNotify");
@@ -194,7 +197,11 @@ const HistoryView = observer(() => {
               <Text fontSize="13px" fontWeight={400}>
                 {label}
               </Text>
-              <Text fontSize="11px" fontWeight={400} className={styles.historyDate}>
+              <Text
+                fontSize="11px"
+                fontWeight={400}
+                className={styles.historyDate}
+              >
                 {getCorrectDate(culture, event.date)}
               </Text>
             </div>
@@ -206,3 +213,4 @@ const HistoryView = observer(() => {
 });
 
 export default HistoryView;
+

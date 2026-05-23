@@ -61,8 +61,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { InputType } from "@docspace/ui-kit/components/text-input/TextInput.enums";
-import { Button } from "@docspace/ui-kit/components/button";
-import { ButtonSize } from "@docspace/ui-kit/components/button/Button.enums";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 import type { TOption } from "@docspace/ui-kit/components/combobox";
 
@@ -451,9 +450,6 @@ const Item: React.FC<ItemProps> = ({
     </>
   );
 
-  const okIcon = <CheckIcon className={styles.rowIcons} size="scale" />;
-  const cancelIcon = <CrossIcon className={styles.rowIcons} size="scale" />;
-
   const editBody = (
     <>
       <TextInput
@@ -464,22 +460,18 @@ const Item: React.FC<ItemProps> = ({
         type={InputType.text}
         testId="invite_panel_item_edit_input"
       />
-      <Button
+      <IconButton
         className={styles.editButton}
-        icon={okIcon}
-        label=""
-        size={ButtonSize.small}
-        onClick={saveEdit}
+        iconNode={<CheckIcon className={styles.rowIcons} size="scale" />}
         isDisabled={searchRequestRunning}
-        testId="invite_panel_item_save_button"
+        onClick={saveEdit}
+        dataTestId="invite_panel_item_save_button"
       />
-      <Button
+      <IconButton
         className={styles.editButton}
-        icon={cancelIcon}
-        label=""
-        size={ButtonSize.small}
+        iconNode={<CrossIcon className={styles.rowIcons} size="scale" />}
         onClick={cancelEdit}
-        testId="invite_panel_item_cancel_button"
+        dataTestId="invite_panel_item_cancel_button"
       />
     </>
   );

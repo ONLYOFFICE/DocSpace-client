@@ -89,7 +89,6 @@ const AI_FORMS_SECTION_TO_ID: Record<string, string> = {
 };
 
 const AI_ROOMS_SECTION_TO_ID: Record<string, string> = {
-  rooms: "ai-rooms-rooms",
   recent: "ai-rooms-recent",
   favorites: "ai-rooms-favorites",
   archive: "ai-rooms-archive",

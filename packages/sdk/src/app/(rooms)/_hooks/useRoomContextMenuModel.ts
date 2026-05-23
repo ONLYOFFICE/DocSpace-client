@@ -32,6 +32,7 @@ import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu"
 
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import CheckBoxReactSvgUrl from "PUBLIC_DIR/images/check-box.react.svg?url";
+import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
 import PinReactSvgUrl from "PUBLIC_DIR/images/pin.react.svg?url";
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
@@ -80,6 +81,7 @@ export default function useRoomContextMenuModel(
   onArchiveRoom?: (item: TRoomItem) => void,
   onArchiveSelected?: (items: TRoomItem[]) => void,
   onInfoRoom?: (item: TRoomItem) => void,
+  onInviteRoom?: (item: TRoomItem) => void,
 ) {
   const { t } = useTranslation(["Common", "Files"]);
   const refreshRooms = useContext(RoomsRefreshContext);
@@ -191,6 +193,14 @@ export default function useRoomContextMenuModel(
           disabled: !room.security?.EditRoom,
         },
         {
+          id: "option_invite-users-to-room",
+          key: "invite-users-to-room",
+          label: t("Common:InviteContacts"),
+          icon: PersonReactSvgUrl,
+          onClick: () => onInviteRoom?.(room),
+          disabled: !room.security?.EditAccess,
+        },
+        {
           id: "option_more-options",
           key: "more-options",
           label: t("Common:MoreOptions"),
@@ -260,6 +270,7 @@ export default function useRoomContextMenuModel(
       onDeleteRoom,
       onArchiveRoom,
       onInfoRoom,
+      onInviteRoom,
       isArchive,
       filesSelectionStore,
     ],

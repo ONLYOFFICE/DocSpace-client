@@ -92,6 +92,7 @@ const RoomsTile = observer(
     onArchiveRoom,
     onArchiveSelected,
     onInfoRoom,
+    onInviteRoom,
     isArchive,
   }: RoomsTileProps) => {
     const { t } = useTranslation(["Common"]);
@@ -129,6 +130,7 @@ const RoomsTile = observer(
       onArchiveRoom,
       onArchiveSelected,
       onInfoRoom,
+      onInviteRoom,
     );
 
     const isChecked = filesSelectionStore.isCheckedItem(item);

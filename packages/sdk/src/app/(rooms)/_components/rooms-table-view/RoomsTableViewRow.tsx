@@ -79,6 +79,7 @@ type RoomsTableViewRowProps = {
   onArchiveRoom?: (item: TFolderItem | TFileItem) => void;
   onArchiveSelected?: (items: (TFolderItem | TFileItem)[]) => void;
   onInfoRoom?: (item: TFolderItem | TFileItem) => void;
+  onInviteRoom?: (item: TFolderItem | TFileItem) => void;
   isArchive?: boolean;
 };
 
@@ -99,6 +100,7 @@ const RoomsTableViewRow = observer(
     onArchiveRoom,
     onArchiveSelected,
     onInfoRoom,
+    onInviteRoom,
     isArchive,
   }: RoomsTableViewRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
@@ -124,6 +126,7 @@ const RoomsTableViewRow = observer(
       onArchiveRoom,
       onArchiveSelected,
       onInfoRoom,
+      onInviteRoom,
     );
     const refreshRooms = React.useContext(RoomsRefreshContext);
     const isChecked = filesSelectionStore.isCheckedItem(item);

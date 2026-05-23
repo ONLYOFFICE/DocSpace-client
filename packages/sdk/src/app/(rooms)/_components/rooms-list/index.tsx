@@ -41,7 +41,7 @@ import type {
 import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TSortBy, TCreatedBy } from "@docspace/shared/types";
-import { DeviceType, FolderType, RoomSearchArea } from "@docspace/shared/enums";
+import { DeviceType, FolderType, RoomSearchArea, RoomsType } from "@docspace/shared/enums";
 
 import { PAGE_COUNT } from "@/utils/constants";
 
@@ -67,6 +67,7 @@ import RoomsTileView from "../rooms-tile-view";
 import RoomsTableView from "../rooms-table-view";
 import RoomsRowView from "../rooms-row-view";
 import ChangeRoomOwnerDialog from "../change-room-owner-dialog";
+import InvitePanel from "../invite-panel";
 import EmptyView from "../empty-view";
 import CreateEditRoomDialog from "../create-edit-room-dialog";
 import RestoreRoomDialog from "../restore-room-dialog";
@@ -182,6 +183,14 @@ const RoomsList = ({
   const [changingOwnerRoom, setChangingOwnerRoom] = React.useState<
     (TFolderItem | TFileItem) | null
   >(null);
+
+  const [invitingRoom, setInvitingRoom] = React.useState<
+    (TFolderItem | TFileItem) | null
+  >(null);
+
+  const onInviteRoom = React.useCallback((item: TFolderItem | TFileItem) => {
+    setInvitingRoom(item);
+  }, []);
 
   const [restoringItems, setRestoringItems] = React.useState<
     (TFolderItem | TFileItem)[] | null
@@ -568,6 +577,7 @@ const RoomsList = ({
         onArchiveRoom={onArchiveRoom}
         onArchiveSelected={onArchiveSelected}
         onInfoRoom={onInfoRoom}
+        onInviteRoom={onInviteRoom}
         isArchive={isArchive}
       />
     );
@@ -602,6 +612,7 @@ const RoomsList = ({
         onArchiveRoom={onArchiveRoom}
         onArchiveSelected={onArchiveSelected}
         onInfoRoom={onInfoRoom}
+        onInviteRoom={onInviteRoom}
         isArchive={isArchive}
       />
     );
@@ -625,6 +636,7 @@ const RoomsList = ({
         onArchiveRoom={onArchiveRoom}
         onArchiveSelected={onArchiveSelected}
         onInfoRoom={onInfoRoom}
+        onInviteRoom={onInviteRoom}
         isArchive={isArchive}
       />
     );
@@ -665,6 +677,21 @@ const RoomsList = ({
           }
           currentUserId={user?.id}
           onChanged={refreshSingleRoom}
+        />
+      ) : null}
+      {invitingRoom ? (
+        <InvitePanel
+          visible
+          onClose={() => setInvitingRoom(null)}
+          roomId={invitingRoom.id as number}
+          roomType={
+            (invitingRoom as TFolderItem).roomType ?? RoomsType.EditingRoom
+          }
+          user={user}
+          isPrivateRoom={
+            (invitingRoom as unknown as { private?: boolean }).private ?? false
+          }
+          onMembersUpdated={() => refreshSingleRoom(invitingRoom.id as number)}
         />
       ) : null}
       {restoringItems && restoringItems.length > 0 ? (

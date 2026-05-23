@@ -73,6 +73,7 @@ type RoomsTableViewProps = {
   onArchiveRoom?: (item: TFolderItem | TFileItem) => void;
   onArchiveSelected?: (items: (TFolderItem | TFileItem)[]) => void;
   onInfoRoom?: (item: TFolderItem | TFileItem) => void;
+  onInviteRoom?: (item: TFolderItem | TFileItem) => void;
   isArchive?: boolean;
 };
 
@@ -96,6 +97,7 @@ const RoomsTableView = ({
   onArchiveRoom,
   onArchiveSelected,
   onInfoRoom,
+  onInviteRoom,
   isArchive,
 }: RoomsTableViewProps) => {
   const { t } = useTranslation(["Common", "Files"]);
@@ -235,6 +237,7 @@ const RoomsTableView = ({
             onArchiveRoom={onArchiveRoom}
             onArchiveSelected={onArchiveSelected}
             onInfoRoom={onInfoRoom}
+            onInviteRoom={onInviteRoom}
             isArchive={isArchive}
           />
         ))}

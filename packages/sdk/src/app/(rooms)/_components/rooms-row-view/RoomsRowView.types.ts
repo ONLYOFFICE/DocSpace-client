@@ -53,6 +53,7 @@ export type RoomsRowProps = RoomsRowContentProps & {
   onArchiveRoom?: (item: TFolderItem | TFileItem) => void;
   onArchiveSelected?: (items: (TFolderItem | TFileItem)[]) => void;
   onInfoRoom?: (item: TFolderItem | TFileItem) => void;
+  onInviteRoom?: (item: TFolderItem | TFileItem) => void;
   isArchive?: boolean;
 };
 
@@ -75,5 +76,6 @@ export type RoomsRowViewProps = Pick<
   onArchiveRoom?: (item: TFolderItem | TFileItem) => void;
   onArchiveSelected?: (items: (TFolderItem | TFileItem)[]) => void;
   onInfoRoom?: (item: TFolderItem | TFileItem) => void;
+  onInviteRoom?: (item: TFolderItem | TFileItem) => void;
   isArchive?: boolean;
 };

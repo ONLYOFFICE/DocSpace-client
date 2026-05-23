@@ -54,6 +54,7 @@ const RoomsRowView = ({
   onArchiveRoom,
   onArchiveSelected,
   onInfoRoom,
+  onInviteRoom,
   isArchive,
 }: RoomsRowViewProps) => {
   const isSSR = useIsServer();
@@ -88,6 +89,7 @@ const RoomsRowView = ({
           onArchiveRoom={onArchiveRoom}
           onArchiveSelected={onArchiveSelected}
           onInfoRoom={onInfoRoom}
+          onInviteRoom={onInviteRoom}
           isArchive={isArchive}
         />
       ))}

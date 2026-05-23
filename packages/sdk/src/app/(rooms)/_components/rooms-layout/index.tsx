@@ -61,6 +61,7 @@ import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
 import RoomsList from "../rooms-list";
+import CreateEditRoomDialog from "../create-edit-room-dialog";
 import {
   InfoPanelBody as DocsInfoPanelBody,
   InfoPanelHeader as DocsInfoPanelHeader,
@@ -111,7 +112,7 @@ const RoomsLayout = observer(
         const updated = (await api.rooms.getRoomInfo(
           sel.id,
         )) as unknown as TFolder;
-        infoPanelStore.setSelection({ ...updated, isRoom: true } as TFolder);
+        infoPanelStore.setSelection({ ...updated, isRoom: true } as unknown as TFolder);
         const existing = filesListStore.items.find((i) => i.id === sel.id);
         if (existing) {
           const merged = {
@@ -127,6 +128,8 @@ const RoomsLayout = observer(
 
     const [isCreateRoomDialogVisible, setIsCreateRoomDialogVisible] =
       React.useState(false);
+
+    const refreshRef = React.useRef<(() => void) | null>(null);
 
     const createCustomRoom = React.useCallback(() => {
       setIsCreateRoomDialogVisible(true);
@@ -226,8 +229,7 @@ const RoomsLayout = observer(
                 current={current}
                 user={user}
                 isArchive={isArchive}
-                createDialogVisible={isCreateRoomDialogVisible}
-                onCloseCreateDialog={closeCreateRoomDialog}
+                refreshRef={refreshRef}
               />
             }
             infoPanelHeaderContent={<DocsInfoPanelHeader />}
@@ -238,6 +240,11 @@ const RoomsLayout = observer(
             setIsInfoPanelVisible={infoPanelStore.setVisible}
             isEmptyPage={isEmptyList}
             filesFilter={filesFilter}
+          />
+          <CreateEditRoomDialog
+            visible={isCreateRoomDialogVisible}
+            onClose={closeCreateRoomDialog}
+            onRoomCreated={() => refreshRef.current?.()}
           />
           <SelectionArea />
           <DeviceTypeObserver />

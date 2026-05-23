@@ -83,6 +83,7 @@ type CreateEditRoomDialogProps = {
   onClose: () => void;
   room?: EditableRoom;
   onRoomEdited?: (roomId: number) => void;
+  onRoomCreated?: () => void;
 };
 
 const CreateEditRoomDialog = ({
@@ -90,6 +91,7 @@ const CreateEditRoomDialog = ({
   onClose,
   room,
   onRoomEdited,
+  onRoomCreated,
 }: CreateEditRoomDialogProps) => {
   const { t } = useTranslation(["Common", "Files", "RoomLogoCover"]);
   const refreshRooms = React.useContext(RoomsRefreshContext);
@@ -347,7 +349,7 @@ const CreateEditRoomDialog = ({
           });
         }
 
-        refreshRooms?.();
+        (onRoomCreated ?? refreshRooms)?.();
       }
       onClose();
     } catch (e) {
@@ -377,7 +379,6 @@ const CreateEditRoomDialog = ({
     <>
       <ModalDialog
         displayType={ModalDialogType.aside}
-        withBodyScroll
         visible={visible}
         onClose={onClose}
       >

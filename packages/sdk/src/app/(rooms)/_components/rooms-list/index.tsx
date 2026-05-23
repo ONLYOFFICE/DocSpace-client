@@ -85,8 +85,7 @@ type RoomsListProps = {
   current: TFolder;
   user?: TUser;
   isArchive?: boolean;
-  createDialogVisible?: boolean;
-  onCloseCreateDialog?: () => void;
+  refreshRef?: React.MutableRefObject<(() => void) | null>;
 };
 
 const RoomsList = ({
@@ -99,8 +98,7 @@ const RoomsList = ({
   current,
   user,
   isArchive,
-  createDialogVisible,
-  onCloseCreateDialog,
+  refreshRef,
 }: RoomsListProps) => {
   const timezone = portalSettings.timezone;
   const searchParams = useSearchParams();
@@ -487,6 +485,10 @@ const RoomsList = ({
     filesListStore,
   ]);
 
+  React.useEffect(() => {
+    if (refreshRef) refreshRef.current = fetchCurrentRooms;
+  }, [fetchCurrentRooms, refreshRef]);
+
   const fetchMoreRooms = React.useCallback(async () => {
     if (!hasNextPage || requestRunning.current) return;
     requestRunning.current = true;
@@ -652,10 +654,6 @@ const RoomsList = ({
         onClose={() => setEditingRoom(null)}
         room={editingRoomData}
         onRoomEdited={refreshSingleRoom}
-      />
-      <CreateEditRoomDialog
-        visible={!!createDialogVisible}
-        onClose={() => onCloseCreateDialog?.()}
       />
       {changingOwnerRoom ? (
         <ChangeRoomOwnerDialog

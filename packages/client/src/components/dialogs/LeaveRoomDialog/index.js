@@ -84,7 +84,7 @@ const LeaveRoomDialog = (props) => {
   }, []);
 
   const titleText = isAIAgent
-    ? t("Files:LeaveTheAgent")
+    ? t("Common:LeaveTheAgent")
     : t("Common:LeaveTheRoom");
 
   const roomDescription = isRoomOwner
@@ -92,8 +92,8 @@ const LeaveRoomDialog = (props) => {
     : t("Files:WantLeaveRoom");
 
   const agentDescription = isRoomOwner
-    ? t("Files:LeaveAgentDescription")
-    : t("Files:WantLeaveAgent");
+    ? t("Common:LeaveAgentDescription")
+    : t("Common:WantLeaveAgent");
 
   const descriptionText = isAIAgent ? agentDescription : roomDescription;
 
@@ -102,7 +102,7 @@ const LeaveRoomDialog = (props) => {
   const okButtonLabel = isRoomOwner
     ? t("Common:AssignOwner")
     : showFormFillingWarning
-      ? t("Files:LeaveButton")
+      ? t("Common:LeaveButton")
       : t("Common:OKButton");
 
   return (

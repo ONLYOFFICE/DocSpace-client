@@ -228,7 +228,6 @@
   "QuotasDescription": "ここでは、ユーザーとルームのストレージ容量制限を設定することができます。",
   "Recalculate": "再計算",
   "RegisterApp": "アプリを登録",
-  "ResetSettings": "設定をリセット",
   "ResetTemplateDescription": "現在の空白の状態をデフォルトにリセットしてもよろしいですか？\nこの操作は元に戻すことはできません。",
   "ResetToDefault": "初期設定にリセット",
   "RestAPI": "REST API",

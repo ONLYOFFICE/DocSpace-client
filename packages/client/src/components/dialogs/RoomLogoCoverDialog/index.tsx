@@ -83,7 +83,7 @@ const RoomLogoCoverDialog = ({
   setUploadedFile,
   isAIAgentsFolderRoot,
 }: CoverDialogProps) => {
-  const { t } = useTranslation(["Common", "RoomLogoCover"]);
+  const { t } = useTranslation(["Common"]);
   const { currentColorScheme } = useTheme();
 
   const defaultHeight = isDesktop() ? DESKTOP_HEIGHT : TABLET_HEIGHT;

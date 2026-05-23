@@ -228,7 +228,6 @@
   "QuotasDescription": "您可以设置用户和房间的储存空间额度。",
   "Recalculate": "重新计算",
   "RegisterApp": "注册应用",
-  "ResetSettings": "重置设置",
   "ResetTemplateDescription": "您确定要将空白区域的当前状态重置为默认状态吗？此操作将无法撤销。",
   "ResetToDefault": "重置为默认",
   "RestAPI": "REST API",

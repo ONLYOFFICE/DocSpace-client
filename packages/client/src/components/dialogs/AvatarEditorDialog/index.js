@@ -50,7 +50,6 @@ const AvatarEditorDialog = (props) => {
     "Common",
     "CreateEditRoomDialog",
     "Ldap",
-    "RoomLogoCover",
   ]);
 
   const {

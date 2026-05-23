@@ -1,7 +1,6 @@
 {
   "Administration": "Администраторы",
   "AgentRenamed": "Агент <1>«{{oldRoomTitle}}»</1> переименован в <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Узнайте подробную информацию о {{aiAgents}} здесь",
   "AndMoreLabel": "и <1>еще {{count}}</1>",
   "Data": "Данные",
   "ExpectUsers": "Ожидайте пользователей",
@@ -60,7 +59,6 @@
   "LastUpdateInfo": "Последнее обновление",
   "LifetimeEnds": "Срок действия",
   "MembersEmptyScreenText": "Здесь будут представлены подробные сведения об участниках",
-  "NoAgent": "Нет {{aiAgent}}",
   "NoRecordsFound": "Записи не найдены",
   "Resolution": "Разрешение",
   "RoomCreateUserCount": "Пользователи добавлены ({{count}}).",

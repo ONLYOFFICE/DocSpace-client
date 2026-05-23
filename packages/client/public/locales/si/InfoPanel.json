@@ -1,7 +1,6 @@
 {
   "Administration": "පරිපාලනය",
   "AgentRenamed": "නියෝජිතයා <1>«{{oldRoomTitle}}»</1><2>«{{roomTitle}}»</2> ලෙස නැවත නම් කරන ලදී",
-  "AIAgentsEmptyScreenTent": "{{aiAgents}} විස්තර මෙතැනින් බලන්න",
   "AndMoreLabel": "සහ <1>තවත් {{count}}</1>",
   "Data": "දත්ත",
   "ExpectUsers": "අපේක්‍ෂිත පරිශ්‍රීලකයින්",
@@ -60,7 +59,6 @@
   "LastUpdateInfo": "අවසන් යාවත්කාලීන කිරීම",
   "LifetimeEnds": "ආයු කාලය අවසන් වේ",
   "MembersEmptyScreenText": "මෙසේ සාමාජික විස්තර බලන්න:",
-  "NoAgent": "{{aiAgent}} නැත",
   "NoRecordsFound": "වාර්තා කිසිවක් හමු නොවීය.",
   "Resolution": "විභේදනය",
   "RoomCreateUserCount": "පරිශීලකයින් එකතු කරන ලදි ({{count}}).",

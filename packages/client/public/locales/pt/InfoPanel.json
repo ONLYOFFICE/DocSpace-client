@@ -1,7 +1,6 @@
 {
   "Administration": "Administração",
   "AgentRenamed": "Agente <1>«{{oldRoomTitle}}»</1> renomeado para <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Veja os detalhes de {{aiAgents}} aqui",
   "AndMoreLabel": "e <1>{{count}} mais</1>",
   "Data": "Dados",
   "ExpectUsers": "Espere usuários",
@@ -60,7 +59,6 @@
   "LastUpdateInfo": "Última atualização",
   "LifetimeEnds": "Fim da vida útil",
   "MembersEmptyScreenText": "Veja os detalhes dos hóspedes aqui",
-  "NoAgent": "Nenhum {{aiAgent}}",
   "NoRecordsFound": "Nenhum registro foi encontrado",
   "Resolution": "Resolução",
   "RoomCreateUserCount": "Usuários adicionados ({{count}}).",

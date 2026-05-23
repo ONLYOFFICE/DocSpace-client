@@ -1,6 +1,5 @@
 {
   "AddCertificate": "Sertifika ekle",
-  "AdvancedSettings": "Gelişmiş Ayarlar",
   "AdvancedSettingsTooltip": "Varsayılan kimlik doğrulama sayfasını gizle ve otomatik olarak SSO hizmetine yönlendir.",
   "AttributeMatching": "Nitelik Haritalama",
   "AttributeMatchingTooltip": "Tekli Oturum Açma öznitelikleri 'Hesaplar' bölümündeki girişlere karşılık gelir.",
@@ -11,7 +10,6 @@
   "DownloadMetadataXML": "SP meta veri XML'sini indirin",
   "Encryption": "Şifreleme",
   "GenerateCertificate": "Yeni Kendinden İmzalı Sertifika Oluştur",
-  "Hide": "Gizle",
   "HideAdditionalParameters": "Gelişmiş ayarları gizle",
   "HideAuthPage": "Kimlik doğrulama sayfasını gizle",
   "idpAuthRequest": "Kimlik Doğrulama Yanıtları İmzasını Doğrula",
@@ -32,7 +30,6 @@
   "ProviderURLTooltip": "Kimlik Sağlayıcı Varlık Kimliği (Sağlayıcı URL)",
   "ServiceProviderSettings": "{{organizationName}} SP Ayarları",
   "ServiceProviderSettingsDescription": "Tek Oturum Açma için Servis Sağlayıcı ayarlarını yapılandırın ve SP sertifikaları ekleyin.",
-  "Show": "Göster",
   "ShowAdditionalParameters": "Gelişmiş ayarları göster",
   "Signing": "İmzalama",
   "SigningAndEncryption": "İmzalama ve şifreleme",

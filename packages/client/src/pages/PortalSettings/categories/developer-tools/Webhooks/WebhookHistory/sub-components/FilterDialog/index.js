@@ -132,7 +132,7 @@ const FilterDialog = (props) => {
 
   return (
     <ModalDialog visible={visible} onClose={closeModal} displayType="aside">
-      <ModalDialog.Header>{t("Files:Filter")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:Filter")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.dialogBodyWrapper}>
           <DeliveryDatePicker

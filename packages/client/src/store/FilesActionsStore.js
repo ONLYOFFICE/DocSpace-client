@@ -1862,10 +1862,10 @@ class FilesActionStore {
     let notificationsEnabled = t("RoomNotificationsEnabled");
 
     if (isAIAgent) {
-      notificationsDisabled = t("AIAgentNotificationsDisabled", {
+      notificationsDisabled = t("Common:AIAgentNotificationsDisabled", {
         aiAgent: t("Common:AIAgent"),
       });
-      notificationsEnabled = t("AIAgentNotificationsEnabled", {
+      notificationsEnabled = t("Common:AIAgentNotificationsEnabled", {
         aiAgent: t("Common:AIAgent"),
       });
     }
@@ -3610,7 +3610,7 @@ class FilesActionStore {
       ? t("Common:LeftAndAppointNewOwner")
       : t("Files:YouLeftTheRoom");
     const agentSuccessText = isOwner
-      ? t("Files:LeftAgentAndAppointNewOwner")
+      ? t("Common:LeftAgentAndAppointNewOwner")
       : t("Files:YouLeftTheAgent");
     const successText = isAIAgent ? agentSuccessText : roomSuccessText;
 

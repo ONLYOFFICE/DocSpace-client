@@ -1,7 +1,6 @@
 {
   "Administration": "Администрација",
   "AgentRenamed": "Агент <1>«{{oldRoomTitle}}»</1> преименован у <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Погледајте детаље о {{aiAgents}} овде",
   "AndMoreLabel": "и <1>{{count}} више</1>",
   "Data": "Подаци",
   "ExpectUsers": "Очекуј кориснике",
@@ -60,7 +59,6 @@
   "LastUpdateInfo": "Последње ажурирање",
   "LifetimeEnds": "Век трајања истиче",
   "MembersEmptyScreenText": "Погледајте детаље о члановима овде",
-  "NoAgent": "Нема {{aiAgent}}",
   "NoRecordsFound": "Нема пронађених записа",
   "Resolution": "Одлука",
   "RoomCreateUserCount": "Додати корисници ({{count}}).",

@@ -1,6 +1,5 @@
 {
   "AddCertificate": "添加证书",
-  "AdvancedSettings": "高级设置",
   "AdvancedSettingsTooltip": "隐藏默认认证页面并自动重定向至 SSO 服务。",
   "AttributeMatching": "属性映射",
   "AttributeMatchingTooltip": "单点登录属性与“账户”部分条目的对应关系。",
@@ -11,7 +10,6 @@
   "DownloadMetadataXML": "下载 SP 元数据 XML",
   "Encryption": "加密",
   "GenerateCertificate": "生成新的自签名证书",
-  "Hide": "隐藏",
   "HideAdditionalParameters": "隐藏高级设置",
   "HideAuthPage": "隐藏认证页面",
   "idpAuthRequest": "校验认证响应签名",
@@ -32,7 +30,6 @@
   "ProviderURLTooltip": "身份供应商实体 ID（发布者 URL）",
   "ServiceProviderSettings": "{{organizationName}} SP 设置",
   "ServiceProviderSettingsDescription": "配置服务提供方设置，添加用于单一登录的 SP 证书。",
-  "Show": "显示",
   "ShowAdditionalParameters": "显示高级设置",
   "Signing": "签署中",
   "SigningAndEncryption": "签名和加密",

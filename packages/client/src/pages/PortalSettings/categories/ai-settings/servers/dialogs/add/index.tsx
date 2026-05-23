@@ -67,7 +67,7 @@ const AddMCPDialogComponent = ({
   addNewMCP,
   mcpServersSettingsUrl,
 }: AddMCPDialogProps) => {
-  const { t } = useTranslation(["Common", "AISettings"]);
+  const { t } = useTranslation(["Common"]);
   const submitButtonRef = useRef<HTMLButtonElement>(null);
 
   const [loading, setLoading] = React.useState(false);
@@ -108,7 +108,7 @@ const AddMCPDialogComponent = ({
 
     try {
       await addNewMCP?.(data);
-      toastr.success(t("AISettings:ServerAddedSuccess"));
+      toastr.success(t("Common:ServerAddedSuccess"));
       onClose();
     } catch (e) {
       console.error(e);
@@ -138,7 +138,7 @@ const AddMCPDialogComponent = ({
         >
           <div className={styles.connectDocspace}>
             <Text className={styles.connectDocspaceDescription}>
-              {t("AISettings:ConnectProductToYourDataAndTools", {
+              {t("Common:ConnectProductToYourDataAndTools", {
                 productName: getBrandName("ProductName"),
               })}
             </Text>

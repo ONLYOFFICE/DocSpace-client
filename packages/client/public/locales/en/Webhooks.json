@@ -57,7 +57,6 @@
   "RequestHeaderCopied": "POST request header successfully copied to clipboard",
   "RequestPostBody": "POST request body",
   "RequestPostHeader": "POST request header",
-  "ResetKey": "Reset key",
   "Response": "Response",
   "ResponseBodyCopied": "POST response body successfully copied to clipboard",
   "ResponseHeaderCopied": "POST response header successfully copied to clipboard",

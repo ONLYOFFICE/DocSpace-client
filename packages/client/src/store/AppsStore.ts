@@ -137,6 +137,7 @@ class AppsStore {
       );
       return !settings?.roomId;
     }
+    if (id === "ai-agents") return false;
     const settings = await this.fetchAppSettings(id);
     return !settings;
   };

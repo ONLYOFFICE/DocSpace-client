@@ -1,7 +1,6 @@
 {
   "Administration": "Quản lý ",
   "AgentRenamed": "Tác nhân <1>«{{oldRoomTitle}}»</1> được đổi tên thành <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Xem chi tiết về {{aiAgents}} tại đây",
   "AndMoreLabel": "và  <1>{{count}} hơn thế nữa</1>",
   "Data": "Dữ liệu",
   "ExpectUsers": "Người dùng được mong chờ ",
@@ -60,7 +59,6 @@
   "LastUpdateInfo": "Cập nhật lần cuối",
   "LifetimeEnds": "Thời gian tồn tại kết thúc",
   "MembersEmptyScreenText": "Xem chi tiết thành viên tại đây",
-  "NoAgent": "Không có {{aiAgent}}",
   "NoRecordsFound": "Không tìm thấy bản ghi nào",
   "Resolution": "Nghị quyết",
   "RoomCreateUserCount": "Đã thêm người dùng ({{count}}).",

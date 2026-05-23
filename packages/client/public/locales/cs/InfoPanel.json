@@ -1,7 +1,6 @@
 {
   "Administration": "Správa",
   "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> přejmenován na <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Zobrazte podrobnosti o {{aiAgents}} zde",
   "AndMoreLabel": "a <1>{{count}} další</1>",
   "Data": "Data",
   "ExpectUsers": "Očekávejte, že uživatelé",
@@ -60,7 +59,6 @@
   "LastUpdateInfo": "Poslední aktualizace",
   "LifetimeEnds": "Konec životnosti",
   "MembersEmptyScreenText": "Podrobnosti o členech naleznete zde",
-  "NoAgent": "Žádný {{aiAgent}}",
   "NoRecordsFound": "Nebyly nalezeny žádné záznamy",
   "Resolution": "Rozlišení",
   "RoomCreateUserCount": "Uživatelé přidáni ({{count}}).",

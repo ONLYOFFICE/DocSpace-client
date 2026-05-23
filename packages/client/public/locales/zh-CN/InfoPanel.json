@@ -1,7 +1,6 @@
 {
   "Administration": "管理",
   "AgentRenamed": "智能体<1>«{{oldRoomTitle}}»</1>已重命名为<2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "请在此处查看 {{aiAgents}} 详情",
   "AndMoreLabel": "以及<1>另外 {{count}} 个</1>",
   "Data": "数据",
   "ExpectUsers": "等待用户",
@@ -60,7 +59,6 @@
   "LastUpdateInfo": "上次更新",
   "LifetimeEnds": "有效期到期",
   "MembersEmptyScreenText": "在此处查看成员详情",
-  "NoAgent": "没有 {{aiAgent}}",
   "NoRecordsFound": "未找到记录",
   "Resolution": "分辨率",
   "RoomCreateUserCount": "用户已添加 ({{count}})。",

@@ -1,7 +1,6 @@
 {
   "Administration": "الإدارة",
   "AgentRenamed": "تمت إعادة تسمية الوكيل <1>«{{oldRoomTitle}}»</1> إلى <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "راجع تفاصيل {{aiAgents}} هنا",
   "AndMoreLabel": "و <1> {{count}} المزيد </ 1>",
   "Data": "بيانات",
   "ExpectUsers": "مستخدمين متوقعين",
@@ -60,7 +59,6 @@
   "LastUpdateInfo": "آخر تحديث",
   "LifetimeEnds": "تنتهي مدة العمر",
   "MembersEmptyScreenText": " شاهد تفاصيل الأعضاء هنا",
-  "NoAgent": "لا يوجد {{aiAgent}}",
   "NoRecordsFound": "لا توجد سجلات",
   "Resolution": "الدقة",
   "RoomCreateUserCount": "تمت إضافة المستخدمين ({{count}}).",

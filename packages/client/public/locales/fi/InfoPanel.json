@@ -1,7 +1,6 @@
 {
   "Administration": "Hallinto",
   "AgentRenamed": "Agentti <1>«{{oldRoomTitle}}»</1> nimennettiin uudelleen <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Katso {{aiAgents}} tiedot täältä",
   "AndMoreLabel": "ja <1>{{count}} enemmän</1>",
   "Data": "Tiedot",
   "ExpectUsers": "Odota käyttäjiä",
@@ -60,7 +59,6 @@
   "LastUpdateInfo": "Viimeisin päivitys",
   "LifetimeEnds": "Käyttöikä päättyy",
   "MembersEmptyScreenText": "Katso jäsentiedot täältä",
-  "NoAgent": "Ei {{aiAgent}}ia",
   "NoRecordsFound": "Merkintöjä ei löydy",
   "Resolution": "Päätös",
   "RoomCreateUserCount": "Käyttäjät lisätty ({{count}}).",

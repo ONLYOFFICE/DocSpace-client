@@ -1,7 +1,6 @@
 {
   "Administration": "Administrata",
   "AgentRenamed": "Agjenti <1>«{{oldRoomTitle}}»</1> u riemërua në <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Shikoni detajet e {{aiAgents}} këtu",
   "AndMoreLabel": "dhe <1>{{count}} më shumë</1>",
   "Data": "Data",
   "ExpectUsers": "Prisni përdoruesit",
@@ -60,7 +59,6 @@
   "LastUpdateInfo": "Përditësim i fundit",
   "LifetimeEnds": "Jeta përfundon",
   "MembersEmptyScreenText": "Shikoni detajet e anëtarëve këtu",
-  "NoAgent": "Asnjë {{aiAgent}}",
   "NoRecordsFound": "Nuk u gjend asnjë regjistrim",
   "Resolution": "Rezolucioni",
   "RoomCreateUserCount": "Përdoruesit e shtuar ({{count}}).",

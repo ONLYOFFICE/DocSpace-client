@@ -116,7 +116,10 @@ export async function proxy(request: NextRequest) {
     });
   }
 
-  if (request.nextUrl.pathname.includes("rooms")) {
+  if (
+    request.nextUrl.pathname.includes("ai-agents") ||
+    request.nextUrl.pathname.includes("rooms")
+  ) {
     requestHeaders.set(FILTER_HEADER, searchParams.toString());
 
     return NextResponse.next({
@@ -209,6 +212,8 @@ export const config = {
     "/chat",
     "/personal-files",
     "/personal-files/:path*",
+    "/ai-agents",
+    "/ai-agents/:path*",
     "/rooms",
     "/rooms/:path*",
   ],

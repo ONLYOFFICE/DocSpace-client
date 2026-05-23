@@ -1,7 +1,6 @@
 {
   "Administration": "ບໍລິຫານ",
   "AgentRenamed": "ຕົວແທນ <1>«{{oldRoomTitle}}»</1> ໄດ້ປ່ຽນຊື່ເປັນ <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "ເບິ່ງລາຍລະອຽດຂອງ {{aiAgents}} ທີ່ນີ້",
   "AndMoreLabel": "ແລະ <1>{{count}} ເພີ່ມເຕີມ</1>",
   "Data": "ຂໍ້ມູນ",
   "ExpectUsers": "ຄາດຫວັງວ່າຜູ້ໃຊ້",
@@ -60,7 +59,6 @@
   "LastUpdateInfo": "ອັບເດດລ່າສຸດ",
   "LifetimeEnds": "ຊີວິດສິ້ນສຸດ",
   "MembersEmptyScreenText": "ເບິ່ງລາຍລະອຽດສະມາຊິກຢູ່ທີ່ນີ້",
-  "NoAgent": "ບໍ່ມີ {{aiAgent}}",
   "NoRecordsFound": "ບໍ່ພົບຂໍ້ມູນໃດໆ",
   "Resolution": "ຄວາມລະອຽດ",
   "RoomCreateUserCount": "ຜູ້ໃຊ້ເພີ່ມເຕີມ ({{count}}).",

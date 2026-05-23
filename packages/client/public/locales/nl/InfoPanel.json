@@ -1,7 +1,6 @@
 {
   "Administration": "Beheer",
   "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> heeft de naam veranderd naar <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Bekijk hier de details van {{aiAgents}}",
   "AndMoreLabel": "en <1>{{count}} meer</1>",
   "Data": "Data",
   "ExpectUsers": "Verwacht gebruikers",
@@ -60,7 +59,6 @@
   "LastUpdateInfo": "Laatste update",
   "LifetimeEnds": "Einde levensduur",
   "MembersEmptyScreenText": "Bekijk hier de details van de leden",
-  "NoAgent": "Nee {{aiAgent}}",
   "NoRecordsFound": "Geen records gevonden",
   "Resolution": "Resolutie",
   "RoomCreateUserCount": "Gebruikers toegevoegd ({{count}}).",

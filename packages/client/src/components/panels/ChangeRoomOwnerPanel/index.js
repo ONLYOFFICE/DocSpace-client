@@ -205,7 +205,7 @@ const ChangeRoomOwner = (props) => {
       });
 
   const footerCheckboxLabel = isAIAgent
-    ? t("Files:LeaveTheAgent")
+    ? t("Common:LeaveTheAgent")
     : t("Common:LeaveTheRoom");
 
   const selectorComponent = excludeReady ? (

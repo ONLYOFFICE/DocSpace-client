@@ -161,7 +161,6 @@ const setAgentParams = ({
     "CreateEditRoomDialog",
     "Translations",
     "Common",
-    "RoomLogoCover",
   ]);
 
   const [previewIcon, setPreviewIcon] = useState(agentParams.previewIcon);

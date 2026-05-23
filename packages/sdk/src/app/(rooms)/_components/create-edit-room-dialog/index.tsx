@@ -93,7 +93,7 @@ const CreateEditRoomDialog = ({
   onRoomEdited,
   onRoomCreated,
 }: CreateEditRoomDialogProps) => {
-  const { t } = useTranslation(["Common", "Files", "RoomLogoCover"]);
+  const { t } = useTranslation(["Common", "Files"]);
   const refreshRooms = React.useContext(RoomsRefreshContext);
   const dialogsStore = useDialogsStore();
 

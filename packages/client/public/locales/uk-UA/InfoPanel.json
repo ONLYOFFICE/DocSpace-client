@@ -1,7 +1,6 @@
 {
   "Administration": "Адміністрування",
   "AgentRenamed": "Агент <1>«{{oldRoomTitle}}»</1> перейменовано на <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Перегляньте деталі щодо {{aiAgents}} тут",
   "AndMoreLabel": "і ще <1>{{count}}</1>",
   "Data": "Дані",
   "ExpectUsers": "Очікувати користувачів",
@@ -60,7 +59,6 @@
   "LastUpdateInfo": "Останнє оновлення",
   "LifetimeEnds": "Період існування закінчується",
   "MembersEmptyScreenText": "Див. інформацію про учасників тут",
-  "NoAgent": "Немає {{aiAgent}}",
   "NoRecordsFound": "Записів не знайдено",
   "Resolution": "Роздільна здатність",
   "RoomCreateUserCount": "Користувачів додано ({{count}}).",

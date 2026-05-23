@@ -68,7 +68,7 @@ class DeleteOwnerProfileDialogComponent extends React.Component {
         <ModalDialog.Footer>
           <Button
             key="OwnerChangeBtn"
-            label={t("Translations:OwnerChange")}
+            label={t("Common:OwnerChange")}
             size="normal"
             scale
             primary

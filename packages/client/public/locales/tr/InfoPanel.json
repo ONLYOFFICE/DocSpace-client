@@ -1,7 +1,6 @@
 {
   "Administration": "Yönetim",
   "AgentRenamed": "Temsilci <1>«{{oldRoomTitle}}»</1> adını <2>«{{roomTitle}}»</2> olarak değiştirdi",
-  "AIAgentsEmptyScreenTent": "Buradaki {{aiAgents}} detaylarını görün",
   "AndMoreLabel": "ve <1>{{count}} daha</1>",
   "Data": "Veri",
   "ExpectUsers": "Beklenen kullanıcılar",
@@ -60,7 +59,6 @@
   "LastUpdateInfo": "Son güncelleme",
   "LifetimeEnds": "Yaşam süresi sona eriyor",
   "MembersEmptyScreenText": "Üye ayrıntılarını burada görüntüleyin",
-  "NoAgent": "Hayır {{aiAgent}}",
   "NoRecordsFound": "Kayıt bulunamadı",
   "Resolution": "Çözünürlük",
   "RoomCreateUserCount": "Kullanıcılar eklendi ({{count}}).",

@@ -134,7 +134,7 @@ type MainProfileProps = {
 };
 
 const MainProfile = (props: MainProfileProps) => {
-	const { t, i18n } = useTranslation(["Profile", "Common", "RoomLogoCover"]);
+	const { t, i18n } = useTranslation(["Profile", "Common"]);
 
 	const {
 		profile,

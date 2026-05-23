@@ -1,7 +1,6 @@
 {
   "Administration": "Ադմինիստրացիա",
   "AgentRenamed": "Գործակալ <1>«{{oldRoomTitle}}»-ը</1> վերանվանվել է <2>«{{roomTitle}}»-ի</2>",
-  "AIAgentsEmptyScreenTent": "Տեսեք {{aiAgents}}-ի մանրամասները այստեղ",
   "AndMoreLabel": "և <1>{{count}} ավելի</1>",
   "Data": "Տվյալներ",
   "ExpectUsers": "Սպասեք օգտատերերին",
@@ -60,7 +59,6 @@
   "LastUpdateInfo": "Վերջին թարմացում",
   "LifetimeEnds": "Մշտական լիցենզիան ավարտվում է",
   "MembersEmptyScreenText": "Անդամների մանրամասները կարող եք տեսնել այստեղ",
-  "NoAgent": "Չկա {{aiAgent}}",
   "NoRecordsFound": "Գրառումները չեն գտնվել",
   "Resolution": "Թույլատրելիություն",
   "RoomCreateUserCount": "Օգտատերերն ավելացվել են ({{count}})։",

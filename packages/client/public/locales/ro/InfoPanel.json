@@ -1,7 +1,6 @@
 {
   "Administration": "Administrare",
   "AgentRenamed": "Sala <1>«{{oldRoomTitle}}»</1> a agentului a fost redenumită <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Vezi detalii despre {{aiAgents}} aici",
   "AndMoreLabel": "și <1>{{count}} mai multe</1>",
   "Data": "Date",
   "ExpectUsers": "Utilizatori în așteptare",
@@ -60,7 +59,6 @@
   "LastUpdateInfo": "Ultima actualizare",
   "LifetimeEnds": "Durată de viață se încheie",
   "MembersEmptyScreenText": "Detaliile membrilor aici",
-  "NoAgent": "Niciun {{aiAgent}}",
   "NoRecordsFound": "Nu s-au găsit înregistrări",
   "Resolution": "Rezoluție",
   "RoomCreateUserCount": "Utilizatorul a fost adăugat ({{count}}).",

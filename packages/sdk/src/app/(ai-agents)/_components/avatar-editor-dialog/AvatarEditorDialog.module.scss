@@ -1,0 +1,59 @@
+@use "@docspace/ui-kit/styles/mixins";
+@use "@docspace/ui-kit/styles/variables/colors" as *;
+
+.modalDialog {
+	:global(#modal-dialog) {
+		max-height: fit-content;
+
+		:global(.modal-header) {
+			height: 54px;
+			min-height: 54px;
+		}
+
+		:global(.modal-footer) {
+			box-sizing: border-box;
+			max-height: 72px;
+		}
+
+		:global(.modal-body) {
+			height: var(--modal-body-height, auto);
+		}
+	}
+
+	:global(.wrapper-image-editor) {
+		@extend %imageEditorLayout;
+
+		:global(.avatar-editor) {
+			@extend %avatarEditorLayout;
+
+			@include mixins.mobile {
+				justify-content: center;
+			}
+		}
+	}
+}
+
+%imageEditorLayout {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+%avatarEditorLayout {
+	display: flex;
+	gap: 16px;
+	align-items: center;
+}
+
+.bodyContent {
+	display: contents;
+
+	:global(.wrapper-image-editor) {
+		@extend %imageEditorLayout;
+
+		:global(.avatar-editor) {
+			@extend %avatarEditorLayout;
+		}
+	}
+}

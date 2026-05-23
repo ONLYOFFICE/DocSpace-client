@@ -1,6 +1,5 @@
 {
   "AddCertificate": "සහතිකයක් යොදන්න",
-  "AdvancedSettings": "වැඩිදුර සැකසුම්",
   "AdvancedSettingsTooltip": "පෙරනිමි සහතික කිරීමේ පිටුව සඟවා ස්වයංක්‍රීයව තනි-පිවිසුම් (SSO) සේවාව වෙත හරවා යවන්න.",
   "AttributeMatching": "ගුණාංග අනුරූපණය",
   "AttributeMatchingTooltip": "තනි පිවිසුම් (Single Sign-On) ගුණාංග 'ගිණුම්' (Accounts) කොටසේ ඇතුළත් කිරීම් සමඟ අනුරූප වීම.",
@@ -11,7 +10,6 @@
   "DownloadMetadataXML": "SP පාරදත්ත XML බාගන්න",
   "Encryption": "සංකේතනය",
   "GenerateCertificate": "නව ස්වයං-අත්සනක් සහිත සහතිකයක් උත්පාදනය කරන්න",
-  "Hide": "සඟවන්න",
   "HideAdditionalParameters": "වැඩිදුර සැකසුම් සඟවන්න",
   "HideAuthPage": "අභිජාන පිටුව සඟවන්න",
   "idpAuthRequest": "සත්‍යාපන ප්‍රතිචාරවල අත්සන සත්‍යාපනය කරන්න",
@@ -32,7 +30,6 @@
   "ProviderURLTooltip": "අනන්‍යතා සපයන්නාගේ එන්ටිටි හැඳුනුම්පත (නිකුත්කරුගේ URL එක)",
   "ServiceProviderSettings": "{{organizationName}} SP සැකසුම්",
   "ServiceProviderSettingsDescription": "සේවා ප්‍රතිපාදක සැකසුම් වින්‍යාස කර තනි පිවිසුම (SSO) සඳහා SP සහතික එක් කරන්න.",
-  "Show": "පෙන්වන්න",
   "ShowAdditionalParameters": "වැඩිදුර සැකසුම් පෙන්වන්න",
   "Signing": "අත්සන් තැබීම",
   "SigningAndEncryption": "අත්සන් තැබීම හා සංකේතනය",

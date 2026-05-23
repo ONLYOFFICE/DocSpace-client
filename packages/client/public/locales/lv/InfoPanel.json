@@ -1,7 +1,6 @@
 {
   "Administration": "Administrācija",
   "AgentRenamed": "Aģents <1>«{{oldRoomTitle}}»</1> pārdēvēts par <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Skatīt {{aiAgents}} detaļas šeit",
   "AndMoreLabel": "un <1>{{count}} vēl</1>",
   "Data": "Dati",
   "ExpectUsers": "Gaidīt lietotājus",
@@ -60,7 +59,6 @@
   "LastUpdateInfo": "Pēdējais atjauninājums",
   "LifetimeEnds": "Kalpošanas laika beigas",
   "MembersEmptyScreenText": "Skatiet informāciju par dalībniekiem šeit",
-  "NoAgent": "Nav {{aiAgent}}",
   "NoRecordsFound": "Ieraksti nav atrasti",
   "Resolution": "Rezolūcija",
   "RoomCreateUserCount": "Lietotāji pievienoti ({{count}}).",

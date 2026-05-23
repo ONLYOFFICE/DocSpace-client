@@ -315,7 +315,7 @@ export default class FilesHeaderOptionStore {
         return {
           id: "menu-unpin",
           key: "unpin",
-          label: t("Unpin"),
+          label: t("Common:Unpin"),
           iconUrl: UnpinReactSvgUrl,
           onClick: this.unpinHandle,
           disabled: false,
@@ -487,7 +487,7 @@ export default class FilesHeaderOptionStore {
         if (!this.isAvailableOption("vectorization")) return null;
         return {
           id: "menu-vectorization",
-          label: t("Files:Vectorization"),
+          label: t("Common:Vectorization"),
           iconUrl: RefreshReactSvgUrl,
           onClick: this.retryVectorization,
         };

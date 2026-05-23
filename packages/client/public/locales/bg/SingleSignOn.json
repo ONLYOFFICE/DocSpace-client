@@ -1,6 +1,5 @@
 {
   "AddCertificate": "Добавете сертификат",
-  "AdvancedSettings": "Разширени настройки",
   "AdvancedSettingsTooltip": "Скриване на страницата за удостоверяване по подразбиране и автоматично пренасочване към SSO услуга.",
   "AttributeMatching": "Мапинг на атрибути",
   "AttributeMatchingTooltip": "Съответствието на атрибутите за единично входно удостоверяване (Single Sign-On) с записите в раздела „Акаунти“.",
@@ -11,7 +10,6 @@
   "DownloadMetadataXML": "Изтеглете XML с метаданните на SP",
   "Encryption": "Криптиране",
   "GenerateCertificate": "Генериране на нов само-подписан сертификат",
-  "Hide": "Скриване",
   "HideAdditionalParameters": "Скриване на разширените настройки",
   "HideAuthPage": "Скриване на страницата за удостоверяване",
   "idpAuthRequest": "Проверка на подписа на отговорите за автентикация",
@@ -32,7 +30,6 @@
   "ProviderURLTooltip": "Идентификация на обекта на доставчика на самоличност (URL адрес на издателя)",
   "ServiceProviderSettings": "{{organizationName}} SP настройки",
   "ServiceProviderSettingsDescription": "Конфигурирайте настройките на Доставчика на Услуги и добавете SP сертификати за Единично Вписване.",
-  "Show": "Показване",
   "ShowAdditionalParameters": "Показване на разширени настройки",
   "Signing": "Подписване",
   "SigningAndEncryption": "Подписване и криптиране",

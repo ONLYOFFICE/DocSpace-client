@@ -1,7 +1,6 @@
 {
   "Administration": "İdarəetmə",
   "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> adını <2>«{{roomTitle}}»</2> adınadək dəyişdi",
-  "AIAgentsEmptyScreenTent": "Burada {{aiAgents}} detallarına baxın",
   "AndMoreLabel": "və <1>{{count}} daha çox</1>",
   "Data": "Məlumat",
   "ExpectUsers": "İstifadəçiləri gözləyin",
@@ -60,7 +59,6 @@
   "LastUpdateInfo": "Son yeniləmə",
   "LifetimeEnds": "İstifadə müddəti bitir",
   "MembersEmptyScreenText": "Üzvlərin məlumatlarına burada baxın",
-  "NoAgent": "{{aiAgent}} yoxdur",
   "NoRecordsFound": "Qeydlər tapılmadı",
   "Resolution": "Qərar",
   "RoomCreateUserCount": "İstifadəçilər əlavə edildi ({{count}}).",

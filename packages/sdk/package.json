@@ -32,6 +32,7 @@
   "dependencies": {
     "@docspace/shared": "workspace:*",
     "@docspace/ui-kit": "workspace:*",
+    "@tanstack/react-query": "^5.90.21",
     "adm-zip": "0.5.16",
     "classnames": "2.5.1",
     "date-and-time": "3.6.0",

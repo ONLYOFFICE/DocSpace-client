@@ -243,7 +243,7 @@ const LinkSettingsPanel = ({
                       place="right"
                       iconNode={<ButtonAlertIcon />}
                       tooltipContent={
-                        <Text>{t("Files:LinkSettingsUsersLimitToast")}</Text>
+                        <Text>{t("Common:LinkSettingsUsersLimitToast")}</Text>
                       }
                       className={styles.linkSettingsHelpButton}
                     />

@@ -532,7 +532,7 @@ export const getOptions = (
         {
           ...actions.onGoToShared(),
           icon: <FolderIcon />,
-          description: t("Files:GoToMyRooms"),
+          description: t("Common:GoToMyRooms"),
           key: "empty-view-goto-shared",
         },
       ])
@@ -696,3 +696,4 @@ export const getOptions = (
       return [];
   }
 };
+

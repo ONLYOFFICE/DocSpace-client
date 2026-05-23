@@ -62,7 +62,7 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "@docspace/shared/constants";
-import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
+import { calculateRoomLogoParams } from "@docspace/ui-kit/utils";
 import { openMembersTab, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 import { modelCache } from "SRC_DIR/components/dialogs/CreateEditAgentDialog/sub-components/modelCache";
 

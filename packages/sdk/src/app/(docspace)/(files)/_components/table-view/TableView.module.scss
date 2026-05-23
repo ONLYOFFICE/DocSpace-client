@@ -246,6 +246,22 @@
   position: relative;
 }
 
+.inlineBadges {
+  display: flex;
+  align-items: center;
+  margin-inline-start: 16px;
+
+  :global(.badges) {
+    display: flex;
+    align-items: center;
+  }
+
+  :global(.badge) {
+    cursor: pointer;
+    margin-inline-end: 8px;
+  }
+}
+
 .isHighlight {
   :global(.table-container_cell) {
     animation: Highlight 2s 1;

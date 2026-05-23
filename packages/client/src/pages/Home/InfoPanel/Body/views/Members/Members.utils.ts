@@ -55,7 +55,7 @@ class MembersHelper {
       roomAdmin: {
         key: "roomAdmin",
         label: this.t("Common:RoomManager"),
-        tooltip: this.t("InviteDialog:UserMaxAvailableRoleWarning", {
+        tooltip: this.t("Common:UserMaxAvailableRoleWarning", {
           productName: getBrandName("ProductName"),
         }),
         access: ShareAccessRights.RoomManager,
@@ -64,7 +64,7 @@ class MembersHelper {
       agentAdmin: {
         key: "agentAdmin",
         label: this.t("Common:AgentManager"),
-        tooltip: this.t("InviteDialog:UserAgentMaxAvailableRoleWarning", {
+        tooltip: this.t("Common:UserAgentMaxAvailableRoleWarning", {
           productName: getBrandName("ProductName"),
         }),
         access: ShareAccessRights.RoomManager,
@@ -74,7 +74,7 @@ class MembersHelper {
         key: "collaborator",
         label: this.t("Common:ContentCreator"),
         access: ShareAccessRights.Collaborator,
-        tooltip: this.t("InviteDialog:GuestAgentMaxAvailableRoleWarning", {
+        tooltip: this.t("Common:GuestAgentMaxAvailableRoleWarning", {
           productName: getBrandName("ProductName"),
         }),
         type: "collaborator",

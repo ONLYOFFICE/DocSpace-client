@@ -1034,6 +1034,9 @@ importers:
       '@docspace/ui-kit':
         specifier: workspace:*
         version: link:../../libs/ui-kit
+      '@tanstack/react-query':
+        specifier: ^5.90.21
+        version: 5.100.10(react@19.2.4)
       adm-zip:
         specifier: 0.5.16
         version: 0.5.16

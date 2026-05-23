@@ -24,7 +24,6 @@
   "NeedMoreIntegrationsDescription": "Nutzen Sie Webhooks, um Daten an Ihr eigenes System zu senden, oder verbinden Sie Formulare mit Tausenden von Diensten über Zapier.",
   "NoDatabaseConnections": "Keine Datenbankverbindungen konfiguriert",
   "NoDatabaseConnectionsRoomAdmin": "Datenbankverbindungen werden von einem Administrator konfiguriert. Sobald eine Datenbank eingerichtet ist, können Sie den Export hier aktivieren.",
-  "PeopleSelectorInfo": "Nur ein Raumadministrator oder ein {{productName}}-Administrator kann Besitzer des Raums werden",
   "Position": "Position",
   "PublicRoomBarDescription": "Dieser Raum ist für jeden zugänglich, der den Link hat. Der Zugang für externe Nutzer ist abhängig von der gewählten Art der Zugangsrechte.",
   "PublicRoomSystemFoldersDescription": "Systemordner speichern Kopien von Formularen in verschiedenen Stadien der Fertigstellung. Formulare, die gerade ausgefüllt werden, werden im Ordner „In Bearbeitung“ gespeichert, und ausgefüllte Formulare werden im Ordner „Abgeschlossen“ gespeichert.",

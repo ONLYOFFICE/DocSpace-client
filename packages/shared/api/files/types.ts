@@ -218,7 +218,7 @@ export type TFolder = {
   parentShared?: boolean;
   parentRoomType?: FolderType;
   order?: string;
-  isRoom?: false;
+  isRoom?: boolean;
   rootRoomType?: RoomsType;
   shareSettings?: TShareSettings;
   availableShareRights?: TAvailableShareRights;

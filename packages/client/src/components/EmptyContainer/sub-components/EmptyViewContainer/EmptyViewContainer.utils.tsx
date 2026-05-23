@@ -306,7 +306,7 @@ export const getRootDescription = (
       t("Common:EmptyFavoritesDescription"),
     )
     .with([FolderType.Archive, ShareAccessRights.None], () =>
-      t("Files:ArchiveEmptyScreen", {
+      t("Common:ArchiveEmptyScreen", {
         productName: getBrandName("ProductName"),
       }),
     )
@@ -433,7 +433,7 @@ export const getRootTitle = (
     .with([FolderType.SHARE, P._], () => t("Common:EmptyShareTitle"))
     .with([FolderType.Favorites, P._], () => t("Common:EmptyFavoritesTitle"))
     .with([FolderType.Recent, P._], () => t("Common:NoRecentFilesHereYet"))
-    .with([FolderType.Archive, P._], () => t("Files:ArchiveEmptyScreenHeader"))
+    .with([FolderType.Archive, P._], () => t("Common:ArchiveEmptyScreenHeader"))
     .with([FolderType.TRASH, P._], () => t("Common:EmptyScreenFolder"))
     .otherwise(() => "");
 };
@@ -798,3 +798,4 @@ export const helperOptions = (
     createUploadFromDeviceOption,
   };
 };
+

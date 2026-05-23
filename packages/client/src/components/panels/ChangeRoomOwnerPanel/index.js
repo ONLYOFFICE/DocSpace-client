@@ -194,19 +194,19 @@ const ChangeRoomOwner = (props) => {
 
   const headerLabel = isAIAgent
     ? t("Files:ChangeTheAgentOwner")
-    : t("Files:ChangeTheRoomOwner");
+    : t("Common:ChangeTheRoomOwner");
 
   const infoText = isAIAgent
     ? t("Files:ChangeAgentOwnerSelectorInfo", {
         productName: getBrandName("ProductName"),
       })
-    : t("CreateEditRoomDialog:PeopleSelectorInfo", {
+    : t("Common:PeopleSelectorInfo", {
         productName: getBrandName("ProductName"),
       });
 
   const footerCheckboxLabel = isAIAgent
     ? t("Files:LeaveTheAgent")
-    : t("Files:LeaveTheRoom");
+    : t("Common:LeaveTheRoom");
 
   const selectorComponent = excludeReady ? (
     <PeopleSelector
@@ -214,7 +214,7 @@ const ChangeRoomOwner = (props) => {
       onCancel={handleClosePanel}
       cancelButtonLabel=""
       disableSubmitButton={false}
-      submitButtonLabel={showBackButton ? "" : t("Files:AssignOwner")}
+      submitButtonLabel={showBackButton ? "" : t("Common:AssignOwner")}
       onSubmit={onChangeRoomOwner}
       withHeader
       headerProps={{
@@ -312,3 +312,4 @@ export default inject(
     ),
   ),
 );
+

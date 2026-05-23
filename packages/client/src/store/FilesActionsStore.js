@@ -3607,7 +3607,7 @@ class FilesActionStore {
     const isRoot = this.selectedFolderStore.isRootFolder;
 
     const roomSuccessText = isOwner
-      ? t("Files:LeftAndAppointNewOwner")
+      ? t("Common:LeftAndAppointNewOwner")
       : t("Files:YouLeftTheRoom");
     const agentSuccessText = isOwner
       ? t("Files:LeftAgentAndAppointNewOwner")
@@ -3678,7 +3678,7 @@ class FilesActionStore {
         }
 
         if (isLeaveChecked) await this.onLeaveRoom(t);
-        else toastr.success(t("Files:AppointNewOwner"));
+        else toastr.success(t("Common:AppointNewOwner"));
       })
       .catch((e) => toastr.error(e))
       .finally(() => {
@@ -4377,3 +4377,4 @@ class FilesActionStore {
 }
 
 export default FilesActionStore;
+

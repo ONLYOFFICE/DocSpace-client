@@ -198,8 +198,7 @@ const DeleteDialogComponent = (props) => {
       return t("Common:DeletePermanently");
     }
 
-    if (isRecycleBinFolder)
-      return t("Common:DeleteForeverButton");
+    if (isRecycleBinFolder) return t("Common:DeleteForeverButton");
 
     if (isPrivacyFolder || selection[0]?.providerKey)
       return t("Common:OKButton");
@@ -219,8 +218,8 @@ const DeleteDialogComponent = (props) => {
     }
 
     if (isRoomDelete) {
-      if (selection.length > 1) return t("DeleteRoomsTitle");
-      return t("DeleteRoomTitle");
+      if (selection.length > 1) return t("Common:DeleteRoomsTitle");
+      return t("Common:DeleteRoomTitle");
     }
 
     if (isRecycleBinFolder) return t("EmptyTrashDialog:DeleteForeverTitle");
@@ -275,7 +274,7 @@ const DeleteDialogComponent = (props) => {
                 ? t("DeleteAIAgentWarning")
                 : isTemplate
                   ? t("DeleteTemplateWarning")
-                  : t("DeleteRoomWarning")
+                  : t("Common:DeleteRoomWarning")
             }
             dataTestId="delete_warning_checkbox"
             isChecked={isChecked}
@@ -390,3 +389,4 @@ export default inject(
     };
   },
 )(observer(DeleteDialog));
+

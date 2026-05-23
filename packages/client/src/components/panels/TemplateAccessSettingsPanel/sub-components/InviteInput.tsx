@@ -268,7 +268,7 @@ const InviteInput = ({
           onClick={openUsersPanel}
           dataTestId="template_access_settings_choose_from_list_link"
         >
-          {t("Translations:ChooseFromList")}
+          {t("Common:ChooseFromList")}
         </Link>
       </Heading>
       <Text className={styles.description}>
@@ -318,6 +318,4 @@ const InviteInput = ({
   );
 };
 
-export default withTranslation(["InviteDialog", "Common", "Translations"])(
-  InviteInput,
-);
+export default withTranslation(["InviteDialog", "Common"])(InviteInput);

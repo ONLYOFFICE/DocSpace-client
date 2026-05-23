@@ -72,6 +72,7 @@ const List = ({
   total: totalProp,
   current,
   currentUserId,
+  withoutFavorite,
   infoPanelVisible,
 }: ListProps) => {
   const timezone = portalSettings.timezone;
@@ -101,7 +102,8 @@ const List = ({
     filesSettings,
   });
 
-  const rootFolderType = filesListStore.rootFolderType ?? current.rootFolderType;
+  const rootFolderType =
+    filesListStore.rootFolderType ?? current.rootFolderType;
   const rootFolderTypeRef = React.useRef(rootFolderType);
   rootFolderTypeRef.current = rootFolderType;
 
@@ -113,6 +115,7 @@ const List = ({
     isTrashSection: rootFolderType === FolderType.TRASH,
     isDocsSection: rootFolderType === FolderType.USER,
     isShareSection: rootFolderType === FolderType.SHARE,
+    withoutFavorite,
   });
 
   const [filter, setFilter] = React.useState<FilesFilter>(
@@ -122,15 +125,18 @@ const List = ({
     } as Location)!,
   );
   const [filesList, setFilesList] = React.useState<(TFolderItem | TFileItem)[]>(
-    [...folders.map(convertFolderToItem), ...files.map((file) => convertFileToItem(file))],
+    [
+      ...folders.map(convertFolderToItem),
+      ...files.map((file) => convertFileToItem(file)),
+    ],
   );
   const [total, setTotal] = React.useState<number>(totalProp);
   const [hasNextPage, setHasNextPage] = React.useState<boolean>(
     filesList.length < total,
   );
-  const [currentFolderId, setCurrentFolderId] = React.useState<
-    string | number
-  >(current.id);
+  const [currentFolderId, setCurrentFolderId] = React.useState<string | number>(
+    current.id,
+  );
 
   const requestRunning = React.useRef(false);
   const isInit = React.useRef(false);
@@ -153,6 +159,13 @@ const List = ({
 
     requestRunning.current = true;
     const newFilter = FilesFilter.getFilter(window.location)!;
+
+    const urlHasFolder = new URLSearchParams(window.location.search).has(
+      "folder",
+    );
+    if (!urlHasFolder) {
+      newFilter.folder = String(currentFolderId);
+    }
 
     newFilter.page = 0;
     newFilter.pageCount = PAGE_COUNT;
@@ -195,7 +208,8 @@ const List = ({
         ...newFiles.map((file) =>
           convertFileToItem(file, {
             isRecentSection: rootFolderTypeRef.current === FolderType.Recent,
-            isFavoritesSection: rootFolderTypeRef.current === FolderType.Favorites,
+            isFavoritesSection:
+              rootFolderTypeRef.current === FolderType.Favorites,
           }),
         ),
       ];
@@ -296,7 +310,8 @@ const List = ({
     setRootFolderType(current.rootFolderType);
   }, [current.rootFolderType, setRootFolderType]);
 
-  const visibleItems = filesListStore.items.length > 0 ? filesListStore.items : filesList;
+  const visibleItems =
+    filesListStore.items.length > 0 ? filesListStore.items : filesList;
 
   if (visibleItems.length === 0) {
     return (

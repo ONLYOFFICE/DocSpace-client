@@ -393,6 +393,26 @@ const ClientRoutes = [
         },
       },
       {
+        path: "/ai-rooms",
+        async lazy() {
+          const { AiRooms } = await componentLoader(
+            () => import("SRC_DIR/pages/AiRooms"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ProtectedAppRoute appId="ai-rooms">
+                <ErrorBoundary>
+                  <AiRooms />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
         path: "/docs-cloud",
         async lazy() {
           const { DocsCloud } = await componentLoader(
@@ -718,8 +738,7 @@ const ClientRoutes = [
     async lazy() {
       const { default: NoAccessContainer, NoAccessContainerType } =
         await componentLoader(
-          () =>
-            import("SRC_DIR/components/EmptyContainer/NoAccessContainer"),
+          () => import("SRC_DIR/components/EmptyContainer/NoAccessContainer"),
         );
 
       const Component = () => (
@@ -772,3 +791,4 @@ const ClientRoutes = [
 ];
 
 export default ClientRoutes;
+

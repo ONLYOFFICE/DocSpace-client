@@ -11,6 +11,11 @@ type UseItemContextMenuProps = {
   isTrashSection?: boolean;
   isDocsSection?: boolean;
   isShareSection?: boolean;
+  /**
+   * Temporary flag: hide the "Add to favorites" context menu entry.
+   * Used for rooms internals and trash where favoriting is undesired.
+   */
+  withoutFavorite?: boolean;
 };
 
 export default function useItemContextMenu({
@@ -19,6 +24,7 @@ export default function useItemContextMenu({
   isTrashSection = false,
   isDocsSection = false,
   isShareSection = false,
+  withoutFavorite = false,
 }: UseItemContextMenuProps = {}) {
   const { filesSettings } = useFilesSettingsStore();
 
@@ -123,10 +129,12 @@ export default function useItemContextMenu({
 
     if (!file.canShare) model.delete(AVAILABLE_CONTEXT_ITEMS.share);
 
-    if (effectiveIsFavoritesSection || file.isFavorite) {
-      model.add(AVAILABLE_CONTEXT_ITEMS.removeFromFavorites);
-    } else {
-      model.add(AVAILABLE_CONTEXT_ITEMS.markAsFavorite);
+    if (!withoutFavorite) {
+      if (effectiveIsFavoritesSection || file.isFavorite) {
+        model.add(AVAILABLE_CONTEXT_ITEMS.removeFromFavorites);
+      } else {
+        model.add(AVAILABLE_CONTEXT_ITEMS.markAsFavorite);
+      }
     }
 
     if (effectiveIsRecentSection) {
@@ -179,7 +187,7 @@ export default function useItemContextMenu({
     }
 
     return Array.from(model);
-  }, [isFavoritesSection, isRecentSection, isTrashSection, isDocsSection, isShareSection, filesSettings?.extsWebCustomFilterEditing, filesSettings?.extsWebEdited]);
+  }, [isFavoritesSection, isRecentSection, isTrashSection, isDocsSection, isShareSection, filesSettings?.extsWebCustomFilterEditing, filesSettings?.extsWebEdited, withoutFavorite]);
 
   const getFoldersContextMenu = useCallback((folder: TFolder) => {
     if (isShareSection) {
@@ -201,10 +209,12 @@ export default function useItemContextMenu({
       AVAILABLE_CONTEXT_ITEMS.download,
     ];
 
-    if (folder.isFavorite) {
-      items.push(AVAILABLE_CONTEXT_ITEMS.removeFromFavorites);
-    } else {
-      items.push(AVAILABLE_CONTEXT_ITEMS.markAsFavorite);
+    if (!withoutFavorite) {
+      if (folder.isFavorite) {
+        items.push(AVAILABLE_CONTEXT_ITEMS.removeFromFavorites);
+      } else {
+        items.push(AVAILABLE_CONTEXT_ITEMS.markAsFavorite);
+      }
     }
 
     if (isFavoritesSection || isRecentSection) {
@@ -232,7 +242,7 @@ export default function useItemContextMenu({
     }
 
     return items;
-  }, [isTrashSection, isDocsSection, isShareSection, isFavoritesSection, isRecentSection]);
+  }, [isTrashSection, isDocsSection, isShareSection, withoutFavorite, isFavoritesSection, isRecentSection]);
 
   return { getFilesContextMenu, getFoldersContextMenu };
 }

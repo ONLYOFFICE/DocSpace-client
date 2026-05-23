@@ -170,13 +170,13 @@ class DetailsHelper {
       "isRoom" in this.item && this.item.isRoom
         ? [
             "Owner",
-            this.item.providerKey && "Storage Type",
+            (this.item as TRoom).providerKey && "Storage Type",
             "Type",
             "Content",
             "Date modified",
             "Last modified by",
             "Creation date",
-            this.item.tags?.length && "Tags",
+            (this.item as TRoom).tags?.length && "Tags",
             "Storage",
           ]
         : "isFolder" in this.item && this.item.isFolder

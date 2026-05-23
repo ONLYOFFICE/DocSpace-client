@@ -137,7 +137,7 @@ const NoAccessContainer = (props: Props) => {
                 icon: <FolderIcon />,
                 onClick: onGoTo,
                 key: "empty-view-goto-rooms",
-                description: t("GoToMyRooms"),
+                description: t("Common:GoToMyRooms"),
               },
             ],
       };
@@ -202,3 +202,4 @@ export default inject<TStore>(
     };
   },
 )(withTranslation(["Files", "AIRoom"])(observer(NoAccessContainer)));
+

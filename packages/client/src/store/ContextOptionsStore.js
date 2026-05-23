@@ -1524,7 +1524,7 @@ class ContextOptionsStore {
       {
         id: "option_pin-room",
         key: "pin-room",
-        label: t("PinToTop"),
+        label: t("Common:PinToTop"),
         icon: PinReactSvgUrl,
         onClick: () => this.onClickPin("pin", item.id, t, item.isAIAgent),
         disabled:
@@ -1534,7 +1534,7 @@ class ContextOptionsStore {
       {
         id: "option_unpin-room",
         key: "unpin-room",
-        label: t("Unpin"),
+        label: t("Common:Unpin"),
         icon: UnpinReactSvgUrl,
         onClick: () => this.onClickPin("unpin", item.id, t, item.isAIAgent),
         disabled:
@@ -1550,7 +1550,7 @@ class ContextOptionsStore {
       {
         id: "option_unmute-room",
         key: "unmute-room",
-        label: t("EnableNotifications"),
+        label: t("Common:EnableNotifications"),
         icon: UnmuteReactSvgUrl,
         onClick: () => this.onClickMute("unmute", item, t),
         disabled: !canMute,
@@ -1558,7 +1558,7 @@ class ContextOptionsStore {
       {
         id: "option_mute-room",
         key: "mute-room",
-        label: t("DisableNotifications"),
+        label: t("Common:DisableNotifications"),
         icon: MuteReactSvgUrl,
         onClick: () => this.onClickMute("mute", item, t),
         disabled: !canMute,
@@ -2287,7 +2287,7 @@ class ContextOptionsStore {
       {
         id: "option_edit-room",
         key: "edit-room",
-        label: t("EditRoom"),
+        label: t("Common:EditRoom"),
         icon: SettingsReactSvgUrl,
         onClick: () => this.onClickEditRoom(item),
         disabled: false,
@@ -2584,7 +2584,7 @@ class ContextOptionsStore {
       {
         id: "option_change-room-owner",
         key: "change-room-owner",
-        label: t("Files:ChangeRoomOwner"),
+        label: t("Common:ChangeRoomOwner"),
         icon: ReconnectSvgUrl,
         onClick: this.onChangeRoomOwner,
         disabled: isAIAgent,
@@ -2737,7 +2737,7 @@ class ContextOptionsStore {
       {
         id: "option_leave-room",
         key: "leave-room",
-        label: isAIAgent ? t("LeaveTheAgent") : t("LeaveTheRoom"),
+        label: isAIAgent ? t("LeaveTheAgent") : t("Common:LeaveTheRoom"),
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
         disabled: isKnowledgeOrResult
@@ -2747,7 +2747,7 @@ class ContextOptionsStore {
       {
         id: "option_archive-room",
         key: "archive-room",
-        label: t("MoveToArchive"),
+        label: t("Common:MoveToArchive"),
         icon: RoomArchiveSvgUrl,
         onClick: () => this.onClickArchive("archive"),
         disabled: false,
@@ -3241,14 +3241,14 @@ class ContextOptionsStore {
       const pinOption = isPinOption
         ? {
             key: "pin-room",
-            label: t("PinToTop"),
+            label: t("Common:PinToTop"),
             icon: PinReactSvgUrl,
             onClick: () => pinRooms(t),
             disabled: false,
           }
         : {
             key: "unpin-room",
-            label: t("Unpin"),
+            label: t("Common:Unpin"),
             icon: UnpinReactSvgUrl,
             onClick: () => unpinRooms(t),
             disabled: false,
@@ -3257,7 +3257,7 @@ class ContextOptionsStore {
       if (canArchiveRoom) {
         archiveOptions = {
           key: "archive-room",
-          label: t("MoveToArchive"),
+          label: t("Common:MoveToArchive"),
           icon: RoomArchiveSvgUrl,
           onClick: (e) => this.onClickArchive("archive"),
           disabled: false,

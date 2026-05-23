@@ -24,7 +24,6 @@
   "NeedMoreIntegrationsDescription": "Folosiți webhook-uri pentru a trimite date către sistemul dvs. sau conectați formularele la mii de servicii prin Zapier.",
   "NoDatabaseConnections": "Nicio conexiune la bază de date configurată",
   "NoDatabaseConnectionsRoomAdmin": "Conexiunile la baza de date sunt configurate de către un administrator. Odată ce o bază de date este configurată, veți putea activa exportul aici.",
-  "PeopleSelectorInfo": "Numai administratorul sălii sau administratorul spaţiului {{productName}} poate deveni proprietar al sălii",
   "Position": "Poziția",
   "PublicRoomBarDescription": "Această sală este disponibilă tuturor la link-ul. Accesul utilizatorilor externi se acordă În funcție de nivelul de acces permis.",
   "PublicRoomSystemFoldersDescription": "Copiile formularelor la diferite etape de completare sunt stocate în foldere de sistem. Formularele în curs de completare sunt stocate în folderul În curs de completare, iar cele completate sunt stocate în folderul Formulare competate.",

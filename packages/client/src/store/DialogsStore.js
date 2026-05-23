@@ -323,6 +323,7 @@ class DialogsStore {
   removeUserConfirmation = {
     visible: false,
     callback: null,
+    isEncryptedRoom: false,
   };
 
   isShareFormData = { visible: false, updateAccessLink: null, fileId: null };
@@ -1072,7 +1073,7 @@ class DialogsStore {
   getLogoCoverModel = (t, hasImage, onDelete) => {
     return [
       {
-        label: t("RoomLogoCover:UploadPicture"),
+        label: t("Common:UploadPicture"),
         icon: UploadSvgUrl,
         key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_UPLOAD,
         onClick: (ref) => ref.current.click(),
@@ -1086,7 +1087,7 @@ class DialogsStore {
             onClick: onDelete ? onDelete() : () => this.deleteRoomLogo(),
           }
         : {
-            label: t("RoomLogoCover:CustomizeCover"),
+            label: t("Common:CustomizeCover"),
             icon: PenSvgUrl,
             key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_CUSTOMIZE_COVER,
             onClick: () => this.setRoomLogoCoverDialogVisible(true),
@@ -1118,11 +1119,17 @@ class DialogsStore {
   /**
    * @param {boolean} visible
    * @param {()=>Promise<void>=} callback
+   * @param {boolean} [isEncryptedRoom=false]
    */
-  setRemoveUserConfirmation = (visible, callback = null) => {
+  setRemoveUserConfirmation = (
+    visible,
+    callback = null,
+    isEncryptedRoom = false,
+  ) => {
     this.removeUserConfirmation = {
       visible,
       callback,
+      isEncryptedRoom,
     };
   };
 
@@ -1212,3 +1219,4 @@ class DialogsStore {
 }
 
 export default DialogsStore;
+

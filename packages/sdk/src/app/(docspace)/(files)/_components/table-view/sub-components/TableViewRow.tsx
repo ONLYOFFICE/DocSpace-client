@@ -63,15 +63,24 @@ import { DeleteContext } from "../../../../_contexts/DeleteContext";
 import { FileOperationsContext } from "../../../../_contexts/FileOperationsContext";
 import { RenameContext } from "../../../../_contexts/RenameContext";
 import { VersionHistoryContext } from "../../../../_contexts/VersionHistoryContext";
+import { ConvertContext } from "../../../../_contexts/ConvertContext";
 import type { TFileItem } from "../../../../_hooks/useItemList";
 import { generateFilesItemValue } from "../../../_utils";
 import getTitleWithoutExt from "../../../../_utils/get-title-without-ext";
 
 import type { TableViewRowProps } from "../TableView.types";
 import styles from "../TableView.module.scss";
+import AuthorCell from "./AuthorCell";
 
 const TableViewRow = observer(
-  ({ item, index, timezone, displayFileExtension, lastColumn }: TableViewRowProps) => {
+  ({
+    item,
+    index,
+    timezone,
+    displayFileExtension,
+    lastColumn,
+    currentUserId,
+  }: TableViewRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
     const { filesSettings } = useFilesSettingsStore();
@@ -94,6 +103,7 @@ const TableViewRow = observer(
     const fileOpsCtx = React.useContext(FileOperationsContext);
     const renameCtx = React.useContext(RenameContext);
     const onShowVersionHistory = React.useContext(VersionHistoryContext);
+    const onConvert = React.useContext(ConvertContext);
 
     const { getContextMenuModel } = useContextMenuModel({
       item: observableItem,
@@ -121,6 +131,21 @@ const TableViewRow = observer(
       "LT",
       timezone ?? "UTC",
     );
+
+    const createdDate = getCorrectDate(
+      i18n.language || "",
+      item.created,
+      "L",
+      "LT",
+      timezone ?? "UTC",
+    );
+
+    const fileOwner =
+      item.createdBy &&
+      ((currentUserId && currentUserId === item.createdBy.id
+        ? t("Common:MeLabel")
+        : item.createdBy.displayName) ??
+        "");
 
     const fileSize = "contentLength" in item ? item.contentLength : "";
     const fileType =
@@ -198,6 +223,11 @@ const TableViewRow = observer(
           }}
           onClickFavorite={onClickFavorite}
           onClickLock={onClickLock}
+          setConvertDialogVisible={
+            !observableItem.isFolder && onConvert
+              ? () => onConvert(observableItem as TFileItem)
+              : undefined
+          }
           onShowVersionHistory={
             !observableItem.isFolder && onShowVersionHistory
               ? () => onShowVersionHistory(observableItem as TFileItem)
@@ -227,6 +257,7 @@ const TableViewRow = observer(
       <TableRow
         className={classNames({
           "table-row-selected": isChecked,
+          [styles.isHighlight]: filesListStore.highlightFileId === item.id,
         })}
         checked={isChecked}
         contextOptions={contextMenuModel}
@@ -248,9 +279,10 @@ const TableViewRow = observer(
           <div className="table-container_element-container" onClick={(e) => e.stopPropagation()}>
             <div className="table-container_element">
               <RoomIcon
-                logo={item.icon}
+                logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
+                color={"isRoom" in item && item.isRoom ? item.roomIconColor : undefined}
                 title={item.title}
-                showDefault={false}
+                showDefault={"isRoom" in item && item.isRoom ? !item.hasRoomImage : false}
               />
             </div>
             <Checkbox
@@ -268,6 +300,19 @@ const TableViewRow = observer(
           </span>
           {badgesNode}
           {lastColumn === "Name" ? quickButtonsNode : null}
+        </TableCell>
+        <TableCell className={lastColumn === "Author" ? styles.lastCell : undefined}>
+          {item.createdBy ? (
+            <AuthorCell
+              fileOwner={fileOwner || ""}
+              createdBy={item.createdBy}
+            />
+          ) : null}
+          {lastColumn === "Author" ? quickButtonsNode : null}
+        </TableCell>
+        <TableCell className={lastColumn === "Created" ? styles.lastCell : undefined}>
+          <span className={styles.secondaryCell} suppressHydrationWarning>{createdDate}</span>
+          {lastColumn === "Created" ? quickButtonsNode : null}
         </TableCell>
         <TableCell className={lastColumn === "Modified" ? styles.lastCell : undefined}>
           <span className={styles.secondaryCell} suppressHydrationWarning>{modifiedDate}</span>

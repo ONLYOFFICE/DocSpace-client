@@ -57,7 +57,6 @@
   "RequestHeaderCopied": "Η επικεφαλίδα της αίτησης POST αντιγράφηκε επιτυχώς στο πρόχειρο",
   "RequestPostBody": "Σώμα αίτησης POST",
   "RequestPostHeader": "Κεφαλίδα αίτησης POST",
-  "ResetKey": "Επαναφορά κλειδιού",
   "Response": "Απάντηση",
   "ResponseBodyCopied": "Το σώμα της απάντησης POST αντιγράφηκε επιτυχώς στο πρόχειρο",
   "ResponseHeaderCopied": "Η επικεφαλίδα απάντησης POST αντιγράφηκε επιτυχώς στο πρόχειρο",

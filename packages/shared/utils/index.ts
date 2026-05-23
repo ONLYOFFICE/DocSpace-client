@@ -64,14 +64,12 @@ import {
   INFO_PANEL_WIDTH,
   isMobileDevice,
 } from "@docspace/ui-kit/utils/device";
-import commonIconsStyles, {
+import {
   IconSizeType,
   isIconSizeType,
 } from "@docspace/ui-kit/utils/common-icons-style";
 import { classNames } from "./classNames";
 import { getBannerAttribute, getLanguage } from "./banner";
-import { NoUserSelect } from "./commonStyles";
-import { commonInputStyles } from "./commonInputStyles";
 import {
   RoomsTypeValues,
   RoomsTypes,
@@ -90,7 +88,6 @@ import {
 import { getTitleWithoutExtension } from "./getTitleWithoutExtension";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
 import type { TRoom } from "../api/rooms/types";
-import { injectDefaultTheme } from "./injectDefaultTheme";
 import { getFromSessionStorage } from "./getFromSessionStorage";
 import { saveToSessionStorage } from "./saveToSessionStorage";
 import { getFromLocalStorage } from "./getFromLocalStorage";
@@ -111,8 +108,6 @@ export {
   RoomsTypes,
   parseAddresses,
   getParts,
-  NoUserSelect,
-  commonInputStyles,
   INFO_PANEL_WIDTH,
   EmailSettings,
   parseAddress,
@@ -122,7 +117,6 @@ export {
   isArrayEqual,
   getBannerAttribute,
   classNames,
-  commonIconsStyles,
   IconSizeType,
   isIconSizeType,
   size,
@@ -143,7 +137,6 @@ export {
   isMobileDevice,
   onEdgeScrolling,
   clearEdgeScrollingTimer,
-  injectDefaultTheme,
   getFromSessionStorage,
   saveToSessionStorage,
   getFromLocalStorage,

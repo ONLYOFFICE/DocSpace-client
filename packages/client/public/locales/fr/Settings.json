@@ -228,7 +228,6 @@
   "QuotasDescription": "Ici, vous pouvez définir le quota de stockage pour les utilisateurs et les salles.",
   "Recalculate": "Recalculer",
   "RegisterApp": "Enregistrer une application",
-  "ResetSettings": "Réinitialiser les paramètres",
   "ResetTemplateDescription": "Êtes-vous sûr de vouloir réinitialiser l'état actuel du modèle à son état par défaut ?\n Vous ne pourrez pas annuler cette action.",
   "ResetToDefault": "Réinitialiser aux valeurs par défaut",
   "RestAPI": "REST API",

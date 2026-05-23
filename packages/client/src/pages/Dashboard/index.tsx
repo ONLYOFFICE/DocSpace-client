@@ -53,8 +53,12 @@ import { useAppsCatalog, type AppId } from "SRC_DIR/helpers/apps-catalog";
 
 import { ModuleCard, type ModuleItem } from "./ModuleCard";
 import { getGreetingKey, makeCreateUrl, NEW_FILE_NAMES } from "./utils";
-import { InstallAiFormsDialog } from "./InstallModuleDialog";
+import {
+  InstallAiFormsDialog,
+  InstallDocsCloudDialog,
+} from "./InstallModuleDialog";
 import { InstallAiArbiterDialog } from "./InstallAiArbiterDialog";
+import { EnableAiRoomsDialog } from "./EnableAiRoomsDialog";
 import styles from "./Dashboard.module.scss";
 
 interface DashboardProps {
@@ -63,6 +67,7 @@ interface DashboardProps {
   isAdminOrOwner: boolean;
   isAppEnabled: (id: string) => boolean;
   activate: (id: string) => Promise<boolean>;
+  enable: (id: string, enabled: boolean) => Promise<unknown>;
   ensureAppsLoaded: () => void;
 }
 
@@ -72,6 +77,7 @@ const Dashboard = ({
   isAdminOrOwner,
   isAppEnabled,
   activate,
+  enable,
   ensureAppsLoaded,
 }: DashboardProps) => {
   const { t } = useTranslation(["Common"]);
@@ -80,6 +86,10 @@ const Dashboard = ({
   const [myFolderId, setMyFolderId] = React.useState<number | null>(null);
   const [installDialogVisible, setInstallDialogVisible] = React.useState(false);
   const [arbiterDialogVisible, setArbiterDialogVisible] = React.useState(false);
+  const [docsCloudDialogVisible, setDocsCloudDialogVisible] =
+    React.useState(false);
+  const [enableAiRoomsVisible, setEnableAiRoomsVisible] = React.useState(false);
+  const [enableAiRoomsLoading, setEnableAiRoomsLoading] = React.useState(false);
 
   React.useEffect(() => {
     ensureAppsLoaded();
@@ -167,7 +177,51 @@ const Dashboard = ({
       }
       return;
     }
+
+    if (modId === "ai-agents") {
+      try {
+        const activated = await activate("ai-agents");
+        if (activated) {
+          navigate("/ai-agents");
+        } else {
+          toastr.error(t("Common:SomethingWentWrong"));
+        }
+      } catch (err) {
+        console.error("Failed to activate ai-agents", err);
+        toastr.error(t("Common:SomethingWentWrong"));
+      }
+      return;
+    }
+
+    if (modId === "docs-cloud") {
+      if (isAppEnabled("docs-cloud")) {
+        navigate("/docs-cloud");
+      } else {
+        setDocsCloudDialogVisible(true);
+      }
+      return;
+    }
+
+    if (modId === "ai-rooms") {
+      setEnableAiRoomsVisible(true);
+      return;
+    }
+
     toastr.info(t("Common:UnderDevelopment"));
+  };
+
+  const handleConfirmEnableAiRooms = async () => {
+    setEnableAiRoomsLoading(true);
+    try {
+      await enable("ai-rooms", true);
+      setEnableAiRoomsVisible(false);
+      navigate("/ai-rooms");
+    } catch (err) {
+      console.error("Failed to enable ai-rooms", err);
+      toastr.error(t("Common:SomethingWentWrong"));
+    } finally {
+      setEnableAiRoomsLoading(false);
+    }
   };
 
   const handleInstalled = () => {
@@ -178,6 +232,11 @@ const Dashboard = ({
   const handleArbiterInstalled = () => {
     setArbiterDialogVisible(false);
     navigate("/ai-arbiter");
+  };
+
+  const handleDocsCloudInstalled = () => {
+    setDocsCloudDialogVisible(false);
+    navigate("/docs-cloud");
   };
 
   const greetingName = firstName ? `, ${firstName}` : "";
@@ -299,6 +358,17 @@ const Dashboard = ({
         onClose={() => setArbiterDialogVisible(false)}
         onInstalled={handleArbiterInstalled}
       />
+      <InstallDocsCloudDialog
+        visible={docsCloudDialogVisible}
+        onClose={() => setDocsCloudDialogVisible(false)}
+        onInstalled={handleDocsCloudInstalled}
+      />
+      <EnableAiRoomsDialog
+        visible={enableAiRoomsVisible}
+        isLoading={enableAiRoomsLoading}
+        onClose={() => setEnableAiRoomsVisible(false)}
+        onConfirm={handleConfirmEnableAiRooms}
+      />
     </div>
   );
 };
@@ -311,6 +381,7 @@ const DashboardConnected = inject<TStore>(
     pricingUrl: settingsStore.docspacePricesUrl,
     isAppEnabled: appsStore.isEnabled,
     activate: appsStore.activate,
+    enable: appsStore.enable,
     ensureAppsLoaded: appsStore.ensureLoaded,
   }),
 )(observer(Dashboard));

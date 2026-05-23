@@ -57,6 +57,7 @@ const serializeFilter = (filter: FilesFilter) => {
     ["filterType", filter.filterType?.toString()],
     ["search", filter.search],
     ["key", filter.key],
+    ["parentId", filter.parentId as string | number | null | undefined],
   ];
 
   for (const [key, value] of entries) {
@@ -84,6 +85,7 @@ export default async function Docs({
   if (params.sortBy) filter.sortBy = params.sortBy as typeof filter.sortBy;
   if (params.sortOrder) filter.sortOrder = params.sortOrder as typeof filter.sortOrder;
   if (params.search) filter.search = params.search;
+  if (params.parentId) filter.parentId = params.parentId;
 
   const filesFilter = serializeFilter(filter);
 

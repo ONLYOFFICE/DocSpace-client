@@ -63,23 +63,27 @@ const Card = ({ children }: { children: React.ReactNode }) => {
   const getItemSize = (child: React.ReactNode) => {
     const horizontalGap = 16;
     const verticalGap = 14;
+    const verticalRoomGap = 16;
     const headerMargin = 15;
 
     const folderHeight = 64 + verticalGap;
+    const roomHeight = 104 + verticalRoomGap;
     const fileHeight = 220 + horizontalGap;
     const titleHeight = 20 + headerMargin;
+    const templateHeight = 126 + verticalRoomGap;
 
     if (!React.isValidElement(child)) return titleHeight;
 
-    const isFile = (child?.props as { className: string })?.className?.includes(
-      "file",
-    );
-    const isFolder = (
-      child?.props as { className: string }
-    )?.className?.includes("folder");
+    const className = (child?.props as { className?: string })?.className ?? "";
+    const isFile = className.includes("file");
+    const isFolder = className.includes("folder");
+    const isRoom = className.includes("room");
+    const isTemplate = className.includes("template");
 
+    if (isRoom) return roomHeight;
     if (isFolder) return folderHeight;
     if (isFile) return fileHeight;
+    if (isTemplate) return templateHeight;
     return titleHeight;
   };
 
@@ -139,11 +143,25 @@ const InfiniteGrid = (props: InfiniteGridProps) => {
     const card = cards[cards.length - 1];
     const listItem = list[list.length - 1];
 
-    const isFile = useTempList
-      ? card?.props?.children?.props?.className?.includes("file")
-      : listItem?.props?.className?.includes("isFile");
+    const cardClassName = card?.props?.children?.props?.className ?? "";
+    const listClassName = listItem?.props?.className ?? "";
 
-    return isFile ? "isFile" : "isFolder";
+    const isFile = useTempList
+      ? cardClassName.includes("file")
+      : listClassName.includes("isFile");
+    if (isFile) return "isFile";
+
+    const isFolder = useTempList
+      ? cardClassName.includes("folder")
+      : listClassName.includes("isFolder");
+    if (isFolder) return "isFolder";
+
+    const isTemplate = useTempList
+      ? cardClassName.includes("template")
+      : listClassName.includes("isTemplate");
+    if (isTemplate) return "isTemplate";
+
+    return "isRoom";
   };
 
   const onResize = useCallback(() => {
@@ -187,8 +205,17 @@ const InfiniteGrid = (props: InfiniteGridProps) => {
               </HeaderItem>,
             );
           } else {
-            const isFile = childElement.props?.className?.includes("file");
-            const cls = isFile ? "isFile" : "isFolder";
+            const childClassName = childElement.props?.className ?? "";
+            const isFile = childClassName.includes("file");
+            const isRoom = childClassName.includes("room");
+            const isTemplate = childClassName.includes("template");
+            const cls = isFile
+              ? "isFile"
+              : isRoom
+                ? "isRoom"
+                : isTemplate
+                  ? "isTemplate"
+                  : "isFolder";
 
             if (cards.length && cards.length === countTilesInRow) {
               const listKey = uniqueid("list-item_");
@@ -218,6 +245,7 @@ const InfiniteGrid = (props: InfiniteGridProps) => {
           key={key}
           className={`tiles-loader ${type}`}
           isFolder={type === "isFolder"}
+          isRoom={type === "isRoom"}
         />,
       );
     }

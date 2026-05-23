@@ -57,7 +57,6 @@
   "RequestHeaderCopied": "Đã sao chép thành công POST request header vào bộ nhớ tạm",
   "RequestPostBody": "POST request body",
   "RequestPostHeader": "POST request header",
-  "ResetKey": "Đặt lại khóa",
   "Response": "Phản hồi",
   "ResponseBodyCopied": "Đã sao chép thành công POST response body vào bộ nhớ tạm",
   "ResponseHeaderCopied": "Đã sao chép thành công POST response header vào bộ nhớ tạm",

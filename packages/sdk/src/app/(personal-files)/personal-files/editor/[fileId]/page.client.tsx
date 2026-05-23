@@ -38,11 +38,9 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
-import styles from "./EditorPage.module.scss";
+import EditorIframe from "@/app/(docspace)/_components/editor-iframe";
 
 type EditorPageProps = {
   fileId: string;
@@ -51,57 +49,20 @@ type EditorPageProps = {
 
 export default function EditorPage({ fileId, action }: EditorPageProps) {
   const router = useRouter();
-  const iframeRef = React.useRef<HTMLIFrameElement>(null);
-  const [isReady, setIsReady] = React.useState(false);
 
-  const [editorOrigin] = React.useState(
-    () =>
-      (typeof window !== "undefined" &&
-        (window.ClientConfig?.proxy?.url ||
-          window.ClientConfig?.api?.origin)) ||
-      (typeof window !== "undefined" ? window.location.origin : ""),
-  );
-
-  const editorUrl = React.useMemo(() => {
+  const path = React.useMemo(() => {
     const params = new URLSearchParams();
     params.set("fileId", fileId);
     params.set("editorGoBack", "event");
     if (action) params.set("action", action);
+    return `/doceditor?${params.toString()}`;
+  }, [fileId, action]);
 
-    return combineUrl(editorOrigin, `/doceditor?${params.toString()}`);
-  }, [fileId, action, editorOrigin]);
+  const onClose = React.useCallback(() => {
+    router.replace("/personal-files");
+  }, [router]);
 
-  React.useEffect(() => {
-    const onMessage = (event: MessageEvent) => {
-      if (event.origin !== editorOrigin) return;
-
-      const data =
-        typeof event.data === "string"
-          ? (() => {
-              try {
-                return JSON.parse(event.data);
-              } catch {
-                return event.data;
-              }
-            })()
-          : event.data;
-
-      if (
-        data === "close-editor" ||
-        data?.type === "onRequestClose" ||
-        (data?.type === "onEventReturn" &&
-          data?.eventReturnData?.event === "onEditorCloseCallback")
-      ) {
-        router.replace("/personal-files");
-      }
-    };
-
-    window.addEventListener("message", onMessage);
-    return () => window.removeEventListener("message", onMessage);
-  }, [editorOrigin, router]);
-
-  const onIframeLoad = React.useCallback(() => {
-    setIsReady(true);
+  const onReady = React.useCallback(() => {
     frameCallEvent({
       event: "onAppReady",
       data: { frameId: getFrameId() },
@@ -112,20 +73,5 @@ export default function EditorPage({ fileId, action }: EditorPageProps) {
     });
   }, [fileId, action]);
 
-  return (
-    <div className={styles.editorWrapper}>
-      {!isReady && (
-        <div className={styles.loaderOverlay}>
-          <Loader type={LoaderTypes.track} size="40px" />
-        </div>
-      )}
-      <iframe
-        ref={iframeRef}
-        src={editorUrl}
-        onLoad={onIframeLoad}
-        className={isReady ? styles.editorIframe : styles.editorIframeHidden}
-        allow="autoplay; camera; microphone; display-capture; clipboard-write"
-      />
-    </div>
-  );
+  return <EditorIframe path={path} onClose={onClose} onReady={onReady} />;
 }

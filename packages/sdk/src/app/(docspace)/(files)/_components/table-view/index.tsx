@@ -66,6 +66,8 @@ const TableView = ({
   timezone,
   displayFileExtension,
   fetchMoreFiles,
+  currentUserId,
+  infoPanelVisible,
 }: TableViewProps) => {
   const { t } = useTranslation(["Common", "Files"]);
   const isSSR = useIsServer();
@@ -88,7 +90,7 @@ const TableView = ({
       const stored = localStorage.getItem(`${COLUMN_STORAGE_NAME}_enabled`);
       if (stored) return JSON.parse(stored);
     } catch {}
-    return { Modified: true, Size: true, Type: true };
+    return { Author: true, Created: true, Modified: true, Size: true, Type: true };
   });
 
   const onColumnChange = React.useCallback(
@@ -108,7 +110,7 @@ const TableView = ({
   );
 
   const lastColumn = React.useMemo(() => {
-    const orderedKeys = ["Type", "Size", "Modified", "Name"];
+    const orderedKeys = ["Type", "Size", "Modified", "Created", "Author", "Name"];
     return orderedKeys.find((key) => key === "Name" || columnState[key] !== false) ?? "Name";
   }, [columnState]);
 
@@ -123,6 +125,24 @@ const TableView = ({
         default: true,
         minWidth: 210,
         onClick: onColumnSort,
+      },
+      {
+        key: "Author",
+        title: t("Common:ByAuthor"),
+        sortBy: SortByFieldName.Author,
+        enable: columnState.Author !== false,
+        resizable: true,
+        onClick: onColumnSort,
+        onChange: onColumnChange,
+      },
+      {
+        key: "Created",
+        title: t("Common:ByCreation"),
+        sortBy: SortByFieldName.CreationDate,
+        enable: columnState.Created !== false,
+        resizable: true,
+        onClick: onColumnSort,
+        onChange: onColumnChange,
       },
       {
         key: "Modified",
@@ -173,6 +193,7 @@ const TableView = ({
         sortingVisible
         showSettings
         settingsTitle={t("Files:TableSettingsTitle")}
+        infoPanelVisible={infoPanelVisible}
       />
       <TableBody
         columnStorageName={COLUMN_STORAGE_NAME}
@@ -183,6 +204,7 @@ const TableView = ({
         itemCount={total}
         itemHeight={48}
         useReactWindow={!isSSR}
+        infoPanelVisible={infoPanelVisible}
       >
         {items.map((item, index) => (
           <TableViewRow
@@ -192,6 +214,7 @@ const TableView = ({
             timezone={timezone}
             displayFileExtension={displayFileExtension}
             lastColumn={lastColumn}
+            currentUserId={currentUserId}
           />
         ))}
       </TableBody>

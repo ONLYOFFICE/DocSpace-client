@@ -67,7 +67,6 @@ const ClientArticle = React.memo(
     const isLegacyMode = localStorage.getItem("useDocSpace") === "old";
     const useLegacyArticle = isAccountsArticle || isDeveloperToolsArticle;
 
-    console.log("forceNewArticle", forceNewArticle);
     if (forceNewArticle && !useLegacyArticle) {
       return <NewArticle />;
     }
@@ -111,8 +110,9 @@ const ClientContent = (props) => {
     isAuthenticated,
     user,
     isEncryption,
-    encryptionKeys,
-    setEncryptionKeys,
+    legacyEncryptionKeys,
+    setLegacyEncryptionKeys,
+    updateLegacyEncryptionKeys,
     isLoaded,
     isDesktop,
     showMenu,
@@ -148,26 +148,28 @@ const ClientContent = (props) => {
       regDesktop(
         user,
         isEncryption,
-        encryptionKeys,
-        setEncryptionKeys,
+        legacyEncryptionKeys,
+        setLegacyEncryptionKeys,
+        updateLegacyEncryptionKeys,
         isEditor,
         null,
         t,
       );
-      //   console.log(
-      //     "%c%s",
-      //     "color: green; font: 1.2em bold;",
-      //     "Current keys is: ",
-      //     encryptionKeys
-      //   );
+      console.log(
+        "%c%s",
+        "color: green; font: 1.2em bold;",
+        "Current keys is: ",
+        legacyEncryptionKeys,
+      );
     }
   }, [
     t,
     isAuthenticated,
     user,
     isEncryption,
-    encryptionKeys,
-    setEncryptionKeys,
+    legacyEncryptionKeys,
+    setLegacyEncryptionKeys,
+    updateLegacyEncryptionKeys,
     isLoaded,
     isDesktop,
   ]);
@@ -188,7 +190,10 @@ const ClientContent = (props) => {
     location.pathname.includes("/developer-tools");
   const isNewArticle =
     location.pathname.startsWith("/ai-files") ||
-    location.pathname.startsWith("/ai-forms");
+    location.pathname.startsWith("/ai-rooms") ||
+    location.pathname.startsWith("/ai-forms") ||
+    location.pathname.startsWith("/ai-agents") ||
+    location.pathname.startsWith("/docs-cloud");
   const withMainButton =
     isAccountsArticle || isDeveloperToolsArticle
       ? currentDeviceType !== DeviceType.desktop
@@ -242,8 +247,9 @@ export const Client = inject(
       frameConfig,
       isFrame,
       isDesktopClient,
-      encryptionKeys,
-      setEncryptionKeys,
+      legacyEncryptionKeys,
+      setLegacyEncryptionKeys,
+      updateLegacyEncryptionKeys,
       isEncryptionSupport,
       enablePlugins,
       isDesktopClientInit,
@@ -275,7 +281,7 @@ export const Client = inject(
       showMenu: frameConfig?.showMenu,
       user: userStore.user,
       isAuthenticated: authStore.isAuthenticated,
-      encryptionKeys,
+      legacyEncryptionKeys,
       isEncryption: isEncryptionSupport,
       isLoaded: authStore.isLoaded && clientLoadingStore.isLoaded,
       setIsLoaded: clientLoadingStore.setIsLoaded,
@@ -283,7 +289,8 @@ export const Client = inject(
       setIsFilterLoading: setIsSectionFilterLoading,
       setIsHeaderLoading: setIsSectionHeaderLoading,
       isLoading,
-      setEncryptionKeys,
+      setLegacyEncryptionKeys,
+      updateLegacyEncryptionKeys,
       showArticleLoader,
       loadClientInfo: async () => {
         const actions = [];

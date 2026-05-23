@@ -45,6 +45,7 @@ import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import BillingForm from "./category/BillingForm";
 import FileManagement from "./category/FileManagement";
 import InterfaceTheme from "./category/InterfaceTheme";
+import { useDocsUserStore } from "../../_store/DocsUserStore";
 
 type SettingsProps = {
   canSeeBilling?: boolean;
@@ -52,6 +53,7 @@ type SettingsProps = {
 
 const Settings = ({ canSeeBilling }: SettingsProps) => {
   const { t } = useTranslation(["Common", "Profile"]);
+  const { user } = useDocsUserStore();
   const [selectedTabId, setSelectedTabId] = React.useState(
     canSeeBilling ? "billing" : "file-management",
   );
@@ -85,7 +87,7 @@ const Settings = ({ canSeeBilling }: SettingsProps) => {
             {
               id: "billing",
               name: "Billing",
-              content: wrapContent(<BillingForm />),
+              content: wrapContent(<BillingForm user={user} />),
             },
           ]
         : []),

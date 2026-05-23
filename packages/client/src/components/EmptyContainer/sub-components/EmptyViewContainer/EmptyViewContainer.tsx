@@ -39,6 +39,8 @@ import { useTranslation } from "react-i18next";
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
 
+import EmptyPrivateRoomView from "../../EmptyPrivateRoomView";
+
 import { useEmptyView, useOptions } from "./EmptyViewContainer.hooks";
 import type {
   EmptyViewContainerProps,
@@ -47,18 +49,16 @@ import type {
 } from "./EmptyViewContainer.types";
 
 const EmptyViewContainer = observer((props: EmptyViewContainerProps) => {
-  const { t } = useTranslation([
-    "EmptyView",
-    "Files",
-    "Common",
-    "Translations",
-    "AIRoom",
-  ]);
+  const { t } = useTranslation(["EmptyView", "Files", "Common", "Translations"]);
 
   const options = useOptions(props, t);
   const emptyViewOptions = useEmptyView(props, t);
 
   const { description, title, icon } = emptyViewOptions;
+
+  if (props.selectedFolder?.private && !props.isFolder) {
+    return <EmptyPrivateRoomView />;
+  }
 
   return (
     <EmptyView

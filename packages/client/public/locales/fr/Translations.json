@@ -1,5 +1,4 @@
 {
-  "ChooseFromList": "Choisir dans la liste",
   "FileLocked": "Fichier verrouillé",
   "FileProtected": "Le fichier est protégé par un mot de passe",
   "FileUnlocked": "Fichier déverrouillé",
@@ -13,7 +12,6 @@
   "FolderTitleWebDav": "Répertoire WebDAV",
   "FolderTitleYandex": "Répertoire Yandex",
   "NewForm": "Formulaire PDF",
-  "OwnerChange": "Changer le propriétaire",
   "RoleGuestDescriprion": "Les invités peuvent accéder aux salles auxquelles ils ont été conviés, ainsi que créer et modifier des documents si les rôles appropriés leur ont été attribués dans la salle.",
   "SearchByHeadOfGroup": "Rechercher par Responsable du groupe",
   "SearchByOwner": "Rechercher par propriétaire",

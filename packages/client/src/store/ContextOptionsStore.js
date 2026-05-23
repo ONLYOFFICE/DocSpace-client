@@ -729,17 +729,33 @@ class ContextOptionsStore {
   };
 
   onClickDownload = (item, t) => {
-    const { viewUrl, isFolder } = item;
+    const { viewUrl, isFolder, encrypted } = item;
     const isFile = !isFolder;
 
     const { openUrl } = this.settingsStore;
     const { downloadAction } = this.filesActionsStore;
 
-    isFile
-      ? openUrl(viewUrl, UrlActionType.Download)
-      : downloadAction(t("Common:ArchivingData"), item).catch((err) =>
-          toastr.error(err),
-        );
+    if (isFile && encrypted) {
+      downloadAction("", item).catch((err) => toastr.error(err));
+    } else if (isFile) {
+      openUrl(viewUrl, UrlActionType.Download);
+    } else {
+      downloadAction(t("Common:ArchivingData"), item).catch((err) =>
+        toastr.error(err),
+      );
+    }
+  };
+
+  onClickDownloadEncrypted = (item, t) => {
+    const { openUrl } = this.settingsStore;
+
+    if (item.isFolder || item.roomType) {
+      return this.filesActionsStore
+        .downloadFiles([], [item.id], { label: t("Common:ArchivingData") })
+        .catch((err) => toastr.error(err));
+    }
+
+    openUrl(item.viewUrl, UrlActionType.Download);
   };
 
   onClickDownloadAs = () => {
@@ -1508,7 +1524,7 @@ class ContextOptionsStore {
       {
         id: "option_pin-room",
         key: "pin-room",
-        label: t("PinToTop"),
+        label: t("Common:PinToTop"),
         icon: PinReactSvgUrl,
         onClick: () => this.onClickPin("pin", item.id, t, item.isAIAgent),
         disabled:
@@ -1518,7 +1534,7 @@ class ContextOptionsStore {
       {
         id: "option_unpin-room",
         key: "unpin-room",
-        label: t("Unpin"),
+        label: t("Common:Unpin"),
         icon: UnpinReactSvgUrl,
         onClick: () => this.onClickPin("unpin", item.id, t, item.isAIAgent),
         disabled:
@@ -1534,7 +1550,7 @@ class ContextOptionsStore {
       {
         id: "option_unmute-room",
         key: "unmute-room",
-        label: t("EnableNotifications"),
+        label: t("Common:EnableNotifications"),
         icon: UnmuteReactSvgUrl,
         onClick: () => this.onClickMute("unmute", item, t),
         disabled: !canMute,
@@ -1542,7 +1558,7 @@ class ContextOptionsStore {
       {
         id: "option_mute-room",
         key: "mute-room",
-        label: t("DisableNotifications"),
+        label: t("Common:DisableNotifications"),
         icon: MuteReactSvgUrl,
         onClick: () => this.onClickMute("mute", item, t),
         disabled: !canMute,
@@ -2212,7 +2228,7 @@ class ContextOptionsStore {
       {
         id: "option_vectorization",
         key: "vectorization",
-        label: t("Files:Vectorization"),
+        label: t("Common:Vectorization"),
         icon: RefreshReactSvgUrl,
         onClick: () => this.filesActionsStore.retryVectorization([item]),
         disabled: !item.security?.Vectorization,
@@ -2271,7 +2287,7 @@ class ContextOptionsStore {
       {
         id: "option_edit-room",
         key: "edit-room",
-        label: t("EditRoom"),
+        label: t("Common:EditRoom"),
         icon: SettingsReactSvgUrl,
         onClick: () => this.onClickEditRoom(item),
         disabled: false,
@@ -2452,6 +2468,14 @@ class ContextOptionsStore {
           Boolean(item.external && item.isLinkExpired),
       },
       {
+        id: "option_download-encrypted",
+        key: "download-encrypted",
+        label: t("Common:DownloadWithoutDecryption"),
+        icon: DownloadReactSvgUrl,
+        onClick: () => this.onClickDownloadEncrypted(item, t),
+        disabled: !item.security?.Download,
+      },
+      {
         id: "option_room-info",
         key: "room-info",
         label: item.isAIAgent ? t("Common:AgentInfo") : t("Common:RoomInfo"),
@@ -2526,7 +2550,7 @@ class ContextOptionsStore {
       {
         id: "option_owner-change",
         key: "owner-change",
-        label: t("Translations:OwnerChange"),
+        label: t("Common:OwnerChange"),
         icon: FileActionsOwnerReactSvgUrl,
         onClick: this.onOwnerChange,
         disabled: false,
@@ -2560,7 +2584,7 @@ class ContextOptionsStore {
       {
         id: "option_change-room-owner",
         key: "change-room-owner",
-        label: t("Files:ChangeRoomOwner"),
+        label: t("Common:ChangeRoomOwner"),
         icon: ReconnectSvgUrl,
         onClick: this.onChangeRoomOwner,
         disabled: isAIAgent,
@@ -2705,7 +2729,7 @@ class ContextOptionsStore {
       {
         id: "option_change-room-owner",
         key: "change-agent-owner",
-        label: t("Translations:OwnerChange"),
+        label: t("Common:OwnerChange"),
         icon: ReconnectSvgUrl,
         onClick: this.onChangeRoomOwner,
         disabled: !isAIAgent,
@@ -2713,7 +2737,7 @@ class ContextOptionsStore {
       {
         id: "option_leave-room",
         key: "leave-room",
-        label: isAIAgent ? t("LeaveTheAgent") : t("LeaveTheRoom"),
+        label: isAIAgent ? t("LeaveTheAgent") : t("Common:LeaveTheRoom"),
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
         disabled: isKnowledgeOrResult
@@ -2723,7 +2747,7 @@ class ContextOptionsStore {
       {
         id: "option_archive-room",
         key: "archive-room",
-        label: t("MoveToArchive"),
+        label: t("Common:MoveToArchive"),
         icon: RoomArchiveSvgUrl,
         onClick: () => this.onClickArchive("archive"),
         disabled: false,
@@ -2754,7 +2778,7 @@ class ContextOptionsStore {
         label: isRootThirdPartyFolder
           ? t("Common:Disconnect")
           : isAIAgent
-            ? t("DeleteAgent")
+            ? t("Common:DeleteAgent")
             : item.isTemplate
               ? t("Files:DeleteTemplateAction")
               : item.isRoom
@@ -2903,7 +2927,11 @@ class ContextOptionsStore {
       (option) => option.key === "download-as",
     );
 
-    if (downloadOption && downloadAsOption) {
+    const downloadEncryptedOption = newOptions.find(
+      (option) => option.key === "download-encrypted",
+    );
+
+    if (downloadOption && (downloadAsOption || downloadEncryptedOption)) {
       const originalDownloadOption = {
         ...downloadOption,
         key: "download-original",
@@ -2915,11 +2943,15 @@ class ContextOptionsStore {
         originalDownloadOption,
       ];
 
+      const downloadItemKeys = ["download-original"];
+      if (downloadEncryptedOption) downloadItemKeys.push("download-encrypted");
+      if (downloadAsOption) downloadItemKeys.push("download-as");
+
       menuGroupsConfig.push({
         groupKey: "download",
         groupLabel: downloadOption.label,
         groupIcon: downloadOption.icon,
-        itemKeys: ["download-original", "download-as"],
+        itemKeys: downloadItemKeys,
         needsGrouping: false,
         minItemsCount: 1,
       });
@@ -2958,7 +2990,7 @@ class ContextOptionsStore {
       }
     });
 
-    if (downloadOption && downloadAsOption) {
+    if (downloadOption && (downloadAsOption || downloadEncryptedOption)) {
       keysToRemove.push("download-original");
     }
 
@@ -3209,14 +3241,14 @@ class ContextOptionsStore {
       const pinOption = isPinOption
         ? {
             key: "pin-room",
-            label: t("PinToTop"),
+            label: t("Common:PinToTop"),
             icon: PinReactSvgUrl,
             onClick: () => pinRooms(t),
             disabled: false,
           }
         : {
             key: "unpin-room",
-            label: t("Unpin"),
+            label: t("Common:Unpin"),
             icon: UnpinReactSvgUrl,
             onClick: () => unpinRooms(t),
             disabled: false,
@@ -3225,7 +3257,7 @@ class ContextOptionsStore {
       if (canArchiveRoom) {
         archiveOptions = {
           key: "archive-room",
-          label: t("MoveToArchive"),
+          label: t("Common:MoveToArchive"),
           icon: RoomArchiveSvgUrl,
           onClick: (e) => this.onClickArchive("archive"),
           disabled: false,
@@ -3377,7 +3409,7 @@ class ContextOptionsStore {
       },
       {
         key: "vectorization",
-        label: t("Files:Vectorization"),
+        label: t("Common:Vectorization"),
         icon: RefreshReactSvgUrl,
         onClick: () => this.filesActionsStore.retryVectorization(selection),
         disabled: !canRetryVectorization,
@@ -3774,6 +3806,12 @@ class ContextOptionsStore {
 
     const showUploadFolder = !(isMobile || isTablet);
 
+    const privateFolderActions = [
+      createNewFolder,
+      { key: "separator", isSeparator: true },
+      uploadFiles,
+    ];
+
     const options = isAIAgentsFolder
       ? [
           {
@@ -3794,22 +3832,25 @@ class ContextOptionsStore {
                 icon: CatalogRoomsReactSvgUrl,
               },
             ]
-        : [
-            createNewDoc,
-            createNewSpreadsheet,
-            createNewPresentation,
-            ...formActions,
-            createNewFolder,
-            ...templateGallery,
-            { key: "separator", isSeparator: true },
-            uploadFiles,
-            showUploadFolder ? uploadFolder : null,
-          ];
+        : isPrivacyFolder
+          ? privateFolderActions
+          : [
+              createNewDoc,
+              createNewSpreadsheet,
+              createNewPresentation,
+              ...formActions,
+              createNewFolder,
+              ...templateGallery,
+              { key: "separator", isSeparator: true },
+              uploadFiles,
+              showUploadFolder ? uploadFolder : null,
+            ];
     if (
       !isAIAgents() &&
       mainButtonItemsList &&
       enablePlugins &&
-      !isRoomsFolder
+      !isRoomsFolder &&
+      !isPrivacyFolder
     ) {
       const pluginItems = [];
 

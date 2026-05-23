@@ -52,7 +52,7 @@ import type { TViewAs } from "@docspace/shared/types";
 
 import { DocsSettingsStoreContextProvider } from "./DocsSettingsStore";
 import { DocsUserStoreContextProvider } from "./DocsUserStore";
-import { InfoPanelStoreContextProvider } from "./InfoPanelStore";
+import { InfoPanelStoreContextProvider } from "@/app/(docspace)/_store/InfoPanelStore";
 import { VersionHistoryStoreContextProvider } from "./VersionHistoryStore";
 
 export const DocsStoreProviders = ({

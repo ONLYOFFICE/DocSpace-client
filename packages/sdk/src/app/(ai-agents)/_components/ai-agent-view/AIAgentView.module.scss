@@ -1,0 +1,33 @@
+@use "@docspace/ui-kit/styles/mixins";
+
+.aiAgentChat {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+
+  // The chat header is `position: sticky; top: var(--chat-header-top)`. In
+  // the client SectionBody it has to clear the portal's title bar, but in
+  // the SDK the chat sits inside a non-scrolling `body` (the chat owns its
+  // own scroll), so any non-zero offset just leaves an empty band above
+  // the chat header. Pin it to 0.
+  --chat-header-top: 0px;
+
+  // Remove the chat's inner inline padding — our `.body` already provides
+  // the section's side padding, so the default `0 20px` on the chat scroll
+  // body would double up.
+  --chat-content-padding: 0px;
+
+  :global(.chat-message-body) {
+    margin: 0 -20px;
+
+    @include mixins.tablet-and-below {
+      margin: 0 -16px;
+    }
+  }
+
+  :global(div:has(> div > [style*="--chat-welcome-color"])) {
+    margin-bottom: 0 !important;
+    margin-top: 32px !important;
+  }
+}

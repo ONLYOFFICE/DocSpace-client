@@ -57,7 +57,6 @@
   "RequestHeaderCopied": "Заголовок запроса POST успешно скопирован в буфер обмена",
   "RequestPostBody": "Тело запроса POST",
   "RequestPostHeader": "Заголовок запроса POST",
-  "ResetKey": "Кнопка сброса",
   "Response": "Ответ",
   "ResponseBodyCopied": "Тело ответа POST успешно скопировано в буфер обмена",
   "ResponseHeaderCopied": "Заголовок ответа POST успешно скопирован в буфер обмена",

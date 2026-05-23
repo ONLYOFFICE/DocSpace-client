@@ -37,7 +37,7 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import type {
   TFile,
@@ -75,6 +75,7 @@ import { DeleteContext } from "@/app/(docspace)/_contexts/DeleteContext";
 import { FileOperationsContext } from "@/app/(docspace)/_contexts/FileOperationsContext";
 import { RenameContext } from "@/app/(docspace)/_contexts/RenameContext";
 import { VersionHistoryContext } from "@/app/(docspace)/_contexts/VersionHistoryContext";
+import { ConvertContext } from "@/app/(docspace)/_contexts/ConvertContext";
 import type {
   TFileItem,
   TFolderItem,
@@ -85,14 +86,21 @@ import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
 import CreateFileDialog from "../create-file-dialog";
+import ConvertDialog from "../convert-dialog";
 import VersionHistoryPanel from "../version-history-panel";
-import { InfoPanelView, useInfoPanelStore } from "../../_store/InfoPanelStore";
 import { useVersionHistoryStore } from "../../_store/VersionHistoryStore";
+import {
+  InfoPanelView,
+  useInfoPanelStore,
+} from "@/app/(docspace)/_store/InfoPanelStore";
 import useDocsActions from "../../_hooks/useDocsActions";
 import { useDocsMenuModels } from "../../_hooks/useDocsMenuModels";
 import useTrashActions from "../../_hooks/useTrashActions";
 import useFileOperations from "../../_hooks/useFileOperations";
 import useRenameActions from "../../_hooks/useRenameActions";
+import useConvertActions from "../../_hooks/useConvertActions";
+import { useDocsSettingsStore } from "../../_store/DocsSettingsStore";
+import { useDocsUserStore } from "../../_store/DocsUserStore";
 import type { SelectorMode } from "../../_hooks/useFileOperations";
 import { useDocsFrameBridge } from "../../_hooks/useDocsFrameBridge";
 import DropZone from "../drop-zone";
@@ -104,7 +112,7 @@ import {
   InfoPanelBody as DocsInfoPanelBody,
   InfoPanelHeader as DocsInfoPanelHeader,
   InfoPanelEditLinkDialog,
-} from "../info-panel";
+} from "@/app/(docspace)/_components/info-panel";
 
 import styles from "./DocsLayout.module.scss";
 
@@ -117,6 +125,18 @@ type DocsLayoutProps = {
   filesSettings: TFilesSettings;
   portalSettings: TSettings;
   filesFilter: string;
+  /**
+   * Temporary flag: hide "Add to favorites" in file/folder context menus.
+   * Used for rooms internals and trash.
+   */
+  withoutFavorite?: boolean;
+  /**
+   * Base path used to navigate to the editor route. Defaults to
+   * "/personal-files/editor". When provided (e.g., "/editor" for rooms), the
+   * current pathname is appended as a `returnTo` query parameter so the editor
+   * page can navigate back to the originating section.
+   */
+  editorBasePath?: string;
 };
 
 const getSubmitLabel = (mode: SelectorMode, t: (key: string) => string) => {
@@ -135,20 +155,27 @@ const DocsLayout = observer(
     filesSettings,
     portalSettings,
     filesFilter,
+ 	withoutFavorite,
+    editorBasePath,
   }: DocsLayoutProps) => {
     const { t } = useTranslation(["Common"]);
     const { isEmptyList } = useSettingsStore();
     const { rootFolderType } = useFilesListStore();
     const infoPanelStore = useInfoPanelStore();
     const versionHistoryStore = useVersionHistoryStore();
+    const docsUserStore = useDocsUserStore();
     const { sdkConfig } = useSDKConfig();
     const router = useRouter();
+    const pathname = usePathname();
 
     const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
 
     const isMyDocuments = rootFolderType === FolderType.USER;
-    const isActionButtonEnabled =
-      isMyDocuments && !sdkConfig?.disableActionButton;
+  	const isInRooms =
+    rootFolderType === FolderType.Rooms ||
+    rootFolderType === FolderType.Archive;
+     const isActionButtonEnabled =
+    (isMyDocuments || isInRooms) && !sdkConfig?.disableActionButton;
 
     const docsActions = useDocsActions();
     const {
@@ -243,16 +270,48 @@ const DocsLayout = observer(
       ],
     );
 
-    const openFileHandler = React.useCallback(
+    const openFileInEditor = React.useCallback(
       (file: TFileItem, preview?: boolean) => {
-        const url = preview
-          ? `/personal-files/editor/${file.id}?action=view`
-          : `/personal-files/editor/${file.id}`;
-        router.push(url);
+  	 const basePath = editorBasePath ?? "/personal-files/editor";
+      const params = new URLSearchParams();
+      if (preview) params.set("action", "view");
+      if (editorBasePath && pathname) {
+        params.set("returnTo", pathname);
+      }
+      const qs = params.toString();
+      const url = qs
+        ? `${basePath}/${file.id}?${qs}`
+        : `${basePath}/${file.id}`;
+      router.push(url);
       },
-      [router],
+      [router, editorBasePath, pathname],
     );
 
+    const {
+      convertDialogVisible,
+      convertTarget,
+      isConverting,
+      convertProgress,
+      requestConvert,
+      closeConvertDialog,
+      confirmConvert,
+      onChangeStoreOriginal,
+    } = useConvertActions();
+
+    const docsSettingsStore = useDocsSettingsStore();
+    const storeOriginalFiles =
+      docsSettingsStore.filesSettings?.storeOriginalFiles ?? false;
+
+    const openFileHandler = React.useCallback(
+      (file: TFileItem, preview?: boolean) => {
+        if (!preview && file.viewAccessibility?.MustConvert) {
+          requestConvert(file);
+          return;
+        }
+        openFileInEditor(file, preview);
+      },
+      [openFileInEditor, requestConvert],
+    );
     const shareHandler = React.useCallback(
       (item: TFileItem | TFolderItem) => {
         infoPanelStore.open(item);
@@ -284,6 +343,7 @@ const DocsLayout = observer(
               <RenameContext.Provider value={renameHandler}>
                 <FileOperationsContext.Provider value={fileOperationsHandler}>
                   <VersionHistoryContext.Provider value={versionHistoryHandler}>
+                  <ConvertContext.Provider value={requestConvert}>
                   <div className={styles.root} style={frameHeaderVars}>
                     <DropZone
                       onFilesDropped={uploadFilesToFolder}
@@ -341,6 +401,8 @@ const DocsLayout = observer(
                               portalSettings={portalSettings}
                               filesFilter={filesFilter}
                               current={current}
+                              currentUserId={docsUserStore.user?.id}
+                              infoPanelVisible={infoPanelStore.isVisible}
                             />
                           }
                           infoPanelHeaderContent={<DocsInfoPanelHeader />}
@@ -469,6 +531,14 @@ const DocsLayout = observer(
                         onClick={() => uploadStore.setPanelVisible(true)}
                       />
                     )}
+                    {convertProgress && (
+                      <FloatingButton
+                        icon="refresh"
+                        percent={convertProgress.percent}
+                        completed={convertProgress.completed}
+                        alert={convertProgress.alert}
+                      />
+                    )}
                     <UploadPanel />
                     <RenameDialog
                       visible={renameDialogVisible}
@@ -477,7 +547,17 @@ const DocsLayout = observer(
                       onClose={closeRenameDialog}
                       onSave={confirmRename}
                     />
+                    <ConvertDialog
+                      visible={convertDialogVisible}
+                      fileExst={convertTarget?.fileExst ?? ""}
+                      storeOriginalFiles={storeOriginalFiles}
+                      isConverting={isConverting}
+                      onChangeStoreOriginal={onChangeStoreOriginal}
+                      onClose={closeConvertDialog}
+                      onConfirm={confirmConvert}
+                    />
                   </div>
+                  </ConvertContext.Provider>
                   </VersionHistoryContext.Provider>
                 </FileOperationsContext.Provider>
               </RenameContext.Provider>

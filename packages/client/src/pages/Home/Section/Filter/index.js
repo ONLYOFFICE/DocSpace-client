@@ -939,7 +939,7 @@ const SectionFilterContent = ({
         key: FilterKeys.user,
         group: FilterGroups.filterSharedBy,
         displaySelectorType: "button",
-        label: t("Translations:ChooseFromList"),
+        label: t("Common:ChooseFromList"),
       },
     ];
   }, [t, isSharedWithMeFolder, isVisitor, isCollaborator]);
@@ -969,7 +969,7 @@ const SectionFilterContent = ({
           key: FilterKeys.user,
           group: FilterGroups.filterAuthor,
           displaySelectorType: "button",
-          label: t("Translations:ChooseFromList"),
+          label: t("Common:ChooseFromList"),
         },
       ];
     }
@@ -2072,7 +2072,6 @@ export default inject(
       "Files",
       "Settings",
       "Common",
-      "Translations",
       "InfoPanel",
       "People",
       "PeopleTranslations",

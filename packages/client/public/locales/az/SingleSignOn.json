@@ -1,6 +1,5 @@
 {
   "AddCertificate": "Sertifikat əlavə edin",
-  "AdvancedSettings": "Qabaqcıl Parametrlər",
   "AdvancedSettingsTooltip": "Defolt doğrulama səhifəsini gizlədin və avtomatik olaraq SSO xidmətinə yönləndirin.",
   "AttributeMatching": "Atributların Xəritələnməsi",
   "AttributeMatchingTooltip": "Birdəfəlik Giriş (SSO) atributlarının 'Hesablar' bölməsindəki qeydlərə uyğunluğu.",
@@ -11,7 +10,6 @@
   "DownloadMetadataXML": "SP metadata XML-ni endirin",
   "Encryption": "Şifrələmə",
   "GenerateCertificate": "Yeni özü imzalanmış sertifikat yaradın",
-  "Hide": "Gizlədin",
   "HideAdditionalParameters": "Qabaqcıl parametrləri gizlədin",
   "HideAuthPage": "Doğrulama səhifəsini gizlədin",
   "idpAuthRequest": "Autentifikasiya cavablarının imzasını yoxlayın",
@@ -32,7 +30,6 @@
   "ProviderURLTooltip": "İdentifikasiya Provayderi Müəssisə ID-si (Emit edən URL)",
   "ServiceProviderSettings": "{{organizationName}} SP Parametrləri",
   "ServiceProviderSettingsDescription": "Tək Giriş üçün Xidmət Provayderi parametrlərini konfiqurasiya edin və SP sertifikatları əlavə edin.",
-  "Show": "Göstərin",
   "ShowAdditionalParameters": "Qabaqcıl parametrləri göstərin",
   "Signing": "İmzalanma",
   "SigningAndEncryption": "İmzalanma və şifrələnmə",

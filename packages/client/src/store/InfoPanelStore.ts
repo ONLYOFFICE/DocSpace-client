@@ -300,7 +300,7 @@ class InfoPanelStore {
       "isRoom" in this.infoPanelSelection &&
       this.infoPanelSelection.isRoom
     ) {
-      return this.infoPanelSelection;
+      return this.infoPanelSelection as TRoom;
     }
 
     return this.infoPanelRoom;

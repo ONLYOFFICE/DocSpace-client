@@ -191,10 +191,10 @@ export const getRoomDescription = (
 
 const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {
   return isUser(access)
-    ? t("EmptyView:EmptyAIAgentsUserTitle", {
+    ? t("Common:EmptyAIAgentsUserTitle", {
         aiAgents: t("Common:AIAgents"),
       })
-    : t("EmptyView:EmptyAIAgentsTitle", {
+    : t("Common:EmptyAIAgentsTitle", {
         aiAgent: t("Common:AIAgent"),
       });
 };
@@ -211,10 +211,10 @@ const getAIAgentsAIDisabledTitle = (
       }),
     )
     .with([false, true], () =>
-      t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminTitle"),
+      t("Common:EmptyAIAgentsAIDisabledSaasAdminTitle"),
     )
     .otherwise(() =>
-      t("EmptyView:EmptyAIAgentsAIDisabledUserTitle", {
+      t("Common:EmptyAIAgentsAIDisabledUserTitle", {
         aiAgents: t("Common:AIAgents"),
       }),
     );
@@ -233,13 +233,13 @@ const getAIAgentsAIDisabledDescription = (
       }),
     )
     .with([false, true], () =>
-      t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminDescription", {
+      t("Common:EmptyAIAgentsAIDisabledSaasAdminDescription", {
         productName: getBrandName("ProductName"),
         aiAgents: t("Common:AIAgents"),
       }),
     )
     .otherwise(() =>
-      t("EmptyView:EmptyAIAgentsAIDisabledDescription", {
+      t("Common:EmptyAIAgentsAIDisabledDescription", {
         productName: getBrandName("ProductName"),
         aiAgents: t("Common:AIAgents"),
       }),
@@ -251,10 +251,10 @@ const getAIAgentsAIEnabledDescription = (
   access: AccessType,
 ) => {
   return isUser(access)
-    ? t("EmptyView:EmptyAIAgentsAIEnabledUserDescription", {
+    ? t("Common:EmptyAIAgentsAIEnabledUserDescription", {
         aiAgents: t("Common:AIAgents"),
       })
-    : t("EmptyView:EmptyAIAgentsDescription", {
+    : t("Common:EmptyAIAgentsDescription", {
         mcpServer: t("Common:MCPServer"),
       });
 };
@@ -306,7 +306,7 @@ export const getRootDescription = (
       t("Common:EmptyFavoritesDescription"),
     )
     .with([FolderType.Archive, ShareAccessRights.None], () =>
-      t("Files:ArchiveEmptyScreen", {
+      t("Common:ArchiveEmptyScreen", {
         productName: getBrandName("ProductName"),
       }),
     )
@@ -433,7 +433,7 @@ export const getRootTitle = (
     .with([FolderType.SHARE, P._], () => t("Common:EmptyShareTitle"))
     .with([FolderType.Favorites, P._], () => t("Common:EmptyFavoritesTitle"))
     .with([FolderType.Recent, P._], () => t("Common:NoRecentFilesHereYet"))
-    .with([FolderType.Archive, P._], () => t("Files:ArchiveEmptyScreenHeader"))
+    .with([FolderType.Archive, P._], () => t("Common:ArchiveEmptyScreenHeader"))
     .with([FolderType.TRASH, P._], () => t("Common:EmptyScreenFolder"))
     .otherwise(() => "");
 };
@@ -798,3 +798,4 @@ export const helperOptions = (
     createUploadFromDeviceOption,
   };
 };
+

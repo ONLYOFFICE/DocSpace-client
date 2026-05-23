@@ -36,7 +36,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 import {
   createFolder,
@@ -76,12 +76,37 @@ const getDefaultFileName = (
 const DEFAULT_CHUNK_SIZE = 10 * 1024 * 1024;
 const DEFAULT_UPLOAD_THREADS = 3;
 
-export default function useDocsActions() {
+type UseDocsActionsOptions = {
+  /**
+   * Base path for the editor route, used to build the create-file URL.
+   * Defaults to "/personal-files/editor". When provided (e.g., "/editor" for
+   * rooms), the current pathname is appended as a `returnTo` query parameter.
+   */
+  editorBasePath?: string;
+};
+
+export default function useDocsActions(options?: UseDocsActionsOptions) {
   const router = useRouter();
+  const pathname = usePathname();
   const navigationStore = useNavigationStore();
   const { filesSettings } = useFilesSettingsStore();
   const uploadStore = useUploadStore();
   const { t } = useTranslation(["Common"]);
+
+  const editorBasePath = options?.editorBasePath;
+  const buildCreateUrl = useCallback(
+    (folderId: number | string, fileTitle: string) => {
+      const base = editorBasePath ?? "/personal-files/editor";
+      const params = new URLSearchParams();
+      params.set("parentId", String(folderId));
+      params.set("fileTitle", fileTitle);
+      if (editorBasePath && pathname) {
+        params.set("returnTo", pathname);
+      }
+      return `${base}/create?${params.toString()}`;
+    },
+    [editorBasePath, pathname],
+  );
 
   const inputFilesRef = useRef<HTMLInputElement | null>(null);
   const inputFolderRef = useRef<HTMLInputElement | null>(null);
@@ -123,9 +148,7 @@ export default function useDocsActions() {
             })
             .finally(() => setIsCreating(false));
         } else {
-          router.push(
-            `/personal-files/editor/create?parentId=${folderId}&fileTitle=${encodeURIComponent(`${name}.${type}`)}`,
-          );
+          router.push(buildCreateUrl(folderId, `${name}.${type}`));
         }
         return;
       }
@@ -133,7 +156,7 @@ export default function useDocsActions() {
       setDialogType(type);
       setDialogVisible(true);
     },
-    [getFolderId, t, filesSettings?.keepNewFileName, router],
+    [getFolderId, t, filesSettings?.keepNewFileName, router, buildCreateUrl],
   );
 
   const closeCreateDialog = useCallback(() => {
@@ -147,9 +170,7 @@ export default function useDocsActions() {
 
       if (dialogType !== "folder") {
         setDialogVisible(false);
-        router.push(
-          `/personal-files/editor/create?parentId=${folderId}&fileTitle=${encodeURIComponent(`${name}.${dialogType}`)}`,
-        );
+        router.push(buildCreateUrl(folderId, `${name}.${dialogType}`));
         return;
       }
 
@@ -164,7 +185,7 @@ export default function useDocsActions() {
         setIsCreating(false);
       }
     },
-    [getFolderId, dialogType, router],
+    [getFolderId, dialogType, router, buildCreateUrl],
   );
 
   const uploadFilesToFolder = useCallback(

@@ -47,7 +47,6 @@ import { clearTextSelection } from "@docspace/shared/utils/copy";
 import config from "PACKAGE_FILE";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { TABLE_HEADER_HEIGHT } from "@docspace/ui-kit/components/table/Table.constants";
-import { encryptionUploadDialog } from "../helpers/encryptionUploadDialog";
 
 class HotkeyStore {
   filesStore;
@@ -604,15 +603,6 @@ class HotkeyStore {
       if (this.treeFoldersStore.isPrivacyFolder) return;
       const folderInput = document.getElementById("customFolderInput");
       folderInput && folderInput.click();
-    } else if (this.treeFoldersStore.isPrivacyFolder) {
-      encryptionUploadDialog(
-        this.filesSettingsStore.extsWebEncrypt,
-        (encryptedFile, encrypted) => {
-          encryptedFile.encrypted = encrypted;
-          this.goToHomePage(navigate);
-          this.uploadDataStore.startUpload([encryptedFile], null, t);
-        },
-      );
     } else {
       const fileInput = document.getElementById("customFileInput");
       fileInput && fileInput.click();

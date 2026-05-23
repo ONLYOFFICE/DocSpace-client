@@ -47,12 +47,12 @@ const SECTION_PREFIXES = [
   "/ai-files",
   "/ai-forms",
   "/ai-arbiter",
+  "/ai-rooms",
+  "/docs-cloud",
 ] as const;
 
 function getSectionPrefix(pathname: string): string {
-  const match = SECTION_PREFIXES.find((prefix) =>
-    pathname.startsWith(prefix),
-  );
+  const match = SECTION_PREFIXES.find((prefix) => pathname.startsWith(prefix));
   return match ?? "/";
 }
 
@@ -113,3 +113,4 @@ export const useSectionNavigation = (): SectionNavigationContextValue => {
 
   return ctx;
 };
+

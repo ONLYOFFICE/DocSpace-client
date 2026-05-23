@@ -1,5 +1,4 @@
 {
-  "ChooseFromList": "Ընտրեք ցանկից",
   "FileLocked": "Ֆայլը կողպված է",
   "FileProtected": "Ֆայլը պաշտպանված է գաղտնաբառով",
   "FileUnlocked": "Ֆայլը ապակողպված է",
@@ -13,7 +12,6 @@
   "FolderTitleWebDav": "WebDAV թղթապանակ",
   "FolderTitleYandex": "Yandex գրացուցակ",
   "NewForm": "PDF Ձև",
-  "OwnerChange": "Փոխել տնօրինողին",
   "RoleGuestDescriprion": "Հյուրերը կարող են մուտք գործել այն սենյակներ, որտեղ նրանք հրավիրվել են, ինչպես նաև ստեղծել և խմբագրել փաստաթղթեր, եթե նրանց հանձնարարվել են համապատասխան դերեր սենյակում:",
   "SearchByHeadOfGroup": "Որոնում ըստ խմբի ղեկավարի",
   "SearchByOwner": "Որոնում ըստ սեփականատերերի",

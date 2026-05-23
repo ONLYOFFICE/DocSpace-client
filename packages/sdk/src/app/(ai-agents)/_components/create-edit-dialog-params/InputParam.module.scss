@@ -1,0 +1,15 @@
+.inputParam {
+	flex-direction: column;
+	gap: 4px;
+	max-height: 54px;
+
+	:global(.input-label-wrapper) {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+
+		:global(.input-label) {
+			cursor: pointer;
+		}
+	}
+}

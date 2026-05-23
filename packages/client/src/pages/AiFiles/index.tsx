@@ -24,25 +24,51 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { inject, observer } from "mobx-react";
 import { useSearchParams } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import SdkIframe from "SRC_DIR/components/SdkIframe";
 
-const SECTION_TO_PATH: Record<string, string> = {
-  recent: "/sdk/personal-files/recent",
-  favorites: "/sdk/personal-files/favorites",
-  "shared-with-me": "/sdk/personal-files/shared-with-me",
-  trash: "/sdk/personal-files/trash",
-  settings: "/sdk/personal-files/settings",
+type AiFilesProps = {
+  myFolderId?: number | null;
 };
 
-export const AiFiles = () => {
+const getSrc = (section: string, myFolderId?: number | null): string => {
+  const parentIdParam =
+    myFolderId != null ? `?parentId=${myFolderId}` : "";
+
+  switch (section) {
+    case "recent":
+      return `/sdk/personal-files/recent${parentIdParam}`;
+    case "favorites":
+      return `/sdk/personal-files/favorites${parentIdParam}`;
+    case "shared-with-me":
+      return "/sdk/personal-files/shared-with-me";
+    case "trash":
+      return "/sdk/personal-files/trash";
+    case "settings":
+      return "/sdk/personal-files/settings";
+    default:
+      return "/sdk/personal-files";
+  }
+};
+
+const AiFiles = ({ myFolderId }: AiFilesProps) => {
   const { t } = useTranslation(["Common"]);
   const [searchParams] = useSearchParams();
   const section = searchParams.get("section") ?? "";
-  const src = SECTION_TO_PATH[section] ?? "/sdk/personal-files";
-  return <SdkIframe src={src} title={t("Common:DashboardAIFilesTitle")} />;
+  return (
+    <SdkIframe
+      src={getSrc(section, myFolderId)}
+      title={t("Common:DashboardAIFilesTitle")}
+    />
+  );
 };
 
-export default AiFiles;
+const AiFilesConnected = inject<TStore>(({ treeFoldersStore }) => ({
+  myFolderId: treeFoldersStore.myFolderId,
+}))(observer(AiFiles));
+
+export { AiFilesConnected as AiFiles };
+export default AiFilesConnected;

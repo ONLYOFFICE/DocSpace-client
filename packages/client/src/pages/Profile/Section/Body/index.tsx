@@ -47,6 +47,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
 import { AuthStore } from "@docspace/shared/store/AuthStore";
+import { UserStore } from "@docspace/shared/store/UserStore";
 
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
@@ -63,6 +64,7 @@ import Notifications from "./sub-components/notifications";
 import FileManagement from "./sub-components/file-management";
 import InterfaceTheme from "./sub-components/interface-theme";
 import AuthorizedApps from "./sub-components/authorized-apps";
+import KeysManagement from "./sub-components/keys-management";
 import useProfileBody from "./useProfileBody";
 import styles from "./body.module.scss";
 
@@ -89,6 +91,7 @@ type SectionBodyContentProps = {
   resetSelections?: FilesStore["resetSelections"];
   setNotificationChannels?: TargetUserStore["setNotificationChannels"];
   checkTg?: TelegramStore["checkTg"];
+  getEncryptionKeys?: UserStore["getEncryptionKeys"];
 };
 
 const SectionBodyContent = (props: SectionBodyContentProps) => {
@@ -115,6 +118,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     resetSelections,
     setNotificationChannels,
     checkTg,
+    getEncryptionKeys,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -141,6 +145,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     tfaOn,
     getNotificationsData,
     getFileManagementData,
+    getEncryptionKeysData,
     getConsentList,
     openLoginTab,
   } = useProfileBody({
@@ -161,6 +166,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     getTfaType: getTfaType!,
     checkTg: checkTg!,
     setIsSectionBodyLoading: setIsSectionBodyLoading!,
+    getEncryptionKeys: getEncryptionKeys!,
   });
 
   const data = [
@@ -186,6 +192,14 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
       content: <FileManagement />,
       onClick: async () => {
         await getFileManagementData();
+      },
+    },
+    {
+      id: "keys-management",
+      name: t?.("Common:KeysManagement"),
+      content: <KeysManagement />,
+      onClick: async () => {
+        await getEncryptionKeysData();
       },
     },
     {
@@ -260,6 +274,7 @@ export default inject(
     setup,
     filesStore,
     telegramStore,
+    userStore,
   }: TStore) => {
     const {
       showProfileLoader,
@@ -291,6 +306,8 @@ export default inject(
 
     const { checkTg } = telegramStore;
 
+    const { getEncryptionKeys } = userStore;
+
     return {
       currentDeviceType: settingsStore.currentDeviceType,
       showProfileLoader,
@@ -314,6 +331,7 @@ export default inject(
       resetSelections,
       setNotificationChannels,
       checkTg,
+      getEncryptionKeys,
     };
   },
 )(

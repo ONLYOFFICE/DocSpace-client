@@ -139,6 +139,7 @@ class AppsStore {
       const settings = await this.fetchAppSettings<{ installed?: boolean }>(id);
       return !settings?.installed;
     }
+    if (id === "ai-agents") return false;
     const settings = await this.fetchAppSettings(id);
     return !settings;
   };
@@ -187,6 +188,16 @@ class AppsStore {
   uninstallAiArbiter = async () => {
     await this.enable("ai-arbiter", false);
     await this.saveSettings("ai-arbiter", null);
+  };
+
+  installDocsCloud = async () => {
+    await this.saveSettings("docs-cloud", { activated: true });
+    await this.enable("docs-cloud", true);
+  };
+
+  uninstallDocsCloud = async () => {
+    await this.enable("docs-cloud", false);
+    await this.saveSettings("docs-cloud", null);
   };
 
   // Re-enable a previously configured app without recreating its resources.

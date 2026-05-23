@@ -111,7 +111,6 @@ const PureHome = (props) => {
 
     firstLoad,
 
-    isPrivacyFolder,
     isRecycleBinFolder,
     isErrorRoomNotAvailable,
     isErrorAIAgentNotAvailable,
@@ -379,8 +378,7 @@ const PureHome = (props) => {
     if (!isContactsPage) {
       sectionProps.dragging = dragging;
       sectionProps.uploadFiles = !isChat;
-      sectionProps.onDrop =
-        isRecycleBinFolder || isPrivacyFolder ? null : onDrop;
+      sectionProps.onDrop = isRecycleBinFolder ? null : onDrop;
 
       sectionProps.viewAs = viewAs;
       sectionProps.hideAside =
@@ -664,7 +662,6 @@ export const Component = inject(
 
     const {
       isRecycleBinFolder,
-      isPrivacyFolder,
 
       setExpandedKeys,
       isRoomsFolder,
@@ -772,7 +769,6 @@ export const Component = inject(
       dragging,
       viewAs,
       isRecycleBinFolder,
-      isPrivacyFolder,
       isVisitor: userStore.user.isVisitor,
       userId: userStore?.user?.id,
       folderSecurity,

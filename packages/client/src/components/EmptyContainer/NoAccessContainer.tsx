@@ -201,4 +201,5 @@ export default inject<TStore>(
       userId: userStore?.user?.id,
     };
   },
-)(withTranslation(["Files", "AIRoom"])(observer(NoAccessContainer)));
+)(withTranslation(["Files", "Common"])(observer(NoAccessContainer)));
+

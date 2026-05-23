@@ -26,7 +26,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState, useMemo, useRef, useCallback } from "react";
+import React, {
+  useEffect,
+  useState,
+  useMemo,
+  useRef,
+  useCallback,
+} from "react";
 import { useTranslation, Trans } from "react-i18next";
 import {
   now,
@@ -156,7 +162,13 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
   culture,
   onMembersUpdated,
 }) => {
-  const { t } = useTranslation(["InviteDialog", "Translations", "Common", "InfoPanel", "Files"]);
+  const { t } = useTranslation([
+    "InviteDialog",
+    "Translations",
+    "Common",
+    "InfoPanel",
+    "Files",
+  ]);
 
   // Derive user-related values from the passed user prop
   const isOwner = user?.isOwner ?? false;
@@ -166,9 +178,12 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
   const [allowInvitingGuests, setAllowInvitingGuests] = useState(false);
 
   useEffect(() => {
-    api.settings.getInvitationSettings().then((res) => {
-      setAllowInvitingGuests(res.allowInvitingGuests);
-    }).catch(() => {});
+    api.settings
+      .getInvitationSettings()
+      .then((res) => {
+        setAllowInvitingGuests(res.allowInvitingGuests);
+      })
+      .catch(() => {});
   }, []);
 
   const [inviteItems, setInviteItems] = useState<InviteItem[]>([]);
@@ -214,7 +229,9 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
   // ─── Room & Link Fetching ────────────────────────────────────────────────────
 
   const getInfo = useCallback(async (): Promise<void> => {
-    const res = (await api.rooms.getRoomSecurityInfo(roomId)) as RoomSecurityResponse | null;
+    const res = (await api.rooms.getRoomSecurityInfo(
+      roomId,
+    )) as RoomSecurityResponse | null;
     const links = res?.items ?? [];
     const link = links[0];
 
@@ -580,7 +597,7 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
     const mutableUsers = users.map((u) => {
       let mutableUser: InviteItem = {
         id: (u.id as string | number) ?? "",
-        access: access.access ?? (u.access ?? ShareAccessRights.ReadOnly),
+        access: access.access ?? u.access ?? ShareAccessRights.ReadOnly,
         isGroup: u.isGroup,
         isVisitor: u.isVisitor,
         isCollaborator: u.isCollaborator,
@@ -591,7 +608,9 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
 
       const shouldMakeFreeRole =
         checkIfAccessPaid(mutableUser.access) &&
-        (mutableUser.isGroup || mutableUser.isVisitor || mutableUser.isCollaborator);
+        (mutableUser.isGroup ||
+          mutableUser.isVisitor ||
+          mutableUser.isCollaborator);
       const shouldMakeViewerRole =
         roomTypeResolved === RoomsType.AIRoom &&
         mutableUser.isVisitor &&
@@ -639,7 +658,9 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
 
   const bodyInvitePanel = useMemo(() => {
     const roomTypeForLinks: RoomsType =
-      roomTypeResolved === -1 ? RoomsType.EditingRoom : (roomTypeResolved as RoomsType);
+      roomTypeResolved === -1
+        ? RoomsType.EditingRoom
+        : (roomTypeResolved as RoomsType);
 
     return (
       <div style={{ display: "contents" }}>
@@ -742,10 +763,12 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
     disabled?: boolean;
   };
 
-  const accessRightsForSelector = (accessOptions as TAccessRight[]).map((o) => ({
-    ...o,
-    key: String(o.key),
-  }));
+  const accessRightsForSelector = (accessOptions as TAccessRight[]).map(
+    (o) => ({
+      ...o,
+      key: String(o.key),
+    }),
+  );
 
   const selectedAccessRight =
     accessRightsForSelector.find((a) => a.access === access) ?? null;
@@ -754,9 +777,12 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
 
   // These casts are hoisted out of JSX to avoid `<` / `>` being misread as tags.
   type PeopleSelectorProps = Parameters<typeof PeopleSelector>[0];
-  const peopleSelectorOnSubmit = addItems as unknown as PeopleSelectorProps["onSubmit"];
-  const peopleSelectorAccessRights = (accessRightsForSelector ?? []) as unknown as NonNullable<PeopleSelectorProps["accessRights"]>;
-  const peopleSelectorSelectedAccess = (selectedAccessRight ?? null) as unknown as NonNullable<PeopleSelectorProps["selectedAccessRight"]>;
+  const peopleSelectorOnSubmit =
+    addItems as unknown as PeopleSelectorProps["onSubmit"];
+  const peopleSelectorAccessRights = (accessRightsForSelector ??
+    []) as unknown as NonNullable<PeopleSelectorProps["accessRights"]>;
+  const peopleSelectorSelectedAccess = (selectedAccessRight ??
+    null) as unknown as NonNullable<PeopleSelectorProps["selectedAccessRight"]>;
 
   return (
     <ModalDialog
@@ -857,7 +883,7 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
           isDisabled={hasErrors || !hasInvitedUsers}
           primary
           onClick={onClickSend}
-          label={t("SendInvitation")}
+          label={t("Common:SendInvitation")}
           isLoading={isLoading}
           testId="invite_panel_send_button"
         />
@@ -876,3 +902,4 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
 };
 
 export default InvitePanel;
+

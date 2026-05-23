@@ -68,7 +68,9 @@ const InfoPanelHeader = observer(() => {
 
   const tabItems = availableTabs.map((id) => {
     let name: string;
-    if (id === InfoPanelView.infoShare) {
+    if (id === InfoPanelView.infoMembers) {
+      name = t("Common:Contacts");
+    } else if (id === InfoPanelView.infoShare) {
       name = t("Common:Share");
     } else if (id === InfoPanelView.infoHistory) {
       name = t("Common:SubmenuHistory");

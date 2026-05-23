@@ -39,6 +39,7 @@ import {
 import { getAvailableTabs } from "./helpers/tabs";
 import Details from "./views/Details";
 import History from "./views/History";
+import Members from "./views/Members";
 import ShareView from "./views/Share";
 import { NoItem, SeveralItems } from "./views/EmptyStates";
 
@@ -97,6 +98,8 @@ const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
       ? fileView
       : (availableTabs[0] ?? InfoPanelView.infoDetails);
 
+    if (currentView === InfoPanelView.infoMembers)
+      return <Members selection={selection} />;
     if (currentView === InfoPanelView.infoShare)
       return <ShareView selection={selection} />;
     if (currentView === InfoPanelView.infoHistory)

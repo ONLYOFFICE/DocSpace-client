@@ -106,11 +106,14 @@ const ExternalLinks: React.FC<ExternalLinksProps> = ({
   setIsLinksToggling,
   culture,
 }) => {
-  const showUsersJoinedBlock = !!(activeLink?.maxUseCount);
-  const showLifetimeBlock = !!(activeLink?.expirationDate);
+  const showUsersJoinedBlock = !!activeLink?.maxUseCount;
+  const showLifetimeBlock = !!activeLink?.expirationDate;
   const showUsersLimitWarning =
     (activeLink?.currentUseCount ?? 0) >= (activeLink?.maxUseCount ?? Infinity);
-  const linkIsExpired = isAfter(now(), parseToDateTime(activeLink?.expirationDate));
+  const linkIsExpired = isAfter(
+    now(),
+    parseToDateTime(activeLink?.expirationDate),
+  );
 
   const locale = getCookie(LANGUAGE) ?? culture ?? "en";
 
@@ -180,13 +183,13 @@ const ExternalLinks: React.FC<ExternalLinksProps> = ({
   const description =
     roomType === RoomsType.AIRoom
       ? allowInvitingGuests
-        ? t("InviteViaLinkDescriptionAgentGuest")
-        : t("InviteViaLinkDescriptionAgentMembers", {
+        ? t("Common:InviteViaLinkDescriptionAgentGuest")
+        : t("Common:InviteViaLinkDescriptionAgentMembers", {
             productName: getBrandName("ProductName"),
           })
       : allowInvitingGuests
-        ? t("InviteViaLinkDescriptionRoomGuest")
-        : t("InviteViaLinkDescriptionRoomMembers", {
+        ? t("Common:InviteViaLinkDescriptionRoomGuest")
+        : t("Common:InviteViaLinkDescriptionRoomMembers", {
             productName: getBrandName("ProductName"),
           });
 
@@ -197,7 +200,7 @@ const ExternalLinks: React.FC<ExternalLinksProps> = ({
           [styles.inline]: true,
         })}
       >
-        {t("InviteViaLink")}
+        {t("Common:InviteViaLink")}
 
         <ToggleButton
           className={classNames("invite-via-link", styles.toggleButton)}
@@ -260,7 +263,7 @@ const ExternalLinks: React.FC<ExternalLinksProps> = ({
                     fontSize="12px"
                     fontWeight={400}
                   >
-                    {t("Files:ValidUntil")}
+                    {t("Common:ValidUntil")}
                   </Text>
                   <Text
                     fontSize="12px"
@@ -280,7 +283,7 @@ const ExternalLinks: React.FC<ExternalLinksProps> = ({
                         <>
                           <Text>{t("Common:LinkSettingsExpired")}</Text>
                           <Text>
-                            {t("Files:LinkSettingsExpiredToastDescription")}
+                            {t("Common:LinkSettingsExpiredToastDescription")}
                           </Text>
                         </>
                       }
@@ -302,7 +305,7 @@ const ExternalLinks: React.FC<ExternalLinksProps> = ({
                     fontSize="12px"
                     fontWeight={400}
                   >
-                    {t("Files:UsersJoined")}
+                    {t("Common:UsersJoined")}
                   </Text>
                   <Text
                     fontSize="12px"
@@ -319,9 +322,9 @@ const ExternalLinks: React.FC<ExternalLinksProps> = ({
                       iconNode={<ButtonAlertIcon />}
                       tooltipContent={
                         <>
-                          <Text>{t("Files:LinkSettingsUsersLimitToast")}</Text>
+                          <Text>{t("LinkSettingsUsersLimitToast")}</Text>
                           <Text>
-                            {t("Files:LinkSettingsUsersLimitToastDescription")}
+                            {t("Common:LinkSettingsUsersLimitToastDescription")}
                           </Text>
                         </>
                       }
@@ -340,3 +343,4 @@ const ExternalLinks: React.FC<ExternalLinksProps> = ({
 };
 
 export default ExternalLinks;
+

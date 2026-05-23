@@ -45,12 +45,14 @@ export const enum InfoPanelView {
   infoShare = "info_share",
   infoHistory = "info_history",
   infoDetails = "info_details",
+  infoMembers = "info_members",
 }
 
 export type InfoPanelViewType =
   | InfoPanelView.infoShare
   | InfoPanelView.infoHistory
-  | InfoPanelView.infoDetails;
+  | InfoPanelView.infoDetails
+  | InfoPanelView.infoMembers;
 
 class InfoPanelStore {
   isVisible: boolean = false;

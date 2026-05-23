@@ -36,7 +36,10 @@ import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import EveryoneIconUrl from "PUBLIC_DIR/images/icons/16/departments.react.svg?url";
 
 import { Avatar } from "@docspace/ui-kit/components/avatar";
-import { AvatarRole, AvatarSize } from "@docspace/ui-kit/components/avatar/Avatar.enums";
+import {
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/ui-kit/components/avatar/Avatar.enums";
 import { Link } from "@docspace/ui-kit/components/link";
 import { LinkType } from "@docspace/ui-kit/components/link/Link.enums";
 import { Text } from "@docspace/ui-kit/components/text";
@@ -183,7 +186,8 @@ const InviteInput: React.FC<InviteInputProps> = ({
       const filter = Filter.getDefault();
 
       filter.search = query;
-      (filter as unknown as Record<string, unknown>).filterSeparator = filterSeparator;
+      (filter as unknown as Record<string, unknown>).filterSeparator =
+        filterSeparator;
 
       const users = await getMembersList(
         isPrivateRoom ? AccountsSearchArea.People : AccountsSearchArea.Any,
@@ -494,7 +498,11 @@ const InviteInput: React.FC<InviteInputProps> = ({
           height={53}
         >
           <div className={styles.emailListAvatar}>
-            <Avatar size={AvatarSize.min} role={AvatarRole.user} source={AtReactSvgUrl} />
+            <Avatar
+              size={AvatarSize.min}
+              role={AvatarRole.user}
+              source={AtReactSvgUrl}
+            />
             <div className={styles.emailListContainer}>
               <Text truncate fontSize="14px" fontWeight={600}>
                 {inputValue}
@@ -523,7 +531,9 @@ const InviteInput: React.FC<InviteInputProps> = ({
     if (item.access !== undefined) setSelectedAccess(item.access);
   };
   // Cast hoisted out of JSX to avoid `<TOption>` being misread as a tag.
-  const onSelectAccessCast = onSelectAccessInternal as (access: TOption) => void;
+  const onSelectAccessCast = onSelectAccessInternal as (
+    access: TOption,
+  ) => void;
 
   const onKeyPress = (e: KeyboardEvent) => {
     if (e.key === "Enter") {
@@ -550,7 +560,7 @@ const InviteInput: React.FC<InviteInputProps> = ({
   return (
     <>
       <Heading className={styles.subHeader}>
-        {t("AddManually")}
+        {t("Common:AddManually")}
         {!hideSelector ? (
           <Link
             className={classNames(styles.styledLink, "link-list")}
@@ -560,7 +570,7 @@ const InviteInput: React.FC<InviteInputProps> = ({
             onClick={openUsersPanel}
             dataTestId="invite_panel_choose_from_list_link"
           >
-            {t("Translations:ChooseFromList")}
+            {t("Common:ChooseFromList")}
           </Link>
         ) : null}
       </Heading>
@@ -570,10 +580,10 @@ const InviteInput: React.FC<InviteInputProps> = ({
         })}
       >
         {!allowInvitingGuests
-          ? t("InviteToRoomManuallyInfoMembers", {
+          ? t("Common:InviteToRoomManuallyInfoMembers", {
               productName: getBrandName("ProductName"),
             })
-          : t("InviteToRoomManuallyInfoGuest", {
+          : t("Common:InviteToRoomManuallyInfoGuest", {
               productName: getBrandName("ProductName"),
             })}
       </Text>
@@ -591,8 +601,8 @@ const InviteInput: React.FC<InviteInputProps> = ({
             onChange={onChange}
             placeholder={
               !allowInvitingGuests
-                ? t("InviteToRoomAddPlaceholder")
-                : t("InviteToRoomSearchPlaceholder")
+                ? t("Common:InviteToRoomAddPlaceholder")
+                : t("Common:InviteToRoomSearchPlaceholder")
             }
             value={inputValue}
             onKeyDown={onKeyDown}
@@ -651,3 +661,4 @@ const InviteInput: React.FC<InviteInputProps> = ({
 };
 
 export default InviteInput;
+

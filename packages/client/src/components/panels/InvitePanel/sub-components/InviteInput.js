@@ -657,7 +657,7 @@ const InviteInput = ({
             onClick={openUsersPanel}
             dataTestId="invite_panel_choose_from_list_link"
           >
-            {t("Translations:ChooseFromList")}
+            {t("ChooseFromList")}
           </Link>
         ) : null}
       </Heading>

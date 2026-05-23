@@ -24,36 +24,50 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+.membersList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
 
-import {
-  InfoPanelView,
-  type InfoPanelViewType,
-} from "../../../_store/InfoPanelStore";
+.memberGroup {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 8px;
+}
 
-export function getAvailableTabs(
-  selection: TFile | TFolder | null,
-): InfoPanelViewType[] {
-  if (!selection) return [InfoPanelView.infoDetails];
+.groupTitle {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 16px 0 8px;
+  color: var(--info-panel-text-color);
+}
 
-  const isRoom = "isRoom" in selection && Boolean(selection.isRoom);
-  if (isRoom) {
-    return [
-      InfoPanelView.infoMembers,
-      InfoPanelView.infoHistory,
-      InfoPanelView.infoDetails,
-    ];
-  }
+.memberRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  width: 100%;
+  min-width: 0;
+}
 
-  const tabs: InfoPanelViewType[] = [];
+.memberInfo {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
 
-  const canShare = "canShare" in selection && selection.canShare;
+.memberName {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--info-panel-text-color);
+}
 
-  if (canShare) {
-    tabs.push(InfoPanelView.infoShare);
-  }
-
-  tabs.push(InfoPanelView.infoHistory, InfoPanelView.infoDetails);
-
-  return tabs;
+.memberRole {
+  font-size: 11px;
+  color: var(--info-panel-text-color);
+  opacity: 0.6;
 }

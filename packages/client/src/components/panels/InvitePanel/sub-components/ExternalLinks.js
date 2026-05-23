@@ -274,7 +274,7 @@ const ExternalLinks = ({
                     fontSize="12px"
                     fontWeight={400}
                   >
-                    {t("Files:ValidUntil")}
+                    {t("ValidUntil")}
                   </Text>
                   <Text
                     fontSize="12px"
@@ -294,7 +294,7 @@ const ExternalLinks = ({
                         <>
                           <Text>{t("Common:LinkSettingsExpired")}</Text>
                           <Text>
-                            {t("Files:LinkSettingsExpiredToastDescription")}
+                            {t("LinkSettingsExpiredToastDescription")}
                           </Text>
                         </>
                       }
@@ -316,7 +316,7 @@ const ExternalLinks = ({
                     fontSize="12px"
                     fontWeight={400}
                   >
-                    {t("Files:UsersJoined")}
+                    {t("UsersJoined")}
                   </Text>
                   <Text
                     fontSize="12px"
@@ -333,9 +333,9 @@ const ExternalLinks = ({
                       iconNode={<ButtonAlertIcon />}
                       tooltipContent={
                         <>
-                          <Text>{t("Files:LinkSettingsUsersLimitToast")}</Text>
+                          <Text>{t("LinkSettingsUsersLimitToast")}</Text>
                           <Text>
-                            {t("Files:LinkSettingsUsersLimitToastDescription")}
+                            {t("LinkSettingsUsersLimitToastDescription")}
                           </Text>
                         </>
                       }

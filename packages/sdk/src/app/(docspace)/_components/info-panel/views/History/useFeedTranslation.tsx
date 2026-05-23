@@ -100,7 +100,7 @@ export const useFeedTranslation = (
             ns="Common"
             i18nKey="HistoryRoomCreated"
             values={{ roomTitle: title }}
-            components={{ 1: <HistoryText title={title ?? ""} /> }}
+            components={{ 1: <HistoryText key="1" title={title ?? ""} /> }}
           />
         );
       }
@@ -114,8 +114,8 @@ export const useFeedTranslation = (
             i18nKey="RoomRenamed"
             values={{ oldRoomTitle: oldTitle, roomTitle: newTitle }}
             components={{
-              1: <HistoryText title={oldTitle ?? ""} />,
-              2: <HistoryText title={newTitle ?? ""} />,
+              1: <HistoryText key="1" title={oldTitle ?? ""} />,
+              2: <HistoryText key="2" title={newTitle ?? ""} />,
             }}
           />
         );

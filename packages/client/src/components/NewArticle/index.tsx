@@ -291,6 +291,19 @@ const NewArticle = ({
               icon: FormGalleryReactSvgUrl,
               onClick: () => navigate("/ai-forms?section=completed-forms"),
             },
+            {
+              id: "ai-forms-recent",
+              label: t("Common:Recent"),
+              icon: CatalogRestoreReactSvgUrl,
+              onClick: () => navigate("/ai-forms?section=recent"),
+              withTopSeparator: true,
+            },
+            {
+              id: "ai-forms-favorites",
+              label: t("Common:Favorites"),
+              icon: CatalogFavoritesReactSvgUrl,
+              onClick: () => navigate("/ai-forms?section=favorites"),
+            },
             ...(canCreateForms
               ? [
                   {
@@ -301,6 +314,13 @@ const NewArticle = ({
                   },
                 ]
               : []),
+            {
+              id: "ai-forms-trash",
+              label: t("Common:TrashSection"),
+              icon: CatalogTrashReactSvgUrl,
+              onClick: () => navigate("/ai-forms?section=trash"),
+              withTopSeparator: true,
+            },
             ...(isAdminOrOwner
               ? [
                   {
@@ -325,22 +345,23 @@ const NewArticle = ({
       children: aiRoomsEnabled
         ? [
             {
-              id: "ai-rooms-favorites",
-              label: t("Common:Favorites"),
-              icon: CatalogFavoritesReactSvgUrl,
-              onClick: () => navigate("/ai-rooms?section=favorites"),
-            },
-            {
               id: "ai-rooms-recent",
               label: t("Common:Recent"),
               icon: CatalogRestoreReactSvgUrl,
               onClick: () => navigate("/ai-rooms?section=recent"),
             },
             {
+              id: "ai-rooms-favorites",
+              label: t("Common:Favorites"),
+              icon: CatalogFavoritesReactSvgUrl,
+              onClick: () => navigate("/ai-rooms?section=favorites"),
+            },
+            {
               id: "ai-rooms-archive",
               label: t("Common:Archive"),
               icon: CatalogArchiveReactSvgUrl,
               onClick: () => navigate("/ai-rooms?section=archive"),
+              withTopSeparator: true,
             },
             {
               id: "ai-rooms-trash",

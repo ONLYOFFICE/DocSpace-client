@@ -212,7 +212,7 @@ const Members = ({ selection }: MembersProps) => {
       data-testid="info_panel_members"
     >
       <MemberGroup
-        title={t("InfoPanel:Administrators")}
+        title={t("InfoPanel:Administration")}
         members={admins}
         t={t}
       />
@@ -227,7 +227,7 @@ const Members = ({ selection }: MembersProps) => {
         t={t}
       />
       <MemberGroup
-        title={t("InfoPanel:Pending")}
+        title={t("InfoPanel:ExpectUsers")}
         members={pending}
         t={t}
       />

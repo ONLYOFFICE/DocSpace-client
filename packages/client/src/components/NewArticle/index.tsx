@@ -199,7 +199,7 @@ const NewArticle = ({
   }, [docsCloudEnabled, navigate]);
 
   const groups = React.useMemo<NavMenuGroup[]>(() => {
-    const underDevelopment = () => toastr.info(t("Common:UnderDevelopment"));
+    // const underDevelopment = () => toastr.info(t("Common:UnderDevelopment"));
 
     const docsCloudItem: NavMenuItem = {
       id: DOCS_CLOUD_ID,

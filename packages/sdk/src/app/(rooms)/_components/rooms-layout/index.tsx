@@ -137,21 +137,24 @@ const RoomsLayout = observer(
     }, []);
 
     const quickActionItems = React.useMemo<QuickActionItem[]>(
-      () => [
-        {
-          id: "custom-room",
-          icon: <CreateCustomRoomIllustrationIcon />,
-          label: t("Common:NewRoom"),
-          onClick: createCustomRoom,
-          disabled: isArchive,
-        },
-        {
-          id: "use-template",
-          icon: <UseRoomTemplateIllustrationIcon />,
-          label: t("Common:UseTemplate"),
-          disabled: true,
-        },
-      ],
+      () =>
+        isArchive
+          ? []
+          : [
+              {
+                id: "custom-room",
+                icon: <CreateCustomRoomIllustrationIcon />,
+                label: t("Common:NewRoom"),
+                onClick: createCustomRoom,
+                disabled: isArchive,
+              },
+              {
+                id: "use-template",
+                icon: <UseRoomTemplateIllustrationIcon />,
+                label: t("Common:UseTemplate"),
+                disabled: true,
+              },
+            ],
       [t, createCustomRoom, isArchive],
     );
 
@@ -191,13 +194,15 @@ const RoomsLayout = observer(
             }
             sectionFilterContent={
               <>
-                <QuickActions
-                  items={quickActionItems}
-                  className={styles.quickActions}
-                />
+                {!isArchive && (
+                  <QuickActions
+                    items={quickActionItems}
+                    className={styles.quickActions}
+                  />
+                )}
                 <Filter
                   filesFilter={filesFilter}
-                  showMainButton
+                  showMainButton={!isArchive}
                   mainButtonProps={{
                     isDropdown: false,
                     // model: mainButtonModel,

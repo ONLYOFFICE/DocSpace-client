@@ -155,25 +155,25 @@ const RoomsLayout = observer(
       [t, createCustomRoom, isArchive],
     );
 
-    const mainButtonModel = React.useMemo<ContextMenuModel[]>(
-      () => [
-        {
-          id: "actions_create-custom-room",
-          key: "custom-room",
-          label: t("Common:NewRoom"),
-          icon: CreateRoomReactSvgUrl,
-          onClick: createCustomRoom,
-        },
-        {
-          id: "actions_use-template",
-          key: "use-template",
-          label: t("Common:UseTemplate"),
-          icon: TemplateReactSvgUrl,
-          disabled: true,
-        },
-      ],
-      [t, createCustomRoom],
-    );
+    // const mainButtonModel = React.useMemo<ContextMenuModel[]>(
+    //   () => [
+    //     {
+    //       id: "actions_create-custom-room",
+    //       key: "custom-room",
+    //       label: t("Common:NewRoom"),
+    //       icon: CreateRoomReactSvgUrl,
+    //       onClick: createCustomRoom,
+    //     },
+    //     {
+    //       id: "actions_use-template",
+    //       key: "use-template",
+    //       label: t("Common:UseTemplate"),
+    //       icon: TemplateReactSvgUrl,
+    //       disabled: true,
+    //     },
+    //   ],
+    //   [t, createCustomRoom],
+    // );
 
     return (
       <div className={styles.root} style={frameHeaderVars}>
@@ -199,10 +199,13 @@ const RoomsLayout = observer(
                   filesFilter={filesFilter}
                   showMainButton
                   mainButtonProps={{
-                    isDropdown: true,
-                    model: mainButtonModel,
-                    text: t("Common:New"),
+                    isDropdown: false,
+                    // model: mainButtonModel,
+                    text: t("Common:NewRoom"),
+                    onAction: createCustomRoom,
+                    model: [],
                     isDisabled: isArchive,
+                    hideArrow: true,
                   }}
                 />
               </>

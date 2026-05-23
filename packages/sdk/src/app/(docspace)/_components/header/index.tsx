@@ -98,7 +98,9 @@ const Header = ({
     onRestoreClick: isTrashSection ? fileOpsCtx?.restoreItem : undefined,
     onCopySelectedClick: !isTrashSection ? fileOpsCtx?.copyItems : undefined,
     onMoveSelectedClick: !isTrashSection ? fileOpsCtx?.moveItems : undefined,
-    onRestoreSelectedClick: isTrashSection ? fileOpsCtx?.restoreItems : undefined,
+    onRestoreSelectedClick: isTrashSection
+      ? fileOpsCtx?.restoreItems
+      : undefined,
   });
   const { getHeaderMenu, onCheckboxChange } = useHeaderMenu();
 
@@ -117,22 +119,25 @@ const Header = ({
   const pathParts = filesListStore.pathParts ?? pathPartsProp;
 
   const isRoomsFolder = pathParts?.[0]?.id === rootFolderId;
+  const isInRoomsContext =
+    pathParts?.[0]?.folderType === FolderType.Rooms ||
+    pathParts?.[0]?.folderType === FolderType.Archive;
 
   const navigationItems: TNavigationItem[] = useMemo(() => {
     if (!pathParts) return [];
 
-    const items = pathParts
+    const items: TNavigationItem[] = pathParts
       .map((p) => ({
         id: p.id,
         title: p.title,
         isRootRoom: !p.roomType,
       }))
-      .filter((item) => item.isRootRoom);
+      .filter((item) => isInRoomsContext || item.isRootRoom);
 
     items.pop();
 
     return items.reverse();
-  }, [pathParts]);
+  }, [pathParts, isInRoomsContext]);
 
   const prevIdRef = React.useRef<typeof id>(id);
 
@@ -252,3 +257,4 @@ const Header = ({
 };
 
 export default observer(Header);
+

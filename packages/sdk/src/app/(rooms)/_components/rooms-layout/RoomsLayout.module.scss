@@ -1,0 +1,46 @@
+@use "@docspace/ui-kit/styles/mixins";
+
+.root {
+	display: flex;
+	width: 100%;
+	height: 100dvh;
+	position: relative;
+	overflow: hidden;
+}
+
+.root :global(.articleItemText) {
+	font-weight: 600;
+}
+
+.root :global(#section) {
+	@include mixins.mobile {
+		width: 100% !important;
+		max-width: 100% !important;
+		padding-inline-start: 8px;
+	}
+}
+
+.root :global(.section-body_header) {
+	@include mixins.mobile {
+		min-width: 100% !important;
+	}
+}
+
+.root :global([class*="Navigation_box"]) {
+	padding-top: var(--nav-dropbox-padding-top, 18px);
+
+	@include mixins.tablet-and-below {
+		padding-top: var(--nav-dropbox-padding-top, 14px);
+	}
+
+	@include mixins.mobile {
+		padding-top: var(--nav-dropbox-padding-top, 10px) !important;
+	}
+}
+
+.quickActions {
+	margin: 0 auto 16px;
+	justify-content: center;
+	max-width: 736px;
+	width: 100%;
+}

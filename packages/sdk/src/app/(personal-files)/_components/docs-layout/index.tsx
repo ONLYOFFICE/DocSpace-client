@@ -37,7 +37,7 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import type {
   TFile,
@@ -88,8 +88,11 @@ import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import CreateFileDialog from "../create-file-dialog";
 import ConvertDialog from "../convert-dialog";
 import VersionHistoryPanel from "../version-history-panel";
-import { InfoPanelView, useInfoPanelStore } from "../../_store/InfoPanelStore";
 import { useVersionHistoryStore } from "../../_store/VersionHistoryStore";
+import {
+  InfoPanelView,
+  useInfoPanelStore,
+} from "@/app/(docspace)/_store/InfoPanelStore";
 import useDocsActions from "../../_hooks/useDocsActions";
 import { useDocsMenuModels } from "../../_hooks/useDocsMenuModels";
 import useTrashActions from "../../_hooks/useTrashActions";
@@ -109,7 +112,7 @@ import {
   InfoPanelBody as DocsInfoPanelBody,
   InfoPanelHeader as DocsInfoPanelHeader,
   InfoPanelEditLinkDialog,
-} from "../info-panel";
+} from "@/app/(docspace)/_components/info-panel";
 
 import styles from "./DocsLayout.module.scss";
 
@@ -122,6 +125,18 @@ type DocsLayoutProps = {
   filesSettings: TFilesSettings;
   portalSettings: TSettings;
   filesFilter: string;
+  /**
+   * Temporary flag: hide "Add to favorites" in file/folder context menus.
+   * Used for rooms internals and trash.
+   */
+  withoutFavorite?: boolean;
+  /**
+   * Base path used to navigate to the editor route. Defaults to
+   * "/personal-files/editor". When provided (e.g., "/editor" for rooms), the
+   * current pathname is appended as a `returnTo` query parameter so the editor
+   * page can navigate back to the originating section.
+   */
+  editorBasePath?: string;
 };
 
 const getSubmitLabel = (mode: SelectorMode, t: (key: string) => string) => {
@@ -140,6 +155,8 @@ const DocsLayout = observer(
     filesSettings,
     portalSettings,
     filesFilter,
+ 	withoutFavorite,
+    editorBasePath,
   }: DocsLayoutProps) => {
     const { t } = useTranslation(["Common"]);
     const { isEmptyList } = useSettingsStore();
@@ -149,12 +166,16 @@ const DocsLayout = observer(
     const docsUserStore = useDocsUserStore();
     const { sdkConfig } = useSDKConfig();
     const router = useRouter();
+    const pathname = usePathname();
 
     const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
 
     const isMyDocuments = rootFolderType === FolderType.USER;
-    const isActionButtonEnabled =
-      isMyDocuments && !sdkConfig?.disableActionButton;
+  	const isInRooms =
+    rootFolderType === FolderType.Rooms ||
+    rootFolderType === FolderType.Archive;
+     const isActionButtonEnabled =
+    (isMyDocuments || isInRooms) && !sdkConfig?.disableActionButton;
 
     const docsActions = useDocsActions();
     const {
@@ -251,12 +272,19 @@ const DocsLayout = observer(
 
     const openFileInEditor = React.useCallback(
       (file: TFileItem, preview?: boolean) => {
-        const url = preview
-          ? `/personal-files/editor/${file.id}?action=view`
-          : `/personal-files/editor/${file.id}`;
-        router.push(url);
+  	 const basePath = editorBasePath ?? "/personal-files/editor";
+      const params = new URLSearchParams();
+      if (preview) params.set("action", "view");
+      if (editorBasePath && pathname) {
+        params.set("returnTo", pathname);
+      }
+      const qs = params.toString();
+      const url = qs
+        ? `${basePath}/${file.id}?${qs}`
+        : `${basePath}/${file.id}`;
+      router.push(url);
       },
-      [router],
+      [router, editorBasePath, pathname],
     );
 
     const {
@@ -284,7 +312,6 @@ const DocsLayout = observer(
       },
       [openFileInEditor, requestConvert],
     );
-
     const shareHandler = React.useCallback(
       (item: TFileItem | TFolderItem) => {
         infoPanelStore.open(item);

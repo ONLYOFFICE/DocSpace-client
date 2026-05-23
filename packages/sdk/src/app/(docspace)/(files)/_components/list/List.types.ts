@@ -51,5 +51,7 @@ export type ListProps = {
   currentUserId?: string;
 
   shareKey?: string;
+  withoutFavorite?: boolean;
   infoPanelVisible?: boolean;
 };
+

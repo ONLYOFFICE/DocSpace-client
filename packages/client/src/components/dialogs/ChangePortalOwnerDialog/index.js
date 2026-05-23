@@ -225,9 +225,9 @@ const ChangePortalOwnerDialog = ({
             <AddButton
               className="selector-add-button"
               onClick={onTogglePeopleSelector}
-              label={t("Translations:ChooseFromList")}
+              label={t("Common:ChooseFromList")}
               noSelect
-              titleText={t("Translations:ChooseFromList")}
+              titleText={t("Common:ChooseFromList")}
               testId="change_portal_owner_choose_from_list_button"
             />
           </div>

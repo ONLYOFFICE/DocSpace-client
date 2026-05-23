@@ -123,3 +123,4 @@ export default inject(({ settingsStore, userStore }: TStore) => ({
   currentUserId: userStore.user?.id,
   currentColorScheme: settingsStore.currentColorScheme,
 }))(observer(ChangeRoomOwner));
+

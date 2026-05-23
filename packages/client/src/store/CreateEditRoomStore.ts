@@ -60,7 +60,7 @@ import { startDbSync } from "@docspace/shared/api/rooms";
 import { DbSyncService } from "@docspace/shared/services/db-sync.service";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
+import { calculateRoomLogoParams } from "@docspace/ui-kit/utils";
 import { openMembersTab, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import FilesStore from "./FilesStore";

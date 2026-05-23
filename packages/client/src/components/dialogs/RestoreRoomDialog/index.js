@@ -85,15 +85,15 @@ const RestoreRoomDialogComponent = (props) => {
   const getDescription = () => {
     if (hasPublicRoom) {
       return items.length > 1
-        ? t("Files:WantToRestoreTheRooms")
-        : t("Files:WantToRestoreTheRoom");
+        ? t("Common:WantToRestoreTheRooms")
+        : t("Common:WantToRestoreTheRoom");
     }
 
-    if (restoreAll) return t("ArchiveDialog:RestoreAllRooms");
+    if (restoreAll) return t("Common:RestoreAllRooms");
 
     return items.length > 1
-      ? t("ArchiveDialog:RestoreRooms")
-      : t("ArchiveDialog:RestoreRoom");
+      ? t("Common:RestoreRooms")
+      : t("Common:RestoreRoom");
   };
 
   const description = getDescription();
@@ -172,3 +172,4 @@ export default inject(
     };
   },
 )(observer(RestoreRoomDialog));
+

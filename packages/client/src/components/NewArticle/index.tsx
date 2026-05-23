@@ -41,6 +41,7 @@ import {
   InstallAiFormsDialog,
   InstallDocsCloudDialog,
 } from "SRC_DIR/pages/Dashboard/InstallModuleDialog";
+import { EnableAiRoomsDialog } from "SRC_DIR/pages/Dashboard/EnableAiRoomsDialog";
 
 import CatalogDocumentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
@@ -49,6 +50,7 @@ import CatalogAiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-ag
 import CatalogFavoritesReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.favorites.react.svg?url";
 import CatalogSharedReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.shared.outline.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
+import CatalogArchiveReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.archive.react.svg?url";
 import CatalogSettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import CatalogRestoreReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-restore.svg?url";
 import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
@@ -68,6 +70,7 @@ const PATH_TO_PARENT_ID: Record<string, string> = {
   "/docs-cloud": DOCS_CLOUD_ID,
   "/ai-files": AI_FILES_ID,
   "/ai-forms": AI_FORMS_ID,
+  "/ai-rooms": AI_ROOMS_ID,
 };
 
 const AI_FILES_SECTION_TO_ID: Record<string, string> = {
@@ -92,6 +95,14 @@ const AI_AGENTS_SECTION_TO_ID: Record<string, string> = {
   settings: "ai-agents-settings",
 };
 
+const AI_ROOMS_SECTION_TO_ID: Record<string, string> = {
+  recent: "ai-rooms-recent",
+  favorites: "ai-rooms-favorites",
+  archive: "ai-rooms-archive",
+  trash: "ai-rooms-trash",
+  settings: "ai-rooms-settings",
+};
+
 type NewArticleProps = {
   user?: TUser | null;
   currentDeviceType: DeviceType;
@@ -103,6 +114,7 @@ type NewArticleProps = {
   aiRoomsEnabled: boolean;
   aiAgentsEnabled: boolean;
   activate: (id: string) => Promise<boolean>;
+  enable: (id: string, enabled: boolean) => Promise<unknown>;
   ensureAppsLoaded: () => void;
   toggleArticleOpen: () => void;
 };
@@ -118,6 +130,7 @@ const NewArticle = ({
   aiRoomsEnabled,
   aiAgentsEnabled,
   activate,
+  enable,
   ensureAppsLoaded,
   toggleArticleOpen,
 }: NewArticleProps) => {
@@ -127,6 +140,22 @@ const NewArticle = ({
   const [installDialogVisible, setInstallDialogVisible] = React.useState(false);
   const [installDocsCloudVisible, setInstallDocsCloudVisible] =
     React.useState(false);
+  const [enableAiRoomsVisible, setEnableAiRoomsVisible] = React.useState(false);
+  const [enableAiRoomsLoading, setEnableAiRoomsLoading] = React.useState(false);
+
+  const handleConfirmEnableAiRooms = async () => {
+    setEnableAiRoomsLoading(true);
+    try {
+      await enable("ai-rooms", true);
+      setEnableAiRoomsVisible(false);
+      navigate("/ai-rooms?section=rooms");
+    } catch (err) {
+      console.error("Failed to enable ai-rooms", err);
+      toastr.error(t("Common:SomethingWentWrong"));
+    } finally {
+      setEnableAiRoomsLoading(false);
+    }
+  };
 
   React.useEffect(() => {
     ensureAppsLoaded();
@@ -138,7 +167,8 @@ const NewArticle = ({
   });
 
   const isAdminOrOwner = (user?.isAdmin ?? false) || (user?.isOwner ?? false);
-  const canCreateForms = !(user?.isVisitor ?? false) && !(user?.isCollaborator ?? false);
+  const canCreateForms =
+    !(user?.isVisitor ?? false) && !(user?.isCollaborator ?? false);
 
   const activeId = React.useMemo(() => {
     const section = new URLSearchParams(location.search).get("section") ?? "";
@@ -150,6 +180,9 @@ const NewArticle = ({
     }
     if (location.pathname.startsWith("/ai-agents")) {
       return AI_AGENTS_SECTION_TO_ID[section] ?? AI_AGENTS_ID;
+    }
+    if (location.pathname.startsWith("/ai-rooms")) {
+      return AI_ROOMS_SECTION_TO_ID[section] ?? AI_ROOMS_ID;
     }
     for (const [path, id] of Object.entries(PATH_TO_PARENT_ID)) {
       if (location.pathname.startsWith(path)) return id;
@@ -286,7 +319,43 @@ const NewArticle = ({
       id: AI_ROOMS_ID,
       label: t("Common:DashboardAIRoomsTitle"),
       icon: CatalogRoomsReactSvgUrl,
-      onClick: underDevelopment,
+      onClick: aiRoomsEnabled
+        ? () => navigate("/ai-rooms?section=rooms")
+        : () => setEnableAiRoomsVisible(true),
+      children: aiRoomsEnabled
+        ? [
+            {
+              id: "ai-rooms-favorites",
+              label: t("Common:Favorites"),
+              icon: CatalogFavoritesReactSvgUrl,
+              onClick: () => navigate("/ai-rooms?section=favorites"),
+            },
+            {
+              id: "ai-rooms-recent",
+              label: t("Common:Recent"),
+              icon: CatalogRestoreReactSvgUrl,
+              onClick: () => navigate("/ai-rooms?section=recent"),
+            },
+            {
+              id: "ai-rooms-archive",
+              label: t("Common:Archive"),
+              icon: CatalogArchiveReactSvgUrl,
+              onClick: () => navigate("/ai-rooms?section=archive"),
+            },
+            {
+              id: "ai-rooms-trash",
+              label: t("Common:TrashSection"),
+              icon: CatalogTrashReactSvgUrl,
+              onClick: () => navigate("/ai-rooms?section=trash"),
+            },
+            {
+              id: "ai-rooms-settings",
+              label: t("Common:Settings"),
+              icon: CatalogSettingsReactSvgUrl,
+              onClick: () => navigate("/ai-rooms?section=settings"),
+            },
+          ]
+        : undefined,
     };
 
     const handleAiAgentsClick = async () => {
@@ -344,11 +413,11 @@ const NewArticle = ({
     };
 
     const all: { item: NavMenuItem; enabled: boolean }[] = [
-      { item: docsCloudItem, enabled: docsCloudEnabled },
       { item: aiFilesItem, enabled: aiFilesEnabled },
-      { item: aiFormsItem, enabled: aiFormsEnabled },
       { item: aiRoomsItem, enabled: aiRoomsEnabled },
+      { item: aiFormsItem, enabled: aiFormsEnabled },
       { item: aiAgentsItem, enabled: aiAgentsEnabled },
+      { item: docsCloudItem, enabled: docsCloudEnabled },
     ];
 
     const enabled = all.filter((x) => x.enabled).map((x) => x.item);
@@ -415,6 +484,12 @@ const NewArticle = ({
           navigate("/docs-cloud");
         }}
       />
+      <EnableAiRoomsDialog
+        visible={enableAiRoomsVisible}
+        isLoading={enableAiRoomsLoading}
+        onClose={() => setEnableAiRoomsVisible(false)}
+        onConfirm={handleConfirmEnableAiRooms}
+      />
     </>
   );
 };
@@ -432,6 +507,7 @@ const NewArticleConnected = inject<TStore>(
     aiRoomsEnabled: appsStore.isEnabled("ai-rooms"),
     aiAgentsEnabled: appsStore.isEnabled("ai-agents"),
     activate: appsStore.activate,
+    enable: appsStore.enable,
     ensureAppsLoaded: appsStore.ensureLoaded,
   }),
 )(observer(NewArticle));

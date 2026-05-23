@@ -194,19 +194,19 @@ const ChangeRoomOwner = (props) => {
 
   const headerLabel = isAIAgent
     ? t("Files:ChangeTheAgentOwner")
-    : t("Files:ChangeTheRoomOwner");
+    : t("Common:ChangeTheRoomOwner");
 
   const infoText = isAIAgent
     ? t("Files:ChangeAgentOwnerSelectorInfo", {
         productName: getBrandName("ProductName"),
       })
-    : t("CreateEditRoomDialog:PeopleSelectorInfo", {
+    : t("Common:PeopleSelectorInfo", {
         productName: getBrandName("ProductName"),
       });
 
   const footerCheckboxLabel = isAIAgent
     ? t("Common:LeaveTheAgent")
-    : t("Files:LeaveTheRoom");
+    : t("Common:LeaveTheRoom");
 
   const selectorComponent = excludeReady ? (
     <PeopleSelector
@@ -312,3 +312,4 @@ export default inject(
     ),
   ),
 );
+

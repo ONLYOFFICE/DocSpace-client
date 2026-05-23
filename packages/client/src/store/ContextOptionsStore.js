@@ -2287,7 +2287,7 @@ class ContextOptionsStore {
       {
         id: "option_edit-room",
         key: "edit-room",
-        label: t("EditRoom"),
+        label: t("Common:EditRoom"),
         icon: SettingsReactSvgUrl,
         onClick: () => this.onClickEditRoom(item),
         disabled: false,
@@ -2584,7 +2584,7 @@ class ContextOptionsStore {
       {
         id: "option_change-room-owner",
         key: "change-room-owner",
-        label: t("Files:ChangeRoomOwner"),
+        label: t("Common:ChangeRoomOwner"),
         icon: ReconnectSvgUrl,
         onClick: this.onChangeRoomOwner,
         disabled: isAIAgent,
@@ -2737,7 +2737,7 @@ class ContextOptionsStore {
       {
         id: "option_leave-room",
         key: "leave-room",
-        label: isAIAgent ? t("LeaveTheAgent") : t("LeaveTheRoom"),
+        label: isAIAgent ? t("LeaveTheAgent") : t("Common:LeaveTheRoom"),
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
         disabled: isKnowledgeOrResult
@@ -2747,7 +2747,7 @@ class ContextOptionsStore {
       {
         id: "option_archive-room",
         key: "archive-room",
-        label: t("MoveToArchive"),
+        label: t("Common:MoveToArchive"),
         icon: RoomArchiveSvgUrl,
         onClick: () => this.onClickArchive("archive"),
         disabled: false,
@@ -3257,7 +3257,7 @@ class ContextOptionsStore {
       if (canArchiveRoom) {
         archiveOptions = {
           key: "archive-room",
-          label: t("MoveToArchive"),
+          label: t("Common:MoveToArchive"),
           icon: RoomArchiveSvgUrl,
           onClick: (e) => this.onClickArchive("archive"),
           disabled: false,

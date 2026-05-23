@@ -6,6 +6,7 @@ import { copyShareLink } from "@docspace/shared/utils/copy";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { TTranslation } from "@docspace/shared/types";
 
+import { OpenFolderContext } from "../_contexts/OpenFolderContext";
 import { useNavigationStore } from "../_store/NavigationStore";
 import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
 import { useFilesListStore } from "../_store/FilesListStore";
@@ -23,9 +24,14 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
   const { setSelection } = useFilesSelectionStore();
   const { setHighlightFileId } = useFilesListStore();
   const { shareKey } = useSettingsStore();
+  const openFolderOverride = React.useContext(OpenFolderContext);
 
   const openFolder = React.useCallback(
     (folderId: number | string, title: string) => {
+      if (openFolderOverride && openFolderOverride(folderId, title)) {
+        return;
+      }
+
       const filter = FilesFilter.getDefault();
 
       filter.folder = folderId.toString();
@@ -41,6 +47,7 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
       window.history.pushState({}, "", `${window.location.pathname}${filterUrl}`);
     },
     [
+      openFolderOverride,
       shareKey,
       updateNavigationItems,
       setCurrentFolderId,

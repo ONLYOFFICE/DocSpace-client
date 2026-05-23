@@ -43,6 +43,7 @@ import {
   InstallAiFormsDialog,
   InstallDocsCloudDialog,
 } from "../../../Dashboard/InstallModuleDialog";
+import { EnableAiRoomsDialog } from "../../../Dashboard/EnableAiRoomsDialog";
 
 import styles from "./Apps.module.scss";
 
@@ -67,7 +68,10 @@ const Apps = ({
   const navigate = useNavigate();
   const apps = useAppsCatalog();
   const [installDialogVisible, setInstallDialogVisible] = React.useState(false);
-  const [docsCloudDialogVisible, setDocsCloudDialogVisible] = React.useState(false);
+  const [docsCloudDialogVisible, setDocsCloudDialogVisible] =
+    React.useState(false);
+  const [enableAiRoomsVisible, setEnableAiRoomsVisible] = React.useState(false);
+  const [enableAiRoomsLoading, setEnableAiRoomsLoading] = React.useState(false);
 
   useEffect(() => {
     ensureLoaded?.();
@@ -76,6 +80,19 @@ const Apps = ({
   useEffect(() => {
     if (ready) setDocumentTitle(t("OAuth:Apps"));
   }, [ready, t]);
+
+  const handleConfirmEnableAiRooms = async () => {
+    setEnableAiRoomsLoading(true);
+    try {
+      await enable?.("ai-rooms", true);
+      setEnableAiRoomsVisible(false);
+    } catch (err) {
+      console.error("Failed to enable ai-rooms", err);
+      toastr.error(t("Common:SomethingWentWrong"));
+    } finally {
+      setEnableAiRoomsLoading(false);
+    }
+  };
 
   const handleToggle = async (
     id: string,
@@ -102,6 +119,14 @@ const Apps = ({
           if (activated === false) setDocsCloudDialogVisible(true);
         } else {
           await uninstallDocsCloud?.();
+        }
+      }
+
+      if (id === "ai-rooms") {
+        if (next) {
+          setEnableAiRoomsVisible(true);
+        } else {
+          await enable?.("ai-rooms", false);
         }
         return;
       }
@@ -175,6 +200,13 @@ const Apps = ({
           navigate("/docs-cloud");
         }}
       />
+<EnableAiRoomsDialog
+        visible={enableAiRoomsVisible}
+        isLoading={enableAiRoomsLoading}
+        onClose={() => setEnableAiRoomsVisible(false)}
+        onConfirm={handleConfirmEnableAiRooms}
+
+      />
     </div>
   );
 };
@@ -189,3 +221,4 @@ export const Component = inject(({ appsStore }: TStore) => ({
 }))(observer(Apps));
 
 export default Component;
+

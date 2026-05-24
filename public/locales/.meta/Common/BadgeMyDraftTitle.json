@@ -3,7 +3,7 @@
   "content": "My draft",
   "content_en_sha1_hash": "b5235c7a4454a54323265ceb2c24783fd196a731",
   "created_at": "2025-05-19T21:30:43.216Z",
-  "updated_at": "2026-05-15T14:00:06.926Z",
+  "updated_at": "2026-05-24T17:27:49.207Z",
   "comment": {
     "text": "This text appears as a badge label and tooltip, indicating that a document is a user's personal draft. It also serves as a status label for a file filling form.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 243,
+      "line_number": 236,
       "context": "status: FileFillingFormStatus | undefined,\n t: TTranslation,\n ) => {\n switch (status) {\n case FileFillingFormStatus.Draft:\n return t(\"Common:BadgeMyDraftTitle\");\n case FileFillingFormStatus.YourTurn:\n return t(\"Common:YourTurn\");\n case FileFillingFormStatus.InProgress:\n return t(\"Common:InProgress\");\n case FileFillingFormStatus.Stopped:",
       "module": "/packages/shared"
     }

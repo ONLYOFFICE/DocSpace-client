@@ -3,7 +3,7 @@
   "content": "Items selected",
   "content_en_sha1_hash": "71df4f9b608d03b3dfa07d8ce7cdee242420abae",
   "created_at": "2026-05-19T19:03:18.225Z",
-  "updated_at": "2026-05-19T19:08:51.600Z",
+  "updated_at": "2026-05-24T17:27:49.119Z",
   "comment": {
     "text": "Label or heading in the info panel or empty state that appears when multiple items are selected, typically followed by a colon and a numeric variable.",
     "is_auto": true,
@@ -18,8 +18,8 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/sdk/src/app/(personal-files)/_components/info-panel/views/EmptyStates/index.tsx",
-      "line_number": 66,
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/EmptyStates/index.tsx",
+      "line_number": 83,
       "context": "return (\n <div className={styles.severalItemsContainer}>\n {/* biome-ignore lint/performance/noImgElement: static SVG via ?url import */}\n <img className={styles.image} src={imgSrc} alt=\"Several items\" />\n <Text fontSize=\"16px\" fontWeight={700}>\n {`${t(\"Common:ItemsSelected\")}: ${count}`}\n </Text>\n </div>\n );\n };",
       "module": "/packages/sdk"
     }

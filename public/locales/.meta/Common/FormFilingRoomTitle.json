@@ -3,7 +3,7 @@
   "content": "Form Filling Room",
   "content_en_sha1_hash": "ce16b03553997eee69758275d881c1e1971387c2",
   "created_at": "2025-05-19T21:30:45.511Z",
-  "updated_at": "2026-05-15T15:37:40.254Z",
+  "updated_at": "2026-05-24T17:27:49.155Z",
   "comment": {
     "text": "This is a room type label. It identifies a room specifically designed for filling out forms.",
     "is_auto": true,
@@ -32,7 +32,7 @@
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
       "line_number": 23,
-      "context": "case RoomsType.AIRoom:\n return t(\"Common:AIRoomTitle\");\n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomTitle\");\n default:\n return \"\";\n }\n };",
+      "context": "case RoomsType.AIRoom:\n return t(\"Common:AIRoomTitle\");\n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomTitle\");\n case RoomsTypePrivate:\n return t(\"Common:PrivateRoomTitle\");\n default:\n return \"\";\n }",
       "module": "/packages/shared"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Uploaded elements: {{count}}",
   "content_en_sha1_hash": "3fbe647575ee9d3b5b58c83eb362282b29b9a3a2",
   "created_at": "2025-05-19T21:30:46.011Z",
-  "updated_at": "2026-05-15T15:37:40.301Z",
+  "updated_at": "2026-05-24T17:27:49.200Z",
   "comment": {
     "text": "This is a toast message indicating successful file uploads. It appears after files have been uploaded, displaying the number of successfully uploaded items. The `{{count}}` variable represents this number.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/UploadDataStore.js",
-      "line_number": 1891,
+      "line_number": 2358,
       "context": "filesWithErrors,\n filesWithAllErrors,\n ) => {\n if (totalErrorsCount === 0) {\n toastr.success(\n t(\"Common:ItemsSuccessfullyUploaded\", {\n count: filesWithoutErrors.length,\n }),\n );\n return;\n }",
       "module": "/packages/client"
     }

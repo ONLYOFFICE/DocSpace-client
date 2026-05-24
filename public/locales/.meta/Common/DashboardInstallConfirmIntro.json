@@ -3,7 +3,7 @@
   "content": "Build forms, share them with your team, and see all responses in one place. We'll set everything up for you in a moment.",
   "content_en_sha1_hash": "9eb551e825ffa60ca464b43373e5c40131f1af09",
   "created_at": "2026-05-19T19:03:13.860Z",
-  "updated_at": "2026-05-19T19:27:46.039Z",
+  "updated_at": "2026-05-24T17:27:49.115Z",
   "comment": {
     "text": "Introductory paragraph text in the module installation confirmation dialog, describing the features and benefits of the module being installed.",
     "is_auto": true,
@@ -12,9 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/index.tsx",
-      "line_number": 203,
-      "context": "<div className={styles.heroIllustration} aria-hidden=\"true\">\n {isBase ? <FormRoomLightIllustration /> : <FormRoomDarkIllustration />}\n </div>\n \n <Text as=\"p\" className={styles.confirmText}>\n {t(\"Common:DashboardInstallConfirmIntro\")}\n </Text>\n \n <ul className={styles.bulletList}>\n {confirmBullets.map(({ icon: Icon, title, description }) => (\n <li key={title} className={styles.bulletItem}>",
+      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallAiFormsDialog.tsx",
+      "line_number": 154,
+      "context": "<div className={styles.confirmBody}>\n <div className={styles.heroIllustration} aria-hidden=\"true\">\n {isBase ? <FormRoomLightIllustration /> : <FormRoomDarkIllustration />}\n </div>\n <Text as=\"p\" className={styles.confirmText}>\n {t(\"Common:DashboardInstallConfirmIntro\")}\n </Text>\n <ul className={styles.bulletList}>\n {bullets.map(({ Icon, title, description }) => (\n <li key={title} className={styles.bulletItem}>\n <span className={styles.bulletIconWrap} aria-hidden=\"true\">",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Delete forever?",
   "content_en_sha1_hash": "0e0027aade000ea790cb5c39b96cbcc240beec7d",
   "created_at": "2025-05-19T21:30:56.571Z",
-  "updated_at": "2026-05-15T14:00:06.673Z",
+  "updated_at": "2026-05-24T17:27:49.092Z",
   "comment": {
     "text": "This is the title of a confirmation dialog that appears when a user attempts to permanently delete items from the Recycle Bin.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 226,
-      "context": "if (isRoomDelete) {\n if (selection.length > 1) return t(\"DeleteRoomsTitle\");\n return t(\"DeleteRoomTitle\");\n }\n \n if (isRecycleBinFolder) return t(\"EmptyTrashDialog:DeleteForeverTitle\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:Confirmation\");\n \n if (unsubscribe) return t(\"Common:RemoveFromList\");",
+      "line_number": 225,
+      "context": "if (isRoomDelete) {\n if (selection.length > 1) return t(\"Common:DeleteRoomsTitle\");\n return t(\"Common:DeleteRoomTitle\");\n }\n \n if (isRecycleBinFolder) return t(\"EmptyTrashDialog:DeleteForeverTitle\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:Confirmation\");\n \n if (unsubscribe) return t(\"Common:RemoveFromList\");",
       "module": "/packages/client"
     },
     {

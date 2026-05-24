@@ -1,0 +1,29 @@
+{
+  "key_path": "ArbiterPageDescription",
+  "content": "Ask a question, get independent answers from multiple AI experts, and let the arbiter weigh them into a single reasoned verdict.",
+  "content_en_sha1_hash": "76ec333e8acbe41a3324f9db2948bb916867771e",
+  "created_at": "2026-05-24T17:27:18.290Z",
+  "updated_at": "2026-05-24T18:52:14.633Z",
+  "comment": {
+    "text": "Page description text explaining the AI Arbiter's workflow of synthesizing multiple expert answers into a single verdict.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:52:14.633Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/ai-arbiter/page.client.tsx",
+      "line_number": 208,
+      "context": "</button>\n \n <div className={styles.pageHeader}>\n <p className={styles.pageTitle}>{t(\"Common:ArbiterTitle\")}</p>\n <p className={styles.pageDescription}>\n {t(\"Common:ArbiterPageDescription\")}\n </p>\n </div>\n \n {/* Question input */}\n <div className={styles.inputArea}>",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

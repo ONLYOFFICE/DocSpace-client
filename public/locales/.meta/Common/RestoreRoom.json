@@ -3,7 +3,7 @@
   "content": "Are you sure you want to restore a room?",
   "content_en_sha1_hash": "288032a6e5ee16c77100152f822af1e40925f541",
   "created_at": "2025-05-19T21:30:57.062Z",
-  "updated_at": "2026-05-15T14:00:06.694Z",
+  "updated_at": "2026-05-24T17:27:49.099Z",
   "comment": {
     "text": "This is a confirmation dialog message that appears when a user attempts to restore a single archived room.",
     "is_auto": true,
@@ -14,8 +14,14 @@
     {
       "file_path": "/packages/client/src/components/dialogs/RestoreRoomDialog/index.js",
       "line_number": 96,
-      "context": "if (restoreAll) return t(\"ArchiveDialog:RestoreAllRooms\");\n \n return items.length > 1\n ? t(\"ArchiveDialog:RestoreRooms\")\n : t(\"ArchiveDialog:RestoreRoom\");\n };\n \n const description = getDescription();\n \n return (",
+      "context": "if (restoreAll) return t(\"Common:RestoreAllRooms\");\n \n return items.length > 1\n ? t(\"Common:RestoreRooms\")\n : t(\"Common:RestoreRoom\");\n };\n \n const description = getDescription();\n \n return (",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/restore-room-dialog/index.tsx",
+      "line_number": 80,
+      "context": "const getBody = () => {\n if (!isSingle) return t(\"Common:RestoreRooms\");\n if (roomType === RoomsType.PublicRoom)\n return t(\"Common:WantToRestoreTheRoom\");\n return t(\"Common:RestoreRoom\");\n };\n \n return (\n <ModalDialog\n visible={visible}",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

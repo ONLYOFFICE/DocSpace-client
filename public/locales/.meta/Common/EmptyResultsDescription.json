@@ -3,7 +3,7 @@
   "content": "Files generated in {{aiChat}} will appear here automatically. Whenever you generate content, start a chat, or send a message with output, the result will be saved in this section.",
   "content_en_sha1_hash": "7a39094c0e0c2d40e35838b93986f87af2d1fbbb",
   "created_at": "2025-12-23T10:30:51.145Z",
-  "updated_at": "2026-05-15T14:00:06.596Z",
+  "updated_at": "2026-05-24T17:27:49.056Z",
   "comment": {
     "text": "This is the description text shown in an empty \"AI Results\" tab. It explains that AI-generated files will automatically appear there, and mentions that `{{aiChat}}` refers to the AI Chat feature.",
     "is_auto": true,
@@ -14,8 +14,14 @@
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
       "line_number": 142,
-      "context": "</>\n );\n \n if (isResultsTab)\n return security && \"UseChat\" in security && security.UseChat\n ? t(\"AIRoom:EmptyResultsDescription\", {\n aiChat: t(\"AIRoom:AIChat\"),\n })\n : t(\"AIRoom:EmptyResultsViewerDescription\", {\n aiChat: t(\"AIRoom:AIChat\"),\n });",
+      "context": "</>\n );\n \n if (isResultsTab)\n return security && \"UseChat\" in security && security.UseChat\n ? t(\"Common:EmptyResultsDescription\", {\n aiChat: t(\"Common:AIChat\"),\n })\n : t(\"Common:EmptyResultsViewerDescription\", {\n aiChat: t(\"Common:AIChat\"),\n });",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/EmptyView.helpers.tsx",
+      "line_number": 148,
+      "context": "defaultValue:\n \"Files uploaded here will be indexed and used as context in the {{aiChat}} tab. Add files (up to 10 MB each) to ask AI questions, generate content, or collaborate on information.\",\n aiChat: t(\"Common:AIChat\"),\n });\n case FolderType.ResultStorage:\n return t(\"Common:EmptyResultsDescription\", {\n defaultValue:\n \"Files generated in {{aiChat}} will appear here automatically. Whenever you generate content, start a chat, or send a message with output, the result will be saved in this section.\",\n aiChat: t(\"Common:AIChat\"),\n });\n default:",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

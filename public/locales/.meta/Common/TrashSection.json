@@ -3,7 +3,7 @@
   "content": "Trash",
   "content_en_sha1_hash": "e3bf62bb7f5af7ba291b2df1a11d573bdb55d7e9",
   "created_at": "2025-05-19T21:30:49.325Z",
-  "updated_at": "2026-05-19T19:03:33.048Z",
+  "updated_at": "2026-05-24T17:27:49.048Z",
   "comment": {
     "text": "This is a noun referring to the \"Trash\" section where deleted files are stored. It appears as a label in various UI components, often as part of a longer sentence or as a section name.",
     "is_auto": true,
@@ -121,8 +121,26 @@
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 165,
-      "context": "icon: CatalogFavoritesReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=favorites\"),\n },\n {\n id: \"ai-files-trash\",\n label: t(\"Common:TrashSection\"),\n icon: CatalogTrashReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=trash\"),\n },\n {\n id: \"ai-files-settings\",",
+      "line_number": 247,
+      "context": "icon: CatalogFavoritesReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=favorites\"),\n },\n {\n id: \"ai-files-trash\",\n label: t(\"Common:TrashSection\"),\n icon: CatalogTrashReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=trash\"),\n withTopSeparator: true,\n },\n ...(isAdminOrOwner",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
+      "line_number": 247,
+      "context": "icon: CatalogFavoritesReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=favorites\"),\n },\n {\n id: \"ai-files-trash\",\n label: t(\"Common:TrashSection\"),\n icon: CatalogTrashReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=trash\"),\n withTopSeparator: true,\n },\n ...(isAdminOrOwner",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
+      "line_number": 247,
+      "context": "icon: CatalogFavoritesReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=favorites\"),\n },\n {\n id: \"ai-files-trash\",\n label: t(\"Common:TrashSection\"),\n icon: CatalogTrashReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=trash\"),\n withTopSeparator: true,\n },\n ...(isAdminOrOwner",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
+      "line_number": 247,
+      "context": "icon: CatalogFavoritesReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=favorites\"),\n },\n {\n id: \"ai-files-trash\",\n label: t(\"Common:TrashSection\"),\n icon: CatalogTrashReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=trash\"),\n withTopSeparator: true,\n },\n ...(isAdminOrOwner",
       "module": "/packages/client"
     },
     {
@@ -139,49 +157,49 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 88,
+      "line_number": 91,
       "context": "return t(\"Common:FilesMovedNotify\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"Common:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 88,
+      "line_number": 91,
       "context": "return t(\"Common:FilesMovedNotify\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"Common:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 88,
+      "line_number": 91,
       "context": "return t(\"Common:FilesMovedNotify\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"Common:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 88,
+      "line_number": 91,
       "context": "return t(\"Common:FilesMovedNotify\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"Common:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 82,
+      "line_number": 85,
       "context": "return t(\"Common:FilesMovedNotify\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"Common:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 82,
+      "line_number": 85,
       "context": "return t(\"Common:FilesMovedNotify\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"Common:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 82,
+      "line_number": 85,
       "context": "return t(\"Common:FilesMovedNotify\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"Common:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 82,
+      "line_number": 85,
       "context": "return t(\"Common:FilesMovedNotify\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"Common:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:",
       "module": "/packages/client"
     },
@@ -193,8 +211,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 582,
-      "context": "period: getLifetimePeriodTranslation(lifetime.period, t),\n })}. ${\n lifetime.deletePermanently\n ? t(\"Files:AfterFilesWillBeDeletedPermanently\")\n : t(\"Files:FilesMovedToTrashNotice\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n }`;\n \n return null;\n }, [sharedType, lifetime, t]);",
+      "line_number": 589,
+      "context": "period: getLifetimePeriodTranslation(lifetime.period, t),\n })}. ${\n lifetime.deletePermanently\n ? t(\"Files:AfterFilesWillBeDeletedPermanently\")\n : t(\"Files:FilesMovedToTrashNotice\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n }`;\n \n return null;\n }, [sharedType, isEncryptedRoom, lifetime, t]);",
       "module": "/packages/client"
     },
     {
@@ -205,19 +223,19 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 887,
+      "line_number": 903,
       "context": "toastr.error(err),\n );\n } else {\n translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n deleteAction(translations, [selectedFolder], true).catch((err) =>\n toastr.error(err),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 887,
+      "line_number": 903,
       "context": "toastr.error(err),\n );\n } else {\n translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n deleteAction(translations, [selectedFolder], true).catch((err) =>\n toastr.error(err),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 887,
+      "line_number": 903,
       "context": "toastr.error(err),\n );\n } else {\n translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n deleteAction(translations, [selectedFolder], true).catch((err) =>\n toastr.error(err),",
       "module": "/packages/client"
     },
@@ -234,21 +252,39 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/empty-view/EmptyView.helpers.tsx",
-      "line_number": 107,
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-section-empty-view/index.tsx",
+      "line_number": 121,
+      "context": "icon={icon}\n title={t(\"Common:EmptyScreenFolder\", {\n defaultValue: \"No agents here yet\",\n })}\n description={t(\"Common:TrashFunctionalityDescription\", {\n sectionName: t(\"Common:TrashSection\"),\n defaultValue:\n \"All deleted agents are moved to '{{sectionName}}'. Restore agents deleted by mistake or delete them permanently. Items in '{{sectionName}}' are automatically deleted after 30 days.\",\n })}\n options={null}\n />",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/EmptyView.helpers.tsx",
+      "line_number": 121,
       "context": "return t(\"Common:EmptyFavoritesDescription\");\n case FolderType.Recent:\n return t(\"Common:EmptyRecentDescription\");\n case FolderType.TRASH:\n return t(\"Common:TrashFunctionalityDescription\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FolderType.USER:\n return t(\"Common:DefaultFolderDescription\");\n default:\n return (",
       "module": "/packages/sdk"
     },
     {
-      "file_path": "/packages/sdk/src/app/(personal-files)/_components/info-panel/views/History/useFeedTranslation.tsx",
-      "line_number": 67,
+      "file_path": "/packages/sdk/src/app/(ai-agents)/@header/ai-agents/trash/page.tsx",
+      "line_number": 19,
+      "context": "const { t } = useTranslation([\"Common\"]);\n const store = useTrashFilesStore();\n const isEmpty =\n !store.isLoading && store.files.length === 0 && store.folders.length === 0;\n return (\n <AgentsHeader title={t(\"Common:TrashSection\")} isEmptyList={isEmpty} />\n );\n });",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
+      "line_number": 70,
       "context": "});\n }\n return t(\"Common:FilesMovedNotify\");\n case FeedActionKeys.FileMovedToTrash:\n return t(\"Common:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:\n if (\"fromParentTitle\" in feed.data && feed.data.fromParentTitle) {\n return t(\"Common:FileCopiedTo\", {\n folderTitle: (feed.data as TFeedData).parentTitle,",
       "module": "/packages/sdk"
     },
     {
-      "file_path": "/packages/sdk/src/app/(personal-files)/_components/info-panel/views/History/useFeedTranslation.tsx",
-      "line_number": 67,
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
+      "line_number": 70,
       "context": "});\n }\n return t(\"Common:FilesMovedNotify\");\n case FeedActionKeys.FileMovedToTrash:\n return t(\"Common:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:\n if (\"fromParentTitle\" in feed.data && feed.data.fromParentTitle) {\n return t(\"Common:FileCopiedTo\", {\n folderTitle: (feed.data as TFeedData).parentTitle,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/empty-view/EmptyView.helpers.tsx",
+      "line_number": 107,
+      "context": "return t(\"Common:EmptyFavoritesDescription\");\n case FolderType.Recent:\n return t(\"Common:EmptyRecentDescription\");\n case FolderType.TRASH:\n return t(\"Common:TrashFunctionalityDescription\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FolderType.USER:\n return t(\"Common:DefaultFolderDescription\");\n default:\n return (",
       "module": "/packages/sdk"
     },
     {

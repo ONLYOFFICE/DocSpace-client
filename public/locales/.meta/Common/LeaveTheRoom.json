@@ -3,7 +3,7 @@
   "content": "Leave the room",
   "content_en_sha1_hash": "0494f65ff12e4895fbbc91bd002080a4361c346d",
   "created_at": "2025-05-19T21:30:55.737Z",
-  "updated_at": "2026-05-15T14:00:06.688Z",
+  "updated_at": "2026-05-24T17:27:49.097Z",
   "comment": {
     "text": "This is a button label or menu item. It allows a user to exit a room they are currently in.",
     "is_auto": true,
@@ -14,20 +14,26 @@
     {
       "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
       "line_number": 88,
-      "context": "};\n }, []);\n \n const titleText = isAIAgent\n ? t(\"Files:LeaveTheAgent\")\n : t(\"Files:LeaveTheRoom\");\n \n const roomDescription = isRoomOwner\n ? t(\"Files:LeaveRoomDescription\")\n : t(\"Files:WantLeaveRoom\");",
+      "context": "};\n }, []);\n \n const titleText = isAIAgent\n ? t(\"Common:LeaveTheAgent\")\n : t(\"Common:LeaveTheRoom\");\n \n const roomDescription = isRoomOwner\n ? t(\"Files:LeaveRoomDescription\")\n : t(\"Files:WantLeaveRoom\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 114,
-      "context": "productName: getBrandName(\"ProductName\"),\n });\n \n const footerCheckboxLabel = isAIAgent\n ? t(\"Files:LeaveTheAgent\")\n : t(\"Files:LeaveTheRoom\");\n \n const selectorComponent = (\n <PeopleSelector\n withCancelButton\n onCancel={handleClosePanel}",
+      "line_number": 209,
+      "context": "productName: getBrandName(\"ProductName\"),\n });\n \n const footerCheckboxLabel = isAIAgent\n ? t(\"Common:LeaveTheAgent\")\n : t(\"Common:LeaveTheRoom\");\n \n const selectorComponent = excludeReady ? (\n <PeopleSelector\n withCancelButton\n onCancel={handleClosePanel}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2714,
-      "context": "disabled: !isAIAgent,\n },\n {\n id: \"option_leave-room\",\n key: \"leave-room\",\n label: isAIAgent ? t(\"LeaveTheAgent\") : t(\"LeaveTheRoom\"),\n icon: LeaveRoomSvgUrl,\n onClick: this.onLeaveRoom,\n disabled: isKnowledgeOrResult\n ? false\n : isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),",
+      "line_number": 2740,
+      "context": "disabled: !isAIAgent,\n },\n {\n id: \"option_leave-room\",\n key: \"leave-room\",\n label: isAIAgent ? t(\"LeaveTheAgent\") : t(\"Common:LeaveTheRoom\"),\n icon: LeaveRoomSvgUrl,\n onClick: this.onLeaveRoom,\n disabled: isKnowledgeOrResult\n ? false\n : isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/change-room-owner-dialog/index.tsx",
+      "line_number": 109,
+      "context": "};\n \n const checkboxProps = ownerIsCurrentUser\n ? {\n withFooterCheckbox: true as const,\n footerCheckboxLabel: t(\"Common:LeaveTheRoom\"),\n isChecked: false,\n }\n : {};\n \n const infoProps = {",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

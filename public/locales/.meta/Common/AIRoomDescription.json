@@ -3,7 +3,7 @@
   "content": "A versatile chat powered by your chosen text model. Use it to solve everyday tasks and collaborate on text documents, spreadsheets, and presentations. All files added to the room are automatically used as context during your conversations with the chat.",
   "content_en_sha1_hash": "09632c1987210f7024ec0e3a3c6d32e5d2b64847",
   "created_at": "2025-10-27T16:14:10.301Z",
-  "updated_at": "2026-04-11T20:59:44.151Z",
+  "updated_at": "2026-05-24T17:27:49.211Z",
   "comment": {
     "text": "Description for an AI Room. This text appears as a description of the AI Room type when creating a new room.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
-      "line_number": 44,
-      "context": "case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoomDescription\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomDescription\");\n case RoomsType.AIRoom:\n return t(\"Common:AIRoomDescription\");\n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoomInfo\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomInfo\");\n default:",
+      "line_number": 46,
+      "context": "case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoomDescription\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomDescription\");\n case RoomsType.AIRoom:\n return t(\"Common:AIRoomDescription\");\n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoomInfo\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomInfo\");\n case RoomsTypePrivate:",
       "module": "/packages/shared"
     }
   ],

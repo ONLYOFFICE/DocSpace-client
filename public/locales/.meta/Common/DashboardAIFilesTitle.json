@@ -3,7 +3,7 @@
   "content": "AI Files",
   "content_en_sha1_hash": "68931d33a8493d0e6c2ee79ae0623d215347c9ad",
   "created_at": "2026-05-19T19:03:13.725Z",
-  "updated_at": "2026-05-19T19:32:42.564Z",
+  "updated_at": "2026-05-24T17:27:49.068Z",
   "comment": {
     "text": "Navigation menu label and app catalog title for the section containing AI-related files.",
     "is_auto": true,
@@ -13,20 +13,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 140,
-      "context": "const groups = React.useMemo<NavMenuGroup[]>(() => {\n const underDevelopment = () => toastr.info(t(\"Common:UnderDevelopment\"));\n \n const aiFilesItem: NavMenuItem = {\n id: AI_FILES_ID,\n label: t(\"Common:DashboardAIFilesTitle\"),\n icon: CatalogFolderReactSvgUrl,\n onClick: () => navigate(\"/ai-files\"),\n children: aiFilesEnabled\n ? [\n {",
+      "line_number": 222,
+      "context": "onClick: handleDocsCloudClick,\n };\n \n const aiFilesItem: NavMenuItem = {\n id: AI_FILES_ID,\n label: t(\"Common:DashboardAIFilesTitle\"),\n icon: CatalogFolderReactSvgUrl,\n onClick: () => navigate(\"/ai-files\"),\n children: aiFilesEnabled\n ? [\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/helpers/apps-catalog.tsx",
-      "line_number": 54,
+      "line_number": 62,
       "context": "return [\n {\n id: \"ai-files\",\n icon: <CatalogFolderIcon />,\n title: t(\"Common:DashboardAIFilesTitle\"),\n description: t(\"Common:DashboardAIFilesDescription\"),\n href: \"/ai-files\",\n supported: true,\n alwaysOn: true,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/AiFiles/index.tsx",
-      "line_number": 45,
-      "context": "export const AiFiles = () => {\n const { t } = useTranslation([\"Common\"]);\n const [searchParams] = useSearchParams();\n const section = searchParams.get(\"section\") ?? \"\";\n const src = SECTION_TO_PATH[section] ?? \"/sdk/personal-files\";\n return <SdkIframe src={src} title={t(\"Common:DashboardAIFilesTitle\")} />;\n };\n \n export default AiFiles;",
+      "line_number": 64,
+      "context": "const [searchParams] = useSearchParams();\n const section = searchParams.get(\"section\") ?? \"\";\n return (\n <SdkIframe\n src={getSrc(section, myFolderId)}\n title={t(\"Common:DashboardAIFilesTitle\")}\n />\n );\n };\n \n const AiFilesConnected = inject<TStore>(({ treeFoldersStore }) => ({",
       "module": "/packages/client"
     }
   ],

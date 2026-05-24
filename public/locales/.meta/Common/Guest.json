@@ -3,7 +3,7 @@
   "content": "Guest",
   "content_en_sha1_hash": "face83ee3014bdc8f98203cc94e2e89222452e90",
   "created_at": "2025-05-19T21:30:45.686Z",
-  "updated_at": "2026-05-15T15:37:40.196Z",
+  "updated_at": "2026-05-24T17:27:49.094Z",
   "comment": {
     "text": "This is a noun, \"Guest,\" used to refer to a user with limited permissions. It appears in various contexts, including warning messages about reassigning content from deleted users and notifications about changes in user type.",
     "is_auto": true,
@@ -36,14 +36,20 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/sub-components/Item.tsx",
+      "line_number": 249,
+      "context": "? isRolePaid\n ? getUserTypeTranslation(\n defaultAccessOption?.type ?? resolvedType,\n t,\n )\n : t(\"Common:Guest\")\n : (defaultAccessOption?.type as number) === (EmployeeType.RoomAdmin as number) &&\n (resolvedType as number) !== (EmployeeType.Admin as number) &&\n (resolvedType as number) !== (EmployeeType.Owner as number)\n ? getUserTypeTranslation(EmployeeType.RoomAdmin, t)\n : getUserTypeTranslation(resolvedType, t);",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 366,
+      "line_number": 367,
       "context": "return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");\n }\n };\n \n export function clickBackdrop() {\n const elms = document.getElementsByClassName(",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 366,
+      "line_number": 367,
       "context": "return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");\n }\n };\n \n export function clickBackdrop() {\n const elms = document.getElementsByClassName(",
       "module": "/packages/shared"
     }

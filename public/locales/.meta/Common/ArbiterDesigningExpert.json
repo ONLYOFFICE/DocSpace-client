@@ -1,0 +1,29 @@
+{
+  "key_path": "ArbiterDesigningExpert",
+  "content": "Designing expert {{number}}...",
+  "content_en_sha1_hash": "35d02ab01225c813afe21cfa943fcd81ead85241",
+  "created_at": "2026-05-24T17:27:18.123Z",
+  "updated_at": "2026-05-24T18:57:24.296Z",
+  "comment": {
+    "text": "Status message in a progress indicator appearing during the AI arbiter's preparation phase, where {{number}} represents the count of roles being designed.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:57:24.296Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/ChatPhase.tsx",
+      "line_number": 54,
+      "context": "const roleCount = roleMatches ? roleMatches.length : 0;\n if (text.includes('\"arbiter\"')) {\n if (text.trimEnd().endsWith(\"}\")) return t(\"Common:ArbiterFinalizingPanel\");\n return t(\"Common:ArbiterComposingArbiter\");\n }\n if (roleCount > 0) return t(\"Common:ArbiterDesigningExpert\", { number: roleCount });\n return t(\"Common:ArbiterAnalyzingAnswers\");\n }\n \n function PreparingProgress({ text }: { text: string }) {\n const { t } = useTranslation([\"Common\"]);",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

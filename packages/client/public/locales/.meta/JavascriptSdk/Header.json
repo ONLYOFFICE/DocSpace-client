@@ -3,7 +3,7 @@
   "content": "Header",
   "content_en_sha1_hash": "31341c6f0c7af677ffb8fadcb92038e8ac2b6193",
   "created_at": "2025-05-19T21:30:54.517Z",
-  "updated_at": "2026-05-15T14:00:06.701Z",
+  "updated_at": "2026-05-24T17:27:49.102Z",
   "comment": {
     "text": "This is a checkbox label in the embedding settings. It refers to the header section of the embedded document viewer.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 610,
+      "line_number": 612,
       "context": "/>\n </LabelGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Header\")}\n onChange={onChangeShowHeader}\n isChecked={config.showHeader}\n dataTestId=\"show_header_checkbox\"\n />\n <Text color=\"gray\">{`(${t(\"MobileOnly\")})`}</Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 610,
+      "line_number": 612,
       "context": "/>\n </LabelGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Header\")}\n onChange={onChangeShowHeader}\n isChecked={config.showHeader}\n dataTestId=\"show_header_checkbox\"\n />\n <Text color=\"gray\">{`(${t(\"MobileOnly\")})`}</Text>",
       "module": "/packages/client"
     }

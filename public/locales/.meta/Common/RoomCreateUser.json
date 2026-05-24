@@ -3,7 +3,7 @@
   "content": "Users added.",
   "content_en_sha1_hash": "a878f78eb9713716912f998404ed3dca2a7b8005",
   "created_at": "2025-09-23T07:24:16.863Z",
-  "updated_at": "2026-05-15T14:00:06.738Z",
+  "updated_at": "2026-05-24T17:27:49.127Z",
   "comment": {
     "text": "This is a toast message confirming that users have been successfully added to a room. It appears after a user addition operation is completed.",
     "is_auto": true,
@@ -13,15 +13,21 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 333,
+      "line_number": 336,
       "context": "/>\n );\n case FeedActionKeys.RoomCreateUser:\n if (hasRelatedItems)\n return t(\"InfoPanel:RoomCreateUserCount\", { count });\n return t(\"Common:RoomCreateUser\");\n case FeedActionKeys.RoomUpdateAccessForUser:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomRemoveUser:\n return t(\"InfoPanel:RoomRemoveUser\");\n case FeedActionKeys.RoomInviteResend:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 277,
+      "line_number": 280,
       "context": "}}\n />\n );\n case FeedActionKeys.RoomCreateUser:\n if (hasRelatedItems) return t(\"InfoPanel:RoomCreateUserCount\", { count });\n return t(\"Common:RoomCreateUser\");\n case FeedActionKeys.RoomUpdateAccessForUser:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomRemoveUser:\n return t(\"InfoPanel:RoomRemoveUser\");\n case FeedActionKeys.RoomInviteResend:",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/info-panel/views/history.tsx",
+      "line_number": 74,
+      "context": "roomTitle: title,\n });\n case FeedActionKeys.RoomChangeOwner:\n return t(\"Common:RoomChangeOwner\");\n case FeedActionKeys.RoomCreateUser:\n return t(\"Common:RoomCreateUser\");\n case FeedActionKeys.RoomRemoveUser:\n return t(\"InfoPanel:RoomRemoveUser\");\n case FeedActionKeys.RoomUpdateAccessForUser:\n case FeedActionKeys.RoomUpdateAccessForGroup:\n return t(\"InfoPanel:RoomUpdateAccess\");",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/share/selector/index.tsx",

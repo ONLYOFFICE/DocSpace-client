@@ -3,7 +3,7 @@
   "content": "Viewer",
   "content_en_sha1_hash": "dbad9f126b33570e09839a2d60720898de1a512d",
   "created_at": "2025-05-19T21:30:48.141Z",
-  "updated_at": "2026-05-15T15:37:40.189Z",
+  "updated_at": "2026-05-24T17:27:49.088Z",
   "comment": {
     "text": "This is a label for the \"Viewer\" role, indicating a user with read-only access. It appears in dialogs and panels where user roles or access rights are defined.",
     "is_auto": true,
@@ -22,6 +22,12 @@
       "line_number": 84,
       "context": "}),\n type: \"collaborator\",\n },\n viewer: {\n key: \"viewer\",\n label: this.t(\"Common:RoleViewer\"),\n access: ShareAccessRights.ReadOnly,\n type: \"user\",\n },\n editor: {\n key: \"editor\",",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/index.tsx",
+      "line_number": 94,
+      "context": "case ShareAccessRights.FormFilling:\n return t(\"Common:RoleFormFiller\");\n case ShareAccessRights.CustomFilter:\n return t(\"Common:CustomFilter\");\n case ShareAccessRights.ReadOnly:\n return t(\"Common:RoleViewer\");\n default:\n return \"\";\n }\n };",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",

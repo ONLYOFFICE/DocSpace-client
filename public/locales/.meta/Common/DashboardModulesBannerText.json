@@ -3,7 +3,7 @@
   "content": "Each app is licensed separately — install only what fits your workflow",
   "content_en_sha1_hash": "6513dccc4cd6b5b084ec465390766214f3a1750a",
   "created_at": "2026-05-19T19:03:14.044Z",
-  "updated_at": "2026-05-19T19:22:00.994Z",
+  "updated_at": "2026-05-24T17:27:49.117Z",
   "comment": {
     "text": "Banner title on the Dashboard explaining that apps are licensed individually.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
-      "line_number": 224,
+      "line_number": 314,
       "context": "} as React.CSSProperties\n }\n >\n <div className={styles.modulesBannerText}>\n <Text as=\"p\" className={styles.modulesBannerTitle}>\n {t(\"Common:DashboardModulesBannerText\")}\n </Text>\n <div className={styles.modulesBannerTags}>\n <Text as=\"span\" className={styles.modulesBannerTag}>\n {t(\"Common:NoBundlesRequired\")}\n </Text>",
       "module": "/packages/client"
     }

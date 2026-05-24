@@ -3,7 +3,7 @@
   "content": "Guests",
   "content_en_sha1_hash": "3c23a67045a35d8dc1bd02b5088b1f1470636e89",
   "created_at": "2025-05-19T21:30:45.714Z",
-  "updated_at": "2026-05-15T14:00:06.583Z",
+  "updated_at": "2026-05-24T17:27:49.050Z",
   "comment": {
     "text": "This is a label for a section or category that refers to external users who have limited access to the platform. It appears in navigation menus or lists.",
     "is_auto": true,
@@ -43,9 +43,15 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 731,
+      "line_number": 738,
       "context": "return isLoading && insideGroupTempTitle\n ? insideGroupTempTitle\n : currentGroupName;\n }\n case \"guests\":\n return t(\"Common:Guests\");\n default:\n return t(\"Common:Members\");\n }\n }",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/index.tsx",
+      "line_number": 225,
+      "context": "title={t(\"InfoPanel:Users\")}\n members={users}\n t={t}\n />\n <MemberGroup\n title={t(\"Common:Guests\")}\n members={guests}\n t={t}\n />\n <MemberGroup\n title={t(\"InfoPanel:ExpectUsers\")}",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",

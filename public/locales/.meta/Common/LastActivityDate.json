@@ -3,7 +3,7 @@
   "content": "Last activity date",
   "content_en_sha1_hash": "7858db9eac1fd53a9a6e83786014f02e6d83aea2",
   "created_at": "2025-05-19T21:30:46.047Z",
-  "updated_at": "2026-05-15T14:00:06.751Z",
+  "updated_at": "2026-05-24T17:27:49.134Z",
   "comment": {
     "text": "This is a label for a sorting option in a filter menu, indicating the last time an item was modified.",
     "is_auto": true,
@@ -16,6 +16,12 @@
       "line_number": 1573,
       "context": "default: true,\n };\n const activityDate = {\n id: \"sort-by_activity\",\n key: SortByFieldName.ModifiedDate,\n label: t(\"Common:LastActivityDate\"),\n default: true,\n };\n \n const owner = {\n id: \"sort-by_owner\",",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-table-view/index.tsx",
+      "line_number": 182,
+      "context": "onClick: onColumnSort,\n onChange: onColumnChange,\n },\n {\n key: \"Activity\",\n title: t(\"Common:LastActivityDate\"),\n sortBy: SortByFieldName.ModifiedDate,\n enable: columnState.Activity !== false,\n resizable: true,\n onClick: onColumnSort,\n onChange: onColumnChange,",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

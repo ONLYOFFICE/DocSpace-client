@@ -3,7 +3,7 @@
   "content": "You are about to archive rooms.",
   "content_en_sha1_hash": "7ec21db52915f2cd4ebef07340b69fdb32cf2984",
   "created_at": "2025-05-19T21:30:57.059Z",
-  "updated_at": "2026-05-15T14:00:06.632Z",
+  "updated_at": "2026-05-24T17:27:49.075Z",
   "comment": {
     "text": "This is part of a confirmation dialog's description, appearing when a user attempts to archive multiple rooms. It is followed by a question asking if the user wants to continue.",
     "is_auto": true,
@@ -14,8 +14,14 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ArchiveDialog/index.js",
       "line_number": 90,
-      "context": "const getDescription = () => {\n if (restoreAll) return t(\"ArchiveDialog:RestoreAllRooms\");\n \n return items.length > 1\n ? `${t(\"ArchiveDialog:ArchiveRooms\")} ${t(\"Common:WantToContinue\")}`\n : `${t(\"ArchiveDialog:ArchiveRoom\")} ${t(\"Common:WantToContinue\")}`;\n };\n \n const description = getDescription();",
+      "context": "const getDescription = () => {\n if (restoreAll) return t(\"Common:RestoreAllRooms\");\n \n return items.length > 1\n ? `${t(\"Common:ArchiveRooms\")} ${t(\"Common:WantToContinue\")}`\n : `${t(\"Common:ArchiveRoom\")} ${t(\"Common:WantToContinue\")}`;\n };\n \n const description = getDescription();",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/move-to-archive-dialog/index.tsx",
+      "line_number": 87,
+      "context": "sectionName: t(\"Common:Archive\"),\n })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {`${isSingle ? t(\"Common:ArchiveRoom\") : t(\"Common:ArchiveRooms\")} ${t(\"Common:WantToContinue\")}`}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"archive\"",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

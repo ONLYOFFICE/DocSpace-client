@@ -131,46 +131,6 @@ const ClientRoutes = [
             ),
           },
           {
-            path: "ai-agents",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/filter",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/:agent/chat",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/:agent",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/:agent/filter",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
             path: "recent",
             element: (
               <PrivateRoute>
@@ -384,6 +344,64 @@ const ClientRoutes = [
               <ProtectedAppRoute appId="ai-forms">
                 <ErrorBoundary>
                   <AiForms />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
+        path: "/ai-agents",
+        async lazy() {
+          const { AiAgents } = await componentLoader(
+            () => import("SRC_DIR/pages/AiAgents"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ErrorBoundary>
+                <AiAgents />
+              </ErrorBoundary>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
+        path: "/ai-rooms",
+        async lazy() {
+          const { AiRooms } = await componentLoader(
+            () => import("SRC_DIR/pages/AiRooms"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ProtectedAppRoute appId="ai-rooms">
+                <ErrorBoundary>
+                  <AiRooms />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
+        path: "/docs-cloud",
+        async lazy() {
+          const { DocsCloud } = await componentLoader(
+            () => import("SRC_DIR/pages/DocsCloud"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ProtectedAppRoute appId="docs-cloud">
+                <ErrorBoundary>
+                  <DocsCloud />
                 </ErrorBoundary>
               </ProtectedAppRoute>
             </PrivateRoute>
@@ -698,8 +716,7 @@ const ClientRoutes = [
     async lazy() {
       const { default: NoAccessContainer, NoAccessContainerType } =
         await componentLoader(
-          () =>
-            import("SRC_DIR/components/EmptyContainer/NoAccessContainer"),
+          () => import("SRC_DIR/components/EmptyContainer/NoAccessContainer"),
         );
 
       const Component = () => (
@@ -752,3 +769,4 @@ const ClientRoutes = [
 ];
 
 export default ClientRoutes;
+

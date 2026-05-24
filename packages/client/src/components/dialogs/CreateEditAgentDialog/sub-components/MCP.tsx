@@ -65,7 +65,7 @@ const MCPSettings = ({
   selectedServers,
   setSelectedServers,
 }: MCPSettingsProps) => {
-  const { t } = useTranslation(["AIRoom", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   return (
     <StyledParam increaseGap>
@@ -128,3 +128,4 @@ const MCPSettings = ({
 };
 
 export default MCPSettings;
+

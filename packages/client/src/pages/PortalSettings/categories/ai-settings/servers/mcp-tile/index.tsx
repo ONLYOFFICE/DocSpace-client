@@ -69,7 +69,7 @@ export const MCPTile = ({
   disableActions,
 }: MCPTileProps) => {
   const { isBase } = useTheme();
-  const { t } = useTranslation(["Common", "AISettings"]);
+  const { t } = useTranslation(["Common"]);
 
   const icon =
     item.icon?.icon48 || (getServerIconUrl(item.serverType, isBase) ?? "");
@@ -98,7 +98,7 @@ export const MCPTile = ({
 
   const description =
     item.serverType === ServerType.Portal
-      ? t("AISettings:MCPProductDescription", {
+      ? t("Common:MCPProductDescription", {
           organizationName: getBrandName("OrganizationName"),
           productName: getBrandName("ProductName"),
           mcpServer: t("Common:MCPServer"),
@@ -112,7 +112,7 @@ export const MCPTile = ({
       }
       tooltipText={
         disableActions
-          ? t("AISettings:ToUseAddProvider", {
+          ? t("Common:ToUseAddProvider", {
               value: t("Common:MCPServer"),
               aiProvider: t("Common:AIProvider"),
             })
@@ -125,7 +125,7 @@ export const MCPTile = ({
         hasError={item.needReset}
         getErrorTooltipContent={() => (
           <Text fontSize="12px" lineHeight="16px">
-            {t("AISettings:MCPUnavailableError", {
+            {t("Common:MCPUnavailableError", {
               mcpServer: t("Common:MCPServer"),
             })}
           </Text>

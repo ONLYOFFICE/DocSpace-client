@@ -1,6 +1,5 @@
 {
   "AddCertificate": "Shtoni certifikatën",
-  "AdvancedSettings": "Cilësimet e avancuara",
   "AdvancedSettingsTooltip": "Fshihni faqen e paracaktuar të vërtetimit dhe ridrejto automatikisht te shërbimi SSO.",
   "AttributeMatching": "Lidhja e atributeve",
   "AttributeMatchingTooltip": "Korrespondenca e atributeve të Single Sign-On me hyrjet e seksionit 'Llogaritë'.",
@@ -11,7 +10,6 @@
   "DownloadMetadataXML": "Shkarkoni të dhënat meta të SP XML",
   "Encryption": "Enkriptimi",
   "GenerateCertificate": "Gjeneroni një certifikatë të re të vetë-nënshkruar",
-  "Hide": "Fshihni",
   "HideAdditionalParameters": "Fshihni cilësimet e avancuara",
   "HideAuthPage": "Fshihni faqen e autorizimit",
   "idpAuthRequest": "Verifikoni shenjën e përgjigjeve të vërtetimit",
@@ -32,7 +30,6 @@
   "ProviderURLTooltip": "ID-ja e entitetit të ofruesit të identitetit (URL-ja e lëshuesit)",
   "ServiceProviderSettings": "{{organizationName}} Cilësimet e SP",
   "ServiceProviderSettingsDescription": "Konfiguroni cilësimet e Ofruesit të Shërbimit dhe shtoni certifikatat SP për Single Sign-On.",
-  "Show": "Shfaqni",
   "ShowAdditionalParameters": "Shfaqni cilësimet e avancuara",
   "Signing": "Nënshkrimi",
   "SigningAndEncryption": "Nënshkrimi dhe enkriptimi",

@@ -1,6 +1,5 @@
 {
   "AddCertificate": "Ավելացնել վկայագիր",
-  "AdvancedSettings": "Լրացուցիչ կարգավորումներ",
   "AdvancedSettingsTooltip": "Թաքցնել լռելյայն նույնականացման էջը և ավտոմատ կերպով վերահղել SSO ծառայությանը:",
   "AttributeMatching": "Հատկանիշների արտապատկերում",
   "AttributeMatchingTooltip": "Single Sign-On ատրիբուտների համապատասխանությունը «Հաշիվներ» բաժնի գրառումներին:",
@@ -11,7 +10,6 @@
   "DownloadMetadataXML": "Ներբեռնել SP մետատվյալների XML-ը",
   "Encryption": "Գաղտնագրում",
   "GenerateCertificate": "Ստեղծեք նոր ինքնաստորագրված վկայական",
-  "Hide": "Թաքցնել",
   "HideAdditionalParameters": "Թաքցնել լրացուցիչ կարգավորումներ",
   "HideAuthPage": "Թաքցնել մուտքագրման էջը",
   "idpAuthRequest": "Ստուգեք Auth Responses Sign-ը",
@@ -32,7 +30,6 @@
   "ProviderURLTooltip": "Ինքնության տրամադրողի Entity Id (Թողարկողի URL)",
   "ServiceProviderSettings": "{{organizationName}} SP Կարգավորումներ",
   "ServiceProviderSettingsDescription": "Կարգավորեք Ծառայությունների Մատակարարի կարգավորումները և ավելացրեք SP սերտիֆիկատներ Միակ Մուտք սիստեմի համար:",
-  "Show": "Ցույց տալ",
   "ShowAdditionalParameters": "Ցույց տալ առաջադեմ կարգավորումները",
   "Signing": "Ստորագրում",
   "SigningAndEncryption": "Ստորագրում և գաղտնագրում",

@@ -83,7 +83,7 @@ const RoomLogoCoverDialog = ({
   setUploadedFile,
   isAIAgentsFolderRoot,
 }: CoverDialogProps) => {
-  const { t } = useTranslation(["Common", "RoomLogoCover"]);
+  const { t } = useTranslation(["Common"]);
   const { currentColorScheme } = useTheme();
 
   const defaultHeight = isDesktop() ? DESKTOP_HEIGHT : TABLET_HEIGHT;
@@ -265,8 +265,6 @@ const RoomLogoCoverDialog = ({
           setOpenColorPicker={setOpenColorPicker}
           generalScroll={!!scrollBodyHeight}
           isScrollLocked={openColorPicker}
-          setCover={setCover}
-          cover={roomCoverDialogProps.icon as unknown as ILogoCover}
           currentColorScheme={currentColorScheme!}
           setRoomCoverDialogProps={setRoomCoverDialogProps}
           roomCoverDialogProps={roomCoverDialogProps}

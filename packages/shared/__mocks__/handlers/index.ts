@@ -48,6 +48,7 @@ import { apisystemHandlers } from "./apisystem";
 import { editorHandlers } from "./editor";
 import { notificationHandlers } from "./notification";
 import { selfByTypeHandler } from "./people/self";
+import { privacyroomHandlers } from "./privacyroom";
 
 export * from "./settings";
 export * from "./capabilities";
@@ -63,6 +64,7 @@ export * from "./share";
 export * from "./apisystem";
 export * from "./editor";
 export * from "./notification";
+export * from "./privacyroom";
 
 export const allHandlers = (port: string) => [
   ...settingsHandlers(port),
@@ -79,5 +81,6 @@ export const allHandlers = (port: string) => [
   ...apisystemHandlers(port),
   ...editorHandlers(port),
   ...notificationHandlers(port),
+  ...privacyroomHandlers(port),
   selfByTypeHandler(port),
 ];

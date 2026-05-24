@@ -1,5 +1,4 @@
 {
-  "ChooseFromList": "Kies uit lijst",
   "FileLocked": "Bestand vergrendeld",
   "FileProtected": "Het bestand is beschermd met een wachtwoord",
   "FileUnlocked": "Bestand ontgrendeld",
@@ -13,7 +12,6 @@
   "FolderTitleWebDav": "WebDAV Directory",
   "FolderTitleYandex": "Yandex Directory",
   "NewForm": "PDF-formulier",
-  "OwnerChange": "Wijzig eigenaar",
   "RoleGuestDescriprion": "Gasten hebben toegang tot de kamers waarvoor ze zijn uitgenodigd en kunnen documenten maken en bewerken als ze de juiste rollen in de kamer hebben gekregen.",
   "SearchByHeadOfGroup": "Zoeken op Groepshoofd",
   "SearchByOwner": "Zoeken op Eigenaren",

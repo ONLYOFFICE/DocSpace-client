@@ -55,6 +55,7 @@ import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers"
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { SearchArea } from "@docspace/shared/enums";
+import { UserStore } from "@docspace/shared/store/UserStore";
 
 import type ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import type FilesStore from "SRC_DIR/store/FilesStore";
@@ -75,6 +76,7 @@ import OformsStore from "SRC_DIR/store/OformsStore";
 type ViewProps = UseContactsProps &
   UseFilesProps &
   UseProfileBodyProps & {
+    getEncryptionKeys: UserStore["getEncryptionKeys"];
     setIsChangePageRequestRunning: ClientLoadingStore["setIsChangePageRequestRunning"];
     setCurrentClientView: ClientLoadingStore["setCurrentClientView"];
     setIsSectionHeaderLoading: ClientLoadingStore["setIsSectionHeaderLoading"];
@@ -161,12 +163,13 @@ const View = ({
 
   setNotificationChannels,
   checkTg,
+  getEncryptionKeys,
 
   canUseChat,
 }: ViewProps) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { t } = useTranslation(["Files", "Common", "AIRoom"]);
+  const { t } = useTranslation(["Common", "Files"]);
 
   const isContactsPage = location.pathname.includes("accounts");
   const isProfilePage = location.pathname.includes("profile");
@@ -259,6 +262,7 @@ const View = ({
     setIsSectionHeaderLoading: setIsSectionHeaderLoading!,
     getTfaType: getTfaType!,
     checkTg: checkTg!,
+    getEncryptionKeys: getEncryptionKeys!,
   });
 
   const getFilesRef = React.useRef(getFiles);
@@ -500,12 +504,12 @@ const View = ({
       toastr.info(
         <Trans
           t={t}
-          ns="AIRoom"
+          ns="Common"
           i18nKey="AgentInViewModeWarning"
           components={{
             strong: <strong />,
           }}
-          values={{ aiAgent: t("Common:AIAgent"), aiChat: t("AIRoom:AIChat") }}
+          values={{ aiAgent: t("Common:AIAgent"), aiChat: t("Common:AIChat") }}
         />,
       );
     }
@@ -683,6 +687,7 @@ export const ViewComponent = inject(
       currentExtensionGallery,
 
       userId: userStore?.user?.id,
+      getEncryptionKeys: userStore?.getEncryptionKeys,
 
       selectedFolderStore,
 
@@ -713,4 +718,3 @@ export const ViewComponent = inject(
     };
   },
 )(observer(View));
-

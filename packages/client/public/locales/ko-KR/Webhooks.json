@@ -57,7 +57,6 @@
   "RequestHeaderCopied": "POST 요청 헤더가 클립보드에 성공적으로 복사되었습니다",
   "RequestPostBody": "POST 요청 본문",
   "RequestPostHeader": "POST 요청 헤더",
-  "ResetKey": "재설정 키",
   "Response": "응답",
   "ResponseBodyCopied": "POST 응답 본문이 클립보드에 복사되었습니다",
   "ResponseHeaderCopied": "POST 응답 헤더가 클립보드에 성공적으로 복사되었습니다",

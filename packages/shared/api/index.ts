@@ -56,6 +56,7 @@ import * as apiKeys from "./api-keys";
 import * as backup from "./backup";
 import * as ai from "./ai";
 import * as apps from "./apps";
+import * as privacy from "./privacy";
 
 export default {
   Filter,
@@ -79,4 +80,5 @@ export default {
   apiKeys,
   ai,
   apps,
+  privacy,
 };

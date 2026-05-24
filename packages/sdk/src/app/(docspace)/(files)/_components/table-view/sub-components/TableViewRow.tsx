@@ -257,6 +257,7 @@ const TableViewRow = observer(
       <TableRow
         className={classNames({
           "table-row-selected": isChecked,
+          [styles.isHighlight]: filesListStore.highlightFileId === item.id,
         })}
         checked={isChecked}
         contextOptions={contextMenuModel}
@@ -278,9 +279,10 @@ const TableViewRow = observer(
           <div className="table-container_element-container" onClick={(e) => e.stopPropagation()}>
             <div className="table-container_element">
               <RoomIcon
-                logo={item.icon}
+                logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
+                color={"isRoom" in item && item.isRoom ? item.roomIconColor : undefined}
                 title={item.title}
-                showDefault={false}
+                showDefault={"isRoom" in item && item.isRoom ? !item.hasRoomImage : false}
               />
             </div>
             <Checkbox

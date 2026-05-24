@@ -130,7 +130,9 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const displayFileExtension = Boolean(filesSettings?.displayFileExtension);
   const isExtsCustomFilter =
     "fileExst" in item
-      ? (filesSettings?.extsWebCustomFilterEditing ?? []).includes(item.fileExst)
+      ? (filesSettings?.extsWebCustomFilterEditing ?? []).includes(
+          item.fileExst,
+        )
       : false;
   const temporaryIcon = getTemporaryIcon(item, getIcon);
   const isChecked = isCheckedItem(item);
@@ -168,7 +170,12 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const contextMenuModel = getContextMenuModel(true);
 
   const element = (
-    <RoomIcon logo={item.icon} title={item.title} showDefault={false} />
+    <RoomIcon
+      logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
+      color={"isRoom" in item && item.isRoom ? item.roomIconColor : undefined}
+      title={item.title}
+      showDefault={"isRoom" in item && item.isRoom ? !item.hasRoomImage : false}
+    />
   );
 
   const tileContent = (
@@ -241,7 +248,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const commonTileProps = {
     item,
     contextOptions: contextMenuModel,
-    isHighlight: false,
+    isHighlight: filesListStore.highlightFileId === item.id,
     checked: isChecked,
     isActive: false,
     inProgress,
@@ -286,3 +293,4 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
 };
 
 export default observer(Tile);
+

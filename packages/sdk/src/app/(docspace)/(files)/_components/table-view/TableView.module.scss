@@ -241,7 +241,39 @@
 
 // Last cell hosting quick buttons: allow badges to overflow
 .lastCell {
-  overflow: visible !important;
+  // overflow: visible !important;
   z-index: 1;
   position: relative;
+}
+
+.inlineBadges {
+  display: flex;
+  align-items: center;
+  margin-inline-start: 16px;
+
+  :global(.badges) {
+    display: flex;
+    align-items: center;
+  }
+
+  :global(.badge) {
+    cursor: pointer;
+    margin-inline-end: 8px;
+  }
+}
+
+.isHighlight {
+  :global(.table-container_cell) {
+    animation: Highlight 2s 1;
+  }
+}
+
+@keyframes Highlight {
+  0% {
+    background: var(--files-section-animation-color);
+  }
+
+  100% {
+    background: none;
+  }
 }

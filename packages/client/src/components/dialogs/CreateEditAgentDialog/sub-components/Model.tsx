@@ -55,7 +55,9 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
   const profiles = useProfilesStore((s) => s.profiles);
   const defaultProfile = useProfilesStore((s) => s.defaultProfile);
 
-  const [selectedProfile, setSelectedProfile] = React.useState<Profile | null>(null);
+  const [selectedProfile, setSelectedProfile] = React.useState<Profile | null>(
+    null,
+  );
   const isInitializedRef = React.useRef(false);
   const prevModelIdRef = React.useRef<string | undefined>(undefined);
 
@@ -79,7 +81,11 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
     if (prevModelIdRef.current === selectedProfile.modelId) return;
 
     prevModelIdRef.current = selectedProfile.modelId;
-    setAgentParams({ modelId: selectedProfile.modelId, providerId: undefined, profileId: selectedProfile.id });
+    setAgentParams({
+      modelId: selectedProfile.modelId,
+      providerId: undefined,
+      profileId: selectedProfile.id,
+    });
   }, [selectedProfile, setAgentParams]);
 
   const options = React.useMemo<TOption[]>(
@@ -140,7 +146,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
             <Trans
               t={t}
               i18nKey="ResponseQualityNode"
-              ns="AIRoom"
+              ns="Common"
               components={{
                 1: <span key="1" style={{ fontWeight: 600 }} />,
               }}

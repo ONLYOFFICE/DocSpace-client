@@ -44,8 +44,8 @@ import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { BillingRoot, Wallet, PaymentMethod } from "@docspace/ui-kit/billing";
 import AdditionalStoragePage from "@docspace/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage";
 import type { TPaymentConfig } from "@docspace/ui-kit/billing/types";
+import type { TUser } from "@docspace/shared/api/people/types";
 import { getBrandName } from "@docspace/shared/constants/brands";
-import { useDocsUserStore } from "../../../_store/DocsUserStore";
 
 import { BillingCards, type BillingCardTab } from "@/components/BillingCards";
 import cardStyles from "@/components/BillingCards/BillingCards.module.scss";
@@ -92,9 +92,12 @@ const TAB_DEFS: {
   },
 ];
 
-const BillingForm = () => {
+type BillingFormProps = {
+  user?: TUser | null;
+};
+
+const BillingForm = ({ user }: BillingFormProps) => {
   const { t, i18n } = useTranslation();
-  const { user } = useDocsUserStore();
   const [activeTab, setActiveTab] = React.useState<BillingTab>("wallet");
 
   const onOpenBilling = React.useCallback(() => {

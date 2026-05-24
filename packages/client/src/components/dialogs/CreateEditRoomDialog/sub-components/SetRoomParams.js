@@ -685,7 +685,6 @@ export default inject(
       "CreateEditRoomDialog",
       "Translations",
       "Common",
-      "RoomLogoCover",
     ])(withLoader(SetRoomParams)(<SetRoomParamsLoader />)),
   ),
 );

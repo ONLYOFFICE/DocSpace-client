@@ -105,3 +105,4 @@ export const AIAgentView = inject(
     };
   },
 )(observer(AIAgentViewComponent));
+

@@ -228,7 +228,6 @@
   "QuotasDescription": "Aquí puede establecer una cuota de almacenamiento para usuarios y salas.",
   "Recalculate": "Recalcular",
   "RegisterApp": "Registrar aplicación",
-  "ResetSettings": "Restablecer ajustes",
   "ResetTemplateDescription": "¿Está seguro de que desea restablecer el estado actual del espacio en blanco a su estado predeterminado? No podrá deshacer esta acción.",
   "ResetToDefault": "Restablecer a predeterminado",
   "RestAPI": "REST API",

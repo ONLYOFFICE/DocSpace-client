@@ -137,6 +137,7 @@ class AppsStore {
       );
       return !settings?.roomId;
     }
+    if (id === "ai-agents") return false;
     const settings = await this.fetchAppSettings(id);
     return !settings;
   };
@@ -175,6 +176,16 @@ class AppsStore {
   uninstallAiForms = async () => {
     await this.enable("ai-forms", false);
     await this.saveSettings("ai-forms", null);
+  };
+
+  installDocsCloud = async () => {
+    await this.saveSettings("docs-cloud", { activated: true });
+    await this.enable("docs-cloud", true);
+  };
+
+  uninstallDocsCloud = async () => {
+    await this.enable("docs-cloud", false);
+    await this.saveSettings("docs-cloud", null);
   };
 
   // Re-enable a previously configured app without recreating its resources.

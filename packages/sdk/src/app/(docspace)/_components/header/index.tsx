@@ -64,7 +64,7 @@ export type { HeaderProps };
 
 const Header = ({
   current,
-  pathParts,
+  pathParts: pathPartsProp,
   isEmptyList,
   showTitle = true,
   onBurgerClick,
@@ -117,28 +117,37 @@ const Header = ({
   const rootFolderId = current?.rootFolderId;
   const id = current?.id;
 
+  const pathParts = filesListStore.pathParts ?? pathPartsProp;
+
   const isRoomsFolder = pathParts?.[0]?.id === rootFolderId;
+  const isInRoomsContext =
+    pathParts?.[0]?.folderType === FolderType.Rooms ||
+    pathParts?.[0]?.folderType === FolderType.Archive;
 
   const navigationItems: TNavigationItem[] = useMemo(() => {
     if (!pathParts) return [];
 
-    const items = pathParts
+    const items: TNavigationItem[] = pathParts
       .map((p) => ({
         id: p.id,
         title: p.title,
         isRootRoom: !p.roomType,
       }))
-      .filter((item) => item.isRootRoom);
+      .filter((item) => isInRoomsContext || item.isRootRoom);
 
     items.pop();
 
     return items.reverse();
-  }, [pathParts]);
+  }, [pathParts, isInRoomsContext]);
+
+  const prevIdRef = React.useRef<typeof id>(id);
 
   useEffect(() => {
     navigationStore.setNavigationItems(navigationItems);
     if (id !== undefined) navigationStore.setCurrentFolderId(id);
-    if (title !== undefined) navigationStore.setCurrentTitle(title);
+    if (title !== undefined && (navigationStore.currentTitle === null || prevIdRef.current !== id))
+      navigationStore.setCurrentTitle(title);
+    prevIdRef.current = id;
     navigationStore.setCurrentIsRootRoom(isRoomsFolder);
   }, [title, navigationItems, navigationStore, id, isRoomsFolder]);
 
@@ -250,3 +259,4 @@ const Header = ({
 };
 
 export default observer(Header);
+

@@ -47,13 +47,13 @@ import { DialogsStoreContextProvider } from "@/app/(docspace)/_store/DialogsStor
 import { DownloadDialogStoreContextProvider } from "@/app/(docspace)/_store/DownloadDialogStore";
 import { ActiveItemsStoreContextProvider } from "@/app/(docspace)/_store/ActiveItemsStore";
 import { UploadStoreContextProvider } from "@/app/(docspace)/_store/UploadStore";
+import { InfoPanelStoreContextProvider } from "@/app/(docspace)/_store/InfoPanelStore";
 
 import type { TViewAs } from "@docspace/shared/types";
 
 import { AiChatPanelStoreContextProvider } from "./AiChatStore";
 import { DocsSettingsStoreContextProvider } from "./DocsSettingsStore";
 import { DocsUserStoreContextProvider } from "./DocsUserStore";
-import { InfoPanelStoreContextProvider } from "./InfoPanelStore";
 import PersonalFilesAiAgentProviders from "../_components/ai-agent-providers";
 import { VersionHistoryStoreContextProvider } from "./VersionHistoryStore";
 

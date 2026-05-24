@@ -165,7 +165,7 @@ const ChangePortalOwnerDialog = ({
           />
         </ModalDialog.Container>
       ) : null}
-      <ModalDialog.Header>{t("Translations:OwnerChange")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:OwnerChange")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.ownerInfo}>
           <Avatar className="avatar" role="owner" source={avatar} size="big" />
@@ -225,9 +225,9 @@ const ChangePortalOwnerDialog = ({
             <AddButton
               className="selector-add-button"
               onClick={onTogglePeopleSelector}
-              label={t("Translations:ChooseFromList")}
+              label={t("Common:ChooseFromList")}
               noSelect
-              titleText={t("Translations:ChooseFromList")}
+              titleText={t("Common:ChooseFromList")}
               testId="change_portal_owner_choose_from_list_button"
             />
           </div>

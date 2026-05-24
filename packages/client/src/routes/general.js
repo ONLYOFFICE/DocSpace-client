@@ -73,6 +73,14 @@ export const profileClientRoutes = [
     ),
   },
   {
+    path: "profile/keys-management",
+    element: (
+      <PrivateRouteWrapper>
+        <ViewComponent />
+      </PrivateRouteWrapper>
+    ),
+  },
+  {
     path: "profile/interface-theme",
     element: (
       <PrivateRouteWrapper>
@@ -301,6 +309,10 @@ const generalRoutes = [
       },
       {
         path: "file-management",
+        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
+      },
+      {
+        path: "keys-management",
         lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
       },
       {

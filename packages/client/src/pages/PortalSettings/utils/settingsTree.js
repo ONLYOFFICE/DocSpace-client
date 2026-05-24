@@ -568,7 +568,7 @@ export const settingsTree = [
         id: "portal-settings_catalog-ai-settings-knowledge",
         key: "7-3",
         link: "knowledge",
-        tKey: "AIRoom:Knowledge",
+        tKey: "Common:Knowledge",
         isCategory: true,
       },
     ],

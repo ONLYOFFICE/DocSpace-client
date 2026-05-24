@@ -116,7 +116,6 @@ const Details = ({
     "Common",
     "Translations",
     "Files",
-    "RoomLogoCover",
   ]);
   const [itemProperties, setItemProperties] = useState<
     ReturnType<DetailsHelper["getPropertyList"]>

@@ -36,7 +36,10 @@
 import { Trans } from "react-i18next";
 import { TFunction } from "i18next";
 import { FeedActionKeys } from "@docspace/shared/api/rooms/types";
-import { humanizeDuration, type DurationUnit } from "@docspace/ui-kit/utils/date";
+import {
+  humanizeDuration,
+  type DurationUnit,
+} from "@docspace/ui-kit/utils/date";
 import { TTranslation } from "@docspace/shared/types";
 
 import { HistoryText } from "./HistoryText";
@@ -189,7 +192,7 @@ export const useFeedTranslation = (
       return (
         <Trans
           t={t as TFunction}
-          ns="InfoPanel"
+          ns="Common"
           i18nKey="HistoryRoomCreated"
           values={{ roomTitle: feed.data.title }}
           components={{ 1: <HistoryText title={feed.data.title!} /> }}
@@ -209,7 +212,7 @@ export const useFeedTranslation = (
       return (
         <Trans
           t={t as TFunction}
-          ns="InfoPanel"
+          ns="Common"
           i18nKey="RoomRenamed"
           values={{
             oldRoomTitle: feed.data.oldTitle,
@@ -222,15 +225,15 @@ export const useFeedTranslation = (
         />
       );
     case FeedActionKeys.AddedRoomTags:
-      return t("InfoPanel:AddedRoomTags");
+      return t("Common:AddedRoomTags");
     case FeedActionKeys.DeletedRoomTags:
-      return t("InfoPanel:DeletedRoomTags");
+      return t("Common:DeletedRoomTags");
     case FeedActionKeys.RoomLogoCreated:
     case FeedActionKeys.RoomColorChanged:
     case FeedActionKeys.RoomCoverChanged:
-      return t("InfoPanel:RoomLogoChanged");
+      return t("Common:RoomLogoChanged");
     case FeedActionKeys.RoomLogoDeleted:
-      return t("InfoPanel:RoomLogoChanged");
+      return t("Common:RoomLogoChanged");
     case FeedActionKeys.RoomExternalLinkCreated:
       return t("InfoPanel:RoomExternalLinkCreated");
     case FeedActionKeys.RoomExternalLinkRenamed:
@@ -330,11 +333,11 @@ export const useFeedTranslation = (
     case FeedActionKeys.RoomDenyDownloadDisabled:
       return t("InfoPanel:RoomDenyDownloadDisabled");
     case FeedActionKeys.RoomArchived:
-      return t("InfoPanel:RoomToArchiveMove", {
+      return t("Common:RoomToArchiveMove", {
         sectionName: t("Common:Archive"),
       });
     case FeedActionKeys.RoomUnarchived:
-      return t("InfoPanel:RoomFromArchiveRestore", {
+      return t("Common:RoomFromArchiveRestore", {
         sectionName: t("Common:Archive"),
       });
     case FeedActionKeys.RoomIndexExportSaved:
@@ -366,3 +369,4 @@ export const useFeedTranslation = (
       return null;
   }
 };
+

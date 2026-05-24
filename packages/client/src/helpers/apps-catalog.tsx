@@ -31,8 +31,14 @@ import CatalogFolderIcon from "@docspace/ui-kit/assets/icons/16/catalog.folder.r
 import CatalogRoomsIcon from "@docspace/ui-kit/assets/icons/16/catalog.rooms.react.svg";
 import CatalogDocumentsIcon from "@docspace/ui-kit/assets/icons/16/catalog.documents.react.svg";
 import AiAgentsIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
+import CatalogPortfolioIcon from "@docspace/ui-kit/assets/icons/16/catalog.portfolio.react.svg";
 
-export type AppId = "ai-files" | "ai-rooms" | "ai-forms" | "ai-agents";
+export type AppId =
+  | "ai-files"
+  | "ai-rooms"
+  | "ai-forms"
+  | "ai-agents"
+  | "docs-cloud";
 
 export type AppCatalogItem = {
   id: AppId;
@@ -62,7 +68,8 @@ export const useAppsCatalog = (): AppCatalogItem[] => {
       icon: <CatalogRoomsIcon />,
       title: t("Common:DashboardAIRoomsTitle"),
       description: t("Common:DashboardAIRoomsDescription"),
-      supported: false,
+      href: "/ai-rooms",
+      supported: true,
       alwaysOn: false,
     },
     {
@@ -79,7 +86,17 @@ export const useAppsCatalog = (): AppCatalogItem[] => {
       icon: <AiAgentsIcon />,
       title: t("Common:DashboardAIChatAgentsTitle"),
       description: t("Common:DashboardAIChatAgentsDescription"),
-      supported: false,
+      href: "/ai-agents",
+      supported: true,
+      alwaysOn: false,
+    },
+    {
+      id: "docs-cloud",
+      icon: <CatalogPortfolioIcon />,
+      title: t("Common:DocsCloud"),
+      description: t("Common:DocsCloudDescription"),
+      href: "/docs-cloud",
+      supported: true,
       alwaysOn: false,
     },
   ];

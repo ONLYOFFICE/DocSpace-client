@@ -57,7 +57,6 @@
   "RequestHeaderCopied": "تم نسخ ترويسة طلب POST إلى الحافظة بنجاح",
   "RequestPostBody": "نص طلب POST",
   "RequestPostHeader": "ترويسة طلب POST",
-  "ResetKey": "رمز إعادة التعيين",
   "Response": "رد",
   "ResponseBodyCopied": "تم نسخ نص رد POST إلى الحافظة بنجاح",
   "ResponseHeaderCopied": "تم نسخ ترويسة رد POST إلى الحافظة بنجاح",

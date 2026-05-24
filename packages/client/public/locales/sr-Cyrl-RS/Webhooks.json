@@ -57,7 +57,6 @@
   "RequestHeaderCopied": "Заглавље POST захтева је успешно копирано у клипборд",
   "RequestPostBody": "Тело POST захтева",
   "RequestPostHeader": "Заглавље POST захтева",
-  "ResetKey": "Поновно постави кључ",
   "Response": "Одговор",
   "ResponseBodyCopied": "Тело одговора POST захтева успешно копирано у привремену меморију",
   "ResponseHeaderCopied": "Заглавље POST одговора успешно копирано у привремену меморију",

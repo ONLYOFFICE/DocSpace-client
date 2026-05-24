@@ -1,6 +1,5 @@
 {
   "AddCertificate": "Dodaj certifikat",
-  "AdvancedSettings": "Napredne nastavitve",
   "AdvancedSettingsTooltip": "Skrij privzeto stran za avtentikacijo in samodejno preusmeri na storitev SSO.",
   "AttributeMatching": "Preslikava atributov",
   "AttributeMatchingTooltip": "Ujemanje atributov enotne prijave z vnosi v razdelku 'Računi'.",
@@ -11,7 +10,6 @@
   "DownloadMetadataXML": "Prenesi SP metapodatke v XML",
   "Encryption": "Šifriranje",
   "GenerateCertificate": "Ustvarite nov samopodpisni certifikat",
-  "Hide": "Skrij",
   "HideAdditionalParameters": "Skrij napredne nastavitve",
   "HideAuthPage": "Skrij avtentikacijsko stran",
   "idpAuthRequest": "Preveri podpise odzivov za avtentikacijo",
@@ -32,7 +30,6 @@
   "ProviderURLTooltip": "ID subjekta ponudnika identitete (URL izdajatelja)",
   "ServiceProviderSettings": "{{organizationName}} SP Nastavitve",
   "ServiceProviderSettingsDescription": "Konfigurirajte nastavitve ponudnika storitev in dodajte potrdila SP za enotno prijavo.",
-  "Show": "Prikaži",
   "ShowAdditionalParameters": "Pokaži napredne nastavitve",
   "Signing": "Podpisovanje",
   "SigningAndEncryption": "Podpisovanje in šifriranje",

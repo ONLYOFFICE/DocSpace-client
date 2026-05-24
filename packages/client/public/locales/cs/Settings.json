@@ -228,7 +228,6 @@
   "QuotasDescription": "Zde můžete nastavit kvótu úložiště pro uživatele a místnosti.",
   "Recalculate": "Přepočítat",
   "RegisterApp": "Registrovat aplikaci",
-  "ResetSettings": "Obnovit nastavení",
   "ResetTemplateDescription": "Jste si jisti, že chcete resetovat aktuální stav šablony na její výchozí stav? Tato akce nebude možné zrušit.",
   "ResetToDefault": "Resetovat na výchozí",
   "RestAPI": "REST API",

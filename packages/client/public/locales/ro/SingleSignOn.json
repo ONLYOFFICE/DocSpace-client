@@ -1,6 +1,5 @@
 {
   "AddCertificate": "Adăugare certificat",
-  "AdvancedSettings": "Setări avansate",
   "AdvancedSettingsTooltip": "Ascundere pagina de autentificare implicită şi redirecționare automată spre serviciu SSO.",
   "AttributeMatching": "Mapare atribute",
   "AttributeMatchingTooltip": "Corespondenţa atributelor SSO cu intrările din secţiunea Conturi.",
@@ -11,7 +10,6 @@
   "DownloadMetadataXML": "Descărcare metadate XML SP",
   "Encryption": "Criptare",
   "GenerateCertificate": "Generează un nou certificat cu semnătură automată",
-  "Hide": "Ascunde",
   "HideAdditionalParameters": "Ascundere setări avansate",
   "HideAuthPage": "Ascundere pagina de autentificare",
   "idpAuthRequest": "Verificarea semnăturii cu răspunsul de autentificare",
@@ -32,7 +30,6 @@
   "ProviderURLTooltip": "ID-ul de entitate al furnizorului de identitate (Adresa URL a emitentului)",
   "ServiceProviderSettings": "Setări furnizor de servicii {{organizationName}}",
   "ServiceProviderSettingsDescription": "Configurați setări Furnizor de serviciu și adăugați certificate de furnizor de servicii pentru autentificarea unică.",
-  "Show": "Afişare",
   "ShowAdditionalParameters": "Afişare setări avansate",
   "Signing": "Semnare",
   "SigningAndEncryption": "Semnare şi criptare",

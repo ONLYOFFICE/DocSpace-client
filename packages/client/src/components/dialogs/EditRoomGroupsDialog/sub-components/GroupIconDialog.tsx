@@ -77,7 +77,7 @@ const GroupIconDialog = ({
   currentGroupName,
   isOpenedFromContextMenu,
 }: CoverDialogProps) => {
-  const { t } = useTranslation(["Common", "RoomLogoCover", "GroupingRooms"]);
+  const { t } = useTranslation(["Common", "GroupingRooms"]);
 
   const [roomIcon, setRoomIcon] = React.useState<
     ICover | ILogo | string | null

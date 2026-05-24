@@ -229,7 +229,6 @@
   "QuotasDescription": "Here, you can set storage quota for users and rooms.",
   "Recalculate": "Recalculate",
   "RegisterApp": "Register app",
-  "ResetSettings": "Reset settings",
   "ResetTemplateDescription": "Are you sure you want to reset the current state of the blank to its default state?\n You will not be able to undo this action.",
   "ResetToDefault": "Reset to default",
   "RestAPI": "REST API",

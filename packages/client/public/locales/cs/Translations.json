@@ -1,5 +1,4 @@
 {
-  "ChooseFromList": "Vyberte ze seznamu",
   "FileLocked": "Soubor uzamčen",
   "FileProtected": "Soubor je chráněn heslem",
   "FileUnlocked": "Soubor odemčen",
@@ -13,7 +12,6 @@
   "FolderTitleWebDav": "Adresář WebDAV",
   "FolderTitleYandex": "Adresář Yandex",
   "NewForm": "PDF formulář",
-  "OwnerChange": "Změnit vlastníka",
   "RoleGuestDescriprion": "Hosté mají přístup do místností, do kterých byli pozváni, a mohou vytvářet a upravovat dokumenty, pokud jim byly v místnosti přiděleny příslušné role.",
   "SearchByHeadOfGroup": "Vyhledávání podle vedoucího skupiny",
   "SearchByOwner": "Vyhledávání podle vlastníků",

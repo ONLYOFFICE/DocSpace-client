@@ -37,7 +37,7 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import type {
   TFile,
@@ -82,15 +82,24 @@ import type {
 } from "@/app/(docspace)/_hooks/useItemList";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
+import {
+  InfoPanelBody as DocsInfoPanelBody,
+  InfoPanelHeader as DocsInfoPanelHeader,
+  InfoPanelEditLinkDialog,
+} from "@/app/(docspace)/_components/info-panel";
+import {
+  InfoPanelView,
+  useInfoPanelStore,
+} from "@/app/(docspace)/_store/InfoPanelStore";
 import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
-import CreateFileDialog from "../create-file-dialog";
 import ConvertDialog from "../convert-dialog";
+import CreateFileDialog from "../create-file-dialog";
 import VersionHistoryPanel from "../version-history-panel";
-import { InfoPanelView, useInfoPanelStore } from "../../_store/InfoPanelStore";
 import { useVersionHistoryStore } from "../../_store/VersionHistoryStore";
+
 import useDocsActions from "../../_hooks/useDocsActions";
 import { useDocsMenuModels } from "../../_hooks/useDocsMenuModels";
 import useTrashActions from "../../_hooks/useTrashActions";
@@ -102,22 +111,12 @@ import { useDocsUserStore } from "../../_store/DocsUserStore";
 import { useAiChatPanelStore } from "../../_store/AiChatStore";
 import type { SelectorMode } from "../../_hooks/useFileOperations";
 import { useDocsFrameBridge } from "../../_hooks/useDocsFrameBridge";
+
 import DropZone from "../drop-zone";
 import DeleteDialog from "../delete-dialog";
 import RenameDialog from "../rename-dialog";
 import UploadPanel from "../upload-panel";
-import {
-  InfoPanelBody as DocsInfoPanelBody,
-  InfoPanelHeader as DocsInfoPanelHeader,
-  InfoPanelEditLinkDialog,
-} from "../info-panel";
-
-import PersonalFilesAiAgentProviders from "../ai-agent-providers";
-import {
-  DocsChatHeaderPanel,
-  DocsChatBodyPanel,
-  AiChatTrigger,
-} from "../ai-chat-panel/";
+import { DocsChatBodyPanel, DocsChatHeaderPanel } from "../ai-chat-panel";
 
 import styles from "./DocsLayout.module.scss";
 
@@ -130,6 +129,18 @@ type DocsLayoutProps = {
   filesSettings: TFilesSettings;
   portalSettings: TSettings;
   filesFilter: string;
+  /**
+   * Temporary flag: hide "Add to favorites" in file/folder context menus.
+   * Used for rooms internals and trash.
+   */
+  withoutFavorite?: boolean;
+  /**
+   * Base path used to navigate to the editor route. Defaults to
+   * "/personal-files/editor". When provided (e.g., "/editor" for rooms), the
+   * current pathname is appended as a `returnTo` query parameter so the editor
+   * page can navigate back to the originating section.
+   */
+  editorBasePath?: string;
 };
 
 const getSubmitLabel = (mode: SelectorMode, t: (key: string) => string) => {
@@ -148,6 +159,8 @@ const DocsLayout = observer(
     filesSettings,
     portalSettings,
     filesFilter,
+    withoutFavorite,
+    editorBasePath,
   }: DocsLayoutProps) => {
     const { t } = useTranslation(["Common"]);
     const { isEmptyList } = useSettingsStore();
@@ -157,16 +170,16 @@ const DocsLayout = observer(
     const docsUserStore = useDocsUserStore();
     const { sdkConfig } = useSDKConfig();
     const router = useRouter();
-    const {
-      isFullscreen: isAiChatPanelFullscreen,
-      isVisible: isAiChatPanelVisible,
-    } = useAiChatPanelStore();
+    const pathname = usePathname();
 
     const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
 
     const isMyDocuments = rootFolderType === FolderType.USER;
+    const isInRooms =
+      rootFolderType === FolderType.Rooms ||
+      rootFolderType === FolderType.Archive;
     const isActionButtonEnabled =
-      isMyDocuments && !sdkConfig?.disableActionButton;
+      (isMyDocuments || isInRooms) && !sdkConfig?.disableActionButton;
 
     const docsActions = useDocsActions();
     const {
@@ -180,6 +193,11 @@ const DocsLayout = observer(
       onUploadFiles,
       onUploadFolder,
     } = docsActions;
+
+    const {
+      isFullscreen: isAiChatPanelFullscreen,
+      isVisible: isAiChatPanelVisible,
+    } = useAiChatPanelStore();
 
     const { desktopModel, quickActionItems } = useDocsMenuModels({
       openCreateDialog,
@@ -263,12 +281,19 @@ const DocsLayout = observer(
 
     const openFileInEditor = React.useCallback(
       (file: TFileItem, preview?: boolean) => {
-        const url = preview
-          ? `/personal-files/editor/${file.id}?action=view`
-          : `/personal-files/editor/${file.id}`;
+        const basePath = editorBasePath ?? "/personal-files/editor";
+        const params = new URLSearchParams();
+        if (preview) params.set("action", "view");
+        if (editorBasePath && pathname) {
+          params.set("returnTo", pathname);
+        }
+        const qs = params.toString();
+        const url = qs
+          ? `${basePath}/${file.id}?${qs}`
+          : `${basePath}/${file.id}`;
         router.push(url);
       },
-      [router],
+      [router, editorBasePath, pathname],
     );
 
     const {
@@ -296,7 +321,6 @@ const DocsLayout = observer(
       },
       [openFileInEditor, requestConvert],
     );
-
     const shareHandler = React.useCallback(
       (item: TFileItem | TFolderItem) => {
         infoPanelStore.open(item);
@@ -323,266 +347,258 @@ const DocsLayout = observer(
     const layoutMode = isAiChatPanelFullscreen ? "ai-fullscreen" : "default";
 
     return (
-      <PersonalFilesAiAgentProviders>
-        <OpenFileContext.Provider value={openFileHandler}>
-          <InfoContext.Provider value={infoHandler}>
-            <ShareContext.Provider value={shareHandler}>
-              <DeleteContext.Provider value={deleteHandler}>
-                <RenameContext.Provider value={renameHandler}>
-                  <FileOperationsContext.Provider value={fileOperationsHandler}>
-                    <VersionHistoryContext.Provider
-                      value={versionHistoryHandler}
-                    >
-                      <ConvertContext.Provider value={requestConvert}>
-                        <div
-                          className={styles.root}
-                          style={frameHeaderVars}
-                          data-layout-mode={layoutMode}
+      <OpenFileContext.Provider value={openFileHandler}>
+        <InfoContext.Provider value={infoHandler}>
+          <ShareContext.Provider value={shareHandler}>
+            <DeleteContext.Provider value={deleteHandler}>
+              <RenameContext.Provider value={renameHandler}>
+                <FileOperationsContext.Provider value={fileOperationsHandler}>
+                  <VersionHistoryContext.Provider value={versionHistoryHandler}>
+                    <ConvertContext.Provider value={requestConvert}>
+                      <div
+                        className={styles.root}
+                        style={frameHeaderVars}
+                        data-layout-mode={layoutMode}
+                      >
+                        <DropZone
+                          onFilesDropped={uploadFilesToFolder}
+                          disabled={!isMyDocuments}
                         >
-                          <DropZone
-                            onFilesDropped={uploadFilesToFolder}
-                            disabled={!isMyDocuments}
-                          >
-                            <RootScrollbar>
-                              <SectionWrapper
-                                sectionHeaderContent={
-                                  <Header
-                                    current={current}
-                                    pathParts={pathParts}
-                                    isEmptyList={isEmptyList}
-                                    isInfoPanelVisible={
-                                      sdkConfig?.infoPanelVisible
-                                        ? infoPanelStore.isVisible
-                                        : false
-                                    }
-                                    onToggleInfoPanel={
-                                      sdkConfig?.infoPanelVisible
-                                        ? infoPanelStore.toggle
+                          <RootScrollbar>
+                            <SectionWrapper
+                              sectionHeaderContent={
+                                <Header
+                                  current={current}
+                                  pathParts={pathParts}
+                                  isEmptyList={isEmptyList}
+                                  isInfoPanelVisible={
+                                    sdkConfig?.infoPanelVisible
+                                      ? infoPanelStore.isVisible
+                                      : false
+                                  }
+                                  onToggleInfoPanel={
+                                    sdkConfig?.infoPanelVisible
+                                      ? infoPanelStore.toggle
+                                      : undefined
+                                  }
+                                  headerOffset={headerOffset}
+                                />
+                              }
+                              sectionFilterContent={
+                                <>
+                                  {isActionButtonEnabled && (
+                                    <QuickActions
+                                      items={quickActionItems}
+                                      className={styles.quickActions}
+                                    />
+                                  )}
+                                  <Filter
+                                    filesFilter={filesFilter}
+                                    showMainButton={isActionButtonEnabled}
+                                    mainButtonProps={
+                                      isActionButtonEnabled
+                                        ? {
+                                            isDropdown: true,
+                                            model: desktopModel,
+                                            text: t("Common:New"),
+                                          }
                                         : undefined
                                     }
-                                    headerOffset={headerOffset}
-                                    aiChatButton={<AiChatTrigger />}
                                   />
-                                }
-                                sectionFilterContent={
-                                  <>
-                                    {isActionButtonEnabled && (
-                                      <QuickActions
-                                        items={quickActionItems}
-                                        className={styles.quickActions}
-                                      />
-                                    )}
-                                    <Filter
-                                      filesFilter={filesFilter}
-                                      showMainButton={isActionButtonEnabled}
-                                      mainButtonProps={
-                                        isActionButtonEnabled
-                                          ? {
-                                              isDropdown: true,
-                                              model: desktopModel,
-                                              text: t("Common:New"),
-                                            }
-                                          : undefined
-                                      }
-                                    />
-                                  </>
-                                }
-                                sectionBodyContent={
-                                  <List
-                                    total={total}
-                                    folders={folders}
-                                    files={files}
-                                    filesSettings={filesSettings}
-                                    portalSettings={portalSettings}
-                                    filesFilter={filesFilter}
-                                    current={current}
-                                    currentUserId={docsUserStore.user?.id}
-                                  />
-                                }
-                                infoPanelHeaderContent={
-                                  isAiChatPanelVisible ? (
-                                    <DocsChatHeaderPanel />
-                                  ) : (
-                                    <DocsInfoPanelHeader />
-                                  )
-                                }
-                                infoPanelBodyContent={
-                                  isAiChatPanelVisible ? (
-                                    <DocsChatBodyPanel />
-                                  ) : (
-                                    <DocsInfoPanelBody />
-                                  )
-                                }
-                                isInfoPanelVisible={
-                                  infoPanelStore.isVisible ||
-                                  isAiChatPanelVisible
-                                }
-                                infoPanelWithoutScroll={isAiChatPanelVisible}
-                                setIsInfoPanelVisible={(v: boolean) => {
-                                  if (v) {
-                                    if (!infoPanelStore.isVisible) {
-                                      infoPanelStore.toggle();
-                                    }
-                                  } else {
-                                    infoPanelStore.close();
+                                </>
+                              }
+                              sectionBodyContent={
+                                <List
+                                  total={total}
+                                  folders={folders}
+                                  files={files}
+                                  filesSettings={filesSettings}
+                                  portalSettings={portalSettings}
+                                  filesFilter={filesFilter}
+                                  current={current}
+                                  currentUserId={docsUserStore.user?.id}
+                                  infoPanelVisible={infoPanelStore.isVisible}
+                                />
+                              }
+                              infoPanelHeaderContent={
+                                isAiChatPanelVisible ? (
+                                  <DocsChatHeaderPanel />
+                                ) : (
+                                  <DocsInfoPanelHeader />
+                                )
+                              }
+                              infoPanelBodyContent={
+                                isAiChatPanelVisible ? (
+                                  <DocsChatBodyPanel />
+                                ) : (
+                                  <DocsInfoPanelBody />
+                                )
+                              }
+                              isInfoPanelVisible={
+                                infoPanelStore.isVisible || isAiChatPanelVisible
+                              }
+                              infoPanelWithoutScroll={isAiChatPanelVisible}
+                              setIsInfoPanelVisible={(v: boolean) => {
+                                if (v) {
+                                  if (!infoPanelStore.isVisible) {
+                                    infoPanelStore.toggle();
                                   }
-                                }}
-                                isEmptyPage={isEmptyList}
-                                filesFilter={filesFilter}
-                              />
-                              <SelectionArea />
-                              <FilesMediaViewer filesSettings={filesSettings} />
-                              <DeviceTypeObserver />
-                              <Dialogs />
-                            </RootScrollbar>
-                          </DropZone>
-                          <InfoPanelEditLinkDialog />
-                          <VersionHistoryPanel />
-                          <CreateFileDialog
-                            visible={dialogVisible}
-                            type={dialogType}
-                            isCreating={isCreating}
-                            onClose={closeCreateDialog}
-                            onSave={onSaveCreate}
-                          />
-                          <DeleteDialog
-                            visible={deleteDialogVisible}
-                            isLoading={isDeleting}
-                            itemCount={deleteDialogItemCount}
-                            isTrash={isTrash}
-                            onClose={closeDeleteDialog}
-                            onConfirm={confirmDelete}
-                          />
-                          {selectorDialogVisible && selectorInitData && (
-                            <FilesSelector
-                              isPanelVisible={selectorDialogVisible}
-                              embedded={false}
-                              currentDeviceType={DeviceType.desktop}
-                              currentFolderId={selectorInitData.currentFolderId}
-                              rootFolderType={
-                                selectorInitData.rootFolderType as unknown as Parameters<
-                                  typeof FilesSelector
-                                >[0]["rootFolderType"]
-                              }
-                              treeFolders={
-                                (foldersTree ??
-                                  []) as unknown as FolderDtoInteger[]
-                              }
-                              filesSettings={
-                                filesSettings as unknown as NonNullable<
-                                  FilesSelectorProps["filesSettings"]
-                                >
-                              }
-                              isUserOnly={selectorMode !== "restore"}
-                              isRoomsOnly={false}
-                              isThirdParty={false}
-                              openRoot={selectorMode === "restore"}
-                              withInit
-                              initItems={
-                                selectorInitData.items as unknown as FolderDtoInteger[]
-                              }
-                              initBreadCrumbs={selectorInitData.breadCrumbs}
-                              initSelectedItemType="files"
-                              initSelectedItemId={
-                                selectorInitData.currentFolderId
-                              }
-                              initSearchValue={null}
-                              initTotal={selectorInitData.total}
-                              initHasNextPage={selectorInitData.hasNextPage}
-                              submitButtonLabel={getSubmitLabel(
-                                selectorMode,
-                                t,
-                              )}
-                              cancelButtonLabel={t("Common:CancelButton")}
-                              withCancelButton
-                              withBreadCrumbs
-                              withSearch
-                              withCreate={false}
-                              withFooterInput={false}
-                              withFooterCheckbox={false}
-                              withoutBackButton
-                              footerInputHeader=""
-                              currentFooterInputValue=""
-                              footerCheckboxLabel=""
-                              descriptionText=""
-                              disabledItems={disabledItems}
-                              getFilesArchiveError={() => ""}
-                              getIsDisabled={(
-                                isFirstLoad: boolean,
-                                _isSelectedParentFolder: boolean,
-                                _selectedItemId: string | number | undefined,
-                                _selectedItemType:
-                                  | "rooms"
-                                  | "files"
-                                  | "agents"
-                                  | undefined,
-                                isRoot: boolean,
-                              ) => isFirstLoad || isRoot}
-                              onCancel={closeSelectorDialog}
-                              onSubmit={(
-                                selectedItemId: string | number | undefined,
-                              ) => {
-                                if (selectedItemId !== undefined) {
-                                  confirmOperation(selectedItemId as number);
+                                } else {
+                                  infoPanelStore.close();
                                 }
                               }}
+                              isEmptyPage={isEmptyList}
+                              filesFilter={filesFilter}
                             />
-                          )}
-                          {operationProgress && (
-                            <FloatingButton
-                              icon={operationProgress.icon}
-                              percent={operationProgress.percent}
-                              completed={operationProgress.completed}
-                              alert={operationProgress.alert}
-                            />
-                          )}
-                          {uploadStore.hasItems && (
-                            <FloatingButton
-                              icon="upload"
-                              percent={uploadStore.percent}
-                              completed={
-                                uploadStore.uploaded &&
-                                uploadStore.errorsCount === 0
+                            <SelectionArea />
+                            <FilesMediaViewer filesSettings={filesSettings} />
+                            <DeviceTypeObserver />
+                            <Dialogs />
+                          </RootScrollbar>
+                        </DropZone>
+                        <InfoPanelEditLinkDialog />
+                        <VersionHistoryPanel />
+                        <CreateFileDialog
+                          visible={dialogVisible}
+                          type={dialogType}
+                          isCreating={isCreating}
+                          onClose={closeCreateDialog}
+                          onSave={onSaveCreate}
+                        />
+                        <DeleteDialog
+                          visible={deleteDialogVisible}
+                          isLoading={isDeleting}
+                          itemCount={deleteDialogItemCount}
+                          isTrash={isTrash}
+                          onClose={closeDeleteDialog}
+                          onConfirm={confirmDelete}
+                        />
+                        {selectorDialogVisible && selectorInitData && (
+                          <FilesSelector
+                            isPanelVisible={selectorDialogVisible}
+                            embedded={false}
+                            currentDeviceType={DeviceType.desktop}
+                            currentFolderId={selectorInitData.currentFolderId}
+                            rootFolderType={
+                              selectorInitData.rootFolderType as unknown as Parameters<
+                                typeof FilesSelector
+                              >[0]["rootFolderType"]
+                            }
+                            treeFolders={
+                              (foldersTree ??
+                                []) as unknown as FolderDtoInteger[]
+                            }
+                            filesSettings={
+                              filesSettings as unknown as NonNullable<
+                                FilesSelectorProps["filesSettings"]
+                              >
+                            }
+                            isUserOnly={selectorMode !== "restore"}
+                            isRoomsOnly={false}
+                            isThirdParty={false}
+                            openRoot={selectorMode === "restore"}
+                            withInit
+                            initItems={
+                              selectorInitData.items as unknown as FolderDtoInteger[]
+                            }
+                            initBreadCrumbs={selectorInitData.breadCrumbs}
+                            initSelectedItemType="files"
+                            initSelectedItemId={
+                              selectorInitData.currentFolderId
+                            }
+                            initSearchValue={null}
+                            initTotal={selectorInitData.total}
+                            initHasNextPage={selectorInitData.hasNextPage}
+                            submitButtonLabel={getSubmitLabel(selectorMode, t)}
+                            cancelButtonLabel={t("Common:CancelButton")}
+                            withCancelButton
+                            withBreadCrumbs
+                            withSearch
+                            withCreate={false}
+                            withFooterInput={false}
+                            withFooterCheckbox={false}
+                            withoutBackButton
+                            footerInputHeader=""
+                            currentFooterInputValue=""
+                            footerCheckboxLabel=""
+                            descriptionText=""
+                            disabledItems={disabledItems}
+                            getFilesArchiveError={() => ""}
+                            getIsDisabled={(
+                              isFirstLoad: boolean,
+                              _isSelectedParentFolder: boolean,
+                              _selectedItemId: string | number | undefined,
+                              _selectedItemType:
+                                | "rooms"
+                                | "files"
+                                | "agents"
+                                | undefined,
+                              isRoot: boolean,
+                            ) => isFirstLoad || isRoot}
+                            onCancel={closeSelectorDialog}
+                            onSubmit={(
+                              selectedItemId: string | number | undefined,
+                            ) => {
+                              if (selectedItemId !== undefined) {
+                                confirmOperation(selectedItemId as number);
                               }
-                              alert={uploadStore.errorsCount > 0}
-                              onClick={() => uploadStore.setPanelVisible(true)}
-                            />
-                          )}
-                          {convertProgress && (
-                            <FloatingButton
-                              icon="refresh"
-                              percent={convertProgress.percent}
-                              completed={convertProgress.completed}
-                              alert={convertProgress.alert}
-                            />
-                          )}
-                          <UploadPanel />
-                          <RenameDialog
-                            visible={renameDialogVisible}
-                            initialName={renameInitialName}
-                            isRenaming={isRenaming}
-                            onClose={closeRenameDialog}
-                            onSave={confirmRename}
+                            }}
                           />
-                          <ConvertDialog
-                            visible={convertDialogVisible}
-                            fileExst={convertTarget?.fileExst ?? ""}
-                            storeOriginalFiles={storeOriginalFiles}
-                            isConverting={isConverting}
-                            onChangeStoreOriginal={onChangeStoreOriginal}
-                            onClose={closeConvertDialog}
-                            onConfirm={confirmConvert}
+                        )}
+                        {operationProgress && (
+                          <FloatingButton
+                            icon={operationProgress.icon}
+                            percent={operationProgress.percent}
+                            completed={operationProgress.completed}
+                            alert={operationProgress.alert}
                           />
-                        </div>
-                      </ConvertContext.Provider>
-                    </VersionHistoryContext.Provider>
-                  </FileOperationsContext.Provider>
-                </RenameContext.Provider>
-              </DeleteContext.Provider>
-            </ShareContext.Provider>
-          </InfoContext.Provider>
-        </OpenFileContext.Provider>
-      </PersonalFilesAiAgentProviders>
+                        )}
+                        {uploadStore.hasItems && (
+                          <FloatingButton
+                            icon="upload"
+                            percent={uploadStore.percent}
+                            completed={
+                              uploadStore.uploaded &&
+                              uploadStore.errorsCount === 0
+                            }
+                            alert={uploadStore.errorsCount > 0}
+                            onClick={() => uploadStore.setPanelVisible(true)}
+                          />
+                        )}
+                        {convertProgress && (
+                          <FloatingButton
+                            icon="refresh"
+                            percent={convertProgress.percent}
+                            completed={convertProgress.completed}
+                            alert={convertProgress.alert}
+                          />
+                        )}
+                        <UploadPanel />
+                        <RenameDialog
+                          visible={renameDialogVisible}
+                          initialName={renameInitialName}
+                          isRenaming={isRenaming}
+                          onClose={closeRenameDialog}
+                          onSave={confirmRename}
+                        />
+                        <ConvertDialog
+                          visible={convertDialogVisible}
+                          fileExst={convertTarget?.fileExst ?? ""}
+                          storeOriginalFiles={storeOriginalFiles}
+                          isConverting={isConverting}
+                          onChangeStoreOriginal={onChangeStoreOriginal}
+                          onClose={closeConvertDialog}
+                          onConfirm={confirmConvert}
+                        />
+                      </div>
+                    </ConvertContext.Provider>
+                  </VersionHistoryContext.Provider>
+                </FileOperationsContext.Provider>
+              </RenameContext.Provider>
+            </DeleteContext.Provider>
+          </ShareContext.Provider>
+        </InfoContext.Provider>
+      </OpenFileContext.Provider>
     );
   },
 );

@@ -34,31 +34,35 @@
  */
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import { parseChips } from "@/utils/ai-arbiter";
 
 import styles from "./Wizard.module.scss";
 import type { ChatMessage } from "./useWizardChat";
 
-function inferPreparingStage(text: string): string {
-  if (!text) return "Analyzing your answers...";
+type TFunc = (key: string, opts?: Record<string, unknown>) => string;
+
+function inferPreparingStage(text: string, t: TFunc): string {
+  if (!text) return t("Common:ArbiterAnalyzingAnswers");
   const roleMatches = text.match(/"role_title"\s*:/g);
   const roleCount = roleMatches ? roleMatches.length : 0;
   if (text.includes('"arbiter"')) {
-    if (text.trimEnd().endsWith("}")) return "Finalizing your panel...";
-    return "Composing the arbiter...";
+    if (text.trimEnd().endsWith("}")) return t("Common:ArbiterFinalizingPanel");
+    return t("Common:ArbiterComposingArbiter");
   }
-  if (roleCount > 0) return `Designing expert ${roleCount}...`;
-  return "Analyzing your answers...";
+  if (roleCount > 0) return t("Common:ArbiterDesigningExpert", { number: roleCount });
+  return t("Common:ArbiterAnalyzingAnswers");
 }
 
 function PreparingProgress({ text }: { text: string }) {
+  const { t } = useTranslation(["Common"]);
   return (
     <div className={styles.preparing}>
       <div className={styles.preparingHeader}>
-        <span className={styles.preparingTitle}>Designing your AI experts</span>
+        <span className={styles.preparingTitle}>{t("Common:ArbiterDesigningExperts")}</span>
         <span className={styles.preparingStage}>
-          {inferPreparingStage(text)}
+          {inferPreparingStage(text, t)}
         </span>
       </div>
       <div className={styles.preparingBar} aria-hidden="true">
@@ -81,6 +85,7 @@ export function ChatPhase({
   onSend,
   onStop,
 }: ChatPhaseProps) {
+  const { t } = useTranslation(["Common"]);
   const [draft, setDraft] = React.useState("");
   const scrollRef = React.useRef<HTMLDivElement>(null);
 
@@ -130,7 +135,7 @@ export function ChatPhase({
     <div className={styles.chatLayout}>
       <div className={styles.messagesScroll} ref={scrollRef}>
         {visible.length === 0 ? (
-          <div className={styles.chatPlaceholder}>Starting setup...</div>
+          <div className={styles.chatPlaceholder}>{t("Common:ArbiterStartingSetup")}</div>
         ) : (
           visible.map((m) => {
             if (m.role === "wizard" && m.pendingConfig) {
@@ -180,7 +185,7 @@ export function ChatPhase({
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Type your reply..."
+          placeholder={t("Common:ArbiterTypeReply")}
           disabled={isStreaming}
           rows={3}
         />
@@ -190,7 +195,7 @@ export function ChatPhase({
             className={styles.chatStopBtn}
             onClick={onStop}
           >
-            Stop
+            {t("Common:ArbiterStop")}
           </button>
         ) : (
           <button
@@ -199,7 +204,7 @@ export function ChatPhase({
             onClick={submit}
             disabled={!draft.trim()}
           >
-            Send
+            {t("Common:SendButton")}
           </button>
         )}
       </div>

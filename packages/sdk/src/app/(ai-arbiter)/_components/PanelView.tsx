@@ -38,19 +38,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 import MarkdownField from "@docspace/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/Markdown";
 
 import type { PanelState } from "@/types/arbiter";
 
 import styles from "./ArbiterApp.module.scss";
 
-const STATUS_LABELS: Record<PanelState["status"], string> = {
-  idle: "",
-  streaming: "Running...",
-  done: "Done",
-  error: "Error",
-  aborted: "Stopped",
-};
 
 type PanelViewProps = {
   panel: PanelState;
@@ -61,8 +55,16 @@ type PanelViewProps = {
 
 export const PanelView = observer(
   ({ panel, isArbiter = false, isCollapsed = false, onToggleCollapse }: PanelViewProps) => {
+    const { t } = useTranslation(["Common"]);
     const { status } = panel;
-    const label = STATUS_LABELS[status];
+    const statusLabels: Record<PanelState["status"], string> = {
+      idle: "",
+      streaming: t("Common:ArbiterRunning"),
+      done: t("Common:Done"),
+      error: t("Common:Error"),
+      aborted: t("Common:ArbiterStopped"),
+    };
+    const label = statusLabels[status];
     const headerClass = isArbiter ? styles.panelHeaderArbiter : styles.panelHeader;
     const bodyClass = isArbiter ? styles.panelBodyArbiter : styles.panelBody;
 
@@ -87,7 +89,7 @@ export const PanelView = observer(
                   type="button"
                   onClick={() => setShowReasoning((s) => !s)}
                 >
-                  {showReasoning ? "v Hide reasoning" : "> Show reasoning"}
+                  {showReasoning ? t("Common:ArbiterHideReasoning") : t("Common:ArbiterShowReasoning")}
                 </button>
                 {showReasoning && (
                   <MarkdownField chatMessage={panel.reasoningText} />
@@ -97,7 +99,7 @@ export const PanelView = observer(
           </>
         ) : (
           <p className={styles.placeholderText}>
-            {status === "idle" ? "Waiting..." : ""}
+            {status === "idle" ? t("Common:ArbiterWaiting") : ""}
           </p>
         )}
       </>
@@ -131,8 +133,8 @@ export const PanelView = observer(
             <button
               type="button"
               className={styles.expandBtn}
-              aria-label="Open in dialog"
-              title="Open in dialog"
+              aria-label={t("Common:ArbiterExpandPanel")}
+              title={t("Common:ArbiterExpandPanel")}
               onClick={(e) => { e.stopPropagation(); setModalOpen(true); }}
             >
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -167,7 +169,7 @@ export const PanelView = observer(
               <button
                 type="button"
                 className={styles.fullscreenClose}
-                aria-label="Close"
+                aria-label={t("Common:CloseButton")}
                 onClick={() => setModalOpen(false)}
               >
                 ✕

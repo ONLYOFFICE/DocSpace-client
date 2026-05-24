@@ -36,6 +36,7 @@
 "use client";
 
 import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import type { AgentSummary } from "@/types/arbiter";
 
@@ -82,9 +83,10 @@ export const AgentList = observer(
     onRemoveExpert,
     onAddExpert,
   }: AgentListProps) => {
+    const { t } = useTranslation(["Common"]);
     return (
       <div className={styles.pickerBar}>
-        <span className={styles.pickerLabel}>Experts:</span>
+        <span className={styles.pickerLabel}>{t("Common:ArbiterExpertsLabel")}</span>
 
         {experts.map((a) => (
           <span key={a.id} className={styles.agentTag}>
@@ -100,7 +102,7 @@ export const AgentList = observer(
                 type="button"
                 className={styles.agentTagRemove}
                 onClick={() => onRemoveExpert(a.id)}
-                aria-label={`Remove ${a.title}`}
+                aria-label={t("Common:ArbiterRemoveExpert", { name: a.title })}
               >
                 ×
               </button>
@@ -114,12 +116,12 @@ export const AgentList = observer(
             className={styles.addExpertBtn}
             onClick={onAddExpert}
           >
-            + Add expert
+            {t("Common:ArbiterAddExpert")}
           </button>
         )}
 
         <span className={styles.pickerLabel} style={{ marginLeft: 8 }}>
-          Arbiter:
+          {t("Common:ArbiterLabel")}
         </span>
 
         <span className={styles.agentTagArbiter}>

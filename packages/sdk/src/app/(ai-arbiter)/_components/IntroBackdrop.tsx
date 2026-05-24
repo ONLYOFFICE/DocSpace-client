@@ -36,6 +36,7 @@
 "use client";
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
@@ -49,16 +50,16 @@ type IntroBackdropProps = {
 };
 
 export function IntroBackdrop({ onStart }: IntroBackdropProps) {
+  const { t } = useTranslation(["Common"]);
   const { isBase } = useTheme();
   return (
     <div className={styles.introBackdrop}>
       <div className={styles.introIllustration} aria-hidden="true">
         {isBase ? <AiAgentsLightIllustration /> : <AiAgentsDarkIllustration />}
       </div>
-      <p className={styles.introTitle}>AI Arbiter</p>
+      <p className={styles.introTitle}>{t("Common:ArbiterTitle")}</p>
       <p className={styles.introDescription}>
-        Multiple AI experts answer your question in parallel; an arbiter
-        synthesises their answers into a single weighted reply.
+        {t("Common:ArbiterIntroDescription")}
       </p>
       {onStart ? (
         <button
@@ -66,7 +67,7 @@ export function IntroBackdrop({ onStart }: IntroBackdropProps) {
           className={styles.startBtn}
           onClick={onStart}
         >
-          Start setup wizard
+          {t("Common:ArbiterStartSetupWizard")}
         </button>
       ) : null}
     </div>

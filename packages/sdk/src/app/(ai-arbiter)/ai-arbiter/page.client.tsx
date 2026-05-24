@@ -197,13 +197,13 @@ const AiArbiterPage = observer(() => {
         type="button"
         className={styles.resetFab}
         onClick={() => setResetDialogVisible(true)}
-        title="Reset AI Arbiter configuration"
+        title={t("Common:ArbiterResetConfigurationTitle")}
       >
-        Reset configuration
+        {t("Common:ArbiterResetConfiguration")}
       </button>
 
       <div className={styles.pageHeader}>
-        <p className={styles.pageTitle}>AI Arbiter</p>
+        <p className={styles.pageTitle}>{t("Common:ArbiterTitle")}</p>
         <p className={styles.pageDescription}>
           {t("Common:ArbiterPageDescription")}
         </p>
@@ -217,13 +217,13 @@ const AiArbiterPage = observer(() => {
             value={question}
             onChange={(e) => runStore.setQuestion(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Ask a question... (Ctrl+Enter to run)"
+            placeholder={t("Common:ArbiterQuestionPlaceholder")}
             disabled={isRunning}
             rows={3}
           />
           {isRunning ? (
             <button className={styles.stopBtn} type="button" onClick={stop}>
-              Stop
+              {t("Common:ArbiterStop")}
             </button>
           ) : (
             <button
@@ -232,7 +232,7 @@ const AiArbiterPage = observer(() => {
               onClick={run}
               disabled={!canRun || !question.trim()}
             >
-              Run
+              {t("Common:ArbiterRun")}
             </button>
           )}
         </div>
@@ -244,7 +244,7 @@ const AiArbiterPage = observer(() => {
             disabled={isRunning}
             onClick={() => setFileSelectorOpen(true)}
           >
-            Attach file
+            {t("Common:ArbiterAttachFile")}
           </button>
 
           {attachedFile && (
@@ -255,7 +255,7 @@ const AiArbiterPage = observer(() => {
                   className={styles.fileChipRemove}
                   type="button"
                   onClick={() => runStore.setAttachedFile(null)}
-                  aria-label="Remove file"
+                  aria-label={t("Common:ArbiterRemoveFile")}
                 >
                   x
                 </button>
@@ -270,15 +270,15 @@ const AiArbiterPage = observer(() => {
                 className={styles.clearResultsBtn}
                 onClick={handleClearResults}
               >
-                Clear
+                {t("Common:ArbiterClear")}
               </button>
             )}
             {runStatus !== "idle" && (
               <span className={styles.statusText}>
-                {runStatus === "running" && "Running..."}
-                {runStatus === "done" && "Done"}
-                {runStatus === "error" && "Error"}
-                {runStatus === "aborted" && "Stopped"}
+                {runStatus === "running" && t("Common:ArbiterRunning")}
+                {runStatus === "done" && t("Common:Done")}
+                {runStatus === "error" && t("Common:Error")}
+                {runStatus === "aborted" && t("Common:ArbiterStopped")}
               </span>
             )}
           </div>
@@ -305,13 +305,13 @@ const AiArbiterPage = observer(() => {
       <div className={styles.panelsArea}>
         {!hasPanels && !isRunning && (
           <p className={styles.emptyHint}>
-            Enter a question above and click Run.
+            {t("Common:ArbiterEmptyHint")}
           </p>
         )}
 
         {expertPanels.length > 0 && (
           <div className={styles.expertSection}>
-            <p className={styles.arbiterSectionTitle}>Expert panels</p>
+            <p className={styles.arbiterSectionTitle}>{t("Common:ArbiterExpertPanels")}</p>
             <div className={styles.expertsGrid}>
               {expertPanels.map((panel) => (
                 <PanelView
@@ -329,7 +329,7 @@ const AiArbiterPage = observer(() => {
 
         {arbiterPanel && (
           <div className={styles.arbiterSection}>
-            <p className={styles.arbiterSectionTitle}>Arbiter</p>
+            <p className={styles.arbiterSectionTitle}>{t("Common:ArbiterSectionTitle")}</p>
             <PanelView panel={arbiterPanel} isArbiter key={ARBITER_PANEL_ID} />
           </div>
         )}

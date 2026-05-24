@@ -86,19 +86,19 @@ export function ResetPanelDialog({
 
   return (
     <ModalDialog visible={visible} onClose={handleClose} autoMaxHeight>
-      <ModalDialog.Header>Reset AI Arbiter configuration</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:ArbiterResetConfigurationTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
         {phase === "confirm" ? (
           <Text as="p">
-            {`This will delete your ${expertCount} expert agent${
-              expertCount === 1 ? "" : "s"
-            } and arbiter, then start a new setup conversation. The setup wizard itself will be preserved. This cannot be undone.`}
+            {expertCount === 1
+              ? t("Common:ArbiterResetMessage_one", { count: expertCount })
+              : t("Common:ArbiterResetMessage_other", { count: expertCount })}
           </Text>
         ) : null}
-        {phase === "deleting" ? <Text as="p">Removing agents...</Text> : null}
+        {phase === "deleting" ? <Text as="p">{t("Common:ArbiterRemovingAgents")}</Text> : null}
         {phase === "failed" ? (
           <Text as="p">
-            {`Failed to reset: ${error ?? "unknown error"}`}
+            {t("Common:ArbiterResetFailed", { error: error ?? "unknown error" })}
           </Text>
         ) : null}
       </ModalDialog.Body>

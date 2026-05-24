@@ -204,7 +204,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
     if (!visible) return;
     if (phase !== "bootstrap") return;
     if (!userId) {
-      setErrorMessage("Unable to identify current user.");
+      setErrorMessage(t("Common:ArbiterUnidentifiedUser"));
       setPhase("failed");
       return;
     }
@@ -227,7 +227,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
         const provider = await getDefaultProvider();
         if (cancelled) return;
         if (!provider) {
-          setErrorMessage("No AI provider is configured for this workspace.");
+          setErrorMessage(t("Common:ArbiterNoAIProvider"));
           setPhase("failed");
           return;
         }
@@ -398,7 +398,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
     <div className={styles.bootstrapBody}>
       <div className={styles.spinner} aria-hidden="true" />
       <Text as="p" className={styles.bootstrapText}>
-        Preparing your setup wizard...
+        {t("Common:ArbiterPreparingSetup")}
       </Text>
     </div>
   );
@@ -451,9 +451,9 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
     return (
       <div className={styles.previewBody}>
         <Text as="p" className={styles.previewIntro}>
-          {`I'll create ${pendingConfig.experts.length} expert agent${
-            pendingConfig.experts.length === 1 ? "" : "s"
-          } and 1 arbiter for the domain `}
+          {pendingConfig.experts.length === 1
+            ? t("Common:ArbiterPreviewIntro_one", { count: pendingConfig.experts.length })
+            : t("Common:ArbiterPreviewIntro_other", { count: pendingConfig.experts.length })}{" "}
           <strong>{pendingConfig.domain}</strong>.
         </Text>
 
@@ -476,7 +476,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
                   </span>
                 </div>
                 <div className={styles.previewItemModel}>
-                  <span className={styles.previewModelLabel}>Model</span>
+                  <span className={styles.previewModelLabel}>{t("Common:AIAgentModel")}</span>
                   {renderModelControl(expertModelIds[i] ?? "", (v) =>
                     setExpertModelIds((prev) => {
                       const next = [...prev];
@@ -491,13 +491,13 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
               className={`${styles.previewItem} ${styles.previewItemArbiter}`}
             >
               <div className={styles.previewItemBody}>
-                <span className={styles.previewItemTitle}>Arbiter</span>
+                <span className={styles.previewItemTitle}>{t("Common:ArbiterSectionTitle")}</span>
                 <span className={styles.previewItemMeta}>
-                  Synthesizes expert answers
+                  {t("Common:ArbiterSynthesizesAnswers")}
                 </span>
               </div>
               <div className={styles.previewItemModel}>
-                <span className={styles.previewModelLabel}>Model</span>
+                <span className={styles.previewModelLabel}>{t("Common:AIAgentModel")}</span>
                 {renderModelControl(arbiterModelId, setArbiterModelId)}
               </div>
             </li>
@@ -510,7 +510,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
   const renderProvisioning = () => (
     <div className={styles.provisioningBody}>
       <Text as="p" className={styles.provisioningIntro}>
-        Creating your agents...
+        {t("Common:ArbiterCreatingAgents")}
       </Text>
       <ol className={styles.provisioningList}>
         {provisioningItems.map((it) => (
@@ -539,7 +539,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
         <CheckIcon />
       </div>
       <Text as="p" className={styles.statusText}>
-        Your AI Arbiter panel is ready.
+        {t("Common:ArbiterPanelReady")}
       </Text>
     </div>
   );
@@ -554,7 +554,7 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
         <DangerIcon />
       </div>
       <Text as="p" className={styles.statusError}>
-        {errorMessage ?? "Something went wrong."}
+        {errorMessage ?? t("Common:ArbiterSomethingWentWrong")}
       </Text>
     </div>
   );
@@ -650,11 +650,11 @@ export const WizardOverlay = observer(({ visible, onClose }: Props) => {
   const header = (() => {
     switch (phase) {
       case "done":
-        return "AI Arbiter ready";
+        return t("Common:ArbiterReadyTitle");
       case "failed":
-        return "Setup failed";
+        return t("Common:ArbiterSetupFailed");
       default:
-        return "Set up AI Arbiter";
+        return t("Common:ArbiterSetupTitle");
     }
   })();
 

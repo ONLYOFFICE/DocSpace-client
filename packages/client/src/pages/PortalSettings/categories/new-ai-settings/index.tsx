@@ -60,7 +60,7 @@ const NewAISettings = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { t: aiT } = useI18n();
-  const { t } = useTranslation("AIRoom");
+  const { t } = useTranslation(["Common"]);
 
   const { useProfilesStore } = useStores();
   const profiles = useProfilesStore((s) => s.profiles);
@@ -149,4 +149,3 @@ const NewAISettings = () => {
 };
 
 export default NewAISettings;
-

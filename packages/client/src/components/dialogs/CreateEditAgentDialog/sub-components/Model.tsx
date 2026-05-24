@@ -50,7 +50,7 @@ type ModelSettingsProps = {
 };
 
 const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
-  const { t } = useTranslation(["AIRoom", "Common"]);
+  const { t } = useTranslation(["Common"]);
   const { useProfilesStore } = useStores();
   const profiles = useProfilesStore((s) => s.profiles);
   const defaultProfile = useProfilesStore((s) => s.defaultProfile);

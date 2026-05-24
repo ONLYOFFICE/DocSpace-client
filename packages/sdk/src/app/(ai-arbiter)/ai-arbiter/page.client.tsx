@@ -39,16 +39,27 @@ import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
+import AIAgentSelector from "@docspace/ui-kit/selectors/AIAgent";
+import FilesSelector from "@docspace/ui-kit/selectors/Files";
+import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { tearDownPanel } from "@/utils/ai-arbiter";
+import useGetIcon from "@docspace/ui-kit/ai-agent/chat/hooks/useGetIcon";
+import {
+  FolderType,
+  DeviceType,
+  FilesSelectorFilterTypes,
+} from "@docspace/shared/enums";
+import { deleteAIAgent, getAIAgent } from "@docspace/shared/api/ai";
+import { tearDownPanel, toAgentSummary } from "@/utils/ai-arbiter";
+import { clearArbiterSession } from "../_utils/arbiterDb";
 
 import { ARBITER_PANEL_ID } from "@/types/arbiter";
 
 import { useAiArbiterAgentsStore } from "../_store/AiArbiterAgentsStore";
 import { useAiArbiterRunStore } from "../_store/AiArbiterRunStore";
 import useArbiterRun from "../_hooks/useArbiterRun";
+import { useArbiterPersistence } from "../_hooks/useArbiterPersistence";
 import { AgentList } from "../_components/AgentList";
-import { FilePicker } from "../_components/FilePicker";
 import { IntroBackdrop } from "../_components/IntroBackdrop";
 import { PanelView } from "../_components/PanelView";
 import { ResetPanelDialog } from "../_components/ResetPanelDialog";
@@ -60,16 +71,20 @@ const AiArbiterPage = observer(() => {
   const agentsStore = useAiArbiterAgentsStore();
   const runStore = useAiArbiterRunStore();
   const { run, stop } = useArbiterRun();
+  useArbiterPersistence();
 
-  const { experts, arbiter, sessionId, userId, canRun, hasPanel } =
-    agentsStore;
+  const { experts, arbiter, sessionId, userId, canRun, hasPanel } = agentsStore;
   const { question, attachedFile, runStatus, expertPanels, arbiterPanel } =
     runStore;
 
   const isRunning = runStatus === "running";
 
+  const { getIcon } = useGetIcon();
+
   const [wizardOpen, setWizardOpen] = React.useState(true);
   const [resetDialogVisible, setResetDialogVisible] = React.useState(false);
+  const [agentSelectorOpen, setAgentSelectorOpen] = React.useState(false);
+  const [fileSelectorOpen, setFileSelectorOpen] = React.useState(false);
 
   React.useEffect(() => {
     if (!hasPanel) setWizardOpen(true);
@@ -81,6 +96,73 @@ const AiArbiterPage = observer(() => {
       if (canRun && !isRunning) run();
     }
   };
+
+  const excludeItems = React.useMemo(
+    () =>
+      [...experts.map((e) => e.id), arbiter?.id].filter(
+        (id): id is number => id !== undefined,
+      ),
+    [experts, arbiter],
+  );
+
+  const handleRemoveExpert = async (id: number) => {
+    try {
+      await deleteAIAgent(id);
+    } catch {
+      // ignore — agent may already be gone
+    }
+    agentsStore.removeExpert(id);
+  };
+
+  const handleAgentSelected = async (items: TSelectorItem[]) => {
+    setAgentSelectorOpen(false);
+    const item = items[0];
+    if (!item) return;
+    try {
+      const agent = await getAIAgent(Number(item.id));
+      agentsStore.addExpert(toAgentSummary(agent));
+    } catch {
+      // ignore
+    }
+  };
+
+  const handleClearResults = () => {
+    runStore.clearRun();
+    if (sessionId) clearArbiterSession(sessionId).catch(() => {});
+  };
+
+  const handleFileSubmit: React.ComponentProps<
+    typeof FilesSelector
+  >["onSubmit"] = (
+    _selectedItemId,
+    _folderTitle,
+    _isPublic,
+    _breadCrumbs,
+    _fileName,
+    _isChecked,
+    _selectedTreeNode,
+    selectedFileInfo,
+  ) => {
+    if (selectedFileInfo) {
+      runStore.setAttachedFile({
+        id: Number(selectedFileInfo.id),
+        name: selectedFileInfo.title,
+      });
+    }
+    setFileSelectorOpen(false);
+  };
+
+  const getIsDisabledFile: React.ComponentProps<
+    typeof FilesSelector
+  >["getIsDisabled"] = (
+    isFirstLoad,
+    _isSelectedParentFolder,
+    _selectedItemId,
+    _selectedItemType,
+    _isRoot,
+    _selectedItemSecurity,
+    selectedFileInfo,
+  ) => isFirstLoad || !selectedFileInfo;
 
   const handleResetConfirm = async () => {
     if (!sessionId || !userId) return;
@@ -106,6 +188,9 @@ const AiArbiterPage = observer(() => {
 
   const hasPanels = expertPanels.length > 0 || !!arbiterPanel;
 
+  type SdkFolderType = Parameters<typeof FilesSelector>[0]["rootFolderType"];
+  const sdkUserFolderType = FolderType.USER as unknown as SdkFolderType;
+
   return (
     <div className={styles.layout}>
       <button
@@ -116,6 +201,13 @@ const AiArbiterPage = observer(() => {
       >
         Reset configuration
       </button>
+
+      <div className={styles.pageHeader}>
+        <p className={styles.pageTitle}>AI Arbiter</p>
+        <p className={styles.pageDescription}>
+          {t("Common:ArbiterPageDescription")}
+        </p>
+      </div>
 
       {/* Question input */}
       <div className={styles.inputArea}>
@@ -146,10 +238,14 @@ const AiArbiterPage = observer(() => {
         </div>
 
         <div className={styles.metaRow}>
-          <FilePicker
+          <button
+            type="button"
+            className={styles.attachFileBtn}
             disabled={isRunning}
-            onSelect={(file) => runStore.setAttachedFile(file)}
-          />
+            onClick={() => setFileSelectorOpen(true)}
+          >
+            Attach file
+          </button>
 
           {attachedFile && (
             <span className={styles.fileChip}>
@@ -167,19 +263,43 @@ const AiArbiterPage = observer(() => {
             </span>
           )}
 
-          {runStatus !== "idle" && (
-            <span className={styles.statusText}>
-              {runStatus === "running" && "Running..."}
-              {runStatus === "done" && "Done"}
-              {runStatus === "error" && "Error"}
-              {runStatus === "aborted" && "Stopped"}
-            </span>
-          )}
+          <div className={styles.metaRight}>
+            {!isRunning && (hasPanels || !!question || !!attachedFile) && (
+              <button
+                type="button"
+                className={styles.clearResultsBtn}
+                onClick={handleClearResults}
+              >
+                Clear
+              </button>
+            )}
+            {runStatus !== "idle" && (
+              <span className={styles.statusText}>
+                {runStatus === "running" && "Running..."}
+                {runStatus === "done" && "Done"}
+                {runStatus === "error" && "Error"}
+                {runStatus === "aborted" && "Stopped"}
+              </span>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* Agent list (read-only — panel is decided by the setup wizard) */}
-      <AgentList experts={experts} arbiter={arbiter} />
+      <AgentList
+        experts={experts}
+        arbiter={arbiter}
+        isRunning={isRunning}
+        onRemoveExpert={handleRemoveExpert}
+        onAddExpert={() => setAgentSelectorOpen(true)}
+      />
+
+      {agentSelectorOpen && (
+        <AIAgentSelector
+          excludeItems={excludeItems}
+          onSubmit={handleAgentSelected}
+          onClose={() => setAgentSelectorOpen(false)}
+        />
+      )}
 
       {/* Panels */}
       <div className={styles.panelsArea}>
@@ -210,11 +330,7 @@ const AiArbiterPage = observer(() => {
         {arbiterPanel && (
           <>
             <p className={styles.arbiterSectionTitle}>Arbiter</p>
-            <PanelView
-              panel={arbiterPanel}
-              isArbiter
-              key={ARBITER_PANEL_ID}
-            />
+            <PanelView panel={arbiterPanel} isArbiter key={ARBITER_PANEL_ID} />
           </>
         )}
       </div>
@@ -225,8 +341,39 @@ const AiArbiterPage = observer(() => {
         onCancel={() => setResetDialogVisible(false)}
         onConfirm={handleResetConfirm}
       />
+
+      <FilesSelector
+        isPanelVisible={fileSelectorOpen}
+        onCancel={() => setFileSelectorOpen(false)}
+        onSubmit={handleFileSubmit}
+        getIcon={getIcon}
+        getIsDisabled={getIsDisabledFile}
+        openRoot
+        currentFolderId=""
+        rootFolderType={sdkUserFolderType}
+        disabledItems={[]}
+        isRoomsOnly={false}
+        isThirdParty={false}
+        withSearch
+        withBreadCrumbs
+        withoutBackButton
+        withCancelButton
+        withCreate={false}
+        withFooterInput={false}
+        withFooterCheckbox={false}
+        submitButtonLabel={t("Common:SelectAction")}
+        cancelButtonLabel={t("Common:CancelButton")}
+        footerCheckboxLabel=""
+        footerInputHeader=""
+        currentFooterInputValue=""
+        descriptionText=""
+        getFilesArchiveError={() => ""}
+        currentDeviceType={DeviceType.desktop}
+        filterParam={FilesSelectorFilterTypes.ALL}
+      />
     </div>
   );
 });
 
 export default AiArbiterPage;
+

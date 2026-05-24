@@ -69,6 +69,20 @@ class AiArbiterAgentsStore {
     this.sessionId = null;
   };
 
+  removeExpert = (id: number) => {
+    this.experts = this.experts.filter((e) => e.id !== id);
+  };
+
+  addExpert = (agent: AgentSummary) => {
+    if (!this.experts.some((e) => e.id === agent.id)) {
+      this.experts = [...this.experts, agent];
+    }
+  };
+
+  setExperts = (agents: AgentSummary[]) => {
+    this.experts = agents;
+  };
+
   get hasPanel(): boolean {
     return this.arbiter !== null;
   }

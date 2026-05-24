@@ -83,11 +83,13 @@ export type {
 export {
   cleanupOrphanAgents,
   ensureWizardAgent,
+  fetchUserAgents,
   findActivePanel,
   findWizardAgent,
   provisionPanel,
   selectActivePanel,
   tearDownPanel,
+  toAgentSummary,
 } from "./provision";
 
 export type { SseEvent } from "./sseEvent";

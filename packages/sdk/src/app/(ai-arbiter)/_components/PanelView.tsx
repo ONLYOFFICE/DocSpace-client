@@ -37,6 +37,7 @@
 
 import React from "react";
 import { observer } from "mobx-react";
+import MarkdownField from "@docspace/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/Markdown";
 
 import type { PanelState } from "@/types/arbiter";
 
@@ -111,7 +112,7 @@ export const PanelView = observer(
               <div className={styles.errorBox}>{panel.error}</div>
             ) : displayText ? (
               <>
-                <pre className={styles.streamingText}>{displayText}</pre>
+                <MarkdownField chatMessage={displayText} />
                 {panel.reasoningText && (
                   <div className={styles.reasoningSection}>
                     <button
@@ -122,9 +123,7 @@ export const PanelView = observer(
                       {showReasoning ? "v Hide reasoning" : "> Show reasoning"}
                     </button>
                     {showReasoning && (
-                      <pre className={styles.reasoningText}>
-                        {panel.reasoningText}
-                      </pre>
+                      <MarkdownField chatMessage={panel.reasoningText} />
                     )}
                   </div>
                 )}

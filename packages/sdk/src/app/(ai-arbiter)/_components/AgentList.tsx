@@ -35,7 +35,6 @@
 
 "use client";
 
-import React from "react";
 import { observer } from "mobx-react";
 
 import type { AgentSummary } from "@/types/arbiter";
@@ -70,38 +69,69 @@ function agentInitials(title: string): string {
 type AgentListProps = {
   experts: AgentSummary[];
   arbiter: AgentSummary;
+  isRunning?: boolean;
+  onRemoveExpert?: (id: number) => void;
+  onAddExpert?: () => void;
 };
 
-export const AgentList = observer(({ experts, arbiter }: AgentListProps) => {
-  return (
-    <div className={styles.pickerBar}>
-      <span className={styles.pickerLabel}>Experts:</span>
+export const AgentList = observer(
+  ({
+    experts,
+    arbiter,
+    isRunning = false,
+    onRemoveExpert,
+    onAddExpert,
+  }: AgentListProps) => {
+    return (
+      <div className={styles.pickerBar}>
+        <span className={styles.pickerLabel}>Experts:</span>
 
-      {experts.map((a) => (
-        <span key={a.id} className={styles.agentTag}>
+        {experts.map((a) => (
+          <span key={a.id} className={styles.agentTag}>
+            <span
+              className={styles.agentAvatar}
+              style={{ background: agentColor(a.title) }}
+            >
+              {agentInitials(a.title)}
+            </span>
+            {a.title}
+            {onRemoveExpert && !isRunning && (
+              <button
+                type="button"
+                className={styles.agentTagRemove}
+                onClick={() => onRemoveExpert(a.id)}
+                aria-label={`Remove ${a.title}`}
+              >
+                ×
+              </button>
+            )}
+          </span>
+        ))}
+
+        {onAddExpert && !isRunning && (
+          <button
+            type="button"
+            className={styles.addExpertBtn}
+            onClick={onAddExpert}
+          >
+            + Add expert
+          </button>
+        )}
+
+        <span className={styles.pickerLabel} style={{ marginLeft: 8 }}>
+          Arbiter:
+        </span>
+
+        <span className={styles.agentTagArbiter}>
           <span
             className={styles.agentAvatar}
-            style={{ background: agentColor(a.title) }}
+            style={{ background: agentColor(arbiter.title) }}
           >
-            {agentInitials(a.title)}
+            {agentInitials(arbiter.title)}
           </span>
-          {a.title}
+          {arbiter.title}
         </span>
-      ))}
-
-      <span className={styles.pickerLabel} style={{ marginLeft: 8 }}>
-        Arbiter:
-      </span>
-
-      <span className={styles.agentTagArbiter}>
-        <span
-          className={styles.agentAvatar}
-          style={{ background: agentColor(arbiter.title) }}
-        >
-          {agentInitials(arbiter.title)}
-        </span>
-        {arbiter.title}
-      </span>
-    </div>
-  );
-});
+      </div>
+    );
+  },
+);

@@ -175,6 +175,38 @@ class AiArbiterRunStore {
     }
   });
 
+  clearRun = action(() => {
+    this.question = "";
+    this.attachedFile = null;
+    this.panels.clear();
+    this.collapsedPanels.clear();
+    this.runStatus = "idle";
+  });
+
+  restoreSession = action(
+    (
+      panels: [string, PanelState][],
+      collapsedPanels: string[],
+      runStatus: RunStatus,
+    ) => {
+      this.panels.clear();
+      for (const [id, state] of panels) {
+        this.panels.set(id, {
+          ...state,
+          // Normalize incomplete streaming state from a previous page load
+          status: state.status === "streaming" ? "aborted" : state.status,
+        });
+      }
+
+      this.collapsedPanels.clear();
+      for (const id of collapsedPanels) {
+        this.collapsedPanels.add(id);
+      }
+
+      this.runStatus = runStatus === "running" ? "aborted" : runStatus;
+    },
+  );
+
   get expertPanels(): PanelState[] {
     return Array.from(this.panels.values()).filter(
       (p) => p.panelId !== ARBITER_PANEL_ID,

@@ -42,6 +42,7 @@ import {
   getChats,
 } from "@docspace/shared/api/ai";
 import type { TAgent } from "@docspace/shared/api/ai/types";
+import type { AgentSummary } from "@/types/arbiter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { RoomSearchArea } from "@docspace/shared/enums";
 
@@ -300,6 +301,27 @@ export async function cleanupOrphanAgents(userId: string): Promise<number> {
   if (orphans.length === 0) return 0;
   await Promise.allSettled(orphans.map((a) => deleteAIAgent(a.id)));
   return orphans.length;
+}
+
+export function toAgentSummary(a: TAgent): AgentSummary {
+  return {
+    id: a.id,
+    title: a.title ?? "",
+    modelAlias: a.chatSettings?.modelAlias ?? "",
+    modelId: a.chatSettings?.modelId ?? "",
+    prompt: a.chatSettings?.prompt ?? "",
+    providerId: a.chatSettings?.providerId ?? 0,
+    tags: a.tags,
+  };
+}
+
+export async function fetchUserAgents(userId: string): Promise<TAgent[]> {
+  const f = RoomsFilter.getDefault();
+  f.searchArea = RoomSearchArea.AIAgents;
+  f.subjectId = userId;
+  f.pageCount = 100;
+  const res = await getAIAgents(f);
+  return res.folders.filter((a) => !a.tags?.includes(TAG_WIZARD));
 }
 
 export type ActivePanelOf<T> = {

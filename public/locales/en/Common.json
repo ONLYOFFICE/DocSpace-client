@@ -209,6 +209,7 @@
   "ArbiterAttachFile": "Attach a file",
   "ArbiterConfigurationReset": "Configuration reset.",
   "ArbiterOpenAiArbiter": "Open AI Arbiter",
+  "ArbiterPageDescription": "Ask a question, get independent answers from multiple AI experts, and let the arbiter weigh them into a single reasoned verdict.",
   "ArbiterProceed": "Proceed",
   "ArbiterRetry": "Retry",
   "ArbiterSetupCancelled": "Setup cancelled.",

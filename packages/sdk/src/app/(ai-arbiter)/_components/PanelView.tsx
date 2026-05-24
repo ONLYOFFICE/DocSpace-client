@@ -172,7 +172,7 @@ export const PanelView = observer(
                 aria-label={t("Common:CloseButton")}
                 onClick={() => setModalOpen(false)}
               >
-                ✕
+                x
               </button>
             </div>
             <div className={styles.fullscreenBody}>{renderBody()}</div>

@@ -228,7 +228,6 @@
   "ArbiterPageDescription": "Ask a question, get independent answers from multiple AI experts, and let the arbiter weigh them into a single reasoned verdict.",
   "ArbiterPanelReady": "Your AI Arbiter panel is ready.",
   "ArbiterPreparingSetup": "Preparing your setup wizard...",
-  "ArbiterPreviewIntro": "I'll create {{count}} expert agents and 1 arbiter for the domain",
   "ArbiterPreviewIntro_one": "I'll create {{count}} expert agent and 1 arbiter for the domain",
   "ArbiterPreviewIntro_other": "I'll create {{count}} expert agents and 1 arbiter for the domain",
   "ArbiterProceed": "Proceed",

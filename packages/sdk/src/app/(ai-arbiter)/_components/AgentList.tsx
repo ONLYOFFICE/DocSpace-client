@@ -104,7 +104,7 @@ export const AgentList = observer(
                 onClick={() => onRemoveExpert(a.id)}
                 aria-label={t("Common:ArbiterRemoveExpert", { name: a.title })}
               >
-                ×
+                x
               </button>
             )}
           </span>

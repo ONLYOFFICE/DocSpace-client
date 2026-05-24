@@ -63,14 +63,18 @@
 	opacity: 0.7;
 }
 
-/* Tile mode — grid override applied to ui-kit TileContainer.
- * RoomTile provides its own bg, frame, icon and kebab; we only set the
- * grid container layout here. */
+/* Tile mode — className applied to TileContainer outer div.
+ * TileContainer's internal .gridWrapper handles the actual CSS grid layout.
+ * We only override the per-tile content box here. */
 
 .tilesGrid {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
-	gap: 16px;
+	/* BaseTile's `.content` flex item has flex-basis: 100% but no min-width: 0,
+	 * which prevents long agent names from truncating. Fix as a descendant
+	 * selector so we don't touch the shared ui-kit component. */
+	:global(.content) {
+		min-width: 0;
+		overflow: hidden;
+	}
 }
 
 /* Tile top-content slot — title link + meta line stacked vertically. */

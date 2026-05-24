@@ -187,7 +187,7 @@ const NewArticle = ({
     if (location.pathname.startsWith("/ai-forms")) {
       return AI_FORMS_SECTION_TO_ID[section] ?? AI_FORMS_ID;
     }
-    if (location.pathname.startsWith("/ai-agents")) {
+    if (location.pathname.startsWith("/agents")) {
       return AI_AGENTS_SECTION_TO_ID[section] ?? AI_AGENTS_ID;
     }
     if (location.pathname.startsWith("/ai-rooms")) {
@@ -394,13 +394,13 @@ const NewArticle = ({
 
     const handleAiAgentsClick = async () => {
       if (aiAgentsEnabled) {
-        navigate("/ai-agents");
+        navigate("/agents");
         return;
       }
       try {
         const activated = await activate("ai-agents");
         if (activated) {
-          navigate("/ai-agents");
+          navigate("/agents");
         } else {
           toastr.error(t("Common:SomethingWentWrong"));
         }
@@ -421,26 +421,26 @@ const NewArticle = ({
               id: "ai-agents-recent",
               label: t("Common:Recent"),
               icon: CatalogRestoreReactSvgUrl,
-              onClick: () => navigate("/ai-agents?section=recent"),
+              onClick: () => navigate("/agents?section=recent"),
             },
             {
               id: "ai-agents-favorites",
               label: t("Common:Favorites"),
               icon: CatalogFavoritesReactSvgUrl,
-              onClick: () => navigate("/ai-agents?section=favorites"),
+              onClick: () => navigate("/agents?section=favorites"),
             },
             {
               id: "ai-agents-trash",
               label: t("Common:TrashSection"),
               icon: CatalogTrashReactSvgUrl,
-              onClick: () => navigate("/ai-agents?section=trash"),
+              onClick: () => navigate("/agents?section=trash"),
               withTopSeparator: true,
             },
             {
               id: "ai-agents-settings",
               label: t("Common:Settings"),
               icon: CatalogSettingsReactSvgUrl,
-              onClick: () => navigate("/ai-agents?section=settings"),
+              onClick: () => navigate("/agents?section=settings"),
             },
           ]
         : undefined,

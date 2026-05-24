@@ -182,7 +182,7 @@ const Dashboard = ({
       try {
         const activated = await activate("ai-agents");
         if (activated) {
-          navigate("/ai-agents");
+          navigate("/agents");
         } else {
           toastr.error(t("Common:SomethingWentWrong"));
         }

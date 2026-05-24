@@ -97,7 +97,8 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
         const preferredProvider = cachedProviders.find(
           (pr) => pr.id === defaultProvider?.providerId,
         );
-        setSelectedProvider(preferredProvider || cachedProviders[0]);
+        const next = preferredProvider || cachedProviders[0];
+        if (next) setSelectedProvider(next);
       } else {
         const provider = cachedProviders.find(
           (pr) => pr.id === selectedProvider.id,
@@ -138,14 +139,15 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
           const preferredProvider = enabledProviders.find(
             (pr) => pr.id === defaultProvider?.providerId,
           );
-          setSelectedProvider(preferredProvider || enabledProviders[0]);
+          const next = preferredProvider || enabledProviders[0];
+          if (next) setSelectedProvider(next);
         } else {
           const provider = enabledProviders.find(
             (pr) => pr.id === selectedProvider.id,
           );
 
           if (!provider) {
-            setSelectedProvider(enabledProviders[0]);
+            if (enabledProviders[0]) setSelectedProvider(enabledProviders[0]);
             return;
           }
 
@@ -276,7 +278,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
   const onSelectProvider = React.useCallback(
     (option: TOption) => {
       const provider = providers.find((p) => p.id === option.key);
-      if (!provider || provider.id === selectedProvider.id) return;
+      if (!provider || provider.id === selectedProvider?.id) return;
 
       setSelectedProvider(provider);
       setSelectedModel(null);
@@ -284,7 +286,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
       setIsModelsLoading(true);
       setHasProviderBeenSwitched(true);
     },
-    [providers, selectedProvider.id],
+    [providers, selectedProvider?.id],
   );
 
   const modelOptions = React.useMemo<TOption[]>(

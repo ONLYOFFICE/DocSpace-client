@@ -88,7 +88,7 @@ export const useAppsCatalog = (): AppCatalogItem[] => {
       icon: <AiAgentsIcon />,
       title: t("Common:DashboardAIChatAgentsTitle"),
       description: t("Common:DashboardAIChatAgentsDescription"),
-      href: "/ai-agents",
+      href: "/agents",
       supported: true,
       alwaysOn: false,
     },

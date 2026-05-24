@@ -299,6 +299,22 @@ const ClientRoutes = [
               </PrivateRoute>
             ),
           },
+          {
+            path: "ai-agents",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
           ...contactsRoutes,
           ...profileClientRoutes,
         ],
@@ -373,7 +389,7 @@ const ClientRoutes = [
         },
       },
       {
-        path: "/ai-agents",
+        path: "/agents",
         async lazy() {
           const { AiAgents } = await componentLoader(
             () => import("SRC_DIR/pages/AiAgents"),

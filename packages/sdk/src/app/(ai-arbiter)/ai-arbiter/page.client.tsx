@@ -310,7 +310,7 @@ const AiArbiterPage = observer(() => {
         )}
 
         {expertPanels.length > 0 && (
-          <>
+          <div className={styles.expertSection}>
             <p className={styles.arbiterSectionTitle}>Expert panels</p>
             <div className={styles.expertsGrid}>
               {expertPanels.map((panel) => (
@@ -324,14 +324,14 @@ const AiArbiterPage = observer(() => {
                 />
               ))}
             </div>
-          </>
+          </div>
         )}
 
         {arbiterPanel && (
-          <>
+          <div className={styles.arbiterSection}>
             <p className={styles.arbiterSectionTitle}>Arbiter</p>
             <PanelView panel={arbiterPanel} isArbiter key={ARBITER_PANEL_ID} />
-          </>
+          </div>
         )}
       </div>
 

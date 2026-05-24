@@ -36,6 +36,7 @@
 "use client";
 
 import React from "react";
+import ReactDOM from "react-dom";
 import { observer } from "mobx-react";
 import MarkdownField from "@docspace/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/Markdown";
 
@@ -70,72 +71,113 @@ export const PanelView = observer(
       : panel.streamingText;
 
     const [showReasoning, setShowReasoning] = React.useState(false);
+    const [modalOpen, setModalOpen] = React.useState(false);
+
+    const renderBody = () => (
+      <>
+        {status === "error" ? (
+          <div className={styles.errorBox}>{panel.error}</div>
+        ) : displayText ? (
+          <>
+            <MarkdownField chatMessage={displayText} />
+            {panel.reasoningText && (
+              <div className={styles.reasoningSection}>
+                <button
+                  className={styles.reasoningToggle}
+                  type="button"
+                  onClick={() => setShowReasoning((s) => !s)}
+                >
+                  {showReasoning ? "v Hide reasoning" : "> Show reasoning"}
+                </button>
+                {showReasoning && (
+                  <MarkdownField chatMessage={panel.reasoningText} />
+                )}
+              </div>
+            )}
+          </>
+        ) : (
+          <p className={styles.placeholderText}>
+            {status === "idle" ? "Waiting..." : ""}
+          </p>
+        )}
+      </>
+    );
 
     return (
-      <div className={styles.panel} data-status={status}>
-        <div
-          className={headerClass}
-          onClick={!isArbiter ? onToggleCollapse : undefined}
-          role={!isArbiter ? "button" : undefined}
-          tabIndex={!isArbiter ? 0 : undefined}
-          onKeyDown={!isArbiter
-            ? (e) => { if (e.key === "Enter" || e.key === " ") onToggleCollapse?.(); }
-            : undefined
-          }
-        >
-          <span className={styles.panelTitle}>{panel.alias}</span>
-          <span className={styles.panelModel}>{panel.modelAlias}</span>
+      <>
+        <div className={styles.panel} data-status={status}>
+          <div
+            className={headerClass}
+            onClick={!isArbiter ? onToggleCollapse : undefined}
+            role={!isArbiter ? "button" : undefined}
+            tabIndex={!isArbiter ? 0 : undefined}
+            onKeyDown={!isArbiter
+              ? (e) => { if (e.key === "Enter" || e.key === " ") onToggleCollapse?.(); }
+              : undefined
+            }
+          >
+            <span className={styles.panelTitle}>{panel.alias}</span>
+            <span className={styles.panelModel}>{panel.modelAlias}</span>
 
-          {label && (
-            <span className={styles.panelBadge} data-status={status}>
-              {status === "streaming" && (
-                <span className={styles.spinnerDot} style={{ marginRight: 4 }} />
-              )}
-              {label}
-            </span>
-          )}
+            {label && (
+              <span className={styles.panelBadge} data-status={status}>
+                {status === "streaming" && (
+                  <span className={styles.spinnerDot} style={{ marginRight: 4 }} />
+                )}
+                {label}
+              </span>
+            )}
 
-          {!isArbiter && (
-            <span
-              className={styles.panelChevron}
-              data-collapsed={isCollapsed ? "true" : "false"}
-              aria-hidden="true"
+            <button
+              type="button"
+              className={styles.expandBtn}
+              aria-label="Open in dialog"
+              title="Open in dialog"
+              onClick={(e) => { e.stopPropagation(); setModalOpen(true); }}
             >
-              v
-            </span>
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="7.5,1 11,1 11,4.5" />
+                <line x1="6.5" y1="5.5" x2="11" y2="1" />
+                <polyline points="4.5,11 1,11 1,7.5" />
+                <line x1="5.5" y1="6.5" x2="1" y2="11" />
+              </svg>
+            </button>
+
+            {!isArbiter && (
+              <span
+                className={styles.panelChevron}
+                data-collapsed={isCollapsed ? "true" : "false"}
+                aria-hidden="true"
+              >
+                v
+              </span>
+            )}
+          </div>
+
+          {(!isCollapsed || isArbiter) && (
+            <div className={bodyClass}>{renderBody()}</div>
           )}
         </div>
 
-        {(!isCollapsed || isArbiter) && (
-          <div className={bodyClass}>
-            {status === "error" ? (
-              <div className={styles.errorBox}>{panel.error}</div>
-            ) : displayText ? (
-              <>
-                <MarkdownField chatMessage={displayText} />
-                {panel.reasoningText && (
-                  <div className={styles.reasoningSection}>
-                    <button
-                      className={styles.reasoningToggle}
-                      type="button"
-                      onClick={() => setShowReasoning((s) => !s)}
-                    >
-                      {showReasoning ? "v Hide reasoning" : "> Show reasoning"}
-                    </button>
-                    {showReasoning && (
-                      <MarkdownField chatMessage={panel.reasoningText} />
-                    )}
-                  </div>
-                )}
-              </>
-            ) : (
-              <p className={styles.placeholderText}>
-                {status === "idle" ? "Waiting..." : ""}
-              </p>
-            )}
-          </div>
+        {modalOpen && ReactDOM.createPortal(
+          <div className={styles.fullscreenOverlay}>
+            <div className={styles.fullscreenHeader}>
+              <span className={styles.panelTitle}>{panel.alias}</span>
+              <span className={styles.panelModel}>{panel.modelAlias}</span>
+              <button
+                type="button"
+                className={styles.fullscreenClose}
+                aria-label="Close"
+                onClick={() => setModalOpen(false)}
+              >
+                ✕
+              </button>
+            </div>
+            <div className={styles.fullscreenBody}>{renderBody()}</div>
+          </div>,
+          document.body,
         )}
-      </div>
+      </>
     );
   },
 );

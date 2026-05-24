@@ -397,9 +397,24 @@
   gap: 16px;
 }
 
+.expertSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.arbiterSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .expertsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  /* Row height scales with viewport: 200px–500px, centred around 100vh minus
+   * the fixed chrome above the panels area (~500px of header/input/picker). */
+  grid-auto-rows: clamp(200px, calc(100vh - 500px), 500px);
   gap: 12px;
 }
 
@@ -417,6 +432,8 @@
   overflow: hidden;
   background: var(--input-bg);
   transition: box-shadow 0.15s;
+  display: flex;
+  flex-direction: column;
 
   &[data-status="streaming"] {
     border-color: var(--main-button-background-color);
@@ -497,6 +514,27 @@
   }
 }
 
+.expandBtn {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  color: var(--text-disable-color);
+  border-radius: 3px;
+  transition: color 0.15s, background 0.15s;
+
+  &:hover {
+    color: var(--text-color);
+    background: var(--selector-item-hover-background);
+  }
+}
+
 .panelChevron {
   flex: 0 0 auto;
   transition: transform 0.2s;
@@ -508,12 +546,60 @@
 
 .panelBody {
   padding: 12px;
-  min-height: 60px;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
 }
 
 .panelBodyArbiter {
   composes: panelBody;
   padding: 16px;
+  flex: 0 0 auto;
+  height: 500px;
+}
+
+.fullscreenOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  background: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--font-family);
+  font-size: 13px;
+}
+
+.fullscreenHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.fullscreenClose {
+  margin-inline-start: auto;
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+  font-size: 16px;
+  line-height: 1;
+  padding: 4px 8px;
+  border-radius: 3px;
+
+  &:hover {
+    background: var(--hover-color);
+  }
+}
+
+.fullscreenBody {
+  flex: 1;
+  overflow: auto;
+  padding: 24px;
 }
 
 .streamingText {

@@ -191,4 +191,5 @@ export type TFrameConfig = {
   withBreadCrumbs?: boolean;
   withSearch?: boolean;
   withSubtitle?: boolean;
+  openEditorInSameTab?: boolean;
 };

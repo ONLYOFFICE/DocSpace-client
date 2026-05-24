@@ -272,19 +272,26 @@ const DocsLayout = observer(
 
     const openFileInEditor = React.useCallback(
       (file: TFileItem, preview?: boolean) => {
-  	 const basePath = editorBasePath ?? "/personal-files/editor";
-      const params = new URLSearchParams();
-      if (preview) params.set("action", "view");
-      if (editorBasePath && pathname) {
-        params.set("returnTo", pathname);
-      }
-      const qs = params.toString();
-      const url = qs
-        ? `${basePath}/${file.id}?${qs}`
-        : `${basePath}/${file.id}`;
-      router.push(url);
+        const basePath = editorBasePath ?? "/personal-files/editor";
+        const params = new URLSearchParams();
+        if (preview) params.set("action", "view");
+        if (editorBasePath && pathname) {
+          params.set("returnTo", pathname);
+        }
+        const qs = params.toString();
+        const url = qs
+          ? `${basePath}/${file.id}?${qs}`
+          : `${basePath}/${file.id}`;
+
+        const openInSameTab =
+          sdkConfig?.openEditorInSameTab ?? filesSettings.openEditorInSameTab;
+        if (!openInSameTab) {
+          window.open(`${window.location.origin}/sdk${url}`, "_blank");
+          return;
+        }
+        router.push(url);
       },
-      [router, editorBasePath, pathname],
+      [router, editorBasePath, pathname, filesSettings.openEditorInSameTab, sdkConfig?.openEditorInSameTab],
     );
 
     const {

@@ -48,6 +48,7 @@ import {
 import { FormFillingManageAction } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { frameCallEvent } from "@docspace/shared/utils/common";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
 import { XlsxUpdateService } from "@docspace/shared/services/xlsx-update.service";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
@@ -56,6 +57,7 @@ import type { TTranslation } from "@docspace/shared/types";
 import type { EditorAction } from "../_store/FormsNavigationStore";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
+import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
 
 import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import { useFormsListStore } from "../_store/FormsListStore";
@@ -69,6 +71,7 @@ type UseFormsActionsProps = { t: TTranslation };
 
 export default function useFormsActions({ t }: UseFormsActionsProps) {
   const { sdkConfig } = useSDKConfig();
+  const filesSettingsStore = useFilesSettingsStore();
   const { openEditor } = useFormsNavigationStore();
   const { closePanel } = useFormsAiAgentStore();
   const formsListStore = useFormsListStore();
@@ -87,10 +90,36 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
         return;
       }
 
+      const openInSameTab =
+        sdkConfig?.openEditorInSameTab ??
+        filesSettingsStore.filesSettings?.openEditorInSameTab ??
+        true;
+
+      if (!openInSameTab) {
+        const editorOrigin =
+          window.ClientConfig?.proxy?.url ||
+          window.ClientConfig?.api?.origin ||
+          window.location.origin;
+        const params = new URLSearchParams();
+        params.set("fileId", file.id.toString());
+        params.append("action", action);
+        window.open(
+          combineUrl(editorOrigin, `/doceditor?${params.toString()}`),
+          "_blank",
+        );
+        return;
+      }
+
       closePanel();
       openEditor(file, action);
     },
-    [sdkConfig?.events?.onFileManagerClick, closePanel, openEditor],
+    [
+      sdkConfig?.events?.onFileManagerClick,
+      sdkConfig?.openEditorInSameTab,
+      filesSettingsStore.filesSettings?.openEditorInSameTab,
+      closePanel,
+      openEditor,
+    ],
   );
 
   const downloadFile = useCallback(

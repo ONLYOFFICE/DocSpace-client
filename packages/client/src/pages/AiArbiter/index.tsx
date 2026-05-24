@@ -37,12 +37,16 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
+import AiAgentsLightIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
+import AiAgentsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";
+
+import { EmptyView } from "@docspace/shared/components/empty-view";
+import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
+
 import SdkIframe, {
   type SdkIframeHandle,
 } from "SRC_DIR/components/SdkIframe";
 import { InstallAiArbiterDialog } from "SRC_DIR/pages/Dashboard/InstallAiArbiterDialog";
-
-import styles from "./AiArbiter.module.scss";
 
 type AiArbiterSettings = {
   installed?: boolean;
@@ -54,12 +58,14 @@ type AiArbiterProps = {
     id: string,
   ) => Promise<T | null>;
   canManageAgents: boolean;
+  theme: TTheme;
 };
 
 const AiArbiter = ({
   ensureAppsLoaded,
   fetchAppSettings,
   canManageAgents,
+  theme,
 }: AiArbiterProps) => {
   const { t } = useTranslation(["Common"]);
   const [settingsChecked, setSettingsChecked] = React.useState(false);
@@ -88,15 +94,14 @@ const AiArbiter = ({
 
   if (!canManageAgents) {
     return (
-      <div className={styles.nonAdminBody}>
-        <p className={styles.nonAdminTitle}>
-          {t("Common:DashboardAIArbiterTitle")}
-        </p>
-        <p className={styles.nonAdminText}>
-          AI Arbiter is available for administrators only. Ask a workspace
-          administrator to set it up.
-        </p>
-      </div>
+      <EmptyView
+        title={t("Common:DashboardAIArbiterTitle")}
+        description={t("Common:ArbiterNonAdminDescription")}
+        icon={
+          theme.isBase ? <AiAgentsLightIcon /> : <AiAgentsDarkIcon />
+        }
+        options={[]}
+      />
     );
   }
 
@@ -119,15 +124,18 @@ const AiArbiter = ({
   );
 };
 
-const AiArbiterConnected = inject<TStore>(({ appsStore, userStore }) => ({
-  ensureAppsLoaded: appsStore.ensureLoaded,
-  fetchAppSettings: appsStore.fetchAppSettings,
-  canManageAgents: !!(
-    userStore.user?.isAdmin ||
-    userStore.user?.isOwner ||
-    userStore.user?.isRoomAdmin
-  ),
-}))(observer(AiArbiter));
+const AiArbiterConnected = inject<TStore>(
+  ({ appsStore, userStore, settingsStore }) => ({
+    ensureAppsLoaded: appsStore.ensureLoaded,
+    fetchAppSettings: appsStore.fetchAppSettings,
+    canManageAgents: !!(
+      userStore.user?.isAdmin ||
+      userStore.user?.isOwner ||
+      userStore.user?.isRoomAdmin
+    ),
+    theme: settingsStore.theme,
+  }),
+)(observer(AiArbiter));
 
 export { AiArbiterConnected as AiArbiter };
 

@@ -174,6 +174,8 @@ const NewArticle = ({
   });
 
   const isAdminOrOwner = (user?.isAdmin ?? false) || (user?.isOwner ?? false);
+  const canManageAgents =
+    isAdminOrOwner || (user?.isRoomAdmin ?? false);
   const canCreateForms =
     !(user?.isVisitor ?? false) && !(user?.isCollaborator ?? false);
 
@@ -376,12 +378,16 @@ const NewArticle = ({
               icon: CatalogTrashReactSvgUrl,
               onClick: () => navigate("/ai-rooms?section=trash"),
             },
-            {
-              id: "ai-rooms-settings",
-              label: t("Common:Settings"),
-              icon: CatalogSettingsReactSvgUrl,
-              onClick: () => navigate("/ai-rooms?section=settings"),
-            },
+            ...(isAdminOrOwner
+              ? [
+                  {
+                    id: "ai-rooms-settings",
+                    label: t("Common:Settings"),
+                    icon: CatalogSettingsReactSvgUrl,
+                    onClick: () => navigate("/ai-rooms?section=settings"),
+                  },
+                ]
+              : []),
           ]
         : undefined,
     };
@@ -409,7 +415,7 @@ const NewArticle = ({
       label: t("Common:DashboardAIChatAgentsTitle"),
       icon: CatalogAiAgentsReactSvgUrl,
       onClick: handleAiAgentsClick,
-      children: aiAgentsEnabled
+      children: aiAgentsEnabled && canManageAgents
         ? [
             {
               id: "ai-agents-recent",

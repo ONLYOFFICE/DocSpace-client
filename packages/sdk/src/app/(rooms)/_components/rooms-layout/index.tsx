@@ -126,6 +126,12 @@ const RoomsLayout = observer(
       }
     }, [infoPanelStore, filesListStore]);
 
+    const canCreateRooms = !!(
+      user?.isAdmin ||
+      user?.isOwner ||
+      user?.isRoomAdmin
+    );
+
     const [isCreateRoomDialogVisible, setIsCreateRoomDialogVisible] =
       React.useState(false);
 
@@ -141,7 +147,7 @@ const RoomsLayout = observer(
 
     const quickActionItems = React.useMemo<QuickActionItem[]>(
       () =>
-        isArchive
+        isArchive || !canCreateRooms
           ? []
           : [
               {
@@ -205,7 +211,7 @@ const RoomsLayout = observer(
                 )}
                 <Filter
                   filesFilter={filesFilter}
-                  showMainButton={!isArchive}
+                  showMainButton={!isArchive && canCreateRooms}
                   mainButtonProps={{
                     isDropdown: false,
                     // model: mainButtonModel,

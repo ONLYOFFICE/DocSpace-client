@@ -535,20 +535,25 @@
   }
 }
 
-.panelChevron {
-  flex: 0 0 auto;
-  transition: transform 0.2s;
-
-  &[data-collapsed="true"] {
-    transform: rotate(-90deg);
-  }
-}
 
 .panelBody {
   padding: 12px;
   flex: 1;
   min-height: 0;
   overflow: auto;
+  font-size: 13px;
+  line-height: 1.6;
+
+  :global(h1) { font-size: 15px; margin: 0 0 8px; }
+  :global(h2) { font-size: 14px; margin: 12px 0 6px; }
+  :global(h3),
+  :global(h4),
+  :global(h5),
+  :global(h6) { font-size: 13px; margin: 8px 0 4px; }
+  :global(p)  { margin: 0 0 8px; }
+  :global(ul),
+  :global(ol) { margin: 0 0 8px; padding-inline-start: 18px; }
+  :global(li) { margin-bottom: 3px; }
 }
 
 .panelBodyArbiter {
@@ -577,6 +582,15 @@
   padding: 16px 24px;
   border-bottom: 1px solid var(--border-color);
   flex-shrink: 0;
+
+  // Override panelTitle size — fullscreen header warrants a larger title
+  .panelTitle {
+    font-size: 16px;
+  }
+
+  .panelModel {
+    font-size: 13px;
+  }
 }
 
 .fullscreenClose {
@@ -599,7 +613,21 @@
 .fullscreenBody {
   flex: 1;
   overflow: auto;
-  padding: 24px;
+  padding: 24px 48px;
+  max-width: 900px;
+  font-size: 14px;
+  line-height: 1.7;
+
+  :global(h1) { font-size: 20px; margin: 0 0 12px; }
+  :global(h2) { font-size: 17px; margin: 20px 0 8px; }
+  :global(h3) { font-size: 15px; margin: 16px 0 6px; }
+  :global(h4),
+  :global(h5),
+  :global(h6) { font-size: 14px; margin: 12px 0 4px; }
+  :global(p)  { margin: 0 0 10px; }
+  :global(ul),
+  :global(ol) { margin: 0 0 10px; padding-inline-start: 20px; }
+  :global(li) { margin-bottom: 4px; }
 }
 
 .streamingText {

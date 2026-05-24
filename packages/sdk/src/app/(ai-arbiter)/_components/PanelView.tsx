@@ -45,7 +45,6 @@ import type { PanelState } from "@/types/arbiter";
 
 import styles from "./ArbiterApp.module.scss";
 
-
 type PanelViewProps = {
   panel: PanelState;
   isArbiter?: boolean;
@@ -54,7 +53,12 @@ type PanelViewProps = {
 };
 
 export const PanelView = observer(
-  ({ panel, isArbiter = false, isCollapsed = false, onToggleCollapse }: PanelViewProps) => {
+  ({
+    panel,
+    isArbiter = false,
+    isCollapsed = false,
+    onToggleCollapse,
+  }: PanelViewProps) => {
     const { t } = useTranslation(["Common"]);
     const { status } = panel;
     const statusLabels: Record<PanelState["status"], string> = {
@@ -65,12 +69,15 @@ export const PanelView = observer(
       aborted: t("Common:ArbiterStopped"),
     };
     const label = statusLabels[status];
-    const headerClass = isArbiter ? styles.panelHeaderArbiter : styles.panelHeader;
+    const headerClass = isArbiter
+      ? styles.panelHeaderArbiter
+      : styles.panelHeader;
     const bodyClass = isArbiter ? styles.panelBodyArbiter : styles.panelBody;
 
-    const displayText = status === "done" || status === "aborted" || status === "error"
-      ? panel.finalText || panel.streamingText
-      : panel.streamingText;
+    const displayText =
+      status === "done" || status === "aborted" || status === "error"
+        ? panel.finalText || panel.streamingText
+        : panel.streamingText;
 
     const [showReasoning, setShowReasoning] = React.useState(false);
     const [modalOpen, setModalOpen] = React.useState(false);
@@ -89,7 +96,9 @@ export const PanelView = observer(
                   type="button"
                   onClick={() => setShowReasoning((s) => !s)}
                 >
-                  {showReasoning ? t("Common:ArbiterHideReasoning") : t("Common:ArbiterShowReasoning")}
+                  {showReasoning
+                    ? t("Common:ArbiterHideReasoning")
+                    : t("Common:ArbiterShowReasoning")}
                 </button>
                 {showReasoning && (
                   <MarkdownField chatMessage={panel.reasoningText} />
@@ -113,9 +122,13 @@ export const PanelView = observer(
             onClick={!isArbiter ? onToggleCollapse : undefined}
             role={!isArbiter ? "button" : undefined}
             tabIndex={!isArbiter ? 0 : undefined}
-            onKeyDown={!isArbiter
-              ? (e) => { if (e.key === "Enter" || e.key === " ") onToggleCollapse?.(); }
-              : undefined
+            onKeyDown={
+              !isArbiter
+                ? (e) => {
+                    if (e.key === "Enter" || e.key === " ")
+                      onToggleCollapse?.();
+                  }
+                : undefined
             }
           >
             <span className={styles.panelTitle}>{panel.alias}</span>
@@ -124,7 +137,10 @@ export const PanelView = observer(
             {label && (
               <span className={styles.panelBadge} data-status={status}>
                 {status === "streaming" && (
-                  <span className={styles.spinnerDot} style={{ marginRight: 4 }} />
+                  <span
+                    className={styles.spinnerDot}
+                    style={{ marginRight: 4 }}
+                  />
                 )}
                 {label}
               </span>
@@ -135,25 +151,28 @@ export const PanelView = observer(
               className={styles.expandBtn}
               aria-label={t("Common:ArbiterExpandPanel")}
               title={t("Common:ArbiterExpandPanel")}
-              onClick={(e) => { e.stopPropagation(); setModalOpen(true); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                setModalOpen(true);
+              }}
             >
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 12 12"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
                 <polyline points="7.5,1 11,1 11,4.5" />
                 <line x1="6.5" y1="5.5" x2="11" y2="1" />
                 <polyline points="4.5,11 1,11 1,7.5" />
                 <line x1="5.5" y1="6.5" x2="1" y2="11" />
               </svg>
             </button>
-
-            {!isArbiter && (
-              <span
-                className={styles.panelChevron}
-                data-collapsed={isCollapsed ? "true" : "false"}
-                aria-hidden="true"
-              >
-                v
-              </span>
-            )}
           </div>
 
           {(!isCollapsed || isArbiter) && (
@@ -161,25 +180,27 @@ export const PanelView = observer(
           )}
         </div>
 
-        {modalOpen && ReactDOM.createPortal(
-          <div className={styles.fullscreenOverlay}>
-            <div className={styles.fullscreenHeader}>
-              <span className={styles.panelTitle}>{panel.alias}</span>
-              <span className={styles.panelModel}>{panel.modelAlias}</span>
-              <button
-                type="button"
-                className={styles.fullscreenClose}
-                aria-label={t("Common:CloseButton")}
-                onClick={() => setModalOpen(false)}
-              >
-                x
-              </button>
-            </div>
-            <div className={styles.fullscreenBody}>{renderBody()}</div>
-          </div>,
-          document.body,
-        )}
+        {modalOpen &&
+          ReactDOM.createPortal(
+            <div className={styles.fullscreenOverlay}>
+              <div className={styles.fullscreenHeader}>
+                <span className={styles.panelTitle}>{panel.alias}</span>
+                <span className={styles.panelModel}>{panel.modelAlias}</span>
+                <button
+                  type="button"
+                  className={styles.fullscreenClose}
+                  aria-label={t("Common:CloseButton")}
+                  onClick={() => setModalOpen(false)}
+                >
+                  x
+                </button>
+              </div>
+              <div className={styles.fullscreenBody}>{renderBody()}</div>
+            </div>,
+            document.body,
+          )}
       </>
     );
   },
 );
+

@@ -30,6 +30,7 @@ import React from "react";
 import { observer } from "mobx-react";
 
 import Share from "@docspace/shared/components/share";
+import { ShareEventName } from "@docspace/shared/components/share/Share.constants";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
@@ -56,6 +57,13 @@ const ShareView = observer(({ selection }: ShareViewProps) => {
 
   const selfId = docsUserStore.user?.id ?? "";
 
+  const onAddUser = React.useCallback((item: TFile | TFolder) => {
+    const event = new CustomEvent(ShareEventName, {
+      detail: { open: true, item },
+    });
+    window.dispatchEvent(event);
+  }, []);
+
   return (
     <Share
       infoPanelSelection={selection}
@@ -66,8 +74,7 @@ const ShareView = observer(({ selection }: ShareViewProps) => {
       setEditLinkPanelIsVisible={setEditLinkPanelIsVisible}
       setLinkParams={setLinkParams}
       setEmbeddingPanelData={setEmbeddingPanelData}
-      disabledSharedUser
-      hideLinkTypeSelector
+      onAddUser={onAddUser}
     />
   );
 });

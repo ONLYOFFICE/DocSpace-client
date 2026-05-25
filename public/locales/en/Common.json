@@ -1569,7 +1569,6 @@
   "Reset": "Reset",
   "ResetAndStartFilling": "Reset and start filling",
   "ResetApplication": "Reset application",
-  "ResetEncryptionKeysAction": "Reset and lose access",
   "ResetEncryptionKeysConfirmation": "Type {{token}} to confirm",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "Lost your passphrase? Reset encryption keys",

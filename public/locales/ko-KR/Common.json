@@ -1461,7 +1461,6 @@
   "Reset": "리셋",
   "ResetAndStartFilling": "재설정하고 채우기 시작",
   "ResetApplication": "애플리케이션 리셋",
-  "ResetEncryptionKeysAction": "재설정하고 접근 권한 잃기",
   "ResetEncryptionKeysConfirmation": "확인을 위해 {{token}}을 입력하세요",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "패스프레이즈를 잊으셨습니까? 암호화 키 재설정",

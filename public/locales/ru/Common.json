@@ -1497,7 +1497,6 @@
   "Reset": "Сбросить",
   "ResetAndStartFilling": "Сбросить и начать заполнение",
   "ResetApplication": "Сбросить приложение",
-  "ResetEncryptionKeysAction": "Сбросить и потерять доступ",
   "ResetEncryptionKeysConfirmation": "Введите {{token}} для подтверждения",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "Забыли парольную фразу? Сбросьте ключи шифрования",

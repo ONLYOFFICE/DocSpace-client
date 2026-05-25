@@ -1490,7 +1490,6 @@
   "Reset": "Resetare",
   "ResetAndStartFilling": "Resetare și începere completare",
   "ResetApplication": "Resetare aplicație",
-  "ResetEncryptionKeysAction": "Resetare și pierdere acces",
   "ResetEncryptionKeysConfirmation": "Introduceți {{token}} pentru confirmare",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "V-ați uitat fraza de acces? Resetați cheile de criptare",

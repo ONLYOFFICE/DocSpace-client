@@ -1490,7 +1490,6 @@
   "Reset": "Reimposta",
   "ResetAndStartFilling": "Reimposta e inizia la compilazione",
   "ResetApplication": "Resettare applicazione",
-  "ResetEncryptionKeysAction": "Ripristina e perdi l'accesso",
   "ResetEncryptionKeysConfirmation": "Digitare {{token}} per confermare",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "Ha dimenticato la passphrase? Ripristina le chiavi di cifratura",

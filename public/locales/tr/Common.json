@@ -1482,7 +1482,6 @@
   "Reset": "Sıfırla",
   "ResetAndStartFilling": "Sıfırla ve doldurmaya başla",
   "ResetApplication": "Uygulamayı sıfırla",
-  "ResetEncryptionKeysAction": "Sıfırla ve erişimi kaybet",
   "ResetEncryptionKeysConfirmation": "Onaylamak için {{token}} yazın",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "Parolanızı mı unuttunuz? Şifreleme anahtarlarını sıfırlayın",

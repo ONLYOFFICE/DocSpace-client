@@ -1482,7 +1482,6 @@
   "Reset": "Repor",
   "ResetAndStartFilling": "Reinicie e comece a preencher",
   "ResetApplication": "Redefinir aplicação",
-  "ResetEncryptionKeysAction": "Repor e perder acesso",
   "ResetEncryptionKeysConfirmation": "Escreva {{token}} para confirmar",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "Esqueceu a frase-passe? Repor chaves de encriptação",

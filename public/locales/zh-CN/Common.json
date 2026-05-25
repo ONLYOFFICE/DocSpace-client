@@ -1490,7 +1490,6 @@
   "Reset": "重设",
   "ResetAndStartFilling": "重置并开始填写",
   "ResetApplication": "重置应用程序",
-  "ResetEncryptionKeysAction": "重置并失去访问权限",
   "ResetEncryptionKeysConfirmation": "输入 {{token}} 以确认",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "忘记了密码短语？重置加密密钥",

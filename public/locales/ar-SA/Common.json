@@ -1482,7 +1482,6 @@
   "Reset": "إعادة تعيين",
   "ResetAndStartFilling": "إعادة التهيئة والبدء بالتعبئة",
   "ResetApplication": "إعادة ضبط التطبيق",
-  "ResetEncryptionKeysAction": "إعادة التعيين وفقدان الوصول",
   "ResetEncryptionKeysConfirmation": "اكتب {{token}} للتأكيد",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "هل نسيت عبارة مرورك؟ أعد تعيين مفاتيح التشفير",

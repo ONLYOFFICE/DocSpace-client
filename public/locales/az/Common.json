@@ -1482,7 +1482,6 @@
   "Reset": "Sıfırlayın",
   "ResetAndStartFilling": "Sıfırlayın və doldurmağa başlayın",
   "ResetApplication": "Tətbiqi sıfırlayın",
-  "ResetEncryptionKeysAction": "Sıfırlayın və girişi itirinizin",
   "ResetEncryptionKeysConfirmation": "Təsdiq etmək üçün {{token}} yazın",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "Parolunuzu itirdiniz? Şifrələmə açarlarını sıfırlayın",

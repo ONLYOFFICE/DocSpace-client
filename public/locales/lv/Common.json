@@ -1482,7 +1482,6 @@
   "Reset": "Atiestatīšana",
   "ResetAndStartFilling": "Atiestatīt un sākt aizpildīšanu",
   "ResetApplication": "Atiestatīt lietojumprogrammu",
-  "ResetEncryptionKeysAction": "Atiestatīt un zaudēt piekļuvi",
   "ResetEncryptionKeysConfirmation": "Ierakstiet {{token}}, lai apstiprinātu",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "Aizmirsāt ieejas frāzi? Atiestatiet šifrēšanas atslēgas",

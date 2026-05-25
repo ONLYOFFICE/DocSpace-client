@@ -1481,7 +1481,6 @@
   "Reset": "Скинути",
   "ResetAndStartFilling": "Скинути й почати заповнення",
   "ResetApplication": "Скинути налаштування програми",
-  "ResetEncryptionKeysAction": "Скинути та втратити доступ",
   "ResetEncryptionKeysConfirmation": "Введіть {{token}} для підтвердження",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "Забули парольну фразу? Скиньте ключі шифрування",

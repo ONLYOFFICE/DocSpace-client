@@ -1489,7 +1489,6 @@
   "Reset": "Resetuj",
   "ResetAndStartFilling": "Ponovno postavljanje i početak popunjavanja",
   "ResetApplication": "Resetuj aplikaciju",
-  "ResetEncryptionKeysAction": "Resetuj i izgubi pristup",
   "ResetEncryptionKeysConfirmation": "Unesite {{token}} za potvrdu",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "Zaboravili ste lozinku? Resetujte ključeve za šifrovanje",

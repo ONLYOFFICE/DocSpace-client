@@ -1482,7 +1482,6 @@
   "Reset": "Đặt lại",
   "ResetAndStartFilling": "Thiết lập lại và bắt đầu điền",
   "ResetApplication": "Đặt lại ứng dụng",
-  "ResetEncryptionKeysAction": "Đặt lại và mất quyền truy cập",
   "ResetEncryptionKeysConfirmation": "Nhập {{token}} để xác nhận",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "Quên mật khẩu bảo vệ? Đặt lại khoá mã hoá",

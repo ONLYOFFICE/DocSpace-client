@@ -1482,7 +1482,6 @@
   "Reset": "Rindizni",
   "ResetAndStartFilling": "Rivendosni dhe filloni plotësimin",
   "ResetApplication": "Rifilloni aplikacionin",
-  "ResetEncryptionKeysAction": "Rivendosni dhe humbisni qasjen",
   "ResetEncryptionKeysConfirmation": "Shkruajini {{token}} për të konfirmuar",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "Keni humbur frazëkalimin? Rivendosni çelësat e enkriptimit",

@@ -1482,7 +1482,6 @@
   "Reset": "Нулирай",
   "ResetAndStartFilling": "Нулирай и започни попълване",
   "ResetApplication": "Нулирай приложението",
-  "ResetEncryptionKeysAction": "Нулиране и загуба на достъп",
   "ResetEncryptionKeysConfirmation": "Въведете {{token}} за потвърждение",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "Забравихте паролната фраза? Нулирайте ключовете за криптиране",

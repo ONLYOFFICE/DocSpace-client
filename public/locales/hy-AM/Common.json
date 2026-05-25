@@ -1490,7 +1490,6 @@
   "Reset": "Վերականգնել",
   "ResetAndStartFilling": "Վերակայել և սկսել լրացնել",
   "ResetApplication": "Վերականգնել հավելվածը",
-  "ResetEncryptionKeysAction": "Վերականգնել և կորցնել մուտքը",
   "ResetEncryptionKeysConfirmation": "Մուտքագրեք {{token}}՝ հաստատելու համար",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "Ծածկաբառը կորցրե՞լ եք: Վերականգնել կոդավորման բանալիները",

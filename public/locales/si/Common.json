@@ -1482,7 +1482,6 @@
   "Reset": "ප්‍රතිසංස්කරණය කරන්න",
   "ResetAndStartFilling": "නැවත සැකසීම සහ පිරවීම ආරම්භ කරන්න",
   "ResetApplication": "යෙදුම යළි සකසන්න",
-  "ResetEncryptionKeysAction": "නැවත සකසා ප්‍රවේශය නැති කරගන්න",
   "ResetEncryptionKeysConfirmation": "තහවුරු කිරීමට {{token}} ටයිප් කරන්න",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "ඔබගේ මුරවාක්‍යය නැති වුණාද? සංකේතාංකන යතුරු නැවත සකසන්න",

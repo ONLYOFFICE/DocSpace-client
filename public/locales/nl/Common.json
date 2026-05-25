@@ -1482,7 +1482,6 @@
   "Reset": "Reset",
   "ResetAndStartFilling": "Resetten en beginnen met vullen",
   "ResetApplication": "Toepassing resetten",
-  "ResetEncryptionKeysAction": "Resetten en toegang verliezen",
   "ResetEncryptionKeysConfirmation": "Typ {{token}} om te bevestigen",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "Wachtzin vergeten? Versleutelingssleutels resetten",

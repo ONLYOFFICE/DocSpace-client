@@ -1482,7 +1482,6 @@
   "Reset": "ຣີເຊັດ",
   "ResetAndStartFilling": "ຣີເຊັດ ແລະເລີ່ມຕື່ມຂໍ້ມູນ",
   "ResetApplication": "ຕັ້ງຄ່າແອບຄືນ",
-  "ResetEncryptionKeysAction": "ຣີເຊັດ ແລ້ວສູນເສຍການເຂົ້າເຖິງ",
   "ResetEncryptionKeysConfirmation": "ພິມ {{token}} ເພື່ອຢືນຢັນ",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "ລືມລະຫັດລັບ? ຣີເຊັດກຸນແຈເຂົ້າລະຫັດ",

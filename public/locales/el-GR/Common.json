@@ -1482,7 +1482,6 @@
   "Reset": "Επαναφορά",
   "ResetAndStartFilling": "Επαναφορά και έναρξη συμπλήρωσης",
   "ResetApplication": "Επαναφορά εφαρμογής",
-  "ResetEncryptionKeysAction": "Επαναφορά και απώλεια πρόσβασης",
   "ResetEncryptionKeysConfirmation": "Πληκτρολογήστε {{token}} για επιβεβαίωση",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "Χάσατε την κωδική φράση σας; Επαναφέρετε τα κλειδιά κρυπτογράφησης",

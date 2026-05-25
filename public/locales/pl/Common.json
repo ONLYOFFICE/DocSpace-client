@@ -1482,7 +1482,6 @@
   "Reset": "Zresetuj",
   "ResetAndStartFilling": "Zresetuj i rozpocznij wypełnianie",
   "ResetApplication": "Zresetuj aplikację",
-  "ResetEncryptionKeysAction": "Zresetuj i utróć dostęp",
   "ResetEncryptionKeysConfirmation": "Wpisz {{token}}, aby potwierdzić",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "Zapomniałeś(-aś) hasła dostępu? Zresetuj klucze szyfrowania",

@@ -1490,7 +1490,6 @@
   "Reset": "Restablecer",
   "ResetAndStartFilling": "Restablecer y comenzar a rellenar",
   "ResetApplication": "Restablecer aplicación",
-  "ResetEncryptionKeysAction": "Restablecer y perder el acceso",
   "ResetEncryptionKeysConfirmation": "Escriba {{token}} para confirmar",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "¿Olvidó su frase de contraseña? Restablecer claves de cifrado",

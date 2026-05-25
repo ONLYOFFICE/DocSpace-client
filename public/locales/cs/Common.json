@@ -1482,7 +1482,6 @@
   "Reset": "Obnovení",
   "ResetAndStartFilling": "Resetovat a začít plnit",
   "ResetApplication": "Obnovení aplikace",
-  "ResetEncryptionKeysAction": "Resetovat a ztratit přístup",
   "ResetEncryptionKeysConfirmation": "Pro potvrzení zadejte {{token}}",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "Zapomněli jste přístupovou frázi? Resetovat šifrovací klíče",

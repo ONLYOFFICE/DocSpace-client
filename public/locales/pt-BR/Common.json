@@ -1490,7 +1490,6 @@
   "Reset": "Redefinir",
   "ResetAndStartFilling": "Redefinir e começar a preencher",
   "ResetApplication": "Redefinir aplicativo",
-  "ResetEncryptionKeysAction": "Redefinir e perder acesso",
   "ResetEncryptionKeysConfirmation": "Digite {{token}} para confirmar",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "Esqueceu sua senha de acesso? Redefina as chaves de criptografia",

@@ -3122,6 +3122,10 @@ class FilesStore {
           "rename",
           "edit-index",
           "show-version-history",
+          "finalize-version",
+          "version",
+          "move-to",
+          "move",
         ]);
 
         fileOptions.push("download-encrypted");

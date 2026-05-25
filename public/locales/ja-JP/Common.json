@@ -1490,7 +1490,6 @@
   "Reset": "リセット",
   "ResetAndStartFilling": "リセットして入力を始める",
   "ResetApplication": "アプリケーションのリセット",
-  "ResetEncryptionKeysAction": "リセットしてアクセスを失う",
   "ResetEncryptionKeysConfirmation": "確認のために{{token}}と入力してください",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "パスフレーズを忘れた場合は、暗号化キーをリセットしてください",

@@ -1490,7 +1490,6 @@
   "Reset": "Réinitialiser",
   "ResetAndStartFilling": "Réinitialiser et commencer le remplissage",
   "ResetApplication": "Réinitialiser l'application",
-  "ResetEncryptionKeysAction": "Réinitialiser et perdre l'accès",
   "ResetEncryptionKeysConfirmation": "Saisissez {{token}} pour confirmer",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "Phrase de passe oubliée ? Réinitialiser les clés de chiffrement",

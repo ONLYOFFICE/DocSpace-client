@@ -1490,7 +1490,6 @@
   "Reset": "Zurücksetzen",
   "ResetAndStartFilling": "Zurücksetzen und mit dem Ausfüllen beginnen",
   "ResetApplication": "Anwendung zurücksetzen",
-  "ResetEncryptionKeysAction": "Zurücksetzen und Zugriff verlieren",
   "ResetEncryptionKeysConfirmation": "Geben Sie {{token}} zur Bestätigung ein",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "Passphrase vergessen? Verschlüsselungsschlüssel zurücksetzen",

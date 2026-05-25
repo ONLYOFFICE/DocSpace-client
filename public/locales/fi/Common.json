@@ -1482,7 +1482,6 @@
   "Reset": "Nollaa",
   "ResetAndStartFilling": "Nollaa ja aloita täyttäminen",
   "ResetApplication": "Nollaa sovellus",
-  "ResetEncryptionKeysAction": "Nollaa ja menetä pääsy",
   "ResetEncryptionKeysConfirmation": "Kirjoita {{token}} vahvistaaksesi",
   "ResetEncryptionKeysConfirmationToken": "RESET",
   "ResetEncryptionKeysCta": "Unohditko salauslauseesi? Nollaa salausavaimet",

@@ -38,6 +38,10 @@ const EmptyView = ({
     current.id === current.rootFolderId ||
     current.parentId === current.rootFolderId;
   const { isBase: isBaseTheme } = useTheme();
+  const aiConfigStore = useAgentsAIConfigStore();
+  // Resolve upload handlers up-front (Rules of Hooks: no hook calls
+  // after the conditional early-return for KnowledgeDisabledContainer).
+  const { onUploadFromDocSpace, onUploadFromDevice } = useKnowledgeUpload();
 
   const rootFolderType = current.rootFolderType;
 
@@ -45,7 +49,6 @@ const EmptyView = ({
   // rejects any copy/upload here, so render the "configure provider"
   // placeholder instead of the regular empty view + upload CTAs. Mirrors
   // client's Section/Body branch (Home/Section/Body/index.js:492-497).
-  const aiConfigStore = useAgentsAIConfigStore();
   if (
     !isFiltered &&
     current.type === FolderType.Knowledge &&
@@ -96,16 +99,13 @@ const EmptyView = ({
   ];
 
   // Knowledge empty view exposes the same Upload options as the filter
-  // main-button (From portal / From device). Handlers come from the
-  // shared `useKnowledgeUpload` hook so the empty-state CTA and the
-  // filter dropdown stay in sync. "From portal" opens the FilesSelector
-  // dialog mounted at the layout; "From device" is currently a stub.
+  // main-button (From portal / From device); handlers come from
+  // `useKnowledgeUpload` (resolved at the top of the component so the
+  // KnowledgeDisabledContainer branch doesn't violate Rules of Hooks).
   // Knowledge is detected by `current.type` (not `rootFolderType`, which
   // is the parent room's type).
   const showUploadOptions =
     !isFiltered && current.type === FolderType.Knowledge;
-
-  const { onUploadFromDocSpace, onUploadFromDevice } = useKnowledgeUpload();
 
   const uploadOptions: EmptyViewOptionsType = [
     {

@@ -85,11 +85,7 @@ const KnowledgeUploadSelectorDialog = observer(() => {
         .then(() => {
           // Server kicks off vectorization asynchronously; surface a
           // success toast so the user knows the request was accepted.
-          toastr.success(
-            t("Common:FilesUploadedToKnowledge", {
-              defaultValue: "Files added to knowledge base",
-            }),
-          );
+          toastr.success(t("Common:FilesCopiedNotify"));
         })
         .catch((err) => {
           toastr.error(err instanceof Error ? err.message : String(err));

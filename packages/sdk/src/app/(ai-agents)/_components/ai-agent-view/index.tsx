@@ -26,6 +26,7 @@
 
 "use client";
 
+import React from "react";
 import { observer } from "mobx-react";
 import dynamic from "next/dynamic";
 
@@ -54,6 +55,20 @@ const AiAgentView = () => {
   const loadingStore = useAgentLoadingStore();
   const aiConfigStore = useAgentsAIConfigStore();
   const userStore = useAgentsUserStore();
+
+  // Chat uses Section's own Scrollbar (`<Scrollbar id="sectionScroll">`)
+  // as its scroll viewport — passed to Chat via `externalScrollRef` so
+  // ChatContainer skips its internal <Scrollbar> (and the
+  // `--chat-content-padding` it injects onto .chatScrollBody).
+  // Mirrors the client's `useScroll`: resolves the scroller lazily on
+  // mount because the section may render before this component does.
+  const chatScrollRef = React.useRef<HTMLElement | null>(null);
+  React.useEffect(() => {
+    const el = document.querySelector<HTMLElement>(
+      "#sectionScroll .scroll-wrapper > .scroller",
+    );
+    if (el) chatScrollRef.current = el;
+  }, []);
 
   const {
     currentTab,
@@ -112,7 +127,8 @@ const AiAgentView = () => {
             attachmentFile={null}
             clearAttachmentFile={() => {}}
             width="100%"
-            height="100%"
+            useExternalScroll
+            externalScrollRef={chatScrollRef}
           />
         </div>
       ) : null}

@@ -129,14 +129,9 @@ const SectionShell = observer(
 
     const isInfoVisible = infoPanel.isVisible && !!infoPanel.currentAgent;
 
-    // The agent detail page hosts the chat (or a result file viewer), which
-    // owns its scroll and must fill the section height. The SDK doesn't
-    // have the client's outer MainLayout chain, so wrapping SectionBody in
-    // a custom Scrollbar (`withBodyScroll: true`) collapses the chat: the
-    // scroll-body is content-sized and the chat's `height: 100%` has no
-    // definite parent to resolve against. Disable `withBodyScroll` here so
-    // SectionBody renders as a non-scrolling flex-column anchor and toggle
-    // `fullHeightBody` + `withoutFooter` to let the chat fill the section.
+    // Agent detail uses `settingsStudio` paddings (chat fills the body) but
+    // still routes through Section's own Scrollbar — the chat hooks into it
+    // via `externalScrollRef={#sectionScroll}` from AiAgentView.
     const isAgentDetail = /\/ai-agents\/(?!settings(?:$|\/)|recent$|favorites$|trash$)[^/]+$/.test(
       pathname,
     );
@@ -160,11 +155,9 @@ const SectionShell = observer(
             if (!visible) infoPanel.hide();
           }}
           canDisplay={isInfoVisible}
-          withBodyScroll={!isAgentDetail}
-          fullHeightBody={isAgentDetail}
-          withoutFooter={isAgentDetail}
+          withBodyScroll
           uploadFiles={false}
-          settingsStudio={false}
+          settingsStudio={isAgentDetail}
         >
           <Section.SectionHeader>
             <AgentsNavigationHeader />

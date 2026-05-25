@@ -47,6 +47,8 @@ import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
+import Badges from "@docspace/shared/components/badges";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
@@ -75,6 +77,7 @@ const TableViewRow = observer(
     const observableItem = storeItem ?? item;
 
     const { t, i18n } = useTranslation(["Common"]);
+    const { isBase } = useTheme();
     const { openFile } = useFilesActions({ t });
     const { openFolder } = useFolderActions({ t });
     const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });
@@ -171,6 +174,25 @@ const TableViewRow = observer(
     // the update (same proxy ref would short-circuit to true).
     const itemSnapshot = { ...observableItem };
 
+    const badgesNode = (
+      <div className={styles.badgesContainer}>
+        <Badges
+          t={t}
+          themeIsBase={isBase}
+          item={observableItem}
+          viewAs="table"
+          showNew={false}
+          onFilesClick={() => {
+            if (!observableItem.isFolder) {
+              openFile(observableItem);
+            }
+          }}
+          onClickFavorite={onClickFavorite}
+          onRetryVectorization={onRetryVectorization}
+        />
+      </div>
+    );
+
     const quickButtonsNode = (
       <div className={styles.quickButtonsContainer}>
         <QuickButtons
@@ -230,6 +252,7 @@ const TableViewRow = observer(
               <span className={styles.nameCellExst}>{item.fileExst}</span>
             ) : null}
           </span>
+          {badgesNode}
           {lastColumn === "Name" ? quickButtonsNode : null}
         </TableCell>
         <TableCell className={lastColumn === "Modified" ? styles.lastCell : undefined}>

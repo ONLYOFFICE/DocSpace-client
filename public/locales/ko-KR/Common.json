@@ -844,6 +844,7 @@
   "ForDays": "며칠 동안: {{count}}",
   "ForQuestionsContactPortalAdmin": "궁금한 점이 있는 경우 {{productName}} 관리자에게 문의하세요.",
   "ForcePathStyle": "경로 스타일 강제",
+  "ForgotPassphrase": "패스프레이즈를 잊으셨나요?",
   "Form": "양식",
   "FormAdmins": "폼 관리자",
   "FormAdminsDescription": "이 양식과 설정을 관리할 수 있는 전체 접근 권한을 가진 사용자.",

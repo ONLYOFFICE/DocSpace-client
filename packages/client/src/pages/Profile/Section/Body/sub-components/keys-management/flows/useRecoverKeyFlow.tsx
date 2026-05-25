@@ -66,7 +66,7 @@ type Deps = {
 };
 
 export type RecoverKeyFlow = {
-  request: () => void;
+  request: (target?: TEncryptionKeyPair) => void;
   isPending: boolean;
   available: boolean;
   modals: ReactNode;
@@ -83,6 +83,9 @@ export function useRecoverKeyFlow({
   const [keyPair, setKeyPair] = useState<IdentityKeyPair | null>(null);
   const [mnemonic, setMnemonic] = useState<string | null>(null);
   const [targetKeyId, setTargetKeyId] = useState<string | null>(null);
+  const [scopedTarget, setScopedTarget] = useState<TEncryptionKeyPair | null>(
+    null,
+  );
   const [error, setError] = useState<string | null>(null);
 
   const reset = useCallback(() => {
@@ -90,24 +93,29 @@ export function useRecoverKeyFlow({
     setKeyPair(null);
     setMnemonic(null);
     setTargetKeyId(null);
+    setScopedTarget(null);
     setError(null);
   }, []);
 
   const available = !!encryptionKeys && encryptionKeys.length > 0;
 
-  const request = useCallback(() => {
+  const request = useCallback((target?: TEncryptionKeyPair) => {
     setError(null);
+    setScopedTarget(target ?? null);
     setStep("phrase");
   }, []);
 
   const onPhraseSubmit = useCallback(
     async (input: string) => {
-      if (!encryptionKeys || encryptionKeys.length === 0) return;
+      const pool: TEncryptionKeyPair[] = scopedTarget
+        ? [scopedTarget]
+        : (encryptionKeys ?? []);
+      if (pool.length === 0) return;
       setError(null);
       setIsPending(true);
       try {
         let unlocked: { kp: IdentityKeyPair; id: string } | null = null;
-        for (const candidate of encryptionKeys) {
+        for (const candidate of pool) {
           try {
             const envelope: SerializedIdentity = {
               publicKey: candidate.publicKey,
@@ -136,7 +144,7 @@ export function useRecoverKeyFlow({
         setIsPending(false);
       }
     },
-    [encryptionKeys, t],
+    [encryptionKeys, scopedTarget, t],
   );
 
   const onNewPassphrase = useCallback(

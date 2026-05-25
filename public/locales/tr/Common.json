@@ -859,6 +859,7 @@
   "ForDays": "günlerdir: {{count}}",
   "ForQuestionsContactPortalAdmin": "Herhangi bir sorunuz olursa, lütfen {{productName}} yöneticinizle iletişime geçin.",
   "ForcePathStyle": "Zorunlu Yol Stili",
+  "ForgotPassphrase": "Parolayı unuttunuz mu?",
   "Form": "Form",
   "FormAdmins": "Form Yöneticileri",
   "FormAdminsDescription": "Bu formu ve ayarlarını yönetmek için tam yetkili kullanıcılar.",

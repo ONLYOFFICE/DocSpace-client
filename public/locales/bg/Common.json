@@ -859,6 +859,7 @@
   "ForDays": "за дни: {{count}}",
   "ForQuestionsContactPortalAdmin": "За всякакви въпроси, моля, свържете се с администратора на {{productName}}.",
   "ForcePathStyle": "Стил на принудителния път",
+  "ForgotPassphrase": "Забравена паролна фраза?",
   "Form": "Форма",
   "FormAdmins": "Администратори на формите",
   "FormAdminsDescription": "Потребители, които имат пълен достъп за управление на тази форма и нейните настройки.",

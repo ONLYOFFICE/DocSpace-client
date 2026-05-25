@@ -17,4 +17,8 @@
 
 .select {
   align-self: flex-start;
+
+  :global(.combo-button-label) {
+    max-width: none;
+  }
 }

@@ -152,6 +152,11 @@ const EncryptionProviderWrapper = ({ userKeys, children }) => {
         await onSubmit(passphrase);
       };
 
+      const handleForgotPassphrase = () => {
+        onCancel();
+        window.location.href = "/profile/keys-management";
+      };
+
       return (
         <PassphraseDialog
           visible={visible}
@@ -160,6 +165,7 @@ const EncryptionProviderWrapper = ({ userKeys, children }) => {
           onSubmit={handleSubmit}
           onCancel={onCancel}
           isNewPassphrase={false}
+          onForgotPassphrase={handleForgotPassphrase}
         />
       );
     },

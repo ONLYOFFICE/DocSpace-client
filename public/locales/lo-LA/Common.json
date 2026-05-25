@@ -859,6 +859,7 @@
   "ForDays": "ເປັນມື້: {{count}}",
   "ForQuestionsContactPortalAdmin": "ສໍາລັບຄໍາຖາມໃດໆ, ກະລຸນາຕິດຕໍ່ຜູ້ບໍລິຫານ {{productName}} ຂອງເຈົ້າ.",
   "ForcePathStyle": "ຮູບແບບເສັ້ນທາງບັງຄັບ",
+  "ForgotPassphrase": "ລືມລະຫັດລັບບໍ?",
   "Form": "ແບບຟອມ",
   "FormAdmins": "ຜູ້ບໍລິຫານຟອມ",
   "FormAdminsDescription": "ຜູ້ໃຊ້ທີ່ມີສິດເຂົ້າເຖິງຢ່າງເຕັມທີ່ເພື່ອຈັດການແບບຟອມ ແລະການຕັ້ງຄ່າຂອງມັນ.",

@@ -859,6 +859,7 @@
   "ForDays": "za dneve: {{count}}",
   "ForQuestionsContactPortalAdmin": "Za kakršna koli vprašanja se obrnite na skrbnika {{productName}}.",
   "ForcePathStyle": "Pranje sloga poti",
+  "ForgotPassphrase": "Ste pozabili geslo?",
   "Form": "Obrazec",
   "FormAdmins": "Admini obrazcev",
   "FormAdminsDescription": "Uporabniki, ki imajo popoln dostop za upravljanje tega obrazca in njegovih nastavitev.",

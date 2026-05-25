@@ -946,6 +946,7 @@
   "ForDays": "for days: {{count}}",
   "ForQuestionsContactPortalAdmin": "For any questions, please contact your {{productName}} admin.",
   "ForcePathStyle": "Force Path Style",
+  "ForgotPassphrase": "Forgot passphrase?",
   "Form": "Form",
   "FormAdmins": "Form admins",
   "FormAdminsDescription": "Users who have full access to manage this form and its settings.",

@@ -49,6 +49,7 @@ import { KeyRotationDialog } from "../modals/KeyRotationDialog";
 type Deps = {
   userId: string | undefined;
   refreshKeysFromServer: () => Promise<void>;
+  onForgotPassphrase?: (target?: TEncryptionKeyPair) => void;
 };
 
 export type RotatePassphraseFlow = {
@@ -60,6 +61,7 @@ export type RotatePassphraseFlow = {
 export function useRotatePassphraseFlow({
   userId,
   refreshKeysFromServer,
+  onForgotPassphrase,
 }: Deps): RotatePassphraseFlow {
   const { t } = useTranslation(["Common"]);
   const [target, setTarget] = useState<TEncryptionKeyPair | null>(null);
@@ -114,6 +116,15 @@ export function useRotatePassphraseFlow({
       onCancel={reset}
       error={error}
       isLoading={isPending}
+      onForgotPassphrase={
+        onForgotPassphrase
+          ? () => {
+              const captured = target;
+              reset();
+              onForgotPassphrase(captured ?? undefined);
+            }
+          : undefined
+      }
     />
   ) : null;
 

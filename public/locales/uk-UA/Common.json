@@ -858,6 +858,7 @@
   "ForDays": "for days: {{count}}",
   "ForQuestionsContactPortalAdmin": "З будь-якими запитаннями звертайтеся до адміністратора {{productName}}.",
   "ForcePathStyle": "Примусово використати стиль шляху",
+  "ForgotPassphrase": "Забули парольну фразу?",
   "Form": "Форма",
   "FormAdmins": "Адміністратори форм",
   "FormAdminsDescription": "Користувачі, які мають повний доступ до керування цією формою та її налаштуваннями.",

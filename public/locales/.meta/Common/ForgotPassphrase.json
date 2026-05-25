@@ -1,0 +1,10 @@
+{
+  "comment": {
+    "text": "Link under the passphrase input in the encryption-key passphrase modal. Clicking it dismisses the passphrase prompt and starts the recovery flow (or, if recovery is unavailable, the reset-all-keys flow). Shown only when the user is being asked for the passphrase of an existing key (delete / export operations on the keys management page)."
+  },
+  "usage": [
+    {
+      "context": "<Link onClick={onForgotPassphrase}>{t(\"Common:ForgotPassphrase\")}</Link>"
+    }
+  ]
+}

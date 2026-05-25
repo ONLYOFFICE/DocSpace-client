@@ -44,13 +44,6 @@
   line-height: 1.5;
 }
 
-.errorBox {
-  padding: 12px;
-  background-color: var(--color-error-light);
-  border-radius: 4px;
-  border-left: 3px solid var(--color-error);
-}
-
 .inputWrapper {
   width: 100%;
 
@@ -68,4 +61,9 @@
 .generateRow {
   display: flex;
   justify-content: flex-end;
+}
+
+.forgotRow {
+  display: flex;
+  justify-content: flex-start;
 }

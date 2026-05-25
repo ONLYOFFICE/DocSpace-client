@@ -859,6 +859,7 @@
   "ForDays": "päivää: {{count}}",
   "ForQuestionsContactPortalAdmin": "Ole yhteydessä {{productName}} pääkäyttäjään, jos sinulla on kysyttävää.",
   "ForcePathStyle": "Pakota polku -tyyli",
+  "ForgotPassphrase": "Unohditko salauslauseen?",
   "Form": "Lomake",
   "FormAdmins": "Lomakkeen ylläpitäjät",
   "FormAdminsDescription": "Käyttäjät, joilla on täysi pääsy hallita tätä lomaketta ja sen asetuksia.",

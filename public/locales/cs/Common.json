@@ -859,6 +859,7 @@
   "ForDays": "pro dny: {{count}}",
   "ForQuestionsContactPortalAdmin": "V případě jakýchkoli dotazů se obraťte na správce {{productName}}.",
   "ForcePathStyle": "Vynutit styl cesty",
+  "ForgotPassphrase": "Zapomněli jste přístupovou frázi?",
   "Form": "Formulář",
   "FormAdmins": "Administrátoři formulářů",
   "FormAdminsDescription": "Uživatelé, kteří mají plný přístup k spravování tohoto formuláře a jeho nastavení.",

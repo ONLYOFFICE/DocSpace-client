@@ -50,7 +50,9 @@ import { PassphraseModal } from "../modals/PassphraseModal";
 
 import { getEncryptionErrorMessage } from "./getEncryptionErrorMessage";
 
-type Deps = Record<string, never>;
+type Deps = {
+  onForgotPassphrase?: (target?: TEncryptionKeyPair) => void;
+};
 
 export type ExportKeyFlow = {
   request: (keyData: TEncryptionKeyPair) => void;
@@ -58,7 +60,7 @@ export type ExportKeyFlow = {
   modals: ReactNode;
 };
 
-export function useExportKeyFlow(_deps?: Deps): ExportKeyFlow {
+export function useExportKeyFlow({ onForgotPassphrase }: Deps = {}): ExportKeyFlow {
   const { t } = useTranslation(["Common"]);
   const [target, setTarget] = useState<TEncryptionKeyPair | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -123,6 +125,15 @@ export function useExportKeyFlow(_deps?: Deps): ExportKeyFlow {
       onCancel={reset}
       isLoading={isPending}
       externalError={error}
+      onForgotPassphrase={
+        onForgotPassphrase
+          ? () => {
+              const captured = target;
+              reset();
+              onForgotPassphrase(captured ?? undefined);
+            }
+          : undefined
+      }
     />
   ) : null;
 

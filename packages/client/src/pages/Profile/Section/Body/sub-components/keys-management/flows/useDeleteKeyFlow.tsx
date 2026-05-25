@@ -56,6 +56,7 @@ import { getEncryptionErrorMessage } from "./getEncryptionErrorMessage";
 type Deps = {
   userId?: string;
   refreshKeysFromServer: () => Promise<void>;
+  onForgotPassphrase?: (target?: TEncryptionKeyPair) => void;
 };
 
 export type DeleteKeyFlow = {
@@ -68,6 +69,7 @@ export type DeleteKeyFlow = {
 export function useDeleteKeyFlow({
   userId,
   refreshKeysFromServer,
+  onForgotPassphrase,
 }: Deps): DeleteKeyFlow {
   const { t } = useTranslation(["Common"]);
   const [pendingId, setPendingId] = useState<string | null>(null);
@@ -148,6 +150,16 @@ export function useDeleteKeyFlow({
           }}
           isLoading={isPending}
           externalError={passphraseError}
+          onForgotPassphrase={
+            onForgotPassphrase
+              ? () => {
+                  const target = verifying;
+                  setVerifying(null);
+                  setPassphraseError(null);
+                  onForgotPassphrase(target ?? undefined);
+                }
+              : undefined
+          }
         />
       ) : null}
     </>

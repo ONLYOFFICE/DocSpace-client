@@ -867,6 +867,7 @@
   "ForDays": "pour les jours : {{count}}",
   "ForQuestionsContactPortalAdmin": "Pour toute question, veuillez contacter votre administrateur {{productName}}.",
   "ForcePathStyle": "Force le style de chemin",
+  "ForgotPassphrase": "Phrase de passe oubliée ?",
   "Form": "Formulaire",
   "FormAdmins": "Administrateurs de formulaires",
   "FormAdminsDescription": "Utilisateurs disposant d'un accès complet pour gérer ce formulaire et ses paramètres.",

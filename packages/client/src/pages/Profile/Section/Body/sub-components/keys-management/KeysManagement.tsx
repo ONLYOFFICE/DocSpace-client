@@ -93,13 +93,35 @@ const KeysManagement = ({
     encryptionKeys,
     refreshKeysFromServer,
   });
-  const remove = useDeleteKeyFlow({ userId, refreshKeysFromServer });
-  const exportFlow = useExportKeyFlow();
-  const rotate = useRotatePassphraseFlow({ userId, refreshKeysFromServer });
   const reset = useResetKeysFlow({
     userId,
     encryptionKeys,
     refreshKeysFromServer,
+  });
+
+  const handleForgotPassphrase = useCallback(
+    (target?: TEncryptionKeyPair) => {
+      if (recover.available) {
+        recover.request(target);
+      } else if (reset.available) {
+        reset.request();
+      }
+    },
+    [recover, reset],
+  );
+
+  const remove = useDeleteKeyFlow({
+    userId,
+    refreshKeysFromServer,
+    onForgotPassphrase: handleForgotPassphrase,
+  });
+  const exportFlow = useExportKeyFlow({
+    onForgotPassphrase: handleForgotPassphrase,
+  });
+  const rotate = useRotatePassphraseFlow({
+    userId,
+    refreshKeysFromServer,
+    onForgotPassphrase: handleForgotPassphrase,
   });
 
   const busy =
@@ -158,7 +180,7 @@ const KeysManagement = ({
           {recover.available ? (
             <Button
               size={ButtonSize.small}
-              onClick={recover.request}
+              onClick={() => recover.request()}
               label={t("Common:UseRecoveryPhrase")}
               isDisabled={busy}
             />

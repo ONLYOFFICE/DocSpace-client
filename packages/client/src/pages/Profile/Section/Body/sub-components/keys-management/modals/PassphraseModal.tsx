@@ -46,6 +46,7 @@ import {
   type PasswordInputHandle,
 } from "@docspace/ui-kit/components/password-input";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
 
@@ -63,6 +64,7 @@ type PassphraseModalProps = {
   isNew: boolean;
   isLoading?: boolean;
   externalError?: string | null;
+  onForgotPassphrase?: () => void;
 };
 
 const MIN_LENGTH = PASSPHRASE_MIN_LENGTH;
@@ -84,6 +86,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
   isNew,
   isLoading = false,
   externalError,
+  onForgotPassphrase,
 }) => {
   const { t, ready } = useTranslation(["Common"]);
   const inputRef = useRef<PasswordInputHandle>(null);
@@ -158,14 +161,6 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
               : t("Common:PassphraseHint")}
           </Text>
 
-          {displayedError && (
-            <div className={styles.errorBox}>
-              <Text fontSize="13px" fontWeight={600} color="var(--color-error)">
-                {displayedError}
-              </Text>
-            </div>
-          )}
-
           <div className={styles.passphraseField}>
             {isNew ? (
               <div className={styles.generateRow}>
@@ -177,12 +172,20 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                   onClick={handleGeneratePassword}
                   dataTestId="generate_passphrase_link"
                 >
-                  {t("Common:GeneratePassword")}
+                  {t("Common:GenerateLogoButton")}
                 </Link>
               </div>
             ) : null}
 
-            <div className={styles.inputWrapper}>
+            <FieldContainer
+              isVertical
+              labelVisible={false}
+              removeMargin
+              hasError={passphraseHasError}
+              errorMessage={displayedError ?? ""}
+              errorMessageWidth="100%"
+              className={styles.inputWrapper}
+            >
               <PasswordInput
                 ref={inputRef}
                 id="passphrase"
@@ -219,11 +222,40 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                 autoComplete="new-password"
                 tabIndex={1}
               />
-            </div>
+            </FieldContainer>
+
+            {onForgotPassphrase && externalError ? (
+              <div className={styles.forgotRow}>
+                <Link
+                  type={LinkType.action}
+                  fontWeight="600"
+                  fontSize="12px"
+                  isHovered
+                  onClick={onForgotPassphrase}
+                  dataTestId="forgot_passphrase_link"
+                >
+                  {t("Common:ForgotPassphrase")}
+                </Link>
+              </div>
+            ) : null}
           </div>
 
           {isNew && (
-            <div className={styles.inputWrapper}>
+            <FieldContainer
+              isVertical
+              labelVisible={false}
+              removeMargin
+              hasError={
+                !!confirmPassphrase && passphrase !== confirmPassphrase
+              }
+              errorMessage={
+                !!confirmPassphrase && passphrase !== confirmPassphrase
+                  ? t("Common:PassphraseMismatch")
+                  : ""
+              }
+              errorMessageWidth="100%"
+              className={styles.inputWrapper}
+            >
               <PasswordInput
                 id="confirmPassphrase"
                 inputName="confirmPassphrase"
@@ -243,7 +275,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                 autoComplete="new-password"
                 tabIndex={2}
               />
-            </div>
+            </FieldContainer>
           )}
         </div>
       </ModalDialog.Body>

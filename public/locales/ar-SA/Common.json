@@ -859,6 +859,7 @@
   "ForDays": "لمدة: {{count}}",
   "ForQuestionsContactPortalAdmin": "لأي استفسارات، يُرجى التواصل مع مشرف {{productName}} الخاص بكم.",
   "ForcePathStyle": "فرض نمط المسار",
+  "ForgotPassphrase": "نسيت عبارة المرور؟",
   "Form": "نموذج",
   "FormAdmins": "مسؤولو النماذج",
   "FormAdminsDescription": "المستخدمون الذين لديهم وصول كامل لإدارة هذا النموذج وإعداداته.",

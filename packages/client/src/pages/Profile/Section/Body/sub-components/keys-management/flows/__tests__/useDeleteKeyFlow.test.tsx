@@ -91,6 +91,7 @@ let latest: DeleteKeyFlow;
 const Harness = (deps: {
   userId?: string;
   refreshKeysFromServer: () => Promise<void>;
+  onForgotPassphrase?: () => void;
 }) => {
   latest = useDeleteKeyFlow(deps);
   return <>{latest.modals}</>;
@@ -196,6 +197,34 @@ describe("useDeleteKeyFlow", () => {
       );
     });
     expect(SecretStorage.lock).toHaveBeenCalledTimes(1);
+  });
+
+  it("dismisses the passphrase modal and calls onForgotPassphrase when the link fires", () => {
+    const onForgot = vi.fn();
+    render(
+      <Harness
+        refreshKeysFromServer={vi.fn()}
+        onForgotPassphrase={onForgot}
+      />,
+    );
+    act(() => latest.request(sampleKey));
+    act(() => (captured.confirmation!.onConfirm as () => void)());
+    expect(captured.passphrase?.visible).toBe(true);
+
+    act(() =>
+      (captured.passphrase!.onForgotPassphrase as () => void)(),
+    );
+
+    expect(captured.passphrase).toBeNull();
+    expect(onForgot).toHaveBeenCalledTimes(1);
+    expect(deleteEncryptionKey).not.toHaveBeenCalled();
+  });
+
+  it("does not pass onForgotPassphrase to the modal when the dep is missing", () => {
+    render(<Harness refreshKeysFromServer={vi.fn()} />);
+    act(() => latest.request(sampleKey));
+    act(() => (captured.confirmation!.onConfirm as () => void)());
+    expect(captured.passphrase?.onForgotPassphrase).toBeUndefined();
   });
 
   it("uses ORDERING: unlock → api → lock → refresh on success", async () => {

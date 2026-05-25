@@ -867,6 +867,7 @@
   "ForDays": "за дана: {{count}}",
   "ForQuestionsContactPortalAdmin": "За било каква питања, обратите се свом {{productName}} администратору.",
   "ForcePathStyle": "На силу стил путање",
+  "ForgotPassphrase": "Заборавили сте лозинку?",
   "Form": "Образац",
   "FormAdmins": "Администратори форме",
   "FormAdminsDescription": "Корисници који имају пун приступ за управљање овим обрасцем и његовим подешавањима.",

@@ -867,6 +867,7 @@
   "ForDays": "օրերի համար՝ {{count}}",
   "ForQuestionsContactPortalAdmin": "Հարցերի համար, դիմեք ձեր {{productName}} ի ադմինիստրատորին",
   "ForcePathStyle": "Պարտադրել ուղու ոճ",
+  "ForgotPassphrase": "Մոռացե՞լ եք ծածկաբառը:",
   "Form": "Ձև",
   "FormAdmins": "Ձևերի ադմինիստրատորներ",
   "FormAdminsDescription": "Օգտվողները, ովքեր ունեն լիարժեք մուտք՝ կառավարելու այս ձևաչափը և դրա կարգավորումները։",

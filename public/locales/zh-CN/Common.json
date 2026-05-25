@@ -867,6 +867,7 @@
   "ForDays": "计费周期：{{count}}天",
   "ForQuestionsContactPortalAdmin": "如有任何疑问，请联系您的{{productName}}管理员。",
   "ForcePathStyle": "强制路径风格",
+  "ForgotPassphrase": "忘记密码短语？",
   "Form": "表单",
   "FormAdmins": "表单管理员",
   "FormAdminsDescription": "拥有完全权限，可管理此表单及其设置的用户。",

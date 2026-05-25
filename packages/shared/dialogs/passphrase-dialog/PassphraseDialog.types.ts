@@ -44,6 +44,7 @@ export type PassphraseDialogProps = {
   description?: string;
   minLength?: number;
   requireStrong?: boolean;
+  onForgotPassphrase?: () => void;
 };
 
 export type PassphraseFormState = {

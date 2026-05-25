@@ -859,6 +859,7 @@
   "ForDays": "për ditë: {{count}}",
   "ForQuestionsContactPortalAdmin": "Për çdo pyetje, ju lutem kontaktoni administratorin tuaj të {{productName}}.",
   "ForcePathStyle": "Detyrimi i stilit të rrugës",
+  "ForgotPassphrase": "Harruat frazëkalimin?",
   "Form": "Formular",
   "FormAdmins": "Adminëtorë të formularëve",
   "FormAdminsDescription": "Përdoruesit që kanë akses të plotë për të menaxhuar këtë formular dhe cilësimet e tij.",

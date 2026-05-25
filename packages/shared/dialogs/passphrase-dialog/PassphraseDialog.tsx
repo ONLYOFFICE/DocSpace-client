@@ -47,6 +47,8 @@ import {
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
 import { PasswordInput } from "@docspace/ui-kit/components/password-input";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
@@ -110,6 +112,7 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
   isLoading = false,
   minLength = DEFAULT_MIN_LENGTH,
   requireStrong = true,
+  onForgotPassphrase,
 }) => {
   const { t, ready } = useTranslation(["Common"]);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -261,15 +264,15 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
         <div className={styles.container} onKeyDown={handleKeyDown}>
           <Text className={styles.description}>{dialogDescription}</Text>
 
-          {errorMessage && (
-            <div className={styles.errorBox}>
-              <Text fontSize="13px" fontWeight={600} color="var(--color-error)">
-                {errorMessage}
-              </Text>
-            </div>
-          )}
-
-          <div className={styles.inputWrapper}>
+          <FieldContainer
+            isVertical
+            labelVisible={false}
+            removeMargin
+            hasError={!!errorMessage}
+            errorMessage={errorMessage ?? ""}
+            errorMessageWidth="100%"
+            className={styles.inputWrapper}
+          >
             <PasswordInput
               id="passphrase"
               inputName="passphrase"
@@ -284,7 +287,22 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
               autoComplete="new-password"
               tabIndex={1}
             />
-          </div>
+          </FieldContainer>
+
+          {!isNewPassphrase && onForgotPassphrase && externalError ? (
+            <div className={styles.forgotRow}>
+              <Link
+                type={LinkType.action}
+                fontWeight="600"
+                fontSize="12px"
+                isHovered
+                onClick={onForgotPassphrase}
+                dataTestId="forgot_passphrase_link"
+              >
+                {t("Common:ForgotPassphrase")}
+              </Link>
+            </div>
+          ) : null}
 
           {isNewPassphrase && strengthResult && (
             <div className={styles.strengthContainer}>
@@ -318,7 +336,23 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
           )}
 
           {isNewPassphrase && (
-            <div className={styles.inputWrapper}>
+            <FieldContainer
+              isVertical
+              labelVisible={false}
+              removeMargin
+              hasError={
+                !!state.confirmPassphrase &&
+                state.passphrase !== state.confirmPassphrase
+              }
+              errorMessage={
+                !!state.confirmPassphrase &&
+                state.passphrase !== state.confirmPassphrase
+                  ? t("Common:PassphraseMismatch")
+                  : ""
+              }
+              errorMessageWidth="100%"
+              className={styles.inputWrapper}
+            >
               <PasswordInput
                 id="confirmPassphrase"
                 inputName="confirmPassphrase"
@@ -336,7 +370,7 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
                 autoComplete="new-password"
                 tabIndex={2}
               />
-            </div>
+            </FieldContainer>
           )}
         </div>
       </ModalDialog.Body>

@@ -859,6 +859,7 @@
   "ForDays": "για ημέρες: {{count}}",
   "ForQuestionsContactPortalAdmin": "Για οποιαδήποτε απορία, επικοινωνήστε με τον διαχειριστή σας {{productName}}.",
   "ForcePathStyle": "Πίεση στυλ διαδρομής",
+  "ForgotPassphrase": "Ξεχάσατε την κωδική φράση;",
   "Form": "Φόρμα",
   "FormAdmins": "Διαχειριστές Φόρμας",
   "FormAdminsDescription": "Χρήστες που έχουν πλήρη πρόσβαση για να διαχειριστούν αυτή τη φόρμα και τις ρυθμίσεις της.",

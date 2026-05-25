@@ -867,6 +867,7 @@
   "ForDays": "利用期間：{{count}}",
   "ForQuestionsContactPortalAdmin": "ご質問がある場合は、{{productName}}管理者にお問い合わせください。",
   "ForcePathStyle": "強制パススタイル",
+  "ForgotPassphrase": "パスフレーズを忘れた場合",
   "Form": "フォーム",
   "FormAdmins": "フォーム管理者",
   "FormAdminsDescription": "このフォームおよびその設定を管理するための完全なアクセス権を持つユーザー。",

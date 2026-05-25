@@ -96,6 +96,8 @@ type CreateRoomEventProps = {
   isDefaultRoomsQuotaSet: CurrentQuotasStore["isDefaultRoomsQuotaSet"];
 
   encryptionKeys: UserStore["encryptionKeys"];
+  setUserEncryptionKeys: UserStore["setUserEncryptionKeys"];
+  userId: string | undefined;
 };
 
 const CreateRoomEvent = ({
@@ -130,6 +132,8 @@ const CreateRoomEvent = ({
   isDefaultRoomsQuotaSet,
   item,
   encryptionKeys,
+  setUserEncryptionKeys,
+  userId,
 }: CreateRoomEventProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
   const [fetchedTags, setFetchedTags] = useState<string[]>([]);
@@ -223,6 +227,8 @@ const CreateRoomEvent = ({
       getThirdPartyIcon={getThirdPartyIcon}
       isDefaultRoomsQuotaSet={isDefaultRoomsQuotaSet}
       encryptionKeys={encryptionKeys}
+      setUserEncryptionKeys={setUserEncryptionKeys}
+      userId={userId}
       {...roomParams}
     />
   );
@@ -272,7 +278,8 @@ export default inject(
 
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
-    const { encryptionKeys } = userStore;
+    const { encryptionKeys, setUserEncryptionKeys, user } = userStore;
+    const userId = user?.id ? String(user.id) : undefined;
 
     const selectionItems = selections;
 
@@ -301,6 +308,8 @@ export default inject(
       getThirdPartyIcon,
       isDefaultRoomsQuotaSet,
       encryptionKeys,
+      setUserEncryptionKeys,
+      userId,
     };
   },
 )(observer(CreateRoomEvent));

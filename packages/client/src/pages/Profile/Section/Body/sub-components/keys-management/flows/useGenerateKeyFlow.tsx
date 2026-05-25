@@ -59,6 +59,8 @@ type Step = "idle" | "passphrase" | "recovery-display";
 type Deps = {
   userId: string | undefined;
   refreshKeysFromServer: () => Promise<void>;
+  onSuccess?: () => void;
+  onError?: () => void;
 };
 
 export type GenerateKeyFlow = {
@@ -70,6 +72,8 @@ export type GenerateKeyFlow = {
 export function useGenerateKeyFlow({
   userId,
   refreshKeysFromServer,
+  onSuccess,
+  onError,
 }: Deps): GenerateKeyFlow {
   const { t } = useTranslation(["Common"]);
   const { suspendAutoLock } = useEncryption();
@@ -103,6 +107,7 @@ export function useGenerateKeyFlow({
     async (input: string) => {
       if (!userId) {
         toastr.error(t("Common:EncryptionError"));
+        onError?.();
         return;
       }
       setIsPending(true);
@@ -117,16 +122,18 @@ export function useGenerateKeyFlow({
         toastr.error(getEncryptionErrorMessage(t, error));
         console.error("Key/mnemonic generation failed:", error);
         reset();
+        onError?.();
       } finally {
         setIsPending(false);
       }
     },
-    [reset, t, userId],
+    [reset, t, userId, onError],
   );
 
   const onRecoveryConfirm = useCallback(async () => {
     if (!keyPair || !passphrase || !mnemonic || !userId) return;
     setIsPending(true);
+    let success = false;
     try {
       const serialized = await serializeIdentity(keyPair, passphrase, {
         recoveryMnemonic: mnemonic,
@@ -141,14 +148,27 @@ export function useGenerateKeyFlow({
       SecretStorage.cacheUnlocked(userId, keyPair);
       await refreshKeysFromServer();
       toastr.success(t("Common:EncryptionKeyGenerated"));
+      success = true;
     } catch (error) {
       toastr.error(getEncryptionErrorMessage(t, error));
       console.error("Key generation upload failed:", error);
     } finally {
       setIsPending(false);
       reset();
+      if (success) onSuccess?.();
+      else onError?.();
     }
-  }, [keyPair, passphrase, mnemonic, userId, refreshKeysFromServer, reset, t]);
+  }, [
+    keyPair,
+    passphrase,
+    mnemonic,
+    userId,
+    refreshKeysFromServer,
+    reset,
+    t,
+    onSuccess,
+    onError,
+  ]);
 
   const modals = (
     <>

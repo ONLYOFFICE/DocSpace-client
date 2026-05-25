@@ -49,6 +49,8 @@ type ConfirmationModalProps = {
   message: string;
   onConfirm: () => void;
   onCancel: () => void;
+  confirmLabel?: string;
+  zIndex?: number;
 };
 
 export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
@@ -57,6 +59,8 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   message,
   onConfirm,
   onCancel,
+  confirmLabel,
+  zIndex,
 }) => {
   const { t } = useTranslation(["Common"]);
 
@@ -65,6 +69,7 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
       visible={visible}
       onClose={onCancel}
       displayType={ModalDialogType.modal}
+      zIndex={zIndex}
     >
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -74,7 +79,7 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
         <Button
           primary
           size={ButtonSize.normal}
-          label={t("Common:Confirm")}
+          label={confirmLabel ?? t("Common:Confirm")}
           onClick={onConfirm}
         />
         <Button

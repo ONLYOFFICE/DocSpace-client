@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 
 import {
   getFetchedRoomParams,
@@ -45,10 +45,13 @@ import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import RoomSelector from "@docspace/ui-kit/selectors/Room";
 import { FolderType, RoomsTypePrivate } from "@docspace/shared/enums";
+import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 
 import TagHandler from "../../../helpers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import RoomTypeList from "./sub-components/RoomTypeList";
+import { ConfirmationModal } from "../../../pages/Profile/Section/Body/sub-components/keys-management/modals/ConfirmationModal";
+import { useGenerateKeyFlow } from "../../../pages/Profile/Section/Body/sub-components/keys-management/flows/useGenerateKeyFlow";
 
 const CreateRoomDialog = ({
   t,
@@ -73,12 +76,17 @@ const CreateRoomDialog = ({
   isDefaultRoomsQuotaSet,
   fetchedRoomParams,
   encryptionKeys,
+  userId,
+  setUserEncryptionKeys,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isOauthWindowOpen, setIsOauthWindowOpen] = useState(false);
   const [isWrongTitle, setIsWrongTitle] = useState(false);
   const [templateDialogIsVisible, setTemplateDialogIsVisible] = useState(false);
+  const [keyConfirmVisible, setKeyConfirmVisible] = useState(false);
   const isMountRef = React.useRef(true);
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
 
   const disabledFormRoom = useMemo(() => {
     if (
@@ -117,6 +125,42 @@ const CreateRoomDialog = ({
 
   const tagHandler = new TagHandler(roomParams.tags, setRoomTags, fetchedTags);
 
+  const applyPrivateRoomType = useCallback(() => {
+    const additionalParams = getRoomCreationAdditionalParams(RoomsTypePrivate);
+
+    setSelectedRoomType(RoomsTypePrivate);
+    setRoomParams((prev) => ({
+      ...prev,
+      type: RoomsTypePrivate,
+      storageLocation: {
+        isThirdparty: false,
+      },
+      ...additionalParams,
+    }));
+  }, [setSelectedRoomType]);
+
+  const refreshKeysFromServer = useCallback(async () => {
+    try {
+      const fresh = await getEncryptionKeys();
+      setUserEncryptionKeys?.(fresh ?? []);
+    } catch (error) {
+      console.error("Failed to refresh keys:", error);
+    }
+  }, [setUserEncryptionKeys]);
+
+  const generateKey = useGenerateKeyFlow({
+    userId,
+    refreshKeysFromServer,
+    onSuccess: () => {
+      if (!isMountRef.current) return;
+      applyPrivateRoomType();
+    },
+    onError: () => {
+      // Key creation failed — abort the room creation too.
+      onCloseRef.current?.();
+    },
+  });
+
   const setRoomType = (newRoomType) => {
     if (newRoomType === RoomsTypePrivate) {
       if (!globalThis.crypto?.subtle) {
@@ -124,7 +168,7 @@ const CreateRoomDialog = ({
         return;
       }
       if (!encryptionKeys || encryptionKeys.length === 0) {
-        toastr.error(t("Common:NoEncryptionKey"));
+        setKeyConfirmVisible(true);
         return;
       }
     }
@@ -140,6 +184,15 @@ const CreateRoomDialog = ({
       },
       ...additionalParams,
     }));
+  };
+
+  const onConfirmGenerateKey = () => {
+    setKeyConfirmVisible(false);
+    generateKey.request();
+  };
+
+  const onCancelGenerateKey = () => {
+    setKeyConfirmVisible(false);
   };
 
   const isRoomTitleChanged = roomParams?.title?.trim() === "";
@@ -248,106 +301,120 @@ const CreateRoomDialog = ({
     : t("Common:CreateRoom");
 
   return (
-    <ModalDialog
-      displayType="aside"
-      withBodyScroll
-      visible={visible}
-      onClose={onCloseAndDisconnectThirdparty}
-      isScrollLocked={isScrollLocked}
-      hideContent={isOauthWindowOpen}
-      isTemplate={isTemplate}
-      isBackButton={roomParams.type}
-      onBackClick={roomParams.type ? goBack : null}
-      onSubmit={handleSubmit}
-      withForm
-      containerVisible={isTemplate ? templateDialogIsVisible : false}
-    >
-      {isTemplate ? (
-        <ModalDialog.Container>
-          <RoomSelector
-            className="template-body_selector"
-            onSubmit={onSubmitRoom}
-            searchArea="Templates"
-            isMultiSelect={false}
-            withHeader
-            headerProps={{
-              onBackClick: onCloseCreateFromTemplateDialog,
-              onCloseClick: onCloseCreateFromTemplateDialog,
-              headerLabel: t("Common:FromTemplate"),
-              withoutBackButton: false,
-              withoutBorder: false,
-            }}
-            withSearch
-            emptyScreenHeader={t("Common:EmptyTemplatesRoomsHeader")}
-            emptyScreenDescription={t("Common:EmptyTemplatesRoomsDescription")}
-          />
-        </ModalDialog.Container>
-      ) : null}
-      <ModalDialog.Header>{dialogHeader}</ModalDialog.Header>
+    <>
+      <ConfirmationModal
+        visible={keyConfirmVisible}
+        title={t("Common:PrivateRoomKeyRequiredTitle")}
+        message={t("Common:PrivateRoomKeyRequiredDescription")}
+        confirmLabel={t("Common:GenerateNewKey")}
+        onConfirm={onConfirmGenerateKey}
+        onCancel={onCancelGenerateKey}
+        zIndex={410}
+      />
+      {generateKey.modals}
+      <ModalDialog
+        displayType="aside"
+        withBodyScroll
+        visible={visible}
+        onClose={onCloseAndDisconnectThirdparty}
+        isScrollLocked={isScrollLocked}
+        hideContent={isOauthWindowOpen}
+        isTemplate={isTemplate}
+        isBackButton={roomParams.type}
+        onBackClick={roomParams.type ? goBack : null}
+        onSubmit={handleSubmit}
+        withForm
+        containerVisible={isTemplate ? templateDialogIsVisible : false}
+      >
+        {isTemplate ? (
+          <ModalDialog.Container>
+            <RoomSelector
+              className="template-body_selector"
+              onSubmit={onSubmitRoom}
+              searchArea="Templates"
+              isMultiSelect={false}
+              withHeader
+              headerProps={{
+                onBackClick: onCloseCreateFromTemplateDialog,
+                onCloseClick: onCloseCreateFromTemplateDialog,
+                headerLabel: t("Common:FromTemplate"),
+                withoutBackButton: false,
+                withoutBorder: false,
+              }}
+              withSearch
+              emptyScreenHeader={t("Common:EmptyTemplatesRoomsHeader")}
+              emptyScreenDescription={t(
+                "Common:EmptyTemplatesRoomsDescription",
+              )}
+            />
+          </ModalDialog.Container>
+        ) : null}
+        <ModalDialog.Header>{dialogHeader}</ModalDialog.Header>
 
-      <ModalDialog.Body>
-        {!roomParams.type ? (
-          <RoomTypeList
-            t={t}
-            setRoomType={setRoomType}
-            disabledFormRoom={disabledFormRoom}
-            setTemplateDialogIsVisible={setTemplateDialogIsVisible}
-          />
-        ) : (
-          <SetRoomParams
-            t={t}
-            disabledChangeRoomType={Boolean(startRoomType)}
-            isTemplateSelected={isTemplateSelected}
-            setIsOauthWindowOpen={setIsOauthWindowOpen}
-            tagHandler={tagHandler}
-            roomParams={roomParams}
-            setRoomParams={setRoomParams}
-            setRoomType={setRoomType}
-            setIsScrollLocked={setIsScrollLocked}
-            isDisabled={isLoading}
-            isValidTitle={isValidTitle}
-            isWrongTitle={isWrongTitle}
-            setIsValidTitle={setIsValidTitle}
-            setIsWrongTitle={setIsWrongTitle}
-            enableThirdParty={enableThirdParty}
-            onKeyUp={onKeyUpHandler}
-            templateItem={templateItem}
-            fromTemplate={
-              selectionItems.length
-                ? selectionItems[0].isTemplate
-                : isTemplateSelected
-            }
-          />
-        )}
-      </ModalDialog.Body>
+        <ModalDialog.Body>
+          {!roomParams.type ? (
+            <RoomTypeList
+              t={t}
+              setRoomType={setRoomType}
+              disabledFormRoom={disabledFormRoom}
+              setTemplateDialogIsVisible={setTemplateDialogIsVisible}
+            />
+          ) : (
+            <SetRoomParams
+              t={t}
+              disabledChangeRoomType={Boolean(startRoomType)}
+              isTemplateSelected={isTemplateSelected}
+              setIsOauthWindowOpen={setIsOauthWindowOpen}
+              tagHandler={tagHandler}
+              roomParams={roomParams}
+              setRoomParams={setRoomParams}
+              setRoomType={setRoomType}
+              setIsScrollLocked={setIsScrollLocked}
+              isDisabled={isLoading}
+              isValidTitle={isValidTitle}
+              isWrongTitle={isWrongTitle}
+              setIsValidTitle={setIsValidTitle}
+              setIsWrongTitle={setIsWrongTitle}
+              enableThirdParty={enableThirdParty}
+              onKeyUp={onKeyUpHandler}
+              templateItem={templateItem}
+              fromTemplate={
+                selectionItems.length
+                  ? selectionItems[0].isTemplate
+                  : isTemplateSelected
+              }
+            />
+          )}
+        </ModalDialog.Body>
 
-      {!!roomParams.type && !isTemplate ? (
-        <ModalDialog.Footer>
-          <Button
-            id="shared_create-room-modal_submit"
-            tabIndex={5}
-            label={t("Common:Create")}
-            size="normal"
-            primary
-            scale
-            isDisabled={isRoomTitleChanged || isWrongTitle}
-            isLoading={isLoading}
-            type="submit"
-            testId="create_room_dialog_save"
-          />
-          <Button
-            id="shared_create-room-modal_cancel"
-            tabIndex={5}
-            label={t("Common:CancelButton")}
-            size="normal"
-            scale
-            isDisabled={isLoading}
-            onClick={onCloseAndDisconnectThirdparty}
-            testId="create_room_dialog_cancel"
-          />
-        </ModalDialog.Footer>
-      ) : null}
-    </ModalDialog>
+        {!!roomParams.type && !isTemplate ? (
+          <ModalDialog.Footer>
+            <Button
+              id="shared_create-room-modal_submit"
+              tabIndex={5}
+              label={t("Common:Create")}
+              size="normal"
+              primary
+              scale
+              isDisabled={isRoomTitleChanged || isWrongTitle}
+              isLoading={isLoading}
+              type="submit"
+              testId="create_room_dialog_save"
+            />
+            <Button
+              id="shared_create-room-modal_cancel"
+              tabIndex={5}
+              label={t("Common:CancelButton")}
+              size="normal"
+              scale
+              isDisabled={isLoading}
+              onClick={onCloseAndDisconnectThirdparty}
+              testId="create_room_dialog_cancel"
+            />
+          </ModalDialog.Footer>
+        ) : null}
+      </ModalDialog>
+    </>
   );
 };
 

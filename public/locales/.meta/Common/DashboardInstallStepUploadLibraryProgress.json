@@ -1,0 +1,29 @@
+{
+  "key_path": "DashboardInstallStepUploadLibraryProgress",
+  "content": "{{percent}}% uploaded",
+  "content_en_sha1_hash": "ff973cb069eeb44173e1380fd9c708d18301a0e7",
+  "created_at": "2026-05-19T19:03:14.022Z",
+  "updated_at": "2026-05-19T19:22:41.217Z",
+  "comment": {
+    "text": "Progress text in the module installation dialog's library upload step, displaying the completion percentage via the {{percent}} variable.",
+    "is_auto": true,
+    "updated_at": "2026-05-19T19:22:41.217Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/index.tsx",
+      "line_number": 169,
+      "context": "if (id === \"upload-library\" && libraryProgress?.total) {\n const percent = Math.min(\n 100,\n Math.floor((libraryProgress.uploaded / libraryProgress.total) * 100),\n );\n return t(\"Common:DashboardInstallStepUploadLibraryProgress\", { percent });\n }\n return stepDescriptions[id];\n };\n \n const confirmBullets: {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

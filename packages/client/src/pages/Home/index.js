@@ -34,7 +34,7 @@
  */
 
 import React, { useCallback } from "react";
-import { useLocation, Outlet } from "react-router";
+import { useLocation, Outlet, Navigate } from "react-router";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -548,6 +548,27 @@ const PureHome = (props) => {
 
 const Home = withTranslation(["UploadPanel", "Files", "People"])(PureHome);
 
+const PASS_THROUGH_PREFIXES = [
+  "/accounts",
+  "/contacts",
+  "/developer-tools",
+  "/portal-settings",
+  "/profile",
+];
+
+const HomeWithGuard = (props) => {
+  const isLegacyMode = localStorage.getItem("useDocSpace") === "old";
+  const { pathname } = useLocation();
+
+  if (
+    !isLegacyMode &&
+    !PASS_THROUGH_PREFIXES.some((p) => pathname.startsWith(p))
+  )
+    return <Navigate to="/dashboard" replace />;
+
+  return <Home {...props} />;
+};
+
 export const Component = inject(
   ({
     authStore,
@@ -878,5 +899,5 @@ export const Component = inject(
       getPluginIconUrl,
     };
   },
-)(observer(Home));
+)(observer(HomeWithGuard));
 

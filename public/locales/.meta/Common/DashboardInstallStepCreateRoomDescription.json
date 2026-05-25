@@ -1,0 +1,29 @@
+{
+  "key_path": "DashboardInstallStepCreateRoomDescription",
+  "content": "Preparing the workspace for your forms",
+  "content_en_sha1_hash": "cd5f064555bf5ccc1fb4658d4858be8158478f92",
+  "created_at": "2026-05-19T19:03:13.964Z",
+  "updated_at": "2026-05-19T19:24:25.091Z",
+  "comment": {
+    "text": "Description text for the \"create-room\" step in the module installation dialog, indicating the current progress of workspace preparation.",
+    "is_auto": true,
+    "updated_at": "2026-05-19T19:24:25.091Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/index.tsx",
+      "line_number": 155,
+      "context": "\"create-blank-form\": t(\"Common:DashboardInstallStepCreateBlankForm\"),\n \"upload-library\": t(\"Common:DashboardInstallStepUploadLibrary\"),\n };\n \n const stepDescriptions: Record<AiFormsInstallStepId, string> = {\n \"create-room\": t(\"Common:DashboardInstallStepCreateRoomDescription\"),\n \"invite-everyone\": t(\"Common:DashboardInstallStepInviteEveryoneDescription\"),\n \"create-blank-form\": t(\n \"Common:DashboardInstallStepCreateBlankFormDescription\",\n ),\n \"upload-library\": t(\"Common:DashboardInstallStepUploadLibraryDescription\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

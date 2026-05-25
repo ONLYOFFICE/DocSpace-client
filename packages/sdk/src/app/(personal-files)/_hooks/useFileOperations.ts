@@ -67,11 +67,17 @@ import type {
 export type SelectorMode = "copy" | "move" | "restore";
 
 export type OperationProgress = {
-  icon: "copy" | "move" | "duplicate";
+  icon: "copy" | "move" | "duplicate" | "trash" | "deletePermanently";
   percent: number;
   completed: boolean;
   alert: boolean;
 };
+
+export type TrackOperation = (
+  operationId: string,
+  icon: OperationProgress["icon"],
+  onComplete?: () => void,
+) => Promise<void>;
 
 export type SelectorInitData = {
   items: (TFile | TFolder)[];
@@ -337,6 +343,7 @@ export default function useFileOperations() {
     selectorInitData,
     disabledItems,
     operationProgress,
+    trackOperation,
     requestCopy,
     requestCopyItems,
     requestMove,

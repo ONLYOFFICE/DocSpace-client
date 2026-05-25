@@ -114,9 +114,9 @@ const InfoPanelHeaderGeneral = ({
     if (id === InfoPanelView.infoMembers) {
       name = isTemplate ? t("Common:Accesses") : t("Common:Contacts");
     } else if (id === InfoPanelView.infoHistory) {
-      name = t("InfoPanel:SubmenuHistory");
+      name = t("Common:SubmenuHistory");
     } else if (id === InfoPanelView.infoDetails) {
-      name = t("InfoPanel:SubmenuDetails");
+      name = t("Common:SubmenuDetails");
     } else if (id === InfoPanelView.infoShare) {
       name = t("Common:Share");
     } else {

@@ -3,7 +3,7 @@
   "content": "Welcome to {{productName}}",
   "content_en_sha1_hash": "aca54bc00694fe8488fc161e8a78ca1ec1a29e4c",
   "created_at": "2025-05-19T21:30:44.886Z",
-  "updated_at": "2026-05-15T15:37:40.166Z",
+  "updated_at": "2026-05-19T19:03:33.058Z",
   "comment": {
     "text": "This is a dialog title or header text displayed on an empty root room screen. It welcomes the user to the product, with `{{productName}}` being replaced by the application's brand name.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/empty-view/EmptyView.helpers.tsx",
-      "line_number": 16,
-      "context": "export const getTitle = (t: TTranslation) => {\n return t(\"Common:EmptyScreenFolder\");\n };\n \n export const getRootTitle = (t: TTranslation) => {\n return t(\"Common:EmptyRootRoomHeader\", {\n productName: getBrandName(\"ProductName\"),\n });\n };\n \n export const getIcon = (isBaseTheme: boolean) => {",
+      "line_number": 42,
+      "context": "case FolderType.TRASH:\n return t(\"Common:EmptyScreenFolder\");\n case FolderType.USER:\n return t(\"Common:EmptyScreenFolder\");\n default:\n return t(\"Common:EmptyRootRoomHeader\", {\n productName: getBrandName(\"ProductName\"),\n });\n }\n };",
       "module": "/packages/sdk"
     }
   ],

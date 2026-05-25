@@ -48,6 +48,10 @@ export type ListProps = {
   filesFilter: string;
   portalSettings: TSettings;
   current: TFolder;
+  currentUserId?: string;
 
   shareKey?: string;
+  withoutFavorite?: boolean;
+  infoPanelVisible?: boolean;
 };
+

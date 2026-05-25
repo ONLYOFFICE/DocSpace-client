@@ -49,10 +49,11 @@ export interface TagManagementPopupProps {
   onClose: VoidFunction;
   onSelectTag: (tag: TagClickEvent) => void;
   anchor: React.RefObject<HTMLElement | null>;
-  
+
   onEditTag?: (oldLabel: string, newLabel: string) => Promise<void>;
   onDeleteTag?: (label: string) => Promise<void>;
-  
+  onTagsChanged?: VoidFunction;
+
   roomName: string;
   access: AccessTagManagement;
 }
@@ -94,11 +95,13 @@ export interface TagManagementContentProps {
 
   onDeleteTag?: (label: string) => Promise<void>;
   onEditTag?: (oldLabel: string, newLabel: string) => Promise<void>;
+  onTagsChanged?: VoidFunction;
 }
 
 export interface TagManagementFilterProps {
   roomId: string | number;
   roomName: string;
+  onTagsChanged?: VoidFunction;
 }
 
 export interface TagManagementProps {
@@ -109,7 +112,8 @@ export interface TagManagementProps {
   isActive?: boolean;
   onSelectTag: (tag: TagClickEvent) => void;
   access: AccessTagManagement;
-  roomName: string
+  roomName: string;
+  onTagsChanged?: VoidFunction;
 }
 
 export interface FormValues {

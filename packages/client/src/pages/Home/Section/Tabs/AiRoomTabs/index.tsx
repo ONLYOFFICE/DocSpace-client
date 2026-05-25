@@ -81,7 +81,7 @@ const AiRoomTabs = ({
 }: AiRoomTabsProps) => {
   const navigate = useNavigate();
 
-  const { t } = useTranslation(["AIRoom", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   useEffect(() => {
     return () => {
@@ -209,3 +209,4 @@ export default inject(
     };
   },
 )(observer(AiRoomTabs));
+

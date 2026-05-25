@@ -191,6 +191,7 @@ const NavMenu = (props) => {
     return null;
 
   const isPreparationPortal = location.pathname === "/preparation-portal";
+  const isDashboard = location.pathname === "/dashboard";
 
   return (
     <header
@@ -208,12 +209,13 @@ const NavMenu = (props) => {
       {!hideHeader ? (
         isLoaded && isAuthenticated && !isPublicRoom ? (
           <>
-            {!isPreparationPortal ? (
+            {!isPreparationPortal && !isDashboard ? (
               <HeaderNav hideProfileMenu={hideProfileMenu} />
             ) : null}
             <Header
               customHeader={customHeader}
               isPreparationPortal={isPreparationPortal}
+              isDashboard={isDashboard}
               isNavOpened={isNavOpened}
               onClick={showNav}
               onNavMouseEnter={handleNavMouseEnter}

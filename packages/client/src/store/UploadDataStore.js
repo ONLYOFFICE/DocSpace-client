@@ -536,7 +536,7 @@ class UploadDataStore {
       canceled: true,
       alert: true,
       label: i18n.t("Common:CanceledOperation", {
-        operationName: i18n.t("Files:Uploading"),
+        operationName: i18n.t("Common:Uploading"),
       }),
     });
 
@@ -778,7 +778,7 @@ class UploadDataStore {
       runInAction(() => (historyFile.inConversion = true));
 
       const res = convertFile(fileId, format, itemPassword).catch(() => {
-        const error = t("FailedToConvert");
+        const error = t("Common:FailedToConvert");
 
         runInAction(() => {
           historyFile.error = error;
@@ -911,7 +911,7 @@ class UploadDataStore {
       const numberFiles = this.files.filter((f) => f.needConvert).length;
 
       const res = convertFile(fileId, format, itemPassword).catch(() => {
-        const error = t("FailedToConvert");
+        const error = t("Common:FailedToConvert");
 
         runInAction(() => {
           if (file) {
@@ -955,7 +955,7 @@ class UploadDataStore {
             fileInfo = response?.[0]?.result;
           } catch (err) {
             // console.log("Error in startConversion while loop:", fileId, err);
-            const conversionError = err.message || t("FailedToConvert");
+            const conversionError = err.message || t("Common:FailedToConvert");
 
             runInAction(() => {
               if (file) {
@@ -2862,3 +2862,4 @@ class UploadDataStore {
 }
 
 export default UploadDataStore;
+

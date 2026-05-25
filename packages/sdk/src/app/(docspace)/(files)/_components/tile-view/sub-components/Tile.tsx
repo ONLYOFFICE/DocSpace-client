@@ -62,9 +62,12 @@ import { generateFilesItemValue } from "@/app/(docspace)/(files)/_utils";
 import useContextMenuModel from "@/app/(docspace)/_hooks/useContextMenuModel";
 import useDownloadActions from "@/app/(docspace)/_hooks/useDownloadActions";
 import { ShareContext } from "@/app/(docspace)/_contexts/ShareContext";
+import { InfoContext } from "@/app/(docspace)/_contexts/InfoContext";
 import { DeleteContext } from "@/app/(docspace)/_contexts/DeleteContext";
 import { FileOperationsContext } from "@/app/(docspace)/_contexts/FileOperationsContext";
 import { RenameContext } from "@/app/(docspace)/_contexts/RenameContext";
+import { VersionHistoryContext } from "@/app/(docspace)/_contexts/VersionHistoryContext";
+import { ConvertContext } from "@/app/(docspace)/_contexts/ConvertContext";
 
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import type { TileProps } from "../TileView.types";
@@ -99,27 +102,38 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const storeItem = filesListStore.items.find((i) => i.id === item.id);
   const observableItem = storeItem ?? item;
 
-  const { openFile } = useFilesActions({ t });
+  const { openFile, lockFile } = useFilesActions({ t });
   const { openFolder } = useFolderActions({ t });
   const onShareClick = React.useContext(ShareContext);
+  const onInfoClick = React.useContext(InfoContext);
   const deleteCtx = React.useContext(DeleteContext);
   const fileOpsCtx = React.useContext(FileOperationsContext);
   const renameCtx = React.useContext(RenameContext);
+  const onShowVersionHistory = React.useContext(VersionHistoryContext);
+  const onConvert = React.useContext(ConvertContext);
   const { getContextMenuModel } = useContextMenuModel({
     item: observableItem,
     onShareClick: onShareClick ?? undefined,
+    onInfoClick: onInfoClick ?? undefined,
     onDeleteClick: deleteCtx?.deleteItem,
     onCopyClick: fileOpsCtx?.copyItem,
     onMoveClick: fileOpsCtx?.moveItem,
     onDuplicateClick: fileOpsCtx?.duplicateItem,
     onRestoreClick: fileOpsCtx?.restoreItem,
     onRenameClick: renameCtx?.renameItem,
+    onShowVersionHistoryClick: onShowVersionHistory ?? undefined,
   });
   const { downloadAction } = useDownloadActions();
   const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });
   const { isItemActive } = useActiveItemsStore();
 
   const displayFileExtension = Boolean(filesSettings?.displayFileExtension);
+  const isExtsCustomFilter =
+    "fileExst" in item
+      ? (filesSettings?.extsWebCustomFilterEditing ?? []).includes(
+          item.fileExst,
+        )
+      : false;
   const temporaryIcon = getTemporaryIcon(item, getIcon);
   const isChecked = isCheckedItem(item);
   const inProgress = isItemActive(item);
@@ -156,7 +170,12 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const contextMenuModel = getContextMenuModel(true);
 
   const element = (
-    <RoomIcon logo={item.icon} title={item.title} showDefault={false} />
+    <RoomIcon
+      logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
+      color={"isRoom" in item && item.isRoom ? item.roomIconColor : undefined}
+      title={item.title}
+      showDefault={"isRoom" in item && item.isRoom ? !item.hasRoomImage : false}
+    />
   );
 
   const tileContent = (
@@ -175,6 +194,12 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
     }
   };
 
+  const onClickLock = () => {
+    if (!observableItem.isFolder) {
+      lockFile(observableItem as TFileItem);
+    }
+  };
+
   const badgesComponent = (
     <Badges
       t={t}
@@ -182,12 +207,24 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
       item={observableItem}
       viewAs="tile"
       showNew={false}
+      isExtsCustomFilter={isExtsCustomFilter}
       onFilesClick={() => {
         if (!observableItem.isFolder) {
           openFile(observableItem);
         }
       }}
       onClickFavorite={onClickFavorite}
+      onClickLock={onClickLock}
+      setConvertDialogVisible={
+        !observableItem.isFolder && onConvert
+          ? () => onConvert(observableItem as TFileItem)
+          : undefined
+      }
+      onShowVersionHistory={
+        !observableItem.isFolder && onShowVersionHistory
+          ? () => onShowVersionHistory(observableItem as TFileItem)
+          : undefined
+      }
     />
   );
 
@@ -202,6 +239,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
       viewAs="tile"
       onClickDownload={() => downloadAction(observableItem)}
       onClickFavorite={onClickFavorite}
+      onClickLock={onClickLock}
       onClickShare={onShareClick ? handleShareClick : undefined}
       openShareTab={onShareClick ? handleShareClick : undefined}
     />
@@ -210,7 +248,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const commonTileProps = {
     item,
     contextOptions: contextMenuModel,
-    isHighlight: false,
+    isHighlight: filesListStore.highlightFileId === item.id,
     checked: isChecked,
     isActive: false,
     inProgress,
@@ -255,3 +293,4 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
 };
 
 export default observer(Tile);
+

@@ -52,15 +52,20 @@ import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
+import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
 
 import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
 import useFavoritesActions from "@/app/(docspace)/_hooks/useFavoritesActions";
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import useContextMenuModel from "../../../../_hooks/useContextMenuModel";
 import { ShareContext } from "../../../../_contexts/ShareContext";
+import { InfoContext } from "../../../../_contexts/InfoContext";
 import { DeleteContext } from "../../../../_contexts/DeleteContext";
 import { FileOperationsContext } from "../../../../_contexts/FileOperationsContext";
 import { RenameContext } from "../../../../_contexts/RenameContext";
+import { VersionHistoryContext } from "../../../../_contexts/VersionHistoryContext";
+import { ConvertContext } from "../../../../_contexts/ConvertContext";
+import type { TFileItem } from "../../../../_hooks/useItemList";
 import { generateFilesItemValue } from "../../../_utils";
 
 import { RowContent } from "./RowContent";
@@ -79,7 +84,12 @@ const Row = observer(
   }: RowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
+    const { filesSettings } = useFilesSettingsStore();
     const { isItemActive } = useActiveItemsStore();
+    const isExtsCustomFilter =
+      "fileExst" in item
+        ? (filesSettings?.extsWebCustomFilterEditing ?? []).includes(item.fileExst)
+        : false;
 
     // Use the observable item from MobX store so isFavorite changes are reactive
     const storeItem = filesListStore.items.find((i) => i.id === item.id);
@@ -87,26 +97,36 @@ const Row = observer(
 
     const { t } = useTranslation(["Common"]);
     const { isBase } = useTheme();
-    const { openFile } = useFilesActions({ t });
+    const { openFile, lockFile } = useFilesActions({ t });
     const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });
     const onShareClick = React.useContext(ShareContext);
+    const onInfoClick = React.useContext(InfoContext);
     const deleteCtx = React.useContext(DeleteContext);
     const fileOpsCtx = React.useContext(FileOperationsContext);
     const renameCtx = React.useContext(RenameContext);
+    const onShowVersionHistory = React.useContext(VersionHistoryContext);
+    const onConvert = React.useContext(ConvertContext);
 
     const { getContextMenuModel } = useContextMenuModel({
       item: observableItem,
       onShareClick: onShareClick ?? undefined,
+      onInfoClick: onInfoClick ?? undefined,
       onDeleteClick: deleteCtx?.deleteItem,
       onCopyClick: fileOpsCtx?.copyItem,
       onMoveClick: fileOpsCtx?.moveItem,
       onDuplicateClick: fileOpsCtx?.duplicateItem,
       onRestoreClick: fileOpsCtx?.restoreItem,
       onRenameClick: renameCtx?.renameItem,
+      onShowVersionHistoryClick: onShowVersionHistory ?? undefined,
     });
 
     const element = (
-      <RoomIcon logo={item.icon} title={item.title} showDefault={false} />
+      <RoomIcon
+        logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
+        color={"isRoom" in item && item.isRoom ? item.roomIconColor : undefined}
+        title={item.title}
+        showDefault={"isRoom" in item && item.isRoom ? !item.hasRoomImage : false}
+      />
     );
 
     const onClickFavorite = () => {
@@ -114,6 +134,12 @@ const Row = observer(
         removeFromFavorites(observableItem);
       } else {
         markAsFavorite(observableItem);
+      }
+    };
+
+    const onClickLock = () => {
+      if (!observableItem.isFolder) {
+        lockFile(observableItem as TFileItem);
       }
     };
 
@@ -125,12 +151,24 @@ const Row = observer(
         item={observableItem}
         viewAs="row"
         showNew={false}
+        isExtsCustomFilter={isExtsCustomFilter}
         onFilesClick={() => {
           if (!observableItem.isFolder) {
             openFile(observableItem);
           }
         }}
         onClickFavorite={onClickFavorite}
+        onClickLock={onClickLock}
+        setConvertDialogVisible={
+          !observableItem.isFolder && onConvert
+            ? () => onConvert(observableItem as TFileItem)
+            : undefined
+        }
+        onShowVersionHistory={
+          !observableItem.isFolder && onShowVersionHistory
+            ? () => onShowVersionHistory(observableItem as TFileItem)
+            : undefined
+        }
       />
     );
 
@@ -144,6 +182,7 @@ const Row = observer(
         item={observableItem}
         viewAs="row"
         onClickFavorite={onClickFavorite}
+        onClickLock={onClickLock}
         onClickShare={onShareClick ? handleShareClick : undefined}
         openShareTab={onShareClick ? handleShareClick : undefined}
       />
@@ -174,7 +213,7 @@ const Row = observer(
         isIndexEditingMode={false}
         isIndexUpdated={false}
         showHotkeyBorder={false}
-        isHighlight={false}
+        isHighlight={filesListStore.highlightFileId === item.id}
         className={classNames(styles.rowWrapper, "row-wrapper")}
       >
         <DragAndDrop

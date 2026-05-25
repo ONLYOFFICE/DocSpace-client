@@ -3,7 +3,7 @@
   "content": "Type",
   "content_en_sha1_hash": "3deb7456519697ecf4eefc455516c969a3681bae",
   "created_at": "2025-05-19T21:30:49.370Z",
-  "updated_at": "2026-05-15T15:37:40.215Z",
+  "updated_at": "2026-05-15T16:22:24.067Z",
   "comment": {
     "text": "This is a table column header or a filter option label. It refers to the kind or category of an item, such as a transaction or a file.",
     "is_auto": true,
@@ -171,6 +171,12 @@
       "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/table-view/index.tsx",
       "line_number": 147,
       "context": "onClick: onColumnSort,\n onChange: onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n sortBy: SortByFieldName.Type,\n enable: columnState.Type !== false,\n resizable: true,\n onClick: onColumnSort,\n onChange: onColumnChange,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/info-panel/views/Details/Details.utils.tsx",
+      "line_number": 120,
+      "context": "private getPropertyTitle = (propertyId: string) => {\n switch (propertyId) {\n case \"Owner\":\n return this.t(\"Common:Owner\");\n case \"Type\":\n return this.t(\"Common:Type\");\n case \"File extension\":\n return this.t(\"Common:FileExtension\");\n case \"Content\":\n return this.t(\"Common:Content\");\n case \"Size\":",
       "module": "/packages/sdk"
     }
   ],

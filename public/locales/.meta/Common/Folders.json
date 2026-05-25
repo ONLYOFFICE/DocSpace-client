@@ -3,7 +3,7 @@
   "content": "Folders",
   "content_en_sha1_hash": "19adc47be34bed86af37b8e8dc882af424402561",
   "created_at": "2025-05-19T21:30:45.434Z",
-  "updated_at": "2026-05-15T15:37:40.216Z",
+  "updated_at": "2026-05-15T16:22:24.069Z",
   "comment": {
     "text": "This is a label for a count of folders or a filter option. It appears in the file list view to indicate the number of folders or as a filter to show only folders.",
     "is_auto": true,
@@ -69,6 +69,12 @@
       "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/tile-view/index.tsx",
       "line_number": 71,
       "context": "filesLength={filesLength}\n >\n {children}\n </InfiniteGrid>\n )}\n headingFolders={t(\"Common:Folders\")}\n headingFiles={t(\"Common:Files\")}\n >\n {items.map((item, index) => (\n <Tile\n key={`${item?.isFolder ? \"folder\" : \"file\"}_${item.id}`}",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/info-panel/views/Details/Details.utils.tsx",
+      "line_number": 186,
+      "context": "private getItemContent = () => {\n if (!(\"foldersCount\" in this.item) || !(\"filesCount\" in this.item))\n return null;\n return text(\n `${this.t(\"Common:Folders\")}: ${this.item.foldersCount} | ${this.t(\n \"Common:Files\",\n )}: ${this.item.filesCount}`,\n );\n };",
       "module": "/packages/sdk"
     },
     {

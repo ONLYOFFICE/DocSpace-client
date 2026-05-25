@@ -1,0 +1,29 @@
+{
+  "key_path": "DashboardInstallStepInviteEveryoneDescription",
+  "content": "Everyone in your portal will be able to fill out forms",
+  "content_en_sha1_hash": "1b0c4560276732e736c9a0459492e8c05d8a0966",
+  "created_at": "2026-05-19T19:03:13.987Z",
+  "updated_at": "2026-05-19T19:23:45.130Z",
+  "comment": {
+    "text": "Description text for the \"invite-everyone\" step in the module installation dialog, explaining the resulting access level for portal users.",
+    "is_auto": true,
+    "updated_at": "2026-05-19T19:23:45.130Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/index.tsx",
+      "line_number": 156,
+      "context": "\"upload-library\": t(\"Common:DashboardInstallStepUploadLibrary\"),\n };\n \n const stepDescriptions: Record<AiFormsInstallStepId, string> = {\n \"create-room\": t(\"Common:DashboardInstallStepCreateRoomDescription\"),\n \"invite-everyone\": t(\"Common:DashboardInstallStepInviteEveryoneDescription\"),\n \"create-blank-form\": t(\n \"Common:DashboardInstallStepCreateBlankFormDescription\",\n ),\n \"upload-library\": t(\"Common:DashboardInstallStepUploadLibraryDescription\"),\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

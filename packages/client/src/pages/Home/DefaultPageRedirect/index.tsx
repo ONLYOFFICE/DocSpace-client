@@ -46,11 +46,19 @@ type Props = {
 };
 
 const DefaultPageRedirectComponent = ({ defaultFolderType }: Props) => {
-  const defaultUrl = getUrlByDefaultFolderType(
-    defaultFolderType || FolderType.Rooms,
-  );
+  const val = localStorage.getItem("useDocSpace");
 
-  return <Navigate to={defaultUrl} replace />;
+  if (val === "old") {
+    const defaultUrl = getUrlByDefaultFolderType(
+      defaultFolderType || FolderType.Rooms,
+    );
+    return <Navigate to={defaultUrl} replace />;
+  }
+
+  // First visit (null) — write "new" via the URL handler so the value is stored explicitly
+  if (val === null) return <Navigate to="/dashboard?design=new" replace />;
+
+  return <Navigate to="/dashboard" replace />;
 };
 
 export const DefaultPageRedirect = inject(({ settingsStore }: TStore) => ({

@@ -96,6 +96,7 @@ import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 
 import OAuthStore from "./OAuthStore";
 import AiRoomStore from "./AiRoomStore";
+import AppsStore from "./AppsStore";
 
 import BrandingStore from "./portal-settings/BrandingStore";
 import AISettingsStore from "./portal-settings/AISettingsStore";
@@ -106,6 +107,8 @@ import DefaultTemplatesStore from "./portal-settings/DefaultTemplatesStore";
 import TelegramStore from "./TelegramStore";
 
 const aiRoomStore = new AiRoomStore();
+
+const appsStore = new AppsStore();
 
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 
@@ -465,6 +468,7 @@ const store = {
   guidanceStore,
 
   aiRoomStore,
+  appsStore,
   aiSettingsStore,
   telegramStore,
   createEditAgentStore,

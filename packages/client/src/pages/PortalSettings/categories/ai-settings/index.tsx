@@ -105,7 +105,7 @@ const AiSettings = ({
   initDefaultProvider,
   showPortalSettingsLoader,
 }: TAiSettingsProps) => {
-  const { t, ready } = useTranslation(["Common", "AISettings", "AIRoom"]);
+  const { t, ready } = useTranslation(["Common"]);
 
   const { initAIProviders, initMCPServers, initWebSearch, initKnowledge } =
     useAiSettings({
@@ -141,7 +141,7 @@ const AiSettings = ({
         : currentTabId === "search"
           ? t("Common:WebSearchAI")
           : currentTabId === "knowledge"
-            ? t("AIRoom:Knowledge")
+            ? t("Common:Knowledge")
             : t("Common:MCPSettingTitle");
     setDocumentTitle(title);
   }, [t, currentTabId]);
@@ -172,7 +172,7 @@ const AiSettings = ({
         },
         {
           id: "knowledge",
-          name: t("AIRoom:Knowledge"),
+          name: t("Common:Knowledge"),
           content: <Knowledge />,
           onClick: initKnowledge,
         },

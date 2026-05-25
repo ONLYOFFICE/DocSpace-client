@@ -55,6 +55,7 @@ import * as debuginfo from "./debuginfo";
 import * as apiKeys from "./api-keys";
 import * as backup from "./backup";
 import * as ai from "./ai";
+import * as apps from "./apps";
 import * as privacy from "./privacy";
 
 export default {
@@ -78,5 +79,6 @@ export default {
   debuginfo,
   apiKeys,
   ai,
+  apps,
   privacy,
 };

@@ -1,0 +1,29 @@
+{
+  "key_path": "AppsDescription",
+  "content": "Manage which apps are available in your {{productName}}. Enabled apps will appear in the main menu for users who have access to them.",
+  "content_en_sha1_hash": "fe53fa8ce81ea24d8d36e27c85b6fbb3a8396926",
+  "created_at": "2026-05-15T16:22:18.496Z",
+  "updated_at": "2026-05-19T19:03:33.111Z",
+  "comment": {
+    "text": "Description text in the Apps settings section explaining how to manage available applications. It includes the {{productName}} variable, which represents the product's brand name.",
+    "is_auto": true,
+    "updated_at": "2026-05-15T16:22:55.424Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/apps/index.tsx",
+      "line_number": 103,
+      "context": "};\n \n return (\n <div className={styles.body}>\n <Text as=\"p\" className={styles.description}>\n {t(\"Settings:AppsDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n \n <div className={styles.list}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1862,10 +1862,10 @@ class FilesActionStore {
     let notificationsEnabled = t("RoomNotificationsEnabled");
 
     if (isAIAgent) {
-      notificationsDisabled = t("AIAgentNotificationsDisabled", {
+      notificationsDisabled = t("Common:AIAgentNotificationsDisabled", {
         aiAgent: t("Common:AIAgent"),
       });
-      notificationsEnabled = t("AIAgentNotificationsEnabled", {
+      notificationsEnabled = t("Common:AIAgentNotificationsEnabled", {
         aiAgent: t("Common:AIAgent"),
       });
     }
@@ -3607,10 +3607,10 @@ class FilesActionStore {
     const isRoot = this.selectedFolderStore.isRootFolder;
 
     const roomSuccessText = isOwner
-      ? t("Files:LeftAndAppointNewOwner")
+      ? t("Common:LeftAndAppointNewOwner")
       : t("Files:YouLeftTheRoom");
     const agentSuccessText = isOwner
-      ? t("Files:LeftAgentAndAppointNewOwner")
+      ? t("Common:LeftAgentAndAppointNewOwner")
       : t("Files:YouLeftTheAgent");
     const successText = isAIAgent ? agentSuccessText : roomSuccessText;
 
@@ -3678,7 +3678,7 @@ class FilesActionStore {
         }
 
         if (isLeaveChecked) await this.onLeaveRoom(t);
-        else toastr.success(t("Files:AppointNewOwner"));
+        else toastr.success(t("Common:AppointNewOwner"));
       })
       .catch((e) => toastr.error(e))
       .finally(() => {
@@ -4377,3 +4377,4 @@ class FilesActionStore {
 }
 
 export default FilesActionStore;
+

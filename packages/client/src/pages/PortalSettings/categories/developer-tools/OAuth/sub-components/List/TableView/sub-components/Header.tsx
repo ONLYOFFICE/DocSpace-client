@@ -62,7 +62,7 @@ const Header = (props: HeaderProps) => {
     },
     {
       key: "Modified",
-      title: t("Files:ByLastModified"),
+      title: t("Common:ByLastModified"),
       resizable: true,
       enable: true,
       minWidth: 150,
@@ -100,3 +100,4 @@ const Header = (props: HeaderProps) => {
 };
 
 export default Header;
+

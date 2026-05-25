@@ -170,13 +170,13 @@ class DetailsHelper {
       "isRoom" in this.item && this.item.isRoom
         ? [
             "Owner",
-            this.item.providerKey && "Storage Type",
+            (this.item as TRoom).providerKey && "Storage Type",
             "Type",
             "Content",
             "Date modified",
             "Last modified by",
             "Creation date",
-            this.item.tags?.length && "Tags",
+            (this.item as TRoom).tags?.length && "Tags",
             "Storage",
           ]
         : "isFolder" in this.item && this.item.isFolder
@@ -260,14 +260,14 @@ class DetailsHelper {
         return this.t("Files:Index");
 
       case "Versions":
-        return this.t("InfoPanel:Versions");
+        return this.t("Common:Versions");
       case "Comments":
         return this.t("Common:Comments");
       case "Tags":
         return this.t("Common:Tags");
 
       case "Author":
-        return this.t("Files:ByAuthor");
+        return this.t("Common:ByAuthor");
       case "Shared by":
         return this.t("Files:SharedBy");
       case "Access level":
@@ -491,3 +491,4 @@ class DetailsHelper {
 }
 
 export default DetailsHelper;
+

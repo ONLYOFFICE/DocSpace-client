@@ -58,7 +58,7 @@ const DisableDialogComponent = ({
   serverId,
   updateMCPStatus,
 }: DisableDialogProps) => {
-  const { t } = useTranslation(["AISettings", "Common", "OAuth"]);
+  const { t } = useTranslation(["Common"]);
 
   const [loading, setLoading] = React.useState(false);
 
@@ -67,7 +67,7 @@ const DisableDialogComponent = ({
 
     try {
       await updateMCPStatus?.(serverId, false);
-      toastr.success(t("AISettings:ServerDisabledSuccess"));
+      toastr.success(t("Common:ServerDisabledSuccess"));
     } catch (error) {
       console.error(error);
       toastr.error(error as string);
@@ -80,11 +80,11 @@ const DisableDialogComponent = ({
   return (
     <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>
       <ModalDialog.Header>
-        {t("AISettings:DisableMCPServer")}
+        {t("Common:DisableMCPServer")}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <Text>
-          <Trans t={t} i18nKey="DisableServerDescription" ns="AISettings" />
+          <Trans t={t} i18nKey="DisableServerDescription" ns="Common" />
         </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>

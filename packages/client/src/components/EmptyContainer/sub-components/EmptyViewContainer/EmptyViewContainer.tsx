@@ -49,13 +49,7 @@ import type {
 } from "./EmptyViewContainer.types";
 
 const EmptyViewContainer = observer((props: EmptyViewContainerProps) => {
-  const { t } = useTranslation([
-    "EmptyView",
-    "Files",
-    "Common",
-    "Translations",
-    "AIRoom",
-  ]);
+  const { t } = useTranslation(["EmptyView", "Files", "Common", "Translations"]);
 
   const options = useOptions(props, t);
   const emptyViewOptions = useEmptyView(props, t);

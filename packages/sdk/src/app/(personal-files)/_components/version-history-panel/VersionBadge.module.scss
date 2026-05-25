@@ -1,0 +1,80 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+.versionBadge {
+  box-sizing: border-box;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+}
+
+.versionMarkIcon {
+  path {
+    fill: var(--files-version-history-badge-default-fill);
+    stroke: var(--files-version-history-badge-stroke);
+    stroke-dasharray: 3 1;
+    stroke-linejoin: round;
+  }
+
+  &.isVersion {
+    path {
+      fill: var(--files-version-history-badge-fill);
+      stroke: var(--files-version-history-badge-fill);
+      stroke-dasharray: 2 0;
+      stroke-linejoin: miter;
+      stroke-width: 2;
+    }
+  }
+
+  &.isVersion.isFirst {
+    path {
+      fill: var(--files-version-history-badge-first-fill);
+      stroke: var(--files-version-history-badge-first-fill);
+    }
+  }
+}
+
+.versionBadgeText {
+  position: absolute;
+  box-sizing: border-box;
+  max-width: 56px;
+  padding-inline: 6px;
+
+  white-space: nowrap;
+
+  display: flex;
+  justify-content: flex-start;
+  gap: 3px;
+
+  &.reverse {
+    flex-direction: row-reverse;
+  }
+
+  span:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.isAccent {
+  .versionMarkIcon {
+    path {
+      fill: var(--accent-main);
+      stroke: var(--accent-main);
+    }
+  }
+
+  .versionBadgeText {
+    color: var(--accent-text);
+  }
+}

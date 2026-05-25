@@ -46,6 +46,7 @@ import { DefaultPageRedirect } from "SRC_DIR/pages/Home/DefaultPageRedirect";
 import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
+import ProtectedAppRoute from "../components/ProtectedAppRoute";
 
 import { profileClientRoutes, generalClientRoutes } from "./general";
 import { contactsRoutes } from "./contacts";
@@ -125,46 +126,6 @@ const ClientRoutes = [
             path: "rooms/personal/filter",
             element: (
               <PrivateRoute restricted withManager withCollaborator>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/filter",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/:agent/chat",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/:agent",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/:agent/filter",
-            element: (
-              <PrivateRoute requireAIServices>
                 <ViewComponent />
               </PrivateRoute>
             ),
@@ -338,6 +299,22 @@ const ClientRoutes = [
               </PrivateRoute>
             ),
           },
+          {
+            path: "ai-agents",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
           ...contactsRoutes,
           ...profileClientRoutes,
         ],
@@ -351,7 +328,143 @@ const ClientRoutes = [
         ),
       },
       ...generalClientRoutes,
+      {
+        path: "/ai-files",
+        async lazy() {
+          const { AiFiles } = await componentLoader(
+            () => import("SRC_DIR/pages/AiFiles"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ProtectedAppRoute appId="ai-files">
+                <ErrorBoundary>
+                  <AiFiles />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
+        path: "/ai-forms",
+        async lazy() {
+          const { AiForms } = await componentLoader(
+            () => import("SRC_DIR/pages/AiForms"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ProtectedAppRoute appId="ai-forms">
+                <ErrorBoundary>
+                  <AiForms />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
+        path: "/ai-arbiter",
+        async lazy() {
+          const { AiArbiter } = await componentLoader(
+            () => import("SRC_DIR/pages/AiArbiter"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ProtectedAppRoute appId="ai-arbiter">
+                <ErrorBoundary>
+                  <AiArbiter />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
+        path: "/agents",
+        async lazy() {
+          const { AiAgents } = await componentLoader(
+            () => import("SRC_DIR/pages/AiAgents"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ErrorBoundary>
+                <AiAgents />
+              </ErrorBoundary>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
+        path: "/ai-rooms",
+        async lazy() {
+          const { AiRooms } = await componentLoader(
+            () => import("SRC_DIR/pages/AiRooms"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ProtectedAppRoute appId="ai-rooms">
+                <ErrorBoundary>
+                  <AiRooms />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
+        path: "/docs-cloud",
+        async lazy() {
+          const { DocsCloud } = await componentLoader(
+            () => import("SRC_DIR/pages/DocsCloud"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ProtectedAppRoute appId="docs-cloud">
+                <ErrorBoundary>
+                  <DocsCloud />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
     ],
+  },
+  {
+    path: "/dashboard",
+    async lazy() {
+      const { Dashboard } = await componentLoader(
+        () => import("SRC_DIR/pages/Dashboard"),
+      );
+
+      const Component = () => (
+        <PrivateRoute>
+          <ErrorBoundary>
+            <Dashboard />
+          </ErrorBoundary>
+        </PrivateRoute>
+      );
+
+      return { Component };
+    },
   },
   {
     path: "/Products/Files/",
@@ -639,8 +752,7 @@ const ClientRoutes = [
     async lazy() {
       const { default: NoAccessContainer, NoAccessContainerType } =
         await componentLoader(
-          () =>
-            import("SRC_DIR/components/EmptyContainer/NoAccessContainer"),
+          () => import("SRC_DIR/components/EmptyContainer/NoAccessContainer"),
         );
 
       const Component = () => (
@@ -693,3 +805,4 @@ const ClientRoutes = [
 ];
 
 export default ClientRoutes;
+

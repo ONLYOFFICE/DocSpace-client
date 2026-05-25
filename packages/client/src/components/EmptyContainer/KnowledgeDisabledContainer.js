@@ -47,13 +47,13 @@ import { getBrandName } from "@docspace/shared/constants/brands";
 const KnowledgeDisabledContainer = (props) => {
   const { t, theme, isFrame, isAdmin, setKnowledgeId, setCurrentTab } = props;
 
-  const titleRoomNoAccess = t("AIRoom:KnowledgeUnavailable");
+  const titleRoomNoAccess = t("Common:KnowledgeUnavailable");
   const descriptionRoomNoAccess = isAdmin
-    ? t("AIRoom:KnowledgeUnavailableDescription", {
+    ? t("Common:KnowledgeUnavailableDescription", {
         productName: getBrandName("ProductName"),
         aiAgents: t("Common:AIAgents"),
       })
-    : t("AIRoom:KnowledgeUnavailableDescriptionUser", {
+    : t("Common:KnowledgeUnavailableDescriptionUser", {
         productName: getBrandName("ProductName"),
         aiAgents: t("Common:AIAgents"),
       });
@@ -104,5 +104,5 @@ export default inject(({ settingsStore, userStore, aiRoomStore }) => {
     setKnowledgeId: aiRoomStore.setKnowledgeId,
     setCurrentTab: aiRoomStore.setCurrentTab,
   };
-})(withTranslation(["Common", "AIRoom"])(observer(KnowledgeDisabledContainer)));
+})(withTranslation(["Common"])(observer(KnowledgeDisabledContainer)));
 

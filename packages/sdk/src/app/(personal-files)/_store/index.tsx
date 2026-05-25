@@ -46,12 +46,14 @@ import { MediaViewerStoreContextProvider } from "@/app/(docspace)/_store/MediaVi
 import { DialogsStoreContextProvider } from "@/app/(docspace)/_store/DialogsStore";
 import { DownloadDialogStoreContextProvider } from "@/app/(docspace)/_store/DownloadDialogStore";
 import { ActiveItemsStoreContextProvider } from "@/app/(docspace)/_store/ActiveItemsStore";
+import { UploadStoreContextProvider } from "@/app/(docspace)/_store/UploadStore";
 
 import type { TViewAs } from "@docspace/shared/types";
 
 import { DocsSettingsStoreContextProvider } from "./DocsSettingsStore";
 import { DocsUserStoreContextProvider } from "./DocsUserStore";
-import { InfoPanelStoreContextProvider } from "./InfoPanelStore";
+import { InfoPanelStoreContextProvider } from "@/app/(docspace)/_store/InfoPanelStore";
+import { VersionHistoryStoreContextProvider } from "./VersionHistoryStore";
 
 export const DocsStoreProviders = ({
   children,
@@ -70,13 +72,17 @@ export const DocsStoreProviders = ({
                 <DialogsStoreContextProvider>
                   <DownloadDialogStoreContextProvider>
                     <ActiveItemsStoreContextProvider>
-                      <DocsSettingsStoreContextProvider>
-                        <DocsUserStoreContextProvider>
-                          <InfoPanelStoreContextProvider>
-                            {children}
-                          </InfoPanelStoreContextProvider>
-                        </DocsUserStoreContextProvider>
-                      </DocsSettingsStoreContextProvider>
+                      <UploadStoreContextProvider>
+                        <DocsSettingsStoreContextProvider>
+                          <DocsUserStoreContextProvider>
+                            <InfoPanelStoreContextProvider>
+                              <VersionHistoryStoreContextProvider>
+                                {children}
+                              </VersionHistoryStoreContextProvider>
+                            </InfoPanelStoreContextProvider>
+                          </DocsUserStoreContextProvider>
+                        </DocsSettingsStoreContextProvider>
+                      </UploadStoreContextProvider>
                     </ActiveItemsStoreContextProvider>
                   </DownloadDialogStoreContextProvider>
                 </DialogsStoreContextProvider>

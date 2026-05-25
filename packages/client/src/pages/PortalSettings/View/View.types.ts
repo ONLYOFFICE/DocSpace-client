@@ -49,6 +49,7 @@ export type TView =
   | "ai-services"
   | "backup-service"
   | "disk-storage"
+  | "apps"
   | "";
 
 export type ViewProps = {

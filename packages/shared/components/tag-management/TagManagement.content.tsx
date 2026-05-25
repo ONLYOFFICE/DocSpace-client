@@ -76,6 +76,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
   roomId,
   onDeleteTag,
   onEditTag,
+  onTagsChanged,
 }) => {
   const { control, handleSubmit, setValue, resetField } = useForm({
     defaultValues: {
@@ -112,6 +113,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
       updateTag.mutate(updatedTags[tagIndex], {
         onSuccess: () => {
           setTags(updatedTags);
+          onTagsChanged?.();
         },
         onError: (error) => {
           toastr.error(error);
@@ -120,7 +122,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
         },
       });
     },
-    [tags, updateTag],
+    [tags, updateTag, onTagsChanged],
   );
 
   const handleEdit = useCallback(

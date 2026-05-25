@@ -56,7 +56,7 @@ export const useBaseParams = (initialValues?: {
 	url?: string;
 	description?: string;
 }) => {
-	const { t } = useTranslation(["AISettings", "Common", "OAuth"]);
+	const { t } = useTranslation(["Common", "OAuth"]);
 
 	const [name, setName] = React.useState(initialValues?.name || "");
 	const [url, setUrl] = React.useState(initialValues?.url || "");
@@ -93,7 +93,7 @@ export const useBaseParams = (initialValues?: {
 		if (descriptionError) setDescriptionError("");
 	};
 
-	const requiredError = t("OAuth:ThisRequiredField");
+	const requiredError = t("Common:ThisRequiredField");
 
 	const getBaseParams = () => {
 		if (!name) {
@@ -126,7 +126,7 @@ export const useBaseParams = (initialValues?: {
 	const baseParamsComponent = (
 		<>
 			<FieldContainer
-				labelText={t("AISettings:IntegrationName")}
+				labelText={t("Common:IntegrationName")}
 				isRequired
 				isVertical
 				removeMargin
@@ -153,11 +153,11 @@ export const useBaseParams = (initialValues?: {
 				>
 					{hasError
 						? `${t("Common:AllowedCharacters")}: ${ALLOWED_MCP_CHARACTERS}`
-						: t("AISettings:ProviderNameInputHint")}
+						: t("Common:ProviderNameInputHint")}
 				</Text>
 			</FieldContainer>
 			<FieldContainer
-				labelText={t("AISettings:IntegrationURL")}
+				labelText={t("Common:IntegrationURL")}
 				isRequired
 				isVertical
 				removeMargin
@@ -170,13 +170,13 @@ export const useBaseParams = (initialValues?: {
 					size={InputSize.base}
 					value={url}
 					onChange={(e) => onChangeUrl(e.target.value)}
-					placeholder={t("OAuth:EnterURL")}
+					placeholder={t("Common:EnterURL")}
 					scale
 					hasError={!!urlError}
 					testId="mcp-url-input"
 				/>
 				<Text className={styles.fieldHint}>
-					{t("AISettings:MCPServerIntegrationURLHint", {
+					{t("Common:MCPServerIntegrationURLHint", {
 						mcpServer: t("Common:MCPServer"),
 					})}
 				</Text>
@@ -194,12 +194,12 @@ export const useBaseParams = (initialValues?: {
 					heightTextArea={64}
 					value={description}
 					onChange={(e) => onChangeDescription(e.target.value)}
-					placeholder={t("OAuth:EnterDescription")}
+					placeholder={t("Common:EnterDescription")}
 					maxLength={256}
 					dataTestId="mcp-description-textarea"
 				/>
 				<Text className={styles.fieldHint}>
-					{t("AISettings:MCPServerDescriptionHint")}
+					{t("Common:MCPServerDescriptionHint")}
 				</Text>
 			</FieldContainer>
 		</>

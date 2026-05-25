@@ -1,5 +1,4 @@
 {
-  "ChooseFromList": "목록에서 선택",
   "FileLocked": "파일이 잠겼습니다",
   "FileProtected": "비밀번호로 보호된 파일입니다",
   "FileUnlocked": "파일이 잠금 해제되었습니다",
@@ -13,7 +12,6 @@
   "FolderTitleWebDav": "WebDAV 디렉토리",
   "FolderTitleYandex": "Yandex 디렉토리",
   "NewForm": "PDF 양식",
-  "OwnerChange": "소유자 변경",
   "RoleGuestDescriprion": "게스트는 초대받은 룸에 액세스할 수 있으며, 룸에서 적절한 역할을 할당 받았다면 문서를 생성하고 편집할 수 있습니다.",
   "SearchByHeadOfGroup": "그룹장으로 검색",
   "SearchByOwner": "소유자로 검색",

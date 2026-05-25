@@ -109,7 +109,7 @@ const AIProviderComponent = ({
   hasAIProviders,
   aiConfig,
 }: AIProviderProps) => {
-  const { t } = useTranslation(["Common", "AISettings"]);
+  const { t } = useTranslation(["Common"]);
   const [addDialogVisible, setaddDialogVisible] = useState(false);
   const [updateDialogData, setUpdateDialogData] = useState<TUpdateDialogData>({
     visible: false,
@@ -183,7 +183,7 @@ const AIProviderComponent = ({
         className={styles.description}
         dataTestId="provider-section-description"
       >
-        {t("AISettings:AIProviderSettingDescription", {
+        {t("Common:AIProviderSettingDescription", {
           productName: getBrandName("ProductName"),
           aiChats: t("Common:AIChats"),
         })}
@@ -205,7 +205,7 @@ const AIProviderComponent = ({
         testId="add-provider-button"
         primary
         size={ButtonSize.small}
-        label={t("AISettings:AddAIProvider", {
+        label={t("Common:AddAIProvider", {
           aiProvider: t("Common:AIProvider"),
         })}
         scale={false}

@@ -71,12 +71,7 @@ const BASE_LANGUAGES = [
 ];
 
 const forbiddenElements = ["ONLYOFFICE", "DOCSPACE"];
-const skipForbiddenKeys = [
-  "OrganizationName",
-  "ProductName",
-  "ProductEditorsName",
-  "OnlyofficeDesktopEditors",
-];
+const skipForbiddenKeys = [];
 
 // Brand/product keys and constants — injected at runtime, not in JSON locale files.
 // Skip these in per-language completeness and forbidden-elements checks.
@@ -364,7 +359,7 @@ beforeAll(() => {
 
     moduleFolders.push({
       path: wsPath,
-      isCommon: wsPath.includes("public/locales"),
+      isCommon: wsPath.includes(path.join("public", "locales")),
       availableLanguages: t?.languages,
       appliedJsTranslationKeys: j?.translationKeys,
     });
@@ -894,10 +889,8 @@ describe("Locales Tests", () => {
     let i = 0;
     const forbiddenEntries = [];
 
-    moduleFolders.forEach((module) => {
-      if (!module.availableLanguages || module.isCommon) return;
-
-      module.availableLanguages.forEach((lng) => {
+    const checkLanguages = (languages) => {
+      languages.forEach((lng) => {
         const translationItems = lng.translations
           .filter((elem) => !skipForbiddenKeys.includes(elem.key))
           .filter((f) => {
@@ -923,7 +916,14 @@ describe("Locales Tests", () => {
           forbiddenEntries.push({ filePath: lng.path, key: t.key });
         });
       });
+    };
+
+    moduleFolders.forEach((module) => {
+      if (!module.availableLanguages) return;
+      checkLanguages(module.availableLanguages);
     });
+
+    checkLanguages(commonTranslations);
 
     clearWrongKeys(forbiddenEntries, "forbidden value keys");
 
@@ -2506,6 +2506,42 @@ describe("Locales Tests", () => {
           `   Key: "${key}"\r\n\r\n`;
         errorsCount++;
       });
+    });
+
+    expect(errorsCount, message).toBe(0);
+  });
+
+  it("UnicodeEscapedValuesTest: Verify that translation files use readable Unicode characters instead of \\uXXXX escape sequences.", () => {
+    // JSON files must store non-ASCII characters directly in UTF-8, not as \uXXXX
+    // escape sequences. Escaped forms are invisible in code review, harder to spot
+    // translation errors in, and typically produced by json.dumps() without
+    // ensure_ascii=False or similar tooling mistakes.
+    const unicodeEscapePattern = /\\u[0-9a-fA-F]{4}/;
+
+    let message =
+      "Next translation files contain \\uXXXX escape sequences instead of readable Unicode characters.\r\n" +
+      "Re-save the file in UTF-8 with unescaped characters (e.g. ensure_ascii=False in Python).\r\n\r\n";
+    let errorsCount = 0;
+    let i = 0;
+
+    translationFiles.forEach((file) => {
+      const rawContent = fs.readFileSync(file.path, "utf8");
+
+      if (!unicodeEscapePattern.test(rawContent)) return;
+
+      const escapedLines = rawContent
+        .split("\n")
+        .map((line, idx) => ({ line, lineNo: idx + 1 }))
+        .filter(({ line }) => unicodeEscapePattern.test(line))
+        .slice(0, 3)
+        .map(
+          ({ line, lineNo }) =>
+            `    line ${lineNo}: ${line.trim().substring(0, 80)}`,
+        )
+        .join("\r\n");
+
+      message += `${++i}. ${file.language}/${file.fileName}\r\n${escapedLines}\r\n\r\n`;
+      errorsCount++;
     });
 
     expect(errorsCount, message).toBe(0);

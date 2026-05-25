@@ -39,12 +39,17 @@ import React from "react";
 import { makeAutoObservable } from "mobx";
 
 import { FolderType } from "@docspace/shared/enums";
+import { TPathParts } from "@docspace/shared/types";
 
 import { TFileItem, TFolderItem } from "../_hooks/useItemList";
 
 class FilesListStore {
   items: (TFileItem | TFolderItem)[] = [];
   rootFolderType: FolderType | null = null;
+  pathParts: TPathParts[] | null = null;
+  highlightFileId: number | string | null = null;
+
+  private highlightTimerId: ReturnType<typeof setTimeout> | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -54,13 +59,51 @@ class FilesListStore {
     this.items = items || [];
   };
 
+  appendItems = (items: (TFileItem | TFolderItem)[]) => {
+    this.items = [...this.items, ...items];
+  };
+
+  replaceItem = (id: number | string, item: TFileItem | TFolderItem) => {
+    this.items = this.items.map((i) => (i.id === id ? item : i));
+  };
+
   setRootFolderType = (type: FolderType) => {
     this.rootFolderType = type;
+  };
+
+  setPathParts = (pathParts: TPathParts[] | null) => {
+    this.pathParts = pathParts;
+  };
+
+  setHighlightFileId = (id: number | string | null) => {
+    this.highlightFileId = id;
+
+    if (this.highlightTimerId) {
+      clearTimeout(this.highlightTimerId);
+      this.highlightTimerId = null;
+    }
+
+    if (id == null) return;
+
+    this.highlightTimerId = setTimeout(() => {
+      this.highlightFileId = null;
+      this.highlightTimerId = null;
+    }, 2000);
   };
 
   updateItemFavorite = (id: number | string, isFavorite: boolean) => {
     const item = this.items.find((i) => i.id === id);
     if (item) item.isFavorite = isFavorite;
+  };
+
+  updateItemLocked = (id: number | string, locked: boolean) => {
+    const item = this.items.find((i) => i.id === id);
+    if (item && "locked" in item) item.locked = locked;
+  };
+
+  updateItemCustomFilter = (id: number | string, enabled: boolean) => {
+    const item = this.items.find((i) => i.id === id);
+    if (item && "customFilterEnabled" in item) item.customFilterEnabled = enabled;
   };
 
   removeItem = (id: number | string) => {

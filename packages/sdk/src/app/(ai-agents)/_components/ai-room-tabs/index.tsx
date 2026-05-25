@@ -31,6 +31,7 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Tabs, type TTabItem } from "@docspace/ui-kit/components/tabs";
+import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 
 import { useAiRoomStore, type AiRoomTab } from "../../_store";
 
@@ -80,6 +81,21 @@ const AiRoomTabs = () => {
     // frame bridge re-emits `onNavigate` on the MobX `currentTab` change.
     const nextUrl = `/ai-agents/${roomId}?${params.toString()}`;
     window.history.replaceState(null, "", nextUrl);
+
+    // Tabs with `withAnimation` starts the indicator bar via
+    // `triggerAnimation`; PrimaryTabs only auto-finishes it when an
+    // item has a per-item `onClick`. We use top-level `onSelect`, so
+    // close the loop ourselves.
+    //
+    // Defer to the next tick: `triggerAnimation` queues
+    // `setAnimationPhase("progress")` but the effect that handles
+    // END_ANIMATION captures the old `animationPhase` value through its
+    // closure — if we dispatch synchronously, the listener still sees
+    // "none" and the bar is never finished. `setTimeout(..., 0)` lets
+    // React flush the state update first.
+    setTimeout(() => {
+      window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
+    }, 0);
   };
 
   // AIRoom namespace is not bundled in SDK i18n (Common-only). Pass

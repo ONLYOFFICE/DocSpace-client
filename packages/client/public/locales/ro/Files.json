@@ -170,7 +170,7 @@
   "TooltipElementCopyMessage": "Copiere {{element}}",
   "TooltipElementsCopyMessage": "Copiere elemente {{element}}",
   "TooltipElementsMoveMessage": "Mutare elemente {{element}}",
-  "TrashAutoDeleteWarning": "{{sectionName}}内のアイテムは、30日後に自動的に削除されます。",
+  "TrashAutoDeleteWarning": "Elementele din {{sectionName}} sunt șterse automat după 30 de zile.",
   "UnarchivedRoomAction": "Sala '{{name}}' este dezarhivată.",
   "UnarchivedRoomsAction": "Sălile sunt dezarhivate.",
   "UploadingProgress": "Încărcare: {{progress}}%",

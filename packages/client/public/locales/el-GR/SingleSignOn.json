@@ -33,7 +33,7 @@
   "ShowAdditionalParameters": "Εμφάνιση προηγμένων ρυθμίσεων",
   "Signing": "Υπογραφή",
   "SigningAndEncryption": "Υπογραφή και κρυπτογράφηση",
-  "SignOnEndpointUrl": "URL des Single Sign-On Endpunkts vom IdP",
+  "SignOnEndpointUrl": "URL τελικού σημείου ενιαίας σύνδεσης παρόχου ταυτότητας",
   "SignOnEndpointUrlTooltip": "Η διεύθυνση URL που χρησιμοποιείται για την ενιαία σύνδεση στην πλευρά του παρόχου ταυτότητας",
   "SPAssertionConsumerURL": "Διεύθυνση URL του καταναλωτή ισχυρισμού του παρόχου υπηρεσιών (υποστήριξη POST και δέσμευσης ανακατεύθυνσης)",
   "SPAssertionConsumerURLTooltip": "Η διεύθυνση URL του παρόχου υπηρεσιών όπου λαμβάνει και επεξεργάζεται βεβαιώσεις από τον πάροχο ταυτότητας",

@@ -68,7 +68,7 @@
   "ExportRoomIndexAlreadyInProgressError": "කාමර දර්ශක අපනයනය දැනටමත් ක්‍රියාවිරුද්ධව පවතී. නව එකක් ආරම්භ කිරීමට පෙර වත්මන් අපනයනය අවසන් වනතුරු කරුණාකර රැඳී සිටින්න.",
   "ExportingIndex": "ඉදිකාය පිටපත කිරීම",
   "FileDownloadingIsRestricted": "මෙම කාමරයෙන් ගොනු බාගැනීම සීමා කර ඇත.",
-  "FileExportDestination": "Datoteka <1>{{fileName}}</1> izvožena v {{sectionName}}",
+  "FileExportDestination": "<1>{{fileName}}</1> ගොනුව {{sectionName}} වෙත අපනයනය කෙරිණි",
   "FileRenamed": "'{{oldTitle}}' ලේඛනය '{{newTitle}}' ලෙස නම් කර ඇත",
   "FilesMovedToTrashNotice": "ගොනු {{sectionName}} වෙත ගෙන ගිය පසු.",
   "FinalizeVersion": "අවසාන අනුවාදය",

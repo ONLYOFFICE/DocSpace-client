@@ -35,6 +35,7 @@ import {
   useAgentsListStore,
   useAgentsAIConfigStore,
   useAgentsUserStore,
+  useAiRoomStore,
 } from "./_store";
 import DeleteAgentDialog from "./_components/delete-agent-dialog";
 import LeaveAgentDialog from "./_components/leave-agent-dialog";
@@ -126,16 +127,19 @@ const SectionShell = observer(
     const { currentDeviceType } = useDeviceType();
     const { frameHeaderVars } = useFrameHeaderConfig();
     const infoPanel = useAgentInfoPanelStore();
+    const aiRoomStore = useAiRoomStore();
     const pathname = usePathname() ?? "";
 
     const isInfoVisible = infoPanel.isVisible && !!infoPanel.currentAgent;
 
-    // Agent detail uses `settingsStudio` paddings (chat fills the body) but
-    // still routes through Section's own Scrollbar — the chat hooks into it
-    // via `externalScrollRef={#sectionScroll}` from AiAgentView.
+    // Only the chat tab needs `settingsStudio` paddings (chat fills the body
+    // edge-to-edge). Knowledge / Result tabs render the standard files list,
+    // which expects the regular section paddings + column header — forcing
+    // studio mode there strips the top padding and squashes the table.
     const isAgentDetail = /\/ai-agents\/(?!settings(?:$|\/)|recent$|favorites$|trash$)[^/]+$/.test(
       pathname,
     );
+    const isAgentChat = isAgentDetail && aiRoomStore.currentTab === "chat";
 
     return (
       <div
@@ -158,7 +162,7 @@ const SectionShell = observer(
           canDisplay={isInfoVisible}
           withBodyScroll
           uploadFiles={false}
-          settingsStudio={isAgentDetail}
+          settingsStudio={isAgentChat}
         >
           <Section.SectionHeader>
             <AgentsNavigationHeader />

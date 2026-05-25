@@ -119,6 +119,12 @@ const AiRoomTabs = () => {
     },
   ];
 
+  // The sticky 20px gap below the tabs is suppressed only on the Chat tab
+  // (chat fills the body edge-to-edge). Knowledge / Result render the
+  // standard files list, which expects the gap so the filter row doesn't
+  // butt up against the tabs.
+  const withoutStickyIntend = (currentTab ?? "chat") === "chat";
+
   return (
     <Tabs
       className="ai-room-tabs"
@@ -126,7 +132,7 @@ const AiRoomTabs = () => {
       items={items}
       onSelect={onSelect}
       withAnimation
-      withoutStickyIntend
+      withoutStickyIntend={withoutStickyIntend}
     />
   );
 };

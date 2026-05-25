@@ -111,12 +111,21 @@ const AiAgentView = () => {
   // `hidden` and didn't reliably re-attach them on `visible` after the
   // tab switch was moved to `history.replaceState` (no full Next.js
   // re-render to repopulate the subtree).
+  //
+  // The inline `display: none` is applied to BOTH the wrapper and the inner
+  // `.chat-container` (via Chat's `style` prop). Section's
+  // `:has(.chat-container:not([style*="display: none"]))` rule zeros out
+  // `padding-block` whenever a chat-container exists in the DOM without an
+  // inline `display: none` — putting it only on the wrapper used to leave
+  // the inner div unflagged, so the rule kept matching on Knowledge/Result
+  // tabs and clipped the table column header above the visible viewport.
+  const chatHidden = currentTab !== "chat";
   return (
     <>
       {shouldRenderChat ? (
         <div
           className={styles.aiAgentChat}
-          style={currentTab === "chat" ? undefined : { display: "none" }}
+          style={chatHidden ? { display: "none" } : undefined}
         >
           <Chat
             agentId={roomId}
@@ -129,6 +138,7 @@ const AiAgentView = () => {
             width="100%"
             useExternalScroll
             externalScrollRef={chatScrollRef}
+            style={chatHidden ? { display: "none" } : undefined}
           />
         </div>
       ) : null}

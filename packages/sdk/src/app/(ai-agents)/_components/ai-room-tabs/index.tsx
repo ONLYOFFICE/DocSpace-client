@@ -28,7 +28,6 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import { Tabs, type TTabItem } from "@docspace/ui-kit/components/tabs";
@@ -36,7 +35,6 @@ import { Tabs, type TTabItem } from "@docspace/ui-kit/components/tabs";
 import { useAiRoomStore, type AiRoomTab } from "../../_store";
 
 const AiRoomTabs = () => {
-  const router = useRouter();
   const { t } = useTranslation(["Common"]);
 
   const aiRoomStore = useAiRoomStore();
@@ -72,7 +70,16 @@ const AiRoomTabs = () => {
     const params = new URLSearchParams(window.location.search);
     params.set("tab", id);
     if (id !== "result") params.delete("fileId");
-    router.push(`/ai-agents/${roomId}?${params.toString()}`);
+
+    // Use replaceState instead of router.push: tab content is driven by
+    // `aiRoomStore.currentTab` (MobX), so we don't need Next.js to re-run
+    // the server component on each tab click. Routing through Next would
+    // force-dynamic-fetch the page (search params changed) and re-stream
+    // SectionBody, which visually nudges the surrounding navigation.
+    // We just sync the URL bar for deep-link / refresh purposes — the
+    // frame bridge re-emits `onNavigate` on the MobX `currentTab` change.
+    const nextUrl = `/ai-agents/${roomId}?${params.toString()}`;
+    window.history.replaceState(null, "", nextUrl);
   };
 
   // AIRoom namespace is not bundled in SDK i18n (Common-only). Pass

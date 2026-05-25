@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect } from "react";
+import React from "react";
 import { useSearchParams } from "react-router";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -35,50 +35,68 @@ import AiAgentsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.d
 import { EmptyView } from "@docspace/shared/components/empty-view";
 import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
 
-import SdkIframe from "SRC_DIR/components/SdkIframe";
+import SdkIframe, {
+  type SdkIframeHandle,
+} from "SRC_DIR/components/SdkIframe";
 
-const SECTION_TO_PATH: Record<string, string> = {
-  recent: "/sdk/ai-agents/recent",
-  favorites: "/sdk/ai-agents/favorites",
-  trash: "/sdk/ai-agents/trash",
-  settings: "/sdk/ai-agents/settings",
+// Sub-sections inside the iframe that the host URL exposes via
+// `?section=...`. Agent detail lives under `?agentId=N&tab=T` instead.
+const VALID_SECTIONS = new Set(["recent", "favorites", "trash", "settings"]);
+
+// Translate the parent's query string into the SDK navigation key the
+// frame bridge understands. Returns a stable string we can dedupe on so
+// we don't re-emit the same `navigateSection` after the SDK reported it
+// back via `onNavigate`.
+type NavKey = {
+  key: string;
+  payload: { section?: string; agentId?: string; tab?: string };
 };
 
-// Build the iframe `src` from the parent URL query params. Honors
-// `?agentId=N&tab=T` for direct-link / refresh of a specific agent;
-// `?section=...` for the list sub-pages; falls back to the root list.
-const buildSrc = (params: URLSearchParams): string => {
+const buildNavKey = (params: URLSearchParams): NavKey => {
   const agentId = params.get("agentId");
   if (agentId) {
     const tab = params.get("tab") ?? "chat";
-    return `/sdk/ai-agents/${agentId}?tab=${encodeURIComponent(tab)}`;
+    return {
+      key: `agent:${agentId}:${tab}`,
+      payload: { agentId, tab },
+    };
   }
   const section = params.get("section") ?? "";
-  return SECTION_TO_PATH[section] ?? "/sdk/ai-agents";
+  if (VALID_SECTIONS.has(section)) {
+    return { key: `section:${section}`, payload: { section } };
+  }
+  return { key: "root", payload: {} };
 };
 
-// Translate the iframe's reported path back into the parent's query shape.
-// The SDK is mounted at Next's basePath `/sdk`, so `window.location.pathname`
-// inside the iframe looks like `/sdk/ai-agents/123` — strip that prefix
-// before matching.
-const buildParentSearch = (
+// Translate the iframe-reported path into the parent's section key so
+// `lastSdkKeyRef` can deduplicate the resulting `setSearchParams` round-
+// trip. The SDK is mounted at Next's basePath `/sdk`.
+const navKeyFromPath = (
   pathname: string | undefined,
   search: string | undefined,
-): string => {
-  if (!pathname) return "";
+): { key: string; nextSearch: string } => {
+  if (!pathname) return { key: "root", nextSearch: "" };
   const stripped = pathname.replace(/^\/sdk/, "");
   const detailMatch = stripped.match(/^\/ai-agents\/(\d+)(?:\/|$)/);
   if (detailMatch) {
     const agentId = detailMatch[1];
     const inner = new URLSearchParams(search?.replace(/^\?/, "") ?? "");
     const tab = inner.get("tab") ?? "chat";
-    return `?agentId=${agentId}&tab=${encodeURIComponent(tab)}`;
+    return {
+      key: `agent:${agentId}:${tab}`,
+      nextSearch: `?agentId=${agentId}&tab=${encodeURIComponent(tab)}`,
+    };
   }
   const sectionMatch = stripped.match(
     /^\/ai-agents\/(recent|favorites|trash|settings)(?:\/|$)/,
   );
-  if (sectionMatch) return `?section=${sectionMatch[1]}`;
-  return "";
+  if (sectionMatch) {
+    return {
+      key: `section:${sectionMatch[1]}`,
+      nextSearch: `?section=${sectionMatch[1]}`,
+    };
+  }
+  return { key: "root", nextSearch: "" };
 };
 
 type AiAgentsProps = {
@@ -88,50 +106,48 @@ type AiAgentsProps = {
 
 const AiAgentsComponent = ({ canManageAgents, theme }: AiAgentsProps) => {
   const { t } = useTranslation(["Common"]);
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const iframeRef = React.useRef<SdkIframeHandle | null>(null);
+  const lastSdkKeyRef = React.useRef<string | null>(null);
+  const initialSrcRef = React.useRef<string | null>(null);
 
-  // `src` stays a derived value: parent-driven nav (sidebar menu, router
-  // push) flows through React Router → useSearchParams → buildSrc and
-  // remounts the iframe at the right URL. Iframe-driven nav is handled
-  // below via raw replaceState so it does NOT trigger a re-render here
-  // (which would otherwise reload the iframe right after it navigated).
-  const src = buildSrc(searchParams);
+  const searchParamsRef = React.useRef(searchParams);
+  searchParamsRef.current = searchParams;
+  const setSearchParamsRef = React.useRef(setSearchParams);
+  setSearchParamsRef.current = setSearchParams;
 
-  useEffect(() => {
-    const handler = (e: MessageEvent) => {
-      let parsed: unknown;
-      try {
-        parsed =
-          typeof e.data === "string" ? JSON.parse(e.data) : (e.data as unknown);
-      } catch {
-        return;
-      }
-      if (!parsed || typeof parsed !== "object") return;
-      const envelope = parsed as {
-        type?: string;
-        eventReturnData?: {
-          event?: string;
-          data?: { pathname?: string; search?: string };
-        };
-      };
-      if (envelope.type !== "onEventReturn") return;
-      if (envelope.eventReturnData?.event !== "onNavigate") return;
+  // Iframe -> parent: SDK reports its current location via postMessage on
+  // every internal navigation. We mirror it into the host's URL via
+  // setSearchParams (no `src` change, so the iframe does NOT remount).
+  const handleSdkNavigate = React.useCallback(
+    (_section: string, extra?: { pathname?: string; search?: string }) => {
+      const { key, nextSearch } = navKeyFromPath(
+        extra?.pathname,
+        extra?.search,
+      );
+      lastSdkKeyRef.current = key;
 
-      const { pathname, search } = envelope.eventReturnData.data ?? {};
-      const nextSearch = buildParentSearch(pathname, search);
-      const next = `${window.location.pathname}${nextSearch}`;
-      const current = `${window.location.pathname}${window.location.search}`;
-      if (current !== next) {
-        // replaceState is intentional: it updates the address bar so the
-        // user sees / can share / can refresh on the correct URL, but it
-        // does NOT trigger a React Router update (and therefore does not
-        // re-render this component or remount the iframe).
-        window.history.replaceState(null, "", next);
-      }
-    };
-    window.addEventListener("message", handler);
-    return () => window.removeEventListener("message", handler);
-  }, []);
+      const sp = searchParamsRef.current;
+      const currentSearch = sp.toString() ? `?${sp.toString()}` : "";
+      if (currentSearch === nextSearch) return;
+
+      const next = new URLSearchParams(
+        nextSearch.replace(/^\?/, ""),
+      ) as unknown as URLSearchParamsInit;
+      setSearchParamsRef.current(next, { replace: true });
+    },
+    [],
+  );
+
+  // Parent -> iframe: when the host URL changes (sidebar click, deep link
+  // navigation, etc.), tell the SDK to route internally rather than
+  // reloading the frame. Skip if the SDK just reported this exact key —
+  // that's the iframe-driven case echoing back.
+  const navKey = buildNavKey(searchParams);
+  React.useEffect(() => {
+    if (lastSdkKeyRef.current === navKey.key) return;
+    iframeRef.current?.call("navigateSection", navKey.payload);
+  }, [navKey.key, navKey.payload]);
 
   if (!canManageAgents) {
     return (
@@ -150,10 +166,40 @@ const AiAgentsComponent = ({ canManageAgents, theme }: AiAgentsProps) => {
     );
   }
 
+  // Compute the iframe `src` exactly once. All subsequent navigations
+  // flow through postMessage so the iframe stays mounted — that's what
+  // keeps the SDK's warmed Next.js runtime, MobX stores and socket
+  // connection across host navigations.
+  if (initialSrcRef.current === null) {
+    const { payload } = navKey;
+    if (payload.agentId) {
+      initialSrcRef.current = `/sdk/ai-agents/${payload.agentId}?tab=${encodeURIComponent(
+        payload.tab ?? "chat",
+      )}`;
+    } else if (payload.section) {
+      initialSrcRef.current = `/sdk/ai-agents/${payload.section}`;
+    } else {
+      initialSrcRef.current = "/sdk/ai-agents";
+    }
+  }
+
   return (
-    <SdkIframe src={src} title={t("Common:DashboardAIChatAgentsTitle")} />
+    <SdkIframe
+      apiRef={iframeRef}
+      src={initialSrcRef.current}
+      title={t("Common:DashboardAIChatAgentsTitle")}
+      onNavigate={handleSdkNavigate}
+    />
   );
 };
+
+// Local alias for the react-router `URLSearchParamsInit` shape (string |
+// URLSearchParams | Record<string, string | string[]>). Inlined to avoid
+// pulling in `@remix-run/router` type plumbing for one call site.
+type URLSearchParamsInit =
+  | string
+  | URLSearchParams
+  | Record<string, string | string[]>;
 
 export const AiAgents = inject<TStore>(
   ({ userStore, settingsStore }) => ({

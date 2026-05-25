@@ -26,7 +26,6 @@
 
 "use client";
 
-import { Activity } from "react";
 import { observer } from "mobx-react";
 import dynamic from "next/dynamic";
 
@@ -91,24 +90,31 @@ const AiAgentView = () => {
     !hasNoAccessToChat &&
     (!isErrorAIAgentNotAvailable || loadingStore.showBodyLoader);
 
+  // Chat stays mounted across tab switches (preserving scroll position and
+  // message-stream effects). We toggle visibility via CSS instead of
+  // React's experimental `<Activity>`, which unmounts effects on
+  // `hidden` and didn't reliably re-attach them on `visible` after the
+  // tab switch was moved to `history.replaceState` (no full Next.js
+  // re-render to repopulate the subtree).
   return (
     <>
       {shouldRenderChat ? (
-        <Activity mode={currentTab === "chat" ? "visible" : "hidden"}>
-          <div className={styles.aiAgentChat}>
-            <Chat
-              agentId={roomId}
-              selectedModel=""
-              standalone
-              allowAttachFiles
-              allowSelectChat
-              attachmentFile={null}
-              clearAttachmentFile={() => {}}
-              width="100%"
-              height="100%"
-            />
-          </div>
-        </Activity>
+        <div
+          className={styles.aiAgentChat}
+          style={currentTab === "chat" ? undefined : { display: "none" }}
+        >
+          <Chat
+            agentId={roomId}
+            selectedModel=""
+            standalone
+            allowAttachFiles
+            allowSelectChat
+            attachmentFile={null}
+            clearAttachmentFile={() => {}}
+            width="100%"
+            height="100%"
+          />
+        </div>
       ) : null}
 
       {currentTab === "knowledge" && knowledgeId ? (

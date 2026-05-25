@@ -48,6 +48,7 @@ import {
   AgentsNavigationSubmenu,
 } from "./_components/agents-navigation";
 import { AgentsCommonDataProvider } from "./_store/AgentsCommonDataContext";
+import useAiAgentsFrameBridge from "./_hooks/useAiAgentsFrameBridge";
 
 // Imported only for side effects: cross-route CSS overrides that need to
 // out-rank per-page chunks in the cascade.
@@ -199,9 +200,16 @@ const AiAgentsBootstrap = ({
 
   const [queryClient] = React.useState(() => new QueryClient());
 
-  // Mirror client Shell.jsx — subscribe to `change-ai-config` and refetch
-  // /ai/config when a provider is added/removed elsewhere.
+  // Initial fetch + socket subscription. Previously aiConfig was only
+  // hydrated by the root list page (SSR data + client fallback), so a
+  // direct entry into agent detail (e.g. parent's `?agentId=N`, or
+  // postMessage-driven navigation that skips the root) left `aiReady`
+  // false and the chat wouldn't render. The fetcher de-dupes in-flight
+  // requests, so doing it here on top of the root page's SSR hydration is
+  // safe — the root page short-circuits if data is already loaded.
   React.useEffect(() => {
+    void aiConfigStore.fetchAIConfig();
+
     SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "change-ai-config",
     });
@@ -242,9 +250,20 @@ const AiAgentsBootstrap = ({
     <QueryClientProvider client={queryClient}>
       {children}
       <AgentLifecycleDialogs />
+      <FrameBridgeHost />
     </QueryClientProvider>
   );
 };
+
+// Bridge is mounted at the layout so the parent-driven `navigateSection`
+// message is always handled regardless of the active sub-route, and so the
+// `onNavigate` emit fires on every Next.js navigation without depending on
+// per-page remounts. observer() so the agent-detail tab change inside
+// aiRoomStore triggers the onNavigate emit.
+const FrameBridgeHost = observer(() => {
+  useAiAgentsFrameBridge(true);
+  return null;
+});
 
 export default function AiAgentsRootLayout({ commonData, children }: Props) {
   return (

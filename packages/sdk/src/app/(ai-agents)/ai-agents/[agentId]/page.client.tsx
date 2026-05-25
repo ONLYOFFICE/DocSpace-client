@@ -43,7 +43,6 @@ import {
 } from "../../_store";
 import type { AiRoomTab } from "../../_store";
 import useAiAgentsPageInit from "../../_hooks/useAiAgentsPageInit";
-import useAiAgentsFrameBridge from "../../_hooks/useAiAgentsFrameBridge";
 import useAiRoomSocket from "../../_hooks/useAiRoomSocket";
 
 import AiAgentView from "../../_components/ai-agent-view";
@@ -75,7 +74,6 @@ const AiAgentDetailPage = ({
   const resultFilesStore = useResultFilesStore();
 
   useAiAgentsPageInit();
-  useAiAgentsFrameBridge(true, aiRoomStore.currentTab);
   useAiRoomSocket(aiRoomStore.knowledgeId);
   useAiRoomSocket(aiRoomStore.resultId);
 

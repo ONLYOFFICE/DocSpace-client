@@ -134,7 +134,7 @@ export default function useDocsHotkeys({
   // Select all
   useHotkeys(
     "ctrl+a, command+a",
-    (e) => {
+    (e: KeyboardEvent) => {
       if (!isEnabled()) return;
       e.preventDefault();
       filesSelectionStore.setSelection([...filesListStore.items]);

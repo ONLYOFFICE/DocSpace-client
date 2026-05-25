@@ -1,10 +1,19 @@
 import { useTranslation } from "react-i18next";
 
 import { EmptyView as EmptyViewComponent } from "@docspace/shared/components/empty-view";
+import type { EmptyViewOptionsType } from "@docspace/ui-kit/components/empty-view";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { FolderType } from "@docspace/shared/enums";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 import ClearEmptyFilterSvg from "PUBLIC_DIR/images/clear.empty.filter.svg";
+import UploadPDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.pdf.form.svg";
+import UploadDevicePDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.device.pdf.form.svg";
+
+import { useAgentsAIConfigStore } from "../../../_store";
+import useKnowledgeUpload from "../../../_hooks/useKnowledgeUpload";
+import KnowledgeDisabledContainer from "./KnowledgeDisabledContainer";
 
 import {
   getRootDescription,
@@ -31,6 +40,20 @@ const EmptyView = ({
   const { isBase: isBaseTheme } = useTheme();
 
   const rootFolderType = current.rootFolderType;
+
+  // Knowledge folder + vectorization disabled in the portal — server
+  // rejects any copy/upload here, so render the "configure provider"
+  // placeholder instead of the regular empty view + upload CTAs. Mirrors
+  // client's Section/Body branch (Home/Section/Body/index.js:492-497).
+  const aiConfigStore = useAgentsAIConfigStore();
+  if (
+    !isFiltered &&
+    current.type === FolderType.Knowledge &&
+    aiConfigStore.aiConfig &&
+    !aiConfigStore.aiConfig.vectorizationEnabled
+  ) {
+    return <KnowledgeDisabledContainer />;
+  }
 
   const title = isFiltered
     ? t("Common:NoFindingsFound")
@@ -72,12 +95,59 @@ const EmptyView = ({
     },
   ];
 
+  // Knowledge empty view exposes the same Upload options as the filter
+  // main-button (From portal / From device). Handlers come from the
+  // shared `useKnowledgeUpload` hook so the empty-state CTA and the
+  // filter dropdown stay in sync. "From portal" opens the FilesSelector
+  // dialog mounted at the layout; "From device" is currently a stub.
+  // Knowledge is detected by `current.type` (not `rootFolderType`, which
+  // is the parent room's type).
+  const showUploadOptions =
+    !isFiltered && current.type === FolderType.Knowledge;
+
+  const { onUploadFromDocSpace, onUploadFromDevice } = useKnowledgeUpload();
+
+  const uploadOptions: EmptyViewOptionsType = [
+    {
+      key: "knowledge-empty-upload-from-docspace",
+      title: t("EmptyView:UploadFromPortalTitle", {
+        productName: getBrandName("ProductName"),
+        defaultValue: "Upload from {{productName}}",
+      }),
+      description: t("Common:UploadFilesPortal", {
+        sectionNameFirst: t("Common:MyDocuments"),
+        sectionNameSecond: t("Common:Rooms"),
+        defaultValue:
+          "Pick files from {{sectionNameFirst}} or {{sectionNameSecond}}.",
+      }),
+      icon: <UploadPDFFormIcon />,
+      onClick: onUploadFromDocSpace,
+    },
+    {
+      key: "knowledge-empty-upload-from-device",
+      title: t("EmptyView:UploadDeviceOptionTitle", {
+        defaultValue: "Upload from device",
+      }),
+      description: t("Common:UploadFilesDevice", {
+        defaultValue: "Pick files from your device.",
+      }),
+      icon: <UploadDevicePDFFormIcon />,
+      onClick: onUploadFromDevice,
+    },
+  ];
+
+  const options = isFiltered
+    ? filterOptions
+    : showUploadOptions
+      ? uploadOptions
+      : [];
+
   return (
     <EmptyViewComponent
       icon={icon}
       title={title}
       description={description}
-      options={isFiltered ? filterOptions : []}
+      options={options}
     />
   );
 };

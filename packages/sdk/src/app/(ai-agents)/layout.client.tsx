@@ -47,6 +47,7 @@ import {
   AgentsNavigationHeader,
   AgentsNavigationSubmenu,
 } from "./_components/agents-navigation";
+import KnowledgeUploadSelectorDialog from "./_components/knowledge-upload-selector-dialog";
 import { AgentsCommonDataProvider } from "./_store/AgentsCommonDataContext";
 import useAiAgentsFrameBridge from "./_hooks/useAiAgentsFrameBridge";
 
@@ -243,6 +244,7 @@ const AiAgentsBootstrap = ({
     <QueryClientProvider client={queryClient}>
       {children}
       <AgentLifecycleDialogs />
+      <KnowledgeUploadSelectorDialog />
       <FrameBridgeHost />
     </QueryClientProvider>
   );

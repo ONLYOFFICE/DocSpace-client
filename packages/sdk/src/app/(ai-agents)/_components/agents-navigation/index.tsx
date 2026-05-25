@@ -15,6 +15,9 @@ import {
 } from "@docspace/ui-kit/components/quick-actions";
 import { CreateAgentIcon } from "@docspace/ui-kit/components/quick-actions/icons";
 import type { MainButtonProps } from "@docspace/ui-kit/components/main-button/MainButton.types";
+import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
+
+import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 
 import AgentsHeader from "../agents-header";
 import AgentsFilter from "../agents-filter";
@@ -28,9 +31,11 @@ import {
   useAgentsUserStore,
   useAiRoomStore,
   useFavoritesFilesStore,
+  useKnowledgeFilesStore,
   useRecentFilesStore,
   useTrashFilesStore,
 } from "../../_store";
+import useKnowledgeUpload from "../../_hooks/useKnowledgeUpload";
 import styles from "../agents-list/AgentsList.module.scss";
 
 // Single client component rendered from `(ai-agents)/layout.client.tsx` that
@@ -175,7 +180,58 @@ const RootFilter = observer(() => {
   );
 });
 
+// Knowledge tab filter: same alias-files filter UI as Recent/Favorites,
+// plus an Upload main-button dropdown with two items ("From device" /
+// "From {{productName}}"). Mirrors the client's Article MainButton
+// pattern for room folders. Upload handlers are stubs for now — wiring
+// them to the chunked-upload session pipeline is a separate task.
+const KnowledgeFilter = observer(() => {
+  const { t } = useTranslation(["Common"]);
+  const { onUploadFromDocSpace, onUploadFromDevice } = useKnowledgeUpload();
+
+  const uploadMenuModel = React.useMemo<ContextMenuModel[]>(
+    () => [
+      {
+        id: "knowledge-upload-from-docspace",
+        key: "knowledge-upload-from-docspace",
+        label: t("Common:FromPortal", { defaultValue: "From portal" }),
+        icon: ActionsUploadReactSvgUrl,
+        onClick: onUploadFromDocSpace,
+      },
+      {
+        id: "knowledge-upload-from-device",
+        key: "knowledge-upload-from-device",
+        label: t("Common:FromDevice", { defaultValue: "From device" }),
+        icon: ActionsUploadReactSvgUrl,
+        onClick: onUploadFromDevice,
+      },
+    ],
+    [t, onUploadFromDocSpace, onUploadFromDevice],
+  );
+
+  const mainButtonProps = React.useMemo<MainButtonProps>(
+    () => ({
+      isDropdown: true,
+      model: uploadMenuModel,
+      text: t("Common:Upload", { defaultValue: "Upload" }),
+    }),
+    [t, uploadMenuModel],
+  );
+
+  return (
+    <AliasFilesFilter
+      config={{
+        useStore: useKnowledgeFilesStore,
+        includeFoldersFilesArchivesInType: true,
+      }}
+      showMainButton
+      mainButtonProps={mainButtonProps}
+    />
+  );
+});
+
 const FilterArea = observer(({ route }: { route: Route }) => {
+  const aiRoomStore = useAiRoomStore();
   if (route === "root") return <RootFilter />;
   if (route === "recent") {
     return (
@@ -209,6 +265,9 @@ const FilterArea = observer(({ route }: { route: Route }) => {
         }}
       />
     );
+  }
+  if (route === "agent" && aiRoomStore.currentTab === "knowledge") {
+    return <KnowledgeFilter />;
   }
   return null;
 });

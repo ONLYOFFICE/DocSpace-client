@@ -28,6 +28,7 @@
 
 import React from "react";
 import { observer } from "mobx-react";
+import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -54,6 +55,7 @@ import {
 
 const AgentsEmptyView = () => {
   const { t } = useTranslation(["Common"]);
+  const router = useRouter();
   const { isBase } = useTheme();
 
   // Defer theme-dependent rendering until the client has mounted. The server
@@ -143,9 +145,13 @@ const AgentsEmptyView = () => {
     <EmptyAIAgentsDarkIcon />
   );
 
-  // Actions: AI-enabled + admin → [createAIAgent]. AI-disabled + admin path
-  // (goToAIProviderSettings) is not surfaced in the SDK because the SDK
-  // doesn't own portal settings UI.
+  // Actions:
+  // - AI-enabled + admin/owner → [createAIAgent] item.
+  // - AI-disabled + admin/owner → ["Go to settings"] button targeting the
+  //   SDK's providers route. Mirrors client's `onGoToAIProviderSettings`
+  //   from EmptyViewContainer.hooks.ts (just rewritten for the SDK
+  //   settings tree).
+  // - Anyone else (visitor, non-admin disabled view) → no actions.
   const options: EmptyViewOptionsType | null =
     aiReady && isAdminOrOwner && !isVisitor
       ? [
@@ -163,7 +169,21 @@ const AgentsEmptyView = () => {
             disabled: false,
           },
         ]
-      : null;
+      : !aiReady && isAdminOrOwner
+        ? [
+            {
+              type: "button",
+              key: "go-to-ai-provider-settings",
+              title: t("Common:GoToSettings", {
+                defaultValue: "Go to settings",
+              }),
+              onClick: (event: React.MouseEvent<HTMLElement>) => {
+                event.preventDefault();
+                router.push("/ai-agents/settings/providers");
+              },
+            },
+          ]
+        : null;
 
   return (
     <EmptyView

@@ -79,6 +79,12 @@ class AgentDialogsStore {
 
   aiAgentsDialogVisible = false;
 
+  // Knowledge "Upload from {{productName}}" picker. Mirrors client's
+  // `dialogsStore.selectFileAiKnowledgeDialogVisible` — drives a
+  // <FilesSelector> dialog whose `onSelectFile` copies the picked files
+  // into the agent's knowledge folder via `copyToFolder`.
+  selectFileAiKnowledgeDialogVisible = false;
+
   editingAgent: Nullable<TAgent> = null;
 
   deleteAgentDialogState: { visible: boolean; agent: Nullable<TAgent> } = {
@@ -137,6 +143,10 @@ class AgentDialogsStore {
 
   setAiAgentsDialogVisible = (visible: boolean) => {
     this.aiAgentsDialogVisible = visible;
+  };
+
+  setSelectFileAiKnowledgeDialogVisible = (visible: boolean) => {
+    this.selectFileAiKnowledgeDialogVisible = visible;
   };
 
   setDeleteAgentDialogVisible = (

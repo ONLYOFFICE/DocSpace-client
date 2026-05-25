@@ -178,6 +178,13 @@ export default function useItemContextMenu({
 
     model.add(AVAILABLE_CONTEXT_ITEMS.showInfo);
 
+    // Knowledge-folder retry: the server sets `security.Vectorization` on
+    // files that live inside a Knowledge subfolder of an AI agent. Mirrors
+    // the client's ContextOptionsStore vectorization entry.
+    if (file.security?.Vectorization) {
+      model.add(AVAILABLE_CONTEXT_ITEMS.vectorization);
+    }
+
     if (file.security.Delete) {
       if (isTrashSection) {
         model.add(AVAILABLE_CONTEXT_ITEMS.deletePermanently);

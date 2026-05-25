@@ -27,6 +27,7 @@ import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.rea
 import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
 import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
 import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
@@ -52,6 +53,13 @@ type UseContextMenuModelProps = {
   onMoveSelectedClick?: (items: (TFileItem | TFolderItem)[]) => void;
   onRestoreSelectedClick?: (items: (TFileItem | TFolderItem)[]) => void;
   onShowVersionHistoryClick?: (item: TFileItem) => void;
+  /**
+   * Caller-supplied retry handler for AI Knowledge files. When provided
+   * (e.g. from the ai-agents row components), the "Vectorization" menu
+   * entry calls into it; otherwise the entry stays inert. Mirrors the
+   * client's `filesActionsStore.retryVectorization` wiring.
+   */
+  onRetryVectorization?: (item: TFileItem) => void;
 };
 
 export default function useContextMenuModel({
@@ -69,6 +77,7 @@ export default function useContextMenuModel({
   onMoveSelectedClick,
   onRestoreSelectedClick,
   onShowVersionHistoryClick,
+  onRetryVectorization,
 }: UseContextMenuModelProps) {
   const { t } = useTranslation(["Common"]);
 
@@ -467,6 +476,20 @@ export default function useContextMenuModel({
     [t, onDeleteClick],
   );
 
+  const getVectorizationItem = useCallback(
+    (i: TFileItem) => {
+      return {
+        id: "option_vectorization",
+        key: "vectorization",
+        label: t("Common:Vectorization"),
+        icon: RefreshReactSvgUrl,
+        onClick: () => onRetryVectorization?.(i),
+        disabled: !onRetryVectorization || !i.security?.Vectorization,
+      };
+    },
+    [t, onRetryVectorization],
+  );
+
   const getGroupCopyItem = useCallback(() => {
     const canCopy = filesSelectionStore.selection.every((i) => i.security.Copy);
     return {
@@ -743,6 +766,12 @@ export default function useContextMenuModel({
         actionGroup.push(getShowInfoItem(item!));
 
       if (
+        contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.vectorization) &&
+        !("isFolder" in item! && item!.isFolder)
+      )
+        actionGroup.push(getVectorizationItem(item as TFileItem));
+
+      if (
         contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.markAsFavorite) ||
         contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.removeFromFavorites)
       ) {
@@ -810,6 +839,7 @@ export default function useContextMenuModel({
       getBlockUnblockVersionItem,
       getCustomFilterItem,
       getDeleteItem,
+      getVectorizationItem,
       getHeaderContextMenuModel,
       getGroupContextMenuModel,
 

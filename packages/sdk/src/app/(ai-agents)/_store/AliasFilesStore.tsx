@@ -11,6 +11,7 @@ import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { CategoryType } from "@docspace/shared/constants";
+import type { VectorizationStatus } from "@docspace/shared/enums";
 
 export type AliasViewAs = "tile" | "row" | "table";
 
@@ -115,6 +116,20 @@ class AliasFilesStore {
 
   setViewAs = (value: AliasViewAs) => {
     this.viewAs = value;
+  };
+
+  // Optimistic per-file vectorization-status flip. Mirrors the client's
+  // FilesStore.updateFileVectorizationStatus — the AI-retry action calls
+  // this to flip InProgress before the POST and reverts to Failed on
+  // error. Server-pushed updates come in via socket and re-set the same
+  // field through a regular fetch/getFileInfo refresh.
+  updateFileVectorizationStatus = (
+    fileId: TFile["id"],
+    status: VectorizationStatus,
+  ) => {
+    const index = this.files.findIndex((file) => file.id === fileId);
+    if (index === -1) return;
+    this.files[index] = { ...this.files[index], vectorizationStatus: status };
   };
 
   apply = (filter: FilesFilter) => {

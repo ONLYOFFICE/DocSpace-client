@@ -3,7 +3,7 @@
   "content": "Enabled apps",
   "content_en_sha1_hash": "e88ea5ca9049bdea976bcde5fa31013cc3d93856",
   "created_at": "2026-05-19T19:03:15.713Z",
-  "updated_at": "2026-05-19T19:18:45.743Z",
+  "updated_at": "2026-05-24T17:27:49.069Z",
   "comment": {
     "text": "A navigation menu group label that serves as a header for a list of currently active applications.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 260,
-      "context": "const result: NavMenuGroup[] = [];\n if (enabled.length > 0) {\n result.push({\n id: \"enabled\",\n label: t(\"Common:EnabledApps\"),\n items: enabled,\n });\n }\n if (available.length > 0) {\n result.push({",
+      "line_number": 492,
+      "context": "const result: NavMenuGroup[] = [];\n if (enabled.length > 0) {\n result.push({\n id: \"enabled\",\n label: hasAvailableGroup ? t(\"Common:EnabledApps\") : undefined,\n items: enabled,\n });\n }\n if (hasAvailableGroup) {\n result.push({",
       "module": "/packages/client"
     }
   ],

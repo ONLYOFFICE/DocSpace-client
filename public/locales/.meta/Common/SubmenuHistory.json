@@ -3,7 +3,7 @@
   "content": "History",
   "content_en_sha1_hash": "90ccd6497400b5576aeca1bd94af74aae1e0a250",
   "created_at": "2026-05-19T19:03:25.019Z",
-  "updated_at": "2026-05-19T19:05:09.389Z",
+  "updated_at": "2026-05-24T17:27:49.132Z",
   "comment": {
     "text": "Tab label or section heading used to identify the history view within the info panel or webhook settings.",
     "is_auto": true,
@@ -24,9 +24,15 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/sdk/src/app/(personal-files)/_components/info-panel/Header.tsx",
-      "line_number": 74,
-      "context": "const tabItems = availableTabs.map((id) => {\n let name: string;\n if (id === InfoPanelView.infoShare) {\n name = t(\"Common:Share\");\n } else if (id === InfoPanelView.infoHistory) {\n name = t(\"Common:SubmenuHistory\");\n } else {\n name = t(\"Common:SubmenuDetails\");\n }\n \n return { id, name, onClick: () => setView(id), content: null };",
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/info-panel/index.tsx",
+      "line_number": 63,
+      "context": "content: null,\n onClick: () => setView(\"members\"),\n },\n {\n id: \"history\" as AgentInfoPanelView,\n name: t(\"Common:SubmenuHistory\", { defaultValue: \"History\" }),\n content: null,\n onClick: () => setView(\"history\"),\n },\n {\n id: \"details\" as AgentInfoPanelView,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/Header.tsx",
+      "line_number": 76,
+      "context": "if (id === InfoPanelView.infoMembers) {\n name = t(\"Common:Contacts\");\n } else if (id === InfoPanelView.infoShare) {\n name = t(\"Common:Share\");\n } else if (id === InfoPanelView.infoHistory) {\n name = t(\"Common:SubmenuHistory\");\n } else {\n name = t(\"Common:SubmenuDetails\");\n }\n \n return { id, name, onClick: () => setView(id), content: null };",
       "module": "/packages/sdk"
     }
   ],

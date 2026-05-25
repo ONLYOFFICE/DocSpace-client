@@ -3,7 +3,7 @@
   "content": "Go to {{sectionName}}",
   "content_en_sha1_hash": "c1337f981bf1d4a2b8b5f06ade64c7b13617b7ef",
   "created_at": "2025-05-19T21:30:55.713Z",
-  "updated_at": "2026-05-15T14:00:06.595Z",
+  "updated_at": "2026-05-24T17:27:49.056Z",
   "comment": {
     "text": "This is a button label or link text that directs the user to a specific section of the application. `{{sectionName}}` will be replaced by the name of the target section (e.g., \"AI Agents\", \"My Documents\").",
     "is_auto": true,
@@ -20,8 +20,14 @@
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
       "line_number": 543,
-      "context": "])\n .with([FolderType.TRASH, P._, P.when((item) => !item)], () => [\n {\n ...actions.onGoToPersonal(),\n icon: <PersonIcon />,\n description: t(\"Files:GoToSection\", {\n sectionName: t(\"Common:MyDocuments\"),\n }),\n key: \"empty-view-trash-goto-personal\",\n },\n ])",
+      "context": "])\n .with([FolderType.TRASH, P._, P.when((item) => !item)], () => [\n {\n ...actions.onGoToPersonal(),\n icon: <PersonIcon />,\n description: t(\"Common:GoToSection\", {\n sectionName: t(\"Common:MyDocuments\"),\n }),\n key: \"empty-view-trash-goto-personal\",\n },\n ])",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/no-access-agent/index.tsx",
+      "line_number": 81,
+      "context": "{\n to: \"\",\n icon: <AIAgentsIcon />,\n onClick: onGoTo,\n key: \"empty-view-goto-agents\",\n description: t(\"Common:GoToSection\", {\n sectionName: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n defaultValue: \"Go to {{sectionName}}\",\n }),\n },\n ]}",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

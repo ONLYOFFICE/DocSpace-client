@@ -70,7 +70,7 @@
   "ItemsCount": "Кількість елементів на сторінці",
   "ItemsCountDescription": "Можна вказати кількість файлів/папок, які буде показано на одній сторінці, а також вказати, з якої сторінки почати показ",
   "JavaScriptCodeDescription": "Вбудовування простору {{productName}} або його частини за допомогою JavaScript. Скопіюйте представлений нижче код JavaScript.",
-  "JavascriptSdk": "SDK Javascript",
+  "JavascriptSdk": "Javascript SDK",
   "LimitByTime": "Обмеження за періодом часу",
   "LinkSetDescription": "Це посилання захищено {{parameter}}. Щоб налаштувати посилання,",
   "LinkSetDescription2": "Для цього посилання встановлено {{parameter1}} і {{parameter2}}. Щоб налаштувати посилання,",

@@ -1,0 +1,35 @@
+{
+  "key_path": "ArbiterTitle",
+  "content": "AI Arbiter",
+  "content_en_sha1_hash": "542571c512268a0755f7361f633efe00b416b5cf",
+  "created_at": "2026-05-24T17:27:18.729Z",
+  "updated_at": "2026-05-24T18:40:45.799Z",
+  "comment": {
+    "text": "Heading/title for the AI Arbiter feature page and its introduction screen.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:40:45.799Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/IntroBackdrop.tsx",
+      "line_number": 60,
+      "context": "return (\n <div className={styles.introBackdrop}>\n <div className={styles.introIllustration} aria-hidden=\"true\">\n {isBase ? <AiAgentsLightIllustration /> : <AiAgentsDarkIllustration />}\n </div>\n <p className={styles.introTitle}>{t(\"Common:ArbiterTitle\")}</p>\n <p className={styles.introDescription}>\n {t(\"Common:ArbiterIntroDescription\")}\n </p>\n {onStart ? (\n <button",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/ai-arbiter/page.client.tsx",
+      "line_number": 206,
+      "context": ">\n {t(\"Common:ArbiterResetConfiguration\")}\n </button>\n \n <div className={styles.pageHeader}>\n <p className={styles.pageTitle}>{t(\"Common:ArbiterTitle\")}</p>\n <p className={styles.pageDescription}>\n {t(\"Common:ArbiterPageDescription\")}\n </p>\n </div>",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

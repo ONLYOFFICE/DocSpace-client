@@ -3,7 +3,7 @@
   "content": "AI settings",
   "content_en_sha1_hash": "6dcf51d7630d6e48c2162d10dfcc2c61485912c7",
   "created_at": "2025-10-27T16:14:27.398Z",
-  "updated_at": "2026-05-15T16:22:24.046Z",
+  "updated_at": "2026-05-24T17:27:49.094Z",
   "comment": {
     "text": "This is a label for a section or link related to artificial intelligence settings. It appears in dialogs and portal settings pages.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 97,
-      "context": "handleServiceQuota,\n fetchAiServiceBalance,\n defaultFolderType,\n updateDefaultFolderType,\n }: AiServicesManagementProps) => {\n const { t, ready } = useTranslation([\"Settings\", \"Common\", \"AISettings\"]);\n const navigate = useNavigate();\n const location = useLocation();\n \n const [type, setType] = useState(true);\n const [showReminder, setShowReminder] = useState(false);",
+      "line_number": 241,
+      "context": ") : null}\n <Text className=\"category-item-description\" fontSize=\"13px\">\n {t(\"AiServicesManagementDescription\", {\n productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n aiSettings: t(\"AISettings\"),\n aiServices: t(\"Common:AIServices\"),\n organizationName: getBrandName(\"OrganizationName\"),\n })}\n </Text>\n {aiServicesManagementUrl ? (",
       "module": "/packages/client"
     },
     {

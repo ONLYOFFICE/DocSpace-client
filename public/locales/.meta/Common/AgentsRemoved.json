@@ -3,7 +3,7 @@
   "content": "Agents removed",
   "content_en_sha1_hash": "6ab4676e4d68903c1758c17abb1557370c9205fb",
   "created_at": "2025-10-27T16:14:29.966Z",
-  "updated_at": "2026-05-15T14:00:06.672Z",
+  "updated_at": "2026-05-24T17:27:49.091Z",
   "comment": {
     "text": "Toast message indicating that multiple AI agents have been successfully removed.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
       "line_number": 134,
-      "context": "const translations = {\n successRemoveRoom: isAIAgent\n ? t(\"Files:AgentRemoved\")\n : t(\"Files:RoomRemoved\"),\n successRemoveRooms: isAIAgent\n ? t(\"Files:AgentsRemoved\")\n : t(\"Files:RoomsRemoved\"),\n };\n \n if (isTemplate) {\n translations.successRemoveTemplate = t(\"Files:TemplateRemoved\");",
+      "context": "const translations = {\n successRemoveRoom: isAIAgent\n ? t(\"Common:AgentRemoved\")\n : t(\"Files:RoomRemoved\"),\n successRemoveRooms: isAIAgent\n ? t(\"Common:AgentsRemoved\")\n : t(\"Files:RoomsRemoved\"),\n };\n \n if (isTemplate) {\n translations.successRemoveTemplate = t(\"Files:TemplateRemoved\");",
       "module": "/packages/client"
     }
   ],

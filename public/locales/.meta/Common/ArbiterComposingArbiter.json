@@ -1,0 +1,29 @@
+{
+  "key_path": "ArbiterComposingArbiter",
+  "content": "Composing the arbiter...",
+  "content_en_sha1_hash": "4cd444fc3b71b7e951534c59c5242a1ad54fecd1",
+  "created_at": "2026-05-24T17:27:18.082Z",
+  "updated_at": "2026-05-24T18:58:20.199Z",
+  "comment": {
+    "text": "A loading status message shown in the chat interface while the AI arbiter is generating its response.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:58:20.199Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/ChatPhase.tsx",
+      "line_number": 52,
+      "context": "if (!text) return t(\"Common:ArbiterAnalyzingAnswers\");\n const roleMatches = text.match(/\"role_title\"\\s*:/g);\n const roleCount = roleMatches ? roleMatches.length : 0;\n if (text.includes('\"arbiter\"')) {\n if (text.trimEnd().endsWith(\"}\")) return t(\"Common:ArbiterFinalizingPanel\");\n return t(\"Common:ArbiterComposingArbiter\");\n }\n if (roleCount > 0) return t(\"Common:ArbiterDesigningExpert\", { number: roleCount });\n return t(\"Common:ArbiterAnalyzingAnswers\");\n }",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "key_path": "ArbiterRemoveExpert",
+  "content": "Remove {{name}}",
+  "content_en_sha1_hash": "b99a913cfd507efde96756f3e5659cb072d093d5",
+  "created_at": "2026-05-24T17:27:18.404Z",
+  "updated_at": "2026-05-24T18:49:04.816Z",
+  "comment": {
+    "text": "Aria-label for the removal button on an agent tag; {{name}} represents the name of the expert being deleted.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:49:04.816Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/AgentList.tsx",
+      "line_number": 105,
+      "context": "{onRemoveExpert && !isRunning && (\n <button\n type=\"button\"\n className={styles.agentTagRemove}\n onClick={() => onRemoveExpert(a.id)}\n aria-label={t(\"Common:ArbiterRemoveExpert\", { name: a.title })}\n >\n x\n </button>\n )}\n </span>",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

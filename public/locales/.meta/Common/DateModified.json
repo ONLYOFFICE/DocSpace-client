@@ -3,7 +3,7 @@
   "content": "Date modified",
   "content_en_sha1_hash": "dcef8297cd84445acb4ad6b84e674163d3d9765e",
   "created_at": "2026-05-19T19:03:14.149Z",
-  "updated_at": "2026-05-19T19:21:10.918Z",
+  "updated_at": "2026-05-24T17:27:49.120Z",
   "comment": {
     "text": "A label in the file details panel that indicates when the file was last changed. It appears as a property name within a list of metadata.",
     "is_auto": true,
@@ -18,8 +18,14 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/sdk/src/app/(personal-files)/_components/info-panel/views/Details/Details.utils.tsx",
-      "line_number": 128,
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/info-panel/views/details.tsx",
+      "line_number": 108,
+      "context": "{renderPerson(agent.createdBy)}\n </Row>\n <Row title={t(\"Common:Content\", { defaultValue: \"Content\" })}>\n {contentLabel}\n </Row>\n <Row title={t(\"Common:DateModified\", { defaultValue: \"Date modified\" })}>\n {getCorrectDate(culture, agent.updated)}\n </Row>\n <Row\n title={t(\"Common:LastModifiedBy\", {\n defaultValue: \"Last modified by\",",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Details/Details.utils.tsx",
+      "line_number": 178,
       "context": "case \"Content\":\n return this.t(\"Common:Content\");\n case \"Size\":\n return this.t(\"Common:Size\");\n case \"Date modified\":\n return this.t(\"Common:DateModified\");\n case \"Last modified by\":\n return this.t(\"Common:LastModifiedBy\");\n case \"Creation date\":\n return this.t(\"Common:CreationDate\");\n case \"Versions\":",
       "module": "/packages/sdk"
     }

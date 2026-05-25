@@ -3,7 +3,7 @@
   "content": "Sorry, this file format isn't supported",
   "content_en_sha1_hash": "44faa0a5086202b59ef30646e8573a659f5c5bc0",
   "created_at": "2025-05-19T21:30:46.955Z",
-  "updated_at": "2026-05-15T14:00:06.883Z",
+  "updated_at": "2026-05-24T17:27:49.186Z",
   "comment": {
     "text": "This is an error toast message displayed when a user attempts to upload a file with an unsupported format.",
     "is_auto": true,
@@ -22,6 +22,12 @@
       "line_number": 221,
       "context": "toastr.error(t(\"Common:SizeImageLarge\"));\n }\n });\n } catch (error) {\n console.error(error);\n toastr.error(t(\"Common:NotSupportedFormat\"));\n }\n };\n }\n \n export default AvatarEditorDialogStore;",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_store/AvatarEditorStore.tsx",
+      "line_number": 211,
+      "context": "}\n return undefined;\n });\n } catch (error) {\n console.error(error);\n toastr.error(t(\"Common:NotSupportedFormat\"));\n return undefined;\n } finally {\n // Release the decoded bitmap from memory once we are done with it\n // (the canvas already holds a copy of the pixel data).\n imageBitMap?.close();",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

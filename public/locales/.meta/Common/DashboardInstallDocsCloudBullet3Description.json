@@ -1,0 +1,29 @@
+{
+  "key_path": "DashboardInstallDocsCloudBullet3Description",
+  "content": "Works with DOCX, XLSX, PPTX and all major office formats.",
+  "content_en_sha1_hash": "98a5df3ec996ac382fc0d60c2ba2349233d4bd68",
+  "created_at": "2026-05-24T17:27:23.160Z",
+  "updated_at": "2026-05-24T18:21:21.944Z",
+  "comment": {
+    "text": "Bullet point description in the Install DocsCloud dialog listing supported file formats.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:21:21.944Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallDocsCloudDialog.tsx",
+      "line_number": 111,
+      "context": "description: t(\"Common:DashboardInstallDocsCloudBullet2Description\"),\n },\n {\n Icon: CatalogFolderIcon,\n title: t(\"Common:DashboardInstallDocsCloudBullet3\"),\n description: t(\"Common:DashboardInstallDocsCloudBullet3Description\"),\n },\n ];\n \n const confirmBody = (\n <div className={styles.confirmBody}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

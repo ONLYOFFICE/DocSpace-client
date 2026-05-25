@@ -1,20 +1,20 @@
 {
   "key_path": "DashboardArbiterInstallConfirmIntro",
   "content": "Ask the same question to multiple AI experts and let the arbiter weigh their answers — then get a single, well-reasoned verdict. We’ll set everything up in a moment.",
-  "content_en_sha1_hash": "3e497feee9faa347a711d231c43a4f881eae703c",
-  "created_at": "2026-05-20T10:00:00.000Z",
-  "updated_at": "2026-05-20T12:00:00.000Z",
+  "content_en_sha1_hash": "e3ef338d0300d95e2b7259f34c5182808d01a167",
+  "created_at": "2026-05-24T17:27:22.953Z",
+  "updated_at": "2026-05-24T18:23:21.545Z",
   "comment": {
-    "text": "Introductory paragraph shown in the AI Arbiter install confirmation dialog before the user starts setup. Explains the core multi-expert AI consensus feature: ask multiple AI experts, let arbiter weigh answers, get single verdict.",
+    "text": "Introductory text in the AI Arbiter installation confirmation dialog that explains how the feature synthesizes multiple AI expert answers into a single verdict.",
     "is_auto": true,
-    "updated_at": "2026-05-20T10:00:00.000Z",
-    "model": "claude-sonnet-4-6"
+    "updated_at": "2026-05-24T18:23:21.545Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/helpers/apps-catalog.tsx",
-      "line_number": 1,
-      "context": "t(\"Common:DashboardArbiterInstallConfirmIntro\")",
+      "file_path": "/packages/client/src/pages/Dashboard/InstallAiArbiterDialog/index.tsx",
+      "line_number": 111,
+      "context": "<AiAgentsDarkIllustration />\n )}\n </div>\n \n <Text as=\"p\" className={styles.confirmText}>\n {t(\"Common:DashboardArbiterInstallConfirmIntro\")}\n </Text>\n \n <ul className={styles.bulletList}>\n {confirmBullets.map(({ icon: Icon, title, description }) => (\n <li key={title} className={styles.bulletItem}>",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "AI agents",
   "content_en_sha1_hash": "2b51b10f658502a5ad4e50a7005f9bddf67f44c0",
   "created_at": "2025-09-26T15:20:53.940Z",
-  "updated_at": "2026-05-15T15:37:40.162Z",
+  "updated_at": "2026-05-24T17:27:49.055Z",
   "comment": {
     "text": "This is a label for a feature or service related to artificial intelligence. It appears in billing panels and selectors.",
     "is_auto": true,
@@ -56,55 +56,55 @@
     {
       "file_path": "/packages/client/src/components/EmptyContainer/KnowledgeDisabledContainer.js",
       "line_number": 54,
-      "context": "const titleRoomNoAccess = t(\"AIRoom:KnowledgeUnavailable\");\n const descriptionRoomNoAccess = isAdmin\n ? t(\"AIRoom:KnowledgeUnavailableDescription\", {\n productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"AIRoom:KnowledgeUnavailableDescriptionUser\", {\n productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n });",
+      "context": "const titleRoomNoAccess = t(\"Common:KnowledgeUnavailable\");\n const descriptionRoomNoAccess = isAdmin\n ? t(\"Common:KnowledgeUnavailableDescription\", {\n productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"Common:KnowledgeUnavailableDescriptionUser\", {\n productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/KnowledgeDisabledContainer.js",
       "line_number": 54,
-      "context": "const titleRoomNoAccess = t(\"AIRoom:KnowledgeUnavailable\");\n const descriptionRoomNoAccess = isAdmin\n ? t(\"AIRoom:KnowledgeUnavailableDescription\", {\n productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"AIRoom:KnowledgeUnavailableDescriptionUser\", {\n productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n });",
+      "context": "const titleRoomNoAccess = t(\"Common:KnowledgeUnavailable\");\n const descriptionRoomNoAccess = isAdmin\n ? t(\"Common:KnowledgeUnavailableDescription\", {\n productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"Common:KnowledgeUnavailableDescriptionUser\", {\n productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/NoAccessContainer.tsx",
       "line_number": 152,
-      "context": "emptyViewProps = {\n title: t(\"AIRoom:NoAccessAIAgentTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n }),\n description: t(\"AIRoom:AIAgentAccessRedirectNote\", {\n sectionName: t(\"Common:AIAgents\"),\n }),\n icon: theme.isBase ? (\n <ManageAccessRightsLightIcon />\n ) : (\n <ManageAccessRightsDarkIcon />",
+      "context": "emptyViewProps = {\n title: t(\"Common:NoAccessAIAgentTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n }),\n description: t(\"Common:AIAgentAccessRedirectNote\", {\n sectionName: t(\"Common:AIAgents\"),\n }),\n icon: theme.isBase ? (\n <ManageAccessRightsLightIcon />\n ) : (\n <ManageAccessRightsDarkIcon />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/NoAccessContainer.tsx",
       "line_number": 152,
-      "context": "emptyViewProps = {\n title: t(\"AIRoom:NoAccessAIAgentTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n }),\n description: t(\"AIRoom:AIAgentAccessRedirectNote\", {\n sectionName: t(\"Common:AIAgents\"),\n }),\n icon: theme.isBase ? (\n <ManageAccessRightsLightIcon />\n ) : (\n <ManageAccessRightsDarkIcon />",
+      "context": "emptyViewProps = {\n title: t(\"Common:NoAccessAIAgentTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n }),\n description: t(\"Common:AIAgentAccessRedirectNote\", {\n sectionName: t(\"Common:AIAgents\"),\n }),\n icon: theme.isBase ? (\n <ManageAccessRightsLightIcon />\n ) : (\n <ManageAccessRightsDarkIcon />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
       "line_number": 195,
-      "context": "};\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"EmptyView:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"EmptyView:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n };",
+      "context": "};\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"Common:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"Common:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
       "line_number": 195,
-      "context": "};\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"EmptyView:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"EmptyView:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n };",
+      "context": "};\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"Common:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"Common:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
       "line_number": 195,
-      "context": "};\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"EmptyView:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"EmptyView:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n };",
+      "context": "};\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"Common:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"Common:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
       "line_number": 195,
-      "context": "};\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"EmptyView:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"EmptyView:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n };",
+      "context": "};\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"Common:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"Common:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
       "line_number": 195,
-      "context": "};\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"EmptyView:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"EmptyView:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n };",
+      "context": "};\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"Common:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"Common:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n };",
       "module": "/packages/client"
     },
     {
@@ -116,13 +116,13 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
       "line_number": 272,
-      "context": "}\n >\n <Text className={generalStyles.description}>\n {t(\"AISettings:KnowledgeSettingsDescription\", {\n modelName: aiConfig?.embeddingModel || \"text-embedding-3-small\",\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n {knowledgeSettingsUrl ? (\n <Link\n className={generalStyles.learnMoreLink}",
+      "context": "}\n >\n <Text className={generalStyles.description}>\n {t(\"Common:KnowledgeSettingsDescription\", {\n modelName: aiConfig?.embeddingModel || \"text-embedding-3-small\",\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n {knowledgeSettingsUrl ? (\n <Link\n className={generalStyles.learnMoreLink}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/DefaultProvider.tsx",
       "line_number": 367,
-      "context": "{t(\"AISettings:DefaultProviderTitle\")}\n </Heading>\n <Text className={styles.description} lineHeight=\"20px\">\n {t(\"AISettings:DefaultProviderDescription\", {\n aiProvider: t(\"Common:AIProvider\"),\n aiAgents: t(\"Common:AIAgents\"),\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n \n <div className={styles.defaultProviderForm}>",
+      "context": "{t(\"Common:DefaultProviderTitle\")}\n </Heading>\n <Text className={styles.description} lineHeight=\"20px\">\n {t(\"Common:DefaultProviderDescription\", {\n aiProvider: t(\"Common:AIProvider\"),\n aiAgents: t(\"Common:AIAgents\"),\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n \n <div className={styles.defaultProviderForm}>",
       "module": "/packages/client"
     },
     {
@@ -181,19 +181,19 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1377,
+      "line_number": 1783,
       "context": "if (isAIAgent) {\n translationForOneItem = isPin\n ? t(\"AIAgentPinned\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"AIAgentUnpinned\", { aiAgent: t(\"Common:AIAgent\") });\n translationForSeverals = isPin\n ? t(\"AIAgentsPinned\", { aiAgents: t(\"Common:AIAgents\") })\n : t(\"AIAgentsUnpinned\", { aiAgents: t(\"Common:AIAgents\") });\n } else {\n translationForOneItem = isPin ? t(\"RoomPinned\") : t(\"RoomUnpinned\");\n translationForSeverals = isPin\n ? t(\"RoomsPinned\", { count: elems.length })",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1377,
+      "line_number": 1783,
       "context": "if (isAIAgent) {\n translationForOneItem = isPin\n ? t(\"AIAgentPinned\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"AIAgentUnpinned\", { aiAgent: t(\"Common:AIAgent\") });\n translationForSeverals = isPin\n ? t(\"AIAgentsPinned\", { aiAgents: t(\"Common:AIAgents\") })\n : t(\"AIAgentsUnpinned\", { aiAgents: t(\"Common:AIAgents\") });\n } else {\n translationForOneItem = isPin ? t(\"RoomPinned\") : t(\"RoomUnpinned\");\n translationForSeverals = isPin\n ? t(\"RoomsPinned\", { count: elems.length })",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1377,
+      "line_number": 1783,
       "context": "if (isAIAgent) {\n translationForOneItem = isPin\n ? t(\"AIAgentPinned\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"AIAgentUnpinned\", { aiAgent: t(\"Common:AIAgent\") });\n translationForSeverals = isPin\n ? t(\"AIAgentsPinned\", { aiAgents: t(\"Common:AIAgents\") })\n : t(\"AIAgentsUnpinned\", { aiAgents: t(\"Common:AIAgents\") });\n } else {\n translationForOneItem = isPin ? t(\"RoomPinned\") : t(\"RoomUnpinned\");\n translationForSeverals = isPin\n ? t(\"RoomsPinned\", { count: elems.length })",
       "module": "/packages/client"
     },
@@ -202,6 +202,78 @@
       "line_number": 76,
       "context": "const treeFolders = await getFoldersTree();\n \n treeFolders.forEach((folder) => {\n switch (folder.rootFolderType) {\n case FolderType.AIAgents:\n folder.title = i18n.t(\"Common:AIAgents\");\n break;\n case FolderType.USER:\n folder.title = i18n.t(\"Common:MyDocuments\");\n break;\n case FolderType.SHARE:",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
+      "line_number": 84,
+      "context": "const standalone = true;\n \n const title = aiReady\n ? isVisitor\n ? t(\"Common:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n defaultValue: \"No {{aiAgents}} yet\",\n })\n : t(\"Common:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\", { defaultValue: \"AI Agent\" }),\n defaultValue: \"Create your first {{aiAgent}}\",",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
+      "line_number": 84,
+      "context": "const standalone = true;\n \n const title = aiReady\n ? isVisitor\n ? t(\"Common:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n defaultValue: \"No {{aiAgents}} yet\",\n })\n : t(\"Common:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\", { defaultValue: \"AI Agent\" }),\n defaultValue: \"Create your first {{aiAgent}}\",",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
+      "line_number": 84,
+      "context": "const standalone = true;\n \n const title = aiReady\n ? isVisitor\n ? t(\"Common:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n defaultValue: \"No {{aiAgents}} yet\",\n })\n : t(\"Common:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\", { defaultValue: \"AI Agent\" }),\n defaultValue: \"Create your first {{aiAgent}}\",",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
+      "line_number": 84,
+      "context": "const standalone = true;\n \n const title = aiReady\n ? isVisitor\n ? t(\"Common:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n defaultValue: \"No {{aiAgents}} yet\",\n })\n : t(\"Common:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\", { defaultValue: \"AI Agent\" }),\n defaultValue: \"Create your first {{aiAgent}}\",",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
+      "line_number": 84,
+      "context": "const standalone = true;\n \n const title = aiReady\n ? isVisitor\n ? t(\"Common:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n defaultValue: \"No {{aiAgents}} yet\",\n })\n : t(\"Common:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\", { defaultValue: \"AI Agent\" }),\n defaultValue: \"Create your first {{aiAgent}}\",",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/knowledge/index.tsx",
+      "line_number": 260,
+      "context": "}\n >\n <Text className={generalStyles.description}>\n {t(\"Common:KnowledgeSettingsDescription\", {\n modelName: aiConfig?.embeddingModel || \"text-embedding-3-small\",\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n {knowledgeSettingsUrl ? (\n <Link\n className={generalStyles.learnMoreLink}",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/DefaultProvider.tsx",
+      "line_number": 352,
+      "context": "{t(\"Common:DefaultProviderTitle\")}\n </Heading>\n <Text className={styles.description} lineHeight=\"20px\">\n {t(\"Common:DefaultProviderDescription\", {\n aiProvider: t(\"Common:AIProvider\"),\n aiAgents: t(\"Common:AIAgents\"),\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n \n <div className={styles.defaultProviderForm}>",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/no-access-agent/index.tsx",
+      "line_number": 69,
+      "context": "title={t(\"Common:NoAccessAIAgentTitle\", {\n aiAgent: t(\"Common:AIAgent\", { defaultValue: \"AI Agent\" }),\n defaultValue: \"You don't have access to this {{aiAgent}}\",\n })}\n description={t(\"Common:AIAgentAccessRedirectNote\", {\n sectionName: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n defaultValue: \"Redirecting to {{sectionName}}...\",\n })}\n icon={\n isBase ? <ManageAccessRightsLightIcon /> : <ManageAccessRightsDarkIcon />\n }",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/no-access-agent/index.tsx",
+      "line_number": 69,
+      "context": "title={t(\"Common:NoAccessAIAgentTitle\", {\n aiAgent: t(\"Common:AIAgent\", { defaultValue: \"AI Agent\" }),\n defaultValue: \"You don't have access to this {{aiAgent}}\",\n })}\n description={t(\"Common:AIAgentAccessRedirectNote\", {\n sectionName: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n defaultValue: \"Redirecting to {{sectionName}}...\",\n })}\n icon={\n isBase ? <ManageAccessRightsLightIcon /> : <ManageAccessRightsDarkIcon />\n }",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/no-agent-item/index.tsx",
+      "line_number": 67,
+      "context": "})}\n />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">\n {t(\"Common:AIAgentsEmptyScreenTent\", {\n aiAgents: t(\"Common:AIAgents\"),\n defaultValue: \"Select an AI agent to start working with it.\",\n })}\n </Text>\n </div>\n );",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/@header/ai-agents/[agentId]/page.tsx",
+      "line_number": 27,
+      "context": "<AgentsHeader\n title={aiRoomStore.title}\n navigationItems={[\n {\n id: \"ai-agents\",\n title: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n isRootRoom: true,\n },\n ]}\n onBackToParentFolder={goToList}\n onClickFolder={() => goToList()}",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/@header/ai-agents/page.tsx",
+      "line_number": 19,
+      "context": "const { t } = useTranslation([\"Common\"]);\n const store = useAgentsListStore();\n const isEmpty = !store.isLoading && store.agents.length === 0;\n return (\n <AgentsHeader\n title={t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" })}\n isEmptyList={isEmpty}\n />\n );\n });",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",

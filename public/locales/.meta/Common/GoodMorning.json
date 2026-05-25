@@ -3,7 +3,7 @@
   "content": "Good morning{{name}}!",
   "content_en_sha1_hash": "bac83b928a76a6e94d485b8932dd12b239b1da00",
   "created_at": "2026-05-19T19:03:17.490Z",
-  "updated_at": "2026-05-19T19:09:37.760Z",
+  "updated_at": "2026-05-24T17:27:49.117Z",
   "comment": {
     "text": "Dashboard greeting message that welcomes the user. The {{name}} variable contains a comma and the user's first name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
-      "line_number": 163,
+      "line_number": 246,
       "context": "const greetingName = firstName ? `, ${firstName}` : \"\";\n const greetingKey = getGreetingKey();\n const greeting =\n greetingKey === \"GoodMorning\"\n ? t(\"Common:GoodMorning\", { name: greetingName })\n : greetingKey === \"GoodAfternoon\"\n ? t(\"Common:GoodAfternoon\", { name: greetingName })\n : t(\"Common:GoodEvening\", { name: greetingName });\n \n const design = searchParams.get(\"design\");",
       "module": "/packages/client"
     }

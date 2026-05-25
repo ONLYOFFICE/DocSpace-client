@@ -3,7 +3,7 @@
   "content": "Available apps",
   "content_en_sha1_hash": "fc05e2a31db7d125194ebf090f0441bc287bc29d",
   "created_at": "2026-05-19T19:03:11.393Z",
-  "updated_at": "2026-05-19T19:35:53.238Z",
+  "updated_at": "2026-05-24T17:27:49.069Z",
   "comment": {
     "text": "A section label in a menu or dropdown that introduces a list of apps available for use.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 267,
-      "context": "});\n }\n if (available.length > 0) {\n result.push({\n id: \"available\",\n label: t(\"Common:AvailableApps\"),\n items: available,\n });\n }\n return result;\n }, [",
+      "line_number": 499,
+      "context": "});\n }\n if (hasAvailableGroup) {\n result.push({\n id: \"available\",\n label: t(\"Common:AvailableApps\"),\n items: available,\n });\n }\n return result;\n }, [",
       "module": "/packages/client"
     }
   ],

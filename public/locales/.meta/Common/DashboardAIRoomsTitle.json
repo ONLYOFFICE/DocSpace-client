@@ -3,7 +3,7 @@
   "content": "AI Rooms",
   "content_en_sha1_hash": "c3891525508a72ceb4087d358d4b10934ae4266c",
   "created_at": "2026-05-19T19:03:13.770Z",
-  "updated_at": "2026-05-19T19:31:18.306Z",
+  "updated_at": "2026-05-24T17:27:49.069Z",
   "comment": {
     "text": "Navigation menu label and catalog item title for the AI Rooms feature.",
     "is_auto": true,
@@ -13,14 +13,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 234,
-      "context": ": undefined,\n };\n \n const aiRoomsItem: NavMenuItem = {\n id: AI_ROOMS_ID,\n label: t(\"Common:DashboardAIRoomsTitle\"),\n icon: CatalogRoomsReactSvgUrl,\n onClick: underDevelopment,\n };\n \n const aiAgentsItem: NavMenuItem = {",
+      "line_number": 349,
+      "context": ": undefined,\n };\n \n const aiRoomsItem: NavMenuItem = {\n id: AI_ROOMS_ID,\n label: t(\"Common:DashboardAIRoomsTitle\"),\n icon: CatalogRoomsReactSvgUrl,\n onClick: aiRoomsEnabled\n ? () => navigate(\"/ai-rooms?section=rooms\")\n : () => setEnableAiRoomsVisible(true),\n children: aiRoomsEnabled",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/helpers/apps-catalog.tsx",
-      "line_number": 63,
-      "context": "alwaysOn: true,\n },\n {\n id: \"ai-rooms\",\n icon: <CatalogRoomsIcon />,\n title: t(\"Common:DashboardAIRoomsTitle\"),\n description: t(\"Common:DashboardAIRoomsDescription\"),\n supported: false,\n alwaysOn: false,\n },\n {",
+      "line_number": 71,
+      "context": "alwaysOn: true,\n },\n {\n id: \"ai-rooms\",\n icon: <CatalogRoomsIcon />,\n title: t(\"Common:DashboardAIRoomsTitle\"),\n description: t(\"Common:DashboardAIRoomsDescription\"),\n href: \"/ai-rooms\",\n supported: true,\n alwaysOn: false,\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiRooms/index.tsx",
+      "line_number": 66,
+      "context": "const [searchParams] = useSearchParams();\n const section = searchParams.get(\"section\") ?? \"\";\n return (\n <SdkIframe\n src={getSrc(section, roomsFolderId)}\n title={t(\"Common:DashboardAIRoomsTitle\")}\n />\n );\n };\n \n const AiRoomsConnected = inject<TStore>(({ treeFoldersStore }) => ({",
       "module": "/packages/client"
     }
   ],

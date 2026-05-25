@@ -3,7 +3,7 @@
   "content": "Setting things up",
   "content_en_sha1_hash": "f96bac3587cc6b3b35df3e7aad233b34c2f6c2d6",
   "created_at": "2026-05-19T19:03:13.952Z",
-  "updated_at": "2026-05-19T19:24:46.710Z",
+  "updated_at": "2026-05-24T17:27:49.114Z",
   "comment": {
     "text": "Step label in the module installation wizard indicating the current stage of creating a room.",
     "is_auto": true,
@@ -12,9 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/index.tsx",
-      "line_number": 148,
-      "context": "const inProgress = phase === \"installing\";\n \n const moduleTitle = t(\"Common:DashboardAIFormsTitle\");\n \n const stepLabels: Record<AiFormsInstallStepId, string> = {\n \"create-room\": t(\"Common:DashboardInstallStepCreateRoom\"),\n \"invite-everyone\": t(\"Common:DashboardInstallStepInviteEveryone\"),\n \"create-blank-form\": t(\"Common:DashboardInstallStepCreateBlankForm\"),\n \"upload-library\": t(\"Common:DashboardInstallStepUploadLibrary\"),\n };",
+      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallAiFormsDialog.tsx",
+      "line_number": 75,
+      "context": "const steps: InstallStep[] = React.useMemo(\n () =>\n AI_FORMS_INSTALL_STEPS.map((id) => {\n const labels: Record<AiFormsInstallStepId, string> = {\n \"create-room\": t(\"Common:DashboardInstallStepCreateRoom\"),\n \"invite-everyone\": t(\"Common:DashboardInstallStepInviteEveryone\"),\n \"create-blank-form\": t(\"Common:DashboardInstallStepCreateBlankForm\"),\n \"upload-library\": t(\"Common:DashboardInstallStepUploadLibrary\"),\n };\n const descriptions: Record<AiFormsInstallStepId, string> = {",
       "module": "/packages/client"
     }
   ],

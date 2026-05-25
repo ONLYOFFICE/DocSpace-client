@@ -3,7 +3,7 @@
   "content": "AI Forms",
   "content_en_sha1_hash": "33a1b46a973e52f51cccc28f16aa0cc70f3d7b45",
   "created_at": "2026-05-19T19:03:13.747Z",
-  "updated_at": "2026-05-19T19:32:07.087Z",
+  "updated_at": "2026-05-24T17:27:49.069Z",
   "comment": {
     "text": "Title for a navigation menu item and an app catalog entry identifying the AI Forms feature.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 199,
+      "line_number": 286,
       "context": "}\n };\n \n const aiFormsItem: NavMenuItem = {\n id: AI_FORMS_ID,\n label: t(\"Common:DashboardAIFormsTitle\"),\n icon: FormFileReactSvgUrl,\n onClick: handleAiFormsClick,\n children: aiFormsEnabled\n ? [\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/helpers/apps-catalog.tsx",
-      "line_number": 71,
+      "line_number": 80,
       "context": "alwaysOn: false,\n },\n {\n id: \"ai-forms\",\n icon: <CatalogDocumentsIcon />,\n title: t(\"Common:DashboardAIFormsTitle\"),\n description: t(\"Common:DashboardAIFormsDescription\"),\n href: \"/ai-forms\",\n supported: true,\n alwaysOn: false,\n },",
       "module": "/packages/client"
     },
@@ -30,9 +30,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/index.tsx",
-      "line_number": 145,
-      "context": "}\n }, [visible, skipConfirm, phase, handleInstallClick]);\n \n const inProgress = phase === \"installing\";\n \n const moduleTitle = t(\"Common:DashboardAIFormsTitle\");\n \n const stepLabels: Record<AiFormsInstallStepId, string> = {\n \"create-room\": t(\"Common:DashboardInstallStepCreateRoom\"),\n \"invite-everyone\": t(\"Common:DashboardInstallStepInviteEveryone\"),\n \"create-blank-form\": t(\"Common:DashboardInstallStepCreateBlankForm\"),",
+      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallAiFormsDialog.tsx",
+      "line_number": 181,
+      "context": "return (\n <InstallModuleDialog\n visible={visible}\n onClose={onClose}\n onInstalled={onInstalled}\n moduleTitle={t(\"Common:DashboardAIFormsTitle\")}\n confirmBody={confirmBody}\n doneHint={t(\"Common:DashboardInstallDoneHint\")}\n steps={steps}\n onInstall={handleInstall}\n onCleanup={handleCleanup}",
       "module": "/packages/client"
     },
     {

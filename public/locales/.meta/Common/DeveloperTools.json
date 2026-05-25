@@ -3,7 +3,7 @@
   "content": "Developer Tools",
   "content_en_sha1_hash": "b0608ab1bd96359355856ec5aafa9740f6d63c4d",
   "created_at": "2025-05-19T21:30:44.517Z",
-  "updated_at": "2026-05-15T16:22:23.996Z",
+  "updated_at": "2026-05-24T17:27:49.049Z",
   "comment": {
     "text": "This is a label for a section or menu item that provides access to developer-related tools and settings. It appears in the UI as a navigation link or a heading.",
     "is_auto": true,
@@ -19,14 +19,14 @@
     },
     {
       "file_path": "/packages/client/src/components/AppsSidebar/FooterMenu.tsx",
-      "line_number": 69,
-      "context": "linkData={EMPTY_LINK}\n onClick={() => navigate(\"/portal-settings/payments/portal-payments\")}\n />\n <ArticleItem\n key=\"developer-tools\"\n text={t(\"Common:DeveloperTools\")}\n title={t(\"Common:DeveloperTools\")}\n icon={DeveloperIconUrl}\n showText={showText}\n linkData={EMPTY_LINK}\n onClick={() => navigate(\"/developer-tools/overview\")}",
+      "line_number": 92,
+      "context": "/>\n )}\n {showDeveloperTools && (\n <ArticleItem\n key=\"developer-tools\"\n text={t(\"Common:DeveloperTools\")}\n title={t(\"Common:DeveloperTools\")}\n icon={DeveloperIconUrl}\n showText={showText}\n linkData={EMPTY_LINK}\n onClick={() => navigate(\"/developer-tools/overview\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/AppsSidebar/FooterMenu.tsx",
-      "line_number": 69,
-      "context": "linkData={EMPTY_LINK}\n onClick={() => navigate(\"/portal-settings/payments/portal-payments\")}\n />\n <ArticleItem\n key=\"developer-tools\"\n text={t(\"Common:DeveloperTools\")}\n title={t(\"Common:DeveloperTools\")}\n icon={DeveloperIconUrl}\n showText={showText}\n linkData={EMPTY_LINK}\n onClick={() => navigate(\"/developer-tools/overview\")}",
+      "line_number": 92,
+      "context": "/>\n )}\n {showDeveloperTools && (\n <ArticleItem\n key=\"developer-tools\"\n text={t(\"Common:DeveloperTools\")}\n title={t(\"Common:DeveloperTools\")}\n icon={DeveloperIconUrl}\n showText={showText}\n linkData={EMPTY_LINK}\n onClick={() => navigate(\"/developer-tools/overview\")}",
       "module": "/packages/client"
     },
     {

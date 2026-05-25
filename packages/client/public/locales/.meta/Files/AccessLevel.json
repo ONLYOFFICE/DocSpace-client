@@ -3,7 +3,7 @@
   "content": "Access level",
   "content_en_sha1_hash": "b125f10821825256f5c288cc1daf7dfe19f6281b",
   "created_at": "2025-09-23T07:24:22.232Z",
-  "updated_at": "2026-05-15T14:00:06.726Z",
+  "updated_at": "2026-05-24T17:27:49.120Z",
   "comment": {
     "text": "This is a column header in a table, indicating the permission level a user has for a file or folder. It appears in file lists and details panels.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
       "line_number": 274,
-      "context": "case \"Author\":\n return this.t(\"Files:ByAuthor\");\n case \"Shared by\":\n return this.t(\"Files:SharedBy\");\n case \"Access level\":\n return this.t(\"Files:AccessLevel\");\n case \"externalDbTableName\":\n return this.t(\"Files:TableName\");\n \n case \"Storage\":\n if (\"usedSpace\" in this.item && this.item.usedSpace !== undefined) {",
+      "context": "case \"Author\":\n return this.t(\"Common:ByAuthor\");\n case \"Shared by\":\n return this.t(\"Files:SharedBy\");\n case \"Access level\":\n return this.t(\"Files:AccessLevel\");\n case \"externalDbTableName\":\n return this.t(\"Files:TableName\");\n \n case \"Storage\":\n if (\"usedSpace\" in this.item && this.item.usedSpace !== undefined) {",
       "module": "/packages/client"
     },
     {

@@ -52,6 +52,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigationStore } from "@/app/(docspace)/_store/NavigationStore";
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
 import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
+import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
 import type { CreateFileDialogType } from "../_components/create-file-dialog";
 
@@ -91,9 +92,14 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
   const navigationStore = useNavigationStore();
   const { filesSettings } = useFilesSettingsStore();
   const uploadStore = useUploadStore();
+  const { sdkConfig } = useSDKConfig();
   const { t } = useTranslation(["Common"]);
 
   const editorBasePath = options?.editorBasePath;
+
+  const openInSameTab =
+    sdkConfig?.openEditorInSameTab ?? filesSettings?.openEditorInSameTab ?? true;
+
   const buildCreateUrl = useCallback(
     (folderId: number | string, fileTitle: string) => {
       const base = editorBasePath ?? "/personal-files/editor";
@@ -106,6 +112,18 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
       return `${base}/create?${params.toString()}`;
     },
     [editorBasePath, pathname],
+  );
+
+  const navigateToCreate = useCallback(
+    (folderId: number | string, fileTitle: string) => {
+      const url = buildCreateUrl(folderId, fileTitle);
+      if (!openInSameTab) {
+        window.open(`${window.location.origin}/sdk${url}`, "_blank");
+        return;
+      }
+      router.push(url);
+    },
+    [buildCreateUrl, openInSameTab, router],
   );
 
   const inputFilesRef = useRef<HTMLInputElement | null>(null);
@@ -148,7 +166,7 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
             })
             .finally(() => setIsCreating(false));
         } else {
-          router.push(buildCreateUrl(folderId, `${name}.${type}`));
+          navigateToCreate(folderId, `${name}.${type}`);
         }
         return;
       }
@@ -156,7 +174,7 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
       setDialogType(type);
       setDialogVisible(true);
     },
-    [getFolderId, t, filesSettings?.keepNewFileName, router, buildCreateUrl],
+    [getFolderId, t, filesSettings?.keepNewFileName, router, navigateToCreate],
   );
 
   const closeCreateDialog = useCallback(() => {
@@ -170,7 +188,7 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
 
       if (dialogType !== "folder") {
         setDialogVisible(false);
-        router.push(buildCreateUrl(folderId, `${name}.${dialogType}`));
+        navigateToCreate(folderId, `${name}.${dialogType}`);
         return;
       }
 
@@ -185,7 +203,7 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
         setIsCreating(false);
       }
     },
-    [getFolderId, dialogType, router, buildCreateUrl],
+    [getFolderId, dialogType, router, navigateToCreate],
   );
 
   const uploadFilesToFolder = useCallback(

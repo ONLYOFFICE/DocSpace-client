@@ -42,6 +42,11 @@ import {
   AgentInfoPanelBody,
   AgentInfoPanelHeader,
 } from "./_components/info-panel";
+import {
+  AgentsNavigationFilter,
+  AgentsNavigationHeader,
+  AgentsNavigationSubmenu,
+} from "./_components/agents-navigation";
 import { AgentsCommonDataProvider } from "./_store/AgentsCommonDataContext";
 
 // Imported only for side effects: cross-route CSS overrides that need to
@@ -62,9 +67,6 @@ export type AiAgentsCommonData = {
 type Props = {
   commonData: AiAgentsCommonData;
   children: React.ReactNode;
-  header: React.ReactNode;
-  filter: React.ReactNode;
-  submenu: React.ReactNode;
 };
 
 const AgentLifecycleDialogs = observer(() => {
@@ -116,14 +118,8 @@ const AgentLifecycleDialogs = observer(() => {
 const SectionShell = observer(
   ({
     children,
-    header,
-    filter,
-    submenu,
   }: {
     children: React.ReactNode;
-    header: React.ReactNode;
-    filter: React.ReactNode;
-    submenu: React.ReactNode;
   }) => {
     const { currentDeviceType } = useDeviceType();
     const { frameHeaderVars } = useFrameHeaderConfig();
@@ -169,9 +165,15 @@ const SectionShell = observer(
           uploadFiles={false}
           settingsStudio={false}
         >
-          <Section.SectionHeader>{header}</Section.SectionHeader>
-          <Section.SectionFilter>{filter}</Section.SectionFilter>
-          <Section.SectionSubmenu>{submenu}</Section.SectionSubmenu>
+          <Section.SectionHeader>
+            <AgentsNavigationHeader />
+          </Section.SectionHeader>
+          <Section.SectionFilter>
+            <AgentsNavigationFilter />
+          </Section.SectionFilter>
+          <Section.SectionSubmenu>
+            <AgentsNavigationSubmenu />
+          </Section.SectionSubmenu>
           <Section.SectionBody>{children}</Section.SectionBody>
           <Section.InfoPanelHeader>
             <AgentInfoPanelHeader />
@@ -244,13 +246,7 @@ const AiAgentsBootstrap = ({
   );
 };
 
-export default function AiAgentsRootLayout({
-  commonData,
-  children,
-  header,
-  filter,
-  submenu,
-}: Props) {
+export default function AiAgentsRootLayout({ commonData, children }: Props) {
   return (
     <main style={{ width: "100%", height: "100%", overflow: "hidden" }}>
       <AiAgentsStoreProviders initialUser={commonData.user ?? null}>
@@ -264,9 +260,7 @@ export default function AiAgentsRootLayout({
             }}
           >
             <AiAgentsBootstrap commonData={commonData}>
-              <SectionShell header={header} filter={filter} submenu={submenu}>
-                {children}
-              </SectionShell>
+              <SectionShell>{children}</SectionShell>
             </AiAgentsBootstrap>
           </AgentsCommonDataProvider>
         </DocspaceFilesLayout>

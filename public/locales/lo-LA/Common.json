@@ -1386,6 +1386,8 @@
   "PriceCalculation": "ຄິດໄລ້ລາຄາຂອງເຈົ້າ",
   "PricePerGB": "ລາຄາຕໍ່ GB",
   "PrivateRoomDescription": "ໄຟລ໌ທັງໝົດໃນຫ້ອງນີ້ຈະຖືກເຂົ້າລະຫັດ",
+  "PrivateRoomKeyRequiredDescription": "ຫ້ອງສ່ວນຕົວໃຊ້ການເຂົ້າລະຫັດແບບປາຍຫາປາຍ. ເພື່ອດຳເນີນຕໍ່, ທ່ານຕ້ອງມີກະແຈເຂົ້າລະຫັດ. ທ່ານຕ້ອງການສ້າງມັນດຽວນີ້ບໍ?",
+  "PrivateRoomKeyRequiredTitle": "ຕ້ອງການກະແຈເຂົ້າລະຫັດ",
   "PrivateRoomTitle": "Private Room",
   "ProcessDetails": "ລາຍລະອຽດຂອງການປະມວນຜົນ",
   "Processes": "ຂະບວນການ: {{count}}",

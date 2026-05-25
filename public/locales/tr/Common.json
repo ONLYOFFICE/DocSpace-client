@@ -1386,6 +1386,8 @@
   "PriceCalculation": "Fiyatını hesapla",
   "PricePerGB": "GB başına fiyat",
   "PrivateRoomDescription": "Bu odadaki tüm dosyalar şifrelenecektir",
+  "PrivateRoomKeyRequiredDescription": "Özel odalar uçtan uca şifreleme kullanır. Devam etmek için bir şifreleme anahtarı gereklidir. Şimdi bir tane oluşturmak ister misiniz?",
+  "PrivateRoomKeyRequiredTitle": "Şifreleme anahtarı gerekli",
   "PrivateRoomTitle": "Özel Oda",
   "ProcessDetails": "İşlem ayrıntıları",
   "Processes": "İşlemler: {{count}}",

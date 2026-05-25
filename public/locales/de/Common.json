@@ -1394,6 +1394,8 @@
   "PriceCalculation": "Berechnen Sie Ihren Preis",
   "PricePerGB": "Preis pro GB",
   "PrivateRoomDescription": "Alle Dateien in diesem Raum werden verschlüsselt",
+  "PrivateRoomKeyRequiredDescription": "Private Räume verwenden Ende-zu-Ende-Verschlüsselung. Um fortzufahren, benötigen Sie einen Verschlüsselungsschlüssel. Möchten Sie jetzt einen erstellen?",
+  "PrivateRoomKeyRequiredTitle": "Verschlüsselungsschlüssel erforderlich",
   "PrivateRoomTitle": "Privater Raum",
   "ProcessDetails": "Prozessdetails",
   "Processes": "Prozesse: {{count}}",

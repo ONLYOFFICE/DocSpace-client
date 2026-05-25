@@ -1394,6 +1394,8 @@
   "PriceCalculation": "Հաշվարկեք ձեր արժեքը",
   "PricePerGB": "Գինը 1 ԳԲ-ի համար",
   "PrivateRoomDescription": "Այս սենյակի բոլոր ֆայլերը կոդավորված կլինեն",
+  "PrivateRoomKeyRequiredDescription": "Մասնավոր սենյակներն օգտագործում են ծայրից ծայր ծածկագրում: Շարունակելու համար ձեզ անհրաժեշտ է ծածկագրման բանալի: Ցանկանու՞մ եք ստեղծել այն հիմա:",
+  "PrivateRoomKeyRequiredTitle": "Անհրաժեշտ է ծածկագրման բանալի",
   "PrivateRoomTitle": "Մասնավոր սենյակ",
   "ProcessDetails": "Գործընթացի մանրամասներ",
   "Processes": "Գործընթացներ՝ {{count}}",

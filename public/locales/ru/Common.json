@@ -1401,6 +1401,8 @@
   "PriceCalculation": "Рассчитайте свою стоимость",
   "PricePerGB": "Цена за ГБ",
   "PrivateRoomDescription": "Все файлы в этой комнате будут зашифрованы",
+  "PrivateRoomKeyRequiredDescription": "Приватные комнаты используют сквозное шифрование. Чтобы продолжить, вам нужен ключ шифрования. Создать его сейчас?",
+  "PrivateRoomKeyRequiredTitle": "Требуется ключ шифрования",
   "PrivateRoomTitle": "Приватная комната",
   "ProcessDetails": "Детали процесса",
   "Processes": "Процессы: {{count}}",

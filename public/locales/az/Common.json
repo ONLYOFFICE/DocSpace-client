@@ -1386,6 +1386,8 @@
   "PriceCalculation": "Qiymətinizi hesablayın",
   "PricePerGB": "GB başına qiymət",
   "PrivateRoomDescription": "Bu otaqdakı bütün fayllar şifrələnəcək",
+  "PrivateRoomKeyRequiredDescription": "Şəxsi otaqlar uçdan-uca şifrələmə istifadə edir. Davam etmək üçün şifrələmə açarı lazımdır. İndi yaratmaq istəyirsiniz?",
+  "PrivateRoomKeyRequiredTitle": "Şifrələmə açarı tələb olunur",
   "PrivateRoomTitle": "Şəxsi Otaq",
   "ProcessDetails": "Proses təfərrüatları",
   "Processes": "Proseslər: {{count}}",

@@ -1365,6 +1365,8 @@
   "PriceCalculation": "요금 계산",
   "PricePerGB": "GB당 가격",
   "PrivateRoomDescription": "이 룸의 모든 파일이 암호화됩니다",
+  "PrivateRoomKeyRequiredDescription": "비공개 룸은 종단 간 암호화를 사용합니다. 계속하려면 암호화 키가 필요합니다. 지금 생성하시겠습니까?",
+  "PrivateRoomKeyRequiredTitle": "암호화 키가 필요합니다",
   "PrivateRoomTitle": "비공개 룸",
   "ProcessDetails": "프로세스 세부 정보",
   "Processes": "프로세스: {{count}}",

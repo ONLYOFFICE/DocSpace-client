@@ -1394,6 +1394,8 @@
   "PriceCalculation": "Calcola il tuo prezzo",
   "PricePerGB": "Prezzo per GB",
   "PrivateRoomDescription": "Tutti i file in questa stanza saranno cifrati",
+  "PrivateRoomKeyRequiredDescription": "Le stanze private utilizzano la crittografia end-to-end. Per continuare, è necessaria una chiave di crittografia. Vuoi crearne una ora?",
+  "PrivateRoomKeyRequiredTitle": "Chiave di crittografia richiesta",
   "PrivateRoomTitle": "Stanza privata",
   "ProcessDetails": "Dettagli del processo",
   "Processes": "Processi: {{count}}",

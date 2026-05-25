@@ -1385,6 +1385,8 @@
   "PriceCalculation": "Розрахуйте вашу ціну",
   "PricePerGB": "Ціна за ГБ",
   "PrivateRoomDescription": "Усі файли в цій кімнаті будуть зашифровані",
+  "PrivateRoomKeyRequiredDescription": "Приватні кімнати використовують наскрізне шифрування. Щоб продовжити, вам потрібен ключ шифрування. Бажаєте створити його зараз?",
+  "PrivateRoomKeyRequiredTitle": "Потрібен ключ шифрування",
   "PrivateRoomTitle": "Приватна кімната",
   "ProcessDetails": "Деталі процесу",
   "Processes": "Процеси: {{count}}",

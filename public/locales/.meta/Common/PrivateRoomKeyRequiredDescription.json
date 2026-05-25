@@ -1,0 +1,10 @@
+{
+  "comment": {
+    "text": "Body text of a confirmation dialog shown inside the Create Room dialog when the user picks 'Private room' but has no encryption key on the account. Explains that private rooms need end-to-end encryption and asks whether the user wants to create a new key now. Confirm button reads 'Generate new key', Cancel button dismisses the dialog and keeps the user on the room type selection screen."
+  },
+  "usage": [
+    {
+      "context": "<ConfirmationModal title={t(\"Common:PrivateRoomKeyRequiredTitle\")} message={t(\"Common:PrivateRoomKeyRequiredDescription\")} confirmLabel={t(\"Common:GenerateNewKey\")} ... />"
+    }
+  ]
+}

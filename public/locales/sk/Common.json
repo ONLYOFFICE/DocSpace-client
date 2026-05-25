@@ -1313,6 +1313,8 @@
   "PriceCalculation": "Vypočítajte svoju cenu",
   "PricePerGB": "Cena za GB",
   "PrivateRoomDescription": "Všetky súbory v tejto miestnosti budú zašifrované",
+  "PrivateRoomKeyRequiredDescription": "Súkromné miestnosti používajú koncové šifrovanie. Ak chcete pokračovať, potrebujete šifrovací kľúč. Chcete ho teraz vytvoriť?",
+  "PrivateRoomKeyRequiredTitle": "Vyžaduje sa šifrovací kľúč",
   "PrivateRoomTitle": "Súkromná miestnosť",
   "ProcessDetails": "Detaily procesu",
   "Processes": "Procesy: {{count}}",

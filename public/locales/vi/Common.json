@@ -1386,6 +1386,8 @@
   "PriceCalculation": "Tính phí của bạn",
   "PricePerGB": "Giá mỗi GB",
   "PrivateRoomDescription": "Tất cả tập tin trong phòng này sẽ được mã hoá",
+  "PrivateRoomKeyRequiredDescription": "Các phòng riêng tư sử dụng mã hóa đầu cuối. Để tiếp tục, bạn cần có khóa mã hóa. Bạn có muốn tạo một khóa ngay bây giờ không?",
+  "PrivateRoomKeyRequiredTitle": "Cần khóa mã hóa",
   "PrivateRoomTitle": "Phòng Riêng Tư",
   "ProcessDetails": "Chi tiết về Quy trình",
   "Processes": "Các tiến trình: {{count}}",

@@ -1386,6 +1386,8 @@
   "PriceCalculation": "احسب سعرك",
   "PricePerGB": "سعر لكل جيجابايت",
   "PrivateRoomDescription": "ستُشفَّر جميع الملفات في هذه الغرفة",
+  "PrivateRoomKeyRequiredDescription": "تستخدم الغرف الخاصة التشفير من طرف إلى طرف. للمتابعة، تحتاج إلى مفتاح تشفير. هل تريد إنشاء واحد الآن؟",
+  "PrivateRoomKeyRequiredTitle": "مفتاح التشفير مطلوب",
   "PrivateRoomTitle": "الغرفة الخاصة",
   "ProcessDetails": "تفاصيل العملية",
   "Processes": "عدد العمليات: {{count}}",

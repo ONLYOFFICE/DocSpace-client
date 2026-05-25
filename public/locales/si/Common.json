@@ -1386,6 +1386,8 @@
   "PriceCalculation": "මිල ගණනය කරන්න",
   "PricePerGB": "GB එකකට මිල",
   "PrivateRoomDescription": "මෙම කාමරයේ සියලු ගොනු සංකේතාංකනය කෙරේ",
+  "PrivateRoomKeyRequiredDescription": "පුද්ගලික කාමර අන්ත-සිට-අන්ත සංකේතනය භාවිතා කරයි. ඉදිරියට යාමට ඔබට සංකේතන යතුරක් අවශ්‍ය වේ. දැන් එකක් සෑදීමට අවශ්‍යද?",
+  "PrivateRoomKeyRequiredTitle": "සංකේතන යතුර අවශ්‍යයි",
   "PrivateRoomTitle": "පුද්ගලික කාමරය",
   "ProcessDetails": "ක්‍රියාවලියේ විස්තර",
   "Processes": "ක්‍රියාවලි: {{count}}",

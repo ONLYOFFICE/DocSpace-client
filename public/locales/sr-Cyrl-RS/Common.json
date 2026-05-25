@@ -1394,6 +1394,8 @@
   "PriceCalculation": "Израчунај своју цену",
   "PricePerGB": "Цена за GB",
   "PrivateRoomDescription": "Све датотеке у овој соби биће шифроване",
+  "PrivateRoomKeyRequiredDescription": "Приватне собе користе шифровање од краја до краја. Да бисте наставили, потребан вам је кључ за шифровање. Желите ли да га направите сада?",
+  "PrivateRoomKeyRequiredTitle": "Потребан је кључ за шифровање",
   "PrivateRoomTitle": "Приватна соба",
   "ProcessDetails": "Детаљи процеса",
   "Processes": "Процеси: {{count}}",

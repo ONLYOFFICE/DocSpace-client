@@ -1386,6 +1386,8 @@
   "PriceCalculation": "Изчислете цената си",
   "PricePerGB": "Цена на GB",
   "PrivateRoomDescription": "Всички файлове в тази стая ще бъдат криптирани",
+  "PrivateRoomKeyRequiredDescription": "Частните стаи използват шифроване от край до край. За да продължите, ви е нужен ключ за шифроване. Искате ли да създадете такъв сега?",
+  "PrivateRoomKeyRequiredTitle": "Изисква се ключ за шифроване",
   "PrivateRoomTitle": "Частна стая",
   "ProcessDetails": "Детайли за процеса",
   "Processes": "Процеси: {{count}}",

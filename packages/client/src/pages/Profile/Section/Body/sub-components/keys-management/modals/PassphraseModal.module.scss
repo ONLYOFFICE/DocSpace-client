@@ -58,3 +58,14 @@
     width: 100%;
   }
 }
+
+.passphraseField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.generateRow {
+  display: flex;
+  justify-content: flex-end;
+}

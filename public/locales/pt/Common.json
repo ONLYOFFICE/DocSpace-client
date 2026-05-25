@@ -1386,6 +1386,8 @@
   "PriceCalculation": "Calcule o seu preço",
   "PricePerGB": "Preço por GB",
   "PrivateRoomDescription": "Todos os ficheiros nesta sala serão encriptados",
+  "PrivateRoomKeyRequiredDescription": "As salas privadas usam encriptação de ponta a ponta. Para continuar, precisa de uma chave de encriptação. Deseja criar uma agora?",
+  "PrivateRoomKeyRequiredTitle": "Chave de encriptação necessária",
   "PrivateRoomTitle": "Sala Privada",
   "ProcessDetails": "Detalhes do processo",
   "Processes": "Processos: {{count}}",

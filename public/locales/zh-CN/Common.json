@@ -1394,6 +1394,8 @@
   "PriceCalculation": "计算价格",
   "PricePerGB": "每 GB 价格",
   "PrivateRoomDescription": "此房间中的所有文件将被加密",
+  "PrivateRoomKeyRequiredDescription": "私人房间使用端到端加密。要继续操作，您需要一个加密密钥。是否现在创建？",
+  "PrivateRoomKeyRequiredTitle": "需要加密密钥",
   "PrivateRoomTitle": "私人房间",
   "ProcessDetails": "流程详情",
   "Processes": "进程：{{count}}",

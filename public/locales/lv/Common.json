@@ -1386,6 +1386,8 @@
   "PriceCalculation": "Aprēķināt cenu",
   "PricePerGB": "Cena par GB",
   "PrivateRoomDescription": "Visi faili šajā telpā tiks šifrēti",
+  "PrivateRoomKeyRequiredDescription": "Privātās telpas izmanto pilnīgu (end-to-end) šifrēšanu. Lai turpinātu, ir nepieciešama šifrēšanas atslēga. Vai vēlaties to izveidot tagad?",
+  "PrivateRoomKeyRequiredTitle": "Nepieciešama šifrēšanas atslēga",
   "PrivateRoomTitle": "Privātā telpa",
   "ProcessDetails": "Procesa informācija",
   "Processes": "Procesi: {{count}}",

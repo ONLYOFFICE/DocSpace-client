@@ -1386,6 +1386,8 @@
   "PriceCalculation": "Υπολογίστε την τιμή σας",
   "PricePerGB": "Τιμή ανά GB",
   "PrivateRoomDescription": "Όλα τα αρχεία σε αυτό το δωμάτιο θα κρυπτογραφηθούν",
+  "PrivateRoomKeyRequiredDescription": "Τα ιδιωτικά δωμάτια χρησιμοποιούν κρυπτογράφηση από άκρο σε άκρο. Για να συνεχίσετε, χρειάζεστε ένα κλειδί κρυπτογράφησης. Θέλετε να δημιουργήσετε ένα τώρα;",
+  "PrivateRoomKeyRequiredTitle": "Απαιτείται κλειδί κρυπτογράφησης",
   "PrivateRoomTitle": "Ιδιωτικό Δωμάτιο",
   "ProcessDetails": "Λεπτομέρειες διαδικασίας",
   "Processes": "Διαδικασίες: {{count}}",

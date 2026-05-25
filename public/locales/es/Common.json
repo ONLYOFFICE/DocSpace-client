@@ -1394,6 +1394,8 @@
   "PriceCalculation": "Calcule su precio",
   "PricePerGB": "Precio por GB",
   "PrivateRoomDescription": "Todos los archivos de esta sala serán cifrados",
+  "PrivateRoomKeyRequiredDescription": "Las salas privadas utilizan cifrado de extremo a extremo. Para continuar, necesita una clave de cifrado. ¿Desea crear una ahora?",
+  "PrivateRoomKeyRequiredTitle": "Se requiere una clave de cifrado",
   "PrivateRoomTitle": "Sala privada",
   "ProcessDetails": "Detalles del proceso",
   "Processes": "Procesos: {{count}}",

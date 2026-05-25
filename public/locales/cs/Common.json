@@ -1386,6 +1386,8 @@
   "PriceCalculation": "Vypočítejte si cenu",
   "PricePerGB": "Cena za GB",
   "PrivateRoomDescription": "Všechny soubory v této místnosti budou zašifrovány",
+  "PrivateRoomKeyRequiredDescription": "Soukromé místnosti používají koncové šifrování. Pro pokračování potřebujete šifrovací klíč. Chcete jej nyní vytvořit?",
+  "PrivateRoomKeyRequiredTitle": "Vyžaduje se šifrovací klíč",
   "PrivateRoomTitle": "Soukromá místnost",
   "ProcessDetails": "Podrobnosti o procesu",
   "Processes": "Procesy: {{count}}",

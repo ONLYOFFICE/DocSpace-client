@@ -1386,6 +1386,8 @@
   "PriceCalculation": "Llogaritni çmimin tuaj",
   "PricePerGB": "Çmimi për GB",
   "PrivateRoomDescription": "Të gjithë skedarët në këtë dhomë do të enkriptohen",
+  "PrivateRoomKeyRequiredDescription": "Dhomat private përdorin kriptim nga skaji në skaj. Për të vazhduar, ju nevojitet një çelës kriptimi. Dëshironi të krijoni një tani?",
+  "PrivateRoomKeyRequiredTitle": "Kërkohet çelësi i kriptimit",
   "PrivateRoomTitle": "Dhomë Private",
   "ProcessDetails": "Detajet e procesit",
   "Processes": "Procese: {{count}}",

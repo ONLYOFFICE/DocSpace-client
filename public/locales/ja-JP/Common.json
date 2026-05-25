@@ -1394,6 +1394,8 @@
   "PriceCalculation": "価格を計算する",
   "PricePerGB": "1GBあたりの価格",
   "PrivateRoomDescription": "このルーム内のすべてのファイルは暗号化されます",
+  "PrivateRoomKeyRequiredDescription": "プライベートルームはエンドツーエンド暗号化を使用します。続行するには暗号化キーが必要です。今すぐ作成しますか？",
+  "PrivateRoomKeyRequiredTitle": "暗号化キーが必要です",
   "PrivateRoomTitle": "プライベートルーム",
   "ProcessDetails": "プロセスの詳細",
   "Processes": "プロセス: {{count}}",

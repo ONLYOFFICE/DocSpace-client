@@ -1386,6 +1386,8 @@
   "PriceCalculation": "Bereken uw prijs",
   "PricePerGB": "Prijs per GB",
   "PrivateRoomDescription": "Alle bestanden in deze kamer worden versleuteld",
+  "PrivateRoomKeyRequiredDescription": "Privékamers gebruiken end-to-end-versleuteling. Om door te gaan heeft u een versleutelingssleutel nodig. Wilt u er nu een aanmaken?",
+  "PrivateRoomKeyRequiredTitle": "Versleutelingssleutel vereist",
   "PrivateRoomTitle": "Privékamer",
   "ProcessDetails": "Procesdetails",
   "Processes": "Processen: {{count}}",

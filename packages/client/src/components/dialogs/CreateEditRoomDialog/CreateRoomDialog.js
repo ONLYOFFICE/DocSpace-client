@@ -156,7 +156,6 @@ const CreateRoomDialog = ({
       applyPrivateRoomType();
     },
     onError: () => {
-      // Key creation failed — abort the room creation too.
       onCloseRef.current?.();
     },
   });

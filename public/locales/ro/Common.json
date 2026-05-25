@@ -1394,6 +1394,8 @@
   "PriceCalculation": "Calculaţi preţul",
   "PricePerGB": "Preț pe GB",
   "PrivateRoomDescription": "Toate fișierele din această cameră vor fi criptate",
+  "PrivateRoomKeyRequiredDescription": "Camerele private folosesc criptare end-to-end. Pentru a continua, aveți nevoie de o cheie de criptare. Doriți să creați una acum?",
+  "PrivateRoomKeyRequiredTitle": "Cheie de criptare necesară",
   "PrivateRoomTitle": "Cameră privată",
   "ProcessDetails": "Detalii proces",
   "Processes": "Procese: {{count}}",

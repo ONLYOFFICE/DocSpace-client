@@ -1386,6 +1386,8 @@
   "PriceCalculation": "Oblicz swoją cenę",
   "PricePerGB": "Cena za GB",
   "PrivateRoomDescription": "Wszystkie pliki w tym pokoju będą szyfrowane",
+  "PrivateRoomKeyRequiredDescription": "Pokoje prywatne używają szyfrowania end-to-end. Aby kontynuować, potrzebujesz klucza szyfrowania. Czy chcesz go teraz utworzyć?",
+  "PrivateRoomKeyRequiredTitle": "Wymagany klucz szyfrowania",
   "PrivateRoomTitle": "Prywatny pokój",
   "ProcessDetails": "Szczegóły procesu",
   "Processes": "Procesy {{count}}",

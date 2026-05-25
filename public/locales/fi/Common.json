@@ -1386,6 +1386,8 @@
   "PriceCalculation": "Laske hintasi",
   "PricePerGB": "Hinta GB kohden",
   "PrivateRoomDescription": "Kaikki tämän huoneen tiedostot salataan",
+  "PrivateRoomKeyRequiredDescription": "Yksityishuoneet käyttävät päästä päähän -salausta. Jatkaaksesi tarvitset salausavaimen. Haluatko luoda sellaisen nyt?",
+  "PrivateRoomKeyRequiredTitle": "Salausavain vaaditaan",
   "PrivateRoomTitle": "Yksityishuone",
   "ProcessDetails": "Prosessin yksityiskohdat",
   "Processes": "Prosessit: {{count}}",

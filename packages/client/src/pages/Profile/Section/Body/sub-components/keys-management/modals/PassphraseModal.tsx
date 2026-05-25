@@ -41,8 +41,12 @@ import {
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { PasswordInput } from "@docspace/ui-kit/components/password-input";
+import {
+  PasswordInput,
+  type PasswordInputHandle,
+} from "@docspace/ui-kit/components/password-input";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import {
@@ -80,7 +84,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
   isLoading = false,
 }) => {
   const { t, ready } = useTranslation(["Common"]);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<PasswordInputHandle>(null);
 
   const [passphrase, setPassphrase] = useState("");
   const [confirmPassphrase, setConfirmPassphrase] = useState("");
@@ -93,9 +97,15 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
       setConfirmPassphrase("");
       setError("");
       setRulesPassed(false);
-      setTimeout(() => inputRef.current?.focus(), 100);
     }
   }, [visible]);
+
+  const handleGeneratePassword = useCallback(
+    (e: React.MouseEvent) => {
+      inputRef.current?.onGeneratePassword(e);
+    },
+    [],
+  );
 
   const handleSubmit = useCallback(() => {
     if (isNew && !isPassphraseAcceptable(passphrase)) {
@@ -121,6 +131,9 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
     : passphrase.length >= MIN_LENGTH;
 
   const isDisabled = !isValid || isLoading;
+
+  const passphraseHasError =
+    !!error || (isNew && passphrase.length >= MIN_LENGTH && !rulesPassed);
 
   return (
     <ModalDialog
@@ -151,34 +164,60 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
             </div>
           )}
 
-          <div className={styles.inputWrapper}>
-            <PasswordInput
-              id="passphrase"
-              inputName="passphrase"
-              inputValue={passphrase}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setPassphrase(e.target.value);
-                setError("");
-              }}
-              placeholder={t("Common:Passphrase")}
-              scale
-              size={InputSize.base}
-              simpleView={!isNew}
-              isFullWidth
-              passwordSettings={PASSPHRASE_SETTINGS}
-              onValidateInput={(progressScore) => setRulesPassed(progressScore)}
-              tooltipPasswordTitle={`${t("Common:PassphraseLimitMessage")}:`}
-              tooltipPasswordLength={`${t(
-                "Common:PasswordMinimumLength",
-              )}: ${MIN_LENGTH}`}
-              tooltipPasswordDigits={t("Common:PasswordLimitDigits")}
-              tooltipPasswordCapital={t("Common:PasswordLimitUpperCase")}
-              tooltipPasswordSpecial={t("Common:PasswordLimitSpecialSymbols")}
-              isDisabled={isLoading}
-              hasError={!!error}
-              autoComplete="new-password"
-              tabIndex={1}
-            />
+          <div className={styles.passphraseField}>
+            {isNew ? (
+              <div className={styles.generateRow}>
+                <Link
+                  type={LinkType.action}
+                  fontWeight="600"
+                  fontSize="13px"
+                  isHovered
+                  onClick={handleGeneratePassword}
+                  dataTestId="generate_passphrase_link"
+                >
+                  {t("Common:GeneratePassword")}
+                </Link>
+              </div>
+            ) : null}
+
+            <div className={styles.inputWrapper}>
+              <PasswordInput
+                ref={inputRef}
+                id="passphrase"
+                inputName="passphrase"
+                inputValue={passphrase}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  const next = e.target.value;
+                  const isBulkChange =
+                    Math.abs(next.length - passphrase.length) > 1;
+                  setPassphrase(next);
+                  if (isNew && isBulkChange && next.length >= MIN_LENGTH) {
+                    setConfirmPassphrase(next);
+                  }
+                  setError("");
+                }}
+                placeholder={t("Common:Passphrase")}
+                scale
+                size={InputSize.base}
+                simpleView={!isNew}
+                isFullWidth
+                passwordSettings={PASSPHRASE_SETTINGS}
+                onValidateInput={(progressScore) =>
+                  setRulesPassed(progressScore)
+                }
+                tooltipPasswordTitle={`${t("Common:PassphraseLimitMessage")}:`}
+                tooltipPasswordLength={`${t(
+                  "Common:PasswordMinimumLength",
+                )}: ${MIN_LENGTH}`}
+                tooltipPasswordDigits={t("Common:PasswordLimitDigits")}
+                tooltipPasswordCapital={t("Common:PasswordLimitUpperCase")}
+                tooltipPasswordSpecial={t("Common:PasswordLimitSpecialSymbols")}
+                isDisabled={isLoading}
+                hasError={passphraseHasError}
+                autoComplete="new-password"
+                tabIndex={1}
+              />
+            </div>
           </div>
 
           {isNew && (

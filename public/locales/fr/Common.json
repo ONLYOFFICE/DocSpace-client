@@ -1394,6 +1394,8 @@
   "PriceCalculation": "Calculez votre prix",
   "PricePerGB": "Prix par Go",
   "PrivateRoomDescription": "Tous les fichiers de cette salle seront chiffrés",
+  "PrivateRoomKeyRequiredDescription": "Les salles privées utilisent un chiffrement de bout en bout. Pour continuer, vous avez besoin d'une clé de chiffrement. Souhaitez-vous en créer une maintenant ?",
+  "PrivateRoomKeyRequiredTitle": "Clé de chiffrement requise",
   "PrivateRoomTitle": "Salle privée",
   "ProcessDetails": "Détails du processus",
   "Processes": "Processus : {{count}}",

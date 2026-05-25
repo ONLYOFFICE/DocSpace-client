@@ -26,9 +26,21 @@
 
 import { redirect } from "next/navigation";
 
-export default function SettingsRoot() {
-  // Billing is the first visible tab for admins/owners (most common case).
-  // If the current viewer is a regular user, the client layout bounces them
-  // off /billing onto the next allowed tab.
-  redirect("/ai-agents/settings/billing");
+import { getSettings } from "@/api/settings";
+
+export default async function SettingsRoot() {
+  // Billing is hidden in standalone portals, so the landing tab is providers
+  // there. SaaS still lands on billing for admins/owners; the client layout
+  // bounces regular users off to the next allowed tab.
+  const portalSettings = await getSettings().catch(() => undefined);
+  const standalone =
+    portalSettings && typeof portalSettings !== "string"
+      ? Boolean(portalSettings.standalone)
+      : false;
+
+  redirect(
+    standalone
+      ? "/ai-agents/settings/providers"
+      : "/ai-agents/settings/billing",
+  );
 }

@@ -18,6 +18,7 @@ import type { MainButtonProps } from "@docspace/ui-kit/components/main-button/Ma
 import AgentsFilter from "../../_components/agents-filter";
 import {
   useAgentDialogsStore,
+  useAgentsAIConfigStore,
   useAgentsUserStore,
 } from "../../_store";
 import styles from "../../_components/agents-list/AgentsList.module.scss";
@@ -26,6 +27,7 @@ export default observer(function ListFilter() {
   const { t } = useTranslation(["Common"]);
   const dialogsStore = useAgentDialogsStore();
   const userStore = useAgentsUserStore();
+  const aiConfigStore = useAgentsAIConfigStore();
 
   const onCreate = React.useCallback(() => {
     dialogsStore.setCreateAgentDialogVisible(true);
@@ -60,6 +62,9 @@ export default observer(function ListFilter() {
     user?.isRoomAdmin
   );
   const showCreateButton = canManage;
+  const aiReady = aiConfigStore.aiReady;
+
+  if (!aiReady) return null;
 
   return (
     <>

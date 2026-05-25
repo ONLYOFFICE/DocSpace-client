@@ -18,6 +18,7 @@ import { SearchLoader } from "../../_components/ai-settings/search/SearchLoader"
 import { KnowledgeLoader } from "../../_components/ai-settings/knowledge/KnowledgeLoader";
 import { useAgentLoadingStore } from "../../_store";
 import { useAgentsUserStore } from "../../_store/AgentsUserStore";
+import { useAgentsCommonData } from "../../_store/AgentsCommonDataContext";
 import styles from "../../_components/ai-settings/AISettings.module.scss";
 
 const VALID_TABS = [
@@ -29,12 +30,12 @@ const VALID_TABS = [
 ] as const;
 type TabId = (typeof VALID_TABS)[number];
 
-const getTabIdFromPath = (path: string | null): TabId => {
-  if (!path) return "billing";
+const getTabIdFromPath = (path: string | null, defaultTab: TabId): TabId => {
+  if (!path) return defaultTab;
   const last = path.split("/").filter(Boolean).pop() ?? "";
   return (VALID_TABS as readonly string[]).includes(last)
     ? (last as TabId)
-    : "billing";
+    : defaultTab;
 };
 
 const SettingsLayoutClient = ({ children }: { children: React.ReactNode }) => {
@@ -43,13 +44,18 @@ const SettingsLayoutClient = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const loadingStore = useAgentLoadingStore();
   const { user } = useAgentsUserStore();
-  const canSeeBilling = Boolean(user?.isAdmin || user?.isOwner);
+  const { portalSettings } = useAgentsCommonData();
+  const standalone = Boolean(portalSettings?.standalone);
+  const canSeeBilling = !standalone && Boolean(user?.isAdmin || user?.isOwner);
 
-  const currentTabId = getTabIdFromPath(pathname);
+  const defaultTab: TabId = standalone ? "providers" : "billing";
+  const currentTabId = getTabIdFromPath(pathname, defaultTab);
 
   // Non-admins land on /billing via the server-side redirect default. Once
   // the user store hydrates and we know they can't see billing, bounce them
   // forward to the first allowed tab so the URL matches the visible tabs.
+  // In standalone mode billing is hidden entirely, so any /billing URL is
+  // bounced regardless of role.
   React.useEffect(() => {
     if (!user) return;
     if (currentTabId === "billing" && !canSeeBilling) {
@@ -58,7 +64,7 @@ const SettingsLayoutClient = ({ children }: { children: React.ReactNode }) => {
   }, [user, currentTabId, canSeeBilling, router]);
 
   const { initAIProviders, initMCPServers, initWebSearch, initKnowledge } =
-    useAiSettings({ standalone: true });
+    useAiSettings({ standalone });
 
   // Initialise data on direct deep-links + on tab changes.
   React.useEffect(() => {

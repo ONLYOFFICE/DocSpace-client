@@ -74,6 +74,13 @@ const NoAccessAgent = () => {
       }
       options={[
         {
+          // `isNext: true` forces EmptyViewOption to render the ui-kit
+          // <Link> instead of the shared `LinkRouter={Link from "react-router"}`.
+          // SDK runs under Next.js — react-router has no provider here, and
+          // its <Link> destructures `basename` from a null NavigationContext
+          // on mount → "Cannot destructure property 'basename'". Same fix
+          // as `files-empty-filter` / `agents-empty-filter`.
+          isNext: true,
           to: "",
           icon: <AIAgentsIcon />,
           onClick: onGoTo,

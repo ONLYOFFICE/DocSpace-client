@@ -70,6 +70,27 @@ const AiAgentView = () => {
     if (el) chatScrollRef.current = el;
   }, []);
 
+  // The chat-header is sticky; it must pin BELOW Section's
+  // `.section-sticky-container` (header + tabs + filter), which has a
+  // higher z-index and otherwise paints over the chat-header. The static
+  // calc(section-header-height + section-submenu-height) we used to set
+  // here was brittle: device-specific paddings, the optional filter slot
+  // and the SDK frame-header config all change the real height. Measure
+  // the container and feed the result back as a CSS variable on the
+  // chat-container.
+  const [chatHeaderTop, setChatHeaderTop] = React.useState<number | null>(null);
+  React.useEffect(() => {
+    const container = document.querySelector<HTMLElement>(
+      ".section-sticky-container",
+    );
+    if (!container) return;
+    const update = () => setChatHeaderTop(container.getBoundingClientRect().height);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(container);
+    return () => ro.disconnect();
+  }, []);
+
   const {
     currentTab,
     roomId,
@@ -112,35 +133,38 @@ const AiAgentView = () => {
   // tab switch was moved to `history.replaceState` (no full Next.js
   // re-render to repopulate the subtree).
   //
-  // The inline `display: none` is applied to BOTH the wrapper and the inner
-  // `.chat-container` (via Chat's `style` prop). Section's
-  // `:has(.chat-container:not([style*="display: none"]))` rule zeros out
-  // `padding-block` whenever a chat-container exists in the DOM without an
-  // inline `display: none` — putting it only on the wrapper used to leave
-  // the inner div unflagged, so the rule kept matching on Knowledge/Result
-  // tabs and clipped the table column header above the visible viewport.
+  // `display: none` is applied directly to the chat-container via Chat's
+  // `style` prop — matches Section's
+  // `:has(.chat-container:not([style*="display: none"]))` selector so it
+  // doesn't strip padding from the section-wrapper-content on
+  // Knowledge/Result tabs. No wrapping <div> here: the chat-container is
+  // a direct child of section-wrapper-content, which is what the sticky
+  // chat-header/footer rely on to pin against `#sectionScroll`.
   const chatHidden = currentTab !== "chat";
   return (
     <>
       {shouldRenderChat ? (
-        <div
+        <Chat
           className={styles.aiAgentChat}
-          style={chatHidden ? { display: "none" } : undefined}
-        >
-          <Chat
-            agentId={roomId}
-            selectedModel=""
-            standalone
-            allowAttachFiles
-            allowSelectChat
-            attachmentFile={null}
-            clearAttachmentFile={() => {}}
-            width="100%"
-            useExternalScroll
-            externalScrollRef={chatScrollRef}
-            style={chatHidden ? { display: "none" } : undefined}
-          />
-        </div>
+          agentId={roomId}
+          selectedModel=""
+          standalone
+          allowAttachFiles
+          allowSelectChat
+          attachmentFile={null}
+          clearAttachmentFile={() => {}}
+          width="100%"
+          useExternalScroll
+          externalScrollRef={chatScrollRef}
+          style={{
+            ...(chatHidden ? { display: "none" } : null),
+            ...(chatHeaderTop !== null
+              ? ({
+                  "--chat-header-top": `${chatHeaderTop}px`,
+                } as React.CSSProperties)
+              : null),
+          }}
+        />
       ) : null}
 
       {currentTab === "knowledge" && knowledgeId ? (

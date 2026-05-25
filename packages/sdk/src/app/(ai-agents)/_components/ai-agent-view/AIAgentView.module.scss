@@ -1,17 +1,14 @@
+// Class is applied to the chat-container itself (no wrapper div) — keeps
+// the chat-container as a direct child of section-wrapper-content so the
+// sticky chat-header / chat-footer pin against Section's `#sectionScroll`
+// scroller (chat hooks into it via `externalScrollRef`).
+//
+// `--chat-header-top` is set as an inline style by AiAgentView, measured
+// at runtime from `.section-sticky-container` via ResizeObserver. The CSS
+// `calc(section-header-height + section-submenu-height)` we used to set
+// here was off because the filter slot (always rendered, even when it
+// returns null) and frame-header configuration shift the real height.
 .aiAgentChat {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  min-height: 0;
-  // Scroll is owned by Section's #sectionScroll Scrollbar; the chat hooks
-  // into it via `externalScrollRef`. ChatContainer therefore skips its
-  // internal <Scrollbar> and stops injecting the 20px `.chatScrollBody`
-  // padding. Sticky chat header/footer anchor against the section scroller.
-
-  // Sticky chat header pins to 0 — the section body doesn't impose a
-  // top offset like the client's outer layout does.
-  --chat-header-top: 0px;
-
   :global(div:has(> div > [style*="--chat-welcome-color"])) {
     margin-bottom: 0 !important;
     margin-top: 32px !important;

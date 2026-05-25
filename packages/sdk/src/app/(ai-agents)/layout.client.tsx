@@ -169,6 +169,18 @@ const SectionShell = observer(
           withBodyScroll
           uploadFiles={false}
           settingsStudio={isAgentChat}
+          // Section's `fullHeightBody` turns section-wrapper /
+          // section-wrapper-content into flex columns with flex-grow:1, so
+          // the chat-container's own `flex-grow:1` actually applies and
+          // the chat gets pinned to the section's height. Without this the
+          // chat-container fell back to natural content height — a tall
+          // input pushed the sticky header/footer below the viewport.
+          // Mirrors client's `sectionProps.fullHeightBody = isChat`.
+          fullHeightBody={isAgentChat}
+          // Section appends a `.spacer` div under the body unless this is
+          // set — that spacer adds extra scroll height on the chat tab
+          // (chat-container already fills the body edge-to-edge).
+          withoutFooter={isAgentChat}
         >
           <Section.SectionHeader>
             <AgentsNavigationHeader />

@@ -108,6 +108,7 @@ import DeleteDialog from "../delete-dialog";
 import RenameDialog from "../rename-dialog";
 import UploadPanel from "../upload-panel";
 import ShareSelector from "../share-selector";
+import useDocsHotkeys from "../../_hooks/useDocsHotkeys";
 
 import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
 import {
@@ -349,6 +350,17 @@ const DocsLayout = observer(
       },
       [versionHistoryStore],
     );
+
+    useDocsHotkeys({
+      onOpenFile: (item) => {
+        if (!item.isFolder) openFileHandler(item as TFileItem);
+      },
+      onRenameItem: requestRename,
+      onDeleteItems: requestDelete,
+      onCreateFile: openCreateDialog,
+      onUploadFiles,
+      onUploadFolder,
+    });
 
     return (
       <OpenFileContext.Provider value={openFileHandler}>

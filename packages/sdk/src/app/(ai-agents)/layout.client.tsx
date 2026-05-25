@@ -13,6 +13,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { setAuthToken } from "@docspace/shared/api/client";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import Section from "@docspace/ui-kit/components/section";
+import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
@@ -51,6 +52,11 @@ import {
 import KnowledgeUploadSelectorDialog from "./_components/knowledge-upload-selector-dialog";
 import { AgentsCommonDataProvider } from "./_store/AgentsCommonDataContext";
 import useAiAgentsFrameBridge from "./_hooks/useAiAgentsFrameBridge";
+import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
+// UploadPanel is the side-aside list of in-flight uploads; it depends
+// only on UploadStore + ui-kit primitives, so it's safe to share with
+// the ai-agents Knowledge upload pipeline.
+import UploadPanel from "@/app/(personal-files)/_components/upload-panel";
 
 // Imported only for side effects: cross-route CSS overrides that need to
 // out-rank per-page chunks in the cascade.
@@ -249,10 +255,32 @@ const AiAgentsBootstrap = ({
       {children}
       <AgentLifecycleDialogs />
       <KnowledgeUploadSelectorDialog />
+      <UploadPanel />
+      <UploadFloatingButton />
       <FrameBridgeHost />
     </QueryClientProvider>
   );
-};
+}
+
+// Floating progress indicator for the Knowledge upload pipeline. Mirrors
+// the Docs layout: shows while there are items in the upload store and
+// opens the side panel on click. Stays mounted at the layout level so it
+// survives tab/agent switches and isn't tied to the Knowledge route slot.
+const UploadFloatingButton = observer(() => {
+  const uploadStore = useUploadStore();
+
+  if (!uploadStore.hasItems) return null;
+
+  return (
+    <FloatingButton
+      icon="upload"
+      percent={uploadStore.percent}
+      completed={uploadStore.uploaded && uploadStore.errorsCount === 0}
+      alert={uploadStore.errorsCount > 0}
+      onClick={() => uploadStore.setPanelVisible(true)}
+    />
+  );
+});;
 
 // Bridge is mounted at the layout so the parent-driven `navigateSection`
 // message is always handled regardless of the active sub-route, and so the

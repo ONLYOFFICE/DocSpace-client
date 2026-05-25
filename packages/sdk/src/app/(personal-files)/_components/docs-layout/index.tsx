@@ -116,7 +116,11 @@ import DropZone from "../drop-zone";
 import DeleteDialog from "../delete-dialog";
 import RenameDialog from "../rename-dialog";
 import UploadPanel from "../upload-panel";
-import { DocsChatBodyPanel, DocsChatHeaderPanel } from "../ai-chat-panel";
+import {
+  AiChatTrigger,
+  DocsChatBodyPanel,
+  DocsChatHeaderPanel,
+} from "../ai-chat-panel";
 
 import styles from "./DocsLayout.module.scss";
 
@@ -382,6 +386,7 @@ const DocsLayout = observer(
                                       : undefined
                                   }
                                   headerOffset={headerOffset}
+                                  aiChatButton={<AiChatTrigger />}
                                 />
                               }
                               sectionFilterContent={

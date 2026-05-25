@@ -30,7 +30,7 @@ import React from "react";
 import { makeAutoObservable } from "mobx";
 
 class AiChatPanelStore {
-  isVisible: boolean = true;
+  isVisible: boolean = false;
   isFullscreen: boolean = false;
   agentId: number | null = null;
 

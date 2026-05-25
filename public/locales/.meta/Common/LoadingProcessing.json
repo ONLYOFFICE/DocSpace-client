@@ -3,7 +3,7 @@
   "content": "Loading...",
   "content_en_sha1_hash": "b04ba49f848624bb97ab094a2631d2ad74913498",
   "created_at": "2025-05-19T21:30:46.280Z",
-  "updated_at": "2026-05-15T14:00:06.912Z",
+  "updated_at": "2026-05-24T17:27:49.204Z",
   "comment": {
     "text": "This is a button label that appears while an action is being processed, indicating that the system is busy.",
     "is_auto": true,
@@ -42,8 +42,20 @@
       "module": "/packages/login"
     },
     {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/info-panel/views/history.tsx",
+      "line_number": 157,
+      "context": "if (!currentAgent) return null;\n \n if (loading && !feed) {\n return (\n <div className={styles.emptyState}>\n <Text fontSize=\"13px\">{t(\"Common:LoadingProcessing\")}</Text>\n </div>\n );\n }\n \n if (!feed || feed.length === 0) {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/info-panel/views/members.tsx",
+      "line_number": 73,
+      "context": "if (!currentAgent) return null;\n \n if (loading && !members) {\n return (\n <div className={styles.emptyState}>\n <Text fontSize=\"13px\">{t(\"Common:LoadingProcessing\")}</Text>\n </div>\n );\n }\n \n if (!members || members.length === 0) {",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/shared/utils/desktop.ts",
-      "line_number": 162,
+      "line_number": 163,
       "context": "break;\n case 1:\n message = t?.(\"Common:EncryptingFile\");\n break;\n default:\n message = t?.(\"Common:LoadingProcessing\");\n }\n }\n toastr.info(message);\n break;\n default:",
       "module": "/packages/shared"
     }

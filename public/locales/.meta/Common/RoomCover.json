@@ -3,7 +3,7 @@
   "content": "Room cover",
   "content_en_sha1_hash": "629fe77eb87170248f519263ffdf53af11eb35b4",
   "created_at": "2025-05-19T21:30:53.318Z",
-  "updated_at": "2026-05-15T15:37:40.177Z",
+  "updated_at": "2026-05-24T17:27:49.076Z",
   "comment": {
     "text": "This is a dialog title for uploading or editing the cover image for a room. It appears when a user wants to customize the visual representation of a room.",
     "is_auto": true,
@@ -12,9 +12,15 @@
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/components/room-logo-cover-dialog/index.tsx",
+      "line_number": 166,
+      "context": "withBodyScroll\n withBodyScrollForcibly={!!scrollBodyHeight}\n isScrollLocked={openColorPicker}\n dataTestId=\"room_logo_cover_dialog\"\n >\n <ModalDialog.Header>{t(\"RoomLogoCover:RoomCover\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <RoomLogoCover\n key={visible ? \"open\" : \"closed\"}\n t={t}\n covers={covers}",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/components/dialogs/AvatarEditorDialog/index.js",
-      "line_number": 91,
-      "context": "const avatarTitle = isProfileUpload\n ? t(\"Ldap:LdapAvatar\")\n : isAIAgentsFolderRoot\n ? t(\"RoomLogoCover:AgentCover\")\n : t(\"RoomLogoCover:RoomCover\");\n \n const onResize = () => {\n const imageCropperModalHeight = IMAGE_CROPPER_HEIGHT + HEADER + BUTTONS;\n const screenHeight = document.documentElement.clientHeight;",
+      "line_number": 80,
+      "context": "const avatarTitle = isProfileUpload\n ? t(\"Ldap:LdapAvatar\")\n : isAIAgentsFolderRoot\n ? t(\"RoomLogoCover:AgentCover\")\n : t(\"RoomLogoCover:RoomCover\");\n \n const onCloseModal = () => {\n onChangeImage({ x: 0.5, y: 0.5, zoom: 1, uploadedFile: null });\n setPreview && setPreview(\"\");\n onClose && onClose();",
       "module": "/packages/client"
     },
     {
@@ -22,6 +28,12 @@
       "line_number": 257,
       "context": "dataTestId=\"room_logo_cover_dialog\"\n >\n <ModalDialog.Header>\n {isAIAgentsFolderRoot\n ? t(\"RoomLogoCover:AgentCover\")\n : t(\"RoomLogoCover:RoomCover\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <RoomLogoCover\n forwardedRef={contentRef}\n scrollHeight={scrollH}",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
+      "line_number": 515,
+      "context": "</ModalDialog>\n \n <AvatarEditorDialog\n t={t}\n visible={cropperVisible}\n title={t(\"RoomLogoCover:RoomCover\")}\n image={cropperImage}\n onClose={onCropperClose}\n onSave={onCropperSave}\n onChangeImage={onChangeImage}\n onChangeFile={onCropperChangeFile}",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

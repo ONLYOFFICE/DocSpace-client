@@ -1,0 +1,29 @@
+{
+  "key_path": "DeleteAIAgentWarning",
+  "content": "I understand the consequences and want to delete the agent",
+  "content_en_sha1_hash": "99959fbd30cf7d70abde7ebf6ceb1f554e089d08",
+  "created_at": "2026-05-24T17:27:23.864Z",
+  "updated_at": "2026-05-24T18:16:08.784Z",
+  "comment": {
+    "text": "Checkbox label in the AI agent deletion confirmation dialog, used to confirm the user's awareness of the deletion consequences.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:16:08.784Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
+      "line_number": 274,
+      "context": "{isRoomDelete || isTemplate || isAIAgent ? (\n <Checkbox\n style={{ marginTop: \"16px\" }}\n label={\n isAIAgent\n ? t(\"DeleteAIAgentWarning\")\n : isTemplate\n ? t(\"DeleteTemplateWarning\")\n : t(\"Common:DeleteRoomWarning\")\n }\n dataTestId=\"delete_warning_checkbox\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -27,6 +27,13 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router";
 import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+
+import AiAgentsLightIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
+import AiAgentsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";
+
+import { EmptyView } from "@docspace/shared/components/empty-view";
+import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
 
 import SdkIframe from "SRC_DIR/components/SdkIframe";
 
@@ -74,7 +81,12 @@ const buildParentSearch = (
   return "";
 };
 
-export const AiAgents = () => {
+type AiAgentsProps = {
+  canManageAgents?: boolean;
+  theme?: TTheme;
+};
+
+const AiAgentsComponent = ({ canManageAgents, theme }: AiAgentsProps) => {
   const { t } = useTranslation(["Common"]);
   const [searchParams] = useSearchParams();
 
@@ -121,9 +133,37 @@ export const AiAgents = () => {
     return () => window.removeEventListener("message", handler);
   }, []);
 
+  if (!canManageAgents) {
+    return (
+      <EmptyView
+        title={t("Common:DashboardAIChatAgentsTitle")}
+        description={t("Common:AIAgentsNonAdminDescription")}
+        icon={
+          theme?.isBase !== false ? (
+            <AiAgentsLightIcon />
+          ) : (
+            <AiAgentsDarkIcon />
+          )
+        }
+        options={[]}
+      />
+    );
+  }
+
   return (
     <SdkIframe src={src} title={t("Common:DashboardAIChatAgentsTitle")} />
   );
 };
+
+export const AiAgents = inject<TStore>(
+  ({ userStore, settingsStore }) => ({
+    canManageAgents: !!(
+      userStore.user?.isAdmin ||
+      userStore.user?.isOwner ||
+      userStore.user?.isRoomAdmin
+    ),
+    theme: settingsStore.theme,
+  }),
+)(observer(AiAgentsComponent));
 
 export default AiAgents;

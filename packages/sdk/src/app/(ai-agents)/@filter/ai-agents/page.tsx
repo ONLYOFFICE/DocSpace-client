@@ -17,15 +17,15 @@ import type { MainButtonProps } from "@docspace/ui-kit/components/main-button/Ma
 
 import AgentsFilter from "../../_components/agents-filter";
 import {
-  useAgentsAIConfigStore,
   useAgentDialogsStore,
+  useAgentsUserStore,
 } from "../../_store";
 import styles from "../../_components/agents-list/AgentsList.module.scss";
 
 export default observer(function ListFilter() {
   const { t } = useTranslation(["Common"]);
-  const aiConfigStore = useAgentsAIConfigStore();
   const dialogsStore = useAgentDialogsStore();
+  const userStore = useAgentsUserStore();
 
   const onCreate = React.useCallback(() => {
     dialogsStore.setCreateAgentDialogVisible(true);
@@ -53,13 +53,23 @@ export default observer(function ListFilter() {
     [t, onCreate],
   );
 
-  const aiUnavailable = aiConfigStore.isLoaded && !aiConfigStore.aiReady;
-  if (aiUnavailable) return null;
+  const { user } = userStore;
+  const canManage = !!(
+    user?.isAdmin ||
+    user?.isOwner ||
+    user?.isRoomAdmin
+  );
+  const showCreateButton = canManage;
 
   return (
     <>
-      <QuickActions items={quickActionItems} className={styles.quickActions} />
-      <AgentsFilter showMainButton mainButtonProps={mainButtonProps} />
+      {showCreateButton && (
+        <QuickActions items={quickActionItems} className={styles.quickActions} />
+      )}
+      <AgentsFilter
+        showMainButton={showCreateButton}
+        mainButtonProps={showCreateButton ? mainButtonProps : undefined}
+      />
     </>
   );
 });

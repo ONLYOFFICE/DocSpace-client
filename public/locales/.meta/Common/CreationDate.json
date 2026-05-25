@@ -3,7 +3,7 @@
   "content": "Creation date",
   "content_en_sha1_hash": "c175379b0389b2d6057b0b7db996720f1fb92fc7",
   "created_at": "2026-05-19T19:03:13.477Z",
-  "updated_at": "2026-05-19T19:35:01.123Z",
+  "updated_at": "2026-05-24T17:27:49.120Z",
   "comment": {
     "text": "Label in the file details panel indicating the date the object was created.",
     "is_auto": true,
@@ -18,8 +18,14 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/sdk/src/app/(personal-files)/_components/info-panel/views/Details/Details.utils.tsx",
-      "line_number": 132,
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/info-panel/views/details.tsx",
+      "line_number": 119,
+      "context": "})}\n variant=\"link\"\n >\n {renderPerson(agent.updatedBy ?? agent.createdBy)}\n </Row>\n <Row title={t(\"Common:CreationDate\", { defaultValue: \"Creation date\" })}>\n {getCorrectDate(culture, agent.created)}\n </Row>\n <Row\n title={\n agent.quotaLimit !== undefined",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Details/Details.utils.tsx",
+      "line_number": 182,
       "context": "case \"Date modified\":\n return this.t(\"Common:DateModified\");\n case \"Last modified by\":\n return this.t(\"Common:LastModifiedBy\");\n case \"Creation date\":\n return this.t(\"Common:CreationDate\");\n case \"Versions\":\n return this.t(\"Common:Versions\");\n default:\n return propertyId;\n }",
       "module": "/packages/sdk"
     }

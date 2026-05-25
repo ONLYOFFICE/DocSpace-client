@@ -41,6 +41,7 @@ import {
   InstallAiFormsDialog,
   InstallDocsCloudDialog,
 } from "SRC_DIR/pages/Dashboard/InstallModuleDialog";
+import { InstallAiArbiterDialog } from "SRC_DIR/pages/Dashboard/InstallAiArbiterDialog";
 import { EnableAiRoomsDialog } from "SRC_DIR/pages/Dashboard/EnableAiRoomsDialog";
 
 import CatalogDocumentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
@@ -56,6 +57,7 @@ import CatalogRestoreReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settin
 import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url";
+import CatalogAiArbiterReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-arbiter.react.svg?url";
 
 import AppsSidebar from "../AppsSidebar";
 import { useSidebarShowText } from "../AppsSidebar/useSidebarShowText";
@@ -65,11 +67,13 @@ const AI_FILES_ID = "ai-files";
 const AI_FORMS_ID = "ai-forms";
 const AI_ROOMS_ID = "ai-rooms";
 const AI_AGENTS_ID = "ai-agents";
+const AI_ARBITER_ID = "ai-arbiter";
 
 const PATH_TO_PARENT_ID: Record<string, string> = {
   "/docs-cloud": DOCS_CLOUD_ID,
   "/ai-files": AI_FILES_ID,
   "/ai-forms": AI_FORMS_ID,
+  "/ai-arbiter": AI_ARBITER_ID,
   "/ai-rooms": AI_ROOMS_ID,
 };
 
@@ -113,6 +117,7 @@ type NewArticleProps = {
   aiFormsEnabled: boolean;
   aiRoomsEnabled: boolean;
   aiAgentsEnabled: boolean;
+  aiArbiterEnabled: boolean;
   activate: (id: string) => Promise<boolean>;
   enable: (id: string, enabled: boolean) => Promise<unknown>;
   ensureAppsLoaded: () => void;
@@ -129,6 +134,7 @@ const NewArticle = ({
   aiFormsEnabled,
   aiRoomsEnabled,
   aiAgentsEnabled,
+  aiArbiterEnabled,
   activate,
   enable,
   ensureAppsLoaded,
@@ -138,6 +144,7 @@ const NewArticle = ({
   const location = useLocation();
   const navigate = useNavigate();
   const [installDialogVisible, setInstallDialogVisible] = React.useState(false);
+  const [arbiterDialogVisible, setArbiterDialogVisible] = React.useState(false);
   const [installDocsCloudVisible, setInstallDocsCloudVisible] =
     React.useState(false);
   const [enableAiRoomsVisible, setEnableAiRoomsVisible] = React.useState(false);
@@ -167,6 +174,8 @@ const NewArticle = ({
   });
 
   const isAdminOrOwner = (user?.isAdmin ?? false) || (user?.isOwner ?? false);
+  const canManageAgents =
+    isAdminOrOwner || (user?.isRoomAdmin ?? false);
   const canCreateForms =
     !(user?.isVisitor ?? false) && !(user?.isCollaborator ?? false);
 
@@ -178,7 +187,7 @@ const NewArticle = ({
     if (location.pathname.startsWith("/ai-forms")) {
       return AI_FORMS_SECTION_TO_ID[section] ?? AI_FORMS_ID;
     }
-    if (location.pathname.startsWith("/ai-agents")) {
+    if (location.pathname.startsWith("/agents")) {
       return AI_AGENTS_SECTION_TO_ID[section] ?? AI_AGENTS_ID;
     }
     if (location.pathname.startsWith("/ai-rooms")) {
@@ -369,25 +378,29 @@ const NewArticle = ({
               icon: CatalogTrashReactSvgUrl,
               onClick: () => navigate("/ai-rooms?section=trash"),
             },
-            {
-              id: "ai-rooms-settings",
-              label: t("Common:Settings"),
-              icon: CatalogSettingsReactSvgUrl,
-              onClick: () => navigate("/ai-rooms?section=settings"),
-            },
+            ...(isAdminOrOwner
+              ? [
+                  {
+                    id: "ai-rooms-settings",
+                    label: t("Common:Settings"),
+                    icon: CatalogSettingsReactSvgUrl,
+                    onClick: () => navigate("/ai-rooms?section=settings"),
+                  },
+                ]
+              : []),
           ]
         : undefined,
     };
 
     const handleAiAgentsClick = async () => {
       if (aiAgentsEnabled) {
-        navigate("/ai-agents");
+        navigate("/agents");
         return;
       }
       try {
         const activated = await activate("ai-agents");
         if (activated) {
-          navigate("/ai-agents");
+          navigate("/agents");
         } else {
           toastr.error(t("Common:SomethingWentWrong"));
         }
@@ -402,35 +415,60 @@ const NewArticle = ({
       label: t("Common:DashboardAIChatAgentsTitle"),
       icon: CatalogAiAgentsReactSvgUrl,
       onClick: handleAiAgentsClick,
-      children: aiAgentsEnabled
+      children: aiAgentsEnabled && canManageAgents
         ? [
             {
               id: "ai-agents-recent",
               label: t("Common:Recent"),
               icon: CatalogRestoreReactSvgUrl,
-              onClick: () => navigate("/ai-agents?section=recent"),
+              onClick: () => navigate("/agents?section=recent"),
             },
             {
               id: "ai-agents-favorites",
               label: t("Common:Favorites"),
               icon: CatalogFavoritesReactSvgUrl,
-              onClick: () => navigate("/ai-agents?section=favorites"),
+              onClick: () => navigate("/agents?section=favorites"),
             },
             {
               id: "ai-agents-trash",
               label: t("Common:TrashSection"),
               icon: CatalogTrashReactSvgUrl,
-              onClick: () => navigate("/ai-agents?section=trash"),
+              onClick: () => navigate("/agents?section=trash"),
               withTopSeparator: true,
             },
             {
               id: "ai-agents-settings",
               label: t("Common:Settings"),
               icon: CatalogSettingsReactSvgUrl,
-              onClick: () => navigate("/ai-agents?section=settings"),
+              onClick: () => navigate("/agents?section=settings"),
             },
           ]
         : undefined,
+    };
+
+    const handleAiArbiterClick = async () => {
+      if (aiArbiterEnabled) {
+        navigate("/ai-arbiter");
+        return;
+      }
+      try {
+        const activated = await activate("ai-arbiter");
+        if (activated) {
+          navigate("/ai-arbiter");
+        } else {
+          setArbiterDialogVisible(true);
+        }
+      } catch (err) {
+        console.error("Failed to activate ai-arbiter", err);
+        toastr.error(t("Common:SomethingWentWrong"));
+      }
+    };
+
+    const aiArbiterItem: NavMenuItem = {
+      id: AI_ARBITER_ID,
+      label: t("Common:DashboardAIArbiterTitle"),
+      icon: CatalogAiArbiterReactSvgUrl,
+      onClick: handleAiArbiterClick,
     };
 
     const all: { item: NavMenuItem; enabled: boolean }[] = [
@@ -438,6 +476,7 @@ const NewArticle = ({
       { item: aiRoomsItem, enabled: aiRoomsEnabled },
       { item: aiFormsItem, enabled: aiFormsEnabled },
       { item: aiAgentsItem, enabled: aiAgentsEnabled },
+      { item: aiArbiterItem, enabled: aiArbiterEnabled },
       { item: docsCloudItem, enabled: docsCloudEnabled },
     ];
 
@@ -472,8 +511,10 @@ const NewArticle = ({
     aiFormsEnabled,
     aiRoomsEnabled,
     aiAgentsEnabled,
+    aiArbiterEnabled,
     handleDocsCloudClick,
     activate,
+    setArbiterDialogVisible,
   ]);
 
   return (
@@ -495,6 +536,14 @@ const NewArticle = ({
         onInstalled={() => {
           setInstallDialogVisible(false);
           navigate("/ai-forms");
+        }}
+      />
+      <InstallAiArbiterDialog
+        visible={arbiterDialogVisible}
+        onClose={() => setArbiterDialogVisible(false)}
+        onInstalled={() => {
+          setArbiterDialogVisible(false);
+          navigate("/ai-arbiter");
         }}
       />
       <InstallDocsCloudDialog
@@ -527,6 +576,7 @@ const NewArticleConnected = inject<TStore>(
     aiFormsEnabled: appsStore.isEnabled("ai-forms"),
     aiRoomsEnabled: appsStore.isEnabled("ai-rooms"),
     aiAgentsEnabled: appsStore.isEnabled("ai-agents"),
+    aiArbiterEnabled: appsStore.isEnabled("ai-arbiter"),
     activate: appsStore.activate,
     enable: appsStore.enable,
     ensureAppsLoaded: appsStore.ensureLoaded,

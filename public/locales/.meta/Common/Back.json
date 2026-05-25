@@ -3,7 +3,7 @@
   "content": "Back",
   "content_en_sha1_hash": "b52b36b7269fbfc58ec24bb724691951a3decbe8",
   "created_at": "2025-05-19T21:30:43.167Z",
-  "updated_at": "2026-05-15T15:37:40.241Z",
+  "updated_at": "2026-05-24T17:27:49.148Z",
   "comment": {
     "text": "Button label. Navigates the user to the previous screen or step in a process.",
     "is_auto": true,
@@ -70,6 +70,12 @@
       "line_number": 107,
       "context": "<Text\n fontWeight={600}\n onClick={onClickBack}\n dataTestId=\"email_invitation_back_text\"\n >\n {t(\"Common:Back\")}\n </Text>\n </div>\n <Text fontWeight={600} fontSize=\"16px\">\n {t(\"Common:LoginButton\")}\n </Text>",
       "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/WizardOverlay.tsx",
+      "line_number": 603,
+      "context": "onClick={handleProceed}\n />\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:Back\")}\n onClick={handleBackToChat}\n />\n </>\n );\n case \"provisioning\":",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsTour.ts",

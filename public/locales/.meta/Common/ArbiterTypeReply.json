@@ -1,0 +1,29 @@
+{
+  "key_path": "ArbiterTypeReply",
+  "content": "Type your reply...",
+  "content_en_sha1_hash": "4f0987ee3dcbb62429483607cbb09ac6a23118c4",
+  "created_at": "2026-05-24T17:27:18.743Z",
+  "updated_at": "2026-05-24T18:35:25.466Z",
+  "comment": {
+    "text": "Placeholder text for the chat input textarea, prompting the user to enter their response.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:35:25.466Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/ChatPhase.tsx",
+      "line_number": 188,
+      "context": "<textarea\n className={styles.chatInput}\n value={draft}\n onChange={(e) => setDraft(e.target.value)}\n onKeyDown={handleKeyDown}\n placeholder={t(\"Common:ArbiterTypeReply\")}\n disabled={isStreaming}\n rows={3}\n />\n {isStreaming ? (\n <button",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

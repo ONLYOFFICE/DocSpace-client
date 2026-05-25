@@ -132,10 +132,12 @@ class AppsStore {
   // server, so a stale local cache cannot trigger a duplicate install flow.
   needsSetupAsync = async (id: string): Promise<boolean> => {
     if (id === "ai-forms") {
-      const settings = await this.fetchAppSettings<{ roomId?: number }>(
-        "ai-forms",
-      );
+      const settings = await this.fetchAppSettings<{ roomId?: number }>(id);
       return !settings?.roomId;
+    }
+    if (id === "ai-arbiter") {
+      const settings = await this.fetchAppSettings<{ installed?: boolean }>(id);
+      return !settings?.installed;
     }
     if (id === "ai-agents") return false;
     const settings = await this.fetchAppSettings(id);
@@ -176,6 +178,16 @@ class AppsStore {
   uninstallAiForms = async () => {
     await this.enable("ai-forms", false);
     await this.saveSettings("ai-forms", null);
+  };
+
+  installAiArbiter = async () => {
+    await this.saveSettings("ai-arbiter", { installed: true });
+    await this.enable("ai-arbiter", true);
+  };
+
+  uninstallAiArbiter = async () => {
+    await this.enable("ai-arbiter", false);
+    await this.saveSettings("ai-arbiter", null);
   };
 
   installDocsCloud = async () => {

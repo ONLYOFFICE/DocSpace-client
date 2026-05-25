@@ -3,7 +3,7 @@
   "content": "Setting up your AI balance",
   "content_en_sha1_hash": "61e067ddac35b68cce56aa33bea6ec24b79bb312",
   "created_at": "2026-05-15T13:59:45.939Z",
-  "updated_at": "2026-05-15T14:08:19.909Z",
+  "updated_at": "2026-05-24T17:27:49.240Z",
   "comment": {
     "text": "Page title shown on the AI paywall completion screen during the AI balance setup process.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
-      "line_number": 144,
+      "line_number": 140,
       "context": "<div className={styles.card}>\n {status === \"processing\" ? (\n <>\n <div className={styles.heroText}>\n <Text fontSize=\"20px\" fontWeight={700} className={styles.title}>\n {t(\"AIPaywallCallbackProcessing\")}\n </Text>\n <Text fontSize=\"13px\" lineHeight=\"18px\" className={styles.hint}>\n {t(\"AIPaywallCallbackProcessingHint\")}\n </Text>\n </div>",
       "module": "/libs/ui-kit"
     }

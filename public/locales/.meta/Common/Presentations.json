@@ -3,7 +3,7 @@
   "content": "Presentations",
   "content_en_sha1_hash": "25c4116b66b152694c7300d8d3f73ff01eb60a35",
   "created_at": "2025-05-19T21:30:47.458Z",
-  "updated_at": "2026-05-15T15:37:40.175Z",
+  "updated_at": "2026-05-24T17:27:49.074Z",
   "comment": {
     "text": "This is a label for a tab or filter option that displays presentation files.",
     "is_auto": true,
@@ -42,6 +42,18 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-filter/useAliasFilesFilter.tsx",
+      "line_number": 249,
+      "context": "},\n {\n id: \"filter_type-presentations\",\n key: String(FilterType.PresentationsOnly),\n group: FilterGroups.filterType,\n label: t(\"Common:Presentations\", { defaultValue: \"Presentations\" }),\n },\n {\n id: \"filter_type-pdf\",\n key: String(FilterType.Pdf),\n group: FilterGroups.filterType,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-filter/useAliasFilesFilter.tsx",
+      "line_number": 249,
+      "context": "},\n {\n id: \"filter_type-presentations\",\n key: String(FilterType.PresentationsOnly),\n group: FilterGroups.filterType,\n label: t(\"Common:Presentations\", { defaultValue: \"Presentations\" }),\n },\n {\n id: \"filter_type-pdf\",\n key: String(FilterType.Pdf),\n group: FilterGroups.filterType,",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
       "line_number": 191,
       "context": "},\n {\n id: \"filter_type-presentations\",\n key: FilterType.PresentationsOnly.toString(),\n group: FilterGroups.filterType,\n label: t(\"Common:Presentations\"),\n },\n {\n id: \"filter_type-forms\",\n key: FilterType.PDFForm.toString(),\n group: FilterGroups.filterType,",
@@ -61,7 +73,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 327,
+      "line_number": 320,
       "context": "case FilterType.FoldersOnly:\n return t(\"Common:Folders\");\n case FilterType.DocumentsOnly:\n return t(\"Common:Documents\");\n case FilterType.PresentationsOnly:\n return t(\"Common:Presentations\");\n case FilterType.SpreadsheetsOnly:\n return t(\"Common:Spreadsheets\");\n case FilterType.ImagesOnly:\n return t(\"Common:Images\");\n case FilterType.MediaOnly:",
       "module": "/packages/shared"
     }

@@ -116,6 +116,9 @@ import DropZone from "../drop-zone";
 import DeleteDialog from "../delete-dialog";
 import RenameDialog from "../rename-dialog";
 import UploadPanel from "../upload-panel";
+import ShareSelector from "../share-selector";
+import useDocsHotkeys from "../../_hooks/useDocsHotkeys";
+
 import {
   AiChatTrigger,
   DocsChatBodyPanel,
@@ -295,9 +298,22 @@ const DocsLayout = observer(
         const url = qs
           ? `${basePath}/${file.id}?${qs}`
           : `${basePath}/${file.id}`;
+
+        const openInSameTab =
+          sdkConfig?.openEditorInSameTab ?? filesSettings.openEditorInSameTab;
+        if (!openInSameTab) {
+          window.open(`${window.location.origin}/sdk${url}`, "_blank");
+          return;
+        }
         router.push(url);
       },
-      [router, editorBasePath, pathname],
+      [
+        router,
+        editorBasePath,
+        pathname,
+        filesSettings.openEditorInSameTab,
+        sdkConfig?.openEditorInSameTab,
+      ],
     );
 
     const {
@@ -349,6 +365,17 @@ const DocsLayout = observer(
     );
 
     const layoutMode = isAiChatPanelFullscreen ? "ai-fullscreen" : "default";
+
+    useDocsHotkeys({
+      onOpenFile: (item) => {
+        if (!item.isFolder) openFileHandler(item as TFileItem);
+      },
+      onRenameItem: requestRename,
+      onDeleteItems: requestDelete,
+      onCreateFile: openCreateDialog,
+      onUploadFiles,
+      onUploadFolder,
+    });
 
     return (
       <OpenFileContext.Provider value={openFileHandler}>
@@ -462,6 +489,7 @@ const DocsLayout = observer(
                           </RootScrollbar>
                         </DropZone>
                         <InfoPanelEditLinkDialog />
+                        <ShareSelector />
                         <VersionHistoryPanel />
                         <CreateFileDialog
                           visible={dialogVisible}

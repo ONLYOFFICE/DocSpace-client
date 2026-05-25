@@ -100,7 +100,10 @@ const ExternalLinks = ({
   const showLifetimeBlock = !!activeLink?.expirationDate;
   const showUsersLimitWarning =
     activeLink?.currentUseCount >= activeLink?.maxUseCount;
-  const linkIsExpired = isAfter(now(), parseToDateTime(activeLink?.expirationDate));
+  const linkIsExpired = isAfter(
+    now(),
+    parseToDateTime(activeLink?.expirationDate),
+  );
 
   const locale = getCookie(LANGUAGE) ?? culture ?? "en";
 
@@ -201,7 +204,7 @@ const ExternalLinks = ({
           [styles.inline]: true,
         })}
       >
-        {t("InviteViaLink")}
+        {t("Common:InviteViaLink")}
 
         <IconButton
           iconName={SettingsReactSvgUrl}
@@ -375,3 +378,4 @@ export default inject(
     };
   },
 )(observer(ExternalLinks));
+

@@ -278,7 +278,9 @@ const InviteInput = ({
         roomId === -1
           ? await getUserList(filter)
           : await getMembersList(
-              isPrivateRoom ? AccountsSearchArea.People : AccountsSearchArea.Any,
+              isPrivateRoom
+                ? AccountsSearchArea.People
+                : AccountsSearchArea.Any,
               roomId,
               filter,
             );
@@ -647,7 +649,7 @@ const InviteInput = ({
   return (
     <>
       <Heading className={styles.subHeader}>
-        {t("AddManually")}
+        {t("Common:AddManually")}
         {!hideSelector ? (
           <Link
             className={classNames(styles.styledLink, "link-list")}
@@ -830,3 +832,4 @@ export default inject(
     ),
   ),
 );
+

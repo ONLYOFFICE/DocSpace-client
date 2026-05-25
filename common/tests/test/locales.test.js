@@ -2103,6 +2103,117 @@ describe("Locales Tests", () => {
     expect(errorsCount, message).toBe(0);
   });
 
+  it("NativeLetterPresenceTest: Verify that every translation contains at least one letter from the language's alphabet.", () => {
+    // Each language's "alphabet" — a regex that must match at least once in the stripped
+    // translation value. After removing {{variables}} and <HTML/React tags> the remaining
+    // text must contain at least one native letter.  This catches values that consist
+    // entirely of digits, punctuation, or technical symbols with no human-readable text
+    // in the target language (e.g. a Russian value of "100% done" with no Cyrillic).
+    //
+    // Non-Latin-script languages: the regex covers their Unicode block.
+    // Latin-script languages: any [a-zA-Z] letter suffices; the test still catches
+    // purely-numeric or symbol-only values such as a translation that strips to "42".
+
+    const LANG_ALPHABET = {
+      // Non-Latin scripts
+      "ar-SA":      /[؀-ۿ]/,
+      "el-GR":      /[Ͱ-Ͽ]/,
+      "hy-AM":      /[԰-֏]/,
+      "ja-JP":      /[぀-ヿ一-鿿]/,
+      "ko-KR":      /[가-힯ᄀ-ᇿ]/,
+      "lo-LA":      /[຀-໿]/,
+      "si":         /[඀-෿]/,
+      "zh-CN":      /[一-鿿]/,
+      // Cyrillic
+      "bg":         /[Ѐ-ӿ]/,
+      "ru":         /[Ѐ-ӿ]/,
+      "sr-Cyrl-RS": /[Ѐ-ӿ]/,
+      "uk-UA":      /[Ѐ-ӿ]/,
+      // Latin-script — any Latin letter
+      "az":         /[a-zA-Z]/,
+      "cs":         /[a-zA-Z]/,
+      "de":         /[a-zA-Z]/,
+      "es":         /[a-zA-Z]/,
+      "fi":         /[a-zA-Z]/,
+      "fr":         /[a-zA-Z]/,
+      "it":         /[a-zA-Z]/,
+      "lv":         /[a-zA-Z]/,
+      "nl":         /[a-zA-Z]/,
+      "pl":         /[a-zA-Z]/,
+      "pt":         /[a-zA-Z]/,
+      "pt-BR":      /[a-zA-Z]/,
+      "ro":         /[a-zA-Z]/,
+      "sk":         /[a-zA-Z]/,
+      "sl":         /[a-zA-Z]/,
+      "sq-AL":      /[a-zA-Z]/,
+      "sr-Latn-RS": /[a-zA-Z]/,
+      "tr":         /[a-zA-Z]/,
+      "vi":         /[a-zA-Z]/,
+    };
+
+    // Minimum stripped-text length to bother checking.
+    // Values shorter than this are likely abbreviations, numbers, or symbols.
+    const MIN_STRIPPED_LEN = 8;
+
+    function stripMarkup(text) {
+      return text
+        .replace(/\{\{[^}]+\}\}/g, "")
+        .replace(/<[^>]*>/g, "")
+        .replace(/&[a-zA-Z]+;/g, "");
+    }
+
+    // Build EN reference for "equals English" exemption (brand names, tech terms).
+    const enByNsKey = {};
+    translationFiles
+      .filter((f) => f.language === "en")
+      .forEach((file) => {
+        file.translations.forEach((t) => {
+          enByNsKey[`${file.namespace}|${t.key}`] = t.value;
+        });
+      });
+
+    let message =
+      "Next translation values contain no letters from the language's alphabet:\r\n\r\n";
+    let errorsCount = 0;
+    let i = 0;
+    const wrongKeys = [];
+
+    for (const [lang, alphabetRegex] of Object.entries(LANG_ALPHABET)) {
+      const langFiles = translationFiles.filter((f) => f.language === lang);
+
+      langFiles.forEach((file) => {
+        file.translations.forEach((t) => {
+          if (!t.value) return;
+
+          const stripped = stripMarkup(t.value).trim();
+
+          // Skip short values — numbers, abbreviations, symbols
+          if (stripped.length < MIN_STRIPPED_LEN) return;
+
+          // Skip if identical to English (case-insensitive) — brand names, product names, technical terms
+          const enVal = enByNsKey[`${file.namespace}|${t.key}`];
+          if (enVal && t.value.toLowerCase() === enVal.toLowerCase()) return;
+
+          // At least one native letter must be present
+          if (alphabetRegex.test(stripped)) return;
+
+          message +=
+            `${++i}. lng='${lang}' key='${file.namespace}:${t.key}'\r\n` +
+            `  Value: '${t.value.substring(0, 150)}'\r\n\r\n`;
+          errorsCount++;
+          wrongKeys.push({ language: lang, key: `${file.namespace}:${t.key}` });
+        });
+      });
+    }
+
+    clearWrongKeys(
+      resolveTranslationEntries(wrongKeys),
+      "no-native-letter translation keys",
+    );
+
+    expect(errorsCount, message).toBe(0);
+  });
+
   it("ForeignScriptContaminationTest: Verify that translations do not contain characters from unrelated scripts.", () => {
     // Each language has a set of ALLOWED Unicode script ranges.
     // Any character outside ASCII + allowed ranges (after stripping markup) is contamination.

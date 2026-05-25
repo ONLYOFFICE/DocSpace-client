@@ -3,7 +3,7 @@
   "content": "Are you sure you want to restore all rooms?",
   "content_en_sha1_hash": "bacc85ff792307c347c95fa2aedccf9d2c9ee102",
   "created_at": "2025-05-19T21:30:57.060Z",
-  "updated_at": "2026-05-15T14:00:06.632Z",
+  "updated_at": "2026-05-24T17:27:49.074Z",
   "comment": {
     "text": "This is a confirmation message in a dialog box, asking the user if they want to restore all archived rooms. It appears when the user chooses to restore all rooms from the archive.",
     "is_auto": true,
@@ -14,13 +14,13 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ArchiveDialog/index.js",
       "line_number": 87,
-      "context": "window.addEventListener(\"keydown\", onKeyPress);\n return () => window.removeEventListener(\"keydown\", onKeyPress);\n }, []);\n \n const getDescription = () => {\n if (restoreAll) return t(\"ArchiveDialog:RestoreAllRooms\");\n \n return items.length > 1\n ? `${t(\"ArchiveDialog:ArchiveRooms\")} ${t(\"Common:WantToContinue\")}`\n : `${t(\"ArchiveDialog:ArchiveRoom\")} ${t(\"Common:WantToContinue\")}`;\n };",
+      "context": "window.addEventListener(\"keydown\", onKeyPress);\n return () => window.removeEventListener(\"keydown\", onKeyPress);\n }, []);\n \n const getDescription = () => {\n if (restoreAll) return t(\"Common:RestoreAllRooms\");\n \n return items.length > 1\n ? `${t(\"Common:ArchiveRooms\")} ${t(\"Common:WantToContinue\")}`\n : `${t(\"Common:ArchiveRoom\")} ${t(\"Common:WantToContinue\")}`;\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/RestoreRoomDialog/index.js",
       "line_number": 92,
-      "context": "return items.length > 1\n ? t(\"Files:WantToRestoreTheRooms\")\n : t(\"Files:WantToRestoreTheRoom\");\n }\n \n if (restoreAll) return t(\"ArchiveDialog:RestoreAllRooms\");\n \n return items.length > 1\n ? t(\"ArchiveDialog:RestoreRooms\")\n : t(\"ArchiveDialog:RestoreRoom\");\n };",
+      "context": "return items.length > 1\n ? t(\"Common:WantToRestoreTheRooms\")\n : t(\"Common:WantToRestoreTheRoom\");\n }\n \n if (restoreAll) return t(\"Common:RestoreAllRooms\");\n \n return items.length > 1\n ? t(\"Common:RestoreRooms\")\n : t(\"Common:RestoreRoom\");\n };",
       "module": "/packages/client"
     }
   ],

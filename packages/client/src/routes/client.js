@@ -299,6 +299,22 @@ const ClientRoutes = [
               </PrivateRoute>
             ),
           },
+          {
+            path: "ai-agents",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
           ...contactsRoutes,
           ...profileClientRoutes,
         ],
@@ -353,7 +369,27 @@ const ClientRoutes = [
         },
       },
       {
-        path: "/ai-agents",
+        path: "/ai-arbiter",
+        async lazy() {
+          const { AiArbiter } = await componentLoader(
+            () => import("SRC_DIR/pages/AiArbiter"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ProtectedAppRoute appId="ai-arbiter">
+                <ErrorBoundary>
+                  <AiArbiter />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
+        path: "/agents",
         async lazy() {
           const { AiAgents } = await componentLoader(
             () => import("SRC_DIR/pages/AiAgents"),

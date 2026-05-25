@@ -3,7 +3,7 @@
   "content": "Error",
   "content_en_sha1_hash": "7f2f6a15cf8da2b27e5a4af47b58e7ad71c0b3d9",
   "created_at": "2025-05-19T21:30:45.027Z",
-  "updated_at": "2026-05-15T14:00:06.819Z",
+  "updated_at": "2026-05-24T17:27:49.160Z",
   "comment": {
     "text": "This is a general error message displayed in toast notifications or as part of a larger error message when an unexpected issue occurs.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1313,
+      "line_number": 1329,
       "context": "...transProps,\n }),\n );\n } catch (error) {\n console.error(\"Error adding rooms to group:\", error);\n toastr.error(t(\"Common:Error\"));\n }\n };\n \n onRemoveRoomsFromGroup = async (roomIds, t) => {\n const currentGroupId = this.filesStore.roomsFilter?.groupId;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1313,
+      "line_number": 1329,
       "context": "...transProps,\n }),\n );\n } catch (error) {\n console.error(\"Error adding rooms to group:\", error);\n toastr.error(t(\"Common:Error\"));\n }\n };\n \n onRemoveRoomsFromGroup = async (roomIds, t) => {\n const currentGroupId = this.filesStore.roomsFilter?.groupId;",
       "module": "/packages/client"
     },
@@ -94,6 +94,24 @@
       "line_number": 76,
       "context": "};\n \n export const getMessageKeyTranslate = (t: TTranslation, message: string) => {\n switch (message) {\n case \"Error\":\n return t(\"Common:Error\");\n case \"None\":\n return t(\"Common:UnknownError\");\n case \"ErrorUserNotFound\":\n return t(\"Errors:ErrorUserNotFound\");\n case \"ErrorExpiredActivationLink\":",
       "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/PanelView.tsx",
+      "line_number": 68,
+      "context": "const { status } = panel;\n const statusLabels: Record<PanelState[\"status\"], string> = {\n idle: \"\",\n streaming: t(\"Common:ArbiterRunning\"),\n done: t(\"Common:Done\"),\n error: t(\"Common:Error\"),\n aborted: t(\"Common:ArbiterStopped\"),\n };\n const label = statusLabels[status];\n const headerClass = isArbiter\n ? styles.panelHeaderArbiter",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/ai-arbiter/page.client.tsx",
+      "line_number": 280,
+      "context": ")}\n {runStatus !== \"idle\" && (\n <span className={styles.statusText}>\n {runStatus === \"running\" && t(\"Common:ArbiterRunning\")}\n {runStatus === \"done\" && t(\"Common:Done\")}\n {runStatus === \"error\" && t(\"Common:Error\")}\n {runStatus === \"aborted\" && t(\"Common:ArbiterStopped\")}\n </span>\n )}\n </div>\n </div>",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/upload-panel/file-row.tsx",
+      "line_number": 94,
+      "context": "fontWeight={600}\n type={LinkType.action}\n className={styles.errorText}\n title={item.error}\n >\n {t(\"Common:Error\")}\n </Link>\n ) : (\n <>\n {item.percent >= 0 ? (\n <Text className={styles.percentText}>",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/pages/Branding/BrandName/index.tsx",

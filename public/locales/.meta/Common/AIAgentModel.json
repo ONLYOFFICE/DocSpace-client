@@ -3,7 +3,7 @@
   "content": "Model",
   "content_en_sha1_hash": "68c2cc7f0ceaa3e499ecb4db331feb4debbbcc23",
   "created_at": "2026-03-31T15:18:16.635Z",
-  "updated_at": "2026-05-15T14:00:06.980Z",
+  "updated_at": "2026-05-24T17:27:49.230Z",
   "comment": {
     "text": "This is a short label for a dropdown menu in the AI Agent settings, allowing users to select a specific AI model.",
     "is_auto": true,
@@ -11,6 +11,18 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/WizardOverlay.tsx",
+      "line_number": 479,
+      "context": "<span className={styles.previewItemMeta}>\n {e.domain_expertise.slice(0, 3).join(\" • \")}\n </span>\n </div>\n <div className={styles.previewItemModel}>\n <span className={styles.previewModelLabel}>{t(\"Common:AIAgentModel\")}</span>\n {renderModelControl(expertModelIds[i] ?? \"\", (v) =>\n setExpertModelIds((prev) => {\n const next = [...prev];\n next[i] = v;\n return next;",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/WizardOverlay.tsx",
+      "line_number": 479,
+      "context": "<span className={styles.previewItemMeta}>\n {e.domain_expertise.slice(0, 3).join(\" • \")}\n </span>\n </div>\n <div className={styles.previewItemModel}>\n <span className={styles.previewModelLabel}>{t(\"Common:AIAgentModel\")}</span>\n {renderModelControl(expertModelIds[i] ?? \"\", (v) =>\n setExpertModelIds((prev) => {\n const next = [...prev];\n next[i] = v;\n return next;",
+      "module": "/packages/sdk"
+    },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/AIAgentForm.tsx",
       "line_number": 366,

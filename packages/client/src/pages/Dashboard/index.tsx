@@ -57,6 +57,7 @@ import {
   InstallAiFormsDialog,
   InstallDocsCloudDialog,
 } from "./InstallModuleDialog";
+import { InstallAiArbiterDialog } from "./InstallAiArbiterDialog";
 import { EnableAiRoomsDialog } from "./EnableAiRoomsDialog";
 import styles from "./Dashboard.module.scss";
 
@@ -84,6 +85,7 @@ const Dashboard = ({
   const [searchParams] = useSearchParams();
   const [myFolderId, setMyFolderId] = React.useState<number | null>(null);
   const [installDialogVisible, setInstallDialogVisible] = React.useState(false);
+  const [arbiterDialogVisible, setArbiterDialogVisible] = React.useState(false);
   const [docsCloudDialogVisible, setDocsCloudDialogVisible] =
     React.useState(false);
   const [enableAiRoomsVisible, setEnableAiRoomsVisible] = React.useState(false);
@@ -161,12 +163,26 @@ const Dashboard = ({
       }
       return;
     }
+    if (modId === "ai-arbiter") {
+      try {
+        const activated = await activate("ai-arbiter");
+        if (activated) {
+          navigate("/ai-arbiter");
+        } else {
+          setArbiterDialogVisible(true);
+        }
+      } catch (err) {
+        console.error("Failed to activate ai-arbiter", err);
+        toastr.error(t("Common:SomethingWentWrong"));
+      }
+      return;
+    }
 
     if (modId === "ai-agents") {
       try {
         const activated = await activate("ai-agents");
         if (activated) {
-          navigate("/ai-agents");
+          navigate("/agents");
         } else {
           toastr.error(t("Common:SomethingWentWrong"));
         }
@@ -211,6 +227,11 @@ const Dashboard = ({
   const handleInstalled = () => {
     setInstallDialogVisible(false);
     navigate("/ai-forms");
+  };
+
+  const handleArbiterInstalled = () => {
+    setArbiterDialogVisible(false);
+    navigate("/ai-arbiter");
   };
 
   const handleDocsCloudInstalled = () => {
@@ -332,13 +353,17 @@ const Dashboard = ({
         onClose={() => setInstallDialogVisible(false)}
         onInstalled={handleInstalled}
       />
-
+      <InstallAiArbiterDialog
+        visible={arbiterDialogVisible}
+        onClose={() => setArbiterDialogVisible(false)}
+        onInstalled={handleArbiterInstalled}
+      />
       <InstallDocsCloudDialog
         visible={docsCloudDialogVisible}
         onClose={() => setDocsCloudDialogVisible(false)}
         onInstalled={handleDocsCloudInstalled}
       />
- <EnableAiRoomsDialog
+      <EnableAiRoomsDialog
         visible={enableAiRoomsVisible}
         isLoading={enableAiRoomsLoading}
         onClose={() => setEnableAiRoomsVisible(false)}

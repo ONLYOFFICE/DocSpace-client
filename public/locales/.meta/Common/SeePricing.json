@@ -3,7 +3,7 @@
   "content": "See pricing",
   "content_en_sha1_hash": "52a8d5d7d8ece3b2ccda0bfe53534ea8912e5553",
   "created_at": "2026-05-19T19:03:23.452Z",
-  "updated_at": "2026-05-19T19:05:39.273Z",
+  "updated_at": "2026-05-24T17:27:49.117Z",
   "comment": {
     "text": "Button label that directs the user to the pricing information page.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
-      "line_number": 240,
+      "line_number": 330,
       "context": "</Text>\n </div>\n </div>\n <Button\n className={styles.modulesPricingBtn}\n label={t(\"Common:SeePricing\")}\n size={ButtonSize.small}\n isDisabled={!pricingUrl}\n onClick={() => {\n if (pricingUrl) window.open(pricingUrl, \"_blank\");\n }}",
       "module": "/packages/client"
     }

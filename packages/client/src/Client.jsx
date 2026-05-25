@@ -192,8 +192,9 @@ const ClientContent = (props) => {
     location.pathname.startsWith("/ai-files") ||
     location.pathname.startsWith("/ai-rooms") ||
     location.pathname.startsWith("/ai-forms") ||
-    location.pathname.startsWith("/ai-agents") ||
-    location.pathname.startsWith("/docs-cloud");
+    location.pathname.startsWith("/agents") ||
+    location.pathname.startsWith("/docs-cloud") ||
+    location.pathname.startsWith("/ai-arbiter");
   const withMainButton =
     isAccountsArticle || isDeveloperToolsArticle
       ? currentDeviceType !== DeviceType.desktop

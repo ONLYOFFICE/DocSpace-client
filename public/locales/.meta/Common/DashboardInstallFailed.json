@@ -3,7 +3,7 @@
   "content": "Installation failed",
   "content_en_sha1_hash": "346500a90ca20904b9a28e0cae2346c7195ccd78",
   "created_at": "2026-05-19T19:03:13.906Z",
-  "updated_at": "2026-05-19T19:26:19.397Z",
+  "updated_at": "2026-05-24T17:27:49.113Z",
   "comment": {
     "text": "Error toast message that appears when a module installation fails.",
     "is_auto": true,
@@ -12,15 +12,27 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/index.tsx",
-      "line_number": 111,
-      "context": "setPhase(\"done\");\n } catch (err) {\n if (cancelledRef.current) return;\n console.error(\"AI Forms install failed\", err);\n setPhase(\"failed\");\n toastr.error(t(\"Common:DashboardInstallFailed\"));\n } finally {\n abortRef.current = null;\n }\n }, [installAiForms, t]);",
+      "file_path": "/packages/client/src/pages/Dashboard/InstallAiArbiterDialog/index.tsx",
+      "line_number": 73,
+      "context": "await installAiArbiter?.();\n setPhase(\"done\");\n } catch (err) {\n console.error(\"AI Arbiter install failed\", err);\n setPhase(\"failed\");\n toastr.error(t(\"Common:DashboardInstallFailed\"));\n } finally {\n setIsPending(false);\n }\n }, [installAiArbiter, t]);",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/index.tsx",
-      "line_number": 111,
-      "context": "setPhase(\"done\");\n } catch (err) {\n if (cancelledRef.current) return;\n console.error(\"AI Forms install failed\", err);\n setPhase(\"failed\");\n toastr.error(t(\"Common:DashboardInstallFailed\"));\n } finally {\n abortRef.current = null;\n }\n }, [installAiForms, t]);",
+      "file_path": "/packages/client/src/pages/Dashboard/InstallAiArbiterDialog/index.tsx",
+      "line_number": 73,
+      "context": "await installAiArbiter?.();\n setPhase(\"done\");\n } catch (err) {\n console.error(\"AI Arbiter install failed\", err);\n setPhase(\"failed\");\n toastr.error(t(\"Common:DashboardInstallFailed\"));\n } finally {\n setIsPending(false);\n }\n }, [installAiArbiter, t]);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallModuleDialog.tsx",
+      "line_number": 106,
+      "context": "setPhase(\"done\");\n } catch (err) {\n if (cancelledRef.current) return;\n console.error(\"Module install failed\", err);\n setPhase(\"failed\");\n toastr.error(t(\"Common:DashboardInstallFailed\"));\n } finally {\n abortRef.current = null;\n }\n }, [onInstall, steps, t]);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallModuleDialog.tsx",
+      "line_number": 106,
+      "context": "setPhase(\"done\");\n } catch (err) {\n if (cancelledRef.current) return;\n console.error(\"Module install failed\", err);\n setPhase(\"failed\");\n toastr.error(t(\"Common:DashboardInstallFailed\"));\n } finally {\n abortRef.current = null;\n }\n }, [onInstall, steps, t]);",
       "module": "/packages/client"
     }
   ],

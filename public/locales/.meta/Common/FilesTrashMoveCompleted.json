@@ -3,7 +3,7 @@
   "content": "Files moved to {{sectionName}}.",
   "content_en_sha1_hash": "1a4e20715b0d1234e1d3b9bd7c2718b767d813cc",
   "created_at": "2026-05-19T19:03:16.621Z",
-  "updated_at": "2026-05-19T19:14:04.116Z",
+  "updated_at": "2026-05-24T17:27:49.124Z",
   "comment": {
     "text": "Notification message in the History feed appearing after files are moved to a specific section. The {{sectionName}} variable represents the destination section name.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 90,
+      "line_number": 93,
       "context": "if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"Common:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:\n if (\"fromParentTitle\" in feed.data && feed.data.fromParentTitle) {\n return t(\"Common:FileCopiedTo\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 84,
+      "line_number": 87,
       "context": "if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"Common:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:\n if (feed.data.fromParentTitle) {\n return t(\"Common:FileCopiedTo\", {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/sdk/src/app/(personal-files)/_components/info-panel/views/History/useFeedTranslation.tsx",
-      "line_number": 66,
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
+      "line_number": 69,
       "context": "folderTitle: (feed.data as TFeedData).parentTitle,\n });\n }\n return t(\"Common:FilesMovedNotify\");\n case FeedActionKeys.FileMovedToTrash:\n return t(\"Common:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:\n if (\"fromParentTitle\" in feed.data && feed.data.fromParentTitle) {\n return t(\"Common:FileCopiedTo\", {",
       "module": "/packages/sdk"
     }

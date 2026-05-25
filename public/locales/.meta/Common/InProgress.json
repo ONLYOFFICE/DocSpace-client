@@ -3,7 +3,7 @@
   "content": "In progress",
   "content_en_sha1_hash": "b6bd42e4e7302e5e9a15930c8fcdb73fc2c0cf18",
   "created_at": "2025-05-19T21:30:45.918Z",
-  "updated_at": "2026-05-19T19:03:33.063Z",
+  "updated_at": "2026-05-24T17:27:49.069Z",
   "comment": {
     "text": "This label indicates that an operation or process is currently running. It appears in a dialog showing the status of a data reassignment and as a section title in the forms module.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 206,
+      "line_number": 293,
       "context": "onClick: handleAiFormsClick,\n children: aiFormsEnabled\n ? [\n {\n id: \"ai-forms-in-progress\",\n label: t(\"Common:InProgress\"),\n icon: FormFillRectSvgUrl,\n onClick: () => navigate(\"/ai-forms?section=in-progress\"),\n },\n {\n id: \"ai-forms-completed\",",
       "module": "/packages/client"
     },
@@ -49,7 +49,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 247,
+      "line_number": 240,
       "context": "case FileFillingFormStatus.Draft:\n return t(\"Common:BadgeMyDraftTitle\");\n case FileFillingFormStatus.YourTurn:\n return t(\"Common:YourTurn\");\n case FileFillingFormStatus.InProgress:\n return t(\"Common:InProgress\");\n case FileFillingFormStatus.Stopped:\n return t(\"Common:Stopped\");\n case FileFillingFormStatus.Completed:\n return t(\"Common:Complete\");\n default:",
       "module": "/packages/shared"
     }

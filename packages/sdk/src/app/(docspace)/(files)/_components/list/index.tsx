@@ -190,6 +190,7 @@ const List = ({
 
       if (newCurrent?.id) {
         setCurrentFolderId(newCurrent.id);
+        navigationStore.setCurrentFolderId(newCurrent.id);
       }
 
       if (newCurrent?.title) {

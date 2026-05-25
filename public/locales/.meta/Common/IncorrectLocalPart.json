@@ -3,7 +3,7 @@
   "content": "Incorrect local part",
   "content_en_sha1_hash": "f295e102907935b47152a237d618a71a6cfb0930",
   "created_at": "2025-05-19T21:30:45.882Z",
-  "updated_at": "2026-05-15T14:00:06.640Z",
+  "updated_at": "2026-05-24T17:27:49.077Z",
   "comment": {
     "text": "Error text. This message appears when the local part of an email address (the part before the \"@\" symbol) is incorrectly formatted.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 200,
+      "line_number": 201,
       "context": "case ErrorKeys.PunycodeDomain:\n return t(\"Common:PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:\n return t(\"Common:PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"Common:MaxLengthExceeded\");\n default:",
       "module": "/packages/shared"
     }

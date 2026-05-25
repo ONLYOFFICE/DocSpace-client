@@ -41,10 +41,6 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { useEncryption } from "@docspace/shared/context/encryption";
-import {
-  exportIdentityToBlob,
-  getPublicKeyFingerprint,
-} from "@docspace/shared/services/encryption/identity";
 import { setActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
@@ -56,9 +52,9 @@ import { useGenerateKeyFlow } from "./flows/useGenerateKeyFlow";
 import { useImportKeyFlow } from "./flows/useImportKeyFlow";
 import { useRecoverKeyFlow } from "./flows/useRecoverKeyFlow";
 import { useDeleteKeyFlow } from "./flows/useDeleteKeyFlow";
+import { useExportKeyFlow } from "./flows/useExportKeyFlow";
 import { useRotatePassphraseFlow } from "./flows/useRotatePassphraseFlow";
 import { useResetKeysFlow } from "./flows/useResetKeysFlow";
-import { getEncryptionErrorMessage } from "./flows/getEncryptionErrorMessage";
 
 import styles from "./KeysManagement.module.scss";
 
@@ -98,6 +94,7 @@ const KeysManagement = ({
     refreshKeysFromServer,
   });
   const remove = useDeleteKeyFlow({ userId, refreshKeysFromServer });
+  const exportFlow = useExportKeyFlow();
   const rotate = useRotatePassphraseFlow({ userId, refreshKeysFromServer });
   const reset = useResetKeysFlow({
     userId,
@@ -109,6 +106,7 @@ const KeysManagement = ({
     generate.isPending ||
     importFlow.isPending ||
     remove.isPending ||
+    exportFlow.isPending ||
     rotate.isPending ||
     recover.isPending ||
     reset.isPending;
@@ -127,37 +125,12 @@ const KeysManagement = ({
     [userId, refreshKeysFromServer, t],
   );
 
-  const handleExport = useCallback(
-    async (keyData: TEncryptionKeyPair) => {
-      try {
-        const blob = exportIdentityToBlob({
-          publicKey: keyData.publicKey,
-          privateKeyEnc: keyData.privateKeyEnc,
-        });
-        const url = URL.createObjectURL(blob);
-        const fingerprint = await getPublicKeyFingerprint(keyData.publicKey);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `docspace-key-${fingerprint.slice(0, 8)}.json`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        toastr.success(t("Common:EncryptionKeyExported"));
-      } catch (error) {
-        toastr.error(getEncryptionErrorMessage(t, error));
-        console.error("Key export failed:", error);
-      }
-    },
-    [t],
-  );
-
   return (
     <div className={styles.sectionBody}>
       <KeysList
         keys={encryptionKeys || []}
         onDelete={remove.request}
-        onExport={handleExport}
+        onExport={exportFlow.request}
         onRotate={rotate.request}
         onSelectActive={handleSelectActive}
         isDeleting={remove.isPending}
@@ -223,6 +196,7 @@ const KeysManagement = ({
       {importFlow.modals}
       {recover.modals}
       {remove.modals}
+      {exportFlow.modals}
       {rotate.modals}
       {reset.modals}
     </div>

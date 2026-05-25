@@ -62,6 +62,7 @@ type PassphraseModalProps = {
   onCancel: () => void;
   isNew: boolean;
   isLoading?: boolean;
+  externalError?: string | null;
 };
 
 const MIN_LENGTH = PASSPHRASE_MIN_LENGTH;
@@ -82,6 +83,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
   onCancel,
   isNew,
   isLoading = false,
+  externalError,
 }) => {
   const { t, ready } = useTranslation(["Common"]);
   const inputRef = useRef<PasswordInputHandle>(null);
@@ -114,9 +116,6 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
     }
 
     onSubmit(passphrase);
-    setPassphrase("");
-    setConfirmPassphrase("");
-    setError("");
   }, [passphrase, isNew, onSubmit, t]);
 
   const handleCancel = useCallback(() => {
@@ -132,8 +131,11 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
 
   const isDisabled = !isValid || isLoading;
 
+  const displayedError = externalError || error;
+
   const passphraseHasError =
-    !!error || (isNew && passphrase.length >= MIN_LENGTH && !rulesPassed);
+    !!displayedError ||
+    (isNew && passphrase.length >= MIN_LENGTH && !rulesPassed);
 
   return (
     <ModalDialog
@@ -156,10 +158,10 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
               : t("Common:PassphraseHint")}
           </Text>
 
-          {error && (
+          {displayedError && (
             <div className={styles.errorBox}>
               <Text fontSize="13px" fontWeight={600} color="var(--color-error)">
-                {error}
+                {displayedError}
               </Text>
             </div>
           )}

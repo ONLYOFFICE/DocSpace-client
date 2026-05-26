@@ -59,6 +59,7 @@ import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url";
 import CatalogAiArbiterReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-arbiter.react.svg?url";
 
+import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 import AppsSidebar from "../AppsSidebar";
 import { useSidebarShowText } from "../AppsSidebar/useSidebarShowText";
 
@@ -118,6 +119,8 @@ type NewArticleProps = {
   aiRoomsEnabled: boolean;
   aiAgentsEnabled: boolean;
   aiArbiterEnabled: boolean;
+  sharedWithMeFolderId?: number | null;
+  sharedWithMeNewItems?: number;
   activate: (id: string) => Promise<boolean>;
   enable: (id: string, enabled: boolean) => Promise<unknown>;
   ensureAppsLoaded: () => void;
@@ -135,6 +138,8 @@ const NewArticle = ({
   aiRoomsEnabled,
   aiAgentsEnabled,
   aiArbiterEnabled,
+  sharedWithMeFolderId,
+  sharedWithMeNewItems = 0,
   activate,
   enable,
   ensureAppsLoaded,
@@ -217,6 +222,9 @@ const NewArticle = ({
       onClick: handleDocsCloudClick,
     };
 
+    const sharedWithMeHasNew =
+      sharedWithMeNewItems > 0 && sharedWithMeFolderId != null;
+
     const aiFilesItem: NavMenuItem = {
       id: AI_FILES_ID,
       label: t("Common:DashboardAIFilesTitle"),
@@ -229,6 +237,13 @@ const NewArticle = ({
               label: t("Common:SharedWithMe"),
               icon: CatalogSharedReactSvgUrl,
               onClick: () => navigate("/ai-files?section=shared-with-me"),
+              showBadge: sharedWithMeHasNew,
+              badgeComponent: sharedWithMeHasNew ? (
+                <NewFilesBadge
+                  newFilesCount={sharedWithMeNewItems}
+                  folderId={sharedWithMeFolderId!}
+                />
+              ) : undefined,
             },
             {
               id: "ai-files-recent",
@@ -512,6 +527,8 @@ const NewArticle = ({
     aiRoomsEnabled,
     aiAgentsEnabled,
     aiArbiterEnabled,
+    sharedWithMeFolderId,
+    sharedWithMeNewItems,
     handleDocsCloudClick,
     activate,
     setArbiterDialogVisible,
@@ -565,7 +582,13 @@ const NewArticle = ({
 };
 
 const NewArticleConnected = inject<TStore>(
-  ({ userStore, settingsStore, appsStore, currentTariffStatusStore }) => ({
+  ({
+    userStore,
+    settingsStore,
+    appsStore,
+    currentTariffStatusStore,
+    treeFoldersStore,
+  }) => ({
     user: userStore.user,
     currentDeviceType: settingsStore.currentDeviceType,
     articleOpen: settingsStore.articleOpen,
@@ -577,6 +600,8 @@ const NewArticleConnected = inject<TStore>(
     aiRoomsEnabled: appsStore.isEnabled("ai-rooms"),
     aiAgentsEnabled: appsStore.isEnabled("ai-agents"),
     aiArbiterEnabled: appsStore.isEnabled("ai-arbiter"),
+    sharedWithMeFolderId: treeFoldersStore.sharedWithMeFolder?.id ?? null,
+    sharedWithMeNewItems: treeFoldersStore.sharedWithMeFolder?.newItems ?? 0,
     activate: appsStore.activate,
     enable: appsStore.enable,
     ensureAppsLoaded: appsStore.ensureLoaded,

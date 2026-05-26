@@ -4,5 +4,6 @@
   "ContinueToProduct": "{{productName}} へ引き続き",
   "GeneratedPassword": "生成されたパスワード",
   "ProductNameDetail": "{{productName}} の名前",
-  "ReviewAccountDetails": "アカウントの詳細をご確認ください。"
+  "ReviewAccountDetails": "アカウントの詳細をご確認ください。",
+  "YourProfileDetails": "プロフィールの詳細"
 }

@@ -1,0 +1,35 @@
+{
+  "key_path": "LinkNewPaymentMethodEmail",
+  "content": "To add one, please contact the payer <1>{{email}}</1>",
+  "content_en_sha1_hash": "c13c5253bc03806912bb41b71ec70b4a9262eb45",
+  "created_at": "2026-05-25T18:26:09.063Z",
+  "updated_at": "2026-05-25T18:30:45.529Z",
+  "comment": {
+    "text": "Warning text displayed when a user needs to add a payment method and must contact the payer. The `<1>` tag contains a clickable email address variable.",
+    "is_auto": true,
+    "updated_at": "2026-05-25T18:30:45.529Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/PriceCalculation.tsx",
+      "line_number": 198,
+      "context": "{t(\"LinkPaymentMethod\")}\n </Text>\n ) : (\n <Text className={styles.warningColor}>\n <CommonTrans\n i18nKey=\"LinkNewPaymentMethodEmail\"\n values={{ email: walletCustomerEmail }}\n components={{\n 1: (\n <Link\n href={`mailto:${walletCustomerEmail}`}",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
+      "line_number": 222,
+      "context": "{isPayer ? (\n t(\"LinkPaymentMethod\")\n ) : (\n <Text className={styles.warningColor}>\n <CommonTrans\n i18nKey=\"LinkNewPaymentMethodEmail\"\n values={{ email: walletCustomerEmail }}\n components={{\n 1: (\n <Link\n href={`mailto:${walletCustomerEmail}`}",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

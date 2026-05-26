@@ -3024,7 +3024,7 @@ class FilesStore {
         fileOptions = removeOptions(fileOptions, ["move-to"]);
       }
 
-      if (!canCopy) {
+      if (!canCopy && !isEncrypted) {
         fileOptions = removeOptions(fileOptions, ["copy-to"]);
       }
 
@@ -3032,7 +3032,7 @@ class FilesStore {
         fileOptions = removeOptions(fileOptions, ["duplicate"]);
       }
 
-      if (!canMove && !canCopy && !canDuplicate) {
+      if (!canMove && !canCopy && !canDuplicate && !isEncrypted) {
         fileOptions = removeOptions(fileOptions, ["move"]);
       }
 

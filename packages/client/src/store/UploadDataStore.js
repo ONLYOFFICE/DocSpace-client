@@ -1338,6 +1338,8 @@ class UploadDataStore {
         ? this.selectedFolderStore.id
         : null);
 
+    const isPrivateUpload = this.treeFoldersStore.isPrivacyFolder;
+
     if (this.uploaded) {
       this.files = this.files.filter((f) => f.action !== "upload" || f.error);
       this.filesSize = 0;
@@ -1363,7 +1365,7 @@ class UploadDataStore {
 
       const parts = file.name.split(".");
       const ext = parts.length > 1 ? `.${parts.pop()}` : "";
-      const needConvert = canConvert(ext);
+      const needConvert = !isPrivateUpload && canConvert(ext);
 
       const newFile = {
         file,

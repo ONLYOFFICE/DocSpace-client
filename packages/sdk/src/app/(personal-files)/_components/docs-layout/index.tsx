@@ -459,7 +459,10 @@ const DocsLayout = observer(
                                     filesFilter={filesFilter}
                                     current={current}
                                     currentUserId={docsUserStore.user?.id}
-                                    infoPanelVisible={infoPanelStore.isVisible}
+                                    infoPanelVisible={
+                                      infoPanelStore.isVisible ||
+                                      isAiChatPanelVisible
+                                    }
                                   />
                                 }
                                 infoPanelHeaderContent={

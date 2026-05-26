@@ -1,31 +1,14 @@
-@use "@docspace/ui-kit/styles/mixins";
-
+// Class is applied to the chat-container itself (no wrapper div) — keeps
+// the chat-container as a direct child of section-wrapper-content so the
+// sticky chat-header / chat-footer pin against Section's `#sectionScroll`
+// scroller (chat hooks into it via `externalScrollRef`).
+//
+// `--chat-header-top` is set as an inline style by AiAgentView, measured
+// at runtime from `.section-sticky-container` via ResizeObserver. The CSS
+// `calc(section-header-height + section-submenu-height)` we used to set
+// here was off because the filter slot (always rendered, even when it
+// returns null) and frame-header configuration shift the real height.
 .aiAgentChat {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  min-height: 0;
-
-  // The chat header is `position: sticky; top: var(--chat-header-top)`. In
-  // the client SectionBody it has to clear the portal's title bar, but in
-  // the SDK the chat sits inside a non-scrolling `body` (the chat owns its
-  // own scroll), so any non-zero offset just leaves an empty band above
-  // the chat header. Pin it to 0.
-  --chat-header-top: 0px;
-
-  // Remove the chat's inner inline padding — our `.body` already provides
-  // the section's side padding, so the default `0 20px` on the chat scroll
-  // body would double up.
-  --chat-content-padding: 0px;
-
-  :global(.chat-message-body) {
-    margin: 0 -20px;
-
-    @include mixins.tablet-and-below {
-      margin: 0 -16px;
-    }
-  }
-
   :global(div:has(> div > [style*="--chat-welcome-color"])) {
     margin-bottom: 0 !important;
     margin-top: 32px !important;

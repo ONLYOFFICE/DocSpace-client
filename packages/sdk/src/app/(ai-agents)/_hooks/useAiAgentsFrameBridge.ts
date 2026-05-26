@@ -27,7 +27,7 @@
 "use client";
 
 import React from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import {
   frameCallEvent,
@@ -43,13 +43,18 @@ import { useAiRoomStore } from "../_store";
  * and handles incoming postMessage commands from the parent — ports the
  * three Shell.jsx callbacks (getAgentRoomId / openResultFile /
  * closeEditorPanel) into a postMessage protocol used by the SDK embedder.
+ *
+ * Lives at the layout level so that the message listener is always
+ * installed regardless of which sub-route is mounted, and so that
+ * parent-driven `navigateSection` doesn't have to re-mount any per-page
+ * client component before being routable.
  */
-export const useAiAgentsFrameBridge = (
-  isReady: boolean,
-  currentTab: string | null,
-) => {
+export const useAiAgentsFrameBridge = (isReady: boolean) => {
   const router = useRouter();
   const aiRoomStore = useAiRoomStore();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const currentTab = aiRoomStore.currentTab;
 
   const appReadySent = React.useRef(false);
   React.useEffect(() => {
@@ -62,13 +67,14 @@ export const useAiAgentsFrameBridge = (
     }
   }, [isReady]);
 
-  // Notify the parent on every (re)mount of an ai-agents page and on tab
-  // changes, so its address bar can mirror the iframe's location. We read
-  // `window.location` inside the effect instead of using `usePathname()` /
-  // `useSearchParams()` — that keeps the hook signature identical to the
-  // pre-bridge version (avoiding HMR-driven "order of Hooks changed"
-  // warnings) and is sufficient here because list-detail-list navigation
-  // remounts the consuming page component, re-firing this effect.
+  // Notify the parent every time the iframe's logical location changes
+  // (sub-route or agent tab) so its address bar can mirror the iframe.
+  // Read pathname/search from `window.location` rather than Next's
+  // `usePathname()` / `useSearchParams()` — agent-tab clicks bypass the
+  // Next router and use raw `history.replaceState`, which doesn't update
+  // Next's reactive URL state. We still keep those hooks in the deps so
+  // the effect re-fires on real Next.js navigations; the MobX
+  // `currentTab` covers the replaceState path.
   React.useEffect(() => {
     if (typeof window === "undefined") return;
     frameCallEvent({
@@ -79,7 +85,7 @@ export const useAiAgentsFrameBridge = (
         search: window.location.search,
       },
     });
-  }, [currentTab]);
+  }, [pathname, searchParams, currentTab]);
 
   React.useEffect(() => {
     const handler = (e: MessageEvent) => {
@@ -111,6 +117,45 @@ export const useAiAgentsFrameBridge = (
       // Mirror Shell.jsx callbacks (lines 703–727).
       if (methodName === "getAgentRoomId") {
         frameCallbackData({ roomId: aiRoomStore.roomId }, callId);
+        return;
+      }
+
+      // Parent-driven navigation: the embedder posts the target section
+      // (root/recent/favorites/trash/settings) or an agent detail
+      // (agentId + optional tab) and we route the iframe internally via
+      // Next.js' router instead of letting the embedder change the iframe
+      // `src` — that would remount the SDK and lose the warmed runtime /
+      // MobX stores / socket connection. Mirrors the (forms) bridge's
+      // navigateSection handler.
+      if (methodName === "navigateSection") {
+        const section =
+          typeof payload?.section === "string" ? payload.section : undefined;
+        const agentIdRaw = payload?.agentId;
+        const agentId =
+          typeof agentIdRaw === "number"
+            ? String(agentIdRaw)
+            : typeof agentIdRaw === "string" && agentIdRaw !== ""
+              ? agentIdRaw
+              : undefined;
+        const tab = typeof payload?.tab === "string" ? payload.tab : "chat";
+
+        let path: string;
+        if (agentId) {
+          path = `/ai-agents/${agentId}?tab=${encodeURIComponent(tab)}`;
+        } else if (
+          section &&
+          (section === "recent" ||
+            section === "favorites" ||
+            section === "trash" ||
+            section === "settings")
+        ) {
+          path = `/ai-agents/${section}`;
+        } else {
+          path = "/ai-agents";
+        }
+
+        router.replace(path);
+        frameCallbackData({ section, agentId, tab }, callId);
         return;
       }
 

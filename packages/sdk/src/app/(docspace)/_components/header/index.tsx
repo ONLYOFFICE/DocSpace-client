@@ -46,7 +46,7 @@ import Navigation, {
 } from "@docspace/ui-kit/components/navigation";
 import { TableGroupMenu } from "@docspace/ui-kit/components/table";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, DeviceType } from "@docspace/shared/enums";
 import useDeviceType from "@/hooks/useDeviceType";
 import { useNavigationStore } from "../../_store/NavigationStore";
 import { useFilesSelectionStore } from "../../_store/FilesSelectionStore";
@@ -219,7 +219,7 @@ const Header = ({
             rootRoomTitle={
               currentNavigationItems.length === 0 ? "" : pathParts[0].title
             }
-            isDesktop={false}
+            isDesktop={currentDeviceType === DeviceType.desktop}
             navigationItems={currentNavigationItems}
             getContextOptionsPlus={() => []}
             getContextOptionsFolder={() => []}
@@ -248,7 +248,6 @@ const Header = ({
             withLogo=""
             burgerLogo=""
             onLogoClick={onBurgerClick ?? (() => {})}
-            hideInfoPanel={() => {}}
             clearTrash={() => {}}
             showFolderInfo={() => {}}
             aiChatButton={aiChatButton}

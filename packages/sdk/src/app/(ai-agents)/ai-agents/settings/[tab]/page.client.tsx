@@ -37,19 +37,23 @@ import { MCPServers } from "../../../_components/ai-settings/servers";
 import { Search } from "../../../_components/ai-settings/search";
 import { Knowledge } from "../../../_components/ai-settings/knowledge";
 import { useAgentsUserStore } from "../../../_store/AgentsUserStore";
+import { useAgentsCommonData } from "../../../_store/AgentsCommonDataContext";
 
 type Props = { tab: string };
 
 const TabClient = observer(({ tab }: Props) => {
   const { user } = useAgentsUserStore();
+  const { portalSettings } = useAgentsCommonData();
+  const standalone = Boolean(portalSettings?.standalone);
 
   switch (tab) {
     case "billing":
+      if (standalone) return null;
       return <BillingForm user={user} />;
     case "providers":
       return <AIProvider />;
     case "servers":
-      return <MCPServers standalone />;
+      return <MCPServers standalone={standalone} />;
     case "search":
       return <Search />;
     case "knowledge":

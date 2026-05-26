@@ -58,6 +58,7 @@ import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import useFavoritesActions from "@/app/(docspace)/_hooks/useFavoritesActions";
 import useContextMenuModel from "../../../../_hooks/useContextMenuModel";
 import { ShareContext } from "../../../../_contexts/ShareContext";
+import { CopyShareLinkContext } from "../../../../_contexts/CopyShareLinkContext";
 import { InfoContext } from "../../../../_contexts/InfoContext";
 import { DeleteContext } from "../../../../_contexts/DeleteContext";
 import { FileOperationsContext } from "../../../../_contexts/FileOperationsContext";
@@ -98,6 +99,7 @@ const TableViewRow = observer(
     const { openFolder } = useFolderActions({ t });
     const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });
     const onShareClick = React.useContext(ShareContext);
+    const onCopyShareLink = React.useContext(CopyShareLinkContext);
     const onInfoClick = React.useContext(InfoContext);
     const deleteCtx = React.useContext(DeleteContext);
     const fileOpsCtx = React.useContext(FileOperationsContext);
@@ -198,9 +200,9 @@ const TableViewRow = observer(
       }
     }, [observableItem, lockFile]);
 
-    const handleShareClick = React.useCallback(() => {
-      onShareClick?.(observableItem);
-    }, [onShareClick, observableItem]);
+    const handleCopyShareLink = React.useCallback(() => {
+      onCopyShareLink?.(observableItem);
+    }, [onCopyShareLink, observableItem]);
 
     // Spread observable item to create a new object reference when MobX
     // properties change, so that QuickButtons memo(fast-deep-equal) detects
@@ -245,8 +247,8 @@ const TableViewRow = observer(
           viewAs="table"
           onClickFavorite={onClickFavorite}
           onClickLock={onClickLock}
-          onClickShare={onShareClick ? handleShareClick : undefined}
-          openShareTab={onShareClick ? handleShareClick : undefined}
+          onClickShare={onCopyShareLink ? handleCopyShareLink : undefined}
+          openShareTab={onCopyShareLink ? handleCopyShareLink : undefined}
         />
       </div>
     );

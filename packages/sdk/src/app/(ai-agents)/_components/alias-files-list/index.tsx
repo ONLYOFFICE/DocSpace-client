@@ -90,8 +90,16 @@ const AliasFilesList = ({
   // store (filter changes → store.apply → store.fetch). For routes with
   // no SSR pre-fetch (Knowledge / Result), skip hydration and let the
   // store handle its own data lifecycle (setFolder + fetch).
+  //
+  // Done in a layout effect (not inline during render) so the MobX writes
+  // don't trip React 19's "setState during render" guard via the other
+  // observer components subscribed to the same store (header empty-state
+  // badge, filter visibility, etc.). useLayoutEffect runs synchronously
+  // before paint, so the visible result is identical to the inline path.
   const hydrated = React.useRef(false);
-  if (!hydrated.current && files !== undefined && current !== undefined) {
+  React.useLayoutEffect(() => {
+    if (hydrated.current) return;
+    if (files === undefined || current === undefined) return;
     hydrated.current = true;
     const initialFilter = filesFilter
       ? FilesFilter.getFilter({
@@ -108,7 +116,7 @@ const AliasFilesList = ({
         filter: initialFilter ?? store.filter,
       });
     });
-  }
+  }, [files, folders, current, total, filesFilter, store]);
 
   React.useEffect(() => {
     if (filesViewAs !== "table" && filesViewAs !== "row") return;

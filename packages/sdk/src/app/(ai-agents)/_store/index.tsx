@@ -55,6 +55,7 @@ import { FavoritesFilesStoreContextProvider } from "./FavoritesFilesStore";
 import { TrashFilesStoreContextProvider } from "./TrashFilesStore";
 import { KnowledgeFilesStoreContextProvider } from "./KnowledgeFilesStore";
 import { ResultFilesStoreContextProvider } from "./ResultFilesStore";
+import { UploadStoreContextProvider } from "@/app/(docspace)/_store/UploadStore";
 
 export const AiAgentsStoreProviders = ({
   children,
@@ -81,7 +82,9 @@ export const AiAgentsStoreProviders = ({
                                 <ResultFilesStoreContextProvider>
                                   <AgentInfoPanelStoreContextProvider>
                                     <AgentsListStoreContextProvider>
-                                      {children}
+                                      <UploadStoreContextProvider>
+                                        {children}
+                                      </UploadStoreContextProvider>
                                     </AgentsListStoreContextProvider>
                                   </AgentInfoPanelStoreContextProvider>
                                 </ResultFilesStoreContextProvider>

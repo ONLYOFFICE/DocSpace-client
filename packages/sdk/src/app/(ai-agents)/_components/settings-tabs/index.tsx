@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import { Tabs, type TTabItem } from "@docspace/ui-kit/components/tabs";
 
 import { useAgentsUserStore } from "../../_store/AgentsUserStore";
+import { useAgentsCommonData } from "../../_store/AgentsCommonDataContext";
 
 const VALID_TABS = [
   "billing",
@@ -21,12 +22,12 @@ const VALID_TABS = [
 ] as const;
 type TabId = (typeof VALID_TABS)[number];
 
-const getTabIdFromPath = (path: string | null): TabId => {
-  if (!path) return "billing";
+const getTabIdFromPath = (path: string | null, defaultTab: TabId): TabId => {
+  if (!path) return defaultTab;
   const last = path.split("/").filter(Boolean).pop() ?? "";
   return (VALID_TABS as readonly string[]).includes(last)
     ? (last as TabId)
-    : "billing";
+    : defaultTab;
 };
 
 // Settings sub-menu — Tabs strip rendered into `<Section.SectionSubmenu>`.
@@ -38,8 +39,12 @@ export const SettingsTabs = observer(function SettingsTabs() {
   const router = useRouter();
   const { user } = useAgentsUserStore();
 
-  const canSeeBilling = Boolean(user?.isAdmin || user?.isOwner);
-  const currentTabId = getTabIdFromPath(pathname);
+  const { portalSettings } = useAgentsCommonData();
+  const standalone = Boolean(portalSettings?.standalone);
+
+  const canSeeBilling = !standalone && Boolean(user?.isAdmin || user?.isOwner);
+  const defaultTab: TabId = standalone ? "providers" : "billing";
+  const currentTabId = getTabIdFromPath(pathname, defaultTab);
 
   const items: TTabItem[] = [
     ...(canSeeBilling

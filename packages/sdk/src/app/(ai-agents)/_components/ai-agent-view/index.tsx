@@ -26,7 +26,7 @@
 
 "use client";
 
-import { Activity } from "react";
+import React from "react";
 import { observer } from "mobx-react";
 import dynamic from "next/dynamic";
 
@@ -55,6 +55,41 @@ const AiAgentView = () => {
   const loadingStore = useAgentLoadingStore();
   const aiConfigStore = useAgentsAIConfigStore();
   const userStore = useAgentsUserStore();
+
+  // Chat uses Section's own Scrollbar (`<Scrollbar id="sectionScroll">`)
+  // as its scroll viewport — passed to Chat via `externalScrollRef` so
+  // ChatContainer skips its internal <Scrollbar> (and the
+  // `--chat-content-padding` it injects onto .chatScrollBody).
+  // Mirrors the client's `useScroll`: resolves the scroller lazily on
+  // mount because the section may render before this component does.
+  const chatScrollRef = React.useRef<HTMLElement | null>(null);
+  React.useEffect(() => {
+    const el = document.querySelector<HTMLElement>(
+      "#sectionScroll .scroll-wrapper > .scroller",
+    );
+    if (el) chatScrollRef.current = el;
+  }, []);
+
+  // The chat-header is sticky; it must pin BELOW Section's
+  // `.section-sticky-container` (header + tabs + filter), which has a
+  // higher z-index and otherwise paints over the chat-header. The static
+  // calc(section-header-height + section-submenu-height) we used to set
+  // here was brittle: device-specific paddings, the optional filter slot
+  // and the SDK frame-header config all change the real height. Measure
+  // the container and feed the result back as a CSS variable on the
+  // chat-container.
+  const [chatHeaderTop, setChatHeaderTop] = React.useState<number | null>(null);
+  React.useEffect(() => {
+    const container = document.querySelector<HTMLElement>(
+      ".section-sticky-container",
+    );
+    if (!container) return;
+    const update = () => setChatHeaderTop(container.getBoundingClientRect().height);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(container);
+    return () => ro.disconnect();
+  }, []);
 
   const {
     currentTab,
@@ -91,24 +126,45 @@ const AiAgentView = () => {
     !hasNoAccessToChat &&
     (!isErrorAIAgentNotAvailable || loadingStore.showBodyLoader);
 
+  // Chat stays mounted across tab switches (preserving scroll position and
+  // message-stream effects). We toggle visibility via CSS instead of
+  // React's experimental `<Activity>`, which unmounts effects on
+  // `hidden` and didn't reliably re-attach them on `visible` after the
+  // tab switch was moved to `history.replaceState` (no full Next.js
+  // re-render to repopulate the subtree).
+  //
+  // `display: none` is applied directly to the chat-container via Chat's
+  // `style` prop — matches Section's
+  // `:has(.chat-container:not([style*="display: none"]))` selector so it
+  // doesn't strip padding from the section-wrapper-content on
+  // Knowledge/Result tabs. No wrapping <div> here: the chat-container is
+  // a direct child of section-wrapper-content, which is what the sticky
+  // chat-header/footer rely on to pin against `#sectionScroll`.
+  const chatHidden = currentTab !== "chat";
   return (
     <>
       {shouldRenderChat ? (
-        <Activity mode={currentTab === "chat" ? "visible" : "hidden"}>
-          <div className={styles.aiAgentChat}>
-            <Chat
-              agentId={roomId}
-              selectedModel=""
-              standalone
-              allowAttachFiles
-              allowSelectChat
-              attachmentFile={null}
-              clearAttachmentFile={() => {}}
-              width="100%"
-              height="100%"
-            />
-          </div>
-        </Activity>
+        <Chat
+          className={styles.aiAgentChat}
+          agentId={roomId}
+          selectedModel=""
+          standalone
+          allowAttachFiles
+          allowSelectChat
+          attachmentFile={null}
+          clearAttachmentFile={() => {}}
+          width="100%"
+          useExternalScroll
+          externalScrollRef={chatScrollRef}
+          style={{
+            ...(chatHidden ? { display: "none" } : null),
+            ...(chatHeaderTop !== null
+              ? ({
+                  "--chat-header-top": `${chatHeaderTop}px`,
+                } as React.CSSProperties)
+              : null),
+          }}
+        />
       ) : null}
 
       {currentTab === "knowledge" && knowledgeId ? (

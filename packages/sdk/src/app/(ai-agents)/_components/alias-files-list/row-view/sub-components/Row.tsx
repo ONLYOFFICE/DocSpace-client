@@ -57,6 +57,7 @@ import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
 import useFavoritesActions from "@/app/(docspace)/_hooks/useFavoritesActions";
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import useContextMenuModel from "@/app/(docspace)/_hooks/useContextMenuModel";
+import useVectorizationActions from "../../../../_hooks/useVectorizationActions";
 import { ShareContext } from "@/app/(docspace)/_contexts/ShareContext";
 import { InfoContext } from "@/app/(docspace)/_contexts/InfoContext";
 import { DeleteContext } from "@/app/(docspace)/_contexts/DeleteContext";
@@ -96,6 +97,12 @@ const Row = observer(
     const fileOpsCtx = React.useContext(FileOperationsContext);
     const renameCtx = React.useContext(RenameContext);
 
+    const { retry: retryVectorize } = useVectorizationActions();
+    const onRetryVectorization = React.useCallback(
+      () => void retryVectorize([observableItem]),
+      [retryVectorize, observableItem],
+    );
+
     const { getContextMenuModel } = useContextMenuModel({
       item: observableItem,
       onShareClick: onShareClick ?? undefined,
@@ -106,6 +113,7 @@ const Row = observer(
       onDuplicateClick: fileOpsCtx?.duplicateItem,
       onRestoreClick: fileOpsCtx?.restoreItem,
       onRenameClick: renameCtx?.renameItem,
+      onRetryVectorization,
     });
 
     const element = (
@@ -134,6 +142,7 @@ const Row = observer(
           }
         }}
         onClickFavorite={onClickFavorite}
+        onRetryVectorization={onRetryVectorization}
       />
     );
 
@@ -149,6 +158,7 @@ const Row = observer(
         onClickFavorite={onClickFavorite}
         onClickShare={onShareClick ? handleShareClick : undefined}
         openShareTab={onShareClick ? handleShareClick : undefined}
+        onRetryVectorization={onRetryVectorization}
       />
     );
 

@@ -24,60 +24,39 @@
  * icon sets, and technical writing content, are licensed under the
  * Creative Commons Attribution-ShareAlike 4.0 International License:
  * https://creativecommons.org/licenses/by-sa/4.0/legalcode
- *
- * This license applies only to such non-code elements and does not
- * modify or replace the licensing terms applicable to the Program's
- * source code, which remains licensed under the GNU Affero General
- * Public License v3.
- *
- * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect, useRef } from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { AiChatPanelHeader } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
 import { useStores } from "@docspace/ui-kit/ai-agent/providers";
-
-import { useAiChatPanelStore } from "../../_store/AiChatStore";
+import { useAiChatStore } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
 
 export const DocsChatHeaderPanel = observer(() => {
-  const { toggleFullscreen, isFullscreen, setFullscreen, close } =
-    useAiChatPanelStore();
   const { t } = useTranslation(["Common"]);
-
+  const store = useAiChatStore();
   const stores = useStores();
   const currentPage = stores.useRouter((s) => s.currentPage);
   const goToChat = stores.useRouter((s) => s.goToChat);
-  const isSettingsPage = currentPage === "settings";
 
-  const forcedFullscreenRef = useRef(false);
-
-  useEffect(() => {
-    if (isSettingsPage && !isFullscreen) {
-      setFullscreen(true);
-      forcedFullscreenRef.current = true;
-      return;
-    }
-    if (!isSettingsPage && forcedFullscreenRef.current) {
-      setFullscreen(false);
-      forcedFullscreenRef.current = false;
-    }
-  }, [isSettingsPage, isFullscreen, setFullscreen]);
-
+  // Reset upstream router back to the chat page on close so reopening
+  // the panel doesn't drop the user back into settings/history.
   const handleClose = () => {
+    const isSettings =
+      currentPage === "settings" || currentPage === "initial-setup";
     goToChat();
-    if (!isSettingsPage) close();
+    if (!isSettings) store.close();
   };
 
   return (
     <AiChatPanelHeader
       title={t("Common:AIChatButton")}
       onClose={handleClose}
-      isFullscreen={isFullscreen}
-      onToggleFullscreen={toggleFullscreen}
-      isFullscreenToggleDisabled={isSettingsPage}
+      isFullscreen={store.effectiveFullscreen}
+      onToggleFullscreen={store.toggleFullscreen}
+      isFullscreenToggleDisabled={store.isFullscreenToggleDisabled}
     />
   );
 });
+

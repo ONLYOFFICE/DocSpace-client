@@ -108,7 +108,7 @@ import useRenameActions from "../../_hooks/useRenameActions";
 import useConvertActions from "../../_hooks/useConvertActions";
 import { useDocsSettingsStore } from "../../_store/DocsSettingsStore";
 import { useDocsUserStore } from "../../_store/DocsUserStore";
-import { useAiChatPanelStore } from "../../_store/AiChatStore";
+import { useAiChatStore } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
 import type { SelectorMode } from "../../_hooks/useFileOperations";
 import { useDocsFrameBridge } from "../../_hooks/useDocsFrameBridge";
 
@@ -201,10 +201,9 @@ const DocsLayout = observer(
       onUploadFolder,
     } = docsActions;
 
-    const {
-      isFullscreen: isAiChatPanelFullscreen,
-      isVisible: isAiChatPanelVisible,
-    } = useAiChatPanelStore();
+    const aiChatStore = useAiChatStore();
+    const isAiChatPanelFullscreen = aiChatStore.effectiveFullscreen;
+    const isAiChatPanelVisible = aiChatStore.isVisible;
 
     const { desktopModel, quickActionItems } = useDocsMenuModels({
       openCreateDialog,

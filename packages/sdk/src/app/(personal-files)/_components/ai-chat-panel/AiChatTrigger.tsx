@@ -30,26 +30,25 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { useAiChatStore } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
 
 import AiAgentsReactSvg from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg";
-
-import { useAiChatPanelStore } from "../../_store/AiChatStore";
 
 import styles from "./AiChatTrigger.module.scss";
 
 const AiChatTrigger = observer(() => {
   const { t } = useTranslation(["Common"]);
-  const { isVisible, open } = useAiChatPanelStore();
+  const store = useAiChatStore();
 
   // Hide the trigger while the AI Chat panel is already open — the
   // panel has its own close control, and the inline header position
   // would otherwise compete with that.
-  if (isVisible) return null;
+  if (store.isVisible) return null;
 
   return (
     <Button
       accent
-      onClick={() => open()}
+      onClick={() => store.open()}
       size={ButtonSize.small}
       label={t("Common:AIChatButton")}
       icon={<AiAgentsReactSvg />}
@@ -60,4 +59,3 @@ const AiChatTrigger = observer(() => {
 });
 
 export default AiChatTrigger;
-

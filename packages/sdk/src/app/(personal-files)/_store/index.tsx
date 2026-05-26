@@ -51,7 +51,6 @@ import { InfoPanelStoreContextProvider } from "@/app/(docspace)/_store/InfoPanel
 
 import type { TViewAs } from "@docspace/shared/types";
 
-import { AiChatPanelStoreContextProvider } from "./AiChatStore";
 import { DocsSettingsStoreContextProvider } from "./DocsSettingsStore";
 import { DocsUserStoreContextProvider } from "./DocsUserStore";
 import PersonalFilesAiAgentProviders from "../_components/ai-agent-providers";
@@ -79,11 +78,9 @@ export const DocsStoreProviders = ({
                           <DocsUserStoreContextProvider>
                             <InfoPanelStoreContextProvider>
                               <VersionHistoryStoreContextProvider>
-                                <AiChatPanelStoreContextProvider>
-                                  <PersonalFilesAiAgentProviders>
-                                    {children}
-                                  </PersonalFilesAiAgentProviders>
-                                </AiChatPanelStoreContextProvider>
+                                <PersonalFilesAiAgentProviders>
+                                  {children}
+                                </PersonalFilesAiAgentProviders>
                               </VersionHistoryStoreContextProvider>
                             </InfoPanelStoreContextProvider>
                           </DocsUserStoreContextProvider>

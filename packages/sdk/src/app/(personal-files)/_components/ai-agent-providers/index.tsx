@@ -27,41 +27,38 @@
 "use client";
 
 import React from "react";
-import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { useTheme } from "@docspace/ui-kit";
 import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
-
-import { useAiChatPanelStore } from "../../_store/AiChatStore";
+import {
+  PORTAL_BASE_THEME_ID,
+  PORTAL_DARK_THEME_ID,
+} from "@docspace/ui-kit/ai-agent/providers/themes";
 
 type PersonalFilesAiAgentProvidersProps = {
   children: React.ReactNode;
 };
 
-const PersonalFilesAiAgentProviders = observer(
-  ({ children }: PersonalFilesAiAgentProvidersProps) => {
-    const { i18n } = useTranslation();
-    const aiChatStore = useAiChatPanelStore();
-    const { isBase } = useTheme();
+// AiAgentProviders owns the AiChatStore now and wires `agentId` to the
+// upstream chat via its internal AgentRoomIdSync — nothing here reads the
+// store, so PersonalFilesAiAgentProviders stays a thin wrapper that just
+// forwards theme/locale.
+const PersonalFilesAiAgentProviders = ({
+  children,
+}: PersonalFilesAiAgentProvidersProps) => {
+  const { i18n } = useTranslation();
+  const { isBase } = useTheme();
 
-    const getAgentRoomId = React.useCallback(
-      () => aiChatStore.agentId,
-      [aiChatStore],
-    );
-
-    const theme = isBase ? "light" : "dark";
-
-    return (
-      <AiAgentProviders
-        theme={theme}
-        locale={i18n.language}
-        getAgentRoomId={getAgentRoomId}
-      >
-        {children}
-      </AiAgentProviders>
-    );
-  },
-);
+  return (
+    <AiAgentProviders
+      theme={isBase ? PORTAL_BASE_THEME_ID : PORTAL_DARK_THEME_ID}
+      locale={i18n.language}
+    >
+      {children}
+    </AiAgentProviders>
+  );
+};
 
 export default PersonalFilesAiAgentProviders;
+

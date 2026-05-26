@@ -59,6 +59,7 @@ import useFavoritesActions from "@/app/(docspace)/_hooks/useFavoritesActions";
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import useContextMenuModel from "../../../../_hooks/useContextMenuModel";
 import { ShareContext } from "../../../../_contexts/ShareContext";
+import { CopyShareLinkContext } from "../../../../_contexts/CopyShareLinkContext";
 import { InfoContext } from "../../../../_contexts/InfoContext";
 import { DeleteContext } from "../../../../_contexts/DeleteContext";
 import { FileOperationsContext } from "../../../../_contexts/FileOperationsContext";
@@ -100,6 +101,7 @@ const Row = observer(
     const { openFile, lockFile } = useFilesActions({ t });
     const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });
     const onShareClick = React.useContext(ShareContext);
+    const onCopyShareLink = React.useContext(CopyShareLinkContext);
     const onInfoClick = React.useContext(InfoContext);
     const deleteCtx = React.useContext(DeleteContext);
     const fileOpsCtx = React.useContext(FileOperationsContext);
@@ -172,9 +174,9 @@ const Row = observer(
       />
     );
 
-    const handleShareClick = React.useCallback(() => {
-      onShareClick?.(observableItem);
-    }, [onShareClick, observableItem]);
+    const handleCopyShareLink = React.useCallback(() => {
+      onCopyShareLink?.(observableItem);
+    }, [onCopyShareLink, observableItem]);
 
     const quickButtonsComponent = (
       <QuickButtons
@@ -183,8 +185,8 @@ const Row = observer(
         viewAs="row"
         onClickFavorite={onClickFavorite}
         onClickLock={onClickLock}
-        onClickShare={onShareClick ? handleShareClick : undefined}
-        openShareTab={onShareClick ? handleShareClick : undefined}
+        onClickShare={onCopyShareLink ? handleCopyShareLink : undefined}
+        openShareTab={onCopyShareLink ? handleCopyShareLink : undefined}
       />
     );
 

@@ -35,7 +35,6 @@ import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
 import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
-import { useShareData } from "@/app/(personal-files)/_hooks/useShareData";
 
 type ShareViewProps = {
   selection: TFile | TFolder;
@@ -53,8 +52,6 @@ const ShareView = observer(({ selection }: ShareViewProps) => {
     setEmbeddingPanelData,
   } = infoPanelStore;
 
-  const { filesLink } = useShareData({ selection });
-
   const selfId = docsUserStore.user?.id ?? "";
 
   const onAddUser = React.useCallback((item: TFile | TFolder) => {
@@ -67,7 +64,6 @@ const ShareView = observer(({ selection }: ShareViewProps) => {
   return (
     <Share
       infoPanelSelection={selection}
-      fileLinkProps={filesLink}
       selfId={selfId}
       shareChanged={shareChanged}
       setShareChanged={setShareChanged}

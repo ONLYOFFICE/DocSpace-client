@@ -34,6 +34,7 @@
  */
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useSearchParams } from "react-router";
 import debounce from "lodash/debounce";
 import { ReactSVG } from "react-svg";
 import { useTranslation, Trans } from "react-i18next";
@@ -280,6 +281,17 @@ const MainProfile = (props: MainProfileProps) => {
 		setDialogData?.({ email });
 		setChangePasswordVisible?.(true);
 	};
+
+	const [searchParams, setSearchParams] = useSearchParams();
+
+	useEffect(() => {
+		if (!profile?.email) return;
+		if (searchParams.get("changePassword") === "true") {
+			onChangePasswordClick();
+			searchParams.delete("changePassword");
+			setSearchParams(searchParams, { replace: true });
+		}
+	}, [profile?.email]);
 
 	const model = getProfileModel?.(t);
 

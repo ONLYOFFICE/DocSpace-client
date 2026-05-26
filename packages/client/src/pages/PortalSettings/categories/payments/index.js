@@ -90,7 +90,7 @@ const PaymentsPage = (props) => {
   const data = [
     {
       id: "portal-payments",
-      name: t("Common:PortalTariffPlan", {
+      name: t("Common:TariffPlan", {
         productName: getBrandName("ProductName"),
       }),
       content: <MainTariff />,

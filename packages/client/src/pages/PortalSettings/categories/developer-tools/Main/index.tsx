@@ -56,9 +56,16 @@ import styles from "./main.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 const Main = (props: { apiBasicLink: string }) => {
-  const { t, ready } = useTranslation(["Common", "Settings", "JavascriptSdk", "WebPlugins", "Webhooks", "OAuth"]);
+  const { t, ready } = useTranslation([
+    "Common",
+    "Settings",
+    "JavascriptSdk",
+    "WebPlugins",
+    "Webhooks",
+    "OAuth",
+  ]);
   const { apiBasicLink } = props;
-  
+
   useEffect(() => {
     if (ready) setDocumentTitle(t("Common:DeveloperTools"));
   }, [ready]);
@@ -79,58 +86,84 @@ const Main = (props: { apiBasicLink: string }) => {
     <ConfirmWrapper height="100%">
       <div className={styles.main}>
         <div className={styles.header}>
-          <Text fontSize="23px" fontWeight={700} lineHeight="28px">{t("Common:DeveloperTools")}</Text>
-          <Text fontSize="13px" fontWeight={400} lineHeight="20px">{t("Settings:DeveloperToolsDescription", { organizationName: getBrandName("OrganizationName"), productName: getBrandName("ProductName") })}</Text>
+          <Text fontSize="23px" fontWeight={700} lineHeight="28px">
+            {t("Common:DeveloperTools")}
+          </Text>
+          <Text fontSize="13px" fontWeight={400} lineHeight="20px">
+            {t("Settings:DeveloperToolsDescription", {
+              organizationName: getBrandName("OrganizationName"),
+              productName: getBrandName("ProductName"),
+            })}
+          </Text>
         </div>
         <div className={styles.grid}>
-          <Card 
-            icon={<DevToolsSvg />} 
-            title={t("Settings:RestAPI")} 
-            description={t("Settings:RestAPIDescription", { organizationName: getBrandName("OrganizationName"), productName: getBrandName("ProductName") })} 
+          <Card
+            icon={<DevToolsSvg />}
+            title={t("Settings:RestAPI")}
+            description={t("Settings:RestAPIDescription", {
+              organizationName: getBrandName("OrganizationName"),
+              productName: getBrandName("ProductName"),
+            })}
             url={apiBasicLink}
             color={globalColors.lightBlueMain}
-            linkTitle={t("Common:LearnMore")} 
+            linkTitle={t("Common:LearnMore")}
             isBlank
           />
-          <Card 
-            icon={<EmbedSvg />} 
-            title={t("Settings:EmbedSDK")} 
-            description={t("Settings:EmbedSDKDescription", { productName: getBrandName("ProductName") })} 
-            url="/developer-tools/javascript-sdk" 
+          <Card
+            icon={<EmbedSvg />}
+            title={t("Settings:EmbedSDK")}
+            description={t("Settings:EmbedSDKDescription", {
+              productName: getBrandName("ProductName"),
+            })}
+            url="/developer-tools/javascript-sdk"
             color={globalColors.mainOrange}
-            linkTitle={t("Settings:StartEmbedding")} 
+            linkTitle={t("Settings:StartEmbedding")}
           />
-          <Card 
-            icon={<PluginSvg />} 
-            title={t("WebPlugins:PluginSDK")} 
-            description={t("Settings:PluginDescription", { productName: getBrandName("ProductName") })} 
-            url="/developer-tools/plugin-sdk" 
+          <Card
+            icon={<PluginSvg />}
+            title={t("WebPlugins:PluginSDK")}
+            description={t("Settings:PluginDescription", {
+              productName: getBrandName("ProductName"),
+            })}
+            url="/developer-tools/plugin-sdk"
             color={globalColors.secondGreen}
-            linkTitle={t("Common:ReadInstructions")} 
+            linkTitle={t("Common:ReadInstructions")}
           />
           <Card
             icon={<WebhookSvg />}
             title={t("Webhooks:Webhooks")}
-            description={t("Settings:WebhooksDescription", { organizationName: getBrandName("OrganizationName"), productName: getBrandName("ProductName") })}
-            url="/developer-tools/webhooks?create=true"
+            description={t("Settings:WebhooksDescription", {
+              organizationName: getBrandName("OrganizationName"),
+              productName: getBrandName("ProductName"),
+            })}
+            url="/developer-tools/webhooks"
             color={globalColors.mainRed}
             linkTitle={t("Webhooks:CreateWebhook")}
+            ctaUrl="/developer-tools/webhooks?create=true"
           />
           <Card
             icon={<OAuthSvg />}
             title={t("OAuth:OAuth")}
-            description={t("Settings:OAuthDescription", { organizationName: getBrandName("OrganizationName"), productName: getBrandName("ProductName") })}
-            url="/developer-tools/oauth/create"
+            description={t("Settings:OAuthDescription", {
+              organizationName: getBrandName("OrganizationName"),
+              productName: getBrandName("ProductName"),
+            })}
+            url="/developer-tools/oauth"
             color={globalColors.purple}
             linkTitle={t("Settings:RegisterApp")}
+            ctaUrl="/developer-tools/oauth/create"
           />
           <Card
             icon={<KeySvg />}
             title={t("Settings:ApiKeys")}
-            description={t("Settings:ApiKeysCardDescription", { organizationName: getBrandName("OrganizationName"), productName: getBrandName("ProductName") })}
-            url="/developer-tools/api-keys?create=true"
+            description={t("Settings:ApiKeysCardDescription", {
+              organizationName: getBrandName("OrganizationName"),
+              productName: getBrandName("ProductName"),
+            })}
+            url="/developer-tools/api-keys"
             color={globalColors.lightGrayDark}
             linkTitle={t("Settings:CreateKey")}
+            ctaUrl="/developer-tools/api-keys?create=true"
           />
         </div>
       </div>
@@ -145,3 +178,4 @@ export default inject(({ settingsStore }: TStore) => {
     apiBasicLink,
   };
 })(observer(Main));
+

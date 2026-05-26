@@ -1,7 +1,7 @@
 {
-  "AgentCreated": "AI Agent luotu",
+  "AgentCreated": "AI agent luotu",
   "AgentDeleted": "Poistettu tekoälyagentti",
-  "AgentUpdated": "AI Agent päivitetty",
+  "AgentUpdated": "AI agent päivitetty",
   "Before": "Ennen",
   "CreateWebhook": "Luo webhook",
   "DeleteHint": "Webhook poistetaan pysyvästi.\nEt voi peruuttaa tätä toimintoa.",

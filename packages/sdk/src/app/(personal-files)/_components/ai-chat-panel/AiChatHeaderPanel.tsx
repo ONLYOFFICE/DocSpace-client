@@ -37,22 +37,20 @@ export const DocsChatHeaderPanel = observer(() => {
   const { t } = useTranslation(["Common"]);
   const store = useAiChatStore();
   const stores = useStores();
-  const currentPage = stores.useRouter((s) => s.currentPage);
   const goToChat = stores.useRouter((s) => s.goToChat);
 
+  // On settings/initial-setup pages with profiles configured: drop back
+  // to chat but keep the panel open. Without profiles: close the panel
+  // (the setup CTA had nowhere left to send the user). On any other page
+  // (chat/history/…): reset upstream router AND close the panel.
   const handleClose = () => {
-    switch (currentPage) {
-      case "initial-setup":
-        store.close();
-        break;
-      case "settings":
-        goToChat();
-        break;
-      default:
-        goToChat();
-        store.close();
-        break;
+    if (store.isOnSettingsPage) {
+      if (store.hasProfiles) goToChat();
+      else store.close();
+      return;
     }
+    goToChat();
+    store.close();
   };
 
   return (

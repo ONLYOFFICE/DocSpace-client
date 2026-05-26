@@ -66,21 +66,16 @@
 	}
 }
 
-// Allow the section header to grow beyond its default fixed height
-// so QuickActions + Navigation can both fit inside it.
-.root :global(.section-header) {
-	--section-header-size: auto;
-	--section-header-tablet-size: auto;
-	--section-header-mobile-size: auto;
-	align-items: flex-start;
-	height: auto;
-	min-height: 0;
-	padding-top: 16px;
-	flex-direction: column;
+.createNewSection {
+	padding-block: 19px 16px;
+	flex-shrink: 0;
 }
 
-.root :global(.section-header_filter) {
-	margin-top: 16px;
+.createNewTitle {
+	margin: 0 0 16px;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 24px;
 }
 
 .quickActions {

@@ -393,23 +393,28 @@ const DocsLayout = observer(
                         >
                           <RootScrollbar>
                             <SectionWrapper
-                              sectionHeaderContent={
-                                <>
-                                  {isActionButtonEnabled && (
+                              sectionBannerContent={
+                                isActionButtonEnabled ? (
+                                  <div className={styles.createNewSection}>
+                                    <h2 className={styles.createNewTitle}>
+                                      {t("Common:CreateNew")}
+                                    </h2>
                                     <QuickActions
                                       items={quickActionItems}
                                       className={styles.quickActions}
                                     />
-                                  )}
-                                  <Header
-                                    current={current}
-                                    pathParts={pathParts}
-                                    isEmptyList={isEmptyList}
-                                    isInfoPanelVisible={infoPanelStore.isVisible}
-                                    onToggleInfoPanel={infoPanelStore.toggle}
-                                    headerOffset={headerOffset}
-                                  />
-                                </>
+                                  </div>
+                                ) : undefined
+                              }
+                              sectionHeaderContent={
+                                <Header
+                                  current={current}
+                                  pathParts={pathParts}
+                                  isEmptyList={isEmptyList}
+                                  isInfoPanelVisible={infoPanelStore.isVisible}
+                                  onToggleInfoPanel={infoPanelStore.toggle}
+                                  headerOffset={headerOffset}
+                                />
                               }
                               sectionFilterContent={
                                 <Filter

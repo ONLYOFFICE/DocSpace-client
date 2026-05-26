@@ -28,4 +28,5 @@ export enum AVAILABLE_CONTEXT_ITEMS {
   deletePermanently = "delete-permanently",
   restore = "restore",
   rename = "rename",
+  vectorization = "vectorization",
 }

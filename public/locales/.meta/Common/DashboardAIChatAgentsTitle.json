@@ -1,26 +1,38 @@
 {
   "key_path": "DashboardAIChatAgentsTitle",
-  "content": "AI Chat & Agents",
-  "content_en_sha1_hash": "9a4a7875ed47a39ae39c321c00f14c9ba7c7d722",
-  "created_at": "2026-05-19T19:03:13.702Z",
-  "updated_at": "2026-05-19T19:33:31.348Z",
+  "content": "AI Agents",
+  "content_en_sha1_hash": "c493babc690053157450ff5e5620d0672e6ea8dd",
+  "created_at": "2026-05-24T17:27:22.830Z",
+  "updated_at": "2026-05-24T18:23:41.356Z",
   "comment": {
-    "text": "Title for a navigation menu item and an app catalog entry identifying the AI Chat and Agents feature.",
+    "text": "Title for the AI Agents navigation menu item, catalog entry, and empty state view; serves as a short heading or label.",
     "is_auto": true,
-    "updated_at": "2026-05-19T19:33:31.348Z",
+    "updated_at": "2026-05-24T18:23:41.356Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 241,
-      "context": "onClick: underDevelopment,\n };\n \n const aiAgentsItem: NavMenuItem = {\n id: AI_AGENTS_ID,\n label: t(\"Common:DashboardAIChatAgentsTitle\"),\n icon: CatalogAiAgentsReactSvgUrl,\n onClick: underDevelopment,\n };\n \n const all: { item: NavMenuItem; enabled: boolean }[] = [",
+      "line_number": 415,
+      "context": "}\n };\n \n const aiAgentsItem: NavMenuItem = {\n id: AI_AGENTS_ID,\n label: t(\"Common:DashboardAIChatAgentsTitle\"),\n icon: CatalogAiAgentsReactSvgUrl,\n onClick: handleAiAgentsClick,\n children: aiAgentsEnabled && canManageAgents\n ? [\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/helpers/apps-catalog.tsx",
-      "line_number": 80,
-      "context": "alwaysOn: false,\n },\n {\n id: \"ai-agents\",\n icon: <AiAgentsIcon />,\n title: t(\"Common:DashboardAIChatAgentsTitle\"),\n description: t(\"Common:DashboardAIChatAgentsDescription\"),\n supported: false,\n alwaysOn: false,\n },\n ];",
+      "line_number": 89,
+      "context": "alwaysOn: false,\n },\n {\n id: \"ai-agents\",\n icon: <AiAgentsIcon />,\n title: t(\"Common:DashboardAIChatAgentsTitle\"),\n description: t(\"Common:DashboardAIChatAgentsDescription\"),\n href: \"/agents\",\n supported: true,\n alwaysOn: false,\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiAgents/index.tsx",
+      "line_number": 139,
+      "context": "}, []);\n \n if (!canManageAgents) {\n return (\n <EmptyView\n title={t(\"Common:DashboardAIChatAgentsTitle\")}\n description={t(\"Common:AIAgentsNonAdminDescription\")}\n icon={\n theme?.isBase !== false ? (\n <AiAgentsLightIcon />\n ) : (",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiAgents/index.tsx",
+      "line_number": 139,
+      "context": "}, []);\n \n if (!canManageAgents) {\n return (\n <EmptyView\n title={t(\"Common:DashboardAIChatAgentsTitle\")}\n description={t(\"Common:AIAgentsNonAdminDescription\")}\n icon={\n theme?.isBase !== false ? (\n <AiAgentsLightIcon />\n ) : (",
       "module": "/packages/client"
     }
   ],
@@ -151,12 +163,6 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
-    "ru": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
     "si": {
       "ai_translated": false,
       "ai_model": null,
@@ -187,19 +193,7 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
-    "sr-Latn-RS": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
     "tr": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

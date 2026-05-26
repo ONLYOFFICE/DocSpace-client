@@ -13,6 +13,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { setAuthToken } from "@docspace/shared/api/client";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import Section from "@docspace/ui-kit/components/section";
+import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
@@ -35,6 +36,7 @@ import {
   useAgentsListStore,
   useAgentsAIConfigStore,
   useAgentsUserStore,
+  useAiRoomStore,
 } from "./_store";
 import DeleteAgentDialog from "./_components/delete-agent-dialog";
 import LeaveAgentDialog from "./_components/leave-agent-dialog";
@@ -42,7 +44,19 @@ import {
   AgentInfoPanelBody,
   AgentInfoPanelHeader,
 } from "./_components/info-panel";
+import {
+  AgentsNavigationFilter,
+  AgentsNavigationHeader,
+  AgentsNavigationSubmenu,
+} from "./_components/agents-navigation";
+import KnowledgeUploadSelectorDialog from "./_components/knowledge-upload-selector-dialog";
 import { AgentsCommonDataProvider } from "./_store/AgentsCommonDataContext";
+import useAiAgentsFrameBridge from "./_hooks/useAiAgentsFrameBridge";
+import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
+// UploadPanel is the side-aside list of in-flight uploads; it depends
+// only on UploadStore + ui-kit primitives, so it's safe to share with
+// the ai-agents Knowledge upload pipeline.
+import UploadPanel from "@/app/(personal-files)/_components/upload-panel";
 
 // Imported only for side effects: cross-route CSS overrides that need to
 // out-rank per-page chunks in the cascade.
@@ -62,9 +76,6 @@ export type AiAgentsCommonData = {
 type Props = {
   commonData: AiAgentsCommonData;
   children: React.ReactNode;
-  header: React.ReactNode;
-  filter: React.ReactNode;
-  submenu: React.ReactNode;
 };
 
 const AgentLifecycleDialogs = observer(() => {
@@ -116,33 +127,25 @@ const AgentLifecycleDialogs = observer(() => {
 const SectionShell = observer(
   ({
     children,
-    header,
-    filter,
-    submenu,
   }: {
     children: React.ReactNode;
-    header: React.ReactNode;
-    filter: React.ReactNode;
-    submenu: React.ReactNode;
   }) => {
     const { currentDeviceType } = useDeviceType();
     const { frameHeaderVars } = useFrameHeaderConfig();
     const infoPanel = useAgentInfoPanelStore();
+    const aiRoomStore = useAiRoomStore();
     const pathname = usePathname() ?? "";
 
     const isInfoVisible = infoPanel.isVisible && !!infoPanel.currentAgent;
 
-    // The agent detail page hosts the chat (or a result file viewer), which
-    // owns its scroll and must fill the section height. The SDK doesn't
-    // have the client's outer MainLayout chain, so wrapping SectionBody in
-    // a custom Scrollbar (`withBodyScroll: true`) collapses the chat: the
-    // scroll-body is content-sized and the chat's `height: 100%` has no
-    // definite parent to resolve against. Disable `withBodyScroll` here so
-    // SectionBody renders as a non-scrolling flex-column anchor and toggle
-    // `fullHeightBody` + `withoutFooter` to let the chat fill the section.
+    // Only the chat tab needs `settingsStudio` paddings (chat fills the body
+    // edge-to-edge). Knowledge / Result tabs render the standard files list,
+    // which expects the regular section paddings + column header — forcing
+    // studio mode there strips the top padding and squashes the table.
     const isAgentDetail = /\/ai-agents\/(?!settings(?:$|\/)|recent$|favorites$|trash$)[^/]+$/.test(
       pathname,
     );
+    const isAgentChat = isAgentDetail && aiRoomStore.currentTab === "chat";
 
     return (
       <div
@@ -163,15 +166,31 @@ const SectionShell = observer(
             if (!visible) infoPanel.hide();
           }}
           canDisplay={isInfoVisible}
-          withBodyScroll={!isAgentDetail}
-          fullHeightBody={isAgentDetail}
-          withoutFooter={isAgentDetail}
+          withBodyScroll
           uploadFiles={false}
-          settingsStudio={false}
+          settingsStudio={isAgentChat}
+          // Section's `fullHeightBody` turns section-wrapper /
+          // section-wrapper-content into flex columns with flex-grow:1, so
+          // the chat-container's own `flex-grow:1` actually applies and
+          // the chat gets pinned to the section's height. Without this the
+          // chat-container fell back to natural content height — a tall
+          // input pushed the sticky header/footer below the viewport.
+          // Mirrors client's `sectionProps.fullHeightBody = isChat`.
+          fullHeightBody={isAgentChat}
+          // Section appends a `.spacer` div under the body unless this is
+          // set — that spacer adds extra scroll height on the chat tab
+          // (chat-container already fills the body edge-to-edge).
+          withoutFooter={isAgentChat}
         >
-          <Section.SectionHeader>{header}</Section.SectionHeader>
-          <Section.SectionFilter>{filter}</Section.SectionFilter>
-          <Section.SectionSubmenu>{submenu}</Section.SectionSubmenu>
+          <Section.SectionHeader>
+            <AgentsNavigationHeader />
+          </Section.SectionHeader>
+          <Section.SectionFilter>
+            <AgentsNavigationFilter />
+          </Section.SectionFilter>
+          <Section.SectionSubmenu>
+            <AgentsNavigationSubmenu />
+          </Section.SectionSubmenu>
           <Section.SectionBody>{children}</Section.SectionBody>
           <Section.InfoPanelHeader>
             <AgentInfoPanelHeader />
@@ -197,9 +216,16 @@ const AiAgentsBootstrap = ({
 
   const [queryClient] = React.useState(() => new QueryClient());
 
-  // Mirror client Shell.jsx — subscribe to `change-ai-config` and refetch
-  // /ai/config when a provider is added/removed elsewhere.
+  // Initial fetch + socket subscription. Previously aiConfig was only
+  // hydrated by the root list page (SSR data + client fallback), so a
+  // direct entry into agent detail (e.g. parent's `?agentId=N`, or
+  // postMessage-driven navigation that skips the root) left `aiReady`
+  // false and the chat wouldn't render. The fetcher de-dupes in-flight
+  // requests, so doing it here on top of the root page's SSR hydration is
+  // safe — the root page short-circuits if data is already loaded.
   React.useEffect(() => {
+    void aiConfigStore.fetchAIConfig();
+
     SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "change-ai-config",
     });
@@ -240,17 +266,45 @@ const AiAgentsBootstrap = ({
     <QueryClientProvider client={queryClient}>
       {children}
       <AgentLifecycleDialogs />
+      <KnowledgeUploadSelectorDialog />
+      <UploadPanel />
+      <UploadFloatingButton />
+      <FrameBridgeHost />
     </QueryClientProvider>
   );
-};
+}
 
-export default function AiAgentsRootLayout({
-  commonData,
-  children,
-  header,
-  filter,
-  submenu,
-}: Props) {
+// Floating progress indicator for the Knowledge upload pipeline. Mirrors
+// the Docs layout: shows while there are items in the upload store and
+// opens the side panel on click. Stays mounted at the layout level so it
+// survives tab/agent switches and isn't tied to the Knowledge route slot.
+const UploadFloatingButton = observer(() => {
+  const uploadStore = useUploadStore();
+
+  if (!uploadStore.hasItems) return null;
+
+  return (
+    <FloatingButton
+      icon="upload"
+      percent={uploadStore.percent}
+      completed={uploadStore.uploaded && uploadStore.errorsCount === 0}
+      alert={uploadStore.errorsCount > 0}
+      onClick={() => uploadStore.setPanelVisible(true)}
+    />
+  );
+});;
+
+// Bridge is mounted at the layout so the parent-driven `navigateSection`
+// message is always handled regardless of the active sub-route, and so the
+// `onNavigate` emit fires on every Next.js navigation without depending on
+// per-page remounts. observer() so the agent-detail tab change inside
+// aiRoomStore triggers the onNavigate emit.
+const FrameBridgeHost = observer(() => {
+  useAiAgentsFrameBridge(true);
+  return null;
+});
+
+export default function AiAgentsRootLayout({ commonData, children }: Props) {
   return (
     <main style={{ width: "100%", height: "100%", overflow: "hidden" }}>
       <AiAgentsStoreProviders initialUser={commonData.user ?? null}>
@@ -264,9 +318,7 @@ export default function AiAgentsRootLayout({
             }}
           >
             <AiAgentsBootstrap commonData={commonData}>
-              <SectionShell header={header} filter={filter} submenu={submenu}>
-                {children}
-              </SectionShell>
+              <SectionShell>{children}</SectionShell>
             </AiAgentsBootstrap>
           </AgentsCommonDataProvider>
         </DocspaceFilesLayout>

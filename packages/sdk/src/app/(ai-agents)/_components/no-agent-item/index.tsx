@@ -26,6 +26,7 @@
 
 "use client";
 
+import React from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
@@ -41,7 +42,19 @@ const NoAgentItem = () => {
   const { isBase } = useTheme();
   const { t } = useTranslation(["Common"]);
 
-  const imageSrc = isBase
+  // Defer theme-dependent rendering until the client has mounted. The
+  // server doesn't know the theme (negotiated client-side via the theme
+  // header), so a direct `isBase ? Light : Dark` swap mismatches hydration
+  // when the resolved theme isn't the default. Mount-gating forces SSR +
+  // first client render to share one branch (light), then upgrades on
+  // next render. Same pattern as AgentsEmptyView.
+  const [mounted, setMounted] = React.useState(false);
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+  const useLightIcon = !mounted || isBase;
+
+  const imageSrc = useLightIcon
     ? InfoPanelRoomEmptyScreenSvgUrl
     : InfoPanelRoomEmptyScreenDarkSvgUrl;
 

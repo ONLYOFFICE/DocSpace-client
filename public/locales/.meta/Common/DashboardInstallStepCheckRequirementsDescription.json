@@ -1,0 +1,29 @@
+{
+  "key_path": "DashboardInstallStepCheckRequirementsDescription",
+  "content": "Verifying your portal configuration",
+  "content_en_sha1_hash": "e130292fdca13d80780ecda1ad139b34a3d3b7e8",
+  "created_at": "2026-05-24T17:27:23.297Z",
+  "updated_at": "2026-05-24T18:18:49.939Z",
+  "comment": {
+    "text": "Description for an installation step in the Docs Cloud installation dialog, shown while the system is checking the portal configuration.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:18:49.939Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallDocsCloudDialog.tsx",
+      "line_number": 66,
+      "context": "const steps: InstallStep[] = [\n {\n id: \"check-requirements\",\n label: t(\"Common:DashboardInstallStepCheckRequirements\"),\n description: t(\"Common:DashboardInstallStepCheckRequirementsDescription\"),\n },\n {\n id: \"connect-cloud\",\n label: t(\"Common:DashboardInstallStepConnectCloud\"),\n description: t(\"Common:DashboardInstallStepConnectCloudDescription\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

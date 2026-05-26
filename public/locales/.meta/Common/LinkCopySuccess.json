@@ -3,7 +3,7 @@
   "content": "Link has been copied to the clipboard",
   "content_en_sha1_hash": "2254c41229de93951969596ba422451fa0eff387",
   "created_at": "2025-05-19T21:30:46.142Z",
-  "updated_at": "2026-05-15T15:37:40.182Z",
+  "updated_at": "2026-05-24T17:27:49.081Z",
   "comment": {
     "text": "This is a toast message that appears after a user successfully copies a link to their clipboard.",
     "is_auto": true,
@@ -90,15 +90,21 @@
       "module": "/packages/doceditor"
     },
     {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-list/useAgentContextOptions.tsx",
+      "line_number": 218,
+      "context": "const url = buildAgentLink(agent);\n void navigator.clipboard\n .writeText(url)\n .then(() => {\n toastr.success(\n t(\"Common:LinkCopySuccess\", {\n defaultValue: \"Link copied to the clipboard\",\n }),\n );\n })\n .catch((err) => {",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useFilesActions.ts",
-      "line_number": 96,
+      "line_number": 98,
       "context": "const copyFileLink = React.useCallback(\n async (itemId: number) => {\n try {\n const itemLink = await api.files.getFileLink(itemId);\n copyShareLink(itemLink.sharedTo.shareLink);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n } catch (error) {\n toastr.error(\n error instanceof Error ? error.message : String(error),\n );\n }",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useFolderActions.ts",
-      "line_number": 55,
-      "context": "const copyFolderLink = React.useCallback(\n async (itemId: number) => {\n const itemLink = await api.files.getFolderLink(itemId);\n copyShareLink(itemLink.sharedTo.shareLink);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n },\n [t],\n );\n \n return { openFolder, copyFolderLink };",
+      "line_number": 92,
+      "context": "const copyFolderLink = React.useCallback(\n async (itemId: number) => {\n const itemLink = await api.files.getFolderLink(itemId);\n copyShareLink(itemLink.sharedTo.shareLink);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n },\n [t],\n );\n \n return { openFolder, openLocation, copyFolderLink };",
       "module": "/packages/sdk"
     }
   ],

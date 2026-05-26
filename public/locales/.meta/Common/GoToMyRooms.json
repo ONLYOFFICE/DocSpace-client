@@ -3,7 +3,7 @@
   "content": "Go to rooms",
   "content_en_sha1_hash": "74af5faf48c945eeed9e3c0e3dc2559009a9a4aa",
   "created_at": "2025-05-19T21:30:55.709Z",
-  "updated_at": "2026-05-15T14:00:06.594Z",
+  "updated_at": "2026-05-24T17:27:49.055Z",
   "comment": {
     "text": "Button label. This button navigates the user to their personal rooms or shared files section.",
     "is_auto": true,
@@ -14,14 +14,20 @@
     {
       "file_path": "/packages/client/src/components/EmptyContainer/NoAccessContainer.tsx",
       "line_number": 140,
-      "context": "{\n to: \"\",\n icon: <FolderIcon />,\n onClick: onGoTo,\n key: \"empty-view-goto-rooms\",\n description: t(\"GoToMyRooms\"),\n },\n ],\n };\n break;\n // TODO: for AI agents",
+      "context": "{\n to: \"\",\n icon: <FolderIcon />,\n onClick: onGoTo,\n key: \"empty-view-goto-rooms\",\n description: t(\"Common:GoToMyRooms\"),\n },\n ],\n };\n break;\n // TODO: for AI agents",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
       "line_number": 535,
-      "context": "])\n .with([FolderType.Archive, ShareAccessRights.None, P._], () => [\n {\n ...actions.onGoToShared(),\n icon: <FolderIcon />,\n description: t(\"Files:GoToMyRooms\"),\n key: \"empty-view-goto-shared\",\n },\n ])\n .with([FolderType.TRASH, P._, P.when((item) => !item)], () => [\n {",
+      "context": "])\n .with([FolderType.Archive, ShareAccessRights.None, P._], () => [\n {\n ...actions.onGoToShared(),\n icon: <FolderIcon />,\n description: t(\"Common:GoToMyRooms\"),\n key: \"empty-view-goto-shared\",\n },\n ])\n .with([FolderType.TRASH, P._, P.when((item) => !item)], () => [\n {",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/empty-view/index.tsx",
+      "line_number": 101,
+      "context": "const archiveOptions = [\n {\n key: \"empty-view-go-to-rooms\",\n to: \"\",\n description: t(\"Common:GoToMyRooms\"),\n icon: <FolderReactSvg />,\n onClick: onGoToRooms,\n isNext: true,\n },\n ];",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

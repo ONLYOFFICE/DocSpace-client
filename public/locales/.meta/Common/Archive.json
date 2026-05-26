@@ -3,7 +3,7 @@
   "content": "Archive",
   "content_en_sha1_hash": "2621c6fd51a58e1d1d5c491aac71488647b20224",
   "created_at": "2025-05-19T21:30:43.051Z",
-  "updated_at": "2026-05-15T15:37:40.176Z",
+  "updated_at": "2026-05-24T17:27:49.069Z",
   "comment": {
     "text": "This is a noun referring to the archive section. It appears in dialog titles, confirmation messages, and activity feed descriptions when moving items to or from the archive.",
     "is_auto": true,
@@ -24,27 +24,33 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 390,
-      "context": "return t(\"InfoPanel:RoomDenyDownloadEnabled\");\n case FeedActionKeys.RoomDenyDownloadDisabled:\n return t(\"InfoPanel:RoomDenyDownloadDisabled\");\n case FeedActionKeys.RoomArchived:\n return t(\"InfoPanel:RoomToArchiveMove\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomUnarchived:\n return t(\"InfoPanel:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });",
+      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
+      "line_number": 370,
+      "context": "icon: CatalogFavoritesReactSvgUrl,\n onClick: () => navigate(\"/ai-rooms?section=favorites\"),\n },\n {\n id: \"ai-rooms-archive\",\n label: t(\"Common:Archive\"),\n icon: CatalogArchiveReactSvgUrl,\n onClick: () => navigate(\"/ai-rooms?section=archive\"),\n withTopSeparator: true,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 390,
-      "context": "return t(\"InfoPanel:RoomDenyDownloadEnabled\");\n case FeedActionKeys.RoomDenyDownloadDisabled:\n return t(\"InfoPanel:RoomDenyDownloadDisabled\");\n case FeedActionKeys.RoomArchived:\n return t(\"InfoPanel:RoomToArchiveMove\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomUnarchived:\n return t(\"InfoPanel:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });",
+      "line_number": 393,
+      "context": "return t(\"InfoPanel:RoomDenyDownloadEnabled\");\n case FeedActionKeys.RoomDenyDownloadDisabled:\n return t(\"InfoPanel:RoomDenyDownloadDisabled\");\n case FeedActionKeys.RoomArchived:\n return t(\"Common:RoomToArchiveMove\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomUnarchived:\n return t(\"Common:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 393,
+      "context": "return t(\"InfoPanel:RoomDenyDownloadEnabled\");\n case FeedActionKeys.RoomDenyDownloadDisabled:\n return t(\"InfoPanel:RoomDenyDownloadDisabled\");\n case FeedActionKeys.RoomArchived:\n return t(\"Common:RoomToArchiveMove\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomUnarchived:\n return t(\"Common:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 334,
-      "context": "return t(\"InfoPanel:RoomDenyDownloadEnabled\");\n case FeedActionKeys.RoomDenyDownloadDisabled:\n return t(\"InfoPanel:RoomDenyDownloadDisabled\");\n case FeedActionKeys.RoomArchived:\n return t(\"InfoPanel:RoomToArchiveMove\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomUnarchived:\n return t(\"InfoPanel:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });",
+      "line_number": 337,
+      "context": "return t(\"InfoPanel:RoomDenyDownloadEnabled\");\n case FeedActionKeys.RoomDenyDownloadDisabled:\n return t(\"InfoPanel:RoomDenyDownloadDisabled\");\n case FeedActionKeys.RoomArchived:\n return t(\"Common:RoomToArchiveMove\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomUnarchived:\n return t(\"Common:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 334,
-      "context": "return t(\"InfoPanel:RoomDenyDownloadEnabled\");\n case FeedActionKeys.RoomDenyDownloadDisabled:\n return t(\"InfoPanel:RoomDenyDownloadDisabled\");\n case FeedActionKeys.RoomArchived:\n return t(\"InfoPanel:RoomToArchiveMove\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomUnarchived:\n return t(\"InfoPanel:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });",
+      "line_number": 337,
+      "context": "return t(\"InfoPanel:RoomDenyDownloadEnabled\");\n case FeedActionKeys.RoomDenyDownloadDisabled:\n return t(\"InfoPanel:RoomDenyDownloadDisabled\");\n case FeedActionKeys.RoomArchived:\n return t(\"Common:RoomToArchiveMove\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomUnarchived:\n return t(\"Common:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });",
       "module": "/packages/client"
     },
     {
@@ -58,6 +64,24 @@
       "line_number": 88,
       "context": "break;\n case FolderType.Rooms:\n folder.title = i18n.t(\"Common:Rooms\");\n break;\n case FolderType.Archive:\n folder.title = i18n.t(\"Common:Archive\");\n break;\n case FolderType.TRASH:\n folder.title = i18n.t(\"Common:TrashSection\");\n break;\n case FolderType.Favorites:",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
+      "line_number": 125,
+      "context": "/>\n );\n }\n case FeedActionKeys.RoomArchived:\n return t(\"Common:RoomToArchiveMove\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomUnarchived:\n return t(\"Common:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
+      "line_number": 125,
+      "context": "/>\n );\n }\n case FeedActionKeys.RoomArchived:\n return t(\"Common:RoomToArchiveMove\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomUnarchived:\n return t(\"Common:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/move-to-archive-dialog/index.tsx",
+      "line_number": 82,
+      "context": "onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>\n {t(\"Common:SectionMoveConfirmation\", {\n sectionName: t(\"Common:Archive\"),\n })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {`${isSingle ? t(\"Common:ArchiveRoom\") : t(\"Common:ArchiveRooms\")} ${t(\"Common:WantToContinue\")}`}",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/utils/getFileType.ts",

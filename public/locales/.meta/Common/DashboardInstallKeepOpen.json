@@ -3,7 +3,7 @@
   "content": "Please don't close this window until setup is finished — if you cancel, you'll need to start over.",
   "content_en_sha1_hash": "cb36ce13fa41821c2a91d174ea1863645d742130",
   "created_at": "2026-05-19T19:03:13.918Z",
-  "updated_at": "2026-05-19T19:26:04.877Z",
+  "updated_at": "2026-05-24T17:27:49.116Z",
   "comment": {
     "text": "Informational callout within the installation dialog body that warns users not to close the window during the setup process to avoid having to restart.",
     "is_auto": true,
@@ -12,9 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/index.tsx",
-      "line_number": 230,
-      "context": "const renderInstallingBody = () => (\n <div className={styles.installingBody}>\n <div className={styles.keepOpenCallout} role=\"status\">\n <InfoIcon className={styles.keepOpenCalloutIcon} aria-hidden=\"true\" />\n <span>{t(\"Common:DashboardInstallKeepOpen\")}</span>\n </div>\n \n <ol className={styles.timeline}>\n {AI_FORMS_INSTALL_STEPS.map((id, idx) => {\n const state =",
+      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallModuleDialog.tsx",
+      "line_number": 143,
+      "context": "const renderInstallingBody = () => (\n <div className={styles.installingBody}>\n <div className={styles.keepOpenCallout} role=\"status\">\n <InfoIcon className={styles.keepOpenCalloutIcon} aria-hidden=\"true\" />\n <span>{t(\"Common:DashboardInstallKeepOpen\")}</span>\n </div>\n \n <ol className={styles.timeline}>\n {steps.map(({ id, label, description }, idx) => {\n const state =",
       "module": "/packages/client"
     }
   ],

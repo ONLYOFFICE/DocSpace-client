@@ -3,7 +3,7 @@
   "content": "Domains as IP addresses are not supported",
   "content_en_sha1_hash": "bf51d68a049b2ba8093c29b93ff3b61ca192aaa4",
   "created_at": "2025-05-19T21:30:44.599Z",
-  "updated_at": "2026-05-15T14:00:06.639Z",
+  "updated_at": "2026-05-24T17:27:49.077Z",
   "comment": {
     "text": "This is an error message displayed when a user attempts to use an IP address as a domain name, which is not allowed.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 194,
+      "line_number": 195,
       "context": "return t(\"Common:LocalDomain\");\n case ErrorKeys.IncorrectDomain:\n case ErrorKeys.IncorrectEmail:\n return t(\"Common:IncorrectDomain\");\n case ErrorKeys.DomainIpAddress:\n return t(\"Common:DomainIpAddress\");\n case ErrorKeys.PunycodeDomain:\n return t(\"Common:PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:\n return t(\"Common:PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:",
       "module": "/packages/shared"
     }

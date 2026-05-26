@@ -34,10 +34,18 @@ export type SdkIframeHandle = {
   call: (methodName: string, data?: unknown) => void;
 };
 
+type SdkNavigateExtra = {
+  pathname?: string;
+  search?: string;
+};
+
 type SdkIframeProps = {
   src: string;
   title: string;
-  onNavigate?: (section: string) => void;
+  // `extra` carries `pathname` / `search` so consumers that need the full
+  // iframe location (e.g. ai-agents distinguishing `/123?tab=chat` vs a
+  // section) can read them. Section-only consumers (ai-forms) ignore it.
+  onNavigate?: (section: string, extra?: SdkNavigateExtra) => void;
   apiRef?: React.MutableRefObject<SdkIframeHandle | null>;
 };
 
@@ -84,9 +92,17 @@ export const SdkIframe = ({
       const eventData = payload.eventReturnData;
       if (eventData?.event !== "onNavigate") return;
 
-      const section = (eventData.data as { section?: string } | undefined)
-        ?.section;
-      if (typeof section === "string") onNavigate(section);
+      const data = eventData.data as
+        | { section?: string | null; pathname?: string; search?: string }
+        | undefined;
+      const section = typeof data?.section === "string" ? data.section : "";
+      // ai-agents may emit onNavigate without a `section` (the section
+      // field carries the agent's current tab and is null outside agent
+      // detail). Forward the event anyway when `pathname` is present so
+      // host wrappers that read pathname can react.
+      if (section || data?.pathname) {
+        onNavigate(section, { pathname: data?.pathname, search: data?.search });
+      }
     };
 
     window.addEventListener("message", handler);

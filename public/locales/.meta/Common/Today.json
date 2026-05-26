@@ -3,7 +3,7 @@
   "content": "Today",
   "content_en_sha1_hash": "24345a14377fd821d3932f4e82f6431640955b0b",
   "created_at": "2025-05-19T21:30:49.316Z",
-  "updated_at": "2026-05-15T16:22:24.017Z",
+  "updated_at": "2026-05-24T17:27:49.070Z",
   "comment": {
     "text": "This label indicates the current day. It appears in date displays, such as the \"New Files\" panel and file history.",
     "is_auto": true,
@@ -24,8 +24,8 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/sdk/src/app/(personal-files)/_components/info-panel/views/History/index.tsx",
-      "line_number": 66,
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/index.tsx",
+      "line_number": 63,
       "context": "const weekAgo = subtractFromDate(currentDate, 1, \"weeks\");\n const halfYearAgo = subtractFromDate(currentDate, 6, \"months\");\n const yesterday = subtractFromDate(currentDate, 1, \"days\");\n \n if (isAfter(given, weekAgo)) {\n if (isSameDay(currentDate, given)) return t(\"Common:Today\");\n if (isSameDay(yesterday, given)) return t(\"Common:Yesterday\");\n \n const weekday = getWeekdayName(given.weekday, \"long\", locale);\n return weekday.charAt(0).toUpperCase() + weekday.slice(1);\n }",
       "module": "/packages/sdk"
     }

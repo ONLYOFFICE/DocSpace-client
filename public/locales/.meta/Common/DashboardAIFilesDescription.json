@@ -3,7 +3,7 @@
   "content": "Store, organize, and share files across teams in a structured workspace.",
   "content_en_sha1_hash": "586ba7e784019224bbcbc3ac50cf955ad5f65a24",
   "created_at": "2026-05-19T19:03:13.713Z",
-  "updated_at": "2026-05-19T19:33:07.234Z",
+  "updated_at": "2026-05-24T17:27:49.109Z",
   "comment": {
     "text": "Subtext for the AI Files feature card in the apps catalog, providing a brief summary of the tool's functionality.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/apps-catalog.tsx",
-      "line_number": 55,
+      "line_number": 63,
       "context": "return [\n {\n id: \"ai-files\",\n icon: <CatalogFolderIcon />,\n title: t(\"Common:DashboardAIFilesTitle\"),\n description: t(\"Common:DashboardAIFilesDescription\"),\n href: \"/ai-files\",\n supported: true,\n alwaysOn: true,\n },\n {",
       "module": "/packages/client"
     }

@@ -44,7 +44,6 @@ import {
   useAgentsAIConfigStore,
 } from "../_store";
 import useAiAgentsPageInit from "../_hooks/useAiAgentsPageInit";
-import useAiAgentsFrameBridge from "../_hooks/useAiAgentsFrameBridge";
 
 import AgentsList from "../_components/agents-list";
 import type { AgentsListSection } from "../_components/agents-section-empty-view";
@@ -82,7 +81,6 @@ const AgentsListPage = ({
   const aiConfigStore = useAgentsAIConfigStore();
 
   useAiAgentsPageInit();
-  useAiAgentsFrameBridge(true, null);
 
   // Synchronously hydrate the list + AI config stores from SSR data so the
   // first render already has everything — no client fetch on mount, no

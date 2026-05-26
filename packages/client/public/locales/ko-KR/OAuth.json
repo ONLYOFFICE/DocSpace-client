@@ -54,7 +54,7 @@
   "NoOAuthAppHeader": "OAuth 애플리케이션이 없습니다",
   "OAuth": "OAuth 2.0",
   "OAuthAppDescription": "인증 및 추가 작업(파일 액세스 등)을 위해 OAuth 2.0을 사용하여 {{organizationName}} {{productName}} API에 액세스하세요. 여기에서 새 애플리케이션을 등록하고 목록에서 만든 앱을 관리하고 비활성화하고 활성화할 수 있습니다.",
-  "OAuthHeaderBlock": "OAuth URL",
+  "OAuthHeaderBlock": "OAuth URLs",
   "PrivacyPolicy": "개인 정보 보호 정책",
   "PrivacyPolicyURL": "개인 정보 보호 정책 URL",
   "PrivacyPolicyURLHelpButton": "적용 법률 및 규정을 준수하고 개인 정보를 수집, 사용, 공유, 보관 및 처리하는 방법을 명확히 하는 개인 정보 보호 정책의 URL 링크를 제공하세요.",

@@ -1,0 +1,29 @@
+{
+  "key_path": "ArbiterReadyTitle",
+  "content": "AI Arbiter ready",
+  "content_en_sha1_hash": "136de95fe63c01137ce5758c282600a5f83f2ef7",
+  "created_at": "2026-05-24T17:27:18.391Z",
+  "updated_at": "2026-05-24T18:49:23.459Z",
+  "comment": {
+    "text": "Header title in the wizard overlay that appears when the AI Arbiter setup process is successfully completed.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:49:23.459Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/WizardOverlay.tsx",
+      "line_number": 653,
+      "context": "};\n \n const header = (() => {\n switch (phase) {\n case \"done\":\n return t(\"Common:ArbiterReadyTitle\");\n case \"failed\":\n return t(\"Common:ArbiterSetupFailed\");\n default:\n return t(\"Common:ArbiterSetupTitle\");\n }",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

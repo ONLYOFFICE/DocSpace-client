@@ -3,7 +3,7 @@
   "content": "Custom",
   "content_en_sha1_hash": "081ae3fdc403609cf6e760849ebb14117b7a50cb",
   "created_at": "2025-10-27T16:14:31.641Z",
-  "updated_at": "2026-05-15T14:00:06.768Z",
+  "updated_at": "2026-05-24T17:27:49.145Z",
   "comment": {
     "text": "This is the heading for a list of custom AI model servers. It appears above the list of user-defined AI services in the settings.",
     "is_auto": true,
@@ -14,8 +14,14 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/index.tsx",
       "line_number": 276,
-      "context": "}\n testId=\"add-mcp-button\"\n />\n \n <MCPList\n headingText={t(\"AISettings:CustomMCPListTitle\")}\n mcpServers={customMCPServers}\n showHeading={showMCPHeadings}\n onMCPToggle={onMCPToggle}\n onSettingsClick={onUpdateMCP}\n onDeleteClick={onDeleteMCP}",
+      "context": "}\n testId=\"add-mcp-button\"\n />\n \n <MCPList\n headingText={t(\"Common:CustomMCPListTitle\")}\n mcpServers={customMCPServers}\n showHeading={showMCPHeadings}\n onMCPToggle={onMCPToggle}\n onSettingsClick={onUpdateMCP}\n onDeleteClick={onDeleteMCP}",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/index.tsx",
+      "line_number": 264,
+      "context": "}\n testId=\"add-mcp-button\"\n />\n \n <MCPList\n headingText={t(\"Common:CustomMCPListTitle\")}\n mcpServers={customMCPServers}\n showHeading={showMCPHeadings}\n onMCPToggle={onMCPToggle}\n onSettingsClick={onUpdateMCP}\n onDeleteClick={onDeleteMCP}",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

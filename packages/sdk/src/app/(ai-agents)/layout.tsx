@@ -25,17 +25,9 @@ export const dynamic = "force-dynamic";
 
 type SlotProps = {
   children: React.ReactNode;
-  header: React.ReactNode;
-  filter: React.ReactNode;
-  submenu: React.ReactNode;
 };
 
-export default async function AiAgentsServerLayout({
-  children,
-  header,
-  filter,
-  submenu,
-}: SlotProps) {
+export default async function AiAgentsServerLayout({ children }: SlotProps) {
   const hdrs = await headers();
   const cookieStore = await cookies();
 
@@ -102,13 +94,6 @@ export default async function AiAgentsServerLayout({
   };
 
   return (
-    <AiAgentsRootLayout
-      commonData={commonData}
-      header={header}
-      filter={filter}
-      submenu={submenu}
-    >
-      {children}
-    </AiAgentsRootLayout>
+    <AiAgentsRootLayout commonData={commonData}>{children}</AiAgentsRootLayout>
   );
 }

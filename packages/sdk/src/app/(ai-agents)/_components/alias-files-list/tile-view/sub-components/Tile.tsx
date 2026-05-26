@@ -60,6 +60,7 @@ import type { TGetIcon } from "@/app/(docspace)/_hooks/useItemIcon";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { generateFilesItemValue } from "../../utils";
 import useContextMenuModel from "@/app/(docspace)/_hooks/useContextMenuModel";
+import useVectorizationActions from "../../../../_hooks/useVectorizationActions";
 import useDownloadActions from "@/app/(docspace)/_hooks/useDownloadActions";
 import { ShareContext } from "@/app/(docspace)/_contexts/ShareContext";
 import { InfoContext } from "@/app/(docspace)/_contexts/InfoContext";
@@ -107,6 +108,12 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const deleteCtx = React.useContext(DeleteContext);
   const fileOpsCtx = React.useContext(FileOperationsContext);
   const renameCtx = React.useContext(RenameContext);
+  const { retry: retryVectorize } = useVectorizationActions();
+  const onRetryVectorization = React.useCallback(
+    () => void retryVectorize([observableItem]),
+    [retryVectorize, observableItem],
+  );
+
   const { getContextMenuModel } = useContextMenuModel({
     item: observableItem,
     onShareClick: onShareClick ?? undefined,
@@ -117,6 +124,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
     onDuplicateClick: fileOpsCtx?.duplicateItem,
     onRestoreClick: fileOpsCtx?.restoreItem,
     onRenameClick: renameCtx?.renameItem,
+    onRetryVectorization,
   });
   const { downloadAction } = useDownloadActions();
   const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });
@@ -191,6 +199,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
         }
       }}
       onClickFavorite={onClickFavorite}
+      onRetryVectorization={onRetryVectorization}
     />
   );
 
@@ -207,6 +216,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
       onClickFavorite={onClickFavorite}
       onClickShare={onShareClick ? handleShareClick : undefined}
       openShareTab={onShareClick ? handleShareClick : undefined}
+      onRetryVectorization={onRetryVectorization}
     />
   );
 

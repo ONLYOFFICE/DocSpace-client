@@ -28,15 +28,14 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import { Tabs, type TTabItem } from "@docspace/ui-kit/components/tabs";
+import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 
 import { useAiRoomStore, type AiRoomTab } from "../../_store";
 
 const AiRoomTabs = () => {
-  const router = useRouter();
   const { t } = useTranslation(["Common"]);
 
   const aiRoomStore = useAiRoomStore();
@@ -72,7 +71,31 @@ const AiRoomTabs = () => {
     const params = new URLSearchParams(window.location.search);
     params.set("tab", id);
     if (id !== "result") params.delete("fileId");
-    router.push(`/ai-agents/${roomId}?${params.toString()}`);
+
+    // Use replaceState instead of router.push: tab content is driven by
+    // `aiRoomStore.currentTab` (MobX), so we don't need Next.js to re-run
+    // the server component on each tab click. Routing through Next would
+    // force-dynamic-fetch the page (search params changed) and re-stream
+    // SectionBody, which visually nudges the surrounding navigation.
+    // We just sync the URL bar for deep-link / refresh purposes — the
+    // frame bridge re-emits `onNavigate` on the MobX `currentTab` change.
+    const nextUrl = `/ai-agents/${roomId}?${params.toString()}`;
+    window.history.replaceState(null, "", nextUrl);
+
+    // Tabs with `withAnimation` starts the indicator bar via
+    // `triggerAnimation`; PrimaryTabs only auto-finishes it when an
+    // item has a per-item `onClick`. We use top-level `onSelect`, so
+    // close the loop ourselves.
+    //
+    // Defer to the next tick: `triggerAnimation` queues
+    // `setAnimationPhase("progress")` but the effect that handles
+    // END_ANIMATION captures the old `animationPhase` value through its
+    // closure — if we dispatch synchronously, the listener still sees
+    // "none" and the bar is never finished. `setTimeout(..., 0)` lets
+    // React flush the state update first.
+    setTimeout(() => {
+      window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
+    }, 0);
   };
 
   // AIRoom namespace is not bundled in SDK i18n (Common-only). Pass
@@ -96,6 +119,12 @@ const AiRoomTabs = () => {
     },
   ];
 
+  // The sticky 20px gap below the tabs is suppressed only on the Chat tab
+  // (chat fills the body edge-to-edge). Knowledge / Result render the
+  // standard files list, which expects the gap so the filter row doesn't
+  // butt up against the tabs.
+  const withoutStickyIntend = (currentTab ?? "chat") === "chat";
+
   return (
     <Tabs
       className="ai-room-tabs"
@@ -103,7 +132,7 @@ const AiRoomTabs = () => {
       items={items}
       onSelect={onSelect}
       withAnimation
-      withoutStickyIntend
+      withoutStickyIntend={withoutStickyIntend}
     />
   );
 };

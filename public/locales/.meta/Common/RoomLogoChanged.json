@@ -3,7 +3,7 @@
   "content": "Icon changed",
   "content_en_sha1_hash": "46fa2dcaabe5f818483c85df00108c0fabde27f4",
   "created_at": "2025-05-19T21:30:54.941Z",
-  "updated_at": "2026-05-15T14:00:06.737Z",
+  "updated_at": "2026-05-24T17:27:49.127Z",
   "comment": {
     "text": "This is a feed message in the InfoPanel history. It appears when a room's logo, color, or cover image has been changed or deleted.",
     "is_auto": true,
@@ -13,27 +13,39 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 266,
-      "context": "case FeedActionKeys.DeletedRoomTags:\n return t(\"InfoPanel:DeletedRoomTags\");\n case FeedActionKeys.RoomLogoCreated:\n case FeedActionKeys.RoomColorChanged:\n case FeedActionKeys.RoomCoverChanged:\n return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomLogoDeleted:\n return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomExternalLinkCreated:\n return t(\"InfoPanel:RoomExternalLinkCreated\");\n case FeedActionKeys.RoomExternalLinkRenamed:",
+      "line_number": 269,
+      "context": "case FeedActionKeys.DeletedRoomTags:\n return t(\"Common:DeletedRoomTags\");\n case FeedActionKeys.RoomLogoCreated:\n case FeedActionKeys.RoomColorChanged:\n case FeedActionKeys.RoomCoverChanged:\n return t(\"Common:RoomLogoChanged\");\n case FeedActionKeys.RoomLogoDeleted:\n return t(\"Common:RoomLogoChanged\");\n case FeedActionKeys.RoomExternalLinkCreated:\n return t(\"InfoPanel:RoomExternalLinkCreated\");\n case FeedActionKeys.RoomExternalLinkRenamed:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 266,
-      "context": "case FeedActionKeys.DeletedRoomTags:\n return t(\"InfoPanel:DeletedRoomTags\");\n case FeedActionKeys.RoomLogoCreated:\n case FeedActionKeys.RoomColorChanged:\n case FeedActionKeys.RoomCoverChanged:\n return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomLogoDeleted:\n return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomExternalLinkCreated:\n return t(\"InfoPanel:RoomExternalLinkCreated\");\n case FeedActionKeys.RoomExternalLinkRenamed:",
+      "line_number": 269,
+      "context": "case FeedActionKeys.DeletedRoomTags:\n return t(\"Common:DeletedRoomTags\");\n case FeedActionKeys.RoomLogoCreated:\n case FeedActionKeys.RoomColorChanged:\n case FeedActionKeys.RoomCoverChanged:\n return t(\"Common:RoomLogoChanged\");\n case FeedActionKeys.RoomLogoDeleted:\n return t(\"Common:RoomLogoChanged\");\n case FeedActionKeys.RoomExternalLinkCreated:\n return t(\"InfoPanel:RoomExternalLinkCreated\");\n case FeedActionKeys.RoomExternalLinkRenamed:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 231,
-      "context": "case FeedActionKeys.DeletedRoomTags:\n return t(\"InfoPanel:DeletedRoomTags\");\n case FeedActionKeys.RoomLogoCreated:\n case FeedActionKeys.RoomColorChanged:\n case FeedActionKeys.RoomCoverChanged:\n return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomLogoDeleted:\n return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomExternalLinkCreated:\n return t(\"InfoPanel:RoomExternalLinkCreated\");\n case FeedActionKeys.RoomExternalLinkRenamed:",
+      "line_number": 234,
+      "context": "case FeedActionKeys.DeletedRoomTags:\n return t(\"Common:DeletedRoomTags\");\n case FeedActionKeys.RoomLogoCreated:\n case FeedActionKeys.RoomColorChanged:\n case FeedActionKeys.RoomCoverChanged:\n return t(\"Common:RoomLogoChanged\");\n case FeedActionKeys.RoomLogoDeleted:\n return t(\"Common:RoomLogoChanged\");\n case FeedActionKeys.RoomExternalLinkCreated:\n return t(\"InfoPanel:RoomExternalLinkCreated\");\n case FeedActionKeys.RoomExternalLinkRenamed:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 231,
-      "context": "case FeedActionKeys.DeletedRoomTags:\n return t(\"InfoPanel:DeletedRoomTags\");\n case FeedActionKeys.RoomLogoCreated:\n case FeedActionKeys.RoomColorChanged:\n case FeedActionKeys.RoomCoverChanged:\n return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomLogoDeleted:\n return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomExternalLinkCreated:\n return t(\"InfoPanel:RoomExternalLinkCreated\");\n case FeedActionKeys.RoomExternalLinkRenamed:",
+      "line_number": 234,
+      "context": "case FeedActionKeys.DeletedRoomTags:\n return t(\"Common:DeletedRoomTags\");\n case FeedActionKeys.RoomLogoCreated:\n case FeedActionKeys.RoomColorChanged:\n case FeedActionKeys.RoomCoverChanged:\n return t(\"Common:RoomLogoChanged\");\n case FeedActionKeys.RoomLogoDeleted:\n return t(\"Common:RoomLogoChanged\");\n case FeedActionKeys.RoomExternalLinkCreated:\n return t(\"InfoPanel:RoomExternalLinkCreated\");\n case FeedActionKeys.RoomExternalLinkRenamed:",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/info-panel/views/history.tsx",
+      "line_number": 92,
+      "context": "return t(\"Common:DeletedRoomTags\");\n case FeedActionKeys.RoomLogoCreated:\n case FeedActionKeys.RoomColorChanged:\n case FeedActionKeys.RoomCoverChanged:\n case FeedActionKeys.RoomLogoDeleted:\n return t(\"Common:RoomLogoChanged\");\n case FeedActionKeys.FileCreated:\n case FeedActionKeys.FileUploaded:\n return t(\"Common:FileCreatedNotify\");\n case FeedActionKeys.FileDeleted:\n case FeedActionKeys.FileMovedToTrash:",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
+      "line_number": 139,
+      "context": "return t(\"Common:DeletedRoomTags\");\n case FeedActionKeys.RoomLogoCreated:\n case FeedActionKeys.RoomColorChanged:\n case FeedActionKeys.RoomCoverChanged:\n case FeedActionKeys.RoomLogoDeleted:\n return t(\"Common:RoomLogoChanged\");\n case FeedActionKeys.RoomChangeOwner:\n return t(\"Common:RoomChangeOwner\");\n default:\n return feed.action.key ?? \"\";\n }",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

@@ -3,7 +3,7 @@
   "content": "No {{aiAgent}}",
   "content_en_sha1_hash": "8624059f8f4da69f99eb4239747d64697b30b3f5",
   "created_at": "2025-12-23T10:30:40.967Z",
-  "updated_at": "2026-05-15T14:00:06.723Z",
+  "updated_at": "2026-05-24T17:27:49.118Z",
   "comment": {
     "text": "This is an informational message displayed when no AI agent is available or selected. The `{{aiAgent}}` variable will be replaced with the name of the AI agent (e.g., \"ChatGPT\", \"Google Gemini\").",
     "is_auto": true,
@@ -16,6 +16,12 @@
       "line_number": 65,
       "context": ")}\n >\n <div className=\"no-thumbnail-img-wrapper\">\n <img\n src={imageSrc}\n alt={t(\"NoAgent\", { aiAgent: t(\"Common:AIAgent\") })}\n />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">\n {t(\"AIAgentsEmptyScreenTent\", { aiAgents: t(\"Common:AIAgents\") })}\n </Text>",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/no-agent-item/index.tsx",
+      "line_number": 59,
+      "context": ">\n <div className=\"no-thumbnail-img-wrapper\">\n {/* biome-ignore lint/performance/noImgElement: static SVG asset; next/image is unnecessary here */}\n <img\n src={imageSrc}\n alt={t(\"Common:NoAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n defaultValue: \"No AI agent\",\n })}\n />\n </div>",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

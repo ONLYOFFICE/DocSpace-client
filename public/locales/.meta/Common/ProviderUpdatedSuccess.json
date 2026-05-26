@@ -3,7 +3,7 @@
   "content": "{{aiProvider}} updated successfully",
   "content_en_sha1_hash": "476f2a3b0812d0814f634f69bb9015fa6d686169",
   "created_at": "2025-12-17T14:56:14.687Z",
-  "updated_at": "2026-05-15T14:00:06.763Z",
+  "updated_at": "2026-05-24T17:27:49.141Z",
   "comment": {
     "text": "This is a toast message confirming that an AI provider's settings have been successfully updated. It appears after a user saves changes to an AI provider. The `{{aiProvider}}` variable will be replaced with the localized name of the AI provider (e.g., \"AI Provider\").",
     "is_auto": true,
@@ -14,8 +14,14 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
       "line_number": 396,
-      "context": "data.modelSettings = buildUpdateDelta(allSettings);\n }\n \n await updateAIProvider?.(providerData.id, data);\n toastr.success(\n t(\"AISettings:ProviderUpdatedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n }",
+      "context": "data.modelSettings = buildUpdateDelta(allSettings);\n }\n \n await updateAIProvider?.(providerData.id, data);\n toastr.success(\n t(\"Common:ProviderUpdatedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n }",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/dialogs/add-update/index.tsx",
+      "line_number": 387,
+      "context": "data.modelSettings = buildUpdateDelta(allSettings);\n }\n \n await updateAIProvider?.(providerData.id, data);\n toastr.success(\n t(\"Common:ProviderUpdatedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n }",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

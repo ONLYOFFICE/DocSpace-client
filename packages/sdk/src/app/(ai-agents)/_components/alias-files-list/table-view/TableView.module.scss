@@ -170,6 +170,19 @@
   min-width: 0;
 }
 
+.badgesContainer {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-inline-start: 8px;
+
+  :global(.badges) {
+    display: flex;
+    align-items: center;
+    margin-inline-end: 12px;
+  }
+}
+
 .quickButtonsContainer {
   display: flex;
   justify-content: flex-end;

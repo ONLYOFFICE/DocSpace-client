@@ -3221,7 +3221,7 @@ class FilesActionStore {
       if ((fileStatus & FileStatus.IsNew) === FileStatus.IsNew)
         await this.onMarkAsRead(item);
 
-      if (canWebEdit || canViewedDocs) {
+      if ((canWebEdit || canViewedDocs) && !item.encrypted) {
         let shareKey = item.requestToken;
 
         if (webUrl) {
@@ -3256,6 +3256,12 @@ class FilesActionStore {
       if (!item.security.Download) {
         toastr.error(t("Files:FileDownloadingIsRestricted"));
         return;
+      }
+
+      if (item.encrypted) {
+        return this.downloadEncryptedFile(item).catch((err) =>
+          toastr.error(err),
+        );
       }
 
       return window.open(viewUrl, "_self");

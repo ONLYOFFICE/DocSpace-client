@@ -189,6 +189,7 @@ const SectionHeaderContent = (props) => {
     setRefMap,
     deleteRefMap,
     isPersonalReadOnly,
+    isPrivacyFolder,
     showTemplateBadge,
 
     allowInvitingMembers,
@@ -531,7 +532,8 @@ const SectionHeaderContent = (props) => {
   const lifetime = selectedFolder?.lifetime || infoPanelRoom?.lifetime;
   const sharedType =
     (location.state?.isExternal || selectedFolder?.external) && !isPublicRoom;
-  const isEncryptedRoom = selectedFolder?.private === true;
+  const isEncryptedRoom =
+    selectedFolder?.private === true || isPrivacyFolder;
 
   const titleIcon = React.useMemo(() => {
     if (sharedType) return SharedLinkSvgUrl;
@@ -1169,6 +1171,7 @@ export default inject(
       isPersonalReadOnly,
       isSharedWithMeFolderRoot,
       isAIAgentsFolder,
+      isPrivacyFolder,
     } = treeFoldersStore;
 
     const {
@@ -1355,6 +1358,7 @@ export default inject(
       isEmptyFilesList,
       isEmptyArchive,
       isArchiveFolder,
+      isPrivacyFolder,
 
       setIsLoading,
 

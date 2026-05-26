@@ -1965,6 +1965,7 @@ class FilesStore {
             let quotaLimit;
             let usedSpace;
             let external;
+            let isPrivate;
 
             room = data.current;
 
@@ -1979,6 +1980,8 @@ class FilesStore {
               } else {
                 setInfoPanelSelectedRoom({ ...data.current, isRoom: true });
               }
+
+              isPrivate = room.private;
 
               const { mute } = room;
 
@@ -2007,6 +2010,7 @@ class FilesStore {
               usedSpace,
               isRootTemplates,
               folderType,
+              private: isPrivate,
             };
           }),
         ).then((res) => {
@@ -3125,7 +3129,18 @@ class FilesStore {
           "finalize-version",
           "version",
           "move-to",
-          "move",
+          // Document editor / PDF flows do not support encrypted files yet.
+          "preview",
+          "fill-form",
+          "edit",
+          "open-pdf",
+          "edit-pdf",
+          "filling-status",
+          "start-filling",
+          "reset-and-start-filling",
+          "separate-stop-filling",
+          "stop-filling",
+          "block-unblock-version",
         ]);
 
         fileOptions.push("download-encrypted");
@@ -3136,22 +3151,9 @@ class FilesStore {
 
         if (!hasEncryptionKeys) {
           fileOptions = removeOptions(fileOptions, [
-            "fill-form",
-            "edit",
-            "open-pdf",
-            "edit-pdf",
-            "pdf-view",
-            "preview",
             "view",
+            "pdf-view",
             "download",
-            "filling-status",
-            "start-filling",
-            "reset-and-start-filling",
-            "separate-stop-filling",
-            "stop-filling",
-            "block-unblock-version",
-            "version",
-            "finalize-version",
           ]);
         }
       }
@@ -3670,6 +3672,7 @@ class FilesStore {
         "remove-from-favorites",
         "edit-index",
         "rename",
+        "move-to",
       ]);
     }
 

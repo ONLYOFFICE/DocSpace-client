@@ -387,19 +387,26 @@ class UploadDataStore {
   };
 
   shouldEncryptCurrentUpload = () => {
-    const { roomType, private: isPrivate } = this.selectedFolderStore;
+    const isPrivate = this.treeFoldersStore.isPrivacyFolder;
+    const roomType = isPrivate
+      ? RoomsType.CustomRoom
+      : this.selectedFolderStore.roomType;
     const { publicKey, userId } = this.getUserEncryptionKeys();
     return shouldEncryptUpload(roomType, isPrivate) && !!publicKey && !!userId;
   };
 
   prepareFileForEncryptedUpload = async (file, folderId, onProgress) => {
     const overrideCtx = file?.uploadContext;
+    const ancestorIsPrivate = this.treeFoldersStore.isPrivacyFolder;
     const roomType =
-      overrideCtx?.roomType ?? this.selectedFolderStore.roomType;
+      overrideCtx?.roomType ??
+      (ancestorIsPrivate
+        ? RoomsType.CustomRoom
+        : this.selectedFolderStore.roomType);
     const isPrivate =
       overrideCtx && "isPrivate" in overrideCtx
         ? overrideCtx.isPrivate
-        : this.selectedFolderStore.private;
+        : ancestorIsPrivate;
     return prepareEncryptedUpload({
       file,
       folderId,
@@ -2051,11 +2058,16 @@ class UploadDataStore {
 
     const { chunkUploadSize } = this.filesSettingsStore;
     const overrideCtx = item.file?.uploadContext;
-    const roomType = overrideCtx?.roomType ?? this.selectedFolderStore.roomType;
+    const ancestorIsPrivate = this.treeFoldersStore.isPrivacyFolder;
+    const roomType =
+      overrideCtx?.roomType ??
+      (ancestorIsPrivate
+        ? RoomsType.CustomRoom
+        : this.selectedFolderStore.roomType);
     const isPrivate =
       overrideCtx && "isPrivate" in overrideCtx
         ? overrideCtx.isPrivate
-        : this.selectedFolderStore.private;
+        : ancestorIsPrivate;
 
     const { file, toFolderId /* , action */ } = item;
     let fileToUpload = file;

@@ -29,8 +29,8 @@
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { AiChatPanelHeader } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
 import { useStores } from "@docspace/ui-kit/ai-agent/providers";
+import { AiChatPanelHeader } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
 import { useAiChatStore } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
 
 export const DocsChatHeaderPanel = observer(() => {
@@ -40,12 +40,19 @@ export const DocsChatHeaderPanel = observer(() => {
   const currentPage = stores.useRouter((s) => s.currentPage);
   const goToChat = stores.useRouter((s) => s.goToChat);
 
-  // Reset upstream router back to the chat page on close so reopening
-  // the panel doesn't drop the user back into settings/history.
   const handleClose = () => {
-    const isSettings = currentPage === "settings";
-    goToChat();
-    if (!isSettings) store.close();
+    switch (currentPage) {
+      case "initial-setup":
+        store.close();
+        break;
+      case "settings":
+        goToChat();
+        break;
+      default:
+        goToChat();
+        store.close();
+        break;
+    }
   };
 
   return (

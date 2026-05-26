@@ -43,8 +43,7 @@ export const DocsChatHeaderPanel = observer(() => {
   // Reset upstream router back to the chat page on close so reopening
   // the panel doesn't drop the user back into settings/history.
   const handleClose = () => {
-    const isSettings =
-      currentPage === "settings" || currentPage === "initial-setup";
+    const isSettings = currentPage === "settings";
     goToChat();
     if (!isSettings) store.close();
   };

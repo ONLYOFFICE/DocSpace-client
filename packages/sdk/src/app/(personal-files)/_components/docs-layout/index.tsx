@@ -394,24 +394,6 @@ const DocsLayout = observer(
                           <RootScrollbar>
                             <SectionWrapper
                               sectionHeaderContent={
-                                <Header
-                                  current={current}
-                                  pathParts={pathParts}
-                                  isEmptyList={isEmptyList}
-                                  isInfoPanelVisible={
-                                    sdkConfig?.infoPanelVisible
-                                      ? infoPanelStore.isVisible
-                                      : false
-                                  }
-                                  onToggleInfoPanel={
-                                    sdkConfig?.infoPanelVisible
-                                      ? infoPanelStore.toggle
-                                      : undefined
-                                  }
-                                  headerOffset={headerOffset}
-                                />
-                              }
-                              sectionFilterContent={
                                 <>
                                   {isActionButtonEnabled && (
                                     <QuickActions
@@ -419,20 +401,30 @@ const DocsLayout = observer(
                                       className={styles.quickActions}
                                     />
                                   )}
-                                  <Filter
-                                    filesFilter={filesFilter}
-                                    showMainButton={isActionButtonEnabled}
-                                    mainButtonProps={
-                                      isActionButtonEnabled
-                                        ? {
-                                            isDropdown: true,
-                                            model: desktopModel,
-                                            text: t("Common:New"),
-                                          }
-                                        : undefined
-                                    }
+                                  <Header
+                                    current={current}
+                                    pathParts={pathParts}
+                                    isEmptyList={isEmptyList}
+                                    isInfoPanelVisible={infoPanelStore.isVisible}
+                                    onToggleInfoPanel={infoPanelStore.toggle}
+                                    headerOffset={headerOffset}
                                   />
                                 </>
+                              }
+                              sectionFilterContent={
+                                <Filter
+                                  filesFilter={filesFilter}
+                                  showMainButton={isActionButtonEnabled}
+                                  mainButtonProps={
+                                    isActionButtonEnabled
+                                      ? {
+                                          isDropdown: true,
+                                          model: desktopModel,
+                                          text: t("Common:New"),
+                                        }
+                                      : undefined
+                                  }
+                                />
                               }
                               sectionBodyContent={
                                 <List

@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { inject, observer } from "mobx-react";
 import { useSearchParams } from "react-router";
 import { useTranslation } from "react-i18next";
@@ -70,14 +71,34 @@ const getSrc = (
 
 const AiFiles = ({ myFolderId }: AiFilesProps) => {
   const { t } = useTranslation(["Common"]);
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const section = searchParams.get("section") ?? "";
   const search = searchParams.get("search");
   const folder = searchParams.get("folder");
+
+  const handleFilterSearch = React.useCallback(
+    (value: string) => {
+      setSearchParams(
+        (prev) => {
+          const next = new URLSearchParams(prev);
+          if (value) {
+            next.set("search", value);
+          } else {
+            next.delete("search");
+          }
+          return next;
+        },
+        { replace: true },
+      );
+    },
+    [setSearchParams],
+  );
+
   return (
     <SdkIframe
       src={getSrc(section, myFolderId, search, folder)}
       title={t("Common:DashboardAIFilesTitle")}
+      onFilterSearch={handleFilterSearch}
     />
   );
 };

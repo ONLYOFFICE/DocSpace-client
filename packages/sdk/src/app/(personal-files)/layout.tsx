@@ -36,9 +36,11 @@
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 
+import { FolderType } from "@docspace/shared/enums";
 import type { TViewAs } from "@docspace/shared/types";
 
 import { getSelf } from "@/api/people";
+import { getFoldersTree } from "@/api/files";
 import { FILTER_HEADER, PATHNAME_HEADER } from "@/utils/constants";
 
 import { DocsStoreProviders } from "./_store";
@@ -106,9 +108,19 @@ export default async function DocsLayout({
 
   const initViewAs = (cookieStore.get("viewAs")?.value || "row") as TViewAs;
 
+  let myFolderId: number | string | undefined;
+  try {
+    const tree = await getFoldersTree();
+    myFolderId = tree.find((f) => f.rootFolderType === FolderType.USER)?.id;
+  } catch {
+    // Degraded mode: AI chat runs in the unscoped namespace when the
+    // user's root folder can't be resolved (new tenant, guest, etc.).
+    myFolderId = undefined;
+  }
+
   return (
     <main style={{ width: "100%", height: "100%" }}>
-      <DocsStoreProviders initViewAs={initViewAs}>
+      <DocsStoreProviders initViewAs={initViewAs} myFolderId={myFolderId}>
         {children}
       </DocsStoreProviders>
     </main>

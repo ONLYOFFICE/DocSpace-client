@@ -59,9 +59,11 @@ import { VersionHistoryStoreContextProvider } from "./VersionHistoryStore";
 export const DocsStoreProviders = ({
   children,
   initViewAs = "row",
+  myFolderId,
 }: {
   children: React.ReactNode;
   initViewAs?: TViewAs;
+  myFolderId?: number | string;
 }) => {
   return (
     <SettingsStoreContextProvider initData={{ viewAs: initViewAs }}>
@@ -78,7 +80,9 @@ export const DocsStoreProviders = ({
                           <DocsUserStoreContextProvider>
                             <InfoPanelStoreContextProvider>
                               <VersionHistoryStoreContextProvider>
-                                <PersonalFilesAiAgentProviders>
+                                <PersonalFilesAiAgentProviders
+                                  myFolderId={myFolderId}
+                                >
                                   {children}
                                 </PersonalFilesAiAgentProviders>
                               </VersionHistoryStoreContextProvider>

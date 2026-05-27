@@ -43,11 +43,14 @@ import FilesSelector from "@docspace/ui-kit/selectors/Files";
 import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import useGetIcon from "@docspace/ui-kit/ai-agent/chat/hooks/useGetIcon";
 import { toastr, type TData } from "@docspace/ui-kit/components/toast";
-import { DeviceType, FileType, FolderType } from "@docspace/shared/enums";
+import { DeviceType, FolderType } from "@docspace/shared/enums";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import CatalogDocumentsUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
+import UploadIconUrl from "PUBLIC_DIR/images/icons/16/upload.react.svg?url";
 
 import useDeviceType from "@/hooks/useDeviceType";
+
+import { getOnlyofficeFileType } from "./onlyoffice-file-type";
 
 type DocSpaceFilesAttachDialogProps = {
   onClose: () => void;
@@ -93,20 +96,25 @@ const DocSpaceFilesAttachDialog = observer(
       ) => {
         const inputs =
           selectedFilesRef.current.length > 0
-            ? selectedFilesRef.current.map((f) => ({
-                path: String(f.id),
-                title: f.label,
-                type: Number(
-                  "fileType" in f ? (f.fileType ?? FileType.Unknown) : FileType.Unknown,
-                ),
-                content: "",
-              }))
+            ? selectedFilesRef.current.map((f) => {
+                // FilesSelector splits filename and extension for display, so
+                // `label` carries the name only. Extension lives in `fileExst`.
+                const fileExst = "fileExst" in f ? (f.fileExst ?? "") : "";
+                return {
+                  path: String(f.id),
+                  title: `${f.label}${fileExst}`,
+                  type: getOnlyofficeFileType(fileExst),
+                  content: "",
+                };
+              })
             : selectedFileInfo
               ? [
                   {
                     path: String(selectedFileInfo.id),
                     title: selectedFileInfo.title,
-                    type: Number(selectedFileInfo.fileType ?? FileType.Unknown),
+                    type: getOnlyofficeFileType(
+                      selectedFileInfo.fileExst ?? selectedFileInfo.title,
+                    ),
                     content: "",
                   },
                 ]
@@ -176,11 +184,134 @@ const DocSpaceFilesAttachDialog = observer(
   },
 );
 
+type DeviceUploaderHandle = { open: () => void };
+
+// Mirrors `useChatDropAttachments` from @onlyoffice/ai-chat:
+//   - image/* → readAsDataURL → addAttachmentImage
+//   - text/*, application/json, empty mime → readAsText → addAttachmentFile (type=Unknown)
+//   - anything else (DOCX/PDF/XLSX without host text extractor) → skipped with a toast
+// Owns a hidden <input type="file" multiple>; the parent triggers the picker
+// via the imperative `open()` handle attached through `React.forwardRef`.
+const DeviceUploader = React.forwardRef<DeviceUploaderHandle>((_, ref) => {
+  const { t } = useTranslation(["Common"]);
+  const { useAttachmentsStore } = useStores();
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
+  React.useImperativeHandle(
+    ref,
+    () => ({
+      open: () => {
+        const el = inputRef.current;
+        if (!el) return;
+        // Reset so re-picking the same file fires onChange again.
+        el.value = "";
+        el.click();
+      },
+    }),
+    [],
+  );
+
+  const onChange = React.useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
+      const picked = Array.from(e.target.files ?? []);
+      if (picked.length === 0) return;
+
+      const fileInputs: {
+        path: string;
+        content: string;
+        type: number;
+        title: string;
+      }[] = [];
+      const imageInputs: { name: string; base64: string }[] = [];
+      const skipped: string[] = [];
+
+      await Promise.all(
+        picked.map(
+          (f) =>
+            new Promise<void>((resolve) => {
+              const reader = new FileReader();
+              reader.onerror = () => {
+                skipped.push(f.name);
+                resolve();
+              };
+
+              if (f.type.startsWith("image/")) {
+                reader.onload = () => {
+                  imageInputs.push({
+                    name: f.name,
+                    base64: String(reader.result ?? ""),
+                  });
+                  resolve();
+                };
+                reader.readAsDataURL(f);
+                return;
+              }
+
+              const isTextish =
+                f.type.startsWith("text/")
+                || f.type === ""
+                || f.type === "application/json";
+              if (isTextish) {
+                reader.onload = () => {
+                  fileInputs.push({
+                    // Empty path → raw-payload draft (not a DocSpace entry).
+                    // Backend resolves the content from `content` directly
+                    // once the raw-attachment path is wired up.
+                    path: "",
+                    content: String(reader.result ?? ""),
+                    type: getOnlyofficeFileType(f.name),
+                    title: f.name,
+                  });
+                  resolve();
+                };
+                reader.readAsText(f);
+                return;
+              }
+
+              skipped.push(f.name);
+              resolve();
+            }),
+        ),
+      );
+
+      if (skipped.length > 0) {
+        toastr.error(
+          t("Common:UnsupportedFileType", {
+            defaultValue: `Unsupported file type: ${skipped.join(", ")}`,
+          }),
+        );
+      }
+
+      try {
+        const store = useAttachmentsStore.getState();
+        if (fileInputs.length > 0) await store.addAttachmentFile(fileInputs);
+        if (imageInputs.length > 0) await store.addAttachmentImage(imageInputs);
+      } catch (err) {
+        toastr.error(err as TData);
+      }
+    },
+    [useAttachmentsStore, t],
+  );
+
+  return (
+    <input
+      ref={inputRef}
+      type="file"
+      multiple
+      hidden
+      onChange={onChange}
+    />
+  );
+});
+DeviceUploader.displayName = "DeviceUploader";
+
 type PersonalFilesAiAgentProvidersProps = {
+  myFolderId?: number | string;
   children: React.ReactNode;
 };
 
 const PersonalFilesAiAgentProviders = ({
+  myFolderId,
   children,
 }: PersonalFilesAiAgentProvidersProps) => {
   const { t, i18n } = useTranslation(["Common"]);
@@ -188,6 +319,8 @@ const PersonalFilesAiAgentProviders = ({
 
   const [pickerVisible, setPickerVisible] = React.useState(false);
   const closePicker = React.useCallback(() => setPickerVisible(false), []);
+
+  const deviceUploaderRef = React.useRef<DeviceUploaderHandle>(null);
 
   const composerActions = React.useMemo<ComposerAction[]>(
     () => [
@@ -200,6 +333,12 @@ const PersonalFilesAiAgentProviders = ({
         icon: CatalogDocumentsUrl,
         onClick: () => setPickerVisible(true),
       },
+      {
+        id: "upload-from-device",
+        text: t("Common:FromDevice", { defaultValue: "From device" }),
+        icon: UploadIconUrl,
+        onClick: () => deviceUploaderRef.current?.open(),
+      },
     ],
     [t, i18n.language],
   );
@@ -209,11 +348,13 @@ const PersonalFilesAiAgentProviders = ({
       theme={isBase ? PORTAL_BASE_THEME_ID : PORTAL_DARK_THEME_ID}
       locale={i18n.language}
       composerActions={composerActions}
+      // entityId={myFolderId !== undefined ? String(myFolderId) : undefined}
     >
       {children}
       {pickerVisible ? (
         <DocSpaceFilesAttachDialog onClose={closePicker} />
       ) : null}
+      <DeviceUploader ref={deviceUploaderRef} />
     </AiAgentProviders>
   );
 };

@@ -47,16 +47,19 @@ import Navigation, {
 import { TableGroupMenu } from "@docspace/ui-kit/components/table";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
 import { FolderType, DeviceType } from "@docspace/shared/enums";
+import { TRoom } from "@docspace/shared/api/rooms/types";
 import useDeviceType from "@/hooks/useDeviceType";
 import { useNavigationStore } from "../../_store/NavigationStore";
 import { useFilesSelectionStore } from "../../_store/FilesSelectionStore";
 import { useFilesListStore } from "../../_store/FilesListStore";
 
 import useFolderActions from "../../_hooks/useFolderActions";
-import useContextMenuModel from "../../_hooks/useContextMenuModel";
 import useHeaderMenu from "../../_hooks/useHeaderMenu";
 import { DeleteContext } from "../../_contexts/DeleteContext";
 import { FileOperationsContext } from "../../_contexts/FileOperationsContext";
+import { useHeaderContextMenu } from "../../_hooks/useHeaderContextMenu";
+import useContextMenuModel from "../../_hooks/useContextMenuModel";
+import CreateEditRoomDialog from "@/app/(rooms)/_components/create-edit-room-dialog";
 
 import type { HeaderProps } from "./Header.types";
 
@@ -89,6 +92,15 @@ const Header = ({
   const deleteCtx = React.useContext(DeleteContext);
   const fileOpsCtx = React.useContext(FileOperationsContext);
   const isTrashSection = filesListStore.rootFolderType === FolderType.TRASH;
+
+  const {
+    getContextOptionsFolder,
+    editingRoom,
+    setEditingRoom,
+    onRoomEdited,
+    isRoom,
+  } = useHeaderContextMenu(current);
+
   const { getHeaderContextMenuModel } = useContextMenuModel({
     onDeleteClick: deleteCtx?.deleteItem,
     onDeleteSelectedClick: deleteCtx?.deleteItems,
@@ -102,6 +114,7 @@ const Header = ({
       ? fileOpsCtx?.restoreItems
       : undefined,
   });
+
   const { getHeaderMenu, onCheckboxChange } = useHeaderMenu();
 
   const tableGroupMenuVisible = filesSelectionStore.selection.length > 0;
@@ -118,7 +131,11 @@ const Header = ({
 
   const pathParts = filesListStore.pathParts ?? pathPartsProp;
 
-  const isRoomsFolder = pathParts?.[0]?.id === rootFolderId;
+  // const isRoomsFolder = pathParts?.[0]?.id === rootFolderId;
+
+  // `isRoomsFolder` is true only when the current folder IS the section root
+  // (e.g. the "Rooms" list itself, not a specific room or subfolder).
+  const isRoomsFolder = id === rootFolderId;
   const isInRoomsContext =
     pathParts?.[0]?.folderType === FolderType.Rooms ||
     pathParts?.[0]?.folderType === FolderType.Archive;
@@ -145,7 +162,10 @@ const Header = ({
     navigationStore.setNavigationItems(navigationItems);
     if (id !== undefined && prevIdRef.current !== id)
       navigationStore.setCurrentFolderId(id);
-    if (title !== undefined && (navigationStore.currentTitle === null || prevIdRef.current !== id))
+    if (
+      title !== undefined &&
+      (navigationStore.currentTitle === null || prevIdRef.current !== id)
+    )
       navigationStore.setCurrentTitle(title);
     prevIdRef.current = id;
     navigationStore.setCurrentIsRootRoom(isRoomsFolder);
@@ -187,72 +207,89 @@ const Header = ({
   if (!current || !pathParts) return null;
 
   return (
-    <div
-      className={classnames(styles.headerContainer, {
-        [styles.infoPanelVisible]: isInfoPanelVisible,
-        [styles.isExternalFolder]: false,
-        [styles.isLifetimeEnabled]: false,
-      })}
-      style={outerOffsetStyle}
-    >
-      {tableGroupMenuVisible ? (
-        <TableGroupMenu
-          withComboBox
-          withoutInfoPanelToggler={!onToggleInfoPanel}
-          isChecked={isChecked}
-          isIndeterminate={!isChecked}
-          headerMenu={getHeaderContextMenuModel()}
-          onClick={() => {}}
-          onChange={onCheckboxChange}
-          toggleInfoPanel={onToggleInfoPanel ?? (() => {})}
-          isInfoPanelVisible={isInfoPanelVisible}
-          checkboxOptions={getHeaderMenu()}
-        />
-      ) : (
-        <div className="header-container" style={innerOffsetStyle}>
-          <Navigation
-            showText
-            isRootFolder={currentNavigationItems.length === 0}
-            canCreate={false}
-            title={navigationStore.currentTitle ?? title}
-            rootRoomTitle={
-              currentNavigationItems.length === 0 ? "" : pathParts[0].title
-            }
-            isDesktop={currentDeviceType === DeviceType.desktop}
-            navigationItems={currentNavigationItems}
-            getContextOptionsPlus={() => []}
-            getContextOptionsFolder={() => []}
-            onClickFolder={(idFolder) => {
-              openFolder(
-                idFolder,
-                currentNavigationItems.find((v) => v.id === idFolder)?.title ??
-                  currentNavigationItems[0].title,
-              );
-            }}
-            isTrashFolder={false}
-            isEmptyPage={isEmptyList}
-            isEmptyFilesList={isEmptyList}
-            onBackToParentFolder={onBackToParentFolder}
-            showRootFolderTitle={false}
-            withMenu={!isRoomsFolder}
-            currentDeviceType={currentDeviceType}
-            titleIcon=""
-            titleIconTooltip=""
-            showNavigationButton={false}
-            isCurrentFolderInfo={false}
-            showTitle={showTitle}
-            isRoom={!!current.roomType}
-            isInfoPanelVisible={isInfoPanelVisible}
+    <>
+      <div
+        className={classnames(styles.headerContainer, {
+          [styles.infoPanelVisible]: isInfoPanelVisible,
+          [styles.isExternalFolder]: false,
+          [styles.isLifetimeEnabled]: false,
+        })}
+        style={outerOffsetStyle}
+      >
+        {tableGroupMenuVisible ? (
+          <TableGroupMenu
+            withComboBox
+            withoutInfoPanelToggler={!onToggleInfoPanel}
+            isChecked={isChecked}
+            isIndeterminate={!isChecked}
+            headerMenu={getHeaderContextMenuModel()}
+            onClick={() => {}}
+            onChange={onCheckboxChange}
             toggleInfoPanel={onToggleInfoPanel ?? (() => {})}
-            withLogo=""
-            burgerLogo=""
-            onLogoClick={onBurgerClick ?? (() => {})}
-            clearTrash={() => {}}
-            showFolderInfo={() => {}}
+            isInfoPanelVisible={isInfoPanelVisible}
+            checkboxOptions={getHeaderMenu()}
           />
-        </div>
+        ) : (
+          <div className="header-container" style={innerOffsetStyle}>
+            <Navigation
+              showText
+              isRootFolder={currentNavigationItems.length === 0}
+              canCreate={false}
+              title={navigationStore.currentTitle ?? title}
+              rootRoomTitle={
+                currentNavigationItems.length === 0 ? "" : pathParts[0].title
+              }
+              isDesktop={currentDeviceType === DeviceType.desktop}
+              navigationItems={currentNavigationItems}
+              getContextOptionsPlus={() => []}
+              getContextOptionsFolder={getContextOptionsFolder}
+              onClickFolder={(idFolder) => {
+                openFolder(
+                  idFolder,
+                  currentNavigationItems.find((v) => v.id === idFolder)
+                    ?.title ?? currentNavigationItems[0].title,
+                );
+              }}
+              isTrashFolder={false}
+              isEmptyPage={isEmptyList}
+              isEmptyFilesList={isEmptyList}
+              onBackToParentFolder={onBackToParentFolder}
+              showRootFolderTitle={false}
+              withMenu={!isRoomsFolder}
+              currentDeviceType={currentDeviceType}
+              titleIcon=""
+              titleIconTooltip=""
+              showNavigationButton={false}
+              isCurrentFolderInfo={false}
+              showTitle={showTitle}
+              isRoom={isRoom}
+              isInfoPanelVisible={isInfoPanelVisible}
+              toggleInfoPanel={onToggleInfoPanel ?? (() => {})}
+              withLogo=""
+              burgerLogo=""
+              onLogoClick={onBurgerClick ?? (() => {})}
+              clearTrash={() => {}}
+              showFolderInfo={() => {}}
+              isContextButtonVisible
+            />
+          </div>
+        )}
+      </div>
+      {editingRoom && isRoom && (
+        <CreateEditRoomDialog
+          visible
+          onClose={() => setEditingRoom(null)}
+          room={{
+            id: editingRoom.id,
+            title: editingRoom.title,
+            tags: (current as TRoom).tags ?? [],
+            roomLogo: (current as TRoom).logo?.original,
+            createdBy: current.createdBy,
+          }}
+          onRoomEdited={onRoomEdited}
+        />
       )}
-    </div>
+    </>
   );
 };
 

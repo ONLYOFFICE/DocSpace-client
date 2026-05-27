@@ -146,7 +146,10 @@ const Header = ({
     navigationStore.setNavigationItems(navigationItems);
     if (id !== undefined && prevIdRef.current !== id)
       navigationStore.setCurrentFolderId(id);
-    if (title !== undefined && (navigationStore.currentTitle === null || prevIdRef.current !== id))
+    if (
+      title !== undefined &&
+      (navigationStore.currentTitle === null || prevIdRef.current !== id)
+    )
       navigationStore.setCurrentTitle(title);
     prevIdRef.current = id;
     navigationStore.setCurrentIsRootRoom(isRoomsFolder);
@@ -212,6 +215,7 @@ const Header = ({
       ) : (
         <div className="header-container" style={innerOffsetStyle}>
           <Navigation
+            hideInfoPanel={() => {}}
             showText
             isRootFolder={currentNavigationItems.length === 0}
             canCreate={false}

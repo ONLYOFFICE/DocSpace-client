@@ -261,7 +261,7 @@ const RoomsTableViewRow = observer(
 
     return (
       <TableRow
-        className={classNames("files-item", {
+        className={classNames({
           "table-row-selected": isChecked,
         })}
         checked={isChecked}

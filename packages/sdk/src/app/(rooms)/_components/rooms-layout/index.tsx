@@ -252,7 +252,7 @@ const RoomsLayout = observer(
             onClose={closeCreateRoomDialog}
             onRoomCreated={() => refreshRef.current?.()}
           />
-          <SelectionArea />
+          <SelectionArea isRooms />
           <DeviceTypeObserver />
         </RootScrollbar>
       </div>

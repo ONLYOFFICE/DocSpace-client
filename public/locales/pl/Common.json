@@ -1973,6 +1973,7 @@
   "UploadFilesDevice": "Wgraj pliki z urządzenia osobistego.",
   "UploadFilesPortal": "Wgraj pliki z {{sectionNameFirst}} lub {{sectionNameSecond}}",
   "UploadFolder": "Wgraj folder",
+  "UploadFromDevice": "Wgraj z urządzenia",
   "Uploading": "Wysyłanie",
   "UploadLicenseFile": "Wgraj plik licencyjny",
   "UploadPDFForm": "Prześlij formularz PDF",

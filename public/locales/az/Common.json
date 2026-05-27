@@ -1973,6 +1973,7 @@
   "UploadFilesDevice": "Şəxsi cihazınızdan faylları yükləyin",
   "UploadFilesPortal": "{{sectionNameFirst}} və ya {{sectionNameSecond}} bölmələrindən faylları yükləyin",
   "UploadFolder": "Qovluğu yüklə",
+  "UploadFromDevice": "Cihazdan yüklə",
   "Uploading": "Yüklənir",
   "UploadLicenseFile": "Lisenziya faylını yükləyin",
   "UploadPDFForm": "PDF formasını yükləyin",

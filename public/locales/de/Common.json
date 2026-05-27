@@ -1981,6 +1981,7 @@
   "UploadFilesDevice": "Laden Sie Dateien von Ihrem persönlichen Gerät hoch",
   "UploadFilesPortal": "Laden Sie Dateien von {{sectionNameFirst}} oder {{sectionNameSecond}} hoch",
   "UploadFolder": "Ordner hochladen",
+  "UploadFromDevice": "Vom Gerät hochladen",
   "Uploading": "Hochladen",
   "UploadLicenseFile": "Lizenzdatei hochladen",
   "UploadPDFForm": "PDF-Formular hochladen",

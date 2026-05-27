@@ -1973,6 +1973,7 @@
   "UploadFilesDevice": "Ngarko skedarë nga pajisja jote personale",
   "UploadFilesPortal": "Ngarko skedarë nga {{sectionNameFirst}} ose {{sectionNameSecond}}",
   "UploadFolder": "Ngarkoni dosjen",
+  "UploadFromDevice": "Ngarko nga pajisja",
   "Uploading": "Ngarkimi",
   "UploadLicenseFile": "Ngarko skedarin e licencës",
   "UploadPDFForm": "Ngarkoni formularin PDF",

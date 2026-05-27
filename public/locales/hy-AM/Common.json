@@ -1981,6 +1981,7 @@
   "UploadFilesDevice": "Վերբեռնեք ֆայլեր ձեր անձնական սարքից",
   "UploadFilesPortal": "Բեռնեք ֆայլեր {{sectionNameFirst}} կամ {{sectionNameSecond}} կայքերից",
   "UploadFolder": "Վերբեռնման պանակ",
+  "UploadFromDevice": "Վերբեռնել սարքից",
   "Uploading": "Վերբեռնում",
   "UploadLicenseFile": "Վերբեռնեք լիցենզիայի ֆայլը",
   "UploadPDFForm": "Վերբեռնել PDF ձևը",

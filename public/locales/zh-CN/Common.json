@@ -1981,6 +1981,7 @@
   "UploadFilesDevice": "从个人设备上传文件",
   "UploadFilesPortal": "从{{sectionNameFirst}}或{{sectionNameSecond}}上传文件",
   "UploadFolder": "上传文件夹",
+  "UploadFromDevice": "从设备上传",
   "Uploading": "上传中",
   "UploadLicenseFile": "上传许可证文件",
   "UploadPDFForm": "上传 PDF 表单",

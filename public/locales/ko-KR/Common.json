@@ -1944,6 +1944,7 @@
   "UploadFilesDevice": "개인 기기에서 파일 업로드",
   "UploadFilesPortal": "{{sectionNameFirst}} 또는 {{sectionNameSecond}}에서 파일을 업로드하세요.",
   "UploadFolder": "폴더 업로드",
+  "UploadFromDevice": "장치에서 업로드",
   "Uploading": "업로드 중",
   "UploadLicenseFile": "라이선스 파일 업로드",
   "UploadPDFForm": "PDF 양식 업로드",

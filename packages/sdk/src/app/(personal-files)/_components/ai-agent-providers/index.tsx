@@ -370,7 +370,9 @@ const PersonalFilesAiAgentProviders = ({
       },
       {
         id: "upload-from-device",
-        text: t("Common:FromDevice", { defaultValue: "From device" }),
+        text: t("Common:UploadFromDevice", {
+          defaultValue: "Upload from device",
+        }),
         icon: UploadIconUrl,
         onClick: () => deviceUploaderRef.current?.open(),
       },

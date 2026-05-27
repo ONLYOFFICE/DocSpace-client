@@ -1973,6 +1973,7 @@
   "UploadFilesDevice": "ອັບໂຫຼດໄຟລ໌ຈາກອຸປະກອນສ່ວນຕົວຂອງທ່ານ",
   "UploadFilesPortal": "ອັບໂຫຼດໄຟລ໌ຈາກ {{sectionNameFirst}} ຫຼື {{sectionNameSecond}}",
   "UploadFolder": "ອັບໂຫລດ ໂຟຣເດີ",
+  "UploadFromDevice": "ອັບໂຫລດຈາກອຸປະກອນ",
   "Uploading": "ການອັບໂຫຼດ",
   "UploadLicenseFile": "ອັບໂຫຼດໄຟລ໌ໃບອະນຸຍາດ",
   "UploadPDFForm": "ໂຫລດແບບຟອມ PDF",

@@ -1981,6 +1981,7 @@
   "UploadFilesDevice": "élécharger des fichiers depuis votre appareil personnel",
   "UploadFilesPortal": "Télécharger des fichiers depuis {{sectionNameFirst}} ou {{sectionNameSecond}}",
   "UploadFolder": "Téléverser le dossier",
+  "UploadFromDevice": "Téléverser depuis l'appareil",
   "Uploading": "Téléchargement",
   "UploadLicenseFile": "Charger le fichier de licence",
   "UploadPDFForm": "Téléverser le formulaire PDF",

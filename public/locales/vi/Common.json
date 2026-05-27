@@ -1973,6 +1973,7 @@
   "UploadFilesDevice": "Tải lên tệp từ thiết bị cá nhân của bạn.",
   "UploadFilesPortal": "Tải lên tệp từ {{sectionNameFirst}} hoặc {{sectionNameSecond}}",
   "UploadFolder": "Tải thư mục lên",
+  "UploadFromDevice": "Tải lên từ thiết bị",
   "Uploading": "Đang tải lên",
   "UploadLicenseFile": "Tải giấy phép lên",
   "UploadPDFForm": "Tải biểu mẫu PDF ",

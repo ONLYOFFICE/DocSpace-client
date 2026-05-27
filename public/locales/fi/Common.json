@@ -1973,6 +1973,7 @@
   "UploadFilesDevice": "Lataa tiedostoja henkilökohtaiselta laitteeltasi",
   "UploadFilesPortal": "Lataa tiedostoja osiosta {{sectionNameFirst}} tai {{sectionNameSecond}}",
   "UploadFolder": "Lataa kansio ylös",
+  "UploadFromDevice": "Lataa laitteesta",
   "Uploading": "Ladataan",
   "UploadLicenseFile": "Lataa lisenssitiedosto",
   "UploadPDFForm": "Lataa PDF-lomake",

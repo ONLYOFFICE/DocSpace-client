@@ -1973,6 +1973,7 @@
   "UploadFilesDevice": "Augšupielādējiet failus no sava personīgā ierīces",
   "UploadFilesPortal": "Augšupielādējiet failus no {{sectionNameFirst}} vai {{sectionNameSecond}}.",
   "UploadFolder": "Augšupielādēt mapi",
+  "UploadFromDevice": "Augšupielādēt no ierīces",
   "Uploading": "Augšupielādē",
   "UploadLicenseFile": "Augšupielādējiet licences failu",
   "UploadPDFForm": "Augšupielādēt PDF veidlapu",

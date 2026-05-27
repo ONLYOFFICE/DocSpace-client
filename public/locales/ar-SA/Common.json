@@ -1973,6 +1973,7 @@
   "UploadFilesDevice": "تحميل الملفات من جهازكم الشخصي",
   "UploadFilesPortal": "تحميل الملفات من {{sectionNameFirst}} أو {{sectionNameSecond}}",
   "UploadFolder": "رفع مجلد",
+  "UploadFromDevice": "تحميل من الجهاز",
   "Uploading": "جارٍ التحميل",
   "UploadLicenseFile": "تحميل ملف الترخيص",
   "UploadPDFForm": "تحميل نموذج PDF",

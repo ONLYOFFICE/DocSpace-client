@@ -1973,6 +1973,7 @@
   "UploadFilesDevice": "Завантажте файли з вашого особистого пристрою.",
   "UploadFilesPortal": "Завантажте файли з {{sectionNameFirst}} або {{sectionNameSecond}}",
   "UploadFolder": "Завантажити папку",
+  "UploadFromDevice": "Завантажити з пристрою",
   "Uploading": "Передавання",
   "UploadLicenseFile": "Завантажити файл ліцензії",
   "UploadPDFForm": "Завантажити PDF-форму",

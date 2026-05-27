@@ -1981,6 +1981,7 @@
   "UploadFilesDevice": "個人用デバイスからファイルをアップロードする",
   "UploadFilesPortal": "{{sectionNameFirst}}または{{sectionNameSecond}}からファイルをアップロードする",
   "UploadFolder": "フォルダのアップロード",
+  "UploadFromDevice": "デバイスからアップロード",
   "Uploading": "アップロード中",
   "UploadLicenseFile": "ライセンスファイルのアップロード",
   "UploadPDFForm": "PDFフォームのアップロード",

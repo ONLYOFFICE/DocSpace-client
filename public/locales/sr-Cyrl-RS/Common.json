@@ -1981,6 +1981,7 @@
   "UploadFilesDevice": "Отпремите датотеке са свог личног уређаја",
   "UploadFilesPortal": "Отпремите датотеке са {{sectionNameFirst}} или {{sectionNameSecond}}",
   "UploadFolder": "Отпреми фолдер",
+  "UploadFromDevice": "Отпреми са уређаја",
   "Uploading": "Отпремање",
   "UploadLicenseFile": "Отпремите датотеку лиценце",
   "UploadPDFForm": "Отпреми PDF формулар",

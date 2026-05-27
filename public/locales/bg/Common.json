@@ -1973,6 +1973,7 @@
   "UploadFilesDevice": "Качете файлове от вашето лично устройство.",
   "UploadFilesPortal": "Качете файлове от {{sectionNameFirst}} или {{sectionNameSecond}}",
   "UploadFolder": "Качи папка",
+  "UploadFromDevice": "Качване от устройство",
   "Uploading": "Качване",
   "UploadLicenseFile": "Качване на файл с лиценз",
   "UploadPDFForm": "Качи PDF формуляр",

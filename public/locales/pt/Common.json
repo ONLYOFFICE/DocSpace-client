@@ -1973,6 +1973,7 @@
   "UploadFilesDevice": "Carregar arquivos do seu dispositivo pessoal",
   "UploadFilesPortal": "Carregue arquivos de {{sectionNameFirst}} ou {{sectionNameSecond}}",
   "UploadFolder": "Carregar pasta",
+  "UploadFromDevice": "Carregar do dispositivo",
   "Uploading": "Fazendo upload",
   "UploadLicenseFile": "Carregar ficheiro de licença",
   "UploadPDFForm": "Carregar formulário PDF",

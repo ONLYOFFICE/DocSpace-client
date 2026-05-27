@@ -1973,6 +1973,7 @@
   "UploadFilesDevice": "ඔබගේ පුද්ගලික උපාංගයෙන් ගොනු උඩුගත කරන්න",
   "UploadFilesPortal": "{{sectionNameFirst}} හෝ {{sectionNameSecond}} වෙතින් ගොනු උඩුගත කරන්න",
   "UploadFolder": "ෆෝල්ඩරයක් උඩුගත කරන්න",
+  "UploadFromDevice": "උපාංගයෙන් උඩුගත කරන්න",
   "Uploading": "ඉහල් කිරීම",
   "UploadLicenseFile": "බලපත්‍රය උඩුගත කරන්න",
   "UploadPDFForm": "PDF පෝරමය උඩුගත කරන්න",

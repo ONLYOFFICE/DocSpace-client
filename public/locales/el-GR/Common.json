@@ -1973,6 +1973,7 @@
   "UploadFilesDevice": "Ανεβάστε αρχεία από τη προσωπική σας συσκευή",
   "UploadFilesPortal": "Ανεβάστε αρχεία από το {{sectionNameFirst}} ή το {{sectionNameSecond}}",
   "UploadFolder": "Μεταφόρτωση φακέλου",
+  "UploadFromDevice": "Μεταφόρτωση από συσκευή",
   "Uploading": "Γίνεται μεταφόρτωση",
   "UploadLicenseFile": "Ανέβασμα αρχείου άδειας χρήσης",
   "UploadPDFForm": "Ανεβάστε φόρμα PDF",

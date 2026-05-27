@@ -1981,6 +1981,7 @@
   "UploadFilesDevice": "Upload files from your personal device",
   "UploadFilesPortal": "Upload files from  {{sectionNameFirst}} or {{sectionNameSecond}}",
   "UploadFolder": "Upload folder",
+  "UploadFromDevice": "Upload from device",
   "Uploading": "Uploading",
   "UploadLicenseFile": "Upload license file",
   "UploadPDFForm": "Upload PDF form",

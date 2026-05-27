@@ -1981,6 +1981,7 @@
   "UploadFilesDevice": "Încărcați fișierele de pe diapozitivul dvs peronal",
   "UploadFilesPortal": "Încărcați fișierele din {{sectionNameFirst}} sau {{sectionNameSecond}}",
   "UploadFolder": "Încarcă folderul",
+  "UploadFromDevice": "Încarcă de pe dispozitiv",
   "Uploading": "Încărcare",
   "UploadLicenseFile": "Încărcare fişier licenţă",
   "UploadPDFForm": "Încărcare formular PDF",

@@ -1973,6 +1973,7 @@
   "UploadFilesDevice": "Nahrajte soubory z vašeho osobního zařízení.",
   "UploadFilesPortal": "Nahrajte soubory z {{sectionNameFirst}} nebo {{sectionNameSecond}}",
   "UploadFolder": "Nahrát složku",
+  "UploadFromDevice": "Nahrát ze zařízení",
   "Uploading": "Nahrávání",
   "UploadLicenseFile": "Nahrání licenčního souboru",
   "UploadPDFForm": "Nahrát PDF formulář",

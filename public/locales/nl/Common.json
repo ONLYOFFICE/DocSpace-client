@@ -1973,6 +1973,7 @@
   "UploadFilesDevice": "Upload bestanden vanaf uw persoonlijke apparaat",
   "UploadFilesPortal": "Upload bestanden vanuit {{sectionNameFirst}} of {{sectionNameSecond}}",
   "UploadFolder": "Upload map",
+  "UploadFromDevice": "Uploaden van apparaat",
   "Uploading": "Uploaden",
   "UploadLicenseFile": "Upload licentiebestand",
   "UploadPDFForm": "Upload PDF formulier",

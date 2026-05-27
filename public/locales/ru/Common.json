@@ -1981,6 +1981,7 @@
   "UploadFilesDevice": "Загрузить файлы с персонального устройства",
   "UploadFilesPortal": "Загрузить файлы из {{sectionNameFirst}} или {{sectionNameSecond}}",
   "UploadFolder": "Загрузить папку",
+  "UploadFromDevice": "Загрузить с устройства",
   "Uploading": "Загрузка",
   "UploadLicenseFile": "Загрузить файл лицензии",
   "UploadPDFForm": "Загрузить PDF-форму",

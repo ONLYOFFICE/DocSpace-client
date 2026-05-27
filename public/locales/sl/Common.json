@@ -1973,6 +1973,7 @@
   "UploadFilesDevice": "Naložite datoteke iz vaše osebne naprave.",
   "UploadFilesPortal": "Naložite datoteke iz  {{sectionNameFirst}} ali {{sectionNameSecond}}",
   "UploadFolder": "Naloži mapo",
+  "UploadFromDevice": "Naloži iz naprave",
   "Uploading": "Nalaganje",
   "UploadLicenseFile": "Naloži licenčno datoteko",
   "UploadPDFForm": "Naloži PDF obrazec",

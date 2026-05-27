@@ -73,8 +73,19 @@ const AiFiles = ({ myFolderId }: AiFilesProps) => {
   const { t } = useTranslation(["Common"]);
   const [searchParams, setSearchParams] = useSearchParams();
   const section = searchParams.get("section") ?? "";
-  const search = searchParams.get("search");
   const folder = searchParams.get("folder");
+
+  const prevSectionRef = React.useRef<string>(section);
+  const prevFolderRef = React.useRef<string | null>(folder);
+  const srcRef = React.useRef<string>(
+    getSrc(section, myFolderId, searchParams.get("search"), folder),
+  );
+
+  if (section !== prevSectionRef.current || folder !== prevFolderRef.current) {
+    prevSectionRef.current = section;
+    prevFolderRef.current = folder;
+    srcRef.current = getSrc(section, myFolderId, null, folder);
+  }
 
   const handleFilterSearch = React.useCallback(
     (value: string) => {
@@ -96,7 +107,7 @@ const AiFiles = ({ myFolderId }: AiFilesProps) => {
 
   return (
     <SdkIframe
-      src={getSrc(section, myFolderId, search, folder)}
+      src={srcRef.current}
       title={t("Common:DashboardAIFilesTitle")}
       onFilterSearch={handleFilterSearch}
     />

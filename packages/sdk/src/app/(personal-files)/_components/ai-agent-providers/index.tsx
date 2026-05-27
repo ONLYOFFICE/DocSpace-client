@@ -27,38 +27,195 @@
 "use client";
 
 import React from "react";
+import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { useTheme } from "@docspace/ui-kit";
-import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
+import AiAgentProviders, {
+  useStores,
+  type ComposerAction,
+} from "@docspace/ui-kit/ai-agent/providers";
 import {
   PORTAL_BASE_THEME_ID,
   PORTAL_DARK_THEME_ID,
 } from "@docspace/ui-kit/ai-agent/providers/themes";
+import FilesSelector from "@docspace/ui-kit/selectors/Files";
+import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
+import useGetIcon from "@docspace/ui-kit/ai-agent/chat/hooks/useGetIcon";
+import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+import { DeviceType, FileType, FolderType } from "@docspace/shared/enums";
+import { getBrandName } from "@docspace/shared/constants/brands";
+import CatalogDocumentsUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
+
+import useDeviceType from "@/hooks/useDeviceType";
+
+type DocSpaceFilesAttachDialogProps = {
+  onClose: () => void;
+};
+
+// Rendered inside <AiAgentProviders> so `useStores()` resolves the
+// AttachmentsStore from the widget's context. `addAttachmentFile` round-trips
+// to the AI backend, which resolves the entryId server-side — `content` here
+// is a placeholder and is ignored by the host integration.
+const DocSpaceFilesAttachDialog = observer(
+  ({ onClose }: DocSpaceFilesAttachDialogProps) => {
+    const { t } = useTranslation(["Common"]);
+    const { currentDeviceType } = useDeviceType();
+    const { getIcon } = useGetIcon();
+    const { useAttachmentsStore } = useStores();
+
+    const selectedFilesRef = React.useRef<TSelectorItem[]>([]);
+
+    const onSelectItem = React.useCallback((item: TSelectorItem) => {
+      if ("isFolder" in item && item.isFolder) return;
+      const idx = selectedFilesRef.current.findIndex((f) => f.id === item.id);
+      if (idx >= 0) {
+        selectedFilesRef.current = selectedFilesRef.current.filter(
+          (f) => f.id !== item.id,
+        );
+      } else {
+        selectedFilesRef.current = [...selectedFilesRef.current, item];
+      }
+    }, []);
+
+    const onSubmit = React.useCallback<
+      React.ComponentProps<typeof FilesSelector>["onSubmit"]
+    >(
+      async (
+        _selectedItemId,
+        _folderTitle,
+        _isPublic,
+        _breadCrumbs,
+        _fileName,
+        _isChecked,
+        _selectedTreeNode,
+        selectedFileInfo,
+      ) => {
+        const inputs =
+          selectedFilesRef.current.length > 0
+            ? selectedFilesRef.current.map((f) => ({
+                path: String(f.id),
+                title: f.label,
+                type: Number(
+                  "fileType" in f ? (f.fileType ?? FileType.Unknown) : FileType.Unknown,
+                ),
+                content: "",
+              }))
+            : selectedFileInfo
+              ? [
+                  {
+                    path: String(selectedFileInfo.id),
+                    title: selectedFileInfo.title,
+                    type: Number(selectedFileInfo.fileType ?? FileType.Unknown),
+                    content: "",
+                  },
+                ]
+              : [];
+
+        // Optimistic close — the chip will appear once saveFilesMany resolves.
+        onClose();
+
+        if (inputs.length === 0) return;
+
+        try {
+          await useAttachmentsStore.getState().addAttachmentFile(inputs);
+        } catch (e) {
+          toastr.error(e as TData);
+        }
+      },
+      [onClose, useAttachmentsStore],
+    );
+
+    const getIsDisabled = React.useCallback<
+      React.ComponentProps<typeof FilesSelector>["getIsDisabled"]
+    >((isFirstLoad, _a, _b, _c, _d, _e, selectedFileInfo) => {
+      if (isFirstLoad) return true;
+      return selectedFilesRef.current.length === 0 && !selectedFileInfo;
+    }, []);
+
+    type SdkFolderType = Parameters<
+      typeof FilesSelector
+    >[0]["rootFolderType"];
+    const sdkUserFolderType = FolderType.USER as unknown as SdkFolderType;
+
+    return (
+      <FilesSelector
+        isPanelVisible
+        openRoot
+        isMultiSelect
+        withRecentTreeFolder
+        withFavoritesTreeFolder
+        isRoomsOnly={false}
+        isThirdParty={false}
+        withCreate={false}
+        withSearch
+        withBreadCrumbs
+        withoutBackButton
+        withCancelButton
+        withFooterInput={false}
+        withFooterCheckbox={false}
+        onCancel={onClose}
+        onSubmit={onSubmit}
+        onSelectItem={onSelectItem}
+        getIcon={getIcon}
+        getIsDisabled={getIsDisabled}
+        currentFolderId=""
+        rootFolderType={sdkUserFolderType}
+        disabledItems={[]}
+        filterParam="ALL"
+        submitButtonLabel={t("Common:SelectAction", { defaultValue: "Select" })}
+        cancelButtonLabel={t("Common:CancelButton", { defaultValue: "Cancel" })}
+        descriptionText=""
+        footerCheckboxLabel=""
+        footerInputHeader=""
+        currentFooterInputValue=""
+        getFilesArchiveError={() => ""}
+        currentDeviceType={currentDeviceType as unknown as DeviceType}
+      />
+    );
+  },
+);
 
 type PersonalFilesAiAgentProvidersProps = {
   children: React.ReactNode;
 };
 
-// AiAgentProviders owns the AiChatStore now and wires `agentId` to the
-// upstream chat via its internal AgentRoomIdSync — nothing here reads the
-// store, so PersonalFilesAiAgentProviders stays a thin wrapper that just
-// forwards theme/locale.
 const PersonalFilesAiAgentProviders = ({
   children,
 }: PersonalFilesAiAgentProvidersProps) => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation(["Common"]);
   const { isBase } = useTheme();
+
+  const [pickerVisible, setPickerVisible] = React.useState(false);
+  const closePicker = React.useCallback(() => setPickerVisible(false), []);
+
+  const composerActions = React.useMemo<ComposerAction[]>(
+    () => [
+      {
+        id: "add-files-from-docspace",
+        text: t("Common:AddFilesFromProduct", {
+          productName: getBrandName("ProductName"),
+          defaultValue: `Add files from ${getBrandName("ProductName")}`,
+        }),
+        icon: CatalogDocumentsUrl,
+        onClick: () => setPickerVisible(true),
+      },
+    ],
+    [t, i18n.language],
+  );
 
   return (
     <AiAgentProviders
       theme={isBase ? PORTAL_BASE_THEME_ID : PORTAL_DARK_THEME_ID}
       locale={i18n.language}
+      composerActions={composerActions}
     >
       {children}
+      {pickerVisible ? (
+        <DocSpaceFilesAttachDialog onClose={closePicker} />
+      ) : null}
     </AiAgentProviders>
   );
 };
 
 export default PersonalFilesAiAgentProviders;
-

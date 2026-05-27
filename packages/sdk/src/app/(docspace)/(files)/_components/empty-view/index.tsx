@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { EmptyView as EmptyViewComponent } from "@docspace/shared/components/empty-view";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { frameCallEvent } from "@docspace/shared/utils/common";
 
 import ClearEmptyFilterSvg from "PUBLIC_DIR/images/clear.empty.filter.svg";
 
@@ -59,6 +60,8 @@ const EmptyView = ({
     defaultFilter.key = shareKey ?? "";
 
     window.history.pushState(null, "", `?${defaultFilter.toUrlParams()}`);
+
+    frameCallEvent({ event: "onFilterSearch", data: { search: "" } });
   };
 
   const filterOptions = [

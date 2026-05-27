@@ -27,6 +27,7 @@ type useFilesFiltersProps = {
   shareKey?: string;
   filesViewAs: TViewAs | null;
   setFilesViewAs: (viewAs: TViewAs) => void;
+  setClearSearch: (value: boolean) => void;
 };
 
 export default function useFilesFilter({
@@ -34,6 +35,7 @@ export default function useFilesFilter({
   shareKey,
   filesViewAs,
   setFilesViewAs,
+  setClearSearch,
 }: useFilesFiltersProps) {
   const { t } = useTranslation(["Common"]);
   const searchParams = useSearchParams();
@@ -59,8 +61,12 @@ export default function useFilesFilter({
 
     const urlFilter = defaultFilter.toUrlParams();
 
-    window.history.pushState(null, "", urlFilter);
-  }, [filter.folder, shareKey]);
+    window.history.pushState(null, "", `?${urlFilter}`);
+
+    frameCallEvent({ event: "onFilterSearch", data: { search: "" } });
+
+    setClearSearch(true);
+  }, [filter.folder, shareKey, setClearSearch]);
 
   const onSearch = React.useCallback(
     (value: string) => {

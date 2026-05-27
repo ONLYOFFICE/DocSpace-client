@@ -1094,6 +1094,9 @@ importers:
       react-virtualized:
         specifier: ^9.22.6
         version: 9.22.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react-window:
+        specifier: 1.8.10
+        version: 1.8.10(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       resize-image:
         specifier: 0.1.0
         version: 0.1.0
@@ -1103,6 +1106,9 @@ importers:
       ts-pattern:
         specifier: 5.5.0
         version: 5.5.0
+      use-resize-observer:
+        specifier: 9.1.0
+        version: 9.1.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       winston:
         specifier: 3.17.0
         version: 3.17.0
@@ -1149,6 +1155,9 @@ importers:
       '@types/react-virtualized':
         specifier: 9.21.30
         version: 9.21.30
+      '@types/react-window':
+        specifier: 1.8.8
+        version: 1.8.8
       cross-env:
         specifier: ^10.1.0
         version: 10.1.0

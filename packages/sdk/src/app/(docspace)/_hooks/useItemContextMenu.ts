@@ -89,6 +89,17 @@ export default function useItemContextMenu({
         return Array.from(shareModel);
       }
 
+      if (isTrashSection) {
+        const trashModel: AVAILABLE_CONTEXT_ITEMS[] = [
+          AVAILABLE_CONTEXT_ITEMS.select,
+          AVAILABLE_CONTEXT_ITEMS.showInfo,
+          AVAILABLE_CONTEXT_ITEMS.restore,
+        ];
+        if (file.security.Delete)
+          trashModel.push(AVAILABLE_CONTEXT_ITEMS.deletePermanently);
+        return trashModel;
+      }
+
       const model = new Set([
         AVAILABLE_CONTEXT_ITEMS.select,
         AVAILABLE_CONTEXT_ITEMS.fillForm,
@@ -162,21 +173,17 @@ export default function useItemContextMenu({
         model.add(AVAILABLE_CONTEXT_ITEMS.openLocation);
       }
 
-      if (isTrashSection) {
-        model.add(AVAILABLE_CONTEXT_ITEMS.restore);
-      } else {
-        if (file.security.Rename) model.add(AVAILABLE_CONTEXT_ITEMS.rename);
-        if (file.security.Copy) model.add(AVAILABLE_CONTEXT_ITEMS.copy);
-        if (file.security.Duplicate)
-          model.add(AVAILABLE_CONTEXT_ITEMS.duplicate);
-        if (file.security.Move) model.add(AVAILABLE_CONTEXT_ITEMS.moveTo);
-      }
+      if (file.security.Rename) model.add(AVAILABLE_CONTEXT_ITEMS.rename);
+      if (file.security.Copy) model.add(AVAILABLE_CONTEXT_ITEMS.copy);
+      if (file.security.Duplicate)
+        model.add(AVAILABLE_CONTEXT_ITEMS.duplicate);
+      if (file.security.Move) model.add(AVAILABLE_CONTEXT_ITEMS.moveTo);
 
-      if (!isTrashSection && file.security?.ReadHistory) {
+      if (file.security?.ReadHistory) {
         model.add(AVAILABLE_CONTEXT_ITEMS.showVersionHistory);
       }
 
-      if (!isTrashSection && file.security?.Lock) {
+      if (file.security?.Lock) {
         model.add(AVAILABLE_CONTEXT_ITEMS.blockUnblockVersion);
       }
 
@@ -186,7 +193,6 @@ export default function useItemContextMenu({
       const isExtsWebEdited = extsWebEdited.includes(file.fileExst);
 
       if (
-        !isTrashSection &&
         file.security?.CustomFilter &&
         isExtsCustomFilter &&
         isExtsWebEdited
@@ -203,13 +209,7 @@ export default function useItemContextMenu({
         model.add(AVAILABLE_CONTEXT_ITEMS.vectorization);
       }
 
-      if (file.security.Delete) {
-        if (isTrashSection) {
-          model.add(AVAILABLE_CONTEXT_ITEMS.deletePermanently);
-        } else {
-          model.add(AVAILABLE_CONTEXT_ITEMS.delete);
-        }
-      }
+      if (file.security.Delete) model.add(AVAILABLE_CONTEXT_ITEMS.delete);
 
       return Array.from(model);
     },
@@ -243,6 +243,17 @@ export default function useItemContextMenu({
         return items;
       }
 
+      if (isTrashSection) {
+        const trashItems: AVAILABLE_CONTEXT_ITEMS[] = [
+          AVAILABLE_CONTEXT_ITEMS.select,
+          AVAILABLE_CONTEXT_ITEMS.showInfo,
+          AVAILABLE_CONTEXT_ITEMS.restore,
+        ];
+        if (folder.security.Delete)
+          trashItems.push(AVAILABLE_CONTEXT_ITEMS.deletePermanently);
+        return trashItems;
+      }
+
       const items = [
         AVAILABLE_CONTEXT_ITEMS.select,
         ...(isHeader ? [] : [AVAILABLE_CONTEXT_ITEMS.open]),
@@ -266,25 +277,15 @@ export default function useItemContextMenu({
         items.push(AVAILABLE_CONTEXT_ITEMS.openLocation);
       }
 
-      if (isTrashSection) {
-        items.push(AVAILABLE_CONTEXT_ITEMS.restore);
-      } else {
-        if (folder.security.Rename) items.push(AVAILABLE_CONTEXT_ITEMS.rename);
-        if (folder.security.Copy) items.push(AVAILABLE_CONTEXT_ITEMS.copy);
-        if (folder.security.Duplicate)
-          items.push(AVAILABLE_CONTEXT_ITEMS.duplicate);
-        if (folder.security.Move) items.push(AVAILABLE_CONTEXT_ITEMS.moveTo);
-      }
+      if (folder.security.Rename) items.push(AVAILABLE_CONTEXT_ITEMS.rename);
+      if (folder.security.Copy) items.push(AVAILABLE_CONTEXT_ITEMS.copy);
+      if (folder.security.Duplicate)
+        items.push(AVAILABLE_CONTEXT_ITEMS.duplicate);
+      if (folder.security.Move) items.push(AVAILABLE_CONTEXT_ITEMS.moveTo);
 
       items.push(AVAILABLE_CONTEXT_ITEMS.showInfo);
 
-      if (folder.security.Delete) {
-        if (isTrashSection) {
-          items.push(AVAILABLE_CONTEXT_ITEMS.deletePermanently);
-        } else {
-          items.push(AVAILABLE_CONTEXT_ITEMS.delete);
-        }
-      }
+      if (folder.security.Delete) items.push(AVAILABLE_CONTEXT_ITEMS.delete);
 
       return items;
     },

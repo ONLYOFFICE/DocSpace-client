@@ -7,6 +7,7 @@ import {
   TOnFilter,
 } from "@docspace/ui-kit/components/filter/Filter.types";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { frameCallEvent } from "@docspace/shared/utils/common";
 import { getFilterType } from "@docspace/ui-kit/components/filter/Filter.utils";
 import {
   FilterGroups,
@@ -74,6 +75,8 @@ export default function useFilesFilter({
       const urlFilter = modifiedFilter.toUrlParams();
 
       window.history.pushState(null, "", `?${urlFilter}`);
+
+      frameCallEvent({ event: "onFilterSearch", data: { search: value } });
     },
     [filter],
   );

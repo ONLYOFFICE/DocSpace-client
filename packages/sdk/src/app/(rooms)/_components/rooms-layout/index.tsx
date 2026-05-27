@@ -52,6 +52,8 @@ import TemplateReactSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 
 import { SectionWrapper } from "@/app/(docspace)/_components/section";
 import Header from "@/app/(docspace)/_components/header";
+import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
+import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
 import { Filter } from "@/app/(docspace)/_components/filter";
 import SelectionArea from "@/app/(docspace)/_components/selection-area";
 import { DeviceTypeObserver } from "@/app/(docspace)/_components/DeviceTypeObserver";
@@ -132,18 +134,16 @@ const RoomsLayout = observer(
       user?.isRoomAdmin
     );
 
-    const [isCreateRoomDialogVisible, setIsCreateRoomDialogVisible] =
-      React.useState(false);
-
+    const dialogsStore = useDialogsStore();
     const refreshRef = React.useRef<(() => void) | null>(null);
 
     const createCustomRoom = React.useCallback(() => {
-      setIsCreateRoomDialogVisible(true);
-    }, []);
+      dialogsStore.openDialog(SDKDialogs.CreateRoom);
+    }, [dialogsStore]);
 
     const closeCreateRoomDialog = React.useCallback(() => {
-      setIsCreateRoomDialogVisible(false);
-    }, []);
+      dialogsStore.closeDialog(SDKDialogs.CreateRoom);
+    }, [dialogsStore]);
 
     const quickActionItems = React.useMemo<QuickActionItem[]>(
       () =>
@@ -248,7 +248,7 @@ const RoomsLayout = observer(
             filesFilter={filesFilter}
           />
           <CreateEditRoomDialog
-            visible={isCreateRoomDialogVisible}
+            visible={dialogsStore.isDialogOpen(SDKDialogs.CreateRoom)}
             onClose={closeCreateRoomDialog}
             onRoomCreated={() => refreshRef.current?.()}
           />

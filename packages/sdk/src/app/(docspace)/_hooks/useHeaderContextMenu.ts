@@ -33,18 +33,18 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo } from "react";
 
 import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
+import type { TLogo } from "@docspace/ui-kit/types";
 import { FolderType } from "@docspace/shared/enums";
-import api from "@docspace/shared/api";
 import { TFolder } from "@docspace/shared/api/files/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 
-import { useNavigationStore } from "../_store/NavigationStore";
 import { useFilesListStore } from "../_store/FilesListStore";
 import { DeleteContext } from "../_contexts/DeleteContext";
 import { FileOperationsContext } from "../_contexts/FileOperationsContext";
+import { useDialogsStore } from "../_store/DialogsStore";
 import useItemContextMenu from "./useItemContextMenu";
 import useContextMenuModel from "./useContextMenuModel";
 import useRoomContextMenuModel from "@/app/(rooms)/_hooks/useRoomContextMenuModel";
@@ -60,28 +60,27 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
   const filesListStore = useFilesListStore();
   const deleteCtx = React.useContext(DeleteContext);
   const fileOpsCtx = React.useContext(FileOperationsContext);
-  const navigationStore = useNavigationStore();
+  const dialogsStore = useDialogsStore();
 
   const isTrashSection = filesListStore.rootFolderType === FolderType.TRASH;
   const isRoom = !!current?.roomType;
 
-  const [editingRoom, setEditingRoom] = useState<TFolderItem | null>(null);
-
-  const onEditRoom = useCallback((item: TFolderItem | TFileItem) => {
-    setEditingRoom(item as TFolderItem);
-  }, []);
-
-  const onRoomEdited = useCallback(
-    async (roomId: number) => {
-      setEditingRoom(null);
-      try {
-        const updatedRoom = await api.rooms.getRoomInfo(roomId);
-        navigationStore.setCurrentTitle(updatedRoom.title);
-      } catch {
-        // title refresh is best-effort; old title stays until next navigation
-      }
+  const onEditRoom = useCallback(
+    (_item: TFolderItem | TFileItem) => {
+      if (!current) return;
+      const room = current as TRoom;
+      const logo = room.logo as TLogo | undefined;
+      dialogsStore.openEditRoomDialog({
+        id: current.id,
+        title: current.title,
+        tags: room.tags ?? [],
+        roomLogo: logo?.cover ? undefined : logo?.original,
+        roomIconColor: logo?.color,
+        roomCover: logo?.cover,
+        createdBy: current.createdBy,
+      });
     },
-    [navigationStore],
+    [current, dialogsStore],
   );
 
   const { getFoldersContextMenu } = useItemContextMenu({ isTrashSection });
@@ -143,10 +142,6 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
   return {
     currentFolderItem,
     getContextOptionsFolder,
-    editingRoom,
-    setEditingRoom,
-    onRoomEdited,
     isRoom,
   };
 }
-

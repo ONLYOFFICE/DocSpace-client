@@ -38,15 +38,47 @@
 import React from "react";
 import { observer } from "mobx-react";
 
+import api from "@docspace/shared/api";
+
 import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
 import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
+import { useNavigationStore } from "@/app/(docspace)/_store/NavigationStore";
+import CreateEditRoomDialog from "@/app/(rooms)/_components/create-edit-room-dialog";
 
 import DownloadDialog from "./components/download-dialog";
 
 export const Dialogs = () => {
-  const { isDialogOpen } = useDialogsStore();
+  const dialogsStore = useDialogsStore();
+  const navigationStore = useNavigationStore();
 
-  return isDialogOpen(SDKDialogs.DownloadDialog) ? <DownloadDialog /> : null;
+  const onRoomEdited = React.useCallback(
+    async (roomId: number) => {
+      try {
+        const updatedRoom = await api.rooms.getRoomInfo(roomId);
+        navigationStore.setCurrentTitle(updatedRoom.title);
+      } catch {
+        // title refresh is best-effort; old title stays until next navigation
+      }
+    },
+    [navigationStore],
+  );
+
+  return (
+    <>
+      {dialogsStore.isDialogOpen(SDKDialogs.DownloadDialog) && (
+        <DownloadDialog />
+      )}
+      {dialogsStore.editingRoomData && (
+        <CreateEditRoomDialog
+          visible={dialogsStore.isDialogOpen(SDKDialogs.EditRoom)}
+          onClose={dialogsStore.closeEditRoomDialog}
+          room={dialogsStore.editingRoomData}
+          onRoomEdited={onRoomEdited}
+        />
+      )}
+    </>
+  );
 };
 
 export default observer(Dialogs);
+

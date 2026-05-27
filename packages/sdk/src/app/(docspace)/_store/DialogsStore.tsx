@@ -40,8 +40,19 @@ import { makeAutoObservable } from "mobx";
 
 import api from "@docspace/shared/api";
 import type { ICover } from "@docspace/ui-kit/components/room-logo-cover-dialog";
+import type { TCreatedBy } from "@docspace/shared/types";
 
 import { type SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
+
+export type TEditableRoom = {
+  id: number;
+  title: string;
+  tags?: string[];
+  roomLogo?: string;
+  roomIconColor?: string;
+  roomCover?: ICover;
+  createdBy?: TCreatedBy;
+};
 
 class DialogsStore {
   // [[dialogName, visible]]
@@ -49,6 +60,8 @@ class DialogsStore {
 
   covers: ICover[] = [];
   coversLoaded = false;
+
+  editingRoomData: TEditableRoom | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -64,6 +77,16 @@ class DialogsStore {
 
   isDialogOpen = (name: SDKDialogs) => {
     return this.dialogs.get(name) || false;
+  };
+
+  openEditRoomDialog = (room: TEditableRoom) => {
+    this.editingRoomData = room;
+    this.openDialog(SDKDialogs.EditRoom);
+  };
+
+  closeEditRoomDialog = () => {
+    this.closeDialog(SDKDialogs.EditRoom);
+    this.editingRoomData = null;
   };
 
   setCovers = (covers: ICover[]) => {

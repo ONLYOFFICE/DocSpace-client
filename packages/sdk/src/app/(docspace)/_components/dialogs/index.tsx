@@ -37,19 +37,29 @@
 
 import React from "react";
 import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
+import { FolderType } from "@docspace/shared/enums";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
 import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
 import { useNavigationStore } from "@/app/(docspace)/_store/NavigationStore";
+import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
+import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import CreateEditRoomDialog from "@/app/(rooms)/_components/create-edit-room-dialog";
+import MoveToArchiveDialog from "@/app/(rooms)/_components/move-to-archive-dialog";
+import DeleteRoomDialog from "@/app/(rooms)/_components/delete-room-dialog";
 
 import DownloadDialog from "./components/download-dialog";
 
 export const Dialogs = () => {
+  const { t } = useTranslation(["Common"]);
   const dialogsStore = useDialogsStore();
   const navigationStore = useNavigationStore();
+  const activeItemsStore = useActiveItemsStore();
+  const { openFolder } = useFolderActions({ t });
 
   const onRoomEdited = React.useCallback(
     async (roomId: number) => {
@@ -63,6 +73,52 @@ export const Dialogs = () => {
     [navigationStore],
   );
 
+  const navigateToParent = React.useCallback(() => {
+    const parent = navigationStore.navigationItems?.[0];
+    if (parent) openFolder(parent.id, parent.title);
+  }, [navigationStore, openFolder]);
+
+  const onArchiveConfirm = React.useCallback(async () => {
+    const room = dialogsStore.archivingRoomData;
+    if (!room) return;
+    activeItemsStore.addActiveItems([], [room.id]);
+    try {
+      const tree = await api.files.getFoldersTree();
+      const archiveFolderId = (
+        tree as unknown as { rootFolderType: number; id: number }[]
+      ).find((f) => f.rootFolderType === FolderType.Archive)?.id;
+      if (archiveFolderId == null) throw new Error("Archive folder not found");
+      await api.files.moveToFolder(
+        archiveFolderId,
+        [room.id],
+        [],
+        0,
+        false,
+        false,
+        true,
+      );
+      navigateToParent();
+    } catch (e) {
+      toastr.error(e as Error);
+    } finally {
+      activeItemsStore.removeActiveItems([], [room.id]);
+    }
+  }, [dialogsStore, activeItemsStore, navigateToParent]);
+
+  const onDeleteConfirm = React.useCallback(async () => {
+    const room = dialogsStore.deletingRoomData;
+    if (!room) return;
+    activeItemsStore.addActiveItems([], [room.id]);
+    try {
+      await api.files.removeFiles([room.id], [], false, true, true);
+      navigateToParent();
+    } catch (e) {
+      toastr.error(e as Error);
+    } finally {
+      activeItemsStore.removeActiveItems([], [room.id]);
+    }
+  }, [dialogsStore, activeItemsStore, navigateToParent]);
+
   return (
     <>
       {dialogsStore.isDialogOpen(SDKDialogs.DownloadDialog) && (
@@ -74,6 +130,21 @@ export const Dialogs = () => {
           onClose={dialogsStore.closeEditRoomDialog}
           room={dialogsStore.editingRoomData}
           onRoomEdited={onRoomEdited}
+        />
+      )}
+      {dialogsStore.archivingRoomData && (
+        <MoveToArchiveDialog
+          visible={dialogsStore.isDialogOpen(SDKDialogs.ArchiveRoom)}
+          onClose={dialogsStore.closeArchiveRoomDialog}
+          onConfirm={onArchiveConfirm}
+        />
+      )}
+      {dialogsStore.deletingRoomData && (
+        <DeleteRoomDialog
+          visible={dialogsStore.isDialogOpen(SDKDialogs.DeleteRoom)}
+          onClose={dialogsStore.closeDeleteRoomDialog}
+          roomName={dialogsStore.deletingRoomData.title}
+          onConfirm={onDeleteConfirm}
         />
       )}
     </>

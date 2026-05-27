@@ -83,9 +83,34 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
     [current, dialogsStore],
   );
 
+  const onArchiveRoom = useCallback(
+    (_item: TFolderItem | TFileItem) => {
+      if (!current) return;
+      dialogsStore.openArchiveRoomDialog({ id: current.id, title: current.title });
+    },
+    [current, dialogsStore],
+  );
+
+  const onDeleteRoom = useCallback(
+    (_item: TFolderItem | TFileItem) => {
+      if (!current) return;
+      dialogsStore.openDeleteRoomDialog({ id: current.id, title: current.title });
+    },
+    [current, dialogsStore],
+  );
+
   const { getFoldersContextMenu } = useItemContextMenu({ isTrashSection });
-  const { getContextModel: getRoomContextModel } =
-    useRoomContextMenuModel(onEditRoom);
+  const { getContextModel: getRoomContextModel } = useRoomContextMenuModel(
+    onEditRoom,
+    undefined, // onRoomChanged
+    undefined, // onChangeOwner
+    false,     // isArchive
+    undefined, // onRestoreRoom
+    onDeleteRoom,
+    undefined, // onDeleteSelected
+    undefined, // onRestoreSelected
+    onArchiveRoom,
+  );
 
   const currentFolderItem = useMemo((): TFolderItem | undefined => {
     if (!current) return undefined;

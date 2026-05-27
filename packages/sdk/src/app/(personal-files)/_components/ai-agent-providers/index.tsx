@@ -43,7 +43,7 @@ import FilesSelector from "@docspace/ui-kit/selectors/Files";
 import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import useGetIcon from "@docspace/ui-kit/ai-agent/chat/hooks/useGetIcon";
 import { toastr, type TData } from "@docspace/ui-kit/components/toast";
-import { DeviceType, FolderType } from "@docspace/shared/enums";
+import { DeviceType, FileType, FolderType } from "@docspace/shared/enums";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import CatalogDocumentsUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import UploadIconUrl from "PUBLIC_DIR/images/icons/16/upload.react.svg?url";
@@ -94,42 +94,77 @@ const DocSpaceFilesAttachDialog = observer(
         _selectedTreeNode,
         selectedFileInfo,
       ) => {
-        const inputs =
+        // Align the input array with the original selector items so we know
+        // which records to re-key as images after `addAttachmentFile`.
+        const sources =
           selectedFilesRef.current.length > 0
-            ? selectedFilesRef.current.map((f) => {
-                // FilesSelector splits filename and extension for display, so
-                // `label` carries the name only. Extension lives in `fileExst`.
-                const fileExst = "fileExst" in f ? (f.fileExst ?? "") : "";
-                return {
-                  path: String(f.id),
-                  title: `${f.label}${fileExst}`,
-                  type: getOnlyofficeFileType(fileExst),
-                  content: "",
-                };
-              })
+            ? selectedFilesRef.current.map((f) => ({
+                id: f.id,
+                title: f.label,
+                fileType: "fileType" in f ? f.fileType : undefined,
+                fileExst: "fileExst" in f ? (f.fileExst ?? "") : "",
+              }))
             : selectedFileInfo
               ? [
                   {
-                    path: String(selectedFileInfo.id),
+                    id: selectedFileInfo.id,
                     title: selectedFileInfo.title,
-                    type: getOnlyofficeFileType(
-                      selectedFileInfo.fileExst ?? selectedFileInfo.title,
-                    ),
-                    content: "",
+                    fileType: selectedFileInfo.fileType,
+                    fileExst: selectedFileInfo.fileExst ?? "",
                   },
                 ]
               : [];
+
+        const inputs = sources.map((s) => ({
+          path: String(s.id),
+          title: s.fileExst ? `${s.title}${s.fileExst}` : s.title,
+          type: getOnlyofficeFileType(s.fileExst || s.title),
+          content: "",
+        }));
+
+        const imageIndices = new Set<number>();
+        sources.forEach((s, i) => {
+          if (s.fileType === FileType.Image) imageIndices.add(i);
+        });
 
         // Optimistic close — the chip will appear once saveFilesMany resolves.
         onClose();
 
         if (inputs.length === 0) return;
 
+        const before =
+          useAttachmentsStore.getState().attachmentFiles.length;
+
         try {
           await useAttachmentsStore.getState().addAttachmentFile(inputs);
         } catch (e) {
           toastr.error(e as TData);
+          return;
         }
+
+        if (imageIndices.size === 0) return;
+
+        // Library hardcodes `kind: "file"` for refs produced by
+        // `addAttachmentFile`, even when the backend resolved the record
+        // as an image. Move image refs to `attachmentImages` so `FileItem`
+        // pulls the presigned URL via `api.attachments.get(id)` and renders
+        // the preview instead of the unknown-format icon.
+        useAttachmentsStore.setState((s) => {
+          const added = s.attachmentFiles.slice(before);
+          const stayingFiles = s.attachmentFiles.slice(0, before);
+          const movedImages: typeof s.attachmentImages = [];
+          added.forEach((ref, i) => {
+            if (imageIndices.has(i)) {
+              movedImages.push({ ...ref, kind: "image" });
+            } else {
+              stayingFiles.push(ref);
+            }
+          });
+          return {
+            attachmentFiles: stayingFiles,
+            attachmentImages: [...s.attachmentImages, ...movedImages],
+          };
+        });
       },
       [onClose, useAttachmentsStore],
     );

@@ -4,5 +4,6 @@
   "ContinueToProduct": "Continuar para {{productName}}",
   "GeneratedPassword": "Senha gerada",
   "ProductNameDetail": "Nome do {{productName}}",
-  "ReviewAccountDetails": "Reserve um momento para revisar os detalhes da sua conta:"
+  "ReviewAccountDetails": "Reserve um momento para revisar os detalhes da sua conta:",
+  "YourProfileDetails": "Detalhes do seu perfil"
 }

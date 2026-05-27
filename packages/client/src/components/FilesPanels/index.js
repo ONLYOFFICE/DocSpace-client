@@ -85,7 +85,6 @@ import {
   DeleteVersionDialog,
   CancelOperationDialog,
   ReducedRightsDialog,
-  SocialAuthWelcomeDialog,
   EditRoomGroupsDialog,
   AddRoomToGroupDialog,
   PauseSubmissionsDialog,
@@ -195,7 +194,6 @@ const Panels = (props) => {
     reducedRightsVisible,
     removeUserConfirmation,
     assignRolesDialogVisible,
-    socialAuthWelcomeDialogVisible,
     extsFilesVectorized,
     aiAgentSelectorDialogProps,
     setAiAgentSelectorDialogProps,
@@ -499,9 +497,6 @@ const Panels = (props) => {
       <RemoveUserConfirmationDialog key="remove-user-confirmation-dialog" />
     ),
     assignRolesDialogVisible && <AssignRoles key="assign-roles-dialog" />,
-    socialAuthWelcomeDialogVisible && (
-      <SocialAuthWelcomeDialog key="joining-space-dialog" />
-    ),
     <ShareSelector key="share-selector" />,
     templateGalleryVisible && <TemplateGallery key="template-gallery" />,
     isVisibleInfoPanelTemplateGallery && (
@@ -612,7 +607,6 @@ export default inject(
       reducedRightsData,
       removeUserConfirmation,
       assignRolesDialogData,
-      socialAuthWelcomeDialogVisible,
 
       aiAgentSelectorDialogProps,
       setAiAgentSelectorDialogProps,
@@ -749,7 +743,6 @@ export default inject(
       reducedRightsVisible: reducedRightsData.visible,
       removeUserConfirmation: removeUserConfirmation.visible,
       assignRolesDialogVisible: assignRolesDialogData.visible,
-      socialAuthWelcomeDialogVisible,
       extsFilesVectorized,
 
       aiAgentSelectorDialogProps,

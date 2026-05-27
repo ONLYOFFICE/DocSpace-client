@@ -1,14 +1,14 @@
 {
   "key_path": "RoleNewUserDescription",
-  "content": "Users can only access the rooms they are invited to by admins. They can't create own rooms, folders or files.<br/><1>In {{agentSection}}</1>: can view the {{aiAgent}} results and shared chats if they were invited, but cannot create chats or modify the knowledge base.",
-  "content_en_sha1_hash": "ef129e1554a846afbdb03bc4bbcb2555fbc97db8",
-  "created_at": "2025-12-19T10:16:38.171Z",
-  "updated_at": "2026-05-15T14:00:06.968Z",
+  "content": "Users can only access the rooms they are invited to by admins. They can't create own rooms, folders or files.<br/><1>In {{agentSection}}</1>: can view the AI agent results and shared chats if they were invited, but cannot create chats or modify the knowledge base.",
+  "content_en_sha1_hash": "562020852c16948fffecf6db51bc5ef21a740654",
+  "created_at": "2026-05-25T18:26:12.713Z",
+  "updated_at": "2026-05-25T18:27:33.752Z",
   "comment": {
-    "text": "This is a description of the \"New User\" role, explaining their limited permissions within DocSpace and AI Agent features. It appears in user role selection interfaces. The `{{agentSection}}` variable is the localized name for the AI Agents section, and `{{aiAgent}}` is the localized name for the AI Agent feature. The `<1>` tag bolds the text within it.",
+    "text": "Description text for the \"New User\" role in access options or user type settings, detailing permission limitations. It includes a line break, a bold tag for the `{{agentSection}}` variable, and outlines restrictions regarding rooms, files, and AI agent interactions.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:44:31.179Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-05-25T18:27:33.752Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -40,15 +40,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The English text contains 'In {{agentSection}}' within the bold tag <1>In {{agentSection}}</1>, but the Azerbaijani translation only has '{{agentSection}}' within <1>{{agentSection}}</1>. The word 'In' (or its Azerbaijani equivalent) is missing, which is important for establishing the context/location.",
-          "suggestion": "<1>{{agentSection}}-də</1>: dəvət olundularsa, {{aiAgent}} nəticələrini və paylaşılmış söhbətləri görə bilərlər, lakin söhbət yarada və ya bilik bazasını dəyişdirə bilməzlər.",
-          "checked_at": "2026-04-13T08:36:05.315Z",
-          "checked_by": "claude-code/haiku"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -108,29 +100,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "English text 'In' appears untranslated within the Japanese translation. The phrase '<1>In {{agentSection}}</1>' mixes English into the Japanese text, which should be fully translated to Japanese.",
-          "suggestion": "Change '<1>In {{agentSection}}</1>' to '<1>{{agentSection}}では</1>' or '<1>{{agentSection}}内では</1>' to properly translate the English preposition into Japanese. Full corrected text: 'ユーザーは、管理者から招待されたルームのみにアクセスできます。自身でルーム、フォルダ、またはファイルを作成することはできません。<br/><1>{{agentSection}}では</1>: 招待された場合、{{aiAgent}}の結果と共有チャットを閲覧できますが、チャットの作成やナレッジベースの変更はできません。'",
-          "checked_at": "2026-04-13T08:37:01.537Z",
-          "checked_by": "claude-code/haiku"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'In' appears before {{agentSection}} in the English text (within the <1> bold tags) but is missing from the Korean translation. English has '<1>In {{agentSection}}</1>' while Korean has '<1>{{agentSection}}</1>'.",
-          "suggestion": "사용자는 관리자가 초대하는 방에만 접근할 수 있습니다. 자체적으로 방, 폴더 또는 파일을 생성할 수 없습니다.<br/><1>{{agentSection}}에</1>: 초대된 경우 {{aiAgent}} 결과 및 공유 채팅을 볼 수 있지만, 채팅을 생성하거나 지식 기반을 수정할 수는 없습니다.",
-          "checked_at": "2026-04-13T08:36:58.505Z",
-          "checked_by": "claude-code/haiku"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -179,20 +155,12 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'In' (or its Sinhala equivalent) is missing from inside the <1> tag. English has '<1>In {{agentSection}}</1>' but Sinhala only has '<1>{{agentSection}}</1>'. This changes the meaning by removing the locative context indicator.",
-          "suggestion": "<1>{{agentSection}} හි</1>: ඔවුන්ට ආරාධනා කර ඇත්නම්, {{aiAgent}} ප්‍රතිඵල සහ බෙදාගත් chats නැරඹිය හැකි නමුත්, chats නිර්මාණය කිරීමට හෝ දැනුම පදනම සංශෝධනය කිරීමට නොහැකිය.",
-          "checked_at": "2026-04-13T08:38:04.819Z",
-          "checked_by": "claude-code/haiku"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -228,15 +196,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The word 'In' is left in English within the Turkish translation. This breaks the Turkish localization and should be translated to Turkish, such as using the locative case suffix.",
-          "suggestion": "Kullanıcılar yalnızca yöneticiler tarafından davet edildikleri odalara erişebilirler. Kendi odalarını, klasörlerini veya dosyalarını oluşturamazlar.<br/><1>{{agentSection}}'de</1>: davet edildilerse {{aiAgent}} sonuçlarını ve paylaşılan sohbetleri görüntüleyebilir, ancak sohbet oluşturamaz veya bilgi tabanını düzenleyemez.",
-          "checked_at": "2026-04-13T08:38:28.560Z",
-          "checked_by": "claude-code/haiku"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

@@ -43,7 +43,7 @@ import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.files.in
 import styles from "./NoItem.module.scss";
 
 const NoFileOrFolderItem = () => {
-  const { t } = useTranslation(["InfoPanel"]);
+  const { t } = useTranslation(["Common"]);
 
   const { isBase } = useTheme();
 
@@ -61,3 +61,4 @@ const NoFileOrFolderItem = () => {
 };
 
 export default NoFileOrFolderItem;
+

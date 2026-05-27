@@ -1,7 +1,7 @@
 {
-  "AgentCreated": "AI Agent vytvorený",
+  "AgentCreated": "AI agent vytvorený",
   "AgentDeleted": "AI Agent odstrnený",
-  "AgentUpdated": "Aktualizovaný AI Agent",
+  "AgentUpdated": "Aktualizovaný AI agent",
   "Before": "Pred",
   "CreateWebhook": "Vytvoriť webhook",
   "DeleteHint": "Webhook bude natrvalo vymazaný.\nTento úkon nebude možné odvolať.",

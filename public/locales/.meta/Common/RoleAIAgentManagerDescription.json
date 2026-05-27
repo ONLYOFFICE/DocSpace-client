@@ -1,14 +1,14 @@
 {
   "key_path": "RoleAIAgentManagerDescription",
-  "content": "Agent managers can manage the assigned {{aiAgent}}, invite new users, and assign roles below their level.\nThey can use the chat, upload knowledge files, work with Result storage, and manage chat settings.",
-  "content_en_sha1_hash": "cc775f7206bb72ef36c1f9ccb45b183e8348c5d8",
-  "created_at": "2025-12-19T10:16:37.940Z",
-  "updated_at": "2026-05-15T14:00:06.967Z",
+  "content": "Agent managers can manage the assigned AI agent, invite new users, and assign roles below their level.\nThey can use the chat, upload knowledge files, work with Result storage, and manage chat settings.",
+  "content_en_sha1_hash": "7a0912ba9ced09aa62221047ab793339089da8eb",
+  "created_at": "2026-05-25T18:26:12.610Z",
+  "updated_at": "2026-05-25T18:28:01.443Z",
   "comment": {
-    "text": "This is a description of the \"AI Agent Manager\" role, displayed in a tooltip or information panel. It explains the permissions and capabilities of users assigned this role, with `{{aiAgent}}` being a placeholder for the localized term \"AI Agent\".",
+    "text": "Description text for the AI Agent Manager role in an AI Room, detailing their permissions and capabilities. It includes a variable `aiAgent` representing the name of the AI agent.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:44:40.613Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-05-25T18:28:01.443Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -34,15 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_variable",
-          "description": "The variable {{aiAgent}} has been modified to {{aiAgent}}-i in the translation. Variable placeholders must appear with identical spelling and braces. The accusative case marker '-i' should not be applied to the variable placeholder itself, as this will break the variable substitution in the code.",
-          "suggestion": "Agent menecerləri təyin edilmiş {{aiAgent}}-i idarə edə, yeni istifadəçilər dəvət edə və səviyyələrindən aşağı rollar təyin edə bilərlər.\nOnlar chatdan istifadə edə, bilik faylları yükləyə, Result yaddaş sahəsi ilə işləyə və chat parametrlərini idarə edə bilərlər.",
-          "checked_at": "2026-04-13T08:54:26.751Z",
-          "checked_by": "claude-code/haiku"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -157,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -168,15 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak text uses 'prideliť úlohy' (assign tasks) instead of 'prideliť roly' (assign roles). The English clearly states 'assign roles below their level' - this is about assigning role-based permissions/positions in the system, not tasks. The word 'úlohy' changes the meaning to assigning duties/tasks rather than system roles.",
-          "suggestion": "Správcovia agentov môžu spravovať pridelený {{aiAgent}}, pozvať nových používateľov a prideliť roly nižšie ako ich vlastná úroveň.\nMôžu použiť chat, nahrávať znalostné súbory, pracovať s Result úložiskom a spravovať nastavenia chatu.",
-          "checked_at": "2026-04-13T08:56:04.419Z",
-          "checked_by": "claude-code/haiku"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

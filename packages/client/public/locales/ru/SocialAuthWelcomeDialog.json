@@ -4,5 +4,6 @@
   "ContinueToProduct": "Продолжить работу с {{productName}}",
   "GeneratedPassword": "Сгенерированный пароль",
   "ProductNameDetail": "{{productName}} имя",
-  "ReviewAccountDetails": "Пожалуйста, уделите немного времени проверке данных вашего аккаунта:"
+  "ReviewAccountDetails": "Пожалуйста, уделите немного времени проверке данных вашего аккаунта:",
+  "YourProfileDetails": "Данные вашего профиля"
 }

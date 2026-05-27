@@ -3,7 +3,7 @@
   "content": "Email",
   "content_en_sha1_hash": "84add5b2952787581cb9a8851eef63d1ec75d22b",
   "created_at": "2025-05-19T21:30:44.776Z",
-  "updated_at": "2026-05-18T17:47:04.652Z",
+  "updated_at": "2026-05-26T17:09:24.540Z",
   "comment": {
     "text": "This is a label for an email address, used in user information displays and table headers. It appears as a short label.",
     "is_auto": true,
@@ -15,6 +15,12 @@
       "file_path": "/packages/client/src/components/dialogs/SocialAuthWelcomeDialog/index.tsx",
       "line_number": 162,
       "context": "className=\"welcome-text\"\n >{`${user?.firstName} ${user?.lastName}`}</Text>\n </div>\n \n <div className={styles.infoRow}>\n <Text className=\"welcome-text\">{t(\"Common:Email\")}</Text>\n <Text fontWeight=\"600\" truncate className=\"welcome-text\">\n {user?.email}\n </Text>\n </div>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/MainBar/SocialAuthWelcomeBar.jsx",
+      "line_number": 83,
+      "context": "value: (\n <span>{`${user?.firstName ?? \"\"} ${user?.lastName ?? \"\"}`.trim()}</span>\n ),\n },\n {\n label: t(\"Common:Email\"),\n value: <span>{user?.email}</span>,\n },\n {\n label: t(\"SocialAuthWelcomeDialog:GeneratedPassword\"),\n value: (",
       "module": "/packages/client"
     },
     {
@@ -49,13 +55,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 492,
+      "line_number": 504,
       "context": "/>\n ) : null}\n </div>\n \n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Email\")}\n </Text>\n <div className={styles.emailContainer}>\n <div className={styles.emailEditContainer}>\n <Text\n data-tooltip-id=\"emailTooltip\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 492,
+      "line_number": 504,
       "context": "/>\n ) : null}\n </div>\n \n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Email\")}\n </Text>\n <div className={styles.emailContainer}>\n <div className={styles.emailEditContainer}>\n <Text\n data-tooltip-id=\"emailTooltip\"",
       "module": "/packages/client"
     },

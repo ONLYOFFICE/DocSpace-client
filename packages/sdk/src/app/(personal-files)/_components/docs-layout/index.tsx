@@ -70,6 +70,9 @@ import RootScrollbar from "@/app/(docspace)/_components/RootScrollbar";
 import List from "@/app/(docspace)/(files)/_components/list";
 import { OpenFileContext } from "@/app/(docspace)/_contexts/OpenFileContext";
 import { ShareContext } from "@/app/(docspace)/_contexts/ShareContext";
+import { CopyShareLinkContext } from "@/app/(docspace)/_contexts/CopyShareLinkContext";
+import { ShareLinkService } from "@docspace/shared/services/share-link.service";
+import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import { InfoContext } from "@/app/(docspace)/_contexts/InfoContext";
 import { DeleteContext } from "@/app/(docspace)/_contexts/DeleteContext";
 import { FileOperationsContext } from "@/app/(docspace)/_contexts/FileOperationsContext";
@@ -336,6 +339,17 @@ const DocsLayout = observer(
       [infoPanelStore],
     );
 
+    const copyShareLinkHandler = React.useCallback(
+      async (item: TFileItem | TFolderItem) => {
+        const primaryLink = await ShareLinkService.getPrimaryLink(item);
+        if (primaryLink) {
+          copyShareLink(item, primaryLink, t);
+          infoPanelStore.setShareChanged(true);
+        }
+      },
+      [t, infoPanelStore],
+    );
+
     const infoHandler = React.useCallback(
       (item: TFileItem | TFolderItem) => {
         infoPanelStore.open(item);
@@ -366,6 +380,7 @@ const DocsLayout = observer(
       <OpenFileContext.Provider value={openFileHandler}>
         <InfoContext.Provider value={infoHandler}>
           <ShareContext.Provider value={shareHandler}>
+            <CopyShareLinkContext.Provider value={copyShareLinkHandler}>
             <DeleteContext.Provider value={deleteHandler}>
               <RenameContext.Provider value={renameHandler}>
                 <FileOperationsContext.Provider value={fileOperationsHandler}>
@@ -378,46 +393,43 @@ const DocsLayout = observer(
                         >
                           <RootScrollbar>
                             <SectionWrapper
+                              sectionBannerContent={
+                                isActionButtonEnabled ? (
+                                  <div className={styles.createNewSection}>
+                                    <h2 className={styles.createNewTitle}>
+                                      {t("Common:CreateNew")}
+                                    </h2>
+                                    <QuickActions
+                                      items={quickActionItems}
+                                      className={styles.quickActions}
+                                    />
+                                  </div>
+                                ) : undefined
+                              }
                               sectionHeaderContent={
                                 <Header
                                   current={current}
                                   pathParts={pathParts}
                                   isEmptyList={isEmptyList}
-                                  isInfoPanelVisible={
-                                    sdkConfig?.infoPanelVisible
-                                      ? infoPanelStore.isVisible
-                                      : false
-                                  }
-                                  onToggleInfoPanel={
-                                    sdkConfig?.infoPanelVisible
-                                      ? infoPanelStore.toggle
-                                      : undefined
-                                  }
+                                  isInfoPanelVisible={infoPanelStore.isVisible}
+                                  onToggleInfoPanel={infoPanelStore.toggle}
                                   headerOffset={headerOffset}
                                 />
                               }
                               sectionFilterContent={
-                                <>
-                                  {isActionButtonEnabled && (
-                                    <QuickActions
-                                      items={quickActionItems}
-                                      className={styles.quickActions}
-                                    />
-                                  )}
-                                  <Filter
-                                    filesFilter={filesFilter}
-                                    showMainButton={isActionButtonEnabled}
-                                    mainButtonProps={
-                                      isActionButtonEnabled
-                                        ? {
-                                            isDropdown: true,
-                                            model: desktopModel,
-                                            text: t("Common:New"),
-                                          }
-                                        : undefined
-                                    }
-                                  />
-                                </>
+                                <Filter
+                                  filesFilter={filesFilter}
+                                  showMainButton={isActionButtonEnabled}
+                                  mainButtonProps={
+                                    isActionButtonEnabled
+                                      ? {
+                                          isDropdown: true,
+                                          model: desktopModel,
+                                          text: t("Common:New"),
+                                        }
+                                      : undefined
+                                  }
+                                />
                               }
                               sectionBodyContent={
                                 <List
@@ -594,6 +606,7 @@ const DocsLayout = observer(
                 </FileOperationsContext.Provider>
               </RenameContext.Provider>
             </DeleteContext.Provider>
+            </CopyShareLinkContext.Provider>
           </ShareContext.Provider>
         </InfoContext.Provider>
       </OpenFileContext.Provider>

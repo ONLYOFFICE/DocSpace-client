@@ -1,14 +1,14 @@
 {
   "key_path": "AgentCreated",
-  "content": "AI Agent Created",
-  "content_en_sha1_hash": "492946ca8bbd5072556015fdec837b3b8b076c35",
-  "created_at": "2026-03-31T15:18:27.255Z",
-  "updated_at": "2026-05-15T14:00:06.836Z",
+  "content": "AI agent created",
+  "content_en_sha1_hash": "96a39e7a8edf8005051e56c92f5eaff5e2080abd",
+  "created_at": "2026-05-25T18:26:16.906Z",
+  "updated_at": "2026-05-25T18:44:20.706Z",
   "comment": {
-    "text": "This is a webhook trigger label that appears in a list of available webhook events. It indicates that an AI agent has been successfully created.",
+    "text": "A label for a webhook trigger event that occurs when an AI agent is created.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:29:25.704Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-05-25T18:44:20.706Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

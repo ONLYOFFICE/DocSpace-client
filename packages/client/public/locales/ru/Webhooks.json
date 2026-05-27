@@ -1,7 +1,7 @@
 {
-  "AgentCreated": "Создан агент ИИ",
-  "AgentDeleted": "Агент ИИ удален",
-  "AgentUpdated": "Обновлен AI Agent",
+  "AgentCreated": "ИИ-агент создан",
+  "AgentDeleted": "ИИ-агент удален",
+  "AgentUpdated": "ИИ-агент обновлен",
   "Before": "До",
   "CreateWebhook": "Создать вебхук",
   "DeleteHint": "Вебхук будет удален окончательно.\nВы не сможете отменить это действие.",

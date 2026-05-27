@@ -10,7 +10,7 @@
   "NotConfigured": "Kəsilmədən hazırlanmayıb",
   "Notifications": "Bildirişlər",
   "RoomsActivityDescription": "Sizin {{rooms}} və {{aiAgents}} daxilindəki yeni paylaşılmış fayllar/qovluqlar və fəaliyyət haqqında anında e-poçt bildirişləri alın.",
-  "RoomUpdateNotify": "Paylaşılan məzmun, {{rooms}} və {{aiAgents}} fəaliyyəti",
+  "RoomUpdateNotify": "Ümumi məzmun, {{rooms}} və {{aiAgents}} bölmələrindəki fəaliyyət",
   "SettingUpNotifications": "Bildirişləri təyin etmək",
   "SuccessConnected": "{{serviceName}} bildiriş kanalı kimi uğurla qoşulub. İndidən buraya yeniliklər gələcək.",
   "SuccessDisconnected": "{{serviceName}} bildiriş kanalı kimi uğurla əlaqədən kəsilmişdir. Bildirişlər oraya göndərilməyəcəkdir.",

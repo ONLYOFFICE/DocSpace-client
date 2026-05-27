@@ -62,6 +62,7 @@ import { generateFilesItemValue } from "@/app/(docspace)/(files)/_utils";
 import useContextMenuModel from "@/app/(docspace)/_hooks/useContextMenuModel";
 import useDownloadActions from "@/app/(docspace)/_hooks/useDownloadActions";
 import { ShareContext } from "@/app/(docspace)/_contexts/ShareContext";
+import { CopyShareLinkContext } from "@/app/(docspace)/_contexts/CopyShareLinkContext";
 import { InfoContext } from "@/app/(docspace)/_contexts/InfoContext";
 import { DeleteContext } from "@/app/(docspace)/_contexts/DeleteContext";
 import { FileOperationsContext } from "@/app/(docspace)/_contexts/FileOperationsContext";
@@ -105,6 +106,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const { openFile, lockFile } = useFilesActions({ t });
   const { openFolder } = useFolderActions({ t });
   const onShareClick = React.useContext(ShareContext);
+  const onCopyShareLink = React.useContext(CopyShareLinkContext);
   const onInfoClick = React.useContext(InfoContext);
   const deleteCtx = React.useContext(DeleteContext);
   const fileOpsCtx = React.useContext(FileOperationsContext);
@@ -228,9 +230,9 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
     />
   );
 
-  const handleShareClick = React.useCallback(() => {
-    onShareClick?.(observableItem);
-  }, [onShareClick, observableItem]);
+  const handleCopyShareLink = React.useCallback(() => {
+    onCopyShareLink?.(observableItem);
+  }, [onCopyShareLink, observableItem]);
 
   const quickButtonsComponent = (
     <QuickButtons
@@ -240,8 +242,8 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
       onClickDownload={() => downloadAction(observableItem)}
       onClickFavorite={onClickFavorite}
       onClickLock={onClickLock}
-      onClickShare={onShareClick ? handleShareClick : undefined}
-      openShareTab={onShareClick ? handleShareClick : undefined}
+      onClickShare={onCopyShareLink ? handleCopyShareLink : undefined}
+      openShareTab={onCopyShareLink ? handleCopyShareLink : undefined}
     />
   );
 

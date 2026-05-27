@@ -107,6 +107,8 @@ import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/fi
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
+  getNewViewUrlByFolderType,
+  isNewProductView,
 } from "SRC_DIR/helpers/utils";
 import { muteRoomNotification } from "@docspace/shared/api/settings";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
@@ -992,9 +994,7 @@ class FilesActionStore {
       promises.push(this.downloadFiles(fileIds, folderIds, label));
     }
 
-    return Promise.all(promises).finally(() =>
-      this.setGroupMenuBlocked(false),
-    );
+    return Promise.all(promises).finally(() => this.setGroupMenuBlocked(false));
   };
 
   resolveRoomIdForFile = (file) => {
@@ -2249,6 +2249,24 @@ class FilesActionStore {
       isFileHasExst: !item.fileExst,
       rootFolderType,
     };
+
+    if (isNewProductView()) {
+      const newViewBase = getNewViewUrlByFolderType(
+        rootFolderTypeItem ?? rootFolderType,
+      );
+
+      const newViewParams = new URLSearchParams(
+        newViewBase.includes("?") ? newViewBase.split("?")[1] : "",
+      );
+      if (title) newViewParams.set("search", title);
+      if (parentId) newViewParams.set("folder", String(parentId));
+
+      const newViewUrl = `${newViewBase.split("?")[0]}?${newViewParams.toString()}`;
+
+      if (!isDesktop()) hideInfoPanel();
+      window.DocSpace.navigate(newViewUrl, { state });
+      return;
+    }
 
     const url = getCategoryUrl(
       getCategoryTypeByFolderType(rootFolderTypeItem ?? rootFolderType, id),

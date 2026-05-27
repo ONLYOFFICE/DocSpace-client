@@ -34,23 +34,37 @@ type AiFilesProps = {
   myFolderId?: number | null;
 };
 
-const getSrc = (section: string, myFolderId?: number | null): string => {
+const getSrc = (
+  section: string,
+  myFolderId?: number | null,
+  search?: string | null,
+  folder?: string | null,
+): string => {
   const parentIdParam =
-    myFolderId != null ? `?parentId=${myFolderId}` : "";
+    myFolderId != null ? `parentId=${myFolderId}` : "";
+
+  const buildQuery = (base: Record<string, string | null | undefined>) => {
+    const params = new URLSearchParams();
+    for (const [k, v] of Object.entries(base)) {
+      if (v != null && v !== "") params.set(k, v);
+    }
+    const str = params.toString();
+    return str ? `?${str}` : "";
+  };
 
   switch (section) {
     case "recent":
-      return `/sdk/personal-files/recent${parentIdParam}`;
+      return `/sdk/personal-files/recent${buildQuery({ search, id: folder, parentId: myFolderId != null ? String(myFolderId) : null })}`;
     case "favorites":
-      return `/sdk/personal-files/favorites${parentIdParam}`;
+      return `/sdk/personal-files/favorites${buildQuery({ search, id: folder, parentId: myFolderId != null ? String(myFolderId) : null })}`;
     case "shared-with-me":
-      return "/sdk/personal-files/shared-with-me";
+      return `/sdk/personal-files/shared-with-me${buildQuery({ search, id: folder })}`;
     case "trash":
-      return "/sdk/personal-files/trash";
+      return `/sdk/personal-files/trash${buildQuery({ search, id: folder })}`;
     case "settings":
       return "/sdk/personal-files/settings";
     default:
-      return "/sdk/personal-files";
+      return `/sdk/personal-files${buildQuery({ search, id: folder, ...(parentIdParam ? { parentId: String(myFolderId) } : {}) })}`;
   }
 };
 
@@ -58,9 +72,11 @@ const AiFiles = ({ myFolderId }: AiFilesProps) => {
   const { t } = useTranslation(["Common"]);
   const [searchParams] = useSearchParams();
   const section = searchParams.get("section") ?? "";
+  const search = searchParams.get("search");
+  const folder = searchParams.get("folder");
   return (
     <SdkIframe
-      src={getSrc(section, myFolderId)}
+      src={getSrc(section, myFolderId, search, folder)}
       title={t("Common:DashboardAIFilesTitle")}
     />
   );

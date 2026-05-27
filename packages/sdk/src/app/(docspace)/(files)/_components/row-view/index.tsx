@@ -53,6 +53,7 @@ const RowView = ({
   timezone,
   displayFileExtension,
   fetchMoreFiles,
+  isPrivate,
 }: RowViewProps) => {
   const isSSR = useIsServer();
 
@@ -76,6 +77,7 @@ const RowView = ({
           timezone={timezone}
           displayFileExtension={displayFileExtension}
           isSSR={isSSR}
+          isPrivate={isPrivate}
         />
       ))}
     </FilesRowContainer>

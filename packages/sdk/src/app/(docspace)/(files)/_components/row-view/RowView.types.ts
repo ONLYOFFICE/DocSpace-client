@@ -49,6 +49,7 @@ export type RowContentProps = {
 export type RowProps = RowContentProps & {
   index: number;
   isSSR: boolean;
+  isPrivate?: boolean;
 };
 
 export type RowViewProps = Pick<
@@ -60,4 +61,5 @@ export type RowViewProps = Pick<
   items: (TFolderItem | TFileItem)[];
 
   fetchMoreFiles: (params: IndexRange) => Promise<void>;
+  isPrivate?: boolean;
 };

@@ -145,6 +145,7 @@ async function verifyUserPublicKey(
     });
   } catch (e) {
     if (typeof console !== "undefined") {
+      // biome-ignore lint/suspicious/noConsole: surface resolver bugs in dev; failing closed (refused).
       console.error("Key mismatch resolver threw:", e);
     }
     return { kind: "key-mismatch-refused" };
@@ -275,6 +276,38 @@ export async function addMembersToEncryptedRoom(
         ...newKeys,
       ];
       await setFileEncryptionKeys(file.id, allKeys);
+
+      // BL-4 defense-in-depth — the server-side authz on PUT /file/{id}/access
+      // currently lets any room-Viewer overwrite arbitrary userId entries.
+      // Re-fetch ACL state and emit a structured warning if the returned set
+      // doesn't include every entry we just wrote. Best-effort: never throws,
+      // never affects the operation result.
+      try {
+        const verifiedInfo = await getFileEncryptionAccess(file.id);
+        const verifiedSet = new Set(
+          (verifiedInfo?.fileKeys ?? []).map(
+            (k) => `${String(k.userId)}:${k.publicKeyId || ""}`,
+          ),
+        );
+        const expectedNew = newKeys.map(
+          (k) => `${String(k.userId)}:${k.publicKeyId || ""}`,
+        );
+        const missing = expectedNew.filter((p) => !verifiedSet.has(p));
+        if (missing.length > 0 && typeof console !== "undefined") {
+          // biome-ignore lint/suspicious/noConsole: BL-4 telemetry hook; production build strips console.
+          console.warn(
+            "[ENCRYPTION] encryption-acl-drift after addMembersToEncryptedRoom",
+            {
+              fileId: file.id,
+              missing,
+              telemetryEvent: "encryption-acl-drift",
+            },
+          );
+        }
+      } catch {
+        // Verification GET failed — non-fatal. The main operation succeeded.
+      }
+
       fileResults.push({ fileId: file.id, success: true });
     } catch (error) {
       fileResults.push({
@@ -470,6 +503,7 @@ export async function backfillEncryptedFilesForRoomMembers(
           message?: string;
         };
         const status = err?.response?.status;
+        // biome-ignore lint/suspicious/noConsole: structured backfill failure log for incident triage.
         console.error(
           "[ENCRYPTION] setFileEncryptionKeys failed (backfill)",
           {

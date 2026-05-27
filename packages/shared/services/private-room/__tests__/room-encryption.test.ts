@@ -458,6 +458,10 @@ describe("addMembersToEncryptedRoom", () => {
     });
     getFileEncryptionAccessMock
       .mockResolvedValueOnce({ fileKeys: aliceOwnWrap, userKeys: [] })
+      // BL-4 follow-up verification GET for file 1 — returns same ACL state.
+      .mockResolvedValueOnce({ fileKeys: aliceOwnWrap, userKeys: [] })
+      .mockResolvedValueOnce({ fileKeys: secondWrap, userKeys: [] })
+      // BL-4 follow-up verification GET for file 2.
       .mockResolvedValueOnce({ fileKeys: secondWrap, userKeys: [] });
     getRoomEncryptionKeysMock.mockResolvedValue([
       { userId: ALICE, publicKey: pubB64(alice) },

@@ -47,6 +47,8 @@ import {
 } from "@docspace/shared/components/files-row";
 import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
+import { useDecryptedFilename } from "@/app/(docspace)/_hooks/useDecryptedFilename";
 import Badges from "@docspace/shared/components/badges";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 
@@ -81,6 +83,7 @@ const Row = observer(
     timezone,
     displayFileExtension,
     isSSR,
+    isPrivate,
   }: RowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
@@ -94,6 +97,12 @@ const Row = observer(
     // Use the observable item from MobX store so isFavorite changes are reactive
     const storeItem = filesListStore.items.find((i) => i.id === item.id);
     const observableItem = storeItem ?? item;
+
+    const decryptedTitle = useDecryptedFilename(
+      item.id,
+      item.title,
+      "encrypted" in item ? item.encrypted : false,
+    );
 
     const { t } = useTranslation(["Common"]);
     const { isBase } = useTheme();
@@ -121,12 +130,22 @@ const Row = observer(
     });
 
     const element = (
-      <RoomIcon
-        logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
-        color={"isRoom" in item && item.isRoom ? item.roomIconColor : undefined}
-        title={item.title}
-        showDefault={"isRoom" in item && item.isRoom ? !item.hasRoomImage : false}
-      />
+      <EncryptedItemIconWrapper
+        encrypted={!!isPrivate}
+        hasEncryptionKeys
+        isRoom={false}
+      >
+        <RoomIcon
+          logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
+          color={
+            "isRoom" in item && item.isRoom ? item.roomIconColor : undefined
+          }
+          title={decryptedTitle}
+          showDefault={
+            "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
+          }
+        />
+      </EncryptedItemIconWrapper>
     );
 
     const onClickFavorite = () => {
@@ -217,7 +236,7 @@ const Row = observer(
         className={classNames(styles.rowWrapper, "row-wrapper")}
       >
         <DragAndDrop
-          data-title={item.title}
+          data-title={decryptedTitle}
           className="files-item"
           value={value}
         >

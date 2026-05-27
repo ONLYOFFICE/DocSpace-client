@@ -33,6 +33,7 @@ import { useTranslation } from "react-i18next";
 
 import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
@@ -81,6 +82,7 @@ type RoomsTableViewRowProps = {
   onInfoRoom?: (item: TFolderItem | TFileItem) => void;
   onInviteRoom?: (item: TFolderItem | TFileItem) => void;
   isArchive?: boolean;
+  hasEncryptionKeys?: boolean;
 };
 
 const RoomsTableViewRow = observer(
@@ -102,6 +104,7 @@ const RoomsTableViewRow = observer(
     onInfoRoom,
     onInviteRoom,
     isArchive,
+    hasEncryptionKeys,
   }: RoomsTableViewRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
@@ -294,18 +297,26 @@ const RoomsTableViewRow = observer(
               {inProgress ? (
                 <Loader color="" size="20px" type={LoaderTypes.track} />
               ) : (
-                <RoomIcon
-                  logo={getRoomIconLogo(item)}
-                  color={
-                    "isRoom" in item && item.isRoom
-                      ? item.roomIconColor
-                      : undefined
-                  }
-                  title={item.title}
-                  showDefault={
-                    "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
-                  }
-                />
+                <EncryptedItemIconWrapper
+                  encrypted={(item as { private?: boolean }).private === true}
+                  hasEncryptionKeys={!!hasEncryptionKeys}
+                  isRoom
+                >
+                  <RoomIcon
+                    logo={getRoomIconLogo(item)}
+                    color={
+                      "isRoom" in item && item.isRoom
+                        ? item.roomIconColor
+                        : undefined
+                    }
+                    title={item.title}
+                    showDefault={
+                      "isRoom" in item && item.isRoom
+                        ? !item.hasRoomImage
+                        : false
+                    }
+                  />
+                </EncryptedItemIconWrapper>
               )}
             </div>
             <Checkbox

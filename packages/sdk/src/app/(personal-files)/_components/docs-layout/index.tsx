@@ -57,6 +57,7 @@ import type {
 import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
+import EmptyPrivateRoomView from "@docspace/shared/components/empty-views/empty-private-room";
 
 import { SectionWrapper } from "@/app/(docspace)/_components/section";
 import Header from "@/app/(docspace)/_components/header";
@@ -111,6 +112,7 @@ import ShareSelector from "../share-selector";
 import useDocsHotkeys from "../../_hooks/useDocsHotkeys";
 
 import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
+import { PRIVATE_FILE_CONTEXT_OPTIONS } from "../../_constants/private-context-options";
 import {
   InfoPanelBody as DocsInfoPanelBody,
   InfoPanelHeader as DocsInfoPanelHeader,
@@ -128,18 +130,22 @@ type DocsLayoutProps = {
   filesSettings: TFilesSettings;
   portalSettings: TSettings;
   filesFilter: string;
-  /**
-   * Temporary flag: hide "Add to favorites" in file/folder context menus.
-   * Used for rooms internals and trash.
-   */
+  /** Hide "Add to favorites" in context menus (rooms internals, trash). */
   withoutFavorite?: boolean;
-  /**
-   * Base path used to navigate to the editor route. Defaults to
-   * "/personal-files/editor". When provided (e.g., "/editor" for rooms), the
-   * current pathname is appended as a `returnTo` query parameter so the editor
-   * page can navigate back to the originating section.
-   */
+  /** Editor route base path. Defaults to "/personal-files/editor". */
   editorBasePath?: string;
+  infoPanelHeader?: React.ReactNode;
+  infoPanelBody?: React.ReactNode;
+  /**
+   * Enables private-room semantics: slim main-button (folder + upload),
+   * no quick-actions, filtered context menu, encrypted empty-view, drag-drop
+   * unblocked for rooms. Caller still owns `uploadFilesToFolder`.
+   */
+  isPrivate?: boolean;
+  /** Override the upload pipeline (private rooms swap in encrypted upload). */
+  uploadFilesToFolder?: (files: FileList | File[]) => Promise<void>;
+  /** Root-room id for HPKE-Auth unwrap of encrypted previews. */
+  currentRoomId?: number | string | null;
 };
 
 const getSubmitLabel = (mode: SelectorMode, t: (key: string) => string) => {
@@ -160,6 +166,11 @@ const DocsLayout = observer(
     filesFilter,
     withoutFavorite,
     editorBasePath,
+    infoPanelHeader,
+    infoPanelBody,
+    isPrivate,
+    uploadFilesToFolder: uploadFilesToFolderOverride,
+    currentRoomId,
   }: DocsLayoutProps) => {
     const { t } = useTranslation(["Common"]);
     const { isEmptyList } = useSettingsStore();
@@ -180,7 +191,9 @@ const DocsLayout = observer(
     const isActionButtonEnabled =
       (isMyDocuments || isInRooms) && !sdkConfig?.disableActionButton;
 
-    const docsActions = useDocsActions();
+    const docsActions = useDocsActions({
+      uploadFilesToFolderOverride,
+    });
     const {
       uploadFilesToFolder,
       openCreateDialog,
@@ -193,11 +206,41 @@ const DocsLayout = observer(
       onUploadFolder,
     } = docsActions;
 
-    const { desktopModel, quickActionItems } = useDocsMenuModels({
+    const {
+      desktopModel: defaultDesktopModel,
+      quickActionItems: defaultQuickActionItems,
+    } = useDocsMenuModels({
       openCreateDialog,
       onUploadFiles,
       onUploadFolder,
     });
+
+    const desktopModel = React.useMemo(() => {
+      if (!isPrivate) return defaultDesktopModel;
+      const allowed = new Set(["new-folder", "separator-1", "upload-files"]);
+      return defaultDesktopModel.filter((item) => allowed.has(String(item.key)));
+    }, [isPrivate, defaultDesktopModel]);
+    const quickActionItems = isPrivate ? [] : defaultQuickActionItems;
+
+    const allowedContextOptions = isPrivate
+      ? PRIVATE_FILE_CONTEXT_OPTIONS
+      : undefined;
+
+    const handleCreateFolder = React.useCallback(
+      () => openCreateDialog("folder"),
+      [openCreateDialog],
+    );
+
+    const emptyView = React.useMemo(() => {
+      if (!isPrivate) return undefined;
+      return (
+        <EmptyPrivateRoomView
+          canCreate={isActionButtonEnabled}
+          onCreateFolder={handleCreateFolder}
+          onUploadFiles={onUploadFiles}
+        />
+      );
+    }, [isPrivate, isActionButtonEnabled, handleCreateFolder, onUploadFiles]);
 
     useDocsFrameBridge({ isReady: true, uploadFilesToFolder });
 
@@ -374,7 +417,7 @@ const DocsLayout = observer(
                       <div className={styles.root} style={frameHeaderVars}>
                         <DropZone
                           onFilesDropped={uploadFilesToFolder}
-                          disabled={!isMyDocuments}
+                          disabled={!isMyDocuments && !isPrivate}
                         >
                           <RootScrollbar>
                             <SectionWrapper
@@ -430,10 +473,17 @@ const DocsLayout = observer(
                                   current={current}
                                   currentUserId={docsUserStore.user?.id}
                                   infoPanelVisible={infoPanelStore.isVisible}
+                                  allowedContextOptions={allowedContextOptions}
+                                  emptyView={emptyView}
+                                  isPrivate={isPrivate}
                                 />
                               }
-                              infoPanelHeaderContent={<DocsInfoPanelHeader />}
-                              infoPanelBodyContent={<DocsInfoPanelBody />}
+                              infoPanelHeaderContent={
+                                infoPanelHeader ?? <DocsInfoPanelHeader />
+                              }
+                              infoPanelBodyContent={
+                                infoPanelBody ?? <DocsInfoPanelBody />
+                              }
                               isInfoPanelVisible={infoPanelStore.isVisible}
                               setIsInfoPanelVisible={(v: boolean) => {
                                 if (v) {
@@ -448,7 +498,10 @@ const DocsLayout = observer(
                               filesFilter={filesFilter}
                             />
                             <SelectionArea />
-                            <FilesMediaViewer filesSettings={filesSettings} />
+                            <FilesMediaViewer
+                              filesSettings={filesSettings}
+                              currentRoomId={currentRoomId}
+                            />
                             <DeviceTypeObserver />
                             <Dialogs />
                           </RootScrollbar>

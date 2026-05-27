@@ -45,6 +45,7 @@ import { updateEncryptionKeys } from "@docspace/shared/api/privacy";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
 import { KeyRotationDialog } from "../modals/KeyRotationDialog";
+import { getEncryptionErrorMessage } from "./getEncryptionErrorMessage";
 
 type Deps = {
   userId: string | undefined;
@@ -100,8 +101,10 @@ export function useRotatePassphraseFlow({
         toastr.success(t("Common:PassphraseUpdated"));
         reset();
       } catch (e) {
-        console.error("Passphrase rotation failed:", e);
-        setError(t("Common:InvalidPassphrase"));
+        // Network / API errors and the actual "invalid passphrase" case both
+        // landed here previously, so a network glitch looked like a wrong
+        // passphrase. getEncryptionErrorMessage classifies it correctly.
+        setError(getEncryptionErrorMessage(t, e));
       } finally {
         setIsPending(false);
       }

@@ -54,6 +54,7 @@ import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.re
 import CatalogArchiveReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.archive.react.svg?url";
 import CatalogSettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import CatalogRestoreReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-restore.svg?url";
+import CatalogPrivateReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.private.react.svg?url";
 import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url";
@@ -68,6 +69,7 @@ const AI_FORMS_ID = "ai-forms";
 const AI_ROOMS_ID = "ai-rooms";
 const AI_AGENTS_ID = "ai-agents";
 const AI_ARBITER_ID = "ai-arbiter";
+const E2E_ROOMS_ID = "e2e-rooms";
 
 const PATH_TO_PARENT_ID: Record<string, string> = {
   "/docs-cloud": DOCS_CLOUD_ID,
@@ -75,6 +77,11 @@ const PATH_TO_PARENT_ID: Record<string, string> = {
   "/ai-forms": AI_FORMS_ID,
   "/ai-arbiter": AI_ARBITER_ID,
   "/ai-rooms": AI_ROOMS_ID,
+  "/e2e-rooms": E2E_ROOMS_ID,
+};
+
+const E2E_ROOMS_SECTION_TO_ID: Record<string, string> = {
+  archive: "e2e-rooms-archive",
 };
 
 const AI_FILES_SECTION_TO_ID: Record<string, string> = {
@@ -118,6 +125,7 @@ type NewArticleProps = {
   aiRoomsEnabled: boolean;
   aiAgentsEnabled: boolean;
   aiArbiterEnabled: boolean;
+  e2eRoomsEnabled: boolean;
   activate: (id: string) => Promise<boolean>;
   enable: (id: string, enabled: boolean) => Promise<unknown>;
   ensureAppsLoaded: () => void;
@@ -135,6 +143,7 @@ const NewArticle = ({
   aiRoomsEnabled,
   aiAgentsEnabled,
   aiArbiterEnabled,
+  e2eRoomsEnabled,
   activate,
   enable,
   ensureAppsLoaded,
@@ -192,6 +201,9 @@ const NewArticle = ({
     }
     if (location.pathname.startsWith("/ai-rooms")) {
       return AI_ROOMS_SECTION_TO_ID[section] ?? AI_ROOMS_ID;
+    }
+    if (location.pathname.startsWith("/e2e-rooms")) {
+      return E2E_ROOMS_SECTION_TO_ID[section] ?? E2E_ROOMS_ID;
     }
     for (const [path, id] of Object.entries(PATH_TO_PARENT_ID)) {
       if (location.pathname.startsWith(path)) return id;
@@ -471,12 +483,44 @@ const NewArticle = ({
       onClick: handleAiArbiterClick,
     };
 
+    const handleE2eRoomsClick = async () => {
+      if (e2eRoomsEnabled) {
+        navigate("/e2e-rooms");
+        return;
+      }
+      try {
+        await enable(E2E_ROOMS_ID, true);
+        navigate("/e2e-rooms");
+      } catch (err) {
+        console.error("Failed to enable e2e-rooms", err);
+        toastr.error(t("Common:SomethingWentWrong"));
+      }
+    };
+
+    const e2eRoomsItem: NavMenuItem = {
+      id: E2E_ROOMS_ID,
+      label: t("Common:DashboardE2eRoomsTitle"),
+      icon: CatalogPrivateReactSvgUrl,
+      onClick: handleE2eRoomsClick,
+      children: e2eRoomsEnabled
+        ? [
+            {
+              id: "e2e-rooms-archive",
+              label: t("Common:Archive"),
+              icon: CatalogArchiveReactSvgUrl,
+              onClick: () => navigate("/e2e-rooms?section=archive"),
+            },
+          ]
+        : undefined,
+    };
+
     const all: { item: NavMenuItem; enabled: boolean }[] = [
       { item: aiFilesItem, enabled: aiFilesEnabled },
       { item: aiRoomsItem, enabled: aiRoomsEnabled },
       { item: aiFormsItem, enabled: aiFormsEnabled },
       { item: aiAgentsItem, enabled: aiAgentsEnabled },
       { item: aiArbiterItem, enabled: aiArbiterEnabled },
+      { item: e2eRoomsItem, enabled: e2eRoomsEnabled },
       { item: docsCloudItem, enabled: docsCloudEnabled },
     ];
 
@@ -506,14 +550,17 @@ const NewArticle = ({
     navigate,
     isAdminOrOwner,
     canCreateForms,
+    canManageAgents,
     docsCloudEnabled,
     aiFilesEnabled,
     aiFormsEnabled,
     aiRoomsEnabled,
     aiAgentsEnabled,
     aiArbiterEnabled,
+    e2eRoomsEnabled,
     handleDocsCloudClick,
     activate,
+    enable,
     setArbiterDialogVisible,
   ]);
 
@@ -577,6 +624,7 @@ const NewArticleConnected = inject<TStore>(
     aiRoomsEnabled: appsStore.isEnabled("ai-rooms"),
     aiAgentsEnabled: appsStore.isEnabled("ai-agents"),
     aiArbiterEnabled: appsStore.isEnabled("ai-arbiter"),
+    e2eRoomsEnabled: appsStore.isEnabled("e2e-rooms"),
     activate: appsStore.activate,
     enable: appsStore.enable,
     ensureAppsLoaded: appsStore.ensureLoaded,

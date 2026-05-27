@@ -71,6 +71,8 @@ const Header = ({
   isInfoPanelVisible = false,
   onToggleInfoPanel,
   headerOffset = 0,
+  titleIcon = "",
+  titleIconTooltip = "",
 }: HeaderProps) => {
   const searchParams = useSearchParams();
 
@@ -236,8 +238,8 @@ const Header = ({
             showRootFolderTitle={false}
             withMenu={!isRoomsFolder}
             currentDeviceType={currentDeviceType}
-            titleIcon=""
-            titleIconTooltip=""
+            titleIcon={titleIcon}
+            titleIconTooltip={titleIconTooltip}
             showNavigationButton={false}
             isCurrentFolderInfo={false}
             showTitle={showTitle}

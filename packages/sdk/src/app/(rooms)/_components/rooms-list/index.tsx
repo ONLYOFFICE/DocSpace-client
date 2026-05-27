@@ -87,6 +87,14 @@ type RoomsListProps = {
   user?: TUser;
   isArchive?: boolean;
   refreshRef?: React.MutableRefObject<(() => void) | null>;
+  emptyView?: React.ReactNode;
+  /** Sticky breadcrumb title that survives re-fetches. */
+  titleOverride?: string;
+  /** Picks shield vs padlock icon on private-room cards. */
+  hasEncryptionKeys?: boolean;
+  /** Private-only override; falls through to public dialogs otherwise. */
+  onPrivateInviteRoom?: (room: TFolder) => void;
+  onPrivateChangeOwner?: (room: TFolder) => void;
 };
 
 const RoomsList = ({
@@ -100,6 +108,11 @@ const RoomsList = ({
   user,
   isArchive,
   refreshRef,
+  emptyView,
+  titleOverride,
+  hasEncryptionKeys,
+  onPrivateInviteRoom,
+  onPrivateChangeOwner,
 }: RoomsListProps) => {
   const timezone = portalSettings.timezone;
   const searchParams = useSearchParams();
@@ -188,9 +201,17 @@ const RoomsList = ({
     (TFolderItem | TFileItem) | null
   >(null);
 
-  const onInviteRoom = React.useCallback((item: TFolderItem | TFileItem) => {
-    setInvitingRoom(item);
-  }, []);
+  const onInviteRoom = React.useCallback(
+    (item: TFolderItem | TFileItem) => {
+      const isPrivate = (item as { private?: boolean }).private === true;
+      if (isPrivate && onPrivateInviteRoom) {
+        onPrivateInviteRoom(item as TFolder);
+        return;
+      }
+      setInvitingRoom(item);
+    },
+    [onPrivateInviteRoom],
+  );
 
   const [restoringItems, setRestoringItems] = React.useState<
     (TFolderItem | TFileItem)[] | null
@@ -200,9 +221,17 @@ const RoomsList = ({
     setEditingRoom(item);
   }, []);
 
-  const onChangeOwner = React.useCallback((item: TFolderItem | TFileItem) => {
-    setChangingOwnerRoom(item);
-  }, []);
+  const onChangeOwner = React.useCallback(
+    (item: TFolderItem | TFileItem) => {
+      const isPrivate = (item as { private?: boolean }).private === true;
+      if (isPrivate && onPrivateChangeOwner) {
+        onPrivateChangeOwner(item as TFolder);
+        return;
+      }
+      setChangingOwnerRoom(item);
+    },
+    [onPrivateChangeOwner],
+  );
 
   const onTagClick = React.useCallback(
     (tag: string) => {
@@ -460,7 +489,11 @@ const RoomsList = ({
         current: newCurrent,
       } = res;
 
-      if (newCurrent?.title) {
+      if (titleOverride) {
+        // Sticky title — keep the page-level override (e.g. "Rooms E2E")
+        // even after the server response carries a generic title.
+        navigationStore.setCurrentTitle(titleOverride);
+      } else if (newCurrent?.title) {
         navigationStore.setCurrentTitle(newCurrent.title);
       }
 
@@ -555,9 +588,10 @@ const RoomsList = ({
   let content: React.ReactNode;
 
   if (visibleItems.length === 0) {
-    content = (
-      <EmptyView isFiltered={!!filter.filterValue} isArchive={isArchive} />
-    );
+    content =
+      emptyView ?? (
+        <EmptyView isFiltered={!!filter.filterValue} isArchive={isArchive} />
+      );
   } else if (filesViewAs === "tile") {
     content = (
       <RoomsTileView
@@ -579,6 +613,7 @@ const RoomsList = ({
         onInfoRoom={onInfoRoom}
         onInviteRoom={onInviteRoom}
         isArchive={isArchive}
+        hasEncryptionKeys={hasEncryptionKeys}
       />
     );
   } else if (filesViewAs === "table") {
@@ -614,6 +649,7 @@ const RoomsList = ({
         onInfoRoom={onInfoRoom}
         onInviteRoom={onInviteRoom}
         isArchive={isArchive}
+        hasEncryptionKeys={hasEncryptionKeys}
       />
     );
   } else {
@@ -638,6 +674,7 @@ const RoomsList = ({
         onInfoRoom={onInfoRoom}
         onInviteRoom={onInviteRoom}
         isArchive={isArchive}
+        hasEncryptionKeys={hasEncryptionKeys}
       />
     );
   }

@@ -43,6 +43,8 @@ import { FileTile } from "@docspace/ui-kit/components/tiles/file-tile";
 import { FolderTile } from "@docspace/ui-kit/components/tiles/folder-tile";
 
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
+import { useDecryptedFilename } from "@/app/(docspace)/_hooks/useDecryptedFilename";
 import Badges from "@docspace/shared/components/badges";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 
@@ -83,12 +85,18 @@ const getTemporaryIcon = (item: TFileItem | TFolderItem, getIcon: TGetIcon) => {
   return getIcon(temporaryExtension, 96, item.contentLength);
 };
 
-const Tile = ({ item, getIcon, index }: TileProps) => {
+const Tile = ({ item, getIcon, index, isPrivate }: TileProps) => {
   const tileRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation("Common");
   const { isBase } = useTheme();
   const { filesSettings } = useFilesSettingsStore();
   const filesListStore = useFilesListStore();
+
+  const decryptedTitle = useDecryptedFilename(
+    item.id,
+    item.title,
+    "encrypted" in item ? item.encrypted : false,
+  );
 
   const {
     isCheckedItem,
@@ -170,12 +178,22 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const contextMenuModel = getContextMenuModel(true);
 
   const element = (
-    <RoomIcon
-      logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
-      color={"isRoom" in item && item.isRoom ? item.roomIconColor : undefined}
-      title={item.title}
-      showDefault={"isRoom" in item && item.isRoom ? !item.hasRoomImage : false}
-    />
+    <EncryptedItemIconWrapper
+      encrypted={!!isPrivate}
+      hasEncryptionKeys
+      isRoom={false}
+    >
+      <RoomIcon
+        logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
+        color={
+          "isRoom" in item && item.isRoom ? item.roomIconColor : undefined
+        }
+        title={decryptedTitle}
+        showDefault={
+          "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
+        }
+      />
+    </EncryptedItemIconWrapper>
   );
 
   const tileContent = (

@@ -1189,10 +1189,10 @@ importers:
         specifier: 1.11.0
         version: 1.11.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@hpke/core':
-        specifier: ^1.9.0
+        specifier: 1.9.0
         version: 1.9.0
       '@hpke/dhkem-x25519':
-        specifier: ^1.8.0
+        specifier: 1.8.0
         version: 1.8.0
       '@noble/hashes':
         specifier: ^2.0.1
@@ -1237,7 +1237,7 @@ importers:
         specifier: 11.2.0
         version: 11.2.0
       hash-wasm:
-        specifier: ^4.12.0
+        specifier: 4.12.0
         version: 4.12.0
       he:
         specifier: 1.2.0

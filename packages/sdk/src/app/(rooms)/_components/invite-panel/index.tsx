@@ -147,6 +147,16 @@ type InvitePanelProps = {
   isPrivateRoom?: boolean;
   culture?: string;
   onMembersUpdated?: () => void;
+  /**
+   * Invoked after `setRoomSecurity` resolves successfully but BEFORE the panel
+   * closes. Private rooms use this hook to run `addMembersToEncryptedRoom`,
+   * which wraps file DEKs for the new recipients. The panel surfaces thrown
+   * errors as toasts and stays open on failure.
+   */
+  onInviteSubmitted?: (
+    memberIds: string[],
+    displayNamesByMemberId: Record<string, string>,
+  ) => Promise<void>;
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -161,6 +171,7 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
   isPrivateRoom = false,
   culture,
   onMembersUpdated,
+  onInviteSubmitted,
 }) => {
   const { t } = useTranslation([
     "InviteDialog",
@@ -520,6 +531,26 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
         roomId,
         data,
       )) as SetRoomSecurityResult;
+
+      if (onInviteSubmitted) {
+        const memberIds = invitations
+          .map((inv) => inv.id)
+          .filter((id): id is string => typeof id === "string" && id.length > 0);
+        const displayNames: Record<string, string> = {};
+        for (const item of inviteItems) {
+          const id = item.id;
+          const name = item.displayName ?? item.email;
+          if (typeof id === "string" && name) displayNames[id] = name;
+        }
+        try {
+          await onInviteSubmitted(memberIds, displayNames);
+        } catch (encryptError) {
+          setIsLoading(false);
+          toastr.error(encryptError as string | Error);
+          return;
+        }
+      }
+
       setIsLoading(false);
 
       handleClose();

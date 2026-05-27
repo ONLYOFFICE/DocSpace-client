@@ -91,6 +91,7 @@ export const reportPotentialGhostState = (error: unknown): void => {
   try {
     registeredHandler();
   } catch (e) {
+    // biome-ignore lint/suspicious/noConsole: surface handler bugs in dev; production build strips console.
     console.error("[ghost-state] handler threw:", e);
   }
 };

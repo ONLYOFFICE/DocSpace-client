@@ -207,6 +207,19 @@ const Dashboard = ({
       return;
     }
 
+    if (modId === "e2e-rooms") {
+      try {
+        if (!isAppEnabled("e2e-rooms")) {
+          await enable("e2e-rooms", true);
+        }
+        navigate("/e2e-rooms");
+      } catch (err) {
+        console.error("Failed to enable e2e-rooms", err);
+        toastr.error(t("Common:SomethingWentWrong"));
+      }
+      return;
+    }
+
     toastr.info(t("Common:UnderDevelopment"));
   };
 

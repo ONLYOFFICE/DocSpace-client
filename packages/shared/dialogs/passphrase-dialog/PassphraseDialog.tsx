@@ -57,6 +57,7 @@ import {
   PASSPHRASE_MIN_LENGTH,
   checkPassphraseStrength,
   type PassphraseStrength,
+  type PassphraseSuggestion,
 } from "@docspace/shared/services/encryption/passphrase-strength";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 
@@ -98,6 +99,35 @@ function getStrengthLabelKey(
       return t("Common:StrengthStrong");
     default:
       return t("Common:StrengthWeak");
+  }
+}
+
+// Suggestion copy reuses existing `Common:PasswordLimit*` fragments (already
+// translated for all 33 locales) and `Common:PassphraseTooShort` for the
+// length hint. Only the "common-pattern" warning is genuinely new — there is
+// no equivalent in the password validator since passwords don't get a weak
+// downgrade for keyboard runs.
+function getSuggestionLabel(
+  suggestion: PassphraseSuggestion,
+  t: (key: string, options?: Record<string, unknown>) => string,
+): string {
+  switch (suggestion.kind) {
+    case "min-length":
+      return t("Common:PassphraseTooShort", { length: suggestion.value });
+    case "lowercase":
+      return t("Common:PasswordLimitLowerCase");
+    case "uppercase":
+      return t("Common:PasswordLimitUpperCase");
+    case "digits":
+      return t("Common:PasswordLimitDigits");
+    case "special":
+      return t("Common:PasswordLimitSpecialSymbols");
+    case "common-pattern":
+      return t("Common:PassphraseSuggestionCommonPattern");
+    default: {
+      const _exhaustive: never = suggestion;
+      return _exhaustive;
+    }
   }
 }
 
@@ -264,6 +294,24 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
         <div className={styles.container} onKeyDown={handleKeyDown}>
           <Text className={styles.description}>{dialogDescription}</Text>
 
+          {/* Hidden ARIA live region — assistive tech announces errors on
+              submit failure even though the visual error sits inside
+              FieldContainer below. */}
+          <div
+            role="alert"
+            aria-live="assertive"
+            style={{
+              position: "absolute",
+              width: 1,
+              height: 1,
+              overflow: "hidden",
+              clip: "rect(0 0 0 0)",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {errorMessage}
+          </div>
+
           <FieldContainer
             isVertical
             labelVisible={false}
@@ -306,7 +354,20 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
 
           {isNewPassphrase && strengthResult && (
             <div className={styles.strengthContainer}>
-              <div className={styles.strengthBar}>
+              <div
+                className={styles.strengthBar}
+                role="progressbar"
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={strengthResult.score}
+                aria-label={t("Common:PassphraseStrengthLabel", {
+                  defaultValue: "Passphrase strength",
+                })}
+                aria-valuetext={getStrengthLabelKey(
+                  strengthResult.strength,
+                  t,
+                )}
+              >
                 <div
                   className={styles.strengthFill}
                   style={{
@@ -324,9 +385,9 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
               {strengthResult.suggestions.length > 0 && (
                 <ul className={styles.suggestions}>
                   {strengthResult.suggestions.map((s) => (
-                    <li key={s}>
+                    <li key={s.kind}>
                       <Text fontSize="12px" color="var(--color-text-tertiary)">
-                        {s}
+                        {getSuggestionLabel(s, t)}
                       </Text>
                     </li>
                   ))}

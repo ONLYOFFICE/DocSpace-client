@@ -36,6 +36,7 @@
 import { useCallback } from "react";
 import { openUrl } from "@docspace/shared/utils/common";
 import { UrlActionType } from "@docspace/shared/enums";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
@@ -47,6 +48,7 @@ import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
 import type { TFileItem, TFolderItem } from "./useItemList";
 import useFileType from "./useFileType";
 import useDownloadFiles from "./useDownloadFiles";
+import { useEncryptedFileActions } from "../_contexts/EncryptedFileActionsContext";
 
 export default function useDownloadActions() {
   const { sdkConfig } = useSDKConfig();
@@ -58,6 +60,7 @@ export default function useDownloadActions() {
   const { isDocument, isMasterForm, isPresentation, isSpreadsheet, isDiagram } =
     useFileType();
   const { downloadFiles } = useDownloadFiles();
+  const encryptedActions = useEncryptedFileActions();
 
   const downloadFromSelection = useCallback(() => {
     const fileIds: number[] = [];
@@ -71,6 +74,25 @@ export default function useDownloadActions() {
 
     if (!data) return;
 
+    if (encryptedActions) {
+      const encryptedFiles = (data.filter(
+        (item) => !item.isFolder && (item as TFileItem).encrypted,
+      ) as TFileItem[]);
+      if (encryptedFiles.length === data.length) {
+        encryptedActions.downloadZip(encryptedFiles).catch((error) => {
+          const msg = error instanceof Error ? error.message : String(error);
+          toastr.error(msg);
+        });
+        return;
+      }
+      if (encryptedFiles.length > 0) {
+        toastr.error(
+          "Cannot download a mix of encrypted and plaintext files at once.",
+        );
+        return;
+      }
+    }
+
     data.forEach((item) => {
       if (item.isFolder) {
         folderIds.push(item.id);
@@ -80,7 +102,7 @@ export default function useDownloadActions() {
     });
 
     downloadFiles(fileIds, folderIds);
-  }, [bufferSelection, selection, downloadFiles]);
+  }, [bufferSelection, selection, downloadFiles, encryptedActions]);
 
   const downloadAction = useCallback(
     (item?: TFileItem | TFolderItem) => {
@@ -89,7 +111,22 @@ export default function useDownloadActions() {
       }
 
       if (item.isFolder) {
+        if (encryptedActions) {
+          toastr.error(
+            "Folder download is not supported inside private rooms.",
+          );
+          return;
+        }
         return downloadFiles([], [item.id]);
+      }
+
+      if (encryptedActions && (item as TFileItem).encrypted) {
+        return encryptedActions
+          .downloadFile(item as TFileItem)
+          .catch((error) => {
+            const msg = error instanceof Error ? error.message : String(error);
+            toastr.error(msg);
+          });
       }
 
       return openUrl({
@@ -99,7 +136,7 @@ export default function useDownloadActions() {
         frameConfig: sdkConfig,
       });
     },
-    [downloadFromSelection, downloadFiles, sdkConfig],
+    [downloadFromSelection, downloadFiles, sdkConfig, encryptedActions],
   );
 
   const downloadAsAction = useCallback(() => {

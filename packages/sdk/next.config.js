@@ -101,6 +101,14 @@ const nextConfig = {
         "@docspace/shared": path.resolve(__dirname, "../shared"),
         "@docspace/ui-kit": path.resolve(__dirname, "../../libs/ui-kit"),
       },
+      fallback: {
+        ...config.resolve?.fallback,
+        // hash-wasm dynamically tries to fall back to node:fs / node:crypto on
+        // server bundles. We're encryption-client-only — stub them out so the
+        // bundle doesn't pull in Node polyfills.
+        fs: false,
+        crypto: false,
+      },
     };
 
     config.devtool = isProduction ? "source-map" : false; // TODO: replace to "eval-cheap-module-source-map" if you want to debug in a browser;
@@ -131,6 +139,16 @@ const nextConfig = {
             firebase: {
               test: /[\\/](?:@firebase|firebase[\\/]compat)[\\/]/,
               name: "firebase-vendor",
+              chunks: "async",
+              priority: 30,
+              reuseExistingChunk: true,
+              enforce: true,
+            },
+            // Argon2 (hash-wasm) + HPKE only loaded inside (private). Async-only
+            // so the rooms-list view does not pay the ~200 KB cost on first paint.
+            encryption: {
+              test: /[\\/](?:hash-wasm|@hpke[\\/])[\\/]/,
+              name: "encryption-vendor",
               chunks: "async",
               priority: 30,
               reuseExistingChunk: true,

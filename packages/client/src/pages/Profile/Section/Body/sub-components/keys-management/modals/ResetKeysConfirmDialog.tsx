@@ -89,14 +89,18 @@ export const ResetKeysConfirmDialog: React.FC<ResetKeysConfirmDialogProps> = ({
             gap: "12px",
           }}
         >
-          <Text fontSize="13px" noSelect>
-            {t("Common:ResetEncryptionKeysWarning")}
-          </Text>
-          <Text fontSize="13px" fontWeight="600">
-            {t("Common:ResetEncryptionKeysConfirmation", {
-              token: expectedToken,
-            })}
-          </Text>
+          <div id="reset-keys-warning" role="alert">
+            <Text fontSize="13px" noSelect>
+              {t("Common:ResetEncryptionKeysWarning")}
+            </Text>
+          </div>
+          <div id="reset-keys-confirmation">
+            <Text fontSize="13px" fontWeight="600">
+              {t("Common:ResetEncryptionKeysConfirmation", {
+                token: expectedToken,
+              })}
+            </Text>
+          </div>
           <TextInput
             type={InputType.text}
             size={InputSize.base}
@@ -106,6 +110,8 @@ export const ResetKeysConfirmDialog: React.FC<ResetKeysConfirmDialogProps> = ({
             autoFocus
             scale
             isDisabled={isPending}
+            aria-describedby="reset-keys-warning reset-keys-confirmation"
+            aria-required="true"
           />
         </div>
       </ModalDialog.Body>

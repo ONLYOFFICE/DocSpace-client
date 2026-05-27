@@ -123,5 +123,20 @@
         "noStaticElementInteractions": "off"
       }
     }
-  }
+  },
+  "overrides": [
+    {
+      "includes": [
+        "**/services/encryption/**",
+        "**/services/private-room/**"
+      ],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsole": "error"
+          }
+        }
+      }
+    }
+  ]
 }

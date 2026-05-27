@@ -78,12 +78,10 @@ const DEFAULT_CHUNK_SIZE = 10 * 1024 * 1024;
 const DEFAULT_UPLOAD_THREADS = 3;
 
 type UseDocsActionsOptions = {
-  /**
-   * Base path for the editor route, used to build the create-file URL.
-   * Defaults to "/personal-files/editor". When provided (e.g., "/editor" for
-   * rooms), the current pathname is appended as a `returnTo` query parameter.
-   */
+  /** Editor route base path. Defaults to "/personal-files/editor". */
   editorBasePath?: string;
+  /** Replaces the default chunked upload (e.g., encrypted upload). */
+  uploadFilesToFolderOverride?: (files: FileList | File[]) => Promise<void>;
 };
 
 export default function useDocsActions(options?: UseDocsActionsOptions) {
@@ -206,7 +204,7 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
     [getFolderId, dialogType, router, navigateToCreate],
   );
 
-  const uploadFilesToFolder = useCallback(
+  const defaultUploadFilesToFolder = useCallback(
     async (files: FileList | File[]) => {
       const folderId = getFolderId();
       if (!folderId) return;
@@ -311,6 +309,14 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
       }
     },
     [getFolderId, filesSettings, router, uploadStore],
+  );
+
+  const uploadFilesToFolder = useCallback(
+    (files: FileList | File[]) =>
+      (options?.uploadFilesToFolderOverride ?? defaultUploadFilesToFolder)(
+        files,
+      ),
+    [options?.uploadFilesToFolderOverride, defaultUploadFilesToFolder],
   );
 
   const onUploadFiles = useCallback(() => {

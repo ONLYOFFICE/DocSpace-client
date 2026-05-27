@@ -68,6 +68,7 @@ const TableView = ({
   fetchMoreFiles,
   currentUserId,
   infoPanelVisible,
+  isPrivate,
 }: TableViewProps) => {
   const { t } = useTranslation(["Common", "Files"]);
   const isSSR = useIsServer();
@@ -215,6 +216,7 @@ const TableView = ({
             displayFileExtension={displayFileExtension}
             lastColumn={lastColumn}
             currentUserId={currentUserId}
+            isPrivate={isPrivate}
           />
         ))}
       </TableBody>

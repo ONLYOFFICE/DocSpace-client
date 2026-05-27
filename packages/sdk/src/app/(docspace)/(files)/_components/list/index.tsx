@@ -74,6 +74,9 @@ const List = ({
   currentUserId,
   withoutFavorite,
   infoPanelVisible,
+  allowedContextOptions,
+  emptyView,
+  isPrivate,
 }: ListProps) => {
   const timezone = portalSettings.timezone;
   const displayFileExtension = filesSettings.displayFileExtension;
@@ -116,6 +119,7 @@ const List = ({
     isDocsSection: rootFolderType === FolderType.USER,
     isShareSection: rootFolderType === FolderType.SHARE,
     withoutFavorite,
+    allowedContextOptions,
   });
 
   const [filter, setFilter] = React.useState<FilesFilter>(
@@ -315,6 +319,12 @@ const List = ({
     filesListStore.items.length > 0 ? filesListStore.items : filesList;
 
   if (visibleItems.length === 0) {
+    // Filtered searches always use the standard EmptyView ("no results"
+    // copy is generic). Override only fires when the folder itself is
+    // empty, so private rooms can swap in their E2EE benefits view.
+    if (!filter.isFiltered() && emptyView) {
+      return <>{emptyView}</>;
+    }
     return (
       <EmptyView
         current={current}
@@ -334,6 +344,7 @@ const List = ({
         fetchMoreFiles={fetchMoreFiles}
         filesLength={visibleItems.length}
         getIcon={getIcon}
+        isPrivate={isPrivate}
       />
     );
   }
@@ -361,6 +372,7 @@ const List = ({
         fetchMoreFiles={fetchMoreFiles}
         currentUserId={currentUserId}
         infoPanelVisible={infoPanelVisible}
+        isPrivate={isPrivate}
       />
     );
   }
@@ -374,6 +386,7 @@ const List = ({
       timezone={timezone}
       displayFileExtension={displayFileExtension}
       fetchMoreFiles={fetchMoreFiles}
+      isPrivate={isPrivate}
     />
   );
 };

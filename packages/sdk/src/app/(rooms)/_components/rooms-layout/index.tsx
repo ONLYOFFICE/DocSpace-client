@@ -81,6 +81,18 @@ type RoomsLayoutProps = {
   filesFilter: string;
   user?: TUser;
   isArchive?: boolean;
+  /** Hides templates tile + tags new rooms as `private:true`. */
+  isPrivate?: boolean;
+  /** Gates CreateEditRoomDialog submit when no envelope exists yet. */
+  hasEncryptionKeys?: boolean;
+  infoPanelHeader?: React.ReactNode;
+  infoPanelBody?: React.ReactNode;
+  emptyView?: React.ReactNode;
+  /** Sticky breadcrumb title. */
+  titleOverride?: string;
+  /** Private-only overrides for invite / change-owner from room cards. */
+  onPrivateInviteRoom?: (room: TFolder) => void;
+  onPrivateChangeOwner?: (room: TFolder) => void;
 };
 
 const RoomsLayout = observer(
@@ -95,6 +107,14 @@ const RoomsLayout = observer(
     filesFilter,
     user,
     isArchive,
+    isPrivate,
+    hasEncryptionKeys,
+    infoPanelHeader,
+    infoPanelBody,
+    emptyView,
+    titleOverride,
+    onPrivateInviteRoom,
+    onPrivateChangeOwner,
   }: RoomsLayoutProps) => {
     const { t } = useTranslation(["Common"]);
     const { isEmptyList } = useSettingsStore();
@@ -145,27 +165,29 @@ const RoomsLayout = observer(
       setIsCreateRoomDialogVisible(false);
     }, []);
 
-    const quickActionItems = React.useMemo<QuickActionItem[]>(
-      () =>
-        isArchive || !canCreateRooms
-          ? []
-          : [
-              {
-                id: "custom-room",
-                icon: <CreateCustomRoomIllustrationIcon />,
-                label: t("Common:NewRoom"),
-                onClick: createCustomRoom,
-                disabled: isArchive,
-              },
-              {
-                id: "use-template",
-                icon: <UseRoomTemplateIllustrationIcon />,
-                label: t("Common:UseTemplate"),
-                disabled: true,
-              },
-            ],
-      [t, createCustomRoom, isArchive],
-    );
+    const quickActionItems = React.useMemo<QuickActionItem[]>(() => {
+      if (isArchive || !canCreateRooms) return [];
+      const items: QuickActionItem[] = [
+        {
+          id: "custom-room",
+          icon: <CreateCustomRoomIllustrationIcon />,
+          label: t("Common:NewRoom"),
+          onClick: createCustomRoom,
+          disabled: isArchive,
+        },
+      ];
+      // Templates aren't supported for private (e2e-encrypted) rooms — the
+      // template gallery isn't encryption-aware.
+      if (!isPrivate) {
+        items.push({
+          id: "use-template",
+          icon: <UseRoomTemplateIllustrationIcon />,
+          label: t("Common:UseTemplate"),
+          disabled: true,
+        });
+      }
+      return items;
+    }, [t, createCustomRoom, isArchive, canCreateRooms, isPrivate]);
 
     // const mainButtonModel = React.useMemo<ContextMenuModel[]>(
     //   () => [
@@ -236,11 +258,18 @@ const RoomsLayout = observer(
                 user={user}
                 isArchive={isArchive}
                 refreshRef={refreshRef}
+                emptyView={emptyView}
+                titleOverride={titleOverride}
+                hasEncryptionKeys={isPrivate ? hasEncryptionKeys : undefined}
+                onPrivateInviteRoom={onPrivateInviteRoom}
+                onPrivateChangeOwner={onPrivateChangeOwner}
               />
             }
-            infoPanelHeaderContent={<DocsInfoPanelHeader />}
+            infoPanelHeaderContent={infoPanelHeader ?? <DocsInfoPanelHeader />}
             infoPanelBodyContent={
-              <DocsInfoPanelBody onTagsChanged={onInfoPanelTagsChanged} />
+              infoPanelBody ?? (
+                <DocsInfoPanelBody onTagsChanged={onInfoPanelTagsChanged} />
+              )
             }
             isInfoPanelVisible={infoPanelStore.isVisible}
             setIsInfoPanelVisible={infoPanelStore.setVisible}
@@ -251,6 +280,8 @@ const RoomsLayout = observer(
             visible={isCreateRoomDialogVisible}
             onClose={closeCreateRoomDialog}
             onRoomCreated={() => refreshRef.current?.()}
+            isPrivate={isPrivate}
+            hasEncryptionKeys={hasEncryptionKeys}
           />
           <SelectionArea />
           <DeviceTypeObserver />

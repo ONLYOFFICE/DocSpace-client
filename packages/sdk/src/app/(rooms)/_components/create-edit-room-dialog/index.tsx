@@ -64,11 +64,13 @@ import UploadSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import DeleteSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import PencilSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 
+import { Link } from "@docspace/ui-kit/components/link";
+
 import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
 
 import styles from "./CreateEditRoomDialog.module.scss";
 
-type EditableRoom = {
+export type EditableRoom = {
   id: number;
   title: string;
   tags?: string[];
@@ -76,14 +78,29 @@ type EditableRoom = {
   roomIconColor?: string;
   roomCover?: ICover;
   createdBy?: TCreatedBy;
+  /** Set true to keep the dialog in private-room mode without an explicit prop. */
+  private?: boolean;
 };
 
-type CreateEditRoomDialogProps = {
+export type CreateEditRoomDialogProps = {
   visible: boolean;
   onClose: () => void;
   room?: EditableRoom;
   onRoomEdited?: (roomId: number) => void;
-  onRoomCreated?: () => void;
+  onRoomCreated?: (roomId?: number) => void;
+  /**
+   * Lock the dialog to encrypted private-room semantics: hard-codes
+   * `private:true` on the create payload and refuses to submit when the
+   * caller hasn't set up an encryption envelope. Defaults to false.
+   */
+  isPrivate?: boolean;
+  /**
+   * Companion gate for `isPrivate` — caller passes false when the user has
+   * no encryption keys yet. When false + isPrivate, the dialog displays a
+   * blocking notice with a deep link to the keys-management page instead
+   * of letting the user submit. Ignored when `isPrivate` is false.
+   */
+  hasEncryptionKeys?: boolean;
 };
 
 const CreateEditRoomDialog = ({
@@ -92,6 +109,8 @@ const CreateEditRoomDialog = ({
   room,
   onRoomEdited,
   onRoomCreated,
+  isPrivate = false,
+  hasEncryptionKeys = true,
 }: CreateEditRoomDialogProps) => {
   const { t } = useTranslation(["Common", "Files"]);
   const refreshRooms = React.useContext(RoomsRefreshContext);
@@ -332,10 +351,15 @@ const CreateEditRoomDialog = ({
 
         onRoomEdited?.(room.id);
       } else {
+        if (isPrivate && !hasEncryptionKeys) {
+          setIsLoading(false);
+          return;
+        }
         const logo = await buildLogoParams();
         const newRoom = (await api.rooms.createRoom({
           roomType: RoomsType.CustomRoom,
           title: trimmedName,
+          ...(isPrivate && { private: true }),
           ...(tags.length && { tags }),
           ...(logo && { logo }),
         })) as { id?: number };
@@ -349,7 +373,11 @@ const CreateEditRoomDialog = ({
           });
         }
 
-        (onRoomCreated ?? refreshRooms)?.();
+        if (onRoomCreated) {
+          onRoomCreated(newRoom?.id);
+        } else {
+          refreshRooms?.();
+        }
       }
       onClose();
     } catch (e) {
@@ -383,11 +411,42 @@ const CreateEditRoomDialog = ({
         onClose={onClose}
       >
         <ModalDialog.Header>
-          {isEdit ? t("Common:EditRoom") : t("Common:CreateRoom")}
+          {isEdit
+            ? isPrivate
+              ? t("Common:EditPrivateRoom")
+              : t("Common:EditRoom")
+            : isPrivate
+              ? t("Common:CreatePrivateRoom")
+              : t("Common:CreateRoom")}
         </ModalDialog.Header>
 
         <ModalDialog.Body>
           <div className={styles.body}>
+            {isPrivate && !hasEncryptionKeys && !isEdit ? (
+              <div
+                style={{
+                  padding: 12,
+                  borderRadius: 6,
+                  background:
+                    "var(--row-hover-background, rgba(0, 0, 0, 0.04))",
+                }}
+                data-test-id="create_edit_room_keys_required"
+              >
+                <Text>
+                  {t("Common:EncryptionKeysRequiredForPrivateRoom")}{" "}
+                  <Link
+                    tag="a"
+                    isHovered
+                    color="accent"
+                    onClick={() =>
+                      window.open("/profile/keys-management", "_blank")
+                    }
+                  >
+                    {t("Common:OpenKeysManagement")}
+                  </Link>
+                </Text>
+              </div>
+            ) : null}
             <div className={styles.logoNameRow}>
               <RoomIcon
                 title={name}
@@ -497,7 +556,11 @@ const CreateEditRoomDialog = ({
             scale
             isLoading={isLoading}
             onClick={onSave}
-            isDisabled={!name.trim() || isLoading}
+            isDisabled={
+              !name.trim() ||
+              isLoading ||
+              (isPrivate && !hasEncryptionKeys && !isEdit)
+            }
           />
           <Button
             label={t("Common:CancelButton")}

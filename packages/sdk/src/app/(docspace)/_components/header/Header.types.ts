@@ -12,4 +12,13 @@ export type HeaderProps = {
   isInfoPanelVisible?: boolean;
   onToggleInfoPanel?: () => void;
   headerOffset?: number;
+
+  /**
+   * Optional decoration shown next to the current folder title. Used by
+   * private rooms to surface the lock badge; left as a slot so other
+   * future route groups (lifetime rooms, external folders) can plug in
+   * their own icons without forking the header.
+   */
+  titleIcon?: string;
+  titleIconTooltip?: string;
 };

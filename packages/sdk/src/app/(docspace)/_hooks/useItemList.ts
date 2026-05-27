@@ -54,6 +54,8 @@ type useItemListProps = {
   isDocsSection?: boolean;
   isShareSection?: boolean;
   withoutFavorite?: boolean;
+  /** Filters per-item contextOptions to this whitelist. */
+  allowedContextOptions?: ReadonlySet<string>;
 
   getIcon: ReturnType<typeof useItemIcon>["getIcon"];
 };
@@ -67,6 +69,7 @@ export default function useItemList({
   isDocsSection,
   isShareSection,
   withoutFavorite,
+  allowedContextOptions,
 }: useItemListProps) {
   const { getFilesContextMenu, getFoldersContextMenu } = useItemContextMenu({
     isFavoritesSection,
@@ -106,9 +109,12 @@ export default function useItemList({
 
       const isForm = file.fileExst === ".oform";
 
-      const contextOptions = overrides
+      const rawContextOptions = overrides
         ? getFilesContextMenuRef.current(file, overrides)
         : getFilesContextMenuRef.current(file);
+      const contextOptions = allowedContextOptions
+        ? rawContextOptions.filter((k) => allowedContextOptions.has(k))
+        : rawContextOptions;
 
       return {
         ...file,
@@ -123,7 +129,7 @@ export default function useItemList({
         contextOptions,
       };
     },
-    [getIcon, shareKey],
+    [getIcon, shareKey, allowedContextOptions],
   );
 
   const convertFolderToItem = useCallback(
@@ -134,7 +140,10 @@ export default function useItemList({
 
       const icon = getIcon();
 
-      const contextOptions = getFoldersContextMenu(folder);
+      const rawContextOptions = getFoldersContextMenu(folder);
+      const contextOptions = allowedContextOptions
+        ? rawContextOptions.filter((k) => allowedContextOptions.has(k))
+        : rawContextOptions;
 
       const rawLogo = (folder as unknown as { logo?: TLogo }).logo;
       const isRoom = folder.roomType !== undefined;
@@ -154,7 +163,7 @@ export default function useItemList({
         hasRoomImage,
       };
     },
-    [getFoldersContextMenu, getIcon],
+    [getFoldersContextMenu, getIcon, allowedContextOptions],
   );
 
   return { convertFileToItem, convertFolderToItem };

@@ -53,5 +53,10 @@ export type ListProps = {
   shareKey?: string;
   withoutFavorite?: boolean;
   infoPanelVisible?: boolean;
+  /** Whitelist of context-menu action keys; filters per-item contextOptions. */
+  allowedContextOptions?: ReadonlySet<string>;
+  emptyView?: React.ReactNode;
+  /** Adds the encrypted-shield overlay to every file/folder icon. */
+  isPrivate?: boolean;
 };
 

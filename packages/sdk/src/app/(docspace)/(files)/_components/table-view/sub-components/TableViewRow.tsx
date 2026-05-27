@@ -43,6 +43,7 @@ import classNames from "classnames";
 import { TableRow } from "@docspace/ui-kit/components/table";
 import { TableCell } from "@docspace/ui-kit/components/table";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
@@ -65,6 +66,7 @@ import { RenameContext } from "../../../../_contexts/RenameContext";
 import { VersionHistoryContext } from "../../../../_contexts/VersionHistoryContext";
 import { ConvertContext } from "../../../../_contexts/ConvertContext";
 import type { TFileItem } from "../../../../_hooks/useItemList";
+import { useDecryptedFilename } from "@/app/(docspace)/_hooks/useDecryptedFilename";
 import { generateFilesItemValue } from "../../../_utils";
 import getTitleWithoutExt from "../../../../_utils/get-title-without-ext";
 
@@ -80,6 +82,7 @@ const TableViewRow = observer(
     displayFileExtension,
     lastColumn,
     currentUserId,
+    isPrivate,
   }: TableViewRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
@@ -121,8 +124,14 @@ const TableViewRow = observer(
     const isChecked = filesSelectionStore.isCheckedItem(item);
     const value = generateFilesItemValue(item, false, index);
 
+    const title = useDecryptedFilename(
+      item.id,
+      item.title,
+      "encrypted" in item ? item.encrypted : false,
+    );
+
     const titleWithoutExt =
-      "fileExst" in item ? getTitleWithoutExt(item.title, item.fileExst) : item.title;
+      "fileExst" in item ? getTitleWithoutExt(title, item.fileExst) : title;
 
     const modifiedDate = getCorrectDate(
       i18n.language || "",
@@ -278,12 +287,26 @@ const TableViewRow = observer(
         >
           <div className="table-container_element-container" onClick={(e) => e.stopPropagation()}>
             <div className="table-container_element">
-              <RoomIcon
-                logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
-                color={"isRoom" in item && item.isRoom ? item.roomIconColor : undefined}
-                title={item.title}
-                showDefault={"isRoom" in item && item.isRoom ? !item.hasRoomImage : false}
-              />
+              <EncryptedItemIconWrapper
+                encrypted={!!isPrivate}
+                hasEncryptionKeys
+                isRoom={false}
+              >
+                <RoomIcon
+                  logo={
+                    "isRoom" in item && item.isRoom ? item.roomLogo : item.icon
+                  }
+                  color={
+                    "isRoom" in item && item.isRoom
+                      ? item.roomIconColor
+                      : undefined
+                  }
+                  title={title}
+                  showDefault={
+                    "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
+                  }
+                />
+              </EncryptedItemIconWrapper>
             </div>
             <Checkbox
               className="table-container_row-checkbox"

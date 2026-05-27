@@ -43,6 +43,7 @@ import { useTranslation } from "react-i18next";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { RoomTile } from "@docspace/ui-kit/components/tiles/room-tile";
+import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import type { TagClickEvent } from "@docspace/ui-kit/components/tag";
@@ -94,6 +95,7 @@ const RoomsTile = observer(
     onInfoRoom,
     onInviteRoom,
     isArchive,
+    hasEncryptionKeys,
   }: RoomsTileProps) => {
     const { t } = useTranslation(["Common"]);
     const { isBase } = useTheme();
@@ -199,17 +201,26 @@ const RoomsTile = observer(
       [getContextModel, item],
     );
 
+    const isPrivateRoom = (item as { private?: boolean }).private === true;
     const element = (
-      <RoomIcon
-        logo={getRoomIconLogo(item)}
-        color={"isRoom" in item && item.isRoom ? item.roomIconColor : undefined}
-        title={item.title}
-        showDefault={
-          "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
-        }
-        size="32px"
-        radius="6px"
-      />
+      <EncryptedItemIconWrapper
+        encrypted={isPrivateRoom}
+        hasEncryptionKeys={!!hasEncryptionKeys}
+        isRoom
+      >
+        <RoomIcon
+          logo={getRoomIconLogo(item)}
+          color={
+            "isRoom" in item && item.isRoom ? item.roomIconColor : undefined
+          }
+          title={item.title}
+          showDefault={
+            "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
+          }
+          size="32px"
+          radius="6px"
+        />
+      </EncryptedItemIconWrapper>
     );
 
     const tileContent = (

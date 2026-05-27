@@ -55,6 +55,7 @@ export type RoomsRowProps = RoomsRowContentProps & {
   onInfoRoom?: (item: TFolderItem | TFileItem) => void;
   onInviteRoom?: (item: TFolderItem | TFileItem) => void;
   isArchive?: boolean;
+  hasEncryptionKeys?: boolean;
 };
 
 export type RoomsRowViewProps = Pick<
@@ -78,4 +79,5 @@ export type RoomsRowViewProps = Pick<
   onInfoRoom?: (item: TFolderItem | TFileItem) => void;
   onInviteRoom?: (item: TFolderItem | TFileItem) => void;
   isArchive?: boolean;
+  hasEncryptionKeys?: boolean;
 };

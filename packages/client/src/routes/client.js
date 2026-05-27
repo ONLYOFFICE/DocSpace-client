@@ -427,6 +427,26 @@ const ClientRoutes = [
         },
       },
       {
+        path: "/e2e-rooms",
+        async lazy() {
+          const { E2eRooms } = await componentLoader(
+            () => import("SRC_DIR/pages/E2eRooms"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ProtectedAppRoute appId="e2e-rooms">
+                <ErrorBoundary>
+                  <E2eRooms />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
         path: "/docs-cloud",
         async lazy() {
           const { DocsCloud } = await componentLoader(

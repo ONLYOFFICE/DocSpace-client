@@ -46,6 +46,7 @@ export type TableViewRowProps = {
   hideColumns?: boolean;
   lastColumn: string;
   currentUserId?: string;
+  isPrivate?: boolean;
 };
 
 export type TableViewProps = {
@@ -60,4 +61,5 @@ export type TableViewProps = {
   fetchMoreFiles: (params: IndexRange) => Promise<void>;
   currentUserId?: string;
   infoPanelVisible?: boolean;
+  isPrivate?: boolean;
 };

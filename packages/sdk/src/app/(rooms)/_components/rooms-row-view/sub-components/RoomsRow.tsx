@@ -38,6 +38,7 @@ import {
 } from "@docspace/shared/components/files-row";
 import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
 import Badges from "@docspace/shared/components/badges";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import api from "@docspace/shared/api";
@@ -76,6 +77,7 @@ const RoomsRow = observer(
     onInfoRoom,
     onInviteRoom,
     isArchive,
+    hasEncryptionKeys,
   }: RoomsRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
@@ -130,15 +132,24 @@ const RoomsRow = observer(
       }
     }, [canMute, item.id, onRoomChanged, t]);
 
+    const isPrivateRoom = (item as { private?: boolean }).private === true;
     const element = (
-      <RoomIcon
-        logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
-        color={"isRoom" in item && item.isRoom ? item.roomIconColor : undefined}
-        title={item.title}
-        showDefault={
-          "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
-        }
-      />
+      <EncryptedItemIconWrapper
+        encrypted={isPrivateRoom}
+        hasEncryptionKeys={!!hasEncryptionKeys}
+        isRoom
+      >
+        <RoomIcon
+          logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
+          color={
+            "isRoom" in item && item.isRoom ? item.roomIconColor : undefined
+          }
+          title={item.title}
+          showDefault={
+            "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
+          }
+        />
+      </EncryptedItemIconWrapper>
     );
 
     const badgesComponent = (

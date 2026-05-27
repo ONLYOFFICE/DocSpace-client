@@ -75,6 +75,7 @@ type RoomsTableViewProps = {
   onInfoRoom?: (item: TFolderItem | TFileItem) => void;
   onInviteRoom?: (item: TFolderItem | TFileItem) => void;
   isArchive?: boolean;
+  hasEncryptionKeys?: boolean;
 };
 
 const RoomsTableView = ({
@@ -99,6 +100,7 @@ const RoomsTableView = ({
   onInfoRoom,
   onInviteRoom,
   isArchive,
+  hasEncryptionKeys,
 }: RoomsTableViewProps) => {
   const { t } = useTranslation(["Common", "Files"]);
   const isSSR = useIsServer();
@@ -239,6 +241,7 @@ const RoomsTableView = ({
             onInfoRoom={onInfoRoom}
             onInviteRoom={onInviteRoom}
             isArchive={isArchive}
+            hasEncryptionKeys={hasEncryptionKeys}
           />
         ))}
       </TableBody>

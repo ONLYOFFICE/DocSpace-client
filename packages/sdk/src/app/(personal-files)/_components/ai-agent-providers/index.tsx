@@ -312,7 +312,8 @@ const DeviceUploader = React.forwardRef<DeviceUploaderHandle>((_, ref) => {
       if (skipped.length > 0) {
         toastr.error(
           t("Common:UnsupportedFileType", {
-            defaultValue: `Unsupported file type: ${skipped.join(", ")}`,
+            files: skipped.join(", "),
+            defaultValue: "Unsupported file type: {{files}}",
           }),
         );
       }
@@ -363,7 +364,7 @@ const PersonalFilesAiAgentProviders = ({
         id: "add-files-from-docspace",
         text: t("Common:AddFilesFromProduct", {
           productName: getBrandName("ProductName"),
-          defaultValue: `Add files from ${getBrandName("ProductName")}`,
+          defaultValue: "Add files from {{productName}}",
         }),
         icon: CatalogDocumentsUrl,
         onClick: () => setPickerVisible(true),

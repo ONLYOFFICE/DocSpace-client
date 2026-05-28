@@ -107,6 +107,7 @@ import { useDocsUserStore } from "../../_store/DocsUserStore";
 import type { SelectorMode } from "../../_hooks/useFileOperations";
 import { useDocsFrameBridge } from "../../_hooks/useDocsFrameBridge";
 import DropZone from "../drop-zone";
+import ConflictResolveDialog from "../conflict-resolve-dialog";
 import DeleteDialog from "../delete-dialog";
 import RenameDialog from "../rename-dialog";
 import UploadPanel from "../upload-panel";
@@ -197,6 +198,10 @@ const DocsLayout = observer(
       isCreating,
       onUploadFiles,
       onUploadFolder,
+      uploadConflictDialogVisible,
+      uploadConflictItems,
+      confirmUploadConflict,
+      closeUploadConflictDialog,
     } = docsActions;
 
     const { desktopModel, quickActionItems } = useDocsMenuModels({
@@ -235,6 +240,10 @@ const DocsLayout = observer(
       requestDuplicate,
       closeSelectorDialog,
       confirmOperation,
+      conflictDialogVisible,
+      conflictItems,
+      closeConflictDialog,
+      confirmConflict,
     } = useFileOperations();
 
     const {
@@ -593,6 +602,12 @@ const DocsLayout = observer(
                           isRenaming={isRenaming}
                           onClose={closeRenameDialog}
                           onSave={confirmRename}
+                        />
+                        <ConflictResolveDialog
+                          visible={conflictDialogVisible || uploadConflictDialogVisible}
+                          conflictItems={conflictDialogVisible ? conflictItems : uploadConflictItems}
+                          onClose={conflictDialogVisible ? closeConflictDialog : closeUploadConflictDialog}
+                          onSubmit={conflictDialogVisible ? confirmConflict : confirmUploadConflict}
                         />
                         <ConvertDialog
                           visible={convertDialogVisible}

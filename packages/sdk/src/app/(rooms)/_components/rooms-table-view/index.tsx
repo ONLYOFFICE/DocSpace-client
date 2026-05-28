@@ -75,6 +75,7 @@ type RoomsTableViewProps = {
   onInfoRoom?: (item: TFolderItem | TFileItem) => void;
   onInviteRoom?: (item: TFolderItem | TFileItem) => void;
   isArchive?: boolean;
+  infoPanelVisible?: boolean;
 };
 
 const RoomsTableView = ({
@@ -99,6 +100,7 @@ const RoomsTableView = ({
   onInfoRoom,
   onInviteRoom,
   isArchive,
+  infoPanelVisible,
 }: RoomsTableViewProps) => {
   const { t } = useTranslation(["Common", "Files"]);
   const isSSR = useIsServer();
@@ -208,6 +210,7 @@ const RoomsTableView = ({
         sortingVisible
         showSettings
         settingsTitle={t("Files:TableSettingsTitle")}
+        infoPanelVisible={infoPanelVisible}
       />
       <TableBody
         columnStorageName={COLUMN_STORAGE_NAME}
@@ -218,6 +221,7 @@ const RoomsTableView = ({
         itemCount={total}
         itemHeight={48}
         useReactWindow={!isSSR}
+        infoPanelVisible={infoPanelVisible}
       >
         {items.map((item, index) => (
           <RoomsTableViewRow

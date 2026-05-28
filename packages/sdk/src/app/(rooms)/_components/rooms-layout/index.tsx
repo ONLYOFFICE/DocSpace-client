@@ -236,6 +236,7 @@ const RoomsLayout = observer(
                 user={user}
                 isArchive={isArchive}
                 refreshRef={refreshRef}
+                infoPanelVisible={infoPanelStore.isVisible}
               />
             }
             infoPanelHeaderContent={<DocsInfoPanelHeader />}

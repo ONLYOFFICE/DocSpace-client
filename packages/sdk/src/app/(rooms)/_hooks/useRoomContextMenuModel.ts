@@ -65,7 +65,10 @@ type TRoomItem = TFolderItem & {
     ChangeOwner?: boolean;
     Download?: boolean;
     EditRoom?: boolean;
+    EditAccess?: boolean;
     Mute?: boolean;
+    Move?: boolean;
+    Delete?: boolean;
   };
 };
 
@@ -246,6 +249,7 @@ export default function useRoomContextMenuModel(
           label: t("Common:MoveToArchive"),
           icon: RoomArchiveSvgUrl,
           onClick: () => onArchiveRoom?.(room),
+          disabled: !room.security?.Move,
         },
         {
           id: "option_delete-room",
@@ -253,6 +257,7 @@ export default function useRoomContextMenuModel(
           label: t("Common:DeleteRoom"),
           icon: TrashReactSvgUrl,
           onClick: () => onDeleteRoom?.(room),
+          disabled: !room.security?.Delete,
         },
       ];
 

@@ -33,55 +33,63 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-"use client";
+import type { AvatarSize } from "@docspace/ui-kit/components/avatar";
 
-import React from "react";
-import { observer } from "mobx-react";
+export interface UserPhoto {
+  original: string;
+  retina: string;
+  max: string;
+  big: string;
+  medium: string;
+  small: string;
+}
 
-import { FilesRowContainer } from "@docspace/shared/components/files-row";
-import { useIsServer } from "@docspace/shared/hooks/useIsServer";
+export interface EditorUser {
+  id: string;
+  name: string;
+  photo: UserPhoto | null;
+}
 
-import { Row } from "./sub-components/Row";
+export interface EditorsTooltipItem {
+  editingBy?: Record<string, string> | null;
+  activeEditors?: Record<string, string> | null;
+  [key: string]: unknown;
+}
 
-import { RowViewProps } from "./RowView.types";
+export interface EditorsTooltipProps {
+  item: EditorsTooltipItem;
+  currentUserId?: string;
+}
 
-const RowView = ({
-  total,
-  items,
-  hasMoreFiles,
-  filterSortBy,
-  timezone,
-  displayFileExtension,
-  fetchMoreFiles,
-  currentUserId,
-}: RowViewProps) => {
-  const isSSR = useIsServer();
+export interface EditorsListProps {
+  editors: EditorUser[];
+  avatarSize: AvatarSize;
+  isMobile?: boolean;
+}
 
-  return (
-    <FilesRowContainer
-      className="files-row-container"
-      filesLength={items.length}
-      itemCount={total}
-      hasMoreFiles={hasMoreFiles}
-      useReactWindow={!isSSR}
-      fetchMoreFiles={fetchMoreFiles}
-      itemHeight={58}
-      onScroll={() => {}}
-    >
-      {items.map((item, index) => (
-        <Row
-          key={`${item.id}`}
-          index={index}
-          item={item}
-          filterSortBy={filterSortBy}
-          timezone={timezone}
-          displayFileExtension={displayFileExtension}
-          isSSR={isSSR}
-          currentUserId={currentUserId}
-        />
-      ))}
-    </FilesRowContainer>
-  );
-};
+export interface EditorsTooltipMobileProps {
+  visible: boolean;
+  editors: EditorUser[];
+  onClose: () => void;
+  t: (key: string) => string;
+  height: number;
+}
 
-export default observer(RowView);
+export interface UseEditorsDataProps {
+  activeEditors: Record<string, string> | undefined;
+  editingBy: Record<string, string> | undefined;
+  currentUserId?: string;
+}
+
+export interface UseEditorsDataReturn {
+  editors: EditorUser[];
+  isOpen: boolean;
+  openTooltip: () => void;
+  closeTooltip: () => void;
+  setIsOpen: (value: boolean) => void;
+}
+
+export interface TooltipDimensions {
+  width: number;
+  height: number;
+}

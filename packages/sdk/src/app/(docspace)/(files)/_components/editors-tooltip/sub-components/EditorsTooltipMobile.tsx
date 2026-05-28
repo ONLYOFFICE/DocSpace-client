@@ -33,55 +33,58 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-"use client";
-
 import React from "react";
-import { observer } from "mobx-react";
+import { Portal } from "@docspace/ui-kit/components/portal";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
+import { AvatarSize } from "@docspace/ui-kit/components/avatar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
-import { FilesRowContainer } from "@docspace/shared/components/files-row";
-import { useIsServer } from "@docspace/shared/hooks/useIsServer";
+import { EditorsList } from "./EditorsList";
+import type { EditorsTooltipMobileProps } from "../EditorsTooltip.types";
+import styles from "../EditorsTooltip.module.scss";
 
-import { Row } from "./sub-components/Row";
+const EditorsTooltipMobile = ({
+  visible,
+  editors,
+  onClose,
+  t,
+  height,
+}: EditorsTooltipMobileProps) => {
+  if (!visible || editors.length === 0) return null;
 
-import { RowViewProps } from "./RowView.types";
-
-const RowView = ({
-  total,
-  items,
-  hasMoreFiles,
-  filterSortBy,
-  timezone,
-  displayFileExtension,
-  fetchMoreFiles,
-  currentUserId,
-}: RowViewProps) => {
-  const isSSR = useIsServer();
+  const content = (
+    <>
+      <Backdrop
+        visible={visible}
+        onClick={onClose}
+        withBackground
+        zIndex={310}
+      />
+      <div
+        className={styles.mobileContainer}
+        style={{ height: `${height}px` }}
+        data-testid="editors-tooltip-mobile"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <Scrollbar autoHide={false}>
+          <div className={styles.tooltipHeader}>
+            {t("FileCurrentlyEditedBy")}
+          </div>
+          <EditorsList
+            editors={editors}
+            avatarSize={AvatarSize.min}
+            isMobile={true}
+          />
+        </Scrollbar>
+      </div>
+    </>
+  );
 
   return (
-    <FilesRowContainer
-      className="files-row-container"
-      filesLength={items.length}
-      itemCount={total}
-      hasMoreFiles={hasMoreFiles}
-      useReactWindow={!isSSR}
-      fetchMoreFiles={fetchMoreFiles}
-      itemHeight={58}
-      onScroll={() => {}}
-    >
-      {items.map((item, index) => (
-        <Row
-          key={`${item.id}`}
-          index={index}
-          item={item}
-          filterSortBy={filterSortBy}
-          timezone={timezone}
-          displayFileExtension={displayFileExtension}
-          isSSR={isSSR}
-          currentUserId={currentUserId}
-        />
-      ))}
-    </FilesRowContainer>
+    <>
+      <Portal element={content} visible={visible} />
+    </>
   );
 };
 
-export default observer(RowView);
+export default EditorsTooltipMobile;

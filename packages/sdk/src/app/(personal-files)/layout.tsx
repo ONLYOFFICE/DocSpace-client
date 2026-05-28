@@ -42,6 +42,7 @@ import { getSelf } from "@/api/people";
 import { FILTER_HEADER, PATHNAME_HEADER } from "@/utils/constants";
 
 import { DocsStoreProviders } from "./_store";
+import QueryProvider from "@/app/(rooms)/_components/query-provider";
 
 export const dynamic = "force-dynamic";
 
@@ -108,9 +109,11 @@ export default async function DocsLayout({
 
   return (
     <main style={{ width: "100%", height: "100%" }}>
-      <DocsStoreProviders initViewAs={initViewAs}>
-        {children}
-      </DocsStoreProviders>
+      <QueryProvider>
+        <DocsStoreProviders initViewAs={initViewAs}>
+          {children}
+        </DocsStoreProviders>
+      </QueryProvider>
     </main>
   );
 }

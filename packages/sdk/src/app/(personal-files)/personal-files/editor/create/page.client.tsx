@@ -63,7 +63,6 @@ export default function CreateEditorPage({
         if (file?.id) {
           router.replace(`/personal-files/editor/${file.id}`);
         } else {
-          toastr.error("Failed to create file");
           router.replace("/personal-files");
         }
       })

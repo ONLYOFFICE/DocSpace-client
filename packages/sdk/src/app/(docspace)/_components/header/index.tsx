@@ -120,19 +120,19 @@ const Header = ({
   const { openFolder } = useFolderActions({ t });
 
   const title = current?.title;
-  const rootFolderId = current?.rootFolderId;
   const id = current?.id;
 
   const pathParts = filesListStore.pathParts ?? pathPartsProp;
 
-  // const isRoomsFolder = pathParts?.[0]?.id === rootFolderId;
-
-  // `isRoomsFolder` is true only when the current folder IS the section root
-  // (e.g. the "Rooms" list itself, not a specific room or subfolder).
-  const isRoomsFolder = id === rootFolderId;
   const isInRoomsContext =
     pathParts?.[0]?.folderType === FolderType.Rooms ||
     pathParts?.[0]?.folderType === FolderType.Archive;
+
+  // `isRoomsFolder` is true only when the current folder IS the section root
+  // (e.g. the "Rooms" or "Archive" list itself, not a specific room or subfolder).
+  // Using pathParts.length instead of id === rootFolderId because the server may
+  // return rootFolderId = 0 for the section root itself, breaking the equality check.
+  const isRoomsFolder = isInRoomsContext && pathParts?.length === 1;
 
   const navigationItems: TNavigationItem[] = useMemo(() => {
     if (!pathParts) return [];
@@ -263,7 +263,7 @@ const Header = ({
             onLogoClick={onBurgerClick ?? (() => {})}
             clearTrash={() => {}}
             showFolderInfo={() => {}}
-            isContextButtonVisible
+            isContextButtonVisible={!isRoomsFolder}
           />
         </div>
       )}

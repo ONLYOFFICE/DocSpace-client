@@ -78,7 +78,7 @@ const DeleteVersionDialog = ({
   onClose,
   onConfirm,
 }: DeleteVersionDialogProps) => {
-  const { t } = useTranslation(["VersionHistory", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   const onKeyUp = React.useCallback(
     (e: KeyboardEvent) => {
@@ -95,14 +95,10 @@ const DeleteVersionDialog = ({
 
   return (
     <ModalDialog visible={visible} onClose={onClose}>
-      <ModalDialog.Header>
-        {t("VersionHistory:DeleteVersion")}
-      </ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:DeleteVersion")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className="modal-dialog-content-body">
-          <Text lineHeight="20px">
-            {t("VersionHistory:DeleteVersionDescription")}
-          </Text>
+          <Text lineHeight="20px">{t("Common:DeleteVersionDescription")}</Text>
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>

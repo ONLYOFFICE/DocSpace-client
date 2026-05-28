@@ -231,34 +231,47 @@ export default function useRoomContextMenuModel(
               icon: InfoOutlineReactSvgUrl,
               onClick: () => onInfoRoom?.(room),
             },
-            { key: "separator-owner", isSeparator: true },
-            {
-              id: "option_change-room-owner",
-              key: "change-room-owner",
-              label: t("Common:ChangeRoomOwner"),
-              icon: ReconnectSvgUrl,
-              onClick: () => onChangeOwner?.(room),
-              disabled: !room.security?.ChangeOwner,
-            },
+            ...(room.security?.ChangeOwner
+              ? [
+                  { key: "separator-owner", isSeparator: true },
+                  {
+                    id: "option_change-room-owner",
+                    key: "change-room-owner",
+                    label: t("Common:ChangeRoomOwner"),
+                    icon: ReconnectSvgUrl,
+                    onClick: () => onChangeOwner?.(room),
+                  },
+                ]
+              : []),
           ],
         },
-        { key: "separator-archive", isSeparator: true },
-        {
-          id: "option_move-to-archive",
-          key: "move-to-archive",
-          label: t("Common:MoveToArchive"),
-          icon: RoomArchiveSvgUrl,
-          onClick: () => onArchiveRoom?.(room),
-          disabled: !room.security?.Move,
-        },
-        {
-          id: "option_delete-room",
-          key: "delete-room",
-          label: t("Common:DeleteRoom"),
-          icon: TrashReactSvgUrl,
-          onClick: () => onDeleteRoom?.(room),
-          disabled: !room.security?.Delete,
-        },
+        ...(room.security?.Move || room.security?.Delete
+          ? [
+              { key: "separator-archive", isSeparator: true },
+              ...(room.security?.Move
+                ? [
+                    {
+                      id: "option_move-to-archive",
+                      key: "move-to-archive",
+                      label: t("Common:MoveToArchive"),
+                      icon: RoomArchiveSvgUrl,
+                      onClick: () => onArchiveRoom?.(room),
+                    },
+                  ]
+                : []),
+              ...(room.security?.Delete
+                ? [
+                    {
+                      id: "option_delete-room",
+                      key: "delete-room",
+                      label: t("Common:DeleteRoom"),
+                      icon: TrashReactSvgUrl,
+                      onClick: () => onDeleteRoom?.(room),
+                    },
+                  ]
+                : []),
+            ]
+          : []),
       ];
 
       return mainItems;

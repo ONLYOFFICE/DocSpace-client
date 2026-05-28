@@ -2073,5 +2073,7 @@
   "YourPrice": "Vaše cena",
   "YourTurn": "Jste na řadě",
   "YouWillBeContacted": "Po vytvoření požadavku vás bude kontaktovat prodejní tým.",
-  "EditComment": "Upravit komentář"
+  "EditComment": "Upravit komentář",
+  "DeleteVersion": "Smazat verzi",
+  "DeleteVersionDescription": "Chystáte se odstranit verzi souboru. Nebude již možné ji zobrazit nebo obnovit. Jste si jisti, že chcete pokračovat?"
 }

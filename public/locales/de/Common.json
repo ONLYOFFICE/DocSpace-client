@@ -2081,5 +2081,7 @@
   "YourPrice": "Ihr Preis",
   "YourTurn": "Jetzt sind Sie dran",
   "YouWillBeContacted": "Das Verkaufsteam wird Sie nach der Erstellung der Anfrage kontaktieren.",
-  "EditComment": "Kommentar bearbeiten"
+  "EditComment": "Kommentar bearbeiten",
+  "DeleteVersion": "Version löschen",
+  "DeleteVersionDescription": "Sie sind dabei, eine Dateiversion zu löschen. Sie kann dann nicht mehr angezeigt oder wiederhergestellt werden. Möchten Sie wirklich fortfahren?"
 }

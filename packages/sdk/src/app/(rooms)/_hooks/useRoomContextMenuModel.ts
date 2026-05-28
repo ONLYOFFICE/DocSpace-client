@@ -60,6 +60,7 @@ import { RoomsRefreshContext } from "../_contexts/RoomsRefreshContext";
 type TRoomItem = TFolderItem & {
   pinned?: boolean;
   mute?: boolean;
+  inRoom?: boolean;
   security?: {
     Pin?: boolean;
     ChangeOwner?: boolean;
@@ -103,7 +104,6 @@ export default function useRoomContextMenuModel(
         }
         refreshRooms?.();
       };
-
       const handleMute = async () => {
         await api.settings.muteRoomNotification(room.id, !room.mute);
         onRoomChanged?.(room.id);
@@ -220,7 +220,7 @@ export default function useRoomContextMenuModel(
             : t("Common:DisableNotifications"),
           icon: room.mute ? UnmuteReactSvgUrl : MuteReactSvgUrl,
           onClick: handleMute,
-          disabled: !room.security?.Mute,
+          disabled: !room.security?.Mute || !room.inRoom,
         },
         { key: "separator-mute", isSeparator: true },
         {

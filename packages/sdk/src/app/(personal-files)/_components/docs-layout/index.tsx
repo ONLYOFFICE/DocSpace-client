@@ -180,8 +180,11 @@ const DocsLayout = observer(
     const isInRooms =
       rootFolderType === FolderType.Rooms ||
       rootFolderType === FolderType.Archive;
+    const isCanCreate = !!current.security?.Create;
     const isActionButtonEnabled =
-      (isMyDocuments || isInRooms) && !sdkConfig?.disableActionButton;
+      (isMyDocuments || isInRooms) &&
+      !sdkConfig?.disableActionButton &&
+      isCanCreate;
 
     const docsActions = useDocsActions();
     const {

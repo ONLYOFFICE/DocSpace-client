@@ -33,55 +33,38 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-"use client";
-
 import React from "react";
-import { observer } from "mobx-react";
+import { Avatar, AvatarRole } from "@docspace/ui-kit/components/avatar";
+import { classNames } from "@docspace/shared/utils";
+import DefaultUserAvatarSmall from "PUBLIC_DIR/images/default_user_photo_size_32-32.png?url";
 
-import { FilesRowContainer } from "@docspace/shared/components/files-row";
-import { useIsServer } from "@docspace/shared/hooks/useIsServer";
+import type { EditorsListProps } from "../EditorsTooltip.types";
+import styles from "../EditorsTooltip.module.scss";
 
-import { Row } from "./sub-components/Row";
+export const EditorsList = ({
+  editors,
+  avatarSize,
+  isMobile = false,
+}: EditorsListProps) => {
+  if (editors.length === 0) return null;
 
-import { RowViewProps } from "./RowView.types";
-
-const RowView = ({
-  total,
-  items,
-  hasMoreFiles,
-  filterSortBy,
-  timezone,
-  displayFileExtension,
-  fetchMoreFiles,
-  currentUserId,
-}: RowViewProps) => {
-  const isSSR = useIsServer();
+  const getClassName = (baseClassName: string) =>
+    classNames(baseClassName, { [styles.mobile]: isMobile });
 
   return (
-    <FilesRowContainer
-      className="files-row-container"
-      filesLength={items.length}
-      itemCount={total}
-      hasMoreFiles={hasMoreFiles}
-      useReactWindow={!isSSR}
-      fetchMoreFiles={fetchMoreFiles}
-      itemHeight={58}
-      onScroll={() => {}}
-    >
-      {items.map((item, index) => (
-        <Row
-          key={`${item.id}`}
-          index={index}
-          item={item}
-          filterSortBy={filterSortBy}
-          timezone={timezone}
-          displayFileExtension={displayFileExtension}
-          isSSR={isSSR}
-          currentUserId={currentUserId}
-        />
+    <div className={styles.editorsList}>
+      {editors.map((editor) => (
+        <div key={editor.id} className={getClassName(styles.editorItem)}>
+          <Avatar
+            size={avatarSize}
+            userName={editor.name}
+            source={editor.photo?.big || DefaultUserAvatarSmall}
+            className={getClassName(styles.editorAvatar)}
+            role={AvatarRole.user}
+          />
+          <span className={styles.editorName}>{editor.name}</span>
+        </div>
       ))}
-    </FilesRowContainer>
+    </div>
   );
 };
-
-export default observer(RowView);

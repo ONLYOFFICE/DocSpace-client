@@ -106,6 +106,21 @@ class FilesListStore {
     if (item && "customFilterEnabled" in item) item.customFilterEnabled = enabled;
   };
 
+  updateItemEditing = (id: number | string, isEditing: boolean) => {
+    const item = this.items.find((i) => i.id === id);
+    if (item && "isEditing" in item) item.isEditing = isEditing;
+  };
+
+  updateItemActiveEditors = (
+    id: number | string,
+    activeEditors: Record<string, string> | undefined,
+  ) => {
+    const item = this.items.find((i) => i.id === id);
+    if (item && !item.isFolder) {
+      (item as Record<string, unknown>).activeEditors = activeEditors;
+    }
+  };
+
   removeItem = (id: number | string) => {
     this.items = this.items.filter((i) => i.id !== id);
   };

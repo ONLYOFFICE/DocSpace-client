@@ -65,6 +65,7 @@ interface DashboardProps {
   firstName?: string;
   pricingUrl?: string;
   isAdminOrOwner: boolean;
+  isGuest: boolean;
   isAppEnabled: (id: string) => boolean;
   activate: (id: string) => Promise<boolean>;
   enable: (id: string, enabled: boolean) => Promise<unknown>;
@@ -75,6 +76,7 @@ const Dashboard = ({
   firstName,
   pricingUrl,
   isAdminOrOwner,
+  isGuest,
   isAppEnabled,
   activate,
   enable,
@@ -259,6 +261,7 @@ const Dashboard = ({
   }
 
   const moduleItems: ModuleItem[] = appsCatalog
+    .filter((app) => !(isGuest && app.id === "ai-files"))
     .map((app) => ({
       id: app.id,
       icon: app.icon,
@@ -378,6 +381,7 @@ const DashboardConnected = inject<TStore>(
     firstName: userStore.user?.firstName,
     isAdminOrOwner:
       (userStore.user?.isAdmin ?? false) || (userStore.user?.isOwner ?? false),
+    isGuest: userStore.user?.isVisitor ?? false,
     pricingUrl: settingsStore.docspacePricesUrl,
     isAppEnabled: appsStore.isEnabled,
     activate: appsStore.activate,

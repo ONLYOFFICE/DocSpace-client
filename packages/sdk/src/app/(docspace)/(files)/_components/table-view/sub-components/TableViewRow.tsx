@@ -163,6 +163,7 @@ const TableViewRow = observer(
     );
 
     const onRowClick = React.useCallback(() => {
+      if (filesSelectionStore.isCheckedItem(item)) return;
       filesSelectionStore.setSelection([]);
       filesSelectionStore.setBufferSelection(item);
     }, [filesSelectionStore, item]);

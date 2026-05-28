@@ -2044,5 +2044,6 @@
   "YouWillBeContacted": "요청을 생성하면 영업팀에서 연락을 드릴 것입니다.",
   "EditComment": "코멘트 수정",
   "DeleteVersion": "버전 삭제",
-  "DeleteVersionDescription": "파일 버전을 삭제하려고 합니다. 삭제하면 더 이상 확인하거나 복원할 수 없습니다. 그래도 계속하시겠습니까?"
+  "DeleteVersionDescription": "파일 버전을 삭제하려고 합니다. 삭제하면 더 이상 확인하거나 복원할 수 없습니다. 그래도 계속하시겠습니까?",
+  "VersionShort": "버전"
 }

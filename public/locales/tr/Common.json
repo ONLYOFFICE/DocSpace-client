@@ -2075,5 +2075,6 @@
   "YouWillBeContacted": "Satış ekibi, talebi oluşturduktan sonra sizinle iletişime geçecektir.",
   "EditComment": "Yorumu düzenle",
   "DeleteVersion": "Sürümü sil",
-  "DeleteVersionDescription": "Bir dosya sürümünü silmek üzeresiniz. Silindikten sonra artık görüntülenemez veya geri getirilemez. Devam etmek istediğinizden emin misiniz?"
+  "DeleteVersionDescription": "Bir dosya sürümünü silmek üzeresiniz. Silindikten sonra artık görüntülenemez veya geri getirilemez. Devam etmek istediğinizden emin misiniz?",
+  "VersionShort": "Sür."
 }

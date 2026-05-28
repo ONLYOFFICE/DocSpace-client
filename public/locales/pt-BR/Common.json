@@ -2083,5 +2083,6 @@
   "YouWillBeContacted": "A equipe de vendas entrará em contato com você após a criação do pedido.",
   "EditComment": "Editar comentário",
   "DeleteVersion": "Excluir versão",
-  "DeleteVersionDescription": "Você está prestes a excluir uma versão do arquivo. Não será mais possível vê-lo ou restaurá-lo. Tem certeza de que deseja continuar?"
+  "DeleteVersionDescription": "Você está prestes a excluir uma versão do arquivo. Não será mais possível vê-lo ou restaurá-lo. Tem certeza de que deseja continuar?",
+  "VersionShort": "Ver."
 }

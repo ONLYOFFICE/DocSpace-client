@@ -2083,5 +2083,6 @@
   "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării.",
   "EditComment": "Editare comentariu",
   "DeleteVersion": "Ștergere versiune",
-  "DeleteVersionDescription": "Sunteţi pe cale să ştergeţi o versiune a fişierului. Va fi imposibil să o vizualizați sau recuperați. Sigur doriţi să continuați?"
+  "DeleteVersionDescription": "Sunteţi pe cale să ştergeţi o versiune a fişierului. Va fi imposibil să o vizualizați sau recuperați. Sigur doriţi să continuați?",
+  "VersionShort": "Ver."
 }

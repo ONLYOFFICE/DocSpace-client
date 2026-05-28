@@ -2075,5 +2075,6 @@
   "YouWillBeContacted": "Đội ngũ kinh doanh sẽ liên hệ với bạn sau khi tạo yêu cầu.",
   "EditComment": "Chỉnh sửa nhận xét",
   "DeleteVersion": "Xóa phiên bản",
-  "DeleteVersionDescription": "Bạn sắp xóa một phiên bản tập tin. Sẽ không thể xem hoặc khôi phục nó lại. Bạn có chắc chắn muốn tiếp tục không?"
+  "DeleteVersionDescription": "Bạn sắp xóa một phiên bản tập tin. Sẽ không thể xem hoặc khôi phục nó lại. Bạn có chắc chắn muốn tiếp tục không?",
+  "VersionShort": "Phiên bản"
 }

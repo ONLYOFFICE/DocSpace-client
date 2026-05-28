@@ -2083,5 +2083,6 @@
   "YouWillBeContacted": "Il team di vendita ti contatterà dopo aver creato la richiesta.",
   "EditComment": "Modifica commento",
   "DeleteVersion": "Elimina versione",
-  "DeleteVersionDescription": "Stai per eliminare una versione del file. Non sarà più possibile visualizzarla o ripristinarla. Sei sicuro di voler procedere?"
+  "DeleteVersionDescription": "Stai per eliminare una versione del file. Non sarà più possibile visualizzarla o ripristinarla. Sei sicuro di voler procedere?",
+  "VersionShort": "Ver."
 }

@@ -459,9 +459,5 @@ export default inject(
       versionDeletionProcess,
     };
   },
-)(
-  withTranslation(["VersionHistory", "Common", "Translations"])(
-    observer(VersionRow),
-  ),
-);
+)(withTranslation(["Common", "Translations"])(observer(VersionRow)));
 

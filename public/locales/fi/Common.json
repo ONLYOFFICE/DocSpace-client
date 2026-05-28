@@ -2075,5 +2075,6 @@
   "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen.",
   "EditComment": "Muokkaa kommenttia",
   "DeleteVersion": "Poista versio",
-  "DeleteVersionDescription": "Olet poistamassa tiedoston versiota. Sen jälkeen sen näkeminen tai palauttaminen ei ole enää mahdollista. Olet varma, että haluat jatkaa?"
+  "DeleteVersionDescription": "Olet poistamassa tiedoston versiota. Sen jälkeen sen näkeminen tai palauttaminen ei ole enää mahdollista. Olet varma, että haluat jatkaa?",
+  "VersionShort": "Ver."
 }

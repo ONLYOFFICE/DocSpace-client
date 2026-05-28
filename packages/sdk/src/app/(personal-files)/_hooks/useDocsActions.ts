@@ -307,10 +307,14 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
       });
 
       if (anySuccess) {
+        const successCount = uploadStore.items.filter(
+          (i) => i.status === "uploaded",
+        ).length;
+        toastr.success(t("Common:ItemsSuccessfullyUploaded", { count: successCount }));
         router.refresh();
       }
     },
-    [getFolderId, filesSettings, router, uploadStore],
+    [getFolderId, filesSettings, router, uploadStore, t],
   );
 
   const onUploadFiles = useCallback(() => {

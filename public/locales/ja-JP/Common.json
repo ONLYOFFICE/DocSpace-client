@@ -2084,5 +2084,8 @@
   "EditComment": "コメントの編集",
   "DeleteVersion": "バージョンを削除",
   "DeleteVersionDescription": "ファイルのバージョンを削除しようとしています。これ以上見ることや復元することはできません。本当に続行してもよろしいですか？",
-  "VersionShort": "Ver."
+  "VersionShort": "Ver.",
+  "LeaveRoomDescription": "あなたはこのルームの所有者です。退室する前に、所有者の役割を他のユーザーに譲渡する必要があります。",
+  "AreYouSureWantLeaveRoom": "このルームを退出してもよろしいですか？",
+  "YouLeftTheRoom": "正常に退室されました。"
 }

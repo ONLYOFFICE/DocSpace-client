@@ -2084,5 +2084,8 @@
   "EditComment": "Editar comentário",
   "DeleteVersion": "Excluir versão",
   "DeleteVersionDescription": "Você está prestes a excluir uma versão do arquivo. Não será mais possível vê-lo ou restaurá-lo. Tem certeza de que deseja continuar?",
-  "VersionShort": "Ver."
+  "VersionShort": "Ver.",
+  "LeaveRoomDescription": "Você é o dono desta sala. Antes de sair da sala, você deve transferir a função de proprietário para outro usuário.",
+  "AreYouSureWantLeaveRoom": "Tem certeza que deseja sair desta sala?",
+  "YouLeftTheRoom": "Você saiu da sala"
 }

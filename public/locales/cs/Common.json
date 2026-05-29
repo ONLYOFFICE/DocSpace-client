@@ -2076,5 +2076,8 @@
   "EditComment": "Upravit komentář",
   "DeleteVersion": "Smazat verzi",
   "DeleteVersionDescription": "Chystáte se odstranit verzi souboru. Nebude již možné ji zobrazit nebo obnovit. Jste si jisti, že chcete pokračovat?",
-  "VersionShort": "Ver."
+  "VersionShort": "Ver.",
+  "LeaveRoomDescription": "Majitelem této místnosti jste vy. Než místnost opustíte, musíte roli vlastníka převést na jiného uživatele.",
+  "AreYouSureWantLeaveRoom": "Jste si jisti, že chcete opustit tuto místnost?",
+  "YouLeftTheRoom": "Opustili jste místnost"
 }

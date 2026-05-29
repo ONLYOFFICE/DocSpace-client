@@ -16,7 +16,6 @@
   "ArchiveAction": "Opróżnij archiwum",
   "ArchivedRoomsAction": "Pokoje zostały zarchiwizowane",
   "ArchiveEmptyScreenUser": "Tutaj pojawią się zarchiwizowane pokoje.",
-  "AreYouSureWantLeaveRoom": "Czy na pewno chcesz opuścić ten pokój?",
   "ByErasure": "Kasowanie",
   "ChangeAgentOwnerSelectorInfo": "Tylko administrator pokoju lub administrator {{productName}} może zostać właścicielem agenta.",
   "ChangeTheAgentOwner": "Zmień właściciela agenta",
@@ -78,7 +77,6 @@
   "Index": "Indeks",
   "LastActivity": "Ostatnia aktywność",
   "LastOpened": "Ostatnio otwarte",
-  "LeaveRoomDescription": "Jesteś właścicielem tego pokoju. Zanim opuścisz pokój, musisz przekazać rolę właściciela innemu użytkownikowi.",
   "LeaveRoomFormFillingWarning": "Obecnie jesteś przypisany do wypełniania formularzy w tym pokoju. Opuszczenie pokoju spowoduje wstrzymanie tych formularzy na Twoim etapie. Możesz dołączyć ponownie tylko poprzez nowe zaproszenie od administratora pokoju.",
   "LifetimeDialogDescription": "Odliczanie okresu ważności rozpoczyna się w dniu utworzenia pliku. Niektóre pliki w tym pokoju przekroczyły swój okres ważności i zostaną usunięte po włączeniu ustawienia.",
   "LifetimeDialogDescriptionHeader": "Starsze pliki, które przekroczyły swój okres ważności, zostaną usunięte",
@@ -183,6 +181,5 @@
   "WarningMoveToFormRoomServal": "Przenoszenie kilku plików do Pokoju do wypełniania formularzy nie jest obsługiwane. Przenoś po jednym formularzu PDF {{ organizationName }} na raz.",
   "WillBeDeletedPermanently": "{{date}} nastąpi trwałe usunięcie",
   "YouLeftTheAgent": "Zostawiłeś agenta.",
-  "YouLeftTheRoom": "Opuszczono pokój",
   "YourUserTypeHasChanged": "Twój rodzaj użytkownika został zmieniony na <1>“{{userType}}”</1> przez administratora {{productName}} <1>{{adminName}}</1>."
 }

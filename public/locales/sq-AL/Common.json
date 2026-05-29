@@ -2076,5 +2076,8 @@
   "EditComment": "Redaktoni komentin",
   "DeleteVersion": "Fshij versionin",
   "DeleteVersionDescription": "Jeni duke fshirë një version të skedarit. Nuk do të jetë e mundur ta shihni ose ta rivendosni atë më. Jeni të sigurt që doni të vazhdoni?",
-  "VersionShort": "Ver."
+  "VersionShort": "Ver.",
+  "LeaveRoomDescription": "Ju jeni pronari i kësaj dhome. Përpara se të dilni nga dhoma, duhet të transferoni rolin e pronarit te një përdorues tjetër.",
+  "AreYouSureWantLeaveRoom": "A jeni të sigurt që dëshironi të largoheni nga kjo dhomë?",
+  "YouLeftTheRoom": "Ju keni dalë nga dhoma"
 }

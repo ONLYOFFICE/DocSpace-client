@@ -2084,5 +2084,8 @@
   "EditComment": "编辑批注",
   "DeleteVersion": "删除版本",
   "DeleteVersionDescription": "您即将删除文件版本，将无法再查看或恢复。确定要继续吗？",
-  "VersionShort": "版本"
+  "VersionShort": "版本",
+  "LeaveRoomDescription": "您是房间的所有者。退出房间之前，您必须将所有者的角色转移给其他用户。",
+  "AreYouSureWantLeaveRoom": "您确定要离开此房间吗？",
+  "YouLeftTheRoom": "您已退出房间"
 }

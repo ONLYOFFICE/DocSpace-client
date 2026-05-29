@@ -2076,5 +2076,8 @@
   "EditComment": "Chỉnh sửa nhận xét",
   "DeleteVersion": "Xóa phiên bản",
   "DeleteVersionDescription": "Bạn sắp xóa một phiên bản tập tin. Sẽ không thể xem hoặc khôi phục nó lại. Bạn có chắc chắn muốn tiếp tục không?",
-  "VersionShort": "Phiên bản"
+  "VersionShort": "Phiên bản",
+  "LeaveRoomDescription": "Bạn là chủ sở hữu của phòng này. Trước khi rời khỏi phòng, bạn phải chuyển vai trò của chủ sở hữu cho người dùng khác.",
+  "AreYouSureWantLeaveRoom": "Bạn có chắc chắn muốn rời khỏi phòng này không?",
+  "YouLeftTheRoom": "Bạn đã rời khỏi phòng"
 }

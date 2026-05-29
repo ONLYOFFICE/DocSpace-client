@@ -2084,5 +2084,8 @@
   "EditComment": "Kommentar bearbeiten",
   "DeleteVersion": "Version löschen",
   "DeleteVersionDescription": "Sie sind dabei, eine Dateiversion zu löschen. Sie kann dann nicht mehr angezeigt oder wiederhergestellt werden. Möchten Sie wirklich fortfahren?",
-  "VersionShort": "Ver."
+  "VersionShort": "Ver.",
+  "LeaveRoomDescription": "Sie sind verantwortlich für diesen Raum. Sie müssen die Rolle des Verantwortlichen auf einen anderen Benutzer übertragen, bevor Sie den Raum verlassen.",
+  "AreYouSureWantLeaveRoom": "Sind Sie sicher, dass Sie diesen Raum verlassen möchten?",
+  "YouLeftTheRoom": "Sie haben den Raum verlassen"
 }

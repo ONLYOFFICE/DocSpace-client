@@ -16,7 +16,6 @@
   "ArchiveAction": "Arhivă goală",
   "ArchivedRoomsAction": "Sălile sunt arhivate",
   "ArchiveEmptyScreenUser": "Sălile care au fost arhivate vor apărea aici.",
-  "AreYouSureWantLeaveRoom": "Sunteți sigur că doriți să părăsiți această cameră?",
   "ByErasure": "Ștergere",
   "ChangeAgentOwnerSelectorInfo": "Doar administratorul sălii sau administratorul {{productName}} poate deveni proprietarul agentului",
   "ChangeTheAgentOwner": "Schimbare proprietar al agentului",
@@ -78,7 +77,6 @@
   "Index": "Index",
   "LastActivity": "Ultima activitate",
   "LastOpened": "Deschise recent",
-  "LeaveRoomDescription": "Sunteți proprietarul acestei săli. Înainte de a părăsi sala, trebuie să atribuiți rolul de proprietar unui alt utilizator.",
   "LeaveRoomFormFillingWarning": "Sunteți în prezent desemnat pentru completarea formularelor în această cameră. Părăsirea acesteia va opri procesarea acestor formulare la etapa dumneavoastră. Vă puteți reconecta doar printr-o nouă invitație de la un administrator al camerei.",
   "LifetimeDialogDescription": "Numărătoarea inversă pentru durată de viață va începe la data creării fișierului.  Durata de viață a unor fișierelor este mai mică decât durata de viață propusă, astfel aceste fișiere vor fi șterse după activarea acestei setări.",
   "LifetimeDialogDescriptionHeader": "Fișierele mai vechi a căror durata de viață este depășită vor fi șterse",
@@ -183,6 +181,5 @@
   "WarningMoveToFormRoomServal": "Deplasarea mai multor fișiere în Sala de completare a formularelor nu este acceptată. Deplasați câte un formular PDF  {{ organizationName }}.",
   "WillBeDeletedPermanently": "{{date}} va fi şters definitiv",
   "YouLeftTheAgent": "Dvs ați părăsit agentul",
-  "YouLeftTheRoom": "Ați părăsit sala",
   "YourUserTypeHasChanged": "Tipul de utilizator a fost schimbat în <1>“{{userType}}”</1> de către administratorul  <1>{{adminName}}</1> al {{productName}}."
 }

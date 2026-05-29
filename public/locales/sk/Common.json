@@ -2046,5 +2046,8 @@
   "EditComment": "Upraviť komentár",
   "DeleteVersion": "Odstrániť verziu",
   "DeleteVersionDescription": "Práve sa chystáte odstrániť verziu súboru. Už ju nebude možné zobraziť ani obnoviť. Ste si istí, že chcete pokračovať?",
-  "VersionShort": "Ver."
+  "VersionShort": "Ver.",
+  "LeaveRoomDescription": "Vy ste majiteľom tejto miestnosti. Skôr ako opustíte miestnosť, musíte odovzdať úlohu vlastníka inému používateľovi.",
+  "AreYouSureWantLeaveRoom": "Naozaj chcete opustiť túto miestnosť?",
+  "YouLeftTheRoom": "Opustili ste miestnosť"
 }

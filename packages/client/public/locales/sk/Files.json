@@ -16,7 +16,6 @@
   "ArchiveAction": "Vyprázdniť archív",
   "ArchivedRoomsAction": "Miestnosti sú archivované",
   "ArchiveEmptyScreenUser": "Tu sa zobrazia miestnosti, ktoré boli archivované.",
-  "AreYouSureWantLeaveRoom": "Naozaj chcete opustiť túto miestnosť?",
   "ByErasure": "Vymazanie",
   "ChangeAgentOwnerSelectorInfo": "Len správca priestoru alebo správca {{productName}} môže byť vlastníkom agenta.",
   "ChangeTheAgentOwner": "Zmeniť vlastníka agenta",
@@ -78,7 +77,6 @@
   "Index": "Index",
   "LastActivity": "Posledná aktivita",
   "LastOpened": "Posledný otvorený",
-  "LeaveRoomDescription": "Vy ste majiteľom tejto miestnosti. Skôr ako opustíte miestnosť, musíte odovzdať úlohu vlastníka inému používateľovi.",
   "LeaveRoomFormFillingWarning": "Momentálne ste v tejto miestnosti priradení k dokončovaniu formulárov. Odchod z tejto miestnosti zastaví tieto formuláre na vašom kroku. Opätovne sa môžete pripojiť len prostredníctvom novej pozvánky od správcu miestnosti.",
   "LifetimeDialogDescription": "Odpočítavanie doby používania sa začína od dátumu vytvorenia súboru. Pri niektorých súboroch v tejto miestnosti je prekročená navrhovaná doba používania a po zapnutí tohto nastavenia tieto súbory budú vymazané.",
   "LifetimeDialogDescriptionHeader": "Staršie súbory s prekročenou dobou používania budú vymazané",
@@ -183,6 +181,5 @@
   "WarningMoveToFormRoomServal": "Presunutie viacerých súborov do miestnosti na vyplnenie formulárov nie je podporované. Premiestňujte jeden {{ organizationName }} PDF formulára naraz.",
   "WillBeDeletedPermanently": "{{date}} bude natrvalo odstránený",
   "YouLeftTheAgent": "Opustili ste agenta.",
-  "YouLeftTheRoom": "Opustili ste miestnosť",
   "YourUserTypeHasChanged": "Váš typ používateľa bol zmenený na <1>„{{userType}}“</1> správcom {{productName}} <1>{{adminName}}</1>."
 }

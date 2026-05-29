@@ -2076,5 +2076,8 @@
   "EditComment": "Edytuj komentarz",
   "DeleteVersion": "Usuń wersję",
   "DeleteVersionDescription": "Zamierzasz usunąć wersję pliku. Nie będzie już można jej zobaczyć ani przywrócić. Czy na pewno chcesz kontynuować?",
-  "VersionShort": "Wer."
+  "VersionShort": "Wer.",
+  "LeaveRoomDescription": "Jesteś właścicielem tego pokoju. Zanim opuścisz pokój, musisz przekazać rolę właściciela innemu użytkownikowi.",
+  "AreYouSureWantLeaveRoom": "Czy na pewno chcesz opuścić ten pokój?",
+  "YouLeftTheRoom": "Opuszczono pokój"
 }

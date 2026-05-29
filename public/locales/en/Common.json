@@ -2084,5 +2084,8 @@
   "EditComment": "Edit comment",
   "DeleteVersion": "Delete version",
   "DeleteVersionDescription": "You are about to delete a file version. It will be no possible to see or restore it anymore. Are you sure you want to continue?",
-  "VersionShort": "Ver."
+  "VersionShort": "Ver.",
+  "LeaveRoomDescription": "You are the owner of this room. Before you leave the room, you must transfer the owner's role to another user.",
+  "AreYouSureWantLeaveRoom": "Are you sure you want to leave this room?",
+  "YouLeftTheRoom": "You have left the room"
 }

@@ -16,7 +16,6 @@
   "ArchiveAction": "Kho sao lưu trống",
   "ArchivedRoomsAction": "Các phòng đã được sao lưu",
   "ArchiveEmptyScreenUser": "Các phòng đã được sao lưu sẽ xuất hiện ở đây.",
-  "AreYouSureWantLeaveRoom": "Bạn có chắc chắn muốn rời khỏi phòng này không?",
   "ByErasure": "Xóa",
   "ChangeAgentOwnerSelectorInfo": "Chỉ có quản trị viên phòng hoặc quản trị viên {{productName}} mới có thể trở thành chủ sở hữu của agent.",
   "ChangeTheAgentOwner": "Thay đổi chủ sở hữu đại lý",
@@ -78,7 +77,6 @@
   "Index": "Chỉ mục",
   "LastActivity": "Hoạt động cuối",
   "LastOpened": "Lần mở cuối",
-  "LeaveRoomDescription": "Bạn là chủ sở hữu của phòng này. Trước khi rời khỏi phòng, bạn phải chuyển vai trò của chủ sở hữu cho người dùng khác.",
   "LeaveRoomFormFillingWarning": "Bạn hiện đang được giao nhiệm vụ hoàn thành biểu mẫu trong phòng này. Việc rời đi sẽ làm tạm dừng các biểu mẫu đó tại bước của bạn. Bạn chỉ có thể tham gia lại thông qua một lời mời mới từ quản trị viên phòng.",
   "LifetimeDialogDescription": "Đếm ngược thời gian tồn tại bắt đầu vào ngày tạo tập tin. Một số tập tin trong phòng này vượt quá thời gian tồn tại đề xuất và sẽ bị xóa sau khi bạn bật cài đặt.",
   "LifetimeDialogDescriptionHeader": "Các tập tin cũ hơn vượt quá thời gian tồn tại sẽ bị xóa",
@@ -183,6 +181,5 @@
   "WarningMoveToFormRoomServal": "Không hỗ trợ di chuyển một số tập tin vào phòng Điền Biểu mẫu. Hãy di chuyển từng biểu mẫu PDF {{ organizationName }} mỗi lần.",
   "WillBeDeletedPermanently": "{{date}} sẽ bị xóa vĩnh viễn",
   "YouLeftTheAgent": "Bạn đã rời khỏi tác nhân.",
-  "YouLeftTheRoom": "Bạn đã rời khỏi phòng",
   "YourUserTypeHasChanged": "Loại người dùng của bạn đã được quản trị viên <1>{{adminName}}</1> của {{productName}} thay đổi thành <1>“{{userType}}”</1>."
 }

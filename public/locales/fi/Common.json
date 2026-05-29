@@ -2076,5 +2076,8 @@
   "EditComment": "Muokkaa kommenttia",
   "DeleteVersion": "Poista versio",
   "DeleteVersionDescription": "Olet poistamassa tiedoston versiota. Sen jälkeen sen näkeminen tai palauttaminen ei ole enää mahdollista. Olet varma, että haluat jatkaa?",
-  "VersionShort": "Ver."
+  "VersionShort": "Ver.",
+  "LeaveRoomDescription": "Olet tämän huoneen omistaja. Sinun täytyy siirtää omistajan rooli toiselle käyttäjälle ennen kuin poistut huoneesta.",
+  "AreYouSureWantLeaveRoom": "Oletko varma, että haluat poistua tästä huoneesta?",
+  "YouLeftTheRoom": "Olet poistunut huoneesta"
 }

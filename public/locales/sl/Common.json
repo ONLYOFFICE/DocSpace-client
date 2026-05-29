@@ -2076,5 +2076,8 @@
   "EditComment": "Uredi komentar",
   "DeleteVersion": "Izbriši verzijo",
   "DeleteVersionDescription": "Izbrisali boste različico datoteke. Ne bo je več mogoče videti ali obnoviti. Ste prepričani, da želite nadaljevati?",
-  "VersionShort": "Ver."
+  "VersionShort": "Ver.",
+  "LeaveRoomDescription": "Vi ste lastnik te sobe. Preden zapustite sobo, morate vlogo lastnika prenesti na drugega uporabnika.",
+  "AreYouSureWantLeaveRoom": "Ali ste prepričani, da želite zapustiti to sobo?",
+  "YouLeftTheRoom": "Zapustili ste sobo"
 }

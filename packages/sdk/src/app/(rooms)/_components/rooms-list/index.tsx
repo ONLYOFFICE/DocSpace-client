@@ -72,6 +72,7 @@ import RoomsTileView from "../rooms-tile-view";
 import RoomsTableView from "../rooms-table-view";
 import RoomsRowView from "../rooms-row-view";
 import ChangeRoomOwnerDialog from "../change-room-owner-dialog";
+import LeaveRoomDialog from "../leave-room-dialog";
 import InvitePanel from "../invite-panel";
 import EmptyView from "../empty-view";
 import CreateEditRoomDialog from "../create-edit-room-dialog";
@@ -695,6 +696,10 @@ const RoomsList = ({
           onChanged={refreshSingleRoom}
         />
       ) : null}
+      <LeaveRoomDialog
+        currentUserId={user?.id}
+        onTransferOwnership={(room) => setChangingOwnerRoom(room)}
+      />
       {invitingRoom ? (
         <InvitePanel
           visible

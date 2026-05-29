@@ -16,7 +16,6 @@
   "ArchiveAction": "Archief leegmaken",
   "ArchivedRoomsAction": "De kamers zijn gearchiveerd",
   "ArchiveEmptyScreenUser": "Kamers die zijn gearchiveerd verschijnen hier.",
-  "AreYouSureWantLeaveRoom": "Weet u het zeker dat u deze kamer wilt verlaten?",
   "ByErasure": "Erasure",
   "ChangeAgentOwnerSelectorInfo": "Alleen een room admin of een {{productName}} admin kan de eigenaar van de agent worden.",
   "ChangeTheAgentOwner": "Wijzig de agent eigenaar",
@@ -78,7 +77,6 @@
   "Index": "Index",
   "LastActivity": "Laatste activiteit",
   "LastOpened": "Laatst geopend",
-  "LeaveRoomDescription": "U bent de eigenaar van deze kamer. Voordat u de kamer verlaat, moet u de rol van de eigenaar overdragen aan een andere gebruiker.",
   "LeaveRoomFormFillingWarning": "U bent momenteel toegewezen aan het voltooien van formulieren in deze ruimte. Vertrek zal deze formulieren bij uw stap laten stilstaan. U kunt alleen opnieuw deelnemen via een nieuwe uitnodiging van een ruimtebeheerder.",
   "LifetimeDialogDescription": "Het aftellen van de levensduur begint vanaf de aanmaakdatum van het bestand. Sommige bestanden in deze ruimte overschrijden de voorgestelde levensduur en zullen worden verwijderd zodra u de instelling inschakelt.",
   "LifetimeDialogDescriptionHeader": "Oudere bestanden met een overschreden levensduur worden verwijderd",
@@ -183,6 +181,5 @@
   "WarningMoveToFormRoomServal": "Het verplaatsen van meerdere bestanden naar de kamer voor het invullen van formulieren wordt niet ondersteund. Verplaats één {{ organizationName }} PDF formulier tegelijk.",
   "WillBeDeletedPermanently": "{{date}} wordt definitief verwijderd",
   "YouLeftTheAgent": "U heeft de agent verlaten",
-  "YouLeftTheRoom": "U heeft de kamer verlaten",
   "YourUserTypeHasChanged": "Uw gebruikerstype is gewijzigd in <1>“{{userType}}”</1> door de {{productName}} beheerder <1>{{adminName}}</1>."
 }

@@ -16,7 +16,6 @@
   "ArchiveAction": "Boş arxiv",
   "ArchivedRoomsAction": "Otaqlar arxivləşdirildi",
   "ArchiveEmptyScreenUser": "Arxivlənmiş otaqlar burada görünəcək.",
-  "AreYouSureWantLeaveRoom": "Bu otağı tərk etmək istədiyinizə əminsiniz?",
   "ByErasure": "Təmizləmə",
   "ChangeAgentOwnerSelectorInfo": "Ancaq otaq administratorı və ya {{productName}} administratoru agentin sahibi ola bilər.",
   "ChangeTheAgentOwner": "Agent sahibi dəyişdir",
@@ -78,7 +77,6 @@
   "Index": "İndeks",
   "LastActivity": "Son fəaliyyət",
   "LastOpened": "Sonuncu açılmış",
-  "LeaveRoomDescription": "Bu otağın sahibi sizsiniz. Otağı tərk etməzdən əvvəl sahib rolunu başqa istifadəçiyə ötürməlisiniz.",
   "LeaveRoomFormFillingWarning": "Siz hazırda bu otaqda formaların tamamlanması üçün təyin olunmusunuz. Otağı tərk etmək həmin formaları sizin mərhələdə dayandıracaq. Yenidən yalnız otaq adminindən gələn yeni dəvət vasitəsilə qoşula bilərsiniz.",
   "LifetimeDialogDescription": "İstifadə müddəti vaxtı faylın yaradılması tarixindən başlayır. Bu otaqdakı bəzi fayllar tövsiyə olunan istifadə müddətini aşır və parametri aktiv etdikdə silinəcək.",
   "LifetimeDialogDescriptionHeader": "İstifadə müddətini keçmiş köhnə fayllar silinəcək",
@@ -183,6 +181,5 @@
   "WarningMoveToFormRoomServal": "Birdən çox faylın Forma Doldurma otağına köçürülməsi dəstəklənmir. Eyni anda bir {{organizationName }} PDF formasını köçürün.",
   "WillBeDeletedPermanently": "{{date}} həmişəlik silinəcək",
   "YouLeftTheAgent": "Siz agentdən ayrılıbsınız.",
-  "YouLeftTheRoom": "Otağı tərk etdiniz",
   "YourUserTypeHasChanged": "İstifadəçi tipiniz {{productName}} administratoru <1>{{adminName}}</1> tərəfindən <1>“{{userType}}”</1> olaraq dəyişdirilib."
 }

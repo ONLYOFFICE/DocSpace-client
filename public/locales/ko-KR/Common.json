@@ -2045,5 +2045,8 @@
   "EditComment": "코멘트 수정",
   "DeleteVersion": "버전 삭제",
   "DeleteVersionDescription": "파일 버전을 삭제하려고 합니다. 삭제하면 더 이상 확인하거나 복원할 수 없습니다. 그래도 계속하시겠습니까?",
-  "VersionShort": "버전"
+  "VersionShort": "버전",
+  "LeaveRoomDescription": "이 방의 주인입니다. 방을 나가기 전에 방의 소유자 역할을 다른 사용자에게 이전해야 합니다.",
+  "AreYouSureWantLeaveRoom": "이 방을 나가시겠습니까?",
+  "YouLeftTheRoom": "방을 나왔습니다"
 }

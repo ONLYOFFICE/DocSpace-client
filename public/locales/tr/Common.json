@@ -2076,5 +2076,8 @@
   "EditComment": "Yorumu düzenle",
   "DeleteVersion": "Sürümü sil",
   "DeleteVersionDescription": "Bir dosya sürümünü silmek üzeresiniz. Silindikten sonra artık görüntülenemez veya geri getirilemez. Devam etmek istediğinizden emin misiniz?",
-  "VersionShort": "Sür."
+  "VersionShort": "Sür.",
+  "LeaveRoomDescription": "Siz bu odanın sahibisiniz. Odadan ayrılmadan önce sahip rolünü başka bir kullanıcıya aktarmanız gerekir.",
+  "AreYouSureWantLeaveRoom": "Bu odadan ayrılmak istediğinizden emin misiniz?",
+  "YouLeftTheRoom": "Odadan ayrıldınız"
 }

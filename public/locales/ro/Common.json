@@ -2084,5 +2084,8 @@
   "EditComment": "Editare comentariu",
   "DeleteVersion": "Ștergere versiune",
   "DeleteVersionDescription": "Sunteţi pe cale să ştergeţi o versiune a fişierului. Va fi imposibil să o vizualizați sau recuperați. Sigur doriţi să continuați?",
-  "VersionShort": "Ver."
+  "VersionShort": "Ver.",
+  "LeaveRoomDescription": "Sunteți proprietarul acestei săli. Înainte de a părăsi sala, trebuie să atribuiți rolul de proprietar unui alt utilizator.",
+  "AreYouSureWantLeaveRoom": "Sunteți sigur că doriți să părăsiți această cameră?",
+  "YouLeftTheRoom": "Ați părăsit sala"
 }

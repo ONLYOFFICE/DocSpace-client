@@ -16,7 +16,6 @@
   "ArchiveAction": "Arşivi boşalt",
   "ArchivedRoomsAction": "Odalar arşivlendi",
   "ArchiveEmptyScreenUser": "Arşivlenen odalar burada görünecektir.",
-  "AreYouSureWantLeaveRoom": "Bu odadan ayrılmak istediğinizden emin misiniz?",
   "ByErasure": "Silinti",
   "ChangeAgentOwnerSelectorInfo": "Sadece bir oda yöneticisi veya bir {{productName}} yöneticisi aracının sahibi olabilir.",
   "ChangeTheAgentOwner": "Ajan sahibini değiştir",
@@ -78,7 +77,6 @@
   "Index": "Dizin",
   "LastActivity": "Son etkinlik",
   "LastOpened": "Son açılan",
-  "LeaveRoomDescription": "Siz bu odanın sahibisiniz. Odadan ayrılmadan önce sahip rolünü başka bir kullanıcıya aktarmanız gerekir.",
   "LeaveRoomFormFillingWarning": "Şu anda bu odada form tamamlama işlemi için görevlendirildiniz. Ayrılmanız, bu formların sizin aşamanızda durmasına neden olacaktır. Odaya ancak bir oda yöneticisinden gelecek yeni bir davet ile yeniden katılabilirsiniz.",
   "LifetimeDialogDescription": "Yaşam süresi geri sayımı dosya oluşturma tarihinde başlar. Bu odadaki bazı dosyalar önerilen yaşam süresini aşıyor ve ayarı etkinleştirdiğinizde silinecektir.",
   "LifetimeDialogDescriptionHeader": "Yaşam süresini aşmış eski dosyalar silinecek",
@@ -183,6 +181,5 @@
   "WarningMoveToFormRoomServal": "Birden fazla dosyanın Form Doldurma odasına taşınması desteklenmiyor. Tek seferde bir {{ organizationName }} PDF formu taşıyın.",
   "WillBeDeletedPermanently": "{{date}} kalıcı olarak silinecek",
   "YouLeftTheAgent": "Ajanı terk ettiniz.",
-  "YouLeftTheRoom": "Odadan ayrıldınız",
   "YourUserTypeHasChanged": "Kullanıcı türünüz, {{productName}} yöneticisi <1>{{adminName}}</1> tarafından <1>“{{userType}}”</1> olarak değiştirildi."
 }

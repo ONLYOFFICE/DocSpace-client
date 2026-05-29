@@ -44,6 +44,9 @@ import { TRoom } from "@docspace/shared/api/rooms/types";
 import { useFilesListStore } from "../_store/FilesListStore";
 import { DeleteContext } from "../_contexts/DeleteContext";
 import { FileOperationsContext } from "../_contexts/FileOperationsContext";
+import { RenameContext } from "../_contexts/RenameContext";
+import { InfoContext } from "../_contexts/InfoContext";
+import { ShareContext } from "../_contexts/ShareContext";
 import { useDialogsStore } from "../_store/DialogsStore";
 import useItemContextMenu from "./useItemContextMenu";
 import useContextMenuModel from "./useContextMenuModel";
@@ -63,7 +66,11 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
   const dialogsStore = useDialogsStore();
 
   const isTrashSection = filesListStore.rootFolderType === FolderType.TRASH;
+  const isDocsSection = filesListStore.rootFolderType === FolderType.USER;
   const isRoom = !!current?.roomType;
+  const renameCtx = React.useContext(RenameContext);
+  const infoCtx = React.useContext(InfoContext);
+  const shareCtx = React.useContext(ShareContext);
 
   const onEditRoom = useCallback(
     (_item: TFolderItem | TFileItem) => {
@@ -99,7 +106,7 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
     [current, dialogsStore],
   );
 
-  const { getFoldersContextMenu } = useItemContextMenu({ isTrashSection });
+  const { getFoldersContextMenu } = useItemContextMenu({ isTrashSection, isDocsSection });
   const { getContextModel: getRoomContextModel } = useRoomContextMenuModel(
     onEditRoom,
     undefined, // onRoomChanged
@@ -139,6 +146,9 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
       onMoveClick: !isTrashSection ? fileOpsCtx?.moveItem : undefined,
       onDuplicateClick: !isTrashSection ? fileOpsCtx?.duplicateItem : undefined,
       onRestoreClick: isTrashSection ? fileOpsCtx?.restoreItem : undefined,
+      onRenameClick: renameCtx?.renameItem,
+      onInfoClick: infoCtx ?? undefined,
+      onShareClick: shareCtx ?? undefined,
     });
 
   const getContextOptionsFolder = useCallback((): ContextMenuModel[] => {

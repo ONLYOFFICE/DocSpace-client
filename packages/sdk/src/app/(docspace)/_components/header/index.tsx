@@ -90,10 +90,9 @@ const Header = ({
   const fileOpsCtx = React.useContext(FileOperationsContext);
   const isTrashSection = filesListStore.rootFolderType === FolderType.TRASH;
 
-  const {
-    getContextOptionsFolder,
-    isRoom,
-  } = useHeaderContextMenu(current);
+  const { getContextOptionsFolder, isRoom } = useHeaderContextMenu(
+    filesListStore.currentFolder ?? current,
+  );
 
   const { getHeaderContextMenuModel } = useContextMenuModel({
     onDeleteClick: deleteCtx?.deleteItem,
@@ -119,8 +118,10 @@ const Header = ({
 
   const { openFolder } = useFolderActions({ t });
 
-  const title = current?.title;
-  const id = current?.id;
+  const activeCurrent = filesListStore.currentFolder ?? current;
+
+  const title = activeCurrent?.title;
+  const id = activeCurrent?.id;
 
   const pathParts = filesListStore.pathParts ?? pathPartsProp;
 
@@ -128,11 +129,12 @@ const Header = ({
     pathParts?.[0]?.folderType === FolderType.Rooms ||
     pathParts?.[0]?.folderType === FolderType.Archive;
 
-  // `isRoomsFolder` is true only when the current folder IS the section root
-  // (e.g. the "Rooms" or "Archive" list itself, not a specific room or subfolder).
+  // Section root: only one entry in pathParts means we're at the top of a
+  // section (Rooms list, My documents, Favorites, Recent, Trash, etc.).
   // Using pathParts.length instead of id === rootFolderId because the server may
   // return rootFolderId = 0 for the section root itself, breaking the equality check.
-  const isRoomsFolder = isInRoomsContext && pathParts?.length === 1;
+  const isRootSection = (pathParts?.length ?? 0) <= 1;
+  const isRoomsFolder = isInRoomsContext && isRootSection;
 
   const navigationItems: TNavigationItem[] = useMemo(() => {
     if (!pathParts) return [];
@@ -239,8 +241,8 @@ const Header = ({
             onClickFolder={(idFolder) => {
               openFolder(
                 idFolder,
-                currentNavigationItems.find((v) => v.id === idFolder)
-                  ?.title ?? currentNavigationItems[0].title,
+                currentNavigationItems.find((v) => v.id === idFolder)?.title ??
+                  currentNavigationItems[0].title,
               );
             }}
             isTrashFolder={false}
@@ -248,7 +250,7 @@ const Header = ({
             isEmptyFilesList={isEmptyList}
             onBackToParentFolder={onBackToParentFolder}
             showRootFolderTitle={false}
-            withMenu={!isRoomsFolder}
+            withMenu={!isRootSection}
             currentDeviceType={currentDeviceType}
             titleIcon=""
             titleIconTooltip=""
@@ -263,7 +265,7 @@ const Header = ({
             onLogoClick={onBurgerClick ?? (() => {})}
             clearTrash={() => {}}
             showFolderInfo={() => {}}
-            isContextButtonVisible={!isRoomsFolder}
+            isContextButtonVisible={!isRootSection}
           />
         </div>
       )}

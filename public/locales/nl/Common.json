@@ -2072,5 +2072,9 @@
   "YourName": "Uw naam",
   "YourPrice": "Uw prijs",
   "YourTurn": "Uw beurt",
-  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag."
+  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag.",
+  "EditComment": "Bewerk opmerking",
+  "DeleteVersion": "Versie verwijderen",
+  "DeleteVersionDescription": "U staat op het punt een bestandsversie te verwijderen. Het zal niet meer mogelijk zijn om het te zien of te herstellen. Weet u zeker dat u door wilt gaan?",
+  "VersionShort": "Ver."
 }

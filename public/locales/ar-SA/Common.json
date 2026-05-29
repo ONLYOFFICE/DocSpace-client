@@ -2072,5 +2072,9 @@
   "YourName": "اسمك",
   "YourPrice": "سعرك",
   "YourTurn": "دوركم الآن",
-  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب."
+  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب.",
+  "EditComment": "تعديل التعليق",
+  "DeleteVersion": "حذف النسخة",
+  "DeleteVersionDescription": "أنتم على وشك حذف نسخة من الملف. لن يكون من الممكن عرضها أو استعادتها بعد الآن. هل أنتم متأكدون من المتابعة؟",
+  "VersionShort": "الإصدار"
 }

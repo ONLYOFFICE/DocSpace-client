@@ -2080,5 +2080,9 @@
   "YourName": "您的姓名",
   "YourPrice": "您的价格",
   "YourTurn": "轮到您了",
-  "YouWillBeContacted": "创建请求后销售团队将与您取得联系。"
+  "YouWillBeContacted": "创建请求后销售团队将与您取得联系。",
+  "EditComment": "编辑批注",
+  "DeleteVersion": "删除版本",
+  "DeleteVersionDescription": "您即将删除文件版本，将无法再查看或恢复。确定要继续吗？",
+  "VersionShort": "版本"
 }

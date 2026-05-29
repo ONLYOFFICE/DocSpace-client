@@ -43,7 +43,9 @@ import {
   startUploadSession,
   uploadChunkParallel,
   finalizeUploadSession,
+  checkIsFileExist,
 } from "@docspace/shared/api/files";
+import { ConflictResolveType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { createChunks, runWithConcurrency } from "@docspace/ui-kit/uploader";
 
@@ -98,7 +100,9 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
   const editorBasePath = options?.editorBasePath;
 
   const openInSameTab =
-    sdkConfig?.openEditorInSameTab ?? filesSettings?.openEditorInSameTab ?? true;
+    sdkConfig?.openEditorInSameTab ??
+    filesSettings?.openEditorInSameTab ??
+    true;
 
   const buildCreateUrl = useCallback(
     (folderId: number | string, fileTitle: string) => {
@@ -128,6 +132,17 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
 
   const inputFilesRef = useRef<HTMLInputElement | null>(null);
   const inputFolderRef = useRef<HTMLInputElement | null>(null);
+
+  const [uploadConflictDialogVisible, setUploadConflictDialogVisible] =
+    useState(false);
+  const [uploadConflictItems, setUploadConflictItems] = useState<
+    { title: string; isFile: boolean }[]
+  >([]);
+  const pendingUploadRef = useRef<{
+    files: { file: File; uniqueId: string }[];
+    conflictNames: string[];
+    folderId: number | string;
+  } | null>(null);
 
   const [dialogVisible, setDialogVisible] = useState(false);
   const [dialogType, setDialogType] = useState<CreateFileDialogType>("folder");
@@ -162,7 +177,9 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
           createFolder(folderId, name)
             .then(() => router.refresh())
             .catch((error: unknown) => {
-              toastr.error(error instanceof Error ? error.message : String(error));
+              toastr.error(
+                error instanceof Error ? error.message : String(error),
+              );
             })
             .finally(() => setIsCreating(false));
         } else {
@@ -206,26 +223,15 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
     [getFolderId, dialogType, router, navigateToCreate],
   );
 
-  const uploadFilesToFolder = useCallback(
-    async (files: FileList | File[]) => {
-      const folderId = getFolderId();
-      if (!folderId) return;
-
-      const chunkSize =
-        filesSettings?.chunkUploadSize ?? DEFAULT_CHUNK_SIZE;
+  const doUpload = useCallback(
+    async (
+      taggedFiles: { file: File; uniqueId: string }[],
+      folderId: number | string,
+      createNewIfExist: boolean,
+    ) => {
+      const chunkSize = filesSettings?.chunkUploadSize ?? DEFAULT_CHUNK_SIZE;
       const maxThreads =
         filesSettings?.maxUploadThreadCount ?? DEFAULT_UPLOAD_THREADS;
-
-      const fileArray = Array.from(files);
-      if (fileArray.length === 0) return;
-
-      const taggedFiles = fileArray.map((file) => ({
-        file,
-        uniqueId:
-          typeof crypto !== "undefined" && "randomUUID" in crypto
-            ? crypto.randomUUID()
-            : `${Date.now()}-${Math.random().toString(36).slice(2)}`,
-      }));
 
       uploadStore.startBatch(
         taggedFiles.map(({ file, uniqueId }) => ({
@@ -256,7 +262,7 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
             "",
             false,
             new Date(file.lastModified),
-            true,
+            createNewIfExist,
           );
 
           if (signal.aborted) {
@@ -307,11 +313,87 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
       });
 
       if (anySuccess) {
+        const successCount = uploadStore.items.filter(
+          (i) => i.status === "uploaded",
+        ).length;
+        toastr.success(
+          t("Common:ItemsSuccessfullyUploaded", { count: successCount }),
+        );
         router.refresh();
       }
     },
-    [getFolderId, filesSettings, router, uploadStore],
+    [filesSettings, router, uploadStore, t],
   );
+
+  const uploadFilesToFolder = useCallback(
+    async (files: FileList | File[]) => {
+      const folderId = getFolderId();
+      if (!folderId) return;
+
+      const fileArray = Array.from(files);
+      if (fileArray.length === 0) return;
+
+      const taggedFiles = fileArray.map((file) => ({
+        file,
+        uniqueId:
+          typeof crypto !== "undefined" && "randomUUID" in crypto
+            ? crypto.randomUUID()
+            : `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+      }));
+
+      try {
+        const fileNames = taggedFiles.map((f) => f.file.name);
+        const conflictNames = (await checkIsFileExist(
+          folderId as number,
+          fileNames,
+        )) as string[];
+
+        if (conflictNames.length > 0) {
+          pendingUploadRef.current = {
+            files: taggedFiles,
+            conflictNames,
+            folderId,
+          };
+          setUploadConflictItems(
+            conflictNames.map((name) => ({ title: name, isFile: true })),
+          );
+          setUploadConflictDialogVisible(true);
+          return;
+        }
+      } catch {
+        // If conflict check fails, proceed with upload (createNewIfExist=true as safe default)
+      }
+
+      await doUpload(taggedFiles, folderId, true);
+    },
+    [getFolderId, doUpload],
+  );
+
+  const confirmUploadConflict = useCallback(
+    async (resolveType: ConflictResolveType) => {
+      const pending = pendingUploadRef.current;
+      if (!pending) return;
+
+      setUploadConflictDialogVisible(false);
+      pendingUploadRef.current = null;
+
+      if (resolveType === ConflictResolveType.Skip) {
+        setUploadConflictItems([]);
+        return;
+      }
+
+      setUploadConflictItems([]);
+      const createNewIfExist = resolveType === ConflictResolveType.Duplicate;
+      await doUpload(pending.files, pending.folderId, createNewIfExist);
+    },
+    [doUpload],
+  );
+
+  const closeUploadConflictDialog = useCallback(() => {
+    setUploadConflictDialogVisible(false);
+    setUploadConflictItems([]);
+    pendingUploadRef.current = null;
+  }, []);
 
   const onUploadFiles = useCallback(() => {
     if (!inputFilesRef.current) {
@@ -368,8 +450,11 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
     onUploadFiles,
     onUploadFolder,
     uploadFilesToFolder,
+    uploadConflictDialogVisible,
+    uploadConflictItems,
+    confirmUploadConflict,
+    closeUploadConflictDialog,
   };
 }
 
 export type DocsActions = ReturnType<typeof useDocsActions>;
-

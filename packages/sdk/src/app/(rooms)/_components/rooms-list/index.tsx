@@ -92,6 +92,7 @@ type RoomsListProps = {
   user?: TUser;
   isArchive?: boolean;
   refreshRef?: React.MutableRefObject<(() => void) | null>;
+  infoPanelVisible?: boolean;
 };
 
 const RoomsList = ({
@@ -105,6 +106,7 @@ const RoomsList = ({
   user,
   isArchive,
   refreshRef,
+  infoPanelVisible,
 }: RoomsListProps) => {
   const timezone = portalSettings.timezone;
   const searchParams = useSearchParams();
@@ -627,6 +629,7 @@ const RoomsList = ({
         onInfoRoom={onInfoRoom}
         onInviteRoom={onInviteRoom}
         isArchive={isArchive}
+        infoPanelVisible={infoPanelVisible}
       />
     );
   } else {

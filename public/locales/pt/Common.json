@@ -2072,5 +2072,9 @@
   "YourName": "O seu nome",
   "YourPrice": "O seu preço",
   "YourTurn": "A sua vez",
-  "YouWillBeContacted": "A equipa de vendas entrará em contacto consigo depois de criar o pedido."
+  "YouWillBeContacted": "A equipa de vendas entrará em contacto consigo depois de criar o pedido.",
+  "EditComment": "Editar comentário",
+  "DeleteVersion": "Eliminar a versão",
+  "DeleteVersionDescription": "Está prestes a eliminar uma versão de ficheiro. Deixará de ser possível vê-lo ou restaurá-lo. Tem a certeza de que quer continuar?",
+  "VersionShort": "Ver."
 }

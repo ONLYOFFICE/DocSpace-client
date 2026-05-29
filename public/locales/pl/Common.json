@@ -2072,5 +2072,9 @@
   "YourName": "Twoje imię",
   "YourPrice": "Twoja cena",
   "YourTurn": "Twoja kolej",
-  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby."
+  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby.",
+  "EditComment": "Edytuj komentarz",
+  "DeleteVersion": "Usuń wersję",
+  "DeleteVersionDescription": "Zamierzasz usunąć wersję pliku. Nie będzie już można jej zobaczyć ani przywrócić. Czy na pewno chcesz kontynuować?",
+  "VersionShort": "Wer."
 }

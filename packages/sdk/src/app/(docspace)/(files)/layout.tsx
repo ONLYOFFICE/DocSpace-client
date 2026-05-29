@@ -33,10 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import QueryProvider from "@/app/(rooms)/_components/query-provider";
+
 export default async function FilesLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return <QueryProvider>{children}</QueryProvider>;
 }

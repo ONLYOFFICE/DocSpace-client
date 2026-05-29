@@ -2072,5 +2072,9 @@
   "YourName": "Vaše ime",
   "YourPrice": "Vaša cena",
   "YourTurn": "Vi ste na vrsti",
-  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala."
+  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala.",
+  "EditComment": "Uredi komentar",
+  "DeleteVersion": "Izbriši verzijo",
+  "DeleteVersionDescription": "Izbrisali boste različico datoteke. Ne bo je več mogoče videti ali obnoviti. Ste prepričani, da želite nadaljevati?",
+  "VersionShort": "Ver."
 }

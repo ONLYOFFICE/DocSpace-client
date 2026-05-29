@@ -45,6 +45,7 @@ import { FolderTile } from "@docspace/ui-kit/components/tiles/folder-tile";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import Badges from "@docspace/shared/components/badges";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
+import EditorsTooltip from "../../editors-tooltip";
 
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
@@ -84,7 +85,7 @@ const getTemporaryIcon = (item: TFileItem | TFolderItem, getIcon: TGetIcon) => {
   return getIcon(temporaryExtension, 96, item.contentLength);
 };
 
-const Tile = ({ item, getIcon, index }: TileProps) => {
+const Tile = ({ item, getIcon, index, currentUserId }: TileProps) => {
   const tileRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation("Common");
   const { isBase } = useTheme();
@@ -202,6 +203,10 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
     }
   };
 
+  const editorsTooltip = (
+    <EditorsTooltip item={observableItem} currentUserId={currentUserId} />
+  );
+
   const badgesComponent = (
     <Badges
       t={t}
@@ -210,6 +215,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
       viewAs="tile"
       showNew={false}
       isExtsCustomFilter={isExtsCustomFilter}
+      editorsTooltip={editorsTooltip}
       onFilesClick={() => {
         if (!observableItem.isFolder) {
           openFile(observableItem);

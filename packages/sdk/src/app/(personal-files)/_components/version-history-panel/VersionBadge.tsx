@@ -39,6 +39,7 @@ const VersionBadge = ({
     <div
       className={classNames(styles.versionBadge, className, {
         [styles.isAccent]: !isFirst,
+        [styles.isFirst]: isFirst,
       })}
     >
       <VersionSvg

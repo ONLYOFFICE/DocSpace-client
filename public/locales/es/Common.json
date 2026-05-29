@@ -2080,5 +2080,9 @@
   "YourName": "Su nombre",
   "YourPrice": "Su precio",
   "YourTurn": "Su turno",
-  "YouWillBeContacted": "El equipo de ventas se pondrá en contacto con usted después de crear la solicitud."
+  "YouWillBeContacted": "El equipo de ventas se pondrá en contacto con usted después de crear la solicitud.",
+  "EditComment": "Editar comentario",
+  "DeleteVersion": "Eliminar versión",
+  "DeleteVersionDescription": "Está a punto de eliminar una versión de archivo. Ya no será posible verla ni restaurarla. ¿Está seguro que desea continuar?",
+  "VersionShort": "Ver."
 }

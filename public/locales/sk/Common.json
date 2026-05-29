@@ -2042,5 +2042,9 @@
   "YourName": "Vaše meno",
   "YourPrice": "Vaša cena",
   "YourTurn": "Ste na rade",
-  "YouWillBeContacted": "Po vytvorení požiadavky vás bude kontaktovať predajný tím."
+  "YouWillBeContacted": "Po vytvorení požiadavky vás bude kontaktovať predajný tím.",
+  "EditComment": "Upraviť komentár",
+  "DeleteVersion": "Odstrániť verziu",
+  "DeleteVersionDescription": "Práve sa chystáte odstrániť verziu súboru. Už ju nebude možné zobraziť ani obnoviť. Ste si istí, že chcete pokračovať?",
+  "VersionShort": "Ver."
 }

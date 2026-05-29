@@ -365,6 +365,22 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
       "postcss",
       "path-browserify",
       "sass",
+      // Optional peer deps of @onlyoffice/ai-chat. Its registry imports
+      // them statically, so host builds (Vite/webpack) need them installed,
+      // but they are not referenced directly from ui-kit source.
+      "@anthropic-ai/sdk",
+      "@assistant-ui/react-markdown",
+      "@codemirror/lang-json",
+      "@google/genai",
+      "@mistralai/mistralai",
+      "@radix-ui/react-dialog",
+      "@radix-ui/react-switch",
+      "@radix-ui/react-tabs",
+      "@radix-ui/react-tooltip",
+      "class-variance-authority",
+      "openai",
+      "react-shiki",
+      "tailwind-merge",
     ];
 
     missing = missing.filter((m) => !allowedUnusedDeps.includes(m.name));

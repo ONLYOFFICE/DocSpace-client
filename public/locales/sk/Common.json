@@ -2049,5 +2049,6 @@
   "VersionShort": "Ver.",
   "LeaveRoomDescription": "Vy ste majiteľom tejto miestnosti. Skôr ako opustíte miestnosť, musíte odovzdať úlohu vlastníka inému používateľovi.",
   "AreYouSureWantLeaveRoom": "Naozaj chcete opustiť túto miestnosť?",
-  "YouLeftTheRoom": "Opustili ste miestnosť"
+  "YouLeftTheRoom": "Opustili ste miestnosť",
+  "WantLeaveRoom": "Naozaj chcete opustiť túto miestnosť? Budete sa do nej môcť opäť pripojiť prostredníctvom novej pozvánky od administrátora miestnosti."
 }

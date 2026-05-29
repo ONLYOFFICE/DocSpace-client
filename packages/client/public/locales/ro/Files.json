@@ -175,7 +175,6 @@
   "UserLimitDescription": "Definiți numărul de utilizatori care pot se alătura prin acest link de invitație.",
   "VersionHistory": "Istoricul versiune",
   "WaitOperation": "Aşteptaţi finalizarea operaţiunii curente",
-  "WantLeaveRoom": "Doriți să părăsiți această sală? Veți putea să vă alăturați din nou prin intermediul unei noi invitații de la administratorul sălii.",
   "WarningCopyToFormRoomServal": "Copierea mai multor fișiere în Sala de completare a formularelor nu este acceptată. Copiați câte un formular PDF {{ organizationName }}.",
   "WarningMoveToFormRoom": "Imposibil de mutat fișierul în acestă sală. Încercați să deplasați formularul PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Deplasarea mai multor fișiere în Sala de completare a formularelor nu este acceptată. Deplasați câte un formular PDF  {{ organizationName }}.",

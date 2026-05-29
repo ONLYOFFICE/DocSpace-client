@@ -2079,5 +2079,6 @@
   "VersionShort": "Phiên bản",
   "LeaveRoomDescription": "Bạn là chủ sở hữu của phòng này. Trước khi rời khỏi phòng, bạn phải chuyển vai trò của chủ sở hữu cho người dùng khác.",
   "AreYouSureWantLeaveRoom": "Bạn có chắc chắn muốn rời khỏi phòng này không?",
-  "YouLeftTheRoom": "Bạn đã rời khỏi phòng"
+  "YouLeftTheRoom": "Bạn đã rời khỏi phòng",
+  "WantLeaveRoom": "Bạn có thực sự muốn rời khỏi phòng này không? Bạn sẽ có thể tham gia lại thông qua lời mời mới của quản trị viên phòng."
 }

@@ -2079,5 +2079,6 @@
   "VersionShort": "Ver.",
   "LeaveRoomDescription": "U bent de eigenaar van deze kamer. Voordat u de kamer verlaat, moet u de rol van de eigenaar overdragen aan een andere gebruiker.",
   "AreYouSureWantLeaveRoom": "Weet u het zeker dat u deze kamer wilt verlaten?",
-  "YouLeftTheRoom": "U heeft de kamer verlaten"
+  "YouLeftTheRoom": "U heeft de kamer verlaten",
+  "WantLeaveRoom": "Wilt u deze kamer echt verlaten? U kunt er weer aan deelnemen via een nieuwe uitnodiging van de beheerder van de kamer."
 }

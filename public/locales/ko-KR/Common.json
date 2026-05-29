@@ -2048,5 +2048,6 @@
   "VersionShort": "버전",
   "LeaveRoomDescription": "이 방의 주인입니다. 방을 나가기 전에 방의 소유자 역할을 다른 사용자에게 이전해야 합니다.",
   "AreYouSureWantLeaveRoom": "이 방을 나가시겠습니까?",
-  "YouLeftTheRoom": "방을 나왔습니다"
+  "YouLeftTheRoom": "방을 나왔습니다",
+  "WantLeaveRoom": "정말로 이 방에서 나가시겠습니까? 방 관리자의 새로운 초대를 통해 다시 참여할 수 있습니다."
 }

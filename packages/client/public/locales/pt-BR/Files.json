@@ -175,7 +175,6 @@
   "UserLimitDescription": "Defina o número de usuários que podem entrar por meio deste link de convite.",
   "VersionHistory": "Histórico de Versão",
   "WaitOperation": "Aguarde a conclusão da operação atual",
-  "WantLeaveRoom": "Você realmente quer sair desta sala? Você poderá participar novamente por meio de um novo convite de um administrador da sala.",
   "WarningCopyToFormRoomServal": "Não há suporte para a cópia de vários arquivos para a sala de preenchimento de formulários. Copie um formulário PDF {{ organizationName }} formulário PDF de cada vez.",
   "WarningMoveToFormRoom": "O arquivo não pode ser movido para esta sala. Tente mover o formulário em PDF {{ organizationName }} formulário PDF.",
   "WarningMoveToFormRoomServal": "Não há suporte para a movimentação de vários arquivos para a sala de preenchimento de formulários. Mova um formulário PDF {{ organizationName }} formulário PDF de cada vez.",

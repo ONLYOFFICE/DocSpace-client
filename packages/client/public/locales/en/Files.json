@@ -175,7 +175,6 @@
   "UserLimitDescription": "Define the number of users who can join via this invite link.",
   "VersionHistory": "Version history",
   "WaitOperation": "Wait for the current operation to complete",
-  "WantLeaveRoom": "Do you really want to leave this room? You will be able to join it again via new invitation by a room admin.",
   "WarningCopyToFormRoomServal": "Copying several files to the Form Filling room is not supported. Copy one {{ organizationName }} PDF form at a time.",
   "WarningMoveToFormRoom": "The file cannot be moved to this room. Please try to move the {{ organizationName }} PDF form.",
   "WarningMoveToFormRoomServal": "Moving several files to the Form Filling room is not supported. Move one {{ organizationName }} PDF form at a time.",

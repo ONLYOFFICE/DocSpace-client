@@ -175,7 +175,6 @@
   "UserLimitDescription": "이 초대 링크를 통해 참여할 수 있는 사용자 수를 정의하세요.",
   "VersionHistory": "버전 기록",
   "WaitOperation": "현재 작업이 완료될 때까지 기다려 주세요 ",
-  "WantLeaveRoom": "정말로 이 방에서 나가시겠습니까? 방 관리자의 새로운 초대를 통해 다시 참여할 수 있습니다.",
   "WarningCopyToFormRoomServal": "여러 파일을 양식 작성 룸으로 복사하는 것은 지원되지 않습니다. {{ organizationName }} PDF 양식을 한 번에 하나씩 복사하세요.",
   "WarningMoveToFormRoom": "파일을 이 룸으로 이동할 수 없습니다. {{ organizationName }} PDF 양식을 이동해 보세요.",
   "WarningMoveToFormRoomServal": "여러 파일을 양식 작성 룸으로 이동하는 것은 지원되지 않습니다. {{ organizationName }} PDF 양식을 한 번에 하나씩 이동하세요.",

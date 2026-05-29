@@ -175,7 +175,6 @@
   "UserLimitDescription": "Bu davet bağlantısı aracılığıyla katılabilecek kullanıcı sayısını tanımlayın.",
   "VersionHistory": " Versiyon Geçmişi",
   "WaitOperation": "Geçerli işlemin tamamlanmasını bekleyin",
-  "WantLeaveRoom": "Bu odadan gerçekten ayrılmak istiyor musunuz? Bir oda yöneticisinin yeni davetiyle tekrar katılabileceksiniz.",
   "WarningCopyToFormRoomServal": "Form Doldurma odasına birden fazla dosya kopyalama desteklenmiyor. Tek seferde bir {{ organizationName }} PDF formu kopyalayın.",
   "WarningMoveToFormRoom": "Dosya bu odaya taşınamıyor. Lütfen {{ organizationName }} PDF formunu taşımayı deneyin.",
   "WarningMoveToFormRoomServal": "Birden fazla dosyanın Form Doldurma odasına taşınması desteklenmiyor. Tek seferde bir {{ organizationName }} PDF formu taşıyın.",

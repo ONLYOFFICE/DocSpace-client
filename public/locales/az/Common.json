@@ -2079,5 +2079,6 @@
   "VersionShort": "Ver.",
   "LeaveRoomDescription": "Bu otağın sahibi sizsiniz. Otağı tərk etməzdən əvvəl sahib rolunu başqa istifadəçiyə ötürməlisiniz.",
   "AreYouSureWantLeaveRoom": "Bu otağı tərk etmək istədiyinizə əminsiniz?",
-  "YouLeftTheRoom": "Otağı tərk etdiniz"
+  "YouLeftTheRoom": "Otağı tərk etdiniz",
+  "WantLeaveRoom": "Bu otağı tərk etmək istədiyinə əminsən? Otaq administratorunun yeni dəvəti ilə yenidən qoşula biləcəksiniz."
 }

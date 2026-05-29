@@ -2087,5 +2087,6 @@
   "VersionShort": "Ver.",
   "LeaveRoomDescription": "Sie sind verantwortlich für diesen Raum. Sie müssen die Rolle des Verantwortlichen auf einen anderen Benutzer übertragen, bevor Sie den Raum verlassen.",
   "AreYouSureWantLeaveRoom": "Sind Sie sicher, dass Sie diesen Raum verlassen möchten?",
-  "YouLeftTheRoom": "Sie haben den Raum verlassen"
+  "YouLeftTheRoom": "Sie haben den Raum verlassen",
+  "WantLeaveRoom": "Willst du diesen Raum wirklich verlassen? Du kannst ihn wieder betreten, wenn du eine neue Einladung von einem Raumadministrator erhältst."
 }

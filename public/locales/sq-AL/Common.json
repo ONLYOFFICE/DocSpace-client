@@ -2079,5 +2079,6 @@
   "VersionShort": "Ver.",
   "LeaveRoomDescription": "Ju jeni pronari i kësaj dhome. Përpara se të dilni nga dhoma, duhet të transferoni rolin e pronarit te një përdorues tjetër.",
   "AreYouSureWantLeaveRoom": "A jeni të sigurt që dëshironi të largoheni nga kjo dhomë?",
-  "YouLeftTheRoom": "Ju keni dalë nga dhoma"
+  "YouLeftTheRoom": "Ju keni dalë nga dhoma",
+  "WantLeaveRoom": "Dëshiron vërtet të largohesh nga kjo dhomë? Do të mund t'i bashkohesh sërish me ftesë të re nga një administrator i dhomës."
 }

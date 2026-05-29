@@ -2079,5 +2079,6 @@
   "VersionShort": "Ver.",
   "LeaveRoomDescription": "Jūs esat šīs telpas īpašnieks. Pirms pametat telpu, jums ir jānodod īpašnieka loma citam lietotājam.",
   "AreYouSureWantLeaveRoom": "Vai jūs esat pārliecināti, ka vēlaties pamest šo telpu?",
-  "YouLeftTheRoom": "Jūs atstājāt telpu"
+  "YouLeftTheRoom": "Jūs atstājāt telpu",
+  "WantLeaveRoom": "Vai tiešām vēlaties atstāt šo telpu? Jūs varēsiet tai atkal pievienoties, izmantojot jaunu telpas administratora ielūgumu."
 }

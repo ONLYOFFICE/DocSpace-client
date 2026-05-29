@@ -2087,5 +2087,6 @@
   "VersionShort": "Ver.",
   "LeaveRoomDescription": "Sei il proprietario di questa stanza. Prima di lasciare la stanza, devi trasferire il ruolo di proprietario a un altro utente.",
   "AreYouSureWantLeaveRoom": "Sei sicuro di voler lasciare questa stanza?",
-  "YouLeftTheRoom": "Hai lasciato la stanza"
+  "YouLeftTheRoom": "Hai lasciato la stanza",
+  "WantLeaveRoom": "Vuoi lasciare questa stanza? Potrai unirti nuovamente tramite un nuovo invito da parte di un amministratore della sala."
 }

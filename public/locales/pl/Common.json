@@ -2079,5 +2079,6 @@
   "VersionShort": "Wer.",
   "LeaveRoomDescription": "Jesteś właścicielem tego pokoju. Zanim opuścisz pokój, musisz przekazać rolę właściciela innemu użytkownikowi.",
   "AreYouSureWantLeaveRoom": "Czy na pewno chcesz opuścić ten pokój?",
-  "YouLeftTheRoom": "Opuszczono pokój"
+  "YouLeftTheRoom": "Opuszczono pokój",
+  "WantLeaveRoom": "Czy na pewno chcesz opuścić ten pokój? Będziesz w stanie ponownie do niego dołączyć po otrzymaniu nowego zaproszenia od administratora pokoju."
 }

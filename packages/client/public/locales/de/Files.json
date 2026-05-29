@@ -175,7 +175,6 @@
   "UserLimitDescription": "Legen Sie die Anzahl der Benutzer fest, die über diesen Einladungslink beitreten können.",
   "VersionHistory": "Versionshistorie",
   "WaitOperation": "Warten, bis der aktuelle Vorgang abgeschlossen ist",
-  "WantLeaveRoom": "Willst du diesen Raum wirklich verlassen? Du kannst ihn wieder betreten, wenn du eine neue Einladung von einem Raumadministrator erhältst.",
   "WarningCopyToFormRoomServal": "Das Kopieren mehrerer Dateien in den Raum zum Ausfüllen von Formularen wird nicht unterstützt. Kopieren Sie jeweils ein {{ organizationName }} PDF-Formular.",
   "WarningMoveToFormRoom": "Die Datei kann nicht in diesen Raum verschoben werden. Bitte versuchen Sie, das PDF-Formular {{ organizationName }} zu verschieben.",
   "WarningMoveToFormRoomServal": "Das Verschieben mehrerer Dateien in den Raum zum Ausfüllen von Formularen wird nicht unterstützt. Verschieben Sie jeweils ein {{ organizationName }} PDF-Formular.",

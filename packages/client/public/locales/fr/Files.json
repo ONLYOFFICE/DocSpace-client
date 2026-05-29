@@ -175,7 +175,6 @@
   "UserLimitDescription": "Définir le nombre d'utilisateurs pouvant rejoindre via ce lien d'invitation.",
   "VersionHistory": "Historique des versions",
   "WaitOperation": "Attendez la fin de l'opération en cours",
-  "WantLeaveRoom": "Souhaitez-vous vraiment quitter cette salle ? Vous pourrez la rejoindre à nouveau via une nouvelle invitation d'un administrateur de la salle.",
   "WarningCopyToFormRoomServal": "La copie de plusieurs fichiers dans la salle de remplissage des formulaires n'est pas possible. Copiez un formulaire PDF {{ organizationName }} à la fois.",
   "WarningMoveToFormRoom": "Le fichier ne peut pas être déplacé dans cette salle. Veuillez essayer de déplacer le formulaire PDF de {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Le déplacement de plusieurs fichiers vers la salle de remplissage des formulaires n'est pas pris en charge. Déplacez un formulaire PDF {{ organizationName }} à la fois.",

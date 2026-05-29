@@ -175,7 +175,6 @@
   "UserLimitDescription": "设置通过此邀请链接可加入的用户数量。",
   "VersionHistory": "版本历史",
   "WaitOperation": "等待当前操作完成",
-  "WantLeaveRoom": "您确定要退出房间吗？您可以通过房间管理员的新邀请再次加入。",
   "WarningCopyToFormRoomServal": "不支持将多个文件复制到表单填写房间。请每次复制一份{{ organizationName }}的 PDF 表单。",
   "WarningMoveToFormRoom": "该文件无法移动到此房间。请尝试移动{{ organizationName }}的 PDF 表单。",
   "WarningMoveToFormRoomServal": "不支持将多个文件移动到表单填写房间。请每次移动一份{{ organizationName }}的 PDF 表单。",

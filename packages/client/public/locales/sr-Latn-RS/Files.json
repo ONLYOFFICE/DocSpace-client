@@ -175,7 +175,6 @@
   "UserLimitDescription": "Definišite broj korisnika koji mogu pristupiti putem ovog linka za pozivnicu.",
   "VersionHistory": "Istorija verzije",
   "WaitOperation": "Sačekaj da se trenutna operacija završi",
-  "WantLeaveRoom": "Da li zaista želite da napustite ovu sobu? Moći ćete da joj se pridružite ponovo putem nove pozivnice od administratora sobe.",
   "WarningCopyToFormRoomServal": "Kopiranje više fajlova u sobu za popunjavanje obrazaca nije podržano. Kopirajte jedan {{ organizationName }} PDF obrazac u isto vreme.",
   "WarningMoveToFormRoom": "Fajl ne može biti premesten u ovu sobu. Pokušajte da premestite {{ organizationName }} PDF obrazac.",
   "WarningMoveToFormRoomServal": "Premještanje više fajlova u sobu za popunjavanje obrazaca nije podržano. Premestite jedan {{ organizationName }} PDF obrazac u isto vreme.",

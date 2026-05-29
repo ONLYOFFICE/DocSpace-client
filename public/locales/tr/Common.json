@@ -2079,5 +2079,6 @@
   "VersionShort": "Sür.",
   "LeaveRoomDescription": "Siz bu odanın sahibisiniz. Odadan ayrılmadan önce sahip rolünü başka bir kullanıcıya aktarmanız gerekir.",
   "AreYouSureWantLeaveRoom": "Bu odadan ayrılmak istediğinizden emin misiniz?",
-  "YouLeftTheRoom": "Odadan ayrıldınız"
+  "YouLeftTheRoom": "Odadan ayrıldınız",
+  "WantLeaveRoom": "Bu odadan gerçekten ayrılmak istiyor musunuz? Bir oda yöneticisinin yeni davetiyle tekrar katılabileceksiniz."
 }

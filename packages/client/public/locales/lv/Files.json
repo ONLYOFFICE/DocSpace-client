@@ -175,7 +175,6 @@
   "UserLimitDescription": "Definējiet lietotāju skaitu, kas var pievienoties ar šo italošu saiti.",
   "VersionHistory": "Versijas vēsture",
   "WaitOperation": "Uzgaidiet, līdz tiks pabeigta pašreizējā darbība",
-  "WantLeaveRoom": "Vai tiešām vēlaties atstāt šo telpu? Jūs varēsiet tai atkal pievienoties, izmantojot jaunu telpas administratora ielūgumu.",
   "WarningCopyToFormRoomServal": "Vairāku failu kopēšana uz veidlapu aizpildīšanas telpu netiek atbalstīta. Vienlaikus kopējiet vienu {{ organizationName }} PDF veidlapu.",
   "WarningMoveToFormRoom": "Failu nevar pārvietot uz šo telpu. Mēģiniet pārvietot {{ organizationName }} PDF veidlapu.",
   "WarningMoveToFormRoomServal": "Vairāku failu pārvietošana uz veidlapu aizpildīšanas telpu netiek atbalstīta. Vienlaikus pārvietojiet vienu {{ organizationName }} PDF veidlapu.",

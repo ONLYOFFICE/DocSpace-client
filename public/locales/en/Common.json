@@ -2087,5 +2087,6 @@
   "VersionShort": "Ver.",
   "LeaveRoomDescription": "You are the owner of this room. Before you leave the room, you must transfer the owner's role to another user.",
   "AreYouSureWantLeaveRoom": "Are you sure you want to leave this room?",
-  "YouLeftTheRoom": "You have left the room"
+  "YouLeftTheRoom": "You have left the room",
+  "WantLeaveRoom": "Do you really want to leave this room? You will be able to join it again via new invitation by a room admin."
 }

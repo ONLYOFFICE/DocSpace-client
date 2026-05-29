@@ -175,7 +175,6 @@
   "UserLimitDescription": "Thiết lập số lượng người dùng có thể tham gia qua liên kết mời này.",
   "VersionHistory": "Lịch sử phiên bản",
   "WaitOperation": "Chờ cho hoạt động hiện tại hoàn thành",
-  "WantLeaveRoom": "Bạn có thực sự muốn rời khỏi phòng này không? Bạn sẽ có thể tham gia lại thông qua lời mời mới của quản trị viên phòng.",
   "WarningCopyToFormRoomServal": "Không hỗ trợ sao chép một số tập tin vào phòng Điền Biểu mẫu. Hãy sao chép từng biểu mẫu PDF {{ organizationName }} mỗi lần.",
   "WarningMoveToFormRoom": "Không thể di chuyển tập tin đến phòng này. Xin hãy thử di chuyển biểu mẫu PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Không hỗ trợ di chuyển một số tập tin vào phòng Điền Biểu mẫu. Hãy di chuyển từng biểu mẫu PDF {{ organizationName }} mỗi lần.",

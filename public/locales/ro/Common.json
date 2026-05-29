@@ -2087,5 +2087,6 @@
   "VersionShort": "Ver.",
   "LeaveRoomDescription": "Sunteți proprietarul acestei săli. Înainte de a părăsi sala, trebuie să atribuiți rolul de proprietar unui alt utilizator.",
   "AreYouSureWantLeaveRoom": "Sunteți sigur că doriți să părăsiți această cameră?",
-  "YouLeftTheRoom": "Ați părăsit sala"
+  "YouLeftTheRoom": "Ați părăsit sala",
+  "WantLeaveRoom": "Doriți să părăsiți această sală? Veți putea să vă alăturați din nou prin intermediul unei noi invitații de la administratorul sălii."
 }

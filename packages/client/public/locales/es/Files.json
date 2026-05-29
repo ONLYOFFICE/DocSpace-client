@@ -175,7 +175,6 @@
   "UserLimitDescription": "Define el número de usuarios que pueden unirse a través de este enlace de invitación.",
   "VersionHistory": "Historial de las Versiones",
   "WaitOperation": "Espere a que se complete la operación actual",
-  "WantLeaveRoom": "¿Quiere realmente salir de esta sala? Podrá volver a entrar a través de una nueva invitación de un administrador de la sala.",
   "WarningCopyToFormRoomServal": "No es posible copiar varios archivos en la sala para rellenar formularios. Copie un formulario PDF de {{organizationName}} cada vez.",
   "WarningMoveToFormRoom": "El archivo no se puede mover a esta sala. Por favor, intente mover el formulario PDF de {{organizationName}}.",
   "WarningMoveToFormRoomServal": "No es posible mover varios archivos a la sala para rellenar formularios. Mueva un formulario PDF de {{organizationName}}  a la vez.",

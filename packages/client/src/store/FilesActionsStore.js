@@ -3626,7 +3626,7 @@ class FilesActionStore {
 
     const roomSuccessText = isOwner
       ? t("Common:LeftAndAppointNewOwner")
-      : t("Files:YouLeftTheRoom");
+      : t("Common:YouLeftTheRoom");
     const agentSuccessText = isOwner
       ? t("Common:LeftAgentAndAppointNewOwner")
       : t("Files:YouLeftTheAgent");

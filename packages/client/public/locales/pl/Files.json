@@ -175,7 +175,6 @@
   "UserLimitDescription": "Zdefiniuj liczbę użytkowników, którzy mogą dołączyć za pomocą tego linku zaproszenia.",
   "VersionHistory": "Historia wersji",
   "WaitOperation": "Poczekaj na zakończenie bieżącej operacji",
-  "WantLeaveRoom": "Czy na pewno chcesz opuścić ten pokój? Będziesz w stanie ponownie do niego dołączyć po otrzymaniu nowego zaproszenia od administratora pokoju.",
   "WarningCopyToFormRoomServal": "Kopiowanie kilku plików do Pokoju do wypełniania formularzy nie jest obsługiwane. Kopiuj po jednym formularzu PDF {{ organizationName }} na raz.",
   "WarningMoveToFormRoom": "Plik nie może zostać przeniesiony do tego pokoju. Spróbuj przenieść formularz PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Przenoszenie kilku plików do Pokoju do wypełniania formularzy nie jest obsługiwane. Przenoś po jednym formularzu PDF {{ organizationName }} na raz.",

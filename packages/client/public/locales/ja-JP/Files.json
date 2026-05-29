@@ -175,7 +175,6 @@
   "UserLimitDescription": "この招待リンクから参加できるユーザー数を定義してください。",
   "VersionHistory": "バージョン履歴",
   "WaitOperation": "現在の操作が完了するまで少々お待ちください",
-  "WantLeaveRoom": "このまま退室の手続きしてもよろしいですか？ルーム管理者による新たな招待で再び参加することができます。",
   "WarningCopyToFormRoomServal": "フォーム記入ルームに複数のファイルをコピーすることはサポートされていません。{{ organizationName }} PDFフォームを1つずつコピーしてください。",
   "WarningMoveToFormRoom": "このルームにファイルを移動できません。{{ organizationName }} PDFフォームを移動してみてください。",
   "WarningMoveToFormRoomServal": "フォーム記入ルームへの複数のファイルの移動はサポートされていません。{{ organizationName }} PDFフォームを1つずつ移動してください。",

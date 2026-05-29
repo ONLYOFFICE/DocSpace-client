@@ -175,7 +175,6 @@
   "UserLimitDescription": "Definujte počet uživatelů, kteří se mohou připojit pomocí tohoto invitačního odkazu.",
   "VersionHistory": "Historie verzí",
   "WaitOperation": "Počkat na dokončení aktuální operace",
-  "WantLeaveRoom": "Opravdu chcete opustit tuto místnost? Budete se do ní moci znovu připojit prostřednictvím nového pozvání od správce místnosti.",
   "WarningCopyToFormRoomServal": "Kopírování více souborů do místnosti pro vyplňování formulářů není podporováno. Kopírujte PDF formuláře {{ organizationName }} po jednom.",
   "WarningMoveToFormRoom": "Soubor nelze do této místnosti přesunout. Zkuste prosím přesunout soubor {{ organizationName }}. PDF formulář.",
   "WarningMoveToFormRoomServal": "Přesunutí několika souborů do místnosti pro vyplňování formulářů není podporováno. Přesunujte PDF formuláře {{ organizationName }} po jednom.",

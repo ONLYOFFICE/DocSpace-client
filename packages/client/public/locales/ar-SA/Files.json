@@ -175,7 +175,6 @@
   "UserLimitDescription": "حدد عدد المستخدمين الذين يمكنهم الانضمام عبر رابط الدعوة هذا.",
   "VersionHistory": "تاريخ النسخة",
   "WaitOperation": "انتظر حتى تكتمل العملية الحالية",
-  "WantLeaveRoom": "هل تريد حقاً مغادرة هذه الغرفة؟ سيمكنك الانضمام مجدداً للغرفة من خلال دعوة جديدة من مسئول الغرفة.",
   "WarningCopyToFormRoomServal": "لا يمكن نقل الملف إلى هذه الغرفة. يُرجى محاولة نقل نموذج PDF الخاص بـ {{ organizationName }}.",
   "WarningMoveToFormRoom": "لا يمكن نقل الملف إلى هذه الغرفة. يُرجى محاولة نقل نموذج PDF الخاص بـ {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "لا يُسمح بنقل أكثر من ملف واحد إلى غرفة تعبئة النماذج. يرجى نقل نماذج PDF من {{ organizationName }} بشكل فردي.",

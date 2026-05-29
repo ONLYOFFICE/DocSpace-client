@@ -2087,5 +2087,6 @@
   "VersionShort": "Ver.",
   "LeaveRoomDescription": "Você é o dono desta sala. Antes de sair da sala, você deve transferir a função de proprietário para outro usuário.",
   "AreYouSureWantLeaveRoom": "Tem certeza que deseja sair desta sala?",
-  "YouLeftTheRoom": "Você saiu da sala"
+  "YouLeftTheRoom": "Você saiu da sala",
+  "WantLeaveRoom": "Você realmente quer sair desta sala? Você poderá participar novamente por meio de um novo convite de um administrador da sala."
 }

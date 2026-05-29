@@ -263,6 +263,8 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
             false,
             new Date(file.lastModified),
             createNewIfExist,
+            undefined,
+            signal,
           );
 
           if (signal.aborted) {
@@ -281,6 +283,7 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
               session.id,
               chunk.index,
               chunk.data,
+              signal,
             );
 
             if (signal.aborted) return;
@@ -298,11 +301,16 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
             return;
           }
 
-          await finalizeUploadSession(folderId, session.id);
+          await finalizeUploadSession(folderId, session.id, signal);
           uploadStore.setItemUploaded(uniqueId);
           anySuccess = true;
         } catch (error) {
-          if (signal.aborted) {
+          const isAbort =
+            signal.aborted ||
+            (error instanceof Error &&
+              (error.name === "AbortError" ||
+                error.name === "CanceledError"));
+          if (isAbort) {
             uploadStore.setItemCancelled(uniqueId);
             return;
           }

@@ -116,6 +116,7 @@ import type { SelectorMode } from "../../_hooks/useFileOperations";
 import { useDocsFrameBridge } from "../../_hooks/useDocsFrameBridge";
 
 import DropZone from "../drop-zone";
+import ConflictResolveDialog from "../conflict-resolve-dialog";
 import DeleteDialog from "../delete-dialog";
 import RenameDialog from "../rename-dialog";
 import UploadPanel from "../upload-panel";
@@ -188,8 +189,11 @@ const DocsLayout = observer(
     const isInRooms =
       rootFolderType === FolderType.Rooms ||
       rootFolderType === FolderType.Archive;
+    const isCanCreate = !!current.security?.Create;
     const isActionButtonEnabled =
-      (isMyDocuments || isInRooms) && !sdkConfig?.disableActionButton;
+      (isMyDocuments || isInRooms) &&
+      !sdkConfig?.disableActionButton &&
+      isCanCreate;
 
     const docsActions = useDocsActions();
     const {
@@ -202,6 +206,10 @@ const DocsLayout = observer(
       isCreating,
       onUploadFiles,
       onUploadFolder,
+      uploadConflictDialogVisible,
+      uploadConflictItems,
+      confirmUploadConflict,
+      closeUploadConflictDialog,
     } = docsActions;
 
     const aiChatStore = useAiChatStore();
@@ -244,6 +252,10 @@ const DocsLayout = observer(
       requestDuplicate,
       closeSelectorDialog,
       confirmOperation,
+      conflictDialogVisible,
+      conflictItems,
+      closeConflictDialog,
+      confirmConflict,
     } = useFileOperations();
 
     const {
@@ -413,26 +425,31 @@ const DocsLayout = observer(
                           >
                             <RootScrollbar>
                               <SectionWrapper
-                                sectionHeaderContent={
-                                  <>
-                                    {isActionButtonEnabled && (
+                                sectionBannerContent={
+                                  isActionButtonEnabled ? (
+                                    <div className={styles.createNewSection}>
+                                      <h2 className={styles.createNewTitle}>
+                                        {t("Common:CreateNew")}
+                                      </h2>
                                       <QuickActions
                                         items={quickActionItems}
                                         className={styles.quickActions}
                                       />
-                                    )}
-                                    <Header
-                                      current={current}
-                                      pathParts={pathParts}
-                                      isEmptyList={isEmptyList}
-                                      isInfoPanelVisible={
-                                        infoPanelStore.isVisible
-                                      }
-                                      onToggleInfoPanel={infoPanelStore.toggle}
-                                      headerOffset={headerOffset}
-                                      aiChatButton={<AiChatTrigger />}
-                                    />
-                                  </>
+                                    </div>
+                                  ) : undefined
+                                }
+                                sectionHeaderContent={
+                                  <Header
+                                    current={current}
+                                    pathParts={pathParts}
+                                    isEmptyList={isEmptyList}
+                                    isInfoPanelVisible={
+                                      infoPanelStore.isVisible
+                                    }
+                                    onToggleInfoPanel={infoPanelStore.toggle}
+                                    headerOffset={headerOffset}
+                                    aiChatButton={<AiChatTrigger />}
+                                  />
                                 }
                                 sectionFilterContent={
                                   <Filter
@@ -639,6 +656,26 @@ const DocsLayout = observer(
                             onChangeStoreOriginal={onChangeStoreOriginal}
                             onClose={closeConvertDialog}
                             onConfirm={confirmConvert}
+                          />
+                          <ConflictResolveDialog
+                            visible={
+                              conflictDialogVisible || uploadConflictDialogVisible
+                            }
+                            conflictItems={
+                              conflictDialogVisible
+                                ? conflictItems
+                                : uploadConflictItems
+                            }
+                            onClose={
+                              conflictDialogVisible
+                                ? closeConflictDialog
+                                : closeUploadConflictDialog
+                            }
+                            onSubmit={
+                              conflictDialogVisible
+                                ? confirmConflict
+                                : confirmUploadConflict
+                            }
                           />
                         </div>
                       </ConvertContext.Provider>

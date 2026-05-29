@@ -27,6 +27,7 @@
 "use client";
 
 import React from "react";
+import { decode } from "he";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -104,9 +105,11 @@ type MemberRowProps = {
 
 const MemberRow = ({ member, t }: MemberRowProps) => {
   const isGroup = member.subjectType === MembersSubjectType.Group;
-  const displayName = isGroup
-    ? (member.sharedTo as TGroup).name
-    : (member.sharedTo as TUser).displayName;
+  const displayName = decode(
+    isGroup
+      ? (member.sharedTo as TGroup).name
+      : ((member.sharedTo as TUser).displayName ?? ""),
+  );
   const avatarSrc = isGroup
     ? ""
     : ((member.sharedTo as TUser).avatar || DefaultUserAvatarSmall);

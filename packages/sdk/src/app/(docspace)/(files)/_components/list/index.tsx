@@ -334,6 +334,7 @@ const List = ({
         fetchMoreFiles={fetchMoreFiles}
         filesLength={visibleItems.length}
         getIcon={getIcon}
+        currentUserId={currentUserId}
       />
     );
   }
@@ -374,6 +375,7 @@ const List = ({
       timezone={timezone}
       displayFileExtension={displayFileExtension}
       fetchMoreFiles={fetchMoreFiles}
+      currentUserId={currentUserId}
     />
   );
 };

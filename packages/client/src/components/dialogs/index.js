@@ -79,7 +79,6 @@ import DeleteVersionDialog from "./DeleteVersionDialog";
 import CancelOperationDialog from "./CancelOperationDialog";
 import FormFillingTipsDialog from "./FormFillingTipsDialog";
 import ReducedRightsDialog from "./ReducedRightsDialog";
-import SocialAuthWelcomeDialog from "./SocialAuthWelcomeDialog";
 import ConnectAccountDialog from "./ConnectAccountDialog";
 import DisconnectAccountDialog from "./DisconnectAccountDialog";
 import CreateAgentDialog from "./CreateEditAgentDialog/CreateAgentDialog";
@@ -135,7 +134,6 @@ export {
   CancelOperationDialog,
   FormFillingTipsDialog,
   ReducedRightsDialog,
-  SocialAuthWelcomeDialog,
   ConnectAccountDialog,
   DisconnectAccountDialog,
   CreateAgentDialog,

@@ -1,0 +1,29 @@
+{
+  "key_path": "PaymentMethodDesc",
+  "content": "Linked to your {{productName}} wallet",
+  "content_en_sha1_hash": "430ad2d793a5b3645e1ca9fb596c71cb8f4a107a",
+  "created_at": "2026-05-25T18:26:11.253Z",
+  "updated_at": "2026-05-25T18:28:56.653Z",
+  "comment": {
+    "text": "Description text for a payment method in the billing interface, indicating its connection to the user's wallet. The {{productName}} variable represents the name of the product.",
+    "is_auto": true,
+    "updated_at": "2026-05-25T18:28:56.653Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
+      "line_number": 180,
+      "context": "isRefreshing={isRefreshing}\n />\n </div>\n \n <Text className={styles.description} lineHeight=\"20px\">\n {t(\"PaymentMethodDesc\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n \n <CardInformation />",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

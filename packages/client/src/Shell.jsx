@@ -482,9 +482,8 @@ const Shell = ({ page = "home", ...rest }) => {
   useEffect(() => {
     if (
       isLoaded &&
-      localStorage.getItem("showSocialAuthWelcomeDialog") === "true"
+      localStorage.getItem("socialAuthWelcomeBar") === "true"
     ) {
-      localStorage.removeItem("showSocialAuthWelcomeDialog");
       setSocialAuthWelcomeDialogVisible(true);
     }
   }, [isLoaded]);

@@ -49,6 +49,7 @@ import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import Badges from "@docspace/shared/components/badges";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
+import EditorsTooltip from "../../editors-tooltip";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
@@ -82,6 +83,7 @@ const Row = observer(
     timezone,
     displayFileExtension,
     isSSR,
+    currentUserId,
   }: RowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
@@ -145,6 +147,10 @@ const Row = observer(
       }
     };
 
+    const editorsTooltip = (
+      <EditorsTooltip item={observableItem} currentUserId={currentUserId} />
+    );
+
     const badgesComponent = (
       <Badges
         className={styles.badgesComponent}
@@ -154,6 +160,7 @@ const Row = observer(
         viewAs="row"
         showNew={false}
         isExtsCustomFilter={isExtsCustomFilter}
+        editorsTooltip={editorsTooltip}
         onFilesClick={() => {
           if (!observableItem.isFolder) {
             openFile(observableItem);

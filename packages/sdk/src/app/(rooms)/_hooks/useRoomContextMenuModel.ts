@@ -60,12 +60,16 @@ import { RoomsRefreshContext } from "../_contexts/RoomsRefreshContext";
 type TRoomItem = TFolderItem & {
   pinned?: boolean;
   mute?: boolean;
+  inRoom?: boolean;
   security?: {
     Pin?: boolean;
     ChangeOwner?: boolean;
     Download?: boolean;
     EditRoom?: boolean;
+    EditAccess?: boolean;
     Mute?: boolean;
+    Move?: boolean;
+    Delete?: boolean;
   };
 };
 
@@ -100,7 +104,6 @@ export default function useRoomContextMenuModel(
         }
         refreshRooms?.();
       };
-
       const handleMute = async () => {
         await api.settings.muteRoomNotification(room.id, !room.mute);
         onRoomChanged?.(room.id);
@@ -149,6 +152,42 @@ export default function useRoomContextMenuModel(
         ];
       }
 
+      const moreOptionsItems: ContextMenuModel[] = [
+        {
+          id: "option_download",
+          key: "download",
+          label: t("Common:Download"),
+          icon: DownloadReactSvgUrl,
+          onClick: () => downloadAction(item),
+          disabled: !room.security?.Download,
+        },
+        {
+          id: "option_duplicate",
+          key: "duplicate",
+          label: t("Common:Duplicate"),
+          icon: DuplicateReactSvgUrl,
+          disabled: true,
+        },
+        {
+          id: "option_room-info",
+          key: "room-info",
+          label: t("Common:RoomInfo"),
+          icon: InfoOutlineReactSvgUrl,
+          onClick: () => onInfoRoom?.(room),
+        },
+      ];
+
+      if (room.security?.ChangeOwner) {
+        moreOptionsItems.push({ key: "separator-owner", isSeparator: true });
+        moreOptionsItems.push({
+          id: "option_change-room-owner",
+          key: "change-room-owner",
+          label: t("Common:ChangeRoomOwner"),
+          icon: ReconnectSvgUrl,
+          onClick: () => onChangeOwner?.(room),
+        });
+      }
+
       const mainItems: ContextMenuModel[] = [
         {
           id: "option_open",
@@ -181,7 +220,7 @@ export default function useRoomContextMenuModel(
             : t("Common:DisableNotifications"),
           icon: room.mute ? UnmuteReactSvgUrl : MuteReactSvgUrl,
           onClick: handleMute,
-          disabled: !room.security?.Mute,
+          disabled: !room.security?.Mute || !room.inRoom,
         },
         { key: "separator-mute", isSeparator: true },
         {
@@ -205,56 +244,31 @@ export default function useRoomContextMenuModel(
           key: "more-options",
           label: t("Common:MoreOptions"),
           icon: MoreOptionsReactSvgUrl,
-          items: [
-            {
-              id: "option_download",
-              key: "download",
-              label: t("Common:Download"),
-              icon: DownloadReactSvgUrl,
-              onClick: () => downloadAction(item),
-              disabled: !room.security?.Download,
-            },
-            {
-              id: "option_duplicate",
-              key: "duplicate",
-              label: t("Common:Duplicate"),
-              icon: DuplicateReactSvgUrl,
-              disabled: true,
-            },
-            {
-              id: "option_room-info",
-              key: "room-info",
-              label: t("Common:RoomInfo"),
-              icon: InfoOutlineReactSvgUrl,
-              onClick: () => onInfoRoom?.(room),
-            },
-            { key: "separator-owner", isSeparator: true },
-            {
-              id: "option_change-room-owner",
-              key: "change-room-owner",
-              label: t("Common:ChangeRoomOwner"),
-              icon: ReconnectSvgUrl,
-              onClick: () => onChangeOwner?.(room),
-              disabled: !room.security?.ChangeOwner,
-            },
-          ],
-        },
-        { key: "separator-archive", isSeparator: true },
-        {
-          id: "option_move-to-archive",
-          key: "move-to-archive",
-          label: t("Common:MoveToArchive"),
-          icon: RoomArchiveSvgUrl,
-          onClick: () => onArchiveRoom?.(room),
-        },
-        {
-          id: "option_delete-room",
-          key: "delete-room",
-          label: t("Common:DeleteRoom"),
-          icon: TrashReactSvgUrl,
-          onClick: () => onDeleteRoom?.(room),
+          items: moreOptionsItems,
         },
       ];
+
+      if (room.security?.Move || room.security?.Delete) {
+        mainItems.push({ key: "separator-archive", isSeparator: true });
+        if (room.security?.Move) {
+          mainItems.push({
+            id: "option_move-to-archive",
+            key: "move-to-archive",
+            label: t("Common:MoveToArchive"),
+            icon: RoomArchiveSvgUrl,
+            onClick: () => onArchiveRoom?.(room),
+          });
+        }
+        if (room.security?.Delete) {
+          mainItems.push({
+            id: "option_delete-room",
+            key: "delete-room",
+            label: t("Common:DeleteRoom"),
+            icon: TrashReactSvgUrl,
+            onClick: () => onDeleteRoom?.(room),
+          });
+        }
+      }
 
       return mainItems;
     },

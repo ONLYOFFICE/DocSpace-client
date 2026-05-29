@@ -49,6 +49,7 @@ import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import Badges from "@docspace/shared/components/badges";
+import EditorsTooltip from "../../editors-tooltip";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
@@ -162,6 +163,7 @@ const TableViewRow = observer(
     );
 
     const onRowClick = React.useCallback(() => {
+      if (filesSelectionStore.isCheckedItem(item)) return;
       filesSelectionStore.setSelection([]);
       filesSelectionStore.setBufferSelection(item);
     }, [filesSelectionStore, item]);
@@ -209,6 +211,10 @@ const TableViewRow = observer(
     // the update (same proxy ref would short-circuit to true).
     const itemSnapshot = { ...observableItem };
 
+    const editorsTooltip = (
+      <EditorsTooltip item={observableItem} currentUserId={currentUserId} />
+    );
+
     const badgesNode = (
       <div className={styles.badgesContainer}>
         <Badges
@@ -218,6 +224,7 @@ const TableViewRow = observer(
           viewAs="table"
           showNew={false}
           isExtsCustomFilter={isExtsCustomFilter}
+          editorsTooltip={editorsTooltip}
           onFilesClick={() => {
             if (!observableItem.isFolder) {
               openFile(observableItem);

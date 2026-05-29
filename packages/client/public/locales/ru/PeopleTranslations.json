@@ -22,7 +22,7 @@
   "RemoveGuests": "Удалить гостей",
   "RemoveGuestsDescription": "Выбранные гости будут удалены из всех комнат, в которые вы их пригласили. Это действие нельзя отменить.",
   "ResetAuth": "Сбросить аутентификацию",
-  "SendInviteAgain": "Отправить приглашение ещё раз",
+  "SendInviteAgain": "Отправить приглашение еще раз",
   "ShareGuest": "Поделиться гостем",
   "SSOAccountTooltip": "Эта учетная запись пользователя загружена из SSO. Если вам нужно изменить имя пользователя и адрес электронной почты, обратитесь к серверу SSO.",
   "StandardLogin": "Стандартный вход",
@@ -32,7 +32,7 @@
   "SuccessDeleteGroup": "Группа успешно удалена",
   "SuccessDeleteGroups": "Группы успешно удалены",
   "SuccessDeletePersonalData": "Персональные данные успешно удалены",
-  "SuccessSentInvitation": "Приглашение было успешно отправлено",
-  "SuccessSentMultipleInvitatios": "Приглашения были успешно отправлены",
+  "SuccessSentInvitation": "Приглашение успешно отправлено",
+  "SuccessSentMultipleInvitatios": "Приглашения успешно отправлены",
   "WithoutGroup": "Без группы"
 }

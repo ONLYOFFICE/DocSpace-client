@@ -7,6 +7,7 @@ import {
   TOnFilter,
 } from "@docspace/ui-kit/components/filter/Filter.types";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { frameCallEvent } from "@docspace/shared/utils/common";
 import { getFilterType } from "@docspace/ui-kit/components/filter/Filter.utils";
 import {
   FilterGroups,
@@ -26,6 +27,7 @@ type useFilesFiltersProps = {
   shareKey?: string;
   filesViewAs: TViewAs | null;
   setFilesViewAs: (viewAs: TViewAs) => void;
+  setClearSearch: (value: boolean) => void;
 };
 
 export default function useFilesFilter({
@@ -33,6 +35,7 @@ export default function useFilesFilter({
   shareKey,
   filesViewAs,
   setFilesViewAs,
+  setClearSearch,
 }: useFilesFiltersProps) {
   const { t } = useTranslation(["Common"]);
   const searchParams = useSearchParams();
@@ -58,8 +61,12 @@ export default function useFilesFilter({
 
     const urlFilter = defaultFilter.toUrlParams();
 
-    window.history.pushState(null, "", urlFilter);
-  }, [filter.folder, shareKey]);
+    window.history.pushState(null, "", `?${urlFilter}`);
+
+    frameCallEvent({ event: "onFilterSearch", data: { search: "" } });
+
+    setClearSearch(true);
+  }, [filter.folder, shareKey, setClearSearch]);
 
   const onSearch = React.useCallback(
     (value: string) => {
@@ -74,6 +81,8 @@ export default function useFilesFilter({
       const urlFilter = modifiedFilter.toUrlParams();
 
       window.history.pushState(null, "", `?${urlFilter}`);
+
+      frameCallEvent({ event: "onFilterSearch", data: { search: value } });
     },
     [filter],
   );

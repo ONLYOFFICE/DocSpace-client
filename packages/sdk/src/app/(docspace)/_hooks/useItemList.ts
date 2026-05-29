@@ -104,7 +104,7 @@ export default function useItemList({
 
       const icon = getIcon(file.fileExst, 32, file.contentLength);
 
-      const isForm = file.fileExst === ".oform";
+      const isForm = file.isForm || file.fileExst === ".oform";
 
       const contextOptions = overrides
         ? getFilesContextMenuRef.current(file, overrides)

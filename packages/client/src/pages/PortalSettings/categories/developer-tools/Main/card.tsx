@@ -39,57 +39,83 @@ import { useNavigate } from "react-router";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 
-import styles from './main.module.scss';
+import styles from "./main.module.scss";
 
 type CardProps = {
-    title: string;
-    description: string;
-    url: string;
-    linkTitle: string;
-    color: string;
-    icon: React.ReactNode;
-    isBlank?: boolean;
-}
+  title: string;
+  description: string;
+  url: string;
+  linkTitle: string;
+  color: string;
+  icon: React.ReactNode;
+  isBlank?: boolean;
+  ctaUrl?: string;
+};
 
-const Card = ({ title, description, url, linkTitle, color, icon, isBlank = false }: CardProps) => {
-    const navigate = useNavigate();
+const Card = ({
+  title,
+  description,
+  url,
+  linkTitle,
+  color,
+  icon,
+  isBlank = false,
+  ctaUrl,
+}: CardProps) => {
+  const navigate = useNavigate();
 
-    const handleClick = () => {
-        if (isBlank) {
-            window.open(url, '_blank');
-        } else {
-            navigate(url);
-        }
-    };
+  const handleCardClick = () => {
+    if (isBlank) {
+      window.open(url, "_blank");
+    } else {
+      navigate(url);
+    }
+  };
 
-    return (
-        <div className={styles.card} onClick={handleClick} style={{ cursor: 'pointer' }}>
-            <div
-                className={styles.cardIcon}
-                style={{ backgroundColor: `${color}1a` }}
-            >
-                <span style={{ color }} className={styles.cardIconInner}>
-                    {icon}
-                </span>
-            </div>
-            <div className={styles.cardContent}>
-                <Text fontSize="14px" fontWeight={600}>{title}</Text>
-                <Text fontSize="12px">{description}</Text>
-            </div>
-            <hr className={styles.cardDivider} />
-            <Link
-                className={styles.cardLink}
-                onClick={handleClick}
-                color="accent"
-                type={LinkType.page}
-                fontSize="14px"
-                fontWeight={600}
-            >
-                {linkTitle}
-                <ArrowSvg />
-            </Link>
-        </div>
-    );
+  const handleLinkClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const target = ctaUrl ?? url;
+    if (isBlank) {
+      window.open(target, "_blank");
+    } else {
+      navigate(target);
+    }
+  };
+
+  return (
+    <div
+      className={styles.card}
+      onClick={handleCardClick}
+      style={{ cursor: "pointer" }}
+    >
+      <div
+        className={styles.cardIcon}
+        style={{ backgroundColor: `${color}1a` }}
+      >
+        <span style={{ color }} className={styles.cardIconInner}>
+          {icon}
+        </span>
+      </div>
+      <div className={styles.cardContent}>
+        <Text fontSize="14px" fontWeight={600}>
+          {title}
+        </Text>
+        <Text fontSize="12px">{description}</Text>
+      </div>
+      <hr className={styles.cardDivider} />
+      <Link
+        className={styles.cardLink}
+        onClick={handleLinkClick}
+        color="accent"
+        type={LinkType.page}
+        fontSize="13px"
+        fontWeight={600}
+      >
+        {linkTitle}
+        <ArrowSvg />
+      </Link>
+    </div>
+  );
 };
 
 export default Card;

@@ -17,6 +17,7 @@ import FavoritesReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
 import FavoritesFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?url";
 import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import ShareSvgUrl from "PUBLIC_DIR/images/icons/12/share.svg?url";
+import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import DuplicateReactSvgUrl from "PUBLIC_DIR/images/icons/16/duplicate.react.svg?url";
@@ -28,6 +29,7 @@ import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
 import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
+import DotsHorizontalReactSvgUrl from "PUBLIC_DIR/images/icons/16/dots-horizontal.react.svg?url";
 
 import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
 import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
@@ -324,7 +326,7 @@ export default function useContextMenuModel({
       return {
         id: "option_share",
         key: "share",
-        label: t("Common:Share"),
+        label: t("Common:SharingSettings"),
         icon: ShareSvgUrl,
         onClick: () => onShareClick?.(i),
         disabled: !onShareClick,
@@ -693,8 +695,29 @@ export default function useContextMenuModel({
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.preview))
         openGroup.push(getPreviewItem(item as TFileItem));
 
-      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.share))
-        actionGroup.push(getShareItem(item!));
+      if (
+        contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.vectorization) &&
+        !("isFolder" in item! && item!.isFolder)
+      )
+        openGroup.push(getVectorizationItem(item as TFileItem));
+
+      const hasShare = contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.share);
+      const hasCopyLink = contextOptions.includes(
+        AVAILABLE_CONTEXT_ITEMS.copyLink,
+      );
+
+      if (hasShare && hasCopyLink) {
+        actionGroup.push({
+          id: "option_share",
+          key: "share",
+          label: t("Common:Share"),
+          icon: ShareReactSvgUrl,
+          items: [getShareItem(item!), getLinkForRoomMembersItem(item!)],
+        });
+      } else {
+        if (hasShare) actionGroup.push(getShareItem(item!));
+        if (hasCopyLink) actionGroup.push(getLinkForRoomMembersItem(item!));
+      }
 
       const moveOrCopyItems: ContextMenuModel[] = [];
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.moveTo))
@@ -713,9 +736,6 @@ export default function useContextMenuModel({
           items: moveOrCopyItems,
         });
       }
-
-      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.copyLink))
-        actionGroup.push(getLinkForRoomMembersItem(item!));
 
       const hasDownload = contextOptions.includes(
         AVAILABLE_CONTEXT_ITEMS.download,
@@ -741,49 +761,61 @@ export default function useContextMenuModel({
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.rename))
         actionGroup.push(getRenameItem(item!));
 
-      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.restore))
-        actionGroup.push(getRestoreItem(item!));
-
       if (
-        contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.showVersionHistory) &&
-        !("isFolder" in item! && item!.isFolder)
+        contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.markAsFavorite) &&
+        !item!.isFavorite
       )
-        actionGroup.push(getShowVersionHistoryItem(item as TFileItem));
+        favoritesGroup.push(getMarkAsFavoriteItem(item!));
 
       if (
         contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.blockUnblockVersion) &&
         !("isFolder" in item! && item!.isFolder)
       )
-        actionGroup.push(getBlockUnblockVersionItem(item as TFileItem));
+        favoritesGroup.push(getBlockUnblockVersionItem(item as TFileItem));
 
       if (
         contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.customFilter) &&
         !("isFolder" in item! && item!.isFolder)
       )
-        actionGroup.push(getCustomFilterItem(item as TFileItem));
+        favoritesGroup.push(getCustomFilterItem(item as TFileItem));
 
-      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.showInfo))
-        actionGroup.push(getShowInfoItem(item!));
+      const hasVersionHistory =
+        contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.showVersionHistory) &&
+        !("isFolder" in item! && item!.isFolder);
+      const hasShowInfo = contextOptions.includes(
+        AVAILABLE_CONTEXT_ITEMS.showInfo,
+      );
 
-      if (
-        contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.vectorization) &&
-        !("isFolder" in item! && item!.isFolder)
-      )
-        actionGroup.push(getVectorizationItem(item as TFileItem));
-
-      if (
-        contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.markAsFavorite) ||
-        contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.removeFromFavorites)
-      ) {
-        if (item!.isFavorite) {
-          favoritesGroup.push(getRemoveFromFavoritesItem(item!));
-        } else {
-          favoritesGroup.push(getMarkAsFavoriteItem(item!));
-        }
+      if (hasVersionHistory && hasShowInfo) {
+        favoritesGroup.push({
+          id: "option_more-options",
+          key: "more-options",
+          label: t("Common:MoreOptions"),
+          icon: DotsHorizontalReactSvgUrl,
+          items: [
+            getShowVersionHistoryItem(item as TFileItem),
+            getShowInfoItem(item!),
+          ],
+        });
+      } else {
+        if (hasVersionHistory)
+          favoritesGroup.push(getShowVersionHistoryItem(item as TFileItem));
+        if (hasShowInfo) favoritesGroup.push(getShowInfoItem(item!));
       }
 
+      const restoreGroup: ContextMenuModel[] = [];
+
+      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.restore))
+        restoreGroup.push(getRestoreItem(item!));
+
+      if (
+        contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.removeFromFavorites) &&
+        item!.isFavorite
+      )
+        deleteGroup.push(getRemoveFromFavoritesItem(item!));
+
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.removeFromRecent))
-        favoritesGroup.push(getRemoveFromRecentItem(item as TFileItem));
+        deleteGroup.push(getRemoveFromRecentItem(item as TFileItem));
 
       if (
         contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.removeFromSharedWithMe)
@@ -796,7 +828,13 @@ export default function useContextMenuModel({
       )
         deleteGroup.push(getDeleteItem(item!));
 
-      const groups = [openGroup, actionGroup, favoritesGroup, deleteGroup];
+      const groups = [
+        openGroup,
+        actionGroup,
+        favoritesGroup,
+        restoreGroup,
+        deleteGroup,
+      ];
       const model: ContextMenuModel[] = [];
       groups.forEach((group) => {
         if (!group.length) return;

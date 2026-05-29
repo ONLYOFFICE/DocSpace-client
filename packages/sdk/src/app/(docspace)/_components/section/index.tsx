@@ -49,6 +49,7 @@ type SectionProps = {
   sectionHeaderContent: React.ReactNode;
   sectionFilterContent: React.ReactNode;
   sectionBodyContent: React.ReactNode;
+  sectionBannerContent?: React.ReactNode;
 
   infoPanelHeaderContent?: React.ReactNode;
   infoPanelBodyContent?: React.ReactNode;
@@ -69,6 +70,7 @@ export const SectionWrapper = observer(
     sectionHeaderContent,
     sectionFilterContent,
     sectionBodyContent,
+    sectionBannerContent,
     infoPanelHeaderContent,
     infoPanelBodyContent,
     isInfoPanelVisible,
@@ -111,6 +113,10 @@ export const SectionWrapper = observer(
         setIsInfoPanelVisible={setIsInfoPanelVisible}
         canDisplay={showInfoPanel}
       >
+        {sectionBannerContent ? (
+          <Section.SectionBanner>{sectionBannerContent}</Section.SectionBanner>
+        ) : null}
+
         <Section.SectionHeader>{sectionHeaderContent}</Section.SectionHeader>
 
         <Section.SectionFilter>

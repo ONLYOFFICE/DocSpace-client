@@ -1,23 +1,14 @@
 {
-  "key_path": "AIAgentPinned",
-  "content": "{{aiAgent}} pinned",
-  "content_en_sha1_hash": "999363a437ea6fa222cc3fdaadb7e64ef7eef1ac",
-  "created_at": "2025-12-19T13:03:48.187Z",
-  "updated_at": "2026-05-24T17:27:49.195Z",
   "comment": {
     "text": "This is a toast message indicating that a single AI agent has been successfully pinned. The `{{aiAgent}}` variable will be replaced with the localized term for \"AI agent\".",
     "is_auto": true,
     "updated_at": "2026-04-11T21:10:36.993Z",
     "model": "google/gemini-2.5-flash"
   },
-  "usage": [
-    {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1780,
-      "context": "let translationForOneItem;\n let translationForSeverals;\n \n if (isAIAgent) {\n translationForOneItem = isPin\n ? t(\"AIAgentPinned\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"AIAgentUnpinned\", { aiAgent: t(\"Common:AIAgent\") });\n translationForSeverals = isPin\n ? t(\"AIAgentsPinned\", { aiAgents: t(\"Common:AIAgents\") })\n : t(\"AIAgentsUnpinned\", { aiAgents: t(\"Common:AIAgents\") });\n } else {",
-      "module": "/packages/client"
-    }
-  ],
+  "content": "{{aiAgent}} pinned",
+  "content_en_sha1_hash": "999363a437ea6fa222cc3fdaadb7e64ef7eef1ac",
+  "created_at": "2025-12-19T13:03:48.187Z",
+  "key_path": "AIAgentPinned",
   "languages": {
     "en": {
       "ai_translated": false,
@@ -211,5 +202,14 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     }
-  }
+  },
+  "updated_at": "2026-05-24T17:27:49.195Z",
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 1780,
+      "context": "let translationForOneItem;\n let translationForSeverals;\n \n if (isAIAgent) {\n translationForOneItem = isPin\n ? t(\"AIAgentPinned\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"AIAgentUnpinned\", { aiAgent: t(\"Common:AIAgent\") });\n translationForSeverals = isPin\n ? t(\"AIAgentsPinned\", { aiAgents: t(\"Common:AIAgents\") })\n : t(\"AIAgentsUnpinned\", { aiAgents: t(\"Common:AIAgents\") });\n } else {",
+      "module": "/packages/client"
+    }
+  ]
 }

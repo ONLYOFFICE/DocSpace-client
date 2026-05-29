@@ -72,7 +72,7 @@ class PureVersionHistory extends React.Component {
   }
 }
 
-const VersionHistory = withTranslation("VersionHistory")(PureVersionHistory);
+const VersionHistory = withTranslation("Common")(PureVersionHistory);
 
 VersionHistory.propTypes = {};
 
@@ -92,3 +92,4 @@ export default inject(
     };
   },
 )(observer(VersionHistory));
+

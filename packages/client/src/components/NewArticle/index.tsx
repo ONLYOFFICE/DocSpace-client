@@ -179,10 +179,10 @@ const NewArticle = ({
   });
 
   const isAdminOrOwner = (user?.isAdmin ?? false) || (user?.isOwner ?? false);
+  const isGuest = user?.isVisitor ?? false;
   const canManageAgents =
     isAdminOrOwner || (user?.isRoomAdmin ?? false);
-  const canCreateForms =
-    !(user?.isVisitor ?? false) && !(user?.isCollaborator ?? false);
+  const canCreateForms = !isGuest && !(user?.isCollaborator ?? false);
 
   const activeId = React.useMemo(() => {
     const section = new URLSearchParams(location.search).get("section") ?? "";
@@ -487,7 +487,7 @@ const NewArticle = ({
     };
 
     const all: { item: NavMenuItem; enabled: boolean }[] = [
-      { item: aiFilesItem, enabled: aiFilesEnabled },
+      ...(!isGuest ? [{ item: aiFilesItem, enabled: aiFilesEnabled }] : []),
       { item: aiRoomsItem, enabled: aiRoomsEnabled },
       { item: aiFormsItem, enabled: aiFormsEnabled },
       { item: aiAgentsItem, enabled: aiAgentsEnabled },
@@ -520,6 +520,7 @@ const NewArticle = ({
     t,
     navigate,
     isAdminOrOwner,
+    isGuest,
     canCreateForms,
     docsCloudEnabled,
     aiFilesEnabled,

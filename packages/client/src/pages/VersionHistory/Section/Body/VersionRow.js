@@ -217,7 +217,7 @@ const VersionRow = (props) => {
     canChangeVersionFileHistory && {
       key: "edit",
       icon: AccessCommentReactSvgUrl,
-      label: t("EditComment"),
+      label: t("Common:EditComment"),
       onClick: onEditComment,
     },
     index !== 0 &&
@@ -459,8 +459,5 @@ export default inject(
       versionDeletionProcess,
     };
   },
-)(
-  withTranslation(["VersionHistory", "Common", "Translations"])(
-    observer(VersionRow),
-  ),
-);
+)(withTranslation(["Common", "Translations"])(observer(VersionRow)));
+

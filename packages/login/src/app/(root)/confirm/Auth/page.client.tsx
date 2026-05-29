@@ -99,7 +99,7 @@ const AuthHandler = () => {
         const wizard = searchParams?.get("wizard");
 
         if (wizard === "true") {
-          localStorage.setItem("showSocialAuthWelcomeDialog", "true");
+          localStorage.setItem("socialAuthWelcomeBar", "true");
         }
 
         if (referenceUrl && referenceUrl.includes("oauth2")) {

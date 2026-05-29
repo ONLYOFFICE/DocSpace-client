@@ -100,6 +100,7 @@ export type ItemProps = {
   setIsOpenItemAccess: (v: boolean) => void;
   isMobileView: boolean;
   allowInvitingGuests: boolean;
+  style?: React.CSSProperties;
 };
 
 type AccessOption = TOption & {
@@ -118,6 +119,7 @@ const Item: React.FC<ItemProps> = ({
   setHasErrors,
   roomType,
   roomId,
+  style,
   isOwner,
   isAdmin,
   inputsRef,
@@ -190,11 +192,11 @@ const Item: React.FC<ItemProps> = ({
     [],
   );
 
-  const type: EmployeeType | undefined =
-    isEmailInvite
-      ? (userType as EmployeeType | undefined)
-      : ((getUserType(item as Parameters<typeof getUserType>[0]) ??
-          userType) as EmployeeType | undefined);
+  const type: EmployeeType | undefined = isEmailInvite
+    ? (userType as EmployeeType | undefined)
+    : ((getUserType(item as Parameters<typeof getUserType>[0]) ?? userType) as
+        | EmployeeType
+        | undefined);
 
   // standalone = false always in SDK
   const accesses = getAccessOptions(
@@ -209,8 +211,7 @@ const Item: React.FC<ItemProps> = ({
 
   const isRolePaid = isPaidUserRole(access);
   const isUserRolesFiltered =
-    isRolePaid &&
-    (type === EmployeeType.Guest || type === EmployeeType.User);
+    isRolePaid && (type === EmployeeType.Guest || type === EmployeeType.User);
 
   const isReadOnlyFiltered =
     roomType === RoomsType.AIRoom && type === EmployeeType.Guest;
@@ -242,12 +243,10 @@ const Item: React.FC<ItemProps> = ({
 
   const typeLabel = isEmailInvite
     ? isRolePaid
-      ? getUserTypeTranslation(
-          defaultAccessOption?.type ?? resolvedType,
-          t,
-        )
+      ? getUserTypeTranslation(defaultAccessOption?.type ?? resolvedType, t)
       : t("Common:Guest")
-    : (defaultAccessOption?.type as number) === (EmployeeType.RoomAdmin as number) &&
+    : (defaultAccessOption?.type as number) ===
+          (EmployeeType.RoomAdmin as number) &&
         (resolvedType as number) !== (EmployeeType.Admin as number) &&
         (resolvedType as number) !== (EmployeeType.Owner as number)
       ? getUserTypeTranslation(EmployeeType.RoomAdmin, t)
@@ -281,10 +280,9 @@ const Item: React.FC<ItemProps> = ({
   const validateValue = (value: string) => {
     const parsedEmail = parseAddresses(value);
     const validationErrors = parsedEmail[0]?.parseErrors ?? [];
-    const currentErrors =
-      validationErrors.length
-        ? (validationErrors as unknown as InviteItem["errors"])
-        : [];
+    const currentErrors = validationErrors.length
+      ? (validationErrors as unknown as InviteItem["errors"])
+      : [];
 
     setParseErrors(currentErrors as typeof parseErrors);
 
@@ -479,6 +477,7 @@ const Item: React.FC<ItemProps> = ({
   return (
     <div
       key={item.id}
+      style={style}
       className={classNames("row-item", styles.rowItem, styles.styledRow, {
         [styles.isEdit]: edit,
         [styles.hasWarning]: !!item.warning,

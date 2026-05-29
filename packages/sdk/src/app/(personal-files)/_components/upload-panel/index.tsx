@@ -37,6 +37,7 @@ const UploadPanel = observer(() => {
 
   const onCancelBatch = () => {
     uploadStore.cancelBatch();
+    setTimeout(() => uploadStore.dropPending(), 0);
   };
 
   const onCancelItem = (uniqueId: string) => {

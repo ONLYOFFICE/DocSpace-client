@@ -73,7 +73,7 @@ const labelFor = (
     case FeedActionKeys.RoomCreateUser:
       return t("Common:RoomCreateUser");
     case FeedActionKeys.RoomRemoveUser:
-      return t("InfoPanel:RoomRemoveUser");
+      return t("Common:RoomRemoveUser");
     case FeedActionKeys.RoomUpdateAccessForUser:
     case FeedActionKeys.RoomUpdateAccessForGroup:
       return t("InfoPanel:RoomUpdateAccess");

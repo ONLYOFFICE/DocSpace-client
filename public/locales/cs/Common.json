@@ -2080,5 +2080,9 @@
   "LeaveRoomDescription": "Majitelem této místnosti jste vy. Než místnost opustíte, musíte roli vlastníka převést na jiného uživatele.",
   "AreYouSureWantLeaveRoom": "Jste si jisti, že chcete opustit tuto místnost?",
   "YouLeftTheRoom": "Opustili jste místnost",
-  "WantLeaveRoom": "Opravdu chcete opustit tuto místnost? Budete se do ní moci znovu připojit prostřednictvím nového pozvání od správce místnosti."
+  "WantLeaveRoom": "Opravdu chcete opustit tuto místnost? Budete se do ní moci znovu připojit prostřednictvím nového pozvání od správce místnosti.",
+  "RoomRemoveUser": "Odstraněný uživatel.",
+  "RoomCreateUserCount": "Uživatelé přidáni ({{count}}).",
+  "RoomGroupAdded": "Skupiny přidány.",
+  "RoomGroupAddedCount": "Skupiny přidány ({{count}})."
 }

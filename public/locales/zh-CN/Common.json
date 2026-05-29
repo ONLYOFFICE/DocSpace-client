@@ -2088,5 +2088,9 @@
   "LeaveRoomDescription": "您是房间的所有者。退出房间之前，您必须将所有者的角色转移给其他用户。",
   "AreYouSureWantLeaveRoom": "您确定要离开此房间吗？",
   "YouLeftTheRoom": "您已退出房间",
-  "WantLeaveRoom": "您确定要退出房间吗？您可以通过房间管理员的新邀请再次加入。"
+  "WantLeaveRoom": "您确定要退出房间吗？您可以通过房间管理员的新邀请再次加入。",
+  "RoomRemoveUser": "用户已删除。",
+  "RoomCreateUserCount": "用户已添加 ({{count}})。",
+  "RoomGroupAdded": "组已添加。",
+  "RoomGroupAddedCount": "组已添加 ({{count}})。"
 }

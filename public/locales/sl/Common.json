@@ -2080,5 +2080,9 @@
   "LeaveRoomDescription": "Vi ste lastnik te sobe. Preden zapustite sobo, morate vlogo lastnika prenesti na drugega uporabnika.",
   "AreYouSureWantLeaveRoom": "Ali ste prepričani, da želite zapustiti to sobo?",
   "YouLeftTheRoom": "Zapustili ste sobo",
-  "WantLeaveRoom": "Ali res želite zapustiti to sobo? Ponovno se ji boste lahko pridružili z novim povabilom skrbnika sobe."
+  "WantLeaveRoom": "Ali res želite zapustiti to sobo? Ponovno se ji boste lahko pridružili z novim povabilom skrbnika sobe.",
+  "RoomRemoveUser": "Ikona spremenjena",
+  "RoomCreateUserCount": "Uporabniki dodani ({{count}})",
+  "RoomGroupAdded": "Skupine dodane.",
+  "RoomGroupAddedCount": "Skupine dodane ({{count}})"
 }

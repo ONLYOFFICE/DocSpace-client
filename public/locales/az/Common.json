@@ -2080,5 +2080,9 @@
   "LeaveRoomDescription": "Bu otağın sahibi sizsiniz. Otağı tərk etməzdən əvvəl sahib rolunu başqa istifadəçiyə ötürməlisiniz.",
   "AreYouSureWantLeaveRoom": "Bu otağı tərk etmək istədiyinizə əminsiniz?",
   "YouLeftTheRoom": "Otağı tərk etdiniz",
-  "WantLeaveRoom": "Bu otağı tərk etmək istədiyinə əminsən? Otaq administratorunun yeni dəvəti ilə yenidən qoşula biləcəksiniz."
+  "WantLeaveRoom": "Bu otağı tərk etmək istədiyinə əminsən? Otaq administratorunun yeni dəvəti ilə yenidən qoşula biləcəksiniz.",
+  "RoomRemoveUser": "İstifadəçi silindi.",
+  "RoomCreateUserCount": "İstifadəçilər əlavə edildi ({{count}}).",
+  "RoomGroupAdded": "Qruplar əlavə edildi.",
+  "RoomGroupAddedCount": "Qruplar əlavə edildi ({{count}})."
 }

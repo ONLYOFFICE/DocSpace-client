@@ -2050,5 +2050,9 @@
   "LeaveRoomDescription": "Vy ste majiteľom tejto miestnosti. Skôr ako opustíte miestnosť, musíte odovzdať úlohu vlastníka inému používateľovi.",
   "AreYouSureWantLeaveRoom": "Naozaj chcete opustiť túto miestnosť?",
   "YouLeftTheRoom": "Opustili ste miestnosť",
-  "WantLeaveRoom": "Naozaj chcete opustiť túto miestnosť? Budete sa do nej môcť opäť pripojiť prostredníctvom novej pozvánky od administrátora miestnosti."
+  "WantLeaveRoom": "Naozaj chcete opustiť túto miestnosť? Budete sa do nej môcť opäť pripojiť prostredníctvom novej pozvánky od administrátora miestnosti.",
+  "RoomRemoveUser": "Ikonka zmenená",
+  "RoomCreateUserCount": "Používatelia pridaní ({{count}}).",
+  "RoomGroupAdded": "Skupiny pridané.",
+  "RoomGroupAddedCount": "Skupiny pridané ({{count}})."
 }

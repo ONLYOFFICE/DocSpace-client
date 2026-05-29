@@ -43,6 +43,7 @@ import { FileTile } from "@docspace/ui-kit/components/tiles/file-tile";
 import { FolderTile } from "@docspace/ui-kit/components/tiles/folder-tile";
 
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { FolderType } from "@docspace/shared/enums";
 import Badges from "@docspace/shared/components/badges";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import EditorsTooltip from "../../editors-tooltip";
@@ -240,6 +241,9 @@ const Tile = ({ item, getIcon, index, currentUserId }: TileProps) => {
     onCopyShareLink?.(observableItem);
   }, [onCopyShareLink, observableItem]);
 
+  const isTrashFolder =
+    filesListStore.rootFolderType === FolderType.TRASH;
+
   const quickButtonsComponent = (
     <QuickButtons
       t={t}
@@ -250,6 +254,7 @@ const Tile = ({ item, getIcon, index, currentUserId }: TileProps) => {
       onClickLock={onClickLock}
       onClickShare={onCopyShareLink ? handleCopyShareLink : undefined}
       openShareTab={onCopyShareLink ? handleCopyShareLink : undefined}
+      isTrashFolder={isTrashFolder}
     />
   );
 

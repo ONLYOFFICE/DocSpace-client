@@ -76,7 +76,7 @@ const Dashboard = ({
   enable,
   ensureAppsLoaded,
 }: DashboardProps) => {
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common", "OAuth"]);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [myFolderId, setMyFolderId] = React.useState<number | null>(null);
@@ -286,7 +286,7 @@ const Dashboard = ({
         {moduleItems.length > 0 ? (
           <section className={styles.section}>
             <Text as="h2" className={styles.sectionTitle} isBold>
-              {t("Common:Apps")}
+              {t("OAuth:Apps")}
             </Text>
             <div className={styles.modulesGrid}>
               {moduleItems.map((mod) => (

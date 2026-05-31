@@ -24,12 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
 import { Text } from "@docspace/ui-kit/components/text";
 import { getBrandName } from "@docspace/shared/constants/brands";
-import { getConstName } from "@docspace/shared/constants/consts";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow2.react.svg";
 
@@ -39,10 +39,28 @@ type DevTool = {
   id: string;
   title: string;
   description: string;
-  url: string;
+  url?: string;
 };
 
-const useDevTools = (): DevTool[] => {
+interface DevToolsCardProps {
+  apiBasicLink?: string;
+  sdkLink?: string;
+  apiPluginSDKLink?: string;
+  webhooksGuideUrl?: string;
+  apiOAuthLink?: string;
+  apiKeysUrl?: string;
+}
+
+const useDevTools = (props: DevToolsCardProps): DevTool[] => {
+  const {
+    apiBasicLink,
+    sdkLink,
+    apiPluginSDKLink,
+    webhooksGuideUrl,
+    apiOAuthLink,
+    apiKeysUrl,
+  } = props;
+
   const { t } = useTranslation([
     "Settings",
     "WebPlugins",
@@ -62,19 +80,19 @@ const useDevTools = (): DevTool[] => {
         organizationName,
         productName,
       }),
-      url: "https://onlyoffice.com",
+      url: apiBasicLink,
     },
     {
       id: "embed-sdk",
       title: t("Settings:EmbedSDK"),
       description: t("Settings:EmbedSDKDescription", { productName }),
-      url: "https://onlyoffice.com",
+      url: sdkLink,
     },
     {
       id: "plugins-sdk",
       title: t("WebPlugins:PluginSDK"),
       description: t("Settings:PluginDescription", { productName }),
-      url: "https://onlyoffice.com",
+      url: apiPluginSDKLink,
     },
     {
       id: "webhooks",
@@ -83,7 +101,7 @@ const useDevTools = (): DevTool[] => {
         organizationName,
         productName,
       }),
-      url: "https://onlyoffice.com",
+      url: webhooksGuideUrl,
     },
     {
       id: "oauth",
@@ -92,7 +110,7 @@ const useDevTools = (): DevTool[] => {
         organizationName,
         productName,
       }),
-      url: "https://onlyoffice.com",
+      url: apiOAuthLink,
     },
     {
       id: "api-keys",
@@ -101,14 +119,14 @@ const useDevTools = (): DevTool[] => {
         organizationName,
         productName,
       }),
-      url: "https://onlyoffice.com",
+      url: apiKeysUrl,
     },
   ];
 };
 
-export const DevToolsCard = () => {
+const DevToolsCardComponent = (props: DevToolsCardProps) => {
   const { t } = useTranslation(["Common"]);
-  const tools = useDevTools();
+  const tools = useDevTools(props);
   const organizationName = getBrandName("OrganizationName");
 
   return (
@@ -125,6 +143,7 @@ export const DevToolsCard = () => {
             href={tool.url}
             target="_blank"
             rel="noopener noreferrer"
+            aria-disabled={!tool.url}
           >
             <Text as="p" className={styles.devToolTitle} isBold>
               {tool.title}
@@ -145,6 +164,15 @@ export const DevToolsCard = () => {
     </CollapsibleCard>
   );
 };
+
+export const DevToolsCard = inject<TStore>(({ settingsStore }) => ({
+  apiBasicLink: settingsStore.apiBasicLink,
+  sdkLink: settingsStore.sdkLink,
+  apiPluginSDKLink: settingsStore.apiPluginSDKLink,
+  webhooksGuideUrl: settingsStore.webhooksGuideUrl,
+  apiOAuthLink: settingsStore.apiOAuthLink,
+  apiKeysUrl: settingsStore.apiKeysUrl,
+}))(observer(DevToolsCardComponent));
 
 export default DevToolsCard;
 

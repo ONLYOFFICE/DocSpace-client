@@ -34,20 +34,20 @@ import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import styles from "../Dashboard.module.scss";
 
 type HeaderProps = {
-  planTitle?: string;
   isFreeTariff?: boolean;
   paymentDate?: string;
   isAdminOrOwner?: boolean;
 };
 
 const Header = ({
-  planTitle = "",
   isFreeTariff = true,
   paymentDate = "",
   isAdminOrOwner = false,
 }: HeaderProps) => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
+
+  if (!isAdminOrOwner) return null;
 
   return (
     <header className={styles.planHeader}>
@@ -58,38 +58,33 @@ const Header = ({
             : t("Common:BusinessPlan"),
         })}
       </Text>
-      {isAdminOrOwner ? (
-        <div className={styles.planSubline}>
-          {!isFreeTariff && paymentDate ? (
-            <Text as="span" className={styles.planSublineText}>
-              {t("Common:SubscriptionAutoRenewedOn", {
-                finalDate: paymentDate,
+      <div className={styles.planSubline}>
+        {!isFreeTariff && paymentDate ? (
+          <Text as="span" className={styles.planSublineText}>
+            {t("Common:SubscriptionAutoRenewedOn", {
+              finalDate: paymentDate,
+            })}
+          </Text>
+        ) : null}
+        <Link
+          className={styles.planLink}
+          type={LinkType.action}
+          onClick={() => navigate("/portal-settings/payments/portal-payments")}
+          isHovered
+        >
+          {isFreeTariff
+            ? t("Common:ActivatePremiumFeatures")
+            : t("Common:CustomizeYourPlan", {
+                plan: t("Common:BusinessPlan"),
               })}
-            </Text>
-          ) : null}
-          <Link
-            className={styles.planLink}
-            type={LinkType.action}
-            onClick={() =>
-              navigate("/portal-settings/payments/portal-payments")
-            }
-            isHovered
-          >
-            {isFreeTariff
-              ? t("Common:ActivatePremiumFeatures")
-              : t("Common:CustomizeYourPlan", {
-                  plan: t("Common:BusinessPlan"),
-                })}
-          </Link>
-        </div>
-      ) : null}
+        </Link>
+      </div>
     </header>
   );
 };
 
 const HeaderConnected = inject<TStore>(
   ({ userStore, currentQuotaStore, currentTariffStatusStore }) => ({
-    planTitle: currentQuotaStore.currentTariffPlanTitle,
     isFreeTariff: currentQuotaStore.isFreeTariff,
     paymentDate: currentTariffStatusStore.paymentDate,
     isAdminOrOwner:

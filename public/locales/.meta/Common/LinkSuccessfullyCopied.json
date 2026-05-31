@@ -3,7 +3,7 @@
   "content": "Link successfully copied to clipboard",
   "content_en_sha1_hash": "0fdcf87a27dad18e3dbd7da5c4f771eb628a25c6",
   "created_at": "2025-05-19T21:30:46.217Z",
-  "updated_at": "2026-05-15T14:00:06.574Z",
+  "updated_at": "2026-05-28T15:46:18.469Z",
   "comment": {
     "text": "This is a toast message confirming that a link has been successfully copied to the user's clipboard. It appears after the user initiates a copy action for a shareable link.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 623,
-      "context": "if (primaryLink) {\n copyShareLink(item, primaryLink, t, this.getManageLinkOptions(item));\n // copyShareLink(primaryLink.sharedTo.shareLink);\n // item.shared\n //   ? toastr.success(t(\"Common:LinkSuccessfullyCopied\"))\n //   : toastr.success(t(\"Files:LinkSuccessfullyCreatedAndCopied\"));\n \n this.publicRoomStore.setExternalLink(primaryLink);\n }\n };",
+      "line_number": 634,
+      "context": "if (primaryLink) {\n copyShareLink(item, primaryLink, t, this.getManageLinkOptions(item));\n // copyShareLink(primaryLink.sharedTo.shareLink);\n // item.shared\n //   ? toastr.success(t(\"Common:LinkSuccessfullyCopied\"))\n //   : toastr.success(t(\"Files:LinkSuccessfullyCreatedAndCopied\"));\n \n this.publicRoomStore.setExternalLink(primaryLink);\n \n if (item.isRoom || !item.isFolder) {",
       "module": "/packages/client"
     }
   ],

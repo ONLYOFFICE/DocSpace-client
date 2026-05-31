@@ -1,14 +1,23 @@
 {
-  "comment": {
-    "text": "This is a toast message indicating that notifications for the AI agent have been turned off. The `{{aiAgent}}` variable will be replaced with the localized name for \"AI Agent\".",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:10:39.729Z",
-    "model": "google/gemini-2.5-flash"
-  },
-  "content": "{{aiAgent}} notifications disabled",
-  "content_en_sha1_hash": "78a95937b2ffa20c86592487e0e7d29fdc70c905",
-  "created_at": "2025-12-19T13:03:47.500Z",
   "key_path": "AIAgentNotificationsDisabled",
+  "content": "AI agent notifications disabled",
+  "content_en_sha1_hash": "119d83d665e3d1134c4b870d61e86a4910da92e2",
+  "created_at": "2026-05-25T18:26:20.056Z",
+  "updated_at": "2026-05-28T15:46:18.646Z",
+  "comment": {
+    "text": "Status label or message indicating that notifications for a specific AI agent are turned off, where the `{aiAgent}` variable represents the agent's name or type.",
+    "is_auto": true,
+    "updated_at": "2026-05-25T18:40:25.033Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 1495,
+      "context": "let notificationsDisabled = t(\"RoomNotificationsDisabled\");\n let notificationsEnabled = t(\"RoomNotificationsEnabled\");\n \n if (isAIAgent) {\n notificationsDisabled = t(\"AIAgentNotificationsDisabled\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n notificationsEnabled = t(\"AIAgentNotificationsEnabled\", {\n aiAgent: t(\"Common:AIAgent\"),\n });",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -140,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:53.938772Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -202,20 +211,5 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     }
-  },
-  "updated_at": "2026-05-24T17:27:49.197Z",
-  "usage": [
-    {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1865,
-      "context": "let notificationsDisabled = t(\"RoomNotificationsDisabled\");\n let notificationsEnabled = t(\"RoomNotificationsEnabled\");\n \n if (isAIAgent) {\n notificationsDisabled = t(\"Common:AIAgentNotificationsDisabled\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n notificationsEnabled = t(\"Common:AIAgentNotificationsEnabled\", {\n aiAgent: t(\"Common:AIAgent\"),\n });",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_store/AgentsListStore.tsx",
-      "line_number": 169,
-      "context": "await muteRoomNotification(id, muteStatus);\n const aiAgent = t(\"Common:AIAgent\", { defaultValue: \"AI agent\" });\n // Two literal keys instead of a dynamic ternary so the i18n usage\n // scanner can see both at static analysis time.\n const message = muteStatus\n ? t(\"Common:AIAgentNotificationsDisabled\", {\n aiAgent,\n defaultValue: \"AI agent notifications disabled\",\n })\n : t(\"Common:AIAgentNotificationsEnabled\", {\n aiAgent,",
-      "module": "/packages/sdk"
-    }
-  ]
+  }
 }

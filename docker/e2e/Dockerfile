@@ -1,4 +1,4 @@
-FROM node:24-bookworm-slim
+FROM mcr.microsoft.com/playwright:v1.58.1-noble
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
@@ -6,18 +6,21 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV CI=true
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 
-# Install required dependencies and fonts in a single layer
-# Using minimal font set - only what's needed for consistent rendering
-RUN apt-get -y update && \
+# Playwright image ships with Node 22; upgrade to 24 as required by the project.
+# Fonts are installed in the same layer to minimize image layers.
+RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    fonts-noto-core \
-    fonts-noto-cjk-extra \
-    fonts-roboto \
-    fonts-liberation \
-    fontconfig \
-    && fc-cache -f \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+        curl \
+        fonts-noto-core \
+        fonts-noto-cjk-extra \
+        fonts-roboto \
+        fonts-liberation \
+        fontconfig && \
+    fc-cache -f && \
+    curl -fsSL https://deb.nodesource.com/setup_24.x | bash - && \
+    apt-get install -y nodejs && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 # Install PNPM
 RUN npm install -g pnpm@10.33.0 && npm cache clean --force
@@ -48,13 +51,6 @@ RUN pnpm install --frozen-lockfile && \
     pnpm store prune && \
     rm -rf /root/.local/share/pnpm/store/v3/tmp/*
 
-# Install Playwright chromium only (skip unnecessary browsers)
-RUN cd /app/packages/client && \
-    pnpm exec playwright install chromium --with-deps && \
-    rm -rf /root/.cache/ms-playwright/firefox-* \
-           /root/.cache/ms-playwright/webkit-* \
-           /var/lib/apt/lists/*
-
 # Copy the source code with correct directory structure
 COPY common/ ./common/
 COPY packages/client/ ./packages/client/
@@ -65,7 +61,6 @@ COPY packages/management/ ./packages/management/
 COPY packages/shared/ ./packages/shared/
 COPY public/ ./public/
 COPY libs/ui-kit/ ./libs/ui-kit/
-
 
 # Build translations for all packages in single layer
 RUN pnpm --filter @docspace/client run build:translations && \
@@ -81,7 +76,6 @@ RUN NODE_OPTIONS="--max-old-space-size=4096" \
     pnpm --filter @docspace/doceditor run test:build && \
     pnpm --filter @docspace/sdk run test:build && \
     pnpm --filter @docspace/management run test:build && \
-    # Clean up build caches and unnecessary files
     rm -rf /app/packages/*/.next/cache \
            /app/packages/*/node_modules/.cache \
            /root/.npm \
@@ -89,7 +83,6 @@ RUN NODE_OPTIONS="--max-old-space-size=4096" \
 
 WORKDIR /app
 
-# Copy the entrypoint script
 COPY docker/e2e/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 

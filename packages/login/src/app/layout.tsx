@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import path from "path";
+
 import { cookies, headers } from "next/headers";
 
 import { Toast } from "@docspace/ui-kit/components/toast";
@@ -41,9 +43,10 @@ import { ThemeKeys } from "@docspace/ui-kit/enums";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
 import {
-	getDirectionByLanguage,
-	getFontFamilyDependingOnLanguage,
+  getDirectionByLanguage,
+  getFontFamilyDependingOnLanguage,
 } from "@docspace/ui-kit/providers/theme/rtl-utils";
+import { loadTranslationsForLocale } from "@docspace/shared/utils/ssr-translation-loader";
 
 import { Providers } from "@/providers";
 import {
@@ -52,12 +55,20 @@ import {
   getSettings,
   getUser,
 } from "@/utils/actions";
-
 import "../styles/globals.scss";
 import "@docspace/shared/styles/theme.scss";
 import Scripts from "@/components/Scripts";
 import { TConfirmLinkParams } from "@/types";
 import { logger } from "@/../logger.mjs";
+
+const LOGIN_NAMESPACES = [
+  "Login",
+  "Confirm",
+  "Consent",
+  "Errors",
+  "TenantList",
+  "Wizard",
+] as const;
 
 export default async function RootLayout({
   children,
@@ -150,6 +161,12 @@ export default async function RootLayout({
     queryParams?.culture ||
     (settings && typeof settings !== "string" ? settings.culture : "en");
 
+  const translations = await loadTranslationsForLocale(locale || "en", {
+    namespaces: LOGIN_NAMESPACES,
+    appLocalesDir: process.env.NEXT_APP_LOCALES_DIR ?? path.join(process.cwd(), "public/locales"),
+    sharedLocalesDir: process.env.NEXT_SHARED_LOCALES_DIR ?? path.join(process.cwd(), "../../public/locales"),
+  });
+
   const dirClass = getDirectionByLanguage(locale || "en");
   const themeClass =
     systemTheme?.value === ThemeKeys.DarkStr ? "dark" : "light";
@@ -200,6 +217,7 @@ export default async function RootLayout({
           redirectURL={redirectUrl}
           user={user}
           locale={locale}
+          translations={translations}
         >
           <Toast isSSR />
           {children}

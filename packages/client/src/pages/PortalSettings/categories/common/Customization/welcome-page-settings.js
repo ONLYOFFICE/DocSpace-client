@@ -367,6 +367,7 @@ const WelcomePageSettingsComponent = (props) => {
         <TextInput
           tabIndex={5}
           id="textInputContainerWelcomePage"
+          name="greeting_title"
           scale
           value={state.greetingTitle}
           testId="customization_welcome_page_text_input"

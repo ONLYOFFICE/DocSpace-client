@@ -40,6 +40,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 
 import api from "@docspace/shared/api";
 import {
+  AnalyticsEvents,
   FileType,
   FilterType,
   FolderType,
@@ -620,6 +621,13 @@ class FilesStore {
       }
 
       if (foundIndex > -1) return;
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: AnalyticsEvents.FileCreated,
+        id: file.id,
+        parentId: file.folderId,
+      });
 
       this.selectedFolderStore.setFilesCount(
         this.selectedFolderStore.filesCount + 1,
@@ -3176,6 +3184,7 @@ class FilesStore {
               item.fileExst,
               security,
               item.security,
+              item.id,
             );
 
             pluginFilesKeys &&
@@ -3191,6 +3200,7 @@ class FilesStore {
               item.fileExst,
               security,
               item.security,
+              item.id,
             );
 
             pluginFilesKeys &&
@@ -3206,6 +3216,7 @@ class FilesStore {
               item.fileExst,
               security,
               item.security,
+              item.id,
             );
 
             pluginFilesKeys &&
@@ -3543,6 +3554,7 @@ class FilesStore {
             null,
             security,
             item.security,
+            item.id,
           );
 
           pluginRoomsKeys &&
@@ -3700,6 +3712,7 @@ class FilesStore {
           null,
           security,
           item.security,
+          item.id,
         );
 
         pluginFoldersKeys &&

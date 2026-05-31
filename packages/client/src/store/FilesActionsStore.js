@@ -59,6 +59,7 @@ import {
 } from "@docspace/shared/api/files";
 import { loadRoomMemberKeysSafe } from "@docspace/shared/services/private-room/room-member-keys";
 import {
+  AnalyticsEvents,
   Events,
   ExportRoomIndexTaskStatus,
   FileAction,
@@ -599,6 +600,19 @@ class FilesActionStore {
             if (currentFolderId) {
               SocketHelper?.emit(SocketCommands.RefreshFolder, currentFolderId);
             }
+
+            if (fileIds.length) {
+              window.dataLayer = window.dataLayer || [];
+              selection
+                .filter((item) => fileIds.includes(item.id))
+                .forEach((file) => {
+                  window.dataLayer.push({
+                    event: AnalyticsEvents.FileDeleted,
+                    id: file.id,
+                    parentId: file.folderId,
+                  });
+                });
+            }
           })
           .finally(() => {
             clearActiveOperations(fileIds, folderIds);
@@ -879,6 +893,14 @@ class FilesActionStore {
 
           if (item.url) {
             openUrl(item.url, UrlActionType.Download, true);
+
+            if (fileConvertIds.length) {
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({
+                event: AnalyticsEvents.FileDownloaded,
+                fileIds: fileConvertIds.map((f) => f.key ?? f),
+              });
+            }
           }
 
           if (!isCanceled) {
@@ -992,9 +1014,7 @@ class FilesActionStore {
       promises.push(this.downloadFiles(fileIds, folderIds, label));
     }
 
-    return Promise.all(promises).finally(() =>
-      this.setGroupMenuBlocked(false),
-    );
+    return Promise.all(promises).finally(() => this.setGroupMenuBlocked(false));
   };
 
   resolveRoomIdForFile = (file) => {
@@ -1431,6 +1451,9 @@ class FilesActionStore {
     const destFolderId = isRecycleBinFolder ? null : recycleBinFolderId;
 
     if (isFile) {
+      const fileParentId = this.filesStore.files.find(
+        (x) => x.id === itemId,
+      )?.folderId;
       addActiveItems([itemId], null, destFolderId);
       return deleteFile(itemId).then(async (res) => {
         const result = res[0];
@@ -1446,10 +1469,20 @@ class FilesActionStore {
         this.updateFilesAfterDelete(operationId, operation);
         this.filesStore.removeFiles([itemId], null, null, destFolderId);
         forgetEncryptedFilename(itemId);
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: AnalyticsEvents.FileDeleted,
+          id: itemId,
+          parentId: fileParentId,
+        });
       });
     }
     if (isRoom) {
       const items = Array.isArray(itemId) ? itemId : [itemId];
+      const roomParentId = this.filesStore.folders.find(
+        (x) => x.id === items[0],
+      )?.parentId;
       addActiveItems(null, items);
 
       this.setGroupMenuBlocked(true);
@@ -1473,12 +1506,22 @@ class FilesActionStore {
                 : translations?.successRemoveRoom,
           );
 
+          const { rootFolderType } = this.selectedFolderStore;
+          const categoryType = getCategoryTypeByFolderType(rootFolderType, 0);
+          const isAgentDeletion = categoryType === CategoryType.AIAgents;
+
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: isAgentDeletion
+              ? AnalyticsEvents.AgentDeleted
+              : AnalyticsEvents.RoomDeleted,
+            ids: items,
+            parentId: roomParentId,
+          });
+
           const currentFolderId = this.selectedFolderStore.id;
           if (items.includes(currentFolderId)) {
-            const { rootFolderType } = this.selectedFolderStore;
-            const categoryType = getCategoryTypeByFolderType(rootFolderType, 0);
-
-            if (categoryType === CategoryType.AIAgents) {
+            if (isAgentDeletion) {
               this.moveToAIAgentsPage();
             } else {
               this.moveToRoomsPage();
@@ -1508,6 +1551,12 @@ class FilesActionStore {
 
       this.updateFilesAfterDelete(operationId, operation);
       this.filesStore.removeFiles(null, [itemId], null, destFolderId);
+
+      window.dispatchEvent(
+        new CustomEvent("folder_deleted", {
+          detail: { id: itemId },
+        }),
+      );
 
       getIsEmptyTrash();
     });
@@ -1899,6 +1948,9 @@ class FilesActionStore {
     const items = Array.isArray(folders)
       ? folders.map((x) => (x?.id ? x.id : x))
       : [folders.id];
+    const archiveParentId = Array.isArray(folders)
+      ? folders[0]?.parentId
+      : folders?.parentId;
 
     const operation = OPERATIONS_NAME.move;
 
@@ -1965,6 +2017,13 @@ class FilesActionStore {
                   : t("Common:ArchivedRoomAction", { name: folders.title });
 
             toastr.success(successTranslation);
+
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              event: AnalyticsEvents.RoomArchived,
+              ids: items,
+              parentId: archiveParentId,
+            });
           })
           .then(() => {
             const clearBuffer =
@@ -2678,9 +2737,11 @@ class FilesActionStore {
     this.processCreatingRoomFromData = processCreatingRoomFromData;
   };
 
-  onClickCreateRoom = (item) => {
+  onClickCreateRoom = (item, context = "sidebar") => {
     this.setProcessCreatingRoomFromData(true);
-    const event = new Event(Events.ROOM_CREATE);
+    const event = new CustomEvent(Events.ROOM_CREATE, {
+      detail: { parentId: this.selectedFolderStore.id, context },
+    });
     if (item && item.isFolder) {
       event.title = item.title;
     }
@@ -3702,7 +3763,9 @@ class FilesActionStore {
   };
 
   onCreateRoomFromTemplate = (item, addSelection) => {
-    const event = new Event(Events.ROOM_CREATE);
+    const event = new CustomEvent(Events.ROOM_CREATE, {
+      detail: { parentId: this.selectedFolderStore.id, context: "template" },
+    });
     event.item = item;
     window.dispatchEvent(event);
 

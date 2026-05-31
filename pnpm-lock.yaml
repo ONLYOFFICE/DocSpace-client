@@ -3220,11 +3220,11 @@ packages:
     os: [win32]
 
   '@onlyoffice/docspace-api-sdk@file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.7.0.tgz':
-    resolution: {integrity: sha512-Sp2tFtcc8Yq9BrO8fnaFst6uJYR7LJYmvFuvj3J2QWHaA2ugVnauTUAfwg7dIbzdmpyD8IzM8iIct1EdXvnJkQ==, tarball: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.7.0.tgz}
+    resolution: {integrity: sha512-QllfkKJOZzgVmN+VMD9+r/vCwY2xHmxdFIZN9TNpg7Ea7fi9Q3UNAZQPmnTMu6DlEuBb0Ztc188Bca2RK0nhrg==, tarball: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.7.0.tgz}
     version: 3.7.0
 
   '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz':
-    resolution: {integrity: sha512-g7xq2Orc2iS6OfKg+zZT61hScteT0B00pFiqYA8yddUzLOMMDMMHOiRKObw6QZkhizkPXEHgWsH1n9Z2nOlWrA==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz}
+    resolution: {integrity: sha512-pOXY7OMgWbc3qCFyXPZJDXdzwKrznQzMDDSfH9CcdwgErK16eQ15AMc6X5l3caKl2wVW6ED3ZTtxCc3MsvJF4A==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz}
     version: 2.1.0
     hasBin: true
 

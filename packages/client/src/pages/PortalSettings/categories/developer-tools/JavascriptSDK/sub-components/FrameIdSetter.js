@@ -64,6 +64,7 @@ export const FrameIdSetter = (props) => {
 			<Label className="label" text={t("FrameId")} />
 			<TextInput
 				scale
+				name="frame_id"
 				value={frameId}
 				onChange={onChangeFrameId}
 				placeholder={t("EnterId")}

@@ -192,6 +192,7 @@ const GlobalEvents = ({
     setCreateRoomDialogProps({
       ...startRoomParams,
       item: e.item,
+      context: e.context || e.detail?.context || "",
       visible: true,
       onClose: () =>
         setCreateRoomDialogProps({
@@ -225,6 +226,7 @@ const GlobalEvents = ({
     setCreateAgentDialogProps({
       ...startAgentParams,
       item: e.item,
+      context: e.context || e.detail?.context || "",
       visible: true,
       onClose: () => {
         setCreateAgentDialogProps({

@@ -5,5 +5,7 @@
   "GeneratedPassword": "Генерисана лозинка",
   "ProductNameDetail": "Име {{productName}}",
   "ReviewAccountDetails": "Молимо вас да одвојите тренутак да прегледате детаље свог налога:",
+  "SetEmailPassword": "Поставите лозинку",
+  "WelcomeSubtitle": "Ваш простор је успешно креиран. Прегледајте детаље вашег профила и почните да радите.",
   "YourProfileDetails": "Детаљи вашег профила"
 }

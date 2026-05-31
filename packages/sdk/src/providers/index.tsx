@@ -78,7 +78,7 @@ export type TContextData = {
   locale?: string;
   portalCultures: string[];
   authToken?: string;
-  initialLocaleResources?: Record<string, string>;
+  initialLocaleResources?: TTranslations;
 };
 
 export type TProviders = {
@@ -103,14 +103,8 @@ const Providers = ({ children, contextData }: TProviders) => {
     locale || user?.cultureName || settings?.culture || "en";
 
   const [translations, setTranslations] = React.useState(() => {
-    const base = createInitialTranslations();
     const preloaded = contextData.initialLocaleResources;
-    if (preloaded && requestedLng !== "en") {
-      const next = new Map(base);
-      next.set(requestedLng, new Map([["Common", preloaded]]));
-      return next;
-    }
-    return base;
+    return preloaded ?? createInitialTranslations();
   });
 
   React.useEffect(() => {

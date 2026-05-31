@@ -3,7 +3,7 @@
   "content": "Domain",
   "content_en_sha1_hash": "9b10914d8b0a097ace7176e8973f5c3dee92bb44",
   "created_at": "2025-05-19T21:30:44.590Z",
-  "updated_at": "2026-05-15T14:00:06.916Z",
+  "updated_at": "2026-05-28T15:46:18.655Z",
   "comment": {
     "text": "This is a label for a text input field or a display label, referring to the web address or name of a network.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
-      "line_number": 460,
+      "line_number": 461,
       "context": "</FieldContainer>\n ) : null}\n \n <div className={styles.infoWrapper}>\n <Text className={styles.text} fontWeight={400}>\n {t(\"Common:Domain\")}\n </Text>\n <Text fontWeight={600} className={styles.machineName}>\n {machineName}\n </Text>\n </div>",
       "module": "/packages/login"
     },

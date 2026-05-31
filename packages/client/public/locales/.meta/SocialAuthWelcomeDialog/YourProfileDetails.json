@@ -3,7 +3,7 @@
   "content": "Your profile details",
   "content_en_sha1_hash": "0feb38a1d878bc335a2db8628884d07df960f227",
   "created_at": "2026-05-26T17:09:18.625Z",
-  "updated_at": "2026-05-26T17:10:12.619Z",
+  "updated_at": "2026-05-28T15:46:18.482Z",
   "comment": {
     "text": "Dialog header text for the information bar in the social authentication welcome dialog, introducing the user's profile information.",
     "is_auto": true,
@@ -12,9 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/MainBar/SocialAuthWelcomeBar.jsx",
-      "line_number": 107,
-      "context": "},\n ];\n \n return (\n <ColumnarInfoBar\n headerText={t(\"SocialAuthWelcomeDialog:YourProfileDetails\")}\n columns={columns}\n onAction={onClose}\n onLoad={onLoad}\n />\n );",
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/SocialAuthWelcomePanel.jsx",
+      "line_number": 127,
+      "context": "},\n ];\n \n return (\n <ColumnarInfoBar\n headerText={t(\"SocialAuthWelcomeDialog:YourProfileDetails\")}\n columns={columns}\n onAction={onClose}\n variant=\"page\"\n />\n );",
       "module": "/packages/client"
     }
   ],

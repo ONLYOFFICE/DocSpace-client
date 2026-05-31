@@ -3,7 +3,7 @@
   "content": "Allow",
   "content_en_sha1_hash": "3ad0e3698278f45b2af94445396e9865f213f617",
   "created_at": "2025-10-27T16:14:24.335Z",
-  "updated_at": "2026-05-15T14:00:06.990Z",
+  "updated_at": "2026-05-28T15:46:18.693Z",
   "comment": {
     "text": "This is a button label. It allows the user to confirm an action, specifically related to tool calls within a chat message.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/tool-call-confirm-dialog/index.tsx",
-      "line_number": 142,
-      "context": "data-testid=\"always-allow-checkbox\"\n />\n <div className={styles.buttonsBlockContainer}>\n <Button\n primary\n label={t(\"Allow\")}\n onClick={() => onClickAction(ToolsPermission.Allow)}\n scale={isMobile()}\n size={ButtonSize.normal}\n data-testid=\"allow-button\"\n />",
+      "line_number": 187,
+      "context": "/>\n ) : null}\n <div className={styles.buttonsBlockContainer}>\n <Button\n primary\n label={isGenerateTool ? t(\"Create\") : t(\"Allow\")}\n onClick={() => onClickAction(ToolsPermission.Allow)}\n scale={isMobile()}\n size={ButtonSize.normal}\n data-testid=\"allow-button\"\n />",
       "module": "/libs/ui-kit"
     }
   ],

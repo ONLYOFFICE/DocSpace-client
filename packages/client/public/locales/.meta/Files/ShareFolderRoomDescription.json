@@ -3,7 +3,7 @@
   "content": "A new room will be created and all the contents of the selected folder will be copied there. Afterward, you can invite other users to collaborate on the files within a room.",
   "content_en_sha1_hash": "597bc2fc2cbb30eaee9a51897835cd16d0e53d5f",
   "created_at": "2025-05-19T21:30:56.185Z",
-  "updated_at": "2026-05-15T14:00:06.697Z",
+  "updated_at": "2026-05-28T15:46:18.547Z",
   "comment": {
     "text": "This is a descriptive text within a dialog explaining what happens when a user shares a folder as a new room. It clarifies that the folder's contents will be copied to the new room for collaboration.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ShareFolderDialog/index.js",
-      "line_number": 68,
+      "line_number": 71,
       "context": "return (\n <ModalDialog isLoading={!ready} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"Files:ShareFolderAction\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" fontWeight={400}>\n {t(\"Files:ShareFolderRoomDescription\")}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"create-room\"",
       "module": "/packages/client"
     }

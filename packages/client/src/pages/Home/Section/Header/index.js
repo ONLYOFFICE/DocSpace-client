@@ -912,7 +912,7 @@ const SectionHeaderContent = (props) => {
   const onPlusClick = React.useCallback(() => {
     if (isAIAgentsFolder) return onCreateAgent();
     if (!isContactsPage) return onCreateRoom();
-    if (isContactsGroupsPage) return createGroup();
+    if (isContactsGroupsPage) return createGroup(selectedFolder?.id, "sidebar");
   }, [
     isAIAgentsFolder,
     isContactsPage,

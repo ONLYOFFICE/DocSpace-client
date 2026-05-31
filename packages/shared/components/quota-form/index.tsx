@@ -252,6 +252,7 @@ export const QuotaForm = forwardRef<{ focus: () => void }, QuotaFormProps>(
           <TextInput
             forwardedRef={inputRef}
             type={InputType.text}
+            name="quota_limit"
             className={classNames(styles.quotaLimit, "quota_limit")}
             style={{ maxWidth: maxInputWidth }}
             isAutoFocussed={isAutoFocussed}

@@ -178,6 +178,7 @@ const CSP = ({
       ) : null}
       <div className={classNames(styles.container, styles.inputHolder)}>
         <TextInput
+          name="allowed_domain"
           onChange={onChangeDomain}
           value={domain}
           placeholder={t("CSPInputPlaceholder")}

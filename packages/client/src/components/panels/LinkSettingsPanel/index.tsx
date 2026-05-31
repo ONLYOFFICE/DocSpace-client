@@ -251,6 +251,7 @@ const LinkSettingsPanel = ({
                 </div>
                 <TextInput
                   className={styles.userLimitTextInput}
+                  name="users_limit"
                   type={InputType.text}
                   value={maxNumber}
                   scale

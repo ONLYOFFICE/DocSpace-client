@@ -26,24 +26,13 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { Navigate, useNavigate, useSearchParams } from "react-router";
+import { Navigate, useSearchParams } from "react-router";
 import { useTranslation, Trans } from "react-i18next";
 
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
-import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { getPersonalFolderTree } from "@docspace/shared/api/files";
-import { getConstName } from "@docspace/shared/constants/consts";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
-
-import {
-  BlankPdfIcon,
-  CreateDocumentIcon,
-  CreatePresentationIcon,
-  CreateSpreadsheetIcon,
-} from "@docspace/ui-kit/components/quick-actions/icons";
 
 import { useAppsCatalog, type AppId } from "SRC_DIR/helpers/apps-catalog";
 
@@ -52,14 +41,10 @@ import { ProfileCard } from "./sub-components/ProfileCard";
 import { IntegrationsCard } from "./sub-components/IntegrationsCard";
 import { DevToolsCard } from "./sub-components/DevToolsCard";
 import { Header } from "./sub-components/Header";
-import { useUploadToMyDocuments } from "./sub-components/useUploadToMyDocuments";
-import { makeCreateUrl, NEW_FILE_NAMES } from "./utils";
-import {
-  InstallAiFormsDialog,
-  InstallDocsCloudDialog,
-} from "./InstallModuleDialog";
-import { InstallAiArbiterDialog } from "./InstallAiArbiterDialog";
-import { EnableAiRoomsDialog } from "./EnableAiRoomsDialog";
+import { useUploadToMyDocuments } from "./hooks/useUploadToMyDocuments";
+import { useCreateActions } from "./hooks/useCreateActions";
+import { useMyFolderId } from "./hooks/useMyFolderId";
+import { useModuleLauncher } from "./hooks/useModuleLauncher";
 import styles from "./Dashboard.module.scss";
 
 interface DashboardProps {
@@ -79,159 +64,18 @@ const Dashboard = ({
 }: DashboardProps) => {
   const { t } = useTranslation(["Common", "OAuth"]);
   useDocumentTitle("Common:Overview");
-  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [myFolderId, setMyFolderId] = React.useState<number | null>(null);
-  const [installDialogVisible, setInstallDialogVisible] = React.useState(false);
-  const [arbiterDialogVisible, setArbiterDialogVisible] = React.useState(false);
-  const [docsCloudDialogVisible, setDocsCloudDialogVisible] =
-    React.useState(false);
-  const [enableAiRoomsVisible, setEnableAiRoomsVisible] = React.useState(false);
-  const [enableAiRoomsLoading, setEnableAiRoomsLoading] = React.useState(false);
 
+  const myFolderId = useMyFolderId();
   const { openUploadDialog } = useUploadToMyDocuments(myFolderId);
+  const createItems = useCreateActions(myFolderId);
+  const { launchApp, dialogs } = useModuleLauncher({ activate, enable });
+
+  const appsCatalog = useAppsCatalog();
 
   React.useEffect(() => {
     ensureAppsLoaded();
   }, [ensureAppsLoaded]);
-
-  React.useEffect(() => {
-    getPersonalFolderTree()
-      .then(([folder]) => setMyFolderId(folder.id as number))
-      .catch((err) => {
-        console.error("Failed to load personal folder tree", err);
-      });
-  }, []);
-
-  const createItems = React.useMemo<QuickActionItem[]>(
-    () => [
-      {
-        id: "document",
-        icon: <CreateDocumentIcon />,
-        label: t("Common:Document"),
-        onClick: () =>
-          window.open(
-            makeCreateUrl(NEW_FILE_NAMES.document, myFolderId),
-            "_blank",
-          ),
-      },
-      {
-        id: "spreadsheet",
-        icon: <CreateSpreadsheetIcon />,
-        label: t("Common:Spreadsheet"),
-        onClick: () =>
-          window.open(
-            makeCreateUrl(NEW_FILE_NAMES.spreadsheet, myFolderId),
-            "_blank",
-          ),
-      },
-      {
-        id: "presentation",
-        icon: <CreatePresentationIcon />,
-        label: t("Common:Presentation"),
-        onClick: () =>
-          window.open(
-            makeCreateUrl(NEW_FILE_NAMES.presentation, myFolderId),
-            "_blank",
-          ),
-      },
-      {
-        id: "pdf",
-        icon: <BlankPdfIcon />,
-        label: getConstName("PDF"),
-        onClick: () =>
-          window.open(makeCreateUrl(NEW_FILE_NAMES.pdf, myFolderId), "_blank"),
-      },
-    ],
-    [t, myFolderId],
-  );
-
-  const appsCatalog = useAppsCatalog();
-
-  const handleAppClick = async (
-    modId: AppId,
-    installed: boolean,
-    href?: string,
-  ) => {
-    if (installed && href) {
-      navigate(href);
-      return;
-    }
-
-    if (modId === "ai-forms") {
-      try {
-        const activated = await activate("ai-forms");
-        if (activated) {
-          navigate("/ai-forms");
-        } else {
-          setInstallDialogVisible(true);
-        }
-      } catch (err) {
-        console.error("Failed to activate ai-forms", err);
-        toastr.error(t("Common:SomethingWentWrong"));
-      }
-      return;
-    }
-    if (modId === "ai-arbiter") {
-      try {
-        const activated = await activate("ai-arbiter");
-        if (activated) {
-          navigate("/ai-arbiter");
-        } else {
-          setArbiterDialogVisible(true);
-        }
-      } catch (err) {
-        console.error("Failed to activate ai-arbiter", err);
-        toastr.error(t("Common:SomethingWentWrong"));
-      }
-      return;
-    }
-
-    if (modId === "ai-agents") {
-      try {
-        const activated = await activate("ai-agents");
-        if (activated) {
-          navigate("/agents");
-        } else {
-          toastr.error(t("Common:SomethingWentWrong"));
-        }
-      } catch (err) {
-        console.error("Failed to activate ai-agents", err);
-        toastr.error(t("Common:SomethingWentWrong"));
-      }
-      return;
-    }
-
-    if (modId === "docs-cloud") {
-      if (isAppEnabled("docs-cloud")) {
-        navigate("/docs-cloud");
-      } else {
-        setDocsCloudDialogVisible(true);
-      }
-      return;
-    }
-
-    if (modId === "ai-rooms") {
-      setEnableAiRoomsVisible(true);
-      return;
-    }
-
-    toastr.info(t("Common:UnderDevelopment"));
-  };
-
-  const handleConfirmEnableAiRooms = async () => {
-    setEnableAiRoomsLoading(true);
-    try {
-      await enable("ai-rooms", true);
-      setEnableAiRoomsVisible(false);
-      navigate("/ai-rooms");
-    } catch (err) {
-      console.error("Failed to enable ai-rooms", err);
-      toastr.error(t("Common:SomethingWentWrong"));
-    } finally {
-      setEnableAiRoomsLoading(false);
-    }
-  };
 
   const design = searchParams.get("design");
   if (design === "old") {
@@ -295,9 +139,7 @@ const Dashboard = ({
                 <ModuleCard
                   key={mod.id}
                   mod={mod}
-                  onClick={() =>
-                    handleAppClick(mod.id as AppId, mod.installed, mod.href)
-                  }
+                  onClick={() => launchApp(mod.id as AppId, mod.href)}
                 />
               ))}
             </div>
@@ -308,36 +150,7 @@ const Dashboard = ({
         <DevToolsCard />
       </div>
 
-      <InstallAiFormsDialog
-        visible={installDialogVisible}
-        onClose={() => setInstallDialogVisible(false)}
-        onInstalled={() => {
-          setInstallDialogVisible(false);
-          navigate("/ai-forms");
-        }}
-      />
-      <InstallAiArbiterDialog
-        visible={arbiterDialogVisible}
-        onClose={() => setArbiterDialogVisible(false)}
-        onInstalled={() => {
-          setArbiterDialogVisible(false);
-          navigate("/ai-arbiter");
-        }}
-      />
-      <InstallDocsCloudDialog
-        visible={docsCloudDialogVisible}
-        onClose={() => setDocsCloudDialogVisible(false)}
-        onInstalled={() => {
-          setDocsCloudDialogVisible(false);
-          navigate("/docs-cloud");
-        }}
-      />
-      <EnableAiRoomsDialog
-        visible={enableAiRoomsVisible}
-        isLoading={enableAiRoomsLoading}
-        onClose={() => setEnableAiRoomsVisible(false)}
-        onConfirm={handleConfirmEnableAiRooms}
-      />
+      {dialogs}
     </div>
   );
 };
@@ -353,4 +166,3 @@ const DashboardConnected = inject<TStore>(({ userStore, appsStore }) => ({
 export { DashboardConnected as Dashboard };
 
 export default DashboardConnected;
-

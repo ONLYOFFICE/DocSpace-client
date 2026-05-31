@@ -29,6 +29,8 @@ import { inject, observer } from "mobx-react";
 import { useSearchParams } from "react-router";
 import { useTranslation } from "react-i18next";
 
+import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
+
 import SdkIframe from "SRC_DIR/components/SdkIframe";
 
 type AiFilesProps = {
@@ -71,6 +73,7 @@ const getSrc = (
 
 const AiFiles = ({ myFolderId }: AiFilesProps) => {
   const { t } = useTranslation(["Common"]);
+  useDocumentTitle("Common:DashboardAIFilesTitle");
   const [searchParams, setSearchParams] = useSearchParams();
   const section = searchParams.get("section") ?? "";
   const folder = searchParams.get("folder");

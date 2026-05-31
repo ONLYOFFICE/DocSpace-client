@@ -31,9 +31,11 @@ import EmptyScreenDarkUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.dark.s
 
 import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 
 const DocsCloudComponent = () => {
   const { t } = useTranslation(["Common"]);
+  useDocumentTitle("Common:DocsCloud");
   const { isBase } = useTheme();
 
   return (

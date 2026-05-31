@@ -28,6 +28,8 @@ import { inject, observer } from "mobx-react";
 import { useSearchParams } from "react-router";
 import { useTranslation } from "react-i18next";
 
+import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
+
 import SdkIframe from "SRC_DIR/components/SdkIframe";
 
 type AiRoomsProps = {
@@ -58,6 +60,7 @@ const getSrc = (section: string, roomsFolderId?: number | null): string => {
 
 const AiRooms = ({ roomsFolderId }: AiRoomsProps) => {
   const { t } = useTranslation(["Common"]);
+  useDocumentTitle("Common:DashboardAIRoomsTitle");
   const [searchParams] = useSearchParams();
   const section = searchParams.get("section") ?? "";
   return (

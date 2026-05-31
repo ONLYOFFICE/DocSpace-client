@@ -36,6 +36,7 @@ import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getPersonalFolderTree } from "@docspace/shared/api/files";
 import { getConstName } from "@docspace/shared/constants/consts";
+import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 
 import {
   BlankPdfIcon,
@@ -77,6 +78,7 @@ const Dashboard = ({
   ensureAppsLoaded,
 }: DashboardProps) => {
   const { t } = useTranslation(["Common", "OAuth"]);
+  useDocumentTitle("Common:Overview");
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [myFolderId, setMyFolderId] = React.useState<number | null>(null);

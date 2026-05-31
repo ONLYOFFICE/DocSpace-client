@@ -33,6 +33,7 @@ import AiAgentsLightIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.
 import AiAgentsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
+import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
 
 import SdkIframe, {
@@ -106,6 +107,7 @@ type AiAgentsProps = {
 
 const AiAgentsComponent = ({ canManageAgents, theme }: AiAgentsProps) => {
   const { t } = useTranslation(["Common"]);
+  useDocumentTitle("Common:DashboardAIChatAgentsTitle");
   const [searchParams, setSearchParams] = useSearchParams();
   const iframeRef = React.useRef<SdkIframeHandle | null>(null);
   const lastSdkKeyRef = React.useRef<string | null>(null);

@@ -3,7 +3,7 @@
   "content": "Done",
   "content_en_sha1_hash": "e9b450d14bc2363d292c84f17cfad5cfbd58a458",
   "created_at": "2025-05-19T21:30:44.608Z",
-  "updated_at": "2026-05-24T17:27:49.100Z",
+  "updated_at": "2026-05-28T15:46:18.548Z",
   "comment": {
     "text": "Button label or toast message indicating the completion of an action.",
     "is_auto": true,
@@ -19,25 +19,25 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/SubmitToFormGallery/index.js",
-      "line_number": 128,
+      "line_number": 127,
       "context": "\"en\",\n abortControllerRef.current?.signal,\n )\n .then((res) => {\n if (!res.data) throw new Error(res.statusText);\n toastr.success(t(\"Common:Done\"));\n window.location.replace(res.data);\n })\n .catch(() => {\n toastr.error(t(\"Common:SomethingWentWrong\"));\n onClose();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 544,
+      "line_number": 546,
       "context": ");\n \n const keyFooter = (\n <Button\n key=\"OKButton\"\n label={t(\"Common:Done\")}\n size={ButtonSize.normal}\n primary\n onClick={onClose}\n scale\n testId=\"secret_key_done_button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsNavigationHeader.js",
-      "line_number": 66,
-      "context": "navigate(`/developer-tools/webhooks/${id}`);\n };\n \n const handleRetryEvent = async () => {\n await retryWebhook(eventId);\n toastr.success(t(\"WebhookRedilivered\"), <b>{t(\"Common:Done\")}</b>);\n };\n \n return (\n <div className={styles.headerContainer}>\n <div className=\"headerNavigation\">",
+      "line_number": 123,
+      "context": "navigate(`/developer-tools/webhooks/${id}`);\n };\n \n const handleRetryEvent = async () => {\n await retryWebhook(eventId);\n toastr.success(t(\"WebhookRedilivered\"), <b>{t(\"Common:Done\")}</b>);\n };\n \n return (\n <HeaderContainer>\n <div className=\"headerNavigation\">",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader.js",
-      "line_number": 144,
+      "line_number": 234,
       "context": "...(historyFilters ? formatFilters(historyFilters) : {}),\n configId: id,\n });\n toastr.success(\n `${t(\"WebhookRedilivered\")}: ${checkedEventIds.length}`,\n <b>{t(\"Common:Done\")}</b>,\n );\n } catch (error) {\n console.error(error);\n toastr.error(error);\n } finally {",
       "module": "/packages/client"
     },
@@ -49,21 +49,9 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/WebhookHistoryTable/HistoryTableView/HistoryTableRow.js",
-      "line_number": 85,
+      "line_number": 116,
       "context": "await retryWebhook(item.id);\n await fetchHistoryItems({\n ...(historyFilters ? formatFilters(historyFilters) : {}),\n configId: id,\n });\n toastr.success(t(\"WebhookRedilivered\"), <b>{t(\"Common:Done\")}</b>);\n };\n \n const contextOptions = [\n {\n id: \"webhook-details\",",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/PanelView.tsx",
-      "line_number": 67,
-      "context": "const { t } = useTranslation([\"Common\"]);\n const { status } = panel;\n const statusLabels: Record<PanelState[\"status\"], string> = {\n idle: \"\",\n streaming: t(\"Common:ArbiterRunning\"),\n done: t(\"Common:Done\"),\n error: t(\"Common:Error\"),\n aborted: t(\"Common:ArbiterStopped\"),\n };\n const label = statusLabels[status];\n const headerClass = isArbiter",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-arbiter)/ai-arbiter/page.client.tsx",
-      "line_number": 279,
-      "context": "</button>\n )}\n {runStatus !== \"idle\" && (\n <span className={styles.statusText}>\n {runStatus === \"running\" && t(\"Common:ArbiterRunning\")}\n {runStatus === \"done\" && t(\"Common:Done\")}\n {runStatus === \"error\" && t(\"Common:Error\")}\n {runStatus === \"aborted\" && t(\"Common:ArbiterStopped\")}\n </span>\n )}\n </div>",
-      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsTour.ts",

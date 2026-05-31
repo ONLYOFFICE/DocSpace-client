@@ -3,7 +3,7 @@
   "content": "Default settings",
   "content_en_sha1_hash": "57afbebd04d4d02458682eb7fa90339a9d41caac",
   "created_at": "2025-05-19T21:30:51.088Z",
-  "updated_at": "2026-05-15T15:37:40.272Z",
+  "updated_at": "2026-05-28T15:46:18.614Z",
   "comment": {
     "text": "This is a button label. It appears on settings pages and allows users to revert all settings on the current page to their default values.",
     "is_auto": true,

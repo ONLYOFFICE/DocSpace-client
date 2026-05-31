@@ -3,7 +3,7 @@
   "content": "Analyze responses faster and uncover deeper insights with AI.",
   "content_en_sha1_hash": "8268429d5c17a5bf00ba7bf38ae916603ed24ec3",
   "created_at": "2026-05-08T13:10:24.743Z",
-  "updated_at": "2026-05-15T14:00:06.631Z",
+  "updated_at": "2026-05-28T15:46:18.492Z",
   "comment": {
     "text": "Descriptive text within the AI Agents dialog that highlights the benefits of using AI for analysis.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/AIAgentsDialog/index.tsx",
-      "line_number": 109,
+      "line_number": 111,
       "context": "icon: <AiSvg className={styles.aiIcon} />,\n title: t(\"AIFeature\"),\n onClose: () => setConnectDbBannerDismissed(true),\n description: (\n <>\n <Text className={styles.text}>{t(\"AnalyzeResponsesFaster\")}</Text>\n <Link\n textDecoration=\"underline\"\n fontWeight={600}\n color=\"accent\"\n onClick={handleConnectDatabase}",
       "module": "/packages/client"
     }

@@ -175,6 +175,7 @@ export const CreatePortalDialog = observer(
             </Text>
             <TextInput
               testId="create-portal-input"
+              name="portal_name"
               type={InputType.text}
               size={InputSize.base}
               onChange={onHandleName}

@@ -213,6 +213,7 @@ export const CompanyInfo = ({
 					>
 						<TextInput
 							id="textInputContainerCompanyName"
+							name="company_name"
 							testId="company_info_settings_company_name_input"
 							className={classNames(styles.textInput, "text-input")}
 							isDisabled={!isSettingPaid}
@@ -232,6 +233,7 @@ export const CompanyInfo = ({
 					>
 						<TextInput
 							id="textInputContainerEmail"
+							name="company_email"
 							testId="company_info_settings_email_input"
 							className={classNames(styles.textInput, "text-input")}
 							isDisabled={!isSettingPaid}
@@ -251,6 +253,7 @@ export const CompanyInfo = ({
 					>
 						<TextInput
 							id="textInputContainerPhone"
+							name="company_phone"
 							testId="company_info_settings_phone_input"
 							className={classNames(styles.textInput, "text-input")}
 							isDisabled={!isSettingPaid}
@@ -270,6 +273,7 @@ export const CompanyInfo = ({
 					>
 						<TextInput
 							id="textInputContainerWebsite"
+							name="company_website"
 							testId="company_info_settings_site_input"
 							className={classNames(styles.textInput, "text-input")}
 							isDisabled={!isSettingPaid}
@@ -289,6 +293,7 @@ export const CompanyInfo = ({
 					>
 						<TextInput
 							id="textInputContainerAddress"
+							name="company_address"
 							testId="company_info_settings_address_input"
 							className={classNames(styles.textInput, "text-input")}
 							isDisabled={!isSettingPaid}

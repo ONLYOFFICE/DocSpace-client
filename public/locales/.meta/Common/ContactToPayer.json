@@ -3,7 +3,7 @@
   "content": "Contact the Payer (<1>{{email}}</1>) to connect the backup service.",
   "content_en_sha1_hash": "b700b846a0abe7d7234a5ef9e44502f3ca39735f",
   "created_at": "2026-04-10T13:53:44.945Z",
-  "updated_at": "2026-05-15T14:00:06.759Z",
+  "updated_at": "2026-05-28T15:46:18.580Z",
   "comment": {
     "text": "This is a warning message displayed to the user, informing them to contact the payer to enable a backup service. The `{{email}}` variable will be replaced with the payer's email address, and `<1></1>` is a link tag.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/WarningComponent/index.tsx",
       "line_number": 139,
-      "context": ");\n \n const connectPayer = (\n <Trans\n t={t}\n i18nKey=\"ContactToPayer\"\n ns=\"Services\"\n values={{ email: walletCustomerEmail }}\n components={{\n 1: (\n <Link",
+      "context": ");\n \n const connectPayer = (\n <Trans\n t={t}\n i18nKey=\"ContactToPayer\"\n ns=\"Common\"\n values={{ email: walletCustomerEmail }}\n components={{\n 1: (\n <Link",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Search term",
   "content_en_sha1_hash": "972c8207d026dc3c256eba4e01b67d41c19be089",
   "created_at": "2025-05-19T21:30:54.661Z",
-  "updated_at": "2026-05-15T14:00:06.814Z",
+  "updated_at": "2026-05-28T15:46:18.605Z",
   "comment": {
     "text": "This is a placeholder text for a search input field. It prompts the user to enter a term to search for.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/SearchTerm.js",
       "line_number": 72,
-      "context": "}));\n };\n \n return (\n <>\n <Label className=\"label\" text={t(\"SearchTerm\")} />\n <ColumnContainer>\n <TextInput\n scale\n onChange={onChangeSearch}\n placeholder={t(\"Common:Search\")}",
+      "context": "}));\n };\n \n return (\n <>\n <Label className=\"label\" text={t(\"SearchTerm\")} />\n <ColumnContainer>\n <TextInput\n scale\n name=\"search_term\"\n onChange={onChangeSearch}",
       "module": "/packages/client"
     }
   ],

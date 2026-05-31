@@ -180,6 +180,7 @@ const ChangeNameDialog = (props) => {
 							>
 								<TextInput
 									className={field.className}
+									name={field.id}
 									scale
 									isAutoFocussed={index === 0}
 									value={field.value}

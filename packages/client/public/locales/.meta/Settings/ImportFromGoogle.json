@@ -3,7 +3,7 @@
   "content": "Import from Google Workspace",
   "content_en_sha1_hash": "3e8c6ed520af16193ff43a67f65b78870ac079ec",
   "created_at": "2025-05-19T21:30:51.657Z",
-  "updated_at": "2026-05-15T15:37:40.227Z",
+  "updated_at": "2026-05-27T14:11:50.680Z",
   "comment": {
     "text": "This is a button label or header text for importing data. It appears when a user chooses to import content from Google Workspace.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 309,
-      "context": "!location.pathname.includes(\"portal-settings/payments/services/\");\n \n const translatedHeader =\n header === IMPORT_HEADER_CONST\n ? workspace === \"GoogleWorkspace\"\n ? t(\"ImportFromGoogle\")\n : workspace === \"Nextcloud\"\n ? t(\"ImportFromNextcloud\")\n : workspace === \"Workspace\"\n ? t(\"ImportFromPortal\", {\n organizationName: logoText,",
+      "line_number": 378,
+      "context": "!window.location.href.includes(\"portal-settings/payments/services/\");\n \n const translatedHeader =\n header === IMPORT_HEADER_CONST\n ? workspace === \"GoogleWorkspace\"\n ? t(\"ImportFromGoogle\")\n : workspace === \"Nextcloud\"\n ? t(\"ImportFromNextcloud\")\n : workspace === \"Workspace\"\n ? t(\"ImportFromPortal\", {\n organizationName: logoText,",
       "module": "/packages/client"
     }
   ],

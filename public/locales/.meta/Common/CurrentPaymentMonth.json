@@ -3,7 +3,7 @@
   "content": "Current payment: {{price}}/month ({{size}})",
   "content_en_sha1_hash": "e0b56f598b09a6685c82e581985607c0b6f37582",
   "created_at": "2026-04-10T13:53:42.371Z",
-  "updated_at": "2026-05-15T15:49:17.109Z",
+  "updated_at": "2026-05-27T14:11:50.762Z",
   "comment": {
     "text": "This is a label indicating the current monthly payment for a storage plan. It appears in the billing section and includes variables for the `price` and `size` of the storage.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 195,
+      "line_number": 197,
       "context": "if (hasScheduledStorageChange) {\n return t(\"ChangeShedule\");\n }\n \n if (!hasScheduledStorageChange && currentStoragePlanSize! > 0) {\n return t(\"CurrentPaymentMonth\", {\n price: formatWalletCurrency(\n calculateTotalPrice(\n currentStoragePlanSize!,\n storagePriceIncrement,\n ),",
       "module": "/libs/ui-kit"
     }

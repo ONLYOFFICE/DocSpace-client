@@ -42,7 +42,12 @@ import api from "@docspace/shared/api";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { FolderType, RoomsType, RoomsTypePrivate } from "@docspace/shared/enums";
+import {
+  AnalyticsEvents,
+  FolderType,
+  RoomsType,
+  RoomsTypePrivate,
+} from "@docspace/shared/enums";
 import { CategoryType } from "@docspace/shared/constants";
 import {
   createTemplate,
@@ -89,6 +94,12 @@ class CreateEditRoomStore {
   isImageType: boolean = false;
 
   selectedRoomType: Nullable<RoomsType> = null;
+
+  openContext: string = "";
+
+  setOpenContext = (context: string) => {
+    this.openContext = context;
+  };
 
   constructor(
     public filesStore: FilesStore,
@@ -724,6 +735,16 @@ class CreateEditRoomStore {
       }
 
       await this.onOpenNewRoom(room);
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: AnalyticsEvents.RoomCreated,
+        id: room.id,
+        roomType: room.roomType,
+        parentId: room.parentId,
+        context: this.openContext,
+      });
+
       if (successToast)
         toastr.success(successToast as unknown as React.ReactNode);
     } catch (err) {
@@ -896,3 +917,4 @@ class CreateEditRoomStore {
 }
 
 export default CreateEditRoomStore;
+

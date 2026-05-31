@@ -332,6 +332,7 @@ const ConnectDialog = ({
               >
                 <TextInput
                   id="connection-url-input"
+                  name="connection_url"
                   isAutoFocussed
                   hasError={!isUrlValid}
                   isDisabled={isLoading}
@@ -356,6 +357,7 @@ const ConnectDialog = ({
             >
               <TextInput
                 id="login-input"
+                name="login"
                 isAutoFocussed={!showUrlField}
                 hasError={!isLoginValid}
                 isDisabled={isLoading}
@@ -379,6 +381,7 @@ const ConnectDialog = ({
             >
               <PasswordInput
                 id="password-input"
+                inputName="password"
                 hasError={!isPasswordValid}
                 isDisabled={isLoading}
                 tabIndex={3}
@@ -402,6 +405,7 @@ const ConnectDialog = ({
           >
             <TextInput
               hasError={!isTitleValid}
+              name="folder_title"
               isDisabled={isLoading}
               tabIndex={4}
               scale

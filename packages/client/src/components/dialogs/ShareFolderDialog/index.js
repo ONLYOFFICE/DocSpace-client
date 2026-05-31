@@ -46,6 +46,7 @@ const ShareFolderDialog = ({
   visible,
   setIsVisible,
   setProcessCreatingRoomFromData,
+  currentFolderId,
 }) => {
   const { t, ready } = useTranslation(["Files", "Common"]);
 
@@ -55,7 +56,9 @@ const ShareFolderDialog = ({
 
   const onAction = () => {
     setProcessCreatingRoomFromData(true);
-    const event = new Event(Events.ROOM_CREATE);
+    const event = new CustomEvent(Events.ROOM_CREATE, {
+      detail: { parentId: currentFolderId, context: "dialog" },
+    });
     window.dispatchEvent(event);
     onClose();
   };
@@ -93,7 +96,7 @@ const ShareFolderDialog = ({
   );
 };
 
-export default inject(({ dialogsStore, filesActionsStore }) => {
+export default inject(({ dialogsStore, filesActionsStore, selectedFolderStore }) => {
   const { setShareFolderDialogVisible, shareFolderDialogVisible } =
     dialogsStore;
   const { setProcessCreatingRoomFromData } = filesActionsStore;
@@ -101,5 +104,6 @@ export default inject(({ dialogsStore, filesActionsStore }) => {
     visible: shareFolderDialogVisible,
     setIsVisible: setShareFolderDialogVisible,
     setProcessCreatingRoomFromData,
+    currentFolderId: selectedFolderStore.id,
   };
 })(observer(ShareFolderDialog));

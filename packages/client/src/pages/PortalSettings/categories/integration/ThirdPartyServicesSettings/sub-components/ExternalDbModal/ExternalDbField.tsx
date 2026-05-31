@@ -79,6 +79,7 @@ const ExternalDbField: React.FC<ExternalDbFieldProps> = ({
         <PasswordInput
           simpleView
           id={fieldName}
+          inputName={fieldName}
           inputValue={String(value)}
           onChange={(e) => onChange(fieldName, e.target.value)}
           placeholder={passwordField.title}
@@ -106,6 +107,7 @@ const ExternalDbField: React.FC<ExternalDbFieldProps> = ({
         </Text>
         <TextInput
           id={fieldName}
+          name={fieldName}
           value={String(value)}
           onChange={(e) => onChange(fieldName, e.target.valueAsNumber)}
           placeholder={textField.title}
@@ -122,6 +124,7 @@ const ExternalDbField: React.FC<ExternalDbFieldProps> = ({
         </Text>
         <TextInput
           id={fieldName}
+          name={fieldName}
           value={String(value)}
           onChange={(e) => onChange(fieldName, e.target.value)}
           placeholder={textField.title}

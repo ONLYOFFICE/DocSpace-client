@@ -14,7 +14,7 @@ import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import OutlineReactSvgUrl from "PUBLIC_DIR/images/outline-true.react.svg?url";
 
 import { isDesktop } from "../../../utils";
-import { ShareAccessRights } from "../../../enums";
+import { AnalyticsEvents, ShareAccessRights } from "../../../enums";
 import type { TFileLink } from "../../../api/files/types";
 import { ShareLinkService } from "../../../services/share-link.service";
 import { getExternalFolderLinks, getExternalLinks } from "../../../api/files";
@@ -372,6 +372,18 @@ export const useShare = ({
     if (link.sharedTo?.isExpired) return;
 
     copyShareLink(infoPanelSelection, link, t);
+
+    const isRoomItem = "roomType" in infoPanelSelection && infoPanelSelection.roomType !== undefined;
+    const isFileItem = "folderId" in infoPanelSelection;
+    if (isRoomItem || isFileItem) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: isRoomItem ? AnalyticsEvents.RoomShared : AnalyticsEvents.FileShared,
+        id: infoPanelSelection.id,
+        linkId: link.sharedTo?.id,
+        parentId: isFileItem ? infoPanelSelection.folderId : infoPanelSelection.parentId,
+      });
+    }
   };
 
   const getData = (link: TFileLink): ContextMenuModel[] => {

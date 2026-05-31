@@ -60,6 +60,7 @@ export const CancelTextInput = ({ t, config, setConfig }) => {
 			<Label className="label" text={t("CancelButtonText")} />
 			<TextInput
 				scale
+				name="cancel_button_text"
 				onChange={onChangeCancelLabel}
 				placeholder={t("Common:CancelButton")}
 				value={value}

@@ -112,6 +112,7 @@ const beforeBuild = async (
 
   const collectionByLng = new Map();
   const truthLng = new Map();
+  const seenBindings = new Set();
 
   let importString = "\n";
 
@@ -145,6 +146,10 @@ const beforeBuild = async (
     truthLng.set(language, language.replaceAll("-", ""));
 
     language = language.replaceAll("-", "");
+
+    const bindingKey = `${language}:${fileName}`;
+    if (seenBindings.has(bindingKey)) return;
+    seenBindings.add(bindingKey);
 
     const items = collectionByLng.get(language);
 

@@ -3,7 +3,7 @@
   "content": "Helper text",
   "content_en_sha1_hash": "00ffa642281cfac34e7aa038a2e85b734505bbc5",
   "created_at": "2026-03-20T09:07:42.205Z",
-  "updated_at": "2026-05-15T14:00:06.808Z",
+  "updated_at": "2026-05-28T15:46:18.602Z",
   "comment": {
     "text": "This is a label for a text input field, allowing users to enter helper text that will appear below a button.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
-      "line_number": 565,
-      "context": "testId=\"button_text_input\"\n />\n </ControlsGroup>\n \n <ControlsGroup>\n <Label className=\"label\" text={t(\"HelperText\")} />\n <TextInput\n scale\n value={config.secondaryText}\n onChange={onChangeSecondaryText}\n tabIndex={6}",
+      "line_number": 566,
+      "context": "testId=\"button_text_input\"\n />\n </ControlsGroup>\n \n <ControlsGroup>\n <Label className=\"label\" text={t(\"HelperText\")} />\n <TextInput\n scale\n name=\"helper_text\"\n value={config.secondaryText}\n onChange={onChangeSecondaryText}",
       "module": "/packages/client"
     }
   ],

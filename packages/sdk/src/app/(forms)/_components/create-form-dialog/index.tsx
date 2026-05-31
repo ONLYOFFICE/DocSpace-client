@@ -112,6 +112,7 @@ const CreateFormDialog = ({
         <TextInput
           forwardedRef={inputRef}
           type={InputType.text}
+          name="form_name"
           scale
           value={name}
           hasError={hasError}

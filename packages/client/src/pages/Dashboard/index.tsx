@@ -27,18 +27,15 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { Navigate, useNavigate, useSearchParams } from "react-router";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 
-import PortalLogo from "@docspace/ui-kit/components/portal-logo/PortalLogo";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
 import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { TwoStateToggle } from "@docspace/ui-kit/components/two-state-toggle";
 import { getPersonalFolderTree } from "@docspace/shared/api/files";
 import { getConstName } from "@docspace/shared/constants/consts";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 import {
   BlankPdfIcon,
@@ -47,12 +44,15 @@ import {
   CreateSpreadsheetIcon,
 } from "@docspace/ui-kit/components/quick-actions/icons";
 
-import BgPatternGreenUrl from "PUBLIC_DIR/images/background.pattern.green.react.svg?url";
-
 import { useAppsCatalog, type AppId } from "SRC_DIR/helpers/apps-catalog";
 
-import { ModuleCard, type ModuleItem } from "./ModuleCard";
-import { getGreetingKey, makeCreateUrl, NEW_FILE_NAMES } from "./utils";
+import { ModuleCard, type ModuleItem } from "./sub-components/ModuleCard";
+import { ProfileCard } from "./sub-components/ProfileCard";
+import { IntegrationsCard } from "./sub-components/IntegrationsCard";
+import { DevToolsCard } from "./sub-components/DevToolsCard";
+import { Header } from "./sub-components/Header";
+import { useUploadToMyDocuments } from "./sub-components/useUploadToMyDocuments";
+import { makeCreateUrl, NEW_FILE_NAMES } from "./utils";
 import {
   InstallAiFormsDialog,
   InstallDocsCloudDialog,
@@ -62,9 +62,6 @@ import { EnableAiRoomsDialog } from "./EnableAiRoomsDialog";
 import styles from "./Dashboard.module.scss";
 
 interface DashboardProps {
-  firstName?: string;
-  pricingUrl?: string;
-  isAdminOrOwner: boolean;
   isGuest: boolean;
   isAppEnabled: (id: string) => boolean;
   activate: (id: string) => Promise<boolean>;
@@ -73,9 +70,6 @@ interface DashboardProps {
 }
 
 const Dashboard = ({
-  firstName,
-  pricingUrl,
-  isAdminOrOwner,
   isGuest,
   isAppEnabled,
   activate,
@@ -92,6 +86,8 @@ const Dashboard = ({
     React.useState(false);
   const [enableAiRoomsVisible, setEnableAiRoomsVisible] = React.useState(false);
   const [enableAiRoomsLoading, setEnableAiRoomsLoading] = React.useState(false);
+
+  const { openUploadDialog } = useUploadToMyDocuments(myFolderId);
 
   React.useEffect(() => {
     ensureAppsLoaded();
@@ -150,7 +146,16 @@ const Dashboard = ({
 
   const appsCatalog = useAppsCatalog();
 
-  const handleInstall = async (modId: AppId) => {
+  const handleAppClick = async (
+    modId: AppId,
+    installed: boolean,
+    href?: string,
+  ) => {
+    if (installed && href) {
+      navigate(href);
+      return;
+    }
+
     if (modId === "ai-forms") {
       try {
         const activated = await activate("ai-forms");
@@ -226,30 +231,6 @@ const Dashboard = ({
     }
   };
 
-  const handleInstalled = () => {
-    setInstallDialogVisible(false);
-    navigate("/ai-forms");
-  };
-
-  const handleArbiterInstalled = () => {
-    setArbiterDialogVisible(false);
-    navigate("/ai-arbiter");
-  };
-
-  const handleDocsCloudInstalled = () => {
-    setDocsCloudDialogVisible(false);
-    navigate("/docs-cloud");
-  };
-
-  const greetingName = firstName ? `, ${firstName}` : "";
-  const greetingKey = getGreetingKey();
-  const greeting =
-    greetingKey === "GoodMorning"
-      ? t("Common:GoodMorning", { name: greetingName })
-      : greetingKey === "GoodAfternoon"
-        ? t("Common:GoodAfternoon", { name: greetingName })
-        : t("Common:GoodEvening", { name: greetingName });
-
   const design = searchParams.get("design");
   if (design === "old") {
     localStorage.setItem("useDocSpace", "old");
@@ -270,101 +251,84 @@ const Dashboard = ({
       installed: app.alwaysOn ? true : isAppEnabled(app.id),
       href: app.href,
     }))
-    .filter((mod) => isAdminOrOwner || mod.installed);
+    .filter((mod) => mod.installed);
 
   return (
     <div className={styles.dashboard}>
-      <TwoStateToggle
-        className={styles.viewToggle}
-        onNavigate={(url) => navigate(url)}
-      />
-      <PortalLogo className={styles.logo} />
+      <div className={styles.dashboardInner}>
+        <Header />
+        <ProfileCard />
 
-      <Text as="h1" className={styles.greeting}>
-        {greeting}
-      </Text>
-
-      <section className={styles.section}>
-        <Text as="h2" className={styles.sectionTitle}>
-          {t("Common:CreateNew")}
-        </Text>
-        <QuickActions items={createItems} className={styles.quickActions} />
-      </section>
-
-      <section className={styles.section}>
-        <Text as="h2" className={styles.sectionTitle}>
-          {t("Common:Modules")}
-        </Text>
-        {isAdminOrOwner && (
-          <Text as="p" className={styles.sectionSubtitle}>
-            {t("Common:DashboardModulesSubtitle", {
-              productName: getBrandName("ProductName"),
-            })}
-          </Text>
-        )}
-
-        {isAdminOrOwner && (
-          <div
-            className={styles.modulesBanner}
-            style={
-              {
-                "--modules-banner-bg": `url('${BgPatternGreenUrl}')`,
-              } as React.CSSProperties
-            }
-          >
-            <div className={styles.modulesBannerText}>
-              <Text as="p" className={styles.modulesBannerTitle}>
-                {t("Common:DashboardModulesBannerText")}
-              </Text>
-              <div className={styles.modulesBannerTags}>
-                <Text as="span" className={styles.modulesBannerTag}>
-                  {t("Common:NoBundlesRequired")}
-                </Text>
-                <Text as="span" className={styles.modulesBannerTag}>
-                  {t("Common:AddOrRemoveAnytime")}
-                </Text>
-                <Text as="span" className={styles.modulesBannerTag}>
-                  {t("Common:PayPerModule")}
-                </Text>
-              </div>
-            </div>
-            <Button
-              className={styles.modulesPricingBtn}
-              label={t("Common:SeePricing")}
-              size={ButtonSize.small}
-              isDisabled={!pricingUrl}
-              onClick={() => {
-                if (pricingUrl) window.open(pricingUrl, "_blank");
+        <section className={styles.section}>
+          <Text fontSize="18px" fontWeight={700} lineHeight="24px">
+            <Trans
+              t={t}
+              ns="Common"
+              i18nKey="CreateNewOrUpload"
+              components={{
+                1: (
+                  <Link
+                    type={LinkType.action}
+                    color="accent"
+                    isHovered
+                    fontSize="18px"
+                    fontWeight={700}
+                    lineHeight="24px"
+                    onClick={openUploadDialog}
+                  />
+                ),
               }}
             />
-          </div>
-        )}
+          </Text>
+          <QuickActions items={createItems} className={styles.quickActions} />
+        </section>
 
-        <div className={styles.modulesGrid}>
-          {moduleItems.map((mod) => (
-            <ModuleCard
-              key={mod.id}
-              mod={mod}
-              onInstall={() => handleInstall(mod.id as AppId)}
-            />
-          ))}
-        </div>
-      </section>
+        {moduleItems.length > 0 ? (
+          <section className={styles.section}>
+            <Text as="h2" className={styles.sectionTitle} isBold>
+              {t("Common:Apps")}
+            </Text>
+            <div className={styles.modulesGrid}>
+              {moduleItems.map((mod) => (
+                <ModuleCard
+                  key={mod.id}
+                  mod={mod}
+                  onClick={() =>
+                    handleAppClick(mod.id as AppId, mod.installed, mod.href)
+                  }
+                />
+              ))}
+            </div>
+          </section>
+        ) : null}
+
+        <IntegrationsCard />
+        <DevToolsCard />
+      </div>
 
       <InstallAiFormsDialog
         visible={installDialogVisible}
         onClose={() => setInstallDialogVisible(false)}
-        onInstalled={handleInstalled}
+        onInstalled={() => {
+          setInstallDialogVisible(false);
+          navigate("/ai-forms");
+        }}
       />
       <InstallAiArbiterDialog
         visible={arbiterDialogVisible}
         onClose={() => setArbiterDialogVisible(false)}
-        onInstalled={handleArbiterInstalled}
+        onInstalled={() => {
+          setArbiterDialogVisible(false);
+          navigate("/ai-arbiter");
+        }}
       />
       <InstallDocsCloudDialog
         visible={docsCloudDialogVisible}
         onClose={() => setDocsCloudDialogVisible(false)}
-        onInstalled={handleDocsCloudInstalled}
+        onInstalled={() => {
+          setDocsCloudDialogVisible(false);
+          navigate("/docs-cloud");
+        }}
       />
       <EnableAiRoomsDialog
         visible={enableAiRoomsVisible}
@@ -376,19 +340,13 @@ const Dashboard = ({
   );
 };
 
-const DashboardConnected = inject<TStore>(
-  ({ userStore, settingsStore, appsStore }) => ({
-    firstName: userStore.user?.firstName,
-    isAdminOrOwner:
-      (userStore.user?.isAdmin ?? false) || (userStore.user?.isOwner ?? false),
-    isGuest: userStore.user?.isVisitor ?? false,
-    pricingUrl: settingsStore.docspacePricesUrl,
-    isAppEnabled: appsStore.isEnabled,
-    activate: appsStore.activate,
-    enable: appsStore.enable,
-    ensureAppsLoaded: appsStore.ensureLoaded,
-  }),
-)(observer(Dashboard));
+const DashboardConnected = inject<TStore>(({ userStore, appsStore }) => ({
+  isGuest: userStore.user?.isVisitor ?? false,
+  isAppEnabled: appsStore.isEnabled,
+  activate: appsStore.activate,
+  enable: appsStore.enable,
+  ensureAppsLoaded: appsStore.ensureLoaded,
+}))(observer(Dashboard));
 
 export { DashboardConnected as Dashboard };
 

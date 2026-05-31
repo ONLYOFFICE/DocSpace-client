@@ -29,68 +29,45 @@
 .dashboard {
   position: relative;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px 24px 60px;
-  gap: 40px;
-  min-height: 100%;
+  height: 100%;
+  overflow-y: auto;
   box-sizing: border-box;
 }
 
-.viewToggle {
-  position: absolute;
-  top: 16px;
-  inset-inline-end: 24px;
-
-  @media (max-width: 1148px) {
-    position: static;
-    align-self: center;
-  }
+.dashboardInner {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  max-width: 1180px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-.logo {
-  --portal-logo-desktop-img-height: 40px;
+// Plan header
+.planHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.greeting {
+.planTitle {
   font-size: 21px;
   font-weight: 700;
   line-height: 28px;
   margin: 0;
 }
 
-.section {
+.planSubline {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: 100%;
-  max-width: 800px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
 }
 
-.quickActions {
-  @media (min-width: 601px) {
-    justify-content: center;
-
-    > a,
-    > button {
-      flex: 0 0 172px;
-    }
-  }
-}
-
-.sectionTitle {
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 22px;
-  margin: 0;
-}
-
-.sectionSubtitle {
+.planSublineText {
   font-size: 13px;
-  font-weight: 400;
   line-height: 20px;
-  margin: -8px 0 0;
 
   :global(.light) & {
     color: $light-gray-dark;
@@ -101,107 +78,148 @@
   }
 }
 
-// Modules banner
-.modulesBanner {
+.planLink {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--accent-main);
+  text-decoration: underline;
+}
+
+// Profile card
+.profileCard {
+  position: relative;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
   gap: 16px;
-  padding: 16px 20px;
+  padding: 20px 24px;
   border-radius: 12px;
-  background-image: var(--modules-banner-bg);
-  background-size: 100% auto;
-  background-position: center;
-  background-repeat: no-repeat;
 
   :global(.light) & {
-    background-color: $portal-green;
+    background-color: $gray-light;
   }
 
   :global(.dark) & {
-    background-color: $second-green-dark;
+    background-color: $dark-gray-light;
   }
 }
 
-.modulesBannerText {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.profileCardClose {
+  position: absolute;
+  top: 16px;
+  inset-inline-end: 16px;
 }
 
-.modulesBannerTitle {
+.profileCardTitle {
   font-size: 14px;
   font-weight: 600;
   line-height: 20px;
   margin: 0;
+  padding-inline-end: 28px;
 }
 
-.modulesBannerTags {
+.profileCardGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px 24px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 520px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.profileCardField {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-
-  @media (max-width: 600px) {
-    display: none;
-  }
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
 }
 
-.modulesBannerTag {
+.profileCardLabel {
   font-size: 12px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 16px;
-  padding: 2px 8px;
-  border-radius: 4px;
 
   :global(.light) & {
-    color: $main-green;
-    background-color: rgba($main-green, 0.12);
+    color: $light-gray-dark;
   }
 
   :global(.dark) & {
-    color: $second-green;
-    background-color: rgba($second-green, 0.12);
+    color: $gray-dark;
   }
 }
 
-.modulesPricingBtn {
-  flex-shrink: 0;
-  padding: 7px 16px;
-  border-radius: 6px;
+.profileCardValueRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.profileCardValue {
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 20px;
-  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
-  transition: background-color 0.15s ease;
+}
 
-  :global(.light) & {
-    background-color: $white;
-    border: 1px solid $gray-strong;
-    color: $black;
+.profileCardEdit {
+  flex-shrink: 0;
+}
 
-    &:hover {
-      background-color: $light-gray-hover;
-    }
-  }
+.profileCardLink {
+  font-size: 13px;
+  line-height: 20px;
+  align-self: flex-start;
+}
 
-  :global(.dark) & {
-    background-color: $gray-dark-mid;
-    border: 1px solid $loader-dark;
-    color: $white;
+// Section
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
 
-    &:hover {
-      background-color: $light-dark-gray-hover;
-    }
+.sectionTitle {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+  margin: 0;
+}
+
+.sectionTitleLink {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+}
+
+.quickActions {
+  justify-content: flex-start;
+
+  > a,
+  > button {
+    flex: 1 1 0;
+    max-width: 240px;
+    aspect-ratio: 240 / 200;
   }
 }
 
 // Modules grid
 .modulesGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
-  padding-bottom: 16px;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
   @media (max-width: 600px) {
     grid-template-columns: 1fr;
@@ -214,13 +232,38 @@
   gap: 12px;
   padding: 16px;
   border-radius: 12px;
+  background: transparent;
+  cursor: pointer;
+  text-align: start;
+  font: inherit;
+  color: inherit;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
 
   :global(.light) & {
     border: 1px solid $gray-light-mid;
+
+    &:hover {
+      background-color: $gray-light;
+    }
   }
 
   :global(.dark) & {
     border: 1px solid $light-dark-gray-hover;
+
+    &:hover {
+      background-color: $dark-gray-light;
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
   }
 }
 
@@ -229,9 +272,9 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
 
   :global(.light) & {
     background-color: $gray-light-mid;
@@ -242,8 +285,8 @@
   }
 
   svg {
-    width: 22px;
-    height: 22px;
+    width: 18px;
+    height: 18px;
   }
 
   &[data-installed="true"] {
@@ -285,6 +328,185 @@
   }
 }
 
-.moduleBtn {
+// Integrations grid (inside CollapsibleCard)
+.integrationsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.integrationTile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  :global(.light) & {
+    background-color: $white;
+    border: 1px solid $gray-light-mid;
+
+    &:hover {
+      border-color: var(--accent-main);
+    }
+  }
+
+  :global(.dark) & {
+    background-color: $dark-gray-light;
+    border: 1px solid $light-dark-gray-hover;
+
+    &:hover {
+      border-color: var(--accent-main);
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent-main);
+    outline-offset: -2px;
+  }
+}
+
+.integrationTileMore {
+  :global(.light) & {
+    background-color: $gray-light;
+  }
+
+  :global(.dark) & {
+    background-color: $gray-dark-mid;
+  }
+}
+
+.integrationName {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 0;
+}
+
+.integrationLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--accent-main);
+  text-decoration: underline;
+}
+
+.integrationArrow {
+  width: 13px;
+  height: 12px;
   flex-shrink: 0;
+
+  path {
+    fill: var(--accent-main);
+  }
+}
+
+// Dev tools grid (inside CollapsibleCard)
+.devToolsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.devToolTile {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+
+  :global(.light) & {
+    background-color: $white;
+    border: 1px solid $gray-light-mid;
+
+    &:hover {
+      border-color: var(--accent-main);
+    }
+  }
+
+  :global(.dark) & {
+    background-color: $dark-gray-light;
+    border: 1px solid $light-dark-gray-hover;
+
+    &:hover {
+      border-color: var(--accent-main);
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent-main);
+    outline-offset: -2px;
+  }
+}
+
+.devToolTitle {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 0;
+}
+
+.devToolDescription {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0;
+  flex: 1;
+
+  :global(.light) & {
+    color: $light-gray-dark;
+  }
+
+  :global(.dark) & {
+    color: $gray-dark;
+  }
+}
+
+.devToolLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-block-start: 8px;
+  color: var(--accent-main);
+  text-decoration: underline;
 }

@@ -44,6 +44,7 @@ import {
 import { InstallAiArbiterDialog } from "SRC_DIR/pages/Dashboard/InstallAiArbiterDialog";
 import { EnableAiRoomsDialog } from "SRC_DIR/pages/Dashboard/EnableAiRoomsDialog";
 
+import CatalogOverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
 import CatalogDocumentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
@@ -63,6 +64,7 @@ import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 import AppsSidebar from "../AppsSidebar";
 import { useSidebarShowText } from "../AppsSidebar/useSidebarShowText";
 
+const OVERVIEW_ID = "overview";
 const DOCS_CLOUD_ID = "docs-cloud";
 const AI_FILES_ID = "ai-files";
 const AI_FORMS_ID = "ai-forms";
@@ -186,6 +188,9 @@ const NewArticle = ({
 
   const activeId = React.useMemo(() => {
     const section = new URLSearchParams(location.search).get("section") ?? "";
+    if (location.pathname.startsWith("/dashboard")) {
+      return OVERVIEW_ID;
+    }
     if (location.pathname.startsWith("/ai-files")) {
       return AI_FILES_SECTION_TO_ID[section] ?? AI_FILES_ID;
     }
@@ -214,6 +219,13 @@ const NewArticle = ({
 
   const groups = React.useMemo<NavMenuGroup[]>(() => {
     // const underDevelopment = () => toastr.info(t("Common:UnderDevelopment"));
+
+    const overviewItem: NavMenuItem = {
+      id: OVERVIEW_ID,
+      label: t("Common:Overview"),
+      icon: CatalogOverviewReactSvgUrl,
+      onClick: () => navigate("/dashboard"),
+    };
 
     const docsCloudItem: NavMenuItem = {
       id: DOCS_CLOUD_ID,
@@ -501,6 +513,10 @@ const NewArticle = ({
     const hasAvailableGroup = isAdminOrOwner && available.length > 0;
 
     const result: NavMenuGroup[] = [];
+    result.push({
+      id: "overview",
+      items: [overviewItem],
+    });
     if (enabled.length > 0) {
       result.push({
         id: "enabled",

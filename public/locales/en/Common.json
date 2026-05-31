@@ -2093,5 +2093,17 @@
   "RoomCreateUserCount": "Users added ({{count}}).",
   "RoomGroupAdded": "Groups added.",
   "RoomGroupAddedCount": "Groups added ({{count}}).",
-  "Overview": "Overview"
+  "Overview": "Overview",
+  "ActivatePremiumFeatures": "Activate premium features",
+  "SetPassword": "Set password",
+  "StartupPlan": "Startup",
+  "BusinessPlan": "Business",
+  "AlreadyUsingAnotherPlatform": "Already using another platform?",
+  "IntegrationsDescription": "Plug {{productName}} into any ecosystem (DMS, CMS, LMS, etc.) — no custom code, no migration.",
+  "PlusMore": "+{{count}} more",
+  "ViewAll": "View all",
+  "BuildWithProduct": "Build with {{organizationName}}",
+  "BuildWithProductDescription": "Use developer tools when you need deeper integration, automation, embedding, webhooks, or API access.",
+  "CustomizeYourPlan": "Customize your {{plan}} plan",
+  "CreateNewOrUpload": "Create new or <1>upload your file</1>"
 }

@@ -2084,5 +2084,6 @@
   "RoomRemoveUser": "ຜູ້ໃຊ້ໄດ້ລຶບອອກແລ້ວ.",
   "RoomCreateUserCount": "ຜູ້ໃຊ້ເພີ່ມເຕີມ ({{count}}).",
   "RoomGroupAdded": "ກຸ່ມຖືກເພີ່ມເຂົ້າແລ້ວ.",
-  "RoomGroupAddedCount": "ກຸ່ມຖືກເພີ່ມເຂົ້າແລ້ວ ({{count}})."
+  "RoomGroupAddedCount": "ກຸ່ມຖືກເພີ່ມເຂົ້າແລ້ວ ({{count}}).",
+  "Overview": "ພາບລວມ"
 }

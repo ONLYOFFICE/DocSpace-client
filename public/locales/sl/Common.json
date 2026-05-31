@@ -2084,5 +2084,6 @@
   "RoomRemoveUser": "Ikona spremenjena",
   "RoomCreateUserCount": "Uporabniki dodani ({{count}})",
   "RoomGroupAdded": "Skupine dodane.",
-  "RoomGroupAddedCount": "Skupine dodane ({{count}})"
+  "RoomGroupAddedCount": "Skupine dodane ({{count}})",
+  "Overview": "Pregled"
 }

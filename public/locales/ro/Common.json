@@ -2092,5 +2092,6 @@
   "RoomRemoveUser": "Utilizatorul a fost eliminat.",
   "RoomCreateUserCount": "Utilizatorul a fost adăugat ({{count}}).",
   "RoomGroupAdded": "Grupuri au fost adăugate.",
-  "RoomGroupAddedCount": "Grupuri au fost adăugate ({{count}})."
+  "RoomGroupAddedCount": "Grupuri au fost adăugate ({{count}}).",
+  "Overview": "Prezentare generală"
 }

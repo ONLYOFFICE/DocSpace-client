@@ -2092,5 +2092,6 @@
   "RoomRemoveUser": "Օգտատերը հեռացվել է:",
   "RoomCreateUserCount": "Օգտատերերն ավելացվել են ({{count}})։",
   "RoomGroupAdded": "Խմբերն ավելացվել են։",
-  "RoomGroupAddedCount": "Խմբերն ավելացվել են ({{count}})։"
+  "RoomGroupAddedCount": "Խմբերն ավելացվել են ({{count}})։",
+  "Overview": "Ընդհանուր տեսք"
 }

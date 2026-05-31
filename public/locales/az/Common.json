@@ -2084,5 +2084,6 @@
   "RoomRemoveUser": "İstifadəçi silindi.",
   "RoomCreateUserCount": "İstifadəçilər əlavə edildi ({{count}}).",
   "RoomGroupAdded": "Qruplar əlavə edildi.",
-  "RoomGroupAddedCount": "Qruplar əlavə edildi ({{count}})."
+  "RoomGroupAddedCount": "Qruplar əlavə edildi ({{count}}).",
+  "Overview": "Ümumi Baxış"
 }

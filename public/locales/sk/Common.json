@@ -2054,5 +2054,6 @@
   "RoomRemoveUser": "Ikonka zmenená",
   "RoomCreateUserCount": "Používatelia pridaní ({{count}}).",
   "RoomGroupAdded": "Skupiny pridané.",
-  "RoomGroupAddedCount": "Skupiny pridané ({{count}})."
+  "RoomGroupAddedCount": "Skupiny pridané ({{count}}).",
+  "Overview": "Prehľad"
 }

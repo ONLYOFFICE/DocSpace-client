@@ -2092,5 +2092,6 @@
   "RoomRemoveUser": "Korisnik uklonjen.",
   "RoomCreateUserCount": "Dodati korisnici ({{count}}).",
   "RoomGroupAdded": "Grupe dodate.",
-  "RoomGroupAddedCount": "Grupe dodate ({{count}})."
+  "RoomGroupAddedCount": "Grupe dodate ({{count}}).",
+  "Overview": "Pregled"
 }

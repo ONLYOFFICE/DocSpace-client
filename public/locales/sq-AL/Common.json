@@ -2084,5 +2084,6 @@
   "RoomRemoveUser": "Përdoruesi u fshi",
   "RoomCreateUserCount": "Përdoruesit e shtuar ({{count}}).",
   "RoomGroupAdded": "Grupet u shtuan.",
-  "RoomGroupAddedCount": "Grupet e shtuara ({{count}})."
+  "RoomGroupAddedCount": "Grupet e shtuara ({{count}}).",
+  "Overview": "Përmbledhje"
 }

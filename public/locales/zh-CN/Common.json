@@ -2092,5 +2092,6 @@
   "RoomRemoveUser": "用户已删除。",
   "RoomCreateUserCount": "用户已添加 ({{count}})。",
   "RoomGroupAdded": "组已添加。",
-  "RoomGroupAddedCount": "组已添加 ({{count}})。"
+  "RoomGroupAddedCount": "组已添加 ({{count}})。",
+  "Overview": "概览"
 }

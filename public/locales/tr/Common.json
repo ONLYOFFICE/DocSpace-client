@@ -2084,5 +2084,6 @@
   "RoomRemoveUser": "Simge değişti",
   "RoomCreateUserCount": "Kullanıcılar eklendi ({{count}}).",
   "RoomGroupAdded": "Gruplar ekledi.",
-  "RoomGroupAddedCount": "Gruplar eklendi ({{count}})."
+  "RoomGroupAddedCount": "Gruplar eklendi ({{count}}).",
+  "Overview": "Genel Bakış"
 }

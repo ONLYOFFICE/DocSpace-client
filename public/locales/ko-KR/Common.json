@@ -2053,5 +2053,6 @@
   "RoomRemoveUser": "사용자가 제거되었습니다.",
   "RoomCreateUserCount": "사용자 추가됨 ({{count}}).",
   "RoomGroupAdded": "그룹이 추가되었습니다.",
-  "RoomGroupAddedCount": "그룹 추가됨 ({{count}})."
+  "RoomGroupAddedCount": "그룹 추가됨 ({{count}}).",
+  "Overview": "개요"
 }

@@ -2084,5 +2084,6 @@
   "RoomRemoveUser": "Піктограму змінено",
   "RoomCreateUserCount": "Користувачів додано ({{count}}).",
   "RoomGroupAdded": "Групи додано.",
-  "RoomGroupAddedCount": "Групи додано ({{count}})."
+  "RoomGroupAddedCount": "Групи додано ({{count}}).",
+  "Overview": "Огляд"
 }

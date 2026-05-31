@@ -2084,5 +2084,6 @@
   "RoomRemoveUser": "Lietotājs ir noņemts.",
   "RoomCreateUserCount": "Lietotāji pievienoti ({{count}}).",
   "RoomGroupAdded": "Grupas ir pievienotas.",
-  "RoomGroupAddedCount": "Grupas pievienotas ({{count}})."
+  "RoomGroupAddedCount": "Grupas pievienotas ({{count}}).",
+  "Overview": "Apraksts"
 }

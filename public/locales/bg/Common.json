@@ -2084,5 +2084,6 @@
   "RoomRemoveUser": "Потребителят е премахнат.",
   "RoomCreateUserCount": "Потребители добавени ({{count}}).",
   "RoomGroupAdded": "Добавени групи.",
-  "RoomGroupAddedCount": "Групи добавени ({{count}})."
+  "RoomGroupAddedCount": "Групи добавени ({{count}}).",
+  "Overview": "Преглед"
 }

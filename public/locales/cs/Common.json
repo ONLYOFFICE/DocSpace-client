@@ -2084,5 +2084,6 @@
   "RoomRemoveUser": "Odstraněný uživatel.",
   "RoomCreateUserCount": "Uživatelé přidáni ({{count}}).",
   "RoomGroupAdded": "Skupiny přidány.",
-  "RoomGroupAddedCount": "Skupiny přidány ({{count}})."
+  "RoomGroupAddedCount": "Skupiny přidány ({{count}}).",
+  "Overview": "Přehled"
 }

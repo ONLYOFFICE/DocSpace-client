@@ -2084,5 +2084,6 @@
   "RoomRemoveUser": "පරිශීලකයා ඉවත් කර ඇත.",
   "RoomCreateUserCount": "පරිශීලකයින් එකතු කරන ලදි ({{count}}).",
   "RoomGroupAdded": "කණ්ඩායම් එකතු කරන ලදි.",
-  "RoomGroupAddedCount": "කණ්ඩායම් එකතු කරන ලදි ({{count}})."
+  "RoomGroupAddedCount": "කණ්ඩායම් එකතු කරන ලදි ({{count}}).",
+  "Overview": "සාරාංශය"
 }

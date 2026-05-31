@@ -2084,5 +2084,6 @@
   "RoomRemoveUser": "Ο χρήστης αφαιρέθηκε.",
   "RoomCreateUserCount": "Προσθήκη χρηστών ({{count}}).",
   "RoomGroupAdded": "Οι ομάδες προστέθηκαν.",
-  "RoomGroupAddedCount": "Προσθήκη ομάδων ({{count}})."
+  "RoomGroupAddedCount": "Προσθήκη ομάδων ({{count}}).",
+  "Overview": "Γενική επισκόπηση"
 }

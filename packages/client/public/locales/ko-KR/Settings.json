@@ -198,7 +198,6 @@
   "OAuthDescription": "{{organizationName}} {{productName}} API를 인증 및 파일 액세스 등 작업에 사용하십시오.",
   "OpenInAppOnly": "앱에서만 열기",
   "OpenInWebOnly": "웹에서만 열기",
-  "Overview": "개요",
   "PasswordMinLenght": "최소 비밀번호 길이",
   "PersonalFiles": "개인 파일",
   "PluginDescription": "{{productName}} 기능을 확장하거나, 타사 서비스를 연결하거나, 기존 사용자 경험을 개선하세요.",

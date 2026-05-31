@@ -2084,5 +2084,6 @@
   "RoomRemoveUser": "Käyttäjä poistettu.",
   "RoomCreateUserCount": "Käyttäjät lisätty ({{count}}).",
   "RoomGroupAdded": "Ryhmät lisätty.",
-  "RoomGroupAddedCount": "Ryhmät lisätty ({{count}})."
+  "RoomGroupAddedCount": "Ryhmät lisätty ({{count}}).",
+  "Overview": "Yleiskatsaus"
 }

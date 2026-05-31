@@ -2084,5 +2084,6 @@
   "RoomRemoveUser": "تمت إزالة المستخدم.",
   "RoomCreateUserCount": "تمت إضافة المستخدمين ({{count}}).",
   "RoomGroupAdded": "تمت إضافة المجموعات.",
-  "RoomGroupAddedCount": "تمت إضافة المجموعات ({{count}})."
+  "RoomGroupAddedCount": "تمت إضافة المجموعات ({{count}}).",
+  "Overview": "نظرة عامة"
 }

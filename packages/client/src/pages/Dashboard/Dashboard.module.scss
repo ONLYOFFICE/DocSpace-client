@@ -202,13 +202,6 @@
 
 .quickActions {
   justify-content: flex-start;
-
-  > a,
-  > button {
-    flex: 1 1 0;
-    max-width: 240px;
-    aspect-ratio: 240 / 200;
-  }
 }
 
 // Modules grid

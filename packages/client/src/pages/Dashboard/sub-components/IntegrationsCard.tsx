@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
@@ -34,48 +35,36 @@ import ArrowIcon from "PUBLIC_DIR/images/arrow2.react.svg";
 
 import styles from "../Dashboard.module.scss";
 
-const PLATFORMS: { id: string; name: string; url: string }[] = [
-  {
-    id: "nextcloud",
-    name: "Nextcloud",
-    url: "https://www.onlyoffice.com",
-  },
-  {
-    id: "owncloud",
-    name: "ownCloud",
-    url: "https://www.onlyoffice.com",
-  },
-  {
-    id: "confluence",
-    name: "Confluence",
-    url: "https://www.onlyoffice.com",
-  },
-  {
-    id: "alfresco",
-    name: "Alfresco",
-    url: "https://www.onlyoffice.com",
-  },
-  {
-    id: "moodle",
-    name: "Moodle",
-    url: "https://www.onlyoffice.com",
-  },
-  {
-    id: "seafile",
-    name: "Seafile",
-    url: "https://www.onlyoffice.com",
-  },
-  {
-    id: "odoo",
-    name: "Odoo",
-    url: "https://www.onlyoffice.com",
-  },
-];
+interface IntegrationsCardProps {
+  nextcloudUrl?: string;
+  owncloudUrl?: string;
+  confluenceUrl?: string;
+  alfrescoUrl?: string;
+  moodleUrl?: string;
+  odooUrl?: string;
+  allConnectorsUrl?: string;
+}
 
-const VIEW_ALL_URL = "https://www.onlyoffice.com/all-connectors.aspx";
-
-export const IntegrationsCard = () => {
+const IntegrationsCardComponent = ({
+  nextcloudUrl,
+  owncloudUrl,
+  confluenceUrl,
+  alfrescoUrl,
+  moodleUrl,
+  odooUrl,
+  allConnectorsUrl,
+}: IntegrationsCardProps) => {
   const { t } = useTranslation(["Common"]);
+
+  const platforms: { id: string; name: string; url?: string }[] = [
+    { id: "nextcloud", name: "Nextcloud", url: nextcloudUrl },
+    { id: "owncloud", name: "ownCloud", url: owncloudUrl },
+    { id: "confluence", name: "Confluence", url: confluenceUrl },
+    { id: "alfresco", name: "Alfresco", url: alfrescoUrl },
+    { id: "moodle", name: "Moodle", url: moodleUrl },
+    { id: "seafile", name: "Seafile", url: allConnectorsUrl },
+    { id: "odoo", name: "Odoo", url: odooUrl },
+  ];
 
   return (
     <CollapsibleCard
@@ -86,7 +75,7 @@ export const IntegrationsCard = () => {
       defaultOpen
     >
       <div className={styles.integrationsGrid}>
-        {PLATFORMS.map((platform) => (
+        {platforms.map((platform) => (
           <a
             key={platform.id}
             className={styles.integrationTile}
@@ -108,7 +97,7 @@ export const IntegrationsCard = () => {
         ))}
         <a
           className={`${styles.integrationTile} ${styles.integrationTileMore}`}
-          href={VIEW_ALL_URL}
+          href={allConnectorsUrl}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -124,6 +113,16 @@ export const IntegrationsCard = () => {
     </CollapsibleCard>
   );
 };
+
+export const IntegrationsCard = inject<TStore>(({ settingsStore }) => ({
+  nextcloudUrl: settingsStore.nextcloudUrl,
+  owncloudUrl: settingsStore.owncloudUrl,
+  confluenceUrl: settingsStore.confluenceUrl,
+  alfrescoUrl: settingsStore.alfrescoUrl,
+  moodleUrl: settingsStore.moodleUrl,
+  odooUrl: settingsStore.odooUrl,
+  allConnectorsUrl: settingsStore.allConnectorsUrl,
+}))(observer(IntegrationsCardComponent));
 
 export default IntegrationsCard;
 

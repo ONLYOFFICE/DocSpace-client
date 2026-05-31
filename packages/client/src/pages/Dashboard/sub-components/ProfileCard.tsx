@@ -33,6 +33,7 @@ import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import { DeviceType } from "@docspace/shared/enums";
 
 import ChangePasswordDialog from "SRC_DIR/components/dialogs/ChangePasswordDialog";
 
@@ -47,12 +48,14 @@ interface ProfileCardProps {
   portalName?: string;
   displayName?: string;
   email?: string;
+  currentDeviceType?: DeviceType;
 }
 
 const ProfileCardComponent = ({
   portalName = "",
   displayName = "",
   email = "",
+  currentDeviceType,
 }: ProfileCardProps) => {
   const { t } = useTranslation(["SocialAuthWelcomeDialog", "Common"]);
   const navigate = useNavigate();
@@ -71,7 +74,16 @@ const ProfileCardComponent = ({
   };
 
   const handleEditPortalName = () => {
-    navigate("/portal-settings/customization/general/dns-settings");
+    // On desktop/tablet all customization sections live on a single page,
+    // so we link to the portal-renaming anchor to scroll straight to it.
+    // On mobile each section has its own route, where the anchor is moot.
+    const isMobile = currentDeviceType === DeviceType.mobile;
+
+    navigate(
+      isMobile
+        ? "/portal-settings/customization/general/portal-renaming"
+        : "/portal-settings/customization/general#portal-renaming",
+    );
   };
 
   return (
@@ -159,6 +171,7 @@ export const ProfileCard = inject<TStore>(({ userStore, settingsStore }) => ({
   displayName: userStore.user?.displayName,
   email: userStore.user?.email,
   portalName: settingsStore.tenantAlias,
+  currentDeviceType: settingsStore.currentDeviceType,
 }))(observer(ProfileCardComponent));
 
 export default ProfileCard;

@@ -58,7 +58,6 @@ const EmptyViewContainer = observer((props: EmptyViewContainerProps) => {
     "Files",
     "Common",
     "Translations",
-    "AIRoom",
     "SocialAuthWelcomeDialog",
   ]);
 

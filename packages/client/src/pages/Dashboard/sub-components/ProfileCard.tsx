@@ -49,6 +49,8 @@ interface ProfileCardProps {
   displayName?: string;
   email?: string;
   currentDeviceType?: DeviceType;
+  isAdmin?: boolean;
+  isOwner?: boolean;
 }
 
 const ProfileCardComponent = ({
@@ -56,6 +58,8 @@ const ProfileCardComponent = ({
   displayName = "",
   email = "",
   currentDeviceType,
+  isAdmin = false,
+  isOwner = false,
 }: ProfileCardProps) => {
   const { t } = useTranslation(["SocialAuthWelcomeDialog", "Common"]);
   const navigate = useNavigate();
@@ -65,6 +69,10 @@ const ProfileCardComponent = ({
   );
   const [changePasswordVisible, setChangePasswordVisible] =
     React.useState(false);
+
+  // The card lets the user jump to portal settings (renaming, etc.),
+  // which only admins and the owner can access — hide it for everyone else.
+  if (!isAdmin && !isOwner) return null;
 
   if (hidden) return null;
 
@@ -172,6 +180,8 @@ export const ProfileCard = inject<TStore>(({ userStore, settingsStore }) => ({
   email: userStore.user?.email,
   portalName: settingsStore.tenantAlias,
   currentDeviceType: settingsStore.currentDeviceType,
+  isAdmin: userStore.user?.isAdmin ?? false,
+  isOwner: userStore.user?.isOwner ?? false,
 }))(observer(ProfileCardComponent));
 
 export default ProfileCard;

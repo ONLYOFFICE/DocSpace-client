@@ -67,6 +67,38 @@
   object-fit: contain;
 }
 
+.collapsedHeader {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  // On desktop: show burger logo by default, swap to collapse button on hover.
+  @include mixins.desktop {
+    .collapseButton {
+      display: none;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        .logoBurgerButton {
+          display: none;
+        }
+
+        .collapseButton {
+          display: flex;
+        }
+      }
+    }
+  }
+
+  // On tablet: always show the collapse button instead of the burger logo.
+  @include mixins.tablet {
+    .logoBurgerButton {
+      display: none;
+    }
+  }
+}
+
 .logoBurgerButton {
   display: inline-flex;
   align-items: center;

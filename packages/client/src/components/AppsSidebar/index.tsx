@@ -131,19 +131,28 @@ const AppsSidebar = ({
                 />
               </>
             ) : (
-              <button
-                type="button"
-                className={styles.logoBurgerButton}
-                onClick={toggleShowText}
-                title={collapseLabel}
-                aria-label={collapseLabel}
-              >
-                <img
-                  className={styles.logoBurger}
-                  src={burgerLogo}
-                  alt="portal logo"
+              <div className={styles.collapsedHeader}>
+                <button
+                  type="button"
+                  className={styles.logoBurgerButton}
+                  onClick={toggleShowText}
+                  title={collapseLabel}
+                  aria-label={collapseLabel}
+                >
+                  <img
+                    className={styles.logoBurger}
+                    src={burgerLogo}
+                    alt="portal logo"
+                  />
+                </button>
+
+                <CollapseButton
+                  showText={showText}
+                  toggleShowText={toggleShowText}
+                  label={collapseLabel}
+                  className={styles.collapseButton}
                 />
-              </button>
+              </div>
             )}
           </div>
         )}

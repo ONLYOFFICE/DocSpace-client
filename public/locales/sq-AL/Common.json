@@ -2118,5 +2118,11 @@
   "RoomCreateUserCount": "Përdoruesit e shtuar ({{count}}).",
   "RoomGroupAdded": "Grupet u shtuan.",
   "RoomGroupAddedCount": "Grupet e shtuara ({{count}}).",
-  "Overview": "Përmbledhje"
+  "Overview": "Përmbledhje",
+  "ChangesToTag": "Ndryshimet tek kjo etiketë do të ndikojnë në të gjitha ambientet ku përdoret.",
+  "DeleteTag": "Fshij tag",
+  "DeleteTagCannotBeUndone": "Ky veprim nuk mund të zhbëhet.",
+  "DeleteTagConfirmation": "Fshirja e kësaj etikete do ta hiqë atë nga të gjitha dhomat ku përdoret.",
+  "EditTag": "Redakto tag",
+  "RemoveTag": "<1>{{tag}}</1> etiketa e hiqur."
 }

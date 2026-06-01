@@ -64,7 +64,7 @@ export const DeleteTagModal = ({
   // tagName,
   ref,
 }: DeleteTagModalProps) => {
-  const { t } = useTranslation(["ConvertDialog", "TagManagement", "Common"]);
+  const { t } = useTranslation(["ConvertDialog", "Common"]);
 
   const onChangeCheckbox = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,13 +82,13 @@ export const DeleteTagModal = ({
       id={DELETE_TAG_MODAL_ID}
       displayType={ModalDialogType.modal}
     >
-      <ModalDialog.Header>{t("TagManagement:DeleteTag")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:DeleteTag")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text className={styles.deleteTagModalText}>
-          {t("TagManagement:DeleteTagConfirmation")}
+          {t("Common:DeleteTagConfirmation")}
         </Text>
         <Text className={styles.deleteTagModalText}>
-          {t("TagManagement:DeleteTagCannotBeUndone")}
+          {t("Common:DeleteTagCannotBeUndone")}
         </Text>
         <Checkbox
           key="dont-show-again"

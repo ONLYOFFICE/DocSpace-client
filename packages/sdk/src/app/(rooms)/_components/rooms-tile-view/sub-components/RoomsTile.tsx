@@ -48,6 +48,7 @@ import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import type { TagClickEvent } from "@docspace/ui-kit/components/tag";
 import Badges from "@docspace/shared/components/badges";
 import api from "@docspace/shared/api";
+import { isAdmin } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import {
   TagManagement,
@@ -57,6 +58,7 @@ import {
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
+import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
 import { generateFilesItemValue } from "@/app/(docspace)/(files)/_utils";
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import { getRoomIconLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
@@ -100,6 +102,7 @@ const RoomsTile = observer(
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
     const { isItemActive } = useActiveItemsStore();
+    const { user } = useDocsUserStore();
     const { openFolder } = useFolderActions({ t });
     const refreshRooms = React.useContext(RoomsRefreshContext);
 
@@ -242,12 +245,14 @@ const RoomsTile = observer(
       />
     );
 
+    const canManageTags = !!(user && isAdmin(user)) && !isArchive;
+
     const tagAccess: AccessTagManagement = {
       canCreate: hasEditAccess,
       canBindTag: hasEditAccess,
       canSearch: hasEditAccess,
-      canEdit: false,
-      canRemove: false,
+      canEdit: canManageTags,
+      canRemove: canManageTags,
     };
 
     const renderTags = (isHovered: boolean) => (

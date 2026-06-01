@@ -2126,5 +2126,11 @@
   "RoomCreateUserCount": "Usuarios añadidos ({{count}}).",
   "RoomGroupAdded": "Grupos añadidos.",
   "RoomGroupAddedCount": "Grupos añadidos ({{count}}).",
-  "Overview": "Resumen"
+  "Overview": "Resumen",
+  "ChangesToTag": "Los cambios en esta etiqueta afectarán a todas las salas donde se utiliza.",
+  "DeleteTag": "Eliminar etiqueta",
+  "DeleteTagCannotBeUndone": "Esta acción no se puede deshacer.",
+  "DeleteTagConfirmation": "Eliminar esta etiqueta la eliminará de todas las salas donde se utilice.",
+  "EditTag": "Editar etiqueta",
+  "RemoveTag": "<1>{{tag}}</1> etiqueta eliminada."
 }

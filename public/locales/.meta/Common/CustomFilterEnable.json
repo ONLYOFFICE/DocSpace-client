@@ -2,26 +2,20 @@
   "key_path": "CustomFilterEnable",
   "content": "Enable Custom filter",
   "content_en_sha1_hash": "347ea46e6b8619e12adca52dc59d4182968077ea",
-  "created_at": "2026-05-24T17:27:22.622Z",
-  "updated_at": "2026-05-24T18:24:37.407Z",
+  "created_at": "2025-05-19T21:30:55.402Z",
+  "updated_at": "2026-05-28T15:46:18.641Z",
   "comment": {
-    "text": "Menu item label in a context menu used to activate the custom filter feature.",
+    "text": "This is a button label that enables a custom filter. It appears in a context menu.",
     "is_auto": true,
-    "updated_at": "2026-05-24T18:24:37.407Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-04-11T21:10:10.122Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2606,
-      "context": "{\n id: \"option_custom-filter\",\n key: \"custom-filter\",\n label: item.customFilterEnabled\n ? t(\"Common:CustomFilterDisable\")\n : t(\"Common:CustomFilterEnable\"),\n icon: CustomFilterReactSvgUrl,\n onClick: () => this.onSetUpCustomFilter(item, t),\n disabled: Boolean(\n !isRoomAdmin &&\n item.customFilterEnabled &&",
+      "line_number": 2635,
+      "context": "{\n id: \"option_custom-filter\",\n key: \"custom-filter\",\n label: item.customFilterEnabled\n ? t(\"Files:CustomFilterDisable\")\n : t(\"Files:CustomFilterEnable\"),\n icon: CustomFilterReactSvgUrl,\n onClick: () => this.onSetUpCustomFilter(item, t),\n disabled: Boolean(\n !isRoomAdmin &&\n item.customFilterEnabled &&",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 404,
-      "context": "return {\n id: \"option_custom-filter\",\n key: \"custom-filter\",\n label: i.customFilterEnabled\n ? t(\"Common:CustomFilterDisable\")\n : t(\"Common:CustomFilterEnable\"),\n icon: CustomFilterReactSvgUrl,\n onClick: () => changeCustomFilter(i),\n disabled: false,\n };\n },",
-      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -155,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,
@@ -170,12 +164,6 @@
       "approved_at": null
     },
     "sl": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

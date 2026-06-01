@@ -198,7 +198,6 @@
   "OAuthDescription": "使用 {{organizationName}} {{productName}} API 进行授权和文件访问等操作。",
   "OpenInAppOnly": "仅在应用程序中打开",
   "OpenInWebOnly": "仅在网页中打开",
-  "Overview": "概览",
   "PasswordMinLenght": "密码最短长度",
   "PersonalFiles": "个人文件",
   "PluginDescription": "扩展您的{{productName}}功能，连接第三方服务或增强现有用户体验。",

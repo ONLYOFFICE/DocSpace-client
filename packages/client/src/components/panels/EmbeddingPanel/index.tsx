@@ -499,6 +499,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 						<div className={styles.embeddingPanelInputsContainer}>
 							<DisplayBlock
 								label={t("EmbeddingPanel:Width")}
+								name="embed_width"
 								inputValue={widthValue}
 								onInputChange={onChangeWidth}
 								selectedOption={widthDimension}
@@ -506,6 +507,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 							/>
 							<DisplayBlock
 								label={t("EmbeddingPanel:Height")}
+								name="embed_height"
 								inputValue={heightValue}
 								onInputChange={onChangeHeight}
 								selectedOption={heightDimension}

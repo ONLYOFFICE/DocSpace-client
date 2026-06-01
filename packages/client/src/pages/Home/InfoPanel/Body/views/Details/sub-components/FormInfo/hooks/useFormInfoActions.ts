@@ -61,7 +61,9 @@ export function useFormInfoActions({
   onClickLinkFillForm,
 }: Args): FormInfoActions {
   const handleEditRoom = (item: ItemType) => {
-    const event: EventType = new Event(Events.ROOM_EDIT);
+    const event: EventType = new CustomEvent(Events.ROOM_EDIT, {
+      detail: { context: "info_panel" },
+    });
 
     event.item = item;
     event.cb = (room) => {

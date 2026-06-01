@@ -3,7 +3,7 @@
   "content": "Enter page number",
   "content_en_sha1_hash": "7ac45489eeeeea6114ff51313824c781ea011d31",
   "created_at": "2025-05-19T21:30:54.478Z",
-  "updated_at": "2026-05-15T14:00:06.810Z",
+  "updated_at": "2026-05-28T15:46:18.604Z",
   "comment": {
     "text": "Placeholder text for a text input field where users enter a page number. It appears within the developer tools settings.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/DisplayPageBlock.js",
-      "line_number": 67,
-      "context": "<ControlsGroup>\n <Label className=\"label\" text={t(\"Page\")} />\n <TextInput\n scale\n onChange={onChangePage}\n placeholder={t(\"EnterPage\")}\n value={value}\n isDisabled={!config.filter.count}\n tabIndex={7}\n testId=\"display_page_text_input\"\n />",
+      "line_number": 68,
+      "context": "<Label className=\"label\" text={t(\"Page\")} />\n <TextInput\n scale\n name=\"display_page\"\n onChange={onChangePage}\n placeholder={t(\"EnterPage\")}\n value={value}\n isDisabled={!config.filter.count}\n tabIndex={7}\n testId=\"display_page_text_input\"\n />",
       "module": "/packages/client"
     }
   ],

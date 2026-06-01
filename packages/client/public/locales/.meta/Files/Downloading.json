@@ -3,7 +3,7 @@
   "content": "Downloading",
   "content_en_sha1_hash": "9b4592f9ae45a647155e857c8bbbe5e38c83f01e",
   "created_at": "2025-05-19T21:30:55.480Z",
-  "updated_at": "2026-05-24T17:27:49.112Z",
+  "updated_at": "2026-05-28T15:46:18.565Z",
   "comment": {
     "text": "This is a status message displayed in a toast notification, indicating that a file or folder is currently being downloaded. It appears briefly to inform the user about the ongoing download process.",
     "is_auto": true,
@@ -13,26 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 259,
+      "line_number": 317,
       "context": "case move:\n return i18n.t(\"Common:MoveToOperation\");\n case copy:\n return i18n.t(\"Common:CopyOperation\");\n case download:\n return i18n.t(\"Files:Downloading\");\n case duplicate:\n return i18n.t(\"Files:Duplicating\");\n case exportIndex:\n return i18n.t(\"Files:ExportingIndex\");\n case markAsRead:",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1071,
-      "context": "originalFileType: file.contentType || \"application/octet-stream\",\n onDownloadProgress: (progress) => {\n setSecondaryProgressBarData({\n operation: OPERATIONS_NAME.download,\n percent: Math.floor(progress * 70),\n label: i18n.t(\"Files:Downloading\"),\n operationId,\n });\n },\n onProgress: (progress) => {\n setSecondaryProgressBarData({",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1071,
-      "context": "originalFileType: file.contentType || \"application/octet-stream\",\n onDownloadProgress: (progress) => {\n setSecondaryProgressBarData({\n operation: OPERATIONS_NAME.download,\n percent: Math.floor(progress * 70),\n label: i18n.t(\"Files:Downloading\"),\n operationId,\n });\n },\n onProgress: (progress) => {\n setSecondaryProgressBarData({",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1071,
-      "context": "originalFileType: file.contentType || \"application/octet-stream\",\n onDownloadProgress: (progress) => {\n setSecondaryProgressBarData({\n operation: OPERATIONS_NAME.download,\n percent: Math.floor(progress * 70),\n label: i18n.t(\"Files:Downloading\"),\n operationId,\n });\n },\n onProgress: (progress) => {\n setSecondaryProgressBarData({",
       "module": "/packages/client"
     }
   ],

@@ -86,6 +86,6 @@ export default inject<TStore, TagManagementProps, InjectedTagManagementProps>(
   ({ filesActionsStore, authStore, treeFoldersStore }) => ({
     isAdmin: authStore.isAdmin,
     onSelectTag: filesActionsStore.selectTag,
-    isArchiveFolder: treeFoldersStore.isArchiveFolder,
+    isArchiveFolder: treeFoldersStore.isArchiveFolderRoot,
   }),
 )(observer(TagManagement as FC<TagManagementProps>));

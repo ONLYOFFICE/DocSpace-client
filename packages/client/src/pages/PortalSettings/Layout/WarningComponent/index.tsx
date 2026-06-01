@@ -137,7 +137,7 @@ const Warning = ({
         <Trans
           t={t}
           i18nKey="ContactToPayer"
-          ns="Services"
+          ns="Common"
           values={{ email: walletCustomerEmail }}
           components={{
             1: (

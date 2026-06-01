@@ -4,5 +4,8 @@
   "ContinueToProduct": "Nadaljujte z {{productName}}",
   "GeneratedPassword": "Ustvarjeno geslo",
   "ProductNameDetail": "{{productName}} ime",
-  "ReviewAccountDetails": "Prosimo, namenite trenutek za pregled vaših podatkov računa:"
+  "ReviewAccountDetails": "Prosimo, namenite trenutek za pregled vaših podatkov računa:",
+  "SetEmailPassword": "Nastavi geslo",
+  "WelcomeSubtitle": "Vaš prostor je bil uspešno ustvarjen. Preglejte podrobnosti svojega profila in začnite delati.",
+  "YourProfileDetails": "Podrobnosti profila"
 }

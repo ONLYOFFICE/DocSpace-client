@@ -16,7 +16,6 @@
   "ArchiveAction": "Archivo vacío",
   "ArchivedRoomsAction": "Las salas están archivadas",
   "ArchiveEmptyScreenUser": "Las salas archivadas aparecerán aquí.",
-  "AreYouSureWantLeaveRoom": "¿Está seguro de que desea salir de esta sala?",
   "ByErasure": "Eliminación",
   "ChangeAgentOwnerSelectorInfo": "Sólo un administrador de sala o un administrador de {{productName}} puede convertirse en el propietario del agente.",
   "ChangeTheAgentOwner": "Cambiar el propietario del agente",
@@ -78,7 +77,6 @@
   "Index": "Índice",
   "LastActivity": "Última actividad",
   "LastOpened": "Última apertura",
-  "LeaveRoomDescription": "Usted es el propietario de esta sala. Antes de salir de la sala, debe transferir el rol de propietario a otro usuario.",
   "LeaveRoomFormFillingWarning": "Actualmente tiene asignada la cumplimentación de formularios en esta sala. Al salir, dichos formularios se detendrán en su paso actual. Solo podrá volver a unirse mediante una nueva invitación de un administrador de la sala.",
   "LifetimeDialogDescription": "La cuenta atrás de la vida útil comienza en la fecha de creación del archivo. Algunos archivos de esta sala superan la vida útil propuesta y se eliminarán una vez que active la configuración.",
   "LifetimeDialogDescriptionHeader": "Los archivos antiguos cuya vida útil se haya superado se eliminarán",
@@ -177,12 +175,10 @@
   "UserLimitDescription": "Define el número de usuarios que pueden unirse a través de este enlace de invitación.",
   "VersionHistory": "Historial de las Versiones",
   "WaitOperation": "Espere a que se complete la operación actual",
-  "WantLeaveRoom": "¿Quiere realmente salir de esta sala? Podrá volver a entrar a través de una nueva invitación de un administrador de la sala.",
   "WarningCopyToFormRoomServal": "No es posible copiar varios archivos en la sala para rellenar formularios. Copie un formulario PDF de {{organizationName}} cada vez.",
   "WarningMoveToFormRoom": "El archivo no se puede mover a esta sala. Por favor, intente mover el formulario PDF de {{organizationName}}.",
   "WarningMoveToFormRoomServal": "No es posible mover varios archivos a la sala para rellenar formularios. Mueva un formulario PDF de {{organizationName}}  a la vez.",
   "WillBeDeletedPermanently": "{{date}} se eliminará permanentemente",
   "YouLeftTheAgent": "Ha abandonado el agente",
-  "YouLeftTheRoom": "Ha salido de la sala",
   "YourUserTypeHasChanged": "Su tipo de usuario se ha cambiado a <1>“{{userType}}”</1> por el administrador de {{productName}}  <1>{{adminName}}</1>."
 }

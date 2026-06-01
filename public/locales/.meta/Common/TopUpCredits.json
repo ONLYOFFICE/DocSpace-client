@@ -3,7 +3,7 @@
   "content": "Top up credits",
   "content_en_sha1_hash": "d1af034cd110e9c741c358564c4c9e120bca1364",
   "created_at": "2026-04-10T13:53:45.807Z",
-  "updated_at": "2026-05-15T15:49:17.112Z",
+  "updated_at": "2026-05-27T14:11:50.765Z",
   "comment": {
     "text": "This is a button label. It allows users to add more credits to their account for AI tools.",
     "is_auto": true,
@@ -15,6 +15,12 @@
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
       "line_number": 351,
       "context": "/>\n \n <Button\n size={ButtonSize.small}\n primary\n label={t(\"TopUpCredits\")}\n onClick={onOpenTopUp}\n scale\n testId=\"top_up_credits_button\"\n isDisabled={isDisabled}\n />",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/FirstTopUpDialog.tsx",
+      "line_number": 200,
+      "context": "onClose={isLoading ? () => {} : onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n withBodyScroll\n >\n <ModalDialog.Header>{t(\"TopUpCredits\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.body}>\n <Text className={styles.description}>\n {t(\"TopUpCreditsDescription\")}",
       "module": "/libs/ui-kit"
     }
   ],

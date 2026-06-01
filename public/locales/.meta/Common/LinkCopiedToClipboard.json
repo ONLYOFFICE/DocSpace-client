@@ -3,7 +3,7 @@
   "content": "Link copied to clipboard",
   "content_en_sha1_hash": "cf544a801cb0075732ebc8f8196db5c590adc7e6",
   "created_at": "2025-05-19T21:30:46.130Z",
-  "updated_at": "2026-05-24T17:27:49.106Z",
+  "updated_at": "2026-05-28T15:46:18.557Z",
   "comment": {
     "text": "Toast message. Appears briefly to confirm that a link has been successfully copied to the user's clipboard.",
     "is_auto": true,
@@ -13,15 +13,9 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 669,
+      "line_number": 548,
       "context": "i18nKey=\"LinkNoExpiration\"\n components={{ 1: <strong key=\"strong-link-valid\" /> }}\n />\n );\n \n toastr.success(toastTranslation, t(\"Common:LinkCopiedToClipboard\"));\n copyShareLink(link.shareLink ?? link.url);\n };\n \n const editLink = async (linkAccess = null, defaultLink) => {\n const type = getDefaultAccessUser(roomType);",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/index.tsx",
-      "line_number": 367,
-      "context": "i18nKey=\"LinkNoExpiration\"\n components={{ 1: <strong key=\"strong-link-valid\" /> }}\n />\n );\n \n toastr.success(toastTranslation, t(\"Common:LinkCopiedToClipboard\"));\n copyShareLink(link.shareLink);\n };\n \n const editLink = async (\n linkAccess: number | null = null,",
-      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",

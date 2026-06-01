@@ -117,6 +117,11 @@ export interface InjectedEmptyViewContainerProps
   isPortalAdmin: AuthStore["isAdmin"];
   aiReady?: boolean;
   standalone: SettingsStore["standalone"];
+  socialAuthWelcomeVisible: boolean;
+  onSocialAuthWelcomeClose: () => void;
+  tenantAlias: string;
+  baseDomain: string | null;
+  socialAuthUser: TStore["userStore"]["user"];
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &

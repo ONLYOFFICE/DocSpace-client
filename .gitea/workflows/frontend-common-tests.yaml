@@ -1,14 +1,12 @@
 name: Frontend common tests
 
 'on':
-  push:
-    branches: [develop, release/v*, hotfix/v*]
-    paths:
-      [packages/**, common/**, .github/workflows/frontend-common-tests.yaml]
-  pull_request:
-    branches: [develop, release/v*, hotfix/v*]
-    paths:
-      [packages/**, common/**, .github/workflows/frontend-common-tests.yaml]
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for manual run'
+        required: false
+        default: 'manual'
 
 env:
   NODE_VERSION: 24.x
@@ -69,6 +67,16 @@ jobs:
               echo "::set-output name=${key}::${value}"
             fi
           }
+
+          # For manual runs — mark everything as changed so all jobs execute
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "🖱️ Manual trigger — forcing all change flags to true"
+            for key in packages common playwright playwright_client playwright_login playwright_sdk playwright_management playwright_doceditor locales workflow any_changes; do
+              set_output "$key" "true"
+            done
+            set_output "changed_files" "(manual trigger — all files considered changed)"
+            exit 0
+          fi
 
           # Get the base branch for comparison
           if [ "${{ github.event_name }}" = "pull_request" ]; then

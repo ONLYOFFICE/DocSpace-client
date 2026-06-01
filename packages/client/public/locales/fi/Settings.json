@@ -198,7 +198,6 @@
   "OAuthDescription": "Käytä {{organizationName}} {{productName}} APIa tunnistautumiseen ja toimintoihin, kuten tiedostojen käsittelyyn ja muihin.",
   "OpenInAppOnly": "Avaa vain sovelluksessa",
   "OpenInWebOnly": "Avaa vain verkossa",
-  "Overview": "Yleiskatsaus",
   "PasswordMinLenght": "Salasanan vähimmäispituus",
   "PersonalFiles": "Henkilökohtaiset tiedostot",
   "PluginDescription": "Laajenna {{productName}}-toiminnallisuuttasi, yhdistä kolmannen osapuolen palvelut tai paranna olemassa olevaa käyttökokemusta.",

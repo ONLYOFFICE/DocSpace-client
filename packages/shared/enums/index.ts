@@ -349,7 +349,6 @@ export const enum TariffState {
   NotPaid = 3,
 }
 
-
 /**
  * Enum for payment method status.
  * @readonly
@@ -699,3 +698,4 @@ export enum VectorizationStatus {
   Completed,
   Failed,
 }
+

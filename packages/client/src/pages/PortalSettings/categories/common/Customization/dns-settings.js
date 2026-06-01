@@ -65,6 +65,7 @@ const toggleStyle = {
 
 const textInputProps = {
   id: "textInputContainerDNSSettings",
+  name: "custom_domain",
   testId: "customization_dns_settings_text_input",
   className: "dns-textarea",
   scale: true,
@@ -266,6 +267,7 @@ const DNSSettingsComponent = (props) => {
           >
             <TextInput
               {...textInputProps}
+              name="current_domain"
               isDisabled
               value={window.location.hostname?.trim()}
             />

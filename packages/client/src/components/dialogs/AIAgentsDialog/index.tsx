@@ -87,7 +87,9 @@ const AIAgentsDialogComponent = ({
   const handleConnectDatabase = () => {
     if (!room) return;
 
-    const event = new Event(Events.ROOM_EDIT) as RoomEditEvent;
+    const event = new CustomEvent(Events.ROOM_EDIT, {
+      detail: { context: "dialog" },
+    }) as unknown as RoomEditEvent;
     event.item = room;
     event.cb = (updatedRoom) => {
       window.dispatchEvent(

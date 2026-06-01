@@ -51,38 +51,36 @@ const FileRow = observer(({ item, onCancel }: FileRowProps) => {
   const showProgress = item.status === "uploading";
 
   return (
-    <div
-      className={`${styles.fileRow}${isError ? ` ${styles.fileRowError}` : ""}`}
-    >
+    <div className={styles.fileRow} data-error={isError ? "" : undefined}>
       <div className={styles.fileIconWrap}>
         {/* biome-ignore lint/performance/noImgElement: bundled static asset; next/image is not applicable */}
         <img
-          className={`${styles.fileIcon}${isError ? ` ${styles.iconError}` : ""}`}
+          className={isError ? "img_error" : undefined}
           src={fileIcon}
           alt=""
         />
       </div>
 
-      <div className={styles.fileName}>
+      <div className="upload-panel_file-name">
         <Text
           as="span"
           fontWeight={600}
           truncate
-          className={styles.fileNameText}
+          className="upload-panel-file-error_text"
           title={item.fileName}
         >
           {name}
           {ext ? (
-            <Text as="span" fontWeight={600} className={styles.fileExt}>
+            <Text as="span" fontWeight={600} className="file-exst">
               {ext}
             </Text>
           ) : null}
         </Text>
       </div>
 
-      <div className={styles.actionsWrapper}>
+      <div className="actions-wrapper">
         {isDone ? (
-          <CheckReactSvg className={styles.checkButton} />
+          <CheckReactSvg className="upload-panel_check-button" />
         ) : isError ? (
           <Link
             fontSize="12px"
@@ -96,14 +94,14 @@ const FileRow = observer(({ item, onCancel }: FileRowProps) => {
         ) : (
           <>
             {item.percent >= 0 ? (
-              <Text className={styles.percentText}>
+              <Text className="upload-panel_percent-text">
                 {Math.trunc(item.percent)}%
               </Text>
             ) : null}
             <IconButton
               iconName={CrossSvgUrl}
               size={16}
-              className={styles.closeButton}
+              className="upload-panel_close-button"
               onClick={() => onCancel(item.uniqueId)}
             />
           </>
@@ -120,4 +118,3 @@ const FileRow = observer(({ item, onCancel }: FileRowProps) => {
 });
 
 export default FileRow;
-

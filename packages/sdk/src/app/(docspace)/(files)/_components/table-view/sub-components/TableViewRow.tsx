@@ -47,6 +47,7 @@ import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
+import { FolderType } from "@docspace/shared/enums";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import Badges from "@docspace/shared/components/badges";
 import EditorsTooltip from "../../editors-tooltip";
@@ -163,6 +164,7 @@ const TableViewRow = observer(
     );
 
     const onRowClick = React.useCallback(() => {
+      if (filesSelectionStore.isCheckedItem(item)) return;
       filesSelectionStore.setSelection([]);
       filesSelectionStore.setBufferSelection(item);
     }, [filesSelectionStore, item]);
@@ -245,6 +247,9 @@ const TableViewRow = observer(
       </div>
     );
 
+    const isTrashFolder =
+      filesListStore.rootFolderType === FolderType.TRASH;
+
     const quickButtonsNode = (
       <div className={styles.quickButtonsContainer}>
         <QuickButtons
@@ -255,6 +260,7 @@ const TableViewRow = observer(
           onClickLock={onClickLock}
           onClickShare={onCopyShareLink ? handleCopyShareLink : undefined}
           openShareTab={onCopyShareLink ? handleCopyShareLink : undefined}
+          isTrashFolder={isTrashFolder}
         />
       </div>
     );

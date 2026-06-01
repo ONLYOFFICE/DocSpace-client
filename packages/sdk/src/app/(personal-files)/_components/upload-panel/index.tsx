@@ -37,6 +37,7 @@ const UploadPanel = observer(() => {
 
   const onCancelBatch = () => {
     uploadStore.cancelBatch();
+    setTimeout(() => uploadStore.dropPending(), 0);
   };
 
   const onCancelItem = (uniqueId: string) => {
@@ -50,6 +51,7 @@ const UploadPanel = observer(() => {
       visible={uploadStore.panelVisible}
       onClose={onClose}
       displayType={ModalDialogType.aside}
+      withBodyScroll
     >
       <ModalDialog.Header>
         <span className={styles.headerActions}>

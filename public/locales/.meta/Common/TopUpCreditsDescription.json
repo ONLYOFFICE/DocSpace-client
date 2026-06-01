@@ -1,21 +1,21 @@
 {
-  "key_path": "YouLeftTheRoom",
-  "content": "You have left the room",
-  "content_en_sha1_hash": "46542dad576cfe3647d36a31566045dcad57950c",
-  "created_at": "2025-05-19T21:30:56.359Z",
-  "updated_at": "2026-05-24T17:27:49.197Z",
+  "key_path": "TopUpCreditsDescription",
+  "content": "Enter the amount you want to add to your credits balance. On the next step, you'll be asked to attach a payment method securely via Stripe.",
+  "content_en_sha1_hash": "0d176424c79bb935ff4108f3f577eede57ada9eb",
+  "created_at": "2026-05-27T14:11:43.026Z",
+  "updated_at": "2026-05-27T14:13:52.467Z",
   "comment": {
-    "text": "This is a toast message confirming that the user has successfully left a room. It appears after a user initiates the action to leave a room.",
+    "text": "Description text in a modal dialog for adding credits, explaining the process and the upcoming Stripe payment step.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:07:32.691Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-05-27T14:13:52.467Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 3611,
-      "context": "const isAdmin = user.isOwner || user.isAdmin;\n const isRoot = this.selectedFolderStore.isRootFolder;\n \n const roomSuccessText = isOwner\n ? t(\"Common:LeftAndAppointNewOwner\")\n : t(\"Files:YouLeftTheRoom\");\n const agentSuccessText = isOwner\n ? t(\"Common:LeftAgentAndAppointNewOwner\")\n : t(\"Files:YouLeftTheAgent\");\n const successText = isAIAgent ? agentSuccessText : roomSuccessText;",
-      "module": "/packages/client"
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/FirstTopUpDialog.tsx",
+      "line_number": 205,
+      "context": "<ModalDialog.Header>{t(\"TopUpCredits\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.body}>\n <Text className={styles.description}>\n {t(\"TopUpCreditsDescription\")}\n </Text>\n \n <Amount\n formatWalletCurrency={formatWalletCurrency}\n isDisabled={isLoading}",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:53.938772Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

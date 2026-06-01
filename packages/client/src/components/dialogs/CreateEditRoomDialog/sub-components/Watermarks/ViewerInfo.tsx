@@ -305,6 +305,7 @@ const ViewerInfoWatermark = ({
       </Text>
       <TextInput
         scale
+        name="watermark_text"
         value={textValue}
         tabIndex={1}
         onChange={onTextChange}

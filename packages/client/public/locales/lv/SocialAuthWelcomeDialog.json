@@ -4,5 +4,8 @@
   "ContinueToProduct": "Turpiniet ar {{productName}}",
   "GeneratedPassword": "Ģenerēta parole",
   "ProductNameDetail": "{{productName}} nosaukums",
-  "ReviewAccountDetails": "Lūdzu, atcerieties pārskatīt savus konta datus:"
+  "ReviewAccountDetails": "Lūdzu, atcerieties pārskatīt savus konta datus:",
+  "SetEmailPassword": "Iestatīt paroli",
+  "WelcomeSubtitle": "Jūsu vieta ir veiksmīgi izveidota. Pārskatiet sava profila informāciju un sāciet darbu.",
+  "YourProfileDetails": "Jūsu profila informācija"
 }

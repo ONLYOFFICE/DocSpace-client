@@ -331,6 +331,7 @@ const KnowledgeComponent = ({
                   <PasswordInput
                     className={styles.passwordInput}
                     placeholder={t("Common:EnterKey")}
+                    inputName="knowledge_key"
                     inputValue={currentValue}
                     onChange={onChange}
                     scale
@@ -403,3 +404,4 @@ export const Knowledge = inject(
 )(observer(KnowledgeComponent));
 
 export { KnowledgeLoader };
+

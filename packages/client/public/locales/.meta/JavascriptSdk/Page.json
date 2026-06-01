@@ -3,7 +3,7 @@
   "content": "Display page (number)",
   "content_en_sha1_hash": "e4af37b628f69398388a2c71a6e41b92567591b9",
   "created_at": "2025-05-19T21:30:54.613Z",
-  "updated_at": "2026-05-15T14:00:06.810Z",
+  "updated_at": "2026-05-28T15:46:18.603Z",
   "comment": {
     "text": "This is a label for a text input field where the user can specify a page number to display.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/DisplayPageBlock.js",
       "line_number": 63,
-      "context": "debouncedSetConfig(e.target.page);\n };\n \n return (\n <ControlsGroup>\n <Label className=\"label\" text={t(\"Page\")} />\n <TextInput\n scale\n onChange={onChangePage}\n placeholder={t(\"EnterPage\")}\n value={value}",
+      "context": "debouncedSetConfig(e.target.page);\n };\n \n return (\n <ControlsGroup>\n <Label className=\"label\" text={t(\"Page\")} />\n <TextInput\n scale\n name=\"display_page\"\n onChange={onChangePage}\n placeholder={t(\"EnterPage\")}",
       "module": "/packages/client"
     }
   ],

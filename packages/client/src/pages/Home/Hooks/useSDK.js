@@ -126,7 +126,10 @@ const useSDK = ({
               const eventDetail =
                 type === "CreateFile" || type === "CreateFolder"
                   ? { extension: options, id: -1 }
-                  : undefined;
+                  : {
+                      parentId: selectedFolderStore.id,
+                      context: "sdk",
+                    };
 
               window.dispatchEvent(
                 new CustomEvent(eventType, { detail: eventDetail }),

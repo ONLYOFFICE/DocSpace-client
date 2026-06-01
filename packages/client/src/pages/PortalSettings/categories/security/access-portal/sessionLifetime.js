@@ -299,6 +299,7 @@ const SessionLifetime = (props) => {
           </Text>
           <TextInput
             className={styles.lifetimeInput}
+            name="session_lifetime"
             testId="session_lifetime_input"
             maxLength={4}
             isAutoFocussed={false}

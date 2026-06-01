@@ -37,12 +37,13 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 
 import { ColumnarInfoBar } from "@docspace/ui-kit/components/columnar-info-bar";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import PencilSvgUrl from "PUBLIC_DIR/images/pencil.outline.react.svg?url";
 
-const SocialAuthWelcomeBar = ({
+const SocialAuthWelcomePanel = ({
   t,
-  onLoad,
   onClose,
   tenantAlias,
   baseDomain,
@@ -61,15 +62,13 @@ const SocialAuthWelcomeBar = ({
       value: (
         <>
           <span>{domain}</span>
-          <Link
-            isHovered
-            type={LinkType.page}
-            fontSize="12px"
-            fontWeight="400"
+          <IconButton
+            iconName={PencilSvgUrl}
+            size={12}
             onClick={onChangeDomainClick}
-          >
-            {t("Common:ChangeButton")}
-          </Link>
+            aria-label={t("Common:ChangeButton")}
+            isFill
+          />
         </>
       ),
     },
@@ -84,20 +83,18 @@ const SocialAuthWelcomeBar = ({
       value: <span>{user?.email}</span>,
     },
     {
-      label: t("SocialAuthWelcomeDialog:GeneratedPassword"),
+      label: t("Common:Password"),
       value: (
-        <>
-          <span>{"*".repeat(8)}</span>
-          <Link
-            isHovered
-            type={LinkType.page}
-            fontSize="12px"
-            fontWeight="400"
-            onClick={onChangePasswordClick}
-          >
-            {t("Common:ChangeButton")}
-          </Link>
-        </>
+        <Link
+          type={LinkType.action}
+          fontSize="13px"
+          fontWeight="600"
+          textDecoration="underline"
+          color="var(--accent-main)"
+          onClick={onChangePasswordClick}
+        >
+          {t("SocialAuthWelcomeDialog:SetEmailPassword")}
+        </Link>
       ),
     },
   ];
@@ -107,12 +104,12 @@ const SocialAuthWelcomeBar = ({
       headerText={t("SocialAuthWelcomeDialog:YourProfileDetails")}
       columns={columns}
       onAction={onClose}
-      onLoad={onLoad}
+      variant="page"
     />
   );
 };
 
 export default withTranslation(["SocialAuthWelcomeDialog", "Common"])(
-  SocialAuthWelcomeBar,
+  SocialAuthWelcomePanel,
 );
 

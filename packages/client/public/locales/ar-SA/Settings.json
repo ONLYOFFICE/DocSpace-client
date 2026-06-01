@@ -198,7 +198,6 @@
   "OAuthDescription": "استخدم واجهة برمجة تطبيقات {{organizationName}} {{productName}} API للتفويض والإجراءات مثل الوصول إلى الملفات والمزيد.",
   "OpenInAppOnly": "الفتح فقط في التطبيق",
   "OpenInWebOnly": "الفتح فقط في الويب",
-  "Overview": "نظرة عامة",
   "PasswordMinLenght": "الحد الأدنى لطول كلمة المرور",
   "PersonalFiles": "الملفات الشخصية",
   "PluginDescription": "توسيع وظائف {{productName}}، أو ربط خدمات الطرف الثالث، أو تعزيز تجربة المستخدم الحالية.",

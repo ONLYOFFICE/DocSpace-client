@@ -3,7 +3,7 @@
   "content": "Room info",
   "content_en_sha1_hash": "2a6cc5757e034713f73b7ed2b5d0ae68ba0b8ee4",
   "created_at": "2025-12-15T14:02:08.646Z",
-  "updated_at": "2026-05-24T17:27:49.190Z",
+  "updated_at": "2026-05-28T15:46:18.639Z",
   "comment": {
     "text": "This is a button label that opens a panel displaying information about the current room or agent.",
     "is_auto": true,
@@ -13,15 +13,9 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2481,
-      "context": "disabled: !item.security?.Download,\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: item.isAIAgent ? t(\"Common:AgentInfo\") : t(\"Common:RoomInfo\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => this.onShowInfoPanel(item),\n disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),\n },\n {",
+      "line_number": 2510,
+      "context": "Boolean(item.external && item.isLinkExpired),\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: item.isAIAgent ? t(\"Common:AgentInfo\") : t(\"Common:RoomInfo\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => this.onShowInfoPanel(item),\n disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),\n },\n {",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 227,
-      "context": "disabled: true,\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: t(\"Common:RoomInfo\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => onInfoRoom?.(room),\n },\n { key: \"separator-owner\", isSeparator: true },\n {",
-      "module": "/packages/sdk"
     }
   ],
   "languages": {

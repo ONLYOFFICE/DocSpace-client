@@ -53,7 +53,7 @@ type InfoPanelBodyProps = {
 const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
   const infoPanelStore = useInfoPanelStore();
   const filesSelectionStore = useFilesSelectionStore();
-  const { selection, fileView, isVisible } = infoPanelStore;
+  const { selection, fileView, isVisible, isPinnedSelection } = infoPanelStore;
 
   const selectedCount = filesSelectionStore.selection.length;
   const isSeveralItems = selectedCount > 1;
@@ -71,6 +71,15 @@ const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
 
   React.useEffect(() => {
     if (!isVisible) return;
+
+    // When the panel was opened explicitly for a specific item (e.g. from the
+    // folder header context menu), don't let the selection-sync overwrite it.
+    // The pin is cleared when the panel closes or the user clicks another item.
+    if (isPinnedSelection && selectedCount === 0) return;
+
+    if (isPinnedSelection && selectedCount > 0) {
+      infoPanelStore.setPinnedSelection(false);
+    }
 
     if (isSeveralItems) {
       if (selection !== null) infoPanelStore.setSelection(null);
@@ -92,6 +101,7 @@ const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
     infoPanelStore.setSelection(next);
   }, [
     isVisible,
+    isPinnedSelection,
     isSeveralItems,
     selectedCount,
     filesSelectionStore.selection,

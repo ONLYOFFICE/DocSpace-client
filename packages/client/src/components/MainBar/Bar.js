@@ -50,7 +50,6 @@ import { QuotaBarTypes } from "SRC_DIR/helpers/constants";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import QuotasBar from "./QuotasBar";
 import ConfirmEmailBar from "./ConfirmEmailBar";
-import SocialAuthWelcomeBar from "./SocialAuthWelcomeBar";
 
 const Bar = (props) => {
   const {
@@ -93,22 +92,9 @@ const Bar = (props) => {
     isRoomsTariffAlmostLimit,
     isRoomsTariffLimit,
 
-    socialAuthWelcomeVisible,
-    onSocialAuthWelcomeClose,
-    tenantAlias,
-    baseDomain,
-    socialAuthUser,
   } = props;
 
   const navigate = useNavigate();
-
-  const onChangeDomainClick = () => {
-    navigate("/portal-settings/customization/general#portal-renaming");
-  };
-
-  const onChangePasswordClick = () => {
-    navigate("/profile/login?changePassword=true");
-  };
 
   const [barVisible, setBarVisible] = useState({
     roomsTariff: false,
@@ -468,8 +454,7 @@ const Bar = (props) => {
     const newValue =
       showQuotasBar ||
       (withActivationBar && barVisible.confirmEmail && tReady) ||
-      (htmlLink && !firstLoad && tReady) ||
-      (socialAuthWelcomeVisible && tReady);
+      (htmlLink && !firstLoad && tReady);
 
     setMainBarVisible(newValue);
 
@@ -483,7 +468,6 @@ const Bar = (props) => {
     tReady,
     htmlLink,
     firstLoad,
-    socialAuthWelcomeVisible,
   ]);
 
   const onClose = () => {
@@ -499,18 +483,7 @@ const Bar = (props) => {
     setMaintenanceExist(true);
   };
 
-  return socialAuthWelcomeVisible && tReady ? (
-    <SocialAuthWelcomeBar
-      onLoad={onLoad}
-      onClose={onSocialAuthWelcomeClose}
-      tenantAlias={tenantAlias}
-      baseDomain={baseDomain}
-      user={socialAuthUser}
-      onChangeDomainClick={onChangeDomainClick}
-      onChangePasswordClick={onChangePasswordClick}
-      currentColorScheme={currentColorScheme}
-    />
-  ) : showQuotasBar ? (
+  return showQuotasBar ? (
     <QuotasBar
       currentColorScheme={currentColorScheme}
       {...currentBar}
@@ -544,7 +517,6 @@ export default inject(
     profileActionsStore,
     userStore,
     currentQuotaStore,
-    dialogsStore,
   }) => {
     const { user, withActivationBar, sendActivationLink } = userStore;
 
@@ -572,8 +544,7 @@ export default inject(
       isRoomsTariffLimit,
     } = currentQuotaStore;
 
-    const { currentColorScheme, setMainBarVisible, tenantAlias, baseDomain } =
-      settingsStore;
+    const { currentColorScheme, setMainBarVisible } = settingsStore;
 
     return {
       isAdmin: user?.isAdmin || user?.isOwner,
@@ -608,15 +579,6 @@ export default inject(
       isStorageQuotaLimit,
       isRoomsTariffAlmostLimit,
       isRoomsTariffLimit,
-
-      socialAuthWelcomeVisible: dialogsStore.socialAuthWelcomeDialogVisible,
-      onSocialAuthWelcomeClose: () => {
-        localStorage.removeItem("socialAuthWelcomeBar");
-        dialogsStore.setSocialAuthWelcomeDialogVisible(false);
-      },
-      tenantAlias,
-      baseDomain,
-      socialAuthUser: user,
     };
   },
-)(withTranslation(["Profile", "Common", "SocialAuthWelcomeDialog"])(observer(Bar)));
+)(withTranslation(["Profile", "Common"])(observer(Bar)));

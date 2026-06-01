@@ -331,21 +331,20 @@ export const useFeedTranslation = (
           />
         );
       case FeedActionKeys.RoomCreateUser:
-        if (hasRelatedItems)
-          return t("InfoPanel:RoomCreateUserCount", { count });
+        if (hasRelatedItems) return t("Common:RoomCreateUserCount", { count });
         return t("Common:RoomCreateUser");
       case FeedActionKeys.RoomUpdateAccessForUser:
         return t("InfoPanel:RoomUpdateAccess");
       case FeedActionKeys.RoomRemoveUser:
-        return t("InfoPanel:RoomRemoveUser");
+        return t("Common:RoomRemoveUser");
       case FeedActionKeys.RoomInviteResend:
         return t("InfoPanel:RoomInviteResend");
       case FeedActionKeys.RoomGroupAdded:
         if (hasRelatedItems)
-          return t("InfoPanel:RoomGroupAddedCount", {
+          return t("Common:RoomGroupAddedCount", {
             count,
           });
-        return t("InfoPanel:RoomGroupAdded");
+        return t("Common:RoomGroupAdded");
       case FeedActionKeys.RoomUpdateAccessForGroup:
         return t("InfoPanel:RoomUpdateAccess");
       case FeedActionKeys.RoomGroupRemove:

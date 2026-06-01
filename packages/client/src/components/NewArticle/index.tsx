@@ -276,16 +276,6 @@ const NewArticle = ({
               onClick: () => navigate("/ai-files?section=trash"),
               withTopSeparator: true,
             },
-            ...(isAdminOrOwner
-              ? [
-                  {
-                    id: "ai-files-settings",
-                    label: t("Common:Settings"),
-                    icon: CatalogSettingsReactSvgUrl,
-                    onClick: () => navigate("/ai-files?section=settings"),
-                  },
-                ]
-              : []),
           ]
         : undefined,
     };

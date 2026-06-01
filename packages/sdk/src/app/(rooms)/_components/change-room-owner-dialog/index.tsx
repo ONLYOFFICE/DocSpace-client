@@ -107,7 +107,7 @@ const ChangeRoomOwnerDialog = ({
     ? {
         withFooterCheckbox: true as const,
         footerCheckboxLabel: t("Common:LeaveTheRoom"),
-        isChecked: false,
+        isChecked: true,
       }
     : {};
 

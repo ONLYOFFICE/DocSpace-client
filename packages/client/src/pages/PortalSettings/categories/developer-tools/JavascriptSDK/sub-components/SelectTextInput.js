@@ -60,6 +60,7 @@ export const SelectTextInput = ({ t, config, setConfig }) => {
 			<Label className="label" text={t("SelectButtonText")} />
 			<TextInput
 				scale
+				name="select_button_text"
 				onChange={onChangeAcceptLabel}
 				placeholder={t("Common:SelectAction")}
 				value={value}

@@ -38,14 +38,24 @@
 import React from "react";
 import { makeAutoObservable, runInAction, toJS } from "mobx";
 
-import type { TFile } from "@docspace/shared/api/files/types";
-import { getFileVersionInfo } from "@docspace/shared/api/files";
+import type { TFile, TFileSecurity } from "@docspace/shared/api/files/types";
+import {
+  getFileVersionInfo,
+  versionRestore,
+  versionEditComment,
+  deleteVersionFile,
+} from "@docspace/shared/api/files";
 
 class VersionHistoryStore {
   isVisible: boolean = false;
   file: TFile | null = null;
   versions: TFile[] | null = null;
   isLoading: boolean = false;
+  fileSecurity: TFileSecurity | null = null;
+
+  deleteVersionDialogVisible: boolean = false;
+  versionSelectedForDeletion: number | null = null;
+  versionDeletionProcess: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -53,6 +63,7 @@ class VersionHistoryStore {
 
   open = (file: TFile) => {
     this.file = toJS(file);
+    this.fileSecurity = file.security ?? null;
     this.isVisible = true;
     this.versions = null;
     void this.fetchVersions(file.id, file.requestToken);
@@ -63,6 +74,10 @@ class VersionHistoryStore {
     this.file = null;
     this.versions = null;
     this.isLoading = false;
+    this.fileSecurity = null;
+    this.deleteVersionDialogVisible = false;
+    this.versionSelectedForDeletion = null;
+    this.versionDeletionProcess = false;
   };
 
   fetchVersions = async (fileId: number, requestToken?: string) => {
@@ -77,6 +92,56 @@ class VersionHistoryStore {
         this.isLoading = false;
       });
     }
+  };
+
+  restoreVersion = async (fileId: number, version: number) => {
+    const newVersion = await versionRestore(fileId, version);
+    runInAction(() => {
+      if (this.versions) {
+        this.versions = [newVersion, ...this.versions];
+      }
+    });
+  };
+
+  updateCommentVersion = async (
+    fileId: number,
+    comment: string,
+    version: number,
+  ) => {
+    const updatedComment = await versionEditComment(fileId, comment, version);
+    runInAction(() => {
+      if (this.versions) {
+        this.versions = this.versions.map((v) => {
+          if (v.version === version) return { ...v, comment: updatedComment };
+          return v;
+        });
+      }
+    });
+  };
+
+  deleteVersion = async (fileId: number, versionGroup: number) => {
+    runInAction(() => {
+      this.versionDeletionProcess = true;
+    });
+    try {
+      await deleteVersionFile(fileId, [versionGroup]);
+      if (this.file) {
+        await this.fetchVersions(this.file.id, this.file.requestToken);
+      }
+    } finally {
+      runInAction(() => {
+        this.versionDeletionProcess = false;
+        this.versionSelectedForDeletion = null;
+      });
+    }
+  };
+
+  setDeleteVersionDialogVisible = (visible: boolean) => {
+    this.deleteVersionDialogVisible = visible;
+  };
+
+  setVersionSelectedForDeletion = (versionGroup: number | null) => {
+    this.versionSelectedForDeletion = versionGroup;
   };
 }
 

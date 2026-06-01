@@ -118,6 +118,7 @@ export const ChangeDomainDialog = observer(() => {
           </Text>
           <TextInput
             testId="change-domain-input"
+            name="domain_name"
             type={InputType.text}
             size={InputSize.base}
             hasError={!!domainNameError}

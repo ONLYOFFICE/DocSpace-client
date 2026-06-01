@@ -1,0 +1,29 @@
+{
+  "key_path": "AdditionalBackupsNotAvailable",
+  "content": "Additional backups unavailable — top up wallet",
+  "content_en_sha1_hash": "5d213e02ae857d6b2415d911942c6132cf752e5a",
+  "created_at": "2026-05-27T14:11:28.353Z",
+  "updated_at": "2026-05-27T14:14:50.150Z",
+  "comment": {
+    "text": "Status message within a service item in the billing section, appearing when the backup service is active but no additional backups remain.",
+    "is_auto": true,
+    "updated_at": "2026-05-27T14:14:50.150Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "line_number": 218,
+      "context": "case BACKUP_SERVICE:\n if (isBackupServiceOn && availableBackupsCount === 0) {\n return isFreeTariff\n ? t(\"BackupsNotAvailable\")\n : t(\"AdditionalBackupsNotAvailable\");\n }\n \n if (isBackupServiceOn) {\n return t(\"BackupsAvailable\", {\n currency: formatWalletCurrency(priceValue!, 2),",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

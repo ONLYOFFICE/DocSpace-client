@@ -137,6 +137,7 @@ export const useBaseParams = (initialValues?: {
 				<TextInput
 					type={InputType.text}
 					size={InputSize.base}
+					name="server_name"
 					value={name}
 					onChange={(e) => onChangeName(e.target.value)}
 					onBlur={handleBlur}
@@ -168,6 +169,7 @@ export const useBaseParams = (initialValues?: {
 				<TextInput
 					type={InputType.text}
 					size={InputSize.base}
+					name="server_url"
 					value={url}
 					onChange={(e) => onChangeUrl(e.target.value)}
 					placeholder={t("Common:EnterURL")}

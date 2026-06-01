@@ -1,43 +1,29 @@
-FROM node:24-bookworm-slim
+FROM mcr.microsoft.com/playwright:v1.58.1-noble
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Install required dependencies
-RUN apt-get -y update && \
-    apt-get install -yq
-    
+# Playwright image ships with Node 22; upgrade to 24 as required by the project
+RUN apt-get update && \
+    apt-get install -y curl \
+        fonts-noto-cjk \
+        fonts-noto-core \
+        fonts-noto-ui-core \
+        fonts-noto-color-emoji \
+        fonts-noto-mono \
+        fonts-noto-extra \
+        fonts-roboto \
+        fonts-open-sans \
+        fonts-liberation \
+        fontconfig && \
+    curl -fsSL https://deb.nodesource.com/setup_24.x | bash - && \
+    apt-get install -y nodejs && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 # Install PNPM
 RUN npm install -g pnpm@10.33.0
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    fonts-noto-cjk \
-    fonts-noto-core \
-    fonts-noto-ui-core \
-    fonts-noto-color-emoji \
-    fonts-noto-mono \
-    fonts-noto-extra \
-    fonts-roboto \
-    fonts-open-sans \
-    fonts-liberation \
-    fontconfig \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    fonts-noto-cjk \
-    fonts-noto-core \
-    fonts-noto-ui-core \
-    fonts-noto-color-emoji \
-    fonts-noto-mono \
-    fonts-noto-extra \
-    fonts-roboto \
-    fonts-open-sans \
-    fonts-liberation \
-    fontconfig \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -47,8 +33,6 @@ RUN pnpm config set store-dir /root/.local/share/pnpm/store
 # Copy package files first for better layer caching
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 
-# ENV NODE_OPTIONS="--max-old-space-size=8192"
-
 # Copy the source code with correct directory structure
 COPY common/tests/package-lock.json ./common/tests/package-lock.json
 COPY common/tests/package.json ./common/tests/package.json
@@ -57,14 +41,8 @@ COPY packages/shared/package.json ./packages/shared/package.json
 COPY libs/ui-kit/package.json ./libs/ui-kit/package.json
 COPY libs/ui-kit/onlyoffice-docspace-api-sdk-*.tgz ./libs/ui-kit/
 
-# Install dependencies with recursive installation
+# Install dependencies
 RUN pnpm install --frozen-lockfile
-
-# Clear any existing global Playwright installations to avoid conflicts
-RUN npm uninstall -g playwright playwright-core @playwright/test
-
-# Install Playwright browsers directly from the project's dependency
-RUN cd /app/packages/sdk && pnpm exec playwright install chromium --with-deps
 
 # Copy the source code with correct directory structure
 COPY common/ ./common/

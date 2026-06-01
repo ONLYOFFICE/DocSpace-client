@@ -98,7 +98,7 @@ const DeleteRoomDialog = ({
               ns="Common"
               i18nKey="DeleteRoomConfirm"
               values={{ roomName }}
-              components={{ strong: <strong /> }}
+              components={{ strong: <strong key="strong" /> }}
             />
           ) : (
             <Trans
@@ -106,7 +106,7 @@ const DeleteRoomDialog = ({
               ns="Common"
               i18nKey="DeleteRooms"
               values={{ count }}
-              components={{ strong: <strong /> }}
+              components={{ strong: <strong key="strong" /> }}
             />
           )}
         </Text>

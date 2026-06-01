@@ -75,6 +75,7 @@ export const HeightSetter = (props) => {
       <Label className="label" text={t("EmbeddingPanel:Height")} />
       <RowContainer combo>
         <TextInput
+          name="embed_height"
           onChange={onChangeHeight}
           placeholder={t("EnterHeight")}
           value={height}

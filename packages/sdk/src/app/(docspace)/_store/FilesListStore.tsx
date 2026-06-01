@@ -41,12 +41,14 @@ import { makeAutoObservable } from "mobx";
 import { FolderType } from "@docspace/shared/enums";
 import { TPathParts } from "@docspace/shared/types";
 
+import type { TFolder } from "@docspace/shared/api/files/types";
 import { TFileItem, TFolderItem } from "../_hooks/useItemList";
 
 class FilesListStore {
   items: (TFileItem | TFolderItem)[] = [];
   rootFolderType: FolderType | null = null;
   pathParts: TPathParts[] | null = null;
+  currentFolder: TFolder | null = null;
   highlightFileId: number | string | null = null;
 
   private highlightTimerId: ReturnType<typeof setTimeout> | null = null;
@@ -73,6 +75,10 @@ class FilesListStore {
 
   setPathParts = (pathParts: TPathParts[] | null) => {
     this.pathParts = pathParts;
+  };
+
+  setCurrentFolder = (folder: TFolder | null) => {
+    this.currentFolder = folder;
   };
 
   setHighlightFileId = (id: number | string | null) => {
@@ -104,6 +110,21 @@ class FilesListStore {
   updateItemCustomFilter = (id: number | string, enabled: boolean) => {
     const item = this.items.find((i) => i.id === id);
     if (item && "customFilterEnabled" in item) item.customFilterEnabled = enabled;
+  };
+
+  updateItemEditing = (id: number | string, isEditing: boolean) => {
+    const item = this.items.find((i) => i.id === id);
+    if (item && "isEditing" in item) item.isEditing = isEditing;
+  };
+
+  updateItemActiveEditors = (
+    id: number | string,
+    activeEditors: Record<string, string> | undefined,
+  ) => {
+    const item = this.items.find((i) => i.id === id);
+    if (item && !item.isFolder) {
+      (item as Record<string, unknown>).activeEditors = activeEditors;
+    }
   };
 
   removeItem = (id: number | string) => {

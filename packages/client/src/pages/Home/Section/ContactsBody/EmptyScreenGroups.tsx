@@ -55,6 +55,7 @@ type EmptyScreenGroupsProps = {
   isCollaborator?: boolean;
   groupsIsFiltered?: boolean;
   setIsLoading?: (value: boolean) => void;
+  currentFolderId?: number | string;
 };
 
 const EmptyScreenGroups = ({
@@ -62,6 +63,7 @@ const EmptyScreenGroups = ({
   isCollaborator,
   groupsIsFiltered,
   setIsLoading,
+  currentFolderId,
 }: EmptyScreenGroupsProps) => {
   const { t } = useTranslation([
     "People",
@@ -73,7 +75,9 @@ const EmptyScreenGroups = ({
   const { isBase } = useTheme();
 
   const onCreateGroup = () => {
-    const event = new Event(Events.GROUP_CREATE);
+    const event = new CustomEvent(Events.GROUP_CREATE, {
+      detail: { parentId: currentFolderId, context: "empty_state" },
+    });
 
     window.dispatchEvent(event);
   };
@@ -144,7 +148,7 @@ const EmptyScreenGroups = ({
 };
 
 export default inject(
-  ({ peopleStore, clientLoadingStore, userStore }: TStore) => {
+  ({ peopleStore, clientLoadingStore, userStore, selectedFolderStore }: TStore) => {
     const { isRoomAdmin, isCollaborator } = userStore.user!;
     const { groupsIsFiltered } = peopleStore.groupsStore!;
 
@@ -159,6 +163,7 @@ export default inject(
       isCollaborator,
       groupsIsFiltered,
       setIsLoading,
+      currentFolderId: selectedFolderStore.id,
     };
   },
 )(observer(EmptyScreenGroups));

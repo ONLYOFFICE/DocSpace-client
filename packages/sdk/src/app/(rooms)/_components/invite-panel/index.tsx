@@ -587,6 +587,7 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
     displayName?: string;
     email?: string;
     avatar?: string | null;
+    name?: string;
     [key: string]: unknown;
   };
 
@@ -604,6 +605,7 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
         displayName: u.displayName,
         email: u.email,
         avatar: u.avatar,
+        name: u.name ?? "",
       };
 
       const shouldMakeFreeRole =

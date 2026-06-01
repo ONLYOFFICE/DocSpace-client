@@ -198,7 +198,6 @@
   "OAuthDescription": "Përdorni API-n {{organizationName}} {{productName}} për autorizimin dhe veprimet si akses në skedarë dhe më shumë.",
   "OpenInAppOnly": "Hap në aplikacion vetëm",
   "OpenInWebOnly": "Hap në web vetëm",
-  "Overview": "Përmbledhje",
   "PasswordMinLenght": "Gjatësia minimale e fjalëkalimit",
   "PersonalFiles": "Skedarët personal",
   "PluginDescription": "Zgjathësoni funksionalitetin e {{productName}}, lidhni shërbimet e palëve të treta ose përmirësoni përvojën ekzistuese të përdoruesit.",

@@ -45,12 +45,14 @@ export type TileViewProps = {
   fetchMoreFiles: (params: IndexRange) => Promise<void>;
   currentFolderId: string | number;
   filesLength: number;
+  currentUserId?: string;
 };
 
 export type TileProps = {
   item: TFolderItem | TFileItem;
   getIcon: TGetIcon;
   index: number;
+  currentUserId?: string;
 };
 
 export type TileContentProps = {

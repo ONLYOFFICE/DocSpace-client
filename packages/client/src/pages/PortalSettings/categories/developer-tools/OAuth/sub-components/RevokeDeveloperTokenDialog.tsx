@@ -177,6 +177,7 @@ const GenerateDeveloperTokenDialog = ({
             removeMargin
           >
             <TextInput
+              name="developer_token"
               value={token}
               scale
               placeholder={t("OAuth:EnterToken")}

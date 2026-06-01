@@ -795,9 +795,15 @@ class DialogsStore {
       lastIndex = newTitle.length;
     }
 
-    const event = new Event(Events.CREATE);
-
     const title = newTitle.substring(0, lastIndex);
+
+    const event = new CustomEvent(Events.CREATE, {
+      detail: {
+        parentId: this.selectedFolderStore.id,
+        context: "dialog",
+        extension,
+      },
+    });
 
     const payload = {
       extension,

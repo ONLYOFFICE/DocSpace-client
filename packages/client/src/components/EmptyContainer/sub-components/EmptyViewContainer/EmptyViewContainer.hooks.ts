@@ -274,9 +274,11 @@ export const useOptions = (
       return;
     }
 
-    const event = new Event(Events.ROOM_CREATE);
+    const event = new CustomEvent(Events.ROOM_CREATE, {
+      detail: { parentId: selectedFolder?.id, context: "empty_state" },
+    });
     window.dispatchEvent(event);
-  }, [isWarningRoomsDialog, setQuotaWarningDialogVisible]);
+  }, [isWarningRoomsDialog, setQuotaWarningDialogVisible, selectedFolder?.id]);
 
   const onCreateAIAgent = useCallback(() => {
     if (isWarningRoomsDialog) {
@@ -284,9 +286,11 @@ export const useOptions = (
       return;
     }
 
-    const event = new Event(Events.AGENT_CREATE);
+    const event = new CustomEvent(Events.AGENT_CREATE, {
+      detail: { parentId: selectedFolder?.id, context: "empty_state" },
+    });
     window.dispatchEvent(event);
-  }, []);
+  }, [isWarningRoomsDialog, setQuotaWarningDialogVisible, selectedFolder?.id]);
 
   const openInfoPanel = useCallback(() => {
     if (!isVisibleInfoPanel) setVisibleInfoPanel?.(true);

@@ -42,14 +42,18 @@ type ProtectedAppRouteProps = {
   isEnabled: (id: string) => boolean;
   isAppsLoaded: boolean;
   ensureAppsLoaded: () => void;
+  isGuest: boolean;
   children: React.ReactNode;
 };
+
+const GUEST_RESTRICTED_APPS = new Set(["ai-files"]);
 
 const ProtectedAppRoute = ({
   appId,
   isEnabled,
   isAppsLoaded,
   ensureAppsLoaded,
+  isGuest,
   children,
 }: ProtectedAppRouteProps) => {
   useEffect(() => {
@@ -58,11 +62,15 @@ const ProtectedAppRoute = ({
 
   if (!isAppsLoaded) return null;
 
+  if (isGuest && GUEST_RESTRICTED_APPS.has(appId))
+    return <Navigate to="/dashboard" replace />;
+
   return isEnabled(appId) ? children : <Navigate to="/dashboard" replace />;
 };
 
-export default inject<TStore>(({ appsStore }) => ({
+export default inject<TStore>(({ appsStore, userStore }) => ({
   isEnabled: appsStore.isEnabled,
   isAppsLoaded: appsStore.isLoaded,
   ensureAppsLoaded: appsStore.ensureLoaded,
+  isGuest: userStore.user?.isVisitor ?? false,
 }))(observer(ProtectedAppRoute));

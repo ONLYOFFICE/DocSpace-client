@@ -54,11 +54,14 @@ import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { calculateRoomLogoParams } from "@docspace/ui-kit/utils";
 import type { TImage } from "@docspace/ui-kit/components/image-editor";
 import type { ICover } from "@docspace/ui-kit/components/room-logo-cover-dialog";
-import type { Nullable, TCreatedBy } from "@docspace/shared/types";
+import type { Nullable } from "@docspace/shared/types";
 import { RoomsType } from "@docspace/shared/enums";
 import api from "@docspace/shared/api";
 
-import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
+import {
+  useDialogsStore,
+  type TEditableRoom,
+} from "@/app/(docspace)/_store/DialogsStore";
 
 import UploadSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import DeleteSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
@@ -68,20 +71,10 @@ import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
 
 import styles from "./CreateEditRoomDialog.module.scss";
 
-type EditableRoom = {
-  id: number;
-  title: string;
-  tags?: string[];
-  roomLogo?: string;
-  roomIconColor?: string;
-  roomCover?: ICover;
-  createdBy?: TCreatedBy;
-};
-
 type CreateEditRoomDialogProps = {
   visible: boolean;
   onClose: () => void;
-  room?: EditableRoom;
+  room?: TEditableRoom;
   onRoomEdited?: (roomId: number) => void;
   onRoomCreated?: () => void;
 };

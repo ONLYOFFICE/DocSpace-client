@@ -284,6 +284,7 @@ const SearchComponent = ({
                   <PasswordInput
                     className={styles.passwordInput}
                     placeholder={t("Common:EnterKey")}
+                    inputName="web_search_key"
                     inputValue={value}
                     onChange={onChange}
                     scale
@@ -356,3 +357,4 @@ export const Search = inject(({ aiSettingsStore, settingsStore }: TStore) => {
 })(observer(SearchComponent));
 
 export { SearchLoader };
+

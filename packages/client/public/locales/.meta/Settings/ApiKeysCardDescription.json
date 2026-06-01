@@ -3,7 +3,7 @@
   "content": "Create and manage all API keys for your {{organizationName}} {{productName}}.",
   "content_en_sha1_hash": "9382389dde3009cae36131b69c5c0694038fffce",
   "created_at": "2026-04-03T21:51:36.613Z",
-  "updated_at": "2026-05-15T14:00:06.818Z",
+  "updated_at": "2026-05-27T14:11:50.700Z",
   "comment": {
     "text": "This is the description text for a card on the settings page. It explains that users can create and manage API keys for their organization's product. `{{organizationName}}` is the name of the organization, and `{{productName}}` is the name of the product (e.g., DocSpace).",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 130,
-      "context": "linkTitle={t(\"Settings:RegisterApp\")}\n />\n <Card\n icon={<KeySvg />}\n title={t(\"Settings:ApiKeys\")}\n description={t(\"Settings:ApiKeysCardDescription\", { organizationName: getBrandName(\"OrganizationName\"), productName: getBrandName(\"ProductName\") })}\n url=\"/developer-tools/api-keys?create=true\"\n color={globalColors.lightGrayDark}\n linkTitle={t(\"Settings:CreateKey\")}\n />\n </div>",
+      "line_number": 159,
+      "context": "ctaUrl=\"/developer-tools/oauth/create\"\n />\n <Card\n icon={<KeySvg />}\n title={t(\"Settings:ApiKeys\")}\n description={t(\"Settings:ApiKeysCardDescription\", {\n organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),\n })}\n url=\"/developer-tools/api-keys\"\n color={globalColors.lightGrayDark}",
       "module": "/packages/client"
     }
   ],

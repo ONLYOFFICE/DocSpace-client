@@ -341,6 +341,7 @@ const PortalRenamingComponent = (props) => {
         <TextInput
           tabIndex={10}
           id="textInputContainerPortalRenaming"
+          name="portal_name"
           scale
           value={portalName}
           testId="customization_portal_renaming_text_input"

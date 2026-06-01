@@ -5,5 +5,7 @@
   "GeneratedPassword": "Generiertes Passwort\n",
   "ProductNameDetail": "Name von {{productName}}",
   "ReviewAccountDetails": "Bitte überprüfen Sie Ihre Kontodetails:\n",
+  "SetEmailPassword": "Passwort festlegen",
+  "WelcomeSubtitle": "Ihr Bereich wurde erfolgreich erstellt. Überprüfen Sie Ihre Profildetails und beginnen Sie mit der Arbeit.",
   "YourProfileDetails": "Ihre Profildetails"
 }

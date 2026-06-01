@@ -41,7 +41,12 @@ import type {
 import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TSortBy, TCreatedBy } from "@docspace/shared/types";
-import { DeviceType, FolderType, RoomSearchArea, RoomsType } from "@docspace/shared/enums";
+import {
+  DeviceType,
+  FolderType,
+  RoomSearchArea,
+  RoomsType,
+} from "@docspace/shared/enums";
 
 import { PAGE_COUNT } from "@/utils/constants";
 
@@ -67,6 +72,7 @@ import RoomsTileView from "../rooms-tile-view";
 import RoomsTableView from "../rooms-table-view";
 import RoomsRowView from "../rooms-row-view";
 import ChangeRoomOwnerDialog from "../change-room-owner-dialog";
+import LeaveRoomDialog from "../leave-room-dialog";
 import InvitePanel from "../invite-panel";
 import EmptyView from "../empty-view";
 import CreateEditRoomDialog from "../create-edit-room-dialog";
@@ -87,6 +93,7 @@ type RoomsListProps = {
   user?: TUser;
   isArchive?: boolean;
   refreshRef?: React.MutableRefObject<(() => void) | null>;
+  infoPanelVisible?: boolean;
 };
 
 const RoomsList = ({
@@ -100,6 +107,7 @@ const RoomsList = ({
   user,
   isArchive,
   refreshRef,
+  infoPanelVisible,
 }: RoomsListProps) => {
   const timezone = portalSettings.timezone;
   const searchParams = useSearchParams();
@@ -162,18 +170,25 @@ const RoomsList = ({
     return f;
   });
 
-  const initRef = React.useRef(false);
-  if (!initRef.current) {
-    initRef.current = true;
-    filesListStore.setItems([
+  const initialItems = React.useMemo(
+    () => [
       ...folders.map(convertFolderToItem),
       ...files.map((file) => convertFileToItem(file)),
-    ]);
-  }
+    ],
+    [folders, files, convertFolderToItem, convertFileToItem],
+  );
+
+  const initRef = React.useRef(false);
+
+  React.useLayoutEffect(() => {
+    if (initRef.current) return;
+    initRef.current = true;
+    filesListStore.setItems(initialItems);
+  }, [initialItems, filesListStore]);
 
   const [total, setTotal] = React.useState<number>(totalProp);
   const [hasNextPage, setHasNextPage] = React.useState<boolean>(
-    filesListStore.items.length < total,
+    initialItems.length < totalProp,
   );
 
   const [editingRoom, setEditingRoom] = React.useState<
@@ -550,7 +565,8 @@ const RoomsList = ({
     setRootFolderType(current.rootFolderType);
   }, [current.rootFolderType, setRootFolderType]);
 
-  const visibleItems = filesListStore.items;
+  const visibleItems =
+    filesListStore.items.length > 0 ? filesListStore.items : initialItems;
 
   let content: React.ReactNode;
 
@@ -614,6 +630,7 @@ const RoomsList = ({
         onInfoRoom={onInfoRoom}
         onInviteRoom={onInviteRoom}
         isArchive={isArchive}
+        infoPanelVisible={infoPanelVisible}
       />
     );
   } else {
@@ -679,6 +696,10 @@ const RoomsList = ({
           onChanged={refreshSingleRoom}
         />
       ) : null}
+      <LeaveRoomDialog
+        currentUserId={user?.id}
+        onTransferOwnership={(room) => setChangingOwnerRoom(room)}
+      />
       {invitingRoom ? (
         <InvitePanel
           visible

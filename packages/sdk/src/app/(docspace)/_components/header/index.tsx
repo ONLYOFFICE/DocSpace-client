@@ -53,11 +53,11 @@ import { useFilesSelectionStore } from "../../_store/FilesSelectionStore";
 import { useFilesListStore } from "../../_store/FilesListStore";
 
 import useFolderActions from "../../_hooks/useFolderActions";
-import useContextMenuModel from "../../_hooks/useContextMenuModel";
 import useHeaderMenu from "../../_hooks/useHeaderMenu";
 import { DeleteContext } from "../../_contexts/DeleteContext";
 import { FileOperationsContext } from "../../_contexts/FileOperationsContext";
-
+import { useHeaderContextMenu } from "../../_hooks/useHeaderContextMenu";
+import useContextMenuModel from "../../_hooks/useContextMenuModel";
 import type { HeaderProps } from "./Header.types";
 
 export type { HeaderProps };
@@ -89,6 +89,11 @@ const Header = ({
   const deleteCtx = React.useContext(DeleteContext);
   const fileOpsCtx = React.useContext(FileOperationsContext);
   const isTrashSection = filesListStore.rootFolderType === FolderType.TRASH;
+
+  const { getContextOptionsFolder, isRoom } = useHeaderContextMenu(
+    filesListStore.currentFolder ?? current,
+  );
+
   const { getHeaderContextMenuModel } = useContextMenuModel({
     onDeleteClick: deleteCtx?.deleteItem,
     onDeleteSelectedClick: deleteCtx?.deleteItems,
@@ -102,6 +107,7 @@ const Header = ({
       ? fileOpsCtx?.restoreItems
       : undefined,
   });
+
   const { getHeaderMenu, onCheckboxChange } = useHeaderMenu();
 
   const tableGroupMenuVisible = filesSelectionStore.selection.length > 0;
@@ -112,16 +118,23 @@ const Header = ({
 
   const { openFolder } = useFolderActions({ t });
 
-  const title = current?.title;
-  const rootFolderId = current?.rootFolderId;
-  const id = current?.id;
+  const activeCurrent = filesListStore.currentFolder ?? current;
+
+  const title = activeCurrent?.title;
+  const id = activeCurrent?.id;
 
   const pathParts = filesListStore.pathParts ?? pathPartsProp;
 
-  const isRoomsFolder = pathParts?.[0]?.id === rootFolderId;
   const isInRoomsContext =
     pathParts?.[0]?.folderType === FolderType.Rooms ||
     pathParts?.[0]?.folderType === FolderType.Archive;
+
+  // Section root: only one entry in pathParts means we're at the top of a
+  // section (Rooms list, My documents, Favorites, Recent, Trash, etc.).
+  // Using pathParts.length instead of id === rootFolderId because the server may
+  // return rootFolderId = 0 for the section root itself, breaking the equality check.
+  const isRootSection = (pathParts?.length ?? 0) <= 1;
+  const isRoomsFolder = isInRoomsContext && isRootSection;
 
   const navigationItems: TNavigationItem[] = useMemo(() => {
     if (!pathParts) return [];
@@ -145,7 +158,10 @@ const Header = ({
     navigationStore.setNavigationItems(navigationItems);
     if (id !== undefined && prevIdRef.current !== id)
       navigationStore.setCurrentFolderId(id);
-    if (title !== undefined && (navigationStore.currentTitle === null || prevIdRef.current !== id))
+    if (
+      title !== undefined &&
+      (navigationStore.currentTitle === null || prevIdRef.current !== id)
+    )
       navigationStore.setCurrentTitle(title);
     prevIdRef.current = id;
     navigationStore.setCurrentIsRootRoom(isRoomsFolder);
@@ -221,7 +237,7 @@ const Header = ({
             isDesktop={currentDeviceType === DeviceType.desktop}
             navigationItems={currentNavigationItems}
             getContextOptionsPlus={() => []}
-            getContextOptionsFolder={() => []}
+            getContextOptionsFolder={getContextOptionsFolder}
             onClickFolder={(idFolder) => {
               openFolder(
                 idFolder,
@@ -234,14 +250,14 @@ const Header = ({
             isEmptyFilesList={isEmptyList}
             onBackToParentFolder={onBackToParentFolder}
             showRootFolderTitle={false}
-            withMenu={!isRoomsFolder}
+            withMenu={!isRootSection}
             currentDeviceType={currentDeviceType}
             titleIcon=""
             titleIconTooltip=""
             showNavigationButton={false}
             isCurrentFolderInfo={false}
             showTitle={showTitle}
-            isRoom={!!current.roomType}
+            isRoom={isRoom}
             isInfoPanelVisible={isInfoPanelVisible}
             toggleInfoPanel={onToggleInfoPanel ?? (() => {})}
             withLogo=""
@@ -249,6 +265,7 @@ const Header = ({
             onLogoClick={onBurgerClick ?? (() => {})}
             clearTrash={() => {}}
             showFolderInfo={() => {}}
+            isContextButtonVisible={!isRootSection}
           />
         </div>
       )}

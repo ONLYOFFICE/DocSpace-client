@@ -50,6 +50,7 @@ import { CreateAgentDialog } from "../../dialogs";
 type CreateRoomEventProps = {
   title: string;
   visible: boolean;
+  context: string;
   onClose: VoidFunction;
 
   fetchTags: TagsStore["fetchTags"];
@@ -57,6 +58,7 @@ type CreateRoomEventProps = {
   setAgentParams: CreateEditAgentStore["setAgentParams"];
   onCreateAgent: CreateEditAgentStore["onCreateAgent"];
   setOnClose: CreateEditAgentStore["setOnClose"];
+  setOpenContext: CreateEditAgentStore["setOpenContext"];
   isLoading: CreateEditAgentStore["isLoading"];
 
   setCreateAgentDialogVisible: DialogsStore["setCreateAgentDialogVisible"];
@@ -71,6 +73,7 @@ const CreateRoomEvent = ({
   title,
   visible,
   onClose,
+  context,
 
   fetchTags,
   setAgentParams,
@@ -78,6 +81,7 @@ const CreateRoomEvent = ({
 
   isLoading,
   setOnClose,
+  setOpenContext,
   setCreateAgentDialogVisible,
   setCover,
 
@@ -111,6 +115,7 @@ const CreateRoomEvent = ({
   }, [fetchTagsAction]);
 
   useEffect(() => {
+    setOpenContext(context ?? "");
     setCreateAgentDialogVisible(true);
     return () => {
       setCreateAgentDialogVisible(false);
@@ -147,7 +152,7 @@ export default inject(
 
     const { setCreateAgentDialogVisible, setCover } = dialogsStore;
 
-    const { setAgentParams, onCreateAgent, isLoading, setOnClose } =
+    const { setAgentParams, onCreateAgent, isLoading, setOnClose, setOpenContext } =
       createEditAgentStore;
 
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
@@ -160,6 +165,7 @@ export default inject(
       onCreateAgent,
       isLoading,
       setOnClose,
+      setOpenContext,
       setCreateAgentDialogVisible,
 
       setCover,

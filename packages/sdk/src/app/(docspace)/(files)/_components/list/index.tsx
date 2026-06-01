@@ -83,7 +83,7 @@ const List = ({
   const { setIsEmptyList, filesViewAs, setFilesViewAs, currentDeviceType } =
     useSettingsStore();
   const filesListStore = useFilesListStore();
-  const { setItems, setRootFolderType, setPathParts } = filesListStore;
+  const { setItems, setRootFolderType, setPathParts, setCurrentFolder } = filesListStore;
   const { setSelection, setBufferSelection } = useFilesSelectionStore();
   const navigationStore = useNavigationStore();
 
@@ -203,6 +203,7 @@ const List = ({
       }
 
       setPathParts(newPathParts ?? null);
+      if (newCurrent) setCurrentFolder(newCurrent);
 
       const newItems = [
         ...newFolders.map(convertFolderToItem),
@@ -235,6 +236,7 @@ const List = ({
     setCurrentFolderId,
     setRootFolderType,
     setPathParts,
+    setCurrentFolder,
   ]);
 
   const fetchMoreFiles = React.useCallback(async () => {
@@ -311,6 +313,10 @@ const List = ({
     setRootFolderType(current.rootFolderType);
   }, [current.rootFolderType, setRootFolderType]);
 
+  React.useEffect(() => {
+    setCurrentFolder(current);
+  }, [current, setCurrentFolder]);
+
   const visibleItems =
     filesListStore.items.length > 0 ? filesListStore.items : filesList;
 
@@ -334,6 +340,7 @@ const List = ({
         fetchMoreFiles={fetchMoreFiles}
         filesLength={visibleItems.length}
         getIcon={getIcon}
+        currentUserId={currentUserId}
       />
     );
   }
@@ -374,6 +381,7 @@ const List = ({
       timezone={timezone}
       displayFileExtension={displayFileExtension}
       fetchMoreFiles={fetchMoreFiles}
+      currentUserId={currentUserId}
     />
   );
 };

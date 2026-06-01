@@ -3,7 +3,7 @@
   "content": "Your logo",
   "content_en_sha1_hash": "bcf2253991976c9d41f18ecca9f3eed026899b53",
   "created_at": "2025-05-26T07:15:49.731Z",
-  "updated_at": "2026-05-15T14:00:06.952Z",
+  "updated_at": "2026-05-28T15:46:18.667Z",
   "comment": {
     "text": "Placeholder text for an input field where the user can enter text to be displayed as a logo.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/WhiteLabelHeader.tsx",
-      "line_number": 131,
-      "context": "})}\n >\n <TextInput\n testId=\"logo-text-input\"\n className={classNames(styles.input, \"input\")}\n placeholder={t(\"YourLogo\")}\n value={logoTextWhiteLabel}\n onChange={onChange}\n isDisabled={!isSettingPaid}\n isReadOnly={!isSettingPaid}\n scale",
+      "line_number": 132,
+      "context": ">\n <TextInput\n testId=\"logo-text-input\"\n name=\"logo_text\"\n className={classNames(styles.input, \"input\")}\n placeholder={t(\"YourLogo\")}\n value={logoTextWhiteLabel}\n onChange={onChange}\n isDisabled={!isSettingPaid}\n isReadOnly={!isSettingPaid}\n scale",
       "module": "/packages/shared"
     }
   ],

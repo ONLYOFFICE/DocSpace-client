@@ -34,6 +34,7 @@
  */
 
 import { makeAutoObservable, runInAction } from "mobx";
+import { AnalyticsEvents } from "@docspace/shared/enums";
 import axios from "axios";
 
 import {
@@ -181,6 +182,13 @@ class AISettingsStore {
 
     this.aiProviders.push(newProvider);
 
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: AnalyticsEvents.AiProviderAdded,
+      id: newProvider.id,
+      type: newProvider.type,
+    });
+
     if (this.aiProviders.length === 1) {
       await this.initDefaultProvider();
     }
@@ -218,7 +226,7 @@ class AISettingsStore {
 
     await deleteProviders({ ids: [id] });
 
-    runInAction(async () => {
+    runInAction(() => {
       this.aiProviders = this.aiProviders.filter(
         (provider) => provider.id !== id,
       );
@@ -226,10 +234,12 @@ class AISettingsStore {
       if (isLastProvider) {
         this.clearDefaultProviderData();
       }
+    });
 
-      if (isDefaultProvider && !isLastProvider) {
-        await this.initDefaultProvider();
+    if (isDefaultProvider && !isLastProvider) {
+      await this.initDefaultProvider();
 
+      runInAction(() => {
         const defaultProviderInList = this.aiProviders.find(
           (p) => p.id === this.defaultProvider?.providerId,
         );
@@ -237,8 +247,8 @@ class AISettingsStore {
         if (defaultProviderInList && !defaultProviderInList.isDefault) {
           defaultProviderInList.isDefault = true;
         }
-      }
-    });
+      });
+    }
   };
 
   fetchAIProviders = async () => {

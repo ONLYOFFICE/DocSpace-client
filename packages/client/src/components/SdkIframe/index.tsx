@@ -46,6 +46,7 @@ type SdkIframeProps = {
   // iframe location (e.g. ai-agents distinguishing `/123?tab=chat` vs a
   // section) can read them. Section-only consumers (ai-forms) ignore it.
   onNavigate?: (section: string, extra?: SdkNavigateExtra) => void;
+  onFilterSearch?: (search: string) => void;
   apiRef?: React.MutableRefObject<SdkIframeHandle | null>;
 };
 
@@ -53,6 +54,7 @@ export const SdkIframe = ({
   src,
   title,
   onNavigate,
+  onFilterSearch,
   apiRef,
 }: SdkIframeProps) => {
   const iframeRef = React.useRef<HTMLIFrameElement | null>(null);
@@ -75,7 +77,7 @@ export const SdkIframe = ({
   }, [apiRef]);
 
   React.useEffect(() => {
-    if (!onNavigate) return undefined;
+    if (!onNavigate && !onFilterSearch) return undefined;
 
     const handler = (e: MessageEvent) => {
       if (e.source !== iframeRef.current?.contentWindow) return;
@@ -90,6 +92,13 @@ export const SdkIframe = ({
 
       if (payload?.type !== "onEventReturn") return;
       const eventData = payload.eventReturnData;
+
+      if (eventData?.event === "onFilterSearch" && onFilterSearch) {
+        const data = eventData.data as { search?: string } | undefined;
+        onFilterSearch(data?.search ?? "");
+        return;
+      }
+
       if (eventData?.event !== "onNavigate") return;
 
       const data = eventData.data as
@@ -101,13 +110,13 @@ export const SdkIframe = ({
       // detail). Forward the event anyway when `pathname` is present so
       // host wrappers that read pathname can react.
       if (section || data?.pathname) {
-        onNavigate(section, { pathname: data?.pathname, search: data?.search });
+        onNavigate?.(section, { pathname: data?.pathname, search: data?.search });
       }
     };
 
     window.addEventListener("message", handler);
     return () => window.removeEventListener("message", handler);
-  }, [onNavigate]);
+  }, [onNavigate, onFilterSearch]);
 
   return (
     <iframe

@@ -38,7 +38,9 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 
-import EditorIframe from "@/app/(docspace)/_components/editor-iframe";
+import { createFile } from "@docspace/shared/api/files";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 type CreateEditorPageProps = {
   parentId: string;
@@ -50,19 +52,38 @@ export default function CreateEditorPage({
   fileTitle,
 }: CreateEditorPageProps) {
   const router = useRouter();
+  const creatingRef = React.useRef(false);
 
-  const path = React.useMemo(() => {
-    const params = new URLSearchParams();
-    params.set("parentId", parentId);
-    params.set("fileTitle", fileTitle);
-    params.set("editorGoBack", "event");
-    params.set("withoutGoBackText", "true");
-    return `/doceditor/create?${params.toString()}`;
-  }, [parentId, fileTitle]);
+  React.useEffect(() => {
+    if (creatingRef.current) return;
+    creatingRef.current = true;
 
-  const onClose = React.useCallback(() => {
-    router.replace("/personal-files");
-  }, [router]);
+    createFile(parentId, fileTitle)
+      .then((file) => {
+        if (file?.id) {
+          router.replace(`/personal-files/editor/${file.id}`);
+        } else {
+          router.replace("/personal-files");
+        }
+      })
+      .catch((error: unknown) => {
+        toastr.error(error instanceof Error ? error.message : String(error));
+        router.replace("/personal-files");
+      });
+  }, []);
 
-  return <EditorIframe path={path} onClose={onClose} />;
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
+        height: "100%",
+      }}
+    >
+      <Loader type={LoaderTypes.dualRing} size="40px" />
+    </div>
+  );
 }
+

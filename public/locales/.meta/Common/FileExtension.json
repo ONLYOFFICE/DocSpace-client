@@ -3,7 +3,7 @@
   "content": "File extension",
   "content_en_sha1_hash": "3f77fbf03bc4a79bdd764b642097fb426df9d195",
   "created_at": "2026-05-19T19:03:16.361Z",
-  "updated_at": "2026-05-24T17:27:49.119Z",
+  "updated_at": "2026-06-01T21:20:44.439Z",
   "comment": {
     "text": "A property label in the file details panel indicating the file's format. It appears as a short noun in a list of file metadata.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Details/Details.utils.tsx",
-      "line_number": 170,
+      "line_number": 173,
       "context": "case \"Owner\":\n return this.t(\"Common:Owner\");\n case \"Type\":\n return this.t(\"Common:Type\");\n case \"File extension\":\n return this.t(\"Common:FileExtension\");\n case \"Tags\":\n return this.t(\"Common:Tags\");\n case \"Content\":\n return this.t(\"Common:Content\");\n case \"Size\":",
       "module": "/packages/sdk"
     }

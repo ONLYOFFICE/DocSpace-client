@@ -3,7 +3,7 @@
   "content": "AI Chat",
   "content_en_sha1_hash": "81cefbaa610fdd5ac7a58a071fcea75d7e9af3d6",
   "created_at": "2025-11-25T11:53:02.411Z",
-  "updated_at": "2026-05-24T17:27:49.056Z",
+  "updated_at": "2026-06-01T21:20:44.381Z",
   "comment": {
     "text": "This is a label for the \"AI Chat\" feature, appearing as a noun within a sentence describing an empty knowledge base in an AI Room.",
     "is_auto": true,
@@ -49,7 +49,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-room-tabs/index.tsx",
-      "line_number": 84,
+      "line_number": 107,
       "context": "// English defaults via `defaultValue` so labels render correctly when\n // the namespace is missing.\n const items: TTabItem[] = [\n {\n id: \"chat\",\n name: t(\"Common:AIChat\", { defaultValue: \"AI Chat\" }),\n content: null,\n },\n {\n id: \"knowledge\",\n name: t(\"Common:Knowledge\", { defaultValue: \"Knowledge base\" }),",
       "module": "/packages/sdk"
     },

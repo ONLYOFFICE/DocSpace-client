@@ -3,7 +3,7 @@
   "content": "Document",
   "content_en_sha1_hash": "e214b8a29923056887b7edf6635d90dcbb2abe88",
   "created_at": "2025-05-19T21:30:44.571Z",
-  "updated_at": "2026-05-28T15:46:18.474Z",
+  "updated_at": "2026-06-01T21:20:44.376Z",
   "comment": {
     "text": "This is a button label or option label for creating or converting a document. It appears in menus and dialogs where users can choose to create a new document or convert a file to a document format.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 458,
+      "line_number": 442,
       "context": "const createNewDocumentDocx = {\n id: \"actions_new-document\",\n className: \"main-button_drop-down\",\n icon: ActionsDocumentsReactSvgUrl,\n label: t(\"Common:Document\"),\n onClick: onCreate,\n action: \"docx\",\n key: \"docx\",\n };",
       "module": "/packages/client"
     },
@@ -30,10 +30,22 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/Dashboard/hooks/useCreateActions.tsx",
+      "line_number": 54,
+      "context": "return React.useMemo<QuickActionItem[]>(\n () => [\n {\n id: \"document\",\n icon: <CreateDocumentIcon />,\n label: t(\"Common:Document\"),\n onClick: () =>\n window.open(\n makeCreateUrl(NEW_FILE_NAMES.document, myFolderId),\n \"_blank\",\n ),",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/TypeCell.js",
-      "line_number": 62,
+      "line_number": 64,
       "context": "case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Document:\n return t(\"Common:Document\");\n case FileType.Diagram:\n return t(\"Common:Diagram\");\n case FileType.OForm:\n case FileType.OFormTemplate:\n case FileType.PDF: {",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/convert-dialog/index.tsx",
+      "line_number": 76,
+      "context": "const isXML = fileExst?.includes(\".xml\");\n \n const options = React.useMemo(\n () => [\n { label: t(\"Common:Document\"), value: \".docx\" },\n { label: t(\"Common:Spreadsheet\"), value: \".xlsx\" },\n ],\n [t],\n );",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/create-file-dialog/index.tsx",
@@ -42,14 +54,20 @@
       "module": "/packages/sdk"
     },
     {
-      "file_path": "/packages/sdk/src/app/(personal-files)/_components/main-button/index.tsx",
-      "line_number": 96,
+      "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useDocsMenuModels.tsx",
+      "line_number": 73,
       "context": "const desktopModel = React.useMemo<ContextMenuModel[]>(\n () => [\n {\n id: \"actions_new-document\",\n key: \"docx\",\n label: t(\"Common:Document\"),\n icon: ActionsDocumentsReactSvgUrl,\n onClick: () => openCreateDialog(\"docx\"),\n },\n {\n id: \"actions_new-spreadsheet\",",
       "module": "/packages/sdk"
     },
     {
-      "file_path": "/packages/sdk/src/app/(personal-files)/_components/main-button/index.tsx",
-      "line_number": 96,
+      "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useDocsMenuModels.tsx",
+      "line_number": 73,
+      "context": "const desktopModel = React.useMemo<ContextMenuModel[]>(\n () => [\n {\n id: \"actions_new-document\",\n key: \"docx\",\n label: t(\"Common:Document\"),\n icon: ActionsDocumentsReactSvgUrl,\n onClick: () => openCreateDialog(\"docx\"),\n },\n {\n id: \"actions_new-spreadsheet\",",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useDocsMenuModels.tsx",
+      "line_number": 73,
       "context": "const desktopModel = React.useMemo<ContextMenuModel[]>(\n () => [\n {\n id: \"actions_new-document\",\n key: \"docx\",\n label: t(\"Common:Document\"),\n icon: ActionsDocumentsReactSvgUrl,\n onClick: () => openCreateDialog(\"docx\"),\n },\n {\n id: \"actions_new-spreadsheet\",",
       "module": "/packages/sdk"
     },

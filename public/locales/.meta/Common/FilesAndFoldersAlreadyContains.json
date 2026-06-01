@@ -3,7 +3,7 @@
   "content": "The destination already contains files and folders with the same name.",
   "content_en_sha1_hash": "c342c02419e200d1d798c694ecfc21ddc3b9d5a4",
   "created_at": "2025-05-19T21:30:45.288Z",
-  "updated_at": "2026-05-15T14:00:06.650Z",
+  "updated_at": "2026-06-01T21:20:44.402Z",
   "comment": {
     "text": "This is an error message displayed in a dialog when a user attempts to move or copy files and folders to a location that already contains items with identical names. It informs the user about the naming conflict.",
     "is_auto": true,
@@ -16,6 +16,12 @@
       "line_number": 284,
       "context": ": t(\"Common:FilesAlreadyContains\")\n : isFolderDialog\n ? items.length === 1\n ? singleFolderMessage\n : t(\"Common:FoldersAlreadyContains\")\n : t(\"Common:FilesAndFoldersAlreadyContains\");\n };\n \n const getOverwriteTitle = () => {\n return isFileDialog\n ? t(\"Common:OverwriteTitle\")",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/conflict-resolve-dialog/index.tsx",
+      "line_number": 84,
+      "context": "values={{ folderName: single.title }}\n components={{ 1: <span key=\"folder-name\" className=\"bold\" /> }}\n />\n );\n } else if (hasFiles && hasFolders) {\n messageText = t(\"Common:FilesAndFoldersAlreadyContains\");\n } else if (hasFolders) {\n messageText = t(\"Common:FoldersAlreadyContains\");\n } else {\n messageText = t(\"Common:FilesAlreadyContains\");\n }",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

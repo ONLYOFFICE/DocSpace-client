@@ -3,7 +3,7 @@
   "content": "Remove this user from the encrypted room? Their wrapped key will be removed from every existing file, so they can no longer download new copies. However, anything they already decrypted on their device may still be accessible to them. For full revocation you must rotate the room's content.",
   "content_en_sha1_hash": "7536e78de0116a2248664fd838575b406d98c164",
   "created_at": "2026-05-24T17:27:36.924Z",
-  "updated_at": "2026-05-24T17:34:22.201Z",
+  "updated_at": "2026-06-01T21:20:44.418Z",
   "comment": {
     "text": "Warning text in a confirmation dialog body that appears when removing a user from an encrypted room, explaining the security implications for file access and the requirement for content rotation.",
     "is_auto": true,
@@ -16,6 +16,12 @@
       "line_number": 98,
       "context": ">\n <ModalDialog.Header>{t(\"People:RemoveUser\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {isEncryptedRoom\n ? t(\"Common:RemoveUserFromEncryptedRoomWarning\")\n : t(\"People:RemoveUserConfirmationText\")}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/sub-components/RemoveUserDialog.tsx",
+      "line_number": 70,
+      "context": ">\n <ModalDialog.Header>{t(\"Common:RoomMembersRemoveUser\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {isEncrypted\n ? t(\"Common:RemoveUserFromEncryptedRoomWarning\")\n : t(\"Common:RoomRemoveUserConfirmationText\")}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

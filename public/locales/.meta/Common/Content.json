@@ -3,7 +3,7 @@
   "content": "Content",
   "content_en_sha1_hash": "4f9be057f0ea5d2ba72fd2c810e8d7b9aa98b469",
   "created_at": "2025-05-19T21:30:43.672Z",
-  "updated_at": "2026-05-24T17:27:49.119Z",
+  "updated_at": "2026-06-01T21:20:44.440Z",
   "comment": {
     "text": "This is a label in the Info Panel, indicating the content type of a file.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Details/Details.utils.tsx",
-      "line_number": 174,
+      "line_number": 177,
       "context": "case \"File extension\":\n return this.t(\"Common:FileExtension\");\n case \"Tags\":\n return this.t(\"Common:Tags\");\n case \"Content\":\n return this.t(\"Common:Content\");\n case \"Size\":\n return this.t(\"Common:Size\");\n case \"Date modified\":\n return this.t(\"Common:DateModified\");\n case \"Last modified by\":",
       "module": "/packages/sdk"
     }

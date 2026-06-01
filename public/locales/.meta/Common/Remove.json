@@ -3,7 +3,7 @@
   "content": "Remove",
   "content_en_sha1_hash": "e963907dac5cd5c017869b4c96c18021c9bd058b",
   "created_at": "2025-05-19T21:30:47.809Z",
-  "updated_at": "2026-05-24T17:27:49.092Z",
+  "updated_at": "2026-06-01T21:20:44.412Z",
   "comment": {
     "text": "This is a button label that confirms the removal of an item, such as a guest from a room, a user, or a subscription.",
     "is_auto": true,
@@ -52,6 +52,18 @@
       "line_number": 247,
       "context": "onClick: () => toggleDeleteProfileEverDialog(selection),\n iconUrl: DeleteReactSvgUrl,\n },\n {\n key: \"menu-remove\",\n label: t(\"Common:Remove\"),\n disabled: !isGuests || !isRoomAdmin,\n onClick: () => setRemoveGuestDialogVisible(true),\n iconUrl: DisableReactSvgUrl,\n },\n ];",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/Members.utils.ts",
+      "line_number": 123,
+      "context": "const deleteOption = canChangeUserRole\n ? [\n { key: \"s2\", isSeparator: true },\n {\n key: \"remove\",\n label: this.t(\"Common:Remove\"),\n access: ShareAccessRights.None,\n },\n ]\n : [];",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/sub-components/RemoveUserDialog.tsx",
+      "line_number": 77,
+      "context": "</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OKButton\"\n label={t(\"Common:Remove\")}\n size={ButtonSize.normal}\n primary\n scale\n isLoading={isRemoving}\n onClick={onConfirm}",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ContactsForm.tsx",

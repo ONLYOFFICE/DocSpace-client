@@ -203,7 +203,7 @@
       "approved_at": null
     }
   },
-  "updated_at": "2026-05-24T17:27:49.059Z",
+  "updated_at": "2026-06-01T21:20:44.383Z",
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
@@ -213,7 +213,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
-      "line_number": 87,
+      "line_number": 89,
       "context": "? isVisitor\n ? t(\"Common:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n defaultValue: \"No {{aiAgents}} yet\",\n })\n : t(\"Common:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\", { defaultValue: \"AI Agent\" }),\n defaultValue: \"Create your first {{aiAgent}}\",\n })\n : standalone && isAdminOrOwner\n ? t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle\", {",
       "module": "/packages/sdk"
     }

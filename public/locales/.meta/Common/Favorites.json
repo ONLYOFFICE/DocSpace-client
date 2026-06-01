@@ -3,7 +3,7 @@
   "content": "Favorites",
   "content_en_sha1_hash": "07b3e447db02b7cc20a78a57c316febae22ed72b",
   "created_at": "2025-08-29T14:33:19.030Z",
-  "updated_at": "2026-05-24T17:27:49.068Z",
+  "updated_at": "2026-06-01T21:20:44.392Z",
   "comment": {
     "text": "This is a label for a folder or section in the file management interface, indicating items that have been marked as favorites. It appears in navigation menus and settings for default page display.",
     "is_auto": true,
@@ -19,25 +19,25 @@
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 241,
+      "line_number": 268,
       "context": "icon: CatalogRestoreReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=recent\"),\n },\n {\n id: \"ai-files-favorites\",\n label: t(\"Common:Favorites\"),\n icon: CatalogFavoritesReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=favorites\"),\n },\n {\n id: \"ai-files-trash\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 241,
+      "line_number": 268,
       "context": "icon: CatalogRestoreReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=recent\"),\n },\n {\n id: \"ai-files-favorites\",\n label: t(\"Common:Favorites\"),\n icon: CatalogFavoritesReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=favorites\"),\n },\n {\n id: \"ai-files-trash\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 241,
+      "line_number": 268,
       "context": "icon: CatalogRestoreReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=recent\"),\n },\n {\n id: \"ai-files-favorites\",\n label: t(\"Common:Favorites\"),\n icon: CatalogFavoritesReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=favorites\"),\n },\n {\n id: \"ai-files-trash\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 241,
+      "line_number": 268,
       "context": "icon: CatalogRestoreReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=recent\"),\n },\n {\n id: \"ai-files-favorites\",\n label: t(\"Common:Favorites\"),\n icon: CatalogFavoritesReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=favorites\"),\n },\n {\n id: \"ai-files-trash\",",
       "module": "/packages/client"
     },
@@ -54,9 +54,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/@header/ai-agents/favorites/page.tsx",
-      "line_number": 17,
-      "context": "export default observer(function FavoritesHeader() {\n const { t } = useTranslation([\"Common\"]);\n const store = useAgentsListStore();\n const isEmpty = !store.isLoading && store.agents.length === 0;\n return <AgentsHeader title={t(\"Common:Favorites\")} isEmptyList={isEmpty} />;\n });",
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-navigation/index.tsx",
+      "line_number": 118,
+      "context": "if (route === \"recent\") {\n return <AgentsHeader title={t(\"Common:Recent\")} isEmptyList={isEmpty} />;\n }\n if (route === \"favorites\") {\n return <AgentsHeader title={t(\"Common:Favorites\")} isEmptyList={isEmpty} />;\n }\n if (route === \"root\") {\n return (\n <AgentsHeader\n title={t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" })}",
       "module": "/packages/sdk"
     },
     {

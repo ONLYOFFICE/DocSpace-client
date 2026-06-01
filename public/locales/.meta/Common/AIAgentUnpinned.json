@@ -1,19 +1,19 @@
 {
   "key_path": "AIAgentUnpinned",
-  "content": "AI agent unpinned",
-  "content_en_sha1_hash": "a87e0a2cbc7edf27d4fb803b62e8f863ecf8a731",
-  "created_at": "2026-05-25T18:26:20.078Z",
-  "updated_at": "2026-05-28T15:46:18.645Z",
+  "content": "{{aiAgent}} unpinned",
+  "content_en_sha1_hash": "d5c46cd948bd8f6f4065e67e6d1c884a1cf4f845",
+  "created_at": "2026-06-01T21:20:07.460Z",
+  "updated_at": "2026-06-01T21:48:20.183Z",
   "comment": {
-    "text": "Status label for a single item in a list, appearing when an AI agent is not pinned. The `aiAgent` variable represents the name of the agent.",
+    "text": "Status message indicating that an AI agent has been unpinned. The {{aiAgent}} variable represents the name of the agent.",
     "is_auto": true,
-    "updated_at": "2026-05-25T18:38:52.051Z",
+    "updated_at": "2026-06-01T21:48:20.183Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1411,
+      "line_number": 1832,
       "context": "let translationForSeverals;\n \n if (isAIAgent) {\n translationForOneItem = isPin\n ? t(\"AIAgentPinned\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"AIAgentUnpinned\", { aiAgent: t(\"Common:AIAgent\") });\n translationForSeverals = isPin\n ? t(\"AIAgentsPinned\", { aiAgents: t(\"Common:AIAgents\") })\n : t(\"AIAgentsUnpinned\", { aiAgents: t(\"Common:AIAgents\") });\n } else {\n translationForOneItem = isPin ? t(\"RoomPinned\") : t(\"RoomUnpinned\");",
       "module": "/packages/client"
     }

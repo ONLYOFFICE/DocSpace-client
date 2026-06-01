@@ -3,7 +3,7 @@
   "content": "Continue",
   "content_en_sha1_hash": "2e02623966f9391facf6eaefc8b079ed5b630bee",
   "created_at": "2025-05-19T21:30:43.691Z",
-  "updated_at": "2026-05-28T15:46:18.492Z",
+  "updated_at": "2026-06-01T21:20:44.397Z",
   "comment": {
     "text": "This is the label for a button that allows users to proceed with an action, such as confirming a service, closing an editor without saving, or initiating a file conversion.",
     "is_auto": true,
@@ -66,6 +66,24 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/PassphraseModal.tsx",
+      "line_number": 217,
+      "context": "scale\n primary\n key=\"SubmitButton\"\n onClick={handleSubmit}\n size={ButtonSize.normal}\n label={t(\"Common:ContinueButton\")}\n isDisabled={isDisabled}\n isLoading={isLoading}\n tabIndex={3}\n />\n <Button",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/RecoveryPhraseDisplayModal.tsx",
+      "line_number": 267,
+      "context": "scale\n primary\n key=\"StartQuizButton\"\n onClick={startQuiz}\n size={ButtonSize.normal}\n label={t(\"Common:ContinueButton\")}\n isDisabled={!acknowledged || isLoading}\n isLoading={isLoading}\n tabIndex={2}\n />\n <Button",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/RecoveryPhraseInputModal.tsx",
+      "line_number": 166,
+      "context": "scale\n primary\n key=\"SubmitButton\"\n onClick={handleSubmit}\n size={ButtonSize.normal}\n label={t(\"Common:ContinueButton\")}\n isDisabled={isDisabled}\n isLoading={isLoading || isValidating}\n tabIndex={2}\n />\n <Button",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/EmailInputForm.tsx",
       "line_number": 121,
       "context": "id=\"email-continue\"\n className=\"login-continue-button\"\n primary\n size={ButtonSize.medium}\n scale\n label={t(\"Common:ContinueButton\")}\n tabIndex={1}\n isDisabled={isLoading || isContinueDisabled}\n isLoading={isLoading}\n onClick={onContinue}\n testId=\"email_continue_button\"",
@@ -82,6 +100,12 @@
       "line_number": 565,
       "context": "<Button\n size={ButtonSize.medium}\n scale\n primary\n label={t(\"Common:ContinueButton\")}\n isLoading={isCreated}\n onClick={onContinueClick}\n testId=\"wizard_continue_button\"\n />\n </div>",
       "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/convert-dialog/index.tsx",
+      "line_number": 145,
+      "context": "isDisabled={isConverting}\n />\n </div>\n <div className={styles.buttons}>\n <Button\n label={t(\"Common:ContinueButton\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={handleConfirm}\n isLoading={isConverting}",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",

@@ -36,10 +36,12 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { useNavigate } from "react-router";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
+import { TwoStateToggle } from "@docspace/ui-kit/components/two-state-toggle";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
@@ -60,6 +62,7 @@ type InterfaceThemeProps = {
 
 const InterfaceTheme = (props: InterfaceThemeProps) => {
   const { t } = useTranslation(["Common", "Profile"]);
+  const navigate = useNavigate();
 
   const {
     theme,
@@ -126,6 +129,10 @@ const InterfaceTheme = (props: InterfaceThemeProps) => {
       className={styles.interfaceTheme}
       data-testid="profile-interface-theme"
     >
+      <div className={styles.designSwitch}>
+        <TwoStateToggle onNavigate={(url) => navigate(url)} />
+      </div>
+
       <div>
         <Checkbox
           className={styles.systemThemeCheckbox}
@@ -207,3 +214,4 @@ export default inject(({ settingsStore, userStore }: TStore) => {
     isDesktopClient,
   };
 })(observer(InterfaceTheme));
+

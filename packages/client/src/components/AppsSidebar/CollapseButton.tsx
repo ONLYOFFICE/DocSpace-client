@@ -42,19 +42,25 @@ type CollapseButtonProps = {
   showText: boolean;
   toggleShowText: () => void;
   label?: string;
+  className?: string;
 };
 
 const CollapseButton = ({
   showText,
   toggleShowText,
   label,
+  className,
 }: CollapseButtonProps) => (
-  <div className={styles.wrapper} data-show-text={showText ? "true" : "false"}>
+  <div
+    className={`${styles.wrapper}${className ? ` ${className}` : ""}`}
+    data-show-text={showText ? "true" : "false"}
+  >
     <IconButton
       iconNode={<CollapseIcon />}
       size={20}
       isFill={false}
       isStroke
+      hoverColor="accent"
       onClick={toggleShowText}
       title={label}
     />

@@ -24,30 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useTranslation } from "react-i18next";
+import React from "react";
 
-import EmptyScreenLightUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.light.svg?url";
-import EmptyScreenDarkUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.dark.svg?url";
+import { getPersonalFolderTree } from "@docspace/shared/api/files";
 
-import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
+// Loads the id of the user's "My documents" folder, used as the upload and
+// file-creation target across the Dashboard. Returns null until it resolves.
+export const useMyFolderId = (): number | null => {
+  const [myFolderId, setMyFolderId] = React.useState<number | null>(null);
 
-const DocsCloudComponent = () => {
-  const { t } = useTranslation(["Common"]);
-  useDocumentTitle("Common:DocsCloud");
-  const { isBase } = useTheme();
+  React.useEffect(() => {
+    getPersonalFolderTree()
+      .then(([folder]) => setMyFolderId(folder.id as number))
+      .catch((err) => {
+        console.error("Failed to load personal folder tree", err);
+      });
+  }, []);
 
-  return (
-    <EmptyScreenContainer
-      imageSrc={isBase ? EmptyScreenLightUrl : EmptyScreenDarkUrl}
-      imageAlt={t("Common:DocsCloud")}
-      headerText={t("Common:DocsCloud")}
-      descriptionText={t("Common:DocsCloudDescription")}
-    />
-  );
+  return myFolderId;
 };
 
-export const DocsCloud = DocsCloudComponent;
-
-export default DocsCloudComponent;
+export default useMyFolderId;

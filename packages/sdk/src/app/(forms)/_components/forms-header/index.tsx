@@ -117,7 +117,7 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
   const getSectionTitle = React.useCallback(() => {
     switch (activeSection) {
       case FormsSection.MyForms:
-        return t("Common:DashboardAIFormsTitle");
+        return t("Common:DashboardFormsTitle");
       case FormsSection.Library:
         return t("Common:Library");
       case FormsSection.InProgress:

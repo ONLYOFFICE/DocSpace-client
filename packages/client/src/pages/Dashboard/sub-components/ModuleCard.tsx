@@ -25,13 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useNavigate } from "react-router";
-import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 
-import styles from "./Dashboard.module.scss";
+import styles from "../Dashboard.module.scss";
 
 export type ModuleItem = {
   id: string;
@@ -44,49 +41,24 @@ export type ModuleItem = {
 
 type ModuleCardProps = {
   mod: ModuleItem;
-  onInstall: () => void;
+  onClick: () => void;
 };
 
-export const ModuleCard = ({ mod, onInstall }: ModuleCardProps) => {
-  const { t } = useTranslation(["Common"]);
-  const navigate = useNavigate();
-
-  const handleOpen = () => {
-    if (mod.href) navigate(mod.href);
-  };
-
+export const ModuleCard = ({ mod, onClick }: ModuleCardProps) => {
   return (
-    <div className={styles.moduleCard}>
-      <span
-        className={styles.moduleIcon}
-        data-installed={mod.installed}
-      >
-        {mod.icon}
-      </span>
-      <div className={styles.moduleInfo}>
-        <Text as="p" className={styles.moduleTitle} isBold>
+    <button type="button" className={styles.moduleCard} onClick={onClick}>
+      <div className={styles.moduleHeader}>
+        <span className={styles.moduleIcon} data-installed={mod.installed}>
+          {mod.icon}
+        </span>
+        <Text as="p" className={styles.moduleTitle}>
           {mod.title}
         </Text>
-        <Text as="p" className={styles.moduleDescription}>
-          {mod.description}
-        </Text>
       </div>
-      {mod.installed ? (
-        <Button
-          className={styles.moduleBtn}
-          label={t("Common:Open")}
-          size={ButtonSize.small}
-          onClick={handleOpen}
-        />
-      ) : (
-        <Button
-          primary
-          className={styles.moduleBtn}
-          label={t("Common:Install")}
-          size={ButtonSize.small}
-          onClick={onInstall}
-        />
-      )}
-    </div>
+      <Text as="p" className={styles.moduleDescription}>
+        {mod.description}
+      </Text>
+    </button>
   );
 };
+

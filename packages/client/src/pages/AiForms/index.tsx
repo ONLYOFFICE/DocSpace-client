@@ -29,6 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useSearchParams } from "react-router";
 import { useTranslation } from "react-i18next";
 
+import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 
 import SdkIframe, {
   type SdkIframeHandle,
@@ -72,6 +73,7 @@ const AiForms = ({
   fetchAppSettings,
 }: AiFormsProps) => {
   const { t } = useTranslation(["Common"]);
+  useDocumentTitle("Common:DashboardFormsTitle");
   const [searchParams, setSearchParams] = useSearchParams();
   const [settingsChecked, setSettingsChecked] = React.useState(false);
   const [showSetupDialog, setShowSetupDialog] = React.useState(false);
@@ -155,7 +157,7 @@ const AiForms = ({
     <SdkIframe
       apiRef={iframeRef}
       src={initialSrcRef.current}
-      title={t("Common:DashboardAIFormsTitle")}
+      title={t("Common:DashboardFormsTitle")}
       onNavigate={handleSdkNavigate}
     />
   );

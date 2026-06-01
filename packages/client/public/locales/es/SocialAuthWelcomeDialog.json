@@ -5,5 +5,7 @@
   "GeneratedPassword": "Contraseña generada\n",
   "ProductNameDetail": "Nombre de {{productName}}",
   "ReviewAccountDetails": "Por favor, tómese un momento para revisar los detalles de su cuenta:\n",
+  "SetEmailPassword": "Establecer contraseña",
+  "WelcomeSubtitle": "Su espacio se ha creado correctamente. Revise los detalles de su perfil y empiece a trabajar.",
   "YourProfileDetails": "Los detalles de su perfil"
 }

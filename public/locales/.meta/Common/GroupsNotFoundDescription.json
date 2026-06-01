@@ -3,7 +3,7 @@
   "content": "No groups match your search. Please adjust your search parameters or clear the search field to view the full list of groups.",
   "content_en_sha1_hash": "9c3caa1ff1cab6647d8d6b2e9142676a207a5953",
   "created_at": "2025-05-19T21:30:45.677Z",
-  "updated_at": "2026-05-15T15:37:40.223Z",
+  "updated_at": "2026-05-28T15:46:18.577Z",
   "comment": {
     "text": "This is an empty state message displayed when a search for groups yields no results. It prompts the user to adjust their search or clear the field.",
     "is_auto": true,
@@ -37,8 +37,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreenGroups.tsx",
-      "line_number": 104,
-      "context": "return isBase ? <EmptyGroupLightIcon /> : <EmptyGroupDarkIcon />;\n };\n \n const getDescription = () => {\n if (groupsIsFiltered) return t(\"Common:GroupsNotFoundDescription\");\n \n return t(\"Common:ThisSectionIsEmpty\");\n };\n \n const getOptions = () => {",
+      "line_number": 108,
+      "context": "return theme.isBase ? <EmptyGroupLightIcon /> : <EmptyGroupDarkIcon />;\n };\n \n const getDescription = () => {\n if (groupsIsFiltered) return t(\"Common:GroupsNotFoundDescription\");\n \n return t(\"Common:ThisSectionIsEmpty\");\n };\n \n const getOptions = () => {",
       "module": "/packages/client"
     }
   ],

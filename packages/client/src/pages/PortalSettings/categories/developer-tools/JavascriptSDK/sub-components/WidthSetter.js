@@ -75,6 +75,7 @@ export const WidthSetter = (props) => {
       <Label className="label" text={t("EmbeddingPanel:Width")} />
       <RowContainer combo>
         <TextInput
+          name="embed_width"
           onChange={onChangeWidth}
           placeholder={t("EnterWidth")}
           value={width}

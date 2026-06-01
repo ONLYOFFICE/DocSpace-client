@@ -257,6 +257,7 @@ const GroupIconDialog = ({
           <span className={styles.symbol}>*</span>
           <TextInput
             className={styles.nameInput}
+            name="group_name"
             type={InputType.text}
             size={InputSize.base}
             value={groupName || ""}

@@ -3,7 +3,7 @@
   "content": "Open",
   "content_en_sha1_hash": "cf9b77061f7b3126b49d50a6fa68f7ca8c26b7a3",
   "created_at": "2026-03-20T09:07:38.471Z",
-  "updated_at": "2026-05-24T17:27:49.114Z",
+  "updated_at": "2026-05-28T15:46:18.632Z",
   "comment": {
     "text": "This is a button label that allows users to open a file or folder. It appears in various contexts, such as confirming an AI agent's action or within a version history context menu.",
     "is_auto": true,
@@ -12,34 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/open-file-confirm-dialog/index.tsx",
-      "line_number": 116,
-      "context": "<ModalDialog.Footer>\n <div className={styles.toolCallFooter}>\n <div className={styles.buttonsBlockContainer}>\n <Button\n primary\n label={t(\"Open\")}\n onClick={onOpenAction}\n scale={isMobile()}\n size={ButtonSize.normal}\n data-testid=\"open-file-button\"\n />",
-      "module": "/libs/ui-kit"
-    },
-    {
       "file_path": "/libs/ui-kit/uploader/index.tsx",
       "line_number": 337,
       "context": "href={folderUrl}\n target=\"_blank\"\n rel=\"noopener noreferrer\"\n className={styles.toastLink}\n >\n {getCommonTranslation(\"Open\")}\n </a>\n </>\n )}\n </>,\n getCommonTranslation(\"Done\"),",
       "module": "/libs/ui-kit"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Dashboard/InstallAiArbiterDialog/index.tsx",
-      "line_number": 190,
-      "context": "return (\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:Open\")}\n onClick={onInstalled}\n />\n );\n }\n return (",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallModuleDialog.tsx",
-      "line_number": 232,
-      "context": "return (\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:Open\")}\n onClick={onInstalled}\n />\n );\n }\n if (phase === \"failed\") {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Dashboard/ModuleCard.tsx",
-      "line_number": 77,
-      "context": "</Text>\n </div>\n {mod.installed ? (\n <Button\n className={styles.moduleBtn}\n label={t(\"Common:Open\")}\n size={ButtonSize.small}\n onClick={handleOpen}\n />\n ) : (\n <Button",
-      "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionRow.js",
@@ -49,25 +25,25 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2166,
+      "line_number": 2203,
       "context": "disabled: false,\n },\n withOpen && {\n id: \"option_open\",\n key: \"open\",\n label: t(\"Open\"),\n icon: FolderReactSvgUrl,\n onClick: () => this.onOpenFolder(item, t),\n disabled:\n !this.treeFoldersStore.isFavoritesFolder &&\n !this.treeFoldersStore.isRecentFolder &&",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2166,
+      "line_number": 2203,
       "context": "disabled: false,\n },\n withOpen && {\n id: \"option_open\",\n key: \"open\",\n label: t(\"Open\"),\n icon: FolderReactSvgUrl,\n onClick: () => this.onOpenFolder(item, t),\n disabled:\n !this.treeFoldersStore.isFavoritesFolder &&\n !this.treeFoldersStore.isRecentFolder &&",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2166,
+      "line_number": 2203,
       "context": "disabled: false,\n },\n withOpen && {\n id: \"option_open\",\n key: \"open\",\n label: t(\"Open\"),\n icon: FolderReactSvgUrl,\n onClick: () => this.onOpenFolder(item, t),\n disabled:\n !this.treeFoldersStore.isFavoritesFolder &&\n !this.treeFoldersStore.isRecentFolder &&",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2166,
+      "line_number": 2203,
       "context": "disabled: false,\n },\n withOpen && {\n id: \"option_open\",\n key: \"open\",\n label: t(\"Open\"),\n icon: FolderReactSvgUrl,\n onClick: () => this.onOpenFolder(item, t),\n disabled:\n !this.treeFoldersStore.isFavoritesFolder &&\n !this.treeFoldersStore.isRecentFolder &&",
       "module": "/packages/client"
     },
@@ -84,20 +60,14 @@
       "module": "/packages/management"
     },
     {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-list/useAgentContextOptions.tsx",
-      "line_number": 142,
-      "context": "// 2. Open\n items.push({\n id: \"option_open\",\n key: \"open\",\n label: t(\"Common:Open\", { defaultValue: \"Open\" }),\n icon: FolderReactSvgUrl,\n onClick: () => router.push(`/ai-agents/${agent.id}?tab=chat`),\n });\n \n items.push({ key: \"separator0\", isSeparator: true });",
-      "module": "/packages/sdk"
-    },
-    {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 107,
+      "line_number": 92,
       "context": "const getOpenItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_open\",\n key: \"open\",\n label: t(\"Common:Open\"),\n icon: FolderReactSvgUrl,\n onClick: () => openFolder(i.id, i.title),\n disabled: false,\n };\n },",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 107,
+      "line_number": 92,
       "context": "const getOpenItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_open\",\n key: \"open\",\n label: t(\"Common:Open\"),\n icon: FolderReactSvgUrl,\n onClick: () => openFolder(i.id, i.title),\n disabled: false,\n };\n },",
       "module": "/packages/sdk"
     },
@@ -105,24 +75,6 @@
       "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
       "line_number": 390,
       "context": "> = {\n \"open-folder\": onOpen\n ? {\n id: \"option_open-folder\",\n key: \"open-folder\",\n label: t(\"Common:Open\"),\n icon: EyeReactSvgUrl,\n onClick: onOpen,\n disabled: false,\n }\n : null,",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(personal-files)/_components/version-history-panel/index.tsx",
-      "line_number": 207,
-      "context": "if (!isVisible || !file) return null;\n \n const culture = i18n.language || \"en\";\n const anonymousLabel = t(\"Common:Anonymous\");\n const openLabel = t(\"Common:Open\");\n const downloadLabel = t(\"Common:Download\");\n const actionsLabel = t(\"Common:Actions\");\n const title = versions && versions.length > 0 ? versions[0].title : file.title;\n \n return (",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 121,
-      "context": "onClick: () => filesSelectionStore.addSelection(item),\n },\n {\n id: \"option_open\",\n key: \"open\",\n label: t(\"Common:Open\"),\n icon: FolderReactSvgUrl,\n onClick: () => openFolder(room.id, room.title),\n },\n { key: \"separator-download\", isSeparator: true },\n {",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 121,
-      "context": "onClick: () => filesSelectionStore.addSelection(item),\n },\n {\n id: \"option_open\",\n key: \"open\",\n label: t(\"Common:Open\"),\n icon: FolderReactSvgUrl,\n onClick: () => openFolder(room.id, room.title),\n },\n { key: \"separator-download\", isSeparator: true },\n {",
       "module": "/packages/sdk"
     }
   ],

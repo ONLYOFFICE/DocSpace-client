@@ -3,7 +3,7 @@
   "content": "Lifetime (min)",
   "content_en_sha1_hash": "20610b86435a234a6314cab2a967b3e0bbfd719f",
   "created_at": "2025-05-19T21:30:51.805Z",
-  "updated_at": "2026-05-15T14:00:06.869Z",
+  "updated_at": "2026-05-28T15:46:18.624Z",
   "comment": {
     "text": "This is a label for an input field where users define the session lifetime in minutes.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
       "line_number": 298,
-      "context": "/>\n \n {type ? (\n <>\n <Text className={styles.lifetime} fontSize=\"15px\" fontWeight=\"600\">\n {t(\"Lifetime\")}\n </Text>\n <TextInput\n className={styles.lifetimeInput}\n testId=\"session_lifetime_input\"\n maxLength={4}",
+      "context": "/>\n \n {type ? (\n <>\n <Text className={styles.lifetime} fontSize=\"15px\" fontWeight=\"600\">\n {t(\"Lifetime\")}\n </Text>\n <TextInput\n className={styles.lifetimeInput}\n name=\"session_lifetime\"\n testId=\"session_lifetime_input\"",
       "module": "/packages/client"
     }
   ],

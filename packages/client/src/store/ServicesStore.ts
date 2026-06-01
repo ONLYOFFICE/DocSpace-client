@@ -123,7 +123,7 @@ class ServicesStore {
 
   partialUpgradeFee: number = 0;
 
-  reccomendedAmount: number = 0;
+  recommendedAmount: number = 0;
 
   featureCountData: number = 0;
 

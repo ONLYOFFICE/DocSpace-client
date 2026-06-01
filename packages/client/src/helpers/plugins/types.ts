@@ -164,6 +164,7 @@ export interface IContextMenuItemValidation {
   device?: PluginDevices;
   security?: TRoomSecurity | TFolderSecurity;
   itemSecurity?: TFileSecurity | TRoomSecurity | TFolderSecurity;
+  itemId?: number | string;
 }
 
 // Client-specific window interface

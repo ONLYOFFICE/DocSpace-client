@@ -554,6 +554,7 @@ const Uploader = (props) => {
               <Label className="label" text={t("ButtonText")} />
               <TextInput
                 scale
+                name="button_text"
                 value={config.linkMainText}
                 onChange={onChangeLinkFileText}
                 tabIndex={5}
@@ -565,6 +566,7 @@ const Uploader = (props) => {
               <Label className="label" text={t("HelperText")} />
               <TextInput
                 scale
+                name="helper_text"
                 value={config.secondaryText}
                 onChange={onChangeSecondaryText}
                 tabIndex={6}

@@ -3,7 +3,7 @@
   "content": "Language",
   "content_en_sha1_hash": "89b86ab0e66f527166d98df92ddbcf5416ed58f6",
   "created_at": "2025-05-19T21:30:46.038Z",
-  "updated_at": "2026-05-26T17:09:24.682Z",
+  "updated_at": "2026-05-28T15:46:18.588Z",
   "comment": {
     "text": "This is a label for a dropdown menu or a section heading where users can select their preferred language for the interface.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
-      "line_number": 469,
+      "line_number": 470,
       "context": "</Text>\n </div>\n \n <div className={styles.infoWrapper}>\n <Text className={styles.text} fontWeight={400}>\n {t(\"Common:Language\")}\n </Text>\n <div className={styles.wrapperLanguageSelector}>\n <ComboBox\n withoutPadding\n directionY=\"both\"",
       "module": "/packages/login"
     }

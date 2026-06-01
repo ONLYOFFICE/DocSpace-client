@@ -216,6 +216,7 @@ const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
             </Text>
             <TextInput
               scale
+              name="db_host"
               type={InputType.text}
               value={store.host}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -232,6 +233,7 @@ const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
             </Text>
             <TextInput
               scale
+              name="db_port"
               type={InputType.text}
               value={store.port}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -249,6 +251,7 @@ const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
             </Text>
             <TextInput
               scale
+              name="db_name"
               type={InputType.text}
               value={store.databaseName}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -265,6 +268,7 @@ const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
             </Text>
             <TextInput
               scale
+              name="db_user"
               type={InputType.text}
               value={store.user}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -281,6 +285,7 @@ const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
             </Text>
             <PasswordInput
               simpleView
+              inputName="db_password"
               passwordSettings={{ minLength: 0 }}
               inputValue={store.password}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>

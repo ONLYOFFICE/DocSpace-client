@@ -2,26 +2,20 @@
   "key_path": "MoveOrCopy",
   "content": "Move or copy",
   "content_en_sha1_hash": "279d14d0958c69b48ed63e892a91ec9598c2db7f",
-  "created_at": "2026-05-19T19:03:19.769Z",
-  "updated_at": "2026-05-24T17:27:49.189Z",
+  "created_at": "2025-05-19T21:30:55.861Z",
+  "updated_at": "2026-05-28T15:46:18.637Z",
   "comment": {
-    "text": "Label for a context menu option or group header that allows users to choose between moving or copying an item.",
+    "text": "This is a button label in a context menu. It allows users to choose between moving or copying selected files or folders.",
     "is_auto": true,
-    "updated_at": "2026-05-19T19:07:52.201Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-04-11T21:08:54.829Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2068,
-      "context": "const moveActions = [\n {\n id: \"option_move-or-copy\",\n key: \"move\",\n label: t(\"Common:MoveOrCopy\"),\n icon: CopyReactSvgUrl,\n items: [\n {\n id: \"option_move-to\",\n key: \"move-to\",",
+      "line_number": 2105,
+      "context": "const moveActions = [\n {\n id: \"option_move-or-copy\",\n key: \"move\",\n label: t(\"MoveOrCopy\"),\n icon: CopyReactSvgUrl,\n items: [\n {\n id: \"option_move-to\",\n key: \"move-to\",",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 688,
-      "context": "if (moveOrCopyItems.length) {\n actionGroup.push({\n id: \"option_move-or-copy\",\n key: \"move-or-copy\",\n label: t(\"Common:MoveOrCopy\"),\n icon: MoveReactSvgUrl,\n items: moveOrCopyItems,\n });\n }",
-      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -155,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,
@@ -170,12 +164,6 @@
       "approved_at": null
     },
     "sl": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

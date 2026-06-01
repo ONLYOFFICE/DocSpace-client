@@ -131,6 +131,7 @@ import {
 import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
 import { OPERATIONS_NAME } from "@docspace/ui-kit/constants";
 import {
+  AnalyticsEvents,
   RoomsType,
   Events,
   FolderType,
@@ -538,6 +539,16 @@ class ContextOptionsStore {
           : await getFileLink(item.id);
 
         copyToBuffer(itemLink.sharedTo.shareLink);
+
+        if (!item.isFolder && !item.isRoom) {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: AnalyticsEvents.FileShared,
+            id: item.id,
+            parentId: item.folderId,
+          });
+        }
+
         item.customFilterEnabled
           ? toastr.success(
               <Trans t={t} i18nKey="Common:LinkCopySuccessWithCustomFilter" />,
@@ -624,6 +635,15 @@ class ContextOptionsStore {
       //   : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
 
       this.publicRoomStore.setExternalLink(primaryLink);
+
+      if (item.isRoom || !item.isFolder) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: item.isRoom ? AnalyticsEvents.RoomShared : AnalyticsEvents.FileShared,
+          id: item.id,
+          parentId: item.isRoom ? item.parentId : item.folderId,
+        });
+      }
     }
   };
 
@@ -776,7 +796,12 @@ class ContextOptionsStore {
   };
 
   onClickRename = (item) => {
-    const event = new Event(Events.RENAME);
+    const event = new CustomEvent(Events.RENAME, {
+      detail: {
+        parentId: this.selectedFolderStore.id,
+        context: "context_menu",
+      },
+    });
 
     event.item = item;
 
@@ -1012,19 +1037,28 @@ class ContextOptionsStore {
   };
 
   onClickEditRoom = (item) => {
-    const event = new Event(Events.ROOM_EDIT);
+    const event = new CustomEvent(Events.ROOM_EDIT, {
+      detail: { context: "context_menu" },
+    });
     event.item = item;
     window.dispatchEvent(event);
   };
 
   onClickEditAgent = (item) => {
-    const event = new Event(Events.AGENT_EDIT);
+    const event = new CustomEvent(Events.AGENT_EDIT, {
+      detail: { context: "context_menu" },
+    });
     event.item = item;
     window.dispatchEvent(event);
   };
 
   onSaveAsTemplate = (item) => {
-    const event = new Event(Events.SAVE_AS_TEMPLATE);
+    const event = new CustomEvent(Events.SAVE_AS_TEMPLATE, {
+      detail: {
+        parentId: this.selectedFolderStore.id,
+        context: "context_menu",
+      },
+    });
     event.item = item;
     window.dispatchEvent(event);
   };
@@ -1034,7 +1068,9 @@ class ContextOptionsStore {
   };
 
   onEditRoomTemplate = (item, cb) => {
-    const event = new Event(Events.ROOM_EDIT);
+    const event = new CustomEvent(Events.ROOM_EDIT, {
+      detail: { context: "context_menu" },
+    });
     event.item = { ...item, isEdit: true };
     event.cb = cb;
     window.dispatchEvent(event);
@@ -1460,10 +1496,18 @@ class ContextOptionsStore {
   onCreateTemplate = async () => {
     this.oformsStore.setIsVisibleInfoPanelTemplateGallery(false);
 
-    const event = new Event(Events.CREATE);
+    const extension = this.oformsStore.currentExtensionGallery.replace(".", "");
+
+    const event = new CustomEvent(Events.CREATE, {
+      detail: {
+        parentId: this.selectedFolderStore.id,
+        context: "template",
+        extension,
+      },
+    });
 
     const payload = {
-      extension: this.oformsStore.currentExtensionGallery.replace(".", ""),
+      extension,
       id: -1,
       fromTemplate: true,
       title: this.oformsStore.gallerySelected.attributes.name_form,
@@ -1861,6 +1905,15 @@ class ContextOptionsStore {
     if (primaryLink) {
       copyShareLink(item, primaryLink, t, this.getManageLinkOptions(item));
       this.infoPanelStore?.setShareChanged(true);
+
+      if (item.isRoom || !item.isFolder) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: item.isRoom ? AnalyticsEvents.RoomShared : AnalyticsEvents.FileShared,
+          id: item.id,
+          parentId: item.isRoom ? item.parentId : item.folderId,
+        });
+      }
     }
   };
 
@@ -3526,7 +3579,12 @@ class ContextOptionsStore {
       this.filesActionsStore.setProcessCreatingRoomFromData(true);
     }
 
-    const event = new Event(Events.ROOM_CREATE);
+    const event = new CustomEvent(Events.ROOM_CREATE, {
+      detail: {
+        parentId: this.selectedFolderStore.id,
+        context: "context_menu",
+      },
+    });
 
     if (item && item.isFolder) {
       event.title = item.title;
@@ -3543,20 +3601,31 @@ class ContextOptionsStore {
     //   return;
     // }
 
-    const event = new Event(Events.AGENT_CREATE);
+    const event = new CustomEvent(Events.AGENT_CREATE, {
+      detail: {
+        parentId: this.selectedFolderStore.id,
+        context: "context_menu",
+      },
+    });
 
     window.dispatchEvent(event);
   };
 
   onCreate = (format, t) => {
-    const event = new Event(Events.CREATE);
-
     const isPDf = format === FileExtensions.PDF;
 
     if (isMobile && isPDf) {
       toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
       return;
     }
+
+    const event = new CustomEvent(Events.CREATE, {
+      detail: {
+        parentId: this.selectedFolderStore.id,
+        context: "context_menu",
+        extension: format,
+      },
+    });
 
     const payload = {
       extension: format,

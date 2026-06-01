@@ -45,9 +45,10 @@ type DropZoneProps = {
   children: React.ReactNode;
   onFilesDropped: (files: File[]) => void;
   disabled?: boolean;
+  className?: string;
 };
 
-const DropZone = ({ children, onFilesDropped, disabled }: DropZoneProps) => {
+const DropZone = ({ children, onFilesDropped, disabled, className }: DropZoneProps) => {
   const [isDragging, setIsDragging] = React.useState(false);
   const dragCounterRef = React.useRef(0);
 
@@ -104,7 +105,7 @@ const DropZone = ({ children, onFilesDropped, disabled }: DropZoneProps) => {
 
   return (
     <div
-      className={styles.dropZone}
+      className={className ? `${styles.dropZone} ${className}` : styles.dropZone}
       onDragEnter={onDragEnter}
       onDragLeave={onDragLeave}
       onDragOver={onDragOver}

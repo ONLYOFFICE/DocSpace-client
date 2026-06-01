@@ -58,7 +58,10 @@ import type { Nullable, TCreatedBy } from "@docspace/shared/types";
 import { RoomsType } from "@docspace/shared/enums";
 import api from "@docspace/shared/api";
 
-import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
+import {
+  useDialogsStore,
+  type TEditableRoom,
+} from "@/app/(docspace)/_store/DialogsStore";
 
 import UploadSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import DeleteSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
@@ -85,7 +88,7 @@ export type EditableRoom = {
 export type CreateEditRoomDialogProps = {
   visible: boolean;
   onClose: () => void;
-  room?: EditableRoom;
+  room?: TEditableRoom;
   onRoomEdited?: (roomId: number) => void;
   onRoomCreated?: (roomId?: number) => void;
   /**

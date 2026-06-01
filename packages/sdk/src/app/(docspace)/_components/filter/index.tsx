@@ -35,6 +35,7 @@
 
 "use client";
 
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 
@@ -53,6 +54,7 @@ export const Filter = observer(({ filesFilter, shareKey, showMainButton, mainBut
   const { t } = useTranslation(["Common"]);
   const { filesViewAs, setFilesViewAs } = useSettingsStore();
   const { currentDeviceType } = useDeviceType();
+  const [clearSearch, setClearSearch] = React.useState(false);
 
   const {
     getFilterData,
@@ -74,6 +76,7 @@ export const Filter = observer(({ filesFilter, shareKey, showMainButton, mainBut
     shareKey,
     filesViewAs,
     setFilesViewAs,
+    setClearSearch,
   });
 
   const initSearchValue = getSelectedInputValue();
@@ -86,8 +89,8 @@ export const Filter = observer(({ filesFilter, shareKey, showMainButton, mainBut
       onFilter={onFilter}
       onSort={onSort}
       onSortButtonClick={() => {}}
-      clearSearch={false}
-      setClearSearch={() => {}}
+      clearSearch={clearSearch}
+      setClearSearch={setClearSearch}
       getSelectedFilterData={getSelectedFilterData}
       getViewSettingsData={getViewSettingsData}
       clearAll={clearAll}

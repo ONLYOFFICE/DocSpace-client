@@ -36,6 +36,7 @@
 "use client";
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
 type ErrorBoundaryProps = {
@@ -44,6 +45,8 @@ type ErrorBoundaryProps = {
 };
 
 export default function PrivateError({ error, reset }: ErrorBoundaryProps) {
+  const { t } = useTranslation(["Common"]);
+
   React.useEffect(() => {
     // Surface error to the host instrumentation; crypto-related code paths
     // intentionally avoid console.* (see Biome no-console rule).
@@ -74,7 +77,12 @@ export default function PrivateError({ error, reset }: ErrorBoundaryProps) {
       <p style={{ margin: 0, opacity: 0.7 }}>
         {error.message || "Unexpected error in private rooms client"}
       </p>
-      <Button size={ButtonSize.normal} label="Try again" onClick={reset} primary />
+      <Button
+        size={ButtonSize.normal}
+        label={t("Common:TryAgain")}
+        onClick={reset}
+        primary
+      />
     </div>
   );
 }

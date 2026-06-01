@@ -3,7 +3,7 @@
   "content": "Create your own productivity platform based on {{organizationName}} {{productName}} and collaborate on documents with teams, clients, and partners.",
   "content_en_sha1_hash": "2fec16a0e87329b3160f8c9bb2a7319e6a6493ae",
   "created_at": "2026-04-03T21:51:36.581Z",
-  "updated_at": "2026-05-15T14:00:06.816Z",
+  "updated_at": "2026-05-27T14:11:50.698Z",
   "comment": {
     "text": "This is a description for a card in the Developer Tools settings. It explains the purpose of the REST API feature, using `{{organizationName}}` for the company name and `{{productName}}` for the product name.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 89,
-      "context": "</div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}\n description={t(\"Settings:RestAPIDescription\", { organizationName: getBrandName(\"OrganizationName\"), productName: getBrandName(\"ProductName\") })}\n url={apiBasicLink}\n color={globalColors.lightBlueMain}\n linkTitle={t(\"Common:LearnMore\")}\n isBlank\n />",
+      "line_number": 103,
+      "context": "</div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}\n description={t(\"Settings:RestAPIDescription\", {\n organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),\n })}\n url={apiBasicLink}\n color={globalColors.lightBlueMain}",
       "module": "/packages/client"
     }
   ],

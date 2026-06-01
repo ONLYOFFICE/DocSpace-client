@@ -723,6 +723,7 @@ export async function startUploadSession(
   createOn: unknown,
   CreateNewIfExist: boolean,
   encryptionMetadata?: unknown,
+  signal?: AbortSignal,
 ) {
   const data: Record<string, unknown> = {
     fileName,
@@ -742,6 +743,7 @@ export async function startUploadSession(
     url: `/files/${folderId}/session`,
     data,
     skipForbidden: true,
+    signal,
   }) as TUploadOperation;
 }
 
@@ -750,11 +752,13 @@ export async function uploadChunkParallel(
   sessionId: string,
   chunkNumber: number,
   data: FormData,
+  signal?: AbortSignal,
 ) {
   return request({
     method: "post",
     url: `/files/${folderId}/session/${sessionId}/upload?chunkNumber=${chunkNumber}`,
     data,
+    signal,
   });
 }
 
@@ -773,10 +777,12 @@ export async function uploadChunkSequential(
 export async function finalizeUploadSession(
   folderId: string | number,
   sessionId: string,
+  signal?: AbortSignal,
 ) {
   const res = await request({
     method: "put",
     url: `/files/${folderId}/session/${sessionId}/finalize`,
+    signal,
   });
   return res;
 }

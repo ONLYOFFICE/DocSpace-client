@@ -4,5 +4,8 @@
   "ContinueToProduct": "{{productName}} へ引き続き",
   "GeneratedPassword": "生成されたパスワード",
   "ProductNameDetail": "{{productName}} の名前",
-  "ReviewAccountDetails": "アカウントの詳細をご確認ください。"
+  "ReviewAccountDetails": "アカウントの詳細をご確認ください。",
+  "SetEmailPassword": "パスワードを設定する",
+  "WelcomeSubtitle": "スペースが正常に作成されました。プロフィールの詳細を確認して作業を開始してください。",
+  "YourProfileDetails": "プロフィールの詳細"
 }

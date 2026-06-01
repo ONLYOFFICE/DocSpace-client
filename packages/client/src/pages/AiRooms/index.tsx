@@ -48,7 +48,7 @@ const getSrc = (section: string, roomsFolderId?: number | null): string => {
     case "archive":
       return "/sdk/archive";
     case "trash":
-      return "/sdk/trash";
+      return `/sdk/personal-files/trash${parentIdParam}`;
     case "settings":
       return "/sdk/settings";
     default:
@@ -74,3 +74,4 @@ const AiRoomsConnected = inject<TStore>(({ treeFoldersStore }) => ({
 
 export { AiRoomsConnected as AiRooms };
 export default AiRoomsConnected;
+

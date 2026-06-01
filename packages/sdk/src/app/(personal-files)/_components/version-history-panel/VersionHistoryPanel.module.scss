@@ -9,6 +9,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+@use "@docspace/ui-kit/styles/variables/colors" as *;
+
 .body {
   height: 100%;
   display: flex;
@@ -33,13 +35,18 @@
 }
 
 .row {
-  border-bottom: 1px solid var(--row-border);
+  border-bottom: 1px solid $gray-light-mid;
+
+  :global(.dark) & {
+    border-bottom-color: $gray-dark-strong;
+  }
 
   :global(.row_content) {
     padding-block: 13px 12px;
     padding-inline-end: 0;
     height: auto;
     display: block;
+    align-self: flex-start;
   }
 
   :global(.row_context-menu-wrapper) {
@@ -85,16 +92,10 @@
   margin-bottom: 4px;
 }
 
-.contentLength {
-  display: block;
-  margin-inline-start: auto;
-  flex-shrink: 0;
-  padding-inline-start: 8px;
-}
-
 .commentWrapper {
   box-sizing: border-box;
   display: flex;
+  flex-direction: column;
   margin-inline-start: 72px;
   margin-top: 4px;
   white-space: normal;
@@ -110,4 +111,23 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   white-space: inherit;
+}
+
+.editCommentTextareaWrapper {
+  margin-block: 6px 1px;
+  width: 100%;
+}
+
+.editCommentButtons {
+  display: flex;
+  gap: 8px;
+  margin: 8px 0 2px;
+  margin-inline-start: 72px;
+}
+
+.editCommentButtonPrimary,
+.editCommentButtonSecond {
+  box-sizing: border-box;
+  width: 87px;
+  flex-shrink: 0;
 }

@@ -4,5 +4,8 @@
   "ContinueToProduct": "Continua su {{productName}}",
   "GeneratedPassword": "Password generata",
   "ProductNameDetail": "Nome di {{productName}}",
-  "ReviewAccountDetails": "Dedica un momento alla revisione dei dettagli del tuo account:"
+  "ReviewAccountDetails": "Dedica un momento alla revisione dei dettagli del tuo account:",
+  "SetEmailPassword": "Imposta password",
+  "WelcomeSubtitle": "Il tuo spazio è stato creato con successo. Controlla i dettagli del tuo profilo e inizia a lavorare.",
+  "YourProfileDetails": "I dettagli del tuo profilo"
 }

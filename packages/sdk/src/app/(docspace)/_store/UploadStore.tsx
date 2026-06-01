@@ -134,9 +134,33 @@ class UploadStore {
     this.batchAbortController?.abort();
   };
 
+  dropPending = () => {
+    const keptBytes = this.items
+      .filter((i) => i.status === "uploaded")
+      .reduce((sum, i) => sum + i.fileSize, 0);
+    this.items = this.items.filter(
+      (i) => i.status === "uploaded" || i.status === "error",
+    );
+    if (this.items.length === 0) {
+      this.uploadedBytes = 0;
+      this.totalBytes = 0;
+    } else {
+      this.totalBytes = this.items.reduce((sum, i) => sum + i.fileSize, 0);
+      this.uploadedBytes = Math.min(this.totalBytes, keptBytes);
+    }
+  };
+
   cancelItem = (uniqueId: string) => {
     const item = this.items.find((i) => i.uniqueId === uniqueId);
-    item?.abortController.abort();
+    if (!item) return;
+    item.abortController.abort();
+    const uploadedItemBytes =
+      item.status === "uploaded"
+        ? item.fileSize
+        : Math.round((item.fileSize * Math.max(0, item.percent)) / 100);
+    this.totalBytes = Math.max(0, this.totalBytes - item.fileSize);
+    this.uploadedBytes = Math.max(0, this.uploadedBytes - uploadedItemBytes);
+    this.items = this.items.filter((i) => i.uniqueId !== uniqueId);
   };
 
   setPanelVisible = (visible: boolean) => {

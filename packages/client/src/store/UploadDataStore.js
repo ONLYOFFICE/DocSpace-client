@@ -38,7 +38,11 @@ import { getI18n, Trans } from "react-i18next";
 import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 import uniqueid from "lodash/uniqueId";
 import sumBy from "lodash/sumBy";
-import { ConflictResolveType, RoomsType } from "@docspace/shared/enums";
+import {
+  AnalyticsEvents,
+  ConflictResolveType,
+  RoomsType,
+} from "@docspace/shared/enums";
 import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
 import {
   prepareEncryptedUpload,
@@ -1334,9 +1338,7 @@ class UploadDataStore {
 
     const encryptionRoomId =
       this.selectedFolderStore.navigationPath?.find((r) => r.isRoom)?.id ??
-      (this.selectedFolderStore.isRoom
-        ? this.selectedFolderStore.id
-        : null);
+      (this.selectedFolderStore.isRoom ? this.selectedFolderStore.id : null);
 
     const isPrivateUpload = this.treeFoldersStore.isPrivacyFolder;
 
@@ -1613,16 +1615,14 @@ class UploadDataStore {
             dekForWrap,
             roomIdForWrap,
           ).catch((error) => {
-            const wrapMessage =
-              getI18n().t("Common:EncryptionUploadWrapFailed");
-            console.error(
-              "[ENCRYPTION] Failed to set file encryption keys",
-              {
-                fileId,
-                status: error?.response?.status,
-                message: error?.message,
-              },
+            const wrapMessage = getI18n().t(
+              "Common:EncryptionUploadWrapFailed",
             );
+            console.error("[ENCRYPTION] Failed to set file encryption keys", {
+              fileId,
+              status: error?.response?.status,
+              message: error?.message,
+            });
             runInAction(() => {
               if (this.files[indexOfFile]) {
                 this.files[indexOfFile].error = wrapMessage;
@@ -1642,6 +1642,12 @@ class UploadDataStore {
           });
         }
       }
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: AnalyticsEvents.FileUploaded,
+        id: fileInfo.id,
+        parentId: fileInfo.folderId,
+      });
 
       if (fileInfo.version > 2) {
         this.filesStore.setHighlightFile({
@@ -2205,7 +2211,10 @@ class UploadDataStore {
         while (chunk < chunks) {
           const offset = chunk * chunkUploadSize;
           const formData = new FormData();
-          formData.append("file", fileToUpload.slice(offset, offset + chunkUploadSize));
+          formData.append(
+            "file",
+            fileToUpload.slice(offset, offset + chunkUploadSize),
+          );
           requestsDataArray.push(formData);
           chunk++;
         }

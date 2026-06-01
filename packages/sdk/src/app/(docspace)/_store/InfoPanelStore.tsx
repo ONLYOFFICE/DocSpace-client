@@ -58,6 +58,7 @@ class InfoPanelStore {
   isVisible: boolean = false;
   selection: TFile | TFolder | null = null;
   shareChanged: boolean = false;
+  isPinnedSelection: boolean = false;
 
   fileView: InfoPanelViewType = InfoPanelView.infoDetails;
 
@@ -73,16 +74,19 @@ class InfoPanelStore {
   open = (item: TFile | TFolder) => {
     this.selection = toJS(item);
     this.isVisible = true;
+    this.isPinnedSelection = true;
   };
 
   close = () => {
     this.isVisible = false;
     this.selection = null;
     this.shareChanged = false;
+    this.isPinnedSelection = false;
   };
 
   toggle = () => {
     this.isVisible = !this.isVisible;
+    if (!this.isVisible) this.isPinnedSelection = false;
   };
 
   setVisible = (visible: boolean) => {
@@ -95,6 +99,10 @@ class InfoPanelStore {
 
   setSelection = (item: TFile | TFolder | null) => {
     this.selection = item ? toJS(item) : null;
+  };
+
+  setPinnedSelection = (pinned: boolean) => {
+    this.isPinnedSelection = pinned;
   };
 
   setView = (view: InfoPanelViewType) => {

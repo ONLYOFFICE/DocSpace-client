@@ -3,7 +3,7 @@
   "content": "The person responsible for billing and payments",
   "content_en_sha1_hash": "b3c33f0718e733efa3c29a1c54ce673998cdb344",
   "created_at": "2026-04-10T13:53:42.939Z",
-  "updated_at": "2026-05-15T14:00:06.998Z",
+  "updated_at": "2026-05-25T18:26:22.320Z",
   "comment": {
     "text": "This is a descriptive text that appears below the \"Payer\" label, clarifying that the payer is the individual accountable for billing and payments.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
-      "line_number": 163,
+      "line_number": 164,
       "context": "{t(\"Payer\")}\n </Text>\n {renderTooltip}\n </div>\n <Text className={styles.description} lineHeight=\"20px\">\n {t(\"PayerResponsibleForBilling\")}\n </Text>\n \n <PayerInformation />\n \n <div className={styles.header}>",
       "module": "/libs/ui-kit"
     }

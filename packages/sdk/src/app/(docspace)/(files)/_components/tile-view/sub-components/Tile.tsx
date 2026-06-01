@@ -45,8 +45,10 @@ import { FolderTile } from "@docspace/ui-kit/components/tiles/folder-tile";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
 import { useDecryptedFilename } from "@/app/(docspace)/_hooks/useDecryptedFilename";
+import { FolderType } from "@docspace/shared/enums";
 import Badges from "@docspace/shared/components/badges";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
+import EditorsTooltip from "../../editors-tooltip";
 
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
@@ -64,6 +66,7 @@ import { generateFilesItemValue } from "@/app/(docspace)/(files)/_utils";
 import useContextMenuModel from "@/app/(docspace)/_hooks/useContextMenuModel";
 import useDownloadActions from "@/app/(docspace)/_hooks/useDownloadActions";
 import { ShareContext } from "@/app/(docspace)/_contexts/ShareContext";
+import { CopyShareLinkContext } from "@/app/(docspace)/_contexts/CopyShareLinkContext";
 import { InfoContext } from "@/app/(docspace)/_contexts/InfoContext";
 import { DeleteContext } from "@/app/(docspace)/_contexts/DeleteContext";
 import { FileOperationsContext } from "@/app/(docspace)/_contexts/FileOperationsContext";
@@ -85,7 +88,7 @@ const getTemporaryIcon = (item: TFileItem | TFolderItem, getIcon: TGetIcon) => {
   return getIcon(temporaryExtension, 96, item.contentLength);
 };
 
-const Tile = ({ item, getIcon, index, isPrivate }: TileProps) => {
+const Tile = ({ item, getIcon, index, isPrivate, currentUserId }: TileProps) => {
   const tileRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation("Common");
   const { isBase } = useTheme();
@@ -113,6 +116,7 @@ const Tile = ({ item, getIcon, index, isPrivate }: TileProps) => {
   const { openFile, lockFile } = useFilesActions({ t });
   const { openFolder } = useFolderActions({ t });
   const onShareClick = React.useContext(ShareContext);
+  const onCopyShareLink = React.useContext(CopyShareLinkContext);
   const onInfoClick = React.useContext(InfoContext);
   const deleteCtx = React.useContext(DeleteContext);
   const fileOpsCtx = React.useContext(FileOperationsContext);
@@ -218,6 +222,10 @@ const Tile = ({ item, getIcon, index, isPrivate }: TileProps) => {
     }
   };
 
+  const editorsTooltip = (
+    <EditorsTooltip item={observableItem} currentUserId={currentUserId} />
+  );
+
   const badgesComponent = (
     <Badges
       t={t}
@@ -226,6 +234,7 @@ const Tile = ({ item, getIcon, index, isPrivate }: TileProps) => {
       viewAs="tile"
       showNew={false}
       isExtsCustomFilter={isExtsCustomFilter}
+      editorsTooltip={editorsTooltip}
       onFilesClick={() => {
         if (!observableItem.isFolder) {
           openFile(observableItem);
@@ -246,9 +255,12 @@ const Tile = ({ item, getIcon, index, isPrivate }: TileProps) => {
     />
   );
 
-  const handleShareClick = React.useCallback(() => {
-    onShareClick?.(observableItem);
-  }, [onShareClick, observableItem]);
+  const handleCopyShareLink = React.useCallback(() => {
+    onCopyShareLink?.(observableItem);
+  }, [onCopyShareLink, observableItem]);
+
+  const isTrashFolder =
+    filesListStore.rootFolderType === FolderType.TRASH;
 
   const quickButtonsComponent = (
     <QuickButtons
@@ -258,8 +270,9 @@ const Tile = ({ item, getIcon, index, isPrivate }: TileProps) => {
       onClickDownload={() => downloadAction(observableItem)}
       onClickFavorite={onClickFavorite}
       onClickLock={onClickLock}
-      onClickShare={onShareClick ? handleShareClick : undefined}
-      openShareTab={onShareClick ? handleShareClick : undefined}
+      onClickShare={onCopyShareLink ? handleCopyShareLink : undefined}
+      openShareTab={onCopyShareLink ? handleCopyShareLink : undefined}
+      isTrashFolder={isTrashFolder}
     />
   );
 

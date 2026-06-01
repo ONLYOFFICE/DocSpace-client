@@ -16,7 +16,6 @@
   "ArchiveAction": "Vietne izņemta no arhīva",
   "ArchivedRoomsAction": "Telpas ir arhivētas",
   "ArchiveEmptyScreenUser": "Šeit tiks parādītas arhivētās telpas.",
-  "AreYouSureWantLeaveRoom": "Vai jūs esat pārliecināti, ka vēlaties pamest šo telpu?",
   "ByErasure": "Dzēšana",
   "ChangeAgentOwnerSelectorInfo": "Tikai telpas administrators vai {{productName}} administrators var kļūt par aģenta īpašnieks.",
   "ChangeTheAgentOwner": "Izmainīt aģenta īpašnieku",
@@ -78,7 +77,6 @@
   "Index": "Indekss",
   "LastActivity": "Pēdējā aktivitāte",
   "LastOpened": "Pēdēji atvērts",
-  "LeaveRoomDescription": "Jūs esat šīs telpas īpašnieks. Pirms pametat telpu, jums ir jānodod īpašnieka loma citam lietotājam.",
   "LeaveRoomFormFillingWarning": "Jums šajā telpā pašlaik ir uztverieta formu aizpildīšana. Iziešana no telpas apturēs šīs formas jūsu posmā. Jūs varēsiet pievienoties atkal tikai pēc jauna uzaicinājuma no telpas administratora.",
   "LifetimeDialogDescription": "Kalpošanas laika atskaite sākas faila izveides datumā. Daži faili šajā telpā pārsniedz piedāvāto kalpošanas laiku un tiks izdzēsti, tiklīdz iespējosiet iestatījumu.",
   "LifetimeDialogDescriptionHeader": "Vecāki faili ar pārsniegtu kalpošanas laiku tiks izdzēsti",
@@ -177,12 +175,10 @@
   "UserLimitDescription": "Definējiet lietotāju skaitu, kas var pievienoties ar šo italošu saiti.",
   "VersionHistory": "Versijas vēsture",
   "WaitOperation": "Uzgaidiet, līdz tiks pabeigta pašreizējā darbība",
-  "WantLeaveRoom": "Vai tiešām vēlaties atstāt šo telpu? Jūs varēsiet tai atkal pievienoties, izmantojot jaunu telpas administratora ielūgumu.",
   "WarningCopyToFormRoomServal": "Vairāku failu kopēšana uz veidlapu aizpildīšanas telpu netiek atbalstīta. Vienlaikus kopējiet vienu {{ organizationName }} PDF veidlapu.",
   "WarningMoveToFormRoom": "Failu nevar pārvietot uz šo telpu. Mēģiniet pārvietot {{ organizationName }} PDF veidlapu.",
   "WarningMoveToFormRoomServal": "Vairāku failu pārvietošana uz veidlapu aizpildīšanas telpu netiek atbalstīta. Vienlaikus pārvietojiet vienu {{ organizationName }} PDF veidlapu.",
   "WillBeDeletedPermanently": "{{date}} tiks neatgriezeniski dzēsts",
   "YouLeftTheAgent": "Jūs esat atstājis aģentu.",
-  "YouLeftTheRoom": "Jūs atstājāt telpu",
   "YourUserTypeHasChanged": "{{productName}} administrators <1>{{adminName}}</1> ir mainījis jūsu lietotāja tipu uz <1>“{{userType}}”</1>."
 }

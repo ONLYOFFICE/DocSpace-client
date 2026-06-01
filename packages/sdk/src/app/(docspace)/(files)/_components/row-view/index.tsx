@@ -54,6 +54,7 @@ const RowView = ({
   displayFileExtension,
   fetchMoreFiles,
   isPrivate,
+  currentUserId,
 }: RowViewProps) => {
   const isSSR = useIsServer();
 
@@ -78,6 +79,7 @@ const RowView = ({
           displayFileExtension={displayFileExtension}
           isSSR={isSSR}
           isPrivate={isPrivate}
+          currentUserId={currentUserId}
         />
       ))}
     </FilesRowContainer>

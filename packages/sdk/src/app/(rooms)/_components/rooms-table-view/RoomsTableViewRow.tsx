@@ -264,7 +264,7 @@ const RoomsTableViewRow = observer(
 
     return (
       <TableRow
-        className={classNames("files-item", {
+        className={classNames({
           "table-row-selected": isChecked,
         })}
         checked={isChecked}
@@ -278,8 +278,8 @@ const RoomsTableViewRow = observer(
           className: classNames("files-item", "table-container_file-name-cell"),
           value,
         }}
-        fileContextClick={() => {
-          if (filesSelectionStore.isCheckedItem(item)) return;
+        fileContextClick={(isRightClick) => {
+          if (isRightClick && filesSelectionStore.selection.length > 1) return;
           filesSelectionStore.setSelection([]);
           filesSelectionStore.setBufferSelection(item);
         }}

@@ -3,7 +3,7 @@
   "content": "Buy storage",
   "content_en_sha1_hash": "1e9a438b3b32e15b092cf458e1d9571ee16d8ba8",
   "created_at": "2026-04-10T13:53:44.848Z",
-  "updated_at": "2026-05-15T14:00:06.993Z",
+  "updated_at": "2026-05-25T18:26:22.317Z",
   "comment": {
     "text": "Button label. It appears on a button that, when clicked, allows the user to purchase additional storage space.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 309,
+      "line_number": 315,
       "context": "{isScheduled ? null : (\n <Button\n className={styles.increaseButton}\n label={\n previousStoragePlanSize ? t(\"BuyStorage\") : t(\"EditSubscription\")\n }\n size={ButtonSize.small}\n primary\n onClick={openUpgradeDialog}\n isDisabled={isDisabled}",
       "module": "/libs/ui-kit"
     }

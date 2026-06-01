@@ -88,9 +88,7 @@ class PureVersionHistoryPanel extends React.Component {
   }
 }
 
-const VersionHistoryPanel = withTranslation("VersionHistory")(
-  PureVersionHistoryPanel,
-);
+const VersionHistoryPanel = withTranslation("Common")(PureVersionHistoryPanel);
 
 VersionHistoryPanel.propTypes = {
   fileId: PropTypes.string,
@@ -128,3 +126,4 @@ export default inject(
     };
   },
 )(observer(VersionHistoryPanel));
+

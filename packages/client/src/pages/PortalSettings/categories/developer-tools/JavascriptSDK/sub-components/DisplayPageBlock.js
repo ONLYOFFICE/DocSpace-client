@@ -63,6 +63,7 @@ export const DisplayPageBlock = ({ t, config, setConfig }) => {
 			<Label className="label" text={t("Page")} />
 			<TextInput
 				scale
+				name="display_page"
 				onChange={onChangePage}
 				placeholder={t("EnterPage")}
 				value={value}

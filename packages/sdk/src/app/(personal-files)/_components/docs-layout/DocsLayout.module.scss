@@ -66,6 +66,18 @@
 	}
 }
 
+.createNewSection {
+	padding-block: 19px 16px;
+	flex-shrink: 0;
+}
+
+.createNewTitle {
+	margin: 0 0 16px;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 24px;
+}
+
 .quickActions {
 	margin: 0 auto 16px;
 	justify-content: center;

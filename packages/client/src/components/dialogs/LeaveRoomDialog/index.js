@@ -88,8 +88,8 @@ const LeaveRoomDialog = (props) => {
     : t("Common:LeaveTheRoom");
 
   const roomDescription = isRoomOwner
-    ? t("Files:LeaveRoomDescription")
-    : t("Files:WantLeaveRoom");
+    ? t("Common:LeaveRoomDescription")
+    : t("Common:WantLeaveRoom");
 
   const agentDescription = isRoomOwner
     ? t("Common:LeaveAgentDescription")
@@ -114,7 +114,7 @@ const LeaveRoomDialog = (props) => {
             <>
               <Text>{t("Files:LeaveRoomFormFillingWarning")}</Text>
               <Text style={{ marginTop: "12px" }}>
-                {t("Files:AreYouSureWantLeaveRoom")}
+                {t("Common:AreYouSureWantLeaveRoom")}
               </Text>
             </>
           ) : (

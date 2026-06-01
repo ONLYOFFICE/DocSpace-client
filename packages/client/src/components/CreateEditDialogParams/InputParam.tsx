@@ -130,7 +130,7 @@ const InputParam = ({
           onKeyUp={onKeyUp}
           onKeyDown={onKeyDown}
           maxLength={170}
-          name={name}
+          name={name ?? id}
           type={InputType.text}
           testId={dataTestId}
         />
@@ -142,3 +142,4 @@ const InputParam = ({
 InputParam.displayName = "InputParam";
 
 export default InputParam;
+

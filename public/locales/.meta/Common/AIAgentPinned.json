@@ -1,19 +1,19 @@
 {
   "key_path": "AIAgentPinned",
-  "content": "{{aiAgent}} pinned",
-  "content_en_sha1_hash": "999363a437ea6fa222cc3fdaadb7e64ef7eef1ac",
-  "created_at": "2025-12-19T13:03:48.187Z",
-  "updated_at": "2026-05-24T17:27:49.195Z",
+  "content": "AI agent pinned",
+  "content_en_sha1_hash": "5c731bf114f3fe08259813250fcc5843b82bd1e3",
+  "created_at": "2026-05-25T18:26:20.067Z",
+  "updated_at": "2026-05-28T15:46:18.645Z",
   "comment": {
-    "text": "This is a toast message indicating that a single AI agent has been successfully pinned. The `{{aiAgent}}` variable will be replaced with the localized term for \"AI agent\".",
+    "text": "Toast message appearing when an AI agent is pinned. It includes the `{aiAgent}` variable, which represents the name of the agent.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:10:36.993Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-05-25T18:39:15.813Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1780,
+      "line_number": 1410,
       "context": "let translationForOneItem;\n let translationForSeverals;\n \n if (isAIAgent) {\n translationForOneItem = isPin\n ? t(\"AIAgentPinned\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"AIAgentUnpinned\", { aiAgent: t(\"Common:AIAgent\") });\n translationForSeverals = isPin\n ? t(\"AIAgentsPinned\", { aiAgents: t(\"Common:AIAgents\") })\n : t(\"AIAgentsUnpinned\", { aiAgents: t(\"Common:AIAgents\") });\n } else {",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:53.938772Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

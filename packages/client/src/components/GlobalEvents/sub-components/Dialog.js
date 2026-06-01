@@ -45,10 +45,12 @@ import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 
 import { removeEmojiCharacters } from "@docspace/shared/utils";
+import { getCreateModalEntityType } from "SRC_DIR/helpers/filesUtils";
 
 const Dialog = ({
   t,
   title,
+  testIdPrefix,
   startValue,
   visible,
   folderFormValidation,
@@ -67,6 +69,10 @@ const Dialog = ({
   withForm,
   errorText,
 }) => {
+  const createEntityType = isCreateDialog
+    ? getCreateModalEntityType(extension)
+    : null;
+
   const [value, setValue] = useState("");
 
   const [isError, setIsError] = useState(false);
@@ -76,11 +82,11 @@ const Dialog = ({
 
   const hasError = Boolean(errorText) || isError;
 
-  // Generate test ID prefix based on dialog title
   const getTestIdPrefix = useCallback(() => {
+    if (testIdPrefix) return testIdPrefix;
     if (!title) return "dialog";
     return title.toLowerCase().replace(/\s+/g, "_");
-  }, [title]);
+  }, [testIdPrefix, title]);
 
   const onCancelAction = useCallback(
     (e) => {
@@ -188,6 +194,7 @@ const Dialog = ({
       displayType="modal"
       scale
       onClose={onCloseAction}
+      onSubmit={withForm ? onSaveAction : undefined}
       zIndex={405}
     >
       <ModalDialog.Header>{title}</ModalDialog.Header>
@@ -248,6 +255,11 @@ const Dialog = ({
         <Button
           className="submit"
           key="GlobalSendBtn"
+          id={
+            createEntityType
+              ? `shared_create-${createEntityType}-modal_submit`
+              : undefined
+          }
           label={isCreateDialog ? t("Common:Create") : t("Common:SaveButton")}
           size="normal"
           type="submit"
@@ -255,12 +267,17 @@ const Dialog = ({
           primary
           isLoading={isDisabled}
           isDisabled={isCreateDisabled || isDisabled || isError}
-          onClick={onSaveAction}
+          onClick={withForm ? undefined : onSaveAction}
           testId={`${getTestIdPrefix()}_save_button`}
         />
         <Button
           className="cancel-button"
           key="CloseBtn"
+          id={
+            createEntityType
+              ? `shared_create-${createEntityType}-modal_cancel`
+              : undefined
+          }
           label={t("Common:CancelButton")}
           size="normal"
           scale

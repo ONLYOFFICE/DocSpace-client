@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.705Z",
-  "updated_at": "2026-05-24T17:27:49.100Z",
+  "updated_at": "2026-05-28T15:46:18.482Z",
   "comment": {
     "text": "This is a label for a user's name, appearing in a welcome dialog, as a sorting option in a filter, and as a column header in a table.",
     "is_auto": true,
@@ -12,9 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/SocialAuthWelcomeDialog/index.tsx",
-      "line_number": 153,
-      "context": "isPaidBadge\n />\n </div>\n \n <div className={styles.infoRow}>\n <Text className=\"welcome-text\">{t(\"Common:Name\")}</Text>\n <Text\n fontWeight=\"600\"\n truncate\n className=\"welcome-text\"\n >{`${user?.firstName} ${user?.lastName}`}</Text>",
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/SocialAuthWelcomePanel.jsx",
+      "line_number": 99,
+      "context": "</StyledIconButton>\n </>\n ),\n },\n {\n label: t(\"Common:Name\"),\n value: (\n <span>{`${user?.firstName ?? \"\"} ${user?.lastName ?? \"\"}`.trim()}</span>\n ),\n },\n {",
       "module": "/packages/client"
     },
     {
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/RowView/index.tsx",
-      "line_number": 105,
-      "context": "checked={isChecked}\n onSelect={toggleAll}\n indeterminate={isIndeterminate}\n isDisabled={usersWithFilledEmails.length === 0}\n >\n <Text className=\"row-header-title\">{t(\"Common:Name\")}</Text>\n </Row>\n {accountsData.map((data) => (\n <UsersRow\n t={t}\n key={data.key}",
+      "line_number": 137,
+      "context": "checked={isChecked}\n onSelect={toggleAll}\n indeterminate={isIndeterminate}\n isDisabled={usersWithFilledEmails.length === 0}\n >\n <Text className=\"row-header-title\">{t(\"Common:Name\")}</Text>\n </StyledRow>\n {accountsData.map((data) => (\n <UsersRow\n t={t}\n key={data.key}",
       "module": "/packages/client"
     },
     {
@@ -43,8 +43,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/RowView/index.tsx",
-      "line_number": 95,
-      "context": "{checkedUsers.withEmail.length > 0 ? (\n <Checkbox\n isIndeterminate={isIndeterminate}\n isChecked={isChecked}\n onChange={toggleAll}\n label={t(\"Common:Name\")}\n />\n ) : null}\n </div>\n </Row>",
+      "line_number": 180,
+      "context": "{checkedUsers.withEmail.length > 0 ? (\n <Checkbox\n isIndeterminate={isIndeterminate}\n isChecked={isChecked}\n onChange={toggleAll}\n label={t(\"Common:Name\")}\n />\n ) : null}\n </div>\n </StyledRow>",
       "module": "/packages/client"
     },
     {
@@ -61,8 +61,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/RowView/index.tsx",
-      "line_number": 118,
-      "context": "</div>\n ) : null}\n {accountsData.length > 0 ? (\n <>\n <Row className={styles.styledRowType} key=\"Name\">\n <Text className=\"row-header-title\">{t(\"Common:Name\")}</Text>\n </Row>\n \n {accountsData.map((data) => (\n <UsersRow\n key={data.key}",
+      "line_number": 196,
+      "context": "</div>\n ) : null}\n {accountsData.length > 0 ? (\n <>\n <StyledRow key=\"Name\">\n <Text className=\"row-header-title\">{t(\"Common:Name\")}</Text>\n </StyledRow>\n \n {accountsData.map((data) => (\n <UsersRow\n key={data.key}",
       "module": "/packages/client"
     },
     {
@@ -79,21 +79,15 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 430,
+      "line_number": 442,
       "context": ") : null}\n </div>\n <div className={styles.infoWrapper}>\n <div className={styles.rowsContainer}>\n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Name\")}\n </Text>\n <div className={styles.profileBlockField}>\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {profile!.displayName}\n </Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 430,
+      "line_number": 442,
       "context": ") : null}\n </div>\n <div className={styles.infoWrapper}>\n <div className={styles.rowsContainer}>\n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Name\")}\n </Text>\n <div className={styles.profileBlockField}>\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {profile!.displayName}\n </Text>",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-list/index.tsx",
-      "line_number": 360,
-      "context": "// Name (avatar + title) | Activity (created date) | Owner (avatar + name).\n // Skipping Tags & Quota columns we don't surface in the SDK.\n const columns: TTableColumn[] = [\n {\n key: \"Name\",\n title: t(\"Common:Name\", { defaultValue: \"Name\" }),\n enable: true,\n default: true,\n resizable: true,\n minWidth: 210,\n },",
-      "module": "/packages/sdk"
     }
   ],
   "languages": {

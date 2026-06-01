@@ -79,7 +79,9 @@ export const usePrivateRemoveMemberFlow = (
 
   const guardReason = React.useMemo(
     () =>
-      activeUploads > 0 ? t("Common:CannotRemoveMemberWhileUploads") : null,
+      activeUploads > 0
+        ? t("Common:CannotRemoveMemberWhileUploads", { count: activeUploads })
+        : null,
     [activeUploads, t],
   );
 

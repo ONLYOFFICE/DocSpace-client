@@ -41,7 +41,10 @@ import SocketHelper, {
   SocketCommands,
   SocketEvents,
   type TOptSocket,
+  type TEditFileData,
 } from "@docspace/ui-kit/utils/socket";
+
+import { useFilesListStore } from "../_store/FilesListStore";
 
 export default function useFilesSocket(
   socketUrl: string,
@@ -51,6 +54,10 @@ export default function useFilesSocket(
   const isInit = useRef(false);
   const onFilesUpdatedRef = useRef(onFilesUpdated);
   onFilesUpdatedRef.current = onFilesUpdated;
+
+  const filesListStore = useFilesListStore();
+  const filesListStoreRef = useRef(filesListStore);
+  filesListStoreRef.current = filesListStore;
 
   useEffect(() => {
     if (!socketUrl || isInit.current) return;
@@ -70,6 +77,33 @@ export default function useFilesSocket(
     };
   }, [socketUrl, folderId]);
 
+  // Subscribe to FILE-{id} for each file in the current folder so we receive
+  // StartEditFile / StopEditFile events for them.
+  useEffect(() => {
+    if (!socketUrl) return;
+
+    const { items } = filesListStoreRef.current;
+    const fileIds = items
+      .filter((item) => !item.isFolder)
+      .map((item) => `FILE-${item.id}`);
+
+    if (fileIds.length === 0) return;
+
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: fileIds,
+      individual: true,
+    });
+
+    return () => {
+      SocketHelper?.emit(SocketCommands.Unsubscribe, {
+        roomParts: fileIds,
+        individual: true,
+      });
+    };
+  // Re-subscribe whenever the file list changes (new files loaded / folder changed).
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [socketUrl, filesListStore.items]);
+
   const handleModifyFolder = useCallback((opt?: TOptSocket) => {
     if (!opt?.cmd) return;
 
@@ -78,13 +112,40 @@ export default function useFilesSocket(
     }
   }, []);
 
+  const handleStartEditFile = useCallback((data: TEditFileData) => {
+    const fileId = typeof data === "object" ? data.fileId : data;
+    const pathParts = `FILE-${fileId}`;
+
+    if (!SocketHelper?.socketSubscribers.has(pathParts)) return;
+
+    const editingBy =
+      typeof data === "object" ? data.editingBy : undefined;
+
+    filesListStoreRef.current.updateItemEditing(fileId, true);
+    filesListStoreRef.current.updateItemActiveEditors(fileId, editingBy);
+  }, []);
+
+  const handleStopEditFile = useCallback((data: TEditFileData) => {
+    const fileId = typeof data === "object" ? data.fileId : data;
+    const pathParts = `FILE-${fileId}`;
+
+    if (!SocketHelper?.socketSubscribers.has(pathParts)) return;
+
+    filesListStoreRef.current.updateItemEditing(fileId, false);
+    filesListStoreRef.current.updateItemActiveEditors(fileId, undefined);
+  }, []);
+
   useEffect(() => {
     if (!socketUrl) return;
 
     SocketHelper?.on(SocketEvents.ModifyFolder, handleModifyFolder);
+    SocketHelper?.on(SocketEvents.StartEditFile, handleStartEditFile);
+    SocketHelper?.on(SocketEvents.StopEditFile, handleStopEditFile);
 
     return () => {
       SocketHelper?.off(SocketEvents.ModifyFolder, handleModifyFolder);
+      SocketHelper?.off(SocketEvents.StartEditFile, handleStartEditFile);
+      SocketHelper?.off(SocketEvents.StopEditFile, handleStopEditFile);
     };
-  }, [socketUrl, handleModifyFolder]);
+  }, [socketUrl, handleModifyFolder, handleStartEditFile, handleStopEditFile]);
 }

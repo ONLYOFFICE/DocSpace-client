@@ -1,0 +1,29 @@
+{
+  "key_path": "ReachedOutPayerForPayment",
+  "content": "To link a new payment method, please reach out to the payer",
+  "content_en_sha1_hash": "a4c92e6ac76bd8ae69aa63e03f0f17c84f194da6",
+  "created_at": "2026-05-25T18:26:11.944Z",
+  "updated_at": "2026-05-25T18:28:19.894Z",
+  "comment": {
+    "text": "Instructional text in the payment method section that appears when the wallet status is inactive, informing the user to contact the payer to link a new payment method.",
+    "is_auto": true,
+    "updated_at": "2026-05-25T18:28:19.894Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
+      "line_number": 213,
+      "context": "testId=\"go_to_stripe_button\"\n />\n </div>\n ) : walletCustomerStatusNotActive ? (\n <Text className={styles.reachOutPayer}>\n {t(\"ReachedOutPayerForPayment\")}\n </Text>\n ) : null}\n </>\n );",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

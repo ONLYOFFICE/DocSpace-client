@@ -74,11 +74,13 @@ const getSelectedProviderOption = (
   aiProviders?: TAiProvider[],
   selectedProviderId?: number | null,
 ): TOption => {
-  if (!aiProviders || !selectedProviderId) return { key: "-2", label: "" };
+  if (!aiProviders || !aiProviders.length || !selectedProviderId)
+    return { key: "-2", label: "" };
 
   const provider =
     aiProviders.find((p) => p.id === selectedProviderId) || aiProviders[0];
-  return { key: provider?.id, label: provider.title };
+
+  return { key: provider.id, label: provider.title };
 };
 
 const DefaultProviderComponent = ({

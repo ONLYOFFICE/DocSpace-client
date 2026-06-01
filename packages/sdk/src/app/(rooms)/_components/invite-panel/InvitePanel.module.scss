@@ -189,7 +189,7 @@
 
   :global(.access-selector) {
     margin-inline-start: auto;
-    margin-inline-end: 0;
+    margin-inline-end: 0 !important;
 
     &.hasWarning {
       margin-inline-start: 0;

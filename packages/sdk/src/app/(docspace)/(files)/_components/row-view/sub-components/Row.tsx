@@ -41,6 +41,7 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { FolderType } from "@docspace/shared/enums";
 import {
   FilesRow,
   FilesRowWrapper,
@@ -51,6 +52,7 @@ import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-
 import { useDecryptedFilename } from "@/app/(docspace)/_hooks/useDecryptedFilename";
 import Badges from "@docspace/shared/components/badges";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
+import EditorsTooltip from "../../editors-tooltip";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
@@ -61,6 +63,7 @@ import useFavoritesActions from "@/app/(docspace)/_hooks/useFavoritesActions";
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import useContextMenuModel from "../../../../_hooks/useContextMenuModel";
 import { ShareContext } from "../../../../_contexts/ShareContext";
+import { CopyShareLinkContext } from "../../../../_contexts/CopyShareLinkContext";
 import { InfoContext } from "../../../../_contexts/InfoContext";
 import { DeleteContext } from "../../../../_contexts/DeleteContext";
 import { FileOperationsContext } from "../../../../_contexts/FileOperationsContext";
@@ -84,6 +87,7 @@ const Row = observer(
     displayFileExtension,
     isSSR,
     isPrivate,
+    currentUserId,
   }: RowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
@@ -109,6 +113,7 @@ const Row = observer(
     const { openFile, lockFile } = useFilesActions({ t });
     const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });
     const onShareClick = React.useContext(ShareContext);
+    const onCopyShareLink = React.useContext(CopyShareLinkContext);
     const onInfoClick = React.useContext(InfoContext);
     const deleteCtx = React.useContext(DeleteContext);
     const fileOpsCtx = React.useContext(FileOperationsContext);
@@ -162,6 +167,10 @@ const Row = observer(
       }
     };
 
+    const editorsTooltip = (
+      <EditorsTooltip item={observableItem} currentUserId={currentUserId} />
+    );
+
     const badgesComponent = (
       <Badges
         className={styles.badgesComponent}
@@ -171,6 +180,7 @@ const Row = observer(
         viewAs="row"
         showNew={false}
         isExtsCustomFilter={isExtsCustomFilter}
+        editorsTooltip={editorsTooltip}
         onFilesClick={() => {
           if (!observableItem.isFolder) {
             openFile(observableItem);
@@ -191,9 +201,12 @@ const Row = observer(
       />
     );
 
-    const handleShareClick = React.useCallback(() => {
-      onShareClick?.(observableItem);
-    }, [onShareClick, observableItem]);
+    const handleCopyShareLink = React.useCallback(() => {
+      onCopyShareLink?.(observableItem);
+    }, [onCopyShareLink, observableItem]);
+
+    const isTrashFolder =
+      filesListStore.rootFolderType === FolderType.TRASH;
 
     const quickButtonsComponent = (
       <QuickButtons
@@ -202,8 +215,9 @@ const Row = observer(
         viewAs="row"
         onClickFavorite={onClickFavorite}
         onClickLock={onClickLock}
-        onClickShare={onShareClick ? handleShareClick : undefined}
-        openShareTab={onShareClick ? handleShareClick : undefined}
+        onClickShare={onCopyShareLink ? handleCopyShareLink : undefined}
+        openShareTab={onCopyShareLink ? handleCopyShareLink : undefined}
+        isTrashFolder={isTrashFolder}
       />
     );
 

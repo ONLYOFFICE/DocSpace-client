@@ -41,6 +41,7 @@ import DuplicateReactSvgUrl from "PUBLIC_DIR/images/icons/16/duplicate.react.svg
 import ReconnectSvgUrl from "PUBLIC_DIR/images/reconnect.svg?url";
 import EditRoomReactSvgUrl from "PUBLIC_DIR/images/settings.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
+import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import MoreOptionsReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import MuteReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
 import UnmuteReactSvgUrl from "PUBLIC_DIR/images/unmute.react.svg?url";
@@ -50,6 +51,8 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import useDownloadActions from "@/app/(docspace)/_hooks/useDownloadActions";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
+import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
+import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
 import type {
   TFolderItem,
   TFileItem,
@@ -60,12 +63,16 @@ import { RoomsRefreshContext } from "../_contexts/RoomsRefreshContext";
 type TRoomItem = TFolderItem & {
   pinned?: boolean;
   mute?: boolean;
+  inRoom?: boolean;
   security?: {
     Pin?: boolean;
     ChangeOwner?: boolean;
     Download?: boolean;
     EditRoom?: boolean;
+    EditAccess?: boolean;
     Mute?: boolean;
+    Move?: boolean;
+    Delete?: boolean;
   };
 };
 
@@ -86,6 +93,7 @@ export default function useRoomContextMenuModel(
   const { t } = useTranslation(["Common", "Files"]);
   const refreshRooms = useContext(RoomsRefreshContext);
   const filesSelectionStore = useFilesSelectionStore();
+  const dialogsStore = useDialogsStore();
   const { openFolder } = useFolderActions({ t });
   const { downloadAction } = useDownloadActions();
 
@@ -100,10 +108,13 @@ export default function useRoomContextMenuModel(
         }
         refreshRooms?.();
       };
-
       const handleMute = async () => {
         await api.settings.muteRoomNotification(room.id, !room.mute);
         onRoomChanged?.(room.id);
+      };
+      const handleLeave = () => {
+        filesSelectionStore.setBufferSelection(room);
+        dialogsStore.openDialog(SDKDialogs.LeaveRoom);
       };
 
       if (isArchive) {
@@ -149,6 +160,42 @@ export default function useRoomContextMenuModel(
         ];
       }
 
+      const moreOptionsItems: ContextMenuModel[] = [
+        {
+          id: "option_download",
+          key: "download",
+          label: t("Common:Download"),
+          icon: DownloadReactSvgUrl,
+          onClick: () => downloadAction(item),
+          disabled: !room.security?.Download,
+        },
+        {
+          id: "option_duplicate",
+          key: "duplicate",
+          label: t("Common:Duplicate"),
+          icon: DuplicateReactSvgUrl,
+          disabled: true,
+        },
+        {
+          id: "option_room-info",
+          key: "room-info",
+          label: t("Common:RoomInfo"),
+          icon: InfoOutlineReactSvgUrl,
+          onClick: () => onInfoRoom?.(room),
+        },
+      ];
+
+      if (room.security?.ChangeOwner) {
+        moreOptionsItems.push({ key: "separator-owner", isSeparator: true });
+        moreOptionsItems.push({
+          id: "option_change-room-owner",
+          key: "change-room-owner",
+          label: t("Common:ChangeRoomOwner"),
+          icon: ReconnectSvgUrl,
+          onClick: () => onChangeOwner?.(room),
+        });
+      }
+
       const mainItems: ContextMenuModel[] = [
         {
           id: "option_open",
@@ -181,7 +228,7 @@ export default function useRoomContextMenuModel(
             : t("Common:DisableNotifications"),
           icon: room.mute ? UnmuteReactSvgUrl : MuteReactSvgUrl,
           onClick: handleMute,
-          disabled: !room.security?.Mute,
+          disabled: !room.security?.Mute || !room.inRoom,
         },
         { key: "separator-mute", isSeparator: true },
         {
@@ -205,56 +252,44 @@ export default function useRoomContextMenuModel(
           key: "more-options",
           label: t("Common:MoreOptions"),
           icon: MoreOptionsReactSvgUrl,
-          items: [
-            {
-              id: "option_download",
-              key: "download",
-              label: t("Common:Download"),
-              icon: DownloadReactSvgUrl,
-              onClick: () => downloadAction(item),
-              disabled: !room.security?.Download,
-            },
-            {
-              id: "option_duplicate",
-              key: "duplicate",
-              label: t("Common:Duplicate"),
-              icon: DuplicateReactSvgUrl,
-              disabled: true,
-            },
-            {
-              id: "option_room-info",
-              key: "room-info",
-              label: t("Common:RoomInfo"),
-              icon: InfoOutlineReactSvgUrl,
-              onClick: () => onInfoRoom?.(room),
-            },
-            { key: "separator-owner", isSeparator: true },
-            {
-              id: "option_change-room-owner",
-              key: "change-room-owner",
-              label: t("Common:ChangeRoomOwner"),
-              icon: ReconnectSvgUrl,
-              onClick: () => onChangeOwner?.(room),
-              disabled: !room.security?.ChangeOwner,
-            },
-          ],
-        },
-        { key: "separator-archive", isSeparator: true },
-        {
-          id: "option_move-to-archive",
-          key: "move-to-archive",
-          label: t("Common:MoveToArchive"),
-          icon: RoomArchiveSvgUrl,
-          onClick: () => onArchiveRoom?.(room),
-        },
-        {
-          id: "option_delete-room",
-          key: "delete-room",
-          label: t("Common:DeleteRoom"),
-          icon: TrashReactSvgUrl,
-          onClick: () => onDeleteRoom?.(room),
+          items: moreOptionsItems,
         },
       ];
+
+      const canLeave = !!room.inRoom;
+      const canArchive = !!room.security?.Move;
+      const canDelete = !!room.security?.Delete;
+
+      if (canLeave || canArchive || canDelete) {
+        mainItems.push({ key: "separator-archive", isSeparator: true });
+        if (canLeave) {
+          mainItems.push({
+            id: "option_leave-room",
+            key: "leave-room",
+            label: t("Common:LeaveTheRoom"),
+            icon: LeaveRoomSvgUrl,
+            onClick: handleLeave,
+          });
+        }
+        if (canArchive) {
+          mainItems.push({
+            id: "option_move-to-archive",
+            key: "move-to-archive",
+            label: t("Common:MoveToArchive"),
+            icon: RoomArchiveSvgUrl,
+            onClick: () => onArchiveRoom?.(room),
+          });
+        }
+        if (canDelete) {
+          mainItems.push({
+            id: "option_delete-room",
+            key: "delete-room",
+            label: t("Common:DeleteRoom"),
+            icon: TrashReactSvgUrl,
+            onClick: () => onDeleteRoom?.(room),
+          });
+        }
+      }
 
       return mainItems;
     },
@@ -273,6 +308,7 @@ export default function useRoomContextMenuModel(
       onInviteRoom,
       isArchive,
       filesSelectionStore,
+      dialogsStore,
     ],
   );
 

@@ -60,7 +60,7 @@
   "LdapSettingsValidUntil": "Veljavno do",
   "LdapSyncButton": "Sinhroniziraj uporabnike",
   "LdapSyncCronTitle": "Tukaj se lahko nastavi, kako pogosto želiš samodejno sinhronizirati uporabnike LDAP",
-  "LdapSyncDescription": "Sinhronizacija podatkov LDAP je način za sinhronizacijo sprememb podatkov med vašim portalom in strežnikom LDAP. Omogoči možnost  ‘Samodejna sinhronizacija‘ in nastavi časovno obdobje za samodejno posodabljanje informacij.",
+  "LdapSyncDescription": "Sinhronizacija podatkov LDAP je način za sinhronizacijo sprememb podatkov med vašim portalom in strežnikom LDAP. Omogoči možnost »Samodejna sinhronizacija« in nastavi časovno obdobje za samodejno posodabljanje informacij.",
   "LdapSyncTitle": "Sinhroniziraj LDAP podatke",
   "LdapToggle": "LDAP preverjanje pristnosti",
   "LdapToggleDescription": "Omogoči to možnost, če želiš samodejno dodati uporabnike iz strežnika LDAP v {{productName}}. Dodani uporabniki bodo lahko avtorizirali s svojimi poverilnicami strežnika LDAP. {{productName}} ne shranjuje uporabniških gesel lokalno in bo preverjal pristnost uporabnikov, ki pošljejo svojo prijavo in geslo v strežnik LDAP.",

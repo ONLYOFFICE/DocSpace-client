@@ -45,6 +45,7 @@ import {
 } from "@docspace/ui-kit/utils/date";
 
 import {
+  AnalyticsEvents,
   EmployeeType,
   ShareAccessRights,
   RoomsType,
@@ -464,6 +465,21 @@ const InvitePanel = ({
 
       if (!isRooms) {
         setIsNewUserByCurrentUser(true);
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: AnalyticsEvents.UserInvited,
+          count: invitations.length,
+          context: "invite_panel",
+        });
+      } else {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: AnalyticsEvents.RoomShared,
+          roomId,
+          count: invitations.length,
+          context: "invite_panel",
+          parentId: selectedRoom?.parentId,
+        });
       }
       setIsLoading(false);
 

@@ -1,14 +1,14 @@
 {
   "key_path": "InvitationToAgent",
-  "content": "<1>{{displayName}}</1> invites you to join the {{aiAgent}} <1>{{agentName}}</1>.",
-  "content_en_sha1_hash": "c291e936eeda4cfe61676f56a30dc6bdc0b1815d",
-  "created_at": "2025-12-19T10:16:30.756Z",
-  "updated_at": "2026-05-15T14:00:06.917Z",
+  "content": "<1>{{displayName}}</1> invites you to join the AI agent <1>{{agentName}}</1>.",
+  "content_en_sha1_hash": "219914f391293ff45a679d1db1a94472c58701ce",
+  "created_at": "2026-05-25T18:26:08.331Z",
+  "updated_at": "2026-05-25T18:32:09.613Z",
   "comment": {
-    "text": "This is a greeting message displayed when a user is invited to an AI agent. It informs the user who invited them (`{{displayName}}`), the type of agent (`{{aiAgent}}`), and the agent's name (`<1>{{agentName}}</1>`).",
+    "text": "A message in the greeting container shown when a user is invited to an AI agent room, where `{{displayName}}` is the inviter and `{{agentName}}` is the AI agent.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:50:38.499Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-05-25T18:32:09.613Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

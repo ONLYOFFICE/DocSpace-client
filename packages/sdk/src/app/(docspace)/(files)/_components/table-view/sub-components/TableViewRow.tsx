@@ -48,8 +48,10 @@ import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
+import { FolderType } from "@docspace/shared/enums";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import Badges from "@docspace/shared/components/badges";
+import EditorsTooltip from "../../editors-tooltip";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
@@ -59,6 +61,7 @@ import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import useFavoritesActions from "@/app/(docspace)/_hooks/useFavoritesActions";
 import useContextMenuModel from "../../../../_hooks/useContextMenuModel";
 import { ShareContext } from "../../../../_contexts/ShareContext";
+import { CopyShareLinkContext } from "../../../../_contexts/CopyShareLinkContext";
 import { InfoContext } from "../../../../_contexts/InfoContext";
 import { DeleteContext } from "../../../../_contexts/DeleteContext";
 import { FileOperationsContext } from "../../../../_contexts/FileOperationsContext";
@@ -101,6 +104,7 @@ const TableViewRow = observer(
     const { openFolder } = useFolderActions({ t });
     const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });
     const onShareClick = React.useContext(ShareContext);
+    const onCopyShareLink = React.useContext(CopyShareLinkContext);
     const onInfoClick = React.useContext(InfoContext);
     const deleteCtx = React.useContext(DeleteContext);
     const fileOpsCtx = React.useContext(FileOperationsContext);
@@ -169,6 +173,7 @@ const TableViewRow = observer(
     );
 
     const onRowClick = React.useCallback(() => {
+      if (filesSelectionStore.isCheckedItem(item)) return;
       filesSelectionStore.setSelection([]);
       filesSelectionStore.setBufferSelection(item);
     }, [filesSelectionStore, item]);
@@ -207,14 +212,18 @@ const TableViewRow = observer(
       }
     }, [observableItem, lockFile]);
 
-    const handleShareClick = React.useCallback(() => {
-      onShareClick?.(observableItem);
-    }, [onShareClick, observableItem]);
+    const handleCopyShareLink = React.useCallback(() => {
+      onCopyShareLink?.(observableItem);
+    }, [onCopyShareLink, observableItem]);
 
     // Spread observable item to create a new object reference when MobX
     // properties change, so that QuickButtons memo(fast-deep-equal) detects
     // the update (same proxy ref would short-circuit to true).
     const itemSnapshot = { ...observableItem };
+
+    const editorsTooltip = (
+      <EditorsTooltip item={observableItem} currentUserId={currentUserId} />
+    );
 
     const badgesNode = (
       <div className={styles.badgesContainer}>
@@ -225,6 +234,7 @@ const TableViewRow = observer(
           viewAs="table"
           showNew={false}
           isExtsCustomFilter={isExtsCustomFilter}
+          editorsTooltip={editorsTooltip}
           onFilesClick={() => {
             if (!observableItem.isFolder) {
               openFile(observableItem);
@@ -246,6 +256,9 @@ const TableViewRow = observer(
       </div>
     );
 
+    const isTrashFolder =
+      filesListStore.rootFolderType === FolderType.TRASH;
+
     const quickButtonsNode = (
       <div className={styles.quickButtonsContainer}>
         <QuickButtons
@@ -254,8 +267,9 @@ const TableViewRow = observer(
           viewAs="table"
           onClickFavorite={onClickFavorite}
           onClickLock={onClickLock}
-          onClickShare={onShareClick ? handleShareClick : undefined}
-          openShareTab={onShareClick ? handleShareClick : undefined}
+          onClickShare={onCopyShareLink ? handleCopyShareLink : undefined}
+          openShareTab={onCopyShareLink ? handleCopyShareLink : undefined}
+          isTrashFolder={isTrashFolder}
         />
       </div>
     );

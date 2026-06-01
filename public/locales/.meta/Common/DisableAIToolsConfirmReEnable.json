@@ -3,7 +3,7 @@
   "content": "You can re-enable the service at any time. Are you sure you want to continue?",
   "content_en_sha1_hash": "b3b580c3b08cb6b409db90421bcaab456bfbad2d",
   "created_at": "2026-04-10T13:53:45.008Z",
-  "updated_at": "2026-05-15T14:00:07.001Z",
+  "updated_at": "2026-05-27T14:11:50.764Z",
   "comment": {
     "text": "This is a confirmation dialog message that appears when a user attempts to disable AI tools, reassuring them that the service can be re-enabled later.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/index.tsx",
-      "line_number": 208,
+      "line_number": 215,
       "context": "values={{ balance: formatAiServiceCurrency() }}\n components={{\n 1: <span style={{ fontWeight: 600 }} />,\n }}\n />,\n t(\"DisableAIToolsConfirmReEnable\"),\n ]\n : [\n t(\"AIToolsDescription\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,",
       "module": "/libs/ui-kit"
     },

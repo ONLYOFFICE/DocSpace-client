@@ -373,6 +373,7 @@ function WizardForm(props: WizardFormProps) {
           tabIndex={2}
           size={InputSize.large}
           scale
+          inputName="password"
           inputValue={password}
           inputType={InputType.password}
           passwordSettings={passwordSettings}

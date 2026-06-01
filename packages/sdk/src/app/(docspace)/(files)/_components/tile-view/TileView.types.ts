@@ -46,6 +46,7 @@ export type TileViewProps = {
   currentFolderId: string | number;
   filesLength: number;
   isPrivate?: boolean;
+  currentUserId?: string;
 };
 
 export type TileProps = {
@@ -53,6 +54,7 @@ export type TileProps = {
   getIcon: TGetIcon;
   index: number;
   isPrivate?: boolean;
+  currentUserId?: string;
 };
 
 export type TileContentProps = {

@@ -97,6 +97,40 @@ export const getDefaultFileName = (format) => {
   }
 };
 
+export const getDefaultFileTestIdPrefix = (format) => {
+  switch (format) {
+    case "docx":
+      return "new_document";
+    case "xlsx":
+      return "new_spreadsheet";
+    case "pptx":
+      return "new_presentation";
+    case "pdf":
+      return "new_pdf_form";
+    default:
+      return "new_folder";
+  }
+};
+
+export const getCreateModalEntityType = (extension) => {
+  switch (extension) {
+    case "docx":
+      return "document";
+    case "xlsx":
+      return "spreadsheet";
+    case "pptx":
+      return "presentation";
+    case "pdf":
+      return "pdf-form";
+    case "":
+    case null:
+    case undefined:
+      return "folder";
+    default:
+      return null;
+  }
+};
+
 export const getUnexpectedErrorText = () => {
   return i18n.t("Common:UnexpectedError");
 };

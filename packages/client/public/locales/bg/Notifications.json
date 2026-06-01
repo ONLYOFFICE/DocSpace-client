@@ -10,7 +10,7 @@
   "NotConfigured": "Не е конфигурирано",
   "Notifications": "Известия",
   "RoomsActivityDescription": "Получавайте незабавни известия по имейл за нови споделени файлове/доки и активност в вашите {{rooms}} и {{aiAgents}}.",
-  "RoomUpdateNotify": "Сподеян съдържание, {{rooms}} и активност на {{aiAgents}}",
+  "RoomUpdateNotify": "Сподеян съдържание, активност в секциите {{rooms}} и {{aiAgents}}",
   "SettingUpNotifications": "Настройка на известия",
   "SuccessConnected": "{{serviceName}} беше успешно свързан като канал за известия. Сега ще получавате актуализации там.",
   "SuccessDisconnected": "{{serviceName}} беше успешно премахнат като канал за известия. Известия вече няма да се изпращат там.",

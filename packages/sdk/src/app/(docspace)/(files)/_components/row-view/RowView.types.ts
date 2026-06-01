@@ -44,6 +44,7 @@ export type RowContentProps = {
   timezone: string;
   displayFileExtension: boolean;
   badgesComponent?: React.ReactNode;
+  currentUserId?: string;
 };
 
 export type RowProps = RowContentProps & {
@@ -59,7 +60,7 @@ export type RowViewProps = Pick<
   total: number;
   hasMoreFiles: boolean;
   items: (TFolderItem | TFileItem)[];
-
+  currentUserId?: string;
   fetchMoreFiles: (params: IndexRange) => Promise<void>;
   isPrivate?: boolean;
 };

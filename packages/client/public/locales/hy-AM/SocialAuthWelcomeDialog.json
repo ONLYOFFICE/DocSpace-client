@@ -4,5 +4,8 @@
   "ContinueToProduct": "Շարունակել՝  {{productName}}",
   "GeneratedPassword": "Գեներացված գաղտնաբառ",
   "ProductNameDetail": "{{productName}} անուն",
-  "ReviewAccountDetails": "Խնդրում ենք մի պահ ծախսել ձեր հաշվի մանրամասները վերանայելու համար:"
+  "ReviewAccountDetails": "Խնդրում ենք մի պահ ծախսել ձեր հաշվի մանրամասները վերանայելու համար:",
+  "SetEmailPassword": "Սահմանել գաղտնաբառ",
+  "WelcomeSubtitle": "Ձեր տարածքը հաջողությամբ ստեղծվել է: Ստուգեք ձեր հաշվի մանրամասները և սկսեք աշխատել:",
+  "YourProfileDetails": "Ձեր հաշվի մանրամասները"
 }

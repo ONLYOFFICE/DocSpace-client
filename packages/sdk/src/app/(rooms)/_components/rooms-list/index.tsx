@@ -80,6 +80,7 @@ import RestoreRoomDialog from "../restore-room-dialog";
 import DeleteRoomDialog from "../delete-room-dialog";
 import MoveToArchiveDialog from "../move-to-archive-dialog";
 import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
+import { useRoomsTagsStore } from "../../_store/RoomsTagsStore";
 import useResetSelectionClick from "@/app/(docspace)/(files)/_components/list/hooks/useResetSelectionClick";
 
 type RoomsListProps = {
@@ -115,6 +116,7 @@ const RoomsList = ({
   const { setIsEmptyList, filesViewAs, setFilesViewAs, currentDeviceType } =
     useSettingsStore();
   const filesListStore = useFilesListStore();
+  const tagsStore = useRoomsTagsStore();
   const { setRootFolderType } = filesListStore;
   const { setSelection, setBufferSelection } = useFilesSelectionStore();
   const navigationStore = useNavigationStore();
@@ -412,11 +414,15 @@ const RoomsList = ({
           updatedRoom as unknown as TFolder,
         );
         filesListStore.replaceItem(roomId, updatedItem);
+        const updatedTags = (updatedRoom as unknown as { tags?: string[] }).tags;
+        if (Array.isArray(updatedTags) && updatedTags.length > 0) {
+          tagsStore.upsertTags(updatedTags);
+        }
       } catch {
         // ignore
       }
     },
-    [convertFolderToItem, filesListStore],
+    [convertFolderToItem, filesListStore, tagsStore],
   );
 
   const requestRunning = React.useRef(false);

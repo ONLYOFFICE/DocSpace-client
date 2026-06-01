@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) Ascensio System SIA, 2009-2026
  *
  * This program is a free software product. You can redistribute it and/or
@@ -33,7 +33,17 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export { DocsChatHeaderPanel } from "./AiChatHeaderPanel";
-export { DocsChatBodyPanel } from "./DocsChatBody";
-export { default as AiChatTrigger } from "./AiChatTrigger";
-export { useOpenAiChat } from "./useOpenAiChat";
+import React from "react";
+
+import type { TFileItem } from "../_hooks/useItemList";
+
+/**
+ * When set, provides a callback that opens the AI chat panel and attaches the
+ * given file to its composer. Surfaced as the "AI features → Ask AI" entry in
+ * the file context menu. Only personal-files wires this (it owns the AI chat
+ * panel + attachments store); elsewhere it stays `null` and the entry is
+ * hidden. Mirrors the [[ShareContext]] wiring pattern.
+ */
+export const AskAIContext = React.createContext<
+  ((item: TFileItem) => void) | null
+>(null);

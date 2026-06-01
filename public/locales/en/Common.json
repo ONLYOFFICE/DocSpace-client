@@ -99,6 +99,7 @@
   "AIDisabledInfoBlockAdminStandaloneDescription": "AI capabilities are currently turned off, which means this agent can’t process chats or tasks. Connect your own AI service to unlock advanced features in {{productName}}.",
   "AIDisabledInfoBlockUserDescription": "AI capabilities are currently turned off, which means this agent can’t process chats or tasks. To get back on track, ask your {{productName}} admin to enable AI features.",
   "AIFeature": "AI feature",
+  "AIFeatures": "AI features",
   "AIFeaturesAreCurrentlyDisabled": "AI features are currently disabled",
   "AIGetStartedStep1Description": "Transfer credits from your {{productName}} wallet to {{organizationName}} AI. If your wallet is empty, top it up first. Credits never expire.",
   "AIGetStartedStep1Title": "Add funds to your AI balance",

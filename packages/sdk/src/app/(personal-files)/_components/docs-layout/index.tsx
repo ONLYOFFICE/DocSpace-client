@@ -46,7 +46,7 @@ import type {
 } from "@docspace/shared/api/files/types";
 import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TPathParts } from "@docspace/shared/types";
-import { FolderType, DeviceType } from "@docspace/shared/enums";
+import { FolderType, DeviceType, FileType } from "@docspace/shared/enums";
 import FilesSelector from "@docspace/ui-kit/selectors/Files";
 import type {
   FilesSelectorProps,
@@ -79,6 +79,7 @@ import { FileOperationsContext } from "@/app/(docspace)/_contexts/FileOperations
 import { RenameContext } from "@/app/(docspace)/_contexts/RenameContext";
 import { VersionHistoryContext } from "@/app/(docspace)/_contexts/VersionHistoryContext";
 import { ConvertContext } from "@/app/(docspace)/_contexts/ConvertContext";
+import { AskAIContext } from "@/app/(docspace)/_contexts/AskAIContext";
 import type {
   TFileItem,
   TFolderItem,
@@ -112,6 +113,8 @@ import useConvertActions from "../../_hooks/useConvertActions";
 import { useDocsSettingsStore } from "../../_store/DocsSettingsStore";
 import { useDocsUserStore } from "../../_store/DocsUserStore";
 import { useAiChatStore } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
+import { useStores } from "@docspace/ui-kit/ai-agent/providers";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import type { SelectorMode } from "../../_hooks/useFileOperations";
 import { useDocsFrameBridge } from "../../_hooks/useDocsFrameBridge";
 
@@ -127,7 +130,10 @@ import {
   AiChatTrigger,
   DocsChatBodyPanel,
   DocsChatHeaderPanel,
+  useOpenAiChat,
 } from "../ai-chat-panel";
+import { getOnlyofficeFileType } from "../ai-agent-providers/onlyoffice-file-type";
+import { attachFilesToChat } from "../ai-agent-providers/attach-files";
 
 import styles from "./DocsLayout.module.scss";
 
@@ -213,6 +219,8 @@ const DocsLayout = observer(
     } = docsActions;
 
     const aiChatStore = useAiChatStore();
+    const { useAttachmentsStore } = useStores();
+    const openChat = useOpenAiChat();
     const isAiChatPanelFullscreen = aiChatStore.effectiveFullscreen;
     const isAiChatPanelVisible = aiChatStore.isVisible;
 
@@ -389,7 +397,41 @@ const DocsLayout = observer(
       [versionHistoryStore],
     );
 
-    const layoutMode = isAiChatPanelFullscreen ? "ai-fullscreen" : "default";
+    // "AI features → Ask AI": open the chat panel and drop the file into the
+    // composer as an attachment. Opening a closed panel starts a fresh chat
+    // (via openChat); doing this in an already-open chat keeps the current
+    // conversation and just appends the file. The menu entry is only shown
+    // for supported files (see useContextMenuModel).
+    const askAIHandler = React.useCallback(
+      (item: TFileItem) => {
+        openChat();
+
+        const input = {
+          path: String(item.id),
+          // TFileItem.title already includes the extension.
+          title: item.title,
+          type: getOnlyofficeFileType(item.fileExst || item.title),
+          content: "",
+        };
+
+        const imageIndices =
+          item.fileType === FileType.Image ? new Set([0]) : new Set<number>();
+
+        attachFilesToChat(useAttachmentsStore, [input], imageIndices).catch(
+          (e) => toastr.error(e as string),
+        );
+      },
+      [openChat, useAttachmentsStore],
+    );
+
+    // Only collapse the docs layout when the chat is actually on screen.
+    // `effectiveFullscreen` can be forced on while the panel is closed (e.g.
+    // when AI isn't configured yet), and applying the fullscreen layout then
+    // would hide the whole section with no chat to replace it.
+    const layoutMode =
+      isAiChatPanelVisible && isAiChatPanelFullscreen
+        ? "ai-fullscreen"
+        : "default";
 
     useDocsHotkeys({
       onOpenFile: (item) => {
@@ -414,6 +456,7 @@ const DocsLayout = observer(
                       value={versionHistoryHandler}
                     >
                       <ConvertContext.Provider value={requestConvert}>
+                       <AskAIContext.Provider value={askAIHandler}>
                         <div
                           className={styles.root}
                           style={frameHeaderVars}
@@ -678,6 +721,7 @@ const DocsLayout = observer(
                             }
                           />
                         </div>
+                       </AskAIContext.Provider>
                       </ConvertContext.Provider>
                     </VersionHistoryContext.Provider>
                   </FileOperationsContext.Provider>

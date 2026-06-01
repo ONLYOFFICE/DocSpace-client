@@ -51,6 +51,7 @@ import UploadIconUrl from "PUBLIC_DIR/images/icons/16/upload.react.svg?url";
 import useDeviceType from "@/hooks/useDeviceType";
 
 import { getOnlyofficeFileType } from "./onlyoffice-file-type";
+import { attachFilesToChat } from "./attach-files";
 
 type DocSpaceFilesAttachDialogProps = {
   onClose: () => void;
@@ -130,41 +131,11 @@ const DocSpaceFilesAttachDialog = observer(
         // Optimistic close — the chip will appear once saveFilesMany resolves.
         onClose();
 
-        if (inputs.length === 0) return;
-
-        const before =
-          useAttachmentsStore.getState().attachmentFiles.length;
-
         try {
-          await useAttachmentsStore.getState().addAttachmentFile(inputs);
+          await attachFilesToChat(useAttachmentsStore, inputs, imageIndices);
         } catch (e) {
           toastr.error(e as TData);
-          return;
         }
-
-        if (imageIndices.size === 0) return;
-
-        // Library hardcodes `kind: "file"` for refs produced by
-        // `addAttachmentFile`, even when the backend resolved the record
-        // as an image. Move image refs to `attachmentImages` so `FileItem`
-        // pulls the presigned URL via `api.attachments.get(id)` and renders
-        // the preview instead of the unknown-format icon.
-        useAttachmentsStore.setState((s) => {
-          const added = s.attachmentFiles.slice(before);
-          const stayingFiles = s.attachmentFiles.slice(0, before);
-          const movedImages: typeof s.attachmentImages = [];
-          added.forEach((ref, i) => {
-            if (imageIndices.has(i)) {
-              movedImages.push({ ...ref, kind: "image" });
-            } else {
-              stayingFiles.push(ref);
-            }
-          });
-          return {
-            attachmentFiles: stayingFiles,
-            attachmentImages: [...s.attachmentImages, ...movedImages],
-          };
-        });
       },
       [onClose, useAttachmentsStore],
     );

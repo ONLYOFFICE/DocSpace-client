@@ -12,7 +12,24 @@
   --info-panel-width: 100vw;
   --info-panel-tablet-width: 100vw;
 
-  &:global(.info-panel) {
+  // The chat panel takes over the whole layout. The files section (#section)
+  // and the info panel are siblings in the same flex row, so widening the
+  // panel to 100vw isn't enough on its own: #section has min-width:auto, and
+  // its content (the "Create new" banner + file list) imposes a min-content
+  // floor that flexbox can't shrink past — the 100vw panel ends up squeezed
+  // beside the leftover section. Collapse the section to nothing so the
+  // panel fills the viewport.
+  //
+  // Safe to apply unconditionally here: `ai-fullscreen` is only set when the
+  // chat panel is actually visible (see `layoutMode` in index.tsx).
+  :global(#section) {
+    flex: 0 0 0 !important;
+    min-width: 0 !important;
+    width: 0 !important;
+    overflow: hidden;
+  }
+
+  :global(.info-panel) {
     max-width: 100vw !important;
   }
 }
@@ -38,12 +55,12 @@
 }
 
 .root :global(.layout-progress-bar_wrapper) {
-	@include mixins.tablet-and-below {
-		position: absolute;
-		z-index: 300;
-		inset-inline-end: 16px;
-		bottom: 16px;
-	}
+  @include mixins.tablet-and-below {
+    position: absolute;
+    z-index: 300;
+    inset-inline-end: 16px;
+    bottom: 16px;
+  }
 }
 
 .sectionArea {
@@ -76,15 +93,15 @@
 }
 
 .createNewSection {
-	padding-block: 19px 16px;
-	flex-shrink: 0;
+  padding-block: 19px 16px;
+  flex-shrink: 0;
 }
 
 .createNewTitle {
-	margin: 0 0 16px;
-	font-size: 18px;
-	font-weight: 700;
-	line-height: 24px;
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
 }
 
 .quickActions {
@@ -100,3 +117,4 @@
   gap: 16px;
   width: 100%;
 }
+

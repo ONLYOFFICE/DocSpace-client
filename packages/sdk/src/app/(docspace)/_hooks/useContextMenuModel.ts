@@ -4,6 +4,8 @@ import { isMobile } from "react-device-detect";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
+import { CHAT_SUPPORTED_FORMATS } from "@docspace/ui-kit/ai-agent/chat/Chat.constants";
+import { FileType } from "@docspace/shared/enums";
 
 import CheckBoxReactSvgUrl from "PUBLIC_DIR/images/check-box.react.svg?url";
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
@@ -29,6 +31,7 @@ import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
 import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
+import AISvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
 import DotsHorizontalReactSvgUrl from "PUBLIC_DIR/images/icons/16/dots-horizontal.react.svg?url";
 
 import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
@@ -39,6 +42,18 @@ import useFolderActions from "./useFolderActions";
 import useFilesActions from "./useFilesActions";
 import useDownloadActions from "./useDownloadActions";
 import useFavoritesActions from "./useFavoritesActions";
+
+// Files the AI chat can ingest as an attachment: the document set the chat
+// supports (CHAT_SUPPORTED_FORMATS) plus any image. Gates the "Ask AI" entry.
+const ASK_AI_SUPPORTED_EXTS = new Set(
+  CHAT_SUPPORTED_FORMATS.split(",").map((ext) => ext.trim().toLowerCase()),
+);
+
+const isAskAiSupportedFile = (item: TFileItem): boolean => {
+  if (item.fileType === FileType.Image) return true;
+  const ext = (item.fileExst ?? "").replace(/^\./, "").toLowerCase();
+  return ASK_AI_SUPPORTED_EXTS.has(ext);
+};
 
 type UseContextMenuModelProps = {
   item?: TFileItem | TFolderItem;
@@ -62,6 +77,13 @@ type UseContextMenuModelProps = {
    * client's `filesActionsStore.retryVectorization` wiring.
    */
   onRetryVectorization?: (item: TFileItem) => void;
+  /**
+   * Caller-supplied handler that opens the AI chat and attaches the file.
+   * When provided (only personal-files, via [[AskAIContext]]), the "AI
+   * features → Ask AI" entry is shown for supported files; otherwise it
+   * stays hidden.
+   */
+  onAskAI?: (item: TFileItem) => void;
 };
 
 export default function useContextMenuModel({
@@ -80,6 +102,7 @@ export default function useContextMenuModel({
   onRestoreSelectedClick,
   onShowVersionHistoryClick,
   onRetryVectorization,
+  onAskAI,
 }: UseContextMenuModelProps) {
   const { t } = useTranslation(["Common"]);
 
@@ -492,6 +515,35 @@ export default function useContextMenuModel({
     [t, onRetryVectorization],
   );
 
+  const getAskAIItem = useCallback(
+    (i: TFileItem) => {
+      return {
+        id: "option_ask-ai",
+        key: "ask-ai",
+        label: t("Common:AskAI"),
+        icon: AISvgUrl,
+        onClick: () => onAskAI?.(i),
+        disabled: !onAskAI,
+      };
+    },
+    [t, onAskAI],
+  );
+
+  // Parent "AI features" submenu collecting every AI action for a file.
+  // Currently holds "Ask AI"; future AI entries slot in here.
+  const getAIFeaturesItem = useCallback(
+    (i: TFileItem) => {
+      return {
+        id: "option_ai-features",
+        key: "ai-features",
+        label: t("Common:AIFeatures"),
+        icon: AISvgUrl,
+        items: [getAskAIItem(i)],
+      };
+    },
+    [t, getAskAIItem],
+  );
+
   const getGroupCopyItem = useCallback(() => {
     const canCopy = filesSelectionStore.selection.every((i) => i.security.Copy);
     return {
@@ -667,6 +719,7 @@ export default function useContextMenuModel({
       }
 
       const openGroup: ContextMenuModel[] = [];
+      const aiGroup: ContextMenuModel[] = [];
       const actionGroup: ContextMenuModel[] = [];
       const favoritesGroup: ContextMenuModel[] = [];
       const deleteGroup: ContextMenuModel[] = [];
@@ -700,6 +753,13 @@ export default function useContextMenuModel({
         !("isFolder" in item! && item!.isFolder)
       )
         openGroup.push(getVectorizationItem(item as TFileItem));
+
+      if (
+        onAskAI &&
+        !("isFolder" in item! && item!.isFolder) &&
+        isAskAiSupportedFile(item as TFileItem)
+      )
+        aiGroup.push(getAIFeaturesItem(item as TFileItem));
 
       const hasShare = contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.share);
       const hasCopyLink = contextOptions.includes(
@@ -830,6 +890,7 @@ export default function useContextMenuModel({
 
       const groups = [
         openGroup,
+        aiGroup,
         actionGroup,
         favoritesGroup,
         restoreGroup,
@@ -878,6 +939,8 @@ export default function useContextMenuModel({
       getCustomFilterItem,
       getDeleteItem,
       getVectorizationItem,
+      getAIFeaturesItem,
+      onAskAI,
       getHeaderContextMenuModel,
       getGroupContextMenuModel,
 

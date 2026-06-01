@@ -66,6 +66,7 @@ import { FileOperationsContext } from "../../../../_contexts/FileOperationsConte
 import { RenameContext } from "../../../../_contexts/RenameContext";
 import { VersionHistoryContext } from "../../../../_contexts/VersionHistoryContext";
 import { ConvertContext } from "../../../../_contexts/ConvertContext";
+import { AskAIContext } from "../../../../_contexts/AskAIContext";
 import type { TFileItem } from "../../../../_hooks/useItemList";
 import { generateFilesItemValue } from "../../../_utils";
 import getTitleWithoutExt from "../../../../_utils/get-title-without-ext";
@@ -107,6 +108,7 @@ const TableViewRow = observer(
     const renameCtx = React.useContext(RenameContext);
     const onShowVersionHistory = React.useContext(VersionHistoryContext);
     const onConvert = React.useContext(ConvertContext);
+    const onAskAI = React.useContext(AskAIContext);
 
     const { getContextMenuModel } = useContextMenuModel({
       item: observableItem,
@@ -119,6 +121,7 @@ const TableViewRow = observer(
       onRestoreClick: fileOpsCtx?.restoreItem,
       onRenameClick: renameCtx?.renameItem,
       onShowVersionHistoryClick: onShowVersionHistory ?? undefined,
+      onAskAI: onAskAI ?? undefined,
     });
 
     const isChecked = filesSelectionStore.isCheckedItem(item);

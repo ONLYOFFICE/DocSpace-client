@@ -26,38 +26,30 @@
 
 "use client";
 
-import { observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import React from "react";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import { useAiChatStore } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
 
-import AiAgentsReactSvg from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg";
+/**
+ * Opens the AI chat panel, always starting a fresh conversation when the
+ * panel was closed (new empty thread + cleared messages). Opening a panel
+ * that is already visible leaves the current thread untouched — so flows
+ * that drop something into an *open* chat (e.g. "Ask AI") keep the ongoing
+ * conversation instead of resetting it.
+ *
+ * `onSwitchToNewThread` only resets the thread/messages, never the composer
+ * attachments, so attaching a file right after calling this is safe in
+ * either order.
+ */
+export const useOpenAiChat = () => {
+  const aiChatStore = useAiChatStore();
+  const { useThreadsStore } = useStores();
 
-import { useOpenAiChat } from "./useOpenAiChat";
-import styles from "./AiChatTrigger.module.scss";
-
-const AiChatTrigger = observer(() => {
-  const { t } = useTranslation(["Common"]);
-  const store = useAiChatStore();
-  const openChat = useOpenAiChat();
-
-  // Hide the trigger while the AI Chat panel is already open — the
-  // panel has its own close control, and the inline header position
-  // would otherwise compete with that.
-  if (store.isVisible) return null;
-
-  return (
-    <Button
-      accent
-      onClick={openChat}
-      size={ButtonSize.small}
-      label={t("Common:AIChatButton")}
-      icon={<AiAgentsReactSvg />}
-      aria-label={t("Common:AIChatButton")}
-      className={styles.trigger}
-    />
-  );
-});
-
-export default AiChatTrigger;
+  return React.useCallback(() => {
+    if (!aiChatStore.isVisible) {
+      useThreadsStore.getState().onSwitchToNewThread();
+    }
+    aiChatStore.open();
+  }, [aiChatStore, useThreadsStore]);
+};

@@ -203,7 +203,7 @@
       "approved_at": null
     }
   },
-  "updated_at": "2026-05-24T17:27:49.058Z",
+  "updated_at": "2026-06-01T21:20:44.382Z",
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
@@ -213,7 +213,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
-      "line_number": 157,
+      "line_number": 163,
       "context": "{\n key: \"create-ai-agent\",\n title: t(\"Common:CreateNewAIAgent\", {\n defaultValue: \"Create a new AI agent\",\n }),\n description: t(\"Common:CreateAIAgentDescription\", {\n aiAgent: t(\"Common:AIAgent\", { defaultValue: \"AI Agent\" }),\n defaultValue: \"Set up a new {{aiAgent}} from scratch.\",\n }),\n icon: <CreateAIAgentIcon />,\n onClick: () => dialogsStore.setCreateAgentDialogVisible(true),",
       "module": "/packages/sdk"
     }

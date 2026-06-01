@@ -446,25 +446,25 @@ const ClientRoutes = [
           return { Component };
         },
       },
+      {
+        path: "/dashboard",
+        async lazy() {
+          const { Dashboard } = await componentLoader(
+            () => import("SRC_DIR/pages/Dashboard"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ErrorBoundary>
+                <Dashboard />
+              </ErrorBoundary>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
     ],
-  },
-  {
-    path: "/dashboard",
-    async lazy() {
-      const { Dashboard } = await componentLoader(
-        () => import("SRC_DIR/pages/Dashboard"),
-      );
-
-      const Component = () => (
-        <PrivateRoute>
-          <ErrorBoundary>
-            <Dashboard />
-          </ErrorBoundary>
-        </PrivateRoute>
-      );
-
-      return { Component };
-    },
   },
   {
     path: "/Products/Files/",

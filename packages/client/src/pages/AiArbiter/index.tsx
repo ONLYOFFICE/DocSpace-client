@@ -41,6 +41,7 @@ import AiAgentsLightIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.
 import AiAgentsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
+import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
 
 import SdkIframe, {
@@ -68,6 +69,7 @@ const AiArbiter = ({
   theme,
 }: AiArbiterProps) => {
   const { t } = useTranslation(["Common"]);
+  useDocumentTitle("Common:DashboardAIArbiterTitle");
   const [settingsChecked, setSettingsChecked] = React.useState(false);
   const [showSetupDialog, setShowSetupDialog] = React.useState(false);
   const iframeRef = React.useRef<SdkIframeHandle | null>(null);

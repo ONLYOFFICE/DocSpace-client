@@ -35,6 +35,7 @@ import { FILTER_HEADER, PATHNAME_HEADER } from "@/utils/constants";
 import { DocsStoreProviders } from "../(personal-files)/_store";
 import RoomsQueryProvider from "./_components/query-provider";
 import { RoomsOperationsStoreContextProvider } from "./_store/RoomsOperationsStore";
+import { RoomsTagsStoreContextProvider } from "./_store/RoomsTagsStore";
 import RoomsOperationsProgress from "./_components/operations-progress";
 
 export const dynamic = "force-dynamic";
@@ -105,8 +106,10 @@ export default async function RoomsLayout({
       <RoomsQueryProvider>
         <DocsStoreProviders initViewAs={initViewAs}>
           <RoomsOperationsStoreContextProvider>
-            {children}
-            <RoomsOperationsProgress />
+            <RoomsTagsStoreContextProvider>
+              {children}
+              <RoomsOperationsProgress />
+            </RoomsTagsStoreContextProvider>
           </RoomsOperationsStoreContextProvider>
         </DocsStoreProviders>
       </RoomsQueryProvider>

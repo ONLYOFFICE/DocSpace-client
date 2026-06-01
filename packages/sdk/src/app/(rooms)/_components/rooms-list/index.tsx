@@ -80,6 +80,7 @@ import RestoreRoomDialog from "../restore-room-dialog";
 import DeleteRoomDialog from "../delete-room-dialog";
 import MoveToArchiveDialog from "../move-to-archive-dialog";
 import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
+import { useRoomsTagsStore } from "../../_store/RoomsTagsStore";
 import useResetSelectionClick from "@/app/(docspace)/(files)/_components/list/hooks/useResetSelectionClick";
 
 type RoomsListProps = {
@@ -115,9 +116,12 @@ const RoomsList = ({
   const { setIsEmptyList, filesViewAs, setFilesViewAs, currentDeviceType } =
     useSettingsStore();
   const filesListStore = useFilesListStore();
-  const { setRootFolderType } = filesListStore;
+  const tagsStore = useRoomsTagsStore();
+  const { setItems, setPathParts, setCurrentFolder, setRootFolderType } =
+    filesListStore;
   const { setSelection, setBufferSelection } = useFilesSelectionStore();
   const navigationStore = useNavigationStore();
+  const { setNavigationItems } = navigationStore;
   const activeItemsStore = useActiveItemsStore();
   const operationsStore = useRoomsOperationsStore();
   const infoPanelStore = useInfoPanelStore();
@@ -151,6 +155,7 @@ const RoomsList = ({
       undefined,
       isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
     );
+    f.type = String(RoomsType.CustomRoom);
     const sp = new URLSearchParams(filesFilter);
     if (sp.get("page")) f.page = Number(sp.get("page"));
     if (sp.get("pageCount")) f.pageCount = Number(sp.get("pageCount"));
@@ -183,8 +188,19 @@ const RoomsList = ({
   React.useLayoutEffect(() => {
     if (initRef.current) return;
     initRef.current = true;
-    filesListStore.setItems(initialItems);
-  }, [initialItems, filesListStore]);
+
+    setItems(initialItems);
+    setPathParts(null);
+    setCurrentFolder(current);
+    setNavigationItems([]);
+  }, [
+    initialItems.length,
+    current,
+    setItems,
+    setPathParts,
+    setCurrentFolder,
+    setNavigationItems,
+  ]);
 
   const [total, setTotal] = React.useState<number>(totalProp);
   const [hasNextPage, setHasNextPage] = React.useState<boolean>(
@@ -412,11 +428,16 @@ const RoomsList = ({
           updatedRoom as unknown as TFolder,
         );
         filesListStore.replaceItem(roomId, updatedItem);
+        const updatedTags = (updatedRoom as unknown as { tags?: string[] })
+          .tags;
+        if (Array.isArray(updatedTags) && updatedTags.length > 0) {
+          tagsStore.upsertTags(updatedTags);
+        }
       } catch {
         // ignore
       }
     },
-    [convertFolderToItem, filesListStore],
+    [convertFolderToItem, filesListStore, tagsStore],
   );
 
   const requestRunning = React.useRef(false);
@@ -444,6 +465,7 @@ const RoomsList = ({
       undefined,
       isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
     );
+    newFilter.type = String(RoomsType.CustomRoom);
     const sp = new URLSearchParams(window.location.search);
     if (sp.get("page")) newFilter.page = Number(sp.get("page"));
     if (sp.get("sortBy"))
@@ -490,7 +512,7 @@ const RoomsList = ({
 
       setIsEmptyList(newItems.length === 0);
 
-      filesListStore.setItems(newItems);
+      setItems(newItems);
       setTotal(newTotal);
       setHasNextPage(newTotal > newItems.length);
       setFilter(newFilter);

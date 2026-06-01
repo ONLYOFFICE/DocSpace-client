@@ -3,7 +3,7 @@
   "content": "AI provider",
   "content_en_sha1_hash": "f81714b57309b6c32065a1d1c2804f1c4658bb33",
   "created_at": "2025-11-21T08:21:51.316Z",
-  "updated_at": "2026-05-24T17:27:49.059Z",
+  "updated_at": "2026-06-01T21:20:44.384Z",
   "comment": {
     "text": "This is a noun, appearing as a short label or part of a sentence. It refers to the service that provides AI capabilities.",
     "is_auto": true,
@@ -55,7 +55,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/DefaultProvider.tsx",
-      "line_number": 366,
+      "line_number": 368,
       "context": ">\n {t(\"Common:DefaultProviderTitle\")}\n </Heading>\n <Text className={styles.description} lineHeight=\"20px\">\n {t(\"Common:DefaultProviderDescription\", {\n aiProvider: t(\"Common:AIProvider\"),\n aiAgents: t(\"Common:AIAgents\"),\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>",
       "module": "/packages/client"
     },
@@ -133,7 +133,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
-      "line_number": 93,
+      "line_number": 95,
       "context": "aiAgent: t(\"Common:AIAgent\", { defaultValue: \"AI Agent\" }),\n defaultValue: \"Create your first {{aiAgent}}\",\n })\n : standalone && isAdminOrOwner\n ? t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle\", {\n aiProvider: t(\"Common:AIProvider\", {\n defaultValue: \"AI Provider\",\n }),\n defaultValue: \"Configure {{aiProvider}} to start\",\n })\n : isAdminOrOwner",
       "module": "/packages/sdk"
     },
@@ -235,7 +235,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/settings-tabs/index.tsx",
-      "line_number": 54,
+      "line_number": 59,
       "context": "name: t(\"Common:Billing\"),\n content: null,\n },\n ]\n : []),\n { id: \"providers\", name: t(\"Common:AIProvider\"), content: null },\n { id: \"servers\", name: t(\"Common:MCPSettingTitle\"), content: null },\n { id: \"search\", name: t(\"Common:WebSearchAI\"), content: null },\n { id: \"knowledge\", name: t(\"Common:Knowledge\"), content: null },\n ];",
       "module": "/packages/sdk"
     },

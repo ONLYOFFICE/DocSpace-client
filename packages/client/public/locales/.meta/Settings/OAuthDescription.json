@@ -3,7 +3,7 @@
   "content": "Use the {{organizationName}} {{productName}} API for authorization and actions like file access and more.",
   "content_en_sha1_hash": "74eb0caf53cd3f8add35b45bf9820d0ed697da8b",
   "created_at": "2026-04-03T21:51:36.605Z",
-  "updated_at": "2026-05-27T14:11:50.699Z",
+  "updated_at": "2026-06-01T21:20:44.437Z",
   "comment": {
     "text": "This is the description for the OAuth card on the Developer Tools page. It explains that the OAuth API allows third-party applications to access user data and perform actions within DocSpace. `{{organizationName}}` is the name of the organization, and `{{productName}}` is the name of the product (e.g., ONLYOFFICE DocSpace).",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 109,
+      "context": "url: webhooksGuideUrl,\n },\n {\n id: \"oauth\",\n title: t(\"OAuth:OAuth\"),\n description: t(\"Settings:OAuthDescription\", {\n organizationName,\n productName,\n }),\n url: apiOAuthLink,\n },",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
       "line_number": 147,

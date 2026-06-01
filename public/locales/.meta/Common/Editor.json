@@ -3,7 +3,7 @@
   "content": "Editor",
   "content_en_sha1_hash": "c7e9fb2ea6c3b8c3ce97645eb902c348d859f36d",
   "created_at": "2025-05-19T21:30:44.767Z",
-  "updated_at": "2026-05-24T17:27:49.130Z",
+  "updated_at": "2026-06-01T21:20:44.447Z",
   "comment": {
     "text": "This is a label for the \"Editor\" access right, indicating a user has full editing permissions. It appears in various contexts, such as user role selections and descriptions of document access levels.",
     "is_auto": true,
@@ -36,9 +36,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/index.tsx",
-      "line_number": 82,
-      "context": "case ShareAccessRights.FullAccess:\n return t(\"Common:RoomAdmin\");\n case ShareAccessRights.RoomManager:\n return t(\"Common:RoomManager\");\n case ShareAccessRights.Editing:\n return t(\"Common:Editor\");\n case ShareAccessRights.Collaborator:\n return t(\"Common:Collaborator\");\n case ShareAccessRights.Review:\n return t(\"Common:RoleReviewer\");\n case ShareAccessRights.Comment:",
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/Members.utils.ts",
+      "line_number": 90,
+      "context": "access: ShareAccessRights.ReadOnly,\n type: \"user\",\n },\n editor: {\n key: \"editor\",\n label: this.t(\"Common:Editor\"),\n access: ShareAccessRights.Editing,\n type: \"user\",\n },\n formFiller: {\n key: \"formFiller\",",
       "module": "/packages/sdk"
     },
     {

@@ -284,6 +284,12 @@ export type TSiteEntries = {
   seamlesscollaboration: string;
   subscribe: string;
   wrongportalname: string;
+  nextcloud: string;
+  owncloud: string;
+  confluence: string;
+  alfresco: string;
+  moodle: string;
+  odoo: string;
 };
 
 export type TSocialNetworksEntries = {

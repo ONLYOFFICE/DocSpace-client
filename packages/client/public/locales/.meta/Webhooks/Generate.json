@@ -3,7 +3,7 @@
   "content": "Generate",
   "content_en_sha1_hash": "fc45f9b7a9a6e8b48f0e28821ec1981804dd1eb6",
   "created_at": "2025-05-19T21:30:49.766Z",
-  "updated_at": "2026-05-28T15:46:18.597Z",
+  "updated_at": "2026-06-01T21:20:44.466Z",
   "comment": {
     "text": "Button label. It generates a new API key, developer token, or secret key.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/SecretKeyInput.js",
-      "line_number": 202,
-      "context": "isHovered\n onClick={generatePassword}\n className=\"link dotted\"\n dataTestId=\"generate_link\"\n >\n {t(\"Generate\")}\n </Link>\n </div>\n </SecretKeyWrapper>\n );\n };",
+      "line_number": 172,
+      "context": "isHovered\n onClick={generatePassword}\n className=\"link dotted\"\n dataTestId=\"generate_link\"\n >\n {t(\"Generate\")}\n </Link>\n </div>\n </div>\n );\n };",
       "module": "/packages/client"
     }
   ],

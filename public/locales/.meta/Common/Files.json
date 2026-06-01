@@ -3,7 +3,7 @@
   "content": "Files",
   "content_en_sha1_hash": "6ce6c512ea433a7fc5c8841628e7696cd0ff7f2b",
   "created_at": "2025-05-19T21:30:45.269Z",
-  "updated_at": "2026-05-24T17:27:49.058Z",
+  "updated_at": "2026-06-01T21:20:44.382Z",
   "comment": {
     "text": "This is a noun, used as a label for a button to upload files, a heading in a file list, and as part of a sentence displaying a count of files.",
     "is_auto": true,
@@ -85,25 +85,25 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
-      "line_number": 173,
+      "line_number": 182,
       "context": "},\n {\n id: \"filter_type-all-files\",\n key: FilterType.FilesOnly.toString(),\n group: FilterGroups.filterType,\n label: t(\"Common:Files\"),\n },\n {\n id: \"filter_type-documents\",\n key: FilterType.DocumentsOnly.toString(),\n group: FilterGroups.filterType,",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
-      "line_number": 173,
+      "line_number": 182,
       "context": "},\n {\n id: \"filter_type-all-files\",\n key: FilterType.FilesOnly.toString(),\n group: FilterGroups.filterType,\n label: t(\"Common:Files\"),\n },\n {\n id: \"filter_type-documents\",\n key: FilterType.DocumentsOnly.toString(),\n group: FilterGroups.filterType,",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Details/Details.utils.tsx",
-      "line_number": 263,
+      "line_number": 266,
       "context": "private getItemContent = () => {\n if (!(\"foldersCount\" in this.item) || !(\"filesCount\" in this.item))\n return null;\n return text(\n `${this.t(\"Common:Folders\")}: ${this.item.foldersCount} | ${this.t(\n \"Common:Files\",\n )}: ${this.item.filesCount}`,\n );\n };\n \n private getItemSize = () => {",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/tile-view/index.tsx",
-      "line_number": 72,
+      "line_number": 73,
       "context": ">\n {children}\n </InfiniteGrid>\n )}\n headingFolders={t(\"Common:Folders\")}\n headingFiles={t(\"Common:Files\")}\n >\n {items.map((item, index) => (\n <Tile\n key={`${item?.isFolder ? \"folder\" : \"file\"}_${item.id}`}\n item={item}",
       "module": "/packages/sdk"
     },

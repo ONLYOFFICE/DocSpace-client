@@ -3,7 +3,7 @@
   "content": "Skip",
   "content_en_sha1_hash": "3da474537ac378c616d6b301acc1674bc348cecd",
   "created_at": "2025-05-19T21:30:48.925Z",
-  "updated_at": "2026-05-15T14:00:06.652Z",
+  "updated_at": "2026-06-01T21:20:44.404Z",
   "comment": {
     "text": "This is a button label. It allows the user to skip an action, such as resolving a conflict or dismissing a tip.",
     "is_auto": true,
@@ -28,6 +28,12 @@
       "line_number": 75,
       "context": "selectActionText={t(\"ConflictResolveSelectAction\")}\n overwriteTitle={t(\"OverwriteTitle\")}\n overwriteDescription={t(\"OverwriteDescription\")}\n duplicateTitle={t(\"Common:CreateFileCopy\")}\n duplicateDescription={t(\"CreateDescription\")}\n skipTitle={t(\"SkipTitle\")}\n skipDescription={t(\"SkipDescription\")}\n headerLabel={t(\"ActionRequired\")}\n />\n );\n }",
       "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/conflict-resolve-dialog/index.tsx",
+      "line_number": 105,
+      "context": ": t(\"Common:CreateFileCopy\");\n const duplicateDescription = hasFolders\n ? t(\"Common:CreateFolderDescription\")\n : t(\"Common:CreateDescription\");\n \n const skipTitle = t(\"Common:SkipTitle\");\n const skipDescription = hasFolders\n ? t(\"Common:SkipFolderDescription\")\n : t(\"Common:SkipDescription\");\n \n return (",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

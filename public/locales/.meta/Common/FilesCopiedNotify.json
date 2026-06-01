@@ -3,7 +3,7 @@
   "content": "Files copied.",
   "content_en_sha1_hash": "9bab25397cd16a5f1461f06dc1004411ecc74e27",
   "created_at": "2026-05-19T19:03:16.529Z",
-  "updated_at": "2026-05-24T17:27:49.124Z",
+  "updated_at": "2026-06-01T21:20:44.443Z",
   "comment": {
     "text": "A notification message in the activity feed that appears when a file copy operation is completed.",
     "is_auto": true,
@@ -22,6 +22,12 @@
       "line_number": 100,
       "context": "}\n if (hasRelatedItems)\n return t(\"InfoPanel:FileCopiedCount\", {\n count,\n });\n return t(\"Common:FilesCopiedNotify\");\n case FeedActionKeys.FileDeleted:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/knowledge-upload-selector-dialog/index.tsx",
+      "line_number": 88,
+      "context": "false,\n )\n .then(() => {\n // Server kicks off vectorization asynchronously; surface a\n // success toast so the user knows the request was accepted.\n toastr.success(t(\"Common:FilesCopiedNotify\"));\n })\n .catch((err) => {\n toastr.error(err instanceof Error ? err.message : String(err));\n });",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",

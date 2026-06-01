@@ -96,6 +96,9 @@ export const InfoPanelEditLinkDialog = observer(() => {
       visible={editLinkPanelIsVisible}
       setIsVisible={setEditLinkPanelIsVisible}
       updateLink={linkParams.updateLink}
+      setExternalLink={(link) => linkParams.updateLink?.(link)}
+      searchParams={new URLSearchParams()}
+      setSearchParams={() => {}}
       setLinkParams={setLinkParams}
       currentDeviceType={currentDeviceType}
       passwordSettings={passwordSettings}

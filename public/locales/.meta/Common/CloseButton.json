@@ -3,7 +3,7 @@
   "content": "Close",
   "content_en_sha1_hash": "bbfa773e5a63a5ea58c9b6207e608ca0120e592a",
   "created_at": "2025-05-19T21:30:43.485Z",
-  "updated_at": "2026-05-24T17:27:49.082Z",
+  "updated_at": "2026-06-01T21:20:44.405Z",
   "comment": {
     "text": "This is the label for a button that closes a dialog window, such as a conversion dialog, a password dialog, or a \"Get Code\" dialog.",
     "is_auto": true,
@@ -33,6 +33,12 @@
       "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallModuleDialog.tsx",
       "line_number": 243,
       "context": "return (\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CloseButton\")}\n onClick={onClose}\n />\n );\n }\n return (",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/ProfileCard.tsx",
+      "line_number": 105,
+      "context": "<IconButton\n className={styles.profileCardClose}\n iconName={CrossReactSvgUrl}\n size={16}\n onClick={handleClose}\n title={t(\"Common:CloseButton\")}\n />\n \n <Text as=\"p\" className={styles.profileCardTitle}>\n {t(\"SocialAuthWelcomeDialog:YourProfileDetails\")}\n </Text>",
       "module": "/packages/client"
     },
     {

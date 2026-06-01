@@ -3,7 +3,7 @@
   "content": "Create",
   "content_en_sha1_hash": "6e157c5da4410b7e9de85f5c93026b9176e69064",
   "created_at": "2025-05-19T21:30:43.828Z",
-  "updated_at": "2026-05-28T15:46:18.484Z",
+  "updated_at": "2026-06-01T21:20:44.389Z",
   "comment": {
     "text": "This is a dialog title for creating various entities like agents, groups, or rooms. It appears at the top of the respective creation dialogs.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/CreateGroupDialog.tsx",
-      "line_number": 198,
+      "line_number": 194,
       "context": "<ModalDialog.Footer>\n <Button\n id=\"create-group-modal_submit\"\n testId=\"create_edit_group_create_button\"\n tabIndex={5}\n label={t(\"Common:Create\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onCreateGroup}\n isDisabled={!groupParams.groupName || !groupParams.groupManager}",
       "module": "/packages/client"
     },
@@ -55,13 +55,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhookDialog.js",
-      "line_number": 296,
-      "context": "<ModalDialog.Footer>\n <Footer>\n <Button\n id={isSettingsModal ? \"save-button\" : \"create-button\"}\n label={\n isSettingsModal ? t(\"Common:SaveButton\") : t(\"Common:Create\")\n }\n size=\"normal\"\n primary\n onClick={handleSubmitClick}\n isDisabled={isLoading}",
+      "line_number": 278,
+      "context": "<ModalDialog.Footer>\n <div className={styles.footer}>\n <Button\n id={isSettingsModal ? \"save-button\" : \"create-button\"}\n label={\n isSettingsModal ? t(\"Common:SaveButton\") : t(\"Common:Create\")\n }\n size=\"normal\"\n primary\n onClick={handleSubmitClick}\n isDisabled={isLoading}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1525,
+      "line_number": 1541,
       "context": "getFormGalleryContextOptions = (item, t, navigate) => {\n return [\n {\n key: \"create\",\n label: t(\"Common:Create\"),\n onClick: () => this.onCreateTemplate(navigate),\n },\n {\n key: \"template-info\",\n label: t(\"FormGallery:TemplateInfo\"),",
       "module": "/packages/client"
     },
@@ -78,6 +78,12 @@
       "module": "/packages/management"
     },
     {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/index.tsx",
+      "line_number": 221,
+      "context": "<ModalDialog.Footer>\n <Button\n id=\"shared_create-agent-modal_submit\"\n tabIndex={5}\n label={t(\"Common:Create\")}\n primary\n scale\n isDisabled={isAgentTitleChanged || isWrongTitle || !isModelSelected}\n isLoading={isLoading}\n type=\"submit\"",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(forms)/_components/create-form-dialog/index.tsx",
       "line_number": 129,
       "context": "isDisabled={isCreating}\n />\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:Create\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onSubmit}\n isLoading={isCreating}",
@@ -90,9 +96,21 @@
       "module": "/packages/sdk"
     },
     {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
+      "line_number": 491,
+      "context": "</div>\n </ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n label={isEdit ? t(\"Common:SaveButton\") : t(\"Common:Create\")}\n size={ButtonSize.normal}\n primary\n scale\n isLoading={isLoading}\n onClick={onSave}",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/shared/components/files-selector-input/FilesSelector.helpers.ts",
       "line_number": 64,
       "context": "filterParam?: string,\n isSelectFolder?: boolean,\n ) => {\n if (isSelect || isSelectFolder) return t(\"Common:SelectAction\");\n \n if (filterParam === FilesSelectorFilterTypes.DOCX) return t(\"Common:Create\");\n if (filterParam) return t(\"Common:SaveButton\");\n \n return t(\"Common:SaveHereButton\");\n };",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/passphrase-dialog/PassphraseDialog.tsx",
+      "line_number": 351,
+      "context": "scale\n primary\n key=\"SubmitButton\"\n onClick={handleSubmit}\n size={ButtonSize.normal}\n label={isNewPassphrase ? t(\"Common:Create\") : t(\"Common:Confirm\")}\n isDisabled={isDisabled}\n isLoading={isLoading}\n tabIndex={3}\n />\n <Button",
       "module": "/packages/shared"
     },
     {

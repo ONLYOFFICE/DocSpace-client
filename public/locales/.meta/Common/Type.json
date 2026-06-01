@@ -203,7 +203,7 @@
       "approved_at": null
     }
   },
-  "updated_at": "2026-05-24T17:27:49.119Z",
+  "updated_at": "2026-06-01T21:20:44.439Z",
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/FilterPanel.tsx",
@@ -345,13 +345,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 610,
+      "line_number": 622,
       "context": "/>\n {isBetaLanguage ? <BetaBadge place=\"bottom-end\" /> : null}\n </div>\n \n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Type\")}\n </Text>\n <div className={styles.userTypeContainer}>\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {getUserTypeName(\n isOwner,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 610,
+      "line_number": 622,
       "context": "/>\n {isBetaLanguage ? <BetaBadge place=\"bottom-end\" /> : null}\n </div>\n \n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Type\")}\n </Text>\n <div className={styles.userTypeContainer}>\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {getUserTypeName(\n isOwner,",
       "module": "/packages/client"
     },
@@ -369,13 +369,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
-      "line_number": 159,
+      "line_number": 168,
       "context": "const getFilterData = React.useCallback(async () => {\n const typeOptions = [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.filterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: true,\n },\n {\n id: \"filter_type-folders\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Details/Details.utils.tsx",
-      "line_number": 168,
+      "line_number": 171,
       "context": "private getPropertyTitle = (propertyId: string) => {\n switch (propertyId) {\n case \"Owner\":\n return this.t(\"Common:Owner\");\n case \"Type\":\n return this.t(\"Common:Type\");\n case \"File extension\":\n return this.t(\"Common:FileExtension\");\n case \"Tags\":\n return this.t(\"Common:Tags\");\n case \"Content\":",
       "module": "/packages/sdk"
     },

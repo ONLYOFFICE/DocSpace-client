@@ -17,7 +17,7 @@
       "approved_at": null
     }
   },
-  "updated_at": "2026-05-24T17:27:49.118Z",
+  "updated_at": "2026-06-01T21:20:44.439Z",
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/NoAgentItem.tsx",
@@ -27,7 +27,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/no-agent-item/index.tsx",
-      "line_number": 59,
+      "line_number": 72,
       "context": ">\n <div className=\"no-thumbnail-img-wrapper\">\n {/* biome-ignore lint/performance/noImgElement: static SVG asset; next/image is unnecessary here */}\n <img\n src={imageSrc}\n alt={t(\"Common:NoAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n defaultValue: \"No AI agent\",\n })}\n />\n </div>",
       "module": "/packages/sdk"
     }

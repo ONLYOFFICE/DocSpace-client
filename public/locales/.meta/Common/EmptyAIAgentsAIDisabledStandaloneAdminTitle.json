@@ -3,7 +3,7 @@
   "content": "{{aiProvider}} is not available yet",
   "content_en_sha1_hash": "504a112d4df23df7699214be2942748918b9356f",
   "created_at": "2025-12-18T11:15:10.656Z",
-  "updated_at": "2026-05-24T17:27:49.059Z",
+  "updated_at": "2026-06-01T21:20:44.383Z",
   "comment": {
     "text": "This is a title displayed when AI agents are disabled. It appears for standalone portal administrators and includes a variable `{{aiProvider}}` for the name of the AI provider.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
-      "line_number": 92,
+      "line_number": 94,
       "context": ": t(\"Common:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\", { defaultValue: \"AI Agent\" }),\n defaultValue: \"Create your first {{aiAgent}}\",\n })\n : standalone && isAdminOrOwner\n ? t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle\", {\n aiProvider: t(\"Common:AIProvider\", {\n defaultValue: \"AI Provider\",\n }),\n defaultValue: \"Configure {{aiProvider}} to start\",\n })",
       "module": "/packages/sdk"
     }

@@ -203,11 +203,11 @@
       "approved_at": null
     }
   },
-  "updated_at": "2026-05-24T17:27:49.063Z",
+  "updated_at": "2026-06-01T21:20:44.387Z",
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesPanels/index.js",
-      "line_number": 244,
+      "line_number": 242,
       "context": "setSelectFileAiKnowledgeDialogVisible(false);\n };\n \n const descriptionTextFileFormRoomDialog = useMemo(() => {\n const text = {\n [FilesSelectorFilterTypes.DOCX]: t(\"Common:SelectDOCXFormat\"),\n // [FilesSelectorFilterTypes.DOCXF]: t(\"Common:SelectDOCXFFormat\"),\n [FilesSelectorFilterTypes.PDF]: t(\"Common:SelectPDFFormat\"),\n [FilterType.PDFForm]: t(\"Common:SelectPDFFormat\"),\n };",
       "module": "/packages/client"
     },

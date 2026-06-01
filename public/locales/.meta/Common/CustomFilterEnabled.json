@@ -3,7 +3,7 @@
   "content": "Custom filter for the selected file enabled",
   "content_en_sha1_hash": "2e614b1037d174f7e01244b06af7ffb0f67ac0cc",
   "created_at": "2025-05-19T21:30:55.406Z",
-  "updated_at": "2026-05-28T15:46:18.644Z",
+  "updated_at": "2026-06-01T21:20:44.522Z",
   "comment": {
     "text": "Toast message. Appears when a custom filter is successfully applied to a selected file.",
     "is_auto": true,
@@ -13,9 +13,15 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1268,
+      "line_number": 1601,
       "context": "changeCustomFilter = async (item, t) => {\n return enableCustomFilter(item.id, !item.customFilterEnabled)\n .then((res) => {\n if (res.customFilterEnabled) {\n toastr.success(t(\"CustomFilterEnabled\"));\n } else {\n toastr.success(t(\"CustomFilterDisabled\"));\n }\n })\n .catch((err) => {",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useFilesActions.ts",
+      "line_number": 131,
+      "context": "try {\n await api.files.enableCustomFilter(file.id as number, nextEnabled);\n filesListStore.updateItemCustomFilter(file.id, nextEnabled);\n toastr.success(\n nextEnabled\n ? t(\"Common:CustomFilterEnabled\")\n : t(\"Common:CustomFilterDisabled\"),\n );\n } catch (error) {\n toastr.error(\n error instanceof Error ? error.message : String(error),",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

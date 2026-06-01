@@ -3,7 +3,7 @@
   "content": "Anonymous",
   "content_en_sha1_hash": "9bed5104004c5fe4e3e46673da174472bff1360a",
   "created_at": "2025-05-19T21:30:43.013Z",
-  "updated_at": "2026-05-24T17:27:49.120Z",
+  "updated_at": "2026-06-01T21:20:44.440Z",
   "comment": {
     "text": "This text identifies a user as \"Anonymous\" when their name is not available or they are not logged in. It appears in various places, such as the details panel, history logs, and author cells in tables, to indicate the creator or initiator of an action or file.",
     "is_auto": true,
@@ -67,8 +67,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/version-history-panel/index.tsx",
-      "line_number": 206,
-      "context": "const { isVisible, file, versions, isLoading, close } = store;\n \n if (!isVisible || !file) return null;\n \n const culture = i18n.language || \"en\";\n const anonymousLabel = t(\"Common:Anonymous\");\n const openLabel = t(\"Common:Open\");\n const downloadLabel = t(\"Common:Download\");\n const actionsLabel = t(\"Common:Actions\");\n const title = versions && versions.length > 0 ? versions[0].title : file.title;",
+      "line_number": 419,
+      "context": "const culture = i18n.language || \"en\";\n const canChangeVersionFileHistory = !!fileSecurity?.EditHistory;\n const canDeleteVersion = !!fileSecurity?.Delete;\n \n const anonymousLabel = t(\"Common:Anonymous\");\n const openLabel = t(\"Common:Open\");\n const downloadLabel = t(\"Common:Download\");\n const actionsLabel = t(\"Common:Actions\");\n const editCommentLabel = t(\"Common:EditComment\");\n const restoreLabel = t(\"Common:Restore\");",
       "module": "/packages/sdk"
     }
   ],

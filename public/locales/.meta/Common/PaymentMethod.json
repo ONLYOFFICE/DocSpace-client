@@ -203,11 +203,11 @@
       "approved_at": null
     }
   },
-  "updated_at": "2026-05-15T16:22:24.119Z",
+  "updated_at": "2026-06-01T21:20:44.501Z",
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
-      "line_number": 170,
+      "line_number": 171,
       "context": "<PayerInformation />\n \n <div className={styles.header}>\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"PaymentMethod\")}\n </Text>\n <RefreshIconButton\n onRefresh={onRefreshPaymentMethod}\n isRefreshing={isRefreshing}\n />",
       "module": "/libs/ui-kit"
     },

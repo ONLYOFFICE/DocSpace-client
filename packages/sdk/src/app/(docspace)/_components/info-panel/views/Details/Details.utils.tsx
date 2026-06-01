@@ -89,6 +89,7 @@ type DetailsHelperProps = {
   culture: string;
   tagListClassName: string;
   onTagsChanged?: () => void;
+  canManageTags: boolean;
 };
 
 export type DetailsProperty = {
@@ -103,6 +104,7 @@ class DetailsHelper {
   culture: string;
   tagListClassName: string;
   onTagsChanged?: () => void;
+  canManageTags: boolean;
 
   constructor(props: DetailsHelperProps) {
     this.t = props.t;
@@ -110,6 +112,7 @@ class DetailsHelper {
     this.culture = props.culture;
     this.tagListClassName = props.tagListClassName;
     this.onTagsChanged = props.onTagsChanged;
+    this.canManageTags = props.canManageTags;
   }
 
   getPropertyList = (): DetailsProperty[] => {
@@ -236,8 +239,8 @@ class DetailsHelper {
       canCreate: hasEditAccess,
       canBindTag: hasEditAccess,
       canSearch: hasEditAccess,
-      canEdit: false,
-      canRemove: false,
+      canEdit: this.canManageTags,
+      canRemove: this.canManageTags,
     };
     return tagList(
       tags,

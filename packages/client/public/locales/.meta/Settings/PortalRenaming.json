@@ -203,7 +203,7 @@
       "approved_at": null
     }
   },
-  "updated_at": "2026-05-15T15:37:40.200Z",
+  "updated_at": "2026-06-01T21:20:44.418Z",
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/PortalRenamingDialog/index.js",
@@ -219,13 +219,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 135,
+      "line_number": 164,
       "context": "}\n }, [isMobileDevice, setIsCustomizationView]);\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalRenaming\", { productName: getBrandName(\"ProductName\") }),\n );\n setPortalName(portalNameInitially);\n \n const checkScroll = checkScrollSettingsBlock();\n checkInnerWidth();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 135,
+      "line_number": 164,
       "context": "}\n }, [isMobileDevice, setIsCustomizationView]);\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalRenaming\", { productName: getBrandName(\"ProductName\") }),\n );\n setPortalName(portalNameInitially);\n \n const checkScroll = checkScrollSettingsBlock();\n checkInnerWidth();",
       "module": "/packages/client"
     },

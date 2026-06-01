@@ -3,7 +3,7 @@
   "content": "Create and manage all API keys for your {{organizationName}} {{productName}}.",
   "content_en_sha1_hash": "9382389dde3009cae36131b69c5c0694038fffce",
   "created_at": "2026-04-03T21:51:36.613Z",
-  "updated_at": "2026-05-27T14:11:50.700Z",
+  "updated_at": "2026-06-01T21:20:44.437Z",
   "comment": {
     "text": "This is the description text for a card on the settings page. It explains that users can create and manage API keys for their organization's product. `{{organizationName}}` is the name of the organization, and `{{productName}}` is the name of the product (e.g., DocSpace).",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 118,
+      "context": "url: apiOAuthLink,\n },\n {\n id: \"api-keys\",\n title: t(\"Settings:ApiKeys\"),\n description: t(\"Settings:ApiKeysCardDescription\", {\n organizationName,\n productName,\n }),\n url: apiKeysUrl,\n },",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
       "line_number": 159,

@@ -40,6 +40,7 @@ import React from "react";
 import type { TViewAs } from "@docspace/shared/types";
 
 import { PrivateStoreProviders } from "../../_store/PrivateStoreProviders";
+import { usePrivateFrameBridge } from "../../_hooks/usePrivateFrameBridge";
 
 const PrivateFilesShell = ({
   children,
@@ -48,6 +49,8 @@ const PrivateFilesShell = ({
   children: React.ReactNode;
   initViewAs: TViewAs;
 }) => {
+  usePrivateFrameBridge();
+
   return (
     <PrivateStoreProviders initViewAs={initViewAs}>
       {children}

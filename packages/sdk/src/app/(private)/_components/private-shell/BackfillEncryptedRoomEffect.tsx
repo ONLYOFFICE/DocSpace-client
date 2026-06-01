@@ -33,29 +33,41 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { AVAILABLE_CONTEXT_ITEMS } from "@/app/(docspace)/_enums/context-items";
+// PARITY-SOURCE: packages/client/src/store/FilesStore.js (maybeBackfillEncryptedRoom)
+// PARITY-REVIEW: Required when source changes. Last reviewed: 2026-06-01 by Ilya Oleshko
 
-// Lives in (personal-files) so DocsLayout can import without inverting the
-// (personal-files) → (private) dependency direction.
-export const PRIVATE_FILE_CONTEXT_OPTIONS: ReadonlySet<string> = new Set([
-  AVAILABLE_CONTEXT_ITEMS.select,
-  AVAILABLE_CONTEXT_ITEMS.open,
-  AVAILABLE_CONTEXT_ITEMS.openLocation,
-  AVAILABLE_CONTEXT_ITEMS.view,
-  AVAILABLE_CONTEXT_ITEMS.preview,
-  AVAILABLE_CONTEXT_ITEMS.openPDF,
-  AVAILABLE_CONTEXT_ITEMS.download,
-  AVAILABLE_CONTEXT_ITEMS.showInfo,
-  AVAILABLE_CONTEXT_ITEMS.copy,
-  AVAILABLE_CONTEXT_ITEMS.duplicate,
-  AVAILABLE_CONTEXT_ITEMS.moveTo,
-  AVAILABLE_CONTEXT_ITEMS.rename,
-  AVAILABLE_CONTEXT_ITEMS.delete,
-]);
+"use client";
 
-export const PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS: ReadonlySet<string> = new Set([
-  AVAILABLE_CONTEXT_ITEMS.select,
-  AVAILABLE_CONTEXT_ITEMS.showInfo,
-  AVAILABLE_CONTEXT_ITEMS.download,
-  AVAILABLE_CONTEXT_ITEMS.delete,
-]);
+import React from "react";
+
+import { useEncryption } from "@docspace/shared/context/encryption";
+
+import { usePrivateRoomFilesStoreOptional } from "../../_store/PrivateRoomFilesStore";
+import { useEncryptionIdentityStore } from "../../_store/EncryptionIdentityStore";
+
+const BackfillEncryptedRoomEffect: React.FC = () => {
+  const { isUnlocked, getIdentity } = useEncryption();
+  const filesStore = usePrivateRoomFilesStoreOptional();
+  const identityStore = useEncryptionIdentityStore();
+
+  React.useEffect(() => {
+    if (!isUnlocked) return;
+    if (!filesStore?.roomId || !filesStore.canEditRoom) return;
+    const userId = identityStore.userKeys?.userId;
+    if (!userId) return;
+    const identity = getIdentity();
+    if (!identity) return;
+    void filesStore.maybeBackfillEncryptedRoom(userId, identity);
+  }, [
+    isUnlocked,
+    filesStore,
+    filesStore?.roomId,
+    filesStore?.canEditRoom,
+    identityStore.userKeys?.userId,
+    getIdentity,
+  ]);
+
+  return null;
+};
+
+export default BackfillEncryptedRoomEffect;

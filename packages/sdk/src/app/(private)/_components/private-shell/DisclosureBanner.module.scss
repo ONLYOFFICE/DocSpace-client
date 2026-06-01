@@ -33,29 +33,52 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { AVAILABLE_CONTEXT_ITEMS } from "@/app/(docspace)/_enums/context-items";
+.banner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--banner-border, rgba(0, 0, 0, 0.08));
+  background-color: var(--banner-background, rgba(45, 124, 230, 0.08));
+}
 
-// Lives in (personal-files) so DocsLayout can import without inverting the
-// (personal-files) → (private) dependency direction.
-export const PRIVATE_FILE_CONTEXT_OPTIONS: ReadonlySet<string> = new Set([
-  AVAILABLE_CONTEXT_ITEMS.select,
-  AVAILABLE_CONTEXT_ITEMS.open,
-  AVAILABLE_CONTEXT_ITEMS.openLocation,
-  AVAILABLE_CONTEXT_ITEMS.view,
-  AVAILABLE_CONTEXT_ITEMS.preview,
-  AVAILABLE_CONTEXT_ITEMS.openPDF,
-  AVAILABLE_CONTEXT_ITEMS.download,
-  AVAILABLE_CONTEXT_ITEMS.showInfo,
-  AVAILABLE_CONTEXT_ITEMS.copy,
-  AVAILABLE_CONTEXT_ITEMS.duplicate,
-  AVAILABLE_CONTEXT_ITEMS.moveTo,
-  AVAILABLE_CONTEXT_ITEMS.rename,
-  AVAILABLE_CONTEXT_ITEMS.delete,
-]);
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
 
-export const PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS: ReadonlySet<string> = new Set([
-  AVAILABLE_CONTEXT_ITEMS.select,
-  AVAILABLE_CONTEXT_ITEMS.showInfo,
-  AVAILABLE_CONTEXT_ITEMS.download,
-  AVAILABLE_CONTEXT_ITEMS.delete,
-]);
+.title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-color, #333);
+}
+
+.body {
+  margin: 0;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-color-secondary, #555);
+}
+
+.dismiss {
+  flex-shrink: 0;
+  align-self: center;
+  padding: 6px 12px;
+  border: 1px solid var(--banner-border, rgba(0, 0, 0, 0.12));
+  border-radius: 3px;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-color, #333);
+  cursor: pointer;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--row-hover-background, rgba(0, 0, 0, 0.04));
+    }
+  }
+}

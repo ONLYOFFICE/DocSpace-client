@@ -33,29 +33,31 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { AVAILABLE_CONTEXT_ITEMS } from "@/app/(docspace)/_enums/context-items";
+import { describe, it, expect } from "vitest";
 
-// Lives in (personal-files) so DocsLayout can import without inverting the
-// (personal-files) → (private) dependency direction.
-export const PRIVATE_FILE_CONTEXT_OPTIONS: ReadonlySet<string> = new Set([
-  AVAILABLE_CONTEXT_ITEMS.select,
-  AVAILABLE_CONTEXT_ITEMS.open,
-  AVAILABLE_CONTEXT_ITEMS.openLocation,
-  AVAILABLE_CONTEXT_ITEMS.view,
-  AVAILABLE_CONTEXT_ITEMS.preview,
-  AVAILABLE_CONTEXT_ITEMS.openPDF,
-  AVAILABLE_CONTEXT_ITEMS.download,
-  AVAILABLE_CONTEXT_ITEMS.showInfo,
-  AVAILABLE_CONTEXT_ITEMS.copy,
-  AVAILABLE_CONTEXT_ITEMS.duplicate,
-  AVAILABLE_CONTEXT_ITEMS.moveTo,
-  AVAILABLE_CONTEXT_ITEMS.rename,
-  AVAILABLE_CONTEXT_ITEMS.delete,
-]);
+import { sectionFromPathname } from "./usePrivateFrameBridge";
 
-export const PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS: ReadonlySet<string> = new Set([
-  AVAILABLE_CONTEXT_ITEMS.select,
-  AVAILABLE_CONTEXT_ITEMS.showInfo,
-  AVAILABLE_CONTEXT_ITEMS.download,
-  AVAILABLE_CONTEXT_ITEMS.delete,
-]);
+describe("usePrivateFrameBridge / sectionFromPathname", () => {
+  it("maps the archive route to 'archive'", () => {
+    expect(sectionFromPathname("/private/archive")).toBe("archive");
+    expect(sectionFromPathname("/private/archive?foo=bar")).toBe("archive");
+  });
+
+  it("maps the rooms list to 'rooms'", () => {
+    expect(sectionFromPathname("/private")).toBe("rooms");
+  });
+
+  it("maps a room-files sub-route to 'rooms' (still under the active section)", () => {
+    expect(sectionFromPathname("/private/12345")).toBe("rooms");
+    expect(sectionFromPathname("/private/12345?folder=678")).toBe("rooms");
+  });
+
+  it("falls back to 'rooms' for unexpected paths", () => {
+    expect(sectionFromPathname("")).toBe("rooms");
+    expect(sectionFromPathname("/something-else")).toBe("rooms");
+  });
+
+  it("treats the /private/archive prefix as the archive section", () => {
+    expect(sectionFromPathname("/private/archived-room")).toBe("archive");
+  });
+});

@@ -37,11 +37,12 @@ import React from "react";
 
 import type { TFileItem, TFolderItem } from "../_hooks/useItemList";
 
-// Filled by (private); null elsewhere keeps (rooms)/(personal-files) on the
-// plain openUrl(viewUrl) path.
 export type EncryptedFileActions = {
   downloadFile: (file: TFileItem) => Promise<void>;
   downloadZip: (files: TFileItem[]) => Promise<void>;
+  duplicateFile: (file: TFileItem) => Promise<void>;
+  copyFiles: (files: TFileItem[], destFolderId: number | string) => Promise<void>;
+  moveFiles: (files: TFileItem[], destFolderId: number | string) => Promise<void>;
 };
 
 export const EncryptedFileActionsContext =

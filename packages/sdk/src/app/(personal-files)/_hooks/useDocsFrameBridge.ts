@@ -54,6 +54,7 @@ import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 type UseDocsFrameBridgeParams = {
   isReady: boolean;
   uploadFilesToFolder?: (files: FileList | File[]) => Promise<void>;
+  enabled?: boolean;
 };
 
 const PERSONAL_BASE_PATH = "/personal-files";
@@ -133,6 +134,7 @@ const sectionToUrl = (section: string): string => {
 export const useDocsFrameBridge = ({
   isReady,
   uploadFilesToFolder,
+  enabled = true,
 }: UseDocsFrameBridgeParams) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -146,14 +148,16 @@ export const useDocsFrameBridge = ({
 
   const appReadySent = React.useRef(false);
   React.useEffect(() => {
+    if (!enabled) return;
     if (isReady && !appReadySent.current) {
       appReadySent.current = true;
       frameCallEvent({ event: "onAppReady", data: { frameId: getFrameId() } });
     }
-  }, [isReady]);
+  }, [isReady, enabled]);
 
   const prevSection = React.useRef<string | null>(activeSection);
   React.useEffect(() => {
+    if (!enabled) return;
     if (prevSection.current !== activeSection && activeSection) {
       prevSection.current = activeSection;
       frameCallEvent({
@@ -161,7 +165,7 @@ export const useDocsFrameBridge = ({
         data: { section: activeSection },
       });
     }
-  }, [activeSection]);
+  }, [activeSection, enabled]);
 
   const uploadRef = React.useRef(uploadFilesToFolder);
   React.useEffect(() => {
@@ -169,6 +173,7 @@ export const useDocsFrameBridge = ({
   }, [uploadFilesToFolder]);
 
   React.useEffect(() => {
+    if (!enabled) return undefined;
     const handler = (e: MessageEvent) => {
       if (window.self === window.parent || e.source !== window.parent) return;
 
@@ -247,5 +252,5 @@ export const useDocsFrameBridge = ({
 
     window.addEventListener("message", handler);
     return () => window.removeEventListener("message", handler);
-  }, [router]);
+  }, [router, enabled]);
 };

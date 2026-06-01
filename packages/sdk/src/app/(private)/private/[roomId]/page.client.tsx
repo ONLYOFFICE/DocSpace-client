@@ -59,6 +59,7 @@ import { usePrivateRoomsPageInit } from "../../_hooks/usePrivateRoomsPageInit";
 import { usePrivateRoomFilesStore } from "../../_store/PrivateRoomFilesStore";
 import { useEncryptedUpload } from "../../_hooks/useEncryptedUpload";
 import { useEncryptedDownload } from "../../_hooks/useEncryptedDownload";
+import { useEncryptedCopyMove } from "../../_hooks/useEncryptedCopyMove";
 import {
   PrivateInfoPanelBody,
   PrivateInfoPanelHeader,
@@ -89,6 +90,11 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
   const { uploadFiles } = useEncryptedUpload();
   const { downloadFile: decryptAndSaveFile, downloadZip: decryptAndSaveZip } =
     useEncryptedDownload();
+  const {
+    duplicateFile: duplicateEncryptedFile,
+    copyFiles: copyEncryptedFiles,
+    moveFiles: moveEncryptedFiles,
+  } = useEncryptedCopyMove();
 
   const isReady = usePrivateRoomsPageInit({
     authToken,
@@ -99,9 +105,15 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
 
   React.useEffect(() => {
     const isPrivate = folderData?.current?.private === true;
-    filesStore.setRoomContext(roomId, isPrivate);
+    const canEditRoom = folderData?.current?.security?.EditRoom === true;
+    filesStore.setRoomContext(roomId, isPrivate, canEditRoom);
     return () => filesStore.reset();
-  }, [filesStore, roomId, folderData?.current?.private]);
+  }, [
+    filesStore,
+    roomId,
+    folderData?.current?.private,
+    folderData?.current?.security?.EditRoom,
+  ]);
 
   const handleOpenFolder = React.useCallback(
     (folderId: number | string) => {
@@ -148,8 +160,50 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
             originalFileType: item.fileExst ?? "",
           })),
         }),
+      duplicateFile: (item) =>
+        duplicateEncryptedFile({
+          item: {
+            id: Number(item.id),
+            title: item.title,
+            viewUrl: item.viewUrl,
+            fileExst: item.fileExst ?? "",
+          },
+          roomId,
+          folderId: navigationStore.currentFolderId ?? folderData.current?.id ?? roomId,
+        }),
+      copyFiles: (items, destFolderId) =>
+        copyEncryptedFiles({
+          files: items.map((it: TFileItem) => ({
+            id: Number(it.id),
+            title: it.title,
+            viewUrl: it.viewUrl,
+            fileExst: it.fileExst ?? "",
+          })),
+          destFolderId,
+          sourceRoomId: roomId,
+        }),
+      moveFiles: (items, destFolderId) =>
+        moveEncryptedFiles({
+          files: items.map((it: TFileItem) => ({
+            id: Number(it.id),
+            title: it.title,
+            viewUrl: it.viewUrl,
+            fileExst: it.fileExst ?? "",
+          })),
+          destFolderId,
+          sourceRoomId: roomId,
+        }),
     }),
-    [decryptAndSaveFile, decryptAndSaveZip, roomId],
+    [
+      decryptAndSaveFile,
+      decryptAndSaveZip,
+      duplicateEncryptedFile,
+      copyEncryptedFiles,
+      moveEncryptedFiles,
+      navigationStore,
+      folderData.current?.id,
+      roomId,
+    ],
   );
 
   if (!isReady) {

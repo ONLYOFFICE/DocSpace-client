@@ -34,6 +34,7 @@
  */
 
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { openUrl } from "@docspace/shared/utils/common";
 import { UrlActionType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -51,6 +52,7 @@ import useDownloadFiles from "./useDownloadFiles";
 import { useEncryptedFileActions } from "../_contexts/EncryptedFileActionsContext";
 
 export default function useDownloadActions() {
+  const { t } = useTranslation(["Common"]);
   const { sdkConfig } = useSDKConfig();
   const { selection, bufferSelection, getSortedFilesFromSelection } =
     useFilesSelectionStore();
@@ -86,9 +88,7 @@ export default function useDownloadActions() {
         return;
       }
       if (encryptedFiles.length > 0) {
-        toastr.error(
-          "Cannot download a mix of encrypted and plaintext files at once.",
-        );
+        toastr.error(t("Common:PrivateRoomMixedDownloadNotSupported"));
         return;
       }
     }
@@ -102,7 +102,7 @@ export default function useDownloadActions() {
     });
 
     downloadFiles(fileIds, folderIds);
-  }, [bufferSelection, selection, downloadFiles, encryptedActions]);
+  }, [bufferSelection, selection, downloadFiles, encryptedActions, t]);
 
   const downloadAction = useCallback(
     (item?: TFileItem | TFolderItem) => {
@@ -112,9 +112,7 @@ export default function useDownloadActions() {
 
       if (item.isFolder) {
         if (encryptedActions) {
-          toastr.error(
-            "Folder download is not supported inside private rooms.",
-          );
+          toastr.error(t("Common:PrivateRoomFolderDownloadNotSupported"));
           return;
         }
         return downloadFiles([], [item.id]);
@@ -136,7 +134,7 @@ export default function useDownloadActions() {
         frameConfig: sdkConfig,
       });
     },
-    [downloadFromSelection, downloadFiles, sdkConfig, encryptedActions],
+    [downloadFromSelection, downloadFiles, sdkConfig, encryptedActions, t],
   );
 
   const downloadAsAction = useCallback(() => {

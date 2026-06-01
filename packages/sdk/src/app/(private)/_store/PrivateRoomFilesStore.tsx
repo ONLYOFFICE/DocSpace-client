@@ -51,22 +51,56 @@ type RecoveryItem = {
   viewUrl?: string;
 };
 
-class PrivateRoomFilesStore {
+const loadRoomEncryption = () =>
+  import("@docspace/shared/services/private-room/room-encryption");
+
+export class PrivateRoomFilesStore {
   roomId: string | number | null = null;
   isPrivateRoomFolder = false;
+  canEditRoom = false;
+
+  _backfilledRooms = new Set<string | number>();
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this, { _backfilledRooms: false });
   }
 
-  setRoomContext = (roomId: string | number | null, isPrivate: boolean) => {
+  setRoomContext = (
+    roomId: string | number | null,
+    isPrivate: boolean,
+    canEditRoom = false,
+  ) => {
     this.roomId = roomId;
     this.isPrivateRoomFolder = isPrivate;
+    this.canEditRoom = canEditRoom;
   };
 
   reset = () => {
     this.roomId = null;
     this.isPrivateRoomFolder = false;
+    this.canEditRoom = false;
+  };
+
+  maybeBackfillEncryptedRoom = async (
+    userId: string,
+    identity: IdentityKeyPair,
+  ): Promise<void> => {
+    const roomId = this.roomId;
+    if (!roomId || !this.canEditRoom) return;
+    if (this._backfilledRooms.has(roomId)) return;
+
+    this._backfilledRooms.add(roomId);
+    try {
+      const { backfillEncryptedFilesForRoomMembers } =
+        await loadRoomEncryption();
+      await backfillEncryptedFilesForRoomMembers(Number(roomId), {
+        currentUserId: String(userId),
+        identity,
+        onKeyChange: async () => "refuse",
+      });
+    } catch {
+      this._backfilledRooms.delete(roomId);
+    }
   };
 
   recoverEncryptedFilenamesForCurrentView = async (

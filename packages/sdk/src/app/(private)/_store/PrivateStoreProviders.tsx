@@ -56,10 +56,11 @@ import { PrivateDialogs } from "../_components/dialogs";
 //   └─ PrivateBaseStoreProviders
 //      └─ PrivateRoomsFilterStore
 //         └─ PrivateRoomFilesStore
-//            └─ (TODO M2: PrivateEncryptedUploadStore, PrivateRoomOperationsStore)
-//               └─ RoomsOperationsStore (reused from (rooms))
-//                  └─ EncryptionIdentityStore
-//                     └─ EncryptionShell (+ effects + dialogs)
+//            └─ PrivateEncryptedUploadStore
+//               └─ PrivateDialogsStore
+//                  └─ RoomsOperationsStore (reused from (rooms))
+//                     └─ EncryptionIdentityStore
+//                        └─ EncryptionShell (+ effects + dialogs)
 export const PrivateStoreProviders = ({
   children,
   initViewAs = "row",

@@ -24,10 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { useSearchParams } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import SdkIframe from "SRC_DIR/components/SdkIframe";
+import SdkIframe, { type SdkIframeHandle } from "SRC_DIR/components/SdkIframe";
 
 // Server identifies this solution as "e2e-rooms"; the SDK route group lives
 // at /sdk/private (see packages/sdk/src/app/(private)/). The two names are
@@ -35,25 +36,53 @@ import SdkIframe from "SRC_DIR/components/SdkIframe";
 // while "private" is the runtime path that the rest of the encryption code
 // already references.
 
-const getSrc = (section: string): string => {
-  switch (section) {
-    case "archive":
-      return "/sdk/private/archive";
-    case "rooms":
-    default:
-      return "/sdk/private";
-  }
-};
+const getSrc = (section: string): string =>
+  section === "archive" ? "/sdk/private/archive" : "/sdk/private";
 
 const E2eRooms = () => {
   const { t } = useTranslation(["Common"]);
-  const [searchParams] = useSearchParams();
-  const section = searchParams.get("section") ?? "";
+  const [searchParams, setSearchParams] = useSearchParams();
+  const section =
+    searchParams.get("section") === "archive" ? "archive" : "rooms";
+
+  const apiRef = React.useRef<SdkIframeHandle | null>(null);
+
+  const initialSrcRef = React.useRef(getSrc(section));
+
+  const syncedSectionRef = React.useRef(section);
+
+  const handleNavigate = React.useCallback(
+    (sec: string) => {
+      const normalized = sec === "archive" ? "archive" : "rooms";
+      syncedSectionRef.current = normalized;
+      setSearchParams(
+        (prev) => {
+          const cur =
+            prev.get("section") === "archive" ? "archive" : "rooms";
+          if (cur === normalized) return prev;
+          const next = new URLSearchParams(prev);
+          if (normalized === "archive") next.set("section", "archive");
+          else next.delete("section");
+          return next;
+        },
+        { replace: true },
+      );
+    },
+    [setSearchParams],
+  );
+
+  React.useEffect(() => {
+    if (section === syncedSectionRef.current) return;
+    syncedSectionRef.current = section;
+    apiRef.current?.call("navigateSection", { section });
+  }, [section]);
 
   return (
     <SdkIframe
-      src={getSrc(section)}
+      src={initialSrcRef.current}
       title={t("Common:DashboardE2eRoomsTitle")}
+      onNavigate={handleNavigate}
+      apiRef={apiRef}
     />
   );
 };

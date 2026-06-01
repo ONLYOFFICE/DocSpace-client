@@ -57,6 +57,7 @@ import type {
 import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import EmptyPrivateRoomView from "@docspace/shared/components/empty-views/empty-private-room";
 
 import { SectionWrapper } from "@/app/(docspace)/_components/section";
@@ -253,7 +254,7 @@ const DocsLayout = observer(
       );
     }, [isPrivate, isActionButtonEnabled, handleCreateFolder, onUploadFiles]);
 
-    useDocsFrameBridge({ isReady: true, uploadFilesToFolder });
+    useDocsFrameBridge({ isReady: true, uploadFilesToFolder, enabled: !isPrivate });
 
     const uploadStore = useUploadStore();
 
@@ -305,9 +306,20 @@ const DocsLayout = observer(
       [requestDeleteItem, requestDelete],
     );
 
+    const guardedRename = React.useCallback(
+      (item: TFileItem | TFolderItem) => {
+        if (isPrivate && !item.isFolder && (item as TFileItem).encrypted) {
+          toastr.info(t("Common:PrivateRoomRenameNotSupported"));
+          return;
+        }
+        requestRename(item);
+      },
+      [requestRename, isPrivate, t],
+    );
+
     const renameHandler = React.useMemo(
-      () => ({ renameItem: requestRename }),
-      [requestRename],
+      () => ({ renameItem: guardedRename }),
+      [guardedRename],
     );
 
     const fileOperationsHandler = React.useMemo(
@@ -378,13 +390,17 @@ const DocsLayout = observer(
 
     const openFileHandler = React.useCallback(
       (file: TFileItem, preview?: boolean) => {
+        if (isPrivate && file.encrypted) {
+          toastr.info(t("Common:PrivateRoomEditorNotSupported"));
+          return;
+        }
         if (!preview && file.viewAccessibility?.MustConvert) {
           requestConvert(file);
           return;
         }
         openFileInEditor(file, preview);
       },
-      [openFileInEditor, requestConvert],
+      [openFileInEditor, requestConvert, isPrivate, t],
     );
     const shareHandler = React.useCallback(
       (item: TFileItem | TFolderItem) => {
@@ -424,7 +440,7 @@ const DocsLayout = observer(
       onOpenFile: (item) => {
         if (!item.isFolder) openFileHandler(item as TFileItem);
       },
-      onRenameItem: requestRename,
+      onRenameItem: guardedRename,
       onDeleteItems: requestDelete,
       onCreateFile: openCreateDialog,
       onUploadFiles,

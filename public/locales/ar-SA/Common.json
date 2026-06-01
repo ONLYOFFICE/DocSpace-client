@@ -2108,5 +2108,11 @@
   "RoomCreateUserCount": "تمت إضافة المستخدمين ({{count}}).",
   "RoomGroupAdded": "تمت إضافة المجموعات.",
   "RoomGroupAddedCount": "تمت إضافة المجموعات ({{count}}).",
-  "Overview": "نظرة عامة"
+  "Overview": "نظرة عامة",
+  "ChangesToTag": "التغييرات التي تطرأ على هذه العلامة ستؤثر على جميع الغرف التي تُستخدم فيها.",
+  "DeleteTag": "حذف الوسم",
+  "DeleteTagCannotBeUndone": "لا يمكن التراجع عن هذا الإجراء.",
+  "DeleteTagConfirmation": "سيؤدي حذف هذا الوسم إلى إزالته من جميع الغرف التي يُستخدم فيها.",
+  "EditTag": "تعديل وسم",
+  "RemoveTag": "<1>{{tag}}</1> تمت إزالة العلامة."
 }

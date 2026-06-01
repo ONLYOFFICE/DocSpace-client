@@ -2108,5 +2108,11 @@
   "RoomCreateUserCount": "Uporabniki dodani ({{count}})",
   "RoomGroupAdded": "Skupine dodane.",
   "RoomGroupAddedCount": "Skupine dodane ({{count}})",
-  "Overview": "Pregled"
+  "Overview": "Pregled",
+  "ChangesToTag": "Spremembe te oznake bodo vplivale na vse sobe, kjer se jo uporablja.",
+  "DeleteTag": "Izbriši oznako",
+  "DeleteTagCannotBeUndone": "To dejanja ni mogoče razveljavati.",
+  "DeleteTagConfirmation": "Brisanje te oznake bo jo odstranilo iz vseh sob, kjer je uporabljena.",
+  "EditTag": "Uredi oznako",
+  "RemoveTag": "<1>{{tag}}</1> oznaka je odstranjena."
 }

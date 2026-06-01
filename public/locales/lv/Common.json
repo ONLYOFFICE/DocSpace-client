@@ -2108,5 +2108,11 @@
   "RoomCreateUserCount": "Lietotāji pievienoti ({{count}}).",
   "RoomGroupAdded": "Grupas ir pievienotas.",
   "RoomGroupAddedCount": "Grupas pievienotas ({{count}}).",
-  "Overview": "Apraksts"
+  "Overview": "Apraksts",
+  "ChangesToTag": "Izdarītās izmaiņas šajā tagā ietekmēs visas istabas, kurās tas tiek izmantots.",
+  "DeleteTag": "Dzēst tagu",
+  "DeleteTagCannotBeUndone": "Šo darbību nevar atcelt.",
+  "DeleteTagConfirmation": "Dzīrojot šo atzīmi, tā tiks noņemta no visām istabām, kur tā ir izmantota.",
+  "EditTag": "Rediģēt tagu",
+  "RemoveTag": "<1>{{tag}}</1> tag noņemts."
 }

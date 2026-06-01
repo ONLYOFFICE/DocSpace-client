@@ -2128,5 +2128,11 @@
   "BuildWithProduct": "Build with {{organizationName}}",
   "BuildWithProductDescription": "Use developer tools when you need deeper integration, automation, embedding, webhooks, or API access.",
   "CustomizeYourPlan": "Customize your {{plan}} plan",
-  "CreateNewOrUpload": "Create new or <1>upload your file</1>"
+  "CreateNewOrUpload": "Create new or <1>upload your file</1>",
+  "ChangesToTag": "Changes to this tag will affect all rooms where it is used.",
+  "DeleteTag": "Delete tag",
+  "DeleteTagCannotBeUndone": "This action cannot be undone.",
+  "DeleteTagConfirmation": "Deleting this tag will remove it from all rooms where it is used.",
+  "EditTag": "Edit tag",
+  "RemoveTag": "<1>{{tag}}</1> tag removed."
 }

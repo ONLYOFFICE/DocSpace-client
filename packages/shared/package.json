@@ -163,7 +163,7 @@
     "style-loader": "3.3.4",
     "ts-node": "10.9.2",
     "typescript": "5.9.3",
-    "vitest": "4.0.5"
+    "vitest": "4.1.0"
   },
   "peerDependencies": {
     "react": "19.2.0",

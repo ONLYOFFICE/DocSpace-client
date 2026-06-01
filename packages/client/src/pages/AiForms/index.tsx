@@ -73,7 +73,7 @@ const AiForms = ({
   fetchAppSettings,
 }: AiFormsProps) => {
   const { t } = useTranslation(["Common"]);
-  useDocumentTitle("Common:DashboardAIFormsTitle");
+  useDocumentTitle("Common:DashboardFormsTitle");
   const [searchParams, setSearchParams] = useSearchParams();
   const [settingsChecked, setSettingsChecked] = React.useState(false);
   const [showSetupDialog, setShowSetupDialog] = React.useState(false);
@@ -157,7 +157,7 @@ const AiForms = ({
     <SdkIframe
       apiRef={iframeRef}
       src={initialSrcRef.current}
-      title={t("Common:DashboardAIFormsTitle")}
+      title={t("Common:DashboardFormsTitle")}
       onNavigate={handleSdkNavigate}
     />
   );

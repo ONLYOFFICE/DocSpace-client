@@ -60,13 +60,13 @@ const getSrc = (section: string, roomsFolderId?: number | null): string => {
 
 const AiRooms = ({ roomsFolderId }: AiRoomsProps) => {
   const { t } = useTranslation(["Common"]);
-  useDocumentTitle("Common:DashboardAIRoomsTitle");
+  useDocumentTitle("Common:DashboardRoomsTitle");
   const [searchParams] = useSearchParams();
   const section = searchParams.get("section") ?? "";
   return (
     <SdkIframe
       src={getSrc(section, roomsFolderId)}
-      title={t("Common:DashboardAIRoomsTitle")}
+      title={t("Common:DashboardRoomsTitle")}
     />
   );
 };

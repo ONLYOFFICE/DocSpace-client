@@ -73,7 +73,7 @@ const getSrc = (
 
 const AiFiles = ({ myFolderId }: AiFilesProps) => {
   const { t } = useTranslation(["Common"]);
-  useDocumentTitle("Common:DashboardAIFilesTitle");
+  useDocumentTitle("Common:DashboardFilesTitle");
   const [searchParams, setSearchParams] = useSearchParams();
   const section = searchParams.get("section") ?? "";
   const folder = searchParams.get("folder");
@@ -111,7 +111,7 @@ const AiFiles = ({ myFolderId }: AiFilesProps) => {
   return (
     <SdkIframe
       src={srcRef.current}
-      title={t("Common:DashboardAIFilesTitle")}
+      title={t("Common:DashboardFilesTitle")}
       onFilterSearch={handleFilterSearch}
     />
   );

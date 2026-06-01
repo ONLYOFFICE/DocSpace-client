@@ -51,7 +51,7 @@ const Header = ({
 
   return (
     <header className={styles.planHeader}>
-      <Text as="h1" className={styles.planTitle} isBold>
+      <Text className={styles.planTitle}>
         {t("Common:BusinessTitle", {
           planName: isFreeTariff
             ? t("Common:StartupPlan")
@@ -68,6 +68,7 @@ const Header = ({
         ) : null}
         <Link
           className={styles.planLink}
+          color="accent"
           type={LinkType.action}
           onClick={() => navigate("/portal-settings/payments/portal-payments")}
           isHovered

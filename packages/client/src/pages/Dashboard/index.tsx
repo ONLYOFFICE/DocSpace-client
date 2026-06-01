@@ -131,9 +131,7 @@ const Dashboard = ({
 
         {moduleItems.length > 0 ? (
           <section className={styles.section}>
-            <Text as="h2" className={styles.sectionTitle} isBold>
-              {t("OAuth:Apps")}
-            </Text>
+            <Text className={styles.sectionTitle}>{t("OAuth:Apps")}</Text>
             <div className={styles.modulesGrid}>
               {moduleItems.map((mod) => (
                 <ModuleCard
@@ -166,3 +164,4 @@ const DashboardConnected = inject<TStore>(({ userStore, appsStore }) => ({
 export { DashboardConnected as Dashboard };
 
 export default DashboardConnected;
+

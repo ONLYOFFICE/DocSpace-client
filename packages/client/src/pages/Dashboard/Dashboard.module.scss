@@ -52,7 +52,7 @@
 }
 
 .planTitle {
-  font-size: 21px;
+  font-size: 23px;
   font-weight: 700;
   line-height: 28px;
   margin: 0;
@@ -81,9 +81,7 @@
 .planLink {
   font-size: 13px;
   font-weight: 600;
-  line-height: 20px;
-  color: var(--accent-main);
-  text-decoration: underline;
+  line-height: 15px;
 }
 
 // Profile card
@@ -91,9 +89,9 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 20px 24px;
-  border-radius: 12px;
+  gap: 12px;
+  padding: 16px 20px;
+  border-radius: 6px;
 
   :global(.light) & {
     background-color: $gray-light;
@@ -113,7 +111,7 @@
 .profileCardTitle {
   font-size: 14px;
   font-weight: 600;
-  line-height: 20px;
+  line-height: 16px;
   margin: 0;
   padding-inline-end: 28px;
 }
@@ -156,13 +154,13 @@
 .profileCardValueRow {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   min-width: 0;
 }
 
 .profileCardValue {
   font-size: 13px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -174,6 +172,7 @@
 }
 
 .profileCardLink {
+  font-weight: 600;
   font-size: 13px;
   line-height: 20px;
   align-self: flex-start;
@@ -183,14 +182,14 @@
 .section {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   width: 100%;
 }
 
 .sectionTitle {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
-  line-height: 22px;
+  line-height: 24px;
   margin: 0;
 }
 
@@ -221,7 +220,7 @@
 
 .moduleCard {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 12px;
   padding: 16px;
   border-radius: 12px;
@@ -260,6 +259,12 @@
   }
 }
 
+.moduleHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .moduleIcon {
   display: flex;
   align-items: center;
@@ -267,7 +272,7 @@
   flex-shrink: 0;
   width: 32px;
   height: 32px;
-  border-radius: 8px;
+  border-radius: 6px;
 
   :global(.light) & {
     background-color: $gray-light-mid;
@@ -278,8 +283,8 @@
   }
 
   svg {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
   }
 
   &[data-installed="true"] {
@@ -291,19 +296,13 @@
   }
 }
 
-.moduleInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  flex: 1;
-  min-width: 0;
-}
-
 .moduleTitle {
   font-size: 14px;
   font-weight: 600;
-  line-height: 20px;
+  line-height: 16px;
   margin: 0;
+  flex: 1;
+  min-width: 0;
 }
 
 .moduleDescription {
@@ -342,8 +341,8 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 20px 16px;
-  border-radius: 8px;
+  padding: 20px;
+  border-radius: 12px;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
@@ -390,24 +389,24 @@
 .integrationName {
   font-size: 14px;
   font-weight: 600;
-  line-height: 20px;
+  line-height: 16px;
   margin: 0;
 }
 
 .integrationLink {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   font-size: 13px;
   font-weight: 600;
-  line-height: 20px;
+  line-height: 15px;
   color: var(--accent-main);
   text-decoration: underline;
 }
 
 .integrationArrow {
-  width: 13px;
-  height: 12px;
+  width: 8px;
+  height: 9px;
   flex-shrink: 0;
 
   path {
@@ -433,9 +432,9 @@
 .devToolTile {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 20px;
-  border-radius: 8px;
+  gap: 4px;
+  padding: 16px;
+  border-radius: 12px;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
@@ -472,14 +471,14 @@
 .devToolTitle {
   font-size: 14px;
   font-weight: 600;
-  line-height: 20px;
+  line-height: 16px;
   margin: 0;
 }
 
 .devToolDescription {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 400;
-  line-height: 20px;
+  line-height: 16px;
   margin: 0;
   flex: 1;
 
@@ -495,11 +494,12 @@
 .devToolLink {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   font-size: 13px;
   font-weight: 600;
-  line-height: 20px;
+  line-height: 15px;
   margin-block-start: 8px;
   color: var(--accent-main);
   text-decoration: underline;
+  padding-top: 12px;
 }

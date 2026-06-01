@@ -100,12 +100,12 @@ const ProfileCardComponent = ({
         <IconButton
           className={styles.profileCardClose}
           iconName={CrossReactSvgUrl}
-          size={12}
+          size={16}
           onClick={handleClose}
           title={t("Common:CloseButton")}
         />
 
-        <Text as="p" className={styles.profileCardTitle} isBold>
+        <Text as="p" className={styles.profileCardTitle}>
           {t("SocialAuthWelcomeDialog:YourProfileDetails")}
         </Text>
 
@@ -156,6 +156,7 @@ const ProfileCardComponent = ({
               className={styles.profileCardLink}
               type={LinkType.action}
               onClick={() => setChangePasswordVisible(true)}
+              color="accent"
               isHovered
             >
               {t("Common:SetPassword")}
@@ -185,3 +186,4 @@ export const ProfileCard = inject<TStore>(({ userStore, settingsStore }) => ({
 }))(observer(ProfileCardComponent));
 
 export default ProfileCard;
+

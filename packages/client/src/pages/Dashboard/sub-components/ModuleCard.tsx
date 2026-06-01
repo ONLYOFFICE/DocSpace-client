@@ -46,22 +46,19 @@ type ModuleCardProps = {
 
 export const ModuleCard = ({ mod, onClick }: ModuleCardProps) => {
   return (
-    <button
-      type="button"
-      className={styles.moduleCard}
-      onClick={onClick}
-    >
-      <span className={styles.moduleIcon} data-installed={mod.installed}>
-        {mod.icon}
-      </span>
-      <div className={styles.moduleInfo}>
-        <Text as="p" className={styles.moduleTitle} isBold>
+    <button type="button" className={styles.moduleCard} onClick={onClick}>
+      <div className={styles.moduleHeader}>
+        <span className={styles.moduleIcon} data-installed={mod.installed}>
+          {mod.icon}
+        </span>
+        <Text as="p" className={styles.moduleTitle}>
           {mod.title}
         </Text>
-        <Text as="p" className={styles.moduleDescription}>
-          {mod.description}
-        </Text>
       </div>
+      <Text as="p" className={styles.moduleDescription}>
+        {mod.description}
+      </Text>
     </button>
   );
 };
+

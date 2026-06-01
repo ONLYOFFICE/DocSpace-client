@@ -83,7 +83,7 @@ const IntegrationsCardComponent = ({
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Text as="p" className={styles.integrationName} isBold>
+            <Text as="p" className={styles.integrationName}>
               {platform.name}
             </Text>
             <span className={styles.integrationLink}>

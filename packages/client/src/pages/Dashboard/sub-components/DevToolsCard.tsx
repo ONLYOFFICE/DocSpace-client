@@ -145,7 +145,7 @@ const DevToolsCardComponent = (props: DevToolsCardProps) => {
             rel="noopener noreferrer"
             aria-disabled={!tool.url}
           >
-            <Text as="p" className={styles.devToolTitle} isBold>
+            <Text as="p" className={styles.devToolTitle}>
               {tool.title}
             </Text>
             <Text as="p" className={styles.devToolDescription}>

@@ -117,9 +117,11 @@ const RoomsList = ({
     useSettingsStore();
   const filesListStore = useFilesListStore();
   const tagsStore = useRoomsTagsStore();
-  const { setRootFolderType } = filesListStore;
+  const { setItems, setPathParts, setCurrentFolder, setRootFolderType } =
+    filesListStore;
   const { setSelection, setBufferSelection } = useFilesSelectionStore();
   const navigationStore = useNavigationStore();
+  const { setNavigationItems } = navigationStore;
   const activeItemsStore = useActiveItemsStore();
   const operationsStore = useRoomsOperationsStore();
   const infoPanelStore = useInfoPanelStore();
@@ -185,8 +187,19 @@ const RoomsList = ({
   React.useLayoutEffect(() => {
     if (initRef.current) return;
     initRef.current = true;
-    filesListStore.setItems(initialItems);
-  }, [initialItems, filesListStore]);
+
+    setItems(initialItems);
+    setPathParts(null);
+    setCurrentFolder(current);
+    setNavigationItems([]);
+  }, [
+    initialItems.length,
+    current,
+    setItems,
+    setPathParts,
+    setCurrentFolder,
+    setNavigationItems,
+  ]);
 
   const [total, setTotal] = React.useState<number>(totalProp);
   const [hasNextPage, setHasNextPage] = React.useState<boolean>(
@@ -414,7 +427,8 @@ const RoomsList = ({
           updatedRoom as unknown as TFolder,
         );
         filesListStore.replaceItem(roomId, updatedItem);
-        const updatedTags = (updatedRoom as unknown as { tags?: string[] }).tags;
+        const updatedTags = (updatedRoom as unknown as { tags?: string[] })
+          .tags;
         if (Array.isArray(updatedTags) && updatedTags.length > 0) {
           tagsStore.upsertTags(updatedTags);
         }
@@ -496,7 +510,7 @@ const RoomsList = ({
 
       setIsEmptyList(newItems.length === 0);
 
-      filesListStore.setItems(newItems);
+      setItems(newItems);
       setTotal(newTotal);
       setHasNextPage(newTotal > newItems.length);
       setFilter(newFilter);

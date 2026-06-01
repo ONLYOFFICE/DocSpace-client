@@ -76,7 +76,7 @@ type CreateEditRoomDialogProps = {
   onClose: () => void;
   room?: TEditableRoom;
   onRoomEdited?: (roomId: number) => void;
-  onRoomCreated?: () => void;
+  onRoomCreated?: (roomId: number) => void;
 };
 
 const CreateEditRoomDialog = ({
@@ -342,7 +342,11 @@ const CreateEditRoomDialog = ({
           });
         }
 
-        (onRoomCreated ?? refreshRooms)?.();
+        if (onRoomCreated && newRoom?.id != null) {
+          onRoomCreated(newRoom.id);
+        } else {
+          refreshRooms?.();
+        }
       }
       onClose();
     } catch (e) {

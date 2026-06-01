@@ -37,6 +37,7 @@
 
 import React from "react";
 import { observer } from "mobx-react";
+import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import type {
@@ -111,6 +112,7 @@ const RoomsLayout = observer(
     isArchive,
   }: RoomsLayoutProps) => {
     const { t } = useTranslation(["Common"]);
+    const router = useRouter();
     const { isEmptyList } = useSettingsStore();
     const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
     const infoPanelStore = useInfoPanelStore();
@@ -166,6 +168,10 @@ const RoomsLayout = observer(
     const closeCreateRoomDialog = React.useCallback(() => {
       dialogsStore.closeDialog(SDKDialogs.CreateRoom);
     }, [dialogsStore]);
+
+    const onRoomCreated = (roomId: number) => {
+      router.push(`/rooms/${roomId}`);
+    };
 
     const quickActionItems = React.useMemo<QuickActionItem[]>(
       () =>
@@ -274,7 +280,7 @@ const RoomsLayout = observer(
           <CreateEditRoomDialog
             visible={dialogsStore.isDialogOpen(SDKDialogs.CreateRoom)}
             onClose={closeCreateRoomDialog}
-            onRoomCreated={() => refreshRef.current?.()}
+            onRoomCreated={onRoomCreated}
           />
           <SelectionArea isRooms />
           <DeviceTypeObserver />

@@ -129,10 +129,10 @@ const RoomsFilter = ({
       filterHeader={t("Common:AdvancedFilter", {
         defaultValue: "Advanced filter",
       })}
-      placeholder={t("Common:Search", { defaultValue: "Search" })}
-      view={t("Common:View", { defaultValue: "View" })}
-      filterTitle={t("Common:Filter", { defaultValue: "Filter" })}
-      sortByTitle={t("Common:SortBy", { defaultValue: "Sort by" })}
+      placeholder={t("Common:Search")}
+      view={t("Common:View")}
+      filterTitle={t("Common:Filter")}
+      sortByTitle={t("Common:SortBy")}
       selectorLabel=""
       isIndexing={false}
       initSearchValue={initSearchValue}

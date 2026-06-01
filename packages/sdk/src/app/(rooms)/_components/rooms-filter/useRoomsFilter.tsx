@@ -150,21 +150,19 @@ export default function useRoomsFilter({
       {
         id: "sort-by_name",
         key: SortByFieldName.Name,
-        label: t("Common:Label", { defaultValue: "Name" }),
+        label: t("Common:Label"),
         default: true,
       },
       {
         id: "sort-by_modified",
         key: SortByFieldName.ModifiedDate,
-        label: t("Common:LastModifiedDate", {
-          defaultValue: "Last modified date",
-        }),
+        label: t("Common:LastModifiedDate"),
         default: true,
       },
       {
         id: "sort-by_author",
         key: SortByFieldName.Author,
-        label: t("Common:Owner", { defaultValue: "Owner" }),
+        label: t("Common:Owner"),
         default: true,
       },
     ],
@@ -237,7 +235,7 @@ export default function useRoomsFilter({
       {
         key: FilterGroups.roomFilterSubject,
         group: FilterGroups.roomFilterSubject,
-        label: t("Common:Contacts", { defaultValue: "Contacts" }),
+        label: t("Common:Contacts"),
         isHeader: true,
         isLast: !tags.length,
         withMultiItems: true,
@@ -246,7 +244,7 @@ export default function useRoomsFilter({
         id: "filter_author-me",
         key: FilterKeys.me,
         group: FilterGroups.roomFilterSubject,
-        label: t("Common:MeLabel", { defaultValue: "Me" }),
+        label: t("Common:MeLabel"),
       },
       {
         id: "filter_author-user",
@@ -261,7 +259,7 @@ export default function useRoomsFilter({
         id: "filter_author-other",
         key: FilterKeys.other,
         group: FilterGroups.roomFilterSubject,
-        label: t("Common:SelectAction", { defaultValue: "Select" }),
+        label: t("Common:SelectAction"),
       });
     }
 
@@ -269,7 +267,7 @@ export default function useRoomsFilter({
       {
         key: FilterGroups.roomFilterOwner,
         group: FilterGroups.roomFilterOwner,
-        label: t("Common:Owners", { defaultValue: "Owners" }),
+        label: t("Common:Owners"),
         isHeader: true,
         withoutSeparator: true,
         withMultiItems: true,
@@ -278,7 +276,7 @@ export default function useRoomsFilter({
         id: "filter_owner-me",
         key: FilterKeys.me,
         group: FilterGroups.roomFilterOwner,
-        label: t("Common:MeLabel", { defaultValue: "Me" }),
+        label: t("Common:MeLabel"),
       },
       {
         id: "filter_owner-user",
@@ -293,7 +291,7 @@ export default function useRoomsFilter({
         id: "filter_owner-other",
         key: FilterKeys.other,
         group: FilterGroups.roomFilterOwner,
-        label: t("Common:SelectAction", { defaultValue: "Select" }),
+        label: t("Common:SelectAction"),
       });
     }
 
@@ -303,7 +301,7 @@ export default function useRoomsFilter({
       filterOptions.push({
         key: FilterGroups.roomFilterTags,
         group: FilterGroups.roomFilterTags,
-        label: t("Common:Tags", { defaultValue: "Tags" }),
+        label: t("Common:Tags"),
         isHeader: true,
         isLast: true,
       });
@@ -328,7 +326,7 @@ export default function useRoomsFilter({
     if (filter.subjectId) {
       const isMe = userId === filter.subjectId;
       let label = isMe
-        ? t("Common:MeLabel", { defaultValue: "Me" })
+        ? t("Common:MeLabel")
         : filter.subjectId;
 
       try {
@@ -348,7 +346,7 @@ export default function useRoomsFilter({
 
       if (filter.subjectFilter?.toString()) {
         if (filter.subjectFilter.toString() === FilterSubject.Owner) {
-          subject.selectedLabel = `${t("Common:Owner", { defaultValue: "Owner" })}: ${label}`;
+          subject.selectedLabel = `${t("Common:Owner")}: ${label}`;
         }
         filterValues.push(subject);
         filterValues.push({
@@ -364,7 +362,7 @@ export default function useRoomsFilter({
     if (filter.subjectOwnerId) {
       const isMe = userId === filter.subjectOwnerId;
       let label = isMe
-        ? t("Common:MeLabel", { defaultValue: "Me" })
+        ? t("Common:MeLabel")
         : filter.subjectOwnerId;
       try {
         if (!isMe) {
@@ -379,7 +377,7 @@ export default function useRoomsFilter({
         key: isMe ? FilterKeys.me : filter.subjectOwnerId,
         group: FilterGroups.roomFilterOwner,
         label,
-        selectedLabel: `${t("Common:Owner", { defaultValue: "Owner" })}: ${label}`,
+        selectedLabel: `${t("Common:Owner")}: ${label}`,
       });
     }
 
@@ -410,7 +408,7 @@ export default function useRoomsFilter({
         key: isMe ? FilterKeys.me : filter.subjectId,
         group: FilterGroups.roomFilterSubject,
         label: isMe
-          ? t("Common:MeLabel", { defaultValue: "Me" })
+          ? t("Common:MeLabel")
           : filter.subjectId,
       });
     }
@@ -421,7 +419,7 @@ export default function useRoomsFilter({
         key: isMe ? FilterKeys.me : filter.subjectOwnerId,
         group: FilterGroups.roomFilterOwner,
         label: isMe
-          ? t("Common:MeLabel", { defaultValue: "Me" })
+          ? t("Common:MeLabel")
           : filter.subjectOwnerId,
       });
     }
@@ -444,13 +442,13 @@ export default function useRoomsFilter({
       {
         id: "view-switch_rows",
         value: "row",
-        label: t("Common:ViewList", { defaultValue: "List view" }),
+        label: t("Common:ViewList"),
         icon: <ViewRowsReactSvg />,
       },
       {
         id: "view-switch_tiles",
         value: "tile",
-        label: t("Common:ViewTiles", { defaultValue: "Tile view" }),
+        label: t("Common:ViewTiles"),
         icon: <ViewTilesReactSvg />,
       },
     ],

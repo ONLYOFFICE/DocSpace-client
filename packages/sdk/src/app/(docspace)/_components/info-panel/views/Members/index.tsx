@@ -1,241 +1,403 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 //
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+// SPDX-License-Identifier: AGPL-3.0-only
 
 "use client";
 
 import React from "react";
-import { decode } from "he";
+import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
-import {
-  Avatar,
-  AvatarRole,
-  AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { Text } from "@docspace/ui-kit/components/text";
-import { ShareAccessRights } from "@docspace/ui-kit/enums";
-import api from "@docspace/shared/api";
-import { MembersSubjectType } from "@docspace/shared/enums";
-import type { RoomMember } from "@docspace/shared/api/rooms/types";
-import type { TUser } from "@docspace/shared/api/people/types";
-import type { TGroup } from "@docspace/shared/api/groups/types";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
+
+import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
-
-import DefaultUserAvatarSmall from "PUBLIC_DIR/images/default_user_photo_size_32-32.png?url";
-
+import type { TGroup } from "@docspace/shared/api/groups/types";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
+import { isDesktop } from "@docspace/shared/utils";
+import { GENERAL_LINK_HEADER_KEY } from "@docspace/shared/constants";
+import { createExternalLink, getPrimaryLink } from "@docspace/shared/api/rooms";
+import { EditGroupMembers } from "@docspace/shared/dialogs/edit-group-members-dialog";
+import MembersList from "@docspace/shared/components/share/sub-components/List";
 
-import commonStyles from "../../helpers/Common.module.scss";
+import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
+import PlusReactSvgUrl from "PUBLIC_DIR/images/plus.react.svg?url";
+
+import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
+import InvitePanel from "@/app/(rooms)/_components/invite-panel";
+
+import type { UseMembersReturn } from "./useMembers";
+import User from "./sub-components/User";
+import LinkRow from "./sub-components/LinkRow";
+import EmptyContainer from "./sub-components/EmptyContainer";
+import RoomHeader from "./sub-components/RoomHeader";
 import styles from "./Members.module.scss";
 
-const ADMIN_ROLES = new Set([
-  ShareAccessRights.FullAccess,
-  ShareAccessRights.RoomManager,
-]);
-
-const USER_SUBJECT_TYPES = new Set([
-  MembersSubjectType.User,
-  MembersSubjectType.Group,
-]);
-
-const getAvatarRole = (member: RoomMember): AvatarRole => {
-  if (member.isOwner) return AvatarRole.owner;
-  if (member.access === ShareAccessRights.FullAccess) return AvatarRole.admin;
-  if (member.access === ShareAccessRights.RoomManager) return AvatarRole.manager;
-  const user = member.sharedTo as TUser;
-  if (user.isVisitor) return AvatarRole.guest;
-  if (member.access === ShareAccessRights.Collaborator)
-    return AvatarRole.collaborator;
-  return AvatarRole.user;
-};
-
-const getRoleLabel = (member: RoomMember, t: ReturnType<typeof useTranslation>["t"]): string => {
-  if (member.isOwner) return t("Common:Owner");
-  switch (member.access) {
-    case ShareAccessRights.FullAccess:
-      return t("Common:RoomAdmin");
-    case ShareAccessRights.RoomManager:
-      return t("Common:RoomManager");
-    case ShareAccessRights.Editing:
-      return t("Common:Editor");
-    case ShareAccessRights.Collaborator:
-      return t("Common:Collaborator");
-    case ShareAccessRights.Review:
-      return t("Common:RoleReviewer");
-    case ShareAccessRights.Comment:
-      return t("Common:RoleCommentator");
-    case ShareAccessRights.FormFilling:
-      return t("Common:RoleFormFiller");
-    case ShareAccessRights.CustomFilter:
-      return t("Common:CustomFilter");
-    case ShareAccessRights.ReadOnly:
-      return t("Common:RoleViewer");
-    default:
-      return "";
-  }
-};
-
-type MemberRowProps = {
-  member: RoomMember;
-  t: ReturnType<typeof useTranslation>["t"];
-};
-
-const MemberRow = ({ member, t }: MemberRowProps) => {
-  const isGroup = member.subjectType === MembersSubjectType.Group;
-  const displayName = decode(
-    isGroup
-      ? (member.sharedTo as TGroup).name
-      : ((member.sharedTo as TUser).displayName ?? ""),
-  );
-  const avatarSrc = isGroup
-    ? ""
-    : ((member.sharedTo as TUser).avatar || DefaultUserAvatarSmall);
-  const roleLabel = getRoleLabel(member, t);
-  const avatarRole = isGroup ? AvatarRole.user : getAvatarRole(member);
-
-  return (
-    <div className={styles.memberRow}>
-      <Avatar
-        size={AvatarSize.min}
-        role={avatarRole}
-        source={avatarSrc}
-        userName={displayName}
-        isGroup={isGroup}
-      />
-      <div className={styles.memberInfo}>
-        <Text className={styles.memberName} truncate>
-          {displayName}
-        </Text>
-        {roleLabel ? (
-          <Text className={styles.memberRole} truncate>
-            {roleLabel}
-          </Text>
-        ) : null}
-      </div>
-    </div>
-  );
-};
-
-type MemberGroupProps = {
-  title: string;
-  members: RoomMember[];
-  t: ReturnType<typeof useTranslation>["t"];
-};
-
-const MemberGroup = ({ title, members, t }: MemberGroupProps) => {
-  if (!members.length) return null;
-  return (
-    <div className={styles.memberGroup}>
-      <Text className={commonStyles.subtitle + " " + styles.groupTitle}>
-        {title}
-      </Text>
-      {members.map((member) => (
-        <MemberRow
-          key={`${member.subjectType}-${member.sharedTo.id}`}
-          member={member}
-          t={t}
-        />
-      ))}
-    </div>
-  );
-};
-
-type MembersProps = {
+type MembersViewProps = {
   selection: TFile | TFolder;
+  membersData: UseMembersReturn;
 };
 
-const Members = ({ selection }: MembersProps) => {
-  const { t } = useTranslation(["InfoPanel", "Common"]);
-  const [members, setMembers] = React.useState<RoomMember[]>([]);
-  const [isLoading, setIsLoading] = React.useState(true);
+const TooltipContent = ({ content }: { content: React.ReactNode }) => (
+  <Text fontSize="12px">{content}</Text>
+);
+
+const Members = observer(({ selection, membersData }: MembersViewProps) => {
+  const { t } = useTranslation(["Common"]);
+  const docsUserStore = useDocsUserStore();
+  const selfId = docsUserStore.user?.id;
+
+  const [invitePanelVisible, setInvitePanelVisible] = React.useState(false);
+  const [showSearch, setShowSearch] = React.useState(false);
+  const [editGroup, setEditGroup] = React.useState<TGroup | null>(null);
+
+  const room = selection as unknown as TRoom;
+  const folder = selection as TFolder;
+
+  const roomType = room.roomType;
+  const isPublicRoom = roomType === RoomsType.PublicRoom;
+  const isFormRoom = roomType === RoomsType.FormRoom;
+  const isCustomRoom = roomType === RoomsType.CustomRoom;
+  const isPublicRoomType =
+    (isPublicRoom || isFormRoom || isCustomRoom) && !room.private;
+  const hasEditAccess = Boolean(room.security?.EditAccess);
+  const isTemplate = room.rootFolderType === FolderType.RoomTemplates;
+  const isArchiveFolder = false;
+
+  const {
+    searchValue,
+    handleSearchMembers,
+    members,
+    fetchMoreMembers,
+    changeUserRole,
+    total,
+    isMembersPanelUpdating,
+    setIsMembersPanelUpdating,
+    primaryLink,
+    setPrimaryLink,
+    additionalLinks,
+    setAdditionalLinks,
+  } = membersData;
 
   React.useEffect(() => {
-    const controller = new AbortController();
-    setIsLoading(true);
-
-    api.rooms
-      .getRoomMembers(selection.id, {}, controller.signal)
-      .then((res) => {
-        setMembers(
-          res.items.filter((m) => USER_SUBJECT_TYPES.has(m.subjectType)),
-        );
-        setIsLoading(false);
-      })
-      .catch(() => {
-        setIsLoading(false);
-      });
-
-    return () => controller.abort();
+    setShowSearch(false);
   }, [selection.id]);
 
-  const admins = members.filter(
-    (m) => m.isOwner || ADMIN_ROLES.has(m.access),
-  );
-  const guests = members.filter(
-    (m) =>
-      !m.isOwner &&
-      !ADMIN_ROLES.has(m.access) &&
-      m.subjectType === MembersSubjectType.User &&
-      (m.sharedTo as TUser).isVisitor,
-  );
-  const pending = members.filter(
-    (m) => !m.isOwner && m.access === ShareAccessRights.None,
-  );
-  const usersSet = new Set([...admins, ...guests, ...pending]);
-  const users = members.filter((m) => !usersSet.has(m));
+  const onSearchClose = React.useCallback(() => {
+    setShowSearch(false);
+    handleSearchMembers("");
+  }, [handleSearchMembers]);
 
-  if (isLoading) return <InfoPanelViewLoader view="members" />;
+  const onAddNewLink = async () => {
+    try {
+      if (isPublicRoom || primaryLink) {
+        const link = await createExternalLink(selection.id);
+        setAdditionalLinks((prev) => [...prev, link]);
+      } else {
+        const link = await getPrimaryLink(selection.id);
+        setPrimaryLink(link);
+      }
+      toastr.success(t("Common:RoomLinkSuccessfullyCreatedAndCopied"));
+    } catch (error) {
+      toastr.error(error as Error);
+      console.error(error);
+    }
+  };
+
+  const getPublicRoomItems = () => {
+    const publicRoomItems: React.ReactNode[] = [];
+
+    const countCanCreateLink = Math.max(
+      0,
+      (room?.shareSettings?.ExternalLink ?? 0) +
+        (room?.shareSettings?.PrimaryExternalLink ?? 0) -
+        1,
+    );
+
+    const canAddLink = (room?.shareSettings?.ExternalLink ?? 0) > 0;
+
+    if (
+      isPublicRoomType &&
+      room?.security?.EditAccess &&
+      !searchValue &&
+      !isTemplate
+    ) {
+      if (!isArchiveFolder || primaryLink) {
+        publicRoomItems.push(
+          <div
+            className={styles.linksBlock}
+            key={GENERAL_LINK_HEADER_KEY}
+            data-testid="info_panel_members_links_block"
+          >
+            <Text
+              fontSize="14px"
+              fontWeight={600}
+              lineHeight="16px"
+              color="var(--info-panel-subtitle-color)"
+            >
+              {isFormRoom ? t("Common:PublicLink") : t("Common:SharedLinks")}
+            </Text>
+
+            {!isArchiveFolder && canAddLink ? (
+              <div
+                data-tooltip-id="emailTooltip"
+                data-tooltip-content={t(
+                  "Common:MaximumNumberOfExternalLinksCreated",
+                )}
+              >
+                <IconButton
+                  className="link-to-viewing-icon"
+                  iconName={LinksToViewingIconUrl}
+                  onClick={onAddNewLink}
+                  size={16}
+                  isDisabled={
+                    additionalLinks
+                      ? additionalLinks.length >= countCanCreateLink
+                      : false
+                  }
+                  title={t("Common:RoomAddNewLink")}
+                  dataTestId="info_panel_members_add_new_link_button"
+                />
+
+                {additionalLinks &&
+                additionalLinks.length >= countCanCreateLink ? (
+                  <Tooltip
+                    float={isDesktop()}
+                    id="emailTooltip"
+                    getContent={TooltipContent}
+                    place="bottom"
+                  />
+                ) : null}
+              </div>
+            ) : null}
+          </div>,
+        );
+      }
+
+      if (primaryLink && !searchValue) {
+        publicRoomItems.push(
+          <div data-share key="general-link">
+            <LinkRow
+              link={primaryLink}
+              selection={folder}
+              t={t}
+              onLinkUpdate={(updated) => setPrimaryLink(updated)}
+              onLinkRemoved={() => setPrimaryLink(null)}
+            />
+          </div>,
+        );
+      }
+
+      if (additionalLinks && additionalLinks.length && !searchValue) {
+        additionalLinks.forEach((link) => {
+          publicRoomItems.push(
+            <div data-share key={link?.sharedTo?.id}>
+              <LinkRow
+                link={link}
+                selection={folder}
+                t={t}
+                onLinkUpdate={(updated) =>
+                  setAdditionalLinks((prev) =>
+                    prev.map((l) =>
+                      l.sharedTo.id === updated.sharedTo.id ? updated : l,
+                    ),
+                  )
+                }
+                onLinkRemoved={() =>
+                  setAdditionalLinks((prev) =>
+                    prev.filter((l) => l.sharedTo.id !== link.sharedTo.id),
+                  )
+                }
+              />
+            </div>,
+          );
+        });
+      } else if (!isArchiveFolder && !primaryLink && !searchValue) {
+        publicRoomItems.push(
+          <div
+            key="create-additional-link"
+            className={classNames("additional-link", styles.createLinkRow)}
+            onClick={onAddNewLink}
+            data-share
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === "Enter" && onAddNewLink()}
+            data-testid="info_panel_members_create_additional_link"
+          >
+            <div className={styles.createLinkIcon}>
+              <IconButton size={12} iconName={PlusReactSvgUrl} isDisabled />
+            </div>
+
+            <Link
+              noHover
+              type={LinkType.action}
+              fontSize="14px"
+              fontWeight={600}
+              className="external-row-link"
+            >
+              {t("Common:RoomCreateNewLink")}
+            </Link>
+          </div>,
+        );
+      }
+    }
+
+    return publicRoomItems;
+  };
+
+  const getContent = () => {
+    if (!members) return <InfoPanelViewLoader view="members" />;
+
+    const [currentMember] = members.administrators.filter(
+      (member) => member.id === selfId,
+    );
+
+    const { administrators, users, expected, groups, guests } = members;
+
+    const membersList = [
+      ...administrators,
+      ...groups,
+      ...users,
+      ...guests,
+      ...expected,
+    ];
+
+    const adminsTitleCount = administrators.length ? 1 : 0;
+    const usersTitleCount = users.length ? 1 : 0;
+    const expectedTitleCount = expected.length ? 1 : 0;
+    const groupsTitleCount = groups.length ? 1 : 0;
+    const guestsTitleCount = guests.length ? 1 : 0;
+
+    const headersCount = searchValue
+      ? 0
+      : adminsTitleCount +
+        usersTitleCount +
+        expectedTitleCount +
+        groupsTitleCount +
+        guestsTitleCount;
+
+    const publicRoomItems = getPublicRoomItems();
+
+    const showPublicRoomBar =
+      ((primaryLink && !isArchiveFolder) || isPublicRoom) &&
+      room?.security?.EditAccess &&
+      !searchValue &&
+      !isTemplate;
+
+    const publicRoomItemsLength = publicRoomItems.length;
+
+    if (!membersList.length) {
+      return <EmptyContainer />;
+    }
+
+    return (
+      <>
+        {showPublicRoomBar ? (
+          <div
+            className={styles.publicRoomBarContainer}
+            data-testid="info_panel_members_public_room_bar_container"
+          >
+            <PublicRoomBar
+              headerText={
+                isFormRoom
+                  ? t("Common:RoomMembersAvailableViaSharedLink")
+                  : t("Common:RoomMembersAvailableViaExternalLink")
+              }
+              bodyText={
+                isFormRoom
+                  ? t("Common:RoomFormBarDescription")
+                  : t("Common:RoomPublicBarDescription")
+              }
+            />
+          </div>
+        ) : null}
+
+        <MembersList
+          loadNextPage={fetchMoreMembers}
+          hasNextPage={
+            !isMembersPanelUpdating
+              ? membersList.length - headersCount < total
+              : false
+          }
+          itemCount={total + headersCount + publicRoomItemsLength}
+          linksBlockLength={publicRoomItemsLength}
+          withoutTitlesAndLinks={!!searchValue}
+        >
+          {publicRoomItems}
+          {membersList.map((user, index) => {
+            return (
+              <User
+                user={user}
+                key={
+                  user.id ||
+                  ("email" in user && user.email) ||
+                  ("name" in user && user.name) ||
+                  ""
+                }
+                currentUser={currentMember}
+                hasNextPage={
+                  !isMembersPanelUpdating
+                    ? membersList.length - headersCount < total
+                    : false
+                }
+                searchValue={searchValue}
+                room={room}
+                changeUserRole={changeUserRole}
+                onOpenGroup={setEditGroup}
+                index={index + publicRoomItemsLength}
+              />
+            );
+          })}
+        </MembersList>
+      </>
+    );
+  };
 
   return (
-    <div
-      className={styles.membersList}
-      data-testid="info_panel_members"
-    >
-      <MemberGroup
-        title={t("InfoPanel:Administration")}
-        members={admins}
-        t={t}
+    <div className={styles.membersList} data-testid="info_panel_members">
+      <RoomHeader
+        selection={folder}
+        hasEditAccess={hasEditAccess}
+        showSearch={showSearch}
+        onSearchOpen={() => setShowSearch(true)}
+        onSearchClose={onSearchClose}
+        setSearchValue={handleSearchMembers}
+        onInvite={() => setInvitePanelVisible(true)}
       />
-      <MemberGroup
-        title={t("InfoPanel:Users")}
-        members={users}
-        t={t}
-      />
-      <MemberGroup
-        title={t("Common:Guests")}
-        members={guests}
-        t={t}
-      />
-      <MemberGroup
-        title={t("InfoPanel:ExpectUsers")}
-        members={pending}
-        t={t}
-      />
+
+      {getContent()}
+
+      {invitePanelVisible ? (
+        <InvitePanel
+          visible
+          roomId={Number(selection.id)}
+          roomType={roomType}
+          onClose={() => setInvitePanelVisible(false)}
+          onMembersUpdated={() => setIsMembersPanelUpdating(true)}
+        />
+      ) : null}
+
+      {editGroup ? (
+        <EditGroupMembers
+          infoPanelSelection={selection}
+          group={editGroup}
+          visible
+          standalone
+          setVisible={(visible: boolean) => {
+            if (!visible) setEditGroup(null);
+          }}
+          onClose={() => setEditGroup(null)}
+        />
+      ) : null}
     </div>
   );
-};
+});
 
 export default Members;

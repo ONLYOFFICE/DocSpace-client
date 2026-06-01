@@ -29,17 +29,18 @@
 import React from "react";
 import { observer } from "mobx-react";
 
+import { ScrollbarContext } from "@docspace/ui-kit/components/scrollbar";
+import type { TRoom } from "@docspace/shared/api/rooms/types";
+
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 
-import {
-  InfoPanelView,
-  useInfoPanelStore,
-} from "../../_store/InfoPanelStore";
+import { InfoPanelView, useInfoPanelStore } from "../../_store/InfoPanelStore";
 
 import { getAvailableTabs } from "./helpers/tabs";
 import Details from "./views/Details";
 import History from "./views/History";
 import Members from "./views/Members";
+import { useMembers } from "./views/Members/useMembers";
 import ShareView from "./views/Share";
 import { NoItem, SeveralItems } from "./views/EmptyStates";
 
@@ -56,6 +57,17 @@ const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
 
   const selectedCount = filesSelectionStore.selection.length;
   const isSeveralItems = selectedCount > 1;
+
+  const isRoom =
+    !!selection && "isRoom" in selection && Boolean(selection.isRoom);
+  const scrollContext = React.use(ScrollbarContext);
+  const scrollToTop = React.useCallback(() => {
+    scrollContext?.parentScrollbar?.scrollToTop();
+  }, []);
+  const membersData = useMembers({
+    room: isRoom ? (selection as unknown as TRoom) : null,
+    scrollToTop,
+  });
 
   React.useEffect(() => {
     if (!isVisible) return;
@@ -99,7 +111,7 @@ const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
       : (availableTabs[0] ?? InfoPanelView.infoDetails);
 
     if (currentView === InfoPanelView.infoMembers)
-      return <Members selection={selection} />;
+      return <Members selection={selection} membersData={membersData} />;
     if (currentView === InfoPanelView.infoShare)
       return <ShareView selection={selection} />;
     if (currentView === InfoPanelView.infoHistory)

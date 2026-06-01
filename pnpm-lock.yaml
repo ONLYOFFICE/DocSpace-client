@@ -1046,6 +1046,9 @@ importers:
       classnames:
         specifier: 2.5.1
         version: 2.5.1
+      copy-to-clipboard:
+        specifier: 3.3.3
+        version: 3.3.3
       date-and-time:
         specifier: 3.6.0
         version: 3.6.0
@@ -1058,6 +1061,9 @@ importers:
       lodash:
         specifier: 4.18.1
         version: 4.18.1
+      luxon:
+        specifier: 3.7.2
+        version: 3.7.2
       mobx:
         specifier: 6.13.5
         version: 6.13.5
@@ -1143,6 +1149,9 @@ importers:
       '@types/lodash':
         specifier: 4.17.10
         version: 4.17.10
+      '@types/luxon':
+        specifier: 3.7.1
+        version: 3.7.1
       '@types/node':
         specifier: 24.10.7
         version: 24.10.7

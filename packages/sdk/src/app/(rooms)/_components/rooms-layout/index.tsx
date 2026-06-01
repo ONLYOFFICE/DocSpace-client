@@ -67,6 +67,7 @@ import CreateEditRoomDialog from "../create-edit-room-dialog";
 import {
   InfoPanelBody as DocsInfoPanelBody,
   InfoPanelHeader as DocsInfoPanelHeader,
+  InfoPanelEditLinkDialog,
 } from "@/app/(docspace)/_components/info-panel";
 import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
 
@@ -255,6 +256,10 @@ const RoomsLayout = observer(
           />
           <SelectionArea isRooms />
           <DeviceTypeObserver />
+          {/* Renders the room-link edit side panel driven by InfoPanelStore
+              (LinkRow opens it). Mounted here so it shares the rooms-tree
+              InfoPanelStore; docs-layout mounts its own for personal-files. */}
+          <InfoPanelEditLinkDialog />
         </RootScrollbar>
       </div>
     );

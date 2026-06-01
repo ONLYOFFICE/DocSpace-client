@@ -155,6 +155,7 @@ const RoomsList = ({
       undefined,
       isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
     );
+    f.type = String(RoomsType.CustomRoom);
     const sp = new URLSearchParams(filesFilter);
     if (sp.get("page")) f.page = Number(sp.get("page"));
     if (sp.get("pageCount")) f.pageCount = Number(sp.get("pageCount"));
@@ -464,6 +465,7 @@ const RoomsList = ({
       undefined,
       isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
     );
+    newFilter.type = String(RoomsType.CustomRoom);
     const sp = new URLSearchParams(window.location.search);
     if (sp.get("page")) newFilter.page = Number(sp.get("page"));
     if (sp.get("sortBy"))

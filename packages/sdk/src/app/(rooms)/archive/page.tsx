@@ -29,7 +29,7 @@ import { cookies } from "next/headers";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import type { TFolder } from "@docspace/shared/api/files/types";
 import type { TSettings } from "@docspace/shared/api/settings/types";
-import { RoomSearchArea } from "@docspace/shared/enums";
+import { RoomSearchArea, RoomsType } from "@docspace/shared/enums";
 
 import { getFilesSettings } from "@/api/files";
 import { getRooms } from "@/api/rooms";
@@ -72,6 +72,7 @@ export default async function Archive({
   const params = await searchParams;
 
   const filter = RoomsFilter.getDefault(undefined, RoomSearchArea.Archive);
+  filter.type = String(RoomsType.CustomRoom);
   filter.pageCount = params.pageCount ? Number(params.pageCount) : PAGE_COUNT;
   if (params.page) filter.page = Math.max(0, Number(params.page) - 1);
   if (params.sortBy) filter.sortBy = params.sortBy as typeof filter.sortBy;

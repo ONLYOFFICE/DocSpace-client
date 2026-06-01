@@ -42,6 +42,7 @@ import { useSearchParams } from "next/navigation";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import {
   RoomSearchArea,
+  RoomsType,
   SortByFieldName,
   FilterGroups,
   FilterKeys,
@@ -94,19 +95,25 @@ export default function useRoomsFilter({
 
   const searchArea = isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active;
 
-  const [filter, setFilter] = React.useState<RoomsFilter>(() => {
+  const buildDefaultFilter = React.useCallback(() => {
     const f = RoomsFilter.getDefault(userId, searchArea);
+    f.type = String(RoomsType.CustomRoom);
+    return f;
+  }, [userId, searchArea]);
+
+  const [filter, setFilter] = React.useState<RoomsFilter>(() => {
+    const f = buildDefaultFilter();
     const sp = new URLSearchParams(filesFilter);
     applyParamsToFilter(sp, f);
     return f;
   });
 
   React.useEffect(() => {
-    const f = RoomsFilter.getDefault(userId, searchArea);
+    const f = buildDefaultFilter();
     const sp = new URLSearchParams(window.location.search);
     applyParamsToFilter(sp, f);
     setFilter(f);
-  }, [searchParams, userId, searchArea]);
+  }, [searchParams, buildDefaultFilter]);
 
   const applyFilter = React.useCallback((next: RoomsFilter) => {
     setFilter(next);
@@ -114,8 +121,8 @@ export default function useRoomsFilter({
   }, []);
 
   const onClearFilter = React.useCallback(() => {
-    applyFilter(RoomsFilter.getDefault(userId, searchArea));
-  }, [applyFilter, userId, searchArea]);
+    applyFilter(buildDefaultFilter());
+  }, [applyFilter, buildDefaultFilter]);
 
   const onSearch = React.useCallback(
     (value: string) => {

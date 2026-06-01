@@ -24,6 +24,7 @@
     transform: translateX(-100%);
     transition: transform 0.2s ease-out;
     will-change: transform;
+    padding-block-start: 16px;
 
     &:global([data-sidebar-open="true"]) {
       transform: translateX(0);

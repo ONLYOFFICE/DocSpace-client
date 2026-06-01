@@ -2118,5 +2118,11 @@
   "RoomCreateUserCount": "Користувачів додано ({{count}}).",
   "RoomGroupAdded": "Групи додано.",
   "RoomGroupAddedCount": "Групи додано ({{count}}).",
-  "Overview": "Огляд"
+  "Overview": "Огляд",
+  "ChangesToTag": "Зміни цього тегу вплинуть на всі кімнати, де він використовується.",
+  "DeleteTag": "Видалити тег",
+  "DeleteTagCannotBeUndone": "Цю дію неможливо скасувати.",
+  "DeleteTagConfirmation": "Видалення цього тегу видалить його з усіх кімнат, де він використовується.",
+  "EditTag": "Редагувати тег",
+  "RemoveTag": "<1>{{tag}}</1> тег видалено."
 }

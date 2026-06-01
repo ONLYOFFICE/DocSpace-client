@@ -32,8 +32,9 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
-import { FileType } from "@docspace/shared/enums";
+import { FileType, FolderType } from "@docspace/shared/enums";
 import { createThumbnails } from "@docspace/shared/api/files";
+import { isAdmin } from "@docspace/shared/utils/common";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
@@ -42,6 +43,8 @@ import {
   type RoomIconFields,
 } from "@/app/(docspace)/_utils/getRoomIconLogo";
 import { useDocsSettingsStore } from "@/app/(personal-files)/_store/DocsSettingsStore";
+import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
+import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
 import DetailsHelper, { type DetailsProperty } from "./Details.utils";
 
@@ -61,6 +64,11 @@ const Details = observer(({ selection, onTagsChanged }: DetailsProps) => {
     filesSettings: docsSettingsStore.filesSettings ?? undefined,
   });
 
+  const { user } = useDocsUserStore();
+  const { rootFolderType } = useFilesListStore();
+  const canManageTags =
+    !!(user && isAdmin(user)) && rootFolderType !== FolderType.Archive;
+
   const [itemProperties, setItemProperties] = React.useState<DetailsProperty[]>(
     [],
   );
@@ -73,6 +81,7 @@ const Details = observer(({ selection, onTagsChanged }: DetailsProps) => {
       culture: i18n.language,
       tagListClassName: styles.tagList,
       onTagsChanged,
+      canManageTags,
     });
     setItemProperties(helper.getPropertyList());
 
@@ -93,7 +102,7 @@ const Details = observer(({ selection, onTagsChanged }: DetailsProps) => {
     }
 
     setIsThumbnailError(false);
-  }, [selection, t, i18n.language]);
+  }, [selection, t, i18n.language, canManageTags]);
 
   const onThumbnailError = () => setIsThumbnailError(true);
 

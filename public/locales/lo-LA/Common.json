@@ -2118,5 +2118,11 @@
   "RoomCreateUserCount": "ຜູ້ໃຊ້ເພີ່ມເຕີມ ({{count}}).",
   "RoomGroupAdded": "ກຸ່ມຖືກເພີ່ມເຂົ້າແລ້ວ.",
   "RoomGroupAddedCount": "ກຸ່ມຖືກເພີ່ມເຂົ້າແລ້ວ ({{count}}).",
-  "Overview": "ພາບລວມ"
+  "Overview": "ພາບລວມ",
+  "ChangesToTag": "ການປ່ຽນແປງໃດໆຕໍ່ແທັກນີ້ຈະສົ່ງຜົນກະທົບຕໍ່ທຸກຫ້ອງທີ່ມັນຖືກນຳໃຊ້.",
+  "DeleteTag": "ລຶບປ້າຍ",
+  "DeleteTagCannotBeUndone": "ການກະທຳນີ້ບໍ່ສາມາດຍົກເລີກໄດ້.",
+  "DeleteTagConfirmation": "ການລຶບແທັກນີ້ຈະເຮັດໃຫ້ມັນຖືກລຶບອອກຈາກທຸກຫ້ອງທີ່ມັນຖືກນຳໃຊ້.",
+  "EditTag": "ແກ້ໄຂປ້າຍ",
+  "RemoveTag": "<1>{{tag}}</1> tag ຖືກລຶບອອກ."
 }

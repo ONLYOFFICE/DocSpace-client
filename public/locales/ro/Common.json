@@ -2126,5 +2126,11 @@
   "RoomCreateUserCount": "Utilizatorul a fost adăugat ({{count}}).",
   "RoomGroupAdded": "Grupuri au fost adăugate.",
   "RoomGroupAddedCount": "Grupuri au fost adăugate ({{count}}).",
-  "Overview": "Prezentare generală"
+  "Overview": "Prezentare generală",
+  "ChangesToTag": "Schimbările efectuate la acest tag vor afecta toate camerele în care este utilizat.",
+  "DeleteTag": "Șterge etichetă",
+  "DeleteTagCannotBeUndone": "Acțiunea nu poate fi anulată.",
+  "DeleteTagConfirmation": "Ștergerea acestui tag îl va elimina din toate camerele în care este utilizat.",
+  "EditTag": "Editează eticheta",
+  "RemoveTag": "<1>{{tag}}</1> eticheta eliminată."
 }

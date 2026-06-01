@@ -422,7 +422,6 @@
   "CollaborationRoomDescription": "Arbeiten Sie gemeinsam mit Ihrem Team an einem oder mehreren Dokumenten",
   "CollaborationRooms": "Zusammenarbeit",
   "CollaborationRoomTitle": "Raum für Zusammenarbeit",
-  "Collaborator": "Mitarbeiter",
   "CollectData": "Daten sammeln",
   "CollectResultsInXlsx": "Ergebnisse in XLSX sammeln",
   "CollectResultsInXlsxDescription": "Automatische Erfassung von Formularergebnissen in Tabellenkalkulationen. Die Tabellenkalkulationen werden im selben Ordner erstellt, in dem die ausgefüllten Formularkopien gespeichert sind. Für jedes Formular wird eine separate XLSX-Datei generiert. Jede Zeile repräsentiert ein einzelnes ausgefülltes Formular, und die Spalten entsprechen den Formularfeldern.",

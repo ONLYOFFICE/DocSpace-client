@@ -422,7 +422,6 @@
   "CollaborationRoomDescription": "Collabora con il tuo team su uno o più documenti",
   "CollaborationRooms": "Collaborazione",
   "CollaborationRoomTitle": "Stanza di collaborazione",
-  "Collaborator": "Collaboratore",
   "CollectData": "Raccogli dati",
   "CollectResultsInXlsx": "Raccogli i risultati in XLSX",
   "CollectResultsInXlsxDescription": "Raccolta automatica dei risultati del modulo in fogli di calcolo. I fogli di calcolo vengono creati nella stessa cartella dove sono archiviate le copie del modulo compilato. Viene generato un file XLSX separato per ogni modulo. Ogni riga rappresenta un singolo modulo compilato, e le colonne corrispondono ai campi del modulo.",

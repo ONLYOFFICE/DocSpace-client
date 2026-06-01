@@ -422,7 +422,6 @@
   "CollaborationRoomDescription": "Colaborați în documentul sau în mai multe documente cu echipa dvs",
   "CollaborationRooms": "Colaborare",
   "CollaborationRoomTitle": "Sală de colaborare",
-  "Collaborator": "Colaborator",
   "CollectData": "Colectează date",
   "CollectResultsInXlsx": "Colectează rezultatele în XLSX",
   "CollectResultsInXlsxDescription": "Colectarea automată a rezultatelor formularului în fișiere de calcul. Fișierele de calcul sunt create în același folder unde sunt stocate copiile formularului completat. Pentru fiecare formular este generat un fișier XLSX separat. Fiecare rând reprezintă un singur formular completat, iar coloanele corespund câmpurilor formularului.",

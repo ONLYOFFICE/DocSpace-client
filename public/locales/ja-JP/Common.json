@@ -422,7 +422,6 @@
   "CollaborationRoomDescription": "1つまたは複数のドキュメントをチームで共同編集する。",
   "CollaborationRooms": "コラボレーション",
   "CollaborationRoomTitle": "コラボレーションルーム",
-  "Collaborator": "コラボレーター",
   "CollectData": "データ収集",
   "CollectResultsInXlsx": "結果をXLSXに収集する。",
   "CollectResultsInXlsxDescription": "フォームの結果をスプレッドシートに自動で収集します。スプレッドシートは、記入されたフォームのコピーが保存されているのと同じフォルダに作成されます。フォームごとに個別のXLSXファイルが生成されます。各行は単一の記入済みフォームを表し、列はフォームのフィールドに対応します。",

@@ -414,7 +414,6 @@
   "CollaborationRoomDescription": "Tee yhteistyötä tiimisi kanssa yhden tai useamman dokumentin parissa",
   "CollaborationRooms": "Yhteistyö",
   "CollaborationRoomTitle": "Yhteistyöhuone",
-  "Collaborator": "Yhteistyökumppani",
   "CollectData": "Kerää dataa",
   "CollectResultsInXlsx": "Kerää tulokset XLSX-tiedostoon",
   "CollectResultsInXlsxDescription": "Lomakeiden tulosten automaattinen kerääminen taulukkolaskentaohjelmiin. Taulukkolaskentaohjelmat luodaan samaan kansioon, johon täytetyt lomakekopiot tallennetaan. Jokaiselle lomakkeelle luodaan erillinen XLSX-tiedosto. Jokainen rivi edustaa yhtä täytettyä lomaketta, ja sarakkeet vastaavat lomakekenttiä.",

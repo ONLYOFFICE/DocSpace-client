@@ -414,7 +414,6 @@
   "CollaborationRoomDescription": "Sadarbojieties ar savu komandu vienā vai vairākos dokumentos",
   "CollaborationRooms": "Sadarbība",
   "CollaborationRoomTitle": "Sadarbības telpa",
-  "Collaborator": "Līdzautors",
   "CollectData": "Savāc datus",
   "CollectResultsInXlsx": "Savāc rezultātus XLSX formātā",
   "CollectResultsInXlsxDescription": "Automātiska formu rezultātu savākšana tabulās. Tabulas tiek izvekotas tajā pašā mappē, kur saglabātas pildītas formas kopijas. Katrai formai tiek ģenerēts atsevišķs XLSX fails. Katra rinda apraksta vienu pildītu formu, un kolonnas atspoguļo formu laukus.",

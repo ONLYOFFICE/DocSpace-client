@@ -414,7 +414,6 @@
   "CollaborationRoomDescription": "Cộng tác trên một hoặc nhiều tài liệu với nhóm của bạn",
   "CollaborationRooms": "Cộng tác",
   "CollaborationRoomTitle": "Phòng cộng tác",
-  "Collaborator": "Cộng tác viên",
   "CollectData": "Thu thập dữ liệu",
   "CollectResultsInXlsx": "Thu thập kết quả trong XLSX",
   "CollectResultsInXlsxDescription": "Thu thập tự động kết quả biểu mẫu vào bảng tính. Các bảng tính được tạo trong cùng thư mục nơi lưu trữ các bản sao biểu mẫu đã điền. Một tệp XLSX riêng biệt được tạo cho mỗi biểu mẫu. Mỗi hàng đại diện cho một biểu mẫu đã điền, và các cột tương ứng với các trường biểu mẫu.",

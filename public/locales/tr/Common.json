@@ -414,7 +414,6 @@
   "CollaborationRoomDescription": "Ekibinizle bir veya daha fazla belge üzerinde iş birliği yapın",
   "CollaborationRooms": "İş birliği",
   "CollaborationRoomTitle": "İş birliği odası",
-  "Collaborator": "İşbirlikçi",
   "CollectData": "Veri topla",
   "CollectResultsInXlsx": "Sonuçları XLSX'te toplayın",
   "CollectResultsInXlsxDescription": "Form sonuçlarının e-tablolara otomatik olarak toplanması. E-tablolar, doldurulmuş form kopyalarının saklandığı aynı klasörde oluşturulur. Her form için ayrı bir XLSX dosyası oluşturulur. Her satır tek bir doldurulmuş formu, sütunlar ise form alanlarını temsil eder.",

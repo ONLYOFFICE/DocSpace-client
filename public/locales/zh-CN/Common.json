@@ -422,7 +422,6 @@
   "CollaborationRoomDescription": "与团队就一个或多个文档进行协作",
   "CollaborationRooms": "协作",
   "CollaborationRoomTitle": "协作房间",
-  "Collaborator": "协作者",
   "CollectData": "收集数据",
   "CollectResultsInXlsx": "收集结果到 XLSX",
   "CollectResultsInXlsxDescription": "表单结果会自动收集到电子表格中。电子表格将创建在存储已填写表单副本的同一文件夹中。每个表单都会生成一个独立的 XLSX 文件。每一行代表一个已填写的表单，而列则对应表单字段。",

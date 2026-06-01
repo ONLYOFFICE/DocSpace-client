@@ -414,7 +414,6 @@
   "CollaborationRoomDescription": "Werk samen met uw team aan één of meerdere documenten",
   "CollaborationRooms": "Samenwerking",
   "CollaborationRoomTitle": "Samenwerkingskamer",
-  "Collaborator": "Medewerker",
   "CollectData": "Verzamel data",
   "CollectResultsInXlsx": "Verzamel resultaten in XLSX",
   "CollectResultsInXlsxDescription": "Automatische verzameling van formulierresultaten in werkbladen. Werkbladen worden aangemaakt in dezelfde map waar de ingevulde formulierkopieën worden opgeslagen. Er wordt een apart XLSX-bestand gegenereerd voor elk formulier. Elke rij vertegenwoordigt een enkel ingevuld formulier, en de kolommen corresponderen met de velden van het formulier.",

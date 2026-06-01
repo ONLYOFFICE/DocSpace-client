@@ -422,7 +422,6 @@
   "CollaborationRoomDescription": "Sarađuj na jednom ili više dokumenata sa svojim timom",
   "CollaborationRooms": "Saradnja",
   "CollaborationRoomTitle": "Soba za saradnju",
-  "Collaborator": "Saradnik",
   "CollectData": "Prikupljati podatke",
   "CollectResultsInXlsx": "Prikupiti rezultate u XLSX",
   "CollectResultsInXlsxDescription": "Automatsko prikupljanje rezultata forme u radne knjige. Radne knjige se kreiraju u istoj mapi gde su sačuvane kopije popunjene forme. Za svaku formu generiše se odvojena XLSX datoteka. Svaki red predstavlja jednu popunjenu formu, a kolone odgovaraju poljima forme.",

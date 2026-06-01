@@ -422,7 +422,6 @@
   "CollaborationRoomDescription": "Collaborez avec votre équipe sur un ou plusieurs documents",
   "CollaborationRooms": "Salles de collaboration",
   "CollaborationRoomTitle": "Salle de collaboration",
-  "Collaborator": "Collaborateur",
   "CollectData": "Collecter des données",
   "CollectResultsInXlsx": "Collecter les résultats dans XLSX",
   "CollectResultsInXlsxDescription": "Collecte automatique des résultats de formulaire dans des feuilles de calcul. Les feuilles de calcul sont créées dans le même dossier où sont stockées les copies de formulaire remplies. Un fichier XLSX séparé est généré pour chaque formulaire. Chaque ligne représente un formulaire rempli, et les colonnes correspondent aux champs du formulaire.",

@@ -414,7 +414,6 @@
   "CollaborationRoomDescription": "تعاون في مستند واحد أو عدة مستندات مع فريقك",
   "CollaborationRooms": "تعاون",
   "CollaborationRoomTitle": "غرفة التعاون",
-  "Collaborator": "متعاون",
   "CollectData": "اجمع البيانات",
   "CollectResultsInXlsx": "اجمع النتائج في ملف XLSX",
   "CollectResultsInXlsxDescription": "التجميع التلقائي لنتائج النماذج في جداول البيانات. يتم إنشاء جداول البيانات في نفس المجلد الذي تُخزَّن فيه نسخ النماذج المعبأة. يتم إنشاء ملف XLSX منفصل لكل نموذج. يمثل كل صف نموذجًا واحدًا مُعبأً، وتتناظر الأعمدة مع حقول النموذج.",

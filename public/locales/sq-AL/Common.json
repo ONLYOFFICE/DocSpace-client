@@ -414,7 +414,6 @@
   "CollaborationRoomDescription": "Bashkëpunoni në një ose disa dokumente me ekipin tuaj",
   "CollaborationRooms": "Bashkëpunimi",
   "CollaborationRoomTitle": "Dhoma e bashkëpunimit",
-  "Collaborator": "Bashkëpunëtor",
   "CollectData": "Mblidhni të dhënat",
   "CollectResultsInXlsx": "Mbledhni rezultatet në XLSX",
   "CollectResultsInXlsxDescription": "Mbledhja automatike e rezultateve të formularëve në fletë pune. Fletët e punës krijohen në të njëjtën dosje ku ruhen kopjet e plotësuara të formularëve. Krijohet një skedar XLSX i veçantë për çdo formular. Çdo rresht përfaqëson një formular të plotësuar, dhe kolonat korrespondojnë me fusha të formularit.",

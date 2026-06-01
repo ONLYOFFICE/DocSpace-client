@@ -422,7 +422,6 @@
   "CollaborationRoomDescription": "Colabore em um ou vários documentos com sua equipe",
   "CollaborationRooms": "Colaboração",
   "CollaborationRoomTitle": "Sala de colaboração",
-  "Collaborator": "Colaborador",
   "CollectData": "Coletar dados",
   "CollectResultsInXlsx": "Colete os resultados em XLSX",
   "CollectResultsInXlsxDescription": "Coleta automática de resultados de formulário em planilhas. As planilhas são criadas na mesma pasta onde as cópias de formulários preenchidos são armazenadas. Um arquivo XLSX separado é gerado para cada formulário. Cada linha representa um formulário preenchido, e as colunas correspondem aos campos do formulário.",

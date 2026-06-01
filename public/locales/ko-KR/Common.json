@@ -406,7 +406,6 @@
   "CollaborationRoomDescription": "팀과 함께 하나 이상의 문서에서 공동 작업하세요",
   "CollaborationRooms": "공동 작업",
   "CollaborationRoomTitle": "공동 작업실",
-  "Collaborator": "협업자",
   "CollectData": "데이터 수집하기",
   "CollectResultsInXlsx": "XLSX 파일에 결과 수집",
   "CollectResultsInXlsxDescription": "양식 결과를 스프레드시트로 자동 수집합니다. 스프레드시트는 작성된 양식 사본이 저장된 폴더에 생성됩니다. 각 양식별로 별도의 XLSX 파일이 생성됩니다. 각 행은 단일 작성 양식을 나타내며, 열은 양식 필드에 해당합니다.",

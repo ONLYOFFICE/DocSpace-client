@@ -414,7 +414,6 @@
   "CollaborationRoomDescription": "Sodeluj pri enem ali več dokumentih s svojo ekipo",
   "CollaborationRooms": "Sodelovanje",
   "CollaborationRoomTitle": "Soba za sodelovanje",
-  "Collaborator": "Sodelavec",
   "CollectData": "Zbiraj podatke",
   "CollectResultsInXlsx": "Zberite rezultate v datoteki XLSX",
   "CollectResultsInXlsxDescription": "Avtomatsko zbiranje rezultatov obrazcev v delovne knjige. Delovne knjige se ustvarjajo v isti mapi, kjer so shranjene kopije zapolnjenih obrazcev. Za vsak obrazec se generira ločen XLSX dokument. Vsaka vrstica predstavlja en sam zapolnjen obrazec, in stolpci ustrezajo poljem obrazca.",

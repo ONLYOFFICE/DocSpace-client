@@ -414,7 +414,6 @@
   "CollaborationRoomDescription": "Współpracuj z zespołem nad jednym lub wieloma dokumentami",
   "CollaborationRooms": "Współpraca",
   "CollaborationRoomTitle": "Pokój do współpracy",
-  "Collaborator": "Współpracownik",
   "CollectData": "Zbierz dane",
   "CollectResultsInXlsx": "Zbierz wyniki w XLSX",
   "CollectResultsInXlsxDescription": "Automatyczne zbieranie wyników formularzy do arkuszy kalkulacyjnych. Arkusze kalkulacyjne są tworzone w tym samym folderze, w którym przechowywane są wypełnione kopie formularzy. Dla każdego formularza generowany jest oddzielny plik XLSX. Każdy wiersz reprezentuje jeden wypełniony formularz, a kolumny odpowiadają polom formularza.",

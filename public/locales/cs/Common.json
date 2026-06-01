@@ -414,7 +414,6 @@
   "CollaborationRoomDescription": "Spolupracujte s týmem na jednom nebo více dokumentech",
   "CollaborationRooms": "Spolupráce",
   "CollaborationRoomTitle": "Místnost pro spolupráci",
-  "Collaborator": "Spolupracovník",
   "CollectData": "Sběr dat",
   "CollectResultsInXlsx": "Shromáždit výsledky do XLSX",
   "CollectResultsInXlsxDescription": "Automatické sbírání výsledků formulářů do tabulek. Tabulky jsou vytvářeny v téže složce, kde jsou uloženy kopie vyplněných formulářů. Pro každý formulář je vygenerován samostatný soubor XLSX. Každý řádek reprezentuje jeden vyplněný formulář, a sloupce odpovídají polím formuláře.",

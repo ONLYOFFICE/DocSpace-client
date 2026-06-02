@@ -269,9 +269,9 @@ class DetailsHelper {
       case "Author":
         return this.t("Common:ByAuthor");
       case "Shared by":
-        return this.t("Files:SharedBy");
+        return this.t("Common:SharedBy");
       case "Access level":
-        return this.t("Files:AccessLevel");
+        return this.t("Common:AccessLevel");
       case "externalDbTableName":
         return this.t("Files:TableName");
 

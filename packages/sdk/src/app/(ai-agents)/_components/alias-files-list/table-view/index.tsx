@@ -83,33 +83,35 @@ const TableView = ({
     [filterSortBy, filterSortOrder, onSort],
   );
 
-  const [columnState, setColumnState] = React.useState<Record<string, boolean>>(() => {
-    try {
-      const stored = localStorage.getItem(`${COLUMN_STORAGE_NAME}_enabled`);
-      if (stored) return JSON.parse(stored);
-    } catch {}
-    return { Modified: true, Size: true, Type: true };
-  });
-
-  const onColumnChange = React.useCallback(
-    (key: string) => {
-      setColumnState((prev) => {
-        const next = { ...prev, [key]: !prev[key] };
-        try {
-          localStorage.setItem(
-            `${COLUMN_STORAGE_NAME}_enabled`,
-            JSON.stringify(next),
-          );
-        } catch {}
-        return next;
-      });
+  const [columnState, setColumnState] = React.useState<Record<string, boolean>>(
+    () => {
+      try {
+        const stored = localStorage.getItem(`${COLUMN_STORAGE_NAME}_enabled`);
+        if (stored) return JSON.parse(stored);
+      } catch {}
+      return { Modified: true, Size: true, Type: true };
     },
-    [],
   );
+
+  const onColumnChange = React.useCallback((key: string) => {
+    setColumnState((prev) => {
+      const next = { ...prev, [key]: !prev[key] };
+      try {
+        localStorage.setItem(
+          `${COLUMN_STORAGE_NAME}_enabled`,
+          JSON.stringify(next),
+        );
+      } catch {}
+      return next;
+    });
+  }, []);
 
   const lastColumn = React.useMemo(() => {
     const orderedKeys = ["Type", "Size", "Modified", "Name"];
-    return orderedKeys.find((key) => key === "Name" || columnState[key] !== false) ?? "Name";
+    return (
+      orderedKeys.find((key) => key === "Name" || columnState[key] !== false) ??
+      "Name"
+    );
   }, [columnState]);
 
   const columns: TTableColumn[] = React.useMemo(
@@ -172,7 +174,7 @@ const TableView = ({
         sorted={filterSortOrder === "descending"}
         sortingVisible
         showSettings
-        settingsTitle={t("Files:TableSettingsTitle")}
+        settingsTitle={t("Common:TableSettingsTitle")}
       />
       <TableBody
         columnStorageName={COLUMN_STORAGE_NAME}
@@ -200,3 +202,4 @@ const TableView = ({
 };
 
 export default observer(TableView);
+

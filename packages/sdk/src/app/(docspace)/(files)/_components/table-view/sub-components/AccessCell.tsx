@@ -33,38 +33,30 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { Nullable, TSortBy } from "@docspace/shared/types";
-import type { FolderType } from "@docspace/shared/enums";
-import type { IndexRange } from "react-virtualized";
+import React from "react";
+import type { TFunction } from "i18next";
 
-import type { TFileItem, TFolderItem } from "../../../_hooks/useItemList";
+import { Text } from "@docspace/ui-kit/components/text";
+import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
-export type TableViewRowProps = {
-  item: TFolderItem | TFileItem;
-  index: number;
-  timezone: string;
-  displayFileExtension: boolean;
-  hideColumns?: boolean;
-  lastColumn: string;
-  currentUserId?: string;
+import styles from "../TableView.module.scss";
+
+type AccessCellProps = {
+  t: TFunction;
+  item: TFile | TFolder;
 };
 
-export type TableViewProps = {
-  total: number;
-  items: (TFolderItem | TFileItem)[];
-  hasMoreFiles: boolean;
-  filterSortBy: Nullable<TSortBy>;
-  filterSortOrder: string;
-  onSort: (sortBy: string, sortDirection: string) => void;
-  timezone: string;
-  displayFileExtension: boolean;
-  fetchMoreFiles: (params: IndexRange) => Promise<void>;
-  currentUserId?: string;
-  infoPanelVisible?: boolean;
-  /**
-   * Current section root folder type. Drives the section-specific column set,
-   * order, and per-column sortability (see columns.ts).
-   */
-  rootFolderType?: FolderType;
+// Access level for the "Shared with me" section. Reuses the shared
+// getAccessLabel helper, which maps item.access -> a Common-namespace label.
+const AccessCell = ({ t, item }: AccessCellProps) => {
+  const label = React.useMemo(() => getAccessLabel(t, item), [t, item]);
+
+  return (
+    <span className={styles.secondaryCell} title={label}>
+      {label || "—"}
+    </span>
+  );
 };
 
+export default React.memo(AccessCell);

@@ -2135,5 +2135,11 @@
   "YourPrice": "Votre prix",
   "YourTurn": "Votre tour",
   "YouWillBeContacted": "L’équipe de vente vous contactera après avoir créé la demande.",
-  "HideMessage": "Ne plus afficher ce message"
+  "HideMessage": "Ne plus afficher ce message",
+  "LastOpened": "Dernière ouverture",
+  "AccessLevel": "Niveau d'accès",
+  "SharedBy": "Partagé par",
+  "TableSettingsTitle": "Gérer les colonnes affichées",
+  "ByErasure": "Suppression",
+  "DaysRemaining": "Jours restants : {{daysRemaining}}"
 }

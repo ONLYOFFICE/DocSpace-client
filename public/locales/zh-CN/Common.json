@@ -2135,5 +2135,11 @@
   "YourPrice": "您的价格",
   "YourTurn": "轮到您了",
   "YouWillBeContacted": "创建请求后销售团队将与您取得联系。",
-  "HideMessage": "不要再次显示此消息"
+  "HideMessage": "不要再次显示此消息",
+  "LastOpened": "上次打开",
+  "AccessLevel": "访问权限级别",
+  "SharedBy": "共享自",
+  "TableSettingsTitle": "管理显示的列",
+  "ByErasure": "永久删除",
+  "DaysRemaining": "剩余天数：{{daysRemaining}}"
 }

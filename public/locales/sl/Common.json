@@ -2127,5 +2127,11 @@
   "YourPrice": "Vaša cena",
   "YourTurn": "Vi ste na vrsti",
   "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala.",
-  "HideMessage": "Ne prikazuj več tega sporočila"
+  "HideMessage": "Ne prikazuj več tega sporočila",
+  "LastOpened": "Zadnjič odprto",
+  "AccessLevel": "Raven dostopa",
+  "SharedBy": "Javno deljeno s",
+  "TableSettingsTitle": "Upravljanje prikazanih stolpcev",
+  "ByErasure": "Brisanje",
+  "DaysRemaining": "Preostali dnevi: {{daysRemaining}}"
 }

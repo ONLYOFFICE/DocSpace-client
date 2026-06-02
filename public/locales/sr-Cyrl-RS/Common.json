@@ -2135,5 +2135,11 @@
   "YourPrice": "Ваша цена",
   "YourTurn": "Ваш ред",
   "YouWillBeContacted": "Продајни тим ће вас контактирати након креирања захтева.",
-  "HideMessage": "Не приказуј ову поруку поново"
+  "HideMessage": "Не приказуј ову поруку поново",
+  "LastOpened": "Последње отворено",
+  "AccessLevel": "Ниво приступа",
+  "SharedBy": "Дељено од",
+  "TableSettingsTitle": "Управљај приказаним колонама",
+  "ByErasure": "Брисање",
+  "DaysRemaining": "Дани преостали: {{daysRemaining}}"
 }

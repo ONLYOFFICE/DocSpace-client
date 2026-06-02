@@ -2135,5 +2135,11 @@
   "YourPrice": "Ihr Preis",
   "YourTurn": "Jetzt sind Sie dran",
   "YouWillBeContacted": "Das Verkaufsteam wird Sie nach der Erstellung der Anfrage kontaktieren.",
-  "HideMessage": "Diese Nachricht nicht mehr anzeigen."
+  "HideMessage": "Diese Nachricht nicht mehr anzeigen.",
+  "LastOpened": "Zuletzt geöffnet",
+  "AccessLevel": "Zugriffsebene",
+  "SharedBy": "Geteilt von",
+  "TableSettingsTitle": "Angezeigte Spalten verwalten",
+  "ByErasure": "Löschen",
+  "DaysRemaining": "Verbleibende Tage: {{daysRemaining}}"
 }

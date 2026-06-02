@@ -2127,5 +2127,11 @@
   "YourPrice": "ລາຄາຂອງເຈົ້າ",
   "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
   "YouWillBeContacted": "ທີມງານຂາຍຈະຕິດຕໍ່ທ່ານຫຼັງຈາກສ້າງຄໍາຮ້ອງຂໍ.",
-  "HideMessage": "ບໍ່ສະແດງຂໍ້ຄວາມນີ້ອີກຄັ້ງ"
+  "HideMessage": "ບໍ່ສະແດງຂໍ້ຄວາມນີ້ອີກຄັ້ງ",
+  "LastOpened": "ເປີດຄັ້ງສຸດທ້າຍ",
+  "AccessLevel": "ລະດັບການເຂົ້າເຖິງ",
+  "SharedBy": "ແບ່ງປັນໂດຍ",
+  "TableSettingsTitle": "ຈັດການຖັນທີ່ສະແດງ",
+  "ByErasure": "ລົບ",
+  "DaysRemaining": "ມື້ທີ່ຍັງເຫຼືອ: {{daysRemaining}}"
 }

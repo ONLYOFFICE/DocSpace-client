@@ -2135,5 +2135,11 @@
   "YourPrice": "価格",
   "YourTurn": "あなたの番です",
   "YouWillBeContacted": "リクエスト作成後、営業担当よりご連絡させていただきます。",
-  "HideMessage": "このメッセージを再度表示しない"
+  "HideMessage": "このメッセージを再度表示しない",
+  "LastOpened": "最後に開いた項目",
+  "AccessLevel": "アクセスレベル",
+  "SharedBy": "共有者",
+  "TableSettingsTitle": "表示列の管理",
+  "ByErasure": "消去",
+  "DaysRemaining": "残りの日数：{{daysRemaining}}"
 }

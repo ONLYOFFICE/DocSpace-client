@@ -2097,5 +2097,11 @@
   "YourPrice": "Vaša cena",
   "YourTurn": "Ste na rade",
   "YouWillBeContacted": "Po vytvorení požiadavky vás bude kontaktovať predajný tím.",
-  "HideMessage": "Túto správu viac nezobrazovať"
+  "HideMessage": "Túto správu viac nezobrazovať",
+  "LastOpened": "Posledný otvorený",
+  "AccessLevel": "Úroveň prístupu",
+  "SharedBy": "Zdieľané od",
+  "TableSettingsTitle": "Spravovať zobrazené stĺpce",
+  "ByErasure": "Vymazanie",
+  "DaysRemaining": "Zostávajúce dni: {{daysRemaining}}"
 }

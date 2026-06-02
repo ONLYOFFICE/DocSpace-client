@@ -2127,5 +2127,11 @@
   "YourPrice": "Вашата цена",
   "YourTurn": "Ваш ред",
   "YouWillBeContacted": "Търговският екип ще се свърже с вас след създаване на заявката.",
-  "HideMessage": "Не показвай това съобщение отново"
+  "HideMessage": "Не показвай това съобщение отново",
+  "LastOpened": "Последно отворен",
+  "AccessLevel": "Ниво на достъп",
+  "SharedBy": "Споделено от",
+  "TableSettingsTitle": "Управлявай показаните колони",
+  "ByErasure": "Заличаване",
+  "DaysRemaining": "Оставащи дни: {{daysRemaining}}"
 }

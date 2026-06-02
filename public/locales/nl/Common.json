@@ -2127,5 +2127,11 @@
   "YourPrice": "Uw prijs",
   "YourTurn": "Uw beurt",
   "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag.",
-  "HideMessage": "Laat dit bericht niet meer zien"
+  "HideMessage": "Laat dit bericht niet meer zien",
+  "LastOpened": "Laatst geopend",
+  "AccessLevel": "Toegangslevel",
+  "SharedBy": "Gedeeld door",
+  "TableSettingsTitle": "Weergegeven kolommen beheren",
+  "ByErasure": "Erasure",
+  "DaysRemaining": "Aantal resterende dagen: {{daysRemaining}}"
 }

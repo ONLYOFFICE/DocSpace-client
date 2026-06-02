@@ -2135,5 +2135,11 @@
   "YourPrice": "Vaša cena",
   "YourTurn": "Vaš red",
   "YouWillBeContacted": "Prodajni tim će vas kontaktirati nakon kreiranja zahteva.",
-  "HideMessage": "Ne prikazuj ovu poruku ponovo"
+  "HideMessage": "Ne prikazuj ovu poruku ponovo",
+  "LastOpened": "Poslednje otvoreno",
+  "AccessLevel": "Nivo pristupa",
+  "SharedBy": "Deljeno od",
+  "TableSettingsTitle": "Upravljaj prikazanim kolonama",
+  "ByErasure": "Brisanje",
+  "DaysRemaining": "Dani preostali: {{daysRemaining}}"
 }

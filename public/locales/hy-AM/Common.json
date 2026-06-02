@@ -2135,5 +2135,11 @@
   "YourPrice": "Ձեր գինը",
   "YourTurn": "Ձեր հերթն է",
   "YouWillBeContacted": "Վաճառքի թիմը կկապվի ձեզ հետ հարցումը ստեղծելուց հետո:",
-  "HideMessage": "Այլևս չցուցադրել այս ուղերձը"
+  "HideMessage": "Այլևս չցուցադրել այս ուղերձը",
+  "LastOpened": "Վերջին անգամ բացված",
+  "AccessLevel": "Մուտքի մակարդակ",
+  "SharedBy": "Կիսվել է`",
+  "TableSettingsTitle": "Կառավարեք ցուցադրված սյունակները",
+  "ByErasure": "Ջնջում",
+  "DaysRemaining": "Մնացած օր: {{daysRemaining}}"
 }

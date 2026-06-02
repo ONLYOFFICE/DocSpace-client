@@ -2127,5 +2127,11 @@
   "YourPrice": "سعرك",
   "YourTurn": "دوركم الآن",
   "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب.",
-  "HideMessage": "لا تعرض هذه الرسالة مرة آخرى"
+  "HideMessage": "لا تعرض هذه الرسالة مرة آخرى",
+  "LastOpened": "آخر مرة تم الفتح ",
+  "AccessLevel": "مستوى الوصول ",
+  "SharedBy": "تمت مشاركته بواسطة",
+  "TableSettingsTitle": "إدارة الأعمدة المعروضة",
+  "ByErasure": "امسح",
+  "DaysRemaining": "الأيام المتبقية: {{daysRemaining}}"
 }

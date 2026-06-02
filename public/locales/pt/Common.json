@@ -2127,5 +2127,11 @@
   "YourPrice": "O seu preço",
   "YourTurn": "A sua vez",
   "YouWillBeContacted": "A equipa de vendas entrará em contacto consigo depois de criar o pedido.",
-  "HideMessage": "Não mostre esta mensagem novamente"
+  "HideMessage": "Não mostre esta mensagem novamente",
+  "LastOpened": "Último aberto",
+  "AccessLevel": "Nível de acesso",
+  "SharedBy": "Compartilhado por",
+  "TableSettingsTitle": "Gerenciar colunas exibidas",
+  "ByErasure": "Eliminação",
+  "DaysRemaining": "Dias restantes: {{daysRemaining}}"
 }

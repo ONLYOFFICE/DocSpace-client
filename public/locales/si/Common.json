@@ -2127,5 +2127,11 @@
   "YourPrice": "ඔබගේ මිල",
   "YourTurn": "ඔබේ වාරය.",
   "YouWillBeContacted": "ඉල්ලීම සෑදීමෙන් පසු අලෙවි කණ්ඩායම ඔබව සම්බන්ධ කර ගනු ඇත.",
-  "HideMessage": "මෙම පණිවිඩය නැවත නොපෙන්වන්න"
+  "HideMessage": "මෙම පණිවිඩය නැවත නොපෙන්වන්න",
+  "LastOpened": "අවසන් වරට විවෘත කළේ",
+  "AccessLevel": "ප්‍රවේශ මට්ටම",
+  "SharedBy": "බෙදාගත්තේ",
+  "TableSettingsTitle": "දිස්වන තීරු කළමනාකරණය",
+  "ByErasure": "මැකීම",
+  "DaysRemaining": "ඉතිරි දවස් ගණන: {{daysRemaining}}"
 }

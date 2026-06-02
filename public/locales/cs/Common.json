@@ -2127,5 +2127,11 @@
   "YourPrice": "Vaše cena",
   "YourTurn": "Jste na řadě",
   "YouWillBeContacted": "Po vytvoření požadavku vás bude kontaktovat prodejní tým.",
-  "HideMessage": "Tuto zprávu již nezobrazovat"
+  "HideMessage": "Tuto zprávu již nezobrazovat",
+  "LastOpened": "Poslední otevřený",
+  "AccessLevel": "Úroveň přístupu",
+  "SharedBy": "Sdíleno společností",
+  "TableSettingsTitle": "Správa zobrazených sloupců",
+  "ByErasure": "Smazání",
+  "DaysRemaining": "Zbývající dny: {{daysRemaining}}"
 }

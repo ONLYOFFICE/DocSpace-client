@@ -2127,5 +2127,11 @@
   "YourPrice": "Çmimi juaj",
   "YourTurn": "Radha jote",
   "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës.",
-  "HideMessage": "Mos e shfaqni më këtë mesazh"
+  "HideMessage": "Mos e shfaqni më këtë mesazh",
+  "LastOpened": "Të fundit të hapur",
+  "AccessLevel": "Niveli i aksesit",
+  "SharedBy": "Ndarë nga",
+  "TableSettingsTitle": "Menaxhoni kolonat e shfaqura",
+  "ByErasure": "Fshirja",
+  "DaysRemaining": "Ditët e mbetura: {{daysRemaining}}"
 }

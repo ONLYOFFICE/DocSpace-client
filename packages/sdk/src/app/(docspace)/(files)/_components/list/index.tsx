@@ -368,6 +368,7 @@ const List = ({
         fetchMoreFiles={fetchMoreFiles}
         currentUserId={currentUserId}
         infoPanelVisible={infoPanelVisible}
+        rootFolderType={rootFolderType}
       />
     );
   }

@@ -60,4 +60,6 @@ export type TableViewProps = {
   fetchMoreFiles: (params: IndexRange) => Promise<void>;
   currentUserId?: string;
   infoPanelVisible?: boolean;
+  sortingDisabled?: boolean;
 };
+

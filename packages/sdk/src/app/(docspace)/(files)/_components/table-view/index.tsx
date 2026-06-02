@@ -68,6 +68,7 @@ const TableView = ({
   fetchMoreFiles,
   currentUserId,
   infoPanelVisible,
+  sortingDisabled,
 }: TableViewProps) => {
   const { t } = useTranslation(["Common", "Files"]);
   const isSSR = useIsServer();
@@ -190,7 +191,7 @@ const TableView = ({
         useReactWindow={!isSSR}
         sortBy={filterSortBy ?? undefined}
         sorted={filterSortOrder === "descending"}
-        sortingVisible
+        sortingVisible={!sortingDisabled}
         showSettings
         settingsTitle={t("Files:TableSettingsTitle")}
         infoPanelVisible={infoPanelVisible}

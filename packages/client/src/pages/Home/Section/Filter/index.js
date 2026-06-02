@@ -961,7 +961,7 @@ const SectionFilterContent = ({
         {
           key: FilterGroups.filterAuthor,
           group: FilterGroups.filterAuthor,
-          label: t("ByAuthor"),
+          label: t("Common:ByAuthor"),
           isHeader: true,
         },
         {
@@ -978,7 +978,7 @@ const SectionFilterContent = ({
       {
         key: FilterGroups.filterAuthor,
         group: FilterGroups.filterAuthor,
-        label: t("ByAuthor"),
+        label: t("Common:ByAuthor"),
         isHeader: true,
       },
       {
@@ -2080,3 +2080,4 @@ export default inject(
     ])(observer(SectionFilterContent)),
   ),
 );
+

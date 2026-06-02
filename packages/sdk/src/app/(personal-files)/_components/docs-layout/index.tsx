@@ -405,19 +405,6 @@ const DocsLayout = observer(
                         >
                           <RootScrollbar>
                             <SectionWrapper
-                              sectionBannerContent={
-                                isActionButtonEnabled ? (
-                                  <div className={styles.createNewSection}>
-                                    <h2 className={styles.createNewTitle}>
-                                      {t("Common:CreateNew")}
-                                    </h2>
-                                    <QuickActions
-                                      items={quickActionItems}
-                                      className={styles.quickActions}
-                                    />
-                                  </div>
-                                ) : undefined
-                              }
                               sectionHeaderContent={
                                 <Header
                                   current={current}
@@ -427,6 +414,16 @@ const DocsLayout = observer(
                                   onToggleInfoPanel={infoPanelStore.toggle}
                                   headerOffset={headerOffset}
                                 />
+                              }
+                              stickyTableHeader
+                              scrollableBanner={isActionButtonEnabled}
+                              sectionBannerContent={
+                                isActionButtonEnabled ? (
+                                  <QuickActions
+                                    items={quickActionItems}
+                                    className={styles.quickActions}
+                                  />
+                                ) : undefined
                               }
                               sectionFilterContent={
                                 <Filter

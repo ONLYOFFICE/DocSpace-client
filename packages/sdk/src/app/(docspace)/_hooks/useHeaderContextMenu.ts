@@ -171,8 +171,8 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
             sectionName: t("Common:TrashSection"),
           }),
           icon: ClearTrashReactSvgUrl,
-          disabled: isEmpty || !deleteCtx?.deleteItems,
-          onClick: () => deleteCtx?.deleteItems(allItems),
+          disabled: isEmpty || !deleteCtx?.emptyTrash,
+          onClick: () => deleteCtx?.emptyTrash?.(),
         },
         {
           id: "header_option_restore-all",

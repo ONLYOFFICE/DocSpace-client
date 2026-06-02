@@ -256,11 +256,20 @@ const DocsLayout = observer(
       isDeleting,
       closeDeleteDialog,
       confirmDelete,
+      requestEmptyTrash,
+      emptyTrashDialogVisible,
+      isEmptyingTrash,
+      closeEmptyTrashDialog,
+      confirmEmptyTrash,
     } = useTrashActions(trackOperation);
 
     const deleteHandler = React.useMemo(
-      () => ({ deleteItem: requestDeleteItem, deleteItems: requestDelete }),
-      [requestDeleteItem, requestDelete],
+      () => ({
+        deleteItem: requestDeleteItem,
+        deleteItems: requestDelete,
+        emptyTrash: requestEmptyTrash,
+      }),
+      [requestDeleteItem, requestDelete, requestEmptyTrash],
     );
 
     const renameHandler = React.useMemo(
@@ -504,6 +513,15 @@ const DocsLayout = observer(
                           isTrash={isTrash}
                           onClose={closeDeleteDialog}
                           onConfirm={confirmDelete}
+                        />
+                        <DeleteDialog
+                          visible={emptyTrashDialogVisible}
+                          isLoading={isEmptyingTrash}
+                          itemCount={0}
+                          isTrash
+                          isEmptyTrash
+                          onClose={closeEmptyTrashDialog}
+                          onConfirm={confirmEmptyTrash}
                         />
                         {selectorDialogVisible && selectorInitData && (
                           <FilesSelector

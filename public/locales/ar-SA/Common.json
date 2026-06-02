@@ -2126,5 +2126,9 @@
   "YourName": "اسمك",
   "YourPrice": "سعرك",
   "YourTurn": "دوركم الآن",
-  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب."
+  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب.",
+  "LastOpened": "آخر مرة تم الفتح ",
+  "AccessLevel": "مستوى الوصول ",
+  "SharedBy": "تمت مشاركته بواسطة",
+  "TableSettingsTitle": "إدارة الأعمدة المعروضة"
 }

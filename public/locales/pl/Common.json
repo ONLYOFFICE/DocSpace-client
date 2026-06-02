@@ -2126,5 +2126,9 @@
   "YourName": "Twoje imię",
   "YourPrice": "Twoja cena",
   "YourTurn": "Twoja kolej",
-  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby."
+  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby.",
+  "LastOpened": "Ostatnio otwarte",
+  "AccessLevel": "Poziom dostępu",
+  "SharedBy": "Udostępnił",
+  "TableSettingsTitle": "Zarządzaj wyświetlanymi kolumnami"
 }

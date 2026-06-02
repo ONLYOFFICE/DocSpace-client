@@ -2134,5 +2134,9 @@
   "YourName": "Ihr Name",
   "YourPrice": "Ihr Preis",
   "YourTurn": "Jetzt sind Sie dran",
-  "YouWillBeContacted": "Das Verkaufsteam wird Sie nach der Erstellung der Anfrage kontaktieren."
+  "YouWillBeContacted": "Das Verkaufsteam wird Sie nach der Erstellung der Anfrage kontaktieren.",
+  "LastOpened": "Zuletzt geöffnet",
+  "AccessLevel": "Zugriffsebene",
+  "SharedBy": "Geteilt von",
+  "TableSettingsTitle": "Angezeigte Spalten verwalten"
 }

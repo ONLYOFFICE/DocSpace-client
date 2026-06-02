@@ -2134,5 +2134,9 @@
   "YourName": "お名前",
   "YourPrice": "価格",
   "YourTurn": "あなたの番です",
-  "YouWillBeContacted": "リクエスト作成後、営業担当よりご連絡させていただきます。"
+  "YouWillBeContacted": "リクエスト作成後、営業担当よりご連絡させていただきます。",
+  "LastOpened": "最後に開いた項目",
+  "AccessLevel": "アクセスレベル",
+  "SharedBy": "共有者",
+  "TableSettingsTitle": "表示列の管理"
 }

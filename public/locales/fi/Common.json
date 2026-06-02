@@ -2126,5 +2126,9 @@
   "YourName": "Nimesi",
   "YourPrice": "Hintasi",
   "YourTurn": "Sinun vuorosi",
-  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen."
+  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen.",
+  "LastOpened": "Viimeksi avattu",
+  "AccessLevel": "Pääsyasoikeus",
+  "SharedBy": "Jakanut",
+  "TableSettingsTitle": "Hallitse näytettyjä kolumneja"
 }

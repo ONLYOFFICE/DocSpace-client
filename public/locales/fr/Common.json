@@ -2134,5 +2134,9 @@
   "YourName": "Votre nom",
   "YourPrice": "Votre prix",
   "YourTurn": "Votre tour",
-  "YouWillBeContacted": "L’équipe de vente vous contactera après avoir créé la demande."
+  "YouWillBeContacted": "L’équipe de vente vous contactera après avoir créé la demande.",
+  "LastOpened": "Dernière ouverture",
+  "AccessLevel": "Niveau d'accès",
+  "SharedBy": "Partagé par",
+  "TableSettingsTitle": "Gérer les colonnes affichées"
 }

@@ -2126,5 +2126,9 @@
   "YourName": "Tên của bạn",
   "YourPrice": "Giá của bạn",
   "YourTurn": "Phiên của bạn",
-  "YouWillBeContacted": "Đội ngũ kinh doanh sẽ liên hệ với bạn sau khi tạo yêu cầu."
+  "YouWillBeContacted": "Đội ngũ kinh doanh sẽ liên hệ với bạn sau khi tạo yêu cầu.",
+  "LastOpened": "Lần mở cuối",
+  "AccessLevel": "Cấp độ truy cập",
+  "SharedBy": "Chia sẻ bởi",
+  "TableSettingsTitle": "Quản lý các cột được hiển thị"
 }

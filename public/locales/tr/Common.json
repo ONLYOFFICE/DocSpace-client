@@ -2126,5 +2126,9 @@
   "YourName": "Adınız",
   "YourPrice": "Ücret",
   "YourTurn": "Sıra sizde",
-  "YouWillBeContacted": "Satış ekibi, talebi oluşturduktan sonra sizinle iletişime geçecektir."
+  "YouWillBeContacted": "Satış ekibi, talebi oluşturduktan sonra sizinle iletişime geçecektir.",
+  "LastOpened": "Son açılan",
+  "AccessLevel": "Erişim düzeyi",
+  "SharedBy": "Paylaşıldı",
+  "TableSettingsTitle": "Görüntülenen sütunları yönet"
 }

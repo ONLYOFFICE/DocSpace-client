@@ -2126,5 +2126,9 @@
   "YourName": "Jūsu vārds",
   "YourPrice": "Jūsu cena",
   "YourTurn": "Jūsu kārta",
-  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides."
+  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides.",
+  "LastOpened": "Pēdēji atvērts",
+  "AccessLevel": "Piekļuves līmenis",
+  "SharedBy": "Kopīgojis",
+  "TableSettingsTitle": "Pārvaldiet parādītās kolonnas"
 }

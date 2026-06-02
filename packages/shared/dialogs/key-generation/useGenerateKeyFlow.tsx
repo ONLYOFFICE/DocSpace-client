@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+"use client";
+
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -45,14 +47,14 @@ import {
 import { generateRecoveryMnemonic } from "@docspace/shared/services/encryption/recovery";
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import { setActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
+import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import { setEncryptionKeys } from "@docspace/shared/api/privacy";
 import { useEncryption } from "@docspace/shared/context/encryption";
 import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
 
-import { PassphraseModal } from "../modals/PassphraseModal";
-import { RecoveryPhraseDisplayModal } from "../modals/RecoveryPhraseDisplayModal";
+import { PassphraseModal } from "@docspace/shared/dialogs/passphrase-modal";
 
-import { getEncryptionErrorMessage } from "./getEncryptionErrorMessage";
+import { RecoveryPhraseDisplayModal } from "./RecoveryPhraseDisplayModal";
 
 type Step = "idle" | "passphrase" | "recovery-display";
 
@@ -175,9 +177,9 @@ export function useGenerateKeyFlow({
       {step === "passphrase" ? (
         <PassphraseModal
           visible
+          isNew
           onSubmit={onPassphraseSubmit}
           onCancel={reset}
-          isNew
           isLoading={isPending}
         />
       ) : null}
@@ -195,3 +197,5 @@ export function useGenerateKeyFlow({
 
   return { request, isPending, modals };
 }
+
+export default useGenerateKeyFlow;

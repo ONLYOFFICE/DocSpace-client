@@ -42,7 +42,7 @@ const captured = {
   recovery: null as Record<string, unknown> | null,
 };
 
-vi.mock("../../modals/PassphraseModal", () => ({
+vi.mock("@docspace/shared/dialogs/passphrase-modal", () => ({
   PassphraseModal: (props: Record<string, unknown>) => {
     captured.passphrase = props;
     useEffect(() => () => {
@@ -51,7 +51,7 @@ vi.mock("../../modals/PassphraseModal", () => ({
     return null;
   },
 }));
-vi.mock("../../modals/RecoveryPhraseDisplayModal", () => ({
+vi.mock("../RecoveryPhraseDisplayModal", () => ({
   RecoveryPhraseDisplayModal: (props: Record<string, unknown>) => {
     captured.recovery = props;
     useEffect(() => () => {

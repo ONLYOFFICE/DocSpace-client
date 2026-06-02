@@ -60,6 +60,7 @@ import {
   PrivateInfoPanelBody,
   PrivateInfoPanelHeader,
 } from "../_components/info-panel";
+import PrivateCreateRoomDialog from "../_components/create-room/PrivateCreateRoomDialog";
 
 type PrivateRoomsPageProps = {
   authToken: string;
@@ -166,6 +167,13 @@ const PrivateRoomsPageInner: React.FC<PrivateRoomsPageProps> = ({
         emptyView={<EmptyPrivateRoomsList />}
         onPrivateInviteRoom={handlePrivateInviteRoom}
         onPrivateChangeOwner={handlePrivateChangeOwner}
+        renderCreateRoomDialog={({ visible, onClose, onRoomCreated }) => (
+          <PrivateCreateRoomDialog
+            visible={visible}
+            onClose={onClose}
+            onCreated={onRoomCreated}
+          />
+        )}
       />
     </OpenFolderContext.Provider>
   );

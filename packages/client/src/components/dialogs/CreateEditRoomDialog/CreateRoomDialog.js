@@ -50,8 +50,8 @@ import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 import TagHandler from "../../../helpers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import RoomTypeList from "./sub-components/RoomTypeList";
-import { ConfirmationModal } from "../../../pages/Profile/Section/Body/sub-components/keys-management/modals/ConfirmationModal";
-import { useGenerateKeyFlow } from "../../../pages/Profile/Section/Body/sub-components/keys-management/flows/useGenerateKeyFlow";
+import { ConfirmationModal } from "@docspace/shared/dialogs/confirmation-modal";
+import { useGenerateKeyFlow } from "@docspace/shared/dialogs/key-generation";
 
 const CreateRoomDialog = ({
   t,

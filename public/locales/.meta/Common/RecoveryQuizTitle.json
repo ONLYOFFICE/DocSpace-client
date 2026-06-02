@@ -3,7 +3,7 @@
   "content": "Verify your recovery phrase",
   "content_en_sha1_hash": "52cb4bb74f9aa2a9f2dfd52367b4f06edec49d85",
   "created_at": "2026-05-24T17:27:36.673Z",
-  "updated_at": "2026-05-24T17:35:33.454Z",
+  "updated_at": "2026-06-02T14:21:21.881Z",
   "comment": {
     "text": "Dialog title in a modal header that appears during the recovery phrase verification step.",
     "is_auto": true,
@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/RecoveryPhraseDisplayModal.tsx",
+      "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
       "line_number": 156,
       "context": "autoMaxHeight\n >\n <ModalDialog.Header>\n {step === \"display\"\n ? t(\"Common:RecoveryPhraseTitle\")\n : t(\"Common:RecoveryQuizTitle\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n {step === \"display\" ? (\n <div className={styles.container}>",
-      "module": "/packages/client"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

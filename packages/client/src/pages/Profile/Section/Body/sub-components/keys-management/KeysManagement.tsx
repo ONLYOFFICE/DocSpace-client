@@ -48,7 +48,7 @@ import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 
 import { AutoLockSetting } from "./AutoLockSetting";
 import { KeysList } from "./KeysList";
-import { useGenerateKeyFlow } from "./flows/useGenerateKeyFlow";
+import { useGenerateKeyFlow } from "@docspace/shared/dialogs/key-generation";
 import { useImportKeyFlow } from "./flows/useImportKeyFlow";
 import { useRecoverKeyFlow } from "./flows/useRecoverKeyFlow";
 import { useDeleteKeyFlow } from "./flows/useDeleteKeyFlow";

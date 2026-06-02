@@ -48,8 +48,8 @@ import { InvalidPassphraseError } from "@docspace/shared/services/encryption/err
 import { deleteEncryptionKey } from "@docspace/shared/api/privacy";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
-import { ConfirmationModal } from "../modals/ConfirmationModal";
-import { PassphraseModal } from "../modals/PassphraseModal";
+import { ConfirmationModal } from "@docspace/shared/dialogs/confirmation-modal";
+import { PassphraseModal } from "@docspace/shared/dialogs/passphrase-modal";
 
 import { getEncryptionErrorMessage } from "./getEncryptionErrorMessage";
 

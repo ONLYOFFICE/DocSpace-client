@@ -49,7 +49,7 @@ import {
   registerGhostStateHandler,
   clearGhostStateHandler,
 } from "@docspace/shared/services/encryption/ghost-state-notifier";
-import { PassphraseDialog } from "@docspace/shared/dialogs/passphrase-dialog";
+import { PassphraseModal } from "@docspace/shared/dialogs/passphrase-modal";
 import { KeyChangeDialog } from "@docspace/shared/dialogs/key-change-dialog";
 import { Link } from "@docspace/ui-kit/components/link";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -112,12 +112,8 @@ const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
         if (sessionStorage.getItem(DEVICE_SETUP_HINT_SESSION_KEY) === "1")
           return;
         sessionStorage.setItem(DEVICE_SETUP_HINT_SESSION_KEY, "1");
-      } catch {
-        // sessionStorage throws in private-mode Safari; fall through.
-      }
+      } catch {}
 
-      // useNavigate() is unavailable here — EncryptionProviderWrapper is
-      // mounted outside <RouterProvider> in App.js and would crash.
       toastr.info(
         <Trans
           i18nKey="Common:EncryptionDeviceSetupHint"
@@ -145,37 +141,39 @@ const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
   }),
 );
 
-const EncryptionProviderWrapper = ({ userKeys, children }) => {
-  const PassphraseDialogAdapter = React.useCallback(
-    ({ visible, isLoading, error, onSubmit, onCancel }) => {
-      const handleSubmit = async (passphrase) => {
-        await onSubmit(passphrase);
-      };
+const PassphraseUnlockAdapter = ({
+  visible,
+  isLoading,
+  error,
+  onSubmit,
+  onCancel,
+}) => {
+  const { t } = useTranslation(["Common"]);
 
-      const handleForgotPassphrase = () => {
-        onCancel();
-        window.location.href = "/profile/keys-management";
-      };
+  const handleForgotPassphrase = () => {
+    onCancel();
+    window.location.href = "/profile/keys-management";
+  };
 
-      return (
-        <PassphraseDialog
-          visible={visible}
-          isLoading={isLoading}
-          error={error}
-          onSubmit={handleSubmit}
-          onCancel={onCancel}
-          isNewPassphrase={false}
-          onForgotPassphrase={handleForgotPassphrase}
-        />
-      );
-    },
-    [],
+  return (
+    <PassphraseModal
+      visible={visible}
+      isNew={false}
+      isLoading={isLoading}
+      externalError={error}
+      onSubmit={onSubmit}
+      onCancel={onCancel}
+      onForgotPassphrase={handleForgotPassphrase}
+      submitLabel={t("Common:Confirm")}
+    />
   );
+};
 
+const EncryptionProviderWrapper = ({ userKeys, children }) => {
   return (
     <EncryptionProvider
       userKeys={userKeys}
-      PassphraseDialog={PassphraseDialogAdapter}
+      PassphraseDialog={PassphraseUnlockAdapter}
       KeyChangeDialog={KeyChangeDialog}
     >
       <FilenameRecoveryEffect />
@@ -186,7 +184,6 @@ const EncryptionProviderWrapper = ({ userKeys, children }) => {
   );
 };
 
-// encryptionKeys[].userId is sometimes blank in the server response; use userStore.user.id instead.
 export default inject(({ userStore }) => {
   const keys = userStore?.encryptionKeys;
   const ownerId = userStore?.user?.id;

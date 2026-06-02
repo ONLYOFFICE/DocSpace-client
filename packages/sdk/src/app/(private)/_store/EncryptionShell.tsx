@@ -37,12 +37,13 @@
 
 import React from "react";
 import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import {
   EncryptionProvider,
   type PassphraseDialogProps,
 } from "@docspace/shared/context/encryption";
-import { PassphraseDialog } from "@docspace/shared/dialogs/passphrase-dialog";
+import { PassphraseModal } from "@docspace/shared/dialogs/passphrase-modal";
 import { KeyChangeDialog } from "@docspace/shared/dialogs/key-change-dialog";
 
 import { useEncryptionIdentityStore } from "./EncryptionIdentityStore";
@@ -61,20 +62,22 @@ const PassphraseDialogAdapter: React.FC<PassphraseDialogProps> = ({
   onSubmit,
   onCancel,
 }) => {
+  const { t } = useTranslation(["Common"]);
   const handleForgotPassphrase = React.useCallback(() => {
     onCancel();
     window.open("/profile/keys-management", "_blank");
   }, [onCancel]);
 
   return (
-    <PassphraseDialog
+    <PassphraseModal
       visible={visible}
+      isNew={false}
       isLoading={isLoading}
-      error={error}
+      externalError={error}
       onSubmit={onSubmit}
       onCancel={onCancel}
-      isNewPassphrase={false}
       onForgotPassphrase={handleForgotPassphrase}
+      submitLabel={t("Common:Confirm")}
     />
   );
 };

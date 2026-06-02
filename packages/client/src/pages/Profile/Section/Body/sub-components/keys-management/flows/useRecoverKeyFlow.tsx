@@ -52,7 +52,7 @@ import type {
 } from "@docspace/shared/services/encryption/types";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
-import { PassphraseModal } from "../modals/PassphraseModal";
+import { PassphraseModal } from "@docspace/shared/dialogs/passphrase-modal";
 import { RecoveryPhraseInputModal } from "../modals/RecoveryPhraseInputModal";
 
 import { getEncryptionErrorMessage } from "./getEncryptionErrorMessage";

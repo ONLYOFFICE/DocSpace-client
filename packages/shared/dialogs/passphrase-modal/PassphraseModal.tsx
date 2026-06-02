@@ -65,6 +65,7 @@ type PassphraseModalProps = {
   isLoading?: boolean;
   externalError?: string | null;
   onForgotPassphrase?: () => void;
+  submitLabel?: string;
 };
 
 const MIN_LENGTH = PASSPHRASE_MIN_LENGTH;
@@ -87,6 +88,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
   isLoading = false,
   externalError,
   onForgotPassphrase,
+  submitLabel,
 }) => {
   const { t, ready } = useTranslation(["Common"]);
   const inputRef = useRef<PasswordInputHandle>(null);
@@ -192,13 +194,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                 inputName="passphrase"
                 inputValue={passphrase}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  const next = e.target.value;
-                  const isBulkChange =
-                    Math.abs(next.length - passphrase.length) > 1;
-                  setPassphrase(next);
-                  if (isNew && isBulkChange && next.length >= MIN_LENGTH) {
-                    setConfirmPassphrase(next);
-                  }
+                  setPassphrase(e.target.value);
                   setError("");
                 }}
                 placeholder={t("Common:Passphrase")}
@@ -287,7 +283,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
           key="SubmitButton"
           onClick={handleSubmit}
           size={ButtonSize.normal}
-          label={t("Common:ContinueButton")}
+          label={submitLabel ?? t("Common:ContinueButton")}
           isDisabled={isDisabled}
           isLoading={isLoading}
           tabIndex={3}
@@ -305,3 +301,5 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
     </ModalDialog>
   );
 };
+
+export default PassphraseModal;

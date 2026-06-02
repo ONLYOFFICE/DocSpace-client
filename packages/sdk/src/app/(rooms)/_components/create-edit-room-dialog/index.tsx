@@ -81,7 +81,6 @@ export type EditableRoom = {
   roomIconColor?: string;
   roomCover?: ICover;
   createdBy?: TCreatedBy;
-  /** Set true to keep the dialog in private-room mode without an explicit prop. */
   private?: boolean;
 };
 
@@ -91,19 +90,9 @@ export type CreateEditRoomDialogProps = {
   room?: TEditableRoom;
   onRoomEdited?: (roomId: number) => void;
   onRoomCreated?: (roomId?: number) => void;
-  /**
-   * Lock the dialog to encrypted private-room semantics: hard-codes
-   * `private:true` on the create payload and refuses to submit when the
-   * caller hasn't set up an encryption envelope. Defaults to false.
-   */
   isPrivate?: boolean;
-  /**
-   * Companion gate for `isPrivate` — caller passes false when the user has
-   * no encryption keys yet. When false + isPrivate, the dialog displays a
-   * blocking notice with a deep link to the keys-management page instead
-   * of letting the user submit. Ignored when `isPrivate` is false.
-   */
   hasEncryptionKeys?: boolean;
+  onRequestCreateKeys?: () => void;
 };
 
 const CreateEditRoomDialog = ({
@@ -114,6 +103,7 @@ const CreateEditRoomDialog = ({
   onRoomCreated,
   isPrivate = false,
   hasEncryptionKeys = true,
+  onRequestCreateKeys,
 }: CreateEditRoomDialogProps) => {
   const { t } = useTranslation(["Common", "Files"]);
   const refreshRooms = React.useContext(RoomsRefreshContext);
@@ -356,6 +346,7 @@ const CreateEditRoomDialog = ({
       } else {
         if (isPrivate && !hasEncryptionKeys) {
           setIsLoading(false);
+          onRequestCreateKeys?.();
           return;
         }
         const logo = await buildLogoParams();
@@ -405,6 +396,9 @@ const CreateEditRoomDialog = ({
   const showDefault = !hasCoverOrPreview && (!!name || !!selectedColor);
   const withEditing = !isEmptyIcon;
 
+  const isKeySetupMode = isPrivate && !hasEncryptionKeys && !isEdit;
+  const canStartKeySetup = isKeySetupMode && !!onRequestCreateKeys;
+
   const initialCoverColor = selectedColor ? `#${selectedColor}` : undefined;
   return (
     <>
@@ -425,7 +419,7 @@ const CreateEditRoomDialog = ({
 
         <ModalDialog.Body>
           <div className={styles.body}>
-            {isPrivate && !hasEncryptionKeys && !isEdit ? (
+            {isKeySetupMode ? (
               <div
                 style={{
                   padding: 12,
@@ -436,17 +430,22 @@ const CreateEditRoomDialog = ({
                 data-test-id="create_edit_room_keys_required"
               >
                 <Text>
-                  {t("Common:EncryptionKeysRequiredForPrivateRoom")}{" "}
-                  <Link
-                    tag="a"
-                    isHovered
-                    color="accent"
-                    onClick={() =>
-                      window.open("/profile/keys-management", "_blank")
-                    }
-                  >
-                    {t("Common:OpenKeysManagement")}
-                  </Link>
+                  {t("Common:EncryptionKeysRequiredForPrivateRoom")}
+                  {canStartKeySetup ? null : (
+                    <>
+                      {" "}
+                      <Link
+                        tag="a"
+                        isHovered
+                        color="accent"
+                        onClick={() =>
+                          window.open("/profile/keys-management", "_blank")
+                        }
+                      >
+                        {t("Common:OpenKeysManagement")}
+                      </Link>
+                    </>
+                  )}
                 </Text>
               </div>
             ) : null}
@@ -558,11 +557,10 @@ const CreateEditRoomDialog = ({
             primary
             scale
             isLoading={isLoading}
-            onClick={onSave}
+            onClick={canStartKeySetup ? onRequestCreateKeys : onSave}
             isDisabled={
-              !name.trim() ||
               isLoading ||
-              (isPrivate && !hasEncryptionKeys && !isEdit)
+              (canStartKeySetup ? false : !name.trim() || isKeySetupMode)
             }
           />
           <Button

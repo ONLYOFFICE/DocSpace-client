@@ -48,7 +48,7 @@ import { setEncryptionKeys } from "@docspace/shared/api/privacy";
 import { InvalidPassphraseError } from "@docspace/shared/services/encryption/errors";
 import type { SerializedIdentity } from "@docspace/shared/services/encryption/types";
 
-import { PassphraseModal } from "../modals/PassphraseModal";
+import { PassphraseModal } from "@docspace/shared/dialogs/passphrase-modal";
 
 import { getEncryptionErrorMessage } from "./getEncryptionErrorMessage";
 

@@ -33,27 +33,4 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export type PassphraseDialogProps = {
-  visible: boolean;
-  isNewPassphrase?: boolean;
-  error?: string | null;
-  isLoading?: boolean;
-  onSubmit: (passphrase: string) => Promise<void>;
-  onCancel: () => void;
-  title?: string;
-  description?: string;
-  minLength?: number;
-  requireStrong?: boolean;
-  onForgotPassphrase?: () => void;
-};
-
-export type PassphraseFormState = {
-  passphrase: string;
-  confirmPassphrase: string;
-  localError: string;
-};
-
-export type {
-  PassphraseStrength,
-  PassphraseStrengthResult as StrengthCheckResult,
-} from "@docspace/shared/services/encryption/passphrase-strength";
+export { PassphraseModal, default } from "./PassphraseModal";

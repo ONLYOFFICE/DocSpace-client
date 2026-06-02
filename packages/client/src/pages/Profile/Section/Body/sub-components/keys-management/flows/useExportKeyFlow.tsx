@@ -46,7 +46,7 @@ import {
 import { InvalidPassphraseError } from "@docspace/shared/services/encryption/errors";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
-import { PassphraseModal } from "../modals/PassphraseModal";
+import { PassphraseModal } from "@docspace/shared/dialogs/passphrase-modal";
 
 import { getEncryptionErrorMessage } from "./getEncryptionErrorMessage";
 

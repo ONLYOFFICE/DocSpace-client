@@ -307,3 +307,5 @@ export const RecoveryPhraseDisplayModal: React.FC<
     </ModalDialog>
   );
 };
+
+export default RecoveryPhraseDisplayModal;

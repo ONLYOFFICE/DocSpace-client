@@ -33,10 +33,63 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export { default as PassphraseDialog } from "./PassphraseDialog";
-export type {
-  PassphraseDialogProps,
-  PassphraseFormState,
-  PassphraseStrength,
-  StrengthCheckResult,
-} from "./PassphraseDialog.types";
+import React from "react";
+import { useTranslation } from "react-i18next";
+
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+
+export type ConfirmationModalProps = {
+  visible: boolean;
+  title: string;
+  message: string;
+  onConfirm: () => void;
+  onCancel: () => void;
+  confirmLabel?: string;
+  zIndex?: number;
+};
+
+export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
+  visible,
+  title,
+  message,
+  onConfirm,
+  onCancel,
+  confirmLabel,
+  zIndex,
+}) => {
+  const { t } = useTranslation(["Common"]);
+
+  return (
+    <ModalDialog
+      visible={visible}
+      onClose={onCancel}
+      displayType={ModalDialogType.modal}
+      zIndex={zIndex}
+    >
+      <ModalDialog.Header>{title}</ModalDialog.Header>
+      <ModalDialog.Body>
+        <Text fontSize="13px">{message}</Text>
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          primary
+          size={ButtonSize.normal}
+          label={confirmLabel ?? t("Common:Confirm")}
+          onClick={onConfirm}
+        />
+        <Button
+          size={ButtonSize.normal}
+          label={t("Common:CancelButton")}
+          onClick={onCancel}
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
+  );
+};
+
+export default ConfirmationModal;

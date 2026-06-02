@@ -33,41 +33,5 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.description {
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
-
-.inputWrapper {
-  width: 100%;
-}
-
-.forgotRow {
-  display: flex;
-  justify-content: flex-start;
-}
-
-.strengthContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.strengthBar {
-  height: 4px;
-  background-color: var(--background-secondary);
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.strengthFill {
-  height: 100%;
-  border-radius: 2px;
-  transition: width 0.3s ease, background-color 0.3s ease;
-}
+export { ConfirmationModal, default } from "./ConfirmationModal";
+export type { ConfirmationModalProps } from "./ConfirmationModal";

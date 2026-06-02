@@ -3,7 +3,7 @@
   "content": "Passphrase must be at least {{length}} characters",
   "content_en_sha1_hash": "d37088ed7a023b4b8c7754841fdcd0edddc89181",
   "created_at": "2026-05-24T17:27:34.718Z",
-  "updated_at": "2026-05-24T17:41:03.181Z",
+  "updated_at": "2026-06-02T14:21:21.859Z",
   "comment": {
     "text": "Error message in passphrase or key rotation dialogs that appears when the input is too short. The {{length}} variable represents the minimum required character count.",
     "is_auto": true,
@@ -13,15 +13,9 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/KeyRotationDialog.tsx",
-      "line_number": 96,
-      "context": "setLocalError(t(\"Common:CurrentPassphraseRequired\"));\n return;\n }\n \n if (newPassphrase.length < MIN_LENGTH) {\n setLocalError(t(\"Common:PassphraseTooShort\", { length: MIN_LENGTH }));\n return;\n }\n \n if (newPassphrase !== confirmPassphrase) {\n setLocalError(t(\"Common:PassphraseMismatch\"));",
+      "line_number": 97,
+      "context": "? t(\"Common:CurrentPassphraseRequired\")\n : \"\";\n \n const newFieldError = attemptedSubmit\n ? newPassphrase.length > 0 && newPassphrase.length < MIN_LENGTH\n ? t(\"Common:PassphraseTooShort\", { length: MIN_LENGTH })\n : newPassphrase &&\n currentPassphrase &&\n currentPassphrase === newPassphrase\n ? t(\"Common:PassphraseMustBeDifferent\")\n : \"\"",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/shared/dialogs/passphrase-dialog/PassphraseDialog.tsx",
-      "line_number": 143,
-      "context": "const validatePassphrase = useCallback((): string | null => {\n const { passphrase, confirmPassphrase } = state;\n \n if (passphrase.length < minLength) {\n return t(\"Common:PassphraseTooShort\", { length: minLength });\n }\n \n if (isNewPassphrase && passphrase !== confirmPassphrase) {\n return t(\"Common:PassphraseMismatch\");\n }",
-      "module": "/packages/shared"
     }
   ],
   "languages": {

@@ -37,23 +37,22 @@
 
 import React from "react";
 import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
+
+import type { TUser } from "@docspace/shared/api/people/types";
+import { useGenerateKeyFlow } from "@docspace/shared/dialogs/key-generation";
+import { ConfirmationModal } from "@docspace/shared/dialogs/confirmation-modal";
 
 import CreateEditRoomDialog, {
   type EditableRoom,
 } from "@/app/(rooms)/_components/create-edit-room-dialog";
+import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
 
 import { useEncryptionIdentityStore } from "../../_store/EncryptionIdentityStore";
-
-// Thin wrapper around (rooms)/CreateEditRoomDialog that hard-codes
-// isPrivate=true and feeds hasEncryptionKeys from EncryptionIdentityStore.
-// Supports both create and edit flows by passing through the `room` prop —
-// editing a private room reuses the full logo/cover/tags UI from the base
-// dialog, only the create payload is differentiated.
 
 type PrivateCreateRoomDialogProps = {
   visible: boolean;
   onClose: () => void;
-  /** Pass an existing room to switch the dialog into edit mode. */
   room?: EditableRoom;
   onCreated?: (roomId?: number) => void;
   onEdited?: (roomId: number) => void;
@@ -66,18 +65,75 @@ const PrivateCreateRoomDialogInner: React.FC<PrivateCreateRoomDialogProps> = ({
   onCreated,
   onEdited,
 }) => {
+  const { t } = useTranslation(["Common"]);
   const identityStore = useEncryptionIdentityStore();
+  const docsUser = useDocsUserStore();
+  const user = docsUser.user as TUser | null;
+  const userId = user?.id ? String(user.id) : undefined;
+
+  const hasKeys = identityStore.hasKeys;
+  const keysLoaded = identityStore.keys !== null;
+
+  const [keyConfirmVisible, setKeyConfirmVisible] = React.useState(false);
+  const autoPromptedRef = React.useRef(false);
+
+  const refreshKeysFromServer = React.useCallback(
+    () => identityStore.loadKeys(),
+    [identityStore],
+  );
+
+  const generateKey = useGenerateKeyFlow({
+    userId,
+    refreshKeysFromServer,
+  });
+
+  const onRequestCreateKeys = React.useCallback(() => {
+    setKeyConfirmVisible(true);
+  }, []);
+
+  const onConfirmGenerateKey = React.useCallback(() => {
+    setKeyConfirmVisible(false);
+    generateKey.request();
+  }, [generateKey]);
+
+  const onCancelGenerateKey = React.useCallback(() => {
+    setKeyConfirmVisible(false);
+  }, []);
+
+  React.useEffect(() => {
+    if (!visible) {
+      autoPromptedRef.current = false;
+      return;
+    }
+    if (keysLoaded && !hasKeys && !autoPromptedRef.current) {
+      autoPromptedRef.current = true;
+      setKeyConfirmVisible(true);
+    }
+  }, [visible, keysLoaded, hasKeys]);
 
   return (
-    <CreateEditRoomDialog
-      visible={visible}
-      onClose={onClose}
-      room={room}
-      isPrivate
-      hasEncryptionKeys={identityStore.hasKeys}
-      onRoomCreated={onCreated}
-      onRoomEdited={onEdited}
-    />
+    <>
+      <ConfirmationModal
+        visible={keyConfirmVisible}
+        title={t("Common:PrivateRoomKeyRequiredTitle")}
+        message={t("Common:PrivateRoomKeyRequiredDescription")}
+        confirmLabel={t("Common:ContinueButton")}
+        onConfirm={onConfirmGenerateKey}
+        onCancel={onCancelGenerateKey}
+        zIndex={410}
+      />
+      {generateKey.modals}
+      <CreateEditRoomDialog
+        visible={visible}
+        onClose={onClose}
+        room={room}
+        isPrivate
+        hasEncryptionKeys={hasKeys}
+        onRequestCreateKeys={onRequestCreateKeys}
+        onRoomCreated={onCreated}
+        onRoomEdited={onEdited}
+      />
+    </>
   );
 };
 

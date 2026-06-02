@@ -3,7 +3,7 @@
   "content": "To make sure you've saved the phrase, type a few words from it.",
   "content_en_sha1_hash": "a7bbe709b2e0812d64d4812de7d3053e324e977f",
   "created_at": "2026-05-24T17:27:36.631Z",
-  "updated_at": "2026-05-24T17:36:36.351Z",
+  "updated_at": "2026-06-02T14:21:21.879Z",
   "comment": {
     "text": "Instructional text in a recovery quiz modal that guides the user to verify their saved phrase by typing parts of it.",
     "is_auto": true,
@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/RecoveryPhraseDisplayModal.tsx",
+      "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
       "line_number": 210,
       "context": "</div>\n </div>\n ) : (\n <div className={styles.container}>\n <Text className={styles.description}>\n {t(\"Common:RecoveryQuizHint\")}\n </Text>\n \n <div className={styles.quizContainer}>\n {quizPositions.map((pos, idx) => (\n <div key={`q-${pos}`} className={styles.quizQuestion}>",
-      "module": "/packages/client"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

@@ -45,10 +45,6 @@ import {
   CreateCustomRoomIllustrationIcon,
   UseRoomTemplateIllustrationIcon,
 } from "@docspace/ui-kit/components/quick-actions/icons";
-import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
-
-import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
-import TemplateReactSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 
 import { SectionWrapper } from "@/app/(docspace)/_components/section";
 import Header from "@/app/(docspace)/_components/header";
@@ -83,18 +79,21 @@ type RoomsLayoutProps = {
   filesFilter: string;
   user?: TUser;
   isArchive?: boolean;
-  /** Hides templates tile + tags new rooms as `private:true`. */
   isPrivate?: boolean;
-  /** Gates CreateEditRoomDialog submit when no envelope exists yet. */
   hasEncryptionKeys?: boolean;
   infoPanelHeader?: React.ReactNode;
   infoPanelBody?: React.ReactNode;
   emptyView?: React.ReactNode;
-  /** Sticky breadcrumb title. */
   titleOverride?: string;
-  /** Private-only overrides for invite / change-owner from room cards. */
   onPrivateInviteRoom?: (room: TFolder) => void;
   onPrivateChangeOwner?: (room: TFolder) => void;
+  renderCreateRoomDialog?: (args: {
+    visible: boolean;
+    onClose: () => void;
+    onRoomCreated: () => void;
+    isPrivate?: boolean;
+    hasEncryptionKeys?: boolean;
+  }) => React.ReactNode;
 };
 
 const RoomsLayout = observer(
@@ -117,6 +116,7 @@ const RoomsLayout = observer(
     titleOverride,
     onPrivateInviteRoom,
     onPrivateChangeOwner,
+    renderCreateRoomDialog,
   }: RoomsLayoutProps) => {
     const { t } = useTranslation(["Common"]);
     const { isEmptyList } = useSettingsStore();
@@ -124,9 +124,6 @@ const RoomsLayout = observer(
     const infoPanelStore = useInfoPanelStore();
     const filesListStore = useFilesListStore();
 
-    // Re-fetch the room after tags are bound/unbound inside the info panel and
-    // update both the panel's selection (so Tags row refreshes) and the room
-    // entry in the files list store (so the table/row view updates).
     const onInfoPanelTagsChanged = React.useCallback(async () => {
       const sel = infoPanelStore.selection;
       if (!sel || !("isRoom" in sel) || !sel.isRoom) return;
@@ -143,9 +140,7 @@ const RoomsLayout = observer(
           } as unknown as typeof existing;
           filesListStore.replaceItem(sel.id, merged);
         }
-      } catch {
-        // ignore
-      }
+      } catch {}
     }, [infoPanelStore, filesListStore]);
 
     const canCreateRooms = !!(
@@ -176,8 +171,6 @@ const RoomsLayout = observer(
           disabled: isArchive,
         },
       ];
-      // Templates aren't supported for private (e2e-encrypted) rooms — the
-      // template gallery isn't encryption-aware.
       if (!isPrivate) {
         items.push({
           id: "use-template",
@@ -188,26 +181,6 @@ const RoomsLayout = observer(
       }
       return items;
     }, [t, createCustomRoom, isArchive, canCreateRooms, isPrivate]);
-
-    // const mainButtonModel = React.useMemo<ContextMenuModel[]>(
-    //   () => [
-    //     {
-    //       id: "actions_create-custom-room",
-    //       key: "custom-room",
-    //       label: t("Common:NewRoom"),
-    //       icon: CreateRoomReactSvgUrl,
-    //       onClick: createCustomRoom,
-    //     },
-    //     {
-    //       id: "actions_use-template",
-    //       key: "use-template",
-    //       label: t("Common:UseTemplate"),
-    //       icon: TemplateReactSvgUrl,
-    //       disabled: true,
-    //     },
-    //   ],
-    //   [t, createCustomRoom],
-    // );
 
     return (
       <div className={styles.root} style={frameHeaderVars}>
@@ -236,7 +209,6 @@ const RoomsLayout = observer(
                   showMainButton={!isArchive && canCreateRooms}
                   mainButtonProps={{
                     isDropdown: false,
-                    // model: mainButtonModel,
                     text: t("Common:NewRoom"),
                     onAction: createCustomRoom,
                     model: [],
@@ -277,13 +249,23 @@ const RoomsLayout = observer(
             isEmptyPage={isEmptyList}
             filesFilter={filesFilter}
           />
-          <CreateEditRoomDialog
-            visible={dialogsStore.isDialogOpen(SDKDialogs.CreateRoom)}
-            onClose={closeCreateRoomDialog}
-            onRoomCreated={() => refreshRef.current?.()}
-            isPrivate={isPrivate}
-            hasEncryptionKeys={hasEncryptionKeys}
-          />
+          {renderCreateRoomDialog ? (
+            renderCreateRoomDialog({
+              visible: dialogsStore.isDialogOpen(SDKDialogs.CreateRoom),
+              onClose: closeCreateRoomDialog,
+              onRoomCreated: () => refreshRef.current?.(),
+              isPrivate,
+              hasEncryptionKeys,
+            })
+          ) : (
+            <CreateEditRoomDialog
+              visible={dialogsStore.isDialogOpen(SDKDialogs.CreateRoom)}
+              onClose={closeCreateRoomDialog}
+              onRoomCreated={() => refreshRef.current?.()}
+              isPrivate={isPrivate}
+              hasEncryptionKeys={hasEncryptionKeys}
+            />
+          )}
           <SelectionArea isRooms />
           <DeviceTypeObserver />
         </RootScrollbar>

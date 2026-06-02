@@ -106,7 +106,8 @@ const TRASH_COLUMNS: SectionColumn[] = [
   { key: "Location", sortBy: SortByFieldName.Location },
   { key: "Author", sortBy: SortByFieldName.Author },
   { key: "Created", sortBy: SortByFieldName.CreationDate },
-  // Erasure (auto-delete countdown) is temporarily omitted.
+  // Erasure (auto-delete countdown) sorts by modified date in the client.
+  { key: "Erasure", sortBy: SortByFieldName.ModifiedDate },
   { key: "Size", sortBy: SortByFieldName.Size },
   { key: "Type", sortBy: SortByFieldName.Type },
 ];
@@ -157,8 +158,10 @@ export const getColumnStorageKey = (
  * shape at the cell instead of casting ad hoc.
  */
 export type WithRuntimeFields = {
+  /** Recent: last access time (ISO). */
   lastOpened?: string;
-  daysRemaining?: number;
+  /** Trash: auto-deletion date (ISO) the erasure countdown is derived from. */
+  autoDelete?: string;
 };
 
 export type TableItem = TFileItem | TFolderItem;

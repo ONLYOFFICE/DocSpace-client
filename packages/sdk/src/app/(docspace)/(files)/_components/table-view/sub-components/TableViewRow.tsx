@@ -47,6 +47,7 @@ import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
+import { getDaysRemaining } from "@docspace/shared/utils/common";
 import { FolderType } from "@docspace/shared/enums";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import Badges from "@docspace/shared/components/badges";
@@ -163,7 +164,8 @@ const TableViewRow = observer(
     const fileType =
       "fileType" in item ? getFileTypeName(item.fileType, t) : t("Common:Folder");
 
-    // `lastOpened` (Recent) is a runtime-only field — not on TFile/TFolder.
+    // `lastOpened` (Recent) and `autoDelete` (Trash) are runtime-only fields —
+    // not declared on TFile/TFolder.
     const runtimeItem = item as typeof item & WithRuntimeFields;
     const lastOpenedDate = runtimeItem.lastOpened
       ? getCorrectDate(
@@ -173,6 +175,16 @@ const TableViewRow = observer(
           "LT",
           timezone ?? "UTC",
         )
+      : "";
+
+    // Erasure: days left until auto-deletion, derived from `autoDelete` the
+    // same way the client does (getDaysRemaining returns e.g. "5" or "<1").
+    const erasureLabel = runtimeItem.autoDelete
+      ? t("Common:DaysRemaining", {
+          daysRemaining: getDaysRemaining(
+            runtimeItem.autoDelete as unknown as Date,
+          ),
+        })
       : "";
 
     // Visible columns + order are section-specific (same source as the header).
@@ -329,12 +341,8 @@ const TableViewRow = observer(
           );
         case "Erasure":
           return (
-            <span className={styles.secondaryCell}>
-              {runtimeItem.daysRemaining != null
-                ? t("Common:DaysRemaining", {
-                    daysRemaining: runtimeItem.daysRemaining,
-                  })
-                : ""}
+            <span className={styles.secondaryCell} title={erasureLabel}>
+              {erasureLabel}
             </span>
           );
         case "Size":

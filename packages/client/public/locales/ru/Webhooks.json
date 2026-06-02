@@ -1,7 +1,7 @@
 {
-  "AgentCreated": "Создан агент ИИ",
-  "AgentDeleted": "Агент ИИ удален",
-  "AgentUpdated": "Обновлен AI Agent",
+  "AgentCreated": "ИИ-агент создан",
+  "AgentDeleted": "ИИ-агент удален",
+  "AgentUpdated": "ИИ-агент обновлен",
   "Before": "До",
   "CreateWebhook": "Создать вебхук",
   "DeleteHint": "Вебхук будет удален окончательно.\nВы не сможете отменить это действие.",
@@ -57,7 +57,6 @@
   "RequestHeaderCopied": "Заголовок запроса POST успешно скопирован в буфер обмена",
   "RequestPostBody": "Тело запроса POST",
   "RequestPostHeader": "Заголовок запроса POST",
-  "ResetKey": "Кнопка сброса",
   "Response": "Ответ",
   "ResponseBodyCopied": "Тело ответа POST успешно скопировано в буфер обмена",
   "ResponseHeaderCopied": "Заголовок ответа POST успешно скопирован в буфер обмена",

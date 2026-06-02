@@ -3,7 +3,7 @@
   "content": "Users have joined via this link",
   "content_en_sha1_hash": "8d9cf65833243dcc0964dffcbf523611c2168ab1",
   "created_at": "2026-02-19T13:36:27.563Z",
-  "updated_at": "2026-05-15T14:00:06.713Z",
+  "updated_at": "2026-05-28T15:46:18.560Z",
   "comment": {
     "text": "This text appears below a link in the link settings panel, indicating that users have accessed the shared file using that specific link.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/LinkSettingsPanel/index.tsx",
-      "line_number": 288,
+      "line_number": 289,
       "context": "<Text\n fontSize=\"12px\"\n fontWeight={400}\n className={styles.linkSettingsDescriptionText}\n >\n {t(\"Files:LinkSettingsJoinedUsers\")}\n </Text>\n </div>\n </div>\n ) : null}\n </div>",
       "module": "/packages/client"
     }

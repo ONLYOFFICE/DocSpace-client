@@ -235,6 +235,7 @@ export const enum PageType {
   groups = "groups",
   guests = "guests",
   aiSettings = "aiSettings",
+  apps = "apps",
 }
 
 export const enum ConflictResolveType {
@@ -347,7 +348,6 @@ export const enum TariffState {
   Delay = 2,
   NotPaid = 3,
 }
-
 
 /**
  * Enum for payment method status.
@@ -698,3 +698,4 @@ export enum VectorizationStatus {
   Completed,
   Failed,
 }
+

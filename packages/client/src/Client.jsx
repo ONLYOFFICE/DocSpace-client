@@ -53,6 +53,7 @@ import {
   ArticleMainButtonContent,
 } from "./components/Article";
 import ArticleWrapper from "./components/ArticleWrapper";
+import NewArticle from "./components/NewArticle";
 
 const ClientArticle = React.memo(
   ({
@@ -61,7 +62,19 @@ const ClientArticle = React.memo(
     isInfoPanelVisible,
     isAccountsArticle,
     isDeveloperToolsArticle,
+    forceNewArticle,
   }) => {
+    const isLegacyMode = localStorage.getItem("useDocSpace") === "old";
+    const useLegacyArticle = isAccountsArticle || isDeveloperToolsArticle;
+
+    if (forceNewArticle && !useLegacyArticle) {
+      return <NewArticle />;
+    }
+
+    if (!isLegacyMode && !useLegacyArticle) {
+      return <NewArticle />;
+    }
+
     return (
       <ArticleWrapper
         isInfoPanelVisible={isInfoPanelVisible}
@@ -175,6 +188,14 @@ const ClientContent = (props) => {
       location.state?.fromUrl?.includes("/accounts"));
   const isDeveloperToolsArticle =
     location.pathname.includes("/developer-tools");
+  const isNewArticle =
+    location.pathname.startsWith("/ai-files") ||
+    location.pathname.startsWith("/ai-rooms") ||
+    location.pathname.startsWith("/ai-forms") ||
+    location.pathname.startsWith("/agents") ||
+    location.pathname.startsWith("/docs-cloud") ||
+    location.pathname.startsWith("/ai-arbiter") ||
+    location.pathname.startsWith("/dashboard");
   const withMainButton =
     isAccountsArticle || isDeveloperToolsArticle
       ? currentDeviceType !== DeviceType.desktop
@@ -194,6 +215,7 @@ const ClientContent = (props) => {
             showArticleLoader={showArticleLoader}
             isAccountsArticle={isAccountsArticle}
             isDeveloperToolsArticle={isDeveloperToolsArticle}
+            forceNewArticle={isNewArticle}
           />
         )
       ) : (
@@ -205,6 +227,7 @@ const ClientContent = (props) => {
           showArticleLoader={showArticleLoader}
           isAccountsArticle={isAccountsArticle}
           isDeveloperToolsArticle={isDeveloperToolsArticle}
+          forceNewArticle={isNewArticle}
         />
       )}
       <Outlet />
@@ -282,3 +305,4 @@ export const Client = inject(
     };
   },
 )(withTranslation("Common")(observer(ClientContent)));
+

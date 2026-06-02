@@ -1,0 +1,35 @@
+{
+  "key_path": "InviteToRoomAddPlaceholder",
+  "content": "Add people by name or email",
+  "content_en_sha1_hash": "8293f0c6e55cfbc44981432a63a2fcdf69e93014",
+  "created_at": "2025-05-26T07:15:53.257Z",
+  "updated_at": "2026-05-24T17:27:49.108Z",
+  "comment": {
+    "text": "This is a placeholder text for an input field. It appears when inviting users to a room, prompting them to enter names or email addresses.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:14:08.061Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
+      "line_number": 740,
+      "context": "onChange={onChange}\n placeholder={\n roomId === -1\n ? t(\"InviteMembersSearchPlaceholder\")\n : !allowInvitingGuests\n ? t(\"InviteToRoomAddPlaceholder\")\n : t(\"InviteToRoomSearchPlaceholder\")\n }\n value={inputValue}\n onKeyDown={onKeyDown}\n type=\"search\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/sub-components/InviteInput.tsx",
+      "line_number": 604,
+      "context": "className=\"invite-input\"\n scale\n onChange={onChange}\n placeholder={\n !allowInvitingGuests\n ? t(\"Common:InviteToRoomAddPlaceholder\")\n : t(\"Common:InviteToRoomSearchPlaceholder\")\n }\n value={inputValue}\n onKeyDown={onKeyDown}\n type={InputType.search}",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

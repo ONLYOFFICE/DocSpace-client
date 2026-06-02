@@ -57,7 +57,6 @@
   "RequestHeaderCopied": "El encabezado de la solicitud POST se ha copiado correctamente en el portapapeles",
   "RequestPostBody": "El cuerpo de la solicitud POST",
   "RequestPostHeader": "El encabezado de la solicitud POST",
-  "ResetKey": "Clave de reinicio",
   "Response": "Respuesta",
   "ResponseBodyCopied": "El cuerpo de la respuesta POST se ha copiado correctamente en el portapapeles",
   "ResponseHeaderCopied": "El encabezado de la respuesta POST se ha copiado correctamente en el portapapeles",

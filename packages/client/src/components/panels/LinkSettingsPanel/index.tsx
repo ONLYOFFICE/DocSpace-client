@@ -243,7 +243,7 @@ const LinkSettingsPanel = ({
                       place="right"
                       iconNode={<ButtonAlertIcon />}
                       tooltipContent={
-                        <Text>{t("Files:LinkSettingsUsersLimitToast")}</Text>
+                        <Text>{t("Common:LinkSettingsUsersLimitToast")}</Text>
                       }
                       className={styles.linkSettingsHelpButton}
                     />
@@ -251,6 +251,7 @@ const LinkSettingsPanel = ({
                 </div>
                 <TextInput
                   className={styles.userLimitTextInput}
+                  name="users_limit"
                   type={InputType.text}
                   value={maxNumber}
                   scale

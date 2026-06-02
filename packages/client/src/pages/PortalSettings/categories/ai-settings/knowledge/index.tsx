@@ -78,7 +78,7 @@ const KnowledgeComponent = ({
   aiConfig,
   knowledgeSettingsUrl,
 }: TKnowledgeProps) => {
-  const { t } = useTranslation(["Common", "AISettings", "AIRoom", "Settings"]);
+  const { t } = useTranslation(["Common"]);
 
   const [resetDialogVisible, setResetDialogVisible] =
     React.useState<boolean>(false);
@@ -159,7 +159,7 @@ const KnowledgeComponent = ({
     try {
       await updateKnowledge?.(selectedOption, currentValue);
 
-      toastr.success(t("AISettings:KnowledgeEnabledSuccess"));
+      toastr.success(t("Common:KnowledgeEnabledSuccess"));
     } catch (e) {
       console.error(e);
       toastr.error(e as string);
@@ -259,15 +259,15 @@ const KnowledgeComponent = ({
         data-tooltip-id={tooltipId}
         data-tooltip-content={
           !hasAIProviders
-            ? t("AISettings:ToUseAddProvider", {
-                value: t("AIRoom:Knowledge"),
+            ? t("Common:ToUseAddProvider", {
+                value: t("Common:Knowledge"),
                 aiProvider: t("Common:AIProvider"),
               })
             : undefined
         }
       >
         <Text className={generalStyles.description}>
-          {t("AISettings:KnowledgeSettingsDescription", {
+          {t("Common:KnowledgeSettingsDescription", {
             modelName: aiConfig?.embeddingModel || "text-embedding-3-small",
             aiAgents: t("Common:AIAgents"),
           })}
@@ -289,7 +289,7 @@ const KnowledgeComponent = ({
           <FieldContainer
             labelVisible
             isVertical
-            labelText={t("AISettings:Provider")}
+            labelText={t("Common:Provider")}
             removeMargin
           >
             <ComboBox
@@ -314,7 +314,7 @@ const KnowledgeComponent = ({
             <FieldContainer
               labelVisible
               isVertical
-              labelText={t("AISettings:APIKey")}
+              labelText={t("Common:APIKey")}
               removeMargin
             >
               {isKeyHidden ? (
@@ -323,14 +323,15 @@ const KnowledgeComponent = ({
                   data-testid="knowledge-key-hidden-banner"
                 >
                   <Text fontSize="12px" fontWeight={400} lineHeight="16px">
-                    {t("AISettings:WebSearchKeyHiddenDescription")}
+                    {t("Common:WebSearchKeyHiddenDescription")}
                   </Text>
                 </div>
               ) : (
                 <>
                   <PasswordInput
                     className={styles.passwordInput}
-                    placeholder={t("AISettings:EnterKey")}
+                    placeholder={t("Common:EnterKey")}
+                    inputName="knowledge_key"
                     inputValue={currentValue}
                     onChange={onChange}
                     scale
@@ -344,7 +345,7 @@ const KnowledgeComponent = ({
                     testId="knowledge-key-input"
                   />
                   <Text className={styles.hiddenKeyDescription}>
-                    {t("AISettings:KnowledgeKeyDescription")}
+                    {t("Common:KnowledgeKeyDescription")}
                   </Text>
                 </>
               )}
@@ -355,7 +356,7 @@ const KnowledgeComponent = ({
           <Button
             primary
             size={ButtonSize.small}
-            label={t("SaveButton")}
+            label={t("Common:SaveButton")}
             scale={false}
             onClick={onSave}
             isLoading={saveRequestRunning}
@@ -364,7 +365,7 @@ const KnowledgeComponent = ({
           />
           <Button
             size={ButtonSize.small}
-            label={t("Settings:ResetSettings")}
+            label={t("Common:ResetSettings")}
             scale={false}
             onClick={onRestoreToDefault}
             isDisabled={
@@ -403,3 +404,4 @@ export const Knowledge = inject(
 )(observer(KnowledgeComponent));
 
 export { KnowledgeLoader };
+

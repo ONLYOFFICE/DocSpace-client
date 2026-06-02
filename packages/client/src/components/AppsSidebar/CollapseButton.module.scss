@@ -1,0 +1,15 @@
+@use "@docspace/ui-kit/styles/mixins";
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+
+  &[data-show-text="false"] {
+    justify-content: center;
+  }
+
+  @include mixins.mobile {
+    display: none;
+  }
+}

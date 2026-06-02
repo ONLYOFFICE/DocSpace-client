@@ -1,0 +1,29 @@
+{
+  "key_path": "Unlinked",
+  "content": "Unlinked",
+  "content_en_sha1_hash": "86998aceb93f9016ca618a2e4f61c1a70b7b5059",
+  "created_at": "2026-05-25T18:26:03.657Z",
+  "updated_at": "2026-05-25T18:26:44.760Z",
+  "comment": {
+    "text": "Status label in the billing card information section indicating that a payment method is not connected to the account.",
+    "is_auto": true,
+    "updated_at": "2026-05-25T18:26:44.760Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/card-information/index.tsx",
+      "line_number": 73,
+      "context": "<CardIconUrl />\n </div>\n \n <div className={styles.cardContent}>\n <Text fontSize=\"14px\" fontWeight={600} lineHeight=\"16px\">\n {walletCustomerStatusNotActive ? t(\"Unlinked\") : t(\"Linked\")}\n </Text>\n </div>\n \n <div\n className={classNames(styles.tickedWrapper, {",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

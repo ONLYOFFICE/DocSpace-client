@@ -3,7 +3,7 @@
   "content": "Apply",
   "content_en_sha1_hash": "cfea419c3b4e8b02ee586e70a28bf846e44cdda4",
   "created_at": "2025-05-19T21:30:43.032Z",
-  "updated_at": "2026-05-15T15:37:40.202Z",
+  "updated_at": "2026-05-24T17:27:49.099Z",
   "comment": {
     "text": "This is the label for a button that confirms and applies changes or filter selections within a dialog or panel.",
     "is_auto": true,
@@ -24,26 +24,32 @@
       "module": "/libs/ui-kit"
     },
     {
+      "file_path": "/libs/ui-kit/components/room-logo-cover-dialog/index.tsx",
+      "line_number": 193,
+      "context": "<Button\n scale\n primary\n tabIndex={0}\n size={ButtonSize.normal}\n label={t(\"Common:ApplyButton\")}\n onClick={handleSubmit}\n testId=\"room_logo_cover_apply_button\"\n />\n <Button\n scale",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/components/room-logo-cover-dialog/sub-components/SelectColor.tsx",
+      "line_number": 177,
+      "context": "onClose={() => setOpenColorPicker(false)}\n onApply={onApply}\n isPickerOnly\n handleChange={onApply}\n appliedColor={selectedColor}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n />\n </ModalDialog.Body>\n </ModalDialog>\n ) : (",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/components/room-logo-cover-dialog/sub-components/SelectColor.tsx",
+      "line_number": 177,
+      "context": "onClose={() => setOpenColorPicker(false)}\n onApply={onApply}\n isPickerOnly\n handleChange={onApply}\n appliedColor={selectedColor}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n />\n </ModalDialog.Body>\n </ModalDialog>\n ) : (",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/index.tsx",
-      "line_number": 282,
+      "line_number": 280,
       "context": "<Button\n scale\n primary\n tabIndex={0}\n size={ButtonSize.normal}\n label={t(\"Common:ApplyButton\")}\n onClick={handleSubmit}\n testId=\"room_logo_cover_apply_button\"\n />\n <Button\n scale",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/sub-components/SelectColor/SelectColor.tsx",
-      "line_number": 191,
-      "context": "onClose={() => setOpenColorPicker(false)}\n onApply={onApply}\n isPickerOnly\n handleChange={onApply}\n appliedColor={selectedColor!}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n />\n </ModalDialog.Body>\n </ModalDialog>\n ) : (",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/sub-components/SelectColor/SelectColor.tsx",
-      "line_number": 191,
-      "context": "onClose={() => setOpenColorPicker(false)}\n onApply={onApply}\n isPickerOnly\n handleChange={onApply}\n appliedColor={selectedColor!}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n />\n </ModalDialog.Body>\n </ModalDialog>\n ) : (",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 616,
+      "line_number": 623,
       "context": "onClick: onIndexReorder,\n iconUrl: RoundedArrowSvgUrl,\n },\n {\n id: \"save-index\",\n label: t(\"Common:ApplyButton\"),\n onClick: onIndexApply,\n iconUrl: CheckIcon,\n },\n ];\n }, [t, onIndexReorder, onIndexApply, isIndexEditingMode]);",
       "module": "/packages/client"
     },

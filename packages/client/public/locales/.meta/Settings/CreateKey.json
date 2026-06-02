@@ -3,7 +3,7 @@
   "content": "Create key",
   "content_en_sha1_hash": "e028cb09f2a481aec3b30e1b7d57d0e8976efb23",
   "created_at": "2026-04-03T21:51:36.617Z",
-  "updated_at": "2026-05-15T14:00:06.818Z",
+  "updated_at": "2026-05-27T14:11:50.700Z",
   "comment": {
     "text": "This is a button label that creates a new API key.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 133,
-      "context": "icon={<KeySvg />}\n title={t(\"Settings:ApiKeys\")}\n description={t(\"Settings:ApiKeysCardDescription\", { organizationName: getBrandName(\"OrganizationName\"), productName: getBrandName(\"ProductName\") })}\n url=\"/developer-tools/api-keys?create=true\"\n color={globalColors.lightGrayDark}\n linkTitle={t(\"Settings:CreateKey\")}\n />\n </div>\n </div>\n </ConfirmWrapper>\n );",
+      "line_number": 165,
+      "context": "organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),\n })}\n url=\"/developer-tools/api-keys\"\n color={globalColors.lightGrayDark}\n linkTitle={t(\"Settings:CreateKey\")}\n ctaUrl=\"/developer-tools/api-keys?create=true\"\n />\n </div>\n </div>\n </ConfirmWrapper>",
       "module": "/packages/client"
     }
   ],

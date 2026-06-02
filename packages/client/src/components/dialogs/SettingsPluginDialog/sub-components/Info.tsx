@@ -74,7 +74,7 @@ const Info = ({ t, plugin, withDelete, withSeparator }: InfoProps) => {
         {plugin.author ? (
           <>
             <Text fontSize="13px" fontWeight={400} lineHeight="20px" truncate>
-              {t("Files:ByAuthor")}
+              {t("Common:ByAuthor")}
             </Text>
             <Text fontSize="13px" fontWeight={600} lineHeight="20px">
               {plugin.author}
@@ -193,3 +193,4 @@ const Info = ({ t, plugin, withDelete, withSeparator }: InfoProps) => {
 };
 
 export default Info;
+

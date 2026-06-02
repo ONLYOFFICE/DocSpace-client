@@ -4,5 +4,8 @@
   "ContinueToProduct": "Procedează la {{productName}}",
   "GeneratedPassword": "Parolă generată\n",
   "ProductNameDetail": "Denumire {{productName}}",
-  "ReviewAccountDetails": "Vă rugăm să acordați câteva momente pentru a revizui detaliile contului dvs:\n"
+  "ReviewAccountDetails": "Vă rugăm să acordați câteva momente pentru a revizui detaliile contului dvs:\n",
+  "SetEmailPassword": "Setare parolă",
+  "WelcomeSubtitle": "Spațiul dvs. a fost creat cu succes. Examinați detaliile profilului dvs. și începeți să lucrați.",
+  "YourProfileDetails": "Detaliile profilului dvs"
 }

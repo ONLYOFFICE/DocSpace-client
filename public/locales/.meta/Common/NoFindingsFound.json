@@ -3,7 +3,7 @@
   "content": "No findings",
   "content_en_sha1_hash": "ab5062b935491263fcc3318d6d8d558b82d2b044",
   "created_at": "2025-05-19T21:30:46.827Z",
-  "updated_at": "2026-05-15T14:00:06.591Z",
+  "updated_at": "2026-06-01T21:20:44.379Z",
   "comment": {
     "text": "This is a title displayed in an empty state view when no items are found after applying a filter or search.",
     "is_auto": true,
@@ -18,9 +18,27 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-filter/index.tsx",
+      "line_number": 86,
+      "context": ");\n \n return (\n <EmptyView\n icon={icon}\n title={t(\"Common:NoFindingsFound\", { defaultValue: \"No results found\" })}\n description={t(\"Common:EmptyFilterAIAgentsDescription\", {\n defaultValue:\n \"No AI agents match the filter. Try a different search or clear the filter.\",\n })}\n options={options}",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/index.tsx",
+      "line_number": 62,
+      "context": ") {\n return <KnowledgeDisabledContainer />;\n }\n \n const title = isFiltered\n ? t(\"Common:NoFindingsFound\")\n : isRoot\n ? getRootTitle(t, rootFolderType)\n : getTitle(t, current.type);\n const description = isFiltered\n ? t(\"Common:EmptyFilterFilesDescription\")",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/files-empty-filter/index.tsx",
+      "line_number": 60,
+      "context": ");\n \n return (\n <EmptyView\n icon={icon}\n title={t(\"Common:NoFindingsFound\", { defaultValue: \"No findings\" })}\n description={t(\"Common:EmptyFilterFilesDescription\", {\n defaultValue:\n \"No files or folders match this filter. Try another or remove the filter to view all files.\",\n })}\n options={options}",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/empty-view/index.tsx",
-      "line_number": 32,
-      "context": "const isRoot = current.parentId === current.rootFolderId;\n const { isBase: isBaseTheme } = useTheme();\n \n const title = isFiltered\n ? t(\"Common:NoFindingsFound\")\n : isRoot\n ? getRootTitle(t)\n : getTitle(t);\n const description = isFiltered\n ? t(\"Common:EmptyFilterFilesDescription\")",
+      "line_number": 37,
+      "context": "const { isBase: isBaseTheme } = useTheme();\n \n const rootFolderType = current.rootFolderType;\n \n const title = isFiltered\n ? t(\"Common:NoFindingsFound\")\n : isRoot\n ? getRootTitle(t, rootFolderType)\n : getTitle(t);\n const description = isFiltered\n ? t(\"Common:EmptyFilterFilesDescription\")",
       "module": "/packages/sdk"
     }
   ],

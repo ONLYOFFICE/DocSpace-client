@@ -1,0 +1,35 @@
+{
+  "key_path": "InviteToRoomManuallyInfoMembers",
+  "content": "Add existing {{productName}} members to the room.",
+  "content_en_sha1_hash": "816770fbd8f562c5be684447272d1393838bad6e",
+  "created_at": "2025-05-26T07:15:53.261Z",
+  "updated_at": "2026-05-24T17:27:49.107Z",
+  "comment": {
+    "text": "This is an informational message displayed in the invite panel. It explains that existing {{productName}} members can be added to the current room.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:14:06.566Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
+      "line_number": 677,
+      "context": "{roomId === -1\n ? t(\"InviteMembersManuallyDescription\", {\n productName: getBrandName(\"ProductName\"),\n })\n : !allowInvitingGuests\n ? t(\"InviteToRoomManuallyInfoMembers\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"InviteToRoomManuallyInfoGuest\", {\n productName: getBrandName(\"ProductName\"),\n })}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/sub-components/InviteInput.tsx",
+      "line_number": 583,
+      "context": "className={classNames(styles.description, {\n [styles.noAllowInvitingGuests]: !allowInvitingGuests,\n })}\n >\n {!allowInvitingGuests\n ? t(\"Common:InviteToRoomManuallyInfoMembers\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"Common:InviteToRoomManuallyInfoGuest\", {\n productName: getBrandName(\"ProductName\"),\n })}",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

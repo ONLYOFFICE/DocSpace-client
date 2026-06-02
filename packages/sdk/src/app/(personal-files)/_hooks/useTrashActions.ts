@@ -36,6 +36,8 @@
 "use client";
 
 import { useCallback, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 import { removeFiles } from "@docspace/shared/api/files";
 import { FolderType } from "@docspace/shared/enums";
@@ -43,14 +45,19 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
+import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import type {
   TFileItem,
   TFolderItem,
 } from "@/app/(docspace)/_hooks/useItemList";
+import type { TrackOperation } from "./useFileOperations";
 
-export default function useTrashActions() {
+export default function useTrashActions(trackOperation?: TrackOperation) {
   const filesListStore = useFilesListStore();
   const filesSelectionStore = useFilesSelectionStore();
+  const router = useRouter();
+  const { t } = useTranslation(["Common"]);
+  const { openFolder } = useFolderActions({ t });
 
   const isTrash = filesListStore.rootFolderType === FolderType.TRASH;
 
@@ -90,22 +97,69 @@ export default function useTrashActions() {
       .filter((i) => i.isFolder)
       .map((i) => i.id as number);
     const immediately = isTrash;
+    const itemsToRemove = pendingDeleteItems;
+
+    const currentFolder = filesListStore.currentFolder;
+    const pathParts = filesListStore.pathParts;
+    const isDeletingCurrentFolder =
+      !!currentFolder &&
+      itemsToRemove.some(
+        (item) => item.isFolder && item.id === currentFolder.id,
+      );
+    const parentFolderId =
+      isDeletingCurrentFolder && currentFolder
+        ? currentFolder.parentId
+        : undefined;
+    const parentFolderTitle =
+      isDeletingCurrentFolder && pathParts && pathParts.length >= 2
+        ? pathParts[pathParts.length - 2].title
+        : "";
 
     setIsDeleting(true);
     try {
-      await removeFiles(folderIds, fileIds, false, immediately);
-      for (const item of pendingDeleteItems) {
-        filesListStore.removeItem(item.id);
-      }
-      filesSelectionStore.setSelection();
+      const operations = await removeFiles(
+        folderIds,
+        fileIds,
+        false,
+        immediately,
+      );
       setDeleteDialogVisible(false);
       setPendingDeleteItems([]);
+
+      const opId = operations?.[0]?.id;
+      const icon = immediately ? "deletePermanently" : "trash";
+
+      const onComplete = () => {
+        for (const item of itemsToRemove) {
+          filesListStore.removeItem(item.id);
+        }
+        filesSelectionStore.setSelection();
+
+        if (isDeletingCurrentFolder && parentFolderId !== undefined) {
+          openFolder(parentFolderId, parentFolderTitle);
+          router.refresh();
+        }
+      };
+
+      if (opId && trackOperation) {
+        await trackOperation(opId, icon, onComplete);
+      } else {
+        onComplete();
+      }
     } catch (error) {
       toastr.error(error instanceof Error ? error.message : String(error));
     } finally {
       setIsDeleting(false);
     }
-  }, [isTrash, filesListStore, filesSelectionStore, pendingDeleteItems]);
+  }, [
+    isTrash,
+    filesListStore,
+    filesSelectionStore,
+    pendingDeleteItems,
+    trackOperation,
+    openFolder,
+    router,
+  ]);
 
   return {
     isTrash,

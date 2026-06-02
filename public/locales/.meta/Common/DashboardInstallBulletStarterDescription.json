@@ -1,0 +1,29 @@
+{
+  "key_path": "DashboardInstallBulletStarterDescription",
+  "content": "Start from a blank form or pick a ready-made template — contracts, requests, surveys, and more.",
+  "content_en_sha1_hash": "c8f188bfc773210d62c15545873307c2b99342a4",
+  "created_at": "2026-05-19T19:03:13.838Z",
+  "updated_at": "2026-05-24T17:27:49.115Z",
+  "comment": {
+    "text": "Bullet point description in the module installation dialog explaining the \"Starter\" feature's ability to use blank forms or templates.",
+    "is_auto": true,
+    "updated_at": "2026-05-19T19:28:29.460Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallAiFormsDialog.tsx",
+      "line_number": 144,
+      "context": "description: t(\"Common:DashboardInstallBulletInviteDescription\"),\n },\n {\n Icon: TemplateIcon,\n title: t(\"Common:DashboardInstallBulletStarter\"),\n description: t(\"Common:DashboardInstallBulletStarterDescription\"),\n },\n ];\n \n const confirmBody = (\n <div className={styles.confirmBody}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -204,3 +204,30 @@ export const getUrlByDefaultFolderType = (folderType) => {
   const categoryType = getCategoryTypeByFolderType(folderType);
   return getCategoryUrl(categoryType);
 };
+
+export const isNewProductView = () =>
+  localStorage.getItem("useDocSpace") !== "old";
+
+export const getNewViewUrlByFolderType = (folderType) => {
+  switch (folderType) {
+    case FolderType.SHARE:
+      return "/ai-files?section=shared-with-me";
+    case FolderType.Recent:
+      return "/ai-files?section=recent";
+    case FolderType.Favorites:
+      return "/ai-files?section=favorites";
+    case FolderType.TRASH:
+      return "/ai-files?section=trash";
+    case FolderType.USER:
+      return "/ai-files";
+    case FolderType.Rooms:
+    case FolderType.RoomTemplates:
+      return "/ai-rooms?section=rooms";
+    case FolderType.Archive:
+      return "/ai-rooms?section=archive";
+    case FolderType.AIAgents:
+      return "/agents";
+    default:
+      return "/ai-files";
+  }
+};

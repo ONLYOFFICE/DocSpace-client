@@ -1,7 +1,7 @@
 {
-  "AgentCreated": "AI Agent luotu",
+  "AgentCreated": "AI agent luotu",
   "AgentDeleted": "Poistettu tekoälyagentti",
-  "AgentUpdated": "AI Agent päivitetty",
+  "AgentUpdated": "AI agent päivitetty",
   "Before": "Ennen",
   "CreateWebhook": "Luo webhook",
   "DeleteHint": "Webhook poistetaan pysyvästi.\nEt voi peruuttaa tätä toimintoa.",
@@ -57,7 +57,6 @@
   "RequestHeaderCopied": "POST-pyynnön otsikko onnistuneesti kopioitu leikepöydälle",
   "RequestPostBody": "POST-pyynnön runko",
   "RequestPostHeader": "POST-pyynnön otsikko",
-  "ResetKey": "Nollausavain",
   "Response": "Vastaus",
   "ResponseBodyCopied": "POST-vastauksen runko onnistuneesti kopioitu leikepöydälle",
   "ResponseHeaderCopied": "POST-pyynnön otsikko onnistuneesti kopioitu leikepöydälle",

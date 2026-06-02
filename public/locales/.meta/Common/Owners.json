@@ -3,7 +3,7 @@
   "content": "Owners",
   "content_en_sha1_hash": "4eaec4bc0f1df68ab2a7c896845068f9bba671b9",
   "created_at": "2026-03-31T15:18:18.114Z",
-  "updated_at": "2026-05-15T14:00:06.751Z",
+  "updated_at": "2026-06-01T21:20:44.451Z",
   "comment": {
     "text": "This is a label for a filter option in the Home section, allowing users to filter items by their owners.",
     "is_auto": true,
@@ -16,6 +16,18 @@
       "line_number": 1273,
       "context": "const ownerOptions = [\n {\n key: FilterGroups.roomFilterOwner,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Common:Owners\"),\n isHeader: true,\n withoutSeparator: true,\n withMultiItems: true,\n },\n {",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-filter/useAgentsFilter.tsx",
+      "line_number": 252,
+      "context": "const ownerOptions = [\n {\n key: FilterGroups.roomFilterOwner,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Common:Owners\", { defaultValue: \"Owners\" }),\n isHeader: true,\n withoutSeparator: true,\n withMultiItems: true,\n },\n {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/useRoomsFilter.tsx",
+      "line_number": 277,
+      "context": "const ownerOptions: unknown[] = [\n {\n key: FilterGroups.roomFilterOwner,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Common:Owners\"),\n isHeader: true,\n withoutSeparator: true,\n withMultiItems: true,\n },\n {",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

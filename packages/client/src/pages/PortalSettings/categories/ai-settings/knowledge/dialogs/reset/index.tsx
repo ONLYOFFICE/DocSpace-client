@@ -59,7 +59,7 @@ const ResetKnowledgeDialogComponent = ({
   restoreKnowledge,
   getAIConfig,
 }: ResetKnowledgeDialogProps) => {
-  const { t } = useTranslation(["AISettings", "Common", "OAuth", "Settings"]);
+  const { t } = useTranslation(["Common"]);
 
   const [loading, setLoading] = React.useState(false);
 
@@ -68,7 +68,7 @@ const ResetKnowledgeDialogComponent = ({
 
     try {
       await restoreKnowledge?.();
-      toastr.success(t("AISettings:KnowledgeDisabledSuccess"));
+      toastr.success(t("Common:KnowledgeDisabledSuccess"));
       onSuccess?.();
       getAIConfig?.();
     } catch (error) {
@@ -82,17 +82,17 @@ const ResetKnowledgeDialogComponent = ({
 
   return (
     <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>
-      <ModalDialog.Header>{t("Settings:ResetSettings")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:ResetSettings")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>
-          <Trans t={t} i18nKey="ResetKnowledgeDescription" ns="AISettings" />
+          <Trans t={t} i18nKey="ResetKnowledgeDescription" ns="Common" />
         </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           primary
           size={ButtonSize.normal}
-          label={t("OAuth:Reset")}
+          label={t("Common:Reset")}
           scale
           onClick={onSubmitAction}
           isLoading={loading}

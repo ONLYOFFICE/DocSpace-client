@@ -77,7 +77,7 @@ const GroupIconDialog = ({
   currentGroupName,
   isOpenedFromContextMenu,
 }: CoverDialogProps) => {
-  const { t } = useTranslation(["Common", "RoomLogoCover", "GroupingRooms"]);
+  const { t } = useTranslation(["Common", "GroupingRooms"]);
 
   const [roomIcon, setRoomIcon] = React.useState<
     ICover | ILogo | string | null
@@ -257,6 +257,7 @@ const GroupIconDialog = ({
           <span className={styles.symbol}>*</span>
           <TextInput
             className={styles.nameInput}
+            name="group_name"
             type={InputType.text}
             size={InputSize.base}
             value={groupName || ""}

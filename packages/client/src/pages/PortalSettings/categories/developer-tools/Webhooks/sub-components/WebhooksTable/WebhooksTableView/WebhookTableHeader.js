@@ -90,7 +90,7 @@ const WebhookTableHeader = (props) => {
   const authorBlock = isAdmin
     ? {
         key: "Author",
-        title: t("Files:ByAuthor"),
+        title: t("Common:ByAuthor"),
         enable: true,
         resizable: true,
         onChange: onColumnChange,
@@ -152,3 +152,4 @@ export default inject(({ userStore }) => {
     isAdmin: userStore.user.isAdmin || userStore.user.isOwner,
   };
 })(observer(WebhookTableHeader));
+

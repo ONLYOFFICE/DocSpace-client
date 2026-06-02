@@ -44,6 +44,7 @@ import {
   duplicate,
   getFolder,
   getFoldersTree,
+  checkFileConflicts,
 } from "@docspace/shared/api/files";
 import type {
   TFolder,
@@ -67,11 +68,17 @@ import type {
 export type SelectorMode = "copy" | "move" | "restore";
 
 export type OperationProgress = {
-  icon: "copy" | "move" | "duplicate";
+  icon: "copy" | "move" | "duplicate" | "trash" | "deletePermanently";
   percent: number;
   completed: boolean;
   alert: boolean;
 };
+
+export type TrackOperation = (
+  operationId: string,
+  icon: OperationProgress["icon"],
+  onComplete?: () => void,
+) => Promise<void>;
 
 export type SelectorInitData = {
   items: (TFile | TFolder)[];
@@ -89,9 +96,18 @@ export default function useFileOperations() {
 
   const [selectorDialogVisible, setSelectorDialogVisible] = useState(false);
   const [selectorMode, setSelectorMode] = useState<SelectorMode>("copy");
-  const [pendingItems, setPendingItems] = useState<
-    (TFileItem | TFolderItem)[]
+  const [pendingItems, setPendingItems] = useState<(TFileItem | TFolderItem)[]>(
+    [],
+  );
+
+  const [conflictDialogVisible, setConflictDialogVisible] = useState(false);
+  const [conflictItems, setConflictItems] = useState<
+    { title: string; isFile: boolean }[]
   >([]);
+  const pendingConflictDestRef = useRef<{
+    destFolderId: number;
+    isMove: boolean;
+  } | null>(null);
 
   // Panel init data
   const [foldersTree, setFoldersTree] = useState<TFolder[] | null>(null);
@@ -117,7 +133,12 @@ export default function useFileOperations() {
       icon: OperationProgress["icon"],
       onComplete?: () => void,
     ) => {
-      setOperationProgress({ icon, percent: 0, completed: false, alert: false });
+      setOperationProgress({
+        icon,
+        percent: 0,
+        completed: false,
+        alert: false,
+      });
 
       try {
         let finished = false;
@@ -253,9 +274,63 @@ export default function useFileOperations() {
     setSelectorInitData(null);
   }, []);
 
+  const executeOperation = useCallback(
+    async (
+      destFolderId: number,
+      isMove: boolean,
+      resolveType: ConflictResolveType,
+      itemsToProcess: (TFileItem | TFolderItem)[],
+    ) => {
+      const fileIds = itemsToProcess
+        .filter((i) => !i.isFolder)
+        .map((i) => i.id as number);
+      const folderIds = itemsToProcess
+        .filter((i) => i.isFolder)
+        .map((i) => i.id as number);
+
+      const operations = isMove
+        ? await moveToFolder(
+            destFolderId,
+            folderIds,
+            fileIds,
+            resolveType,
+            false,
+          )
+        : await copyToFolder(
+            destFolderId,
+            folderIds,
+            fileIds,
+            resolveType,
+            false,
+          );
+
+      const opId = operations?.[0]?.id;
+      const icon: OperationProgress["icon"] = isMove ? "move" : "copy";
+
+      if (opId) {
+        await trackOperation(opId, icon, () => {
+          if (isMove) {
+            for (const item of itemsToProcess) {
+              filesListStore.removeItem(item.id);
+            }
+            filesSelectionStore.setSelection();
+          }
+        });
+      } else if (isMove) {
+        for (const item of itemsToProcess) {
+          filesListStore.removeItem(item.id);
+        }
+        filesSelectionStore.setSelection();
+      }
+    },
+    [filesListStore, filesSelectionStore, trackOperation],
+  );
+
   const confirmOperation = useCallback(
     async (destFolderId: number | string) => {
       if (!pendingItems.length) return;
+
+      const isMove = selectorMode === "move" || selectorMode === "restore";
 
       const fileIds = pendingItems
         .filter((i) => !i.isFolder)
@@ -264,65 +339,80 @@ export default function useFileOperations() {
         .filter((i) => i.isFolder)
         .map((i) => i.id as number);
 
-      const isMove = selectorMode === "move" || selectorMode === "restore";
-
-      // Close panel immediately
+      // Close selector panel immediately
       setSelectorDialogVisible(false);
+      setFoldersTree(null);
+      setSelectorInitData(null);
 
       try {
-        let operations;
-        if (selectorMode === "copy") {
-          operations = await copyToFolder(
-            destFolderId as number,
-            folderIds,
-            fileIds,
-            ConflictResolveType.Duplicate,
-            false,
+        const conflicts = await checkFileConflicts(
+          destFolderId as number,
+          folderIds,
+          fileIds,
+        );
+
+        if (conflicts.length > 0) {
+          pendingConflictDestRef.current = {
+            destFolderId: destFolderId as number,
+            isMove,
+          };
+          setConflictItems(
+            conflicts.map((c) => ({
+              title: c.title,
+              isFile: !("isFolder" in c && c.isFolder),
+            })),
           );
-        } else {
-          operations = await moveToFolder(
-            destFolderId as number,
-            folderIds,
-            fileIds,
-            ConflictResolveType.Duplicate,
-            false,
-          );
+          setConflictDialogVisible(true);
+          // Keep pendingItems so confirmConflict can use them after user resolves
+          return;
         }
 
-        const opId = operations?.[0]?.id;
-        const icon = selectorMode === "copy" ? "copy" : "move";
+        await executeOperation(
+          destFolderId as number,
+          isMove,
+          ConflictResolveType.Overwrite,
+          pendingItems,
+        );
+      } catch (error) {
+        toastr.error(error instanceof Error ? error.message : String(error));
+      }
 
-        if (opId) {
-          await trackOperation(opId, icon, () => {
-            if (isMove) {
-              for (const item of pendingItems) {
-                filesListStore.removeItem(item.id);
-              }
-              filesSelectionStore.setSelection();
-            }
-          });
-        } else if (isMove) {
-          for (const item of pendingItems) {
-            filesListStore.removeItem(item.id);
-          }
-          filesSelectionStore.setSelection();
-        }
+      setPendingItems([]);
+    },
+    [selectorMode, pendingItems, executeOperation],
+  );
+
+  const confirmConflict = useCallback(
+    async (resolveType: ConflictResolveType) => {
+      const dest = pendingConflictDestRef.current;
+      if (!dest || !pendingItems.length) return;
+
+      setConflictDialogVisible(false);
+      pendingConflictDestRef.current = null;
+
+      try {
+        await executeOperation(
+          dest.destFolderId,
+          dest.isMove,
+          resolveType,
+          pendingItems,
+        );
       } catch (error) {
         toastr.error(error instanceof Error ? error.message : String(error));
       } finally {
         setPendingItems([]);
-        setFoldersTree(null);
-        setSelectorInitData(null);
+        setConflictItems([]);
       }
     },
-    [
-      selectorMode,
-      filesListStore,
-      filesSelectionStore,
-      pendingItems,
-      trackOperation,
-    ],
+    [pendingItems, executeOperation],
   );
+
+  const closeConflictDialog = useCallback(() => {
+    setConflictDialogVisible(false);
+    setConflictItems([]);
+    pendingConflictDestRef.current = null;
+    setPendingItems([]);
+  }, []);
 
   // Compute disabled items (can't move folder into itself)
   const disabledItems = pendingItems
@@ -337,6 +427,7 @@ export default function useFileOperations() {
     selectorInitData,
     disabledItems,
     operationProgress,
+    trackOperation,
     requestCopy,
     requestCopyItems,
     requestMove,
@@ -346,5 +437,9 @@ export default function useFileOperations() {
     requestDuplicate,
     closeSelectorDialog,
     confirmOperation,
+    conflictDialogVisible,
+    conflictItems,
+    closeConflictDialog,
+    confirmConflict,
   };
 }

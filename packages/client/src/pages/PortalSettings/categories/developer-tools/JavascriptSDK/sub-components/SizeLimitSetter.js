@@ -168,6 +168,7 @@ export const SizeLimitSetter = (props) => {
       >
         <RowContainer combo>
           <TextInput
+            name={configKey}
             onChange={onChangeValue}
             value={value}
             tabIndex={tabIndex}

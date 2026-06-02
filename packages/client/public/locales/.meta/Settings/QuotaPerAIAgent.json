@@ -1,14 +1,14 @@
 {
   "key_path": "QuotaPerAIAgent",
-  "content": "Quota per {{aiAgent}}",
-  "content_en_sha1_hash": "ca43fdb6c37f3b33cc11a6a1d44d3718b6a7f3d4",
-  "created_at": "2025-12-22T09:40:15.250Z",
-  "updated_at": "2026-05-15T14:00:06.873Z",
+  "content": "Quota per AI agent",
+  "content_en_sha1_hash": "215b8bf5a578ced0bc211d0f9fbf5d4ea2b4f1f9",
+  "created_at": "2026-05-25T18:26:18.144Z",
+  "updated_at": "2026-05-25T18:41:47.214Z",
   "comment": {
-    "text": "This is a title for a settings category or a label within a settings page. It indicates a quota limit associated with a specific AI agent, where `{{aiAgent}}` will be replaced by the name of the AI agent.",
+    "text": "Title for a category item and a form label in storage management settings, containing a variable `aiAgent` that refers to the AI agent.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:22:47.560Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-05-25T18:41:47.214Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

@@ -49,11 +49,12 @@ import type {
 } from "./SharePDFFormDialog.type";
 
 export const SharePDFFormDialog = inject<TStore>(
-  ({ filesActionsStore, filesStore }) => {
+  ({ filesActionsStore, filesStore, selectedFolderStore }) => {
     const { setProcessCreatingRoomFromData } = filesActionsStore;
     const { setBufferSelection } = filesStore;
+    const currentFolderId = selectedFolderStore.id;
 
-    return { setProcessCreatingRoomFromData, setBufferSelection };
+    return { setProcessCreatingRoomFromData, setBufferSelection, currentFolderId };
   },
 )(
   observer(
@@ -62,13 +63,16 @@ export const SharePDFFormDialog = inject<TStore>(
       onClose,
       setBufferSelection,
       setProcessCreatingRoomFromData,
+      currentFolderId,
     }: SharePDFFormDialogProps) => {
       const { t } = useTranslation(["Files", "Common"]);
 
       const onSubmit = () => {
         setBufferSelection?.(file);
         setProcessCreatingRoomFromData?.(true);
-        const event: EventWithPayload = new Event(Events.ROOM_CREATE);
+        const event: EventWithPayload = new CustomEvent(Events.ROOM_CREATE, {
+          detail: { parentId: currentFolderId, context: "dialog" },
+        });
 
         event.payload = {
           startRoomType: RoomsType.FormRoom,

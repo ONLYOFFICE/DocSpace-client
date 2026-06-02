@@ -131,6 +131,7 @@ import {
 import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
 import { OPERATIONS_NAME } from "@docspace/ui-kit/constants";
 import {
+  AnalyticsEvents,
   RoomsType,
   Events,
   FolderType,
@@ -538,6 +539,16 @@ class ContextOptionsStore {
           : await getFileLink(item.id);
 
         copyToBuffer(itemLink.sharedTo.shareLink);
+
+        if (!item.isFolder && !item.isRoom) {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: AnalyticsEvents.FileShared,
+            id: item.id,
+            parentId: item.folderId,
+          });
+        }
+
         item.customFilterEnabled
           ? toastr.success(
               <Trans t={t} i18nKey="Common:LinkCopySuccessWithCustomFilter" />,
@@ -624,6 +635,15 @@ class ContextOptionsStore {
       //   : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
 
       this.publicRoomStore.setExternalLink(primaryLink);
+
+      if (item.isRoom || !item.isFolder) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: item.isRoom ? AnalyticsEvents.RoomShared : AnalyticsEvents.FileShared,
+          id: item.id,
+          parentId: item.isRoom ? item.parentId : item.folderId,
+        });
+      }
     }
   };
 
@@ -776,7 +796,12 @@ class ContextOptionsStore {
   };
 
   onClickRename = (item) => {
-    const event = new Event(Events.RENAME);
+    const event = new CustomEvent(Events.RENAME, {
+      detail: {
+        parentId: this.selectedFolderStore.id,
+        context: "context_menu",
+      },
+    });
 
     event.item = item;
 
@@ -1012,19 +1037,28 @@ class ContextOptionsStore {
   };
 
   onClickEditRoom = (item) => {
-    const event = new Event(Events.ROOM_EDIT);
+    const event = new CustomEvent(Events.ROOM_EDIT, {
+      detail: { context: "context_menu" },
+    });
     event.item = item;
     window.dispatchEvent(event);
   };
 
   onClickEditAgent = (item) => {
-    const event = new Event(Events.AGENT_EDIT);
+    const event = new CustomEvent(Events.AGENT_EDIT, {
+      detail: { context: "context_menu" },
+    });
     event.item = item;
     window.dispatchEvent(event);
   };
 
   onSaveAsTemplate = (item) => {
-    const event = new Event(Events.SAVE_AS_TEMPLATE);
+    const event = new CustomEvent(Events.SAVE_AS_TEMPLATE, {
+      detail: {
+        parentId: this.selectedFolderStore.id,
+        context: "context_menu",
+      },
+    });
     event.item = item;
     window.dispatchEvent(event);
   };
@@ -1034,7 +1068,9 @@ class ContextOptionsStore {
   };
 
   onEditRoomTemplate = (item, cb) => {
-    const event = new Event(Events.ROOM_EDIT);
+    const event = new CustomEvent(Events.ROOM_EDIT, {
+      detail: { context: "context_menu" },
+    });
     event.item = { ...item, isEdit: true };
     event.cb = cb;
     window.dispatchEvent(event);
@@ -1460,10 +1496,18 @@ class ContextOptionsStore {
   onCreateTemplate = async () => {
     this.oformsStore.setIsVisibleInfoPanelTemplateGallery(false);
 
-    const event = new Event(Events.CREATE);
+    const extension = this.oformsStore.currentExtensionGallery.replace(".", "");
+
+    const event = new CustomEvent(Events.CREATE, {
+      detail: {
+        parentId: this.selectedFolderStore.id,
+        context: "template",
+        extension,
+      },
+    });
 
     const payload = {
-      extension: this.oformsStore.currentExtensionGallery.replace(".", ""),
+      extension,
       id: -1,
       fromTemplate: true,
       title: this.oformsStore.gallerySelected.attributes.name_form,
@@ -1524,7 +1568,7 @@ class ContextOptionsStore {
       {
         id: "option_pin-room",
         key: "pin-room",
-        label: t("PinToTop"),
+        label: t("Common:PinToTop"),
         icon: PinReactSvgUrl,
         onClick: () => this.onClickPin("pin", item.id, t, item.isAIAgent),
         disabled:
@@ -1534,7 +1578,7 @@ class ContextOptionsStore {
       {
         id: "option_unpin-room",
         key: "unpin-room",
-        label: t("Unpin"),
+        label: t("Common:Unpin"),
         icon: UnpinReactSvgUrl,
         onClick: () => this.onClickPin("unpin", item.id, t, item.isAIAgent),
         disabled:
@@ -1550,7 +1594,7 @@ class ContextOptionsStore {
       {
         id: "option_unmute-room",
         key: "unmute-room",
-        label: t("EnableNotifications"),
+        label: t("Common:EnableNotifications"),
         icon: UnmuteReactSvgUrl,
         onClick: () => this.onClickMute("unmute", item, t),
         disabled: !canMute,
@@ -1558,7 +1602,7 @@ class ContextOptionsStore {
       {
         id: "option_mute-room",
         key: "mute-room",
-        label: t("DisableNotifications"),
+        label: t("Common:DisableNotifications"),
         icon: MuteReactSvgUrl,
         onClick: () => this.onClickMute("mute", item, t),
         disabled: !canMute,
@@ -1861,6 +1905,15 @@ class ContextOptionsStore {
     if (primaryLink) {
       copyShareLink(item, primaryLink, t, this.getManageLinkOptions(item));
       this.infoPanelStore?.setShareChanged(true);
+
+      if (item.isRoom || !item.isFolder) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: item.isRoom ? AnalyticsEvents.RoomShared : AnalyticsEvents.FileShared,
+          id: item.id,
+          parentId: item.isRoom ? item.parentId : item.folderId,
+        });
+      }
     }
   };
 
@@ -1918,7 +1971,9 @@ class ContextOptionsStore {
   };
 
   askAI = async (item) => {
-    const skipAi = JSON.parse(localStorage.getItem(SKIP_AI_MODAL_KEY) ?? "false");
+    const skipAi = JSON.parse(
+      localStorage.getItem(SKIP_AI_MODAL_KEY) ?? "false",
+    );
 
     if (item.parentRoomType !== FolderType.FormRoom || skipAi) {
       this.filesActionsStore.askAIAction(item);
@@ -2063,7 +2118,7 @@ class ContextOptionsStore {
       {
         id: "option_move-or-copy",
         key: "move",
-        label: t("MoveOrCopy"),
+        label: t("Common:MoveOrCopy"),
         icon: CopyReactSvgUrl,
         items: [
           {
@@ -2226,7 +2281,7 @@ class ContextOptionsStore {
       {
         id: "option_vectorization",
         key: "vectorization",
-        label: t("Files:Vectorization"),
+        label: t("Common:Vectorization"),
         icon: RefreshReactSvgUrl,
         onClick: () => this.filesActionsStore.retryVectorization([item]),
         disabled: !item.security?.Vectorization,
@@ -2285,7 +2340,7 @@ class ContextOptionsStore {
       {
         id: "option_edit-room",
         key: "edit-room",
-        label: t("EditRoom"),
+        label: t("Common:EditRoom"),
         icon: SettingsReactSvgUrl,
         onClick: () => this.onClickEditRoom(item),
         disabled: false,
@@ -2548,7 +2603,7 @@ class ContextOptionsStore {
       {
         id: "option_owner-change",
         key: "owner-change",
-        label: t("Translations:OwnerChange"),
+        label: t("Common:OwnerChange"),
         icon: FileActionsOwnerReactSvgUrl,
         onClick: this.onOwnerChange,
         disabled: false,
@@ -2582,7 +2637,7 @@ class ContextOptionsStore {
       {
         id: "option_change-room-owner",
         key: "change-room-owner",
-        label: t("Files:ChangeRoomOwner"),
+        label: t("Common:ChangeRoomOwner"),
         icon: ReconnectSvgUrl,
         onClick: this.onChangeRoomOwner,
         disabled: isAIAgent,
@@ -2600,8 +2655,8 @@ class ContextOptionsStore {
         id: "option_custom-filter",
         key: "custom-filter",
         label: item.customFilterEnabled
-          ? t("Files:CustomFilterDisable")
-          : t("Files:CustomFilterEnable"),
+          ? t("Common:CustomFilterDisable")
+          : t("Common:CustomFilterEnable"),
         icon: CustomFilterReactSvgUrl,
         onClick: () => this.onSetUpCustomFilter(item, t),
         disabled: Boolean(
@@ -2727,7 +2782,7 @@ class ContextOptionsStore {
       {
         id: "option_change-room-owner",
         key: "change-agent-owner",
-        label: t("Translations:OwnerChange"),
+        label: t("Common:OwnerChange"),
         icon: ReconnectSvgUrl,
         onClick: this.onChangeRoomOwner,
         disabled: !isAIAgent,
@@ -2735,7 +2790,7 @@ class ContextOptionsStore {
       {
         id: "option_leave-room",
         key: "leave-room",
-        label: isAIAgent ? t("LeaveTheAgent") : t("LeaveTheRoom"),
+        label: isAIAgent ? t("LeaveTheAgent") : t("Common:LeaveTheRoom"),
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
         disabled: isKnowledgeOrResult
@@ -2745,7 +2800,7 @@ class ContextOptionsStore {
       {
         id: "option_archive-room",
         key: "archive-room",
-        label: t("MoveToArchive"),
+        label: t("Common:MoveToArchive"),
         icon: RoomArchiveSvgUrl,
         onClick: () => this.onClickArchive("archive"),
         disabled: false,
@@ -2776,7 +2831,7 @@ class ContextOptionsStore {
         label: isRootThirdPartyFolder
           ? t("Common:Disconnect")
           : isAIAgent
-            ? t("DeleteAgent")
+            ? t("Common:DeleteAgent")
             : item.isTemplate
               ? t("Files:DeleteTemplateAction")
               : item.isRoom
@@ -3239,14 +3294,14 @@ class ContextOptionsStore {
       const pinOption = isPinOption
         ? {
             key: "pin-room",
-            label: t("PinToTop"),
+            label: t("Common:PinToTop"),
             icon: PinReactSvgUrl,
             onClick: () => pinRooms(t),
             disabled: false,
           }
         : {
             key: "unpin-room",
-            label: t("Unpin"),
+            label: t("Common:Unpin"),
             icon: UnpinReactSvgUrl,
             onClick: () => unpinRooms(t),
             disabled: false,
@@ -3255,7 +3310,7 @@ class ContextOptionsStore {
       if (canArchiveRoom) {
         archiveOptions = {
           key: "archive-room",
-          label: t("MoveToArchive"),
+          label: t("Common:MoveToArchive"),
           icon: RoomArchiveSvgUrl,
           onClick: (e) => this.onClickArchive("archive"),
           disabled: false,
@@ -3407,7 +3462,7 @@ class ContextOptionsStore {
       },
       {
         key: "vectorization",
-        label: t("Files:Vectorization"),
+        label: t("Common:Vectorization"),
         icon: RefreshReactSvgUrl,
         onClick: () => this.filesActionsStore.retryVectorization(selection),
         disabled: !canRetryVectorization,
@@ -3524,7 +3579,12 @@ class ContextOptionsStore {
       this.filesActionsStore.setProcessCreatingRoomFromData(true);
     }
 
-    const event = new Event(Events.ROOM_CREATE);
+    const event = new CustomEvent(Events.ROOM_CREATE, {
+      detail: {
+        parentId: this.selectedFolderStore.id,
+        context: "context_menu",
+      },
+    });
 
     if (item && item.isFolder) {
       event.title = item.title;
@@ -3541,20 +3601,31 @@ class ContextOptionsStore {
     //   return;
     // }
 
-    const event = new Event(Events.AGENT_CREATE);
+    const event = new CustomEvent(Events.AGENT_CREATE, {
+      detail: {
+        parentId: this.selectedFolderStore.id,
+        context: "context_menu",
+      },
+    });
 
     window.dispatchEvent(event);
   };
 
   onCreate = (format, t) => {
-    const event = new Event(Events.CREATE);
-
     const isPDf = format === FileExtensions.PDF;
 
     if (isMobile && isPDf) {
       toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
       return;
     }
+
+    const event = new CustomEvent(Events.CREATE, {
+      detail: {
+        parentId: this.selectedFolderStore.id,
+        context: "context_menu",
+        extension: format,
+      },
+    });
 
     const payload = {
       extension: format,
@@ -3889,3 +3960,4 @@ class ContextOptionsStore {
 }
 
 export default ContextOptionsStore;
+

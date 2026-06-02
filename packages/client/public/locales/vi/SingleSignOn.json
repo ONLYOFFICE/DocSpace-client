@@ -1,6 +1,5 @@
 {
   "AddCertificate": "Thêm chứng chỉ",
-  "AdvancedSettings": "Cài đặt Nâng cao",
   "AdvancedSettingsTooltip": "Ẩn trang xác thực mặc định và tự động chuyển hướng đến dịch vụ SSO.",
   "AttributeMatching": "Ánh xạ thuộc tính",
   "AttributeMatchingTooltip": "Sự tương ứng của các thuộc tính Đăng nhập một lần với các mục nhập của phần 'Tài khoản'.",
@@ -11,7 +10,6 @@
   "DownloadMetadataXML": "Tải XML metadata SP",
   "Encryption": "Mã hóa",
   "GenerateCertificate": "Tạo chứng chỉ tự ký mới",
-  "Hide": "Ẩn",
   "HideAdditionalParameters": "Ẩn cài đặt nâng cao",
   "HideAuthPage": "Ẩn trang xác thực",
   "idpAuthRequest": "Xác minh chữ ký phản hồi xác thực",
@@ -32,7 +30,6 @@
   "ProviderURLTooltip": "ID thực thể của nhà cung cấp danh tính (URL nhà phát hành)",
   "ServiceProviderSettings": "Cài đặt Nhà cung cấp dịch vụ {{organizationName}}",
   "ServiceProviderSettingsDescription": "Định cấu hình cài đặt Nhà cung cấp Dịch vụ và thêm chứng chỉ SP cho Đăng Nhập Một Lần.",
-  "Show": "Hiển thị",
   "ShowAdditionalParameters": "Hiển thị cài đặt nâng cao",
   "Signing": "Ký số",
   "SigningAndEncryption": "Ký và mã hóa",

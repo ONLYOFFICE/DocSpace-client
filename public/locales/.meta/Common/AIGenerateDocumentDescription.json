@@ -1,0 +1,29 @@
+{
+  "key_path": "AIGenerateDocumentDescription",
+  "content": "A new document will be created and opened in the editor. AI will then write the generated content directly into the document.",
+  "content_en_sha1_hash": "b91bb5618063b4d5fa5c96baaed2232e93a90640",
+  "created_at": "2026-05-28T15:45:58.346Z",
+  "updated_at": "2026-05-28T15:46:44.926Z",
+  "comment": {
+    "text": "Description text in a confirmation dialog that appears when a user approves an AI tool call to generate a document.",
+    "is_auto": true,
+    "updated_at": "2026-05-28T15:46:44.926Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/tool-call-confirm-dialog/index.tsx",
+      "line_number": 161,
+      "context": "status={ToolCallStatus.Confirmation}\n placement={ToolCallPlacement.ConfirmDialog}\n />\n <div>\n {isGenerateTool ? (\n <Text>{t(\"AIGenerateDocumentDescription\")}</Text>\n ) : (\n <>\n <Text>{t(\"ReviewAction\")}</Text>\n <Text>{t(\"CannotGuaranteeSecurity\")}</Text>\n </>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

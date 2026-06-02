@@ -3,7 +3,7 @@
   "content": "MCP servers",
   "content_en_sha1_hash": "8d9a304fd985232ade488e1913e41a3d9a502b09",
   "created_at": "2025-11-21T08:21:51.274Z",
-  "updated_at": "2026-05-15T14:00:06.654Z",
+  "updated_at": "2026-06-01T21:20:44.406Z",
   "comment": {
     "text": "This is a noun phrase used as a label for a setting or a section related to managing \"MCP servers.\" It appears in tooltips and as part of longer sentences in empty state messages.",
     "is_auto": true,
@@ -44,20 +44,38 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
       "line_number": 145,
-      "context": "? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);\n \n const serversData = [\n {",
+      "context": "? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"Common:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);\n \n const serversData = [\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
       "line_number": 145,
-      "context": "? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);\n \n const serversData = [\n {",
+      "context": "? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"Common:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);\n \n const serversData = [\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/index.tsx",
       "line_number": 237,
-      "context": "return (\n <div className={styles.mcpServers}>\n <Text className={styles.description}>\n {t(\"AISettings:MCPSettingsDescription\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n aiChats: t(\"Common:AIChats\"),\n })}\n </Text>\n {mcpServersSettingsUrl ? (\n <Link",
+      "context": "return (\n <div className={styles.mcpServers}>\n <Text className={styles.description}>\n {t(\"Common:MCPSettingsDescription\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n aiChats: t(\"Common:AIChats\"),\n })}\n </Text>\n {mcpServersSettingsUrl ? (\n <Link",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/index.tsx",
+      "line_number": 225,
+      "context": "return (\n <div className={styles.mcpServers}>\n <Text className={styles.description}>\n {t(\"Common:MCPSettingsDescription\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n aiChats: t(\"Common:AIChats\"),\n })}\n </Text>\n {mcpServersSettingsUrl ? (\n <Link",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/sub-components/MCP.tsx",
+      "line_number": 78,
+      "context": "fontWeight={400}\n className=\"set_room_params-info-description\"\n noSelect\n >\n {t(\"Common:MCPDescriptionServers\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n defaultValue:\n \"Use MCP servers connected by the administrator to enhance the chat with AI.\",\n })}\n </Text>\n </div>",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/settings-tabs/index.tsx",
+      "line_number": 60,
+      "context": "content: null,\n },\n ]\n : []),\n { id: \"providers\", name: t(\"Common:AIProvider\"), content: null },\n { id: \"servers\", name: t(\"Common:MCPSettingTitle\"), content: null },\n { id: \"search\", name: t(\"Common:WebSearchAI\"), content: null },\n { id: \"knowledge\", name: t(\"Common:Knowledge\"), content: null },\n ];\n \n const onSelect = (element: TTabItem) => {",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

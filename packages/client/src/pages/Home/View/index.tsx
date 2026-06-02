@@ -186,7 +186,7 @@ const View = ({
 }: ViewProps) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { t } = useTranslation(["Files", "Common", "AIRoom"]);
+  const { t } = useTranslation(["Common", "Files"]);
 
   const isContactsPage = location.pathname.includes("accounts");
   const isProfilePage = location.pathname.includes("profile");
@@ -561,12 +561,12 @@ const View = ({
       toastr.info(
         <Trans
           t={t}
-          ns="AIRoom"
+          ns="Common"
           i18nKey="AgentInViewModeWarning"
           components={{
             strong: <strong />,
           }}
-          values={{ aiAgent: t("Common:AIAgent"), aiChat: t("AIRoom:AIChat") }}
+          values={{ aiAgent: t("Common:AIAgent"), aiChat: t("Common:AIChat") }}
         />,
       );
     }

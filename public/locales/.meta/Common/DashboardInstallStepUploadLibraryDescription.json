@@ -1,0 +1,29 @@
+{
+  "key_path": "DashboardInstallStepUploadLibraryDescription",
+  "content": "Ready-made forms for contracts, requests, surveys, and more",
+  "content_en_sha1_hash": "bfb46f2e3b67dd443640d645329df5a7f5ed08e6",
+  "created_at": "2026-05-19T19:03:14.009Z",
+  "updated_at": "2026-05-24T17:27:49.115Z",
+  "comment": {
+    "text": "Descriptive text for the \"upload library\" step in the module installation dialog, explaining the contents of the library.",
+    "is_auto": true,
+    "updated_at": "2026-05-19T19:23:03.433Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallAiFormsDialog.tsx",
+      "line_number": 89,
+      "context": "),\n \"create-blank-form\": t(\n \"Common:DashboardInstallStepCreateBlankFormDescription\",\n ),\n \"upload-library\": t(\n \"Common:DashboardInstallStepUploadLibraryDescription\",\n ),\n };\n let description = descriptions[id];\n if (id === \"upload-library\" && libraryProgress?.total) {\n const percent = Math.min(",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

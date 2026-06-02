@@ -42,7 +42,7 @@ import api from "@docspace/shared/api";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { RoomsType, SearchArea } from "@docspace/shared/enums";
+import { AnalyticsEvents, RoomsType, SearchArea } from "@docspace/shared/enums";
 
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { Nullable } from "@docspace/shared/types";
@@ -62,7 +62,7 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "@docspace/shared/constants";
-import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
+import { calculateRoomLogoParams } from "@docspace/ui-kit/utils";
 import { openMembersTab, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 import { modelCache } from "SRC_DIR/components/dialogs/CreateEditAgentDialog/sub-components/modelCache";
 
@@ -107,6 +107,12 @@ class CreateEditRoomStore {
   isImageType: boolean = false;
 
   selectedRoomType: Nullable<RoomsType> = null;
+
+  openContext: string = "";
+
+  setOpenContext = (context: string) => {
+    this.openContext = context;
+  };
 
   constructor(
     filesStore: FilesStore,
@@ -381,6 +387,14 @@ class CreateEditRoomStore {
       }
 
       this.onOpenNewAgent(agent);
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: AnalyticsEvents.AgentCreated,
+        id: agent.id,
+        parentId: agent.parentId,
+        context: this.openContext,
+      });
 
       if (successToast)
         toastr.success(successToast as unknown as React.ReactNode);

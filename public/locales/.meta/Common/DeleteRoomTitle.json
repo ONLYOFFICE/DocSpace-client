@@ -1,0 +1,38 @@
+{
+  "key_path": "DeleteRoomTitle",
+  "content": "Delete this room?",
+  "content_en_sha1_hash": "efa9534b795643580e429b3ae955bc0e86472b24",
+  "created_at": "2025-09-22T13:39:49.178Z",
+  "updated_at": "2026-05-24T17:27:49.092Z",
+  "comment": {
+    "text": "This is a dialog title. It appears when a user is about to delete a single room.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:05:33.189Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
+      "line_number": 222,
+      "context": "return `${t(\"Files:DeleteTemplateAction\")}?`;\n }\n \n if (isRoomDelete) {\n if (selection.length > 1) return t(\"Common:DeleteRoomsTitle\");\n return t(\"Common:DeleteRoomTitle\");\n }\n \n if (isRecycleBinFolder) return t(\"EmptyTrashDialog:DeleteForeverTitle\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/delete-room-dialog/index.tsx",
+      "line_number": 90,
+      "context": "onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>\n {isSingle\n ? t(\"Common:DeleteRoomTitle\")\n : t(\"Common:DeleteRoomsTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {isSingle ? (",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
+    }
+  }
+}

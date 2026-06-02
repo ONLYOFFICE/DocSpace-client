@@ -1,0 +1,38 @@
+{
+  "key_path": "Model",
+  "content": "Model",
+  "content_en_sha1_hash": "68c2cc7f0ceaa3e499ecb4db331feb4debbbcc23",
+  "created_at": "2026-02-19T13:36:30.111Z",
+  "updated_at": "2026-06-01T21:20:44.455Z",
+  "comment": {
+    "text": "This is a label for a text input field in the AI settings, indicating where the user can specify the AI model to be used.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:02:37.611Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/DefaultProvider.tsx",
+      "line_number": 407,
+      "context": "/>\n </FieldContainer>\n <FieldContainer\n labelVisible\n isVertical\n labelText={t(\"Common:Model\")}\n removeMargin\n >\n {isSystemProviderSelected ? (\n <ComboBox\n onSelect={() => {}}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/DefaultProvider.tsx",
+      "line_number": 390,
+      "context": "/>\n </FieldContainer>\n <FieldContainer\n labelVisible\n isVertical\n labelText={t(\"Common:Model\")}\n removeMargin\n >\n {isSystemProviderSelected ? (\n <ComboBox\n onSelect={() => {}}",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
+    }
+  }
+}

@@ -1,6 +1,5 @@
 {
   "AddCertificate": "Добавить сертификат",
-  "AdvancedSettings": "Дополнительно",
   "AdvancedSettingsTooltip": "Скрыть страницу аутентификации по умолчанию и автоматически перенаправлять на сервис SSO.",
   "AttributeMatching": "Сопоставление атрибутов",
   "AttributeMatchingTooltip": "Соответствие атрибутов единого входа записям раздела 'Аккаунты'.",
@@ -11,7 +10,6 @@
   "DownloadMetadataXML": "Скачать XML-файл метаданных поставщика сервиса",
   "Encryption": "Шифрование",
   "GenerateCertificate": "Сгенерировать новый самоподписанный сертификат ",
-  "Hide": "Скрыть",
   "HideAdditionalParameters": "Скрыть дополнительные параметры",
   "HideAuthPage": "Скрыть страницу аутентификации",
   "idpAuthRequest": "Проверять подпись ответов аутентификации",
@@ -32,7 +30,6 @@
   "ProviderURLTooltip": "Идентификатор сущности поставщика учетных записей (URL-адрес поставщика)",
   "ServiceProviderSettings": "Настройки поставщика сервиса {{organizationName}}",
   "ServiceProviderSettingsDescription": "Настройте параметры поставщика сервиса и добавьте сертификаты поставщика сервиса для единого входа.",
-  "Show": "Раскрыть",
   "ShowAdditionalParameters": "Показать дополнительные параметры",
   "Signing": "Подпись",
   "SigningAndEncryption": "Подпись и шифрование",

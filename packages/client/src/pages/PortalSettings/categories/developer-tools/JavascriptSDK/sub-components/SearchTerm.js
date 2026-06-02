@@ -73,6 +73,7 @@ export const SearchTerm = ({ t, config, setConfig }) => {
 			<ColumnContainer>
 				<TextInput
 					scale
+					name="search_term"
 					onChange={onChangeSearch}
 					placeholder={t("Common:Search")}
 					value={value}

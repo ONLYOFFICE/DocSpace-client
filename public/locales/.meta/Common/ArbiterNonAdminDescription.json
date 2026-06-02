@@ -1,0 +1,29 @@
+{
+  "key_path": "ArbiterNonAdminDescription",
+  "content": "AI Arbiter is available for administrators only. Ask a workspace administrator to set it up.",
+  "content_en_sha1_hash": "d7cd66a5f1560c6dac30f75ceedfa97158825277",
+  "created_at": "2026-05-24T17:27:18.713Z",
+  "updated_at": "2026-06-01T21:20:44.433Z",
+  "comment": {
+    "text": "Description text in an empty state view shown to non-admin users to explain that AI Arbiter requires setup by a workspace administrator.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:52:58.646Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/AiArbiter/index.tsx",
+      "line_number": 101,
+      "context": "if (!canManageAgents) {\n return (\n <EmptyView\n title={t(\"Common:DashboardAIArbiterTitle\")}\n description={t(\"Common:ArbiterNonAdminDescription\")}\n icon={\n theme.isBase ? <AiAgentsLightIcon /> : <AiAgentsDarkIcon />\n }\n options={[]}\n />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

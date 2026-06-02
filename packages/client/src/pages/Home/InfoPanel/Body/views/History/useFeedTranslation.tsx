@@ -36,7 +36,10 @@
 import { Trans } from "react-i18next";
 import { TFunction } from "i18next";
 import { FeedActionKeys } from "@docspace/shared/api/rooms/types";
-import { humanizeDuration, type DurationUnit } from "@docspace/ui-kit/utils/date";
+import {
+  humanizeDuration,
+  type DurationUnit,
+} from "@docspace/ui-kit/utils/date";
 import { TTranslation } from "@docspace/shared/types";
 
 import { HistoryText } from "./HistoryText";
@@ -51,22 +54,22 @@ export const useFeedTranslation = (
 
   switch (feed.action.key) {
     case FeedActionKeys.FileCreated:
-      return t("InfoPanel:FileCreatedNotify");
+      return t("Common:FileCreatedNotify");
     case FeedActionKeys.FileUploaded:
       if (hasRelatedItems)
         return t("InfoPanel:FileUploadedCount", {
           count,
         });
-      return t("InfoPanel:FilesAddedNotify");
+      return t("Common:FilesAddedNotify");
     case FeedActionKeys.UserFileUpdated:
-      return t("InfoPanel:UserFileUpdated");
+      return t("Common:UserFileUpdated");
     case FeedActionKeys.FileConverted:
-      return t("InfoPanel:FileConverted");
+      return t("Common:FileConverted");
     case FeedActionKeys.FileRenamed:
-      return t("InfoPanel:FileRenamedNotify");
+      return t("Common:FileRenamedNotify");
     case FeedActionKeys.FileMoved:
       if (feed.data.fromParentTitle) {
-        return t("InfoPanel:FileMovedTo", {
+        return t("Common:FileMovedTo", {
           folderTitle: feed.data.parentTitle,
         });
       }
@@ -74,19 +77,19 @@ export const useFeedTranslation = (
         return t("InfoPanel:FileMovedCount", {
           count,
         });
-      return t("InfoPanel:FilesMovedNotify");
+      return t("Common:FilesMovedNotify");
     case FeedActionKeys.FileMovedToTrash:
       if (hasRelatedItems)
         return t("InfoPanel:FilesTrashMoveCompletedCount", {
           count,
           sectionName: t("Common:TrashSection"),
         });
-      return t("InfoPanel:FilesTrashMoveCompleted", {
+      return t("Common:FilesTrashMoveCompleted", {
         sectionName: t("Common:TrashSection"),
       });
     case FeedActionKeys.FileCopied:
       if (feed.data.fromParentTitle) {
-        return t("InfoPanel:FileCopiedTo", {
+        return t("Common:FileCopiedTo", {
           folderTitle: feed.data.parentTitle,
         });
       }
@@ -94,13 +97,13 @@ export const useFeedTranslation = (
         return t("InfoPanel:FileCopiedCount", {
           count,
         });
-      return t("InfoPanel:FilesCopiedNotify");
+      return t("Common:FilesCopiedNotify");
     case FeedActionKeys.FileDeleted:
       if (hasRelatedItems)
         return t("InfoPanel:FileDeletedCount", {
           count,
         });
-      return t("InfoPanel:FilesRemovedNotify");
+      return t("Common:FilesRemovedNotify");
     case FeedActionKeys.FileLocked:
       return `${t("Translations:FileLocked")}.`;
     case FeedActionKeys.FileUnlocked:
@@ -117,22 +120,22 @@ export const useFeedTranslation = (
     case FeedActionKeys.FolderIndexReordered:
       return t("InfoPanel:FolderIndexReordered");
     case FeedActionKeys.FolderCreated:
-      return t("InfoPanel:FolderCreatedNotify");
+      return t("Common:FolderCreatedNotify");
     case FeedActionKeys.FolderRenamed:
-      return t("InfoPanel:FolderRenamedNotify");
+      return t("Common:FolderRenamedNotify");
     case FeedActionKeys.FolderMoved:
       if (hasRelatedItems)
         return t("InfoPanel:FolderMovedCount", {
           count,
         });
-      return t("InfoPanel:FoldersMovedNotify");
+      return t("Common:FoldersMovedNotify");
     case FeedActionKeys.FolderMovedToTrash:
       if (hasRelatedItems)
         return t("InfoPanel:FoldersTrashMoveCompletedCount", {
           count,
           sectionName: t("Common:TrashSection"),
         });
-      return t("InfoPanel:FoldersTrashMoveCompleted", {
+      return t("Common:FoldersTrashMoveCompleted", {
         sectionName: t("Common:TrashSection"),
       });
     case FeedActionKeys.FolderCopied:
@@ -140,13 +143,13 @@ export const useFeedTranslation = (
         return t("InfoPanel:FolderCopiedCount", {
           count,
         });
-      return t("InfoPanel:FoldersCopiedNotify");
+      return t("Common:FoldersCopiedNotify");
     case FeedActionKeys.FolderDeleted:
       if (hasRelatedItems)
         return t("InfoPanel:FolderDeletedCount", {
           count,
         });
-      return t("InfoPanel:FoldersRemovedNotify");
+      return t("Common:FoldersRemovedNotify");
     case FeedActionKeys.AgentCreated:
       return (
         <Trans
@@ -189,7 +192,7 @@ export const useFeedTranslation = (
       return (
         <Trans
           t={t as TFunction}
-          ns="InfoPanel"
+          ns="Common"
           i18nKey="HistoryRoomCreated"
           values={{ roomTitle: feed.data.title }}
           components={{ 1: <HistoryText title={feed.data.title!} /> }}
@@ -209,7 +212,7 @@ export const useFeedTranslation = (
       return (
         <Trans
           t={t as TFunction}
-          ns="InfoPanel"
+          ns="Common"
           i18nKey="RoomRenamed"
           values={{
             oldRoomTitle: feed.data.oldTitle,
@@ -222,15 +225,15 @@ export const useFeedTranslation = (
         />
       );
     case FeedActionKeys.AddedRoomTags:
-      return t("InfoPanel:AddedRoomTags");
+      return t("Common:AddedRoomTags");
     case FeedActionKeys.DeletedRoomTags:
-      return t("InfoPanel:DeletedRoomTags");
+      return t("Common:DeletedRoomTags");
     case FeedActionKeys.RoomLogoCreated:
     case FeedActionKeys.RoomColorChanged:
     case FeedActionKeys.RoomCoverChanged:
-      return t("InfoPanel:RoomLogoChanged");
+      return t("Common:RoomLogoChanged");
     case FeedActionKeys.RoomLogoDeleted:
-      return t("InfoPanel:RoomLogoChanged");
+      return t("Common:RoomLogoChanged");
     case FeedActionKeys.RoomExternalLinkCreated:
       return t("InfoPanel:RoomExternalLinkCreated");
     case FeedActionKeys.RoomExternalLinkRenamed:
@@ -273,20 +276,20 @@ export const useFeedTranslation = (
         />
       );
     case FeedActionKeys.RoomCreateUser:
-      if (hasRelatedItems) return t("InfoPanel:RoomCreateUserCount", { count });
+      if (hasRelatedItems) return t("Common:RoomCreateUserCount", { count });
       return t("Common:RoomCreateUser");
     case FeedActionKeys.RoomUpdateAccessForUser:
       return t("InfoPanel:RoomUpdateAccess");
     case FeedActionKeys.RoomRemoveUser:
-      return t("InfoPanel:RoomRemoveUser");
+      return t("Common:RoomRemoveUser");
     case FeedActionKeys.RoomInviteResend:
       return t("InfoPanel:RoomInviteResend");
     case FeedActionKeys.RoomGroupAdded:
       if (hasRelatedItems)
-        return t("InfoPanel:RoomGroupAddedCount", {
+        return t("Common:RoomGroupAddedCount", {
           count,
         });
-      return t("InfoPanel:RoomGroupAdded");
+      return t("Common:RoomGroupAdded");
     case FeedActionKeys.RoomUpdateAccessForGroup:
       return t("InfoPanel:RoomUpdateAccess");
     case FeedActionKeys.RoomGroupRemove:
@@ -330,11 +333,11 @@ export const useFeedTranslation = (
     case FeedActionKeys.RoomDenyDownloadDisabled:
       return t("InfoPanel:RoomDenyDownloadDisabled");
     case FeedActionKeys.RoomArchived:
-      return t("InfoPanel:RoomToArchiveMove", {
+      return t("Common:RoomToArchiveMove", {
         sectionName: t("Common:Archive"),
       });
     case FeedActionKeys.RoomUnarchived:
-      return t("InfoPanel:RoomFromArchiveRestore", {
+      return t("Common:RoomFromArchiveRestore", {
         sectionName: t("Common:Archive"),
       });
     case FeedActionKeys.RoomIndexExportSaved:
@@ -366,3 +369,4 @@ export const useFeedTranslation = (
       return null;
   }
 };
+

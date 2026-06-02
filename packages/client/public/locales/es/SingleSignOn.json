@@ -1,6 +1,5 @@
 {
   "AddCertificate": "Añadir certificado",
-  "AdvancedSettings": "Configuración avanzada",
   "AdvancedSettingsTooltip": "Ocultar la página de autenticación predeterminada y redirigir automáticamente al servicio SSO.",
   "AttributeMatching": "Asignación de atributos",
   "AttributeMatchingTooltip": "correspondencia de los atributos de Inicio de sesión único con las entradas de la sección «Cuentas».",
@@ -11,7 +10,6 @@
   "DownloadMetadataXML": "Descargar XML de metadatos SP",
   "Encryption": "Cifrado",
   "GenerateCertificate": "Generar nuevo certificado autofirmado",
-  "Hide": "Ocultar",
   "HideAdditionalParameters": "Ocultar configuración avanzada",
   "HideAuthPage": "Ocultar la página de autenticación",
   "idpAuthRequest": "Verificar la firma de respuestas de autenticación",
@@ -32,7 +30,6 @@
   "ProviderURLTooltip": "Id. de entidad del proveedor de identidad (URL del emisor)",
   "ServiceProviderSettings": "Configuración de {{organizationName}} SP",
   "ServiceProviderSettingsDescription": "Configure los ajustes del proveedor de servicios y añada certificados SP para Single Sign-On.",
-  "Show": "Mostrar",
   "ShowAdditionalParameters": "Mostrar configuración avanzada",
   "Signing": "Firma",
   "SigningAndEncryption": "Firma y cifrado",

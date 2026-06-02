@@ -1,0 +1,38 @@
+{
+  "key_path": "ServerDisabledSuccess",
+  "content": "Server disabled successfully",
+  "content_en_sha1_hash": "76482d89c727a7a5e18e9b3e0c45c2e71e48d841",
+  "created_at": "2025-10-27T16:14:31.649Z",
+  "updated_at": "2026-05-24T17:27:49.143Z",
+  "comment": {
+    "text": "This is a toast message confirming that a server has been successfully disabled. It appears briefly after the user disables a server in the AI settings.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:02:21.136Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/disable/index.tsx",
+      "line_number": 70,
+      "context": "const onSubmitAction = async () => {\n setLoading(true);\n \n try {\n await updateMCPStatus?.(serverId, false);\n toastr.success(t(\"Common:ServerDisabledSuccess\"));\n } catch (error) {\n console.error(error);\n toastr.error(error as string);\n } finally {\n setLoading(false);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/dialogs/disable/index.tsx",
+      "line_number": 57,
+      "context": "const onSubmitAction = async () => {\n setLoading(true);\n \n try {\n await updateMCPStatus?.(serverId, false);\n toastr.success(t(\"Common:ServerDisabledSuccess\"));\n } catch (error) {\n console.error(error);\n toastr.error(error instanceof Error ? error.message : String(error));\n } finally {\n setLoading(false);",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
+    }
+  }
+}

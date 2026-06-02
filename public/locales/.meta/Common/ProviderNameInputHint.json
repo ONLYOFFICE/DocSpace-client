@@ -1,0 +1,50 @@
+{
+  "key_path": "ProviderNameInputHint",
+  "content": "Use any name that is convenient for you to identify this connection",
+  "content_en_sha1_hash": "31f2233533a619051503d74dd63eff2f6b1122fc",
+  "created_at": "2025-11-07T13:41:03.790Z",
+  "updated_at": "2026-06-01T21:20:44.456Z",
+  "comment": {
+    "text": "This is a hint text for an input field where the user enters a name for an AI provider connection. It guides the user to choose a memorable name. It also appears as an error message when the input contains invalid characters.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:02:32.421Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
+      "line_number": 498,
+      "context": "placeholder={t(\"Common:EnterLabel\")}\n isDisabled={isRequestRunning}\n testId=\"provider-title-input\"\n />\n <Text className={styles.fieldHint}>\n {t(\"Common:ProviderNameInputHint\")}\n </Text>\n </FieldContainer>\n \n <FieldContainer\n labelText={t(\"Common:ProviderURL\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useBaseParams.tsx",
+      "line_number": 157,
+      "context": "[styles.errorText]: hasError,\n })}\n >\n {hasError\n ? `${t(\"Common:AllowedCharacters\")}: ${ALLOWED_MCP_CHARACTERS}`\n : t(\"Common:ProviderNameInputHint\")}\n </Text>\n </FieldContainer>\n <FieldContainer\n labelText={t(\"Common:IntegrationURL\")}\n isRequired",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/dialogs/add-update/index.tsx",
+      "line_number": 488,
+      "context": "placeholder={t(\"Common:EnterLabel\")}\n isDisabled={isRequestRunning}\n testId=\"provider-title-input\"\n />\n <Text className={styles.fieldHint}>\n {t(\"Common:ProviderNameInputHint\")}\n </Text>\n </FieldContainer>\n \n <FieldContainer\n labelText={t(\"Common:ProviderURL\")}",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/hooks/useBaseParams.tsx",
+      "line_number": 147,
+      "context": "[styles.errorText]: hasError,\n })}\n >\n {hasError\n ? `${t(\"Common:AllowedCharacters\")}: ${ALLOWED_MCP_CHARACTERS}`\n : t(\"Common:ProviderNameInputHint\")}\n </Text>\n </FieldContainer>\n <FieldContainer\n labelText={t(\"Common:IntegrationURL\")}\n isRequired",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
+    }
+  }
+}

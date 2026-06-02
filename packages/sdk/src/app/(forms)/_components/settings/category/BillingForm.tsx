@@ -48,7 +48,6 @@ import { AI_TOOLS, AI_ENUM } from "@docspace/ui-kit/billing/constants";
 import type { TPaymentConfig } from "@docspace/ui-kit/billing/types";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { useFormsUserStore } from "../../../_store/FormsUserStore";
-import { useFormsTourStore } from "../../../_store/FormsTourStore";
 
 import styles from "./SettingsPanel.module.scss";
 
@@ -129,7 +128,6 @@ const AiBillingContent = observer(
 const BillingForm = () => {
   const { i18n } = useTranslation();
   const { user } = useFormsUserStore();
-  const tourStore = useFormsTourStore();
 
   const billingConfig = React.useMemo<TPaymentConfig>(
     () => ({
@@ -152,15 +150,13 @@ const BillingForm = () => {
 
   return (
     <div className={styles.billingWrapper}>
-      {!tourStore.showMockItems && (
-        <MemoryRouter>
-          <BillingRoot config={billingConfig}>
-            <div className={styles.billingContent}>
-              <AiBillingContent integrationUrl={integrationUrl} />
-            </div>
-          </BillingRoot>
-        </MemoryRouter>
-      )}
+      <MemoryRouter>
+        <BillingRoot config={billingConfig}>
+          <div className={styles.billingContent}>
+            <AiBillingContent integrationUrl={integrationUrl} />
+          </div>
+        </BillingRoot>
+      </MemoryRouter>
     </div>
   );
 };

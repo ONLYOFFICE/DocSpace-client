@@ -33,23 +33,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Button } from "@docspace/ui-kit/components/button";
+import { AvatarEditorDialog as AvatarEditorDialogUI } from "@docspace/ui-kit/components/avatar-editor-dialog";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { ImageEditor } from "@docspace/ui-kit/components/image-editor";
 
 import { loadAvatar } from "@docspace/shared/api/people";
 import { dataUrlToFile } from "@docspace/shared/utils/dataUrlToFile";
-import styles from "./AvatarEditorDialog.module.scss";
-
-const IMAGE_CROPPER_HEIGHT = 448;
-const HEADER = 70;
-const BUTTONS = 72;
 
 const AvatarEditorDialog = (props) => {
   const { t } = useTranslation([
@@ -58,7 +50,6 @@ const AvatarEditorDialog = (props) => {
     "Common",
     "CreateEditRoomDialog",
     "Ldap",
-    "RoomLogoCover",
   ]);
 
   const {
@@ -79,8 +70,6 @@ const AvatarEditorDialog = (props) => {
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
-  const [preview, setPreviewState] = useState(null);
-  const [scrollBodyHeight, setScrollBodyHeight] = useState(null);
 
   const editorBorderRadius = isProfileUpload ? 400 : 110;
 
@@ -90,31 +79,13 @@ const AvatarEditorDialog = (props) => {
       ? t("RoomLogoCover:AgentCover")
       : t("RoomLogoCover:RoomCover");
 
-  const onResize = () => {
-    const imageCropperModalHeight = IMAGE_CROPPER_HEIGHT + HEADER + BUTTONS;
-    const screenHeight = document.documentElement.clientHeight;
-
-    if (screenHeight < imageCropperModalHeight)
-      setScrollBodyHeight(screenHeight - HEADER - BUTTONS);
-    else setScrollBodyHeight(null);
-  };
-
-  useEffect(() => {
-    onResize();
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, []);
-
   const onCloseModal = () => {
     onChangeImage({ x: 0.5, y: 0.5, zoom: 1, uploadedFile: null });
     setPreview && setPreview("");
     onClose && onClose();
   };
 
-  const onSaveClick = async () => {
+  const onSaveClick = async (img, preview) => {
     setIsLoading(true);
 
     const file = await dataUrlToFile(preview);
@@ -144,73 +115,27 @@ const AvatarEditorDialog = (props) => {
     }
   };
 
-  const onSaveAction = async (img) => {
+  const onSaveAction = async (image, preview) => {
     setIsLoading(true);
-
-    await onSave(img);
-
+    await onSave(image, preview);
     setIsLoading(false);
   };
 
   return (
-    <ModalDialog
-      className={styles.modalDialog}
-      displayType="modal"
-      withBodyScroll
+    <AvatarEditorDialogUI
+      t={t}
       visible={visible}
-      onClose={onCloseModal}
-      withFooterBorder
-      withBodyScrollForcibly={!!scrollBodyHeight}
+      title={avatarTitle}
+      image={image}
+      isLoading={isLoading}
+      editorBorderRadius={editorBorderRadius}
+      maxImageSize={maxImageUploadSize}
       dataTestId={dataTestId}
-      style={
-        scrollBodyHeight
-          ? { "--modal-body-height": `${scrollBodyHeight}px` }
-          : undefined
-      }
-    >
-      <ModalDialog.Header>
-        <Text fontSize="21px" fontWeight={700}>
-          {avatarTitle}
-        </Text>
-      </ModalDialog.Header>
-      <ModalDialog.Body>
-        <div className={styles.bodyContent}>
-          <ImageEditor
-            t={t}
-            className="wrapper-image-editor"
-            classNameWrapperImageCropper="avatar-editor"
-            image={image}
-            setPreview={setPreview || setPreviewState}
-            onChangeImage={onChangeImage}
-            onChangeFile={onChangeFile}
-            maxImageSize={maxImageUploadSize}
-            editorBorderRadius={editorBorderRadius}
-          />
-        </div>
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          className="save"
-          key="AvatarEditorSaveBtn"
-          label={t("Common:SaveButton")}
-          size="normal"
-          scale
-          primary
-          onClick={onSave ? () => onSaveAction(image) : onSaveClick}
-          isLoading={isLoading}
-          testId="avatar_editor_save_button"
-        />
-        <Button
-          className="cancel-button"
-          key="AvatarEditorCloseBtn"
-          label={t("Common:CancelButton")}
-          size="normal"
-          scale
-          onClick={onCloseModal}
-          testId="avatar_editor_cancel_button"
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
+      onClose={onCloseModal}
+      onSave={isProfileUpload ? onSaveClick : onSaveAction}
+      onChangeImage={onChangeImage}
+      onChangeFile={onChangeFile}
+    />
   );
 };
 
@@ -233,3 +158,4 @@ export default inject(
     };
   },
 )(observer(AvatarEditorDialog));
+

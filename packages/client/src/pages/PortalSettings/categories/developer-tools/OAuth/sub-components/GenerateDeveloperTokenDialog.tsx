@@ -244,7 +244,7 @@ const GenerateDeveloperTokenDialog = ({
                 testId="generate_token_input"
               />
               <Text dataTestId="generate_token_dates" className="dates">
-                <strong>{t("Files:ByCreation")}</strong>: {dates.created}
+                <strong>{t("Common:ByCreation")}</strong>: {dates.created}
                 <br />
                 <strong>{t("Expires")}</strong>: {dates.expires}
               </Text>
@@ -307,3 +307,4 @@ export default inject(
     };
   },
 )(observer(GenerateDeveloperTokenDialog));
+

@@ -71,12 +71,7 @@ const BASE_LANGUAGES = [
 ];
 
 const forbiddenElements = ["ONLYOFFICE", "DOCSPACE"];
-const skipForbiddenKeys = [
-  "OrganizationName",
-  "ProductName",
-  "ProductEditorsName",
-  "OnlyofficeDesktopEditors",
-];
+const skipForbiddenKeys = [];
 
 // Brand/product keys and constants — injected at runtime, not in JSON locale files.
 // Skip these in per-language completeness and forbidden-elements checks.
@@ -364,7 +359,7 @@ beforeAll(() => {
 
     moduleFolders.push({
       path: wsPath,
-      isCommon: wsPath.includes("public/locales"),
+      isCommon: wsPath.includes(path.join("public", "locales")),
       availableLanguages: t?.languages,
       appliedJsTranslationKeys: j?.translationKeys,
     });
@@ -894,10 +889,8 @@ describe("Locales Tests", () => {
     let i = 0;
     const forbiddenEntries = [];
 
-    moduleFolders.forEach((module) => {
-      if (!module.availableLanguages || module.isCommon) return;
-
-      module.availableLanguages.forEach((lng) => {
+    const checkLanguages = (languages) => {
+      languages.forEach((lng) => {
         const translationItems = lng.translations
           .filter((elem) => !skipForbiddenKeys.includes(elem.key))
           .filter((f) => {
@@ -923,7 +916,14 @@ describe("Locales Tests", () => {
           forbiddenEntries.push({ filePath: lng.path, key: t.key });
         });
       });
+    };
+
+    moduleFolders.forEach((module) => {
+      if (!module.availableLanguages) return;
+      checkLanguages(module.availableLanguages);
     });
+
+    checkLanguages(commonTranslations);
 
     clearWrongKeys(forbiddenEntries, "forbidden value keys");
 
@@ -2103,6 +2103,117 @@ describe("Locales Tests", () => {
     expect(errorsCount, message).toBe(0);
   });
 
+  it("NativeLetterPresenceTest: Verify that every translation contains at least one letter from the language's alphabet.", () => {
+    // Each language's "alphabet" — a regex that must match at least once in the stripped
+    // translation value. After removing {{variables}} and <HTML/React tags> the remaining
+    // text must contain at least one native letter.  This catches values that consist
+    // entirely of digits, punctuation, or technical symbols with no human-readable text
+    // in the target language (e.g. a Russian value of "100% done" with no Cyrillic).
+    //
+    // Non-Latin-script languages: the regex covers their Unicode block.
+    // Latin-script languages: any [a-zA-Z] letter suffices; the test still catches
+    // purely-numeric or symbol-only values such as a translation that strips to "42".
+
+    const LANG_ALPHABET = {
+      // Non-Latin scripts
+      "ar-SA":      /[؀-ۿ]/,
+      "el-GR":      /[Ͱ-Ͽ]/,
+      "hy-AM":      /[԰-֏]/,
+      "ja-JP":      /[぀-ヿ一-鿿]/,
+      "ko-KR":      /[가-힯ᄀ-ᇿ]/,
+      "lo-LA":      /[຀-໿]/,
+      "si":         /[඀-෿]/,
+      "zh-CN":      /[一-鿿]/,
+      // Cyrillic
+      "bg":         /[Ѐ-ӿ]/,
+      "ru":         /[Ѐ-ӿ]/,
+      "sr-Cyrl-RS": /[Ѐ-ӿ]/,
+      "uk-UA":      /[Ѐ-ӿ]/,
+      // Latin-script — any Latin letter
+      "az":         /[a-zA-Z]/,
+      "cs":         /[a-zA-Z]/,
+      "de":         /[a-zA-Z]/,
+      "es":         /[a-zA-Z]/,
+      "fi":         /[a-zA-Z]/,
+      "fr":         /[a-zA-Z]/,
+      "it":         /[a-zA-Z]/,
+      "lv":         /[a-zA-Z]/,
+      "nl":         /[a-zA-Z]/,
+      "pl":         /[a-zA-Z]/,
+      "pt":         /[a-zA-Z]/,
+      "pt-BR":      /[a-zA-Z]/,
+      "ro":         /[a-zA-Z]/,
+      "sk":         /[a-zA-Z]/,
+      "sl":         /[a-zA-Z]/,
+      "sq-AL":      /[a-zA-Z]/,
+      "sr-Latn-RS": /[a-zA-Z]/,
+      "tr":         /[a-zA-Z]/,
+      "vi":         /[a-zA-Z]/,
+    };
+
+    // Minimum stripped-text length to bother checking.
+    // Values shorter than this are likely abbreviations, numbers, or symbols.
+    const MIN_STRIPPED_LEN = 8;
+
+    function stripMarkup(text) {
+      return text
+        .replace(/\{\{[^}]+\}\}/g, "")
+        .replace(/<[^>]*>/g, "")
+        .replace(/&[a-zA-Z]+;/g, "");
+    }
+
+    // Build EN reference for "equals English" exemption (brand names, tech terms).
+    const enByNsKey = {};
+    translationFiles
+      .filter((f) => f.language === "en")
+      .forEach((file) => {
+        file.translations.forEach((t) => {
+          enByNsKey[`${file.namespace}|${t.key}`] = t.value;
+        });
+      });
+
+    let message =
+      "Next translation values contain no letters from the language's alphabet:\r\n\r\n";
+    let errorsCount = 0;
+    let i = 0;
+    const wrongKeys = [];
+
+    for (const [lang, alphabetRegex] of Object.entries(LANG_ALPHABET)) {
+      const langFiles = translationFiles.filter((f) => f.language === lang);
+
+      langFiles.forEach((file) => {
+        file.translations.forEach((t) => {
+          if (!t.value) return;
+
+          const stripped = stripMarkup(t.value).trim();
+
+          // Skip short values — numbers, abbreviations, symbols
+          if (stripped.length < MIN_STRIPPED_LEN) return;
+
+          // Skip if identical to English (case-insensitive) — brand names, product names, technical terms
+          const enVal = enByNsKey[`${file.namespace}|${t.key}`];
+          if (enVal && t.value.toLowerCase() === enVal.toLowerCase()) return;
+
+          // At least one native letter must be present
+          if (alphabetRegex.test(stripped)) return;
+
+          message +=
+            `${++i}. lng='${lang}' key='${file.namespace}:${t.key}'\r\n` +
+            `  Value: '${t.value.substring(0, 150)}'\r\n\r\n`;
+          errorsCount++;
+          wrongKeys.push({ language: lang, key: `${file.namespace}:${t.key}` });
+        });
+      });
+    }
+
+    clearWrongKeys(
+      resolveTranslationEntries(wrongKeys),
+      "no-native-letter translation keys",
+    );
+
+    expect(errorsCount, message).toBe(0);
+  });
+
   it("ForeignScriptContaminationTest: Verify that translations do not contain characters from unrelated scripts.", () => {
     // Each language has a set of ALLOWED Unicode script ranges.
     // Any character outside ASCII + allowed ranges (after stripping markup) is contamination.
@@ -2506,6 +2617,42 @@ describe("Locales Tests", () => {
           `   Key: "${key}"\r\n\r\n`;
         errorsCount++;
       });
+    });
+
+    expect(errorsCount, message).toBe(0);
+  });
+
+  it("UnicodeEscapedValuesTest: Verify that translation files use readable Unicode characters instead of \\uXXXX escape sequences.", () => {
+    // JSON files must store non-ASCII characters directly in UTF-8, not as \uXXXX
+    // escape sequences. Escaped forms are invisible in code review, harder to spot
+    // translation errors in, and typically produced by json.dumps() without
+    // ensure_ascii=False or similar tooling mistakes.
+    const unicodeEscapePattern = /\\u[0-9a-fA-F]{4}/;
+
+    let message =
+      "Next translation files contain \\uXXXX escape sequences instead of readable Unicode characters.\r\n" +
+      "Re-save the file in UTF-8 with unescaped characters (e.g. ensure_ascii=False in Python).\r\n\r\n";
+    let errorsCount = 0;
+    let i = 0;
+
+    translationFiles.forEach((file) => {
+      const rawContent = fs.readFileSync(file.path, "utf8");
+
+      if (!unicodeEscapePattern.test(rawContent)) return;
+
+      const escapedLines = rawContent
+        .split("\n")
+        .map((line, idx) => ({ line, lineNo: idx + 1 }))
+        .filter(({ line }) => unicodeEscapePattern.test(line))
+        .slice(0, 3)
+        .map(
+          ({ line, lineNo }) =>
+            `    line ${lineNo}: ${line.trim().substring(0, 80)}`,
+        )
+        .join("\r\n");
+
+      message += `${++i}. ${file.language}/${file.fileName}\r\n${escapedLines}\r\n\r\n`;
+      errorsCount++;
     });
 
     expect(errorsCount, message).toBe(0);

@@ -37,6 +37,7 @@ import React, { useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import api from "@docspace/shared/api";
+import { AnalyticsEvents } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -44,7 +45,10 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { showSuccessCreateFolder } from "SRC_DIR/helpers/toast-helpers";
 import config from "PACKAGE_FILE";
 
-import { getDefaultFileName } from "SRC_DIR/helpers/filesUtils";
+import {
+  getDefaultFileName,
+  getDefaultFileTestIdPrefix,
+} from "SRC_DIR/helpers/filesUtils";
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
 import { frameCallEvent } from "@docspace/shared/utils/common";
@@ -136,6 +140,14 @@ const CreateEvent = ({
 						createdFolderId = folder.id;
 						addActiveItems(null, [folder.id]);
 						setCreatedItem({ id: createdFolderId, type: "folder" });
+						window.dispatchEvent(
+							new CustomEvent("folder_created", {
+								detail: {
+									id: folder.id,
+									parentId: folder.parentId,
+								},
+							}),
+						);
 					})
 					.then(() => completeAction(item, type, true))
 					.then(() => {
@@ -205,6 +217,12 @@ const CreateEvent = ({
 						gallerySelected?.id,
 					)
 						.then((data) => {
+							window.dataLayer = window.dataLayer || [];
+							window.dataLayer.push({
+								event: AnalyticsEvents.FileCreated,
+								id: data.id,
+								parentId: data.folderId,
+							});
 							if (isFrame && frameConfig?.events?.onEditorOpen) {
 								frameCallEvent({
 									event: "onEditorOpen",
@@ -274,6 +292,7 @@ const CreateEvent = ({
 			withForm
 			visible={eventDialogVisible}
 			title={headerTitle}
+			testIdPrefix={getDefaultFileTestIdPrefix(extension)}
 			startValue={startValue}
 			onSave={onSave}
 			onCancel={onCloseAction}

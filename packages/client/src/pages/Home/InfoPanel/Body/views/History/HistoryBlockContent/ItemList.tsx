@@ -231,7 +231,7 @@ const HistoryItemList = ({
 									size={16}
 									isFill
 									onClick={() => checkAndOpenLocationAction!(item)}
-									title={t("Files:OpenLocation")}
+									title={t("Common:OpenLocation")}
 									dataTestId={`history_item_location_${index}`}
 								/>
 							) : null}

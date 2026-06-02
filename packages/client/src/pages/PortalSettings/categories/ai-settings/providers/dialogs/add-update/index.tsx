@@ -130,7 +130,7 @@ const AddUpdateDialogComponent = ({
   initialModels,
   getAIConfig,
 }: AddEditDialogProps) => {
-  const { t } = useTranslation(["Common", "AISettings", "OAuth", "Webhooks"]);
+  const { t } = useTranslation(["Common", "OAuth", "Webhooks"]);
   const submitButtonRef = useRef<HTMLButtonElement>(null);
 
   const providerOptions = useMemo(
@@ -366,7 +366,7 @@ const AddUpdateDialogComponent = ({
 
         await addAIProvider?.(data);
         toastr.success(
-          t("AISettings:ProviderAddedSuccess", {
+          t("Common:ProviderAddedSuccess", {
             aiProvider: t("Common:AIProvider"),
           }),
         );
@@ -393,7 +393,7 @@ const AddUpdateDialogComponent = ({
 
         await updateAIProvider?.(providerData.id, data);
         toastr.success(
-          t("AISettings:ProviderUpdatedSuccess", {
+          t("Common:ProviderUpdatedSuccess", {
             aiProvider: t("Common:AIProvider"),
           }),
         );
@@ -461,7 +461,7 @@ const AddUpdateDialogComponent = ({
             }
           >
             <FieldContainer
-              labelText={t("AISettings:Provider")}
+              labelText={t("Common:Provider")}
               labelVisible
               isVertical
               removeMargin
@@ -486,20 +486,21 @@ const AddUpdateDialogComponent = ({
               <TextInput
                 size={InputSize.base}
                 type={InputType.text}
+                name="provider_title"
                 value={providerTitle}
                 onChange={(e) => setProviderTitle(e.target.value)}
                 scale
-                placeholder={t("AISettings:EnterLabel")}
+                placeholder={t("Common:EnterLabel")}
                 isDisabled={isRequestRunning}
                 testId="provider-title-input"
               />
               <Text className={styles.fieldHint}>
-                {t("AISettings:ProviderNameInputHint")}
+                {t("Common:ProviderNameInputHint")}
               </Text>
             </FieldContainer>
 
             <FieldContainer
-              labelText={t("AISettings:ProviderURL")}
+              labelText={t("Common:ProviderURL")}
               labelVisible
               isVertical
               removeMargin
@@ -508,10 +509,11 @@ const AddUpdateDialogComponent = ({
               <TextInput
                 size={InputSize.base}
                 type={InputType.text}
+                name="provider_url"
                 value={providerUrl}
                 onChange={(e) => setProviderUrl(e.target.value)}
                 scale
-                placeholder={t("OAuth:EnterURL")}
+                placeholder={t("Common:EnterURL")}
                 isDisabled={
                   isRequestRunning ||
                   selectedOption.key !== ProviderType.OpenAiCompatible
@@ -519,11 +521,11 @@ const AddUpdateDialogComponent = ({
                 testId="provider-url-input"
               />
               <Text className={styles.fieldHint}>
-                {t("AISettings:ProviderURLInputHint")}
+                {t("Common:ProviderURLInputHint")}
               </Text>
             </FieldContainer>
             <FieldContainer
-              labelText={t("AISettings:ProviderKey")}
+              labelText={t("Common:ProviderKey")}
               labelVisible
               isVertical
               removeMargin
@@ -531,7 +533,7 @@ const AddUpdateDialogComponent = ({
               {isKeyInputHidden ? (
                 <div className={styles.resetKeyBlock}>
                   <div className={styles.resetKeyHint}>
-                    {t("AISettings:ResetProviderKeyDescription")}
+                    {t("Common:ResetProviderKeyDescription")}
                   </div>
                   <Link
                     type={LinkType.action}
@@ -541,18 +543,19 @@ const AddUpdateDialogComponent = ({
                     onClick={onResetKey}
                     dataTestId="provider-reset-key-link"
                   >
-                    {t("Webhooks:ResetKey")}
+                    {t("Common:ResetKey")}
                   </Link>
                 </div>
               ) : (
                 <>
                   <PasswordInput
                     size={InputSize.base}
+                    inputName="provider_key"
                     inputValue={providerKey}
                     onChange={(_, value) => setProviderKey(value ?? "")}
                     isFullWidth
                     isDisableTooltip
-                    placeholder={t("AISettings:EnterKey")}
+                    placeholder={t("Common:EnterKey")}
                     isDisabled={isRequestRunning}
                     isSimulateType
                     autoComplete="off"
@@ -564,7 +567,7 @@ const AddUpdateDialogComponent = ({
                       [styles.fieldHintError]: providerData?.needReset,
                     })}
                   >
-                    {t("AISettings:ProviderKeyInputHint", {
+                    {t("Common:ProviderKeyInputHint", {
                       aiProvider: t("Common:AIProvider"),
                     })}
                   </Text>
@@ -607,6 +610,11 @@ const AddUpdateDialogComponent = ({
 
         <ModalDialog.Footer>
           <Button
+            id={
+              variant === "add"
+                ? "shared_create-ai-provider-modal_submit"
+                : undefined
+            }
             primary
             size={ButtonSize.normal}
             label={t("Common:SaveButton")}
@@ -617,6 +625,11 @@ const AddUpdateDialogComponent = ({
             testId="provider-save-button"
           />
           <Button
+            id={
+              variant === "add"
+                ? "shared_create-ai-provider-modal_cancel"
+                : undefined
+            }
             size={ButtonSize.normal}
             label={t("Common:CancelButton")}
             scale

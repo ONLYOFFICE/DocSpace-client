@@ -3,7 +3,7 @@
   "content": "Position",
   "content_en_sha1_hash": "cf1c85adba548e8d681255278976584a7e4a44de",
   "created_at": "2025-05-19T21:30:56.819Z",
-  "updated_at": "2026-05-15T14:00:06.666Z",
+  "updated_at": "2026-05-28T15:46:18.525Z",
   "comment": {
     "text": "This is a label for a dropdown menu or radio button group. It refers to the placement of an element, such as a watermark, on a page.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/Watermarks/ViewerInfo.tsx",
-      "line_number": 316,
+      "line_number": 317,
       "context": "type={InputType.text}\n testId=\"virtual_data_room_watermark_text_input\"\n />\n \n <Text className=\"watermark-title\" fontWeight={600} lineHeight=\"20px\">\n {t(\"Position\")}\n </Text>\n <ComboBox\n selectedOption={selectedPosition}\n options={initialInfoRef?.dataRotate as TOption[]}\n onSelect={onPositionChange}",
       "module": "/packages/client"
     }

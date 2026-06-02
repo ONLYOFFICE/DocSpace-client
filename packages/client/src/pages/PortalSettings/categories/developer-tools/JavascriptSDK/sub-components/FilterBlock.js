@@ -270,7 +270,9 @@ export const FilterBlock = ({ t, config, setConfig }) => {
       >
         <Avatar size="min" role="user" source={avatar} />
         <div className="list-item_content">
-          <Text className={classNames(styles.searchItemText, styles.primary)}>{displayName}</Text>
+          <Text className={classNames(styles.searchItemText, styles.primary)}>
+            {displayName}
+          </Text>
           <Text className={styles.searchItemText}>{email}</Text>
         </div>
       </DropDownItem>
@@ -345,7 +347,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
       <Label className="label" text={t("FileFilter")} />
       <ToggleButton
         className="toggle"
-        label={t("Files:ByAuthor")}
+        label={t("Common:ByAuthor")}
         onChange={toggleAuthor}
         isChecked={isUserFilterSet}
         isDisabled={!!config.requestToken}
@@ -376,7 +378,11 @@ export const FilterBlock = ({ t, config, setConfig }) => {
             {author.length >= minSearchValue ? (
               <DropDown
                 className={styles.dropDown}
-                style={searchRef?.current?.offsetWidth ? { width: `${searchRef.current.offsetWidth}px` } : undefined}
+                style={
+                  searchRef?.current?.offsetWidth
+                    ? { width: `${searchRef.current.offsetWidth}px` }
+                    : undefined
+                }
                 isDefaultMode={false}
                 open={searchPanelVisible}
                 manualX="16px"
@@ -457,7 +463,11 @@ export const FilterBlock = ({ t, config, setConfig }) => {
               {author.length >= minSearchValue ? (
                 <DropDown
                   className={styles.dropDown}
-                  style={searchRef?.current?.offsetWidth ? { width: `${searchRef.current.offsetWidth}px` } : undefined}
+                  style={
+                    searchRef?.current?.offsetWidth
+                      ? { width: `${searchRef.current.offsetWidth}px` }
+                      : undefined
+                  }
                   isDefaultMode={false}
                   open={searchPanelVisible}
                   manualX="16px"
@@ -512,3 +522,4 @@ export const FilterBlock = ({ t, config, setConfig }) => {
     </>
   );
 };
+

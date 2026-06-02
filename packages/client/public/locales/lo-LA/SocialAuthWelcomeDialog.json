@@ -4,5 +4,8 @@
   "ContinueToProduct": "ດໍາເນີນການກັບ {{productName}}",
   "GeneratedPassword": "ລະຫັດຜ່ານທີ່ສ້າງຂຶ້ນ",
   "ProductNameDetail": "ຊື່ຜະລິດຕະພັນ {{productName}}",
-  "ReviewAccountDetails": "ກະລຸນາໃຊ້ເວລາສັກຄາວເພື່ອກວດສອບລາຍລະອຽດບັນຊີຂອງທ່ານ:"
+  "ReviewAccountDetails": "ກະລຸນາໃຊ້ເວລາສັກຄາວເພື່ອກວດສອບລາຍລະອຽດບັນຊີຂອງທ່ານ:",
+  "SetEmailPassword": "ຕັ້ງລະຫັດຜ່ານ",
+  "WelcomeSubtitle": "ພື້ນທີ່ຂອງທ່ານໄດ້ຖືກສ້າງຂຶ້ນສຳເລັດແລ້ວ. ກວດສອບລາຍລະອຽດໂປຣໄຟລ໌ຂອງທ່ານ ແລະ ເລີ່ມຕົ້ນເຮັດວຽກ.",
+  "YourProfileDetails": "ລາຍລະອຽດໂປຣໄຟລ໌ຂອງທ່ານ"
 }

@@ -3,7 +3,7 @@
   "content": "Upload any type files from your personal device",
   "content_en_sha1_hash": "668f73764cc99938a3a442a47ee4a5d6a62e4d50",
   "created_at": "2025-05-19T21:30:56.543Z",
-  "updated_at": "2026-05-15T14:00:06.600Z",
+  "updated_at": "2026-05-24T17:27:49.054Z",
   "comment": {
     "text": "This is the descriptive text for an option to upload files. It appears below the title \"Upload from device\" in an empty container view, explaining that users can upload any file type from their personal device.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyPrivateRoomView.tsx",
+      "line_number": 129,
+      "context": "<span className={styles.actionBody}>\n <span className={styles.actionTitle}>\n {t(\"EmptyView:UploadDeviceOptionTitle\")}\n </span>\n <span className={styles.actionDescription}>\n {t(\"EmptyView:UploadDeviceOptionDescription\")}\n </span>\n </span>\n </button>\n </div>\n ) : null}",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
       "line_number": 430,

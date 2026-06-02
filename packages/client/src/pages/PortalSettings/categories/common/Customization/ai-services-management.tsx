@@ -94,7 +94,7 @@ const AiServicesManagementComponent = ({
   defaultFolderType,
   updateDefaultFolderType,
 }: AiServicesManagementProps) => {
-  const { t, ready } = useTranslation(["Settings", "Common", "AISettings"]);
+  const { t, ready } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
   const location = useLocation();
 

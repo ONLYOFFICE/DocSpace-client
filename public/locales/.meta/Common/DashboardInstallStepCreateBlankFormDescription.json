@@ -1,0 +1,29 @@
+{
+  "key_path": "DashboardInstallStepCreateBlankFormDescription",
+  "content": "A blank PDF form so you can start right away",
+  "content_en_sha1_hash": "fea49b966a339d653bc058682c740a6be033dafb",
+  "created_at": "2026-05-19T19:03:13.941Z",
+  "updated_at": "2026-05-24T17:27:49.115Z",
+  "comment": {
+    "text": "Description text for the \"create blank form\" step in the module installation dialog, explaining the purpose of this step.",
+    "is_auto": true,
+    "updated_at": "2026-05-19T19:25:18.125Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallAiFormsDialog.tsx",
+      "line_number": 86,
+      "context": "\"create-room\": t(\"Common:DashboardInstallStepCreateRoomDescription\"),\n \"invite-everyone\": t(\n \"Common:DashboardInstallStepInviteEveryoneDescription\",\n ),\n \"create-blank-form\": t(\n \"Common:DashboardInstallStepCreateBlankFormDescription\",\n ),\n \"upload-library\": t(\n \"Common:DashboardInstallStepUploadLibraryDescription\",\n ),\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "Event ID",
   "content_en_sha1_hash": "894b1c749d25e8c3e7119c9df315a6b3f7fc899a",
   "created_at": "2025-05-19T21:30:49.709Z",
-  "updated_at": "2026-05-15T15:37:40.265Z",
+  "updated_at": "2026-06-01T21:20:44.481Z",
   "comment": {
     "text": "This is a label for an event identifier, appearing in a table header and as a detail in a webhook event log.",
     "is_auto": true,

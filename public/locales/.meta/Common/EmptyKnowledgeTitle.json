@@ -1,0 +1,38 @@
+{
+  "key_path": "EmptyKnowledgeTitle",
+  "content": "No files uploaded yet",
+  "content_en_sha1_hash": "118574e18f8e491fcdabd4289071cb6479b05c9e",
+  "created_at": "2025-10-27T16:14:31.664Z",
+  "updated_at": "2026-05-24T17:27:49.056Z",
+  "comment": {
+    "text": "This is a title displayed in an empty state view. It appears when no files have been uploaded to the current location.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:02:03.335Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 196,
+      "context": "isPortalAdmin: boolean = false,\n ): string => {\n const isNotAdmin = isUser(access);\n \n if (isAIRoom) {\n if (isKnowledgeTab) return t(\"Common:EmptyKnowledgeTitle\");\n \n if (isResultsTab)\n return security && \"UseChat\" in security && security.UseChat\n ? t(\"Common:EmptyResultsTitle\")\n : t(\"Common:NothingToShowYet\");",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/EmptyView.helpers.tsx",
+      "line_number": 28,
+      "context": "t: TTranslation,\n folderType?: FolderType | null,\n ) => {\n switch (folderType) {\n case FolderType.Knowledge:\n return t(\"Common:EmptyKnowledgeTitle\", {\n defaultValue: \"No files uploaded yet\",\n });\n case FolderType.ResultStorage:\n return t(\"Common:EmptyResultsTitle\", {\n defaultValue: \"No results yet\",",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
+    }
+  }
+}

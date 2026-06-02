@@ -36,184 +36,115 @@ import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { isMobile } from "@docspace/shared/utils";
-import styles from "../RoomLogoCover.module.scss";
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
-import { TRoom } from "@docspace/shared/api/rooms/types";
-import type { ICover } from "@docspace/ui-kit/types";
+import { RoomLogoCover as UIKitRoomLogoCover } from "@docspace/ui-kit/components/room-logo-cover-dialog";
 import { getRoomTitle } from "@docspace/ui-kit/components";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import type { ICover } from "@docspace/ui-kit/types";
 
-import { CustomLogo } from "./CustomLogo";
-import { SelectColor } from "./SelectColor/SelectColor";
-import { SelectIcon } from "./SelectIcon";
+import type { TRoom } from "@docspace/shared/api/rooms/types";
 
 import { ILogo, RoomLogoCoverProps } from "../RoomLogoCoverDialog.types";
 
-
 const RoomLogoCover = ({
-	isBaseTheme,
-	logo,
-	title,
-	covers,
-	cover,
-	setRoomCoverDialogProps,
-	roomCoverDialogProps,
-	forwardedRef,
-	scrollHeight,
-	currentColorScheme,
-	openColorPicker,
-	setOpenColorPicker,
-	generalScroll,
-	isScrollLocked,
+  isBaseTheme,
+  title,
+  covers,
+  logoColor,
+  logoCover,
+  coverColor,
+  coverId,
+  withSelection,
+  setRoomCoverDialogProps,
+  roomCoverDialogProps,
+  forwardedRef,
+  scrollHeight,
+  currentColorScheme,
+  openColorPicker,
+  setOpenColorPicker,
+  generalScroll,
 }: RoomLogoCoverProps) => {
-	const { t } = useTranslation(["Common", "CreateEditRoomDialog"]);
+  const { t } = useTranslation(["Common", "CreateEditRoomDialog"]);
 
-	const roomTitle: string = React.useMemo(
-		() => getRoomTitle(title ?? ""),
-		[title],
-	);
+  const roomTitle = React.useMemo(
+    () => getRoomTitle(title ?? ""),
+    [title],
+  );
 
-	const SelectedCover = React.useMemo(() => {
-		return covers?.filter((item) => item.id === cover?.cover)[0];
-	}, [cover?.cover, covers]);
+  const syncToStore = (color: string, cover: ICover | null) => {
+    setRoomCoverDialogProps({
+      ...roomCoverDialogProps,
+      icon: cover ? (cover as unknown as ILogo) : roomTitle,
+      color,
+      withoutIcon: !cover,
+      customColor: globalColors.logoColors.includes(color)
+        ? roomCoverDialogProps.customColor
+        : color,
+    });
+  };
 
-	const roomColor = cover?.color
-		? `#${cover?.color}`
-		: logo?.color
-			? `#${logo.color}`
-			: globalColors.logoColors[0];
-
-	const roomIcon = cover?.cover
-		? SelectedCover
-		: logo?.cover && roomCoverDialogProps.withSelection
-			? logo.cover
-			: roomTitle;
-
-	React.useEffect(() => {
-		setRoomCoverDialogProps({
-			...roomCoverDialogProps,
-			icon: roomIcon as unknown as ILogo,
-			color: roomColor,
-			withoutIcon: typeof roomIcon === "string",
-			customColor: globalColors.logoColors.includes(roomColor)
-				? roomCoverDialogProps.customColor
-				: roomColor,
-		});
-	}, [roomIcon]);
-
-	const coverId =
-		(roomCoverDialogProps.icon as unknown as ICover)?.id ||
-		(roomIcon as ICover)?.id;
-
-	const scrollRef = useRef(null);
-
-	const setWithoutIcon = (value: boolean) => {
-		if (roomCoverDialogProps.icon === roomTitle) return;
-
-		setRoomCoverDialogProps({
-			...roomCoverDialogProps,
-			withoutIcon: value,
-		});
-	};
-
-	const selectContainerBody = (
-		<>
-			<div className="color-select-container">
-				<SelectColor
-					t={t}
-					selectedColor={roomCoverDialogProps.color}
-					logoColors={globalColors.logoColors}
-					roomColor={roomCoverDialogProps.customColor}
-					openColorPicker={openColorPicker}
-					setOpenColorPicker={setOpenColorPicker}
-					onChangeColor={(color) =>
-						setRoomCoverDialogProps({
-							...roomCoverDialogProps,
-							color,
-							customColor: globalColors.logoColors.includes(color)
-								? roomCoverDialogProps.customColor
-								: color,
-						})
-					}
-				/>
-			</div>
-			<div className="icon-select-container">
-				<SelectIcon
-					t={t}
-					withoutIcon={roomCoverDialogProps.withoutIcon}
-					$currentColorScheme={currentColorScheme}
-					coverId={coverId}
-					setIcon={(icon) =>
-						setRoomCoverDialogProps({
-							...roomCoverDialogProps,
-							icon,
-							withoutIcon: false,
-						})
-					}
-					setWithoutIcon={setWithoutIcon}
-					covers={covers}
-				/>
-			</div>
-		</>
-	);
-
-	return (
-		<div ref={forwardedRef} className={`${styles.roomLogoCoverContainer}${isScrollLocked ? ` ${styles.scrollLocked}` : ""}`}>
-			<div className="room-logo-container">
-				<CustomLogo
-					isBaseTheme={!!isBaseTheme}
-					icon={roomCoverDialogProps.icon}
-					color={roomCoverDialogProps.color}
-					withoutIcon={roomCoverDialogProps.withoutIcon}
-					roomTitle={roomTitle}
-				/>
-			</div>
-			<div className="select-container">
-				{isMobile() || generalScroll ? (
-					selectContainerBody
-				) : (
-					<Scrollbar ref={scrollRef} style={{ height: `${scrollHeight}` }}>
-						{selectContainerBody}
-					</Scrollbar>
-				)}
-			</div>
-		</div>
-	);
+  return (
+    <UIKitRoomLogoCover
+      t={t}
+      covers={covers ?? []}
+      title={title ?? ""}
+      logoColor={logoColor}
+      logoCover={logoCover}
+      coverColor={coverColor}
+      coverId={coverId}
+      withSelection={withSelection}
+      openColorPicker={openColorPicker}
+      isBaseTheme={isBaseTheme}
+      currentColorScheme={currentColorScheme}
+      forwardedRef={forwardedRef as React.RefObject<HTMLDivElement | null> | undefined}
+      scrollHeight={
+        typeof scrollHeight === "string" ? scrollHeight : undefined
+      }
+      generalScroll={generalScroll}
+      onInit={syncToStore}
+      onChange={syncToStore}
+      setOpenColorPicker={setOpenColorPicker}
+    />
+  );
 };
 
 export default inject<TStore>(({ settingsStore, dialogsStore }) => {
-	const { theme, currentColorScheme } = settingsStore;
+  const { theme, currentColorScheme } = settingsStore;
 
-	const {
-		coverSelection,
-		setCover,
-		cover,
-		createRoomDialogProps,
-		editRoomDialogProps,
-		setRoomCoverDialogProps,
-		roomCoverDialogProps,
-	} = dialogsStore;
+  const {
+    coverSelection,
+    cover: storeCover,
+    covers,
+    createRoomDialogProps,
+    editRoomDialogProps,
+    setRoomCoverDialogProps,
+    roomCoverDialogProps,
+  } = dialogsStore;
 
-	const room: TRoom = coverSelection as unknown as TRoom;
+  const room: TRoom = coverSelection as unknown as TRoom;
 
-	const logo = createRoomDialogProps.visible ? null : room?.logo;
-	const title =
-		createRoomDialogProps.visible || editRoomDialogProps.visible
-			? roomCoverDialogProps.title
-			: room?.title;
+  const logoRaw = createRoomDialogProps.visible ? null : room?.logo;
+  const logo = room?.isTemplate ? room?.logo : logoRaw;
+  const title =
+    createRoomDialogProps.visible || editRoomDialogProps.visible
+      ? roomCoverDialogProps.title
+      : room?.title;
 
-	return {
-		isBaseTheme: theme?.isBase,
-		logo: room?.isTemplate ? room?.logo : logo,
-		title,
-		cover: cover ?? {
-			color: logo?.color,
-			cover: logo?.cover?.id,
-		},
-		setCover,
-		setRoomCoverDialogProps,
-		roomCoverDialogProps,
-		currentColorScheme,
-	};
+  const cover = storeCover ?? {
+    color: logo?.color,
+    cover: logo?.cover?.id,
+  };
+
+  return {
+    isBaseTheme: theme?.isBase,
+    title,
+    covers,
+    logoColor: logo?.color,
+    logoCover: logo?.cover as unknown as ICover,
+    coverColor: cover?.color,
+    coverId: cover?.cover,
+    withSelection: roomCoverDialogProps.withSelection,
+    setRoomCoverDialogProps,
+    roomCoverDialogProps,
+    currentColorScheme,
+  };
 })(observer(RoomLogoCover));

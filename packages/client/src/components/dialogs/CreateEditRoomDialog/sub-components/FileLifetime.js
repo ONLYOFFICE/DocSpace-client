@@ -115,6 +115,7 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
         <div className="virtual-data-room_file-lifetime_date">
           <TextInput
             className="virtual-data-room_file-lifetime_input"
+            name="file_lifetime_days"
             isAutoFocussed={!roomParams.lifetime}
             isDisabled={isLoading}
             tabIndex={1}

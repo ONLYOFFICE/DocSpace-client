@@ -48,58 +48,59 @@ import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 const KnowledgeSettings = () => {
-	const { t } = useTranslation(["AIRoom", "Common", "Article"]);
+  const { t } = useTranslation(["Common", "Article"]);
 
-	const onClickAction = () => toastr.info(t("Common:WorkInProgress"));
+  const onClickAction = () => toastr.info(t("Common:WorkInProgress"));
 
-	return (
-		<StyledParam increaseGap>
-			<div className=" set_room_params-info">
-				<div>
-					<Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
-						{t("Knowledge")}
-					</Text>
-					<Text
-						fontSize="12px"
-						lineHeight="16px"
-						fontWeight={400}
-						className="set_room_params-info-description"
-						noSelect
-					>
-						{t("KnowledgeDescription", {
-							productName: getBrandName("ProductName"),
-						})}
-					</Text>
-				</div>
-				<div className="ai-button-group">
-					<Button
-						size={ButtonSize.small}
-						icon={
-							<ReactSVG
-								className="ai-button-icon"
-								src={ActionsUploadReactSvgUrl}
-							/>
-						}
-						label={t("Common:UploadFiles")}
-						scale
-						filled
-						filledStroke
-						onClick={onClickAction}
-					/>
-					<Button
-						size={ButtonSize.small}
-						icon={<ReactSVG className="ai-button-icon" src={MoveReactSvgUrl} />}
-						label={t("KnowledgeSelectIn", {
-							productName: getBrandName("ProductName"),
-						})}
-						scale
-						filled
-						onClick={onClickAction}
-					/>
-				</div>
-			</div>
-		</StyledParam>
-	);
+  return (
+    <StyledParam increaseGap>
+      <div className=" set_room_params-info">
+        <div>
+          <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
+            {t("Knowledge")}
+          </Text>
+          <Text
+            fontSize="12px"
+            lineHeight="16px"
+            fontWeight={400}
+            className="set_room_params-info-description"
+            noSelect
+          >
+            {t("KnowledgeDescription", {
+              productName: getBrandName("ProductName"),
+            })}
+          </Text>
+        </div>
+        <div className="ai-button-group">
+          <Button
+            size={ButtonSize.small}
+            icon={
+              <ReactSVG
+                className="ai-button-icon"
+                src={ActionsUploadReactSvgUrl}
+              />
+            }
+            label={t("Common:UploadFiles")}
+            scale
+            filled
+            filledStroke
+            onClick={onClickAction}
+          />
+          <Button
+            size={ButtonSize.small}
+            icon={<ReactSVG className="ai-button-icon" src={MoveReactSvgUrl} />}
+            label={t("KnowledgeSelectIn", {
+              productName: getBrandName("ProductName"),
+            })}
+            scale
+            filled
+            onClick={onClickAction}
+          />
+        </div>
+      </div>
+    </StyledParam>
+  );
 };
 
 export default KnowledgeSettings;
+

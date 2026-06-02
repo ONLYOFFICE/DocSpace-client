@@ -3,7 +3,7 @@
   "content": "DNS Settings",
   "content_en_sha1_hash": "7f2a7680272773297fb8efa578de3f25d6399c36",
   "created_at": "2025-05-19T21:30:51.213Z",
-  "updated_at": "2026-05-15T15:37:40.235Z",
+  "updated_at": "2026-06-01T21:20:44.461Z",
   "comment": {
     "text": "This is the title for a section in the portal settings where users can configure DNS settings. It appears as a clickable link in the navigation menu and as the heading of the DNS settings page.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/dns-settings.js",
-      "line_number": 140,
+      "line_number": 141,
       "context": "setIsCustomizationView(false);\n }\n }, [isMobileDevice, setIsCustomizationView]);\n \n useEffect(() => {\n setDocumentTitle(t(\"DNSSettings\"));\n \n const checkScroll = checkScrollSettingsBlock();\n checkInnerWidth();\n window.addEventListener(\"resize\", checkInnerWidth);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/dns-settings.js",
-      "line_number": 140,
+      "line_number": 141,
       "context": "setIsCustomizationView(false);\n }\n }, [isMobileDevice, setIsCustomizationView]);\n \n useEffect(() => {\n setDocumentTitle(t(\"DNSSettings\"));\n \n const checkScroll = checkScrollSettingsBlock();\n checkInnerWidth();\n window.addEventListener(\"resize\", checkInnerWidth);",
       "module": "/packages/client"
     },

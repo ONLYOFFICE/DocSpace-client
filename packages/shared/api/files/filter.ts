@@ -96,6 +96,7 @@ const DATE = "date";
 const TAGS = "tags";
 const LOCATION = "location";
 const AREA = "area";
+const PARENT_ID = "parentId";
 
 // TODO: add next params
 // subjectGroup bool
@@ -127,6 +128,7 @@ const getOtherSearchParams = () => {
     TAGS,
     LOCATION,
     AREA,
+    PARENT_ID,
   ];
 
   filterSearchParams.forEach((param) => {
@@ -199,6 +201,8 @@ class FilesFilter {
   key: string | null = null;
 
   location: FilterLocation | null = null;
+
+  parentId: number | string | null;
 
   static getDefault(
     options: {
@@ -307,6 +311,8 @@ class FilesFilter {
       sharedBy,
     );
 
+    if (urlFilter[PARENT_ID]) newFilter.parentId = urlFilter[PARENT_ID];
+
     return newFilter;
   }
 
@@ -331,6 +337,7 @@ class FilesFilter {
     key = DEFAULT_KEY,
     location = DEFAULT_LOCATION,
     sharedBy = DEFAULT_SHARED_BY_TYPE,
+    parentId: number | string | null = null,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -352,6 +359,7 @@ class FilesFilter {
     this.key = key;
     this.location = location;
     this.sharedBy = sharedBy;
+    this.parentId = parentId;
   }
 
   getStartIndex = () => {
@@ -420,6 +428,7 @@ class FilesFilter {
       searchArea,
       location,
       sharedBy,
+      parentId: this.parentId,
     };
 
     const str = toUrlParams(dtoFilter, true);
@@ -470,6 +479,7 @@ class FilesFilter {
     if (searchArea) dtoFilter[SEARCH_AREA] = searchArea;
     if (key) dtoFilter[KEY] = key;
     if (location) dtoFilter[LOCATION] = location;
+    if (this.parentId != null) dtoFilter[PARENT_ID] = this.parentId;
 
     dtoFilter[PAGE] = page + 1;
     dtoFilter[SORT_BY] = sortBy;
@@ -524,6 +534,7 @@ class FilesFilter {
       this.key,
       this.location,
       this.sharedBy,
+      this.parentId,
     );
   }
 

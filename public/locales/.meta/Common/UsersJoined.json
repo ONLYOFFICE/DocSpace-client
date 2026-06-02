@@ -1,0 +1,38 @@
+{
+  "key_path": "UsersJoined",
+  "content": "Users joined:",
+  "content_en_sha1_hash": "54d0af21bd21624bab2739c57dffe212ad864865",
+  "created_at": "2026-02-19T13:36:27.575Z",
+  "updated_at": "2026-05-24T17:27:49.106Z",
+  "comment": {
+    "text": "This is a static text label displayed next to the number of users who have joined via an invitation link. It appears within the invitation settings panel.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:07:46.670Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
+      "line_number": 322,
+      "context": "<Text\n className={styles.inviteViaLinkSettingsText}\n fontSize=\"12px\"\n fontWeight={400}\n >\n {t(\"UsersJoined\")}\n </Text>\n <Text\n fontSize=\"12px\"\n fontWeight={600}\n className={classNames(styles.inviteViaLinkText, {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/sub-components/ExternalLinks.tsx",
+      "line_number": 308,
+      "context": "<Text\n className={styles.inviteViaLinkSettingsText}\n fontSize=\"12px\"\n fontWeight={400}\n >\n {t(\"Common:UsersJoined\")}\n </Text>\n <Text\n fontSize=\"12px\"\n fontWeight={600}\n className={classNames(styles.inviteViaLinkText, {",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
+    }
+  }
+}

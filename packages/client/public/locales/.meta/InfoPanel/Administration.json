@@ -3,7 +3,7 @@
   "content": "Administration",
   "content_en_sha1_hash": "b8be3d1264310c3b8c848d4b90d5206179a40cc4",
   "created_at": "2025-05-19T21:30:54.760Z",
-  "updated_at": "2026-05-15T14:00:06.730Z",
+  "updated_at": "2026-06-01T21:20:44.441Z",
   "comment": {
     "text": "This is a label for a section or category in the InfoPanel and Share dialogs, representing administrators or administrative roles.",
     "is_auto": true,

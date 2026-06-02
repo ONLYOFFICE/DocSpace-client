@@ -3,7 +3,7 @@
   "content": "Size",
   "content_en_sha1_hash": "b7152342a267362add3c0d7f69f720f7a9c76c9e",
   "created_at": "2025-05-19T21:30:48.889Z",
-  "updated_at": "2026-05-15T14:00:06.725Z",
+  "updated_at": "2026-06-01T21:20:44.440Z",
   "comment": {
     "text": "This is a label for the size of a file or item, displayed in various information panels and table headers.",
     "is_auto": true,
@@ -68,24 +68,36 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
       "line_number": 133,
-      "context": "const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];\n \n const dataSortOrder = [",
+      "context": "const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Common:ByCreation\") },\n { key: \"Author\", label: t(\"Common:ByAuthor\") },\n ];\n \n const dataSortOrder = [",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
       "line_number": 133,
-      "context": "const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];\n \n const dataSortOrder = [",
+      "context": "const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Common:ByCreation\") },\n { key: \"Author\", label: t(\"Common:ByAuthor\") },\n ];\n \n const dataSortOrder = [",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/table-view/index.tsx",
+      "line_number": 138,
+      "context": "onClick: onColumnSort,\n onChange: onColumnChange,\n },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n sortBy: SortByFieldName.Size,\n enable: columnState.Size !== false,\n resizable: true,\n onClick: onColumnSort,\n onChange: onColumnChange,",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
-      "line_number": 122,
+      "line_number": 131,
       "context": "};\n \n const size = {\n id: \"sort-by_size\",\n key: SortByFieldName.Size,\n label: t(\"Common:Size\"),\n default: true,\n };\n \n return [name, modifiedDate, size];\n }, [t]);",
       "module": "/packages/sdk"
     },
     {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Details/Details.utils.tsx",
+      "line_number": 179,
+      "context": "case \"Tags\":\n return this.t(\"Common:Tags\");\n case \"Content\":\n return this.t(\"Common:Content\");\n case \"Size\":\n return this.t(\"Common:Size\");\n case \"Date modified\":\n return this.t(\"Common:DateModified\");\n case \"Last modified by\":\n return this.t(\"Common:LastModifiedBy\");\n case \"Creation date\":",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/table-view/index.tsx",
-      "line_number": 138,
+      "line_number": 158,
       "context": "onClick: onColumnSort,\n onChange: onColumnChange,\n },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n sortBy: SortByFieldName.Size,\n enable: columnState.Size !== false,\n resizable: true,\n onClick: onColumnSort,\n onChange: onColumnChange,",
       "module": "/packages/sdk"
     }

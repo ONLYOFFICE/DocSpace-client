@@ -70,7 +70,7 @@ export const AiProviderTile = ({
   enabled = true,
   dataTestId = "ai-provider-tile",
 }: AiProviderTileProps) => {
-  const { t } = useTranslation(["Common", "AISettings"]);
+  const { t } = useTranslation(["Common"]);
 
   const icon = getAiProviderIcon(item.type) ?? "";
   const companyLabel = getAiProviderLabel(item.type, t, enabled);
@@ -95,7 +95,7 @@ export const AiProviderTile = ({
   const getErrorTooltipContent = () => {
     return (
       <Text fontSize="12px" lineHeight="16px">
-        {t("AISettings:ProviderUnavailableError", {
+        {t("Common:ProviderUnavailableError", {
           aiProvider: t("Common:AIProvider"),
         })}
       </Text>

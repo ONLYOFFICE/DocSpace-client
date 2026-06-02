@@ -49,6 +49,7 @@ import styles from "../EmbeddingPanel.module.scss";
 
 type DisplayBlockProps = {
   label: string;
+  name: string;
   inputValue: string;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   selectedOption: TOption;
@@ -57,6 +58,7 @@ type DisplayBlockProps = {
 
 const DisplayBlock = ({
   label,
+  name,
   inputValue,
   onInputChange,
   selectedOption,
@@ -75,6 +77,7 @@ const DisplayBlock = ({
         <TextInput
           type={InputType.text}
           size={InputSize.base}
+          name={name}
           className={styles.embeddingPanelInput}
           value={inputValue}
           onChange={onInputChange}

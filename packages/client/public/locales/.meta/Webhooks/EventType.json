@@ -3,7 +3,7 @@
   "content": "Event type",
   "content_en_sha1_hash": "23f657cb1808bbd1809ee6f087ace27b821719e2",
   "created_at": "2025-05-19T21:30:49.716Z",
-  "updated_at": "2026-05-15T15:37:40.265Z",
+  "updated_at": "2026-06-01T21:20:44.481Z",
   "comment": {
     "text": "This is a table column header and a label in a details bar. It identifies the type of event that triggered a webhook.",
     "is_auto": true,

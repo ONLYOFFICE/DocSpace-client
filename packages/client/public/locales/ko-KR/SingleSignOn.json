@@ -1,6 +1,5 @@
 {
   "AddCertificate": "인증서 추가",
-  "AdvancedSettings": "고급 설정",
   "AdvancedSettingsTooltip": "기본 인증 페이지 숨기기 및 SSO 서비스로 자동 리디렉션.",
   "AttributeMatching": "속성 매핑",
   "AttributeMatchingTooltip": "'계정' 섹션의 항목에 대한 싱글 사인온 속성의 대응.",
@@ -11,7 +10,6 @@
   "DownloadMetadataXML": "SP 메타데이터 XML 다운로드",
   "Encryption": "암호화",
   "GenerateCertificate": "새로운 자체 서명된 인증서 생성",
-  "Hide": "숨기기",
   "HideAdditionalParameters": "고급 설정 숨기기",
   "HideAuthPage": "인증 페이지 숨기기",
   "idpAuthRequest": "인증 응답 서명 확인",
@@ -32,7 +30,6 @@
   "ProviderURLTooltip": "ID 제공자 엔터티 ID(발급자 URL)",
   "ServiceProviderSettings": "{{organizationName}} SP 설정",
   "ServiceProviderSettingsDescription": "서비스 공급자 설정을 구성하고 싱글 사인온을 위한 SP 인증서를 추가하세요.",
-  "Show": "표시",
   "ShowAdditionalParameters": "고급 설정 표시",
   "Signing": "서명",
   "SigningAndEncryption": "서명 및 암호화",

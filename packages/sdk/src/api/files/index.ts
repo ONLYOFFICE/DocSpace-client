@@ -60,7 +60,7 @@ export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
 		const [req] = await createRequest([`/files/settings`], [["", ""]], "GET");
 
 		const res = await fetch(req, {
-			next: { revalidate: 900 },
+			cache: "no-store",
 			signal: AbortSignal.timeout(8000),
 		});
 
@@ -88,7 +88,7 @@ export async function getFoldersTree(): Promise<TFolder[]> {
 		);
 
 		const res = await fetch(req, {
-			next: { revalidate: 300 },
+			cache: "no-store",
 			signal: AbortSignal.timeout(8000),
 		});
 
@@ -187,7 +187,7 @@ export async function getFolder(
 		);
 
 		const res = await fetch(req, {
-			next: { revalidate: 300 },
+			cache: "no-store",
 			signal: AbortSignal.timeout(8000),
 		});
 
@@ -226,7 +226,7 @@ export async function getFolderInfo(
 		);
 
 		const res = await fetch(req, {
-			next: { revalidate: 300 },
+			cache: "no-store",
 			signal: AbortSignal.timeout(8000),
 		});
 
@@ -258,7 +258,7 @@ export async function validateShareFolder(share: string) {
 		);
 
 		const res = await fetch(req, {
-			next: { revalidate: 300 },
+			cache: "no-store",
 			signal: AbortSignal.timeout(8000),
 		});
 

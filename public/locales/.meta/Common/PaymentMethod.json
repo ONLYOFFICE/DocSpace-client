@@ -1,41 +1,14 @@
 {
-  "key_path": "PaymentMethod",
-  "content": "Payment method",
-  "content_en_sha1_hash": "0e55fb3b04e225d83af1a64ec1cedc121fb61c32",
-  "created_at": "2026-04-10T13:53:42.955Z",
-  "updated_at": "2026-05-15T14:00:06.863Z",
   "comment": {
     "text": "This is a label for a section or option related to how payments are made. It appears in billing interfaces, such as when managing payment settings or topping up a balance.",
     "is_auto": true,
     "updated_at": "2026-04-11T20:46:33.719Z",
     "model": "google/gemini-2.5-flash"
   },
-  "usage": [
-    {
-      "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
-      "line_number": 170,
-      "context": "<PayerInformation />\n \n <div className={styles.header}>\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"PaymentMethod\")}\n </Text>\n <RefreshIconButton\n onRefresh={onRefreshPaymentMethod}\n isRefreshing={isRefreshing}\n />",
-      "module": "/libs/ui-kit"
-    },
-    {
-      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/PaymentMethod.tsx",
-      "line_number": 125,
-      "context": "return (\n <div className={styles.addPaymentMethod}>\n <div className={styles.paymentMethodDescription}>\n <div className={styles.paymentMethodTitle}>\n <Text isBold fontSize=\"16px\">\n {t(\"PaymentMethod\")}\n </Text>\n {walletCustomerEmail ? (\n <Link\n fontWeight={600}\n onClick={",
-      "module": "/libs/ui-kit"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/index.js",
-      "line_number": 103,
-      "context": "clearAbortControllerArr();\n },\n },\n !isNotPaidPeriod && {\n id: \"payment-method\",\n name: t(\"Common:PaymentMethod\"),\n content: <PaymentMethod />,\n onClick: () => {\n clearAbortControllerArr();\n },\n },",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 576,
-      "context": "{\n id: \"portal-settings_catalog-payment-method\",\n key: \"10-1\",\n icon: \"\",\n link: \"payment-method\",\n tKey: \"PaymentMethod\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-wallet\",\n key: \"10-2\",",
-      "module": "/packages/client"
-    }
-  ],
+  "content": "Payment method",
+  "content_en_sha1_hash": "0e55fb3b04e225d83af1a64ec1cedc121fb61c32",
+  "created_at": "2026-04-10T13:53:42.955Z",
+  "key_path": "PaymentMethod",
   "languages": {
     "en": {
       "ai_translated": false,
@@ -229,5 +202,32 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     }
-  }
+  },
+  "updated_at": "2026-06-01T21:20:44.501Z",
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
+      "line_number": 171,
+      "context": "<PayerInformation />\n \n <div className={styles.header}>\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"PaymentMethod\")}\n </Text>\n <RefreshIconButton\n onRefresh={onRefreshPaymentMethod}\n isRefreshing={isRefreshing}\n />",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/PaymentMethod.tsx",
+      "line_number": 125,
+      "context": "return (\n <div className={styles.addPaymentMethod}>\n <div className={styles.paymentMethodDescription}>\n <div className={styles.paymentMethodTitle}>\n <Text isBold fontSize=\"16px\">\n {t(\"PaymentMethod\")}\n </Text>\n {walletCustomerEmail ? (\n <Link\n fontWeight={600}\n onClick={",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/index.js",
+      "line_number": 103,
+      "context": "clearAbortControllerArr();\n },\n },\n !isNotPaidPeriod && {\n id: \"payment-method\",\n name: t(\"Common:PaymentMethod\"),\n content: <PaymentMethod />,\n onClick: () => {\n clearAbortControllerArr();\n },\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 593,
+      "context": "{\n id: \"portal-settings_catalog-payment-method\",\n key: \"10-1\",\n icon: \"\",\n link: \"payment-method\",\n tKey: \"PaymentMethod\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-wallet\",\n key: \"10-2\",",
+      "module": "/packages/client"
+    }
+  ]
 }

@@ -3,7 +3,7 @@
   "content": "Paid",
   "content_en_sha1_hash": "dc9d4584a55464cd571719ee0066acb16d411f86",
   "created_at": "2025-05-19T21:30:47.223Z",
-  "updated_at": "2026-05-15T15:37:40.204Z",
+  "updated_at": "2026-06-01T21:20:44.420Z",
   "comment": {
     "text": "This is a short label indicating a paid status. It appears on a badge or as part of a user's status description.",
     "is_auto": true,
@@ -61,13 +61,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/dns-settings.js",
-      "line_number": 319,
+      "line_number": 321,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n isPaidBadge\n />\n ) : null}\n </div>\n ) : null}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 354,
+      "line_number": 386,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n isPaidBadge\n />\n ) : null}\n </div>\n ) : null}",
       "module": "/packages/client"
     },
@@ -139,7 +139,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 370,
+      "line_number": 375,
       "context": "backgroundColor={\n isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n fontWeight=\"700\"\n className=\"settings-section_badge\"\n isPaidBadge\n />\n ) : (",
       "module": "/packages/client"
     },

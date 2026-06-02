@@ -3,7 +3,7 @@
   "content": "AI provider",
   "content_en_sha1_hash": "f81714b57309b6c32065a1d1c2804f1c4658bb33",
   "created_at": "2025-11-21T08:21:51.316Z",
-  "updated_at": "2026-05-15T14:00:06.603Z",
+  "updated_at": "2026-06-01T21:20:44.384Z",
   "comment": {
     "text": "This is a noun, appearing as a short label or part of a sentence. It refers to the service that provides AI capabilities.",
     "is_auto": true,
@@ -32,104 +32,212 @@
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
       "line_number": 210,
-      "context": "isPortalAdmin: boolean,\n ) => {\n return match([standalone, isPortalAdmin])\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n )\n .with([false, true], () =>\n t(\"EmptyView:EmptyAIAgentsAIDisabledSaasAdminTitle\"),\n )",
+      "context": "isPortalAdmin: boolean,\n ) => {\n return match([standalone, isPortalAdmin])\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n )\n .with([false, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledSaasAdminTitle\"),\n )",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
       "line_number": 140,
-      "context": "}, [standalone]);\n \n React.useEffect(() => {\n const title =\n currentTabId === \"providers\"\n ? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");",
+      "context": "}, [standalone]);\n \n React.useEffect(() => {\n const title =\n currentTabId === \"providers\"\n ? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"Common:Knowledge\")\n : t(\"Common:MCPSettingTitle\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
       "line_number": 140,
-      "context": "}, [standalone]);\n \n React.useEffect(() => {\n const title =\n currentTabId === \"providers\"\n ? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");",
+      "context": "}, [standalone]);\n \n React.useEffect(() => {\n const title =\n currentTabId === \"providers\"\n ? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"Common:Knowledge\")\n : t(\"Common:MCPSettingTitle\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
       "line_number": 264,
-      "context": "data-tooltip-id={tooltipId}\n data-tooltip-content={\n !hasAIProviders\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"AIRoom:Knowledge\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }\n >\n <Text className={generalStyles.description}>",
+      "context": "data-tooltip-id={tooltipId}\n data-tooltip-content={\n !hasAIProviders\n ? t(\"Common:ToUseAddProvider\", {\n value: t(\"Common:Knowledge\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }\n >\n <Text className={generalStyles.description}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/DefaultProvider.tsx",
-      "line_number": 366,
-      "context": ">\n {t(\"AISettings:DefaultProviderTitle\")}\n </Heading>\n <Text className={styles.description} lineHeight=\"20px\">\n {t(\"AISettings:DefaultProviderDescription\", {\n aiProvider: t(\"Common:AIProvider\"),\n aiAgents: t(\"Common:AIAgents\"),\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>",
+      "line_number": 368,
+      "context": ">\n {t(\"Common:DefaultProviderTitle\")}\n </Heading>\n <Text className={styles.description} lineHeight=\"20px\">\n {t(\"Common:DefaultProviderDescription\", {\n aiProvider: t(\"Common:AIProvider\"),\n aiAgents: t(\"Common:AIAgents\"),\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
       "line_number": 370,
-      "context": "};\n \n await addAIProvider?.(data);\n toastr.success(\n t(\"AISettings:ProviderAddedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n }\n \n if (variant === \"update\" && providerData?.id) {",
+      "context": "};\n \n await addAIProvider?.(data);\n toastr.success(\n t(\"Common:ProviderAddedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n }\n \n if (variant === \"update\" && providerData?.id) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
       "line_number": 370,
-      "context": "};\n \n await addAIProvider?.(data);\n toastr.success(\n t(\"AISettings:ProviderAddedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n }\n \n if (variant === \"update\" && providerData?.id) {",
+      "context": "};\n \n await addAIProvider?.(data);\n toastr.success(\n t(\"Common:ProviderAddedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n }\n \n if (variant === \"update\" && providerData?.id) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
       "line_number": 370,
-      "context": "};\n \n await addAIProvider?.(data);\n toastr.success(\n t(\"AISettings:ProviderAddedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n }\n \n if (variant === \"update\" && providerData?.id) {",
+      "context": "};\n \n await addAIProvider?.(data);\n toastr.success(\n t(\"Common:ProviderAddedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n }\n \n if (variant === \"update\" && providerData?.id) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
       "line_number": 370,
-      "context": "};\n \n await addAIProvider?.(data);\n toastr.success(\n t(\"AISettings:ProviderAddedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n }\n \n if (variant === \"update\" && providerData?.id) {",
+      "context": "};\n \n await addAIProvider?.(data);\n toastr.success(\n t(\"Common:ProviderAddedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n }\n \n if (variant === \"update\" && providerData?.id) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/delete/index.tsx",
       "line_number": 80,
-      "context": "await deleteAIProvider?.(providerId);\n getAIConfig?.();\n \n toastr.success(\n t(\"AISettings:ProviderRemovedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n } catch (error) {\n console.error(error);\n toastr.error(error as string);",
+      "context": "await deleteAIProvider?.(providerId);\n getAIConfig?.();\n \n toastr.success(\n t(\"Common:ProviderRemovedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n } catch (error) {\n console.error(error);\n toastr.error(error as string);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/delete/index.tsx",
       "line_number": 80,
-      "context": "await deleteAIProvider?.(providerId);\n getAIConfig?.();\n \n toastr.success(\n t(\"AISettings:ProviderRemovedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n } catch (error) {\n console.error(error);\n toastr.error(error as string);",
+      "context": "await deleteAIProvider?.(providerId);\n getAIConfig?.();\n \n toastr.success(\n t(\"Common:ProviderRemovedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n } catch (error) {\n console.error(error);\n toastr.error(error as string);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/delete/index.tsx",
       "line_number": 80,
-      "context": "await deleteAIProvider?.(providerId);\n getAIConfig?.();\n \n toastr.success(\n t(\"AISettings:ProviderRemovedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n } catch (error) {\n console.error(error);\n toastr.error(error as string);",
+      "context": "await deleteAIProvider?.(providerId);\n getAIConfig?.();\n \n toastr.success(\n t(\"Common:ProviderRemovedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n } catch (error) {\n console.error(error);\n toastr.error(error as string);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/index.tsx",
       "line_number": 209,
-      "context": "<Button\n testId=\"add-provider-button\"\n primary\n size={ButtonSize.small}\n label={t(\"AISettings:AddAIProvider\", {\n aiProvider: t(\"Common:AIProvider\"),\n })}\n scale={false}\n className={styles.addProviderButton}\n onClick={showAddProviderDialog}\n />",
+      "context": "<Button\n testId=\"add-provider-button\"\n primary\n size={ButtonSize.small}\n label={t(\"Common:AddAIProvider\", {\n aiProvider: t(\"Common:AIProvider\"),\n })}\n scale={false}\n className={styles.addProviderButton}\n onClick={showAddProviderDialog}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/Tile.tsx",
       "line_number": 99,
-      "context": "const getErrorTooltipContent = () => {\n return (\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"AISettings:ProviderUnavailableError\", {\n aiProvider: t(\"Common:AIProvider\"),\n })}\n </Text>\n );\n };",
+      "context": "const getErrorTooltipContent = () => {\n return (\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:ProviderUnavailableError\", {\n aiProvider: t(\"Common:AIProvider\"),\n })}\n </Text>\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
       "line_number": 214,
-      "context": "data-tooltip-id={tooltipId}\n data-tooltip-content={\n !hasAIProviders\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"Common:WebSearchAI\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }\n >\n <Text className={generalStyles.description}>",
+      "context": "data-tooltip-id={tooltipId}\n data-tooltip-content={\n !hasAIProviders\n ? t(\"Common:ToUseAddProvider\", {\n value: t(\"Common:WebSearchAI\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }\n >\n <Text className={generalStyles.description}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/index.tsx",
       "line_number": 268,
-      "context": "isDisabled={isMCPActionsDisabled}\n tooltipText={\n isMCPActionsDisabled\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"Common:MCPServer\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }\n testId=\"add-mcp-button\"\n />",
+      "context": "isDisabled={isMCPActionsDisabled}\n tooltipText={\n isMCPActionsDisabled\n ? t(\"Common:ToUseAddProvider\", {\n value: t(\"Common:MCPServer\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }\n testId=\"add-mcp-button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/mcp-tile/index.tsx",
       "line_number": 117,
-      "context": "}\n tooltipText={\n disableActions\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"Common:MCPServer\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }\n dataTestId=\"mcp-tile\"\n >",
+      "context": "}\n tooltipText={\n disableActions\n ? t(\"Common:ToUseAddProvider\", {\n value: t(\"Common:MCPServer\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }\n dataTestId=\"mcp-tile\"\n >",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
+      "line_number": 95,
+      "context": "aiAgent: t(\"Common:AIAgent\", { defaultValue: \"AI Agent\" }),\n defaultValue: \"Create your first {{aiAgent}}\",\n })\n : standalone && isAdminOrOwner\n ? t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle\", {\n aiProvider: t(\"Common:AIProvider\", {\n defaultValue: \"AI Provider\",\n }),\n defaultValue: \"Configure {{aiProvider}} to start\",\n })\n : isAdminOrOwner",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/knowledge/index.tsx",
+      "line_number": 252,
+      "context": "data-tooltip-id={tooltipId}\n data-tooltip-content={\n !hasAIProviders\n ? t(\"Common:ToUseAddProvider\", {\n value: t(\"Common:Knowledge\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }\n >\n <Text className={generalStyles.description}>",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/DefaultProvider.tsx",
+      "line_number": 351,
+      "context": ">\n {t(\"Common:DefaultProviderTitle\")}\n </Heading>\n <Text className={styles.description} lineHeight=\"20px\">\n {t(\"Common:DefaultProviderDescription\", {\n aiProvider: t(\"Common:AIProvider\"),\n aiAgents: t(\"Common:AIAgents\"),\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/dialogs/add-update/index.tsx",
+      "line_number": 361,
+      "context": "};\n \n await addAIProvider?.(data);\n toastr.success(\n t(\"Common:ProviderAddedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n }\n \n if (variant === \"update\" && providerData?.id) {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/dialogs/add-update/index.tsx",
+      "line_number": 361,
+      "context": "};\n \n await addAIProvider?.(data);\n toastr.success(\n t(\"Common:ProviderAddedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n }\n \n if (variant === \"update\" && providerData?.id) {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/dialogs/add-update/index.tsx",
+      "line_number": 361,
+      "context": "};\n \n await addAIProvider?.(data);\n toastr.success(\n t(\"Common:ProviderAddedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n }\n \n if (variant === \"update\" && providerData?.id) {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/dialogs/add-update/index.tsx",
+      "line_number": 361,
+      "context": "};\n \n await addAIProvider?.(data);\n toastr.success(\n t(\"Common:ProviderAddedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n }\n \n if (variant === \"update\" && providerData?.id) {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/dialogs/delete/index.tsx",
+      "line_number": 73,
+      "context": "await deleteAIProvider?.(providerId);\n getAIConfig?.();\n \n toastr.success(\n t(\"Common:ProviderRemovedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n } catch (error) {\n console.error(error);\n toastr.error(error instanceof Error ? error.message : String(error));",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/dialogs/delete/index.tsx",
+      "line_number": 73,
+      "context": "await deleteAIProvider?.(providerId);\n getAIConfig?.();\n \n toastr.success(\n t(\"Common:ProviderRemovedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n } catch (error) {\n console.error(error);\n toastr.error(error instanceof Error ? error.message : String(error));",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/dialogs/delete/index.tsx",
+      "line_number": 73,
+      "context": "await deleteAIProvider?.(providerId);\n getAIConfig?.();\n \n toastr.success(\n t(\"Common:ProviderRemovedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n } catch (error) {\n console.error(error);\n toastr.error(error instanceof Error ? error.message : String(error));",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/index.tsx",
+      "line_number": 199,
+      "context": "<Button\n testId=\"add-provider-button\"\n primary\n size={ButtonSize.small}\n label={t(\"Common:AddAIProvider\", {\n aiProvider: t(\"Common:AIProvider\"),\n })}\n scale={false}\n className={styles.addProviderButton}\n onClick={showAddProviderDialog}\n />",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/Tile.tsx",
+      "line_number": 92,
+      "context": "const getErrorTooltipContent = () => {\n return (\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:ProviderUnavailableError\", {\n aiProvider: t(\"Common:AIProvider\"),\n })}\n </Text>\n );\n };",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/search/index.tsx",
+      "line_number": 201,
+      "context": "data-tooltip-id={tooltipId}\n data-tooltip-content={\n !hasAIProviders\n ? t(\"Common:ToUseAddProvider\", {\n value: t(\"Common:WebSearchAI\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }\n >\n <Text className={generalStyles.description}>",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/index.tsx",
+      "line_number": 256,
+      "context": "isDisabled={isMCPActionsDisabled}\n tooltipText={\n isMCPActionsDisabled\n ? t(\"Common:ToUseAddProvider\", {\n value: t(\"Common:MCPServer\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }\n testId=\"add-mcp-button\"\n />",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/mcp-tile/index.tsx",
+      "line_number": 110,
+      "context": "}\n tooltipText={\n disableActions\n ? t(\"Common:ToUseAddProvider\", {\n value: t(\"Common:MCPServer\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }\n dataTestId=\"mcp-tile\"\n >",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/sub-components/Model.tsx",
+      "line_number": 355,
+      "context": "<StyledParam increaseGap>\n <div className=\" set_room_params-info\">\n <div>\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} noSelect>\n {t(\"Common:AIProviderAndModel\", {\n aiProvider: t(\"Common:AIProvider\"),\n defaultValue: \"AI provider and model\",\n })}\n </Text>\n <Text\n fontSize=\"12px\"",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/sub-components/Model.tsx",
+      "line_number": 355,
+      "context": "<StyledParam increaseGap>\n <div className=\" set_room_params-info\">\n <div>\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} noSelect>\n {t(\"Common:AIProviderAndModel\", {\n aiProvider: t(\"Common:AIProvider\"),\n defaultValue: \"AI provider and model\",\n })}\n </Text>\n <Text\n fontSize=\"12px\"",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/settings-tabs/index.tsx",
+      "line_number": 59,
+      "context": "name: t(\"Common:Billing\"),\n content: null,\n },\n ]\n : []),\n { id: \"providers\", name: t(\"Common:AIProvider\"), content: null },\n { id: \"servers\", name: t(\"Common:MCPSettingTitle\"), content: null },\n { id: \"search\", name: t(\"Common:WebSearchAI\"), content: null },\n { id: \"knowledge\", name: t(\"Common:Knowledge\"), content: null },\n ];",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/AIAgentForm.tsx",

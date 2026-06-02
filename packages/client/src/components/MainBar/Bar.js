@@ -91,6 +91,7 @@ const Bar = (props) => {
     isStorageQuotaLimit,
     isRoomsTariffAlmostLimit,
     isRoomsTariffLimit,
+
   } = props;
 
   const navigate = useNavigate();
@@ -511,7 +512,12 @@ const Bar = (props) => {
 };
 
 export default inject(
-  ({ settingsStore, profileActionsStore, userStore, currentQuotaStore }) => {
+  ({
+    settingsStore,
+    profileActionsStore,
+    userStore,
+    currentQuotaStore,
+  }) => {
     const { user, withActivationBar, sendActivationLink } = userStore;
 
     const { onPaymentsClick } = profileActionsStore;

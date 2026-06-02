@@ -54,7 +54,7 @@ export const useAdvancedSettings = (
   initialValues?: Record<string, string>,
   needReset?: boolean,
 ) => {
-  const { t } = useTranslation(["Common", "AISettings", "SingleSignOn"]);
+  const { t } = useTranslation(["Common", "SingleSignOn"]);
   const [showAdvancedSettings, setShowAdvancedSettings] = useState(
     !!initialValues || needReset,
   );
@@ -122,7 +122,7 @@ export const useAdvancedSettings = (
       <div>
         <div className={addEditStyles.advancedSettings}>
           <Text fontSize="16px" lineHeight="22px" fontWeight={700}>
-            {t("SingleSignOn:AdvancedSettings")}
+            {t("Common:AdvancedSettings")}
           </Text>
           <Link
             onClick={() => setShowAdvancedSettings(!showAdvancedSettings)}
@@ -131,13 +131,13 @@ export const useAdvancedSettings = (
             data-testid="mcp-headers-block-toggle"
           >
             {showAdvancedSettings
-              ? t("SingleSignOn:Hide")
-              : t("SingleSignOn:Show")}
+              ? t("Common:Hide")
+              : t("Common:Show")}
           </Link>
         </div>
         {showAdvancedSettings ? (
           <Text className={baseParamsStyles.fieldHint}>
-            {t("AISettings:MCPServerAdvancedSettingsHint")}
+            {t("Common:MCPServerAdvancedSettingsHint")}
           </Text>
         ) : null}
       </div>
@@ -147,7 +147,7 @@ export const useAdvancedSettings = (
             {Array.from({ length: headerCounts }).map((_, index) => (
               <React.Fragment key={`header-${index * 2}`}>
                 <FieldContainer
-                  labelText={t("AISettings:HeaderName")}
+                  labelText={t("Common:HeaderName")}
                   isVertical
                   removeMargin
                   labelVisible
@@ -155,16 +155,17 @@ export const useAdvancedSettings = (
                   <TextInput
                     type={InputType.text}
                     size={InputSize.base}
+                    name={`header_name_${index}`}
                     value={headerNames[index]}
                     onChange={(e) => onChangeHeaderName(index, e.target.value)}
-                    placeholder={t("AISettings:EnterLabel")}
+                    placeholder={t("Common:EnterLabel")}
                     scale
                     hasError={needReset && !headerNames[index] && index === 0}
                     testId="mcp-header-name-input"
                   />
                 </FieldContainer>
                 <FieldContainer
-                  labelText={t("AISettings:HeaderValue")}
+                  labelText={t("Common:HeaderValue")}
                   isVertical
                   removeMargin
                   labelVisible
@@ -172,9 +173,10 @@ export const useAdvancedSettings = (
                   <TextInput
                     type={InputType.text}
                     size={InputSize.base}
+                    name={`header_value_${index}`}
                     value={headerValues[index]}
                     onChange={(e) => onChangeHeaderValue(index, e.target.value)}
-                    placeholder={t("AISettings:EnterValue")}
+                    placeholder={t("Common:EnterValue")}
                     scale
                     hasError={needReset && !headerValues[index] && index === 0}
                     testId="mcp-header-value-input"
@@ -184,7 +186,7 @@ export const useAdvancedSettings = (
             ))}
           </div>
           <AddButton
-            label={t("AISettings:AddMoreHeaders")}
+            label={t("Common:AddMoreHeaders")}
             onClick={onAddNewHeader}
           />
         </div>

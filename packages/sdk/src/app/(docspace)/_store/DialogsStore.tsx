@@ -38,11 +38,38 @@
 import React from "react";
 import { makeAutoObservable } from "mobx";
 
-import { type SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
+import api from "@docspace/shared/api";
+import type { ICover } from "@docspace/ui-kit/components/room-logo-cover-dialog";
+import type { TCreatedBy } from "@docspace/shared/types";
+
+import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
+
+export type TEditableRoom = {
+  id: number;
+  title: string;
+  tags?: string[];
+  roomLogo?: string;
+  roomIconColor?: string;
+  roomCover?: ICover;
+  createdBy?: TCreatedBy;
+};
+
+/** Minimal room data needed for archive/delete confirmation dialogs. */
+export type TRoomTarget = {
+  id: number;
+  title: string;
+};
 
 class DialogsStore {
   // [[dialogName, visible]]
   dialogs = new Map<SDKDialogs, boolean>();
+
+  covers: ICover[] = [];
+  coversLoaded = false;
+
+  editingRoomData: TEditableRoom | null = null;
+  archivingRoomData: TRoomTarget | null = null;
+  deletingRoomData: TRoomTarget | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -58,6 +85,51 @@ class DialogsStore {
 
   isDialogOpen = (name: SDKDialogs) => {
     return this.dialogs.get(name) || false;
+  };
+
+  openEditRoomDialog = (room: TEditableRoom) => {
+    this.editingRoomData = room;
+    this.openDialog(SDKDialogs.EditRoom);
+  };
+
+  closeEditRoomDialog = () => {
+    this.closeDialog(SDKDialogs.EditRoom);
+    this.editingRoomData = null;
+  };
+
+  openArchiveRoomDialog = (room: TRoomTarget) => {
+    this.archivingRoomData = room;
+    this.openDialog(SDKDialogs.ArchiveRoom);
+  };
+
+  closeArchiveRoomDialog = () => {
+    this.closeDialog(SDKDialogs.ArchiveRoom);
+    this.archivingRoomData = null;
+  };
+
+  openDeleteRoomDialog = (room: TRoomTarget) => {
+    this.deletingRoomData = room;
+    this.openDialog(SDKDialogs.DeleteRoom);
+  };
+
+  closeDeleteRoomDialog = () => {
+    this.closeDialog(SDKDialogs.DeleteRoom);
+    this.deletingRoomData = null;
+  };
+
+  setCovers = (covers: ICover[]) => {
+    this.covers = covers;
+    this.coversLoaded = true;
+  };
+
+  getCovers = async () => {
+    if (this.coversLoaded) return;
+    try {
+      const res = (await api.rooms.getRoomCovers()) as ICover[];
+      this.setCovers(Array.isArray(res) ? res : []);
+    } catch {
+      // ignore
+    }
   };
 }
 

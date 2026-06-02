@@ -1,0 +1,38 @@
+{
+  "key_path": "AddMoreHeaders",
+  "content": "Add more headers",
+  "content_en_sha1_hash": "51e336dbcfd5dc44cff2e46f72aad0c09ced8287",
+  "created_at": "2025-10-27T16:14:31.646Z",
+  "updated_at": "2026-06-01T21:20:44.459Z",
+  "comment": {
+    "text": "This is a button label. It allows users to add more header fields to a list of AI server settings.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:03:08.393Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useAdvancedSettings.tsx",
+      "line_number": 189,
+      "context": "</FieldContainer>\n </React.Fragment>\n ))}\n </div>\n <AddButton\n label={t(\"Common:AddMoreHeaders\")}\n onClick={onAddNewHeader}\n />\n </div>\n ) : null}\n </>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/hooks/useAdvancedSettings.tsx",
+      "line_number": 178,
+      "context": "</FieldContainer>\n </React.Fragment>\n ))}\n </div>\n <AddButton\n label={t(\"Common:AddMoreHeaders\")}\n onClick={onAddNewHeader}\n />\n </div>\n ) : null}\n </>",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
+    }
+  }
+}

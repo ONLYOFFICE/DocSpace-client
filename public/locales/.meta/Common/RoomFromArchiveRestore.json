@@ -1,0 +1,41 @@
+{
+  "key_path": "RoomFromArchiveRestore",
+  "content": "Room recovered from {{sectionName}}",
+  "content_en_sha1_hash": "1c11c187e0180d5bc1d6bc5280e1c79c32f7ac71",
+  "created_at": "2025-06-02T10:19:22.204Z",
+  "updated_at": "2026-06-01T21:20:44.446Z",
+  "comment": {
+    "text": "This is a toast message displayed when a room is restored from the archive. `{{sectionName}}` will be replaced with the localized name of the \"Archive\" section.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:12:50.298Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 395,
+      "context": "case FeedActionKeys.RoomArchived:\n return t(\"Common:RoomToArchiveMove\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomUnarchived:\n return t(\"Common:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomIndexExportSaved:\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyDocuments\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
+      "line_number": 340,
+      "context": "case FeedActionKeys.RoomArchived:\n return t(\"Common:RoomToArchiveMove\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomUnarchived:\n return t(\"Common:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomIndexExportSaved:\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyDocuments\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
+      "line_number": 128,
+      "context": "case FeedActionKeys.RoomArchived:\n return t(\"Common:RoomToArchiveMove\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomUnarchived:\n return t(\"Common:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.AddedRoomTags:\n return t(\"Common:AddedRoomTags\");\n case FeedActionKeys.DeletedRoomTags:",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

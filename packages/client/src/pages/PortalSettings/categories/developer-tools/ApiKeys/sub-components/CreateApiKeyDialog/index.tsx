@@ -382,6 +382,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
           {t("Common:Label")}
         </Text>
         <TextInput
+          name="api_key_name"
           placeholder={t("Settings:NewSecretKey")}
           value={inputValue}
           type={InputType.text}
@@ -432,6 +433,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
             <div className="api-key_lifetime-input-block">
               <TextInput
                 className="api-key_lifetime-input"
+                name="key_lifetime_days"
                 value={expiresInDays}
                 type={InputType.text}
                 maxLength={6}

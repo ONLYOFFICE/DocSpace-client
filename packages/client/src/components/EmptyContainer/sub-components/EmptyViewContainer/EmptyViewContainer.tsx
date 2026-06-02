@@ -36,8 +36,12 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
+import { FolderType } from "@docspace/shared/enums";
+
+import SocialAuthWelcomePanel from "./SocialAuthWelcomePanel";
 
 import EmptyPrivateRoomView from "../../EmptyPrivateRoomView";
 
@@ -54,13 +58,53 @@ const EmptyViewContainer = observer((props: EmptyViewContainerProps) => {
     "Files",
     "Common",
     "Translations",
-    "AIRoom",
+    "SocialAuthWelcomeDialog",
   ]);
+
+  const navigate = useNavigate();
+
+  const {
+    isRootEmptyPage,
+    rootFolderType,
+    socialAuthWelcomeVisible,
+    onSocialAuthWelcomeClose,
+    tenantAlias,
+    baseDomain,
+    socialAuthUser,
+  } = props;
 
   const options = useOptions(props, t);
   const emptyViewOptions = useEmptyView(props, t);
 
-  const { description, title, icon } = emptyViewOptions;
+  const { description: baseDescription, title, icon } = emptyViewOptions;
+
+  const showSocialAuthBar =
+    isRootEmptyPage &&
+    rootFolderType === FolderType.Rooms &&
+    socialAuthWelcomeVisible;
+
+  const description = showSocialAuthBar
+    ? t("SocialAuthWelcomeDialog:WelcomeSubtitle")
+    : baseDescription;
+
+  const onChangeDomainClick = () => {
+    navigate("/portal-settings/customization/general#portal-renaming");
+  };
+
+  const onChangePasswordClick = () => {
+    navigate("/profile/login?changePassword=true");
+  };
+
+  const extraContent = showSocialAuthBar ? (
+    <SocialAuthWelcomePanel
+      onClose={onSocialAuthWelcomeClose}
+      tenantAlias={tenantAlias}
+      baseDomain={baseDomain}
+      user={socialAuthUser}
+      onChangeDomainClick={onChangeDomainClick}
+      onChangePasswordClick={onChangePasswordClick}
+    />
+  ) : null;
 
   if (props.selectedFolder?.private && !props.isFolder) {
     return <EmptyPrivateRoomView />;
@@ -72,6 +116,7 @@ const EmptyViewContainer = observer((props: EmptyViewContainerProps) => {
       title={title}
       options={options}
       description={description}
+      extraContent={extraContent}
     />
   );
 });
@@ -97,7 +142,8 @@ const InjectedEmptyViewContainer = inject<
   }): InjectedEmptyViewContainerProps => {
     const { isWarningRoomsDialog } = currentQuotaStore;
     const { isPublicRoom } = publicRoomStore;
-    const { isFrame, logoText, aiConfig, standalone } = settingsStore;
+    const { isFrame, logoText, aiConfig, standalone, tenantAlias, baseDomain } =
+      settingsStore;
 
     const { myFolderId, myFolder, roomsFolder } = treeFoldersStore;
 
@@ -119,6 +165,8 @@ const InjectedEmptyViewContainer = inject<
       setQuotaWarningDialogVisible,
       setSelectFileAiKnowledgeDialogVisible,
       setTemplateAccessSettingsVisible,
+      socialAuthWelcomeDialogVisible,
+      setSocialAuthWelcomeDialogVisible,
     } = dialogsStore;
 
     const {
@@ -163,8 +211,17 @@ const InjectedEmptyViewContainer = inject<
       isPortalAdmin: authStore.isAdmin,
       aiReady: aiConfig?.aiReady,
       standalone,
+      socialAuthWelcomeVisible: socialAuthWelcomeDialogVisible,
+      onSocialAuthWelcomeClose: () => {
+        localStorage.removeItem("socialAuthWelcomeBar");
+        setSocialAuthWelcomeDialogVisible(false);
+      },
+      tenantAlias,
+      baseDomain,
+      socialAuthUser: userStore?.user,
     };
   },
 )(EmptyViewContainer as React.FC<OutEmptyViewContainerProps>);
 
 export default InjectedEmptyViewContainer;
+

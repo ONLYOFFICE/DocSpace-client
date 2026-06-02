@@ -1,29 +1,14 @@
 {
-  "key_path": "SelectDOCXFormat",
-  "content": "Select .DOCX file",
-  "content_en_sha1_hash": "bff9ac62060c554eef777047f11e53f604167bf2",
-  "created_at": "2025-05-19T21:30:48.392Z",
-  "updated_at": "2026-05-15T14:00:06.607Z",
   "comment": {
     "text": "This text appears as a description or instruction within a file selection dialog, prompting the user to choose a .DOCX file.",
     "is_auto": true,
     "updated_at": "2026-04-11T20:43:42.056Z",
     "model": "google/gemini-2.5-flash"
   },
-  "usage": [
-    {
-      "file_path": "/packages/client/src/components/FilesPanels/index.js",
-      "line_number": 244,
-      "context": "setSelectFileAiKnowledgeDialogVisible(false);\n };\n \n const descriptionTextFileFormRoomDialog = useMemo(() => {\n const text = {\n [FilesSelectorFilterTypes.DOCX]: t(\"Common:SelectDOCXFormat\"),\n // [FilesSelectorFilterTypes.DOCXF]: t(\"Common:SelectDOCXFFormat\"),\n [FilesSelectorFilterTypes.PDF]: t(\"Common:SelectPDFFormat\"),\n [FilterType.PDFForm]: t(\"Common:SelectPDFFormat\"),\n };",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/FilesSelector/index.tsx",
-      "line_number": 510,
-      "context": "filterParam === \"ALL\" ||\n (filterParam as unknown as FilterType) !== FilterType.DocumentsOnly ||\n !descriptionText ||\n withoutDescriptionText\n ? \"\"\n : (descriptionText ?? t(\"Common:SelectDOCXFormat\"))\n }\n submitButtonId={\n isMove || isCopy || isRestore ? \"select-file-modal-submit\" : \"\"\n }\n cancelButtonId={",
-      "module": "/packages/client"
-    }
-  ],
+  "content": "Select .DOCX file",
+  "content_en_sha1_hash": "bff9ac62060c554eef777047f11e53f604167bf2",
+  "created_at": "2025-05-19T21:30:48.392Z",
+  "key_path": "SelectDOCXFormat",
   "languages": {
     "en": {
       "ai_translated": false,
@@ -217,5 +202,20 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     }
-  }
+  },
+  "updated_at": "2026-06-01T21:20:44.387Z",
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FilesPanels/index.js",
+      "line_number": 242,
+      "context": "setSelectFileAiKnowledgeDialogVisible(false);\n };\n \n const descriptionTextFileFormRoomDialog = useMemo(() => {\n const text = {\n [FilesSelectorFilterTypes.DOCX]: t(\"Common:SelectDOCXFormat\"),\n // [FilesSelectorFilterTypes.DOCXF]: t(\"Common:SelectDOCXFFormat\"),\n [FilesSelectorFilterTypes.PDF]: t(\"Common:SelectPDFFormat\"),\n [FilterType.PDFForm]: t(\"Common:SelectPDFFormat\"),\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/FilesSelector/index.tsx",
+      "line_number": 583,
+      "context": "filterParam === \"ALL\" ||\n (filterParam as unknown as FilterType) !== FilterType.DocumentsOnly ||\n !descriptionText ||\n withoutDescriptionText\n ? \"\"\n : (descriptionText ?? t(\"Common:SelectDOCXFormat\"))\n }\n submitButtonId={\n isMove || isCopy || isRestore ? \"select-file-modal-submit\" : \"\"\n }\n cancelButtonId={",
+      "module": "/packages/client"
+    }
+  ]
 }

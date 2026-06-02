@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { EmptyView as EmptyViewComponent } from "@docspace/shared/components/empty-view";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { frameCallEvent } from "@docspace/shared/utils/common";
 
 import ClearEmptyFilterSvg from "PUBLIC_DIR/images/clear.empty.filter.svg";
 
@@ -25,23 +26,27 @@ const EmptyView = ({
 }: EmptyViewProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const isRoot = current.parentId === current.rootFolderId;
+  const isRoot =
+    current.id === current.rootFolderId ||
+    current.parentId === current.rootFolderId;
   const { isBase: isBaseTheme } = useTheme();
+
+  const rootFolderType = current.rootFolderType;
 
   const title = isFiltered
     ? t("Common:NoFindingsFound")
     : isRoot
-      ? getRootTitle(t)
+      ? getRootTitle(t, rootFolderType)
       : getTitle(t);
   const description = isFiltered
     ? t("Common:EmptyFilterFilesDescription")
     : isRoot
-      ? getRootDescription(t)
+      ? getRootDescription(t, rootFolderType)
       : getDescription(t);
   const icon = isFiltered
     ? getFilterIcon(isBaseTheme)
     : isRoot
-      ? getRootIcon(isBaseTheme)
+      ? getRootIcon(isBaseTheme, rootFolderType)
       : getIcon(isBaseTheme);
 
   const onResetFilter = (
@@ -55,6 +60,8 @@ const EmptyView = ({
     defaultFilter.key = shareKey ?? "";
 
     window.history.pushState(null, "", `?${defaultFilter.toUrlParams()}`);
+
+    frameCallEvent({ event: "onFilterSearch", data: { search: "" } });
   };
 
   const filterOptions = [

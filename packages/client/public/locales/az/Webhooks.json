@@ -1,7 +1,7 @@
 {
-  "AgentCreated": "AI Agent yaradıldı",
-  "AgentDeleted": "AI Agent silinmiş",
-  "AgentUpdated": "AI Agent yeniləndi",
+  "AgentCreated": "AI agent yaradıldı",
+  "AgentDeleted": "AI agent silinmiş",
+  "AgentUpdated": "AI agent yeniləndi",
   "Before": "Əvvəl",
   "CreateWebhook": "Webhook yaradın",
   "DeleteHint": "Webhook həmişəlik silinəcək.\nBu əməliyyatı geri qaytara bilməzsiniz.",
@@ -57,7 +57,6 @@
   "RequestHeaderCopied": "POST sorğu başlığı mübadilə buferinə uğurla nüsxələndi",
   "RequestPostBody": "POST sorğu mətni",
   "RequestPostHeader": "POST sorğu başlığı",
-  "ResetKey": "Sıfırlama açarı",
   "Response": "Cavab",
   "ResponseBodyCopied": "POST cavab mətni mübadilə buferinə uğurla kopyalandı",
   "ResponseHeaderCopied": "POST cavab başlığı mübadilə buferinə uğurla nüsxələndi",

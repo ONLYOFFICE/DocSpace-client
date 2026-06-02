@@ -1,35 +1,14 @@
 {
-  "key_path": "PortalNameLength",
-  "content": "The account name must be between {{minLength}} and {{maxLength}} characters long",
-  "content_en_sha1_hash": "fc3643edea764dc1006d640f4f99f132b319f558",
-  "created_at": "2025-05-26T07:15:46.250Z",
-  "updated_at": "2026-05-15T14:00:06.772Z",
   "comment": {
     "text": "This is an error message displayed when a user attempts to rename their portal to a name that is too short or too long. It informs the user about the required minimum ({{minLength}}) and maximum ({{maxLength}}) character limits for the portal name.",
     "is_auto": true,
     "updated_at": "2026-04-11T20:46:16.418Z",
     "model": "google/gemini-2.5-flash"
   },
-  "usage": [
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 258,
-      "context": "saveToSessionStorage(\"errorValue\", t(\"PortalNameEmpty\"));\n break;\n case value.length < domainValidator.minLength ||\n value.length > domainValidator.maxLength:\n setErrorValue(\n t(\"PortalNameLength\", {\n minLength: domainValidator.minLength,\n maxLength: domainValidator.maxLength,\n }),\n );\n saveToSessionStorage(",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 258,
-      "context": "saveToSessionStorage(\"errorValue\", t(\"PortalNameEmpty\"));\n break;\n case value.length < domainValidator.minLength ||\n value.length > domainValidator.maxLength:\n setErrorValue(\n t(\"PortalNameLength\", {\n minLength: domainValidator.minLength,\n maxLength: domainValidator.maxLength,\n }),\n );\n saveToSessionStorage(",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 229,
-      "context": "case value === \"\":\n return setError(t(\"Common:PortalNameEmpty\"));\n case value.length < nameValidator.minLength ||\n value.length > nameValidator.maxLength:\n return setError(\n t(\"Common:PortalNameLength\", {\n minLength: nameValidator.minLength.toString(),\n maxLength: nameValidator.maxLength.toString(),\n }),\n );\n case !validName.test(value):",
-      "module": "/packages/shared"
-    }
-  ],
+  "content": "The account name must be between {{minLength}} and {{maxLength}} characters long",
+  "content_en_sha1_hash": "fc3643edea764dc1006d640f4f99f132b319f558",
+  "created_at": "2025-05-26T07:15:46.250Z",
+  "key_path": "PortalNameLength",
   "languages": {
     "en": {
       "ai_translated": false,
@@ -223,5 +202,26 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     }
-  }
+  },
+  "updated_at": "2026-06-01T21:20:44.461Z",
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
+      "line_number": 287,
+      "context": "saveToSessionStorage(\"errorValue\", t(\"PortalNameEmpty\"));\n break;\n case value.length < domainValidator.minLength ||\n value.length > domainValidator.maxLength:\n setErrorValue(\n t(\"PortalNameLength\", {\n minLength: domainValidator.minLength,\n maxLength: domainValidator.maxLength,\n }),\n );\n saveToSessionStorage(",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
+      "line_number": 287,
+      "context": "saveToSessionStorage(\"errorValue\", t(\"PortalNameEmpty\"));\n break;\n case value.length < domainValidator.minLength ||\n value.length > domainValidator.maxLength:\n setErrorValue(\n t(\"PortalNameLength\", {\n minLength: domainValidator.minLength,\n maxLength: domainValidator.maxLength,\n }),\n );\n saveToSessionStorage(",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/utils/common.tsx",
+      "line_number": 230,
+      "context": "case value === \"\":\n return setError(t(\"Common:PortalNameEmpty\"));\n case value.length < nameValidator.minLength ||\n value.length > nameValidator.maxLength:\n return setError(\n t(\"Common:PortalNameLength\", {\n minLength: nameValidator.minLength.toString(),\n maxLength: nameValidator.maxLength.toString(),\n }),\n );\n case !validName.test(value):",
+      "module": "/packages/shared"
+    }
+  ]
 }

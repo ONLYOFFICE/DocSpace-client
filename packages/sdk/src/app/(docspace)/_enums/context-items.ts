@@ -1,6 +1,7 @@
 export enum AVAILABLE_CONTEXT_ITEMS {
   select = "select",
   open = "open",
+  openLocation = "open-location",
   openPDF = "open-pdf",
   fillForm = "fill-form",
   edit = "edit",
@@ -14,7 +15,12 @@ export enum AVAILABLE_CONTEXT_ITEMS {
   markAsFavorite = "mark-as-favorite",
   removeFromFavorites = "remove-from-favorites",
   removeFromRecent = "remove-from-recent",
+  removeFromSharedWithMe = "remove-from-shared-with-me",
   share = "share",
+  showInfo = "show-info",
+  showVersionHistory = "show-version-history",
+  blockUnblockVersion = "block-unblock-version",
+  customFilter = "custom-filter",
   copy = "copy",
   duplicate = "duplicate",
   moveTo = "move-to",
@@ -22,4 +28,5 @@ export enum AVAILABLE_CONTEXT_ITEMS {
   deletePermanently = "delete-permanently",
   restore = "restore",
   rename = "rename",
+  vectorization = "vectorization",
 }

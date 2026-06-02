@@ -21,42 +21,6 @@
   align-self: stretch;
 }
 
-.burgerButton {
-  display: none;
-  flex: 0 0 auto;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  border: none;
-  background: transparent;
-  color: var(--text-primary);
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  margin-inline-start: -8px;
-
-  &:hover,
-  &:focus-visible {
-    background-color: var(--color-background-hover);
-    outline: none;
-  }
-
-  .burgerIcon {
-    display: block;
-    width: 20px;
-    height: 20px;
-
-    path {
-      fill: currentColor;
-    }
-  }
-
-  @include mixins.mobile {
-    display: inline-flex;
-  }
-}
-
 .headerNavigation {
   flex: 1;
   min-width: 0;
@@ -185,4 +149,11 @@
   @include mixins.mobile {
     inset-inline-end: 16px;
   }
+}
+
+.quickActions {
+  margin: 0 auto 16px;
+  justify-content: center;
+  max-width: 736px; // 4 tiles * 172px + 3 gaps * 16px
+  width: 100%;
 }

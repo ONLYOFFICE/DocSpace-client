@@ -3,7 +3,7 @@
   "content": "Data import",
   "content_en_sha1_hash": "783af5b205a3e0c3c3b5feadf95d2a786442a1fe",
   "created_at": "2025-05-19T21:30:51.050Z",
-  "updated_at": "2026-05-15T15:37:40.227Z",
+  "updated_at": "2026-06-01T21:20:44.453Z",
   "comment": {
     "text": "This is a section title in the portal settings, referring to the functionality of importing data into DocSpace.",
     "is_auto": true,
@@ -43,14 +43,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 240,
+      "line_number": 244,
       "context": "return t(\"PortalDeletion\", { productName: getBrandName(\"ProductName\") });\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");\n case \"Common:FreeAccessToLicensedVersion\":\n return \"Common:FreeAccessToLicensedVersion\";\n case \"DataImport\":\n return t(\"DataImport\");\n case \"StorageManagement\":\n return t(\"StorageManagement\");\n case \"Services\":\n return t(\"Services\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 316,
-      "context": "? t(\"ImportFromNextcloud\")\n : workspace === \"Workspace\"\n ? t(\"ImportFromPortal\", {\n organizationName: logoText,\n })\n : t(\"DataImport\")\n : !standalone && isPaymentPage\n ? t(\"Common:Billing\")\n // biome-ignore lint/plugin/no-dynamic-i18n-key: header is passed from route config; underlying keys are declared as literals at callsites\n : t(header, {\n organizationName: logoText,",
+      "line_number": 321,
+      "context": "? t(\"ImportFromNextcloud\")\n : workspace === \"Workspace\"\n ? t(\"ImportFromPortal\", {\n organizationName: logoText,\n })\n : t(\"DataImport\")\n : !standalone && isPaymentPage\n ? t(\"Common:Billing\")\n : // biome-ignore lint/plugin/no-dynamic-i18n-key: header is passed from route config; underlying keys are declared as literals at callsites\n t(header, {\n organizationName: logoText,",
       "module": "/packages/client"
     },
     {

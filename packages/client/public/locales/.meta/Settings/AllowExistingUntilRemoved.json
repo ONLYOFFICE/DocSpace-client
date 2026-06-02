@@ -1,0 +1,29 @@
+{
+  "key_path": "AllowExistingUntilRemoved",
+  "content": "Allow existing links until removed",
+  "content_en_sha1_hash": "be089a638844b81efe291eb624c11f14e6143009",
+  "created_at": "2026-06-02T08:43:23.439Z",
+  "updated_at": "2026-06-02T08:54:27.697Z",
+  "comment": {
+    "text": "A label for a configuration setting in the Portal Settings security section that determines if previously created links remain active until manually deleted.",
+    "is_auto": true,
+    "updated_at": "2026-06-02T08:54:27.697Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
+      "line_number": 288,
+      "context": "value: \"true\",\n dataTestId: \"links_block_access\",\n },\n {\n id: \"links-allow-existing\",\n label: t(\"Settings:AllowExistingUntilRemoved\"),\n value: \"false\",\n dataTestId: \"links_allow_existing\",\n },\n ],\n [t],",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

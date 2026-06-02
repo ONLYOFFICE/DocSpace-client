@@ -3,7 +3,7 @@
   "content": "Brute Force Protection",
   "content_en_sha1_hash": "ad05e298131255f6f589995a3c3f681dfa43a007",
   "created_at": "2025-05-19T21:30:50.820Z",
-  "updated_at": "2026-05-15T14:00:06.866Z",
+  "updated_at": "2026-06-02T08:43:27.532Z",
   "comment": {
     "text": "This is a section title in the portal settings, referring to a security feature that prevents automated attempts to guess login credentials.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 319,
+      "line_number": 326,
       "context": "<IpSecuritySection />\n \n <StyledSettingsSeparator />\n \n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"BruteForceProtection\")}\n </Text>\n \n <BruteForceProtectionSection />\n \n <StyledSettingsSeparator />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 127,
+      "line_number": 135,
       "context": "}\n url=\"/portal-settings/security/access-portal/ip\"\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"BruteForceProtection\")}\n subtitle={t(\"BruteForceProtectionDescriptionMobile\")}\n url=\"/portal-settings/security/access-portal/brute-force-protection\"\n onClickLink={onClickLink}\n />\n <CategoryItem",
       "module": "/packages/client"
     },

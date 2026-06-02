@@ -3,7 +3,7 @@
   "content": "Edit",
   "content_en_sha1_hash": "5301648dcf6b53cefc9ed52999aaa92d4603cae0",
   "created_at": "2025-05-19T21:30:44.738Z",
-  "updated_at": "2026-06-01T21:20:44.418Z",
+  "updated_at": "2026-06-02T08:43:27.478Z",
   "comment": {
     "text": "This is a button label. It allows users to edit settings, such as auto-payments or submission configurations.",
     "is_auto": true,
@@ -30,12 +30,6 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Dashboard/sub-components/ProfileCard.tsx",
-      "line_number": 128,
-      "context": "<IconButton\n className={styles.profileCardEdit}\n iconName={PencilReactSvgUrl}\n size={12}\n onClick={handleEditPortalName}\n title={t(\"Common:EditButton\")}\n />\n </span>\n </div>\n \n <div className={styles.profileCardField}>",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/CommentEditor.tsx",
       "line_number": 149,
       "context": "onClick={onOpenEditor}\n data-testid=\"info_panel_details_comment_edit_toggle\"\n >\n <ReactSVG className=\"edit_toggle-icon\" src={PencilReactSvgUrl} />\n <div className=\"property-content edit_toggle-text\">\n {comment ? t(\"Common:EditButton\") : t(\"Common:AddButton\")}\n </div>\n </div>\n ) : null}\n </div>\n ) : (",
@@ -43,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 812,
+      "line_number": 810,
       "context": "testId=\"appearance_save_button\"\n />\n \n <Button\n className=\"edit-current-theme button\"\n label={t(\"Common:EditButton\")}\n onClick={onClickEdit}\n size={buttonSize}\n isDisabled={isDisabledEditButton}\n testId=\"appearance_edit_button\"\n />",
       "module": "/packages/client"
     },
@@ -67,13 +61,13 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2254,
+      "line_number": 2249,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-pdf\",\n key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2254,
+      "line_number": 2249,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-pdf\",\n key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;",
       "module": "/packages/client"
     },
@@ -91,7 +85,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 236,
+      "line_number": 192,
       "context": "const getEditItem = useCallback(\n (i: TFileItem) => {\n return {\n id: \"option_edit\",\n key: \"edit\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n const isPdf = i.fileExst === \".pdf\";\n if (isPdf && isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));",
       "module": "/packages/sdk"
     },

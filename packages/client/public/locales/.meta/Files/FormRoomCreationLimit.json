@@ -3,7 +3,7 @@
   "content": "Creation based on several files and folders is not available for this type of room. To create such a room, go to the {{sectionName}} section or use one of the PDF forms.",
   "content_en_sha1_hash": "04390f074403148046bbe6a9ceb367130918e5f4",
   "created_at": "2025-06-02T10:19:22.921Z",
-  "updated_at": "2026-05-15T14:00:06.660Z",
+  "updated_at": "2026-06-02T08:43:27.467Z",
   "comment": {
     "text": "This is a tooltip that appears when a user tries to create a room based on multiple files/folders, but the selected room type doesn't support it. It informs the user about alternative methods, with `{{sectionName}}` being a placeholder for the name of a section in the application.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/RoomTypeList/index.tsx",
-      "line_number": 71,
-      "context": "}\n \n setRoomType(roomType);\n };\n \n const tooltipContent = t(\"Files:FormRoomCreationLimit\", {\n sectionName: t(\"Common:Rooms\"),\n });\n \n return (\n <div className={styles.roomTypeList}>",
+      "line_number": 75,
+      "context": "}\n \n setRoomType(roomType);\n };\n \n const formRoomTooltipContent = t(\"Files:FormRoomCreationLimit\", {\n sectionName: t(\"Common:Rooms\"),\n });\n \n const publicRoomTooltipContent = t(\"Common:PublicRoomCreationDisabled\");",
       "module": "/packages/client"
     }
   ],

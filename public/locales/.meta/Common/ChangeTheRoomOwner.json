@@ -1,27 +1,33 @@
 {
-  "key_path": "ChangeTheRoomOwner",
-  "content": "Change the Room Owner",
-  "content_en_sha1_hash": "02a0f3d75f6449e5611f36f91216cb8be76a6efe",
-  "created_at": "2025-05-19T21:30:55.324Z",
-  "updated_at": "2026-05-24T17:27:49.101Z",
+  "key_path": "LeaveTheRoom",
+  "content": "Leave the room",
+  "content_en_sha1_hash": "0494f65ff12e4895fbbc91bd002080a4361c346d",
+  "created_at": "2025-05-19T21:30:55.737Z",
+  "updated_at": "2026-06-02T08:43:27.477Z",
   "comment": {
-    "text": "This is a dialog title or header label for a panel that allows changing the owner of a room. It appears when a user initiates the process of transferring room ownership.",
+    "text": "This is a button label or menu item. It allows a user to exit a room they are currently in.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:10:19.286Z",
+    "updated_at": "2026-04-11T21:09:19.852Z",
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 197,
-      "context": "const ownerIsCurrentUser = roomOwnerId === userId;\n \n const headerLabel = isAIAgent\n ? t(\"Files:ChangeTheAgentOwner\")\n : t(\"Common:ChangeTheRoomOwner\");\n \n const infoText = isAIAgent\n ? t(\"Files:ChangeAgentOwnerSelectorInfo\", {\n productName: getBrandName(\"ProductName\"),\n })",
+      "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
+      "line_number": 88,
+      "context": "};\n }, []);\n \n const titleText = isAIAgent\n ? t(\"Files:LeaveTheAgent\")\n : t(\"Files:LeaveTheRoom\");\n \n const roomDescription = isRoomOwner\n ? t(\"Files:LeaveRoomDescription\")\n : t(\"Files:WantLeaveRoom\");",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/sdk/src/app/(rooms)/_components/change-room-owner-dialog/index.tsx",
-      "line_number": 77,
-      "context": "[],\n );\n \n const ownerIsCurrentUser = !!currentUserId && roomOwnerId === currentUserId;\n \n const headerLabel = t(\"Common:ChangeTheRoomOwner\");\n const infoText = t(\"Common:PeopleSelectorInfo\", {\n productName: getBrandName(\"ProductName\"),\n });\n \n const onSubmit: TOnSubmit = async (users, _access, _name, isLeaveChecked) => {",
-      "module": "/packages/sdk"
+      "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
+      "line_number": 114,
+      "context": "productName: getBrandName(\"ProductName\"),\n });\n \n const footerCheckboxLabel = isAIAgent\n ? t(\"Files:LeaveTheAgent\")\n : t(\"Files:LeaveTheRoom\");\n \n const selectorComponent = (\n <PeopleSelector\n withCancelButton\n onCancel={handleClosePanel}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2780,
+      "context": "disabled: !isAIAgent,\n },\n {\n id: \"option_leave-room\",\n key: \"leave-room\",\n label: isAIAgent ? t(\"LeaveTheAgent\") : t(\"LeaveTheRoom\"),\n icon: LeaveRoomSvgUrl,\n onClick: this.onLeaveRoom,\n disabled: isKnowledgeOrResult\n ? false\n : isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),",
+      "module": "/packages/client"
     }
   ],
   "languages": {

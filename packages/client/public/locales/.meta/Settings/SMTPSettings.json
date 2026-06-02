@@ -3,7 +3,7 @@
   "content": "SMTP Settings",
   "content_en_sha1_hash": "52ff101f3a7156bd8a868fbddda28dc2f4dfb972",
   "created_at": "2025-05-19T21:30:52.745Z",
-  "updated_at": "2026-05-15T14:00:06.853Z",
+  "updated_at": "2026-06-02T08:43:27.526Z",
   "comment": {
     "text": "This is a section title within the portal settings, referring to the configuration options for Simple Mail Transfer Protocol.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 430,
+      "line_number": 437,
       "context": "{\n id: \"portal-settings_catalog-smtp-settings\",\n key: \"4-5\",\n icon: \"\",\n link: \"smtp-settings\",\n tKey: \"SMTPSettings\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-ai-settings\",\n key: \"4-6\",",
       "module": "/packages/client"
     }

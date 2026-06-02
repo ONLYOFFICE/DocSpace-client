@@ -293,6 +293,19 @@ const PortalSettingsRoutes = {
       },
     },
     {
+      path: "security/access-portal/access-control",
+      async lazy() {
+        const { AccessControlSection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/accessControl"
+            ),
+        );
+
+        return { Component: AccessControlSection };
+      },
+    },
+    {
       path: "security/access-portal/access-dev-tools",
       async lazy() {
         const { DevToolsAccessSection } = await componentLoader(

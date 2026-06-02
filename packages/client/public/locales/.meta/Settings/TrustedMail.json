@@ -3,7 +3,7 @@
   "content": "Trusted mail domain settings",
   "content_en_sha1_hash": "cad01243d98a7420bb73d72774f75a5a0388682f",
   "created_at": "2025-05-19T21:30:52.982Z",
-  "updated_at": "2026-05-15T14:00:06.866Z",
+  "updated_at": "2026-06-02T08:43:27.531Z",
   "comment": {
     "text": "This is a section title in the portal settings, referring to the configuration options for trusted email domains.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 94,
+      "line_number": 95,
       "context": "const [isTrustedMailLoaded, setTrustedMailLoaded] = useState(false);\n \n const onSettingsSkeletonNotShown = (setting) => {\n if (setting === \"PasswordStrength\") setPasswordStrengthLoaded(true);\n if (setting === \"Tfa\") setTfaLoaded(true);\n if (setting === \"TrustedMail\") setTrustedMailLoaded(true);\n };\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: getBrandName(\"ProductName\") }),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 86,
+      "line_number": 94,
       "context": "}\n url=\"/portal-settings/security/access-portal/tfa\"\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"TrustedMail\")}\n subtitle={\n <Trans i18nKey=\"TrustedMailMobileDescription\" ns=\"Settings\" t={t} />\n }\n url=\"/portal-settings/security/access-portal/trusted-mail\"\n onClickLink={onClickLink}",
       "module": "/packages/client"
     },

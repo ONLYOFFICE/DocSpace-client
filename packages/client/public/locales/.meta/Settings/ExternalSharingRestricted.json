@@ -1,0 +1,29 @@
+{
+  "key_path": "ExternalSharingRestricted",
+  "content": "Restricted ({{productName}} users only)",
+  "content_en_sha1_hash": "14c3d80248e33c7d185c673e8a9db8a8feeeb1ca",
+  "created_at": "2026-06-02T08:43:23.386Z",
+  "updated_at": "2026-06-02T08:46:37.575Z",
+  "comment": {
+    "text": "Label for a security setting option in the Portal Settings, indicating that sharing is limited to users of the specified {{productName}}.",
+    "is_auto": true,
+    "updated_at": "2026-06-02T08:46:37.575Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
+      "line_number": 248,
+      "context": "value: \"true\",\n dataTestId: \"external_sharing_allowed\",\n },\n {\n id: \"external-sharing-restricted\",\n label: t(\"Settings:ExternalSharingRestricted\", {\n productName: getBrandName(\"ProductName\"),\n }),\n value: \"false\",\n dataTestId: \"external_sharing_restricted\",\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

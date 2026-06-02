@@ -3,7 +3,7 @@
   "content": "Link successfully created and copied to clipboard",
   "content_en_sha1_hash": "e2f282155a04f8b128e934a7c3ee95e5dd9cf092",
   "created_at": "2025-05-19T21:30:55.795Z",
-  "updated_at": "2026-05-28T15:46:18.573Z",
+  "updated_at": "2026-06-02T08:43:27.492Z",
   "comment": {
     "text": "This is a toast message confirming that a shareable link has been generated and copied to the user's clipboard. It appears after a user creates a new share link for a file or folder.",
     "is_auto": true,
@@ -13,14 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.tsx",
-      "line_number": 147,
-      "context": "const shareLink = typeLink.sharedTo.shareLink;\n \n copyShareLink(shareLink);\n \n toastr.success(t(\"Files:LinkSuccessfullyCreatedAndCopied\"));\n });\n }\n };\n \n const onOpenAccessSettings = () => {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 635,
-      "context": "if (primaryLink) {\n copyShareLink(item, primaryLink, t, this.getManageLinkOptions(item));\n // copyShareLink(primaryLink.sharedTo.shareLink);\n // item.shared\n //   ? toastr.success(t(\"Common:LinkSuccessfullyCopied\"))\n //   : toastr.success(t(\"Files:LinkSuccessfullyCreatedAndCopied\"));\n \n this.publicRoomStore.setExternalLink(primaryLink);\n \n if (item.isRoom || !item.isFolder) {\n window.dataLayer = window.dataLayer || [];",
+      "line_number": 146,
+      "context": "})\n : await getPrimaryLink!(roomId);\n \n setExternalLink!(link);\n copyShareLink(link.sharedTo.shareLink);\n toastr.success(t(\"Files:LinkSuccessfullyCreatedAndCopied\"));\n }\n } catch (error) {\n toastr.error(error as Error);\n console.error(error);\n }",
       "module": "/packages/client"
     }
   ],

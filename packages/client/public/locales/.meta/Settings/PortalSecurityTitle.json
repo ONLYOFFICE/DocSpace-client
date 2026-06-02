@@ -3,7 +3,7 @@
   "content": "This subsection allows you to provide users with secure and convenient ways to access the portal.",
   "content_en_sha1_hash": "0f3b230f6983fda1db2a358a7aa46ce3c5840a0f",
   "created_at": "2025-05-19T21:30:52.300Z",
-  "updated_at": "2026-05-15T14:00:06.865Z",
+  "updated_at": "2026-06-02T08:43:27.531Z",
   "comment": {
     "text": "This is a subtitle for the \"Security\" section of the portal settings, introducing options related to user access.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 150,
-      "context": "return (\n <MainContainer\n className=\"desktop-view\"\n withoutExternalLink={!helpCenterDomain}\n >\n <Text className=\"subtitle\">{t(\"PortalSecurityTitle\")}</Text>\n \n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"SettingPasswordTittle\")}\n </Text>",
+      "line_number": 151,
+      "context": "return (\n <MainContainer\n className=\"desktop-view\"\n withoutExternalLink={!helpCenterDomain}\n >\n <Text className=\"subtitle\">{t(\"PortalSecurityTitle\")}</Text>\n \n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"Settings:AccessControl\")}\n </Text>\n <AccessControlSection />",
       "module": "/packages/client"
     }
   ],

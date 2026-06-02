@@ -3,7 +3,7 @@
   "content": "Enter the amount you want to add to your credits balance. On the next step, you'll be asked to attach a payment method securely via Stripe.",
   "content_en_sha1_hash": "0d176424c79bb935ff4108f3f577eede57ada9eb",
   "created_at": "2026-05-27T14:11:43.026Z",
-  "updated_at": "2026-05-27T14:13:52.467Z",
+  "updated_at": "2026-06-02T08:43:27.584Z",
   "comment": {
     "text": "Description text in a modal dialog for adding credits, explaining the process and the upcoming Stripe payment step.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/top-up-balance/FirstTopUpDialog.tsx",
-      "line_number": 205,
+      "line_number": 198,
       "context": "<ModalDialog.Header>{t(\"TopUpCredits\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.body}>\n <Text className={styles.description}>\n {t(\"TopUpCreditsDescription\")}\n </Text>\n \n <Amount\n formatWalletCurrency={formatWalletCurrency}\n isDisabled={isLoading}",
       "module": "/libs/ui-kit"
     }

@@ -3,7 +3,7 @@
   "content": "Configure the invitation options for internal members and external guests of your {{productName}}. These settings can help you comply with your company's security guidelines, for example, if you use LDAP or other user management systems.",
   "content_en_sha1_hash": "679bd3552b0cd51701c408c4776d782a843309fd",
   "created_at": "2025-05-26T07:15:51.088Z",
-  "updated_at": "2026-05-15T14:00:06.866Z",
+  "updated_at": "2026-06-02T08:43:27.532Z",
   "comment": {
     "text": "This is a descriptive text explaining the purpose of the \"Invitation Settings\" section. It appears below the section title and describes how to configure invitation options for internal and external users, mentioning security compliance. The `{{productName}}` variable will be replaced with the actual product name (e.g., ONLYOFFICE DocSpace).",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 269,
+      "line_number": 276,
       "context": "<Text fontSize=\"16px\" fontWeight=\"700\" ref={invitationSettingsRef}>\n {t(\"InvitationSettings\")}\n </Text>\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"InvitationSettingsDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n \n {invitationSettingsUrl ? (",
       "module": "/packages/client"
     },

@@ -3,7 +3,7 @@
   "content": "Enable two-factor authentication for a more secure {{productName}} access for users.",
   "content_en_sha1_hash": "6ce1a1af78378b2613e5ff44bb9f6cce9bf8079c",
   "created_at": "2025-05-19T21:30:53.013Z",
-  "updated_at": "2026-05-15T14:00:06.866Z",
+  "updated_at": "2026-06-02T08:43:27.531Z",
   "comment": {
     "text": "This is a descriptive text explaining the purpose of two-factor authentication. It appears below the \"Two-Factor Authentication\" heading in the security settings and includes the variable `{{productName}}` which will be replaced with \"ONLYOFFICE DocSpace\".",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 185,
+      "line_number": 192,
       "context": "{t(\"TwoFactorAuth\")}\n </Text>\n \n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"TwoFactorAuthEnableDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n <Trans t={t} i18nKey=\"TwoFactorAuthSave\" />",
       "module": "/packages/client"
     },

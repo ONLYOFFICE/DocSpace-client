@@ -3,7 +3,7 @@
   "content": "To protect the portal against brute-force attacks, you can set up the limits of unsuccessful login attempts by the user.",
   "content_en_sha1_hash": "df581d5d7ed874eec5e55be026d206a447996258",
   "created_at": "2025-05-19T21:30:50.835Z",
-  "updated_at": "2026-05-15T14:00:06.869Z",
+  "updated_at": "2026-06-02T08:43:27.534Z",
   "comment": {
     "text": "This is a subtitle for a settings category item. It describes the purpose of the \"Brute-Force Protection\" setting, explaining that it allows users to configure limits for failed login attempts to enhance portal security.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 128,
+      "line_number": 136,
       "context": "url=\"/portal-settings/security/access-portal/ip\"\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"BruteForceProtection\")}\n subtitle={t(\"BruteForceProtectionDescriptionMobile\")}\n url=\"/portal-settings/security/access-portal/brute-force-protection\"\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"AdminsMessage\")}",
       "module": "/packages/client"
     }

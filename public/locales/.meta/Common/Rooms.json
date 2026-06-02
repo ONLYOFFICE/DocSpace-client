@@ -3,7 +3,7 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:48.236Z",
-  "updated_at": "2026-06-01T21:20:44.380Z",
+  "updated_at": "2026-06-02T08:43:27.444Z",
   "comment": {
     "text": "This is a label for a section or category within the file selector, representing a collection of collaborative workspaces.",
     "is_auto": true,
@@ -31,14 +31,14 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/RoomTypeList/index.tsx",
-      "line_number": 72,
-      "context": "setRoomType(roomType);\n };\n \n const tooltipContent = t(\"Files:FormRoomCreationLimit\", {\n sectionName: t(\"Common:Rooms\"),\n });\n \n return (\n <div className={styles.roomTypeList}>\n {RoomsTypeValues.map((roomType) => {",
+      "line_number": 76,
+      "context": "setRoomType(roomType);\n };\n \n const formRoomTooltipContent = t(\"Files:FormRoomCreationLimit\", {\n sectionName: t(\"Common:Rooms\"),\n });\n \n const publicRoomTooltipContent = t(\"Common:PublicRoomCreationDisabled\");\n \n return (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Progress.js",
-      "line_number": 122,
-      "context": "<div className={styles.progress}>\n <div className=\"data-start\"> {reassigningDataStart}</div>\n <div className=\"progress-container\">\n <div className=\"progress-section\">\n {!noRooms ? (\n <Text className=\"progress-section-text\">{t(\"Common:Rooms\")}</Text>\n ) : null}\n {noRoomFilesToMove ? null : (\n <Text className=\"progress-section-text\">\n {t(\"Common:Documents\")}\n </Text>",
+      "line_number": 211,
+      "context": "<StyledProgress>\n <div className=\"data-start\"> {reassigningDataStart}</div>\n <div className=\"progress-container\">\n <div className=\"progress-section\">\n {!noRooms ? (\n <Text className=\"progress-section-text\">{t(\"Common:Rooms\")}</Text>\n ) : null}\n {noRoomFilesToMove ? null : (\n <Text className=\"progress-section-text\">\n {t(\"Common:Documents\")}\n </Text>",
       "module": "/packages/client"
     },
     {
@@ -97,14 +97,26 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 271,
+      "line_number": 277,
       "context": "sectionName: t(\"Common:Common\"),\n workspace: serviceName,\n sectionIcon: PortfolioIcon,\n }}\n importSection={{\n sectionName: t(\"Common:Rooms\"),\n workspace: getBrandName(\"ProductName\"),\n sectionIcon: RoomsIcon,\n }}\n isDisabled={false}\n dataTestId=\"import_common_files_section\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 271,
+      "line_number": 277,
       "context": "sectionName: t(\"Common:Common\"),\n workspace: serviceName,\n sectionIcon: PortfolioIcon,\n }}\n importSection={{\n sectionName: t(\"Common:Rooms\"),\n workspace: getBrandName(\"ProductName\"),\n sectionIcon: RoomsIcon,\n }}\n isDisabled={false}\n dataTestId=\"import_common_files_section\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
+      "line_number": 404,
+      "context": "<Checkbox\n dataTestId=\"applies_to_rooms_checkbox\"\n isChecked={applyToRooms}\n onChange={() => setApplyToRooms(!applyToRooms)}\n label={t(\"Settings:AppliesToRooms\", {\n rooms: t(\"Common:Rooms\"),\n })}\n />\n <div\n className={`category-item-description ${styles.checkboxDescription}`}\n >",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
+      "line_number": 404,
+      "context": "<Checkbox\n dataTestId=\"applies_to_rooms_checkbox\"\n isChecked={applyToRooms}\n onChange={() => setApplyToRooms(!applyToRooms)}\n label={t(\"Settings:AppliesToRooms\", {\n rooms: t(\"Common:Rooms\"),\n })}\n />\n <div\n className={`category-item-description ${styles.checkboxDescription}`}\n >",
       "module": "/packages/client"
     },
     {
@@ -136,24 +148,6 @@
       "line_number": 85,
       "context": "break;\n case FolderType.SHARE:\n folder.title = i18n.t(\"Common:SharedWithMe\");\n break;\n case FolderType.Rooms:\n folder.title = i18n.t(\"Common:Rooms\");\n break;\n case FolderType.Archive:\n folder.title = i18n.t(\"Common:Archive\");\n break;\n case FolderType.TRASH:",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/index.tsx",
-      "line_number": 119,
-      "context": "productName: getBrandName(\"ProductName\"),\n defaultValue: \"Upload from {{productName}}\",\n }),\n description: t(\"Common:UploadFilesPortal\", {\n sectionNameFirst: t(\"Common:MyDocuments\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n defaultValue:\n \"Pick files from {{sectionNameFirst}} or {{sectionNameSecond}}.\",\n }),\n icon: <UploadPDFFormIcon />,\n onClick: onUploadFromDocSpace,",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(rooms)/_components/empty-view/index.tsx",
-      "line_number": 121,
-      "context": "if (isArchive)\n return t(\"Common:ArchiveEmptyScreen\", {\n productName: getBrandName(\"ProductName\"),\n });\n return t(\"Common:EmptyRoomsDescriptionText\", {\n sectionName: t(\"Common:Rooms\"),\n });\n };\n \n const getOptions = () => {\n if (isFiltered) return filterOptions;",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-tile-view/index.tsx",
-      "line_number": 73,
-      "context": "filesLength={filesLength}\n >\n {children}\n </InfiniteGrid>\n )}\n headingFolders={t(\"Common:Rooms\")}\n headingFiles={t(\"Common:Files\")}\n >\n {items.map((item, index) => (\n <RoomsTile\n key={`room_${item.id}`}",
-      "module": "/packages/sdk"
     }
   ],
   "languages": {

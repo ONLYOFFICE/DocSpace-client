@@ -3,7 +3,7 @@
   "content": "Choose room type",
   "content_en_sha1_hash": "e7c09e9e23bdd2add626c8f0f567b1148f985f6e",
   "created_at": "2025-05-19T21:30:56.784Z",
-  "updated_at": "2026-05-15T14:00:06.656Z",
+  "updated_at": "2026-06-02T08:43:27.465Z",
   "comment": {
     "text": "This is a dialog title that appears when a user is creating a new room and needs to select the type of room.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 234,
+      "line_number": 235,
       "context": "};\n \n const isTemplate = !roomParams.type && !isTemplateSelected;\n \n const dialogHeader = !roomParams.type\n ? t(\"ChooseRoomType\")\n : t(\"Common:CreateRoom\");\n \n return (\n <ModalDialog\n displayType=\"aside\"",
       "module": "/packages/client"
     }

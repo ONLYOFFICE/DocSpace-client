@@ -91,6 +91,7 @@ type CreateRoomEventProps = {
   getThirdPartyIcon: ThirdPartyStore["getThirdPartyIcon"];
 
   enableThirdParty: FilesSettingsStore["enableThirdParty"];
+  isExternalShareRestricted: boolean;
 
   selectionItems: FilesStore["selection"];
 
@@ -129,6 +130,7 @@ const CreateRoomEvent = ({
   setSelectedRoomType,
   getThirdPartyIcon,
   isDefaultRoomsQuotaSet,
+  isExternalShareRestricted,
   item,
 }: CreateRoomEventProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
@@ -223,6 +225,7 @@ const CreateRoomEvent = ({
       setSelectedRoomType={setSelectedRoomType}
       getThirdPartyIcon={getThirdPartyIcon}
       isDefaultRoomsQuotaSet={isDefaultRoomsQuotaSet}
+      isExternalShareRestricted={isExternalShareRestricted}
       {...roomParams}
     />
   );
@@ -247,7 +250,11 @@ export default inject(
     const { deleteThirdParty, fetchThirdPartyProviders, getThirdPartyIcon } =
       filesSettingsStore.thirdPartyStore;
 
-    const { enableThirdParty } = filesSettingsStore;
+    const {
+      enableThirdParty,
+      isExternalShareRestricted,
+      externalShareApplyToRooms,
+    } = filesSettingsStore;
 
     const {
       createRoomConfirmDialogVisible,
@@ -299,6 +306,7 @@ export default inject(
       setProcessCreatingRoomFromData,
       getThirdPartyIcon,
       isDefaultRoomsQuotaSet,
+      isExternalShareRestricted: isExternalShareRestricted && externalShareApplyToRooms,
     };
   },
 )(observer(CreateRoomEvent));

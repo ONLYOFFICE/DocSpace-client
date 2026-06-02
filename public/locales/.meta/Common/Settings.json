@@ -3,7 +3,7 @@
   "content": "Settings",
   "content_en_sha1_hash": "c7f73bb54d928922c3838bb789ee9fb8a5b1eb37",
   "created_at": "2025-05-19T21:30:48.587Z",
-  "updated_at": "2026-06-01T21:20:44.374Z",
+  "updated_at": "2026-06-02T08:43:27.479Z",
   "comment": {
     "text": "This is a label for a button or a title for a dialog, indicating a section or action related to configuration options.",
     "is_auto": true,
@@ -12,44 +12,14 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/AppsSidebar/FooterMenu.tsx",
-      "line_number": 103,
-      "context": "/>\n )}\n {showSettings && (\n <ArticleItem\n key=\"settings\"\n text={t(\"Common:Settings\")}\n title={t(\"Common:Settings\")}\n icon={SettingsIconUrl}\n showText={showText}\n linkData={EMPTY_LINK}\n onClick={() => navigate(\"/portal-settings\")}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/AppsSidebar/FooterMenu.tsx",
-      "line_number": 103,
-      "context": "/>\n )}\n {showSettings && (\n <ArticleItem\n key=\"settings\"\n text={t(\"Common:Settings\")}\n title={t(\"Common:Settings\")}\n icon={SettingsIconUrl}\n showText={showText}\n linkData={EMPTY_LINK}\n onClick={() => navigate(\"/portal-settings\")}",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Header.tsx",
       "line_number": 42,
       "context": "import styles from \"../SettingsPluginDialog.module.scss\";\n \n const Header = ({ t, name }: HeaderProps) => {\n return (\n <div className={styles.header}>\n {t(\"Common:Settings\")}&nbsp;\n <div>({name})</div>\n </div>\n );\n };",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 354,
-      "context": "},\n ...(isAdminOrOwner\n ? [\n {\n id: \"ai-forms-settings\",\n label: t(\"Common:Settings\"),\n icon: CatalogSettingsReactSvgUrl,\n onClick: () => navigate(\"/ai-forms?section=settings\"),\n },\n ]\n : []),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 354,
-      "context": "},\n ...(isAdminOrOwner\n ? [\n {\n id: \"ai-forms-settings\",\n label: t(\"Common:Settings\"),\n icon: CatalogSettingsReactSvgUrl,\n onClick: () => navigate(\"/ai-forms?section=settings\"),\n },\n ]\n : []),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 354,
-      "context": "},\n ...(isAdminOrOwner\n ? [\n {\n id: \"ai-forms-settings\",\n label: t(\"Common:Settings\"),\n icon: CatalogSettingsReactSvgUrl,\n onClick: () => navigate(\"/ai-forms?section=settings\"),\n },\n ]\n : []),",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 724,
+      "line_number": 748,
       "context": "]);\n \n const currentTitle = React.useMemo(() => {\n if (isProfile) return t(\"Profile:MyProfile\");\n \n if (isSettingsPage) return t(\"Common:Settings\");\n \n if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");",
       "module": "/packages/client"
     },
@@ -66,12 +36,6 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/apps/index.tsx",
-      "line_number": 174,
-      "context": "isDisabled={app.alwaysOn}\n onChange={() => handleToggle(app.id, !enabled, app.supported)}\n />\n <Button\n className={styles.settingsBtn}\n label={t(\"Common:Settings\")}\n size={ButtonSize.small}\n isDisabled={!app.href || !enabled}\n onClick={() => {\n if (app.href) navigate(`${app.href}?section=settings`);\n }}",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhooksTable/WebhooksRowView/WebhookRow.js",
       "line_number": 102,
       "context": "const contextOptions = [\n {\n id: \"settings\",\n key: \"Settings dropdownItem\",\n label: t(\"Common:Settings\"),\n icon: SettingsIcon,\n onClick: onSettingsOpen,\n },\n {\n id: \"webhook-history\",",
@@ -79,7 +43,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhooksTable/WebhooksTableView/WebhooksTableRow.js",
-      "line_number": 115,
+      "line_number": 142,
       "context": "};\n \n const contextOptions = [\n {\n key: \"Settings dropdownItem\",\n label: t(\"Common:Settings\"),\n icon: SettingsIcon,\n onClick: onSettingsOpen,\n dataTestId: \"webhook_settings_item\",\n },\n {",
       "module": "/packages/client"
     },
@@ -114,33 +78,27 @@
       "module": "/packages/management"
     },
     {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-navigation/index.tsx",
-      "line_number": 97,
-      "context": "/>\n );\n }\n \n if (route === \"settings\") {\n return <AgentsHeader title={t(\"Common:Settings\")} />;\n }\n \n if (route === \"trash\") {\n const isEmpty =\n !trashStore.isLoading &&",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/Tile.tsx",
-      "line_number": 75,
-      "context": "const getContextOptions = () => {\n return [\n {\n key: \"settings\",\n label: t(\"Common:Settings\"),\n icon: SettingsIcon,\n onClick: () => onSettingsClick(item),\n },\n {\n key: \"delete\",",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/mcp-tile/index.tsx",
-      "line_number": 74,
-      "context": "const getContextOptions = () => {\n return [\n {\n key: \"settings\",\n label: t(\"Common:Settings\"),\n icon: SettingsIcon,\n onClick: () => onSettingsClick?.(item),\n },\n {\n key: \"delete\",",
-      "module": "/packages/sdk"
-    },
-    {
       "file_path": "/packages/sdk/src/app/(forms)/_components/forms-header/index.tsx",
-      "line_number": 128,
+      "line_number": 162,
       "context": "case FormsSection.InProgress:\n return t(\"Common:InProgress\");\n case FormsSection.CompletedForms:\n return t(\"Common:CompletedForms\");\n case FormsSection.Settings:\n return t(\"Common:Settings\");\n default:\n return \"\";\n }\n }, [activeSection, t]);",
       "module": "/packages/sdk"
     },
     {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/sidebar/index.tsx",
+      "line_number": 238,
+      "context": "</Scrollbar>\n {showSettings && (\n <div className={styles.navBottom}>\n <SidebarNavItem\n id=\"forms-nav-settings\"\n label={t(\"Common:Settings\")}\n icon={SettingsReactSvgUrl}\n isActive={activeSection === FormsSection.Settings}\n onClick={onSettingsClick}\n showText={showText}\n />",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/DocsSettingsLayout.tsx",
-      "line_number": 71,
-      "context": "<RootScrollbar>\n <SectionWrapper\n sectionHeaderContent={\n <div style={{ padding: \"12px 0\" }}>\n <Text fontSize=\"18px\" fontWeight={700}>\n {t(\"Common:Settings\")}\n </Text>\n </div>\n }\n sectionFilterContent={<div />}\n sectionBodyContent={<Settings canSeeBilling={canSeeBilling} />}",
+      "line_number": 74,
+      "context": "<RootScrollbar>\n <SectionWrapper\n sectionHeaderContent={\n <div style={{ padding: \"12px 0\" }}>\n <Text fontSize=\"18px\" fontWeight={700}>\n {t(\"Common:Settings\")}\n </Text>\n </div>\n }\n sectionFilterContent={<div />}\n sectionBodyContent={<Settings />}",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/sidebar/index.tsx",
+      "line_number": 181,
+      "context": "))}\n </Scrollbar>\n <div className={styles.navBottom}>\n <SidebarNavItem\n id=\"docs-nav-settings\"\n label={t(\"Common:Settings\")}\n icon={SettingsReactSvgUrl}\n isActive={isSettings}\n onClick={onSettingsClick}\n showText={showText}\n />",
       "module": "/packages/sdk"
     }
   ],

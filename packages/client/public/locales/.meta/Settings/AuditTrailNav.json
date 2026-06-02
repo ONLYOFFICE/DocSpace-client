@@ -3,7 +3,7 @@
   "content": "Audit Trail",
   "content_en_sha1_hash": "e01eacc119b7bc154d3fc47e8d5dca2a54b1af3f",
   "created_at": "2025-05-19T21:30:50.600Z",
-  "updated_at": "2026-05-15T14:00:06.870Z",
+  "updated_at": "2026-06-02T08:43:27.534Z",
   "comment": {
     "text": "This is a navigation item and page title for the \"Audit Trail\" section within the portal settings, where users can view a log of actions.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 297,
+      "line_number": 304,
       "context": "{\n id: \"portal-settings_catalog-audit-trail\",\n key: \"1-3\",\n icon: \"\",\n link: \"audit-trail\",\n tKey: \"AuditTrailNav\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     }

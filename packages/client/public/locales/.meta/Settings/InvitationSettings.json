@@ -3,7 +3,7 @@
   "content": "Invitation Settings",
   "content_en_sha1_hash": "8a0e33d62c6b19c6f0e574b7a75348dbf29f66a4",
   "created_at": "2025-05-26T07:15:51.069Z",
-  "updated_at": "2026-05-15T14:00:06.843Z",
+  "updated_at": "2026-06-02T08:43:27.522Z",
   "comment": {
     "text": "This is a section title within the portal settings, referring to configurations related to user invitations.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 265,
+      "line_number": 272,
       "context": "</div>\n <DevToolsAccessSection />\n <StyledSettingsSeparator />\n \n <Text fontSize=\"16px\" fontWeight=\"700\" ref={invitationSettingsRef}>\n {t(\"InvitationSettings\")}\n </Text>\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"InvitationSettingsDescription\", {\n productName: getBrandName(\"ProductName\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 106,
+      "line_number": 114,
       "context": "}\n url=\"/portal-settings/security/access-portal/access-dev-tools\"\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"InvitationSettings\")}\n subtitle={\n <Trans\n i18nKey=\"InvitationSettingsMobile\"\n ns=\"Settings\"\n t={t}",
       "module": "/packages/client"
     },

@@ -1,0 +1,29 @@
+{
+  "key_path": "ExternalAccessDisabledByAdmin",
+  "content": "External access is disabled by administrator policy.",
+  "content_en_sha1_hash": "64851e13fc260fb9b9857efcc38f47095f742f1e",
+  "created_at": "2026-06-02T08:43:21.550Z",
+  "updated_at": "2026-06-02T08:45:00.513Z",
+  "comment": {
+    "text": "Informational message in the header that appears when a folder with existing external links is subject to administrator-imposed external access restrictions.",
+    "is_auto": true,
+    "updated_at": "2026-06-02T08:45:00.513Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
+      "line_number": 590,
+      "context": "selectedFolder?.shared &&\n isExternalShareRestricted &&\n blockExistingLinksOnRestrict &&\n hasExternalLinks\n )\n return t(\"Common:ExternalAccessDisabledByAdmin\");\n \n return undefined;\n }, [\n isRoom,\n selectedFolder,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

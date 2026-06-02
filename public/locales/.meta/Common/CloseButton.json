@@ -3,7 +3,7 @@
   "content": "Close",
   "content_en_sha1_hash": "bbfa773e5a63a5ea58c9b6207e608ca0120e592a",
   "created_at": "2025-05-19T21:30:43.485Z",
-  "updated_at": "2026-06-01T21:20:44.405Z",
+  "updated_at": "2026-06-02T08:43:27.464Z",
   "comment": {
     "text": "This is the label for a button that closes a dialog window, such as a conversion dialog, a password dialog, or a \"Get Code\" dialog.",
     "is_auto": true,
@@ -24,26 +24,8 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Dashboard/InstallAiArbiterDialog/index.tsx",
-      "line_number": 200,
-      "context": "return (\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CloseButton\")}\n onClick={onClose}\n />\n );\n };",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallModuleDialog.tsx",
-      "line_number": 243,
-      "context": "return (\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CloseButton\")}\n onClick={onClose}\n />\n );\n }\n return (",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Dashboard/sub-components/ProfileCard.tsx",
-      "line_number": 105,
-      "context": "<IconButton\n className={styles.profileCardClose}\n iconName={CrossReactSvgUrl}\n size={16}\n onClick={handleClose}\n title={t(\"Common:CloseButton\")}\n />\n \n <Text as=\"p\" className={styles.profileCardTitle}>\n {t(\"SocialAuthWelcomeDialog:YourProfileDetails\")}\n </Text>",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/GetCodeDialog.js",
-      "line_number": 76,
+      "line_number": 78,
       "context": "onClick={onCopyClick}\n />\n <Button\n scale\n size=\"normal\"\n label={t(\"Common:CloseButton\")}\n onClick={onClose}\n />\n </ModalDialog.Footer>\n </ModalDialog>\n );",
       "module": "/packages/client"
     },
@@ -55,27 +37,9 @@
     },
     {
       "file_path": "/packages/doceditor/src/hooks/useGoBackAndClose.ts",
-      "line_number": 108,
+      "line_number": 112,
       "context": "const close =\n showClose && !sdkConfig?.isSDK\n ? {\n visible: true,\n text: t(\"Common:CloseButton\"),\n }\n : undefined;\n \n return { goBack, close };\n };",
       "module": "/packages/doceditor"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/PanelView.tsx",
-      "line_number": 192,
-      "context": "<span className={styles.panelTitle}>{panel.alias}</span>\n <span className={styles.panelModel}>{panel.modelAlias}</span>\n <button\n type=\"button\"\n className={styles.fullscreenClose}\n aria-label={t(\"Common:CloseButton\")}\n onClick={() => setModalOpen(false)}\n >\n x\n </button>\n </div>",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/ResetPanelDialog.tsx",
-      "line_number": 136,
-      "context": "{phase === \"failed\" ? (\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CloseButton\")}\n onClick={onCancel}\n />\n ) : null}\n </ModalDialog.Footer>\n </ModalDialog>",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/WizardOverlay.tsx",
-      "line_number": 640,
-      "context": "onClick={handleRetry}\n />\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CloseButton\")}\n onClick={onClose}\n />\n </>\n );\n default:",
-      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-panel/index.tsx",
@@ -93,12 +57,6 @@
       "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsTour.ts",
       "line_number": 146,
       "context": "beforeTimeout: 15000,\n targetWaitTimeout: 15000,\n },\n locale: {\n back: t(\"Common:Back\"),\n close: t(\"Common:CloseButton\"),\n last: t(\"Common:Done\"),\n next: t(\"Common:Next\"),\n skip: t(\"Common:Skip\"),\n },\n });",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(personal-files)/_components/convert-dialog/index.tsx",
-      "line_number": 153,
-      "context": "scale\n onClick={handleConfirm}\n isLoading={isConverting}\n />\n <Button\n label={t(\"Common:CloseButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n isDisabled={isConverting}\n />",
       "module": "/packages/sdk"
     },
     {

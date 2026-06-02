@@ -65,6 +65,7 @@ const itemSize = 48;
 const shareLinkItemSize = 68;
 const SHARE_HEADER_HEIGHT = 36;
 const GENERAL_LINK_HEADER_HEIGHT = 28;
+const RESTRICTED_BAR_HEIGHT = 64;
 
 const List: FC<ListProps> = (props) => {
   const {
@@ -73,6 +74,7 @@ const List: FC<ListProps> = (props) => {
     loadNextPage,
     linksBlockLength,
     withoutTitlesAndLinks,
+    restrictedBarVisible,
     children,
   } = props;
 
@@ -86,6 +88,7 @@ const List: FC<ListProps> = (props) => {
     const temp: React.ReactElement<{
       isShareLink?: boolean;
       "data-share"?: boolean;
+      "data-restricted-bar"?: boolean;
       user: TUser;
       index?: number;
     }>[] = [];
@@ -95,6 +98,7 @@ const List: FC<ListProps> = (props) => {
         item as React.ReactElement<{
           isShareLink?: boolean;
           "data-share"?: boolean;
+          "data-restricted-bar"?: boolean;
           user: TUser;
           index?: number;
         }>,
@@ -192,6 +196,10 @@ const List: FC<ListProps> = (props) => {
       return GENERAL_LINK_HEADER_HEIGHT;
     }
 
+    if (elem?.props?.["data-restricted-bar"]) {
+      return RESTRICTED_BAR_HEIGHT;
+    }
+
     if (elem?.props?.isShareLink || elem?.props?.["data-share"]) {
       return shareLinkItemSize;
     }
@@ -209,9 +217,14 @@ const List: FC<ListProps> = (props) => {
     const headerTitle = header.children[0] as HTMLDivElement;
     const scrollOffset = (e.target as HTMLDivElement).scrollTop;
 
-    // First item is links header. Its size is different from link item size
+    // First item is links header. Its size is different from link item size.
+    // Second item may be the restricted bar (also different size).
+    const restrictedBarOffset = restrictedBarVisible ? RESTRICTED_BAR_HEIGHT : 0;
+    const linkItemsCount = linksBlockLength - 1 - (restrictedBarVisible ? 1 : 0);
     const linksBlockHeight = linksBlockLength
-      ? GENERAL_LINK_HEADER_HEIGHT + (linksBlockLength - 1) * shareLinkItemSize
+      ? GENERAL_LINK_HEADER_HEIGHT +
+        restrictedBarOffset +
+        Math.max(0, linkItemsCount) * shareLinkItemSize
       : 0;
 
     Object.keys(listOfTitles).forEach((titleIndex) => {

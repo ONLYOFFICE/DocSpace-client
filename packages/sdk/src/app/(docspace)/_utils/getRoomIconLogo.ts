@@ -50,3 +50,20 @@ export function getRoomIconLogo(
   if (logo.cover) return logo;
   return logo.large || logo.medium || logo.original || undefined;
 }
+
+export type RoomIconDerivedFields = {
+  roomLogo: TLogo | undefined;
+  roomIconColor: string | undefined;
+  hasRoomImage: boolean;
+};
+
+export function normalizeRoomLogo(
+  logo: TLogo | undefined,
+): RoomIconDerivedFields {
+  const hasRoomImage = !!(logo?.medium || logo?.large || logo?.cover);
+  return {
+    hasRoomImage,
+    roomLogo: hasRoomImage ? logo : undefined,
+    roomIconColor: logo?.color?.replace("#", "") ?? undefined,
+  };
+}

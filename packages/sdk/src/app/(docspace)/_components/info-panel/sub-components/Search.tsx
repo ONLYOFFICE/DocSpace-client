@@ -46,7 +46,7 @@ import {
 } from "@docspace/ui-kit/components/text-input";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
-import styles from "../Members.module.scss";
+import styles from "./RoomHeader.module.scss";
 
 type SearchProps = {
   setSearchValue: (value: string) => void;

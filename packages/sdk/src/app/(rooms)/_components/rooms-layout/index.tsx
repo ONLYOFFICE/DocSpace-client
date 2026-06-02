@@ -284,9 +284,6 @@ const RoomsLayout = observer(
           />
           <SelectionArea isRooms />
           <DeviceTypeObserver />
-          {/* Renders the room-link edit side panel driven by InfoPanelStore
-              (LinkRow opens it). Mounted here so it shares the rooms-tree
-              InfoPanelStore; docs-layout mounts its own for personal-files. */}
           <InfoPanelEditLinkDialog />
         </RootScrollbar>
       </div>
@@ -295,4 +292,3 @@ const RoomsLayout = observer(
 );
 
 export default RoomsLayout;
-

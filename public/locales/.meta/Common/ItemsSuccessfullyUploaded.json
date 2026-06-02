@@ -3,7 +3,7 @@
   "content": "Uploaded elements: {{count}}",
   "content_en_sha1_hash": "3fbe647575ee9d3b5b58c83eb362282b29b9a3a2",
   "created_at": "2025-05-19T21:30:46.011Z",
-  "updated_at": "2026-05-24T17:27:49.200Z",
+  "updated_at": "2026-06-01T21:20:44.435Z",
   "comment": {
     "text": "This is a toast message indicating successful file uploads. It appears after files have been uploaded, displaying the number of successfully uploaded items. The `{{count}}` variable represents this number.",
     "is_auto": true,
@@ -18,10 +18,22 @@
       "module": "/libs/ui-kit"
     },
     {
+      "file_path": "/packages/client/src/pages/Dashboard/hooks/useUploadToMyDocuments.ts",
+      "line_number": 108,
+      "context": "}\n });\n \n if (uploaded > 0) {\n toastr.success(\n t(\"Common:ItemsSuccessfullyUploaded\", { count: uploaded }),\n );\n }\n if (failed > 0) {\n toastr.error(t(\"Common:ErrorUploadingFiles\", { count: failed }));\n }",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/store/UploadDataStore.js",
-      "line_number": 2358,
+      "line_number": 2366,
       "context": "filesWithErrors,\n filesWithAllErrors,\n ) => {\n if (totalErrorsCount === 0) {\n toastr.success(\n t(\"Common:ItemsSuccessfullyUploaded\", {\n count: filesWithoutErrors.length,\n }),\n );\n return;\n }",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useDocsActions.ts",
+      "line_number": 328,
+      "context": "if (anySuccess) {\n const successCount = uploadStore.items.filter(\n (i) => i.status === \"uploaded\",\n ).length;\n toastr.success(\n t(\"Common:ItemsSuccessfullyUploaded\", { count: successCount }),\n );\n router.refresh();\n }\n },\n [filesSettings, router, uploadStore, t],",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

@@ -16,7 +16,6 @@
   "ArchiveAction": "Archivio vuoto",
   "ArchivedRoomsAction": "Le stanza sono archiviate",
   "ArchiveEmptyScreenUser": "Le stanze che sono state archiviate appariranno qui.",
-  "AreYouSureWantLeaveRoom": "Sei sicuro di voler lasciare questa stanza?",
   "ByErasure": "Cancellazione",
   "ChangeAgentOwnerSelectorInfo": "Solo un amministratore della stanza o un amministratore di {{productName}} può diventare il proprietario dell'agente",
   "ChangeTheAgentOwner": "Cambia il proprietario dell’agente",
@@ -78,7 +77,6 @@
   "Index": "Indice",
   "LastActivity": "Ultima attività",
   "LastOpened": "Aperto l’ultima volta",
-  "LeaveRoomDescription": "Sei il proprietario di questa stanza. Prima di lasciare la stanza, devi trasferire il ruolo di proprietario a un altro utente.",
   "LeaveRoomFormFillingWarning": "Sei attualmente assegnato alla compilazione di moduli in questa stanza. L'uscita interromperà la compilazione di tali moduli al tuo passaggio. Potrai rientrare solo tramite un nuovo invito da parte di un amministratore della stanza.",
   "LifetimeDialogDescription": "l conto alla rovescia della durata inizia alla data di creazione del file. Alcuni file in questa stanza superano la durata proposta e verranno eliminati una volta abilitata l'impostazione.",
   "LifetimeDialogDescriptionHeader": "I file più vecchi che hanno superato la durata di vita verranno eliminati.",
@@ -177,12 +175,10 @@
   "UserLimitDescription": "Definisci il numero di utenti che possono unirsi tramite questo link di invito.",
   "VersionHistory": "Cronologia delle versioni",
   "WaitOperation": "Attendi il completamento dell'operazione corrente",
-  "WantLeaveRoom": "Vuoi lasciare questa stanza? Potrai unirti nuovamente tramite un nuovo invito da parte di un amministratore della sala.",
   "WarningCopyToFormRoomServal": "La copia di più file nella stanza di compilazione dei moduli non è supportata. Copia un modulo PDF {{ organizationName }} alla volta.",
   "WarningMoveToFormRoom": "Non è possibile spostare il file in questa stanza. Provare a spostare un modulo PDF {{ organizationName }} alla volta.",
   "WarningMoveToFormRoomServal": "Lo spostamento di più file nella stanza di compilazione dei moduli non è supportato. Sposta un modulo PDF {{ organizationName }} alla volta.",
   "WillBeDeletedPermanently": "{{date}} verrà eliminato definitivamente",
   "YouLeftTheAgent": "Hai lasciato l'agente",
-  "YouLeftTheRoom": "Hai lasciato la stanza",
   "YourUserTypeHasChanged": "Il tuo tipo di utente è stato modificato in <1>“{{userType}}”</1> dall’amministratore di {{productName}}, <1>{{adminName}}</1>."
 }

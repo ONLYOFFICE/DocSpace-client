@@ -3,7 +3,7 @@
   "content": "AI chats",
   "content_en_sha1_hash": "3fd9fe09d100ec141d95e517cac55b5f4eb4cf54",
   "created_at": "2025-12-23T10:27:34.733Z",
-  "updated_at": "2026-05-24T17:27:49.060Z",
+  "updated_at": "2026-06-01T21:20:44.384Z",
   "comment": {
     "text": "This is a short label for the AI chat feature. It appears in various descriptions and settings related to AI functionality.",
     "is_auto": true,
@@ -49,7 +49,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
-      "line_number": 122,
+      "line_number": 124,
       "context": "\"Set up an agent with model, instructions and an {{mcpServer}} to get started.\",\n })\n : standalone && isAdminOrOwner\n ? t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: getBrandName(\"ProductName\"),\n aiChats: t(\"Common:AIChats\", { defaultValue: \"AI Chats\" }),\n defaultValue:\n \"Configure an AI provider in {{productName}} settings to unlock {{aiChats}}.\",\n })\n : isAdminOrOwner\n ? t(\"Common:EmptyAIAgentsAIDisabledSaasAdminDescription\", {",
       "module": "/packages/sdk"
     },

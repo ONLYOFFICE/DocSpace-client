@@ -3,7 +3,7 @@
   "content": "The title can't contain any of the following characters: *+:\"<>?|/",
   "content_en_sha1_hash": "2988d94a573dbf375e5668150d952ca1022bdb80",
   "created_at": "2025-05-26T07:15:41.554Z",
-  "updated_at": "2026-05-24T17:27:49.066Z",
+  "updated_at": "2026-06-01T21:20:44.390Z",
   "comment": {
     "text": "This is an error message that appears when a user enters an invalid character in a title field, such as for a room or an agent.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/components/GlobalEvents/sub-components/Dialog.js",
-      "line_number": 199,
+      "line_number": 206,
       "context": "<ModalDialog.Body>\n <FieldContainer\n hasError={hasError}\n labelVisible={false}\n errorMessageWidth=\"100%\"\n errorMessage={errorText || t(\"Common:ContainsSpecCharacter\")}\n removeMargin\n >\n <TextInput\n id=\"create-text-input\"\n name=\"create\"",
       "module": "/packages/client"
     },

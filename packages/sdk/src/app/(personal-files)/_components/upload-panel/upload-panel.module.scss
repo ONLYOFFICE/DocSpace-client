@@ -3,10 +3,12 @@
  */
 
 .uploadBody {
-  width: 100%;
+  width: calc(100% + 16px);
   height: 100%;
-  display: flex;
-  flex-direction: column;
+
+  :global(.scroll-body) {
+    padding-inline-end: 0px !important;
+  }
 }
 
 .headerActions {
@@ -31,8 +33,57 @@
   padding-block: 8px;
   padding-inline-end: 16px;
 
-  &.fileRowError .fileNameText {
-    color: var(--files-panels-upload-color);
+  :global {
+    .upload-panel_file-name {
+      max-width: 412px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      align-items: center;
+      display: flex;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .file-exst {
+      color: var(--files-panels-upload-color);
+    }
+
+    .actions-wrapper {
+      display: flex;
+      margin-inline-start: auto;
+      padding-inline-start: 16px;
+      align-items: center;
+      flex: 0 0 auto;
+
+      .upload-panel_percent-text {
+        margin-inline-start: 16px;
+        color: var(--files-panels-upload-progress-color);
+      }
+
+      .upload-panel_close-button,
+      .upload-panel_check-button {
+        margin-inline-start: 16px;
+      }
+
+      .upload-panel_check-button {
+        width: 16px;
+        height: 16px;
+
+        path {
+          fill: var(--files-panels-upload-positive-status-color);
+        }
+      }
+    }
+
+    .img_error {
+      filter: grayscale(1);
+    }
+  }
+
+  &[data-error] {
+    :global(.upload-panel-file-error_text) {
+      color: var(--files-panels-upload-color);
+    }
   }
 }
 
@@ -48,68 +99,12 @@
   width: 32px;
   height: 32px;
   object-fit: contain;
-
-  &.iconError {
-    filter: grayscale(1);
-  }
-}
-
-.fileName {
-  flex: 1 1 auto;
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-}
-
-.fileNameText {
-  line-height: 16px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.fileExt {
-  color: var(--files-panels-upload-color);
-}
-
-.actionsWrapper {
-  flex: 0 0 auto;
-  display: flex;
-  margin-inline-start: auto;
-  padding-inline-start: 16px;
-  align-items: center;
-}
-
-.percentText {
-  margin-inline-start: 16px;
-  color: var(--files-panels-upload-progress-color);
-}
-
-.closeButton {
-  margin-inline-start: 16px;
-}
-
-.checkButton {
-  margin-inline-start: 16px;
-  width: 16px;
-  height: 16px;
-
-  path {
-    fill: var(--files-panels-upload-positive-status-color);
-  }
 }
 
 .errorText {
   color: var(--files-panels-upload-color);
-  margin-inline-start: 16px;
   text-decoration: underline dashed;
   cursor: default;
-}
-
-.cancelledText {
-  color: var(--files-panels-upload-color);
-  margin-inline-start: 16px;
 }
 
 .progressWrap {

@@ -39,4 +39,5 @@ export const enum SDKDialogs {
   EditRoom = "edit_room",
   ArchiveRoom = "archive_room",
   DeleteRoom = "delete_room",
+  LeaveRoom = "leave_room",
 }

@@ -198,7 +198,6 @@
   "OAuthDescription": "Используйте API {{organizationName}} {{productName}} для авторизации и таких действий, как доступ к файлам и многое другое.",
   "OpenInAppOnly": "Открыть только в приложении",
   "OpenInWebOnly": "Открыть только в вебе",
-  "Overview": "Обзор",
   "PasswordMinLenght": "Минимальная длина пароля",
   "PersonalFiles": "Личные файлы",
   "PluginDescription": "Расширьте функциональность {{productName}}, подключите сторонние сервисы или улучшите существующий пользовательский опыт.",

@@ -3,7 +3,7 @@
   "content": "OK",
   "content_en_sha1_hash": "9ce3bd4224c8c1780db56b4125ecf3f24bf748b7",
   "created_at": "2025-06-05T23:02:58.880Z",
-  "updated_at": "2026-05-24T17:27:49.075Z",
+  "updated_at": "2026-06-01T21:20:44.397Z",
   "comment": {
     "text": "This is the label for an \"OK\" button, typically used to confirm an action or close a dialog box.",
     "is_auto": true,
@@ -165,6 +165,18 @@
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/dialogs/disable/index.tsx",
       "line_number": 81,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:OKButton\")}\n scale\n onClick={onSubmitAction}\n isLoading={loading}\n testId=\"disable-mcp-button\"\n />",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/conflict-resolve-dialog/index.tsx",
+      "line_number": 123,
+      "context": "overwriteDescription={overwriteDescription}\n duplicateTitle={duplicateTitle}\n duplicateDescription={duplicateDescription}\n skipTitle={skipTitle}\n skipDescription={skipDescription}\n submitButtonLabel={t(\"Common:OKButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n onClose={onClose}\n onSubmit={onSubmit}\n />\n );",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/leave-room-dialog/index.tsx",
+      "line_number": 88,
+      "context": "const descriptionText = isOwner\n ? t(\"Common:LeaveRoomDescription\")\n : t(\"Common:WantLeaveRoom\");\n \n const okLabel = isOwner ? t(\"Common:AssignOwner\") : t(\"Common:OKButton\");\n \n const handleConfirm = async () => {\n if (!room) return;\n \n if (isOwner) {",
       "module": "/packages/sdk"
     },
     {

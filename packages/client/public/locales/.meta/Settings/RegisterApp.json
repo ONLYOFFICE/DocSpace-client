@@ -3,7 +3,7 @@
   "content": "Register app",
   "content_en_sha1_hash": "d377a3cb1713d903c61de93c2313f56ca7857d84",
   "created_at": "2026-04-03T21:51:36.610Z",
-  "updated_at": "2026-05-15T14:00:06.818Z",
+  "updated_at": "2026-05-27T14:11:50.699Z",
   "comment": {
     "text": "This is the label for a link that allows users to register a new application within the developer tools settings.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 125,
-      "context": "icon={<OAuthSvg />}\n title={t(\"OAuth:OAuth\")}\n description={t(\"Settings:OAuthDescription\", { organizationName: getBrandName(\"OrganizationName\"), productName: getBrandName(\"ProductName\") })}\n url=\"/developer-tools/oauth/create\"\n color={globalColors.purple}\n linkTitle={t(\"Settings:RegisterApp\")}\n />\n <Card\n icon={<KeySvg />}\n title={t(\"Settings:ApiKeys\")}\n description={t(\"Settings:ApiKeysCardDescription\", { organizationName: getBrandName(\"OrganizationName\"), productName: getBrandName(\"ProductName\") })}",
+      "line_number": 153,
+      "context": "organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),\n })}\n url=\"/developer-tools/oauth\"\n color={globalColors.purple}\n linkTitle={t(\"Settings:RegisterApp\")}\n ctaUrl=\"/developer-tools/oauth/create\"\n />\n <Card\n icon={<KeySvg />}\n title={t(\"Settings:ApiKeys\")}",
       "module": "/packages/client"
     }
   ],

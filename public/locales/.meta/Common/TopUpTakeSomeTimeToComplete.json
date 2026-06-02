@@ -3,7 +3,7 @@
   "content": "The top-up might take some time to complete",
   "content_en_sha1_hash": "879c71750a4b87b47a412c63d6e1558334cfb3a8",
   "created_at": "2026-04-10T13:53:43.643Z",
-  "updated_at": "2026-05-15T14:00:07.020Z",
+  "updated_at": "2026-05-28T15:46:18.724Z",
   "comment": {
     "text": "This is a message displayed to the user while a top-up transaction is processing, indicating that it may not be instantaneous.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/TopUpButtons.tsx",
-      "line_number": 130,
+      "line_number": 140,
       "context": "}\n };\n \n return (\n <div className={styles.buttonContainerWrapper}>\n {isLoading ? <Text>{t(\"TopUpTakeSomeTimeToComplete\")}</Text> : null}\n <div className={styles.buttonContainer}>\n <Button\n key=\"OkButton\"\n label={t(\"TopUp\")}\n size={ButtonSize.normal}",
       "module": "/libs/ui-kit"
     }

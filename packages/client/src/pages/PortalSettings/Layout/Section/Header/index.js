@@ -98,6 +98,7 @@ const SectionHeaderContent = (props) => {
     deviceType,
     isNotPaidPeriod,
     isBackupPaid,
+    isFreeTariff,
   } = props;
 
   const navigate = useNavigate();
@@ -166,7 +167,7 @@ const SectionHeaderContent = (props) => {
     const arrayOfParams = getArrayOfParams();
 
     const serviceSubPageHeaders = {
-      "backup": "Common:Backup",
+      backup: isFreeTariff ? "Common:Backup" : t("Common:AdditionalBackup"),
       "ai-services": "Common:OrganizationAI",
       "disk-storage": "Common:AdditionalDiskStorage",
     };
@@ -180,7 +181,10 @@ const SectionHeaderContent = (props) => {
       const isCategoryOrHeader = false;
 
       setState((val) => {
-        if (val.header === header && val.isCategoryOrHeader === isCategoryOrHeader)
+        if (
+          val.header === header &&
+          val.isCategoryOrHeader === isCategoryOrHeader
+        )
           return val;
         return { ...val, header, isCategoryOrHeader };
       });
@@ -224,6 +228,7 @@ const SectionHeaderContent = (props) => {
     getArrayOfParams,
     isAvailableSettings,
     location.pathname,
+    isFreeTariff,
   ]);
 
   const onBackToParent = () => {
@@ -316,8 +321,8 @@ const SectionHeaderContent = (props) => {
             : t("DataImport")
       : !standalone && isPaymentPage
         ? t("Common:Billing")
-        // biome-ignore lint/plugin/no-dynamic-i18n-key: header is passed from route config; underlying keys are declared as literals at callsites
-        : t(header, {
+        : // biome-ignore lint/plugin/no-dynamic-i18n-key: header is passed from route config; underlying keys are declared as literals at callsites
+          t(header, {
             organizationName: logoText,
             license: t("Common:EnterpriseLicense"),
             productName: getBrandName("ProductName"),
@@ -419,6 +424,7 @@ export default inject(
       isRestoreAndAutoBackupAvailable,
       isSSOAvailable,
       isBackupPaid,
+      isFreeTariff,
     } = currentQuotaStore;
     const { isNotPaidPeriod } = currentTariffStatusStore;
     const { addUsers, removeAdmins } = setup.headerAction;
@@ -468,6 +474,7 @@ export default inject(
       deviceType,
       isNotPaidPeriod,
       isBackupPaid,
+      isFreeTariff,
     };
   },
 )(

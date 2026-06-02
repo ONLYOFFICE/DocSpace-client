@@ -70,6 +70,7 @@ const GroupNameParam = ({
 			>
 				<TextInput
 					id="create-group-name"
+					name="group_name"
 					type={InputType.text}
 					value={groupName}
 					onChange={onChangeGroupName}

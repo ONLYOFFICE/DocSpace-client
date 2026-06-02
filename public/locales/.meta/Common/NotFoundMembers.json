@@ -3,7 +3,7 @@
   "content": "No members found",
   "content_en_sha1_hash": "2f9524453596c315ea26d2daec2af8d6792b16f1",
   "created_at": "2025-05-19T21:30:46.909Z",
-  "updated_at": "2026-05-24T17:27:49.101Z",
+  "updated_at": "2026-06-01T21:20:44.421Z",
   "comment": {
     "text": "This is an empty state header text displayed when no members are found after applying a filter or search in a people selector.",
     "is_auto": true,
@@ -45,6 +45,12 @@
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/info-panel/views/members.tsx",
       "line_number": 81,
       "context": "}\n \n if (!members || members.length === 0) {\n return (\n <div className={styles.emptyState}>\n <Text fontSize=\"13px\">{t(\"Common:NotFoundMembers\")}</Text>\n </div>\n );\n }\n \n return (",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/sub-components/EmptyContainer.tsx",
+      "line_number": 60,
+      "context": "return (\n <EmptyScreenContainer\n imageSrc={imageSrc}\n imageAlt=\"Empty screen image\"\n headerText={t(\"NotFoundMembers\")}\n descriptionText={t(\"NotFoundUsersDescription\")}\n className={styles.emptyScreen}\n />\n );\n };",
       "module": "/packages/sdk"
     },
     {

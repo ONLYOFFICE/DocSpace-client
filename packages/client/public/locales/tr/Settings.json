@@ -198,7 +198,6 @@
   "OAuthDescription": "Yetkilendirme ve dosya erişimi gibi eylemler için {{organizationName}} {{productName}} API'sini kullanın.",
   "OpenInAppOnly": "Yalnızca uygulamada aç",
   "OpenInWebOnly": "Yalnızca web'de aç",
-  "Overview": "Genel Bakış",
   "PasswordMinLenght": "Minimum şifre uzunluğu",
   "PersonalFiles": "Kişisel dosyalar",
   "PluginDescription": "{{productName}} işlevselliğinizi genişletin, üçüncü taraf hizmetleri bağlayın veya mevcut kullanıcı deneyimini iyileştirin.",

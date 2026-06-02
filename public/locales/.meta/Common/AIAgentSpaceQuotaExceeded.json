@@ -1,14 +1,23 @@
 {
-  "comment": {
-    "text": "This is an error message displayed as a toast notification. It informs the user that the storage quota for the AI Agent space has been exceeded, with `{{aiAgent}}` representing \"AI Agent\" and `{{size}}` indicating the quota limit.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:00:35.678Z",
-    "model": "google/gemini-2.5-flash"
-  },
+  "key_path": "AIAgentSpaceQuotaExceeded",
   "content": "{{aiAgent}} space quota exceeded ({{size}}).",
   "content_en_sha1_hash": "b2c3e259f54b8152df2defd05f1a570008f37470",
-  "created_at": "2025-12-19T10:16:17.423Z",
-  "key_path": "AIAgentSpaceQuotaExceeded",
+  "created_at": "2026-06-01T21:20:07.414Z",
+  "updated_at": "2026-06-01T21:48:55.543Z",
+  "comment": {
+    "text": "Error message appearing when an AI agent reaches its storage limit. `{{aiAgent}}` is the name of the agent, and `{{size}}` is the storage capacity.",
+    "is_auto": true,
+    "updated_at": "2026-06-01T21:48:55.543Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 429,
+      "context": "});\n \n const size = getConvertedSize(t, roomFolder.quotaLimit);\n \n const error = isAIAgentsFolderRoot\n ? t(\"Common:AIAgentSpaceQuotaExceeded\", {\n aiAgent: t(\"Common:AIAgent\"),\n size,\n })\n : t(\"Common:RoomSpaceQuotaExceeded\", {\n size,",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -140,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -202,14 +211,5 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     }
-  },
-  "updated_at": "2026-05-24T17:27:49.195Z",
-  "usage": [
-    {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 426,
-      "context": "});\n \n const size = getConvertedSize(t, roomFolder.quotaLimit);\n \n const error = isAIAgentsFolderRoot\n ? t(\"Common:AIAgentSpaceQuotaExceeded\", {\n aiAgent: t(\"Common:AIAgent\"),\n size,\n })\n : t(\"Common:RoomSpaceQuotaExceeded\", {\n size,",
-      "module": "/packages/client"
-    }
-  ]
+  }
 }

@@ -2,13 +2,13 @@
   "key_path": "Show",
   "content": "Show",
   "content_en_sha1_hash": "d97d1ee339e4eeaba8cac91dca37c8b4ec8f5501",
-  "created_at": "2025-05-19T21:30:50.132Z",
-  "updated_at": "2026-05-24T17:27:49.143Z",
+  "created_at": "2026-06-01T21:20:32.973Z",
+  "updated_at": "2026-06-01T21:22:03.084Z",
   "comment": {
-    "text": "This is a button label. It appears when additional settings are hidden and allows the user to reveal them.",
+    "text": "Button label used to expand and display advanced or additional settings. It is a verb.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:26:34.702Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-06-01T21:22:03.084Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -187,6 +187,12 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
@@ -218,12 +224,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -199,7 +199,6 @@
   "OAuthDescription": "Use the {{organizationName}} {{productName}} API for authorization and actions like file access and more.",
   "OpenInAppOnly": "Open in app only",
   "OpenInWebOnly": "Open in web only",
-  "Overview": "Overview",
   "PasswordMinLenght": "Minimal password length",
   "PersonalFiles": "Personal files",
   "PluginDescription": "Extend your {{productName}} functionality, connect third-party services or enhance the existing user experience.",

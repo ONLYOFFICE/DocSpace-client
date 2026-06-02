@@ -141,6 +141,7 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
               <PasswordInput
                 id="conversion-password"
                 className={styles.passwordInput}
+                inputName="link_password"
                 ref={passwordInputRef}
                 isDisabled={isLoading}
                 inputValue={passwordValue}
@@ -198,3 +199,4 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
 };
 
 export default PasswordAccessBlock;
+

@@ -127,6 +127,7 @@ export const WhiteLabelHeader = ({
           >
             <TextInput
               testId="logo-text-input"
+              name="logo_text"
               className={classNames(styles.input, "input")}
               placeholder={t("YourLogo")}
               value={logoTextWhiteLabel}

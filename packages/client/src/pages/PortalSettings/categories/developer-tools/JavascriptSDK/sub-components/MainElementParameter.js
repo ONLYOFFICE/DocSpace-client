@@ -143,6 +143,7 @@ export const MainElementParameter = ({
             <Label className="label" text={t("ButtonText")} />
             <TextInput
               scale
+              name="button_text"
               onChange={setButtonText}
               placeholder={t("SelectToPortal", {
                 productName: getBrandName("ProductName"),

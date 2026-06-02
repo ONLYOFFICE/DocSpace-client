@@ -3,7 +3,7 @@
   "content": "Versions",
   "content_en_sha1_hash": "a239107ef28f6efe13d8ea83e502da9aa8c43fbb",
   "created_at": "2026-05-19T19:03:26.848Z",
-  "updated_at": "2026-05-24T17:27:49.120Z",
+  "updated_at": "2026-06-01T21:20:44.440Z",
   "comment": {
     "text": "Label in the file information panel that identifies the section for document history.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Details/Details.utils.tsx",
-      "line_number": 184,
+      "line_number": 187,
       "context": "case \"Last modified by\":\n return this.t(\"Common:LastModifiedBy\");\n case \"Creation date\":\n return this.t(\"Common:CreationDate\");\n case \"Versions\":\n return this.t(\"Common:Versions\");\n default:\n return propertyId;\n }\n };",
       "module": "/packages/sdk"
     }

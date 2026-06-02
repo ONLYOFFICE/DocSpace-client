@@ -172,6 +172,7 @@ export const BrandName = ({
         <FieldContainer id="fieldContainerBrandName" isVertical>
           <TextInput
             testId="brand_name_input"
+            name="brand_name"
             className="brand-name input"
             value={brandNameWhiteLabel ?? ""}
             onChange={onChange}

@@ -37,7 +37,7 @@ import { useMemo, FC } from "react";
 import { useTranslation } from "react-i18next";
 
 import { isFile } from "../../../utils/typeGuards";
-import { EmployeeStatus, ShareAccessRights } from "../../../enums";
+import { AnalyticsEvents, EmployeeStatus, ShareAccessRights } from "../../../enums";
 import PeopleSelector from "@docspace/ui-kit/selectors/People";
 import { ShareLinkService } from "../../../services/share-link.service";
 import type { TShareToUser } from "../../../api/files/types";
@@ -87,6 +87,17 @@ export const ShareSelector: FC<ShareSelectorProps> = ({
 			const list = await ShareLinkService.shareItemToUser(share, item);
 
 			onSubmit?.(list);
+
+			const isRoomItem = "roomType" in item && item.roomType !== undefined;
+			const isFileItem = isFile(item);
+			if (isRoomItem || isFileItem) {
+				window.dataLayer = window.dataLayer || [];
+				window.dataLayer.push({
+					event: isRoomItem ? AnalyticsEvents.RoomShared : AnalyticsEvents.FileShared,
+					id: item.id,
+					parentId: isFileItem ? item.folderId : item.parentId,
+				});
+			}
 
 			toastr.success(t("Common:RoomCreateUser"));
 		} catch (error) {

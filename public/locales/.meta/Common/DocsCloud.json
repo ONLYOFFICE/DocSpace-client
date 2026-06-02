@@ -3,7 +3,7 @@
   "content": "Docs cloud",
   "content_en_sha1_hash": "e555e156454df904da0c78663ddff08d01bd7c31",
   "created_at": "2026-05-24T17:27:24.564Z",
-  "updated_at": "2026-05-24T18:14:54.177Z",
+  "updated_at": "2026-06-01T21:20:44.392Z",
   "comment": {
     "text": "Navigation menu label, app catalog title, and installation dialog title for the DocsCloud module.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 215,
-      "context": "const groups = React.useMemo<NavMenuGroup[]>(() => {\n // const underDevelopment = () => toastr.info(t(\"Common:UnderDevelopment\"));\n \n const docsCloudItem: NavMenuItem = {\n id: DOCS_CLOUD_ID,\n label: t(\"Common:DocsCloud\"),\n icon: CatalogDocumentsReactSvgUrl,\n onClick: handleDocsCloudClick,\n };\n \n const aiFilesItem: NavMenuItem = {",
+      "line_number": 232,
+      "context": "onClick: () => navigate(\"/dashboard\"),\n };\n \n const docsCloudItem: NavMenuItem = {\n id: DOCS_CLOUD_ID,\n label: t(\"Common:DocsCloud\"),\n icon: CatalogDocumentsReactSvgUrl,\n onClick: handleDocsCloudClick,\n };\n \n const sharedWithMeHasNew =",
       "module": "/packages/client"
     },
     {
@@ -31,14 +31,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/DocsCloud/index.tsx",
-      "line_number": 42,
-      "context": "const { isBase } = useTheme();\n \n return (\n <EmptyScreenContainer\n imageSrc={isBase ? EmptyScreenLightUrl : EmptyScreenDarkUrl}\n imageAlt={t(\"Common:DocsCloud\")}\n headerText={t(\"Common:DocsCloud\")}\n descriptionText={t(\"Common:DocsCloudDescription\")}\n />\n );\n };",
+      "line_number": 38,
+      "context": "import { useTheme } from \"@docspace/ui-kit/context/ThemeContext\";\n import { useDocumentTitle } from \"@docspace/shared/hooks/useDocumentTitle\";\n \n const DocsCloudComponent = () => {\n const { t } = useTranslation([\"Common\"]);\n useDocumentTitle(\"Common:DocsCloud\");\n const { isBase } = useTheme();\n \n return (\n <EmptyScreenContainer\n imageSrc={isBase ? EmptyScreenLightUrl : EmptyScreenDarkUrl}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/DocsCloud/index.tsx",
-      "line_number": 42,
-      "context": "const { isBase } = useTheme();\n \n return (\n <EmptyScreenContainer\n imageSrc={isBase ? EmptyScreenLightUrl : EmptyScreenDarkUrl}\n imageAlt={t(\"Common:DocsCloud\")}\n headerText={t(\"Common:DocsCloud\")}\n descriptionText={t(\"Common:DocsCloudDescription\")}\n />\n );\n };",
+      "line_number": 38,
+      "context": "import { useTheme } from \"@docspace/ui-kit/context/ThemeContext\";\n import { useDocumentTitle } from \"@docspace/shared/hooks/useDocumentTitle\";\n \n const DocsCloudComponent = () => {\n const { t } = useTranslation([\"Common\"]);\n useDocumentTitle(\"Common:DocsCloud\");\n const { isBase } = useTheme();\n \n return (\n <EmptyScreenContainer\n imageSrc={isBase ? EmptyScreenLightUrl : EmptyScreenDarkUrl}",
       "module": "/packages/client"
     }
   ],

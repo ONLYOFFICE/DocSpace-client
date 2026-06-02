@@ -198,7 +198,6 @@
   "OAuthDescription": "Користите {{organizationName}} {{productName}} API за autorizaciju и акције као што су приступ фајловима и више.",
   "OpenInAppOnly": "Отвори само у апликацији",
   "OpenInWebOnly": "Отвори само у прегледачу",
-  "Overview": "Преглед",
   "PasswordMinLenght": "Минимална дужина лозинке",
   "PersonalFiles": "Личне датотеке",
   "PluginDescription": "Проширите функционалност свог {{productName}}, повежите услуге трећих страна или унапредите постојеће корисничко искуство.",

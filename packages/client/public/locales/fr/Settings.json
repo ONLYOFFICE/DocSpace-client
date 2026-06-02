@@ -198,7 +198,6 @@
   "OAuthDescription": "Utilisez l'API {{organizationName}} {{productName}} pour l'autorisation et des actions telles que l'accès aux fichiers et plus.",
   "OpenInAppOnly": "Ouvrir uniquement dans l'application",
   "OpenInWebOnly": "Ouvrir en ligne uniquement",
-  "Overview": "Aperçu",
   "PasswordMinLenght": "Longueur minimale du mot de passe",
   "PersonalFiles": "Fichiers personnels",
   "PluginDescription": "Développez la fonctionnalité de votre {{productName}}, connectez des services tiers ou améliorez l'expérience utilisateur existante.",

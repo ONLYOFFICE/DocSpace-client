@@ -3,7 +3,7 @@
   "content": "As the current owner, you must transfer ownership to another user before leaving this agent.",
   "content_en_sha1_hash": "1b66b271e767abe92382fe4a9716cf6948dd2904",
   "created_at": "2025-10-27T16:14:30.378Z",
-  "updated_at": "2026-05-24T17:27:49.097Z",
+  "updated_at": "2026-06-01T21:20:44.417Z",
   "comment": {
     "text": "This is a dialog message displayed to the owner of an AI agent when they attempt to leave it, explaining that ownership must be transferred first.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
       "line_number": 95,
-      "context": "const roomDescription = isRoomOwner\n ? t(\"Files:LeaveRoomDescription\")\n : t(\"Files:WantLeaveRoom\");\n \n const agentDescription = isRoomOwner\n ? t(\"Common:LeaveAgentDescription\")\n : t(\"Common:WantLeaveAgent\");\n \n const descriptionText = isAIAgent ? agentDescription : roomDescription;\n \n const showFormFillingWarning = isFormFiller && !isAIAgent && !isRoomOwner;",
+      "context": "const roomDescription = isRoomOwner\n ? t(\"Common:LeaveRoomDescription\")\n : t(\"Common:WantLeaveRoom\");\n \n const agentDescription = isRoomOwner\n ? t(\"Common:LeaveAgentDescription\")\n : t(\"Common:WantLeaveAgent\");\n \n const descriptionText = isAIAgent ? agentDescription : roomDescription;\n \n const showFormFillingWarning = isFormFiller && !isAIAgent && !isRoomOwner;",
       "module": "/packages/client"
     },
     {

@@ -3,7 +3,7 @@
   "content": "Failed to copy encrypted files: {{names}}",
   "content_en_sha1_hash": "6a291dfdd5f74c42ce4bd92d90213bdbd61ddc54",
   "created_at": "2026-05-24T17:27:26.283Z",
-  "updated_at": "2026-05-24T18:12:10.710Z",
+  "updated_at": "2026-06-01T21:20:44.522Z",
   "comment": {
     "text": "Error toast message appearing when an encrypted file copy operation fails. The {{names}} variable contains a comma-separated list of the failed filenames.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1717,
+      "line_number": 1768,
       "context": "this.uploadDataStore.startUpload(filesToUpload, destFolderId, i18n.t);\n }\n \n if (failed.length > 0) {\n toastr.error(\n i18n.t(\"Common:EncryptedCopyFailed\", {\n defaultValue: \"Failed to copy encrypted files: {{names}}\",\n names: failed.join(\", \"),\n }),\n );\n }",
       "module": "/packages/client"
     }

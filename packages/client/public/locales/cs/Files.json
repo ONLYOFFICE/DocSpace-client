@@ -16,7 +16,6 @@
   "ArchiveAction": "Prázdný archiv",
   "ArchivedRoomsAction": "Místnosti jsou archivovány",
   "ArchiveEmptyScreenUser": "Zde se zobrazí místnosti, které byly archivovány.",
-  "AreYouSureWantLeaveRoom": "Jste si jisti, že chcete opustit tuto místnost?",
   "ByErasure": "Smazání",
   "ChangeAgentOwnerSelectorInfo": "Pouze správce místnosti nebo správce {{productName}} může být vlastníkem agenta.",
   "ChangeTheAgentOwner": "Změnit vlastníka agenta",
@@ -78,7 +77,6 @@
   "Index": "Index",
   "LastActivity": "Poslední aktivita",
   "LastOpened": "Poslední otevřený",
-  "LeaveRoomDescription": "Majitelem této místnosti jste vy. Než místnost opustíte, musíte roli vlastníka převést na jiného uživatele.",
   "LeaveRoomFormFillingWarning": "V této místnosti máte momentálně přiřazenou povinnost dokončit formuláře. Odchod z místnosti tyto formuláře zastaví ve vašem kroku. Znovu se můžete připojit pouze na základě nového pozvání od administrátora místnosti.",
   "LifetimeDialogDescription": "Odpočet životnosti začíná datem vytvoření souboru. Některé soubory v této místnosti překročí navrhovanou dobu životnosti a budou odstraněny, jakmile toto nastavení povolíte.",
   "LifetimeDialogDescriptionHeader": "Starší soubory s překročenou dobou životnosti budou odstraněny.",
@@ -177,12 +175,10 @@
   "UserLimitDescription": "Definujte počet uživatelů, kteří se mohou připojit pomocí tohoto invitačního odkazu.",
   "VersionHistory": "Historie verzí",
   "WaitOperation": "Počkat na dokončení aktuální operace",
-  "WantLeaveRoom": "Opravdu chcete opustit tuto místnost? Budete se do ní moci znovu připojit prostřednictvím nového pozvání od správce místnosti.",
   "WarningCopyToFormRoomServal": "Kopírování více souborů do místnosti pro vyplňování formulářů není podporováno. Kopírujte PDF formuláře {{ organizationName }} po jednom.",
   "WarningMoveToFormRoom": "Soubor nelze do této místnosti přesunout. Zkuste prosím přesunout soubor {{ organizationName }}. PDF formulář.",
   "WarningMoveToFormRoomServal": "Přesunutí několika souborů do místnosti pro vyplňování formulářů není podporováno. Přesunujte PDF formuláře {{ organizationName }} po jednom.",
   "WillBeDeletedPermanently": "{{date}} bude trvale smazáno",
   "YouLeftTheAgent": "Opustili jste agenta.",
-  "YouLeftTheRoom": "Opustili jste místnost",
   "YourUserTypeHasChanged": "Váš typ uživatele byl změněn na <1>\"{{userType}}\"</1> správcem {{productName}} <1>{{adminName}}</1>."
 }

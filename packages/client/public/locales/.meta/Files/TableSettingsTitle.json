@@ -3,7 +3,7 @@
   "content": "Manage displayed columns",
   "content_en_sha1_hash": "edef33d6c30b6b2dbcd0652de4bbdd3b72cfe10e",
   "created_at": "2025-05-19T21:30:56.214Z",
-  "updated_at": "2026-05-24T17:27:49.133Z",
+  "updated_at": "2026-06-01T21:20:44.449Z",
   "comment": {
     "text": "This is the title for a dialog or pop-up menu that allows users to customize which columns are visible in a table view.",
     "is_auto": true,
@@ -31,8 +31,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-table-view/index.tsx",
-      "line_number": 210,
-      "context": "useReactWindow={!isSSR}\n sortBy={filterSortBy ?? undefined}\n sorted={filterSortOrder === \"descending\"}\n sortingVisible\n showSettings\n settingsTitle={t(\"Files:TableSettingsTitle\")}\n />\n <TableBody\n columnStorageName={COLUMN_STORAGE_NAME}\n columnInfoPanelStorageName={COLUMN_INFO_PANEL_STORAGE_NAME}\n fetchMoreFiles={fetchMoreFiles}",
+      "line_number": 212,
+      "context": "useReactWindow={!isSSR}\n sortBy={filterSortBy ?? undefined}\n sorted={filterSortOrder === \"descending\"}\n sortingVisible\n showSettings\n settingsTitle={t(\"Files:TableSettingsTitle\")}\n infoPanelVisible={infoPanelVisible}\n />\n <TableBody\n columnStorageName={COLUMN_STORAGE_NAME}\n columnInfoPanelStorageName={COLUMN_INFO_PANEL_STORAGE_NAME}",
       "module": "/packages/sdk"
     }
   ],

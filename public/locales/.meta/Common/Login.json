@@ -3,7 +3,7 @@
   "content": "Login",
   "content_en_sha1_hash": "4e5a2893bdcc7d239c1db72e4c4ffbe4bea73174",
   "created_at": "2025-05-19T21:30:56.904Z",
-  "updated_at": "2026-05-24T17:27:49.176Z",
+  "updated_at": "2026-06-01T21:20:44.508Z",
   "comment": {
     "text": "This is a label for a login field or a button to initiate the login process. It refers to the user's account name or identifier.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 351,
+      "line_number": 352,
       "context": "</FieldContainer>\n ) : null}\n \n <FieldContainer\n labelVisible\n labelText={t(\"Common:Login\")}\n isRequired\n isVertical\n hasError={!isLoginValid}\n errorMessage={t(\"Common:RequiredField\")}\n >",
       "module": "/packages/shared"
     }

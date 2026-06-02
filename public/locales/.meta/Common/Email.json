@@ -3,7 +3,7 @@
   "content": "Email",
   "content_en_sha1_hash": "84add5b2952787581cb9a8851eef63d1ec75d22b",
   "created_at": "2025-05-19T21:30:44.776Z",
-  "updated_at": "2026-05-26T17:09:24.540Z",
+  "updated_at": "2026-06-01T21:20:44.386Z",
   "comment": {
     "text": "This is a label for an email address, used in user information displays and table headers. It appears as a short label.",
     "is_auto": true,
@@ -18,9 +18,15 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/MainBar/SocialAuthWelcomeBar.jsx",
-      "line_number": 83,
-      "context": "value: (\n <span>{`${user?.firstName ?? \"\"} ${user?.lastName ?? \"\"}`.trim()}</span>\n ),\n },\n {\n label: t(\"Common:Email\"),\n value: <span>{user?.email}</span>,\n },\n {\n label: t(\"SocialAuthWelcomeDialog:GeneratedPassword\"),\n value: (",
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/SocialAuthWelcomePanel.jsx",
+      "line_number": 82,
+      "context": "value: (\n <span>{`${user?.firstName ?? \"\"} ${user?.lastName ?? \"\"}`.trim()}</span>\n ),\n },\n {\n label: t(\"Common:Email\"),\n value: <span>{user?.email}</span>,\n },\n {\n label: t(\"Common:Password\"),\n value: (",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/ProfileCard.tsx",
+      "line_number": 144,
+      "context": "</Text>\n </div>\n \n <div className={styles.profileCardField}>\n <Text as=\"span\" className={styles.profileCardLabel}>\n {t(\"Common:Email\")}\n </Text>\n <Text as=\"span\" className={styles.profileCardValue}>\n {email}\n </Text>\n </div>",
       "module": "/packages/client"
     },
     {
@@ -91,8 +97,8 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 230,
-      "context": "/>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerEmail\"\n className=\"field-container-width\"\n labelText={t(\"Common:Email\")}\n isVertical\n >\n <TextInput\n id=\"textInputContainerEmail\"\n testId=\"company_info_settings_email_input\"",
+      "line_number": 231,
+      "context": "/>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerEmail\"\n className=\"field-container-width\"\n labelText={t(\"Common:Email\")}\n isVertical\n >\n <TextInput\n id=\"textInputContainerEmail\"\n name=\"company_email\"",
       "module": "/packages/shared"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "No file will be copied. The original file will be retained in the destination folder.",
   "content_en_sha1_hash": "d031adeeb4ad91e6a7490531b401915486d79266",
   "created_at": "2025-05-19T21:30:48.907Z",
-  "updated_at": "2026-05-15T14:00:06.651Z",
+  "updated_at": "2026-06-01T21:20:44.404Z",
   "comment": {
     "text": "This is a description that appears in a dialog when a file conflict is detected. It informs the user that the original file will be kept and no copy will be made.",
     "is_auto": true,
@@ -22,6 +22,12 @@
       "line_number": 76,
       "context": "overwriteTitle={t(\"OverwriteTitle\")}\n overwriteDescription={t(\"OverwriteDescription\")}\n duplicateTitle={t(\"Common:CreateFileCopy\")}\n duplicateDescription={t(\"CreateDescription\")}\n skipTitle={t(\"SkipTitle\")}\n skipDescription={t(\"SkipDescription\")}\n headerLabel={t(\"ActionRequired\")}\n />\n );\n }",
       "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/conflict-resolve-dialog/index.tsx",
+      "line_number": 108,
+      "context": ": t(\"Common:CreateDescription\");\n \n const skipTitle = t(\"Common:SkipTitle\");\n const skipDescription = hasFolders\n ? t(\"Common:SkipFolderDescription\")\n : t(\"Common:SkipDescription\");\n \n return (\n <ConflictResolve\n visible={visible}\n isLoading={false}",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

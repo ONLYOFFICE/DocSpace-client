@@ -198,7 +198,6 @@
   "OAuthDescription": "Sử dụng API {{organizationName}} {{productName}} để ủy quyền và thực hiện các hành động như truy cập tệp và hơn thế nữa.",
   "OpenInAppOnly": "Chỉ mở trong ứng dụng",
   "OpenInWebOnly": "Chỉ mở bằng web",
-  "Overview": "Tổng quan",
   "PasswordMinLenght": "Độ dài mật khẩu tối thiểu",
   "PersonalFiles": "Tập tin cá nhân",
   "PluginDescription": "Mở rộng chức năng {{productName}} của bạn, kết nối các dịch vụ của bên thứ ba hoặc nâng cao trải nghiệm người dùng hiện có.",

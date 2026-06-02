@@ -3,7 +3,7 @@
   "content": "Event time",
   "content_en_sha1_hash": "795e7a4d5d53d91259ae038d0eae2894f2e2d5af",
   "created_at": "2025-05-19T21:30:49.711Z",
-  "updated_at": "2026-05-15T15:37:40.265Z",
+  "updated_at": "2026-06-01T21:20:44.481Z",
   "comment": {
     "text": "This is a label for a field displaying the time an event occurred, shown within the details bar of a webhook event.",
     "is_auto": true,

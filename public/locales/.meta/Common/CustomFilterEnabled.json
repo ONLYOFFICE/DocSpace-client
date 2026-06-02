@@ -2,18 +2,18 @@
   "key_path": "CustomFilterEnabled",
   "content": "Custom filter for the selected file enabled",
   "content_en_sha1_hash": "2e614b1037d174f7e01244b06af7ffb0f67ac0cc",
-  "created_at": "2026-05-24T17:27:22.649Z",
-  "updated_at": "2026-05-24T18:24:02.807Z",
+  "created_at": "2025-05-19T21:30:55.406Z",
+  "updated_at": "2026-06-01T21:20:44.522Z",
   "comment": {
-    "text": "Success toast message appearing when a custom filter for a selected file is successfully enabled.",
+    "text": "Toast message. Appears when a custom filter is successfully applied to a selected file.",
     "is_auto": true,
-    "updated_at": "2026-05-24T18:24:02.807Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-04-11T21:10:09.373Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1550,
+      "line_number": 1601,
       "context": "changeCustomFilter = async (item, t) => {\n return enableCustomFilter(item.id, !item.customFilterEnabled)\n .then((res) => {\n if (res.customFilterEnabled) {\n toastr.success(t(\"CustomFilterEnabled\"));\n } else {\n toastr.success(t(\"CustomFilterDisabled\"));\n }\n })\n .catch((err) => {",
       "module": "/packages/client"
     },
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,
@@ -170,12 +170,6 @@
       "approved_at": null
     },
     "sl": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

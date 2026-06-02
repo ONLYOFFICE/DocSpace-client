@@ -2,13 +2,13 @@
   "key_path": "Uploading",
   "content": "Uploading",
   "content_en_sha1_hash": "de27240983ef2f1432e07df25dd609712f69a107",
-  "created_at": "2026-05-24T17:27:42.948Z",
-  "updated_at": "2026-05-24T17:28:37.126Z",
+  "created_at": "2025-05-19T21:30:56.289Z",
+  "updated_at": "2026-06-01T21:20:44.429Z",
   "comment": {
-    "text": "Title for the upload panel, a status label for file upload progress, and part of an alert message describing a canceled operation.",
+    "text": "This is a status message or label indicating that files are currently being uploaded. It appears in the upload panel, file progress indicators, and toast messages.",
     "is_auto": true,
-    "updated_at": "2026-05-24T17:28:37.126Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-04-11T21:07:49.277Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -19,19 +19,19 @@
     },
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 271,
+      "line_number": 305,
       "context": "case deletePermanently:\n return i18n.t(\"Files:DeletingPermanently\");\n case upload:\n if (progress > 0 && progress < 100)\n return i18n.t(\"Files:UploadingProgress\", { progress });\n return i18n.t(\"Common:Uploading\");\n case convert:\n return i18n.t(\"Files:Converting\");\n case deleteVersionFile:\n return i18n.t(\"Files:DeletingVersion\");\n case roomReencryption:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/UploadDataStore.js",
-      "line_number": 539,
+      "line_number": 542,
       "context": "operation: OPERATIONS_NAME.upload,\n completed: true,\n canceled: true,\n alert: true,\n label: i18n.t(\"Common:CanceledOperation\", {\n operationName: i18n.t(\"Common:Uploading\"),\n }),\n });\n \n toastr.info(i18n.t(\"Common:CancelUpload\"));\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/upload-panel/index.tsx",
-      "line_number": 46,
+      "line_number": 47,
       "context": "const onCancelItem = (uniqueId: string) => {\n uploadStore.cancelItem(uniqueId);\n };\n \n const title = t(\"Common:Uploading\");\n \n return (\n <ModalDialog\n visible={uploadStore.panelVisible}\n onClose={onClose}",
       "module": "/packages/sdk"
     }
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,
@@ -182,12 +182,6 @@
       "approved_at": null
     },
     "sl": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

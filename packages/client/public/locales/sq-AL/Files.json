@@ -16,7 +16,6 @@
   "ArchiveAction": "Arkivi bosh",
   "ArchivedRoomsAction": "Dhomat janë të arkivuara",
   "ArchiveEmptyScreenUser": "Dhomat që janë akrivuar do të shfaqen këtu.",
-  "AreYouSureWantLeaveRoom": "A jeni të sigurt që dëshironi të largoheni nga kjo dhomë?",
   "ByErasure": "Fshirja",
   "ChangeAgentOwnerSelectorInfo": "Vetëm një administrator dhome ose një administrator i {{productName}} mund të bëhet pronar i agjentit",
   "ChangeTheAgentOwner": "Ndryshoni pronarin e agjentit",
@@ -78,7 +77,6 @@
   "Index": "Indeks",
   "LastActivity": "Aktiviteti i fundit",
   "LastOpened": "Të fundit të hapur",
-  "LeaveRoomDescription": "Ju jeni pronari i kësaj dhome. Përpara se të dilni nga dhoma, duhet të transferoni rolin e pronarit te një përdorues tjetër.",
   "LeaveRoomFormFillingWarning": "Ju jeni aktualisht i caktuar për plotësimin e formularëve në këtë dhomë. Largimi do të ndalojë ato forma në hapin tuaj. Ju mund të rilidheni vetëm përmes një ftese të re nga një administrator i dhomës.",
   "LifetimeDialogDescription": "Numërimi mbrapsht i jetëgjatësisë fillon në datën e krijimit të skedarit. Disa skedarë në këtë dhomë tejkalojnë jetëgjatësinë e propozuar dhe do të fshihen sapo të aktivizoni cilësimin.",
   "LifetimeDialogDescriptionHeader": "Skedarët e vjetër me jetëgjatësi të tejkaluar do të fshihen",
@@ -177,12 +175,10 @@
   "UserLimitDescription": "Përcaktoni numrin e përdoruesve që mund të bashkohen përmes këtij liênku të ftonit.",
   "VersionHistory": "Historia e versionit",
   "WaitOperation": "Prisni që operacioni aktual të përfundojë",
-  "WantLeaveRoom": "Dëshiron vërtet të largohesh nga kjo dhomë? Do të mund t'i bashkohesh sërish me ftesë të re nga një administrator i dhomës.",
   "WarningCopyToFormRoomServal": "Kopjimi i disa skedarëve në dhomën e plotësimit të formularit nuk mbështetet. Kopjo një formë PDF {{ organizationName }} në të njëjtën kohë.",
   "WarningMoveToFormRoom": "Skedari nuk mund të zhvendoset në këtë dhomë. Ju lutemi provoni të zhvendosni formularin PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Zhvendosja e disa skedarëve në dhomën e plotësimit të formularit nuk mbështetet. Lëvizni një formular PDF {{ organizationName }} në të njëjtën kohë.",
   "WillBeDeletedPermanently": "{{date}} do të fshihet përgjithmonë",
   "YouLeftTheAgent": "Ju e keni lënë agjentin",
-  "YouLeftTheRoom": "Ju keni dalë nga dhoma",
   "YourUserTypeHasChanged": "Lloji juaj i përdoruesit është ndryshuar në <1>“{{userType}}”</1> nga administratori i {{productName}} <1>{{adminName}}</1>."
 }

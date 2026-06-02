@@ -139,6 +139,16 @@ export const useFeedTranslation = (
         return t("Common:RoomLogoChanged");
       case FeedActionKeys.RoomChangeOwner:
         return t("Common:RoomChangeOwner");
+      case FeedActionKeys.RoomCreateUser:
+        if (hasRelatedItems)
+          return t("Common:RoomCreateUserCount", { count });
+        return t("Common:RoomCreateUser");
+      case FeedActionKeys.RoomRemoveUser:
+        return t("Common:RoomRemoveUser");
+      case FeedActionKeys.RoomGroupAdded:
+        if (hasRelatedItems)
+          return t("Common:RoomGroupAddedCount", { count });
+        return t("Common:RoomGroupAdded");
       default:
         return feed.action.key ?? "";
     }

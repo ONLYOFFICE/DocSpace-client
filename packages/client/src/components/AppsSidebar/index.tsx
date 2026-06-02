@@ -114,13 +114,46 @@ const AppsSidebar = ({
             className={`${articleStyles.articleHeader} ${styles.header}`}
             data-show-text={showText ? "true" : "false"}
           >
-            <a href="/" className={styles.logoWrapper}>
-              <img
-                className={showText ? styles.logoFull : styles.logoBurger}
-                src={showText ? fullLogo : burgerLogo}
-                alt="portal logo"
-              />
-            </a>
+            {showText ? (
+              <>
+                <a href="/" className={styles.logoWrapper}>
+                  <img
+                    className={styles.logoFull}
+                    src={fullLogo}
+                    alt="portal logo"
+                  />
+                </a>
+
+                <CollapseButton
+                  showText={showText}
+                  toggleShowText={toggleShowText}
+                  label={collapseLabel}
+                />
+              </>
+            ) : (
+              <div className={styles.collapsedHeader}>
+                <button
+                  type="button"
+                  className={styles.logoBurgerButton}
+                  onClick={toggleShowText}
+                  title={collapseLabel}
+                  aria-label={collapseLabel}
+                >
+                  <img
+                    className={styles.logoBurger}
+                    src={burgerLogo}
+                    alt="portal logo"
+                  />
+                </button>
+
+                <CollapseButton
+                  showText={showText}
+                  toggleShowText={toggleShowText}
+                  label={collapseLabel}
+                  className={styles.collapseButton}
+                />
+              </div>
+            )}
           </div>
         )}
 
@@ -147,12 +180,6 @@ const AppsSidebar = ({
               isNotPaidPeriod={isNotPaidPeriod}
             />
           </div>
-
-          <CollapseButton
-            showText={showText}
-            toggleShowText={toggleShowText}
-            label={collapseLabel}
-          />
 
           {user && !isMobile ? (
             <div className={styles.profileBlockWrapper}>

@@ -313,6 +313,7 @@ const DocumentService = ({
             <PasswordInput
               key={secretKeyVersion}
               id="secretKey"
+              inputName="secret_key"
               type="password"
               simpleView
               tabIndex={2}

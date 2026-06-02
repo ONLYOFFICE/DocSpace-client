@@ -830,6 +830,42 @@ class SettingsStore {
       : this.siteDomain;
   }
 
+  get nextcloudUrl() {
+    return this.siteDomain && this.siteEntries?.nextcloud
+      ? `${this.siteDomain}${this.siteEntries.nextcloud}`
+      : this.siteDomain;
+  }
+
+  get owncloudUrl() {
+    return this.siteDomain && this.siteEntries?.owncloud
+      ? `${this.siteDomain}${this.siteEntries.owncloud}`
+      : this.siteDomain;
+  }
+
+  get confluenceUrl() {
+    return this.siteDomain && this.siteEntries?.confluence
+      ? `${this.siteDomain}${this.siteEntries.confluence}`
+      : this.siteDomain;
+  }
+
+  get alfrescoUrl() {
+    return this.siteDomain && this.siteEntries?.alfresco
+      ? `${this.siteDomain}${this.siteEntries.alfresco}`
+      : this.siteDomain;
+  }
+
+  get moodleUrl() {
+    return this.siteDomain && this.siteEntries?.moodle
+      ? `${this.siteDomain}${this.siteEntries.moodle}`
+      : this.siteDomain;
+  }
+
+  get odooUrl() {
+    return this.siteDomain && this.siteEntries?.odoo
+      ? `${this.siteDomain}${this.siteEntries.odoo}`
+      : this.siteDomain;
+  }
+
   get wordPressUrl() {
     return this.siteDomain && this.siteEntries?.officeforwordpress
       ? `${this.siteDomain}${this.siteEntries.officeforwordpress}`

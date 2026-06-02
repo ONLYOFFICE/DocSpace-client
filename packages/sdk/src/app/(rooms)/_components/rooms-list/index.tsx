@@ -41,7 +41,12 @@ import type {
 import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TSortBy, TCreatedBy } from "@docspace/shared/types";
-import { DeviceType, FolderType, RoomSearchArea, RoomsType } from "@docspace/shared/enums";
+import {
+  DeviceType,
+  FolderType,
+  RoomSearchArea,
+  RoomsType,
+} from "@docspace/shared/enums";
 
 import { PAGE_COUNT } from "@/utils/constants";
 
@@ -67,6 +72,7 @@ import RoomsTileView from "../rooms-tile-view";
 import RoomsTableView from "../rooms-table-view";
 import RoomsRowView from "../rooms-row-view";
 import ChangeRoomOwnerDialog from "../change-room-owner-dialog";
+import LeaveRoomDialog from "../leave-room-dialog";
 import InvitePanel from "../invite-panel";
 import EmptyView from "../empty-view";
 import CreateEditRoomDialog from "../create-edit-room-dialog";
@@ -74,6 +80,7 @@ import RestoreRoomDialog from "../restore-room-dialog";
 import DeleteRoomDialog from "../delete-room-dialog";
 import MoveToArchiveDialog from "../move-to-archive-dialog";
 import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
+import { useRoomsTagsStore } from "../../_store/RoomsTagsStore";
 import useResetSelectionClick from "@/app/(docspace)/(files)/_components/list/hooks/useResetSelectionClick";
 
 type RoomsListProps = {
@@ -109,9 +116,12 @@ const RoomsList = ({
   const { setIsEmptyList, filesViewAs, setFilesViewAs, currentDeviceType } =
     useSettingsStore();
   const filesListStore = useFilesListStore();
-  const { setRootFolderType } = filesListStore;
+  const tagsStore = useRoomsTagsStore();
+  const { setItems, setPathParts, setCurrentFolder, setRootFolderType } =
+    filesListStore;
   const { setSelection, setBufferSelection } = useFilesSelectionStore();
   const navigationStore = useNavigationStore();
+  const { setNavigationItems } = navigationStore;
   const activeItemsStore = useActiveItemsStore();
   const operationsStore = useRoomsOperationsStore();
   const infoPanelStore = useInfoPanelStore();
@@ -145,6 +155,7 @@ const RoomsList = ({
       undefined,
       isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
     );
+    f.type = String(RoomsType.CustomRoom);
     const sp = new URLSearchParams(filesFilter);
     if (sp.get("page")) f.page = Number(sp.get("page"));
     if (sp.get("pageCount")) f.pageCount = Number(sp.get("pageCount"));
@@ -164,18 +175,36 @@ const RoomsList = ({
     return f;
   });
 
-  const initRef = React.useRef(false);
-  if (!initRef.current) {
-    initRef.current = true;
-    filesListStore.setItems([
+  const initialItems = React.useMemo(
+    () => [
       ...folders.map(convertFolderToItem),
       ...files.map((file) => convertFileToItem(file)),
-    ]);
-  }
+    ],
+    [folders, files, convertFolderToItem, convertFileToItem],
+  );
+
+  const initRef = React.useRef(false);
+
+  React.useLayoutEffect(() => {
+    if (initRef.current) return;
+    initRef.current = true;
+
+    setItems(initialItems);
+    setPathParts(null);
+    setCurrentFolder(current);
+    setNavigationItems([]);
+  }, [
+    initialItems.length,
+    current,
+    setItems,
+    setPathParts,
+    setCurrentFolder,
+    setNavigationItems,
+  ]);
 
   const [total, setTotal] = React.useState<number>(totalProp);
   const [hasNextPage, setHasNextPage] = React.useState<boolean>(
-    filesListStore.items.length < total,
+    initialItems.length < totalProp,
   );
 
   const [editingRoom, setEditingRoom] = React.useState<
@@ -399,11 +428,16 @@ const RoomsList = ({
           updatedRoom as unknown as TFolder,
         );
         filesListStore.replaceItem(roomId, updatedItem);
+        const updatedTags = (updatedRoom as unknown as { tags?: string[] })
+          .tags;
+        if (Array.isArray(updatedTags) && updatedTags.length > 0) {
+          tagsStore.upsertTags(updatedTags);
+        }
       } catch {
         // ignore
       }
     },
-    [convertFolderToItem, filesListStore],
+    [convertFolderToItem, filesListStore, tagsStore],
   );
 
   const requestRunning = React.useRef(false);
@@ -431,6 +465,7 @@ const RoomsList = ({
       undefined,
       isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
     );
+    newFilter.type = String(RoomsType.CustomRoom);
     const sp = new URLSearchParams(window.location.search);
     if (sp.get("page")) newFilter.page = Number(sp.get("page"));
     if (sp.get("sortBy"))
@@ -477,7 +512,7 @@ const RoomsList = ({
 
       setIsEmptyList(newItems.length === 0);
 
-      filesListStore.setItems(newItems);
+      setItems(newItems);
       setTotal(newTotal);
       setHasNextPage(newTotal > newItems.length);
       setFilter(newFilter);
@@ -552,7 +587,8 @@ const RoomsList = ({
     setRootFolderType(current.rootFolderType);
   }, [current.rootFolderType, setRootFolderType]);
 
-  const visibleItems = filesListStore.items;
+  const visibleItems =
+    filesListStore.items.length > 0 ? filesListStore.items : initialItems;
 
   let content: React.ReactNode;
 
@@ -682,6 +718,10 @@ const RoomsList = ({
           onChanged={refreshSingleRoom}
         />
       ) : null}
+      <LeaveRoomDialog
+        currentUserId={user?.id}
+        onTransferOwnership={(room) => setChangingOwnerRoom(room)}
+      />
       {invitingRoom ? (
         <InvitePanel
           visible

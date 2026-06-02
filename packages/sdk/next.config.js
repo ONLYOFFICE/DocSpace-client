@@ -60,10 +60,27 @@ const version = pkg.version;
 const banner = getBanner(version);
 const isDev = process.env.NODE_ENV !== productionMode;
 
+const monorepoRoot = path.resolve(__dirname, "../..");
+const docspaceApiSdkDir = path.dirname(
+  require.resolve("@onlyoffice/docspace-api-sdk/package.json", {
+    paths: [path.resolve(__dirname, "../../libs/ui-kit")],
+  }),
+);
+const docspaceApiSdkTraceGlob = `${path
+  .relative(__dirname, docspaceApiSdkDir)
+  .split(path.sep)
+  .join("/")}/**`;
+
 const nextConfig = {
   basePath: "/sdk",
+  outputFileTracingRoot: monorepoRoot,
   outputFileTracingIncludes: {
     "/forms/**": ["./src/app/(forms)/_styles/*.scss", "./data.zip"],
+    "/*": [
+      docspaceApiSdkTraceGlob,
+      "public/locales/*/*.json",
+      "../../public/locales/*/Common.json",
+    ],
   },
   serverExternalPackages: [
     "nconf",
@@ -72,6 +89,7 @@ const nextConfig = {
     "winston-cloudwatch",
     "winston-daily-rotate-file",
     "@aws-sdk/client-cloudwatch-logs",
+    "@onlyoffice/docspace-api-sdk",
   ],
   compiler: {
     styledComponents: true,
@@ -93,6 +111,7 @@ const nextConfig = {
   },
   webpack: (config) => {
     const isProduction = config.mode === "production";
+
     // Add resolve configuration for shared package
     config.resolve = {
       ...config.resolve,

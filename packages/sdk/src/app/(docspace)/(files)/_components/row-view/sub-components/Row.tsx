@@ -41,6 +41,7 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { FolderType } from "@docspace/shared/enums";
 import {
   FilesRow,
   FilesRowWrapper,
@@ -188,6 +189,9 @@ const Row = observer(
       onCopyShareLink?.(observableItem);
     }, [onCopyShareLink, observableItem]);
 
+    const isTrashFolder =
+      filesListStore.rootFolderType === FolderType.TRASH;
+
     const quickButtonsComponent = (
       <QuickButtons
         t={t}
@@ -197,6 +201,7 @@ const Row = observer(
         onClickLock={onClickLock}
         onClickShare={onCopyShareLink ? handleCopyShareLink : undefined}
         openShareTab={onCopyShareLink ? handleCopyShareLink : undefined}
+        isTrashFolder={isTrashFolder}
       />
     );
 

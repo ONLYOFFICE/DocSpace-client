@@ -3,7 +3,7 @@
   "content": "Current balance: <1>{{balance}}</1>",
   "content_en_sha1_hash": "612d0b372e9a00cb71ed89195d7313b3674e1db7",
   "created_at": "2026-04-10T13:53:42.357Z",
-  "updated_at": "2026-05-15T14:00:07.001Z",
+  "updated_at": "2026-05-27T14:11:50.764Z",
   "comment": {
     "text": "This text displays a user's current account balance. It appears in billing-related modals and sections, with `{{balance}}` representing the monetary value.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/index.tsx",
-      "line_number": 216,
+      "line_number": 223,
       "context": "t(\"AIToolsDescription\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n }),\n <CommonTrans\n key=\"CurrentBalance\"\n i18nKey=\"CurrentBalance\"\n values={{ balance: formatAiServiceCurrency() }}\n components={{\n 1: <span style={{ fontWeight: 600 }} />,\n }}",
       "module": "/libs/ui-kit"
     },

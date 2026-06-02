@@ -3,7 +3,7 @@
   "content": "{{count}} encrypted file(s) could not be shared with new members. Try again later or share them manually.",
   "content_en_sha1_hash": "ae480b22b3dd566ae7486bcead721d973206513d",
   "created_at": "2026-05-24T17:27:26.325Z",
-  "updated_at": "2026-05-24T18:11:16.246Z",
+  "updated_at": "2026-06-01T21:20:44.424Z",
   "comment": {
     "text": "Warning toast message appearing when some encrypted files fail to be shared with new members during the invitation process. The {{count}} variable represents the number of failed files.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 542,
+      "line_number": 558,
       "context": "}\n }\n \n if (failures.length > 0) {\n toastr.warning(\n t(\"Common:EncryptedReencryptPartialFailure\", {\n count: failures.length,\n }),\n );\n } else if (skippedMembers.length === 0) {\n toastr.success(t(\"Common:UsersInvited\"));",
       "module": "/packages/client"
     }

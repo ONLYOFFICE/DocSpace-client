@@ -4,5 +4,8 @@
   "ContinueToProduct": "{{productName}} ilə davam edin",
   "GeneratedPassword": "Yaranmış şifrə",
   "ProductNameDetail": "{{productName}} adı",
-  "ReviewAccountDetails": "Xüsusi hesab məlumatlarınızı nəzərdən keçmək üçün bir dəqiqə vaxt ayırın:"
+  "ReviewAccountDetails": "Xüsusi hesab məlumatlarınızı nəzərdən keçmək üçün bir dəqiqə vaxt ayırın:",
+  "SetEmailPassword": "Şifrə təyin et",
+  "WelcomeSubtitle": "Sahəniz uğurla yaradıldı. Profil məlumatlarınızı nəzərdən keçirin və işə başlayın.",
+  "YourProfileDetails": "Profil məlumatlarınız"
 }

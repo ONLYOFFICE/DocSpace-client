@@ -1,13 +1,13 @@
 {
   "key_path": "NoMCPServersDescription",
-  "content": "Please connect {{mcpServers}} in {{productName}} settings to use them in the AI agent.",
-  "content_en_sha1_hash": "3515363cff5f0ece3bcdda3615547237e6ee87a7",
-  "created_at": "2026-05-25T18:26:10.298Z",
-  "updated_at": "2026-05-25T18:29:36.546Z",
+  "content": "Please connect {{mcpServers}} in {{productName}} settings to use them in the {{aiAgent}}.",
+  "content_en_sha1_hash": "cb7d0b5345d622db847157a2457d0c1cff8e3cce",
+  "created_at": "2026-06-01T21:20:26.047Z",
+  "updated_at": "2026-06-01T21:34:42.865Z",
   "comment": {
-    "text": "Empty screen description providing instructions on how to enable MCP servers. It includes placeholders for the server title and the product name.",
+    "text": "Empty screen description instructing the user to configure MCP servers in the product settings. Includes placeholders for the server title, product name, and AI agent name.",
     "is_auto": true,
-    "updated_at": "2026-05-25T18:29:36.546Z",
+    "updated_at": "2026-06-01T21:34:42.865Z",
     "model": "gemma4:26b"
   },
   "usage": [

@@ -2,24 +2,24 @@
   "key_path": "CustomFilterDisable",
   "content": "Disable Custom filter",
   "content_en_sha1_hash": "598157d6d4873c7b214960264722b2388f27f0ee",
-  "created_at": "2026-05-24T17:27:22.594Z",
-  "updated_at": "2026-05-24T18:25:19.181Z",
+  "created_at": "2025-05-19T21:30:55.390Z",
+  "updated_at": "2026-06-01T21:20:44.519Z",
   "comment": {
-    "text": "Menu option label in a context menu or dropdown that appears when the custom filter is currently active.",
+    "text": "This is a button label that appears in a menu. It allows users to disable a custom filter that has been applied to a file or folder.",
     "is_auto": true,
-    "updated_at": "2026-05-24T18:25:19.181Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-04-11T21:10:11.565Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2605,
+      "line_number": 2658,
       "context": "...versionActions,\n {\n id: \"option_custom-filter\",\n key: \"custom-filter\",\n label: item.customFilterEnabled\n ? t(\"Common:CustomFilterDisable\")\n : t(\"Common:CustomFilterEnable\"),\n icon: CustomFilterReactSvgUrl,\n onClick: () => this.onSetUpCustomFilter(item, t),\n disabled: Boolean(\n !isRoomAdmin &&",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 403,
+      "line_number": 414,
       "context": "(i: TFileItem) => {\n return {\n id: \"option_custom-filter\",\n key: \"custom-filter\",\n label: i.customFilterEnabled\n ? t(\"Common:CustomFilterDisable\")\n : t(\"Common:CustomFilterEnable\"),\n icon: CustomFilterReactSvgUrl,\n onClick: () => changeCustomFilter(i),\n disabled: false,\n };",
       "module": "/packages/sdk"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,
@@ -170,12 +170,6 @@
       "approved_at": null
     },
     "sl": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

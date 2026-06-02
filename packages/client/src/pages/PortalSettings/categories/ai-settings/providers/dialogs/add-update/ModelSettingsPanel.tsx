@@ -119,6 +119,7 @@ export const ModelSettingsPanel = ({
             <TextInput
               size={InputSize.base}
               type={InputType.text}
+              name="model_name"
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
               scale

@@ -1,0 +1,29 @@
+{
+  "key_path": "StartupPlan",
+  "content": "Startup",
+  "content_en_sha1_hash": "79ce33706ca0540aaf9d8ed291d64bf45fad0cd4",
+  "created_at": "2026-06-01T21:20:38.387Z",
+  "updated_at": "2026-06-01T21:21:35.851Z",
+  "comment": {
+    "text": "Plan name label used as a variable within the dashboard header title to identify the current subscription tier.",
+    "is_auto": true,
+    "updated_at": "2026-06-01T21:21:35.851Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/Header.tsx",
+      "line_number": 57,
+      "context": "return (\n <header className={styles.planHeader}>\n <Text className={styles.planTitle}>\n {t(\"Common:BusinessTitle\", {\n planName: isFreeTariff\n ? t(\"Common:StartupPlan\")\n : t(\"Common:BusinessPlan\"),\n })}\n </Text>\n <div className={styles.planSubline}>\n {!isFreeTariff && paymentDate ? (",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

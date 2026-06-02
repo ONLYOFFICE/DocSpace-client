@@ -16,7 +16,6 @@
   "ArchiveAction": "Empty archive",
   "ArchivedRoomsAction": "The rooms are archived",
   "ArchiveEmptyScreenUser": "Rooms that have been archived will appear here.",
-  "AreYouSureWantLeaveRoom": "Are you sure you want to leave this room?",
   "ByErasure": "Erasure",
   "ChangeAgentOwnerSelectorInfo": "Only a room admin or a {{productName}} admin can become the owner of the agent",
   "ChangeTheAgentOwner": "Change the agent owner",
@@ -78,7 +77,6 @@
   "Index": "Index",
   "LastActivity": "Last activity",
   "LastOpened": "Last opened",
-  "LeaveRoomDescription": "You are the owner of this room. Before you leave the room, you must transfer the owner's role to another user.",
   "LeaveRoomFormFillingWarning": "You are currently assigned to form completion in this room. Leaving will halt those forms at your step. You can rejoin only via a new invitation from a room admin.",
   "LifetimeDialogDescription": "Lifetime countdown begins at the file creation date. Some files in this room exceed the proposed lifetime and will be deleted once you enable the setting.",
   "LifetimeDialogDescriptionHeader": "Older files with exceeded lifetime will be deleted",
@@ -177,12 +175,10 @@
   "UserLimitDescription": "Define the number of users who can join via this invite link.",
   "VersionHistory": "Version history",
   "WaitOperation": "Wait for the current operation to complete",
-  "WantLeaveRoom": "Do you really want to leave this room? You will be able to join it again via new invitation by a room admin.",
   "WarningCopyToFormRoomServal": "Copying several files to the Form Filling room is not supported. Copy one {{ organizationName }} PDF form at a time.",
   "WarningMoveToFormRoom": "The file cannot be moved to this room. Please try to move the {{ organizationName }} PDF form.",
   "WarningMoveToFormRoomServal": "Moving several files to the Form Filling room is not supported. Move one {{ organizationName }} PDF form at a time.",
   "WillBeDeletedPermanently": "{{date}} will be deleted permanently",
   "YouLeftTheAgent": "You have left the agent",
-  "YouLeftTheRoom": "You have left the room",
   "YourUserTypeHasChanged": "Your user type has been changed to <1>“{{userType}}”</1> by the {{productName}} admin <1>{{adminName}}</1>."
 }

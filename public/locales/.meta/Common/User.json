@@ -3,7 +3,7 @@
   "content": "User",
   "content_en_sha1_hash": "9f8a2389a20ca0752aa9e95093515517e90e194c",
   "created_at": "2025-05-19T21:30:49.454Z",
-  "updated_at": "2026-05-24T17:27:49.094Z",
+  "updated_at": "2026-06-01T21:20:44.414Z",
   "comment": {
     "text": "This is a label for a user type, appearing in tables, dropdowns, and dialogs. It refers to a standard user account.",
     "is_auto": true,
@@ -43,8 +43,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ConnectDatabaseForm.tsx",
-      "line_number": 264,
-      "context": "/>\n </div>\n \n <div className={styles.fieldGroup}>\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:User\")}\n </Text>\n <TextInput\n scale\n type={InputType.text}\n value={store.user}",
+      "line_number": 267,
+      "context": "/>\n </div>\n \n <div className={styles.fieldGroup}>\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:User\")}\n </Text>\n <TextInput\n scale\n name=\"db_user\"\n type={InputType.text}",
       "module": "/packages/sdk"
     },
     {

@@ -1,13 +1,13 @@
 {
   "key_path": "EnableAIAgent",
-  "content": "Enable AI agent",
-  "content_en_sha1_hash": "ff238253372273e71a0dbd184787ca0c25b2eb1f",
-  "created_at": "2026-05-25T18:26:06.346Z",
-  "updated_at": "2026-05-25T18:32:27.230Z",
+  "content": "Enable AI Agent",
+  "content_en_sha1_hash": "8e39e84907b2314146cb285fe7f1b9327bbdb9e3",
+  "created_at": "2026-06-01T21:20:17.960Z",
+  "updated_at": "2026-06-01T21:37:12.003Z",
   "comment": {
-    "text": "Label for a toggle switch in the AI Agent settings form used to activate or deactivate the AI agent feature.",
+    "text": "Label for a toggle switch in the AI Agent settings form used to activate or deactivate the feature.",
     "is_auto": true,
-    "updated_at": "2026-05-25T18:32:27.230Z",
+    "updated_at": "2026-06-01T21:37:12.003Z",
     "model": "gemma4:26b"
   },
   "usage": [

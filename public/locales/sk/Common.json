@@ -2115,5 +2115,11 @@
   "SharedBy": "Zdieľané od",
   "TableSettingsTitle": "Spravovať zobrazené stĺpce",
   "ByErasure": "Vymazanie",
-  "DaysRemaining": "Zostávajúce dni: {{daysRemaining}}"
+  "DaysRemaining": "Zostávajúce dni: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Položky v {{sectionName}} sú automaticky odstránené po 30 dňoch.",
+  "EmptySection": "Vyprázdniť {{sectionName}}",
+  "RestoreAll": "Obnoviť všetko",
+  "DeleteForeverTitle": "Odstrániť navždy?",
+  "DeleteForeverNote": "Všetky položky z časti {{sectionName}} budú navždy vymazané. Nebude možné ich obnoviť.",
+  "SuccessEmptyAction": "Časť {{sectionName}} bola vyprázdnená"
 }

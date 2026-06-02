@@ -57,6 +57,7 @@ import type {
 import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
+import WarningComponent from "@docspace/ui-kit/components/navigation/sub-components/WarningComponent";
 
 import { SectionWrapper } from "@/app/(docspace)/_components/section";
 import Header from "@/app/(docspace)/_components/header";
@@ -255,11 +256,20 @@ const DocsLayout = observer(
       isDeleting,
       closeDeleteDialog,
       confirmDelete,
+      requestEmptyTrash,
+      emptyTrashDialogVisible,
+      isEmptyingTrash,
+      closeEmptyTrashDialog,
+      confirmEmptyTrash,
     } = useTrashActions(trackOperation);
 
     const deleteHandler = React.useMemo(
-      () => ({ deleteItem: requestDeleteItem, deleteItems: requestDelete }),
-      [requestDeleteItem, requestDelete],
+      () => ({
+        deleteItem: requestDeleteItem,
+        deleteItems: requestDelete,
+        emptyTrash: requestEmptyTrash,
+      }),
+      [requestDeleteItem, requestDelete, requestEmptyTrash],
     );
 
     const renameHandler = React.useMemo(
@@ -428,6 +438,15 @@ const DocsLayout = observer(
                                   headerOffset={headerOffset}
                                 />
                               }
+                              sectionWarningContent={
+                                isTrash ? (
+                                  <WarningComponent
+                                    title={t("Common:TrashAutoDeleteWarning", {
+                                      sectionName: t("Common:TrashSection"),
+                                    })}
+                                  />
+                                ) : undefined
+                              }
                               sectionFilterContent={
                                 <Filter
                                   filesFilter={filesFilter}
@@ -494,6 +513,15 @@ const DocsLayout = observer(
                           isTrash={isTrash}
                           onClose={closeDeleteDialog}
                           onConfirm={confirmDelete}
+                        />
+                        <DeleteDialog
+                          visible={emptyTrashDialogVisible}
+                          isLoading={isEmptyingTrash}
+                          itemCount={0}
+                          isTrash
+                          isEmptyTrash
+                          onClose={closeEmptyTrashDialog}
+                          onConfirm={confirmEmptyTrash}
                         />
                         {selectorDialogVisible && selectorInitData && (
                           <FilesSelector

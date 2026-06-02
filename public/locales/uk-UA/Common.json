@@ -2145,5 +2145,11 @@
   "SharedBy": "Поділився(-лася)",
   "TableSettingsTitle": "Керувати відображеними стовпцями",
   "ByErasure": "Стирання",
-  "DaysRemaining": "Залишилося днів: {{daysRemaining}}"
+  "DaysRemaining": "Залишилося днів: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Елементи в {{sectionName}} автоматично видаляються через 30 днів.",
+  "EmptySection": "Спорожнити {{sectionName}}",
+  "RestoreAll": "Відновити все",
+  "DeleteForeverTitle": "Видалити назавжди?",
+  "DeleteForeverNote": "Усі елементи розділу {{sectionName}} буде видалено назавжди. Ви не зможете їх відновити.",
+  "SuccessEmptyAction": "Розділ {{sectionName}} спорожнено"
 }

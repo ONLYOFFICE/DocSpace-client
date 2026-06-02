@@ -2145,5 +2145,11 @@
   "SharedBy": "Ndarë nga",
   "TableSettingsTitle": "Menaxhoni kolonat e shfaqura",
   "ByErasure": "Fshirja",
-  "DaysRemaining": "Ditët e mbetura: {{daysRemaining}}"
+  "DaysRemaining": "Ditët e mbetura: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Artikujt në {{sectionName}} fshihen automatikisht pas 30 ditësh.",
+  "EmptySection": "Bosh {{sectionName}}",
+  "RestoreAll": "Rivendosni të gjitha",
+  "DeleteForeverTitle": "Fshini përgjithmonë?",
+  "DeleteForeverNote": "Të gjithë artikujt nga seksioni {{sectionName}} do të fshihen përgjithmonë. Ju nuk do të jeni në gjendje t'i rivendosni ato.",
+  "SuccessEmptyAction": "Seksioni {{sectionName}} u zbraz"
 }

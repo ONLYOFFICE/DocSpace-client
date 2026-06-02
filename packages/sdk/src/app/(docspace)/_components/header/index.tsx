@@ -123,6 +123,21 @@ const Header = ({
   const title = activeCurrent?.title;
   const id = activeCurrent?.id;
 
+  // Desktop trash warning ("Items in Trash are automatically deleted after
+  // 30 days") — rendered by ui-kit Navigation/ControlBtn from titles.warningText
+  // on desktop. Mobile shows the same text via Section.SectionWarning.
+  const navigationTitles = useMemo(
+    () =>
+      isTrashSection
+        ? {
+            warningText: t("Common:TrashAutoDeleteWarning", {
+              sectionName: t("Common:TrashSection"),
+            }),
+          }
+        : undefined,
+    [isTrashSection, t],
+  );
+
   const pathParts = filesListStore.pathParts ?? pathPartsProp;
 
   const isInRoomsContext =
@@ -135,6 +150,12 @@ const Header = ({
   // return rootFolderId = 0 for the section root itself, breaking the equality check.
   const isRootSection = (pathParts?.length ?? 0) <= 1;
   const isRoomsFolder = isInRoomsContext && isRootSection;
+
+  // Trash exposes a header context menu (Empty all / Restore all) even at its
+  // root, as long as it is non-empty — mirror the client.
+  const showTrashHeaderMenu = isTrashSection && !isEmptyList;
+  // Show the kebab / enable the menu in subfolders OR at trash root (non-empty).
+  const isHeaderMenuVisible = !isRootSection || showTrashHeaderMenu;
 
   const navigationItems: TNavigationItem[] = useMemo(() => {
     if (!pathParts) return [];
@@ -245,12 +266,13 @@ const Header = ({
                   currentNavigationItems[0].title,
               );
             }}
-            isTrashFolder={false}
+            isTrashFolder={isTrashSection}
+            titles={navigationTitles}
             isEmptyPage={isEmptyList}
             isEmptyFilesList={isEmptyList}
             onBackToParentFolder={onBackToParentFolder}
             showRootFolderTitle={false}
-            withMenu={!isRootSection}
+            withMenu={isHeaderMenuVisible}
             currentDeviceType={currentDeviceType}
             titleIcon=""
             titleIconTooltip=""
@@ -265,7 +287,7 @@ const Header = ({
             onLogoClick={onBurgerClick ?? (() => {})}
             clearTrash={() => {}}
             showFolderInfo={() => {}}
-            isContextButtonVisible={!isRootSection}
+            isContextButtonVisible={isHeaderMenuVisible}
           />
         </div>
       )}

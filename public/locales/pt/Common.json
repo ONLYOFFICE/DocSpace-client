@@ -2145,5 +2145,11 @@
   "SharedBy": "Compartilhado por",
   "TableSettingsTitle": "Gerenciar colunas exibidas",
   "ByErasure": "Eliminação",
-  "DaysRemaining": "Dias restantes: {{daysRemaining}}"
+  "DaysRemaining": "Dias restantes: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Itens em {{sectionName}} são automaticamente excluídos após 30 dias.",
+  "EmptySection": "Vazio {{sectionName}}",
+  "RestoreAll": "Restaurar tudo",
+  "DeleteForeverTitle": "Eliminar para sempre?",
+  "DeleteForeverNote": "Todos os itens da secção {{sectionName}} serão eliminados para sempre. Não os poderá restaurar.",
+  "SuccessEmptyAction": "{{sectionName}} Secção esvaziada"
 }

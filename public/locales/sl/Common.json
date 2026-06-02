@@ -2145,5 +2145,11 @@
   "SharedBy": "Javno deljeno s",
   "TableSettingsTitle": "Upravljanje prikazanih stolpcev",
   "ByErasure": "Brisanje",
-  "DaysRemaining": "Preostali dnevi: {{daysRemaining}}"
+  "DaysRemaining": "Preostali dnevi: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Predmeti v {{sectionName}} so samodejno izbrisani po 30 dneh.",
+  "EmptySection": "Izprazni {{sectionName}}",
+  "RestoreAll": "Obnovi vse",
+  "DeleteForeverTitle": "Izbriši za vedno?",
+  "DeleteForeverNote": "Vsi elementi iz razdelka {{sectionName}} bodo za vedno izbrisani. Ne boste jih mogli obnoviti.",
+  "SuccessEmptyAction": "Razdelek {{sectionName}} je izpraznjen"
 }

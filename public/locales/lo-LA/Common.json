@@ -2145,5 +2145,11 @@
   "SharedBy": "ແບ່ງປັນໂດຍ",
   "TableSettingsTitle": "ຈັດການຖັນທີ່ສະແດງ",
   "ByErasure": "ລົບ",
-  "DaysRemaining": "ມື້ທີ່ຍັງເຫຼືອ: {{daysRemaining}}"
+  "DaysRemaining": "ມື້ທີ່ຍັງເຫຼືອ: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "ລາຍການໃນ {{sectionName}} ຈະຖືກລຶບໂດຍອັດຕະໂນມັດຫຼັງຈາກ 30 ມື້.",
+  "EmptySection": "{{sectionName}} ຫວ່າງເປົ່າ",
+  "RestoreAll": "ກູ້ຄືນທັງໝົດ",
+  "DeleteForeverTitle": "ລຶບຖາວອນບໍ?",
+  "DeleteForeverNote": "ສິ່ງຂອງທັງໝົດຈາກພາກສ່ວນ {{sectionName}} ຈະຖືກລົບອອກຢ່າງຖາວອນ ແລະທ່ານຈະບໍ່ສາມາດຟື້ນຕົວພວກມັນໄດ້.",
+  "SuccessEmptyAction": "ພາກສ່ວນ {{sectionName}} ເຊື່ອມໂຍງອອກແລ້ວ"
 }

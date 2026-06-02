@@ -2145,5 +2145,11 @@
   "SharedBy": "Chia sẻ bởi",
   "TableSettingsTitle": "Quản lý các cột được hiển thị",
   "ByErasure": "Xóa",
-  "DaysRemaining": "Số ngày còn lại: {{daysRemaining}}"
+  "DaysRemaining": "Số ngày còn lại: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Các mục trong {{sectionName}} sẽ tự động bị xóa sau 30 ngày.",
+  "EmptySection": "Làm trống {{sectionName}}",
+  "RestoreAll": "Khôi phục tất cả",
+  "DeleteForeverTitle": "Xóa vĩnh viễn?",
+  "DeleteForeverNote": "Tất cả các mục từ phần {{sectionName}} này sẽ bị xóa vĩnh viễn. Bạn sẽ không thể khôi phục chúng.",
+  "SuccessEmptyAction": "Phần {{sectionName}} đã được làm trống"
 }

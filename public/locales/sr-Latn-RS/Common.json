@@ -2153,5 +2153,11 @@
   "SharedBy": "Deljeno od",
   "TableSettingsTitle": "Upravljaj prikazanim kolonama",
   "ByErasure": "Brisanje",
-  "DaysRemaining": "Dani preostali: {{daysRemaining}}"
+  "DaysRemaining": "Dani preostali: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Stavke u {{sectionName}} se automatski brišu nakon 30 dana.",
+  "EmptySection": "Isprazni {{sectionName}}",
+  "RestoreAll": "Povrati sve",
+  "DeleteForeverTitle": "Obrisati zauvek?",
+  "DeleteForeverNote": "Svi elementi iz odeljka {{sectionName}} biće trajno izbrisani. Nećete moći da ih vratite.",
+  "SuccessEmptyAction": "Odeljak {{sectionName}} je ispražnjen"
 }

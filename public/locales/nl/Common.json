@@ -2145,5 +2145,11 @@
   "SharedBy": "Gedeeld door",
   "TableSettingsTitle": "Weergegeven kolommen beheren",
   "ByErasure": "Erasure",
-  "DaysRemaining": "Aantal resterende dagen: {{daysRemaining}}"
+  "DaysRemaining": "Aantal resterende dagen: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Items in {{sectionName}} worden automatisch verwijderd na 30 dagen.",
+  "EmptySection": "Leeg {{sectionName}}",
+  "RestoreAll": "Alles herstellen",
+  "DeleteForeverTitle": "Voor altijd verwijderen?",
+  "DeleteForeverNote": "Alle items uit de {{sectionName}} sectie zullen definitief verwijderd worden. U kunt ze niet meer herstellen.",
+  "SuccessEmptyAction": "{{sectionName}} sectie geleegd"
 }

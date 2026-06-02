@@ -2145,5 +2145,11 @@
   "SharedBy": "Μοιράστηκε από",
   "TableSettingsTitle": "Διαχείριση εμφανιζόμενων στηλών",
   "ByErasure": "Διαγραφή",
-  "DaysRemaining": "Ημέρες που απομένουν: {{daysRemaining}}"
+  "DaysRemaining": "Ημέρες που απομένουν: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Τα αντικείμενα στην {{sectionName}} διαγράφονται αυτόματα μετά από 30 ημέρες.",
+  "EmptySection": "Κενό {{sectionName}}",
+  "RestoreAll": "Επαναφορά όλων",
+  "DeleteForeverTitle": "Οριστική διαγραφή;",
+  "DeleteForeverNote": "Όλα τα στοιχεία από την ενότητα {{sectionName}} θα διαγραφούν για πάντα. Δεν θα μπορείτε να τα επαναφέρετε.",
+  "SuccessEmptyAction": "Το τμήμα {{sectionName}} άδειασε"
 }

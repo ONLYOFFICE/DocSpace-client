@@ -2145,5 +2145,11 @@
   "SharedBy": "Kopīgojis",
   "TableSettingsTitle": "Pārvaldiet parādītās kolonnas",
   "ByErasure": "Dzēšana",
-  "DaysRemaining": "Atlikušās dienas: {{daysRemaining}}"
+  "DaysRemaining": "Atlikušās dienas: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "{{sectionName}} sadaļā esoši vienumi tiek automātiski dzēsti pēc 30 dienām.",
+  "EmptySection": "Iztukšot {{sectionName}}",
+  "RestoreAll": "Atjaunot visu",
+  "DeleteForeverTitle": "Vai dzēst uz visiem laikiem?",
+  "DeleteForeverNote": "Visi {{sectionName}} sadaļas elementi tiks neatgriezeniski dzēsti. Jūs nevarēsiet tos atjaunot.",
+  "SuccessEmptyAction": "{{sectionName}} sadaļa iztukšota"
 }

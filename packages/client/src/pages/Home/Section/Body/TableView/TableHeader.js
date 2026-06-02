@@ -273,7 +273,7 @@ class FilesTableHeader extends React.Component {
     const erasureBlock = isPersonalReadOnly
       ? {
           key: "Erasure",
-          title: t("ByErasure"),
+          title: t("Common:ByErasure"),
           enable: erasureColumnIsEnabled,
           resizable: true,
           sortBy: SortByFieldName.ModifiedDate,
@@ -682,7 +682,7 @@ class FilesTableHeader extends React.Component {
       },
       {
         key: "Erasure",
-        title: t("ByErasure"),
+        title: t("Common:ByErasure"),
         enable: erasureColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.ModifiedDate,

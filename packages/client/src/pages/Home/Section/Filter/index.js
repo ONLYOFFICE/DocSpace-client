@@ -1583,7 +1583,7 @@ const SectionFilterContent = ({
     const erasure = {
       id: "sort-by_erasure",
       key: SortByFieldName.ModifiedDate,
-      label: t("ByErasure"),
+      label: t("Common:ByErasure"),
       default: true,
     };
     const tags = {

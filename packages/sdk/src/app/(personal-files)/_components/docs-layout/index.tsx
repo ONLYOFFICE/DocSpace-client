@@ -61,6 +61,7 @@ import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
 import { SectionWrapper } from "@/app/(docspace)/_components/section";
 import Header from "@/app/(docspace)/_components/header";
 import useFrameHeaderConfig from "@/hooks/useFrameHeaderConfig";
+import useDeviceType from "@/hooks/useDeviceType";
 import { Filter } from "@/app/(docspace)/_components/filter";
 import SelectionArea from "@/app/(docspace)/_components/selection-area";
 import FilesMediaViewer from "@/app/(docspace)/_components/FilesMediaViewer";
@@ -89,6 +90,7 @@ import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
 import CreateFileDialog from "../create-file-dialog";
+import DocsMainButton from "../main-button";
 import ConvertDialog from "../convert-dialog";
 import VersionHistoryPanel from "../version-history-panel";
 import { useVersionHistoryStore } from "../../_store/VersionHistoryStore";
@@ -176,6 +178,8 @@ const DocsLayout = observer(
     const pathname = usePathname();
 
     const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
+    const { currentDeviceType } = useDeviceType();
+    const isMobile = currentDeviceType === DeviceType.mobile;
 
     const isMyDocuments = rootFolderType === FolderType.USER;
     const isInRooms =
@@ -428,9 +432,11 @@ const DocsLayout = observer(
                               sectionFilterContent={
                                 <Filter
                                   filesFilter={filesFilter}
-                                  showMainButton={isActionButtonEnabled}
+                                  showMainButton={
+                                    isActionButtonEnabled && !isMobile
+                                  }
                                   mainButtonProps={
-                                    isActionButtonEnabled
+                                    isActionButtonEnabled && !isMobile
                                       ? {
                                           isDropdown: true,
                                           model: desktopModel,
@@ -474,6 +480,9 @@ const DocsLayout = observer(
                             <Dialogs />
                           </RootScrollbar>
                         </DropZone>
+                        {isActionButtonEnabled && isMobile ? (
+                          <DocsMainButton mode="mobile" actions={docsActions} />
+                        ) : null}
                         <InfoPanelEditLinkDialog />
                         <ShareSelector />
                         <VersionHistoryPanel />

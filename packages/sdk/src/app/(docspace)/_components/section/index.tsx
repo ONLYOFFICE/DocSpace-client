@@ -50,6 +50,7 @@ type SectionProps = {
   sectionFilterContent?: React.ReactNode;
   sectionBodyContent: React.ReactNode;
   sectionBannerContent?: React.ReactNode;
+  sectionWarningContent?: React.ReactNode;
 
   infoPanelHeaderContent?: React.ReactNode;
   infoPanelBodyContent?: React.ReactNode;
@@ -82,6 +83,7 @@ export const SectionWrapper = observer(
     sectionFilterContent,
     sectionBodyContent,
     sectionBannerContent,
+    sectionWarningContent,
     infoPanelHeaderContent,
     infoPanelBodyContent,
     isInfoPanelVisible,
@@ -110,9 +112,7 @@ export const SectionWrapper = observer(
 
     const isEmptyList = settingsStore.isEmptyList || isEmptyPage;
 
-    const showInfoPanel = !!(
-      infoPanelHeaderContent || infoPanelBodyContent
-    );
+    const showInfoPanel = !!(infoPanelHeaderContent || infoPanelBodyContent);
 
     return (
       <Section
@@ -138,11 +138,20 @@ export const SectionWrapper = observer(
           {effectiveShowFilter ? sectionFilterContent : null}
         </Section.SectionFilter>
 
+        {sectionWarningContent ? (
+          <Section.SectionWarning>
+            {sectionWarningContent}
+          </Section.SectionWarning>
+        ) : null}
+
         <Section.SectionBody>{sectionBodyContent}</Section.SectionBody>
 
-        <Section.InfoPanelHeader>{infoPanelHeaderContent}</Section.InfoPanelHeader>
+        <Section.InfoPanelHeader>
+          {infoPanelHeaderContent}
+        </Section.InfoPanelHeader>
         <Section.InfoPanelBody>{infoPanelBodyContent}</Section.InfoPanelBody>
       </Section>
     );
   },
 );
+

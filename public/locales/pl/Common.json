@@ -2125,5 +2125,18 @@
   "YourName": "Twoje imię",
   "YourPrice": "Twoja cena",
   "YourTurn": "Twoja kolej",
-  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby."
+  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby.",
+  "HideMessage": "Nie wyświetlaj więcej tego komunikatu",
+  "LastOpened": "Ostatnio otwarte",
+  "AccessLevel": "Poziom dostępu",
+  "SharedBy": "Udostępnił",
+  "TableSettingsTitle": "Zarządzaj wyświetlanymi kolumnami",
+  "ByErasure": "Kasowanie",
+  "DaysRemaining": "Pozostało dni: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Elementy w {{sectionName}} są automatycznie usuwane po 30 dniach.",
+  "EmptySection": "Opróżnij {{sectionName}}",
+  "RestoreAll": "Przywróć wszystko",
+  "DeleteForeverTitle": "Usunąć na zawsze?",
+  "DeleteForeverNote": "Wszystkie pozycje z sekcji  {{sectionName}} zostaną trwale usunięte. Nie będzie można ich przywrócić.",
+  "SuccessEmptyAction": "Secja {{sectionName}} została opróżniona"
 }

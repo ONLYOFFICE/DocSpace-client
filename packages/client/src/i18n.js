@@ -83,7 +83,6 @@ newInstance
       "InviteDialog",
       "FormGallery",
       "DeleteDialog",
-      "EmptyTrashDialog",
       "ConvertDialog",
       "ConnectDialog",
       "CreateEditRoomDialog",
@@ -112,3 +111,4 @@ newInstance
   });
 
 export default newInstance;
+

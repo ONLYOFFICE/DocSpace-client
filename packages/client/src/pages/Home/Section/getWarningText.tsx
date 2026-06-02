@@ -57,7 +57,7 @@ export const getWarningText = ({
   roomQuotaLimit,
 }: GetWarningTextParams): React.ReactNode => {
   if (isRecycleBinFolder) {
-    return t("TrashAutoDeleteWarning", {
+    return t("Common:TrashAutoDeleteWarning", {
       sectionName: t("Common:TrashSection"),
     });
   }
@@ -85,3 +85,4 @@ export const getWarningText = ({
 
   return "";
 };
+

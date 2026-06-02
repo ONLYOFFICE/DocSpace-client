@@ -2125,5 +2125,18 @@
   "YourName": "Emri juaj",
   "YourPrice": "Çmimi juaj",
   "YourTurn": "Radha jote",
-  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës."
+  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës.",
+  "HideMessage": "Mos e shfaqni më këtë mesazh",
+  "LastOpened": "Të fundit të hapur",
+  "AccessLevel": "Niveli i aksesit",
+  "SharedBy": "Ndarë nga",
+  "TableSettingsTitle": "Menaxhoni kolonat e shfaqura",
+  "ByErasure": "Fshirja",
+  "DaysRemaining": "Ditët e mbetura: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Artikujt në {{sectionName}} fshihen automatikisht pas 30 ditësh.",
+  "EmptySection": "Bosh {{sectionName}}",
+  "RestoreAll": "Rivendosni të gjitha",
+  "DeleteForeverTitle": "Fshini përgjithmonë?",
+  "DeleteForeverNote": "Të gjithë artikujt nga seksioni {{sectionName}} do të fshihen përgjithmonë. Ju nuk do të jeni në gjendje t'i rivendosni ato.",
+  "SuccessEmptyAction": "Seksioni {{sectionName}} u zbraz"
 }

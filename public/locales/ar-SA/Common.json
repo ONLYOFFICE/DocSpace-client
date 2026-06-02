@@ -2125,5 +2125,18 @@
   "YourName": "اسمك",
   "YourPrice": "سعرك",
   "YourTurn": "دوركم الآن",
-  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب."
+  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب.",
+  "HideMessage": "لا تعرض هذه الرسالة مرة آخرى",
+  "LastOpened": "آخر مرة تم الفتح ",
+  "AccessLevel": "مستوى الوصول ",
+  "SharedBy": "تمت مشاركته بواسطة",
+  "TableSettingsTitle": "إدارة الأعمدة المعروضة",
+  "ByErasure": "امسح",
+  "DaysRemaining": "الأيام المتبقية: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "يتم حذف العناصر الموجودة في {{sectionName}} تلقائيًا بعد 30 يومًا.",
+  "EmptySection": "إفراغ قسم {{sectionName}}",
+  "RestoreAll": "استعادة الكل",
+  "DeleteForeverTitle": "هل تريد الحذف للأبد؟",
+  "DeleteForeverNote": "جميع العناصر الموجودة في قسم {{sectionName}} سيتم حذفها نهائيًا. لن تتمكنوا من استعادتها.",
+  "SuccessEmptyAction": "تم إفراغ قسم {{sectionName}}"
 }

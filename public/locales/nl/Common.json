@@ -2125,5 +2125,18 @@
   "YourName": "Uw naam",
   "YourPrice": "Uw prijs",
   "YourTurn": "Uw beurt",
-  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag."
+  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag.",
+  "HideMessage": "Laat dit bericht niet meer zien",
+  "LastOpened": "Laatst geopend",
+  "AccessLevel": "Toegangslevel",
+  "SharedBy": "Gedeeld door",
+  "TableSettingsTitle": "Weergegeven kolommen beheren",
+  "ByErasure": "Erasure",
+  "DaysRemaining": "Aantal resterende dagen: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Items in {{sectionName}} worden automatisch verwijderd na 30 dagen.",
+  "EmptySection": "Leeg {{sectionName}}",
+  "RestoreAll": "Alles herstellen",
+  "DeleteForeverTitle": "Voor altijd verwijderen?",
+  "DeleteForeverNote": "Alle items uit de {{sectionName}} sectie zullen definitief verwijderd worden. U kunt ze niet meer herstellen.",
+  "SuccessEmptyAction": "{{sectionName}} sectie geleegd"
 }

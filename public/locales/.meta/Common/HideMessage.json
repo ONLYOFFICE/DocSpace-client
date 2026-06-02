@@ -14,25 +14,25 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
       "line_number": 213,
-      "context": "</div>\n ) : null}\n {!convertSingleFile ? (\n <Checkbox\n className=\"convert_dialog_checkbox\"\n label={t(\"HideMessage\")}\n isChecked={hideMessage}\n onChange={onChangeMessageVisible}\n dataTestId=\"convert_dialog_hide_message_checkbox\"\n />\n ) : null}",
+      "context": "</div>\n ) : null}\n {!convertSingleFile ? (\n <Checkbox\n className=\"convert_dialog_checkbox\"\n label={t(\"Common:HideMessage\")}\n isChecked={hideMessage}\n onChange={onChangeMessageVisible}\n dataTestId=\"convert_dialog_hide_message_checkbox\"\n />\n ) : null}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/LifetimeDialog/index.js",
       "line_number": 76,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <div className={styles.lifetimeFooterContainer}>\n <Checkbox\n className={styles.lifetimeCheckbox}\n label={t(\"ConvertDialog:HideMessage\")}\n isChecked={isChecked}\n onChange={onChange}\n dataTestId=\"lifetime_dialog_hide_message_checkbox\"\n />\n <div className={styles.lifetimeButtons}>",
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <div className={styles.lifetimeFooterContainer}>\n <Checkbox\n className={styles.lifetimeCheckbox}\n label={t(\"Common:HideMessage\")}\n isChecked={isChecked}\n onChange={onChange}\n dataTestId=\"lifetime_dialog_hide_message_checkbox\"\n />\n <div className={styles.lifetimeButtons}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/tag-management/modals/DeleteTag.modal.tsx",
       "line_number": 95,
-      "context": "<Text className={styles.deleteTagModalText}>\n {t(\"Common:DeleteTagCannotBeUndone\")}\n </Text>\n <Checkbox\n key=\"dont-show-again\"\n label={t(\"ConvertDialog:HideMessage\")}\n isChecked={isChecked}\n onChange={onChangeCheckbox}\n dataTestId=\"delete_tag_checkbox\"\n />\n </ModalDialog.Body>",
+      "context": "<Text className={styles.deleteTagModalText}>\n {t(\"Common:DeleteTagCannotBeUndone\")}\n </Text>\n <Checkbox\n key=\"dont-show-again\"\n label={t(\"Common:HideMessage\")}\n isChecked={isChecked}\n onChange={onChangeCheckbox}\n dataTestId=\"delete_tag_checkbox\"\n />\n </ModalDialog.Body>",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/tag-management/modals/EditTag.modal.tsx",
       "line_number": 90,
-      "context": "<Text className={styles.editTagModalText}>\n {t(\"Common:ChangesToTag\")}\n </Text>\n <Checkbox\n key=\"dont-show-again\"\n label={t(\"ConvertDialog:HideMessage\")}\n isChecked={isChecked}\n onChange={onChangeCheckbox}\n dataTestId=\"edit_tag_checkbox\"\n />\n </ModalDialog.Body>",
+      "context": "<Text className={styles.editTagModalText}>\n {t(\"Common:ChangesToTag\")}\n </Text>\n <Checkbox\n key=\"dont-show-again\"\n label={t(\"Common:HideMessage\")}\n isChecked={isChecked}\n onChange={onChangeCheckbox}\n dataTestId=\"edit_tag_checkbox\"\n />\n </ModalDialog.Body>",
       "module": "/packages/shared"
     }
   ],
@@ -182,6 +182,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

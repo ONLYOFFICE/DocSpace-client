@@ -2125,5 +2125,18 @@
   "YourName": "ඔබගේ නම",
   "YourPrice": "ඔබගේ මිල",
   "YourTurn": "ඔබේ වාරය.",
-  "YouWillBeContacted": "ඉල්ලීම සෑදීමෙන් පසු අලෙවි කණ්ඩායම ඔබව සම්බන්ධ කර ගනු ඇත."
+  "YouWillBeContacted": "ඉල්ලීම සෑදීමෙන් පසු අලෙවි කණ්ඩායම ඔබව සම්බන්ධ කර ගනු ඇත.",
+  "HideMessage": "මෙම පණිවිඩය නැවත නොපෙන්වන්න",
+  "LastOpened": "අවසන් වරට විවෘත කළේ",
+  "AccessLevel": "ප්‍රවේශ මට්ටම",
+  "SharedBy": "බෙදාගත්තේ",
+  "TableSettingsTitle": "දිස්වන තීරු කළමනාකරණය",
+  "ByErasure": "මැකීම",
+  "DaysRemaining": "ඉතිරි දවස් ගණන: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "{{sectionName}} හි ඇති අයිතම දින 30කට පසු ස්වයංක්‍රීයව මකා දමනු ලැබේ.",
+  "EmptySection": "ශූන්‍ය {{sectionName}}",
+  "RestoreAll": "සියල්ල ප්‍රත්‍යර්පණය",
+  "DeleteForeverTitle": "සදහටම මකන්නද?",
+  "DeleteForeverNote": "{{sectionName}} කොටසින් සියලුම අයිතමයන් සදහටම මකා දමනු ලැබේ. ඒවා ප්‍රතිෂ්ඨාපනය කිරීමට ඔබට හැකියාවක් නොවනු ඇත.",
+  "SuccessEmptyAction": "{{sectionName}} කොටස හිස් විය"
 }

@@ -2133,5 +2133,18 @@
   "YourName": "Il tuo nome",
   "YourPrice": "Il tuo prezzo",
   "YourTurn": "Il tuo turno",
-  "YouWillBeContacted": "Il team di vendita ti contatterà dopo aver creato la richiesta."
+  "YouWillBeContacted": "Il team di vendita ti contatterà dopo aver creato la richiesta.",
+  "HideMessage": "Non mostrare nuovamente questo messaggio",
+  "LastOpened": "Aperto l’ultima volta",
+  "AccessLevel": "Livello di accesso",
+  "SharedBy": "Condiviso da",
+  "TableSettingsTitle": "Gestisci le colonne visualizzate",
+  "ByErasure": "Cancellazione",
+  "DaysRemaining": "Giorni rimanenti: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Gli elementi in {{sectionName}} vengono eliminati automaticamente dopo 30 giorni.",
+  "EmptySection": "Svuota {{sectionName}}",
+  "RestoreAll": "Ripristina tutto",
+  "DeleteForeverTitle": "Eliminare per sempre?",
+  "DeleteForeverNote": "Tutti gli elementi dalla sezione {{sectionName}} verranno eliminati definitivamente. Non potrai ripristinarli.",
+  "SuccessEmptyAction": "Sezione {{sectionName}} svuotata"
 }

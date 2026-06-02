@@ -2133,5 +2133,18 @@
   "YourName": "您的姓名",
   "YourPrice": "您的价格",
   "YourTurn": "轮到您了",
-  "YouWillBeContacted": "创建请求后销售团队将与您取得联系。"
+  "YouWillBeContacted": "创建请求后销售团队将与您取得联系。",
+  "HideMessage": "不要再次显示此消息",
+  "LastOpened": "上次打开",
+  "AccessLevel": "访问权限级别",
+  "SharedBy": "共享自",
+  "TableSettingsTitle": "管理显示的列",
+  "ByErasure": "永久删除",
+  "DaysRemaining": "剩余天数：{{daysRemaining}}",
+  "TrashAutoDeleteWarning": "{{sectionName}}中的项目将在30天后自动删除",
+  "EmptySection": "清空{{sectionName}}",
+  "RestoreAll": "全部还原",
+  "DeleteForeverTitle": "永久删除？",
+  "DeleteForeverNote": "{{sectionName}}部分中的所有项目将被永久删除且不可恢复。",
+  "SuccessEmptyAction": "{{sectionName}}部分已清空"
 }

@@ -35,6 +35,7 @@
 
 "use client";
 
+import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
@@ -54,33 +55,40 @@ import {
 } from "@/app/(docspace)/_utils/getRoomIconLogo";
 
 import Search from "./Search";
-import styles from "../Members.module.scss";
+import styles from "./RoomHeader.module.scss";
 
 type RoomHeaderProps = {
   selection: TFolder;
-  hasEditAccess: boolean;
-  showSearch: boolean;
-  onSearchOpen: () => void;
-  onSearchClose: () => void;
-  setSearchValue: (value: string) => void;
-  onInvite: () => void;
+  isMembersView?: boolean;
+  hasEditAccess?: boolean;
+  setSearchValue?: (value: string) => void;
+  onInvite?: () => void;
 };
 
 const RoomHeader = ({
   selection,
-  hasEditAccess,
-  showSearch,
-  onSearchOpen,
-  onSearchClose,
+  isMembersView = false,
+  hasEditAccess = false,
   setSearchValue,
   onInvite,
 }: RoomHeaderProps) => {
   const { t } = useTranslation(["Common"]);
 
+  const [showSearch, setShowSearch] = React.useState(false);
+
+  React.useEffect(() => {
+    setShowSearch(false);
+  }, [selection.id]);
+
   const roomItem = selection as TFolder & RoomIconFields;
   const roomIconLogo = getRoomIconLogo(roomItem);
   const isTemplate = selection.rootFolderType === FolderType.RoomTemplates;
   const badgeUrl = getRoomBadgeUrl(selection as Parameters<typeof getRoomBadgeUrl>[0]) ?? "";
+
+  const onSearchClose = () => {
+    setShowSearch(false);
+    setSearchValue?.("");
+  };
 
   return (
     <div className={styles.roomHeader}>
@@ -97,13 +105,15 @@ const RoomHeader = ({
         {selection.title}
       </Text>
       <div className={styles.roomActions}>
-        <IconButton
-          iconName={SearchIconReactSvgUrl}
-          size={16}
-          title={t("Common:Search")}
-          onClick={onSearchOpen}
-        />
-        {hasEditAccess ? (
+        {isMembersView ? (
+          <IconButton
+            iconName={SearchIconReactSvgUrl}
+            size={16}
+            title={t("Common:Search")}
+            onClick={() => setShowSearch(true)}
+          />
+        ) : null}
+        {isMembersView && hasEditAccess ? (
           <IconButton
             iconName={PersonPlusReactSvgUrl}
             size={16}
@@ -120,7 +130,7 @@ const RoomHeader = ({
         />
       </div>
 
-      {showSearch ? (
+      {isMembersView && showSearch && setSearchValue ? (
         <Search setSearchValue={setSearchValue} onClose={onSearchClose} />
       ) : null}
     </div>

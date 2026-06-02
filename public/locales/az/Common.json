@@ -2125,5 +2125,18 @@
   "YourName": "Adınız",
   "YourPrice": "Qiymətiniz",
   "YourTurn": "Sizin növbəniz",
-  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq."
+  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq.",
+  "HideMessage": "Bu bildirişi bir daha göstərmə",
+  "LastOpened": "Sonuncu açılmış",
+  "AccessLevel": "Təqdim olunan səviyyə",
+  "SharedBy": "Paylaşılmışdır",
+  "TableSettingsTitle": "Göstərilən sütunları idarə edin",
+  "ByErasure": "Təmizləmə",
+  "DaysRemaining": "Qalan günlər: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "{{sectionName}} bölməsinin əşyaları 30 gün sonra avtomatik olaraq silinir.",
+  "EmptySection": "Boş {{sectionName}}",
+  "RestoreAll": "Hər şeyi bərpa edin",
+  "DeleteForeverTitle": "Həmişəlik silinsin?",
+  "DeleteForeverNote": "{{sectionName}} bölməsindəki bütün elementlər həmişəlik silinəcək. Onları bərpa etmək mümkün deyil.",
+  "SuccessEmptyAction": "{{sectionName}} bölməsi boşaldıldı"
 }

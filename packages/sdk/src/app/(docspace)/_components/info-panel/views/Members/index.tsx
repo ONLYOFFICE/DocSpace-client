@@ -62,13 +62,11 @@ import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?
 import PlusReactSvgUrl from "PUBLIC_DIR/images/plus.react.svg?url";
 
 import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
-import InvitePanel from "@/app/(rooms)/_components/invite-panel";
 
 import type { UseMembersReturn } from "./useMembers";
 import User from "./sub-components/User";
 import LinkRow from "./sub-components/LinkRow";
 import EmptyContainer from "./sub-components/EmptyContainer";
-import RoomHeader from "./sub-components/RoomHeader";
 import styles from "./Members.module.scss";
 
 type MembersViewProps = {
@@ -85,8 +83,6 @@ const Members = observer(({ selection, membersData }: MembersViewProps) => {
   const docsUserStore = useDocsUserStore();
   const selfId = docsUserStore.user?.id;
 
-  const [invitePanelVisible, setInvitePanelVisible] = React.useState(false);
-  const [showSearch, setShowSearch] = React.useState(false);
   const [editGroup, setEditGroup] = React.useState<TGroup | null>(null);
 
   const room = selection as unknown as TRoom;
@@ -98,33 +94,21 @@ const Members = observer(({ selection, membersData }: MembersViewProps) => {
   const isCustomRoom = roomType === RoomsType.CustomRoom;
   const isPublicRoomType =
     (isPublicRoom || isFormRoom || isCustomRoom) && !room.private;
-  const hasEditAccess = Boolean(room.security?.EditAccess);
   const isTemplate = room.rootFolderType === FolderType.RoomTemplates;
   const isArchiveFolder = false;
 
   const {
     searchValue,
-    handleSearchMembers,
     members,
     fetchMoreMembers,
     changeUserRole,
     total,
     isMembersPanelUpdating,
-    setIsMembersPanelUpdating,
     primaryLink,
     setPrimaryLink,
     additionalLinks,
     setAdditionalLinks,
   } = membersData;
-
-  React.useEffect(() => {
-    setShowSearch(false);
-  }, [selection.id]);
-
-  const onSearchClose = React.useCallback(() => {
-    setShowSearch(false);
-    handleSearchMembers("");
-  }, [handleSearchMembers]);
 
   const onAddNewLink = async () => {
     try {
@@ -393,27 +377,7 @@ const Members = observer(({ selection, membersData }: MembersViewProps) => {
 
   return (
     <div className={styles.membersList} data-testid="info_panel_members">
-      <RoomHeader
-        selection={folder}
-        hasEditAccess={hasEditAccess}
-        showSearch={showSearch}
-        onSearchOpen={() => setShowSearch(true)}
-        onSearchClose={onSearchClose}
-        setSearchValue={handleSearchMembers}
-        onInvite={() => setInvitePanelVisible(true)}
-      />
-
       {getContent()}
-
-      {invitePanelVisible ? (
-        <InvitePanel
-          visible
-          roomId={Number(selection.id)}
-          roomType={roomType}
-          onClose={() => setInvitePanelVisible(false)}
-          onMembersUpdated={() => setIsMembersPanelUpdating(true)}
-        />
-      ) : null}
 
       {editGroup ? (
         <EditGroupMembers
@@ -432,3 +396,4 @@ const Members = observer(({ selection, membersData }: MembersViewProps) => {
 });
 
 export default Members;
+

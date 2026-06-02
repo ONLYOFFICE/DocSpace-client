@@ -2133,5 +2133,18 @@
   "YourName": "Numele dvs.",
   "YourPrice": "Preţul dvs.",
   "YourTurn": "Acum e rândul dvs.",
-  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării."
+  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării.",
+  "HideMessage": "Nu afișa acest mesaj din nou",
+  "LastOpened": "Deschise recent",
+  "AccessLevel": "Nivel de permisiune",
+  "SharedBy": "Partajat de",
+  "TableSettingsTitle": "Gestionează coloane afișate",
+  "ByErasure": "Ștergere",
+  "DaysRemaining": "Zile rămase: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Elementele din {{sectionName}} sunt șterse automat după 30 de zile.",
+  "EmptySection": "Golire {{sectionName}}",
+  "RestoreAll": "Restaurare totală",
+  "DeleteForeverTitle": "Sigur că doriți să ștergeți definitiv?",
+  "DeleteForeverNote": "Toate elementele din secțiunea {{sectionName}} vor fi şterse pentru totdeauna. Nu le veţi putea restaura.",
+  "SuccessEmptyAction": "Conținutul {{sectionName}} secțiunii a fost șters"
 }

@@ -2125,5 +2125,18 @@
   "YourName": "Jūsu vārds",
   "YourPrice": "Jūsu cena",
   "YourTurn": "Jūsu kārta",
-  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides."
+  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides.",
+  "HideMessage": "Nerādīt šo ziņojumu vēlreiz",
+  "LastOpened": "Pēdēji atvērts",
+  "AccessLevel": "Piekļuves līmenis",
+  "SharedBy": "Kopīgojis",
+  "TableSettingsTitle": "Pārvaldiet parādītās kolonnas",
+  "ByErasure": "Dzēšana",
+  "DaysRemaining": "Atlikušās dienas: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "{{sectionName}} sadaļā esoši vienumi tiek automātiski dzēsti pēc 30 dienām.",
+  "EmptySection": "Iztukšot {{sectionName}}",
+  "RestoreAll": "Atjaunot visu",
+  "DeleteForeverTitle": "Vai dzēst uz visiem laikiem?",
+  "DeleteForeverNote": "Visi {{sectionName}} sadaļas elementi tiks neatgriezeniski dzēsti. Jūs nevarēsiet tos atjaunot.",
+  "SuccessEmptyAction": "{{sectionName}} sadaļa iztukšota"
 }

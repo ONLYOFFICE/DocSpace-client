@@ -2125,5 +2125,18 @@
   "YourName": "Ваше ім’я",
   "YourPrice": "Ваша ціна",
   "YourTurn": "Ваша черга",
-  "YouWillBeContacted": "Після створення запиту з вами зв’яжеться відділ продажів."
+  "YouWillBeContacted": "Після створення запиту з вами зв’яжеться відділ продажів.",
+  "HideMessage": "Більше не показувати це повідомлення",
+  "LastOpened": "Останній відкритий",
+  "AccessLevel": "Рівень доступу",
+  "SharedBy": "Поділився(-лася)",
+  "TableSettingsTitle": "Керувати відображеними стовпцями",
+  "ByErasure": "Стирання",
+  "DaysRemaining": "Залишилося днів: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Елементи в {{sectionName}} автоматично видаляються через 30 днів.",
+  "EmptySection": "Спорожнити {{sectionName}}",
+  "RestoreAll": "Відновити все",
+  "DeleteForeverTitle": "Видалити назавжди?",
+  "DeleteForeverNote": "Усі елементи розділу {{sectionName}} буде видалено назавжди. Ви не зможете їх відновити.",
+  "SuccessEmptyAction": "Розділ {{sectionName}} спорожнено"
 }

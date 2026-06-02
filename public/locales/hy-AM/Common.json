@@ -2144,5 +2144,7 @@
   "DaysRemaining": "Մնացած օր: {{daysRemaining}}",
   "TrashAutoDeleteWarning": "{{sectionName}} բաժնի տարրերը ավտոմատ ջնջվում են 30 օրից։",
   "EmptySection": "Դատարկ {{sectionName}}",
-  "RestoreAll": "Վերականգնել բոլորը"
+  "RestoreAll": "Վերականգնել բոլորը",
+  "DeleteForeverTitle": "Ջնջե՞լ ընդմիշտ",
+  "DeleteForeverNote": "Բոլոր տարրերը «{{sectionName}}» բաժնից կջնջվեն ընդմիշտ։ Դրանք հնարավոր չի լինի վերականգնել։"
 }

@@ -2136,5 +2136,7 @@
   "DaysRemaining": "Zbývající dny: {{daysRemaining}}",
   "TrashAutoDeleteWarning": "Položky v {{sectionName}} jsou automaticky smazány po 30 dnech.",
   "EmptySection": "Prázdná sekce {{sectionName}}",
-  "RestoreAll": "Obnovit vše"
+  "RestoreAll": "Obnovit vše",
+  "DeleteForeverTitle": "Smazat navždy?",
+  "DeleteForeverNote": "Všechny položky ze sekce {{sectionName}} budou navždy odstraněny. Nebudete je moci obnovit."
 }

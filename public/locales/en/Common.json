@@ -2144,5 +2144,7 @@
   "DaysRemaining": "Days remaining: {{daysRemaining}}",
   "TrashAutoDeleteWarning": "Items in {{sectionName}} are automatically deleted after 30 days.",
   "EmptySection": "Empty {{sectionName}}",
-  "RestoreAll": "Restore all"
+  "RestoreAll": "Restore all",
+  "DeleteForeverTitle": "Delete forever?",
+  "DeleteForeverNote": "All items from the {{sectionName}} section will be deleted forever. You won’t be able to restore them."
 }

@@ -2105,5 +2105,7 @@
   "DaysRemaining": "남은 일수: {{daysRemaining}}",
   "TrashAutoDeleteWarning": "{{sectionName}}에 있는 항목은 30일 후 자동으로 삭제됩니다.",
   "EmptySection": "{{sectionName}} 섹션 비우기",
-  "RestoreAll": "전부 복구"
+  "RestoreAll": "전부 복구",
+  "DeleteForeverTitle": "영구 삭제하시겠습니까?",
+  "DeleteForeverNote": "{{sectionName}} 섹션의 모든 항목이 영구적으로 삭제됩니다. 삭제되면 복원할 수 없습니다."
 }

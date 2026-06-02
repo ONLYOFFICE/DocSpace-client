@@ -2136,5 +2136,7 @@
   "DaysRemaining": "Оставащи дни: {{daysRemaining}}",
   "TrashAutoDeleteWarning": "Елементите в {{sectionName}} се изтриват автоматично след 30 дни.",
   "EmptySection": "Изпразни {{sectionName}}",
-  "RestoreAll": "Възстановете всичко"
+  "RestoreAll": "Възстановете всичко",
+  "DeleteForeverTitle": "Изтриване завинаги?",
+  "DeleteForeverNote": "Всички елементи от раздел {{sectionName}} ще бъдат изтрити завинаги. Няма да можете да ги възстановите."
 }

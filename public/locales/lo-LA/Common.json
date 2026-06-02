@@ -2136,5 +2136,7 @@
   "DaysRemaining": "ມື້ທີ່ຍັງເຫຼືອ: {{daysRemaining}}",
   "TrashAutoDeleteWarning": "ລາຍການໃນ {{sectionName}} ຈະຖືກລຶບໂດຍອັດຕະໂນມັດຫຼັງຈາກ 30 ມື້.",
   "EmptySection": "{{sectionName}} ຫວ່າງເປົ່າ",
-  "RestoreAll": "ກູ້ຄືນທັງໝົດ"
+  "RestoreAll": "ກູ້ຄືນທັງໝົດ",
+  "DeleteForeverTitle": "ລຶບຖາວອນບໍ?",
+  "DeleteForeverNote": "ສິ່ງຂອງທັງໝົດຈາກພາກສ່ວນ {{sectionName}} ຈະຖືກລົບອອກຢ່າງຖາວອນ ແລະທ່ານຈະບໍ່ສາມາດຟື້ນຕົວພວກມັນໄດ້."
 }

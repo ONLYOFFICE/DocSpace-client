@@ -2136,5 +2136,7 @@
   "DaysRemaining": "ඉතිරි දවස් ගණන: {{daysRemaining}}",
   "TrashAutoDeleteWarning": "{{sectionName}} හි ඇති අයිතම දින 30කට පසු ස්වයංක්‍රීයව මකා දමනු ලැබේ.",
   "EmptySection": "ශූන්‍ය {{sectionName}}",
-  "RestoreAll": "සියල්ල ප්‍රත්‍යර්පණය"
+  "RestoreAll": "සියල්ල ප්‍රත්‍යර්පණය",
+  "DeleteForeverTitle": "සදහටම මකන්නද?",
+  "DeleteForeverNote": "{{sectionName}} කොටසින් සියලුම අයිතමයන් සදහටම මකා දමනු ලැබේ. ඒවා ප්‍රතිෂ්ඨාපනය කිරීමට ඔබට හැකියාවක් නොවනු ඇත."
 }

@@ -2144,5 +2144,7 @@
   "DaysRemaining": "Осталось дней: {{daysRemaining}}",
   "TrashAutoDeleteWarning": "Элементы в разделе \"{{sectionName}}\" автоматически удаляются через 30 дней.",
   "EmptySection": "Пустой {{sectionName}}",
-  "RestoreAll": "Восстановить все"
+  "RestoreAll": "Восстановить все",
+  "DeleteForeverTitle": "Удалить навсегда?",
+  "DeleteForeverNote": "Все элементы из раздела {{sectionName}} будут удалены навсегда. Вы не сможете их восстановить."
 }

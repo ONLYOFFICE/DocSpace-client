@@ -2136,5 +2136,7 @@
   "DaysRemaining": "Pozostało dni: {{daysRemaining}}",
   "TrashAutoDeleteWarning": "Elementy w {{sectionName}} są automatycznie usuwane po 30 dniach.",
   "EmptySection": "Opróżnij {{sectionName}}",
-  "RestoreAll": "Przywróć wszystko"
+  "RestoreAll": "Przywróć wszystko",
+  "DeleteForeverTitle": "Usunąć na zawsze?",
+  "DeleteForeverNote": "Wszystkie pozycje z sekcji  {{sectionName}} zostaną trwale usunięte. Nie będzie można ich przywrócić."
 }

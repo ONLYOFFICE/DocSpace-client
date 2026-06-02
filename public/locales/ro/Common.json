@@ -2144,5 +2144,7 @@
   "DaysRemaining": "Zile rămase: {{daysRemaining}}",
   "TrashAutoDeleteWarning": "Elementele din {{sectionName}} sunt șterse automat după 30 de zile.",
   "EmptySection": "Golire {{sectionName}}",
-  "RestoreAll": "Restaurare totală"
+  "RestoreAll": "Restaurare totală",
+  "DeleteForeverTitle": "Sigur că doriți să ștergeți definitiv?",
+  "DeleteForeverNote": "Toate elementele din secțiunea {{sectionName}} vor fi şterse pentru totdeauna. Nu le veţi putea restaura."
 }

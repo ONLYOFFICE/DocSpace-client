@@ -57,6 +57,7 @@ import type {
 import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
+import WarningComponent from "@docspace/ui-kit/components/navigation/sub-components/WarningComponent";
 
 import { SectionWrapper } from "@/app/(docspace)/_components/section";
 import Header from "@/app/(docspace)/_components/header";
@@ -427,6 +428,15 @@ const DocsLayout = observer(
                                   onToggleInfoPanel={infoPanelStore.toggle}
                                   headerOffset={headerOffset}
                                 />
+                              }
+                              sectionWarningContent={
+                                isTrash ? (
+                                  <WarningComponent
+                                    title={t("Common:TrashAutoDeleteWarning", {
+                                      sectionName: t("Common:TrashSection"),
+                                    })}
+                                  />
+                                ) : undefined
                               }
                               sectionFilterContent={
                                 <Filter

@@ -52,7 +52,9 @@ export {
 } from "../_utils/private-rooms-filter";
 import { getPrivateRoomsDefaultFilter } from "../_utils/private-rooms-filter";
 
-class PrivateRoomsFilterStore {
+// Exported for unit testing (instantiated directly), mirroring
+// PrivateRoomFilesStore. Consumers should use the hook / provider below.
+export class PrivateRoomsFilterStore {
   searchArea: RoomSearchArea = RoomSearchArea.Active;
   page = 0;
   pageCount = 100;

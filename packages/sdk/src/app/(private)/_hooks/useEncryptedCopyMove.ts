@@ -51,6 +51,7 @@ import {
   registerCryptoOperation,
   releaseCryptoOperation,
 } from "../_utils/abort-registry";
+import { resolveEncryptedCopyDest } from "../_utils/encrypted-copy-dest";
 import { useEncryptedUpload } from "./useEncryptedUpload";
 
 type EncryptedSourceItem = {
@@ -82,18 +83,6 @@ type UseEncryptedCopyMoveReturn = {
 
 const loadCopyModule = () =>
   import("@docspace/shared/services/private-room/encrypted-copy");
-
-const resolveDestRoom = (
-  folderData: TGetFolder,
-): { roomId: number | string | null; isPrivate: boolean } => {
-  const current = folderData.current;
-  const isPrivate = current?.private === true;
-  if (current?.roomType !== undefined) {
-    return { roomId: current.id, isPrivate };
-  }
-  const roomId = folderData.pathParts?.[1]?.id ?? null;
-  return { roomId, isPrivate };
-};
 
 export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
   const { t } = useTranslation(["Common"]);
@@ -169,13 +158,13 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
           destFolderId as number,
           FilesFilter.getDefault(),
         )) as TGetFolder;
-        const { roomId: destRoomId, isPrivate } =
-          resolveDestRoom(destFolderData);
+        const dest = resolveEncryptedCopyDest(destFolderData);
 
-        if (!isPrivate || destRoomId === null) {
+        if (!dest.allowed) {
           toastr.error(t("Common:PrivateRoomCopyOutNotSupported"));
           return;
         }
+        const destRoomId = dest.roomId;
 
         const { decryptEncryptedItemToFile } = await loadCopyModule();
 

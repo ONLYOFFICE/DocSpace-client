@@ -48,7 +48,9 @@ import {
 } from "../../_utils/broadcast-lock";
 
 // Mirrors lock() events across browser tabs scoped to the current user.
-// Tab A unlocks → Tab B also has access; Tab A locks → Tab B locks < 200ms.
+// Lock-only: when one tab locks, the others lock too (< 200ms); an unlock is
+// never shared (in-memory keys can't cross tabs without leaking the secret;
+// each tab unlocks on its own with its passphrase).
 // User-scoped channel name prevents cross-user leakage on shared machines.
 const BroadcastLockSync: React.FC = observer(() => {
   const { lock, isUnlocked } = useEncryption();

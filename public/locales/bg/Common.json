@@ -2133,5 +2133,8 @@
   "SharedBy": "Споделено от",
   "TableSettingsTitle": "Управлявай показаните колони",
   "ByErasure": "Заличаване",
-  "DaysRemaining": "Оставащи дни: {{daysRemaining}}"
+  "DaysRemaining": "Оставащи дни: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Елементите в {{sectionName}} се изтриват автоматично след 30 дни.",
+  "EmptySection": "Изпразни {{sectionName}}",
+  "RestoreAll": "Възстановете всичко"
 }

@@ -2133,5 +2133,8 @@
   "SharedBy": "බෙදාගත්තේ",
   "TableSettingsTitle": "දිස්වන තීරු කළමනාකරණය",
   "ByErasure": "මැකීම",
-  "DaysRemaining": "ඉතිරි දවස් ගණන: {{daysRemaining}}"
+  "DaysRemaining": "ඉතිරි දවස් ගණන: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "{{sectionName}} හි ඇති අයිතම දින 30කට පසු ස්වයංක්‍රීයව මකා දමනු ලැබේ.",
+  "EmptySection": "ශූන්‍ය {{sectionName}}",
+  "RestoreAll": "සියල්ල ප්‍රත්‍යර්පණය"
 }

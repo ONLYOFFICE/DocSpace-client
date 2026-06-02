@@ -2133,5 +2133,8 @@
   "SharedBy": "ແບ່ງປັນໂດຍ",
   "TableSettingsTitle": "ຈັດການຖັນທີ່ສະແດງ",
   "ByErasure": "ລົບ",
-  "DaysRemaining": "ມື້ທີ່ຍັງເຫຼືອ: {{daysRemaining}}"
+  "DaysRemaining": "ມື້ທີ່ຍັງເຫຼືອ: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "ລາຍການໃນ {{sectionName}} ຈະຖືກລຶບໂດຍອັດຕະໂນມັດຫຼັງຈາກ 30 ມື້.",
+  "EmptySection": "{{sectionName}} ຫວ່າງເປົ່າ",
+  "RestoreAll": "ກູ້ຄືນທັງໝົດ"
 }

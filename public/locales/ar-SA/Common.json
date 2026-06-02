@@ -2133,5 +2133,8 @@
   "SharedBy": "تمت مشاركته بواسطة",
   "TableSettingsTitle": "إدارة الأعمدة المعروضة",
   "ByErasure": "امسح",
-  "DaysRemaining": "الأيام المتبقية: {{daysRemaining}}"
+  "DaysRemaining": "الأيام المتبقية: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "يتم حذف العناصر الموجودة في {{sectionName}} تلقائيًا بعد 30 يومًا.",
+  "EmptySection": "إفراغ قسم {{sectionName}}",
+  "RestoreAll": "استعادة الكل"
 }

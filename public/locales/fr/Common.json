@@ -2141,5 +2141,8 @@
   "SharedBy": "Partagé par",
   "TableSettingsTitle": "Gérer les colonnes affichées",
   "ByErasure": "Suppression",
-  "DaysRemaining": "Jours restants : {{daysRemaining}}"
+  "DaysRemaining": "Jours restants : {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Les éléments dans {{sectionName}} sont automatiquement supprimés après 30 jours.",
+  "EmptySection": "Vide {{sectionName}}",
+  "RestoreAll": "Restaurer tout"
 }

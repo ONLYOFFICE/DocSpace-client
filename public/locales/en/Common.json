@@ -2141,5 +2141,8 @@
   "SharedBy": "Shared by",
   "TableSettingsTitle": "Manage displayed columns",
   "ByErasure": "Erasure",
-  "DaysRemaining": "Days remaining: {{daysRemaining}}"
+  "DaysRemaining": "Days remaining: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Items in {{sectionName}} are automatically deleted after 30 days.",
+  "EmptySection": "Empty {{sectionName}}",
+  "RestoreAll": "Restore all"
 }

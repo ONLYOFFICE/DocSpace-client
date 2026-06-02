@@ -2133,5 +2133,8 @@
   "SharedBy": "Compartilhado por",
   "TableSettingsTitle": "Gerenciar colunas exibidas",
   "ByErasure": "Eliminação",
-  "DaysRemaining": "Dias restantes: {{daysRemaining}}"
+  "DaysRemaining": "Dias restantes: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Itens em {{sectionName}} são automaticamente excluídos após 30 dias.",
+  "EmptySection": "Vazio {{sectionName}}",
+  "RestoreAll": "Restaurar tudo"
 }

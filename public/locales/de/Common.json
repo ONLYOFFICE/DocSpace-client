@@ -2141,5 +2141,8 @@
   "SharedBy": "Geteilt von",
   "TableSettingsTitle": "Angezeigte Spalten verwalten",
   "ByErasure": "Löschen",
-  "DaysRemaining": "Verbleibende Tage: {{daysRemaining}}"
+  "DaysRemaining": "Verbleibende Tage: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Elemente in {{sectionName}} werden nach 30 Tagen automatisch gelöscht.",
+  "EmptySection": "{{sectionName}} leer",
+  "RestoreAll": "Alle wiederherstellen"
 }

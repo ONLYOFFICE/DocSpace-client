@@ -2133,5 +2133,8 @@
   "SharedBy": "Udostępnił",
   "TableSettingsTitle": "Zarządzaj wyświetlanymi kolumnami",
   "ByErasure": "Kasowanie",
-  "DaysRemaining": "Pozostało dni: {{daysRemaining}}"
+  "DaysRemaining": "Pozostało dni: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Elementy w {{sectionName}} są automatycznie usuwane po 30 dniach.",
+  "EmptySection": "Opróżnij {{sectionName}}",
+  "RestoreAll": "Przywróć wszystko"
 }

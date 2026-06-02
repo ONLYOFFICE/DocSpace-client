@@ -2133,5 +2133,8 @@
   "SharedBy": "Gedeeld door",
   "TableSettingsTitle": "Weergegeven kolommen beheren",
   "ByErasure": "Erasure",
-  "DaysRemaining": "Aantal resterende dagen: {{daysRemaining}}"
+  "DaysRemaining": "Aantal resterende dagen: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Items in {{sectionName}} worden automatisch verwijderd na 30 dagen.",
+  "EmptySection": "Leeg {{sectionName}}",
+  "RestoreAll": "Alles herstellen"
 }

@@ -2133,5 +2133,8 @@
   "SharedBy": "Paylaşıldı",
   "TableSettingsTitle": "Görüntülenen sütunları yönet",
   "ByErasure": "Silinti",
-  "DaysRemaining": "Kalan gün sayısı: {{daysRemaining}}"
+  "DaysRemaining": "Kalan gün sayısı: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "{{sectionName}}'deki öğeler 30 gün sonra otomatik olarak silinir.",
+  "EmptySection": "{{sectionName}} bölümünü boşalt",
+  "RestoreAll": "Her şeyi eski haline getir"
 }

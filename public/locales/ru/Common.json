@@ -2141,5 +2141,8 @@
   "SharedBy": "Предоставил доступ:",
   "TableSettingsTitle": "Управление отображаемыми столбцами",
   "ByErasure": "Удаление",
-  "DaysRemaining": "Осталось дней: {{daysRemaining}}"
+  "DaysRemaining": "Осталось дней: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Элементы в разделе \"{{sectionName}}\" автоматически удаляются через 30 дней.",
+  "EmptySection": "Пустой {{sectionName}}",
+  "RestoreAll": "Восстановить все"
 }

@@ -2133,5 +2133,8 @@
   "SharedBy": "Jakanut",
   "TableSettingsTitle": "Hallitse näytettyjä kolumneja",
   "ByErasure": "Poistaminen",
-  "DaysRemaining": "Päiviä jäljellä: {{daysRemaining}}"
+  "DaysRemaining": "Päiviä jäljellä: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "{{sectionName}} -osiossa olevat kohteet poistetaan automaattisesti 30 päivän kuluttua.",
+  "EmptySection": "Tyhjä {{sectionName}}",
+  "RestoreAll": "Palauta kaikki"
 }

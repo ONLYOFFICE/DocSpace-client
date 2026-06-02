@@ -2133,5 +2133,8 @@
   "SharedBy": "Chia sẻ bởi",
   "TableSettingsTitle": "Quản lý các cột được hiển thị",
   "ByErasure": "Xóa",
-  "DaysRemaining": "Số ngày còn lại: {{daysRemaining}}"
+  "DaysRemaining": "Số ngày còn lại: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Các mục trong {{sectionName}} sẽ tự động bị xóa sau 30 ngày.",
+  "EmptySection": "Làm trống {{sectionName}}",
+  "RestoreAll": "Khôi phục tất cả"
 }

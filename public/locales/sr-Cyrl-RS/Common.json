@@ -2141,5 +2141,8 @@
   "SharedBy": "Дељено од",
   "TableSettingsTitle": "Управљај приказаним колонама",
   "ByErasure": "Брисање",
-  "DaysRemaining": "Дани преостали: {{daysRemaining}}"
+  "DaysRemaining": "Дани преостали: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Ставке у {{sectionName}} се аутоматски бришу након 30 дана.",
+  "EmptySection": "Испразни {{sectionName}}",
+  "RestoreAll": "Поврати све"
 }

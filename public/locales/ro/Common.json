@@ -2141,5 +2141,8 @@
   "SharedBy": "Partajat de",
   "TableSettingsTitle": "Gestionează coloane afișate",
   "ByErasure": "Ștergere",
-  "DaysRemaining": "Zile rămase: {{daysRemaining}}"
+  "DaysRemaining": "Zile rămase: {{daysRemaining}}",
+  "TrashAutoDeleteWarning": "Elementele din {{sectionName}} sunt șterse automat după 30 de zile.",
+  "EmptySection": "Golire {{sectionName}}",
+  "RestoreAll": "Restaurare totală"
 }

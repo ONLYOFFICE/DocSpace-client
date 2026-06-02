@@ -95,7 +95,7 @@ const EmptyTrashDialogComponent = (props) => {
     return () => window.removeEventListener("keydown", onKeyPress);
   }, []);
 
-  const description = t("DeleteForeverNote", { sectionName });
+  const description = t("Common:DeleteForeverNote", { sectionName });
 
   return (
     <ModalDialog
@@ -104,7 +104,7 @@ const EmptyTrashDialogComponent = (props) => {
       onClose={onClose}
       displayType="modal"
     >
-      <ModalDialog.Header>{t("DeleteForeverTitle")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:DeleteForeverTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>{description}</Text>
       </ModalDialog.Body>
@@ -166,3 +166,4 @@ export default inject(
     };
   },
 )(observer(EmptyTrashDialog));
+

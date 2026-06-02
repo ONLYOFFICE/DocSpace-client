@@ -915,8 +915,8 @@ class ContextOptionsStore {
 
     if (isRoom) {
       translations = {
-        successRemoveRoom: t("Files:RoomRemoved"),
-        successRemoveRooms: t("Files:RoomsRemoved"),
+        successRemoveRoom: t("Common:RoomRemoved"),
+        successRemoveRooms: t("Common:RoomsRemoved"),
       };
 
       deleteRoomsAction([selectedFolderId], translations).catch((err) =>

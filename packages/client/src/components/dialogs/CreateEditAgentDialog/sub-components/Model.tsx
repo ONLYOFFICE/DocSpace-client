@@ -93,6 +93,8 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
     [profiles],
   );
 
+  const hasNoProfiles = profiles.length === 0;
+
   const selectedOption = React.useMemo<TOption>(
     () =>
       selectedProfile
@@ -103,9 +105,9 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
           }
         : {
             key: "empty-selected-option",
-            label: profiles.length === 0 ? t("Common:NoModelsFound") : "",
+            label: hasNoProfiles ? t("Common:NoModelsFound") : "",
           },
-    [selectedProfile, profiles.length, t],
+    [selectedProfile, hasNoProfiles, t],
   );
 
   const onSelect = React.useCallback(

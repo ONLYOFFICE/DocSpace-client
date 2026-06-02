@@ -26,18 +26,11 @@
 
 import NewChat from "@docspace/ui-kit/ai-agent/new-chat";
 
+import styles from "./AIChat.module.scss";
+
 const AIChat = () => {
   return (
-    <div
-      data-testid="info_panel_ai_chat"
-      style={{
-        flex: 1,
-        minHeight: 0,
-        display: "flex",
-        flexDirection: "column",
-        marginInlineStart: "-16px",
-      }}
-    >
+    <div data-testid="info_panel_ai_chat" className={styles.aiChat}>
       <NewChat />
     </div>
   );

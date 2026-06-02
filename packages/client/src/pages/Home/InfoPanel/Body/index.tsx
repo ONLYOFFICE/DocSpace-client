@@ -110,6 +110,7 @@ export default inject(
     filesActionsStore,
     pluginStore,
     treeFoldersStore,
+    aiRoomStore,
   }: TStore) => {
     const { contactsTab } = peopleStore.usersStore;
 
@@ -160,6 +161,7 @@ export default inject(
 
       enablePlugins: settingsStore.enablePlugins,
       isRecentFolder: treeFoldersStore.isRecentFolder,
+      selectedResultFileId: aiRoomStore.selectedResultFileId,
 
       maxImageUploadSize: settingsStore.maxImageUploadSize,
 

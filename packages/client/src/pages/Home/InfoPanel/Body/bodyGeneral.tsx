@@ -71,6 +71,7 @@ const InfoPanelBodyGeneral = ({
   infoPanelItemsList,
   enablePlugins,
   isRecentFolder,
+  selectedResultFileId,
 
   maxImageUploadSize,
 
@@ -124,8 +125,16 @@ const InfoPanelBodyGeneral = ({
         isRecentFolder,
         enablePlugins,
         infoPanelItemsList,
+        selectedResultFileId,
       }),
-    [selection, isTrash, isRecentFolder, enablePlugins, infoPanelItemsList],
+    [
+      selection,
+      isTrash,
+      isRecentFolder,
+      enablePlugins,
+      infoPanelItemsList,
+      selectedResultFileId,
+    ],
   );
 
   const currentView = useMemo(() => {

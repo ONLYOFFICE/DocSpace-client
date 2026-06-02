@@ -129,6 +129,8 @@ const NewAISettings = () => {
     },
     {
       id: TAB_IDS.KNOWLEDGE,
+      // Knowledge has no key in the @onlyoffice/ai-chat bundle (aiT), so its
+      // label comes from the DocSpace Common namespace instead. Intentional.
       name: t("Knowledge"),
       content: <Knowledge />,
       onClick: makeOnClick(TAB_IDS.KNOWLEDGE),

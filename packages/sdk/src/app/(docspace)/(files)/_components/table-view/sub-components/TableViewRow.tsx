@@ -74,6 +74,14 @@ import getTitleWithoutExt from "../../../../_utils/get-title-without-ext";
 import type { TableViewRowProps } from "../TableView.types";
 import styles from "../TableView.module.scss";
 import AuthorCell from "./AuthorCell";
+import LocationCell from "./LocationCell";
+import AccessCell from "./AccessCell";
+import {
+  getSectionColumns,
+  type ColumnKey,
+  type SectionColumn,
+  type WithRuntimeFields,
+} from "../columns";
 
 const TableViewRow = observer(
   ({
@@ -154,6 +162,21 @@ const TableViewRow = observer(
     const fileSize = "contentLength" in item ? item.contentLength : "";
     const fileType =
       "fileType" in item ? getFileTypeName(item.fileType, t) : t("Common:Folder");
+
+    // `lastOpened` (Recent) is a runtime-only field — not on TFile/TFolder.
+    const runtimeItem = item as typeof item & WithRuntimeFields;
+    const lastOpenedDate = runtimeItem.lastOpened
+      ? getCorrectDate(
+          i18n.language || "",
+          runtimeItem.lastOpened,
+          "L",
+          "LT",
+          timezone ?? "UTC",
+        )
+      : "";
+
+    // Visible columns + order are section-specific (same source as the header).
+    const sectionColumns = getSectionColumns(filesListStore.rootFolderType);
 
     const onCheckboxChange = React.useCallback(
       (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -267,6 +290,62 @@ const TableViewRow = observer(
 
     const contextMenuModel = getContextMenuModel(true);
 
+    // Inner content for a non-Name cell, keyed by column. The section descriptor
+    // decides which of these render and in what order (header stays in lockstep).
+    const renderCell = (key: ColumnKey): React.ReactNode => {
+      switch (key) {
+        case "Author":
+          return item.createdBy ? (
+            <AuthorCell fileOwner={fileOwner || ""} createdBy={item.createdBy} />
+          ) : null;
+        case "SharedBy":
+          return item.sharedBy ? (
+            <AuthorCell
+              fileOwner={item.sharedBy.displayName ?? ""}
+              createdBy={item.sharedBy}
+            />
+          ) : null;
+        case "AccessLevel":
+          return <AccessCell t={t} item={item} />;
+        case "Location":
+          return <LocationCell item={item} />;
+        case "Created":
+          return (
+            <span className={styles.secondaryCell} suppressHydrationWarning>
+              {createdDate}
+            </span>
+          );
+        case "Modified":
+          return (
+            <span className={styles.secondaryCell} suppressHydrationWarning>
+              {modifiedDate}
+            </span>
+          );
+        case "LastOpened":
+          return (
+            <span className={styles.secondaryCell} suppressHydrationWarning>
+              {lastOpenedDate}
+            </span>
+          );
+        case "Erasure":
+          return (
+            <span className={styles.secondaryCell}>
+              {runtimeItem.daysRemaining != null
+                ? t("Common:DaysRemaining", {
+                    daysRemaining: runtimeItem.daysRemaining,
+                  })
+                : ""}
+            </span>
+          );
+        case "Size":
+          return <span className={styles.secondaryCell}>{fileSize}</span>;
+        case "Type":
+          return <span className={styles.secondaryCell}>{fileType}</span>;
+        default:
+          return null;
+      }
+    };
+
     return (
       <TableRow
         className={classNames({
@@ -315,31 +394,19 @@ const TableViewRow = observer(
           {badgesNode}
           {lastColumn === "Name" ? quickButtonsNode : null}
         </TableCell>
-        <TableCell className={lastColumn === "Author" ? styles.lastCell : undefined}>
-          {item.createdBy ? (
-            <AuthorCell
-              fileOwner={fileOwner || ""}
-              createdBy={item.createdBy}
-            />
-          ) : null}
-          {lastColumn === "Author" ? quickButtonsNode : null}
-        </TableCell>
-        <TableCell className={lastColumn === "Created" ? styles.lastCell : undefined}>
-          <span className={styles.secondaryCell} suppressHydrationWarning>{createdDate}</span>
-          {lastColumn === "Created" ? quickButtonsNode : null}
-        </TableCell>
-        <TableCell className={lastColumn === "Modified" ? styles.lastCell : undefined}>
-          <span className={styles.secondaryCell} suppressHydrationWarning>{modifiedDate}</span>
-          {lastColumn === "Modified" ? quickButtonsNode : null}
-        </TableCell>
-        <TableCell className={lastColumn === "Size" ? styles.lastCell : undefined}>
-          <span className={styles.secondaryCell}>{fileSize}</span>
-          {lastColumn === "Size" ? quickButtonsNode : null}
-        </TableCell>
-        <TableCell className={lastColumn === "Type" ? styles.lastCell : undefined}>
-          <span className={styles.secondaryCell}>{fileType}</span>
-          {lastColumn === "Type" ? quickButtonsNode : null}
-        </TableCell>
+        {sectionColumns
+          .filter((column: SectionColumn) => column.key !== "Name")
+          .map((column: SectionColumn) => (
+            <TableCell
+              key={column.key}
+              className={
+                lastColumn === column.key ? styles.lastCell : undefined
+              }
+            >
+              {renderCell(column.key)}
+              {lastColumn === column.key ? quickButtonsNode : null}
+            </TableCell>
+          ))}
       </TableRow>
     );
   },

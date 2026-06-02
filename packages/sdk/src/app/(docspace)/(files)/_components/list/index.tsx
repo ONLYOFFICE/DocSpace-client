@@ -368,7 +368,7 @@ const List = ({
         fetchMoreFiles={fetchMoreFiles}
         currentUserId={currentUserId}
         infoPanelVisible={infoPanelVisible}
-        sortingDisabled={rootFolderType === FolderType.Recent}
+        rootFolderType={rootFolderType}
       />
     );
   }

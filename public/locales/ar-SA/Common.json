@@ -2130,5 +2130,7 @@
   "LastOpened": "آخر مرة تم الفتح ",
   "AccessLevel": "مستوى الوصول ",
   "SharedBy": "تمت مشاركته بواسطة",
-  "TableSettingsTitle": "إدارة الأعمدة المعروضة"
+  "TableSettingsTitle": "إدارة الأعمدة المعروضة",
+  "ByErasure": "امسح",
+  "DaysRemaining": "الأيام المتبقية: {{daysRemaining}}"
 }

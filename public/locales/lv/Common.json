@@ -2130,5 +2130,7 @@
   "LastOpened": "Pēdēji atvērts",
   "AccessLevel": "Piekļuves līmenis",
   "SharedBy": "Kopīgojis",
-  "TableSettingsTitle": "Pārvaldiet parādītās kolonnas"
+  "TableSettingsTitle": "Pārvaldiet parādītās kolonnas",
+  "ByErasure": "Dzēšana",
+  "DaysRemaining": "Atlikušās dienas: {{daysRemaining}}"
 }

@@ -2138,5 +2138,7 @@
   "LastOpened": "Последње отворено",
   "AccessLevel": "Ниво приступа",
   "SharedBy": "Дељено од",
-  "TableSettingsTitle": "Управљај приказаним колонама"
+  "TableSettingsTitle": "Управљај приказаним колонама",
+  "ByErasure": "Брисање",
+  "DaysRemaining": "Дани преостали: {{daysRemaining}}"
 }

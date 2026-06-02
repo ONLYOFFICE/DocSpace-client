@@ -2130,5 +2130,7 @@
   "LastOpened": "Viimeksi avattu",
   "AccessLevel": "Pääsyasoikeus",
   "SharedBy": "Jakanut",
-  "TableSettingsTitle": "Hallitse näytettyjä kolumneja"
+  "TableSettingsTitle": "Hallitse näytettyjä kolumneja",
+  "ByErasure": "Poistaminen",
+  "DaysRemaining": "Päiviä jäljellä: {{daysRemaining}}"
 }

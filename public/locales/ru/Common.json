@@ -2138,5 +2138,7 @@
   "LastOpened": "Последнее открытие",
   "AccessLevel": "Уровень прав доступа",
   "SharedBy": "Предоставил доступ:",
-  "TableSettingsTitle": "Управление отображаемыми столбцами"
+  "TableSettingsTitle": "Управление отображаемыми столбцами",
+  "ByErasure": "Удаление",
+  "DaysRemaining": "Осталось дней: {{daysRemaining}}"
 }

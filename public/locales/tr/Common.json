@@ -2130,5 +2130,7 @@
   "LastOpened": "Son açılan",
   "AccessLevel": "Erişim düzeyi",
   "SharedBy": "Paylaşıldı",
-  "TableSettingsTitle": "Görüntülenen sütunları yönet"
+  "TableSettingsTitle": "Görüntülenen sütunları yönet",
+  "ByErasure": "Silinti",
+  "DaysRemaining": "Kalan gün sayısı: {{daysRemaining}}"
 }

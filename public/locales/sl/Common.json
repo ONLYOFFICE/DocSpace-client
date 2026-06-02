@@ -2130,5 +2130,7 @@
   "LastOpened": "Zadnjič odprto",
   "AccessLevel": "Raven dostopa",
   "SharedBy": "Javno deljeno s",
-  "TableSettingsTitle": "Upravljanje prikazanih stolpcev"
+  "TableSettingsTitle": "Upravljanje prikazanih stolpcev",
+  "ByErasure": "Brisanje",
+  "DaysRemaining": "Preostali dnevi: {{daysRemaining}}"
 }

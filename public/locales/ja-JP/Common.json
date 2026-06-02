@@ -2138,5 +2138,7 @@
   "LastOpened": "最後に開いた項目",
   "AccessLevel": "アクセスレベル",
   "SharedBy": "共有者",
-  "TableSettingsTitle": "表示列の管理"
+  "TableSettingsTitle": "表示列の管理",
+  "ByErasure": "消去",
+  "DaysRemaining": "残りの日数：{{daysRemaining}}"
 }

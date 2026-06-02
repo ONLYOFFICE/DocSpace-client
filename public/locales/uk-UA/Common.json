@@ -2130,5 +2130,7 @@
   "LastOpened": "Останній відкритий",
   "AccessLevel": "Рівень доступу",
   "SharedBy": "Поділився(-лася)",
-  "TableSettingsTitle": "Керувати відображеними стовпцями"
+  "TableSettingsTitle": "Керувати відображеними стовпцями",
+  "ByErasure": "Стирання",
+  "DaysRemaining": "Залишилося днів: {{daysRemaining}}"
 }

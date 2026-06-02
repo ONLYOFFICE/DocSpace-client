@@ -2130,5 +2130,7 @@
   "LastOpened": "Poslední otevřený",
   "AccessLevel": "Úroveň přístupu",
   "SharedBy": "Sdíleno společností",
-  "TableSettingsTitle": "Správa zobrazených sloupců"
+  "TableSettingsTitle": "Správa zobrazených sloupců",
+  "ByErasure": "Smazání",
+  "DaysRemaining": "Zbývající dny: {{daysRemaining}}"
 }

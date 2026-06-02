@@ -2100,5 +2100,7 @@
   "LastOpened": "Posledný otvorený",
   "AccessLevel": "Úroveň prístupu",
   "SharedBy": "Zdieľané od",
-  "TableSettingsTitle": "Spravovať zobrazené stĺpce"
+  "TableSettingsTitle": "Spravovať zobrazené stĺpce",
+  "ByErasure": "Vymazanie",
+  "DaysRemaining": "Zostávajúce dni: {{daysRemaining}}"
 }

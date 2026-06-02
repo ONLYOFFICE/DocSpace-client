@@ -2138,5 +2138,7 @@
   "LastOpened": "Zuletzt geöffnet",
   "AccessLevel": "Zugriffsebene",
   "SharedBy": "Geteilt von",
-  "TableSettingsTitle": "Angezeigte Spalten verwalten"
+  "TableSettingsTitle": "Angezeigte Spalten verwalten",
+  "ByErasure": "Löschen",
+  "DaysRemaining": "Verbleibende Tage: {{daysRemaining}}"
 }

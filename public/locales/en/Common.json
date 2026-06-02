@@ -2138,5 +2138,7 @@
   "LastOpened": "Last opened",
   "AccessLevel": "Access level",
   "SharedBy": "Shared by",
-  "TableSettingsTitle": "Manage displayed columns"
+  "TableSettingsTitle": "Manage displayed columns",
+  "ByErasure": "Erasure",
+  "DaysRemaining": "Days remaining: {{daysRemaining}}"
 }

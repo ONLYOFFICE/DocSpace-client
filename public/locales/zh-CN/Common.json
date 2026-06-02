@@ -2138,5 +2138,7 @@
   "LastOpened": "上次打开",
   "AccessLevel": "访问权限级别",
   "SharedBy": "共享自",
-  "TableSettingsTitle": "管理显示的列"
+  "TableSettingsTitle": "管理显示的列",
+  "ByErasure": "永久删除",
+  "DaysRemaining": "剩余天数：{{daysRemaining}}"
 }

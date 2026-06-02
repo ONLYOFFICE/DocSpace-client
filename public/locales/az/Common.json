@@ -2130,5 +2130,7 @@
   "LastOpened": "Sonuncu açılmış",
   "AccessLevel": "Təqdim olunan səviyyə",
   "SharedBy": "Paylaşılmışdır",
-  "TableSettingsTitle": "Göstərilən sütunları idarə edin"
+  "TableSettingsTitle": "Göstərilən sütunları idarə edin",
+  "ByErasure": "Təmizləmə",
+  "DaysRemaining": "Qalan günlər: {{daysRemaining}}"
 }

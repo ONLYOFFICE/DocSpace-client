@@ -2130,5 +2130,7 @@
   "LastOpened": "Laatst geopend",
   "AccessLevel": "Toegangslevel",
   "SharedBy": "Gedeeld door",
-  "TableSettingsTitle": "Weergegeven kolommen beheren"
+  "TableSettingsTitle": "Weergegeven kolommen beheren",
+  "ByErasure": "Erasure",
+  "DaysRemaining": "Aantal resterende dagen: {{daysRemaining}}"
 }

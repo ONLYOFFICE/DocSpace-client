@@ -2130,5 +2130,7 @@
   "LastOpened": "Последно отворен",
   "AccessLevel": "Ниво на достъп",
   "SharedBy": "Споделено от",
-  "TableSettingsTitle": "Управлявай показаните колони"
+  "TableSettingsTitle": "Управлявай показаните колони",
+  "ByErasure": "Заличаване",
+  "DaysRemaining": "Оставащи дни: {{daysRemaining}}"
 }

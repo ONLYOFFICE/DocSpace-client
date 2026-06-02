@@ -2130,5 +2130,7 @@
   "LastOpened": "Último aberto",
   "AccessLevel": "Nível de acesso",
   "SharedBy": "Compartilhado por",
-  "TableSettingsTitle": "Gerenciar colunas exibidas"
+  "TableSettingsTitle": "Gerenciar colunas exibidas",
+  "ByErasure": "Eliminação",
+  "DaysRemaining": "Dias restantes: {{daysRemaining}}"
 }

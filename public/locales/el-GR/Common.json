@@ -2130,5 +2130,7 @@
   "LastOpened": "Τελευταία φορά ανοιχτό",
   "AccessLevel": "Επίπεδο πρόσβασης",
   "SharedBy": "Μοιράστηκε από",
-  "TableSettingsTitle": "Διαχείριση εμφανιζόμενων στηλών"
+  "TableSettingsTitle": "Διαχείριση εμφανιζόμενων στηλών",
+  "ByErasure": "Διαγραφή",
+  "DaysRemaining": "Ημέρες που απομένουν: {{daysRemaining}}"
 }

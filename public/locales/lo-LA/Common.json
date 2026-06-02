@@ -2130,5 +2130,7 @@
   "LastOpened": "ເປີດຄັ້ງສຸດທ້າຍ",
   "AccessLevel": "ລະດັບການເຂົ້າເຖິງ",
   "SharedBy": "ແບ່ງປັນໂດຍ",
-  "TableSettingsTitle": "ຈັດການຖັນທີ່ສະແດງ"
+  "TableSettingsTitle": "ຈັດການຖັນທີ່ສະແດງ",
+  "ByErasure": "ລົບ",
+  "DaysRemaining": "ມື້ທີ່ຍັງເຫຼືອ: {{daysRemaining}}"
 }

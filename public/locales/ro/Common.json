@@ -2138,5 +2138,7 @@
   "LastOpened": "Deschise recent",
   "AccessLevel": "Nivel de permisiune",
   "SharedBy": "Partajat de",
-  "TableSettingsTitle": "Gestionează coloane afișate"
+  "TableSettingsTitle": "Gestionează coloane afișate",
+  "ByErasure": "Ștergere",
+  "DaysRemaining": "Zile rămase: {{daysRemaining}}"
 }

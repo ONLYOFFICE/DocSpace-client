@@ -2130,5 +2130,7 @@
   "LastOpened": "අවසන් වරට විවෘත කළේ",
   "AccessLevel": "ප්‍රවේශ මට්ටම",
   "SharedBy": "බෙදාගත්තේ",
-  "TableSettingsTitle": "දිස්වන තීරු කළමනාකරණය"
+  "TableSettingsTitle": "දිස්වන තීරු කළමනාකරණය",
+  "ByErasure": "මැකීම",
+  "DaysRemaining": "ඉතිරි දවස් ගණන: {{daysRemaining}}"
 }

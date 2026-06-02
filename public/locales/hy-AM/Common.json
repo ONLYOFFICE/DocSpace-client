@@ -2138,5 +2138,7 @@
   "LastOpened": "Վերջին անգամ բացված",
   "AccessLevel": "Մուտքի մակարդակ",
   "SharedBy": "Կիսվել է`",
-  "TableSettingsTitle": "Կառավարեք ցուցադրված սյունակները"
+  "TableSettingsTitle": "Կառավարեք ցուցադրված սյունակները",
+  "ByErasure": "Ջնջում",
+  "DaysRemaining": "Մնացած օր: {{daysRemaining}}"
 }

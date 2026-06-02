@@ -2130,5 +2130,7 @@
   "LastOpened": "Të fundit të hapur",
   "AccessLevel": "Niveli i aksesit",
   "SharedBy": "Ndarë nga",
-  "TableSettingsTitle": "Menaxhoni kolonat e shfaqura"
+  "TableSettingsTitle": "Menaxhoni kolonat e shfaqura",
+  "ByErasure": "Fshirja",
+  "DaysRemaining": "Ditët e mbetura: {{daysRemaining}}"
 }

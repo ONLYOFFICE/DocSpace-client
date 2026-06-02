@@ -441,7 +441,7 @@ class FilesTableHeader extends React.Component {
       !isPublicRoom && !isInSharedFolder
         ? {
             key: "SharedByShareWithMe",
-            title: t("SharedBy"),
+            title: t("Common:SharedBy"),
             enable: sharedByShareWithMeColumnIsEnabled,
             resizable: true,
             onChange: this.onColumnChange,
@@ -475,7 +475,7 @@ class FilesTableHeader extends React.Component {
       author,
       {
         key: "AccessLevelShareWithMe",
-        title: t("AccessLevel"),
+        title: t("Common:AccessLevel"),
         enable: accessLevelShareWithMeColumnIsEnabled,
         resizable: true,
         onChange: this.onColumnChange,
@@ -546,7 +546,7 @@ class FilesTableHeader extends React.Component {
       },
       {
         key: "LastOpenedRecent",
-        title: t("LastOpened"),
+        title: t("Common:LastOpened"),
         enable: lastOpenedRecentColumnIsEnabled,
         resizable: true,
         onChange: this.onColumnChange,
@@ -1044,7 +1044,7 @@ class FilesTableHeader extends React.Component {
         useReactWindow
         tagRef={tagRef}
         setHideColumns={setHideColumns}
-        settingsTitle={t("Files:TableSettingsTitle")}
+        settingsTitle={t("Common:TableSettingsTitle")}
         showSettings={isFrame ? showSettings : true}
       />
     );

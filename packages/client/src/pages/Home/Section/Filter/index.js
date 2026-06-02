@@ -931,7 +931,7 @@ const SectionFilterContent = ({
       {
         key: FilterGroups.filterSharedBy,
         group: FilterGroups.filterSharedBy,
-        label: t("Files:SharedBy"),
+        label: t("Common:SharedBy"),
         isHeader: true,
       },
       {

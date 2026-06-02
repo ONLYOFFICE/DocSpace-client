@@ -2134,5 +2134,6 @@
   "YourName": "Numele dvs.",
   "YourPrice": "Preţul dvs.",
   "YourTurn": "Acum e rândul dvs.",
-  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării."
+  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării.",
+  "HideMessage": "Nu afișa acest mesaj din nou"
 }

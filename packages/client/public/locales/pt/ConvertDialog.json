@@ -2,6 +2,5 @@
   "ConversionMessage": "Todos os documentos que carregar serão convertidos no formato Office Open XML (docx, xlsx ou pptx) para uma edição mais rápida.",
   "ConvertedFileDestination": "A copia do ficheiro será criada na pasta <strong>{{folderTitle}}</strong>.",
   "FileUploadTitle": "Ficheiro carregado",
-  "HideMessage": "Não mostre esta mensagem novamente",
   "InfoCreateFileIn": "O novo ficheiro '{{fileTitle}}' foi criado em '{{folderTitle}}'"
 }

@@ -2126,5 +2126,6 @@
   "YourName": "اسمك",
   "YourPrice": "سعرك",
   "YourTurn": "دوركم الآن",
-  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب."
+  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب.",
+  "HideMessage": "لا تعرض هذه الرسالة مرة آخرى"
 }

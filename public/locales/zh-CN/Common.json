@@ -2134,5 +2134,6 @@
   "YourName": "您的姓名",
   "YourPrice": "您的价格",
   "YourTurn": "轮到您了",
-  "YouWillBeContacted": "创建请求后销售团队将与您取得联系。"
+  "YouWillBeContacted": "创建请求后销售团队将与您取得联系。",
+  "HideMessage": "不要再次显示此消息"
 }

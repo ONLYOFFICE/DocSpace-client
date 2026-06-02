@@ -2126,5 +2126,6 @@
   "YourName": "Jūsu vārds",
   "YourPrice": "Jūsu cena",
   "YourTurn": "Jūsu kārta",
-  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides."
+  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides.",
+  "HideMessage": "Nerādīt šo ziņojumu vēlreiz"
 }

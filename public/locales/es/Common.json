@@ -2134,5 +2134,6 @@
   "YourName": "Su nombre",
   "YourPrice": "Su precio",
   "YourTurn": "Su turno",
-  "YouWillBeContacted": "El equipo de ventas se pondrá en contacto con usted después de crear la solicitud."
+  "YouWillBeContacted": "El equipo de ventas se pondrá en contacto con usted después de crear la solicitud.",
+  "HideMessage": "No volver a mostrar este mensaje"
 }

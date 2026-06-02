@@ -2,6 +2,5 @@
   "ConversionMessage": "Vse prenešene datoteke bodo konvertirane v Office Open XML format (docx, xlsx ali pptx) za hitrejše urejanje.",
   "ConvertedFileDestination": "Kopija datoteke bo ustvarjena v mapi <strong>{{folderTitle}}</strong>.",
   "FileUploadTitle": "Nalaganje datoteke",
-  "HideMessage": "Ne prikazuj več tega sporočila",
   "InfoCreateFileIn": "Nova '{{fileTitle}}' datoteka je ustvarjena v '{{folderTitle}}'"
 }

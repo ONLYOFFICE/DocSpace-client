@@ -2126,5 +2126,6 @@
   "YourName": "Nimesi",
   "YourPrice": "Hintasi",
   "YourTurn": "Sinun vuorosi",
-  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen."
+  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen.",
+  "HideMessage": "Älä näytä tätä viestiä enää"
 }

@@ -2138,5 +2138,6 @@
   "EmptySection": "{{sectionName}} ຫວ່າງເປົ່າ",
   "RestoreAll": "ກູ້ຄືນທັງໝົດ",
   "DeleteForeverTitle": "ລຶບຖາວອນບໍ?",
-  "DeleteForeverNote": "ສິ່ງຂອງທັງໝົດຈາກພາກສ່ວນ {{sectionName}} ຈະຖືກລົບອອກຢ່າງຖາວອນ ແລະທ່ານຈະບໍ່ສາມາດຟື້ນຕົວພວກມັນໄດ້."
+  "DeleteForeverNote": "ສິ່ງຂອງທັງໝົດຈາກພາກສ່ວນ {{sectionName}} ຈະຖືກລົບອອກຢ່າງຖາວອນ ແລະທ່ານຈະບໍ່ສາມາດຟື້ນຕົວພວກມັນໄດ້.",
+  "SuccessEmptyAction": "ພາກສ່ວນ {{sectionName}} ເຊື່ອມໂຍງອອກແລ້ວ"
 }

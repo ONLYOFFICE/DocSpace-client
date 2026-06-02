@@ -2108,5 +2108,6 @@
   "EmptySection": "Vyprázdniť {{sectionName}}",
   "RestoreAll": "Obnoviť všetko",
   "DeleteForeverTitle": "Odstrániť navždy?",
-  "DeleteForeverNote": "Všetky položky z časti {{sectionName}} budú navždy vymazané. Nebude možné ich obnoviť."
+  "DeleteForeverNote": "Všetky položky z časti {{sectionName}} budú navždy vymazané. Nebude možné ich obnoviť.",
+  "SuccessEmptyAction": "Časť {{sectionName}} bola vyprázdnená"
 }

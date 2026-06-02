@@ -2138,5 +2138,6 @@
   "EmptySection": "Boş {{sectionName}}",
   "RestoreAll": "Hər şeyi bərpa edin",
   "DeleteForeverTitle": "Həmişəlik silinsin?",
-  "DeleteForeverNote": "{{sectionName}} bölməsindəki bütün elementlər həmişəlik silinəcək. Onları bərpa etmək mümkün deyil."
+  "DeleteForeverNote": "{{sectionName}} bölməsindəki bütün elementlər həmişəlik silinəcək. Onları bərpa etmək mümkün deyil.",
+  "SuccessEmptyAction": "{{sectionName}} bölməsi boşaldıldı"
 }

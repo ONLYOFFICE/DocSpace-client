@@ -2138,5 +2138,6 @@
   "EmptySection": "ශූන්‍ය {{sectionName}}",
   "RestoreAll": "සියල්ල ප්‍රත්‍යර්පණය",
   "DeleteForeverTitle": "සදහටම මකන්නද?",
-  "DeleteForeverNote": "{{sectionName}} කොටසින් සියලුම අයිතමයන් සදහටම මකා දමනු ලැබේ. ඒවා ප්‍රතිෂ්ඨාපනය කිරීමට ඔබට හැකියාවක් නොවනු ඇත."
+  "DeleteForeverNote": "{{sectionName}} කොටසින් සියලුම අයිතමයන් සදහටම මකා දමනු ලැබේ. ඒවා ප්‍රතිෂ්ඨාපනය කිරීමට ඔබට හැකියාවක් නොවනු ඇත.",
+  "SuccessEmptyAction": "{{sectionName}} කොටස හිස් විය"
 }

@@ -2146,5 +2146,6 @@
   "EmptySection": "Испразни {{sectionName}}",
   "RestoreAll": "Поврати све",
   "DeleteForeverTitle": "Обрисати заувек?",
-  "DeleteForeverNote": "Сви елементи из одељка {{sectionName}} биће трајно избрисани. Нећете моћи да их вратите."
+  "DeleteForeverNote": "Сви елементи из одељка {{sectionName}} биће трајно избрисани. Нећете моћи да их вратите.",
+  "SuccessEmptyAction": "Одељак {{sectionName}} је испражњен"
 }

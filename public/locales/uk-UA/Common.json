@@ -2138,5 +2138,6 @@
   "EmptySection": "Спорожнити {{sectionName}}",
   "RestoreAll": "Відновити все",
   "DeleteForeverTitle": "Видалити назавжди?",
-  "DeleteForeverNote": "Усі елементи розділу {{sectionName}} буде видалено назавжди. Ви не зможете їх відновити."
+  "DeleteForeverNote": "Усі елементи розділу {{sectionName}} буде видалено назавжди. Ви не зможете їх відновити.",
+  "SuccessEmptyAction": "Розділ {{sectionName}} спорожнено"
 }

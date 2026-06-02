@@ -49,7 +49,7 @@ export const DeleteWebhookDialog = ({
   const onKeyPress = (e) =>
     (e.key === "Esc" || e.key === "Escape") && onClose();
 
-  const { t } = useTranslation(["Webhooks", "Common", "EmptyTrashDialog"]);
+  const { t } = useTranslation(["Webhooks", "Common"]);
 
   const cleanUpEvent = () => window.removeEventListener("keyup", onKeyPress);
 
@@ -92,3 +92,4 @@ export const DeleteWebhookDialog = ({
     </ModalDialog>
   );
 };
+

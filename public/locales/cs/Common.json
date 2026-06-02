@@ -2138,5 +2138,6 @@
   "EmptySection": "Prázdná sekce {{sectionName}}",
   "RestoreAll": "Obnovit vše",
   "DeleteForeverTitle": "Smazat navždy?",
-  "DeleteForeverNote": "Všechny položky ze sekce {{sectionName}} budou navždy odstraněny. Nebudete je moci obnovit."
+  "DeleteForeverNote": "Všechny položky ze sekce {{sectionName}} budou navždy odstraněny. Nebudete je moci obnovit.",
+  "SuccessEmptyAction": "Sekce {{sectionName}} vyprázdněna"
 }

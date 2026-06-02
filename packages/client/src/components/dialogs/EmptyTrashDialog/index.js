@@ -67,7 +67,7 @@ const EmptyTrashDialogComponent = (props) => {
     onClose();
 
     const translations = {
-      successOperation: t("SuccessEmptyAction", { sectionName }),
+      successOperation: t("Common:SuccessEmptyAction", { sectionName }),
     };
 
     if (isPersonalReadOnly) {
@@ -135,11 +135,9 @@ const EmptyTrashDialogComponent = (props) => {
   );
 };
 
-const EmptyTrashDialog = withTranslation([
-  "EmptyTrashDialog",
-  "Common",
-  "Translations",
-])(EmptyTrashDialogComponent);
+const EmptyTrashDialog = withTranslation(["Common", "Translations"])(
+  EmptyTrashDialogComponent,
+);
 
 export default inject(
   ({ filesStore, filesActionsStore, treeFoldersStore, dialogsStore }) => {

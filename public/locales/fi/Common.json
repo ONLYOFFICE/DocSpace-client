@@ -2138,5 +2138,6 @@
   "EmptySection": "Tyhjä {{sectionName}}",
   "RestoreAll": "Palauta kaikki",
   "DeleteForeverTitle": "Poistetaanko pysyvästi?",
-  "DeleteForeverNote": "Kaikki {{sectionName}} -osion kohteet poistetaan lopullisesti. Niitä ei voida palauttaa."
+  "DeleteForeverNote": "Kaikki {{sectionName}} -osion kohteet poistetaan lopullisesti. Niitä ei voida palauttaa.",
+  "SuccessEmptyAction": "{{sectionName}} -osio tyhjennetty"
 }

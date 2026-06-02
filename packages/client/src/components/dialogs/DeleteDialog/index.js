@@ -315,7 +315,6 @@ const DeleteDialog = withTranslation([
   "Common",
   "Translations",
   "Files",
-  "EmptyTrashDialog",
 ])(DeleteDialogComponent);
 
 export default inject(

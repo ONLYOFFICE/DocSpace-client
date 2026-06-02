@@ -2146,5 +2146,6 @@
   "EmptySection": "Svuota {{sectionName}}",
   "RestoreAll": "Ripristina tutto",
   "DeleteForeverTitle": "Eliminare per sempre?",
-  "DeleteForeverNote": "Tutti gli elementi dalla sezione {{sectionName}} verranno eliminati definitivamente. Non potrai ripristinarli."
+  "DeleteForeverNote": "Tutti gli elementi dalla sezione {{sectionName}} verranno eliminati definitivamente. Non potrai ripristinarli.",
+  "SuccessEmptyAction": "Sezione {{sectionName}} svuotata"
 }

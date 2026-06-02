@@ -2146,5 +2146,6 @@
   "EmptySection": "Vide {{sectionName}}",
   "RestoreAll": "Restaurer tout",
   "DeleteForeverTitle": "Supprimer définitivement ?",
-  "DeleteForeverNote": "Tous les éléments de la section {{sectionName}} seront définitivement supprimés. Vous ne pourrez pas les restaurer."
+  "DeleteForeverNote": "Tous les éléments de la section {{sectionName}} seront définitivement supprimés. Vous ne pourrez pas les restaurer.",
+  "SuccessEmptyAction": "La section {{sectionName}} a été vidée"
 }

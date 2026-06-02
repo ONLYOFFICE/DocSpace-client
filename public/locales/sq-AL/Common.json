@@ -2138,5 +2138,6 @@
   "EmptySection": "Bosh {{sectionName}}",
   "RestoreAll": "Rivendosni të gjitha",
   "DeleteForeverTitle": "Fshini përgjithmonë?",
-  "DeleteForeverNote": "Të gjithë artikujt nga seksioni {{sectionName}} do të fshihen përgjithmonë. Ju nuk do të jeni në gjendje t'i rivendosni ato."
+  "DeleteForeverNote": "Të gjithë artikujt nga seksioni {{sectionName}} do të fshihen përgjithmonë. Ju nuk do të jeni në gjendje t'i rivendosni ato.",
+  "SuccessEmptyAction": "Seksioni {{sectionName}} u zbraz"
 }

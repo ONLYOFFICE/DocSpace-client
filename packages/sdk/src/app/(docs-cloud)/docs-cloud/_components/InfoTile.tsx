@@ -33,83 +33,18 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-@use './_shared';
+import styles from "./InfoTile.module.scss";
 
-.settings {
-  max-width: 560px;
-}
-
-.section {
-  margin-bottom: 30px;
-}
-
-.sectionCard {
-  border: 1px solid var(--files-section-table-view-row-border-color, #eceef1);
-  border-radius: 6px;
-  padding: 22px 22px 6px;
-}
-
-.field {
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.fieldLabel {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-color, #333);
-}
-
-.help {
-  font-size: 12px;
-  color: var(--param-description-color, #a3a9ae);
-  line-height: 1.45;
-}
-
-.segmented {
-  display: inline-flex;
-  align-self: flex-start;
-  border: 1px solid var(--files-section-table-view-row-border-color, #eceef1);
-  border-radius: 6px;
-  overflow: hidden;
-
-  button {
-    height: 36px;
-    padding: 0 22px;
-    border: none;
-    background: none;
-    font-size: 13.5px;
-    font-weight: 600;
-    color: var(--param-description-color, #a3a9ae);
-    cursor: pointer;
-    font-family: inherit;
-    transition:
-      background 0.15s ease,
-      color 0.15s ease;
-
-    & + button {
-      border-left: 1px solid
-        var(--files-section-table-view-row-border-color, #eceef1);
-    }
-  }
-}
-
-.segmented button.segmentOn {
-  background: var(--main-button-background-color, #4781d9);
-  color: #fff;
-}
-
-.sectionFooter {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding-top: 4px;
-}
-
-.dirtyNote {
-  font-size: 12px;
-  color: var(--param-description-color, #a3a9ae);
-}
+export const InfoTile = ({
+  label,
+  value,
+}: {
+  label: string;
+  value: React.ReactNode;
+}) => (
+  <div className={styles.infoTile}>
+    <div className={styles.infoTileKey}>{label}</div>
+    <div className={styles.infoTileValue}>{value}</div>
+  </div>
+);
 

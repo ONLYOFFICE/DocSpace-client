@@ -42,13 +42,7 @@ export type TTenant = {
   isDeveloperPack: boolean;
 };
 
-export type TTenantInfo = {
-  resourceId: string;
-  alias: string;
-  name: string;
-  isActive: boolean;
-  isTrial: boolean;
-  isDeveloperPack: boolean;
+export type TTenantInfo = TTenant & {
   buildVersion: string;
   licenseDate: string;
   usersLimit: number;

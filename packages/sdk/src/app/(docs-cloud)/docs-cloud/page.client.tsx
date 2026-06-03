@@ -56,12 +56,10 @@ import type {
 import { useDocsCloudFrameBridge } from "./_hooks/useDocsCloudFrameBridge";
 import { InformationTab } from "./_tabs/Information";
 import { SettingsTab } from "./_tabs/Settings";
-import { TariffPlanTab } from "./_tabs/TariffPlan";
+import type { TabId } from "./types";
 import styles from "./TenantInfo.module.scss";
 
-type TabId = "information" | "settings" | "tariff-plan";
-
-export default function DocsCloudPage() {
+const DocsCloudPage = () => {
   const { t } = useTranslation(["DocsCloud"]);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -83,7 +81,6 @@ export default function DocsCloudPage() {
   const tabs: TTabItem[] = [
     { id: "information", name: t("DocsCloud:Statistic"), content: null },
     { id: "settings", name: t("Settings"), content: null },
-    // { id: "tariff-plan", name: t("TariffPlan"), content: null },
   ];
 
   if (isLoading) return <AppLoader />;
@@ -93,9 +90,17 @@ export default function DocsCloudPage() {
     <div className={styles.wrapper}>
       <div className={styles.header}>
         <div className={styles.titleRow}>
-          <Text fontSize="20px" fontWeight={700} noSelect>
-            {tenantInfo.name || tenantInfo.alias}
-          </Text>
+          <div className={styles.logo}>
+            {(tenantInfo.name || tenantInfo.alias).charAt(0).toUpperCase()}
+          </div>
+          <div>
+            <Text fontSize="20px" fontWeight={700} noSelect>
+              {tenantInfo.name || tenantInfo.alias}
+            </Text>
+            <Text fontSize="12px" color="var(--text-secondary-color)" noSelect>
+              {t("DocsCloud:DocsConnectorSubtitle")}
+            </Text>
+          </div>
           <div className={styles.badges}>
             {tenantInfo.isTrial && (
               <Badge
@@ -130,9 +135,10 @@ export default function DocsCloudPage() {
         {activeTab === "settings" && (
           <SettingsTab config={tenantConfig} onConfigChange={setTenantConfig} />
         )}
-        {activeTab === "tariff-plan" && <TariffPlanTab info={tenantInfo} />}
       </div>
     </div>
   );
-}
+};
+
+export default DocsCloudPage;
 

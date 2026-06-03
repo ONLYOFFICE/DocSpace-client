@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+@use "@docspace/ui-kit/styles/variables/colors" as colors;
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -45,18 +47,17 @@
   flex-shrink: 0;
 }
 
-.backBtn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  margin-bottom: 12px;
-  color: var(--link-color);
-  font-size: 13px;
-
-  &:hover {
-    text-decoration: underline;
-  }
+.logo {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 7px;
+  background: var(--main-button-background-color, #4781d9);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
 }
 
 .titleRow {
@@ -64,7 +65,7 @@
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 8px;
+  margin-bottom: 22px;
 }
 
 .badges {
@@ -84,4 +85,5 @@
   flex: 1;
   overflow-y: auto;
   padding: 20px;
+  --pill-ok-color: #{colors.$main-green}; // #2db482 — no global token yet
 }

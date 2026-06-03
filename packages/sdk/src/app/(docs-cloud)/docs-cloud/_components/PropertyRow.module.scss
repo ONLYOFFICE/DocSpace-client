@@ -33,63 +33,43 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-"use client";
+.propertyRow {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  border-bottom: 1px solid
+    var(--files-section-table-view-row-border-color, #eceef1);
 
-import { useTranslation } from "react-i18next";
+  &:last-child {
+    border-bottom: none;
+  }
+}
 
-import { Slider } from "@docspace/ui-kit/components/slider";
-import { Text } from "@docspace/ui-kit/components/text";
+.propertyKey {
+  font-size: 13px;
+  color: var(--param-description-color, #a3a9ae);
+  font-weight: 600;
+}
 
-import styles from "./UserCountSelector.module.scss";
+.propertyValue {
+  font-size: 13px;
+  color: var(--text-color, #333);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
 
-type UserCountSelectorProps = {
-  count: number;
-  onCountChange: (n: number) => void;
-  min?: number;
-  max?: number;
-  disabled?: boolean;
-};
+  a {
+    color: var(--main-button-background-color, #4781d9);
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
-export function UserCountSelector({
-  count,
-  onCountChange,
-  min = 1,
-  max = 999,
-  disabled = false,
-}: UserCountSelectorProps) {
-  const { t } = useTranslation(["DocsCloud"]);
-
-  return (
-    <div className={styles.wrapper}>
-      <Text className={styles.label} fontSize="14px">
-        {t("DocsCloud:NumberOfUsers")}
-      </Text>
-      <div className={styles.controls}>
-        <button
-          className={styles.btn}
-          onClick={() => onCountChange(Math.max(min, count - 1))}
-          disabled={disabled || count <= min}
-        >
-          -
-        </button>
-        <span className={styles.count}>{count}</span>
-        <button
-          className={styles.btn}
-          onClick={() => onCountChange(Math.min(max, count + 1))}
-          disabled={disabled || count >= max}
-        >
-          +
-        </button>
-      </div>
-      <Slider
-        value={count}
-        min={min}
-        max={max}
-        step={1}
-        isDisabled={disabled}
-        onChange={(e) => onCountChange(parseInt(e.target.value, 10))}
-        withPouring
-      />
-    </div>
-  );
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

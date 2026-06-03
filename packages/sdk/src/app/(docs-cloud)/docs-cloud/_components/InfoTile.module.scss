@@ -33,48 +33,25 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-"use client";
+.infoTile {
+  border: 1px solid var(--files-section-table-view-row-border-color, #eceef1);
+  border-radius: 6px;
+  padding: 14px 16px;
+  background: var(--header-background-color, #f8f9f9);
+}
 
-import { useTranslation } from "react-i18next";
+.infoTileKey {
+  font-size: 11.5px;
+  color: var(--param-description-color, #a3a9ae);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
 
-import { Text } from "@docspace/ui-kit/components/text";
-
-import styles from "./PriceDisplay.module.scss";
-
-type PriceDisplayProps = {
-  totalPrice: number;
-  pricePerUser: number;
-  currencySymbol?: string;
-  isAnnual?: boolean;
-};
-
-export function PriceDisplay({
-  totalPrice,
-  pricePerUser,
-  currencySymbol = "$",
-  isAnnual = false,
-}: PriceDisplayProps) {
-  const { t } = useTranslation(["DocsCloud"]);
-
-  return (
-    <div className={styles.wrapper}>
-      <div className={styles.total}>
-        <span className={styles.amount}>
-          {currencySymbol}
-          {totalPrice}
-        </span>
-        <span className={styles.period}>
-          / {isAnnual ? t("DocsCloud:Year") : t("DocsCloud:Month")}
-        </span>
-      </div>
-      <Text className={styles.perUser} fontSize="13px">
-        {currencySymbol}
-        {pricePerUser}{" "}
-        {isAnnual
-          ? t("DocsCloud:PerUserPerYear")
-          : t("DocsCloud:PerUserPerMonth")}
-      </Text>
-    </div>
-  );
+.infoTileValue {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-color, #333);
+  margin-top: 6px;
 }
 

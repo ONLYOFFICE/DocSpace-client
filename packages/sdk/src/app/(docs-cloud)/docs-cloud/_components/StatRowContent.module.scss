@@ -33,53 +33,18 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-.wrapper {
-  margin-bottom: 24px;
+.statRowContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-block: 4px;
+  min-width: 0;
 }
 
-.label {
-  text-align: center;
-  margin-bottom: 8px;
-}
-
-.controls {
+.nameCellContent {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
-  margin-bottom: 16px;
+  gap: 6px;
+  min-width: 0;
 }
 
-.btn {
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--quick-buttons-color);
-  border-radius: 50%;
-  background: var(--file-row-background);
-  font-size: 22px;
-  font-weight: 400;
-  color: var(--text-color);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.15s;
-
-  &:hover:not(:disabled) {
-    background: var(--button-hover-background);
-  }
-
-  &:disabled {
-    opacity: 0.35;
-    cursor: not-allowed;
-  }
-}
-
-.count {
-  font-size: 44px;
-  font-weight: 700;
-  min-width: 100px;
-  text-align: center;
-  line-height: 1;
-  color: var(--text-color);
-}

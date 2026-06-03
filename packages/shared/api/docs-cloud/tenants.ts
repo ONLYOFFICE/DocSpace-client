@@ -49,7 +49,7 @@ const FAKE_TENANT_INFO: TTenantInfo = {
   usersLimit: 100,
   docServerAddress: "https://ds.demo-portal.onlyoffice.com",
   authorizationHeader: "AuthorizationJWT",
-  documentServerSecret: "***",
+  documentServerSecret: "s3cr3t-jwt-key-9f2a1c",
   activeEditorsCount: 12,
   internalEditorsCount: 10,
   externalEditorsCount: 2,

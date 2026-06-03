@@ -33,60 +33,27 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-.wrapper {
-  max-width: 640px;
-}
+import type {
+  TTenantConfig,
+  TTenantInfo,
+} from "@docspace/shared/api/docs-cloud";
 
-.banner {
-  padding: 12px 16px;
-  margin-bottom: 24px;
-  background: var(--warning-bg);
-  border: 1px solid var(--warning-color);
-  border-radius: 6px;
-  font-size: 13px;
-  color: var(--text-color);
-  line-height: 1.5;
-}
+export type TabId = "information" | "settings";
 
-.bannerStrong {
-  font-weight: 700;
-}
+export type InformationTabProps = {
+  info: TTenantInfo;
+};
 
-.card {
-  padding: 20px;
-  border: 1px solid var(--quick-buttons-color);
-  border-radius: 8px;
-  margin-bottom: 24px;
-}
+export type StatRow = {
+  label: string;
+  isMonthly?: boolean;
+  active: number | null;
+  internal: number | null;
+  external: number | null;
+  remaining: number | null;
+};
 
-.cardHeader {
-  margin-bottom: 16px;
-}
-
-.planName {
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.devPackRow {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 0;
-  border-top: 1px solid var(--file-row-background, rgba(0, 0, 0, 0.06));
-  margin-top: 12px;
-}
-
-.warningBox {
-  padding: 8px 12px;
-  margin-bottom: 12px;
-  background: var(--error-bg);
-  border: 1px solid var(--error-color);
-  border-radius: 4px;
-  font-size: 12px;
-  color: var(--error-color);
-}
-
-.actions {
-  margin-top: 20px;
-}
+export type SettingsTabProps = {
+  config: TTenantConfig;
+  onConfigChange: (config: TTenantConfig) => void;
+};

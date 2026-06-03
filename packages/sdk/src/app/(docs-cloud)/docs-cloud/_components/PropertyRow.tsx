@@ -33,21 +33,18 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-"use client";
+import styles from "./PropertyRow.module.scss";
 
-import type { TTenantInfo } from "@docspace/shared/api/docs-cloud";
-
-import { CurrentTariffPlan } from "./_tariff/CurrentTariffPlan";
-import { NewTariffPlan } from "./_tariff/NewTariffPlan";
-
-type TariffPlanTabProps = {
-  info: TTenantInfo;
-};
-
-export function TariffPlanTab({ info }: TariffPlanTabProps) {
-  if (info.isActive && !info.isTrial) {
-    return <CurrentTariffPlan info={info} />;
-  }
-  return <NewTariffPlan info={info} />;
-}
+export const PropertyRow = ({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) => (
+  <div className={styles.propertyRow}>
+    <div className={styles.propertyKey}>{label}</div>
+    <div className={styles.propertyValue}>{children}</div>
+  </div>
+);
 

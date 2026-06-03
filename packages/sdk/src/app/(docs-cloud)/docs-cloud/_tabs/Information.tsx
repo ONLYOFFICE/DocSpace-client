@@ -38,9 +38,15 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import CheckRoundReactSvgUrl from "PUBLIC_DIR/images/icons/16/check.round.react.svg?url";
+import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
+import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
+import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
+
+import { Badge } from "@docspace/ui-kit/components/badge";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Row, RowContainer } from "@docspace/ui-kit/components/rows";
-import type { RowItemType } from "@docspace/ui-kit/components/rows/row/Row.types";
 import {
   TableBody,
   TableCell,
@@ -56,75 +62,38 @@ import { Provider } from "@docspace/ui-kit/utils/context";
 import { isMobile, isTablet } from "@docspace/ui-kit/utils/device";
 
 import { downloadQuota } from "@docspace/shared/api/docs-cloud";
-import type { TTenantInfo } from "@docspace/shared/api/docs-cloud";
 
+import { InfoTile } from "../_components/InfoTile";
+import { PropertyRow } from "../_components/PropertyRow";
+import { StatRowContent } from "../_components/StatRowContent";
+import type { InformationTabProps, StatRow } from "../types";
 import styles from "./Information.module.scss";
 
 const COLUMN_STORAGE_NAME = "docsCloudStatsColumns_v1";
 const COLUMN_INFO_PANEL_STORAGE_NAME = "docsCloudStatsInfoPanelColumns_v1";
 
-type InformationTabProps = {
-  info: TTenantInfo;
-};
-
-type StatRow = {
-  label: string;
-  active: number | null;
-  internal: number | null;
-  external: number | null;
-  remaining: number | null;
-};
-
-function getDeviceType(): DeviceType {
+const getDeviceType = (): DeviceType => {
   if (typeof window === "undefined") return DeviceType.desktop;
   if (isMobile()) return DeviceType.mobile;
   if (isTablet()) return DeviceType.tablet;
   return DeviceType.desktop;
-}
-
-function InfoRow({ label, value }: { label: string; value: React.ReactNode }) {
-  return (
-    <div className={styles.row}>
-      <span className={styles.label}>{label}</span>
-      <span className={styles.value}>{value}</span>
-    </div>
-  );
-}
-
-function StatRowContent({
-  row,
-  values,
-  item: _item,
-}: {
-  row: StatRow;
-  values: string;
-  item?: RowItemType;
-}) {
-  return (
-    <div className={styles.statRowContent}>
-      <Text fontWeight={600} fontSize="14px">
-        {row.label}
-      </Text>
-      <Text fontSize="12px" color="var(--text-secondary-color)">
-        {values}
-      </Text>
-    </div>
-  );
-}
+};
 
 // Inner component — must be a child of Provider to call useViewEffect
-function InformationTabContent({ info }: InformationTabProps) {
+const InformationTabContent = ({ info }: InformationTabProps) => {
   const { t } = useTranslation(["DocsCloud", "Common"]);
   const [isDownloading, setIsDownloading] = useState(false);
-  const [viewAs, setViewAsState] = useState<"table" | "row">("table");
+  const [viewAs, setViewAs] = useState<"table" | "row">("table");
   const [currentDeviceType, setCurrentDeviceType] = useState(getDeviceType);
+  const [showSecret, setShowSecret] = useState(false);
+  const [copied, setCopied] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const setViewAs = (view: string) => {
-    if (view === "table" || view === "row") setViewAsState(view);
+  const handleViewChange = (view: string) => {
+    if (view === "table" || view === "row") setViewAs(view);
   };
 
-  useViewEffect({ view: viewAs, setView: setViewAs, currentDeviceType });
+  useViewEffect({ view: viewAs, setView: handleViewChange, currentDeviceType });
 
   useEffect(() => {
     const handleResize = () => setCurrentDeviceType(getDeviceType());
@@ -210,14 +179,16 @@ function InformationTabContent({ info }: InformationTabProps) {
       remaining: info.remainingViewersCount,
     },
     {
-      label: `${t("DocsCloud:EditorsMode")} (${t("DocsCloud:Monthly")})`,
+      label: t("DocsCloud:EditorsMode"),
+      isMonthly: true,
       active: info.monthlyActiveEditors,
       internal: null,
       external: null,
       remaining: null,
     },
     {
-      label: `${t("DocsCloud:LiveViewerMode")} (${t("DocsCloud:Monthly")})`,
+      label: t("DocsCloud:LiveViewerMode"),
+      isMonthly: true,
       active: info.monthlyActiveViewers,
       internal: null,
       external: null,
@@ -236,103 +207,180 @@ function InformationTabContent({ info }: InformationTabProps) {
     return parts.join(" . ");
   };
 
+  const hasExternalUsers =
+    info.externalEditorsCount + info.externalViewersCount > 0;
+
   return (
     <>
-      <InfoRow
-        label={t("DocsCloud:DocServerAddress")}
-        value={info.docServerAddress}
-      />
-      <InfoRow
-        label={t("DocumentServiceAuthHeader")}
-        value={info.authorizationHeader}
-      />
-      <InfoRow
-        label={t("DocsCloud:DocumentServerSecret")}
-        value={info.documentServerSecret || "—"}
-      />
-      <InfoRow label={t("DocsCloud:Build")} value={info.buildVersion} />
-      <InfoRow
-        label={t("DocsCloud:Valid")}
-        value={formatDate(info.licenseDate)}
-      />
-      <InfoRow label={t("DocsCloud:UsersLimit")} value={info.usersLimit} />
+      {/* Meta tiles */}
+      <div className={styles.infoTileRow}>
+        <InfoTile label={t("DocsCloud:Build")} value={info.buildVersion} />
+        <InfoTile
+          label={t("Common:ValidUntil")}
+          value={formatDate(info.licenseDate)}
+        />
+        <InfoTile label={t("DocsCloud:UsersLimit")} value={info.usersLimit} />
+      </div>
 
-      <div className={styles.statsSection}>
-        {viewAs === "table" ? (
-          <TableContainer
-            useReactWindow={false}
-            forwardedRef={containerRef}
-            className={styles.statsTable}
+      {/* Document Service */}
+      <div className={styles.sectionHead}>
+        <span className={styles.sectionTitle}>
+          {t("DocsCloud:DocumentService")}
+        </span>
+        {info.isActive && (
+          <span className={`${styles.pill} ${styles.pillOk}`}>
+            <span className={styles.pillDot} />
+            {t("Common:Connected")}
+          </span>
+        )}
+      </div>
+      <div className={styles.propertyCard}>
+        <PropertyRow label={t("DocsCloud:DocServerAddress")}>
+          <a
+            href={info.docServerAddress}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <TableHeader
-              containerRef={containerRef}
-              columns={columns}
-              columnStorageName={COLUMN_STORAGE_NAME}
-              columnInfoPanelStorageName={COLUMN_INFO_PANEL_STORAGE_NAME}
-              sectionWidth={0}
-              useReactWindow={false}
-              showSettings={false}
-              sortingVisible={false}
-            />
-            <TableBody
-              columnStorageName={COLUMN_STORAGE_NAME}
-              columnInfoPanelStorageName={COLUMN_INFO_PANEL_STORAGE_NAME}
-              useReactWindow={false}
-              itemHeight={48}
-              filesLength={statRows.length}
-              fetchMoreFiles={async () => {}}
-              hasMoreFiles={false}
-              itemCount={statRows.length}
-            >
-              {statRows.map((row) => (
-                <TableRow key={row.label}>
-                  <TableCell>
+            {info.docServerAddress}
+          </a>
+          <IconButton
+            iconName={copied ? CheckRoundReactSvgUrl : CopyReactSvgUrl}
+            size={12}
+            isClickable
+            onClick={() => {
+              navigator.clipboard
+                ?.writeText(info.docServerAddress)
+                .catch(() => {});
+              setCopied(true);
+              setTimeout(() => setCopied(false), 1200);
+            }}
+          />
+        </PropertyRow>
+        <PropertyRow label={t("DocumentServiceAuthHeader")}>
+          <span className={styles.codeChip}>{info.authorizationHeader}</span>
+        </PropertyRow>
+        <PropertyRow label={t("DocsCloud:DocumentServerSecret")}>
+          {info.documentServerSecret ? (
+            <>
+              <span className={styles.mono}>
+                {showSecret ? info.documentServerSecret : "••••••••••••"}
+              </span>
+              <IconButton
+                iconName={showSecret ? EyeOffReactSvgUrl : EyeReactSvgUrl}
+                size={12}
+                isClickable
+                className={styles.iconBtn}
+                onClick={() => setShowSecret((s) => !s)}
+              />
+            </>
+          ) : (
+            "—"
+          )}
+        </PropertyRow>
+      </div>
+
+      {/* License Usage */}
+      <div className={styles.sectionHead}>
+        <span className={styles.sectionTitle}>
+          {t("DocsCloud:LicenseUsage")}
+        </span>
+        {hasExternalUsers && (
+          <span className={`${styles.pill} ${styles.pillWarn}`}>
+            <span className={styles.pillDot} />
+            {t("DocsCloud:ExternalUsersActive")}
+          </span>
+        )}
+      </div>
+
+      {viewAs === "table" ? (
+        <TableContainer
+          useReactWindow={false}
+          forwardedRef={containerRef}
+          className={styles.statsTable}
+        >
+          <TableHeader
+            containerRef={containerRef}
+            columns={columns}
+            columnStorageName={COLUMN_STORAGE_NAME}
+            columnInfoPanelStorageName={COLUMN_INFO_PANEL_STORAGE_NAME}
+            sectionWidth={0}
+            useReactWindow={false}
+            showSettings={false}
+            sortingVisible={false}
+          />
+          <TableBody
+            columnStorageName={COLUMN_STORAGE_NAME}
+            columnInfoPanelStorageName={COLUMN_INFO_PANEL_STORAGE_NAME}
+            useReactWindow={false}
+            itemHeight={48}
+            filesLength={statRows.length}
+            fetchMoreFiles={async () => {}}
+            hasMoreFiles={false}
+            itemCount={statRows.length}
+          >
+            {statRows.map((row) => (
+              <TableRow key={`${row.label}-${row.isMonthly}`}>
+                <TableCell>
+                  <div className={styles.nameCellContent}>
                     <Text fontSize="13px" fontWeight={600} truncate>
                       {row.label}
                     </Text>
-                  </TableCell>
-                  <TableCell className={styles.statsDataCell}>
-                    <Text fontSize="13px">{row.active ?? "—"}</Text>
-                  </TableCell>
-                  <TableCell className={styles.statsDataCell}>
-                    <Text fontSize="13px">{row.internal ?? "—"}</Text>
-                  </TableCell>
-                  <TableCell className={styles.statsDataCell}>
-                    <Text fontSize="13px">{row.external ?? "—"}</Text>
-                  </TableCell>
-                  <TableCell className={styles.statsDataCell}>
-                    <Text fontSize="13px">{row.remaining ?? "—"}</Text>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </TableContainer>
-        ) : (
-          <RowContainer useReactWindow={false}>
-            {statRows.map((row) => (
-              <Row key={row.label}>
-                <StatRowContent row={row} values={formatRowValues(row)} />
-              </Row>
+                    {row.isMonthly && (
+                      <Badge
+                        label={t("DocsCloud:Monthly")}
+                        fontSize="10.5px"
+                        fontWeight={600}
+                        color="var(--param-description-color, #a3a9ae)"
+                        backgroundColor="var(--header-background-color, #f8f9f9)"
+                        border="1px solid var(--files-section-table-view-row-border-color, #eceef1)"
+                        borderRadius="100px"
+                        padding="1px 8px"
+                        noHover
+                      />
+                    )}
+                  </div>
+                </TableCell>
+                <TableCell className={styles.statsDataCell}>
+                  <Text fontSize="13px">{row.active ?? "—"}</Text>
+                </TableCell>
+                <TableCell className={styles.statsDataCell}>
+                  <Text fontSize="13px">{row.internal ?? "—"}</Text>
+                </TableCell>
+                <TableCell className={styles.statsDataCell}>
+                  <Text fontSize="13px">{row.external ?? "—"}</Text>
+                </TableCell>
+                <TableCell className={styles.statsDataCell}>
+                  <Text fontSize="13px">{row.remaining ?? "—"}</Text>
+                </TableCell>
+              </TableRow>
             ))}
-          </RowContainer>
-        )}
-      </div>
+          </TableBody>
+        </TableContainer>
+      ) : (
+        <RowContainer useReactWindow={false}>
+          {statRows.map((row) => (
+            <Row key={row.label}>
+              <StatRowContent row={row} values={formatRowValues(row)} />
+            </Row>
+          ))}
+        </RowContainer>
+      )}
 
       <div className={styles.downloadRow}>
         <Button
           label={t("Common:DownloadReportBtnText")}
-          size={ButtonSize.normal}
+          size={ButtonSize.small}
           isLoading={isDownloading}
           onClick={handleDownload}
         />
       </div>
     </>
   );
-}
+};
 
 // Outer component — sets up sectionWidth and wraps with Provider so
 // useViewEffect inside InformationTabContent can read it from context
-export function InformationTab({ info }: InformationTabProps) {
+export const InformationTab = ({ info }: InformationTabProps) => {
   const [sectionWidth, setSectionWidth] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -355,5 +403,5 @@ export function InformationTab({ info }: InformationTabProps) {
       </Provider>
     </div>
   );
-}
+};
 

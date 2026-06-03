@@ -39,30 +39,28 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
+import { PasswordInput } from "@docspace/ui-kit/components/password-input";
 import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
-import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 
 import { setTenantConfiguration } from "@docspace/shared/api/docs-cloud";
 import type { TTenantConfig } from "@docspace/shared/api/docs-cloud";
 
+import type { SettingsTabProps } from "../types";
 import styles from "./Settings.module.scss";
 
-type SettingsTabProps = {
-  config: TTenantConfig;
-  onConfigChange: (config: TTenantConfig) => void;
-};
-
-export function SettingsTab({ config, onConfigChange }: SettingsTabProps) {
-  const { t } = useTranslation(["DocsCloud"]);
+export const SettingsTab = ({ config, onConfigChange }: SettingsTabProps) => {
+  const { t } = useTranslation(["DocsCloud", "Common"]);
   const [draft, setDraft] = useState<TTenantConfig>({ ...config });
   const [isSaving, setIsSaving] = useState(false);
+
   const setField = <K extends keyof TTenantConfig>(
     key: K,
     value: TTenantConfig[K],
   ) => {
     setDraft((prev) => ({ ...prev, [key]: value }));
   };
+
+  const isDirty = JSON.stringify(draft) !== JSON.stringify(config);
 
   const handleSave = async () => {
     setIsSaving(true);
@@ -74,71 +72,114 @@ export function SettingsTab({ config, onConfigChange }: SettingsTabProps) {
     }
   };
 
-  const hasError = (val: string) => val.trim().length === 0;
+  const handleCancel = () => {
+    setDraft({ ...config });
+  };
 
   return (
-    <div className={styles.form}>
-      <div className={styles.field}>
-        <Text className={styles.fieldLabel} fontSize="13px" fontWeight={600}>
-          {t("DocumentServiceAuthHeader")}
-        </Text>
-        <TextInput
-          type={InputType.text}
-          value={draft.authorizationHeader}
-          onChange={(e) => setField("authorizationHeader", e.target.value)}
-          maxLength={50}
-          scale
-        />
-      </div>
-
-      <div className={styles.field}>
-        <Text className={styles.fieldLabel} fontSize="13px" fontWeight={600}>
-          {t("DocsCloud:DocumentServerSecret")}
-        </Text>
-        <TextInput
-          type={InputType.password}
-          value={draft.documentServerSecret}
-          onChange={(e) => setField("documentServerSecret", e.target.value)}
-          maxLength={50}
-          scale
-        />
-      </div>
-
-      <div className={styles.field}>
-        <Text className={styles.fieldLabel} fontSize="13px" fontWeight={600}>
-          {t("DocsCloud:AnonymousSupport")}
-        </Text>
-        <div className={styles.radioGroup}>
-          <RadioButtonGroup
-            orientation="horizontal"
-            name="anonymous-support"
-            options={[
-              { value: "true", label: t("Yes") },
-              { value: "false", label: t("No") },
-            ]}
-            selected={draft.anonymousSupport ? "true" : "false"}
-            onClick={(e) =>
-              setField(
-                "anonymousSupport",
-                (e as React.ChangeEvent<HTMLInputElement>).target.value ===
-                  "true",
-              )
-            }
-            spacing="16px"
-          />
+    <form
+      className={styles.settings}
+      autoComplete="off"
+      onSubmit={(e) => e.preventDefault()}
+    >
+      {/* AUTHORIZATION */}
+      <div className={styles.section}>
+        <div className={styles.sectionHead}>
+          <span className={styles.sectionTitle}>
+            {t("Common:Authorization")}
+          </span>
+        </div>
+        <div className={styles.sectionCard}>
+          <div className={styles.field}>
+            <label className={styles.fieldLabel}>
+              {t("DocumentServiceAuthHeader")}
+            </label>
+            <TextInput
+              type={InputType.text}
+              value={draft.authorizationHeader}
+              onChange={(e) => setField("authorizationHeader", e.target.value)}
+              maxLength={50}
+              autoComplete="off"
+              scale
+            />
+            <span className={styles.help}>{t("DocsCloud:AuthHeaderHelp")}</span>
+          </div>
+          <div className={styles.field}>
+            <label className={styles.fieldLabel}>
+              {t("DocsCloud:DocumentServerSecret")}
+            </label>
+            <PasswordInput
+              inputValue={draft.documentServerSecret}
+              onChange={(_, value) =>
+                setField("documentServerSecret", value ?? "")
+              }
+              placeholder={t("DocsCloud:JWTSecretPlaceholder")}
+              simpleView
+              isDisableTooltip
+              isSimulateType
+              simulateSymbol="•"
+              autoComplete="new-password"
+              scale
+            />
+            <span className={styles.help}>{t("DocsCloud:JWTSecretHelp")}</span>
+          </div>
         </div>
       </div>
 
-      <div className={styles.saveRow}>
+      {/* ACCESS */}
+      <div className={styles.section}>
+        <div className={styles.sectionHead}>
+          <span className={styles.sectionTitle}>{t("DocsCloud:Access")}</span>
+        </div>
+        <div className={styles.sectionCard}>
+          <div className={styles.field}>
+            <label className={styles.fieldLabel}>
+              {t("DocsCloud:AnonymousSupport")}
+            </label>
+            <div className={styles.segmented}>
+              <button
+                type="button"
+                className={draft.anonymousSupport ? styles.segmentOn : ""}
+                onClick={() => setField("anonymousSupport", true)}
+              >
+                {t("Common:Yes")}
+              </button>
+              <button
+                type="button"
+                className={!draft.anonymousSupport ? styles.segmentOn : ""}
+                onClick={() => setField("anonymousSupport", false)}
+              >
+                {t("Common:No")}
+              </button>
+            </div>
+            <span className={styles.help}>
+              {t("DocsCloud:AnonymousSupportHelp")}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className={styles.sectionFooter}>
         <Button
           label={t("Common:SaveButton")}
           size={ButtonSize.normal}
           isLoading={isSaving}
-          isDisabled={hasError(draft.name)}
+          isDisabled={!isDirty}
           onClick={handleSave}
           primary
         />
+        <Button
+          label={t("Common:CancelButton")}
+          size={ButtonSize.normal}
+          isDisabled={isSaving || !isDirty}
+          onClick={handleCancel}
+        />
+        {isDirty && !isSaving && (
+          <span className={styles.dirtyNote}>{t("Common:UnsavedChanges")}</span>
+        )}
       </div>
-    </div>
+    </form>
   );
-}
+};
+

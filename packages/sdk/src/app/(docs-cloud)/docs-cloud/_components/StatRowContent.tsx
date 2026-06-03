@@ -33,33 +33,50 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-.wrapper {
-  text-align: center;
-  margin: 24px 0 16px;
-}
+"use client";
 
-.total {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 4px;
-}
+import { useTranslation } from "react-i18next";
 
-.amount {
-  font-size: 42px;
-  font-weight: 700;
-  color: var(--text-color);
-  line-height: 1;
-}
+import { Badge } from "@docspace/ui-kit/components/badge";
+import type { RowItemType } from "@docspace/ui-kit/components/rows/row/Row.types";
+import { Text } from "@docspace/ui-kit/components/text";
 
-.period {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--text-color);
-}
+import type { StatRow } from "../types";
+import styles from "./StatRowContent.module.scss";
 
-.perUser {
-  margin-top: 8px;
-  font-size: 13px;
-  color: var(--text-secondary-color);
-}
+export const StatRowContent = ({
+  row,
+  values,
+}: {
+  row: StatRow;
+  values: string;
+  item?: RowItemType;
+}) => {
+  const { t } = useTranslation(["DocsCloud"]);
+  return (
+    <div className={styles.statRowContent}>
+      <div className={styles.nameCellContent}>
+        <Text fontWeight={600} fontSize="14px">
+          {row.label}
+        </Text>
+        {row.isMonthly && (
+          <Badge
+            label={t("DocsCloud:Monthly")}
+            fontSize="10.5px"
+            fontWeight={600}
+            color="var(--param-description-color, #a3a9ae)"
+            backgroundColor="var(--header-background-color, #f8f9f9)"
+            border="1px solid var(--files-section-table-view-row-border-color, #eceef1)"
+            borderRadius="100px"
+            padding="1px 8px"
+            noHover
+          />
+        )}
+      </div>
+      <Text fontSize="12px" color="var(--param-description-color)">
+        {values}
+      </Text>
+    </div>
+  );
+};
+

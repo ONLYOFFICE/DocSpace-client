@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2026-06-03T09:40:22.094Z",
+  "updated_at": "2026-06-03T11:46:06.806Z",
   "comment": {
     "text": "This is the label for a button that dismisses a dialog or cancels an action, such as deleting a chat, renaming a chat, or adding an attachment.",
     "is_auto": true,
@@ -1248,6 +1248,12 @@
       "module": "/packages/sdk"
     },
     {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/ai-agent-providers/index.tsx",
+      "line_number": 181,
+      "context": "currentFolderId=\"\"\n rootFolderType={sdkUserFolderType}\n disabledItems={[]}\n filterParam=\"ALL\"\n submitButtonLabel={t(\"Common:SelectAction\", { defaultValue: \"Select\" })}\n cancelButtonLabel={t(\"Common:CancelButton\", { defaultValue: \"Cancel\" })}\n descriptionText=\"\"\n footerCheckboxLabel=\"\"\n footerInputHeader=\"\"\n currentFooterInputValue=\"\"\n getFilesArchiveError={() => \"\"}",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/conflict-resolve-dialog/index.tsx",
       "line_number": 124,
       "context": "duplicateTitle={duplicateTitle}\n duplicateDescription={duplicateDescription}\n skipTitle={skipTitle}\n skipDescription={skipDescription}\n submitButtonLabel={t(\"Common:OKButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n onClose={onClose}\n onSubmit={onSubmit}\n />\n );\n };",
@@ -1267,7 +1273,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx",
-      "line_number": 582,
+      "line_number": 668,
       "context": "initHasNextPage={selectorInitData.hasNextPage}\n submitButtonLabel={getSubmitLabel(\n selectorMode,\n t,\n )}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n withCancelButton\n withBreadCrumbs\n withSearch\n withCreate={false}\n withFooterInput={false}",
       "module": "/packages/sdk"
     },

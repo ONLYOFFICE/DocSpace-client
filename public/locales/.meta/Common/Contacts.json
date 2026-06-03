@@ -3,7 +3,7 @@
   "content": "Contacts",
   "content_en_sha1_hash": "b0dd615cbbdcbf21ffb72115599ca915634fcb85",
   "created_at": "2025-05-19T21:30:43.662Z",
-  "updated_at": "2026-06-03T09:40:22.073Z",
+  "updated_at": "2026-06-03T11:46:06.788Z",
   "comment": {
     "text": "This is a header label for a people selector or invitation panel, identifying the section as \"Contacts\".",
     "is_auto": true,
@@ -43,8 +43,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/headerGeneral.tsx",
-      "line_number": 115,
-      "context": ": (availableTabs[0] ?? InfoPanelView.infoDetails);\n \n const tabItems = availableTabs.map((id) => {\n let name: string;\n if (id === InfoPanelView.infoMembers) {\n name = isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\");\n } else if (id === InfoPanelView.infoHistory) {\n name = t(\"Common:SubmenuHistory\");\n } else if (id === InfoPanelView.infoDetails) {\n name = t(\"Common:SubmenuDetails\");\n } else if (id === InfoPanelView.infoShare) {",
+      "line_number": 118,
+      "context": ": (availableTabs[0] ?? InfoPanelView.infoDetails);\n \n const tabItems = availableTabs.map((id) => {\n const name = match(id)\n .with(InfoPanelView.infoMembers, () =>\n isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\"),\n )\n .with(InfoPanelView.infoShare, () => t(\"Common:Share\"))\n .with(InfoPanelView.infoHistory, () => t(\"Common:SubmenuHistory\"))\n .with(InfoPanelView.infoDetails, () => t(\"Common:SubmenuDetails\"))\n .with(InfoPanelView.infoAIChat, () => t(\"InfoPanel:SubmenuAIChat\"))",
       "module": "/packages/client"
     },
     {

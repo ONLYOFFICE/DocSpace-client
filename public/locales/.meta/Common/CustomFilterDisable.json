@@ -3,7 +3,7 @@
   "content": "Disable Custom filter",
   "content_en_sha1_hash": "598157d6d4873c7b214960264722b2388f27f0ee",
   "created_at": "2025-05-19T21:30:55.390Z",
-  "updated_at": "2026-06-03T09:30:05.110Z",
+  "updated_at": "2026-06-03T11:46:06.889Z",
   "comment": {
     "text": "This is a button label that appears in a menu. It allows users to disable a custom filter that has been applied to a file or folder.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 414,
+      "line_number": 437,
       "context": "(i: TFileItem) => {\n return {\n id: \"option_custom-filter\",\n key: \"custom-filter\",\n label: i.customFilterEnabled\n ? t(\"Common:CustomFilterDisable\")\n : t(\"Common:CustomFilterEnable\"),\n icon: CustomFilterReactSvgUrl,\n onClick: () => changeCustomFilter(i),\n disabled: false,\n };",
       "module": "/packages/sdk"
     }

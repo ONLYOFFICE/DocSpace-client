@@ -3,7 +3,7 @@
   "content": "Days remaining: {{daysRemaining}}",
   "content_en_sha1_hash": "0e94f2f4c0003d4ac110575e4374ddbe1195c476",
   "created_at": "2026-06-03T09:30:00.148Z",
-  "updated_at": "2026-06-03T09:34:20.939Z",
+  "updated_at": "2026-06-03T11:46:06.846Z",
   "comment": {
     "text": "A label or tooltip in file/room lists indicating the time left until auto-deletion. The {{daysRemaining}} variable represents the number of days (e.g., \"5\" or \"<1\").",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/table-view/sub-components/TableViewRow.tsx",
-      "line_number": 183,
+      "line_number": 186,
       "context": ": \"\";\n \n // Erasure: days left until auto-deletion, derived from `autoDelete` the\n // same way the client does (getDaysRemaining returns e.g. \"5\" or \"<1\").\n const erasureLabel = runtimeItem.autoDelete\n ? t(\"Common:DaysRemaining\", {\n daysRemaining: getDaysRemaining(\n runtimeItem.autoDelete as unknown as Date,\n ),\n })\n : \"\";",
       "module": "/packages/sdk"
     }

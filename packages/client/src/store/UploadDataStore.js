@@ -73,7 +73,10 @@ import {
   getActiveKeyId,
   selectActiveKey,
 } from "@docspace/shared/services/encryption/active-key-preference";
-import { rememberEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
+import {
+  rememberEncryptedFilename,
+  resolveDisplayTitle,
+} from "@docspace/shared/services/encryption/filename-cache";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 
@@ -1093,7 +1096,11 @@ class UploadDataStore {
 
           if (file && isSortedFolder) {
             const folderId = file.fileInfo?.folderId;
-            const fileTitle = file.fileInfo?.title;
+            const fileTitle = resolveDisplayTitle({
+              id: file.fileInfo?.id,
+              title: file.fileInfo?.title,
+              encrypted: file.encrypted ?? file.fileInfo?.encrypted,
+            });
 
             folderId &&
               getFolderInfo(folderId)

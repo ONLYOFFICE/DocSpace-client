@@ -76,11 +76,14 @@ import {
   getCategoryType,
 } from "@docspace/shared/utils/common";
 import {
-  getCachedEncryptedFilename,
+  resolveDisplayTitle,
   subscribeFilenameCache,
 } from "@docspace/shared/services/encryption/filename-cache";
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
-import { recoverEncryptedFilenames } from "@docspace/shared/services/private-room/encrypted-filename-recovery";
+import {
+  ensureDecryptedFilename,
+  recoverEncryptedFilenames,
+} from "@docspace/shared/services/private-room/encrypted-filename-recovery";
 import { backfillEncryptedFilesForRoomMembers } from "@docspace/shared/services/private-room/room-encryption";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -4017,6 +4020,24 @@ class FilesStore {
     );
   };
 
+  ensureEncryptedFilenameForFile = (file) => {
+    if (!file?.encrypted || !file.id || !file.viewUrl) return;
+    const userId = this.userStore?.user?.id;
+    if (!userId) return;
+    const identity = SecretStorage.getCached(String(userId));
+    if (!identity) return;
+    const roomId =
+      this.selectedFolderStore.navigationPath.find((r) => r.isRoom)?.id ??
+      (this.selectedFolderStore.isRoom ? this.selectedFolderStore.id : null);
+    if (!roomId) return;
+    void ensureDecryptedFilename(
+      { id: file.id, viewUrl: file.viewUrl, encrypted: file.encrypted },
+      String(userId),
+      identity,
+      roomId,
+    );
+  };
+
   maybeBackfillEncryptedRoom = (roomId, security) => {
     if (!roomId) return;
     // Only room managers/admins backfill — they're the likely "inviter" with
@@ -4480,8 +4501,7 @@ class FilesStore {
 
       // `void` registers the MobX dep — background cache writes re-render.
       void this.encryptedFilenameCacheVersion;
-      const displayTitle =
-        encrypted && id ? getCachedEncryptedFilename(id) || title : title;
+      const displayTitle = resolveDisplayTitle({ id, title, encrypted });
 
       return {
         access,

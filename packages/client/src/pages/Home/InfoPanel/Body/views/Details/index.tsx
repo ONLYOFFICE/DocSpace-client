@@ -39,6 +39,7 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { isMobile } from "@docspace/shared/utils";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 import { Text } from "@docspace/ui-kit/components/text";
 import { FileType, FolderType } from "@docspace/shared/enums";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
@@ -216,7 +217,11 @@ const Details = ({
     selection.isRoom;
 
   const color = "logo" in selection ? selection.logo?.color : undefined;
-  const title = "title" in selection ? selection.title : "";
+  const resolvedTitle = useResolvedFileTitle(
+    selection as { id?: number | string; title?: string; encrypted?: boolean },
+  );
+  const title =
+    "title" in selection ? resolvedTitle || selection.title : "";
 
   return (
     <>

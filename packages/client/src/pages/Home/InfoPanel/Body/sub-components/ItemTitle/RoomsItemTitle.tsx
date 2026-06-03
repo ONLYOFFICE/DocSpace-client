@@ -38,6 +38,7 @@ import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 import { Text } from "@docspace/ui-kit/components/text";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
@@ -161,10 +162,16 @@ const RoomsItemHeader = ({
       : null;
 
   const isFile = "fileExst" in selection && !!selection.fileExst;
-  let title = selection.title;
+  const resolvedTitle = useResolvedFileTitle(
+    selection as { id?: number | string; title?: string; encrypted?: boolean },
+  );
+  let title = resolvedTitle || selection.title;
 
   if (isFile) {
-    title = getTitleWithoutExtension(selection, false);
+    title = getTitleWithoutExtension(
+      { ...selection, title: resolvedTitle || selection.title },
+      false,
+    );
   }
 
   const onChangeFileContext = (e: React.ChangeEvent<HTMLInputElement>) => {

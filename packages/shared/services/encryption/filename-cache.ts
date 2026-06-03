@@ -67,6 +67,12 @@ function safeStorage(): Storage | null {
 type CacheChangeListener = (fileId: string) => void;
 const listeners = new Set<CacheChangeListener>();
 
+let cacheVersion = 0;
+
+export function getFilenameCacheVersion(): number {
+  return cacheVersion;
+}
+
 export function subscribeFilenameCache(
   listener: CacheChangeListener,
 ): () => void {
@@ -77,6 +83,7 @@ export function subscribeFilenameCache(
 }
 
 function notify(fileId: number | string): void {
+  cacheVersion += 1;
   const id = String(fileId);
   for (const l of listeners) {
     try {
@@ -116,6 +123,23 @@ export function getCachedEncryptedFilename(
   } catch {
     return null;
   }
+}
+
+export function resolveDisplayTitle(
+  file:
+    | {
+        id?: number | string | null;
+        title?: string | null;
+        encrypted?: boolean | null;
+      }
+    | null
+    | undefined,
+): string {
+  const title = file?.title ?? "";
+  if (file?.encrypted && file.id) {
+    return getCachedEncryptedFilename(file.id) || title;
+  }
+  return title;
 }
 
 export function forgetEncryptedFilename(fileId: number | string): void {

@@ -53,12 +53,12 @@
 .btn {
   width: 40px;
   height: 40px;
-  border: 1px solid var(--quick-buttons-color, #d0d5da);
+  border: 1px solid var(--quick-buttons-color);
   border-radius: 50%;
-  background: var(--file-row-background, #f5f5f5);
+  background: var(--file-row-background);
   font-size: 22px;
   font-weight: 400;
-  color: var(--text-color, #333);
+  color: var(--text-color);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -66,7 +66,7 @@
   transition: background-color 0.15s;
 
   &:hover:not(:disabled) {
-    background: var(--button-hover-background, #ebebeb);
+    background: var(--button-hover-background);
   }
 
   &:disabled {
@@ -81,5 +81,5 @@
   min-width: 100px;
   text-align: center;
   line-height: 1;
-  color: var(--text-color, #333);
+  color: var(--text-color);
 }

@@ -48,18 +48,18 @@
 .amount {
   font-size: 42px;
   font-weight: 700;
-  color: var(--text-color, #333);
+  color: var(--text-color);
   line-height: 1;
 }
 
 .period {
   font-size: 18px;
   font-weight: 700;
-  color: var(--text-color, #333);
+  color: var(--text-color);
 }
 
 .perUser {
   margin-top: 8px;
   font-size: 13px;
-  color: var(--text-secondary-color, #657077);
+  color: var(--text-secondary-color);
 }

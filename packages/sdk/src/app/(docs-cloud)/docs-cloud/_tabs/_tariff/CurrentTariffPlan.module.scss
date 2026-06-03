@@ -43,7 +43,7 @@
 
 .subtitle {
   margin-bottom: 24px;
-  color: var(--text-secondary-color, #657077);
+  color: var(--text-secondary-color);
 }
 
 .grid {
@@ -58,7 +58,7 @@
 
 .card {
   padding: 20px;
-  border: 1px solid var(--quick-buttons-color, #d0d5da);
+  border: 1px solid var(--quick-buttons-color);
   border-radius: 8px;
 }
 
@@ -76,7 +76,7 @@
 }
 
 .rowLabel {
-  color: var(--text-secondary-color, #657077);
+  color: var(--text-secondary-color);
 }
 
 .actions {
@@ -88,7 +88,7 @@
 
 .accountLink {
   font-size: 13px;
-  color: var(--link-color, #4781d1);
+  color: var(--link-color);
   cursor: pointer;
   background: none;
   border: none;
@@ -102,9 +102,9 @@
 .warning {
   margin-top: 8px;
   padding: 8px 12px;
-  background: var(--warning-bg, #fff8e1);
-  border: 1px solid var(--warning-color, #f0c040);
+  background: var(--warning-bg);
+  border: 1px solid var(--warning-color);
   border-radius: 4px;
   font-size: 12px;
-  color: var(--text-color, #333);
+  color: var(--text-color);
 }

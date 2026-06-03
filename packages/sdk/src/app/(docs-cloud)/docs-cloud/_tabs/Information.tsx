@@ -233,7 +233,7 @@ function InformationTabContent({ info }: InformationTabProps) {
       parts.push(`${t("DocsCloud:External")}: ${row.external}`);
     if (row.remaining !== null)
       parts.push(`${t("DocsCloud:Remaining")}: ${row.remaining}`);
-    return parts.join(" · ");
+    return parts.join(" . ");
   };
 
   return (
@@ -356,3 +356,4 @@ export function InformationTab({ info }: InformationTabProps) {
     </div>
   );
 }
+

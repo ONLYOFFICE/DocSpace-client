@@ -49,7 +49,7 @@
 .fieldLabel {
   font-size: 13px;
   font-weight: 600;
-  color: var(--text-color, #333);
+  color: var(--text-color);
 }
 
 .radioGroup {
@@ -64,6 +64,6 @@
 
 .successMsg {
   margin-top: 8px;
-  color: var(--success-color, #017d1c);
+  color: var(--success-color);
   font-size: 13px;
 }

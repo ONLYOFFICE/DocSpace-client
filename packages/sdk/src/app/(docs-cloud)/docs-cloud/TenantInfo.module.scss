@@ -51,7 +51,7 @@
   cursor: pointer;
   padding: 0;
   margin-bottom: 12px;
-  color: var(--link-color, #4781d1);
+  color: var(--link-color);
   font-size: 13px;
 
   &:hover {
@@ -75,8 +75,8 @@
 .expiredBanner {
   padding: 8px 12px;
   margin-bottom: 12px;
-  background-color: var(--error-bg, #fff3f3);
-  border: 1px solid var(--error-color, #cb0000);
+  background-color: var(--error-bg);
+  border: 1px solid var(--error-color);
   border-radius: 4px;
 }
 

@@ -70,7 +70,7 @@ export function UserCountSelector({
           onClick={() => onCountChange(Math.max(min, count - 1))}
           disabled={disabled || count <= min}
         >
-          −
+          -
         </button>
         <span className={styles.count}>{count}</span>
         <button
@@ -93,4 +93,3 @@ export function UserCountSelector({
     </div>
   );
 }
-

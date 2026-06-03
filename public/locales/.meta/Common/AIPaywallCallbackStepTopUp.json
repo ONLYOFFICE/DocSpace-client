@@ -3,7 +3,7 @@
   "content": "Topping up your AI balance",
   "content_en_sha1_hash": "0e051a220792bfc7127aecbace266fedd811f4a8",
   "created_at": "2026-05-15T13:59:45.994Z",
-  "updated_at": "2026-05-28T15:46:18.711Z",
+  "updated_at": "2026-06-02T15:03:00.432Z",
   "comment": {
     "text": "A step label in a progress indicator on the AI paywall completion page, representing the stage of adding funds to the AI balance.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
-      "line_number": 183,
-      "context": "const steps = isWalletOnly\n ? [t(\"AIPaywallCallbackStepLinkCard\"), t(\"WalletTopUpStep\")]\n : [\n t(\"AIPaywallCallbackStepLinkCard\"),\n t(\"AIPaywallCallbackStepTopUp\"),\n t(\"AIPaywallCallbackStepActivate\"),\n ];\n \n return (\n <div className={styles.page}>",
+      "line_number": 192,
+      "context": "t(\"WalletTopUpStepCardSaved\"),\n t(\"WalletTopUpCallbackStep\", { price: formattedAmount }),\n ]\n : [\n t(\"AIPaywallCallbackStepLinkCard\"),\n t(\"AIPaywallCallbackStepTopUp\"),\n t(\"AIPaywallCallbackStepActivate\"),\n ];\n \n return (\n <div className={styles.page}>",
       "module": "/libs/ui-kit"
     }
   ],

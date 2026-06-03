@@ -48,7 +48,7 @@ import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 const KnowledgeSettings = () => {
-  const { t } = useTranslation(["Common", "Article"]);
+  const { t } = useTranslation(["Common"]);
 
   const onClickAction = () => toastr.info(t("Common:WorkInProgress"));
 

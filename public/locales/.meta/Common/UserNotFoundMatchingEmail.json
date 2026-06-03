@@ -3,7 +3,7 @@
   "content": "We couldn’t find the user with the matching Stripe e-mail.",
   "content_en_sha1_hash": "60160aa846de84503c5bbb1f1aa6962502abe150",
   "created_at": "2026-04-10T13:53:43.862Z",
-  "updated_at": "2026-05-15T14:00:07.017Z",
+  "updated_at": "2026-06-02T15:03:00.438Z",
   "comment": {
     "text": "This is an error message displayed when a user cannot be found in Stripe using the provided email address. It appears as part of a longer sentence.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/libs/ui-kit/billing/shared/payer-information/index.tsx",
       "line_number": 104,
-      "context": "}\n setDisabled(false);\n };\n \n const unknownPayerDescription = () => {\n const userNotFound = `${t(\"UserNotFoundMatchingEmail\")} `;\n \n let invalidEmailDescription = isOwner\n ? t(\"UnknownPayerForOwner\", {\n productName: getBrandName(\"ProductName\"),\n })",
+      "context": "}\n setDisabled(false);\n };\n \n const unknownPayerDescription = () => {\n const userNotFound = `${t(\"UserNotFoundMatchingEmail\")} `;\n \n if (isNotPaidPeriod) {\n const invalidEmailDescription = isOwner\n ? t(\"InvalidEmailWithoutActiveSubscription\", {\n productName: getBrandName(\"ProductName\"),",
       "module": "/libs/ui-kit"
     }
   ],

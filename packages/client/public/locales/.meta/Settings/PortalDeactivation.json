@@ -3,7 +3,7 @@
   "content": "Deactivate {{productName}}",
   "content_en_sha1_hash": "54fe2d3e5e6088fc60b02a8e670df55142d8e8e1",
   "created_at": "2025-05-19T21:30:52.177Z",
-  "updated_at": "2026-05-15T16:22:24.096Z",
+  "updated_at": "2026-06-02T22:18:05.063Z",
   "comment": {
     "text": "This is the title for a section in the portal settings. It refers to the action of deactivating the entire portal, where `{{productName}}` will be replaced with the product's brand name (e.g., \"DocSpace\").",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 567,
+      "line_number": 574,
       "context": "},\n {\n key: \"9-1\",\n icon: \"\",\n link: \"deactivation\",\n tKey: \"PortalDeactivation\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

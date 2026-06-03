@@ -2075,7 +2075,6 @@ export default inject(
       "InfoPanel",
       "People",
       "PeopleTranslations",
-      "ConnectDialog",
       "SmartBanner",
     ])(observer(SectionFilterContent)),
   ),

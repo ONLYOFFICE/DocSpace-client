@@ -3,7 +3,7 @@
   "content": "Storage capacity has been updated",
   "content_en_sha1_hash": "3eb6406c46e8164622584626f24aef1424e211c3",
   "created_at": "2026-04-10T13:53:43.341Z",
-  "updated_at": "2026-05-15T14:00:07.002Z",
+  "updated_at": "2026-06-02T15:03:00.429Z",
   "comment": {
     "text": "This is a toast message confirming that the storage capacity has been successfully updated. It appears after a user changes their storage plan.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
-      "line_number": 209,
+      "line_number": 218,
       "context": "if (isCancellation || !isUpgradeStoragePlan)\n setAmount(String(currentStoragePlanSize ?? \"\"));\n \n if (intervalRef.current) {\n toastr.success(t(\"StorageCapacityUpdated\"));\n clearInterval(intervalRef.current);\n intervalRef.current = null;\n }\n \n if (localStorage.getItem(STORAGE_TARIFF_DEACTIVATED) !== null) {",
       "module": "/libs/ui-kit"
     }

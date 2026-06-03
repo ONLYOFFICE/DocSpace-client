@@ -39,7 +39,7 @@ import {
   setRecentSetting,
   setOrganizeGrouping,
 } from "@docspace/shared/api/files";
-import { RoomsType } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import { presentInArray } from "@docspace/shared/utils";
@@ -57,6 +57,7 @@ import {
 } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
+import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
 import i18n from "../i18n";
 
 class FilesSettingsStore {
@@ -169,6 +170,16 @@ class FilesSettingsStore {
 
   extsFilesVectorized = [];
 
+  externalShare = true;
+
+  defaultShareLinkInternal = false;
+
+  externalShareApplyToDocuments = true;
+
+  externalShareApplyToRooms = true;
+
+  blockExistingLinksOnRestrict = true;
+
   documentServiceLocation = null;
 
   constructor(
@@ -187,6 +198,15 @@ class FilesSettingsStore {
     this.pluginStore = pluginStore;
     this.authStore = authStore;
     this.settingsStore = settingsStore;
+
+    SocketHelper?.on(SocketEvents.UpdateExternalShareSettings, (settings) => {
+      this.externalShare = settings.externalShare;
+      this.defaultShareLinkInternal = settings.defaultShareLinkInternal;
+      this.externalShareApplyToDocuments =
+        settings.externalShareApplyToDocuments;
+      this.externalShareApplyToRooms = settings.externalShareApplyToRooms;
+      this.blockExistingLinksOnRestrict = settings.blockExistingLinksOnRestrict;
+    });
   }
 
   setIsLoaded = (isLoaded) => {
@@ -196,6 +216,24 @@ class FilesSettingsStore {
   get uploadThreadCount() {
     return this.maxUploadThreadCount / this.maxUploadFilesCount;
   }
+
+  get isExternalShareRestricted() {
+    return !this.externalShare;
+  }
+
+  isLinkBlockedByAdmin = (item, link) => {
+    const isInRoom = item.rootFolderType === FolderType.Rooms;
+    const appliesToItem = isInRoom
+      ? this.externalShareApplyToRooms
+      : this.externalShareApplyToDocuments;
+
+    return (
+      this.isExternalShareRestricted &&
+      appliesToItem &&
+      !link.sharedTo.internal &&
+      this.blockExistingLinksOnRestrict
+    );
+  };
 
   get isLoadedSettingsTree() {
     return (
@@ -268,6 +306,16 @@ class FilesSettingsStore {
 
   setFilesSetting = (setting, val) => {
     this[setting] = val;
+  };
+
+  setAccessControlSettings = async (settings) => {
+    const res = await api.files.setAccessControlSettings(settings);
+    this.externalShare = res.externalShare;
+    this.defaultShareLinkInternal = res.defaultShareLinkInternal;
+    this.externalShareApplyToDocuments = res.externalShareApplyToDocuments;
+    this.externalShareApplyToRooms = res.externalShareApplyToRooms;
+    this.blockExistingLinksOnRestrict = res.blockExistingLinksOnRestrict;
+    return res;
   };
 
   setStoreOriginal = (data, setting) =>

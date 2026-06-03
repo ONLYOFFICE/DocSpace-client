@@ -74,6 +74,7 @@ const CreateRoomDialog = ({
   setSelectedRoomType,
   getThirdPartyIcon,
   isDefaultRoomsQuotaSet,
+  isExternalShareRestricted,
   fetchedRoomParams,
   encryptionKeys,
   userId,
@@ -115,9 +116,8 @@ const CreateRoomDialog = ({
     ...startRoomParams,
   });
   const [isValidTitle, setIsValidTitle] = useState(true);
-  const [isTemplateSelected, setIsTemplateSelected] = useState(
-    !!fetchedRoomParams,
-  );
+  const [isTemplateSelected, setIsTemplateSelected] =
+    useState(!!fetchedRoomParams);
   const [templateItem, setTemplateItem] = useState(null);
 
   const setRoomTags = (newTags) =>
@@ -356,6 +356,7 @@ const CreateRoomDialog = ({
               t={t}
               setRoomType={setRoomType}
               disabledFormRoom={disabledFormRoom}
+              isExternalShareRestricted={isExternalShareRestricted}
               setTemplateDialogIsVisible={setTemplateDialogIsVisible}
             />
           ) : (
@@ -418,3 +419,4 @@ const CreateRoomDialog = ({
 };
 
 export default CreateRoomDialog;
+

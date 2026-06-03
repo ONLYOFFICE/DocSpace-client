@@ -3,7 +3,7 @@
   "content": "My documents",
   "content_en_sha1_hash": "143f7ba1fed6d88c5657c9a23c89975723c9f700",
   "created_at": "2025-09-02T08:31:42.199Z",
-  "updated_at": "2026-06-01T21:20:44.381Z",
+  "updated_at": "2026-06-02T22:18:04.987Z",
   "comment": {
     "text": "This is a label for the user's personal document storage. It appears in various contexts, such as a download report location or a section title within dialogs.",
     "is_auto": true,
@@ -132,6 +132,18 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
+      "line_number": 380,
+      "context": "<Checkbox\n dataTestId=\"applies_to_documents_checkbox\"\n isChecked={applyToDocuments}\n onChange={() => setApplyToDocuments(!applyToDocuments)}\n label={t(\"Settings:AppliesToDocuments\", {\n myDocuments: t(\"Common:MyDocuments\"),\n })}\n />\n <div\n className={`category-item-description ${styles.checkboxDescription}`}\n >",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
+      "line_number": 380,
+      "context": "<Checkbox\n dataTestId=\"applies_to_documents_checkbox\"\n isChecked={applyToDocuments}\n onChange={() => setApplyToDocuments(!applyToDocuments)}\n label={t(\"Settings:AppliesToDocuments\", {\n myDocuments: t(\"Common:MyDocuments\"),\n })}\n />\n <div\n className={`category-item-description ${styles.checkboxDescription}`}\n >",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
       "line_number": 127,
       "context": "lifetime={securityLifetime.auditTrailLifeTime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"Common:DownloadReportBtnText\")}\n downloadReportDescription={t(\"Common:ReportSaveLocation\", {\n sectionName: t(\"Common:MyDocuments\"),\n })}\n getReport={getAuditTrailReport}\n isSettingNotPaid={!isAuditAvailable}\n isLoadingDownloadReport={isLoadingDownloadReport}\n />",
@@ -169,7 +181,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1888,
+      "line_number": 1894,
       "context": "},\n {\n id: \"header_option_empty-section\",\n key: \"empty-section\",\n label: t(\"Files:EmptySection\", {\n sectionName: t(\"Common:MyDocuments\"),\n }),\n onClick: this.onEmptyPersonalAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,\n },",
       "module": "/packages/client"
     },

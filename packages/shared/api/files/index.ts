@@ -1262,6 +1262,27 @@ export async function getSettingsFiles(headers = null) {
   return res;
 }
 
+export type TAccessControlSettings = Pick<
+  TFilesSettings,
+  | "externalShare"
+  | "defaultShareLinkInternal"
+  | "externalShareApplyToDocuments"
+  | "externalShareApplyToRooms"
+  | "blockExistingLinksOnRestrict"
+>;
+
+export async function setAccessControlSettings(
+  settings: TAccessControlSettings,
+) {
+  const res = (await request({
+    method: "put",
+    url: "/files/settings/externalsharingsettings",
+    data: settings,
+  })) as TAccessControlSettings;
+
+  return res;
+}
+
 export async function markAsFavorite(fileIds: number[], folderIds: number[]) {
   const data = { fileIds, folderIds };
   const options: AxiosRequestConfig = {

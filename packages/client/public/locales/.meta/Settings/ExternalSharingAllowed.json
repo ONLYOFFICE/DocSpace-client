@@ -1,0 +1,29 @@
+{
+  "key_path": "ExternalSharingAllowed",
+  "content": "Allowed",
+  "content_en_sha1_hash": "77c7b4909d393bbb0e9e72d3dd008972625771b3",
+  "created_at": "2026-06-02T08:43:23.382Z",
+  "updated_at": "2026-06-02T08:48:17.180Z",
+  "comment": {
+    "text": "Label for a configuration option in the security settings indicating that external sharing is permitted.",
+    "is_auto": true,
+    "updated_at": "2026-06-02T08:48:17.180Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
+      "line_number": 242,
+      "context": "const externalSharingOptions = useMemo(\n () => [\n {\n id: \"external-sharing-allowed\",\n label: t(\"Settings:ExternalSharingAllowed\"),\n value: \"true\",\n dataTestId: \"external_sharing_allowed\",\n },\n {\n id: \"external-sharing-restricted\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

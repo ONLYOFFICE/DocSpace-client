@@ -263,6 +263,13 @@ export const settingsTree = [
             link: "lifetime",
             tKey: "SessionLifetime",
           },
+          {
+            id: "portal-settings_catalog-access-control",
+            key: "1-0-9",
+            icon: "",
+            link: "access-control",
+            tKey: "AccessControl",
+          },
         ],
       },
       {

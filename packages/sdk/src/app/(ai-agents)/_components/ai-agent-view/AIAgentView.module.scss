@@ -1,16 +1,14 @@
-// Class is applied to the chat-container itself (no wrapper div) — keeps
-// the chat-container as a direct child of section-wrapper-content so the
-// sticky chat-header / chat-footer pin against Section's `#sectionScroll`
-// scroller (chat hooks into it via `externalScrollRef`).
-//
-// `--chat-header-top` is set as an inline style by AiAgentView, measured
-// at runtime from `.section-sticky-container` via ResizeObserver. The CSS
-// `calc(section-header-height + section-submenu-height)` we used to set
-// here was off because the filter slot (always rendered, even when it
-// returns null) and frame-header configuration shift the real height.
+// Bounded-height flex parent for the new chat (`@onlyoffice/ai-chat`).
+// NewChat owns its own scroll viewport and pins its header/footer inside
+// this box, so it only needs a flex column that fills the Section body.
+// The chat tab sets Section's `fullHeightBody` (see layout.client.tsx),
+// which makes section-wrapper / section-wrapper-content flex columns with
+// flex-grow:1 — this `.aiAgentChat` then grows to the full body height and
+// `min-height:0` lets the inner viewport scroll instead of overflowing.
 .aiAgentChat {
-  :global(div:has(> div > [style*="--chat-welcome-color"])) {
-    margin-bottom: 0 !important;
-    margin-top: 32px !important;
-  }
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-height: 0;
+  height: 100%;
 }

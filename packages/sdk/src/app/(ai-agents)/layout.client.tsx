@@ -50,6 +50,7 @@ import {
   AgentsNavigationSubmenu,
 } from "./_components/agents-navigation";
 import KnowledgeUploadSelectorDialog from "./_components/knowledge-upload-selector-dialog";
+import AiAgentsAiChatProviders from "./_components/ai-agent-providers";
 import { AgentsCommonDataProvider } from "./_store/AgentsCommonDataContext";
 import useAiAgentsFrameBridge from "./_hooks/useAiAgentsFrameBridge";
 import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
@@ -191,7 +192,9 @@ const SectionShell = observer(
           <Section.SectionSubmenu>
             <AgentsNavigationSubmenu />
           </Section.SectionSubmenu>
-          <Section.SectionBody>{children}</Section.SectionBody>
+          <Section.SectionBody>
+            <AiAgentsAiChatProviders>{children}</AiAgentsAiChatProviders>
+          </Section.SectionBody>
           <Section.InfoPanelHeader>
             <AgentInfoPanelHeader />
           </Section.InfoPanelHeader>

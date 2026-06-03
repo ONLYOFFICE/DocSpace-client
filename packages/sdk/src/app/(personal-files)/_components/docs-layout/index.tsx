@@ -132,8 +132,10 @@ import {
   DocsChatHeaderPanel,
   useOpenAiChat,
 } from "../ai-chat-panel";
-import { getOnlyofficeFileType } from "../ai-agent-providers/onlyoffice-file-type";
-import { attachFilesToChat } from "../ai-agent-providers/attach-files";
+import {
+  getOnlyofficeFileType,
+  attachFilesToChat,
+} from "@/components/ai-chat-composer";
 
 import styles from "./DocsLayout.module.scss";
 

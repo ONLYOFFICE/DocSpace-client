@@ -3,7 +3,7 @@
   "content": "Room available via external link",
   "content_en_sha1_hash": "5eafad26a9c596d53f01c8dbd5b7dfa038263586",
   "created_at": "2026-06-01T21:20:31.301Z",
-  "updated_at": "2026-06-01T21:26:17.794Z",
+  "updated_at": "2026-06-03T09:30:05.140Z",
   "comment": {
     "text": "Header text for the public room information bar, indicating that the room is accessible via an external link.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/index.tsx",
-      "line_number": 342,
+      "line_number": 326,
       "context": ">\n <PublicRoomBar\n headerText={\n isFormRoom\n ? t(\"Common:RoomMembersAvailableViaSharedLink\")\n : t(\"Common:RoomMembersAvailableViaExternalLink\")\n }\n bodyText={\n isFormRoom\n ? t(\"Common:RoomFormBarDescription\")\n : t(\"Common:RoomPublicBarDescription\")",
       "module": "/packages/sdk"
     }

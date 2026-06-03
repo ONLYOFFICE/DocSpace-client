@@ -1,0 +1,65 @@
+{
+  "key_path": "NewAISettings",
+  "content": "New AI settings",
+  "content_en_sha1_hash": "826d4d979e5b0de30228ba37ffb50f5c33460bf6",
+  "created_at": "2026-06-03T11:46:02.380Z",
+  "updated_at": "2026-06-03T11:48:51.421Z",
+  "comment": {
+    "text": "Section header in the portal settings navigation menu that labels a new group of AI configuration options.",
+    "is_auto": true,
+    "updated_at": "2026-06-03T11:48:51.421Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
+      "line_number": 251,
+      "context": "case \"Services\":\n return t(\"Services\");\n case \"AISettings\":\n return t(\"Settings:AISettings\");\n case \"NewAISettings\":\n return t(\"Settings:NewAISettings\");\n case \"OAuth:Apps\":\n return t(\"OAuth:Apps\");\n default:\n throw new Error(\"Unexpected translation key\");\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 504,
+      "context": "},\n {\n id: \"portal-settings_catalog-new-ai-settings\",\n key: \"8\",\n link: \"new-ai-settings\",\n tKey: \"NewAISettings\",\n type: PageType.newAISettings,\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-new-ai-settings-ai-models\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 504,
+      "context": "},\n {\n id: \"portal-settings_catalog-new-ai-settings\",\n key: \"8\",\n link: \"new-ai-settings\",\n tKey: \"NewAISettings\",\n type: PageType.newAISettings,\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-new-ai-settings-ai-models\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 504,
+      "context": "},\n {\n id: \"portal-settings_catalog-new-ai-settings\",\n key: \"8\",\n link: \"new-ai-settings\",\n tKey: \"NewAISettings\",\n type: PageType.newAISettings,\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-new-ai-settings-ai-models\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 504,
+      "context": "},\n {\n id: \"portal-settings_catalog-new-ai-settings\",\n key: \"8\",\n link: \"new-ai-settings\",\n tKey: \"NewAISettings\",\n type: PageType.newAISettings,\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-new-ai-settings-ai-models\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 504,
+      "context": "},\n {\n id: \"portal-settings_catalog-new-ai-settings\",\n key: \"8\",\n link: \"new-ai-settings\",\n tKey: \"NewAISettings\",\n type: PageType.newAISettings,\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-new-ai-settings-ai-models\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 504,
+      "context": "},\n {\n id: \"portal-settings_catalog-new-ai-settings\",\n key: \"8\",\n link: \"new-ai-settings\",\n tKey: \"NewAISettings\",\n type: PageType.newAISettings,\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-new-ai-settings-ai-models\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

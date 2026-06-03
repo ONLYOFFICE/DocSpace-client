@@ -39,7 +39,7 @@ import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
-import { removeFiles } from "@docspace/shared/api/files";
+import { removeFiles, emptyTrash } from "@docspace/shared/api/files";
 import { FolderType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
@@ -161,6 +161,44 @@ export default function useTrashActions(trackOperation?: TrackOperation) {
     router,
   ]);
 
+  // Empty all — permanently clear the whole trash via the dedicated emptyTrash
+  // API (not a per-item bulk delete), confirmed through the same DeleteDialog
+  // shown in its "empty trash" variant.
+  const [emptyTrashDialogVisible, setEmptyTrashDialogVisible] = useState(false);
+  const [isEmptyingTrash, setIsEmptyingTrash] = useState(false);
+
+  const requestEmptyTrash = useCallback(() => {
+    setEmptyTrashDialogVisible(true);
+  }, []);
+
+  const closeEmptyTrashDialog = useCallback(() => {
+    setEmptyTrashDialogVisible(false);
+  }, []);
+
+  const confirmEmptyTrash = useCallback(async () => {
+    setIsEmptyingTrash(true);
+    try {
+      const operations = await emptyTrash();
+      setEmptyTrashDialogVisible(false);
+
+      const opId = operations?.[0]?.id;
+      const onComplete = () => {
+        filesListStore.setItems([]);
+        filesSelectionStore.setSelection();
+      };
+
+      if (opId && trackOperation) {
+        await trackOperation(opId, "deletePermanently", onComplete);
+      } else {
+        onComplete();
+      }
+    } catch (error) {
+      toastr.error(error instanceof Error ? error.message : String(error));
+    } finally {
+      setIsEmptyingTrash(false);
+    }
+  }, [filesListStore, filesSelectionStore, trackOperation]);
+
   return {
     isTrash,
     requestDeleteItem,
@@ -170,5 +208,10 @@ export default function useTrashActions(trackOperation?: TrackOperation) {
     isDeleting,
     closeDeleteDialog,
     confirmDelete,
+    requestEmptyTrash,
+    emptyTrashDialogVisible,
+    isEmptyingTrash,
+    closeEmptyTrashDialog,
+    confirmEmptyTrash,
   };
 }

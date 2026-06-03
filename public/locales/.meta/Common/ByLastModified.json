@@ -2,37 +2,37 @@
   "key_path": "ByLastModified",
   "content": "Modified",
   "content_en_sha1_hash": "19a532c8bc61c311f583455c80ffe37067bbc9bb",
-  "created_at": "2026-05-24T17:27:20.303Z",
-  "updated_at": "2026-05-24T18:30:21.968Z",
+  "created_at": "2025-05-19T21:30:55.319Z",
+  "updated_at": "2026-06-03T09:30:05.060Z",
   "comment": {
-    "text": "Column header in a table view that labels the column for the last modification date.",
+    "text": "This is a column header in a table view, indicating the last modification date of an item. It appears as a short label.",
     "is_auto": true,
-    "updated_at": "2026-05-24T18:30:21.968Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-04-11T21:10:22.538Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
       "line_number": 308,
-      "context": "// onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Modified\",\n title: t(\"ByLastModified\"),\n enable: modifiedColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.ModifiedDate,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
+      "context": "// onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Modified\",\n title: t(\"Common:ByLastModified\"),\n enable: modifiedColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.ModifiedDate,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
       "line_number": 308,
-      "context": "// onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Modified\",\n title: t(\"ByLastModified\"),\n enable: modifiedColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.ModifiedDate,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
+      "context": "// onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Modified\",\n title: t(\"Common:ByLastModified\"),\n enable: modifiedColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.ModifiedDate,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
       "line_number": 308,
-      "context": "// onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Modified\",\n title: t(\"ByLastModified\"),\n enable: modifiedColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.ModifiedDate,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
+      "context": "// onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Modified\",\n title: t(\"Common:ByLastModified\"),\n enable: modifiedColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.ModifiedDate,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
       "line_number": 308,
-      "context": "// onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Modified\",\n title: t(\"ByLastModified\"),\n enable: modifiedColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.ModifiedDate,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
+      "context": "// onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Modified\",\n title: t(\"Common:ByLastModified\"),\n enable: modifiedColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.ModifiedDate,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
@@ -173,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
@@ -188,12 +188,6 @@
       "approved_at": null
     },
     "sl": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

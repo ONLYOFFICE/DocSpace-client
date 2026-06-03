@@ -236,7 +236,6 @@ export const enum PageType {
   guests = "guests",
   aiSettings = "aiSettings",
   newAISettings = "new-ai-settings",
-  apps = "apps",
 }
 
 export const enum ConflictResolveType {

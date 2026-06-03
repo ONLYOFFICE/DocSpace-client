@@ -38,6 +38,7 @@
 import React from "react";
 
 import { Toast } from "@docspace/ui-kit/components/toast";
+import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type {
   TGetColorTheme,
@@ -163,6 +164,7 @@ const Providers = ({ children, contextData }: TProviders) => {
               <SDKConfigProvider>
                 {children}
                 <Toast isSSR />
+                <RootTooltip />
               </SDKConfigProvider>
             </ErrorProvider>
           </ThemeProvider>

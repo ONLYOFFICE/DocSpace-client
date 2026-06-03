@@ -3,7 +3,7 @@
   "content": "This item will be permanently deleted. Are you sure?",
   "content_en_sha1_hash": "bc9b11f940706f51e5a6fa996be78b0f399ba112",
   "created_at": "2026-04-03T21:51:27.561Z",
-  "updated_at": "2026-05-15T14:00:06.976Z",
+  "updated_at": "2026-06-03T09:30:05.141Z",
   "comment": {
     "text": "This is a confirmation message displayed in a dialog when a user attempts to permanently delete a single item from the trash.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/delete-dialog/index.tsx",
-      "line_number": 66,
-      "context": "}: DeleteDialogProps) => {\n const { t } = useTranslation([\"Common\"]);\n \n const message = isTrash\n ? itemCount === 1\n ? t(\"Common:DeleteItemForever\")\n : t(\"Common:DeleteItemsForever\", { itemCount })\n : itemCount === 1\n ? t(\"Common:MoveToTrashItem\")\n : t(\"Common:MoveToTrashItems\", { itemCount });",
+      "line_number": 73,
+      "context": "? t(\"Common:DeleteForeverNote\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n : isTrash\n ? itemCount === 1\n ? t(\"Common:DeleteItemForever\")\n : t(\"Common:DeleteItemsForever\", { itemCount })\n : itemCount === 1\n ? t(\"Common:MoveToTrashItem\")\n : t(\"Common:MoveToTrashItems\", { itemCount });",
       "module": "/packages/sdk"
     }
   ],

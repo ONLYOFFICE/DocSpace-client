@@ -263,6 +263,13 @@ export const settingsTree = [
             link: "lifetime",
             tKey: "SessionLifetime",
           },
+          {
+            id: "portal-settings_catalog-access-control",
+            key: "1-0-9",
+            icon: "",
+            link: "access-control",
+            tKey: "AccessControl",
+          },
         ],
       },
       {
@@ -569,23 +576,6 @@ export const settingsTree = [
         key: "7-3",
         link: "knowledge",
         tKey: "Common:Knowledge",
-        isCategory: true,
-      },
-    ],
-  },
-  {
-    id: "portal-settings_catalog-apps",
-    key: "8",
-    type: PageType.apps,
-    link: "apps",
-    tKey: "OAuth:Apps",
-    isHeader: true,
-    children: [
-      {
-        id: "portal-settings_catalog-apps-list",
-        key: "8-0",
-        link: "",
-        tKey: "OAuth:Apps",
         isCategory: true,
       },
     ],

@@ -210,7 +210,7 @@ const ConvertDialogComponent = (props) => {
             {!convertSingleFile ? (
               <Checkbox
                 className="convert_dialog_checkbox"
-                label={t("HideMessage")}
+                label={t("Common:HideMessage")}
                 isChecked={hideMessage}
                 onChange={onChangeMessageVisible}
                 dataTestId="convert_dialog_hide_message_checkbox"

@@ -1,0 +1,29 @@
+{
+  "key_path": "DefaultLinkTypeInternal",
+  "content": "{{productName}} users only",
+  "content_en_sha1_hash": "0beea2f05fa9af55a0c63adb5ee8fc835cf3d5e9",
+  "created_at": "2026-06-02T08:43:23.398Z",
+  "updated_at": "2026-06-02T08:49:51.539Z",
+  "comment": {
+    "text": "Label for a selection option in the access control settings that restricts link access to internal users. The {{productName}} variable represents the application's name.",
+    "is_auto": true,
+    "updated_at": "2026-06-02T08:49:51.539Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
+      "line_number": 268,
+      "context": "value: \"false\",\n dataTestId: \"default_link_type_anyone\",\n },\n {\n id: \"default-link-type-docspace\",\n label: t(\"Settings:DefaultLinkTypeInternal\", {\n productName: getBrandName(\"ProductName\"),\n }),\n value: \"true\",\n dataTestId: \"default_link_type_docspace\",\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

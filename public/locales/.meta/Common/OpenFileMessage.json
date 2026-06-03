@@ -2,13 +2,13 @@
   "key_path": "OpenFileMessage",
   "content": "The document file you open will be converted to the Office Open XML format for quick viewing and editing.",
   "content_en_sha1_hash": "9de0c615b3fdd60d1a33c6f1aab9a1102479e8e0",
-  "created_at": "2026-05-24T17:27:34.264Z",
-  "updated_at": "2026-05-24T17:43:27.589Z",
+  "created_at": "2025-05-19T21:30:56.890Z",
+  "updated_at": "2026-06-02T22:18:05.009Z",
   "comment": {
-    "text": "Informational text within the body of a conversion dialog, appearing when a user opens a file that requires conversion to the Office Open XML format.",
+    "text": "This is a message displayed in a dialog box, informing the user that a non-Office Open XML document will be converted for viewing and editing.",
     "is_auto": true,
-    "updated_at": "2026-05-24T17:43:27.589Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-04-11T21:04:09.474Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
@@ -170,12 +170,6 @@
       "approved_at": null
     },
     "sl": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -160,10 +160,6 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["7-0"]);
       }
 
-      if (location.pathname.includes("/apps")) {
-        setSelectedKeys(["8-0"]);
-      }
-
       if (location.pathname.includes("delete-data")) {
         setSelectedKeys(["9-0"]);
       }
@@ -412,3 +408,4 @@ export default inject(
     ),
   ),
 );
+

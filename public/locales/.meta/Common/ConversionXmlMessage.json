@@ -2,13 +2,13 @@
   "key_path": "ConversionXmlMessage",
   "content": "The file you open will be converted to the Office Open XML format (docx or xlsx) for faster viewing and editing.",
   "content_en_sha1_hash": "9507fc970eb372f149cc24fa018de9ed8efd6a72",
-  "created_at": "2026-05-24T17:27:21.782Z",
-  "updated_at": "2026-05-24T18:27:42.746Z",
+  "created_at": "2025-05-19T21:30:56.879Z",
+  "updated_at": "2026-06-02T22:18:05.009Z",
   "comment": {
-    "text": "Informational text in a modal dialog body that appears when opening an XML file, explaining that the file will be converted to docx or xlsx format.",
+    "text": "This is a message displayed in a confirmation dialog when a user attempts to open a file that will be converted to Office Open XML format for improved performance. It informs the user about the conversion process.",
     "is_auto": true,
-    "updated_at": "2026-05-24T18:27:42.746Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-04-11T21:04:15.586Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
@@ -170,12 +170,6 @@
       "approved_at": null
     },
     "sl": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

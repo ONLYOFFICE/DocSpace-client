@@ -1,0 +1,29 @@
+{
+  "key_path": "PublicRoomCreationDisabled",
+  "content": "Public Rooms cannot be created because external sharing is disabled.",
+  "content_en_sha1_hash": "77005c009d9680f4180487bf6ec21096b43c0c7c",
+  "created_at": "2026-06-02T08:43:15.985Z",
+  "updated_at": "2026-06-02T08:43:49.728Z",
+  "comment": {
+    "text": "Tooltip text explaining why the Public Room option is unavailable when external sharing is disabled.",
+    "is_auto": true,
+    "updated_at": "2026-06-02T08:43:49.728Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/RoomTypeList/index.tsx",
+      "line_number": 79,
+      "context": "const formRoomTooltipContent = t(\"Files:FormRoomCreationLimit\", {\n sectionName: t(\"Common:Rooms\"),\n });\n \n const publicRoomTooltipContent = t(\"Common:PublicRoomCreationDisabled\");\n \n return (\n <div className={styles.roomTypeList}>\n {RoomsTypeValues.map((roomType) => {\n const isFormRoom = roomType === RoomsType.FormRoom;",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

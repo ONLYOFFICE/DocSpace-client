@@ -57,10 +57,12 @@ import type {
 import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
+import WarningComponent from "@docspace/ui-kit/components/navigation/sub-components/WarningComponent";
 
 import { SectionWrapper } from "@/app/(docspace)/_components/section";
 import Header from "@/app/(docspace)/_components/header";
 import useFrameHeaderConfig from "@/hooks/useFrameHeaderConfig";
+import useDeviceType from "@/hooks/useDeviceType";
 import { Filter } from "@/app/(docspace)/_components/filter";
 import SelectionArea from "@/app/(docspace)/_components/selection-area";
 import FilesMediaViewer from "@/app/(docspace)/_components/FilesMediaViewer";
@@ -101,6 +103,7 @@ import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
 import ConvertDialog from "../convert-dialog";
 import CreateFileDialog from "../create-file-dialog";
+import DocsMainButton from "../main-button";
 import VersionHistoryPanel from "../version-history-panel";
 import { useVersionHistoryStore } from "../../_store/VersionHistoryStore";
 
@@ -191,6 +194,8 @@ const DocsLayout = observer(
     const pathname = usePathname();
 
     const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
+    const { currentDeviceType } = useDeviceType();
+    const isMobile = currentDeviceType === DeviceType.mobile;
 
     const isMyDocuments = rootFolderType === FolderType.USER;
     const isInRooms =
@@ -280,11 +285,20 @@ const DocsLayout = observer(
       isDeleting,
       closeDeleteDialog,
       confirmDelete,
+      requestEmptyTrash,
+      emptyTrashDialogVisible,
+      isEmptyingTrash,
+      closeEmptyTrashDialog,
+      confirmEmptyTrash,
     } = useTrashActions(trackOperation);
 
     const deleteHandler = React.useMemo(
-      () => ({ deleteItem: requestDeleteItem, deleteItems: requestDelete }),
-      [requestDeleteItem, requestDelete],
+      () => ({
+        deleteItem: requestDeleteItem,
+        deleteItems: requestDelete,
+        emptyTrash: requestEmptyTrash,
+      }),
+      [requestDeleteItem, requestDelete, requestEmptyTrash],
     );
 
     const renameHandler = React.useMemo(
@@ -473,19 +487,6 @@ const DocsLayout = observer(
                             >
                               <RootScrollbar>
                                 <SectionWrapper
-                                  sectionBannerContent={
-                                    isActionButtonEnabled ? (
-                                      <div className={styles.createNewSection}>
-                                        <h2 className={styles.createNewTitle}>
-                                          {t("Common:CreateNew")}
-                                        </h2>
-                                        <QuickActions
-                                          items={quickActionItems}
-                                          className={styles.quickActions}
-                                        />
-                                      </div>
-                                    ) : undefined
-                                  }
                                   sectionHeaderContent={
                                     <Header
                                       current={current}
@@ -499,12 +500,40 @@ const DocsLayout = observer(
                                       aiChatButton={<AiChatTrigger />}
                                     />
                                   }
+                                  stickyTableHeader
+                                  scrollableBanner={isActionButtonEnabled}
+                                  sectionBannerContent={
+                                    isActionButtonEnabled ? (
+                                      <div className={styles.createNewSection}>
+                                        <QuickActions
+                                          items={quickActionItems}
+                                          className={styles.quickActions}
+                                        />
+                                      </div>
+                                    ) : undefined
+                                  }
+                                  sectionWarningContent={
+                                    isTrash ? (
+                                      <WarningComponent
+                                        title={t(
+                                          "Common:TrashAutoDeleteWarning",
+                                          {
+                                            sectionName: t(
+                                              "Common:TrashSection",
+                                            ),
+                                          },
+                                        )}
+                                      />
+                                    ) : undefined
+                                  }
                                   sectionFilterContent={
                                     <Filter
                                       filesFilter={filesFilter}
-                                      showMainButton={isActionButtonEnabled}
+                                      showMainButton={
+                                        isActionButtonEnabled && !isMobile
+                                      }
                                       mainButtonProps={
-                                        isActionButtonEnabled
+                                        isActionButtonEnabled && !isMobile
                                           ? {
                                               isDropdown: true,
                                               model: desktopModel,
@@ -569,6 +598,12 @@ const DocsLayout = observer(
                                 <Dialogs />
                               </RootScrollbar>
                             </DropZone>
+                            {isActionButtonEnabled && isMobile ? (
+                              <DocsMainButton
+                                mode="mobile"
+                                actions={docsActions}
+                              />
+                            ) : null}
                             <InfoPanelEditLinkDialog />
                             <ShareSelector />
                             <VersionHistoryPanel />
@@ -586,6 +621,15 @@ const DocsLayout = observer(
                               isTrash={isTrash}
                               onClose={closeDeleteDialog}
                               onConfirm={confirmDelete}
+                            />
+                            <DeleteDialog
+                              visible={emptyTrashDialogVisible}
+                              isLoading={isEmptyingTrash}
+                              itemCount={0}
+                              isTrash
+                              isEmptyTrash
+                              onClose={closeEmptyTrashDialog}
+                              onConfirm={confirmEmptyTrash}
                             />
                             {selectorDialogVisible && selectorInitData && (
                               <FilesSelector
@@ -702,15 +746,6 @@ const DocsLayout = observer(
                               onClose={closeRenameDialog}
                               onSave={confirmRename}
                             />
-                            <ConvertDialog
-                              visible={convertDialogVisible}
-                              fileExst={convertTarget?.fileExst ?? ""}
-                              storeOriginalFiles={storeOriginalFiles}
-                              isConverting={isConverting}
-                              onChangeStoreOriginal={onChangeStoreOriginal}
-                              onClose={closeConvertDialog}
-                              onConfirm={confirmConvert}
-                            />
                             <ConflictResolveDialog
                               visible={
                                 conflictDialogVisible ||
@@ -731,6 +766,15 @@ const DocsLayout = observer(
                                   ? confirmConflict
                                   : confirmUploadConflict
                               }
+                            />
+                            <ConvertDialog
+                              visible={convertDialogVisible}
+                              fileExst={convertTarget?.fileExst ?? ""}
+                              storeOriginalFiles={storeOriginalFiles}
+                              isConverting={isConverting}
+                              onChangeStoreOriginal={onChangeStoreOriginal}
+                              onClose={closeConvertDialog}
+                              onConfirm={confirmConvert}
                             />
                           </div>
                         </AskAIContext.Provider>

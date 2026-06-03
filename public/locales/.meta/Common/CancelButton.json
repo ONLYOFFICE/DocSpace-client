@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2026-06-01T21:20:44.390Z",
+  "updated_at": "2026-06-03T09:30:05.011Z",
   "comment": {
     "text": "This is the label for a button that dismisses a dialog or cancels an action, such as deleting a chat, renaming a chat, or adding an attachment.",
     "is_auto": true,
@@ -61,7 +61,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/ButtonContainer.tsx",
-      "line_number": 127,
+      "line_number": 153,
       "context": "isWaitingCalculation\n }\n testId=\"storage_plan_upgrade_ok_button\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n isDisabled={isLoading}",
       "module": "/libs/ui-kit"
     },
@@ -91,7 +91,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/top-up-balance/FirstTopUpDialog.tsx",
-      "line_number": 236,
+      "line_number": 230,
       "context": "isLoading={isLoading}\n isDisabled={isDisabled}\n testId=\"first_topup_continue_to_stripe\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n isDisabled={isLoading}",
       "module": "/libs/ui-kit"
     },
@@ -283,7 +283,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 328,
+      "line_number": 329,
       "context": "testId=\"create_room_dialog_save\"\n />\n <Button\n id=\"shared_create-room-modal_cancel\"\n tabIndex={5}\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n scale\n isDisabled={isLoading}\n onClick={onCloseAndDisconnectThirdparty}\n testId=\"create_room_dialog_cancel\"",
       "module": "/packages/client"
     },
@@ -882,6 +882,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
+      "line_number": 459,
+      "context": "onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n saveButtonDataTestId=\"access_control_save_button\"\n cancelButtonDataTestId=\"access_control_cancel_button\"",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
       "line_number": 221,
       "context": "onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n additionalClassSaveButton=\"admin-message-save\"\n additionalClassCancelButton=\"admin-message-cancel\"\n saveButtonDataTestId=\"administrator_message_save_button\"",
@@ -1255,13 +1261,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/delete-dialog/index.tsx",
-      "line_number": 88,
+      "line_number": 103,
       "context": "scale\n onClick={onConfirm}\n isLoading={isLoading}\n />\n <Button\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n isDisabled={isLoading}\n />",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx",
-      "line_number": 535,
+      "line_number": 563,
       "context": "}\n initSearchValue={null}\n initTotal={selectorInitData.total}\n initHasNextPage={selectorInitData.hasNextPage}\n submitButtonLabel={getSubmitLabel(selectorMode, t)}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n withCancelButton\n withBreadCrumbs\n withSearch\n withCreate={false}\n withFooterInput={false}",
       "module": "/packages/sdk"
     },
@@ -1285,7 +1291,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
-      "line_number": 500,
+      "line_number": 501,
       "context": "isLoading={isLoading}\n onClick={onSave}\n isDisabled={!name.trim() || isLoading}\n />\n <Button\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n isDisabled={isLoading}\n />",
       "module": "/packages/sdk"
     },

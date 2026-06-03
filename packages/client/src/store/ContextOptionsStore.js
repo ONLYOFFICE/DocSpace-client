@@ -538,6 +538,11 @@ class ContextOptionsStore {
           ? await getFolderLink(item.id)
           : await getFileLink(item.id);
 
+        if (this.filesSettingsStore.isLinkBlockedByAdmin(item, itemLink)) {
+          toastr.error(t("Common:LinkBlockedByAdminWarning"));
+          return;
+        }
+
         copyToBuffer(itemLink.sharedTo.shareLink);
 
         if (!item.isFolder && !item.isRoom) {
@@ -628,11 +633,12 @@ class ContextOptionsStore {
     const primaryLink = await this.filesStore.getPrimaryLink(item.id);
 
     if (primaryLink) {
+      if (this.filesSettingsStore.isLinkBlockedByAdmin(item, primaryLink)) {
+        toastr.error(t("Common:LinkBlockedByAdminWarning"));
+        return;
+      }
+
       copyShareLink(item, primaryLink, t, this.getManageLinkOptions(item));
-      // copyShareLink(primaryLink.sharedTo.shareLink);
-      // item.shared
-      //   ? toastr.success(t("Common:LinkSuccessfullyCopied"))
-      //   : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
 
       this.publicRoomStore.setExternalLink(primaryLink);
 
@@ -917,8 +923,8 @@ class ContextOptionsStore {
 
     if (isRoom) {
       translations = {
-        successRemoveRoom: t("Files:RoomRemoved"),
-        successRemoveRooms: t("Files:RoomsRemoved"),
+        successRemoveRoom: t("Common:RoomRemoved"),
+        successRemoveRooms: t("Common:RoomsRemoved"),
       };
 
       deleteRoomsAction([selectedFolderId], translations).catch((err) =>
@@ -1905,6 +1911,11 @@ class ContextOptionsStore {
     const primaryLink = await ShareLinkService.getPrimaryLink(item);
 
     if (primaryLink) {
+      if (this.filesSettingsStore.isLinkBlockedByAdmin(item, primaryLink)) {
+        toastr.error(t("Common:LinkBlockedByAdminWarning"));
+        return;
+      }
+
       copyShareLink(item, primaryLink, t, this.getManageLinkOptions(item));
       this.infoPanelStore?.setShareChanged(true);
 

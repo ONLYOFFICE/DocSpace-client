@@ -1,19 +1,19 @@
 {
   "key_path": "AIAgentNotificationsEnabled",
-  "content": "{{aiAgent}} notifications enabled",
-  "content_en_sha1_hash": "55a05d04314af2a52ec03bd6713f7eceef33e3c9",
-  "created_at": "2026-06-01T21:20:07.307Z",
-  "updated_at": "2026-06-01T21:50:04.952Z",
+  "content": "AI agent notifications enabled",
+  "content_en_sha1_hash": "7b64b614e7db12d11d087cce81225c8bf558b883",
+  "created_at": "2026-06-02T22:17:29.753Z",
+  "updated_at": "2026-06-03T09:30:05.114Z",
   "comment": {
-    "text": "Success toast message appearing when notifications for an AI agent are enabled; {{aiAgent}} represents the agent's name.",
+    "text": "Success toast message appearing when AI agent notifications are turned on; includes the `aiAgent` variable representing the specific agent.",
     "is_auto": true,
-    "updated_at": "2026-06-01T21:50:04.952Z",
+    "updated_at": "2026-06-02T22:20:50.206Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1919,
+      "line_number": 1921,
       "context": "if (isAIAgent) {\n notificationsDisabled = t(\"Common:AIAgentNotificationsDisabled\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n notificationsEnabled = t(\"Common:AIAgentNotificationsEnabled\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n }\n \n muteRoomNotification(id, muteStatus)",
       "module": "/packages/client"
     },

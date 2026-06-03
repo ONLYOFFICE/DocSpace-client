@@ -2,13 +2,13 @@
   "key_path": "FailedToConvert",
   "content": "Failed to convert",
   "content_en_sha1_hash": "77f83211c6420544a7cbc52ddd9fdd077801b113",
-  "created_at": "2026-05-24T17:27:27.436Z",
-  "updated_at": "2026-06-01T21:20:44.526Z",
+  "created_at": "2025-05-19T21:30:56.884Z",
+  "updated_at": "2026-06-02T22:18:05.101Z",
   "comment": {
-    "text": "Error message displayed in the file history or upload status when a file conversion process fails.",
+    "text": "This is an error message displayed when a file conversion process fails. It indicates that the system was unable to convert the file to the desired format.",
     "is_auto": true,
-    "updated_at": "2026-05-24T17:56:07.762Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-04-11T21:04:13.084Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
@@ -182,12 +182,6 @@
       "approved_at": null
     },
     "sl": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

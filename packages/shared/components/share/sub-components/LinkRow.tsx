@@ -38,6 +38,7 @@ import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 import LinkIcon from "PUBLIC_DIR/images/tablet-link.react.svg?url";
+import ExternalLinkWarningIconUrl from "PUBLIC_DIR/images/external-link-warning.react.svg?url";
 
 import { RowSkeleton } from "../../../skeletons/share";
 import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
@@ -81,13 +82,31 @@ const LinkRow = ({
   onAccessRightsSelect,
   removedExpiredLink,
   onCopyLink,
+  blockExistingLinksOnRestrict,
   hideLinkTypeSelector,
+  isExternalShareRestricted,
 }: LinkRowProps) => {
   const { t } = useTranslation("Common");
 
   const isMobileViewLink = useIsMobile();
 
-  const shareOptions = useMemo(() => getAccessTypeOptions(t), [t]);
+  const baseShareOptions = useMemo(() => getAccessTypeOptions(t), [t]);
+
+  const shareOptions = useMemo(() => {
+    if (!isExternalShareRestricted) return baseShareOptions;
+    return baseShareOptions.map((opt) =>
+      "internal" in opt && !opt.internal
+        ? {
+            ...opt,
+            icon: ExternalLinkWarningIconUrl,
+            fillIcon: false,
+            disabled: true,
+            className: "share-external-disabled",
+            tooltip: t("Common:ExternalLinksDisabledByAdmin"),
+          }
+        : opt,
+    );
+  }, [t, baseShareOptions, isExternalShareRestricted]);
 
   const changeAccessOptionHandler = (item: TOption, link: TFileLink) => {
     if (isRoomsLink) {
@@ -117,9 +136,21 @@ const LinkRow = ({
       link.sharedTo.primary,
     );
 
-    const shareOption = shareOptions.find(
-      (option) => option.internal === link.sharedTo.internal,
-    )!;
+    const getShareOption = () => {
+      if (!blockExistingLinksOnRestrict) {
+        return baseShareOptions.find(
+          (option) => option.internal === link.sharedTo.internal,
+        )!;
+      }
+
+      const shareOption = shareOptions.find(
+        (option) => option.internal === link.sharedTo.internal,
+      )!;
+
+      return shareOption;
+    };
+
+    const shareOption = getShareOption();
 
     const selectedAccessOption = accessOptions.find(
       (option) => option && "access" in option && option.access === link.access,
@@ -136,6 +167,10 @@ const LinkRow = ({
 
     const isLoaded = loadingLinks.includes(link.sharedTo.id);
     const canEditInternal = link.canEditInternal;
+    const isBlockedByAdmin =
+      isExternalShareRestricted &&
+      !link.sharedTo.internal &&
+      blockExistingLinksOnRestrict;
 
     return (
       <div className={className} key={link.sharedTo.id}>
@@ -152,20 +187,23 @@ const LinkRow = ({
             shareLink={shareLink}
             isExpiredLink={isExpiredLink}
             disabledCopy={isArchiveFolder}
+            isBlockedByAdmin={isBlockedByAdmin}
             onCopyLink={() =>
               isExpiredLink
                 ? toastr.error(t("Common:LinkExpired"))
                 : onCopyLink(link)
             }
           />
-          <LinkExpiration
-            t={t}
-            link={link}
-            isLoaded={isLoaded}
-            isArchiveFolder={isArchiveFolder}
-            removedExpiredLink={removedExpiredLink}
-            changeExpirationOption={changeExpirationOption}
-          />
+          {isBlockedByAdmin ? null : (
+            <LinkExpiration
+              t={t}
+              link={link}
+              isLoaded={isLoaded}
+              isArchiveFolder={isArchiveFolder}
+              removedExpiredLink={removedExpiredLink}
+              changeExpirationOption={changeExpirationOption}
+            />
+          )}
         </div>
         <div className={styles.linkActions}>
           {!hideLinkTypeSelector && (
@@ -189,6 +227,7 @@ const LinkRow = ({
             roomAccessOptions={roomAccessOptions}
             roomSelectedOptions={roomSelectedOptions}
             changeAccessOption={changeAccessOptionHandler}
+            isBlockedByAdmin={isBlockedByAdmin}
           />
           {!isArchiveFolder ? (
             <ContextMenuButton

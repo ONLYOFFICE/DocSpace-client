@@ -42,6 +42,7 @@ import { FileStatus } from "@docspace/shared/enums";
 import type { TLogo } from "@docspace/ui-kit/types";
 
 import getItemUrl from "../_utils/get-item-url";
+import { normalizeRoomLogo } from "../_utils/getRoomIconLogo";
 
 import useItemIcon from "./useItemIcon";
 import useItemContextMenu from "./useItemContextMenu";
@@ -138,9 +139,8 @@ export default function useItemList({
 
       const rawLogo = (folder as unknown as { logo?: TLogo }).logo;
       const isRoom = folder.roomType !== undefined;
-      const hasRoomImage = !!(rawLogo?.medium || rawLogo?.large || rawLogo?.cover);
-      const roomLogo = hasRoomImage ? rawLogo : undefined;
-      const roomIconColor = rawLogo?.color?.replace("#", "") ?? undefined;
+      const { roomLogo, roomIconColor, hasRoomImage } =
+        normalizeRoomLogo(rawLogo);
 
       return {
         ...folder,

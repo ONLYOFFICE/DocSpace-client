@@ -3,7 +3,7 @@
   "content": "This room is available to anyone with the link. External users will have Form Filler permission for all the files.",
   "content_en_sha1_hash": "71456b52b18baef0b2e68e4d7a533ffa05a20307",
   "created_at": "2026-06-01T21:20:31.377Z",
-  "updated_at": "2026-06-01T21:27:26.592Z",
+  "updated_at": "2026-06-03T09:30:05.140Z",
   "comment": {
     "text": "Body text for an information bar in the Members view, describing the room's accessibility via a shared link and the permissions assigned to external users.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/index.tsx",
-      "line_number": 346,
+      "line_number": 330,
       "context": "? t(\"Common:RoomMembersAvailableViaSharedLink\")\n : t(\"Common:RoomMembersAvailableViaExternalLink\")\n }\n bodyText={\n isFormRoom\n ? t(\"Common:RoomFormBarDescription\")\n : t(\"Common:RoomPublicBarDescription\")\n }\n />\n </div>\n ) : null}",
       "module": "/packages/sdk"
     }

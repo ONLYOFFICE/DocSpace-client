@@ -187,6 +187,8 @@ const Details = ({
         ? selection?.logo
         : getInfoPanelItemIcon?.(selection, 96);
 
+  // isExternalShareRestricted/hasExternalLinks are intentionally omitted: the alert badge is
+  // suppressed anyway by withEditing=true (EditRoom) via RoomIcon's badge render condition.
   const badgeUrl =
     "external" in selection ? getRoomBadgeUrl(selection, 24) : undefined;
 
@@ -285,6 +287,7 @@ const Details = ({
             badgeUrl={badgeUrl ?? undefined}
             tooltipContent={tooltipContent ?? undefined}
             tooltipId="info-panel-details_icon-tooltip"
+            // When EditRoom is true, RoomIcon hides the badge in favour of the edit affordance.
             withEditing={
               "isRoom" in selection && selection.isRoom
                 ? selection.security.EditRoom
@@ -347,6 +350,7 @@ export default inject(
       currentQuotaStore;
 
     const { isAIAgentsFolderRoot } = treeFoldersStore;
+
     return {
       culture,
       createThumbnail,

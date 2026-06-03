@@ -3,7 +3,7 @@
   "content": "Activating AI features",
   "content_en_sha1_hash": "260634f6b08f499cc06a569e05181447941f6901",
   "created_at": "2026-05-15T13:59:45.971Z",
-  "updated_at": "2026-05-28T15:46:18.711Z",
+  "updated_at": "2026-06-02T15:03:00.432Z",
   "comment": {
     "text": "A step label in a progress sequence on the AI paywall completion page, representing the stage where AI features are being enabled.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
-      "line_number": 184,
-      "context": "const steps = isWalletOnly\n ? [t(\"AIPaywallCallbackStepLinkCard\"), t(\"WalletTopUpStep\")]\n : [\n t(\"AIPaywallCallbackStepLinkCard\"),\n t(\"AIPaywallCallbackStepTopUp\"),\n t(\"AIPaywallCallbackStepActivate\"),\n ];\n \n return (\n <div className={styles.page}>\n <div className={styles.bgCover} aria-hidden=\"true\" />",
+      "line_number": 193,
+      "context": "t(\"WalletTopUpCallbackStep\", { price: formattedAmount }),\n ]\n : [\n t(\"AIPaywallCallbackStepLinkCard\"),\n t(\"AIPaywallCallbackStepTopUp\"),\n t(\"AIPaywallCallbackStepActivate\"),\n ];\n \n return (\n <div className={styles.page}>\n <div className={styles.bgCover} aria-hidden=\"true\" />",
       "module": "/libs/ui-kit"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Archive",
   "content_en_sha1_hash": "2621c6fd51a58e1d1d5c491aac71488647b20224",
   "created_at": "2025-05-19T21:30:43.051Z",
-  "updated_at": "2026-06-01T21:20:44.393Z",
+  "updated_at": "2026-06-02T22:18:05.000Z",
   "comment": {
     "text": "This is a noun referring to the archive section. It appears in dialog titles, confirmation messages, and activity feed descriptions when moving items to or from the archive.",
     "is_auto": true,
@@ -55,7 +55,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/TypeCell.js",
-      "line_number": 52,
+      "line_number": 59,
       "context": "const getItemType = () => {\n switch (fileType) {\n case FileType.Unknown:\n return fileTypeName || t(\"Common:Unknown\");\n case FileType.Archive:\n return t(\"Common:Archive\");\n case FileType.Video:\n return t(\"Common:Video\");\n case FileType.Audio:\n return t(\"Common:Audio\");\n case FileType.Image:",
       "module": "/packages/client"
     },

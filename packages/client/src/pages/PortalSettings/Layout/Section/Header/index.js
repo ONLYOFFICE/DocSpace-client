@@ -486,7 +486,6 @@ export default inject(
       "JavascriptSdk",
       "OAuth",
       "Ldap",
-      "Services",
       "Payments",
     ])(observer(SectionHeaderContent)),
   ),

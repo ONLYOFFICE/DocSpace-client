@@ -1,0 +1,29 @@
+{
+  "key_path": "AppliesTo",
+  "content": "Applies to:",
+  "content_en_sha1_hash": "ef612870ce45f5dc2c266d5857bfb7594a229bac",
+  "created_at": "2026-06-02T08:43:23.402Z",
+  "updated_at": "2026-06-02T08:53:47.857Z",
+  "comment": {
+    "text": "A label in the access control settings that precedes a selection or checkbox, indicating the scope of the applied permission.",
+    "is_auto": true,
+    "updated_at": "2026-06-02T08:53:47.857Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
+      "line_number": 371,
+      "context": "<Text\n fontSize=\"13px\"\n fontWeight=\"600\"\n className={styles.appliesTo}\n >\n {t(\"Settings:AppliesTo\")}\n </Text>\n \n <div>\n <Checkbox\n dataTestId=\"applies_to_documents_checkbox\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

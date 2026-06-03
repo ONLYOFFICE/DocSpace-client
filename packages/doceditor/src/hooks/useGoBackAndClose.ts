@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { EditorProps, TGoBack } from "@/types";
+import type { EditorProps, IInitialConfig, TGoBack } from "@/types";
 import { useTranslation } from "react-i18next";
 import { FolderType } from "@docspace/ui-kit/enums";
 
@@ -45,8 +45,12 @@ const useGoBackAndClose = (
   openOnNewPage: boolean,
   i18n: ReturnType<typeof useTranslation>["i18n"],
   t: ReturnType<typeof useTranslation>["t"],
-  goBackUrl: string | undefined,
+  config: IInitialConfig | undefined,
 ) => {
+  const goBackUrl = config?.editorConfig?.customization?.goback?.url;
+
+  const filling = fileInfo?.startFilling && config?.type === "embedded";
+
   let goBack: TGoBack = {} as TGoBack;
 
   if (fileInfo) {
@@ -97,7 +101,7 @@ const useGoBackAndClose = (
   let showClose =
     typeof document !== "undefined" &&
     document.referrer !== "" &&
-    window.history.length > 1;
+    (window.history.length > 1 || filling);
 
   if (!successAuth) showClose = false;
 

@@ -1,0 +1,29 @@
+{
+  "key_path": "LinksBeforeRestriction",
+  "content": "Choose what happens to links created before the restriction:",
+  "content_en_sha1_hash": "ddbffcbf23393595737ce9b98627176fa88be4c6",
+  "created_at": "2026-06-02T08:43:23.427Z",
+  "updated_at": "2026-06-02T08:45:41.727Z",
+  "comment": {
+    "text": "Instructional label for a radio button group in the Access Control security settings, prompting the user to select an action for links created prior to a restriction.",
+    "is_auto": true,
+    "updated_at": "2026-06-02T08:45:41.727Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
+      "line_number": 432,
+      "context": "<Text\n fontSize=\"13px\"\n fontWeight=\"600\"\n className={styles.appliesTo}\n >\n {t(\"Settings:LinksBeforeRestriction\")}\n </Text>\n <RadioButtonGroup\n className={styles.radioGroup}\n fontSize=\"13px\"\n fontWeight=\"400\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

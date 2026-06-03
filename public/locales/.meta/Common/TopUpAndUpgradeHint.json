@@ -1,0 +1,29 @@
+{
+  "key_path": "TopUpAndUpgradeHint",
+  "content": "Your wallet will be topped up by <1>{{currency}}</1> and the selected storage will be purchased automatically. Top-up amounts are rounded up to the next whole dollar.",
+  "content_en_sha1_hash": "2d0cbe1046c8ee3444c56f1b076b6aa1c1b80228",
+  "created_at": "2026-06-02T15:02:53.002Z",
+  "updated_at": "2026-06-02T15:08:43.294Z",
+  "comment": {
+    "text": "Instructional hint in the additional storage panel appearing when the balance is insufficient. It explains the automatic top-up and purchase process, using `<1>{{currency}}</1>` to display the amount.",
+    "is_auto": true,
+    "updated_at": "2026-06-02T15:08:43.294Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/ButtonContainer.tsx",
+      "line_number": 123,
+      "context": "{isBalanceInsufficient ? (\n <Text as=\"span\">\n <Trans\n ns=\"Common\"\n i18nKey=\"TopUpAndUpgradeHint\"\n components={{\n 1: <Text fontWeight=\"600\" as=\"span\"></Text>,\n }}\n values={{\n currency: formatWalletCurrency(recommendedAmount, 2),",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

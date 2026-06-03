@@ -80,6 +80,8 @@ type RoomsItemHeaderProps = {
   onChangeFile?: AvatarEditorDialogStore["onChangeFile"];
   getIcon?: FilesSettingsStore["getIcon"];
   isRoomMembersPanel?: boolean;
+  hasExternalLinks?: boolean;
+  isExternalShareRestricted?: boolean;
 } & (
   | {
       roomsView: InfoPanelView.infoMembers;
@@ -105,6 +107,8 @@ const RoomsItemHeader = ({
   getIcon,
   searchProps,
   isRoomMembersPanel,
+  hasExternalLinks,
+  isExternalShareRestricted,
 }: RoomsItemHeaderProps) => {
   const { t } = useTranslation([
     "Files",
@@ -138,8 +142,18 @@ const RoomsItemHeader = ({
 
   const badgeUrl =
     "isRoom" in selection && selection.isRoom
-      ? getRoomBadgeUrl(selection)
+      ? getRoomBadgeUrl(
+          selection,
+          12,
+          isExternalShareRestricted,
+          hasExternalLinks,
+        )
       : null;
+
+  const badgeIconColor =
+    isExternalShareRestricted && hasExternalLinks && badgeUrl
+      ? "var(--info-panel-link-blocked)"
+      : undefined;
 
   const tooltipContent =
     "external" in selection && selection.external
@@ -230,6 +244,7 @@ const RoomsItemHeader = ({
           imgClassName={`icon ${isRoom && "is-room"}`}
           logo={icon}
           badgeUrl={badgeUrl || ""}
+          badgeIconColor={badgeIconColor}
           tooltipContent={tooltipContent ?? undefined}
           hoverSrc={
             isRoom &&
@@ -300,11 +315,22 @@ export default inject(
   }: TStore) => {
     const { roomsView, setIsMobileHidden } = infoPanelStore;
 
-    const { displayFileExtension, getIcon } = filesSettingsStore;
-    const { externalLinks } = publicRoomStore;
+    const {
+      displayFileExtension,
+      getIcon,
+      externalShareApplyToRooms,
+      blockExistingLinksOnRestrict,
+      isExternalShareRestricted: isShareRestricted,
+    } = filesSettingsStore;
+    const { externalLinks, hasExternalLinks } = publicRoomStore;
     const { setTemplateAccessSettingsVisible } = dialogsStore;
 
     const { onChangeFile } = avatarEditorDialogStore;
+
+    const isExternalShareRestricted =
+      externalShareApplyToRooms &&
+      blockExistingLinksOnRestrict &&
+      isShareRestricted;
 
     return {
       roomsView,
@@ -323,7 +349,10 @@ export default inject(
       onChangeFile,
       setTemplateAccessSettingsVisible,
       getIcon,
+      isShareRestricted,
+      hasExternalLinks,
+
+      isExternalShareRestricted,
     };
   },
 )(observer(RoomsItemHeader));
-

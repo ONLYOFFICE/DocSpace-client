@@ -1,0 +1,29 @@
+{
+  "key_path": "AppliesToRooms",
+  "content": "{{rooms}} (Including shared folders/files from the room)",
+  "content_en_sha1_hash": "95fd53bb49ab077094549189fa35426ea8c1bcbe",
+  "created_at": "2026-06-02T08:43:23.415Z",
+  "updated_at": "2026-06-02T08:51:55.075Z",
+  "comment": {
+    "text": "Checkbox label in the portal security settings indicating that the setting applies to the specified rooms and their shared content. The {{rooms}} variable represents the term for rooms.",
+    "is_auto": true,
+    "updated_at": "2026-06-02T08:51:55.075Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
+      "line_number": 403,
+      "context": "<div>\n <Checkbox\n dataTestId=\"applies_to_rooms_checkbox\"\n isChecked={applyToRooms}\n onChange={() => setApplyToRooms(!applyToRooms)}\n label={t(\"Settings:AppliesToRooms\", {\n rooms: t(\"Common:Rooms\"),\n })}\n />\n <div\n className={`category-item-description ${styles.checkboxDescription}`}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

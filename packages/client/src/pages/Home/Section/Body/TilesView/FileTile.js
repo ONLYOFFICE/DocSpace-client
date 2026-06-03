@@ -40,7 +40,7 @@ import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 
 import { FileTile as FileTileComponent } from "@docspace/ui-kit/components/tiles/file-tile";
@@ -60,7 +60,6 @@ import withFileActions from "../../../../../HOCs/withFileActions";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import ItemIcon from "../../../../../components/ItemIcon";
 import withBadges from "../../../../../HOCs/withBadges";
-
 
 const FileTile = (props) => {
   const {
@@ -96,6 +95,8 @@ const FileTile = (props) => {
     onDragOver,
     onDragLeave,
     badgeUrl,
+    badgeIconColor,
+    isExternalShareRestricted, // injected by withFileActions (accounts for blockExistingLinksOnRestrict)
     selectableRef,
     openUser,
     isBlockingOperation,
@@ -185,6 +186,7 @@ const FileTile = (props) => {
       isTemplate={item.isTemplate}
       badgeUrl={badgeUrl}
       encrypted={item.encrypted}
+      badgeIconColor={badgeIconColor}
     />
   );
 
@@ -268,17 +270,36 @@ const FileTile = (props) => {
           columnCount={columnCount}
           thumbnailClick={onFilesClick}
           getRoomTypeName={getRoomTypeName}
-          customBottomContent={(isHovered, tags) => (
-            <TagManagement
-              tags={tags}
-              id={item.id}
-              access={item.access}
-              roomName={item.title}
-              columnCount={columnCount}
-              onSelectTag={onSelectTag}
-              isActive={isActive || isHovered || checkedProps}
-            />
-          )}
+          customBottomContent={(isHovered, tags) => {
+            const isRestrictedPublicRoom =
+              isExternalShareRestricted &&
+              item.shared &&
+              item.roomType === RoomsType.PublicRoom;
+
+            const patchedTags = isRestrictedPublicRoom
+              ? tags.map((tag) =>
+                  typeof tag === "object" && tag.isDefault
+                    ? {
+                        ...tag,
+                        labelSuffix: ` (${t("Common:Restricted")})`,
+                        labelSuffixColor: "var(--info-panel-link-blocked)",
+                      }
+                    : tag,
+                )
+              : tags;
+
+            return (
+              <TagManagement
+                tags={patchedTags}
+                id={item.id}
+                access={item.access}
+                roomName={item.title}
+                columnCount={columnCount}
+                onSelectTag={onSelectTag}
+                isActive={isActive || isHovered || checkedProps}
+              />
+            );
+          }}
         />
       );
     if (item.isFolder)
@@ -379,3 +400,4 @@ export default inject(
     "GroupingRooms",
   ])(withFileActions(withBadges(withQuickButtons(observer(FileTile))))),
 );
+

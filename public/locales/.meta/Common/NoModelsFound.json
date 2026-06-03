@@ -3,7 +3,7 @@
   "content": "No models found",
   "content_en_sha1_hash": "3d02178b7a78aaa935e174c3b52e143f4d548b07",
   "created_at": "2026-02-18T14:56:04.517Z",
-  "updated_at": "2026-06-01T21:20:44.406Z",
+  "updated_at": "2026-06-02T22:18:05.010Z",
   "comment": {
     "text": "This text appears in a dropdown list or as a label when no AI models are available for selection.",
     "is_auto": true,

@@ -143,11 +143,14 @@ export class ShareLinkService {
    * @param file - The file to get/create a link for
    * @returns Promise resolving to the file link
    */
-  public static async getFilePrimaryLink(file: TFile): Promise<TFileLink> {
+  public static async getFilePrimaryLink(
+    file: TFile,
+    internal = false,
+  ): Promise<TFileLink> {
     return getPrimaryLinkIfNotExistCreate(
       file.id,
       this.getShareLinkAccessFile(file, true),
-      this.DEFAULT_CREATE_LINK_SETTINGS.internal,
+      internal,
       this.DEFAULT_CREATE_LINK_SETTINGS.diffExpirationDate,
     );
   }
@@ -159,11 +162,12 @@ export class ShareLinkService {
    */
   public static async getFolderPrimaryLink(
     folder: TFolder,
+    internal = false,
   ): Promise<TFileLink> {
     return getOrCreatePrimaryFolderLink(
       folder.id,
       this.getShareLinkAccessFolder(folder),
-      this.DEFAULT_CREATE_LINK_SETTINGS.internal,
+      internal,
       this.DEFAULT_CREATE_LINK_SETTINGS.diffExpirationDate,
     );
   }
@@ -176,14 +180,15 @@ export class ShareLinkService {
 
   public static getPrimaryLink = async (
     item: TFile | TFolder | TRoom,
+    internal = false,
   ): Promise<TFileLink> => {
     if (isRoom(item)) {
       return this.getRoomPrimaryLink(item);
     }
 
     return isFile(item)
-      ? this.getFilePrimaryLink(item)
-      : this.getFolderPrimaryLink(item);
+      ? this.getFilePrimaryLink(item, internal)
+      : this.getFolderPrimaryLink(item, internal);
   };
 
   public static editLink = async (
@@ -220,30 +225,39 @@ export class ShareLinkService {
     );
   };
 
-  public static addExternalFileLink = async (file: TFile) => {
+  public static addExternalFileLink = async (
+    file: TFile,
+    internal = false,
+  ) => {
     return addExternalLink(
       file.id,
       this.getShareLinkAccessFile(file),
       false,
-      this.DEFAULT_CREATE_LINK_SETTINGS.internal,
+      internal,
       this.DEFAULT_CREATE_LINK_SETTINGS.diffExpirationDate,
     );
   };
 
-  public static addExternalFolderLink = async (folder: TFolder) => {
+  public static addExternalFolderLink = async (
+    folder: TFolder,
+    internal = false,
+  ) => {
     return addExternalFolderLink(
       folder.id,
       this.getShareLinkAccessFolder(folder),
       false,
-      this.DEFAULT_CREATE_LINK_SETTINGS.internal,
+      internal,
       this.DEFAULT_CREATE_LINK_SETTINGS.diffExpirationDate,
     );
   };
 
-  public static addExternalLink = async (item: TFile | TFolder) => {
+  public static addExternalLink = async (
+    item: TFile | TFolder,
+    internal = false,
+  ) => {
     return isFile(item)
-      ? this.addExternalFileLink(item)
-      : this.addExternalFolderLink(item);
+      ? this.addExternalFileLink(item, internal)
+      : this.addExternalFolderLink(item, internal);
   };
 
   public static getShareFile = (

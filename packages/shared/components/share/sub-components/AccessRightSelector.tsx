@@ -52,6 +52,7 @@ export interface AccessRightSelectorProps {
   isFolder: boolean;
   isArchiveFolder: boolean;
   isMobileViewLink: boolean;
+  isBlockedByAdmin?: boolean;
 
   link: TFileLink;
   accessOptions: TOption[];
@@ -68,6 +69,7 @@ export const AccessRightSelector: FC<AccessRightSelectorProps> = ({
   isFolder,
   isArchiveFolder,
   isMobileViewLink,
+  isBlockedByAdmin,
   link,
   accessOptions,
   roomAccessOptions,
@@ -75,11 +77,20 @@ export const AccessRightSelector: FC<AccessRightSelectorProps> = ({
   roomSelectedOptions,
   changeAccessOption,
 }) => {
-  if (accessOptions.length === 1 || roomAccessOptions?.length === 1) {
+  if (
+    accessOptions.length === 1 ||
+    roomAccessOptions?.length === 1 ||
+    isBlockedByAdmin
+  ) {
     const option =
       isRoomsLink || isFolder ? roomSelectedOptions : selectedAccessOption;
 
-    return <IconDisplay option={option ?? ({} as TOption)} />;
+    return (
+      <IconDisplay
+        option={option ?? ({} as TOption)}
+        withMargin={isBlockedByAdmin}
+      />
+    );
   }
 
   if (isRoomsLink || isFolder) {

@@ -63,6 +63,16 @@
   }
 }
 
+.restrictedBarItem {
+  height: 100%;
+  overflow: hidden;
+
+  :global(.public-room-bar) {
+    margin-top: 6px;
+    margin-bottom: 0;
+  }
+}
+
 .publicRoomBarContainer {
   position: sticky;
   top: 80px;

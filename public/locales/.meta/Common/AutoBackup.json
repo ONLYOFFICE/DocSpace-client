@@ -3,7 +3,7 @@
   "content": "Automatic backup",
   "content_en_sha1_hash": "63c9d2eb5520b137dffca1ebb5266759080b1352",
   "created_at": "2025-05-26T07:15:40.628Z",
-  "updated_at": "2026-05-15T14:00:06.790Z",
+  "updated_at": "2026-06-02T08:43:27.509Z",
   "comment": {
     "text": "This is a label for a section or setting related to automatic data backups within the portal settings.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 323,
+      "line_number": 330,
       "context": "{\n id: \"portal-settings_catalog-auto-backup\",\n key: \"2-1\",\n icon: \"\",\n link: \"auto-backup\",\n tKey: \"AutoBackup\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     },

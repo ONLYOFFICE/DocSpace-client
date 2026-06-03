@@ -64,6 +64,9 @@ type RoomsContextBtnProps = {
   getItemContextOptionsActions?: ContextOptionsStore["getFilesContextOptions"];
 
   getIcon?: FilesSettingsStore["getIcon"];
+  externalShareApplyToRooms?: boolean;
+  blockExistingLinksOnRestrict?: boolean;
+  hasExternalLinks?: boolean;
 };
 
 const RoomsContextBtn = ({
@@ -71,6 +74,9 @@ const RoomsContextBtn = ({
 
   getItemContextOptionsActions,
   getIcon,
+  externalShareApplyToRooms,
+  blockExistingLinksOnRestrict,
+  hasExternalLinks,
 }: RoomsContextBtnProps) => {
   const { t } = useTranslation([
     "Files",
@@ -96,7 +102,14 @@ const RoomsContextBtn = ({
     if (!selection) return undefined;
 
     const isRoom = "isRoom" in selection && selection.isRoom;
-    const badgeUrl = isRoom ? getRoomBadgeUrl(selection) : null;
+    const badgeUrl = isRoom
+      ? getRoomBadgeUrl(
+          selection,
+          12,
+          externalShareApplyToRooms && blockExistingLinksOnRestrict,
+          hasExternalLinks,
+        )
+      : null;
 
     const isFile = "isFile" in selection && selection.isFile;
 
@@ -111,6 +124,14 @@ const RoomsContextBtn = ({
           "type" in selection ? selection.type : undefined,
         )
       : "";
+
+    const badgeIconColor =
+      externalShareApplyToRooms &&
+      blockExistingLinksOnRestrict &&
+      hasExternalLinks &&
+      badgeUrl
+        ? "var(--info-panel-link-blocked)"
+        : undefined;
 
     return {
       title: selection.title || "",
@@ -128,8 +149,9 @@ const RoomsContextBtn = ({
             : selection.logo.cover
           : undefined,
       badgeUrl: badgeUrl ?? undefined,
+      badgeIconColor,
     };
-  }, [selection]);
+  }, [selection, externalShareApplyToRooms, hasExternalLinks]);
 
   const onHideContextMenu = () => {
     // Callback is called when the context menu is closed.
@@ -161,6 +183,7 @@ const RoomsContextBtn = ({
         ignoreChangeView={isMobile()}
         header={contextMenuHeader}
         badgeUrl={contextMenuHeader?.badgeUrl}
+        badgeIconColor={contextMenuHeader?.badgeIconColor}
         onHide={onHideContextMenu}
       />
     </div>
@@ -168,9 +191,12 @@ const RoomsContextBtn = ({
 };
 
 export default inject(
-  ({ contextOptionsStore, filesSettingsStore }: TStore) => ({
+  ({ contextOptionsStore, filesSettingsStore, publicRoomStore }: TStore) => ({
     getItemContextOptionsActions: contextOptionsStore.getFilesContextOptions,
     getIcon: filesSettingsStore.getIcon,
+    externalShareApplyToRooms: filesSettingsStore.externalShareApplyToRooms,
+    blockExistingLinksOnRestrict:
+      filesSettingsStore.blockExistingLinksOnRestrict,
+    hasExternalLinks: publicRoomStore.hasExternalLinks,
   }),
 )(observer(RoomsContextBtn));
-

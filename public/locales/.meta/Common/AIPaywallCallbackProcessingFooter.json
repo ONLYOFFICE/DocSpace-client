@@ -3,7 +3,7 @@
   "content": "Secure transaction powered by Stripe.",
   "content_en_sha1_hash": "1dc8a846d33742ba414c35a617a06d0f4a0164ef",
   "created_at": "2026-05-15T13:59:45.949Z",
-  "updated_at": "2026-05-28T15:46:18.712Z",
+  "updated_at": "2026-06-02T15:03:00.432Z",
   "comment": {
     "text": "Small footer note displayed at the bottom of the AI paywall completion page to indicate the payment processor.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
-      "line_number": 254,
-      "context": ");\n })}\n </ol>\n \n <Text fontSize=\"12px\" className={styles.footerNote}>\n {t(\"AIPaywallCallbackProcessingFooter\")}\n </Text>\n </>\n ) : null}\n \n {status === \"success\" ? (",
+      "line_number": 278,
+      "context": "</ol>\n \n <Text className={styles.footerNote}>\n {isWalletOnly\n ? t(\"WalletTopUpSecuredByStripe\")\n : t(\"AIPaywallCallbackProcessingFooter\")}\n </Text>\n </>\n ) : null}\n \n {status === \"success\" ? (",
       "module": "/libs/ui-kit"
     }
   ],

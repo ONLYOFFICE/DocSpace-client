@@ -3,7 +3,7 @@
   "content": "Top up in progress",
   "content_en_sha1_hash": "23eec64edb1f57a13ffc66cba326c8d115dd84fc",
   "created_at": "2026-04-13T14:58:59.748Z",
-  "updated_at": "2026-05-27T14:11:50.776Z",
+  "updated_at": "2026-06-02T15:03:00.441Z",
   "comment": {
     "text": "Progress text shown while a wallet top‑up is being processed, displayed in the BalanceAmount component.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
       "line_number": 197,
-      "context": "<div className={styles.balanceWrapper}>\n <BalanceAmount\n title={t(\"BalanceText\")}\n showRefresh={!isNotPaidPeriod && isCardLinkedToPortal}\n isRefreshing={isRefreshing || isAutoSpinning}\n progressText={t(\"TopUpInProgress\")}\n isProgressTextVisible={isAutoSpinning}\n onRefresh={onClick}\n amount={walletBalance}\n currency={walletCodeCurrency}\n />",
+      "context": "<div className={styles.balanceWrapper}>\n <BalanceAmount\n title={t(\"BalanceText\")}\n showRefresh={!isNotPaidPeriod && isCardLinkedToPortal}\n isRefreshing={isRefreshing || isAutoSpinning}\n progressText={t(\"TopUpInProgress\")}\n isProgressTextVisible={isAutoSpinning}\n onRefresh={onClick}\n amount={walletBalance}\n currency={walletCodeCurrency}\n language={store.language}",
       "module": "/libs/ui-kit"
     }
   ],

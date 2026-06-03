@@ -78,13 +78,11 @@ newInstance
 
     ns: [
       "Common",
-      "ArchiveDialog",
       "InfoPanel",
       "InviteDialog",
       "FormGallery",
       "DeleteDialog",
       "ConvertDialog",
-      "ConnectDialog",
       "CreateEditRoomDialog",
       "PortalUnavailable",
       "UploadPanel",

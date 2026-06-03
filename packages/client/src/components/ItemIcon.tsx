@@ -59,6 +59,7 @@ type ItemIconProps = {
 	color?: string;
 	isArchive?: boolean;
 	badgeUrl?: string;
+	badgeIconColor?: string;
 	size?: string;
 	radius?: string;
 	withEditing?: boolean;
@@ -84,6 +85,7 @@ const ItemIcon = ({
 	color,
 	isArchive,
 	badgeUrl,
+	badgeIconColor,
 	size,
 	radius,
 	withEditing,
@@ -144,6 +146,7 @@ const ItemIcon = ({
 					imgClassName={imgClassName || "react-svg-icon"}
 					logo={isRoom ? logo : icon}
 					badgeUrl={badgeUrl || ""}
+					badgeIconColor={badgeIconColor}
 					isTemplate={isTemplate}
 					withEditing={withEditing}
 					model={model}

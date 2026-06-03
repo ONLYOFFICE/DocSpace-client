@@ -70,7 +70,7 @@ const Warning = ({
   isBackupServiceOn,
   isNotPaidPeriod,
 }: InjectedProps) => {
-  const { t, ready } = useTranslation(["Services", "Common", "Payments"]);
+  const { t, ready } = useTranslation(["Common", "Payments"]);
   const { pathname } = useLocation();
   const [warningText, setWarningText] = React.useState<React.ReactNode>("");
 

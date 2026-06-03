@@ -33,13 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, {
-  useState,
-  useCallback,
-  useEffect,
-  useRef,
-  useMemo,
-} from "react";
+import React, { useState, useCallback, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -115,7 +109,6 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
   onForgotPassphrase,
 }) => {
   const { t, ready } = useTranslation(["Common"]);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const [state, setState] = useState<PassphraseFormState>({
     passphrase: "",
@@ -135,7 +128,6 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
         confirmPassphrase: "",
         localError: "",
       });
-      setTimeout(() => inputRef.current?.focus(), 100);
     }
   }, [visible]);
 
@@ -284,6 +276,7 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
               simpleView
               isDisabled={isLoading}
               hasError={!!errorMessage}
+              isAutoFocussed
               autoComplete="new-password"
               tabIndex={1}
             />
@@ -298,6 +291,7 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
                 isHovered
                 onClick={onForgotPassphrase}
                 dataTestId="forgot_passphrase_link"
+                tabIndex={2}
               >
                 {t("Common:ForgotPassphrase")}
               </Link>

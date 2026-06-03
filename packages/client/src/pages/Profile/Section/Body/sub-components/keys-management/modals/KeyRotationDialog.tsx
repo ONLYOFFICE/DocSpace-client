@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -69,7 +69,6 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
   onForgotPassphrase,
 }) => {
   const { t, ready } = useTranslation(["Common"]);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const [currentPassphrase, setCurrentPassphrase] = useState("");
   const [newPassphrase, setNewPassphrase] = useState("");
@@ -82,7 +81,6 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
       setNewPassphrase("");
       setConfirmPassphrase("");
       setAttemptedSubmit(false);
-      setTimeout(() => inputRef.current?.focus(), 100);
     }
   }, [visible]);
 
@@ -177,6 +175,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                 simpleView
                 isDisabled={isLoading}
                 hasError={!!currentFieldError}
+                isAutoFocussed
                 autoComplete="new-password"
                 tabIndex={1}
               />
@@ -190,6 +189,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                   isHovered
                   onClick={onForgotPassphrase}
                   dataTestId="forgot_passphrase_link"
+                  tabIndex={2}
                 >
                   {t("Common:ForgotPassphrase")}
                 </Link>
@@ -224,7 +224,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                 isDisabled={isLoading}
                 hasError={!!newFieldError}
                 autoComplete="new-password"
-                tabIndex={2}
+                tabIndex={3}
               />
             </FieldContainer>
           </div>
@@ -256,7 +256,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                 isDisabled={isLoading}
                 hasError={!!confirmFieldError}
                 autoComplete="new-password"
-                tabIndex={3}
+                tabIndex={4}
               />
             </FieldContainer>
           </div>
@@ -273,7 +273,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
           label={t("Common:SaveButton")}
           isDisabled={isDisabled}
           isLoading={isLoading}
-          tabIndex={4}
+          tabIndex={5}
         />
         <Button
           scale
@@ -282,7 +282,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
           size={ButtonSize.normal}
           label={t("Common:CancelButton")}
           isDisabled={isLoading}
-          tabIndex={5}
+          tabIndex={6}
         />
       </ModalDialog.Footer>
     </ModalDialog>

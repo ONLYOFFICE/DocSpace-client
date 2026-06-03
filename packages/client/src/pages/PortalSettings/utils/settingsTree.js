@@ -529,23 +529,6 @@ export const settingsTree = [
     ],
   },
   {
-    id: "portal-settings_catalog-apps",
-    key: "8",
-    type: PageType.apps,
-    link: "apps",
-    tKey: "OAuth:Apps",
-    isHeader: true,
-    children: [
-      {
-        id: "portal-settings_catalog-apps-list",
-        key: "8-0",
-        link: "",
-        tKey: "OAuth:Apps",
-        isCategory: true,
-      },
-    ],
-  },
-  {
     id: "portal-settings_catalog-delete",
     key: "9",
     type: PageType.portalDeletion,

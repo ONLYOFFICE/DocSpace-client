@@ -35,7 +35,6 @@
   "ApiKeysShareDescription": "Nedalieties ar citiem ar savu API atslēgu un neizpaudiet to pārlūkprogrammā vai citā klienta puses kodā.",
   "ApiKeyViewUsage": "API atslēgas izmantošanu var skatīt tajā",
   "Appearance": "Izskats",
-  "AppsDescription": "Pārvaldiet, kuras lietotnes ir pieejamas jūsu {{productName}}. Iespējotas lietotnes parādīsies galvenajā izvēlnē lietotājiem, kuriem ir piekļuve tām.",
   "AuditSubheader": "Apakšsadaļa ļauj pārlūkot jaunāko izmaiņu sarakstu (izveide, mainīšana, dzēšana utt.), ko lietotāji veikuši jūsu {{productName}} esošajās entītijās (telpas, iespējas, faili utt.).",
   "AuditTrailNav": "Audita žurnāls",
   "AuthorizationKeysInfo": "Izmantojot Autorizācijas atslēgas, varat savienot trešo pušu pakalpojumus ar savu darba vietu. Vienkārši piesakieties, izmantojot Facebook, Google vai LinkedIn. Pievienojiet Dropbox, OneDrive un citus kontus, lai strādātu ar tur glabātiem failiem.",

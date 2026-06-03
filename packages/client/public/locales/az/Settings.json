@@ -35,7 +35,6 @@
   "ApiKeysShareDescription": "API açarınızı başqaları ilə paylaşmayın və ya onu brauzerdə və ya digər müştəri kodunda açıqlamayın.",
   "ApiKeyViewUsage": "Hər API açarı üzrə istifadəni aşağıdakı:",
   "Appearance": "Xarici görünüş",
-  "AppsDescription": "{{productName}} məhsulunuzda hansı tətbiqlərin mövcud olduğunu idarə edin. Aktivləşdirilmiş tətbiqlər onlara giriş hüququ olan istifadəçilər üçün əsas menyuda görünəcək.",
   "AuditSubheader": "Alt bölmə sizə {{productName}}-dəki (otaqlara, imkanlara, fayllara və s.) istifadəçilər tərəfindən edilən ən son dəyişikliklərin (yaradılması, dəyişdirilməsi, silinməsi və s.) siyahısını nəzərdən keçirməyə imkan verir.",
   "AuditTrailNav": "Audit jurnalı",
   "AuthorizationKeysInfo": "Avtorizasiya açarları ilə üçüncü tərəf xidmətlərini fəzaya qoşa bilərsiniz. Facebook, Google və ya LinkedIn ilə asanlıqla daxil olun. Dropbox, OneDrive və digər hesabları əlavə edərək orada saxlanılan fayllarla işləyin.",

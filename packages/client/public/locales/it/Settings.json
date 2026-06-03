@@ -35,7 +35,6 @@
   "ApiKeysShareDescription": "Non condividere la tua chiave API con altri, né esporla nel browser o in codice lato client.",
   "ApiKeyViewUsage": "Visualizza l’utilizzo per chiave API su",
   "Appearance": "Aspetto",
-  "AppsDescription": "Gestisci le app disponibili nel tuo {{productName}}. Le app abilitate verranno visualizzate nel menu principale per gli utenti che vi hanno accesso.",
   "AuditSubheader": "La sottosezione ti permette di navigare attraverso l’elenco delle ultime modifiche (creazione, modifica, cancellazione ecc.) apportate dagli utenti alle entità (stanze, opportunità, file ecc.) all’interno del tuo {{productName}}.",
   "AuditTrailNav": "Registro di controllo",
   "AuthorizationKeysInfo": "Con le Chiavi di autorizzazione puoi collegare servizi di terze parti al tuo spazio. Accedi facilmente con Facebook, Google o LinkedIn. Aggiungi Dropbox, OneDrive e altri account per lavorare con i file lì archiviati.",

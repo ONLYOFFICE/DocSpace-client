@@ -35,7 +35,6 @@
   "ApiKeysShareDescription": "Älä jaa API-avaintasi muille tai vie sitä selaimeen tai muuten asiakaspuolelle. ",
   "ApiKeyViewUsage": "Näytä käyttö per API-avain kohdassa",
   "Appearance": "Ulkoasu",
-  "AppsDescription": "Hallitse, mitkä sovellukset ovat käytettävissä {{productName}}-palvelussasi. Käytössä olevat sovellukset näkyvät päävalikossa käyttäjille, joilla on niihin oikeus.",
   "AuditSubheader": "Alaosio mahdollistaa käyttäjien {{productName}}-kokonaisuuksiin (huoneet, mahdollisuudet, tiedostot jne.) tekemien viimeisimpien muutosten (luonti, muokkaus, poisto jne.) selaamisen listan kautta.",
   "AuditTrailNav": "Tapahtumien seuranta",
   "AuthorizationKeysInfo": "Valtuutusavaimien avulla voit yhdistää kolmannen osapuolen palveluja tilaan. Kirjaudu helposti Facebook-, Google- tai LinkedIn-tilillä. Lisää Dropbox, OneDrive ja muut tilit käyttääksesi siellä tallennettuja tiedostoja.",

@@ -35,7 +35,6 @@
   "ApiKeysShareDescription": "Do not share your API key with others or expose it in the browser or other client-side code.",
   "ApiKeyViewUsage": "View usage per API key on the",
   "Appearance": "Appearance",
-  "AppsDescription": "Manage which apps are available in your {{productName}}. Enabled apps will appear in the main menu for users who have access to them.",
   "AuditSubheader": "The subsection allows you to browse through the list of the latest changes (creation, modification, deletion etc.) made by users to the entities (rooms, opportunities, files etc.) within your {{productName}}.",
   "AuditTrailNav": "Audit Trail",
   "AuthorizationKeysInfo": "With Authorization keys, you can connect third-party services to your space. Sign in easily with Facebook, Google, or LinkedIn. Add Dropbox, OneDrive, and other accounts to work with files stored there.",

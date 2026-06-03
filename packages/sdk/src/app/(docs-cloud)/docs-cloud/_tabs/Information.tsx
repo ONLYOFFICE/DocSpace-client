@@ -225,7 +225,7 @@ const InformationTabContent = ({ info }: InformationTabProps) => {
       {/* Document Service */}
       <div className={styles.sectionHead}>
         <span className={styles.sectionTitle}>
-          {t("DocsCloud:DocumentService")}
+          {t("DocsCloud:DocServiceSection")}
         </span>
         {info.isActive && (
           <span className={`${styles.pill} ${styles.pillOk}`}>
@@ -330,9 +330,9 @@ const InformationTabContent = ({ info }: InformationTabProps) => {
                         label={t("DocsCloud:Monthly")}
                         fontSize="10.5px"
                         fontWeight={600}
-                        color="var(--param-description-color, #a3a9ae)"
-                        backgroundColor="var(--header-background-color, #f8f9f9)"
-                        border="1px solid var(--files-section-table-view-row-border-color, #eceef1)"
+                        color="var(--param-description-color)"
+                        backgroundColor="var(--header-background-color)"
+                        border="1px solid var(--files-section-table-view-row-border-color)"
                         borderRadius="100px"
                         padding="1px 8px"
                         noHover

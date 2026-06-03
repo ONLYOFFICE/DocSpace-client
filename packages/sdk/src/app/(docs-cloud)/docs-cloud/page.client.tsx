@@ -53,6 +53,8 @@ import type {
   TTenantInfo,
 } from "@docspace/shared/api/docs-cloud";
 
+import { getBrandName } from "@docspace/shared/constants/brands";
+
 import { useDocsCloudFrameBridge } from "./_hooks/useDocsCloudFrameBridge";
 import { InformationTab } from "./_tabs/Information";
 import { SettingsTab } from "./_tabs/Settings";
@@ -98,7 +100,10 @@ const DocsCloudPage = () => {
               {tenantInfo.name || tenantInfo.alias}
             </Text>
             <Text fontSize="12px" color="var(--text-secondary-color)" noSelect>
-              {t("DocsCloud:DocsConnectorSubtitle")}
+              {t("DocsCloud:DocsConnectorSubtitle", {
+                organizationName: getBrandName("OrganizationName"),
+                productEditorsName: getBrandName("ProductEditorsName"),
+              })}
             </Text>
           </div>
           <div className={styles.badges}>

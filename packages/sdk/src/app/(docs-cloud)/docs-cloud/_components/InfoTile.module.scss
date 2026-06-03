@@ -34,15 +34,15 @@
  */
 
 .infoTile {
-  border: 1px solid var(--files-section-table-view-row-border-color, #eceef1);
+  border: 1px solid var(--files-section-table-view-row-border-color);
   border-radius: 6px;
   padding: 14px 16px;
-  background: var(--header-background-color, #f8f9f9);
+  background: var(--header-background-color);
 }
 
 .infoTileKey {
   font-size: 11.5px;
-  color: var(--param-description-color, #a3a9ae);
+  color: var(--param-description-color);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-weight: 600;
@@ -51,7 +51,7 @@
 .infoTileValue {
   font-size: 18px;
   font-weight: 700;
-  color: var(--text-color, #333);
+  color: var(--text-color);
   margin-top: 6px;
 }
 

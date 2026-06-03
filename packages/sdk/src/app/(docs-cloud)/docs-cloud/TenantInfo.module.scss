@@ -52,8 +52,8 @@
   height: 30px;
   flex-shrink: 0;
   border-radius: 7px;
-  background: var(--main-button-background-color, #4781d9);
-  color: #fff;
+  background: var(--main-button-background-color);
+  color: var(--main-button-text-color);
   font-size: 15px;
   font-weight: 700;
   display: grid;
@@ -85,5 +85,5 @@
   flex: 1;
   overflow-y: auto;
   padding: 20px;
-  --pill-ok-color: #{colors.$main-green}; // #2db482 — no global token yet
+  --pill-ok-color: #{colors.$main-green}; // $main-green — no global token yet
 }

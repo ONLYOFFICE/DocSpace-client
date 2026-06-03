@@ -13,5 +13,10 @@
   "DeveloperPack": "开发者套餐",
   "Build": "生成",
   "YourLicenseExpired": "您的许可证已过期",
-  "Monthly": "每月"
+  "Monthly": "每月",
+  "DocServiceSection": "Document Service",
+  "DocsConnectorSubtitle": "{{organizationName}} {{productEditorsName}} connector",
+  "ExternalUsersActive": "External users active",
+  "JWTSecretPlaceholder": "Enter a new secret…",
+  "LicenseUsage": "License Usage"
 }

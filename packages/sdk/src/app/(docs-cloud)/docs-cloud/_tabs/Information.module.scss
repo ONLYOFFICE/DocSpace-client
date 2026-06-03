@@ -56,13 +56,13 @@
 }
 
 .pillOk {
-  background: color-mix(in srgb, var(--pill-ok-color, #2db482) 12%, transparent);
-  color: var(--pill-ok-color, #2db482);
+  background: color-mix(in srgb, var(--pill-ok-color) 12%, transparent);
+  color: var(--pill-ok-color);
 }
 
 .pillWarn {
-  background: color-mix(in srgb, var(--status-warning, #ed7309) 12%, transparent);
-  color: var(--status-warning, #ed7309);
+  background: color-mix(in srgb, var(--status-warning) 12%, transparent);
+  color: var(--status-warning);
 }
 
 .pillDot {
@@ -75,7 +75,7 @@
 
 /* ---------- property card (Document Service) ---------- */
 .propertyCard {
-  border: 1px solid var(--files-section-table-view-row-border-color, #eceef1);
+  border: 1px solid var(--files-section-table-view-row-border-color);
   border-radius: 6px;
   overflow: hidden;
   margin-bottom: 28px;
@@ -85,12 +85,12 @@
   display: inline-flex;
   align-items: center;
   padding: 3px 8px;
-  background: var(--header-background-color, #f8f9f9);
-  border: 1px solid var(--files-section-table-view-row-border-color, #eceef1);
+  background: var(--header-background-color);
+  border: 1px solid var(--files-section-table-view-row-border-color);
   border-radius: 3px;
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   font-size: 12px;
-  color: var(--text-color, #333);
+  color: var(--text-color);
 }
 
 .mono {
@@ -106,16 +106,16 @@
   border: 1px solid transparent;
   background: none;
   border-radius: 3px;
-  color: var(--param-description-color, #a3a9ae);
+  color: var(--param-description-color);
   cursor: pointer;
   flex-shrink: 0;
   padding: 0;
   margin-inline-start: 4px;
 
   &:hover {
-    background: var(--header-background-color, #f8f9f9);
-    color: var(--main-button-background-color, #4781d9);
-    border-color: var(--files-section-table-view-row-border-color, #eceef1);
+    background: var(--header-background-color);
+    color: var(--main-button-background-color);
+    border-color: var(--files-section-table-view-row-border-color);
   }
 
   svg {

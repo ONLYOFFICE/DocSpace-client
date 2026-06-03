@@ -129,7 +129,7 @@ export const SettingsTab = ({ config, onConfigChange }: SettingsTabProps) => {
       {/* ACCESS */}
       <div className={styles.section}>
         <div className={styles.sectionHead}>
-          <span className={styles.sectionTitle}>{t("DocsCloud:Access")}</span>
+          <span className={styles.sectionTitle}>{t("Common:AccessSettings")}</span>
         </div>
         <div className={styles.sectionCard}>
           <div className={styles.field}>

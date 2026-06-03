@@ -13,5 +13,10 @@
   "DeveloperPack": "Dev Pack",
   "Build": "Build",
   "YourLicenseExpired": "La tua licenza è scaduta",
-  "Monthly": "Mensile"
+  "Monthly": "Mensile",
+  "DocServiceSection": "Document Service",
+  "DocsConnectorSubtitle": "{{organizationName}} {{productEditorsName}} connector",
+  "ExternalUsersActive": "External users active",
+  "JWTSecretPlaceholder": "Enter a new secret…",
+  "LicenseUsage": "License Usage"
 }

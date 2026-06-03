@@ -44,7 +44,7 @@
 }
 
 .sectionCard {
-  border: 1px solid var(--files-section-table-view-row-border-color, #eceef1);
+  border: 1px solid var(--files-section-table-view-row-border-color);
   border-radius: 6px;
   padding: 22px 22px 6px;
 }
@@ -59,19 +59,19 @@
 .fieldLabel {
   font-size: 13px;
   font-weight: 600;
-  color: var(--text-color, #333);
+  color: var(--text-color);
 }
 
 .help {
   font-size: 12px;
-  color: var(--param-description-color, #a3a9ae);
+  color: var(--param-description-color);
   line-height: 1.45;
 }
 
 .segmented {
   display: inline-flex;
   align-self: flex-start;
-  border: 1px solid var(--files-section-table-view-row-border-color, #eceef1);
+  border: 1px solid var(--files-section-table-view-row-border-color);
   border-radius: 6px;
   overflow: hidden;
 
@@ -82,7 +82,7 @@
     background: none;
     font-size: 13.5px;
     font-weight: 600;
-    color: var(--param-description-color, #a3a9ae);
+    color: var(--param-description-color);
     cursor: pointer;
     font-family: inherit;
     transition:
@@ -91,14 +91,14 @@
 
     & + button {
       border-left: 1px solid
-        var(--files-section-table-view-row-border-color, #eceef1);
+        var(--files-section-table-view-row-border-color);
     }
   }
 }
 
 .segmented button.segmentOn {
-  background: var(--main-button-background-color, #4781d9);
-  color: #fff;
+  background: var(--main-button-background-color);
+  color: var(--main-button-text-color);
 }
 
 .sectionFooter {
@@ -110,6 +110,6 @@
 
 .dirtyNote {
   font-size: 12px;
-  color: var(--param-description-color, #a3a9ae);
+  color: var(--param-description-color);
 }
 

@@ -40,7 +40,7 @@
   gap: 16px;
   padding: 14px 18px;
   border-bottom: 1px solid
-    var(--files-section-table-view-row-border-color, #eceef1);
+    var(--files-section-table-view-row-border-color);
 
   &:last-child {
     border-bottom: none;
@@ -49,20 +49,20 @@
 
 .propertyKey {
   font-size: 13px;
-  color: var(--param-description-color, #a3a9ae);
+  color: var(--param-description-color);
   font-weight: 600;
 }
 
 .propertyValue {
   font-size: 13px;
-  color: var(--text-color, #333);
+  color: var(--text-color);
   display: flex;
   align-items: center;
   gap: 8px;
   min-width: 0;
 
   a {
-    color: var(--main-button-background-color, #4781d9);
+    color: var(--main-button-background-color);
     text-decoration: none;
     overflow: hidden;
     text-overflow: ellipsis;

@@ -3,7 +3,7 @@
   "content": "Items in {{sectionName}} are automatically deleted after 30 days.",
   "content_en_sha1_hash": "72740d2f13fab9038a1cf3a73558f696ef70b1af",
   "created_at": "2026-06-03T09:30:00.163Z",
-  "updated_at": "2026-06-03T09:30:32.639Z",
+  "updated_at": "2026-06-03T09:40:22.172Z",
   "comment": {
     "text": "Warning text displayed in a warning component or header when viewing the trash section. The {{sectionName}} variable represents the name of the section.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx",
-      "line_number": 444,
-      "context": "/>\n }\n sectionWarningContent={\n isTrash ? (\n <WarningComponent\n title={t(\"Common:TrashAutoDeleteWarning\", {\n sectionName: t(\"Common:TrashSection\"),\n })}\n />\n ) : undefined\n }",
+      "line_number": 450,
+      "context": "}\n sectionWarningContent={\n isTrash ? (\n <WarningComponent\n title={t(\n \"Common:TrashAutoDeleteWarning\",\n {\n sectionName: t(\"Common:TrashSection\"),\n },\n )}\n />",
       "module": "/packages/sdk"
     }
   ],

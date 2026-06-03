@@ -1613,6 +1613,10 @@ class FilesActionStore {
       return this.duplicateEncryptedFile(item);
     }
 
+    if (!item.fileExst && this.treeFoldersStore.isPrivacyFolder) {
+      return;
+    }
+
     const { setSecondaryProgressBarData } =
       this.uploadDataStore.secondaryProgressDataStore;
     const { clearActiveOperations } = this.uploadDataStore;
@@ -3018,15 +3022,12 @@ class FilesActionStore {
   };
 
   getPrivacyFolderOption = (itemsCollection, t) => {
-    const moveTo = this.getOption("moveTo", t);
     const deleteOption = this.getOption("delete", t);
     const download = this.getOption("download", t);
     const showInfo = this.getOption("showInfo", t);
 
     itemsCollection
       .set("download", download)
-      .set("moveTo", moveTo)
-
       .set("delete", deleteOption)
       .set("showInfo", showInfo);
 

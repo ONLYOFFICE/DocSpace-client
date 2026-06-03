@@ -3696,9 +3696,16 @@ class FilesStore {
         "mark-as-favorite",
         "remove-from-favorites",
         "edit-index",
-        "rename",
         "move-to",
+        "copy-to",
+        "duplicate",
+        "move",
+        "download",
       ]);
+
+      if (canDownload) {
+        folderOptions.push("download-encrypted");
+      }
     }
 
     if (isRecycleBinFolder) {

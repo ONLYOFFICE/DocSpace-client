@@ -1513,7 +1513,6 @@ export default inject(
     "Common",
     "Translations",
     "InfoPanel",
-    "Article",
     "People",
     "PeopleTranslations",
     "ChangeUserTypeDialog",

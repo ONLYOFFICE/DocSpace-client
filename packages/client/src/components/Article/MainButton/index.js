@@ -943,7 +943,6 @@ export default inject(
   },
 )(
   withTranslation([
-    "Article",
     "UploadPanel",
     "Common",
     "Files",

@@ -3,7 +3,7 @@
   "content": "Changes to this tag will affect all rooms where it is used.",
   "content_en_sha1_hash": "3d048c8b0733811ca8f8d357e3c557bcfe8ae03c",
   "created_at": "2026-02-19T13:36:19.063Z",
-  "updated_at": "2026-06-01T21:20:44.538Z",
+  "updated_at": "2026-06-03T09:30:05.128Z",
   "comment": {
     "text": "This is a sentence displayed in a modal dialog. It informs the user that changes made to a tag will be applied universally across all rooms where that tag is utilized.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/shared/components/tag-management/modals/EditTag.modal.tsx",
       "line_number": 86,
-      "context": "displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"Common:EditTag\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text className={styles.editTagModalText}>\n {t(\"Common:ChangesToTag\")}\n </Text>\n <Checkbox\n key=\"dont-show-again\"\n label={t(\"ConvertDialog:HideMessage\")}\n isChecked={isChecked}",
+      "context": "displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"Common:EditTag\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text className={styles.editTagModalText}>\n {t(\"Common:ChangesToTag\")}\n </Text>\n <Checkbox\n key=\"dont-show-again\"\n label={t(\"Common:HideMessage\")}\n isChecked={isChecked}",
       "module": "/packages/shared"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

@@ -393,6 +393,10 @@ class PublicRoomStore {
     const additionalLinks = this.roomLinks.filter((l) => !l.sharedTo.primary);
     return additionalLinks;
   }
+
+  get hasExternalLinks() {
+    return this.roomLinks.some((l) => !l.sharedTo.internal);
+  }
 }
 
 export default PublicRoomStore;

@@ -170,7 +170,7 @@ const Editor = ({
     openOnNewPage,
     i18n,
     t,
-    config?.editorConfig?.customization?.goback?.url,
+    config,
   );
 
   const newConfig: IConfig = useMemo(() => {

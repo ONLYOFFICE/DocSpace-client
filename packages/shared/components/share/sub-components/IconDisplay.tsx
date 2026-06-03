@@ -34,6 +34,7 @@
  */
 
 import { type FC } from "react";
+import classNames from "classnames";
 import { ReactSVG } from "react-svg";
 
 import EmptyIcon from "PUBLIC_DIR/images/empty.svg?url";
@@ -45,13 +46,17 @@ import styles from "../Share.module.scss";
 
 export interface IconDisplayProps {
   option: TOption;
+  withMargin?: boolean;
 }
 
-export const IconDisplay: FC<IconDisplayProps> = ({ option }) => {
+export const IconDisplay: FC<IconDisplayProps> = ({ option, withMargin }) => {
   return (
     <TooltipContainer
       as="div"
-      className={styles.iconContainer}
+      className={classNames(styles.iconContainer, {
+        [styles.coloredIcon]: option.fillIcon === false,
+        [styles.withMargin]: withMargin,
+      })}
       title={
         option.title ||
         (typeof option.label === "string" ? option.label : undefined)

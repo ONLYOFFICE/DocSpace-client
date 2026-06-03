@@ -127,15 +127,20 @@
   }
 }
 
-.bottom {
-  flex-shrink: 0;
+// Lay the scroll content out as a column that fills the viewport height so the
+// footer's margin-block-start: auto can push it to the bottom when there is
+// room, while still scrolling with the content once the apps list overflows.
+.scrollBody {
   display: flex;
   flex-direction: column;
+  min-height: 100%;
 }
 
 // ArticleProfile renders profileWrapper with position:absolute; bottom:0 —
 // override to place it in normal flex flow.
 .profileBlockWrapper {
+  flex-shrink: 0;
+
   > div {
     position: static;
     min-width: unset;
@@ -143,11 +148,11 @@
   }
 }
 
+// Footer items render the same ArticleItem as the apps above, so they must
+// share the apps' horizontal inset (no extra inline padding) to stay aligned.
+// margin-block-start: auto pins them to the bottom when there is free space,
+// and collapses to 0 so they scroll with the apps list on overflow.
 .footer {
+  margin-block-start: auto;
   padding-block: 8px;
-  padding-inline: 12px;
-
-  @include mixins.tablet-and-below {
-    padding-inline: 16px;
-  }
 }

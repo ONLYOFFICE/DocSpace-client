@@ -53,6 +53,7 @@ import { AdminMessageSection } from "./adminMessage";
 import { SessionLifetimeSection } from "./sessionLifetime";
 import { BruteForceProtectionSection } from "./bruteForceProtection";
 import { DevToolsAccessSection } from "./devToolsAccess";
+import { AccessControlSection } from "./accessControl";
 
 import MobileView from "./mobileView";
 import { getBrandName } from "@docspace/shared/constants/brands";
@@ -148,6 +149,12 @@ const AccessPortal = (props) => {
       withoutExternalLink={!helpCenterDomain}
     >
       <Text className="subtitle">{t("PortalSecurityTitle")}</Text>
+
+      <Text fontSize="16px" fontWeight="700">
+        {t("Settings:AccessControl")}
+      </Text>
+      <AccessControlSection />
+      <StyledSettingsSeparator />
 
       <Text fontSize="16px" fontWeight="700">
         {t("SettingPasswordTittle")}

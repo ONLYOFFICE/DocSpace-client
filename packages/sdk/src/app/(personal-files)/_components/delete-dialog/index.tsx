@@ -47,6 +47,8 @@ type DeleteDialogProps = {
   isLoading: boolean;
   itemCount: number;
   isTrash: boolean;
+  /** Empty-trash variant: trash-wide permanent deletion wording. */
+  isEmptyTrash?: boolean;
   onClose: () => void;
   onConfirm: () => void;
 };
@@ -56,28 +58,41 @@ const DeleteDialog = ({
   isLoading,
   itemCount,
   isTrash,
+  isEmptyTrash,
   onClose,
   onConfirm,
 }: DeleteDialogProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const message = isTrash
-    ? itemCount === 1
-      ? t("Common:DeleteItemForever")
-      : t("Common:DeleteItemsForever", { itemCount })
-    : itemCount === 1
-      ? t("Common:MoveToTrashItem")
-      : t("Common:MoveToTrashItems", { itemCount });
+  const message = isEmptyTrash
+    ? t("Common:DeleteForeverNote", {
+        sectionName: t("Common:TrashSection"),
+      })
+    : isTrash
+      ? itemCount === 1
+        ? t("Common:DeleteItemForever")
+        : t("Common:DeleteItemsForever", { itemCount })
+      : itemCount === 1
+        ? t("Common:MoveToTrashItem")
+        : t("Common:MoveToTrashItems", { itemCount });
+
+  const header = isEmptyTrash
+    ? t("Common:DeleteForeverTitle")
+    : t("Common:Delete");
+
+  const confirmLabel = isEmptyTrash
+    ? t("Common:DeleteForeverButton")
+    : t("Common:Delete");
 
   return (
     <ModalDialog visible={visible} onClose={onClose} autoMaxHeight>
-      <ModalDialog.Header>{t("Common:Delete")}</ModalDialog.Header>
+      <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>{message}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
-          label={t("Common:Delete")}
+          label={confirmLabel}
           size={ButtonSize.normal}
           primary
           scale

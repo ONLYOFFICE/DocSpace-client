@@ -261,7 +261,7 @@ const RoomsList = ({
   );
 
   const restoreRooms = React.useCallback(
-    async (ids: number[]) => {
+    async (ids: number[], name?: string) => {
       if (!ids.length) return;
       activeItemsStore.addActiveItems([], ids);
       const opId = operationsStore.startOperation(
@@ -290,6 +290,11 @@ const RoomsList = ({
         setTotal((prev) => Math.max(0, prev - ids.length));
         setSelection([]);
         setBufferSelection(null);
+        toastr.success(
+          ids.length > 1
+            ? t("Common:UnarchivedRoomsAction")
+            : t("Common:UnarchivedRoomAction", { name }),
+        );
       } catch (e) {
         opAlert = true;
         toastr.error(e as Error);
@@ -325,7 +330,7 @@ const RoomsList = ({
   );
 
   const archiveRooms = React.useCallback(
-    async (ids: number[]) => {
+    async (ids: number[], name?: string) => {
       if (!ids.length) return;
       activeItemsStore.addActiveItems([], ids);
       const opId = operationsStore.startOperation(
@@ -354,6 +359,11 @@ const RoomsList = ({
         setTotal((prev) => Math.max(0, prev - ids.length));
         setSelection([]);
         setBufferSelection(null);
+        toastr.success(
+          ids.length > 1
+            ? t("Common:ArchivedRoomsAction")
+            : t("Common:ArchivedRoomAction", { name }),
+        );
       } catch (e) {
         opAlert = true;
         toastr.error(e as Error);
@@ -402,6 +412,11 @@ const RoomsList = ({
         setTotal((prev) => Math.max(0, prev - roomIds.length));
         setSelection([]);
         setBufferSelection(null);
+        toastr.success(
+          roomIds.length > 1
+            ? t("Common:RoomsRemoved")
+            : t("Common:RoomRemoved"),
+        );
       } catch (e) {
         opAlert = true;
         toastr.error(e as Error);
@@ -744,7 +759,10 @@ const RoomsList = ({
           roomType={(restoringItems[0] as TFolderItem).roomType}
           count={restoringItems.length}
           onConfirm={() =>
-            restoreRooms(restoringItems.map((item) => item.id as number))
+            restoreRooms(
+              restoringItems.map((item) => item.id as number),
+              restoringItems[0]?.title,
+            )
           }
         />
       ) : null}
@@ -765,7 +783,10 @@ const RoomsList = ({
           onClose={() => setArchivingItems(null)}
           count={archivingItems.length}
           onConfirm={() =>
-            archiveRooms(archivingItems.map((item) => item.id as number))
+            archiveRooms(
+              archivingItems.map((item) => item.id as number),
+              archivingItems[0]?.title,
+            )
           }
         />
       ) : null}

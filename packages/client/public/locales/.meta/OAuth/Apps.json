@@ -3,7 +3,7 @@
   "content": "Applications",
   "content_en_sha1_hash": "76c74bd071dd73f01696fddbbffc77712a479faf",
   "created_at": "2025-05-19T21:30:53.815Z",
-  "updated_at": "2026-06-01T21:20:44.435Z",
+  "updated_at": "2026-06-03T09:30:05.049Z",
   "comment": {
     "text": "Table column header. It labels a column listing integrated applications in the user's profile settings.",
     "is_auto": true,
@@ -15,30 +15,6 @@
       "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
       "line_number": 134,
       "context": "<QuickActions items={createItems} className={styles.quickActions} />\n </section>\n \n {moduleItems.length > 0 ? (\n <section className={styles.section}>\n <Text className={styles.sectionTitle}>{t(\"OAuth:Apps\")}</Text>\n <div className={styles.modulesGrid}>\n {moduleItems.map((mod) => (\n <ModuleCard\n key={mod.id}\n mod={mod}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/apps/index.tsx",
-      "line_number": 81,
-      "context": "useEffect(() => {\n ensureLoaded?.();\n }, [ensureLoaded]);\n \n useEffect(() => {\n if (ready) setDocumentTitle(t(\"OAuth:Apps\"));\n }, [ready, t]);\n \n const handleConfirmEnableAiRooms = async () => {\n setEnableAiRoomsLoading(true);\n try {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 252,
-      "context": "return t(\"StorageManagement\");\n case \"Services\":\n return t(\"Services\");\n case \"AISettings\":\n return t(\"Settings:AISettings\");\n case \"OAuth:Apps\":\n return t(\"OAuth:Apps\");\n default:\n throw new Error(\"Unexpected translation key\");\n }\n };",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 536,
-      "context": "{\n id: \"portal-settings_catalog-apps\",\n key: \"8\",\n type: PageType.apps,\n link: \"apps\",\n tKey: \"OAuth:Apps\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-apps-list\",\n key: \"8-0\",",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 536,
-      "context": "{\n id: \"portal-settings_catalog-apps\",\n key: \"8\",\n type: PageType.apps,\n link: \"apps\",\n tKey: \"OAuth:Apps\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-apps-list\",\n key: \"8-0\",",
       "module": "/packages/client"
     },
     {
@@ -179,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

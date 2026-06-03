@@ -134,7 +134,7 @@ const RestoreRoomDialogComponent = (props) => {
   );
 };
 
-const RestoreRoomDialog = withTranslation(["Files", "ArchiveDialog", "Common"])(
+const RestoreRoomDialog = withTranslation(["Files", "Common"])(
   RestoreRoomDialogComponent,
 );
 

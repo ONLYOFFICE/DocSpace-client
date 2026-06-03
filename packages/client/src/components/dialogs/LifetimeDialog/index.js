@@ -73,7 +73,7 @@ const LifetimeDialogComponent = (props) => {
         <div className={styles.lifetimeFooterContainer}>
           <Checkbox
             className={styles.lifetimeCheckbox}
-            label={t("ConvertDialog:HideMessage")}
+            label={t("Common:HideMessage")}
             isChecked={isChecked}
             onChange={onChange}
             dataTestId="lifetime_dialog_hide_message_checkbox"

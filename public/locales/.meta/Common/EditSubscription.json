@@ -3,7 +3,7 @@
   "content": "Edit subscription",
   "content_en_sha1_hash": "ff7f89fc702e468dbff110a0c725497b81c29c76",
   "created_at": "2026-04-10T13:53:45.069Z",
-  "updated_at": "2026-05-28T15:46:18.708Z",
+  "updated_at": "2026-06-02T15:03:00.430Z",
   "comment": {
     "text": "This is a button label in a context menu and a dialog title. It allows users to modify their existing subscription plan.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
-      "line_number": 400,
-      "context": "withBodyScroll\n >\n <ModalDialog.Container>{container}</ModalDialog.Container>\n <ModalDialog.Header>\n {hasStorageSubscription\n ? t(\"EditSubscription\")\n : t(\"AdditionalDiskStorage\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.dialogBody}>\n <WalletContainer",
+      "line_number": 420,
+      "context": "withBodyScroll\n >\n <ModalDialog.Container>{container}</ModalDialog.Container>\n <ModalDialog.Header>\n {hasStorageSubscription\n ? t(\"EditSubscription\")\n : t(\"AdditionalDiskStorage\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.dialogBody}>\n <WalletContainer isBalanceInsufficient={isBalanceInsufficient} />",
       "module": "/libs/ui-kit"
     }
   ],

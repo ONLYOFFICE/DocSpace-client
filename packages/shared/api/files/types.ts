@@ -307,6 +307,10 @@ export type TFilesSettings = {
   enableThirdParty: boolean;
   externalShare: boolean;
   externalShareSocialMedia: boolean;
+  defaultShareLinkInternal: boolean;
+  externalShareApplyToDocuments: boolean;
+  externalShareApplyToRooms: boolean;
+  blockExistingLinksOnRestrict: boolean;
   extsArchive: string[];
   extsAudio: string[];
   extsCoAuthoring: string[];

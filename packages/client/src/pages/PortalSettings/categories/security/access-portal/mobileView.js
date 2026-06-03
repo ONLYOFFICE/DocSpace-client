@@ -63,6 +63,14 @@ const MobileView = (props) => {
   return (
     <MainContainer withoutExternalLink={withoutExternalLink}>
       <CategoryItem
+        title={t("Settings:AccessControl")}
+        subtitle={
+          <Trans i18nKey="AccessControlMobileDescription" ns="Settings" t={t} />
+        }
+        url="/portal-settings/security/access-portal/access-control"
+        onClickLink={onClickLink}
+      />
+      <CategoryItem
         title={t("SettingPasswordTittle")}
         subtitle={
           <Trans

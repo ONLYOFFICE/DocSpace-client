@@ -2,6 +2,5 @@
   "ConversionMessage": "Сви документи које отпремите биц́е конвертовани у Office Open XML формат (docx, xlsx или pptx) ради бржег уређивања.",
   "ConvertedFileDestination": "Копија датотеке ц́е бити направљена у <strong>{{folderTitle}}</strong> фолдеру.",
   "FileUploadTitle": "Отпремање датотеке",
-  "HideMessage": "Не приказуј ову поруку поново",
   "InfoCreateFileIn": "Нова '{{fileTitle}}' датотека је направљена у '{{folderTitle}}'"
 }

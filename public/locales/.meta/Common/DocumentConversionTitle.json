@@ -2,13 +2,13 @@
   "key_path": "DocumentConversionTitle",
   "content": "Document conversion",
   "content_en_sha1_hash": "f96037ca2ed0cf02f83458fa984002b431ca5108",
-  "created_at": "2026-05-24T17:27:24.606Z",
-  "updated_at": "2026-05-24T18:14:13.372Z",
+  "created_at": "2025-05-19T21:30:56.882Z",
+  "updated_at": "2026-06-02T22:18:05.008Z",
   "comment": {
-    "text": "Dialog title for the window used to convert documents into different formats.",
+    "text": "This is the title of a dialog box that appears when a user converts a single document.",
     "is_auto": true,
-    "updated_at": "2026-05-24T18:14:13.372Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-04-11T21:04:13.834Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
@@ -170,12 +170,6 @@
       "approved_at": null
     },
     "sl": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

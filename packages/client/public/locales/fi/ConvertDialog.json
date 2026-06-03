@@ -2,6 +2,5 @@
   "ConversionMessage": "Kaikki lähettämäsi asiakirjat muunnetaan Office Open XML -muotoon (docx, xlsx tai pptx) muokkaamisen nopeuttamiseksi.",
   "ConvertedFileDestination": "Tiedoston kopio luodaan <strong>{{folderTitle}}</strong> kansioon.",
   "FileUploadTitle": "Tiedosto ladattu",
-  "HideMessage": "Älä näytä tätä viestiä enää",
   "InfoCreateFileIn": "Uusi tiedosto '{{fileTitle}}' on luotu kohteeseen '{{folderTitle}}'"
 }

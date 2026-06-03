@@ -40,7 +40,7 @@ import styles from "./CellStyles.module.scss";
 
 const ErasureCell = ({ t, sideColor, item }) => {
   const { daysRemaining } = item;
-  const title = t("Files:DaysRemaining", { daysRemaining });
+  const title = t("Common:DaysRemaining", { daysRemaining });
 
   return (
     <Text
@@ -57,3 +57,4 @@ const ErasureCell = ({ t, sideColor, item }) => {
 };
 
 export default React.memo(ErasureCell);
+

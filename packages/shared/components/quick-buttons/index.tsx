@@ -358,7 +358,6 @@ export const QuickButtons = memo((props: QuickButtonsProps) => {
 									place="bottom"
 									getContent={getExpirationLinkDateTooltipContent}
 									maxWidth="300px"
-									openOnClick
 								/>
 							) : null}
 						</>

@@ -931,7 +931,7 @@ const SectionFilterContent = ({
       {
         key: FilterGroups.filterSharedBy,
         group: FilterGroups.filterSharedBy,
-        label: t("Files:SharedBy"),
+        label: t("Common:SharedBy"),
         isHeader: true,
       },
       {
@@ -961,7 +961,7 @@ const SectionFilterContent = ({
         {
           key: FilterGroups.filterAuthor,
           group: FilterGroups.filterAuthor,
-          label: t("ByAuthor"),
+          label: t("Common:ByAuthor"),
           isHeader: true,
         },
         {
@@ -978,7 +978,7 @@ const SectionFilterContent = ({
       {
         key: FilterGroups.filterAuthor,
         group: FilterGroups.filterAuthor,
-        label: t("ByAuthor"),
+        label: t("Common:ByAuthor"),
         isHeader: true,
       },
       {
@@ -1583,7 +1583,7 @@ const SectionFilterContent = ({
     const erasure = {
       id: "sort-by_erasure",
       key: SortByFieldName.ModifiedDate,
-      label: t("ByErasure"),
+      label: t("Common:ByErasure"),
       default: true,
     };
     const tags = {
@@ -2075,8 +2075,8 @@ export default inject(
       "InfoPanel",
       "People",
       "PeopleTranslations",
-      "ConnectDialog",
       "SmartBanner",
     ])(observer(SectionFilterContent)),
   ),
 );
+

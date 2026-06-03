@@ -3,7 +3,7 @@
   "content": "Your profile details",
   "content_en_sha1_hash": "0feb38a1d878bc335a2db8628884d07df960f227",
   "created_at": "2026-05-26T17:09:18.625Z",
-  "updated_at": "2026-06-01T21:20:44.387Z",
+  "updated_at": "2026-06-02T22:18:04.992Z",
   "comment": {
     "text": "Dialog header text for the information bar in the social authentication welcome dialog, introducing the user's profile information.",
     "is_auto": true,

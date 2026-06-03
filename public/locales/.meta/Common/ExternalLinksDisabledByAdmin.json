@@ -1,0 +1,29 @@
+{
+  "key_path": "ExternalLinksDisabledByAdmin",
+  "content": "External links are disabled by your administrator.",
+  "content_en_sha1_hash": "855c36dafcaa542418200c05db7369abd5fc7863",
+  "created_at": "2026-06-02T08:43:21.562Z",
+  "updated_at": "2026-06-02T08:44:38.187Z",
+  "comment": {
+    "text": "Tooltip appearing when an external link option is disabled in the sharing settings due to administrator restrictions.",
+    "is_auto": true,
+    "updated_at": "2026-06-02T08:44:38.187Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/share/sub-components/LinkRow.tsx",
+      "line_number": 105,
+      "context": "...opt,\n icon: ExternalLinkWarningIconUrl,\n fillIcon: false,\n disabled: true,\n className: \"share-external-disabled\",\n tooltip: t(\"Common:ExternalLinksDisabledByAdmin\"),\n }\n : opt,\n );\n }, [t, baseShareOptions, isExternalShareRestricted]);",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

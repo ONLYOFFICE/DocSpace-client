@@ -3,7 +3,7 @@
   "content": "Additional disk storage",
   "content_en_sha1_hash": "ea3c32df1d9ec757ba8a262fccd8dfacc12bae03",
   "created_at": "2026-04-10T13:53:41.750Z",
-  "updated_at": "2026-05-28T15:46:18.708Z",
+  "updated_at": "2026-06-02T15:03:00.430Z",
   "comment": {
     "text": "This is a title for a section or dialog related to purchasing or managing extra storage space. It appears when users are considering or configuring additional disk capacity for their account.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
-      "line_number": 401,
-      "context": ">\n <ModalDialog.Container>{container}</ModalDialog.Container>\n <ModalDialog.Header>\n {hasStorageSubscription\n ? t(\"EditSubscription\")\n : t(\"AdditionalDiskStorage\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.dialogBody}>\n <WalletContainer\n onTopUp={onTopUpClick}",
+      "line_number": 421,
+      "context": ">\n <ModalDialog.Container>{container}</ModalDialog.Container>\n <ModalDialog.Header>\n {hasStorageSubscription\n ? t(\"EditSubscription\")\n : t(\"AdditionalDiskStorage\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.dialogBody}>\n <WalletContainer isBalanceInsufficient={isBalanceInsufficient} />",
       "module": "/libs/ui-kit"
     }
   ],

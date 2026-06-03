@@ -64,7 +64,7 @@ export const DeleteTagModal = ({
   // tagName,
   ref,
 }: DeleteTagModalProps) => {
-  const { t } = useTranslation(["ConvertDialog", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   const onChangeCheckbox = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,7 +92,7 @@ export const DeleteTagModal = ({
         </Text>
         <Checkbox
           key="dont-show-again"
-          label={t("ConvertDialog:HideMessage")}
+          label={t("Common:HideMessage")}
           isChecked={isChecked}
           onChange={onChangeCheckbox}
           dataTestId="delete_tag_checkbox"

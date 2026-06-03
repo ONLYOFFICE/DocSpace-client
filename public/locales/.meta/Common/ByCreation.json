@@ -2,13 +2,13 @@
   "key_path": "ByCreation",
   "content": "Created",
   "content_en_sha1_hash": "accf40c89baa4fa88e6a7ff11e1f805beecafd3f",
-  "created_at": "2026-05-24T17:27:20.289Z",
-  "updated_at": "2026-05-24T18:30:36.269Z",
+  "created_at": "2025-05-19T21:30:55.310Z",
+  "updated_at": "2026-06-02T22:18:05.046Z",
   "comment": {
-    "text": "Table column header label indicating the date an item was created.",
+    "text": "Table header label. It indicates the column for sorting items by their creation date.",
     "is_auto": true,
-    "updated_at": "2026-05-24T18:30:36.269Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-04-11T21:10:24.376Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -185,7 +185,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
@@ -200,12 +200,6 @@
       "approved_at": null
     },
     "sl": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

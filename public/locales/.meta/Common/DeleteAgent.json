@@ -3,7 +3,7 @@
   "content": "Delete agent",
   "content_en_sha1_hash": "7a10a4a6f851226bb23c4854cba9f735001c9f1b",
   "created_at": "2025-10-27T16:14:30.107Z",
-  "updated_at": "2026-06-02T08:43:27.548Z",
+  "updated_at": "2026-06-02T22:18:05.098Z",
   "comment": {
     "text": "This is a button label that appears in a context menu for an AI agent, allowing the user to remove it.",
     "is_auto": true,
@@ -13,9 +13,15 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2821,
-      "context": "id: \"option_delete\",\n key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : isAIAgent\n ? t(\"DeleteAgent\")\n : item.isTemplate\n ? t(\"Files:DeleteTemplateAction\")\n : item.isRoom\n ? t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),",
+      "line_number": 2845,
+      "context": "id: \"option_delete\",\n key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : isAIAgent\n ? t(\"Common:DeleteAgent\")\n : item.isTemplate\n ? t(\"Files:DeleteTemplateAction\")\n : item.isRoom\n ? t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-list/useAgentContextOptions.tsx",
+      "line_number": 266,
+      "context": "// 10. Delete agent\n if (sec?.Delete) {\n items.push({\n id: \"option_delete\",\n key: \"delete\",\n label: t(\"Common:DeleteAgent\", { defaultValue: \"Delete agent\" }),\n icon: TrashReactSvgUrl,\n onClick: () => dialogsStore.setDeleteAgentDialogVisible(true, agent),\n });\n }",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -26,7 +32,7 @@
       "approved_at": null
     },
     "ru": {
-      "approved_at": "2026-05-15T15:04:53.938772Z"
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     }
   }
 }

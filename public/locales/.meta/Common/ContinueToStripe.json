@@ -3,7 +3,7 @@
   "content": "Continue to Stripe",
   "content_en_sha1_hash": "81253e7eb70d423d6e9afb9b72681b4a423f5c1f",
   "created_at": "2026-05-27T14:11:31.664Z",
-  "updated_at": "2026-06-02T08:43:27.584Z",
+  "updated_at": "2026-06-02T15:03:00.439Z",
   "comment": {
     "text": "Button label in the top-up balance dialog used to proceed to the Stripe payment gateway.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/top-up-balance/FirstTopUpDialog.tsx",
-      "line_number": 219,
+      "line_number": 220,
       "context": "<ModalDialog.Footer>\n <div className={styles.footerButtons}>\n <Button\n key=\"ContinueToStripeButton\"\n label={t(\"ContinueToStripe\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onContinue}\n isLoading={isLoading}",
       "module": "/libs/ui-kit"
     }

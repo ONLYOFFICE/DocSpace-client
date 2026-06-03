@@ -32,25 +32,16 @@
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(k,'=',v\\) for k,v in sorted\\(d.items\\(\\)\\) if any\\(x in k.lower\\(\\) for x in ['allow','restrict','default','internal','mobile','portal','control','creation']\\)]\")",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); keys=['AccessControl','AccessControlMobileDescription','AllowExistingUntilRemoved','AppliesTo','AppliesToDocuments','AppliesToDocumentsDescription','AppliesToRooms','AppliesToRoomsDescription','AppliesToRoomsWarning','BlockAccessRecommended','DefaultLinkTypeInternal','DefaultSharingLinkType','DefaultSharingLinkTypeDescription','ExternalSharingAllowed','ExternalSharingLinks','ExternalSharingLinksDescription','ExternalSharingRestricted','LinkStopWorking','LinksBeforeRestriction']; [print\\(k+': '+d.get\\(k,'MISSING'\\)\\) for k in keys]\")",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); keys=['BlockedByAdmin','ExternalAccessDisabledByAdmin','ExternalLinksDisabledByAdmin','ExternalLinksDisabledForGuests','LinkBlockedByAdminWarning','PublicRoomCreationDisabled']; [print\\(k+': '+d.get\\(k,'MISSING'\\)\\) for k in keys]\")",
-      "Bash(git -C /Users/alexeysafronov/Git/Gitea/DocSpace/client diff --name-only)",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); keys=[k for k in d if any\\(w in k.lower\\(\\) for w in ['block','external','link','access','admin','guest','public','room']\\)]; [print\\(k,'=',d[k]\\) for k in keys[:30]]\")",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); keys=[k for k in d if any\\(w in k.lower\\(\\) for w in ['access','link','share','external','control','default','block','restrict']\\)]; [print\\(k,'=',d[k]\\) for k in keys[:30]]\")",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); keys=['AccessControl','AccessControlMobileDescription','AllowExistingUntilRemoved','AppliesTo','AppliesToDocuments','AppliesToDocumentsDescription','AppliesToRooms','AppliesToRoomsDescription','AppliesToRoomsWarning','BlockAccessRecommended','DefaultLinkTypeInternal','DefaultSharingLinkType','DefaultSharingLinkTypeDescription','ExternalSharingAllowed','ExternalSharingLinks','ExternalSharingLinksDescription','ExternalSharingRestricted','LinkStopWorking','LinksBeforeRestriction']; [print\\(f'{k}: {json.dumps\\(d.get\\(k\\)\\)}'\\) for k in keys]\")",
-      "Bash(git -C /Users/alexeysafronov/Git/Gitea/DocSpace/client diff HEAD~1 -- \"public/locales/ru/Common.json\")",
-      "Bash(node -e \"require\\('/Users/alexeysafronov/Git/Gitea/DocSpace/client/packages/client/public/locales/fi/Settings.json'\\); console.log\\('JSON valid'\\);\")",
-      "Bash(git -C /Users/alexeysafronov/Git/Gitea/DocSpace/client diff -- \"public/locales/ru/Common.json\")",
-      "Bash(git -C /Users/alexeysafronov/Git/Gitea/DocSpace/client show HEAD -- \"public/locales/ru/Common.json\")",
-      "Bash(git -C /Users/alexeysafronov/Git/Gitea/DocSpace/client log --oneline -5)",
-      "Bash(git -C /Users/alexeysafronov/Git/Gitea/DocSpace/client show 4e5aeef0250 -- \"public/locales/ru/Common.json\")",
-      "Bash(git -C /Users/alexeysafronov/Git/Gitea/DocSpace/client diff 4e5aeef0250^..4e5aeef0250 -- \"public/locales/ru/Common.json\")",
-      "Bash(python3 -m json.tool /Users/alexeysafronov/Git/Gitea/DocSpace/client/packages/client/public/locales/lv/Settings.json)",
-      "Bash(node -e ' *)",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); keys=list\\(d.keys\\(\\)\\)[:60]; [print\\(f'{k}: {d[k]}'\\) for k in keys]\")",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); keys=[k for k in d if any\\(x in k for x in ['ExternalSharing','AccessControl','DefaultSharing','BlockAccess','LinkStop','LinksBeforeRestriction','AllowExisting','AppliesTo','DefaultLinkType']\\)]; print\\(json.dumps\\({k:d[k] for k in keys}, ensure_ascii=False, indent=2\\)\\)\")",
-      "Bash(find /Users/alexeysafronov/.claude -name \"*.md\" | grep -i translat | head -20 *)",
-      "Read(//Users/alexeysafronov/.claude/**)",
       "Bash(python3 -)",
-      "Bash(node -e \"require\\('/Users/alexeysafronov/Git/Gitea/DocSpace/client/packages/client/public/locales/zh-CN/Settings.json'\\); console.log\\('JSON valid'\\)\")"
+      "Bash(node -e ' *)",
+      "Bash(node_modules/.bin/vitest run *)",
+      "Bash(grep -v \"^en$\")",
+      "Bash(grep -v \"^\\\\.meta$\")"
     ]
   }
 }

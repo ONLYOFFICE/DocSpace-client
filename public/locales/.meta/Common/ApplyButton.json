@@ -3,7 +3,7 @@
   "content": "Apply",
   "content_en_sha1_hash": "cfea419c3b4e8b02ee586e70a28bf846e44cdda4",
   "created_at": "2025-05-19T21:30:43.032Z",
-  "updated_at": "2026-06-02T08:43:27.479Z",
+  "updated_at": "2026-06-02T22:18:05.025Z",
   "comment": {
     "text": "This is the label for a button that confirms and applies changes or filter selections within a dialog or panel.",
     "is_auto": true,
@@ -24,57 +24,63 @@
       "module": "/libs/ui-kit"
     },
     {
+      "file_path": "/libs/ui-kit/components/room-logo-cover-dialog/index.tsx",
+      "line_number": 193,
+      "context": "<Button\n scale\n primary\n tabIndex={0}\n size={ButtonSize.normal}\n label={t(\"Common:ApplyButton\")}\n onClick={handleSubmit}\n testId=\"room_logo_cover_apply_button\"\n />\n <Button\n scale",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/components/room-logo-cover-dialog/sub-components/SelectColor.tsx",
+      "line_number": 177,
+      "context": "onClose={() => setOpenColorPicker(false)}\n onApply={onApply}\n isPickerOnly\n handleChange={onApply}\n appliedColor={selectedColor}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n />\n </ModalDialog.Body>\n </ModalDialog>\n ) : (",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/components/room-logo-cover-dialog/sub-components/SelectColor.tsx",
+      "line_number": 177,
+      "context": "onClose={() => setOpenColorPicker(false)}\n onApply={onApply}\n isPickerOnly\n handleChange={onApply}\n appliedColor={selectedColor}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n />\n </ModalDialog.Body>\n </ModalDialog>\n ) : (",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/index.tsx",
-      "line_number": 331,
+      "line_number": 280,
       "context": "<Button\n scale\n primary\n tabIndex={0}\n size={ButtonSize.normal}\n label={t(\"Common:ApplyButton\")}\n onClick={handleSubmit}\n testId=\"room_logo_cover_apply_button\"\n />\n <Button\n scale",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/sub-components/SelectColor/SelectColor.tsx",
-      "line_number": 181,
-      "context": "onClose={() => setOpenColorPicker(false)}\n onApply={onApply}\n isPickerOnly\n handleChange={onApply}\n appliedColor={selectedColor!}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n />\n </ModalDialog.Body>\n </StyledModalDialog>\n ) : (",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/sub-components/SelectColor/SelectColor.tsx",
-      "line_number": 181,
-      "context": "onClose={() => setOpenColorPicker(false)}\n onApply={onApply}\n isPickerOnly\n handleChange={onApply}\n appliedColor={selectedColor!}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n />\n </ModalDialog.Body>\n </StyledModalDialog>\n ) : (",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 647,
+      "line_number": 654,
       "context": "onClick: onIndexReorder,\n iconUrl: RoundedArrowSvgUrl,\n },\n {\n id: \"save-index\",\n label: t(\"Common:ApplyButton\"),\n onClick: onIndexApply,\n iconUrl: CheckIcon,\n },\n ];\n }, [t, onIndexReorder, onIndexApply, isIndexEditingMode]);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 578,
-      "context": "<ColorPicker\n id=\"buttons-hex\"\n onClose={onCloseHexColorPickerButtons}\n onApply={onAppliedColorButtons}\n appliedColor={appliedColorButtons}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n hexCodeLabel={t(\"Settings:HexCode\")}\n />\n </StyledBodyContent>\n </ModalDialog.Body>",
+      "line_number": 577,
+      "context": "<ColorPicker\n id=\"buttons-hex\"\n onClose={onCloseHexColorPickerButtons}\n onApply={onAppliedColorButtons}\n appliedColor={appliedColorButtons}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n hexCodeLabel={t(\"Settings:HexCode\")}\n />\n </div>\n </ModalDialog.Body>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 578,
-      "context": "<ColorPicker\n id=\"buttons-hex\"\n onClose={onCloseHexColorPickerButtons}\n onApply={onAppliedColorButtons}\n appliedColor={appliedColorButtons}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n hexCodeLabel={t(\"Settings:HexCode\")}\n />\n </StyledBodyContent>\n </ModalDialog.Body>",
+      "line_number": 577,
+      "context": "<ColorPicker\n id=\"buttons-hex\"\n onClose={onCloseHexColorPickerButtons}\n onApply={onAppliedColorButtons}\n appliedColor={appliedColorButtons}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n hexCodeLabel={t(\"Settings:HexCode\")}\n />\n </div>\n </ModalDialog.Body>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 578,
-      "context": "<ColorPicker\n id=\"buttons-hex\"\n onClose={onCloseHexColorPickerButtons}\n onApply={onAppliedColorButtons}\n appliedColor={appliedColorButtons}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n hexCodeLabel={t(\"Settings:HexCode\")}\n />\n </StyledBodyContent>\n </ModalDialog.Body>",
+      "line_number": 577,
+      "context": "<ColorPicker\n id=\"buttons-hex\"\n onClose={onCloseHexColorPickerButtons}\n onApply={onAppliedColorButtons}\n appliedColor={appliedColorButtons}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n hexCodeLabel={t(\"Settings:HexCode\")}\n />\n </div>\n </ModalDialog.Body>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 578,
-      "context": "<ColorPicker\n id=\"buttons-hex\"\n onClose={onCloseHexColorPickerButtons}\n onApply={onAppliedColorButtons}\n appliedColor={appliedColorButtons}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n hexCodeLabel={t(\"Settings:HexCode\")}\n />\n </StyledBodyContent>\n </ModalDialog.Body>",
+      "line_number": 577,
+      "context": "<ColorPicker\n id=\"buttons-hex\"\n onClose={onCloseHexColorPickerButtons}\n onApply={onAppliedColorButtons}\n appliedColor={appliedColorButtons}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n hexCodeLabel={t(\"Settings:HexCode\")}\n />\n </div>\n </ModalDialog.Body>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/index.js",
-      "line_number": 167,
-      "context": "{!areFiltersChanged ? (\n <ModalDialog.Footer>\n <Footer>\n <Button\n className=\"apply-button\"\n label={t(\"Common:ApplyButton\")}\n size=\"normal\"\n primary\n onClick={handleApplyFilters}\n isDisabled={filters.deliveryTo <= filters.deliveryFrom}\n testId=\"apply_filter_button\"",
+      "line_number": 152,
+      "context": "{!areFiltersChanged ? (\n <ModalDialog.Footer>\n <div className={styles.filterDialogFooter}>\n <Button\n className=\"apply-button\"\n label={t(\"Common:ApplyButton\")}\n size=\"normal\"\n primary\n onClick={handleApplyFilters}\n isDisabled={filters.deliveryTo <= filters.deliveryFrom}\n testId=\"apply_filter_button\"",
       "module": "/packages/client"
     }
   ],

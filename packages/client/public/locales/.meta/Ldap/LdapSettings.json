@@ -3,7 +3,7 @@
   "content": "LDAP settings",
   "content_en_sha1_hash": "47aabd81090aebfdaf6d1d37da2399019820296f",
   "created_at": "2025-05-19T21:30:54.273Z",
-  "updated_at": "2026-06-02T08:43:27.500Z",
+  "updated_at": "2026-06-02T22:18:05.052Z",
   "comment": {
     "text": "This is a page title and a category item title. It labels the section for configuring LDAP integration settings.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/LdapMobileView.js",
-      "line_number": 60,
-      "context": "};\n \n return (\n <StyledWrapper>\n <CategoryItem\n title={t(\"Ldap:LdapSettings\")}\n subtitle={t(\"Ldap:LdapMobileSettingsDescription\")}\n url=\"/portal-settings/integration/ldap/settings\"\n withPaidBadge={!isLDAPAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}",
+      "line_number": 53,
+      "context": "};\n \n return (\n <div className={styles.styledWrapper}>\n <CategoryItem\n title={t(\"Ldap:LdapSettings\")}\n subtitle={t(\"Ldap:LdapMobileSettingsDescription\")}\n url=\"/portal-settings/integration/ldap/settings\"\n withPaidBadge={!isLDAPAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}",
       "module": "/packages/client"
     },
     {
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 229,
+      "line_number": 233,
       "context": "case \"Common:PaymentsTitle\":\n return standalone ? t(\"Common:PaymentsTitle\") : t(\"Common:Billing\");\n case \"ManagementCategoryDataManagement\":\n return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":",
       "module": "/packages/client"
     },
@@ -179,7 +179,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

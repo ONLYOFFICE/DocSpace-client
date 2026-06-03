@@ -3,7 +3,7 @@
   "content": "You are using {{planName}} plan",
   "content_en_sha1_hash": "d4806feb989611df3effd43da85972098a769b7a",
   "created_at": "2026-04-10T13:53:42.127Z",
-  "updated_at": "2026-06-02T08:43:27.576Z",
+  "updated_at": "2026-06-02T22:18:05.037Z",
   "comment": {
     "text": "This is a text label indicating the user's current subscription plan. It appears on the billing page and includes a variable `{{planName}}` for the plan's title.",
     "is_auto": true,
@@ -16,6 +16,12 @@
       "line_number": 121,
       "context": "if (isPaidPeriod || isGracePeriod) {\n return (\n <Text fontSize=\"16px\" isBold>\n <CommonTrans\n i18nKey=\"BusinessTitle\"\n values={{ planName: currentTariffPlanTitle }}\n />\n </Text>\n );\n }",
       "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/Header.tsx",
+      "line_number": 55,
+      "context": "if (!isAdminOrOwner) return null;\n \n return (\n <header className={styles.planHeader}>\n <Text className={styles.planTitle}>\n {t(\"Common:BusinessTitle\", {\n planName: isFreeTariff\n ? t(\"Common:StartupPlan\")\n : t(\"Common:BusinessPlan\"),\n })}\n </Text>",
+      "module": "/packages/client"
     }
   ],
   "languages": {

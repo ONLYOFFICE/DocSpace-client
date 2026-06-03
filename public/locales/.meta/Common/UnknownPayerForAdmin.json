@@ -3,7 +3,7 @@
   "content": "We couldn’t find a contact matching the Stripe email. Billing and services will continue to work, but we recommend contacting the {{productName}} owner to assign a new Payer.",
   "content_en_sha1_hash": "fc41ef37a720cd1e3c3ec6ec5ad2ab4962d51a9b",
   "created_at": "2026-04-10T13:53:43.783Z",
-  "updated_at": "2026-05-15T14:00:07.018Z",
+  "updated_at": "2026-06-02T15:03:00.439Z",
   "comment": {
     "text": "This is an error message displayed to an administrator when the system cannot find a Stripe contact for the current payer. It informs them that billing will continue but advises contacting the product owner to assign a new payer. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/payer-information/index.tsx",
-      "line_number": 110,
-      "context": "let invalidEmailDescription = isOwner\n ? t(\"UnknownPayerForOwner\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"UnknownPayerForAdmin\", {\n productName: getBrandName(\"ProductName\"),\n });\n \n if (isNotPaidPeriod) {\n invalidEmailDescription = isOwner",
+      "line_number": 122,
+      "context": "return isOwner\n ? t(\"UnknownPayerForOwner\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"UnknownPayerForAdmin\", {\n productName: getBrandName(\"ProductName\"),\n });\n };\n \n const unknownPayerInformation = (",
       "module": "/libs/ui-kit"
     }
   ],

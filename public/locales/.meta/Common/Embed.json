@@ -3,7 +3,7 @@
   "content": "Embed",
   "content_en_sha1_hash": "ad02e14e2841dfbd22ab2caa12b5541c5b01a53a",
   "created_at": "2025-08-26T11:15:03.751Z",
-  "updated_at": "2026-06-02T08:43:27.494Z",
+  "updated_at": "2026-06-02T22:18:05.045Z",
   "comment": {
     "text": "This is a button label that, when clicked, opens settings related to embedding the current document or file into another web page.",
     "is_auto": true,
@@ -19,9 +19,15 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2572,
+      "line_number": 2596,
       "context": "disabled: !item.indexing || !item.security?.IndexExport,\n },\n {\n id: \"option_embedding-setting\",\n key: \"embedding-settings\",\n label: t(\"Common:Embed\"),\n icon: CodeReactSvgUrl,\n onClick: () => this.onOpenEmbeddingSettings(item),\n disabled: !item.security?.Embed,\n },\n {",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/sub-components/LinkRow.tsx",
+      "line_number": 236,
+      "context": "onClick: onCopyPassword,\n disabled: isDisabled || !isLocked,\n },\n {\n key: \"embedding-settings-key\",\n label: t(\"Common:Embed\"),\n icon: CodeReactSvgUrl,\n onClick: () => {\n infoPanelStore.setLinkParams({ link, item: selection });\n infoPanelStore.setEmbeddingPanelData({ visible: true });\n },",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/share/hooks/useShare.tsx",

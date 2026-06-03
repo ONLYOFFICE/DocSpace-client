@@ -3,7 +3,7 @@
   "content": "Show File Actions",
   "content_en_sha1_hash": "5f4d732bf49f42d2b52ab6682a11f986c01135a6",
   "created_at": "2026-02-18T14:56:21.929Z",
-  "updated_at": "2026-06-02T08:43:27.486Z",
+  "updated_at": "2026-06-02T22:18:05.037Z",
   "comment": {
     "text": "This is a tooltip for a button that opens a context menu with actions for a file or folder.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableRow.js",
-      "line_number": 324,
+      "line_number": 326,
       "context": "showHotkeyBorder={showHotkeyBorder ? !isTutorialEnabled : false}\n displayFileExtension={displayFileExtension}\n title={\n item.isFolder\n ? t(\"Common:TitleShowFolderActions\")\n : t(\"Common:TitleShowActions\")\n }\n isRoom={item.isRoom}\n isHighlight={isHighlight}\n hideColumns={hideColumns}\n badgeUrl={badgeUrl}",
       "module": "/packages/client"
     }

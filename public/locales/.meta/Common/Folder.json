@@ -3,7 +3,7 @@
   "content": "Folder",
   "content_en_sha1_hash": "30baa24967e08965d1594408031f0324ae11ccac",
   "created_at": "2025-05-19T21:30:45.416Z",
-  "updated_at": "2026-06-02T08:43:27.442Z",
+  "updated_at": "2026-06-02T22:18:04.981Z",
   "comment": {
     "text": "This is a button label for creating a new folder or uploading an existing folder. It appears in menus related to adding new content.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 488,
+      "line_number": 472,
       "context": "const createNewFolder = {\n id: \"actions_new-folder\",\n className: \"main-button_drop-down\",\n icon: CatalogFolderReactSvgUrl,\n label: t(\"Common:Folder\"),\n onClick: onCreate,\n key: \"new-folder\",\n };\n \n const formGallery = {",
       "module": "/packages/client"
     },
@@ -31,14 +31,20 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/TypeCell.js",
-      "line_number": 72,
+      "line_number": 80,
       "context": "case FileType.OFormTemplate:\n case FileType.PDF: {\n return getSinglePDFTitle(t, isPDFForm);\n }\n default:\n return t(\"Common:Folder\");\n }\n };\n \n const type = item.isRoom ? getRoomTypeName(roomType, t) : getItemType();\n const Exst = fileExst ? fileExst.slice(1).toUpperCase() : \"\";",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/table-view/sub-components/TableViewRow.tsx",
-      "line_number": 111,
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/table-view/sub-components/TableViewRow.tsx",
+      "line_number": 125,
       "context": "timezone ?? \"UTC\",\n );\n \n const fileSize = \"contentLength\" in item ? item.contentLength : \"\";\n const fileType =\n \"fileType\" in item ? getFileTypeName(item.fileType, t) : t(\"Common:Folder\");\n \n const onCheckboxChange = React.useCallback(\n (e: React.ChangeEvent<HTMLInputElement>) => {\n e.stopPropagation();\n filesSelectionStore.addSelection(item);",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/table-view/sub-components/TableViewRow.tsx",
+      "line_number": 156,
+      "context": ": item.createdBy.displayName) ??\n \"\");\n \n const fileSize = \"contentLength\" in item ? item.contentLength : \"\";\n const fileType =\n \"fileType\" in item ? getFileTypeName(item.fileType, t) : t(\"Common:Folder\");\n \n const onCheckboxChange = React.useCallback(\n (e: React.ChangeEvent<HTMLInputElement>) => {\n e.stopPropagation();\n filesSelectionStore.addSelection(item);",
       "module": "/packages/sdk"
     },
     {
@@ -48,14 +54,14 @@
       "module": "/packages/sdk"
     },
     {
-      "file_path": "/packages/sdk/src/app/(personal-files)/_components/main-button/index.tsx",
-      "line_number": 124,
+      "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useDocsMenuModels.tsx",
+      "line_number": 101,
       "context": "onClick: () => openCreateDialog(\"pdf\"),\n },\n {\n id: \"actions_new-folder\",\n key: \"new-folder\",\n label: t(\"Common:Folder\"),\n icon: CatalogFolderReactSvgUrl,\n onClick: () => openCreateDialog(\"folder\"),\n },\n {\n key: \"separator-1\",",
       "module": "/packages/sdk"
     },
     {
-      "file_path": "/packages/sdk/src/app/(personal-files)/_components/main-button/index.tsx",
-      "line_number": 124,
+      "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useDocsMenuModels.tsx",
+      "line_number": 101,
       "context": "onClick: () => openCreateDialog(\"pdf\"),\n },\n {\n id: \"actions_new-folder\",\n key: \"new-folder\",\n label: t(\"Common:Folder\"),\n icon: CatalogFolderReactSvgUrl,\n onClick: () => openCreateDialog(\"folder\"),\n },\n {\n key: \"separator-1\",",
       "module": "/packages/sdk"
     },

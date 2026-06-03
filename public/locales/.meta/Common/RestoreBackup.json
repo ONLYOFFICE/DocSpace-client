@@ -3,7 +3,7 @@
   "content": "Restore",
   "content_en_sha1_hash": "3cbe6d6b9a8d1596bb5bca12e14d81c9e108a1a3",
   "created_at": "2025-05-26T07:15:46.895Z",
-  "updated_at": "2026-06-02T08:43:27.500Z",
+  "updated_at": "2026-06-02T22:18:05.052Z",
   "comment": {
     "text": "This is a page title and a navigation item label in the portal settings. It refers to the action of restoring a backup of the DocSpace portal.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 232,
+      "line_number": 236,
       "context": "return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: getBrandName(\"ProductName\") });\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");",
       "module": "/packages/client"
     },

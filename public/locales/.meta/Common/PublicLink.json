@@ -3,7 +3,7 @@
   "content": "Public link",
   "content_en_sha1_hash": "dd39ae9e1717c4e3598e229fad2cce750d2b63c7",
   "created_at": "2025-05-19T21:30:47.642Z",
-  "updated_at": "2026-06-02T08:43:27.493Z",
+  "updated_at": "2026-06-02T22:18:05.044Z",
   "comment": {
     "text": "This is a section header in the information panel, indicating a public link to the current document or folder.",
     "is_auto": true,
@@ -16,6 +16,12 @@
       "line_number": 188,
       "context": "className={styles.linksBlock}\n key={GENERAL_LINK_HEADER_KEY}\n data-testid=\"info_panel_members_links_block\"\n >\n <Text fontSize=\"14px\" fontWeight={600} lineHeight=\"16px\">\n {isFormRoom ? t(\"Common:PublicLink\") : t(\"Common:SharedLinks\")}\n </Text>\n \n {!isArchiveFolder &&\n canAddLink &&\n !(isPublicRoom && isExternalShareRestricted) ? (",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/index.tsx",
+      "line_number": 176,
+      "context": "fontSize=\"14px\"\n fontWeight={600}\n lineHeight=\"16px\"\n color=\"var(--info-panel-subtitle-color)\"\n >\n {isFormRoom ? t(\"Common:PublicLink\") : t(\"Common:SharedLinks\")}\n </Text>\n \n {!isArchiveFolder && canAddLink ? (\n <div\n data-tooltip-id=\"emailTooltip\"",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

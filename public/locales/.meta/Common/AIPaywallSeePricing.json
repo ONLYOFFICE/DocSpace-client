@@ -3,7 +3,7 @@
   "content": "See how pricing works",
   "content_en_sha1_hash": "575b07d620a091ed97c53d3f46b086b42ef88870",
   "created_at": "2026-05-15T13:59:46.125Z",
-  "updated_at": "2026-05-15T14:02:24.404Z",
+  "updated_at": "2026-06-02T15:03:00.434Z",
   "comment": {
     "text": "Clickable link on the AI tools paywall page that opens the pricing and billing details.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallPage.tsx",
-      "line_number": 358,
+      "line_number": 359,
       "context": "onClick={onOpenPricingBilling}\n textDecoration=\"underline dotted\"\n color=\"accent\"\n >\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"AIPaywallSeePricing\")}\n </Text>\n </Link>\n </div>\n </div>\n );",
       "module": "/libs/ui-kit"
     }

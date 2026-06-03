@@ -3,7 +3,7 @@
   "content": "Sync LDAP data",
   "content_en_sha1_hash": "eacc43f7e59fe313e63f3f6f031fcc75dac16efb",
   "created_at": "2025-05-19T21:30:54.316Z",
-  "updated_at": "2026-06-02T08:43:27.500Z",
+  "updated_at": "2026-06-02T22:18:05.052Z",
   "comment": {
     "text": "This is a title for a section or page related to synchronizing user data from an LDAP directory. It also appears as a label for a menu item that navigates to this section.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/LdapMobileView.js",
-      "line_number": 70,
+      "line_number": 63,
       "context": "onClickLink={onClickLink}\n disabled={!isLdapEnabled}\n dataTestId=\"ldap_settings\"\n />\n <CategoryItem\n title={t(\"Ldap:LdapSyncTitle\")}\n subtitle={t(\"LdapMobileSyncDescription\")}\n url=\"/portal-settings/integration/ldap/sync-data\"\n withPaidBadge={!isLDAPAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}",
       "module": "/packages/client"
     },
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 231,
+      "line_number": 235,
       "context": "case \"ManagementCategoryDataManagement\":\n return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: getBrandName(\"ProductName\") });\n case \"Common:Bonus\":",
       "module": "/packages/client"
     },
@@ -173,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

@@ -2,13 +2,13 @@
   "key_path": "SaveOriginalFormatMessage",
   "content": "Save the file copy in the original format",
   "content_en_sha1_hash": "64de7dd97e573eef13f21dc0a7909949a67ea43a",
-  "created_at": "2026-05-24T17:27:38.455Z",
-  "updated_at": "2026-05-24T17:30:47.543Z",
+  "created_at": "2025-05-19T21:30:56.892Z",
+  "updated_at": "2026-06-02T22:18:05.009Z",
   "comment": {
-    "text": "Checkbox label in the conversion dialog that indicates the option to keep a copy of the file in its original format.",
+    "text": "This is a checkbox label in a conversion dialog. It allows the user to choose whether to keep a copy of the original file after conversion.",
     "is_auto": true,
-    "updated_at": "2026-05-24T17:30:47.543Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-04-11T21:04:08.655Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
@@ -170,12 +170,6 @@
       "approved_at": null
     },
     "sl": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

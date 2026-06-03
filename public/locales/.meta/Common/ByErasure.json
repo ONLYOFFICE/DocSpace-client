@@ -1,38 +1,38 @@
 {
-  "key_path": "TableSettingsTitle",
-  "content": "Manage displayed columns",
-  "content_en_sha1_hash": "edef33d6c30b6b2dbcd0652de4bbdd3b72cfe10e",
-  "created_at": "2025-05-19T21:30:56.214Z",
-  "updated_at": "2026-06-01T21:20:44.449Z",
+  "key_path": "ByErasure",
+  "content": "Erasure",
+  "content_en_sha1_hash": "e5eaa5fb5b757374407ffad2c33964c599e1aee8",
+  "created_at": "2026-06-03T09:30:00.132Z",
+  "updated_at": "2026-06-03T09:35:08.949Z",
   "comment": {
-    "text": "This is the title for a dialog or pop-up menu that allows users to customize which columns are visible in a table view.",
+    "text": "A label for a table column header or a sorting option in the filter menu, representing a specific sorting criterion.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:08:03.590Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-06-03T09:35:08.949Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 1047,
-      "context": "isIndexEditingMode={isIndexEditingMode}\n infoPanelVisible={infoPanelVisible}\n useReactWindow\n tagRef={tagRef}\n setHideColumns={setHideColumns}\n settingsTitle={t(\"Files:TableSettingsTitle\")}\n showSettings={isFrame ? showSettings : true}\n />\n );\n }\n }",
+      "line_number": 276,
+      "context": ": {};\n \n const erasureBlock = isPersonalReadOnly\n ? {\n key: \"Erasure\",\n title: t(\"Common:ByErasure\"),\n enable: erasureColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.ModifiedDate,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/table-view/index.tsx",
-      "line_number": 175,
-      "context": "useReactWindow={!isSSR}\n sortBy={filterSortBy ?? undefined}\n sorted={filterSortOrder === \"descending\"}\n sortingVisible\n showSettings\n settingsTitle={t(\"Files:TableSettingsTitle\")}\n />\n <TableBody\n columnStorageName={COLUMN_STORAGE_NAME}\n columnInfoPanelStorageName={COLUMN_INFO_PANEL_STORAGE_NAME}\n fetchMoreFiles={fetchMoreFiles}",
-      "module": "/packages/sdk"
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
+      "line_number": 276,
+      "context": ": {};\n \n const erasureBlock = isPersonalReadOnly\n ? {\n key: \"Erasure\",\n title: t(\"Common:ByErasure\"),\n enable: erasureColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.ModifiedDate,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 1586,
+      "context": "default: true,\n };\n const erasure = {\n id: \"sort-by_erasure\",\n key: SortByFieldName.ModifiedDate,\n label: t(\"Common:ByErasure\"),\n default: true,\n };\n const tags = {\n id: \"sort-by_tags\",\n key: SortByFieldName.Tags,",
+      "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/table-view/index.tsx",
-      "line_number": 195,
-      "context": "useReactWindow={!isSSR}\n sortBy={filterSortBy ?? undefined}\n sorted={filterSortOrder === \"descending\"}\n sortingVisible\n showSettings\n settingsTitle={t(\"Files:TableSettingsTitle\")}\n infoPanelVisible={infoPanelVisible}\n />\n <TableBody\n columnStorageName={COLUMN_STORAGE_NAME}\n columnInfoPanelStorageName={COLUMN_INFO_PANEL_STORAGE_NAME}",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-table-view/index.tsx",
-      "line_number": 212,
-      "context": "useReactWindow={!isSSR}\n sortBy={filterSortBy ?? undefined}\n sorted={filterSortOrder === \"descending\"}\n sortingVisible\n showSettings\n settingsTitle={t(\"Files:TableSettingsTitle\")}\n infoPanelVisible={infoPanelVisible}\n />\n <TableBody\n columnStorageName={COLUMN_STORAGE_NAME}\n columnInfoPanelStorageName={COLUMN_INFO_PANEL_STORAGE_NAME}",
+      "line_number": 87,
+      "context": "case \"Location\":\n return t(\"Common:Location\");\n case \"LastOpened\":\n return t(\"Common:LastOpened\");\n case \"Erasure\":\n return t(\"Common:ByErasure\");\n case \"AccessLevel\":\n return t(\"Common:AccessLevel\");\n case \"SharedBy\":\n return t(\"Common:SharedBy\");\n default:",
       "module": "/packages/sdk"
     }
   ],
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -182,6 +182,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

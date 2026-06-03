@@ -2,32 +2,38 @@
   "key_path": "EmptySection",
   "content": "Empty {{sectionName}}",
   "content_en_sha1_hash": "a8c3ee9d97173f47924959f3cbc240a5d756184d",
-  "created_at": "2025-05-19T21:30:55.589Z",
-  "updated_at": "2026-06-02T22:18:04.978Z",
+  "created_at": "2026-06-03T09:30:00.178Z",
+  "updated_at": "2026-06-03T09:32:54.037Z",
   "comment": {
-    "text": "This string is used as a badge title or a button label. It indicates that a specific section, like the \"Trash\" section, is empty. The `{{sectionName}}` variable will be replaced with the name of the section.",
+    "text": "Action label for a menu item or badge title used to clear the contents of a specific area. `{{sectionName}}` is a noun representing the section being emptied (e.g., \"Trash\").",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:09:46.911Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-06-03T09:32:54.037Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/Body/Items.js",
       "line_number": 214,
-      "context": "iconBadge={iconBadge}\n withAnimation\n badgeTitle={\n labelBadge\n ? \"\"\n : t(\"EmptySection\", { sectionName: t(\"Common:TrashSection\") })\n }\n badgeComponent={\n <NewFilesBadge\n newFilesCount={labelBadge}\n folderId={",
+      "context": "iconBadge={iconBadge}\n withAnimation\n badgeTitle={\n labelBadge\n ? \"\"\n : t(\"Common:EmptySection\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n }\n badgeComponent={\n <NewFilesBadge",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1837,
-      "context": "if (isRecycleBinFolder) {\n return [\n {\n id: \"header_option_empty-trash\",\n key: \"empty-trash\",\n label: t(\"Files:EmptySection\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n onClick: this.onEmptyTrashAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,",
+      "line_number": 1839,
+      "context": "if (isRecycleBinFolder) {\n return [\n {\n id: \"header_option_empty-trash\",\n key: \"empty-trash\",\n label: t(\"Common:EmptySection\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n onClick: this.onEmptyTrashAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1837,
-      "context": "if (isRecycleBinFolder) {\n return [\n {\n id: \"header_option_empty-trash\",\n key: \"empty-trash\",\n label: t(\"Files:EmptySection\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n onClick: this.onEmptyTrashAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,",
+      "line_number": 1839,
+      "context": "if (isRecycleBinFolder) {\n return [\n {\n id: \"header_option_empty-trash\",\n key: \"empty-trash\",\n label: t(\"Common:EmptySection\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n onClick: this.onEmptyTrashAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useHeaderContextMenu.ts",
+      "line_number": 170,
+      "context": "return [\n {\n id: \"header_option_empty-trash\",\n key: \"empty-trash\",\n label: t(\"Common:EmptySection\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n icon: ClearTrashReactSvgUrl,\n disabled: isEmpty || !deleteCtx?.emptyTrash,\n onClick: () => deleteCtx?.emptyTrash?.(),",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -161,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -176,6 +182,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

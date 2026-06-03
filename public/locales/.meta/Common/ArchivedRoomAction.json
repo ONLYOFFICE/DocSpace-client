@@ -3,7 +3,7 @@
   "content": "The room '{{name}}' is archived",
   "content_en_sha1_hash": "4cf8fde269eac548a2798f4497add90e7c4d0b0a",
   "created_at": "2025-05-19T21:30:43.060Z",
-  "updated_at": "2026-06-02T22:18:04.992Z",
+  "updated_at": "2026-06-03T09:30:05.006Z",
   "comment": {
     "text": "This is a toast message indicating that a specific room has been archived. The `{{name}}` variable will be replaced with the name of the archived room.",
     "is_auto": true,
@@ -25,15 +25,21 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2018,
-      "context": ".then(() => {\n const successTranslation =\n folders.length !== 1 && Array.isArray(folders)\n ? t(\"ArchivedRoomsAction\")\n : Array.isArray(folders)\n ? t(\"Common:ArchivedRoomAction\", { name: folders[0].title })\n : t(\"Common:ArchivedRoomAction\", { name: folders.title });\n \n toastr.success(successTranslation);\n \n window.dataLayer = window.dataLayer || [];",
+      "line_number": 2020,
+      "context": ".then(() => {\n const successTranslation =\n folders.length !== 1 && Array.isArray(folders)\n ? t(\"Common:ArchivedRoomsAction\")\n : Array.isArray(folders)\n ? t(\"Common:ArchivedRoomAction\", { name: folders[0].title })\n : t(\"Common:ArchivedRoomAction\", { name: folders.title });\n \n toastr.success(successTranslation);\n \n window.dataLayer = window.dataLayer || [];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2018,
-      "context": ".then(() => {\n const successTranslation =\n folders.length !== 1 && Array.isArray(folders)\n ? t(\"ArchivedRoomsAction\")\n : Array.isArray(folders)\n ? t(\"Common:ArchivedRoomAction\", { name: folders[0].title })\n : t(\"Common:ArchivedRoomAction\", { name: folders.title });\n \n toastr.success(successTranslation);\n \n window.dataLayer = window.dataLayer || [];",
+      "line_number": 2020,
+      "context": ".then(() => {\n const successTranslation =\n folders.length !== 1 && Array.isArray(folders)\n ? t(\"Common:ArchivedRoomsAction\")\n : Array.isArray(folders)\n ? t(\"Common:ArchivedRoomAction\", { name: folders[0].title })\n : t(\"Common:ArchivedRoomAction\", { name: folders.title });\n \n toastr.success(successTranslation);\n \n window.dataLayer = window.dataLayer || [];",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-list/index.tsx",
+      "line_number": 365,
+      "context": "setSelection([]);\n setBufferSelection(null);\n toastr.success(\n ids.length > 1\n ? t(\"Common:ArchivedRoomsAction\")\n : t(\"Common:ArchivedRoomAction\", { name }),\n );\n } catch (e) {\n opAlert = true;\n toastr.error(e as Error);\n } finally {",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

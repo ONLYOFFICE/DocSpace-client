@@ -44,7 +44,6 @@
   "AppliesToRooms": "{{rooms}}（ルームからの共有フォルダー/ファイルを含む）",
   "AppliesToRoomsDescription": "{{rooms}}でのリンク作成を禁止すると、新しいリンクはタイプ「{{productName}}ユーザーのみ」としてのみ作成されます。",
   "AppliesToRoomsWarning": "パブリックルームも内部専用となり、外部ユーザーはアクセスできなくなります。",
-  "AppsDescription": "{{productName}} で利用可能なアプリを管理します。有効なアプリは、アクセス権限を持つユーザーのメインメニューに表示されます。",
   "AuditSubheader": "サブセクションでは、{{productName}}内のエンティティ（ルーム、機会、ファイルなど）に対してユーザーが行った最新の変更（作成、変更、削除など）のリストを閲覧することができます。",
   "AuditTrailNav": "監査証跡",
   "AuthorizationKeysInfo": "認証キーを使用すると、サードパーティサービスをスペースに接続できます。Facebook、Google、LinkedIn で簡単にサインインできます。Dropbox、OneDrive などのアカウントを追加し、そこに保存されているファイルを操作できます。",

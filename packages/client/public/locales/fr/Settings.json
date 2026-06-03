@@ -44,7 +44,6 @@
   "AppliesToRooms": "{{rooms}} (Incluant les dossiers/fichiers partagés depuis la salle)",
   "AppliesToRoomsDescription": "En interdisant la création de liens dans {{rooms}}, les nouveaux liens seront créés uniquement avec le type Utilisateurs {{productName}} uniquement.",
   "AppliesToRoomsWarning": "Les salles publiques deviendront également internes et ne seront plus accessibles aux utilisateurs externes.",
-  "AppsDescription": "Gérez les applications disponibles dans votre {{productName}}. Les applications activées apparaîtront dans le menu principal pour les utilisateurs qui y ont accès.",
   "AuditSubheader": "La sous-section vous permet de parcourir la liste des derniers changements (création, modification, suppression, etc.) apportés par les utilisateurs aux entités (salles, opportunités, fichiers, etc.) de votre {{productName}}.",
   "AuditTrailNav": "Piste d'audit ",
   "AuthorizationKeysInfo": "Grâce aux clés d'autorisation, vous pouvez connecter des services tiers à votre espace. Connectez-vous facilement avec Facebook, Google ou LinkedIn. Ajoutez Dropbox, OneDrive et d'autres comptes pour travailler avec les fichiers qui y sont stockés.",

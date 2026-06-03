@@ -44,7 +44,6 @@
   "AppliesToRooms": "{{rooms}} (Bao gồm các thư mục/tệp được chia sẻ từ phòng)",
   "AppliesToRoomsDescription": "Bằng cách cấm tạo liên kết trong {{rooms}}, các liên kết mới sẽ chỉ được tạo với loại chỉ dành cho người dùng {{productName}}.",
   "AppliesToRoomsWarning": "Các Phòng Công khai cũng sẽ trở thành nội bộ và không thể truy cập đối với người dùng bên ngoài.",
-  "AppsDescription": "Quản lý các ứng dụng nào có sẵn trong {{productName}} của bạn. Các ứng dụng đã bật sẽ xuất hiện trong menu chính cho những người dùng có quyền truy cập vào chúng.",
   "AuditSubheader": "Phần phụ cho phép bạn duyệt qua danh sách các thay đổi mới nhất (tạo, sửa đổi, xóa, v.v.) do người dùng thực hiện đối với các thực thể (phòng, cơ hội, tập tin, v.v.) trong {{productName}} của bạn.",
   "AuditTrailNav": "Kiểm tra Truy nguyên",
   "AuthorizationKeysInfo": "Với Khóa ủy quyền, bạn có thể kết nối các dịch vụ bên thứ ba với không gian của mình. Đăng nhập dễ dàng bằng Facebook, Google hoặc LinkedIn. Thêm Dropbox, OneDrive và các tài khoản khác để làm việc với các tệp được lưu trữ ở đó.",

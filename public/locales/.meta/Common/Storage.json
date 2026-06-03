@@ -3,7 +3,7 @@
   "content": "Storage",
   "content_en_sha1_hash": "9e092dda4f0e27d0c7686ddd00272079e678b6e6",
   "created_at": "2025-05-19T21:30:49.092Z",
-  "updated_at": "2026-06-03T08:15:43.531Z",
+  "updated_at": "2026-06-03T09:30:05.054Z",
   "comment": {
     "text": "This is a label or title referring to data storage. It appears in various contexts, such as displaying storage information for users or as part of a larger phrase like \"Storage and Quota.\"",
     "is_auto": true,
@@ -70,6 +70,12 @@
       "line_number": 89,
       "context": "name: t(\"Common:RestoreBackup\"),\n content: <LoaderWrapper isLoading={isLoading}>{children}</LoaderWrapper>,\n },\n {\n id: \"encrypt-data\",\n name: t(\"Common:Storage\"),\n content: <LoaderWrapper isLoading={isLoading}>{children}</LoaderWrapper>,\n },\n ];\n \n const getCurrentTab = () => {",
       "module": "/packages/management"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/info-panel/views/details.tsx",
+      "line_number": 128,
+      "context": "title={\n agent.quotaLimit !== undefined\n ? t(\"Common:StorageAndQuota\", {\n defaultValue: \"Storage and quota\",\n })\n : t(\"Common:Storage\", { defaultValue: \"Storage\" })\n }\n variant=\"muted\"\n >\n {storageLabel}\n </Row>",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

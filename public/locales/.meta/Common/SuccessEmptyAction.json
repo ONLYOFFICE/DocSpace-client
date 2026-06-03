@@ -1,26 +1,20 @@
 {
-  "key_path": "DeleteForeverTitle",
-  "content": "Delete forever?",
-  "content_en_sha1_hash": "0e0027aade000ea790cb5c39b96cbcc240beec7d",
-  "created_at": "2025-05-19T21:30:56.571Z",
-  "updated_at": "2026-05-24T17:27:49.092Z",
+  "key_path": "SuccessEmptyAction",
+  "content": "{{sectionName}} section emptied",
+  "content_en_sha1_hash": "df4e66924e48d30b0bdb4fe7ae72a61232a0f40c",
+  "created_at": "2026-06-03T09:30:00.240Z",
+  "updated_at": "2026-06-03T09:31:09.459Z",
   "comment": {
-    "text": "This is the title of a confirmation dialog that appears when a user attempts to permanently delete items from the Recycle Bin.",
+    "text": "Toast message confirming that all items in a specific area have been deleted. {{sectionName}} represents the name of the emptied section.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:06:28.725Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-06-03T09:31:09.459Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 225,
-      "context": "if (isRoomDelete) {\n if (selection.length > 1) return t(\"Common:DeleteRoomsTitle\");\n return t(\"Common:DeleteRoomTitle\");\n }\n \n if (isRecycleBinFolder) return t(\"EmptyTrashDialog:DeleteForeverTitle\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:Confirmation\");\n \n if (unsubscribe) return t(\"Common:RemoveFromList\");",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/dialogs/EmptyTrashDialog/index.js",
-      "line_number": 107,
-      "context": "isLoading={!tReady}\n visible={visible}\n onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>{t(\"DeleteForeverTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{description}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "line_number": 70,
+      "context": "const onEmptyTrash = () => {\n onClose();\n \n const translations = {\n successOperation: t(\"Common:SuccessEmptyAction\", { sectionName }),\n };\n \n if (isPersonalReadOnly) {\n emptyPersonalRoom(translations);",
       "module": "/packages/client"
     }
   ],
@@ -155,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

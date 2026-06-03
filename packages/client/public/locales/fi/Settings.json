@@ -44,7 +44,6 @@
   "AppliesToRooms": "{{rooms}} (sisältäen jaetut kansiot/tiedostot huoneesta)",
   "AppliesToRoomsDescription": "Kieltämällä linkin luominen kohteessa {{rooms}}, uudet linkit luodaan vain tyypillä {{productName}} käyttäjät.",
   "AppliesToRoomsWarning": "Julkisista huoneista tulee myös vain sisäisiä, eivätkä ne ole ulkoisten käyttäjien käytettävissä.",
-  "AppsDescription": "Hallitse, mitkä sovellukset ovat käytettävissä {{productName}}-palvelussasi. Käytössä olevat sovellukset näkyvät päävalikossa käyttäjille, joilla on niihin oikeus.",
   "AuditSubheader": "Alaosio mahdollistaa käyttäjien {{productName}}-kokonaisuuksiin (huoneet, mahdollisuudet, tiedostot jne.) tekemien viimeisimpien muutosten (luonti, muokkaus, poisto jne.) selaamisen listan kautta.",
   "AuditTrailNav": "Tapahtumien seuranta",
   "AuthorizationKeysInfo": "Valtuutusavaimien avulla voit yhdistää kolmannen osapuolen palveluja tilaan. Kirjaudu helposti Facebook-, Google- tai LinkedIn-tilillä. Lisää Dropbox, OneDrive ja muut tilit käyttääksesi siellä tallennettuja tiedostoja.",

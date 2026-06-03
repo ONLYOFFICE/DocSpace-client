@@ -3,7 +3,7 @@
   "content": "Delete these rooms?",
   "content_en_sha1_hash": "c967f45320fc05a009dc2435460fcd31e741161b",
   "created_at": "2026-05-15T14:00:05.314Z",
-  "updated_at": "2026-05-24T17:27:49.092Z",
+  "updated_at": "2026-06-03T09:30:05.031Z",
   "comment": {
     "text": "Dialog title used for confirmation when multiple rooms are selected for deletion.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
       "line_number": 221,
-      "context": "if (isTemplate) {\n return `${t(\"Files:DeleteTemplateAction\")}?`;\n }\n \n if (isRoomDelete) {\n if (selection.length > 1) return t(\"Common:DeleteRoomsTitle\");\n return t(\"Common:DeleteRoomTitle\");\n }\n \n if (isRecycleBinFolder) return t(\"EmptyTrashDialog:DeleteForeverTitle\");",
+      "context": "if (isTemplate) {\n return `${t(\"Files:DeleteTemplateAction\")}?`;\n }\n \n if (isRoomDelete) {\n if (selection.length > 1) return t(\"Common:DeleteRoomsTitle\");\n return t(\"Common:DeleteRoomTitle\");\n }\n \n if (isRecycleBinFolder) return t(\"Common:DeleteForeverTitle\");",
       "module": "/packages/client"
     },
     {

@@ -1,33 +1,33 @@
 {
-  "key_path": "ByErasure",
-  "content": "Erasure",
-  "content_en_sha1_hash": "e5eaa5fb5b757374407ffad2c33964c599e1aee8",
-  "created_at": "2025-05-19T21:30:55.314Z",
-  "updated_at": "2026-05-15T14:00:06.746Z",
+  "key_path": "RestoreAll",
+  "content": "Restore all",
+  "content_en_sha1_hash": "9eca7fb8c0e99c10b51061dabb85aee7a49051cf",
+  "created_at": "2026-06-03T09:30:00.194Z",
+  "updated_at": "2026-06-03T09:31:59.033Z",
   "comment": {
-    "text": "This is a column header and a filter option label in the file list, referring to the date of an item's last modification or \"erasure\" (deletion/removal).",
+    "text": "Menu item label in a context menu used to restore all items.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:10:23.577Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-06-03T09:31:59.033Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 276,
-      "context": ": {};\n \n const erasureBlock = isPersonalReadOnly\n ? {\n key: \"Erasure\",\n title: t(\"ByErasure\"),\n enable: erasureColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.ModifiedDate,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 1849,
+      "context": "disabled: false,\n },\n {\n id: \"header_option_restore-all\",\n key: \"restore-all\",\n label: t(\"Common:RestoreAll\"),\n onClick: this.onRestoreAllAction,\n icon: MoveReactSvgUrl,\n disabled: false,\n },\n ];",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 276,
-      "context": ": {};\n \n const erasureBlock = isPersonalReadOnly\n ? {\n key: \"Erasure\",\n title: t(\"ByErasure\"),\n enable: erasureColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.ModifiedDate,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 1849,
+      "context": "disabled: false,\n },\n {\n id: \"header_option_restore-all\",\n key: \"restore-all\",\n label: t(\"Common:RestoreAll\"),\n onClick: this.onRestoreAllAction,\n icon: MoveReactSvgUrl,\n disabled: false,\n },\n ];",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1586,
-      "context": "default: true,\n };\n const erasure = {\n id: \"sort-by_erasure\",\n key: SortByFieldName.ModifiedDate,\n label: t(\"ByErasure\"),\n default: true,\n };\n const tags = {\n id: \"sort-by_tags\",\n key: SortByFieldName.Tags,",
-      "module": "/packages/client"
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useHeaderContextMenu.ts",
+      "line_number": 180,
+      "context": "onClick: () => deleteCtx?.emptyTrash?.(),\n },\n {\n id: \"header_option_restore-all\",\n key: \"restore-all\",\n label: t(\"Common:RestoreAll\"),\n icon: MoveReactSvgUrl,\n disabled: isEmpty || !fileOpsCtx?.restoreItems,\n onClick: () => fileOpsCtx?.restoreItems(allItems),\n },\n ];",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -176,6 +176,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -19,6 +19,9 @@ import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import ShareSvgUrl from "PUBLIC_DIR/images/icons/12/share.svg?url";
 import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
+import PinReactSvgUrl from "PUBLIC_DIR/images/pin.react.svg?url";
+import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
+import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import DuplicateReactSvgUrl from "PUBLIC_DIR/images/icons/16/duplicate.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
@@ -62,6 +65,14 @@ type UseContextMenuModelProps = {
    * client's `filesActionsStore.retryVectorization` wiring.
    */
   onRetryVectorization?: (item: TFileItem) => void;
+  /**
+   * Switches `getHeaderContextMenuModel` to the rooms branch (pin/unpin,
+   * archive, delete-room) instead of the generic file actions. Set by
+   * `RoomsLayout` for the active-rooms section.
+   */
+  isRoomsFolder?: boolean;
+  onArchiveSelectedClick?: (items: (TFileItem | TFolderItem)[]) => void;
+  onPinSelectedClick?: (items: (TFileItem | TFolderItem)[]) => void;
 };
 
 export default function useContextMenuModel({
@@ -80,6 +91,9 @@ export default function useContextMenuModel({
   onRestoreSelectedClick,
   onShowVersionHistoryClick,
   onRetryVectorization,
+  isRoomsFolder,
+  onArchiveSelectedClick,
+  onPinSelectedClick,
 }: UseContextMenuModelProps) {
   const { t } = useTranslation(["Common"]);
 
@@ -540,14 +554,55 @@ export default function useContextMenuModel({
     return {
       id: "option_delete",
       key: "delete",
-      label: t("Common:Delete"),
+      label: isRoomsFolder ? t("Common:DeleteRoom") : t("Common:Delete"),
       icon: TrashReactSvgUrl,
       onClick: () => {
         onDeleteSelectedClick?.(filesSelectionStore.selection);
       },
       disabled: !onDeleteSelectedClick || !canDelete,
     };
-  }, [t, onDeleteSelectedClick, filesSelectionStore.selection]);
+  }, [t, isRoomsFolder, onDeleteSelectedClick, filesSelectionStore.selection]);
+
+  // Mirrors client's `getOption("pin"|"unpin")` toggle: if any selected room
+  // is unpinned, the bulk action pins; only when *every* room is already
+  // pinned do we offer "Unpin".
+  const getRoomsPinItem = useCallback(() => {
+    const allPinned =
+      filesSelectionStore.selection.length > 0 &&
+      filesSelectionStore.selection.every(
+        (i) => "pinned" in i && (i as { pinned?: boolean }).pinned,
+      );
+    return {
+      id: allPinned ? "option_unpin" : "option_pin",
+      key: allPinned ? "unpin" : "pin",
+      label: allPinned ? t("Common:Unpin") : t("Common:Pin"),
+      icon: allPinned ? UnpinReactSvgUrl : PinReactSvgUrl,
+      onClick: () => {
+        onPinSelectedClick?.(filesSelectionStore.selection);
+      },
+      disabled: !onPinSelectedClick,
+    };
+  }, [t, onPinSelectedClick, filesSelectionStore.selection]);
+
+  const getRoomsArchiveItem = useCallback(() => {
+    const canArchive = filesSelectionStore.selection.every(
+      (i) => i.security.Move,
+    );
+    return {
+      id: "option_archive",
+      key: "archive",
+      label: t("Common:MoveToArchive"),
+      icon: RoomArchiveSvgUrl,
+      onClick: () => {
+        onArchiveSelectedClick?.(filesSelectionStore.selection);
+      },
+      disabled: !onArchiveSelectedClick || !canArchive,
+    };
+  }, [t, onArchiveSelectedClick, filesSelectionStore.selection]);
+
+  const getRoomsFolderOptions = useCallback(() => {
+    return [getRoomsPinItem(), getRoomsArchiveItem(), getGroupDeleteItem()];
+  }, [getRoomsPinItem, getRoomsArchiveItem, getGroupDeleteItem]);
 
   const getGroupContextMenuModel = useCallback(() => {
     const items = [];
@@ -592,9 +647,12 @@ export default function useContextMenuModel({
   ]);
 
   const getHeaderContextMenuModel = useCallback(() => {
-    const base = getGroupContextMenuModel();
+    const base = isRoomsFolder
+      ? getRoomsFolderOptions()
+      : getGroupContextMenuModel();
 
     const singleFile =
+      !isRoomsFolder &&
       filesSelectionStore.selection.length === 1 &&
       !filesSelectionStore.selection[0].isFolder
         ? (filesSelectionStore.selection[0] as TFileItem)
@@ -642,6 +700,8 @@ export default function useContextMenuModel({
       key: i.key,
     }));
   }, [
+    isRoomsFolder,
+    getRoomsFolderOptions,
     getGroupContextMenuModel,
     getMarkAsFavoriteItem,
     getRemoveFromFavoritesItem,

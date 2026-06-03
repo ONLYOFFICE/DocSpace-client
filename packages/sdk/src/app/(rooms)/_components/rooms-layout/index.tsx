@@ -75,9 +75,14 @@ import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { normalizeRoomLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
 
 import RoomsList from "../rooms-list";
+import type { RoomActions } from "../rooms-list";
 import RoomsFilter from "../rooms-filter";
 import CreateEditRoomDialog from "../create-edit-room-dialog";
 import { useRoomsTagsStore } from "../../_store/RoomsTagsStore";
+import {
+  RoomActionsContext,
+  type RoomActionsHandler,
+} from "../../_contexts/RoomActionsContext";
 import {
   InfoPanelBody as DocsInfoPanelBody,
   InfoPanelHeader as DocsInfoPanelHeader,
@@ -164,6 +169,22 @@ const RoomsLayout = observer(
 
     const dialogsStore = useDialogsStore();
     const refreshRef = React.useRef<(() => void) | null>(null);
+    const roomActionsRef = React.useRef<RoomActions | null>(null);
+
+    // Stable RoomActionsContext handler — values are bridged to RoomsList's
+    // bulk actions via `roomActionsRef` (same pattern as `refreshRef`).
+    // Provided only for active rooms; archive mode skips it (different
+    // action set, TODO).
+    const roomActionsHandler = React.useMemo<RoomActionsHandler | null>(() => {
+      if (isArchive) return null;
+      return {
+        archiveSelected: (items) =>
+          roomActionsRef.current?.archiveSelected(items),
+        deleteSelected: (items) =>
+          roomActionsRef.current?.deleteSelected(items),
+        pinSelected: (items) => roomActionsRef.current?.pinSelected(items),
+      };
+    }, [isArchive]);
 
     const createCustomRoom = React.useCallback(() => {
       dialogsStore.openDialog(SDKDialogs.CreateRoom);
@@ -220,6 +241,7 @@ const RoomsLayout = observer(
     // );
 
     return (
+      <RoomActionsContext.Provider value={roomActionsHandler}>
       <div className={styles.root} style={frameHeaderVars}>
         <RootScrollbar>
           <SectionWrapper
@@ -269,6 +291,7 @@ const RoomsLayout = observer(
                 user={user}
                 isArchive={isArchive}
                 refreshRef={refreshRef}
+                roomActionsRef={roomActionsRef}
                 infoPanelVisible={infoPanelStore.isVisible}
               />
             }
@@ -291,6 +314,7 @@ const RoomsLayout = observer(
           <InfoPanelEditLinkDialog />
         </RootScrollbar>
       </div>
+      </RoomActionsContext.Provider>
     );
   },
 );

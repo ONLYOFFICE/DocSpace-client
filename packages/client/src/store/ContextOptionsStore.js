@@ -496,8 +496,8 @@ class ContextOptionsStore {
       .lockFileAction(id, !locked)
       .then(() =>
         locked
-          ? toastr.success(t("Translations:FileUnlocked"))
-          : toastr.success(t("Translations:FileLocked")),
+          ? toastr.success(t("Common:FileUnlocked"))
+          : toastr.success(t("Common:FileLocked")),
       )
       .catch((err) => {
         toastr.error(err);

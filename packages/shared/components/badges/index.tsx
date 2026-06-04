@@ -59,7 +59,11 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { Badge } from "@docspace/ui-kit/components/badge";
 
-import { RoomsType, ShareAccessRights, VectorizationStatus } from "../../enums";
+import {
+  // RoomsType,
+  // ShareAccessRights,
+  VectorizationStatus,
+} from "../../enums";
 import { globalColors } from "@docspace/ui-kit/providers/theme";
 
 import {
@@ -127,7 +131,7 @@ const Badges = ({
   isMutedBadge,
   isArchiveFolderRoot,
   // onCopyPrimaryLink,
-  isArchiveFolder,
+  // isArchiveFolder,
   isTemplatesFolder,
   onCreateRoom,
   newFilesBadge,
@@ -226,21 +230,21 @@ const Badges = ({
       ? { onClick: onShowVersionHistory }
       : {};
 
-  const isPublicRoomType =
-    item.roomType === RoomsType.PublicRoom ||
-    item.roomType === RoomsType.FormRoom ||
-    item.roomType === RoomsType.CustomRoom;
+  // const isPublicRoomType =
+  //   item.roomType === RoomsType.PublicRoom ||
+  //   item.roomType === RoomsType.FormRoom ||
+  //   item.roomType === RoomsType.CustomRoom;
 
-  const haveLinksRight =
-    item?.access === ShareAccessRights.RoomManager ||
-    item?.access === ShareAccessRights.None;
+  // const haveLinksRight =
+  //   item?.access === ShareAccessRights.RoomManager ||
+  //   item?.access === ShareAccessRights.None;
 
-  const showCopyLinkIcon =
-    isPublicRoomType &&
-    haveLinksRight &&
-    item.shared &&
-    !isArchiveFolder &&
-    !isTile;
+  // const showCopyLinkIcon =
+  //   isPublicRoomType &&
+  //   haveLinksRight &&
+  //   item.shared &&
+  //   !isArchiveFolder &&
+  //   !isTile;
 
   const hasRetryVectorizationAccess =
     security && "Vectorization" in security && security.Vectorization;

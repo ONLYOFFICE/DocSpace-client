@@ -144,6 +144,7 @@ const RoomsLayout = observer(
           const merged = {
             ...existing,
             ...(updated as unknown as Record<string, unknown>),
+            ...normalizeRoomLogo(rawLogo),
           } as unknown as typeof existing;
           filesListStore.replaceItem(sel.id, merged);
         }

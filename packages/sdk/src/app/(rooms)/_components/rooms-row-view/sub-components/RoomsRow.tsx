@@ -138,6 +138,7 @@ const RoomsRow = observer(
         showDefault={
           "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
         }
+        imgClassName="react-svg-icon"
       />
     );
 

@@ -2163,5 +2163,6 @@
   "RestoreAll": "Επαναφορά όλων",
   "DeleteForeverTitle": "Οριστική διαγραφή;",
   "DeleteForeverNote": "Όλα τα στοιχεία από την ενότητα {{sectionName}} θα διαγραφούν για πάντα. Δεν θα μπορείτε να τα επαναφέρετε.",
-  "SuccessEmptyAction": "Το τμήμα {{sectionName}} άδειασε"
+  "SuccessEmptyAction": "Το τμήμα {{sectionName}} άδειασε",
+  "Pin": "Καρφίτσωμα"
 }

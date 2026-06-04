@@ -2171,5 +2171,6 @@
   "RestoreAll": "Povrati sve",
   "DeleteForeverTitle": "Obrisati zauvek?",
   "DeleteForeverNote": "Svi elementi iz odeljka {{sectionName}} biće trajno izbrisani. Nećete moći da ih vratite.",
-  "SuccessEmptyAction": "Odeljak {{sectionName}} je ispražnjen"
+  "SuccessEmptyAction": "Odeljak {{sectionName}} je ispražnjen",
+  "Pin": "Zakači"
 }

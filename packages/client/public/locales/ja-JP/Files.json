@@ -104,7 +104,6 @@
   "OtherProcesses": "他のプロセス",
   "PersonalContentRemovalNotice": "あなたの{{sectionName}}セクション内の個人ファイルとフォルダは、ゲストはこのセクションにアクセスできないため<1>削除されます</1>。ファイルは<1>30日間</1>、閲覧およびダウンロードが可能です。",
   "PersonalFolderErasureWarning": "ユーザータイプが「ゲスト」に変更されました。個人ファイルは30日後に削除されます。",
-  "Pin": "固定",
   "Protected": "保護されている",
   "RecentlyOpenedTooltip": "最近リンクで開いたファイル",
   "ReEncryptingFiles": "ファイルを再暗号化中",

@@ -2171,5 +2171,6 @@
   "RestoreAll": "Restore all",
   "DeleteForeverTitle": "Delete forever?",
   "DeleteForeverNote": "All items from the {{sectionName}} section will be deleted forever. You won’t be able to restore them.",
-  "SuccessEmptyAction": "{{sectionName}} section emptied"
+  "SuccessEmptyAction": "{{sectionName}} section emptied",
+  "Pin": "Pin"
 }

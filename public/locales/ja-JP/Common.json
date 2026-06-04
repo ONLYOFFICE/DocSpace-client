@@ -2171,5 +2171,6 @@
   "RestoreAll": "すべて復元",
   "DeleteForeverTitle": "永久削除？",
   "DeleteForeverNote": "{{sectionName}}セクションのすべてのアイテムは永遠に削除されます。復元することはできません。",
-  "SuccessEmptyAction": "{{sectionName}} セクションが空になりました"
+  "SuccessEmptyAction": "{{sectionName}} セクションが空になりました",
+  "Pin": "固定"
 }

@@ -2171,5 +2171,6 @@
   "RestoreAll": "Վերականգնել բոլորը",
   "DeleteForeverTitle": "Ջնջե՞լ ընդմիշտ",
   "DeleteForeverNote": "Բոլոր տարրերը «{{sectionName}}» բաժնից կջնջվեն ընդմիշտ։ Դրանք հնարավոր չի լինի վերականգնել։",
-  "SuccessEmptyAction": "«{{sectionName}}» բաժինը դատարկվեց"
+  "SuccessEmptyAction": "«{{sectionName}}» բաժինը դատարկվեց",
+  "Pin": "Ամրացնել"
 }

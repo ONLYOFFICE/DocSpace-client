@@ -2163,5 +2163,6 @@
   "RestoreAll": "Her şeyi eski haline getir",
   "DeleteForeverTitle": "Kalıcı olarak sil?",
   "DeleteForeverNote": "{{sectionName}} bölümündeki tüm öğeler kalıcı olarak silinecek. Bunları geri yükleyemeyeceksiniz.",
-  "SuccessEmptyAction": "{{sectionName}} bölümü boşaltıldı"
+  "SuccessEmptyAction": "{{sectionName}} bölümü boşaltıldı",
+  "Pin": "Sabitle"
 }

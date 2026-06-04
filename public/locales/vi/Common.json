@@ -2163,5 +2163,6 @@
   "RestoreAll": "Khôi phục tất cả",
   "DeleteForeverTitle": "Xóa vĩnh viễn?",
   "DeleteForeverNote": "Tất cả các mục từ phần {{sectionName}} này sẽ bị xóa vĩnh viễn. Bạn sẽ không thể khôi phục chúng.",
-  "SuccessEmptyAction": "Phần {{sectionName}} đã được làm trống"
+  "SuccessEmptyAction": "Phần {{sectionName}} đã được làm trống",
+  "Pin": "Ghim"
 }

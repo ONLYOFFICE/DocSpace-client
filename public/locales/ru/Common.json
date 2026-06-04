@@ -2171,5 +2171,6 @@
   "RestoreAll": "Восстановить все",
   "DeleteForeverTitle": "Удалить навсегда?",
   "DeleteForeverNote": "Все элементы из раздела {{sectionName}} будут удалены навсегда. Вы не сможете их восстановить.",
-  "SuccessEmptyAction": "Раздел {{sectionName}} очищен"
+  "SuccessEmptyAction": "Раздел {{sectionName}} очищен",
+  "Pin": "Закрепить"
 }

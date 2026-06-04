@@ -2163,5 +2163,6 @@
   "RestoreAll": "Възстановете всичко",
   "DeleteForeverTitle": "Изтриване завинаги?",
   "DeleteForeverNote": "Всички елементи от раздел {{sectionName}} ще бъдат изтрити завинаги. Няма да можете да ги възстановите.",
-  "SuccessEmptyAction": "Раздел {{sectionName}} е изпразнен"
+  "SuccessEmptyAction": "Раздел {{sectionName}} е изпразнен",
+  "Pin": "ПИН"
 }

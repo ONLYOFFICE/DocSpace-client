@@ -2163,5 +2163,6 @@
   "RestoreAll": "ກູ້ຄືນທັງໝົດ",
   "DeleteForeverTitle": "ລຶບຖາວອນບໍ?",
   "DeleteForeverNote": "ສິ່ງຂອງທັງໝົດຈາກພາກສ່ວນ {{sectionName}} ຈະຖືກລົບອອກຢ່າງຖາວອນ ແລະທ່ານຈະບໍ່ສາມາດຟື້ນຕົວພວກມັນໄດ້.",
-  "SuccessEmptyAction": "ພາກສ່ວນ {{sectionName}} ເຊື່ອມໂຍງອອກແລ້ວ"
+  "SuccessEmptyAction": "ພາກສ່ວນ {{sectionName}} ເຊື່ອມໂຍງອອກແລ້ວ",
+  "Pin": "ປັກໝຸດ"
 }

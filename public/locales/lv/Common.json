@@ -2163,5 +2163,6 @@
   "RestoreAll": "Atjaunot visu",
   "DeleteForeverTitle": "Vai dzēst uz visiem laikiem?",
   "DeleteForeverNote": "Visi {{sectionName}} sadaļas elementi tiks neatgriezeniski dzēsti. Jūs nevarēsiet tos atjaunot.",
-  "SuccessEmptyAction": "{{sectionName}} sadaļa iztukšota"
+  "SuccessEmptyAction": "{{sectionName}} sadaļa iztukšota",
+  "Pin": "Piespraust"
 }

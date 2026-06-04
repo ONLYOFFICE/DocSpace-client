@@ -2163,5 +2163,6 @@
   "RestoreAll": "Obnovi vse",
   "DeleteForeverTitle": "Izbriši za vedno?",
   "DeleteForeverNote": "Vsi elementi iz razdelka {{sectionName}} bodo za vedno izbrisani. Ne boste jih mogli obnoviti.",
-  "SuccessEmptyAction": "Razdelek {{sectionName}} je izpraznjen"
+  "SuccessEmptyAction": "Razdelek {{sectionName}} je izpraznjen",
+  "Pin": "Pripni"
 }

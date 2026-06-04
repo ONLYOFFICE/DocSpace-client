@@ -2163,5 +2163,6 @@
   "RestoreAll": "Restaurar tudo",
   "DeleteForeverTitle": "Eliminar para sempre?",
   "DeleteForeverNote": "Todos os itens da secção {{sectionName}} serão eliminados para sempre. Não os poderá restaurar.",
-  "SuccessEmptyAction": "{{sectionName}} Secção esvaziada"
+  "SuccessEmptyAction": "{{sectionName}} Secção esvaziada",
+  "Pin": "Afixar"
 }

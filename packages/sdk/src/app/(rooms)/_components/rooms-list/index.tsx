@@ -174,7 +174,7 @@ const RoomsList = ({
     if (sp.get("sortBy")) f.sortBy = sp.get("sortBy") as typeof f.sortBy;
     if (sp.get("sortOrder"))
       f.sortOrder = sp.get("sortOrder") as typeof f.sortOrder;
-    if (sp.get("search")) f.filterValue = sp.get("search");
+    if (sp.get("filterValue")) f.filterValue = sp.get("filterValue");
     const tagsRaw = sp.get("tags");
     if (tagsRaw) {
       try {
@@ -499,7 +499,8 @@ const RoomsList = ({
       newFilter.sortBy = sp.get("sortBy") as typeof newFilter.sortBy;
     if (sp.get("sortOrder"))
       newFilter.sortOrder = sp.get("sortOrder") as typeof newFilter.sortOrder;
-    if (sp.get("search")) newFilter.filterValue = sp.get("search");
+    if (sp.get("filterValue"))
+      newFilter.filterValue = sp.get("filterValue");
     const tagsRaw = sp.get("tags");
     if (tagsRaw) {
       try {
@@ -684,8 +685,9 @@ const RoomsList = ({
     setRootFolderType(current.rootFolderType);
   }, [current.rootFolderType, setRootFolderType]);
 
-  const visibleItems =
-    filesListStore.items.length > 0 ? filesListStore.items : initialItems;
+  const visibleItems = initRef.current
+    ? filesListStore.items
+    : initialItems;
 
   let content: React.ReactNode;
 

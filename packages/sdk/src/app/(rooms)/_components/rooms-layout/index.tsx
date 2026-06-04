@@ -91,6 +91,7 @@ import {
 import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
 
 import styles from "./RoomsLayout.module.scss";
+import { Text } from "@docspace/ui-kit/components";
 
 type RoomsLayoutProps = {
   folders: TFolder[];
@@ -245,27 +246,37 @@ const RoomsLayout = observer(
 
     return (
       <RoomActionsContext.Provider value={roomActionsHandler}>
-      <div className={styles.root} style={frameHeaderVars}>
-        <RootScrollbar>
-          <SectionWrapper
-            sectionHeaderContent={
-              <Header
-                current={current}
-                pathParts={pathParts}
-                isEmptyList={isEmptyList}
-                headerOffset={headerOffset}
-                isInfoPanelVisible={infoPanelStore.isVisible}
-                onToggleInfoPanel={infoPanelStore.toggle}
-              />
-            }
-            sectionFilterContent={
-              <>
-                {!isArchive && (
-                  <QuickActions
-                    items={quickActionItems}
-                    className={styles.quickActions}
-                  />
-                )}
+        <div className={styles.root} style={frameHeaderVars}>
+          <RootScrollbar>
+            <SectionWrapper
+              sectionBannerContent={
+                !isArchive && canCreateRooms ? (
+                  <div className={styles.createNewSection}>
+                    <Text
+                      fontSize="18px"
+                      fontWeight={700}
+                      className={styles.createNewTitle}
+                    >
+                      {t("Common:CreateNew")}
+                    </Text>
+                    <QuickActions
+                      items={quickActionItems}
+                      className={styles.quickActions}
+                    />
+                  </div>
+                ) : undefined
+              }
+              sectionHeaderContent={
+                <Header
+                  current={current}
+                  pathParts={pathParts}
+                  isEmptyList={isEmptyList}
+                  headerOffset={headerOffset}
+                  isInfoPanelVisible={infoPanelStore.isVisible}
+                  onToggleInfoPanel={infoPanelStore.toggle}
+                />
+              }
+              sectionFilterContent={
                 <RoomsFilter
                   filesFilter={filesFilter}
                   isArchive={isArchive}
@@ -280,46 +291,46 @@ const RoomsLayout = observer(
                     hideArrow: true,
                   }}
                 />
-              </>
-            }
-            sectionBodyContent={
-              <RoomsList
-                total={total}
-                folders={folders}
-                files={files}
-                filesSettings={filesSettings}
-                portalSettings={portalSettings}
-                filesFilter={filesFilter}
-                current={current}
-                user={user}
-                isArchive={isArchive}
-                refreshRef={refreshRef}
-                roomActionsRef={roomActionsRef}
-                infoPanelVisible={infoPanelStore.isVisible}
-              />
-            }
-            infoPanelHeaderContent={<DocsInfoPanelHeader />}
-            infoPanelBodyContent={
-              <DocsInfoPanelBody onTagsChanged={onInfoPanelTagsChanged} />
-            }
-            isInfoPanelVisible={infoPanelStore.isVisible}
-            setIsInfoPanelVisible={infoPanelStore.setVisible}
-            isEmptyPage={isEmptyList}
-            filesFilter={filesFilter}
-          />
-          <CreateEditRoomDialog
-            visible={dialogsStore.isDialogOpen(SDKDialogs.CreateRoom)}
-            onClose={closeCreateRoomDialog}
-            onRoomCreated={onRoomCreated}
-          />
-          <SelectionArea isRooms />
-          <DeviceTypeObserver />
-          <InfoPanelEditLinkDialog />
-        </RootScrollbar>
-      </div>
+              }
+              sectionBodyContent={
+                <RoomsList
+                  total={total}
+                  folders={folders}
+                  files={files}
+                  filesSettings={filesSettings}
+                  portalSettings={portalSettings}
+                  filesFilter={filesFilter}
+                  current={current}
+                  user={user}
+                  isArchive={isArchive}
+                  refreshRef={refreshRef}
+                  roomActionsRef={roomActionsRef}
+                  infoPanelVisible={infoPanelStore.isVisible}
+                />
+              }
+              infoPanelHeaderContent={<DocsInfoPanelHeader />}
+              infoPanelBodyContent={
+                <DocsInfoPanelBody onTagsChanged={onInfoPanelTagsChanged} />
+              }
+              isInfoPanelVisible={infoPanelStore.isVisible}
+              setIsInfoPanelVisible={infoPanelStore.setVisible}
+              isEmptyPage={isEmptyList}
+              filesFilter={filesFilter}
+            />
+            <CreateEditRoomDialog
+              visible={dialogsStore.isDialogOpen(SDKDialogs.CreateRoom)}
+              onClose={closeCreateRoomDialog}
+              onRoomCreated={onRoomCreated}
+            />
+            <SelectionArea isRooms />
+            <DeviceTypeObserver />
+            <InfoPanelEditLinkDialog />
+          </RootScrollbar>
+        </div>
       </RoomActionsContext.Provider>
     );
   },
 );
 
 export default RoomsLayout;
+

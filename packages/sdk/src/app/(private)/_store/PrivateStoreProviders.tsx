@@ -41,6 +41,7 @@ import type { TViewAs } from "@docspace/shared/types";
 
 import RoomsQueryProvider from "@/app/(rooms)/_components/query-provider";
 import { RoomsOperationsStoreContextProvider } from "@/app/(rooms)/_store/RoomsOperationsStore";
+import { RoomsTagsStoreContextProvider } from "@/app/(rooms)/_store/RoomsTagsStore";
 
 import { PrivateBaseStoreProviders } from "./PrivateBaseStoreProviders";
 import { PrivateRoomsFilterStoreProvider } from "./PrivateRoomsFilterStore";
@@ -59,8 +60,9 @@ import { PrivateDialogs } from "../_components/dialogs";
 //            └─ PrivateEncryptedUploadStore
 //               └─ PrivateDialogsStore
 //                  └─ RoomsOperationsStore (reused from (rooms))
-//                     └─ EncryptionIdentityStore
-//                        └─ EncryptionShell (+ effects + dialogs)
+//                     └─ RoomsTagsStore (reused from (rooms))
+//                        └─ EncryptionIdentityStore
+//                           └─ EncryptionShell (+ effects + dialogs)
 export const PrivateStoreProviders = ({
   children,
   initViewAs = "row",
@@ -76,12 +78,14 @@ export const PrivateStoreProviders = ({
             <PrivateEncryptedUploadStoreProvider>
               <PrivateDialogsStoreProvider>
                 <RoomsOperationsStoreContextProvider>
-                  <EncryptionIdentityStoreProvider>
-                    <EncryptionShell>
-                      {children}
-                      <PrivateDialogs />
-                    </EncryptionShell>
-                  </EncryptionIdentityStoreProvider>
+                  <RoomsTagsStoreContextProvider>
+                    <EncryptionIdentityStoreProvider>
+                      <EncryptionShell>
+                        {children}
+                        <PrivateDialogs />
+                      </EncryptionShell>
+                    </EncryptionIdentityStoreProvider>
+                  </RoomsTagsStoreContextProvider>
                 </RoomsOperationsStoreContextProvider>
               </PrivateDialogsStoreProvider>
             </PrivateEncryptedUploadStoreProvider>

@@ -42,6 +42,7 @@ import classNames from "classnames";
 
 import { TableRow } from "@docspace/ui-kit/components/table";
 import { TableCell } from "@docspace/ui-kit/components/table";
+import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
@@ -68,9 +69,10 @@ import { FileOperationsContext } from "../../../../_contexts/FileOperationsConte
 import { RenameContext } from "../../../../_contexts/RenameContext";
 import { VersionHistoryContext } from "../../../../_contexts/VersionHistoryContext";
 import { ConvertContext } from "../../../../_contexts/ConvertContext";
-import type { TFileItem } from "../../../../_hooks/useItemList";
+import type { TFileItem, TFolderItem } from "../../../../_hooks/useItemList";
 import { generateFilesItemValue } from "../../../_utils";
 import getTitleWithoutExt from "../../../../_utils/get-title-without-ext";
+import { DragContext } from "../../../../_contexts/DragContext";
 
 import type { TableViewRowProps } from "../TableView.types";
 import styles from "../TableView.module.scss";
@@ -131,8 +133,14 @@ const TableViewRow = observer(
       onShowVersionHistoryClick: onShowVersionHistory ?? undefined,
     });
 
+    const dragCtx = React.useContext(DragContext);
+
     const isChecked = filesSelectionStore.isCheckedItem(item);
-    const value = generateFilesItemValue(item, false, index);
+    const isDroppable =
+      item.isFolder &&
+      "security" in item &&
+      (item as TFolderItem).security?.MoveTo === true;
+    const value = generateFilesItemValue(item, isDroppable, index);
 
     const titleWithoutExt =
       "fileExst" in item ? getTitleWithoutExt(item.title, item.fileExst) : item.title;
@@ -355,67 +363,78 @@ const TableViewRow = observer(
     };
 
     return (
-      <TableRow
-        className={classNames({
-          "table-row-selected": isChecked,
-          [styles.isHighlight]: filesListStore.highlightFileId === item.id,
-        })}
-        checked={isChecked}
-        contextOptions={contextMenuModel}
-        getContextModel={getContextMenuModel}
-        onClick={onRowClick}
-        onDoubleClick={onRowDoubleClick}
-        selectionProp={{ className: classNames("files-item", "table-container_file-name-cell"), value }}
-        fileContextClick={(isRightClick?: boolean) => {
-          if (isRightClick && filesSelectionStore.selection.length > 1) return;
-          filesSelectionStore.setSelection([]);
-          filesSelectionStore.setBufferSelection(item);
-        }}
+      <DragAndDrop
+        data-title={item.title}
+        className={classNames(styles.dragAndDropWrapper, "files-item", { droppable: isDroppable })}
+        value={value}
+        onDrop={dragCtx ? (files) => { if (isDroppable) dragCtx.onFilesDroppedToFolder(files, item.id as number); else dragCtx.onFilesDroppedToCurrentFolder(files); } : undefined}
+        onDragOver={dragCtx ? (isDragActive: boolean, e: React.DragEvent<HTMLElement>) => { const over = isDragActive && isDroppable; e.currentTarget.classList.toggle("droppable-hover", over); if (over) dragCtx.onFolderDragOver(item.title); else dragCtx.onFolderDragLeave(); } : undefined}
+        onDragLeave={dragCtx ? (e: React.DragEvent<HTMLElement>) => { e.currentTarget.classList.remove("droppable-hover"); dragCtx.onFolderDragLeave(); } : undefined}
+        // @ts-expect-error: native onMouseDown with event arg passed via ...rest to root div
+        onMouseDown={(e: MouseEvent) => dragCtx?.onItemMouseDown(e, item)}
       >
-        <TableCell
-          className="table-container_file-name-cell table-container_element-wrapper"
-          hasAccess
+        <TableRow
+          className={classNames({
+            "table-row-selected": isChecked,
+            [styles.isHighlight]: filesListStore.highlightFileId === item.id,
+          })}
           checked={isChecked}
+          contextOptions={contextMenuModel}
+          getContextModel={getContextMenuModel}
+          onClick={onRowClick}
+          onDoubleClick={onRowDoubleClick}
+          selectionProp={{ className: classNames("files-item", "table-container_file-name-cell"), value }}
+          fileContextClick={(isRightClick?: boolean) => {
+            if (isRightClick && filesSelectionStore.selection.length > 1) return;
+            filesSelectionStore.setSelection([]);
+            filesSelectionStore.setBufferSelection(item);
+          }}
         >
-          <div className="table-container_element-container" onClick={(e) => e.stopPropagation()}>
-            <div className="table-container_element">
-              <RoomIcon
-                logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
-                color={"isRoom" in item && item.isRoom ? item.roomIconColor : undefined}
-                title={item.title}
-                showDefault={"isRoom" in item && item.isRoom ? !item.hasRoomImage : false}
+          <TableCell
+            className="table-container_file-name-cell table-container_element-wrapper"
+            hasAccess
+            checked={isChecked}
+          >
+            <div className="table-container_element-container" onClick={(e) => e.stopPropagation()}>
+              <div className="table-container_element">
+                <RoomIcon
+                  logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
+                  color={"isRoom" in item && item.isRoom ? item.roomIconColor : undefined}
+                  title={item.title}
+                  showDefault={"isRoom" in item && item.isRoom ? !item.hasRoomImage : false}
+                />
+              </div>
+              <Checkbox
+                className="table-container_row-checkbox"
+                onChange={onCheckboxChange}
+                isChecked={isChecked}
+                title={t("Common:TitleSelectFile")}
               />
             </div>
-            <Checkbox
-              className="table-container_row-checkbox"
-              onChange={onCheckboxChange}
-              isChecked={isChecked}
-              title={t("Common:TitleSelectFile")}
-            />
-          </div>
-          <span className={styles.nameCellText} onClick={onNameClick}>
-            {titleWithoutExt}
-            {displayFileExtension && "fileExst" in item ? (
-              <span className={styles.nameCellExst}>{item.fileExst}</span>
-            ) : null}
-          </span>
-          {badgesNode}
-          {lastColumn === "Name" ? quickButtonsNode : null}
-        </TableCell>
-        {sectionColumns
-          .filter((column: SectionColumn) => column.key !== "Name")
-          .map((column: SectionColumn) => (
-            <TableCell
-              key={column.key}
-              className={
-                lastColumn === column.key ? styles.lastCell : undefined
-              }
-            >
-              {renderCell(column.key)}
-              {lastColumn === column.key ? quickButtonsNode : null}
-            </TableCell>
-          ))}
-      </TableRow>
+            <span className={styles.nameCellText} onClick={onNameClick}>
+              {titleWithoutExt}
+              {displayFileExtension && "fileExst" in item ? (
+                <span className={styles.nameCellExst}>{item.fileExst}</span>
+              ) : null}
+            </span>
+            {badgesNode}
+            {lastColumn === "Name" ? quickButtonsNode : null}
+          </TableCell>
+          {sectionColumns
+            .filter((column: SectionColumn) => column.key !== "Name")
+            .map((column: SectionColumn) => (
+              <TableCell
+                key={column.key}
+                className={
+                  lastColumn === column.key ? styles.lastCell : undefined
+                }
+              >
+                {renderCell(column.key)}
+                {lastColumn === column.key ? quickButtonsNode : null}
+              </TableCell>
+            ))}
+        </TableRow>
+      </DragAndDrop>
     );
   },
 );

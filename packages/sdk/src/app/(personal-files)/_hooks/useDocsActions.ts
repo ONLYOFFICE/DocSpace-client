@@ -308,8 +308,7 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
           const isAbort =
             signal.aborted ||
             (error instanceof Error &&
-              (error.name === "AbortError" ||
-                error.name === "CanceledError"));
+              (error.name === "AbortError" || error.name === "CanceledError"));
           if (isAbort) {
             uploadStore.setItemCancelled(uniqueId);
             return;
@@ -334,8 +333,8 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
   );
 
   const uploadFilesToFolder = useCallback(
-    async (files: FileList | File[]) => {
-      const folderId = getFolderId();
+    async (files: FileList | File[], targetFolderId?: number | string) => {
+      const folderId = targetFolderId ?? getFolderId();
       if (!folderId) return;
 
       const fileArray = Array.from(files);
@@ -466,3 +465,4 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
 }
 
 export type DocsActions = ReturnType<typeof useDocsActions>;
+

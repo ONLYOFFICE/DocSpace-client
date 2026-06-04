@@ -116,6 +116,10 @@ import RenameDialog from "../rename-dialog";
 import UploadPanel from "../upload-panel";
 import ShareSelector from "../share-selector";
 import useDocsHotkeys from "../../_hooks/useDocsHotkeys";
+import useDragActions from "../../_hooks/useDragActions";
+import { useDragStore } from "../../_store/DragStore";
+import { DragContext } from "@/app/(docspace)/_contexts/DragContext";
+import DragTooltip from "../drag-tooltip";
 
 import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
 import {
@@ -343,6 +347,21 @@ const DocsLayout = observer(
       onChangeStoreOriginal,
     } = useConvertActions();
 
+    const { onItemMouseDown } = useDragActions({ trackOperation });
+    const dragStore = useDragStore();
+
+    const dragContextValue: React.ContextType<typeof DragContext> = {
+      onItemMouseDown,
+      isDragging: dragStore.dragging || dragStore.osDragging,
+      onFilesDroppedToFolder: (files, folderId) =>
+        uploadFilesToFolder(files, folderId),
+      onFilesDroppedToCurrentFolder: (files) => uploadFilesToFolder(files),
+      // Hovered sub-folder overrides the current-folder default in the
+      // "Drop to" label; clearing it falls back to the current folder.
+      onFolderDragOver: dragStore.setOsHoveredFolderTitle,
+      onFolderDragLeave: () => dragStore.setOsHoveredFolderTitle(null),
+    };
+
     const docsSettingsStore = useDocsSettingsStore();
     const storeOriginalFiles =
       docsSettingsStore.filesSettings?.storeOriginalFiles ?? false;
@@ -403,6 +422,7 @@ const DocsLayout = observer(
     });
 
     return (
+      <DragContext.Provider value={dragContextValue}>
       <OpenFileContext.Provider value={openFileHandler}>
         <InfoContext.Provider value={infoHandler}>
           <ShareContext.Provider value={shareHandler}>
@@ -418,6 +438,8 @@ const DocsLayout = observer(
                           <DropZone
                             onFilesDropped={uploadFilesToFolder}
                             disabled={!isMyDocuments}
+                            currentFolderTitle={current.title}
+                            canCreate={isCanCreate}
                           >
                             <RootScrollbar>
                               <SectionWrapper
@@ -681,6 +703,7 @@ const DocsLayout = observer(
                             onClose={closeConvertDialog}
                             onConfirm={confirmConvert}
                           />
+                          <DragTooltip />
                         </div>
                       </ConvertContext.Provider>
                     </VersionHistoryContext.Provider>
@@ -691,6 +714,7 @@ const DocsLayout = observer(
           </ShareContext.Provider>
         </InfoContext.Provider>
       </OpenFileContext.Provider>
+      </DragContext.Provider>
     );
   },
 );

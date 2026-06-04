@@ -38,9 +38,48 @@
 	}
 }
 
+// The quick-action tiles render into the Section's banner slot (with
+// `scrollableBanner`, the banner sits inside the scroll body as its first
+// child) and scroll away under the sticky section header. The filter goes
+// through the canonical Section.SectionFilter slot; with `stickyTableHeader`,
+// ui-kit renders it as a sticky element inside the scroll body (class
+// `.section-body_sticky-filter`) and switches the table header to
+// `position: sticky` so it pins below the filter natively — no host JS.
+//
+// We only feed ui-kit the geometry it needs via CSS variables:
+//   --section-filter-top    where the filter sticks (= section header height)
+//   --section-filter-height min-height of the sticky filter block
+//   --section-filter-bottom resting bottom of the filter = the table header top
+.root {
+	--section-filter-height: 60px;
+	--section-filter-top: var(
+		--section-header-size,
+		var(--section-header-height, 69px)
+	);
+
+	@include mixins.tablet-and-below {
+		--section-filter-top: var(
+			--section-header-tablet-size,
+			var(--section-header-height-tablet, 61px)
+		);
+	}
+
+	@include mixins.mobile {
+		--section-filter-top: var(
+			--section-header-mobile-size,
+			var(--section-header-height-mobile, 53px)
+		);
+	}
+
+	--section-filter-bottom: calc(
+		var(--section-filter-top) + var(--section-filter-height)
+	);
+}
+
 .quickActions {
-	margin: 0 auto 16px;
+	margin: 4px auto 16px;
 	justify-content: center;
-	max-width: 736px;
+	max-width: 736px; // 4 tiles * 172px + 3 gaps * 16px
 	width: 100%;
+	flex-shrink: 0;
 }

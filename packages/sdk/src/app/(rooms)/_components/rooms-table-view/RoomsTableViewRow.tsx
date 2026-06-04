@@ -48,6 +48,8 @@ import { isAdmin } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
+
+import useCopyRoomPrimaryLink from "../../_hooks/useCopyRoomPrimaryLink";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
@@ -252,9 +254,16 @@ const RoomsTableViewRow = observer(
       </div>
     );
 
+    const onCopyPrimaryLink = useCopyRoomPrimaryLink(itemSnapshot, t);
+
     const quickButtonsNode = (
       <div className={styles.quickButtonsContainer}>
-        <QuickButtons t={t} item={itemSnapshot} viewAs="table" />
+        <QuickButtons
+          t={t}
+          item={itemSnapshot}
+          viewAs="table"
+          onCopyPrimaryLink={onCopyPrimaryLink}
+        />
       </div>
     );
 

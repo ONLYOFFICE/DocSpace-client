@@ -46,15 +46,24 @@ export type RoomActionsHandler = {
   restoreSelected: (items: (TFileItem | TFolderItem)[]) => void;
   pinSelected: (items: (TFileItem | TFolderItem)[]) => void;
   isArchive: boolean;
+
+  editRoom?: (item: TFileItem | TFolderItem) => void;
+  changeOwner?: (item: TFileItem | TFolderItem) => void;
+  inviteRoom?: (item: TFileItem | TFolderItem) => void;
+  archiveRoom?: (item: TFileItem | TFolderItem) => void;
+  deleteRoom?: (item: TFileItem | TFolderItem) => void;
+  restoreRoom?: (item: TFileItem | TFolderItem) => void;
+  infoRoom?: (item: TFileItem | TFolderItem) => void;
+  roomChanged?: (id: number) => void;
 };
 
 /**
- * Provides bulk pin/archive/delete handlers for the active rooms section.
- * Used by the shared Header's TableGroupMenu so it can dispatch group
- * actions through RoomsList's dialogs/API wiring without lifting state up.
- * `null` outside the rooms tree — the Header then falls back to the
+ * Provides bulk pin/archive/delete handlers for the active rooms section, plus
+ * single-room handlers for the info-panel header's `⋮` menu. Used by the shared
+ * Header's TableGroupMenu and the info-panel RoomActionsMenu so they can
+ * dispatch actions through RoomsList's dialogs/API wiring without lifting state
+ * up. `null` outside the rooms tree — the Header then falls back to the
  * personal-files group menu (file delete/copy/move/etc.).
  */
-export const RoomActionsContext = React.createContext<RoomActionsHandler | null>(
-  null,
-);
+export const RoomActionsContext =
+  React.createContext<RoomActionsHandler | null>(null);

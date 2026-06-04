@@ -44,9 +44,9 @@ import type { TFolder } from "@docspace/shared/api/files/types";
 
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
 import SearchIconReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
-import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
 
 import RoomLogoEditableIcon from "@/app/(rooms)/_components/room-logo-editor";
+import RoomActionsMenu from "@/app/(rooms)/_components/room-actions-menu";
 
 import Search from "./Search";
 import styles from "./RoomHeader.module.scss";
@@ -109,12 +109,7 @@ const RoomHeader = ({
             onClick={onInvite}
           />
         ) : null}
-        <IconButton
-          iconName={VerticalDotsReactSvgUrl}
-          size={16}
-          title={t("Common:Actions")}
-          onClick={() => {}}
-        />
+        <RoomActionsMenu selection={selection} />
       </div>
 
       {isMembersView && showSearch && setSearchValue ? (

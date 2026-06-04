@@ -88,6 +88,14 @@ export type RoomActions = {
   deleteSelected: (items: (TFolderItem | TFileItem)[]) => void;
   restoreSelected: (items: (TFolderItem | TFileItem)[]) => void;
   pinSelected: (items: (TFolderItem | TFileItem)[]) => Promise<void>;
+  editRoom: (item: TFolderItem | TFileItem) => void;
+  changeOwner: (item: TFolderItem | TFileItem) => void;
+  inviteRoom: (item: TFolderItem | TFileItem) => void;
+  archiveRoom: (item: TFolderItem | TFileItem) => void;
+  deleteRoom: (item: TFolderItem | TFileItem) => void;
+  restoreRoom: (item: TFolderItem | TFileItem) => void;
+  infoRoom: (item: TFolderItem | TFileItem) => void;
+  roomChanged: (id: number) => void;
 };
 
 type RoomsListProps = {
@@ -624,6 +632,14 @@ const RoomsList = ({
       deleteSelected: onDeleteSelected,
       restoreSelected: onRestoreSelected,
       pinSelected: onPinSelected,
+      editRoom: onEditRoom,
+      changeOwner: onChangeOwner,
+      inviteRoom: onInviteRoom,
+      archiveRoom: onArchiveRoom,
+      deleteRoom: onDeleteRoom,
+      restoreRoom: onRestoreRoom,
+      infoRoom: onInfoRoom,
+      roomChanged: refreshSingleRoom,
     };
   }, [
     roomActionsRef,
@@ -631,6 +647,14 @@ const RoomsList = ({
     onDeleteSelected,
     onRestoreSelected,
     onPinSelected,
+    onEditRoom,
+    onChangeOwner,
+    onInviteRoom,
+    onArchiveRoom,
+    onDeleteRoom,
+    onRestoreRoom,
+    onInfoRoom,
+    refreshSingleRoom,
   ]);
 
   const fetchMoreRooms = React.useCallback(async () => {

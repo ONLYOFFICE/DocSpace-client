@@ -38,21 +38,15 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { FolderType } from "@docspace/shared/enums";
-import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import type { TFolder } from "@docspace/shared/api/files/types";
 
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
 import SearchIconReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
 
-import {
-  getRoomIconLogo,
-  type RoomIconFields,
-} from "@/app/(docspace)/_utils/getRoomIconLogo";
+import RoomLogoEditableIcon from "@/app/(rooms)/_components/room-logo-editor";
 
 import Search from "./Search";
 import styles from "./RoomHeader.module.scss";
@@ -63,6 +57,7 @@ type RoomHeaderProps = {
   hasEditAccess?: boolean;
   setSearchValue?: (value: string) => void;
   onInvite?: () => void;
+  onUpdated?: () => void;
 };
 
 const RoomHeader = ({
@@ -71,6 +66,7 @@ const RoomHeader = ({
   hasEditAccess = false,
   setSearchValue,
   onInvite,
+  onUpdated,
 }: RoomHeaderProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -80,11 +76,6 @@ const RoomHeader = ({
     setShowSearch(false);
   }, [selection.id]);
 
-  const roomItem = selection as TFolder & RoomIconFields;
-  const roomIconLogo = getRoomIconLogo(roomItem);
-  const isTemplate = selection.rootFolderType === FolderType.RoomTemplates;
-  const badgeUrl = getRoomBadgeUrl(selection as Parameters<typeof getRoomBadgeUrl>[0]) ?? "";
-
   const onSearchClose = () => {
     setShowSearch(false);
     setSearchValue?.("");
@@ -92,14 +83,10 @@ const RoomHeader = ({
 
   return (
     <div className={styles.roomHeader}>
-      <RoomIcon
-        logo={roomIconLogo}
-        color={roomItem.roomIconColor}
-        title={selection.title}
-        showDefault={!roomItem.hasRoomImage}
-        isTemplate={isTemplate}
-        badgeUrl={badgeUrl}
-        size="32px"
+      <RoomLogoEditableIcon
+        selection={selection}
+        variant="header"
+        onUpdated={onUpdated}
       />
       <Text className={styles.roomTitle} fontWeight={600} truncate>
         {selection.title}

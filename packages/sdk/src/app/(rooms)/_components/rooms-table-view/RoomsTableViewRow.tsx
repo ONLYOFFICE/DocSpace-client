@@ -322,6 +322,7 @@ const RoomsTableViewRow = observer(
                   showDefault={
                     "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
                   }
+                  imgClassName="react-svg-icon"
                 />
               )}
             </div>

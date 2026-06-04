@@ -154,6 +154,7 @@ const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
           hasEditAccess={hasEditAccess}
           setSearchValue={membersData.handleSearchMembers}
           onInvite={() => setInvitePanelVisible(true)}
+          onUpdated={onTagsChanged}
         />
       ) : null}
 

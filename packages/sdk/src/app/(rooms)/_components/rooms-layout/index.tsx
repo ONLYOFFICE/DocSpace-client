@@ -91,7 +91,6 @@ import {
 import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
 
 import styles from "./RoomsLayout.module.scss";
-import { Text } from "@docspace/ui-kit/components";
 
 type RoomsLayoutProps = {
   folders: TFolder[];
@@ -249,23 +248,6 @@ const RoomsLayout = observer(
         <div className={styles.root} style={frameHeaderVars}>
           <RootScrollbar>
             <SectionWrapper
-              sectionBannerContent={
-                !isArchive && canCreateRooms ? (
-                  <div className={styles.createNewSection}>
-                    <Text
-                      fontSize="18px"
-                      fontWeight={700}
-                      className={styles.createNewTitle}
-                    >
-                      {t("Common:CreateNew")}
-                    </Text>
-                    <QuickActions
-                      items={quickActionItems}
-                      className={styles.quickActions}
-                    />
-                  </div>
-                ) : undefined
-              }
               sectionHeaderContent={
                 <Header
                   current={current}
@@ -275,6 +257,16 @@ const RoomsLayout = observer(
                   isInfoPanelVisible={infoPanelStore.isVisible}
                   onToggleInfoPanel={infoPanelStore.toggle}
                 />
+              }
+              stickyTableHeader
+              scrollableBanner={!isArchive && canCreateRooms}
+              sectionBannerContent={
+                !isArchive && canCreateRooms ? (
+                  <QuickActions
+                    items={quickActionItems}
+                    className={styles.quickActions}
+                  />
+                ) : undefined
               }
               sectionFilterContent={
                 <RoomsFilter

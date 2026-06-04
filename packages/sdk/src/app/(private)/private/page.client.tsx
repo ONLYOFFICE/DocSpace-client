@@ -171,7 +171,13 @@ const PrivateRoomsPageInner: React.FC<PrivateRoomsPageProps> = ({
           <PrivateCreateRoomDialog
             visible={visible}
             onClose={onClose}
-            onCreated={onRoomCreated}
+            onCreated={(roomId) => {
+              if (roomId != null) {
+                openRoom(roomId);
+                return;
+              }
+              onRoomCreated();
+            }}
           />
         )}
       />

@@ -44,6 +44,7 @@ type ModuleLauncherDeps = {
   // reports no configuration yet, signalling that the install dialog is needed.
   activate: (id: string) => Promise<boolean>;
   enable: (id: string, enabled: boolean) => Promise<unknown>;
+  isAppEnabled: (id: string) => boolean;
 };
 
 type UseModuleLauncher = {
@@ -57,6 +58,7 @@ type UseModuleLauncher = {
 export const useModuleLauncher = ({
   activate,
   enable,
+  isAppEnabled,
 }: ModuleLauncherDeps): UseModuleLauncher => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
@@ -128,6 +130,19 @@ export const useModuleLauncher = ({
         return;
       }
 
+      if (modId === "e2e-rooms") {
+        try {
+          if (!isAppEnabled("e2e-rooms")) {
+            await enable("e2e-rooms", true);
+          }
+          navigate("/e2e-rooms");
+        } catch (err) {
+          console.error("Failed to enable e2e-rooms", err);
+          toastr.error(t("Common:SomethingWentWrong"));
+        }
+        return;
+      }
+
       // Always-on apps (e.g. ai-files) need no per-tenant setup — open directly.
       if (href) {
         navigate(href);
@@ -136,7 +151,7 @@ export const useModuleLauncher = ({
 
       toastr.info(t("Common:UnderDevelopment"));
     },
-    [activate, activateOrSetup, navigate, t],
+    [activate, activateOrSetup, enable, isAppEnabled, navigate, t],
   );
 
   const handleConfirmEnableAiRooms = React.useCallback(async () => {

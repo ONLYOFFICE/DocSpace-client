@@ -90,7 +90,7 @@ export type CreateEditRoomDialogProps = {
   onClose: () => void;
   room?: TEditableRoom;
   onRoomEdited?: (roomId: number) => void;
-  onRoomCreated?: (roomId?: number) => void;
+  onRoomCreated?: (roomId: number) => void;
   isPrivate?: boolean;
   hasEncryptionKeys?: boolean;
   onRequestCreateKeys?: () => void;

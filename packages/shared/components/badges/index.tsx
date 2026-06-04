@@ -39,8 +39,8 @@ import { isMobile as isMobileDevice } from "react-device-detect";
 
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
-import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
-import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
+// import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
+// import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import Refresh12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/refresh.react.svg?url";
 import Mute12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/mute.react.svg?url";
 import Mute16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
@@ -126,7 +126,7 @@ const Badges = ({
   onUnmuteClick,
   isMutedBadge,
   isArchiveFolderRoot,
-  onCopyPrimaryLink,
+  // onCopyPrimaryLink,
   isArchiveFolder,
   isTemplatesFolder,
   onCreateRoom,
@@ -555,7 +555,7 @@ const Badges = ({
         room__badges: isRoom,
       })}
     >
-      {showCopyLinkIcon ? (
+      {/* {showCopyLinkIcon ? (
         <IconButton
           iconName={LinkReactSvgUrl}
           className={classNames(
@@ -566,9 +566,9 @@ const Badges = ({
           title={t("Common:CopySharedLink")}
           hoverColor="accent"
         />
-      ) : null}
+      ) : null} */}
 
-      {showCopyLinkIcon ? (
+      {/* {showCopyLinkIcon ? (
         <IconButton
           iconName={TabletLinkReactSvgUrl}
           className={classNames(
@@ -579,7 +579,7 @@ const Badges = ({
           title={t("Common:CopySharedLink")}
           hoverColor="accent"
         />
-      ) : null}
+      ) : null} */}
 
       {isRoom && mute && !isTile ? (
         <IconButton

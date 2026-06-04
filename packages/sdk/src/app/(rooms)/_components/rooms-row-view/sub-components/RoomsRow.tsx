@@ -220,7 +220,6 @@ const RoomsRow = observer(
               item={item}
               filterSortBy={filterSortBy}
               timezone={timezone}
-              badgesComponent={badgesComponent}
             />
           </FilesRow>
         </DragAndDrop>
@@ -230,3 +229,4 @@ const RoomsRow = observer(
 );
 
 export { RoomsRow };
+

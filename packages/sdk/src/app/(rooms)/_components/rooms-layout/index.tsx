@@ -83,6 +83,7 @@ import {
   RoomActionsContext,
   type RoomActionsHandler,
 } from "../../_contexts/RoomActionsContext";
+import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
 import {
   InfoPanelBody as DocsInfoPanelBody,
   InfoPanelHeader as DocsInfoPanelHeader,
@@ -186,9 +187,23 @@ const RoomsLayout = observer(
           roomActionsRef.current?.restoreSelected(items),
         pinSelected: (items) => roomActionsRef.current?.pinSelected(items),
         isArchive: !!isArchive,
+        editRoom: (item) => roomActionsRef.current?.editRoom(item),
+        changeOwner: (item) => roomActionsRef.current?.changeOwner(item),
+        inviteRoom: (item) => roomActionsRef.current?.inviteRoom(item),
+        archiveRoom: (item) => roomActionsRef.current?.archiveRoom(item),
+        deleteRoom: (item) => roomActionsRef.current?.deleteRoom(item),
+        restoreRoom: (item) => roomActionsRef.current?.restoreRoom(item),
+        infoRoom: (item) => roomActionsRef.current?.infoRoom(item),
+        roomChanged: (id) => roomActionsRef.current?.roomChanged(id),
       }),
       [isArchive],
     );
+
+    // Bridge RoomsList's full-list refresh down to the info panel so room
+    // actions dispatched from the header `⋮` menu (pin/unpin) can refresh the
+    // list — the info panel body is a sibling of RoomsList and would otherwise
+    // sit outside its RoomsRefreshContext provider.
+    const refreshRooms = React.useCallback(() => refreshRef.current?.(), []);
 
     const createCustomRoom = React.useCallback(() => {
       dialogsStore.openDialog(SDKDialogs.CreateRoom);
@@ -303,7 +318,9 @@ const RoomsLayout = observer(
               }
               infoPanelHeaderContent={<DocsInfoPanelHeader />}
               infoPanelBodyContent={
-                <DocsInfoPanelBody onTagsChanged={onInfoPanelTagsChanged} />
+                <RoomsRefreshContext.Provider value={refreshRooms}>
+                  <DocsInfoPanelBody onTagsChanged={onInfoPanelTagsChanged} />
+                </RoomsRefreshContext.Provider>
               }
               isInfoPanelVisible={infoPanelStore.isVisible}
               setIsInfoPanelVisible={infoPanelStore.setVisible}

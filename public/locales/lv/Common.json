@@ -380,6 +380,7 @@
   "CannotChangePlan": "Plānu nevar mainīt, jo izmantotais krātuves apjoms vai administratoru skaits pārsniedz atlasītā plāna ierobežojumus:",
   "CannotGuaranteeSecurity": "Mēs nevaram garantēt trešo pušu integrāciju drošības vai privātuma prakses.",
   "CannotRemoveMemberWhileUploads": "Nevar noņemt dalībnieku, kamēr augšupielādes ir procesā ({{count}}). Pagaidiet, līdz partija ir pabeigta, pēc tam mēģiniet vēlreiz.",
+  "CannotTransferFolderFromPrivateRoom": "Mapes nevar pārvietot vai kopēt ārpus privātas istabas.",
   "CannotTransferToPrivateRoom": "Vienumus nevar pārvietot vai kopēt privātā telpā. Augšupielādējiet failus tieši telpā, lai tie paliktu šifrēti.",
   "Capabilities": "Iespējas",
   "CapabilitiesDescription": "Šie iestatījumi nosaka, kuras funkcijas tiek parādītas un ir pieejamas šim modelim {{productName}} čatā.",

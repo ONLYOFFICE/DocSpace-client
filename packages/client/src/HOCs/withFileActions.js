@@ -344,8 +344,7 @@ export default function withFileActions(WrappedFileItem) {
         !isDisabledDropItem &&
         isFolder &&
         security?.MoveTo &&
-        !isTrashFolder &&
-        !isPrivacy;
+        !isTrashFolder;
 
       let className = isDragging ? " droppable" : "";
       if (draggable) className += " draggable";

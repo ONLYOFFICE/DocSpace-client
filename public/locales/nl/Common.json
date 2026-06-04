@@ -380,6 +380,7 @@
   "CannotChangePlan": "U kunt uw plan niet aanpassen omdat het gebruikte opslagvolume of het aantal beheerders de beperkingen van het geselecteerde plan overschrijdt:",
   "CannotGuaranteeSecurity": "We kunnen de beveiliging of privacy praktijken van integraties van derden niet garanderen.",
   "CannotRemoveMemberWhileUploads": "Kan lid niet verwijderen terwijl uploads bezig zijn ({{count}}). Wacht tot de batch is voltooid en probeer het opnieuw.",
+  "CannotTransferFolderFromPrivateRoom": "Mappen kunnen niet worden verplaatst of gekopieerd uit een privékamer.",
   "CannotTransferToPrivateRoom": "U kunt items niet naar een privékamer verplaatsen of kopiëren. Upload bestanden rechtstreeks naar de kamer om ze versleuteld te houden.",
   "Capabilities": "Mogelijkheden",
   "CapabilitiesDescription": "Deze instellingen bepalen welke functies worden weergegeven en beschikbaar zijn voor dit model in de {{productName}}-chat.",

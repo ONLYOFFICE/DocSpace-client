@@ -374,6 +374,7 @@
   "CannotChangePlan": "사용한 스토리지 볼륨 또는 관리자 수가 선택한 요금제의 제한을 초과하기 때문에 요금제를 변경할 수 없습니다:",
   "CannotGuaranteeSecurity": "제3자 통합의 보안 또는 개인 정보 보호 정책을 보장할 수 없습니다.",
   "CannotRemoveMemberWhileUploads": "업로드가 진행 중인 동안({{count}}건) 멤버를 제거할 수 없습니다. 배치가 완료된 후 다시 시도하세요.",
+  "CannotTransferFolderFromPrivateRoom": "폴더는 비공개 룸 밖으로 이동하거나 복사할 수 없습니다.",
   "CannotTransferToPrivateRoom": "비공개 룸으로 항목을 이동하거나 복사할 수 없습니다. 파일을 암호화된 상태로 유지하려면 룸에 직접 업로드하세요.",
   "Capabilities": "기능",
   "CapabilitiesDescription": "이 설정은 {{productName}} 채팅에서 이 모델에 대해 표시되는 기능 및 사용 가능한 기능을 제어합니다.",

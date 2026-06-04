@@ -143,6 +143,10 @@ export const getIsDisabled = (
   if (isCopy) {
     if (isInsideResultStorage || isAgents) return true;
 
+    if (sourceIsPrivate && isInsidePrivateRoom) {
+      return security && "Create" in security ? !security.Create : false;
+    }
+
     return security && "CopyTo" in security
       ? !security?.CopyTo || !security?.Create
       : !security?.Copy;

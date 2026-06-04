@@ -388,6 +388,7 @@
   "CannotChangePlan": "您无法更改您的计划，因为已使用的存储量或管理员数量超出了所选计划限额：",
   "CannotGuaranteeSecurity": "我们无法保证第三方集成的安全性或隐私措施。",
   "CannotRemoveMemberWhileUploads": "无法在上传进行中（{{count}} 个）时移除成员。请等待批量上传完成后重试。",
+  "CannotTransferFolderFromPrivateRoom": "无法将文件夹移出或复制出私密房间。",
   "CannotTransferToPrivateRoom": "无法将项目移动或复制到私人房间。请将文件直接上传到房间以保持加密。",
   "Capabilities": "功能",
   "CapabilitiesDescription": "这些设置控制此模型在 {{productName}} 聊天中显示及可用的功能。",

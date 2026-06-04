@@ -380,6 +380,7 @@
   "CannotChangePlan": "Tarif nelze změnit, protože použitý objem úložiště nebo počet správců přesahuje omezení zvoleného tarifu:",
   "CannotGuaranteeSecurity": "Nemůžeme zaručit bezpečnost ani ochranu soukromí u integrací třetích stran.",
   "CannotRemoveMemberWhileUploads": "Nelze odebrat člena, zatímco probíhají nahrávání ({{count}}). Počkejte na dokončení dávky a zkuste to znovu.",
+  "CannotTransferFolderFromPrivateRoom": "Složky nelze přesunout ani zkopírovat mimo soukromou místnost.",
   "CannotTransferToPrivateRoom": "Položky nelze přesunout ani zkopírovat do soukromé místnosti. Nahrajte soubory přímo do místnosti, aby zůstaly šifrované.",
   "Capabilities": "Schopnosti",
   "CapabilitiesDescription": "Tato nastavení určují, které funkce jsou zobrazeny a dostupné pro tento model v chatu {{productName}}.",

@@ -380,6 +380,7 @@
   "CannotChangePlan": "Não pode alterar o seu plano porque o volume de armazenamento utilizado ou o número de administradores excede as limitações do plano selecionado:",
   "CannotGuaranteeSecurity": "Não podemos garantir a segurança ou as práticas de privacidade de integrações de terceiros.",
   "CannotRemoveMemberWhileUploads": "Não é possível remover o membro enquanto existem carregamentos em curso ({{count}}). Aguarde a conclusão do lote e tente novamente.",
+  "CannotTransferFolderFromPrivateRoom": "As pastas não podem ser movidas ou copiadas para fora de uma sala privada.",
   "CannotTransferToPrivateRoom": "Não é possível mover ou copiar itens para uma sala privada. Carregue os ficheiros diretamente na sala para mantê-los encriptados.",
   "Capabilities": "Capacidades",
   "CapabilitiesDescription": "Estas configurações controlam quais recursos são exibidos e estão disponíveis para este modelo no chat do {{productName}}.",

@@ -380,6 +380,7 @@
   "CannotChangePlan": "Svojega paketa ne morete spremeniti, ker uporabljena količina prostora za shranjevanje ali število skrbnikov presega omejitve izbranega paketa:",
   "CannotGuaranteeSecurity": "Ne moremo zagotoviti varnosti ali zasebnostnih praks integracij tretjih oseb.",
   "CannotRemoveMemberWhileUploads": "Člana ni mogoče odstraniti med nalaganjem ({{count}}). Počakajte, da se serija konča, in poskusite znova.",
+  "CannotTransferFolderFromPrivateRoom": "Map ni mogoče premakniti ali kopirati iz zasebne sobe.",
   "CannotTransferToPrivateRoom": "Elementov ni mogoče premakniti ali kopirati v zasebno sobo. Datoteke naložite neposredno v sobo, da ostanejo šifrirane.",
   "Capabilities": "Zmožnosti",
   "CapabilitiesDescription": "Te nastavitve nadzorujejo, katere funkcije so prikazane in na voljo za ta model v klepetu {{productName}}.",

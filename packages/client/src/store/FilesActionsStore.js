@@ -1702,6 +1702,7 @@ class FilesActionStore {
   duplicateEncryptedFile = async (item) => {
     return this.copyEncryptedFilesToFolder([item], item.folderId, {
       private: true,
+      rootFolderId: this.selectedFolderStore.rootFolderId,
       roomType: this.selectedFolderStore.roomType ?? RoomsType.CustomRoom,
     });
   };
@@ -2420,8 +2421,39 @@ class FilesActionStore {
   };
 
   moveDragItems = (destFolderId, folderTitle, destFolderInfo) => {
-    if (destFolderInfo?.private && !this.treeFoldersStore.isPrivacyFolder) {
+    const sourceInPrivateRoom = this.treeFoldersStore.isPrivacyFolder;
+    const isDestInsideSameRoom =
+      sourceInPrivateRoom &&
+      destFolderInfo?.rootFolderType === FolderType.Rooms;
+    const isPrivateDestination =
+      destFolderInfo?.private === true || isDestInsideSameRoom;
+
+    if (isPrivateDestination && !sourceInPrivateRoom) {
       toastr.error(i18n.t("Common:CannotTransferToPrivateRoom"));
+      return;
+    }
+
+    if (!isPrivateDestination && sourceInPrivateRoom) {
+      const { bufferSelection: dragBufferSelection } = this.filesStore;
+      const dragSelection = (
+        dragBufferSelection ? [dragBufferSelection] : this.filesStore.selection
+      ).filter((el) => !el.isFolder || el.id !== destFolderId);
+
+      const files = dragSelection.filter((el) => !el.isFolder);
+      const hasFolders = dragSelection.some((el) => el.isFolder);
+
+      if (hasFolders) {
+        toastr.error(i18n.t("Common:CannotTransferFolderFromPrivateRoom"));
+      }
+
+      if (files.length > 0) {
+        this.copyEncryptedFilesToFolder(files, destFolderId, {
+          private: false,
+          rootFolderId: destFolderInfo?.rootFolderId,
+          roomType: destFolderInfo?.roomType,
+        });
+      }
+
       return;
     }
 

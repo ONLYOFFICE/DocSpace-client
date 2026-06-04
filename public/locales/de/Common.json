@@ -388,6 +388,7 @@
   "CannotChangePlan": "Sie können Ihren Tarif nicht ändern, weil das verwendete Speichervolumen oder die Anzahl der Admins Limits des gewählten Tarifs überschreitet:",
   "CannotGuaranteeSecurity": "Wir können die Sicherheit und die Datenschutzpraktiken von Drittanbieterintegrationen nicht garantieren.",
   "CannotRemoveMemberWhileUploads": "Mitglied kann nicht entfernt werden, während Uploads laufen ({{count}}). Warten Sie, bis der Vorgang abgeschlossen ist, und versuchen Sie es erneut.",
+  "CannotTransferFolderFromPrivateRoom": "Ordner können nicht aus einem privaten Raum verschoben oder kopiert werden.",
   "CannotTransferToPrivateRoom": "Sie können Elemente nicht in einen privaten Raum verschieben oder kopieren. Laden Sie Dateien direkt in den Raum hoch, damit sie verschlüsselt bleiben.",
   "Capabilities": "Fähigkeiten",
   "CapabilitiesDescription": "Diese Einstellungen steuern, welche Funktionen für dieses Modell im {{productName}}-Chat angezeigt und verfügbar sind.",

@@ -380,6 +380,7 @@
   "CannotChangePlan": "Ju nuk mund ta ndryshoni planin tuaj sepse vëllimi i hapësirës së përdorur ose numri i administratorëve tejkalon kufizimet e planit të selektuar:",
   "CannotGuaranteeSecurity": "Ne nuk mund të garantojmë praktikat e sigurisë ose të privatësisë së integrimeve të palëve të treta.",
   "CannotRemoveMemberWhileUploads": "Nuk mund të hiqet anëtari ndërkohë që ngarkimet janë në vazhdim ({{count}}). Prisni që grupi të përfundojë, pastaj provoni përsëri.",
+  "CannotTransferFolderFromPrivateRoom": "Dosjet nuk mund të zhvendosen ose kopjohen jashtë një dhome private.",
   "CannotTransferToPrivateRoom": "Nuk mund t'i zhvendosni ose kopjoni artikujt në një dhomë private. Ngarkoni skedarët drejtpërdrejt në dhomë që të mbeten të enkriptuar.",
   "Capabilities": "Aftësitë",
   "CapabilitiesDescription": "Këto cilësime kontrollojnë cilat funksione shfaqen dhe janë të disponueshme për këtë model në bisedën {{productName}}.",

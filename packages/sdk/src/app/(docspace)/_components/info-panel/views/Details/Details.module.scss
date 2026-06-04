@@ -48,6 +48,12 @@
     width: 96px;
     height: 96px;
   }
+
+  :global(.room-title) {
+    font-size: 41px;
+    font-weight: 700;
+    line-height: 56px;
+  }
 }
 
 .tagList {

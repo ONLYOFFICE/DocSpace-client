@@ -387,6 +387,7 @@
   "CannotChangePlan": "No puede cambiar su plan porque el volumen de almacenamiento utilizado o el número de administradores excede las limitaciones del plan seleccionado:",
   "CannotGuaranteeSecurity": "No podemos garantizar la seguridad o las prácticas de privacidad de las integraciones de terceros.",
   "CannotRemoveMemberWhileUploads": "No se puede eliminar al miembro mientras hay cargas en curso ({{count}}). Espere a que finalice el lote e inténtelo de nuevo.",
+  "CannotTransferToPrivateRoom": "No puede mover ni copiar elementos a una sala privada. Suba los archivos directamente a la sala para mantenerlos cifrados.",
   "Capabilities": "Capacidades",
   "CapabilitiesDescription": "Estos ajustes controlan qué funciones se muestran y están disponibles para este modelo en el chat de {{productName}}.",
   "CapabilityExtendedThinking": "Pensamiento extendido",

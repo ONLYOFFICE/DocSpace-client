@@ -379,6 +379,7 @@
   "CannotChangePlan": "Et voi muuttaa ohjelmaasi, koska käytetyn muistin määrä tai ylläpitäjien määrä ylittää valitun ohjelman rajoitukset:",
   "CannotGuaranteeSecurity": "Emme voi taata kolmansien osapuolten integraatioiden tietoturva- tai yksityisyyskäytäntöjä.",
   "CannotRemoveMemberWhileUploads": "Jäsentä ei voi poistaa latausten ollessa käynnissä ({{count}}). Odota erän valmistumista ja yritä uudelleen.",
+  "CannotTransferToPrivateRoom": "Kohteita ei voi siirtää tai kopioida yksityiseen huoneeseen. Lataa tiedostot suoraan huoneeseen, jotta ne pysyvät salattuina.",
   "Capabilities": "Ominaisuudet",
   "CapabilitiesDescription": "Nämä asetukset määrittävät, mitkä ominaisuudet näytetään ja ovat käytettävissä tälle mallille {{productName}}-keskustelussa.",
   "CapabilityExtendedThinking": "Laajennettu ajattelu",

@@ -3144,7 +3144,6 @@ class FilesStore {
           "show-version-history",
           "finalize-version",
           "version",
-          "move-to",
           // Document editor / PDF flows do not support encrypted files yet.
           "preview",
           "fill-form",
@@ -3696,12 +3695,14 @@ class FilesStore {
         "mark-as-favorite",
         "remove-from-favorites",
         "edit-index",
-        "move-to",
         "copy-to",
         "duplicate",
-        "move",
         "download",
       ]);
+
+      if (!canMove) {
+        folderOptions = removeOptions(folderOptions, ["move", "move-to"]);
+      }
 
       if (canDownload) {
         folderOptions.push("download-encrypted");

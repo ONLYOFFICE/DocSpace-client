@@ -45,6 +45,7 @@ import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
@@ -151,8 +152,11 @@ const RoomsItemHeader = ({
         )
       : null;
 
-  const badgeIconColor =
-    isExternalShareRestricted && hasExternalLinks && badgeUrl
+  const isPrivateRoom = "private" in selection && selection.private === true;
+
+  const badgeIconColor = isPrivateRoom
+    ? globalColors.lightStatusPositive
+    : isExternalShareRestricted && hasExternalLinks && badgeUrl
       ? "var(--info-panel-link-blocked)"
       : undefined;
 

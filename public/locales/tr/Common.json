@@ -379,6 +379,7 @@
   "CannotChangePlan": "Kullanılan depolama hacmi veya yönetici sayısı seçilen planın limitlerini aştığı için planınızı değiştiremezsiniz:",
   "CannotGuaranteeSecurity": "Üçüncü taraf entegrasyonlarının güvenliğini veya gizlilik uygulamalarını garanti edemeyiz.",
   "CannotRemoveMemberWhileUploads": "Yüklemeler devam ederken ({{count}}) üye kaldırılamaz. Toplu işlemin tamamlanmasını bekleyip tekrar deneyin.",
+  "CannotTransferToPrivateRoom": "Öğeleri özel bir odaya taşıyamaz veya kopyalayamazsınız. Dosyaların şifreli kalması için doğrudan odaya yükleyin.",
   "Capabilities": "Yetenekler",
   "CapabilitiesDescription": "Bu ayarlar, {{productName}} sohbetinde bu model için hangi özelliklerin gösterileceğini ve kullanılabilir olacağını kontrol eder.",
   "CapabilityExtendedThinking": "Genişletilmiş düşünme",

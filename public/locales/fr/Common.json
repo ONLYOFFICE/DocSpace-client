@@ -387,6 +387,7 @@
   "CannotChangePlan": "Vous ne pouvez pas changer de plan tarifaire, car le volume de stockage utilisé ou le nombre d'administrateurs dépasse les limites du plan sélectionné :",
   "CannotGuaranteeSecurity": "Nous ne pouvons garantir la sécurité ou les pratiques de confidentialité des intégrations tierces.",
   "CannotRemoveMemberWhileUploads": "Impossible de retirer le membre pendant que des téléversements sont en cours ({{count}}). Attendez la fin du lot, puis réessayez.",
+  "CannotTransferToPrivateRoom": "Vous ne pouvez pas déplacer ou copier des éléments dans une salle privée. Téléversez les fichiers directement dans la salle pour qu'ils restent chiffrés.",
   "Capabilities": "Capacités",
   "CapabilitiesDescription": "Ces paramètres contrôlent quelles fonctionnalités sont affichées et disponibles pour ce modèle dans le chat {{productName}}.",
   "CapabilityExtendedThinking": "Réflexion étendue",

@@ -379,6 +379,7 @@
   "CannotChangePlan": "Bạn không thể thay đổi gói dịch vụ của mình vì dung lượng lưu trữ đã sử dụng hoặc số lượng quản trị viên vượt quá giới hạn của gói dịch vụ đã chọn:",
   "CannotGuaranteeSecurity": "Chúng tôi không thể đảm bảo tính bảo mật hoặc các biện pháp bảo vệ quyền riêng tư của các tích hợp của bên thứ ba.",
   "CannotRemoveMemberWhileUploads": "Không thể xoá thành viên trong khi đang tải lên ({{count}}). Hãy đợi đến khi hoàn tất, rồi thử lại.",
+  "CannotTransferToPrivateRoom": "Bạn không thể di chuyển hoặc sao chép các mục vào phòng riêng tư. Hãy tải tệp trực tiếp lên phòng để giữ cho chúng được mã hóa.",
   "Capabilities": "Khả năng",
   "CapabilitiesDescription": "Các cài đặt này kiểm soát các tính năng nào được hiển thị và khả dụng cho mô hình này trong chat {{productName}}.",
   "CapabilityExtendedThinking": "Tư duy mở rộng",

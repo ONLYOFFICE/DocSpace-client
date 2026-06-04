@@ -2418,6 +2418,11 @@ class FilesActionStore {
   };
 
   moveDragItems = (destFolderId, folderTitle, destFolderInfo) => {
+    if (destFolderInfo?.private && !this.treeFoldersStore.isPrivacyFolder) {
+      toastr.error(i18n.t("Common:CannotTransferToPrivateRoom"));
+      return;
+    }
+
     const folderIds = [];
     const fileIds = [];
     const deleteAfter = false;
@@ -3022,12 +3027,14 @@ class FilesActionStore {
   };
 
   getPrivacyFolderOption = (itemsCollection, t) => {
+    const moveTo = this.getOption("moveTo", t);
     const deleteOption = this.getOption("delete", t);
     const download = this.getOption("download", t);
     const showInfo = this.getOption("showInfo", t);
 
     itemsCollection
       .set("download", download)
+      .set("moveTo", moveTo)
       .set("delete", deleteOption)
       .set("showInfo", showInfo);
 

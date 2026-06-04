@@ -374,6 +374,7 @@
   "CannotChangePlan": "Nemôžete zmeniť plán, pretože používaná kapacita úložiska alebo počet administrátorov prekračuje limity vybraného plánu:",
   "CannotGuaranteeSecurity": "Nemôžeme zaručiť bezpečnosť ani dodržiavanie zásad ochrany osobných údajov v prípade integrovaného softvéru od tretích strán.",
   "CannotRemoveMemberWhileUploads": "Nie je možné odstrániť člena, kým prebieha nahrávanie ({{count}}). Počkajte na dokončenie dávky a skúste znova.",
+  "CannotTransferToPrivateRoom": "Položky nie je možné presunúť ani skopírovať do súkromnej miestnosti. Nahrajte súbory priamo do miestnosti, aby zostali šifrované.",
   "Capabilities": "Schopnosti",
   "CapabilitiesDescription": "Tieto nastavenia určujú, ktoré funkcie sú pre tento model v chate {{productName}} zobrazené a dostupné.",
   "CapabilityExtendedThinking": "Rozšírené myslenie",

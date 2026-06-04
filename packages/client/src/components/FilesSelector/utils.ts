@@ -122,6 +122,8 @@ export const getIsDisabled = (
   isInsideKnowledge?: boolean,
   isInsideResultStorage?: boolean,
   isAgents?: boolean,
+  isInsidePrivateRoom?: boolean,
+  sourceIsPrivate?: boolean,
 ) => {
   if (isFirstLoad) return true;
   if (isRequestRunning) return true;
@@ -132,6 +134,12 @@ export const getIsDisabled = (
   if (isRooms) return true;
   if (isRoot) return true;
   if (isSelectedParentFolder) return true;
+  if (
+    (isMove || isCopy || isRestore || isRestoreAll) &&
+    !sourceIsPrivate &&
+    isInsidePrivateRoom
+  )
+    return true;
   if (isCopy) {
     if (isInsideResultStorage || isAgents) return true;
 

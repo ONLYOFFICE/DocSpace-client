@@ -379,6 +379,7 @@
   "CannotChangePlan": "İstifadə olunan yaddaşın həcmi və ya admin sayı seçilmiş planın məhdudiyyətlərini keçdiyi üçün planınızı dəyişə bilməzsiniz:",
   "CannotGuaranteeSecurity": "Üçüncü tərəf inteqrasiyalarının təhlükəsizliyinə və ya məxfilik təcrübələrinə zəmanət verə bilmərik.",
   "CannotRemoveMemberWhileUploads": "Yükləmələr davam edərkən ({{count}}) üzv çıxarıla bilməz. Partiyının bitməsini gözləyin, sonra yenidən cəhd edin.",
+  "CannotTransferToPrivateRoom": "Elementləri özəl otağa köçürmək və ya kopyalamaq mümkün deyil. Faylları şifrələnmiş saxlamaq üçün birbaşa otağa yükləyin.",
   "Capabilities": "İmkanlar",
   "CapabilitiesDescription": "Bu tənzimləmələr {{productName}} çatında bu model üçün hansı funksiyaların göstəriləcəyini və əlçatan olacağını idarə edir.",
   "CapabilityExtendedThinking": "Genişləndirilmiş düşünmə",

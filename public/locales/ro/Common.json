@@ -387,6 +387,7 @@
   "CannotChangePlan": "Nu vă puteți schimba abonamentul deoarece volumul de stocare utilizat sau numărul de administratori depășește limitele abonamentului selectat:",
   "CannotGuaranteeSecurity": "Nu putem garanta practicile de securitate sau de confidențialitate ale integrărilor terțe.",
   "CannotRemoveMemberWhileUploads": "Nu se poate elimina membrul în timp ce încărcările sunt în desfășurare ({{count}}). Așteptați finalizarea lotului, apoi încercați din nou.",
+  "CannotTransferToPrivateRoom": "Nu puteți muta sau copia elemente într-o cameră privată. Încărcați fișierele direct în cameră pentru a le păstra criptate.",
   "Capabilities": "Capabilități",
   "CapabilitiesDescription": "Aceste setări controlează care funcții sunt afișate și disponibile pentru acest model în chat-ul {{productName}}.",
   "CapabilityExtendedThinking": "Gândire extinsă",

@@ -387,6 +387,7 @@
   "CannotChangePlan": "Ne možete da promenite svoj plan jer korišćeni obim memorijskog prostora ili broj administratora premašuju ograničenja izabranog plana:",
   "CannotGuaranteeSecurity": "Ne možemo garantovati bezbednost ili prakse privatnosti integracija trećih strana.",
   "CannotRemoveMemberWhileUploads": "Nije moguće ukloniti člana dok su otpremanja u toku ({{count}}). Sačekajte da se serija završi, pa pokušajte ponovo.",
+  "CannotTransferToPrivateRoom": "Ne možete da premeštate ili kopirate stavke u privatnu sobu. Otpremite datoteke direktno u sobu da bi ostale šifrovane.",
   "Capabilities": "Mogućnosti",
   "CapabilitiesDescription": "Ova podešavanja kontrolišu koje su funkcije prikazane i dostupne za ovaj model u {{productName}} četu.",
   "CapabilityExtendedThinking": "Prošireno razmišljanje",

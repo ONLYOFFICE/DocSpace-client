@@ -379,6 +379,7 @@
   "CannotChangePlan": "Nie możesz zmienić swojego planu, ponieważ zużyta pamięć lub liczba administratorów przekroczyły limit wybranego planu:",
   "CannotGuaranteeSecurity": "Nie gwarantujemy bezpieczeństwa ani prywatności w integracjach z podmiotami trzecimi.",
   "CannotRemoveMemberWhileUploads": "Nie można usunąć członka podczas trwającego przesyłania ({{count}}). Poczekaj na zakończenie wsadu, a następnie spróbuj ponownie.",
+  "CannotTransferToPrivateRoom": "Nie można przenosić ani kopiować elementów do pokoju prywatnego. Prześlij pliki bezpośrednio do pokoju, aby pozostały zaszyfrowane.",
   "Capabilities": "Możliwości",
   "CapabilitiesDescription": "Te ustawienia określają, które funkcje są wyświetlane i dostępne dla tego modelu w czacie {{productName}}.",
   "CapabilityExtendedThinking": "Rozszerzone myślenie",

@@ -55,9 +55,9 @@ const labelFor = (
   // `«{{roomTitle}}»` substring is what the user sees.
   switch (key) {
     case FeedActionKeys.AgentCreated:
-      return t("InfoPanel:HistoryAgentCreated", { roomTitle: title });
+      return t("Common:HistoryAgentCreated", { roomTitle: title });
     case FeedActionKeys.AgentRenamed:
-      return t("InfoPanel:AgentRenamed", {
+      return t("Common:AgentRenamed", {
         oldRoomTitle: oldTitle,
         roomTitle: title,
       });
@@ -76,11 +76,11 @@ const labelFor = (
       return t("Common:RoomRemoveUser");
     case FeedActionKeys.RoomUpdateAccessForUser:
     case FeedActionKeys.RoomUpdateAccessForGroup:
-      return t("InfoPanel:RoomUpdateAccess");
+      return t("Common:RoomUpdateAccess");
     case FeedActionKeys.RoomGroupAdded:
       return t("Common:RoomGroupAdded");
     case FeedActionKeys.RoomGroupRemove:
-      return t("InfoPanel:RoomGroupRemove");
+      return t("Common:RoomGroupRemove");
     case FeedActionKeys.AddedRoomTags:
       return t("Common:AddedRoomTags");
     case FeedActionKeys.DeletedRoomTags:

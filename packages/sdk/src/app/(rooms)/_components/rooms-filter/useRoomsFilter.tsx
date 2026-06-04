@@ -527,7 +527,7 @@ function applyParamsToFilter(sp: URLSearchParams, f: RoomsFilter): void {
   if (sp.get("sortBy")) f.sortBy = sp.get("sortBy") as typeof f.sortBy;
   if (sp.get("sortOrder"))
     f.sortOrder = sp.get("sortOrder") as typeof f.sortOrder;
-  if (sp.get("search")) f.filterValue = sp.get("search");
+  if (sp.get("filterValue")) f.filterValue = sp.get("filterValue");
   if (sp.get("subjectId")) f.subjectId = sp.get("subjectId");
   if (sp.get("subjectOwnerId")) f.subjectOwnerId = sp.get("subjectOwnerId");
   const tagsRaw = sp.get("tags");

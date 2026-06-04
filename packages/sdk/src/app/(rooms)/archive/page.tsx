@@ -49,7 +49,7 @@ const serializeRoomsFilter = (filter: RoomsFilter) => {
     ["pageCount", filter.pageCount],
     ["sortBy", filter.sortBy],
     ["sortOrder", filter.sortOrder],
-    ["search", filter.filterValue],
+    ["filterValue", filter.filterValue],
     ["searchArea", filter.searchArea],
   ];
 
@@ -78,7 +78,7 @@ export default async function Archive({
   if (params.sortBy) filter.sortBy = params.sortBy as typeof filter.sortBy;
   if (params.sortOrder)
     filter.sortOrder = params.sortOrder as typeof filter.sortOrder;
-  if (params.search) filter.filterValue = params.search;
+  if (params.filterValue) filter.filterValue = params.filterValue;
 
   const roomsFilter = serializeRoomsFilter(filter);
 

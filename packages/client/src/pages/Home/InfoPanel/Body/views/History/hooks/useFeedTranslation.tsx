@@ -63,7 +63,7 @@ export const useFeedTranslation = (
         return t("Common:FileCreatedNotify");
       case FeedActionKeys.FileUploaded:
         if (hasRelatedItems)
-          return t("InfoPanel:FileUploadedCount", {
+          return t("Common:FileUploadedCount", {
             count,
           });
         return t("Common:FilesAddedNotify");
@@ -80,13 +80,13 @@ export const useFeedTranslation = (
           });
         }
         if (hasRelatedItems)
-          return t("InfoPanel:FileMovedCount", {
+          return t("Common:FileMovedCount", {
             count,
           });
         return t("Common:FilesMovedNotify");
       case FeedActionKeys.FileMovedToTrash:
         if (hasRelatedItems)
-          return t("InfoPanel:FilesTrashMoveCompletedCount", {
+          return t("Common:FilesTrashMoveCompletedCount", {
             count,
             sectionName: t("Common:TrashSection"),
           });
@@ -100,44 +100,44 @@ export const useFeedTranslation = (
           });
         }
         if (hasRelatedItems)
-          return t("InfoPanel:FileCopiedCount", {
+          return t("Common:FileCopiedCount", {
             count,
           });
         return t("Common:FilesCopiedNotify");
       case FeedActionKeys.FileDeleted:
         if (hasRelatedItems)
-          return t("InfoPanel:FileDeletedCount", {
+          return t("Common:FileDeletedCount", {
             count,
           });
         return t("Common:FilesRemovedNotify");
       case FeedActionKeys.FileLocked:
-        return `${t("Translations:FileLocked")}.`;
+        return `${t("Common:FileLocked")}.`;
       case FeedActionKeys.FileUnlocked:
-        return `${t("Translations:FileUnlocked")}.`;
+        return `${t("Common:FileUnlocked")}.`;
       case FeedActionKeys.FileVersionRemoved:
         if ("version" in feed.data && feed.data.version) {
-          return t("InfoPanel:FileVersionRemoved", {
+          return t("Common:FileVersionRemoved", {
             version: feed.data.version,
           });
         }
       case FeedActionKeys.FileIndexChanged:
       case FeedActionKeys.FolderIndexChanged:
-        return t("InfoPanel:IndexChanged");
+        return t("Common:IndexChanged");
       case FeedActionKeys.FolderIndexReordered:
-        return t("InfoPanel:FolderIndexReordered");
+        return t("Common:FolderIndexReordered");
       case FeedActionKeys.FolderCreated:
         return t("Common:FolderCreatedNotify");
       case FeedActionKeys.FolderRenamed:
         return t("Common:FolderRenamedNotify");
       case FeedActionKeys.FolderMoved:
         if (hasRelatedItems)
-          return t("InfoPanel:FolderMovedCount", {
+          return t("Common:FolderMovedCount", {
             count,
           });
         return t("Common:FoldersMovedNotify");
       case FeedActionKeys.FolderMovedToTrash:
         if (hasRelatedItems)
-          return t("InfoPanel:FoldersTrashMoveCompletedCount", {
+          return t("Common:FoldersTrashMoveCompletedCount", {
             count,
             sectionName: t("Common:TrashSection"),
           });
@@ -146,13 +146,13 @@ export const useFeedTranslation = (
         });
       case FeedActionKeys.FolderCopied:
         if (hasRelatedItems)
-          return t("InfoPanel:FolderCopiedCount", {
+          return t("Common:FolderCopiedCount", {
             count,
           });
         return t("Common:FoldersCopiedNotify");
       case FeedActionKeys.FolderDeleted:
         if (hasRelatedItems)
-          return t("InfoPanel:FolderDeletedCount", {
+          return t("Common:FolderDeletedCount", {
             count,
           });
         return t("Common:FoldersRemovedNotify");
@@ -160,7 +160,7 @@ export const useFeedTranslation = (
         return (
           <Trans
             t={t}
-            ns="InfoPanel"
+            ns="Common"
             i18nKey="HistoryAgentCreated"
             values={{ roomTitle: (feed.data as TFeedData).title }}
             components={{
@@ -177,7 +177,7 @@ export const useFeedTranslation = (
         return (
           <Trans
             t={t}
-            ns="InfoPanel"
+            ns="Common"
             i18nKey="AgentRenamed"
             values={{
               oldRoomTitle: (feed.data as TFeedData).oldTitle,
@@ -220,7 +220,7 @@ export const useFeedTranslation = (
         return (
           <Trans
             t={t}
-            ns="InfoPanel"
+            ns="Common"
             i18nKey="HistoryRoomCopied"
             values={{ roomTitle: (feed.data as TFeedData).title }}
             components={{
@@ -270,12 +270,12 @@ export const useFeedTranslation = (
       case FeedActionKeys.RoomLogoDeleted:
         return t("Common:RoomLogoChanged");
       case FeedActionKeys.RoomExternalLinkCreated:
-        return t("InfoPanel:RoomExternalLinkCreated");
+        return t("Common:RoomExternalLinkCreated");
       case FeedActionKeys.RoomExternalLinkRenamed:
         return (
           <Trans
             t={t}
-            ns="InfoPanel"
+            ns="Common"
             i18nKey="RoomExternalLinkRenamed"
             values={{
               linkTitle: (feed.data as TFeedData).title,
@@ -288,7 +288,7 @@ export const useFeedTranslation = (
         return (
           <Trans
             t={t}
-            ns="InfoPanel"
+            ns="Common"
             i18nKey="RoomExternalLinkDeleted"
             values={{
               linkTitle: (feed.data as TFeedData).title,
@@ -307,7 +307,7 @@ export const useFeedTranslation = (
         return (
           <Trans
             t={t}
-            ns="InfoPanel"
+            ns="Common"
             i18nKey="RoomExternalLinkRevoked"
             values={{
               linkTitle:
@@ -334,11 +334,11 @@ export const useFeedTranslation = (
         if (hasRelatedItems) return t("Common:RoomCreateUserCount", { count });
         return t("Common:RoomCreateUser");
       case FeedActionKeys.RoomUpdateAccessForUser:
-        return t("InfoPanel:RoomUpdateAccess");
+        return t("Common:RoomUpdateAccess");
       case FeedActionKeys.RoomRemoveUser:
         return t("Common:RoomRemoveUser");
       case FeedActionKeys.RoomInviteResend:
-        return t("InfoPanel:RoomInviteResend");
+        return t("Common:RoomInviteResend");
       case FeedActionKeys.RoomGroupAdded:
         if (hasRelatedItems)
           return t("Common:RoomGroupAddedCount", {
@@ -346,17 +346,17 @@ export const useFeedTranslation = (
           });
         return t("Common:RoomGroupAdded");
       case FeedActionKeys.RoomUpdateAccessForGroup:
-        return t("InfoPanel:RoomUpdateAccess");
+        return t("Common:RoomUpdateAccess");
       case FeedActionKeys.RoomGroupRemove:
-        return t("InfoPanel:RoomGroupRemove");
+        return t("Common:RoomGroupRemove");
       case FeedActionKeys.RoomWatermarkSet:
-        return t("InfoPanel:RoomWatermarkSet");
+        return t("Common:RoomWatermarkSet");
       case FeedActionKeys.RoomWatermarkDisabled:
-        return t("InfoPanel:RoomWatermarkDisabled");
+        return t("Common:RoomWatermarkDisabled");
       case FeedActionKeys.RoomIndexingEnabled:
-        return t("InfoPanel:RoomIndexingEnabled");
+        return t("Common:RoomIndexingEnabled");
       case FeedActionKeys.RoomIndexingDisabled:
-        return t("InfoPanel:RoomIndexingDisabled");
+        return t("Common:RoomIndexingDisabled");
       case FeedActionKeys.RoomLifeTimeSet: {
         const periodLifeTime = (feed.data as TFeedData).lifeTime?.period;
         const value = (feed.data as TFeedData).lifeTime?.value ?? 0;
@@ -372,7 +372,7 @@ export const useFeedTranslation = (
         return (
           <Trans
             t={t}
-            ns="InfoPanel"
+            ns="Common"
             i18nKey="RoomLifeTimeSet"
             values={{ data }}
             components={{
@@ -382,11 +382,11 @@ export const useFeedTranslation = (
         );
       }
       case FeedActionKeys.RoomLifeTimeDisabled:
-        return t("InfoPanel:RoomLifeTimeDisabled");
+        return t("Common:RoomLifeTimeDisabled");
       case FeedActionKeys.RoomDenyDownloadEnabled:
-        return t("InfoPanel:RoomDenyDownloadEnabled");
+        return t("Common:RoomDenyDownloadEnabled");
       case FeedActionKeys.RoomDenyDownloadDisabled:
-        return t("InfoPanel:RoomDenyDownloadDisabled");
+        return t("Common:RoomDenyDownloadDisabled");
       case FeedActionKeys.RoomArchived:
         return t("Common:RoomToArchiveMove", {
           sectionName: t("Common:Archive"),
@@ -396,31 +396,31 @@ export const useFeedTranslation = (
           sectionName: t("Common:Archive"),
         });
       case FeedActionKeys.RoomIndexExportSaved:
-        return t("InfoPanel:RoomIndexExportLocation", {
+        return t("Common:RoomIndexExportLocation", {
           sectionName: t("Common:MyDocuments"),
         });
       case FeedActionKeys.RoomChangeOwner:
         return t("Common:RoomChangeOwner");
       case FeedActionKeys.FormSubmit:
-        return t("InfoPanel:FilledOutForm");
+        return t("Common:FilledOutForm");
       case FeedActionKeys.FormOpenedForFilling:
-        return t("InfoPanel:StartedFillingItOut");
+        return t("Common:StartedFillingItOut");
       case FeedActionKeys.FileCustomFilterEnabled:
-        return t("InfoPanel:FileCustomFilterEnabled");
+        return t("Common:FileCustomFilterEnabled");
       case FeedActionKeys.FileCustomFilterDisabled:
-        return t("InfoPanel:FileCustomFilterDisabled");
+        return t("Common:FileCustomFilterDisabled");
 
       case FeedActionKeys.FormStartedToFill:
-        return t("InfoPanel:FormStartedToFill");
+        return t("Common:FormStartedToFill");
 
       case FeedActionKeys.FormPartiallyFilled:
-        return t("InfoPanel:FormPartiallyFilled");
+        return t("Common:FormPartiallyFilled");
 
       case FeedActionKeys.FormCompletelyFilled:
-        return t("InfoPanel:FormCompletelyFilled");
+        return t("Common:FormCompletelyFilled");
 
       case FeedActionKeys.FormStopped:
-        return t("InfoPanel:FormStoppedNotify");
+        return t("Common:FormStoppedNotify");
 
       default:
         return null;

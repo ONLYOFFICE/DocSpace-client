@@ -294,6 +294,9 @@ const RoomsTableViewRow = observer(
           <div
             className="table-container_element-container"
             onClick={(e) => e.stopPropagation()}
+            onMouseDown={(e) => {
+              if (e.button === 0) e.stopPropagation();
+            }}
           >
             <div className="table-container_element">
               {inProgress ? (

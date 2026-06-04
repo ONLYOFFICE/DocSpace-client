@@ -2212,5 +2212,6 @@
   "FolderMovedCount": "Foldere au fost mutate ({{count}}).",
   "FoldersTrashMoveCompletedCount": "Foldere au fost mutate în {{sectionName}} ({{count}}).",
   "FolderCopiedCount": "Foldere au fost copiate ({{count}}).",
-  "FolderDeletedCount": "Foldere au fost eliminate ({{count}})."
+  "FolderDeletedCount": "Foldere au fost eliminate ({{count}}).",
+  "Pin": "Fixare"
 }

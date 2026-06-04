@@ -2212,5 +2212,6 @@
   "FolderMovedCount": "Le cartelle sono state spostate ({{count}}).",
   "FoldersTrashMoveCompletedCount": "Cartelle spostate in {{sectionName}} ({{count}}).",
   "FolderCopiedCount": "Cartelle copiate ({{count}}).",
-  "FolderDeletedCount": "Cartelle rimosse  ({{count}})."
+  "FolderDeletedCount": "Cartelle rimosse  ({{count}}).",
+  "Pin": "Fissa"
 }

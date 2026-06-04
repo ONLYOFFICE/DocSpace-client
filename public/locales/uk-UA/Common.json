@@ -2204,5 +2204,6 @@
   "FolderMovedCount": "Папки переміщено ({{count}}).",
   "FoldersTrashMoveCompletedCount": "Папки переміщено до {{sectionName}} ({{count}}).",
   "FolderCopiedCount": "Папки скопійовано ({{count}}).",
-  "FolderDeletedCount": "Папки видалено ({{count}})."
+  "FolderDeletedCount": "Папки видалено ({{count}}).",
+  "Pin": "Закріпити"
 }

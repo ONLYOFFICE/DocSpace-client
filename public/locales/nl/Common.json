@@ -2204,5 +2204,6 @@
   "FolderMovedCount": "Mappen verplaatst ({{count}}).",
   "FoldersTrashMoveCompletedCount": "Folders verplaatst naar {{sectionName}} ({{count}}).",
   "FolderCopiedCount": "Mappen gekopieerd ({{count}}).",
-  "FolderDeletedCount": "Mappen verwijderd ({{count}})."
+  "FolderDeletedCount": "Mappen verwijderd ({{count}}).",
+  "Pin": "Pinnen"
 }

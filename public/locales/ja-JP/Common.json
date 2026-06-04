@@ -2212,5 +2212,6 @@
   "FolderMovedCount": "フォルダが移動されました ({{count}})。",
   "FoldersTrashMoveCompletedCount": "フォルダが{{sectionName}}に移動されました（{{count}}）。",
   "FolderCopiedCount": "フォルダがコピーされました ({{count}})。",
-  "FolderDeletedCount": "フォルダが削除されました ({{count}})。"
+  "FolderDeletedCount": "フォルダが削除されました ({{count}})。",
+  "Pin": "固定"
 }

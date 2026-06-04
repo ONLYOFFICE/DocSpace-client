@@ -2204,5 +2204,6 @@
   "FolderMovedCount": "Kansiot siirretty ({{count}}).",
   "FoldersTrashMoveCompletedCount": "Kansiot siirretty {{sectionName}} -kohtaan ({{count}}).",
   "FolderCopiedCount": "Kansiot kopioitu ({{count}}).",
-  "FolderDeletedCount": "Kansiot poistettu ({{count}})."
+  "FolderDeletedCount": "Kansiot poistettu ({{count}}).",
+  "Pin": "Kiinnitä"
 }

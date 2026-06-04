@@ -2174,5 +2174,6 @@
   "FolderMovedCount": "Priečinky presunuté ({{count}}).",
   "FoldersTrashMoveCompletedCount": "Zložky presunuté do {{sectionName}} ({{count}}).",
   "FolderCopiedCount": "Priečinky skopírované ({{count}}).",
-  "FolderDeletedCount": "Priečinky odstránené ({{count}})."
+  "FolderDeletedCount": "Priečinky odstránené ({{count}}).",
+  "Pin": "Pripnúť"
 }

@@ -2204,5 +2204,6 @@
   "FolderMovedCount": "تم نقل المجلدات ({{count}}).",
   "FoldersTrashMoveCompletedCount": "تم نقل المجلدات إلى {{sectionName}} ({{count}}).",
   "FolderCopiedCount": "تم نسخ المجلدات ({{count}}).",
-  "FolderDeletedCount": "تم إزالة المجلدات ({{count}})."
+  "FolderDeletedCount": "تم إزالة المجلدات ({{count}}).",
+  "Pin": "تثبيت"
 }

@@ -2212,5 +2212,6 @@
   "FolderMovedCount": "Ordner verschoben ({{count}}).",
   "FoldersTrashMoveCompletedCount": "Ordner nach {{sectionName}} verschoben ({{count}}).",
   "FolderCopiedCount": "Ordner kopiert ({{count}}).",
-  "FolderDeletedCount": "Ordner entfernt ({{count}})."
+  "FolderDeletedCount": "Ordner entfernt ({{count}}).",
+  "Pin": "Anstecken"
 }

@@ -2212,5 +2212,6 @@
   "FolderMovedCount": "Carpetas movidas ({{count}}).",
   "FoldersTrashMoveCompletedCount": "Carpetas movidas a {{sectionName}} ({{count}}).",
   "FolderCopiedCount": "Carpetas copiadas ({{count}}).",
-  "FolderDeletedCount": "Carpetas eliminadas ({{count}})."
+  "FolderDeletedCount": "Carpetas eliminadas ({{count}}).",
+  "Pin": "Anclar"
 }

@@ -2204,5 +2204,6 @@
   "FolderMovedCount": "Pastas movidas ({{count}}).",
   "FoldersTrashMoveCompletedCount": "Pastas movidas para {{sectionName}} ({{count}}).",
   "FolderCopiedCount": "Pastas copiadas ({{count}}).",
-  "FolderDeletedCount": "Pastas removidas ({{count}})."
+  "FolderDeletedCount": "Pastas removidas ({{count}}).",
+  "Pin": "Afixar"
 }

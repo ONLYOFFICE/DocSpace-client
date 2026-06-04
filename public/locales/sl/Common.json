@@ -2204,5 +2204,6 @@
   "FolderMovedCount": "Mape premaknjene ({{count}})",
   "FoldersTrashMoveCompletedCount": "Mape so bile prestavljene v {{sectionName}} ({{count}}).",
   "FolderCopiedCount": "Mape kopirane ({{count}})",
-  "FolderDeletedCount": "Mape odstranjene ({{count}})"
+  "FolderDeletedCount": "Mape odstranjene ({{count}})",
+  "Pin": "Pripni"
 }

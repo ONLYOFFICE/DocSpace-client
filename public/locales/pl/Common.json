@@ -2204,5 +2204,6 @@
   "FolderMovedCount": "Foldery przeniesione ({{count}}).",
   "FoldersTrashMoveCompletedCount": "Foldery przeniesione do {{sectionName}} ({{count}}).",
   "FolderCopiedCount": "Foldery skopiowane ({{count}}).",
-  "FolderDeletedCount": "Foldery usunięte ({{count}})."
+  "FolderDeletedCount": "Foldery usunięte ({{count}}).",
+  "Pin": "Przypnij"
 }

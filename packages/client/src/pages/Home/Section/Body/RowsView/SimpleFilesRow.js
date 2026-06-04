@@ -91,6 +91,7 @@ const SimpleFilesRow = React.memo((props) => {
     onDragLeave,
     itemIndex,
     badgeUrl,
+    badgeIconColor,
     canDrag,
     isIndexEditingMode,
     changeIndex,
@@ -155,6 +156,7 @@ const SimpleFilesRow = React.memo((props) => {
       isTemplate={item.isTemplate}
       badgeUrl={badgeUrl}
       encrypted={item.encrypted}
+      badgeIconColor={badgeIconColor}
     />
   );
 
@@ -331,3 +333,4 @@ export default withTranslation([
   "Notifications",
   "GroupingRooms",
 ])(withFileActions(withQuickButtons(withBadges(SimpleFilesRow))));
+

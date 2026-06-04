@@ -3,7 +3,7 @@
   "content": "Via link",
   "content_en_sha1_hash": "82b77d2291896256b99fa9e0bc5d62490fdcf53d",
   "created_at": "2025-08-27T10:14:18.067Z",
-  "updated_at": "2026-05-15T14:00:06.747Z",
+  "updated_at": "2026-06-03T09:30:05.061Z",
   "comment": {
     "text": "This is a short label indicating that a document or file was accessed via a shared link. It appears in a table view, likely in a \"Location\" column.",
     "is_auto": true,
@@ -16,6 +16,12 @@
       "line_number": 71,
       "context": "const { t } = useTranslation(\"Common\");\n const [path, setPath] = useState<TPath[]>([]);\n const [isPathLoading, setIsPathLoading] = useState(false);\n \n const title = item.requestToken\n ? t(\"Common:ViaLink\")\n : originRoomTitle || originTitle;\n const originId = originFolderId || originRoomId;\n const withTooltip = item.requestToken ? false : !!title;\n \n const getPath = useCallback(async () => {",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/table-view/sub-components/LocationCell.tsx",
+      "line_number": 70,
+      "context": "const originFolderId = \"originId\" in item ? item.originId : undefined;\n const originRoomId = \"originRoomId\" in item ? item.originRoomId : undefined;\n const requestToken = \"requestToken\" in item ? item.requestToken : undefined;\n \n const title = requestToken\n ? t(\"Common:ViaLink\")\n : originRoomTitle || originTitle;\n const originId = originFolderId || originRoomId;\n const withTooltip = requestToken ? false : !!title;\n const tooltipId = `location-${item.id}`;",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

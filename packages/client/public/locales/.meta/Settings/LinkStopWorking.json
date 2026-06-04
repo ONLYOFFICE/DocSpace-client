@@ -1,0 +1,35 @@
+{
+  "key_path": "LinkStopWorking",
+  "content": "Previously created public links will stop working.",
+  "content_en_sha1_hash": "6d106d083c8c607c4a0041ce3dff7a927856e913",
+  "created_at": "2026-06-02T08:43:23.431Z",
+  "updated_at": "2026-06-02T08:46:07.087Z",
+  "comment": {
+    "text": "Informational text in the Access Control settings section that warns about the consequences of modifying public link permissions.",
+    "is_auto": true,
+    "updated_at": "2026-06-02T08:46:07.087Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
+      "line_number": 393,
+      "context": "myDocuments: t(\"Common:MyDocuments\"),\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\" lineHeight=\"20px\">\n {t(\"Settings:LinkStopWorking\")}\n </Text>\n </div>\n </div>\n \n <div>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
+      "line_number": 393,
+      "context": "myDocuments: t(\"Common:MyDocuments\"),\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\" lineHeight=\"20px\">\n {t(\"Settings:LinkStopWorking\")}\n </Text>\n </div>\n </div>\n \n <div>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

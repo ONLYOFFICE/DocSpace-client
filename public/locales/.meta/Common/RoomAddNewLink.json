@@ -3,7 +3,7 @@
   "content": "Add new link",
   "content_en_sha1_hash": "44ff7a980d99eb935ed009b254bb3b7b58a347c4",
   "created_at": "2026-06-01T21:20:31.332Z",
-  "updated_at": "2026-06-01T21:31:08.362Z",
+  "updated_at": "2026-06-03T09:30:05.140Z",
   "comment": {
     "text": "Button label in the room's info panel used to initiate adding a new link.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/index.tsx",
-      "line_number": 196,
+      "line_number": 180,
       "context": "isDisabled={\n additionalLinks\n ? additionalLinks.length >= countCanCreateLink\n : false\n }\n title={t(\"Common:RoomAddNewLink\")}\n dataTestId=\"info_panel_members_add_new_link_button\"\n />\n \n {additionalLinks &&\n additionalLinks.length >= countCanCreateLink ? (",
       "module": "/packages/sdk"
     }

@@ -3,7 +3,7 @@
   "content": "Document Service",
   "content_en_sha1_hash": "56cd1da1e1b8ef8da631a87da2db26079d5a2586",
   "created_at": "2025-05-19T21:30:51.251Z",
-  "updated_at": "2026-05-15T15:37:40.271Z",
+  "updated_at": "2026-06-02T22:18:05.074Z",
   "comment": {
     "text": "This is a category name in the portal settings, referring to the integration settings for the document editing service.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/index.js",
-      "line_number": 137,
-      "context": "];\n \n if (standalone) {\n const documentServiceData = {\n id: \"document-service\",\n name: t(\"Settings:DocumentService\"),\n content: <DocumentService />,\n onClick: async () => {\n clearAbortControllerArr();\n await getDocumentServiceData();\n },",
+      "line_number": 133,
+      "context": "await getSMTPSettingsData();\n },\n },\n {\n id: \"document-service\",\n name: t(\"Settings:DocumentService\"),\n content: <DocumentService />,\n onClick: async () => {\n clearAbortControllerArr();\n await getDocumentServiceData();\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 422,
+      "line_number": 429,
       "context": "{\n id: \"portal-settings_catalog-document-service\",\n key: \"4-4\",\n icon: \"\",\n link: \"document-service\",\n tKey: \"DocumentService\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-smtp-settings\",\n key: \"4-5\",",
       "module": "/packages/client"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

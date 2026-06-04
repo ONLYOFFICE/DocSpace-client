@@ -1,0 +1,29 @@
+{
+  "key_path": "BlockedByAdmin",
+  "content": "Blocked by admin",
+  "content_en_sha1_hash": "065b65779273849a94389785e708081b6a09f20b",
+  "created_at": "2026-06-02T08:43:21.539Z",
+  "updated_at": "2026-06-02T08:45:19.325Z",
+  "comment": {
+    "text": "Status text displayed when a user's access is restricted by an administrator.",
+    "is_auto": true,
+    "updated_at": "2026-06-02T08:45:19.325Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/share/sub-components/LinkTitle.tsx",
+      "line_number": 93,
+      "context": "</div>\n ) : null}\n </div>\n {isBlockedByAdmin ? (\n <Text className={styles.blockedByAdmin}>\n {t(\"Common:BlockedByAdmin\")}\n </Text>\n ) : null}\n </div>\n );\n };",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

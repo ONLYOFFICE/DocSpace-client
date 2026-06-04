@@ -36,7 +36,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { DeviceType } from "@docspace/shared/enums";
+import { DeviceType, FolderType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import { isMobile } from "react-device-detect";
@@ -371,7 +371,16 @@ export default function withFileActions(WrappedFileItem) {
 
       const checkedProps = id <= 0 ? false : isSelected;
 
-      const badgeUrl = getRoomBadgeUrl(item);
+      const { isExternalShareRestricted } = this.props;
+      const itemHasExternalLinks =
+        item.shareSettings?.PrimaryExternalLink != null;
+      const badgeUrl = getRoomBadgeUrl(
+        item,
+        12,
+        isExternalShareRestricted,
+        itemHasExternalLinks,
+      );
+      const badgeIconColor = "var(--info-panel-link-blocked)";
 
       return (
         <WrappedFileItem
@@ -399,6 +408,7 @@ export default function withFileActions(WrappedFileItem) {
           onDragOver={this.onDragOver}
           onDragLeave={this.onDragLeave}
           badgeUrl={badgeUrl}
+          badgeIconColor={badgeIconColor}
           isRecentFolder={isRecentFolder}
           canDrag={canDrag}
           {...this.props}
@@ -412,6 +422,7 @@ export default function withFileActions(WrappedFileItem) {
       {
         settingsStore,
         filesActionsStore,
+        filesSettingsStore,
         dialogsStore,
         treeFoldersStore,
         selectedFolderStore,
@@ -467,6 +478,12 @@ export default function withFileActions(WrappedFileItem) {
       const { startUpload, secondaryProgressDataStore } = uploadDataStore;
       const { withContentSelection } = hotkeyStore;
       const { findOperationById } = secondaryProgressDataStore;
+      const {
+        isExternalShareRestricted: isShareRestricted,
+        externalShareApplyToRooms,
+        externalShareApplyToDocuments,
+        blockExistingLinksOnRestrict,
+      } = filesSettingsStore;
 
       const selectedItem = selection.find(
         (x) => x.id === item.id && x.fileExst === item.fileExst,
@@ -543,6 +560,13 @@ export default function withFileActions(WrappedFileItem) {
       const showHotkeyBorder =
         hotkeyCaret?.id === item.id && hotkeyCaret?.isFolder === item.isFolder;
 
+      const isExternalShareRestricted =
+        isShareRestricted &&
+        blockExistingLinksOnRestrict &&
+        (item.rootFolderType === FolderType.Rooms
+          ? externalShareApplyToRooms
+          : externalShareApplyToDocuments);
+
       return {
         t,
         item,
@@ -595,6 +619,8 @@ export default function withFileActions(WrappedFileItem) {
         isBlockingOperation,
 
         withContentSelection,
+
+        isExternalShareRestricted,
 
         isNewBadgePanelVisible:
           newFilesPanelFolderId === item.id &&

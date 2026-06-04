@@ -1,6 +1,6 @@
 {
   "InvitationLanguage": "Язык приглашения",
-  "InviteMembersManuallyDescription": "Приглашайте новых участников в {{productName}} лично по электронной почте",
+  "InviteMembersManuallyDescription": "Пригласите новых участников в {{productName}} лично по электронной почте",
   "InviteMembersSearchPlaceholder": "Пригласить участников по электронной почте",
   "InviteViaLinkDescriptionAccounts": "Создать универсальную ссылку для самостоятельной авторизации в {{productName}}"
 }

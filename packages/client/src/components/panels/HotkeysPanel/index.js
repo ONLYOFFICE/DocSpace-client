@@ -186,7 +186,7 @@ export default inject(({ settingsStore, publicRoomStore, userStore }) => {
     isVisitor: userStore?.user?.isVisitor || publicRoomStore.isPublicRoom,
   };
 })(
-  withTranslation(["HotkeysPanel", "Article", "Common", "Files"])(
+  withTranslation(["HotkeysPanel", "Common", "Files"])(
     observer(HotkeysPanel),
   ),
 );

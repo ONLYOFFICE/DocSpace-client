@@ -1,0 +1,29 @@
+{
+  "key_path": "AppliesToDocuments",
+  "content": "{{myDocuments}} (Including shared folders/files from the {{myDocuments}})",
+  "content_en_sha1_hash": "db180f9266dc9b20a7610d27e4dcfdcb5975183f",
+  "created_at": "2026-06-02T08:43:23.407Z",
+  "updated_at": "2026-06-02T08:53:09.595Z",
+  "comment": {
+    "text": "Checkbox label in access control settings that defines the scope of a permission. The {{myDocuments}} variable refers to the user's personal documents and folders.",
+    "is_auto": true,
+    "updated_at": "2026-06-02T08:53:09.595Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
+      "line_number": 379,
+      "context": "<div>\n <Checkbox\n dataTestId=\"applies_to_documents_checkbox\"\n isChecked={applyToDocuments}\n onChange={() => setApplyToDocuments(!applyToDocuments)}\n label={t(\"Settings:AppliesToDocuments\", {\n myDocuments: t(\"Common:MyDocuments\"),\n })}\n />\n <div\n className={`category-item-description ${styles.checkboxDescription}`}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -86,7 +86,7 @@
     }
 
     :global(.combo-buttons_arrow-icon),
-    :global(.combo-button_selected-icon-container) {
+    :global(.combo-button_selected-icon) {
       svg path {
         fill: var(--icon-color);
       }
@@ -335,6 +335,10 @@
     height: 16px;
   }
 
+  &.withMargin {
+    margin-inline-end: 15px;
+  }
+
   .wrapper {
     position: relative;
   }
@@ -349,9 +353,11 @@
     z-index: 1;
   }
 
-  svg {
-    path {
-      fill: var(--share-selector-not-active-color);
+  &:not(.coloredIcon) {
+    svg {
+      path {
+        fill: var(--share-selector-not-active-color);
+      }
     }
   }
 }
@@ -529,4 +535,18 @@
   .list {
     width: calc(100% + 16px) !important;
   }
+}
+
+.blockedByAdmin {
+  color: var(--info-panel-link-blocked);
+  font-size: 12px;
+  line-height: 16px;
+  margin: 2px 0 0;
+}
+
+.externalDisabledNotice {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--info-panel-links-color);
+  margin-top: 4px;
 }

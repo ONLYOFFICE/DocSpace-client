@@ -2212,5 +2212,6 @@
   "FolderMovedCount": "Թղթապանակները տեղափոխվել են ({{count}}):",
   "FoldersTrashMoveCompletedCount": "Թղթապանակները տեղափոխվեցին {{sectionName}} ({{count}})։",
   "FolderCopiedCount": "Թղթապանակները պատճենված են ({{count}}):",
-  "FolderDeletedCount": "Թղթապանակները հեռացվել են ({{count}}):"
+  "FolderDeletedCount": "Թղթապանակները հեռացվել են ({{count}}):",
+  "Pin": "Ամրացնել"
 }

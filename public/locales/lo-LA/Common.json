@@ -2204,5 +2204,6 @@
   "FolderMovedCount": "ໂຟນເດີຖືກຍ້າຍ ({{count}}).",
   "FoldersTrashMoveCompletedCount": "ໂຟນເດີຖືກຍ້າຍໄປ {{sectionName}} ({{count}}).",
   "FolderCopiedCount": "ເອກະບົກຖືກຜະລິດສຳເນົາ ({{count}}).",
-  "FolderDeletedCount": "ໂຟນເອກະຄັງຖືກລົບອອກແລ້ວ ({{count}})."
+  "FolderDeletedCount": "ໂຟນເອກະຄັງຖືກລົບອອກແລ້ວ ({{count}}).",
+  "Pin": "ປັກໝຸດ"
 }

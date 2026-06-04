@@ -2204,5 +2204,6 @@
   "FolderMovedCount": "Đã di chuyển thư mục ({{count}}).",
   "FoldersTrashMoveCompletedCount": "Các thư mục đã được chuyển đến {{sectionName}} ({{count}}).",
   "FolderCopiedCount": "Đã sao chép thư mục ({{count}}).",
-  "FolderDeletedCount": "Đã xóa thư mục ({{count}})."
+  "FolderDeletedCount": "Đã xóa thư mục ({{count}}).",
+  "Pin": "Ghim"
 }

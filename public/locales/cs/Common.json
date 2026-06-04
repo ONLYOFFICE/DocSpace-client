@@ -2204,5 +2204,6 @@
   "FolderMovedCount": "Složky přesunuty ({{count}}).",
   "FoldersTrashMoveCompletedCount": "Složky přesunuty do {{sectionName}} ({{count}}).",
   "FolderCopiedCount": "Složky zkopírovány ({{count}}).",
-  "FolderDeletedCount": "Složky odstraněny ({{count}})."
+  "FolderDeletedCount": "Složky odstraněny ({{count}}).",
+  "Pin": "Pin"
 }

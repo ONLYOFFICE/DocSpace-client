@@ -2204,5 +2204,6 @@
   "FolderMovedCount": "Dosjet u zhvendosën ({{count}}).",
   "FoldersTrashMoveCompletedCount": "Dosjet u zhvendosën te {{sectionName}} ({{count}}).",
   "FolderCopiedCount": "Dosjet e kopjuara ({{count}}).",
-  "FolderDeletedCount": "Dosjet u hoqën ({{count}})."
+  "FolderDeletedCount": "Dosjet u hoqën ({{count}}).",
+  "Pin": "Gomë"
 }

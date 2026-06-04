@@ -2212,5 +2212,6 @@
   "FolderMovedCount": "Папки перемещены ({{count}}).",
   "FoldersTrashMoveCompletedCount": "Папки перемещены в раздел {{sectionName}} ({{count}}).",
   "FolderCopiedCount": "Папки скопированы ({{count}}).",
-  "FolderDeletedCount": "Папки удалены ({{count}})."
+  "FolderDeletedCount": "Папки удалены ({{count}}).",
+  "Pin": "Закрепить"
 }

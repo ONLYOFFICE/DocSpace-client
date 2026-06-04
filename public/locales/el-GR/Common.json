@@ -2204,5 +2204,6 @@
   "FolderMovedCount": "Μετακίνηση φακέλων ({{count}}).",
   "FoldersTrashMoveCompletedCount": "Φάκελοι μεταφέρθηκαν στο {{sectionName}} ({{count}}).",
   "FolderCopiedCount": "Αντιγραφή φακέλων ({{count}}).",
-  "FolderDeletedCount": "Διαγραφή φακέλων ({{count}})."
+  "FolderDeletedCount": "Διαγραφή φακέλων ({{count}}).",
+  "Pin": "Καρφίτσωμα"
 }

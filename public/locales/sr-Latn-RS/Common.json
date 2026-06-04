@@ -2212,5 +2212,6 @@
   "FolderMovedCount": "Folderi su pomereni ({{count}}).",
   "FoldersTrashMoveCompletedCount": "Folderi premešteni u {{sectionName}} ({{count}}).",
   "FolderCopiedCount": "Fascikle su kopirane ({{count}}).",
-  "FolderDeletedCount": "Folderi su uklonjeni ({{count}})."
+  "FolderDeletedCount": "Folderi su uklonjeni ({{count}}).",
+  "Pin": "Zakači"
 }

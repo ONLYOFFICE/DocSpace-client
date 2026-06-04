@@ -2204,5 +2204,6 @@
   "FolderMovedCount": "Mapes pārvietotas ({{count}}).",
   "FoldersTrashMoveCompletedCount": "Mapes pārvietotas uz {{sectionName}} ({{count}}).",
   "FolderCopiedCount": "Mapes kopētas ({{count}}).",
-  "FolderDeletedCount": "Mapes noņemtas ({{count}})."
+  "FolderDeletedCount": "Mapes noņemtas ({{count}}).",
+  "Pin": "Piespraust"
 }

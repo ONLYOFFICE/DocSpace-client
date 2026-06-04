@@ -2204,5 +2204,6 @@
   "FolderMovedCount": "ෆෝල්ඩර් {{count}} ක් ගෙනයන ලදි.",
   "FoldersTrashMoveCompletedCount": "ෆෝල්ඩර {{sectionName}} ({{count}}) වෙත ගෙන යන ලදී.",
   "FolderCopiedCount": "ෆෝල්ඩර් පිටපත් කරන ලදී ({{count}}).",
-  "FolderDeletedCount": "ෆෝල්ඩර් {{count}} ක් ඉවත් කරනු ලැබුවා."
+  "FolderDeletedCount": "ෆෝල්ඩර් {{count}} ක් ඉවත් කරනු ලැබුවා.",
+  "Pin": "අමුණන්න"
 }

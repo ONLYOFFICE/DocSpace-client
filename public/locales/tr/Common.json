@@ -2204,5 +2204,6 @@
   "FolderMovedCount": "Klasörler taşındı ({{count}}).",
   "FoldersTrashMoveCompletedCount": "Klasörler {{sectionName}} ({{count}}) konumuna taşındı.",
   "FolderCopiedCount": "Klasörler kopyalandı ({{count}}).",
-  "FolderDeletedCount": "Klasörler kaldırıldı ({{count}})."
+  "FolderDeletedCount": "Klasörler kaldırıldı ({{count}}).",
+  "Pin": "Sabitle"
 }

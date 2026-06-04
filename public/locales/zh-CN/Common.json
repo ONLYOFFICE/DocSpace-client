@@ -2212,5 +2212,6 @@
   "FolderMovedCount": "文件夹已移动 ({{count}})。",
   "FoldersTrashMoveCompletedCount": "文件夹已移至{{sectionName}}（{{count}} 个）。",
   "FolderCopiedCount": "文件夹已复制 ({{count}})。",
-  "FolderDeletedCount": "文件夹已删除 ({{count}})。"
+  "FolderDeletedCount": "文件夹已删除 ({{count}})。",
+  "Pin": "置顶"
 }

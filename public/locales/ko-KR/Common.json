@@ -2173,5 +2173,6 @@
   "FolderMovedCount": "폴더 이동됨 ({{count}}).",
   "FoldersTrashMoveCompletedCount": "폴더가 {{sectionName}} ({{count}})으로 이동되었습니다.",
   "FolderCopiedCount": "폴더 복사됨 ({{count}}).",
-  "FolderDeletedCount": "폴더 제거됨 ({{count}})."
+  "FolderDeletedCount": "폴더 제거됨 ({{count}}).",
+  "Pin": "고정"
 }

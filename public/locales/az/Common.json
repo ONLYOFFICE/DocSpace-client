@@ -2204,5 +2204,6 @@
   "FolderMovedCount": "Qovluqlar köçürüldü ({{count}}).",
   "FoldersTrashMoveCompletedCount": "Papqalar {{sectionName}} ({{count}}) bölməsinə köçürüldü.",
   "FolderCopiedCount": "Qovluqlar köçürüldü ({{count}}).",
-  "FolderDeletedCount": "Qovluqlar silindi ({{count}})."
+  "FolderDeletedCount": "Qovluqlar silindi ({{count}}).",
+  "Pin": "Sabitləyin"
 }

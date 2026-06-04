@@ -2212,5 +2212,6 @@
   "FolderMovedCount": "Dossiers déplacés ({{count}}).",
   "FoldersTrashMoveCompletedCount": "Dossiers déplacés vers {{sectionName}} ({{count}}).",
   "FolderCopiedCount": "Dossiers copiés ({{count}}).",
-  "FolderDeletedCount": "Dossiers supprimés ({{count}})."
+  "FolderDeletedCount": "Dossiers supprimés ({{count}}).",
+  "Pin": "Épingler"
 }

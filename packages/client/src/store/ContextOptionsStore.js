@@ -645,7 +645,9 @@ class ContextOptionsStore {
       if (item.isRoom || !item.isFolder) {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
-          event: item.isRoom ? AnalyticsEvents.RoomShared : AnalyticsEvents.FileShared,
+          event: item.isRoom
+            ? AnalyticsEvents.RoomShared
+            : AnalyticsEvents.FileShared,
           id: item.id,
           parentId: item.isRoom ? item.parentId : item.folderId,
         });
@@ -921,8 +923,8 @@ class ContextOptionsStore {
 
     if (isRoom) {
       translations = {
-        successRemoveRoom: t("Files:RoomRemoved"),
-        successRemoveRooms: t("Files:RoomsRemoved"),
+        successRemoveRoom: t("Common:RoomRemoved"),
+        successRemoveRooms: t("Common:RoomsRemoved"),
       };
 
       deleteRoomsAction([selectedFolderId], translations).catch((err) =>
@@ -1834,7 +1836,7 @@ class ContextOptionsStore {
         {
           id: "header_option_empty-trash",
           key: "empty-trash",
-          label: t("Files:EmptySection", {
+          label: t("Common:EmptySection", {
             sectionName: t("Common:TrashSection"),
           }),
           onClick: this.onEmptyTrashAction,
@@ -1844,7 +1846,7 @@ class ContextOptionsStore {
         {
           id: "header_option_restore-all",
           key: "restore-all",
-          label: t("RestoreAll"),
+          label: t("Common:RestoreAll"),
           onClick: this.onRestoreAllAction,
           icon: MoveReactSvgUrl,
           disabled: false,
@@ -1865,7 +1867,7 @@ class ContextOptionsStore {
         {
           id: "header_option_restore-all",
           key: "restore-all",
-          label: t("RestoreAll"),
+          label: t("Common:RestoreAll"),
           onClick: this.onRestoreAllArchiveAction,
           disabled: !canRestoreAll,
           icon: MoveReactSvgUrl,
@@ -1890,7 +1892,7 @@ class ContextOptionsStore {
         {
           id: "header_option_empty-section",
           key: "empty-section",
-          label: t("Files:EmptySection", {
+          label: t("Common:EmptySection", {
             sectionName: t("Common:MyDocuments"),
           }),
           onClick: this.onEmptyPersonalAction,
@@ -1920,7 +1922,9 @@ class ContextOptionsStore {
       if (item.isRoom || !item.isFolder) {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
-          event: item.isRoom ? AnalyticsEvents.RoomShared : AnalyticsEvents.FileShared,
+          event: item.isRoom
+            ? AnalyticsEvents.RoomShared
+            : AnalyticsEvents.FileShared,
           id: item.id,
           parentId: item.isRoom ? item.parentId : item.folderId,
         });

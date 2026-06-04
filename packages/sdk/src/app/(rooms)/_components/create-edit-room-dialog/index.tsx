@@ -40,6 +40,7 @@ import {
   InputType,
 } from "@docspace/ui-kit/components/text-input";
 import { Text } from "@docspace/ui-kit/components/text";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { Tag } from "@docspace/ui-kit/components/tag";
 import {
   Avatar,
@@ -350,7 +351,7 @@ const CreateEditRoomDialog = ({
       }
       onClose();
     } catch (e) {
-      console.error(e);
+      toastr.error(e as Error);
     } finally {
       setIsLoading(false);
     }

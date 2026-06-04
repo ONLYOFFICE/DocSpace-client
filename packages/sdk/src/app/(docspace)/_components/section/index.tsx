@@ -47,9 +47,10 @@ import { useSettingsStore } from "../../_store/SettingsStore";
 
 type SectionProps = {
   sectionHeaderContent: React.ReactNode;
-  sectionFilterContent: React.ReactNode;
+  sectionFilterContent?: React.ReactNode;
   sectionBodyContent: React.ReactNode;
   sectionBannerContent?: React.ReactNode;
+  sectionWarningContent?: React.ReactNode;
 
   infoPanelHeaderContent?: React.ReactNode;
   infoPanelBodyContent?: React.ReactNode;
@@ -62,6 +63,18 @@ type SectionProps = {
   showFilter?: boolean;
   showHeader?: boolean;
   viewAs?: TViewAs;
+  /**
+   * Render the banner inside the scrollable body so it scrolls away under the
+   * sticky header (used by files to host the quick-action tiles above the
+   * sticky filter). Defaults to the pinned-banner behaviour.
+   */
+  scrollableBanner?: boolean;
+  /**
+   * Render the (desktop) filter slot inside the scroll body as sticky and pin
+   * the table header below it via `position: sticky` — used by files so the
+   * quick-action tiles scroll away above a sticky filter without any host JS.
+   */
+  stickyTableHeader?: boolean;
 };
 
 export const SectionWrapper = observer(
@@ -70,6 +83,7 @@ export const SectionWrapper = observer(
     sectionFilterContent,
     sectionBodyContent,
     sectionBannerContent,
+    sectionWarningContent,
     infoPanelHeaderContent,
     infoPanelBodyContent,
     isInfoPanelVisible,
@@ -78,6 +92,8 @@ export const SectionWrapper = observer(
     filesFilter,
     showFilter = true,
     viewAs,
+    scrollableBanner,
+    stickyTableHeader,
   }: SectionProps) => {
     const searchParams = useSearchParams();
 
@@ -96,9 +112,7 @@ export const SectionWrapper = observer(
 
     const isEmptyList = settingsStore.isEmptyList || isEmptyPage;
 
-    const showInfoPanel = !!(
-      infoPanelHeaderContent || infoPanelBodyContent
-    );
+    const showInfoPanel = !!(infoPanelHeaderContent || infoPanelBodyContent);
 
     return (
       <Section
@@ -111,6 +125,8 @@ export const SectionWrapper = observer(
         isInfoPanelVisible={isInfoPanelVisible}
         setIsInfoPanelVisible={setIsInfoPanelVisible}
         canDisplay={showInfoPanel}
+        scrollableBanner={scrollableBanner}
+        stickyTableHeader={stickyTableHeader}
       >
         {sectionBannerContent ? (
           <Section.SectionBanner>{sectionBannerContent}</Section.SectionBanner>
@@ -122,11 +138,20 @@ export const SectionWrapper = observer(
           {effectiveShowFilter ? sectionFilterContent : null}
         </Section.SectionFilter>
 
+        {sectionWarningContent ? (
+          <Section.SectionWarning>
+            {sectionWarningContent}
+          </Section.SectionWarning>
+        ) : null}
+
         <Section.SectionBody>{sectionBodyContent}</Section.SectionBody>
 
-        <Section.InfoPanelHeader>{infoPanelHeaderContent}</Section.InfoPanelHeader>
+        <Section.InfoPanelHeader>
+          {infoPanelHeaderContent}
+        </Section.InfoPanelHeader>
         <Section.InfoPanelBody>{infoPanelBodyContent}</Section.InfoPanelBody>
       </Section>
     );
   },
 );
+

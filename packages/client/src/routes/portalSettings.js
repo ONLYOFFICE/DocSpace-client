@@ -424,10 +424,6 @@ const PortalSettingsRoutes = {
       ),
     },
     {
-      path: "apps",
-      element: <ViewComponent />,
-    },
-    {
       path: "integration",
       element: <Navigate to="integration/third-party-services" replace />,
     },

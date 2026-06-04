@@ -44,7 +44,6 @@
   "AppliesToRooms": "{{rooms}} (Vključno s skupnimi mapami/datotekami iz sobe)",
   "AppliesToRoomsDescription": "S prepovedjo ustvarjanja povezav v {{rooms}} bodo nove povezave ustvarjene samo z vrsto samo za uporabnike {{productName}}.",
   "AppliesToRoomsWarning": "Javne sobe bodo postale samo za interno uporabo in ne bodo dostopne zunanjim uporabnikom.",
-  "AppsDescription": "Upravljajte, katere aplikacije so na voljo v vašem {{productName}}. Omogočene aplikacije bodo vidne v glavnem meniju za uporabnike, ki do njih dostopajo.",
   "AuditSubheader": "Podrazdelek vam omogoča brskanje po seznamu zadnjih sprememb (ustvarjanje, spreminjanje, brisanje itd.), ki so jih uporabniki naredili za entitete (sobe, priložnosti, datoteke itd.) v vašem prostoru {{productName}}.",
   "AuditTrailNav": "Revizijska pot",
   "AuthorizationKeysInfo": "Z avtorizacijskimi ključi lahko povežete storitve tretjih oseb s svojim prostorom. Enostavno se prijavite z Facebook, Google ali LinkedIn. Dodajte Dropbox, OneDrive in druge račune za delo s tam shranjenimi datotekami.",

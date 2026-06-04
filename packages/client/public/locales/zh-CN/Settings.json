@@ -44,7 +44,6 @@
   "AppliesToRooms": "{{rooms}}（包括来自房间的共享文件夹/文件）",
   "AppliesToRoomsDescription": "在 {{rooms}} 中禁止创建链接后，新链接将仅以「{{productName}} 用户专用」类型创建。",
   "AppliesToRoomsWarning": "公开房间也将变为仅限内部访问，外部用户将无法访问。",
-  "AppsDescription": "管理哪些应用在您的{{productName}}中可用。已启用的应用将出现在有权访问的用户的主菜单中。",
   "AuditSubheader": "此子部分允许您浏览用户对{{productName}}中的实体（房间、机会、文件等）所做的最新更改（创建、修改、删除等）列表。",
   "AuditTrailNav": "审计追踪",
   "AuthorizationKeysInfo": "使用授权密钥，您可以将第三方服务连接到您的空间。轻松使用 Facebook、Google 或 LinkedIn 登录。添加 Dropbox、OneDrive 或其他帐户处理存储的文件。",

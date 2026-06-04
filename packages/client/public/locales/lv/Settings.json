@@ -44,7 +44,6 @@
   "AppliesToRooms": "{{rooms}} (Ieskaitot koplietotās mapes/failus no telpas)",
   "AppliesToRoomsDescription": "Aizliedzot saišu izveidi sadaļā {{rooms}}, jaunas saites tiks veidotas tikai ar tipu \"Tikai {{productName}} lietotāji\".",
   "AppliesToRoomsWarning": "Publiskās telpas arī kļūs tikai iekšēji pieejamas un nebūs pieejamas ārējiem lietotājiem.",
-  "AppsDescription": "Pārvaldiet, kuras lietotnes ir pieejamas jūsu {{productName}}. Iespējotas lietotnes parādīsies galvenajā izvēlnē lietotājiem, kuriem ir piekļuve tām.",
   "AuditSubheader": "Apakšsadaļa ļauj pārlūkot jaunāko izmaiņu sarakstu (izveide, mainīšana, dzēšana utt.), ko lietotāji veikuši jūsu {{productName}} esošajās entītijās (telpas, iespējas, faili utt.).",
   "AuditTrailNav": "Audita žurnāls",
   "AuthorizationKeysInfo": "Izmantojot Autorizācijas atslēgas, varat savienot trešo pušu pakalpojumus ar savu darba vietu. Vienkārši piesakieties, izmantojot Facebook, Google vai LinkedIn. Pievienojiet Dropbox, OneDrive un citus kontus, lai strādātu ar tur glabātiem failiem.",

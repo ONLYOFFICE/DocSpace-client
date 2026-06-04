@@ -44,7 +44,6 @@
   "AppliesToRooms": "{{rooms}} (incluindo pastas/ficheiros partilhados a partir da sala)",
   "AppliesToRoomsDescription": "Ao proibir a criação de links em {{rooms}}, os novos links serão criados apenas com o tipo apenas utilizadores de {{productName}}.",
   "AppliesToRoomsWarning": "As Salas Públicas também passarão a ser apenas internas e não ficarão acessíveis a utilizadores externos.",
-  "AppsDescription": "Gerencie quais aplicações estão disponíveis no seu {{productName}}. As aplicações ativas aparecerão no menu principal para os utilizadores que têm acesso a elas.",
   "AuditSubheader": "A subsecção permite-lhe navegar através da lista das últimas alterações (criação, modificação, eliminação, etc.) feitas pelos utilizadores às entidades (salas, oportunidades, ficheiros, etc.) dentro do seu {{productName}}.",
   "AuditTrailNav": "Trilha de Auditoria",
   "AuthorizationKeysInfo": "Com as Chaves de Autorização, você pode conectar serviços de terceiros ao seu espaço. Faça login facilmente com Facebook, Google ou LinkedIn. Adicione Dropbox, OneDrive e outras contas para trabalhar com arquivos armazenados lá.",

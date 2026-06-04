@@ -3,7 +3,7 @@
   "content": "Search",
   "content_en_sha1_hash": "bce06414177f72ab70e6387b6af9f8ceef0d6049",
   "created_at": "2025-05-19T21:30:48.328Z",
-  "updated_at": "2026-06-02T22:18:05.002Z",
+  "updated_at": "2026-06-03T09:30:05.016Z",
   "comment": {
     "text": "This is a placeholder text for a search input field, prompting the user to type their search query.",
     "is_auto": true,
@@ -120,9 +120,9 @@
       "module": "/packages/sdk"
     },
     {
-      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/sub-components/RoomHeader.tsx",
-      "line_number": 103,
-      "context": "</Text>\n <div className={styles.roomActions}>\n <IconButton\n iconName={SearchIconReactSvgUrl}\n size={16}\n title={t(\"Common:Search\")}\n onClick={onSearchOpen}\n />\n {hasEditAccess ? (\n <IconButton\n iconName={PersonPlusReactSvgUrl}",
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/sub-components/RoomHeader.tsx",
+      "line_number": 112,
+      "context": "<div className={styles.roomActions}>\n {isMembersView ? (\n <IconButton\n iconName={SearchIconReactSvgUrl}\n size={16}\n title={t(\"Common:Search\")}\n onClick={() => setShowSearch(true)}\n />\n ) : null}\n {isMembersView && hasEditAccess ? (\n <IconButton",
       "module": "/packages/sdk"
     },
     {

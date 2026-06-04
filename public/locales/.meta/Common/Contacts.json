@@ -3,7 +3,7 @@
   "content": "Contacts",
   "content_en_sha1_hash": "b0dd615cbbdcbf21ffb72115599ca915634fcb85",
   "created_at": "2025-05-19T21:30:43.662Z",
-  "updated_at": "2026-06-02T22:18:04.976Z",
+  "updated_at": "2026-06-03T09:40:22.073Z",
   "comment": {
     "text": "This is a header label for a people selector or invitation panel, identifying the section as \"Contacts\".",
     "is_auto": true,
@@ -19,14 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/components/AppsSidebar/FooterMenu.tsx",
-      "line_number": 70,
-      "context": "return (\n <>\n {showContacts && (\n <ArticleItem\n key=\"contacts\"\n text={t(\"Common:Contacts\")}\n title={t(\"Common:Contacts\")}\n icon={ContactsIconUrl}\n showText={showText}\n linkData={EMPTY_LINK}\n onClick={() => navigate(\"/accounts/people\")}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/AppsSidebar/FooterMenu.tsx",
-      "line_number": 70,
-      "context": "return (\n <>\n {showContacts && (\n <ArticleItem\n key=\"contacts\"\n text={t(\"Common:Contacts\")}\n title={t(\"Common:Contacts\")}\n icon={ContactsIconUrl}\n showText={showText}\n linkData={EMPTY_LINK}\n onClick={() => navigate(\"/accounts/people\")}",
+      "line_number": 80,
+      "context": "const items: NavMenuItem[] = [];\n \n if (showContacts) {\n items.push({\n id: CONTACTS_ID,\n label: t(\"Common:Contacts\"),\n icon: ContactsIconUrl,\n onClick: () => navigate(\"/accounts/people\"),\n });\n }\n if (showBilling) {",
       "module": "/packages/client"
     },
     {

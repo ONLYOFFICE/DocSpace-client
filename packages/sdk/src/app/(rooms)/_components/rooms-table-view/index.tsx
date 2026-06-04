@@ -209,7 +209,7 @@ const RoomsTableView = ({
         sorted={filterSortOrder === "descending"}
         sortingVisible
         showSettings
-        settingsTitle={t("Files:TableSettingsTitle")}
+        settingsTitle={t("Common:TableSettingsTitle")}
         infoPanelVisible={infoPanelVisible}
       />
       <TableBody

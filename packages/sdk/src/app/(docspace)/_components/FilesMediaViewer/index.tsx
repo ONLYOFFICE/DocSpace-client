@@ -63,6 +63,11 @@ function FilesMediaViewer({ filesSettings }: FilesMediaViewerProps) {
     onPrevClick,
     autoPlay,
     getIcon,
+    onClickDownload,
+    onClickRename,
+    onClickDelete,
+    onDownload,
+    onDelete,
   } = useMediaViewer({ filesSettings });
   const { currentDeviceType } = useSettingsStore();
 
@@ -84,6 +89,11 @@ function FilesMediaViewer({ filesSettings }: FilesMediaViewerProps) {
           currentDeviceType={currentDeviceType}
           nextMedia={onNextClick}
           prevMedia={onPrevClick}
+          onClickDownload={onClickDownload}
+          onClickRename={onClickRename}
+          onClickDelete={onClickDelete}
+          onDownload={onDownload}
+          onDelete={onDelete}
         />
       }
     />

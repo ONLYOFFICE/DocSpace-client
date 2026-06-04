@@ -34,6 +34,10 @@
  */
 
 import React, { useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
+
+import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
+import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
 
 import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 import type { TLogo } from "@docspace/ui-kit/types";
@@ -60,6 +64,7 @@ import type { TFolderItem, TFileItem } from "./useItemList";
  * rendering while this hook owns the "which menu model to show" decision.
  */
 export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
+  const { t } = useTranslation(["Common"]);
   const filesListStore = useFilesListStore();
   const deleteCtx = React.useContext(DeleteContext);
   const fileOpsCtx = React.useContext(FileOperationsContext);
@@ -152,6 +157,34 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
     });
 
   const getContextOptionsFolder = useCallback((): ContextMenuModel[] => {
+    // Trash header menu: Empty all / Restore all over the whole trash listing.
+    // Reuses the existing bulk delete (permanent in trash) and restore flows.
+    if (isTrashSection && !isRoom) {
+      const allItems = filesListStore.items;
+      const isEmpty = allItems.length === 0;
+
+      return [
+        {
+          id: "header_option_empty-trash",
+          key: "empty-trash",
+          label: t("Common:EmptySection", {
+            sectionName: t("Common:TrashSection"),
+          }),
+          icon: ClearTrashReactSvgUrl,
+          disabled: isEmpty || !deleteCtx?.emptyTrash,
+          onClick: () => deleteCtx?.emptyTrash?.(),
+        },
+        {
+          id: "header_option_restore-all",
+          key: "restore-all",
+          label: t("Common:RestoreAll"),
+          icon: MoveReactSvgUrl,
+          disabled: isEmpty || !fileOpsCtx?.restoreItems,
+          onClick: () => fileOpsCtx?.restoreItems(allItems),
+        },
+      ];
+    }
+
     if (isRoom && currentFolderItem) {
       // Use the room-specific context menu and remove items that make no sense
       // when the user is already inside the room.
@@ -168,6 +201,11 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
     }
     return getFolderHeaderContextMenuModel(true) ?? [];
   }, [
+    t,
+    isTrashSection,
+    filesListStore.items,
+    deleteCtx,
+    fileOpsCtx,
     isRoom,
     currentFolderItem,
     getRoomContextModel,

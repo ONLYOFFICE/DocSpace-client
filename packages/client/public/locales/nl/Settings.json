@@ -44,7 +44,6 @@
   "AppliesToRooms": "{{rooms}} (inclusief gedeelde mappen/bestanden uit de kamer)",
   "AppliesToRoomsDescription": "Door het aanmaken van links te verbieden in {{rooms}}, worden nieuwe links uitsluitend aangemaakt met het type Alleen {{productName}}-gebruikers.",
   "AppliesToRoomsWarning": "Openbare kamers worden ook intern en zijn niet langer toegankelijk voor externe gebruikers.",
-  "AppsDescription": "Beheer welke apps beschikbaar zijn in uw {{productName}}. Ingeschakelde apps verschijnen in het hoofdmenu voor gebruikers die er toegang toe hebben.",
   "AuditSubheader": "Met deze subsectie kunt u bladeren door de lijst met de laatste wijzigingen (aanmaak, wijziging, verwijdering enz.) die gebruikers hebben aangebracht in de entiteiten (ruimtes, kansen, bestanden enz.) binnen uw {{productName}}.",
   "AuditTrailNav": "Audit Trail",
   "AuthorizationKeysInfo": "Met Autorisatiesleutels kunt u externe services koppelen aan uw werkruimte. Meld u eenvoudig aan met Facebook, Google of LinkedIn. Voeg Dropbox, OneDrive en andere accounts toe om met daar opgeslagen bestanden te werken.",

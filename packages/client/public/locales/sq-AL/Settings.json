@@ -44,7 +44,6 @@
   "AppliesToRooms": "{{rooms}} (Duke përfshirë dosjet/skedarët e ndarë nga dhoma)",
   "AppliesToRoomsDescription": "Duke ndaluar krijimin e lidhjeve në {{rooms}}, lidhjet e reja do të krijohen vetëm me llojin vetëm përdoruesit e {{productName}}.",
   "AppliesToRoomsWarning": "Dhomat publike do të bëhen gjithashtu vetëm për përdorim të brendshëm dhe nuk do të jenë të aksesueshme për përdoruesit e jashtëm.",
-  "AppsDescription": "Menaxhoni se cilat aplikacione janë të disponueshme në {{productName}} tuaj. Aplikacionet e aktivizuara do të shfaqen në menunë kryesore për përdoruesit që kanë qasje në to.",
   "AuditSubheader": "Nënseksioni ju lejon të shfletoni listën e ndryshimeve më të fundit (krijimi, modifikimi, fshirja etj.) të bëra nga përdoruesit në entitetet (dhoma, mundësi, skedarë etj.) brenda {{productName}} tuaj.",
   "AuditTrailNav": "Gjurma e Auditimit",
   "AuthorizationKeysInfo": "Me çelësat e autorizimit, mund të lidhni shërbimet e palëve të treta me hapësirën tuaj. Hyni lehtësisht me Facebook, Google ose LinkedIn. Shto Dropbox, OneDrive dhe llogari të tjera për të punuar me skedarët e ruajtur atje.",

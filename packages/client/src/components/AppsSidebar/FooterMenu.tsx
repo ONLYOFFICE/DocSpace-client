@@ -24,17 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useNavigate } from "react-router";
+import React from "react";
+import { useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import { ArticleItem } from "@docspace/ui-kit/components/article/item";
+import { NavMenu } from "@docspace/ui-kit/components/nav-menu";
+import type {
+  NavMenuGroup,
+  NavMenuItem,
+} from "@docspace/ui-kit/components/nav-menu";
 
 import ContactsIconUrl from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg?url";
 import BillingIconUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-payment.svg?url";
 import DeveloperIconUrl from "PUBLIC_DIR/images/icons/16/catalog.developer.react.svg?url";
 import SettingsIconUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 
-const EMPTY_LINK = { path: "", state: {} };
+const CONTACTS_ID = "footer-contacts";
+const BILLING_ID = "footer-billing";
+const DEVELOPER_ID = "footer-developer-tools";
+const SETTINGS_ID = "footer-settings";
 
 type FooterMenuProps = {
   showText: boolean;
@@ -54,6 +62,7 @@ const FooterMenu = ({
   isNotPaidPeriod,
 }: FooterMenuProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation(["Common"]);
 
   const isAdminOrOwner = isAdmin || isOwner;
@@ -62,54 +71,65 @@ const FooterMenu = ({
   const showDeveloperTools = isAdminOrOwner;
   const showSettings = isAdminOrOwner && !isNotPaidPeriod;
 
-  return (
-    <>
-      {showContacts && (
-        <ArticleItem
-          key="contacts"
-          text={t("Common:Contacts")}
-          title={t("Common:Contacts")}
-          icon={ContactsIconUrl}
-          showText={showText}
-          linkData={EMPTY_LINK}
-          onClick={() => navigate("/accounts/people")}
-        />
-      )}
-      {showBilling && (
-        <ArticleItem
-          key="billing"
-          text={t("Common:Billing")}
-          title={t("Common:Billing")}
-          icon={BillingIconUrl}
-          showText={showText}
-          linkData={EMPTY_LINK}
-          onClick={() => navigate("/portal-settings/payments/portal-payments")}
-        />
-      )}
-      {showDeveloperTools && (
-        <ArticleItem
-          key="developer-tools"
-          text={t("Common:DeveloperTools")}
-          title={t("Common:DeveloperTools")}
-          icon={DeveloperIconUrl}
-          showText={showText}
-          linkData={EMPTY_LINK}
-          onClick={() => navigate("/developer-tools/overview")}
-        />
-      )}
-      {showSettings && (
-        <ArticleItem
-          key="settings"
-          text={t("Common:Settings")}
-          title={t("Common:Settings")}
-          icon={SettingsIconUrl}
-          showText={showText}
-          linkData={EMPTY_LINK}
-          onClick={() => navigate("/portal-settings")}
-        />
-      )}
-    </>
-  );
+  const groups = React.useMemo<NavMenuGroup[]>(() => {
+    const items: NavMenuItem[] = [];
+
+    if (showContacts) {
+      items.push({
+        id: CONTACTS_ID,
+        label: t("Common:Contacts"),
+        icon: ContactsIconUrl,
+        onClick: () => navigate("/accounts/people"),
+      });
+    }
+    if (showBilling) {
+      items.push({
+        id: BILLING_ID,
+        label: t("Common:Billing"),
+        icon: BillingIconUrl,
+        onClick: () =>
+          navigate("/portal-settings/payments/portal-payments"),
+      });
+    }
+    if (showDeveloperTools) {
+      items.push({
+        id: DEVELOPER_ID,
+        label: t("Common:DeveloperTools"),
+        icon: DeveloperIconUrl,
+        onClick: () => navigate("/developer-tools/overview"),
+      });
+    }
+    if (showSettings) {
+      items.push({
+        id: SETTINGS_ID,
+        label: t("Common:Settings"),
+        icon: SettingsIconUrl,
+        onClick: () => navigate("/portal-settings"),
+      });
+    }
+
+    return items.length > 0 ? [{ id: "footer", items }] : [];
+  }, [
+    t,
+    navigate,
+    showContacts,
+    showBilling,
+    showDeveloperTools,
+    showSettings,
+  ]);
+
+  const activeId = React.useMemo(() => {
+    const { pathname } = location;
+    if (pathname.startsWith("/accounts")) return CONTACTS_ID;
+    if (pathname.startsWith("/portal-settings/payments")) return BILLING_ID;
+    if (pathname.startsWith("/developer-tools")) return DEVELOPER_ID;
+    if (pathname.startsWith("/portal-settings")) return SETTINGS_ID;
+    return undefined;
+  }, [location]);
+
+  if (groups.length === 0) return null;
+
+  return <NavMenu groups={groups} activeItemId={activeId} iconOnly={!showText} />;
 };
 
 export default FooterMenu;

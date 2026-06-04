@@ -129,10 +129,10 @@ const DeleteDialogComponent = (props) => {
     const translations = {
       successRemoveRoom: isAIAgent
         ? t("Common:AgentRemoved")
-        : t("Files:RoomRemoved"),
+        : t("Common:RoomRemoved"),
       successRemoveRooms: isAIAgent
         ? t("Common:AgentsRemoved")
-        : t("Files:RoomsRemoved"),
+        : t("Common:RoomsRemoved"),
     };
 
     if (isTemplate) {
@@ -222,7 +222,7 @@ const DeleteDialogComponent = (props) => {
       return t("Common:DeleteRoomTitle");
     }
 
-    if (isRecycleBinFolder) return t("EmptyTrashDialog:DeleteForeverTitle");
+    if (isRecycleBinFolder) return t("Common:DeleteForeverTitle");
 
     if (isPrivacyFolder || selection[0]?.providerKey)
       return t("Common:Confirmation");
@@ -315,7 +315,6 @@ const DeleteDialog = withTranslation([
   "Common",
   "Translations",
   "Files",
-  "EmptyTrashDialog",
 ])(DeleteDialogComponent);
 
 export default inject(

@@ -2,6 +2,5 @@
   "ConversionMessage": "Всички документи, които качвате, ще бъдат конвертирани във формат Office Open XML (docx, xlsx или pptx) за по-бързо редактиране.",
   "ConvertedFileDestination": "Копие на файла ще бъде създадено в папката <strong>{{folderTitle}}</strong>.",
   "FileUploadTitle": "Качване на файл",
-  "HideMessage": "Не показвай това съобщение отново",
   "InfoCreateFileIn": "Новият файл '{{fileTitle}}' се създава в '{{folderTitle}}'"
 }

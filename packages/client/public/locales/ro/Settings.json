@@ -44,7 +44,6 @@
   "AppliesToRooms": "{{rooms}} (Inclusiv folderele/fișierele partajate din sală)",
   "AppliesToRoomsDescription": "Prin interzicerea creării de linkuri în {{rooms}}, noile linkuri vor fi create numai cu tipul Doar utilizatorii {{productName}}.",
   "AppliesToRoomsWarning": "Sălile publice vor deveni, de asemenea, exclusiv interne și nu vor fi accesibile utilizatorilor externi.",
-  "AppsDescription": "Gestionați aplicațiile disponibile în {{productName}}. Aplicațiile activate vor apărea în meniul principal pentru utilizatorii care au acces la ele.",
   "AuditSubheader": "Subsecțiunea vă permite să răsfoiți lista celor mai recente modificări (creare, modificare, ştergere etc.) efectuate de utilizatori asupra elementelor (săli, oportunităţi, fişiere etc.) din cadrul {{productName}}.",
   "AuditTrailNav": "Lanţ de audit",
   "AuthorizationKeysInfo": "Cu cheile de autorizare, vă puteți conecta spațiul dvs. la servicii terțe. Conectați-vă cu ușurință cu Facebook, Google sau LinkedIn. Adăugați Dropbox, OneDrive și alte conturi pentru a lucra cu fișierele stocate acolo.",

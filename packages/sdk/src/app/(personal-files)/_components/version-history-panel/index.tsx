@@ -460,6 +460,7 @@ const VersionHistoryPanel = observer(() => {
         visible={isVisible}
         onClose={close}
         displayType={ModalDialogType.aside}
+        withBodyScroll
         dataTestId="version_history_panel"
       >
         <ModalDialog.Header>{title}</ModalDialog.Header>

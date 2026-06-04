@@ -48,6 +48,7 @@ import type {
 import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TPathParts } from "@docspace/shared/types";
+import type { TLogo } from "@docspace/ui-kit/types";
 import api from "@docspace/shared/api";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
 import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
@@ -71,6 +72,7 @@ import RootScrollbar from "@/app/(docspace)/_components/RootScrollbar";
 import useFrameHeaderConfig from "@/hooks/useFrameHeaderConfig";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
+import { normalizeRoomLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
 
 import RoomsList from "../rooms-list";
 import RoomsFilter from "../rooms-filter";
@@ -131,9 +133,11 @@ const RoomsLayout = observer(
         const updated = (await api.rooms.getRoomInfo(
           sel.id,
         )) as unknown as TFolder;
+        const rawLogo = (updated as unknown as { logo?: TLogo }).logo;
         infoPanelStore.setSelection({
           ...updated,
           isRoom: true,
+          ...normalizeRoomLogo(rawLogo),
         } as unknown as TFolder);
         const existing = filesListStore.items.find((i) => i.id === sel.id);
         if (existing) {
@@ -284,9 +288,6 @@ const RoomsLayout = observer(
           />
           <SelectionArea isRooms />
           <DeviceTypeObserver />
-          {/* Renders the room-link edit side panel driven by InfoPanelStore
-              (LinkRow opens it). Mounted here so it shares the rooms-tree
-              InfoPanelStore; docs-layout mounts its own for personal-files. */}
           <InfoPanelEditLinkDialog />
         </RootScrollbar>
       </div>
@@ -295,4 +296,3 @@ const RoomsLayout = observer(
 );
 
 export default RoomsLayout;
-

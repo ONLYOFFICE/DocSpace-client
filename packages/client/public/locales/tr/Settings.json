@@ -44,7 +44,6 @@
   "AppliesToRooms": "{{rooms}} (Odadan paylaşılan klasörler/dosyalar dahil)",
   "AppliesToRoomsDescription": "{{rooms}} bölümünde bağlantı oluşturmayı yasaklayarak yeni bağlantılar yalnızca {{productName}} kullanıcılarına özel türde oluşturulacaktır.",
   "AppliesToRoomsWarning": "Herkese açık odalar da yalnızca dahili kullanıma geçecek ve harici kullanıcılar tarafından erişilemez olacaktır.",
-  "AppsDescription": "{{productName}} uygulamanızda hangi uygulamaların kullanılabileceğini yönetin. Etkin uygulamalar, bunlara erişimi olan kullanıcılar için ana menüde görünecektir.",
   "AuditSubheader": "Alt bölüm, kullanıcılar tarafından {{productName}}'inizdeki varlıklarda (odalar, fırsatlar, dosyalar vb.) yapılan en son değişikliklerin (oluşturma, değiştirme, silme vb.) listesine göz atmanıza olanak tanır.",
   "AuditTrailNav": "Denetim İzleme",
   "AuthorizationKeysInfo": "Yetkilendirme Anahtarları ile üçüncü parti hizmetleri alanınıza bağlayabilirsiniz. Facebook, Google veya LinkedIn ile kolayca giriş yapın. Dropbox, OneDrive ve diğer hesapları ekleyerek orada saklanan dosyalarla çalışın.",

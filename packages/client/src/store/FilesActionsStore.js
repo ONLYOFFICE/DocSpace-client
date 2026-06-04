@@ -1838,10 +1838,12 @@ class FilesActionStore {
           ? t("AIAgentsPinned", { aiAgents: t("Common:AIAgents") })
           : t("AIAgentsUnpinned", { aiAgents: t("Common:AIAgents") });
       } else {
-        translationForOneItem = isPin ? t("RoomPinned") : t("RoomUnpinned");
+        translationForOneItem = isPin
+          ? t("Common:RoomPinned")
+          : t("Common:RoomUnpinned");
         translationForSeverals = isPin
-          ? t("RoomsPinned", { count: elems.length })
-          : t("RoomsUnpinned", { count: elems.length });
+          ? t("Common:RoomsPinned", { count: elems.length })
+          : t("Common:RoomsUnpinned", { count: elems.length });
       }
 
       toastr.success(
@@ -1874,7 +1876,7 @@ class FilesActionStore {
           ? toastr.error(
               t("AIAgentPinLimitMessage", { aiAgents: t("Common:AIAgents") }),
             )
-          : toastr.error(t("RoomsPinLimitMessage"));
+          : toastr.error(t("Common:RoomsPinLimitMessage"));
       }
 
       return;
@@ -1913,8 +1915,8 @@ class FilesActionStore {
       } else treeFolders[treeIndex].newItems = count + newCount;
     }
 
-    let notificationsDisabled = t("RoomNotificationsDisabled");
-    let notificationsEnabled = t("RoomNotificationsEnabled");
+    let notificationsDisabled = t("Common:RoomNotificationsDisabled");
+    let notificationsEnabled = t("Common:RoomNotificationsEnabled");
 
     if (isAIAgent) {
       notificationsDisabled = t("Common:AIAgentNotificationsDisabled", {
@@ -2017,7 +2019,7 @@ class FilesActionStore {
           .then(() => {
             const successTranslation =
               folders.length !== 1 && Array.isArray(folders)
-                ? t("ArchivedRoomsAction")
+                ? t("Common:ArchivedRoomsAction")
                 : Array.isArray(folders)
                   ? t("Common:ArchivedRoomAction", { name: folders[0].title })
                   : t("Common:ArchivedRoomAction", { name: folders.title });
@@ -2082,10 +2084,10 @@ class FilesActionStore {
           .then(() => {
             const successTranslation =
               folders.length !== 1 && Array.isArray(folders)
-                ? t("UnarchivedRoomsAction")
+                ? t("Common:UnarchivedRoomsAction")
                 : Array.isArray(folders)
-                  ? t("UnarchivedRoomAction", { name: folders[0].title })
-                  : t("UnarchivedRoomAction", { name: folders.title });
+                  ? t("Common:UnarchivedRoomAction", { name: folders[0].title })
+                  : t("Common:UnarchivedRoomAction", { name: folders.title });
 
             toastr.success(successTranslation);
           })
@@ -2712,8 +2714,8 @@ class FilesActionStore {
     });
 
     const translations = {
-      successRemoveRoom: t("Files:RoomRemoved"),
-      successRemoveRooms: t("Files:RoomsRemoved"),
+      successRemoveRoom: t("Common:RoomRemoved"),
+      successRemoveRooms: t("Common:RoomsRemoved"),
     };
 
     this.deleteItemAction(items, "", translations, null, null, true);

@@ -44,7 +44,6 @@
   "AppliesToRooms": "{{rooms}} (Einschließlich freigegebener Ordner/Dateien aus dem Raum)",
   "AppliesToRoomsDescription": "Wenn die Linkerstellung in {{rooms}} untersagt wird, werden neue Links nur noch mit dem Typ Nur {{productName}}-Benutzer erstellt.",
   "AppliesToRoomsWarning": "Öffentliche Räume werden ebenfalls auf internen Zugriff beschränkt und sind für externe Benutzer nicht mehr zugänglich.",
-  "AppsDescription": "Verwalten Sie, welche Apps in Ihrem {{productName}} verfügbar sind. Aktivierte Apps werden im Hauptmenü für Benutzer angezeigt, die Zugriff darauf haben.",
   "AuditSubheader": "Der Unterabschnitt ermöglicht es Ihnen, die Liste der neuesten Änderungen (Erstellung, Änderung, Löschung usw.) zu durchsuchen, die von Benutzern an den Entitäten (Räume, Gelegenheiten, Dateien usw.) innerhalb Ihres {{productName}} vorgenommen wurden.",
   "AuditTrailNav": "Audit-Trail",
   "AuthorizationKeysInfo": "Mit Autorisierungsschlüsseln können Sie Drittanbieterdienste mit Ihrem Bereich verbinden. Melden Sie sich einfach mit Facebook, Google oder LinkedIn an. Fügen Sie Dropbox, OneDrive und andere Konten hinzu, um mit dort gespeicherten Dateien zu arbeiten.",

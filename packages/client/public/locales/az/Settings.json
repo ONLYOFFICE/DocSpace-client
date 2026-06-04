@@ -44,7 +44,6 @@
   "AppliesToRooms": "{{rooms}} (otaqdan paylaşılan qovluqlar/fayllar daxil olmaqla)",
   "AppliesToRoomsDescription": "{{rooms}} bölməsində keçid yaradılması qadağan edildikdə, yeni keçidlər yalnız {{productName}} istifadəçiləri üçün növü ilə yaradılacaq.",
   "AppliesToRoomsWarning": "İctimai otaqlar da yalnız daxili istifadəçilər üçün əlçatan olacaq və xarici istifadəçilər üçün mövcud olmayacaq.",
-  "AppsDescription": "{{productName}} məhsulunuzda hansı tətbiqlərin mövcud olduğunu idarə edin. Aktivləşdirilmiş tətbiqlər onlara giriş hüququ olan istifadəçilər üçün əsas menyuda görünəcək.",
   "AuditSubheader": "Alt bölmə sizə {{productName}}-dəki (otaqlara, imkanlara, fayllara və s.) istifadəçilər tərəfindən edilən ən son dəyişikliklərin (yaradılması, dəyişdirilməsi, silinməsi və s.) siyahısını nəzərdən keçirməyə imkan verir.",
   "AuditTrailNav": "Audit jurnalı",
   "AuthorizationKeysInfo": "Avtorizasiya açarları ilə üçüncü tərəf xidmətlərini fəzaya qoşa bilərsiniz. Facebook, Google və ya LinkedIn ilə asanlıqla daxil olun. Dropbox, OneDrive və digər hesabları əlavə edərək orada saxlanılan fayllarla işləyin.",

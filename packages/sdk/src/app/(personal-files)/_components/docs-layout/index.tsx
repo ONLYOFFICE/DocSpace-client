@@ -458,6 +458,7 @@ const DocsLayout = observer(
                                 sectionFilterContent={
                                   <Filter
                                     filesFilter={filesFilter}
+                                    currentFolderId={current.id}
                                     showMainButton={
                                       isActionButtonEnabled && !isMobile
                                     }

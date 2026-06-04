@@ -43,7 +43,9 @@ import type {
 export type RoomActionsHandler = {
   archiveSelected: (items: (TFileItem | TFolderItem)[]) => void;
   deleteSelected: (items: (TFileItem | TFolderItem)[]) => void;
+  restoreSelected: (items: (TFileItem | TFolderItem)[]) => void;
   pinSelected: (items: (TFileItem | TFolderItem)[]) => void;
+  isArchive: boolean;
 };
 
 /**

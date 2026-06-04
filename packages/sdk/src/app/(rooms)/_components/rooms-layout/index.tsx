@@ -173,18 +173,21 @@ const RoomsLayout = observer(
 
     // Stable RoomActionsContext handler — values are bridged to RoomsList's
     // bulk actions via `roomActionsRef` (same pattern as `refreshRef`).
-    // Provided only for active rooms; archive mode skips it (different
-    // action set, TODO).
-    const roomActionsHandler = React.useMemo<RoomActionsHandler | null>(() => {
-      if (isArchive) return null;
-      return {
+    // `isArchive` flag lets Header pick the right action set (restore /
+    // delete for archive, pin / archive / delete for active).
+    const roomActionsHandler = React.useMemo<RoomActionsHandler>(
+      () => ({
         archiveSelected: (items) =>
           roomActionsRef.current?.archiveSelected(items),
         deleteSelected: (items) =>
           roomActionsRef.current?.deleteSelected(items),
+        restoreSelected: (items) =>
+          roomActionsRef.current?.restoreSelected(items),
         pinSelected: (items) => roomActionsRef.current?.pinSelected(items),
-      };
-    }, [isArchive]);
+        isArchive: !!isArchive,
+      }),
+      [isArchive],
+    );
 
     const createCustomRoom = React.useCallback(() => {
       dialogsStore.openDialog(SDKDialogs.CreateRoom);

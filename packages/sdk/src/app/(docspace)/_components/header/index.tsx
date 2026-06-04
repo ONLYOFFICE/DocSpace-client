@@ -106,10 +106,10 @@ const Header = ({
     onRestoreClick: isTrashSection ? fileOpsCtx?.restoreItem : undefined,
     onCopySelectedClick: !isTrashSection ? fileOpsCtx?.copyItems : undefined,
     onMoveSelectedClick: !isTrashSection ? fileOpsCtx?.moveItems : undefined,
-    onRestoreSelectedClick: isTrashSection
-      ? fileOpsCtx?.restoreItems
-      : undefined,
+    onRestoreSelectedClick: roomActionsCtx?.restoreSelected
+      ?? (isTrashSection ? fileOpsCtx?.restoreItems : undefined),
     isRoomsFolder: !!roomActionsCtx,
+    isArchiveRoomsFolder: !!roomActionsCtx?.isArchive,
     onArchiveSelectedClick: roomActionsCtx?.archiveSelected,
     onPinSelectedClick: roomActionsCtx?.pinSelected,
   });

@@ -86,6 +86,7 @@ import useResetSelectionClick from "@/app/(docspace)/(files)/_components/list/ho
 export type RoomActions = {
   archiveSelected: (items: (TFolderItem | TFileItem)[]) => void;
   deleteSelected: (items: (TFolderItem | TFileItem)[]) => void;
+  restoreSelected: (items: (TFolderItem | TFileItem)[]) => void;
   pinSelected: (items: (TFolderItem | TFileItem)[]) => Promise<void>;
 };
 
@@ -620,9 +621,16 @@ const RoomsList = ({
     roomActionsRef.current = {
       archiveSelected: onArchiveSelected,
       deleteSelected: onDeleteSelected,
+      restoreSelected: onRestoreSelected,
       pinSelected: onPinSelected,
     };
-  }, [roomActionsRef, onArchiveSelected, onDeleteSelected, onPinSelected]);
+  }, [
+    roomActionsRef,
+    onArchiveSelected,
+    onDeleteSelected,
+    onRestoreSelected,
+    onPinSelected,
+  ]);
 
   const fetchMoreRooms = React.useCallback(async () => {
     if (!hasNextPage || requestRunning.current) return;

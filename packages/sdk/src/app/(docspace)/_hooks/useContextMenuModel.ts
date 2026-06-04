@@ -71,6 +71,7 @@ type UseContextMenuModelProps = {
    * `RoomsLayout` for the active-rooms section.
    */
   isRoomsFolder?: boolean;
+  isArchiveRoomsFolder?: boolean;
   onArchiveSelectedClick?: (items: (TFileItem | TFolderItem)[]) => void;
   onPinSelectedClick?: (items: (TFileItem | TFolderItem)[]) => void;
 };
@@ -92,6 +93,7 @@ export default function useContextMenuModel({
   onShowVersionHistoryClick,
   onRetryVectorization,
   isRoomsFolder,
+  isArchiveRoomsFolder,
   onArchiveSelectedClick,
   onPinSelectedClick,
 }: UseContextMenuModelProps) {
@@ -601,8 +603,17 @@ export default function useContextMenuModel({
   }, [t, onArchiveSelectedClick, filesSelectionStore.selection]);
 
   const getRoomsFolderOptions = useCallback(() => {
+    if (isArchiveRoomsFolder) {
+      return [getGroupRestoreItem(), getGroupDeleteItem()];
+    }
     return [getRoomsPinItem(), getRoomsArchiveItem(), getGroupDeleteItem()];
-  }, [getRoomsPinItem, getRoomsArchiveItem, getGroupDeleteItem]);
+  }, [
+    isArchiveRoomsFolder,
+    getRoomsPinItem,
+    getRoomsArchiveItem,
+    getGroupRestoreItem,
+    getGroupDeleteItem,
+  ]);
 
   const getGroupContextMenuModel = useCallback(() => {
     const items = [];

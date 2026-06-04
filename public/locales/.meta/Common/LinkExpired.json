@@ -3,7 +3,7 @@
   "content": "The link has expired.",
   "content_en_sha1_hash": "ef3fc8d140fe94ebbb33acc6c724acb2c51a4cb9",
   "created_at": "2025-05-19T21:30:46.180Z",
-  "updated_at": "2026-05-28T15:46:18.556Z",
+  "updated_at": "2026-06-02T22:18:05.030Z",
   "comment": {
     "text": "This is an error message displayed as a toast notification or on an error page, indicating that a shared link is no longer valid because its expiration date has passed.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 522,
+      "line_number": 659,
       "context": "const isExpired = isAfter(now(), parseToDateTime(expirationDate));\n const isLimit = link?.currentUseCount >= link?.maxUseCount;\n \n if (isExpired) {\n if (!showToast) return;\n return toastr.error(t(\"Common:LinkExpired\"));\n }\n if (isLimit) {\n if (!showToast) return;\n return toastr.error(t(\"Common:LinkNoLongerAvailable\"));\n }",
       "module": "/packages/client"
     },
@@ -22,6 +22,12 @@
       "line_number": 147,
       "context": "validationResult: confirmLinkResult.result,\n });\n if (confirmLinkParams.type === \"LinkInvite\") {\n window.location.href = \"/login/error/link-expired\";\n } else {\n throw new Error(t(\"Common:LinkExpired\"));\n }\n return;\n case ValidationResult.TariffLimit:\n console.error(\"tariff limit\", {\n confirmLinkParams,",
       "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/index.tsx",
+      "line_number": 341,
+      "context": "const isLimit =\n (link?.currentUseCount ?? 0) >= (link?.maxUseCount ?? Infinity);\n \n if (isExpired) {\n if (!showToast) return;\n return toastr.error(t(\"Common:LinkExpired\"));\n }\n if (isLimit) {\n if (!showToast) return;\n return toastr.error(t(\"Common:LinkNoLongerAvailable\"));\n }",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
@@ -43,8 +49,8 @@
     },
     {
       "file_path": "/packages/shared/components/share/sub-components/LinkRow.tsx",
-      "line_number": 157,
-      "context": "shareLink={shareLink}\n isExpiredLink={isExpiredLink}\n disabledCopy={isArchiveFolder}\n onCopyLink={() =>\n isExpiredLink\n ? toastr.error(t(\"Common:LinkExpired\"))\n : onCopyLink(link)\n }\n />\n <LinkExpiration\n t={t}",
+      "line_number": 193,
+      "context": "isExpiredLink={isExpiredLink}\n disabledCopy={isArchiveFolder}\n isBlockedByAdmin={isBlockedByAdmin}\n onCopyLink={() =>\n isExpiredLink\n ? toastr.error(t(\"Common:LinkExpired\"))\n : onCopyLink(link)\n }\n />\n {isBlockedByAdmin ? null : (\n <LinkExpiration",
       "module": "/packages/shared"
     }
   ],

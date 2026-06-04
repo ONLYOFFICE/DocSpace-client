@@ -3,7 +3,7 @@
   "content": "Clear filter",
   "content_en_sha1_hash": "b667d6f9f635decfb59140eb7361aedc90b3b761",
   "created_at": "2025-05-19T21:30:43.475Z",
-  "updated_at": "2026-05-28T15:46:18.477Z",
+  "updated_at": "2026-06-01T21:20:44.379Z",
   "comment": {
     "text": "This is a button label that resets all applied filters to their default state, clearing any search criteria or selections.",
     "is_auto": true,
@@ -49,37 +49,37 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/RowView/index.tsx",
-      "line_number": 177,
+      "line_number": 145,
       "context": "isHovered\n fontWeight=\"600\"\n onClick={onClearFilter}\n dataTestId=\"accounts_clear_filter_link\"\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n </div>\n }\n />\n )}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/index.tsx",
-      "line_number": 171,
-      "context": "type={LinkType.action}\n isHovered\n fontWeight=\"600\"\n onClick={onClearFilter}\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n </div>\n }\n />\n )}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/RowView/index.tsx",
-      "line_number": 220,
-      "context": "type={LinkType.action}\n isHovered\n fontWeight=\"600\"\n onClick={onClearFilter}\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n </div>\n }\n />\n )}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/TableView/index.tsx",
       "line_number": 172,
       "context": "type={LinkType.action}\n isHovered\n fontWeight=\"600\"\n onClick={onClearFilter}\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n </div>\n }\n />\n )}",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/RowView/index.tsx",
+      "line_number": 135,
+      "context": "type={LinkType.action}\n isHovered\n fontWeight=\"600\"\n onClick={onClearFilter}\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n </div>\n }\n />\n )}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/TableView/index.tsx",
+      "line_number": 173,
+      "context": "type={LinkType.action}\n isHovered\n fontWeight=\"600\"\n onClick={onClearFilter}\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n </div>\n }\n />\n )}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/RowView/index.tsx",
-      "line_number": 233,
+      "line_number": 155,
       "context": "type={LinkType.action}\n isHovered\n fontWeight=\"600\"\n onClick={onClearFilter}\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n </div>\n }\n />\n )}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/TableView/index.tsx",
-      "line_number": 231,
+      "line_number": 190,
       "context": "type={LinkType.action}\n isHovered\n fontWeight=\"600\"\n onClick={onClearFilter}\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n </div>\n }\n />\n )}",
       "module": "/packages/client"
     },
@@ -90,8 +90,32 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-filter/index.tsx",
+      "line_number": 71,
+      "context": "const options: EmptyViewOptionsType = [\n {\n key: \"empty-view-filter\",\n to: \"\",\n isNext: true,\n description: t(\"Common:ClearFilter\", { defaultValue: \"Clear filter\" }),\n icon: <ClearEmptyFilterSvg />,\n onClick: onReset,\n },\n ];",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/index.tsx",
+      "line_number": 94,
+      "context": "const filterOptions = [\n {\n key: \"empty-view-filter\",\n to: \"\",\n description: t(\"Common:ClearFilter\"),\n icon: <ClearEmptyFilterSvg />,\n onClick: onResetFilter,\n isNext: true,\n },\n ];",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/files-empty-filter/index.tsx",
+      "line_number": 45,
+      "context": "const options: EmptyViewOptionsType = [\n {\n key: \"empty-view-filter\",\n to: \"\",\n isNext: true,\n description: t(\"Common:ClearFilter\", { defaultValue: \"Clear filter\" }),\n icon: <ClearEmptyFilterSvg />,\n onClick: handleClick,\n },\n ];",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/empty-view/index.tsx",
-      "line_number": 64,
+      "line_number": 71,
+      "context": "const filterOptions = [\n {\n key: \"empty-view-filter\",\n to: \"\",\n description: t(\"Common:ClearFilter\"),\n icon: <ClearEmptyFilterSvg />,\n onClick: onResetFilter,\n isNext: true,\n },\n ];",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/empty-view/index.tsx",
+      "line_number": 83,
       "context": "const filterOptions = [\n {\n key: \"empty-view-filter\",\n to: \"\",\n description: t(\"Common:ClearFilter\"),\n icon: <ClearEmptyFilterSvg />,\n onClick: onResetFilter,\n isNext: true,\n },\n ];",
       "module": "/packages/sdk"
     }

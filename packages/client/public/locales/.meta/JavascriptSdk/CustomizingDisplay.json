@@ -3,7 +3,7 @@
   "content": "Customizing the display",
   "content_en_sha1_hash": "d89fd68cf6cfcf0d4d0b02cee820b4e13b8d1a88",
   "created_at": "2025-05-19T21:30:54.439Z",
-  "updated_at": "2026-05-28T15:46:18.598Z",
+  "updated_at": "2026-06-01T21:20:44.467Z",
   "comment": {
     "text": "This is a subheader in the portal settings, introducing a section where users can adjust how the interface is displayed.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 470,
+      "line_number": 472,
       "context": "t={t}\n onSetSource={onSetSource}\n onSetVersion={onSetVersion}\n />\n <ControlsSection>\n <CategorySubHeader>{t(\"CustomizingDisplay\")}</CategorySubHeader>\n <WidthSetter\n t={t}\n setConfig={setConfig}\n dataDimensions={dimensionsModel}\n defaultDimension={defaultDimension}",
       "module": "/packages/client"
     },
@@ -191,7 +191,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

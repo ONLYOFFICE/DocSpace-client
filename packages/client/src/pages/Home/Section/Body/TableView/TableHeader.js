@@ -261,7 +261,7 @@ class FilesTableHeader extends React.Component {
     const authorBlock = !isPublicRoom
       ? {
           key: "Author",
-          title: t("ByAuthor"),
+          title: t("Common:ByAuthor"),
           enable: authorColumnIsEnabled,
           resizable: true,
           sortBy: SortByFieldName.Author,
@@ -273,7 +273,7 @@ class FilesTableHeader extends React.Component {
     const erasureBlock = isPersonalReadOnly
       ? {
           key: "Erasure",
-          title: t("ByErasure"),
+          title: t("Common:ByErasure"),
           enable: erasureColumnIsEnabled,
           resizable: true,
           sortBy: SortByFieldName.ModifiedDate,
@@ -296,7 +296,7 @@ class FilesTableHeader extends React.Component {
       { ...authorBlock },
       {
         key: "Created",
-        title: t("ByCreation"),
+        title: t("Common:ByCreation"),
         enable: createdColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.CreationDate,
@@ -305,7 +305,7 @@ class FilesTableHeader extends React.Component {
       },
       {
         key: "Modified",
-        title: t("ByLastModified"),
+        title: t("Common:ByLastModified"),
         enable: modifiedColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.ModifiedDate,
@@ -353,7 +353,7 @@ class FilesTableHeader extends React.Component {
     const authorBlock = !isPublicRoom
       ? {
           key: "AuthorIndexing",
-          title: t("ByAuthor"),
+          title: t("Common:ByAuthor"),
           enable: authorVDRColumnIsEnabled,
           resizable: true,
           sortBy: SortByFieldName.Author,
@@ -384,7 +384,7 @@ class FilesTableHeader extends React.Component {
       { ...authorBlock },
       {
         key: "CreatedIndexing",
-        title: t("ByCreation"),
+        title: t("Common:ByCreation"),
         enable: createdVDRColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.CreationDate,
@@ -393,7 +393,7 @@ class FilesTableHeader extends React.Component {
       },
       {
         key: "ModifiedIndexing",
-        title: t("ByLastModified"),
+        title: t("Common:ByLastModified"),
         enable: modifiedVDRColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.ModifiedDate,
@@ -441,7 +441,7 @@ class FilesTableHeader extends React.Component {
       !isPublicRoom && !isInSharedFolder
         ? {
             key: "SharedByShareWithMe",
-            title: t("SharedBy"),
+            title: t("Common:SharedBy"),
             enable: sharedByShareWithMeColumnIsEnabled,
             resizable: true,
             onChange: this.onColumnChange,
@@ -453,7 +453,7 @@ class FilesTableHeader extends React.Component {
     const author = !isPublicRoom
       ? {
           key: "AuthorShareWithMe",
-          title: t("ByAuthor"),
+          title: t("Common:ByAuthor"),
           enable: authorShareWithMeColumnIsEnabled,
           resizable: true,
           onChange: this.onColumnChange,
@@ -475,14 +475,14 @@ class FilesTableHeader extends React.Component {
       author,
       {
         key: "AccessLevelShareWithMe",
-        title: t("AccessLevel"),
+        title: t("Common:AccessLevel"),
         enable: accessLevelShareWithMeColumnIsEnabled,
         resizable: true,
         onChange: this.onColumnChange,
       },
       {
         key: "ModifiedShareWithMe",
-        title: t("ByLastModified"),
+        title: t("Common:ByLastModified"),
         enable: modifiedShareWithMeColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.ModifiedDate,
@@ -532,7 +532,7 @@ class FilesTableHeader extends React.Component {
       },
       {
         key: "AuthorRecent",
-        title: t("ByAuthor"),
+        title: t("Common:ByAuthor"),
         enable: authorRecentColumnIsEnabled,
         resizable: true,
         onChange: this.onColumnChange,
@@ -546,7 +546,7 @@ class FilesTableHeader extends React.Component {
       },
       {
         key: "LastOpenedRecent",
-        title: t("LastOpened"),
+        title: t("Common:LastOpened"),
         enable: lastOpenedRecentColumnIsEnabled,
         resizable: true,
         onChange: this.onColumnChange,
@@ -591,7 +591,7 @@ class FilesTableHeader extends React.Component {
       },
       {
         key: "AuthorFavorites",
-        title: t("ByAuthor"),
+        title: t("Common:ByAuthor"),
         enable: authorFavoritesColumnIsEnabled,
         resizable: true,
         onChange: this.onColumnChange,
@@ -605,7 +605,7 @@ class FilesTableHeader extends React.Component {
       },
       {
         key: "ModifiedFavorites",
-        title: t("ByLastModified"),
+        title: t("Common:ByLastModified"),
         enable: modifiedFavoritesColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.ModifiedDate,
@@ -664,7 +664,7 @@ class FilesTableHeader extends React.Component {
       },
       {
         key: "AuthorTrash",
-        title: t("ByAuthor"),
+        title: t("Common:ByAuthor"),
         enable: authorTrashColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.Author,
@@ -673,7 +673,7 @@ class FilesTableHeader extends React.Component {
       },
       {
         key: "CreatedTrash",
-        title: t("ByCreation"),
+        title: t("Common:ByCreation"),
         enable: createdTrashColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.CreationDate,
@@ -682,7 +682,7 @@ class FilesTableHeader extends React.Component {
       },
       {
         key: "Erasure",
-        title: t("ByErasure"),
+        title: t("Common:ByErasure"),
         enable: erasureColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.ModifiedDate,
@@ -1044,7 +1044,7 @@ class FilesTableHeader extends React.Component {
         useReactWindow
         tagRef={tagRef}
         setHideColumns={setHideColumns}
-        settingsTitle={t("Files:TableSettingsTitle")}
+        settingsTitle={t("Common:TableSettingsTitle")}
         showSettings={isFrame ? showSettings : true}
       />
     );
@@ -1283,3 +1283,4 @@ export default inject(
     observer(FilesTableHeader),
   ),
 );
+

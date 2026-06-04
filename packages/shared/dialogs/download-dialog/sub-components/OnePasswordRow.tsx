@@ -50,6 +50,7 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { SimulatePassword } from "../../../components/simulate-password";
 import { isMobile } from "../../../utils";
+import { useResolvedFileTitle } from "../../../hooks/useResolvedFileTitle";
 
 import styles from "../DownloadDialog.module.scss";
 import { isFile, type OnePasswordRowProps } from "../DownloadDialog.types";
@@ -133,6 +134,8 @@ export const OnePasswordRow = ({
 
   const element = getItemIcon(item);
 
+  const resolvedTitle = useResolvedFileTitle(item);
+
   const getOptions = () => {
     const options = [
       {
@@ -178,7 +181,7 @@ export const OnePasswordRow = ({
                 truncate
                 dir="auto"
               >
-                {item.title}
+                {resolvedTitle}
               </Text>
             </div>
             <ContextMenuButton

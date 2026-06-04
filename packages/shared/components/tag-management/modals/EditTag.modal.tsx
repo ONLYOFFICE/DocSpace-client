@@ -62,7 +62,7 @@ export const EditTagModal = ({
   onCheckboxChange,
   ref,
 }: EditTagModalProps) => {
-  const { t } = useTranslation(["ConvertDialog", "TagManagement"]);
+  const { t } = useTranslation(["Common"]);
 
   const onChangeCheckbox = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,14 +80,14 @@ export const EditTagModal = ({
       id={EDIT_TAG_MODAL_ID}
       displayType={ModalDialogType.modal}
     >
-      <ModalDialog.Header>{t("TagManagement:EditTag")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:EditTag")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text className={styles.editTagModalText}>
-          {t("TagManagement:ChangesToTag")}
+          {t("Common:ChangesToTag")}
         </Text>
         <Checkbox
           key="dont-show-again"
-          label={t("ConvertDialog:HideMessage")}
+          label={t("Common:HideMessage")}
           isChecked={isChecked}
           onChange={onChangeCheckbox}
           dataTestId="edit_tag_checkbox"

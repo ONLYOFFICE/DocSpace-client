@@ -187,6 +187,19 @@
       color: var(--room-type-list-item-description-text);
     }
   }
+
+  &.disabled {
+    cursor: default;
+    background-color: var(--room-type-list-item-disabled-background);
+
+    &:hover:not(:active) {
+      background-color: var(--room-type-list-item-disabled-background);
+    }
+
+    &:active {
+      border-color: var(--room-type-list-item-border);
+    }
+  }
 }
 
 .dropDownButton {

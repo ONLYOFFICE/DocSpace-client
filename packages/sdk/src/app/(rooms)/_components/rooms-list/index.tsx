@@ -80,6 +80,7 @@ import RestoreRoomDialog from "../restore-room-dialog";
 import DeleteRoomDialog from "../delete-room-dialog";
 import MoveToArchiveDialog from "../move-to-archive-dialog";
 import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
+import { useRoomsTagsStore } from "../../_store/RoomsTagsStore";
 import useResetSelectionClick from "@/app/(docspace)/(files)/_components/list/hooks/useResetSelectionClick";
 
 type RoomsListProps = {
@@ -128,9 +129,12 @@ const RoomsList = ({
   const { setIsEmptyList, filesViewAs, setFilesViewAs, currentDeviceType } =
     useSettingsStore();
   const filesListStore = useFilesListStore();
-  const { setRootFolderType } = filesListStore;
+  const tagsStore = useRoomsTagsStore();
+  const { setItems, setPathParts, setCurrentFolder, setRootFolderType } =
+    filesListStore;
   const { setSelection, setBufferSelection } = useFilesSelectionStore();
   const navigationStore = useNavigationStore();
+  const { setNavigationItems } = navigationStore;
   const activeItemsStore = useActiveItemsStore();
   const operationsStore = useRoomsOperationsStore();
   const infoPanelStore = useInfoPanelStore();
@@ -164,6 +168,7 @@ const RoomsList = ({
       undefined,
       isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
     );
+    f.type = String(RoomsType.CustomRoom);
     const sp = new URLSearchParams(filesFilter);
     if (sp.get("page")) f.page = Number(sp.get("page"));
     if (sp.get("pageCount")) f.pageCount = Number(sp.get("pageCount"));
@@ -196,8 +201,19 @@ const RoomsList = ({
   React.useLayoutEffect(() => {
     if (initRef.current) return;
     initRef.current = true;
-    filesListStore.setItems(initialItems);
-  }, [initialItems, filesListStore]);
+
+    setItems(initialItems);
+    setPathParts(null);
+    setCurrentFolder(current);
+    setNavigationItems([]);
+  }, [
+    initialItems.length,
+    current,
+    setItems,
+    setPathParts,
+    setCurrentFolder,
+    setNavigationItems,
+  ]);
 
   const [total, setTotal] = React.useState<number>(totalProp);
   const [hasNextPage, setHasNextPage] = React.useState<boolean>(
@@ -274,7 +290,7 @@ const RoomsList = ({
   );
 
   const restoreRooms = React.useCallback(
-    async (ids: number[]) => {
+    async (ids: number[], name?: string) => {
       if (!ids.length) return;
       activeItemsStore.addActiveItems([], ids);
       const opId = operationsStore.startOperation(
@@ -303,6 +319,11 @@ const RoomsList = ({
         setTotal((prev) => Math.max(0, prev - ids.length));
         setSelection([]);
         setBufferSelection(null);
+        toastr.success(
+          ids.length > 1
+            ? t("Common:UnarchivedRoomsAction")
+            : t("Common:UnarchivedRoomAction", { name }),
+        );
       } catch (e) {
         opAlert = true;
         toastr.error(e as Error);
@@ -338,7 +359,7 @@ const RoomsList = ({
   );
 
   const archiveRooms = React.useCallback(
-    async (ids: number[]) => {
+    async (ids: number[], name?: string) => {
       if (!ids.length) return;
       activeItemsStore.addActiveItems([], ids);
       const opId = operationsStore.startOperation(
@@ -367,6 +388,11 @@ const RoomsList = ({
         setTotal((prev) => Math.max(0, prev - ids.length));
         setSelection([]);
         setBufferSelection(null);
+        toastr.success(
+          ids.length > 1
+            ? t("Common:ArchivedRoomsAction")
+            : t("Common:ArchivedRoomAction", { name }),
+        );
       } catch (e) {
         opAlert = true;
         toastr.error(e as Error);
@@ -415,6 +441,11 @@ const RoomsList = ({
         setTotal((prev) => Math.max(0, prev - roomIds.length));
         setSelection([]);
         setBufferSelection(null);
+        toastr.success(
+          roomIds.length > 1
+            ? t("Common:RoomsRemoved")
+            : t("Common:RoomRemoved"),
+        );
       } catch (e) {
         opAlert = true;
         toastr.error(e as Error);
@@ -441,11 +472,16 @@ const RoomsList = ({
           updatedRoom as unknown as TFolder,
         );
         filesListStore.replaceItem(roomId, updatedItem);
+        const updatedTags = (updatedRoom as unknown as { tags?: string[] })
+          .tags;
+        if (Array.isArray(updatedTags) && updatedTags.length > 0) {
+          tagsStore.upsertTags(updatedTags);
+        }
       } catch {
         // ignore
       }
     },
-    [convertFolderToItem, filesListStore],
+    [convertFolderToItem, filesListStore, tagsStore],
   );
 
   const requestRunning = React.useRef(false);
@@ -473,6 +509,7 @@ const RoomsList = ({
       undefined,
       isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
     );
+    newFilter.type = String(RoomsType.CustomRoom);
     const sp = new URLSearchParams(window.location.search);
     if (sp.get("page")) newFilter.page = Number(sp.get("page"));
     if (sp.get("sortBy"))
@@ -523,7 +560,7 @@ const RoomsList = ({
 
       setIsEmptyList(newItems.length === 0);
 
-      filesListStore.setItems(newItems);
+      setItems(newItems);
       setTotal(newTotal);
       setHasNextPage(newTotal > newItems.length);
       setFilter(newFilter);
@@ -759,7 +796,10 @@ const RoomsList = ({
           roomType={(restoringItems[0] as TFolderItem).roomType}
           count={restoringItems.length}
           onConfirm={() =>
-            restoreRooms(restoringItems.map((item) => item.id as number))
+            restoreRooms(
+              restoringItems.map((item) => item.id as number),
+              restoringItems[0]?.title,
+            )
           }
         />
       ) : null}
@@ -780,7 +820,10 @@ const RoomsList = ({
           onClose={() => setArchivingItems(null)}
           count={archivingItems.length}
           onConfirm={() =>
-            archiveRooms(archivingItems.map((item) => item.id as number))
+            archiveRooms(
+              archivingItems.map((item) => item.id as number),
+              archivingItems[0]?.title,
+            )
           }
         />
       ) : null}

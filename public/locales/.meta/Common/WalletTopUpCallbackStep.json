@@ -1,0 +1,29 @@
+{
+  "key_path": "WalletTopUpCallbackStep",
+  "content": "Adding {{price}} to your wallet",
+  "content_en_sha1_hash": "92143c456e9c157b565929edae7e0fd7960c557d",
+  "created_at": "2026-06-02T15:02:53.718Z",
+  "updated_at": "2026-06-02T15:06:38.959Z",
+  "comment": {
+    "text": "A step in a progress list on the payment completion page, indicating the current action during a wallet top-up. The {{price}} variable represents the formatted monetary amount.",
+    "is_auto": true,
+    "updated_at": "2026-06-02T15:06:38.959Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
+      "line_number": 188,
+      "context": "};\n \n const steps = isWalletOnly\n ? [\n t(\"WalletTopUpStepCardSaved\"),\n t(\"WalletTopUpCallbackStep\", { price: formattedAmount }),\n ]\n : [\n t(\"AIPaywallCallbackStepLinkCard\"),\n t(\"AIPaywallCallbackStepTopUp\"),\n t(\"AIPaywallCallbackStepActivate\"),",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -203,17 +203,17 @@
       "approved_at": null
     }
   },
-  "updated_at": "2026-05-24T17:27:49.146Z",
+  "updated_at": "2026-06-01T21:20:44.461Z",
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 252,
+      "line_number": 281,
       "context": "const onValidateInput = (value) => {\n const validDomain = new RegExp(domainValidator.regex);\n \n switch (true) {\n case value === \"\":\n setErrorValue(t(\"PortalNameEmpty\"));\n saveToSessionStorage(\"errorValue\", t(\"PortalNameEmpty\"));\n break;\n case value.length < domainValidator.minLength ||\n value.length > domainValidator.maxLength:\n setErrorValue(",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 252,
+      "line_number": 281,
       "context": "const onValidateInput = (value) => {\n const validDomain = new RegExp(domainValidator.regex);\n \n switch (true) {\n case value === \"\":\n setErrorValue(t(\"PortalNameEmpty\"));\n saveToSessionStorage(\"errorValue\", t(\"PortalNameEmpty\"));\n break;\n case value.length < domainValidator.minLength ||\n value.length > domainValidator.maxLength:\n setErrorValue(",
       "module": "/packages/client"
     },

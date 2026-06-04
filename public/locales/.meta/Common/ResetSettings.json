@@ -3,7 +3,7 @@
   "content": "Reset settings",
   "content_en_sha1_hash": "9ba8d6e6aaec0b4ced7d02008b670d094f276531",
   "created_at": "2025-10-27T16:14:26.774Z",
-  "updated_at": "2026-05-24T17:27:49.138Z",
+  "updated_at": "2026-06-01T21:20:44.455Z",
   "comment": {
     "text": "This is the title of a dialog box and the label of a button. It appears when a user wants to revert AI settings (knowledge base or web search) to their default values.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 367,
+      "line_number": 368,
       "context": "isDisabled={isSaveDisabled}\n testId=\"knowledge-save-button\"\n />\n <Button\n size={ButtonSize.small}\n label={t(\"Common:ResetSettings\")}\n scale={false}\n onClick={onRestoreToDefault}\n isDisabled={\n !knowledgeConfig ||\n knowledgeConfig?.type === KnowledgeType.None ||",
       "module": "/packages/client"
     },
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 322,
+      "line_number": 323,
       "context": "isDisabled={isSaveDisabled}\n testId=\"web-search-save-button\"\n />\n <Button\n size={ButtonSize.small}\n label={t(\"Common:ResetSettings\")}\n scale={false}\n onClick={onRestoreToDefault}\n isDisabled={\n !webSearchConfig ||\n webSearchConfig?.type === WebSearchType.None ||",
       "module": "/packages/client"
     },
@@ -191,7 +191,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

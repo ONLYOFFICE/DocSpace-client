@@ -3,7 +3,7 @@
   "content": "You can disable header in the mobile version to limit access to the {{productName}} sections (just like disabling the left menu in the desktop version).",
   "content_en_sha1_hash": "8acce461de78709e974894ea33c37a29838d943c",
   "created_at": "2025-05-19T21:30:54.519Z",
-  "updated_at": "2026-05-28T15:46:18.550Z",
+  "updated_at": "2026-06-01T21:20:44.421Z",
   "comment": {
     "text": "Tooltip description for a checkbox that controls the visibility of the header in the mobile version. The `{{productName}}` variable will be replaced with the product's name.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 623,
+      "line_number": 625,
       "context": "offsetRight={4}\n size={12}\n tooltipContent={\n <TooltipContent\n title={t(\"Header\")}\n description={t(\"HeaderDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n img={theme.isBase ? HeaderUrl : HeaderDarkUrl}\n />\n }",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

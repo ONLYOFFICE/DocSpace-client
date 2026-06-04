@@ -153,7 +153,24 @@
     }
   }
 
-  &:not(.isExternalFolder) {
+  &:not(.isColoredTitleIcon) {
+    :global {
+      .header-container {
+        .title-icon {
+          svg {
+            path {
+              fill: var(--room-icon-link-icon-path);
+            }
+            rect {
+              stroke: var(--background-color);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &:not(.isExternalFolder):not(.isColoredTitleIcon) {
     :global {
       .header-container {
         .title-icon {
@@ -164,6 +181,10 @@
           }
 
           .security {
+            .security-backing {
+              fill: var(--background-color);
+            }
+
             .security-shield {
               fill: colors.$light-status-positive;
             }

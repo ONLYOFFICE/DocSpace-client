@@ -114,7 +114,7 @@ const DefaultProviderComponent = ({
     };
   };
 
-  const { t } = useTranslation(["Common", "Services"]);
+  const { t } = useTranslation(["Common"]);
   const tooltipId = useId();
 
   const isOnlySystemProvider =
@@ -500,3 +500,4 @@ export const DefaultProvider = inject(
     };
   },
 )(observer(DefaultProviderComponent));
+

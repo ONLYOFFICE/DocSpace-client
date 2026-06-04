@@ -194,3 +194,7 @@ Base languages (enforced by tests): `de, es, fr, hy-AM, it, ja-JP, pt-BR, ro, ru
 - Node.js >= 24
 - pnpm >= 10.28.0
 - Docker (for E2E tests)
+
+## Settings and Permissions
+
+When adding entries to `.claude/settings.json` permissions, never include absolute paths (e.g. `/Users/username/...` or `/home/username/...`). All allowed commands must use paths relative to the project root or generic glob patterns. Entries with hardcoded absolute paths or specific commit hashes must not be added.

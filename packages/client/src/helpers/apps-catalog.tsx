@@ -61,8 +61,8 @@ export const useAppsCatalog = (): AppCatalogItem[] => {
     {
       id: "ai-files",
       icon: <CatalogFolderIcon />,
-      title: t("Common:DashboardAIFilesTitle"),
-      description: t("Common:DashboardAIFilesDescription"),
+      title: t("Common:DashboardFilesTitle"),
+      description: t("Common:DashboardFilesDescription"),
       href: "/ai-files",
       supported: true,
       alwaysOn: true,
@@ -70,8 +70,8 @@ export const useAppsCatalog = (): AppCatalogItem[] => {
     {
       id: "ai-rooms",
       icon: <CatalogRoomsIcon />,
-      title: t("Common:DashboardAIRoomsTitle"),
-      description: t("Common:DashboardAIRoomsDescription"),
+      title: t("Common:DashboardRoomsTitle"),
+      description: t("Common:DashboardRoomsDescription"),
       href: "/ai-rooms",
       supported: true,
       alwaysOn: false,
@@ -79,8 +79,8 @@ export const useAppsCatalog = (): AppCatalogItem[] => {
     {
       id: "ai-forms",
       icon: <CatalogDocumentsIcon />,
-      title: t("Common:DashboardAIFormsTitle"),
-      description: t("Common:DashboardAIFormsDescription"),
+      title: t("Common:DashboardFormsTitle"),
+      description: t("Common:DashboardFormsDescription"),
       href: "/ai-forms",
       supported: true,
       alwaysOn: false,

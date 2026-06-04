@@ -38,12 +38,14 @@ import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 import { Text } from "@docspace/ui-kit/components/text";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
@@ -80,6 +82,8 @@ type RoomsItemHeaderProps = {
   onChangeFile?: AvatarEditorDialogStore["onChangeFile"];
   getIcon?: FilesSettingsStore["getIcon"];
   isRoomMembersPanel?: boolean;
+  hasExternalLinks?: boolean;
+  isExternalShareRestricted?: boolean;
 } & (
   | {
       roomsView: InfoPanelView.infoMembers;
@@ -105,6 +109,8 @@ const RoomsItemHeader = ({
   getIcon,
   searchProps,
   isRoomMembersPanel,
+  hasExternalLinks,
+  isExternalShareRestricted,
 }: RoomsItemHeaderProps) => {
   const { t } = useTranslation([
     "Files",
@@ -138,8 +144,21 @@ const RoomsItemHeader = ({
 
   const badgeUrl =
     "isRoom" in selection && selection.isRoom
-      ? getRoomBadgeUrl(selection)
+      ? getRoomBadgeUrl(
+          selection,
+          12,
+          isExternalShareRestricted,
+          hasExternalLinks,
+        )
       : null;
+
+  const isPrivateRoom = "private" in selection && selection.private === true;
+
+  const badgeIconColor = isPrivateRoom
+    ? globalColors.lightStatusPositive
+    : isExternalShareRestricted && hasExternalLinks && badgeUrl
+      ? "var(--info-panel-link-blocked)"
+      : undefined;
 
   const tooltipContent =
     "external" in selection && selection.external
@@ -147,10 +166,16 @@ const RoomsItemHeader = ({
       : null;
 
   const isFile = "fileExst" in selection && !!selection.fileExst;
-  let title = selection.title;
+  const resolvedTitle = useResolvedFileTitle(
+    selection as { id?: number | string; title?: string; encrypted?: boolean },
+  );
+  let title = resolvedTitle || selection.title;
 
   if (isFile) {
-    title = getTitleWithoutExtension(selection, false);
+    title = getTitleWithoutExtension(
+      { ...selection, title: resolvedTitle || selection.title },
+      false,
+    );
   }
 
   const onChangeFileContext = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -230,6 +255,7 @@ const RoomsItemHeader = ({
           imgClassName={`icon ${isRoom && "is-room"}`}
           logo={icon}
           badgeUrl={badgeUrl || ""}
+          badgeIconColor={badgeIconColor}
           tooltipContent={tooltipContent ?? undefined}
           hoverSrc={
             isRoom &&
@@ -300,11 +326,22 @@ export default inject(
   }: TStore) => {
     const { roomsView, setIsMobileHidden } = infoPanelStore;
 
-    const { displayFileExtension, getIcon } = filesSettingsStore;
-    const { externalLinks } = publicRoomStore;
+    const {
+      displayFileExtension,
+      getIcon,
+      externalShareApplyToRooms,
+      blockExistingLinksOnRestrict,
+      isExternalShareRestricted: isShareRestricted,
+    } = filesSettingsStore;
+    const { externalLinks, hasExternalLinks } = publicRoomStore;
     const { setTemplateAccessSettingsVisible } = dialogsStore;
 
     const { onChangeFile } = avatarEditorDialogStore;
+
+    const isExternalShareRestricted =
+      externalShareApplyToRooms &&
+      blockExistingLinksOnRestrict &&
+      isShareRestricted;
 
     return {
       roomsView,
@@ -323,7 +360,10 @@ export default inject(
       onChangeFile,
       setTemplateAccessSettingsVisible,
       getIcon,
+      isShareRestricted,
+      hasExternalLinks,
+
+      isExternalShareRestricted,
     };
   },
 )(observer(RoomsItemHeader));
-

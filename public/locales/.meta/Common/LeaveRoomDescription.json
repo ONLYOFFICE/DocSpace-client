@@ -3,7 +3,7 @@
   "content": "You are the owner of this room. Before you leave the room, you must transfer the owner's role to another user.",
   "content_en_sha1_hash": "7fad132658521906219ad21519aa804777ae5ed8",
   "created_at": "2025-05-19T21:30:55.732Z",
-  "updated_at": "2026-05-24T17:27:49.097Z",
+  "updated_at": "2026-06-01T21:20:44.416Z",
   "comment": {
     "text": "This is a dialog message that appears when a room owner attempts to leave their room. It informs them that they must transfer ownership before leaving.",
     "is_auto": true,
@@ -14,8 +14,14 @@
     {
       "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
       "line_number": 91,
-      "context": "const titleText = isAIAgent\n ? t(\"Common:LeaveTheAgent\")\n : t(\"Common:LeaveTheRoom\");\n \n const roomDescription = isRoomOwner\n ? t(\"Files:LeaveRoomDescription\")\n : t(\"Files:WantLeaveRoom\");\n \n const agentDescription = isRoomOwner\n ? t(\"Common:LeaveAgentDescription\")\n : t(\"Common:WantLeaveAgent\");",
+      "context": "const titleText = isAIAgent\n ? t(\"Common:LeaveTheAgent\")\n : t(\"Common:LeaveTheRoom\");\n \n const roomDescription = isRoomOwner\n ? t(\"Common:LeaveRoomDescription\")\n : t(\"Common:WantLeaveRoom\");\n \n const agentDescription = isRoomOwner\n ? t(\"Common:LeaveAgentDescription\")\n : t(\"Common:WantLeaveAgent\");",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/leave-room-dialog/index.tsx",
+      "line_number": 85,
+      "context": "const isOwner =\n !!room && !!currentUserId && room.createdBy?.id === currentUserId;\n \n const descriptionText = isOwner\n ? t(\"Common:LeaveRoomDescription\")\n : t(\"Common:WantLeaveRoom\");\n \n const okLabel = isOwner ? t(\"Common:AssignOwner\") : t(\"Common:OKButton\");\n \n const handleConfirm = async () => {",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -149,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:53.938772Z"
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import Security12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/security.react.svg?url";
+import SecurityPrivate12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/security.private.react.svg?url";
 import Lock12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
 import PrivateRoom32SvgUrl from "PUBLIC_DIR/images/icons/32/room/private.svg?url";
 
@@ -45,6 +45,7 @@ import { useTranslation } from "react-i18next";
 
 import type { TLogo } from "@docspace/ui-kit/types";
 import { RoomIcon, type TModel } from "@docspace/ui-kit/components";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import styles from "./icons.module.scss";
 
@@ -59,6 +60,7 @@ type ItemIconProps = {
 	color?: string;
 	isArchive?: boolean;
 	badgeUrl?: string;
+	badgeIconColor?: string;
 	size?: string;
 	radius?: string;
 	withEditing?: boolean;
@@ -84,6 +86,7 @@ const ItemIcon = ({
 	color,
 	isArchive,
 	badgeUrl,
+	badgeIconColor,
 	size,
 	radius,
 	withEditing,
@@ -113,7 +116,11 @@ const ItemIcon = ({
 	const showPrivateRoomDefaultIcon =
 		!!isRoom && !!isPrivateRoom && !isArchive && !isLoadedRoomIcon && !isTemplate;
 
-	const badgeSrc = showNoAccessBadge ? Lock12ReactSvgUrl : Security12ReactSvgUrl;
+	const isPrivateRoomBadge = !!isRoom && !!isPrivateRoom && !isArchive;
+
+	const badgeSrc = showNoAccessBadge
+		? Lock12ReactSvgUrl
+		: SecurityPrivate12ReactSvgUrl;
 	const badgeTitle = showNoAccessBadge
 		? t("Common:NoAccessToEncryptedFile")
 		: isEncryptedFile
@@ -144,6 +151,11 @@ const ItemIcon = ({
 					imgClassName={imgClassName || "react-svg-icon"}
 					logo={isRoom ? logo : icon}
 					badgeUrl={badgeUrl || ""}
+					badgeIconColor={
+						isPrivateRoomBadge
+							? globalColors.lightStatusPositive
+							: badgeIconColor
+					}
 					isTemplate={isTemplate}
 					withEditing={withEditing}
 					model={model}

@@ -40,6 +40,7 @@ import {
   InputType,
 } from "@docspace/ui-kit/components/text-input";
 import { Text } from "@docspace/ui-kit/components/text";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { Tag } from "@docspace/ui-kit/components/tag";
 import {
   Avatar,
@@ -367,15 +368,15 @@ const CreateEditRoomDialog = ({
           });
         }
 
-        if (onRoomCreated) {
-          onRoomCreated(newRoom?.id);
+        if (onRoomCreated && newRoom?.id != null) {
+          onRoomCreated(newRoom.id);
         } else {
           refreshRooms?.();
         }
       }
       onClose();
     } catch (e) {
-      console.error(e);
+      toastr.error(e as Error);
     } finally {
       setIsLoading(false);
     }

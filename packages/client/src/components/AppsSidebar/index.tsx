@@ -114,19 +114,53 @@ const AppsSidebar = ({
             className={`${articleStyles.articleHeader} ${styles.header}`}
             data-show-text={showText ? "true" : "false"}
           >
-            <a href="/" className={styles.logoWrapper}>
-              <img
-                className={showText ? styles.logoFull : styles.logoBurger}
-                src={showText ? fullLogo : burgerLogo}
-                alt="portal logo"
-              />
-            </a>
+            {showText ? (
+              <>
+                <a href="/" className={styles.logoWrapper}>
+                  <img
+                    className={styles.logoFull}
+                    src={fullLogo}
+                    alt="portal logo"
+                  />
+                </a>
+
+                <CollapseButton
+                  showText={showText}
+                  toggleShowText={toggleShowText}
+                  label={collapseLabel}
+                />
+              </>
+            ) : (
+              <div className={styles.collapsedHeader}>
+                <button
+                  type="button"
+                  className={styles.logoBurgerButton}
+                  onClick={toggleShowText}
+                  title={collapseLabel}
+                  aria-label={collapseLabel}
+                >
+                  <img
+                    className={styles.logoBurger}
+                    src={burgerLogo}
+                    alt="portal logo"
+                  />
+                </button>
+
+                <CollapseButton
+                  showText={showText}
+                  toggleShowText={toggleShowText}
+                  label={collapseLabel}
+                  className={styles.collapseButton}
+                />
+              </div>
+            )}
           </div>
         )}
 
         <Scrollbar
           className={`article-body__scrollbar ${styles.scrollbar}`}
           scrollClass="article-scroller"
+          scrollBodyClassName={styles.scrollBody}
         >
           <NavMenu
             groups={groups}
@@ -134,9 +168,10 @@ const AppsSidebar = ({
             defaultExpandedId={defaultExpandedId}
             iconOnly={!showText}
           />
-        </Scrollbar>
 
-        <div className={styles.bottom}>
+          {/* Footer menu lives inside the scroll body so it scrolls with the
+              apps list when there is overflow, and stays pinned to the bottom
+              (via margin-block-start: auto) when there is free space above. */}
           <div className={styles.footer}>
             <FooterMenu
               showText={showText}
@@ -147,22 +182,16 @@ const AppsSidebar = ({
               isNotPaidPeriod={isNotPaidPeriod}
             />
           </div>
+        </Scrollbar>
 
-          <CollapseButton
-            showText={showText}
-            toggleShowText={toggleShowText}
-            label={collapseLabel}
-          />
-
-          {user && !isMobile ? (
-            <div className={styles.profileBlockWrapper}>
-              <ProfileBlock
-                user={user as unknown as ArticleProfileProps["user"]}
-                showText={showText}
-              />
-            </div>
-          ) : null}
-        </div>
+        {user && !isMobile ? (
+          <div className={styles.profileBlockWrapper}>
+            <ProfileBlock
+              user={user as unknown as ArticleProfileProps["user"]}
+              showText={showText}
+            />
+          </div>
+        ) : null}
       </div>
       {isMobile && articleOpen && (
         <Backdrop

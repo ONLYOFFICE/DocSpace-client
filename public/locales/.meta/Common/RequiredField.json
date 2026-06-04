@@ -3,7 +3,7 @@
   "content": "Required field",
   "content_en_sha1_hash": "04148d61b0b7212b69dd8b267c98c74a3ae36942",
   "created_at": "2025-05-19T21:30:47.872Z",
-  "updated_at": "2026-05-28T15:46:18.494Z",
+  "updated_at": "2026-06-03T09:30:05.020Z",
   "comment": {
     "text": "Error text. This message appears when a required input field is left empty or invalid, indicating that the user must provide information to proceed.",
     "is_auto": true,
@@ -37,13 +37,13 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/SetAgentParams.tsx",
-      "line_number": 511,
+      "line_number": 454,
       "context": "isValidTitle={isValidTitle}\n isWrongTitle={isWrongTitle}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_agent_input\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
-      "line_number": 539,
+      "line_number": 485,
       "context": "onFocus={() => setForceHideRoomTypeDropdown(true)}\n onBlur={() => setForceHideRoomTypeDropdown(false)}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_room_input\"\n />",
       "module": "/packages/client"
     },
@@ -126,6 +126,18 @@
       "module": "/packages/login"
     },
     {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/sub-components/SetAgentParams.tsx",
+      "line_number": 396,
+      "context": "isValidTitle={isValidTitle}\n isWrongTitle={isWrongTitle}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_agent_input\"\n />",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
+      "line_number": 424,
+      "context": "isAutoFocussed\n isDisabled={isLoading}\n />\n {hasNameError ? (\n <Text className={styles.errorText} fontSize=\"11px\">\n {t(\"Common:RequiredField\")}\n </Text>\n ) : null}\n </div>\n </div>",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
       "line_number": 331,
       "context": "labelVisible\n isRequired\n labelText={t(\"Common:ConnectionUrl\")}\n isVertical\n hasError={!isUrlValid}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"connection-url-input\"\n name=\"connection_url\"\n isAutoFocussed",
@@ -151,7 +163,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/PasswordAccessBlock.tsx",
-      "line_number": 105,
+      "line_number": 106,
       "context": "const onValidatePassword = (isValidate: boolean) => {\n setIsPasswordValid(isValidate);\n };\n \n const errorMessage = !passwordValue\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectPassword\");\n \n const hasError = isPasswordErrorShow && !isPasswordValid;\n \n const tooltipData = {",
       "module": "/packages/shared"
     },

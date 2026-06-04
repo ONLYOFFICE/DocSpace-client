@@ -3,7 +3,7 @@
   "content": "File locked",
   "content_en_sha1_hash": "d56ec25816d2caab4e55bb34552b52e102303854",
   "created_at": "2025-05-19T21:30:49.965Z",
-  "updated_at": "2026-05-28T15:46:18.571Z",
+  "updated_at": "2026-06-01T21:20:44.443Z",
   "comment": {
     "text": "This is a toast message that appears when a file is successfully locked. It indicates that the file is now protected from editing by others.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 111,
-      "context": "return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });\n return t(\"InfoPanel:FilesRemovedNotify\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Translations:FileLocked\")}.`;\n case FeedActionKeys.FileUnlocked:\n return `${t(\"Translations:FileUnlocked\")}.`;\n case FeedActionKeys.FileVersionRemoved:\n if (\"version\" in feed.data && feed.data.version) {\n return t(\"InfoPanel:FileVersionRemoved\", {",
+      "line_number": 114,
+      "context": "return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });\n return t(\"Common:FilesRemovedNotify\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Translations:FileLocked\")}.`;\n case FeedActionKeys.FileUnlocked:\n return `${t(\"Translations:FileUnlocked\")}.`;\n case FeedActionKeys.FileVersionRemoved:\n if (\"version\" in feed.data && feed.data.version) {\n return t(\"InfoPanel:FileVersionRemoved\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 105,
-      "context": "return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });\n return t(\"InfoPanel:FilesRemovedNotify\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Translations:FileLocked\")}.`;\n case FeedActionKeys.FileUnlocked:\n return `${t(\"Translations:FileUnlocked\")}.`;\n case FeedActionKeys.FileVersionRemoved:\n if (feed.data.version) {\n return t(\"InfoPanel:FileVersionRemoved\", {",
+      "line_number": 108,
+      "context": "return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });\n return t(\"Common:FilesRemovedNotify\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Translations:FileLocked\")}.`;\n case FeedActionKeys.FileUnlocked:\n return `${t(\"Translations:FileUnlocked\")}.`;\n case FeedActionKeys.FileVersionRemoved:\n if (feed.data.version) {\n return t(\"InfoPanel:FileVersionRemoved\", {",
       "module": "/packages/client"
     },
     {
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

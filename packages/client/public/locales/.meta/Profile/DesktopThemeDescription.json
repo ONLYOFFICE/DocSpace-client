@@ -3,7 +3,7 @@
   "content": "Automatically switch between light and dark themes depending on the current theme of Desktop Editors.",
   "content_en_sha1_hash": "f22c34003047b47698610a16f3357dd63749f1ba",
   "created_at": "2025-05-19T21:30:53.350Z",
-  "updated_at": "2026-05-15T14:00:06.878Z",
+  "updated_at": "2026-06-03T09:30:05.099Z",
   "comment": {
     "text": "This is a description for a radio button option in the interface theme settings. It explains that selecting this option will synchronize the DocSpace theme with the user's Desktop Editors theme.",
     "is_auto": true,
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

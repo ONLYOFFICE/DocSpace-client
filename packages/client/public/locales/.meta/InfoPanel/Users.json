@@ -3,7 +3,7 @@
   "content": "Users",
   "content_en_sha1_hash": "57f2b181d0a5e79a147ea1cdf41457f58dbbb3c9",
   "created_at": "2025-05-19T21:30:54.976Z",
-  "updated_at": "2026-05-24T17:27:49.122Z",
+  "updated_at": "2026-06-01T21:20:44.441Z",
   "comment": {
     "text": "This is a label for a section or category. It appears in the InfoPanel to categorize members, and in Portal Settings for data import options, referring to the users of the DocSpace platform.",
     "is_auto": true,
@@ -34,12 +34,6 @@
       "line_number": 152,
       "context": "component: (\n <ImportStep\n t={t}\n serviceName=\"Nextcloud\"\n usersExportDetails={{\n name: t(\"InfoPanel:Users\"),\n }}\n personalExportDetails={{\n name: t(\"Settings:UsersFiles\"),\n }}\n sharedFilesAndFoldersExportDetails={{",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/index.tsx",
-      "line_number": 220,
-      "context": "title={t(\"InfoPanel:Administration\")}\n members={admins}\n t={t}\n />\n <MemberGroup\n title={t(\"InfoPanel:Users\")}\n members={users}\n t={t}\n />\n <MemberGroup\n title={t(\"Common:Guests\")}",
-      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
@@ -179,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

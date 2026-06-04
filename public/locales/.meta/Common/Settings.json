@@ -3,7 +3,7 @@
   "content": "Settings",
   "content_en_sha1_hash": "c7f73bb54d928922c3838bb789ee9fb8a5b1eb37",
   "created_at": "2025-05-19T21:30:48.587Z",
-  "updated_at": "2026-05-24T17:27:49.049Z",
+  "updated_at": "2026-06-03T09:40:22.074Z",
   "comment": {
     "text": "This is a label for a button or a title for a dialog, indicating a section or action related to configuration options.",
     "is_auto": true,
@@ -13,14 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/AppsSidebar/FooterMenu.tsx",
-      "line_number": 103,
-      "context": "/>\n )}\n {showSettings && (\n <ArticleItem\n key=\"settings\"\n text={t(\"Common:Settings\")}\n title={t(\"Common:Settings\")}\n icon={SettingsIconUrl}\n showText={showText}\n linkData={EMPTY_LINK}\n onClick={() => navigate(\"/portal-settings\")}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/AppsSidebar/FooterMenu.tsx",
-      "line_number": 103,
-      "context": "/>\n )}\n {showSettings && (\n <ArticleItem\n key=\"settings\"\n text={t(\"Common:Settings\")}\n title={t(\"Common:Settings\")}\n icon={SettingsIconUrl}\n showText={showText}\n linkData={EMPTY_LINK}\n onClick={() => navigate(\"/portal-settings\")}",
+      "line_number": 105,
+      "context": "});\n }\n if (showSettings) {\n items.push({\n id: SETTINGS_ID,\n label: t(\"Common:Settings\"),\n icon: SettingsIconUrl,\n onClick: () => navigate(\"/portal-settings\"),\n });\n }",
       "module": "/packages/client"
     },
     {
@@ -31,31 +25,25 @@
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 256,
-      "context": "},\n ...(isAdminOrOwner\n ? [\n {\n id: \"ai-files-settings\",\n label: t(\"Common:Settings\"),\n icon: CatalogSettingsReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=settings\"),\n },\n ]\n : []),",
+      "line_number": 354,
+      "context": "},\n ...(isAdminOrOwner\n ? [\n {\n id: \"ai-forms-settings\",\n label: t(\"Common:Settings\"),\n icon: CatalogSettingsReactSvgUrl,\n onClick: () => navigate(\"/ai-forms?section=settings\"),\n },\n ]\n : []),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 256,
-      "context": "},\n ...(isAdminOrOwner\n ? [\n {\n id: \"ai-files-settings\",\n label: t(\"Common:Settings\"),\n icon: CatalogSettingsReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=settings\"),\n },\n ]\n : []),",
+      "line_number": 354,
+      "context": "},\n ...(isAdminOrOwner\n ? [\n {\n id: \"ai-forms-settings\",\n label: t(\"Common:Settings\"),\n icon: CatalogSettingsReactSvgUrl,\n onClick: () => navigate(\"/ai-forms?section=settings\"),\n },\n ]\n : []),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 256,
-      "context": "},\n ...(isAdminOrOwner\n ? [\n {\n id: \"ai-files-settings\",\n label: t(\"Common:Settings\"),\n icon: CatalogSettingsReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=settings\"),\n },\n ]\n : []),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 256,
-      "context": "},\n ...(isAdminOrOwner\n ? [\n {\n id: \"ai-files-settings\",\n label: t(\"Common:Settings\"),\n icon: CatalogSettingsReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=settings\"),\n },\n ]\n : []),",
+      "line_number": 354,
+      "context": "},\n ...(isAdminOrOwner\n ? [\n {\n id: \"ai-forms-settings\",\n label: t(\"Common:Settings\"),\n icon: CatalogSettingsReactSvgUrl,\n onClick: () => navigate(\"/ai-forms?section=settings\"),\n },\n ]\n : []),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 724,
+      "line_number": 755,
       "context": "]);\n \n const currentTitle = React.useMemo(() => {\n if (isProfile) return t(\"Profile:MyProfile\");\n \n if (isSettingsPage) return t(\"Common:Settings\");\n \n if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");",
       "module": "/packages/client"
     },
@@ -69,12 +57,6 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/mcp-tile/index.tsx",
       "line_number": 81,
       "context": "const getContextOptions = () => {\n return [\n {\n key: \"settings\",\n label: t(\"Common:Settings\"),\n icon: SettingsIcon,\n onClick: () => onSettingsClick?.(item),\n },\n {\n key: \"delete\",",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/apps/index.tsx",
-      "line_number": 174,
-      "context": "isDisabled={app.alwaysOn}\n onChange={() => handleToggle(app.id, !enabled, app.supported)}\n />\n <Button\n className={styles.settingsBtn}\n label={t(\"Common:Settings\")}\n size={ButtonSize.small}\n isDisabled={!app.href || !enabled}\n onClick={() => {\n if (app.href) navigate(`${app.href}?section=settings`);\n }}",
       "module": "/packages/client"
     },
     {
@@ -120,6 +102,12 @@
       "module": "/packages/management"
     },
     {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-navigation/index.tsx",
+      "line_number": 97,
+      "context": "/>\n );\n }\n \n if (route === \"settings\") {\n return <AgentsHeader title={t(\"Common:Settings\")} />;\n }\n \n if (route === \"trash\") {\n const isEmpty =\n !trashStore.isLoading &&",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/Tile.tsx",
       "line_number": 75,
       "context": "const getContextOptions = () => {\n return [\n {\n key: \"settings\",\n label: t(\"Common:Settings\"),\n icon: SettingsIcon,\n onClick: () => onSettingsClick(item),\n },\n {\n key: \"delete\",",
@@ -129,18 +117,6 @@
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/mcp-tile/index.tsx",
       "line_number": 74,
       "context": "const getContextOptions = () => {\n return [\n {\n key: \"settings\",\n label: t(\"Common:Settings\"),\n icon: SettingsIcon,\n onClick: () => onSettingsClick?.(item),\n },\n {\n key: \"delete\",",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/@header/ai-agents/settings/[tab]/page.tsx",
-      "line_number": 15,
-      "context": "// Settings/[tab] shares the same header treatment as /settings — no\n // breadcrumb, no back arrow. See ../page.tsx for the rationale.\n export default function SettingsTabHeader() {\n const { t } = useTranslation([\"Common\"]);\n return <AgentsHeader title={t(\"Common:Settings\")} />;\n }",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/@header/ai-agents/settings/page.tsx",
-      "line_number": 16,
-      "context": "// Settings sits at the same catalog level as Recent / Favorites / Trash —\n // root-level entries with no breadcrumb chain and no back arrow. Path-parts\n // are reserved for agent detail pages.\n export default function SettingsHeader() {\n const { t } = useTranslation([\"Common\"]);\n return <AgentsHeader title={t(\"Common:Settings\")} />;\n }",
       "module": "/packages/sdk"
     },
     {

@@ -380,6 +380,7 @@ const List = ({
         currentUserId={currentUserId}
         infoPanelVisible={infoPanelVisible}
         isPrivate={isPrivate}
+        rootFolderType={rootFolderType}
       />
     );
   }

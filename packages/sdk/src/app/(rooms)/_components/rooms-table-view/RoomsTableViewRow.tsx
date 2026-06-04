@@ -45,11 +45,13 @@ import {
 } from "@docspace/shared/components/tag-management";
 import type { TagClickEvent } from "@docspace/ui-kit/components/tag";
 import api from "@docspace/shared/api";
+import { isAdmin } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
+import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
 import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import { generateFilesItemValue } from "@/app/(docspace)/(files)/_utils";
@@ -109,6 +111,7 @@ const RoomsTableViewRow = observer(
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
     const { isItemActive } = useActiveItemsStore();
+    const { user } = useDocsUserStore();
     const inProgress = isItemActive(item);
 
     const storeItem = filesListStore.items.find((i) => i.id === item.id);
@@ -151,12 +154,14 @@ const RoomsTableViewRow = observer(
     const canUnpin = !!roomItem.security?.Pin;
     const canMute = !!roomItem.security?.Mute;
 
+    const canManageTags = !!(user && isAdmin(user)) && !isArchive;
+
     const tagAccess: AccessTagManagement = {
       canCreate: hasEditAccess,
       canBindTag: hasEditAccess,
       canSearch: hasEditAccess,
-      canEdit: false,
-      canRemove: false,
+      canEdit: canManageTags,
+      canRemove: canManageTags,
     };
 
     const onSelectTag = React.useCallback(

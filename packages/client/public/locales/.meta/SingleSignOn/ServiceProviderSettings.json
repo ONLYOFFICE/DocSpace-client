@@ -3,7 +3,7 @@
   "content": "{{organizationName}} SP Settings",
   "content_en_sha1_hash": "bfbd7d95c8767887e77950d3041a33ab5f3eecd8",
   "created_at": "2025-05-19T21:30:50.127Z",
-  "updated_at": "2026-05-15T15:37:40.282Z",
+  "updated_at": "2026-06-02T22:18:05.080Z",
   "comment": {
     "text": "This is a title for a section or category related to Single Sign-On (SSO) settings. It appears in the portal settings and refers to the configuration options for the Service Provider (SP). `{{organizationName}}` will be replaced with the name of the organization.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 398,
+      "line_number": 405,
       "context": "{\n id: \"portal-settings_catalog-sso-settings\",\n key: \"4-2-0\",\n icon: \"\",\n link: \"settings\",\n tKey: \"SingleSignOn:ServiceProviderSettings\",\n },\n {\n id: \"portal-settings_catalog-sso-metadata\",\n key: \"4-2-1\",\n icon: \"\",",
       "module": "/packages/client"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

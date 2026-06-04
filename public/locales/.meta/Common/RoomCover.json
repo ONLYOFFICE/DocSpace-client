@@ -3,7 +3,7 @@
   "content": "Room cover",
   "content_en_sha1_hash": "629fe77eb87170248f519263ffdf53af11eb35b4",
   "created_at": "2025-05-19T21:30:53.318Z",
-  "updated_at": "2026-05-24T17:27:49.076Z",
+  "updated_at": "2026-06-03T09:30:05.018Z",
   "comment": {
     "text": "This is a dialog title for uploading or editing the cover image for a room. It appears when a user wants to customize the visual representation of a room.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
-      "line_number": 515,
+      "line_number": 513,
       "context": "</ModalDialog>\n \n <AvatarEditorDialog\n t={t}\n visible={cropperVisible}\n title={t(\"RoomLogoCover:RoomCover\")}\n image={cropperImage}\n onClose={onCropperClose}\n onSave={onCropperSave}\n onChangeImage={onChangeImage}\n onChangeFile={onCropperChangeFile}",
       "module": "/packages/sdk"
     }
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

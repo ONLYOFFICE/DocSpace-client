@@ -28,6 +28,7 @@ import { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
@@ -101,16 +102,33 @@ export default function useRoomContextMenuModel(
     (item: TFolderItem | TFileItem): ContextMenuModel[] => {
       const room = item as TRoomItem;
       const handlePin = async () => {
-        if (room.pinned) {
-          await api.rooms.unpinRoom(room.id);
-        } else {
-          await api.rooms.pinRoom(room.id);
+        try {
+          if (room.pinned) {
+            await api.rooms.unpinRoom(room.id);
+            toastr.success(t("Common:RoomUnpinned"));
+          } else {
+            await api.rooms.pinRoom(room.id);
+            toastr.success(t("Common:RoomPinned"));
+          }
+          refreshRooms?.();
+        } catch (e) {
+          toastr.error(
+            room.pinned ? (e as Error) : t("Common:RoomsPinLimitMessage"),
+          );
         }
-        refreshRooms?.();
       };
       const handleMute = async () => {
-        await api.settings.muteRoomNotification(room.id, !room.mute);
-        onRoomChanged?.(room.id);
+        try {
+          await api.settings.muteRoomNotification(room.id, !room.mute);
+          toastr.success(
+            room.mute
+              ? t("Common:RoomNotificationsEnabled")
+              : t("Common:RoomNotificationsDisabled"),
+          );
+          onRoomChanged?.(room.id);
+        } catch (e) {
+          toastr.error(e as Error);
+        }
       };
       const handleLeave = () => {
         filesSelectionStore.setBufferSelection(room);

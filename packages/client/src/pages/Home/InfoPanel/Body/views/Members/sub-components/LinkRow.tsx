@@ -49,7 +49,7 @@ import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { ShareAccessRights } from "@docspace/shared/enums";
+import { FolderType, ShareAccessRights } from "@docspace/shared/enums";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import LinkRowComponent from "@docspace/shared/components/share/sub-components/LinkRow";
@@ -70,10 +70,14 @@ const LinkRow = (props: LinkRowProps) => {
     setDeleteLinkDialogVisible,
     setEmbeddingPanelData,
     isArchiveFolder,
+    blockExistingLinksOnRestrict,
+
     setIsScrollLocked,
     setExternalLink,
     deleteExternalLink,
     item,
+    isExternalShareRestricted,
+    isLinkBlockedByAdmin,
   } = props;
 
   const availableShareRights = item.availableShareRights;
@@ -126,6 +130,11 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onCopyExternalLink = () => {
+    if (isLinkBlockedByAdmin!(item, link)) {
+      toastr.error(t("Common:LinkBlockedByAdminWarning"));
+      onCloseContextMenu();
+      return;
+    }
     copyShareLink(item, link, t as TFunction);
     onCloseContextMenu();
   };
@@ -135,6 +144,30 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const getData = () => {
+    const isBlockedByAdmin = isLinkBlockedByAdmin!(item, link);
+
+    if (isBlockedByAdmin) {
+      return [
+        {
+          key: "copy-link-settings-key",
+          label: t("Common:CopyLink"),
+          icon: CopyToReactSvgUrl,
+          onClick: onCopyExternalLink,
+          disabled: isDisabled,
+        },
+        {
+          key: "delete-link-separator",
+          isSeparator: true,
+        },
+        {
+          key: "delete-link-key",
+          label: link.canRevoke ? t("Common:RevokeLink") : t("Common:Delete"),
+          icon: link.canRevoke ? OutlineReactSvgUrl : TrashReactSvgUrl,
+          onClick: onDeleteLink,
+        },
+      ];
+    }
+
     return [
       {
         key: "edit-link-key",
@@ -269,6 +302,10 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onCopyLink = (linkArg: TFileLink) => {
+    if (isLinkBlockedByAdmin!(item, linkArg)) {
+      toastr.error(t("Common:LinkBlockedByAdminWarning"));
+      return;
+    }
     copyShareLink(item, linkArg, t);
   };
 
@@ -280,6 +317,8 @@ const LinkRow = (props: LinkRowProps) => {
       onCopyLink={onCopyLink}
       loadingLinks={loadingLinks}
       isArchiveFolder={isArchiveFolder!}
+      isExternalShareRestricted={isExternalShareRestricted}
+      blockExistingLinksOnRestrict={blockExistingLinksOnRestrict}
       changeShareOption={changeShareOption}
       onOpenContextMenu={onOpenContextMenu}
       onCloseContextMenu={onCloseContextMenu}
@@ -291,8 +330,17 @@ const LinkRow = (props: LinkRowProps) => {
   );
 };
 
-export default inject<TStore>(
-  ({ dialogsStore, treeFoldersStore, infoPanelStore, publicRoomStore }) => {
+export default inject<TStore, Pick<LinkRowProps, "item">>(
+  (
+    {
+      dialogsStore,
+      treeFoldersStore,
+      infoPanelStore,
+      publicRoomStore,
+      filesSettingsStore,
+    },
+    { item },
+  ) => {
     const { setIsScrollLocked } = infoPanelStore;
 
     const {
@@ -305,8 +353,25 @@ export default inject<TStore>(
 
     const { setExternalLink, deleteExternalLink } = publicRoomStore;
 
+    const {
+      isExternalShareRestricted: isShareRestricted,
+      externalShareApplyToDocuments,
+      externalShareApplyToRooms,
+      blockExistingLinksOnRestrict,
+    } = filesSettingsStore;
+
+    const isExternalShareRestricted =
+      isShareRestricted &&
+      (item.rootFolderType === FolderType.Rooms
+        ? externalShareApplyToRooms
+        : externalShareApplyToDocuments);
+
     return {
       isArchiveFolder: isArchiveFolderRoot,
+
+      isExternalShareRestricted,
+      blockExistingLinksOnRestrict,
+      isLinkBlockedByAdmin: filesSettingsStore.isLinkBlockedByAdmin,
 
       setLinkParams,
       setEditLinkPanelIsVisible,
@@ -320,4 +385,3 @@ export default inject<TStore>(
     };
   },
 )(observer(LinkRow));
-

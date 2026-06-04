@@ -3,7 +3,7 @@
   "content": "Automatically switch between light and dark themes when your system does.",
   "content_en_sha1_hash": "c63fc79ca86878cd4320587abf222c6e63118c5c",
   "created_at": "2026-04-03T21:51:34.692Z",
-  "updated_at": "2026-05-15T14:00:06.878Z",
+  "updated_at": "2026-06-03T09:30:05.099Z",
   "comment": {
     "text": "This is a description for a radio button option. It explains that selecting this option will make the application's theme (light or dark) automatically match the operating system's theme setting.",
     "is_auto": true,

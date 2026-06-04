@@ -232,6 +232,7 @@ export const RecoveryPhraseDisplayModal: React.FC<
                     value={answers[idx] ?? ""}
                     isDisabled={isLoading}
                     hasError={!!quizError}
+                    isAutoFocussed={idx === 0}
                     onChange={(e) => updateAnswer(idx, e.target.value)}
                     tabIndex={idx + 1}
                   />

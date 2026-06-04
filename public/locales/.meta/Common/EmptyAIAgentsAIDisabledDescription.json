@@ -3,7 +3,7 @@
   "content": "This section allows users to work with {{aiAgents}} — smart assistants for handling documents and other tasks. \nTo start using them, the AI features service must be enabled by your {{productName}} admin.",
   "content_en_sha1_hash": "39dc95677251273fcbab3dcdd56d62e7720a6e59",
   "created_at": "2025-12-19T13:03:52.163Z",
-  "updated_at": "2026-05-24T17:27:49.060Z",
+  "updated_at": "2026-06-01T21:20:44.384Z",
   "comment": {
     "text": "This is a description displayed in an empty state for the AI Agents section. It informs users that AI features are disabled and need to be enabled by an administrator. `{{aiAgents}}` refers to AI assistants, and `{{productName}}` is the name of the product.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
-      "line_number": 133,
+      "line_number": 135,
       "context": "productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n defaultValue:\n \"{{aiAgents}} are not yet enabled in this {{productName}} portal.\",\n })\n : t(\"Common:EmptyAIAgentsAIDisabledDescription\", {\n productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n defaultValue:\n \"Ask your portal admin to enable {{aiAgents}} in {{productName}}.\",\n });",
       "module": "/packages/sdk"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:53.938772Z"
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

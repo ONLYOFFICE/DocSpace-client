@@ -40,6 +40,7 @@ import type { TFileItem, TFolderItem } from "../_hooks/useItemList";
 export type DeleteHandler = {
   deleteItem: (item: TFileItem | TFolderItem) => void;
   deleteItems: (items: (TFileItem | TFolderItem)[]) => void;
+  emptyTrash?: () => void;
 };
 
 /**
@@ -47,3 +48,4 @@ export type DeleteHandler = {
  * Used by context menu in Row/Tile and header components.
  */
 export const DeleteContext = React.createContext<DeleteHandler | null>(null);
+

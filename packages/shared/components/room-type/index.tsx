@@ -62,6 +62,7 @@ const RoomType = ({
   id,
   selectedId,
   disabledFormRoom,
+  disabledPublicRoom,
   isTemplate,
   isTemplateRoom,
 }: RoomTypeProps) => {
@@ -76,8 +77,11 @@ const RoomType = ({
   const isFormRoom = roomType === RoomsType.FormRoom;
   const isPrivateRoom =
     roomType === RoomsTypePrivate && !isTemplate && !isTemplateRoom;
+  const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
-  const disabled = isFormRoom && disabledFormRoom;
+  const disabled =
+    (isFormRoom && disabledFormRoom) ||
+    (isPublicRoomType && disabledPublicRoom);
 
   const arrowClassName =
     type === "dropdownButton"
@@ -124,6 +128,7 @@ const RoomType = ({
       as="div"
       className={classNames(styles.roomType, styles.listItem, {
         [styles.isOpen]: isOpen,
+        [styles.disabled]: disabled,
       })}
       id={id}
       title={disabled ? "" : t(room.title)}
@@ -178,3 +183,4 @@ const RoomType = ({
 };
 
 export default RoomType;
+

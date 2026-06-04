@@ -3,7 +3,7 @@
   "content": "Data import",
   "content_en_sha1_hash": "783af5b205a3e0c3c3b5feadf95d2a786442a1fe",
   "created_at": "2025-05-19T21:30:51.050Z",
-  "updated_at": "2026-05-27T14:11:50.679Z",
+  "updated_at": "2026-06-03T09:30:05.066Z",
   "comment": {
     "text": "This is a section title in the portal settings, referring to the functionality of importing data into DocSpace.",
     "is_auto": true,
@@ -49,7 +49,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 385,
+      "line_number": 321,
       "context": "? t(\"ImportFromNextcloud\")\n : workspace === \"Workspace\"\n ? t(\"ImportFromPortal\", {\n organizationName: logoText,\n })\n : t(\"DataImport\")\n : !standalone && isPaymentPage\n ? t(\"Common:Billing\")\n : // biome-ignore lint/plugin/no-dynamic-i18n-key: header is passed from route config; underlying keys are declared as literals at callsites\n t(header, {\n organizationName: logoText,",
       "module": "/packages/client"
     },
@@ -61,7 +61,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 448,
+      "line_number": 455,
       "context": "{\n id: \"portal-settings_catalog-data-import\",\n key: \"5\",\n type: PageType.dataImport,\n link: \"data-import\",\n tKey: \"DataImport\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-data-import-child\",\n key: \"5-0\",",
       "module": "/packages/client"
     }
@@ -197,7 +197,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

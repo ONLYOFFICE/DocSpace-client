@@ -39,6 +39,8 @@ import { inject, observer } from "mobx-react";
 import Share from "@docspace/shared/components/share";
 import { ShareEventName } from "@docspace/shared/components/share/Share.constants";
 
+import { FolderType } from "@docspace/shared/enums";
+
 import type { ShareProps } from "@docspace/shared/components/share/Share.types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { TGroup } from "@docspace/shared/api/groups/types";
@@ -49,8 +51,10 @@ interface ExternalShareProps {
   members?: ShareProps["members"];
 }
 
-interface WrapperShareProps
-  extends Omit<ShareProps, "onAddUser" | "onClickGroup"> {
+interface WrapperShareProps extends Omit<
+  ShareProps,
+  "onAddUser" | "onClickGroup"
+> {
   setEditMembersGroup: (group: TGroup) => void;
   setEditGroupMembersDialogVisible: (visible: boolean) => void;
 }
@@ -79,40 +83,63 @@ const WrapperShare: FC<WrapperShareProps> = (props) => {
   return <Share {...props} onAddUser={onAddUser} onClickGroup={onClickGroup} />;
 };
 
-export default inject<TStore>(({ infoPanelStore, userStore, dialogsStore }) => {
-  const selfId = userStore.user?.id ?? "";
+export default inject<TStore>(
+  ({ infoPanelStore, userStore, dialogsStore, filesSettingsStore }) => {
+    const selfId = userStore.user?.id ?? "";
 
-  const {
-    setLinkParams,
-    setEditLinkPanelIsVisible,
-    setEmbeddingPanelData,
-    setIsShareFormData,
+    const {
+      setLinkParams,
+      setEditLinkPanelIsVisible,
+      setEmbeddingPanelData,
+      setIsShareFormData,
 
-    setEditMembersGroup,
-    setEditGroupMembersDialogVisible,
-  } = dialogsStore;
+      setEditMembersGroup,
+      setEditGroupMembersDialogVisible,
+    } = dialogsStore;
 
-  const {
-    setView,
+    const {
+      setView,
 
-    shareChanged,
-    setShareChanged,
-    setIsScrollLocked,
-  } = infoPanelStore;
+      shareChanged,
+      setShareChanged,
+      setIsScrollLocked,
+    } = infoPanelStore;
 
-  return {
-    setView,
+    const {
+      isExternalShareRestricted: isShareRestricted,
+      externalShareApplyToDocuments,
+      externalShareApplyToRooms,
+      defaultShareLinkInternal,
+      blockExistingLinksOnRestrict,
+    } = filesSettingsStore;
 
-    shareChanged,
-    setShareChanged,
-    selfId,
-    setIsScrollLocked,
-    setLinkParams,
-    setEditLinkPanelIsVisible,
-    setEmbeddingPanelData,
-    onOpenPanel: setIsShareFormData,
+    const selection = infoPanelStore.infoPanelSelection;
+    const isInRoom =
+      !Array.isArray(selection) &&
+      selection !== null &&
+      "rootFolderType" in selection &&
+      selection.rootFolderType === FolderType.Rooms;
 
-    setEditMembersGroup,
-    setEditGroupMembersDialogVisible,
-  };
-})(observer(WrapperShare as FC<ExternalShareProps>));
+    return {
+      setView,
+
+      shareChanged,
+      setShareChanged,
+      selfId,
+      setIsScrollLocked,
+      setLinkParams,
+      setEditLinkPanelIsVisible,
+      setEmbeddingPanelData,
+      onOpenPanel: setIsShareFormData,
+
+      setEditMembersGroup,
+      setEditGroupMembersDialogVisible,
+
+      isExternalShareRestricted:
+        isShareRestricted &&
+        (isInRoom ? externalShareApplyToRooms : externalShareApplyToDocuments),
+      blockExistingLinksOnRestrict,
+      defaultShareLinkInternal,
+    };
+  },
+)(observer(WrapperShare as FC<ExternalShareProps>));

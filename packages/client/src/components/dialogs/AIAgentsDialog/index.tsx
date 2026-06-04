@@ -82,7 +82,7 @@ const AIAgentsDialogComponent = ({
   const showConnectDb =
     !connectDbBannerDismissed &&
     Boolean(room?.security?.EditRoom) &&
-    !room?.sendFormToExternalDB;
+    room?.sendFormToExternalDB === false;
 
   const handleConnectDatabase = () => {
     if (!room) return;
@@ -139,4 +139,3 @@ export const AIAgentsDialog = inject<
 >(({ infoPanelStore }) => ({
   infoPanelRoomSelection: infoPanelStore.infoPanelRoomSelection,
 }))(observer(AIAgentsDialogComponent));
-

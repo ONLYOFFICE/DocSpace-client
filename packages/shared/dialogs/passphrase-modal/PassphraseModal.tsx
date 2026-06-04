@@ -173,6 +173,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                   isHovered
                   onClick={handleGeneratePassword}
                   dataTestId="generate_passphrase_link"
+                  tabIndex={1}
                 >
                   {t("Common:GenerateLogoButton")}
                 </Link>
@@ -215,8 +216,9 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                 tooltipPasswordSpecial={t("Common:PasswordLimitSpecialSymbols")}
                 isDisabled={isLoading}
                 hasError={passphraseHasError}
+                isAutoFocussed
                 autoComplete="new-password"
-                tabIndex={1}
+                tabIndex={2}
               />
             </FieldContainer>
 
@@ -229,6 +231,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                   isHovered
                   onClick={onForgotPassphrase}
                   dataTestId="forgot_passphrase_link"
+                  tabIndex={3}
                 >
                   {t("Common:ForgotPassphrase")}
                 </Link>
@@ -269,7 +272,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                   !!confirmPassphrase && passphrase !== confirmPassphrase
                 }
                 autoComplete="new-password"
-                tabIndex={2}
+                tabIndex={3}
               />
             </FieldContainer>
           )}
@@ -286,7 +289,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
           label={submitLabel ?? t("Common:ContinueButton")}
           isDisabled={isDisabled}
           isLoading={isLoading}
-          tabIndex={3}
+          tabIndex={4}
         />
         <Button
           scale
@@ -295,7 +298,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
           size={ButtonSize.normal}
           label={t("Common:CancelButton")}
           isDisabled={isLoading}
-          tabIndex={4}
+          tabIndex={5}
         />
       </ModalDialog.Footer>
     </ModalDialog>

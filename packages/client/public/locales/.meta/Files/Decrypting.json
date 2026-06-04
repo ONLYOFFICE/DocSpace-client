@@ -2,24 +2,24 @@
   "key_path": "Decrypting",
   "content": "Decrypting",
   "content_en_sha1_hash": "dcc6d5e21af6c8bcf80289f283c3000e7c9d98a7",
-  "created_at": "2026-05-24T17:27:47.388Z",
-  "updated_at": "2026-05-24T19:03:57.559Z",
+  "created_at": "2026-06-02T22:18:03.303Z",
+  "updated_at": "2026-06-02T22:21:32.509Z",
   "comment": {
-    "text": "Label for a secondary progress bar indicating the active status of a file decryption process.",
+    "text": "Progress bar label indicating the status of a file decryption process.",
     "is_auto": true,
-    "updated_at": "2026-05-24T19:03:57.559Z",
+    "updated_at": "2026-06-02T22:21:32.509Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1079,
+      "line_number": 1101,
       "context": "},\n onProgress: (progress) => {\n setSecondaryProgressBarData({\n operation: OPERATIONS_NAME.download,\n percent: 70 + Math.floor(progress * 30),\n label: i18n.t(\"Files:Decrypting\"),\n operationId,\n });\n },\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1079,
+      "line_number": 1101,
       "context": "},\n onProgress: (progress) => {\n setSecondaryProgressBarData({\n operation: OPERATIONS_NAME.download,\n percent: 70 + Math.floor(progress * 30),\n label: i18n.t(\"Files:Decrypting\"),\n operationId,\n });\n },\n });",
       "module": "/packages/client"
     }

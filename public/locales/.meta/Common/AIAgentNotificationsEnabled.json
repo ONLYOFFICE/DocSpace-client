@@ -2,20 +2,26 @@
   "key_path": "AIAgentNotificationsEnabled",
   "content": "AI agent notifications enabled",
   "content_en_sha1_hash": "7b64b614e7db12d11d087cce81225c8bf558b883",
-  "created_at": "2026-05-25T18:26:20.061Z",
-  "updated_at": "2026-05-28T15:46:18.646Z",
+  "created_at": "2026-06-02T22:17:29.753Z",
+  "updated_at": "2026-06-03T09:30:05.114Z",
   "comment": {
-    "text": "Status message or label indicating that notifications for a specific AI agent are active; includes a variable for the AI agent's name.",
+    "text": "Success toast message appearing when AI agent notifications are turned on; includes the `aiAgent` variable representing the specific agent.",
     "is_auto": true,
-    "updated_at": "2026-05-25T18:39:42.515Z",
+    "updated_at": "2026-06-02T22:20:50.206Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1498,
-      "context": "if (isAIAgent) {\n notificationsDisabled = t(\"AIAgentNotificationsDisabled\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n notificationsEnabled = t(\"AIAgentNotificationsEnabled\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n }\n \n muteRoomNotification(id, muteStatus)",
+      "line_number": 1921,
+      "context": "if (isAIAgent) {\n notificationsDisabled = t(\"Common:AIAgentNotificationsDisabled\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n notificationsEnabled = t(\"Common:AIAgentNotificationsEnabled\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n }\n \n muteRoomNotification(id, muteStatus)",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_store/AgentsListStore.tsx",
+      "line_number": 173,
+      "context": "const message = muteStatus\n ? t(\"Common:AIAgentNotificationsDisabled\", {\n aiAgent,\n defaultValue: \"AI agent notifications disabled\",\n })\n : t(\"Common:AIAgentNotificationsEnabled\", {\n aiAgent,\n defaultValue: \"AI agent notifications enabled\",\n });\n toastr.success(message);\n } catch (e) {",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

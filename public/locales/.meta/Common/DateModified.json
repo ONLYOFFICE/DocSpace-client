@@ -3,7 +3,7 @@
   "content": "Date modified",
   "content_en_sha1_hash": "dcef8297cd84445acb4ad6b84e674163d3d9765e",
   "created_at": "2026-05-19T19:03:14.149Z",
-  "updated_at": "2026-05-24T17:27:49.120Z",
+  "updated_at": "2026-06-01T21:20:44.440Z",
   "comment": {
     "text": "A label in the file details panel that indicates when the file was last changed. It appears as a property name within a list of metadata.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Details/Details.utils.tsx",
-      "line_number": 178,
+      "line_number": 181,
       "context": "case \"Content\":\n return this.t(\"Common:Content\");\n case \"Size\":\n return this.t(\"Common:Size\");\n case \"Date modified\":\n return this.t(\"Common:DateModified\");\n case \"Last modified by\":\n return this.t(\"Common:LastModifiedBy\");\n case \"Creation date\":\n return this.t(\"Common:CreationDate\");\n case \"Versions\":",
       "module": "/packages/sdk"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Encrypted file",
   "content_en_sha1_hash": "3bac8f5aae735d6e6a79c56c53338082d82f606b",
   "created_at": "2026-05-24T17:27:26.296Z",
-  "updated_at": "2026-05-24T18:11:51.709Z",
+  "updated_at": "2026-06-02T22:18:04.998Z",
   "comment": {
     "text": "Tooltip for a file icon indicating that the file is encrypted.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/ItemIcon.tsx",
-      "line_number": 120,
+      "line_number": 122,
       "context": "const badgeSrc = showNoAccessBadge ? Lock12ReactSvgUrl : Security12ReactSvgUrl;\n const badgeTitle = showNoAccessBadge\n ? t(\"Common:NoAccessToEncryptedFile\")\n : isEncryptedFile\n ? t(\"Common:EncryptedFile\")\n : undefined;\n \n return (\n <div\n className={classNames(styles.iconWrapper, {",
       "module": "/packages/client"
     }

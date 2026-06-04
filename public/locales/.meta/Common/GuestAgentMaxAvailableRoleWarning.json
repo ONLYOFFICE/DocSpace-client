@@ -3,7 +3,7 @@
   "content": "Guests cannot be assigned as Content creator.\nOnly Room admins, {{productName}} admins and Users are eligible for this role.",
   "content_en_sha1_hash": "bacaf2f76e9af70543835bf7fba7c43feaf4363e",
   "created_at": "2025-11-20T14:21:54.083Z",
-  "updated_at": "2026-05-24T17:27:49.108Z",
+  "updated_at": "2026-06-01T21:20:44.427Z",
   "comment": {
     "text": "This is a tooltip or warning message that appears when attempting to assign a guest user the \"Content creator\" role. It explains that guests cannot be assigned this role and lists the eligible user types. The `{{productName}}` variable will be replaced with the product's brand name.",
     "is_auto": true,
@@ -22,6 +22,12 @@
       "line_number": 77,
       "context": "},\n collaborator: {\n key: \"collaborator\",\n label: this.t(\"Common:ContentCreator\"),\n access: ShareAccessRights.Collaborator,\n tooltip: this.t(\"Common:GuestAgentMaxAvailableRoleWarning\", {\n productName: getBrandName(\"ProductName\"),\n }),\n type: \"collaborator\",\n },\n viewer: {",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/Members.utils.ts",
+      "line_number": 77,
+      "context": "},\n collaborator: {\n key: \"collaborator\",\n label: this.t(\"Common:ContentCreator\"),\n access: ShareAccessRights.Collaborator,\n tooltip: this.t(\"Common:GuestAgentMaxAvailableRoleWarning\", {\n productName: getBrandName(\"ProductName\"),\n }),\n type: \"collaborator\",\n },\n viewer: {",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/utils/index.ts",
@@ -167,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

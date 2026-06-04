@@ -29,17 +29,21 @@
 import React from "react";
 import { observer } from "mobx-react";
 
-import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
+import { ScrollbarContext } from "@docspace/ui-kit/components/scrollbar";
+import type { TRoom } from "@docspace/shared/api/rooms/types";
+import type { TFolder } from "@docspace/shared/api/files/types";
 
-import {
-  InfoPanelView,
-  useInfoPanelStore,
-} from "../../_store/InfoPanelStore";
+import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
+import InvitePanel from "@/app/(rooms)/_components/invite-panel";
+
+import { InfoPanelView, useInfoPanelStore } from "../../_store/InfoPanelStore";
 
 import { getAvailableTabs } from "./helpers/tabs";
 import Details from "./views/Details";
 import History from "./views/History";
 import Members from "./views/Members";
+import { useMembers } from "./views/Members/useMembers";
+import RoomHeader from "./sub-components/RoomHeader";
 import ShareView from "./views/Share";
 import { NoItem, SeveralItems } from "./views/EmptyStates";
 
@@ -56,6 +60,19 @@ const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
 
   const selectedCount = filesSelectionStore.selection.length;
   const isSeveralItems = selectedCount > 1;
+
+  const isRoom =
+    !!selection && "isRoom" in selection && Boolean(selection.isRoom);
+  const scrollContext = React.use(ScrollbarContext);
+  const scrollToTop = React.useCallback(() => {
+    scrollContext?.parentScrollbar?.scrollToTop();
+  }, []);
+  const membersData = useMembers({
+    room: isRoom ? (selection as unknown as TRoom) : null,
+    scrollToTop,
+  });
+
+  const [invitePanelVisible, setInvitePanelVisible] = React.useState(false);
 
   React.useEffect(() => {
     if (!isVisible) return;
@@ -98,18 +115,25 @@ const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
     infoPanelStore,
   ]);
 
+  const availableTabs = selection ? getAvailableTabs(selection) : [];
+  const currentView = availableTabs.includes(fileView)
+    ? fileView
+    : (availableTabs[0] ?? InfoPanelView.infoDetails);
+
+  const isMembersView = currentView === InfoPanelView.infoMembers;
+
+  const room = selection as unknown as TRoom;
+  const hasEditAccess = isRoom ? Boolean(room.security?.EditAccess) : false;
+
+  const showHeader = !isSeveralItems && !!selection && isRoom;
+
   const renderContent = () => {
     if (isSeveralItems) return <SeveralItems count={selectedCount} />;
 
     if (!selection) return <NoItem />;
 
-    const availableTabs = getAvailableTabs(selection);
-    const currentView = availableTabs.includes(fileView)
-      ? fileView
-      : (availableTabs[0] ?? InfoPanelView.infoDetails);
-
     if (currentView === InfoPanelView.infoMembers)
-      return <Members selection={selection} />;
+      return <Members selection={selection} membersData={membersData} />;
     if (currentView === InfoPanelView.infoShare)
       return <ShareView selection={selection} />;
     if (currentView === InfoPanelView.infoHistory)
@@ -123,7 +147,27 @@ const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
       data-info-panel-scroll
       data-testid="info_panel_body"
     >
+      {showHeader ? (
+        <RoomHeader
+          selection={selection as TFolder}
+          isMembersView={isMembersView}
+          hasEditAccess={hasEditAccess}
+          setSearchValue={membersData.handleSearchMembers}
+          onInvite={() => setInvitePanelVisible(true)}
+        />
+      ) : null}
+
       {renderContent()}
+
+      {invitePanelVisible && selection ? (
+        <InvitePanel
+          visible
+          roomId={Number(selection.id)}
+          roomType={room.roomType}
+          onClose={() => setInvitePanelVisible(false)}
+          onMembersUpdated={() => membersData.setIsMembersPanelUpdating(true)}
+        />
+      ) : null}
     </div>
   );
 });

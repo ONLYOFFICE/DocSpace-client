@@ -33,12 +33,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useCallback, useMemo } from "react";
+import { useCallback, useContext, useMemo } from "react";
 
 import { isVideo } from "@docspace/shared/components/media-viewer/MediaViewer.utils";
-import type { PlaylistType } from "@docspace/shared/components/media-viewer/MediaViewer.types";
+import type {
+  PlaylistType,
+  NumberOrString,
+} from "@docspace/shared/components/media-viewer/MediaViewer.types";
 import { thumbnailStatuses } from "@docspace/shared/constants";
-import type { TFilesSettings } from "@docspace/shared/api/files/types";
+import type { TFile, TFilesSettings } from "@docspace/shared/api/files/types";
 
 import { useMediaViewerStore } from "@/app/(docspace)/_store/MediaViewerStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
@@ -46,6 +49,9 @@ import type { TFileItem } from "@/app/(docspace)/_hooks/useItemList";
 import useItemIcon, {
   type TItemIconSizes,
 } from "@/app/(docspace)/_hooks/useItemIcon";
+import useDownloadActions from "@/app/(docspace)/_hooks/useDownloadActions";
+import { DeleteContext } from "@/app/(docspace)/_contexts/DeleteContext";
+import { RenameContext } from "@/app/(docspace)/_contexts/RenameContext";
 
 type UseMediaViewerProps = {
   filesSettings: TFilesSettings;
@@ -106,6 +112,10 @@ export function useMediaViewer({ filesSettings }: UseMediaViewerProps) {
   const { items } = useFilesListStore();
   const { getIcon: getIconFromHook } = useItemIcon({ filesSettings });
 
+  const { downloadAction } = useDownloadActions();
+  const deleteCtx = useContext(DeleteContext);
+  const renameCtx = useContext(RenameContext);
+
   const onClose = useCallback(() => {
     setMediaViewerData({ id: null, visible: false });
   }, [setMediaViewerData]);
@@ -149,6 +159,42 @@ export function useMediaViewer({ filesSettings }: UseMediaViewerProps) {
     [getIconFromHook],
   );
 
+  // The media viewer passes the target file (taken from `files`, which are
+  // `TFileItem`s) to the context-menu handlers, so we can route them straight
+  // into the same actions the file list rows use.
+  const onClickDownload = useCallback(
+    (file: TFile) => downloadAction(file as TFileItem),
+    [downloadAction],
+  );
+
+  const onClickRename = useCallback(
+    (file: TFile) => renameCtx?.renameItem(file as TFileItem),
+    [renameCtx],
+  );
+
+  const onClickDelete = useCallback(
+    (file: TFile) => deleteCtx?.deleteItem(file as TFileItem),
+    [deleteCtx],
+  );
+
+  // The desktop player toolbar / keyboard shortcuts call the id-based
+  // handlers; resolve the id back to the playlist item before delegating.
+  const onDownload = useCallback(
+    (id: NumberOrString) => {
+      const file = files.find((item) => item.id === id);
+      if (file) downloadAction(file);
+    },
+    [files, downloadAction],
+  );
+
+  const onDelete = useCallback(
+    (id: NumberOrString) => {
+      const file = files.find((item) => item.id === id);
+      if (file) deleteCtx?.deleteItem(file);
+    },
+    [files, deleteCtx],
+  );
+
   return {
     onClose,
     visible,
@@ -161,5 +207,10 @@ export function useMediaViewer({ filesSettings }: UseMediaViewerProps) {
     onPrevClick,
     autoPlay,
     getIcon,
+    onClickDownload,
+    onClickRename,
+    onClickDelete,
+    onDownload,
+    onDelete,
   };
 }

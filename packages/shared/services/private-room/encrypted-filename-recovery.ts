@@ -115,6 +115,26 @@ async function recoverOne(
   }
 }
 
+export async function ensureDecryptedFilename(
+  file: {
+    id: number;
+    viewUrl?: string | null;
+    encrypted?: boolean | null;
+  },
+  userId: string,
+  identity: IdentityKeyPair,
+  roomId: number | string | null | undefined,
+): Promise<void> {
+  if (!file?.encrypted || !file.id || !file.viewUrl) return;
+  if (getCachedEncryptedFilename(file.id)) return;
+  await recoverEncryptedFilenames(
+    [{ id: file.id, viewUrl: file.viewUrl }],
+    userId,
+    identity,
+    roomId,
+  );
+}
+
 export async function recoverEncryptedFilenames(
   candidates: RecoveryCandidate[],
   userId: string,

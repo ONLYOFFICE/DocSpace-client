@@ -69,6 +69,11 @@ function FilesMediaViewer({
     onPrevClick,
     autoPlay,
     getIcon,
+    onClickDownload,
+    onClickRename,
+    onClickDelete,
+    onDownload,
+    onDelete,
   } = useMediaViewer({ filesSettings });
   const { currentDeviceType } = useSettingsStore();
   const docsUserStore = useDocsUserStore();
@@ -93,6 +98,11 @@ function FilesMediaViewer({
           prevMedia={onPrevClick}
           userId={docsUserStore.user?.id}
           currentRoomId={currentRoomId}
+          onClickDownload={onClickDownload}
+          onClickRename={onClickRename}
+          onClickDelete={onClickDelete}
+          onDownload={onDownload}
+          onDelete={onDelete}
         />
       }
     />

@@ -188,7 +188,7 @@ const DocsLayout = observer(
       !sdkConfig?.disableActionButton &&
       isCanCreate;
 
-    const docsActions = useDocsActions();
+    const docsActions = useDocsActions({ editorBasePath });
     const {
       uploadFilesToFolder,
       openCreateDialog,

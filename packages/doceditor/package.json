@@ -42,7 +42,6 @@
     "react-device-detect": "2.2.3",
     "react-dom": "19.2.4",
     "react-i18next": "14.0.1",
-    "sass": "1.79.6",
     "ts-pattern": "5.5.0",
     "winston": "3.17.0",
     "winston-cloudwatch": "6.3.0",

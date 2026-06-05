@@ -33,21 +33,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { ServerType } from "@docspace/ui-kit/enums/ai";
+import { ProviderType, ServerType } from "@docspace/ui-kit/enums/ai";
 
-export { ServerType };
-
-export enum ProviderType {
-  PortalAi = 0,
-  OpenAi = 1,
-  TogetherAi = 2,
-  OpenAiCompatible = 3,
-  Anthropic = 4,
-  OpenRouter = 5,
-  DeepSeek = 6,
-  XAi = 7,
-  Google = 8,
-}
+export { ProviderType, ServerType };
 
 export enum ToolsPermission {
   Allow,

@@ -67,6 +67,7 @@ import type {
   TUpdateDefaultProviderData,
   TModelSettingsDto,
   TPreviewModelsRequest,
+  TAIUserConfig,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -744,4 +745,27 @@ export const updateDefaultProvider = async ({
   const res = await request(options);
 
   return res as TDefaultProvider;
+};
+
+export const getAIUserConfig = async () => {
+  const options = {
+    method: "get",
+    url: `${baseUrl}/config/user`,
+  };
+
+  const res = await request(options);
+
+  return res as TAIUserConfig;
+};
+
+export const updateAIUserConfig = async (data: TAIUserConfig) => {
+  const options = {
+    method: "put",
+    url: `${baseUrl}/config/user`,
+    data,
+  };
+
+  const res = await request(options);
+
+  return res as TAIUserConfig;
 };

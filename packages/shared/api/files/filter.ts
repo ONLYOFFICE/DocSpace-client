@@ -401,9 +401,9 @@ class FilesFilter {
       filterType ||
       (search ?? "").trim() ||
       authorType ||
-      applyFilterOption !== ApplyFilterOption.All
-        ? withSubfolders
-        : false;
+      (applyFilterOption != null && applyFilterOption !== ApplyFilterOption.All)
+        ? (withSubfolders ?? "false")
+        : "false";
 
     const userIdOrGroupId =
       authorType && authorType.includes("_")

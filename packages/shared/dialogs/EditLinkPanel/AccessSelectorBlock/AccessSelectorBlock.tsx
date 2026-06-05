@@ -33,11 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { FC } from "react";
+import { FC, useId, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
 import { AccessSelectorBlockProps } from "./AccessSelectorBlock.types";
 
@@ -49,6 +50,20 @@ const AccessSelectorBlock: FC<AccessSelectorBlockProps> = ({
   selectedOption,
 }) => {
   const { t } = useTranslation("Common");
+  const uid = useId().replace(/:/g, "");
+  const anchorClass = `access-external-disabled-${uid}`;
+
+  const optionsWithAnchor = useMemo(
+    () =>
+      options.map((opt) =>
+        opt.disabled && opt.tooltip ? { ...opt, className: anchorClass } : opt,
+      ),
+    [options, anchorClass],
+  );
+
+  const disabledTooltip = optionsWithAnchor.find(
+    (opt) => opt.disabled && opt.tooltip,
+  )?.tooltip;
 
   return (
     <div className={styles.accessSelectorBlock}>
@@ -56,13 +71,22 @@ const AccessSelectorBlock: FC<AccessSelectorBlockProps> = ({
         {t("Common:WhoHasAccess")}
       </Text>
       <ComboBox
-        options={options}
+        options={optionsWithAnchor}
         selectedOption={selectedOption}
         scaledOptions
         onSelect={onSelect}
         showDisabledItems
         isDefaultMode={false}
       />
+      {disabledTooltip ? (
+        <Tooltip
+          id={`access-external-tooltip-${uid}`}
+          anchorSelect={`.${anchorClass}`}
+          place="bottom-start"
+        >
+          {disabledTooltip}
+        </Tooltip>
+      ) : null}
     </div>
   );
 };

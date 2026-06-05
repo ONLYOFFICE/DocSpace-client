@@ -48,6 +48,7 @@ import type { TAiProvider } from "@docspace/shared/api/ai/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
+import { modelCache } from "SRC_DIR/components/dialogs/CreateEditAgentDialog/sub-components/modelCache";
 
 type Props = {
   providerId: TAiProvider["id"];
@@ -73,6 +74,12 @@ const DeleteDialogComponent = ({
       setLoading(true);
 
       await deleteAIProvider?.(providerId);
+
+      // Drop cached providers/models so the agent edit dialog doesn't keep
+      // offering the just-deleted provider (e.g. OpenRouter) as a
+      // recommended model to switch to.
+      modelCache.clear();
+
       getAIConfig?.();
 
       toastr.success(

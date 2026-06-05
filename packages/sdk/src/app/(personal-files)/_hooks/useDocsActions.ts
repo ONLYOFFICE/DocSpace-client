@@ -36,7 +36,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import {
   createFolder,
@@ -55,6 +55,7 @@ import { useNavigationStore } from "@/app/(docspace)/_store/NavigationStore";
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
 import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
+import openDocEditor from "@/app/(docspace)/_utils/open-doc-editor";
 
 import type { CreateFileDialogType } from "../_components/create-file-dialog";
 
@@ -79,55 +80,29 @@ const getDefaultFileName = (
 const DEFAULT_CHUNK_SIZE = 10 * 1024 * 1024;
 const DEFAULT_UPLOAD_THREADS = 3;
 
-type UseDocsActionsOptions = {
-  /**
-   * Base path for the editor route, used to build the create-file URL.
-   * Defaults to "/personal-files/editor". When provided (e.g., "/editor" for
-   * rooms), the current pathname is appended as a `returnTo` query parameter.
-   */
-  editorBasePath?: string;
-};
-
-export default function useDocsActions(options?: UseDocsActionsOptions) {
+export default function useDocsActions() {
   const router = useRouter();
-  const pathname = usePathname();
   const navigationStore = useNavigationStore();
   const { filesSettings } = useFilesSettingsStore();
   const uploadStore = useUploadStore();
   const { sdkConfig } = useSDKConfig();
   const { t } = useTranslation(["Common"]);
 
-  const editorBasePath = options?.editorBasePath;
-
   const openInSameTab =
     sdkConfig?.openEditorInSameTab ??
     filesSettings?.openEditorInSameTab ??
     true;
 
-  const buildCreateUrl = useCallback(
-    (folderId: number | string, fileTitle: string) => {
-      const base = editorBasePath ?? "/personal-files/editor";
-      const params = new URLSearchParams();
-      params.set("parentId", String(folderId));
-      params.set("fileTitle", fileTitle);
-      if (editorBasePath && pathname) {
-        params.set("returnTo", pathname);
-      }
-      return `${base}/create?${params.toString()}`;
-    },
-    [editorBasePath, pathname],
-  );
-
   const navigateToCreate = useCallback(
     (folderId: number | string, fileTitle: string) => {
-      const url = buildCreateUrl(folderId, fileTitle);
-      if (!openInSameTab) {
-        window.open(`${window.location.origin}/sdk${url}`, "_blank");
-        return;
-      }
-      router.push(url);
+      openDocEditor({
+        parentId: folderId,
+        fileTitle,
+        openInSameTab,
+        frameConfig: sdkConfig,
+      });
     },
-    [buildCreateUrl, openInSameTab, router],
+    [openInSameTab, sdkConfig],
   );
 
   const inputFilesRef = useRef<HTMLInputElement | null>(null);

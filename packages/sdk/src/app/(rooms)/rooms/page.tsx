@@ -48,12 +48,18 @@ const serializeRoomsFilter = (filter: RoomsFilter) => {
     ["sortBy", filter.sortBy],
     ["sortOrder", filter.sortOrder],
     ["filterValue", filter.filterValue],
+    ["subjectId", filter.subjectId],
+    ["subjectOwnerId", filter.subjectOwnerId],
   ];
 
   for (const [key, value] of entries) {
     if (value !== undefined && value !== null && value !== "") {
       params.set(key, String(value));
     }
+  }
+
+  if (filter.tags && filter.tags.length > 0) {
+    params.set("tags", JSON.stringify(filter.tags));
   }
 
   return params.toString();
@@ -76,6 +82,16 @@ export default async function Rooms({
   if (params.sortOrder)
     filter.sortOrder = params.sortOrder as typeof filter.sortOrder;
   if (params.filterValue) filter.filterValue = params.filterValue;
+  if (params.subjectId) filter.subjectId = params.subjectId;
+  if (params.subjectOwnerId) filter.subjectOwnerId = params.subjectOwnerId;
+  if (params.tags) {
+    try {
+      const parsed = JSON.parse(params.tags);
+      if (Array.isArray(parsed) && parsed.length > 0) filter.tags = parsed;
+    } catch {
+      // ignore malformed tags
+    }
+  }
 
   const roomsFilter = serializeRoomsFilter(filter);
 

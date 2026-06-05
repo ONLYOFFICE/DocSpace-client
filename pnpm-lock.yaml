@@ -37,6 +37,8 @@ overrides:
   postcss: '>=8.5.10'
   protobufjs: '>=7.5.5'
   follow-redirects: '>=1.16.0'
+  ws: '>=8.20.1'
+  tmp: '>=0.2.6'
 
 importers:
 
@@ -51,6 +53,9 @@ importers:
       babel-plugin-react-compiler:
         specifier: ^1.0.0
         version: 1.0.0
+      fallow:
+        specifier: ^2.88.2
+        version: 2.88.3
       he:
         specifier: 1.2.0
         version: 1.2.0
@@ -190,8 +195,8 @@ importers:
         specifier: ^10.1.0
         version: 10.1.0(@types/react@19.2.10)(react@19.2.4)
       react-router:
-        specifier: 7.12.0
-        version: 7.12.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: 7.16.0
+        version: 7.16.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-svg:
         specifier: 16.1.34
         version: 16.1.34(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -506,8 +511,8 @@ importers:
         specifier: ^10.1.0
         version: 10.1.0(@types/react@19.2.10)(react@19.2.4)
       react-router:
-        specifier: 7.12.0
-        version: 7.12.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: 7.16.0
+        version: 7.16.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-smartbanner:
         specifier: 5.1.4
         version: 5.1.4(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -695,9 +700,6 @@ importers:
       react-i18next:
         specifier: 14.0.1
         version: 14.0.1(i18next@23.7.19)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      sass:
-        specifier: 1.79.6
-        version: 1.79.6
       ts-pattern:
         specifier: 5.5.0
         version: 5.5.0
@@ -756,6 +758,9 @@ importers:
       prettier:
         specifier: ^3.8.1
         version: 3.8.3
+      sass:
+        specifier: 1.79.6
+        version: 1.79.6
       shx:
         specifier: 0.4.0
         version: 0.4.0
@@ -808,17 +813,14 @@ importers:
         specifier: 14.0.1
         version: 14.0.1(i18next@23.7.19)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-router:
-        specifier: 7.12.0
-        version: 7.12.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: 7.16.0
+        version: 7.16.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-toastify:
         specifier: 10.0.6
         version: 10.0.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       resize-image:
         specifier: 0.1.0
         version: 0.1.0
-      sass:
-        specifier: 1.79.6
-        version: 1.79.6
       ts-pattern:
         specifier: 5.5.0
         version: 5.5.0
@@ -871,6 +873,9 @@ importers:
       prettier:
         specifier: ^3.8.1
         version: 3.8.3
+      sass:
+        specifier: 1.79.6
+        version: 1.79.6
       shx:
         specifier: 0.4.0
         version: 0.4.0
@@ -921,7 +926,7 @@ importers:
         version: 0.12.1
       next:
         specifier: 16.2.6
-        version: 16.2.6(@babel/core@7.25.8)(@playwright/test@1.58.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.97.3)
+        version: 16.2.6(@babel/core@7.25.8)(@playwright/test@1.58.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.79.6)
       react:
         specifier: 19.2.4
         version: 19.2.4
@@ -940,9 +945,6 @@ importers:
       resize-image:
         specifier: 0.1.0
         version: 0.1.0
-      sass:
-        specifier: 1.97.3
-        version: 1.97.3
       ts-pattern:
         specifier: 5.5.0
         version: 5.5.0
@@ -1016,6 +1018,9 @@ importers:
       prettier:
         specifier: ^3.8.1
         version: 3.8.3
+      sass:
+        specifier: 1.79.6
+        version: 1.79.6
       shx:
         specifier: 0.4.0
         version: 0.4.0
@@ -1092,8 +1097,8 @@ importers:
         specifier: ^3.0.0
         version: 3.1.0(@types/react@19.2.10)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-router:
-        specifier: 7.12.0
-        version: 7.12.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: 7.16.0
+        version: 7.16.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-svg:
         specifier: 16.1.34
         version: 16.1.34(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -1106,9 +1111,6 @@ importers:
       resize-image:
         specifier: 0.1.0
         version: 0.1.0
-      sass:
-        specifier: 1.79.6
-        version: 1.79.6
       ts-pattern:
         specifier: 5.5.0
         version: 5.5.0
@@ -1179,6 +1181,9 @@ importers:
       prettier:
         specifier: ^3.8.1
         version: 3.8.3
+      sass:
+        specifier: 1.79.6
+        version: 1.79.6
       shx:
         specifier: 0.4.0
         version: 0.4.0
@@ -1300,8 +1305,8 @@ importers:
         specifier: 14.0.1
         version: 14.0.1(i18next@23.7.19)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-router:
-        specifier: 7.12.0
-        version: 7.12.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: 7.16.0
+        version: 7.16.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-svg:
         specifier: 16.1.34
         version: 16.1.34(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -2534,6 +2539,46 @@ packages:
     peerDependenciesMeta:
       '@noble/hashes':
         optional: true
+
+  '@fallow-cli/darwin-arm64@2.88.3':
+    resolution: {integrity: sha512-lj3E3BevckfT9DHHN7iR/83pOHUA7cr+ynxarhiDNTlH6lklL5QqAb11nj+v7NzhSNQ+VzmwBLtuczrJEqeG7w==}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@fallow-cli/darwin-x64@2.88.3':
+    resolution: {integrity: sha512-DFzP/aiMli2AflKiUMbRVye3PrEHaqeXLi/CnWd+8jECt6LATTeWiEJsDmHDaCfXgF4eaEuCMgosFaJo+ADqKw==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@fallow-cli/linux-arm64-gnu@2.88.3':
+    resolution: {integrity: sha512-bfOtlJXr240a1ZslSjyYI3ZG8Y0qXHwT5gBAx7r5JDbDEmuPqcZv0xoMv+ZfJkHDepb1taeEfyX+77ekm+gXbA==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@fallow-cli/linux-arm64-musl@2.88.3':
+    resolution: {integrity: sha512-8Vt03oKYTVwQcXbVRR2OIQB5QfrJTm6D1kSUKUJ5deHPP+E5IiQBuQLLk9a6HhSnxOtNtIezCapDyz14Ztn3pw==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@fallow-cli/linux-x64-gnu@2.88.3':
+    resolution: {integrity: sha512-LyKWd0nOqjbuQA/Bq6gbUiC1KO0O5fUSc3FQpnvmALX6Ia7ISppLWhbo0vQ0nnOvrywo6zhQrme6g7i04Y4tWg==}
+    cpu: [x64]
+    os: [linux]
+
+  '@fallow-cli/linux-x64-musl@2.88.3':
+    resolution: {integrity: sha512-dxI+ZYupRNr4swaG8nkeCVnAQtut/fhgGMVS0tA6jJGY/2kjkkVze5uvMpfm4l41OEwZ5WsBhPAyXPP8DKx7xg==}
+    cpu: [x64]
+    os: [linux]
+
+  '@fallow-cli/win32-arm64-msvc@2.88.3':
+    resolution: {integrity: sha512-6HFe6csw4RQuGEOfXEZdkYmXVv5TZT0hMQalKSc1ny87s+yvY0DuCHoSpOglAGthPqlTB1MJB7/uLEMDRVWr8Q==}
+    cpu: [arm64]
+    os: [win32]
+
+  '@fallow-cli/win32-x64-msvc@2.88.3':
+    resolution: {integrity: sha512-QPdOTlSoOj3ot29o+v4EaGuPq9ntOKVB4+OBxC31WG4ixjjwf+oHL9vk+tvyaIy2mooRSV0MKO/1m1NQkbJAmQ==}
+    cpu: [x64]
+    os: [win32]
 
   '@fastify/deepmerge@3.2.1':
     resolution: {integrity: sha512-N5Oqvltoa2r9z1tbx4xjky0oRR60v+T47Ic4J1ukoVQcptLOrIdRnCSdTGmOmajZuHVKlTnfcmrjyqsGEW1ztA==}
@@ -5713,6 +5758,11 @@ packages:
   extend@3.0.2:
     resolution: {integrity: sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==}
 
+  fallow@2.88.3:
+    resolution: {integrity: sha512-vXgg/5G5jbx4p8Ff3U3I/nlCfO9ntvJLz5Ut7kUnvuE2Z9ubYtwMY2ZlD4af0i8WQFRvdWS2qwlCfeYP1bMg0A==}
+    engines: {node: '>=16'}
+    hasBin: true
+
   fast-deep-equal@3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
 
@@ -7748,8 +7798,8 @@ packages:
       '@types/react': 19.2.10
       react: '>=18'
 
-  react-router@7.12.0:
-    resolution: {integrity: sha512-kTPDYPFzDVGIIGNLS5VJykK0HfHLY5MF3b+xj0/tTyNYL1gF1qs7u67Z9jEhQk2sQ98SUaHxlG31g1JtF7IfVw==}
+  react-router@7.16.0:
+    resolution: {integrity: sha512-wArC8lVyJb3+jM9OpDyW6hLCizACWkvQR/sSGqSs+o5uEXEtGlqdZ4v8hENR3Jad6i+LRkK93q/+bQAcvl6V1A==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       react: '>=18'
@@ -8043,11 +8093,6 @@ packages:
 
   sass@1.79.6:
     resolution: {integrity: sha512-PVVjeeiUGx6Nj4PtEE/ecwu8ltwfPKzHxbbVmmLj4l1FYHhOyfA0scuVF8sVaa+b+VY4z7BVKjKq0cPUQdUU3g==}
-    engines: {node: '>=14.0.0'}
-    hasBin: true
-
-  sass@1.97.3:
-    resolution: {integrity: sha512-fDz1zJpd5GycprAbu4Q2PV/RprsRtKC/0z82z0JLgdytmcq0+ujJbJ/09bPGDxCLkKY3Np5cRAOcWiVkLXJURg==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -8485,8 +8530,8 @@ packages:
     resolution: {integrity: sha512-ELrFxuqsDdHUwoh0XxDbxuLD3Wnz49Z57IFvTtvWy1hJdcMZjXLIuonjilCiWHlT2GbE4Wlv1wKVTzDFnXH1aw==}
     hasBin: true
 
-  tmp@0.2.5:
-    resolution: {integrity: sha512-voyz6MApa1rQGUxT3E+BK7/ROe8itEx7vD8/HEvt4xwXucvQ5G5oeEiHkmHZJuBO21RpOf+YYm9MOivj709jow==}
+  tmp@0.2.7:
+    resolution: {integrity: sha512-e0votIpp4Uo2AJYSzVHV6xCcawuiez3DzqDAbrTc3YxBkplN6e+dM13ZeIcZnDg/QpSuU2zfZ3rzwY8ukEnaXw==}
     engines: {node: '>=14.14'}
 
   to-regex-range@5.0.1:
@@ -8927,30 +8972,6 @@ packages:
 
   wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
-
-  ws@7.5.10:
-    resolution: {integrity: sha512-+dbF1tHwZpXcbOJdVOkzLDxZP1ailvSxM6ZweXTegylPny803bFhA+vqBYw4s31NSAk4S2Qz+AKXK9a4wkdjcQ==}
-    engines: {node: '>=8.3.0'}
-    peerDependencies:
-      bufferutil: ^4.0.1
-      utf-8-validate: ^5.0.2
-    peerDependenciesMeta:
-      bufferutil:
-        optional: true
-      utf-8-validate:
-        optional: true
-
-  ws@8.18.3:
-    resolution: {integrity: sha512-PEIGCY5tSlUt50cqyMXfCzX+oOPqN0vuGqWzbcJ2xvnkzkq46oOpz7dQaTDBdfICb4N14+GARUDw2XV2N4tvzg==}
-    engines: {node: '>=10.0.0'}
-    peerDependencies:
-      bufferutil: ^4.0.1
-      utf-8-validate: '>=5.0.2'
-    peerDependenciesMeta:
-      bufferutil:
-        optional: true
-      utf-8-validate:
-        optional: true
 
   ws@8.20.1:
     resolution: {integrity: sha512-It4dO0K5v//JtTXuPkfEOaI3uUN87iYPnqo/ZzqCoG3g8uhA66QUMs/SrM0YK7/NAu+r4LMh/9dq2A7k+rHs+w==}
@@ -10412,6 +10433,30 @@ snapshots:
   '@exodus/bytes@1.15.0(@noble/hashes@2.2.0)':
     optionalDependencies:
       '@noble/hashes': 2.2.0
+
+  '@fallow-cli/darwin-arm64@2.88.3':
+    optional: true
+
+  '@fallow-cli/darwin-x64@2.88.3':
+    optional: true
+
+  '@fallow-cli/linux-arm64-gnu@2.88.3':
+    optional: true
+
+  '@fallow-cli/linux-arm64-musl@2.88.3':
+    optional: true
+
+  '@fallow-cli/linux-x64-gnu@2.88.3':
+    optional: true
+
+  '@fallow-cli/linux-x64-musl@2.88.3':
+    optional: true
+
+  '@fallow-cli/win32-arm64-msvc@2.88.3':
+    optional: true
+
+  '@fallow-cli/win32-x64-msvc@2.88.3':
+    optional: true
 
   '@fastify/deepmerge@3.2.1': {}
 
@@ -13412,7 +13457,7 @@ snapshots:
       '@socket.io/component-emitter': 3.1.2
       debug: 4.4.3
       engine.io-parser: 5.2.3
-      ws: 8.18.3
+      ws: 8.20.1
       xmlhttprequest-ssl: 2.1.2
     transitivePeerDependencies:
       - bufferutil
@@ -13562,6 +13607,19 @@ snapshots:
   expect-type@1.3.0: {}
 
   extend@3.0.2: {}
+
+  fallow@2.88.3:
+    dependencies:
+      detect-libc: 2.1.2
+    optionalDependencies:
+      '@fallow-cli/darwin-arm64': 2.88.3
+      '@fallow-cli/darwin-x64': 2.88.3
+      '@fallow-cli/linux-arm64-gnu': 2.88.3
+      '@fallow-cli/linux-arm64-musl': 2.88.3
+      '@fallow-cli/linux-x64-gnu': 2.88.3
+      '@fallow-cli/linux-x64-musl': 2.88.3
+      '@fallow-cli/win32-arm64-msvc': 2.88.3
+      '@fallow-cli/win32-x64-msvc': 2.88.3
 
   fast-deep-equal@3.1.3: {}
 
@@ -15001,33 +15059,6 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
-  next@16.2.6(@babel/core@7.25.8)(@playwright/test@1.58.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.97.3):
-    dependencies:
-      '@next/env': 16.2.6
-      '@swc/helpers': 0.5.15
-      baseline-browser-mapping: 2.10.29
-      caniuse-lite: 1.0.30001792
-      postcss: 8.5.14
-      react: 19.2.4
-      react-dom: 19.2.4(react@19.2.4)
-      styled-jsx: 5.1.6(@babel/core@7.25.8)(react@19.2.4)
-    optionalDependencies:
-      '@next/swc-darwin-arm64': 16.2.6
-      '@next/swc-darwin-x64': 16.2.6
-      '@next/swc-linux-arm64-gnu': 16.2.6
-      '@next/swc-linux-arm64-musl': 16.2.6
-      '@next/swc-linux-x64-gnu': 16.2.6
-      '@next/swc-linux-x64-musl': 16.2.6
-      '@next/swc-win32-arm64-msvc': 16.2.6
-      '@next/swc-win32-x64-msvc': 16.2.6
-      '@playwright/test': 1.58.1
-      babel-plugin-react-compiler: 1.0.0
-      sass: 1.97.3
-      sharp: 0.34.5
-    transitivePeerDependencies:
-      - '@babel/core'
-      - babel-plugin-macros
-
   nice-try@1.0.5: {}
 
   no-case@3.0.4:
@@ -15097,7 +15128,7 @@ snapshots:
       semver: 7.8.0
       string-width: 4.2.3
       tar-stream: 2.2.0
-      tmp: 0.2.5
+      tmp: 0.2.7
       tree-kill: 1.2.2
       tsconfig-paths: 4.2.0
       tslib: 2.8.1
@@ -15946,7 +15977,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  react-router@7.12.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
+  react-router@7.16.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
     dependencies:
       cookie: 1.1.1
       react: 19.2.4
@@ -16347,14 +16378,6 @@ snapshots:
       chokidar: 4.0.3
       immutable: 5.1.5
       source-map-js: 1.2.1
-
-  sass@1.97.3:
-    dependencies:
-      chokidar: 4.0.3
-      immutable: 5.1.5
-      source-map-js: 1.2.1
-    optionalDependencies:
-      '@parcel/watcher': 2.5.6
 
   sax@1.6.0: {}
 
@@ -16804,7 +16827,7 @@ snapshots:
     dependencies:
       tldts-core: 7.0.30
 
-  tmp@0.2.5: {}
+  tmp@0.2.7: {}
 
   to-regex-range@5.0.1:
     dependencies:
@@ -17107,7 +17130,7 @@ snapshots:
       opener: 1.5.2
       picocolors: 1.1.1
       sirv: 2.0.4
-      ws: 7.5.10
+      ws: 8.20.1
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -17304,10 +17327,6 @@ snapshots:
       strip-ansi: 7.2.0
 
   wrappy@1.0.2: {}
-
-  ws@7.5.10: {}
-
-  ws@8.18.3: {}
 
   ws@8.20.1: {}
 

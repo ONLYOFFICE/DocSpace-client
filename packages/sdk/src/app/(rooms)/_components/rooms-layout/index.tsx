@@ -88,6 +88,7 @@ import {
   InfoPanelBody as DocsInfoPanelBody,
   InfoPanelHeader as DocsInfoPanelHeader,
   InfoPanelEditLinkDialog,
+  InfoPanelEmbeddingDialog,
 } from "@/app/(docspace)/_components/info-panel";
 import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
 
@@ -335,6 +336,9 @@ const RoomsLayout = observer(
             <SelectionArea isRooms />
             <DeviceTypeObserver />
             <InfoPanelEditLinkDialog />
+            <InfoPanelEmbeddingDialog
+              isAdmin={!!(user?.isAdmin || user?.isOwner)}
+            />
           </RootScrollbar>
         </div>
       </RoomActionsContext.Provider>

@@ -126,6 +126,7 @@ import {
   InfoPanelBody as DocsInfoPanelBody,
   InfoPanelHeader as DocsInfoPanelHeader,
   InfoPanelEditLinkDialog,
+  InfoPanelEmbeddingDialog,
 } from "@/app/(docspace)/_components/info-panel";
 
 import styles from "./DocsLayout.module.scss";
@@ -536,6 +537,14 @@ const DocsLayout = observer(
                             />
                           ) : null}
                           <InfoPanelEditLinkDialog />
+                          <InfoPanelEmbeddingDialog
+                            isAdmin={
+                              !!(
+                                docsUserStore.user?.isAdmin ||
+                                docsUserStore.user?.isOwner
+                              )
+                            }
+                          />
                           <ShareSelector />
                           <VersionHistoryPanel />
                           <CreateFileDialog

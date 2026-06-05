@@ -48,6 +48,7 @@ import { useInfoPanelStore } from "../../_store/InfoPanelStore";
 
 import InfoPanelHeader from "./Header";
 import InfoPanelBody from "./Body";
+import EmbeddingPanel from "./sub-components/EmbeddingPanel";
 
 export { InfoPanelHeader, InfoPanelBody };
 
@@ -107,5 +108,20 @@ export const InfoPanelEditLinkDialog = observer(() => {
     />
   );
 });
+
+/**
+ * EmbeddingPanel is rendered as a sibling top-level dialog,
+ * driven by InfoPanelStore.embeddingPanelData.
+ */
+export const InfoPanelEmbeddingDialog = observer(
+  ({ isAdmin = false }: { isAdmin?: boolean }) => {
+    const infoPanelStore = useInfoPanelStore();
+    const { embeddingPanelData, linkParams } = infoPanelStore;
+
+    if (!embeddingPanelData?.visible || !linkParams) return null;
+
+    return <EmbeddingPanel isAdmin={isAdmin} />;
+  },
+);
 
 export default InfoPanelBody;

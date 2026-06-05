@@ -509,6 +509,9 @@ const RoomsList = ({
       newFilter.sortOrder = sp.get("sortOrder") as typeof newFilter.sortOrder;
     if (sp.get("filterValue"))
       newFilter.filterValue = sp.get("filterValue");
+    if (sp.get("subjectId")) newFilter.subjectId = sp.get("subjectId");
+    if (sp.get("subjectOwnerId"))
+      newFilter.subjectOwnerId = sp.get("subjectOwnerId");
     const tagsRaw = sp.get("tags");
     if (tagsRaw) {
       try {

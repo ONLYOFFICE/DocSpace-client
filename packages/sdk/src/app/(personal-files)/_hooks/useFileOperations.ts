@@ -463,10 +463,17 @@ export default function useFileOperations() {
     .filter((i) => i.isFolder)
     .map((i) => i.id as number);
 
+  // True when at least one pending file is encrypted; drives the info-bar
+  // warning shown in FilesSelector when source is a private room.
+  const pendingHasEncrypted = pendingItems.some(
+    (i) => !i.isFolder && (i as TFileItem).encrypted,
+  );
+
   return {
     selectorDialogVisible,
     selectorMode,
     pendingItemCount: pendingItems.length,
+    pendingHasEncrypted,
     foldersTree,
     selectorInitData,
     disabledItems,

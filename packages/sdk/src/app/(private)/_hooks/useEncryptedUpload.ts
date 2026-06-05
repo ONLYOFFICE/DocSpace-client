@@ -44,6 +44,7 @@ import {
   getActiveKeyId,
   selectActiveKey,
 } from "@docspace/shared/services/encryption/active-key-preference";
+import { CryptoError } from "@docspace/shared/services/encryption/errors";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 
 import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
@@ -132,6 +133,15 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
             files: [],
             reportProgress: (uploadId, percent) =>
               uploadStore.updateItemProgress(uploadId, percent),
+            // Translate the raw phase marker into a localised label before
+            // storing it so the orchestrator stays UI-agnostic.
+            setItemLabel: (uploadId, phase) =>
+              uploadStore.setItemLabel(
+                uploadId,
+                phase === "encrypting"
+                  ? t("Common:EncryptingFile")
+                  : undefined,
+              ),
           },
           onQuotaError: (error) => {
             privateUploadStore.setQuotaErrorRaised(true);
@@ -146,11 +156,16 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
           onFileError: (file, error) => {
             const idx = files.indexOf(file);
             const init = initItems[idx];
-            if (init)
-              uploadStore.setItemError(
-                init.uniqueId,
-                getEncryptionErrorMessage(t, error),
-              );
+            if (init) {
+              // Typed crypto errors carry precise diagnostic messages; untyped
+              // errors (prepare/wrap/network failures) use the prepare key since
+              // we cannot distinguish prepare vs wrap at this callback boundary.
+              const msg =
+                error instanceof CryptoError
+                  ? getEncryptionErrorMessage(t, error)
+                  : t("Common:EncryptionPrepareFailed");
+              uploadStore.setItemError(init.uniqueId, msg);
+            }
           },
           onFileComplete: (file) => {
             const idx = files.indexOf(file);
@@ -165,7 +180,14 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
           }
         }
       } catch (error) {
-        toastr.error(getEncryptionErrorMessage(t, error));
+        // Typed crypto errors carry precise diagnostic messages; untyped errors
+        // (unexpected orchestrator / session failures) use the prepare key since
+        // they most likely originate in the pre-upload preparation phase.
+        toastr.error(
+          error instanceof CryptoError
+            ? getEncryptionErrorMessage(t, error)
+            : t("Common:EncryptionPrepareFailed"),
+        );
       } finally {
         privateUploadStore.releaseController(controller);
         releaseCryptoOperation(controller);

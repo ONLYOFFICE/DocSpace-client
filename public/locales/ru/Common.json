@@ -1389,6 +1389,7 @@
   "Or": "или",
   "PrivateRoomNotFoundDescription": "Приватная комната, которую вы ищете, не существует, или у вас нет доступа.",
   "PrivateRoomNotFoundTitle": "Не найдено",
+  "ReEncryptingFiles": "Повторное шифрование файлов",
   "RoomNotificationsDisabled": "Уведомления комнаты отключены",
   "RoomNotificationsEnabled": "Уведомления комнаты включены",
   "RoomPinned": "Комната закреплена",

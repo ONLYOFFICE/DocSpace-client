@@ -87,6 +87,7 @@ const Row = observer(
     displayFileExtension,
     isSSR,
     isPrivate,
+    hasEncryptionKeys,
     currentUserId,
   }: RowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
@@ -136,8 +137,8 @@ const Row = observer(
 
     const element = (
       <EncryptedItemIconWrapper
-        encrypted={!!isPrivate}
-        hasEncryptionKeys
+        encrypted={!!("encrypted" in item && (item as TFileItem).encrypted)}
+        hasEncryptionKeys={hasEncryptionKeys ?? true}
         isRoom={false}
       >
         <RoomIcon

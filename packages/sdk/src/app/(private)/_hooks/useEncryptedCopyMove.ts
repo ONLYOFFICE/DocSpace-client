@@ -40,6 +40,7 @@ import { useTranslation } from "react-i18next";
 
 import { useEncryption } from "@docspace/shared/context/encryption";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { CryptoError } from "@docspace/shared/services/encryption/errors";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import { getFolder, deleteFile } from "@docspace/shared/api/files";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -129,7 +130,13 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
         await uploadFiles({ files: [copyFile], folderId, roomId });
       } catch (error) {
         if (controller.signal.aborted) return;
-        toastr.error(getEncryptionErrorMessage(t, error));
+        // Typed crypto errors carry precise diagnostic messages; untyped errors
+        // (network, ACL, unexpected) surface the operation-level failure key.
+        toastr.error(
+          error instanceof CryptoError
+            ? getEncryptionErrorMessage(t, error)
+            : t("Common:EncryptedCopyFailed", { names: item.title }),
+        );
       } finally {
         releaseCryptoOperation(controller);
       }
@@ -153,6 +160,9 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
       if (!identity) return;
 
       const controller = registerCryptoOperation();
+      // Track the title of the item currently being processed so we can
+      // include it in the EncryptedCopyFailed toast if the operation throws.
+      let activeItemTitle = "";
       try {
         const destFolderData = (await getFolder(
           destFolderId as number,
@@ -171,6 +181,7 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
         for (const item of files) {
           if (controller.signal.aborted) return;
 
+          activeItemTitle = item.title;
           const decrypted = await decryptEncryptedItemToFile(
             {
               id: item.id,
@@ -199,7 +210,15 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
         }
       } catch (error) {
         if (controller.signal.aborted) return;
-        toastr.error(getEncryptionErrorMessage(t, error));
+        // Typed crypto errors carry precise diagnostic messages; untyped errors
+        // (network, ACL, unexpected) surface the operation-level failure key.
+        toastr.error(
+          error instanceof CryptoError
+            ? getEncryptionErrorMessage(t, error)
+            : t("Common:EncryptedCopyFailed", {
+                names: activeItemTitle || files.map((f) => f.title).join(", "),
+              }),
+        );
       } finally {
         releaseCryptoOperation(controller);
       }

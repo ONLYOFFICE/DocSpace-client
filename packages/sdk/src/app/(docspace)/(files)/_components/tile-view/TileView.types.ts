@@ -47,6 +47,8 @@ export type TileViewProps = {
   filesLength: number;
   isPrivate?: boolean;
   currentUserId?: string;
+  /** Whether the current user has loaded their E2EE key pair. */
+  hasEncryptionKeys?: boolean;
 };
 
 export type TileProps = {
@@ -55,6 +57,8 @@ export type TileProps = {
   index: number;
   isPrivate?: boolean;
   currentUserId?: string;
+  /** Whether the current user has loaded their E2EE key pair. */
+  hasEncryptionKeys?: boolean;
 };
 
 export type TileContentProps = {

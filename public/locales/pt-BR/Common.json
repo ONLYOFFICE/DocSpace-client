@@ -1389,6 +1389,7 @@
   "Or": "ou",
   "PrivateRoomNotFoundDescription": "A sala privada que você está procurando não existe ou você não tem acesso.",
   "PrivateRoomNotFoundTitle": "Não encontrado",
+  "ReEncryptingFiles": "Criptografando arquivos novamente",
   "RoomNotificationsDisabled": "Notificações da sala desativadas",
   "RoomNotificationsEnabled": "Notificações de sala ativadas",
   "RoomPinned": "Sala fixada",

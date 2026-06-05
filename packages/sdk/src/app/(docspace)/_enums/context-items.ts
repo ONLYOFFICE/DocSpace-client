@@ -11,6 +11,7 @@ export enum AVAILABLE_CONTEXT_ITEMS {
   pdfView = "pdf-view",
   copyLink = "link-for-room-members",
   download = "download",
+  downloadEncrypted = "download-encrypted",
   downloadAs = "download-as",
   markAsFavorite = "mark-as-favorite",
   removeFromFavorites = "remove-from-favorites",

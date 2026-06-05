@@ -1389,6 +1389,7 @@
   "Or": "または",
   "PrivateRoomNotFoundDescription": "お探しのプライベートルームは存在しないか、アクセス権がありません。",
   "PrivateRoomNotFoundTitle": "見つかりません",
+  "ReEncryptingFiles": "ファイルを再暗号化しています",
   "RoomNotificationsDisabled": "ルームの通知が無効",
   "RoomNotificationsEnabled": "ルームの通知が有効",
   "RoomPinned": "ルームが固定されました",

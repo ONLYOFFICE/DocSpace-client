@@ -68,6 +68,12 @@ export interface OrchestratorUploadStore {
   reportProgress?: (uploadId: string, percent: number) => void;
   /** Mark a single file's quota-error state for UI / retry. Optional. */
   markQuotaError?: (uploadId: string, error: unknown) => void;
+  /**
+   * Set (or clear) a transient phase label on the upload-panel row.
+   * Pass `undefined` to clear. Example: "Encrypting".
+   * Optional — callers that do not need labels may omit this.
+   */
+  setItemLabel?: (uploadId: string, label: string | undefined) => void;
 }
 
 export interface OrchestrateEncryptedUploadArgs {
@@ -324,12 +330,19 @@ async function uploadOneFile(
   try {
     throwIfAborted(signal);
 
-    prepared = await prepareEncryptedUpload({
-      file,
-      folderId: typeof folderId === "number" ? folderId : Number(folderId),
-      roomType: RoomsType.CustomRoom,
-      isPrivate: true,
-    });
+    // Signal the encryption phase so the upload-panel row can show a label.
+    uploadStore?.setItemLabel?.(uploadId, "encrypting");
+    try {
+      prepared = await prepareEncryptedUpload({
+        file,
+        folderId: typeof folderId === "number" ? folderId : Number(folderId),
+        roomType: RoomsType.CustomRoom,
+        isPrivate: true,
+      });
+    } finally {
+      // Always clear the label whether encryption succeeded or failed.
+      uploadStore?.setItemLabel?.(uploadId, undefined);
+    }
 
     if (!prepared.encrypted || !prepared.dek) {
       throw new Error(

@@ -1389,6 +1389,7 @@
   "Or": "o",
   "PrivateRoomNotFoundDescription": "La stanza privata che stai cercando non esiste o non hai accesso.",
   "PrivateRoomNotFoundTitle": "Non trovato",
+  "ReEncryptingFiles": "Nuova crittografia dei file in corso",
   "RoomNotificationsDisabled": "Notifiche della stanza disabilitate",
   "RoomNotificationsEnabled": "Notifiche della stanza abilitate",
   "RoomPinned": "La stanza è stata fissata",

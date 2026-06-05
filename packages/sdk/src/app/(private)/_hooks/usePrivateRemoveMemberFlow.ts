@@ -39,6 +39,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
+import { getGroupById } from "@docspace/shared/api/groups";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
@@ -52,6 +53,9 @@ import {
 type RemoveArgs = {
   roomId: number;
   userId: string;
+  /** When true the userId refers to a group; members are expanded via
+   *  getGroupById before the DEK revoke so every member's wrap is removed. */
+  isGroup?: boolean;
 };
 
 type UsePrivateRemoveMemberFlowReturn = {
@@ -87,7 +91,7 @@ export const usePrivateRemoveMemberFlow = (
   );
 
   const remove = React.useCallback(
-    async ({ roomId: targetRoomId, userId }: RemoveArgs) => {
+    async ({ roomId: targetRoomId, userId, isGroup }: RemoveArgs) => {
       if (guardReason) {
         toastr.warning(guardReason);
         return;
@@ -106,12 +110,49 @@ export const usePrivateRemoveMemberFlow = (
 
         if (controller.signal.aborted) return;
 
-        // 2. Strip the revoked user from every file_keys ACL in the room.
+        // 2. Resolve the set of user IDs whose DEK wraps must be removed.
+        // For a group, expand to its member list (includeMembers=true).
+        // Mirrors: packages/client/.../Members/sub-components/User.tsx:165-171
+        let revokedIds: string[] = [userId];
+        if (isGroup) {
+          const group = await getGroupById(userId, true);
+          revokedIds = (group.members ?? []).map((m) => String(m.id));
+          // Empty group: nothing to revoke on the encryption side.
+          if (revokedIds.length === 0) return;
+        }
+
+        if (controller.signal.aborted) return;
+
+        // 3. Strip the revoked user(s) from every file_keys ACL in the room.
         // Best-effort: failures here leave dangling wraps but don't grant
         // decryption ability (the user lost room membership in step 1).
-        const { revokeMemberFromEncryptedRoom } = await loadRoomEncryption();
-        await revokeMemberFromEncryptedRoom(Number(targetRoomId), userId, {});
+        try {
+          const { revokeMemberFromEncryptedRoom } = await loadRoomEncryption();
+          const results = await revokeMemberFromEncryptedRoom(
+            Number(targetRoomId),
+            revokedIds,
+            {},
+          );
+
+          if (controller.signal.aborted) return;
+
+          const failures = results.filter((r) => !r.success);
+          if (failures.length > 0) {
+            toastr.warning(
+              t("Common:EncryptedRevokePartialFailure", {
+                count: failures.length,
+              }),
+            );
+            return;
+          }
+          if (results.length > 0) {
+            toastr.success(t("Common:EncryptedRevokeCompleted"));
+          }
+        } catch {
+          toastr.error(t("Common:EncryptedRevokeFailed"));
+        }
       } catch (error) {
+        // Step 1 (server ACL) failure: surface a localized encryption error.
         toastr.error(getEncryptionErrorMessage(t, error));
       } finally {
         releaseCryptoOperation(controller);

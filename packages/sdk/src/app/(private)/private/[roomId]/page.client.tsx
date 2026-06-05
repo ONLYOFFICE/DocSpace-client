@@ -36,6 +36,7 @@
 "use client";
 
 import React from "react";
+import { observer } from "mobx-react";
 import { useRouter } from "next/navigation";
 
 import type {
@@ -57,6 +58,7 @@ import DocsLayout from "@/app/(personal-files)/_components/docs-layout";
 
 import { usePrivateRoomsPageInit } from "../../_hooks/usePrivateRoomsPageInit";
 import { usePrivateRoomFilesStore } from "../../_store/PrivateRoomFilesStore";
+import { useEncryptionIdentityStore } from "../../_store/EncryptionIdentityStore";
 import { useEncryptedUpload } from "../../_hooks/useEncryptedUpload";
 import { useEncryptedDownload } from "../../_hooks/useEncryptedDownload";
 import { useEncryptedCopyMove } from "../../_hooks/useEncryptedCopyMove";
@@ -89,6 +91,7 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
 }) => {
   const router = useRouter();
   const filesStore = usePrivateRoomFilesStore();
+  const identityStore = useEncryptionIdentityStore();
   const navigationStore = useNavigationStore();
   const { uploadFiles } = useEncryptedUpload();
   const { downloadFile: decryptAndSaveFile, downloadZip: decryptAndSaveZip } =
@@ -243,6 +246,7 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
           editorBasePath="/editor"
           isPrivate
           isArchive={isArchive}
+          hasEncryptionKeys={identityStore.hasKeys}
           uploadFilesToFolder={
             isArchive ? undefined : handleEncryptedUpload
           }
@@ -255,4 +259,4 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
   );
 };
 
-export default PrivateRoomFilesPage;
+export default observer(PrivateRoomFilesPage);

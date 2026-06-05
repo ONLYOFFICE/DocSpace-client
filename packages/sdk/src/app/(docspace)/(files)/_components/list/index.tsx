@@ -78,6 +78,7 @@ const List = ({
   allowedFolderContextOptions,
   emptyView,
   isPrivate,
+  hasEncryptionKeys,
 }: ListProps) => {
   const timezone = portalSettings.timezone;
   const displayFileExtension = filesSettings.displayFileExtension;
@@ -122,6 +123,7 @@ const List = ({
     withoutFavorite,
     allowedContextOptions,
     allowedFolderContextOptions,
+    isPrivate,
   });
 
   const [filter, setFilter] = React.useState<FilesFilter>(
@@ -353,6 +355,7 @@ const List = ({
         filesLength={visibleItems.length}
         getIcon={getIcon}
         isPrivate={isPrivate}
+        hasEncryptionKeys={hasEncryptionKeys}
         currentUserId={currentUserId}
       />
     );
@@ -382,6 +385,7 @@ const List = ({
         currentUserId={currentUserId}
         infoPanelVisible={infoPanelVisible}
         isPrivate={isPrivate}
+        hasEncryptionKeys={hasEncryptionKeys}
         rootFolderType={rootFolderType}
       />
     );
@@ -397,6 +401,7 @@ const List = ({
       displayFileExtension={displayFileExtension}
       fetchMoreFiles={fetchMoreFiles}
       isPrivate={isPrivate}
+      hasEncryptionKeys={hasEncryptionKeys}
       currentUserId={currentUserId}
     />
   );

@@ -107,6 +107,7 @@ const TableView = ({
   currentUserId,
   infoPanelVisible,
   isPrivate,
+  hasEncryptionKeys,
   rootFolderType,
 }: TableViewProps) => {
   const { t } = useTranslation(["Common", "Files"]);
@@ -240,6 +241,7 @@ const TableView = ({
             lastColumn={lastColumn}
             currentUserId={currentUserId}
             isPrivate={isPrivate}
+            hasEncryptionKeys={hasEncryptionKeys}
           />
         ))}
       </TableBody>

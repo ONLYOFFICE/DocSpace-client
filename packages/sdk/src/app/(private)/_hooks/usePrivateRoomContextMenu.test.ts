@@ -94,6 +94,14 @@ describe("private-room context-menu whitelist", () => {
         expect(PRIVATE_FILE_CONTEXT_OPTIONS.has(action)).toBe(true);
       },
     );
+
+    // "Download without decryption" must be offered on encrypted files so
+    // users can retrieve the raw ciphertext (e.g. for backup / migration).
+    // Removing this breaks the only escape-hatch for raw blob retrieval in
+    // the UI and must force a deliberate product decision.
+    it("includes 'download-encrypted' for raw ciphertext retrieval", () => {
+      expect(PRIVATE_FILE_CONTEXT_OPTIONS.has(C.downloadEncrypted)).toBe(true);
+    });
   });
 
   describe("PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS (archived rooms)", () => {
@@ -153,6 +161,15 @@ describe("private-room context-menu whitelist", () => {
         expect(PRIVATE_FOLDER_CONTEXT_OPTIONS.has(action)).toBe(true);
       },
     );
+
+    // Folders also expose the raw-ciphertext archive download so users can
+    // retrieve subtrees without decryption (mirrors the client handler that
+    // calls downloadFiles([], [id]) for folders).
+    it("includes 'download-encrypted' for raw archive download", () => {
+      expect(PRIVATE_FOLDER_CONTEXT_OPTIONS.has(C.downloadEncrypted)).toBe(
+        true,
+      );
+    });
   });
 });
 
@@ -177,6 +194,7 @@ describe("usePrivateRoomContextMenu routing (isArchive wiring)", () => {
     C.select,
     C.open,
     C.download,
+    C.downloadEncrypted,
     C.delete,
     C.showInfo,
     C.rename,
@@ -201,6 +219,12 @@ describe("usePrivateRoomContextMenu routing (isArchive wiring)", () => {
       expect(keys).not.toContain(C.share);
       expect(keys).not.toContain(C.edit);
     });
+
+    it("filterModel passes download-encrypted through for active rooms", () => {
+      const result = filterModel(ALL_ITEMS, PRIVATE_FILE_CONTEXT_OPTIONS);
+      const keys = result.map((i) => i.key);
+      expect(keys).toContain(C.downloadEncrypted);
+    });
   });
 
   describe("isArchive = true (archived room)", () => {
@@ -218,6 +242,14 @@ describe("usePrivateRoomContextMenu routing (isArchive wiring)", () => {
       expect(keys).not.toContain(C.copy);
       expect(keys).not.toContain(C.duplicate);
       expect(keys).not.toContain(C.moveTo);
+    });
+
+    // Archived rooms intentionally omit download-encrypted: users who need raw
+    // blobs should act before archiving, keeping the archive whitelist minimal.
+    it("does not expose download-encrypted in archived rooms", () => {
+      const result = filterModel(ALL_ITEMS, PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS);
+      const keys = result.map((i) => i.key);
+      expect(keys).not.toContain(C.downloadEncrypted);
     });
 
     it("archive whitelist is strictly narrower than active-room whitelist", () => {

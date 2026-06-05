@@ -164,6 +164,8 @@ type DocsLayoutProps = {
   uploadFilesToFolder?: (files: FileList | File[]) => Promise<void>;
   /** Root-room id for HPKE-Auth unwrap of encrypted previews. */
   currentRoomId?: number | string | null;
+  /** Whether the current user has loaded their E2EE key pair. */
+  hasEncryptionKeys?: boolean;
 };
 
 const getSubmitLabel = (mode: SelectorMode, t: (key: string) => string) => {
@@ -190,6 +192,7 @@ const DocsLayout = observer(
     isArchive,
     uploadFilesToFolder: uploadFilesToFolderOverride,
     currentRoomId,
+    hasEncryptionKeys,
   }: DocsLayoutProps) => {
     const { t } = useTranslation(["Common"]);
     const { isEmptyList } = useSettingsStore();
@@ -302,6 +305,7 @@ const DocsLayout = observer(
       foldersTree,
       selectorInitData,
       disabledItems,
+      pendingHasEncrypted,
       operationProgress,
       trackOperation,
       requestCopy,
@@ -318,6 +322,14 @@ const DocsLayout = observer(
       closeConflictDialog,
       confirmConflict,
     } = useFileOperations();
+
+    // Show the encrypted-transfer warning when move/copy is in progress from a
+    // private room and at least one pending item is an encrypted file.
+    // Matches the reference: packages/client/src/components/FilesSelector ~286.
+    const showEncryptedTransferBanner =
+      !!(selectorMode === "copy" || selectorMode === "move") &&
+      pendingHasEncrypted &&
+      !!isPrivate;
 
     const {
       isTrash,
@@ -577,6 +589,7 @@ const DocsLayout = observer(
                                     }
                                     emptyView={emptyView}
                                     isPrivate={isPrivate}
+                                    hasEncryptionKeys={hasEncryptionKeys}
                                   />
                                 }
                                 infoPanelHeaderContent={
@@ -692,7 +705,34 @@ const DocsLayout = observer(
                               currentFooterInputValue=""
                               footerCheckboxLabel=""
                               descriptionText=""
+                              withInfoBar={showEncryptedTransferBanner}
+                              infoBarData={
+                                showEncryptedTransferBanner
+                                  ? {
+                                      title: t(
+                                        "Common:EncryptedTransferBannerTitle",
+                                      ),
+                                      description: t(
+                                        "Common:EncryptedTransferBannerDescription",
+                                      ),
+                                    }
+                                  : undefined
+                              }
                               disabledItems={disabledItems}
+                              isRoomDisabled={
+                                // From a non-private source, private rooms must
+                                // not be selectable as copy/move destinations:
+                                // copying plain files into an E2EE room would
+                                // silently land them unencrypted inside it.
+                                // When the source IS a private room the caller
+                                // supplies encrypted actions and
+                                // resolveEncryptedCopyDest validates the dest,
+                                // so we must leave private destinations open.
+                                !isPrivate
+                                  ? (room: FolderDtoInteger) =>
+                                      room?.private === true
+                                  : undefined
+                              }
                               getFilesArchiveError={() => ""}
                               getIsDisabled={(
                                 isFirstLoad: boolean,

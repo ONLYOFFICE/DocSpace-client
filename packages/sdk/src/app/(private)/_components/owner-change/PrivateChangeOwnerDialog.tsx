@@ -37,6 +37,9 @@
 // PARITY-REVIEW: Required when source changes. Last reviewed: 2026-05-27 by Ilya Oleshko
 // NOTE: Adds validateMembersForEncryption pre-check before setFileOwner so we
 // don't transfer ownership to a user whose envelope can't unwrap room DEKs.
+// NOTE: Excludes portal admins who are not room members from owner candidates
+// (non-member admins lack DEK access in private rooms — parity with
+// ChangeRoomOwnerPanel in packages/client).
 
 "use client";
 
@@ -50,8 +53,16 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { EmployeeType, EmployeeStatus } from "@docspace/shared/enums";
+import {
+  EmployeeType,
+  EmployeeStatus,
+  MembersSubjectType,
+} from "@docspace/shared/enums";
+import Filter from "@docspace/shared/api/people/filter";
+import { getUserList } from "@docspace/shared/api/people";
+import { getRoomMembers } from "@docspace/shared/api/rooms";
 
 import { usePrivateOwnerChangeFlow } from "../../_hooks/usePrivateOwnerChangeFlow";
 
@@ -73,8 +84,13 @@ const PrivateChangeOwnerDialog: React.FC<PrivateChangeOwnerDialogProps> = ({
   onChanged,
 }) => {
   const { t } = useTranslation(["Common"]);
-  const { validateCandidates, changeOwner, isLoading } =
+  const { validateCandidates, changeOwner, leaveRoom, isLoading } =
     usePrivateOwnerChangeFlow();
+
+  // Show the leave-room checkbox only when the current user is the room owner.
+  // Parity: ChangeRoomOwnerPanel — withFooterCheckbox={ownerIsCurrentUser}.
+  const ownerIsCurrentUser =
+    !!currentUserId && !!roomOwnerId && roomOwnerId === currentUserId;
 
   const filter = React.useMemo<PeopleFilter>(
     () => ({
@@ -84,10 +100,74 @@ const PrivateChangeOwnerDialog: React.FC<PrivateChangeOwnerDialogProps> = ({
     [],
   );
 
+  // ----- non-member admin exclusion (parity: ChangeRoomOwnerPanel) -----
+  // Portal admins who are NOT room members cannot own a private room because
+  // they have no DEK envelope. We build the exclusion list by fetching room
+  // members and all admins in parallel, then subtracting the member set.
+
+  const baseExclude = React.useMemo<string[]>(
+    () => (currentUserId ? [currentUserId] : []),
+    [currentUserId],
+  );
+
+  const [excludeItems, setExcludeItems] = React.useState<string[]>(baseExclude);
+  const [excludeReady, setExcludeReady] = React.useState(false);
+
+  React.useEffect(() => {
+    setExcludeItems(baseExclude);
+    setExcludeReady(false);
+
+    const controller = new AbortController();
+    let cancelled = false;
+
+    const adminsFilter = Filter.getDefault();
+    adminsFilter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
+    adminsFilter.employeeStatus = EmployeeStatus.Active;
+    adminsFilter.pageCount = 100;
+
+    Promise.all([
+      getRoomMembers(roomId, { count: 100 }, controller.signal),
+      getUserList(adminsFilter, controller.signal),
+    ])
+      .then(([members, admins]) => {
+        if (cancelled) return;
+
+        const memberIds = new Set(
+          (members?.items ?? [])
+            .filter((m) => m?.subjectType === MembersSubjectType.User)
+            .map((m) => m?.sharedTo?.id)
+            .filter(Boolean) as string[],
+        );
+
+        const nonMemberAdmins = (admins?.items ?? [])
+          .map((a) => a.id)
+          .filter((id): id is string => Boolean(id) && !memberIds.has(id));
+
+        const merged = new Set([...baseExclude, ...nonMemberAdmins]);
+        setExcludeItems([...merged]);
+        setExcludeReady(true);
+      })
+      .catch(() => {
+        if (cancelled) return;
+        // On fetch failure fall back to baseExclude so the dialog still works.
+        setExcludeReady(true);
+      });
+
+    return () => {
+      cancelled = true;
+      controller.abort();
+    };
+  }, [roomId, baseExclude]);
+
   const headerLabel = t("Common:ChangeTheRoomOwner");
   const infoText = t("Common:PrivateOwnerEncryptionHint");
 
-  const onSubmit: TOnSubmit = async (users) => {
+  const onSubmit: TOnSubmit = async (
+    users,
+    _access,
+    _fileName,
+    isLeaveChecked,
+  ) => {
     const candidate = users[0];
     const newOwnerId = candidate?.id;
     if (!newOwnerId || typeof newOwnerId !== "string") return;
@@ -102,16 +182,37 @@ const PrivateChangeOwnerDialog: React.FC<PrivateChangeOwnerDialogProps> = ({
       });
 
       if (!validIds.includes(newOwnerId)) {
-        const reason = skipped[0]?.reason || "no-key";
+        const entry = skipped[0];
+        const reason = entry?.reason ?? "no-key";
+        // Resolve the display name the same way the reference panel does:
+        // prefer the validated entry name, fall back to the selector item,
+        // then the raw id.
+        const name =
+          entry?.displayName ||
+          candidate.displayName ||
+          newOwnerId;
         toastr.error(
-          t("Common:PrivateOwnerCannotBeAssigned", { reason }),
+          reason === "no-key"
+            ? t("Common:EncryptedChangeOwnerNoKeys", { user: name })
+            : t("Common:EncryptedChangeOwnerKeyMismatch", {
+                user: name,
+              }),
         );
         return;
       }
 
       const ok = await changeOwner({ roomId, newOwnerId });
       if (!ok) return;
-      toastr.success(t("Common:AppointNewOwner"));
+
+      // Parity: FilesActionsStore.changeRoomOwner — when isLeaveChecked,
+      // revoke current user's membership; otherwise show AppointNewOwner
+      // toast. DEK wraps are NOT revoked (intentional reference parity).
+      if (isLeaveChecked && currentUserId) {
+        await leaveRoom({ roomId, userId: currentUserId });
+      } else {
+        toastr.success(t("Common:AppointNewOwner"));
+      }
+
       onChanged?.(roomId);
       onClose();
     } catch (error) {
@@ -120,6 +221,57 @@ const PrivateChangeOwnerDialog: React.FC<PrivateChangeOwnerDialogProps> = ({
     }
   };
 
+  // Checkbox props: only pass the complete set when the current user is owner.
+  // WithFlag<"withFooterCheckbox", ...> requires either all props or none.
+  const footerCheckboxProps = ownerIsCurrentUser
+    ? ({
+        withFooterCheckbox: true as const,
+        footerCheckboxLabel: t("Common:LeaveTheRoom"),
+        isChecked: false,
+      } as const)
+    : {};
+
+  const selectorContent = excludeReady ? (
+    <PeopleSelector
+      withCancelButton
+      onCancel={onClose}
+      cancelButtonLabel=""
+      disableSubmitButton={isLoading}
+      submitButtonLabel={t("Common:AssignOwner")}
+      onSubmit={onSubmit}
+      withHeader
+      headerProps={{
+        onCloseClick: onClose,
+        headerLabel,
+      }}
+      filter={filter}
+      withInfo
+      infoText={infoText}
+      withOutCurrentAuthorizedUser
+      filterUserId={roomOwnerId}
+      currentUserId={currentUserId}
+      disableDisabledUsers
+      excludeItems={excludeItems.length > 0 ? excludeItems : undefined}
+      emptyScreenHeader={t("Common:NotFoundMembers")}
+      emptyScreenDescription={infoText}
+      data-test-id="private_change_owner_selector"
+      {...footerCheckboxProps}
+    />
+  ) : (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
+        height: "100%",
+        minHeight: "240px",
+      }}
+    >
+      <Loader type={LoaderTypes.track} />
+    </div>
+  );
+
   return (
     <ModalDialog
       visible={visible}
@@ -127,31 +279,7 @@ const PrivateChangeOwnerDialog: React.FC<PrivateChangeOwnerDialogProps> = ({
       displayType={ModalDialogType.aside}
       withoutPadding
     >
-      <ModalDialog.Body>
-        <PeopleSelector
-          withCancelButton
-          onCancel={onClose}
-          cancelButtonLabel=""
-          disableSubmitButton={isLoading}
-          submitButtonLabel={t("Common:AssignOwner")}
-          onSubmit={onSubmit}
-          withHeader
-          headerProps={{
-            onCloseClick: onClose,
-            headerLabel,
-          }}
-          filter={filter}
-          withInfo
-          infoText={infoText}
-          withOutCurrentAuthorizedUser
-          filterUserId={roomOwnerId}
-          currentUserId={currentUserId}
-          disableDisabledUsers
-          emptyScreenHeader={t("Common:NotFoundMembers")}
-          emptyScreenDescription={infoText}
-          data-test-id="private_change_owner_selector"
-        />
-      </ModalDialog.Body>
+      <ModalDialog.Body>{selectorContent}</ModalDialog.Body>
     </ModalDialog>
   );
 };

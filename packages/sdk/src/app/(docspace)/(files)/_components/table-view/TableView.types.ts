@@ -48,6 +48,8 @@ export type TableViewRowProps = {
   lastColumn: string;
   currentUserId?: string;
   isPrivate?: boolean;
+  /** Whether the current user has loaded their E2EE key pair. */
+  hasEncryptionKeys?: boolean;
 };
 
 export type TableViewProps = {
@@ -63,6 +65,8 @@ export type TableViewProps = {
   currentUserId?: string;
   infoPanelVisible?: boolean;
   isPrivate?: boolean;
+  /** Whether the current user has loaded their E2EE key pair. */
+  hasEncryptionKeys?: boolean;
   /**
    * Current section root folder type. Drives the section-specific column set,
    * order, and per-column sortability (see columns.ts).

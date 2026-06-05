@@ -47,6 +47,7 @@ import { useTranslation } from "react-i18next";
 import api from "@docspace/shared/api";
 import type { RoomMember, TGetRoomMembers } from "@docspace/shared/api/rooms/types";
 import type { TUser } from "@docspace/shared/api/people/types";
+import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { Text } from "@docspace/ui-kit/components/text";
@@ -148,7 +149,15 @@ const PrivateMembersView: React.FC<PrivateMembersViewProps> = ({
       <ul className={styles.list}>
         {members.map((member) => {
           const user = member.sharedTo as TUser & { isGroup?: boolean };
-          if (user.isGroup) return null; // Groups not supported in private rooms
+          const isGroup = Boolean(user.isGroup);
+          // A pending member has activationStatus=Pending — mirrors
+          // Share.helpers.tsx:546-558 isExpect derivation in the reference.
+          // Groups never have activationStatus so default to false.
+          const isExpect =
+            !isGroup &&
+            "activationStatus" in user &&
+            user.activationStatus ===
+              EmployeeActivationStatus.Pending;
           return (
             <li key={user.id} className={styles.listItem}>
               <PrivateMemberUser
@@ -158,7 +167,10 @@ const PrivateMembersView: React.FC<PrivateMembersViewProps> = ({
                 avatar={user.avatar}
                 accessLabel={accessToLabel(member.access, member.isOwner, t)}
                 canRemove={member.canEditAccess && user.id !== currentUserId}
+                isExpect={isExpect}
+                canInvite={canInvite}
                 isOwner={member.isOwner}
+                isGroup={isGroup}
                 onRemoved={() => handleMemberRemoved(user.id)}
               />
             </li>

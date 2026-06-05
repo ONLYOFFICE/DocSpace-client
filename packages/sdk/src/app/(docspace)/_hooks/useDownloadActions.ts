@@ -159,5 +159,28 @@ export default function useDownloadActions() {
     setSortedFiles,
   ]);
 
-  return { downloadAction, downloadAsAction };
+  // Downloads the raw encrypted ciphertext — no crypto pipeline.
+  // For files: triggers a direct browser download of item.viewUrl.
+  // For folders/rooms: creates a server-side ZIP archive of the raw blobs,
+  // identical to client ContextOptionsStore.onClickDownloadEncrypted.
+  const downloadEncryptedAction = useCallback(
+    (item: TFileItem | TFolderItem) => {
+      if (item.isFolder) {
+        return downloadFiles([], [item.id]).catch((error) => {
+          const msg = error instanceof Error ? error.message : String(error);
+          toastr.error(msg);
+        });
+      }
+
+      openUrl({
+        url: (item as TFileItem).viewUrl,
+        action: UrlActionType.Download,
+        isFrame: true,
+        frameConfig: sdkConfig,
+      });
+    },
+    [downloadFiles, sdkConfig],
+  );
+
+  return { downloadAction, downloadAsAction, downloadEncryptedAction };
 }

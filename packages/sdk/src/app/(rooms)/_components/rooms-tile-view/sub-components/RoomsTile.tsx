@@ -40,6 +40,8 @@ import { observer } from "mobx-react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
+import { ReactSVG } from "react-svg";
+
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { RoomTile } from "@docspace/ui-kit/components/tiles/room-tile";
@@ -49,6 +51,8 @@ import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import type { TagClickEvent } from "@docspace/ui-kit/components/tag";
 import Badges from "@docspace/shared/components/badges";
 import api from "@docspace/shared/api";
+
+import PrivateRoom32SvgUrl from "PUBLIC_DIR/images/icons/32/room/private.svg?url";
 import { isAdmin } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import {
@@ -205,24 +209,39 @@ const RoomsTile = observer(
     );
 
     const isPrivateRoom = (item as { private?: boolean }).private === true;
+    // Show 32px shield icon when the room is private, not archived, and has no
+    // custom logo — mirrors ItemIcon.tsx showPrivateRoomDefaultIcon condition.
+    const isLoadedRoomIcon = !!(
+      "isRoom" in item && item.isRoom && item.hasRoomImage
+    );
+    const showPrivateRoomDefaultIcon =
+      isPrivateRoom && !isArchive && !isLoadedRoomIcon;
+
     const element = (
       <EncryptedItemIconWrapper
         encrypted={isPrivateRoom}
         hasEncryptionKeys={!!hasEncryptionKeys}
         isRoom
       >
-        <RoomIcon
-          logo={getRoomIconLogo(item)}
-          color={
-            "isRoom" in item && item.isRoom ? item.roomIconColor : undefined
-          }
-          title={item.title}
-          showDefault={
-            "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
-          }
-          size="32px"
-          radius="6px"
-        />
+        {showPrivateRoomDefaultIcon ? (
+          <ReactSVG
+            src={PrivateRoom32SvgUrl}
+            data-testid="private-room-icon"
+          />
+        ) : (
+          <RoomIcon
+            logo={getRoomIconLogo(item)}
+            color={
+              "isRoom" in item && item.isRoom ? item.roomIconColor : undefined
+            }
+            title={item.title}
+            showDefault={
+              "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
+            }
+            size="32px"
+            radius="6px"
+          />
+        )}
       </EncryptedItemIconWrapper>
     );
 

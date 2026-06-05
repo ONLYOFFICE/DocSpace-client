@@ -62,6 +62,14 @@ type UseContextMenuModelProps = {
    * client's `filesActionsStore.retryVectorization` wiring.
    */
   onRetryVectorization?: (item: TFileItem) => void;
+  /**
+   * Handler for "Download without decryption" (private-room encrypted files
+   * and folders). For files: plain download of item.viewUrl (raw ciphertext,
+   * no crypto pipeline). For folders: archive download of raw ciphertext via
+   * the server ZIP endpoint. Mirrors client ContextOptionsStore
+   * onClickDownloadEncrypted.
+   */
+  onDownloadEncryptedClick?: (item: TFileItem | TFolderItem) => void;
 };
 
 export default function useContextMenuModel({
@@ -80,6 +88,7 @@ export default function useContextMenuModel({
   onRestoreSelectedClick,
   onShowVersionHistoryClick,
   onRetryVectorization,
+  onDownloadEncryptedClick,
 }: UseContextMenuModelProps) {
   const { t } = useTranslation(["Common"]);
 
@@ -88,7 +97,11 @@ export default function useContextMenuModel({
   const { openFolder, copyFolderLink, openLocation } = useFolderActions({ t });
   const { openFile, copyFileLink, lockFile, changeCustomFilter } =
     useFilesActions({ t });
-  const { downloadAction, downloadAsAction } = useDownloadActions();
+  const {
+    downloadAction,
+    downloadAsAction,
+    downloadEncryptedAction,
+  } = useDownloadActions();
   const {
     markAsFavorite,
     removeFromFavorites,
@@ -213,6 +226,28 @@ export default function useContextMenuModel({
       disabled: false,
     };
   }, [downloadAsAction, t]);
+
+  // "Download without decryption": downloads the raw encrypted ciphertext.
+  // For files: navigates to item.viewUrl with UrlActionType.Download (no
+  // crypto pipeline). For folders/rooms: archives via server ZIP endpoint.
+  // Mirrors client ContextOptionsStore.onClickDownloadEncrypted.
+  // An optional onDownloadEncryptedClick prop overrides the default action
+  // (useful for callers that need custom handling).
+  const getDownloadEncryptedItem = useCallback(
+    (i: TFileItem | TFolderItem) => {
+      const isDisabled = !i.security.Download;
+      const handler = onDownloadEncryptedClick ?? downloadEncryptedAction;
+      return {
+        id: "option_download-encrypted",
+        key: "download-encrypted",
+        label: t("Common:DownloadWithoutDecryption"),
+        icon: DownloadReactSvgUrl,
+        onClick: () => handler(i),
+        disabled: isDisabled,
+      };
+    },
+    [t, onDownloadEncryptedClick, downloadEncryptedAction],
+  );
 
   const getViewItem = useCallback(
     (i: TFileItem) => {
@@ -743,6 +778,9 @@ export default function useContextMenuModel({
       const hasDownloadAs = contextOptions.includes(
         AVAILABLE_CONTEXT_ITEMS.downloadAs,
       );
+      const hasDownloadEncrypted = contextOptions.includes(
+        AVAILABLE_CONTEXT_ITEMS.downloadEncrypted,
+      );
 
       if (hasDownload && hasDownloadAs) {
         actionGroup.push({
@@ -756,6 +794,13 @@ export default function useContextMenuModel({
         actionGroup.push(getDownloadItem(item));
       } else if (hasDownloadAs) {
         actionGroup.push(getDownloadAsItem());
+      }
+
+      // "Download without decryption" appears after the regular download
+      // entry. Shown only in private rooms for encrypted files and folders,
+      // gated by PRIVATE_FILE/FOLDER_CONTEXT_OPTIONS whitelists.
+      if (hasDownloadEncrypted) {
+        actionGroup.push(getDownloadEncryptedItem(item!));
       }
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.rename))
@@ -862,6 +907,7 @@ export default function useContextMenuModel({
       getLinkForRoomMembersItem,
       getDownloadItem,
       getDownloadAsItem,
+      getDownloadEncryptedItem,
       getMarkAsFavoriteItem,
       getRemoveFromFavoritesItem,
       getRemoveFromRecentItem,

@@ -39,6 +39,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 
@@ -64,6 +65,11 @@ type ChangeOwnerArgs = {
   newOwnerId: string;
 };
 
+type LeaveRoomArgs = {
+  roomId: number;
+  userId: string;
+};
+
 type UsePrivateOwnerChangeFlowReturn = {
   /**
    * Pre-check: which candidates can actually be wrapped against the room's
@@ -75,6 +81,11 @@ type UsePrivateOwnerChangeFlowReturn = {
   ) => Promise<CandidateValidationResult>;
   /** Transfer ownership via files/owner; server handles ACL/file_keys handoff. */
   changeOwner: (args: ChangeOwnerArgs) => Promise<boolean>;
+  /**
+   * Leave the room by revoking the current user's membership (access=None).
+   * Parity with FilesActionsStore.onLeaveRoom — does NOT revoke DEK wraps.
+   */
+  leaveRoom: (args: LeaveRoomArgs) => Promise<void>;
   isLoading: boolean;
 };
 
@@ -131,5 +142,16 @@ export const usePrivateOwnerChangeFlow =
       [t],
     );
 
-    return { validateCandidates, changeOwner, isLoading };
+    // Parity with FilesActionsStore.onLeaveRoom — revoke membership by setting
+    // access=None. Does NOT revoke DEK wraps (intentional: reference parity).
+    const leaveRoom = React.useCallback(
+      async ({ roomId, userId }: LeaveRoomArgs): Promise<void> => {
+        await api.rooms.updateRoomMemberRole(roomId, {
+          invitations: [{ id: userId, access: ShareAccessRights.None }],
+        });
+      },
+      [],
+    );
+
+    return { validateCandidates, changeOwner, leaveRoom, isLoading };
   };

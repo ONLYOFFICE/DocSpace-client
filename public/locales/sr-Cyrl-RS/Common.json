@@ -1389,6 +1389,7 @@
   "Or": "или",
   "PrivateRoomNotFoundDescription": "Приватна соба коју тражите не постоји или немате приступ.",
   "PrivateRoomNotFoundTitle": "Није пронађено",
+  "ReEncryptingFiles": "Поновно шифровање датотека",
   "RoomNotificationsDisabled": "Нотификације собе онемогућене",
   "RoomNotificationsEnabled": "Нотификације собе омогућене",
   "RoomPinned": "Соба закачена",

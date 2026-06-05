@@ -1389,6 +1389,7 @@
   "Or": "sau",
   "PrivateRoomNotFoundDescription": "Camera privată pe care o căutați nu există sau nu aveți acces.",
   "PrivateRoomNotFoundTitle": "Nu a fost găsit",
+  "ReEncryptingFiles": "Recriptarea fișierelor",
   "RoomNotificationsDisabled": "Notificările pentru sala sunt dezactivate",
   "RoomNotificationsEnabled": "Notificările pentru sala sunt activate",
   "RoomPinned": "Sala fixată",

@@ -53,6 +53,14 @@ type InviteAfterSubmitArgs = {
   displayNames: Record<string, string>;
 };
 
+/** Progress of the ongoing re-encryption fan-out. */
+export type ReencryptProgress = {
+  /** Number of files already processed (DEK re-wrapped). */
+  processed: number;
+  /** Total files to process. */
+  total: number;
+};
+
 type UsePrivateInviteFlowReturn = {
   /**
    * Invoked AFTER setRoomSecurity succeeds. Requires unlock, then runs
@@ -71,6 +79,12 @@ type UsePrivateInviteFlowReturn = {
    */
   onBeforeSubmit: () => Promise<boolean>;
   isLoading: boolean;
+  /**
+   * Live re-encryption progress, non-null while addMembersToEncryptedRoom is
+   * running. Resets to null in the finally block (success OR failure).
+   * Consumers render a progress bar while this is non-null.
+   */
+  reencryptProgress: ReencryptProgress | null;
 };
 
 const loadRoomEncryption = () =>
@@ -97,6 +111,8 @@ export const usePrivateInviteFlow = (): UsePrivateInviteFlowReturn => {
   const { requireIdentity } = useEncryption();
   const identityStore = useEncryptionIdentityStore();
   const [isLoading, setIsLoading] = React.useState(false);
+  const [reencryptProgress, setReencryptProgress] =
+    React.useState<ReencryptProgress | null>(null);
 
   const onInviteSubmitted = React.useCallback(
     async ({ roomId, memberIds, displayNames }: InviteAfterSubmitArgs) => {
@@ -125,17 +141,65 @@ export const usePrivateInviteFlow = (): UsePrivateInviteFlowReturn => {
           {
             currentUserId: userId,
             identity,
+            onProgress: (processed, total) => {
+              setReencryptProgress({ processed, total });
+            },
           },
         );
         if (controller.signal.aborted) return;
 
-        if (result.skippedMembers.length > 0) {
-          const names = result.skippedMembers
-            .map((m) => m.displayName || m.id)
-            .join(", ");
+        // Split skipped members by reason and show separate toasts so the
+        // user understands exactly why each person was skipped.
+        const noKeyNames = result.skippedMembers
+          .filter((m) => m.reason === "no-key")
+          .map((m) => m.displayName || m.id);
+        const mismatchNames = result.skippedMembers
+          .filter((m) => m.reason === "key-mismatch-refused")
+          .map((m) => m.displayName || m.id);
+
+        if (noKeyNames.length > 0) {
           toastr.warning(
-            t("Common:EncryptionInviteSkippedMembers", { names }),
+            t("Common:EncryptedSkippedNoKeys", {
+              users: noKeyNames.join(", "),
+            }),
           );
+        }
+        if (mismatchNames.length > 0) {
+          toastr.warning(
+            t("Common:EncryptedSkippedKeyMismatch", {
+              users: mismatchNames.join(", "),
+            }),
+          );
+        }
+
+        // Per-file failures (DEK unwrap / re-wrap errors) are a separate
+        // partial-failure condition, independent of skipped members.
+        const failures = result.fileResults.filter((r) => !r.success);
+        if (failures.length > 0) {
+          toastr.warning(
+            t("Common:EncryptedReencryptPartialFailure", {
+              count: failures.length,
+            }),
+          );
+        } else if (result.skippedMembers.length === 0) {
+          // Zero skipped and zero file failures → fully successful invite.
+          toastr.success(t("Common:UsersInvited"));
+        }
+
+        // Silent follow-up: backfill envelopes for members who registered
+        // their keypair after the initial invite (their pre-existing files
+        // would otherwise stay inaccessible). Fire-and-forget; skip when
+        // the operation was already aborted (user navigated away).
+        if (!controller.signal.aborted) {
+          void loadRoomEncryption()
+            .then(({ backfillEncryptedFilesForRoomMembers }) =>
+              backfillEncryptedFilesForRoomMembers(roomId, {
+                currentUserId: userId,
+                identity,
+                onKeyChange: async () => "refuse",
+              }),
+            )
+            .catch(() => {});
         }
       } catch (error) {
         // Abort (user locked / navigated away) is expected — stay silent.
@@ -145,6 +209,7 @@ export const usePrivateInviteFlow = (): UsePrivateInviteFlowReturn => {
       } finally {
         releaseCryptoOperation(controller);
         setIsLoading(false);
+        setReencryptProgress(null);
       }
     },
     [requireIdentity, identityStore, t],
@@ -162,5 +227,5 @@ export const usePrivateInviteFlow = (): UsePrivateInviteFlowReturn => {
     return true;
   }, [requireIdentity, t]);
 
-  return { onInviteSubmitted, onBeforeSubmit, isLoading };
+  return { onInviteSubmitted, onBeforeSubmit, isLoading, reencryptProgress };
 };

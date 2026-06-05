@@ -41,6 +41,7 @@ import { useTranslation } from "react-i18next";
 
 import { removeFiles, emptyTrash } from "@docspace/shared/api/files";
 import { FolderType } from "@docspace/shared/enums";
+import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
@@ -136,6 +137,12 @@ export default function useTrashActions(trackOperation?: TrackOperation) {
       const icon = immediately ? "deletePermanently" : "trash";
 
       const onComplete = () => {
+        // Purge cached encrypted filenames so stale plaintext names are not
+        // shown after the files are gone — mirrors FilesActionsStore.js:599.
+        if (encryptedActions) {
+          fileIds.forEach((id) => forgetEncryptedFilename(id));
+        }
+
         for (const item of itemsToRemove) {
           filesListStore.removeItem(item.id);
         }

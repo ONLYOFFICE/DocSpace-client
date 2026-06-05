@@ -41,11 +41,14 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
+import api from "@docspace/shared/api";
 import { Avatar, AvatarRole, AvatarSize } from "@docspace/ui-kit/components/avatar";
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
+import EmailPlusSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
 
 import { usePrivateRemoveMemberFlow } from "../../_hooks/usePrivateRemoveMemberFlow";
 import { usePrivateDialogsStore } from "../../_store/PrivateDialogsStore";
@@ -58,7 +61,13 @@ export type PrivateMemberUserProps = {
   avatar?: string;
   accessLabel: string;
   canRemove: boolean;
+  /** Whether this member has a pending invitation (activationStatus=Pending). */
+  isExpect?: boolean;
+  /** Whether the current user has permission to invite/re-invite members. */
+  canInvite?: boolean;
   isOwner: boolean;
+  /** True when this row represents a group; remove flow expands group members. */
+  isGroup?: boolean;
   onRemoved?: () => void;
 };
 
@@ -69,12 +78,30 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
   avatar,
   accessLabel,
   canRemove,
+  isExpect = false,
+  canInvite = false,
   isOwner,
+  isGroup = false,
   onRemoved,
 }) => {
   const { t } = useTranslation(["Common", "People"]);
   const { remove, guardReason, isLoading } = usePrivateRemoveMemberFlow(roomId);
   const dialogs = usePrivateDialogsStore();
+
+  // Re-invite icon is shown only for pending members when the current user
+  // has invite permission — mirrors User.tsx:101-103 in the reference.
+  const showInviteIcon = canInvite && isExpect;
+
+  const onRepeatInvitation = React.useCallback(() => {
+    api.rooms
+      .resendEmailInvitations(roomId, true)
+      .then(() =>
+        toastr.success(
+          t("Common:RoomSuccessSentMultipleInvitatios"),
+        ),
+      )
+      .catch((err) => toastr.error(err));
+  }, [roomId, t]);
 
   const handleRemoveClick = React.useCallback(() => {
     if (guardReason || isLoading) return;
@@ -83,7 +110,7 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
       userId,
       displayName,
       onConfirm: async () => {
-        await remove({ roomId, userId });
+        await remove({ roomId, userId, isGroup });
         onRemoved?.();
       },
     });
@@ -93,6 +120,7 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
     roomId,
     userId,
     displayName,
+    isGroup,
     remove,
     onRemoved,
     dialogs,
@@ -110,6 +138,16 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
         <Text className={styles.userName}>{displayName}</Text>
         <Text className={styles.userAccess}>{accessLabel}</Text>
       </div>
+      {showInviteIcon ? (
+        <IconButton
+          iconName={EmailPlusSvgUrl}
+          size={16}
+          isClickable
+          onClick={onRepeatInvitation}
+          title={t("Common:RepeatInvitation")}
+          data-testid="member_repeat_invitation_button"
+        />
+      ) : null}
       {canRemove && !isOwner ? (
         <IconButton
           iconName={RemoveSvgUrl}

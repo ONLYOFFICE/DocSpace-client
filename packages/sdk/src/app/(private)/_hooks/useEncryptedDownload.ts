@@ -40,6 +40,7 @@ import { useTranslation } from "react-i18next";
 
 import { useEncryption } from "@docspace/shared/context/encryption";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { CryptoError } from "@docspace/shared/services/encryption/errors";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import { getFileEncryptionAccess } from "@docspace/shared/api/files";
 
@@ -132,7 +133,13 @@ export const useEncryptedDownload = (): UseEncryptedDownloadReturn => {
         triggerFileDownload(result.file, result.file.name);
       } catch (error) {
         if (controller.signal.aborted) return;
-        toastr.error(getEncryptionErrorMessage(t, error));
+        // Typed crypto errors carry precise diagnostic messages; untyped errors
+        // (network, ACL, unexpected) surface the operation-level failure key.
+        toastr.error(
+          error instanceof CryptoError
+            ? getEncryptionErrorMessage(t, error)
+            : t("Common:EncryptionDownloadFailed"),
+        );
       } finally {
         releaseCryptoOperation(controller);
       }
@@ -202,7 +209,15 @@ export const useEncryptedDownload = (): UseEncryptedDownloadReturn => {
         triggerFileDownload(zipBlob, zipFileName);
       } catch (error) {
         if (controller.signal.aborted) return;
-        toastr.error(getEncryptionErrorMessage(t, error));
+        // Files:DecryptAllFailed is the reference key for zip/decrypt-all failure
+        // but the "Files" namespace is not available in the SDK (only "Common" is
+        // loaded). Fall back to the generic download failure key which conveys the
+        // same intent.
+        toastr.error(
+          error instanceof CryptoError
+            ? getEncryptionErrorMessage(t, error)
+            : t("Common:EncryptionDownloadFailed"),
+        );
       } finally {
         releaseCryptoOperation(controller);
       }

@@ -86,6 +86,26 @@ const INTENTIONAL_DIFFERENCES: IntentionalDifference[] = [
       "embedded use-case requires mobile support.  " +
       "Crypto path on mobile requires a manual smoke-test (stays pending).",
   },
+  {
+    title: "Full key lifecycle (import/recover/rotate/reset/auto-lock) requires host-app /profile/keys-management",
+    reference:
+      "packages/client/src/pages/Profile/Section/Body/sub-components/keys-management",
+    decidedOn: "2026-06-05",
+    rationale:
+      "The SDK is NOT self-sufficient for the full encryption key lifecycle. " +
+      "Key import, recovery, rotation, and reset are intentionally kept in the " +
+      "host application at /profile/keys-management.  " +
+      "Available WITHOUT the host app: key generation during room creation and " +
+      "passphrase unlock via PassphraseModal.  " +
+      "Three SDK components navigate to /profile/keys-management via " +
+      "window.open(_blank): GhostStateToastEffect.tsx:67 (ghost-state toast link), " +
+      "DeviceSetupHintEffect.tsx:78 (device-setup hint link), and " +
+      "EncryptionShell.tsx:68 (forgot-passphrase link in PassphraseModal).  " +
+      "These window.open calls are intentional — the host app is the only context " +
+      "with the authoritative key-management UI.  " +
+      "Replicating it inside the SDK iframe would duplicate security-critical UI, " +
+      "increase bundle size, and create a divergent UX.",
+  },
 ];
 
 function isCandidateFile(name: string): boolean {

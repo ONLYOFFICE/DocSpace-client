@@ -1389,6 +1389,7 @@
   "Or": "oder",
   "PrivateRoomNotFoundDescription": "Der private Raum, den Sie suchen, existiert nicht, oder Sie haben keinen Zugriff darauf.",
   "PrivateRoomNotFoundTitle": "Nicht gefunden",
+  "ReEncryptingFiles": "Dateien werden erneut verschlüsselt",
   "RoomNotificationsDisabled": "Raumbenachrichtigungen deaktiviert",
   "RoomNotificationsEnabled": "Raumbenachrichtigungen aktiviert",
   "RoomPinned": "Raum angeheftet",

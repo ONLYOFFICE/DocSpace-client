@@ -63,5 +63,7 @@ export type ListProps = {
   emptyView?: React.ReactNode;
   /** Adds the encrypted-shield overlay to every file/folder icon. */
   isPrivate?: boolean;
+  /** Whether the current user has loaded their E2EE key pair. */
+  hasEncryptionKeys?: boolean;
 };
 

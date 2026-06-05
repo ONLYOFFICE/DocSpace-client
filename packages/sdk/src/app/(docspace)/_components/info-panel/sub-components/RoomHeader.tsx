@@ -43,6 +43,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { FolderType } from "@docspace/shared/enums";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import type { TFolder } from "@docspace/shared/api/files/types";
 
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
@@ -83,7 +84,18 @@ const RoomHeader = ({
   const roomItem = selection as TFolder & RoomIconFields;
   const roomIconLogo = getRoomIconLogo(roomItem);
   const isTemplate = selection.rootFolderType === FolderType.RoomTemplates;
-  const badgeUrl = getRoomBadgeUrl(selection as Parameters<typeof getRoomBadgeUrl>[0]) ?? "";
+  const isPrivateRoom =
+    (selection as TFolder & { private?: boolean }).private === true;
+  const badgeUrl =
+    getRoomBadgeUrl(
+      selection as Parameters<typeof getRoomBadgeUrl>[0],
+    ) ?? "";
+  // Mirror RoomsItemTitle: apply green badge color for private rooms so the
+  // shield renders in lightStatusPositive (#35AD17) instead of the room
+  // background tint.
+  const badgeIconColor = isPrivateRoom
+    ? globalColors.lightStatusPositive
+    : undefined;
 
   const onSearchClose = () => {
     setShowSearch(false);
@@ -99,6 +111,7 @@ const RoomHeader = ({
         showDefault={!roomItem.hasRoomImage}
         isTemplate={isTemplate}
         badgeUrl={badgeUrl}
+        badgeIconColor={badgeIconColor}
         size="32px"
       />
       <Text className={styles.roomTitle} fontWeight={600} truncate>

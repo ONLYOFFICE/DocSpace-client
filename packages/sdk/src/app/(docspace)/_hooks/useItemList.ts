@@ -64,6 +64,11 @@ type useItemListProps = {
    * folders but keep it for files).
    */
   allowedFolderContextOptions?: ReadonlySet<string>;
+  /**
+   * When true, enables private-room-specific context options (e.g.
+   * download-encrypted for folders). Passed down to useItemContextMenu.
+   */
+  isPrivate?: boolean;
 
   getIcon: ReturnType<typeof useItemIcon>["getIcon"];
 };
@@ -79,6 +84,7 @@ export default function useItemList({
   withoutFavorite,
   allowedContextOptions,
   allowedFolderContextOptions,
+  isPrivate,
 }: useItemListProps) {
   const { getFilesContextMenu, getFoldersContextMenu } = useItemContextMenu({
     isFavoritesSection,
@@ -87,6 +93,7 @@ export default function useItemList({
     isDocsSection,
     isShareSection,
     withoutFavorite,
+    isPrivate,
   });
 
   const getFilesContextMenuRef = useRef(getFilesContextMenu);

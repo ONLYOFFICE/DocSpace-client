@@ -95,6 +95,7 @@ const TableViewRow = observer(
     lastColumn,
     currentUserId,
     isPrivate,
+    hasEncryptionKeys,
   }: TableViewRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
@@ -389,8 +390,10 @@ const TableViewRow = observer(
           <div className="table-container_element-container" onClick={(e) => e.stopPropagation()}>
             <div className="table-container_element">
               <EncryptedItemIconWrapper
-                encrypted={!!isPrivate}
-                hasEncryptionKeys
+                encrypted={
+                  !!("encrypted" in item && (item as TFileItem).encrypted)
+                }
+                hasEncryptionKeys={hasEncryptionKeys ?? true}
                 isRoom={false}
               >
                 <RoomIcon

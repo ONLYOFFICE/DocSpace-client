@@ -61,7 +61,7 @@ const PrivateRoomHeader: React.FC<PrivateRoomHeaderProps> = (props) => {
   const isEncrypted = props.current?.private === true;
 
   const titleIcon = isEncrypted ? EncryptedRoomIconUrl : "";
-  const titleIconTooltip = isEncrypted ? t("Common:EncryptedRoomTooltip") : "";
+  const titleIconTooltip = isEncrypted ? t("Common:PrivateRoomDescription") : "";
 
   return (
     <Header

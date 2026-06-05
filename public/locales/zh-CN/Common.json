@@ -1389,6 +1389,7 @@
   "Or": "或",
   "PrivateRoomNotFoundDescription": "您查找的私人房间不存在，或者您没有访问权限。",
   "PrivateRoomNotFoundTitle": "未找到",
+  "ReEncryptingFiles": "正在重新加密文件",
   "RoomNotificationsDisabled": "房间通知禁用",
   "RoomNotificationsEnabled": "房间通知启用",
   "RoomPinned": "房间已置顶",

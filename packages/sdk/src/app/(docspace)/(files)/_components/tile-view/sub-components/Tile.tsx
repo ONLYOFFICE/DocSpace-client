@@ -88,7 +88,14 @@ const getTemporaryIcon = (item: TFileItem | TFolderItem, getIcon: TGetIcon) => {
   return getIcon(temporaryExtension, 96, item.contentLength);
 };
 
-const Tile = ({ item, getIcon, index, isPrivate, currentUserId }: TileProps) => {
+const Tile = ({
+  item,
+  getIcon,
+  index,
+  isPrivate,
+  hasEncryptionKeys,
+  currentUserId,
+}: TileProps) => {
   const tileRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation("Common");
   const { isBase } = useTheme();
@@ -183,8 +190,8 @@ const Tile = ({ item, getIcon, index, isPrivate, currentUserId }: TileProps) => 
 
   const element = (
     <EncryptedItemIconWrapper
-      encrypted={!!isPrivate}
-      hasEncryptionKeys
+      encrypted={!!("encrypted" in item && (item as TFileItem).encrypted)}
+      hasEncryptionKeys={hasEncryptionKeys ?? true}
       isRoom={false}
     >
       <RoomIcon

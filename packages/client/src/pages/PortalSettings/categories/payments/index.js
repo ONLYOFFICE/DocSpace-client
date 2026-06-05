@@ -54,6 +54,22 @@ import {
 } from "@docspace/ui-kit/billing";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
+const TAB_IDS = {
+  MAIN_TARIFF: "portal-payments",
+  ADDONS: "services",
+  WALLET: "wallet",
+  PAYMENT_METHOD: "payment-method",
+  USAGE: "usage",
+};
+
+const TAB_ORDER = [
+  TAB_IDS.MAIN_TARIFF,
+  TAB_IDS.ADDONS,
+  TAB_IDS.WALLET,
+  TAB_IDS.PAYMENT_METHOD,
+  TAB_IDS.USAGE,
+];
+
 const PaymentsPage = (props) => {
   const {
     currentDeviceType,
@@ -68,9 +84,9 @@ const PaymentsPage = (props) => {
     isNotPaidPeriod,
   } = props;
   const location = useLocation();
-  const tabIds = ["portal-payments", "payment-method", "wallet", "services"];
   const [currentTabId, setCurrentTabId] = useState(
-    () => tabIds.find((id) => location.pathname.includes(id)) || tabIds[0],
+    () =>
+      TAB_ORDER.find((id) => location.pathname.includes(id)) || TAB_ORDER[0],
   );
   const navigate = useNavigate();
   const { t } = useTranslation(["Payments", "Settings", "Common"]);
@@ -89,7 +105,7 @@ const PaymentsPage = (props) => {
 
   const data = [
     {
-      id: "portal-payments",
+      id: TAB_IDS.MAIN_TARIFF,
       name: t("Common:TariffPlan", {
         productName: getBrandName("ProductName"),
       }),
@@ -99,15 +115,15 @@ const PaymentsPage = (props) => {
       },
     },
     !isNotPaidPeriod && {
-      id: "payment-method",
-      name: t("Common:PaymentMethod"),
-      content: <PaymentMethod />,
+      id: TAB_IDS.ADDONS,
+      name: t("Common:Addons"),
+      content: <ServicesList getAIConfig={getAIConfig} />,
       onClick: () => {
         clearAbortControllerArr();
       },
     },
     {
-      id: "wallet",
+      id: TAB_IDS.WALLET,
       name: t("Common:Wallet"),
       content: <Wallet />,
       onClick: () => {
@@ -115,9 +131,17 @@ const PaymentsPage = (props) => {
       },
     },
     !isNotPaidPeriod && {
-      id: "services",
-      name: t("Settings:Services"),
-      content: <ServicesList getAIConfig={getAIConfig} />,
+      id: TAB_IDS.PAYMENT_METHOD,
+      name: t("Common:PaymentMethod"),
+      content: <PaymentMethod />,
+      onClick: () => {
+        clearAbortControllerArr();
+      },
+    },
+    {
+      id: TAB_IDS.USAGE,
+      name: t("Common:Usage"),
+      content: null,
       onClick: () => {
         clearAbortControllerArr();
       },

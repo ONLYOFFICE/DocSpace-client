@@ -57,6 +57,7 @@ export const TooltipContent = ({
       </header>
       <Text>{description}</Text>
       <div className={styles.imgWrapper}>
+        {/* biome-ignore lint/performance/noImgElement: static preset preview asset shown in a tooltip; next/image is not applicable */}
         <img src={img} alt={title} />
       </div>
     </div>

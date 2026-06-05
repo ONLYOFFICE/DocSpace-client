@@ -107,7 +107,6 @@
   "Pin": "Pin",
   "Protected": "protected",
   "RecentlyOpenedTooltip": "Recently opened via the link",
-  "ReEncryptingFiles": "Re-encrypting files",
   "RemovedFromRecent": "Removed from recent",
   "Reorder": "Reorder",
   "ReorderIndex": "The Reorder action will remove spaces in the indexes. The files will be re-indexed in order with offset to fill in missing indexes.",

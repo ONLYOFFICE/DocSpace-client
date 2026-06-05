@@ -34,10 +34,9 @@
  */
 
 // PARITY-SOURCE: packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.tsx
-// PARITY-REVIEW: Required when source changes. Last reviewed: 2026-05-27 by Ilya Oleshko
+// PARITY-REVIEW: Required when source changes. Last reviewed: 2026-06-05 by Ilya Oleshko
 // NOTE: Slim fork — drops SharedLinks, PublicRoomBar, LinkRow, template/AI
-// branches. Members are listed without role-change combobox in v1; admins
-// revoke + re-invite to change roles (out-of-scope optimization for M3).
+// branches. Role-change ComboBox is included (wave 3 — task #39).
 
 "use client";
 
@@ -61,6 +60,8 @@ export type PrivateMembersViewProps = {
   roomId: number;
   currentUserId: string;
   canInvite?: boolean;
+  /** True when the current user may change member roles (security.EditRoom). */
+  canEditMembers?: boolean;
   onAddUsersClick?: () => void;
   /** Re-fetches when bumped (e.g. after invite/remove). */
   refreshKey?: number;
@@ -70,6 +71,7 @@ const PrivateMembersView: React.FC<PrivateMembersViewProps> = ({
   roomId,
   currentUserId,
   canInvite = false,
+  canEditMembers = false,
   onAddUsersClick,
   refreshKey,
 }) => {
@@ -78,6 +80,12 @@ const PrivateMembersView: React.FC<PrivateMembersViewProps> = ({
   const [total, setTotal] = React.useState(0);
   const [isLoading, setIsLoading] = React.useState(true);
   const [isLoadingMore, setIsLoadingMore] = React.useState(false);
+  // Bumped after an internal mutation (e.g. role change) to trigger a reload.
+  const [internalRefreshKey, setInternalRefreshKey] = React.useState(0);
+
+  const handleRoleChanged = React.useCallback(() => {
+    setInternalRefreshKey((k) => k + 1);
+  }, []);
 
   const fetchMembers = React.useCallback(
     async (startIndex: number) => {
@@ -105,7 +113,7 @@ const PrivateMembersView: React.FC<PrivateMembersViewProps> = ({
     return () => {
       cancelled = true;
     };
-  }, [fetchMembers, refreshKey]);
+  }, [fetchMembers, refreshKey, internalRefreshKey]);
 
   const handleLoadMore = React.useCallback(async () => {
     setIsLoadingMore(true);
@@ -158,6 +166,16 @@ const PrivateMembersView: React.FC<PrivateMembersViewProps> = ({
             "activationStatus" in user &&
             user.activationStatus ===
               EmployeeActivationStatus.Pending;
+          // Role-change gating mirrors reference User.tsx:104 / Share User.tsx:121.
+          // Owner role cannot be changed (isOwner guard).
+          // Self-role cannot be changed (currentUserId guard).
+          // canEditAccess on the member entry gates the combobox (server-side
+          // flag mirrors reference canChangeUserRole = user.canEditAccess).
+          const canChangeRole =
+            canEditMembers &&
+            member.canEditAccess &&
+            !member.isOwner &&
+            user.id !== currentUserId;
           return (
             <li key={user.id} className={styles.listItem}>
               <PrivateMemberUser
@@ -165,13 +183,15 @@ const PrivateMembersView: React.FC<PrivateMembersViewProps> = ({
                 userId={user.id}
                 displayName={user.displayName || user.email || ""}
                 avatar={user.avatar}
-                accessLabel={accessToLabel(member.access, member.isOwner, t)}
+                access={member.access}
+                canChangeRole={canChangeRole}
                 canRemove={member.canEditAccess && user.id !== currentUserId}
                 isExpect={isExpect}
                 canInvite={canInvite}
                 isOwner={member.isOwner}
                 isGroup={isGroup}
                 onRemoved={() => handleMemberRemoved(user.id)}
+                onRoleChanged={handleRoleChanged}
               />
             </li>
           );
@@ -199,15 +219,5 @@ const PrivateMembersView: React.FC<PrivateMembersViewProps> = ({
     </div>
   );
 };
-
-function accessToLabel(
-  access: number,
-  isOwner: boolean,
-  t: (key: string) => string,
-): string {
-  if (isOwner) return t("Common:Owner");
-  // Numeric access codes vary; keep label generic for v1.
-  return t("Common:Member");
-}
 
 export default PrivateMembersView;

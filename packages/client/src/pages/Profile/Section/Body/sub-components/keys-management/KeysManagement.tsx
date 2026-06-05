@@ -55,6 +55,7 @@ import { useDeleteKeyFlow } from "./flows/useDeleteKeyFlow";
 import { useExportKeyFlow } from "./flows/useExportKeyFlow";
 import { useRotatePassphraseFlow } from "./flows/useRotatePassphraseFlow";
 import { useResetKeysFlow } from "./flows/useResetKeysFlow";
+import { useRotateIdentityForRooms } from "./flows/useRotateIdentityForRooms";
 
 import styles from "./KeysManagement.module.scss";
 
@@ -83,7 +84,13 @@ const KeysManagement = ({
     }
   }, [setUserEncryptionKeys]);
 
-  const generate = useGenerateKeyFlow({ userId, refreshKeysFromServer });
+  const { rotationProgress, rotateForAllRooms } = useRotateIdentityForRooms();
+
+  const generate = useGenerateKeyFlow({
+    userId,
+    refreshKeysFromServer,
+    onBeforeNewKeyActive: rotateForAllRooms,
+  });
   const importFlow = useImportKeyFlow({
     userId,
     refreshKeysFromServer,
@@ -124,6 +131,8 @@ const KeysManagement = ({
     onForgotPassphrase: handleForgotPassphrase,
   });
 
+  const isRotating = rotationProgress !== null;
+
   const busy =
     generate.isPending ||
     importFlow.isPending ||
@@ -131,7 +140,8 @@ const KeysManagement = ({
     exportFlow.isPending ||
     rotate.isPending ||
     recover.isPending ||
-    reset.isPending;
+    reset.isPending ||
+    isRotating;
 
   const handleSelectActive = useCallback(
     (keyId: string) => {
@@ -197,6 +207,14 @@ const KeysManagement = ({
             />
           ) : null}
         </div>
+        {isRotating && rotationProgress ? (
+          <div className={styles.rotationProgress} role="status">
+            <span>
+              {t("Common:ReEncryptingFiles")} (
+              {rotationProgress.roomsDone}/{rotationProgress.roomsTotal})
+            </span>
+          </div>
+        ) : null}
         {hasKeys ? <AutoLockSetting /> : null}
       </div>
       {reset.available ? (

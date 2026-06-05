@@ -161,6 +161,10 @@ const PrivateInfoPanelBody = observer(
             roomId={Number(selection.id)}
             currentUserId={user?.id ?? ""}
             canInvite={!!security?.EditRoom}
+            // Role editing requires the same EditRoom flag as inviting.
+            // Per-member canEditAccess provides the secondary gate inside
+            // PrivateMembersView — mirrors reference User.tsx:104.
+            canEditMembers={!!security?.EditRoom}
             onAddUsersClick={handleAddUsers}
           />
         );

@@ -107,7 +107,6 @@
   "Pin": "固定",
   "Protected": "保護されている",
   "RecentlyOpenedTooltip": "最近リンクで開いたファイル",
-  "ReEncryptingFiles": "ファイルを再暗号化中",
   "RemovedFromRecent": "最近の履歴から削除されました",
   "Reorder": "並び替える",
   "ReorderIndex": "「並び替える」アクションにより、インデックス内のスペースが削除されます。欠落したインデックスを埋めるために、ファイルはオフセット順に再インデックス化されます。",

@@ -63,6 +63,17 @@ type Deps = {
   refreshKeysFromServer: () => Promise<void>;
   onSuccess?: () => void;
   onError?: () => void;
+  /**
+   * Called after the new key is registered on the server but BEFORE the old
+   * SecretStorage entry is overwritten with the new identity. Receives the
+   * old identity (if it was unlocked in SecretStorage) and the new identity.
+   * Any error thrown here is swallowed so key generation still completes.
+   */
+  onBeforeNewKeyActive?: (
+    oldIdentity: IdentityKeyPair | null,
+    newIdentity: IdentityKeyPair,
+    userId: string,
+  ) => Promise<void>;
 };
 
 export type GenerateKeyFlow = {
@@ -76,6 +87,7 @@ export function useGenerateKeyFlow({
   refreshKeysFromServer,
   onSuccess,
   onError,
+  onBeforeNewKeyActive,
 }: Deps): GenerateKeyFlow {
   const { t } = useTranslation(["Common"]);
   const { suspendAutoLock } = useEncryption();
@@ -147,6 +159,19 @@ export function useGenerateKeyFlow({
       };
       await setEncryptionKeys(payload);
       setActiveKeyId(userId, payload.id);
+
+      // Capture the old identity before overwriting the SecretStorage slot.
+      // The callback may re-wrap DEKs in private rooms using the old key.
+      if (onBeforeNewKeyActive) {
+        const oldIdentity = SecretStorage.getCached(userId);
+        try {
+          await onBeforeNewKeyActive(oldIdentity, keyPair, userId);
+        } catch (callbackError) {
+          // Re-wrap errors are reported by the callback; do not abort keygen.
+          console.error("onBeforeNewKeyActive failed:", callbackError);
+        }
+      }
+
       SecretStorage.cacheUnlocked(userId, keyPair);
       await refreshKeysFromServer();
       toastr.success(t("Common:EncryptionKeyGenerated"));
@@ -170,6 +195,7 @@ export function useGenerateKeyFlow({
     t,
     onSuccess,
     onError,
+    onBeforeNewKeyActive,
   ]);
 
   const modals = (

@@ -33,80 +33,25 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-.root {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 16px;
-}
+import { test as base } from "../fixtures/base";
 
-.loaderRoot {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 32px;
-}
+/**
+ * Private-rooms e2e fixture: extends the shared base with an automatic
+ * `asc_auth_key` cookie so the Next.js server components under /sdk/private
+ * do not treat the session as anonymous (BLOCKER B in the spec-file header).
+ * Kept separate from the base fixture so suites that intentionally test the
+ * anonymous flow remain unaffected.
+ */
+export const test = base.extend<{ authCookie: void }>({
+  authCookie: [
+    async ({ page, baseUrl }, use) => {
+      await page.context().addCookies([
+        { name: "asc_auth_key", value: "e2e-test-token", url: baseUrl },
+      ]);
+      await use();
+    },
+    { auto: true },
+  ],
+});
 
-.list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.listItem {
-  list-style: none;
-}
-
-.userRow {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 8px;
-  border-radius: 6px;
-
-  @media (hover: hover) {
-    &:hover {
-      background-color: var(--row-hover-background, rgba(0, 0, 0, 0.04));
-    }
-  }
-}
-
-.userBody {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-.userName {
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 20px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.roleWrapper {
-  flex: 0 0 auto;
-}
-
-.roleCombobox {
-  // Inherits AccessRightSelect default styling; no overrides needed.
-}
-
-.roleLabel {
-  font-size: 12px;
-  color: var(--text-secondary, rgba(0, 0, 0, 0.6));
-  cursor: default;
-}
-
-.empty {
-  text-align: center;
-  padding: 24px;
-  color: var(--text-secondary, rgba(0, 0, 0, 0.6));
-}
+export { expect } from "../fixtures/base";

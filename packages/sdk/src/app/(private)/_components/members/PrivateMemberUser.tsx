@@ -34,22 +34,32 @@
  */
 
 // PARITY-SOURCE: packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/User.tsx
-// PARITY-REVIEW: Required when source changes. Last reviewed: 2026-05-27 by Ilya Oleshko
+// PARITY-REVIEW: Required when source changes. Last reviewed: 2026-06-05 by Ilya Oleshko
 
 "use client";
 
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { isMobileOnly, isMobile } from "react-device-detect";
 
 import api from "@docspace/shared/api";
+import { RoomsType } from "@docspace/shared/enums";
+import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import { Avatar, AvatarRole, AvatarSize } from "@docspace/ui-kit/components/avatar";
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import {
+  ComboBoxSize,
+  type TOption,
+} from "@docspace/ui-kit/components/combobox";
+import { AccessRightSelect } from "@docspace/ui-kit/components/access-right-select";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import EmailPlusSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
 
+import MembersHelper from "../../../(docspace)/_components/info-panel/views/Members/Members.utils";
 import { usePrivateRemoveMemberFlow } from "../../_hooks/usePrivateRemoveMemberFlow";
 import { usePrivateDialogsStore } from "../../_store/PrivateDialogsStore";
 import styles from "./PrivateMembersView.module.scss";
@@ -59,7 +69,10 @@ export type PrivateMemberUserProps = {
   userId: string;
   displayName: string;
   avatar?: string;
-  accessLabel: string;
+  /** Numeric access level (ShareAccessRights) for this member. */
+  access: number;
+  /** Whether the current user may change the role of this member. */
+  canChangeRole: boolean;
   canRemove: boolean;
   /** Whether this member has a pending invitation (activationStatus=Pending). */
   isExpect?: boolean;
@@ -69,6 +82,8 @@ export type PrivateMemberUserProps = {
   /** True when this row represents a group; remove flow expands group members. */
   isGroup?: boolean;
   onRemoved?: () => void;
+  /** Called after a successful role change so the parent can refresh. */
+  onRoleChanged?: () => void;
 };
 
 const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
@@ -76,17 +91,40 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
   userId,
   displayName,
   avatar,
-  accessLabel,
+  access,
+  canChangeRole,
   canRemove,
   isExpect = false,
   canInvite = false,
   isOwner,
   isGroup = false,
   onRemoved,
+  onRoleChanged,
 }) => {
   const { t } = useTranslation(["Common", "People"]);
   const { remove, guardReason, isLoading } = usePrivateRemoveMemberFlow(roomId);
   const dialogs = usePrivateDialogsStore();
+  const [isRoleChanging, setIsRoleChanging] = React.useState(false);
+
+  // Build role options for CustomRoom (private rooms are always CustomRoom).
+  // Mirrors: packages/client/.../Members/sub-components/User.tsx:107-128
+  const membersHelper = React.useMemo(
+    () => new MembersHelper({ t }),
+    // MembersHelper only depends on `t`; rebuild when language changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [t],
+  );
+
+  const roleOptions = membersHelper.getOptionsByRoomType(
+    RoomsType.CustomRoom,
+    // Never include the remove option in the role combobox — removal is
+    // handled by the dedicated remove button below.
+    false,
+  ) as TOption[];
+
+  const selectedRole = membersHelper.getOptionByUserAccess(access) as
+    | TOption
+    | undefined;
 
   // Re-invite icon is shown only for pending members when the current user
   // has invite permission — mirrors User.tsx:101-103 in the reference.
@@ -102,6 +140,32 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
       )
       .catch((err) => toastr.error(err));
   }, [roomId, t]);
+
+  // Role change — mirrors User.tsx:139-160 in the reference.
+  // CRYPTO NOTE: role change does NOT touch DEK wraps (content access is
+  // controlled by wrap presence, not by the role flag). No re-encryption needed.
+  const onSelectRole = React.useCallback(
+    async (option: TOption) => {
+      if (!option.access || option.access === access) return;
+
+      setIsRoleChanging(true);
+      try {
+        await api.rooms.updateRoomMemberRole(roomId, {
+          invitations: [{ id: userId, access: option.access }],
+          notify: true,
+          sharingMessage: "",
+          force: false,
+        });
+        toastr.success(t("Common:AccessRightsChanged"));
+        onRoleChanged?.();
+      } catch (error) {
+        toastr.error(getEncryptionErrorMessage(t, error));
+      } finally {
+        setIsRoleChanging(false);
+      }
+    },
+    [access, roomId, userId, t, onRoleChanged],
+  );
 
   const handleRemoveClick = React.useCallback(() => {
     if (guardReason || isLoading) return;
@@ -136,7 +200,6 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
       />
       <div className={styles.userBody}>
         <Text className={styles.userName}>{displayName}</Text>
-        <Text className={styles.userAccess}>{accessLabel}</Text>
       </div>
       {showInviteIcon ? (
         <IconButton
@@ -147,6 +210,41 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
           title={t("Common:RepeatInvitation")}
           data-testid="member_repeat_invitation_button"
         />
+      ) : null}
+      {/* Role combobox — shown for all non-owner members. */}
+      {selectedRole && !isOwner ? (
+        <div className={styles.roleWrapper}>
+          {canChangeRole ? (
+            <AccessRightSelect
+              modernView
+              className={styles.roleCombobox}
+              selectedOption={selectedRole}
+              usePortalBackdrop
+              onSelect={onSelectRole}
+              accessOptions={roleOptions}
+              noSelect={false}
+              manualWidth="300px"
+              directionY="both"
+              size={ComboBoxSize.content}
+              scaled={false}
+              scaledOptions={false}
+              isAside={isMobile}
+              withBlur={isMobile}
+              isLoading={isRoleChanging}
+              isMobileView={isMobileOnly}
+              shouldShowBackdrop={isMobile}
+              dataTestId="private_member_role_combobox"
+            />
+          ) : (
+            <TooltipContainer
+              as="div"
+              className={styles.roleLabel}
+              title={t("Common:Role")}
+            >
+              {selectedRole.label}
+            </TooltipContainer>
+          )}
+        </div>
       ) : null}
       {canRemove && !isOwner ? (
         <IconButton

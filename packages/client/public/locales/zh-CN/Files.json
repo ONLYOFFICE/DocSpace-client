@@ -107,7 +107,6 @@
   "Pin": "置顶",
   "Protected": "受保护",
   "RecentlyOpenedTooltip": "最近通过链接打开",
-  "ReEncryptingFiles": "正在重新加密文件",
   "RemovedFromRecent": "从“最近”移除",
   "Reorder": "重新排序",
   "ReorderIndex": "重新排序操作将移除索引中的空格。文件将按顺序重新编制索引，并使用偏移量填补缺失的索引。",

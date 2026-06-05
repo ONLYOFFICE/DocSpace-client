@@ -122,6 +122,7 @@ export interface InjectedEmptyViewContainerProps
   tenantAlias: string;
   baseDomain: string | null;
   socialAuthUser: TStore["userStore"]["user"];
+  isGracePeriod: boolean;
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &

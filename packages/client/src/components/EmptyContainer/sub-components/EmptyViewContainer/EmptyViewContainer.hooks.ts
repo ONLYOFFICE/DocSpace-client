@@ -207,6 +207,7 @@ export const useOptions = (
     aiReady,
     standalone,
     isPortalAdmin,
+    isGracePeriod,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -281,11 +282,16 @@ export const useOptions = (
   }, [isWarningRoomsDialog, setQuotaWarningDialogVisible, selectedFolder?.id]);
 
   const onCreateAIAgent = useCallback(() => {
+    if (isGracePeriod) {
+      setQuotaWarningDialogVisible(true);
+      return;
+    }
+
     const event = new CustomEvent(Events.AGENT_CREATE, {
       detail: { parentId: selectedFolder?.id, context: "empty_state" },
     });
     window.dispatchEvent(event);
-  }, [isWarningRoomsDialog, setQuotaWarningDialogVisible, selectedFolder?.id]);
+  }, [isGracePeriod, setQuotaWarningDialogVisible, selectedFolder?.id]);
 
   const openInfoPanel = useCallback(() => {
     if (!isVisibleInfoPanel) setVisibleInfoPanel?.(true);

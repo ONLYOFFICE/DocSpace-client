@@ -29,15 +29,23 @@
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
+import { DeviceType } from "@docspace/shared/enums";
 import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import { AiChatPanelHeader } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
 import { useAiChatStore } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
+
+import useDeviceType from "@/hooks/useDeviceType";
 
 export const DocsChatHeaderPanel = observer(() => {
   const { t } = useTranslation(["Common"]);
   const store = useAiChatStore();
   const stores = useStores();
   const goToChat = stores.useRouter((s) => s.goToChat);
+
+  // On tablet/mobile the chat panel always occupies the full screen, so the
+  // fullscreen toggle is redundant — omitting the handler hides the button.
+  const { currentDeviceType } = useDeviceType();
+  const isMobileOrTablet = currentDeviceType !== DeviceType.desktop;
 
   // On settings/initial-setup pages with profiles configured: drop back
   // to chat but keep the panel open. Without profiles: close the panel
@@ -58,7 +66,9 @@ export const DocsChatHeaderPanel = observer(() => {
       title={t("Common:AIChatButton")}
       onClose={handleClose}
       isFullscreen={store.effectiveFullscreen}
-      onToggleFullscreen={store.toggleFullscreen}
+      onToggleFullscreen={
+        isMobileOrTablet ? undefined : store.toggleFullscreen
+      }
       isFullscreenToggleDisabled={store.isFullscreenToggleDisabled}
     />
   );

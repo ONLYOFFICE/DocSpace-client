@@ -560,24 +560,10 @@ const DocsLayout = observer(
                                     />
                                   }
                                   infoPanelHeaderContent={
-                                    isAiChatPanelVisible ? (
-                                      <DocsChatHeaderPanel />
-                                    ) : (
-                                      <DocsInfoPanelHeader />
-                                    )
+                                    <DocsInfoPanelHeader />
                                   }
-                                  infoPanelBodyContent={
-                                    isAiChatPanelVisible ? (
-                                      <DocsChatBodyPanel />
-                                    ) : (
-                                      <DocsInfoPanelBody />
-                                    )
-                                  }
-                                  isInfoPanelVisible={
-                                    infoPanelStore.isVisible ||
-                                    isAiChatPanelVisible
-                                  }
-                                  infoPanelWithoutScroll={isAiChatPanelVisible}
+                                  infoPanelBodyContent={<DocsInfoPanelBody />}
+                                  isInfoPanelVisible={infoPanelStore.isVisible}
                                   setIsInfoPanelVisible={(v: boolean) => {
                                     if (v) {
                                       if (!infoPanelStore.isVisible) {
@@ -586,6 +572,16 @@ const DocsLayout = observer(
                                     } else {
                                       infoPanelStore.close();
                                     }
+                                  }}
+                                  chatPanelContent={
+                                    <>
+                                      <DocsChatHeaderPanel />
+                                      <DocsChatBodyPanel />
+                                    </>
+                                  }
+                                  isChatPanelVisible={isAiChatPanelVisible}
+                                  setIsChatPanelVisible={(v: boolean) => {
+                                    if (!v) aiChatStore.close();
                                   }}
                                   isEmptyPage={isEmptyList}
                                   filesFilter={filesFilter}

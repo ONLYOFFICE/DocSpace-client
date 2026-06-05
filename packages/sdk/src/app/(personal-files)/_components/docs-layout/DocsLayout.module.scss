@@ -9,11 +9,10 @@
 }
 
 .root[data-layout-mode="ai-fullscreen"] {
-  --info-panel-width: 100vw;
-  --info-panel-tablet-width: 100vw;
+  --chat-panel-width: 100vw;
 
   // The chat panel takes over the whole layout. The files section (#section)
-  // and the info panel are siblings in the same flex row, so widening the
+  // and the chat panel are siblings in the same flex row, so widening the
   // panel to 100vw isn't enough on its own: #section has min-width:auto, and
   // its content (the "Create new" banner + file list) imposes a min-content
   // floor that flexbox can't shrink past — the 100vw panel ends up squeezed
@@ -21,7 +20,10 @@
   // panel fills the viewport.
   //
   // Safe to apply unconditionally here: `ai-fullscreen` is only set when the
-  // chat panel is actually visible (see `layoutMode` in index.tsx).
+  // chat panel is actually visible (see `layoutMode` in index.tsx). This is a
+  // desktop-only concern: on tablet/mobile the chat panel is a fixed-position
+  // full-screen overlay (see `.chatPanel` in ui-kit Section), so it covers the
+  // section regardless of the flex row.
   :global(#section) {
     flex: 0 0 0 !important;
     min-width: 0 !important;
@@ -29,7 +31,7 @@
     overflow: hidden;
   }
 
-  :global(.info-panel) {
+  :global(.chat-panel) {
     max-width: 100vw !important;
   }
 }

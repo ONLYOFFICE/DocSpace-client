@@ -380,7 +380,10 @@ export default function withFileActions(WrappedFileItem) {
         isExternalShareRestricted,
         itemHasExternalLinks,
       );
-      const badgeIconColor = "var(--info-panel-link-blocked)";
+      const badgeIconColor =
+        isExternalShareRestricted && itemHasExternalLinks && badgeUrl
+          ? "var(--info-panel-link-blocked)"
+          : undefined;
 
       return (
         <WrappedFileItem

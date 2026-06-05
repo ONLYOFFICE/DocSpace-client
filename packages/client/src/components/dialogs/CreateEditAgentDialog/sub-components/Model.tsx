@@ -34,6 +34,7 @@
  */
 
 import React from "react";
+import { useNavigate } from "react-router";
 import { Trans, useTranslation } from "react-i18next";
 import axios from "axios";
 import classNames from "classnames";
@@ -54,6 +55,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { RecomendedModel } from "@docspace/ui-kit/ai-agent/recomended-model";
 
 import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 import { modelCache } from "./modelCache";
@@ -62,15 +64,26 @@ import { ProviderType } from "@docspace/shared/api/ai/enums";
 type ModelSettingsProps = {
   agentParams: TAgentParams;
   systemAiEnabled?: TAIConfig["systemAiEnabled"];
+  recommendedModelForForms?: TAIConfig["recommendedModelForForms"];
+  isAdmin?: boolean;
+  openedFromChat?: boolean;
   setAgentParams: (value: Partial<TAgentParams>) => void;
 };
 
 const ModelSettings = ({
   agentParams,
   systemAiEnabled,
+  recommendedModelForForms,
+  isAdmin,
+  openedFromChat,
   setAgentParams,
 }: ModelSettingsProps) => {
   const { t } = useTranslation(["Common"]);
+  const navigate = useNavigate();
+
+  const onOpenSettings = React.useCallback(() => {
+    navigate("/portal-settings/ai-settings/providers");
+  }, [navigate]);
 
   const [providers, setProviders] = React.useState<TAiProvider[]>([]);
   const [models, setModels] = React.useState<TModel[]>([]);
@@ -334,6 +347,51 @@ const ModelSettings = ({
     [models],
   );
 
+  const onSelectRecomendedModel = React.useCallback(async () => {
+    // Current provider is OpenRouter — pick the recommended model.
+    if (selectedProvider?.type === ProviderType.OpenRouter) {
+      const recomended = models.find(
+        (model) => model.modelId === recommendedModelForForms,
+      );
+
+      if (recomended) setSelectedModel(recomended);
+
+      return;
+    }
+
+    // Otherwise switch to the first available OpenRouter provider and select
+    // its recommended model (loading the model list if needed). Caching the
+    // models before switching lets the models effect keep our selection
+    // instead of falling back to the provider's default.
+    const openRouterProvider = providers.find(
+      (provider) => provider.type === ProviderType.OpenRouter,
+    );
+
+    if (!openRouterProvider || openRouterProvider.id === selectedProvider?.id)
+      return;
+
+    let providerModels = modelCache.getModels(openRouterProvider.id);
+
+    if (!providerModels) {
+      try {
+        providerModels = await getModels(openRouterProvider.id);
+        modelCache.setModels(openRouterProvider.id, providerModels);
+      } catch {
+        providerModels = [];
+      }
+    }
+
+    const recomended =
+      providerModels.find(
+        (model) => model.modelId === recommendedModelForForms,
+      ) ?? null;
+
+    setSelectedProvider(openRouterProvider);
+    setSelectedModel(recomended);
+    setError(null);
+    setHasProviderBeenSwitched(true);
+  }, [selectedProvider, providers, models, recommendedModelForForms]);
+
   React.useEffect(() => {
     if (!selectedModel && !error) return;
 
@@ -365,6 +423,18 @@ const ModelSettings = ({
       !selectedModel?.modelId &&
       !error &&
       !hasProviderBeenSwitched);
+
+  const availableProviders = providers.map((provider) => provider.type);
+  const modelIds = models.map((model) => model.modelId);
+
+  // Show the recommendation banner only when the dialog was opened from the
+  // chat recommendation banner, and not until providers and models are loaded
+  // (otherwise it briefly flashes the wrong, not-available state).
+  const isRecomendationReady =
+    openedFromChat &&
+    isProvidersFetched &&
+    !isProvidersLoading &&
+    !isModelLoading;
 
   return (
     <StyledParam increaseGap>
@@ -403,6 +473,21 @@ const ModelSettings = ({
             />
           </Text>
         </div>
+
+        {isRecomendationReady ? (
+          <RecomendedModel
+            isAdmin={!!isAdmin}
+            isChat={false}
+            selectedModel={selectedModel?.modelId ?? ""}
+            providerType={selectedProvider?.type}
+            availableProviders={availableProviders}
+            modelList={modelIds}
+            recomendedModel={recommendedModelForForms ?? ""}
+            onOpenSettings={onOpenSettings}
+            onSelectModel={onSelectRecomendedModel}
+          />
+        ) : null}
+
         {isProvidersLoading ? (
           <RectangleSkeleton width="100%" height="32px" />
         ) : (

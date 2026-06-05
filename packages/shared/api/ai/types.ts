@@ -188,6 +188,10 @@ export type TUpdateDefaultProviderData = {
   defaultModel: TModel["modelId"];
 };
 
+export type TAIUserConfig = {
+  chatRecommendedModelVisible: boolean;
+};
+
 export type TModelSettingsItem = {
   modelId: string;
   isEnabled: boolean;

@@ -34,6 +34,7 @@
  */
 
 @use "@docspace/ui-kit/styles/mixins";
+@use "@docspace/ui-kit/styles/variables/colors" as *;
 
 .wrapper {
   .content {
@@ -46,7 +47,7 @@
 
   @include mixins.mobile {
     width: calc(100% - 16px);
-    
+
     &.hideTabs {
       :global(.sticky),
       :global(.sticky-indent) {
@@ -55,14 +56,18 @@
     }
   }
 
-  :global(:not(.isEnableBranding)){
+  :global(:not(.isEnableBranding)) {
     :global(.settings_unavailable) {
       color: var(--management-disable-color) !important;
       pointer-events: none;
       cursor: default;
-      
+
       p {
         color: var(--management-disable-color) !important;
+      }
+
+      :global(.paid-badge) p {
+        color: #{$white} !important;
       }
 
       label {
@@ -73,11 +78,11 @@
         fill: var(--management-disable-color) !important;
       }
 
-      :global(.wl-helper-label){
+      :global(.wl-helper-label) {
         color: var(--management-disable-color) !important;
       }
-      
-      :global(.section-description){
+
+      :global(.section-description) {
         color: var(--management-disable-color) !important;
       }
     }

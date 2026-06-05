@@ -64,7 +64,6 @@ import { logger } from "../../logger.mjs";
 
 const MANAGEMENT_NAMESPACES = ["Management"] as const;
 
-
 export default async function RootLayout({
   children,
 }: {
@@ -88,9 +87,21 @@ export default async function RootLayout({
     redirect(`${baseURL}/${settings}`);
   }
 
+  if (settings && !settings.standalone) {
+    logger.info("Management layout not available: SaaS mode");
+
+    redirect(`${baseURL}/error/403`);
+  }
+
+  if (!settings || !user) {
+    logger.info("Management layout error/403: settings or user unavailable");
+
+    redirect(`${baseURL}/error/403`);
+  }
+
   if (
-    (user && !user.isAdmin && !user.isOwner) ||
-    (settings && settings.limitedAccessSpace) ||
+    (!user.isAdmin && !user.isOwner) ||
+    settings.limitedAccessSpace ||
     !portalTariff
   ) {
     logger.info("Management layout error/403");
@@ -114,8 +125,12 @@ export default async function RootLayout({
 
   const translations = await loadTranslationsForLocale(locale, {
     namespaces: MANAGEMENT_NAMESPACES,
-    appLocalesDir: process.env.NEXT_APP_LOCALES_DIR ?? path.join(process.cwd(), "public/locales"),
-    sharedLocalesDir: process.env.NEXT_SHARED_LOCALES_DIR ?? path.join(process.cwd(), "../../public/locales"),
+    appLocalesDir:
+      process.env.NEXT_APP_LOCALES_DIR ??
+      path.join(process.cwd(), "public/locales"),
+    sharedLocalesDir:
+      process.env.NEXT_SHARED_LOCALES_DIR ??
+      path.join(process.cwd(), "../../public/locales"),
   });
 
   const { openSource } = portalTariff;
@@ -151,8 +166,8 @@ export default async function RootLayout({
           }}
         >
           <Toast isSSR />
-          <ManagementDialogs settings={settings!} user={user!} />
-          <LayoutWrapper portals={portals!} isCommunity={openSource}>
+          <ManagementDialogs settings={settings} user={user} />
+          <LayoutWrapper portals={portals} isCommunity={openSource}>
             {children}
           </LayoutWrapper>
         </Providers>
@@ -161,3 +176,4 @@ export default async function RootLayout({
     </html>
   );
 }
+

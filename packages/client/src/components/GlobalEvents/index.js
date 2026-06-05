@@ -243,6 +243,7 @@ const GlobalEvents = ({
     setEditAgentDialogProps({
       visible,
       item: e.item,
+      context: e.context || e.detail?.context || "",
       onClose: () => {
         setCover();
         setEditAgentDialogProps({

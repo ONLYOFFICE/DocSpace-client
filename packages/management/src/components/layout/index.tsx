@@ -52,7 +52,7 @@ export const LayoutWrapper = ({
   isCommunity,
 }: {
   children: React.ReactNode;
-  portals: TGetAllPortals;
+  portals: TGetAllPortals | undefined;
   isCommunity: boolean;
 }) => {
   const { settings } = useAppState();

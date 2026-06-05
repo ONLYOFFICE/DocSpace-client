@@ -281,11 +281,6 @@ export const useOptions = (
   }, [isWarningRoomsDialog, setQuotaWarningDialogVisible, selectedFolder?.id]);
 
   const onCreateAIAgent = useCallback(() => {
-    if (isWarningRoomsDialog) {
-      setQuotaWarningDialogVisible(true);
-      return;
-    }
-
     const event = new CustomEvent(Events.AGENT_CREATE, {
       detail: { parentId: selectedFolder?.id, context: "empty_state" },
     });

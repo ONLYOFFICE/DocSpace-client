@@ -1018,6 +1018,8 @@
   "PaymentMethod": "Payment method",
   "PaymentMethodDesc": "Linked to your {{productName}} wallet",
   "PaymentMethodUnlinked": "Payment method unlinked",
+  "PaymentMethodUnlinkedBanner": "<1>Payment method unlinked.</1> To add one, please follow this link. <2>Add payment method</2>",
+  "PaymentMethodUnlinkedEmailBanner": "<1>Payment method unlinked.</1> To add one, please contact the payer <2>{{email}}</2>",
   "PaymentsTitle": "Payments",
   "PDFs": "PDFs",
   "People": "People",

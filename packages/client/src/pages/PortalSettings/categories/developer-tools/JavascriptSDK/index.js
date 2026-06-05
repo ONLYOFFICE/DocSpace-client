@@ -214,7 +214,6 @@ export default inject(({ settingsStore }) => {
   withTranslation([
     "JavascriptSdk",
     "Files",
-    "EmbeddingPanel",
     "CreateEditRoomDialog",
     "Common",
   ])(observer(PortalIntegration)),

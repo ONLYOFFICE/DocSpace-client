@@ -72,7 +72,7 @@ export const WidthSetter = (props) => {
 
   return (
     <ControlsGroup>
-      <Label className="label" text={t("EmbeddingPanel:Width")} />
+      <Label className="label" text={t("Common:Width")} />
       <RowContainer combo>
         <TextInput
           name="embed_width"

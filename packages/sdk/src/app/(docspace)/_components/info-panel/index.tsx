@@ -118,7 +118,9 @@ export const InfoPanelEmbeddingDialog = observer(
     const infoPanelStore = useInfoPanelStore();
     const { embeddingPanelData, linkParams } = infoPanelStore;
 
-    if (!embeddingPanelData?.visible || !linkParams) return null;
+    const item = embeddingPanelData?.item ?? linkParams?.item;
+
+    if (!embeddingPanelData?.visible || !item) return null;
 
     return <EmbeddingPanel isAdmin={isAdmin} />;
   },

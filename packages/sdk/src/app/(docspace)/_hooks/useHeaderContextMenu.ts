@@ -53,6 +53,7 @@ import { InfoContext } from "../_contexts/InfoContext";
 import { ShareContext } from "../_contexts/ShareContext";
 import { useDialogsStore } from "../_store/DialogsStore";
 import { useInfoPanelStore, InfoPanelView } from "../_store/InfoPanelStore";
+import { normalizeRoomLogo } from "../_utils/getRoomIconLogo";
 import useItemContextMenu from "./useItemContextMenu";
 import useContextMenuModel from "./useContextMenuModel";
 import useRoomContextMenuModel from "@/app/(rooms)/_hooks/useRoomContextMenuModel";
@@ -121,12 +122,11 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
   );
 
   const onInfoRoom = useCallback(
-    (_item: TFolderItem | TFileItem) => {
-      if (!current) return;
-      infoPanelStore.open(current as TFolder);
+    (item: TFolderItem | TFileItem) => {
+      infoPanelStore.open(item as unknown as TFolder);
       infoPanelStore.setView(InfoPanelView.infoDetails);
     },
-    [current, infoPanelStore],
+    [infoPanelStore],
   );
 
   const onInviteRoom = useCallback((item: TFolderItem | TFileItem) => {
@@ -159,6 +159,9 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
     // isHeader: true — "open" is excluded at the source (see useItemContextMenu)
     const contextOptions = getFoldersContextMenu(current, { isHeader: true });
 
+    const rawLogo = (current as unknown as { logo?: TLogo }).logo;
+    const { roomLogo, roomIconColor, hasRoomImage } = normalizeRoomLogo(rawLogo);
+
     return {
       ...current,
       isFolder: true as const,
@@ -166,9 +169,9 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
       icon: "" as string,
       contextOptions,
       isRoom,
-      roomLogo: undefined,
-      roomIconColor: undefined as string | undefined,
-      hasRoomImage: false as const,
+      roomLogo,
+      roomIconColor,
+      hasRoomImage,
     } as unknown as TFolderItem;
   }, [current, getFoldersContextMenu, isRoom]);
 

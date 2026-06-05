@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+@use "@docspace/ui-kit/styles/variables/colors" as *;
+
 .branding {
   max-width: 700px;
   width: 100%;
@@ -66,14 +68,18 @@
     border-top: var(--settings-backup-separator-border);
   }
 
-  &:global(:not(.isEnableBranding)){
+  &:global(:not(.isEnableBranding)) {
     &:global(.settings_unavailable) {
       color: var(--management-disable-color) !important;
       pointer-events: none;
       cursor: default;
-      
+
       p {
         color: var(--management-disable-color) !important;
+      }
+
+      :global(.paid-badge) p {
+        color: #{$white} !important;
       }
 
       label {
@@ -84,11 +90,11 @@
         fill: var(--management-disable-color) !important;
       }
 
-      :global(.wl-helper-label){
+      :global(.wl-helper-label) {
         color: var(--management-disable-color) !important;
       }
-      
-      :global(.section-description){
+
+      :global(.section-description) {
         color: var(--management-disable-color) !important;
       }
     }

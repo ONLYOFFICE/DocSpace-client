@@ -56,15 +56,15 @@ export const Section = ({
   portals,
 }: {
   children: React.ReactNode;
-  portals: TGetAllPortals;
+  portals: TGetAllPortals | undefined;
 }) => {
   const pathname = usePathname();
   const router = useRouter();
   const { t } = useTranslation(["Management", "Common"]);
-  const { tenants } = portals;
+  const tenants = portals?.tenants;
   const showBar = pathname.includes("settings");
   const barTitle =
-    tenants?.length > 1 ? t("SettingsForAll") : t("SettingsDisabled");
+    (tenants?.length ?? 0) > 1 ? t("SettingsForAll") : t("SettingsDisabled");
 
   const onBack = () => {
     router.back();

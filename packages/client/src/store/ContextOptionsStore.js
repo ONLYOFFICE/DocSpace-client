@@ -1911,6 +1911,11 @@ class ContextOptionsStore {
     const primaryLink = await ShareLinkService.getPrimaryLink(item);
 
     if (primaryLink) {
+      if (primaryLink.sharedTo?.isExpired) {
+        toastr.error(t("Common:LinkExpired"));
+        return;
+      }
+
       if (this.filesSettingsStore.isLinkBlockedByAdmin(item, primaryLink)) {
         toastr.error(t("Common:LinkBlockedByAdminWarning"));
         return;

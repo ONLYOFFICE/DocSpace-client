@@ -182,7 +182,8 @@
       "options": {
         "env": {
           "SKIP_CLIENT": "true",
-          "STORYBOOK": "false"
+          "STORYBOOK": "false",
+          "APP_EDITION": "developer"
         }
       },
       "type": "shell",

@@ -41,6 +41,8 @@ import type {
 import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TSortBy, TCreatedBy } from "@docspace/shared/types";
+import type { TLogo } from "@docspace/ui-kit/types";
+import { normalizeRoomLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
 import {
   DeviceType,
   FolderType,
@@ -463,6 +465,15 @@ const RoomsList = ({
           updatedRoom as unknown as TFolder,
         );
         filesListStore.replaceItem(roomId, updatedItem);
+        if (infoPanelStore.selection?.id === roomId) {
+          const rawLogo = (updatedRoom as unknown as { logo?: TLogo }).logo;
+          infoPanelStore.setSelection({
+            ...(updatedRoom as unknown as TFolder),
+            isRoom: true,
+            ...normalizeRoomLogo(rawLogo),
+          } as unknown as TFolder);
+        }
+
         const updatedTags = (updatedRoom as unknown as { tags?: string[] })
           .tags;
         if (Array.isArray(updatedTags) && updatedTags.length > 0) {
@@ -472,7 +483,7 @@ const RoomsList = ({
         // ignore
       }
     },
-    [convertFolderToItem, filesListStore, tagsStore],
+    [convertFolderToItem, filesListStore, infoPanelStore, tagsStore],
   );
 
   const requestRunning = React.useRef(false);

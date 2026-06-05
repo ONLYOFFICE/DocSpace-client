@@ -1523,6 +1523,7 @@
   "WalletBalance": "Wallet balance",
   "WalletRefilled": "Wallet refilled",
   "WalletSectionDescription": "The {{productName}} Wallet allows you to easily purchase services such as storage, AI tools, and backups. Add funds and select the services you need to get started.",
+  "WalletSectionDescriptionAddons": "The Wallet allows you to easily purchase add-ons such as storage, AI tools, and backups. Add credits and select the <1>add-ons</1> you need to get started.",
   "WalletToppedUp": "Wallet has been successfully topped up",
   "WalletTopUpCallbackErrorHint": "Your card was saved successfully. Please try topping up your wallet again.",
   "WalletTopUpCallbackProcessingHint": "We're processing your payment. This usually takes a few seconds.",

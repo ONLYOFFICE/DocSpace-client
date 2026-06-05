@@ -125,7 +125,7 @@ const PaymentsPage = (props) => {
     {
       id: TAB_IDS.WALLET,
       name: t("Common:Wallet"),
-      content: <Wallet />,
+      content: <Wallet onViewUsage={() => onSelect({ id: TAB_IDS.USAGE })} />,
       onClick: () => {
         clearAbortControllerArr();
       },

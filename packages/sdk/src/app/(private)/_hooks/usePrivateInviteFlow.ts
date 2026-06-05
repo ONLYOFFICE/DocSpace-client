@@ -63,11 +63,34 @@ type UsePrivateInviteFlowReturn = {
   onInviteSubmitted: (
     args: InviteAfterSubmitArgs,
   ) => Promise<void>;
+  /**
+   * Pre-submit identity gate for use as InvitePanel's `onBeforeSubmit` prop.
+   * Calls requireIdentity(); on null (locked / user cancelled) shows the
+   * `EncryptionLockedAddMembers` toast and returns false, preventing
+   * setRoomSecurity from being called with locked keys.
+   */
+  onBeforeSubmit: () => Promise<boolean>;
   isLoading: boolean;
 };
 
 const loadRoomEncryption = () =>
   import("@docspace/shared/services/private-room/room-encryption");
+
+/**
+ * Returns true when a re-encryption error should be treated as a silent
+ * abort: either the controller was already aborted before the error was
+ * thrown, or the error itself is a DOM/Node AbortError.
+ *
+ * Exported for unit testing.
+ */
+export function isReencryptAbortError(
+  controller: AbortController,
+  error: unknown,
+): boolean {
+  if (controller.signal.aborted) return true;
+  if (error instanceof Error && error.name === "AbortError") return true;
+  return false;
+}
 
 export const usePrivateInviteFlow = (): UsePrivateInviteFlowReturn => {
   const { t } = useTranslation(["Common"]);
@@ -114,6 +137,11 @@ export const usePrivateInviteFlow = (): UsePrivateInviteFlowReturn => {
             t("Common:EncryptionInviteSkippedMembers", { names }),
           );
         }
+      } catch (error) {
+        // Abort (user locked / navigated away) is expected — stay silent.
+        if (!isReencryptAbortError(controller, error)) {
+          toastr.error(t("Common:EncryptedReencryptFailed"));
+        }
       } finally {
         releaseCryptoOperation(controller);
         setIsLoading(false);
@@ -122,5 +150,17 @@ export const usePrivateInviteFlow = (): UsePrivateInviteFlowReturn => {
     [requireIdentity, identityStore, t],
   );
 
-  return { onInviteSubmitted, isLoading };
+  // Pre-submit guard wired to InvitePanel's onBeforeSubmit prop. Runs BEFORE
+  // setRoomSecurity so that server access is never granted when encryption keys
+  // are absent or locked. Mirrors packages/client InvitePanel:452-459 pattern.
+  const onBeforeSubmit = React.useCallback(async (): Promise<boolean> => {
+    const identity = await requireIdentity();
+    if (!identity) {
+      toastr.error(t("Common:EncryptionLockedAddMembers"));
+      return false;
+    }
+    return true;
+  }, [requireIdentity, t]);
+
+  return { onInviteSubmitted, onBeforeSubmit, isLoading };
 };

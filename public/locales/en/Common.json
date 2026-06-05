@@ -1533,6 +1533,8 @@
   "PrivateRoomKeyRequiredDescription": "Private rooms use end-to-end encryption. To continue, you need an encryption key. Would you like to create one now?",
   "PrivateRoomKeyRequiredTitle": "Encryption key required",
   "PrivateRoomMixedDownloadNotSupported": "You cannot download encrypted and unencrypted files at the same time.",
+  "PrivateRoomNotFoundDescription": "The private room you are looking for does not exist or you do not have access.",
+  "PrivateRoomNotFoundTitle": "Not found",
   "PrivateRoomRenameNotSupported": "Renaming encrypted files is not supported yet.",
   "PrivateRoomTitle": "Private Room",
   "ProcessDetails": "Process details",

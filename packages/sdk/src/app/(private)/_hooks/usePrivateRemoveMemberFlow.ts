@@ -41,6 +41,7 @@ import { useTranslation } from "react-i18next";
 import api from "@docspace/shared/api";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 
 import { useActiveEncryptedUploadsForRoom } from "../_store/PrivateEncryptedUploadStore";
 import {
@@ -111,14 +112,13 @@ export const usePrivateRemoveMemberFlow = (
         const { revokeMemberFromEncryptedRoom } = await loadRoomEncryption();
         await revokeMemberFromEncryptedRoom(Number(targetRoomId), userId, {});
       } catch (error) {
-        const msg = error instanceof Error ? error.message : String(error);
-        toastr.error(msg);
+        toastr.error(getEncryptionErrorMessage(t, error));
       } finally {
         releaseCryptoOperation(controller);
         setIsLoading(false);
       }
     },
-    [guardReason],
+    [guardReason, t],
   );
 
   return { remove, guardReason, isLoading };

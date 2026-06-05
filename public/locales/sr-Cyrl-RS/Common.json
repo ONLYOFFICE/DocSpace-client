@@ -1387,6 +1387,8 @@
   "OpenSavedDocument": "Отвори сачуван документ у новој картици",
   "OperationStopped": "Операција је заустављена",
   "Or": "или",
+  "PrivateRoomNotFoundDescription": "Приватна соба коју тражите не постоји или немате приступ.",
+  "PrivateRoomNotFoundTitle": "Није пронађено",
   "RoomNotificationsDisabled": "Нотификације собе онемогућене",
   "RoomNotificationsEnabled": "Нотификације собе омогућене",
   "RoomPinned": "Соба закачена",

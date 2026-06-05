@@ -55,8 +55,15 @@ type useItemListProps = {
   isDocsSection?: boolean;
   isShareSection?: boolean;
   withoutFavorite?: boolean;
-  /** Filters per-item contextOptions to this whitelist. */
+  /** Filters per-item contextOptions to this whitelist (applies to files). */
   allowedContextOptions?: ReadonlySet<string>;
+  /**
+   * Separate whitelist for folder context options. When provided it overrides
+   * `allowedContextOptions` for folders, allowing callers to give files and
+   * folders different action sets (e.g. private rooms hide 'duplicate' from
+   * folders but keep it for files).
+   */
+  allowedFolderContextOptions?: ReadonlySet<string>;
 
   getIcon: ReturnType<typeof useItemIcon>["getIcon"];
 };
@@ -71,6 +78,7 @@ export default function useItemList({
   isShareSection,
   withoutFavorite,
   allowedContextOptions,
+  allowedFolderContextOptions,
 }: useItemListProps) {
   const { getFilesContextMenu, getFoldersContextMenu } = useItemContextMenu({
     isFavoritesSection,
@@ -142,8 +150,12 @@ export default function useItemList({
       const icon = getIcon();
 
       const rawContextOptions = getFoldersContextMenu(folder);
-      const contextOptions = allowedContextOptions
-        ? rawContextOptions.filter((k) => allowedContextOptions.has(k))
+      // Use the folder-specific whitelist when provided; fall back to the
+      // shared one so callers that only pass allowedContextOptions still work.
+      const folderAllowed =
+        allowedFolderContextOptions ?? allowedContextOptions;
+      const contextOptions = folderAllowed
+        ? rawContextOptions.filter((k) => folderAllowed.has(k))
         : rawContextOptions;
 
       const rawLogo = (folder as unknown as { logo?: TLogo }).logo;
@@ -163,7 +175,12 @@ export default function useItemList({
         hasRoomImage,
       };
     },
-    [getFoldersContextMenu, getIcon, allowedContextOptions],
+    [
+      getFoldersContextMenu,
+      getIcon,
+      allowedContextOptions,
+      allowedFolderContextOptions,
+    ],
   );
 
   return { convertFileToItem, convertFolderToItem };

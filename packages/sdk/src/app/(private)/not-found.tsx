@@ -35,7 +35,11 @@
 
 "use client";
 
+import { useTranslation } from "react-i18next";
+
 export default function PrivateNotFound() {
+  const { t } = useTranslation(["Common"]);
+
   return (
     <div
       style={{
@@ -49,10 +53,11 @@ export default function PrivateNotFound() {
         gap: 8,
       }}
     >
-      <h2 style={{ margin: 0 }}>Not found</h2>
+      <h2 style={{ margin: 0 }}>
+        {t("Common:PrivateRoomNotFoundTitle")}
+      </h2>
       <p style={{ margin: 0, opacity: 0.7 }}>
-        The private room you are looking for does not exist or you do not have
-        access.
+        {t("Common:PrivateRoomNotFoundDescription")}
       </p>
     </div>
   );

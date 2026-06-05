@@ -1387,6 +1387,8 @@
   "OpenSavedDocument": "Ouvrir le document enregistré dans un nouvel onglet",
   "OperationStopped": "L'opération a été arrêtée",
   "Or": "ou",
+  "PrivateRoomNotFoundDescription": "La salle privée que vous recherchez n'existe pas ou vous n'y avez pas accès.",
+  "PrivateRoomNotFoundTitle": "Introuvable",
   "RoomNotificationsDisabled": "Notifications de salle désactivées",
   "RoomNotificationsEnabled": "Notifications de salle activées",
   "RoomPinned": "Salle épinglée",

@@ -258,6 +258,13 @@ export default function useFileOperations() {
         return;
       }
 
+      // Folders cannot be duplicated inside a private room — the server would
+      // create an unencrypted copy of the folder tree. Reference:
+      // packages/client/src/store/FilesActionsStore.js:1616-1618
+      if (item.isFolder && encryptedActions) {
+        return;
+      }
+
       const fileIds = item.isFolder ? [] : [item.id as number];
       const folderIds = item.isFolder ? [item.id as number] : [];
 

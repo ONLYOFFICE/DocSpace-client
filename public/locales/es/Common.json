@@ -1387,6 +1387,8 @@
   "OpenSavedDocument": "Abrir el documento guardado en una nueva pestaña",
   "OperationStopped": "La operación ha sido detenida",
   "Or": "o",
+  "PrivateRoomNotFoundDescription": "La sala privada que busca no existe o usted no tiene acceso.",
+  "PrivateRoomNotFoundTitle": "No encontrado",
   "RoomNotificationsDisabled": "Las notificaciones de la sala están desactivadas",
   "RoomNotificationsEnabled": "Las notificaciones de la sala están activadas",
   "RoomPinned": "Se ha anclado la sala",

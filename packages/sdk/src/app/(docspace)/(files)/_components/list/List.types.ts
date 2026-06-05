@@ -55,6 +55,11 @@ export type ListProps = {
   infoPanelVisible?: boolean;
   /** Whitelist of context-menu action keys; filters per-item contextOptions. */
   allowedContextOptions?: ReadonlySet<string>;
+  /**
+   * Separate whitelist applied only to folder items. When set, folders use
+   * this instead of `allowedContextOptions` (see useItemList for details).
+   */
+  allowedFolderContextOptions?: ReadonlySet<string>;
   emptyView?: React.ReactNode;
   /** Adds the encrypted-shield overlay to every file/folder icon. */
   isPrivate?: boolean;

@@ -40,6 +40,7 @@ import { useTranslation } from "react-i18next";
 
 import { useEncryption } from "@docspace/shared/context/encryption";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import { getFolder, deleteFile } from "@docspace/shared/api/files";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TGetFolder } from "@docspace/shared/api/files/types";
@@ -128,8 +129,7 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
         await uploadFiles({ files: [copyFile], folderId, roomId });
       } catch (error) {
         if (controller.signal.aborted) return;
-        const msg = error instanceof Error ? error.message : String(error);
-        toastr.error(msg);
+        toastr.error(getEncryptionErrorMessage(t, error));
       } finally {
         releaseCryptoOperation(controller);
       }
@@ -199,8 +199,7 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
         }
       } catch (error) {
         if (controller.signal.aborted) return;
-        const msg = error instanceof Error ? error.message : String(error);
-        toastr.error(msg);
+        toastr.error(getEncryptionErrorMessage(t, error));
       } finally {
         releaseCryptoOperation(controller);
       }

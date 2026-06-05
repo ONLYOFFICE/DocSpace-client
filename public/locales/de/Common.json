@@ -1387,6 +1387,8 @@
   "OpenSavedDocument": "Das gespeicherte Dokument im neuen Tab öffnen",
   "OperationStopped": "Der Vorgang wurde gestoppt",
   "Or": "oder",
+  "PrivateRoomNotFoundDescription": "Der private Raum, den Sie suchen, existiert nicht, oder Sie haben keinen Zugriff darauf.",
+  "PrivateRoomNotFoundTitle": "Nicht gefunden",
   "RoomNotificationsDisabled": "Raumbenachrichtigungen deaktiviert",
   "RoomNotificationsEnabled": "Raumbenachrichtigungen aktiviert",
   "RoomPinned": "Raum angeheftet",

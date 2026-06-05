@@ -44,6 +44,7 @@ import {
   getActiveKeyId,
   selectActiveKey,
 } from "@docspace/shared/services/encryption/active-key-preference";
+import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 
 import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
 
@@ -134,6 +135,8 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
           },
           onQuotaError: (error) => {
             privateUploadStore.setQuotaErrorRaised(true);
+            // Quota errors are server-side, not crypto: keep the server
+            // message when present, fall back to the quota tooltip.
             const msg =
               error instanceof Error
                 ? error.message
@@ -143,8 +146,11 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
           onFileError: (file, error) => {
             const idx = files.indexOf(file);
             const init = initItems[idx];
-            const msg = error instanceof Error ? error.message : String(error);
-            if (init) uploadStore.setItemError(init.uniqueId, msg);
+            if (init)
+              uploadStore.setItemError(
+                init.uniqueId,
+                getEncryptionErrorMessage(t, error),
+              );
           },
           onFileComplete: (file) => {
             const idx = files.indexOf(file);
@@ -159,8 +165,7 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
           }
         }
       } catch (error) {
-        const msg = error instanceof Error ? error.message : String(error);
-        toastr.error(msg);
+        toastr.error(getEncryptionErrorMessage(t, error));
       } finally {
         privateUploadStore.releaseController(controller);
         releaseCryptoOperation(controller);

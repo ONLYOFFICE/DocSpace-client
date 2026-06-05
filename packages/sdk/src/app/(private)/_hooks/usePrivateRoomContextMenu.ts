@@ -39,11 +39,13 @@ import React from "react";
 
 import {
   PRIVATE_FILE_CONTEXT_OPTIONS,
+  PRIVATE_FOLDER_CONTEXT_OPTIONS,
   PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS,
 } from "@/app/(personal-files)/_constants/private-context-options";
 
 export {
   PRIVATE_FILE_CONTEXT_OPTIONS,
+  PRIVATE_FOLDER_CONTEXT_OPTIONS,
   PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS,
 };
 

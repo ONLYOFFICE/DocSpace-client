@@ -157,6 +157,14 @@ type InvitePanelProps = {
     memberIds: string[],
     displayNamesByMemberId: Record<string, string>,
   ) => Promise<void>;
+  /**
+   * Optional async gate called BEFORE `setRoomSecurity`. Return `true` to
+   * proceed, `false` to abort the submission without error (the callee is
+   * responsible for showing relevant UI/toasts). Private rooms use this to
+   * verify the current user's encryption keys are unlocked before the server
+   * grants room access.
+   */
+  onBeforeSubmit?: () => Promise<boolean>;
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -172,6 +180,7 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
   culture,
   onMembersUpdated,
   onInviteSubmitted,
+  onBeforeSubmit,
 }) => {
   const { t } = useTranslation([
     "InviteDialog",
@@ -527,6 +536,17 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
 
     try {
       setIsLoading(true);
+
+      // Pre-submit identity gate: callers (e.g. private rooms) can verify that
+      // encryption keys are unlocked before the server grants room access.
+      if (onBeforeSubmit) {
+        const canProceed = await onBeforeSubmit();
+        if (!canProceed) {
+          setIsLoading(false);
+          return;
+        }
+      }
+
       const result = (await api.rooms.setRoomSecurity(
         roomId,
         data,

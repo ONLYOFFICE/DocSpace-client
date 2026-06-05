@@ -73,7 +73,7 @@ export default function PrivateError({ error, reset }: ErrorBoundaryProps) {
         gap: 16,
       }}
     >
-      <h2 style={{ margin: 0 }}>Something went wrong</h2>
+      <h2 style={{ margin: 0 }}>{t("Common:SomethingWentWrong")}</h2>
       <p style={{ margin: 0, opacity: 0.7 }}>
         {error.message || "Unexpected error in private rooms client"}
       </p>

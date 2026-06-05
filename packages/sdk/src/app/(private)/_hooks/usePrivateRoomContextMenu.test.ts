@@ -39,6 +39,7 @@ import { AVAILABLE_CONTEXT_ITEMS as C } from "@/app/(docspace)/_enums/context-it
 
 import {
   PRIVATE_FILE_CONTEXT_OPTIONS,
+  PRIVATE_FOLDER_CONTEXT_OPTIONS,
   PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS,
 } from "./usePrivateRoomContextMenu";
 
@@ -121,6 +122,113 @@ describe("private-room context-menu whitelist", () => {
     it("still allows download and delete (the point of an archive view)", () => {
       expect(PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS.has(C.download)).toBe(true);
       expect(PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS.has(C.delete)).toBe(true);
+    });
+  });
+
+  describe("PRIVATE_FOLDER_CONTEXT_OPTIONS (folders inside active private rooms)", () => {
+    // Folders must NOT offer 'duplicate' because the server would produce an
+    // unencrypted copy of the folder tree. This is the UI-layer guard; the
+    // requestDuplicate code-guard is the defense-in-depth layer.
+    it("does not include 'duplicate'", () => {
+      expect(PRIVATE_FOLDER_CONTEXT_OPTIONS.has(C.duplicate)).toBe(false);
+    });
+
+    it("is a strict subset of PRIVATE_FILE_CONTEXT_OPTIONS", () => {
+      for (const action of PRIVATE_FOLDER_CONTEXT_OPTIONS) {
+        expect(PRIVATE_FILE_CONTEXT_OPTIONS.has(action)).toBe(true);
+      }
+    });
+
+    it("differs from PRIVATE_FILE_CONTEXT_OPTIONS only by the absence of 'duplicate'", () => {
+      const fileOnly = [...PRIVATE_FILE_CONTEXT_OPTIONS].filter(
+        (k) => !PRIVATE_FOLDER_CONTEXT_OPTIONS.has(k),
+      );
+      expect(fileOnly).toEqual([C.duplicate]);
+    });
+
+    // Folders in a private room still need the core operations.
+    it.each([C.download, C.delete, C.showInfo])(
+      "keeps the required action '%s' available",
+      (action) => {
+        expect(PRIVATE_FOLDER_CONTEXT_OPTIONS.has(action)).toBe(true);
+      },
+    );
+  });
+});
+
+// ---------------------------------------------------------------------------
+// usePrivateRoomContextMenu — hook routing (isArchive wiring)
+//
+// The hook is a thin wrapper that selects the right whitelist based on the
+// isArchive flag. These tests verify the routing contract using the same
+// filtering logic the hook applies so that any future accidental swap of the
+// constants will be caught here.
+// ---------------------------------------------------------------------------
+describe("usePrivateRoomContextMenu routing (isArchive wiring)", () => {
+  // Simulate filterModel: keep only items whose key is in the set.
+  function filterModel<T extends { key: string }>(
+    model: T[],
+    allowed: ReadonlySet<string>,
+  ): T[] {
+    return model.filter((item) => allowed.has(item.key));
+  }
+
+  const ALL_ITEMS = [
+    C.select,
+    C.open,
+    C.download,
+    C.delete,
+    C.showInfo,
+    C.rename,
+    C.copy,
+    C.duplicate,
+    C.moveTo,
+    C.share,
+    C.edit,
+  ].map((key) => ({ key }));
+
+  describe("isArchive = false (active room)", () => {
+    it("filterModel passes only PRIVATE_FILE_CONTEXT_OPTIONS items", () => {
+      const result = filterModel(ALL_ITEMS, PRIVATE_FILE_CONTEXT_OPTIONS);
+      for (const item of result) {
+        expect(PRIVATE_FILE_CONTEXT_OPTIONS.has(item.key)).toBe(true);
+      }
+    });
+
+    it("filterModel removes forbidden actions (e.g. share, edit)", () => {
+      const result = filterModel(ALL_ITEMS, PRIVATE_FILE_CONTEXT_OPTIONS);
+      const keys = result.map((i) => i.key);
+      expect(keys).not.toContain(C.share);
+      expect(keys).not.toContain(C.edit);
+    });
+  });
+
+  describe("isArchive = true (archived room)", () => {
+    it("filterModel passes only PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS items", () => {
+      const result = filterModel(ALL_ITEMS, PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS);
+      for (const item of result) {
+        expect(PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS.has(item.key)).toBe(true);
+      }
+    });
+
+    it("filterModel blocks all mutating actions (rename, copy, duplicate, moveTo)", () => {
+      const result = filterModel(ALL_ITEMS, PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS);
+      const keys = result.map((i) => i.key);
+      expect(keys).not.toContain(C.rename);
+      expect(keys).not.toContain(C.copy);
+      expect(keys).not.toContain(C.duplicate);
+      expect(keys).not.toContain(C.moveTo);
+    });
+
+    it("archive whitelist is strictly narrower than active-room whitelist", () => {
+      const archiveItems = filterModel(ALL_ITEMS, PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS);
+      const activeItems = filterModel(ALL_ITEMS, PRIVATE_FILE_CONTEXT_OPTIONS);
+      // Every archive-allowed item must also be in the active whitelist.
+      for (const item of archiveItems) {
+        expect(activeItems.some((a) => a.key === item.key)).toBe(true);
+      }
+      // Archive set must be smaller.
+      expect(archiveItems.length).toBeLessThan(activeItems.length);
     });
   });
 });

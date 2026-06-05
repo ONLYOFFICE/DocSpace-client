@@ -120,7 +120,11 @@ import ShareSelector from "../share-selector";
 import useDocsHotkeys from "../../_hooks/useDocsHotkeys";
 
 import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
-import { PRIVATE_FILE_CONTEXT_OPTIONS } from "../../_constants/private-context-options";
+import {
+  PRIVATE_FILE_CONTEXT_OPTIONS,
+  PRIVATE_FOLDER_CONTEXT_OPTIONS,
+  PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS,
+} from "../../_constants/private-context-options";
 import {
   InfoPanelBody as DocsInfoPanelBody,
   InfoPanelHeader as DocsInfoPanelHeader,
@@ -150,6 +154,12 @@ type DocsLayoutProps = {
    * unblocked for rooms. Caller still owns `uploadFilesToFolder`.
    */
   isPrivate?: boolean;
+  /**
+   * When true the room is archived (read-only). Narrows the context-menu
+   * to the archive whitelist and hides all upload/create actions.
+   * Only meaningful when `isPrivate` is also true.
+   */
+  isArchive?: boolean;
   /** Override the upload pipeline (private rooms swap in encrypted upload). */
   uploadFilesToFolder?: (files: FileList | File[]) => Promise<void>;
   /** Root-room id for HPKE-Auth unwrap of encrypted previews. */
@@ -177,6 +187,7 @@ const DocsLayout = observer(
     infoPanelHeader,
     infoPanelBody,
     isPrivate,
+    isArchive,
     uploadFilesToFolder: uploadFilesToFolderOverride,
     currentRoomId,
   }: DocsLayoutProps) => {
@@ -199,10 +210,12 @@ const DocsLayout = observer(
       rootFolderType === FolderType.Rooms ||
       rootFolderType === FolderType.Archive;
     const isCanCreate = !!current.security?.Create;
+    // Archived private rooms are read-only; never show the action button.
     const isActionButtonEnabled =
       (isMyDocuments || isInRooms) &&
       !sdkConfig?.disableActionButton &&
-      isCanCreate;
+      isCanCreate &&
+      !(isPrivate && isArchive);
 
     const docsActions = useDocsActions({
       uploadFilesToFolderOverride,
@@ -237,10 +250,21 @@ const DocsLayout = observer(
       const allowed = new Set(["new-folder", "separator-1", "upload-files"]);
       return defaultDesktopModel.filter((item) => allowed.has(String(item.key)));
     }, [isPrivate, defaultDesktopModel]);
+    // Private rooms (active or archived) suppress the quick-action bar.
     const quickActionItems = isPrivate ? [] : defaultQuickActionItems;
 
+    // Archived private rooms get the narrower read-only whitelist; active
+    // private rooms use the full whitelist; non-private rooms have no filter.
     const allowedContextOptions = isPrivate
-      ? PRIVATE_FILE_CONTEXT_OPTIONS
+      ? isArchive
+        ? PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS
+        : PRIVATE_FILE_CONTEXT_OPTIONS
+      : undefined;
+    // Archive folders use the same read-only whitelist as files.
+    const allowedFolderContextOptions = isPrivate
+      ? isArchive
+        ? PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS
+        : PRIVATE_FOLDER_CONTEXT_OPTIONS
       : undefined;
 
     const handleCreateFolder = React.useCallback(
@@ -476,7 +500,10 @@ const DocsLayout = observer(
                         <div className={styles.root} style={frameHeaderVars}>
                           <DropZone
                             onFilesDropped={uploadFilesToFolder}
-                            disabled={!isMyDocuments && !isPrivate}
+                            disabled={
+                              (!isMyDocuments && !isPrivate) ||
+                              (isPrivate && !!isArchive)
+                            }
                           >
                             <RootScrollbar>
                               <SectionWrapper
@@ -544,6 +571,9 @@ const DocsLayout = observer(
                                     infoPanelVisible={infoPanelStore.isVisible}
                                     allowedContextOptions={
                                       allowedContextOptions
+                                    }
+                                    allowedFolderContextOptions={
+                                      allowedFolderContextOptions
                                     }
                                     emptyView={emptyView}
                                     isPrivate={isPrivate}

@@ -73,6 +73,8 @@ type PrivateRoomFilesPageProps = {
   filesFilter: string;
   user?: TUser;
   roomId: string;
+  /** True when this room lives in the Archive section (read-only). */
+  isArchive?: boolean;
 };
 
 const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
@@ -83,6 +85,7 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
   filesFilter,
   user,
   roomId,
+  isArchive = false,
 }) => {
   const router = useRouter();
   const filesStore = usePrivateRoomFilesStore();
@@ -239,7 +242,10 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
           withoutFavorite
           editorBasePath="/editor"
           isPrivate
-          uploadFilesToFolder={handleEncryptedUpload}
+          isArchive={isArchive}
+          uploadFilesToFolder={
+            isArchive ? undefined : handleEncryptedUpload
+          }
           currentRoomId={roomId}
           infoPanelHeader={<PrivateInfoPanelHeader />}
           infoPanelBody={<PrivateInfoPanelBody />}

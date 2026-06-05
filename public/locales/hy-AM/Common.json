@@ -1387,6 +1387,8 @@
   "OpenSavedDocument": "Բացել պահպանված փաստաթուղթը նոր ներդիրում",
   "OperationStopped": "Գործողությունը դադարեցվել է",
   "Or": "կամ",
+  "PrivateRoomNotFoundDescription": "Ձեր փնտրած մասնավոր սենյակը գոյություն չունի, կամ դուք մուտքի թույլտվություն չունեք։",
+  "PrivateRoomNotFoundTitle": "Չի գտնվել",
   "RoomNotificationsDisabled": "Սենյակի ծանուցումներն անջատված են",
   "RoomNotificationsEnabled": "Սենյակի ծանուցումներն միացված են",
   "RoomPinned": "Սենյակն ամրացված է",

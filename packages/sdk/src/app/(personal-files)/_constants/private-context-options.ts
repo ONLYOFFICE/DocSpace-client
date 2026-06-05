@@ -53,6 +53,16 @@ export const PRIVATE_FILE_CONTEXT_OPTIONS: ReadonlySet<string> = new Set([
   AVAILABLE_CONTEXT_ITEMS.delete,
 ]);
 
+// Folders inside a private room must not expose "duplicate": the server would
+// create an unencrypted copy of the folder tree. Reference: client
+// FilesActionsStore.js duplicateAction — silent return for folders in a
+// privacy folder.
+export const PRIVATE_FOLDER_CONTEXT_OPTIONS: ReadonlySet<string> = new Set(
+  [...PRIVATE_FILE_CONTEXT_OPTIONS].filter(
+    (key) => key !== AVAILABLE_CONTEXT_ITEMS.duplicate,
+  ),
+);
+
 export const PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS: ReadonlySet<string> = new Set([
   AVAILABLE_CONTEXT_ITEMS.select,
   AVAILABLE_CONTEXT_ITEMS.showInfo,

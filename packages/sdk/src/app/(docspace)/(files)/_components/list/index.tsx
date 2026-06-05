@@ -75,6 +75,7 @@ const List = ({
   withoutFavorite,
   infoPanelVisible,
   allowedContextOptions,
+  allowedFolderContextOptions,
   emptyView,
   isPrivate,
 }: ListProps) => {
@@ -120,6 +121,7 @@ const List = ({
     isShareSection: rootFolderType === FolderType.SHARE,
     withoutFavorite,
     allowedContextOptions,
+    allowedFolderContextOptions,
   });
 
   const [filter, setFilter] = React.useState<FilesFilter>(

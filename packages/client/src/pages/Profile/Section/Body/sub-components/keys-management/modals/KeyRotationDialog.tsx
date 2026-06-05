@@ -47,6 +47,8 @@ import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
 
+import { PASSPHRASE_MIN_LENGTH } from "@docspace/shared/services/encryption/passphrase-strength";
+
 import styles from "./KeyRotationDialog.module.scss";
 
 type KeyRotationDialogProps = {
@@ -57,8 +59,6 @@ type KeyRotationDialogProps = {
   isLoading?: boolean;
   onForgotPassphrase?: () => void;
 };
-
-const MIN_LENGTH = 8;
 
 export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
   visible,
@@ -91,8 +91,8 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
       : "";
 
   const newFieldError = attemptedSubmit
-    ? newPassphrase.length > 0 && newPassphrase.length < MIN_LENGTH
-      ? t("Common:PassphraseTooShort", { length: MIN_LENGTH })
+    ? newPassphrase.length > 0 && newPassphrase.length < PASSPHRASE_MIN_LENGTH
+      ? t("Common:PassphraseTooShort", { length: PASSPHRASE_MIN_LENGTH })
       : newPassphrase &&
           currentPassphrase &&
           currentPassphrase === newPassphrase
@@ -109,7 +109,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
     setAttemptedSubmit(true);
 
     if (!currentPassphrase) return;
-    if (newPassphrase.length < MIN_LENGTH) return;
+    if (newPassphrase.length < PASSPHRASE_MIN_LENGTH) return;
     if (newPassphrase !== confirmPassphrase) return;
     if (currentPassphrase === newPassphrase) return;
 
@@ -126,7 +126,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
 
   const isValid =
     currentPassphrase.length > 0 &&
-    newPassphrase.length >= MIN_LENGTH &&
+    newPassphrase.length >= PASSPHRASE_MIN_LENGTH &&
     newPassphrase === confirmPassphrase &&
     currentPassphrase !== newPassphrase;
 

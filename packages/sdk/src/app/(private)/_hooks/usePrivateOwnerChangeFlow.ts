@@ -40,6 +40,7 @@ import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 
 import { useEncryptionIdentityStore } from "../_store/EncryptionIdentityStore";
 import {
@@ -120,15 +121,14 @@ export const usePrivateOwnerChangeFlow =
           await api.files.setFileOwner(newOwnerId, [roomId]);
           return true;
         } catch (error) {
-          const msg = error instanceof Error ? error.message : String(error);
-          toastr.error(msg);
+          toastr.error(getEncryptionErrorMessage(t, error));
           return false;
         } finally {
           releaseCryptoOperation(controller);
           setIsLoading(false);
         }
       },
-      [],
+      [t],
     );
 
     return { validateCandidates, changeOwner, isLoading };

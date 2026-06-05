@@ -69,7 +69,7 @@ const PrivateInvitePanel: React.FC<PrivateInvitePanelProps> = ({
   defaultAccess,
   onMembersUpdated,
 }) => {
-  const { onInviteSubmitted } = usePrivateInviteFlow();
+  const { onInviteSubmitted, onBeforeSubmit } = usePrivateInviteFlow();
 
   const handleInviteSubmitted = React.useCallback(
     (memberIds: string[], displayNames: Record<string, string>) =>
@@ -88,6 +88,7 @@ const PrivateInvitePanel: React.FC<PrivateInvitePanelProps> = ({
       isPrivateRoom
       culture={culture}
       onMembersUpdated={onMembersUpdated}
+      onBeforeSubmit={onBeforeSubmit}
       onInviteSubmitted={handleInviteSubmitted}
     />
   );

@@ -1387,6 +1387,8 @@
   "OpenSavedDocument": "保存されたファイルを新しいタブで開く",
   "OperationStopped": "操作が停止されました",
   "Or": "または",
+  "PrivateRoomNotFoundDescription": "お探しのプライベートルームは存在しないか、アクセス権がありません。",
+  "PrivateRoomNotFoundTitle": "見つかりません",
   "RoomNotificationsDisabled": "ルームの通知が無効",
   "RoomNotificationsEnabled": "ルームの通知が有効",
   "RoomPinned": "ルームが固定されました",

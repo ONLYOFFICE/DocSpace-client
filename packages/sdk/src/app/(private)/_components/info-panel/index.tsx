@@ -154,13 +154,13 @@ const PrivateInfoPanelBody = observer(
           "isRoom" in selection && Boolean((selection as TFolder).isRoom);
         if (!isRoom) return <NoItem />;
         const security = (selection as TFolder).security as
-          | { EditAccess?: boolean }
+          | { EditAccess?: boolean; EditRoom?: boolean }
           | undefined;
         return (
           <PrivateMembersView
             roomId={Number(selection.id)}
             currentUserId={user?.id ?? ""}
-            canInvite={!!security?.EditAccess}
+            canInvite={!!security?.EditRoom}
             onAddUsersClick={handleAddUsers}
           />
         );

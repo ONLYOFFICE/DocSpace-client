@@ -56,6 +56,38 @@ type ParityRecord = {
   reviewDate: string;
 };
 
+/**
+ * Intentional differences: behaviors present in the reference client that the
+ * SDK deliberately does NOT replicate.  Each entry is a static record — no
+ * CI drift check is run against them, but they are printed at the end of a
+ * successful `runParityCheck()` call so reviewers remain aware of them.
+ */
+type IntentionalDifference = {
+  /** Short human-readable title. */
+  title: string;
+  /** Reference file + lines where the omitted behavior lives. */
+  reference: string;
+  /** ISO date of the product decision. */
+  decidedOn: string;
+  /** Why the SDK diverges intentionally. */
+  rationale: string;
+};
+
+const INTENTIONAL_DIFFERENCES: IntentionalDifference[] = [
+  {
+    title: "Mobile guard for private rooms not replicated",
+    reference: "packages/client/src/store/FilesStore.js:2165-2170",
+    decidedOn: "2026-06-05",
+    rationale:
+      "The reference client hides private-room contents on non-desktop " +
+      "browsers (isPrivacyFolder && !isDesktop() → empty lists).  " +
+      "SDK intentionally allows private rooms on mobile browsers — " +
+      "WebCrypto is available in all modern mobile browsers and the " +
+      "embedded use-case requires mobile support.  " +
+      "Crypto path on mobile requires a manual smoke-test (stays pending).",
+  },
+];
+
 function isCandidateFile(name: string): boolean {
   return /\.(tsx?|jsx?)$/.test(name);
 }
@@ -134,6 +166,19 @@ export function runParityCheck(): void {
   console.log(
     `[parity-check] OK — verified ${records.length} fork(s) against their sources.`,
   );
+
+  if (INTENTIONAL_DIFFERENCES.length > 0) {
+    const list = INTENTIONAL_DIFFERENCES.map(
+      (d) =>
+        `  • ${d.title}\n` +
+        `    reference: ${d.reference}\n` +
+        `    decided: ${d.decidedOn}\n` +
+        `    rationale: ${d.rationale}`,
+    ).join("\n\n");
+    console.log(
+      `\n[parity-check] ${INTENTIONAL_DIFFERENCES.length} intentional difference(s) on record:\n\n${list}\n`,
+    );
+  }
 }
 
 // Allow direct invocation: `tsx parity-check.ts` or compiled equivalent.

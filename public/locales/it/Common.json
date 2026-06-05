@@ -1387,6 +1387,8 @@
   "OpenSavedDocument": "Aprire il documento salvato in una scheda nuova",
   "OperationStopped": "L'operazione è stata interrotta",
   "Or": "o",
+  "PrivateRoomNotFoundDescription": "La stanza privata che stai cercando non esiste o non hai accesso.",
+  "PrivateRoomNotFoundTitle": "Non trovato",
   "RoomNotificationsDisabled": "Notifiche della stanza disabilitate",
   "RoomNotificationsEnabled": "Notifiche della stanza abilitate",
   "RoomPinned": "La stanza è stata fissata",

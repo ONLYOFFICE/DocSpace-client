@@ -115,6 +115,8 @@ export default async function PrivateRoomFiles({
     notFound();
   }
 
+  const isArchive = folderData.current.isArchive === true;
+
   return (
     <PrivateRoomFilesPage
       authToken={authToken}
@@ -124,6 +126,7 @@ export default async function PrivateRoomFiles({
       filesFilter={filesFilter}
       user={user}
       roomId={roomId}
+      isArchive={isArchive}
     />
   );
 }

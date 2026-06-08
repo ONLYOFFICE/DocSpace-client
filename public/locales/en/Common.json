@@ -1424,6 +1424,7 @@
   "TopUpAndUpgradeHint": "Your wallet will be topped up by <1>{{currency}}</1> and the selected storage will be purchased automatically. Top-up amounts are rounded up to the next whole dollar.",
   "TopUpBalance": "Top up balance",
   "TopUpCredits": "Top up credits",
+  "TopUpCreditsAmountDescription": "Enter the amount of credits you want to add.",
   "TopUpCreditsChargeHint": "The entered amount will be charged after you attach your payment method",
   "TopUpCreditsDescription": "Enter the amount you want to add to your credits balance. On the next step, you'll be asked to attach a payment method securely via Stripe.",
   "TopUpFrom": "From",

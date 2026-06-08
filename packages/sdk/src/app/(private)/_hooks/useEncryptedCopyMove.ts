@@ -43,6 +43,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import { CryptoError } from "@docspace/shared/services/encryption/errors";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import { getFolder, deleteFile } from "@docspace/shared/api/files";
+import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TGetFolder } from "@docspace/shared/api/files/types";
 
@@ -211,6 +212,7 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
 
           if (isMove) {
             await deleteFile(item.id, false, true);
+            forgetEncryptedFilename(item.id);
             filesListStore.removeItem(item.id);
           }
         }

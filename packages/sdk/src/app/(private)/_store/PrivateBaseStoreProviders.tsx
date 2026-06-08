@@ -62,6 +62,7 @@ import { InfoPanelStoreContextProvider } from "@/app/(docspace)/_store/InfoPanel
 import { DocsSettingsStoreContextProvider } from "@/app/(personal-files)/_store/DocsSettingsStore";
 import { DocsUserStoreContextProvider } from "@/app/(personal-files)/_store/DocsUserStore";
 import { VersionHistoryStoreContextProvider } from "@/app/(personal-files)/_store/VersionHistoryStore";
+import { DragStoreContextProvider } from "@/app/(personal-files)/_store/DragStore";
 
 export const PrivateBaseStoreProviders = ({
   children,
@@ -75,30 +76,33 @@ export const PrivateBaseStoreProviders = ({
       <FilesSettingsStoreContextProvider>
         <FilesListStoreContextProvider>
           <FilesSelectionStoreContextProvider>
-            <NavigationStoreContextProvider>
-              <MediaViewerStoreContextProvider>
-                <DialogsStoreContextProvider>
-                  <DownloadDialogStoreContextProvider>
-                    <ActiveItemsStoreContextProvider>
-                      <UploadStoreContextProvider>
-                        <DocsSettingsStoreContextProvider>
-                          <DocsUserStoreContextProvider>
-                            <InfoPanelStoreContextProvider>
-                              <VersionHistoryStoreContextProvider>
-                                {children}
-                              </VersionHistoryStoreContextProvider>
-                            </InfoPanelStoreContextProvider>
-                          </DocsUserStoreContextProvider>
-                        </DocsSettingsStoreContextProvider>
-                      </UploadStoreContextProvider>
-                    </ActiveItemsStoreContextProvider>
-                  </DownloadDialogStoreContextProvider>
-                </DialogsStoreContextProvider>
-              </MediaViewerStoreContextProvider>
-            </NavigationStoreContextProvider>
+            <DragStoreContextProvider>
+              <NavigationStoreContextProvider>
+                <MediaViewerStoreContextProvider>
+                  <DialogsStoreContextProvider>
+                    <DownloadDialogStoreContextProvider>
+                      <ActiveItemsStoreContextProvider>
+                        <UploadStoreContextProvider>
+                          <DocsSettingsStoreContextProvider>
+                            <DocsUserStoreContextProvider>
+                              <InfoPanelStoreContextProvider>
+                                <VersionHistoryStoreContextProvider>
+                                  {children}
+                                </VersionHistoryStoreContextProvider>
+                              </InfoPanelStoreContextProvider>
+                            </DocsUserStoreContextProvider>
+                          </DocsSettingsStoreContextProvider>
+                        </UploadStoreContextProvider>
+                      </ActiveItemsStoreContextProvider>
+                    </DownloadDialogStoreContextProvider>
+                  </DialogsStoreContextProvider>
+                </MediaViewerStoreContextProvider>
+              </NavigationStoreContextProvider>
+            </DragStoreContextProvider>
           </FilesSelectionStoreContextProvider>
         </FilesListStoreContextProvider>
       </FilesSettingsStoreContextProvider>
     </SettingsStoreContextProvider>
   );
 };
+

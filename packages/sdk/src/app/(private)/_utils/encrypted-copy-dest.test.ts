@@ -52,7 +52,7 @@ describe("resolveEncryptedCopyDest", () => {
     const result = resolveEncryptedCopyDest(
       dest({ current: { id: 7, private: true, roomType: RoomsType.CustomRoom } }),
     );
-    expect(result).toEqual({ allowed: true, roomId: 7 });
+    expect(result).toEqual({ mode: "re-encrypt", roomId: 7 });
   });
 
   it("allows a subfolder of a private room, resolving to the owning room (pathParts[1])", () => {
@@ -63,7 +63,7 @@ describe("resolveEncryptedCopyDest", () => {
         pathParts: [{ id: 1 }, { id: 7 }, { id: 99 }],
       }),
     );
-    expect(result).toEqual({ allowed: true, roomId: 7 });
+    expect(result).toEqual({ mode: "re-encrypt", roomId: 7 });
   });
 
   it("prefers the room's own id over the path when the destination IS a room", () => {
@@ -75,30 +75,30 @@ describe("resolveEncryptedCopyDest", () => {
         pathParts: [{ id: 1 }, { id: 999 }],
       }),
     );
-    expect(result).toEqual({ allowed: true, roomId: 7 });
+    expect(result).toEqual({ mode: "re-encrypt", roomId: 7 });
   });
 
-  it("REFUSES a non-private destination (would leak plaintext into a readable room)", () => {
+  it("returns plaintext mode for a non-private destination (decrypt-and-copy-out)", () => {
     const result = resolveEncryptedCopyDest(
       dest({
         current: { id: 7, private: false, roomType: RoomsType.CustomRoom },
         pathParts: [{ id: 1 }, { id: 7 }],
       }),
     );
-    expect(result).toEqual({ allowed: false, reason: "not-private" });
+    expect(result).toEqual({ mode: "plaintext" });
   });
 
-  it("REFUSES when the destination is private but the room cannot be resolved", () => {
+  it("blocks when the destination is private but the room cannot be resolved", () => {
     const result = resolveEncryptedCopyDest(
       dest({ current: { id: 99, private: true }, pathParts: [{ id: 1 }] }),
     );
-    expect(result).toEqual({ allowed: false, reason: "unresolved-room" });
+    expect(result).toEqual({ mode: "blocked", reason: "unresolved-room" });
   });
 
-  it("treats a missing/undefined current folder as not private (fail closed)", () => {
+  it("blocks when the destination folder is unknown (fail closed)", () => {
     const result = resolveEncryptedCopyDest(
       dest({ pathParts: [{ id: 1 }, { id: 7 }] }),
     );
-    expect(result).toEqual({ allowed: false, reason: "not-private" });
+    expect(result).toEqual({ mode: "blocked", reason: "unresolved-room" });
   });
 });

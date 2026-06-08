@@ -39,35 +39,25 @@ import type { TGetFolder } from "@docspace/shared/api/files/types";
 // without pulling the encrypted copy/move hook's React + store import chain.
 
 export type EncryptedCopyDest =
-  | { allowed: true; roomId: number | string }
-  | { allowed: false; reason: "not-private" | "unresolved-room" };
+  | { mode: "re-encrypt"; roomId: number | string }
+  | { mode: "plaintext" }
+  | { mode: "blocked"; reason: "unresolved-room" };
 
-/**
- * Decides whether an encrypted file may be copied/moved into a destination
- * folder, and which room owns that destination.
- *
- * This is a security gate: an encrypted file may only ever flow into a
- * resolvable *private* room. Copying it into a non-private (or
- * unidentifiable) destination would re-upload it somewhere its E2EE contract
- * no longer holds — i.e. leak plaintext into a room the recipients can read
- * unencrypted. The resolved `roomId` is what the file's DEK is re-wrapped for,
- * so resolving the wrong room would hand access to the wrong member set.
- */
 export const resolveEncryptedCopyDest = (
   folderData: TGetFolder,
 ): EncryptedCopyDest => {
   const current = folderData.current;
-  const isPrivate = current?.private === true;
 
-  // When the destination folder is itself a room it carries `roomType`; a
-  // subfolder does not, so the owning room is the second path segment
-  // (pathParts[0] is the rooms container, pathParts[1] is the room).
+  if (!current) return { mode: "blocked", reason: "unresolved-room" };
+
+  if (current.private !== true) return { mode: "plaintext" };
+
   const roomId =
-    current?.roomType !== undefined
+    current.roomType !== undefined
       ? current.id
       : (folderData.pathParts?.[1]?.id ?? null);
 
-  if (!isPrivate) return { allowed: false, reason: "not-private" };
-  if (roomId === null) return { allowed: false, reason: "unresolved-room" };
-  return { allowed: true, roomId };
+  if (roomId === null) return { mode: "blocked", reason: "unresolved-room" };
+
+  return { mode: "re-encrypt", roomId };
 };

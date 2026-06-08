@@ -42,7 +42,13 @@ import { useEncryption } from "@docspace/shared/context/encryption";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { CryptoError } from "@docspace/shared/services/encryption/errors";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
-import { getFolder, deleteFile } from "@docspace/shared/api/files";
+import {
+  getFolder,
+  deleteFile,
+  startUploadSession,
+  uploadChunkSequential,
+  finalizeUploadSession,
+} from "@docspace/shared/api/files";
 import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TGetFolder } from "@docspace/shared/api/files/types";
@@ -86,6 +92,47 @@ type UseEncryptedCopyMoveReturn = {
 
 const loadCopyModule = () =>
   import("@docspace/shared/services/private-room/encrypted-copy");
+
+const PLAINTEXT_CHUNK_SIZE = 10 * 1024 * 1024;
+
+const uploadPlaintextFile = async (
+  file: File,
+  folderId: number | string,
+  signal: AbortSignal,
+): Promise<void> => {
+  const session = await startUploadSession(
+    folderId,
+    file.name,
+    file.size,
+    "",
+    false,
+    undefined,
+    true,
+  );
+  const sessionId = session?.id;
+  if (!sessionId) {
+    throw new Error("startUploadSession returned no session id");
+  }
+
+  const total = file.size;
+  let anyChunkSent = false;
+  for (let offset = 0; offset < total; offset += PLAINTEXT_CHUNK_SIZE) {
+    if (signal.aborted) return;
+    const end = Math.min(offset + PLAINTEXT_CHUNK_SIZE, total);
+    const formData = new FormData();
+    formData.append("file", file.slice(offset, end), file.name);
+    await uploadChunkSequential(folderId, sessionId, formData);
+    anyChunkSent = true;
+  }
+
+  if (signal.aborted) return;
+
+  if (anyChunkSent) {
+    await finalizeUploadSession(folderId, sessionId).catch(() => {});
+  } else {
+    await finalizeUploadSession(folderId, sessionId);
+  }
+};
 
 export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
   const { t } = useTranslation(["Common"]);
@@ -177,12 +224,10 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
         )) as TGetFolder;
         const dest = resolveEncryptedCopyDest(destFolderData);
 
-        if (!dest.allowed) {
-          toastr.error(t("Common:PrivateRoomCopyOutNotSupported"));
+        if (dest.mode === "blocked") {
+          toastr.error(t("Common:UnexpectedError"));
           return;
         }
-        const destRoomId = dest.roomId;
-        const sameRoom = String(destRoomId) === String(sourceRoomId);
 
         const { decryptEncryptedItemToFile, addCopySuffix } =
           await loadCopyModule();
@@ -206,18 +251,27 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
 
           if (controller.signal.aborted) return;
 
-          const fileToUpload =
-            !isMove && sameRoom
-              ? new File([decrypted], addCopySuffix(decrypted.name), {
-                  type: decrypted.type || "application/octet-stream",
-                })
-              : decrypted;
+          if (dest.mode === "plaintext") {
+            await uploadPlaintextFile(
+              decrypted,
+              destFolderId,
+              controller.signal,
+            );
+          } else {
+            const sameRoom = String(dest.roomId) === String(sourceRoomId);
+            const fileToUpload =
+              !isMove && sameRoom
+                ? new File([decrypted], addCopySuffix(decrypted.name), {
+                    type: decrypted.type || "application/octet-stream",
+                  })
+                : decrypted;
 
-          await uploadFiles({
-            files: [fileToUpload],
-            folderId: destFolderId,
-            roomId: destRoomId,
-          });
+            await uploadFiles({
+              files: [fileToUpload],
+              folderId: destFolderId,
+              roomId: dest.roomId,
+            });
+          }
 
           if (isMove) {
             await deleteFile(item.id, false, true);

@@ -42,6 +42,7 @@ import { useTranslation } from "react-i18next";
 import type { TUser } from "@docspace/shared/api/people/types";
 import { useGenerateKeyFlow } from "@docspace/shared/dialogs/key-generation";
 import { ConfirmationModal } from "@docspace/shared/dialogs/confirmation-modal";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import CreateEditRoomDialog, {
   type EditableRoom,
@@ -87,9 +88,15 @@ const PrivateCreateRoomDialogInner: React.FC<PrivateCreateRoomDialogProps> = ({
     refreshKeysFromServer,
   });
 
-  const onRequestCreateKeys = React.useCallback(() => {
+  const promptKeySetup = React.useCallback(() => {
+    if (!globalThis.crypto?.subtle) {
+      toastr.error(t("Common:EncryptionRequiresHttps"));
+      return;
+    }
     setKeyConfirmVisible(true);
-  }, []);
+  }, [t]);
+
+  const onRequestCreateKeys = promptKeySetup;
 
   const onConfirmGenerateKey = React.useCallback(() => {
     setKeyConfirmVisible(false);
@@ -105,11 +112,12 @@ const PrivateCreateRoomDialogInner: React.FC<PrivateCreateRoomDialogProps> = ({
       autoPromptedRef.current = false;
       return;
     }
+    if (room) return;
     if (keysLoaded && !hasKeys && !autoPromptedRef.current) {
       autoPromptedRef.current = true;
-      setKeyConfirmVisible(true);
+      promptKeySetup();
     }
-  }, [visible, keysLoaded, hasKeys]);
+  }, [visible, keysLoaded, hasKeys, room, promptKeySetup]);
 
   return (
     <>

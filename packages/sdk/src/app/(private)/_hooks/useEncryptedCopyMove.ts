@@ -101,7 +101,10 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
         return;
       }
       const identity = await requireIdentity();
-      if (!identity) return;
+      if (!identity) {
+        toastr.error(t("Common:EncryptionLockedAddMembers"));
+        return;
+      }
 
       const controller = registerCryptoOperation();
       try {
@@ -157,7 +160,10 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
         return;
       }
       const identity = await requireIdentity();
-      if (!identity) return;
+      if (!identity) {
+        toastr.error(t("Common:EncryptionLockedAddMembers"));
+        return;
+      }
 
       const controller = registerCryptoOperation();
       // Track the title of the item currently being processed so we can

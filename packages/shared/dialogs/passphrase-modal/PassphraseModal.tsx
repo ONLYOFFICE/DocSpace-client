@@ -265,6 +265,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                 }}
                 placeholder={t("Common:ConfirmPassphrase")}
                 scale
+                isFullWidth
                 size={InputSize.base}
                 simpleView
                 isDisabled={isLoading}

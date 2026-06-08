@@ -46,7 +46,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import EncryptedRoomIconUrl from "PUBLIC_DIR/images/icons/16/security.react.svg?url";
+import EncryptedRoomIconUrl from "PUBLIC_DIR/images/icons/16/security.private.react.svg?url";
 
 import Header, { type HeaderProps } from "@/app/(docspace)/_components/header";
 

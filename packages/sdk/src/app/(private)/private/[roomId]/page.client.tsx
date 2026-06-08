@@ -38,6 +38,9 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
+
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import type {
   TFilesSettings,
@@ -90,6 +93,7 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
   isArchive = false,
 }) => {
   const router = useRouter();
+  const { t } = useTranslation(["Common"]);
   const filesStore = usePrivateRoomFilesStore();
   const identityStore = useEncryptionIdentityStore();
   const navigationStore = useNavigationStore();
@@ -119,6 +123,24 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
     roomId,
     folderData?.current?.private,
     folderData?.current?.security?.EditRoom,
+  ]);
+
+  const warnedRoomRef = React.useRef<string | null>(null);
+  React.useEffect(() => {
+    if (!isReady) return;
+    if (folderData?.current?.private !== true) return;
+    if (identityStore.keys === null) return;
+    if (identityStore.hasKeys) return;
+    if (warnedRoomRef.current === roomId) return;
+    warnedRoomRef.current = roomId;
+    toastr.warning(t("Common:EncryptionKeysNotConfigured"));
+  }, [
+    isReady,
+    roomId,
+    identityStore.keys,
+    identityStore.hasKeys,
+    folderData?.current?.private,
+    t,
   ]);
 
   const handleOpenFolder = React.useCallback(

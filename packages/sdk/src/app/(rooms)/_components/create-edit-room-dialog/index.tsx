@@ -56,7 +56,7 @@ import { calculateRoomLogoParams } from "@docspace/ui-kit/utils";
 import type { TImage } from "@docspace/ui-kit/components/image-editor";
 import type { ICover } from "@docspace/ui-kit/components/room-logo-cover-dialog";
 import type { Nullable, TCreatedBy } from "@docspace/shared/types";
-import { RoomsType } from "@docspace/shared/enums";
+import { RoomsType, AnalyticsEvents } from "@docspace/shared/enums";
 import api from "@docspace/shared/api";
 
 import {
@@ -365,6 +365,18 @@ const CreateEditRoomDialog = ({
           await api.rooms.setRoomCover(newRoom.id, {
             color: colorForApi,
             cover: selectedCover.id,
+          });
+        }
+
+        if (newRoom?.id != null) {
+          const w = window as unknown as {
+            dataLayer?: Array<Record<string, unknown>>;
+          };
+          w.dataLayer = w.dataLayer ?? [];
+          w.dataLayer.push({
+            event: AnalyticsEvents.RoomCreated,
+            id: newRoom.id,
+            roomType: RoomsType.CustomRoom,
           });
         }
 

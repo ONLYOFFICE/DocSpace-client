@@ -50,7 +50,7 @@ const STORAGE_PREFIX = "private-disclosure-dismissed:";
 const DisclosureBannerInner: React.FC = () => {
   const { t } = useTranslation(["Common"]);
   const identityStore = useEncryptionIdentityStore();
-  const userId = identityStore.userKeys?.userId;
+  const userId = identityStore.userKeys?.userId ?? identityStore.ownerId;
 
   const [visible, setVisible] = React.useState(false);
 

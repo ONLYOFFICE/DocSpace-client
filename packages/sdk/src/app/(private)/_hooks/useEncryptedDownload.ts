@@ -148,7 +148,7 @@ export const useEncryptedDownload = (): UseEncryptedDownloadReturn => {
   );
 
   const downloadZip = React.useCallback(
-    async ({ files, roomId, zipFileName = "files.zip" }: DownloadZipArgs) => {
+    async ({ files, roomId, zipFileName = "Files.zip" }: DownloadZipArgs) => {
       if (files.length === 0) return;
 
       const userId = identityStore.userKeys?.userId;

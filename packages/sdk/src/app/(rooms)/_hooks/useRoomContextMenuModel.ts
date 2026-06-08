@@ -28,11 +28,14 @@ import { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
+import { copyShareLink } from "@docspace/shared/utils/copy";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { RoomsType } from "@docspace/shared/enums";
 import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import CheckBoxReactSvgUrl from "PUBLIC_DIR/images/check-box.react.svg?url";
+import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
 import PinReactSvgUrl from "PUBLIC_DIR/images/pin.react.svg?url";
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
@@ -68,6 +71,8 @@ type TRoomItem = TFolderItem & {
   pinned?: boolean;
   mute?: boolean;
   inRoom?: boolean;
+  private?: boolean;
+  roomType?: RoomsType;
   security?: {
     Pin?: boolean;
     ChangeOwner?: boolean;
@@ -78,6 +83,7 @@ type TRoomItem = TFolderItem & {
     Move?: boolean;
     Delete?: boolean;
     Embed?: boolean;
+    CopySharedLink?: boolean;
   };
 };
 
@@ -233,6 +239,43 @@ export default function useRoomContextMenuModel(
         });
       }
 
+      const isPublicRoomType =
+        room.roomType === RoomsType.FormRoom ||
+        room.roomType === RoomsType.CustomRoom ||
+        room.roomType === RoomsType.PublicRoom;
+      const hasShareLinkRights = room.shared
+        ? room.security?.CopySharedLink
+        : room.security?.EditAccess;
+      const canCopyExternalLink = isPublicRoomType && !!hasShareLinkRights;
+
+      const copyLinkItem: ContextMenuModel = {
+        id: canCopyExternalLink
+          ? "option_external-link"
+          : "option_link-for-room-members",
+        key: canCopyExternalLink ? "external-link" : "link-for-room-members",
+        label: canCopyExternalLink
+          ? t("Common:CopySharedLink")
+          : t("Common:CopyLink"),
+        icon: InvitationLinkReactSvgUrl,
+        onClick: async () => {
+          try {
+            let url: string;
+            if (canCopyExternalLink) {
+              const link = await api.rooms.getPrimaryLink(room.id);
+              url = link.sharedTo.shareLink;
+            } else {
+              const proxyURL =
+                window.ClientConfig?.proxy?.url || window.location.origin;
+              url = `${proxyURL}/rooms/shared/${room.id}/filter`;
+            }
+            copyShareLink(url);
+            toastr.success(t("Common:LinkCopySuccess"));
+          } catch (e) {
+            toastr.error(e as Error);
+          }
+        },
+      };
+
       const mainItems: ContextMenuModel[] = [
         {
           id: "option_open",
@@ -267,6 +310,7 @@ export default function useRoomContextMenuModel(
           onClick: handleMute,
           disabled: !room.security?.Mute || !room.inRoom,
         },
+        ...(!room.private ? [copyLinkItem] : []),
         { key: "separator-mute", isSeparator: true },
         {
           id: "option_edit-room",

@@ -240,4 +240,3 @@ export default inject(
     };
   },
 )(observer(withTranslation(["Payments", "Common"])(InviteQuotaWarningDialog)));
-

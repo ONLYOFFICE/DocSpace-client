@@ -64,6 +64,8 @@ import type { TUser } from "@docspace/shared/api/people/types";
 
 import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
 
+import RoomHeader from "@/app/(docspace)/_components/info-panel/sub-components/RoomHeader";
+
 import PrivateMembersView from "../members/PrivateMembersView";
 import { usePrivateDialogsStore } from "../../_store/PrivateDialogsStore";
 
@@ -103,6 +105,12 @@ const PrivateInfoPanelBody = observer(
     const selectedCount = filesSelectionStore.selection.length;
     const isSeveralItems = selectedCount > 1;
 
+    const [memberSearch, setMemberSearch] = React.useState("");
+
+    React.useEffect(() => {
+      setMemberSearch("");
+    }, [selection?.id]);
+
     // Mirrors (docspace) Body sync logic — keeps infoPanel.selection in line
     // with FilesSelectionStore.
     React.useEffect(() => {
@@ -140,32 +148,34 @@ const PrivateInfoPanelBody = observer(
       dialogs.openInvitePanel({ roomId: Number(selection.id) });
     }, [dialogs, selection]);
 
+    const isRoomSelection =
+      !!selection &&
+      "isRoom" in selection &&
+      Boolean((selection as TFolder).isRoom);
+    const availableTabs = selection ? getPrivateAvailableTabs(selection) : [];
+    const currentView = availableTabs.includes(fileView)
+      ? fileView
+      : (availableTabs[0] ?? InfoPanelView.infoDetails);
+    const isMembersView = currentView === InfoPanelView.infoMembers;
+    const roomSecurity = isRoomSelection
+      ? ((selection as TFolder).security as { EditRoom?: boolean } | undefined)
+      : undefined;
+    const hasEditAccess = !!roomSecurity?.EditRoom;
+    const showHeader = !isSeveralItems && isRoomSelection;
+
     const renderContent = () => {
       if (isSeveralItems) return <SeveralItems count={selectedCount} />;
       if (!selection) return <NoItem />;
 
-      const availableTabs = getPrivateAvailableTabs(selection);
-      const currentView = availableTabs.includes(fileView)
-        ? fileView
-        : (availableTabs[0] ?? InfoPanelView.infoDetails);
-
       if (currentView === InfoPanelView.infoMembers) {
-        const isRoom =
-          "isRoom" in selection && Boolean((selection as TFolder).isRoom);
-        if (!isRoom) return <NoItem />;
-        const security = (selection as TFolder).security as
-          | { EditAccess?: boolean; EditRoom?: boolean }
-          | undefined;
+        if (!isRoomSelection) return <NoItem />;
         return (
           <PrivateMembersView
             roomId={Number(selection.id)}
             currentUserId={user?.id ?? ""}
-            canInvite={!!security?.EditRoom}
-            // Role editing requires the same EditRoom flag as inviting.
-            // Per-member canEditAccess provides the secondary gate inside
-            // PrivateMembersView — mirrors reference User.tsx:104.
-            canEditMembers={!!security?.EditRoom}
-            onAddUsersClick={handleAddUsers}
+            canInvite={hasEditAccess}
+            canEditMembers={hasEditAccess}
+            filterValue={memberSearch}
           />
         );
       }
@@ -180,6 +190,15 @@ const PrivateInfoPanelBody = observer(
         data-info-panel-scroll
         data-testid="private_info_panel_body"
       >
+        {showHeader && selection ? (
+          <RoomHeader
+            selection={selection as TFolder}
+            isMembersView={isMembersView}
+            hasEditAccess={hasEditAccess}
+            setSearchValue={setMemberSearch}
+            onInvite={handleAddUsers}
+          />
+        ) : null}
         {renderContent()}
       </div>
     );

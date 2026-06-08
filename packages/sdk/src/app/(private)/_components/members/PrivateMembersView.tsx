@@ -62,7 +62,7 @@ export type PrivateMembersViewProps = {
   canInvite?: boolean;
   /** True when the current user may change member roles (security.EditRoom). */
   canEditMembers?: boolean;
-  onAddUsersClick?: () => void;
+  filterValue?: string;
   /** Re-fetches when bumped (e.g. after invite/remove). */
   refreshKey?: number;
 };
@@ -72,7 +72,7 @@ const PrivateMembersView: React.FC<PrivateMembersViewProps> = ({
   currentUserId,
   canInvite = false,
   canEditMembers = false,
-  onAddUsersClick,
+  filterValue,
   refreshKey,
 }) => {
   const { t } = useTranslation(["Common"]);
@@ -88,31 +88,36 @@ const PrivateMembersView: React.FC<PrivateMembersViewProps> = ({
   }, []);
 
   const fetchMembers = React.useCallback(
-    async (startIndex: number) => {
-      const data: TGetRoomMembers = await api.rooms.getRoomMembers(roomId, {
-        startIndex,
-        count: PAGE_SIZE,
-      });
+    async (startIndex: number, signal?: AbortSignal) => {
+      const data: TGetRoomMembers = await api.rooms.getRoomMembers(
+        roomId,
+        {
+          filterType: 0,
+          filterValue: filterValue?.trim() || undefined,
+          startIndex,
+          count: PAGE_SIZE,
+        },
+        signal,
+      );
       return data;
     },
-    [roomId],
+    [roomId, filterValue],
   );
 
   React.useEffect(() => {
-    let cancelled = false;
+    const controller = new AbortController();
     setIsLoading(true);
-    fetchMembers(0)
+    fetchMembers(0, controller.signal)
       .then((data) => {
-        if (cancelled) return;
+        if (controller.signal.aborted) return;
         setMembers(data.items);
         setTotal(data.total);
       })
+      .catch(() => {})
       .finally(() => {
-        if (!cancelled) setIsLoading(false);
+        if (!controller.signal.aborted) setIsLoading(false);
       });
-    return () => {
-      cancelled = true;
-    };
+    return () => controller.abort();
   }, [fetchMembers, refreshKey, internalRefreshKey]);
 
   const handleLoadMore = React.useCallback(async () => {
@@ -145,15 +150,6 @@ const PrivateMembersView: React.FC<PrivateMembersViewProps> = ({
 
   return (
     <div className={styles.root}>
-      {canInvite && onAddUsersClick ? (
-        <Button
-          size={ButtonSize.normal}
-          label={t("Common:AddUsers")}
-          onClick={onAddUsersClick}
-          primary
-        />
-      ) : null}
-
       <ul className={styles.list}>
         {members.map((member) => {
           const user = member.sharedTo as TUser & { isGroup?: boolean };

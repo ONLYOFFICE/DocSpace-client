@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
@@ -52,9 +52,12 @@ import { RenameContext } from "../_contexts/RenameContext";
 import { InfoContext } from "../_contexts/InfoContext";
 import { ShareContext } from "../_contexts/ShareContext";
 import { useDialogsStore } from "../_store/DialogsStore";
+import { useInfoPanelStore, InfoPanelView } from "../_store/InfoPanelStore";
+import { normalizeRoomLogo } from "../_utils/getRoomIconLogo";
 import useItemContextMenu from "./useItemContextMenu";
 import useContextMenuModel from "./useContextMenuModel";
 import useRoomContextMenuModel from "@/app/(rooms)/_hooks/useRoomContextMenuModel";
+import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
 import type { TFolderItem, TFileItem } from "./useItemList";
 
 /**
@@ -69,6 +72,8 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
   const deleteCtx = React.useContext(DeleteContext);
   const fileOpsCtx = React.useContext(FileOperationsContext);
   const dialogsStore = useDialogsStore();
+  const infoPanelStore = useInfoPanelStore();
+  const docsUserStore = useDocsUserStore();
 
   const isTrashSection = filesListStore.rootFolderType === FolderType.TRASH;
   const isDocsSection = filesListStore.rootFolderType === FolderType.USER;
@@ -76,6 +81,11 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
   const renameCtx = React.useContext(RenameContext);
   const infoCtx = React.useContext(InfoContext);
   const shareCtx = React.useContext(ShareContext);
+
+  const [invitingRoom, setInvitingRoom] = useState<TFolderItem | null>(null);
+  const [changingOwnerRoom, setChangingOwnerRoom] = useState<
+    TFolderItem | null
+  >(null);
 
   const onEditRoom = useCallback(
     (_item: TFolderItem | TFileItem) => {
@@ -111,17 +121,36 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
     [current, dialogsStore],
   );
 
+  const onInfoRoom = useCallback(
+    (item: TFolderItem | TFileItem) => {
+      infoPanelStore.open(item as unknown as TFolder);
+      infoPanelStore.setView(InfoPanelView.infoDetails);
+    },
+    [infoPanelStore],
+  );
+
+  const onInviteRoom = useCallback((item: TFolderItem | TFileItem) => {
+    setInvitingRoom(item as TFolderItem);
+  }, []);
+
+  const onChangeOwner = useCallback((item: TFolderItem | TFileItem) => {
+    setChangingOwnerRoom(item as TFolderItem);
+  }, []);
+
   const { getFoldersContextMenu } = useItemContextMenu({ isTrashSection, isDocsSection });
   const { getContextModel: getRoomContextModel } = useRoomContextMenuModel(
     onEditRoom,
-    undefined, // onRoomChanged
-    undefined, // onChangeOwner
-    false,     // isArchive
-    undefined, // onRestoreRoom
+    undefined,    // onRoomChanged
+    onChangeOwner,
+    false,        // isArchive
+    undefined,    // onRestoreRoom
     onDeleteRoom,
-    undefined, // onDeleteSelected
-    undefined, // onRestoreSelected
+    undefined,    // onDeleteSelected
+    undefined,    // onRestoreSelected
     onArchiveRoom,
+    undefined,    // onArchiveSelected
+    onInfoRoom,
+    onInviteRoom,
   );
 
   const currentFolderItem = useMemo((): TFolderItem | undefined => {
@@ -130,6 +159,9 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
     // isHeader: true — "open" is excluded at the source (see useItemContextMenu)
     const contextOptions = getFoldersContextMenu(current, { isHeader: true });
 
+    const rawLogo = (current as unknown as { logo?: TLogo }).logo;
+    const { roomLogo, roomIconColor, hasRoomImage } = normalizeRoomLogo(rawLogo);
+
     return {
       ...current,
       isFolder: true as const,
@@ -137,9 +169,9 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
       icon: "" as string,
       contextOptions,
       isRoom,
-      roomLogo: undefined,
-      roomIconColor: undefined as string | undefined,
-      hasRoomImage: false as const,
+      roomLogo,
+      roomIconColor,
+      hasRoomImage,
     } as unknown as TFolderItem;
   }, [current, getFoldersContextMenu, isRoom]);
 
@@ -216,5 +248,10 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
     currentFolderItem,
     getContextOptionsFolder,
     isRoom,
+    invitingRoom,
+    setInvitingRoom,
+    changingOwnerRoom,
+    setChangingOwnerRoom,
+    user: docsUserStore.user,
   };
 }

@@ -51,6 +51,7 @@ import type {
 
 import { useDragStore } from "../_store/DragStore";
 import type { TrackOperation } from "./useFileOperations";
+import useOperationToast from "./useOperationToast";
 
 export default function useDragActions({
   trackOperation,
@@ -61,11 +62,43 @@ export default function useDragActions({
   const filesSelectionStore = useFilesSelectionStore();
   const filesListStore = useFilesListStore();
   const settingsStore = useSettingsStore();
+  const { showMoveToast } = useOperationToast();
 
   const startXRef = useRef(0);
   const startYRef = useRef(0);
   const currentDroppableRef = useRef<Element | null>(null);
   const isDragActiveRef = useRef(false);
+  // Cleanup for the one-shot guard that swallows the click fired right after a
+  // drag's mouseup (otherwise the drop-target row's onClick would select it).
+  const suppressClickCleanupRef = useRef<(() => void) | null>(null);
+
+  // The browser dispatches a `click` after `mouseup` when both happened on the
+  // same element — so dropping files onto a folder would also fire the folder
+  // row's onClick and select it. Swallow exactly that one click (capture phase,
+  // before React's bubbling handlers), then self-remove.
+  const suppressNextClick = useCallback(() => {
+    suppressClickCleanupRef.current?.();
+
+    const onClickCapture = (e: MouseEvent) => {
+      e.stopPropagation();
+      e.preventDefault();
+      cleanup();
+    };
+
+    // The post-drag click (if any) fires in the same task as mouseup, before a
+    // macrotask runs — so a 0ms fallback drops a stale guard without ever
+    // swallowing a later, legitimate click.
+    const timer = window.setTimeout(() => cleanup(), 0);
+
+    const cleanup = () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("click", onClickCapture, true);
+      suppressClickCleanupRef.current = null;
+    };
+
+    window.addEventListener("click", onClickCapture, true);
+    suppressClickCleanupRef.current = cleanup;
+  }, []);
 
   const moveDragItems = useCallback(
     async (destFolderId: number) => {
@@ -88,6 +121,16 @@ export default function useDragActions({
         .filter((i) => i.isFolder)
         .map((i) => i.id as number);
 
+      const destFolder = filesListStore.items.find((i) => i.id === destFolderId);
+      const destFolderTitle = destFolder?.title ?? "";
+
+      const finalize = () => {
+        for (const item of filtered) filesListStore.removeItem(item.id);
+        filesSelectionStore.setSelection();
+        filesSelectionStore.setBufferSelection(null);
+        showMoveToast({ items: filtered, destFolderId, destFolderTitle });
+      };
+
       try {
         const operations = await moveToFolder(
           destFolderId,
@@ -98,21 +141,15 @@ export default function useDragActions({
         );
         const opId = operations?.[0]?.id;
         if (opId) {
-          await trackOperation(opId, "move", () => {
-            for (const item of filtered) filesListStore.removeItem(item.id);
-            filesSelectionStore.setSelection();
-            filesSelectionStore.setBufferSelection(null);
-          });
+          await trackOperation(opId, "move", finalize);
         } else {
-          for (const item of filtered) filesListStore.removeItem(item.id);
-          filesSelectionStore.setSelection();
-          filesSelectionStore.setBufferSelection(null);
+          finalize();
         }
       } catch (error) {
         toastr.error(error instanceof Error ? error.message : String(error));
       }
     },
-    [filesSelectionStore, filesListStore, trackOperation],
+    [filesSelectionStore, filesListStore, showMoveToast, trackOperation],
   );
 
   const handleMouseMove = useCallback(
@@ -156,6 +193,10 @@ export default function useDragActions({
 
       if (!wasActive) return;
 
+      // A real drag just ended — swallow the click the browser fires next so the
+      // drop-target row's onClick doesn't select the destination folder.
+      suppressNextClick();
+
       // Use elementFromPoint (same as mousemove) — e.target may be a text node
       // deep inside the row, not the droppable container itself.
       const el = document.elementFromPoint(e.clientX, e.clientY);
@@ -171,7 +212,7 @@ export default function useDragActions({
 
       void moveDragItems(folderId);
     },
-    [handleMouseMove, dragStore, moveDragItems],
+    [handleMouseMove, dragStore, moveDragItems, suppressNextClick],
   );
 
   const onItemMouseDown = useCallback(
@@ -212,6 +253,7 @@ export default function useDragActions({
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
+      suppressClickCleanupRef.current?.();
       document.body.classList.remove("drag-cursor", "no-select");
     };
   }, [handleMouseMove, handleMouseUp]);

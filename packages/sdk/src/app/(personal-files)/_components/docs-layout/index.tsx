@@ -251,6 +251,7 @@ const DocsLayout = observer(
     const {
       selectorDialogVisible,
       selectorMode,
+      hasRooms,
       foldersTree,
       selectorInitData,
       disabledItems,
@@ -663,7 +664,7 @@ const DocsLayout = observer(
                                       FilesSelectorProps["filesSettings"]
                                     >
                                   }
-                                  isUserOnly={selectorMode !== "restore"}
+                                  isUserOnly={!hasRooms && selectorMode !== "restore"}
                                   isRoomsOnly={false}
                                   isThirdParty={false}
                                   openRoot={selectorMode === "restore"}
@@ -714,10 +715,12 @@ const DocsLayout = observer(
                                   onCancel={closeSelectorDialog}
                                   onSubmit={(
                                     selectedItemId: string | number | undefined,
+                                    folderTitle: string,
                                   ) => {
                                     if (selectedItemId !== undefined) {
                                       confirmOperation(
                                         selectedItemId as number,
+                                        folderTitle,
                                       );
                                     }
                                   }}

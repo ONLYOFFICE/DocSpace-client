@@ -153,6 +153,7 @@ class SecondaryProgressDataStore {
           isFolder ? (
             <Trans
               t={t}
+              ns="Common"
               i18nKey="MoveFolderItem"
               components={commonComponents}
               values={commonProps}
@@ -160,6 +161,7 @@ class SecondaryProgressDataStore {
           ) : (
             <Trans
               t={t}
+              ns="Common"
               i18nKey="MoveItem"
               components={commonComponents}
               values={commonProps}
@@ -180,6 +182,7 @@ class SecondaryProgressDataStore {
           isFolder ? (
             <Trans
               t={t}
+              ns="Common"
               i18nKey="CopyFolderItem"
               components={commonComponents}
               values={commonProps}
@@ -244,6 +247,7 @@ class SecondaryProgressDataStore {
         toastTranslation = isSuccess ? (
           <Trans
             t={t}
+            ns="Common"
             i18nKey="MoveItems"
             components={commonComponents}
             values={commonProps}
@@ -262,6 +266,7 @@ class SecondaryProgressDataStore {
         toastTranslation = isSuccess ? (
           <Trans
             t={t}
+            ns="Common"
             i18nKey="CopyItems"
             components={commonComponents}
             values={commonProps}

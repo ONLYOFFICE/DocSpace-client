@@ -46,7 +46,7 @@ import Navigation, {
 } from "@docspace/ui-kit/components/navigation";
 import { TableGroupMenu } from "@docspace/ui-kit/components/table";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
-import { FolderType, DeviceType } from "@docspace/shared/enums";
+import { FolderType, DeviceType, RoomsType } from "@docspace/shared/enums";
 import useDeviceType from "@/hooks/useDeviceType";
 import { useNavigationStore } from "../../_store/NavigationStore";
 import { useFilesSelectionStore } from "../../_store/FilesSelectionStore";
@@ -59,6 +59,9 @@ import { FileOperationsContext } from "../../_contexts/FileOperationsContext";
 import { RoomActionsContext } from "@/app/(rooms)/_contexts/RoomActionsContext";
 import { useHeaderContextMenu } from "../../_hooks/useHeaderContextMenu";
 import useContextMenuModel from "../../_hooks/useContextMenuModel";
+import InvitePanel from "@/app/(rooms)/_components/invite-panel";
+import ChangeRoomOwnerDialog from "@/app/(rooms)/_components/change-room-owner-dialog";
+import LeaveRoomDialog from "@/app/(rooms)/_components/leave-room-dialog";
 import type { HeaderProps } from "./Header.types";
 
 export type { HeaderProps };
@@ -93,9 +96,15 @@ const Header = ({
   const roomActionsCtx = React.useContext(RoomActionsContext);
   const isTrashSection = filesListStore.rootFolderType === FolderType.TRASH;
 
-  const { getContextOptionsFolder, isRoom } = useHeaderContextMenu(
-    filesListStore.currentFolder ?? current,
-  );
+  const {
+    getContextOptionsFolder,
+    isRoom,
+    invitingRoom,
+    setInvitingRoom,
+    changingOwnerRoom,
+    setChangingOwnerRoom,
+    user,
+  } = useHeaderContextMenu(filesListStore.currentFolder ?? current);
 
   const { getHeaderContextMenuModel } = useContextMenuModel({
     onDeleteClick: deleteCtx?.deleteItem,
@@ -231,76 +240,109 @@ const Header = ({
   if (!current || !pathParts) return null;
 
   return (
-    <div
-      className={classnames(styles.headerContainer, {
-        [styles.infoPanelVisible]: isInfoPanelVisible,
-        [styles.isExternalFolder]: false,
-        [styles.isLifetimeEnabled]: false,
-      })}
-      style={outerOffsetStyle}
-    >
-      {tableGroupMenuVisible ? (
-        <TableGroupMenu
-          withComboBox
-          withoutInfoPanelToggler={!onToggleInfoPanel}
-          isChecked={isChecked}
-          isIndeterminate={!isChecked}
-          headerMenu={getHeaderContextMenuModel()}
-          onClick={() => {}}
-          onChange={onCheckboxChange}
-          toggleInfoPanel={onToggleInfoPanel ?? (() => {})}
-          isInfoPanelVisible={isInfoPanelVisible}
-          checkboxOptions={getHeaderMenu()}
-        />
-      ) : (
-        <div className="header-container" style={innerOffsetStyle}>
-          <Navigation
-            hideInfoPanel={() => {}}
-            showText
-            isRootFolder={currentNavigationItems.length === 0}
-            canCreate={false}
-            title={navigationStore.currentTitle ?? title}
-            rootRoomTitle={
-              currentNavigationItems.length === 0 ? "" : pathParts[0].title
-            }
-            isDesktop={currentDeviceType === DeviceType.desktop}
-            navigationItems={currentNavigationItems}
-            getContextOptionsPlus={() => []}
-            getContextOptionsFolder={getContextOptionsFolder}
-            onClickFolder={(idFolder) => {
-              openFolder(
-                idFolder,
-                currentNavigationItems.find((v) => v.id === idFolder)?.title ??
-                  currentNavigationItems[0].title,
-              );
-            }}
-            isTrashFolder={isTrashSection}
-            titles={navigationTitles}
-            isEmptyPage={isEmptyList}
-            isEmptyFilesList={isEmptyList}
-            onBackToParentFolder={onBackToParentFolder}
-            showRootFolderTitle={false}
-            withMenu={isHeaderMenuVisible}
-            currentDeviceType={currentDeviceType}
-            titleIcon=""
-            titleIconTooltip=""
-            showNavigationButton={false}
-            isCurrentFolderInfo={false}
-            showTitle={showTitle}
-            isRoom={isRoom}
-            isInfoPanelVisible={isInfoPanelVisible}
+    <>
+      <div
+        className={classnames(styles.headerContainer, {
+          [styles.infoPanelVisible]: isInfoPanelVisible,
+          [styles.isExternalFolder]: false,
+          [styles.isLifetimeEnabled]: false,
+        })}
+        style={outerOffsetStyle}
+      >
+        {tableGroupMenuVisible ? (
+          <TableGroupMenu
+            withComboBox
+            withoutInfoPanelToggler={!onToggleInfoPanel}
+            isChecked={isChecked}
+            isIndeterminate={!isChecked}
+            headerMenu={getHeaderContextMenuModel()}
+            onClick={() => {}}
+            onChange={onCheckboxChange}
             toggleInfoPanel={onToggleInfoPanel ?? (() => {})}
-            withLogo=""
-            burgerLogo=""
-            onLogoClick={onBurgerClick ?? (() => {})}
-            clearTrash={() => {}}
-            showFolderInfo={() => {}}
-            aiChatButton={aiChatButton}
-            isContextButtonVisible={isHeaderMenuVisible}
+            isInfoPanelVisible={isInfoPanelVisible}
+            checkboxOptions={getHeaderMenu()}
           />
-        </div>
-      )}
-    </div>
+        ) : (
+          <div className="header-container" style={innerOffsetStyle}>
+            <Navigation
+              showText
+              isRootFolder={currentNavigationItems.length === 0}
+              canCreate={false}
+              title={navigationStore.currentTitle ?? title}
+              rootRoomTitle={
+                currentNavigationItems.length === 0 ? "" : pathParts[0].title
+              }
+              isDesktop={currentDeviceType === DeviceType.desktop}
+              navigationItems={currentNavigationItems}
+              getContextOptionsPlus={() => []}
+              getContextOptionsFolder={getContextOptionsFolder}
+              onClickFolder={(idFolder) => {
+                openFolder(
+                  idFolder,
+                  currentNavigationItems.find((v) => v.id === idFolder)
+                    ?.title ?? currentNavigationItems[0].title,
+                );
+              }}
+              isTrashFolder={isTrashSection}
+              titles={navigationTitles}
+              isEmptyPage={isEmptyList}
+              isEmptyFilesList={isEmptyList}
+              onBackToParentFolder={onBackToParentFolder}
+              showRootFolderTitle={false}
+              withMenu={isHeaderMenuVisible}
+              currentDeviceType={currentDeviceType}
+              titleIcon=""
+              titleIconTooltip=""
+              showNavigationButton={false}
+              isCurrentFolderInfo={false}
+              showTitle={showTitle}
+              isRoom={isRoom}
+              isInfoPanelVisible={isInfoPanelVisible}
+              toggleInfoPanel={onToggleInfoPanel ?? (() => {})}
+              withLogo=""
+              burgerLogo=""
+              onLogoClick={onBurgerClick ?? (() => {})}
+              clearTrash={() => {}}
+              showFolderInfo={() => {}}
+              aiChatButton={aiChatButton}
+              isContextButtonVisible={isHeaderMenuVisible}
+            />
+          </div>
+        )}
+      </div>
+      {invitingRoom ? (
+        <InvitePanel
+          visible
+          onClose={() => setInvitingRoom(null)}
+          roomId={invitingRoom.id as number}
+          roomType={
+            (invitingRoom as unknown as { roomType?: RoomsType }).roomType ??
+            RoomsType.EditingRoom
+          }
+          user={user ?? undefined}
+          isPrivateRoom={
+            (invitingRoom as unknown as { private?: boolean }).private ?? false
+          }
+          onMembersUpdated={() => {}}
+        />
+      ) : null}
+      {changingOwnerRoom ? (
+        <ChangeRoomOwnerDialog
+          visible
+          onClose={() => setChangingOwnerRoom(null)}
+          roomId={changingOwnerRoom.id as number}
+          roomOwnerId={
+            (changingOwnerRoom as unknown as { createdBy?: { id?: string } })
+              .createdBy?.id
+          }
+          currentUserId={user?.id}
+        />
+      ) : null}
+      <LeaveRoomDialog
+        currentUserId={user?.id}
+        onTransferOwnership={(room) => setChangingOwnerRoom(room)}
+      />
+    </>
   );
 };
 

@@ -26,7 +26,11 @@
 
 import type { TTranslation } from "@docspace/shared/types";
 import type { TOption } from "@docspace/ui-kit/components/combobox";
-import { ShareAccessRights, EmployeeType, RoomsType } from "@docspace/shared/enums";
+import {
+  ShareAccessRights,
+  EmployeeType,
+  RoomsType,
+} from "@docspace/shared/enums";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
 import { getBrandName } from "@docspace/shared/constants/brands";
@@ -96,7 +100,7 @@ export const makeFreeRole = <T extends InviteItemBase>(
     ? t("GroupMaxAvailableRoleWarning", {
         roleName: (freeRole as { label: string }).label,
       })
-    : t("UserMaxAvailableRoleWarning", {
+    : t("Common:UserMaxAvailableRoleWarning", {
         productName: getBrandName("ProductName"),
       });
   return item;

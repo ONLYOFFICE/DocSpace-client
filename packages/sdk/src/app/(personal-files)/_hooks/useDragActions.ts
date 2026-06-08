@@ -51,6 +51,7 @@ import type {
 
 import { useDragStore } from "../_store/DragStore";
 import type { TrackOperation } from "./useFileOperations";
+import useOperationToast from "./useOperationToast";
 
 export default function useDragActions({
   trackOperation,
@@ -61,6 +62,7 @@ export default function useDragActions({
   const filesSelectionStore = useFilesSelectionStore();
   const filesListStore = useFilesListStore();
   const settingsStore = useSettingsStore();
+  const { showMoveToast } = useOperationToast();
 
   const startXRef = useRef(0);
   const startYRef = useRef(0);
@@ -119,6 +121,16 @@ export default function useDragActions({
         .filter((i) => i.isFolder)
         .map((i) => i.id as number);
 
+      const destFolder = filesListStore.items.find((i) => i.id === destFolderId);
+      const destFolderTitle = destFolder?.title ?? "";
+
+      const finalize = () => {
+        for (const item of filtered) filesListStore.removeItem(item.id);
+        filesSelectionStore.setSelection();
+        filesSelectionStore.setBufferSelection(null);
+        showMoveToast({ items: filtered, destFolderId, destFolderTitle });
+      };
+
       try {
         const operations = await moveToFolder(
           destFolderId,
@@ -129,21 +141,15 @@ export default function useDragActions({
         );
         const opId = operations?.[0]?.id;
         if (opId) {
-          await trackOperation(opId, "move", () => {
-            for (const item of filtered) filesListStore.removeItem(item.id);
-            filesSelectionStore.setSelection();
-            filesSelectionStore.setBufferSelection(null);
-          });
+          await trackOperation(opId, "move", finalize);
         } else {
-          for (const item of filtered) filesListStore.removeItem(item.id);
-          filesSelectionStore.setSelection();
-          filesSelectionStore.setBufferSelection(null);
+          finalize();
         }
       } catch (error) {
         toastr.error(error instanceof Error ? error.message : String(error));
       }
     },
-    [filesSelectionStore, filesListStore, trackOperation],
+    [filesSelectionStore, filesListStore, showMoveToast, trackOperation],
   );
 
   const handleMouseMove = useCallback(

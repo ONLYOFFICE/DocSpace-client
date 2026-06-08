@@ -625,9 +625,13 @@ const DocsLayout = observer(
                                 onCancel={closeSelectorDialog}
                                 onSubmit={(
                                   selectedItemId: string | number | undefined,
+                                  folderTitle: string,
                                 ) => {
                                   if (selectedItemId !== undefined) {
-                                    confirmOperation(selectedItemId as number);
+                                    confirmOperation(
+                                      selectedItemId as number,
+                                      folderTitle,
+                                    );
                                   }
                                 }}
                               />

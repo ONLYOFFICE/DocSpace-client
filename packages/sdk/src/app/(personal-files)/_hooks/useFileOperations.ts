@@ -60,6 +60,7 @@ import { getOperationProgress } from "@docspace/shared/utils/getOperationProgres
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { PAGE_COUNT } from "@/utils/constants";
+import useOperationToast from "./useOperationToast";
 import type {
   TFileItem,
   TFolderItem,
@@ -91,6 +92,7 @@ export type SelectorInitData = {
 
 export default function useFileOperations() {
   const router = useRouter();
+  const { showCopyToast, showMoveToast } = useOperationToast();
   const filesListStore = useFilesListStore();
   const filesSelectionStore = useFilesSelectionStore();
 
@@ -106,6 +108,7 @@ export default function useFileOperations() {
   >([]);
   const pendingConflictDestRef = useRef<{
     destFolderId: number;
+    destFolderTitle: string;
     isMove: boolean;
   } | null>(null);
 
@@ -280,6 +283,7 @@ export default function useFileOperations() {
       isMove: boolean,
       resolveType: ConflictResolveType,
       itemsToProcess: (TFileItem | TFolderItem)[],
+      destFolderTitle: string,
     ) => {
       const fileIds = itemsToProcess
         .filter((i) => !i.isFolder)
@@ -307,6 +311,19 @@ export default function useFileOperations() {
       const opId = operations?.[0]?.id;
       const icon: OperationProgress["icon"] = isMove ? "move" : "copy";
 
+      const showSuccessToast = () => {
+        const toastArgs = {
+          items: itemsToProcess,
+          destFolderId,
+          destFolderTitle,
+        };
+        if (isMove) {
+          showMoveToast(toastArgs);
+        } else {
+          showCopyToast(toastArgs);
+        }
+      };
+
       if (opId) {
         await trackOperation(opId, icon, () => {
           if (isMove) {
@@ -315,19 +332,29 @@ export default function useFileOperations() {
             }
             filesSelectionStore.setSelection();
           }
+          showSuccessToast();
         });
-      } else if (isMove) {
-        for (const item of itemsToProcess) {
-          filesListStore.removeItem(item.id);
+      } else {
+        if (isMove) {
+          for (const item of itemsToProcess) {
+            filesListStore.removeItem(item.id);
+          }
+          filesSelectionStore.setSelection();
         }
-        filesSelectionStore.setSelection();
+        showSuccessToast();
       }
     },
-    [filesListStore, filesSelectionStore, trackOperation],
+    [
+      filesListStore,
+      filesSelectionStore,
+      showCopyToast,
+      showMoveToast,
+      trackOperation,
+    ],
   );
 
   const confirmOperation = useCallback(
-    async (destFolderId: number | string) => {
+    async (destFolderId: number | string, destFolderTitle: string) => {
       if (!pendingItems.length) return;
 
       const isMove = selectorMode === "move" || selectorMode === "restore";
@@ -354,6 +381,7 @@ export default function useFileOperations() {
         if (conflicts.length > 0) {
           pendingConflictDestRef.current = {
             destFolderId: destFolderId as number,
+            destFolderTitle,
             isMove,
           };
           setConflictItems(
@@ -372,6 +400,7 @@ export default function useFileOperations() {
           isMove,
           ConflictResolveType.Overwrite,
           pendingItems,
+          destFolderTitle,
         );
       } catch (error) {
         toastr.error(error instanceof Error ? error.message : String(error));
@@ -396,6 +425,7 @@ export default function useFileOperations() {
           dest.isMove,
           resolveType,
           pendingItems,
+          dest.destFolderTitle,
         );
       } catch (error) {
         toastr.error(error instanceof Error ? error.message : String(error));

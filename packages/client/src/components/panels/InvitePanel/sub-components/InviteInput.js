@@ -342,9 +342,9 @@ const InviteInput = ({
     const isDisabled = status === EmployeeStatus.Disabled;
 
     if (isDisabled) {
-      toastr.warning(t("UsersCannotBeAdded"));
+      toastr.warning(t("Common:UsersCannotBeAdded"));
     } else if (shared) {
-      toastr.warning(t("UsersAlreadyAdded"));
+      toastr.warning(t("Common:UsersAlreadyAdded"));
     } else {
       const guestWrongRoleInAgent =
         isVisitor &&
@@ -530,7 +530,7 @@ const InviteInput = ({
       });
 
     if (filteredItems.length !== items.length) {
-      toastr.warning(t("UsersAlreadyAdded"));
+      toastr.warning(t("Common:UsersAlreadyAdded"));
     }
 
     if (!filteredItems.length) {
@@ -659,7 +659,7 @@ const InviteInput = ({
             onClick={openUsersPanel}
             dataTestId="invite_panel_choose_from_list_link"
           >
-            {t("ChooseFromList")}
+            {t("Common:ChooseFromList")}
           </Link>
         ) : null}
       </Heading>
@@ -674,10 +674,10 @@ const InviteInput = ({
               productName: getBrandName("ProductName"),
             })
           : !allowInvitingGuests
-            ? t("InviteToRoomManuallyInfoMembers", {
+            ? t("Common:InviteToRoomManuallyInfoMembers", {
                 productName: getBrandName("ProductName"),
               })
-            : t("InviteToRoomManuallyInfoGuest", {
+            : t("Common:InviteToRoomManuallyInfoGuest", {
                 productName: getBrandName("ProductName"),
               })}
       </Text>
@@ -737,8 +737,8 @@ const InviteInput = ({
               roomId === -1
                 ? t("InviteMembersSearchPlaceholder")
                 : !allowInvitingGuests
-                  ? t("InviteToRoomAddPlaceholder")
-                  : t("InviteToRoomSearchPlaceholder")
+                  ? t("Common:InviteToRoomAddPlaceholder")
+                  : t("Common:InviteToRoomSearchPlaceholder")
             }
             value={inputValue}
             onKeyDown={onKeyDown}

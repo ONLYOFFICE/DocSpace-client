@@ -638,7 +638,7 @@ const InvitePanel = ({
       return unique;
     }, []);
 
-    if (items.length > filtered.length) toastr.warning(t("UsersAlreadyAdded"));
+    if (items.length > filtered.length) toastr.warning(t("Common:UsersAlreadyAdded"));
 
     return filtered;
   };
@@ -1147,7 +1147,7 @@ const InvitePanel = ({
           isDisabled={hasErrors || !hasInvitedUsers}
           primary
           onClick={onClickSend}
-          label={t("SendInvitation")}
+          label={t("Common:SendInvitation")}
           isLoading={isLoading}
           testId="invite_panel_send_button"
         />

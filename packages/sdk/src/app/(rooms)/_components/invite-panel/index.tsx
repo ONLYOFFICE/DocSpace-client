@@ -58,7 +58,11 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
-import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
+import {
+  checkIfAccessPaid,
+  filterPaidRoleOptions,
+} from "@docspace/shared/utils/filterPaidRoleOptions";
+import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 import PeopleSelector from "@docspace/ui-kit/selectors/People";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
@@ -68,6 +72,8 @@ import { getDate } from "@docspace/shared/components/share/Share.helpers";
 import ExternalLinks from "./sub-components/ExternalLinks";
 import InviteInput from "./sub-components/InviteInput";
 import ItemsList from "./sub-components/ItemsList";
+import LinkSettingsPanel from "../link-settings-panel";
+import type { LinkSettingsSubmitOption } from "../link-settings-panel/LinkSettingsPanel.types";
 import { fixAccess } from "./utils";
 import styles from "./InvitePanel.module.scss";
 
@@ -199,7 +205,11 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
   const [usersList, setUsersList] = useState<InviteItem[]>([]);
   const [showGuestsTab] = useState(true);
   const [isLinksToggling, setIsLinksToggling] = useState(false);
-  const [, setLinkSettingsPanelVisible] = useState(false);
+  const [linkSettingsPanelVisible, setLinkSettingsPanelVisible] =
+    useState(false);
+  const [linkSelectedAccess, setLinkSelectedAccess] = useState<TOption | null>(
+    null,
+  );
 
   const inputsRef = useRef<HTMLDivElement>(null);
 
@@ -487,6 +497,63 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
     }
   };
 
+  // ─── Link Settings Panel ─────────────────────────────────────────────────────
+
+  const roomTypeForLinks: RoomsType =
+    roomTypeResolved === -1
+      ? RoomsType.EditingRoom
+      : (roomTypeResolved as RoomsType);
+
+  const linkAccesses = getAccessOptions(
+    t,
+    roomTypeForLinks,
+    false,
+    true,
+    isOwner,
+    isAdmin,
+    false, // standalone = false
+  );
+
+  const filteredLinkAccesses = (
+    roomTypeForLinks === RoomsType.AIRoom
+      ? (
+          filterNotReadOnlyOptions(
+            linkAccesses as unknown as Parameters<
+              typeof filterNotReadOnlyOptions
+            >[0],
+          ) as unknown as TOption[]
+        ).filter(
+          (o) => !(o as { isSeparator?: boolean }).isSeparator && !o.disabled,
+        )
+      : (filterPaidRoleOptions(
+          linkAccesses as unknown as Parameters<typeof filterPaidRoleOptions>[0],
+        ) as unknown as TOption[])
+  ) as TOption[];
+
+  const onCloseLinkSettingsPanel = () => {
+    setLinkSettingsPanelVisible(false);
+  };
+
+  const onSubmitLinkSettingsPanel = (defaultLink: LinkSettingsSubmitOption) => {
+    const defaultLinkAccess = (linkSelectedAccess ?? defaultLink).access ?? null;
+
+    onCloseLinkSettingsPanel();
+
+    if (activeLink?.shareLink) {
+      const accessData = linkSelectedAccess ?? defaultLink;
+
+      onSelectAccess({
+        ...accessData,
+        maxUseCount: defaultLink.maxUseCount,
+        expirationDate: defaultLink.expirationDate,
+      });
+    } else {
+      editLink(defaultLinkAccess, defaultLink);
+    }
+
+    onChangeExternalLinksVisible(true);
+  };
+
   // ─── Send Invitations ────────────────────────────────────────────────────────
 
   const onClickSend = async () => {
@@ -659,11 +726,6 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
   // ─── Body ────────────────────────────────────────────────────────────────────
 
   const bodyInvitePanel = useMemo(() => {
-    const roomTypeForLinks: RoomsType =
-      roomTypeResolved === -1
-        ? RoomsType.EditingRoom
-        : (roomTypeResolved as RoomsType);
-
     return (
       <div style={{ display: "contents" }}>
         {!isPrivateRoom ? (
@@ -736,6 +798,7 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
     shareLinks,
     getInfo,
     roomTypeResolved,
+    roomTypeForLinks,
     externalLinksVisible,
     activeLink,
     isMobileView,
@@ -792,7 +855,7 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
       onClose={handleClose}
       onBackClick={onBackClick}
       displayType={ModalDialogType.aside}
-      containerVisible={addUsersPanelVisible}
+      containerVisible={addUsersPanelVisible || linkSettingsPanelVisible}
       withBodyScroll
       id="invite_panel_modal"
     >
@@ -870,6 +933,28 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
               currentUserId={String(currentUserId)}
             />
           )}
+        </ModalDialog.Container>
+      ) : null}
+
+      {linkSettingsPanelVisible ? (
+        <ModalDialog.Container>
+          <LinkSettingsPanel
+            culture={culture}
+            isVisible={linkSettingsPanelVisible}
+            onClose={() => {
+              onCloseLinkSettingsPanel();
+              setLinkSelectedAccess(null);
+              handleClose();
+            }}
+            onBackClick={onCloseLinkSettingsPanel}
+            onSubmit={onSubmitLinkSettingsPanel}
+            activeLink={activeLink}
+            filteredAccesses={filteredLinkAccesses}
+            linkSelectedAccess={linkSelectedAccess}
+            setLinkSelectedAccess={setLinkSelectedAccess}
+            defaultAccess={defaultAccess ?? ShareAccessRights.ReadOnly}
+            isContacts={false}
+          />
         </ModalDialog.Container>
       ) : null}
 

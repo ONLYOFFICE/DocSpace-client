@@ -30,6 +30,7 @@ import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import ButtonAlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
 import ClockIconUrl from "PUBLIC_DIR/images/clock.react.svg?url";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/icons/12/person-plus.react.svg?url";
+import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-common.svg?url";
 
 import { useRef } from "react";
 import classNames from "classnames";
@@ -201,6 +202,13 @@ const ExternalLinks: React.FC<ExternalLinksProps> = ({
         })}
       >
         {t("Common:InviteViaLink")}
+
+        <IconButton
+          iconName={SettingsReactSvgUrl}
+          size={16}
+          dataTestId="link-settings_icon"
+          onClick={() => setLinkSettingsPanelVisible(true)}
+        />
 
         <ToggleButton
           className={classNames("invite-via-link", styles.toggleButton)}

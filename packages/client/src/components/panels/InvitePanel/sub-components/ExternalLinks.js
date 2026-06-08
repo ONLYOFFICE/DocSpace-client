@@ -187,13 +187,13 @@ const ExternalLinks = ({
         })
       : roomType === RoomsType.AIRoom
         ? allowInvitingGuests
-          ? t("InviteViaLinkDescriptionAgentGuest")
-          : t("InviteViaLinkDescriptionAgentMembers", {
+          ? t("Common:InviteViaLinkDescriptionAgentGuest")
+          : t("Common:InviteViaLinkDescriptionAgentMembers", {
               productName: getBrandName("ProductName"),
             })
         : allowInvitingGuests
-          ? t("InviteViaLinkDescriptionRoomGuest")
-          : t("InviteViaLinkDescriptionRoomMembers", {
+          ? t("Common:InviteViaLinkDescriptionRoomGuest")
+          : t("Common:InviteViaLinkDescriptionRoomMembers", {
               productName: getBrandName("ProductName"),
             });
 
@@ -277,7 +277,7 @@ const ExternalLinks = ({
                     fontSize="12px"
                     fontWeight={400}
                   >
-                    {t("ValidUntil")}
+                    {t("Common:ValidUntil")}
                   </Text>
                   <Text
                     fontSize="12px"
@@ -297,7 +297,7 @@ const ExternalLinks = ({
                         <>
                           <Text>{t("Common:LinkSettingsExpired")}</Text>
                           <Text>
-                            {t("LinkSettingsExpiredToastDescription")}
+                            {t("Common:LinkSettingsExpiredToastDescription")}
                           </Text>
                         </>
                       }
@@ -319,7 +319,7 @@ const ExternalLinks = ({
                     fontSize="12px"
                     fontWeight={400}
                   >
-                    {t("UsersJoined")}
+                    {t("Common:UsersJoined")}
                   </Text>
                   <Text
                     fontSize="12px"
@@ -336,9 +336,9 @@ const ExternalLinks = ({
                       iconNode={<ButtonAlertIcon />}
                       tooltipContent={
                         <>
-                          <Text>{t("LinkSettingsUsersLimitToast")}</Text>
+                          <Text>{t("Common:LinkSettingsUsersLimitToast")}</Text>
                           <Text>
-                            {t("LinkSettingsUsersLimitToastDescription")}
+                            {t("Common:LinkSettingsUsersLimitToastDescription")}
                           </Text>
                         </>
                       }

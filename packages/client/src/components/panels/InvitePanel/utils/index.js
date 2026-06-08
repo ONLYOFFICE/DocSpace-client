@@ -85,10 +85,10 @@ export const makeFreeRole = (item, t, freeRole) => {
 
 	item.access = freeRole.access;
 	item.warning = item.isGroup
-		? t("GroupMaxAvailableRoleWarning", {
+		? t("Common:GroupMaxAvailableRoleWarning", {
 				roleName: freeRole.label,
 			})
-		: t("UserMaxAvailableRoleWarning", {
+		: t("Common:UserMaxAvailableRoleWarning", {
 				productName: getBrandName("ProductName"),
 			});
 	return item;
@@ -99,10 +99,10 @@ export const makeViewerRole = (item, t, viewerRole) => {
 
 	item.warning =
 		item.access === ShareAccessRights.RoomManager
-			? t("UserAgentMaxAvailableRoleWarning", {
+			? t("Common:UserAgentMaxAvailableRoleWarning", {
 					productName: getBrandName("ProductName"),
 				})
-			: t("GuestAgentMaxAvailableRoleWarning", {
+			: t("Common:GuestAgentMaxAvailableRoleWarning", {
 					productName: getBrandName("ProductName"),
 				});
 	item.access = viewerRole.access;

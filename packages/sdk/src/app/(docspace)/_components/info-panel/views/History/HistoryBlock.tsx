@@ -30,6 +30,7 @@ import React from "react";
 import classNames from "classnames";
 import { decode } from "he";
 import { useTranslation } from "react-i18next";
+import { usePathname } from "next/navigation";
 
 import {
   Avatar,
@@ -95,7 +96,8 @@ const HistoryBlock = ({
   const { getIcon } = useItemIcon({
     filesSettings: docsSettingsStore.filesSettings ?? undefined,
   });
-  const { openFolder } = useFolderActions({ t });
+  const { openLocation } = useFolderActions({ t });
+  const pathname = usePathname();
 
   const hasRelatedItems = feed.related.length > 0;
   const { getFeedTranslation } = useFeedTranslation(feed, hasRelatedItems);
@@ -128,7 +130,13 @@ const HistoryBlock = ({
 
   const onOpenLocation = () => {
     if (!data.parentId) return;
-    openFolder(data.parentId, data.parentTitle ?? "");
+
+    const section = pathname?.split("/")[1] ?? "";
+    const targetPath = ["rooms", "archive"].includes(section)
+      ? `/${section}/${data.parentId}`
+      : undefined;
+
+    openLocation(data.parentId, data.id, itemTitle, targetPath);
   };
 
   return (

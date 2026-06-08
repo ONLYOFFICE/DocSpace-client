@@ -25,6 +25,7 @@ import { PAGE_COUNT } from "@/utils/constants";
 type useFilesFiltersProps = {
   filesFilter: string;
   shareKey?: string;
+  currentFolderId?: string | number;
   filesViewAs: TViewAs | null;
   setFilesViewAs: (viewAs: TViewAs) => void;
   setClearSearch: (value: boolean) => void;
@@ -33,6 +34,7 @@ type useFilesFiltersProps = {
 export default function useFilesFilter({
   filesFilter,
   shareKey,
+  currentFolderId,
   filesViewAs,
   setFilesViewAs,
   setClearSearch,
@@ -41,13 +43,24 @@ export default function useFilesFilter({
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
-  const [filter, setFilter] = React.useState<FilesFilter>(
-    FilesFilter.getFilter({ search: `?${filesFilter}`, pathname } as Location)!,
+  const parseFromLocation = React.useCallback(
+    (loc: Pick<Location, "search" | "pathname">) => {
+      const next = FilesFilter.getFilter(loc as Location)!;
+      if (currentFolderId != null) {
+        next.folder = String(currentFolderId);
+      }
+      return next;
+    },
+    [currentFolderId],
+  );
+
+  const [filter, setFilter] = React.useState<FilesFilter>(() =>
+    parseFromLocation({ search: `?${filesFilter}`, pathname }),
   );
 
   React.useEffect(() => {
-    setFilter(FilesFilter.getFilter(window.location)!);
-  }, [searchParams]);
+    setFilter(parseFromLocation(window.location));
+  }, [searchParams, parseFromLocation]);
 
   const onClearFilter = React.useCallback(() => {
     const defaultFilter = FilesFilter.getDefault();
@@ -376,9 +389,7 @@ export default function useFilesFilter({
             const parsed = JSON.parse(tagsRaw);
             if (Array.isArray(parsed)) {
               const removed = String(key).replace(/^tag-/, "");
-              const remaining = parsed.filter(
-                (t: string) => t !== removed,
-              );
+              const remaining = parsed.filter((t: string) => t !== removed);
               if (remaining.length) {
                 sp.set("tags", JSON.stringify(remaining));
               } else {
@@ -422,3 +433,4 @@ export default function useFilesFilter({
     initSelectedFilterData,
   };
 }
+

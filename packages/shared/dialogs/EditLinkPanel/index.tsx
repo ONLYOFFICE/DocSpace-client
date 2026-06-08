@@ -119,6 +119,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
   searchParams,
   setSearchParams,
   withBackButton = false,
+  isExternalShareRestricted = false,
 }) => {
   const { t } = useTranslation("Common");
 
@@ -161,7 +162,19 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
     );
   }, [t, item, isPrimaryLink]);
 
-  const linkAccessOptions = useMemo(() => getAccessTypeOptions(t, false), [t]);
+  const linkAccessOptions = useMemo(() => {
+    const options = getAccessTypeOptions(t, false);
+    if (!isExternalShareRestricted) return options;
+    return options.map((opt) =>
+      !opt.internal
+        ? {
+            ...opt,
+            disabled: true,
+            tooltip: t("Common:ExternalLinksDisabledByAdmin"),
+          }
+        : opt,
+    );
+  }, [t, isExternalShareRestricted]);
   const [unsavedChangesDialogVisible, setUnsavedChangesDialog] =
     useState(false);
 
@@ -310,7 +323,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
         password: passwordAccessIsChecked ? passwordValue : undefined,
         denyDownload,
         internal: selectedLinkAccess.internal,
-        ...(!isSameDate && expirationDate && { expirationDate }),
+        ...(!isSameDate && { expirationDate }),
         title: deferredLinkTitle,
       },
     };

@@ -228,6 +228,11 @@ class AuthStore {
       );
     } else {
       this.userStore?.setIsLoaded(true);
+
+      const portalCulture = this.settingsStore?.culture;
+      if (i18n && portalCulture && portalCulture !== i18n.language) {
+        i18n.changeLanguage(portalCulture);
+      }
     }
 
     return Promise.all(requests)

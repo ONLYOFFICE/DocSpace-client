@@ -2946,6 +2946,8 @@ class FilesStore {
           "mark-as-favorite",
           "remove-from-favorites",
           "copy-to",
+          "ask-ai",
+          "separator6",
         ]);
 
         if (!canMove && !canDuplicate) {

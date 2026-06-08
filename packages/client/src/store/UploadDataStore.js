@@ -2860,6 +2860,10 @@ class UploadDataStore {
     if (!isCopy || destFolderId === this.selectedFolderStore.id) {
       this.clearActiveOperations(fileIds, folderIds);
 
+      if (!isCopy) {
+        this.filesStore.removeFiles(fileIds, folderIds, null, destFolderId);
+      }
+
       isMovingSelectedFolder &&
         this.navigateToNewFolderLocation(this.selectedFolderStore.id);
       this.dialogsStore.setIsFolderActions(false);

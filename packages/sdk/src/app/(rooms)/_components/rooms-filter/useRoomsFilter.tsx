@@ -238,38 +238,6 @@ export default function useRoomsFilter({
     }
     const tags = tagsStore.tags;
 
-    const subjectOptions: unknown[] = [
-      {
-        key: FilterGroups.roomFilterSubject,
-        group: FilterGroups.roomFilterSubject,
-        label: t("Common:Contacts"),
-        isHeader: true,
-        isLast: !tags.length,
-        withMultiItems: true,
-      },
-      {
-        id: "filter_author-me",
-        key: FilterKeys.me,
-        group: FilterGroups.roomFilterSubject,
-        label: t("Common:MeLabel"),
-      },
-      {
-        id: "filter_author-user",
-        key: FilterKeys.user,
-        group: FilterGroups.roomFilterSubject,
-        displaySelectorType: "link",
-      },
-    ];
-
-    if (!isCollaborator && !isVisitor) {
-      subjectOptions.push({
-        id: "filter_author-other",
-        key: FilterKeys.other,
-        group: FilterGroups.roomFilterSubject,
-        label: t("Common:SelectAction"),
-      });
-    }
-
     const ownerOptions: unknown[] = [
       {
         key: FilterGroups.roomFilterOwner,
@@ -302,7 +270,39 @@ export default function useRoomsFilter({
       });
     }
 
-    const filterOptions: unknown[] = [...subjectOptions, ...ownerOptions];
+    const subjectOptions: unknown[] = [
+      {
+        key: FilterGroups.roomFilterSubject,
+        group: FilterGroups.roomFilterSubject,
+        label: t("Common:Contacts"),
+        isHeader: true,
+        isLast: !tags.length,
+        withMultiItems: true,
+      },
+      {
+        id: "filter_author-me",
+        key: FilterKeys.me,
+        group: FilterGroups.roomFilterSubject,
+        label: t("Common:MeLabel"),
+      },
+      {
+        id: "filter_author-user",
+        key: FilterKeys.user,
+        group: FilterGroups.roomFilterSubject,
+        displaySelectorType: "link",
+      },
+    ];
+
+    if (!isCollaborator && !isVisitor) {
+      subjectOptions.push({
+        id: "filter_author-other",
+        key: FilterKeys.other,
+        group: FilterGroups.roomFilterSubject,
+        label: t("Common:SelectAction"),
+      });
+    }
+
+    const filterOptions: unknown[] = [...ownerOptions, ...subjectOptions];
 
     if (tags.length > 0) {
       filterOptions.push({
@@ -527,7 +527,7 @@ function applyParamsToFilter(sp: URLSearchParams, f: RoomsFilter): void {
   if (sp.get("sortBy")) f.sortBy = sp.get("sortBy") as typeof f.sortBy;
   if (sp.get("sortOrder"))
     f.sortOrder = sp.get("sortOrder") as typeof f.sortOrder;
-  if (sp.get("search")) f.filterValue = sp.get("search");
+  if (sp.get("filterValue")) f.filterValue = sp.get("filterValue");
   if (sp.get("subjectId")) f.subjectId = sp.get("subjectId");
   if (sp.get("subjectOwnerId")) f.subjectOwnerId = sp.get("subjectOwnerId");
   const tagsRaw = sp.get("tags");

@@ -56,6 +56,7 @@ import useFolderActions from "../../_hooks/useFolderActions";
 import useHeaderMenu from "../../_hooks/useHeaderMenu";
 import { DeleteContext } from "../../_contexts/DeleteContext";
 import { FileOperationsContext } from "../../_contexts/FileOperationsContext";
+import { RoomActionsContext } from "@/app/(rooms)/_contexts/RoomActionsContext";
 import { useHeaderContextMenu } from "../../_hooks/useHeaderContextMenu";
 import useContextMenuModel from "../../_hooks/useContextMenuModel";
 import type { HeaderProps } from "./Header.types";
@@ -88,6 +89,7 @@ const Header = ({
   const { currentDeviceType } = useDeviceType();
   const deleteCtx = React.useContext(DeleteContext);
   const fileOpsCtx = React.useContext(FileOperationsContext);
+  const roomActionsCtx = React.useContext(RoomActionsContext);
   const isTrashSection = filesListStore.rootFolderType === FolderType.TRASH;
 
   const { getContextOptionsFolder, isRoom } = useHeaderContextMenu(
@@ -96,16 +98,20 @@ const Header = ({
 
   const { getHeaderContextMenuModel } = useContextMenuModel({
     onDeleteClick: deleteCtx?.deleteItem,
-    onDeleteSelectedClick: deleteCtx?.deleteItems,
+    onDeleteSelectedClick:
+      roomActionsCtx?.deleteSelected ?? deleteCtx?.deleteItems,
     onCopyClick: !isTrashSection ? fileOpsCtx?.copyItem : undefined,
     onMoveClick: !isTrashSection ? fileOpsCtx?.moveItem : undefined,
     onDuplicateClick: !isTrashSection ? fileOpsCtx?.duplicateItem : undefined,
     onRestoreClick: isTrashSection ? fileOpsCtx?.restoreItem : undefined,
     onCopySelectedClick: !isTrashSection ? fileOpsCtx?.copyItems : undefined,
     onMoveSelectedClick: !isTrashSection ? fileOpsCtx?.moveItems : undefined,
-    onRestoreSelectedClick: isTrashSection
-      ? fileOpsCtx?.restoreItems
-      : undefined,
+    onRestoreSelectedClick: roomActionsCtx?.restoreSelected
+      ?? (isTrashSection ? fileOpsCtx?.restoreItems : undefined),
+    isRoomsFolder: !!roomActionsCtx,
+    isArchiveRoomsFolder: !!roomActionsCtx?.isArchive,
+    onArchiveSelectedClick: roomActionsCtx?.archiveSelected,
+    onPinSelectedClick: roomActionsCtx?.pinSelected,
   });
 
   const { getHeaderMenu, onCheckboxChange } = useHeaderMenu();

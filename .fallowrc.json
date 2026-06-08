@@ -1,0 +1,43 @@
+{
+  "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "libs/*"
+    ]
+  },
+  // @docspace/ui-kit has no main/module/exports in package.json so fallow
+  // cannot trace cross-workspace consumers. Mark as public to avoid false positives.
+  "publicPackages": ["@docspace/ui-kit"],
+  "ignorePatterns": [
+    // MSW mock handlers and test fixtures — not imported by app code
+    "**/__mocks__/**",
+    // Build artifacts
+    "**/dist/**",
+    "**/.next/**",
+    "**/build/**",
+    // Static assets — JSON/image files, not JS modules
+    "**/public/**",
+    // Translation and screenshot tooling — standalone CLI tools, not part of the app
+    "common/translation-app/**",
+    "common/screenshot-comparison-app/**"
+  ],
+  // Peer dependencies not imported directly in source code — consumed internally by their dependents
+  "ignoreDependencies": ["linkifyjs"],
+  // Don't flag an export that is also referenced within the same file
+  "ignoreExportsUsedInFile": true,
+  "duplicates": {
+    // Hide pair-only clones; focus on widespread copy-paste worth refactoring.
+    // Lower to 2 to report every duplicate pair.
+    "minOccurrences": 3
+  },
+  "rules": {
+    // Dead code — warn only; too many pre-existing issues to error on immediately
+    "unused-files": "warn",
+    "unused-exports": "warn",
+    "unused-types": "warn",
+    // Dependencies and circular imports are structural problems — always error
+    "unused-dependencies": "error",
+    "circular-dependencies": "error"
+  }
+}

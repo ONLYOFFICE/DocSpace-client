@@ -50,7 +50,11 @@ import { SnackBar } from "@docspace/ui-kit/components/snackbar";
 import { Toast, toastr, ToastType } from "@docspace/ui-kit/components/toast";
 import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
 import { updateTempContent } from "@docspace/shared/utils/common";
-import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
+import {
+  AnalyticsEvents,
+  DeviceType,
+  IndexedDBStores,
+} from "@docspace/shared/enums";
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
@@ -477,6 +481,15 @@ const Shell = ({ page = "home", ...rest }) => {
       localStorage.getItem("socialAuthWelcomeBar") === "true"
     ) {
       setSocialAuthWelcomeDialogVisible(true);
+
+      if (localStorage.getItem("portalCreatedEventSent") !== "true") {
+        localStorage.setItem("portalCreatedEventSent", "true");
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: AnalyticsEvents.PortalCreated,
+        });
+      }
     }
   }, [isLoaded]);
 

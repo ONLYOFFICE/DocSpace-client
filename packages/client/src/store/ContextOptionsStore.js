@@ -496,8 +496,8 @@ class ContextOptionsStore {
       .lockFileAction(id, !locked)
       .then(() =>
         locked
-          ? toastr.success(t("Translations:FileUnlocked"))
-          : toastr.success(t("Translations:FileLocked")),
+          ? toastr.success(t("Common:FileUnlocked"))
+          : toastr.success(t("Common:FileLocked")),
       )
       .catch((err) => {
         toastr.error(err);
@@ -1911,6 +1911,11 @@ class ContextOptionsStore {
     const primaryLink = await ShareLinkService.getPrimaryLink(item);
 
     if (primaryLink) {
+      if (primaryLink.sharedTo?.isExpired) {
+        toastr.error(t("Common:LinkExpired"));
+        return;
+      }
+
       if (this.filesSettingsStore.isLinkBlockedByAdmin(item, primaryLink)) {
         toastr.error(t("Common:LinkBlockedByAdminWarning"));
         return;

@@ -403,19 +403,23 @@ export async function getUserByEmail(
 }
 
 export async function getScopeList(token?: string) {
-  logger.debug(`Start GET /scopes`);
+  logger.debug(`Start GET /oauth2/scopes`);
 
   try {
     const hdrs: [string, string][] = token
       ? [["Cookie", `x-signature=${token}`]]
       : [["", ""]];
 
-    const [getScopeListRes] = await createRequest([`/scopes`], hdrs, "GET");
+    const [getScopeListRes] = await createRequest(
+      [`/oauth2/scopes`],
+      hdrs,
+      "GET",
+    );
 
     const scopeList = await fetch(getScopeListRes);
 
     if (!scopeList.ok) {
-      logger.error(`GET /scopes failed: ${scopeList.status}`);
+      logger.error(`GET /oauth2/scopes failed: ${scopeList.status}`);
       return;
     }
 
@@ -428,10 +432,10 @@ export async function getScopeList(token?: string) {
 }
 
 export async function getOAuthClient(clientId: string) {
-  logger.debug(`Start GET /clients/${clientId}/public/info`);
+  logger.debug(`Start GET /oauth2/clients/${clientId}/public/info`);
 
   try {
-    const route = `/clients/${clientId}/public/info`;
+    const route = `/oauth2/clients/${clientId}/public/info`;
 
     const request = await createRequest([route], [["", ""]], "GET");
 
@@ -439,7 +443,7 @@ export async function getOAuthClient(clientId: string) {
 
     if (!oauthClient) {
       logger.error(
-        `GET /clients/${clientId}/public/info failed: missing oauthClient`,
+        `GET /oauth2/clients/${clientId}/public/info failed: missing oauthClient`,
       );
       return;
     }

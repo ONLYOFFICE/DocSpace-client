@@ -38,6 +38,7 @@ import { useSearchParams } from "react-router";
 
 import EditLinkPanel from "@docspace/shared/dialogs/EditLinkPanel";
 import { isRoom } from "@docspace/shared/utils/typeGuards";
+import { FolderType } from "@docspace/shared/enums";
 
 import type { InjectedEditLinkPanelProps } from "./EditLinkPanel.types";
 
@@ -53,6 +54,7 @@ const EditLinkPanelWrapper = ({
   setExternalLink,
   currentDeviceType,
   getPortalPasswordSettings,
+  isExternalShareRestricted,
 }: InjectedEditLinkPanelProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -72,13 +74,20 @@ const EditLinkPanelWrapper = ({
         getPortalPasswordSettings,
         searchParams,
         setSearchParams,
+        isExternalShareRestricted,
       }}
     />
   );
 };
 
 export default inject<TStore>(
-  ({ authStore, settingsStore, dialogsStore, publicRoomStore }) => {
+  ({
+    authStore,
+    settingsStore,
+    dialogsStore,
+    publicRoomStore,
+    filesSettingsStore,
+  }) => {
     const {
       editLinkPanelIsVisible,
       setEditLinkPanelIsVisible,
@@ -97,6 +106,17 @@ export default inject<TStore>(
       ? externalLinks.find((l) => l?.sharedTo?.id === linkId)
       : linkParams?.link;
 
+    const {
+      isExternalShareRestricted: isShareRestricted,
+      externalShareApplyToDocuments,
+      externalShareApplyToRooms,
+    } = filesSettingsStore;
+
+    const isInRoom = item?.rootFolderType === FolderType.Rooms;
+    const isExternalShareRestricted =
+      isShareRestricted &&
+      (isInRoom ? externalShareApplyToRooms : externalShareApplyToDocuments);
+
     return {
       link,
       item,
@@ -111,6 +131,7 @@ export default inject<TStore>(
 
       currentDeviceType,
       getPortalPasswordSettings,
+      isExternalShareRestricted,
     };
   },
 )(observer(EditLinkPanelWrapper as FC));

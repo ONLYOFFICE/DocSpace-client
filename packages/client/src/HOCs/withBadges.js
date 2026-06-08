@@ -186,7 +186,7 @@ export default function withBadges(WrappedComponent) {
 
       this.setState({ isLoading: true });
       return lockFileAction(id, !locked)
-        .then(() => toastr.success(t("Translations:FileUnlocked")))
+        .then(() => toastr.success(t("Common:FileUnlocked")))
         .catch((err) => toastr.error(err))
         .finally(() => this.setState({ isLoading: false }));
     };
@@ -403,3 +403,4 @@ export default function withBadges(WrappedComponent) {
     },
   )(observer(WithBadges));
 }
+

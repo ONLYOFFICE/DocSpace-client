@@ -553,7 +553,6 @@ export const Component = inject(({ settingsStore, publicRoomStore }) => {
   withTranslation([
     "JavascriptSdk",
     "Files",
-    "EmbeddingPanel",
     "Common",
     "Translations",
   ])(observer(FileSelector)),

@@ -1,0 +1,22 @@
+{
+  "UsersLimit": "Лимит пользователей",
+  "EditorsMode": "Редакторы",
+  "LiveViewerMode": "Режим просмотра",
+  "Internal": "Внутренние",
+  "External": "Внешние",
+  "Remaining": "Осталось",
+  "DocumentServerSecret": "Секретный ключ для Docs",
+  "DocServerAddress": "Адрес Docs",
+  "Statistic": "Статистика",
+  "AnonymousSupport": "Поддержка анонимов",
+  "Trial": "Пробный период",
+  "DeveloperPack": "Dev Pack",
+  "Build": "Сборка",
+  "YourLicenseExpired": "Срок действия вашей лицензии истек",
+  "Monthly": "Ежемесячно",
+  "DocServiceSection": "Document Service",
+  "DocsConnectorSubtitle": "{{organizationName}} {{productEditorsName}} connector",
+  "ExternalUsersActive": "External users active",
+  "JWTSecretPlaceholder": "Enter a new secret…",
+  "LicenseUsage": "License Usage"
+}

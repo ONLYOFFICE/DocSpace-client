@@ -302,7 +302,6 @@ export const Component = inject(({ settingsStore }) => {
   withTranslation([
     "JavascriptSdk",
     "Files",
-    "EmbeddingPanel",
     "Common",
     "CreateEditRoomDialog",
   ])(observer(Viewer)),

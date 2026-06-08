@@ -36,6 +36,7 @@
 "use client";
 
 import React from "react";
+import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import FilterComponent from "@docspace/ui-kit/components/filter";
@@ -57,7 +58,7 @@ type RoomsFilterProps = {
   mainButtonIcon?: React.ReactNode;
 };
 
-const RoomsFilter = ({
+const RoomsFilter = observer(({
   filesFilter,
   isArchive,
   user,
@@ -143,7 +144,7 @@ const RoomsFilter = ({
       mainButtonIcon={mainButtonIcon}
     />
   );
-};
+});
 
 export default RoomsFilter;
 

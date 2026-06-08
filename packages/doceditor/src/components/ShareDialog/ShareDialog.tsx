@@ -132,6 +132,13 @@ const SharingDialog = ({
     setSelectedGroup(group);
   };
 
+  const isInRoom = fileInfo.rootFolderType === FolderType.Rooms;
+  const isExternalShareRestricted =
+    !filesSettings.externalShare &&
+    (isInRoom
+      ? filesSettings.externalShareApplyToRooms
+      : filesSettings.externalShareApplyToDocuments);
+
   return (
     <ModalDialog
       withBorder
@@ -204,6 +211,11 @@ const SharingDialog = ({
               setLinkParams={setLinkParams}
               onClickGroup={onClickEditGroup}
               onAddUser={onClickAddUser}
+              isExternalShareRestricted={isExternalShareRestricted}
+              blockExistingLinksOnRestrict={
+                filesSettings.blockExistingLinksOnRestrict
+              }
+              defaultShareLinkInternal={filesSettings.defaultShareLinkInternal}
             />
           </div>
         </section>

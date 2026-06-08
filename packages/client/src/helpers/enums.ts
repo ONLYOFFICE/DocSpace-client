@@ -40,6 +40,16 @@ export const enum AuthenticatedAction {
 }
 
 /**
+ * Context from which the create/edit agent dialog was opened.
+ * Used, e.g., to show the recommended-model banner only for the chat flow.
+ * @readonly
+ */
+export const enum AgentDialogContext {
+  Chat = "chat_view",
+  EmptyState = "empty_state",
+}
+
+/**
  * Enum for result of validation confirm link.
  * @readonly
  */

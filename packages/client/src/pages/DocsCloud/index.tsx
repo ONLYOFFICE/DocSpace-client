@@ -26,28 +26,18 @@
 
 import { useTranslation } from "react-i18next";
 
-import EmptyScreenLightUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.light.svg?url";
-import EmptyScreenDarkUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.dark.svg?url";
-
-import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
+
+import SdkIframe from "SRC_DIR/components/SdkIframe";
 
 const DocsCloudComponent = () => {
   const { t } = useTranslation(["Common"]);
   useDocumentTitle("Common:DocsCloud");
-  const { isBase } = useTheme();
 
   return (
-    <EmptyScreenContainer
-      imageSrc={isBase ? EmptyScreenLightUrl : EmptyScreenDarkUrl}
-      imageAlt={t("Common:DocsCloud")}
-      headerText={t("Common:DocsCloud")}
-      descriptionText={t("Common:DocsCloudDescription")}
-    />
+    <SdkIframe src="/sdk/docs-cloud" title={t("Common:DocsCloud")} />
   );
 };
 
 export const DocsCloud = DocsCloudComponent;
-
 export default DocsCloudComponent;

@@ -37,16 +37,6 @@
 }
 
 .linkRowWrapper {
-  :global(.avatar_role-wrapper) {
-    svg path {
-      fill: var(--info-panel-links-icon-color);
-    }
-
-    circle {
-      fill: var(--background-color);
-    }
-  }
-
   :global(.avatar-wrapper) {
     svg path {
       fill: var(--info-panel-links-primary-color) !important;

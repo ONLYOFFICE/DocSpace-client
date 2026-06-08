@@ -55,6 +55,7 @@ const useGoBackAndClose = (
 
   if (fileInfo) {
     const editorGoBack = sdkConfig?.editorGoBack;
+    const returnUrl = sdkConfig?.returnUrl;
 
     const openFileLocationText = (
       (
@@ -70,6 +71,17 @@ const useGoBackAndClose = (
 
     if (editorGoBack === false || user?.isVisitor || !user) {
       console.log("goBack", goBack);
+    } else if (returnUrl) {
+      // Editor opened at the top level (broken out of an SDK iframe):
+      // "go back" must navigate to the originating listing rather than
+      // request a close (which only works inside the SDK editor frame) or
+      // use the backend-provided goback URL.
+      goBack = {
+        requestClose: false,
+        text: withoutGoBackText ? undefined : openFileLocationText,
+        blank: openOnNewPage,
+        url: returnUrl,
+      };
     } else if (editorGoBack === "event") {
       goBack = {
         requestClose: true,
@@ -105,8 +117,12 @@ const useGoBackAndClose = (
 
   if (!successAuth) showClose = false;
 
+  // `isSDK` hides the close button when the editor lives inside an SDK frame.
+  // But when a `returnUrl` is present the editor was opened at the top level
+  // (broken out of the SDK iframe), so the close button is meaningful again
+  // and should navigate back to the originating listing.
   const close =
-    showClose && !sdkConfig?.isSDK
+    showClose && (!sdkConfig?.isSDK || !!sdkConfig?.returnUrl)
       ? {
           visible: true,
           text: t("Common:CloseButton"),

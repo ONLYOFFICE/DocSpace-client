@@ -144,7 +144,7 @@ const InviteQuotaWarningDialog = (props) => {
             }}
           />
         ) : (
-          <Trans t={t} i18nKey="GracePeriodActivatedInfo" ns="Payments">
+          <Trans t={t} i18nKey="GracePeriodActivatedInfo" ns="Common">
             Grace period activated
             <strong>
               from {{ fromDate }} to {{ byDate }}
@@ -159,7 +159,7 @@ const InviteQuotaWarningDialog = (props) => {
           ? t("LicenseGracePeriodInfo", {
               productName: getBrandName("ProductName"),
             })
-          : t("GracePeriodActivatedDescription", {
+          : t("Common:GracePeriodActivatedDescription", {
               productName: getBrandName("ProductName"),
             })}
       </Text>

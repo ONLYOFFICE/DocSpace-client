@@ -34,6 +34,7 @@
  */
 
 import React from "react";
+import { useNavigate } from "react-router";
 import { Trans, useTranslation } from "react-i18next";
 import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import type { Profile } from "@docspace/ui-kit/ai-agent/providers";
@@ -174,3 +175,4 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
 };
 
 export default ModelSettings;
+

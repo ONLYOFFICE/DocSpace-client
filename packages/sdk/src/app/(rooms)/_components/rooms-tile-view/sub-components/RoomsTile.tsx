@@ -212,6 +212,7 @@ const RoomsTile = observer(
         }
         size="32px"
         radius="6px"
+        imgClassName="react-svg-icon"
       />
     );
 

@@ -67,6 +67,7 @@ import type {
   TUpdateDefaultProviderData,
   TModelSettingsDto,
   TPreviewModelsRequest,
+  TAIUserConfig,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -193,12 +194,12 @@ const getAuthHeaders = (): Record<string, string> => {
   const token = getAuthToken();
   if (token) return { Authorization: token };
 
-  const publicRoomKey =
-    new URLSearchParams(window.location.search).get("share");
+  const publicRoomKey = new URLSearchParams(window.location.search).get(
+    "share",
+  );
 
   if (publicRoomKey)
     return {
-      Authorization: `Bearer ${publicRoomKey}`,
       "Request-Token": publicRoomKey,
     };
 
@@ -745,3 +746,27 @@ export const updateDefaultProvider = async ({
 
   return res as TDefaultProvider;
 };
+
+export const getAIUserConfig = async () => {
+  const options = {
+    method: "get",
+    url: `${baseUrl}/config/user`,
+  };
+
+  const res = await request(options);
+
+  return res as TAIUserConfig;
+};
+
+export const updateAIUserConfig = async (data: TAIUserConfig) => {
+  const options = {
+    method: "put",
+    url: `${baseUrl}/config/user`,
+    data,
+  };
+
+  const res = await request(options);
+
+  return res as TAIUserConfig;
+};
+

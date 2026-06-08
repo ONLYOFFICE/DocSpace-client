@@ -1,0 +1,22 @@
+{
+  "UsersLimit": "ユーザー制限",
+  "EditorsMode": "エディタ",
+  "LiveViewerMode": "ライブビューアー",
+  "Internal": "内部",
+  "External": "外部",
+  "Remaining": "残り",
+  "DocumentServerSecret": "DocsのJWTシークレット",
+  "DocServerAddress": "Docsのアドレス",
+  "Statistic": "統計",
+  "AnonymousSupport": "匿名ユーザーのサポート",
+  "Trial": "トライアル",
+  "DeveloperPack": "Dev Pack",
+  "Build": "構築",
+  "YourLicenseExpired": "ライセンスの有効期限が切れました",
+  "Monthly": "月次",
+  "DocServiceSection": "Document Service",
+  "DocsConnectorSubtitle": "{{organizationName}} {{productEditorsName}} connector",
+  "ExternalUsersActive": "External users active",
+  "JWTSecretPlaceholder": "Enter a new secret…",
+  "LicenseUsage": "License Usage"
+}

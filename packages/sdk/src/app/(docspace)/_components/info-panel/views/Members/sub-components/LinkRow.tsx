@@ -237,9 +237,12 @@ const LinkRow = ({
           icon: CodeReactSvgUrl,
           onClick: () => {
             infoPanelStore.setLinkParams({ link, item: selection });
-            infoPanelStore.setEmbeddingPanelData({ visible: true });
+            infoPanelStore.setEmbeddingPanelData({
+              visible: true,
+              item: selection,
+            });
           },
-          disabled: true,
+          disabled: isDisabled || !selection.security?.Embed,
         },
         {
           key: "separator-1",

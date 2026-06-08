@@ -331,7 +331,7 @@ export const Component = inject(({ settingsStore }) => {
     theme,
   };
 })(
-  withTranslation(["JavascriptSdk", "Files", "EmbeddingPanel", "Common"])(
+  withTranslation(["JavascriptSdk", "Files", "Common"])(
     observer(Editor),
   ),
 );

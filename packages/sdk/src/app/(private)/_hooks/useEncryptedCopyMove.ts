@@ -182,8 +182,10 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
           return;
         }
         const destRoomId = dest.roomId;
+        const sameRoom = String(destRoomId) === String(sourceRoomId);
 
-        const { decryptEncryptedItemToFile } = await loadCopyModule();
+        const { decryptEncryptedItemToFile, addCopySuffix } =
+          await loadCopyModule();
 
         for (const item of files) {
           if (controller.signal.aborted) return;
@@ -204,8 +206,15 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
 
           if (controller.signal.aborted) return;
 
+          const fileToUpload =
+            !isMove && sameRoom
+              ? new File([decrypted], addCopySuffix(decrypted.name), {
+                  type: decrypted.type || "application/octet-stream",
+                })
+              : decrypted;
+
           await uploadFiles({
-            files: [decrypted],
+            files: [fileToUpload],
             folderId: destFolderId,
             roomId: destRoomId,
           });

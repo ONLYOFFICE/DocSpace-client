@@ -45,7 +45,10 @@ import {
   type KeyChangeDialogModalProps,
   type PassphraseDialogProps,
 } from "../EncryptionContext";
-import { SecretStorage } from "../../../services/encryption/secret-storage";
+import {
+  SecretStorage,
+  suspendAutoLock,
+} from "../../../services/encryption/secret-storage";
 import type {
   IdentityKeyPair,
   SerializedIdentity,
@@ -395,6 +398,91 @@ describe("EncryptionContext / EncryptionProvider", () => {
       );
       expect(removed).toHaveLength(5);
       removeSpy.mockRestore();
+    });
+  });
+
+  describe("auto-lock suspension via the imperative bridge", () => {
+    afterEach(() => {
+      vi.useRealTimers();
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(0);
+      Object.defineProperty(document, "visibilityState", {
+        value: "visible",
+        configurable: true,
+      });
+    });
+
+    it("registers a suspender so the imperative suspendAutoLock() is wired up", () => {
+      renderTree();
+      let release!: () => void;
+      act(() => {
+        release = suspendAutoLock();
+      });
+      // A real suspender (not the unregistered no-op) is wired up; calling it
+      // releases without throwing.
+      expect(typeof release).toBe("function");
+      act(() => {
+        release();
+      });
+    });
+
+    it("suspends tab-hidden auto-lock until the handle is released", async () => {
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+      expect(latest.isUnlocked).toBe(true);
+
+      let release!: () => void;
+      await act(async () => {
+        release = suspendAutoLock();
+      });
+
+      Object.defineProperty(document, "visibilityState", {
+        value: "hidden",
+        configurable: true,
+      });
+      await act(async () => {
+        document.dispatchEvent(new Event("visibilitychange"));
+      });
+
+      // Still unlocked: the visibility handler is detached while suspended.
+      expect(SecretStorage.hasUnlocked("user-42")).toBe(true);
+      expect(latest.isUnlocked).toBe(true);
+
+      // Release re-arms auto-lock; the next hidden event locks.
+      await act(async () => {
+        release();
+      });
+      await act(async () => {
+        document.dispatchEvent(new Event("visibilitychange"));
+      });
+      expect(SecretStorage.hasUnlocked("user-42")).toBe(false);
+    });
+
+    it("suspends idle auto-lock until the handle is released", () => {
+      vi.useFakeTimers();
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+      expect(latest.isUnlocked).toBe(true);
+
+      let release!: () => void;
+      act(() => {
+        release = suspendAutoLock();
+      });
+
+      // No idle timer runs while suspended, even well past the timeout.
+      act(() => {
+        vi.advanceTimersByTime(180_000);
+      });
+      expect(latest.isUnlocked).toBe(true);
+
+      // After release the idle timer is re-armed and fires.
+      act(() => {
+        release();
+      });
+      act(() => {
+        vi.advanceTimersByTime(60_000);
+      });
+      expect(latest.isUnlocked).toBe(false);
     });
   });
 

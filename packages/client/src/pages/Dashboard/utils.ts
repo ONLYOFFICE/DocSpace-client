@@ -44,7 +44,7 @@ export const makeCreateUrl = (
 ): string => {
   const params = new URLSearchParams({ fileTitle });
   if (parentId) params.set("parentId", String(parentId));
-  return `/sdk/personal-files/editor/create?${params.toString()}`;
+  return `/doceditor/create?${params.toString()}`;
 };
 
 export type AiFormsSettings = {

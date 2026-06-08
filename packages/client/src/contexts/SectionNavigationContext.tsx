@@ -72,23 +72,30 @@ export const SectionNavigationProvider = ({
   const navigate = useNavigate();
 
   const stackRef = useRef<string[]>([]);
-  const prevPathnameRef = useRef<string>(location.pathname);
+  const prevSectionRef = useRef<string>(getSectionPrefix(location.pathname));
+  const prevPathRef = useRef<string>(location.pathname + location.search);
 
   useEffect(() => {
     const currentSection = getSectionPrefix(location.pathname);
-    const prevSection = getSectionPrefix(prevPathnameRef.current);
 
-    if (currentSection !== prevSection) {
-      stackRef.current.push(prevPathnameRef.current);
+    if (currentSection !== prevSectionRef.current) {
+      // Store the full previous path (not just the section prefix) so that
+      // "Back" returns to the exact page we left — e.g. a specific agent
+      // chat (/ai-agents/:id/chat) or the agents list (/ai-agents/filter),
+      // instead of collapsing every non-prefixed route to "/".
+      stackRef.current.push(prevPathRef.current);
+      prevSectionRef.current = currentSection;
     }
 
-    prevPathnameRef.current = location.pathname;
-  }, [location.pathname]);
+    prevPathRef.current = location.pathname + location.search;
+  }, [location.pathname, location.search]);
 
   const navigateBack = () => {
     const prev = stackRef.current.pop();
 
     if (prev) {
+      prevSectionRef.current = getSectionPrefix(prev);
+      prevPathRef.current = prev;
       navigate(prev);
     } else {
       navigate(-1 as unknown as string);

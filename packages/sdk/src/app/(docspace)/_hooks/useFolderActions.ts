@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/navigation";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import api from "@docspace/shared/api";
@@ -25,6 +26,7 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
   const { setHighlightFileId } = useFilesListStore();
   const { shareKey } = useSettingsStore();
   const openFolderOverride = React.useContext(OpenFolderContext);
+  const router = useRouter();
 
   const openFolder = React.useCallback(
     (folderId: number | string, title: string) => {
@@ -58,9 +60,13 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
   );
 
   const openLocation = React.useCallback(
-    (folderId: number | string, fileId: number | string, search: string) => {
+    (
+      folderId: number | string,
+      fileId: number | string,
+      search: string,
+      targetPath?: string,
+    ) => {
       const filter = FilesFilter.getDefault();
-
       filter.folder = folderId.toString();
       filter.search = search;
 
@@ -71,11 +77,20 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
       setCurrentIsRootRoom(false);
       setSelection([]);
 
-      window.history.pushState({}, "", `${window.location.pathname}${filterUrl}`);
+      if (targetPath) {
+        router.push(`${targetPath}${filterUrl}`);
+      } else {
+        window.history.pushState(
+          {},
+          "",
+          `${window.location.pathname}${filterUrl}`,
+        );
+      }
 
       setHighlightFileId(fileId);
     },
     [
+      router,
       shareKey,
       setCurrentFolderId,
       setCurrentTitle,
@@ -96,3 +111,4 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
 
   return { openFolder, openLocation, copyFolderLink };
 }
+

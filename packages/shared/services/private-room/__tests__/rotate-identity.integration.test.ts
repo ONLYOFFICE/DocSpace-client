@@ -66,6 +66,7 @@ const PORT = "3000";
 const ROOM_ID = 7777;
 const ALICE_ID = "11111111-1111-1111-1111-111111111111";
 const BOB_ID = "22222222-2222-2222-2222-222222222222";
+const ALICE_NEW_KEY_ID = "aaaaaaaa-0000-0000-0000-00000000000a";
 
 function pubB64(kp: IdentityKeyPair): string {
   return arrayBufferToBase64(kp.publicKey.buffer as ArrayBuffer);
@@ -173,6 +174,7 @@ describe("rotateOwnIdentityForRoom — integration via MSW", () => {
       currentUserId: ALICE_ID,
       oldIdentity: aliceOld,
       newIdentity: aliceNew,
+      newPublicKeyId: ALICE_NEW_KEY_ID,
     });
 
     expect(result).toEqual([{ fileId, success: true }]);
@@ -244,6 +246,7 @@ describe("rotateOwnIdentityForRoom — integration via MSW", () => {
       currentUserId: ALICE_ID,
       oldIdentity: aliceOld,
       newIdentity: aliceNew,
+      newPublicKeyId: ALICE_NEW_KEY_ID,
     });
 
     expect(result).toEqual([
@@ -310,6 +313,7 @@ describe("rotateOwnIdentityForRoom — integration via MSW", () => {
       currentUserId: ALICE_ID,
       oldIdentity: aliceOld,
       newIdentity: aliceNew,
+      newPublicKeyId: ALICE_NEW_KEY_ID,
     });
 
     expect(result.find((r) => r.fileId === goodFileId)!.success).toBe(true);
@@ -364,6 +368,7 @@ describe("rotateOwnIdentityForRoom — integration via MSW", () => {
       currentUserId: ALICE_ID,
       oldIdentity: aliceWrongOld,
       newIdentity: aliceNew,
+      newPublicKeyId: ALICE_NEW_KEY_ID,
     });
 
     expect(result[0].success).toBe(false);

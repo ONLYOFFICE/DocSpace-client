@@ -41,6 +41,7 @@ import classNames from "classnames";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { FileTile } from "@docspace/ui-kit/components/tiles/file-tile";
 import { FolderTile } from "@docspace/ui-kit/components/tiles/folder-tile";
+import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
@@ -64,6 +65,7 @@ import type { TGetIcon } from "@/app/(docspace)/_hooks/useItemIcon";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { generateFilesItemValue } from "@/app/(docspace)/(files)/_utils";
 import useContextMenuModel from "@/app/(docspace)/_hooks/useContextMenuModel";
+import { DragContext } from "@/app/(docspace)/_contexts/DragContext";
 import useDownloadActions from "@/app/(docspace)/_hooks/useDownloadActions";
 import { ShareContext } from "@/app/(docspace)/_contexts/ShareContext";
 import { CopyShareLinkContext } from "@/app/(docspace)/_contexts/CopyShareLinkContext";
@@ -146,6 +148,8 @@ const Tile = ({
   const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });
   const { isItemActive } = useActiveItemsStore();
 
+  const dragCtx = React.useContext(DragContext);
+
   const displayFileExtension = Boolean(filesSettings?.displayFileExtension);
   const isExtsCustomFilter =
     "fileExst" in item
@@ -156,7 +160,11 @@ const Tile = ({
   const temporaryIcon = getTemporaryIcon(item, getIcon);
   const isChecked = isCheckedItem(item);
   const inProgress = isItemActive(item);
-  const value = generateFilesItemValue(item, false, index);
+  const isDroppable =
+    item.isFolder &&
+    "security" in item &&
+    (item as TFolderItem).security?.MoveTo === true;
+  const value = generateFilesItemValue(item, isDroppable, index);
 
   const openItem = (e: React.MouseEvent) => {
     const { target } = e;
@@ -305,12 +313,19 @@ const Tile = ({
 
   return (
     <div>
-      <div
+      <DragAndDrop
+        data-title={item.title}
         className={classNames("files-item", {
           "tile-selected": isChecked,
+          droppable: isDroppable,
         })}
-        // @ts-expect-error: value required for SelectionArea
         value={value}
+        dragging={isDroppable && !!dragCtx?.isDragging}
+        onDrop={dragCtx ? (files) => { if (isDroppable) dragCtx.onFilesDroppedToFolder(files, item.id as number); else dragCtx.onFilesDroppedToCurrentFolder(files); } : undefined}
+        onDragOver={dragCtx ? (isDragActive: boolean) => { if (isDragActive && isDroppable) dragCtx.onFolderDragOver(item.title); else dragCtx.onFolderDragLeave(); } : undefined}
+        onDragLeave={dragCtx ? () => dragCtx.onFolderDragLeave() : undefined}
+        // @ts-expect-error: native onMouseDown with event arg passed via ...rest to root div
+        onMouseDown={(e: MouseEvent) => dragCtx?.onItemMouseDown(e, item)}
       >
         {item.isFolder ? (
           <FolderTile {...commonTileProps} />
@@ -325,7 +340,7 @@ const Tile = ({
             contentElement={quickButtonsComponent}
           />
         )}
-      </div>
+      </DragAndDrop>
     </div>
   );
 };

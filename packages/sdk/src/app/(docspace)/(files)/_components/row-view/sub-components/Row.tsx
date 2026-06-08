@@ -70,8 +70,9 @@ import { FileOperationsContext } from "../../../../_contexts/FileOperationsConte
 import { RenameContext } from "../../../../_contexts/RenameContext";
 import { VersionHistoryContext } from "../../../../_contexts/VersionHistoryContext";
 import { ConvertContext } from "../../../../_contexts/ConvertContext";
-import type { TFileItem } from "../../../../_hooks/useItemList";
+import type { TFileItem, TFolderItem } from "../../../../_hooks/useItemList";
 import { generateFilesItemValue } from "../../../_utils";
+import { DragContext } from "../../../../_contexts/DragContext";
 
 import { RowContent } from "./RowContent";
 import { RowProps } from "../RowView.types";
@@ -96,7 +97,9 @@ const Row = observer(
     const { isItemActive } = useActiveItemsStore();
     const isExtsCustomFilter =
       "fileExst" in item
-        ? (filesSettings?.extsWebCustomFilterEditing ?? []).includes(item.fileExst)
+        ? (filesSettings?.extsWebCustomFilterEditing ?? []).includes(
+            item.fileExst,
+          )
         : false;
 
     // Use the observable item from MobX store so isFavorite changes are reactive
@@ -206,8 +209,7 @@ const Row = observer(
       onCopyShareLink?.(observableItem);
     }, [onCopyShareLink, observableItem]);
 
-    const isTrashFolder =
-      filesListStore.rootFolderType === FolderType.TRASH;
+    const isTrashFolder = filesListStore.rootFolderType === FolderType.TRASH;
 
     const quickButtonsComponent = (
       <QuickButtons
@@ -221,6 +223,8 @@ const Row = observer(
         isTrashFolder={isTrashFolder}
       />
     );
+
+    const dragCtx = React.useContext(DragContext);
 
     const onContextClick = (isRightMouseButtonClick?: boolean) => {
       if (isRightMouseButtonClick && filesSelectionStore.selection.length > 1) {
@@ -236,7 +240,11 @@ const Row = observer(
     const isChecked = filesSelectionStore.isCheckedItem(item);
     const inProgress = isItemActive(item);
 
-    const value = generateFilesItemValue(item, false, index);
+    const isDroppable =
+      item.isFolder &&
+      "security" in item &&
+      (item as TFolderItem).security?.MoveTo === true;
+    const value = generateFilesItemValue(item, isDroppable, index);
 
     return (
       <FilesRowWrapper
@@ -252,8 +260,30 @@ const Row = observer(
       >
         <DragAndDrop
           data-title={decryptedTitle}
-          className="files-item"
+          className={classNames("files-item", { droppable: isDroppable })}
           value={value}
+          dragging={isDroppable && !!dragCtx?.isDragging}
+          onDrop={
+            dragCtx
+              ? (files) => {
+                  if (isDroppable)
+                    dragCtx.onFilesDroppedToFolder(files, item.id as number);
+                  else dragCtx.onFilesDroppedToCurrentFolder(files);
+                }
+              : undefined
+          }
+          onDragOver={
+            dragCtx
+              ? (isDragActive: boolean) => {
+                  if (isDragActive && isDroppable)
+                    dragCtx.onFolderDragOver(item.title);
+                  else dragCtx.onFolderDragLeave();
+                }
+              : undefined
+          }
+          onDragLeave={dragCtx ? () => dragCtx.onFolderDragLeave() : undefined}
+          // @ts-expect-error: native onMouseDown with event arg passed via ...rest to root div
+          onMouseDown={(e: MouseEvent) => dragCtx?.onItemMouseDown(e, item)}
         >
           <FilesRow
             key={item.id}
@@ -294,3 +324,4 @@ const Row = observer(
 );
 
 export { Row };
+

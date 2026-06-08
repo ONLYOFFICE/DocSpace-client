@@ -74,7 +74,7 @@ export const getClient = async (clientId: string): Promise<IClientProps> => {
   const client = (await request(
     {
       method: "get",
-      url: `/clients/${clientId}`,
+      url: `/oauth2/clients/${clientId}`,
       headers: hdrs,
     },
     false,
@@ -93,7 +93,7 @@ export const getClientList = async (
   const data = (await request(
     {
       method: "get",
-      url: `/clients?page=${page}&limit=${limit}`,
+      url: `/oauth2/clients?page=${page}&limit=${limit}`,
       headers: hdrs,
       signal,
     },
@@ -122,7 +122,7 @@ export const addClient = async (
   const client = (await request(
     {
       method: "post",
-      url: `/clients`,
+      url: `/oauth2/clients`,
       data,
       headers: hdrs,
     },
@@ -139,7 +139,7 @@ export const updateClient = async (clientId: string, data: IClientReqDTO) => {
   await request(
     {
       method: "put",
-      url: `/clients/${clientId}`,
+      url: `/oauth2/clients/${clientId}`,
       data,
       headers: hdrs,
     },
@@ -157,7 +157,7 @@ export const changeClientStatus = async (
   await request(
     {
       method: "patch",
-      url: `/clients/${clientId}/activation`,
+      url: `/oauth2/clients/${clientId}/activation`,
       data: { status },
       headers: hdrs,
     },
@@ -174,7 +174,7 @@ export const regenerateSecret = async (
   const clientSecret = (await request(
     {
       method: "patch",
-      url: `/clients/${clientId}/regenerate`,
+      url: `/oauth2/clients/${clientId}/regenerate`,
       headers: hdrs,
     },
     false,
@@ -190,7 +190,7 @@ export const deleteClient = async (clientId: string): Promise<void> => {
   await request(
     {
       method: "delete",
-      url: `/clients/${clientId}`,
+      url: `/oauth2/clients/${clientId}`,
       headers: hdrs,
     },
     false,
@@ -204,7 +204,7 @@ export const getScope = async (name: string): Promise<TScope> => {
   const scope = (await request(
     {
       method: "get",
-      url: `/scopes/${name}`,
+      url: `/oauth2/scopes/${name}`,
       headers: hdrs,
     },
     false,
@@ -220,7 +220,7 @@ export const getScopeList = async (signal?: AbortSignal): Promise<TScope[]> => {
   const scopeList = (await request(
     {
       method: "get",
-      url: `/scopes`,
+      url: `/oauth2/scopes`,
       headers: hdrs,
       signal,
     },
@@ -292,7 +292,7 @@ export const getConsentList = async (
   const consentList = (await request(
     {
       method: "get",
-      url: `/clients/consents?page=${page}&limit=${limit}`,
+      url: `/oauth2/clients/consents?page=${page}&limit=${limit}`,
       headers: hdrs,
     },
     false,
@@ -325,7 +325,7 @@ export const revokeUserClient = async (clientId: string): Promise<void> => {
   await request(
     {
       method: "delete",
-      url: `/clients/${clientId}/revoke`,
+      url: `/oauth2/clients/${clientId}/revoke`,
       headers: hdrs,
     },
     false,

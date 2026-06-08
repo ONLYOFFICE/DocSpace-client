@@ -71,13 +71,20 @@ import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { normalizeRoomLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
 
 import RoomsList from "../rooms-list";
+import type { RoomActions } from "../rooms-list";
 import RoomsFilter from "../rooms-filter";
 import CreateEditRoomDialog from "../create-edit-room-dialog";
 import { useRoomsTagsStore } from "../../_store/RoomsTagsStore";
 import {
+  RoomActionsContext,
+  type RoomActionsHandler,
+} from "../../_contexts/RoomActionsContext";
+import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
+import {
   InfoPanelBody as DocsInfoPanelBody,
   InfoPanelHeader as DocsInfoPanelHeader,
   InfoPanelEditLinkDialog,
+  InfoPanelEmbeddingDialog,
 } from "@/app/(docspace)/_components/info-panel";
 import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
 
@@ -164,6 +171,7 @@ const RoomsLayout = observer(
           const merged = {
             ...existing,
             ...(updated as unknown as Record<string, unknown>),
+            ...normalizeRoomLogo(rawLogo),
           } as unknown as typeof existing;
           filesListStore.replaceItem(sel.id, merged);
         }
@@ -184,6 +192,39 @@ const RoomsLayout = observer(
 
     const dialogsStore = useDialogsStore();
     const refreshRef = React.useRef<(() => void) | null>(null);
+    const roomActionsRef = React.useRef<RoomActions | null>(null);
+
+    // Stable RoomActionsContext handler — values are bridged to RoomsList's
+    // bulk actions via `roomActionsRef` (same pattern as `refreshRef`).
+    // `isArchive` flag lets Header pick the right action set (restore /
+    // delete for archive, pin / archive / delete for active).
+    const roomActionsHandler = React.useMemo<RoomActionsHandler>(
+      () => ({
+        archiveSelected: (items) =>
+          roomActionsRef.current?.archiveSelected(items),
+        deleteSelected: (items) =>
+          roomActionsRef.current?.deleteSelected(items),
+        restoreSelected: (items) =>
+          roomActionsRef.current?.restoreSelected(items),
+        pinSelected: (items) => roomActionsRef.current?.pinSelected(items),
+        isArchive: !!isArchive,
+        editRoom: (item) => roomActionsRef.current?.editRoom(item),
+        changeOwner: (item) => roomActionsRef.current?.changeOwner(item),
+        inviteRoom: (item) => roomActionsRef.current?.inviteRoom(item),
+        archiveRoom: (item) => roomActionsRef.current?.archiveRoom(item),
+        deleteRoom: (item) => roomActionsRef.current?.deleteRoom(item),
+        restoreRoom: (item) => roomActionsRef.current?.restoreRoom(item),
+        infoRoom: (item) => roomActionsRef.current?.infoRoom(item),
+        roomChanged: (id) => roomActionsRef.current?.roomChanged(id),
+      }),
+      [isArchive],
+    );
+
+    // Bridge RoomsList's full-list refresh down to the info panel so room
+    // actions dispatched from the header `⋮` menu (pin/unpin) can refresh the
+    // list — the info panel body is a sibling of RoomsList and would otherwise
+    // sit outside its RoomsRefreshContext provider.
+    const refreshRooms = React.useCallback(() => refreshRef.current?.(), []);
 
     const createCustomRoom = React.useCallback(() => {
       dialogsStore.openDialog(SDKDialogs.CreateRoom);
@@ -220,27 +261,31 @@ const RoomsLayout = observer(
     }, [t, createCustomRoom, isArchive, canCreateRooms, isPrivate]);
 
     return (
-      <div className={styles.root} style={frameHeaderVars}>
-        <RootScrollbar>
-          <SectionWrapper
-            sectionHeaderContent={
-              <Header
-                current={current}
-                pathParts={pathParts}
-                isEmptyList={isEmptyList}
-                headerOffset={headerOffset}
-                isInfoPanelVisible={infoPanelStore.isVisible}
-                onToggleInfoPanel={infoPanelStore.toggle}
-              />
-            }
-            sectionFilterContent={
-              <>
-                {!isArchive && (
+      <RoomActionsContext.Provider value={roomActionsHandler}>
+        <div className={styles.root} style={frameHeaderVars}>
+          <RootScrollbar>
+            <SectionWrapper
+              sectionHeaderContent={
+                <Header
+                  current={current}
+                  pathParts={pathParts}
+                  isEmptyList={isEmptyList}
+                  headerOffset={headerOffset}
+                  isInfoPanelVisible={infoPanelStore.isVisible}
+                  onToggleInfoPanel={infoPanelStore.toggle}
+                />
+              }
+              stickyTableHeader
+              scrollableBanner={!isArchive && canCreateRooms}
+              sectionBannerContent={
+                !isArchive && canCreateRooms ? (
                   <QuickActions
                     items={quickActionItems}
                     className={styles.quickActions}
                   />
-                )}
+                ) : undefined
+              }
+              sectionFilterContent={
                 <RoomsFilter
                   filesFilter={filesFilter}
                   isArchive={isArchive}
@@ -255,63 +300,70 @@ const RoomsLayout = observer(
                     hideArrow: true,
                   }}
                 />
-              </>
-            }
-            sectionBodyContent={
-              <RoomsList
-                total={total}
-                folders={folders}
-                files={files}
-                filesSettings={filesSettings}
-                portalSettings={portalSettings}
-                filesFilter={filesFilter}
-                current={current}
-                user={user}
-                isArchive={isArchive}
-                refreshRef={refreshRef}
-                emptyView={emptyView}
-                titleOverride={titleOverride}
-                hasEncryptionKeys={isPrivate ? hasEncryptionKeys : undefined}
-                onPrivateInviteRoom={onPrivateInviteRoom}
-                onPrivateChangeOwner={onPrivateChangeOwner}
-                infoPanelVisible={infoPanelStore.isVisible}
-              />
-            }
-            infoPanelHeaderContent={infoPanelHeader ?? <DocsInfoPanelHeader />}
-            infoPanelBodyContent={
-              infoPanelBody ?? (
-                <DocsInfoPanelBody onTagsChanged={onInfoPanelTagsChanged} />
-              )
-            }
-            isInfoPanelVisible={infoPanelStore.isVisible}
-            setIsInfoPanelVisible={infoPanelStore.setVisible}
-            isEmptyPage={isEmptyList}
-            filesFilter={filesFilter}
-          />
-          {renderCreateRoomDialog ? (
-            renderCreateRoomDialog({
-              visible: dialogsStore.isDialogOpen(SDKDialogs.CreateRoom),
-              onClose: closeCreateRoomDialog,
-              onRoomCreated: () => refreshRef.current?.(),
-              isPrivate,
-              hasEncryptionKeys,
-            })
-          ) : (
-            <CreateEditRoomDialog
-              visible={dialogsStore.isDialogOpen(SDKDialogs.CreateRoom)}
-              onClose={closeCreateRoomDialog}
-              onRoomCreated={onRoomCreated}
-              isPrivate={isPrivate}
-              hasEncryptionKeys={hasEncryptionKeys}
+              }
+              sectionBodyContent={
+                <RoomsList
+                  total={total}
+                  folders={folders}
+                  files={files}
+                  filesSettings={filesSettings}
+                  portalSettings={portalSettings}
+                  filesFilter={filesFilter}
+                  current={current}
+                  user={user}
+                  isArchive={isArchive}
+                  refreshRef={refreshRef}
+                  roomActionsRef={roomActionsRef}
+                  emptyView={emptyView}
+                  titleOverride={titleOverride}
+                  hasEncryptionKeys={isPrivate ? hasEncryptionKeys : undefined}
+                  onPrivateInviteRoom={onPrivateInviteRoom}
+                  onPrivateChangeOwner={onPrivateChangeOwner}
+                  infoPanelVisible={infoPanelStore.isVisible}
+                />
+              }
+              infoPanelHeaderContent={infoPanelHeader ?? <DocsInfoPanelHeader />}
+              infoPanelBodyContent={
+                infoPanelBody ?? (
+                  <RoomsRefreshContext.Provider value={refreshRooms}>
+                    <DocsInfoPanelBody onTagsChanged={onInfoPanelTagsChanged} />
+                  </RoomsRefreshContext.Provider>
+                )
+              }
+              isInfoPanelVisible={infoPanelStore.isVisible}
+              setIsInfoPanelVisible={infoPanelStore.setVisible}
+              isEmptyPage={isEmptyList}
+              filesFilter={filesFilter}
             />
-          )}
-          <SelectionArea isRooms />
-          <DeviceTypeObserver />
-          <InfoPanelEditLinkDialog />
-        </RootScrollbar>
-      </div>
+            {renderCreateRoomDialog ? (
+              renderCreateRoomDialog({
+                visible: dialogsStore.isDialogOpen(SDKDialogs.CreateRoom),
+                onClose: closeCreateRoomDialog,
+                onRoomCreated: () => refreshRef.current?.(),
+                isPrivate,
+                hasEncryptionKeys,
+              })
+            ) : (
+              <CreateEditRoomDialog
+                visible={dialogsStore.isDialogOpen(SDKDialogs.CreateRoom)}
+                onClose={closeCreateRoomDialog}
+                onRoomCreated={onRoomCreated}
+                isPrivate={isPrivate}
+                hasEncryptionKeys={hasEncryptionKeys}
+              />
+            )}
+            <SelectionArea isRooms />
+            <DeviceTypeObserver />
+            <InfoPanelEditLinkDialog />
+            <InfoPanelEmbeddingDialog
+              isAdmin={!!(user?.isAdmin || user?.isOwner)}
+            />
+          </RootScrollbar>
+        </div>
+      </RoomActionsContext.Provider>
     );
   },
 );
 
 export default RoomsLayout;
+

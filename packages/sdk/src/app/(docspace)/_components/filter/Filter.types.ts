@@ -6,6 +6,7 @@ export type FilterProps = {
 
   shareKey?: string;
 
+  currentFolderId?: string | number;
   showMainButton?: boolean;
   mainButtonProps?: MainButtonProps;
   mainButtonIcon?: React.ReactNode;

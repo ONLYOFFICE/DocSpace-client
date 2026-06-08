@@ -36,7 +36,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import {
   createFolder,
@@ -55,6 +55,7 @@ import { useNavigationStore } from "@/app/(docspace)/_store/NavigationStore";
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
 import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
+import openDocEditor from "@/app/(docspace)/_utils/open-doc-editor";
 
 import type { CreateFileDialogType } from "../_components/create-file-dialog";
 
@@ -88,44 +89,27 @@ type UseDocsActionsOptions = {
 
 export default function useDocsActions(options?: UseDocsActionsOptions) {
   const router = useRouter();
-  const pathname = usePathname();
   const navigationStore = useNavigationStore();
   const { filesSettings } = useFilesSettingsStore();
   const uploadStore = useUploadStore();
   const { sdkConfig } = useSDKConfig();
   const { t } = useTranslation(["Common"]);
 
-  const editorBasePath = options?.editorBasePath;
-
   const openInSameTab =
     sdkConfig?.openEditorInSameTab ??
     filesSettings?.openEditorInSameTab ??
     true;
 
-  const buildCreateUrl = useCallback(
-    (folderId: number | string, fileTitle: string) => {
-      const base = editorBasePath ?? "/personal-files/editor";
-      const params = new URLSearchParams();
-      params.set("parentId", String(folderId));
-      params.set("fileTitle", fileTitle);
-      if (editorBasePath && pathname) {
-        params.set("returnTo", pathname);
-      }
-      return `${base}/create?${params.toString()}`;
-    },
-    [editorBasePath, pathname],
-  );
-
   const navigateToCreate = useCallback(
     (folderId: number | string, fileTitle: string) => {
-      const url = buildCreateUrl(folderId, fileTitle);
-      if (!openInSameTab) {
-        window.open(`${window.location.origin}/sdk${url}`, "_blank");
-        return;
-      }
-      router.push(url);
+      openDocEditor({
+        parentId: folderId,
+        fileTitle,
+        openInSameTab,
+        frameConfig: sdkConfig,
+      });
     },
-    [buildCreateUrl, openInSameTab, router],
+    [openInSameTab, sdkConfig],
   );
 
   const inputFilesRef = useRef<HTMLInputElement | null>(null);
@@ -306,8 +290,7 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
           const isAbort =
             signal.aborted ||
             (error instanceof Error &&
-              (error.name === "AbortError" ||
-                error.name === "CanceledError"));
+              (error.name === "AbortError" || error.name === "CanceledError"));
           if (isAbort) {
             uploadStore.setItemCancelled(uniqueId);
             return;
@@ -332,8 +315,8 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
   );
 
   const defaultUploadFilesToFolder = useCallback(
-    async (files: FileList | File[]) => {
-      const folderId = getFolderId();
+    async (files: FileList | File[], targetFolderId?: number | string) => {
+      const folderId = targetFolderId ?? getFolderId();
       if (!folderId) return;
 
       const fileArray = Array.from(files);
@@ -376,10 +359,10 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
   );
 
   const uploadFilesToFolder = useCallback(
-    (files: FileList | File[]) =>
-      (options?.uploadFilesToFolderOverride ?? defaultUploadFilesToFolder)(
-        files,
-      ),
+    (files: FileList | File[], targetFolderId?: number | string) =>
+      options?.uploadFilesToFolderOverride
+        ? options.uploadFilesToFolderOverride(files)
+        : defaultUploadFilesToFolder(files, targetFolderId),
     [options?.uploadFilesToFolderOverride, defaultUploadFilesToFolder],
   );
 
@@ -472,3 +455,4 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
 }
 
 export type DocsActions = ReturnType<typeof useDocsActions>;
+

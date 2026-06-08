@@ -41,6 +41,8 @@ import type {
 import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TSortBy, TCreatedBy } from "@docspace/shared/types";
+import type { TLogo } from "@docspace/ui-kit/types";
+import { normalizeRoomLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
 import {
   DeviceType,
   FolderType,
@@ -83,6 +85,21 @@ import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
 import { useRoomsTagsStore } from "../../_store/RoomsTagsStore";
 import useResetSelectionClick from "@/app/(docspace)/(files)/_components/list/hooks/useResetSelectionClick";
 
+export type RoomActions = {
+  archiveSelected: (items: (TFolderItem | TFileItem)[]) => void;
+  deleteSelected: (items: (TFolderItem | TFileItem)[]) => void;
+  restoreSelected: (items: (TFolderItem | TFileItem)[]) => void;
+  pinSelected: (items: (TFolderItem | TFileItem)[]) => Promise<void>;
+  editRoom: (item: TFolderItem | TFileItem) => void;
+  changeOwner: (item: TFolderItem | TFileItem) => void;
+  inviteRoom: (item: TFolderItem | TFileItem) => void;
+  archiveRoom: (item: TFolderItem | TFileItem) => void;
+  deleteRoom: (item: TFolderItem | TFileItem) => void;
+  restoreRoom: (item: TFolderItem | TFileItem) => void;
+  infoRoom: (item: TFolderItem | TFileItem) => void;
+  roomChanged: (id: number) => void;
+};
+
 type RoomsListProps = {
   folders: TFolder[];
   files: TFile[];
@@ -102,6 +119,10 @@ type RoomsListProps = {
   /** Private-only override; falls through to public dialogs otherwise. */
   onPrivateInviteRoom?: (room: TFolder) => void;
   onPrivateChangeOwner?: (room: TFolder) => void;
+  // Populated by RoomsList so RoomsLayout can hand the same handlers to the
+  // shared Header's TableGroupMenu without lifting the dialog state out of
+  // RoomsList. Mirrors the existing `refreshRef` pattern.
+  roomActionsRef?: React.MutableRefObject<RoomActions | null>;
   infoPanelVisible?: boolean;
 };
 
@@ -121,6 +142,7 @@ const RoomsList = ({
   hasEncryptionKeys,
   onPrivateInviteRoom,
   onPrivateChangeOwner,
+  roomActionsRef,
   infoPanelVisible,
 }: RoomsListProps) => {
   const timezone = portalSettings.timezone;
@@ -175,7 +197,7 @@ const RoomsList = ({
     if (sp.get("sortBy")) f.sortBy = sp.get("sortBy") as typeof f.sortBy;
     if (sp.get("sortOrder"))
       f.sortOrder = sp.get("sortOrder") as typeof f.sortOrder;
-    if (sp.get("search")) f.filterValue = sp.get("search");
+    if (sp.get("filterValue")) f.filterValue = sp.get("filterValue");
     const tagsRaw = sp.get("tags");
     if (tagsRaw) {
       try {
@@ -472,6 +494,15 @@ const RoomsList = ({
           updatedRoom as unknown as TFolder,
         );
         filesListStore.replaceItem(roomId, updatedItem);
+        if (infoPanelStore.selection?.id === roomId) {
+          const rawLogo = (updatedRoom as unknown as { logo?: TLogo }).logo;
+          infoPanelStore.setSelection({
+            ...(updatedRoom as unknown as TFolder),
+            isRoom: true,
+            ...normalizeRoomLogo(rawLogo),
+          } as unknown as TFolder);
+        }
+
         const updatedTags = (updatedRoom as unknown as { tags?: string[] })
           .tags;
         if (Array.isArray(updatedTags) && updatedTags.length > 0) {
@@ -481,7 +512,7 @@ const RoomsList = ({
         // ignore
       }
     },
-    [convertFolderToItem, filesListStore, tagsStore],
+    [convertFolderToItem, filesListStore, infoPanelStore, tagsStore],
   );
 
   const requestRunning = React.useRef(false);
@@ -516,7 +547,11 @@ const RoomsList = ({
       newFilter.sortBy = sp.get("sortBy") as typeof newFilter.sortBy;
     if (sp.get("sortOrder"))
       newFilter.sortOrder = sp.get("sortOrder") as typeof newFilter.sortOrder;
-    if (sp.get("search")) newFilter.filterValue = sp.get("search");
+    if (sp.get("filterValue"))
+      newFilter.filterValue = sp.get("filterValue");
+    if (sp.get("subjectId")) newFilter.subjectId = sp.get("subjectId");
+    if (sp.get("subjectOwnerId"))
+      newFilter.subjectOwnerId = sp.get("subjectOwnerId");
     const tagsRaw = sp.get("tags");
     if (tagsRaw) {
       try {
@@ -583,6 +618,92 @@ const RoomsList = ({
     if (refreshRef) refreshRef.current = fetchCurrentRooms;
   }, [fetchCurrentRooms, refreshRef]);
 
+  // Bulk pin/unpin via TableGroupMenu. Direction is decided here from the
+  // current selection — if every room is already pinned, the action is
+  // "unpin"; otherwise "pin". Acts only on items that actually need the
+  // change so the toast count reflects real work (matches client's
+  // `pinRooms`/`unpinRooms` which pre-filter by `item.pinned`).
+  const onPinSelected = React.useCallback(
+    async (items: (TFolderItem | TFileItem)[]) => {
+      if (!items.length) return;
+      const allPinned = items.every(
+        (i) => "pinned" in i && (i as { pinned?: boolean }).pinned,
+      );
+      const action: "pin" | "unpin" = allPinned ? "unpin" : "pin";
+      const ids = items
+        .filter((i) => {
+          const pinned =
+            "pinned" in i ? (i as { pinned?: boolean }).pinned : false;
+          return action === "pin" ? !pinned : pinned;
+        })
+        .map((i) => i.id as number);
+
+      if (!ids.length) return;
+
+      activeItemsStore.addActiveItems([], ids);
+
+      try {
+        await Promise.all(
+          ids.map((id) =>
+            action === "unpin"
+              ? api.rooms.unpinRoom(id)
+              : api.rooms.pinRoom(id),
+          ),
+        );
+        fetchCurrentRooms();
+        setSelection([]);
+        setBufferSelection(null);
+        const singular = ids.length === 1;
+        toastr.success(
+          action === "unpin"
+            ? singular
+              ? t("Common:RoomUnpinned")
+              : t("Common:RoomsUnpinned", { count: ids.length })
+            : singular
+              ? t("Common:RoomPinned")
+              : t("Common:RoomsPinned", { count: ids.length }),
+        );
+      } catch (e) {
+        toastr.error(e as Error);
+      } finally {
+        activeItemsStore.removeActiveItems([], ids);
+      }
+    },
+    [activeItemsStore, fetchCurrentRooms, setSelection, setBufferSelection, t],
+  );
+
+  React.useEffect(() => {
+    if (!roomActionsRef) return;
+    roomActionsRef.current = {
+      archiveSelected: onArchiveSelected,
+      deleteSelected: onDeleteSelected,
+      restoreSelected: onRestoreSelected,
+      pinSelected: onPinSelected,
+      editRoom: onEditRoom,
+      changeOwner: onChangeOwner,
+      inviteRoom: onInviteRoom,
+      archiveRoom: onArchiveRoom,
+      deleteRoom: onDeleteRoom,
+      restoreRoom: onRestoreRoom,
+      infoRoom: onInfoRoom,
+      roomChanged: refreshSingleRoom,
+    };
+  }, [
+    roomActionsRef,
+    onArchiveSelected,
+    onDeleteSelected,
+    onRestoreSelected,
+    onPinSelected,
+    onEditRoom,
+    onChangeOwner,
+    onInviteRoom,
+    onArchiveRoom,
+    onDeleteRoom,
+    onRestoreRoom,
+    onInfoRoom,
+    refreshSingleRoom,
+  ]);
+
   const fetchMoreRooms = React.useCallback(async () => {
     if (!hasNextPage || requestRunning.current) return;
     requestRunning.current = true;
@@ -635,8 +756,9 @@ const RoomsList = ({
     setRootFolderType(current.rootFolderType);
   }, [current.rootFolderType, setRootFolderType]);
 
-  const visibleItems =
-    filesListStore.items.length > 0 ? filesListStore.items : initialItems;
+  const visibleItems = initRef.current
+    ? filesListStore.items
+    : initialItems;
 
   let content: React.ReactNode;
 

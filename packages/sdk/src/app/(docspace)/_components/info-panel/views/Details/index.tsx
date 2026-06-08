@@ -31,22 +31,16 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { FileType, FolderType } from "@docspace/shared/enums";
 import { createThumbnails } from "@docspace/shared/api/files";
 import { isAdmin } from "@docspace/shared/utils/common";
-import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
-import {
-  getRoomIconLogo,
-  type RoomIconFields,
-} from "@/app/(docspace)/_utils/getRoomIconLogo";
 import { useDocsSettingsStore } from "@/app/(personal-files)/_store/DocsSettingsStore";
 import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
+import RoomLogoEditableIcon from "@/app/(rooms)/_components/room-logo-editor";
 
 import DetailsHelper, { type DetailsProperty } from "./Details.utils";
 
@@ -117,32 +111,14 @@ const Details = observer(({ selection, onTagsChanged }: DetailsProps) => {
       ? null
       : getIcon(isFolder ? undefined : fileExst, 96);
 
-  const roomItem = selection as TFolder & RoomIconFields;
-  const roomIconLogo = isRoom ? getRoomIconLogo(roomItem) : undefined;
-  const isPrivateRoom =
-    isRoom && (selection as TFolder & { private?: boolean }).private === true;
-  const roomBadgeUrl = isRoom
-    ? (getRoomBadgeUrl(
-        selection as Parameters<typeof getRoomBadgeUrl>[0],
-        24,
-      ) ?? undefined)
-    : undefined;
-  const roomBadgeIconColor = isPrivateRoom
-    ? globalColors.lightStatusPositive
-    : undefined;
-
   return (
     <>
       {isRoom ? (
         <div className={styles.noThumbnail}>
-          <RoomIcon
-            logo={roomIconLogo}
-            color={roomItem.roomIconColor}
-            title={selection.title}
-            showDefault={!roomItem.hasRoomImage}
-            badgeUrl={roomBadgeUrl}
-            badgeIconColor={roomBadgeIconColor}
-            size="96px"
+          <RoomLogoEditableIcon
+            selection={selection as TFolder}
+            variant="details"
+            onUpdated={onTagsChanged}
           />
         </div>
       ) : "thumbnailUrl" in selection &&

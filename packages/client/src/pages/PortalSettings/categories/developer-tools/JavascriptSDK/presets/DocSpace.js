@@ -266,7 +266,6 @@ export const Component = inject(({ settingsStore }) => {
   withTranslation([
     "JavascriptSdk",
     "Files",
-    "EmbeddingPanel",
     "Common",
     "Files",
     "Translations",

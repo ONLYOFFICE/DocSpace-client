@@ -101,8 +101,11 @@ const buildProviderOptions = (
 const getSelectedOptionByProviderType = (
   options: TOption[],
   type?: ProviderType,
-) => {
-  return options.find((item) => item.key === type) || options[0];
+): TOption => {
+  return (
+    options.find((item) => item.key === type) ||
+    options[0] || { key: "", label: "" }
+  );
 };
 
 const getURLByProviderType = (

@@ -40,6 +40,7 @@ import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 import { ADS_TIMEOUT } from "SRC_DIR/helpers/filesConstants";
+import { AnalyticsEvents } from "@docspace/ui-kit/enums";
 
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -91,7 +92,6 @@ const Bar = (props) => {
     isStorageQuotaLimit,
     isRoomsTariffAlmostLimit,
     isRoomsTariffLimit,
-
   } = props;
 
   const navigate = useNavigate();
@@ -448,6 +448,23 @@ const Bar = (props) => {
 
   const currentBar = getCurrentBar();
 
+  const pushLimitEvent = React.useCallback((context) => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer?.push({ event: AnalyticsEvents.LimitReached, context });
+  }, []);
+
+  React.useEffect(() => {
+    if (isRoomsTariffLimit) pushLimitEvent("rooms");
+  }, [isRoomsTariffLimit, pushLimitEvent]);
+
+  React.useEffect(() => {
+    if (isUserTariffLimit) pushLimitEvent("admins");
+  }, [isUserTariffLimit, pushLimitEvent]);
+
+  React.useEffect(() => {
+    if (isStorageTariffLimit || isStorageQuotaLimit) pushLimitEvent("storage");
+  }, [isStorageTariffLimit, isStorageQuotaLimit, pushLimitEvent]);
+
   const showQuotasBar = !!currentBar && tReady;
 
   React.useEffect(() => {
@@ -512,12 +529,7 @@ const Bar = (props) => {
 };
 
 export default inject(
-  ({
-    settingsStore,
-    profileActionsStore,
-    userStore,
-    currentQuotaStore,
-  }) => {
+  ({ settingsStore, profileActionsStore, userStore, currentQuotaStore }) => {
     const { user, withActivationBar, sendActivationLink } = userStore;
 
     const { onPaymentsClick } = profileActionsStore;

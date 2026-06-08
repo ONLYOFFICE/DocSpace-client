@@ -1500,7 +1500,6 @@
   "PreviousPlan": "<1>الخطة السابقة:</1> {{amount}} <2>({{price}}/الشهر)</2>",
   "PriceCalculation": "احسب سعرك",
   "PricePerGB": "سعر لكل جيجابايت",
-  "PrivateRoomCopyOutNotSupported": "نسخ الملفات المشفرة خارج الغرفة الخاصة غير مدعوم بعد.",
   "PrivateRoomDescription": "ستُشفَّر جميع الملفات في هذه الغرفة",
   "PrivateRoomDisclosureBody": "يتم تنفيذ التشفير بالكامل في متصفحك، لذا لا يمكن قراءة الملفات إلا للأشخاص الذين تدعوهم. أنت تثق في الشيفرة التي تقدمها بوابة {{productName}} الخاصة بك — اقفل جلستك عندما لا تستخدمها.",
   "PrivateRoomDisclosureDismiss": "حسنًا",

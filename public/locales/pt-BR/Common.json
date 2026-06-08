@@ -1523,7 +1523,6 @@
   "PreviousPlan": "<1>Plano anterior:</1> {{amount}} <2>({{price}}/month)</2>",
   "PriceCalculation": "Calcule seu preço",
   "PricePerGB": "Preço por GB",
-  "PrivateRoomCopyOutNotSupported": "Ainda não é possível copiar arquivos criptografados para fora de uma sala privada.",
   "PrivateRoomDescription": "Todos os arquivos nesta sala serão criptografados",
   "PrivateRoomDisclosureBody": "A criptografia é executada inteiramente no seu navegador, portanto os arquivos só podem ser lidos pelas pessoas que você convidar. Você confia no código fornecido pelo seu portal {{productName}} — bloqueie sua sessão quando não estiver usando.",
   "PrivateRoomDisclosureDismiss": "Entendi",

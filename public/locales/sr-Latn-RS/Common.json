@@ -1523,7 +1523,6 @@
   "PreviousPlan": "<1>Prethodni plan:</1> {{amount}} <2>({{price}}/mesečno)</2>",
   "PriceCalculation": "Izračunaj svoju cenu",
   "PricePerGB": "Cena po GB",
-  "PrivateRoomCopyOutNotSupported": "Kopiranje šifrovanih fajlova izvan privatne sobe još uvek nije podržano.",
   "PrivateRoomDescription": "Svi fajlovi u ovoj sobi biće šifrovani",
   "PrivateRoomDisclosureBody": "Šifrovanje se u potpunosti izvršava u vašem pregledaču, pa fajlove mogu da čitaju samo osobe koje pozovete. Oslanjate se na kod koji isporučuje vaš {{productName}} portal — zaključajte sesiju kada je ne koristite.",
   "PrivateRoomDisclosureDismiss": "Razumem",

@@ -1500,7 +1500,6 @@
   "PreviousPlan": "<1>Poprzedni plan:</1> {{amount}} <2>({{price}}/miesiąc)</2>",
   "PriceCalculation": "Oblicz swoją cenę",
   "PricePerGB": "Cena za GB",
-  "PrivateRoomCopyOutNotSupported": "Kopiowanie zaszyfrowanych plików poza pokój prywatny nie jest jeszcze obsługiwane.",
   "PrivateRoomDescription": "Wszystkie pliki w tym pokoju będą szyfrowane",
   "PrivateRoomDisclosureBody": "Szyfrowanie odbywa się w całości w przeglądarce, więc pliki mogą odczytać tylko zaproszone przez Ciebie osoby. Polegasz na kodzie dostarczanym przez Twój portal {{productName}} — blokuj sesję, gdy z niej nie korzystasz.",
   "PrivateRoomDisclosureDismiss": "Rozumiem",

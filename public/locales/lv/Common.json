@@ -1500,7 +1500,6 @@
   "PreviousPlan": "<1>Iepriekšējais plāns:</1> {{amount}} <2>({{price}}/mēnesī)</2>",
   "PriceCalculation": "Aprēķināt cenu",
   "PricePerGB": "Cena par GB",
-  "PrivateRoomCopyOutNotSupported": "Šifrētu failu kopēšana ārpus privātās telpas pagaidām netiek atbalstīta.",
   "PrivateRoomDescription": "Visi faili šajā telpā tiks šifrēti",
   "PrivateRoomDisclosureBody": "Šifrēšana pilnībā darbojas jūsu pārlūkprogrammā, tāpēc failus var lasīt tikai jūsu uzaicinātie cilvēki. Jūs paļaujaties uz kodu, ko nodrošina jūsu {{productName}} portāls — bloķējiet savu sesiju, kad to neizmantojat.",
   "PrivateRoomDisclosureDismiss": "Sapratu",

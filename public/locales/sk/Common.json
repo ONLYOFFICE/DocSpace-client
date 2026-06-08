@@ -1474,7 +1474,6 @@
   "PreviousPlan": "<1>Predošlý plán:</1> {{amount}} <2>({{price}}/mesiac)</2>",
   "PriceCalculation": "Vypočítajte svoju cenu",
   "PricePerGB": "Cena za GB",
-  "PrivateRoomCopyOutNotSupported": "Kopírovanie šifrovaných súborov mimo súkromnú miestnosť zatiaľ nie je podporované.",
   "PrivateRoomDescription": "Všetky súbory v tejto miestnosti budú zašifrované",
   "PrivateRoomDisclosureBody": "Šifrovanie prebieha úplne vo vašom prehliadači, takže súbory môžu čítať iba ľudia, ktorých pozvete. Spoliehate sa na kód, ktorý poskytuje váš portál {{productName}} — keď reláciu nepoužívate, uzamknite ju.",
   "PrivateRoomDisclosureDismiss": "Rozumiem",

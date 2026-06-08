@@ -1523,7 +1523,6 @@
   "PreviousPlan": "<1>以前のプラン：</1> {{amount}} <2>({{price}}/月)</2>",
   "PriceCalculation": "価格を計算する",
   "PricePerGB": "1GBあたりの価格",
-  "PrivateRoomCopyOutNotSupported": "プライベートルームの外への暗号化ファイルのコピーはまだサポートされていません。",
   "PrivateRoomDescription": "このルーム内のすべてのファイルは暗号化されます",
   "PrivateRoomDisclosureBody": "暗号化はすべてお使いのブラウザー内で実行されるため、ファイルを読めるのは招待した相手だけです。お使いの {{productName}} ポータルが配信するコードを信頼することになります。使用していないときはセッションをロックしてください。",
   "PrivateRoomDisclosureDismiss": "了解しました",

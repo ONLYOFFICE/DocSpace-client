@@ -1521,7 +1521,6 @@
   "PreviousPlan": "<1>Previous plan:</1> {{amount}} <2>({{price}}/month)</2>",
   "PriceCalculation": "Calculate your price",
   "PricePerGB": "Price per GB",
-  "PrivateRoomCopyOutNotSupported": "Copying encrypted files out of a private room is not supported yet.",
   "PrivateRoomDescription": "All files in this room will be encrypted",
   "PrivateRoomDisclosureBody": "Encryption runs entirely in your browser, so files are readable only by the people you invite. You rely on the code your {{productName}} portal serves — lock your session when you are not using it.",
   "PrivateRoomDisclosureDismiss": "Got it",

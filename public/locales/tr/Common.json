@@ -1500,7 +1500,6 @@
   "PreviousPlan": "<1>Önceki plan:</1> {{amount}} <2>({{price}}/ay)</2>",
   "PriceCalculation": "Fiyatını hesapla",
   "PricePerGB": "GB başına fiyat",
-  "PrivateRoomCopyOutNotSupported": "Şifrelenmiş dosyaların özel oda dışına kopyalanması henüz desteklenmiyor.",
   "PrivateRoomDescription": "Bu odadaki tüm dosyalar şifrelenecektir",
   "PrivateRoomDisclosureBody": "Şifreleme tamamen tarayıcınızda çalışır, bu nedenle dosyaları yalnızca davet ettiğiniz kişiler okuyabilir. {{productName}} portalınızın sunduğu koda güvenirsiniz — kullanmadığınızda oturumunuzu kilitleyin.",
   "PrivateRoomDisclosureDismiss": "Anladım",

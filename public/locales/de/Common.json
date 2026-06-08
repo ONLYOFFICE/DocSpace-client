@@ -1523,7 +1523,6 @@
   "PreviousPlan": "<1>Vorheriger Plan:</1> {{amount}} <2>({{price}}/Monat)</2>",
   "PriceCalculation": "Berechnen Sie Ihren Preis",
   "PricePerGB": "Preis pro GB",
-  "PrivateRoomCopyOutNotSupported": "Das Kopieren verschlüsselter Dateien aus einem privaten Raum wird noch nicht unterstützt.",
   "PrivateRoomDescription": "Alle Dateien in diesem Raum werden verschlüsselt",
   "PrivateRoomDisclosureBody": "Die Verschlüsselung läuft vollständig in Ihrem Browser, sodass Dateien nur von den von Ihnen eingeladenen Personen gelesen werden können. Sie vertrauen dem Code, den Ihr {{productName}}-Portal bereitstellt — sperren Sie Ihre Sitzung, wenn Sie sie nicht verwenden.",
   "PrivateRoomDisclosureDismiss": "Verstanden",

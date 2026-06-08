@@ -1500,7 +1500,6 @@
   "PreviousPlan": "<1>Edellinen suunnitelma:</1> {{amount}} <2>({{price}}/kk)</2>",
   "PriceCalculation": "Laske hintasi",
   "PricePerGB": "Hinta GB kohden",
-  "PrivateRoomCopyOutNotSupported": "Salattujen tiedostojen kopiointia yksityisen huoneen ulkopuolelle ei vielä tueta.",
   "PrivateRoomDescription": "Kaikki tämän huoneen tiedostot salataan",
   "PrivateRoomDisclosureBody": "Salaus suoritetaan kokonaan selaimessasi, joten tiedostoja voivat lukea vain kutsumasi henkilöt. Luotat koodiin, jonka {{productName}}-portaalisi tarjoaa — lukitse istuntosi, kun et käytä sitä.",
   "PrivateRoomDisclosureDismiss": "Selvä",

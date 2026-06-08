@@ -1523,7 +1523,6 @@
   "PreviousPlan": "<1>Planul precedent:</1> {{amount}} <2>({{price}}/lună)</2>",
   "PriceCalculation": "Calculaţi preţul",
   "PricePerGB": "Preț pe GB",
-  "PrivateRoomCopyOutNotSupported": "Copierea fișierelor criptate în afara unei camere private nu este acceptată încă.",
   "PrivateRoomDescription": "Toate fișierele din această cameră vor fi criptate",
   "PrivateRoomDisclosureBody": "Criptarea rulează integral în browserul dvs., astfel încât fișierele pot fi citite doar de persoanele pe care le invitați. Aveți încredere în codul oferit de portalul {{productName}} — blocați-vă sesiunea când nu o utilizați.",
   "PrivateRoomDisclosureDismiss": "Am înțeles",

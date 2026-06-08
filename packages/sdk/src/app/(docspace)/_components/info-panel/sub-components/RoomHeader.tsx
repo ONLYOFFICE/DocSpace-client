@@ -90,9 +90,6 @@ const RoomHeader = ({
     getRoomBadgeUrl(
       selection as Parameters<typeof getRoomBadgeUrl>[0],
     ) ?? "";
-  // Mirror RoomsItemTitle: apply green badge color for private rooms so the
-  // shield renders in lightStatusPositive (#35AD17) instead of the room
-  // background tint.
   const badgeIconColor = isPrivateRoom
     ? globalColors.lightStatusPositive
     : undefined;

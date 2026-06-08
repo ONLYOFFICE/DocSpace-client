@@ -1523,7 +1523,6 @@
   "PreviousPlan": "<1>之前的套餐：</1> {{amount}} <2>({{price}}/月)</2>",
   "PriceCalculation": "计算价格",
   "PricePerGB": "每 GB 价格",
-  "PrivateRoomCopyOutNotSupported": "暂不支持将加密文件复制到私人房间之外。",
   "PrivateRoomDescription": "此房间中的所有文件将被加密",
   "PrivateRoomDisclosureBody": "加密完全在您的浏览器中运行，因此只有您邀请的人才能读取文件。您信任您的 {{productName}} 门户提供的代码 — 不使用时请锁定会话。",
   "PrivateRoomDisclosureDismiss": "知道了",

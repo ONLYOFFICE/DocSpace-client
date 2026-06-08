@@ -1500,7 +1500,6 @@
   "PreviousPlan": "<1>Plano anterior:</1> {{amount}} <2>({{price}}/mês)</2>",
   "PriceCalculation": "Calcule o seu preço",
   "PricePerGB": "Preço por GB",
-  "PrivateRoomCopyOutNotSupported": "Ainda não é suportada a cópia de ficheiros encriptados para fora de uma sala privada.",
   "PrivateRoomDescription": "Todos os ficheiros nesta sala serão encriptados",
   "PrivateRoomDisclosureBody": "A encriptação é executada inteiramente no seu navegador, por isso os ficheiros só podem ser lidos pelas pessoas que convidar. Confia no código fornecido pelo seu portal {{productName}} — bloqueie a sua sessão quando não a estiver a utilizar.",
   "PrivateRoomDisclosureDismiss": "Compreendi",

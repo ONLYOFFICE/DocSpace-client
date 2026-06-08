@@ -1523,7 +1523,6 @@
   "PreviousPlan": "<1>Piano precedente:</1> {{amount}} <2>({{price}}/mese)</2>",
   "PriceCalculation": "Calcola il tuo prezzo",
   "PricePerGB": "Prezzo per GB",
-  "PrivateRoomCopyOutNotSupported": "La copia di file crittografati al di fuori di una stanza privata non è ancora supportata.",
   "PrivateRoomDescription": "Tutti i file in questa stanza saranno cifrati",
   "PrivateRoomDisclosureBody": "La crittografia viene eseguita interamente nel tuo browser, quindi i file sono leggibili solo dalle persone che inviti. Ti affidi al codice fornito dal tuo portale {{productName}}: blocca la sessione quando non la usi.",
   "PrivateRoomDisclosureDismiss": "Ho capito",

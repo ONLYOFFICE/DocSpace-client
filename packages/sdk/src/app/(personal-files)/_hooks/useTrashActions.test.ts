@@ -112,10 +112,10 @@ function simulateCacheCleanup(
 }
 
 describe("useTrashActions — filename cache cleanup on delete", () => {
-  let forget: ReturnType<typeof vi.fn>;
+  let forget: ReturnType<typeof vi.fn<(id: number) => void>>;
 
   beforeEach(() => {
-    forget = vi.fn();
+    forget = vi.fn<(id: number) => void>();
   });
 
   it("calls forgetEncryptedFilename for each file id in a private context", () => {

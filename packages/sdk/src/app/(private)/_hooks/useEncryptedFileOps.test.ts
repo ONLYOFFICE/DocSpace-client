@@ -35,6 +35,7 @@
 
 import { describe, it, expect } from "vitest";
 
+import type { TFunction } from "i18next";
 import {
   CryptoError,
   DecryptionError,
@@ -58,7 +59,7 @@ function selectDownloadMessage(
   error: unknown,
 ): string {
   return error instanceof CryptoError
-    ? getEncryptionErrorMessage(t, error)
+    ? getEncryptionErrorMessage(t as unknown as TFunction, error)
     : t("Common:EncryptionDownloadFailed");
 }
 
@@ -69,7 +70,7 @@ function selectCopyMessage(
   names: string,
 ): string {
   return error instanceof CryptoError
-    ? getEncryptionErrorMessage(t, error)
+    ? getEncryptionErrorMessage(t as unknown as TFunction, error)
     : t("Common:EncryptedCopyFailed", { names });
 }
 
@@ -79,7 +80,7 @@ function selectUploadMessage(
   error: unknown,
 ): string {
   return error instanceof CryptoError
-    ? getEncryptionErrorMessage(t, error)
+    ? getEncryptionErrorMessage(t as unknown as TFunction, error)
     : t("Common:EncryptionPrepareFailed");
 }
 

@@ -81,10 +81,10 @@ const FAKE_ENCRYPTED_ACTIONS = {
 };
 
 describe("useDocsHotkeys — folder-upload hotkey private-room guard", () => {
-  let onUploadFolder: ReturnType<typeof vi.fn>;
+  let onUploadFolder: ReturnType<typeof vi.fn<() => void>>;
 
   beforeEach(() => {
-    onUploadFolder = vi.fn();
+    onUploadFolder = vi.fn<() => void>();
   });
 
   it("calls onUploadFolder in a normal (non-private) context", () => {
@@ -112,10 +112,10 @@ describe("useDocsHotkeys — folder-upload hotkey private-room guard", () => {
 });
 
 describe("useDocsHotkeys — file-upload hotkey is unrestricted in private rooms", () => {
-  let onUploadFiles: ReturnType<typeof vi.fn>;
+  let onUploadFiles: ReturnType<typeof vi.fn<() => void>>;
 
   beforeEach(() => {
-    onUploadFiles = vi.fn();
+    onUploadFiles = vi.fn<() => void>();
   });
 
   it("calls onUploadFiles in a normal context", () => {

@@ -80,7 +80,7 @@ function computeExcludeItems(
 
   const nonMemberAdmins = admins
     .map((a) => a.id)
-    .filter((id): id is string => Boolean(id) && !memberIds.has(id));
+    .filter((id): id is string => Boolean(id) && !memberIds.has(id!));
 
   return [...new Set([...baseExclude, ...nonMemberAdmins])];
 }
@@ -342,7 +342,7 @@ describe("owner-change toast selection (parity with ChangeRoomOwnerPanel)", () =
 describe("LeaveTheRoom checkbox submit behaviour (parity with ChangeRoomOwnerPanel)", () => {
   const t = (key: string): string => key;
   const ROOM_ID = 42;
-  const CANDIDATE_ID = "user-99";
+  const _CANDIDATE_ID = "user-99";
   const CURRENT_USER_ID = "current-user-1";
 
   // Mirrors the post-changeOwner block in PrivateChangeOwnerDialog.onSubmit.

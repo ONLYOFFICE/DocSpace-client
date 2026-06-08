@@ -428,7 +428,7 @@ describe("post-invite backfill logic", () => {
 
   async function runBackfillGuard(opts: {
     aborted: boolean;
-    backfill: ReturnType<typeof vi.fn>;
+    backfill: (...args: unknown[]) => unknown;
   }): Promise<void> {
     const controller = new AbortController();
     if (opts.aborted) controller.abort("test");
@@ -523,10 +523,10 @@ describe("reencryptProgress state transitions", () => {
     shouldThrow?: boolean;
   }): Promise<ProgressState[]> {
     const states: ProgressState[] = [];
-    let progress: ProgressState = null;
+    let _progress: ProgressState = null;
 
     const setReencryptProgress = (v: ProgressState) => {
-      progress = v;
+      _progress = v;
       states.push(v === null ? null : { ...v });
     };
 
@@ -608,7 +608,7 @@ describe("reencryptProgress state transitions", () => {
   // Scenario 4: null initial state (no active operation).
   it("reports null before onInviteSubmitted is called", async () => {
     // The hook initialises reencryptProgress as null — mirrors useState(null).
-    let progress: ProgressState = null;
+    const progress: ProgressState = null;
     // Before any operation starts, progress stays null.
     expect(progress).toBeNull();
   });

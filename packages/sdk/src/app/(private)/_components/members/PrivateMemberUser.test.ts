@@ -137,8 +137,8 @@ describe("onRepeatInvitation — toast contract", () => {
   const SUCCESS_KEY = "Common:RoomSuccessSentMultipleInvitatios";
 
   it("calls toastr.success with the correct key on successful resend", async () => {
-    const toastrSuccess = vi.fn<[string], void>();
-    const toastrError = vi.fn<[unknown], void>();
+    const toastrSuccess = vi.fn<(msg: string) => void>();
+    const toastrError = vi.fn<(err: unknown) => void>();
     const resendEmailInvitations = vi
       .fn()
       .mockResolvedValue(undefined);
@@ -146,7 +146,7 @@ describe("onRepeatInvitation — toast contract", () => {
 
     // Inline the handler logic from PrivateMemberUser
     await resendEmailInvitations(1, true)
-      .then(() => toastrSuccess(t(SUCCESS_KEY)))
+      .then(() => toastrSuccess(t("Common:RoomSuccessSentMultipleInvitatios")))
       .catch((err: unknown) => toastrError(err));
 
     expect(toastrSuccess).toHaveBeenCalledOnce();
@@ -155,8 +155,8 @@ describe("onRepeatInvitation — toast contract", () => {
   });
 
   it("calls toastr.error when the resend API call rejects", async () => {
-    const toastrSuccess = vi.fn<[string], void>();
-    const toastrError = vi.fn<[unknown], void>();
+    const toastrSuccess = vi.fn<(msg: string) => void>();
+    const toastrError = vi.fn<(err: unknown) => void>();
     const apiError = new Error("network error");
     const resendEmailInvitations = vi
       .fn()
@@ -164,7 +164,7 @@ describe("onRepeatInvitation — toast contract", () => {
     const t = (key: string) => key;
 
     await resendEmailInvitations(1, true)
-      .then(() => toastrSuccess(t(SUCCESS_KEY)))
+      .then(() => toastrSuccess(t("Common:RoomSuccessSentMultipleInvitatios")))
       .catch((err: unknown) => toastrError(err));
 
     expect(toastrError).toHaveBeenCalledOnce();

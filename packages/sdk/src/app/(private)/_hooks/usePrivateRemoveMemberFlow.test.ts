@@ -75,22 +75,22 @@ const FAILED_KEY = "Common:EncryptedRevokeFailed";
 async function runRevokeLogic(
   revoke: () => Promise<FileEncryptionOpResult[]>,
   toastrSuccess: (msg: string) => void,
-  toastrWarning: (msg: string, opts?: object) => void,
+  toastrWarning: (msg: string, opts?: Record<string, unknown>) => void,
   toastrError: (msg: string) => void,
-  t: (key: string, opts?: object) => string,
+  t: (key: string, opts?: Record<string, unknown>) => string,
 ): Promise<void> {
   try {
     const results = await revoke();
     const failures = results.filter((r) => !r.success);
     if (failures.length > 0) {
-      toastrWarning(t(PARTIAL_KEY, { count: failures.length }));
+      toastrWarning(t("Common:EncryptedRevokePartialFailure", { count: failures.length }));
       return;
     }
     if (results.length > 0) {
-      toastrSuccess(t(COMPLETED_KEY));
+      toastrSuccess(t("Common:EncryptedRevokeCompleted"));
     }
   } catch {
-    toastrError(t(FAILED_KEY));
+    toastrError(t("Common:EncryptedRevokeFailed"));
   }
 }
 
@@ -100,9 +100,9 @@ async function runRevokeLogic(
 
 function makeToasts() {
   return {
-    success: vi.fn<[string], void>(),
-    warning: vi.fn<[string, object?], void>(),
-    error: vi.fn<[string], void>(),
+    success: vi.fn<(msg: string) => void>(),
+    warning: vi.fn<(msg: string, opts?: Record<string, unknown>) => void>(),
+    error: vi.fn<(msg: string) => void>(),
   };
 }
 

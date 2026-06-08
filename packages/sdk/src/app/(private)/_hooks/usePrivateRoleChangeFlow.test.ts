@@ -234,7 +234,7 @@ async function runRoleChangeLogic(
 ): Promise<RoleChangeResult> {
   try {
     await updateRoomMemberRole();
-    const key = t(SUCCESS_KEY);
+    const key = t("Common:AccessRightsChanged");
     onRoleChanged();
     return { toastType: "success", toastKey: key, onRoleChangedCalled: true };
   } catch (error) {
@@ -269,7 +269,7 @@ describe("updateRoleLogic — success path", () => {
 
   it("calls the API with the correct roomId, userId and access", async () => {
     const updateRole = vi.fn().mockResolvedValue(undefined);
-    const onRoleChanged = vi.fn();
+    const _onRoleChanged = vi.fn();
 
     const roomId = 42;
     const userId = "user-7";

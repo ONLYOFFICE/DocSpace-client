@@ -45,13 +45,15 @@ import useGetIcon from "@docspace/ui-kit/ai-agent/chat/hooks/useGetIcon";
 import { toastr, type TData } from "@docspace/ui-kit/components/toast";
 import { DeviceType, FileType, FolderType } from "@docspace/shared/enums";
 import { getBrandName } from "@docspace/shared/constants/brands";
-import CatalogDocumentsUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
-import UploadIconUrl from "PUBLIC_DIR/images/icons/16/upload.react.svg?url";
+
+import CatalogDocuments from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg";
+import UploadIcon from "PUBLIC_DIR/images/icons/16/upload.react.svg";
 
 import useDeviceType from "@/hooks/useDeviceType";
 
 import { getOnlyofficeFileType } from "./onlyoffice-file-type";
 import { attachFilesToChat } from "./attach-files";
+import styles from "./styles.module.scss";
 
 type DocSpaceFilesAttachDialogProps = {
   onClose: () => void;
@@ -147,9 +149,7 @@ const DocSpaceFilesAttachDialog = observer(
       return selectedFilesRef.current.length === 0 && !selectedFileInfo;
     }, []);
 
-    type SdkFolderType = Parameters<
-      typeof FilesSelector
-    >[0]["rootFolderType"];
+    type SdkFolderType = Parameters<typeof FilesSelector>[0]["rootFolderType"];
     const sdkUserFolderType = FolderType.USER as unknown as SdkFolderType;
 
     return (
@@ -254,9 +254,9 @@ const DeviceUploader = React.forwardRef<DeviceUploaderHandle>((_, ref) => {
               }
 
               const isTextish =
-                f.type.startsWith("text/")
-                || f.type === ""
-                || f.type === "application/json";
+                f.type.startsWith("text/") ||
+                f.type === "" ||
+                f.type === "application/json";
               if (isTextish) {
                 reader.onload = () => {
                   fileInputs.push({
@@ -301,13 +301,7 @@ const DeviceUploader = React.forwardRef<DeviceUploaderHandle>((_, ref) => {
   );
 
   return (
-    <input
-      ref={inputRef}
-      type="file"
-      multiple
-      hidden
-      onChange={onChange}
-    />
+    <input ref={inputRef} type="file" multiple hidden onChange={onChange} />
   );
 });
 DeviceUploader.displayName = "DeviceUploader";
@@ -337,7 +331,7 @@ const PersonalFilesAiAgentProviders = ({
           productName: getBrandName("ProductName"),
           defaultValue: "Add files from {{productName}}",
         }),
-        icon: CatalogDocumentsUrl,
+        icon: <CatalogDocuments className={styles.composerActionIcon} />,
         onClick: () => setPickerVisible(true),
       },
       {
@@ -345,7 +339,7 @@ const PersonalFilesAiAgentProviders = ({
         text: t("Common:UploadFromDevice", {
           defaultValue: "Upload from device",
         }),
-        icon: UploadIconUrl,
+        icon: <UploadIcon className={styles.composerActionIcon} />,
         onClick: () => deviceUploaderRef.current?.open(),
       },
     ],

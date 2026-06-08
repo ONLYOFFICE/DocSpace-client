@@ -33,6 +33,9 @@
 
   :global(.chat-panel) {
     max-width: 100vw !important;
+    // No section beside it in fullscreen, so the left divider has nothing to
+    // separate from — drop it.
+    border-inline-start: none;
   }
 }
 

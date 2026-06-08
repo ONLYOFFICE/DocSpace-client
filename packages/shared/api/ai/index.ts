@@ -194,12 +194,12 @@ const getAuthHeaders = (): Record<string, string> => {
   const token = getAuthToken();
   if (token) return { Authorization: token };
 
-  const publicRoomKey =
-    new URLSearchParams(window.location.search).get("share");
+  const publicRoomKey = new URLSearchParams(window.location.search).get(
+    "share",
+  );
 
   if (publicRoomKey)
     return {
-      Authorization: `Bearer ${publicRoomKey}`,
       "Request-Token": publicRoomKey,
     };
 
@@ -769,3 +769,4 @@ export const updateAIUserConfig = async (data: TAIUserConfig) => {
 
   return res as TAIUserConfig;
 };
+

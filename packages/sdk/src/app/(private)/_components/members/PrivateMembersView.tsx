@@ -51,7 +51,13 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { Text } from "@docspace/ui-kit/components/text";
 
+import MembersEmptyContainer from "@/app/(docspace)/_components/info-panel/views/Members/sub-components/EmptyContainer";
+
 import PrivateMemberUser from "./PrivateMemberUser";
+import {
+  classifyMembers,
+  type MemberSectionKey,
+} from "./PrivateMembersView.utils";
 import styles from "./PrivateMembersView.module.scss";
 
 const PAGE_SIZE = 100;
@@ -147,51 +153,76 @@ const PrivateMembersView: React.FC<PrivateMembersViewProps> = ({
   }
 
   const hasMore = members.length < total;
+  const isSearching = !!filterValue?.trim();
+  const sections = classifyMembers(members);
+
+  const sectionTitle = (key: MemberSectionKey): string => {
+    switch (key) {
+      case "administrators":
+        return t("Common:RoomAdministration");
+      case "users":
+        return t("Common:RoomUsers");
+      case "expected":
+        return t("Common:RoomExpectUsers");
+      default:
+        return "";
+    }
+  };
+
+  const renderMember = (member: RoomMember) => {
+    const user = member.sharedTo as TUser & { isGroup?: boolean };
+    const isGroup = Boolean(user.isGroup);
+    const isExpect =
+      !isGroup &&
+      "activationStatus" in user &&
+      user.activationStatus === EmployeeActivationStatus.Pending;
+    const canChangeRole =
+      canEditMembers &&
+      member.canEditAccess &&
+      !member.isOwner &&
+      user.id !== currentUserId;
+    return (
+      <li key={user.id} className={styles.listItem}>
+        <PrivateMemberUser
+          roomId={roomId}
+          userId={user.id}
+          displayName={user.displayName || user.email || ""}
+          avatar={user.avatar}
+          access={member.access}
+          canChangeRole={canChangeRole}
+          canRemove={member.canEditAccess && user.id !== currentUserId}
+          isExpect={isExpect}
+          canInvite={canInvite}
+          isOwner={member.isOwner}
+          isGroup={isGroup}
+          onRemoved={() => handleMemberRemoved(user.id)}
+          onRoleChanged={handleRoleChanged}
+        />
+      </li>
+    );
+  };
 
   return (
     <div className={styles.root}>
       <ul className={styles.list}>
-        {members.map((member) => {
-          const user = member.sharedTo as TUser & { isGroup?: boolean };
-          const isGroup = Boolean(user.isGroup);
-          // A pending member has activationStatus=Pending — mirrors
-          // Share.helpers.tsx:546-558 isExpect derivation in the reference.
-          // Groups never have activationStatus so default to false.
-          const isExpect =
-            !isGroup &&
-            "activationStatus" in user &&
-            user.activationStatus ===
-              EmployeeActivationStatus.Pending;
-          // Role-change gating mirrors reference User.tsx:104 / Share User.tsx:121.
-          // Owner role cannot be changed (isOwner guard).
-          // Self-role cannot be changed (currentUserId guard).
-          // canEditAccess on the member entry gates the combobox (server-side
-          // flag mirrors reference canChangeUserRole = user.canEditAccess).
-          const canChangeRole =
-            canEditMembers &&
-            member.canEditAccess &&
-            !member.isOwner &&
-            user.id !== currentUserId;
-          return (
-            <li key={user.id} className={styles.listItem}>
-              <PrivateMemberUser
-                roomId={roomId}
-                userId={user.id}
-                displayName={user.displayName || user.email || ""}
-                avatar={user.avatar}
-                access={member.access}
-                canChangeRole={canChangeRole}
-                canRemove={member.canEditAccess && user.id !== currentUserId}
-                isExpect={isExpect}
-                canInvite={canInvite}
-                isOwner={member.isOwner}
-                isGroup={isGroup}
-                onRemoved={() => handleMemberRemoved(user.id)}
-                onRoleChanged={handleRoleChanged}
-              />
-            </li>
-          );
-        })}
+        {isSearching
+          ? members.map(renderMember)
+          : sections.map((section) =>
+              section.members.length === 0 ? null : (
+                <React.Fragment key={section.key}>
+                  <li className={styles.sectionTitle}>
+                    <Text
+                      fontSize="12px"
+                      fontWeight={600}
+                      className={styles.sectionTitleLabel}
+                    >
+                      {sectionTitle(section.key)}
+                    </Text>
+                  </li>
+                  {section.members.map(renderMember)}
+                </React.Fragment>
+              ),
+            )}
       </ul>
 
       {hasMore ? (
@@ -207,11 +238,7 @@ const PrivateMembersView: React.FC<PrivateMembersViewProps> = ({
         />
       ) : null}
 
-      {members.length === 0 ? (
-        <Text className={styles.empty}>
-          {t("Common:NotFoundMembers")}
-        </Text>
-      ) : null}
+      {members.length === 0 ? <MembersEmptyContainer /> : null}
     </div>
   );
 };

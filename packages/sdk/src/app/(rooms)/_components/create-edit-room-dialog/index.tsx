@@ -67,7 +67,9 @@ import {
 import UploadSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import DeleteSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import PencilSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
+import PrivateRoom32SvgUrl from "PUBLIC_DIR/images/icons/32/room/private.svg?url";
 
+import { ReactSVG } from "react-svg";
 import { Link } from "@docspace/ui-kit/components/link";
 
 import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
@@ -536,6 +538,23 @@ const CreateEditRoomDialog = ({
                 </div>
               ) : null}
             </div>
+
+            {isEdit && isPrivate ? (
+              <div className={styles.privacyRow}>
+                <ReactSVG
+                  className={styles.privacyIcon}
+                  src={PrivateRoom32SvgUrl}
+                />
+                <div className={styles.privacyText}>
+                  <Text fontWeight={600} fontSize="13px">
+                    {t("Common:PrivateRoomTitle")}
+                  </Text>
+                  <Text fontSize="12px" className={styles.privacyDescription}>
+                    {t("Common:PrivateRoomDescription")}
+                  </Text>
+                </div>
+              </div>
+            ) : null}
 
             {isEdit && room.createdBy ? (
               <div className={styles.ownerSection}>

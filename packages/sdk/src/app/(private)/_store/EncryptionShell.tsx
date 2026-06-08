@@ -53,6 +53,7 @@ import BroadcastLockSync from "../_components/private-shell/BroadcastLockSync";
 import AbortOnLockEffect from "../_components/private-shell/AbortOnLockEffect";
 import FilenameRecoveryEffect from "../_components/private-shell/FilenameRecoveryEffect";
 import BackfillEncryptedRoomEffect from "../_components/private-shell/BackfillEncryptedRoomEffect";
+import PostUnlockGateResetEffect from "../_components/private-shell/PostUnlockGateResetEffect";
 import { DisclosureBanner } from "../_components/private-shell/DisclosureBanner";
 
 const PassphraseDialogAdapter: React.FC<PassphraseDialogProps> = ({
@@ -100,6 +101,7 @@ const EncryptionShellInner: React.FC<EncryptionShellProps> = ({ children }) => {
       <AbortOnLockEffect />
       <FilenameRecoveryEffect />
       <BackfillEncryptedRoomEffect />
+      <PostUnlockGateResetEffect />
       <DisclosureBanner />
       {children}
     </EncryptionProvider>

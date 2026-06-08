@@ -33,89 +33,25 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-.root {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 16px;
-}
+"use client";
 
-.loaderRoot {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 32px;
-}
+import React from "react";
 
-.list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
+import { useEncryption } from "@docspace/shared/context/encryption";
+import { resetGhostStateGate } from "@docspace/shared/services/encryption/ghost-state-notifier";
 
-.listItem {
-  list-style: none;
-}
+const PostUnlockGateResetEffect: React.FC = () => {
+  const { isUnlocked } = useEncryption();
+  const prevUnlocked = React.useRef(isUnlocked);
 
-.userRow {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 8px;
-  border-radius: 6px;
-
-  @media (hover: hover) {
-    &:hover {
-      background-color: var(--row-hover-background, rgba(0, 0, 0, 0.04));
+  React.useEffect(() => {
+    if (isUnlocked && !prevUnlocked.current) {
+      resetGhostStateGate();
     }
-  }
-}
+    prevUnlocked.current = isUnlocked;
+  }, [isUnlocked]);
 
-.userBody {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  flex: 1 1 auto;
-  min-width: 0;
-}
+  return null;
+};
 
-.userName {
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 20px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.roleWrapper {
-  flex: 0 0 auto;
-}
-
-.roleCombobox {
-  // Inherits AccessRightSelect default styling; no overrides needed.
-}
-
-.roleLabel {
-  font-size: 12px;
-  color: var(--text-secondary, rgba(0, 0, 0, 0.6));
-  cursor: default;
-}
-
-.empty {
-  text-align: center;
-  padding: 24px;
-  color: var(--text-secondary, rgba(0, 0, 0, 0.6));
-}
-
-.sectionTitle {
-  list-style: none;
-  padding: 12px 8px 2px;
-}
-
-.sectionTitleLabel {
-  color: var(--text-secondary, rgba(0, 0, 0, 0.6));
-}
+export default PostUnlockGateResetEffect;

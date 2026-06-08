@@ -798,7 +798,7 @@ export default function useContextMenuModel({
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.duplicate))
         moveOrCopyItems.push(getDuplicateItem(item!));
 
-      if (moveOrCopyItems.length) {
+      if (moveOrCopyItems.length > 1) {
         actionGroup.push({
           id: "option_move-or-copy",
           key: "move-or-copy",
@@ -806,6 +806,8 @@ export default function useContextMenuModel({
           icon: MoveReactSvgUrl,
           items: moveOrCopyItems,
         });
+      } else if (moveOrCopyItems.length === 1) {
+        actionGroup.push(moveOrCopyItems[0]);
       }
 
       const hasDownload = contextOptions.includes(

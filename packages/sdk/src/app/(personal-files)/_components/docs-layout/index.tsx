@@ -226,6 +226,7 @@ const DocsLayout = observer(
     const {
       selectorDialogVisible,
       selectorMode,
+      hasRooms,
       foldersTree,
       selectorInitData,
       disabledItems,
@@ -577,7 +578,7 @@ const DocsLayout = observer(
                                     FilesSelectorProps["filesSettings"]
                                   >
                                 }
-                                isUserOnly={selectorMode !== "restore"}
+                                isUserOnly={!hasRooms && selectorMode !== "restore"}
                                 isRoomsOnly={false}
                                 isThirdParty={false}
                                 openRoot={selectorMode === "restore"}

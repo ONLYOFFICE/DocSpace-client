@@ -835,6 +835,7 @@
   "EncryptionPrepareFailed": "업로드하기 전에 파일을 암호화할 수 없습니다. 파일이 전송되지 않았습니다. 다시 시도하거나 지원팀에 문의하세요.",
   "EncryptionRequiresHttps": "암호화를 사용할 수 없습니다: 이 기능은 안전한 HTTPS 연결이 필요합니다.",
   "EncryptionUnsupportedKeyVersion": "이 암호화 키는 지원되지 않는 버전을 사용합니다. 계속하려면 응용 프로그램을 업데이트하십시오.",
+  "EncryptionUploadCancelled": "업로드가 취소되었습니다: 암호화 키의 잠금이 해제되지 않았습니다. 파일이 전송되지 않았습니다.",
   "EncryptionUploadWrapFailed": "업로드된 파일의 암호화 봉인에 실패했습니다. 파일을 열 수 없을 수 있으니 제거한 후 다시 업로드하세요.",
   "EnterAmount": "정수 금액을 입력하세요...",
   "EnterAnIntegerAmountBetween": "{{min}}과 {{max}} 사이의 정수 값을 입력하세요.",

@@ -858,6 +858,7 @@
   "EncryptionPrepareFailed": "Die Datei konnte vor dem Hochladen nicht verschlüsselt werden. Die Datei wurde nicht gesendet. Bitte versuchen Sie es erneut oder wenden Sie sich an den Support.",
   "EncryptionRequiresHttps": "Verschlüsselung ist nicht verfügbar: Diese Funktion erfordert eine sichere HTTPS-Verbindung.",
   "EncryptionUnsupportedKeyVersion": "Dieser Verschlüsselungsschlüssel verwendet eine nicht unterstützte Version. Bitte aktualisieren Sie die Anwendung, um fortzufahren.",
+  "EncryptionUploadCancelled": "Hochladen abgebrochen: Der Verschlüsselungsschlüssel wurde nicht entsperrt. Die Datei wurde nicht gesendet.",
   "EncryptionUploadWrapFailed": "Die Verschlüsselungsversiegelung der hochgeladenen Datei ist fehlgeschlagen. Sie kann möglicherweise nicht geöffnet werden. Bitte entfernen Sie sie und laden Sie sie erneut hoch.",
   "EnterAmount": "Geben Sie einen ganzzahligen Betrag ein ...",
   "EnterAnIntegerAmountBetween": "Geben Sie einen ganzzahligen Betrag zwischen {{min}} und {{max}} ein",

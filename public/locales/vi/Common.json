@@ -850,6 +850,7 @@
   "EncryptionPrepareFailed": "Không thể mã hóa tệp trước khi tải lên. Tệp chưa được gửi. Vui lòng thử lại hoặc liên hệ với bộ phận hỗ trợ.",
   "EncryptionRequiresHttps": "Mã hóa không khả dụng: tính năng này yêu cầu kết nối HTTPS an toàn.",
   "EncryptionUnsupportedKeyVersion": "Khóa mã hóa này sử dụng phiên bản không được hỗ trợ. Vui lòng cập nhật ứng dụng để tiếp tục.",
+  "EncryptionUploadCancelled": "Đã hủy tải lên: khóa mã hóa chưa được mở khóa. Tệp chưa được gửi.",
   "EncryptionUploadWrapFailed": "Niêm phong mã hóa cho tệp đã tải lên không thành công. Có thể không mở được; vui lòng xóa và tải lên lại.",
   "EnterAmount": "Nhập một số nguyên...",
   "EnterAnIntegerAmountBetween": "Nhập một số nguyên nằm giữa {{min}} và {{max}}",

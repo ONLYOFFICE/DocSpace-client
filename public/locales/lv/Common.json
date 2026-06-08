@@ -850,6 +850,7 @@
   "EncryptionPrepareFailed": "Neizdevās šifrēt failu pirms augšupielādes. Fails netika nosūtīts. Lūdzu, mēģiniet vēlreiz vai sazinieties ar atbalsta dienestu.",
   "EncryptionRequiresHttps": "Šifrēšana nav pieejama: šai funkcijai nepieciešams drošs HTTPS savienojums.",
   "EncryptionUnsupportedKeyVersion": "Šī šifrēšanas atslēga izmanto neatbalstītu versiju. Lai turpinātu, atjauniniet lietojumprogrammu.",
+  "EncryptionUploadCancelled": "Augšupielāde atcelta: šifrēšanas atslēga netika atbloķēta. Fails netika nosūtīts.",
   "EncryptionUploadWrapFailed": "Augšupielādētā faila šifrēšanas aizzīmogošana neizdevās. Iespējams, fails nebūs atverams; lūdzu, noņemiet to un augšupielādējiet vēlreiz.",
   "EnterAmount": "Ievadiet veselu skaitli...",
   "EnterAnIntegerAmountBetween": "Ievadiet veselu skaitli no {{min}} līdz {{max}}.",

@@ -850,6 +850,7 @@
   "EncryptionPrepareFailed": "Faylı yükləməzdən əvvəl şifrələmək alınmadı. Fayl göndərilmədi. Yenidən cəhd edin və ya dəstək xidmətinə müraciət edin.",
   "EncryptionRequiresHttps": "Şifrələmə əlçatan deyil: bu funksiya təhlükəsiz HTTPS bağlantısı tələb edir.",
   "EncryptionUnsupportedKeyVersion": "Bu şifrələmə açarı dəstəklənməyən versiyadan istifadə edir. Davam etmək üçün tətbiqi yeniləyin.",
+  "EncryptionUploadCancelled": "Yükləmə ləğv edildi: şifrələmə açarının kilidi açılmadı. Fayl göndərilmədi.",
   "EncryptionUploadWrapFailed": "Yüklənmiş fayl üçün şifrələmənin möhürlənməsi alınmadı. Fayl açılmaya bilər; onu silin və yenidən yükləyin.",
   "EnterAmount": "Ədəd məbləği daxil edin...",
   "EnterAnIntegerAmountBetween": "{{min}} ilə {{max}} arasında tam ədəd məbləğ daxil edin.",

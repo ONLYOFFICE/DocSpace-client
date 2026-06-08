@@ -850,6 +850,7 @@
   "EncryptionPrepareFailed": "Não foi possível encriptar o ficheiro antes do carregamento. O ficheiro não foi enviado. Tente novamente ou contacte o suporte.",
   "EncryptionRequiresHttps": "A encriptação não está disponível: esta funcionalidade requer uma ligação HTTPS segura.",
   "EncryptionUnsupportedKeyVersion": "Esta chave de encriptação utiliza uma versão não suportada. Atualize a aplicação para continuar.",
+  "EncryptionUploadCancelled": "Carregamento cancelado: a chave de encriptação não foi desbloqueada. O ficheiro não foi enviado.",
   "EncryptionUploadWrapFailed": "Falha ao selar a encriptação do ficheiro carregado. Pode não ser possível abri-lo; remova-o e volte a carregá-lo.",
   "EnterAmount": "Insira um valor inteiro...",
   "EnterAnIntegerAmountBetween": "Insira um valor inteiro entre {{min}} e {{max}}",

@@ -858,6 +858,7 @@
   "EncryptionPrepareFailed": "No se pudo cifrar el archivo antes de la carga. El archivo no se ha enviado. Vuelva a intentarlo o póngase en contacto con el servicio de soporte.",
   "EncryptionRequiresHttps": "El cifrado no está disponible: esta función requiere una conexión HTTPS segura.",
   "EncryptionUnsupportedKeyVersion": "Esta clave de cifrado utiliza una versión no compatible. Actualice la aplicación para continuar.",
+  "EncryptionUploadCancelled": "Carga cancelada: la clave de cifrado no se desbloqueó. El archivo no se envió.",
   "EncryptionUploadWrapFailed": "Error al sellar el cifrado del archivo cargado. Es posible que no se pueda abrir; elimínelo y vuelva a cargarlo.",
   "EnterAmount": "Introduzca una cantidad entera...",
   "EnterAnIntegerAmountBetween": "Introduzca una cantidad entera entre {{min}} y {{max}}",

@@ -850,6 +850,7 @@
   "EncryptionPrepareFailed": "Tiedostoa ei voitu salata ennen lähetystä. Tiedostoa ei lähetetty. Yritä uudelleen tai ota yhteyttä tukeen.",
   "EncryptionRequiresHttps": "Salaus ei ole käytettävissä: tämä toiminto vaatii suojatun HTTPS-yhteyden.",
   "EncryptionUnsupportedKeyVersion": "Tämä salausavain käyttää versiota, jota ei tueta. Jatka päivittämällä sovellus.",
+  "EncryptionUploadCancelled": "Lähetys peruutettu: salausavainta ei avattu. Tiedostoa ei lähetetty.",
   "EncryptionUploadWrapFailed": "Ladatun tiedoston salauksen sinetöinti epäonnistui. Tiedostoa ei välttämättä voi avata; poista se ja lähetä uudelleen.",
   "EnterAmount": "Syötä kokonaislukumäärä...",
   "EnterAnIntegerAmountBetween": "Anna kokonaislukumäärä {{min}} ja {{max}} väliltä.",

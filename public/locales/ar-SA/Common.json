@@ -850,6 +850,7 @@
   "EncryptionPrepareFailed": "تعذر تشفير الملف قبل الرفع. لم يتم إرسال الملف. يرجى المحاولة مرة أخرى أو الاتصال بالدعم.",
   "EncryptionRequiresHttps": "التشفير غير متاح: تتطلب هذه الميزة اتصال HTTPS آمنًا.",
   "EncryptionUnsupportedKeyVersion": "يستخدم مفتاح التشفير هذا إصدارًا غير مدعوم. يرجى تحديث التطبيق للمتابعة.",
+  "EncryptionUploadCancelled": "تم إلغاء الرفع: لم يتم إلغاء قفل مفتاح التشفير. لم يتم إرسال الملف.",
   "EncryptionUploadWrapFailed": "فشل ختم التشفير للملف الذي تم رفعه. قد يتعذر فتحه؛ يرجى إزالته وإعادة رفعه.",
   "EnterAmount": "أدخل مبلغًا صحيحًا...",
   "EnterAnIntegerAmountBetween": "أدخل مبلغًا صحيحًا بين {{min}} و {{max}}",

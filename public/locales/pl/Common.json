@@ -850,6 +850,7 @@
   "EncryptionPrepareFailed": "Nie udało się zaszyfrować pliku przed wysłaniem. Plik nie został wysłany. Spróbuj ponownie lub skontaktuj się z pomocą techniczną.",
   "EncryptionRequiresHttps": "Szyfrowanie jest niedostępne: ta funkcja wymaga bezpiecznego połączenia HTTPS.",
   "EncryptionUnsupportedKeyVersion": "Ten klucz szyfrowania używa nieobsługiwanej wersji. Aby kontynuować, zaktualizuj aplikację.",
+  "EncryptionUploadCancelled": "Anulowano przesyłanie: klucz szyfrowania nie został odblokowany. Plik nie został wysłany.",
   "EncryptionUploadWrapFailed": "Zapieczętowanie szyfrowania przesłanego pliku nie powiodło się. Może nie dać się go otworzyć; usuń go i prześlij ponownie.",
   "EnterAmount": "Wprowadź całkowitą kwotę...",
   "EnterAnIntegerAmountBetween": "Wprowadź liczbę całkowitą z zakresu od {{min}} do {{max}}.",

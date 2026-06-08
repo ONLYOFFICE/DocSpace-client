@@ -836,6 +836,7 @@
   "EncryptionPrepareFailed": "Súbor sa pred nahraním nepodarilo zašifrovať. Súbor nebol odoslaný. Skúste to znova alebo kontaktujte podporu.",
   "EncryptionRequiresHttps": "Šifrovanie nie je k dispozícii: táto funkcia vyžaduje zabezpečené pripojenie HTTPS.",
   "EncryptionUnsupportedKeyVersion": "Tento šifrovací kľúč používa nepodporovanú verziu. Pre pokračovanie aktualizujte aplikáciu.",
+  "EncryptionUploadCancelled": "Nahrávanie zrušené: šifrovací kľúč nebol odomknutý. Súbor nebol odoslaný.",
   "EncryptionUploadWrapFailed": "Zapečatenie šifrovania nahraného súboru zlyhalo. Súbor sa možno nebude dať otvoriť; odstráňte ho a nahrajte znova.",
   "EnterAmount": "Zadajte celočíselnú sumu...",
   "EnterAnIntegerAmountBetween": "Zadajte celé číslo medzi {{min}} a {{max}}.",

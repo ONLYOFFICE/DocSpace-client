@@ -850,6 +850,7 @@
   "EncryptionPrepareFailed": "Het bestand kon vóór het uploaden niet worden versleuteld. Het bestand is niet verzonden. Probeer het opnieuw of neem contact op met ondersteuning.",
   "EncryptionRequiresHttps": "Versleuteling is niet beschikbaar: voor deze functie is een beveiligde HTTPS-verbinding vereist.",
   "EncryptionUnsupportedKeyVersion": "Deze versleutelingssleutel gebruikt een niet-ondersteunde versie. Werk de applicatie bij om door te gaan.",
+  "EncryptionUploadCancelled": "Uploaden geannuleerd: de versleutelingssleutel is niet ontgrendeld. Het bestand is niet verzonden.",
   "EncryptionUploadWrapFailed": "Het verzegelen van de versleuteling voor het geüploade bestand is mislukt. Het kan mogelijk niet worden geopend. Verwijder het en upload het opnieuw.",
   "EnterAmount": "Voer een geheel getalbedrag in...",
   "EnterAnIntegerAmountBetween": "Voer een geheel getal in tussen {{min}} en {{max}}",

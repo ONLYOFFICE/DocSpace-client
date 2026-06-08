@@ -63,6 +63,23 @@ export function unregisterUnlockHandler(): void {
   _unlockHandler = null;
 }
 
+type AutoLockSuspender = () => () => void;
+
+let _autoLockSuspender: AutoLockSuspender | null = null;
+
+export function registerAutoLockSuspender(suspender: AutoLockSuspender): void {
+  _autoLockSuspender = suspender;
+}
+
+export function unregisterAutoLockSuspender(): void {
+  _autoLockSuspender = null;
+}
+
+export function suspendAutoLock(): () => void {
+  if (!_autoLockSuspender) return () => {};
+  return _autoLockSuspender();
+}
+
 const pendingUnlocks = new Map<
   string,
   Promise<IdentityKeyPair | null>

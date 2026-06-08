@@ -858,6 +858,7 @@
   "EncryptionPrepareFailed": "Could not encrypt the file before upload. The file was not sent. Please try again or contact support.",
   "EncryptionRequiresHttps": "Encryption is unavailable: this feature requires a secure HTTPS connection.",
   "EncryptionUnsupportedKeyVersion": "This encryption key uses an unsupported version. Please update the application to continue.",
+  "EncryptionUploadCancelled": "Upload canceled: the encryption key was not unlocked. The file was not sent.",
   "EncryptionUploadWrapFailed": "Encryption sealing failed for the uploaded file. It may not be openable; please remove it and re-upload.",
   "EnterAmount": "Enter an integer amount...",
   "EnterAnIntegerAmountBetween": "Enter an integer amount between {{min}} and {{max}}",

@@ -858,6 +858,7 @@
   "EncryptionPrepareFailed": "Fișierul nu a putut fi criptat înainte de încărcare. Fișierul nu a fost trimis. Încercați din nou sau contactați asistența.",
   "EncryptionRequiresHttps": "Criptarea nu este disponibilă: această funcție necesită o conexiune HTTPS sigură.",
   "EncryptionUnsupportedKeyVersion": "Această cheie de criptare folosește o versiune neacceptată. Actualizați aplicația pentru a continua.",
+  "EncryptionUploadCancelled": "Încărcare anulată: cheia de criptare nu a fost deblocată. Fișierul nu a fost trimis.",
   "EncryptionUploadWrapFailed": "Sigilarea criptării a eșuat pentru fișierul încărcat. Este posibil să nu poată fi deschis; eliminați-l și încărcați-l din nou.",
   "EnterAmount": "Introduceți o valoare întreagă...",
   "EnterAnIntegerAmountBetween": "Introduceți o valoare întreagă între {{min}} și {{max}}",

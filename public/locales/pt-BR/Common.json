@@ -858,6 +858,7 @@
   "EncryptionPrepareFailed": "Não foi possível criptografar o arquivo antes do upload. O arquivo não foi enviado. Tente novamente ou entre em contato com o suporte.",
   "EncryptionRequiresHttps": "A criptografia não está disponível: este recurso requer uma conexão HTTPS segura.",
   "EncryptionUnsupportedKeyVersion": "Esta chave de criptografia utiliza uma versão não suportada. Atualize o aplicativo para continuar.",
+  "EncryptionUploadCancelled": "Upload cancelado: a chave de criptografia não foi desbloqueada. O arquivo não foi enviado.",
   "EncryptionUploadWrapFailed": "Falha ao selar a criptografia do arquivo enviado. Pode não ser possível abri-lo; remova-o e envie novamente.",
   "EnterAmount": "Digite um valor inteiro...",
   "EnterAnIntegerAmountBetween": "Digite um valor inteiro entre {{min}} e {{max}}",

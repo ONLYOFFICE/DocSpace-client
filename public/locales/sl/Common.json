@@ -850,6 +850,7 @@
   "EncryptionPrepareFailed": "Datoteke pred nalaganjem ni bilo mogoče šifrirati. Datoteka ni bila poslana. Poskusite znova ali se obrnite na podporo.",
   "EncryptionRequiresHttps": "Šifriranje ni na voljo: za to funkcijo je potrebna varna povezava HTTPS.",
   "EncryptionUnsupportedKeyVersion": "Ta šifrirni ključ uporablja nepodprto različico. Za nadaljevanje posodobite aplikacijo.",
+  "EncryptionUploadCancelled": "Nalaganje preklicano: šifrirni ključ ni bil odklenjen. Datoteka ni bila poslana.",
   "EncryptionUploadWrapFailed": "Pečatenje šifriranja naložene datoteke ni uspelo. Morda je ne bo mogoče odpreti; odstranite jo in naložite znova.",
   "EnterAmount": "Vnesite celo količino...",
   "EnterAnIntegerAmountBetween": "Vnesite celo število med {{min}} in {{max}}.",

@@ -858,6 +858,7 @@
   "EncryptionPrepareFailed": "アップロード前にファイルを暗号化できませんでした。ファイルは送信されていません。もう一度お試しいただくか、サポートにお問い合わせください。",
   "EncryptionRequiresHttps": "暗号化は利用できません：この機能には安全なHTTPS接続が必要です。",
   "EncryptionUnsupportedKeyVersion": "この暗号化キーはサポートされていないバージョンを使用しています。続行するにはアプリケーションを更新してください。",
+  "EncryptionUploadCancelled": "アップロードがキャンセルされました：暗号化キーのロックが解除されませんでした。ファイルは送信されませんでした。",
   "EncryptionUploadWrapFailed": "アップロードされたファイルの暗号化の封印に失敗しました。開けない可能性があります。削除してから再度アップロードしてください。",
   "EnterAmount": "整数の金額を入力してください...",
   "EnterAnIntegerAmountBetween": "{{min}} から {{max}} までの整数を入力してください。",

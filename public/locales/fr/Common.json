@@ -858,6 +858,7 @@
   "EncryptionPrepareFailed": "Impossible de chiffrer le fichier avant le téléversement. Le fichier n'a pas été envoyé. Veuillez réessayer ou contacter l'assistance.",
   "EncryptionRequiresHttps": "Le chiffrement n'est pas disponible : cette fonctionnalité nécessite une connexion HTTPS sécurisée.",
   "EncryptionUnsupportedKeyVersion": "Cette clé de chiffrement utilise une version non prise en charge. Veuillez mettre à jour l'application pour continuer.",
+  "EncryptionUploadCancelled": "Téléversement annulé : la clé de chiffrement n'a pas été déverrouillée. Le fichier n'a pas été envoyé.",
   "EncryptionUploadWrapFailed": "Échec du scellement du chiffrement pour le fichier téléversé. Il pourrait ne pas être ouvrable. Veuillez le supprimer et le téléverser à nouveau.",
   "EnterAmount": "Saisissez le montant entier...",
   "EnterAnIntegerAmountBetween": "Saisissez le montant entier entre {{min}} et {{max}}",

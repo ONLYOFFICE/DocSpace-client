@@ -858,6 +858,7 @@
   "EncryptionPrepareFailed": "Nije moguće šifrovati datoteku pre otpremanja. Datoteka nije poslata. Pokušajte ponovo ili kontaktirajte podršku.",
   "EncryptionRequiresHttps": "Šifrovanje nije dostupno: ova funkcija zahteva bezbednu HTTPS vezu.",
   "EncryptionUnsupportedKeyVersion": "Ovaj ključ za šifrovanje koristi nepodržanu verziju. Ažurirajte aplikaciju da biste nastavili.",
+  "EncryptionUploadCancelled": "Otpremanje je otkazano: ključ za šifrovanje nije otključan. Datoteka nije poslata.",
   "EncryptionUploadWrapFailed": "Zapečaćivanje šifrovanja nije uspelo za otpremljenu datoteku. Možda se neće otvoriti; uklonite je i ponovo otpremite.",
   "EnterAmount": "Unesite ceo broj...",
   "EnterAnIntegerAmountBetween": "Unesite ceo broj između {{min}} i {{max}}",

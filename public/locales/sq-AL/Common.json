@@ -850,6 +850,7 @@
   "EncryptionPrepareFailed": "Skedari nuk u enkriptua dot para ngarkimit. Skedari nuk u dërgua. Ju lutemi provoni përsëri ose kontaktoni mbështetjen.",
   "EncryptionRequiresHttps": "Enkriptimi nuk është i disponueshëm: ky funksion kërkon një lidhje të sigurt HTTPS.",
   "EncryptionUnsupportedKeyVersion": "Ky çelës enkriptimi përdor një version të pambështetur. Ju lutemi përditësoni aplikacionin për të vazhduar.",
+  "EncryptionUploadCancelled": "Ngarkimi u anulua: çelësi i enkriptimit nuk u shkyç. Skedari nuk u dërgua.",
   "EncryptionUploadWrapFailed": "Vulosja e enkriptimit dështoi për skedarin e ngarkuar. Mund të mos hapet; ju lutemi hiqeni dhe ringarkojeni.",
   "EnterAmount": "Fut një shumë të plotë...",
   "EnterAnIntegerAmountBetween": "Futni një shumë të plotë midis {{min}} dhe {{max}}",

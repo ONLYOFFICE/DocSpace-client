@@ -46,6 +46,7 @@ import {
   getFoldersTree,
   checkFileConflicts,
 } from "@docspace/shared/api/files";
+import { getApps } from "@docspace/shared/api/apps";
 import type {
   TFolder,
   TFile,
@@ -113,6 +114,7 @@ export default function useFileOperations() {
   const [foldersTree, setFoldersTree] = useState<TFolder[] | null>(null);
   const [selectorInitData, setSelectorInitData] =
     useState<SelectorInitData | null>(null);
+  const [hasRooms, setHasRooms] = useState(false);
 
   // Operation progress
   const [operationProgress, setOperationProgress] =
@@ -184,10 +186,24 @@ export default function useFileOperations() {
         filter.page = 0;
         filter.pageCount = PAGE_COUNT;
 
-        const [tree, folderData] = await Promise.all([
+        const isInRoomsContext =
+          filesListStore.rootFolderType === FolderType.Rooms ||
+          filesListStore.rootFolderType === FolderType.Archive;
+        const initialFolderId =
+          mode !== "restore" && isInRoomsContext && filesListStore.currentFolder
+            ? filesListStore.currentFolder.id
+            : "@my";
+
+        const [tree, folderData, apps] = await Promise.all([
           getFoldersTree(),
-          getFolder("@my", filter),
+          getFolder(initialFolderId, filter),
+          mode !== "restore" && !isInRoomsContext ? getApps() : Promise.resolve(null),
         ]);
+
+        const aiRoomsEnabled =
+          isInRoomsContext ||
+          (apps?.some((a) => a.id === "ai-rooms" && a.enabled) ?? false);
+        setHasRooms(aiRoomsEnabled);
 
         const { folders, files, current, pathParts, total } =
           folderData as TGetFolder;
@@ -272,6 +288,7 @@ export default function useFileOperations() {
     setPendingItems([]);
     setFoldersTree(null);
     setSelectorInitData(null);
+    setHasRooms(false);
   }, []);
 
   const executeOperation = useCallback(
@@ -422,6 +439,7 @@ export default function useFileOperations() {
   return {
     selectorDialogVisible,
     selectorMode,
+    hasRooms,
     pendingItemCount: pendingItems.length,
     foldersTree,
     selectorInitData,

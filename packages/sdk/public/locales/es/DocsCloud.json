@@ -1,0 +1,22 @@
+{
+  "UsersLimit": "Límite de usuarios",
+  "EditorsMode": "Editores",
+  "LiveViewerMode": "Visor en vivo",
+  "Internal": "Internos",
+  "External": "Externos",
+  "Remaining": "Restante",
+  "DocumentServerSecret": "Secreto JWT de Docs",
+  "DocServerAddress": "Dirección de Docs",
+  "Statistic": "Estadística",
+  "AnonymousSupport": "Soporte de anónimos",
+  "Trial": "Prueba",
+  "DeveloperPack": "Dev Pack",
+  "Build": "Build",
+  "YourLicenseExpired": "Su licencia ha expirado",
+  "Monthly": "Mensual",
+  "DocServiceSection": "Document Service",
+  "DocsConnectorSubtitle": "{{organizationName}} {{productEditorsName}} connector",
+  "ExternalUsersActive": "External users active",
+  "JWTSecretPlaceholder": "Enter a new secret…",
+  "LicenseUsage": "License Usage"
+}

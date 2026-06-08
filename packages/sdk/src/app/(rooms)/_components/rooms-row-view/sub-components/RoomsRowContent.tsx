@@ -41,15 +41,9 @@ import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 
 import type { RoomsRowContentProps } from "../RoomsRowView.types";
-import styles from "@/app/(docspace)/(files)/_components/row-view/RowView.module.scss";
 
 const RoomsRowContent = observer(
-  ({
-    item,
-    filterSortBy,
-    timezone,
-    badgesComponent,
-  }: RoomsRowContentProps) => {
+  ({ item, filterSortBy, timezone }: RoomsRowContentProps) => {
     const { title, createdBy, updated } = item;
     const roomItem = item as typeof item & {
       tags?: string[];
@@ -99,9 +93,7 @@ const RoomsRowContent = observer(
         >
           {title}
         </Link>
-        <div className={classNames(styles.mobileBadges, "badges")}>
-          {badgesComponent}
-        </div>
+        <div></div>
 
         {mainInfo ? (
           <Text
@@ -122,3 +114,4 @@ const RoomsRowContent = observer(
 );
 
 export { RoomsRowContent };
+

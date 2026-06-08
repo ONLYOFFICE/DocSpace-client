@@ -48,12 +48,15 @@ import MuteReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
 import UnmuteReactSvgUrl from "PUBLIC_DIR/images/unmute.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
+import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import useDownloadActions from "@/app/(docspace)/_hooks/useDownloadActions";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
+import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
 import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
+import type { TFolder } from "@docspace/shared/api/files/types";
 import type {
   TFolderItem,
   TFileItem,
@@ -74,6 +77,7 @@ type TRoomItem = TFolderItem & {
     Mute?: boolean;
     Move?: boolean;
     Delete?: boolean;
+    Embed?: boolean;
   };
 };
 
@@ -95,6 +99,7 @@ export default function useRoomContextMenuModel(
   const refreshRooms = useContext(RoomsRefreshContext);
   const filesSelectionStore = useFilesSelectionStore();
   const dialogsStore = useDialogsStore();
+  const infoPanelStore = useInfoPanelStore();
   const { openFolder } = useFolderActions({ t });
   const { downloadAction } = useDownloadActions();
 
@@ -200,6 +205,20 @@ export default function useRoomContextMenuModel(
           label: t("Common:RoomInfo"),
           icon: InfoOutlineReactSvgUrl,
           onClick: () => onInfoRoom?.(room),
+        },
+        {
+          id: "option_embedding-settings",
+          key: "embedding-settings",
+          label: t("Common:Embed"),
+          icon: CodeReactSvgUrl,
+          onClick: () => {
+            infoPanelStore.setLinkParams(null);
+            infoPanelStore.setEmbeddingPanelData({
+              visible: true,
+              item: room as unknown as TFolder,
+            });
+          },
+          disabled: !room.security?.Embed,
         },
       ];
 
@@ -327,6 +346,7 @@ export default function useRoomContextMenuModel(
       isArchive,
       filesSelectionStore,
       dialogsStore,
+      infoPanelStore,
     ],
   );
 

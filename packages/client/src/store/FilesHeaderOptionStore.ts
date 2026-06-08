@@ -306,7 +306,7 @@ export default class FilesHeaderOptionStore {
         return {
           id: "menu-pin",
           key: "pin",
-          label: t("Pin"),
+          label: t("Common:Pin"),
           iconUrl: PinReactSvgUrl,
           onClick: this.pinHandle,
           disabled: false,

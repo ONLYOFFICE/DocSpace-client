@@ -36,6 +36,10 @@ import {
   RoomMember,
   TFeedData,
 } from "@docspace/shared/api/rooms/types";
+import {
+  humanizeDuration,
+  type DurationUnit,
+} from "@docspace/ui-kit/utils/date";
 
 import { HistoryText } from "./HistoryText";
 
@@ -51,6 +55,10 @@ export const useFeedTranslation = (
       case FeedActionKeys.FileCreated:
         return t("Common:FileCreatedNotify");
       case FeedActionKeys.FileUploaded:
+        if (hasRelatedItems)
+          return t("Common:FileUploadedCount", {
+            count,
+          });
         return t("Common:FilesAddedNotify");
       case FeedActionKeys.UserFileUpdated:
         return t("Common:UserFileUpdated");
@@ -64,8 +72,17 @@ export const useFeedTranslation = (
             folderTitle: (feed.data as TFeedData).parentTitle,
           });
         }
+        if (hasRelatedItems)
+          return t("Common:FileMovedCount", {
+            count,
+          });
         return t("Common:FilesMovedNotify");
       case FeedActionKeys.FileMovedToTrash:
+        if (hasRelatedItems)
+          return t("Common:FilesTrashMoveCompletedCount", {
+            count,
+            sectionName: t("Common:TrashSection"),
+          });
         return t("Common:FilesTrashMoveCompleted", {
           sectionName: t("Common:TrashSection"),
         });
@@ -75,23 +92,92 @@ export const useFeedTranslation = (
             folderTitle: (feed.data as TFeedData).parentTitle,
           });
         }
+        if (hasRelatedItems)
+          return t("Common:FileCopiedCount", {
+            count,
+          });
         return t("Common:FilesCopiedNotify");
       case FeedActionKeys.FileDeleted:
+        if (hasRelatedItems)
+          return t("Common:FileDeletedCount", {
+            count,
+          });
         return t("Common:FilesRemovedNotify");
+      case FeedActionKeys.FileLocked:
+        return `${t("Common:FileLocked")}.`;
+      case FeedActionKeys.FileUnlocked:
+        return `${t("Common:FileUnlocked")}.`;
+      case FeedActionKeys.FileVersionRemoved:
+        if ("version" in feed.data && feed.data.version) {
+          return t("Common:FileVersionRemoved", {
+            version: feed.data.version,
+          });
+        }
+        return t("Common:IndexChanged");
+      case FeedActionKeys.FileIndexChanged:
+      case FeedActionKeys.FolderIndexChanged:
+        return t("Common:IndexChanged");
+      case FeedActionKeys.FolderIndexReordered:
+        return t("Common:FolderIndexReordered");
       case FeedActionKeys.FolderCreated:
         return t("Common:FolderCreatedNotify");
       case FeedActionKeys.FolderRenamed:
         return t("Common:FolderRenamedNotify");
       case FeedActionKeys.FolderMoved:
+        if (hasRelatedItems)
+          return t("Common:FolderMovedCount", {
+            count,
+          });
         return t("Common:FoldersMovedNotify");
       case FeedActionKeys.FolderMovedToTrash:
+        if (hasRelatedItems)
+          return t("Common:FoldersTrashMoveCompletedCount", {
+            count,
+            sectionName: t("Common:TrashSection"),
+          });
         return t("Common:FoldersTrashMoveCompleted", {
           sectionName: t("Common:TrashSection"),
         });
       case FeedActionKeys.FolderCopied:
+        if (hasRelatedItems)
+          return t("Common:FolderCopiedCount", {
+            count,
+          });
         return t("Common:FoldersCopiedNotify");
       case FeedActionKeys.FolderDeleted:
+        if (hasRelatedItems)
+          return t("Common:FolderDeletedCount", {
+            count,
+          });
         return t("Common:FoldersRemovedNotify");
+      case FeedActionKeys.AgentCreated: {
+        const title = (feed.data as TFeedData).title;
+        return (
+          <Trans
+            t={t as TFunction}
+            ns="Common"
+            i18nKey="HistoryAgentCreated"
+            values={{ roomTitle: title }}
+            components={{ 1: <HistoryText key="1" title={title ?? ""} /> }}
+          />
+        );
+      }
+      case FeedActionKeys.AgentRenamed: {
+        const oldTitle = (feed.data as TFeedData).oldTitle;
+        const newTitle = (feed.data as TFeedData).newTitle;
+        return (
+          <Trans
+            t={t as TFunction}
+            ns="Common"
+            i18nKey="AgentRenamed"
+            values={{ oldRoomTitle: oldTitle, roomTitle: newTitle }}
+            components={{
+              1: <HistoryText key="1" title={oldTitle ?? ""} />,
+              2: <HistoryText key="2" title={newTitle ?? ""} />,
+            }}
+          />
+        );
+      }
       case FeedActionKeys.RoomCreated: {
         const title = (feed.data as TFeedData).title;
         return (
@@ -120,6 +206,18 @@ export const useFeedTranslation = (
           />
         );
       }
+      case FeedActionKeys.RoomCopied: {
+        const title = (feed.data as TFeedData).title;
+        return (
+          <Trans
+            t={t as TFunction}
+            ns="Common"
+            i18nKey="HistoryRoomCopied"
+            values={{ roomTitle: title }}
+            components={{ 1: <strong key="1" title={title} /> }}
+          />
+        );
+      }
       case FeedActionKeys.RoomArchived:
         return t("Common:RoomToArchiveMove", {
           sectionName: t("Common:Archive"),
@@ -140,15 +238,117 @@ export const useFeedTranslation = (
       case FeedActionKeys.RoomChangeOwner:
         return t("Common:RoomChangeOwner");
       case FeedActionKeys.RoomCreateUser:
-        if (hasRelatedItems)
-          return t("Common:RoomCreateUserCount", { count });
+        if (hasRelatedItems) return t("Common:RoomCreateUserCount", { count });
         return t("Common:RoomCreateUser");
       case FeedActionKeys.RoomRemoveUser:
         return t("Common:RoomRemoveUser");
       case FeedActionKeys.RoomGroupAdded:
-        if (hasRelatedItems)
-          return t("Common:RoomGroupAddedCount", { count });
+        if (hasRelatedItems) return t("Common:RoomGroupAddedCount", { count });
         return t("Common:RoomGroupAdded");
+      case FeedActionKeys.RoomUpdateAccessForUser:
+      case FeedActionKeys.RoomUpdateAccessForGroup:
+        return t("Common:RoomUpdateAccess");
+      case FeedActionKeys.RoomInviteResend:
+        return t("Common:RoomInviteResend");
+      case FeedActionKeys.RoomGroupRemove:
+        return t("Common:RoomGroupRemove");
+      case FeedActionKeys.RoomExternalLinkCreated:
+        return t("Common:RoomExternalLinkCreated");
+      case FeedActionKeys.RoomExternalLinkRenamed: {
+        const title = (feed.data as TFeedData).title;
+        const oldTitle = (feed.data as TFeedData).oldTitle;
+        return (
+          <Trans
+            t={t as TFunction}
+            ns="Common"
+            i18nKey="RoomExternalLinkRenamed"
+            values={{ linkTitle: title, oldLinkTitle: oldTitle }}
+            components={{ 1: <strong key="1" /> }}
+          />
+        );
+      }
+      case FeedActionKeys.RoomExternalLinkDeleted: {
+        const title = (feed.data as TFeedData).title;
+        return (
+          <Trans
+            t={t as TFunction}
+            ns="Common"
+            i18nKey="RoomExternalLinkDeleted"
+            values={{ linkTitle: title }}
+            components={{ 1: <strong key="1" title={title} /> }}
+          />
+        );
+      }
+      case FeedActionKeys.RoomExternalLinkRevoked: {
+        const linkTitle =
+          (feed.data as TFeedData).title ||
+          (feed.data as TFeedData).sharedTo?.title;
+        return (
+          <Trans
+            t={t as TFunction}
+            ns="Common"
+            i18nKey="RoomExternalLinkRevoked"
+            values={{ linkTitle }}
+            components={{ 1: <strong key="1" title={linkTitle} /> }}
+          />
+        );
+      }
+      case FeedActionKeys.RoomWatermarkSet:
+        return t("Common:RoomWatermarkSet");
+      case FeedActionKeys.RoomWatermarkDisabled:
+        return t("Common:RoomWatermarkDisabled");
+      case FeedActionKeys.RoomIndexingEnabled:
+        return t("Common:RoomIndexingEnabled");
+      case FeedActionKeys.RoomIndexingDisabled:
+        return t("Common:RoomIndexingDisabled");
+      case FeedActionKeys.RoomLifeTimeSet: {
+        const periodLifeTime = (feed.data as TFeedData).lifeTime?.period;
+        const value = (feed.data as TFeedData).lifeTime?.value ?? 0;
+        const period: DurationUnit =
+          periodLifeTime === 0
+            ? "days"
+            : periodLifeTime === 1
+              ? "months"
+              : "years";
+
+        const data = humanizeDuration(value, period);
+
+        return (
+          <Trans
+            t={t as TFunction}
+            ns="Common"
+            i18nKey="RoomLifeTimeSet"
+            values={{ data }}
+            components={{ 1: <strong key="1" /> }}
+          />
+        );
+      }
+      case FeedActionKeys.RoomLifeTimeDisabled:
+        return t("Common:RoomLifeTimeDisabled");
+      case FeedActionKeys.RoomDenyDownloadEnabled:
+        return t("Common:RoomDenyDownloadEnabled");
+      case FeedActionKeys.RoomDenyDownloadDisabled:
+        return t("Common:RoomDenyDownloadDisabled");
+      case FeedActionKeys.RoomIndexExportSaved:
+        return t("Common:RoomIndexExportLocation", {
+          sectionName: t("Common:MyDocuments"),
+        });
+      case FeedActionKeys.FormSubmit:
+        return t("Common:FilledOutForm");
+      case FeedActionKeys.FormOpenedForFilling:
+        return t("Common:StartedFillingItOut");
+      case FeedActionKeys.FileCustomFilterEnabled:
+        return t("Common:FileCustomFilterEnabled");
+      case FeedActionKeys.FileCustomFilterDisabled:
+        return t("Common:FileCustomFilterDisabled");
+      case FeedActionKeys.FormStartedToFill:
+        return t("Common:FormStartedToFill");
+      case FeedActionKeys.FormPartiallyFilled:
+        return t("Common:FormPartiallyFilled");
+      case FeedActionKeys.FormCompletelyFilled:
+        return t("Common:FormCompletelyFilled");
+      case FeedActionKeys.FormStopped:
+        return t("Common:FormStoppedNotify");
       default:
         return feed.action.key ?? "";
     }

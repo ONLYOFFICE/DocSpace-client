@@ -1,0 +1,22 @@
+{
+  "UsersLimit": "Limite degli utenti",
+  "EditorsMode": "Editor",
+  "LiveViewerMode": "Visualizzatore in tempo reale",
+  "Internal": "Interni",
+  "External": "Esterni",
+  "Remaining": "Rimanenti",
+  "DocumentServerSecret": "Segreto di Docs",
+  "DocServerAddress": "Indirizzo di Docs",
+  "Statistic": "Statistica",
+  "AnonymousSupport": "Supporto degli anonimi",
+  "Trial": "Prova",
+  "DeveloperPack": "Dev Pack",
+  "Build": "Build",
+  "YourLicenseExpired": "La tua licenza è scaduta",
+  "Monthly": "Mensile",
+  "DocServiceSection": "Document Service",
+  "DocsConnectorSubtitle": "{{organizationName}} {{productEditorsName}} connector",
+  "ExternalUsersActive": "External users active",
+  "JWTSecretPlaceholder": "Enter a new secret…",
+  "LicenseUsage": "License Usage"
+}

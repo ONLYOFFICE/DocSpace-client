@@ -55,6 +55,7 @@ import { DocsSettingsStoreContextProvider } from "./DocsSettingsStore";
 import { DocsUserStoreContextProvider } from "./DocsUserStore";
 import PersonalFilesAiAgentProviders from "../_components/ai-agent-providers";
 import { VersionHistoryStoreContextProvider } from "./VersionHistoryStore";
+import { DragStoreContextProvider } from "./DragStore";
 
 export const DocsStoreProviders = ({
   children,
@@ -70,31 +71,33 @@ export const DocsStoreProviders = ({
       <FilesSettingsStoreContextProvider>
         <FilesListStoreContextProvider>
           <FilesSelectionStoreContextProvider>
-            <NavigationStoreContextProvider>
-              <MediaViewerStoreContextProvider>
-                <DialogsStoreContextProvider>
-                  <DownloadDialogStoreContextProvider>
-                    <ActiveItemsStoreContextProvider>
-                      <UploadStoreContextProvider>
-                        <DocsSettingsStoreContextProvider>
-                          <DocsUserStoreContextProvider>
-                            <InfoPanelStoreContextProvider>
-                              <VersionHistoryStoreContextProvider>
-                                <PersonalFilesAiAgentProviders
-                                  myFolderId={myFolderId}
-                                >
-                                  {children}
-                                </PersonalFilesAiAgentProviders>
-                              </VersionHistoryStoreContextProvider>
-                            </InfoPanelStoreContextProvider>
-                          </DocsUserStoreContextProvider>
-                        </DocsSettingsStoreContextProvider>
-                      </UploadStoreContextProvider>
-                    </ActiveItemsStoreContextProvider>
-                  </DownloadDialogStoreContextProvider>
-                </DialogsStoreContextProvider>
-              </MediaViewerStoreContextProvider>
-            </NavigationStoreContextProvider>
+<DragStoreContextProvider>
+              <NavigationStoreContextProvider>
+                <MediaViewerStoreContextProvider>
+                  <DialogsStoreContextProvider>
+                    <DownloadDialogStoreContextProvider>
+                      <ActiveItemsStoreContextProvider>
+                        <UploadStoreContextProvider>
+                          <DocsSettingsStoreContextProvider>
+                            <DocsUserStoreContextProvider>
+                              <InfoPanelStoreContextProvider>
+                                <VersionHistoryStoreContextProvider>
+                                  <PersonalFilesAiAgentProviders
+                                    myFolderId={myFolderId}
+                                  >
+                                    {children}
+                                  </PersonalFilesAiAgentProviders>
+                                </VersionHistoryStoreContextProvider>
+                              </InfoPanelStoreContextProvider>
+                            </DocsUserStoreContextProvider>
+                          </DocsSettingsStoreContextProvider>
+                        </UploadStoreContextProvider>
+                      </ActiveItemsStoreContextProvider>
+                    </DownloadDialogStoreContextProvider>
+                  </DialogsStoreContextProvider>
+                </MediaViewerStoreContextProvider>
+              </NavigationStoreContextProvider>
+            </DragStoreContextProvider>
           </FilesSelectionStoreContextProvider>
         </FilesListStoreContextProvider>
       </FilesSettingsStoreContextProvider>

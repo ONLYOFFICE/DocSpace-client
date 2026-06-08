@@ -151,6 +151,7 @@ const ArticleMainButtonContent = (props) => {
     allowInvitingMembers,
 
     aiConfig,
+    isGracePeriod,
   } = props;
 
   const location = useLocation();
@@ -181,7 +182,11 @@ const ArticleMainButtonContent = (props) => {
       }
 
       const event = new CustomEvent(Events.CREATE, {
-        detail: { parentId: currentFolderId, context: "sidebar", extension: format },
+        detail: {
+          parentId: currentFolderId,
+          context: "sidebar",
+          extension: format,
+        },
       });
 
       const payload = {
@@ -209,7 +214,7 @@ const ArticleMainButtonContent = (props) => {
   }, [isWarningRoomsDialog, currentFolderId]);
 
   const onCreateAgent = React.useCallback(() => {
-    if (isWarningRoomsDialog) {
+    if (isGracePeriod) {
       setQuotaWarningDialogVisible(true);
       return;
     }
@@ -218,7 +223,7 @@ const ArticleMainButtonContent = (props) => {
       detail: { parentId: currentFolderId, context: "sidebar" },
     });
     window.dispatchEvent(event);
-  }, [isWarningRoomsDialog, currentFolderId]);
+  }, [isGracePeriod, currentFolderId]);
 
   const onShowSelectFileDialog = React.useCallback(() => {
     if (isMobile) {
@@ -307,7 +312,9 @@ const ArticleMainButtonContent = (props) => {
         id: "actions_upload-from-docspace",
         className: "main-button_drop-down",
         icon: ActionsUploadReactSvgUrl,
-        label: t("Common:FromPortal", { productName: getBrandName("ProductName") }),
+        label: t("Common:FromPortal", {
+          productName: getBrandName("ProductName"),
+        }),
         key: "actions_upload-from-docspace",
         disabled: false,
         onClick: () => onShowFormRoomSelectFileDialog(FilterType.PDFForm),
@@ -644,7 +651,7 @@ const ArticleMainButtonContent = (props) => {
 
     if (isAIRoom && (isChatTab || isResultTab)) visibilityValue = false;
 
-    if (isAIAgentsFolder && aiConfig.aiReadyNeedReset) visibilityValue = false;
+    if (isAIAgentsFolder && aiConfig?.aiReadyNeedReset) visibilityValue = false;
 
     return visibilityValue;
   };
@@ -723,7 +730,7 @@ const ArticleMainButtonContent = (props) => {
           label={t("Common:NewAgent")}
           onClick={onCreateAgent}
           $currentColorScheme={currentColorScheme}
-          isDisabled={isDisabled || aiConfig.aiReadyNeedReset}
+          isDisabled={isDisabled || aiConfig?.aiReadyNeedReset}
           size="small"
           primary
           scale
@@ -802,6 +809,7 @@ export default inject(
     guidanceStore,
     aiRoomStore,
     filesSettingsStore,
+    currentTariffStatusStore,
   }) => {
     const { isChatTab, isResultTab, isKnowledgeTab } = aiRoomStore;
     const { showArticleLoader } = clientLoadingStore;
@@ -854,6 +862,7 @@ export default inject(
     const { isAdmin, isOwner, isRoomAdmin, isCollaborator } = userStore.user;
 
     const { showWarningDialog, isWarningRoomsDialog } = currentQuotaStore;
+    const { isGracePeriod } = currentTariffStatusStore;
 
     const { setOformFromFolderId, oformsFilter, setTemplateGalleryVisible } =
       oformsStore;
@@ -939,6 +948,8 @@ export default inject(
       allowInvitingMembers,
 
       aiConfig,
+
+      isGracePeriod,
     };
   },
 )(

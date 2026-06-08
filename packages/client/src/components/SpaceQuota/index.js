@@ -186,7 +186,7 @@ const SpaceQuota = (props) => {
 		(elem) => elem.action !== "current-size",
 	);
 
-	if (item.providerType) {
+	if (item.providerType || item.providerKey) {
 		return (
 			<Text fontWeight={600}>
 				{connectedCloudsTypeTitleTranslation(item.providerKey, t)}{" "}

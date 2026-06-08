@@ -147,6 +147,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   cursor: pointer;
+  user-select: none;
   font-weight: 600;
   font-size: 13px;
   margin-inline-start: 12px;
@@ -260,6 +261,10 @@
     cursor: pointer;
     margin-inline-end: 8px;
   }
+}
+
+.dragAndDropWrapper {
+  display: contents;
 }
 
 .isHighlight {

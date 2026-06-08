@@ -618,7 +618,6 @@ export const Component = inject(({ settingsStore, treeFoldersStore }) => {
   withTranslation([
     "JavascriptSdk",
     "Files",
-    "EmbeddingPanel",
     "Common",
     "CreateEditRoomDialog",
   ])(observer(Uploader)),

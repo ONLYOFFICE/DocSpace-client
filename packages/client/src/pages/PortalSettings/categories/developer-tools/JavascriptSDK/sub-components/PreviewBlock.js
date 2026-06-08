@@ -60,7 +60,6 @@ export const PreviewBlock = ({
   const { t, ready } = useTranslation([
     "JavascriptSdk",
     "Files",
-    "EmbeddingPanel",
     "Common",
     "Translations",
     "CreateEditRoomDialog",

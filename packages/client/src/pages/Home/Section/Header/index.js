@@ -1364,11 +1364,7 @@ export default inject(
     isArchive ||
     !isRootRooms
       ? false
-      : security?.Read &&
-        isShared &&
-        (!isExternalShareRestricted ||
-          !blockExistingLinksOnRestrict ||
-          hasExternalLinks));
+      : security?.Read && isShared);
 
     return {
       currentClientView,

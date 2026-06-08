@@ -114,11 +114,11 @@ describe("useRotateIdentityForRooms", () => {
 
   it("calls rotateOwnIdentityForRoom for each private room when old identity is available", async () => {
     vi.mocked(getRooms).mockResolvedValueOnce(
-      // biome-ignore lint/suspicious/noExplicitAny: test mock
       makeRoomsResponse([
         { id: 10, private: true },
         { id: 20, private: true },
         { id: 30, private: false },
+        // biome-ignore lint/suspicious/noExplicitAny: test mock
       ]) as any,
     );
     vi.mocked(rotateOwnIdentityForRoom).mockResolvedValue([
@@ -210,10 +210,10 @@ describe("useRotateIdentityForRooms", () => {
 
   it("shows error toast when all rooms fail entirely", async () => {
     vi.mocked(getRooms).mockResolvedValueOnce(
-      // biome-ignore lint/suspicious/noExplicitAny: test mock
       makeRoomsResponse([
         { id: 10, private: true },
         { id: 20, private: true },
+        // biome-ignore lint/suspicious/noExplicitAny: test mock
       ]) as any,
     );
     // rotateOwnIdentityForRoom throws for both rooms
@@ -325,10 +325,10 @@ describe("useRotateIdentityForRooms", () => {
 
   it("continues processing remaining rooms even if one room throws", async () => {
     vi.mocked(getRooms).mockResolvedValueOnce(
-      // biome-ignore lint/suspicious/noExplicitAny: test mock
       makeRoomsResponse([
         { id: 10, private: true },
         { id: 20, private: true },
+        // biome-ignore lint/suspicious/noExplicitAny: test mock
       ]) as any,
     );
     vi.mocked(rotateOwnIdentityForRoom)

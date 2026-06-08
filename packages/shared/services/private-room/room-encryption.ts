@@ -89,7 +89,7 @@ export interface RoomEncryptionOptions {
 
 async function getEncryptedFilesInRoom(roomId: number): Promise<TFile[]> {
   const allFiles: TFile[] = [];
-  let page = 1;
+  let page = 0;
   const pageSize = 100;
   let hasMore = true;
 
@@ -244,7 +244,10 @@ export async function addMembersToEncryptedRoom(
 
         const pk = await resolveMemberKey(m);
         if (!pk) continue;
-        recipients.push({ userId: m.id, publicKey: pk });
+        const publicKeyId = roomMemberKeys.find(
+          (k) => String(k.userId) === String(m.id),
+        )?.publicKeyId;
+        recipients.push({ userId: m.id, publicKey: pk, publicKeyId });
       }
 
       if (recipients.length === 0) {
@@ -389,14 +392,22 @@ export async function backfillEncryptedFilesForRoomMembers(
         info.fileKeys.map((k) => String(k.userId)),
       );
 
-      const candidates: { userId: string; publicKey: string }[] = [];
+      const candidates: {
+        userId: string;
+        publicKey: string;
+        publicKeyId?: string;
+      }[] = [];
       if (Array.isArray(filePublicKeys)) {
         for (const pk of filePublicKeys) {
           if (!pk?.userId || !pk?.publicKey) continue;
           const uid = String(pk.userId);
           if (uid === String(currentUserId)) continue;
           if (existingIds.has(uid)) continue;
-          candidates.push({ userId: uid, publicKey: pk.publicKey });
+          candidates.push({
+            userId: uid,
+            publicKey: pk.publicKey,
+            publicKeyId: pk.id,
+          });
           // Also feed into sender verification map for any future iterations.
           if (!senderKeyByUserId.has(uid)) {
             senderKeyByUserId.set(uid, pk.publicKey);
@@ -412,7 +423,12 @@ export async function backfillEncryptedFilesForRoomMembers(
       const recipients: RoomMemberPublicKey[] = [];
       for (const c of candidates) {
         const pk = await verifyAndCache(c.userId, c.publicKey);
-        if (pk) recipients.push({ userId: c.userId, publicKey: pk });
+        if (pk)
+          recipients.push({
+            userId: c.userId,
+            publicKey: pk,
+            publicKeyId: c.publicKeyId,
+          });
       }
 
       if (recipients.length === 0) {
@@ -571,11 +587,18 @@ export async function rotateOwnIdentityForRoom(
     currentUserId: string;
     oldIdentity: IdentityKeyPair;
     newIdentity: IdentityKeyPair;
+    newPublicKeyId: string;
     onProgress?: (processed: number, total: number) => void;
   },
 ): Promise<FileEncryptionOpResult[]> {
   const results: FileEncryptionOpResult[] = [];
-  const { currentUserId, oldIdentity, newIdentity, onProgress } = options;
+  const {
+    currentUserId,
+    oldIdentity,
+    newIdentity,
+    newPublicKeyId,
+    onProgress,
+  } = options;
 
   const encryptedFiles = await getEncryptedFilesInRoom(roomId);
   if (encryptedFiles.length === 0) return results;
@@ -623,6 +646,7 @@ export async function rotateOwnIdentityForRoom(
           {
             userId: currentUserId,
             publicKey: base64FromBytes(newIdentity.publicKey),
+            publicKeyId: newPublicKeyId,
           },
         ],
         fileId: file.id,
@@ -663,7 +687,7 @@ export async function rotateOwnIdentityForRoom(
 
 export async function roomHasEncryptedFiles(roomId: number): Promise<boolean> {
   const filter = FilesFilter.getDefault();
-  filter.page = 1;
+  filter.page = 0;
   filter.pageCount = 1;
 
   try {

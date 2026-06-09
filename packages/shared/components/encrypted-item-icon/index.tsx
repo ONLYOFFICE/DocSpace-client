@@ -38,7 +38,7 @@ import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import Security12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/security.react.svg?url";
+import SecurityPrivate12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/security.private.react.svg?url";
 import Lock12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
 
 import styles from "./EncryptedItemIcon.module.scss";
@@ -65,11 +65,16 @@ export const EncryptedItemIconBadge: React.FC<EncryptedItemIconBadgeProps> = ({
   const { t } = useTranslation(["Common"]);
   if (!encrypted) return null;
 
-  const showNoAccess = !hasEncryptionKeys;
-  const src = showNoAccess ? Lock12ReactSvgUrl : Security12ReactSvgUrl;
-  const title = showNoAccess
-    ? t("Common:NoAccessToEncryptedFile")
-    : t("Common:EncryptedFile");
+  // Both files and rooms use the green private shield, matching the main
+  // client's ItemIcon. The "no access" lock only applies to encrypted files
+  // without keys; a private room always shows the shield (never a lock).
+  const showNoAccess = !isRoomIcon && !hasEncryptionKeys;
+  const src = showNoAccess ? Lock12ReactSvgUrl : SecurityPrivate12ReactSvgUrl;
+  const title = isRoomIcon
+    ? undefined
+    : showNoAccess
+      ? t("Common:NoAccessToEncryptedFile")
+      : t("Common:EncryptedFile");
 
   return (
     <ReactSVG

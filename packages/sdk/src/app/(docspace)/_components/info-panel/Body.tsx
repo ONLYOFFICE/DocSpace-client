@@ -104,6 +104,8 @@ const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
     [roomActions, isArchive],
   );
 
+  const effectiveRoomActions = inheritedRoomActions ?? fallbackRoomActions;
+
   // Clear pinned selection when the user navigates to a different folder so that
   // a previously-pinned room does not remain visible after entering another room.
   const prevFolderIdRef = React.useRef<number | string | undefined>(
@@ -208,16 +210,16 @@ const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
       data-testid="info_panel_body"
     >
       {showHeader ? (
-        <RoomActionsContext.Provider
-          value={inheritedRoomActions ?? fallbackRoomActions}
-        >
+        <RoomActionsContext.Provider value={effectiveRoomActions}>
           <RoomHeader
             selection={selection as TFolder}
             isMembersView={isMembersView}
             hasEditAccess={hasEditAccess}
             setSearchValue={membersData.handleSearchMembers}
             onInvite={() =>
-              roomActions.inviteRoom(selection as unknown as TFolderItem)
+              effectiveRoomActions.inviteRoom?.(
+                selection as unknown as TFolderItem,
+              )
             }
             onUpdated={onTagsChanged}
           />

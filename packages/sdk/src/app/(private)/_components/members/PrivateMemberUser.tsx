@@ -55,6 +55,7 @@ import {
 } from "@docspace/ui-kit/components/combobox";
 import { AccessRightSelect } from "@docspace/ui-kit/components/access-right-select";
 import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
+import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
 
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import EmailPlusSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
@@ -71,6 +72,11 @@ export type PrivateMemberUserProps = {
   avatar?: string;
   /** Numeric access level (ShareAccessRights) for this member. */
   access: number;
+  email?: string;
+  /** Localized user-type label for the subtitle ("Room admin", etc.). Omit for groups. */
+  typeLabel?: string;
+  /** True when this row is the current user; renders a "(Me)" marker. */
+  isMe?: boolean;
   /** Whether the current user may change the role of this member. */
   canChangeRole: boolean;
   canRemove: boolean;
@@ -81,6 +87,8 @@ export type PrivateMemberUserProps = {
   isOwner: boolean;
   /** True when this row represents a group; remove flow expands group members. */
   isGroup?: boolean;
+  /** Disable paid roles (FullAccess/RoomManager) for groups and plain users. */
+  restrictPaidRoles?: boolean;
   onRemoved?: () => void;
   /** Called after a successful role change so the parent can refresh. */
   onRoleChanged?: () => void;
@@ -92,12 +100,16 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
   displayName,
   avatar,
   access,
+  email,
+  typeLabel,
+  isMe = false,
   canChangeRole,
   canRemove,
   isExpect = false,
   canInvite = false,
   isOwner,
   isGroup = false,
+  restrictPaidRoles = false,
   onRemoved,
   onRoleChanged,
 }) => {
@@ -115,11 +127,17 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
     [t],
   );
 
-  const roleOptions = membersHelper.getOptionsByRoomType(
+  const fullRoleOptions = membersHelper.getOptionsByRoomType(
     RoomsType.CustomRoom,
     // Never include the remove option in the role combobox — removal is
     // handled by the dedicated remove button below.
     false,
+  );
+
+  const roleOptions = (
+    restrictPaidRoles
+      ? filterPaidRoleOptions(fullRoleOptions)
+      : fullRoleOptions
   ) as TOption[];
 
   const selectedRole = membersHelper.getOptionByUserAccess(access) as
@@ -199,7 +217,19 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
         userName={displayName}
       />
       <div className={styles.userBody}>
-        <Text className={styles.userName}>{displayName}</Text>
+        <div className={styles.nameWrapper}>
+          <Text className={styles.userName}>{displayName}</Text>
+          {isMe ? (
+            <span className={styles.meLabel}>
+              &nbsp;{`(${t("Common:MeLabel")})`}
+            </span>
+          ) : null}
+        </div>
+        {typeLabel ? (
+          <Text className={styles.userSubtitle} truncate>
+            {`${typeLabel} | ${email ?? ""}`}
+          </Text>
+        ) : null}
       </div>
       {showInviteIcon ? (
         <IconButton

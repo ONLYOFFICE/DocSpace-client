@@ -110,6 +110,7 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
 
       const controller = registerCryptoOperation();
       privateUploadStore.registerController(controller);
+      privateUploadStore.setQuotaErrorRaised(false);
 
       const initItems = files.map((f) => ({
         uniqueId:

@@ -900,7 +900,14 @@ const RoomsList = ({
       ) : null}
       <LeaveRoomDialog
         currentUserId={user?.id}
-        onTransferOwnership={(room) => setChangingOwnerRoom(room)}
+        onTransferOwnership={(room) => {
+          const isPrivate = (room as { private?: boolean }).private === true;
+          if (isPrivate && onPrivateChangeOwner) {
+            onPrivateChangeOwner(room as TFolder);
+            return;
+          }
+          setChangingOwnerRoom(room);
+        }}
       />
       {invitingRoom ? (
         <InvitePanel

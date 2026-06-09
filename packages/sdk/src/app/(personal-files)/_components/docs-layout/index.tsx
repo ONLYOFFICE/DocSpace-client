@@ -126,6 +126,7 @@ import DragTooltip from "../drag-tooltip";
 import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
 import {
   PRIVATE_FILE_CONTEXT_OPTIONS,
+  PRIVATE_FILE_CONTEXT_OPTIONS_NO_KEYS,
   PRIVATE_FOLDER_CONTEXT_OPTIONS,
   PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS,
 } from "../../_constants/private-context-options";
@@ -261,7 +262,9 @@ const DocsLayout = observer(
     const allowedContextOptions = isPrivate
       ? isArchive
         ? PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS
-        : PRIVATE_FILE_CONTEXT_OPTIONS
+        : hasEncryptionKeys
+          ? PRIVATE_FILE_CONTEXT_OPTIONS
+          : PRIVATE_FILE_CONTEXT_OPTIONS_NO_KEYS
       : undefined;
     // Archive folders use the same read-only whitelist as files.
     const allowedFolderContextOptions = isPrivate

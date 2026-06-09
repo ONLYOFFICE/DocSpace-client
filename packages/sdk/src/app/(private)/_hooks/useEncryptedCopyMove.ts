@@ -281,7 +281,7 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
               continue;
             }
 
-            if (isMove) {
+            if (isMove && dest.mode !== "plaintext") {
               await deleteFile(item.id, false, true);
               forgetEncryptedFilename(item.id);
               filesListStore.removeItem(item.id);

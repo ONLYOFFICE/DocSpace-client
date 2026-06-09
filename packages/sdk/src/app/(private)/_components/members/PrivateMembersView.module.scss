@@ -82,10 +82,34 @@
   min-width: 0;
 }
 
+.nameWrapper {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
 .userName {
   font-size: 13px;
   font-weight: 600;
   line-height: 20px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meLabel {
+  flex: 0 0 auto;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--info-panel-members-subtitle-color, rgba(0, 0, 0, 0.6));
+  white-space: nowrap;
+}
+
+.userSubtitle {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--info-panel-members-subtitle-color, rgba(0, 0, 0, 0.6));
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

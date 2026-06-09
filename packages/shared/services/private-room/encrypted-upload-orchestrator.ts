@@ -247,65 +247,66 @@ async function wrapDekForSelfAndRoom(args: {
   });
   await setFileEncryptionKeys(fileId, ownWraps);
 
-  throwIfAborted(signal);
+  try {
+    throwIfAborted(signal);
 
-  // 2. Room-member fanout. We refetch ACL state to avoid clobbering wraps a
-  // concurrent upload may have written; only append wraps for recipients we
-  // don't yet cover.
-  const [publicKeys, encryptionInfo] = await Promise.all([
-    getRoomEncryptionKeys(roomId),
-    getFileEncryptionAccess(fileId),
-  ]);
+    const [publicKeys, encryptionInfo] = await Promise.all([
+      getRoomEncryptionKeys(roomId),
+      getFileEncryptionAccess(fileId),
+    ]);
 
-  const existingFileKeys = encryptionInfo?.fileKeys ?? [];
-  const existingKeyPairs = new Set(
-    existingFileKeys.map((k) => `${String(k.userId)}:${k.publicKeyId || ""}`),
-  );
+    const existingFileKeys = encryptionInfo?.fileKeys ?? [];
+    const existingKeyPairs = new Set(
+      existingFileKeys.map((k) => `${String(k.userId)}:${k.publicKeyId || ""}`),
+    );
 
-  const recipients: Array<{
-    userId: string;
-    publicKey: string;
-    publicKeyId: string;
-  }> = [];
+    const recipients: Array<{
+      userId: string;
+      publicKey: string;
+      publicKeyId: string;
+    }> = [];
 
-  if (Array.isArray(publicKeys)) {
-    for (const pk of publicKeys) {
-      if (!pk.publicKey || !pk.userId) continue;
-      const uid = String(pk.userId);
-      if (uid === userId) continue;
-      const pairKey = `${uid}:${pk.id || ""}`;
-      if (existingKeyPairs.has(pairKey)) continue;
-      recipients.push({
-        userId: uid,
-        publicKey: pk.publicKey,
-        publicKeyId: pk.id || "",
-      });
+    if (Array.isArray(publicKeys)) {
+      for (const pk of publicKeys) {
+        if (!pk.publicKey || !pk.userId) continue;
+        const uid = String(pk.userId);
+        if (uid === userId) continue;
+        const pairKey = `${uid}:${pk.id || ""}`;
+        if (existingKeyPairs.has(pairKey)) continue;
+        recipients.push({
+          userId: uid,
+          publicKey: pk.publicKey,
+          publicKeyId: pk.id || "",
+        });
+      }
     }
+
+    if (recipients.length === 0) return;
+
+    throwIfAborted(signal);
+
+    const newKeys = await wrapDekForRecipients({
+      dek,
+      senderIdentity: identity,
+      senderUserId: userId,
+      recipients,
+      fileId: fileIdNumeric,
+    });
+
+    if (newKeys.length === 0) return;
+
+    const allKeys = [
+      ...existingFileKeys.map((k) => ({
+        userId: k.userId,
+        publicKeyId: k.publicKeyId || "",
+        privateKeyEnc: k.privateKeyEnc,
+      })),
+      ...newKeys,
+    ];
+    await setFileEncryptionKeys(fileId, allKeys);
+  } catch (error) {
+    if (error instanceof AbortedError) throw error;
   }
-
-  if (recipients.length === 0) return;
-
-  throwIfAborted(signal);
-
-  const newKeys = await wrapDekForRecipients({
-    dek,
-    senderIdentity: identity,
-    senderUserId: userId,
-    recipients,
-    fileId: fileIdNumeric,
-  });
-
-  if (newKeys.length === 0) return;
-
-  const allKeys = [
-    ...existingFileKeys.map((k) => ({
-      userId: k.userId,
-      publicKeyId: k.publicKeyId || "",
-      privateKeyEnc: k.privateKeyEnc,
-    })),
-    ...newKeys,
-  ];
-  await setFileEncryptionKeys(fileId, allKeys);
 }
 
 async function uploadOneFile(

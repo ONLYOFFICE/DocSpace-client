@@ -45,6 +45,8 @@ import React from "react";
 import { observer } from "mobx-react";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
+import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
+import { normalizeRoomLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
 import {
   InfoPanelView,
   useInfoPanelStore,
@@ -61,6 +63,7 @@ import commonStyles from "@/app/(docspace)/_components/info-panel/helpers/Common
 
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { TUser } from "@docspace/shared/api/people/types";
+import type { TLogo } from "@docspace/ui-kit/types";
 
 import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
 
@@ -97,34 +100,70 @@ const PrivateInfoPanelBody = observer(
   ({ onTagsChanged }: PrivateInfoPanelBodyProps) => {
     const infoPanelStore = useInfoPanelStore();
     const filesSelectionStore = useFilesSelectionStore();
+    const filesListStore = useFilesListStore();
     const dialogs = usePrivateDialogsStore();
     const docsUser = useDocsUserStore();
     const user = docsUser.user as TUser | null;
-    const { selection, fileView, isVisible } = infoPanelStore;
+    const { selection, fileView, isVisible, isPinnedSelection } =
+      infoPanelStore;
 
     const selectedCount = filesSelectionStore.selection.length;
     const isSeveralItems = selectedCount > 1;
 
     const [memberSearch, setMemberSearch] = React.useState("");
+    const [membersRefreshKey, setMembersRefreshKey] = React.useState(0);
 
     React.useEffect(() => {
       setMemberSearch("");
     }, [selection?.id]);
 
-    // Mirrors (docspace) Body sync logic — keeps infoPanel.selection in line
-    // with FilesSelectionStore.
+    const prevFolderIdRef = React.useRef<number | string | undefined>(
+      filesListStore.currentFolder?.id,
+    );
+    React.useEffect(() => {
+      const newId = filesListStore.currentFolder?.id;
+      if (newId !== prevFolderIdRef.current) {
+        prevFolderIdRef.current = newId;
+        infoPanelStore.setPinnedSelection(false);
+      }
+    }, [filesListStore.currentFolder?.id, infoPanelStore]);
+
     React.useEffect(() => {
       if (!isVisible) return;
+
+      if (isPinnedSelection && selectedCount === 0) return;
+      if (isPinnedSelection && selectedCount > 0) {
+        infoPanelStore.setPinnedSelection(false);
+      }
 
       if (isSeveralItems) {
         if (selection !== null) infoPanelStore.setSelection(null);
         return;
       }
 
+      const cf = filesListStore.currentFolder;
+      const isRootFolder = !!(cf && cf.id === cf.rootFolderId);
+      let currentFolderAsItem: TFolder | null = null;
+      if (!isRootFolder && cf) {
+        const rawLogo = (cf as unknown as { logo?: TLogo }).logo;
+        const { roomLogo, roomIconColor, hasRoomImage } =
+          normalizeRoomLogo(rawLogo);
+        currentFolderAsItem = {
+          ...cf,
+          isFolder: true,
+          isRoom: !!cf.roomType,
+          roomLogo,
+          roomIconColor,
+          hasRoomImage,
+        } as unknown as TFolder;
+      }
+
       const next =
         selectedCount === 1
           ? filesSelectionStore.selection[0]
-          : (filesSelectionStore.bufferSelection ?? null);
+          : (filesSelectionStore.bufferSelection ??
+            currentFolderAsItem ??
+            null);
 
       if (!next) {
         if (selection !== null) infoPanelStore.setSelection(null);
@@ -132,20 +171,25 @@ const PrivateInfoPanelBody = observer(
       }
 
       if (selection && selection.id === next.id) return;
-      infoPanelStore.setSelection(next);
+      infoPanelStore.setSelection(next as TFolder);
     }, [
       isVisible,
+      isPinnedSelection,
       isSeveralItems,
       selectedCount,
       filesSelectionStore.selection,
       filesSelectionStore.bufferSelection,
+      filesListStore.currentFolder,
       selection,
       infoPanelStore,
     ]);
 
     const handleAddUsers = React.useCallback(() => {
       if (!selection || !("isRoom" in selection) || !selection.isRoom) return;
-      dialogs.openInvitePanel({ roomId: Number(selection.id) });
+      dialogs.openInvitePanel({
+        roomId: Number(selection.id),
+        onMembersUpdated: () => setMembersRefreshKey((k) => k + 1),
+      });
     }, [dialogs, selection]);
 
     const isRoomSelection =
@@ -176,6 +220,7 @@ const PrivateInfoPanelBody = observer(
             canInvite={hasEditAccess}
             canEditMembers={hasEditAccess}
             filterValue={memberSearch}
+            refreshKey={membersRefreshKey}
           />
         );
       }

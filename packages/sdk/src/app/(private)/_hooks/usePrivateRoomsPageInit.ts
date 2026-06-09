@@ -76,5 +76,20 @@ export const usePrivateRoomsPageInit = ({
     void identityStore.loadKeys();
   }, [isReady, user?.id, identityStore]);
 
+  useEffect(() => {
+    if (!isReady || !user?.id) return undefined;
+    const reload = () => {
+      if (document.visibilityState === "visible") {
+        void identityStore.loadKeys();
+      }
+    };
+    window.addEventListener("focus", reload);
+    document.addEventListener("visibilitychange", reload);
+    return () => {
+      window.removeEventListener("focus", reload);
+      document.removeEventListener("visibilitychange", reload);
+    };
+  }, [isReady, user?.id, identityStore]);
+
   return isReady;
 };

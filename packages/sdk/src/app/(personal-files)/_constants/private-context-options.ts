@@ -54,6 +54,20 @@ export const PRIVATE_FILE_CONTEXT_OPTIONS: ReadonlySet<string> = new Set([
   AVAILABLE_CONTEXT_ITEMS.delete,
 ]);
 
+// Members without encryption keys cannot decrypt files, so hide every action
+// that triggers a decrypt path (view/preview/open PDF/download). They keep
+// "download without decryption" (downloadEncrypted). Reference: client
+// FilesStore.js:3169-3175.
+export const PRIVATE_FILE_CONTEXT_OPTIONS_NO_KEYS: ReadonlySet<string> = new Set(
+  [...PRIVATE_FILE_CONTEXT_OPTIONS].filter(
+    (key) =>
+      key !== AVAILABLE_CONTEXT_ITEMS.view &&
+      key !== AVAILABLE_CONTEXT_ITEMS.preview &&
+      key !== AVAILABLE_CONTEXT_ITEMS.openPDF &&
+      key !== AVAILABLE_CONTEXT_ITEMS.download,
+  ),
+);
+
 // Folders inside a private room must not expose "duplicate": the server would
 // create an unencrypted copy of the folder tree. Reference: client
 // FilesActionsStore.js duplicateAction — silent return for folders in a

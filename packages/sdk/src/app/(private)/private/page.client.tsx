@@ -107,6 +107,8 @@ const PrivateRoomsPageInner: React.FC<PrivateRoomsPageProps> = ({
     [dialogsStore],
   );
 
+  const refreshRef = React.useRef<(() => void) | null>(null);
+
   const handlePrivateChangeOwner = React.useCallback(
     (room: TFolder) => {
       const ownerId =
@@ -115,6 +117,7 @@ const PrivateRoomsPageInner: React.FC<PrivateRoomsPageProps> = ({
       dialogsStore.openChangeOwner({
         roomId: Number(room.id),
         roomOwnerId: ownerId,
+        onChanged: () => refreshRef.current?.(),
       });
     },
     [dialogsStore],
@@ -167,6 +170,7 @@ const PrivateRoomsPageInner: React.FC<PrivateRoomsPageProps> = ({
         emptyView={<EmptyPrivateRoomsList />}
         onPrivateInviteRoom={handlePrivateInviteRoom}
         onPrivateChangeOwner={handlePrivateChangeOwner}
+        refreshRef={refreshRef}
         renderCreateRoomDialog={({ visible, onClose, onRoomCreated }) => (
           <PrivateCreateRoomDialog
             visible={visible}

@@ -574,7 +574,9 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
       setIsLoading(false);
 
       handleClose();
-      toastr.success(t("Common:UsersInvited"));
+      if (!onInviteSubmitted) {
+        toastr.success(t("Common:UsersInvited"));
+      }
 
       if (result?.warning) {
         toastr.warning(result.warning);

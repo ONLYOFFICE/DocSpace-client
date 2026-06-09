@@ -109,6 +109,7 @@ type RoomsLayoutProps = {
   titleOverride?: string;
   onPrivateInviteRoom?: (room: TFolder) => void;
   onPrivateChangeOwner?: (room: TFolder) => void;
+  refreshRef?: React.MutableRefObject<(() => void) | null>;
   renderCreateRoomDialog?: (args: {
     visible: boolean;
     onClose: () => void;
@@ -138,6 +139,7 @@ const RoomsLayout = observer(
     titleOverride,
     onPrivateInviteRoom,
     onPrivateChangeOwner,
+    refreshRef: refreshRefProp,
     renderCreateRoomDialog,
   }: RoomsLayoutProps) => {
     const { t } = useTranslation(["Common"]);
@@ -191,7 +193,8 @@ const RoomsLayout = observer(
     );
 
     const dialogsStore = useDialogsStore();
-    const refreshRef = React.useRef<(() => void) | null>(null);
+    const internalRefreshRef = React.useRef<(() => void) | null>(null);
+    const refreshRef = refreshRefProp ?? internalRefreshRef;
     const roomActionsRef = React.useRef<RoomActions | null>(null);
 
     // Stable RoomActionsContext handler — values are bridged to RoomsList's

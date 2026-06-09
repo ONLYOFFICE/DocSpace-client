@@ -653,7 +653,10 @@ export default function useContextMenuModel({
     items.push(getDownloadItem());
 
     if (
-      filesSelectionStore.selection.some((i) => "fileExst" in i && i.fileExst)
+      filesSelectionStore.selection.some((i) => "fileExst" in i && i.fileExst) &&
+      !filesSelectionStore.selection.some(
+        (i) => (i as TFileItem).encrypted === true,
+      )
     ) {
       items.push(getDownloadAsItem());
     }

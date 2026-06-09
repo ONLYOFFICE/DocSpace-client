@@ -47,6 +47,10 @@ import api from "@docspace/shared/api";
 import type { RoomMember, TGetRoomMembers } from "@docspace/shared/api/rooms/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
+import {
+  getUserType,
+  getUserTypeTranslation,
+} from "@docspace/shared/utils/common";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { Text } from "@docspace/ui-kit/components/text";
@@ -170,12 +174,24 @@ const PrivateMembersView: React.FC<PrivateMembersViewProps> = ({
   };
 
   const renderMember = (member: RoomMember) => {
-    const user = member.sharedTo as TUser & { isGroup?: boolean };
+    const user = member.sharedTo as TUser & {
+      isGroup?: boolean;
+      isAdmin?: boolean;
+      isRoomAdmin?: boolean;
+    };
     const isGroup = Boolean(user.isGroup);
+    const restrictPaidRoles =
+      isGroup ||
+      (!user.isAdmin && !member.isOwner && !user.isRoomAdmin);
     const isExpect =
       !isGroup &&
       "activationStatus" in user &&
       user.activationStatus === EmployeeActivationStatus.Pending;
+    const isMe = user.id === currentUserId;
+    const email = "email" in user ? (user.email ?? "") : "";
+    const typeLabel = isGroup
+      ? undefined
+      : getUserTypeTranslation(getUserType(user), t);
     const canChangeRole =
       canEditMembers &&
       member.canEditAccess &&
@@ -189,12 +205,16 @@ const PrivateMembersView: React.FC<PrivateMembersViewProps> = ({
           displayName={user.displayName || user.email || ""}
           avatar={user.avatar}
           access={member.access}
+          email={email}
+          typeLabel={typeLabel}
+          isMe={isMe}
           canChangeRole={canChangeRole}
           canRemove={member.canEditAccess && user.id !== currentUserId}
           isExpect={isExpect}
           canInvite={canInvite}
           isOwner={member.isOwner}
           isGroup={isGroup}
+          restrictPaidRoles={restrictPaidRoles}
           onRemoved={() => handleMemberRemoved(user.id)}
           onRoleChanged={handleRoleChanged}
         />

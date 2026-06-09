@@ -100,6 +100,8 @@ export const useEncryptedDownload = (): UseEncryptedDownloadReturn => {
       const identity = await requireIdentity();
       if (!identity) return;
 
+      toastr.info(t("Common:DownloadOperationTitle"));
+
       const controller = registerCryptoOperation();
       try {
         const [{ downloadAndDecryptFile, triggerFileDownload }, memberMod] =
@@ -158,6 +160,8 @@ export const useEncryptedDownload = (): UseEncryptedDownloadReturn => {
       }
       const identity = await requireIdentity();
       if (!identity) return;
+
+      toastr.info(t("Common:DownloadOperationTitle"));
 
       const controller = registerCryptoOperation();
       try {

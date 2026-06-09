@@ -130,14 +130,17 @@ export default function useRoomActions() {
     async (id: number) => {
       try {
         const updated = await api.rooms.getRoomInfo(id);
-        filesListStore.setCurrentFolder(updated as unknown as TFolder);
+        const rawLogo = (updated as unknown as { logo?: TLogo }).logo;
+        const fresh = {
+          ...(updated as unknown as TFolder),
+          isRoom: true,
+          ...normalizeRoomLogo(rawLogo),
+        } as unknown as TFolder;
+        if (filesListStore.currentFolder?.id === id) {
+          filesListStore.setCurrentFolder(fresh);
+        }
         if (infoPanelStore.selection?.id === id) {
-          const rawLogo = (updated as unknown as { logo?: TLogo }).logo;
-          infoPanelStore.setSelection({
-            ...(updated as unknown as TFolder),
-            isRoom: true,
-            ...normalizeRoomLogo(rawLogo),
-          } as unknown as TFolder);
+          infoPanelStore.setSelection(fresh);
         }
       } catch {
         // ignore — stale data is tolerable until the next navigation

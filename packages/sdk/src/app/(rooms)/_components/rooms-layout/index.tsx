@@ -78,7 +78,9 @@ import RoomsList from "../rooms-list";
 import type { RoomActions } from "../rooms-list";
 import RoomsFilter from "../rooms-filter";
 import CreateEditRoomDialog from "../create-edit-room-dialog";
+import QuotaWarningDialog from "../quota-warning-dialog";
 import { useRoomsTagsStore } from "../../_store/RoomsTagsStore";
+import { useRoomsQuotaStore } from "../../_store/RoomsQuotaStore";
 import {
   RoomActionsContext,
   type RoomActionsHandler,
@@ -171,6 +173,7 @@ const RoomsLayout = observer(
     );
 
     const dialogsStore = useDialogsStore();
+    const quotaStore = useRoomsQuotaStore();
     const refreshRef = React.useRef<(() => void) | null>(null);
     const roomActionsRef = React.useRef<RoomActions | null>(null);
 
@@ -206,9 +209,14 @@ const RoomsLayout = observer(
     // sit outside its RoomsRefreshContext provider.
     const refreshRooms = React.useCallback(() => refreshRef.current?.(), []);
 
-    const createCustomRoom = React.useCallback(() => {
+    const createCustomRoom = React.useCallback(async () => {
+      await quotaStore.fetch();
+      if (quotaStore.isWarningRoomsDialog) {
+        dialogsStore.openDialog(SDKDialogs.QuotaWarningRooms);
+        return;
+      }
       dialogsStore.openDialog(SDKDialogs.CreateRoom);
-    }, [dialogsStore]);
+    }, [dialogsStore, quotaStore]);
 
     const closeCreateRoomDialog = React.useCallback(() => {
       dialogsStore.closeDialog(SDKDialogs.CreateRoom);
@@ -333,6 +341,11 @@ const RoomsLayout = observer(
               onClose={closeCreateRoomDialog}
               onRoomCreated={onRoomCreated}
             />
+            <QuotaWarningDialog
+              isPaymentPageAvailable={!!(user?.isOwner || user?.isAdmin)}
+              standalone={!!portalSettings?.standalone}
+              language={portalSettings?.culture ?? "en"}
+            />
             <SelectionArea isRooms />
             <DeviceTypeObserver />
             <InfoPanelEditLinkDialog />
@@ -347,4 +360,3 @@ const RoomsLayout = observer(
 );
 
 export default RoomsLayout;
-

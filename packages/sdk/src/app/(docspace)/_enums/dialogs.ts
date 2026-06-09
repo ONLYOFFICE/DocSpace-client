@@ -42,4 +42,5 @@ export const enum SDKDialogs {
   LeaveRoom = "leave_room",
   Invite = "invite_room",
   ChangeOwner = "change_room_owner",
+  QuotaWarningRooms = "quota_warning_rooms",
 }

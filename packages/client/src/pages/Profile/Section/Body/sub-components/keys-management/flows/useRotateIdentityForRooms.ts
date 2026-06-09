@@ -71,6 +71,7 @@ export type RotateIdentityForRoomsHook = {
     oldIdentity: IdentityKeyPair | null,
     newIdentity: IdentityKeyPair,
     currentUserId: string,
+    newPublicKeyId: string,
   ) => Promise<void>;
 };
 
@@ -91,6 +92,7 @@ export function useRotateIdentityForRooms(): RotateIdentityForRoomsHook {
       oldIdentity: IdentityKeyPair | null,
       newIdentity: IdentityKeyPair,
       currentUserId: string,
+      newPublicKeyId: string,
     ) => {
       if (!oldIdentity) {
         // No unlocked identity before generation — nothing to re-wrap.
@@ -150,6 +152,7 @@ export function useRotateIdentityForRooms(): RotateIdentityForRoomsHook {
             currentUserId,
             oldIdentity,
             newIdentity,
+            newPublicKeyId,
             onProgress: (done, total) => {
               totalFiles = Math.max(totalFiles, total);
               setRotationProgress({

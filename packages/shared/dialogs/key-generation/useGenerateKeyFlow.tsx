@@ -73,6 +73,7 @@ type Deps = {
     oldIdentity: IdentityKeyPair | null,
     newIdentity: IdentityKeyPair,
     userId: string,
+    newPublicKeyId: string,
   ) => Promise<void>;
 };
 
@@ -165,7 +166,7 @@ export function useGenerateKeyFlow({
       if (onBeforeNewKeyActive) {
         const oldIdentity = SecretStorage.getCached(userId);
         try {
-          await onBeforeNewKeyActive(oldIdentity, keyPair, userId);
+          await onBeforeNewKeyActive(oldIdentity, keyPair, userId, payload.id);
         } catch (callbackError) {
           // Re-wrap errors are reported by the callback; do not abort keygen.
           console.error("onBeforeNewKeyActive failed:", callbackError);

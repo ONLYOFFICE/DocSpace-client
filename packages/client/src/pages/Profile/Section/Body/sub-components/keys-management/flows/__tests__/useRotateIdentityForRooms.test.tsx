@@ -83,7 +83,7 @@ describe("useRotateIdentityForRooms", () => {
     const { result } = renderHook(() => useRotateIdentityForRooms());
 
     await act(async () => {
-      await result.current.rotateForAllRooms(null, makeIdentity(), "user1");
+      await result.current.rotateForAllRooms(null, makeIdentity(), "user1", "test-key-id");
     });
 
     expect(getRooms).not.toHaveBeenCalled();
@@ -105,6 +105,7 @@ describe("useRotateIdentityForRooms", () => {
         makeIdentity(),
         makeIdentity(),
         "user1",
+        "test-key-id",
       );
     });
 
@@ -130,7 +131,7 @@ describe("useRotateIdentityForRooms", () => {
     const { result } = renderHook(() => useRotateIdentityForRooms());
 
     await act(async () => {
-      await result.current.rotateForAllRooms(oldIdentity, newIdentity, "user1");
+      await result.current.rotateForAllRooms(oldIdentity, newIdentity, "user1", "test-key-id");
     });
 
     expect(rotateOwnIdentityForRoom).toHaveBeenCalledTimes(2);
@@ -169,6 +170,7 @@ describe("useRotateIdentityForRooms", () => {
         makeIdentity(),
         makeIdentity(),
         "user1",
+        "test-key-id",
       );
     });
 
@@ -195,6 +197,7 @@ describe("useRotateIdentityForRooms", () => {
         makeIdentity(),
         makeIdentity(),
         "user1",
+        "test-key-id",
       );
     });
 
@@ -228,6 +231,7 @@ describe("useRotateIdentityForRooms", () => {
         makeIdentity(),
         makeIdentity(),
         "user1",
+        "test-key-id",
       );
     });
 
@@ -246,6 +250,7 @@ describe("useRotateIdentityForRooms", () => {
         makeIdentity(),
         makeIdentity(),
         "user1",
+        "test-key-id",
       );
     });
 
@@ -274,6 +279,7 @@ describe("useRotateIdentityForRooms", () => {
         makeIdentity(),
         makeIdentity(),
         "user1",
+        "test-key-id",
       );
     });
 
@@ -316,6 +322,7 @@ describe("useRotateIdentityForRooms", () => {
         makeIdentity(),
         makeIdentity(),
         "user1",
+        "test-key-id",
       );
     });
 
@@ -342,6 +349,7 @@ describe("useRotateIdentityForRooms", () => {
         makeIdentity(),
         makeIdentity(),
         "user1",
+        "test-key-id",
       );
     });
 

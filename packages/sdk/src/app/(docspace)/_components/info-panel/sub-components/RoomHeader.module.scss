@@ -45,6 +45,10 @@
   min-width: 0;
 }
 
+.fileExtension {
+  color: var(--info-panel-file-exst-color);
+}
+
 .roomActions {
   display: flex;
   margin-inline-start: auto;

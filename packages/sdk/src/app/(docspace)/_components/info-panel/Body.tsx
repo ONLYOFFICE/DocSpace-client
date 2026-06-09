@@ -32,7 +32,7 @@ import { observer } from "mobx-react";
 import { ScrollbarContext } from "@docspace/ui-kit/components/scrollbar";
 import type { TLogo } from "@docspace/ui-kit/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
-import type { TFolder } from "@docspace/shared/api/files/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
@@ -47,6 +47,7 @@ import History from "./views/History";
 import Members from "./views/Members";
 import { useMembers } from "./views/Members/useMembers";
 import RoomHeader from "./sub-components/RoomHeader";
+import FileHeader from "./sub-components/FileHeader";
 import ShareView from "./views/Share";
 import { NoItem, SeveralItems } from "./views/EmptyStates";
 
@@ -159,7 +160,7 @@ const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
   const room = selection as unknown as TRoom;
   const hasEditAccess = isRoom ? Boolean(room.security?.EditAccess) : false;
 
-  const showHeader = !isSeveralItems && !!selection && isRoom;
+  const showHeader = !isSeveralItems && !!selection;
 
   const renderContent = () => {
     if (isSeveralItems) return <SeveralItems count={selectedCount} />;
@@ -181,7 +182,7 @@ const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
       data-info-panel-scroll
       data-testid="info_panel_body"
     >
-      {showHeader ? (
+      {showHeader && isRoom ? (
         <RoomHeader
           selection={selection as TFolder}
           isMembersView={isMembersView}
@@ -190,6 +191,10 @@ const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
           onInvite={() => setInvitePanelVisible(true)}
           onUpdated={onTagsChanged}
         />
+      ) : null}
+
+      {showHeader && !isRoom ? (
+        <FileHeader selection={selection as TFile | TFolder} />
       ) : null}
 
       {renderContent()}

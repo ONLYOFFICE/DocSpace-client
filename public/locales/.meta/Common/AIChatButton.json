@@ -3,7 +3,7 @@
   "content": "AI Chat",
   "content_en_sha1_hash": "81cefbaa610fdd5ac7a58a071fcea75d7e9af3d6",
   "created_at": "2026-03-20T09:07:26.752Z",
-  "updated_at": "2026-06-03T11:46:06.916Z",
+  "updated_at": "2026-06-09T14:03:10.933Z",
   "comment": {
     "text": "This is the label for a button that opens the AI Chat panel. It appears as a short label on a floating button.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/ai-chat-panel/AiChatHeaderPanel.tsx",
-      "line_number": 58,
-      "context": "store.close();\n };\n \n return (\n <AiChatPanelHeader\n title={t(\"Common:AIChatButton\")}\n onClose={handleClose}\n isFullscreen={store.effectiveFullscreen}\n onToggleFullscreen={store.toggleFullscreen}\n isFullscreenToggleDisabled={store.isFullscreenToggleDisabled}\n />",
+      "line_number": 66,
+      "context": "store.close();\n };\n \n return (\n <AiChatPanelHeader\n title={t(\"Common:AIChatButton\")}\n onClose={handleClose}\n isFullscreen={store.effectiveFullscreen}\n onToggleFullscreen={\n isMobileOrTablet ? undefined : store.toggleFullscreen\n }",
       "module": "/packages/sdk"
     },
     {

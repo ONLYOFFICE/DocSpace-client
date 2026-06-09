@@ -40,6 +40,7 @@ import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import PluginStore from "SRC_DIR/store/PluginStore";
 import type TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
+import type AiRoomStore from "SRC_DIR/store/AiRoomStore";
 
 export type BodyProps = {
   selection: InfoPanelStore["infoPanelSelection"];
@@ -52,6 +53,7 @@ export type BodyProps = {
 
   enablePlugins: SettingsStore["enablePlugins"];
   isRecentFolder: TreeFoldersStore["isRecentFolder"];
+  selectedResultFileId?: AiRoomStore["selectedResultFileId"];
 
   infoPanelItemsList: PluginStore["infoPanelItemsList"];
 

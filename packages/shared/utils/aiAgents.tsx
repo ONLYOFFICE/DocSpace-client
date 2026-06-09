@@ -67,6 +67,7 @@ export type TAgentParams = {
   prompt?: string;
   providerId?: number;
   modelId?: string;
+  profileId?: string;
   mcpServers?: string[];
   mcpServersInitial?: string[];
   quota?: number;

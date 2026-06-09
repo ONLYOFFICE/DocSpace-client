@@ -70,6 +70,7 @@ import { FileOperationsContext } from "../../../../_contexts/FileOperationsConte
 import { RenameContext } from "../../../../_contexts/RenameContext";
 import { VersionHistoryContext } from "../../../../_contexts/VersionHistoryContext";
 import { ConvertContext } from "../../../../_contexts/ConvertContext";
+import { AskAIContext } from "../../../../_contexts/AskAIContext";
 import type { TFileItem, TFolderItem } from "../../../../_hooks/useItemList";
 import { generateFilesItemValue } from "../../../_utils";
 import { DragContext } from "../../../../_contexts/DragContext";
@@ -124,6 +125,7 @@ const Row = observer(
     const renameCtx = React.useContext(RenameContext);
     const onShowVersionHistory = React.useContext(VersionHistoryContext);
     const onConvert = React.useContext(ConvertContext);
+    const onAskAI = React.useContext(AskAIContext);
 
     const { getContextMenuModel } = useContextMenuModel({
       item: observableItem,
@@ -136,6 +138,7 @@ const Row = observer(
       onRestoreClick: fileOpsCtx?.restoreItem,
       onRenameClick: renameCtx?.renameItem,
       onShowVersionHistoryClick: onShowVersionHistory ?? undefined,
+      onAskAI: onAskAI ?? undefined,
     });
 
     const element = (

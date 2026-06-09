@@ -3,7 +3,7 @@
   "content": "Move to archive",
   "content_en_sha1_hash": "bc085e822ae67c9e26aba6df62730c436e6c09b2",
   "created_at": "2025-05-19T21:30:55.866Z",
-  "updated_at": "2026-06-09T09:43:10.935Z",
+  "updated_at": "2026-06-09T14:03:10.904Z",
   "comment": {
     "text": "Button label. This action moves the selected room or file to the archive.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 628,
+      "line_number": 680,
       "context": "(i) => i.security.Move,\n );\n return {\n id: \"option_archive\",\n key: \"archive\",\n label: t(\"Common:MoveToArchive\"),\n icon: RoomArchiveSvgUrl,\n onClick: () => {\n onArchiveSelectedClick?.(filesSelectionStore.selection);\n },\n disabled: !onArchiveSelectedClick || !canArchive,",
       "module": "/packages/sdk"
     },

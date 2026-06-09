@@ -1,0 +1,29 @@
+{
+  "key_path": "SubmenuAIChat",
+  "content": "AI Chat",
+  "content_en_sha1_hash": "81cefbaa610fdd5ac7a58a071fcea75d7e9af3d6",
+  "created_at": "2026-06-03T11:46:04.812Z",
+  "updated_at": "2026-06-03T11:48:09.134Z",
+  "comment": {
+    "text": "Submenu label in the Info Panel header used to access the AI Chat feature.",
+    "is_auto": true,
+    "updated_at": "2026-06-03T11:48:09.134Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/headerGeneral.tsx",
+      "line_number": 123,
+      "context": "isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\"),\n )\n .with(InfoPanelView.infoShare, () => t(\"Common:Share\"))\n .with(InfoPanelView.infoHistory, () => t(\"Common:SubmenuHistory\"))\n .with(InfoPanelView.infoDetails, () => t(\"Common:SubmenuDetails\"))\n .with(InfoPanelView.infoAIChat, () => t(\"InfoPanel:SubmenuAIChat\"))\n .otherwise(() => {\n const key = id.replace(\"info_plugin-\", \"\");\n return (\n infoPanelItemsList.find((item) => item.key === key)?.value.subMenu\n .name ?? id",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -75,6 +75,7 @@ const Header = ({
   isInfoPanelVisible = false,
   onToggleInfoPanel,
   headerOffset = 0,
+  aiChatButton,
   titleIcon = "",
   titleIconTooltip = "",
 }: HeaderProps) => {
@@ -305,6 +306,7 @@ const Header = ({
               onLogoClick={onBurgerClick ?? (() => {})}
               clearTrash={() => {}}
               showFolderInfo={() => {}}
+              aiChatButton={aiChatButton}
               isContextButtonVisible={isHeaderMenuVisible}
             />
           </div>

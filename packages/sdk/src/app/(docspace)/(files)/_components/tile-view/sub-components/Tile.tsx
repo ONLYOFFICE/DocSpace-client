@@ -75,6 +75,7 @@ import { FileOperationsContext } from "@/app/(docspace)/_contexts/FileOperations
 import { RenameContext } from "@/app/(docspace)/_contexts/RenameContext";
 import { VersionHistoryContext } from "@/app/(docspace)/_contexts/VersionHistoryContext";
 import { ConvertContext } from "@/app/(docspace)/_contexts/ConvertContext";
+import { AskAIContext } from "@/app/(docspace)/_contexts/AskAIContext";
 
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import type { TileProps } from "../TileView.types";
@@ -132,6 +133,7 @@ const Tile = ({
   const renameCtx = React.useContext(RenameContext);
   const onShowVersionHistory = React.useContext(VersionHistoryContext);
   const onConvert = React.useContext(ConvertContext);
+  const onAskAI = React.useContext(AskAIContext);
   const { getContextMenuModel } = useContextMenuModel({
     item: observableItem,
     onShareClick: onShareClick ?? undefined,
@@ -143,6 +145,7 @@ const Tile = ({
     onRestoreClick: fileOpsCtx?.restoreItem,
     onRenameClick: renameCtx?.renameItem,
     onShowVersionHistoryClick: onShowVersionHistory ?? undefined,
+    onAskAI: onAskAI ?? undefined,
   });
   const { downloadAction } = useDownloadActions();
   const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });

@@ -35,6 +35,7 @@
 
 import { useMemo, useCallback } from "react";
 import { useNavigate, LinkProps } from "react-router";
+import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import { isMobile } from "react-device-detect";
 
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
@@ -212,6 +213,9 @@ export const useOptions = (
   t: TTranslation,
 ) => {
   const navigate = useNavigate();
+
+  const { useProfilesStore } = useStores();
+  const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
 
   const isAIRoom =
     selectedFolder?.roomType === RoomsType.AIRoom ||
@@ -399,7 +403,7 @@ export const useOptions = (
         isKnowledgeTab,
         isResultsTab,
         isAIRoom,
-        aiReady,
+        aiReady || hasAiProfiles,
         standalone,
         isPortalAdmin,
       ),
@@ -407,6 +411,7 @@ export const useOptions = (
       type,
       access,
       security,
+      hasAiProfiles,
       isFolder,
       folderType,
       parentRoomType,

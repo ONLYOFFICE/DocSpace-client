@@ -280,6 +280,7 @@ const useEditorEvents = ({
     if (config?.errorMessage) docEditor?.showMessage?.(config.errorMessage);
 
     const connector = docEditor?.createConnector?.();
+    let provider: TAiProvider | undefined;
 
     if (connector && successAuth) {
       try {
@@ -289,7 +290,6 @@ const useEditorEvents = ({
 
         if (defaultPortalProvider) {
           const DEFAULT_MODEL = "gpt-5.2";
-          let provider: TAiProvider | undefined;
           let model = defaultPortalProvider.defaultModel || DEFAULT_MODEL;
 
           if (defaultPortalProvider.providerId === -1) {
@@ -311,6 +311,25 @@ const useEditorEvents = ({
               model = models[0]?.modelId || model;
             }
           }
+
+          const sendTools = (data?: unknown) => {
+            console.log("send");
+            window.parent?.postMessage({ type: "initedAiPlugin", data }, "*");
+          };
+
+          connector.executeMethod("AI", [{ type: "Tools" }], (data) => {
+            console.log("AI Tools data:", data);
+            if (
+              data &&
+              typeof data === "object" &&
+              "error" in data &&
+              data.error
+            ) {
+              connector.attachEvent("ai_onInit", sendTools);
+            } else {
+              window.parent?.postMessage({ type: "initedAiPlugin", data }, "*");
+            }
+          });
 
           if (provider) {
             const providerTitle = provider.title;
@@ -367,11 +386,50 @@ const useEditorEvents = ({
             connector.attachEvent("ai_onExternalFetch", (e: unknown) =>
               externalAIFetch(connector, e as TEditorAIEvent, providerId),
             );
+
           }
         }
+
       } catch (error) {
         console.error("Failed to initialize AI provider:", error);
       }
+    }
+
+    // Active whenever connector exists — does not require successAuth or a configured provider.
+    if (connector) {
+      const onParentMessage = (event: MessageEvent) => {
+        if (event.source !== window.parent) return;
+        const payload = event.data;
+        if (
+          !payload ||
+          typeof payload !== "object" ||
+          (payload as { type?: unknown }).type !== "callEditorTool"
+        )
+          return;
+
+        const { callId, name, arguments: args } = payload as {
+          callId?: string;
+          name?: string;
+          arguments?: Record<string, unknown>;
+        };
+        if (typeof name !== "string") return;
+
+        if (provider) {
+          connector.sendEvent("ai_onCallTool", { name, arguments: args ?? {} });
+          window.parent?.postMessage(
+            { type: "editorToolResult", callId, result: "" },
+            "*",
+          );
+        } else {
+          window.parent?.postMessage(
+            { type: "editorToolResult", callId, result: JSON.stringify({ error: "AI provider not configured" }) },
+            "*",
+          );
+        }
+      };
+      window.addEventListener("message", onParentMessage);
+      // Signal parent that this window is ready to receive callEditorTool messages.
+      window.parent?.postMessage({ type: "editorDocumentReady" }, "*");
     }
 
     // Do not remove: it's for Back button on Mobile App
@@ -1041,3 +1099,4 @@ const useEditorEvents = ({
 };
 
 export default useEditorEvents;
+

@@ -41,6 +41,7 @@ import { makeAutoObservable } from "mobx";
 import api from "@docspace/shared/api";
 import type { ICover } from "@docspace/ui-kit/components/room-logo-cover-dialog";
 import type { TCreatedBy } from "@docspace/shared/types";
+import type { RoomsType } from "@docspace/shared/enums";
 
 import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
 
@@ -60,6 +61,19 @@ export type TRoomTarget = {
   title: string;
 };
 
+/** Room data the invite panel needs to open for a single room. */
+export type TInviteTarget = {
+  roomId: number;
+  roomType: RoomsType | -1;
+  isPrivateRoom?: boolean;
+};
+
+/** Room data the change-owner dialog needs. */
+export type TChangeOwnerTarget = {
+  roomId: number;
+  roomOwnerId?: string;
+};
+
 class DialogsStore {
   // [[dialogName, visible]]
   dialogs = new Map<SDKDialogs, boolean>();
@@ -70,6 +84,8 @@ class DialogsStore {
   editingRoomData: TEditableRoom | null = null;
   archivingRoomData: TRoomTarget | null = null;
   deletingRoomData: TRoomTarget | null = null;
+  invitingRoomData: TInviteTarget | null = null;
+  changingOwnerRoomData: TChangeOwnerTarget | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -115,6 +131,26 @@ class DialogsStore {
   closeDeleteRoomDialog = () => {
     this.closeDialog(SDKDialogs.DeleteRoom);
     this.deletingRoomData = null;
+  };
+
+  openInviteDialog = (room: TInviteTarget) => {
+    this.invitingRoomData = room;
+    this.openDialog(SDKDialogs.Invite);
+  };
+
+  closeInviteDialog = () => {
+    this.closeDialog(SDKDialogs.Invite);
+    this.invitingRoomData = null;
+  };
+
+  openChangeOwnerDialog = (room: TChangeOwnerTarget) => {
+    this.changingOwnerRoomData = room;
+    this.openDialog(SDKDialogs.ChangeOwner);
+  };
+
+  closeChangeOwnerDialog = () => {
+    this.closeDialog(SDKDialogs.ChangeOwner);
+    this.changingOwnerRoomData = null;
   };
 
   setCovers = (covers: ICover[]) => {

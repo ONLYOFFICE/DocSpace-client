@@ -59,6 +59,7 @@ class InfoPanelStore {
   selection: TFile | TFolder | null = null;
   shareChanged: boolean = false;
   isPinnedSelection: boolean = false;
+  isMembersPanelUpdating: boolean = false;
 
   fileView: InfoPanelViewType = InfoPanelView.infoDetails;
 
@@ -103,6 +104,10 @@ class InfoPanelStore {
 
   setPinnedSelection = (pinned: boolean) => {
     this.isPinnedSelection = pinned;
+  };
+
+  setIsMembersPanelUpdating = (updating: boolean) => {
+    this.isMembersPanelUpdating = updating;
   };
 
   setView = (view: InfoPanelViewType) => {

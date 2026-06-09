@@ -90,6 +90,9 @@ import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
+import RoomDialogs from "@/app/(rooms)/_components/room-dialogs";
+import useRoomActions from "@/app/(rooms)/_hooks/useRoomActions";
+
 import CreateFileDialog from "../create-file-dialog";
 import DocsMainButton from "../main-button";
 import ConvertDialog from "../convert-dialog";
@@ -172,6 +175,14 @@ const DocsLayout = observer(
     const versionHistoryStore = useVersionHistoryStore();
     const docsUserStore = useDocsUserStore();
     const { sdkConfig } = useSDKConfig();
+
+    const { roomChanged } = useRoomActions();
+
+    const onInfoPanelRoomUpdated = React.useCallback(() => {
+      const sel = infoPanelStore.selection;
+      if (!sel || !("isRoom" in sel) || !sel.isRoom) return;
+      roomChanged(sel.id as number);
+    }, [infoPanelStore, roomChanged]);
 
     const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
     const { currentDeviceType } = useDeviceType();
@@ -493,7 +504,11 @@ const DocsLayout = observer(
                                   infoPanelHeaderContent={
                                     <DocsInfoPanelHeader />
                                   }
-                                  infoPanelBodyContent={<DocsInfoPanelBody />}
+                                  infoPanelBodyContent={
+                                    <DocsInfoPanelBody
+                                      onTagsChanged={onInfoPanelRoomUpdated}
+                                    />
+                                  }
                                   isInfoPanelVisible={infoPanelStore.isVisible}
                                   setIsInfoPanelVisible={(v: boolean) => {
                                     if (v) {
@@ -530,6 +545,7 @@ const DocsLayout = observer(
                                 )
                               }
                             />
+                            {isInRooms ? <RoomDialogs /> : null}
                             <ShareSelector />
                             <VersionHistoryPanel />
                             <CreateFileDialog

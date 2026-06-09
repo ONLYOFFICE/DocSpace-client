@@ -54,6 +54,9 @@ import {
 } from "./components/Article";
 import ArticleWrapper from "./components/ArticleWrapper";
 import NewArticle from "./components/NewArticle";
+import { SdkFrameProvider } from "./components/SdkFrameHost/SdkFrameContext";
+import SdkFrameHost from "./components/SdkFrameHost/SdkFrameHost";
+import sdkHostStyles from "./components/SdkFrameHost/SdkFrameHost.module.scss";
 
 const ClientArticle = React.memo(
   ({
@@ -230,7 +233,18 @@ const ClientContent = (props) => {
           forceNewArticle={isNewArticle}
         />
       )}
-      <Outlet />
+      {isNewArticle ? (
+        <SdkFrameProvider>
+          <div className={sdkHostStyles.contentCell}>
+            <SdkFrameHost />
+            <div className={sdkHostStyles.outletLayer}>
+              <Outlet />
+            </div>
+          </div>
+        </SdkFrameProvider>
+      ) : (
+        <Outlet />
+      )}
     </>
   );
 };

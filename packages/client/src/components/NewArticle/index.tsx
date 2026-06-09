@@ -85,7 +85,6 @@ const AI_FILES_SECTION_TO_ID: Record<string, string> = {
   recent: "ai-files-recent",
   favorites: "ai-files-favorites",
   trash: "ai-files-trash",
-  settings: "ai-files-settings",
 };
 
 const AI_FORMS_SECTION_TO_ID: Record<string, string> = {
@@ -107,7 +106,6 @@ const AI_ROOMS_SECTION_TO_ID: Record<string, string> = {
   favorites: "ai-rooms-favorites",
   archive: "ai-rooms-archive",
   trash: "ai-rooms-trash",
-  settings: "ai-rooms-settings",
 };
 
 type NewArticleProps = {
@@ -395,16 +393,6 @@ const NewArticle = ({
               icon: CatalogTrashReactSvgUrl,
               onClick: () => navigate("/ai-rooms?section=trash"),
             },
-            ...(isAdminOrOwner
-              ? [
-                  {
-                    id: "ai-rooms-settings",
-                    label: t("Common:Settings"),
-                    icon: CatalogSettingsReactSvgUrl,
-                    onClick: () => navigate("/ai-rooms?section=settings"),
-                  },
-                ]
-              : []),
           ]
         : undefined,
     };

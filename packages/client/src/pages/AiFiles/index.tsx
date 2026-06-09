@@ -31,10 +31,31 @@ import { useTranslation } from "react-i18next";
 
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 
-import SdkIframe from "SRC_DIR/components/SdkIframe";
+import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
 
 type AiFilesProps = {
   myFolderId?: number | null;
+};
+
+// Host `?section=` -> the SDK `DocsSection` value the personal-files frame
+// bridge understands (it routes internally via `navigateSection`, so the
+// iframe stays mounted instead of reloading on every section switch).
+const HOST_TO_SDK: Record<string, string> = {
+  "": "my-documents",
+  "shared-with-me": "shared-with-me",
+  recent: "recent",
+  favorites: "favorites",
+  trash: "trash",
+};
+
+// SDK `DocsSection` -> host `?section=`. `my-documents` maps to no section
+// param (keeps `/ai-files` URLs clean and matches the sidebar default).
+const SDK_TO_HOST: Record<string, string> = {
+  "my-documents": "",
+  "shared-with-me": "shared-with-me",
+  recent: "recent",
+  favorites: "favorites",
+  trash: "trash",
 };
 
 const getSrc = (
@@ -64,8 +85,6 @@ const getSrc = (
       return `/sdk/personal-files/shared-with-me${buildQuery({ search, id: folder })}`;
     case "trash":
       return `/sdk/personal-files/trash${buildQuery({ search, id: folder })}`;
-    case "settings":
-      return "/sdk/personal-files/settings";
     default:
       return `/sdk/personal-files${buildQuery({ search, id: folder, ...(parentIdParam ? { parentId: String(myFolderId) } : {}) })}`;
   }
@@ -76,45 +95,77 @@ const AiFiles = ({ myFolderId }: AiFilesProps) => {
   useDocumentTitle("Common:DashboardFilesTitle");
   const [searchParams, setSearchParams] = useSearchParams();
   const section = searchParams.get("section") ?? "";
-  const folder = searchParams.get("folder");
+  const lastSdkSectionRef = React.useRef<string | null>(null);
 
-  const prevSectionRef = React.useRef<string>(section);
-  const prevFolderRef = React.useRef<string | null>(folder);
-  const srcRef = React.useRef<string>(
-    getSrc(section, myFolderId, searchParams.get("search"), folder),
-  );
+  const searchParamsRef = React.useRef(searchParams);
+  searchParamsRef.current = searchParams;
+  const setSearchParamsRef = React.useRef(setSearchParams);
+  setSearchParamsRef.current = setSearchParams;
 
-  if (section !== prevSectionRef.current || folder !== prevFolderRef.current) {
-    prevSectionRef.current = section;
-    prevFolderRef.current = folder;
-    srcRef.current = getSrc(section, myFolderId, null, folder);
-  }
+  // Iframe -> parent: the SDK reports its section on every internal
+  // navigation. Mirror it into the host URL without touching `src`, so the
+  // iframe does NOT remount.
+  const handleSdkNavigate = React.useCallback((sdkSection: string) => {
+    lastSdkSectionRef.current = sdkSection;
+    const target = SDK_TO_HOST[sdkSection] ?? "";
+    setSearchParamsRef.current(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        if (target) next.set("section", target);
+        else next.delete("section");
+        // A section change resets the in-section search filter.
+        next.delete("search");
+        return next;
+      },
+      { replace: true },
+    );
+  }, []);
 
-  const handleFilterSearch = React.useCallback(
-    (value: string) => {
-      setSearchParams(
-        (prev) => {
-          const next = new URLSearchParams(prev);
-          if (value) {
-            next.set("search", value);
-          } else {
-            next.delete("search");
-          }
-          return next;
-        },
-        { replace: true },
+  const handleFilterSearch = React.useCallback((value: string) => {
+    setSearchParamsRef.current(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        if (value) {
+          next.set("search", value);
+        } else {
+          next.delete("search");
+        }
+        return next;
+      },
+      { replace: true },
+    );
+  }, []);
+
+  // The host owns the iframe and freezes `src` on first show, so it stays
+  // mounted across app/section switches. A direct deep link
+  // (`?section=&folder=&search=`) still loads the right folder/search.
+  const apiRef = useSdkFrame({
+    appId: "ai-files",
+    enabled: true,
+    title: t("Common:DashboardFilesTitle"),
+    getSrc: () => {
+      const sp = searchParamsRef.current;
+      return getSrc(
+        sp.get("section") ?? "",
+        myFolderId,
+        sp.get("search"),
+        sp.get("folder"),
       );
     },
-    [setSearchParams],
-  );
+    onNavigate: handleSdkNavigate,
+    onFilterSearch: handleFilterSearch,
+  });
 
-  return (
-    <SdkIframe
-      src={srcRef.current}
-      title={t("Common:DashboardFilesTitle")}
-      onFilterSearch={handleFilterSearch}
-    />
-  );
+  // Parent -> iframe: when the host section changes (sidebar click, deep
+  // link), tell the SDK to route internally rather than reloading the
+  // frame. Skip if the SDK just reported this exact section (echo).
+  const sdkSection = HOST_TO_SDK[section] ?? "my-documents";
+  React.useEffect(() => {
+    if (lastSdkSectionRef.current === sdkSection) return;
+    apiRef.current?.call("navigateSection", { section: sdkSection });
+  }, [sdkSection, apiRef]);
+
+  return null;
 };
 
 const AiFilesConnected = inject<TStore>(({ treeFoldersStore }) => ({

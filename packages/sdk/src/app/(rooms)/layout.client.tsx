@@ -24,25 +24,29 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useTranslation } from "react-i18next";
+"use client";
 
-import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
+import { useRoomsFrameBridge } from "./_hooks/useRoomsFrameBridge";
 
-import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
-
-const DocsCloudComponent = () => {
-  const { t } = useTranslation(["Common"]);
-  useDocumentTitle("Common:DocsCloud");
-
-  useSdkFrame({
-    appId: "docs-cloud",
-    enabled: true,
-    title: t("Common:DocsCloud"),
-    getSrc: () => "/sdk/docs-cloud",
-  });
-
+// Installs the rooms frame bridge once at the layout level so host-driven
+// `navigateSection` works for any (rooms) sub-route (rooms/archive/settings)
+// without re-mounting per-page client components. The server layout only
+// renders after its data fetch resolves, so the layout is "ready" at mount —
+// mirrors how the ai-agents / personal-files bridges pass `isReady: true`.
+const RoomsFrameBridgeHost = () => {
+  useRoomsFrameBridge(true);
   return null;
 };
 
-export const DocsCloud = DocsCloudComponent;
-export default DocsCloudComponent;
+export default function RoomsRootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <>
+      {children}
+      <RoomsFrameBridgeHost />
+    </>
+  );
+}

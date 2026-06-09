@@ -167,6 +167,7 @@ const AppsSidebar = ({
             activeItemId={activeId}
             defaultExpandedId={defaultExpandedId}
             iconOnly={!showText}
+            withAnimation
           />
 
           {/* Footer menu lives inside the scroll body so it scrolls with the

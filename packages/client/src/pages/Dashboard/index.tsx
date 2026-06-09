@@ -35,6 +35,7 @@ import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 
 import { useAppsCatalog, type AppId } from "SRC_DIR/helpers/apps-catalog";
+import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
 
 import { ModuleCard, type ModuleItem } from "./sub-components/ModuleCard";
 import { ProfileCard } from "./sub-components/ProfileCard";
@@ -72,6 +73,11 @@ const Dashboard = ({
   const { launchApp, dialogs } = useModuleLauncher({ activate, enable });
 
   const appsCatalog = useAppsCatalog();
+
+  // The dashboard renders its own content (no SDK iframe). Tell the
+  // persistent host to drop the previous app's frame so it doesn't linger
+  // behind the dashboard.
+  useSdkFrame({ appId: "dashboard", enabled: false });
 
   React.useEffect(() => {
     ensureAppsLoaded();

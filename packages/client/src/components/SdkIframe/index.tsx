@@ -26,6 +26,8 @@
 
 import React from "react";
 
+import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
+
 import styles from "./SdkIframe.module.scss";
 
 type SdkFrameEvent = { event?: string; data?: unknown };
@@ -47,6 +49,9 @@ type SdkIframeProps = {
   // section) can read them. Section-only consumers (ai-forms) ignore it.
   onNavigate?: (section: string, extra?: SdkNavigateExtra) => void;
   onFilterSearch?: (search: string) => void;
+  // Fired once the SDK app inside the iframe finishes bootstrapping (the
+  // `onAppReady` frame event). Optional — section-only consumers ignore it.
+  onAppReady?: () => void;
   apiRef?: React.MutableRefObject<SdkIframeHandle | null>;
 };
 
@@ -55,9 +60,15 @@ export const SdkIframe = ({
   title,
   onNavigate,
   onFilterSearch,
+  onAppReady,
   apiRef,
 }: SdkIframeProps) => {
   const iframeRef = React.useRef<HTMLIFrameElement | null>(null);
+  // While the SDK is routing to a new section we keep the *current*
+  // (previous) content on screen, dimmed — instead of letting it flash
+  // white. Cleared when the SDK reports the new section is ready
+  // (onNavigate / onAppReady).
+  const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
     if (!apiRef) return undefined;
@@ -65,6 +76,9 @@ export const SdkIframe = ({
       call: (methodName, data) => {
         const target = iframeRef.current?.contentWindow;
         if (!target) return;
+        // A section navigation is starting — dim the current content until
+        // the SDK reports it settled.
+        if (methodName === "navigateSection") setLoading(true);
         target.postMessage(
           JSON.stringify({ data: { methodName, data } }),
           "*",
@@ -77,7 +91,7 @@ export const SdkIframe = ({
   }, [apiRef]);
 
   React.useEffect(() => {
-    if (!onNavigate && !onFilterSearch) return undefined;
+    if (!onNavigate && !onFilterSearch && !onAppReady) return undefined;
 
     const handler = (e: MessageEvent) => {
       if (e.source !== iframeRef.current?.contentWindow) return;
@@ -92,6 +106,19 @@ export const SdkIframe = ({
 
       if (payload?.type !== "onEventReturn") return;
       const eventData = payload.eventReturnData;
+
+      // The SDK section finished bootstrapping. Complete the sidebar's
+      // "dim" progress animation by firing the same global event the
+      // regular client uses on load completion (Home/View dispatches it on
+      // `!isLoading`). Fires once per iframe mount, so app->app switches
+      // (which mount a fresh iframe) complete here; in-iframe section
+      // switches complete via the onNavigate branch below.
+      if (eventData?.event === "onAppReady") {
+        setLoading(false);
+        window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
+        onAppReady?.();
+        return;
+      }
 
       if (eventData?.event === "onFilterSearch" && onFilterSearch) {
         const data = eventData.data as { search?: string } | undefined;
@@ -110,18 +137,32 @@ export const SdkIframe = ({
       // detail). Forward the event anyway when `pathname` is present so
       // host wrappers that read pathname can react.
       if (section || data?.pathname) {
+        // A settled in-iframe section change == the destination finished
+        // loading: undim the content and complete the sidebar's progress
+        // animation (the iframe stays mounted across these, so onAppReady
+        // won't re-fire).
+        setLoading(false);
+        window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
         onNavigate?.(section, { pathname: data?.pathname, search: data?.search });
       }
     };
 
     window.addEventListener("message", handler);
     return () => window.removeEventListener("message", handler);
-  }, [onNavigate, onFilterSearch]);
+  }, [onNavigate, onFilterSearch, onAppReady]);
+
+  // Safety net: if the SDK never reports back (error / dropped message),
+  // undim after a few seconds so the content can't get stuck dimmed.
+  React.useEffect(() => {
+    if (!loading) return undefined;
+    const timer = window.setTimeout(() => setLoading(false), 5000);
+    return () => window.clearTimeout(timer);
+  }, [loading]);
 
   return (
     <iframe
       ref={iframeRef}
-      className={styles.iframe}
+      className={`${styles.iframe} ${loading ? styles.dimmed : ""}`}
       src={src}
       title={title}
     />

@@ -48,7 +48,6 @@ import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
 import { useNavigationStore } from "@/app/(docspace)/_store/NavigationStore";
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
-import CreateEditRoomDialog from "@/app/(rooms)/_components/create-edit-room-dialog";
 import MoveToArchiveDialog from "@/app/(rooms)/_components/move-to-archive-dialog";
 import DeleteRoomDialog from "@/app/(rooms)/_components/delete-room-dialog";
 
@@ -60,18 +59,6 @@ export const Dialogs = () => {
   const navigationStore = useNavigationStore();
   const activeItemsStore = useActiveItemsStore();
   const { openFolder } = useFolderActions({ t });
-
-  const onRoomEdited = React.useCallback(
-    async (roomId: number) => {
-      try {
-        const updatedRoom = await api.rooms.getRoomInfo(roomId);
-        navigationStore.setCurrentTitle(updatedRoom.title);
-      } catch {
-        // title refresh is best-effort; old title stays until next navigation
-      }
-    },
-    [navigationStore],
-  );
 
   const navigateToParent = React.useCallback(() => {
     const parent = navigationStore.navigationItems?.[0];
@@ -123,14 +110,6 @@ export const Dialogs = () => {
     <>
       {dialogsStore.isDialogOpen(SDKDialogs.DownloadDialog) && (
         <DownloadDialog />
-      )}
-      {dialogsStore.editingRoomData && (
-        <CreateEditRoomDialog
-          visible={dialogsStore.isDialogOpen(SDKDialogs.EditRoom)}
-          onClose={dialogsStore.closeEditRoomDialog}
-          room={dialogsStore.editingRoomData}
-          onRoomEdited={onRoomEdited}
-        />
       )}
       {dialogsStore.archivingRoomData && (
         <MoveToArchiveDialog

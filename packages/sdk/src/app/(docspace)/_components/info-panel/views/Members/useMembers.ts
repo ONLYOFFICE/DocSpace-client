@@ -51,6 +51,8 @@ import api from "@docspace/shared/api";
 import { Nullable } from "@docspace/shared/types";
 import { TOption } from "@docspace/ui-kit/components/combobox";
 
+import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
+
 import type {
   TInfoPanelMember,
   TInfoPanelMembers,
@@ -64,6 +66,7 @@ const PAGE_COUNT = 100;
 
 export const useMembers = ({ room, scrollToTop }: UseMembersProps) => {
   const { t } = useTranslation(["Common"]);
+  const infoPanelStore = useInfoPanelStore();
   const [searchValue, setSearchValue] = React.useState("");
   const [filter, setFilter] = React.useState({
     page: 0,
@@ -77,8 +80,8 @@ export const useMembers = ({ room, scrollToTop }: UseMembersProps) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isFirstLoading, setIsFirstLoading] = React.useState(false);
 
-  const [isMembersPanelUpdating, setIsMembersPanelUpdating] =
-    React.useState(false);
+  const isMembersPanelUpdating = infoPanelStore.isMembersPanelUpdating;
+  const setIsMembersPanelUpdating = infoPanelStore.setIsMembersPanelUpdating;
 
   const [primaryLink, setPrimaryLink] = React.useState<TFileLink | null>(null);
   const [additionalLinks, setAdditionalLinks] = React.useState<TFileLink[]>([]);

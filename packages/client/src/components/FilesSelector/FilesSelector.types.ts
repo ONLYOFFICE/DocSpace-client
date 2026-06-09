@@ -110,6 +110,8 @@ export type FilesSelectorProps = TSelectorHeader & {
 		destInfo: { private?: boolean; rootFolderId?: number; roomType?: number },
 	) => Promise<void>;
 	sourceIsPrivate?: boolean;
+	sourceInPrivateRoom?: boolean;
+	privateRoomId?: number | string;
 	clearActiveOperations: (
 		folderIds: string[] | number[],
 		fileIds: string[] | number[],

@@ -43,19 +43,24 @@ import {
   clearActiveKeyId,
   getActiveKeyId,
 } from "@docspace/shared/services/encryption/active-key-preference";
+import { unlockWithPassphrase } from "@docspace/shared/services/encryption/identity";
+import { InvalidPassphraseError } from "@docspace/shared/services/encryption/errors";
 import { deleteEncryptionKey } from "@docspace/shared/api/privacy";
+import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
-import { ConfirmationModal } from "../modals/ConfirmationModal";
+import { ConfirmationModal } from "@docspace/shared/dialogs/confirmation-modal";
+import { PassphraseModal } from "@docspace/shared/dialogs/passphrase-modal";
 
 import { getEncryptionErrorMessage } from "./getEncryptionErrorMessage";
 
 type Deps = {
   userId?: string;
   refreshKeysFromServer: () => Promise<void>;
+  onForgotPassphrase?: (target?: TEncryptionKeyPair) => void;
 };
 
 export type DeleteKeyFlow = {
-  request: (keyId: string) => void;
+  request: (keyData: TEncryptionKeyPair) => void;
   isPending: boolean;
   pendingId: string | null;
   modals: ReactNode;
@@ -64,47 +69,101 @@ export type DeleteKeyFlow = {
 export function useDeleteKeyFlow({
   userId,
   refreshKeysFromServer,
+  onForgotPassphrase,
 }: Deps): DeleteKeyFlow {
   const { t } = useTranslation(["Common"]);
   const [pendingId, setPendingId] = useState<string | null>(null);
-  const [confirming, setConfirming] = useState<string | null>(null);
+  const [confirming, setConfirming] = useState<TEncryptionKeyPair | null>(null);
+  const [verifying, setVerifying] = useState<TEncryptionKeyPair | null>(null);
+  const [passphraseError, setPassphraseError] = useState<string | null>(null);
   const [isPending, setIsPending] = useState(false);
 
-  const request = useCallback((keyId: string) => {
-    setConfirming(keyId);
+  const request = useCallback((keyData: TEncryptionKeyPair) => {
+    setConfirming(keyData);
   }, []);
 
-  const onConfirm = useCallback(async () => {
+  const onConfirm = useCallback(() => {
     if (!confirming) return;
-    setIsPending(true);
-    setPendingId(confirming);
+    setVerifying(confirming);
     setConfirming(null);
-    try {
-      await deleteEncryptionKey(confirming);
-      if (getActiveKeyId(userId) === confirming) {
-        clearActiveKeyId(userId);
-      }
-      SecretStorage.lock();
-      await refreshKeysFromServer();
-      toastr.success(t("Common:EncryptionKeyDeleted"));
-    } catch (error) {
-      toastr.error(getEncryptionErrorMessage(t, error));
-      console.error("Key deletion failed:", error);
-    } finally {
-      setIsPending(false);
-      setPendingId(null);
-    }
-  }, [confirming, userId, refreshKeysFromServer, t]);
+    setPassphraseError(null);
+  }, [confirming]);
 
-  const modals = confirming !== null ? (
-    <ConfirmationModal
-      visible
-      title={t("Common:DeleteKey")}
-      message={t("Common:DeleteKeyWarning")}
-      onConfirm={onConfirm}
-      onCancel={() => setConfirming(null)}
-    />
-  ) : null;
+  const onPassphraseSubmit = useCallback(
+    async (passphrase: string) => {
+      if (!verifying) return;
+      setIsPending(true);
+      setPendingId(verifying.id);
+      setPassphraseError(null);
+      try {
+        await unlockWithPassphrase(
+          {
+            publicKey: verifying.publicKey,
+            privateKeyEnc: verifying.privateKeyEnc,
+          },
+          passphrase,
+        );
+
+        await deleteEncryptionKey(verifying.id);
+        if (getActiveKeyId(userId) === verifying.id) {
+          clearActiveKeyId(userId);
+        }
+        SecretStorage.lock();
+        await refreshKeysFromServer();
+        toastr.success(t("Common:EncryptionKeyDeleted"));
+        setVerifying(null);
+      } catch (error) {
+        if (error instanceof InvalidPassphraseError) {
+          setPassphraseError(t("Common:InvalidPassphrase"));
+        } else {
+          toastr.error(getEncryptionErrorMessage(t, error));
+          console.error("Key deletion failed:", error);
+          setVerifying(null);
+        }
+      } finally {
+        setIsPending(false);
+        setPendingId(null);
+      }
+    },
+    [verifying, userId, refreshKeysFromServer, t],
+  );
+
+  const modals = (
+    <>
+      {confirming !== null ? (
+        <ConfirmationModal
+          visible
+          title={t("Common:DeleteKey")}
+          message={t("Common:DeleteKeyWarning")}
+          onConfirm={onConfirm}
+          onCancel={() => setConfirming(null)}
+        />
+      ) : null}
+      {verifying !== null ? (
+        <PassphraseModal
+          visible
+          isNew={false}
+          onSubmit={onPassphraseSubmit}
+          onCancel={() => {
+            setVerifying(null);
+            setPassphraseError(null);
+          }}
+          isLoading={isPending}
+          externalError={passphraseError}
+          onForgotPassphrase={
+            onForgotPassphrase
+              ? () => {
+                  const target = verifying;
+                  setVerifying(null);
+                  setPassphraseError(null);
+                  onForgotPassphrase(target ?? undefined);
+                }
+              : undefined
+          }
+        />
+      ) : null}
+    </>
+  );
 
   return { request, isPending, pendingId, modals };
 }

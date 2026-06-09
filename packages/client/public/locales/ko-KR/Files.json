@@ -99,7 +99,6 @@
   "PersonalContentRemovalNotice": "게스트가 {{sectionName}} 섹션에 액세스할 수 없으므로 이 섹션의 개인 파일 및 폴더는 <1>삭제</1>됩니다. 파일은 <1>30일</1> 동안 확인 및 다운로드할 수 있게 유지됩니다.",
   "PersonalFolderErasureWarning": "사용자 유형이 게스트로 변경되었습니다. 개인 파일이 30일 후에 삭제됩니다.",
   "RecentlyOpenedTooltip": "링크를 통해 최근 열렸습니다",
-  "ReEncryptingFiles": "파일 재암호화 중",
   "RemovedFromRecent": "최근 항목에서 제거됨",
   "Reorder": "재정리",
   "ReorderIndex": "재정리 작업은 인덱스에서 공간을 제거합니다. 파일은 오프셋을 사용하여 누락된 인덱스를 채우는 순서대로 다시 인덱싱됩니다.",

@@ -54,9 +54,6 @@ import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import { bootstrapEncryption } from "./fixtures/encryption-helpers";
 
-// The hardcoded user id surfaced by selfResolver in the people/self mock —
-// the same one bootstrapEncryption operates against. Bob (= "the logged-in
-// user in this test") inherits this id.
 const BOB_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
 const ALICE_ID = "11111111-1111-1111-1111-111111111111";
 const ROOM_ID = 9700;
@@ -87,24 +84,14 @@ test.describe("Private room — cross-user file exchange", () => {
     mockRequest,
     baseUrl,
   }) => {
-    // 1. Bob bootstraps his identity via the real UI. This generates a keypair
-    //    in the browser; the server-side mock captures Bob's serialized public
-    //    key, which we'll need to wrap the DEK for him below.
     const { keysHandle: bobKeysHandle, passphrase: bobPassphrase } =
       await bootstrapEncryption(page, mockRequest, baseUrl);
     const bobServerKey = bobKeysHandle.getKeys()[0];
     expect(bobServerKey).toBeDefined();
     const bobPublicKeyB64 = bobServerKey.publicKey;
 
-    // 2. Alice exists only on the server-side fixture — we generate her
-    //    identity in Node and never expose the private key to the browser.
-    //    The browser only ever sees Alice's public key via roomMemberKeys.
     const alice = await generateIdentityKeyPair();
 
-    // 3. Encrypt a real file with a fresh DEK, then wrap the DEK for BOTH
-    //    Alice (uploader) and Bob (recipient). The wrap header embeds Alice
-    //    as the sender — that's the value the client looks up in
-    //    roomMemberKeys at unwrap time.
     const plainBytes = new TextEncoder().encode(ORIGINAL_TEXT);
     const { encryptedBlob, dek } = await encryptFile(plainBytes, {
       fileName: "memo.txt",
@@ -121,9 +108,6 @@ test.describe("Private room — cross-user file exchange", () => {
     });
     const encryptedBytes = await blobToUint8Array(encryptedBlob);
 
-    // 4. Seed the room: one file, owned by Alice, with wraps for both members.
-    //    Also wire up /privacyroom/{roomId}/access to return both pubkeys —
-    //    this is the endpoint our Sprint 1 fix added to the download path.
     const filesHandle: { current: EncryptedFilesHandlerHandle | null } = {
       current: null,
     };
@@ -175,9 +159,6 @@ test.describe("Private room — cross-user file exchange", () => {
       },
     ]);
 
-    // 5. Bob navigates into the room. Files list comes from the mocked
-    //    encryptedFilesHandlers; Alice's memo should appear with its
-    //    server-side (obfuscated) title.
     await page.goto(
       `${baseUrl}/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`,
     );
@@ -192,12 +173,6 @@ test.describe("Private room — cross-user file exchange", () => {
     const row = page.getByTestId("table-row-0");
     await expect(row).toBeVisible({ timeout: 10000 });
 
-    // 6. Trigger download via context menu. The success criterion is layered:
-    //    (a) a Playwright download event fires (= browser received a blob URL,
-    //        meaning unwrap+decrypt completed without throwing), and
-    //    (b) the GET /privacyroom/{roomId}/access call is observed, proving
-    //        the new Sprint-1 code path is wired up (rather than the old one
-    //        that passed /files/{id}/access.userKeys as roomMemberKeys).
     const roomAccessPromise = page.waitForRequest(
       (req) =>
         req.method() === "GET" &&
@@ -210,12 +185,6 @@ test.describe("Private room — cross-user file exchange", () => {
     await expect(contextMenuButton).toBeVisible({ timeout: 5000 });
     await contextMenuButton.click();
 
-    // When a file has both download AND download-encrypted, ContextOptionsStore
-    // groups them under a "Download" parent (#option_download). The submenu
-    // ends up with two items: "Original format" (with decryption — what we
-    // want) and "Download without decryption". The "Original format" entry
-    // inherits its id from the parent (spread in ContextOptionsStore.js:2924),
-    // so we target it by role+name rather than by id.
     const downloadGroup = page.locator("#option_download");
     await expect(downloadGroup).toBeVisible({ timeout: 5000 });
     await downloadGroup.hover();
@@ -227,11 +196,6 @@ test.describe("Private room — cross-user file exchange", () => {
     await expect(downloadDecrypt).toBeVisible({ timeout: 5000 });
     await downloadDecrypt.click();
 
-    // Navigation between /profile/keys-management and the room route triggers
-    // the visibilitychange auto-lock, so the cached identity is gone by the
-    // time download starts. Re-unlock via the prompt the app shows. (If the
-    // cache happened to survive in a future change, the dialog won't appear
-    // and we just skip — the download will fire on its own.)
     const passphrasePrompt = page.getByRole("dialog").filter({
       hasText: "Enter passphrase",
     });
@@ -241,23 +205,16 @@ test.describe("Private room — cross-user file exchange", () => {
         .locator('input[name="passphrase"], #passphrase input')
         .first();
       await passphraseField.fill(bobPassphrase);
-      // PassphraseDialog uses "Confirm" for the unlock flow (isNewPassphrase=false);
-      // PassphraseModal (key generation) uses "Continue".
       await passphrasePrompt
         .getByRole("button", { name: "Confirm" })
         .click();
-    } catch {
-      // Cache was still valid — nothing to do.
-    }
+    } catch {}
 
     const roomAccessRequest = await roomAccessPromise;
     expect(roomAccessRequest.method()).toBe("GET");
 
     const download = await downloadPromise;
 
-    // 7. Read the downloaded bytes and verify they match Alice's plaintext.
-    //    This proves end-to-end: real wraps in the mock → real download URL
-    //    → real client-side unwrap+decrypt → original bytes.
     const downloadPath = await download.path();
     expect(downloadPath).toBeTruthy();
     const fs = await import("node:fs/promises");

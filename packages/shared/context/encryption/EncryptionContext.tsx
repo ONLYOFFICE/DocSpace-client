@@ -49,6 +49,8 @@ import {
   SecretStorage,
   registerUnlockHandler,
   unregisterUnlockHandler,
+  registerAutoLockSuspender,
+  unregisterAutoLockSuspender,
 } from "../../services/encryption/secret-storage";
 import {
   getAutoLockTimeoutSeconds,
@@ -254,6 +256,13 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       unregisterUnlockHandler();
     };
   }, [requireIdentity]);
+
+  useEffect(() => {
+    registerAutoLockSuspender(suspendAutoLock);
+    return () => {
+      unregisterAutoLockSuspender();
+    };
+  }, [suspendAutoLock]);
 
   useEffect(() => {
     if (typeof document === "undefined") return undefined;

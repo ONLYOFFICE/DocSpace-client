@@ -3,7 +3,7 @@
   "content": "Repeat invitation",
   "content_en_sha1_hash": "478aa7782da483f4ed5158c15cf5ef9cae159576",
   "created_at": "2025-05-19T21:30:47.863Z",
-  "updated_at": "2026-05-24T17:27:49.213Z",
+  "updated_at": "2026-06-09T11:32:15.353Z",
   "comment": {
     "text": "This is the tooltip text for an icon button. It appears when a user hovers over the button to resend an invitation to a DocSpace member.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_components/members/PrivateMemberUser.tsx",
+      "line_number": 240,
+      "context": "<IconButton\n iconName={EmailPlusSvgUrl}\n size={16}\n isClickable\n onClick={onRepeatInvitation}\n title={t(\"Common:RepeatInvitation\")}\n data-testid=\"member_repeat_invitation_button\"\n />\n ) : null}\n {/* Role combobox — shown for all non-owner members. */}\n {selectedRole && !isOwner ? (",
+      "module": "/packages/sdk"
+    },
     {
       "file_path": "/packages/shared/components/share/sub-components/User.tsx",
       "line_number": 168,

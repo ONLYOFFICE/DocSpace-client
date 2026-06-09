@@ -41,6 +41,8 @@ import {
   forgetEncryptedFilename,
   clearEncryptedFilenameCache,
   subscribeFilenameCache,
+  resolveDisplayTitle,
+  getFilenameCacheVersion,
 } from "../filename-cache";
 
 // Vitest's jsdom environment provides a real sessionStorage. We clear it
@@ -230,6 +232,61 @@ describe("filenameCache", () => {
         throw new Error("SecurityError");
       });
       expect(() => clearEncryptedFilenameCache()).not.toThrow();
+    });
+  });
+
+  describe("resolveDisplayTitle", () => {
+    it("returns the raw title for non-encrypted files", () => {
+      rememberEncryptedFilename(1, "real.docx");
+      expect(
+        resolveDisplayTitle({ id: 1, title: "server.docx", encrypted: false }),
+      ).toBe("server.docx");
+    });
+
+    it("returns the cached name for encrypted files with a cache hit", () => {
+      rememberEncryptedFilename(1, "Q4-Report.docx");
+      expect(
+        resolveDisplayTitle({
+          id: 1,
+          title: "obfuscated-uuid.docx",
+          encrypted: true,
+        }),
+      ).toBe("Q4-Report.docx");
+    });
+
+    it("falls back to the raw title for encrypted files on cache miss", () => {
+      expect(
+        resolveDisplayTitle({
+          id: 999,
+          title: "obfuscated-uuid.docx",
+          encrypted: true,
+        }),
+      ).toBe("obfuscated-uuid.docx");
+    });
+
+    it("falls back to the raw title when encrypted but no id", () => {
+      expect(
+        resolveDisplayTitle({ title: "obfuscated.docx", encrypted: true }),
+      ).toBe("obfuscated.docx");
+    });
+
+    it("handles null / undefined / empty inputs gracefully", () => {
+      expect(resolveDisplayTitle(null)).toBe("");
+      expect(resolveDisplayTitle(undefined)).toBe("");
+      expect(resolveDisplayTitle({})).toBe("");
+    });
+  });
+
+  describe("getFilenameCacheVersion", () => {
+    it("increments on every cache write", () => {
+      const before = getFilenameCacheVersion();
+      rememberEncryptedFilename(1, "a.txt");
+      const afterFirst = getFilenameCacheVersion();
+      rememberEncryptedFilename(2, "b.txt");
+      const afterSecond = getFilenameCacheVersion();
+
+      expect(afterFirst).toBeGreaterThan(before);
+      expect(afterSecond).toBeGreaterThan(afterFirst);
     });
   });
 

@@ -39,6 +39,7 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { isMobile } from "@docspace/shared/utils";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 import { Text } from "@docspace/ui-kit/components/text";
 import { FileType, FolderType } from "@docspace/shared/enums";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
@@ -48,6 +49,7 @@ import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
 import { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
 
@@ -192,6 +194,11 @@ const Details = ({
   const badgeUrl =
     "external" in selection ? getRoomBadgeUrl(selection, 24) : undefined;
 
+  const badgeIconColor =
+    "private" in selection && selection.private === true
+      ? globalColors.lightStatusPositive
+      : undefined;
+
   const isLoadedRoomIcon =
     "logo" in selection && !!(selection.logo?.cover || selection.logo?.large);
 
@@ -216,7 +223,11 @@ const Details = ({
     selection.isRoom;
 
   const color = "logo" in selection ? selection.logo?.color : undefined;
-  const title = "title" in selection ? selection.title : "";
+  const resolvedTitle = useResolvedFileTitle(
+    selection as { id?: number | string; title?: string; encrypted?: boolean },
+  );
+  const title =
+    "title" in selection ? resolvedTitle || selection.title : "";
 
   return (
     <>
@@ -285,6 +296,7 @@ const Details = ({
             dropDownManualX={isMobile() ? "-30px" : "-10px"}
             onChangeFile={onChangeFileContext}
             badgeUrl={badgeUrl ?? undefined}
+            badgeIconColor={badgeIconColor}
             tooltipContent={tooltipContent ?? undefined}
             tooltipId="info-panel-details_icon-tooltip"
             // When EditRoom is true, RoomIcon hides the badge in favour of the edit affordance.

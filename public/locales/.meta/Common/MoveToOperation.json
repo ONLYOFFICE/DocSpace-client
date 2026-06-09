@@ -3,7 +3,7 @@
   "content": "Moving",
   "content_en_sha1_hash": "65cd4dd8114610f7bacc1f81bb9dd01a137f162f",
   "created_at": "2025-05-19T21:30:46.650Z",
-  "updated_at": "2026-06-03T09:30:05.047Z",
+  "updated_at": "2026-06-09T09:43:10.859Z",
   "comment": {
     "text": "This is a short label indicating an ongoing \"move\" operation. It appears in a toast message or progress indicator when files or folders are being moved.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-list/index.tsx",
-      "line_number": 269,
+      "line_number": 324,
       "context": "async (ids: number[], name?: string) => {\n if (!ids.length) return;\n activeItemsStore.addActiveItems([], ids);\n const opId = operationsStore.startOperation(\n \"move\",\n t(\"Common:MoveToOperation\"),\n );\n let opAlert = false;\n try {\n const tree = await api.files.getFoldersTree();\n const roomsFolderId = (",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-list/index.tsx",
-      "line_number": 269,
+      "line_number": 324,
       "context": "async (ids: number[], name?: string) => {\n if (!ids.length) return;\n activeItemsStore.addActiveItems([], ids);\n const opId = operationsStore.startOperation(\n \"move\",\n t(\"Common:MoveToOperation\"),\n );\n let opAlert = false;\n try {\n const tree = await api.files.getFoldersTree();\n const roomsFolderId = (",
       "module": "/packages/sdk"
     }

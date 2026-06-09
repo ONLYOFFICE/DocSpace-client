@@ -56,7 +56,9 @@ import type {
 import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import WarningComponent from "@docspace/ui-kit/components/navigation/sub-components/WarningComponent";
+import EmptyPrivateRoomView from "@docspace/shared/components/empty-views/empty-private-room";
 
 import { SectionWrapper } from "@/app/(docspace)/_components/section";
 import Header from "@/app/(docspace)/_components/header";
@@ -118,7 +120,6 @@ import { useDocsSettingsStore } from "../../_store/DocsSettingsStore";
 import { useDocsUserStore } from "../../_store/DocsUserStore";
 import { useAiChatStore } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
 import { useStores } from "@docspace/ui-kit/ai-agent/providers";
-import { toastr } from "@docspace/ui-kit/components/toast";
 import type { SelectorMode } from "../../_hooks/useFileOperations";
 import { useDocsFrameBridge } from "../../_hooks/useDocsFrameBridge";
 import { usePanelExclusivity } from "../../_hooks/usePanelExclusivity";
@@ -134,6 +135,13 @@ import useDragActions from "../../_hooks/useDragActions";
 import { useDragStore } from "../../_store/DragStore";
 import { DragContext } from "@/app/(docspace)/_contexts/DragContext";
 import DragTooltip from "../drag-tooltip";
+
+import {
+  PRIVATE_FILE_CONTEXT_OPTIONS,
+  PRIVATE_FILE_CONTEXT_OPTIONS_NO_KEYS,
+  PRIVATE_FOLDER_CONTEXT_OPTIONS,
+  PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS,
+} from "../../_constants/private-context-options";
 
 import {
   AiChatTrigger,
@@ -155,11 +163,28 @@ type DocsLayoutProps = {
   filesSettings: TFilesSettings;
   portalSettings: TSettings;
   filesFilter: string;
-  /**
-   * Temporary flag: hide "Add to favorites" in file/folder context menus.
-   * Used for rooms internals and trash.
-   */
+  /** Hide "Add to favorites" in context menus (rooms internals, trash). */
   withoutFavorite?: boolean;
+  infoPanelHeader?: React.ReactNode;
+  infoPanelBody?: React.ReactNode;
+  /**
+   * Enables private-room semantics: slim main-button (folder + upload),
+   * no quick-actions, filtered context menu, encrypted empty-view, drag-drop
+   * unblocked for rooms. Caller still owns `uploadFilesToFolder`.
+   */
+  isPrivate?: boolean;
+  /**
+   * When true the room is archived (read-only). Narrows the context-menu
+   * to the archive whitelist and hides all upload/create actions.
+   * Only meaningful when `isPrivate` is also true.
+   */
+  isArchive?: boolean;
+  /** Override the upload pipeline (private rooms swap in encrypted upload). */
+  uploadFilesToFolder?: (files: FileList | File[]) => Promise<void>;
+  /** Root-room id for HPKE-Auth unwrap of encrypted previews. */
+  currentRoomId?: number | string | null;
+  /** Whether the current user has loaded their E2EE key pair. */
+  hasEncryptionKeys?: boolean;
 };
 
 const getSubmitLabel = (mode: SelectorMode, t: (key: string) => string) => {
@@ -179,6 +204,13 @@ const DocsLayout = observer(
     portalSettings,
     filesFilter,
     withoutFavorite,
+    infoPanelHeader,
+    infoPanelBody,
+    isPrivate,
+    isArchive,
+    uploadFilesToFolder: uploadFilesToFolderOverride,
+    currentRoomId,
+    hasEncryptionKeys,
   }: DocsLayoutProps) => {
     const { t } = useTranslation(["Common"]);
     const { isEmptyList } = useSettingsStore();
@@ -197,12 +229,16 @@ const DocsLayout = observer(
       rootFolderType === FolderType.Rooms ||
       rootFolderType === FolderType.Archive;
     const isCanCreate = !!current.security?.Create;
+    // Archived private rooms are read-only; never show the action button.
     const isActionButtonEnabled =
       (isMyDocuments || isInRooms) &&
       !sdkConfig?.disableActionButton &&
-      isCanCreate;
+      isCanCreate &&
+      !(isPrivate && isArchive);
 
-    const docsActions = useDocsActions();
+    const docsActions = useDocsActions({
+      uploadFilesToFolderOverride,
+    });
     const {
       uploadFilesToFolder,
       openCreateDialog,
@@ -229,13 +265,61 @@ const DocsLayout = observer(
     // keep them mutually exclusive: opening one closes the other.
     usePanelExclusivity();
 
-    const { desktopModel, quickActionItems } = useDocsMenuModels({
+    const {
+      desktopModel: defaultDesktopModel,
+      quickActionItems: defaultQuickActionItems,
+      privateQuickActionItems,
+    } = useDocsMenuModels({
       openCreateDialog,
       onUploadFiles,
       onUploadFolder,
     });
 
-    useDocsFrameBridge({ isReady: true, uploadFilesToFolder });
+    const desktopModel = React.useMemo(() => {
+      if (!isPrivate) return defaultDesktopModel;
+      const allowed = new Set(["new-folder", "separator-1", "upload-files"]);
+      return defaultDesktopModel.filter((item) => allowed.has(String(item.key)));
+    }, [isPrivate, defaultDesktopModel]);
+    // Private rooms swap the document/PDF tiles for the encrypted-room set
+    // (new folder + upload). Archived private rooms are read-only, so the
+    // banner is hidden upstream via `isActionButtonEnabled`.
+    const quickActionItems = isPrivate
+      ? privateQuickActionItems
+      : defaultQuickActionItems;
+
+    // Archived private rooms get the narrower read-only whitelist; active
+    // private rooms use the full whitelist; non-private rooms have no filter.
+    const allowedContextOptions = isPrivate
+      ? isArchive
+        ? PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS
+        : hasEncryptionKeys
+          ? PRIVATE_FILE_CONTEXT_OPTIONS
+          : PRIVATE_FILE_CONTEXT_OPTIONS_NO_KEYS
+      : undefined;
+    // Archive folders use the same read-only whitelist as files.
+    const allowedFolderContextOptions = isPrivate
+      ? isArchive
+        ? PRIVATE_ARCHIVE_FILE_CONTEXT_OPTIONS
+        : PRIVATE_FOLDER_CONTEXT_OPTIONS
+      : undefined;
+
+    const handleCreateFolder = React.useCallback(
+      () => openCreateDialog("folder"),
+      [openCreateDialog],
+    );
+
+    const emptyView = React.useMemo(() => {
+      if (!isPrivate) return undefined;
+      return (
+        <EmptyPrivateRoomView
+          canCreate={isActionButtonEnabled}
+          onCreateFolder={handleCreateFolder}
+          onUploadFiles={onUploadFiles}
+        />
+      );
+    }, [isPrivate, isActionButtonEnabled, handleCreateFolder, onUploadFiles]);
+
+    useDocsFrameBridge({ isReady: true, uploadFilesToFolder, enabled: !isPrivate });
 
     const uploadStore = useUploadStore();
 
@@ -255,6 +339,7 @@ const DocsLayout = observer(
       foldersTree,
       selectorInitData,
       disabledItems,
+      pendingHasEncrypted,
       operationProgress,
       trackOperation,
       requestCopy,
@@ -271,6 +356,14 @@ const DocsLayout = observer(
       closeConflictDialog,
       confirmConflict,
     } = useFileOperations();
+
+    // Show the encrypted-transfer warning when move/copy is in progress from a
+    // private room and at least one pending item is an encrypted file.
+    // Matches the reference: packages/client/src/components/FilesSelector ~286.
+    const showEncryptedTransferBanner =
+      !!(selectorMode === "copy" || selectorMode === "move") &&
+      pendingHasEncrypted &&
+      !!isPrivate;
 
     const {
       isTrash,
@@ -297,9 +390,20 @@ const DocsLayout = observer(
       [requestDeleteItem, requestDelete, requestEmptyTrash],
     );
 
+    const guardedRename = React.useCallback(
+      (item: TFileItem | TFolderItem) => {
+        if (isPrivate && !item.isFolder && (item as TFileItem).encrypted) {
+          toastr.info(t("Common:PrivateRoomRenameNotSupported"));
+          return;
+        }
+        requestRename(item);
+      },
+      [requestRename, isPrivate, t],
+    );
+
     const renameHandler = React.useMemo(
-      () => ({ renameItem: requestRename }),
-      [requestRename],
+      () => ({ renameItem: guardedRename }),
+      [guardedRename],
     );
 
     const fileOperationsHandler = React.useMemo(
@@ -369,13 +473,17 @@ const DocsLayout = observer(
 
     const openFileHandler = React.useCallback(
       (file: TFileItem, preview?: boolean) => {
+        if (isPrivate && file.encrypted) {
+          toastr.info(t("Common:PrivateRoomEditorNotSupported"));
+          return;
+        }
         if (!preview && file.viewAccessibility?.MustConvert) {
           requestConvert(file);
           return;
         }
         openFileInEditor(file, preview);
       },
-      [openFileInEditor, requestConvert],
+      [openFileInEditor, requestConvert, isPrivate, t],
     );
     const shareHandler = React.useCallback(
       (item: TFileItem | TFolderItem) => {
@@ -451,7 +559,7 @@ const DocsLayout = observer(
       onOpenFile: (item) => {
         if (!item.isFolder) openFileHandler(item as TFileItem);
       },
-      onRenameItem: requestRename,
+      onRenameItem: guardedRename,
       onDeleteItems: requestDelete,
       onCreateFile: openCreateDialog,
       onUploadFiles,
@@ -481,7 +589,10 @@ const DocsLayout = observer(
                             >
                               <DropZone
                                 onFilesDropped={uploadFilesToFolder}
-                                disabled={!isMyDocuments}
+                                disabled={
+                                  (!isMyDocuments && !isPrivate) ||
+                                  (isPrivate && !!isArchive)
+                                }
                                 currentFolderTitle={current.title}
                                 canCreate={isCanCreate}
                               >
@@ -562,12 +673,23 @@ const DocsLayout = observer(
                                           infoPanelStore.isVisible ||
                                           isAiChatPanelVisible
                                         }
+                                        allowedContextOptions={
+                                          allowedContextOptions
+                                        }
+                                        allowedFolderContextOptions={
+                                          allowedFolderContextOptions
+                                        }
+                                        emptyView={emptyView}
+                                        isPrivate={isPrivate}
+                                        hasEncryptionKeys={hasEncryptionKeys}
                                       />
                                     }
                                     infoPanelHeaderContent={
-                                      <DocsInfoPanelHeader />
+                                      infoPanelHeader ?? <DocsInfoPanelHeader />
                                     }
-                                    infoPanelBodyContent={<DocsInfoPanelBody />}
+                                    infoPanelBodyContent={
+                                      infoPanelBody ?? <DocsInfoPanelBody />
+                                    }
                                     isInfoPanelVisible={
                                       infoPanelStore.isVisible
                                     }
@@ -596,6 +718,7 @@ const DocsLayout = observer(
                                   <SelectionArea />
                                   <FilesMediaViewer
                                     filesSettings={filesSettings}
+                                    currentRoomId={currentRoomId}
                                   />
                                   <DeviceTypeObserver />
                                   <Dialogs />
@@ -696,7 +819,26 @@ const DocsLayout = observer(
                                   currentFooterInputValue=""
                                   footerCheckboxLabel=""
                                   descriptionText=""
+                                  withInfoBar={showEncryptedTransferBanner}
+                                  infoBarData={
+                                    showEncryptedTransferBanner
+                                      ? {
+                                          title: t(
+                                            "Common:EncryptedTransferBannerTitle",
+                                          ),
+                                          description: t(
+                                            "Common:EncryptedTransferBannerDescription",
+                                          ),
+                                        }
+                                      : undefined
+                                  }
                                   disabledItems={disabledItems}
+                                  isRoomDisabled={
+                                    !isPrivate
+                                      ? (room: FolderDtoInteger) =>
+                                          room?.private === true
+                                      : undefined
+                                  }
                                   getFilesArchiveError={() => ""}
                                   getIsDisabled={(
                                     isFirstLoad: boolean,
@@ -812,4 +954,3 @@ const DocsLayout = observer(
 );
 
 export default DocsLayout;
-

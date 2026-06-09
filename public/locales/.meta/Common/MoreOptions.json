@@ -3,7 +3,7 @@
   "content": "More options",
   "content_en_sha1_hash": "86c0a35ec8834c720d47b19935543c81b4d7c9c0",
   "created_at": "2025-12-15T14:02:13.980Z",
-  "updated_at": "2026-06-03T11:46:06.890Z",
+  "updated_at": "2026-06-09T11:32:15.338Z",
   "comment": {
     "text": "This is a button label that, when clicked, reveals additional options or actions within a menu.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2965,
+      "line_number": 2970,
       "context": "];\n \n const menuGroupsConfig = [\n {\n groupKey: \"more-options\",\n groupLabel: t(\"Common:MoreOptions\"),\n groupIcon: DotsHorizontalUrl,\n itemKeys: moreOptionsItemKeys,\n needsGrouping: true,\n minItemsCount,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2965,
+      "line_number": 2970,
       "context": "];\n \n const menuGroupsConfig = [\n {\n groupKey: \"more-options\",\n groupLabel: t(\"Common:MoreOptions\"),\n groupIcon: DotsHorizontalUrl,\n itemKeys: moreOptionsItemKeys,\n needsGrouping: true,\n minItemsCount,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2965,
+      "line_number": 2970,
       "context": "];\n \n const menuGroupsConfig = [\n {\n groupKey: \"more-options\",\n groupLabel: t(\"Common:MoreOptions\"),\n groupIcon: DotsHorizontalUrl,\n itemKeys: moreOptionsItemKeys,\n needsGrouping: true,\n minItemsCount,\n },",
       "module": "/packages/client"
     },
@@ -37,13 +37,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 853,
+      "line_number": 911,
       "context": "if (hasVersionHistory && hasShowInfo) {\n favoritesGroup.push({\n id: \"option_more-options\",\n key: \"more-options\",\n label: t(\"Common:MoreOptions\"),\n icon: DotsHorizontalReactSvgUrl,\n items: [\n getShowVersionHistoryItem(item as TFileItem),\n getShowInfoItem(item!),\n ],",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 271,
+      "line_number": 290,
       "context": "disabled: !room.security?.EditAccess,\n },\n {\n id: \"option_more-options\",\n key: \"more-options\",\n label: t(\"Common:MoreOptions\"),\n icon: MoreOptionsReactSvgUrl,\n items: moreOptionsItems,\n },\n ];",
       "module": "/packages/sdk"
     }

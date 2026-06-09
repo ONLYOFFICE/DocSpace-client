@@ -52,6 +52,8 @@ export type TUploadItem = {
   percent: number;
   status: TUploadItemStatus;
   error?: string;
+  /** Phase label shown in the upload panel row (e.g. "Encrypting"). */
+  label?: string;
   abortController: AbortController;
 };
 
@@ -123,6 +125,17 @@ class UploadStore {
     const item = this.items.find((i) => i.uniqueId === uniqueId);
     if (item) {
       item.status = "cancelled";
+    }
+  };
+
+  /**
+   * Set (or clear) a transient phase label for an item (e.g. "Encrypting").
+   * Pass `undefined` or an empty string to clear the label.
+   */
+  setItemLabel = (uniqueId: string, label: string | undefined) => {
+    const item = this.items.find((i) => i.uniqueId === uniqueId);
+    if (item) {
+      item.label = label || undefined;
     }
   };
 

@@ -563,5 +563,119 @@ export const encryptedFilesHandlers = (
         });
       },
     ),
+
+    http.post(
+      `${apiBase}/files/:folderId(\\d+)/session/:sessionId`,
+      async ({ params, request }) => {
+        const session = sessions.get(String(params.sessionId));
+        if (!session) return errorResponse(404, "session not found");
+
+        const fd = await request.formData();
+        const filePart = fd.get("file");
+        const chunkBytes =
+          filePart instanceof Blob
+            ? new Uint8Array(await filePart.arrayBuffer())
+            : new Uint8Array();
+        session.chunks.push(chunkBytes);
+        const totalUploaded = session.chunks.reduce(
+          (acc, c) => acc + c.byteLength,
+          0,
+        );
+        requests.push({
+          method: "POST",
+          url: new URL(request.url).pathname,
+          body: { chunkBytes: chunkBytes.byteLength },
+        });
+
+        const isFinal = totalUploaded >= session.fileSize;
+        if (isFinal && !session.completed) {
+          session.completed = true;
+          const id = nextFileId++;
+          session.resultFileId = id;
+          const merged = new Uint8Array(totalUploaded);
+          let offset = 0;
+          for (const c of session.chunks) {
+            merged.set(c, offset);
+            offset += c.byteLength;
+          }
+          files.set(id, {
+            id,
+            title: session.fileName,
+            serverTitle: session.fileName,
+            size: session.fileSize,
+            encrypted: session.encrypted,
+            fileKeys: [],
+            bytes: merged,
+          });
+          return okResponse({
+            success: true,
+            data: buildFileDto(
+              files.get(id) as EncryptedFileRecord,
+              session.folderId,
+              ownerId,
+              port,
+            ),
+          });
+        }
+
+        return okResponse({
+          success: true,
+          data: {
+            id: session.id,
+            bytes_total: session.fileSize,
+            bytes_uploaded: totalUploaded,
+          },
+        });
+      },
+    ),
+
+    http.put(
+      `${apiBase}/files/:folderId(\\d+)/session/:sessionId/finalize`,
+      async ({ params, request }) => {
+        const session = sessions.get(String(params.sessionId));
+        if (!session) return errorResponse(404, "session not found");
+
+        requests.push({
+          method: "PUT",
+          url: new URL(request.url).pathname,
+          body: {},
+        });
+
+        if (!session.completed) {
+          const totalUploaded = session.chunks.reduce(
+            (acc, c) => acc + c.byteLength,
+            0,
+          );
+          session.completed = true;
+          const id = nextFileId++;
+          session.resultFileId = id;
+          const merged = new Uint8Array(totalUploaded);
+          let offset = 0;
+          for (const c of session.chunks) {
+            merged.set(c, offset);
+            offset += c.byteLength;
+          }
+          files.set(id, {
+            id,
+            title: session.fileName,
+            serverTitle: session.fileName,
+            size: session.fileSize,
+            encrypted: session.encrypted,
+            fileKeys: [],
+            bytes: merged,
+          });
+        }
+
+        return okResponse({
+          success: true,
+          data: buildFileDto(
+            files.get(session.resultFileId as number) as EncryptedFileRecord,
+            session.folderId,
+            ownerId,
+            port,
+          ),
+        });
+      },
+    ),
   ];
 };

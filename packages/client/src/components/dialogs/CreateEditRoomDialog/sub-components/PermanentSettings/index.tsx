@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-// import SecuritySvgUrl from "PUBLIC_DIR/images/security.svg?url";
+import PrivateRoomSvgUrl from "PUBLIC_DIR/images/icons/32/room/private.svg?url";
 import { Trans } from "react-i18next";
 import { TFunction } from "i18next";
 
@@ -49,20 +49,24 @@ type PermanentSettingsProps = {
   t: TFunction;
   isThirdparty: boolean;
   storageLocation: TRoomStorageLocation;
+  isPrivate?: boolean;
 };
 
 const PermanentSettings = ({
   t,
   isThirdparty,
   storageLocation,
+  isPrivate,
 }: PermanentSettingsProps) => {
   const thirdpartyTitle = getProviderTypeTitle(storageLocation?.providerKey, t);
   const thirdpartyFolderName = isThirdparty ? storageLocation?.title : "";
   const thirdpartyPath = "";
 
+  const isVisible = isThirdparty || isPrivate;
+
   return (
     <div
-      className={`${styles.permanentSettings}${!isThirdparty ? ` ${styles.displayNone}` : ""}`}
+      className={`${styles.permanentSettings}${!isVisible ? ` ${styles.displayNone}` : ""}`}
     >
       {isThirdparty ? (
         <PermanentSetting
@@ -83,6 +87,15 @@ const PermanentSettings = ({
               components={{ strong: <strong /> }}
             />
           }
+        />
+      ) : null}
+      {isPrivate ? (
+        <PermanentSetting
+          type="privacy"
+          icon={PrivateRoomSvgUrl}
+          title={t("Common:PrivateRoomTitle")}
+          isFull={false}
+          content={t("Common:PrivateRoomDescription")}
         />
       ) : null}
     </div>

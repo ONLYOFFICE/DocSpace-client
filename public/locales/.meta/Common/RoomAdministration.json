@@ -3,7 +3,7 @@
   "content": "Administration",
   "content_en_sha1_hash": "b8be3d1264310c3b8c848d4b90d5206179a40cc4",
   "created_at": "2026-06-01T21:20:31.256Z",
-  "updated_at": "2026-06-01T21:30:45.786Z",
+  "updated_at": "2026-06-09T11:32:15.367Z",
   "comment": {
     "text": "Section label in the info panel that identifies the list of room administrators.",
     "is_auto": true,
@@ -15,6 +15,12 @@
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/useMembers.ts",
       "line_number": 104,
       "context": "list: TMemberTuple;\n extra?: Partial<TTitleMember>;\n }[] = [\n {\n key: TInfoPanelMemberType.administrators,\n label: t(\"Common:RoomAdministration\"),\n list: administrators,\n },\n {\n key: TInfoPanelMemberType.groups,\n label: t(\"Common:Groups\"),",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_components/members/PrivateMembersView.tsx",
+      "line_number": 166,
+      "context": "const sections = classifyMembers(members);\n \n const sectionTitle = (key: MemberSectionKey): string => {\n switch (key) {\n case \"administrators\":\n return t(\"Common:RoomAdministration\");\n case \"users\":\n return t(\"Common:RoomUsers\");\n case \"expected\":\n return t(\"Common:RoomExpectUsers\");\n default:",
       "module": "/packages/sdk"
     }
   ],

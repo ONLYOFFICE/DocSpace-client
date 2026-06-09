@@ -70,12 +70,15 @@ describe("auto-lock preference storage", () => {
     expect(getAutoLockTimeoutSeconds()).toBe(0);
   });
 
-  it("clamps values above 24h to 24h", () => {
+  it("clamps stored values above 24h and the read-time whitelist falls back to default", () => {
+    // Setter clamps to MAX_AUTO_LOCK_SECONDS = 24h before writing, but the
+    // read-time whitelist (preset values only) further drops it to default
+    // since 24h is not a UI-offered preset.
     setAutoLockTimeoutSeconds(10 * 24 * 60 * 60);
-    expect(getAutoLockTimeoutSeconds()).toBe(24 * 60 * 60);
+    expect(getAutoLockTimeoutSeconds()).toBe(0);
   });
 
-  it("floors fractional seconds", () => {
+  it("floors fractional seconds (900 is a known preset)", () => {
     setAutoLockTimeoutSeconds(900.7);
     expect(getAutoLockTimeoutSeconds()).toBe(900);
   });
@@ -107,9 +110,12 @@ describe("auto-lock preference storage", () => {
     expect(getAutoLockTimeoutSeconds()).toBe(3600);
   });
 
-  it("getCurrentAutoLockPresetId falls back to 'off' when stored value does not match any preset", () => {
+  it("getAutoLockTimeoutSeconds rejects non-preset values at read time (tamper defense)", () => {
+    // Writing succeeds (legacy API), but read-time whitelist enforcement
+    // returns the safe default when the stored value isn't a known preset.
+    // Protects against localStorage tampering by extensions / hostile scripts.
     setAutoLockTimeoutSeconds(42);
-    expect(getAutoLockTimeoutSeconds()).toBe(42);
+    expect(getAutoLockTimeoutSeconds()).toBe(0);
     expect(getCurrentAutoLockPresetId()).toBe("off");
   });
 

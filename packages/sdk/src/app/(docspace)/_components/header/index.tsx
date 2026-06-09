@@ -76,6 +76,8 @@ const Header = ({
   onToggleInfoPanel,
   headerOffset = 0,
   aiChatButton,
+  titleIcon = "",
+  titleIconTooltip = "",
 }: HeaderProps) => {
   const searchParams = useSearchParams();
 
@@ -291,8 +293,8 @@ const Header = ({
               showRootFolderTitle={false}
               withMenu={isHeaderMenuVisible}
               currentDeviceType={currentDeviceType}
-              titleIcon=""
-              titleIconTooltip=""
+              titleIcon={titleIcon}
+              titleIconTooltip={titleIconTooltip}
               showNavigationButton={false}
               isCurrentFolderInfo={false}
               showTitle={showTitle}

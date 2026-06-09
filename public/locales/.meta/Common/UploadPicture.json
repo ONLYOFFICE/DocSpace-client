@@ -3,7 +3,7 @@
   "content": "Upload picture",
   "content_en_sha1_hash": "0a024e54cb81f9e05f0faa90496774cb8e76dcae",
   "created_at": "2025-05-19T21:30:53.320Z",
-  "updated_at": "2026-06-03T09:30:05.112Z",
+  "updated_at": "2026-06-09T09:43:10.936Z",
   "comment": {
     "text": "This is the label for a button that allows users to upload an image, either for a profile avatar or a room logo/cover.",
     "is_auto": true,
@@ -31,8 +31,14 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
-      "line_number": 239,
+      "line_number": 260,
       "context": "};\n \n const items: (UploadItem | ActionItem)[] = [\n {\n key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_UPLOAD,\n label: t(\"Common:UploadPicture\"),\n icon: UploadSvgUrl,\n onClick: (ref?: React.RefObject<Nullable<HTMLInputElement>>) =>\n ref?.current?.click(),\n },\n ];",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/room-logo-editor/useRoomLogoEditor.ts",
+      "line_number": 184,
+      "context": "const model = React.useMemo<TModel[]>(\n () => [\n {\n key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_UPLOAD,\n label: t(\"Common:UploadPicture\"),\n icon: UploadSvgUrl,\n onClick: (ref?: React.RefObject<Nullable<HTMLInputElement>>) =>\n ref?.current?.click(),\n },\n hasImage",
       "module": "/packages/sdk"
     }
   ],

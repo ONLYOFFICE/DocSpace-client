@@ -78,6 +78,7 @@ const getPlayList = (files: TFileItem[]) => {
           fileStatus: file.fileStatus,
           canShare: file.canShare,
           version: file.version,
+          encrypted: file.encrypted === true,
           thumbnailUrl:
             !file.providerItem && file.thumbnailUrl ? file.thumbnailUrl : "",
         });

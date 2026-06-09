@@ -375,9 +375,14 @@ class TreeFoldersStore {
   }
 
   get isPrivacyFolder() {
-    return (
-      this.selectedFolderStore.private === true &&
-      this.selectedFolderStore.rootFolderType === FolderType.Rooms
+    if (this.selectedFolderStore.rootFolderType !== FolderType.Rooms) {
+      return false;
+    }
+    if (this.selectedFolderStore.private === true) {
+      return true;
+    }
+    return !!this.selectedFolderStore.navigationPath?.some(
+      (p) => p.private === true,
     );
   }
 

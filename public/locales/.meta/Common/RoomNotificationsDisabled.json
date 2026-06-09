@@ -3,7 +3,7 @@
   "content": "Room notifications disabled",
   "content_en_sha1_hash": "66e212657f39607ac6632eb53f57a7c8a6d38fe5",
   "created_at": "2025-05-19T21:30:56.101Z",
-  "updated_at": "2026-06-03T09:30:05.114Z",
+  "updated_at": "2026-06-09T09:43:10.939Z",
   "comment": {
     "text": "This is a toast message indicating that notifications for a room have been turned off. It appears briefly to confirm the action.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1914,
+      "line_number": 1919,
       "context": "if (muteStatus) {\n treeFolders[treeIndex].newItems = newCount >= 0 ? count - newCount : 0;\n } else treeFolders[treeIndex].newItems = count + newCount;\n }\n \n let notificationsDisabled = t(\"Common:RoomNotificationsDisabled\");\n let notificationsEnabled = t(\"Common:RoomNotificationsEnabled\");\n \n if (isAIAgent) {\n notificationsDisabled = t(\"Common:AIAgentNotificationsDisabled\", {\n aiAgent: t(\"Common:AIAgent\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 126,
+      "line_number": 131,
       "context": "try {\n await api.settings.muteRoomNotification(room.id, !room.mute);\n toastr.success(\n room.mute\n ? t(\"Common:RoomNotificationsEnabled\")\n : t(\"Common:RoomNotificationsDisabled\"),\n );\n onRoomChanged?.(room.id);\n } catch (e) {\n toastr.error(e as Error);\n }",
       "module": "/packages/sdk"
     }

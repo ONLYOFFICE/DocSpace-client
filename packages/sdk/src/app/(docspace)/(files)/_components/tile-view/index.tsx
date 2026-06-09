@@ -49,6 +49,8 @@ const TileView = ({
   hasMoreFiles,
   currentFolderId,
   filesLength,
+  isPrivate,
+  hasEncryptionKeys,
   currentUserId,
 }: TileViewProps) => {
   const { t } = useTranslation();
@@ -78,6 +80,8 @@ const TileView = ({
           item={item}
           getIcon={getIcon}
           index={index}
+          isPrivate={isPrivate}
+          hasEncryptionKeys={hasEncryptionKeys}
           currentUserId={currentUserId}
         />
       ))}

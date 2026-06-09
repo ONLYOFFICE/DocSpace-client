@@ -43,6 +43,7 @@ import { AvatarEditorDialog } from "@docspace/ui-kit/components/avatar-editor-di
 import { RoomLogoCoverDialog } from "@docspace/ui-kit/components/room-logo-cover-dialog";
 import { FolderType } from "@docspace/shared/enums";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import type { TFolder } from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 
@@ -82,10 +83,16 @@ const RoomLogoEditableIcon = observer(
       onUpdated,
     });
 
-    const badgeUrl = isHeader
-      ? (getRoomBadgeUrl(selection as Parameters<typeof getRoomBadgeUrl>[0]) ??
-        "")
-      : undefined;
+    const badgeUrl =
+      getRoomBadgeUrl(
+        selection as Parameters<typeof getRoomBadgeUrl>[0],
+        isHeader ? 12 : 24,
+      ) ?? "";
+
+    const badgeIconColor =
+      (selection as unknown as TRoom).private === true
+        ? globalColors.lightStatusPositive
+        : undefined;
 
     const sharedProps = {
       logo: roomIconLogo,
@@ -95,6 +102,7 @@ const RoomLogoEditableIcon = observer(
       isTemplate,
       isArchive,
       badgeUrl,
+      badgeIconColor,
       imgClassName: "react-svg-icon",
       size: isHeader ? "32px" : "96px",
       radius: isHeader ? "6px" : "16px",

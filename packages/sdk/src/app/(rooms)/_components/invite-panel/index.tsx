@@ -147,6 +147,24 @@ type InvitePanelProps = {
   isPrivateRoom?: boolean;
   culture?: string;
   onMembersUpdated?: () => void;
+  /**
+   * Invoked after `setRoomSecurity` resolves successfully but BEFORE the panel
+   * closes. Private rooms use this hook to run `addMembersToEncryptedRoom`,
+   * which wraps file DEKs for the new recipients. The panel surfaces thrown
+   * errors as toasts and stays open on failure.
+   */
+  onInviteSubmitted?: (
+    memberIds: string[],
+    displayNamesByMemberId: Record<string, string>,
+  ) => Promise<void>;
+  /**
+   * Optional async gate called BEFORE `setRoomSecurity`. Return `true` to
+   * proceed, `false` to abort the submission without error (the callee is
+   * responsible for showing relevant UI/toasts). Private rooms use this to
+   * verify the current user's encryption keys are unlocked before the server
+   * grants room access.
+   */
+  onBeforeSubmit?: () => Promise<boolean>;
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -161,6 +179,8 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
   isPrivateRoom = false,
   culture,
   onMembersUpdated,
+  onInviteSubmitted,
+  onBeforeSubmit,
 }) => {
   const { t } = useTranslation([
     "InviteDialog",
@@ -516,14 +536,47 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
 
     try {
       setIsLoading(true);
+
+      // Pre-submit identity gate: callers (e.g. private rooms) can verify that
+      // encryption keys are unlocked before the server grants room access.
+      if (onBeforeSubmit) {
+        const canProceed = await onBeforeSubmit();
+        if (!canProceed) {
+          setIsLoading(false);
+          return;
+        }
+      }
+
       const result = (await api.rooms.setRoomSecurity(
         roomId,
         data,
       )) as SetRoomSecurityResult;
+
+      if (onInviteSubmitted) {
+        const memberIds = invitations
+          .map((inv) => inv.id)
+          .filter((id): id is string => typeof id === "string" && id.length > 0);
+        const displayNames: Record<string, string> = {};
+        for (const item of inviteItems) {
+          const id = item.id;
+          const name = item.displayName ?? item.email;
+          if (typeof id === "string" && name) displayNames[id] = name;
+        }
+        try {
+          await onInviteSubmitted(memberIds, displayNames);
+        } catch (encryptError) {
+          setIsLoading(false);
+          toastr.error(encryptError as string | Error);
+          return;
+        }
+      }
+
       setIsLoading(false);
 
       handleClose();
-      toastr.success(t("Common:UsersInvited"));
+      if (!onInviteSubmitted) {
+        toastr.success(t("Common:UsersInvited"));
+      }
 
       if (result?.warning) {
         toastr.warning(result.warning);

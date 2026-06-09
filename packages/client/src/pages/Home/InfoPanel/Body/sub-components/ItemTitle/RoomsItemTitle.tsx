@@ -38,12 +38,14 @@ import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 import { Text } from "@docspace/ui-kit/components/text";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
@@ -150,8 +152,11 @@ const RoomsItemHeader = ({
         )
       : null;
 
-  const badgeIconColor =
-    isExternalShareRestricted && hasExternalLinks && badgeUrl
+  const isPrivateRoom = "private" in selection && selection.private === true;
+
+  const badgeIconColor = isPrivateRoom
+    ? globalColors.lightStatusPositive
+    : isExternalShareRestricted && hasExternalLinks && badgeUrl
       ? "var(--info-panel-link-blocked)"
       : undefined;
 
@@ -161,10 +166,16 @@ const RoomsItemHeader = ({
       : null;
 
   const isFile = "fileExst" in selection && !!selection.fileExst;
-  let title = selection.title;
+  const resolvedTitle = useResolvedFileTitle(
+    selection as { id?: number | string; title?: string; encrypted?: boolean },
+  );
+  let title = resolvedTitle || selection.title;
 
   if (isFile) {
-    title = getTitleWithoutExtension(selection, false);
+    title = getTitleWithoutExtension(
+      { ...selection, title: resolvedTitle || selection.title },
+      false,
+    );
   }
 
   const onChangeFileContext = (e: React.ChangeEvent<HTMLInputElement>) => {

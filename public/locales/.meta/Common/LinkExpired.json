@@ -3,7 +3,7 @@
   "content": "The link has expired.",
   "content_en_sha1_hash": "ef3fc8d140fe94ebbb33acc6c724acb2c51a4cb9",
   "created_at": "2025-05-19T21:30:46.180Z",
-  "updated_at": "2026-06-02T22:18:05.030Z",
+  "updated_at": "2026-06-09T09:43:10.851Z",
   "comment": {
     "text": "This is an error message displayed as a toast notification or on an error page, indicating that a shared link is no longer valid because its expiration date has passed.",
     "is_auto": true,
@@ -18,6 +18,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 1915,
+      "context": "const primaryLink = await ShareLinkService.getPrimaryLink(item);\n \n if (primaryLink) {\n if (primaryLink.sharedTo?.isExpired) {\n toastr.error(t(\"Common:LinkExpired\"));\n return;\n }\n \n if (this.filesSettingsStore.isLinkBlockedByAdmin(item, primaryLink)) {\n toastr.error(t(\"Common:LinkBlockedByAdminWarning\"));",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/login/src/components/ConfirmRoute.tsx",
       "line_number": 147,
       "context": "validationResult: confirmLinkResult.result,\n });\n if (confirmLinkParams.type === \"LinkInvite\") {\n window.location.href = \"/login/error/link-expired\";\n } else {\n throw new Error(t(\"Common:LinkExpired\"));\n }\n return;\n case ValidationResult.TariffLimit:\n console.error(\"tariff limit\", {\n confirmLinkParams,",
@@ -25,20 +31,26 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/index.tsx",
-      "line_number": 341,
+      "line_number": 361,
       "context": "const isLimit =\n (link?.currentUseCount ?? 0) >= (link?.maxUseCount ?? Infinity);\n \n if (isExpired) {\n if (!showToast) return;\n return toastr.error(t(\"Common:LinkExpired\"));\n }\n if (isLimit) {\n if (!showToast) return;\n return toastr.error(t(\"Common:LinkNoLongerAvailable\"));\n }",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 170,
+      "line_number": 171,
       "context": "(item.isLinkExpired ||\n (expirationLinkDate && isExpired(expirationLinkDate)))\n )\n return (\n <Text fontSize=\"12px\" fontWeight={400} noSelect>\n {t(\"Common:LinkExpired\")}\n </Text>\n );\n \n if (!expirationLinkDate) return null;",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 170,
+      "line_number": 171,
       "context": "(item.isLinkExpired ||\n (expirationLinkDate && isExpired(expirationLinkDate)))\n )\n return (\n <Text fontSize=\"12px\" fontWeight={400} noSelect>\n {t(\"Common:LinkExpired\")}\n </Text>\n );\n \n if (!expirationLinkDate) return null;",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
+      "line_number": 381,
+      "context": "}\n };\n \n const onCopyLink = async (link: TFileLink) => {\n if (link.sharedTo?.isExpired) {\n toastr.error(t(\"Common:LinkExpired\"));\n return;\n }\n \n const isBlockedByAdmin =\n isExternalShareRestricted &&",
       "module": "/packages/shared"
     },
     {

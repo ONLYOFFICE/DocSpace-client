@@ -56,10 +56,6 @@ import {
   CreateCustomRoomIllustrationIcon,
   UseRoomTemplateIllustrationIcon,
 } from "@docspace/ui-kit/components/quick-actions/icons";
-import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
-
-import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
-import TemplateReactSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 
 import { SectionWrapper } from "@/app/(docspace)/_components/section";
 import Header from "@/app/(docspace)/_components/header";
@@ -105,6 +101,22 @@ type RoomsLayoutProps = {
   filesFilter: string;
   user?: TUser;
   isArchive?: boolean;
+  isPrivate?: boolean;
+  hasEncryptionKeys?: boolean;
+  infoPanelHeader?: React.ReactNode;
+  infoPanelBody?: React.ReactNode;
+  emptyView?: React.ReactNode;
+  titleOverride?: string;
+  onPrivateInviteRoom?: (room: TFolder) => void;
+  onPrivateChangeOwner?: (room: TFolder) => void;
+  refreshRef?: React.MutableRefObject<(() => void) | null>;
+  renderCreateRoomDialog?: (args: {
+    visible: boolean;
+    onClose: () => void;
+    onRoomCreated: () => void;
+    isPrivate?: boolean;
+    hasEncryptionKeys?: boolean;
+  }) => React.ReactNode;
 };
 
 const RoomsLayout = observer(
@@ -119,6 +131,16 @@ const RoomsLayout = observer(
     filesFilter,
     user,
     isArchive,
+    isPrivate,
+    hasEncryptionKeys,
+    infoPanelHeader,
+    infoPanelBody,
+    emptyView,
+    titleOverride,
+    onPrivateInviteRoom,
+    onPrivateChangeOwner,
+    refreshRef: refreshRefProp,
+    renderCreateRoomDialog,
   }: RoomsLayoutProps) => {
     const { t } = useTranslation(["Common"]);
     const router = useRouter();
@@ -171,7 +193,8 @@ const RoomsLayout = observer(
     );
 
     const dialogsStore = useDialogsStore();
-    const refreshRef = React.useRef<(() => void) | null>(null);
+    const internalRefreshRef = React.useRef<(() => void) | null>(null);
+    const refreshRef = refreshRefProp ?? internalRefreshRef;
     const roomActionsRef = React.useRef<RoomActions | null>(null);
 
     // Stable RoomActionsContext handler — values are bridged to RoomsList's
@@ -218,47 +241,27 @@ const RoomsLayout = observer(
       router.push(`/rooms/${roomId}`);
     };
 
-    const quickActionItems = React.useMemo<QuickActionItem[]>(
-      () =>
-        isArchive || !canCreateRooms
-          ? []
-          : [
-              {
-                id: "custom-room",
-                icon: <CreateCustomRoomIllustrationIcon />,
-                label: t("Common:NewRoom"),
-                onClick: createCustomRoom,
-                disabled: isArchive,
-              },
-              {
-                id: "use-template",
-                icon: <UseRoomTemplateIllustrationIcon />,
-                label: t("Common:UseTemplate"),
-                disabled: true,
-              },
-            ],
-      [t, createCustomRoom, isArchive],
-    );
-
-    // const mainButtonModel = React.useMemo<ContextMenuModel[]>(
-    //   () => [
-    //     {
-    //       id: "actions_create-custom-room",
-    //       key: "custom-room",
-    //       label: t("Common:NewRoom"),
-    //       icon: CreateRoomReactSvgUrl,
-    //       onClick: createCustomRoom,
-    //     },
-    //     {
-    //       id: "actions_use-template",
-    //       key: "use-template",
-    //       label: t("Common:UseTemplate"),
-    //       icon: TemplateReactSvgUrl,
-    //       disabled: true,
-    //     },
-    //   ],
-    //   [t, createCustomRoom],
-    // );
+    const quickActionItems = React.useMemo<QuickActionItem[]>(() => {
+      if (isArchive || !canCreateRooms) return [];
+      const items: QuickActionItem[] = [
+        {
+          id: "custom-room",
+          icon: <CreateCustomRoomIllustrationIcon />,
+          label: t("Common:NewRoom"),
+          onClick: createCustomRoom,
+          disabled: isArchive,
+        },
+      ];
+      if (!isPrivate) {
+        items.push({
+          id: "use-template",
+          icon: <UseRoomTemplateIllustrationIcon />,
+          label: t("Common:UseTemplate"),
+          disabled: true,
+        });
+      }
+      return items;
+    }, [t, createCustomRoom, isArchive, canCreateRooms, isPrivate]);
 
     return (
       <RoomActionsContext.Provider value={roomActionsHandler}>
@@ -314,25 +317,45 @@ const RoomsLayout = observer(
                   isArchive={isArchive}
                   refreshRef={refreshRef}
                   roomActionsRef={roomActionsRef}
+                  emptyView={emptyView}
+                  titleOverride={titleOverride}
+                  isPrivate={isPrivate}
+                  hasEncryptionKeys={isPrivate ? hasEncryptionKeys : undefined}
+                  onPrivateInviteRoom={onPrivateInviteRoom}
+                  onPrivateChangeOwner={onPrivateChangeOwner}
                   infoPanelVisible={infoPanelStore.isVisible}
                 />
               }
-              infoPanelHeaderContent={<DocsInfoPanelHeader />}
+              infoPanelHeaderContent={infoPanelHeader ?? <DocsInfoPanelHeader />}
               infoPanelBodyContent={
-                <RoomsRefreshContext.Provider value={refreshRooms}>
-                  <DocsInfoPanelBody onTagsChanged={onInfoPanelTagsChanged} />
-                </RoomsRefreshContext.Provider>
+                infoPanelBody ?? (
+                  <RoomsRefreshContext.Provider value={refreshRooms}>
+                    <DocsInfoPanelBody onTagsChanged={onInfoPanelTagsChanged} />
+                  </RoomsRefreshContext.Provider>
+                )
               }
               isInfoPanelVisible={infoPanelStore.isVisible}
               setIsInfoPanelVisible={infoPanelStore.setVisible}
               isEmptyPage={isEmptyList}
               filesFilter={filesFilter}
             />
-            <CreateEditRoomDialog
-              visible={dialogsStore.isDialogOpen(SDKDialogs.CreateRoom)}
-              onClose={closeCreateRoomDialog}
-              onRoomCreated={onRoomCreated}
-            />
+            {renderCreateRoomDialog ? (
+              renderCreateRoomDialog({
+                visible: dialogsStore.isDialogOpen(SDKDialogs.CreateRoom),
+                onClose: closeCreateRoomDialog,
+                onRoomCreated: () => refreshRef.current?.(),
+                isPrivate,
+                hasEncryptionKeys,
+              })
+            ) : (
+              <CreateEditRoomDialog
+                visible={dialogsStore.isDialogOpen(SDKDialogs.CreateRoom)}
+                onClose={closeCreateRoomDialog}
+                onRoomCreated={onRoomCreated}
+                isPrivate={isPrivate}
+                hasEncryptionKeys={hasEncryptionKeys}
+              />
+            )}
             <SelectionArea isRooms />
             <DeviceTypeObserver />
             <InfoPanelEditLinkDialog />

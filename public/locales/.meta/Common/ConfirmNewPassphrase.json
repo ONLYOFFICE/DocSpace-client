@@ -3,7 +3,7 @@
   "content": "Confirm new passphrase",
   "content_en_sha1_hash": "0057bb5eec0bd6cad8fdea62dfc64d4ad3863d55",
   "created_at": "2026-05-24T17:27:21.392Z",
-  "updated_at": "2026-05-24T18:28:23.417Z",
+  "updated_at": "2026-06-09T09:43:10.926Z",
   "comment": {
     "text": "Label for a password input field in the Key Rotation dialog, used to prompt the user to re-enter their new passphrase for verification.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/KeyRotationDialog.tsx",
-      "line_number": 210,
-      "context": "</div>\n </div>\n \n <div className={styles.inputGroup}>\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:ConfirmNewPassphrase\")}\n </Text>\n <div className={styles.inputWrapper}>\n <PasswordInput\n id=\"confirmNewPassphrase\"\n inputName=\"confirmNewPassphrase\"",
+      "line_number": 234,
+      "context": "</FieldContainer>\n </div>\n \n <div className={styles.inputGroup}>\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:ConfirmNewPassphrase\")}\n </Text>\n <FieldContainer\n isVertical\n labelVisible={false}\n removeMargin",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/KeyRotationDialog.tsx",
-      "line_number": 210,
-      "context": "</div>\n </div>\n \n <div className={styles.inputGroup}>\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:ConfirmNewPassphrase\")}\n </Text>\n <div className={styles.inputWrapper}>\n <PasswordInput\n id=\"confirmNewPassphrase\"\n inputName=\"confirmNewPassphrase\"",
+      "line_number": 234,
+      "context": "</FieldContainer>\n </div>\n \n <div className={styles.inputGroup}>\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:ConfirmNewPassphrase\")}\n </Text>\n <FieldContainer\n isVertical\n labelVisible={false}\n removeMargin",
       "module": "/packages/client"
     }
   ],

@@ -106,7 +106,7 @@ const EmptyViewContainer = observer((props: EmptyViewContainerProps) => {
     />
   ) : null;
 
-  if (props.selectedFolder?.private && !props.isFolder) {
+  if (props.isPrivacyFolder) {
     return <EmptyPrivateRoomView />;
   }
 
@@ -148,7 +148,8 @@ const InjectedEmptyViewContainer = inject<
     const { isFrame, logoText, aiConfig, standalone, tenantAlias, baseDomain } =
       settingsStore;
 
-    const { myFolderId, myFolder, roomsFolder } = treeFoldersStore;
+    const { myFolderId, myFolder, roomsFolder, isPrivacyFolder } =
+      treeFoldersStore;
 
     const { setIsSectionFilterLoading } = clientLoadingStore;
 
@@ -193,6 +194,7 @@ const InjectedEmptyViewContainer = inject<
       myFolderId,
       myFolder,
       roomsFolder,
+      isPrivacyFolder,
       userId,
       isPublicRoom,
       isWarningRoomsDialog,

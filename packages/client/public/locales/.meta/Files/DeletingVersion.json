@@ -3,7 +3,7 @@
   "content": "Deleting version",
   "content_en_sha1_hash": "aa0427f60fdd32d4031d491119092209bdd1002c",
   "created_at": "2025-05-19T21:30:55.451Z",
-  "updated_at": "2026-06-01T21:20:44.432Z",
+  "updated_at": "2026-06-09T09:43:10.859Z",
   "comment": {
     "text": "This is a toast message indicating that a file version is being deleted.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
       "line_number": 309,
-      "context": "return i18n.t(\"Files:UploadingProgress\", { progress });\n return i18n.t(\"Common:Uploading\");\n case convert:\n return i18n.t(\"Files:Converting\");\n case deleteVersionFile:\n return i18n.t(\"Files:DeletingVersion\");\n case roomReencryption:\n return i18n.t(\"Files:ReEncryptingFiles\");\n \n default:\n return i18n.t(\"Files:OtherProcesses\");",
+      "context": "return i18n.t(\"Files:UploadingProgress\", { progress });\n return i18n.t(\"Common:Uploading\");\n case convert:\n return i18n.t(\"Files:Converting\");\n case deleteVersionFile:\n return i18n.t(\"Files:DeletingVersion\");\n case roomReencryption:\n return i18n.t(\"Common:ReEncryptingFiles\");\n \n default:\n return i18n.t(\"Files:OtherProcesses\");",
       "module": "/packages/client"
     }
   ],

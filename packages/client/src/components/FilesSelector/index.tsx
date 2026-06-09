@@ -117,6 +117,8 @@ const FilesSelectorWrapper = ({
   itemOperationToFolder,
   copyEncryptedFilesToFolder,
   sourceIsPrivate,
+  sourceInPrivateRoom,
+  privateRoomId,
   clearActiveOperations,
   setSelected,
   setMoveToPanelVisible,
@@ -293,12 +295,15 @@ const FilesSelectorWrapper = ({
     isChecked: boolean,
     selectedTreeNode: TFolder,
     selectedFileInfo: TSelectedFileInfo,
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
+    isInsidePrivateRoom?: boolean,
   ) => {
     if (isCopy && !isEditorDialog && hasEncryptedInSelection) {
       const destInfo = {
         private:
           (selectedTreeNode as unknown as { private?: boolean })?.private ===
-          true,
+            true || isInsidePrivateRoom === true,
         rootFolderId: (selectedTreeNode as unknown as { rootFolderId?: number })
           ?.rootFolderId,
         roomType: (selectedTreeNode as unknown as { roomType?: number })
@@ -319,6 +324,11 @@ const FilesSelectorWrapper = ({
         } else {
           folderIds.push(item.id);
         }
+      }
+
+      if (sourceInPrivateRoom && !destInfo.private && folderIds.length) {
+        toastr.error(t("Common:CannotTransferFolderFromPrivateRoom"));
+        folderIds.length = 0;
       }
 
       if (selectedItemId != null) {
@@ -353,6 +363,16 @@ const FilesSelectorWrapper = ({
     }
 
     if ((isMove || isCopy || isRestore || isRestoreAll) && !isEditorDialog) {
+      const isPrivateDestination =
+        (selectedTreeNode as unknown as { private?: boolean })?.private ===
+          true || isInsidePrivateRoom === true;
+
+      if (!sourceInPrivateRoom && isPrivateDestination) {
+        toastr.error(t("Common:CannotTransferToPrivateRoom"));
+        setIsRequestRunning(false);
+        return;
+      }
+
       const fileIds: number[] = [];
       const folderIds: number[] = [];
 
@@ -494,6 +514,7 @@ const FilesSelectorWrapper = ({
     isDisabledFolder?: boolean,
     isInsideKnowledge?: boolean,
     isInsideResultStorage?: boolean,
+    isInsidePrivateRoom?: boolean,
   ) => {
     return getIsDisabled(
       isFirstLoad,
@@ -514,15 +535,29 @@ const FilesSelectorWrapper = ({
       isInsideKnowledge,
       isInsideResultStorage,
       selectedItemType === "agents",
+      isInsidePrivateRoom,
+      sourceInPrivateRoom,
     );
   };
 
   const openRootVar = openRoot || isRestore || isRestoreAll;
 
+  const isRoomDisabled = React.useMemo(
+    () =>
+      (isMove || isCopy || isRestore || isRestoreAll) && !sourceInPrivateRoom
+        ? (room: FolderDtoInteger) => room?.private === true
+        : undefined,
+    [isMove, isCopy, isRestore, isRestoreAll, sourceInPrivateRoom],
+  );
+
   return (
     <FilesSelector
       openRoot={openRootVar}
       disabledItems={disabledItems}
+      isRoomDisabled={isRoomDisabled}
+      pinnedRootId={
+        isMove && sourceInPrivateRoom ? privateRoomId : undefined
+      }
       disabledFolderType={
         isMove || isCopy || isRestore || isRestoreAll
           ? (FolderType.ResultStorage as unknown as SdkFolderType)
@@ -657,7 +692,14 @@ export default inject(
       rootFolderType,
       private: sourceIsPrivate,
       shared,
+      navigationPath,
+      isRoom,
     } = selectedFolderStore;
+
+    const privateRoomId = treeFoldersStore.isPrivacyFolder
+      ? (navigationPath?.find((p) => p.isRoom)?.id ??
+        (isRoom ? selectedId : undefined))
+      : undefined;
 
     const {
       setConflictDialogData,
@@ -796,6 +838,8 @@ export default inject(
       includeFolder,
       copyEncryptedFilesToFolder,
       sourceIsPrivate,
+      sourceInPrivateRoom: treeFoldersStore.isPrivacyFolder,
+      privateRoomId,
 
       setMoveToPublicRoomVisible,
       setBackupToPublicRoomVisible,

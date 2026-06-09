@@ -3,7 +3,7 @@
   "content": "Copy",
   "content_en_sha1_hash": "af74f7c5362aaee985bf8cda3dd75fc80751ce51",
   "created_at": "2025-05-19T21:30:43.729Z",
-  "updated_at": "2026-06-03T11:46:06.804Z",
+  "updated_at": "2026-06-09T09:43:10.799Z",
   "comment": {
     "text": "This is a button label or a toast message. It appears when copying content, such as a file, folder, or embed link, to the clipboard.",
     "is_auto": true,
@@ -43,13 +43,13 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2152,
+      "line_number": 2157,
       "context": "disabled: false,\n },\n {\n id: \"option_copy-to\",\n key: \"copy-to\",\n label: t(\"Common:Copy\"),\n icon: CopyReactSvgUrl,\n onClick: () => this.onCopyAction(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2152,
+      "line_number": 2157,
       "context": "disabled: false,\n },\n {\n id: \"option_copy-to\",\n key: \"copy-to\",\n label: t(\"Common:Copy\"),\n icon: CopyReactSvgUrl,\n onClick: () => this.onCopyAction(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
@@ -60,14 +60,20 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/sub-components/EmbeddingPanel/index.tsx",
+      "line_number": 547,
+      "context": "className=\"send-invitation\"\n scale\n size={ButtonSize.normal}\n primary\n onClick={onCopyAndClose}\n label={t(\"Common:Copy\")}\n isLoading={isLoading}\n testId=\"embedding_panel_copy_button\"\n />\n <Button\n className=\"cancel-button\"",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 366,
+      "line_number": 391,
       "context": "const getCopyItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_copy\",\n key: \"copy\",\n label: t(\"Common:Copy\"),\n icon: CopyReactSvgUrl,\n onClick: () => onCopyClick?.(i),\n disabled: !onCopyClick,\n };\n },",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 366,
+      "line_number": 391,
       "context": "const getCopyItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_copy\",\n key: \"copy\",\n label: t(\"Common:Copy\"),\n icon: CopyReactSvgUrl,\n onClick: () => onCopyClick?.(i),\n disabled: !onCopyClick,\n };\n },",
       "module": "/packages/sdk"
     },

@@ -3,7 +3,7 @@
   "content": "Room owner",
   "content_en_sha1_hash": "6282abf238c9bcb457f0cd3c0cbd37e7971ec3f5",
   "created_at": "2025-05-19T21:30:56.110Z",
-  "updated_at": "2026-06-03T09:30:04.999Z",
+  "updated_at": "2026-06-09T09:43:10.789Z",
   "comment": {
     "text": "This is a label identifying the owner of a room, displayed next to their avatar in the room settings.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
-      "line_number": 467,
-      "context": "</div>\n \n {isEdit && room.createdBy ? (\n <div className={styles.ownerSection}>\n <Text fontWeight={600} fontSize=\"13px\">\n {t(\"Common:RoomOwner\")}:\n </Text>\n <div className={styles.ownerDisplay}>\n <Avatar\n size={AvatarSize.base}\n role={AvatarRole.none}",
+      "line_number": 562,
+      "context": ") : null}\n \n {isEdit && room.createdBy ? (\n <div className={styles.ownerSection}>\n <Text fontWeight={600} fontSize=\"13px\">\n {t(\"Common:RoomOwner\")}:\n </Text>\n <div className={styles.ownerDisplay}>\n <Avatar\n size={AvatarSize.base}\n role={AvatarRole.none}",
       "module": "/packages/sdk"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Confirm",
   "content_en_sha1_hash": "04a212215ef9fbf686d280802eb81ee7a6e681cd",
   "created_at": "2026-05-24T17:27:21.378Z",
-  "updated_at": "2026-06-02T14:21:21.747Z",
+  "updated_at": "2026-06-09T09:43:10.797Z",
   "comment": {
     "text": "Button label used in confirmation and passphrase dialogs to finalize an action or save changes.",
     "is_auto": true,
@@ -11,6 +11,18 @@
     "model": "gemma4:26b"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/EncryptionProviderWrapper.jsx",
+      "line_number": 167,
+      "context": "isLoading={isLoading}\n externalError={error}\n onSubmit={onSubmit}\n onCancel={onCancel}\n onForgotPassphrase={handleForgotPassphrase}\n submitLabel={t(\"Common:Confirm\")}\n />\n );\n };\n \n const EncryptionProviderWrapper = ({ userKeys, children }) => {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_store/EncryptionShell.tsx",
+      "line_number": 81,
+      "context": "isLoading={isLoading}\n externalError={error}\n onSubmit={onSubmit}\n onCancel={onCancel}\n onForgotPassphrase={handleForgotPassphrase}\n submitLabel={t(\"Common:Confirm\")}\n />\n );\n };\n \n type EncryptionShellProps = { children: React.ReactNode };",
+      "module": "/packages/sdk"
+    },
     {
       "file_path": "/packages/shared/dialogs/confirmation-modal/ConfirmationModal.tsx",
       "line_number": 82,

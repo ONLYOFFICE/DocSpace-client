@@ -3,7 +3,7 @@
   "content": "Move to archive",
   "content_en_sha1_hash": "bc085e822ae67c9e26aba6df62730c436e6c09b2",
   "created_at": "2025-05-19T21:30:55.866Z",
-  "updated_at": "2026-06-03T09:30:05.111Z",
+  "updated_at": "2026-06-09T09:43:10.935Z",
   "comment": {
     "text": "Button label. This action moves the selected room or file to the archive.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2818,
+      "line_number": 2823,
       "context": ": isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),\n },\n {\n id: \"option_archive-room\",\n key: \"archive-room\",\n label: t(\"Common:MoveToArchive\"),\n icon: RoomArchiveSvgUrl,\n onClick: () => this.onClickArchive(\"archive\"),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2818,
+      "line_number": 2823,
       "context": ": isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),\n },\n {\n id: \"option_archive-room\",\n key: \"archive-room\",\n label: t(\"Common:MoveToArchive\"),\n icon: RoomArchiveSvgUrl,\n onClick: () => this.onClickArchive(\"archive\"),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
@@ -30,14 +30,20 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
+      "line_number": 628,
+      "context": "(i) => i.security.Move,\n );\n return {\n id: \"option_archive\",\n key: \"archive\",\n label: t(\"Common:MoveToArchive\"),\n icon: RoomArchiveSvgUrl,\n onClick: () => {\n onArchiveSelectedClick?.(filesSelectionStore.selection);\n },\n disabled: !onArchiveSelectedClick || !canArchive,",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 296,
+      "line_number": 315,
       "context": "}\n if (canArchive) {\n mainItems.push({\n id: \"option_move-to-archive\",\n key: \"move-to-archive\",\n label: t(\"Common:MoveToArchive\"),\n icon: RoomArchiveSvgUrl,\n onClick: () => onArchiveRoom?.(room),\n });\n }\n if (canDelete) {",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 296,
+      "line_number": 315,
       "context": "}\n if (canArchive) {\n mainItems.push({\n id: \"option_move-to-archive\",\n key: \"move-to-archive\",\n label: t(\"Common:MoveToArchive\"),\n icon: RoomArchiveSvgUrl,\n onClick: () => onArchiveRoom?.(room),\n });\n }\n if (canDelete) {",
       "module": "/packages/sdk"
     }

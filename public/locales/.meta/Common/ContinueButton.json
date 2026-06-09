@@ -3,7 +3,7 @@
   "content": "Continue",
   "content_en_sha1_hash": "2e02623966f9391facf6eaefc8b079ed5b630bee",
   "created_at": "2025-05-19T21:30:43.691Z",
-  "updated_at": "2026-06-01T21:20:44.397Z",
+  "updated_at": "2026-06-09T09:43:10.814Z",
   "comment": {
     "text": "This is the label for a button that allows users to proceed with an action, such as confirming a service, closing an editor without saving, or initiating a file conversion.",
     "is_auto": true,
@@ -33,6 +33,12 @@
       "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
       "line_number": 223,
       "context": ") : null}\n </div>\n <div className={styles.convertDialogButtons}>\n <Button\n key=\"ContinueButton\"\n label={t(\"Common:ContinueButton\")}\n size=\"normal\"\n primary\n scale\n onClick={onConvert}\n testId=\"convert_dialog_continue_button\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
+      "line_number": 308,
+      "context": "<>\n <ConfirmationModal\n visible={keyConfirmVisible}\n title={t(\"Common:PrivateRoomKeyRequiredTitle\")}\n message={t(\"Common:PrivateRoomKeyRequiredDescription\")}\n confirmLabel={t(\"Common:ContinueButton\")}\n onConfirm={onConfirmGenerateKey}\n onCancel={onCancelGenerateKey}\n zIndex={410}\n />\n {generateKey.modals}",
       "module": "/packages/client"
     },
     {
@@ -66,18 +72,6 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/PassphraseModal.tsx",
-      "line_number": 217,
-      "context": "scale\n primary\n key=\"SubmitButton\"\n onClick={handleSubmit}\n size={ButtonSize.normal}\n label={t(\"Common:ContinueButton\")}\n isDisabled={isDisabled}\n isLoading={isLoading}\n tabIndex={3}\n />\n <Button",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/RecoveryPhraseDisplayModal.tsx",
-      "line_number": 267,
-      "context": "scale\n primary\n key=\"StartQuizButton\"\n onClick={startQuiz}\n size={ButtonSize.normal}\n label={t(\"Common:ContinueButton\")}\n isDisabled={!acknowledged || isLoading}\n isLoading={isLoading}\n tabIndex={2}\n />\n <Button",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/RecoveryPhraseInputModal.tsx",
       "line_number": 166,
       "context": "scale\n primary\n key=\"SubmitButton\"\n onClick={handleSubmit}\n size={ButtonSize.normal}\n label={t(\"Common:ContinueButton\")}\n isDisabled={isDisabled}\n isLoading={isLoading || isValidating}\n tabIndex={2}\n />\n <Button",
@@ -108,6 +102,12 @@
       "module": "/packages/sdk"
     },
     {
+      "file_path": "/packages/sdk/src/app/(private)/_components/create-room/PrivateCreateRoomDialog.tsx",
+      "line_number": 128,
+      "context": "<>\n <ConfirmationModal\n visible={keyConfirmVisible}\n title={t(\"Common:PrivateRoomKeyRequiredTitle\")}\n message={t(\"Common:PrivateRoomKeyRequiredDescription\")}\n confirmLabel={t(\"Common:ContinueButton\")}\n onConfirm={onConfirmGenerateKey}\n onCancel={onCancelGenerateKey}\n zIndex={410}\n />\n {generateKey.modals}",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
       "line_number": 599,
       "context": "<ModalDialog.Footer>\n <Button\n key=\"DownloadButton\"\n label={\n needPassword ? t(\"Common:ContinueButton\") : t(\"Common:Download\")\n }\n size={ButtonSize.normal}\n primary\n onClick={needPassword ? onReDownload : onDownload}\n isDisabled={",
@@ -115,8 +115,20 @@
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/sub-components/OnePasswordRow.tsx",
-      "line_number": 202,
+      "line_number": 205,
       "context": "/>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:ContinueButton\")}\n size={ButtonSize.normal}\n primary\n onClick={onDownloadWithPassword}\n isDisabled={!password.trim().length}\n scale",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
+      "line_number": 268,
+      "context": "scale\n primary\n key=\"StartQuizButton\"\n onClick={startQuiz}\n size={ButtonSize.normal}\n label={t(\"Common:ContinueButton\")}\n isDisabled={!acknowledged || isLoading}\n isLoading={isLoading}\n tabIndex={2}\n />\n <Button",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
+      "line_number": 290,
+      "context": "scale\n primary\n key=\"SubmitButton\"\n onClick={handleSubmit}\n size={ButtonSize.normal}\n label={submitLabel ?? t(\"Common:ContinueButton\")}\n isDisabled={isDisabled}\n isLoading={isLoading}\n tabIndex={4}\n />\n <Button",
       "module": "/packages/shared"
     },
     {

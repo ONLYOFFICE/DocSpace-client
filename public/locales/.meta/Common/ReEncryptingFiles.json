@@ -3,7 +3,7 @@
   "content": "Re-encrypting files",
   "content_en_sha1_hash": "a27b0973184686f875fa317c54547cb81f2ee1b5",
   "created_at": "2026-06-05T00:00:00.000Z",
-  "updated_at": "2026-06-05T00:00:00.000Z",
+  "updated_at": "2026-06-09T09:43:10.860Z",
   "comment": {
     "text": "Progress label shown while existing encrypted files are re-wrapped for new room members during invite.",
     "is_auto": true,
@@ -12,9 +12,21 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/helpers/filesUtils.js",
+      "line_number": 311,
+      "context": "case convert:\n return i18n.t(\"Files:Converting\");\n case deleteVersionFile:\n return i18n.t(\"Files:DeletingVersion\");\n case roomReencryption:\n return i18n.t(\"Common:ReEncryptingFiles\");\n \n default:\n return i18n.t(\"Files:OtherProcesses\");\n }\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
+      "line_number": 213,
+      "context": ") : null}\n </div>\n {isRotating && rotationProgress ? (\n <div className={styles.rotationProgress} role=\"status\">\n <span>\n {t(\"Common:ReEncryptingFiles\")} (\n {rotationProgress.roomsDone}/{rotationProgress.roomsTotal})\n </span>\n </div>\n ) : null}\n {hasKeys ? <AutoLockSetting /> : null}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(private)/_components/invite-panel/index.tsx",
       "line_number": 112,
-      "context": "label={t(\"Common:ReEncryptingFiles\")}",
+      "context": "onInviteSubmitted={handleInviteSubmitted}\n />\n {reencryptProgress !== null ? (\n <ProgressBar\n percent={reencryptPercent}\n label={t(\"Common:ReEncryptingFiles\")}\n data-testid=\"reencrypt-progress-bar\"\n />\n ) : null}\n </>\n );",
       "module": "/packages/sdk"
     }
   ],

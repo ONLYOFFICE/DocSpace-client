@@ -3,7 +3,7 @@
   "content": "OK",
   "content_en_sha1_hash": "9ce3bd4224c8c1780db56b4125ecf3f24bf748b7",
   "created_at": "2025-06-05T23:02:58.880Z",
-  "updated_at": "2026-06-01T21:20:44.397Z",
+  "updated_at": "2026-06-09T09:43:10.814Z",
   "comment": {
     "text": "This is the label for an \"OK\" button, typically used to confirm an action or close a dialog box.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
-      "line_number": 347,
+      "line_number": 350,
       "context": "headerLabel={t(\"Common:ActionRequired\")}\n isLoading={!ready}\n onSubmit={isUploadConflict ? onAcceptUploadType : onAcceptType}\n onClose={onCloseConflictDialog}\n cancelButtonLabel={t(\"CancelButton\")}\n submitButtonLabel={t(\"OKButton\")}\n messageText={messageText}\n selectActionText={t(\"Common:ConflictResolveSelectAction\")}\n overwriteTitle={overwriteTitle}\n overwriteDescription={overwriteDescription}\n duplicateTitle={duplicateTitle}",
       "module": "/packages/client"
     },

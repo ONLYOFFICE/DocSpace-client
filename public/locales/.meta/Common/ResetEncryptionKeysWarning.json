@@ -3,7 +3,7 @@
   "content": "This removes every encryption identity registered to your account. You will lose access to all existing encrypted files. Room owners can re-share files with your new identity, but anything that is not re-shared will become unrecoverable. This action affects every device you are signed in on, not just this one.",
   "content_en_sha1_hash": "2beb227f63a742aa6304cdd44c3a4416d095b6de",
   "created_at": "2026-05-24T17:27:37.229Z",
-  "updated_at": "2026-05-24T17:31:06.592Z",
+  "updated_at": "2026-06-09T09:43:10.926Z",
   "comment": {
     "text": "Warning text within a confirmation dialog that explains the consequences of resetting encryption keys.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/ResetKeysConfirmDialog.tsx",
-      "line_number": 85,
-      "context": "<ModalDialog.Header>\n {t(\"Common:ResetEncryptionKeysTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" noSelect>\n {t(\"Common:ResetEncryptionKeysWarning\")}\n </Text>\n <Text\n fontSize=\"13px\"\n fontWeight=\"600\"\n style={{ marginTop: \"12px\", marginBottom: \"8px\" }}",
+      "line_number": 94,
+      "context": "gap: \"12px\",\n }}\n >\n <div id=\"reset-keys-warning\" role=\"alert\">\n <Text fontSize=\"13px\" noSelect>\n {t(\"Common:ResetEncryptionKeysWarning\")}\n </Text>\n </div>\n <div id=\"reset-keys-confirmation\">\n <Text fontSize=\"13px\" fontWeight=\"600\">\n {t(\"Common:ResetEncryptionKeysConfirmation\", {",
       "module": "/packages/client"
     }
   ],

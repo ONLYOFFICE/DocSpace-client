@@ -3,7 +3,7 @@
   "content": "Failed to decrypt all selected files",
   "content_en_sha1_hash": "62dbd07438816ef485c9068348c3f5c97a97f1cc",
   "created_at": "2026-06-09T00:00:00.000Z",
-  "updated_at": "2026-06-09T00:00:00.000Z",
+  "updated_at": "2026-06-09T11:32:15.371Z",
   "comment": {
     "text": "Error toast shown when none of the selected encrypted files could be decrypted during a zip download.",
     "is_auto": false,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(private)/_hooks/useEncryptedDownload.ts",
-      "line_number": 198,
-      "context": "if (buffers.length === 0) {\n  // Nothing could be decrypted at all.\n  toastr.error(t(\"Common:EncryptionDecryptAllFailed\"));\n  return;\n}",
+      "line_number": 216,
+      "context": "}\n }\n \n if (controller.signal.aborted) return;\n if (buffers.length === 0) {\n toastr.error(t(\"Common:EncryptionDecryptAllFailed\"));\n return;\n }\n \n const names = deduplicateFileNames(buffers.map((b) => b.fileName));\n const zipBytes = createZipFromBuffers(",
       "module": "/packages/sdk"
     }
   ],

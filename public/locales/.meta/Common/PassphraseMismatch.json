@@ -3,7 +3,7 @@
   "content": "Passphrases do not match",
   "content_en_sha1_hash": "42a0ba82992be92edb99d0ae3a35c75971c1ab9c",
   "created_at": "2026-05-24T17:27:34.691Z",
-  "updated_at": "2026-06-02T14:21:21.858Z",
+  "updated_at": "2026-06-09T09:43:10.925Z",
   "comment": {
     "text": "Error text in a dialog that appears when the entered passphrase and the confirmation passphrase are not identical.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/KeyRotationDialog.tsx",
-      "line_number": 101,
-      "context": "setLocalError(t(\"Common:PassphraseTooShort\", { length: MIN_LENGTH }));\n return;\n }\n \n if (newPassphrase !== confirmPassphrase) {\n setLocalError(t(\"Common:PassphraseMismatch\"));\n return;\n }\n \n if (currentPassphrase === newPassphrase) {\n setLocalError(t(\"Common:PassphraseMustBeDifferent\"));",
+      "line_number": 105,
+      "context": ": \"\"\n : \"\";\n \n const confirmFieldError =\n !!confirmPassphrase && newPassphrase !== confirmPassphrase\n ? t(\"Common:PassphraseMismatch\")\n : \"\";\n \n const handleSubmit = useCallback(async () => {\n setAttemptedSubmit(true);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 249,
+      "line_number": 252,
       "context": "hasError={\n !!confirmPassphrase && passphrase !== confirmPassphrase\n }\n errorMessage={\n !!confirmPassphrase && passphrase !== confirmPassphrase\n ? t(\"Common:PassphraseMismatch\")\n : \"\"\n }\n errorMessageWidth=\"100%\"\n className={styles.inputWrapper}\n >",
       "module": "/packages/shared"
     }

@@ -3,7 +3,7 @@
   "content": "Verify",
   "content_en_sha1_hash": "dda6ac27b9d3b234a68e8b2c412e90ab5a03a4e1",
   "created_at": "2026-05-24T17:27:36.687Z",
-  "updated_at": "2026-06-02T14:21:21.882Z",
+  "updated_at": "2026-06-09T09:43:10.968Z",
   "comment": {
     "text": "Button label used to submit answers in a recovery quiz to confirm identity.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
-      "line_number": 290,
+      "line_number": 291,
       "context": "scale\n primary\n key=\"VerifyButton\"\n onClick={submitQuiz}\n size={ButtonSize.normal}\n label={t(\"Common:RecoveryQuizVerify\")}\n isDisabled={!allAnswersFilled || isLoading}\n isLoading={isLoading}\n tabIndex={quizPositions.length + 1}\n />\n <Button",
       "module": "/packages/shared"
     }

@@ -3,7 +3,7 @@
   "content": "Encrypting",
   "content_en_sha1_hash": "3ecd5a51a3787fe7380edc56e4196367e08ad14f",
   "created_at": "2026-05-24T17:27:47.447Z",
-  "updated_at": "2026-06-01T21:20:44.526Z",
+  "updated_at": "2026-06-09T09:43:10.944Z",
   "comment": {
     "text": "Label for the primary progress bar indicating the current status of the file encryption process during an upload.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/UploadDataStore.js",
-      "line_number": 2098,
+      "line_number": 2236,
       "context": "const newPercent = this.getFilesPercent();\n this.percent = newPercent;\n this.primaryProgressDataStore.setPrimaryProgressBarData({\n operation: OPERATIONS_NAME.upload,\n percent: newPercent,\n label: getI18n().t(\"Files:Encrypting\"),\n });\n },\n );\n \n if (prepared.encrypted) {",
       "module": "/packages/client"
     }

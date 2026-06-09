@@ -3,7 +3,7 @@
   "content": "Passphrase must contain",
   "content_en_sha1_hash": "5a99d01542a98f4be0d90c0bc2ebd8e686377926",
   "created_at": "2026-05-24T17:27:34.677Z",
-  "updated_at": "2026-06-02T14:21:21.858Z",
+  "updated_at": "2026-06-09T09:43:10.969Z",
   "comment": {
     "text": "Tooltip title introducing a list of passphrase requirements, followed by a colon.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 209,
+      "line_number": 210,
       "context": "isFullWidth\n passwordSettings={PASSPHRASE_SETTINGS}\n onValidateInput={(progressScore) =>\n setRulesPassed(progressScore)\n }\n tooltipPasswordTitle={`${t(\"Common:PassphraseLimitMessage\")}:`}\n tooltipPasswordLength={`${t(\n \"Common:PasswordMinimumLength\",\n )}: ${MIN_LENGTH}`}\n tooltipPasswordDigits={t(\"Common:PasswordLimitDigits\")}\n tooltipPasswordCapital={t(\"Common:PasswordLimitUpperCase\")}",
       "module": "/packages/shared"
     }

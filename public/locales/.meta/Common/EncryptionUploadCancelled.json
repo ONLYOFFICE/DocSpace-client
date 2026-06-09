@@ -3,7 +3,7 @@
   "content": "Upload canceled: the encryption key was not unlocked. The file was not sent.",
   "content_en_sha1_hash": "26dd9dc5bb904f0d53745730718fd7d00719335e",
   "created_at": "2026-06-08T00:00:00.000Z",
-  "updated_at": "2026-06-08T00:00:00.000Z",
+  "updated_at": "2026-06-09T09:43:10.944Z",
   "comment": {
     "text": "Info toast shown when the user cancels the passphrase prompt before uploading a file to a private (encrypted) room. The encryption identity stays locked, so the file is not encrypted or sent.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/UploadDataStore.js",
-      "line_number": 0,
-      "context": "  cancelEncryptedBatchUpload = () => {\n    ...\n    try {\n      toastr.info(getI18n().t(\"Common:EncryptionUploadCancelled\"));\n    } catch {\n      //\n    }\n  };",
+      "line_number": 481,
+      "context": "this.percent = this.getFilesPercent();\n });\n \n try {\n toastr.info(getI18n().t(\"Common:EncryptionUploadCancelled\"));\n } catch {\n //\n }\n };",
       "module": "/packages/client"
     }
   ],

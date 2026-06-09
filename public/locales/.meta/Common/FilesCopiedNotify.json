@@ -3,7 +3,7 @@
   "content": "Files copied.",
   "content_en_sha1_hash": "9bab25397cd16a5f1461f06dc1004411ecc74e27",
   "created_at": "2026-05-19T19:03:16.529Z",
-  "updated_at": "2026-06-01T21:20:44.443Z",
+  "updated_at": "2026-06-09T09:43:10.872Z",
   "comment": {
     "text": "A notification message in the activity feed that appears when a file copy operation is completed.",
     "is_auto": true,
@@ -14,13 +14,13 @@
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
       "line_number": 106,
-      "context": "}\n if (hasRelatedItems)\n return t(\"InfoPanel:FileCopiedCount\", {\n count,\n });\n return t(\"Common:FilesCopiedNotify\");\n case FeedActionKeys.FileDeleted:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });",
+      "context": "}\n if (hasRelatedItems)\n return t(\"Common:FileCopiedCount\", {\n count,\n });\n return t(\"Common:FilesCopiedNotify\");\n case FeedActionKeys.FileDeleted:\n if (hasRelatedItems)\n return t(\"Common:FileDeletedCount\", {\n count,\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 100,
-      "context": "}\n if (hasRelatedItems)\n return t(\"InfoPanel:FileCopiedCount\", {\n count,\n });\n return t(\"Common:FilesCopiedNotify\");\n case FeedActionKeys.FileDeleted:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });",
+      "context": "}\n if (hasRelatedItems)\n return t(\"Common:FileCopiedCount\", {\n count,\n });\n return t(\"Common:FilesCopiedNotify\");\n case FeedActionKeys.FileDeleted:\n if (hasRelatedItems)\n return t(\"Common:FileDeletedCount\", {\n count,\n });",
       "module": "/packages/client"
     },
     {
@@ -31,8 +31,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
-      "line_number": 78,
-      "context": "if (\"fromParentTitle\" in feed.data && feed.data.fromParentTitle) {\n return t(\"Common:FileCopiedTo\", {\n folderTitle: (feed.data as TFeedData).parentTitle,\n });\n }\n return t(\"Common:FilesCopiedNotify\");\n case FeedActionKeys.FileDeleted:\n return t(\"Common:FilesRemovedNotify\");\n case FeedActionKeys.FolderCreated:\n return t(\"Common:FolderCreatedNotify\");\n case FeedActionKeys.FolderRenamed:",
+      "line_number": 99,
+      "context": "}\n if (hasRelatedItems)\n return t(\"Common:FileCopiedCount\", {\n count,\n });\n return t(\"Common:FilesCopiedNotify\");\n case FeedActionKeys.FileDeleted:\n if (hasRelatedItems)\n return t(\"Common:FileDeletedCount\", {\n count,\n });",
       "module": "/packages/sdk"
     }
   ],

@@ -31,9 +31,7 @@ import { useTranslation } from "react-i18next";
 
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 
-import SdkIframe, {
-  type SdkIframeHandle,
-} from "SRC_DIR/components/SdkIframe";
+import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
 import { InstallAiFormsDialog } from "SRC_DIR/pages/Dashboard/InstallModuleDialog";
 import type { AiFormsSettings } from "SRC_DIR/pages/Dashboard/utils";
 
@@ -77,14 +75,14 @@ const AiForms = ({
   const [searchParams, setSearchParams] = useSearchParams();
   const [settingsChecked, setSettingsChecked] = React.useState(false);
   const [showSetupDialog, setShowSetupDialog] = React.useState(false);
-  const iframeRef = React.useRef<SdkIframeHandle | null>(null);
   const lastSdkSectionRef = React.useRef<string | null>(null);
-  const initialSrcRef = React.useRef<string | null>(null);
 
   const searchParamsRef = React.useRef(searchParams);
   searchParamsRef.current = searchParams;
   const setSearchParamsRef = React.useRef(setSearchParams);
   setSearchParamsRef.current = setSearchParams;
+  const roomIdRef = React.useRef(roomId);
+  roomIdRef.current = roomId;
 
   const handleSdkNavigate = React.useCallback((nextSection: string) => {
     lastSdkSectionRef.current = nextSection;
@@ -102,10 +100,33 @@ const AiForms = ({
   const hostSection = searchParams.get("section") ?? "";
   const sdkSection = SECTION_TO_SDK[hostSection] ?? "my-forms";
 
+  // Only show the frame once configuration is verified and a room exists;
+  // otherwise the page renders its install dialog (below) and the host shows
+  // no frame.
+  const frameEnabled = settingsChecked && roomId !== null;
+
+  const apiRef = useSdkFrame({
+    appId: "ai-forms",
+    enabled: frameEnabled,
+    title: t("Common:DashboardFormsTitle"),
+    getSrc: () => {
+      const sp = searchParamsRef.current;
+      const basePath =
+        SECTION_TO_PATH[sp.get("section") ?? ""] ?? "/sdk/forms/my-forms";
+      const params = new URLSearchParams({ showMenu: "false" });
+      if (roomIdRef.current !== null) {
+        params.set("roomId", String(roomIdRef.current));
+      }
+      return `${basePath}?${params}`;
+    },
+    onNavigate: handleSdkNavigate,
+  });
+
   React.useEffect(() => {
+    if (!frameEnabled) return;
     if (lastSdkSectionRef.current === sdkSection) return;
-    iframeRef.current?.call("navigateSection", { section: sdkSection });
-  }, [sdkSection]);
+    apiRef.current?.call("navigateSection", { section: sdkSection });
+  }, [frameEnabled, sdkSection, apiRef]);
 
   React.useEffect(() => {
     ensureAppsLoaded();
@@ -135,32 +156,17 @@ const AiForms = ({
 
   if (roomId === null) {
     return (
-      <>
-        <InstallAiFormsDialog
-          visible={showSetupDialog}
-          onClose={handleSetupComplete}
-          onInstalled={handleSetupComplete}
-          skipConfirm={true}
-        />
-      </>
+      <InstallAiFormsDialog
+        visible={showSetupDialog}
+        onClose={handleSetupComplete}
+        onInstalled={handleSetupComplete}
+        skipConfirm={true}
+      />
     );
   }
 
-  if (initialSrcRef.current === null) {
-    const basePath = SECTION_TO_PATH[hostSection] ?? "/sdk/forms/my-forms";
-    const params = new URLSearchParams({ showMenu: "false" });
-    if (roomId !== null) params.set("roomId", String(roomId));
-    initialSrcRef.current = `${basePath}?${params}`;
-  }
-
-  return (
-    <SdkIframe
-      apiRef={iframeRef}
-      src={initialSrcRef.current}
-      title={t("Common:DashboardFormsTitle")}
-      onNavigate={handleSdkNavigate}
-    />
-  );
+  // The frame is rendered by the persistent host (see useSdkFrame above).
+  return null;
 };
 
 const AiFormsConnected = inject<TStore>(({ appsStore }) => ({

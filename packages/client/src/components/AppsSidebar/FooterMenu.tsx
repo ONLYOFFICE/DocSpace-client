@@ -129,7 +129,14 @@ const FooterMenu = ({
 
   if (groups.length === 0) return null;
 
-  return <NavMenu groups={groups} activeItemId={activeId} iconOnly={!showText} />;
+  return (
+    <NavMenu
+      groups={groups}
+      activeItemId={activeId}
+      iconOnly={!showText}
+      withAnimation
+    />
+  );
 };
 
 export default FooterMenu;

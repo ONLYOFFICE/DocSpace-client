@@ -36,9 +36,7 @@ import { EmptyView } from "@docspace/shared/components/empty-view";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
 
-import SdkIframe, {
-  type SdkIframeHandle,
-} from "SRC_DIR/components/SdkIframe";
+import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
 
 // Sub-sections inside the iframe that the host URL exposes via
 // `?section=...`. Agent detail lives under `?agentId=N&tab=T` instead.
@@ -109,9 +107,7 @@ const AiAgentsComponent = ({ canManageAgents, theme }: AiAgentsProps) => {
   const { t } = useTranslation(["Common"]);
   useDocumentTitle("Common:DashboardAIChatAgentsTitle");
   const [searchParams, setSearchParams] = useSearchParams();
-  const iframeRef = React.useRef<SdkIframeHandle | null>(null);
   const lastSdkKeyRef = React.useRef<string | null>(null);
-  const initialSrcRef = React.useRef<string | null>(null);
 
   const searchParamsRef = React.useRef(searchParams);
   searchParamsRef.current = searchParams;
@@ -141,15 +137,36 @@ const AiAgentsComponent = ({ canManageAgents, theme }: AiAgentsProps) => {
     [],
   );
 
+  // The host owns the iframe and freezes `src` on first show; all subsequent
+  // navigations flow through postMessage so it stays mounted, keeping the
+  // SDK's warmed runtime / MobX stores / socket across host navigations.
+  const apiRef = useSdkFrame({
+    appId: "ai-agents",
+    enabled: !!canManageAgents,
+    title: t("Common:DashboardAIChatAgentsTitle"),
+    getSrc: () => {
+      const { payload } = buildNavKey(searchParamsRef.current);
+      if (payload.agentId) {
+        return `/sdk/ai-agents/${payload.agentId}?tab=${encodeURIComponent(
+          payload.tab ?? "chat",
+        )}`;
+      }
+      if (payload.section) return `/sdk/ai-agents/${payload.section}`;
+      return "/sdk/ai-agents";
+    },
+    onNavigate: handleSdkNavigate,
+  });
+
   // Parent -> iframe: when the host URL changes (sidebar click, deep link
   // navigation, etc.), tell the SDK to route internally rather than
   // reloading the frame. Skip if the SDK just reported this exact key —
   // that's the iframe-driven case echoing back.
   const navKey = buildNavKey(searchParams);
   React.useEffect(() => {
+    if (!canManageAgents) return;
     if (lastSdkKeyRef.current === navKey.key) return;
-    iframeRef.current?.call("navigateSection", navKey.payload);
-  }, [navKey.key, navKey.payload]);
+    apiRef.current?.call("navigateSection", navKey.payload);
+  }, [canManageAgents, navKey.key, navKey.payload, apiRef]);
 
   if (!canManageAgents) {
     return (
@@ -168,31 +185,8 @@ const AiAgentsComponent = ({ canManageAgents, theme }: AiAgentsProps) => {
     );
   }
 
-  // Compute the iframe `src` exactly once. All subsequent navigations
-  // flow through postMessage so the iframe stays mounted — that's what
-  // keeps the SDK's warmed Next.js runtime, MobX stores and socket
-  // connection across host navigations.
-  if (initialSrcRef.current === null) {
-    const { payload } = navKey;
-    if (payload.agentId) {
-      initialSrcRef.current = `/sdk/ai-agents/${payload.agentId}?tab=${encodeURIComponent(
-        payload.tab ?? "chat",
-      )}`;
-    } else if (payload.section) {
-      initialSrcRef.current = `/sdk/ai-agents/${payload.section}`;
-    } else {
-      initialSrcRef.current = "/sdk/ai-agents";
-    }
-  }
-
-  return (
-    <SdkIframe
-      apiRef={iframeRef}
-      src={initialSrcRef.current}
-      title={t("Common:DashboardAIChatAgentsTitle")}
-      onNavigate={handleSdkNavigate}
-    />
-  );
+  // The frame is rendered by the persistent host (see useSdkFrame above).
+  return null;
 };
 
 // Local alias for the react-router `URLSearchParamsInit` shape (string |

@@ -44,9 +44,7 @@ import { EmptyView } from "@docspace/shared/components/empty-view";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
 
-import SdkIframe, {
-  type SdkIframeHandle,
-} from "SRC_DIR/components/SdkIframe";
+import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
 import { InstallAiArbiterDialog } from "SRC_DIR/pages/Dashboard/InstallAiArbiterDialog";
 
 type AiArbiterSettings = {
@@ -72,7 +70,16 @@ const AiArbiter = ({
   useDocumentTitle("Common:DashboardAIArbiterTitle");
   const [settingsChecked, setSettingsChecked] = React.useState(false);
   const [showSetupDialog, setShowSetupDialog] = React.useState(false);
-  const iframeRef = React.useRef<SdkIframeHandle | null>(null);
+
+  // Show the frame only once configuration is verified, the user can manage
+  // agents, and setup is complete; otherwise the page renders its gating UI
+  // and the host shows no frame.
+  useSdkFrame({
+    appId: "ai-arbiter",
+    enabled: settingsChecked && canManageAgents && !showSetupDialog,
+    title: t("Common:DashboardAIArbiterTitle"),
+    getSrc: () => "/sdk/ai-arbiter",
+  });
 
   React.useEffect(() => {
     ensureAppsLoaded();
@@ -117,13 +124,8 @@ const AiArbiter = ({
     );
   }
 
-  return (
-    <SdkIframe
-      apiRef={iframeRef}
-      src="/sdk/ai-arbiter"
-      title={t("Common:DashboardAIArbiterTitle")}
-    />
-  );
+  // The frame is rendered by the persistent host (see useSdkFrame above).
+  return null;
 };
 
 const AiArbiterConnected = inject<TStore>(

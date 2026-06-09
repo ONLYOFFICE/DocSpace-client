@@ -53,38 +53,55 @@ import layoutStyles from "../docs-layout/DocsLayout.module.scss";
 
 type DocsSettingsLayoutProps = {
   canSeeBilling?: boolean;
+  // The (rooms) group reuses this settings layout but mounts its own
+  // (rooms) frame bridge. Pass `false` there so the personal-files bridge
+  // doesn't also answer `navigateSection` and route out of the rooms group.
+  mountFrameBridge?: boolean;
 };
 
-const DocsSettingsLayout = observer(({ canSeeBilling }: DocsSettingsLayoutProps) => {
-  const { t } = useTranslation(["Common"]);
-
+// Isolated so the hook is only invoked when the personal-files bridge
+// should own `navigateSection` (keeps the rules-of-hooks contract while
+// allowing a conditional mount).
+const DocsFrameBridgeHost = () => {
   useDocsFrameBridge({ isReady: true });
+  return null;
+};
 
-  return (
-    <div className={layoutStyles.root}>
-      <div className={layoutStyles.sectionArea}>
-        <RootScrollbar>
-          <SectionWrapper
-            sectionHeaderContent={
-              <div style={{ padding: "12px 0" }}>
-                <Text fontSize="18px" fontWeight={700}>
-                  {t("Common:Settings")}
-                </Text>
-              </div>
-            }
-            sectionFilterContent={<div />}
-            sectionBodyContent={<Settings canSeeBilling={canSeeBilling} />}
-            isEmptyPage={false}
-            filesFilter=""
-            showFilter={false}
-            viewAs="settings"
-          />
-          <DeviceTypeObserver />
-          <Dialogs />
-        </RootScrollbar>
-      </div>
-    </div>
-  );
-});
+const DocsSettingsLayout = observer(
+  ({ canSeeBilling, mountFrameBridge = true }: DocsSettingsLayoutProps) => {
+    const { t } = useTranslation(["Common"]);
+
+    return (
+      <>
+        {mountFrameBridge ? <DocsFrameBridgeHost /> : null}
+        <div className={layoutStyles.root}>
+          <div className={layoutStyles.sectionArea}>
+            <RootScrollbar>
+              <SectionWrapper
+                sectionHeaderContent={
+                  <div style={{ padding: "12px 0" }}>
+                    <Text fontSize="18px" fontWeight={700}>
+                      {t("Common:Settings")}
+                    </Text>
+                  </div>
+                }
+                sectionFilterContent={<div />}
+                sectionBodyContent={
+                  <Settings canSeeBilling={canSeeBilling} />
+                }
+                isEmptyPage={false}
+                filesFilter=""
+                showFilter={false}
+                viewAs="settings"
+              />
+              <DeviceTypeObserver />
+              <Dialogs />
+            </RootScrollbar>
+          </div>
+        </div>
+      </>
+    );
+  },
+);
 
 export default DocsSettingsLayout;

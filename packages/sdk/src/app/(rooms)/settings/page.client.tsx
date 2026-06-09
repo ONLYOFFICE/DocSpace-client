@@ -50,5 +50,14 @@ export default function RoomsSettingsPage({
 
   const canSeeBilling = user?.isAdmin || user?.isOwner;
 
-  return <DocsSettingsLayout canSeeBilling={canSeeBilling} />;
+  // The (rooms) layout mounts its own frame bridge, so disable the
+  // personal-files bridge here — otherwise both would answer
+  // `navigateSection` and the personal-files one would route out of the
+  // rooms group into `/personal-files`.
+  return (
+    <DocsSettingsLayout
+      canSeeBilling={canSeeBilling}
+      mountFrameBridge={false}
+    />
+  );
 }

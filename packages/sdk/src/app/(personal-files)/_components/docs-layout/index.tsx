@@ -625,7 +625,10 @@ const DocsLayout = observer(
                                     | "agents"
                                     | undefined,
                                   isRoot: boolean,
-                                ) => isFirstLoad || isRoot}
+                                ) =>
+                                  isFirstLoad ||
+                                  isRoot ||
+                                  _selectedItemType === "rooms"}
                                 onCancel={closeSelectorDialog}
                                 onSubmit={(
                                   selectedItemId: string | number | undefined,

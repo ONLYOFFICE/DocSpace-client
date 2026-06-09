@@ -72,14 +72,12 @@ const DocSpaceFilesSaveDialog = ({
             folderId: Number(selectedItemId),
             createTextOrHtmlFile: { title, content },
           });
-          if (res.data.response?.id != null) {
-            toastr.success(
-              t("Common:MessageSavedToFile", {
-                fileName: title,
-                defaultValue: "Saved to {{fileName}}",
-              }),
-            );
-          }
+          // if (res.data.response?.id != null) {
+          //   toastr.success(
+          //
+          //   );
+          // }
+          console.log("File created with ID:", res.data.response?.id);
         } catch (e) {
           toastr.error(e as TData);
         }

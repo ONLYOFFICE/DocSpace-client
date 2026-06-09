@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-@use './_shared';
+@use "./_shared";
 
 /* ---------- info tile grid ---------- */
 .infoTileRow {
@@ -134,6 +134,15 @@
 .statsTable {
   // Cancel TableContainer's default -25px top margin
   margin-top: 0 !important;
+
+  :global(.table-container_header) {
+    position: sticky;
+    top: 0;
+  }
+
+  :global([class*="emptyTableContainer"]) {
+    height: 0;
+  }
 }
 
 .statsDataCell {
@@ -144,4 +153,3 @@
 .downloadRow {
   margin-top: 20px;
 }
-

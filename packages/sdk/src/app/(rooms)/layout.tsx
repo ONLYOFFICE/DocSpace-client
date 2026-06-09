@@ -36,6 +36,7 @@ import { DocsStoreProviders } from "../(personal-files)/_store";
 import RoomsQueryProvider from "./_components/query-provider";
 import { RoomsOperationsStoreContextProvider } from "./_store/RoomsOperationsStore";
 import { RoomsTagsStoreContextProvider } from "./_store/RoomsTagsStore";
+import { RoomsQuotaStoreContextProvider } from "./_store/RoomsQuotaStore";
 import RoomsOperationsProgress from "./_components/operations-progress";
 
 export const dynamic = "force-dynamic";
@@ -105,12 +106,14 @@ export default async function RoomsLayout({
     <main style={{ width: "100%", height: "100%" }}>
       <RoomsQueryProvider>
         <DocsStoreProviders initViewAs={initViewAs}>
-          <RoomsOperationsStoreContextProvider>
-            <RoomsTagsStoreContextProvider>
-              {children}
-              <RoomsOperationsProgress />
-            </RoomsTagsStoreContextProvider>
-          </RoomsOperationsStoreContextProvider>
+          <RoomsQuotaStoreContextProvider>
+            <RoomsOperationsStoreContextProvider>
+              <RoomsTagsStoreContextProvider>
+                {children}
+                <RoomsOperationsProgress />
+              </RoomsTagsStoreContextProvider>
+            </RoomsOperationsStoreContextProvider>
+          </RoomsQuotaStoreContextProvider>
         </DocsStoreProviders>
       </RoomsQueryProvider>
     </main>

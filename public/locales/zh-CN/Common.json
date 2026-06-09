@@ -843,6 +843,8 @@
   "EncryptedTransferBannerDescription": "如果您将加密文件移动或复制到此私人房间之外，文件将以未加密形式保存。",
   "EncryptedTransferBannerTitle": "加密文件",
   "EncryptingFile": "加密文件",
+  "EncryptionDecryptAllFailed": "无法解密所有选定的文件",
+  "EncryptionDecryptPartialFailed": "解密失败：{{fileNames}}",
   "EncryptionDeviceSetupHint": "此设备上没有加密密钥。<0>设置加密</0>以访问加密文件。",
   "EncryptionDownloadFailed": "Could not download the encrypted file.",
   "EncryptionError": "加密操作过程中发生错误",

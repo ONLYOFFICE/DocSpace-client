@@ -843,6 +843,8 @@
   "EncryptedTransferBannerDescription": "Ako premestite ili kopirate šifrovane fajlove izvan ove privatne sobe, biće sačuvani u dešifrovanom obliku.",
   "EncryptedTransferBannerTitle": "Šifrovani fajlovi",
   "EncryptingFile": "Šifrovanje datoteke",
+  "EncryptionDecryptAllFailed": "Nije uspelo dešifrovanje svih izabranih datoteka",
+  "EncryptionDecryptPartialFailed": "Dešifrovanje nije uspelo: {{fileNames}}",
   "EncryptionDeviceSetupHint": "Nemate ključeve za šifrovanje na ovom uređaju. <0>Podesite šifrovanje</0> za pristup šifrovanim fajlovima.",
   "EncryptionDownloadFailed": "Could not download the encrypted file.",
   "EncryptionError": "Došlo je do greške tokom operacije šifrovanja",

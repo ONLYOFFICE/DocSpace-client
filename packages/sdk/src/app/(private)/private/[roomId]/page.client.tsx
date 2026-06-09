@@ -265,7 +265,6 @@ const PrivateRoomFilesPage: React.FC<PrivateRoomFilesPageProps> = ({
           portalSettings={portalSettings}
           filesFilter={filesFilter}
           withoutFavorite
-          editorBasePath="/editor"
           isPrivate
           isArchive={isArchive}
           hasEncryptionKeys={identityStore.hasKeys}

@@ -149,8 +149,6 @@ type DocsLayoutProps = {
   filesFilter: string;
   /** Hide "Add to favorites" in context menus (rooms internals, trash). */
   withoutFavorite?: boolean;
-  /** Editor route base path. Defaults to "/personal-files/editor". */
-  editorBasePath?: string;
   infoPanelHeader?: React.ReactNode;
   infoPanelBody?: React.ReactNode;
   /**
@@ -190,7 +188,6 @@ const DocsLayout = observer(
     portalSettings,
     filesFilter,
     withoutFavorite,
-    editorBasePath,
     infoPanelHeader,
     infoPanelBody,
     isPrivate,

@@ -843,6 +843,8 @@
   "EncryptedTransferBannerDescription": "If you move or copy encrypted files outside this private room, they will be saved in decrypted form.",
   "EncryptedTransferBannerTitle": "Encrypted files",
   "EncryptingFile": "Encrypting file",
+  "EncryptionDecryptAllFailed": "Failed to decrypt all selected files",
+  "EncryptionDecryptPartialFailed": "Failed to decrypt: {{fileNames}}",
   "EncryptionDeviceSetupHint": "You don't have encryption keys on this device. <0>Set up encryption</0> to access encrypted files.",
   "EncryptionDownloadFailed": "Could not download the encrypted file.",
   "EncryptionError": "An error occurred during the encryption operation",

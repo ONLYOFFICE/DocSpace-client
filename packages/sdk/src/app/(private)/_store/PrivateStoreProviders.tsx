@@ -44,7 +44,6 @@ import { RoomsOperationsStoreContextProvider } from "@/app/(rooms)/_store/RoomsO
 import { RoomsTagsStoreContextProvider } from "@/app/(rooms)/_store/RoomsTagsStore";
 
 import { PrivateBaseStoreProviders } from "./PrivateBaseStoreProviders";
-import { PrivateRoomsFilterStoreProvider } from "./PrivateRoomsFilterStore";
 import { PrivateRoomFilesStoreProvider } from "./PrivateRoomFilesStore";
 import { PrivateEncryptedUploadStoreProvider } from "./PrivateEncryptedUploadStore";
 import { PrivateDialogsStoreProvider } from "./PrivateDialogsStore";
@@ -55,14 +54,13 @@ import { PrivateDialogs } from "../_components/dialogs";
 // Outer-to-inner mount order (see SDK_PRIVATE_PLAN.md §6.4):
 //   RoomsQueryProvider
 //   └─ PrivateBaseStoreProviders
-//      └─ PrivateRoomsFilterStore
-//         └─ PrivateRoomFilesStore
-//            └─ PrivateEncryptedUploadStore
-//               └─ PrivateDialogsStore
-//                  └─ RoomsOperationsStore (reused from (rooms))
-//                     └─ RoomsTagsStore (reused from (rooms))
-//                        └─ EncryptionIdentityStore
-//                           └─ EncryptionShell (+ effects + dialogs)
+//      └─ PrivateRoomFilesStore
+//         └─ PrivateEncryptedUploadStore
+//            └─ PrivateDialogsStore
+//               └─ RoomsOperationsStore (reused from (rooms))
+//                  └─ RoomsTagsStore (reused from (rooms))
+//                     └─ EncryptionIdentityStore
+//                        └─ EncryptionShell (+ effects + dialogs)
 export const PrivateStoreProviders = ({
   children,
   initViewAs = "row",
@@ -73,24 +71,22 @@ export const PrivateStoreProviders = ({
   return (
     <RoomsQueryProvider>
       <PrivateBaseStoreProviders initViewAs={initViewAs}>
-        <PrivateRoomsFilterStoreProvider>
-          <PrivateRoomFilesStoreProvider>
-            <PrivateEncryptedUploadStoreProvider>
-              <PrivateDialogsStoreProvider>
-                <RoomsOperationsStoreContextProvider>
-                  <RoomsTagsStoreContextProvider>
-                    <EncryptionIdentityStoreProvider>
-                      <EncryptionShell>
-                        {children}
-                        <PrivateDialogs />
-                      </EncryptionShell>
-                    </EncryptionIdentityStoreProvider>
-                  </RoomsTagsStoreContextProvider>
-                </RoomsOperationsStoreContextProvider>
-              </PrivateDialogsStoreProvider>
-            </PrivateEncryptedUploadStoreProvider>
-          </PrivateRoomFilesStoreProvider>
-        </PrivateRoomsFilterStoreProvider>
+        <PrivateRoomFilesStoreProvider>
+          <PrivateEncryptedUploadStoreProvider>
+            <PrivateDialogsStoreProvider>
+              <RoomsOperationsStoreContextProvider>
+                <RoomsTagsStoreContextProvider>
+                  <EncryptionIdentityStoreProvider>
+                    <EncryptionShell>
+                      {children}
+                      <PrivateDialogs />
+                    </EncryptionShell>
+                  </EncryptionIdentityStoreProvider>
+                </RoomsTagsStoreContextProvider>
+              </RoomsOperationsStoreContextProvider>
+            </PrivateDialogsStoreProvider>
+          </PrivateEncryptedUploadStoreProvider>
+        </PrivateRoomFilesStoreProvider>
       </PrivateBaseStoreProviders>
     </RoomsQueryProvider>
   );

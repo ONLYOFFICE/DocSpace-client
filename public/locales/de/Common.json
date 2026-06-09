@@ -843,6 +843,8 @@
   "EncryptedTransferBannerDescription": "Wenn Sie verschlüsselte Dateien aus diesem privaten Raum verschieben oder kopieren, werden sie in entschlüsselter Form gespeichert.",
   "EncryptedTransferBannerTitle": "Verschlüsselte Dateien",
   "EncryptingFile": "Datei wird verschlüsselt",
+  "EncryptionDecryptAllFailed": "Entschlüsselung aller ausgewählten Dateien fehlgeschlagen",
+  "EncryptionDecryptPartialFailed": "Entschlüsselung fehlgeschlagen: {{fileNames}}",
   "EncryptionDeviceSetupHint": "Sie haben keine Verschlüsselungsschlüssel auf diesem Gerät. <0>Verschlüsselung einrichten</0>, um auf verschlüsselte Dateien zuzugreifen.",
   "EncryptionDownloadFailed": "Could not download the encrypted file.",
   "EncryptionError": "Beim Verschlüsselungsvorgang ist ein Fehler aufgetreten",

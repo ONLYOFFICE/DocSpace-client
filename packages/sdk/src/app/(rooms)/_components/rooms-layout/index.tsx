@@ -316,6 +316,7 @@ const RoomsLayout = observer(
                   roomActionsRef={roomActionsRef}
                   emptyView={emptyView}
                   titleOverride={titleOverride}
+                  isPrivate={isPrivate}
                   hasEncryptionKeys={isPrivate ? hasEncryptionKeys : undefined}
                   onPrivateInviteRoom={onPrivateInviteRoom}
                   onPrivateChangeOwner={onPrivateChangeOwner}

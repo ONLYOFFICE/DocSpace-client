@@ -81,8 +81,6 @@ const DEFAULT_CHUNK_SIZE = 10 * 1024 * 1024;
 const DEFAULT_UPLOAD_THREADS = 3;
 
 type UseDocsActionsOptions = {
-  /** Editor route base path. Defaults to "/personal-files/editor". */
-  editorBasePath?: string;
   /** Replaces the default chunked upload (e.g., encrypted upload). */
   uploadFilesToFolderOverride?: (files: FileList | File[]) => Promise<void>;
 };

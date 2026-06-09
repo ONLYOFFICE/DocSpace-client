@@ -46,6 +46,7 @@ import { normalizeRoomLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
 import {
   DeviceType,
   FolderType,
+  RoomPrivacyFilter,
   RoomSearchArea,
   RoomsType,
 } from "@docspace/shared/enums";
@@ -114,6 +115,7 @@ type RoomsListProps = {
   emptyView?: React.ReactNode;
   /** Sticky breadcrumb title that survives re-fetches. */
   titleOverride?: string;
+  isPrivate?: boolean;
   /** Picks shield vs padlock icon on private-room cards. */
   hasEncryptionKeys?: boolean;
   /** Private-only override; falls through to public dialogs otherwise. */
@@ -139,6 +141,7 @@ const RoomsList = ({
   refreshRef,
   emptyView,
   titleOverride,
+  isPrivate,
   hasEncryptionKeys,
   onPrivateInviteRoom,
   onPrivateChangeOwner,
@@ -191,6 +194,7 @@ const RoomsList = ({
       isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
     );
     f.type = String(RoomsType.CustomRoom);
+    if (isPrivate) f.privacyFilter = RoomPrivacyFilter.Private;
     const sp = new URLSearchParams(filesFilter);
     if (sp.get("page")) f.page = Number(sp.get("page"));
     if (sp.get("pageCount")) f.pageCount = Number(sp.get("pageCount"));
@@ -541,6 +545,7 @@ const RoomsList = ({
       isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
     );
     newFilter.type = String(RoomsType.CustomRoom);
+    if (isPrivate) newFilter.privacyFilter = RoomPrivacyFilter.Private;
     const sp = new URLSearchParams(window.location.search);
     if (sp.get("page")) newFilter.page = Number(sp.get("page"));
     if (sp.get("sortBy"))
@@ -611,6 +616,7 @@ const RoomsList = ({
     navigationStore,
     setRootFolderType,
     isArchive,
+    isPrivate,
     filesListStore,
   ]);
 

@@ -34,14 +34,11 @@
  */
 
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { RoomSearchArea, RoomsType } from "@docspace/shared/enums";
-
-// FE-only marker. The server doesn't know about private rooms as a distinct
-// type; on the wire they are CustomRoom (Type=5) with the `private:true` flag.
-// We always request Type=CustomRoom and post-filter `room.private === true`.
-//
-// Lives in _utils/ (not the client store) so RSC pages can import these
-// helpers without pulling MobX / React context into server bundles.
+import {
+  RoomPrivacyFilter,
+  RoomSearchArea,
+  RoomsType,
+} from "@docspace/shared/enums";
 
 export function applyPrivateRoomsFilter(
   filter: RoomsFilter,
@@ -49,6 +46,7 @@ export function applyPrivateRoomsFilter(
 ): RoomsFilter {
   filter.type = String(RoomsType.CustomRoom);
   filter.searchArea = searchArea;
+  filter.privacyFilter = RoomPrivacyFilter.Private;
   return filter;
 }
 
@@ -60,8 +58,6 @@ export function getPrivateRoomsDefaultFilter(
   return applyPrivateRoomsFilter(filter, searchArea);
 }
 
-// Post-fetch filter — server response carries the `private` flag but no
-// server-side query support exists for it.
 export function isPrivateRoomEntry(entry: { private?: boolean }): boolean {
   return entry?.private === true;
 }

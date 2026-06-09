@@ -843,6 +843,8 @@
   "EncryptedTransferBannerDescription": "Dacă mutați sau copiați fișiere criptate în afara acestei camere private, acestea vor fi salvate în formă decriptată.",
   "EncryptedTransferBannerTitle": "Fișiere criptate",
   "EncryptingFile": "Criptare fișier",
+  "EncryptionDecryptAllFailed": "Nu s-au putut decripta toate fișierele selectate",
+  "EncryptionDecryptPartialFailed": "Decriptare eșuată: {{fileNames}}",
   "EncryptionDeviceSetupHint": "Nu aveți chei de criptare pe acest dispozitiv. <0>Configurați criptarea</0> pentru a accesa fișierele criptate.",
   "EncryptionDownloadFailed": "Could not download the encrypted file.",
   "EncryptionError": "A apărut o eroare în timpul operațiunii de criptare",

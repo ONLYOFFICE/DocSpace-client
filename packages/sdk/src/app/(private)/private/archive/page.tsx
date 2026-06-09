@@ -62,15 +62,21 @@ const serializeRoomsFilter = (filter: RoomsFilter) => {
     ["pageCount", filter.pageCount],
     ["sortBy", filter.sortBy],
     ["sortOrder", filter.sortOrder],
-    ["search", filter.filterValue],
+    ["filterValue", filter.filterValue],
     ["searchArea", filter.searchArea],
     ["type", filter.type as string],
+    ["subjectId", filter.subjectId],
+    ["subjectOwnerId", filter.subjectOwnerId],
   ];
 
   for (const [key, value] of entries) {
     if (value !== undefined && value !== null && value !== "") {
       params.set(key, String(value));
     }
+  }
+
+  if (Array.isArray(filter.tags) && filter.tags.length > 0) {
+    params.set("tags", JSON.stringify(filter.tags));
   }
 
   return params.toString();
@@ -91,7 +97,17 @@ export default async function PrivateArchive({
   if (params.sortBy) filter.sortBy = params.sortBy as typeof filter.sortBy;
   if (params.sortOrder)
     filter.sortOrder = params.sortOrder as typeof filter.sortOrder;
-  if (params.search) filter.filterValue = params.search;
+  if (params.filterValue) filter.filterValue = params.filterValue;
+  if (params.subjectId) filter.subjectId = params.subjectId;
+  if (params.subjectOwnerId) filter.subjectOwnerId = params.subjectOwnerId;
+  if (params.tags) {
+    try {
+      const parsed = JSON.parse(params.tags);
+      if (Array.isArray(parsed) && parsed.length > 0) filter.tags = parsed;
+    } catch {
+      // ignore
+    }
+  }
 
   const filesFilter = serializeRoomsFilter(filter);
 
@@ -117,8 +133,6 @@ export default async function PrivateArchive({
     throw new Error("Failed to load required settings");
   }
 
-  // Same post-fetch filter as the active rooms view; archive just changes
-  // the searchArea query param. Total is recomputed for honest pagination.
   const folders = (roomsData.folders as unknown as TFolder[]).filter(
     isPrivateRoomEntry,
   );
@@ -130,7 +144,7 @@ export default async function PrivateArchive({
       folderData={{
         ...roomsData,
         folders,
-        total: folders.length,
+        total: roomsData.total,
       }}
       portalSettings={portalSettings as TSettings}
       filesFilter={filesFilter}

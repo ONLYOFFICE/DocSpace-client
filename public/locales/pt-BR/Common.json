@@ -843,6 +843,8 @@
   "EncryptedTransferBannerDescription": "Se você mover ou copiar arquivos criptografados para fora desta sala privada, eles serão salvos em formato descriptografado.",
   "EncryptedTransferBannerTitle": "Arquivos criptografados",
   "EncryptingFile": "Criptografando arquivo",
+  "EncryptionDecryptAllFailed": "Falha ao descriptografar todos os arquivos selecionados",
+  "EncryptionDecryptPartialFailed": "Falha ao descriptografar: {{fileNames}}",
   "EncryptionDeviceSetupHint": "Você não tem chaves de criptografia neste dispositivo. <0>Configure a criptografia</0> para acessar arquivos criptografados.",
   "EncryptionDownloadFailed": "Could not download the encrypted file.",
   "EncryptionError": "Ocorreu um erro durante a operação de criptografia",

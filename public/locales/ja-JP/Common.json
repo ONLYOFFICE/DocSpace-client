@@ -843,6 +843,8 @@
   "EncryptedTransferBannerDescription": "このプライベートルーム外に暗号化ファイルを移動またはコピーすると、復号化された形式で保存されます。",
   "EncryptedTransferBannerTitle": "暗号化ファイル",
   "EncryptingFile": "ファイルの暗号化",
+  "EncryptionDecryptAllFailed": "選択したすべてのファイルの復号に失敗しました",
+  "EncryptionDecryptPartialFailed": "復号に失敗しました：{{fileNames}}",
   "EncryptionDeviceSetupHint": "このデバイスに暗号化キーがありません。<0>暗号化を設定</0>して、暗号化ファイルにアクセスしてください。",
   "EncryptionDownloadFailed": "Could not download the encrypted file.",
   "EncryptionError": "暗号化操作中にエラーが発生しました",

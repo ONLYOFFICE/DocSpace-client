@@ -843,6 +843,8 @@
   "EncryptedTransferBannerDescription": "Если вы переместите или скопируете зашифрованные файлы за пределы этой приватной комнаты, они будут сохранены в расшифрованном виде.",
   "EncryptedTransferBannerTitle": "Зашифрованные файлы",
   "EncryptingFile": "Шифрование файла",
+  "EncryptionDecryptAllFailed": "Не удалось расшифровать все выбранные файлы",
+  "EncryptionDecryptPartialFailed": "Не удалось расшифровать: {{fileNames}}",
   "EncryptionDeviceSetupHint": "На этом устройстве отсутствуют ключи шифрования. <0>Настройте шифрование</0>, чтобы получить доступ к зашифрованным файлам.",
   "EncryptionDownloadFailed": "Не удалось загрузить зашифрованный файл.",
   "EncryptionError": "При выполнении операции шифрования произошла ошибка",

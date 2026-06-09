@@ -62,8 +62,12 @@ type UploadFilesArgs = {
   roomId: number | string;
 };
 
+type UploadFilesResult = {
+  ok: boolean;
+};
+
 type UseEncryptedUploadReturn = {
-  uploadFiles: (args: UploadFilesArgs) => Promise<void>;
+  uploadFiles: (args: UploadFilesArgs) => Promise<UploadFilesResult>;
   isUploading: boolean;
 };
 
@@ -76,7 +80,7 @@ const loadOrchestrator = () =>
 
 export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
   const { t } = useTranslation(["Common", "UploadPanel"]);
-  const { requireIdentity } = useEncryption();
+  const { requireIdentity, suspendAutoLock } = useEncryption();
   const identityStore = useEncryptionIdentityStore();
   const uploadStore = useUploadStore();
   const privateUploadStore = usePrivateEncryptedUploadStore();
@@ -84,7 +88,7 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
 
   const uploadFiles = React.useCallback(
     async ({ files, folderId, roomId }: UploadFilesArgs) => {
-      if (files.length === 0) return;
+      if (files.length === 0) return { ok: false };
 
       const userId = identityStore.userKeys?.userId;
       const publicKey = identityStore.userKeys?.publicKey;
@@ -94,13 +98,15 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
 
       if (!userId || !publicKey || !publicKeyId) {
         toastr.error(t("Common:EncryptionKeysNotConfigured"));
-        return;
+        return { ok: false };
       }
 
       // requireIdentity surfaces the PassphraseDialog when locked. A null
       // return means the user cancelled — silently no-op (no toast).
       const identity = await requireIdentity();
-      if (!identity) return;
+      if (!identity) return { ok: false };
+
+      const releaseAutoLock = suspendAutoLock();
 
       const controller = registerCryptoOperation();
       privateUploadStore.registerController(controller);
@@ -118,6 +124,7 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
       uploadStore.setPanelVisible(true);
 
       setIsUploading(true);
+      let ok = false;
       try {
         const { orchestrateEncryptedUpload } = await loadOrchestrator();
         const result = await orchestrateEncryptedUpload({
@@ -179,6 +186,11 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
             if (r.aborted) uploadStore.setItemCancelled(r.uploadId);
           }
         }
+
+        ok =
+          !result.aborted &&
+          result.results.length > 0 &&
+          result.results.every((r) => r.ok);
       } catch (error) {
         // Typed crypto errors carry precise diagnostic messages; untyped errors
         // (unexpected orchestrator / session failures) use the prepare key since
@@ -189,13 +201,17 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
             : t("Common:EncryptionPrepareFailed"),
         );
       } finally {
+        releaseAutoLock();
         privateUploadStore.releaseController(controller);
         releaseCryptoOperation(controller);
         setIsUploading(false);
       }
+
+      return { ok };
     },
     [
       requireIdentity,
+      suspendAutoLock,
       identityStore,
       uploadStore,
       privateUploadStore,

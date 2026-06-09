@@ -843,6 +843,8 @@
   "EncryptedTransferBannerDescription": "Եթե տեղափոխում կամ պատճենում եք կոդավորված ֆայլեր այս մասնավոր սենյակից դուրս, դրանք կպահվեն վերծանված ձևով:",
   "EncryptedTransferBannerTitle": "Կոդավորված ֆայլեր",
   "EncryptingFile": "Ֆայլը կոդավորվում է",
+  "EncryptionDecryptAllFailed": "Չհաջողվեց վերծանել բոլոր ընտրված ֆայլերը",
+  "EncryptionDecryptPartialFailed": "Վերծանումը ձախողվեց՝ {{fileNames}}",
   "EncryptionDeviceSetupHint": "Այս սարքում կոդավորման բանալիներ չկան: <0>Կարգավորեք կոդավորումը</0>՝ կոդավորված ֆայլեր մուտք գործելու համար:",
   "EncryptionDownloadFailed": "Could not download the encrypted file.",
   "EncryptionError": "Կոդավորման գործողության ընթացքում սխալ է տեղի ունեցել",

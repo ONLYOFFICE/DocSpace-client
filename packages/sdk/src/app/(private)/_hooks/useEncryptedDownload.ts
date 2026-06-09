@@ -174,28 +174,42 @@ export const useEncryptedDownload = (): UseEncryptedDownloadReturn => {
         const roomMemberKeys = await memberMod.loadRoomMemberKeysSafe(roomId);
 
         const buffers: Array<{ data: Uint8Array; fileName: string }> = [];
+        const failedNames: string[] = [];
         for (const f of files) {
           if (controller.signal.aborted) return;
-          const info = await getFileEncryptionAccess(f.fileId);
-          if (!info?.fileKeys || info.fileKeys.length === 0) continue;
-          const decrypted = await downloadAndDecryptFileToBuffer({
-            fileId: f.fileId,
-            downloadUrl: f.downloadUrl,
-            fileKeys: info.fileKeys,
-            roomMemberKeys,
-            userId,
-            identity,
-            originalFileName: f.originalFileName,
-            originalFileType: f.originalFileType,
-          });
-          if (decrypted.success && decrypted.data) {
-            buffers.push({ data: decrypted.data, fileName: decrypted.fileName });
+          try {
+            const info = await getFileEncryptionAccess(f.fileId);
+            if (!info?.fileKeys || info.fileKeys.length === 0) {
+              failedNames.push(f.originalFileName);
+              continue;
+            }
+            const decrypted = await downloadAndDecryptFileToBuffer({
+              fileId: f.fileId,
+              downloadUrl: f.downloadUrl,
+              fileKeys: info.fileKeys,
+              roomMemberKeys,
+              userId,
+              identity,
+              originalFileName: f.originalFileName,
+              originalFileType: f.originalFileType,
+            });
+            if (decrypted.success && decrypted.data) {
+              buffers.push({
+                data: decrypted.data,
+                fileName: decrypted.fileName,
+              });
+            } else {
+              failedNames.push(f.originalFileName);
+            }
+          } catch {
+            if (controller.signal.aborted) return;
+            failedNames.push(f.originalFileName);
           }
         }
 
         if (controller.signal.aborted) return;
         if (buffers.length === 0) {
-          toastr.error(t("Common:UnexpectedError"));
+          toastr.error(t("Common:EncryptionDecryptAllFailed"));
           return;
         }
 
@@ -207,6 +221,14 @@ export const useEncryptedDownload = (): UseEncryptedDownloadReturn => {
           type: "application/zip",
         });
         triggerFileDownload(zipBlob, zipFileName);
+
+        if (failedNames.length > 0) {
+          toastr.warning(
+            t("Common:EncryptionDecryptPartialFailed", {
+              fileNames: failedNames.join(", "),
+            }),
+          );
+        }
       } catch (error) {
         if (controller.signal.aborted) return;
         // Files:DecryptAllFailed is the reference key for zip/decrypt-all failure

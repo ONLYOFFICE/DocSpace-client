@@ -843,6 +843,8 @@
   "EncryptedTransferBannerDescription": "Si vous déplacez ou copiez des fichiers chiffrés en dehors de cette salle privée, ils seront enregistrés sous forme déchiffrée.",
   "EncryptedTransferBannerTitle": "Fichiers chiffrés",
   "EncryptingFile": "Chiffrement du fichier",
+  "EncryptionDecryptAllFailed": "Échec du déchiffrement de tous les fichiers sélectionnés",
+  "EncryptionDecryptPartialFailed": "Échec du déchiffrement : {{fileNames}}",
   "EncryptionDeviceSetupHint": "Vous n'avez pas de clés de chiffrement sur cet appareil. <0>Configurer le chiffrement</0> pour accéder aux fichiers chiffrés.",
   "EncryptionDownloadFailed": "Could not download the encrypted file.",
   "EncryptionError": "Une erreur s'est produite lors de l'opération de chiffrement",

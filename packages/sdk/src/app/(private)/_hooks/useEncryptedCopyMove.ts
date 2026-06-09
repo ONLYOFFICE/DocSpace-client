@@ -214,9 +214,7 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
       }
 
       const controller = registerCryptoOperation();
-      // Track the title of the item currently being processed so we can
-      // include it in the EncryptedCopyFailed toast if the operation throws.
-      let activeItemTitle = "";
+      const failed: { title: string; error: unknown }[] = [];
       try {
         const destFolderData = (await getFolder(
           destFolderId as number,
@@ -235,59 +233,83 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
         for (const item of files) {
           if (controller.signal.aborted) return;
 
-          activeItemTitle = item.title;
-          const decrypted = await decryptEncryptedItemToFile(
-            {
-              id: item.id,
-              title: item.title,
-              viewUrl: item.viewUrl,
-              contentType: item.contentType,
-              fileExst: item.fileExst,
-            },
-            userId,
-            identity,
-            sourceRoomId,
-          );
-
-          if (controller.signal.aborted) return;
-
-          if (dest.mode === "plaintext") {
-            await uploadPlaintextFile(
-              decrypted,
-              destFolderId,
-              controller.signal,
+          try {
+            const decrypted = await decryptEncryptedItemToFile(
+              {
+                id: item.id,
+                title: item.title,
+                viewUrl: item.viewUrl,
+                contentType: item.contentType,
+                fileExst: item.fileExst,
+              },
+              userId,
+              identity,
+              sourceRoomId,
             );
-          } else {
-            const sameRoom = String(dest.roomId) === String(sourceRoomId);
-            const fileToUpload =
-              !isMove && sameRoom
-                ? new File([decrypted], addCopySuffix(decrypted.name), {
-                    type: decrypted.type || "application/octet-stream",
-                  })
-                : decrypted;
 
-            await uploadFiles({
-              files: [fileToUpload],
-              folderId: destFolderId,
-              roomId: dest.roomId,
-            });
-          }
+            if (controller.signal.aborted) return;
 
-          if (isMove) {
-            await deleteFile(item.id, false, true);
-            forgetEncryptedFilename(item.id);
-            filesListStore.removeItem(item.id);
+            let uploaded = false;
+            if (dest.mode === "plaintext") {
+              await uploadPlaintextFile(
+                decrypted,
+                destFolderId,
+                controller.signal,
+              );
+              uploaded = !controller.signal.aborted;
+            } else {
+              const sameRoom = String(dest.roomId) === String(sourceRoomId);
+              const fileToUpload =
+                !isMove && sameRoom
+                  ? new File([decrypted], addCopySuffix(decrypted.name), {
+                      type: decrypted.type || "application/octet-stream",
+                    })
+                  : decrypted;
+
+              const uploadResult = await uploadFiles({
+                files: [fileToUpload],
+                folderId: destFolderId,
+                roomId: dest.roomId,
+              });
+              uploaded = uploadResult.ok;
+            }
+
+            if (controller.signal.aborted) return;
+
+            if (!uploaded) {
+              failed.push({ title: item.title, error: null });
+              continue;
+            }
+
+            if (isMove) {
+              await deleteFile(item.id, false, true);
+              forgetEncryptedFilename(item.id);
+              filesListStore.removeItem(item.id);
+            }
+          } catch (error) {
+            if (controller.signal.aborted) return;
+            failed.push({ title: item.title, error });
           }
+        }
+
+        if (controller.signal.aborted) return;
+
+        if (failed.length === 1 && failed[0].error instanceof CryptoError) {
+          toastr.error(getEncryptionErrorMessage(t, failed[0].error));
+        } else if (failed.length > 0) {
+          toastr.error(
+            t("Common:EncryptedCopyFailed", {
+              names: failed.map((f) => f.title).join(", "),
+            }),
+          );
         }
       } catch (error) {
         if (controller.signal.aborted) return;
-        // Typed crypto errors carry precise diagnostic messages; untyped errors
-        // (network, ACL, unexpected) surface the operation-level failure key.
         toastr.error(
           error instanceof CryptoError
             ? getEncryptionErrorMessage(t, error)
             : t("Common:EncryptedCopyFailed", {
-                names: activeItemTitle || files.map((f) => f.title).join(", "),
+                names: files.map((f) => f.title).join(", "),
               }),
         );
       } finally {

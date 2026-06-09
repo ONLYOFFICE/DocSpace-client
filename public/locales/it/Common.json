@@ -843,6 +843,8 @@
   "EncryptedTransferBannerDescription": "Se si spostano o copiano file cifrati al di fuori di questa stanza privata, verranno salvati in forma decifrata.",
   "EncryptedTransferBannerTitle": "File cifrati",
   "EncryptingFile": "Crittografia di file",
+  "EncryptionDecryptAllFailed": "Impossibile decifrare tutti i file selezionati",
+  "EncryptionDecryptPartialFailed": "Impossibile decifrare: {{fileNames}}",
   "EncryptionDeviceSetupHint": "Non ci sono chiavi di cifratura su questo dispositivo. <0>Configura la cifratura</0> per accedere ai file cifrati.",
   "EncryptionDownloadFailed": "Could not download the encrypted file.",
   "EncryptionError": "Si è verificato un errore durante l'operazione di cifratura",

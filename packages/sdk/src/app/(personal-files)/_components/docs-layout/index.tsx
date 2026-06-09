@@ -243,6 +243,7 @@ const DocsLayout = observer(
     const {
       desktopModel: defaultDesktopModel,
       quickActionItems: defaultQuickActionItems,
+      privateQuickActionItems,
     } = useDocsMenuModels({
       openCreateDialog,
       onUploadFiles,
@@ -254,8 +255,12 @@ const DocsLayout = observer(
       const allowed = new Set(["new-folder", "separator-1", "upload-files"]);
       return defaultDesktopModel.filter((item) => allowed.has(String(item.key)));
     }, [isPrivate, defaultDesktopModel]);
-    // Private rooms (active or archived) suppress the quick-action bar.
-    const quickActionItems = isPrivate ? [] : defaultQuickActionItems;
+    // Private rooms swap the document/PDF tiles for the encrypted-room set
+    // (new folder + upload). Archived private rooms are read-only, so the
+    // banner is hidden upstream via `isActionButtonEnabled`.
+    const quickActionItems = isPrivate
+      ? privateQuickActionItems
+      : defaultQuickActionItems;
 
     // Archived private rooms get the narrower read-only whitelist; active
     // private rooms use the full whitelist; non-private rooms have no filter.

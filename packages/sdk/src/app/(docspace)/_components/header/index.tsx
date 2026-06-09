@@ -46,7 +46,7 @@ import Navigation, {
 } from "@docspace/ui-kit/components/navigation";
 import { TableGroupMenu } from "@docspace/ui-kit/components/table";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
-import { FolderType, DeviceType, RoomsType } from "@docspace/shared/enums";
+import { FolderType, DeviceType } from "@docspace/shared/enums";
 import useDeviceType from "@/hooks/useDeviceType";
 import { useNavigationStore } from "../../_store/NavigationStore";
 import { useFilesSelectionStore } from "../../_store/FilesSelectionStore";
@@ -59,8 +59,6 @@ import { FileOperationsContext } from "../../_contexts/FileOperationsContext";
 import { RoomActionsContext } from "@/app/(rooms)/_contexts/RoomActionsContext";
 import { useHeaderContextMenu } from "../../_hooks/useHeaderContextMenu";
 import useContextMenuModel from "../../_hooks/useContextMenuModel";
-import InvitePanel from "@/app/(rooms)/_components/invite-panel";
-import ChangeRoomOwnerDialog from "@/app/(rooms)/_components/change-room-owner-dialog";
 import LeaveRoomDialog from "@/app/(rooms)/_components/leave-room-dialog";
 import type { HeaderProps } from "./Header.types";
 
@@ -95,15 +93,8 @@ const Header = ({
   const roomActionsCtx = React.useContext(RoomActionsContext);
   const isTrashSection = filesListStore.rootFolderType === FolderType.TRASH;
 
-  const {
-    getContextOptionsFolder,
-    isRoom,
-    invitingRoom,
-    setInvitingRoom,
-    changingOwnerRoom,
-    setChangingOwnerRoom,
-    user,
-  } = useHeaderContextMenu(filesListStore.currentFolder ?? current);
+  const { getContextOptionsFolder, isRoom, changeOwner, user } =
+    useHeaderContextMenu(filesListStore.currentFolder ?? current);
 
   const { getHeaderContextMenuModel } = useContextMenuModel({
     onDeleteClick: deleteCtx?.deleteItem,
@@ -308,37 +299,9 @@ const Header = ({
           </div>
         )}
       </div>
-      {invitingRoom ? (
-        <InvitePanel
-          visible
-          onClose={() => setInvitingRoom(null)}
-          roomId={invitingRoom.id as number}
-          roomType={
-            (invitingRoom as unknown as { roomType?: RoomsType }).roomType ??
-            RoomsType.EditingRoom
-          }
-          user={user ?? undefined}
-          isPrivateRoom={
-            (invitingRoom as unknown as { private?: boolean }).private ?? false
-          }
-          onMembersUpdated={() => {}}
-        />
-      ) : null}
-      {changingOwnerRoom ? (
-        <ChangeRoomOwnerDialog
-          visible
-          onClose={() => setChangingOwnerRoom(null)}
-          roomId={changingOwnerRoom.id as number}
-          roomOwnerId={
-            (changingOwnerRoom as unknown as { createdBy?: { id?: string } })
-              .createdBy?.id
-          }
-          currentUserId={user?.id}
-        />
-      ) : null}
       <LeaveRoomDialog
         currentUserId={user?.id}
-        onTransferOwnership={(room) => setChangingOwnerRoom(room)}
+        onTransferOwnership={(room) => changeOwner(room)}
       />
     </>
   );

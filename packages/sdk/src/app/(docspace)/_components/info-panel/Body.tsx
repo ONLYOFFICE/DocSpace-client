@@ -34,10 +34,17 @@ import type { TLogo } from "@docspace/ui-kit/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TFolder } from "@docspace/shared/api/files/types";
 
+import { FolderType } from "@docspace/shared/enums";
+
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { normalizeRoomLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
-import InvitePanel from "@/app/(rooms)/_components/invite-panel";
+import {
+  RoomActionsContext,
+  type RoomActionsHandler,
+} from "@/app/(rooms)/_contexts/RoomActionsContext";
+import useRoomActions from "@/app/(rooms)/_hooks/useRoomActions";
+import type { TFolderItem } from "@/app/(docspace)/_hooks/useItemList";
 
 import { InfoPanelView, useInfoPanelStore } from "../../_store/InfoPanelStore";
 
@@ -76,7 +83,26 @@ const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
     scrollToTop,
   });
 
-  const [invitePanelVisible, setInvitePanelVisible] = React.useState(false);
+  const inheritedRoomActions = React.useContext(RoomActionsContext);
+  const roomActions = useRoomActions();
+  const isArchive = filesListStore.rootFolderType === FolderType.Archive;
+  const fallbackRoomActions = React.useMemo<RoomActionsHandler>(
+    () => ({
+      archiveSelected: () => {},
+      deleteSelected: () => {},
+      restoreSelected: () => {},
+      pinSelected: () => {},
+      isArchive,
+      editRoom: roomActions.editRoom,
+      inviteRoom: roomActions.inviteRoom,
+      changeOwner: roomActions.changeOwner,
+      archiveRoom: roomActions.archiveRoom,
+      deleteRoom: roomActions.deleteRoom,
+      infoRoom: roomActions.infoRoom,
+      roomChanged: roomActions.roomChanged,
+    }),
+    [roomActions, isArchive],
+  );
 
   // Clear pinned selection when the user navigates to a different folder so that
   // a previously-pinned room does not remain visible after entering another room.
@@ -182,27 +208,23 @@ const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
       data-testid="info_panel_body"
     >
       {showHeader ? (
-        <RoomHeader
-          selection={selection as TFolder}
-          isMembersView={isMembersView}
-          hasEditAccess={hasEditAccess}
-          setSearchValue={membersData.handleSearchMembers}
-          onInvite={() => setInvitePanelVisible(true)}
-          onUpdated={onTagsChanged}
-        />
+        <RoomActionsContext.Provider
+          value={inheritedRoomActions ?? fallbackRoomActions}
+        >
+          <RoomHeader
+            selection={selection as TFolder}
+            isMembersView={isMembersView}
+            hasEditAccess={hasEditAccess}
+            setSearchValue={membersData.handleSearchMembers}
+            onInvite={() =>
+              roomActions.inviteRoom(selection as unknown as TFolderItem)
+            }
+            onUpdated={onTagsChanged}
+          />
+        </RoomActionsContext.Provider>
       ) : null}
 
       {renderContent()}
-
-      {invitePanelVisible && selection ? (
-        <InvitePanel
-          visible
-          roomId={Number(selection.id)}
-          roomType={room.roomType}
-          onClose={() => setInvitePanelVisible(false)}
-          onMembersUpdated={() => membersData.setIsMembersPanelUpdating(true)}
-        />
-      ) : null}
     </div>
   );
 });

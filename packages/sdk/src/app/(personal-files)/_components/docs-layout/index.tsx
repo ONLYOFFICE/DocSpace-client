@@ -90,6 +90,8 @@ import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
+import RoomDialogs from "@/app/(rooms)/_components/room-dialogs";
+
 import CreateFileDialog from "../create-file-dialog";
 import DocsMainButton from "../main-button";
 import ConvertDialog from "../convert-dialog";
@@ -530,6 +532,7 @@ const DocsLayout = observer(
                                 )
                               }
                             />
+                            {isInRooms ? <RoomDialogs /> : null}
                             <ShareSelector />
                             <VersionHistoryPanel />
                             <CreateFileDialog

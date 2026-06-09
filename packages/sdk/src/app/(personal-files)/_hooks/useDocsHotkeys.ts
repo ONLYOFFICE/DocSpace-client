@@ -42,6 +42,7 @@ import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
+import { useEncryptedFileActions } from "@/app/(docspace)/_contexts/EncryptedFileActionsContext";
 import type { TFileItem, TFolderItem } from "@/app/(docspace)/_hooks/useItemList";
 import type { CreateFileDialogType } from "../_components/create-file-dialog";
 
@@ -64,6 +65,9 @@ export default function useDocsHotkeys({
 }: DocsHotkeysHandlers) {
   const filesListStore = useFilesListStore();
   const filesSelectionStore = useFilesSelectionStore();
+  // Non-null when rendered inside a private room — the provider is mounted only
+  // in (private)/private/[roomId]/page.client.tsx (same pattern as useTrashActions).
+  const encryptedActions = useEncryptedFileActions();
 
   const isEnabled = useCallback(() => {
     return !checkDialogsOpen();
@@ -238,11 +242,15 @@ export default function useDocsHotkeys({
     { ...hotkeysOptions, keyup: true },
   );
 
-  // Upload folder
+  // Upload folder — silently blocked in private rooms (no folder upload allowed).
+  // Mirrors HotkeyStore.js:601-603: uploadFile(isFolder) { if (isFolder) {
+  //   if (this.treeFoldersStore.isPrivacyFolder) return; ... } }.
+  // No toast is shown — the reference client also returns silently.
   useHotkeys(
     "shift+i",
     () => {
       if (!isEnabled()) return;
+      if (encryptedActions) return;
       onUploadFolder();
     },
     { ...hotkeysOptions, keyup: true },

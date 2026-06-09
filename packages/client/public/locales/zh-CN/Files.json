@@ -99,7 +99,6 @@
   "PersonalContentRemovalNotice": "您在{{sectionName}}部分中的个人文件及文件夹将被<1>删除</1>，因为访客无权访问此部分。相关文件将保留<1>30天</1>供查看和下载。",
   "PersonalFolderErasureWarning": "您的用户类型已更改为访客。个人文件将在 30 天内删除。",
   "RecentlyOpenedTooltip": "最近通过链接打开",
-  "ReEncryptingFiles": "正在重新加密文件",
   "RemovedFromRecent": "从“最近”移除",
   "Reorder": "重新排序",
   "ReorderIndex": "重新排序操作将移除索引中的空格。文件将按顺序重新编制索引，并使用偏移量填补缺失的索引。",

@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.029Z",
-  "updated_at": "2026-06-03T09:30:05.016Z",
+  "updated_at": "2026-06-09T09:43:10.812Z",
   "comment": {
     "text": "This is a label for an input field. It prompts the user to enter a name for a group or a room.",
     "is_auto": true,
@@ -97,7 +97,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
-      "line_number": 480,
+      "line_number": 483,
       "context": "isDisabled={variant === \"update\" || isRequestRunning}\n dataTestId=\"provider-type-combobox\"\n />\n </FieldContainer>\n <FieldContainer\n labelText={t(\"Common:Label\")}\n labelVisible\n isVertical\n removeMargin\n isRequired\n >",
       "module": "/packages/client"
     },
@@ -157,7 +157,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
-      "line_number": 118,
+      "line_number": 131,
       "context": "const getSortData = React.useCallback(() => {\n const name = {\n id: \"sort-by_name\",\n key: SortByFieldName.Name,\n label: t(\"Common:Label\"),\n default: true,\n };\n const modifiedDate = {\n id: \"sort-by_modified\",\n key: SortByFieldName.ModifiedDate,",
       "module": "/packages/sdk"
     },
@@ -169,7 +169,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
-      "line_number": 409,
+      "line_number": 487,
       "context": "<Text\n className={styles.inputLabel}\n fontWeight={600}\n fontSize=\"13px\"\n >\n {t(\"Common:Label\")}:\n </Text>\n <TextInput\n type={InputType.text}\n scale\n size={InputSize.base}",
       "module": "/packages/sdk"
     },
@@ -181,7 +181,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-table-view/index.tsx",
-      "line_number": 156,
+      "line_number": 158,
       "context": "const columns: TTableColumn[] = React.useMemo(\n () => [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n sortBy: SortByFieldName.Name,\n enable: true,\n resizable: true,\n default: true,\n minWidth: 210,",
       "module": "/packages/sdk"
     }

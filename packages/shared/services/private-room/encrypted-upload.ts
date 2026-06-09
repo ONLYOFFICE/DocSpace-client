@@ -73,6 +73,49 @@ export function shouldEncryptUpload(
   return isEncryptableRoomType(roomType) && isPrivate;
 }
 
+export type UploadFolderContext = {
+  isPrivacyFolder: boolean;
+  selectedRoomType?: RoomsType | null;
+};
+
+export type ItemUploadContext = {
+  roomType?: RoomsType;
+  isPrivate?: boolean;
+};
+
+export function resolveItemRoomContext(
+  uploadContext: ItemUploadContext | undefined,
+  folder: UploadFolderContext,
+): { roomType: RoomsType | null | undefined; isPrivate: boolean } {
+  const roomType =
+    uploadContext?.roomType ??
+    (folder.isPrivacyFolder ? RoomsType.CustomRoom : folder.selectedRoomType);
+  const isPrivate =
+    uploadContext && "isPrivate" in uploadContext
+      ? !!uploadContext.isPrivate
+      : folder.isPrivacyFolder;
+  return { roomType, isPrivate };
+}
+
+export function willEncryptUploadItem(
+  params: {
+    uploadContext?: ItemUploadContext;
+    alreadyEncrypted?: boolean;
+    publicKey?: string | null;
+    userId?: string | null;
+  },
+  folder: UploadFolderContext,
+): boolean {
+  if (params.alreadyEncrypted) return false;
+  if (!params.publicKey || !params.userId) return false;
+  const { roomType, isPrivate } = resolveItemRoomContext(
+    params.uploadContext,
+    folder,
+  );
+  if (roomType === null || roomType === undefined) return false;
+  return shouldEncryptUpload(roomType, isPrivate);
+}
+
 function newUuid(): string {
   return globalThis.crypto.randomUUID();
 }

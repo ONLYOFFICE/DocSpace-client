@@ -56,6 +56,7 @@ const RoomsRowView = ({
   onInfoRoom,
   onInviteRoom,
   isArchive,
+  hasEncryptionKeys,
 }: RoomsRowViewProps) => {
   const isSSR = useIsServer();
 
@@ -91,6 +92,7 @@ const RoomsRowView = ({
           onInfoRoom={onInfoRoom}
           onInviteRoom={onInviteRoom}
           isArchive={isArchive}
+          hasEncryptionKeys={hasEncryptionKeys}
         />
       ))}
     </FilesRowContainer>

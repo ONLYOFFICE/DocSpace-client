@@ -41,10 +41,6 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { useEncryption } from "@docspace/shared/context/encryption";
-import {
-  exportIdentityToBlob,
-  getPublicKeyFingerprint,
-} from "@docspace/shared/services/encryption/identity";
 import { setActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
@@ -52,13 +48,14 @@ import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 
 import { AutoLockSetting } from "./AutoLockSetting";
 import { KeysList } from "./KeysList";
-import { useGenerateKeyFlow } from "./flows/useGenerateKeyFlow";
+import { useGenerateKeyFlow } from "@docspace/shared/dialogs/key-generation";
 import { useImportKeyFlow } from "./flows/useImportKeyFlow";
 import { useRecoverKeyFlow } from "./flows/useRecoverKeyFlow";
 import { useDeleteKeyFlow } from "./flows/useDeleteKeyFlow";
+import { useExportKeyFlow } from "./flows/useExportKeyFlow";
 import { useRotatePassphraseFlow } from "./flows/useRotatePassphraseFlow";
 import { useResetKeysFlow } from "./flows/useResetKeysFlow";
-import { getEncryptionErrorMessage } from "./flows/getEncryptionErrorMessage";
+import { useRotateIdentityForRooms } from "./flows/useRotateIdentityForRooms";
 
 import styles from "./KeysManagement.module.scss";
 
@@ -87,7 +84,13 @@ const KeysManagement = ({
     }
   }, [setUserEncryptionKeys]);
 
-  const generate = useGenerateKeyFlow({ userId, refreshKeysFromServer });
+  const { rotationProgress, rotateForAllRooms } = useRotateIdentityForRooms();
+
+  const generate = useGenerateKeyFlow({
+    userId,
+    refreshKeysFromServer,
+    onBeforeNewKeyActive: rotateForAllRooms,
+  });
   const importFlow = useImportKeyFlow({
     userId,
     refreshKeysFromServer,
@@ -97,21 +100,48 @@ const KeysManagement = ({
     encryptionKeys,
     refreshKeysFromServer,
   });
-  const remove = useDeleteKeyFlow({ userId, refreshKeysFromServer });
-  const rotate = useRotatePassphraseFlow({ userId, refreshKeysFromServer });
   const reset = useResetKeysFlow({
     userId,
     encryptionKeys,
     refreshKeysFromServer,
   });
 
+  const handleForgotPassphrase = useCallback(
+    (target?: TEncryptionKeyPair) => {
+      if (recover.available) {
+        recover.request(target);
+      } else if (reset.available) {
+        reset.request();
+      }
+    },
+    [recover, reset],
+  );
+
+  const remove = useDeleteKeyFlow({
+    userId,
+    refreshKeysFromServer,
+    onForgotPassphrase: handleForgotPassphrase,
+  });
+  const exportFlow = useExportKeyFlow({
+    onForgotPassphrase: handleForgotPassphrase,
+  });
+  const rotate = useRotatePassphraseFlow({
+    userId,
+    refreshKeysFromServer,
+    onForgotPassphrase: handleForgotPassphrase,
+  });
+
+  const isRotating = rotationProgress !== null;
+
   const busy =
     generate.isPending ||
     importFlow.isPending ||
     remove.isPending ||
+    exportFlow.isPending ||
     rotate.isPending ||
     recover.isPending ||
-    reset.isPending;
+    reset.isPending ||
+    isRotating;
 
   const handleSelectActive = useCallback(
     (keyId: string) => {
@@ -127,37 +157,12 @@ const KeysManagement = ({
     [userId, refreshKeysFromServer, t],
   );
 
-  const handleExport = useCallback(
-    async (keyData: TEncryptionKeyPair) => {
-      try {
-        const blob = exportIdentityToBlob({
-          publicKey: keyData.publicKey,
-          privateKeyEnc: keyData.privateKeyEnc,
-        });
-        const url = URL.createObjectURL(blob);
-        const fingerprint = await getPublicKeyFingerprint(keyData.publicKey);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `docspace-key-${fingerprint.slice(0, 8)}.json`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        toastr.success(t("Common:EncryptionKeyExported"));
-      } catch (error) {
-        toastr.error(getEncryptionErrorMessage(t, error));
-        console.error("Key export failed:", error);
-      }
-    },
-    [t],
-  );
-
   return (
     <div className={styles.sectionBody}>
       <KeysList
         keys={encryptionKeys || []}
         onDelete={remove.request}
-        onExport={handleExport}
+        onExport={exportFlow.request}
         onRotate={rotate.request}
         onSelectActive={handleSelectActive}
         isDeleting={remove.isPending}
@@ -166,6 +171,7 @@ const KeysManagement = ({
       <div className={styles.contentBody}>
         <div className={styles.inputGroup}>
           <Button
+            primary
             size={ButtonSize.small}
             onClick={generate.request}
             label={t("Common:GenerateNewKey")}
@@ -174,7 +180,6 @@ const KeysManagement = ({
           />
           <div className={styles.buttonsSeparator}>{t("Common:Or")}</div>
           <Button
-            primary
             size={ButtonSize.small}
             onClick={importFlow.request}
             label={t("Common:ImportKey")}
@@ -185,7 +190,7 @@ const KeysManagement = ({
           {recover.available ? (
             <Button
               size={ButtonSize.small}
-              onClick={recover.request}
+              onClick={() => recover.request()}
               label={t("Common:UseRecoveryPhrase")}
               isDisabled={busy}
             />
@@ -202,6 +207,14 @@ const KeysManagement = ({
             />
           ) : null}
         </div>
+        {isRotating && rotationProgress ? (
+          <div className={styles.rotationProgress} role="status">
+            <span>
+              {t("Common:ReEncryptingFiles")} (
+              {rotationProgress.roomsDone}/{rotationProgress.roomsTotal})
+            </span>
+          </div>
+        ) : null}
         {hasKeys ? <AutoLockSetting /> : null}
       </div>
       {reset.available ? (
@@ -223,6 +236,7 @@ const KeysManagement = ({
       {importFlow.modals}
       {recover.modals}
       {remove.modals}
+      {exportFlow.modals}
       {rotate.modals}
       {reset.modals}
     </div>

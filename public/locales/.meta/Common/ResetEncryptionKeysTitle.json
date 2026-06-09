@@ -3,7 +3,7 @@
   "content": "Reset encryption keys",
   "content_en_sha1_hash": "87a37d28c6ed66bbe2eb1237635db03f60c69ca8",
   "created_at": "2026-05-24T17:27:37.214Z",
-  "updated_at": "2026-05-24T17:31:22.118Z",
+  "updated_at": "2026-06-09T09:43:10.926Z",
   "comment": {
     "text": "Dialog title for a confirmation modal that appears when a user initiates the process to reset encryption keys.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/ResetKeysConfirmDialog.tsx",
-      "line_number": 81,
-      "context": "visible={visible}\n onClose={onCancel}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>\n {t(\"Common:ResetEncryptionKeysTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" noSelect>\n {t(\"Common:ResetEncryptionKeysWarning\")}\n </Text>",
+      "line_number": 82,
+      "context": "onClose={onCancel}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>\n {t(\"Common:ResetEncryptionKeysTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div\n style={{\n display: \"flex\",",
       "module": "/packages/client"
     }
   ],

@@ -99,7 +99,6 @@
   "PersonalContentRemovalNotice": "Qonaqların bu bölməyə girişi olmadığı üçün {{sectionName}} bölməsindəki şəxsi fayl və qovluqlarınız <1>silinəcək</1>. Fayllar <1>30 günlük</1> görünən və endirilə bilən qalacaq.",
   "PersonalFolderErasureWarning": "İstifadəçi növünüz Qonaq olaraq dəyişdirildi. Şəxsi sənədləriniz 30 gün ərzində silinəcək.",
   "RecentlyOpenedTooltip": "Yaxın zamanlarda link vasitəsilə açıldı",
-  "ReEncryptingFiles": "Fayllar yenidən şifrələnir",
   "RemovedFromRecent": "Sonlardan kaldırıldı",
   "Reorder": "Yenidən sırala",
   "ReorderIndex": "Yenidən Sırala əməliyyatı indekslərdən boşluqları siləcək. Fayllar çatışmayan indeksləri doldurmaq üçün ofsetlə yenidən indeksləşdiriləcək.",

@@ -3,7 +3,7 @@
   "content": "Word #{{number}}",
   "content_en_sha1_hash": "55ca80cae36da650ff3ef60276f69193f0e71bee",
   "created_at": "2026-05-24T17:27:36.700Z",
-  "updated_at": "2026-05-24T17:34:58.013Z",
+  "updated_at": "2026-06-02T14:21:21.882Z",
   "comment": {
     "text": "Label for an input field in the recovery quiz, indicating the position of a word in a sequence. The {{number}} variable represents the word's index.",
     "is_auto": true,
@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/RecoveryPhraseDisplayModal.tsx",
+      "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
       "line_number": 220,
       "context": "<div key={`q-${pos}`} className={styles.quizQuestion}>\n <label\n htmlFor={`quiz-input-${idx}`}\n className={styles.quizLabel}\n >\n {t(\"Common:RecoveryQuizWordLabel\", { number: pos + 1 })}\n </label>\n <TextInput\n id={`quiz-input-${idx}`}\n name={`quiz-input-${idx}`}\n type={InputType.text}",
-      "module": "/packages/client"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

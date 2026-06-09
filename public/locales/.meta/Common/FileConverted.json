@@ -3,7 +3,7 @@
   "content": "File converted.",
   "content_en_sha1_hash": "1de949499d23c1b37664d1d36e3c621d47452849",
   "created_at": "2026-05-19T19:03:16.316Z",
-  "updated_at": "2026-05-24T17:27:49.123Z",
+  "updated_at": "2026-06-09T09:43:10.870Z",
   "comment": {
     "text": "Status message in the activity feed indicating that a file conversion process has finished.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
-      "line_number": 58,
-      "context": "case FeedActionKeys.FileUploaded:\n return t(\"Common:FilesAddedNotify\");\n case FeedActionKeys.UserFileUpdated:\n return t(\"Common:UserFileUpdated\");\n case FeedActionKeys.FileConverted:\n return t(\"Common:FileConverted\");\n case FeedActionKeys.FileRenamed:\n return t(\"Common:FileRenamedNotify\");\n case FeedActionKeys.FileMoved:\n if (\"fromParentTitle\" in feed.data && feed.data.fromParentTitle) {\n return t(\"Common:FileMovedTo\", {",
+      "line_number": 66,
+      "context": "});\n return t(\"Common:FilesAddedNotify\");\n case FeedActionKeys.UserFileUpdated:\n return t(\"Common:UserFileUpdated\");\n case FeedActionKeys.FileConverted:\n return t(\"Common:FileConverted\");\n case FeedActionKeys.FileRenamed:\n return t(\"Common:FileRenamedNotify\");\n case FeedActionKeys.FileMoved:\n if (\"fromParentTitle\" in feed.data && feed.data.fromParentTitle) {\n return t(\"Common:FileMovedTo\", {",
       "module": "/packages/sdk"
     }
   ],

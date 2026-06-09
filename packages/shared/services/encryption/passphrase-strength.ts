@@ -37,10 +37,22 @@ export const PASSPHRASE_MIN_LENGTH = 12;
 
 export type PassphraseStrength = "weak" | "fair" | "good" | "strong";
 
+/**
+ * Discriminated union of suggestion kinds. UI maps each to a localized
+ * message; producers (`checkPassphraseStrength`) never emit raw English.
+ */
+export type PassphraseSuggestion =
+  | { kind: "min-length"; value: number }
+  | { kind: "lowercase" }
+  | { kind: "uppercase" }
+  | { kind: "digits" }
+  | { kind: "special" }
+  | { kind: "common-pattern" };
+
 export type PassphraseStrengthResult = {
   strength: PassphraseStrength;
   score: number;
-  suggestions: string[];
+  suggestions: PassphraseSuggestion[];
   containsCommonPattern: boolean;
 };
 
@@ -121,31 +133,31 @@ export function checkPassphraseStrength(
   passphrase: string,
   minLength: number = PASSPHRASE_MIN_LENGTH,
 ): PassphraseStrengthResult {
-  const suggestions: string[] = [];
+  const suggestions: PassphraseSuggestion[] = [];
   let score = 0;
 
   if (passphrase.length >= minLength) score += 25;
-  else suggestions.push(`Use at least ${minLength} characters`);
+  else suggestions.push({ kind: "min-length", value: minLength });
 
   if (passphrase.length >= minLength + 4) score += 10;
   if (passphrase.length >= minLength + 8) score += 10;
 
   if (/[a-z]/.test(passphrase)) score += 15;
-  else suggestions.push("Add lowercase letters");
+  else suggestions.push({ kind: "lowercase" });
 
   if (/[A-Z]/.test(passphrase)) score += 15;
-  else suggestions.push("Add uppercase letters");
+  else suggestions.push({ kind: "uppercase" });
 
   if (/\d/.test(passphrase)) score += 15;
-  else suggestions.push("Add numbers");
+  else suggestions.push({ kind: "digits" });
 
   if (/[!@#$%^&*()_+\-=[\]{}|;:'",.<>?/`~]/.test(passphrase)) score += 10;
-  else suggestions.push("Add special characters");
+  else suggestions.push({ kind: "special" });
 
   const matchesPattern = containsCommonPattern(passphrase);
   if (matchesPattern) {
     score = Math.min(score, 25);
-    suggestions.push("Avoid common words and keyboard patterns");
+    suggestions.push({ kind: "common-pattern" });
   }
 
   const belowMinLength = passphrase.length < minLength;

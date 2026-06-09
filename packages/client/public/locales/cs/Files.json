@@ -99,7 +99,6 @@
   "PersonalContentRemovalNotice": "Vaše osobní soubory a složky v sekci {{sectionName}} budou <1>odstraněny</1>, protože Hosté nemají do této sekce přístup. Soubory zůstávají k dispozici k prohlížení a stahování <1>po dobu 30 dnů</1>.",
   "PersonalFolderErasureWarning": "Váš typ uživatele byl změněn na Hosta. Osobní soubory budou smazány za 30 dní.",
   "RecentlyOpenedTooltip": "Nedávno otevřeno přes odkaz",
-  "ReEncryptingFiles": "Přešifrování souborů",
   "RemovedFromRecent": "Odstraněno z nedávno",
   "Reorder": "Změnit pořadí",
   "ReorderIndex": "Akce Změna pořadí odstraní mezery v indexech. Soubory budou znovu indexovány v pořadí s odsazením, aby se doplnily chybějící indexy.",

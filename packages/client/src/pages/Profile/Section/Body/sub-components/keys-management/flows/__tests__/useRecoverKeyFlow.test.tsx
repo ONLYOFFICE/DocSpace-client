@@ -42,7 +42,7 @@ const captured = {
   passphrase: null as Record<string, unknown> | null,
 };
 
-vi.mock("../../modals/PassphraseModal", () => ({
+vi.mock("@docspace/shared/dialogs/passphrase-modal", () => ({
   PassphraseModal: (props: Record<string, unknown>) => {
     captured.passphrase = props;
     useEffect(() => () => {

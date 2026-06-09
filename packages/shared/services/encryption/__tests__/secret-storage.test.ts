@@ -40,6 +40,9 @@ import {
   registerUnlockHandler,
   unregisterUnlockHandler,
   requireUnlock,
+  registerAutoLockSuspender,
+  unregisterAutoLockSuspender,
+  suspendAutoLock,
 } from "../secret-storage";
 import { SESSION_CACHE_DURATION_MS } from "../types";
 import type { IdentityKeyPair } from "../types";
@@ -369,5 +372,43 @@ describe("requireUnlock", () => {
       expect(out).not.toBeNull();
       expect(handler).toHaveBeenCalledTimes(2);
     });
+  });
+});
+
+describe("auto-lock suspender bridge", () => {
+  afterEach(() => {
+    unregisterAutoLockSuspender();
+  });
+
+  it("returns a safe no-op when no suspender is registered", () => {
+    const release = suspendAutoLock();
+    expect(typeof release).toBe("function");
+    expect(() => release()).not.toThrow();
+  });
+
+  it("delegates to the registered suspender and passes its release through", () => {
+    const release = vi.fn();
+    const suspender = vi.fn(() => release);
+    registerAutoLockSuspender(suspender);
+
+    const out = suspendAutoLock();
+    expect(suspender).toHaveBeenCalledTimes(1);
+    expect(out).toBe(release);
+
+    out();
+    expect(release).toHaveBeenCalledTimes(1);
+  });
+
+  it("stops delegating after unregister (no-op again)", () => {
+    const suspender = vi.fn(() => () => {});
+    registerAutoLockSuspender(suspender);
+    suspendAutoLock();
+    expect(suspender).toHaveBeenCalledTimes(1);
+
+    unregisterAutoLockSuspender();
+    const release = suspendAutoLock();
+    expect(suspender).toHaveBeenCalledTimes(1);
+    expect(typeof release).toBe("function");
+    expect(() => release()).not.toThrow();
   });
 });

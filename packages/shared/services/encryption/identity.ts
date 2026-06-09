@@ -251,6 +251,28 @@ function decodePassphraseSlot(
   if (t === 0 || p === 0 || m_KiB === 0) {
     throw new InvalidFormatError("Argon2 params must be non-zero");
   }
+  // Sanity bounds — a compromised server / forged envelope could request
+  // values that DoS the WASM module (m_KiB up to 4 TiB, t/p up to 255).
+  // Defaults are m=65536 (64 MiB), t=3, p=4 — well within these limits.
+  // Upper bounds chosen to allow conservative tuning while preventing
+  // pathological resource use on user devices.
+  const MAX_M_KIB = 1_048_576; // 1 GiB
+  const MAX_TP = 64;
+  if (m_KiB > MAX_M_KIB) {
+    throw new InvalidFormatError(
+      `Argon2 m_KiB out of bounds: ${m_KiB} > ${MAX_M_KIB}`,
+    );
+  }
+  if (t > MAX_TP) {
+    throw new InvalidFormatError(
+      `Argon2 t out of bounds: ${t} > ${MAX_TP}`,
+    );
+  }
+  if (p > MAX_TP) {
+    throw new InvalidFormatError(
+      `Argon2 p out of bounds: ${p} > ${MAX_TP}`,
+    );
+  }
   let cur = offset + 7;
   const salt = buf.slice(cur, cur + SALT_SIZE);
   cur += SALT_SIZE;

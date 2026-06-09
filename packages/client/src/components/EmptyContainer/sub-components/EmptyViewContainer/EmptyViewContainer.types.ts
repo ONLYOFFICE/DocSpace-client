@@ -97,7 +97,10 @@ export interface InjectedEmptyViewContainerProps
       TStore["selectedFolderStore"],
       "access" | "security" | "rootFolderType"
     >,
-    Pick<TStore["treeFoldersStore"], "myFolder" | "myFolderId" | "roomsFolder">,
+    Pick<
+      TStore["treeFoldersStore"],
+      "myFolder" | "myFolderId" | "roomsFolder" | "isPrivacyFolder"
+    >,
     Pick<TStore["clientLoadingStore"], "setIsSectionFilterLoading"> {
   selectedFolder: ReturnType<
     TStore["selectedFolderStore"]["getSelectedFolder"]

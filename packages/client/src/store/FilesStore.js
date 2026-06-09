@@ -76,11 +76,14 @@ import {
   getCategoryType,
 } from "@docspace/shared/utils/common";
 import {
-  getCachedEncryptedFilename,
+  resolveDisplayTitle,
   subscribeFilenameCache,
 } from "@docspace/shared/services/encryption/filename-cache";
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
-import { recoverEncryptedFilenames } from "@docspace/shared/services/private-room/encrypted-filename-recovery";
+import {
+  ensureDecryptedFilename,
+  recoverEncryptedFilenames,
+} from "@docspace/shared/services/private-room/encrypted-filename-recovery";
 import { backfillEncryptedFilesForRoomMembers } from "@docspace/shared/services/private-room/room-encryption";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -1973,6 +1976,7 @@ class FilesStore {
             let quotaLimit;
             let usedSpace;
             let external;
+            let isPrivate;
 
             room = data.current;
 
@@ -1987,6 +1991,8 @@ class FilesStore {
               } else {
                 setInfoPanelSelectedRoom({ ...data.current, isRoom: true });
               }
+
+              isPrivate = room.private;
 
               const { mute } = room;
 
@@ -2015,6 +2021,7 @@ class FilesStore {
               usedSpace,
               isRootTemplates,
               folderType,
+              private: isPrivate,
             };
           }),
         ).then((res) => {
@@ -3035,7 +3042,7 @@ class FilesStore {
         fileOptions = removeOptions(fileOptions, ["move-to"]);
       }
 
-      if (!canCopy) {
+      if (!canCopy && !isEncrypted) {
         fileOptions = removeOptions(fileOptions, ["copy-to"]);
       }
 
@@ -3043,7 +3050,7 @@ class FilesStore {
         fileOptions = removeOptions(fileOptions, ["duplicate"]);
       }
 
-      if (!canMove && !canCopy && !canDuplicate) {
+      if (!canMove && !canCopy && !canDuplicate && !isEncrypted) {
         fileOptions = removeOptions(fileOptions, ["move"]);
       }
 
@@ -3137,6 +3144,20 @@ class FilesStore {
           "rename",
           "edit-index",
           "show-version-history",
+          "finalize-version",
+          "version",
+          // Document editor / PDF flows do not support encrypted files yet.
+          "preview",
+          "fill-form",
+          "edit",
+          "open-pdf",
+          "edit-pdf",
+          "filling-status",
+          "start-filling",
+          "reset-and-start-filling",
+          "separate-stop-filling",
+          "stop-filling",
+          "block-unblock-version",
         ]);
 
         fileOptions.push("download-encrypted");
@@ -3147,22 +3168,9 @@ class FilesStore {
 
         if (!hasEncryptionKeys) {
           fileOptions = removeOptions(fileOptions, [
-            "fill-form",
-            "edit",
-            "open-pdf",
-            "edit-pdf",
-            "pdf-view",
-            "preview",
             "view",
+            "pdf-view",
             "download",
-            "filling-status",
-            "start-filling",
-            "reset-and-start-filling",
-            "separate-stop-filling",
-            "stop-filling",
-            "block-unblock-version",
-            "version",
-            "finalize-version",
           ]);
         }
       }
@@ -3689,8 +3697,18 @@ class FilesStore {
         "mark-as-favorite",
         "remove-from-favorites",
         "edit-index",
-        "rename",
+        "copy-to",
+        "duplicate",
+        "download",
       ]);
+
+      if (!canMove) {
+        folderOptions = removeOptions(folderOptions, ["move", "move-to"]);
+      }
+
+      if (canDownload) {
+        folderOptions.push("download-encrypted");
+      }
     }
 
     if (isRecycleBinFolder) {
@@ -4006,6 +4024,24 @@ class FilesStore {
     if (!roomId) return;
     void recoverEncryptedFilenames(
       candidates,
+      String(userId),
+      identity,
+      roomId,
+    );
+  };
+
+  ensureEncryptedFilenameForFile = (file) => {
+    if (!file?.encrypted || !file.id || !file.viewUrl) return;
+    const userId = this.userStore?.user?.id;
+    if (!userId) return;
+    const identity = SecretStorage.getCached(String(userId));
+    if (!identity) return;
+    const roomId =
+      this.selectedFolderStore.navigationPath.find((r) => r.isRoom)?.id ??
+      (this.selectedFolderStore.isRoom ? this.selectedFolderStore.id : null);
+    if (!roomId) return;
+    void ensureDecryptedFilename(
+      { id: file.id, viewUrl: file.viewUrl, encrypted: file.encrypted },
       String(userId),
       identity,
       roomId,
@@ -4475,8 +4511,7 @@ class FilesStore {
 
       // `void` registers the MobX dep — background cache writes re-render.
       void this.encryptedFilenameCacheVersion;
-      const displayTitle =
-        encrypted && id ? getCachedEncryptedFilename(id) || title : title;
+      const displayTitle = resolveDisplayTitle({ id, title, encrypted });
 
       return {
         access,

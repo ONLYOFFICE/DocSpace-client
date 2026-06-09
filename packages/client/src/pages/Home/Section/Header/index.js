@@ -36,7 +36,7 @@
 import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 import PublicRoomRestrictedIconUrl from "PUBLIC_DIR/images/public-room.restricted.react.svg?url";
 import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
-import EncryptedRoomIconUrl from "PUBLIC_DIR/images/icons/16/security.react.svg?url";
+import EncryptedRoomIconUrl from "PUBLIC_DIR/images/icons/16/security.private.react.svg?url";
 import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
 import SharedLinkSvgUrl from "PUBLIC_DIR/images/icons/16/shared.link.svg?url";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg?url";
@@ -190,6 +190,7 @@ const SectionHeaderContent = (props) => {
     setRefMap,
     deleteRefMap,
     isPersonalReadOnly,
+    isPrivacyFolder,
     showTemplateBadge,
 
     allowInvitingMembers,
@@ -535,7 +536,8 @@ const SectionHeaderContent = (props) => {
   const lifetime = selectedFolder?.lifetime || infoPanelRoom?.lifetime;
   const sharedType =
     (location.state?.isExternal || selectedFolder?.external) && !isPublicRoom;
-  const isEncryptedRoom = selectedFolder?.private === true;
+  const isEncryptedRoom =
+    selectedFolder?.private === true || isPrivacyFolder;
 
   const titleIcon = React.useMemo(() => {
     if (sharedType) return SharedLinkSvgUrl;
@@ -1203,6 +1205,7 @@ export default inject(
       isPersonalReadOnly,
       isSharedWithMeFolderRoot,
       isAIAgentsFolder,
+      isPrivacyFolder,
     } = treeFoldersStore;
 
     const {
@@ -1400,6 +1403,7 @@ export default inject(
       isEmptyFilesList,
       isEmptyArchive,
       isArchiveFolder,
+      isPrivacyFolder,
 
       setIsLoading,
 

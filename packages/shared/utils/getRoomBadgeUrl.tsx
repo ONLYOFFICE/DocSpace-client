@@ -35,11 +35,11 @@
 import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
 import RestrictedAlert12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/restricted.alert.react.svg?url";
 import Link12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/link.svg?url";
-import Security12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/security.react.svg?url";
+import Security12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/security.private.react.svg?url";
 
 import SharedLinkIconURL from "PUBLIC_DIR/images/icons/24/shared.svg?url";
 import PlanetIconURL from "PUBLIC_DIR/images/icons/24/planet.react.svg?url";
-import SecurityIconURL from "PUBLIC_DIR/images/icons/24/security.react.svg?url";
+import SecurityIconURL from "PUBLIC_DIR/images/icons/24/security.private.react.svg?url";
 
 import { RoomsType } from "../enums";
 import type { Nullable } from "../types";

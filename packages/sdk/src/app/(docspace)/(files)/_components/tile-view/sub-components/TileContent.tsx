@@ -38,6 +38,8 @@ import { getTitleWithoutExtension } from "@docspace/shared/utils";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
+import { useDecryptedFilename } from "@/app/(docspace)/_hooks/useDecryptedFilename";
+
 import type { TileContentProps } from "../TileView.types";
 
 const TileContent = ({
@@ -46,16 +48,23 @@ const TileContent = ({
   onTitleClick,
 }: TileContentProps) => {
   const { isBase } = useTheme();
+
+  const title = useDecryptedFilename(
+    item.id,
+    item.title,
+    "encrypted" in item ? item.encrypted : false,
+  );
+
   const titleWithoutExt = item.isFolder
-    ? item.title
-    : getTitleWithoutExtension(item, false);
+    ? title
+    : getTitleWithoutExtension({ title, fileExst: item.fileExst }, false);
 
   return (
     <div>
       <Link
         className="item-file-name"
         type={LinkType.page}
-        title={item.title}
+        title={title}
         fontWeight={600}
         target={LinkTarget.blank}
         onClick={onTitleClick}

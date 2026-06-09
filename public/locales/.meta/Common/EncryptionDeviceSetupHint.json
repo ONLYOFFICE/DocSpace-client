@@ -3,7 +3,7 @@
   "content": "You don't have encryption keys on this device. <0>Set up encryption</0> to access encrypted files.",
   "content_en_sha1_hash": "cb35f751b121270931867ceff7feea1968042bb4",
   "created_at": "2026-05-24T17:27:26.450Z",
-  "updated_at": "2026-05-24T18:03:09.511Z",
+  "updated_at": "2026-06-09T09:43:10.797Z",
   "comment": {
     "text": "Info toast message appearing when the device lacks encryption keys. The `<0>` tag wraps a clickable link to the setup process.",
     "is_auto": true,
@@ -13,9 +13,15 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EncryptionProviderWrapper.jsx",
-      "line_number": 123,
-      "context": "// useNavigate() is unavailable here — EncryptionProviderWrapper is\n // mounted outside <RouterProvider> in App.js and would crash.\n toastr.info(\n <Trans\n i18nKey=\"Common:EncryptionDeviceSetupHint\"\n t={t}\n components={[\n <Link\n key=\"setup\"\n tag=\"a\"",
+      "line_number": 119,
+      "context": "sessionStorage.setItem(DEVICE_SETUP_HINT_SESSION_KEY, \"1\");\n } catch {}\n \n toastr.info(\n <Trans\n i18nKey=\"Common:EncryptionDeviceSetupHint\"\n t={t}\n components={[\n <Link\n key=\"setup\"\n tag=\"a\"",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_components/private-shell/DeviceSetupHintEffect.tsx",
+      "line_number": 68,
+      "context": "// sessionStorage throws in private-mode Safari; fall through.\n }\n \n toastr.info(\n <Trans\n i18nKey=\"Common:EncryptionDeviceSetupHint\"\n t={t}\n components={[\n <Link\n key=\"setup\"\n tag=\"a\"",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

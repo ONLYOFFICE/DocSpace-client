@@ -75,6 +75,7 @@ export type TNavigationPath = {
   shared: boolean;
   quotaLimit?: number;
   usedSpace?: number;
+  private?: boolean;
 };
 
 type ExcludeTypes = SettingsStore | CallableFunction;

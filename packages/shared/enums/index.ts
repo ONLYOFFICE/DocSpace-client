@@ -197,6 +197,11 @@ export const enum RoomSearchArea {
   Templates = "Templates",
   AIAgents = "AiAgents",
 }
+export const enum RoomPrivacyFilter {
+  None = 0,
+  Private = 1,
+  NotPrivate = 2,
+}
 /**
  * Enum for file action.
  * @readonly

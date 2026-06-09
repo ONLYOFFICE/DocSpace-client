@@ -74,6 +74,10 @@ function readStorage(): Storage | null {
   }
 }
 
+const ALLOWED_PRESET_SECONDS: ReadonlySet<number> = new Set(
+  AUTO_LOCK_PRESETS.map((p) => p.seconds),
+);
+
 export function getAutoLockTimeoutSeconds(): number {
   const storage = readStorage();
   if (!storage) return DEFAULT_AUTO_LOCK_SECONDS;
@@ -89,6 +93,11 @@ export function getAutoLockTimeoutSeconds(): number {
   const parsed = Number.parseInt(raw, 10);
   if (!Number.isFinite(parsed) || parsed < 0) return DEFAULT_AUTO_LOCK_SECONDS;
   if (parsed > MAX_AUTO_LOCK_SECONDS) return MAX_AUTO_LOCK_SECONDS;
+  // Defense against localStorage tampering — a hostile script (or browser
+  // extension) could write an arbitrary value to extend the auto-lock window
+  // beyond the UI-offered presets. Read-time enforce the whitelist; falling
+  // back to the safe default if the stored value isn't recognized.
+  if (!ALLOWED_PRESET_SECONDS.has(parsed)) return DEFAULT_AUTO_LOCK_SECONDS;
   return parsed;
 }
 

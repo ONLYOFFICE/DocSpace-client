@@ -1,0 +1,101 @@
+{
+  "key_path": "PrivateRoomEmptyCreateFolderDescription",
+  "content": "Start working in the room by creating files or folders",
+  "content_en_sha1_hash": "b56bfa9dcd9738c6041f0bf7c598799e68e184c6",
+  "created_at": "2026-06-09T09:42:54.449Z",
+  "updated_at": "2026-06-09T09:58:38.151Z",
+  "comment": {
+    "text": "Instructional description text within the empty state view of a private room, appearing below a title to guide users on how to populate the room with content.",
+    "is_auto": true,
+    "updated_at": "2026-06-09T09:58:38.151Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/empty-views/empty-private-room/index.tsx",
+      "line_number": 107,
+      "context": "<span className={styles.actionBody}>\n <span className={styles.actionTitle}>\n {t(\"Common:NewFolder\")}\n </span>\n <span className={styles.actionDescription}>\n {t(\"Common:PrivateRoomEmptyCreateFolderDescription\")}\n </span>\n </span>\n </button>\n ) : null}\n {onUploadFiles ? (",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

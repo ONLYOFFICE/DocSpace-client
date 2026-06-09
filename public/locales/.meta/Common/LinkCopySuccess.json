@@ -3,7 +3,7 @@
   "content": "Link has been copied to the clipboard",
   "content_en_sha1_hash": "2254c41229de93951969596ba422451fa0eff387",
   "created_at": "2025-05-19T21:30:46.142Z",
-  "updated_at": "2026-06-01T21:20:44.405Z",
+  "updated_at": "2026-06-09T09:43:10.822Z",
   "comment": {
     "text": "This is a toast message that appears after a user successfully copies a link to their clipboard.",
     "is_auto": true,
@@ -103,7 +103,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useFolderActions.ts",
-      "line_number": 92,
+      "line_number": 107,
       "context": "const copyFolderLink = React.useCallback(\n async (itemId: number) => {\n const itemLink = await api.files.getFolderLink(itemId);\n copyShareLink(itemLink.sharedTo.shareLink);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n },\n [t],\n );\n \n return { openFolder, openLocation, copyFolderLink };",
       "module": "/packages/sdk"
     }

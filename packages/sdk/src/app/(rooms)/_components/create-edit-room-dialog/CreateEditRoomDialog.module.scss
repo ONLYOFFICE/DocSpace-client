@@ -53,3 +53,27 @@
 	gap: 8px;
 	margin-top: 4px;
 }
+
+.privacyRow {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 12px;
+	border-radius: 6px;
+	background: var(--row-hover-background, rgba(0, 0, 0, 0.04));
+}
+
+.privacyIcon {
+	flex: 0 0 auto;
+	display: flex;
+}
+
+.privacyText {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.privacyDescription {
+	color: var(--text-secondary, rgba(0, 0, 0, 0.6));
+}

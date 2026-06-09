@@ -3,7 +3,7 @@
   "content": "Change passphrase",
   "content_en_sha1_hash": "dd00d696eac10614ed8799191cde06e01e4ca3cd",
   "created_at": "2026-05-24T17:27:20.625Z",
-  "updated_at": "2026-05-24T18:29:41.115Z",
+  "updated_at": "2026-06-09T09:43:10.921Z",
   "comment": {
     "text": "Tooltip for an action button and a title for a dialog used when initiating the passphrase rotation process in keys management.",
     "is_auto": true,
@@ -19,13 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/KeyRotationDialog.tsx",
-      "line_number": 138,
-      "context": "onClose={handleCancel}\n displayType={ModalDialogType.modal}\n isLoading={!ready}\n autoMaxHeight\n >\n <ModalDialog.Header>{t(\"Common:ChangePassphrase\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.container}>\n <Text className={styles.description}>\n {t(\"Common:ChangePassphraseHint\")}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/KeyRotationDialog.tsx",
-      "line_number": 138,
+      "line_number": 144,
       "context": "onClose={handleCancel}\n displayType={ModalDialogType.modal}\n isLoading={!ready}\n autoMaxHeight\n >\n <ModalDialog.Header>{t(\"Common:ChangePassphrase\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.container}>\n <Text className={styles.description}>\n {t(\"Common:ChangePassphraseHint\")}",
       "module": "/packages/client"
     }

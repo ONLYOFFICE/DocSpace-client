@@ -3,7 +3,7 @@
   "content": "Me",
   "content_en_sha1_hash": "94563ec383e29aa3743abd9b337b2e084fb199fb",
   "created_at": "2025-05-19T21:30:46.429Z",
-  "updated_at": "2026-06-03T11:46:06.786Z",
+  "updated_at": "2026-06-09T14:03:10.806Z",
   "comment": {
     "text": "This label appears next to a user's name to indicate that the user is the current user. It is displayed in parentheses.",
     "is_auto": true,
@@ -199,44 +199,50 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/table-view/sub-components/TableViewRow.tsx",
-      "line_number": 162,
+      "line_number": 180,
       "context": ");\n \n const fileOwner =\n item.createdBy &&\n ((currentUserId && currentUserId === item.createdBy.id\n ? t(\"Common:MeLabel\")\n : item.createdBy.displayName) ??\n \"\");\n \n const fileSize = \"contentLength\" in item ? item.contentLength : \"\";\n const fileType =",
       "module": "/packages/sdk"
     },
     {
-      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/useRoomsFilter.tsx",
-      "line_number": 254,
-      "context": "},\n {\n id: \"filter_author-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:MeLabel\"),\n },\n {\n id: \"filter_author-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterSubject,",
+      "file_path": "/packages/sdk/src/app/(private)/_components/members/PrivateMemberUser.tsx",
+      "line_number": 224,
+      "context": "<div className={styles.userBody}>\n <div className={styles.nameWrapper}>\n <Text className={styles.userName}>{displayName}</Text>\n {isMe ? (\n <span className={styles.meLabel}>\n &nbsp;{`(${t(\"Common:MeLabel\")})`}\n </span>\n ) : null}\n </div>\n {typeLabel ? (\n <Text className={styles.userSubtitle} truncate>",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/useRoomsFilter.tsx",
       "line_number": 254,
-      "context": "},\n {\n id: \"filter_author-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:MeLabel\"),\n },\n {\n id: \"filter_author-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterSubject,",
+      "context": "},\n {\n id: \"filter_owner-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Common:MeLabel\"),\n },\n {\n id: \"filter_owner-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterOwner,",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/useRoomsFilter.tsx",
       "line_number": 254,
-      "context": "},\n {\n id: \"filter_author-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:MeLabel\"),\n },\n {\n id: \"filter_author-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterSubject,",
+      "context": "},\n {\n id: \"filter_owner-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Common:MeLabel\"),\n },\n {\n id: \"filter_owner-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterOwner,",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/useRoomsFilter.tsx",
       "line_number": 254,
-      "context": "},\n {\n id: \"filter_author-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:MeLabel\"),\n },\n {\n id: \"filter_author-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterSubject,",
+      "context": "},\n {\n id: \"filter_owner-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Common:MeLabel\"),\n },\n {\n id: \"filter_owner-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterOwner,",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/useRoomsFilter.tsx",
       "line_number": 254,
-      "context": "},\n {\n id: \"filter_author-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:MeLabel\"),\n },\n {\n id: \"filter_author-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterSubject,",
+      "context": "},\n {\n id: \"filter_owner-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Common:MeLabel\"),\n },\n {\n id: \"filter_owner-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterOwner,",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/useRoomsFilter.tsx",
       "line_number": 254,
-      "context": "},\n {\n id: \"filter_author-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:MeLabel\"),\n },\n {\n id: \"filter_author-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterSubject,",
+      "context": "},\n {\n id: \"filter_owner-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Common:MeLabel\"),\n },\n {\n id: \"filter_owner-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterOwner,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/useRoomsFilter.tsx",
+      "line_number": 254,
+      "context": "},\n {\n id: \"filter_owner-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Common:MeLabel\"),\n },\n {\n id: \"filter_owner-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterOwner,",
       "module": "/packages/sdk"
     },
     {

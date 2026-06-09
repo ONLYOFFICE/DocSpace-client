@@ -56,7 +56,7 @@ import styles from "./KeysManagement.module.scss";
 
 type KeyItemProps = {
   keyData: TEncryptionKeyPair;
-  onDelete: (keyId: string) => void;
+  onDelete: (keyData: TEncryptionKeyPair) => void;
   onExport: (keyData: TEncryptionKeyPair) => void;
   onRotate: (keyData: TEncryptionKeyPair) => void;
   onSelectActive: (keyId: string) => void;
@@ -94,8 +94,8 @@ const KeyItem: React.FC<KeyItemProps> = ({
   }, [keyData.publicKey]);
 
   const handleDelete = useCallback(() => {
-    onDelete(keyData.id);
-  }, [onDelete, keyData.id]);
+    onDelete(keyData);
+  }, [onDelete, keyData]);
 
   const handleExport = useCallback(() => {
     onExport(keyData);
@@ -211,7 +211,7 @@ const KeyItem: React.FC<KeyItemProps> = ({
 
 type KeysListProps = {
   keys: TEncryptionKeyPair[];
-  onDelete: (keyId: string) => void;
+  onDelete: (keyData: TEncryptionKeyPair) => void;
   onExport: (keyData: TEncryptionKeyPair) => void;
   onRotate: (keyData: TEncryptionKeyPair) => void;
   onSelectActive: (keyId: string) => void;

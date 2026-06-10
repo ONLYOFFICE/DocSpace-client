@@ -698,7 +698,13 @@ const DocsLayout = observer(
                                       infoPanelHeader ?? <DocsInfoPanelHeader />
                                     }
                                     infoPanelBodyContent={
-                                      infoPanelBody ?? <DocsInfoPanelBody />
+                                      infoPanelBody ?? (
+                                        <DocsInfoPanelBody
+                                          onTagsChanged={
+                                            onInfoPanelRoomUpdated
+                                          }
+                                        />
+                                      )
                                     }
                                     isInfoPanelVisible={
                                       infoPanelStore.isVisible

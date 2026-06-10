@@ -42,6 +42,7 @@ import type { TViewAs } from "@docspace/shared/types";
 import RoomsQueryProvider from "@/app/(rooms)/_components/query-provider";
 import { RoomsOperationsStoreContextProvider } from "@/app/(rooms)/_store/RoomsOperationsStore";
 import { RoomsTagsStoreContextProvider } from "@/app/(rooms)/_store/RoomsTagsStore";
+import { RoomsQuotaStoreContextProvider } from "@/app/(rooms)/_store/RoomsQuotaStore";
 
 import { PrivateBaseStoreProviders } from "./PrivateBaseStoreProviders";
 import { PrivateRoomFilesStoreProvider } from "./PrivateRoomFilesStore";
@@ -57,10 +58,11 @@ import { PrivateDialogs } from "../_components/dialogs";
 //      └─ PrivateRoomFilesStore
 //         └─ PrivateEncryptedUploadStore
 //            └─ PrivateDialogsStore
-//               └─ RoomsOperationsStore (reused from (rooms))
-//                  └─ RoomsTagsStore (reused from (rooms))
-//                     └─ EncryptionIdentityStore
-//                        └─ EncryptionShell (+ effects + dialogs)
+//               └─ RoomsQuotaStore (reused from (rooms))
+//                  └─ RoomsOperationsStore (reused from (rooms))
+//                     └─ RoomsTagsStore (reused from (rooms))
+//                        └─ EncryptionIdentityStore
+//                           └─ EncryptionShell (+ effects + dialogs)
 export const PrivateStoreProviders = ({
   children,
   initViewAs = "row",
@@ -74,16 +76,18 @@ export const PrivateStoreProviders = ({
         <PrivateRoomFilesStoreProvider>
           <PrivateEncryptedUploadStoreProvider>
             <PrivateDialogsStoreProvider>
-              <RoomsOperationsStoreContextProvider>
-                <RoomsTagsStoreContextProvider>
-                  <EncryptionIdentityStoreProvider>
-                    <EncryptionShell>
-                      {children}
-                      <PrivateDialogs />
-                    </EncryptionShell>
-                  </EncryptionIdentityStoreProvider>
-                </RoomsTagsStoreContextProvider>
-              </RoomsOperationsStoreContextProvider>
+              <RoomsQuotaStoreContextProvider>
+                <RoomsOperationsStoreContextProvider>
+                  <RoomsTagsStoreContextProvider>
+                    <EncryptionIdentityStoreProvider>
+                      <EncryptionShell>
+                        {children}
+                        <PrivateDialogs />
+                      </EncryptionShell>
+                    </EncryptionIdentityStoreProvider>
+                  </RoomsTagsStoreContextProvider>
+                </RoomsOperationsStoreContextProvider>
+              </RoomsQuotaStoreContextProvider>
             </PrivateDialogsStoreProvider>
           </PrivateEncryptedUploadStoreProvider>
         </PrivateRoomFilesStoreProvider>

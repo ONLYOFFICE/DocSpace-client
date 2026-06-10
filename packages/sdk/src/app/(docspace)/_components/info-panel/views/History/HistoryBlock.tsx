@@ -117,8 +117,10 @@ const HistoryBlock = ({
     ? getIcon(isFolder ? undefined : fileExst, 24)
     : "";
 
+  const locationFolderId = data.parentId || data.toFolderId;
+
   const canOpenLocation =
-    isFileOrFolder && !!data.parentId && feedInfo.actionType !== "delete";
+    isFileOrFolder && !!locationFolderId && feedInfo.actionType !== "delete";
 
   const isChangeOwner = feed.action.key === FeedActionKeys.RoomChangeOwner;
   const memberData = (feed.data ?? {}) as unknown as {
@@ -129,14 +131,14 @@ const HistoryBlock = ({
   const newOwner = isChangeOwner ? memberData.owner : undefined;
 
   const onOpenLocation = () => {
-    if (!data.parentId) return;
+    if (!locationFolderId) return;
 
     const section = pathname?.split("/")[1] ?? "";
     const targetPath = ["rooms", "archive"].includes(section)
-      ? `/${section}/${data.parentId}`
+      ? `/${section}/${locationFolderId}`
       : undefined;
 
-    openLocation(data.parentId, data.id, itemTitle, targetPath);
+    openLocation(locationFolderId, data.id, itemTitle, targetPath);
   };
 
   return (

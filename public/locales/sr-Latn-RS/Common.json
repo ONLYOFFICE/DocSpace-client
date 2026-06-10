@@ -2290,5 +2290,7 @@
   "YourName": "Vaše ime",
   "YourPrice": "Vaša cena",
   "YourTurn": "Vaš red",
-  "YouWillBeContacted": "Prodajni tim će vas kontaktirati nakon kreiranja zahteva."
+  "YouWillBeContacted": "Prodajni tim će vas kontaktirati nakon kreiranja zahteva.",
+  "DuplicateFolderItem": "Folder <2>{{title}}</2> uspešno dupliran",
+  "DuplicateItem": "<2>{{title}}</2> uspešno dupliran"
 }

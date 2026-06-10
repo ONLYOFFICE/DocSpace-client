@@ -35,8 +35,6 @@
   "DocumentEdited": "Nevar veikt darbību, jo dokuments tiek rediģēts.",
   "DownloadAll": "Lejupielādēt visu",
   "Downloading": "Lejupielādē",
-  "DuplicateFolderItem": "Mape <2>{{title}}</2> veiksmīgi dublēta",
-  "DuplicateItem": "<2>{{title}}</2> veiksmīgi dublēta",
   "Duplicating": "Dublē",
   "EditTemplate": "Rediģēt veidni",
   "EmptyFormFolderDoneDescriptionText": "Šajā sadaļā tiks parādītas visas aizpildītās veidlapas.",

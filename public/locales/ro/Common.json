@@ -2290,5 +2290,7 @@
   "YourName": "Numele dvs.",
   "YourPrice": "Preţul dvs.",
   "YourTurn": "Acum e rândul dvs.",
-  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării."
+  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării.",
+  "DuplicateFolderItem": "Folderul <2>{{title}}</2> s-a duplicat cu succes",
+  "DuplicateItem": "<2>{{title}}</2> s-a duplicat cu succes"
 }

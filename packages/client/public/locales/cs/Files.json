@@ -35,8 +35,6 @@
   "DocumentEdited": "Akci nelze provést, protože se dokument upravuje.",
   "DownloadAll": "Stáhnout vše",
   "Downloading": "Stahování",
-  "DuplicateFolderItem": "Složka <2>{{title}}</2> úspěšně duplikována",
-  "DuplicateItem": "<2>{{title}}</2> úspěšně duplikováno",
   "Duplicating": "Duplikování",
   "EditTemplate": "Upravit šablonu",
   "EmptyFormFolderDoneDescriptionText": "V této části se zobrazí všechny formuláře, které jsou kompletní.",

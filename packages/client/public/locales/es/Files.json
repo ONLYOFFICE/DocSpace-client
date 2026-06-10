@@ -35,8 +35,6 @@
   "DocumentEdited": "No se puede realizar la acción porque el documento se está editando.",
   "DownloadAll": "Descargar todo",
   "Downloading": "Descargando",
-  "DuplicateFolderItem": "La carpeta <2>{{title}}</2> se ha duplicado correctamente",
-  "DuplicateItem": "<2>{{title}}</2> se ha duplicado correctamente",
   "Duplicating": "Duplicando",
   "EditTemplate": "Editar plantilla",
   "EmptyFormFolderDoneDescriptionText": "Esta sección mostrará todos los formularios que estén completados.",

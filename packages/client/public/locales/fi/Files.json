@@ -35,8 +35,6 @@
   "DocumentEdited": "Toimintoa ei voida suorittaa, koska asiakirjaa muokataan.",
   "DownloadAll": "Lataa kaikki ",
   "Downloading": "Ladataan",
-  "DuplicateFolderItem": "Kansio <2>{{title}}</2> onnistuneesti monistettu",
-  "DuplicateItem": "<2>{{title}}</2> onnistuneesti monistettu",
   "Duplicating": "Monistetaan",
   "EditTemplate": "Muokkaa mallia",
   "EmptyFormFolderDoneDescriptionText": "Tässä osiossa näkyy kaikki lomakkeet, jotka ovat valmiita.",

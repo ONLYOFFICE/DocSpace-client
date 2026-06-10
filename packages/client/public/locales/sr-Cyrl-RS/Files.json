@@ -35,8 +35,6 @@
   "DocumentEdited": "Немогуће извршити радњу зато што се документ уређује.",
   "DownloadAll": "Преузми све",
   "Downloading": "Преузимање",
-  "DuplicateFolderItem": "Фолдер <2>{{title}}</2> успешно дуплиран",
-  "DuplicateItem": "<2>{{title}}</2> успешно дуплиран",
   "Duplicating": "Дуплирање",
   "EditTemplate": "Уреди шаблон",
   "EmptyFormFolderDoneDescriptionText": "Овај одељак ће приказати све обрасце који су попуњени.",

@@ -35,8 +35,6 @@
   "DocumentEdited": "Nie można wykonać akcji, ponieważ dokument jest w trakcie edycji.",
   "DownloadAll": "Pobierz wszystko",
   "Downloading": "Pobieranie",
-  "DuplicateFolderItem": "Pomyślnie zduplikowano katalog <2>{{title}}</2>",
-  "DuplicateItem": "Pomyślnie zduplikowano <2>{{title}}</2>",
   "Duplicating": "Duplikowanie",
   "EditTemplate": "Edytuj szablon",
   "EmptyFormFolderDoneDescriptionText": "W danej sekcji będą wyświetlane wszystkie gotowe formularze.",

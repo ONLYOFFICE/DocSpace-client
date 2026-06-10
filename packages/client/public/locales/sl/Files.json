@@ -35,8 +35,6 @@
   "DocumentEdited": "Akcije ni mogoče izvesti, ker se dokument še ureja.",
   "DownloadAll": "Prenesi vse",
   "Downloading": "Prenašanje",
-  "DuplicateFolderItem": "Mapa <2>{{title}}</2> je bila uspešno podvojena",
-  "DuplicateItem": "<2>{{title}}</2> uspešno podvojen",
   "Duplicating": "Podvajanje",
   "EditTemplate": "Uredi predlogo",
   "EmptyFormFolderDoneDescriptionText": "V tem razdelku bodo prikazani vsi izpolnjeni obrazci.",

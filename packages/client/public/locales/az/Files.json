@@ -35,8 +35,6 @@
   "DocumentEdited": "Sənəd redaktə edildiyi üçün əməliyyat həyata keçirilə bilməz.",
   "DownloadAll": "Hamısını endirin",
   "Downloading": "Endirilir",
-  "DuplicateFolderItem": "<2>{{title}}</2> qovluğu uğurla kopyalandı",
-  "DuplicateItem": "<2>{{title}}</2> uğurla kopyalandı",
   "Duplicating": "Kopyalanır",
   "EditTemplate": "Şablonu redaktə edin",
   "EmptyFormFolderDoneDescriptionText": "Bütün doldurulmuş formalar bu bölmədə göstəriləcək.",

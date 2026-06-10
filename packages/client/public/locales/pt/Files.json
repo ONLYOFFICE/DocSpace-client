@@ -35,8 +35,6 @@
   "DocumentEdited": "Não é possível executar a ação porque o documento está a ser editado.",
   "DownloadAll": "Descarregue tudo",
   "Downloading": "Descarregar",
-  "DuplicateFolderItem": "A pasta <2>{{title}}</2> foi duplicada com sucesso",
-  "DuplicateItem": "<2>{{title}}</2> duplicado com sucesso",
   "Duplicating": "Duplicação",
   "EditTemplate": "Edite os templates",
   "EmptyFormFolderDoneDescriptionText": "Esta seção exibirá todos os formulários preenchidos.",

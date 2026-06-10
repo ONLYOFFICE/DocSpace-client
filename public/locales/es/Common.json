@@ -2290,5 +2290,7 @@
   "YourName": "Su nombre",
   "YourPrice": "Su precio",
   "YourTurn": "Su turno",
-  "YouWillBeContacted": "El equipo de ventas se pondrá en contacto con usted después de crear la solicitud."
+  "YouWillBeContacted": "El equipo de ventas se pondrá en contacto con usted después de crear la solicitud.",
+  "DuplicateFolderItem": "La carpeta <2>{{title}}</2> se ha duplicado correctamente",
+  "DuplicateItem": "<2>{{title}}</2> se ha duplicado correctamente"
 }

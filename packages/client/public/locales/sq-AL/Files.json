@@ -35,8 +35,6 @@
   "DocumentEdited": "Veprimi nuk mund të kryhet sepse dokumenti është duke u modifikuar.",
   "DownloadAll": "Shkarkoni të gjitha",
   "Downloading": "Shkarkim",
-  "DuplicateFolderItem": "Folderi <2>{{title}}</2> është kopjuar me sukses",
-  "DuplicateItem": "<2>{{title}}</2> është kopjuar me sukses",
   "Duplicating": "Duke shumëzuar",
   "EditTemplate": "Redakto model",
   "EmptyFormFolderDoneDescriptionText": "Ky seksion do të shfaqë të gjithë formularët që janë të plotë.",

@@ -2267,5 +2267,7 @@
   "YourName": "Adınız",
   "YourPrice": "Qiymətiniz",
   "YourTurn": "Sizin növbəniz",
-  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq."
+  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq.",
+  "DuplicateFolderItem": "<2>{{title}}</2> qovluğu uğurla kopyalandı",
+  "DuplicateItem": "<2>{{title}}</2> uğurla kopyalandı"
 }

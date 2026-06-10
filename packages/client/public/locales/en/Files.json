@@ -35,8 +35,6 @@
   "DocumentEdited": "Cannot perform the action because the document is being edited.",
   "DownloadAll": "Download all",
   "Downloading": "Downloading",
-  "DuplicateFolderItem": "The folder <2>{{title}}</2> successfully duplicated",
-  "DuplicateItem": "<2>{{title}}</2> successfully duplicated",
   "Duplicating": "Duplicating",
   "EditTemplate": "Edit template",
   "EmptyFormFolderDoneDescriptionText": "This section will display all forms that are complete.",

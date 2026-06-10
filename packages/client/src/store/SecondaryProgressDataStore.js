@@ -211,6 +211,7 @@ class SecondaryProgressDataStore {
           isFolder ? (
             <Trans
               t={t}
+              ns="Common"
               i18nKey="DuplicateFolderItem"
               components={commonComponents}
               values={commonProps}
@@ -218,6 +219,7 @@ class SecondaryProgressDataStore {
           ) : (
             <Trans
               t={t}
+              ns="Common"
               i18nKey="DuplicateItem"
               components={commonComponents}
               values={commonProps}

@@ -35,8 +35,6 @@
   "DocumentEdited": "لا يمكن تنفيذ الإجراء لأن المستند قيد التحرير.",
   "DownloadAll": "تنزيل الكل",
   "Downloading": "جارٍ التنزيل",
-  "DuplicateFolderItem": "تم تكرار المجلد <2>{{title}}</2> بنجاح",
-  "DuplicateItem": "تم تكرار <2>{{title}}</2> بنجاح",
   "Duplicating": "جارٍ التكرار",
   "EditTemplate": "تعديل القالب",
   "EmptyFormFolderDoneDescriptionText": "سيعرض هذا القسم جميع النماذج المكتملة.",

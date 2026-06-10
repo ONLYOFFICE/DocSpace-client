@@ -24,31 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
-import { observer } from "mobx-react";
-
-import OperationsProgressButton from "@docspace/ui-kit/components/operations-progress-button";
-
-import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
-
-import { useRoomsOperationsStore } from "../../_store/RoomsOperationsStore";
-
-const RoomsOperationsProgress = observer(() => {
-  const operationsStore = useRoomsOperationsStore();
-  const infoPanelStore = useInfoPanelStore();
-
-  return (
-    <OperationsProgressButton
-      operations={operationsStore.operations}
-      operationsCompleted={
-        operationsStore.operations.length > 0 &&
-        operationsStore.operations.every((op) => op.completed)
-      }
-      clearOperationsData={operationsStore.clearOperation}
-      isInfoPanelVisible={infoPanelStore.isVisible}
-    />
-  );
-});
-
-export default RoomsOperationsProgress;
+export const trackRoomOperation = async (
+  operationId: string,
+): Promise<boolean> => {
+  try {
+    let finished = false;
+    while (!finished) {
+      const result = await getOperationProgress(
+        operationId,
+        "Operation failed",
+        true,
+      );
+      if (!result) break;
+      finished = result.finished;
+    }
+    return false;
+  } catch (error) {
+    toastr.error(error instanceof Error ? error.message : String(error));
+    return true;
+  }
+};

@@ -35,8 +35,6 @@
   "DocumentEdited": "Kan de actie niet uitvoeren omdat het document bewerkt wordt.",
   "DownloadAll": "Alles downloaden",
   "Downloading": "Downloaden",
-  "DuplicateFolderItem": "De map <2>{{title}}</2> met succes gedupliceerd",
-  "DuplicateItem": "<2>{{title}}</2> met succes gedupliceerd",
   "Duplicating": "Dupliceren",
   "EditTemplate": "Bewerk sjabloon",
   "EmptyFormFolderDoneDescriptionText": "In dit gedeelte worden alle formulieren weergegeven die compleet zijn.",

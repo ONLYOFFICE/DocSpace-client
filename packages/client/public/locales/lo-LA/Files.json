@@ -35,8 +35,6 @@
   "DocumentEdited": "ບໍ່ສາມາດດຳເນີນການໄດ້ເນື່ອງຈາກເອກະສານກຳລັງຖືກແກ້ໄຂ.",
   "DownloadAll": "ດາວໂຫຼດທັງໝົດ",
   "Downloading": "ດາວໂຫຼດ",
-  "DuplicateFolderItem": "ເອກະສານ <2>{{title}}</2> ສຳເລັດການຜະລິດສຳເນົາແລ້ວ",
-  "DuplicateItem": "<2>{{title}}</2> ສໍາເລັດການສໍາເນົາແລ້ວ",
   "Duplicating": "ການຜະລິດຄືນ",
   "EditTemplate": "ແກ້ແບບ",
   "EmptyFormFolderDoneDescriptionText": "ພາກນີ້ຈະສະແດງທຸກຮູບແບບທີ່ສົມບູນ.",

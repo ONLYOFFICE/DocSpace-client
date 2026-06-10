@@ -149,6 +149,7 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [PageType.bonus]: CatalogSettingsGiftReactSvgUrl,
     [PageType.storageManagement]: CatalogSettingsStorageManagementReactSvgUrl,
     [PageType.aiSettings]: CatalogSettingsAIReactSvgUrl,
+    [PageType.newAISettings]: CatalogSettingsAIReactSvgUrl,
   },
   20: {
     [FolderType.USER]: CatalogDocuments20ReactSvgUrl,
@@ -184,6 +185,7 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [PageType.bonus]: CatalogSettingsGift20ReactSvgUrl,
     [PageType.storageManagement]: CatalogSettingsStorageManagement20ReactSvgUrl,
     [PageType.aiSettings]: CatalogSettingsAIReactSvgUrl,
+    [PageType.newAISettings]: CatalogSettingsAIReactSvgUrl,
   },
 };
 
@@ -210,3 +212,4 @@ export const getCatalogIconUrlByType = (
 
   return icons[size]?.[pageType] ?? defaultIconUrl;
 };
+

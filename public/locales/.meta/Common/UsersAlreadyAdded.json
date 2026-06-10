@@ -3,7 +3,7 @@
   "content": "Some users have already been added",
   "content_en_sha1_hash": "11ba705efbb4050c93a4d4827ad25f4eb90bb39d",
   "created_at": "2025-05-19T21:30:54.741Z",
-  "updated_at": "2026-06-01T21:20:44.406Z",
+  "updated_at": "2026-06-09T11:32:15.266Z",
   "comment": {
     "text": "This is a toast message that appears when a user attempts to add individuals who are already members of a group or have already been invited.",
     "is_auto": true,
@@ -49,7 +49,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/index.tsx",
-      "line_number": 572,
+      "line_number": 625,
       "context": "if (isUnique) unique.push(current);\n \n return unique;\n }, []);\n \n if (items.length > filtered.length) toastr.warning(t(\"UsersAlreadyAdded\"));\n \n return filtered;\n };\n \n const closeUsersPanel = () => {",
       "module": "/packages/sdk"
     },

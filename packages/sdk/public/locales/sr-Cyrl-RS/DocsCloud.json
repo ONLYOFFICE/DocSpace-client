@@ -18,5 +18,8 @@
   "DocsConnectorSubtitle": "{{organizationName}} {{productEditorsName}} connector",
   "ExternalUsersActive": "External users active",
   "JWTSecretPlaceholder": "Enter a new secret…",
-  "LicenseUsage": "License Usage"
+  "LicenseUsage": "License Usage",
+  "AuthHeaderHelp": "HTTP заглавље које се користи за слање JWT-а на Document Server. Подразумевано: AuthorizationJWT.",
+  "JWTSecretHelp": "Оставите празно да бисте задржали тренутну тајну. Мора да одговара кључу конфигурисаном на Document Server.",
+  "AnonymousSupportHelp": "Омогућите корисницима без налога да отворе и прегледају документе дељене путем јавних линкова."
 }

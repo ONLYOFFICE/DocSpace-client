@@ -78,6 +78,12 @@ export const InstallModuleDialog = ({
   const [stepIndex, setStepIndex] = React.useState(0);
   const abortRef = React.useRef<AbortController | null>(null);
   const cancelledRef = React.useRef(false);
+  // Keep a current-ref so handleInstallClick never needs steps in its deps.
+  // steps only changes when libraryProgress updates descriptions — the IDs and
+  // count are stable — so a stale closure would cause the skipConfirm effect
+  // to re-fire on every progress tick and start duplicate installations.
+  const stepsRef = React.useRef(steps);
+  stepsRef.current = steps;
 
   const handleInstallClick = React.useCallback(async () => {
     setPhase("installing");
@@ -89,7 +95,7 @@ export const InstallModuleDialog = ({
     try {
       await onInstall(
         (id) => {
-          const idx = steps.findIndex((s) => s.id === id);
+          const idx = stepsRef.current.findIndex((s) => s.id === id);
           if (idx >= 0) setStepIndex(idx);
         },
         abortRef.current.signal,
@@ -97,7 +103,7 @@ export const InstallModuleDialog = ({
 
       if (cancelledRef.current) return;
 
-      setStepIndex(steps.length);
+      setStepIndex(stepsRef.current.length);
       setPhase("done");
     } catch (err) {
       if (cancelledRef.current) return;
@@ -107,7 +113,7 @@ export const InstallModuleDialog = ({
     } finally {
       abortRef.current = null;
     }
-  }, [onInstall, steps, t]);
+  }, [onInstall, t]);
 
   const handleCancelInstalling = React.useCallback(async () => {
     cancelledRef.current = true;

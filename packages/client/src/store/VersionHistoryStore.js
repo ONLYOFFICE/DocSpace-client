@@ -38,6 +38,10 @@ import api from "@docspace/shared/api";
 import { FileStatus, FileAction } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
+import {
+  resolveDisplayTitle,
+  subscribeFilenameCache,
+} from "@docspace/shared/services/encryption/filename-cache";
 
 class VersionHistoryStore {
   isVisible = false;
@@ -62,10 +66,18 @@ class VersionHistoryStore {
 
   versionDeletionProcess = false;
 
+  filenameCacheVersion = 0;
+
   constructor(filesStore, filesActionsStore) {
     makeAutoObservable(this);
     this.filesStore = filesStore;
     this.filesActionsStore = filesActionsStore;
+
+    subscribeFilenameCache(() => {
+      runInAction(() => {
+        this.filenameCacheVersion += 1;
+      });
+    });
 
     if (this.versions) {
       // TODO: Files store in not initialized on versionHistory page. Need socket.
@@ -88,6 +100,12 @@ class VersionHistoryStore {
         runInAction(() => (this.isEditing = false));
       });
     }
+  }
+
+  get fileTitle() {
+    void this.filenameCacheVersion;
+    const current = this.versions?.[0];
+    return current ? resolveDisplayTitle(current) : "";
   }
 
   get isEditingVersion() {
@@ -155,6 +173,8 @@ class VersionHistoryStore {
     this.filesStore.setFile(newFile);
 
     this.versions = versions;
+
+    this.filesStore.ensureEncryptedFilenameForFile?.(versions[0]);
   };
 
   fetchFileVersions = (fileId, access, requestToken, update) => {

@@ -18,5 +18,8 @@
   "DocsConnectorSubtitle": "{{organizationName}} {{productEditorsName}} connector",
   "ExternalUsersActive": "External users active",
   "JWTSecretPlaceholder": "Enter a new secret…",
-  "LicenseUsage": "License Usage"
+  "LicenseUsage": "License Usage",
+  "AuthHeaderHelp": "HTTP վերնագիր Document Server-ին JWT-ն փոխանցելու համար: Լռելյայն` AuthorizationJWT:",
+  "JWTSecretHelp": "Թողեք դատարկ ընթացիկ գաղտնի բանալին պահելու համար. պետք է համընկնի Document Server-ում Կարգավորված բանալին հետ.",
+  "AnonymousSupportHelp": "Թույլատրել Օգտագործողներ առանց Հաշիվ Բացել եվ Դիտել Կիսված Փաստաթղթեր Հանրային հղումներով."
 }

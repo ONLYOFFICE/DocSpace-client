@@ -48,6 +48,8 @@ import {
 } from "@docspace/shared/components/files-row";
 import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
+import { useDecryptedFilename } from "@/app/(docspace)/_hooks/useDecryptedFilename";
 import Badges from "@docspace/shared/components/badges";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import EditorsTooltip from "../../editors-tooltip";
@@ -68,6 +70,7 @@ import { FileOperationsContext } from "../../../../_contexts/FileOperationsConte
 import { RenameContext } from "../../../../_contexts/RenameContext";
 import { VersionHistoryContext } from "../../../../_contexts/VersionHistoryContext";
 import { ConvertContext } from "../../../../_contexts/ConvertContext";
+import { AskAIContext } from "../../../../_contexts/AskAIContext";
 import type { TFileItem, TFolderItem } from "../../../../_hooks/useItemList";
 import { generateFilesItemValue } from "../../../_utils";
 import { DragContext } from "../../../../_contexts/DragContext";
@@ -85,6 +88,8 @@ const Row = observer(
     timezone,
     displayFileExtension,
     isSSR,
+    isPrivate,
+    hasEncryptionKeys,
     currentUserId,
   }: RowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
@@ -93,12 +98,20 @@ const Row = observer(
     const { isItemActive } = useActiveItemsStore();
     const isExtsCustomFilter =
       "fileExst" in item
-        ? (filesSettings?.extsWebCustomFilterEditing ?? []).includes(item.fileExst)
+        ? (filesSettings?.extsWebCustomFilterEditing ?? []).includes(
+            item.fileExst,
+          )
         : false;
 
     // Use the observable item from MobX store so isFavorite changes are reactive
     const storeItem = filesListStore.items.find((i) => i.id === item.id);
     const observableItem = storeItem ?? item;
+
+    const decryptedTitle = useDecryptedFilename(
+      item.id,
+      item.title,
+      "encrypted" in item ? item.encrypted : false,
+    );
 
     const { t } = useTranslation(["Common"]);
     const { isBase } = useTheme();
@@ -112,6 +125,7 @@ const Row = observer(
     const renameCtx = React.useContext(RenameContext);
     const onShowVersionHistory = React.useContext(VersionHistoryContext);
     const onConvert = React.useContext(ConvertContext);
+    const onAskAI = React.useContext(AskAIContext);
 
     const { getContextMenuModel } = useContextMenuModel({
       item: observableItem,
@@ -124,15 +138,26 @@ const Row = observer(
       onRestoreClick: fileOpsCtx?.restoreItem,
       onRenameClick: renameCtx?.renameItem,
       onShowVersionHistoryClick: onShowVersionHistory ?? undefined,
+      onAskAI: onAskAI ?? undefined,
     });
 
     const element = (
-      <RoomIcon
-        logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
-        color={"isRoom" in item && item.isRoom ? item.roomIconColor : undefined}
-        title={item.title}
-        showDefault={"isRoom" in item && item.isRoom ? !item.hasRoomImage : false}
-      />
+      <EncryptedItemIconWrapper
+        encrypted={!!("encrypted" in item && (item as TFileItem).encrypted)}
+        hasEncryptionKeys={hasEncryptionKeys ?? true}
+        isRoom={false}
+      >
+        <RoomIcon
+          logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
+          color={
+            "isRoom" in item && item.isRoom ? item.roomIconColor : undefined
+          }
+          title={decryptedTitle}
+          showDefault={
+            "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
+          }
+        />
+      </EncryptedItemIconWrapper>
     );
 
     const onClickFavorite = () => {
@@ -187,8 +212,7 @@ const Row = observer(
       onCopyShareLink?.(observableItem);
     }, [onCopyShareLink, observableItem]);
 
-    const isTrashFolder =
-      filesListStore.rootFolderType === FolderType.TRASH;
+    const isTrashFolder = filesListStore.rootFolderType === FolderType.TRASH;
 
     const quickButtonsComponent = (
       <QuickButtons
@@ -238,12 +262,28 @@ const Row = observer(
         className={classNames(styles.rowWrapper, "row-wrapper")}
       >
         <DragAndDrop
-          data-title={item.title}
+          data-title={decryptedTitle}
           className={classNames("files-item", { droppable: isDroppable })}
           value={value}
           dragging={isDroppable && !!dragCtx?.isDragging}
-          onDrop={dragCtx ? (files) => { if (isDroppable) dragCtx.onFilesDroppedToFolder(files, item.id as number); else dragCtx.onFilesDroppedToCurrentFolder(files); } : undefined}
-          onDragOver={dragCtx ? (isDragActive: boolean) => { if (isDragActive && isDroppable) dragCtx.onFolderDragOver(item.title); else dragCtx.onFolderDragLeave(); } : undefined}
+          onDrop={
+            dragCtx
+              ? (files) => {
+                  if (isDroppable)
+                    dragCtx.onFilesDroppedToFolder(files, item.id as number);
+                  else dragCtx.onFilesDroppedToCurrentFolder(files);
+                }
+              : undefined
+          }
+          onDragOver={
+            dragCtx
+              ? (isDragActive: boolean) => {
+                  if (isDragActive && isDroppable)
+                    dragCtx.onFolderDragOver(item.title);
+                  else dragCtx.onFolderDragLeave();
+                }
+              : undefined
+          }
           onDragLeave={dragCtx ? () => dragCtx.onFolderDragLeave() : undefined}
           // @ts-expect-error: native onMouseDown with event arg passed via ...rest to root div
           onMouseDown={(e: MouseEvent) => dragCtx?.onItemMouseDown(e, item)}
@@ -287,3 +327,4 @@ const Row = observer(
 );
 
 export { Row };
+

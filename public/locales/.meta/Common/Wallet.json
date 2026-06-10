@@ -3,7 +3,7 @@
   "content": "Wallet",
   "content_en_sha1_hash": "b60862f4855a392f00cc9f27e0862c0b979075a6",
   "created_at": "2026-04-10T13:53:43.879Z",
-  "updated_at": "2026-06-03T09:30:05.093Z",
+  "updated_at": "2026-06-03T11:46:06.879Z",
   "comment": {
     "text": "This is a navigation item label in the portal settings, referring to the section where users manage their payment information and balance.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 591,
+      "line_number": 636,
       "context": "{\n id: \"portal-settings_catalog-wallet\",\n key: \"10-2\",\n icon: \"\",\n link: \"wallet\",\n tKey: \"Wallet\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-services\",\n key: \"10-3\",",
       "module": "/packages/client"
     }

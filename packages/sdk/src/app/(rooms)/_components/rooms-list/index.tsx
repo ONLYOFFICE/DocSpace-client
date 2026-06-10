@@ -46,6 +46,7 @@ import { normalizeRoomLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
 import {
   DeviceType,
   FolderType,
+  RoomPrivacyFilter,
   RoomSearchArea,
   RoomsType,
 } from "@docspace/shared/enums";
@@ -111,6 +112,15 @@ type RoomsListProps = {
   user?: TUser;
   isArchive?: boolean;
   refreshRef?: React.MutableRefObject<(() => void) | null>;
+  emptyView?: React.ReactNode;
+  /** Sticky breadcrumb title that survives re-fetches. */
+  titleOverride?: string;
+  isPrivate?: boolean;
+  /** Picks shield vs padlock icon on private-room cards. */
+  hasEncryptionKeys?: boolean;
+  /** Private-only override; falls through to public dialogs otherwise. */
+  onPrivateInviteRoom?: (room: TFolder) => void;
+  onPrivateChangeOwner?: (room: TFolder) => void;
   // Populated by RoomsList so RoomsLayout can hand the same handlers to the
   // shared Header's TableGroupMenu without lifting the dialog state out of
   // RoomsList. Mirrors the existing `refreshRef` pattern.
@@ -129,6 +139,12 @@ const RoomsList = ({
   user,
   isArchive,
   refreshRef,
+  emptyView,
+  titleOverride,
+  isPrivate,
+  hasEncryptionKeys,
+  onPrivateInviteRoom,
+  onPrivateChangeOwner,
   roomActionsRef,
   infoPanelVisible,
 }: RoomsListProps) => {
@@ -178,6 +194,7 @@ const RoomsList = ({
       isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
     );
     f.type = String(RoomsType.CustomRoom);
+    if (isPrivate) f.privacyFilter = RoomPrivacyFilter.Private;
     const sp = new URLSearchParams(filesFilter);
     if (sp.get("page")) f.page = Number(sp.get("page"));
     if (sp.get("pageCount")) f.pageCount = Number(sp.get("pageCount"));
@@ -241,9 +258,17 @@ const RoomsList = ({
     (TFolderItem | TFileItem) | null
   >(null);
 
-  const onInviteRoom = React.useCallback((item: TFolderItem | TFileItem) => {
-    setInvitingRoom(item);
-  }, []);
+  const onInviteRoom = React.useCallback(
+    (item: TFolderItem | TFileItem) => {
+      const isPrivate = (item as { private?: boolean }).private === true;
+      if (isPrivate && onPrivateInviteRoom) {
+        onPrivateInviteRoom(item as TFolder);
+        return;
+      }
+      setInvitingRoom(item);
+    },
+    [onPrivateInviteRoom],
+  );
 
   const [restoringItems, setRestoringItems] = React.useState<
     (TFolderItem | TFileItem)[] | null
@@ -253,9 +278,17 @@ const RoomsList = ({
     setEditingRoom(item);
   }, []);
 
-  const onChangeOwner = React.useCallback((item: TFolderItem | TFileItem) => {
-    setChangingOwnerRoom(item);
-  }, []);
+  const onChangeOwner = React.useCallback(
+    (item: TFolderItem | TFileItem) => {
+      const isPrivate = (item as { private?: boolean }).private === true;
+      if (isPrivate && onPrivateChangeOwner) {
+        onPrivateChangeOwner(item as TFolder);
+        return;
+      }
+      setChangingOwnerRoom(item);
+    },
+    [onPrivateChangeOwner],
+  );
 
   const onTagClick = React.useCallback(
     (tag: string) => {
@@ -512,6 +545,7 @@ const RoomsList = ({
       isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
     );
     newFilter.type = String(RoomsType.CustomRoom);
+    if (isPrivate) newFilter.privacyFilter = RoomPrivacyFilter.Private;
     const sp = new URLSearchParams(window.location.search);
     if (sp.get("page")) newFilter.page = Number(sp.get("page"));
     if (sp.get("sortBy"))
@@ -547,7 +581,11 @@ const RoomsList = ({
         current: newCurrent,
       } = res;
 
-      if (newCurrent?.title) {
+      if (titleOverride) {
+        // Sticky title — keep the page-level override (e.g. "Rooms E2E")
+        // even after the server response carries a generic title.
+        navigationStore.setCurrentTitle(titleOverride);
+      } else if (newCurrent?.title) {
         navigationStore.setCurrentTitle(newCurrent.title);
       }
 
@@ -578,6 +616,7 @@ const RoomsList = ({
     navigationStore,
     setRootFolderType,
     isArchive,
+    isPrivate,
     filesListStore,
   ]);
 
@@ -730,9 +769,10 @@ const RoomsList = ({
   let content: React.ReactNode;
 
   if (visibleItems.length === 0) {
-    content = (
-      <EmptyView isFiltered={!!filter.filterValue} isArchive={isArchive} />
-    );
+    content =
+      emptyView ?? (
+        <EmptyView isFiltered={!!filter.filterValue} isArchive={isArchive} />
+      );
   } else if (filesViewAs === "tile") {
     content = (
       <RoomsTileView
@@ -754,6 +794,7 @@ const RoomsList = ({
         onInfoRoom={onInfoRoom}
         onInviteRoom={onInviteRoom}
         isArchive={isArchive}
+        hasEncryptionKeys={hasEncryptionKeys}
       />
     );
   } else if (filesViewAs === "table") {
@@ -789,6 +830,7 @@ const RoomsList = ({
         onInfoRoom={onInfoRoom}
         onInviteRoom={onInviteRoom}
         isArchive={isArchive}
+        hasEncryptionKeys={hasEncryptionKeys}
         infoPanelVisible={infoPanelVisible}
       />
     );
@@ -814,6 +856,7 @@ const RoomsList = ({
         onInfoRoom={onInfoRoom}
         onInviteRoom={onInviteRoom}
         isArchive={isArchive}
+        hasEncryptionKeys={hasEncryptionKeys}
       />
     );
   }
@@ -857,7 +900,14 @@ const RoomsList = ({
       ) : null}
       <LeaveRoomDialog
         currentUserId={user?.id}
-        onTransferOwnership={(room) => setChangingOwnerRoom(room)}
+        onTransferOwnership={(room) => {
+          const isPrivate = (room as { private?: boolean }).private === true;
+          if (isPrivate && onPrivateChangeOwner) {
+            onPrivateChangeOwner(room as TFolder);
+            return;
+          }
+          setChangingOwnerRoom(room);
+        }}
       />
       {invitingRoom ? (
         <InvitePanel

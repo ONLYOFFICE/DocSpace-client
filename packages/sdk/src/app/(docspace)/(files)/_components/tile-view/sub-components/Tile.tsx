@@ -44,6 +44,8 @@ import { FolderTile } from "@docspace/ui-kit/components/tiles/folder-tile";
 import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
+import { useDecryptedFilename } from "@/app/(docspace)/_hooks/useDecryptedFilename";
 import { FolderType } from "@docspace/shared/enums";
 import Badges from "@docspace/shared/components/badges";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
@@ -73,6 +75,7 @@ import { FileOperationsContext } from "@/app/(docspace)/_contexts/FileOperations
 import { RenameContext } from "@/app/(docspace)/_contexts/RenameContext";
 import { VersionHistoryContext } from "@/app/(docspace)/_contexts/VersionHistoryContext";
 import { ConvertContext } from "@/app/(docspace)/_contexts/ConvertContext";
+import { AskAIContext } from "@/app/(docspace)/_contexts/AskAIContext";
 
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import type { TileProps } from "../TileView.types";
@@ -88,12 +91,25 @@ const getTemporaryIcon = (item: TFileItem | TFolderItem, getIcon: TGetIcon) => {
   return getIcon(temporaryExtension, 96, item.contentLength);
 };
 
-const Tile = ({ item, getIcon, index, currentUserId }: TileProps) => {
+const Tile = ({
+  item,
+  getIcon,
+  index,
+  isPrivate,
+  hasEncryptionKeys,
+  currentUserId,
+}: TileProps) => {
   const tileRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation("Common");
   const { isBase } = useTheme();
   const { filesSettings } = useFilesSettingsStore();
   const filesListStore = useFilesListStore();
+
+  const decryptedTitle = useDecryptedFilename(
+    item.id,
+    item.title,
+    "encrypted" in item ? item.encrypted : false,
+  );
 
   const {
     isCheckedItem,
@@ -117,6 +133,7 @@ const Tile = ({ item, getIcon, index, currentUserId }: TileProps) => {
   const renameCtx = React.useContext(RenameContext);
   const onShowVersionHistory = React.useContext(VersionHistoryContext);
   const onConvert = React.useContext(ConvertContext);
+  const onAskAI = React.useContext(AskAIContext);
   const { getContextMenuModel } = useContextMenuModel({
     item: observableItem,
     onShareClick: onShareClick ?? undefined,
@@ -128,6 +145,7 @@ const Tile = ({ item, getIcon, index, currentUserId }: TileProps) => {
     onRestoreClick: fileOpsCtx?.restoreItem,
     onRenameClick: renameCtx?.renameItem,
     onShowVersionHistoryClick: onShowVersionHistory ?? undefined,
+    onAskAI: onAskAI ?? undefined,
   });
   const { downloadAction } = useDownloadActions();
   const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });
@@ -182,12 +200,22 @@ const Tile = ({ item, getIcon, index, currentUserId }: TileProps) => {
   const contextMenuModel = getContextMenuModel(true);
 
   const element = (
-    <RoomIcon
-      logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
-      color={"isRoom" in item && item.isRoom ? item.roomIconColor : undefined}
-      title={item.title}
-      showDefault={"isRoom" in item && item.isRoom ? !item.hasRoomImage : false}
-    />
+    <EncryptedItemIconWrapper
+      encrypted={!!("encrypted" in item && (item as TFileItem).encrypted)}
+      hasEncryptionKeys={hasEncryptionKeys ?? true}
+      isRoom={false}
+    >
+      <RoomIcon
+        logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
+        color={
+          "isRoom" in item && item.isRoom ? item.roomIconColor : undefined
+        }
+        title={decryptedTitle}
+        showDefault={
+          "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
+        }
+      />
+    </EncryptedItemIconWrapper>
   );
 
   const tileContent = (

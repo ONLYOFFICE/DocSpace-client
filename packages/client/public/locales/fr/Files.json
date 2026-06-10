@@ -93,7 +93,6 @@
   "PersonalContentRemovalNotice": "Vos fichiers et dossiers personnels dans la section {{sectionName}} seront <1>supprimés</1>, car les invités n'ont pas accès à cette section. Les fichiers restent disponibles à la lecture et au téléchargement <1>pendant 30 jours</1>.",
   "PersonalFolderErasureWarning": "Votre type d'utilisateur a été changé en invité. Les fichiers personnels seront supprimés dans 30 jours.",
   "RecentlyOpenedTooltip": "Récemment ouvert via le lien",
-  "ReEncryptingFiles": "Rechiffrement des fichiers en cours",
   "RemovedFromRecent": "Retiré des récents",
   "Reorder": "Réorganiser",
   "ReorderIndex": "L'action Réorganiser supprime les espaces dans les index. Les fichiers seront réindexés dans l'ordre avec un décalage pour compléter les index manquants.",

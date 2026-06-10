@@ -3,7 +3,7 @@
   "content": "This link is blocked by admin and won't work for external users",
   "content_en_sha1_hash": "d0082eb9e225eee86e2f72201d1ba794b4ac17a4",
   "created_at": "2026-06-02T08:43:21.584Z",
-  "updated_at": "2026-06-02T08:44:06.081Z",
+  "updated_at": "2026-06-09T09:43:10.783Z",
   "comment": {
     "text": "Error toast message appearing when a user attempts to copy or use a share link that has been restricted by an administrator.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/HOCs/withQuickButtons.js",
-      "line_number": 105,
+      "line_number": 110,
       "context": "const primaryLink = await ShareLinkService.getPrimaryLink(item);\n \n if (primaryLink) {\n if (isLinkBlockedByAdmin(item, primaryLink)) {\n toastr.error(t(\"Common:LinkBlockedByAdminWarning\"));\n return;\n }\n \n copyShareLink(item, primaryLink, t, getManageLinkOptions(item));\n setShareChanged(true);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/HOCs/withQuickButtons.js",
-      "line_number": 105,
+      "line_number": 110,
       "context": "const primaryLink = await ShareLinkService.getPrimaryLink(item);\n \n if (primaryLink) {\n if (isLinkBlockedByAdmin(item, primaryLink)) {\n toastr.error(t(\"Common:LinkBlockedByAdminWarning\"));\n return;\n }\n \n copyShareLink(item, primaryLink, t, getManageLinkOptions(item));\n setShareChanged(true);",
       "module": "/packages/client"
     },
@@ -55,7 +55,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
-      "line_number": 388,
+      "line_number": 391,
       "context": "isExternalShareRestricted &&\n !link.sharedTo?.internal &&\n blockExistingLinksOnRestrict;\n \n if (isBlockedByAdmin) {\n toastr.error(t(\"Common:LinkBlockedByAdminWarning\"));\n \n const isRoomItem =\n \"roomType\" in infoPanelSelection &&\n infoPanelSelection.roomType !== undefined;\n const isFileItem = \"folderId\" in infoPanelSelection;",
       "module": "/packages/shared"
     }

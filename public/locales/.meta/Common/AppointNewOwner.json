@@ -3,7 +3,7 @@
   "content": "You have appointed a new owner.",
   "content_en_sha1_hash": "bfdff63ec08042212380b8b5ed1aeed73a496e37",
   "created_at": "2025-05-19T21:30:55.262Z",
-  "updated_at": "2026-06-03T09:30:05.115Z",
+  "updated_at": "2026-06-09T09:43:10.941Z",
   "comment": {
     "text": "Toast message. It appears after successfully appointing a new owner for a file or room.",
     "is_auto": true,
@@ -13,9 +13,15 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 3764,
+      "line_number": 3810,
       "context": "const isMe = userId === this.userStore.user.id;\n if (isMe) setInRoom(true);\n }\n \n if (isLeaveChecked) await this.onLeaveRoom(t);\n else toastr.success(t(\"Common:AppointNewOwner\"));\n })\n .catch((e) => toastr.error(e))\n .finally(() => {\n setSelected(\"none\");\n });",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_components/owner-change/PrivateChangeOwnerDialog.tsx",
+      "line_number": 213,
+      "context": "// revoke current user's membership; otherwise show AppointNewOwner\n // toast. DEK wraps are NOT revoked (intentional reference parity).\n if (isLeaveChecked && currentUserId) {\n await leaveRoom({ roomId, userId: currentUserId });\n } else {\n toastr.success(t(\"Common:AppointNewOwner\"));\n }\n \n onChanged?.(roomId);\n onClose();\n } catch (error) {",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/change-room-owner-dialog/index.tsx",

@@ -43,6 +43,7 @@ import {
 } from "@docspace/shared/utils/rooms";
 import { Text } from "@docspace/ui-kit/components/text";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
+import { UserStore } from "@docspace/shared/store/UserStore";
 import { RoomsType } from "@docspace/shared/enums";
 import { TFolder } from "@docspace/shared/api/files/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";
@@ -96,6 +97,10 @@ type CreateRoomEventProps = {
   selectionItems: FilesStore["selection"];
 
   isDefaultRoomsQuotaSet: CurrentQuotasStore["isDefaultRoomsQuotaSet"];
+
+  encryptionKeys: UserStore["encryptionKeys"];
+  setUserEncryptionKeys: UserStore["setUserEncryptionKeys"];
+  userId: string | undefined;
 };
 
 const CreateRoomEvent = ({
@@ -132,6 +137,9 @@ const CreateRoomEvent = ({
   isDefaultRoomsQuotaSet,
   isExternalShareRestricted,
   item,
+  encryptionKeys,
+  setUserEncryptionKeys,
+  userId,
 }: CreateRoomEventProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
   const [fetchedTags, setFetchedTags] = useState<string[]>([]);
@@ -225,6 +233,9 @@ const CreateRoomEvent = ({
       setSelectedRoomType={setSelectedRoomType}
       getThirdPartyIcon={getThirdPartyIcon}
       isDefaultRoomsQuotaSet={isDefaultRoomsQuotaSet}
+      encryptionKeys={encryptionKeys}
+      setUserEncryptionKeys={setUserEncryptionKeys}
+      userId={userId}
       isExternalShareRestricted={isExternalShareRestricted}
       {...roomParams}
     />
@@ -240,6 +251,7 @@ export default inject(
     filesStore,
     filesActionsStore,
     currentQuotaStore,
+    userStore,
   }: TStore) => {
     const { fetchTags } = tagsStore;
     const { selections } = filesStore;
@@ -279,6 +291,9 @@ export default inject(
 
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
+    const { encryptionKeys, setUserEncryptionKeys, user } = userStore;
+    const userId = user?.id ? String(user.id) : undefined;
+
     const selectionItems = selections;
 
     return {
@@ -306,7 +321,11 @@ export default inject(
       setProcessCreatingRoomFromData,
       getThirdPartyIcon,
       isDefaultRoomsQuotaSet,
-      isExternalShareRestricted: isExternalShareRestricted && externalShareApplyToRooms,
+      encryptionKeys,
+      setUserEncryptionKeys,
+      userId,
+      isExternalShareRestricted:
+        isExternalShareRestricted && externalShareApplyToRooms,
     };
   },
 )(observer(CreateRoomEvent));

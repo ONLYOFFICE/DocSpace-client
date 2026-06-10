@@ -3,7 +3,7 @@
   "content": "Connected",
   "content_en_sha1_hash": "c2f9b7b4897f03f94abf92294c9ca46fea62360b",
   "created_at": "2026-03-20T09:07:38.583Z",
-  "updated_at": "2026-05-15T14:00:06.730Z",
+  "updated_at": "2026-06-09T09:43:10.868Z",
   "comment": {
     "text": "A short label indicating that a connection to an external database has been successfully established.",
     "is_auto": true,
@@ -22,6 +22,12 @@
       "line_number": 212,
       "context": "tabIndex={0}\n />\n {match(connected)\n .with(true, () => (\n <Text className={styles.connectedText}>\n {t(\"Common:Connected\")}\n </Text>\n ))\n .with(false, () => (\n <Text className={styles.connectionFailedText}>\n {t(\"Common:ConnectionFailed\")}",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docs-cloud)/docs-cloud/_tabs/Information.tsx",
+      "line_number": 233,
+      "context": "{t(\"DocsCloud:DocServiceSection\")}\n </span>\n {info.isActive && (\n <span className={`${styles.pill} ${styles.pillOk}`}>\n <span className={styles.pillDot} />\n {t(\"Common:Connected\")}\n </span>\n )}\n </div>\n <div className={styles.propertyCard}>\n <PropertyRow label={t(\"DocsCloud:DocServerAddress\")}>",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

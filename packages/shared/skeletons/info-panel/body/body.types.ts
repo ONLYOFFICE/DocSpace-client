@@ -42,5 +42,6 @@ export type InfoPanelViewLoaderProps = {
     | "noItem"
     | "severalItems"
     | "groups"
-    | "users";
+    | "users"
+    | "aiChat";
 };

@@ -18,5 +18,8 @@
   "DocsConnectorSubtitle": "{{organizationName}} {{productEditorsName}} connector",
   "ExternalUsersActive": "External users active",
   "JWTSecretPlaceholder": "Enter a new secret…",
-  "LicenseUsage": "License Usage"
+  "LicenseUsage": "License Usage",
+  "AuthHeaderHelp": "Antetul HTTP utilizat pentru a transmite JWT la Document Server. Implicit: AuthorizationJWT.",
+  "JWTSecretHelp": "Lăsați gol pentru a păstra secretul curent. Trebuie să corespundă cheii configurate pe Document Server.",
+  "AnonymousSupportHelp": "Permiteți utilizatorilor fără cont să deschidă și să vizualizeze documentele partajate prin linkuri publice."
 }

@@ -73,7 +73,6 @@ import RoomQuota from "SRC_DIR/components/RoomQuota";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import type { TRoom } from "@docspace/shared//api/rooms/types";
 
-
 type TServerCover = {
   id: string;
   data: string;
@@ -444,7 +443,9 @@ const setAgentParams = ({
   const inputTitle = `${t("Common:AgentName")}:`;
 
   return (
-    <div className={`${styles.setAgentParams}${disableImageRescaling ? ` ${styles.disableImageRescaling}` : ""}`}>
+    <div
+      className={`${styles.setAgentParams}${disableImageRescaling ? ` ${styles.disableImageRescaling}` : ""}`}
+    >
       <div className="logo-name-container">
         {element}
         <InputParam
@@ -487,10 +488,7 @@ const setAgentParams = ({
 
       <ModelSettings
         agentParams={agentParams}
-        systemAiEnabled={systemAiEnabled}
-        recommendedModelForForms={recommendedModelForForms}
-        isAdmin={!!isUserAdmin}
-        openedFromChat={openContext === AgentDialogContext.Chat}
+        //systemAiEnabled={systemAiEnabled}
         setAgentParams={setAgentParams}
       />
       <InstructionsSettings

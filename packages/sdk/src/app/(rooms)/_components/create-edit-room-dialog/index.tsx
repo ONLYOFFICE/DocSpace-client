@@ -55,8 +55,8 @@ import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { calculateRoomLogoParams } from "@docspace/ui-kit/utils";
 import type { TImage } from "@docspace/ui-kit/components/image-editor";
 import type { ICover } from "@docspace/ui-kit/components/room-logo-cover-dialog";
-import type { Nullable } from "@docspace/shared/types";
-import { RoomsType } from "@docspace/shared/enums";
+import type { Nullable, TCreatedBy } from "@docspace/shared/types";
+import { RoomsType, AnalyticsEvents } from "@docspace/shared/enums";
 import api from "@docspace/shared/api";
 
 import {
@@ -67,17 +67,35 @@ import {
 import UploadSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import DeleteSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import PencilSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
+import PrivateRoom32SvgUrl from "PUBLIC_DIR/images/icons/32/room/private.svg?url";
+
+import { ReactSVG } from "react-svg";
+import { Link } from "@docspace/ui-kit/components/link";
 
 import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
 
 import styles from "./CreateEditRoomDialog.module.scss";
 
-type CreateEditRoomDialogProps = {
+export type EditableRoom = {
+  id: number;
+  title: string;
+  tags?: string[];
+  roomLogo?: string;
+  roomIconColor?: string;
+  roomCover?: ICover;
+  createdBy?: TCreatedBy;
+  private?: boolean;
+};
+
+export type CreateEditRoomDialogProps = {
   visible: boolean;
   onClose: () => void;
   room?: TEditableRoom;
   onRoomEdited?: (roomId: number) => void;
   onRoomCreated?: (roomId: number) => void;
+  isPrivate?: boolean;
+  hasEncryptionKeys?: boolean;
+  onRequestCreateKeys?: () => void;
 };
 
 const CreateEditRoomDialog = ({
@@ -86,6 +104,9 @@ const CreateEditRoomDialog = ({
   room,
   onRoomEdited,
   onRoomCreated,
+  isPrivate = false,
+  hasEncryptionKeys = true,
+  onRequestCreateKeys,
 }: CreateEditRoomDialogProps) => {
   const { t } = useTranslation(["Common", "Files"]);
   const refreshRooms = React.useContext(RoomsRefreshContext);
@@ -326,10 +347,16 @@ const CreateEditRoomDialog = ({
 
         onRoomEdited?.(room.id);
       } else {
+        if (isPrivate && !hasEncryptionKeys) {
+          setIsLoading(false);
+          onRequestCreateKeys?.();
+          return;
+        }
         const logo = await buildLogoParams();
         const newRoom = (await api.rooms.createRoom({
           roomType: RoomsType.CustomRoom,
           title: trimmedName,
+          ...(isPrivate && { private: true }),
           ...(tags.length && { tags }),
           ...(logo && { logo }),
         })) as { id?: number };
@@ -340,6 +367,18 @@ const CreateEditRoomDialog = ({
           await api.rooms.setRoomCover(newRoom.id, {
             color: colorForApi,
             cover: selectedCover.id,
+          });
+        }
+
+        if (newRoom?.id != null) {
+          const w = window as unknown as {
+            dataLayer?: Array<Record<string, unknown>>;
+          };
+          w.dataLayer = w.dataLayer ?? [];
+          w.dataLayer.push({
+            event: AnalyticsEvents.RoomCreated,
+            id: newRoom.id,
+            roomType: RoomsType.CustomRoom,
           });
         }
 
@@ -372,6 +411,9 @@ const CreateEditRoomDialog = ({
   const showDefault = !hasCoverOrPreview && (!!name || !!selectedColor);
   const withEditing = !isEmptyIcon;
 
+  const isKeySetupMode = isPrivate && !hasEncryptionKeys && !isEdit;
+  const canStartKeySetup = isKeySetupMode && !!onRequestCreateKeys;
+
   const initialCoverColor = selectedColor ? `#${selectedColor}` : undefined;
   return (
     <>
@@ -381,11 +423,47 @@ const CreateEditRoomDialog = ({
         onClose={onClose}
       >
         <ModalDialog.Header>
-          {isEdit ? t("Common:EditRoom") : t("Common:CreateRoom")}
+          {isEdit
+            ? isPrivate
+              ? t("Common:EditPrivateRoom")
+              : t("Common:EditRoom")
+            : isPrivate
+              ? t("Common:CreatePrivateRoom")
+              : t("Common:CreateRoom")}
         </ModalDialog.Header>
 
         <ModalDialog.Body>
           <div className={styles.body}>
+            {isKeySetupMode ? (
+              <div
+                style={{
+                  padding: 12,
+                  borderRadius: 6,
+                  background:
+                    "var(--row-hover-background, rgba(0, 0, 0, 0.04))",
+                }}
+                data-test-id="create_edit_room_keys_required"
+              >
+                <Text>
+                  {t("Common:EncryptionKeysRequiredForPrivateRoom")}
+                  {canStartKeySetup ? null : (
+                    <>
+                      {" "}
+                      <Link
+                        tag="a"
+                        isHovered
+                        color="accent"
+                        onClick={() =>
+                          window.open("/profile/keys-management", "_blank")
+                        }
+                      >
+                        {t("Common:OpenKeysManagement")}
+                      </Link>
+                    </>
+                  )}
+                </Text>
+              </div>
+            ) : null}
             <div className={styles.logoNameRow}>
               <RoomIcon
                 title={name}
@@ -461,6 +539,23 @@ const CreateEditRoomDialog = ({
               ) : null}
             </div>
 
+            {isEdit && isPrivate ? (
+              <div className={styles.privacyRow}>
+                <ReactSVG
+                  className={styles.privacyIcon}
+                  src={PrivateRoom32SvgUrl}
+                />
+                <div className={styles.privacyText}>
+                  <Text fontWeight={600} fontSize="13px">
+                    {t("Common:PrivateRoomTitle")}
+                  </Text>
+                  <Text fontSize="12px" className={styles.privacyDescription}>
+                    {t("Common:PrivateRoomDescription")}
+                  </Text>
+                </div>
+              </div>
+            ) : null}
+
             {isEdit && room.createdBy ? (
               <div className={styles.ownerSection}>
                 <Text fontWeight={600} fontSize="13px">
@@ -494,8 +589,11 @@ const CreateEditRoomDialog = ({
             primary
             scale
             isLoading={isLoading}
-            onClick={onSave}
-            isDisabled={!name.trim() || isLoading}
+            onClick={canStartKeySetup ? onRequestCreateKeys : onSave}
+            isDisabled={
+              isLoading ||
+              (canStartKeySetup ? false : !name.trim() || isKeySetupMode)
+            }
           />
           <Button
             label={t("Common:CancelButton")}

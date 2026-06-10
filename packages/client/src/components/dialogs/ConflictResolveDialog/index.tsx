@@ -39,6 +39,7 @@ import { inject, observer } from "mobx-react";
 import isNil from "lodash/isNil";
 
 import ConflictResolve from "@docspace/shared/dialogs/conflict-resolve";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 import { toastr, type TData } from "@docspace/ui-kit/components/toast";
 import { ConflictResolveType, RoomsType } from "@docspace/shared/enums";
 import type { TFile } from "@docspace/shared/api/files/types";
@@ -81,6 +82,8 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
   } = props;
 
   const { t, ready } = useTranslation(["Common"]);
+
+  const conflictTitle = useResolvedFileTitle(items?.[0]);
 
   const {
     destFolderId,
@@ -258,7 +261,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
         t={t}
         ns="Common"
         i18nKey="FileActionRequired"
-        values={{ fileName: items[0].title }}
+        values={{ fileName: conflictTitle }}
         components={{ 1: <span className="bold truncate" /> }}
       />
     );
@@ -268,7 +271,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
         t={t}
         ns="Common"
         i18nKey="FolderActionRequired"
-        values={{ folderName: items[0].title }}
+        values={{ folderName: conflictTitle }}
         components={{ 1: <span className="bold" /> }}
       />
     );

@@ -80,7 +80,12 @@ const getDefaultFileName = (
 const DEFAULT_CHUNK_SIZE = 10 * 1024 * 1024;
 const DEFAULT_UPLOAD_THREADS = 3;
 
-export default function useDocsActions() {
+type UseDocsActionsOptions = {
+  /** Replaces the default chunked upload (e.g., encrypted upload). */
+  uploadFilesToFolderOverride?: (files: FileList | File[]) => Promise<void>;
+};
+
+export default function useDocsActions(options?: UseDocsActionsOptions) {
   const router = useRouter();
   const navigationStore = useNavigationStore();
   const { filesSettings } = useFilesSettingsStore();
@@ -307,7 +312,7 @@ export default function useDocsActions() {
     [filesSettings, router, uploadStore, t],
   );
 
-  const uploadFilesToFolder = useCallback(
+  const defaultUploadFilesToFolder = useCallback(
     async (files: FileList | File[], targetFolderId?: number | string) => {
       const folderId = targetFolderId ?? getFolderId();
       if (!folderId) return;
@@ -349,6 +354,14 @@ export default function useDocsActions() {
       await doUpload(taggedFiles, folderId, true);
     },
     [getFolderId, doUpload],
+  );
+
+  const uploadFilesToFolder = useCallback(
+    (files: FileList | File[], targetFolderId?: number | string) =>
+      options?.uploadFilesToFolderOverride
+        ? options.uploadFilesToFolderOverride(files)
+        : defaultUploadFilesToFolder(files, targetFolderId),
+    [options?.uploadFilesToFolderOverride, defaultUploadFilesToFolder],
   );
 
   const confirmUploadConflict = useCallback(

@@ -55,335 +55,336 @@ import { frameCallEvent } from "@docspace/shared/utils/common";
 import Dialog from "./sub-components/Dialog";
 
 const CreateEvent = ({
-	id,
-	type,
-	extension,
-	title,
-	templateId,
-	fromTemplate,
-	onClose,
+  id,
+  type,
+  extension,
+  title,
+  templateId,
+  fromTemplate,
+  onClose,
 
-	addActiveItems,
+  addActiveItems,
 
-	gallerySelected,
-	setGallerySelected,
-	setCreatedItem,
+  gallerySelected,
+  setGallerySelected,
+  setCreatedItem,
 
-	parentId,
-	isIndexing,
+  parentId,
+  isIndexing,
 
-	completeAction,
-	openItemAction,
+  completeAction,
+  openItemAction,
 
-	clearActiveOperations,
+  clearActiveOperations,
 
-	setEventDialogVisible,
-	eventDialogVisible,
-	keepNewFileName,
-	setPortalTariff,
-	withoutDialog,
-	preview,
-	toForm,
-	publicRoomKey,
-	actionEdit,
-	openOnNewPage,
-	openEditor,
-	createFile,
+  setEventDialogVisible,
+  eventDialogVisible,
+  keepNewFileName,
+  setPortalTariff,
+  withoutDialog,
+  preview,
+  toForm,
+  publicRoomKey,
+  actionEdit,
+  openOnNewPage,
+  openEditor,
+  createFile,
 
-	isFrame,
-	frameConfig,
+  isFrame,
+  frameConfig,
 }) => {
-	const [headerTitle, setHeaderTitle] = React.useState(null);
-	const [startValue, setStartValue] = React.useState("");
+  const [headerTitle, setHeaderTitle] = React.useState(null);
+  const [startValue, setStartValue] = React.useState("");
 
-	const { t } = useTranslation(["Translations", "Common"]);
+  const { t } = useTranslation(["Translations", "Common"]);
 
-	const onCloseAction = useCallback(
-		(e) => {
-			if (gallerySelected) {
-				setGallerySelected && setGallerySelected(null);
-			}
+  const onCloseAction = useCallback(
+    (e) => {
+      if (gallerySelected) {
+        setGallerySelected && setGallerySelected(null);
+      }
 
-			setEventDialogVisible(false);
-			onClose && onClose(e);
-		},
-		[setGallerySelected, gallerySelected, setEventDialogVisible, onClose],
-	);
+      setEventDialogVisible(false);
+      onClose && onClose(e);
+    },
+    [setGallerySelected, gallerySelected, setEventDialogVisible, onClose],
+  );
 
-	const onSave = useCallback(
-		async (e, value, open = true) => {
-			let item;
-			let createdFolderId;
+  const onSave = useCallback(
+    async (e, value, open = true) => {
+      let item;
+      let createdFolderId;
 
-			const isMakeFormFromFile = !!templateId;
+      const isMakeFormFromFile = !!templateId;
 
-			let newValue = value;
+      let newValue = value;
 
-			if (value.trim() === "") {
-				newValue =
-					templateId === null
-						? getDefaultFileName(extension)
-						: getTitleWithoutExtension({ fileExst: extension });
+      if (value.trim() === "") {
+        newValue =
+          templateId === null
+            ? getDefaultFileName(extension)
+            : getTitleWithoutExtension({ fileExst: extension });
 
-				setStartValue(newValue);
-			}
+        setStartValue(newValue);
+      }
 
-			const isPaymentRequiredError = (err) => {
-				if (err?.response?.status === 402) setPortalTariff();
-			};
+      const isPaymentRequiredError = (err) => {
+        if (err?.response?.status === 402) setPortalTariff();
+      };
 
-			if (!extension) {
-				await api.files
-					.createFolder(parentId, newValue.trimEnd())
-					.then((folder) => {
-						item = folder;
-						createdFolderId = folder.id;
-						addActiveItems(null, [folder.id]);
-						setCreatedItem({ id: createdFolderId, type: "folder" });
-						window.dispatchEvent(
-							new CustomEvent("folder_created", {
-								detail: {
-									id: folder.id,
-									parentId: folder.parentId,
-								},
-							}),
-						);
-					})
-					.then(() => completeAction(item, type, true))
-					.then(() => {
-						if (isIndexing) showSuccessCreateFolder(t, item, openItemAction);
-					})
-					.catch((err) => {
-						isPaymentRequiredError(err);
-						toastr.error(err);
-					})
-					.finally(() => {
-						const folderIds = [+id];
-						createdFolderId && folderIds.push(createdFolderId);
+      if (!extension) {
+        await api.files
+          .createFolder(parentId, newValue.trimEnd())
+          .then((folder) => {
+            item = folder;
+            createdFolderId = folder.id;
+            addActiveItems(null, [folder.id]);
+            setCreatedItem({ id: createdFolderId, type: "folder" });
+            window.dispatchEvent(
+              new CustomEvent("folder_created", {
+                detail: {
+                  id: folder.id,
+                  parentId: folder.parentId,
+                },
+              }),
+            );
+          })
+          .then(() => completeAction(item, type, true))
+          .then(() => {
+            if (isIndexing) showSuccessCreateFolder(t, item, openItemAction);
+          })
+          .catch((err) => {
+            isPaymentRequiredError(err);
+            toastr.error(err);
+          })
+          .finally(() => {
+            const folderIds = [+id];
+            createdFolderId && folderIds.push(createdFolderId);
 
-						clearActiveOperations(null, folderIds);
-						onCloseAction();
-					});
-			} else {
-				try {
-					if (openEditor && !(isFrame && frameConfig?.events?.onEditorOpen)) {
-						const searchParams = new URLSearchParams();
+            clearActiveOperations(null, folderIds);
+            onCloseAction();
+          });
+      } else {
+        try {
+          if (openEditor && !(isFrame && frameConfig?.events?.onEditorOpen)) {
+            const searchParams = new URLSearchParams();
 
-						searchParams.append("parentId", parentId);
-						searchParams.append("fileTitle", `${newValue}.${extension}`);
-						searchParams.append("open", open);
-						searchParams.append("id", id);
+            searchParams.append("parentId", parentId);
+            searchParams.append("fileTitle", `${newValue}.${extension}`);
+            searchParams.append("open", open);
+            searchParams.append("id", id);
 
-						if (preview) {
-							searchParams.append("action", "view");
-						}
+            if (preview) {
+              searchParams.append("action", "view");
+            }
 
-						if (actionEdit) {
-							searchParams.append("action", "edit");
-						}
+            if (actionEdit) {
+              searchParams.append("action", "edit");
+            }
 
-						if (toForm) searchParams.append("toForm", "true");
+            if (toForm) searchParams.append("toForm", "true");
 
-						if (publicRoomKey) {
-							searchParams.append("share", publicRoomKey);
-						}
+            if (publicRoomKey) {
+              searchParams.append("share", publicRoomKey);
+            }
 
-						if (isMakeFormFromFile) {
-							searchParams.append("fromFile", isMakeFormFromFile);
-							searchParams.append("templateId", templateId);
-						} else if (fromTemplate) {
-							searchParams.append("fromTemplate", fromTemplate);
-							searchParams.append("formId", gallerySelected.id);
-						}
+            if (isMakeFormFromFile) {
+              searchParams.append("fromFile", isMakeFormFromFile);
+              searchParams.append("templateId", templateId);
+            } else if (fromTemplate) {
+              searchParams.append("fromTemplate", fromTemplate);
+              searchParams.append("formId", gallerySelected.id);
+            }
 
-						searchParams.append("hash", new Date().getTime());
+            searchParams.append("hash", new Date().getTime());
 
-						const url = combineUrl(
-							window.location.origin,
-							window.ClientConfig?.proxy?.url,
-							config.homepage,
-							`/doceditor/create?${searchParams.toString()}`,
-						);
+            const url = combineUrl(
+              window.location.origin,
+              window.ClientConfig?.proxy?.url,
+              config.homepage,
+              `/doceditor/create?${searchParams.toString()}`,
+            );
 
-						window.open(url, openOnNewPage ? "_blank" : "_self");
+            window.open(url, openOnNewPage ? "_blank" : "_self");
 
-						return;
-					}
+            return;
+          }
 
-					await createFile(
-						+parentId,
-						`${newValue}.${extension}`,
-						templateId,
-						gallerySelected?.id,
-					)
-						.then((data) => {
-							window.dataLayer = window.dataLayer || [];
-							window.dataLayer.push({
-								event: AnalyticsEvents.FileCreated,
-								id: data.id,
-								parentId: data.folderId,
-							});
-							if (isFrame && frameConfig?.events?.onEditorOpen) {
-								frameCallEvent({
-									event: "onEditorOpen",
-									data,
-								});
-							}
-						})
-						.catch((error) => {
-							toastr.error(error);
-						});
-				} catch (error) {
-					toastr.error(error);
-				} finally {
-					onCloseAction();
-				}
-			}
-		},
-		[
-			parentId,
-			extension,
-			templateId,
-			title,
-			fromTemplate,
-			withoutDialog,
-			keepNewFileName,
-			gallerySelected?.id,
-			openOnNewPage,
-			openEditor,
-			preview,
-			actionEdit,
-			toForm,
-			publicRoomKey,
-			createFile,
-			onCloseAction,
-		],
-	);
+          await createFile(
+            +parentId,
+            `${newValue}.${extension}`,
+            templateId,
+            gallerySelected?.id,
+          )
+            .then((data) => {
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({
+                event: AnalyticsEvents.FileCreated,
+                id: data.id,
+                parentId: data.folderId,
+                file_type: extension,
+              });
+              if (isFrame && frameConfig?.events?.onEditorOpen) {
+                frameCallEvent({
+                  event: "onEditorOpen",
+                  data,
+                });
+              }
+            })
+            .catch((error) => {
+              toastr.error(error);
+            });
+        } catch (error) {
+          toastr.error(error);
+        } finally {
+          onCloseAction();
+        }
+      }
+    },
+    [
+      parentId,
+      extension,
+      templateId,
+      title,
+      fromTemplate,
+      withoutDialog,
+      keepNewFileName,
+      gallerySelected?.id,
+      openOnNewPage,
+      openEditor,
+      preview,
+      actionEdit,
+      toForm,
+      publicRoomKey,
+      createFile,
+      onCloseAction,
+    ],
+  );
 
-	React.useEffect(() => {
-		const defaultName = getDefaultFileName(extension);
+  React.useEffect(() => {
+    const defaultName = getDefaultFileName(extension);
 
-		if (title) {
-			const item = { fileExst: extension, title };
+    if (title) {
+      const item = { fileExst: extension, title };
 
-			setStartValue(getTitleWithoutExtension(item, fromTemplate));
-		} else {
-			setStartValue(defaultName);
-		}
+      setStartValue(getTitleWithoutExtension(item, fromTemplate));
+    } else {
+      setStartValue(defaultName);
+    }
 
-		setHeaderTitle(defaultName);
+    setHeaderTitle(defaultName);
 
-		if (!extension) return setEventDialogVisible(true);
+    if (!extension) return setEventDialogVisible(true);
 
-		if (!keepNewFileName && !withoutDialog) {
-			setEventDialogVisible(true);
-		} else {
-			onSave(null, title || defaultName);
-		}
+    if (!keepNewFileName && !withoutDialog) {
+      setEventDialogVisible(true);
+    } else {
+      onSave(null, title || defaultName);
+    }
 
-		return () => {
-			setEventDialogVisible(false);
-		};
-	}, [extension, title, fromTemplate, withoutDialog, onSave]);
+    return () => {
+      setEventDialogVisible(false);
+    };
+  }, [extension, title, fromTemplate, withoutDialog, onSave]);
 
-	return (
-		<Dialog
-			t={t}
-			withForm
-			visible={eventDialogVisible}
-			title={headerTitle}
-			testIdPrefix={getDefaultFileTestIdPrefix(extension)}
-			startValue={startValue}
-			onSave={onSave}
-			onCancel={onCloseAction}
-			onClose={onCloseAction}
-			isCreateDialog
-			extension={extension}
-		/>
-	);
+  return (
+    <Dialog
+      t={t}
+      withForm
+      visible={eventDialogVisible}
+      title={headerTitle}
+      testIdPrefix={getDefaultFileTestIdPrefix(extension)}
+      startValue={startValue}
+      onSave={onSave}
+      onCancel={onCloseAction}
+      onClose={onCloseAction}
+      isCreateDialog
+      extension={extension}
+    />
+  );
 };
 
 export default inject(
-	({
-		settingsStore,
-		filesStore,
-		filesActionsStore,
-		selectedFolderStore,
-		treeFoldersStore,
-		uploadDataStore,
-		dialogsStore,
-		oformsStore,
-		filesSettingsStore,
-		currentTariffStatusStore,
-		publicRoomStore,
-	}) => {
-		const publicRoomKey = publicRoomStore.publicRoomKey;
+  ({
+    settingsStore,
+    filesStore,
+    filesActionsStore,
+    selectedFolderStore,
+    treeFoldersStore,
+    uploadDataStore,
+    dialogsStore,
+    oformsStore,
+    filesSettingsStore,
+    currentTariffStatusStore,
+    publicRoomStore,
+  }) => {
+    const publicRoomKey = publicRoomStore.publicRoomKey;
 
-		const {
-			createFile,
-			addActiveItems,
+    const {
+      createFile,
+      addActiveItems,
 
-			setIsUpdatingRowItem,
-			setCreatedItem,
-		} = filesStore;
+      setIsUpdatingRowItem,
+      setCreatedItem,
+    } = filesStore;
 
-		const { gallerySelected, setGallerySelected } = oformsStore;
+    const { gallerySelected, setGallerySelected } = oformsStore;
 
-		const { completeAction, openItemAction } = filesActionsStore;
+    const { completeAction, openItemAction } = filesActionsStore;
 
-		const { clearActiveOperations, fileCopyAs } = uploadDataStore;
+    const { clearActiveOperations, fileCopyAs } = uploadDataStore;
 
-		const { isRecycleBinFolder, isPrivacyFolder } = treeFoldersStore;
+    const { isRecycleBinFolder, isPrivacyFolder } = treeFoldersStore;
 
-		const { id: parentId, isIndexedFolder } = selectedFolderStore;
+    const { id: parentId, isIndexedFolder } = selectedFolderStore;
 
-		const { isDesktopClient, isFrame, frameConfig } = settingsStore;
+    const { isDesktopClient, isFrame, frameConfig } = settingsStore;
 
-		const { setPortalTariff } = currentTariffStatusStore;
+    const { setPortalTariff } = currentTariffStatusStore;
 
-		const {
-			setConvertPasswordDialogVisible,
-			setEventDialogVisible,
-			setFormCreationInfo,
-			eventDialogVisible,
-		} = dialogsStore;
+    const {
+      setConvertPasswordDialogVisible,
+      setEventDialogVisible,
+      setFormCreationInfo,
+      eventDialogVisible,
+    } = dialogsStore;
 
-		const { keepNewFileName, openOnNewPage } = filesSettingsStore;
+    const { keepNewFileName, openOnNewPage } = filesSettingsStore;
 
-		return {
-			setPortalTariff,
-			setEventDialogVisible,
-			eventDialogVisible,
-			createFile,
+    return {
+      setPortalTariff,
+      setEventDialogVisible,
+      eventDialogVisible,
+      createFile,
 
-			addActiveItems,
+      addActiveItems,
 
-			setIsUpdatingRowItem,
-			gallerySelected,
-			setGallerySelected,
-			setCreatedItem,
+      setIsUpdatingRowItem,
+      gallerySelected,
+      setGallerySelected,
+      setCreatedItem,
 
-			parentId,
-			isIndexing: isIndexedFolder,
+      parentId,
+      isIndexing: isIndexedFolder,
 
-			isDesktop: isDesktopClient,
-			isPrivacy: isPrivacyFolder,
-			isTrashFolder: isRecycleBinFolder,
-			completeAction,
-			openItemAction,
+      isDesktop: isDesktopClient,
+      isPrivacy: isPrivacyFolder,
+      isTrashFolder: isRecycleBinFolder,
+      completeAction,
+      openItemAction,
 
-			clearActiveOperations,
-			fileCopyAs,
+      clearActiveOperations,
+      fileCopyAs,
 
-			setConvertPasswordDialogVisible,
-			setFormCreationInfo,
+      setConvertPasswordDialogVisible,
+      setFormCreationInfo,
 
-			keepNewFileName,
-			publicRoomKey,
-			openOnNewPage,
+      keepNewFileName,
+      publicRoomKey,
+      openOnNewPage,
 
-			isFrame,
-			frameConfig,
-		};
-	},
+      isFrame,
+      frameConfig,
+    };
+  },
 )(observer(CreateEvent));

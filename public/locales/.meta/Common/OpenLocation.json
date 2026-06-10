@@ -3,7 +3,7 @@
   "content": "Open location",
   "content_en_sha1_hash": "dbcca6bc5e893598b3c23f1313c9f5d1b45c0114",
   "created_at": "2025-05-19T21:30:55.927Z",
-  "updated_at": "2026-06-03T09:30:05.055Z",
+  "updated_at": "2026-06-09T14:03:10.860Z",
   "comment": {
     "text": "This is a tooltip for an icon button. It appears when hovering over the button, which opens the location of a file or folder.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/ItemList.tsx",
-      "line_number": 234,
+      "line_number": 240,
       "context": "className=\"location-btn\"\n iconName={FolderLocationReactSvgUrl}\n size={16}\n isFill\n onClick={() => checkAndOpenLocationAction!(item)}\n title={t(\"Common:OpenLocation\")}\n dataTestId={`history_item_location_${index}`}\n />\n ) : null}\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2695,
+      "line_number": 2700,
       "context": "disabled: false,\n },\n {\n id: \"option_open-location\",\n key: \"open-location\",\n label: t(\"OpenLocation\"),\n icon: FolderLocationReactSvgUrl,\n onClick: () => this.onOpenLocation(item),\n disabled: !!item.requestToken,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/HistoryBlock.tsx",
-      "line_number": 202,
+      "line_number": 215,
       "context": "className=\"location-btn\"\n iconName={FolderLocationReactSvgUrl}\n size={16}\n isFill\n onClick={onOpenLocation}\n title={t(\"Common:OpenLocation\")}\n dataTestId=\"history_item_location\"\n />\n ) : null}\n </div>\n </div>",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 136,
+      "line_number": 185,
       "context": "const search = isFile ? i.title.replace(i.fileExst ?? \"\", \"\") : i.title;\n \n return {\n id: \"option_open-location\",\n key: \"open-location\",\n label: t(\"Common:OpenLocation\"),\n icon: FolderLocationReactSvgUrl,\n onClick: () => openLocation(locationId, i.id, search),\n disabled: false,\n };\n },",
       "module": "/packages/sdk"
     }

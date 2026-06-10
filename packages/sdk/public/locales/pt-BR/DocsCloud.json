@@ -18,5 +18,8 @@
   "DocsConnectorSubtitle": "{{organizationName}} {{productEditorsName}} connector",
   "ExternalUsersActive": "External users active",
   "JWTSecretPlaceholder": "Enter a new secret…",
-  "LicenseUsage": "License Usage"
+  "LicenseUsage": "License Usage",
+  "AuthHeaderHelp": "Cabeçalho HTTP usado para transmitir o JWT ao Document Server. Padrão: AuthorizationJWT.",
+  "JWTSecretHelp": "Deixe em branco para manter o segredo atual. Deve corresponder à chave configurada no Document Server.",
+  "AnonymousSupportHelp": "Permita que usuários sem conta abram e visualizem documentos compartilhados via links públicos."
 }

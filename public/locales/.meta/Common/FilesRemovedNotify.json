@@ -3,7 +3,7 @@
   "content": "Files removed.",
   "content_en_sha1_hash": "f2c2491c5788d8e6d37267425da3272d584c7b1c",
   "created_at": "2026-05-19T19:03:16.598Z",
-  "updated_at": "2026-05-24T17:27:49.124Z",
+  "updated_at": "2026-06-09T09:43:10.872Z",
   "comment": {
     "text": "Status message in the activity history feed that appears when files are deleted.",
     "is_auto": true,
@@ -14,13 +14,13 @@
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
       "line_number": 112,
-      "context": "case FeedActionKeys.FileDeleted:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });\n return t(\"Common:FilesRemovedNotify\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Translations:FileLocked\")}.`;\n case FeedActionKeys.FileUnlocked:\n return `${t(\"Translations:FileUnlocked\")}.`;\n case FeedActionKeys.FileVersionRemoved:",
+      "context": "case FeedActionKeys.FileDeleted:\n if (hasRelatedItems)\n return t(\"Common:FileDeletedCount\", {\n count,\n });\n return t(\"Common:FilesRemovedNotify\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Common:FileLocked\")}.`;\n case FeedActionKeys.FileUnlocked:\n return `${t(\"Common:FileUnlocked\")}.`;\n case FeedActionKeys.FileVersionRemoved:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 106,
-      "context": "case FeedActionKeys.FileDeleted:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });\n return t(\"Common:FilesRemovedNotify\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Translations:FileLocked\")}.`;\n case FeedActionKeys.FileUnlocked:\n return `${t(\"Translations:FileUnlocked\")}.`;\n case FeedActionKeys.FileVersionRemoved:",
+      "context": "case FeedActionKeys.FileDeleted:\n if (hasRelatedItems)\n return t(\"Common:FileDeletedCount\", {\n count,\n });\n return t(\"Common:FilesRemovedNotify\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Common:FileLocked\")}.`;\n case FeedActionKeys.FileUnlocked:\n return `${t(\"Common:FileUnlocked\")}.`;\n case FeedActionKeys.FileVersionRemoved:",
       "module": "/packages/client"
     },
     {
@@ -31,8 +31,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
-      "line_number": 80,
-      "context": "folderTitle: (feed.data as TFeedData).parentTitle,\n });\n }\n return t(\"Common:FilesCopiedNotify\");\n case FeedActionKeys.FileDeleted:\n return t(\"Common:FilesRemovedNotify\");\n case FeedActionKeys.FolderCreated:\n return t(\"Common:FolderCreatedNotify\");\n case FeedActionKeys.FolderRenamed:\n return t(\"Common:FolderRenamedNotify\");\n case FeedActionKeys.FolderMoved:",
+      "line_number": 105,
+      "context": "case FeedActionKeys.FileDeleted:\n if (hasRelatedItems)\n return t(\"Common:FileDeletedCount\", {\n count,\n });\n return t(\"Common:FilesRemovedNotify\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Common:FileLocked\")}.`;\n case FeedActionKeys.FileUnlocked:\n return `${t(\"Common:FileUnlocked\")}.`;\n case FeedActionKeys.FileVersionRemoved:",
       "module": "/packages/sdk"
     }
   ],

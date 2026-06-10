@@ -1,6 +1,11 @@
 @use "@docspace/ui-kit/styles/mixins";
 
 .aiAgentChat {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+
   --chat-header-top: calc(var(--section-header-height) + var(--section-submenu-height));
 
   @include mixins.tablet-and-below {
@@ -17,5 +22,10 @@
     @include mixins.tablet-and-below {
       margin: 0 -16px;
     }
+  }
+
+  :global(div:has(> div > [style*="--chat-welcome-color"])) {
+    margin-bottom: 0 !important;
+    margin-top: 32px !important;
   }
 }

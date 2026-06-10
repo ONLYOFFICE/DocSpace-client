@@ -39,6 +39,7 @@ import React from "react";
 import { decode } from "he";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import PDFIcon from "PUBLIC_DIR/images/icons/32/pdf.svg";
 import DownloadIconUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
@@ -52,7 +53,7 @@ import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
-import { classNames, mobile, mobileMore } from "@docspace/shared/utils";
+import { mobile, mobileMore } from "@docspace/shared/utils";
 import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { copyShareLink } from "@docspace/shared/utils/copy";
@@ -199,28 +200,33 @@ export const CompletedForm = ({
                 </Text>
               </div>
             </div>
-            <div className={styles.managerWrapper}>
-              <span className="label">{t("CompletedForm:FormOwner")}</span>
-              <div className={styles.completedFormBox}>
-                <Avatar
-                  className="manager__avatar"
-                  size={AvatarSize.medium}
-                  role={AvatarRole.manager}
-                  source={manager.avatar}
-                />
-                <Heading level={HeadingLevel.h3} className="manager__user-name">
-                  {decode(manager.displayName)}
-                </Heading>
-                <Link
-                  className="manager__mail link"
-                  href={`mailto:${manager.email}`}
-                  data-testid="manager_email_link"
-                >
-                  <MailIcon />
-                  <span>{manager.email}</span>
-                </Link>
+            {manager ? (
+              <div className={styles.managerWrapper}>
+                <span className="label">{t("CompletedForm:FormOwner")}</span>
+                <div className={styles.completedFormBox}>
+                  <Avatar
+                    className="manager__avatar"
+                    size={AvatarSize.medium}
+                    role={AvatarRole.manager}
+                    source={manager.avatar}
+                  />
+                  <Heading
+                    level={HeadingLevel.h3}
+                    className="manager__user-name"
+                  >
+                    {decode(manager.displayName)}
+                  </Heading>
+                  <Link
+                    className="manager__mail link"
+                    href={`mailto:${manager.email}`}
+                    data-testid="manager_email_link"
+                  >
+                    <MailIcon />
+                    <span>{manager.email}</span>
+                  </Link>
+                </div>
               </div>
-            </div>
+            ) : null}
           </main>
           <footer
             className={classNames(styles.buttonWrapper, {

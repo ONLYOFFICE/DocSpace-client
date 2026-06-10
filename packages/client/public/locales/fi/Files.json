@@ -93,7 +93,6 @@
   "PersonalContentRemovalNotice": "Henkilökohtaiset tiedostosi {{sectionName}}-osiossa <1>poistetaan</1>, koska Vieras-käyttäjätyypillä ei ole oikeuksia tähän osioon. Tiedostot ovat katseltavissa ja ladattavissa <1>30 päivän ajan</1>.",
   "PersonalFolderErasureWarning": "Käyttäjätyyppisi on muutettu Vieraaksi. Henkilökohtaiset tiedostot poistetaan 30 päivän kuluttua.",
   "RecentlyOpenedTooltip": "Viimeaikoina avattu linkin kautta",
-  "ReEncryptingFiles": "Salataan tiedostoja uudelleen",
   "RemovedFromRecent": "Poistettu viimeisistä",
   "Reorder": "Järjestä uudelleen",
   "ReorderIndex": "Uudelleenjärjestystoiminto poistaa välilyönnit hakemistoista. Tiedostot indeksoidaan uudelleen, jotta ne täyttävät puuttuvat indeksit.",

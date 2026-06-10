@@ -3,7 +3,7 @@
   "content": "Confirm",
   "content_en_sha1_hash": "04a212215ef9fbf686d280802eb81ee7a6e681cd",
   "created_at": "2026-05-24T17:27:21.378Z",
-  "updated_at": "2026-05-24T18:28:44.198Z",
+  "updated_at": "2026-06-09T09:43:10.797Z",
   "comment": {
     "text": "Button label used in confirmation and passphrase dialogs to finalize an action or save changes.",
     "is_auto": true,
@@ -12,15 +12,21 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/ConfirmationModal.tsx",
-      "line_number": 77,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:Confirm\")}\n onClick={onConfirm}\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}",
+      "file_path": "/packages/client/src/components/EncryptionProviderWrapper.jsx",
+      "line_number": 167,
+      "context": "isLoading={isLoading}\n externalError={error}\n onSubmit={onSubmit}\n onCancel={onCancel}\n onForgotPassphrase={handleForgotPassphrase}\n submitLabel={t(\"Common:Confirm\")}\n />\n );\n };\n \n const EncryptionProviderWrapper = ({ userKeys, children }) => {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/shared/dialogs/passphrase-dialog/PassphraseDialog.tsx",
-      "line_number": 351,
-      "context": "scale\n primary\n key=\"SubmitButton\"\n onClick={handleSubmit}\n size={ButtonSize.normal}\n label={isNewPassphrase ? t(\"Common:Create\") : t(\"Common:Confirm\")}\n isDisabled={isDisabled}\n isLoading={isLoading}\n tabIndex={3}\n />\n <Button",
+      "file_path": "/packages/sdk/src/app/(private)/_store/EncryptionShell.tsx",
+      "line_number": 81,
+      "context": "isLoading={isLoading}\n externalError={error}\n onSubmit={onSubmit}\n onCancel={onCancel}\n onForgotPassphrase={handleForgotPassphrase}\n submitLabel={t(\"Common:Confirm\")}\n />\n );\n };\n \n type EncryptionShellProps = { children: React.ReactNode };",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/confirmation-modal/ConfirmationModal.tsx",
+      "line_number": 82,
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}\n label={confirmLabel ?? t(\"Common:Confirm\")}\n onClick={onConfirm}\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}",
       "module": "/packages/shared"
     }
   ],

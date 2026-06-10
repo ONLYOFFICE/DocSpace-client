@@ -396,7 +396,8 @@ export const getOptions = (
     icon: <CreateAIAgentIcon />,
     key: "create-ai-agent",
     onClick: actions.onCreateAIAgent,
-    disabled: !security?.Create,
+    //disabled: !security?.Create,
+    disabled: false,
   };
 
   const inviteRootRoom = {

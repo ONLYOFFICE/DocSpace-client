@@ -55,7 +55,12 @@ type SectionProps = {
   infoPanelHeaderContent?: React.ReactNode;
   infoPanelBodyContent?: React.ReactNode;
   isInfoPanelVisible?: boolean;
+  infoPanelWithoutScroll?: boolean;
   setIsInfoPanelVisible?: (visible: boolean) => void;
+
+  chatPanelContent?: React.ReactNode;
+  isChatPanelVisible?: boolean;
+  setIsChatPanelVisible?: (visible: boolean) => void;
 
   isEmptyPage: boolean;
   filesFilter: string;
@@ -87,7 +92,11 @@ export const SectionWrapper = observer(
     infoPanelHeaderContent,
     infoPanelBodyContent,
     isInfoPanelVisible,
+    infoPanelWithoutScroll,
     setIsInfoPanelVisible,
+    chatPanelContent,
+    isChatPanelVisible,
+    setIsChatPanelVisible,
     isEmptyPage,
     filesFilter,
     showFilter = true,
@@ -113,6 +122,7 @@ export const SectionWrapper = observer(
     const isEmptyList = settingsStore.isEmptyList || isEmptyPage;
 
     const showInfoPanel = !!(infoPanelHeaderContent || infoPanelBodyContent);
+    const showChatPanel = !!chatPanelContent;
 
     return (
       <Section
@@ -123,7 +133,11 @@ export const SectionWrapper = observer(
         currentDeviceType={currentDeviceType}
         isInfoPanelAvailable={showInfoPanel}
         isInfoPanelVisible={isInfoPanelVisible}
+        infoPanelWithoutScroll={infoPanelWithoutScroll}
         setIsInfoPanelVisible={setIsInfoPanelVisible}
+        isChatPanelAvailable={showChatPanel}
+        isChatPanelVisible={isChatPanelVisible}
+        setIsChatPanelVisible={setIsChatPanelVisible}
         canDisplay={showInfoPanel}
         scrollableBanner={scrollableBanner}
         stickyTableHeader={stickyTableHeader}
@@ -150,6 +164,8 @@ export const SectionWrapper = observer(
           {infoPanelHeaderContent}
         </Section.InfoPanelHeader>
         <Section.InfoPanelBody>{infoPanelBodyContent}</Section.InfoPanelBody>
+
+        <Section.ChatPanel>{chatPanelContent}</Section.ChatPanel>
       </Section>
     );
   },

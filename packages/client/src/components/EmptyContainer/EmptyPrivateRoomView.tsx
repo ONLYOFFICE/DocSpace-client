@@ -60,10 +60,10 @@ const EmptyPrivateRoomView = ({ security }: EmptyPrivateRoomViewProps) => {
   const { isBase } = useTheme();
 
   const items = [
-    t("EmptyView:PrivateRoomEmptyBenefitE2EE"),
-    t("EmptyView:PrivateRoomEmptyBenefitAEAD"),
-    t("EmptyView:PrivateRoomEmptyBenefitHPKE"),
-    t("EmptyView:PrivateRoomEmptyBenefitKDF"),
+    t("Common:PrivateRoomEmptyBenefitE2EE"),
+    t("Common:PrivateRoomEmptyBenefitAEAD"),
+    t("Common:PrivateRoomEmptyBenefitHPKE"),
+    t("Common:PrivateRoomEmptyBenefitKDF"),
   ];
 
   const onCreateFolder = useCallback(() => {
@@ -89,7 +89,7 @@ const EmptyPrivateRoomView = ({ security }: EmptyPrivateRoomViewProps) => {
       <div className={styles.icon}>
         {isBase ? <EmptyPrivateRoomLightIcon /> : <EmptyPrivateRoomDarkIcon />}
       </div>
-      <h3 className={styles.title}>{t("EmptyView:PrivateRoomEmptyTitle")}</h3>
+      <h3 className={styles.title}>{t("Common:PrivateRoomEmptyTitle")}</h3>
       <ul className={styles.list}>
         {items.map((text) => (
           <li key={text} className={styles.listItem}>

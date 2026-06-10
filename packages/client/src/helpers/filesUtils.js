@@ -308,7 +308,7 @@ export const getOperationsProgressTitle = (type, progress) => {
     case deleteVersionFile:
       return i18n.t("Files:DeletingVersion");
     case roomReencryption:
-      return i18n.t("Files:ReEncryptingFiles");
+      return i18n.t("Common:ReEncryptingFiles");
 
     default:
       return i18n.t("Files:OtherProcesses");

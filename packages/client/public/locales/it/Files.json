@@ -95,7 +95,6 @@
   "PersonalContentRemovalNotice": "I tuoi file e cartelle personali nella sezione {{sectionName}} verranno <1>eliminati</1> poiché gli Ospiti non hanno accesso a questa sezione. I file resteranno disponibili per la visualizzazione e il download <1>per 30 giorni</1>.",
   "PersonalFolderErasureWarning": "Il tuo tipo di utente è stato modificato in Ospite. I file personali verranno eliminati entro 30 giorni.",
   "RecentlyOpenedTooltip": "Aperto di recente tramite link",
-  "ReEncryptingFiles": "Re-cifratura dei file in corso",
   "RemovedFromRecent": "Rimosso da recenti",
   "Reorder": "Riordina",
   "ReorderIndex": "L'azione Riordina rimuove gli spazi negli indici. I file verranno reindicizzati in ordine con un offset per riempire gli indici mancanti.",

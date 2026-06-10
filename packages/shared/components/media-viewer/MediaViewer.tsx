@@ -58,7 +58,7 @@ import {
   type RoomMemberPublicKey,
 } from "../../services/encryption/room-file-access";
 import { requireUnlock } from "../../services/encryption/secret-storage";
-import { getCachedEncryptedFilename } from "../../services/encryption/filename-cache";
+import { resolveDisplayTitle } from "../../services/encryption/filename-cache";
 
 import { mapSupplied, mediaTypes } from "./MediaViewer.constants";
 import type { MediaViewerProps } from "./MediaViewer.types";
@@ -608,12 +608,13 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       setBufferSelection?.(foundFile);
     }
 
-    if (isEncrypted && fileId) {
-      const cached = getCachedEncryptedFilename(fileId);
-      setTitle(cached || currentTitle);
-    } else {
-      setTitle(currentTitle);
-    }
+    setTitle(
+      resolveDisplayTitle({
+        id: fileId,
+        title: currentTitle,
+        encrypted: isEncrypted,
+      }),
+    );
   }, [
     src,
     files,

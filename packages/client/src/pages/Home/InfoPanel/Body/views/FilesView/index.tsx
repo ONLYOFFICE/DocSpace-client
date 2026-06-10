@@ -59,6 +59,7 @@ import ThirdPartyComponent from "../History/HistoryBlockContent/ThirdParty";
 import Members from "../Members";
 import Share from "../Share";
 import Plugin from "../Plugin";
+import AIChat from "../AIChat";
 
 import { useHistory } from "./hooks/useHistory";
 import { usePlugin } from "./hooks/usePlugin";
@@ -289,6 +290,16 @@ const FilesView = ({
         }
       }
 
+      if (v === InfoPanelView.infoAIChat) {
+        if (currentViewRef.current !== v) return undefined;
+
+        onEndAnimation();
+        setIsLoadingSuspense(false);
+        setIsFirstLoadingSuspense(false);
+
+        return v;
+      }
+
       if (currentViewRef.current !== v) return undefined;
 
       setIsFirstLoadingSuspense(false);
@@ -377,6 +388,8 @@ const FilesView = ({
       );
     }
 
+    if (value === InfoPanelView.infoAIChat) return <AIChat />;
+
     if (isPlugin)
       return <Plugin selection={selection} infoPanelItem={infoPanelItem} />;
 
@@ -404,8 +417,17 @@ const FilesView = ({
       }
     : {};
 
+  const isAIChat = currentView === InfoPanelView.infoAIChat;
+
   return (
-    <div data-testid="info_panel_files_view_container">
+    <div
+      data-testid="info_panel_files_view_container"
+      style={
+        isAIChat
+          ? { height: "100%", display: "flex", flexDirection: "column" }
+          : undefined
+      }
+    >
       <ItemTitle
         infoPanelSelection={
           isRoomMembersPanel
@@ -429,7 +451,9 @@ const FilesView = ({
                   ? "members"
                   : currentView === InfoPanelView.infoHistory
                     ? "history"
-                    : "details"
+                    : currentView === InfoPanelView.infoAIChat
+                      ? "aiChat"
+                      : "details"
               }
               data-testid="info_panel_files_view_loader"
             />
@@ -437,6 +461,16 @@ const FilesView = ({
         ) : (
           <div
             data-testid={`info_panel_files_view_${value?.replace("info_", "")}`}
+            style={
+              isAIChat
+                ? {
+                    flex: 1,
+                    minHeight: 0,
+                    display: "flex",
+                    flexDirection: "column",
+                  }
+                : undefined
+            }
           >
             {getView()}
           </div>

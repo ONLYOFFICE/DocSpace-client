@@ -3,7 +3,7 @@
   "content": "Form owner",
   "content_en_sha1_hash": "7022aa4d3edf4428c9fb1db5c36d5affdb524284",
   "created_at": "2025-05-19T21:30:57.171Z",
-  "updated_at": "2026-05-15T14:00:06.905Z",
+  "updated_at": "2026-06-05T11:04:11.857Z",
   "comment": {
     "text": "This is a label identifying the creator or primary manager of a form. It appears next to an avatar and name in the completed form's details.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedForm.tsx",
-      "line_number": 203,
-      "context": "{formNumber}\n </Text>\n </div>\n </div>\n <div className={styles.managerWrapper}>\n <span className=\"label\">{t(\"CompletedForm:FormOwner\")}</span>\n <div className={styles.completedFormBox}>\n <Avatar\n className=\"manager__avatar\"\n size={AvatarSize.medium}\n role={AvatarRole.manager}",
+      "line_number": 205,
+      "context": "</Text>\n </div>\n </div>\n {manager ? (\n <div className={styles.managerWrapper}>\n <span className=\"label\">{t(\"CompletedForm:FormOwner\")}</span>\n <div className={styles.completedFormBox}>\n <Avatar\n className=\"manager__avatar\"\n size={AvatarSize.medium}\n role={AvatarRole.manager}",
       "module": "/packages/doceditor"
     }
   ],

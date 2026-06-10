@@ -3,7 +3,7 @@
   "content": "Cannot transfer ownership to {{user}}: their encryption key has changed and was not trusted. Re-verify the key and try again.",
   "content_en_sha1_hash": "94955485b9dabdb7cb56a4d8491f659bb5fac6f7",
   "created_at": "2026-05-24T17:27:26.255Z",
-  "updated_at": "2026-05-24T18:12:55.396Z",
+  "updated_at": "2026-06-09T09:43:10.844Z",
   "comment": {
     "text": "Error toast message appearing during room ownership transfer if the target user's encryption key is untrusted. The {{user}} variable represents the name of the recipient.",
     "is_auto": true,
@@ -16,6 +16,12 @@
       "line_number": 119,
       "context": "candidate.displayName ||\n candidate.id;\n toastr.error(\n reason === \"no-key\"\n ? t(\"Common:EncryptedChangeOwnerNoKeys\", { user: name })\n : t(\"Common:EncryptedChangeOwnerKeyMismatch\", { user: name }),\n );\n return;\n }\n }",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_components/owner-change/PrivateChangeOwnerDialog.tsx",
+      "line_number": 197,
+      "context": "candidate.displayName ||\n newOwnerId;\n toastr.error(\n reason === \"no-key\"\n ? t(\"Common:EncryptedChangeOwnerNoKeys\", { user: name })\n : t(\"Common:EncryptedChangeOwnerKeyMismatch\", {\n user: name,\n }),\n );\n return;\n }",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

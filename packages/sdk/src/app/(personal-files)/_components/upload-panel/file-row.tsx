@@ -111,6 +111,11 @@ const FileRow = observer(({ item, onCancel }: FileRowProps) => {
       {showProgress ? (
         <div className={styles.progressWrap}>
           <ProgressBar percent={item.percent} />
+          {item.label ? (
+            <Text fontSize="11px" className={styles.phaseLabel}>
+              {item.label}
+            </Text>
+          ) : null}
         </div>
       ) : null}
     </div>

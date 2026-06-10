@@ -48,6 +48,8 @@ import {
 } from "@docspace/shared/api/rooms/types";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getFileExtension } from "@docspace/shared/utils/common";
+import { getCachedEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
+import { useFilenameCacheVersion } from "@docspace/shared/hooks/useResolvedFileTitle";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -99,6 +101,8 @@ const HistoryItemList = ({
 }: HistoryItemListProps) => {
 	const { t } = useTranslation(["InfoPanel", "Common", "Translations"]);
 
+	useFilenameCacheVersion();
+
 	const totalItems = feed.related.length + 1;
 	const isExpandable = totalItems > EXPANSION_THRESHOLD;
 	const [isExpanded, setIsExpanded] = useState(!isExpandable);
@@ -120,8 +124,10 @@ const HistoryItemList = ({
 			fileExst: string;
 		} = { feedId: id, title: "", isFolder, ...data, fileExst: "" };
 
-		i.fileExst = getFileExtension(data.title || data.newTitle || "");
-		i.title = nameWithoutExtension!(data.title || data.newTitle);
+		const rawTitle = data.title || data.newTitle || "";
+		const resolvedTitle = getCachedEncryptedFilename(data.id) || rawTitle;
+		i.fileExst = getFileExtension(resolvedTitle);
+		i.title = nameWithoutExtension!(resolvedTitle);
 		i.isFolder = actionType === FeedAction.Change ? !i.fileExst : isFolder;
 
 		return i;

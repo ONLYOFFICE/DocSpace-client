@@ -39,13 +39,24 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const captured = {
   confirmation: null as Record<string, unknown> | null,
+  passphrase: null as Record<string, unknown> | null,
 };
 
-vi.mock("../../modals/ConfirmationModal", () => ({
+vi.mock("@docspace/shared/dialogs/confirmation-modal", () => ({
   ConfirmationModal: (props: Record<string, unknown>) => {
     captured.confirmation = props;
     useEffect(() => () => {
       captured.confirmation = null;
+    }, []);
+    return null;
+  },
+}));
+
+vi.mock("@docspace/shared/dialogs/passphrase-modal", () => ({
+  PassphraseModal: (props: Record<string, unknown>) => {
+    captured.passphrase = props;
+    useEffect(() => () => {
+      captured.passphrase = null;
     }, []);
     return null;
   },
@@ -58,12 +69,17 @@ vi.mock("@docspace/ui-kit/components/toast", () => ({
 vi.mock("@docspace/shared/services/encryption/secret-storage", () => ({
   SecretStorage: { lock: vi.fn() },
 }));
+vi.mock("@docspace/shared/services/encryption/identity", () => ({
+  unlockWithPassphrase: vi.fn(),
+}));
 vi.mock("@docspace/shared/api/privacy", () => ({
   deleteEncryptionKey: vi.fn(),
 }));
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
+import { unlockWithPassphrase } from "@docspace/shared/services/encryption/identity";
+import { InvalidPassphraseError } from "@docspace/shared/services/encryption/errors";
 import { deleteEncryptionKey } from "@docspace/shared/api/privacy";
 
 import {
@@ -75,74 +91,147 @@ let latest: DeleteKeyFlow;
 const Harness = (deps: {
   userId?: string;
   refreshKeysFromServer: () => Promise<void>;
+  onForgotPassphrase?: () => void;
 }) => {
   latest = useDeleteKeyFlow(deps);
   return <>{latest.modals}</>;
 };
 
+const sampleKey = {
+  id: "key-7",
+  publicKey: "pub-7",
+  privateKeyEnc: "enc-7",
+} as never;
+
 describe("useDeleteKeyFlow", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     captured.confirmation = null;
+    captured.passphrase = null;
   });
 
-  it("keeps confirmation hidden until request() is called", () => {
+  it("keeps both dialogs hidden until request() is called", () => {
     render(<Harness refreshKeysFromServer={vi.fn()} />);
     expect(captured.confirmation).toBeNull();
+    expect(captured.passphrase).toBeNull();
   });
 
-  it("shows the confirmation dialog when request(keyId) fires", () => {
+  it("shows the confirmation dialog when request(keyData) fires", () => {
     render(<Harness refreshKeysFromServer={vi.fn()} />);
-    act(() => latest.request("key-7"));
+    act(() => latest.request(sampleKey));
     expect(captured.confirmation?.visible).toBe(true);
+    expect(captured.passphrase).toBeNull();
     expect(deleteEncryptionKey).not.toHaveBeenCalled();
   });
 
-  it("clears pendingId after a successful delete (finally block)", async () => {
+  it("transitions to passphrase modal after confirmation", () => {
+    render(<Harness refreshKeysFromServer={vi.fn()} />);
+    act(() => latest.request(sampleKey));
+    act(() => (captured.confirmation!.onConfirm as () => void)());
+    expect(captured.confirmation).toBeNull();
+    expect(captured.passphrase?.visible).toBe(true);
+    expect(deleteEncryptionKey).not.toHaveBeenCalled();
+  });
+
+  it("deletes the key after successful passphrase verification", async () => {
+    vi.mocked(unlockWithPassphrase).mockResolvedValueOnce(undefined as never);
     vi.mocked(deleteEncryptionKey).mockResolvedValueOnce(undefined as never);
-
     render(<Harness refreshKeysFromServer={vi.fn().mockResolvedValue(undefined)} />);
-    act(() => latest.request("key-7"));
+    act(() => latest.request(sampleKey));
+    act(() => (captured.confirmation!.onConfirm as () => void)());
+
     await act(async () => {
-      await (captured.confirmation!.onConfirm as () => Promise<void>)();
+      await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
+        "secret",
+      );
     });
 
-    expect(latest.pendingId).toBeNull();
+    expect(unlockWithPassphrase).toHaveBeenCalledWith(
+      { publicKey: "pub-7", privateKeyEnc: "enc-7" },
+      "secret",
+    );
     expect(deleteEncryptionKey).toHaveBeenCalledWith("key-7");
+    expect(latest.pendingId).toBeNull();
   });
 
-  it("clears pendingId after a failed delete (finally block also runs on error)", async () => {
-    vi.mocked(deleteEncryptionKey).mockRejectedValueOnce(new Error("403"));
-
+  it("surfaces InvalidPassphraseError via externalError without deleting", async () => {
+    vi.mocked(unlockWithPassphrase).mockRejectedValueOnce(
+      new InvalidPassphraseError(),
+    );
     render(<Harness refreshKeysFromServer={vi.fn()} />);
-    act(() => latest.request("key-7"));
+    act(() => latest.request(sampleKey));
+    act(() => (captured.confirmation!.onConfirm as () => void)());
+
     await act(async () => {
-      await (captured.confirmation!.onConfirm as () => Promise<void>)();
+      await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
+        "wrong",
+      );
     });
 
-    expect(latest.pendingId).toBeNull();
-    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(deleteEncryptionKey).not.toHaveBeenCalled();
+    expect(captured.passphrase?.externalError).toBeTruthy();
+    expect(captured.passphrase?.visible).toBe(true);
   });
 
-  it("locks SecretStorage only on success — never on failure", async () => {
+  it("locks SecretStorage only on a successful delete", async () => {
+    vi.mocked(unlockWithPassphrase).mockResolvedValueOnce(undefined as never);
     vi.mocked(deleteEncryptionKey).mockRejectedValueOnce(new Error("403"));
     render(<Harness refreshKeysFromServer={vi.fn()} />);
-    act(() => latest.request("key-7"));
+    act(() => latest.request(sampleKey));
+    act(() => (captured.confirmation!.onConfirm as () => void)());
     await act(async () => {
-      await (captured.confirmation!.onConfirm as () => Promise<void>)();
+      await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
+        "secret",
+      );
     });
     expect(SecretStorage.lock).not.toHaveBeenCalled();
+    expect(toastr.error).toHaveBeenCalledTimes(1);
 
+    vi.mocked(unlockWithPassphrase).mockResolvedValueOnce(undefined as never);
     vi.mocked(deleteEncryptionKey).mockResolvedValueOnce(undefined as never);
-    act(() => latest.request("key-7"));
+    act(() => latest.request(sampleKey));
+    act(() => (captured.confirmation!.onConfirm as () => void)());
     await act(async () => {
-      await (captured.confirmation!.onConfirm as () => Promise<void>)();
+      await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
+        "secret",
+      );
     });
     expect(SecretStorage.lock).toHaveBeenCalledTimes(1);
   });
 
-  it("uses ORDERING: API call → lock → refresh on success", async () => {
+  it("dismisses the passphrase modal and calls onForgotPassphrase when the link fires", () => {
+    const onForgot = vi.fn();
+    render(
+      <Harness
+        refreshKeysFromServer={vi.fn()}
+        onForgotPassphrase={onForgot}
+      />,
+    );
+    act(() => latest.request(sampleKey));
+    act(() => (captured.confirmation!.onConfirm as () => void)());
+    expect(captured.passphrase?.visible).toBe(true);
+
+    act(() =>
+      (captured.passphrase!.onForgotPassphrase as () => void)(),
+    );
+
+    expect(captured.passphrase).toBeNull();
+    expect(onForgot).toHaveBeenCalledTimes(1);
+    expect(deleteEncryptionKey).not.toHaveBeenCalled();
+  });
+
+  it("does not pass onForgotPassphrase to the modal when the dep is missing", () => {
+    render(<Harness refreshKeysFromServer={vi.fn()} />);
+    act(() => latest.request(sampleKey));
+    act(() => (captured.confirmation!.onConfirm as () => void)());
+    expect(captured.passphrase?.onForgotPassphrase).toBeUndefined();
+  });
+
+  it("uses ORDERING: unlock → api → lock → refresh on success", async () => {
     const callOrder: string[] = [];
+    vi.mocked(unlockWithPassphrase).mockImplementationOnce((async () => {
+      callOrder.push("unlock");
+    }) as never);
     vi.mocked(deleteEncryptionKey).mockImplementationOnce((async () => {
       callOrder.push("api");
     }) as never);
@@ -154,16 +243,14 @@ describe("useDeleteKeyFlow", () => {
     });
 
     render(<Harness refreshKeysFromServer={refresh} />);
-    act(() => latest.request("key-7"));
+    act(() => latest.request(sampleKey));
+    act(() => (captured.confirmation!.onConfirm as () => void)());
     await act(async () => {
-      await (captured.confirmation!.onConfirm as () => Promise<void>)();
+      await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
+        "secret",
+      );
     });
-    expect(callOrder).toEqual(["api", "lock", "refresh"]);
-  });
 
-  it("does nothing on confirm when there is no confirming target (defensive)", () => {
-    render(<Harness refreshKeysFromServer={vi.fn()} />);
-    expect(captured.confirmation).toBeNull();
-    expect(deleteEncryptionKey).not.toHaveBeenCalled();
+    expect(callOrder).toEqual(["unlock", "api", "lock", "refresh"]);
   });
 });

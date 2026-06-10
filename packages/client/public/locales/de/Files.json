@@ -95,7 +95,6 @@
   "PersonalContentRemovalNotice": "Ihre persönlichen Dateien und Ordner im Bereich {{sectionName}} werden <1>gelöscht</1>, da Gäste keinen Zugriff auf diesen Bereich haben. Die Dateien bleiben <1>30 Tage lang</1> zum Anzeigen und Herunterladen verfügbar.",
   "PersonalFolderErasureWarning": "Ihr Benutzertyp wurde auf Gast geändert. Persönliche Dateien werden in 30 Tagen gelöscht.",
   "RecentlyOpenedTooltip": "Zuletzt geöffnet über den Link",
-  "ReEncryptingFiles": "Dateien neu verschlüsseln",
   "RemovedFromRecent": "Aus den Letzten entfernt",
   "Reorder": "Neu anordnen",
   "ReorderIndex": "Die Aktion \"Neu anordnen\" entfernt Leerstellen in den Indizes. Die Dateien werden mit einem Versatz neu indexiert, um fehlende Indizes aufzufüllen.",

@@ -50,7 +50,6 @@ import { logout as logoutDesktop } from "../utils/desktop";
 import {
   frameCallEvent,
   isAdmin,
-  insertDataLayer,
   isPublicRoom,
   isPublicPreview,
 } from "../utils/common";
@@ -238,10 +237,6 @@ class AuthStore {
     return Promise.all(requests)
       .then(() => {
         const user = this.userStore?.user;
-
-        if (user?.id) {
-          insertDataLayer(user.id);
-        }
 
         // Load encryption keys for the authenticated user (needed for private rooms)
         if (user?.id && this.isAuthenticated) {
@@ -503,9 +498,8 @@ class AuthStore {
     // Clear encryption state: MobX store + in-memory unlocked-identity cache
     this.userStore?.clearEncryptionKeys();
     try {
-      const { SecretStorage } = await import(
-        "../services/encryption/secret-storage"
-      );
+      const { SecretStorage } =
+        await import("../services/encryption/secret-storage");
       SecretStorage.lock();
     } catch {
       // Encryption module may not be loaded — safe to ignore

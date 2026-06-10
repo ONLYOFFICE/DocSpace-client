@@ -3,7 +3,7 @@
   "content": "Use recovery phrase",
   "content_en_sha1_hash": "8d7f041d531f2d7ac208f5ce3dcc4a7114eec8e4",
   "created_at": "2026-05-24T17:27:43.016Z",
-  "updated_at": "2026-05-24T17:28:08.234Z",
+  "updated_at": "2026-06-09T09:43:10.922Z",
   "comment": {
     "text": "Button label and modal dialog title used to initiate the process of recovering keys via a recovery phrase.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
-      "line_number": 189,
-      "context": "{importFlow.fileInput}\n {recover.available ? (\n <Button\n size={ButtonSize.small}\n onClick={recover.request}\n label={t(\"Common:UseRecoveryPhrase\")}\n isDisabled={busy}\n />\n ) : null}\n {hasKeys && isUnlocked ? (\n <Button",
+      "line_number": 194,
+      "context": "{importFlow.fileInput}\n {recover.available ? (\n <Button\n size={ButtonSize.small}\n onClick={() => recover.request()}\n label={t(\"Common:UseRecoveryPhrase\")}\n isDisabled={busy}\n />\n ) : null}\n {hasKeys && isUnlocked ? (\n <Button",
       "module": "/packages/client"
     },
     {

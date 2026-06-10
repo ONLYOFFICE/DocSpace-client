@@ -39,6 +39,7 @@ import { inject, observer } from "mobx-react";
 
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import { isMobile } from "@docspace/shared/utils";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import {
@@ -85,6 +86,8 @@ const RoomsContextBtn = ({
     "InfoPanel",
   ]);
   const contextMenuRef = useRef<ContextMenuRefType>(null);
+
+  const resolvedTitle = useResolvedFileTitle(selection);
 
   const onContextMenu = (e: React.MouseEvent) => {
     if (!contextMenuRef?.current?.menuRef.current)
@@ -134,7 +137,7 @@ const RoomsContextBtn = ({
         : undefined;
 
     return {
-      title: selection.title || "",
+      title: resolvedTitle || selection.title || "",
       icon:
         "icon" in selection ? (selection.icon as string) || iconUrl || "" : "",
       original: "logo" in selection ? selection.logo?.original : "",
@@ -151,7 +154,7 @@ const RoomsContextBtn = ({
       badgeUrl: badgeUrl ?? undefined,
       badgeIconColor,
     };
-  }, [selection, externalShareApplyToRooms, hasExternalLinks]);
+  }, [selection, resolvedTitle, externalShareApplyToRooms, hasExternalLinks]);
 
   const onHideContextMenu = () => {
     // Callback is called when the context menu is closed.

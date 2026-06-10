@@ -95,7 +95,6 @@
   "PersonalContentRemovalNotice": "Vaši lični fajlovi i folderi u odeljku {{sectionName}} biće <1>obrisani</1>, jer gosti nemaju pristup ovom odeljku. Fajlovi ostaju dostupni za pregled i preuzimanje <1>30 dana</1>.",
   "PersonalFolderErasureWarning": "Vaš tip korisnika je promenjen na Gost. Lični fajlovi će biti obrisani za 30 dana.",
   "RecentlyOpenedTooltip": "Nedavno otvoreno putem linka",
-  "ReEncryptingFiles": "Ponovno šifrovanje fajlova",
   "RemovedFromRecent": "Uklonjeno iz nedavnih",
   "Reorder": "Preuredi",
   "ReorderIndex": "Radnja preuređivanja će ukloniti praznine u indeksima. Fajlovi će biti reindeksirani po redu sa offsetom kako bi popunili nedostajuće indekse.",

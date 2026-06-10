@@ -17,6 +17,12 @@ type UseItemContextMenuProps = {
    * Used for rooms internals and trash where favoriting is undesired.
    */
   withoutFavorite?: boolean;
+  /**
+   * When true, enables the "download without decryption" option for folders.
+   * For files the option is gated by file.encrypted; for folders the caller
+   * must indicate private-room context since folders have no encrypted field.
+   */
+  isPrivate?: boolean;
 };
 
 export default function useItemContextMenu({
@@ -26,6 +32,7 @@ export default function useItemContextMenu({
   isDocsSection = false,
   isShareSection = false,
   withoutFavorite = false,
+  isPrivate = false,
 }: UseItemContextMenuProps = {}) {
   const { filesSettings } = useFilesSettingsStore();
 
@@ -125,6 +132,14 @@ export default function useItemContextMenu({
 
       if (!file.security.Download)
         model.delete(AVAILABLE_CONTEXT_ITEMS.download);
+
+      // Emit the "download without decryption" option for encrypted files so
+      // the private-room whitelist can pass it through. The option is omitted
+      // for non-encrypted files; non-private-room callers filter it out via
+      // their allowedContextOptions whitelist.
+      if (file.encrypted && file.security.Download) {
+        model.add(AVAILABLE_CONTEXT_ITEMS.downloadEncrypted);
+      }
 
       if (!file.viewAccessibility.CanConvert)
         model.delete(AVAILABLE_CONTEXT_ITEMS.downloadAs);
@@ -261,6 +276,12 @@ export default function useItemContextMenu({
           ? [AVAILABLE_CONTEXT_ITEMS.share, AVAILABLE_CONTEXT_ITEMS.copyLink]
           : []),
         AVAILABLE_CONTEXT_ITEMS.download,
+        // In private rooms, expose the raw-ciphertext archive download option.
+        // Gated by Download permission so the item can be disabled at the model
+        // level to match the reference's disabled: !item.security?.Download.
+        ...(isPrivate && folder.security.Download
+          ? [AVAILABLE_CONTEXT_ITEMS.downloadEncrypted]
+          : []),
       ];
 
       const isFavorite = (folder as TFolder).isFavorite;
@@ -296,6 +317,7 @@ export default function useItemContextMenu({
       withoutFavorite,
       isFavoritesSection,
       isRecentSection,
+      isPrivate,
     ],
   );
 

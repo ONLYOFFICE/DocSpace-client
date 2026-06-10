@@ -95,7 +95,6 @@
   "PersonalContentRemovalNotice": "Uw persoonlijke bestanden en mappen in de {{sectionName}} sectie worden <1>verwijderd</1> omdat Gasten geen toegang hebben tot deze sectie. Bestanden blijven <1>30 dagen</1> beschikbaar om te bekijken en te downloaden.",
   "PersonalFolderErasureWarning": "Uw gebruikerstype is gewijzigd naar Gast. Persoonlijke bestanden worden na 30 dagen verwijderd.",
   "RecentlyOpenedTooltip": "Onlangs geopend via de link",
-  "ReEncryptingFiles": "Bestanden opnieuw versleutelen",
   "RemovedFromRecent": "Verwijderd uit recent",
   "Reorder": "Opnieuw ordenen",
   "ReorderIndex": "De Opnieuw ordenen actie verwijdert ruimtes in de indexen. De bestanden worden opnieuw geïndexeerd in volgorde met offset om ontbrekende indexen aan te vullen.",

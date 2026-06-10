@@ -3,7 +3,7 @@
   "content": "Invalid passphrase",
   "content_en_sha1_hash": "92ec89d57abc58876087cda1faa362e046564a2b",
   "created_at": "2026-05-24T17:27:29.929Z",
-  "updated_at": "2026-05-24T17:54:54.220Z",
+  "updated_at": "2026-06-09T09:43:10.923Z",
   "comment": {
     "text": "Error message or toast notification displayed when a passphrase fails verification during encryption key import or rotation.",
     "is_auto": true,
@@ -12,15 +12,21 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useImportKeyFlow.tsx",
-      "line_number": 129,
-      "context": "toastr.success(t(\"Common:EncryptionKeyImported\"));\n reset();\n } catch (error) {\n const message =\n error instanceof InvalidPassphraseError\n ? t(\"Common:InvalidPassphrase\")\n : getEncryptionErrorMessage(t, error);\n toastr.error(message);\n console.error(\"Import passphrase verification failed:\", error);\n } finally {\n setIsPending(false);",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useDeleteKeyFlow.tsx",
+      "line_number": 117,
+      "context": "await refreshKeysFromServer();\n toastr.success(t(\"Common:EncryptionKeyDeleted\"));\n setVerifying(null);\n } catch (error) {\n if (error instanceof InvalidPassphraseError) {\n setPassphraseError(t(\"Common:InvalidPassphrase\"));\n } else {\n toastr.error(getEncryptionErrorMessage(t, error));\n console.error(\"Key deletion failed:\", error);\n setVerifying(null);\n }",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useRotatePassphraseFlow.tsx",
-      "line_number": 102,
-      "context": "await refreshKeysFromServer();\n toastr.success(t(\"Common:PassphraseUpdated\"));\n reset();\n } catch (e) {\n console.error(\"Passphrase rotation failed:\", e);\n setError(t(\"Common:InvalidPassphrase\"));\n } finally {\n setIsPending(false);\n }\n },\n [target, userId, refreshKeysFromServer, reset, t],",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useExportKeyFlow.tsx",
+      "line_number": 107,
+      "context": "URL.revokeObjectURL(url);\n toastr.success(t(\"Common:EncryptionKeyExported\"));\n reset();\n } catch (e) {\n if (e instanceof InvalidPassphraseError) {\n setError(t(\"Common:InvalidPassphrase\"));\n } else {\n toastr.error(getEncryptionErrorMessage(t, e));\n console.error(\"Key export failed:\", e);\n reset();\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useImportKeyFlow.tsx",
+      "line_number": 133,
+      "context": "toastr.success(t(\"Common:EncryptionKeyImported\"));\n reset();\n } catch (error) {\n const message =\n error instanceof InvalidPassphraseError\n ? t(\"Common:InvalidPassphrase\")\n : getEncryptionErrorMessage(t, error);\n toastr.error(message);\n console.error(\"Import passphrase verification failed:\", error);\n } finally {\n setIsPending(false);",
       "module": "/packages/client"
     },
     {

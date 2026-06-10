@@ -106,7 +106,7 @@ const EmptyViewContainer = observer((props: EmptyViewContainerProps) => {
     />
   ) : null;
 
-  if (props.selectedFolder?.private && !props.isFolder) {
+  if (props.isPrivacyFolder) {
     return <EmptyPrivateRoomView />;
   }
 
@@ -139,13 +139,17 @@ const InjectedEmptyViewContainer = inject<
     peopleStore,
     settingsStore,
     authStore,
+    currentTariffStatusStore,
   }): InjectedEmptyViewContainerProps => {
     const { isWarningRoomsDialog } = currentQuotaStore;
+    const { isGracePeriod } = currentTariffStatusStore;
+
     const { isPublicRoom } = publicRoomStore;
     const { isFrame, logoText, aiConfig, standalone, tenantAlias, baseDomain } =
       settingsStore;
 
-    const { myFolderId, myFolder, roomsFolder } = treeFoldersStore;
+    const { myFolderId, myFolder, roomsFolder, isPrivacyFolder } =
+      treeFoldersStore;
 
     const { setIsSectionFilterLoading } = clientLoadingStore;
 
@@ -190,6 +194,7 @@ const InjectedEmptyViewContainer = inject<
       myFolderId,
       myFolder,
       roomsFolder,
+      isPrivacyFolder,
       userId,
       isPublicRoom,
       isWarningRoomsDialog,
@@ -219,6 +224,7 @@ const InjectedEmptyViewContainer = inject<
       tenantAlias,
       baseDomain,
       socialAuthUser: userStore?.user,
+      isGracePeriod,
     };
   },
 )(EmptyViewContainer as React.FC<OutEmptyViewContainerProps>);

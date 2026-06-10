@@ -281,7 +281,13 @@ export const useShare = ({
       }
     };
 
-    if (item.access === ShareAccessRights.FormFilling && onOpenPanel) {
+    const isRooms = infoPanelSelection?.rootFolderType === FolderType.Rooms;
+
+    if (
+      item.access === ShareAccessRights.FormFilling &&
+      !isRooms &&
+      onOpenPanel
+    ) {
       onOpenPanel({
         visible: true,
         updateAccessLink,

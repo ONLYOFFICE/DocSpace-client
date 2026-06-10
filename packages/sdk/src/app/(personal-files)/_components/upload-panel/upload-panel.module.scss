@@ -112,3 +112,11 @@
   inset-inline: 48px 16px;
   bottom: 0;
 }
+
+.phaseLabel {
+  display: block;
+  margin-top: 2px;
+  color: var(--files-panels-upload-progress-color);
+  font-size: 11px;
+  line-height: 1.2;
+}

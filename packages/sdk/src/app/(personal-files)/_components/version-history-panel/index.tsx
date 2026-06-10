@@ -61,6 +61,7 @@ import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu"
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { Encoder } from "@docspace/ui-kit/utils/encoder";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 
 import { useVersionHistoryStore } from "../../_store/VersionHistoryStore";
 
@@ -422,8 +423,9 @@ const VersionHistoryPanel = observer(() => {
   const actionsLabel = t("Common:Actions");
   const editCommentLabel = t("Common:EditComment");
   const restoreLabel = t("Common:Restore");
-  const title =
-    versions && versions.length > 0 ? versions[0].title : (file?.title ?? "");
+  const title = useResolvedFileTitle(
+    versions && versions.length > 0 ? versions[0] : file,
+  );
 
   const onDeleteRequest = React.useCallback(
     (versionGroup: number) => {

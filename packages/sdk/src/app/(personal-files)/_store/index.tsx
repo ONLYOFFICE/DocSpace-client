@@ -47,28 +47,31 @@ import { DialogsStoreContextProvider } from "@/app/(docspace)/_store/DialogsStor
 import { DownloadDialogStoreContextProvider } from "@/app/(docspace)/_store/DownloadDialogStore";
 import { ActiveItemsStoreContextProvider } from "@/app/(docspace)/_store/ActiveItemsStore";
 import { UploadStoreContextProvider } from "@/app/(docspace)/_store/UploadStore";
+import { InfoPanelStoreContextProvider } from "@/app/(docspace)/_store/InfoPanelStore";
 
 import type { TViewAs } from "@docspace/shared/types";
 
 import { DocsSettingsStoreContextProvider } from "./DocsSettingsStore";
 import { DocsUserStoreContextProvider } from "./DocsUserStore";
-import { InfoPanelStoreContextProvider } from "@/app/(docspace)/_store/InfoPanelStore";
+import PersonalFilesAiAgentProviders from "../_components/ai-agent-providers";
 import { VersionHistoryStoreContextProvider } from "./VersionHistoryStore";
 import { DragStoreContextProvider } from "./DragStore";
 
 export const DocsStoreProviders = ({
   children,
   initViewAs = "row",
+  myFolderId,
 }: {
   children: React.ReactNode;
   initViewAs?: TViewAs;
+  myFolderId?: number | string;
 }) => {
   return (
     <SettingsStoreContextProvider initData={{ viewAs: initViewAs }}>
       <FilesSettingsStoreContextProvider>
         <FilesListStoreContextProvider>
           <FilesSelectionStoreContextProvider>
-            <DragStoreContextProvider>
+<DragStoreContextProvider>
               <NavigationStoreContextProvider>
                 <MediaViewerStoreContextProvider>
                   <DialogsStoreContextProvider>
@@ -79,7 +82,11 @@ export const DocsStoreProviders = ({
                             <DocsUserStoreContextProvider>
                               <InfoPanelStoreContextProvider>
                                 <VersionHistoryStoreContextProvider>
-                                  {children}
+                                  <PersonalFilesAiAgentProviders
+                                    myFolderId={myFolderId}
+                                  >
+                                    {children}
+                                  </PersonalFilesAiAgentProviders>
                                 </VersionHistoryStoreContextProvider>
                               </InfoPanelStoreContextProvider>
                             </DocsUserStoreContextProvider>

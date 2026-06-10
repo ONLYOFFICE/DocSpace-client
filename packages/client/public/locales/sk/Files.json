@@ -95,7 +95,6 @@
   "PersonalContentRemovalNotice": "Vaše osobné súbory a priečinky v časti {{sectionName}} budú <1>vymazané</1>, pretože Hostia nemajú prístup do tejto časti. Súbory zostanú prístupné na prezeranie a sťahovanie <1>po dobu 30 dní</1>.",
   "PersonalFolderErasureWarning": "Váš typ používateľa bol zmenený na Hosť. Osobné súbory budú vymazané do 30 dní.",
   "RecentlyOpenedTooltip": "Nedávno otvorené cez odkaz",
-  "ReEncryptingFiles": "Opätovné šifrovanie súborov",
   "RemovedFromRecent": "Odstránené zo zoznamu nedávno",
   "Reorder": "Znovu zoradiť",
   "ReorderIndex": "Funkcia Znovu zoradiť odstráni medzery v indexoch. Súbory budú znovu indexované a poradie sa zmení, aby sa doplnili chýbajúce indexy.",

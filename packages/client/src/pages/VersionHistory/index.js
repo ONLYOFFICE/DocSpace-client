@@ -45,7 +45,7 @@ import { SectionHeaderContent, SectionBodyContent } from "./Section";
 
 class PureVersionHistory extends React.Component {
   render() {
-    const { isLoading, versions } = this.props;
+    const { isLoading, versions, fileTitle } = this.props;
 
     return (
       <SectionWrapper
@@ -56,7 +56,7 @@ class PureVersionHistory extends React.Component {
         <Section.SectionHeader>
           {versions && !isLoading ? (
             <SectionHeaderContent
-              title={versions[0].title}
+              title={fileTitle}
               onClickBack={this.redirectToHomepage}
             />
           ) : (
@@ -80,13 +80,14 @@ export default inject(
   ({ settingsStore, filesStore, clientLoadingStore, versionHistoryStore }) => {
     const { filter } = filesStore;
     const { isLoading } = clientLoadingStore;
-    const { setIsVerHistoryPanel, versions } = versionHistoryStore;
+    const { setIsVerHistoryPanel, versions, fileTitle } = versionHistoryStore;
 
     return {
       isTabletView: settingsStore.isTabletView,
       isLoading,
       filter,
       versions,
+      fileTitle,
 
       setIsVerHistoryPanel,
     };

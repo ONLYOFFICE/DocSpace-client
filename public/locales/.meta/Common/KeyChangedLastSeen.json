@@ -1,13 +1,13 @@
 {
   "key_path": "KeyChangedLastSeen",
-  "content": "last seen: {{date}}",
-  "content_en_sha1_hash": "c2d0ea00e98a78f30b05764d33de321e7694ca74",
-  "created_at": "2026-05-24T17:27:30.316Z",
-  "updated_at": "2026-05-24T17:52:19.427Z",
+  "content": "Last seen: {{date}}",
+  "content_en_sha1_hash": "2b0dd841773b99427ba29f4c0f60c84687dce431",
+  "created_at": "2026-06-09T09:42:47.984Z",
+  "updated_at": "2026-06-09T10:04:29.209Z",
   "comment": {
-    "text": "Metadata text in the Key Change dialog indicating the most recent date the key was observed, following a pipe separator. The `{{date}}` variable represents a formatted date.",
+    "text": "Metadata text in the Key Change dialog that displays the timestamp of the last known occurrence, including a formatted date variable.",
     "is_auto": true,
-    "updated_at": "2026-05-24T17:52:19.427Z",
+    "updated_at": "2026-06-09T10:04:29.209Z",
     "model": "gemma4:26b"
   },
   "usage": [

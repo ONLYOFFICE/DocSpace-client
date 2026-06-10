@@ -3,7 +3,7 @@
   "content": "My documents",
   "content_en_sha1_hash": "143f7ba1fed6d88c5657c9a23c89975723c9f700",
   "created_at": "2025-09-02T08:31:42.199Z",
-  "updated_at": "2026-06-03T09:30:05.002Z",
+  "updated_at": "2026-06-09T09:43:10.794Z",
   "comment": {
     "text": "This is a label for the user's personal document storage. It appears in various contexts, such as a download report location or a section title within dialogs.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/selectors/Files/hooks/useRootHelper.tsx",
-      "line_number": 140,
+      "line_number": 168,
       "context": ") {\n let title = \"\";\n \n switch (folder.rootFolderType) {\n case FolderType.USER:\n title = t(\"MyDocuments\");\n break;\n case FolderType.VirtualRooms:\n title = t(\"Rooms\");\n break;\n case FolderType.Favorites:",
       "module": "/libs/ui-kit"
     },
@@ -104,13 +104,13 @@
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
       "line_number": 400,
-      "context": "return t(\"Common:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomIndexExportSaved:\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyDocuments\"),\n });\n case FeedActionKeys.RoomChangeOwner:\n return t(\"Common:RoomChangeOwner\");\n case FeedActionKeys.FormSubmit:\n return t(\"InfoPanel:FilledOutForm\");",
+      "context": "return t(\"Common:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomIndexExportSaved:\n return t(\"Common:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyDocuments\"),\n });\n case FeedActionKeys.RoomChangeOwner:\n return t(\"Common:RoomChangeOwner\");\n case FeedActionKeys.FormSubmit:\n return t(\"Common:FilledOutForm\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 345,
-      "context": "return t(\"Common:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomIndexExportSaved:\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyDocuments\"),\n });\n case FeedActionKeys.FormSubmit:\n return t(\"InfoPanel:FilledOutForm\");\n case FeedActionKeys.FormOpenedForFilling:\n return t(\"InfoPanel:StartedFillingItOut\");",
+      "context": "return t(\"Common:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomIndexExportSaved:\n return t(\"Common:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyDocuments\"),\n });\n case FeedActionKeys.FormSubmit:\n return t(\"Common:FilledOutForm\");\n case FeedActionKeys.FormOpenedForFilling:\n return t(\"Common:StartedFillingItOut\");",
       "module": "/packages/client"
     },
     {
@@ -195,6 +195,12 @@
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/index.tsx",
       "line_number": 118,
       "context": "title: t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n defaultValue: \"Upload from {{productName}}\",\n }),\n description: t(\"Common:UploadFilesPortal\", {\n sectionNameFirst: t(\"Common:MyDocuments\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n defaultValue:\n \"Pick files from {{sectionNameFirst}} or {{sectionNameSecond}}.\",\n }),\n icon: <UploadPDFFormIcon />,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
+      "line_number": 334,
+      "context": "return t(\"Common:RoomDenyDownloadEnabled\");\n case FeedActionKeys.RoomDenyDownloadDisabled:\n return t(\"Common:RoomDenyDownloadDisabled\");\n case FeedActionKeys.RoomIndexExportSaved:\n return t(\"Common:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyDocuments\"),\n });\n case FeedActionKeys.FormSubmit:\n return t(\"Common:FilledOutForm\");\n case FeedActionKeys.FormOpenedForFilling:\n return t(\"Common:StartedFillingItOut\");",
       "module": "/packages/sdk"
     },
     {

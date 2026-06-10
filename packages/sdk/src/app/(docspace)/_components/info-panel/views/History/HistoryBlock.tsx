@@ -44,6 +44,8 @@ import {
   parseToDateTime,
 } from "@docspace/ui-kit/utils/date";
 import { getFileExtension } from "@docspace/shared/utils/common";
+import { getCachedEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
+import { useFilenameCacheVersion } from "@docspace/shared/hooks/useResolvedFileTitle";
 import type {
   TFeedAction,
   TFeedData,
@@ -107,9 +109,12 @@ const HistoryBlock = ({
     feedInfo &&
     (feedInfo.targetType === "file" || feedInfo.targetType === "folder");
 
+  useFilenameCacheVersion();
+
   const isFolder = feedInfo?.targetType === "folder";
   const data = (feed.data ?? {}) as TFeedData;
-  const rawTitle = data.title || data.newTitle || "";
+  const rawTitle =
+    getCachedEncryptedFilename(data.id) ?? (data.title || data.newTitle || "");
   const itemTitle = nameWithoutExtension(rawTitle);
   const fileExst = isFolder ? "" : getFileExtension(rawTitle);
 

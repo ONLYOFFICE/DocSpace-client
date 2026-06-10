@@ -76,39 +76,50 @@ export const ResetKeysConfirmDialog: React.FC<ResetKeysConfirmDialogProps> = ({
       visible={visible}
       onClose={onCancel}
       displayType={ModalDialogType.modal}
+      autoMaxHeight
     >
       <ModalDialog.Header>
         {t("Common:ResetEncryptionKeysTitle")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Text fontSize="13px" noSelect>
-          {t("Common:ResetEncryptionKeysWarning")}
-        </Text>
-        <Text
-          fontSize="13px"
-          fontWeight="600"
-          style={{ marginTop: "12px", marginBottom: "8px" }}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px",
+          }}
         >
-          {t("Common:ResetEncryptionKeysConfirmation", {
-            token: expectedToken,
-          })}
-        </Text>
-        <TextInput
-          type={InputType.text}
-          size={InputSize.base}
-          value={typed}
-          onChange={(e) => setTyped(e.target.value)}
-          placeholder={expectedToken}
-          autoFocus
-          scale
-          isDisabled={isPending}
-        />
+          <div id="reset-keys-warning" role="alert">
+            <Text fontSize="13px" noSelect>
+              {t("Common:ResetEncryptionKeysWarning")}
+            </Text>
+          </div>
+          <div id="reset-keys-confirmation">
+            <Text fontSize="13px" fontWeight="600">
+              {t("Common:ResetEncryptionKeysConfirmation", {
+                token: expectedToken,
+              })}
+            </Text>
+          </div>
+          <TextInput
+            type={InputType.text}
+            size={InputSize.base}
+            value={typed}
+            onChange={(e) => setTyped(e.target.value)}
+            placeholder={expectedToken}
+            autoFocus
+            scale
+            isDisabled={isPending}
+            aria-describedby="reset-keys-warning reset-keys-confirmation"
+            aria-required="true"
+          />
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           primary
           size={ButtonSize.normal}
-          label={t("Common:ResetEncryptionKeysAction")}
+          label={t("Common:Reset")}
           onClick={onConfirm}
           isDisabled={!matches || isPending}
           isLoading={isPending}

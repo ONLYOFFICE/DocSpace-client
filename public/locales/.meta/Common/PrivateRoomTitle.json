@@ -3,7 +3,7 @@
   "content": "Private Room",
   "content_en_sha1_hash": "a0cccc661b0d8700741fa5aee59c20fb505d3dc0",
   "created_at": "2026-05-24T17:27:35.780Z",
-  "updated_at": "2026-05-24T17:39:42.066Z",
+  "updated_at": "2026-06-09T09:43:10.827Z",
   "comment": {
     "text": "Title used to identify a room when its type is set to private.",
     "is_auto": true,
@@ -11,6 +11,18 @@
     "model": "gemma4:26b"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/PermanentSettings/index.tsx",
+      "line_number": 96,
+      "context": ") : null}\n {isPrivate ? (\n <PermanentSetting\n type=\"privacy\"\n icon={PrivateRoomSvgUrl}\n title={t(\"Common:PrivateRoomTitle\")}\n isFull={false}\n content={t(\"Common:PrivateRoomDescription\")}\n />\n ) : null}\n </div>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
+      "line_number": 550,
+      "context": "className={styles.privacyIcon}\n src={PrivateRoom32SvgUrl}\n />\n <div className={styles.privacyText}>\n <Text fontWeight={600} fontSize=\"13px\">\n {t(\"Common:PrivateRoomTitle\")}\n </Text>\n <Text fontSize=\"12px\" className={styles.privacyDescription}>\n {t(\"Common:PrivateRoomDescription\")}\n </Text>\n </div>",
+      "module": "/packages/sdk"
+    },
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
       "line_number": 25,

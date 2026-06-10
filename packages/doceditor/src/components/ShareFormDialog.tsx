@@ -183,7 +183,7 @@ const ShareFormDialog = ({
       buttonLabel: t("Common:Share"),
       onClick: onClickShareFile,
       icon: <ShareSvg />,
-      disabled: !file.canShare,
+      disabled: !file.canShare || file.rootFolderType === FolderType.Rooms,
     },
     {
       id: "share-with-users",
@@ -234,7 +234,9 @@ const ShareFormDialog = ({
               isVisible
               fileInfo={file}
               onSubmit={onSubmit}
-              filesSettings={filesSettings as StartFillingSelectorDialogProps["filesSettings"]}
+              filesSettings={
+                filesSettings as StartFillingSelectorDialogProps["filesSettings"]
+              }
               header={{
                 withoutBorder: false,
                 onCloseClick: handleClose,

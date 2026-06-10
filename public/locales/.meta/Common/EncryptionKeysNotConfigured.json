@@ -3,7 +3,7 @@
   "content": "Encryption keys are not configured on this device. Set up your keys in Profile settings to work with encrypted files.",
   "content_en_sha1_hash": "6b3faeb384f3604a99003a22e2502c60b08d1f1f",
   "created_at": "2026-05-24T17:27:26.605Z",
-  "updated_at": "2026-06-01T21:20:44.521Z",
+  "updated_at": "2026-06-09T09:43:10.936Z",
   "comment": {
     "text": "Error toast message appearing when a user attempts to download an encrypted file without having encryption keys configured on the device.",
     "is_auto": true,
@@ -31,13 +31,61 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesStore.js",
-      "line_number": 1885,
+      "line_number": 1888,
       "context": "if (data.current.private) {\n const keys = this.userStore?.encryptionKeys;\n if (!Array.isArray(keys) || keys.length === 0) {\n toastr.warning(\n getI18n().t(\"Common:EncryptionKeysNotConfigured\"),\n );\n }\n \n // The room id may differ from data.current.id when navigating into\n // a sub-folder: pathParts[1] is the room, current is the sub-folder.",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/sdk/src/app/(private)/_hooks/useEncryptedCopyMove.ts",
+      "line_number": 148,
+      "context": "const duplicateFile = React.useCallback(\n async ({ item, roomId, folderId }: DuplicateArgs) => {\n const userId = identityStore.userKeys?.userId;\n if (!userId) {\n toastr.error(t(\"Common:EncryptionKeysNotConfigured\"));\n return;\n }\n const identity = await requireIdentity();\n if (!identity) {\n toastr.error(t(\"Common:EncryptionLockedAddMembers\"));",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_hooks/useEncryptedCopyMove.ts",
+      "line_number": 148,
+      "context": "const duplicateFile = React.useCallback(\n async ({ item, roomId, folderId }: DuplicateArgs) => {\n const userId = identityStore.userKeys?.userId;\n if (!userId) {\n toastr.error(t(\"Common:EncryptionKeysNotConfigured\"));\n return;\n }\n const identity = await requireIdentity();\n if (!identity) {\n toastr.error(t(\"Common:EncryptionLockedAddMembers\"));",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_hooks/useEncryptedDownload.ts",
+      "line_number": 97,
+      "context": "originalFileName,\n originalFileType,\n }: DownloadFileArgs) => {\n const userId = identityStore.userKeys?.userId;\n if (!userId) {\n toastr.error(t(\"Common:EncryptionKeysNotConfigured\"));\n return;\n }\n const identity = await requireIdentity();\n if (!identity) return;",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_hooks/useEncryptedDownload.ts",
+      "line_number": 97,
+      "context": "originalFileName,\n originalFileType,\n }: DownloadFileArgs) => {\n const userId = identityStore.userKeys?.userId;\n if (!userId) {\n toastr.error(t(\"Common:EncryptionKeysNotConfigured\"));\n return;\n }\n const identity = await requireIdentity();\n if (!identity) return;",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_hooks/useEncryptedUpload.ts",
+      "line_number": 100,
+      "context": "const keys = identityStore.keys;\n const activeKey = selectActiveKey(keys, getActiveKeyId(userId ?? \"\"));\n const publicKeyId = activeKey?.id ?? null;\n \n if (!userId || !publicKey || !publicKeyId) {\n toastr.error(t(\"Common:EncryptionKeysNotConfigured\"));\n return { ok: false };\n }\n \n // requireIdentity surfaces the PassphraseDialog when locked. A null\n // return means the user cancelled — silently no-op (no toast).",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_hooks/usePrivateInviteFlow.ts",
+      "line_number": 123,
+      "context": "async ({ roomId, memberIds, displayNames }: InviteAfterSubmitArgs) => {\n if (memberIds.length === 0) return;\n \n const userId = identityStore.userKeys?.userId;\n if (!userId) {\n throw new Error(t(\"Common:EncryptionKeysNotConfigured\"));\n }\n \n const identity = await requireIdentity();\n if (!identity) {\n // Cancelled passphrase dialog — surface as user-actionable error so",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_hooks/usePrivateOwnerChangeFlow.ts",
+      "line_number": 105,
+      "context": "const validateCandidates = React.useCallback(\n async ({ roomId, candidateIds, displayNames }: ValidateArgs) => {\n const scopeUserId = identityStore.userKeys?.userId;\n if (!scopeUserId) {\n throw new Error(t(\"Common:EncryptionKeysNotConfigured\"));\n }\n const { validateMembersForEncryption } = await loadRoomEncryption();\n const result = await validateMembersForEncryption(\n roomId,\n candidateIds,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/private/[roomId]/page.client.tsx",
+      "line_number": 136,
+      "context": "if (folderData?.current?.private !== true) return;\n if (identityStore.keys === null) return;\n if (identityStore.hasKeys) return;\n if (warnedRoomRef.current === roomId) return;\n warnedRoomRef.current = roomId;\n toastr.warning(t(\"Common:EncryptionKeysNotConfigured\"));\n }, [\n isReady,\n roomId,\n identityStore.keys,\n identityStore.hasKeys,",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/shared/context/encryption/EncryptionContext.tsx",
-      "line_number": 185,
+      "line_number": 187,
       "context": "}, [showPassphraseDialog]);\n \n const unlock = useCallback(\n async (passphrase: string): Promise<boolean> => {\n if (!userKeys?.privateKeyEnc || !userKeys?.userId) {\n setUnlockError(t(\"Common:EncryptionKeysNotConfigured\"));\n return false;\n }\n setIsUnlocking(true);\n setUnlockError(null);\n try {",
       "module": "/packages/shared"
     }

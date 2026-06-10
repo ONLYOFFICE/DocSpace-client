@@ -48,6 +48,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
 import { Button } from "@docspace/ui-kit/components/button";
 import { SimulatePassword } from "@docspace/shared/components/simulate-password";
+import { resolveDisplayTitle } from "@docspace/shared/services/encryption/filename-cache";
 
 const FileRow = observer(
   ({
@@ -219,7 +220,13 @@ export default inject(
 
     const ext = item.fileInfo.fileExst;
 
-    const title = item.fileInfo.title.split(".").slice(0, -1).join(".");
+    const resolvedTitle = resolveDisplayTitle({
+      id: item.fileId ?? item.fileInfo.id,
+      title: item.fileInfo.title,
+      encrypted: item.encrypted ?? item.fileInfo.encrypted,
+    });
+
+    const title = resolvedTitle.split(".").slice(0, -1).join(".");
 
     const fileIcon = getIconSrc(ext, 32);
 

@@ -50,7 +50,7 @@ export async function loadRoomMemberKeys(
       if (!k?.userId || !k?.publicKey) continue;
       const id = String(k.userId);
       keyByUserId.set(id, k.publicKey);
-      list.push({ userId: id, publicKey: k.publicKey });
+      list.push({ userId: id, publicKey: k.publicKey, publicKeyId: k.id });
     }
   }
   return { keyByUserId, list };

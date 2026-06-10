@@ -3,7 +3,7 @@
   "content": "Role",
   "content_en_sha1_hash": "c3f104d1365744b538bfde9f4adb6a6df4b80355",
   "created_at": "2025-05-19T21:30:47.956Z",
-  "updated_at": "2026-05-24T17:27:49.213Z",
+  "updated_at": "2026-06-09T11:32:15.353Z",
   "comment": {
     "text": "This is a tooltip and a combobox title. It labels a user's role or access level within a group or shared item.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_components/members/PrivateMemberUser.tsx",
+      "line_number": 272,
+      "context": "/>\n ) : (\n <TooltipContainer\n as=\"div\"\n className={styles.roleLabel}\n title={t(\"Common:Role\")}\n >\n {selectedRole.label}\n </TooltipContainer>\n )}\n </div>",
+      "module": "/packages/sdk"
+    },
     {
       "file_path": "/packages/shared/components/share/sub-components/User.tsx",
       "line_number": 272,

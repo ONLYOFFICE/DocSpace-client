@@ -18,5 +18,8 @@
   "DocsConnectorSubtitle": "{{organizationName}} {{productEditorsName}} connector",
   "ExternalUsersActive": "External users active",
   "JWTSecretPlaceholder": "Enter a new secret…",
-  "LicenseUsage": "License Usage"
+  "LicenseUsage": "License Usage",
+  "AuthHeaderHelp": "Document ServerへJWTを渡すために使用するHTTPヘッダーです。デフォルト: AuthorizationJWT。",
+  "JWTSecretHelp": "現在のシークレットを維持するには空白のままにします。Document Server に設定されているキーと一致する必要があります。",
+  "AnonymousSupportHelp": "アカウントを持たないユーザーが、公開リンクで共有されたドキュメントを開いて表示できるようにします。"
 }

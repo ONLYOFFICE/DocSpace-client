@@ -45,6 +45,7 @@ import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { SimulatePassword } from "@docspace/shared/components/simulate-password";
+import { resolveDisplayTitle } from "@docspace/shared/services/encryption/filename-cache";
 
 import CloseSvgUrl from "PUBLIC_DIR/images/icons/16/cross.react.svg?url";
 
@@ -363,7 +364,12 @@ export default inject(
 			}
 		} else {
 			ext = item?.fileInfo?.fileExst;
-			splitted = item.fileInfo?.title?.split(".");
+			const resolvedTitle = resolveDisplayTitle({
+				id: item.fileId,
+				title: item.fileInfo?.title,
+				encrypted: item.encrypted,
+			});
+			splitted = resolvedTitle.split(".");
 			if (ext) splitted.splice(-1);
 		}
 

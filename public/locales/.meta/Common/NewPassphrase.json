@@ -3,7 +3,7 @@
   "content": "New passphrase",
   "content_en_sha1_hash": "2ff0aca6aacc23cef60faee6a52aad8c5a197894",
   "created_at": "2026-05-24T17:27:33.258Z",
-  "updated_at": "2026-05-24T17:45:03.910Z",
+  "updated_at": "2026-06-09T09:43:10.926Z",
   "comment": {
     "text": "Label for the password input field within the Key Rotation dialog.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/KeyRotationDialog.tsx",
-      "line_number": 181,
-      "context": "</div>\n </div>\n \n <div className={styles.inputGroup}>\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:NewPassphrase\")}\n </Text>\n <div className={styles.inputWrapper}>\n <PasswordInput\n id=\"newPassphrase\"\n inputName=\"newPassphrase\"",
+      "line_number": 202,
+      "context": ") : null}\n </div>\n \n <div className={styles.inputGroup}>\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:NewPassphrase\")}\n </Text>\n <FieldContainer\n isVertical\n labelVisible={false}\n removeMargin",
       "module": "/packages/client"
     }
   ],

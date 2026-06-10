@@ -70,7 +70,11 @@ const Dashboard = ({
   const myFolderId = useMyFolderId();
   const { openUploadDialog } = useUploadToMyDocuments(myFolderId);
   const createItems = useCreateActions(myFolderId);
-  const { launchApp, dialogs } = useModuleLauncher({ activate, enable });
+  const { launchApp, dialogs } = useModuleLauncher({
+    activate,
+    enable,
+    isAppEnabled,
+  });
 
   const appsCatalog = useAppsCatalog();
 

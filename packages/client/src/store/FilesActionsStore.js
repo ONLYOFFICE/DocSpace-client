@@ -1613,6 +1613,10 @@ class FilesActionStore {
       return this.duplicateEncryptedFile(item);
     }
 
+    if (!item.fileExst && this.treeFoldersStore.isPrivacyFolder) {
+      return;
+    }
+
     const { setSecondaryProgressBarData } =
       this.uploadDataStore.secondaryProgressDataStore;
     const { clearActiveOperations } = this.uploadDataStore;
@@ -1698,6 +1702,7 @@ class FilesActionStore {
   duplicateEncryptedFile = async (item) => {
     return this.copyEncryptedFilesToFolder([item], item.folderId, {
       private: true,
+      rootFolderId: this.selectedFolderStore.rootFolderId,
       roomType: this.selectedFolderStore.roomType ?? RoomsType.CustomRoom,
     });
   };
@@ -2416,6 +2421,42 @@ class FilesActionStore {
   };
 
   moveDragItems = (destFolderId, folderTitle, destFolderInfo) => {
+    const sourceInPrivateRoom = this.treeFoldersStore.isPrivacyFolder;
+    const isDestInsideSameRoom =
+      sourceInPrivateRoom &&
+      destFolderInfo?.rootFolderType === FolderType.Rooms;
+    const isPrivateDestination =
+      destFolderInfo?.private === true || isDestInsideSameRoom;
+
+    if (isPrivateDestination && !sourceInPrivateRoom) {
+      toastr.error(i18n.t("Common:CannotTransferToPrivateRoom"));
+      return;
+    }
+
+    if (!isPrivateDestination && sourceInPrivateRoom) {
+      const { bufferSelection: dragBufferSelection } = this.filesStore;
+      const dragSelection = (
+        dragBufferSelection ? [dragBufferSelection] : this.filesStore.selection
+      ).filter((el) => !el.isFolder || el.id !== destFolderId);
+
+      const files = dragSelection.filter((el) => !el.isFolder);
+      const hasFolders = dragSelection.some((el) => el.isFolder);
+
+      if (hasFolders) {
+        toastr.error(i18n.t("Common:CannotTransferFolderFromPrivateRoom"));
+      }
+
+      if (files.length > 0) {
+        this.copyEncryptedFilesToFolder(files, destFolderId, {
+          private: false,
+          rootFolderId: destFolderInfo?.rootFolderId,
+          roomType: destFolderInfo?.roomType,
+        });
+      }
+
+      return;
+    }
+
     const folderIds = [];
     const fileIds = [];
     const deleteAfter = false;
@@ -3028,7 +3069,6 @@ class FilesActionStore {
     itemsCollection
       .set("download", download)
       .set("moveTo", moveTo)
-
       .set("delete", deleteOption)
       .set("showInfo", showInfo);
 
@@ -3304,7 +3344,7 @@ class FilesActionStore {
       if ((fileStatus & FileStatus.IsNew) === FileStatus.IsNew)
         await this.onMarkAsRead(item);
 
-      if (canWebEdit || canViewedDocs) {
+      if ((canWebEdit || canViewedDocs) && !item.encrypted) {
         let shareKey = item.requestToken;
 
         if (webUrl) {
@@ -3339,6 +3379,12 @@ class FilesActionStore {
       if (!item.security.Download) {
         toastr.error(t("Files:FileDownloadingIsRestricted"));
         return;
+      }
+
+      if (item.encrypted) {
+        return this.downloadEncryptedFile(item).catch((err) =>
+          toastr.error(err),
+        );
       }
 
       return window.open(viewUrl, "_self");

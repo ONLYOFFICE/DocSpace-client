@@ -45,10 +45,12 @@ import { updateEncryptionKeys } from "@docspace/shared/api/privacy";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
 import { KeyRotationDialog } from "../modals/KeyRotationDialog";
+import { getEncryptionErrorMessage } from "./getEncryptionErrorMessage";
 
 type Deps = {
   userId: string | undefined;
   refreshKeysFromServer: () => Promise<void>;
+  onForgotPassphrase?: (target?: TEncryptionKeyPair) => void;
 };
 
 export type RotatePassphraseFlow = {
@@ -60,6 +62,7 @@ export type RotatePassphraseFlow = {
 export function useRotatePassphraseFlow({
   userId,
   refreshKeysFromServer,
+  onForgotPassphrase,
 }: Deps): RotatePassphraseFlow {
   const { t } = useTranslation(["Common"]);
   const [target, setTarget] = useState<TEncryptionKeyPair | null>(null);
@@ -98,8 +101,10 @@ export function useRotatePassphraseFlow({
         toastr.success(t("Common:PassphraseUpdated"));
         reset();
       } catch (e) {
-        console.error("Passphrase rotation failed:", e);
-        setError(t("Common:InvalidPassphrase"));
+        // Network / API errors and the actual "invalid passphrase" case both
+        // landed here previously, so a network glitch looked like a wrong
+        // passphrase. getEncryptionErrorMessage classifies it correctly.
+        setError(getEncryptionErrorMessage(t, e));
       } finally {
         setIsPending(false);
       }
@@ -114,6 +119,15 @@ export function useRotatePassphraseFlow({
       onCancel={reset}
       error={error}
       isLoading={isPending}
+      onForgotPassphrase={
+        onForgotPassphrase
+          ? () => {
+              const captured = target;
+              reset();
+              onForgotPassphrase(captured ?? undefined);
+            }
+          : undefined
+      }
     />
   ) : null;
 

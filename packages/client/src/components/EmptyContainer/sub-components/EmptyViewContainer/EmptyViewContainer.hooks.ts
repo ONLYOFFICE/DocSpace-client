@@ -35,6 +35,7 @@
 
 import { useMemo, useCallback } from "react";
 import { useNavigate, LinkProps } from "react-router";
+import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import { isMobile } from "react-device-detect";
 
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
@@ -207,10 +208,14 @@ export const useOptions = (
     aiReady,
     standalone,
     isPortalAdmin,
+    isGracePeriod,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
   const navigate = useNavigate();
+
+  const { useProfilesStore } = useStores();
+  const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
 
   const isAIRoom =
     selectedFolder?.roomType === RoomsType.AIRoom ||
@@ -281,11 +286,16 @@ export const useOptions = (
   }, [isWarningRoomsDialog, setQuotaWarningDialogVisible, selectedFolder?.id]);
 
   const onCreateAIAgent = useCallback(() => {
+    if (isGracePeriod) {
+      setQuotaWarningDialogVisible(true);
+      return;
+    }
+
     const event = new CustomEvent(Events.AGENT_CREATE, {
       detail: { parentId: selectedFolder?.id, context: "empty_state" },
     });
     window.dispatchEvent(event);
-  }, [isWarningRoomsDialog, setQuotaWarningDialogVisible, selectedFolder?.id]);
+  }, [isGracePeriod, setQuotaWarningDialogVisible, selectedFolder?.id]);
 
   const openInfoPanel = useCallback(() => {
     if (!isVisibleInfoPanel) setVisibleInfoPanel?.(true);
@@ -393,7 +403,7 @@ export const useOptions = (
         isKnowledgeTab,
         isResultsTab,
         isAIRoom,
-        aiReady,
+        aiReady || hasAiProfiles,
         standalone,
         isPortalAdmin,
       ),
@@ -401,6 +411,7 @@ export const useOptions = (
       type,
       access,
       security,
+      hasAiProfiles,
       isFolder,
       folderType,
       parentRoomType,

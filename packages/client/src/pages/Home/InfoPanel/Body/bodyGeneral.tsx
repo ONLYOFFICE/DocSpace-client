@@ -71,6 +71,7 @@ const InfoPanelBodyGeneral = ({
   infoPanelItemsList,
   enablePlugins,
   isRecentFolder,
+  selectedResultFileId,
 
   maxImageUploadSize,
 
@@ -124,8 +125,16 @@ const InfoPanelBodyGeneral = ({
         isRecentFolder,
         enablePlugins,
         infoPanelItemsList,
+        selectedResultFileId,
       }),
-    [selection, isTrash, isRecentFolder, enablePlugins, infoPanelItemsList],
+    [
+      selection,
+      isTrash,
+      isRecentFolder,
+      enablePlugins,
+      infoPanelItemsList,
+      selectedResultFileId,
+    ],
   );
 
   const currentView = useMemo(() => {
@@ -178,7 +187,9 @@ const InfoPanelBodyGeneral = ({
                 ? "members"
                 : currentView === InfoPanelView.infoHistory
                   ? "history"
-                  : "details"
+                  : currentView === InfoPanelView.infoAIChat
+                    ? "aiChat"
+                    : "details"
             }
           />
         }
@@ -192,8 +203,12 @@ const InfoPanelBodyGeneral = ({
     );
   };
 
+  const isAIChat = currentView === InfoPanelView.infoAIChat;
+
   return (
-    <div className={commonStyles.infoPanelBody}>
+    <div
+      className={`${commonStyles.infoPanelBody}${isAIChat ? ` ${commonStyles.aiChat}` : ""}`}
+    >
       {!isNoItem &&
       !Array.isArray(selection) &&
       (isUsers || isGuests || isGroups) ? (

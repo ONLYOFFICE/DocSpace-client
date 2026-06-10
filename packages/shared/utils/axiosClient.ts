@@ -148,7 +148,6 @@ class AxiosClient {
         if (publicRoomKey) {
           config.headers = config.headers || {};
           config.headers["Request-Token"] = publicRoomKey;
-          config.headers["Authorization"] = `Bearer ${publicRoomKey}`;
         } else {
           const cookie = getCookie("asc_auth_key");
           const token = cookie || this.authToken;

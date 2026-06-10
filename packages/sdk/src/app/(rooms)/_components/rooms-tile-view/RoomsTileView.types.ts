@@ -54,6 +54,8 @@ export type RoomsTileCallbacks = {
   onInfoRoom?: (item: TFolderItem | TFileItem) => void;
   onInviteRoom?: (item: TFolderItem | TFileItem) => void;
   isArchive?: boolean;
+  /** Picks shield vs padlock variant on encrypted-room badge. */
+  hasEncryptionKeys?: boolean;
 };
 
 export type RoomsTileViewProps = RoomsTileCallbacks & {

@@ -181,6 +181,10 @@
           }
 
           .security {
+            .security-backing {
+              fill: var(--background-color);
+            }
+
             .security-shield {
               fill: colors.$light-status-positive;
             }

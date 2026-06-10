@@ -3,7 +3,7 @@
   "content": "Files copied to «{{folderTitle}}»",
   "content_en_sha1_hash": "efc9d1eb35c4eee0ddc64e6c32501869b672aac8",
   "created_at": "2026-05-19T19:03:16.327Z",
-  "updated_at": "2026-05-24T17:27:49.124Z",
+  "updated_at": "2026-06-09T09:43:10.871Z",
   "comment": {
     "text": "An entry in the activity history feed that appears when files are successfully copied, where {{folderTitle}} represents the name of the destination folder.",
     "is_auto": true,
@@ -14,19 +14,19 @@
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
       "line_number": 98,
-      "context": "return t(\"Common:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:\n if (\"fromParentTitle\" in feed.data && feed.data.fromParentTitle) {\n return t(\"Common:FileCopiedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"InfoPanel:FileCopiedCount\", {",
+      "context": "return t(\"Common:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:\n if (\"fromParentTitle\" in feed.data && feed.data.fromParentTitle) {\n return t(\"Common:FileCopiedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"Common:FileCopiedCount\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 92,
-      "context": "return t(\"Common:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:\n if (feed.data.fromParentTitle) {\n return t(\"Common:FileCopiedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"InfoPanel:FileCopiedCount\", {",
+      "context": "return t(\"Common:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:\n if (feed.data.fromParentTitle) {\n return t(\"Common:FileCopiedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"Common:FileCopiedCount\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
-      "line_number": 74,
-      "context": "return t(\"Common:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:\n if (\"fromParentTitle\" in feed.data && feed.data.fromParentTitle) {\n return t(\"Common:FileCopiedTo\", {\n folderTitle: (feed.data as TFeedData).parentTitle,\n });\n }\n return t(\"Common:FilesCopiedNotify\");\n case FeedActionKeys.FileDeleted:",
+      "line_number": 91,
+      "context": "return t(\"Common:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:\n if (\"fromParentTitle\" in feed.data && feed.data.fromParentTitle) {\n return t(\"Common:FileCopiedTo\", {\n folderTitle: (feed.data as TFeedData).parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"Common:FileCopiedCount\", {",
       "module": "/packages/sdk"
     }
   ],

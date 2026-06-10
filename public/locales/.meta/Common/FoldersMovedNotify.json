@@ -3,7 +3,7 @@
   "content": "Folders moved.",
   "content_en_sha1_hash": "95d3399265d8232c4895fbd790a035ba8ae0057d",
   "created_at": "2026-05-19T19:03:16.939Z",
-  "updated_at": "2026-05-24T17:27:49.125Z",
+  "updated_at": "2026-06-09T09:43:10.874Z",
   "comment": {
     "text": "Notification message in the History feed that appears when folders have been moved.",
     "is_auto": true,
@@ -14,19 +14,19 @@
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
       "line_number": 137,
-      "context": "case FeedActionKeys.FolderMoved:\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderMovedCount\", {\n count,\n });\n return t(\"Common:FoldersMovedNotify\");\n case FeedActionKeys.FolderMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FoldersTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),",
+      "context": "case FeedActionKeys.FolderMoved:\n if (hasRelatedItems)\n return t(\"Common:FolderMovedCount\", {\n count,\n });\n return t(\"Common:FoldersMovedNotify\");\n case FeedActionKeys.FolderMovedToTrash:\n if (hasRelatedItems)\n return t(\"Common:FoldersTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 131,
-      "context": "case FeedActionKeys.FolderMoved:\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderMovedCount\", {\n count,\n });\n return t(\"Common:FoldersMovedNotify\");\n case FeedActionKeys.FolderMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FoldersTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),",
+      "context": "case FeedActionKeys.FolderMoved:\n if (hasRelatedItems)\n return t(\"Common:FolderMovedCount\", {\n count,\n });\n return t(\"Common:FoldersMovedNotify\");\n case FeedActionKeys.FolderMovedToTrash:\n if (hasRelatedItems)\n return t(\"Common:FoldersTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
-      "line_number": 86,
-      "context": "case FeedActionKeys.FolderCreated:\n return t(\"Common:FolderCreatedNotify\");\n case FeedActionKeys.FolderRenamed:\n return t(\"Common:FolderRenamedNotify\");\n case FeedActionKeys.FolderMoved:\n return t(\"Common:FoldersMovedNotify\");\n case FeedActionKeys.FolderMovedToTrash:\n return t(\"Common:FoldersTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FolderCopied:",
+      "line_number": 131,
+      "context": "case FeedActionKeys.FolderMoved:\n if (hasRelatedItems)\n return t(\"Common:FolderMovedCount\", {\n count,\n });\n return t(\"Common:FoldersMovedNotify\");\n case FeedActionKeys.FolderMovedToTrash:\n if (hasRelatedItems)\n return t(\"Common:FoldersTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),",
       "module": "/packages/sdk"
     }
   ],

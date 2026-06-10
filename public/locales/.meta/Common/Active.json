@@ -3,7 +3,7 @@
   "content": "Active",
   "content_en_sha1_hash": "a733b809d2f1233496ab516eed0f3ef75cf3791a",
   "created_at": "2025-05-19T21:30:42.902Z",
-  "updated_at": "2026-06-03T09:30:05.045Z",
+  "updated_at": "2026-06-09T09:43:10.856Z",
   "comment": {
     "text": "This is a short label indicating an active status for a user or item, often used in filters or status displays.",
     "is_auto": true,
@@ -40,6 +40,18 @@
       "line_number": 123,
       "context": "return (\n <div className={styles.keyItem}>\n <div className={styles.keyItemHeader}>\n <div className={styles.keyItemBadges}>\n <Badge\n label={t(\"Common:Active\")}\n backgroundColor={globalColors.secondGreen}\n maxWidth=\"none\"\n />\n {isCurrentDevice ? (\n <Badge",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docs-cloud)/docs-cloud/_tabs/Information.tsx",
+      "line_number": 138,
+      "context": "resizable: false,\n minWidth: 120,\n },\n {\n key: \"active\",\n title: t(\"Active\"),\n enable: true,\n resizable: true,\n minWidth: 60,\n },\n {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docs-cloud)/docs-cloud/_tabs/Information.tsx",
+      "line_number": 138,
+      "context": "resizable: false,\n minWidth: 120,\n },\n {\n key: \"active\",\n title: t(\"Active\"),\n enable: true,\n resizable: true,\n minWidth: 60,\n },\n {",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

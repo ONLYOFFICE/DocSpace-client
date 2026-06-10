@@ -18,5 +18,8 @@
   "DocsConnectorSubtitle": "{{organizationName}} {{productEditorsName}} connector",
   "ExternalUsersActive": "External users active",
   "JWTSecretPlaceholder": "Enter a new secret…",
-  "LicenseUsage": "License Usage"
+  "LicenseUsage": "License Usage",
+  "AuthHeaderHelp": "用于将 JWT 传递给 Document Server 的 HTTP 标头。默认值：AuthorizationJWT。",
+  "JWTSecretHelp": "留空以保留当前密钥。必须与 Document Server 上配置的密钥匹配。",
+  "AnonymousSupportHelp": "允许没有账号的用户通过公开链接打开和查看共享文档。"
 }

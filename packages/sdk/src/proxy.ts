@@ -129,6 +129,68 @@ export async function proxy(request: NextRequest) {
     });
   }
 
+  if (request.nextUrl.pathname.startsWith("/private")) {
+    requestHeaders.set(FILTER_HEADER, searchParams.toString());
+
+    // CSP applied to /sdk/private/* only. We deliberately use 'unsafe-inline'
+    // instead of nonces in v1: Next 16's <Script strategy="beforeInteractive">
+    // inlines its bootstrap with a server-side nonce that doesn't survive
+    // rehydration cleanly (server prerender vs client mismatch). A nonce-CSP
+    // is a pentest-recommended follow-up once the inline script story is
+    // sorted (e.g. via Scripts.tsx rewrite using external src).
+    const isDev = process.env.NODE_ENV !== "production";
+
+    // 'wasm-unsafe-eval' is required for hash-wasm's Argon2 implementation.
+    // 'unsafe-inline' for styles is needed by styled-components 5.
+    // Dev additionally allows 'unsafe-eval' for React Refresh runtime.
+    const scriptSrc = isDev
+      ? "script-src 'self' 'unsafe-eval' 'unsafe-inline' 'wasm-unsafe-eval'"
+      : "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'";
+
+    // connect-src in dev needs ws: for HMR. Production stays same-origin.
+    const connectSrc = isDev
+      ? "connect-src 'self' ws: wss: http: https:"
+      : "connect-src 'self'";
+
+    const csp = [
+      "default-src 'self'",
+      scriptSrc,
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: blob:",
+      "media-src 'self' blob:",
+      "font-src 'self' data:",
+      connectSrc,
+      "worker-src 'self' blob:",
+      "frame-ancestors 'self'",
+      "frame-src 'self' blob:",
+      "object-src 'none'",
+      "base-uri 'self'",
+      "form-action 'self'",
+    ].join("; ");
+
+    const response = NextResponse.next({
+      request: { headers: requestHeaders },
+    });
+    response.headers.set("Content-Security-Policy", csp);
+    response.headers.set("Cross-Origin-Opener-Policy", "same-origin");
+    response.headers.set("Cross-Origin-Resource-Policy", "same-origin");
+    response.headers.set(
+      "Permissions-Policy",
+      "clipboard-read=(self), clipboard-write=(self), camera=(), microphone=(), geolocation=()",
+    );
+    if (!isDev) {
+      // HSTS only in production — local dev runs over plain http and would
+      // poison the browser cache for the dev hostname otherwise.
+      response.headers.set(
+        "Strict-Transport-Security",
+        "max-age=31536000; includeSubDomains",
+      );
+    }
+    response.headers.set("X-Content-Type-Options", "nosniff");
+    response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+    return response;
+  }
+
   if (request.nextUrl.pathname === "/chat") {
     const agentId = searchParams.get("agentId") ?? "";
 
@@ -216,6 +278,8 @@ export const config = {
     "/ai-agents/:path*",
     "/rooms",
     "/rooms/:path*",
+    "/private",
+    "/private/:path*",
   ],
 };
 

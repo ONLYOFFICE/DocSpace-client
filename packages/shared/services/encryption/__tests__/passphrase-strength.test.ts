@@ -78,17 +78,22 @@ describe("containsCommonPattern", () => {
   });
 });
 
+const suggestionKinds = (
+  result: ReturnType<typeof checkPassphraseStrength>,
+): string[] => result.suggestions.map((s) => s.kind);
+
 describe("checkPassphraseStrength — length-based scoring", () => {
   it("scores empty input as weak with length suggestion", () => {
     const r = checkPassphraseStrength("");
     expect(r.strength).toBe("weak");
-    expect(r.suggestions).toContain("Use at least 12 characters");
+    expect(suggestionKinds(r)).toContain("min-length");
+    expect(r.suggestions).toContainEqual({ kind: "min-length", value: 12 });
   });
 
   it("treats too-short input as weak", () => {
     const r = checkPassphraseStrength("Aa1!");
     expect(r.strength).toBe("weak");
-    expect(r.suggestions).toContain("Use at least 12 characters");
+    expect(r.suggestions).toContainEqual({ kind: "min-length", value: 12 });
   });
 
   it("rewards length above minimum", () => {
@@ -99,29 +104,29 @@ describe("checkPassphraseStrength — length-based scoring", () => {
 
   it("uses provided minLength when supplied", () => {
     const r = checkPassphraseStrength("short", 4);
-    expect(r.suggestions).not.toContain("Use at least 12 characters");
+    expect(suggestionKinds(r)).not.toContain("min-length");
   });
 });
 
 describe("checkPassphraseStrength — character class additivity", () => {
   it("flags missing lowercase", () => {
     const r = checkPassphraseStrength("ABCDEFGH1234!@");
-    expect(r.suggestions).toContain("Add lowercase letters");
+    expect(suggestionKinds(r)).toContain("lowercase");
   });
 
   it("flags missing uppercase", () => {
     const r = checkPassphraseStrength("abcdefgh1234!@");
-    expect(r.suggestions).toContain("Add uppercase letters");
+    expect(suggestionKinds(r)).toContain("uppercase");
   });
 
   it("flags missing digits", () => {
     const r = checkPassphraseStrength("AbCdEfGhIjKl!@");
-    expect(r.suggestions).toContain("Add numbers");
+    expect(suggestionKinds(r)).toContain("digits");
   });
 
   it("flags missing special chars", () => {
     const r = checkPassphraseStrength("AbCdEfGh1234XY");
-    expect(r.suggestions).toContain("Add special characters");
+    expect(suggestionKinds(r)).toContain("special");
   });
 
   it("returns strong for a high-entropy mixed passphrase", () => {
@@ -136,9 +141,7 @@ describe("checkPassphraseStrength — common-pattern downgrade", () => {
     const r = checkPassphraseStrength("Password1234!");
     expect(r.containsCommonPattern).toBe(true);
     expect(r.strength).toBe("weak");
-    expect(r.suggestions).toContain(
-      "Avoid common words and keyboard patterns",
-    );
+    expect(suggestionKinds(r)).toContain("common-pattern");
   });
 
   it("downgrades qwerty variants", () => {

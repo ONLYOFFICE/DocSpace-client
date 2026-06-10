@@ -44,6 +44,7 @@ import { TableRow } from "@docspace/ui-kit/components/table";
 import { TableCell } from "@docspace/ui-kit/components/table";
 import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
@@ -69,7 +70,9 @@ import { FileOperationsContext } from "../../../../_contexts/FileOperationsConte
 import { RenameContext } from "../../../../_contexts/RenameContext";
 import { VersionHistoryContext } from "../../../../_contexts/VersionHistoryContext";
 import { ConvertContext } from "../../../../_contexts/ConvertContext";
+import { AskAIContext } from "../../../../_contexts/AskAIContext";
 import type { TFileItem, TFolderItem } from "../../../../_hooks/useItemList";
+import { useDecryptedFilename } from "@/app/(docspace)/_hooks/useDecryptedFilename";
 import { generateFilesItemValue } from "../../../_utils";
 import getTitleWithoutExt from "../../../../_utils/get-title-without-ext";
 import { DragContext } from "../../../../_contexts/DragContext";
@@ -94,6 +97,8 @@ const TableViewRow = observer(
     displayFileExtension,
     lastColumn,
     currentUserId,
+    isPrivate,
+    hasEncryptionKeys,
   }: TableViewRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
@@ -119,6 +124,7 @@ const TableViewRow = observer(
     const renameCtx = React.useContext(RenameContext);
     const onShowVersionHistory = React.useContext(VersionHistoryContext);
     const onConvert = React.useContext(ConvertContext);
+    const onAskAI = React.useContext(AskAIContext);
 
     const { getContextMenuModel } = useContextMenuModel({
       item: observableItem,
@@ -131,6 +137,7 @@ const TableViewRow = observer(
       onRestoreClick: fileOpsCtx?.restoreItem,
       onRenameClick: renameCtx?.renameItem,
       onShowVersionHistoryClick: onShowVersionHistory ?? undefined,
+      onAskAI: onAskAI ?? undefined,
     });
 
     const dragCtx = React.useContext(DragContext);
@@ -142,8 +149,14 @@ const TableViewRow = observer(
       (item as TFolderItem).security?.MoveTo === true;
     const value = generateFilesItemValue(item, isDroppable, index);
 
+    const title = useDecryptedFilename(
+      item.id,
+      item.title,
+      "encrypted" in item ? item.encrypted : false,
+    );
+
     const titleWithoutExt =
-      "fileExst" in item ? getTitleWithoutExt(item.title, item.fileExst) : item.title;
+      "fileExst" in item ? getTitleWithoutExt(title, item.fileExst) : title;
 
     const modifiedDate = getCorrectDate(
       i18n.language || "",
@@ -397,12 +410,28 @@ const TableViewRow = observer(
           >
             <div className="table-container_element-container" onClick={(e) => e.stopPropagation()}>
               <div className="table-container_element">
-                <RoomIcon
-                  logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
-                  color={"isRoom" in item && item.isRoom ? item.roomIconColor : undefined}
-                  title={item.title}
-                  showDefault={"isRoom" in item && item.isRoom ? !item.hasRoomImage : false}
-                />
+                <EncryptedItemIconWrapper
+                  encrypted={
+                    !!("encrypted" in item && (item as TFileItem).encrypted)
+                  }
+                  hasEncryptionKeys={hasEncryptionKeys ?? true}
+                  isRoom={false}
+                >
+                  <RoomIcon
+                    logo={
+                      "isRoom" in item && item.isRoom ? item.roomLogo : item.icon
+                    }
+                    color={
+                      "isRoom" in item && item.isRoom
+                        ? item.roomIconColor
+                        : undefined
+                    }
+                    title={title}
+                    showDefault={
+                      "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
+                    }
+                  />
+                </EncryptedItemIconWrapper>
               </div>
               <Checkbox
                 className="table-container_row-checkbox"

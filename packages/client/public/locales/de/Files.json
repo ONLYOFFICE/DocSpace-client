@@ -35,8 +35,6 @@
   "DocumentEdited": "Die Aktion kann nicht ausgeführt werden, da das Dokument gerade bearbeitet wird.",
   "DownloadAll": "Alles herunterladen",
   "Downloading": "Herunterladen",
-  "DuplicateFolderItem": "Der Ordner <2>{{title}}</2> wurde erfolgreich dupliziert",
-  "DuplicateItem": "<2>{{title}}</2> erfolgreich dupliziert",
   "Duplicating": "Duplizieren",
   "EditTemplate": "Vorlage bearbeiten",
   "EmptyFormFolderDoneDescriptionText": "In diesem Abschnitt werden alle ausgefüllten Formulare angezeigt.",

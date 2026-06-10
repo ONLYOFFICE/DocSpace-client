@@ -167,5 +167,33 @@ export default function useOperationToast() {
     [t, makeComponents],
   );
 
-  return { showCopyToast, showMoveToast };
+  const showDuplicateToast = useCallback(
+    (item: TFileItem | TFolderItem) => {
+      const components = { 2: <span style={{ fontWeight: 600 }} /> };
+      const values = { title: item.title };
+
+      toastr.success(
+        item.isFolder ? (
+          <Trans
+            t={t}
+            ns="Common"
+            i18nKey="DuplicateFolderItem"
+            components={components}
+            values={values}
+          />
+        ) : (
+          <Trans
+            t={t}
+            ns="Common"
+            i18nKey="DuplicateItem"
+            components={components}
+            values={values}
+          />
+        ),
+      );
+    },
+    [t],
+  );
+
+  return { showCopyToast, showMoveToast, showDuplicateToast };
 }

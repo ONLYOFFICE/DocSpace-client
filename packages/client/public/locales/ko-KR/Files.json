@@ -35,8 +35,6 @@
   "DocumentEdited": "문서가 편집 중이므로 작업을 수행할 수 없습니다.",
   "DownloadAll": "모두 다운로드",
   "Downloading": "다운로드 중",
-  "DuplicateFolderItem": "<2>{{title}}</2> 폴더가 복제되었습니다",
-  "DuplicateItem": "<2>{{title}}</2>이/가 복제되었습니다",
   "Duplicating": "복제 중",
   "EditTemplate": "템플릿 편집",
   "EmptyFormFolderDoneDescriptionText": "이 섹션에는 완료된 모든 양식이 표시됩니다.",

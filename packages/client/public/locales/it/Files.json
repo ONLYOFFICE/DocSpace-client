@@ -35,8 +35,6 @@
   "DocumentEdited": "Impossibile eseguire l'azione perché il documento è in fase di modifica.",
   "DownloadAll": "Scarica tutto",
   "Downloading": "Download in corso",
-  "DuplicateFolderItem": "La cartella <2>{{title}}</2> è stata duplicata con successo.",
-  "DuplicateItem": "<2>{{title}}</2> duplicata con successo.",
   "Duplicating": "Duplicazione in corso",
   "EditTemplate": "Modifica modello",
   "EmptyFormFolderDoneDescriptionText": "In questa sezione verranno visualizzati tutti i moduli compilati.",

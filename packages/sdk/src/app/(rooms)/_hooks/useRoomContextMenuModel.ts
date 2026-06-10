@@ -55,6 +55,7 @@ import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import useDownloadActions from "@/app/(docspace)/_hooks/useDownloadActions";
+import useOperationToast from "@/app/(personal-files)/_hooks/useOperationToast";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
 import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
@@ -66,6 +67,8 @@ import type {
 } from "@/app/(docspace)/_hooks/useItemList";
 
 import { RoomsRefreshContext } from "../_contexts/RoomsRefreshContext";
+import { useRoomsOperationsStore } from "../_store/RoomsOperationsStore";
+import { trackRoomOperation } from "../_utils/trackRoomOperation";
 
 type TRoomItem = TFolderItem & {
   pinned?: boolean;
@@ -77,6 +80,7 @@ type TRoomItem = TFolderItem & {
     Pin?: boolean;
     ChangeOwner?: boolean;
     Download?: boolean;
+    Duplicate?: boolean;
     EditRoom?: boolean;
     EditAccess?: boolean;
     Mute?: boolean;
@@ -108,6 +112,8 @@ export default function useRoomContextMenuModel(
   const infoPanelStore = useInfoPanelStore();
   const { openFolder } = useFolderActions({ t });
   const { downloadAction } = useDownloadActions();
+  const { showDuplicateToast } = useOperationToast();
+  const operationsStore = useRoomsOperationsStore();
 
   const getContextMenuModel = useCallback(
     (item: TFolderItem | TFileItem): ContextMenuModel[] => {
@@ -144,6 +150,32 @@ export default function useRoomContextMenuModel(
       const handleLeave = () => {
         filesSelectionStore.setBufferSelection(room);
         dialogsStore.openDialog(SDKDialogs.LeaveRoom);
+      };
+      const handleDuplicate = async () => {
+        const opId = operationsStore.startOperation(
+          "duplicate",
+          t("Common:Duplicate"),
+        );
+        let opAlert = false;
+        try {
+          const operations = await api.files.duplicate(
+            [room.id as number],
+            [],
+          );
+          const backendOpId = operations?.[0]?.id;
+          if (backendOpId) {
+            opAlert = await trackRoomOperation(backendOpId);
+          }
+          if (!opAlert) {
+            showDuplicateToast(room);
+          }
+          refreshRooms?.();
+        } catch (e) {
+          opAlert = true;
+          toastr.error(e instanceof Error ? e.message : String(e));
+        } finally {
+          operationsStore.finishOperation(opId, opAlert);
+        }
       };
 
       if (isArchive) {
@@ -203,7 +235,8 @@ export default function useRoomContextMenuModel(
           key: "duplicate",
           label: t("Common:Duplicate"),
           icon: DuplicateReactSvgUrl,
-          disabled: true,
+          onClick: handleDuplicate,
+          disabled: !room.security?.Duplicate,
         },
         {
           id: "option_room-info",
@@ -391,6 +424,8 @@ export default function useRoomContextMenuModel(
       filesSelectionStore,
       dialogsStore,
       infoPanelStore,
+      operationsStore,
+      showDuplicateToast,
     ],
   );
 

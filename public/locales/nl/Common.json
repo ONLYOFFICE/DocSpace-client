@@ -2245,5 +2245,7 @@
   "YourName": "Uw naam",
   "YourPrice": "Uw prijs",
   "YourTurn": "Uw beurt",
-  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag."
+  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag.",
+  "DuplicateFolderItem": "De map <2>{{title}}</2> met succes gedupliceerd",
+  "DuplicateItem": "<2>{{title}}</2> met succes gedupliceerd"
 }

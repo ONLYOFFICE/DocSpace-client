@@ -35,8 +35,6 @@
   "DocumentEdited": "Không thể thực hiện hành động này vì tài liệu đang được chỉnh sửa.",
   "DownloadAll": "Tải xuống tất cả",
   "Downloading": "Đang tải xuống",
-  "DuplicateFolderItem": "Đã sao chép thành công thư mục <2>{{title}}</2>",
-  "DuplicateItem": "<2>{{title}}</2> đã được sao chép thành công",
   "Duplicating": "Đang sao chép",
   "EditTemplate": "Chỉnh sửa mẫu",
   "EmptyFormFolderDoneDescriptionText": "Phần này sẽ hiển thị tất cả các biểu mẫu đã hoàn thành.",

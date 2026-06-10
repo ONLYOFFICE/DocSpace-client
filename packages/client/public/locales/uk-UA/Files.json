@@ -35,8 +35,6 @@
   "DocumentEdited": "Неможливо виконати дію, оскільки документ редагується.",
   "DownloadAll": "Завантажити все",
   "Downloading": "Завантаження",
-  "DuplicateFolderItem": "Папку <2>{{title}}</2> успішно дубльовано",
-  "DuplicateItem": "<2>{{title}}</2> успішно дубльовано",
   "Duplicating": "Дублювання",
   "EditTemplate": "Редагувати шаблон",
   "EmptyFormFolderDoneDescriptionText": "У цьому розділі відображатимуться всі заповнені форми.",

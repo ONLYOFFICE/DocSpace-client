@@ -35,8 +35,6 @@
   "DocumentEdited": "Impossible d’effectuer l’action car le document est en cours de modification.",
   "DownloadAll": "Télécharger tout",
   "Downloading": "Téléchargement",
-  "DuplicateFolderItem": "Le dossier <2>{{title}}</2> a été dupliqué avec succès",
-  "DuplicateItem": "<2>{{title}}</2> dupliqué avec succès",
   "Duplicating": "Duplication",
   "EditTemplate": "Modifier le modèle",
   "EmptyFormFolderDoneDescriptionText": "Cette section affiche tous les formulaires remplis.",

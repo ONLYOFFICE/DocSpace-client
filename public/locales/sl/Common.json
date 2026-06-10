@@ -2245,5 +2245,7 @@
   "YourName": "Vaše ime",
   "YourPrice": "Vaša cena",
   "YourTurn": "Vi ste na vrsti",
-  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala."
+  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala.",
+  "DuplicateFolderItem": "Mapa <2>{{title}}</2> je bila uspešno podvojena",
+  "DuplicateItem": "<2>{{title}}</2> uspešno podvojen"
 }

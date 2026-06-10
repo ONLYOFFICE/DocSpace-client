@@ -2245,5 +2245,7 @@
   "YourName": "اسمك",
   "YourPrice": "سعرك",
   "YourTurn": "دوركم الآن",
-  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب."
+  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب.",
+  "DuplicateFolderItem": "تم تكرار المجلد <2>{{title}}</2> بنجاح",
+  "DuplicateItem": "تم تكرار <2>{{title}}</2> بنجاح"
 }

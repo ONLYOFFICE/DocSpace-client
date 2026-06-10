@@ -35,8 +35,6 @@
   "DocumentEdited": "无法执行该操作，因为正在编辑该文档。",
   "DownloadAll": "下载全部",
   "Downloading": "下载中",
-  "DuplicateFolderItem": "文件夹<2>{{title}}</2>已成功创建副本",
-  "DuplicateItem": "<2>{{title}}</2>已成功创建副本",
   "Duplicating": "正在创建副本",
   "EditTemplate": "编辑模板",
   "EmptyFormFolderDoneDescriptionText": "此板块会显示所有已完成填写的表单。",

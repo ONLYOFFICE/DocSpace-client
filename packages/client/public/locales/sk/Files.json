@@ -35,8 +35,6 @@
   "DocumentEdited": "Nie je možné vykonať operáciu, kým sa dokument upravuje.",
   "DownloadAll": "Stiahnuť všetko",
   "Downloading": "Stiahnutie",
-  "DuplicateFolderItem": "Priečinok <2>{{title}}</2> úspešne duplikovaný",
-  "DuplicateItem": "<2>{{title}}</2> úspešne duplikovaný",
   "Duplicating": "Duplikovanie",
   "EditTemplate": "Upraviť šablónu",
   "EmptyFormFolderDoneDescriptionText": "V tejto časti sa zobrazia všetky vyplnené formuláre.",

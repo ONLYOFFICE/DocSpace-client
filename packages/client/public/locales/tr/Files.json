@@ -35,8 +35,6 @@
   "DocumentEdited": "Belge düzenlenmekte olduğu için eylem gerçekleştirilemiyor.",
   "DownloadAll": "Tümünü indir",
   "Downloading": "İndiriliyor",
-  "DuplicateFolderItem": "<2>{{title}}</2> klasörü başarıyla kopyalandı",
-  "DuplicateItem": "<2>{{title}}</2> başarıyla kopyalandı",
   "Duplicating": "Çoğaltılıyor",
   "EditTemplate": "Şablonu düzenle",
   "EmptyFormFolderDoneDescriptionText": "Bu bölümde tamamlanan tüm formlar görüntülenecektir.",

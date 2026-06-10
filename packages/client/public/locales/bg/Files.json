@@ -35,8 +35,6 @@
   "DocumentEdited": "Не може да се изпълни действието, тъй като документът се редактира.",
   "DownloadAll": "Изтегли всички",
   "Downloading": "Изтегляне",
-  "DuplicateFolderItem": "Папката <2>{{title}}</2> беше успешно дублирана",
-  "DuplicateItem": "<2>{{title}}</2> беше успешно дублиран",
   "Duplicating": "Дублиране",
   "EditTemplate": "Редактирай шаблон",
   "EmptyFormFolderDoneDescriptionText": "Този раздел ще покаже всички попълнени формуляри.",

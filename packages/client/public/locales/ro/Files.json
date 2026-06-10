@@ -35,8 +35,6 @@
   "DocumentEdited": "Nu se poate efectua acțiunea, deoarece documentul este în curs de editare.",
   "DownloadAll": "Descarcă toate",
   "Downloading": "Descărcare",
-  "DuplicateFolderItem": "Folderul <2>{{title}}</2> s-a duplicat cu succes",
-  "DuplicateItem": "<2>{{title}}</2> s-a duplicat cu succes",
   "Duplicating": "Dublare",
   "EditTemplate": "Modificare șablon",
   "EmptyFormFolderDoneDescriptionText": "Această secțiune conține toate formularele completate.",

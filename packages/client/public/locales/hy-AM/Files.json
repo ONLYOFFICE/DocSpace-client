@@ -35,8 +35,6 @@
   "DocumentEdited": "Գործողությունը հնարավոր չէ կատարել, քանի որ փաստաթուղթը խմբագրվում է:",
   "DownloadAll": "Ներբեռնել բոլորը",
   "Downloading": "Ներբեռնում",
-  "DuplicateFolderItem": "Պանակը <2>{{title}}</2> հաջողությամբ կրկնօրինակված է",
-  "DuplicateItem": "<2>{{title}}</2>ը հաջողությամբ կրկնօրինակված է",
   "Duplicating": "Կրկնօրինակվում է",
   "EditTemplate": "Խմբագրել կաղապարը",
   "EmptyFormFolderDoneDescriptionText": "Այս բաժնում կցուցադրվեն բոլոր լրացված ձևերը:",

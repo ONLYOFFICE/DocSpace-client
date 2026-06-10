@@ -35,8 +35,6 @@
   "DocumentEdited": "ලේඛනය සංස්කරණය වෙමින් පවතින බැවින් මෙම ක්‍රියාමාර්ගයට ඉඩ නොදේ.",
   "DownloadAll": "සියල්ල බාගත කරන්න",
   "Downloading": "බාගත කිරීම",
-  "DuplicateFolderItem": "ෆෝල්ඩරය <2>{{title}}</2> සාර්ථකව ප්‍රතිලියනය කරන ලදී.",
-  "DuplicateItem": "<2>{{title}}</2> සාර්ථකව ප්‍රති duplicates කරන ලදී",
   "Duplicating": "පිටපත් කිරීම",
   "EditTemplate": "සැකිල්ල සංස්කරණය කරන්න",
   "EmptyFormFolderDoneDescriptionText": "මෙම කොටසෙහි සම්පූර්ණ කළ සියලුම ආකෘතිපත්‍ර පෙන්වනු ඇත.",

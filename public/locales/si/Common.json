@@ -2245,5 +2245,7 @@
   "YourName": "ඔබගේ නම",
   "YourPrice": "ඔබගේ මිල",
   "YourTurn": "ඔබේ වාරය.",
-  "YouWillBeContacted": "ඉල්ලීම සෑදීමෙන් පසු අලෙවි කණ්ඩායම ඔබව සම්බන්ධ කර ගනු ඇත."
+  "YouWillBeContacted": "ඉල්ලීම සෑදීමෙන් පසු අලෙවි කණ්ඩායම ඔබව සම්බන්ධ කර ගනු ඇත.",
+  "DuplicateFolderItem": "ෆෝල්ඩරය <2>{{title}}</2> සාර්ථකව ප්‍රතිලියනය කරන ලදී.",
+  "DuplicateItem": "<2>{{title}}</2> සාර්ථකව ප්‍රති duplicates කරන ලදී"
 }

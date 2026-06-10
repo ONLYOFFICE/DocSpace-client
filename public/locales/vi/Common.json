@@ -2245,5 +2245,7 @@
   "YourName": "Tên của bạn",
   "YourPrice": "Giá của bạn",
   "YourTurn": "Phiên của bạn",
-  "YouWillBeContacted": "Đội ngũ kinh doanh sẽ liên hệ với bạn sau khi tạo yêu cầu."
+  "YouWillBeContacted": "Đội ngũ kinh doanh sẽ liên hệ với bạn sau khi tạo yêu cầu.",
+  "DuplicateFolderItem": "Đã sao chép thành công thư mục <2>{{title}}</2>",
+  "DuplicateItem": "<2>{{title}}</2> đã được sao chép thành công"
 }

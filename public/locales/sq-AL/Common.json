@@ -2245,5 +2245,7 @@
   "YourName": "Emri juaj",
   "YourPrice": "Çmimi juaj",
   "YourTurn": "Radha jote",
-  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës."
+  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës.",
+  "DuplicateFolderItem": "Folderi <2>{{title}}</2> është kopjuar me sukses",
+  "DuplicateItem": "<2>{{title}}</2> është kopjuar me sukses"
 }

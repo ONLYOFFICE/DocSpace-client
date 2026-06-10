@@ -160,8 +160,7 @@
 }
 
 .secondaryCell {
-  display: flex;
-  align-items: center;
+  display: block;
   overflow: hidden;
   color: var(--files-section-table-view-exst-color);
   font-size: 12px;
@@ -169,6 +168,7 @@
   text-overflow: ellipsis;
   flex-shrink: 1;
   min-width: 0;
+  margin-inline-end: 8px;
 }
 
 .badgesContainer {

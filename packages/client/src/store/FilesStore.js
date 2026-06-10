@@ -74,6 +74,7 @@ import {
   getDaysRemaining,
   frameCallEvent,
   getCategoryType,
+  getFileExtension,
 } from "@docspace/shared/utils/common";
 import {
   resolveDisplayTitle,
@@ -626,10 +627,12 @@ class FilesStore {
       if (foundIndex > -1) return;
 
       window.dataLayer = window.dataLayer || [];
+
       window.dataLayer.push({
         event: AnalyticsEvents.FileCreated,
         id: file.id,
         parentId: file.folderId,
+        file_type: getFileExtension(file.title).replace(".", ""),
       });
 
       this.selectedFolderStore.setFilesCount(

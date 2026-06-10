@@ -48,7 +48,7 @@ export type CompletedFormProps = {
   session?: {
     response: {
       completedForm: TFile;
-      manager: TUser;
+      manager?: TUser;
       originalForm: TFile;
       formNumber: number;
       roomId: number;

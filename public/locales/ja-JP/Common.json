@@ -104,6 +104,7 @@
   "AIDisabledInfoBlockAdminStandaloneDescription": "AI機能は現在無効化されています。これにより、このエージェントはチャットやタスクを処理できません。{{productName}}の高度な機能を有効にするには、ご自身のAIサービスを接続してください。",
   "AIDisabledInfoBlockUserDescription": "AI機能は現在無効化されています。これにより、このエージェントはチャットやタスクを処理できません。正常に機能させるには、{{productName}}の管理者までAI機能を有効化するようにご連絡ください。",
   "AIFeature": "AI機能",
+  "AIFeatures": "AI機能",
   "AIFeaturesAreCurrentlyDisabled": "AI機能は現在無効化されています",
   "AIGenerateDocumentDescription": "新しいドキュメントが作成され、エディタで開かれます。その後、AIが生成されたコンテンツをドキュメントに直接書き込みます。",
   "AIGetStartedStep1Description": "{{productName}}ウォレットから{{organizationName}} AIへクレジットを移行します。ウォレットが空の場合は、まずチャージしてください。クレジットの有効期限はありません。",

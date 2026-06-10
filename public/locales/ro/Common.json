@@ -104,6 +104,7 @@
   "AIDisabledInfoBlockAdminStandaloneDescription": "Capacitățile de IA sunt actualmente dezactivate, ceea ce înseamnă că acest agent nu poate procesa conversații sau sarcini. Conectați serviciu de IA propriu pentru a activa caracteristicile avansate în {{productName}}.",
   "AIDisabledInfoBlockUserDescription": "Capacitățile de IA sunt actualmente dezactivate, ceea ce înseamnă că acest agent nu poate procesa conversații sau sarcini. Pentru a remedia această situație, solicitați administratorului {{productName}} să activeze funcțiile de IA.",
   "AIFeature": "Funcție IA",
+  "AIFeatures": "Funcții IA",
   "AIFeaturesAreCurrentlyDisabled": "Funcțiile de IA sunt momentan dezactivate",
   "AIGenerateDocumentDescription": "Va fi creat un document nou și deschis în editor. IA va scrie apoi conținutul generat direct în document.",
   "AIGetStartedStep1Description": "Transferați creditele de la portofelul dvs. {{productName}} către {{organizationName}} IA. Dacă portofelul dvs. este gol, reumpleți-l întâi. Creditele nu expiră niciodată.",

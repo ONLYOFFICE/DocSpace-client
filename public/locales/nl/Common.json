@@ -104,6 +104,7 @@
   "AIDisabledInfoBlockAdminStandaloneDescription": "AI-mogelijkheden zijn momenteel uitgeschakeld, wat betekent dat deze agent geen chats of taken kan verwerken. Verbind uw eigen AI-dienst om geavanceerde functies te ontgrendelen in {{productName}}.",
   "AIDisabledInfoBlockUserDescription": "AI-mogelijkheden zijn momenteel uitgeschakeld, wat betekent dat deze agent geen chats of taken kan verwerken. Om weer op de rails te komen, vraag je {{productName}}-beheerder om AI-functies in te schakelen.",
   "AIFeature": "AI-functie",
+  "AIFeatures": "AI-functies",
   "AIFeaturesAreCurrentlyDisabled": "AI-functies zijn momenteel uitgeschakeld",
   "AIGenerateDocumentDescription": "Er wordt een nieuw document aangemaakt en geopend in de editor. AI schrijft vervolgens de gegenereerde inhoud rechtstreeks in het document.",
   "AIGetStartedStep1Description": "Overdraag credits van uw {{productName}}-portemonnee naar {{organizationName}} AI. Als uw portemonnee leeg is, voer dan eerst een top-up uit. Credits verlopen nooit.",

@@ -104,6 +104,7 @@
   "AIDisabledInfoBlockAdminStandaloneDescription": "Możliwości AI są obecnie wyłączone, co oznacza, że agent nie może przetwarzać rozmów ani zadań. Połącz własną usługę AI, aby odblokować zaawansowane funkcje w {{productName}}.",
   "AIDisabledInfoBlockUserDescription": "Możliwości AI są obecnie wyłączone, co oznacza, że ten agent nie może przetwarzać czatów ani zadań. Aby wrócić do działania, poproś administratora {{productName}}, aby włączył funkcje AI.",
   "AIFeature": "Funkcja AI",
+  "AIFeatures": "Funkcje AI",
   "AIFeaturesAreCurrentlyDisabled": "Funkcje sztucznej inteligencji są obecnie wyłączone.",
   "AIGenerateDocumentDescription": "Zostanie utworzony nowy dokument i otwarty w edytorze. AI następnie wpisze wygenerowaną treść bezpośrednio do dokumentu.",
   "AIGetStartedStep1Description": "Przenieś kredyty z portfela {{productName}} do {{organizationName}} AI. Jeśli Twój portfel jest pusty, uzupełnij go najpierw. Kredyty nigdy nie wygasają.",

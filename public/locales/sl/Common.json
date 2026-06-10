@@ -104,6 +104,7 @@
   "AIDisabledInfoBlockAdminStandaloneDescription": "Zmogljivosti umetne inteligence so trenutno onemogočene, kar pomeni, da ta agent ne more obdelovati klepetalnih pogovorov ali opravil. Povežite svojo storitev umetne inteligence, da odklenete napredne funkcije v {{productName}}.",
   "AIDisabledInfoBlockUserDescription": "Zmogljivosti umetne inteligence so trenutno onemogočene, kar pomeni, da ta agent ne more obdelovati klepetalnih pogovorov ali opravil. Da bi se vrnili na pravi tir, prosite skrbnika {{productName}}, da omogoči funkcije umetne inteligence.",
   "AIFeature": "AI funkcija",
+  "AIFeatures": "AI funkcije",
   "AIFeaturesAreCurrentlyDisabled": "Funkcije umetne inteligence so trenutno onemogočene.",
   "AIGenerateDocumentDescription": "Ustvarjen bo nov dokument in odprt v urejevalniku. AI bo nato neposredno v dokument zapisal ustvarjeno vsebino.",
   "AIGetStartedStep1Description": "Prenesite kredite iz vašega {{productName}} matičnega računa v {{organizationName}} AI. Če je vaš matični račun prazno, ga najprej napolnite. Krediti ne zastarejo.",

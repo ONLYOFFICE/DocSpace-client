@@ -104,6 +104,7 @@
   "AIDisabledInfoBlockAdminStandaloneDescription": "Aktuálně jsou vypnuté funkce umělé inteligence, což znamená, že tento agent nemůže zpracovávat chaty ani úkoly. Pro odemknutí pokročilých funkcí v {{productName}} připojte vlastní službu umělé inteligence.",
   "AIDisabledInfoBlockUserDescription": "Aktuálně jsou funkce AI vypnuté, což znamená, že tento agent nemůže zpracovávat chaty ani úkoly. Aby se vrátili na správnou cestu, požádejte administrátora {{productName}}, aby povolil funkce AI.",
   "AIFeature": "Funkce AI",
+  "AIFeatures": "Funkce AI",
   "AIFeaturesAreCurrentlyDisabled": "Funkce umělé inteligence jsou momentálně deaktivovány.",
   "AIGenerateDocumentDescription": "Nový dokument bude vytvořen a otevřen v editoru. AI poté napíše vygenerovaný obsah přímo do dokumentu.",
   "AIGetStartedStep1Description": "Přesun kreditu z vašeho peněženky {{productName}} do {{organizationName}} AI. Pokud je vaše peněženka prázdná, nejprve ji doplňte. Kredity nikdy neuznikají.",

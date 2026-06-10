@@ -101,6 +101,7 @@
   "AIDisabledInfoBlockAdminStandaloneDescription": "AI funkcie sú momentálne vypnuté, čo znamená, že tento agent nemôže spracovávať chaty ani úlohy. Pripojte si vlastnú AI službu a odomknite pokročilé funkcie v {{productName}}.",
   "AIDisabledInfoBlockUserDescription": "AI funkcie sú momentálne vypnuté, čo znamená, že tento agent nemôže spracovávať chaty ani úlohy. Aby ste mohli pokračovať v práci, požiadajte administrátora {{productName}} o zapnutie AI funkcií.",
   "AIFeature": "Funkcia AI",
+  "AIFeatures": "Funkcie AI",
   "AIFeaturesAreCurrentlyDisabled": "AI funkcie sú momentálne vypnuté.",
   "AIGenerateDocumentDescription": "Vytvorí sa nový dokument a otvorí sa v editore. AI následne zapíše vygenerovaný obsah priamo do dokumentu.",
   "AIGetStartedStep1Description": "Prejdite kredity zo svojho portfólia {{productName}} do {{organizationName}} AI. Ak je vaše portfólio prázdne, najprv ho doplatte. Kredity nikdy neplynú.",

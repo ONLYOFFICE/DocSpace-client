@@ -104,6 +104,7 @@
   "AIDisabledInfoBlockAdminStandaloneDescription": "Aftësitë e inteligjencës artificiale janë aktualisht të çaktivizuara, që do të thotë se ky agjent nuk mund të përpunojë biseda ose detyra. Lidh shërbimin tënd të inteligjencës artificiale për të zhbllokuar veçori të përparuara në {{productName}}.",
   "AIDisabledInfoBlockUserDescription": "Aftësitë e inteligjencës artificiale janë aktualisht të çaktivizuara, që do të thotë se ky agjent nuk mund të përpunojë biseda ose detyra. Për t'u rikthyer në rrugën e duhur, kërkojini administratorit tuaj të {{productName}} të aktivizojë veçoritë e inteligjencës artificiale.",
   "AIFeature": "Veçori i IA",
+  "AIFeatures": "Funksionet AI",
   "AIFeaturesAreCurrentlyDisabled": "Funksionet e inteligjencës artificiale janë aktualisht të çaktivizuara",
   "AIGenerateDocumentDescription": "Do të krijohet një dokument i ri dhe do të hapet në editor. IA do të shkruajë më pas përmbajtjen e gjeneruar direkt në dokument.",
   "AIGetStartedStep1Description": "Transferoni kredite nga portofoli juaj {{productName}} në {{organizationName}} IA. Nëse portofoli juaj është bosh, mbushni më parë. Kredite nunca skadojnë.",

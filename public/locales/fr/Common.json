@@ -104,6 +104,7 @@
   "AIDisabledInfoBlockAdminStandaloneDescription": "Les fonctionnalités d'IA sont actuellement désactivées, ce qui signifie que cet agent ne peut pas traiter les chats ni les tâches. Connectez votre propre service d'IA pour débloquer les fonctionnalités avancées dans {{productName}}.",
   "AIDisabledInfoBlockUserDescription": "Les fonctionnalités d'IA sont actuellement désactivées, ce qui signifie que cet agent ne peut pas traiter les chats ni les tâches. Pour revenir à la normale, demandez à votre administrateur {{productName}} d'activer les fonctionnalités d'IA.",
   "AIFeature": "Fonctionnalité IA",
+  "AIFeatures": "Fonctionnalités d'IA",
   "AIFeaturesAreCurrentlyDisabled": "Les fonctionnalités d'IA sont actuellement désactivées",
   "AIGenerateDocumentDescription": "Un nouveau document sera créé et ouvert dans l'éditeur. L'IA écrira ensuite le contenu généré directement dans le document.",
   "AIGetStartedStep1Description": "Transférez des crédits de votre portefeuille {{productName}} vers {{organizationName}} AI. Si votre portefeuille est vide, rechargez-le d'abord. Les crédits n'expirent jamais.",

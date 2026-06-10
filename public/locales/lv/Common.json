@@ -104,6 +104,7 @@
   "AIDisabledInfoBlockAdminStandaloneDescription": "MI iespējas šobrīd ir izslēgtas, kas nozīmē, ka šis aģents nevar apstrādāt sarunas vai uzdevumus. Pievienojiet savu MI pakalpojumu, lai atbloķētu papildu funkcijas {{productName}}.",
   "AIDisabledInfoBlockUserDescription": "MI iespējas šobrīd ir izslēgtas, kas nozīmē, ka šis aģents nevar apstrādāt tērzēšanu vai uzdevumus. Lai atgrieztos darba ritē, lūdziet savu {{productName}} administratoru iespējot MI funkcijas.",
   "AIFeature": "MI funkcija",
+  "AIFeatures": "MI funkcijas",
   "AIFeaturesAreCurrentlyDisabled": "MI funkcijas šobrīd ir atslēgtas",
   "AIGenerateDocumentDescription": "Tiks izveidots jauns dokuments un atvērts redaktorā. MI pēc tam ierakstīs ģenerēto saturu tieši dokumentā.",
   "AIGetStartedStep1Description": "Pātrunāt kredītis no jūsu {{productName}} mānākas uz {{organizationName}} MI. Ja jūsu mānāka ir tukša, uzpildiet to kārtībā. Kredītis nekad neder.",

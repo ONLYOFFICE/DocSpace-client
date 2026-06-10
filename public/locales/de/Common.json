@@ -104,6 +104,7 @@
   "AIDisabledInfoBlockAdminStandaloneDescription": "Die KI-Funktionen sind derzeit deaktiviert, daher kann dieser Agent weder Chats noch Aufgaben bearbeiten. Verbinden Sie Ihren eigenen KI-Dienst, um erweiterte Funktionen in {{productName}} freizuschalten.",
   "AIDisabledInfoBlockUserDescription": "Die KI-Funktionen sind derzeit deaktiviert, daher kann dieser Agent weder Chats noch Aufgaben bearbeiten. Um wieder normal arbeiten zu können, bitten Sie Ihren {{productName}}-Administrator, die KI-Funktionen zu aktivieren.",
   "AIFeature": "KI-Funktion",
+  "AIFeatures": "KI-Funktionen",
   "AIFeaturesAreCurrentlyDisabled": "Die KI-Funktionen sind derzeit deaktiviert",
   "AIGenerateDocumentDescription": "Es wird ein neues Dokument erstellt und im Editor geöffnet. Die KI schreibt den generierten Inhalt anschließend direkt in das Dokument.",
   "AIGetStartedStep1Description": "Übertragen Sie Guthaben von Ihrer {{productName}}-Wallet an {{organizationName}} KI. Falls Ihre Wallet leer ist, laden Sie diese zuerst auf. Guthaben verfallen niemals.",

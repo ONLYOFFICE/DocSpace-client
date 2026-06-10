@@ -103,6 +103,7 @@
   "AIDisabledInfoBlockAdminStandaloneDescription": "AI 기능은 현재 꺼져 있어, 이 에이전트는 채팅이나 작업을 처리할 수 없습니다. {{productName}}에서 고급 기능을 사용하려면 AI 서비스를 연결하세요.",
   "AIDisabledInfoBlockUserDescription": "AI 기능은 현재 꺼져 있습니다. 즉, 이 에이전트는 채팅이나 작업을 처리할 수 없습니다. 다시 시작하려면 {{productName}} 관리자에게 AI 기능을 활성화해 달라고 요청하세요.",
   "AIFeature": "AI 기능",
+  "AIFeatures": "AI 기능",
   "AIFeaturesAreCurrentlyDisabled": "AI 기능은 현재 비활성화되어 있습니다.",
   "AIGenerateDocumentDescription": "새 문서가 생성되어 편집기에서 열립니다. 그런 다음 AI가 생성된 콘텐츠를 문서에 직접 작성합니다.",
   "AIGetStartedStep1Description": "{{productName}} 지갑에서 {{organizationName}} AI로 크레딧을 전송합니다. 지갑이 비어 있는 경우 먼저 충전하십시오. 크레딧은 만료되지 않습니다.",

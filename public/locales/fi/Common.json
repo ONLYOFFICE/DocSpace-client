@@ -104,6 +104,7 @@
   "AIDisabledInfoBlockAdminStandaloneDescription": "AI-ominaisuudet ovat tällä hetkellä pois päältä, mikä tarkoittaa, että tämä agentti ei voi käsitellä keskusteluja tai tehtäviä. Yhdistä oma AI-palvelusi avataksesi edistyneitä ominaisuuksia {{productName}}-palvelussa.",
   "AIDisabledInfoBlockUserDescription": "Tekoälyominaisuudet ovat tällä hetkellä pois käytöstä, mikä tarkoittaa, että tämä agentti ei voi käsitellä keskusteluja tai tehtäviä. Jotta pääset takaisin raiteille, pyydä {{productName}}-järjestelmän ylläpitäjää ottamaan tekoälyominaisuudet käyttöön.",
   "AIFeature": "Tekoälyominaisuus",
+  "AIFeatures": "AI-ominaisuudet",
   "AIFeaturesAreCurrentlyDisabled": "AI-ominaisuudet on tällä hetkellä poissa käytöstä",
   "AIGenerateDocumentDescription": "Uusi asiakirja luodaan ja avataan editorissa. Tämän jälkeen AI kirjoittaa luodun sisällön suoraan asiakirjaan.",
   "AIGetStartedStep1Description": "Siirrä luottokredit {{productName}}-lompakostasi {{organizationName}} AI:hin. Jos lompakosi on tyhjä, täydennä se ensin. Luottokredit eivät vanhene koskaan.",

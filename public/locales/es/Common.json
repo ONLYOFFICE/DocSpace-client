@@ -104,6 +104,7 @@
   "AIDisabledInfoBlockAdminStandaloneDescription": "Las capacidades de IA están actualmente desactivadas, lo que significa que este agente no puede procesar chats ni tareas. Conecte su propio servicio de IA para desbloquear funciones avanzadas en {{productName}}.",
   "AIDisabledInfoBlockUserDescription": "Las capacidades de IA están actualmente desactivadas, lo que significa que este agente no puede procesar chats ni tareas. Para volver a activarlo, pídale al administrador de {{productName}} que habilite las funciones de IA.",
   "AIFeature": "Función de IA",
+  "AIFeatures": "Funciones de IA",
   "AIFeaturesAreCurrentlyDisabled": "Las funciones de IA están desactivadas",
   "AIGenerateDocumentDescription": "Se creará un nuevo documento y se abrirá en el editor. A continuación, la IA escribirá el contenido generado directamente en el documento.",
   "AIGetStartedStep1Description": "Transferir créditos de su billetera de {{productName}} a {{organizationName}} IA. Si su billetera está vacía, recárguela primero. Los créditos nunca caducan.",

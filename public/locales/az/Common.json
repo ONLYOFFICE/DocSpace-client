@@ -104,6 +104,7 @@
   "AIDisabledInfoBlockAdminStandaloneDescription": "Süni intellekt funksiyaları hazırda söndürülmüşdür, bu da agentin söhbətləri və tapşırıqları işləməyə bilməsi deməkdir. Təkmilləşdirilmiş funksiyaları açmaq üçün öz SI xidmətinizi {{productName}} ilə qoşun.",
   "AIDisabledInfoBlockUserDescription": "S.İ. (Süni İntellekt) funksiyaları hazırda söndürülüb, bu o deməkdir ki, bu agent söhbətləri və ya tapşırıqları emal edə bilməz. Yenidən işə düşmək üçün {{productName}} administratorundan S.İ. funksiyalarını aktiv etməsini xahiş edin.",
   "AIFeature": "Süni intellekt funksiyası",
+  "AIFeatures": "Süni intellekt funksiyaları",
   "AIFeaturesAreCurrentlyDisabled": "Süni intellekt funksiyaları hazırda işlənmir.",
   "AIGenerateDocumentDescription": "Yeni sənəd yaradılıb redaktorda açılacaq. AI daha sonra yaradılan məzmunu birbaşa sənədə yazacaq.",
   "AIGetStartedStep1Description": "{{productName}} cüzdanınızdan {{organizationName}} AI-ya kreditləri köçürün. Cüzdanınız boşdursa, əvvəlcə doludun. Kreditlər heç vaxt bitmir.",

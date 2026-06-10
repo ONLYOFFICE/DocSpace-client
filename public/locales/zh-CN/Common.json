@@ -104,6 +104,7 @@
   "AIDisabledInfoBlockAdminStandaloneDescription": "AI 当前已关闭，这意味着此智能体无法处理对话或任务。连接您自己的 AI 服务以解锁{{productName}}中的高级功能。",
   "AIDisabledInfoBlockUserDescription": "AI 当前已关闭，这意味着此智能体无法处理对话或任务。要恢复正常，请让您的{{productName}}管理员启用 AI 功能。",
   "AIFeature": "AI 功能",
+  "AIFeatures": "AI 功能",
   "AIFeaturesAreCurrentlyDisabled": "AI 功能当前已禁用",
   "AIGenerateDocumentDescription": "将创建一个新文档并在编辑器中打开。人工智能随后将把生成的内容直接写入文档。",
   "AIGetStartedStep1Description": "将您的 {{productName}} 钱包中的积分转至 {{organizationName}} AI。如果您的钱包为空，请先充值。积分永不过期。",

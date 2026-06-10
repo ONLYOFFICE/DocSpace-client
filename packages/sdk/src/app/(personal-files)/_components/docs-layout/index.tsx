@@ -189,13 +189,22 @@ type DocsLayoutProps = {
   hasEncryptionKeys?: boolean;
 };
 
+type DocsLayoutAiBindings = {
+  isChatPanelVisible: boolean;
+  isChatPanelFullscreen: boolean;
+  chatButton: React.ReactNode;
+  chatPanelContent: React.ReactNode;
+  closeChatPanel: () => void;
+  onAskAI: (item: TFileItem) => void;
+};
+
 const getSubmitLabel = (mode: SelectorMode, t: (key: string) => string) => {
   if (mode === "copy") return t("Common:CopyHere");
   if (mode === "move") return t("Common:MoveHere");
   return t("Common:RestoreHere");
 };
 
-const DocsLayout = observer(
+const DocsLayoutCore = observer(
   ({
     folders,
     files,
@@ -213,7 +222,8 @@ const DocsLayout = observer(
     uploadFilesToFolder: uploadFilesToFolderOverride,
     currentRoomId,
     hasEncryptionKeys,
-  }: DocsLayoutProps) => {
+    ai,
+  }: DocsLayoutProps & { ai?: DocsLayoutAiBindings }) => {
     const { t } = useTranslation(["Common"]);
     const { isEmptyList } = useSettingsStore();
     const { rootFolderType } = useFilesListStore();
@@ -265,15 +275,8 @@ const DocsLayout = observer(
       closeUploadConflictDialog,
     } = docsActions;
 
-    const aiChatStore = useAiChatStore();
-    const { useAttachmentsStore } = useStores();
-    const openChat = useOpenAiChat();
-    const isAiChatPanelFullscreen = aiChatStore.effectiveFullscreen;
-    const isAiChatPanelVisible = aiChatStore.isVisible;
-
-    // The AI Chat panel and the Info Panel share the same right-side area, so
-    // keep them mutually exclusive: opening one closes the other.
-    usePanelExclusivity();
+    const isAiChatPanelVisible = ai?.isChatPanelVisible ?? false;
+    const isAiChatPanelFullscreen = ai?.isChatPanelFullscreen ?? false;
 
     const {
       desktopModel: defaultDesktopModel,
@@ -529,37 +532,6 @@ const DocsLayout = observer(
       [versionHistoryStore],
     );
 
-    // "AI features → Ask AI": open the chat panel and drop the file into the
-    // composer as an attachment. Opening a closed panel starts a fresh chat
-    // (via openChat); doing this in an already-open chat keeps the current
-    // conversation and just appends the file. The menu entry is only shown
-    // for supported files (see useContextMenuModel).
-    const askAIHandler = React.useCallback(
-      (item: TFileItem) => {
-        openChat();
-
-        const input = {
-          path: String(item.id),
-          // TFileItem.title already includes the extension.
-          title: item.title,
-          type: getOnlyofficeFileType(item.fileExst || item.title),
-          content: "",
-        };
-
-        const imageIndices =
-          item.fileType === FileType.Image ? new Set([0]) : new Set<number>();
-
-        attachFilesToChat(useAttachmentsStore, [input], imageIndices).catch(
-          (e) => toastr.error(e as string),
-        );
-      },
-      [openChat, useAttachmentsStore],
-    );
-
-    // Only collapse the docs layout when the chat is actually on screen.
-    // `effectiveFullscreen` can be forced on while the panel is closed (e.g.
-    // when AI isn't configured yet), and applying the fullscreen layout then
-    // would hide the whole section with no chat to replace it.
     const layoutMode =
       isAiChatPanelVisible && isAiChatPanelFullscreen
         ? "ai-fullscreen"
@@ -591,7 +563,7 @@ const DocsLayout = observer(
                         value={versionHistoryHandler}
                       >
                         <ConvertContext.Provider value={requestConvert}>
-                          <AskAIContext.Provider value={askAIHandler}>
+                          <AskAIContext.Provider value={ai?.onAskAI ?? null}>
                             <div
                               className={styles.root}
                               style={frameHeaderVars}
@@ -620,7 +592,7 @@ const DocsLayout = observer(
                                           infoPanelStore.toggle
                                         }
                                         headerOffset={headerOffset}
-                                        aiChatButton={<AiChatTrigger />}
+                                        aiChatButton={ai?.chatButton}
                                       />
                                     }
                                     stickyTableHeader
@@ -718,15 +690,10 @@ const DocsLayout = observer(
                                         infoPanelStore.close();
                                       }
                                     }}
-                                    chatPanelContent={
-                                      <>
-                                        <DocsChatHeaderPanel />
-                                        <DocsChatBodyPanel />
-                                      </>
-                                    }
+                                    chatPanelContent={ai?.chatPanelContent}
                                     isChatPanelVisible={isAiChatPanelVisible}
                                     setIsChatPanelVisible={(v: boolean) => {
-                                      if (!v) aiChatStore.close();
+                                      if (!v) ai?.closeChatPanel();
                                     }}
                                     isEmptyPage={isEmptyList}
                                     filesFilter={filesFilter}
@@ -969,5 +936,57 @@ const DocsLayout = observer(
     );
   },
 );
+
+const DocsLayoutAi = observer((props: DocsLayoutProps) => {
+  const aiChatStore = useAiChatStore();
+  const { useAttachmentsStore } = useStores();
+  const openChat = useOpenAiChat();
+
+  usePanelExclusivity();
+
+  const askAIHandler = React.useCallback(
+    (item: TFileItem) => {
+      openChat();
+
+      const input = {
+        path: String(item.id),
+        title: item.title,
+        type: getOnlyofficeFileType(item.fileExst || item.title),
+        content: "",
+      };
+
+      const imageIndices =
+        item.fileType === FileType.Image ? new Set([0]) : new Set<number>();
+
+      attachFilesToChat(useAttachmentsStore, [input], imageIndices).catch(
+        (e) => toastr.error(e as string),
+      );
+    },
+    [openChat, useAttachmentsStore],
+  );
+
+  const ai: DocsLayoutAiBindings = {
+    isChatPanelVisible: aiChatStore.isVisible,
+    isChatPanelFullscreen: aiChatStore.effectiveFullscreen,
+    chatButton: <AiChatTrigger />,
+    chatPanelContent: (
+      <>
+        <DocsChatHeaderPanel />
+        <DocsChatBodyPanel />
+      </>
+    ),
+    closeChatPanel: () => aiChatStore.close(),
+    onAskAI: askAIHandler,
+  };
+
+  return <DocsLayoutCore {...props} ai={ai} />;
+});
+
+const DocsLayout = (props: DocsLayoutProps) =>
+  props.isPrivate ? (
+    <DocsLayoutCore {...props} />
+  ) : (
+    <DocsLayoutAi {...props} />
+  );
 
 export default DocsLayout;

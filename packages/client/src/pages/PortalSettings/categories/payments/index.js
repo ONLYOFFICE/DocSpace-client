@@ -48,6 +48,7 @@ import PaymentsEnterprise from "./Standalone";
 import {
   MainTariff,
   Wallet,
+  Usage,
   PaymentMethod,
   ServicesList,
   BillingRoot,
@@ -146,7 +147,13 @@ const PaymentsPage = (props) => {
     {
       id: TAB_IDS.USAGE,
       name: t("Common:Usage"),
-      content: null,
+      content: (
+        <Usage
+          onDiskStorageClick={() => navigateToRoute(PAYMENT_ROUTES.diskStorage)}
+          onBackupClick={() => navigateToRoute(PAYMENT_ROUTES.backup)}
+          onAIServicesClick={() => navigateToRoute(PAYMENT_ROUTES.aiServices)}
+        />
+      ),
       onClick: () => {
         clearAbortControllerArr();
       },
@@ -160,6 +167,12 @@ const PaymentsPage = (props) => {
 
     navigate(
       combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url),
+    );
+  };
+
+  const navigateToRoute = (route) => {
+    navigate(
+      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, route),
     );
   };
 

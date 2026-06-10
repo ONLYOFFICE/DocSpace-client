@@ -46,6 +46,7 @@ import type {
 import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TPathParts } from "@docspace/shared/types";
 import { FolderType, DeviceType, FileType } from "@docspace/shared/enums";
+import { RoomType } from "@onlyoffice/docspace-api-sdk";
 import FilesSelector from "@docspace/ui-kit/selectors/Files";
 import type {
   FilesSelectorProps,
@@ -775,18 +776,18 @@ const DocsLayoutCore = observer(
                                   isRoomsOnly={false}
                                   isThirdParty={false}
                                   openRoot={selectorMode === "restore"}
-                                  withInit
-                                  initItems={
-                                    selectorInitData.items as unknown as FolderDtoInteger[]
-                                  }
-                                  initBreadCrumbs={selectorInitData.breadCrumbs}
-                                  initSelectedItemType="files"
-                                  initSelectedItemId={
-                                    selectorInitData.currentFolderId
-                                  }
-                                  initSearchValue={null}
-                                  initTotal={selectorInitData.total}
-                                  initHasNextPage={selectorInitData.hasNextPage}
+                                  // withInit
+                                  // initItems={
+                                  //   selectorInitData.items as unknown as FolderDtoInteger[]
+                                  // }
+                                  // initBreadCrumbs={selectorInitData.breadCrumbs}
+                                  // initSelectedItemType="files"
+                                  // initSelectedItemId={
+                                  //   selectorInitData.currentFolderId
+                                  // }
+                                  // initSearchValue={null}
+                                  // initTotal={selectorInitData.total}
+                                  // initHasNextPage={selectorInitData.hasNextPage}
                                   submitButtonLabel={getSubmitLabel(
                                     selectorMode,
                                     t,
@@ -795,7 +796,8 @@ const DocsLayoutCore = observer(
                                   withCancelButton
                                   withBreadCrumbs
                                   withSearch
-                                  withCreate={false}
+                                  withCreate={!!selectorMode}
+                                  createDefineRoomType={RoomType.CustomRoom}
                                   withFooterInput={false}
                                   withFooterCheckbox={false}
                                   withoutBackButton

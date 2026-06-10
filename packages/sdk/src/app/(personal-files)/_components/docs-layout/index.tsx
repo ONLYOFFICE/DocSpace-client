@@ -46,7 +46,7 @@ import type {
 import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TPathParts } from "@docspace/shared/types";
 import { FolderType, DeviceType, FileType } from "@docspace/shared/enums";
-import { RoomType } from "@onlyoffice/docspace-api-sdk";
+import { RoomsType } from "@docspace/shared/enums";
 import FilesSelector from "@docspace/ui-kit/selectors/Files";
 import type {
   FilesSelectorProps,
@@ -797,7 +797,7 @@ const DocsLayoutCore = observer(
                                   withBreadCrumbs
                                   withSearch
                                   withCreate={!!selectorMode}
-                                  createDefineRoomType={RoomType.CustomRoom}
+                                  createDefineRoomType={RoomsType.CustomRoom}
                                   withFooterInput={false}
                                   withFooterCheckbox={false}
                                   withoutBackButton

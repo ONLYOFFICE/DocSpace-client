@@ -3,7 +3,7 @@
   "content": "Enter name",
   "content_en_sha1_hash": "5df85959e93e078f85961a413efbd7ba4ef678d2",
   "created_at": "2025-05-19T21:30:44.990Z",
-  "updated_at": "2026-06-01T21:20:44.406Z",
+  "updated_at": "2026-06-09T14:03:10.836Z",
   "comment": {
     "text": "This is a placeholder text for an input field, prompting the user to type a name for a new room, agent, or group.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/utils/hooks/useRoomsHelper.tsx",
-      "line_number": 112,
+      "line_number": 113,
       "context": "}, [isInit]);\n \n const createDropDownItems = React.useMemo(() => {\n return RoomsTypeValues.map((value) => {\n const onClick = () => {\n addInputItem(\"\", \"\", value as RoomTypeEnum, t(\"EnterName\"));\n };\n \n return (\n <RoomType\n key={value}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/SetAgentParams.tsx",
-      "line_number": 445,
+      "line_number": 454,
       "context": "<div className=\"logo-name-container\">\n {element}\n <InputParam\n id=\"shared_agent-name\"\n title={inputTitle}\n placeholder={t(\"Common:EnterName\")}\n value={agentParams.title}\n onChange={onChangeName}\n isDisabled={isDisabled}\n isValidTitle={isValidTitle}\n isWrongTitle={isWrongTitle}",
       "module": "/packages/client"
     },
@@ -79,7 +79,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
-      "line_number": 414,
+      "line_number": 493,
       "context": "</Text>\n <TextInput\n type={InputType.text}\n scale\n size={InputSize.base}\n placeholder={t(\"Common:EnterName\")}\n value={name}\n onChange={onChangeName}\n hasError={hasNameError}\n isAutoFocussed\n isDisabled={isLoading}",
       "module": "/packages/sdk"
     }

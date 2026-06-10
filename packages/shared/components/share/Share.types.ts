@@ -91,7 +91,9 @@ export type LinkRowProps = {
   onCloseContextMenu: () => void;
 
   isShareLink?: boolean;
+  blockExistingLinksOnRestrict?: boolean;
   hideLinkTypeSelector?: boolean;
+  isExternalShareRestricted?: boolean;
 } & (
   | {
       isRoomsLink?: undefined | false;
@@ -117,6 +119,9 @@ export type ExpiredComboBoxProps = {
 
 export type ShareProps = {
   infoPanelSelection: TFile | TFolder;
+  isExternalShareRestricted?: boolean;
+  blockExistingLinksOnRestrict?: boolean;
+  defaultShareLinkInternal?: boolean;
   setEmbeddingPanelData?: (value: {
     visible: boolean;
     item?: TFile | TFolder;
@@ -157,6 +162,7 @@ export interface LinkTitleProps {
 
   isLoaded?: boolean;
   disabledCopy?: boolean;
+  isBlockedByAdmin?: boolean;
 }
 
 export type TCopyShareLinkOptions = {
@@ -197,6 +203,9 @@ export interface UseShareProps {
   fileLinkProps?: TLink[];
   setView?: (view: string) => void;
   setIsScrollLocked?: (isScrollLocked: boolean) => void;
+  isExternalShareRestricted?: boolean;
+  blockExistingLinksOnRestrict?: boolean;
+  defaultShareLinkInternal?: boolean;
   onOpenPanel?: (options: {
     visible: boolean;
     updateAccessLink: () => Promise<void>;
@@ -256,6 +265,7 @@ export type ListProps = {
   loadNextPage: (params: IndexRange) => Promise<void>;
   linksBlockLength: number;
   withoutTitlesAndLinks: boolean;
+  restrictedBarVisible?: boolean;
   children: React.ReactNode;
 };
 

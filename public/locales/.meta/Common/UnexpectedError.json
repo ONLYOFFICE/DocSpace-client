@@ -3,7 +3,7 @@
   "content": "An unexpected error occurred. Try again later or contact support.",
   "content_en_sha1_hash": "25ad5a8afd50db67da636bee026c36dbe54b15d6",
   "created_at": "2025-05-19T21:30:49.388Z",
-  "updated_at": "2026-06-01T21:20:44.431Z",
+  "updated_at": "2026-06-09T11:32:15.283Z",
   "comment": {
     "text": "This is an error message that appears as a toast notification when an unexpected issue occurs, for example, when trying to update a tariff plan or link a payment card.",
     "is_auto": true,
@@ -103,7 +103,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
-      "line_number": 304,
+      "line_number": 322,
       "context": "},\n });\n const res = walletRes?.data?.response;\n \n if (res === false) {\n throw new Error(t(\"UnexpectedError\"));\n }\n \n if (isNewSubscription) {\n await fetchPortalTariff!(true);",
       "module": "/libs/ui-kit"
     },
@@ -127,7 +127,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/top-up-balance/FirstTopUpDialog.tsx",
-      "line_number": 186,
+      "line_number": 180,
       "context": "if (signal.aborted) return;\n \n onClose();\n } catch (error) {\n console.error(\"[first-topup] flow failed\", error);\n if (!signal.aborted) toastr.error(t(\"UnexpectedError\"));\n } finally {\n if (!signal.aborted) setIsLoading(false);\n }\n };",
       "module": "/libs/ui-kit"
     },
@@ -163,19 +163,19 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1053,
+      "line_number": 1057,
       "context": "try {\n await Promise.all(requests);\n this.setRangeStepByQuota();\n this.setBasicTariffContainer();\n } catch (error) {\n toastr.error(t(\"UnexpectedError\"));\n console.error(error);\n return;\n }\n \n this.setIsInitPaymentPage(true);",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1053,
+      "line_number": 1057,
       "context": "try {\n await Promise.all(requests);\n this.setRangeStepByQuota();\n this.setBasicTariffContainer();\n } catch (error) {\n toastr.error(t(\"UnexpectedError\"));\n console.error(error);\n return;\n }\n \n this.setIsInitPaymentPage(true);",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1053,
+      "line_number": 1057,
       "context": "try {\n await Promise.all(requests);\n this.setRangeStepByQuota();\n this.setBasicTariffContainer();\n } catch (error) {\n toastr.error(t(\"UnexpectedError\"));\n console.error(error);\n return;\n }\n \n this.setIsInitPaymentPage(true);",
       "module": "/libs/ui-kit"
     },
@@ -294,38 +294,50 @@
       "module": "/packages/sdk"
     },
     {
+      "file_path": "/packages/sdk/src/app/(private)/_hooks/useEncryptedCopyMove.ts",
+      "line_number": 226,
+      "context": "FilesFilter.getDefault(),\n )) as TGetFolder;\n const dest = resolveEncryptedCopyDest(destFolderData);\n \n if (dest.mode === \"blocked\") {\n toastr.error(t(\"Common:UnexpectedError\"));\n return;\n }\n \n const { decryptEncryptedItemToFile, addCopySuffix } =\n await loadCopyModule();",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_hooks/useEncryptedDownload.ts",
+      "line_number": 132,
+      "context": "});\n \n if (controller.signal.aborted) return;\n \n if (!result.success || !result.file) {\n toastr.error(result.error || t(\"Common:UnexpectedError\"));\n return;\n }\n triggerFileDownload(result.file, result.file.name);\n } catch (error) {\n if (controller.signal.aborted) return;",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-row-view/sub-components/RoomsRow.tsx",
-      "line_number": 119,
+      "line_number": 123,
       "context": "if (!canUnpin) return;\n try {\n await api.rooms.unpinRoom(item.id);\n refreshRooms?.();\n } catch {\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n }, [canUnpin, item.id, refreshRooms, t]);\n \n const onUnmuteClick = React.useCallback(async () => {\n if (!canMute) return;",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-row-view/sub-components/RoomsRow.tsx",
-      "line_number": 119,
+      "line_number": 123,
       "context": "if (!canUnpin) return;\n try {\n await api.rooms.unpinRoom(item.id);\n refreshRooms?.();\n } catch {\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n }, [canUnpin, item.id, refreshRooms, t]);\n \n const onUnmuteClick = React.useCallback(async () => {\n if (!canMute) return;",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-table-view/RoomsTableViewRow.tsx",
-      "line_number": 184,
+      "line_number": 191,
       "context": "if (!canUnpin) return;\n try {\n await api.rooms.unpinRoom(item.id);\n refreshRooms?.();\n } catch {\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n }, [canUnpin, item.id, refreshRooms, t]);\n \n const onUnmuteClick = React.useCallback(async () => {\n if (!canMute) return;",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-table-view/RoomsTableViewRow.tsx",
-      "line_number": 184,
+      "line_number": 191,
       "context": "if (!canUnpin) return;\n try {\n await api.rooms.unpinRoom(item.id);\n refreshRooms?.();\n } catch {\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n }, [canUnpin, item.id, refreshRooms, t]);\n \n const onUnmuteClick = React.useCallback(async () => {\n if (!canMute) return;",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-tile-view/sub-components/RoomsTile.tsx",
-      "line_number": 149,
+      "line_number": 153,
       "context": "if (!canUnpin) return;\n try {\n await api.rooms.unpinRoom(item.id);\n refreshRooms?.();\n } catch {\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n }, [canUnpin, item.id, refreshRooms, t]);\n \n const onUnmuteClick = React.useCallback(async () => {\n if (!canMute) return;",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-tile-view/sub-components/RoomsTile.tsx",
-      "line_number": 149,
+      "line_number": 153,
       "context": "if (!canUnpin) return;\n try {\n await api.rooms.unpinRoom(item.id);\n refreshRooms?.();\n } catch {\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n }, [canUnpin, item.id, refreshRooms, t]);\n \n const onUnmuteClick = React.useCallback(async () => {\n if (!canMute) return;",
       "module": "/packages/sdk"
     },

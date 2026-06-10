@@ -3,7 +3,7 @@
   "content": "User removed and their access to existing encrypted files has been revoked.",
   "content_en_sha1_hash": "13c1818845a6e38f11c3e4733ae0db1ee145743c",
   "created_at": "2026-05-24T17:27:26.338Z",
-  "updated_at": "2026-05-24T18:10:55.668Z",
+  "updated_at": "2026-06-09T09:43:10.881Z",
   "comment": {
     "text": "Success toast message appearing after a user is removed and their access to encrypted files is successfully revoked.",
     "is_auto": true,
@@ -16,6 +16,12 @@
       "line_number": 188,
       "context": "}),\n );\n return;\n }\n if (results.length > 0) {\n toastr.success(t(\"Common:EncryptedRevokeCompleted\"));\n }\n } catch (err) {\n console.error(\"[ENCRYPTION] revoke encrypted access failed:\", err);\n toastr.error(t(\"Common:EncryptedRevokeFailed\"));\n }",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_hooks/usePrivateRemoveMemberFlow.ts",
+      "line_number": 149,
+      "context": "}),\n );\n return;\n }\n if (results.length > 0) {\n toastr.success(t(\"Common:EncryptedRevokeCompleted\"));\n }\n } catch {\n toastr.error(t(\"Common:EncryptedRevokeFailed\"));\n }\n } catch (error) {",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -149,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

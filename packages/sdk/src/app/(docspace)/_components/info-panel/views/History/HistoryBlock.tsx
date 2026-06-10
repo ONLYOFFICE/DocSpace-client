@@ -30,6 +30,7 @@ import React from "react";
 import classNames from "classnames";
 import { decode } from "he";
 import { useTranslation } from "react-i18next";
+import { usePathname } from "next/navigation";
 
 import {
   Avatar,
@@ -43,6 +44,8 @@ import {
   parseToDateTime,
 } from "@docspace/ui-kit/utils/date";
 import { getFileExtension } from "@docspace/shared/utils/common";
+import { getCachedEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
+import { useFilenameCacheVersion } from "@docspace/shared/hooks/useResolvedFileTitle";
 import type {
   TFeedAction,
   TFeedData,
@@ -95,7 +98,8 @@ const HistoryBlock = ({
   const { getIcon } = useItemIcon({
     filesSettings: docsSettingsStore.filesSettings ?? undefined,
   });
-  const { openFolder } = useFolderActions({ t });
+  const { openLocation } = useFolderActions({ t });
+  const pathname = usePathname();
 
   const hasRelatedItems = feed.related.length > 0;
   const { getFeedTranslation } = useFeedTranslation(feed, hasRelatedItems);
@@ -105,9 +109,12 @@ const HistoryBlock = ({
     feedInfo &&
     (feedInfo.targetType === "file" || feedInfo.targetType === "folder");
 
+  useFilenameCacheVersion();
+
   const isFolder = feedInfo?.targetType === "folder";
   const data = (feed.data ?? {}) as TFeedData;
-  const rawTitle = data.title || data.newTitle || "";
+  const rawTitle =
+    getCachedEncryptedFilename(data.id) ?? (data.title || data.newTitle || "");
   const itemTitle = nameWithoutExtension(rawTitle);
   const fileExst = isFolder ? "" : getFileExtension(rawTitle);
 
@@ -128,7 +135,13 @@ const HistoryBlock = ({
 
   const onOpenLocation = () => {
     if (!data.parentId) return;
-    openFolder(data.parentId, data.parentTitle ?? "");
+
+    const section = pathname?.split("/")[1] ?? "";
+    const targetPath = ["rooms", "archive"].includes(section)
+      ? `/${section}/${data.parentId}`
+      : undefined;
+
+    openLocation(data.parentId, data.id, itemTitle, targetPath);
   };
 
   return (

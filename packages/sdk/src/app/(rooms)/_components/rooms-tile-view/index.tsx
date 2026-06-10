@@ -51,6 +51,7 @@ const RoomsTileView = ({
   hasMoreFiles,
   currentFolderId,
   filesLength,
+  hasEncryptionKeys,
   ...callbacks
 }: RoomsTileViewProps) => {
   const { t } = useTranslation();
@@ -78,6 +79,7 @@ const RoomsTileView = ({
           key={`room_${item.id}`}
           item={item}
           index={index}
+          hasEncryptionKeys={hasEncryptionKeys}
           {...callbacks}
         />
       ))}

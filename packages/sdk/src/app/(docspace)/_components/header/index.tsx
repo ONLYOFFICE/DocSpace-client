@@ -46,7 +46,7 @@ import Navigation, {
 } from "@docspace/ui-kit/components/navigation";
 import { TableGroupMenu } from "@docspace/ui-kit/components/table";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
-import { FolderType, DeviceType } from "@docspace/shared/enums";
+import { FolderType, DeviceType, RoomsType } from "@docspace/shared/enums";
 import useDeviceType from "@/hooks/useDeviceType";
 import { useNavigationStore } from "../../_store/NavigationStore";
 import { useFilesSelectionStore } from "../../_store/FilesSelectionStore";
@@ -56,8 +56,12 @@ import useFolderActions from "../../_hooks/useFolderActions";
 import useHeaderMenu from "../../_hooks/useHeaderMenu";
 import { DeleteContext } from "../../_contexts/DeleteContext";
 import { FileOperationsContext } from "../../_contexts/FileOperationsContext";
+import { RoomActionsContext } from "@/app/(rooms)/_contexts/RoomActionsContext";
 import { useHeaderContextMenu } from "../../_hooks/useHeaderContextMenu";
 import useContextMenuModel from "../../_hooks/useContextMenuModel";
+import InvitePanel from "@/app/(rooms)/_components/invite-panel";
+import ChangeRoomOwnerDialog from "@/app/(rooms)/_components/change-room-owner-dialog";
+import LeaveRoomDialog from "@/app/(rooms)/_components/leave-room-dialog";
 import type { HeaderProps } from "./Header.types";
 
 export type { HeaderProps };
@@ -72,6 +76,8 @@ const Header = ({
   onToggleInfoPanel,
   headerOffset = 0,
   aiChatButton,
+  titleIcon = "",
+  titleIconTooltip = "",
 }: HeaderProps) => {
   const searchParams = useSearchParams();
 
@@ -89,24 +95,35 @@ const Header = ({
   const { currentDeviceType } = useDeviceType();
   const deleteCtx = React.useContext(DeleteContext);
   const fileOpsCtx = React.useContext(FileOperationsContext);
+  const roomActionsCtx = React.useContext(RoomActionsContext);
   const isTrashSection = filesListStore.rootFolderType === FolderType.TRASH;
 
-  const { getContextOptionsFolder, isRoom } = useHeaderContextMenu(
-    filesListStore.currentFolder ?? current,
-  );
+  const {
+    getContextOptionsFolder,
+    isRoom,
+    invitingRoom,
+    setInvitingRoom,
+    changingOwnerRoom,
+    setChangingOwnerRoom,
+    user,
+  } = useHeaderContextMenu(filesListStore.currentFolder ?? current);
 
   const { getHeaderContextMenuModel } = useContextMenuModel({
     onDeleteClick: deleteCtx?.deleteItem,
-    onDeleteSelectedClick: deleteCtx?.deleteItems,
+    onDeleteSelectedClick:
+      roomActionsCtx?.deleteSelected ?? deleteCtx?.deleteItems,
     onCopyClick: !isTrashSection ? fileOpsCtx?.copyItem : undefined,
     onMoveClick: !isTrashSection ? fileOpsCtx?.moveItem : undefined,
     onDuplicateClick: !isTrashSection ? fileOpsCtx?.duplicateItem : undefined,
     onRestoreClick: isTrashSection ? fileOpsCtx?.restoreItem : undefined,
     onCopySelectedClick: !isTrashSection ? fileOpsCtx?.copyItems : undefined,
     onMoveSelectedClick: !isTrashSection ? fileOpsCtx?.moveItems : undefined,
-    onRestoreSelectedClick: isTrashSection
-      ? fileOpsCtx?.restoreItems
-      : undefined,
+    onRestoreSelectedClick: roomActionsCtx?.restoreSelected
+      ?? (isTrashSection ? fileOpsCtx?.restoreItems : undefined),
+    isRoomsFolder: !!roomActionsCtx,
+    isArchiveRoomsFolder: !!roomActionsCtx?.isArchive,
+    onArchiveSelectedClick: roomActionsCtx?.archiveSelected,
+    onPinSelectedClick: roomActionsCtx?.pinSelected,
   });
 
   const { getHeaderMenu, onCheckboxChange } = useHeaderMenu();
@@ -124,6 +141,21 @@ const Header = ({
   const title = activeCurrent?.title;
   const id = activeCurrent?.id;
 
+  // Desktop trash warning ("Items in Trash are automatically deleted after
+  // 30 days") — rendered by ui-kit Navigation/ControlBtn from titles.warningText
+  // on desktop. Mobile shows the same text via Section.SectionWarning.
+  const navigationTitles = useMemo(
+    () =>
+      isTrashSection
+        ? {
+            warningText: t("Common:TrashAutoDeleteWarning", {
+              sectionName: t("Common:TrashSection"),
+            }),
+          }
+        : undefined,
+    [isTrashSection, t],
+  );
+
   const pathParts = filesListStore.pathParts ?? pathPartsProp;
 
   const isInRoomsContext =
@@ -136,6 +168,12 @@ const Header = ({
   // return rootFolderId = 0 for the section root itself, breaking the equality check.
   const isRootSection = (pathParts?.length ?? 0) <= 1;
   const isRoomsFolder = isInRoomsContext && isRootSection;
+
+  // Trash exposes a header context menu (Empty all / Restore all) even at its
+  // root, as long as it is non-empty — mirror the client.
+  const showTrashHeaderMenu = isTrashSection && !isEmptyList;
+  // Show the kebab / enable the menu in subfolders OR at trash root (non-empty).
+  const isHeaderMenuVisible = !isRootSection || showTrashHeaderMenu;
 
   const navigationItems: TNavigationItem[] = useMemo(() => {
     if (!pathParts) return [];
@@ -204,75 +242,109 @@ const Header = ({
   if (!current || !pathParts) return null;
 
   return (
-    <div
-      className={classnames(styles.headerContainer, {
-        [styles.infoPanelVisible]: isInfoPanelVisible,
-        [styles.isExternalFolder]: false,
-        [styles.isLifetimeEnabled]: false,
-      })}
-      style={outerOffsetStyle}
-    >
-      {tableGroupMenuVisible ? (
-        <TableGroupMenu
-          withComboBox
-          withoutInfoPanelToggler={!onToggleInfoPanel}
-          isChecked={isChecked}
-          isIndeterminate={!isChecked}
-          headerMenu={getHeaderContextMenuModel()}
-          onClick={() => {}}
-          onChange={onCheckboxChange}
-          toggleInfoPanel={onToggleInfoPanel ?? (() => {})}
-          isInfoPanelVisible={isInfoPanelVisible}
-          checkboxOptions={getHeaderMenu()}
-        />
-      ) : (
-        <div className="header-container" style={innerOffsetStyle}>
-          <Navigation
-            hideInfoPanel={() => {}}
-            showText
-            isRootFolder={currentNavigationItems.length === 0}
-            canCreate={false}
-            title={navigationStore.currentTitle ?? title}
-            rootRoomTitle={
-              currentNavigationItems.length === 0 ? "" : pathParts[0].title
-            }
-            isDesktop={currentDeviceType === DeviceType.desktop}
-            navigationItems={currentNavigationItems}
-            getContextOptionsPlus={() => []}
-            getContextOptionsFolder={getContextOptionsFolder}
-            onClickFolder={(idFolder) => {
-              openFolder(
-                idFolder,
-                currentNavigationItems.find((v) => v.id === idFolder)?.title ??
-                  currentNavigationItems[0].title,
-              );
-            }}
-            isTrashFolder={false}
-            isEmptyPage={isEmptyList}
-            isEmptyFilesList={isEmptyList}
-            onBackToParentFolder={onBackToParentFolder}
-            showRootFolderTitle={false}
-            withMenu={!isRootSection}
-            currentDeviceType={currentDeviceType}
-            titleIcon=""
-            titleIconTooltip=""
-            showNavigationButton={false}
-            isCurrentFolderInfo={false}
-            showTitle={showTitle}
-            isRoom={isRoom}
-            isInfoPanelVisible={isInfoPanelVisible}
+    <>
+      <div
+        className={classnames(styles.headerContainer, {
+          [styles.infoPanelVisible]: isInfoPanelVisible,
+          [styles.isExternalFolder]: false,
+          [styles.isLifetimeEnabled]: false,
+        })}
+        style={outerOffsetStyle}
+      >
+        {tableGroupMenuVisible ? (
+          <TableGroupMenu
+            withComboBox
+            withoutInfoPanelToggler={!onToggleInfoPanel}
+            isChecked={isChecked}
+            isIndeterminate={!isChecked}
+            headerMenu={getHeaderContextMenuModel()}
+            onClick={() => {}}
+            onChange={onCheckboxChange}
             toggleInfoPanel={onToggleInfoPanel ?? (() => {})}
-            withLogo=""
-            burgerLogo=""
-            onLogoClick={onBurgerClick ?? (() => {})}
-            clearTrash={() => {}}
-            showFolderInfo={() => {}}
-            aiChatButton={aiChatButton}
-            isContextButtonVisible={!isRootSection}
+            isInfoPanelVisible={isInfoPanelVisible}
+            checkboxOptions={getHeaderMenu()}
           />
-        </div>
-      )}
-    </div>
+        ) : (
+          <div className="header-container" style={innerOffsetStyle}>
+            <Navigation
+              showText
+              isRootFolder={currentNavigationItems.length === 0}
+              canCreate={false}
+              title={navigationStore.currentTitle ?? title}
+              rootRoomTitle={
+                currentNavigationItems.length === 0 ? "" : pathParts[0].title
+              }
+              isDesktop={currentDeviceType === DeviceType.desktop}
+              navigationItems={currentNavigationItems}
+              getContextOptionsPlus={() => []}
+              getContextOptionsFolder={getContextOptionsFolder}
+              onClickFolder={(idFolder) => {
+                openFolder(
+                  idFolder,
+                  currentNavigationItems.find((v) => v.id === idFolder)
+                    ?.title ?? currentNavigationItems[0].title,
+                );
+              }}
+              isTrashFolder={isTrashSection}
+              titles={navigationTitles}
+              isEmptyPage={isEmptyList}
+              isEmptyFilesList={isEmptyList}
+              onBackToParentFolder={onBackToParentFolder}
+              showRootFolderTitle={false}
+              withMenu={isHeaderMenuVisible}
+              currentDeviceType={currentDeviceType}
+              titleIcon={titleIcon}
+              titleIconTooltip={titleIconTooltip}
+              showNavigationButton={false}
+              isCurrentFolderInfo={false}
+              showTitle={showTitle}
+              isRoom={isRoom}
+              isInfoPanelVisible={isInfoPanelVisible}
+              toggleInfoPanel={onToggleInfoPanel ?? (() => {})}
+              withLogo=""
+              burgerLogo=""
+              onLogoClick={onBurgerClick ?? (() => {})}
+              clearTrash={() => {}}
+              showFolderInfo={() => {}}
+              aiChatButton={aiChatButton}
+              isContextButtonVisible={isHeaderMenuVisible}
+            />
+          </div>
+        )}
+      </div>
+      {invitingRoom ? (
+        <InvitePanel
+          visible
+          onClose={() => setInvitingRoom(null)}
+          roomId={invitingRoom.id as number}
+          roomType={
+            (invitingRoom as unknown as { roomType?: RoomsType }).roomType ??
+            RoomsType.EditingRoom
+          }
+          user={user ?? undefined}
+          isPrivateRoom={
+            (invitingRoom as unknown as { private?: boolean }).private ?? false
+          }
+          onMembersUpdated={() => {}}
+        />
+      ) : null}
+      {changingOwnerRoom ? (
+        <ChangeRoomOwnerDialog
+          visible
+          onClose={() => setChangingOwnerRoom(null)}
+          roomId={changingOwnerRoom.id as number}
+          roomOwnerId={
+            (changingOwnerRoom as unknown as { createdBy?: { id?: string } })
+              .createdBy?.id
+          }
+          currentUserId={user?.id}
+        />
+      ) : null}
+      <LeaveRoomDialog
+        currentUserId={user?.id}
+        onTransferOwnership={(room) => setChangingOwnerRoom(room)}
+      />
+    </>
   );
 };
 

@@ -1,0 +1,29 @@
+{
+  "key_path": "ExternalLinksDisabledForGuests",
+  "content": "Guests cannot access this room because external links are disabled by your administrator.",
+  "content_en_sha1_hash": "38d0ed74a231eb7b4b34a53dc5a5b865bf546680",
+  "created_at": "2026-06-02T08:43:21.573Z",
+  "updated_at": "2026-06-02T08:44:23.085Z",
+  "comment": {
+    "text": "Informational text in a notification bar within the members info panel, shown when guest access to a room is restricted by administrator settings.",
+    "is_auto": true,
+    "updated_at": "2026-06-02T08:44:23.085Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.tsx",
+      "line_number": 239,
+      "context": "data-testid=\"info_panel_members_restricted_bar\"\n >\n <PublicRoomBar\n hideHeader\n headerText=\"\"\n bodyText={t(\"Common:ExternalLinksDisabledForGuests\")}\n />\n </div>,\n );\n }\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

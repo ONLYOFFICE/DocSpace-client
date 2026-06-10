@@ -3,7 +3,7 @@
   "content": "Ready to fill out",
   "content_en_sha1_hash": "49288a5a196d7e8da840c21ce9572896f1dc613d",
   "created_at": "2025-05-19T21:30:47.733Z",
-  "updated_at": "2026-05-24T17:27:49.207Z",
+  "updated_at": "2026-06-09T09:43:10.952Z",
   "comment": {
     "text": "This is a toast message and tooltip that indicates a form is now ready for users to fill out.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 330,
+      "line_number": 334,
       "context": "{startFilling && (\n <IconButton\n size={sizeBadge}\n iconName={FormFillIcon}\n onClick={onFilesClick}\n title={t(\"Common:ReadyToFillOut\")}\n color=\"accent\"\n hoverColor=\"accent\"\n className=\"badge icons-group is-editing tablet-badge tablet-edit\"\n />\n )}",
       "module": "/packages/shared"
     }

@@ -43,6 +43,9 @@ import {
   BlankPdfIcon,
 } from "@docspace/ui-kit/components/quick-actions/icons";
 
+import CreateNewFolderIllustration from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
+import UploadDeviceIllustration from "PUBLIC_DIR/images/emptyview/upload.device.pdf.form.svg";
+
 import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
 import ActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
@@ -202,5 +205,32 @@ export function useDocsMenuModels({
     [t, openCreateDialog],
   );
 
-  return { desktopModel, actionOptions, buttonOptions, quickActionItems };
+  // Private rooms hide the document/spreadsheet/PDF quick actions (encrypted
+  // rooms only allow folders and uploads). The banner mirrors the two actions
+  // offered by the private-room empty view, reusing the same illustrations.
+  const privateQuickActionItems = React.useMemo<QuickActionItem[]>(
+    () => [
+      {
+        id: "quick-new-folder",
+        icon: <CreateNewFolderIllustration />,
+        label: t("Common:NewFolder"),
+        onClick: () => openCreateDialog("folder"),
+      },
+      {
+        id: "quick-upload-files",
+        icon: <UploadDeviceIllustration />,
+        label: t("Common:UploadFiles"),
+        onClick: onUploadFiles,
+      },
+    ],
+    [t, openCreateDialog, onUploadFiles],
+  );
+
+  return {
+    desktopModel,
+    actionOptions,
+    buttonOptions,
+    quickActionItems,
+    privateQuickActionItems,
+  };
 }

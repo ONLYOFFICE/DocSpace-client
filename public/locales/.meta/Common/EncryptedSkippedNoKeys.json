@@ -3,7 +3,7 @@
   "content": "Could not share encrypted files with {{users}}: they have not set up encryption keys yet. Ask them to generate keys in their profile and retry from the Members panel.",
   "content_en_sha1_hash": "9fd9f29d8af2967cf82cc2b3352c58c7b329ca8e",
   "created_at": "2026-05-24T17:27:26.395Z",
-  "updated_at": "2026-06-01T21:20:44.424Z",
+  "updated_at": "2026-06-09T09:43:10.851Z",
   "comment": {
     "text": "Warning toast message appearing when sharing encrypted files with users who have not configured encryption keys. The {{users}} variable contains a comma-separated list of names.",
     "is_auto": true,
@@ -16,6 +16,12 @@
       "line_number": 542,
       "context": "const mismatchNames = skippedMembers\n .filter((m) => m.reason === \"key-mismatch-refused\")\n .map(formatName);\n if (noKeyNames.length > 0) {\n toastr.warning(\n t(\"Common:EncryptedSkippedNoKeys\", {\n users: noKeyNames.join(\", \"),\n }),\n );\n }\n if (mismatchNames.length > 0) {",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_hooks/usePrivateInviteFlow.ts",
+      "line_number": 162,
+      "context": ".filter((m) => m.reason === \"key-mismatch-refused\")\n .map((m) => m.displayName || m.id);\n \n if (noKeyNames.length > 0) {\n toastr.warning(\n t(\"Common:EncryptedSkippedNoKeys\", {\n users: noKeyNames.join(\", \"),\n }),\n );\n }\n if (mismatchNames.length > 0) {",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

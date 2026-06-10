@@ -3,7 +3,7 @@
   "content": "Set up your encryption keys in Profile before creating a private room.",
   "content_en_sha1_hash": "a72a5c40597b42602477a7e20502ab346fa4508d",
   "created_at": "2026-05-24T17:27:26.632Z",
-  "updated_at": "2026-06-01T21:20:44.520Z",
+  "updated_at": "2026-06-09T09:43:10.936Z",
   "comment": {
     "text": "Error toast message appearing when a user attempts to create a private room without having encryption keys configured in their Profile.",
     "is_auto": true,
@@ -16,6 +16,12 @@
       "line_number": 632,
       "context": "keys = null;\n }\n }\n \n if (!keys || keys.length === 0) {\n toastr.error(t(\"Common:EncryptionKeysRequiredForPrivateRoom\"));\n return;\n }\n }\n \n const createRoomData = {",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
+      "line_number": 448,
+      "context": "\"var(--row-hover-background, rgba(0, 0, 0, 0.04))\",\n }}\n data-test-id=\"create_edit_room_keys_required\"\n >\n <Text>\n {t(\"Common:EncryptionKeysRequiredForPrivateRoom\")}\n {canStartKeySetup ? null : (\n <>\n {\" \"}\n <Link\n tag=\"a\"",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

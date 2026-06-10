@@ -37,6 +37,7 @@ import { LinkWithDropdown } from "@docspace/ui-kit/components/link-with-dropdown
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { isMobile } from "../../../utils";
+import { useResolvedFileTitle } from "../../../hooks/useResolvedFileTitle";
 
 import { type DownloadRowProps, isFile } from "../DownloadDialog.types";
 import styles from "../DownloadDialog.module.scss";
@@ -56,6 +57,8 @@ export const DownloadRow = (props: DownloadRowProps) => {
 
   const element = getItemIcon(file);
 
+  const resolvedTitle = useResolvedFileTitle(file);
+
   return (
     <div className={styles.downloadDialogRow} data-testid={dataTestId}>
       <div className={styles.downloadDialogMainContent}>
@@ -71,12 +74,12 @@ export const DownloadRow = (props: DownloadRowProps) => {
         <Text
           className={styles.downloadDialogTitle}
           truncate
-          title={file.title}
+          title={resolvedTitle}
           fontSize="14px"
           fontWeight={600}
           dir="auto"
         >
-          {file.title}
+          {resolvedTitle}
         </Text>
       </div>
 
@@ -108,7 +111,7 @@ export const DownloadRow = (props: DownloadRowProps) => {
           <Text
             className={styles.downloadDialogOtherText}
             truncate
-            title={file.title}
+            title={resolvedTitle}
             fontSize="13px"
             fontWeight={600}
             noSelect

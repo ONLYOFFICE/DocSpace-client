@@ -80,6 +80,10 @@
   }
 }
 
+.restrictedLabel {
+  color: var(--info-panel-link-blocked);
+}
+
 .styledAuthorCell {
   display: flex;
   width: 100%;

@@ -3,7 +3,7 @@
   "content": "Remove from list",
   "content_en_sha1_hash": "23a97691b4e6c4fdf5bb0cb8f8d5ab31d1af9fd4",
   "created_at": "2025-05-19T21:30:47.827Z",
-  "updated_at": "2026-06-01T21:20:44.412Z",
+  "updated_at": "2026-06-09T14:03:10.841Z",
   "comment": {
     "text": "This is a button label or a confirmation dialog title. It appears when a user wants to remove an item from a list, such as unsubscribing from a shared room or removing a shared file/folder.",
     "is_auto": true,
@@ -14,42 +14,42 @@
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
       "line_number": 230,
-      "context": "if (isRecycleBinFolder) return t(\"EmptyTrashDialog:DeleteForeverTitle\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:Confirmation\");\n \n if (unsubscribe) return t(\"Common:RemoveFromList\");\n \n return t(\"Common:SectionMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n };",
+      "context": "if (isRecycleBinFolder) return t(\"Common:DeleteForeverTitle\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:Confirmation\");\n \n if (unsubscribe) return t(\"Common:RemoveFromList\");\n \n return t(\"Common:SectionMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2716,
+      "line_number": 2736,
       "context": "disabled: !item.security?.Duplicate,\n },\n {\n id: \"option_remove-shared-room\",\n key: \"remove-shared-room\",\n label: t(\"Common:RemoveFromList\"),\n icon: CircleCrossSvgUrl,\n onClick: () => this.onRemoveSharedFilesOrFolder([item]),\n disabled:\n this.userStore?.user?.isAdmin ||\n this.userStore?.user?.isOwner ||",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2716,
+      "line_number": 2736,
       "context": "disabled: !item.security?.Duplicate,\n },\n {\n id: \"option_remove-shared-room\",\n key: \"remove-shared-room\",\n label: t(\"Common:RemoveFromList\"),\n icon: CircleCrossSvgUrl,\n onClick: () => this.onRemoveSharedFilesOrFolder([item]),\n disabled:\n this.userStore?.user?.isAdmin ||\n this.userStore?.user?.isOwner ||",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2716,
+      "line_number": 2736,
       "context": "disabled: !item.security?.Duplicate,\n },\n {\n id: \"option_remove-shared-room\",\n key: \"remove-shared-room\",\n label: t(\"Common:RemoveFromList\"),\n icon: CircleCrossSvgUrl,\n onClick: () => this.onRemoveSharedFilesOrFolder([item]),\n disabled:\n this.userStore?.user?.isAdmin ||\n this.userStore?.user?.isOwner ||",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2716,
+      "line_number": 2736,
       "context": "disabled: !item.security?.Duplicate,\n },\n {\n id: \"option_remove-shared-room\",\n key: \"remove-shared-room\",\n label: t(\"Common:RemoveFromList\"),\n icon: CircleCrossSvgUrl,\n onClick: () => this.onRemoveSharedFilesOrFolder([item]),\n disabled:\n this.userStore?.user?.isAdmin ||\n this.userStore?.user?.isOwner ||",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2716,
+      "line_number": 2736,
       "context": "disabled: !item.security?.Duplicate,\n },\n {\n id: \"option_remove-shared-room\",\n key: \"remove-shared-room\",\n label: t(\"Common:RemoveFromList\"),\n icon: CircleCrossSvgUrl,\n onClick: () => this.onRemoveSharedFilesOrFolder([item]),\n disabled:\n this.userStore?.user?.isAdmin ||\n this.userStore?.user?.isOwner ||",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 3008,
+      "line_number": 3051,
       "context": ".set(\"downloadAs\", downloadAs)\n .set(\"copy\", copy)\n .set(\"delete\", {\n id: \"menu-remove-from-shared-with-me\",\n key: \"remove-from-shared-with-me\",\n label: t(\"Common:RemoveFromList\"),\n onClick: () => {\n setUnsubscribe(true);\n setDeleteDialogVisible(true);\n },\n iconUrl: RemoveOutlineSvgUrl,",
       "module": "/packages/client"
     },
@@ -61,19 +61,19 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 301,
+      "line_number": 372,
       "context": "const getRemoveFromRecentItem = useCallback(\n (i: TFileItem) => {\n return {\n id: \"option_remove-from-recent\",\n key: \"remove-from-recent\",\n label: t(\"Common:RemoveFromList\"),\n icon: RemoveOutlineSvgUrl,\n onClick: () => removeFromRecent(i),\n disabled: false,\n };\n },",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 301,
+      "line_number": 372,
       "context": "const getRemoveFromRecentItem = useCallback(\n (i: TFileItem) => {\n return {\n id: \"option_remove-from-recent\",\n key: \"remove-from-recent\",\n label: t(\"Common:RemoveFromList\"),\n icon: RemoveOutlineSvgUrl,\n onClick: () => removeFromRecent(i),\n disabled: false,\n };\n },",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/sub-components/PasswordRow.tsx",
-      "line_number": 140,
+      "line_number": 141,
       "context": "});\n \n if (type !== \"remove\") {\n options.push({\n key: \"remove\",\n label: t(\"Common:RemoveFromList\"),\n onClick: removeFromList,\n disabled: false,\n icon: RemoveIcon,\n });\n }",
       "module": "/packages/shared"
     }

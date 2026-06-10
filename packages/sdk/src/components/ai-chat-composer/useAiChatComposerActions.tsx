@@ -31,11 +31,12 @@ import { useTranslation } from "react-i18next";
 
 import type { ComposerAction } from "@docspace/ui-kit/ai-agent/providers";
 import { getBrandName } from "@docspace/shared/constants/brands";
-import CatalogDocumentsUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
-import UploadIconUrl from "PUBLIC_DIR/images/icons/16/upload.react.svg?url";
+import CatalogDocuments from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg";
+import UploadIcon from "PUBLIC_DIR/images/icons/16/upload.react.svg";
 
 import DocSpaceFilesAttachDialog from "./DocSpaceFilesAttachDialog";
 import DeviceUploader, { type DeviceUploaderHandle } from "./DeviceUploader";
+import styles from "./styles.module.scss";
 
 export type UseAiChatComposerActionsResult = {
   // Pass to <AiAgentProviders composerActions={...} />.
@@ -72,7 +73,7 @@ export const useAiChatComposerActions = (): UseAiChatComposerActionsResult => {
           productName: getBrandName("ProductName"),
           defaultValue: "Add files from {{productName}}",
         }),
-        icon: CatalogDocumentsUrl,
+        icon: <CatalogDocuments className={styles.composerActionIcon} />,
         onClick: () => setPickerVisible(true),
       },
       {
@@ -80,7 +81,7 @@ export const useAiChatComposerActions = (): UseAiChatComposerActionsResult => {
         text: t("Common:UploadFromDevice", {
           defaultValue: "Upload from device",
         }),
-        icon: UploadIconUrl,
+        icon: <UploadIcon className={styles.composerActionIcon} />,
         onClick: () => deviceUploaderRef.current?.open(),
       },
     ],

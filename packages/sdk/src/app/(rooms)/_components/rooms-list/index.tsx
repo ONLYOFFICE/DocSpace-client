@@ -41,9 +41,12 @@ import type {
 import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TSortBy, TCreatedBy } from "@docspace/shared/types";
+import type { TLogo } from "@docspace/ui-kit/types";
+import { normalizeRoomLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
 import {
   DeviceType,
   FolderType,
+  RoomPrivacyFilter,
   RoomSearchArea,
   RoomsType,
 } from "@docspace/shared/enums";
@@ -83,6 +86,21 @@ import { RoomsRefreshContext } from "../../_contexts/RoomsRefreshContext";
 import { useRoomsTagsStore } from "../../_store/RoomsTagsStore";
 import useResetSelectionClick from "@/app/(docspace)/(files)/_components/list/hooks/useResetSelectionClick";
 
+export type RoomActions = {
+  archiveSelected: (items: (TFolderItem | TFileItem)[]) => void;
+  deleteSelected: (items: (TFolderItem | TFileItem)[]) => void;
+  restoreSelected: (items: (TFolderItem | TFileItem)[]) => void;
+  pinSelected: (items: (TFolderItem | TFileItem)[]) => Promise<void>;
+  editRoom: (item: TFolderItem | TFileItem) => void;
+  changeOwner: (item: TFolderItem | TFileItem) => void;
+  inviteRoom: (item: TFolderItem | TFileItem) => void;
+  archiveRoom: (item: TFolderItem | TFileItem) => void;
+  deleteRoom: (item: TFolderItem | TFileItem) => void;
+  restoreRoom: (item: TFolderItem | TFileItem) => void;
+  infoRoom: (item: TFolderItem | TFileItem) => void;
+  roomChanged: (id: number) => void;
+};
+
 type RoomsListProps = {
   folders: TFolder[];
   files: TFile[];
@@ -94,6 +112,19 @@ type RoomsListProps = {
   user?: TUser;
   isArchive?: boolean;
   refreshRef?: React.MutableRefObject<(() => void) | null>;
+  emptyView?: React.ReactNode;
+  /** Sticky breadcrumb title that survives re-fetches. */
+  titleOverride?: string;
+  isPrivate?: boolean;
+  /** Picks shield vs padlock icon on private-room cards. */
+  hasEncryptionKeys?: boolean;
+  /** Private-only override; falls through to public dialogs otherwise. */
+  onPrivateInviteRoom?: (room: TFolder) => void;
+  onPrivateChangeOwner?: (room: TFolder) => void;
+  // Populated by RoomsList so RoomsLayout can hand the same handlers to the
+  // shared Header's TableGroupMenu without lifting the dialog state out of
+  // RoomsList. Mirrors the existing `refreshRef` pattern.
+  roomActionsRef?: React.MutableRefObject<RoomActions | null>;
   infoPanelVisible?: boolean;
 };
 
@@ -108,6 +139,13 @@ const RoomsList = ({
   user,
   isArchive,
   refreshRef,
+  emptyView,
+  titleOverride,
+  isPrivate,
+  hasEncryptionKeys,
+  onPrivateInviteRoom,
+  onPrivateChangeOwner,
+  roomActionsRef,
   infoPanelVisible,
 }: RoomsListProps) => {
   const timezone = portalSettings.timezone;
@@ -156,13 +194,14 @@ const RoomsList = ({
       isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
     );
     f.type = String(RoomsType.CustomRoom);
+    if (isPrivate) f.privacyFilter = RoomPrivacyFilter.Private;
     const sp = new URLSearchParams(filesFilter);
     if (sp.get("page")) f.page = Number(sp.get("page"));
     if (sp.get("pageCount")) f.pageCount = Number(sp.get("pageCount"));
     if (sp.get("sortBy")) f.sortBy = sp.get("sortBy") as typeof f.sortBy;
     if (sp.get("sortOrder"))
       f.sortOrder = sp.get("sortOrder") as typeof f.sortOrder;
-    if (sp.get("search")) f.filterValue = sp.get("search");
+    if (sp.get("filterValue")) f.filterValue = sp.get("filterValue");
     const tagsRaw = sp.get("tags");
     if (tagsRaw) {
       try {
@@ -219,9 +258,17 @@ const RoomsList = ({
     (TFolderItem | TFileItem) | null
   >(null);
 
-  const onInviteRoom = React.useCallback((item: TFolderItem | TFileItem) => {
-    setInvitingRoom(item);
-  }, []);
+  const onInviteRoom = React.useCallback(
+    (item: TFolderItem | TFileItem) => {
+      const isPrivate = (item as { private?: boolean }).private === true;
+      if (isPrivate && onPrivateInviteRoom) {
+        onPrivateInviteRoom(item as TFolder);
+        return;
+      }
+      setInvitingRoom(item);
+    },
+    [onPrivateInviteRoom],
+  );
 
   const [restoringItems, setRestoringItems] = React.useState<
     (TFolderItem | TFileItem)[] | null
@@ -231,9 +278,17 @@ const RoomsList = ({
     setEditingRoom(item);
   }, []);
 
-  const onChangeOwner = React.useCallback((item: TFolderItem | TFileItem) => {
-    setChangingOwnerRoom(item);
-  }, []);
+  const onChangeOwner = React.useCallback(
+    (item: TFolderItem | TFileItem) => {
+      const isPrivate = (item as { private?: boolean }).private === true;
+      if (isPrivate && onPrivateChangeOwner) {
+        onPrivateChangeOwner(item as TFolder);
+        return;
+      }
+      setChangingOwnerRoom(item);
+    },
+    [onPrivateChangeOwner],
+  );
 
   const onTagClick = React.useCallback(
     (tag: string) => {
@@ -261,7 +316,7 @@ const RoomsList = ({
   );
 
   const restoreRooms = React.useCallback(
-    async (ids: number[]) => {
+    async (ids: number[], name?: string) => {
       if (!ids.length) return;
       activeItemsStore.addActiveItems([], ids);
       const opId = operationsStore.startOperation(
@@ -290,6 +345,11 @@ const RoomsList = ({
         setTotal((prev) => Math.max(0, prev - ids.length));
         setSelection([]);
         setBufferSelection(null);
+        toastr.success(
+          ids.length > 1
+            ? t("Common:UnarchivedRoomsAction")
+            : t("Common:UnarchivedRoomAction", { name }),
+        );
       } catch (e) {
         opAlert = true;
         toastr.error(e as Error);
@@ -325,7 +385,7 @@ const RoomsList = ({
   );
 
   const archiveRooms = React.useCallback(
-    async (ids: number[]) => {
+    async (ids: number[], name?: string) => {
       if (!ids.length) return;
       activeItemsStore.addActiveItems([], ids);
       const opId = operationsStore.startOperation(
@@ -354,6 +414,11 @@ const RoomsList = ({
         setTotal((prev) => Math.max(0, prev - ids.length));
         setSelection([]);
         setBufferSelection(null);
+        toastr.success(
+          ids.length > 1
+            ? t("Common:ArchivedRoomsAction")
+            : t("Common:ArchivedRoomAction", { name }),
+        );
       } catch (e) {
         opAlert = true;
         toastr.error(e as Error);
@@ -402,6 +467,11 @@ const RoomsList = ({
         setTotal((prev) => Math.max(0, prev - roomIds.length));
         setSelection([]);
         setBufferSelection(null);
+        toastr.success(
+          roomIds.length > 1
+            ? t("Common:RoomsRemoved")
+            : t("Common:RoomRemoved"),
+        );
       } catch (e) {
         opAlert = true;
         toastr.error(e as Error);
@@ -428,6 +498,15 @@ const RoomsList = ({
           updatedRoom as unknown as TFolder,
         );
         filesListStore.replaceItem(roomId, updatedItem);
+        if (infoPanelStore.selection?.id === roomId) {
+          const rawLogo = (updatedRoom as unknown as { logo?: TLogo }).logo;
+          infoPanelStore.setSelection({
+            ...(updatedRoom as unknown as TFolder),
+            isRoom: true,
+            ...normalizeRoomLogo(rawLogo),
+          } as unknown as TFolder);
+        }
+
         const updatedTags = (updatedRoom as unknown as { tags?: string[] })
           .tags;
         if (Array.isArray(updatedTags) && updatedTags.length > 0) {
@@ -437,7 +516,7 @@ const RoomsList = ({
         // ignore
       }
     },
-    [convertFolderToItem, filesListStore, tagsStore],
+    [convertFolderToItem, filesListStore, infoPanelStore, tagsStore],
   );
 
   const requestRunning = React.useRef(false);
@@ -466,13 +545,18 @@ const RoomsList = ({
       isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
     );
     newFilter.type = String(RoomsType.CustomRoom);
+    if (isPrivate) newFilter.privacyFilter = RoomPrivacyFilter.Private;
     const sp = new URLSearchParams(window.location.search);
     if (sp.get("page")) newFilter.page = Number(sp.get("page"));
     if (sp.get("sortBy"))
       newFilter.sortBy = sp.get("sortBy") as typeof newFilter.sortBy;
     if (sp.get("sortOrder"))
       newFilter.sortOrder = sp.get("sortOrder") as typeof newFilter.sortOrder;
-    if (sp.get("search")) newFilter.filterValue = sp.get("search");
+    if (sp.get("filterValue"))
+      newFilter.filterValue = sp.get("filterValue");
+    if (sp.get("subjectId")) newFilter.subjectId = sp.get("subjectId");
+    if (sp.get("subjectOwnerId"))
+      newFilter.subjectOwnerId = sp.get("subjectOwnerId");
     const tagsRaw = sp.get("tags");
     if (tagsRaw) {
       try {
@@ -497,7 +581,11 @@ const RoomsList = ({
         current: newCurrent,
       } = res;
 
-      if (newCurrent?.title) {
+      if (titleOverride) {
+        // Sticky title — keep the page-level override (e.g. "Rooms E2E")
+        // even after the server response carries a generic title.
+        navigationStore.setCurrentTitle(titleOverride);
+      } else if (newCurrent?.title) {
         navigationStore.setCurrentTitle(newCurrent.title);
       }
 
@@ -528,12 +616,99 @@ const RoomsList = ({
     navigationStore,
     setRootFolderType,
     isArchive,
+    isPrivate,
     filesListStore,
   ]);
 
   React.useEffect(() => {
     if (refreshRef) refreshRef.current = fetchCurrentRooms;
   }, [fetchCurrentRooms, refreshRef]);
+
+  // Bulk pin/unpin via TableGroupMenu. Direction is decided here from the
+  // current selection — if every room is already pinned, the action is
+  // "unpin"; otherwise "pin". Acts only on items that actually need the
+  // change so the toast count reflects real work (matches client's
+  // `pinRooms`/`unpinRooms` which pre-filter by `item.pinned`).
+  const onPinSelected = React.useCallback(
+    async (items: (TFolderItem | TFileItem)[]) => {
+      if (!items.length) return;
+      const allPinned = items.every(
+        (i) => "pinned" in i && (i as { pinned?: boolean }).pinned,
+      );
+      const action: "pin" | "unpin" = allPinned ? "unpin" : "pin";
+      const ids = items
+        .filter((i) => {
+          const pinned =
+            "pinned" in i ? (i as { pinned?: boolean }).pinned : false;
+          return action === "pin" ? !pinned : pinned;
+        })
+        .map((i) => i.id as number);
+
+      if (!ids.length) return;
+
+      activeItemsStore.addActiveItems([], ids);
+
+      try {
+        await Promise.all(
+          ids.map((id) =>
+            action === "unpin"
+              ? api.rooms.unpinRoom(id)
+              : api.rooms.pinRoom(id),
+          ),
+        );
+        fetchCurrentRooms();
+        setSelection([]);
+        setBufferSelection(null);
+        const singular = ids.length === 1;
+        toastr.success(
+          action === "unpin"
+            ? singular
+              ? t("Common:RoomUnpinned")
+              : t("Common:RoomsUnpinned", { count: ids.length })
+            : singular
+              ? t("Common:RoomPinned")
+              : t("Common:RoomsPinned", { count: ids.length }),
+        );
+      } catch (e) {
+        toastr.error(e as Error);
+      } finally {
+        activeItemsStore.removeActiveItems([], ids);
+      }
+    },
+    [activeItemsStore, fetchCurrentRooms, setSelection, setBufferSelection, t],
+  );
+
+  React.useEffect(() => {
+    if (!roomActionsRef) return;
+    roomActionsRef.current = {
+      archiveSelected: onArchiveSelected,
+      deleteSelected: onDeleteSelected,
+      restoreSelected: onRestoreSelected,
+      pinSelected: onPinSelected,
+      editRoom: onEditRoom,
+      changeOwner: onChangeOwner,
+      inviteRoom: onInviteRoom,
+      archiveRoom: onArchiveRoom,
+      deleteRoom: onDeleteRoom,
+      restoreRoom: onRestoreRoom,
+      infoRoom: onInfoRoom,
+      roomChanged: refreshSingleRoom,
+    };
+  }, [
+    roomActionsRef,
+    onArchiveSelected,
+    onDeleteSelected,
+    onRestoreSelected,
+    onPinSelected,
+    onEditRoom,
+    onChangeOwner,
+    onInviteRoom,
+    onArchiveRoom,
+    onDeleteRoom,
+    onRestoreRoom,
+    onInfoRoom,
+    refreshSingleRoom,
+  ]);
 
   const fetchMoreRooms = React.useCallback(async () => {
     if (!hasNextPage || requestRunning.current) return;
@@ -587,15 +762,17 @@ const RoomsList = ({
     setRootFolderType(current.rootFolderType);
   }, [current.rootFolderType, setRootFolderType]);
 
-  const visibleItems =
-    filesListStore.items.length > 0 ? filesListStore.items : initialItems;
+  const visibleItems = initRef.current
+    ? filesListStore.items
+    : initialItems;
 
   let content: React.ReactNode;
 
   if (visibleItems.length === 0) {
-    content = (
-      <EmptyView isFiltered={!!filter.filterValue} isArchive={isArchive} />
-    );
+    content =
+      emptyView ?? (
+        <EmptyView isFiltered={!!filter.filterValue} isArchive={isArchive} />
+      );
   } else if (filesViewAs === "tile") {
     content = (
       <RoomsTileView
@@ -617,6 +794,7 @@ const RoomsList = ({
         onInfoRoom={onInfoRoom}
         onInviteRoom={onInviteRoom}
         isArchive={isArchive}
+        hasEncryptionKeys={hasEncryptionKeys}
       />
     );
   } else if (filesViewAs === "table") {
@@ -652,6 +830,7 @@ const RoomsList = ({
         onInfoRoom={onInfoRoom}
         onInviteRoom={onInviteRoom}
         isArchive={isArchive}
+        hasEncryptionKeys={hasEncryptionKeys}
         infoPanelVisible={infoPanelVisible}
       />
     );
@@ -677,6 +856,7 @@ const RoomsList = ({
         onInfoRoom={onInfoRoom}
         onInviteRoom={onInviteRoom}
         isArchive={isArchive}
+        hasEncryptionKeys={hasEncryptionKeys}
       />
     );
   }
@@ -720,7 +900,14 @@ const RoomsList = ({
       ) : null}
       <LeaveRoomDialog
         currentUserId={user?.id}
-        onTransferOwnership={(room) => setChangingOwnerRoom(room)}
+        onTransferOwnership={(room) => {
+          const isPrivate = (room as { private?: boolean }).private === true;
+          if (isPrivate && onPrivateChangeOwner) {
+            onPrivateChangeOwner(room as TFolder);
+            return;
+          }
+          setChangingOwnerRoom(room);
+        }}
       />
       {invitingRoom ? (
         <InvitePanel
@@ -744,7 +931,10 @@ const RoomsList = ({
           roomType={(restoringItems[0] as TFolderItem).roomType}
           count={restoringItems.length}
           onConfirm={() =>
-            restoreRooms(restoringItems.map((item) => item.id as number))
+            restoreRooms(
+              restoringItems.map((item) => item.id as number),
+              restoringItems[0]?.title,
+            )
           }
         />
       ) : null}
@@ -765,7 +955,10 @@ const RoomsList = ({
           onClose={() => setArchivingItems(null)}
           count={archivingItems.length}
           onConfirm={() =>
-            archiveRooms(archivingItems.map((item) => item.id as number))
+            archiveRooms(
+              archivingItems.map((item) => item.id as number),
+              archivingItems[0]?.title,
+            )
           }
         />
       ) : null}

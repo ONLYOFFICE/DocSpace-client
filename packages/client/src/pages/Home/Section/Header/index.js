@@ -34,8 +34,9 @@
  */
 
 import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
+import PublicRoomRestrictedIconUrl from "PUBLIC_DIR/images/public-room.restricted.react.svg?url";
 import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
-import EncryptedRoomIconUrl from "PUBLIC_DIR/images/icons/16/security.react.svg?url";
+import EncryptedRoomIconUrl from "PUBLIC_DIR/images/icons/16/security.private.react.svg?url";
 import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
 import SharedLinkSvgUrl from "PUBLIC_DIR/images/icons/16/shared.link.svg?url";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg?url";
@@ -189,6 +190,7 @@ const SectionHeaderContent = (props) => {
     setRefMap,
     deleteRefMap,
     isPersonalReadOnly,
+    isPrivacyFolder,
     showTemplateBadge,
 
     allowInvitingMembers,
@@ -218,6 +220,9 @@ const SectionHeaderContent = (props) => {
     filesSelection,
     isCollaborator,
     isVisitor,
+    isExternalShareRestricted,
+    blockExistingLinksOnRestrict,
+    hasExternalLinks,
   } = props;
 
   const location = useLocation();
@@ -531,7 +536,8 @@ const SectionHeaderContent = (props) => {
   const lifetime = selectedFolder?.lifetime || infoPanelRoom?.lifetime;
   const sharedType =
     (location.state?.isExternal || selectedFolder?.external) && !isPublicRoom;
-  const isEncryptedRoom = selectedFolder?.private === true;
+  const isEncryptedRoom =
+    selectedFolder?.private === true || isPrivacyFolder;
 
   const titleIcon = React.useMemo(() => {
     if (sharedType) return SharedLinkSvgUrl;
@@ -551,7 +557,11 @@ const SectionHeaderContent = (props) => {
         isInPublicRoom ||
         (isShared && (isArchive ? selectedFolder?.isRoom : isRoom))
       ) {
-        return PublicRoomIconUrl;
+        return isExternalShareRestricted &&
+          blockExistingLinksOnRestrict &&
+          hasExternalLinks
+          ? PublicRoomRestrictedIconUrl
+          : PublicRoomIconUrl;
       } else if (!isRootRooms && !isArchive && !isSharedWithMeFolderRoot)
         return PublicRoomIconUrl;
     }
@@ -571,6 +581,29 @@ const SectionHeaderContent = (props) => {
     isRoom,
     isSharedWithMeFolderRoot,
     isLifetimeEnabled,
+    isExternalShareRestricted,
+    blockExistingLinksOnRestrict,
+    hasExternalLinks,
+  ]);
+
+  const titleTooltip = React.useMemo(() => {
+    if (
+      isRoom &&
+      selectedFolder?.shared &&
+      isExternalShareRestricted &&
+      blockExistingLinksOnRestrict &&
+      hasExternalLinks
+    )
+      return t("Common:ExternalAccessDisabledByAdmin");
+
+    return undefined;
+  }, [
+    isRoom,
+    selectedFolder,
+    isExternalShareRestricted,
+    blockExistingLinksOnRestrict,
+    hasExternalLinks,
+    t,
   ]);
 
   const titleIconTooltip = React.useMemo(() => {
@@ -950,6 +983,8 @@ const SectionHeaderContent = (props) => {
           [styles.isExternalFolder]:
             location.state?.isExternal || selectedFolder?.external,
           [styles.isLifetimeEnabled]: isLifetimeEnabled,
+          [styles.isColoredTitleIcon]:
+            titleIcon === PublicRoomRestrictedIconUrl,
         })}
       >
         {tableGroupMenuVisible ? (
@@ -1032,6 +1067,7 @@ const SectionHeaderContent = (props) => {
               isPublicRoom={isPublicRoom}
               titleIcon={titleIcon}
               titleIconTooltip={titleIconTooltip}
+              titleTooltip={titleTooltip}
               showRootFolderTitle={
                 insideTheRoom || insideTheAgent || isContactsInsideGroupPage
               }
@@ -1169,6 +1205,7 @@ export default inject(
       isPersonalReadOnly,
       isSharedWithMeFolderRoot,
       isAIAgentsFolder,
+      isPrivacyFolder,
     } = treeFoldersStore;
 
     const {
@@ -1274,7 +1311,7 @@ export default inject(
 
     const { isIndexEditingMode, setIsIndexEditingMode, getIndexingArray } =
       indexingStore;
-    const { isPublicRoom } = publicRoomStore;
+    const { isPublicRoom, hasExternalLinks } = publicRoomStore;
 
     let folderPath = navigationPath;
 
@@ -1292,14 +1329,6 @@ export default inject(
     const isRootRooms = rootFolderType === FolderType.Rooms;
 
     const isShared = shared || navigationPath.find((r) => r.shared);
-
-    const showNavigationButton = !!((!security?.CopySharedLink && !isArchive) ||
-    isPublicRoom ||
-    isSharedWithMeFolderRoot ||
-    isArchive ||
-    !isRootRooms
-      ? false
-      : security?.Read && isShared);
 
     const rootFolderId = navigationPath.length
       ? navigationPath[navigationPath.length - 1]?.id
@@ -1320,6 +1349,25 @@ export default inject(
     const { showProfileLoader } = clientLoadingStore;
 
     const { enabledHotkeys } = filesStore;
+    const {
+      getIcon,
+      isExternalShareRestricted: isShareRestricted,
+      externalShareApplyToRooms,
+      externalShareApplyToDocuments,
+      blockExistingLinksOnRestrict,
+    } = filesStore.filesSettingsStore;
+
+    const isExternalShareRestricted =
+      isShareRestricted &&
+      (isRoom ? externalShareApplyToRooms : externalShareApplyToDocuments);
+
+    const showNavigationButton = !!((!security?.CopySharedLink && !isArchive) ||
+    isPublicRoom ||
+    isSharedWithMeFolderRoot ||
+    isArchive ||
+    !isRootRooms
+      ? false
+      : security?.Read && isShared);
 
     return {
       currentClientView,
@@ -1355,6 +1403,7 @@ export default inject(
       isEmptyFilesList,
       isEmptyArchive,
       isArchiveFolder,
+      isPrivacyFolder,
 
       setIsLoading,
 
@@ -1446,7 +1495,10 @@ export default inject(
       setChangePasswordVisible,
       setChangeAvatarVisible,
       setChangeNameVisible,
-      getIcon: filesStore.filesSettingsStore.getIcon,
+      getIcon,
+      isExternalShareRestricted,
+      blockExistingLinksOnRestrict,
+      hasExternalLinks,
 
       isRootRooms,
       isArchive,
@@ -1461,7 +1513,6 @@ export default inject(
     "Common",
     "Translations",
     "InfoPanel",
-    "Article",
     "People",
     "PeopleTranslations",
     "ChangeUserTypeDialog",

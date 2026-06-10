@@ -1,14 +1,23 @@
 {
-  "comment": {
-    "text": "This is a toast message informing the user they are in view-only mode for an AI Agent. It appears when a user accesses an AI Agent in view-only mode, explaining they can see others' activity. `{{aiAgent}}` and `{{aiChat}}` are placeholders for localized terms like \"AI Agent\" and \"AI Chat\".",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:02:11.381Z",
-    "model": "google/gemini-2.5-flash"
-  },
-  "content": "You’re in <strong>view-only</strong> mode for this {{aiAgent}}. You can see the results of {{aiChat}} activity from other users.",
-  "content_en_sha1_hash": "44007c7eff90339c377f5cc1d75060284f1d1103",
-  "created_at": "2025-12-22T14:24:56.488Z",
   "key_path": "AgentInViewModeWarning",
+  "content": "You’re in <strong>view-only</strong> mode for this AI agent. You can see the results of {{aiChat}} activity from other users.",
+  "content_en_sha1_hash": "c77a4b058698563aad2e6983c45e8f7c7ae61b26",
+  "created_at": "2026-05-26T17:09:23.365Z",
+  "updated_at": "2026-06-03T11:46:06.850Z",
+  "comment": {
+    "text": "Info toast message appearing when a user has view-only access to an AI agent. It includes an HTML tag for emphasis and a variable representing the AI chat activity.",
+    "is_auto": true,
+    "updated_at": "2026-05-26T17:09:57.339Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/View/index.tsx",
+      "line_number": 508,
+      "context": ") {\n toastr.info(\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"AgentInViewModeWarning\"\n components={{\n strong: <strong />,\n }}\n values={{ aiAgent: t(\"Common:AIAgent\"), aiChat: t(\"Common:AIChat\") }}\n />,",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -140,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:53.938772Z"
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
@@ -202,14 +211,5 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     }
-  },
-  "updated_at": "2026-05-24T17:27:49.136Z",
-  "usage": [
-    {
-      "file_path": "/packages/client/src/pages/Home/View/index.tsx",
-      "line_number": 565,
-      "context": ") {\n toastr.info(\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"AgentInViewModeWarning\"\n components={{\n strong: <strong />,\n }}\n values={{ aiAgent: t(\"Common:AIAgent\"), aiChat: t(\"Common:AIChat\") }}\n />,",
-      "module": "/packages/client"
-    }
-  ]
+  }
 }

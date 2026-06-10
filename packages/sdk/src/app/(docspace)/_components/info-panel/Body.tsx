@@ -30,9 +30,14 @@ import React from "react";
 import { observer } from "mobx-react";
 
 import { ScrollbarContext } from "@docspace/ui-kit/components/scrollbar";
+import type { TLogo } from "@docspace/ui-kit/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
+import type { TFolder } from "@docspace/shared/api/files/types";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
+import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
+import { normalizeRoomLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
+import InvitePanel from "@/app/(rooms)/_components/invite-panel";
 
 import { InfoPanelView, useInfoPanelStore } from "../../_store/InfoPanelStore";
 
@@ -41,6 +46,7 @@ import Details from "./views/Details";
 import History from "./views/History";
 import Members from "./views/Members";
 import { useMembers } from "./views/Members/useMembers";
+import RoomHeader from "./sub-components/RoomHeader";
 import ShareView from "./views/Share";
 import { NoItem, SeveralItems } from "./views/EmptyStates";
 
@@ -53,6 +59,7 @@ type InfoPanelBodyProps = {
 const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
   const infoPanelStore = useInfoPanelStore();
   const filesSelectionStore = useFilesSelectionStore();
+  const filesListStore = useFilesListStore();
   const { selection, fileView, isVisible, isPinnedSelection } = infoPanelStore;
 
   const selectedCount = filesSelectionStore.selection.length;
@@ -68,6 +75,21 @@ const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
     room: isRoom ? (selection as unknown as TRoom) : null,
     scrollToTop,
   });
+
+  const [invitePanelVisible, setInvitePanelVisible] = React.useState(false);
+
+  // Clear pinned selection when the user navigates to a different folder so that
+  // a previously-pinned room does not remain visible after entering another room.
+  const prevFolderIdRef = React.useRef<number | string | undefined>(
+    filesListStore.currentFolder?.id,
+  );
+  React.useEffect(() => {
+    const newId = filesListStore.currentFolder?.id;
+    if (newId !== prevFolderIdRef.current) {
+      prevFolderIdRef.current = newId;
+      infoPanelStore.setPinnedSelection(false);
+    }
+  }, [filesListStore.currentFolder?.id, infoPanelStore]);
 
   React.useEffect(() => {
     if (!isVisible) return;
@@ -86,10 +108,26 @@ const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
       return;
     }
 
+    const cf = filesListStore.currentFolder;
+    const isRootFolder = !!(cf && cf.id === cf.rootFolderId);
+    let currentFolderAsItem = null;
+    if (!isRootFolder && cf) {
+      const rawLogo = (cf as unknown as { logo?: TLogo }).logo;
+      const { roomLogo, roomIconColor, hasRoomImage } = normalizeRoomLogo(rawLogo);
+      currentFolderAsItem = {
+        ...cf,
+        isFolder: true as const,
+        isRoom: !!cf.roomType,
+        roomLogo,
+        roomIconColor,
+        hasRoomImage,
+      };
+    }
+
     const next =
       selectedCount === 1
         ? filesSelectionStore.selection[0]
-        : (filesSelectionStore.bufferSelection ?? null);
+        : (filesSelectionStore.bufferSelection ?? currentFolderAsItem ?? null);
 
     if (!next) {
       if (selection !== null) infoPanelStore.setSelection(null);
@@ -98,7 +136,7 @@ const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
 
     if (selection && selection.id === next.id) return;
 
-    infoPanelStore.setSelection(next);
+    infoPanelStore.setSelection(next as TFolder);
   }, [
     isVisible,
     isPinnedSelection,
@@ -106,19 +144,27 @@ const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
     selectedCount,
     filesSelectionStore.selection,
     filesSelectionStore.bufferSelection,
+    filesListStore.currentFolder,
     selection,
     infoPanelStore,
   ]);
+
+  const availableTabs = selection ? getAvailableTabs(selection) : [];
+  const currentView = availableTabs.includes(fileView)
+    ? fileView
+    : (availableTabs[0] ?? InfoPanelView.infoDetails);
+
+  const isMembersView = currentView === InfoPanelView.infoMembers;
+
+  const room = selection as unknown as TRoom;
+  const hasEditAccess = isRoom ? Boolean(room.security?.EditAccess) : false;
+
+  const showHeader = !isSeveralItems && !!selection && isRoom;
 
   const renderContent = () => {
     if (isSeveralItems) return <SeveralItems count={selectedCount} />;
 
     if (!selection) return <NoItem />;
-
-    const availableTabs = getAvailableTabs(selection);
-    const currentView = availableTabs.includes(fileView)
-      ? fileView
-      : (availableTabs[0] ?? InfoPanelView.infoDetails);
 
     if (currentView === InfoPanelView.infoMembers)
       return <Members selection={selection} membersData={membersData} />;
@@ -135,7 +181,28 @@ const InfoPanelBody = observer(({ onTagsChanged }: InfoPanelBodyProps) => {
       data-info-panel-scroll
       data-testid="info_panel_body"
     >
+      {showHeader ? (
+        <RoomHeader
+          selection={selection as TFolder}
+          isMembersView={isMembersView}
+          hasEditAccess={hasEditAccess}
+          setSearchValue={membersData.handleSearchMembers}
+          onInvite={() => setInvitePanelVisible(true)}
+          onUpdated={onTagsChanged}
+        />
+      ) : null}
+
       {renderContent()}
+
+      {invitePanelVisible && selection ? (
+        <InvitePanel
+          visible
+          roomId={Number(selection.id)}
+          roomType={room.roomType}
+          onClose={() => setInvitePanelVisible(false)}
+          onMembersUpdated={() => membersData.setIsMembersPanelUpdating(true)}
+        />
+      ) : null}
     </div>
   );
 });

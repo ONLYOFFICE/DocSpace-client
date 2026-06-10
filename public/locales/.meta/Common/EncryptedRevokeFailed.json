@@ -3,7 +3,7 @@
   "content": "Removed the user, but failed to revoke their key wraps from existing encrypted files.",
   "content_en_sha1_hash": "e4720e3581bd721e317fd01e310fbfd84a42bf2b",
   "created_at": "2026-05-24T17:27:26.352Z",
-  "updated_at": "2026-05-24T18:05:31.650Z",
+  "updated_at": "2026-06-09T09:43:10.881Z",
   "comment": {
     "text": "Error toast message appearing when a user is removed but their encryption key revocation for existing files fails.",
     "is_auto": true,
@@ -16,6 +16,12 @@
       "line_number": 192,
       "context": "if (results.length > 0) {\n toastr.success(t(\"Common:EncryptedRevokeCompleted\"));\n }\n } catch (err) {\n console.error(\"[ENCRYPTION] revoke encrypted access failed:\", err);\n toastr.error(t(\"Common:EncryptedRevokeFailed\"));\n }\n };\n \n const onOptionClick = async (option: TOption) => {\n if (option.access === userRole?.access) return;",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_hooks/usePrivateRemoveMemberFlow.ts",
+      "line_number": 152,
+      "context": "}\n if (results.length > 0) {\n toastr.success(t(\"Common:EncryptedRevokeCompleted\"));\n }\n } catch {\n toastr.error(t(\"Common:EncryptedRevokeFailed\"));\n }\n } catch (error) {\n // Step 1 (server ACL) failure: surface a localized encryption error.\n toastr.error(getEncryptionErrorMessage(t, error));\n } finally {",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

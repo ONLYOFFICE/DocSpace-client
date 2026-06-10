@@ -3,7 +3,7 @@
   "content": "Payment method unlinked",
   "content_en_sha1_hash": "39b142abc8c556ae5d34a1e6f5aa23783b633d3f",
   "created_at": "2026-05-25T18:26:11.274Z",
-  "updated_at": "2026-06-01T21:20:44.559Z",
+  "updated_at": "2026-06-02T22:18:05.131Z",
   "comment": {
     "text": "Warning text displayed in billing, tariff, and wallet components when a user's payment method is disconnected or inactive.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
-      "line_number": 221,
+      "line_number": 222,
       "context": "</div>\n \n {!isNotPaidPeriod && walletCustomerStatusNotActive ? (\n <div className={styles.walletCustomerStatusNotActive}>\n <Text fontWeight={600} className={styles.warningColor}>\n {t(\"PaymentMethodUnlinked\")}\n </Text>\n <Text as=\"span\" className={styles.warningColor}>\n {isPayer ? (\n t(\"LinkPaymentMethod\")\n ) : (",
       "module": "/libs/ui-kit"
     }

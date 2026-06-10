@@ -48,8 +48,14 @@ type CacheEntry = {
 
 let _state: CacheEntry | null = null;
 
+/**
+ * Handler invoked when `requireUnlock` finds no cached identity. `reason`
+ * is currently always "no-cache" because `getCached` clears expired /
+ * user-mismatch state before this runs; kept as a sum-type for future
+ * out-of-band wakeup paths but UI-facing copy should not assume it varies.
+ */
 type UnlockRequestCallback = (
-  reason: "no-cache" | "expired" | "user-mismatch",
+  reason: "no-cache",
   expectedUserId?: string,
 ) => Promise<IdentityKeyPair | null>;
 
@@ -61,6 +67,23 @@ export function registerUnlockHandler(handler: UnlockRequestCallback): void {
 
 export function unregisterUnlockHandler(): void {
   _unlockHandler = null;
+}
+
+type AutoLockSuspender = () => () => void;
+
+let _autoLockSuspender: AutoLockSuspender | null = null;
+
+export function registerAutoLockSuspender(suspender: AutoLockSuspender): void {
+  _autoLockSuspender = suspender;
+}
+
+export function unregisterAutoLockSuspender(): void {
+  _autoLockSuspender = null;
+}
+
+export function suspendAutoLock(): () => void {
+  if (!_autoLockSuspender) return () => {};
+  return _autoLockSuspender();
 }
 
 const pendingUnlocks = new Map<
@@ -140,6 +163,7 @@ export async function requireUnlock(
 
   if (!_unlockHandler) {
     if (typeof console !== "undefined") {
+      // biome-ignore lint/suspicious/noConsole: developer hint when EncryptionProvider is missing; production build strips console.
       console.warn(
         "[SecretStorage] No unlock handler registered. Mount EncryptionProvider before calling requireUnlock.",
       );
@@ -147,18 +171,12 @@ export async function requireUnlock(
     return null;
   }
 
-  // Reason is always "no-cache" in practice - getCached() above wipes
-  // _state on expiry/mismatch before this runs.
-  const reason: "no-cache" | "expired" | "user-mismatch" = (() => {
-    if (!_state) return "no-cache";
-    if (_state.userId !== userId) return "user-mismatch";
-    return "expired";
-  })();
-
+  // `getCached` above wipes _state on expiry / user-mismatch before this
+  // runs, so reason is always "no-cache" in practice.
   const handler = _unlockHandler;
   const promise = (async () => {
     try {
-      const kp = await handler(reason, userId);
+      const kp = await handler("no-cache", userId);
       if (!kp) return null;
       if (!SecretStorage.hasUnlocked(userId)) {
         SecretStorage.cacheUnlocked(userId, kp);

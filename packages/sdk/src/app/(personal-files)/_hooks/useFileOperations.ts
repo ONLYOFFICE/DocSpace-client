@@ -46,6 +46,7 @@ import {
   getFoldersTree,
   checkFileConflicts,
 } from "@docspace/shared/api/files";
+import { getApps } from "@docspace/shared/api/apps";
 import type {
   TFolder,
   TFile,
@@ -59,7 +60,9 @@ import { getOperationProgress } from "@docspace/shared/utils/getOperationProgres
 
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
+import { useEncryptedFileActions } from "@/app/(docspace)/_contexts/EncryptedFileActionsContext";
 import { PAGE_COUNT } from "@/utils/constants";
+import useOperationToast from "./useOperationToast";
 import type {
   TFileItem,
   TFolderItem,
@@ -91,8 +94,10 @@ export type SelectorInitData = {
 
 export default function useFileOperations() {
   const router = useRouter();
+  const { showCopyToast, showMoveToast } = useOperationToast();
   const filesListStore = useFilesListStore();
   const filesSelectionStore = useFilesSelectionStore();
+  const encryptedActions = useEncryptedFileActions();
 
   const [selectorDialogVisible, setSelectorDialogVisible] = useState(false);
   const [selectorMode, setSelectorMode] = useState<SelectorMode>("copy");
@@ -106,6 +111,7 @@ export default function useFileOperations() {
   >([]);
   const pendingConflictDestRef = useRef<{
     destFolderId: number;
+    destFolderTitle: string;
     isMove: boolean;
   } | null>(null);
 
@@ -113,6 +119,7 @@ export default function useFileOperations() {
   const [foldersTree, setFoldersTree] = useState<TFolder[] | null>(null);
   const [selectorInitData, setSelectorInitData] =
     useState<SelectorInitData | null>(null);
+  const [hasRooms, setHasRooms] = useState(false);
 
   // Operation progress
   const [operationProgress, setOperationProgress] =
@@ -184,10 +191,24 @@ export default function useFileOperations() {
         filter.page = 0;
         filter.pageCount = PAGE_COUNT;
 
-        const [tree, folderData] = await Promise.all([
+        const isInRoomsContext =
+          filesListStore.rootFolderType === FolderType.Rooms ||
+          filesListStore.rootFolderType === FolderType.Archive;
+        const initialFolderId =
+          mode !== "restore" && isInRoomsContext && filesListStore.currentFolder
+            ? filesListStore.currentFolder.id
+            : "@my";
+
+        const [tree, folderData, apps] = await Promise.all([
           getFoldersTree(),
-          getFolder("@my", filter),
+          getFolder(initialFolderId, filter),
+          mode !== "restore" && !isInRoomsContext ? getApps() : Promise.resolve(null),
         ]);
+
+        const aiRoomsEnabled =
+          isInRoomsContext ||
+          (apps?.some((a) => a.id === "ai-rooms" && a.enabled) ?? false);
+        setHasRooms(aiRoomsEnabled);
 
         const { folders, files, current, pathParts, total } =
           folderData as TGetFolder;
@@ -247,6 +268,22 @@ export default function useFileOperations() {
 
   const requestDuplicate = useCallback(
     async (item: TFileItem | TFolderItem) => {
+      if (
+        encryptedActions &&
+        !item.isFolder &&
+        (item as TFileItem).encrypted
+      ) {
+        await encryptedActions.duplicateFile(item as TFileItem);
+        return;
+      }
+
+      // Folders cannot be duplicated inside a private room — the server would
+      // create an unencrypted copy of the folder tree. Reference:
+      // packages/client/src/store/FilesActionsStore.js:1616-1618
+      if (item.isFolder && encryptedActions) {
+        return;
+      }
+
       const fileIds = item.isFolder ? [] : [item.id as number];
       const folderIds = item.isFolder ? [item.id as number] : [];
 
@@ -264,7 +301,7 @@ export default function useFileOperations() {
         toastr.error(error instanceof Error ? error.message : String(error));
       }
     },
-    [router, trackOperation],
+    [router, trackOperation, encryptedActions],
   );
 
   const closeSelectorDialog = useCallback(() => {
@@ -272,6 +309,7 @@ export default function useFileOperations() {
     setPendingItems([]);
     setFoldersTree(null);
     setSelectorInitData(null);
+    setHasRooms(false);
   }, []);
 
   const executeOperation = useCallback(
@@ -280,6 +318,7 @@ export default function useFileOperations() {
       isMove: boolean,
       resolveType: ConflictResolveType,
       itemsToProcess: (TFileItem | TFolderItem)[],
+      destFolderTitle: string,
     ) => {
       const fileIds = itemsToProcess
         .filter((i) => !i.isFolder)
@@ -307,6 +346,19 @@ export default function useFileOperations() {
       const opId = operations?.[0]?.id;
       const icon: OperationProgress["icon"] = isMove ? "move" : "copy";
 
+      const showSuccessToast = () => {
+        const toastArgs = {
+          items: itemsToProcess,
+          destFolderId,
+          destFolderTitle,
+        };
+        if (isMove) {
+          showMoveToast(toastArgs);
+        } else {
+          showCopyToast(toastArgs);
+        }
+      };
+
       if (opId) {
         await trackOperation(opId, icon, () => {
           if (isMove) {
@@ -315,34 +367,70 @@ export default function useFileOperations() {
             }
             filesSelectionStore.setSelection();
           }
+          showSuccessToast();
         });
-      } else if (isMove) {
-        for (const item of itemsToProcess) {
-          filesListStore.removeItem(item.id);
+      } else {
+        if (isMove) {
+          for (const item of itemsToProcess) {
+            filesListStore.removeItem(item.id);
+          }
+          filesSelectionStore.setSelection();
         }
-        filesSelectionStore.setSelection();
+        showSuccessToast();
       }
     },
-    [filesListStore, filesSelectionStore, trackOperation],
+    [
+      filesListStore,
+      filesSelectionStore,
+      showCopyToast,
+      showMoveToast,
+      trackOperation,
+    ],
   );
 
   const confirmOperation = useCallback(
-    async (destFolderId: number | string) => {
+    async (destFolderId: number | string, destFolderTitle: string) => {
       if (!pendingItems.length) return;
 
       const isMove = selectorMode === "move" || selectorMode === "restore";
-
-      const fileIds = pendingItems
-        .filter((i) => !i.isFolder)
-        .map((i) => i.id as number);
-      const folderIds = pendingItems
-        .filter((i) => i.isFolder)
-        .map((i) => i.id as number);
 
       // Close selector panel immediately
       setSelectorDialogVisible(false);
       setFoldersTree(null);
       setSelectorInitData(null);
+
+      let serverItems: (TFileItem | TFolderItem)[] = pendingItems;
+      if (encryptedActions) {
+        const encryptedFiles = pendingItems.filter(
+          (i) => !i.isFolder && (i as TFileItem).encrypted,
+        ) as TFileItem[];
+        if (encryptedFiles.length) {
+          serverItems = pendingItems.filter(
+            (i) => !(!i.isFolder && (i as TFileItem).encrypted),
+          );
+          try {
+            if (isMove)
+              await encryptedActions.moveFiles(encryptedFiles, destFolderId);
+            else await encryptedActions.copyFiles(encryptedFiles, destFolderId);
+          } catch (error) {
+            toastr.error(
+              error instanceof Error ? error.message : String(error),
+            );
+          }
+        }
+      }
+
+      if (!serverItems.length) {
+        setPendingItems([]);
+        return;
+      }
+
+      const fileIds = serverItems
+        .filter((i) => !i.isFolder)
+        .map((i) => i.id as number);
+      const folderIds = serverItems
+        .filter((i) => i.isFolder)
+        .map((i) => i.id as number);
 
       try {
         const conflicts = await checkFileConflicts(
@@ -354,6 +442,7 @@ export default function useFileOperations() {
         if (conflicts.length > 0) {
           pendingConflictDestRef.current = {
             destFolderId: destFolderId as number,
+            destFolderTitle,
             isMove,
           };
           setConflictItems(
@@ -362,8 +451,8 @@ export default function useFileOperations() {
               isFile: !("isFolder" in c && c.isFolder),
             })),
           );
+          setPendingItems(serverItems);
           setConflictDialogVisible(true);
-          // Keep pendingItems so confirmConflict can use them after user resolves
           return;
         }
 
@@ -371,7 +460,8 @@ export default function useFileOperations() {
           destFolderId as number,
           isMove,
           ConflictResolveType.Overwrite,
-          pendingItems,
+          serverItems,
+          destFolderTitle,
         );
       } catch (error) {
         toastr.error(error instanceof Error ? error.message : String(error));
@@ -379,7 +469,7 @@ export default function useFileOperations() {
 
       setPendingItems([]);
     },
-    [selectorMode, pendingItems, executeOperation],
+    [selectorMode, pendingItems, executeOperation, encryptedActions],
   );
 
   const confirmConflict = useCallback(
@@ -396,6 +486,7 @@ export default function useFileOperations() {
           dest.isMove,
           resolveType,
           pendingItems,
+          dest.destFolderTitle,
         );
       } catch (error) {
         toastr.error(error instanceof Error ? error.message : String(error));
@@ -419,10 +510,18 @@ export default function useFileOperations() {
     .filter((i) => i.isFolder)
     .map((i) => i.id as number);
 
+  // True when at least one pending file is encrypted; drives the info-bar
+  // warning shown in FilesSelector when source is a private room.
+  const pendingHasEncrypted = pendingItems.some(
+    (i) => !i.isFolder && (i as TFileItem).encrypted,
+  );
+
   return {
     selectorDialogVisible,
     selectorMode,
+    hasRooms,
     pendingItemCount: pendingItems.length,
+    pendingHasEncrypted,
     foldersTree,
     selectorInitData,
     disabledItems,

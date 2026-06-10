@@ -3,7 +3,7 @@
   "content": "Search",
   "content_en_sha1_hash": "bce06414177f72ab70e6387b6af9f8ceef0d6049",
   "created_at": "2025-05-19T21:30:48.328Z",
-  "updated_at": "2026-06-01T21:20:44.395Z",
+  "updated_at": "2026-06-09T09:43:10.812Z",
   "comment": {
     "text": "This is a placeholder text for a search input field, prompting the user to type their search query.",
     "is_auto": true,
@@ -49,7 +49,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/RoomsItemTitle.tsx",
-      "line_number": 267,
+      "line_number": 293,
       "context": "<div className=\"info_title-icons\">\n {isRoomMembersPanel ? (\n <IconButton\n id=\"info_search\"\n className=\"icon\"\n title={t(\"Common:Search\")}\n iconName={SearchIconReactSvgUrl}\n onClick={onSearchClick}\n size={16}\n />\n ) : null}",
       "module": "/packages/client"
     },
@@ -115,14 +115,14 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/index.tsx",
-      "line_number": 115,
+      "line_number": 116,
       "context": "getFilterData={getFilterData}\n userId=\"\"\n isRecentFolder\n currentDeviceType={currentDeviceType}\n filterHeader={t(\"Common:AdvancedFilter\")}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n filterTitle={t(\"Common:Filter\")}\n sortByTitle={t(\"Common:SortBy\")}\n selectorLabel=\"\"\n isIndexing={false}",
       "module": "/packages/sdk"
     },
     {
-      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/sub-components/RoomHeader.tsx",
-      "line_number": 103,
-      "context": "</Text>\n <div className={styles.roomActions}>\n <IconButton\n iconName={SearchIconReactSvgUrl}\n size={16}\n title={t(\"Common:Search\")}\n onClick={onSearchOpen}\n />\n {hasEditAccess ? (\n <IconButton\n iconName={PersonPlusReactSvgUrl}",
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/sub-components/RoomHeader.tsx",
+      "line_number": 99,
+      "context": "<div className={styles.roomActions}>\n {isMembersView ? (\n <IconButton\n iconName={SearchIconReactSvgUrl}\n size={16}\n title={t(\"Common:Search\")}\n onClick={() => setShowSearch(true)}\n />\n ) : null}\n {isMembersView && hasEditAccess ? (\n <IconButton",
       "module": "/packages/sdk"
     },
     {
@@ -139,7 +139,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/index.tsx",
-      "line_number": 132,
+      "line_number": 133,
       "context": "isRecentFolder={false}\n currentDeviceType={currentDeviceType}\n filterHeader={t(\"Common:AdvancedFilter\", {\n defaultValue: \"Advanced filter\",\n })}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n filterTitle={t(\"Common:Filter\")}\n sortByTitle={t(\"Common:SortBy\")}\n selectorLabel=\"\"\n isIndexing={false}",
       "module": "/packages/sdk"
     }

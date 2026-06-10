@@ -3,7 +3,7 @@
   "content": "Send request",
   "content_en_sha1_hash": "a89d64179469a9dcedf347dc7dddae85a2272b3e",
   "created_at": "2025-05-19T21:30:48.550Z",
-  "updated_at": "2026-05-28T15:46:18.588Z",
+  "updated_at": "2026-06-02T15:03:00.348Z",
   "comment": {
     "text": "Button label. This text appears on a button that, when clicked, sends a request to the system, often related to billing or service upgrades.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/ButtonContainer.tsx",
-      "line_number": 89,
-      "context": "const { isWaitingCalculation } = usePaymentContext();\n \n const title = !hasStorageSubscription\n ? t(\"UpgradeNow\")\n : isExceedingStorageLimit\n ? t(\"SendRequest\")\n : t(\"Update\");\n \n return (\n <div className={styles.buttonWrapper}>\n {hasStorageSubscription &&",
+      "line_number": 96,
+      "context": "const title = isBalanceInsufficient\n ? t(\"TopUpAndUpgrade\")\n : !hasStorageSubscription\n ? t(\"UpgradeNow\")\n : isExceedingStorageLimit\n ? t(\"SendRequest\")\n : t(\"Update\");\n \n const showNextBillHint =\n hasStorageSubscription &&\n !isDowngradeStoragePlan &&",
       "module": "/libs/ui-kit"
     },
     {

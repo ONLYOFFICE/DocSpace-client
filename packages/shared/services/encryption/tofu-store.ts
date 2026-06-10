@@ -82,6 +82,7 @@ function warnUnavailableOnce(): void {
   if (warnedUnavailable) return;
   warnedUnavailable = true;
   if (typeof console !== "undefined") {
+    // biome-ignore lint/suspicious/noConsole: surface IndexedDB unavailability once per session for diagnostics.
     console.warn(
       "TofuStore: IndexedDB is unavailable; falling back to in-memory state. " +
         "Key-change detection works for the current session only.",
@@ -129,6 +130,7 @@ export class TofuStore {
       };
       req.onerror = () => {
         if (typeof console !== "undefined") {
+          // biome-ignore lint/suspicious/noConsole: diagnostic-only on IndexedDB open failure.
           console.error("TofuStore: open failed", req.error);
         }
         warnUnavailableOnce();
@@ -136,6 +138,7 @@ export class TofuStore {
       };
       req.onblocked = () => {
         if (typeof console !== "undefined") {
+          // biome-ignore lint/suspicious/noConsole: diagnostic-only on IndexedDB open blocked.
           console.warn("TofuStore: open blocked");
         }
         warnUnavailableOnce();

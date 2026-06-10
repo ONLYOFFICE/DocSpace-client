@@ -3,7 +3,7 @@
   "content": "To add one, please contact the payer <1>{{email}}</1>",
   "content_en_sha1_hash": "c13c5253bc03806912bb41b71ec70b4a9262eb45",
   "created_at": "2026-05-25T18:26:09.063Z",
-  "updated_at": "2026-05-27T14:11:50.760Z",
+  "updated_at": "2026-06-02T15:03:00.427Z",
   "comment": {
     "text": "Warning text displayed when a user needs to add a payment method and must contact the payer. The `<1>` tag contains a clickable email address variable.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
-      "line_number": 229,
+      "line_number": 230,
       "context": "{isPayer ? (\n t(\"LinkPaymentMethod\")\n ) : (\n <Text className={styles.warningColor}>\n <CommonTrans\n i18nKey=\"LinkNewPaymentMethodEmail\"\n values={{ email: walletCustomerEmail }}\n components={{\n 1: (\n <Link\n href={`mailto:${walletCustomerEmail}`}",
       "module": "/libs/ui-kit"
     }

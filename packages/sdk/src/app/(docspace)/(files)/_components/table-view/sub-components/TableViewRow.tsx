@@ -42,11 +42,14 @@ import classNames from "classnames";
 
 import { TableRow } from "@docspace/ui-kit/components/table";
 import { TableCell } from "@docspace/ui-kit/components/table";
+import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
+import { getDaysRemaining } from "@docspace/shared/utils/common";
 import { FolderType } from "@docspace/shared/enums";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import Badges from "@docspace/shared/components/badges";
@@ -68,13 +71,23 @@ import { RenameContext } from "../../../../_contexts/RenameContext";
 import { VersionHistoryContext } from "../../../../_contexts/VersionHistoryContext";
 import { ConvertContext } from "../../../../_contexts/ConvertContext";
 import { AskAIContext } from "../../../../_contexts/AskAIContext";
-import type { TFileItem } from "../../../../_hooks/useItemList";
+import type { TFileItem, TFolderItem } from "../../../../_hooks/useItemList";
+import { useDecryptedFilename } from "@/app/(docspace)/_hooks/useDecryptedFilename";
 import { generateFilesItemValue } from "../../../_utils";
 import getTitleWithoutExt from "../../../../_utils/get-title-without-ext";
+import { DragContext } from "../../../../_contexts/DragContext";
 
 import type { TableViewRowProps } from "../TableView.types";
 import styles from "../TableView.module.scss";
 import AuthorCell from "./AuthorCell";
+import LocationCell from "./LocationCell";
+import AccessCell from "./AccessCell";
+import {
+  getSectionColumns,
+  type ColumnKey,
+  type SectionColumn,
+  type WithRuntimeFields,
+} from "../columns";
 
 const TableViewRow = observer(
   ({
@@ -84,6 +97,8 @@ const TableViewRow = observer(
     displayFileExtension,
     lastColumn,
     currentUserId,
+    isPrivate,
+    hasEncryptionKeys,
   }: TableViewRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
@@ -125,11 +140,23 @@ const TableViewRow = observer(
       onAskAI: onAskAI ?? undefined,
     });
 
+    const dragCtx = React.useContext(DragContext);
+
     const isChecked = filesSelectionStore.isCheckedItem(item);
-    const value = generateFilesItemValue(item, false, index);
+    const isDroppable =
+      item.isFolder &&
+      "security" in item &&
+      (item as TFolderItem).security?.MoveTo === true;
+    const value = generateFilesItemValue(item, isDroppable, index);
+
+    const title = useDecryptedFilename(
+      item.id,
+      item.title,
+      "encrypted" in item ? item.encrypted : false,
+    );
 
     const titleWithoutExt =
-      "fileExst" in item ? getTitleWithoutExt(item.title, item.fileExst) : item.title;
+      "fileExst" in item ? getTitleWithoutExt(title, item.fileExst) : title;
 
     const modifiedDate = getCorrectDate(
       i18n.language || "",
@@ -157,6 +184,32 @@ const TableViewRow = observer(
     const fileSize = "contentLength" in item ? item.contentLength : "";
     const fileType =
       "fileType" in item ? getFileTypeName(item.fileType, t) : t("Common:Folder");
+
+    // `lastOpened` (Recent) and `autoDelete` (Trash) are runtime-only fields —
+    // not declared on TFile/TFolder.
+    const runtimeItem = item as typeof item & WithRuntimeFields;
+    const lastOpenedDate = runtimeItem.lastOpened
+      ? getCorrectDate(
+          i18n.language || "",
+          runtimeItem.lastOpened,
+          "L",
+          "LT",
+          timezone ?? "UTC",
+        )
+      : "";
+
+    // Erasure: days left until auto-deletion, derived from `autoDelete` the
+    // same way the client does (getDaysRemaining returns e.g. "5" or "<1").
+    const erasureLabel = runtimeItem.autoDelete
+      ? t("Common:DaysRemaining", {
+          daysRemaining: getDaysRemaining(
+            runtimeItem.autoDelete as unknown as Date,
+          ),
+        })
+      : "";
+
+    // Visible columns + order are section-specific (same source as the header).
+    const sectionColumns = getSectionColumns(filesListStore.rootFolderType);
 
     const onCheckboxChange = React.useCallback(
       (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -270,80 +323,147 @@ const TableViewRow = observer(
 
     const contextMenuModel = getContextMenuModel(true);
 
+    // Inner content for a non-Name cell, keyed by column. The section descriptor
+    // decides which of these render and in what order (header stays in lockstep).
+    const renderCell = (key: ColumnKey): React.ReactNode => {
+      switch (key) {
+        case "Author":
+          return item.createdBy ? (
+            <AuthorCell fileOwner={fileOwner || ""} createdBy={item.createdBy} />
+          ) : null;
+        case "SharedBy":
+          return item.sharedBy ? (
+            <AuthorCell
+              fileOwner={item.sharedBy.displayName ?? ""}
+              createdBy={item.sharedBy}
+            />
+          ) : null;
+        case "AccessLevel":
+          return <AccessCell t={t} item={item} />;
+        case "Location":
+          return <LocationCell item={item} />;
+        case "Created":
+          return (
+            <span className={styles.secondaryCell} suppressHydrationWarning>
+              {createdDate}
+            </span>
+          );
+        case "Modified":
+          return (
+            <span className={styles.secondaryCell} suppressHydrationWarning>
+              {modifiedDate}
+            </span>
+          );
+        case "LastOpened":
+          return (
+            <span className={styles.secondaryCell} suppressHydrationWarning>
+              {lastOpenedDate}
+            </span>
+          );
+        case "Erasure":
+          return (
+            <span className={styles.secondaryCell} title={erasureLabel}>
+              {erasureLabel}
+            </span>
+          );
+        case "Size":
+          return <span className={styles.secondaryCell}>{fileSize}</span>;
+        case "Type":
+          return <span className={styles.secondaryCell}>{fileType}</span>;
+        default:
+          return null;
+      }
+    };
+
     return (
-      <TableRow
-        className={classNames({
-          "table-row-selected": isChecked,
-          [styles.isHighlight]: filesListStore.highlightFileId === item.id,
-        })}
-        checked={isChecked}
-        contextOptions={contextMenuModel}
-        getContextModel={getContextMenuModel}
-        onClick={onRowClick}
-        onDoubleClick={onRowDoubleClick}
-        selectionProp={{ className: classNames("files-item", "table-container_file-name-cell"), value }}
-        fileContextClick={(isRightClick?: boolean) => {
-          if (isRightClick && filesSelectionStore.selection.length > 1) return;
-          filesSelectionStore.setSelection([]);
-          filesSelectionStore.setBufferSelection(item);
-        }}
+      <DragAndDrop
+        data-title={item.title}
+        className={classNames(styles.dragAndDropWrapper, "files-item", { droppable: isDroppable })}
+        value={value}
+        onDrop={dragCtx ? (files) => { if (isDroppable) dragCtx.onFilesDroppedToFolder(files, item.id as number); else dragCtx.onFilesDroppedToCurrentFolder(files); } : undefined}
+        onDragOver={dragCtx ? (isDragActive: boolean, e: React.DragEvent<HTMLElement>) => { const over = isDragActive && isDroppable; e.currentTarget.classList.toggle("droppable-hover", over); if (over) dragCtx.onFolderDragOver(item.title); else dragCtx.onFolderDragLeave(); } : undefined}
+        onDragLeave={dragCtx ? (e: React.DragEvent<HTMLElement>) => { e.currentTarget.classList.remove("droppable-hover"); dragCtx.onFolderDragLeave(); } : undefined}
+        // @ts-expect-error: native onMouseDown with event arg passed via ...rest to root div
+        onMouseDown={(e: MouseEvent) => dragCtx?.onItemMouseDown(e, item)}
       >
-        <TableCell
-          className="table-container_file-name-cell table-container_element-wrapper"
-          hasAccess
+        <TableRow
+          className={classNames({
+            "table-row-selected": isChecked,
+            [styles.isHighlight]: filesListStore.highlightFileId === item.id,
+          })}
           checked={isChecked}
+          contextOptions={contextMenuModel}
+          getContextModel={getContextMenuModel}
+          onClick={onRowClick}
+          onDoubleClick={onRowDoubleClick}
+          selectionProp={{ className: classNames("files-item", "table-container_file-name-cell"), value }}
+          fileContextClick={(isRightClick?: boolean) => {
+            if (isRightClick && filesSelectionStore.selection.length > 1) return;
+            filesSelectionStore.setSelection([]);
+            filesSelectionStore.setBufferSelection(item);
+          }}
         >
-          <div className="table-container_element-container" onClick={(e) => e.stopPropagation()}>
-            <div className="table-container_element">
-              <RoomIcon
-                logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
-                color={"isRoom" in item && item.isRoom ? item.roomIconColor : undefined}
-                title={item.title}
-                showDefault={"isRoom" in item && item.isRoom ? !item.hasRoomImage : false}
+          <TableCell
+            className="table-container_file-name-cell table-container_element-wrapper"
+            hasAccess
+            checked={isChecked}
+          >
+            <div className="table-container_element-container" onClick={(e) => e.stopPropagation()}>
+              <div className="table-container_element">
+                <EncryptedItemIconWrapper
+                  encrypted={
+                    !!("encrypted" in item && (item as TFileItem).encrypted)
+                  }
+                  hasEncryptionKeys={hasEncryptionKeys ?? true}
+                  isRoom={false}
+                >
+                  <RoomIcon
+                    logo={
+                      "isRoom" in item && item.isRoom ? item.roomLogo : item.icon
+                    }
+                    color={
+                      "isRoom" in item && item.isRoom
+                        ? item.roomIconColor
+                        : undefined
+                    }
+                    title={title}
+                    showDefault={
+                      "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
+                    }
+                  />
+                </EncryptedItemIconWrapper>
+              </div>
+              <Checkbox
+                className="table-container_row-checkbox"
+                onChange={onCheckboxChange}
+                isChecked={isChecked}
+                title={t("Common:TitleSelectFile")}
               />
             </div>
-            <Checkbox
-              className="table-container_row-checkbox"
-              onChange={onCheckboxChange}
-              isChecked={isChecked}
-              title={t("Common:TitleSelectFile")}
-            />
-          </div>
-          <span className={styles.nameCellText} onClick={onNameClick}>
-            {titleWithoutExt}
-            {displayFileExtension && "fileExst" in item ? (
-              <span className={styles.nameCellExst}>{item.fileExst}</span>
-            ) : null}
-          </span>
-          {badgesNode}
-          {lastColumn === "Name" ? quickButtonsNode : null}
-        </TableCell>
-        <TableCell className={lastColumn === "Author" ? styles.lastCell : undefined}>
-          {item.createdBy ? (
-            <AuthorCell
-              fileOwner={fileOwner || ""}
-              createdBy={item.createdBy}
-            />
-          ) : null}
-          {lastColumn === "Author" ? quickButtonsNode : null}
-        </TableCell>
-        <TableCell className={lastColumn === "Created" ? styles.lastCell : undefined}>
-          <span className={styles.secondaryCell} suppressHydrationWarning>{createdDate}</span>
-          {lastColumn === "Created" ? quickButtonsNode : null}
-        </TableCell>
-        <TableCell className={lastColumn === "Modified" ? styles.lastCell : undefined}>
-          <span className={styles.secondaryCell} suppressHydrationWarning>{modifiedDate}</span>
-          {lastColumn === "Modified" ? quickButtonsNode : null}
-        </TableCell>
-        <TableCell className={lastColumn === "Size" ? styles.lastCell : undefined}>
-          <span className={styles.secondaryCell}>{fileSize}</span>
-          {lastColumn === "Size" ? quickButtonsNode : null}
-        </TableCell>
-        <TableCell className={lastColumn === "Type" ? styles.lastCell : undefined}>
-          <span className={styles.secondaryCell}>{fileType}</span>
-          {lastColumn === "Type" ? quickButtonsNode : null}
-        </TableCell>
-      </TableRow>
+            <span className={styles.nameCellText} onClick={onNameClick}>
+              {titleWithoutExt}
+              {displayFileExtension && "fileExst" in item ? (
+                <span className={styles.nameCellExst}>{item.fileExst}</span>
+              ) : null}
+            </span>
+            {badgesNode}
+            {lastColumn === "Name" ? quickButtonsNode : null}
+          </TableCell>
+          {sectionColumns
+            .filter((column: SectionColumn) => column.key !== "Name")
+            .map((column: SectionColumn) => (
+              <TableCell
+                key={column.key}
+                className={
+                  lastColumn === column.key ? styles.lastCell : undefined
+                }
+              >
+                {renderCell(column.key)}
+                {lastColumn === column.key ? quickButtonsNode : null}
+              </TableCell>
+            ))}
+        </TableRow>
+      </DragAndDrop>
     );
   },
 );

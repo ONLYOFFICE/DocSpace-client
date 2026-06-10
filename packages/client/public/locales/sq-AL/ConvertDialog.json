@@ -2,6 +2,5 @@
   "ConversionMessage": "Të gjitha dokumentet që ndarkoni do të konvertohen në formatin Office Open XML (docx, xlsx ose pptx) për redaktim më të shpejtë.",
   "ConvertedFileDestination": "Kopja e skedarit dp të krijohet në dosjen<strong>{{folderTitle}}</strong>.",
   "FileUploadTitle": "Ngarkimi skedarit",
-  "HideMessage": "Mos e shfaqni më këtë mesazh",
   "InfoCreateFileIn": "Skedari i ri '{{fileTitle}}' është krijuar në '{{folderTitle}}'"
 }

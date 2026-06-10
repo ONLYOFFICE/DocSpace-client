@@ -1613,6 +1613,10 @@ class FilesActionStore {
       return this.duplicateEncryptedFile(item);
     }
 
+    if (!item.fileExst && this.treeFoldersStore.isPrivacyFolder) {
+      return;
+    }
+
     const { setSecondaryProgressBarData } =
       this.uploadDataStore.secondaryProgressDataStore;
     const { clearActiveOperations } = this.uploadDataStore;
@@ -1698,6 +1702,7 @@ class FilesActionStore {
   duplicateEncryptedFile = async (item) => {
     return this.copyEncryptedFilesToFolder([item], item.folderId, {
       private: true,
+      rootFolderId: this.selectedFolderStore.rootFolderId,
       roomType: this.selectedFolderStore.roomType ?? RoomsType.CustomRoom,
     });
   };
@@ -1834,10 +1839,12 @@ class FilesActionStore {
           ? t("AIAgentsPinned", { aiAgents: t("Common:AIAgents") })
           : t("AIAgentsUnpinned", { aiAgents: t("Common:AIAgents") });
       } else {
-        translationForOneItem = isPin ? t("RoomPinned") : t("RoomUnpinned");
+        translationForOneItem = isPin
+          ? t("Common:RoomPinned")
+          : t("Common:RoomUnpinned");
         translationForSeverals = isPin
-          ? t("RoomsPinned", { count: elems.length })
-          : t("RoomsUnpinned", { count: elems.length });
+          ? t("Common:RoomsPinned", { count: elems.length })
+          : t("Common:RoomsUnpinned", { count: elems.length });
       }
 
       toastr.success(
@@ -1870,7 +1877,7 @@ class FilesActionStore {
           ? toastr.error(
               t("AIAgentPinLimitMessage", { aiAgents: t("Common:AIAgents") }),
             )
-          : toastr.error(t("RoomsPinLimitMessage"));
+          : toastr.error(t("Common:RoomsPinLimitMessage"));
       }
 
       return;
@@ -1909,8 +1916,8 @@ class FilesActionStore {
       } else treeFolders[treeIndex].newItems = count + newCount;
     }
 
-    let notificationsDisabled = t("RoomNotificationsDisabled");
-    let notificationsEnabled = t("RoomNotificationsEnabled");
+    let notificationsDisabled = t("Common:RoomNotificationsDisabled");
+    let notificationsEnabled = t("Common:RoomNotificationsEnabled");
 
     if (isAIAgent) {
       notificationsDisabled = t("Common:AIAgentNotificationsDisabled", {
@@ -2013,7 +2020,7 @@ class FilesActionStore {
           .then(() => {
             const successTranslation =
               folders.length !== 1 && Array.isArray(folders)
-                ? t("ArchivedRoomsAction")
+                ? t("Common:ArchivedRoomsAction")
                 : Array.isArray(folders)
                   ? t("Common:ArchivedRoomAction", { name: folders[0].title })
                   : t("Common:ArchivedRoomAction", { name: folders.title });
@@ -2078,10 +2085,10 @@ class FilesActionStore {
           .then(() => {
             const successTranslation =
               folders.length !== 1 && Array.isArray(folders)
-                ? t("UnarchivedRoomsAction")
+                ? t("Common:UnarchivedRoomsAction")
                 : Array.isArray(folders)
-                  ? t("UnarchivedRoomAction", { name: folders[0].title })
-                  : t("UnarchivedRoomAction", { name: folders.title });
+                  ? t("Common:UnarchivedRoomAction", { name: folders[0].title })
+                  : t("Common:UnarchivedRoomAction", { name: folders.title });
 
             toastr.success(successTranslation);
           })
@@ -2414,6 +2421,42 @@ class FilesActionStore {
   };
 
   moveDragItems = (destFolderId, folderTitle, destFolderInfo) => {
+    const sourceInPrivateRoom = this.treeFoldersStore.isPrivacyFolder;
+    const isDestInsideSameRoom =
+      sourceInPrivateRoom &&
+      destFolderInfo?.rootFolderType === FolderType.Rooms;
+    const isPrivateDestination =
+      destFolderInfo?.private === true || isDestInsideSameRoom;
+
+    if (isPrivateDestination && !sourceInPrivateRoom) {
+      toastr.error(i18n.t("Common:CannotTransferToPrivateRoom"));
+      return;
+    }
+
+    if (!isPrivateDestination && sourceInPrivateRoom) {
+      const { bufferSelection: dragBufferSelection } = this.filesStore;
+      const dragSelection = (
+        dragBufferSelection ? [dragBufferSelection] : this.filesStore.selection
+      ).filter((el) => !el.isFolder || el.id !== destFolderId);
+
+      const files = dragSelection.filter((el) => !el.isFolder);
+      const hasFolders = dragSelection.some((el) => el.isFolder);
+
+      if (hasFolders) {
+        toastr.error(i18n.t("Common:CannotTransferFolderFromPrivateRoom"));
+      }
+
+      if (files.length > 0) {
+        this.copyEncryptedFilesToFolder(files, destFolderId, {
+          private: false,
+          rootFolderId: destFolderInfo?.rootFolderId,
+          roomType: destFolderInfo?.roomType,
+        });
+      }
+
+      return;
+    }
+
     const folderIds = [];
     const fileIds = [];
     const deleteAfter = false;
@@ -2703,8 +2746,8 @@ class FilesActionStore {
     });
 
     const translations = {
-      successRemoveRoom: t("Files:RoomRemoved"),
-      successRemoveRooms: t("Files:RoomsRemoved"),
+      successRemoveRoom: t("Common:RoomRemoved"),
+      successRemoveRooms: t("Common:RoomsRemoved"),
     };
 
     this.deleteItemAction(items, "", translations, null, null, true);
@@ -3026,7 +3069,6 @@ class FilesActionStore {
     itemsCollection
       .set("download", download)
       .set("moveTo", moveTo)
-
       .set("delete", deleteOption)
       .set("showInfo", showInfo);
 
@@ -3302,7 +3344,7 @@ class FilesActionStore {
       if ((fileStatus & FileStatus.IsNew) === FileStatus.IsNew)
         await this.onMarkAsRead(item);
 
-      if (canWebEdit || canViewedDocs) {
+      if ((canWebEdit || canViewedDocs) && !item.encrypted) {
         let shareKey = item.requestToken;
 
         if (webUrl) {
@@ -3337,6 +3379,12 @@ class FilesActionStore {
       if (!item.security.Download) {
         toastr.error(t("Files:FileDownloadingIsRestricted"));
         return;
+      }
+
+      if (item.encrypted) {
+        return this.downloadEncryptedFile(item).catch((err) =>
+          toastr.error(err),
+        );
       }
 
       return window.open(viewUrl, "_self");

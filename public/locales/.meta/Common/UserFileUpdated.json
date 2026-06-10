@@ -3,7 +3,7 @@
   "content": "File updated.",
   "content_en_sha1_hash": "7251f176a4d35c681a5ea6f7875b303dc87be63f",
   "created_at": "2026-05-19T19:03:26.724Z",
-  "updated_at": "2026-05-24T17:27:49.123Z",
+  "updated_at": "2026-06-09T09:43:10.870Z",
   "comment": {
     "text": "A status message in the activity feed that appears when a user modifies a file.",
     "is_auto": true,
@@ -14,19 +14,19 @@
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
       "line_number": 71,
-      "context": "return t(\"InfoPanel:FileUploadedCount\", {\n count,\n });\n return t(\"Common:FilesAddedNotify\");\n case FeedActionKeys.UserFileUpdated:\n return t(\"Common:UserFileUpdated\");\n case FeedActionKeys.FileConverted:\n return t(\"Common:FileConverted\");\n case FeedActionKeys.FileRenamed:\n return t(\"Common:FileRenamedNotify\");\n case FeedActionKeys.FileMoved:",
+      "context": "return t(\"Common:FileUploadedCount\", {\n count,\n });\n return t(\"Common:FilesAddedNotify\");\n case FeedActionKeys.UserFileUpdated:\n return t(\"Common:UserFileUpdated\");\n case FeedActionKeys.FileConverted:\n return t(\"Common:FileConverted\");\n case FeedActionKeys.FileRenamed:\n return t(\"Common:FileRenamedNotify\");\n case FeedActionKeys.FileMoved:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 65,
-      "context": "return t(\"InfoPanel:FileUploadedCount\", {\n count,\n });\n return t(\"Common:FilesAddedNotify\");\n case FeedActionKeys.UserFileUpdated:\n return t(\"Common:UserFileUpdated\");\n case FeedActionKeys.FileConverted:\n return t(\"Common:FileConverted\");\n case FeedActionKeys.FileRenamed:\n return t(\"Common:FileRenamedNotify\");\n case FeedActionKeys.FileMoved:",
+      "context": "return t(\"Common:FileUploadedCount\", {\n count,\n });\n return t(\"Common:FilesAddedNotify\");\n case FeedActionKeys.UserFileUpdated:\n return t(\"Common:UserFileUpdated\");\n case FeedActionKeys.FileConverted:\n return t(\"Common:FileConverted\");\n case FeedActionKeys.FileRenamed:\n return t(\"Common:FileRenamedNotify\");\n case FeedActionKeys.FileMoved:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
-      "line_number": 56,
-      "context": "case FeedActionKeys.FileCreated:\n return t(\"Common:FileCreatedNotify\");\n case FeedActionKeys.FileUploaded:\n return t(\"Common:FilesAddedNotify\");\n case FeedActionKeys.UserFileUpdated:\n return t(\"Common:UserFileUpdated\");\n case FeedActionKeys.FileConverted:\n return t(\"Common:FileConverted\");\n case FeedActionKeys.FileRenamed:\n return t(\"Common:FileRenamedNotify\");\n case FeedActionKeys.FileMoved:",
+      "line_number": 64,
+      "context": "return t(\"Common:FileUploadedCount\", {\n count,\n });\n return t(\"Common:FilesAddedNotify\");\n case FeedActionKeys.UserFileUpdated:\n return t(\"Common:UserFileUpdated\");\n case FeedActionKeys.FileConverted:\n return t(\"Common:FileConverted\");\n case FeedActionKeys.FileRenamed:\n return t(\"Common:FileRenamedNotify\");\n case FeedActionKeys.FileMoved:",
       "module": "/packages/sdk"
     }
   ],
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

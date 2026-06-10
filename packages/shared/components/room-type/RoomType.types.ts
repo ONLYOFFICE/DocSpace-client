@@ -11,6 +11,7 @@ export type RoomTypeProps = {
 
   onClick: React.MouseEventHandler<HTMLElement>;
   disabledFormRoom?: boolean;
+  disabledPublicRoom?: boolean;
   isTemplate?: boolean;
   isTemplateRoom?: boolean;
 };

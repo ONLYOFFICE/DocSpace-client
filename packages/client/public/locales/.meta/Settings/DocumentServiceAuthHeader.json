@@ -3,7 +3,7 @@
   "content": "Authorization header",
   "content_en_sha1_hash": "b4e71c87b167fcd1f2219f26ed7bbc978140646c",
   "created_at": "2025-05-19T21:30:51.346Z",
-  "updated_at": "2026-06-01T21:20:44.489Z",
+  "updated_at": "2026-06-09T09:43:10.911Z",
   "comment": {
     "text": "This is a label for an input field where users can enter an authorization header for document service integration.",
     "is_auto": true,
@@ -16,6 +16,18 @@
       "line_number": 354,
       "context": "{isShowAdvancedSettings ? (\n <>\n <div className={styles.inputWrapper}>\n <Label\n htmlFor=\"authHeader\"\n text={t(\"Settings:DocumentServiceAuthHeader\")}\n />\n <InputBlock\n id=\"authHeader\"\n type=\"text\"\n autoComplete=\"off\"",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docs-cloud)/docs-cloud/_tabs/Information.tsx",
+      "line_number": 259,
+      "context": "setCopied(true);\n setTimeout(() => setCopied(false), 1200);\n }}\n />\n </PropertyRow>\n <PropertyRow label={t(\"DocumentServiceAuthHeader\")}>\n <span className={styles.codeChip}>{info.authorizationHeader}</span>\n </PropertyRow>\n <PropertyRow label={t(\"DocsCloud:DocumentServerSecret\")}>\n {info.documentServerSecret ? (\n <>",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docs-cloud)/docs-cloud/_tabs/Settings.tsx",
+      "line_number": 95,
+      "context": "</span>\n </div>\n <div className={styles.sectionCard}>\n <div className={styles.field}>\n <label className={styles.fieldLabel}>\n {t(\"DocumentServiceAuthHeader\")}\n </label>\n <TextInput\n type={InputType.text}\n value={draft.authorizationHeader}\n onChange={(e) => setField(\"authorizationHeader\", e.target.value)}",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -149,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

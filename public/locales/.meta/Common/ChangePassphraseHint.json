@@ -3,7 +3,7 @@
   "content": "Enter your current passphrase and create a new one. Your encryption key will be re-encrypted with the new passphrase.",
   "content_en_sha1_hash": "decee6e9a53a1ffef55c8442f72cafc1865d704a",
   "created_at": "2026-05-24T17:27:20.640Z",
-  "updated_at": "2026-05-24T18:29:23.709Z",
+  "updated_at": "2026-06-09T09:43:10.925Z",
   "comment": {
     "text": "Description text in the Key Rotation modal dialog providing instructions for updating the passphrase and explaining the re-encryption process.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/KeyRotationDialog.tsx",
-      "line_number": 143,
-      "context": "<ModalDialog.Header>{t(\"Common:ChangePassphrase\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.container}>\n <Text className={styles.description}>\n {t(\"Common:ChangePassphraseHint\")}\n </Text>\n \n {error && (\n <div className={styles.errorBox}>\n <Text fontSize=\"13px\" fontWeight={600} color=\"var(--color-error)\">",
+      "line_number": 149,
+      "context": "<ModalDialog.Header>{t(\"Common:ChangePassphrase\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.container}>\n <Text className={styles.description}>\n {t(\"Common:ChangePassphraseHint\")}\n </Text>\n \n <div className={styles.inputGroup}>\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:CurrentPassphrase\")}",
       "module": "/packages/client"
     }
   ],

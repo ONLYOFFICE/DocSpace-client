@@ -34,7 +34,14 @@
  */
 
 import React, { useEffect } from "react";
-import { now, parseToDateTime, formatDate, formatDateLocalized, isBefore, isAfter } from "@docspace/ui-kit/utils/date";
+import {
+  now,
+  parseToDateTime,
+  formatDate,
+  formatDateLocalized,
+  isBefore,
+  isAfter,
+} from "@docspace/ui-kit/utils/date";
 import { Outlet, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -51,7 +58,13 @@ import { Toast, toastr, ToastType } from "@docspace/ui-kit/components/toast";
 import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
 import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
 import { updateTempContent } from "@docspace/shared/utils/common";
-import { DeviceType, IndexedDBStores, InfoPanelEvents, SearchArea } from "@docspace/shared/enums";
+import {
+  AnalyticsEvents,
+  DeviceType,
+  IndexedDBStores,
+  InfoPanelEvents,
+  SearchArea,
+} from "@docspace/shared/enums";
 import { setFileView } from "SRC_DIR/helpers/info-panel";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { CategoryType } from "@docspace/shared/constants";
@@ -353,7 +366,9 @@ const Shell = ({ page = "home", ...rest }) => {
 
     // lastCampaignStr = campaignStr;
 
-    const targetDate = to ? formatDateLocalized(to, "DATE_MED", { locale: language }) : "";
+    const targetDate = to
+      ? formatDateLocalized(to, "DATE_MED", { locale: language })
+      : "";
 
     const barConfig = {
       parentElementId: "main-bar",
@@ -367,7 +382,10 @@ const Shell = ({ page = "home", ...rest }) => {
         setMaintenanceExist(false);
         setSnackbarExist(false);
         SnackBar.close();
-        localStorage.setItem(LS_CAMPAIGN_DATE, to ? formatDate(to, DATE_FORMAT) : "");
+        localStorage.setItem(
+          LS_CAMPAIGN_DATE,
+          to ? formatDate(to, DATE_FORMAT) : "",
+        );
       },
       opacity: 1,
       onLoad: () => {
@@ -480,11 +498,17 @@ const Shell = ({ page = "home", ...rest }) => {
   }, [userTheme]);
 
   useEffect(() => {
-    if (
-      isLoaded &&
-      localStorage.getItem("socialAuthWelcomeBar") === "true"
-    ) {
+    if (isLoaded && localStorage.getItem("socialAuthWelcomeBar") === "true") {
       setSocialAuthWelcomeDialogVisible(true);
+
+      if (localStorage.getItem("portalCreatedEventSent") !== "true") {
+        localStorage.setItem("portalCreatedEventSent", "true");
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: AnalyticsEvents.PortalCreated,
+        });
+      }
     }
   }, [isLoaded]);
 
@@ -744,3 +768,4 @@ const Root = () => (
 );
 
 export default Root;
+

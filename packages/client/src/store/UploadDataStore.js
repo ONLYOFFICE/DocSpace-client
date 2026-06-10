@@ -47,6 +47,8 @@ import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
 import {
   prepareEncryptedUpload,
   shouldEncryptUpload,
+  resolveItemRoomContext,
+  willEncryptUploadItem,
 } from "@docspace/shared/services/private-room/encrypted-upload";
 import {
   getFileInfo,
@@ -68,12 +70,18 @@ import {
 import { getRoomEncryptionKeys } from "@docspace/shared/api/privacy";
 import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
 import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
-import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
+import {
+  requireUnlock,
+  suspendAutoLock,
+} from "@docspace/shared/services/encryption/secret-storage";
 import {
   getActiveKeyId,
   selectActiveKey,
 } from "@docspace/shared/services/encryption/active-key-preference";
-import { rememberEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
+import {
+  rememberEncryptedFilename,
+  resolveDisplayTitle,
+} from "@docspace/shared/services/encryption/filename-cache";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 
@@ -101,6 +109,8 @@ const removeDuplicate = (items) => {
 };
 
 const dekByFileEntry = new WeakMap();
+
+let uploadAutoLockRelease = null;
 
 function setFileDek(entry, dek) {
   if (!entry) return;
@@ -391,18 +401,120 @@ class UploadDataStore {
   };
 
   shouldEncryptCurrentUpload = () => {
-    const { roomType, private: isPrivate } = this.selectedFolderStore;
+    const isPrivate = this.treeFoldersStore.isPrivacyFolder;
+    const roomType = isPrivate
+      ? RoomsType.CustomRoom
+      : this.selectedFolderStore.roomType;
     const { publicKey, userId } = this.getUserEncryptionKeys();
     return shouldEncryptUpload(roomType, isPrivate) && !!publicKey && !!userId;
   };
 
+  getUploadFolderContext = () => ({
+    isPrivacyFolder: this.treeFoldersStore.isPrivacyFolder,
+    selectedRoomType: this.selectedFolderStore.roomType,
+  });
+
+  getUploadEncryptionContext = (item) => {
+    return resolveItemRoomContext(
+      item?.file?.uploadContext,
+      this.getUploadFolderContext(),
+    );
+  };
+
+  willEncryptItem = (item) => {
+    if (!item) return false;
+    const { publicKey, userId } = this.getUserEncryptionKeys();
+    return willEncryptUploadItem(
+      {
+        uploadContext: item.file?.uploadContext,
+        alreadyEncrypted: item.encrypted,
+        publicKey,
+        userId,
+      },
+      this.getUploadFolderContext(),
+    );
+  };
+
+  ensureEncryptionUnlockedForBatch = async () => {
+    const { userId } = this.getUserEncryptionKeys();
+    if (!userId) return true;
+
+    const needsUnlock = this.files.some(
+      (item) =>
+        !item.inAction &&
+        !item.error &&
+        !item.cancel &&
+        item.action === "upload" &&
+        this.willEncryptItem(item),
+    );
+
+    if (!needsUnlock) return true;
+
+    const identity = await requireUnlock(String(userId));
+    return !!identity;
+  };
+
+  cancelEncryptedBatchUpload = () => {
+    runInAction(() => {
+      this.files.forEach((item) => {
+        if (
+          item.inAction ||
+          item.error ||
+          item.cancel ||
+          item.action !== "upload" ||
+          !this.willEncryptItem(item)
+        )
+          return;
+
+        item.cancel = true;
+        item.action = "uploaded";
+        item.percent = 100;
+        this.uploadedFilesHistory = this.uploadedFilesHistory.filter(
+          (f) => f.uniqueId !== item.uniqueId,
+        );
+      });
+
+      this.percent = this.getFilesPercent();
+    });
+
+    try {
+      toastr.info(getI18n().t("Common:EncryptionUploadCancelled"));
+    } catch {
+      //
+    }
+  };
+
+  acquireUploadAutoLockSuspension = () => {
+    if (uploadAutoLockRelease) return;
+    try {
+      uploadAutoLockRelease = suspendAutoLock();
+    } catch {
+      uploadAutoLockRelease = null;
+    }
+  };
+
+  releaseUploadAutoLockSuspension = () => {
+    if (!uploadAutoLockRelease) return;
+    try {
+      uploadAutoLockRelease();
+    } catch {
+      //
+    }
+    uploadAutoLockRelease = null;
+  };
+
   prepareFileForEncryptedUpload = async (file, folderId, onProgress) => {
     const overrideCtx = file?.uploadContext;
-    const roomType = overrideCtx?.roomType ?? this.selectedFolderStore.roomType;
+    const ancestorIsPrivate = this.treeFoldersStore.isPrivacyFolder;
+    const roomType =
+      overrideCtx?.roomType ??
+      (ancestorIsPrivate
+        ? RoomsType.CustomRoom
+        : this.selectedFolderStore.roomType);
     const isPrivate =
       overrideCtx && "isPrivate" in overrideCtx
         ? overrideCtx.isPrivate
-        : this.selectedFolderStore.private;
+        : ancestorIsPrivate;
     return prepareEncryptedUpload({
       file,
       folderId,
@@ -1085,7 +1197,11 @@ class UploadDataStore {
 
           if (file && isSortedFolder) {
             const folderId = file.fileInfo?.folderId;
-            const fileTitle = file.fileInfo?.title;
+            const fileTitle = resolveDisplayTitle({
+              id: file.fileInfo?.id,
+              title: file.fileInfo?.title,
+              encrypted: file.encrypted ?? file.fileInfo?.encrypted,
+            });
 
             folderId &&
               getFolderInfo(folderId)
@@ -1332,6 +1448,8 @@ class UploadDataStore {
       this.selectedFolderStore.navigationPath?.find((r) => r.isRoom)?.id ??
       (this.selectedFolderStore.isRoom ? this.selectedFolderStore.id : null);
 
+    const isPrivateUpload = this.treeFoldersStore.isPrivacyFolder;
+
     if (this.uploaded) {
       this.files = this.files.filter((f) => f.action !== "upload" || f.error);
       this.filesSize = 0;
@@ -1357,7 +1475,7 @@ class UploadDataStore {
 
       const parts = file.name.split(".");
       const ext = parts.length > 1 ? `.${parts.pop()}` : "";
-      const needConvert = canConvert(ext);
+      const needConvert = !isPrivateUpload && canConvert(ext);
 
       const newFile = {
         file,
@@ -2007,6 +2125,29 @@ class UploadDataStore {
       return this.finishUploadFiles(t);
     }
 
+    const canProceed = await this.ensureEncryptionUnlockedForBatch();
+    if (!canProceed) {
+      this.cancelEncryptedBatchUpload();
+    }
+
+    const notUploadedFiles = this.files.filter(
+      (f) => !f.inAction && !f.cancel && !f.error,
+    );
+
+    if (notUploadedFiles.length === 0) {
+      runInAction(() => {
+        this.uploaded = true;
+        this.converted = true;
+      });
+      this.primaryProgressDataStore.setPrimaryProgressBarData({
+        operation: OPERATIONS_NAME.upload,
+        completed: true,
+        withoutStatus: this.uploadedFilesHistory.length === 0,
+        ...(this.uploadedFilesHistory.length === 0 && { showPanel: null }),
+      });
+      return;
+    }
+
     const progressData = {
       completed: false,
       percent: this.percent,
@@ -2018,7 +2159,9 @@ class UploadDataStore {
 
     this.primaryProgressDataStore.setPrimaryProgressBarData(progressData);
 
-    const notUploadedFiles = this.files.filter((f) => !f.inAction);
+    if (notUploadedFiles.some((f) => this.willEncryptItem(f))) {
+      this.acquireUploadAutoLockSuspension();
+    }
 
     this.parallelUploading(notUploadedFiles, t, createNewIfExist);
   };
@@ -2055,12 +2198,7 @@ class UploadDataStore {
     }
 
     const { chunkUploadSize } = this.filesSettingsStore;
-    const overrideCtx = item.file?.uploadContext;
-    const roomType = overrideCtx?.roomType ?? this.selectedFolderStore.roomType;
-    const isPrivate =
-      overrideCtx && "isPrivate" in overrideCtx
-        ? overrideCtx.isPrivate
-        : this.selectedFolderStore.private;
+    const { roomType, isPrivate } = this.getUploadEncryptionContext(item);
 
     const { file, toFolderId /* , action */ } = item;
     let fileToUpload = file;
@@ -2448,6 +2586,8 @@ class UploadDataStore {
   };
 
   finishUploadFiles = (t, waitConversion) => {
+    this.releaseUploadAutoLockSuspension();
+
     const filesWithErrors = this.uploadedFilesHistory.filter(
       (f) => f.error && !f.errorShown,
     );
@@ -2837,6 +2977,10 @@ class UploadDataStore {
 
     if (!isCopy || destFolderId === this.selectedFolderStore.id) {
       this.clearActiveOperations(fileIds, folderIds);
+
+      if (!isCopy) {
+        this.filesStore.removeFiles(fileIds, folderIds, null, destFolderId);
+      }
 
       isMovingSelectedFolder &&
         this.navigateToNewFolderLocation(this.selectedFolderStore.id);

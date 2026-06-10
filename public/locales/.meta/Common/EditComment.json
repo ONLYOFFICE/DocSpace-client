@@ -3,7 +3,7 @@
   "content": "Edit comment",
   "content_en_sha1_hash": "3b168257183896cf72ca48607075940bcabeb683",
   "created_at": "2026-06-01T21:20:38.160Z",
-  "updated_at": "2026-06-01T21:37:38.499Z",
+  "updated_at": "2026-06-09T09:43:10.928Z",
   "comment": {
     "text": "Button label or menu item label used to initiate the editing of a comment within the version history panel.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/version-history-panel/index.tsx",
-      "line_number": 423,
-      "context": "const anonymousLabel = t(\"Common:Anonymous\");\n const openLabel = t(\"Common:Open\");\n const downloadLabel = t(\"Common:Download\");\n const actionsLabel = t(\"Common:Actions\");\n const editCommentLabel = t(\"Common:EditComment\");\n const restoreLabel = t(\"Common:Restore\");\n const title =\n versions && versions.length > 0 ? versions[0].title : (file?.title ?? \"\");\n \n const onDeleteRequest = React.useCallback(",
+      "line_number": 424,
+      "context": "const anonymousLabel = t(\"Common:Anonymous\");\n const openLabel = t(\"Common:Open\");\n const downloadLabel = t(\"Common:Download\");\n const actionsLabel = t(\"Common:Actions\");\n const editCommentLabel = t(\"Common:EditComment\");\n const restoreLabel = t(\"Common:Restore\");\n const title = useResolvedFileTitle(\n versions && versions.length > 0 ? versions[0] : file,\n );",
       "module": "/packages/sdk"
     }
   ],
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

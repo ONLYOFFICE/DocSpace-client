@@ -1,0 +1,29 @@
+{
+  "key_path": "WalletTopUpCallbackProcessingTitle",
+  "content": "Adding credits to your wallet",
+  "content_en_sha1_hash": "d5ba93b442290ae45931efee6a2b93e70846a108",
+  "created_at": "2026-06-02T15:02:53.706Z",
+  "updated_at": "2026-06-02T15:07:07.113Z",
+  "comment": {
+    "text": "Page title shown during the processing stage of a wallet credit top-up.",
+    "is_auto": true,
+    "updated_at": "2026-06-02T15:07:07.113Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
+      "line_number": 206,
+      "context": "{status === \"processing\" ? (\n <>\n <div className={styles.heroText}>\n <Text fontSize=\"16px\" fontWeight={600} className={styles.title}>\n {isWalletOnly\n ? t(\"WalletTopUpCallbackProcessingTitle\")\n : t(\"AIPaywallCallbackProcessing\")}\n </Text>\n <Text lineHeight=\"20px\">\n {isWalletOnly\n ? t(\"WalletTopUpCallbackProcessingHint\")",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

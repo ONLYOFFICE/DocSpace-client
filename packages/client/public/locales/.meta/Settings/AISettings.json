@@ -3,7 +3,7 @@
   "content": "AI settings",
   "content_en_sha1_hash": "6dcf51d7630d6e48c2162d10dfcc2c61485912c7",
   "created_at": "2025-10-27T16:14:27.398Z",
-  "updated_at": "2026-05-24T17:27:49.094Z",
+  "updated_at": "2026-06-03T11:46:06.823Z",
   "comment": {
     "text": "This is a label for a section or link related to artificial intelligence settings. It appears in dialogs and portal settings pages.",
     "is_auto": true,
@@ -31,37 +31,37 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 251,
-      "context": "case \"StorageManagement\":\n return t(\"StorageManagement\");\n case \"Services\":\n return t(\"Services\");\n case \"AISettings\":\n return t(\"Settings:AISettings\");\n case \"OAuth:Apps\":\n return t(\"OAuth:Apps\");\n default:\n throw new Error(\"Unexpected translation key\");\n }",
+      "line_number": 249,
+      "context": "case \"StorageManagement\":\n return t(\"StorageManagement\");\n case \"Services\":\n return t(\"Services\");\n case \"AISettings\":\n return t(\"Settings:AISettings\");\n case \"NewAISettings\":\n return t(\"Settings:NewAISettings\");\n case \"OAuth:Apps\":\n return t(\"OAuth:Apps\");\n default:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 438,
+      "line_number": 445,
       "context": "{\n id: \"portal-settings_catalog-ai-settings\",\n key: \"4-6\",\n icon: \"\",\n link: \"ai-settings\",\n tKey: \"AISettings\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 438,
+      "line_number": 445,
       "context": "{\n id: \"portal-settings_catalog-ai-settings\",\n key: \"4-6\",\n icon: \"\",\n link: \"ai-settings\",\n tKey: \"AISettings\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 438,
+      "line_number": 445,
       "context": "{\n id: \"portal-settings_catalog-ai-settings\",\n key: \"4-6\",\n icon: \"\",\n link: \"ai-settings\",\n tKey: \"AISettings\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 438,
+      "line_number": 445,
       "context": "{\n id: \"portal-settings_catalog-ai-settings\",\n key: \"4-6\",\n icon: \"\",\n link: \"ai-settings\",\n tKey: \"AISettings\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 438,
+      "line_number": 445,
       "context": "{\n id: \"portal-settings_catalog-ai-settings\",\n key: \"4-6\",\n icon: \"\",\n link: \"ai-settings\",\n tKey: \"AISettings\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     }
@@ -197,7 +197,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

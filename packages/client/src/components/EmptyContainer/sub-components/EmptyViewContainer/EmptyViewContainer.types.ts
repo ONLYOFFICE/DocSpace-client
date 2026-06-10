@@ -97,7 +97,10 @@ export interface InjectedEmptyViewContainerProps
       TStore["selectedFolderStore"],
       "access" | "security" | "rootFolderType"
     >,
-    Pick<TStore["treeFoldersStore"], "myFolder" | "myFolderId" | "roomsFolder">,
+    Pick<
+      TStore["treeFoldersStore"],
+      "myFolder" | "myFolderId" | "roomsFolder" | "isPrivacyFolder"
+    >,
     Pick<TStore["clientLoadingStore"], "setIsSectionFilterLoading"> {
   selectedFolder: ReturnType<
     TStore["selectedFolderStore"]["getSelectedFolder"]
@@ -122,6 +125,7 @@ export interface InjectedEmptyViewContainerProps
   tenantAlias: string;
   baseDomain: string | null;
   socialAuthUser: TStore["userStore"]["user"];
+  isGracePeriod: boolean;
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &

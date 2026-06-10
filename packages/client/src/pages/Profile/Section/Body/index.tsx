@@ -344,7 +344,6 @@ export default inject(
       "BackupCodesDialog",
       "DeleteSelfProfileDialog",
       "Notifications",
-      "ConnectDialog",
       "OAuth",
     ])(SectionBodyContent),
   ),

@@ -182,7 +182,8 @@
       "options": {
         "env": {
           "SKIP_CLIENT": "true",
-          "STORYBOOK": "false"
+          "STORYBOOK": "false",
+          "APP_EDITION": "developer"
         }
       },
       "type": "shell",
@@ -1466,7 +1467,7 @@
     {
       "label": "Translation App | update metadata",
       "type": "shell",
-      "command": "cd '${workspaceFolder}/common/translation-app/backend' && npm install --silent && npm run generate-metadata && npm run save-meta-keys-usage && npm run generate-auto-comments-metadata",
+      "command": "node '${workspaceFolder}/common/scripts/clean-empty-locales.js' && cd '${workspaceFolder}/common/translation-app/backend' && npm install --silent && npm run generate-metadata && npm run save-meta-keys-usage && npm run generate-auto-comments-metadata",
       "group": "build",
       "presentation": {
         "reveal": "always",

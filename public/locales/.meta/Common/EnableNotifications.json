@@ -3,7 +3,7 @@
   "content": "Enable notifications",
   "content_en_sha1_hash": "da3967d004ec4b3493b04e53997991851767517e",
   "created_at": "2025-05-19T21:30:55.594Z",
-  "updated_at": "2026-06-01T21:20:44.515Z",
+  "updated_at": "2026-06-09T09:43:10.929Z",
   "comment": {
     "text": "This is a button label that allows users to re-enable notifications for a specific room or conversation.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1597,
+      "line_number": 1605,
       "context": "const muteOptions = [\n {\n id: \"option_unmute-room\",\n key: \"unmute-room\",\n label: t(\"Common:EnableNotifications\"),\n icon: UnmuteReactSvgUrl,\n onClick: () => this.onClickMute(\"unmute\", item, t),\n disabled: !canMute,\n },\n {",
       "module": "/packages/client"
     },
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 227,
+      "line_number": 264,
       "context": "},\n {\n id: room.mute ? \"option_unmute-room\" : \"option_mute-room\",\n key: room.mute ? \"unmute-room\" : \"mute-room\",\n label: room.mute\n ? t(\"Common:EnableNotifications\")\n : t(\"Common:DisableNotifications\"),\n icon: room.mute ? UnmuteReactSvgUrl : MuteReactSvgUrl,\n onClick: handleMute,\n disabled: !room.security?.Mute || !room.inRoom,\n },",
       "module": "/packages/sdk"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:53.938772Z"
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

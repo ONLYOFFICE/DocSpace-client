@@ -3,7 +3,7 @@
   "content": "Customize cover",
   "content_en_sha1_hash": "b5b9c63cc83c3598cc9ddb9857ac47fb18bca819",
   "created_at": "2025-05-19T21:30:53.313Z",
-  "updated_at": "2026-06-01T21:20:44.521Z",
+  "updated_at": "2026-06-09T09:43:10.936Z",
   "comment": {
     "text": "This is a button label that allows users to modify the cover image of a room.",
     "is_auto": true,
@@ -25,8 +25,14 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
-      "line_number": 247,
+      "line_number": 269,
       "context": "},\n ];\n \n items.push({\n key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_CUSTOMIZE_COVER,\n label: t(\"Common:CustomizeCover\"),\n icon: PencilSvgUrl,\n onClick: onOpenCoverDialog,\n });\n \n if (hasCoverOrPreview) {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/room-logo-editor/useRoomLogoEditor.ts",
+      "line_number": 198,
+      "context": "icon: DeleteSvgUrl,\n onClick: onDeleteLogo,\n }\n : {\n key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_CUSTOMIZE_COVER,\n label: t(\"Common:CustomizeCover\"),\n icon: PencilSvgUrl,\n onClick: onOpenCoverDialog,\n },\n ],\n // eslint-disable-next-line react-hooks/exhaustive-deps",
       "module": "/packages/sdk"
     }
   ],
@@ -161,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

@@ -53,9 +53,11 @@ type EditAgentEventProps = {
   visible: boolean;
   onClose: VoidFunction;
   item: TAgent;
+  context?: string;
   fetchTags: TagsStore["fetchTags"];
   cover: ICover;
   onSaveEditAgent: CreateEditAgentStore["onSaveEditAgent"];
+  setOpenContext: CreateEditAgentStore["setOpenContext"];
   isDefaultAIAgentsQuotaSet: CurrentQuotasStore["isDefaultAIAgentsQuotaSet"];
 };
 
@@ -63,9 +65,11 @@ const EditAgentEvent = ({
   visible,
   onClose,
   item,
+  context,
   fetchTags,
   cover,
   onSaveEditAgent,
+  setOpenContext,
   isDefaultAIAgentsQuotaSet,
 }: EditAgentEventProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
@@ -102,6 +106,13 @@ const EditAgentEvent = ({
     fetchInfo();
   }, []);
 
+  useEffect(() => {
+    setOpenContext(context ?? "");
+    return () => {
+      setOpenContext("");
+    };
+  }, [context, setOpenContext]);
+
   if (!visible) return null;
 
   return (
@@ -131,7 +142,7 @@ export default inject(
 
     const { cover } = dialogsStore;
 
-    const { onSaveEditAgent } = createEditAgentStore;
+    const { onSaveEditAgent, setOpenContext } = createEditAgentStore;
 
     return {
       isDefaultAIAgentsQuotaSet,
@@ -140,6 +151,7 @@ export default inject(
 
       cover,
       onSaveEditAgent,
+      setOpenContext,
     };
   },
 )(observer(EditAgentEvent));

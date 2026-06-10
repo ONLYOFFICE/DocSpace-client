@@ -496,8 +496,8 @@ class ContextOptionsStore {
       .lockFileAction(id, !locked)
       .then(() =>
         locked
-          ? toastr.success(t("Translations:FileUnlocked"))
-          : toastr.success(t("Translations:FileLocked")),
+          ? toastr.success(t("Common:FileUnlocked"))
+          : toastr.success(t("Common:FileLocked")),
       )
       .catch((err) => {
         toastr.error(err);
@@ -537,6 +537,11 @@ class ContextOptionsStore {
         const itemLink = item.isFolder
           ? await getFolderLink(item.id)
           : await getFileLink(item.id);
+
+        if (this.filesSettingsStore.isLinkBlockedByAdmin(item, itemLink)) {
+          toastr.error(t("Common:LinkBlockedByAdminWarning"));
+          return;
+        }
 
         copyToBuffer(itemLink.sharedTo.shareLink);
 
@@ -628,18 +633,21 @@ class ContextOptionsStore {
     const primaryLink = await this.filesStore.getPrimaryLink(item.id);
 
     if (primaryLink) {
+      if (this.filesSettingsStore.isLinkBlockedByAdmin(item, primaryLink)) {
+        toastr.error(t("Common:LinkBlockedByAdminWarning"));
+        return;
+      }
+
       copyShareLink(item, primaryLink, t, this.getManageLinkOptions(item));
-      // copyShareLink(primaryLink.sharedTo.shareLink);
-      // item.shared
-      //   ? toastr.success(t("Common:LinkSuccessfullyCopied"))
-      //   : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
 
       this.publicRoomStore.setExternalLink(primaryLink);
 
       if (item.isRoom || !item.isFolder) {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
-          event: item.isRoom ? AnalyticsEvents.RoomShared : AnalyticsEvents.FileShared,
+          event: item.isRoom
+            ? AnalyticsEvents.RoomShared
+            : AnalyticsEvents.FileShared,
           id: item.id,
           parentId: item.isRoom ? item.parentId : item.folderId,
         });
@@ -915,8 +923,8 @@ class ContextOptionsStore {
 
     if (isRoom) {
       translations = {
-        successRemoveRoom: t("Files:RoomRemoved"),
-        successRemoveRooms: t("Files:RoomsRemoved"),
+        successRemoveRoom: t("Common:RoomRemoved"),
+        successRemoveRooms: t("Common:RoomsRemoved"),
       };
 
       deleteRoomsAction([selectedFolderId], translations).catch((err) =>
@@ -1828,7 +1836,7 @@ class ContextOptionsStore {
         {
           id: "header_option_empty-trash",
           key: "empty-trash",
-          label: t("Files:EmptySection", {
+          label: t("Common:EmptySection", {
             sectionName: t("Common:TrashSection"),
           }),
           onClick: this.onEmptyTrashAction,
@@ -1838,7 +1846,7 @@ class ContextOptionsStore {
         {
           id: "header_option_restore-all",
           key: "restore-all",
-          label: t("RestoreAll"),
+          label: t("Common:RestoreAll"),
           onClick: this.onRestoreAllAction,
           icon: MoveReactSvgUrl,
           disabled: false,
@@ -1859,7 +1867,7 @@ class ContextOptionsStore {
         {
           id: "header_option_restore-all",
           key: "restore-all",
-          label: t("RestoreAll"),
+          label: t("Common:RestoreAll"),
           onClick: this.onRestoreAllArchiveAction,
           disabled: !canRestoreAll,
           icon: MoveReactSvgUrl,
@@ -1884,7 +1892,7 @@ class ContextOptionsStore {
         {
           id: "header_option_empty-section",
           key: "empty-section",
-          label: t("Files:EmptySection", {
+          label: t("Common:EmptySection", {
             sectionName: t("Common:MyDocuments"),
           }),
           onClick: this.onEmptyPersonalAction,
@@ -1903,13 +1911,25 @@ class ContextOptionsStore {
     const primaryLink = await ShareLinkService.getPrimaryLink(item);
 
     if (primaryLink) {
+      if (primaryLink.sharedTo?.isExpired) {
+        toastr.error(t("Common:LinkExpired"));
+        return;
+      }
+
+      if (this.filesSettingsStore.isLinkBlockedByAdmin(item, primaryLink)) {
+        toastr.error(t("Common:LinkBlockedByAdminWarning"));
+        return;
+      }
+
       copyShareLink(item, primaryLink, t, this.getManageLinkOptions(item));
       this.infoPanelStore?.setShareChanged(true);
 
       if (item.isRoom || !item.isFolder) {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
-          event: item.isRoom ? AnalyticsEvents.RoomShared : AnalyticsEvents.FileShared,
+          event: item.isRoom
+            ? AnalyticsEvents.RoomShared
+            : AnalyticsEvents.FileShared,
           id: item.id,
           parentId: item.isRoom ? item.parentId : item.folderId,
         });
@@ -3138,6 +3158,7 @@ class ContextOptionsStore {
               "move",
               "copy-to",
               "download",
+              "download-encrypted",
               "rename",
             ],
             ["mark-as-favorite", "show-info"],
@@ -3165,6 +3186,7 @@ class ContextOptionsStore {
               "move",
               "copy-to",
               "download",
+              "download-encrypted",
               "edit-index",
               "rename",
             ],

@@ -3,7 +3,7 @@
   "content": "Default provider successfully set",
   "content_en_sha1_hash": "da3d99c2cfaa725954e486ee9634d65353564af4",
   "created_at": "2026-02-19T13:36:29.992Z",
-  "updated_at": "2026-06-01T21:20:44.527Z",
+  "updated_at": "2026-06-02T22:18:05.102Z",
   "comment": {
     "text": "This is a toast message confirming that the user has successfully set a new default AI provider in the settings.",
     "is_auto": true,
@@ -32,7 +32,7 @@
       "approved_at": null
     },
     "ru": {
-      "approved_at": "2026-05-15T15:04:53.938772Z"
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     }
   }
 }

@@ -67,7 +67,7 @@ const EmptyTrashDialogComponent = (props) => {
     onClose();
 
     const translations = {
-      successOperation: t("SuccessEmptyAction", { sectionName }),
+      successOperation: t("Common:SuccessEmptyAction", { sectionName }),
     };
 
     if (isPersonalReadOnly) {
@@ -95,7 +95,7 @@ const EmptyTrashDialogComponent = (props) => {
     return () => window.removeEventListener("keydown", onKeyPress);
   }, []);
 
-  const description = t("DeleteForeverNote", { sectionName });
+  const description = t("Common:DeleteForeverNote", { sectionName });
 
   return (
     <ModalDialog
@@ -104,7 +104,7 @@ const EmptyTrashDialogComponent = (props) => {
       onClose={onClose}
       displayType="modal"
     >
-      <ModalDialog.Header>{t("DeleteForeverTitle")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:DeleteForeverTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>{description}</Text>
       </ModalDialog.Body>
@@ -135,11 +135,9 @@ const EmptyTrashDialogComponent = (props) => {
   );
 };
 
-const EmptyTrashDialog = withTranslation([
-  "EmptyTrashDialog",
-  "Common",
-  "Translations",
-])(EmptyTrashDialogComponent);
+const EmptyTrashDialog = withTranslation(["Common", "Translations"])(
+  EmptyTrashDialogComponent,
+);
 
 export default inject(
   ({ filesStore, filesActionsStore, treeFoldersStore, dialogsStore }) => {
@@ -166,3 +164,4 @@ export default inject(
     };
   },
 )(observer(EmptyTrashDialog));
+

@@ -2,13 +2,13 @@
   "key_path": "ChangeTheRoomOwner",
   "content": "Change the Room Owner",
   "content_en_sha1_hash": "02a0f3d75f6449e5611f36f91216cb8be76a6efe",
-  "created_at": "2025-05-19T21:30:55.324Z",
-  "updated_at": "2026-05-24T17:27:49.101Z",
+  "created_at": "2026-06-02T22:17:34.545Z",
+  "updated_at": "2026-06-09T09:43:10.844Z",
   "comment": {
-    "text": "This is a dialog title or header label for a panel that allows changing the owner of a room. It appears when a user initiates the process of transferring room ownership.",
+    "text": "Dialog title or panel header used when initiating the process to reassign room ownership.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:10:19.286Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-06-02T22:19:26.940Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -16,6 +16,12 @@
       "line_number": 197,
       "context": "const ownerIsCurrentUser = roomOwnerId === userId;\n \n const headerLabel = isAIAgent\n ? t(\"Files:ChangeTheAgentOwner\")\n : t(\"Common:ChangeTheRoomOwner\");\n \n const infoText = isAIAgent\n ? t(\"Files:ChangeAgentOwnerSelectorInfo\", {\n productName: getBrandName(\"ProductName\"),\n })",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_components/owner-change/PrivateChangeOwnerDialog.tsx",
+      "line_number": 162,
+      "context": "cancelled = true;\n controller.abort();\n };\n }, [roomId, baseExclude]);\n \n const headerLabel = t(\"Common:ChangeTheRoomOwner\");\n const infoText = t(\"Common:PrivateOwnerEncryptionHint\");\n \n const onSubmit: TOnSubmit = async (\n users,\n _access,",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/change-room-owner-dialog/index.tsx",
@@ -103,12 +109,6 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
-    "ko-KR": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:53.938772Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

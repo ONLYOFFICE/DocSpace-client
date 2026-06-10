@@ -1,0 +1,29 @@
+{
+  "key_path": "UnknownPayerOwnerUnpaid",
+  "content": "We couldn’t find a contact matching the Stripe email. We recommend choosing a new Payer who gets access to billing settings in {{productName}}.",
+  "content_en_sha1_hash": "cd698dd7ba8b5d911d37b22c4fb8d525295383a2",
+  "created_at": "2026-06-03T08:04:22.527Z",
+  "updated_at": "2026-06-03T08:05:20.759Z",
+  "comment": {
+    "text": "Description text in the payer information section appearing when a Stripe email cannot be matched to a contact; includes the {{productName}} variable.",
+    "is_auto": true,
+    "updated_at": "2026-06-03T08:05:20.759Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/payer-information/index.tsx",
+      "line_number": 106,
+      "context": "};\n \n const unknownPayerDescription = () => {\n if (isNotPaidPeriod) {\n return isOwner\n ? t(\"UnknownPayerOwnerUnpaid\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"UnknownPayerAdminUnpaid\", {\n productName: getBrandName(\"ProductName\"),\n });",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

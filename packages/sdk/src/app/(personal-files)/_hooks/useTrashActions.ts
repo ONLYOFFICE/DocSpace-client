@@ -39,12 +39,14 @@ import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
-import { removeFiles } from "@docspace/shared/api/files";
+import { removeFiles, emptyTrash } from "@docspace/shared/api/files";
 import { FolderType } from "@docspace/shared/enums";
+import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
+import { useEncryptedFileActions } from "@/app/(docspace)/_contexts/EncryptedFileActionsContext";
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import type {
   TFileItem,
@@ -55,6 +57,9 @@ import type { TrackOperation } from "./useFileOperations";
 export default function useTrashActions(trackOperation?: TrackOperation) {
   const filesListStore = useFilesListStore();
   const filesSelectionStore = useFilesSelectionStore();
+  // Non-null when the hook is rendered inside a private room — the provider is
+  // mounted only in (private)/private/[roomId]/page.client.tsx.
+  const encryptedActions = useEncryptedFileActions();
   const router = useRouter();
   const { t } = useTranslation(["Common"]);
   const { openFolder } = useFolderActions({ t });
@@ -96,7 +101,9 @@ export default function useTrashActions(trackOperation?: TrackOperation) {
     const folderIds = pendingDeleteItems
       .filter((i) => i.isFolder)
       .map((i) => i.id as number);
-    const immediately = isTrash;
+    // Private-room files must never go to the recycle bin — bypass it the same
+    // way the reference client does for privacy folders (FilesActionsStore.js).
+    const immediately = isTrash || !!encryptedActions;
     const itemsToRemove = pendingDeleteItems;
 
     const currentFolder = filesListStore.currentFolder;
@@ -130,6 +137,12 @@ export default function useTrashActions(trackOperation?: TrackOperation) {
       const icon = immediately ? "deletePermanently" : "trash";
 
       const onComplete = () => {
+        // Purge cached encrypted filenames so stale plaintext names are not
+        // shown after the files are gone — mirrors FilesActionsStore.js:599.
+        if (encryptedActions) {
+          fileIds.forEach((id) => forgetEncryptedFilename(id));
+        }
+
         for (const item of itemsToRemove) {
           filesListStore.removeItem(item.id);
         }
@@ -153,6 +166,7 @@ export default function useTrashActions(trackOperation?: TrackOperation) {
     }
   }, [
     isTrash,
+    encryptedActions,
     filesListStore,
     filesSelectionStore,
     pendingDeleteItems,
@@ -160,6 +174,44 @@ export default function useTrashActions(trackOperation?: TrackOperation) {
     openFolder,
     router,
   ]);
+
+  // Empty all — permanently clear the whole trash via the dedicated emptyTrash
+  // API (not a per-item bulk delete), confirmed through the same DeleteDialog
+  // shown in its "empty trash" variant.
+  const [emptyTrashDialogVisible, setEmptyTrashDialogVisible] = useState(false);
+  const [isEmptyingTrash, setIsEmptyingTrash] = useState(false);
+
+  const requestEmptyTrash = useCallback(() => {
+    setEmptyTrashDialogVisible(true);
+  }, []);
+
+  const closeEmptyTrashDialog = useCallback(() => {
+    setEmptyTrashDialogVisible(false);
+  }, []);
+
+  const confirmEmptyTrash = useCallback(async () => {
+    setIsEmptyingTrash(true);
+    try {
+      const operations = await emptyTrash();
+      setEmptyTrashDialogVisible(false);
+
+      const opId = operations?.[0]?.id;
+      const onComplete = () => {
+        filesListStore.setItems([]);
+        filesSelectionStore.setSelection();
+      };
+
+      if (opId && trackOperation) {
+        await trackOperation(opId, "deletePermanently", onComplete);
+      } else {
+        onComplete();
+      }
+    } catch (error) {
+      toastr.error(error instanceof Error ? error.message : String(error));
+    } finally {
+      setIsEmptyingTrash(false);
+    }
+  }, [filesListStore, filesSelectionStore, trackOperation]);
 
   return {
     isTrash,
@@ -170,5 +222,10 @@ export default function useTrashActions(trackOperation?: TrackOperation) {
     isDeleting,
     closeDeleteDialog,
     confirmDelete,
+    requestEmptyTrash,
+    emptyTrashDialogVisible,
+    isEmptyingTrash,
+    closeEmptyTrashDialog,
+    confirmEmptyTrash,
   };
 }

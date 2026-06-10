@@ -3,7 +3,7 @@
   "content": "Encryption is locked — new members cannot access existing files until you unlock your key.",
   "content_en_sha1_hash": "5d791272ebbe4c70f921c5888c4e36faaed3fbae",
   "created_at": "2026-05-24T17:27:26.662Z",
-  "updated_at": "2026-06-01T21:20:44.424Z",
+  "updated_at": "2026-06-09T09:43:10.850Z",
   "comment": {
     "text": "Error toast message that appears when attempting to add new members to a private space while the user's encryption key is locked.",
     "is_auto": true,
@@ -19,9 +19,27 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1718,
+      "line_number": 1723,
       "context": "const userId = user?.id;\n if (!userId) return;\n \n const identity = await requireUnlock(String(userId));\n if (!identity) {\n toastr.error(i18n.t(\"Common:EncryptionLockedAddMembers\"));\n return;\n }\n \n const sameRoomRoot =\n destInfo?.private === true &&",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_hooks/useEncryptedCopyMove.ts",
+      "line_number": 153,
+      "context": "toastr.error(t(\"Common:EncryptionKeysNotConfigured\"));\n return;\n }\n const identity = await requireIdentity();\n if (!identity) {\n toastr.error(t(\"Common:EncryptionLockedAddMembers\"));\n return;\n }\n \n const controller = registerCryptoOperation();\n try {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_hooks/useEncryptedCopyMove.ts",
+      "line_number": 153,
+      "context": "toastr.error(t(\"Common:EncryptionKeysNotConfigured\"));\n return;\n }\n const identity = await requireIdentity();\n if (!identity) {\n toastr.error(t(\"Common:EncryptionLockedAddMembers\"));\n return;\n }\n \n const controller = registerCryptoOperation();\n try {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_hooks/usePrivateInviteFlow.ts",
+      "line_number": 224,
+      "context": "// setRoomSecurity so that server access is never granted when encryption keys\n // are absent or locked. Mirrors packages/client InvitePanel:452-459 pattern.\n const onBeforeSubmit = React.useCallback(async (): Promise<boolean> => {\n const identity = await requireIdentity();\n if (!identity) {\n toastr.error(t(\"Common:EncryptionLockedAddMembers\"));\n return false;\n }\n return true;\n }, [requireIdentity, t]);",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

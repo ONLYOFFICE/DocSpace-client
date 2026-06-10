@@ -136,7 +136,7 @@ const ArchiveDialogComponent = (props) => {
   );
 };
 
-const ArchiveDialog = withTranslation(["Files", "ArchiveDialog", "Common"])(
+const ArchiveDialog = withTranslation(["Files", "Common"])(
   ArchiveDialogComponent,
 );
 

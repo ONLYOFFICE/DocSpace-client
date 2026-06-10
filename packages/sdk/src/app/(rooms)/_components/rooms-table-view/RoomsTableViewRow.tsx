@@ -31,8 +31,11 @@ import { observer } from "mobx-react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
+
 import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
+
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
@@ -48,6 +51,8 @@ import { isAdmin } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
+
+import useCopyRoomPrimaryLink from "../../_hooks/useCopyRoomPrimaryLink";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
@@ -83,6 +88,7 @@ type RoomsTableViewRowProps = {
   onInfoRoom?: (item: TFolderItem | TFileItem) => void;
   onInviteRoom?: (item: TFolderItem | TFileItem) => void;
   isArchive?: boolean;
+  hasEncryptionKeys?: boolean;
 };
 
 const RoomsTableViewRow = observer(
@@ -104,6 +110,7 @@ const RoomsTableViewRow = observer(
     onInfoRoom,
     onInviteRoom,
     isArchive,
+    hasEncryptionKeys,
   }: RoomsTableViewRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
@@ -239,6 +246,33 @@ const RoomsTableViewRow = observer(
 
     const itemSnapshot = { ...observableItem };
 
+    const isPrivateRoomItem =
+      (item as { private?: boolean }).private === true;
+
+    // Private rooms render like every other room — the literal letter/cover
+    // icon — with the encrypted state shown via the green shield badge from
+    // EncryptedItemIconWrapper (intentional divergence from the main client,
+    // which swaps the whole icon for private.svg).
+    const roomIconElement = (
+      <EncryptedItemIconWrapper
+        encrypted={isPrivateRoomItem}
+        hasEncryptionKeys={!!hasEncryptionKeys}
+        isRoom
+      >
+        <RoomIcon
+          logo={getRoomIconLogo(item)}
+          color={
+            "isRoom" in item && item.isRoom ? item.roomIconColor : undefined
+          }
+          title={item.title}
+          showDefault={
+            "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
+          }
+          imgClassName="react-svg-icon"
+        />
+      </EncryptedItemIconWrapper>
+    );
+
     const badgesNode = (
       <div className={styles.inlineBadges}>
         <Badges
@@ -252,9 +286,16 @@ const RoomsTableViewRow = observer(
       </div>
     );
 
+    const onCopyPrimaryLink = useCopyRoomPrimaryLink(itemSnapshot, t);
+
     const quickButtonsNode = (
       <div className={styles.quickButtonsContainer}>
-        <QuickButtons t={t} item={itemSnapshot} viewAs="table" />
+        <QuickButtons
+          t={t}
+          item={itemSnapshot}
+          viewAs="table"
+          onCopyPrimaryLink={onCopyPrimaryLink}
+        />
       </div>
     );
 
@@ -294,23 +335,15 @@ const RoomsTableViewRow = observer(
           <div
             className="table-container_element-container"
             onClick={(e) => e.stopPropagation()}
+            onMouseDown={(e) => {
+              if (e.button === 0) e.stopPropagation();
+            }}
           >
             <div className="table-container_element">
               {inProgress ? (
                 <Loader color="" size="20px" type={LoaderTypes.track} />
               ) : (
-                <RoomIcon
-                  logo={getRoomIconLogo(item)}
-                  color={
-                    "isRoom" in item && item.isRoom
-                      ? item.roomIconColor
-                      : undefined
-                  }
-                  title={item.title}
-                  showDefault={
-                    "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
-                  }
-                />
+                roomIconElement
               )}
             </div>
             <Checkbox

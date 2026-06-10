@@ -33,12 +33,13 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { type FC } from "react";
+import { type FC, useId, useMemo } from "react";
 import {
   ComboBox,
   ComboBoxSize,
   type TOption,
 } from "@docspace/ui-kit/components/combobox";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
 import { IconDisplay } from "./IconDisplay";
 
@@ -47,7 +48,6 @@ import styles from "../Share.module.scss";
 export interface AccessOptionProps {
   isLoaded: boolean;
   canEditInternal: boolean;
-
   options: TOption[];
   selectedOption: TOption;
   onSelect: (option: TOption) => void;
@@ -60,29 +60,57 @@ export const LinkTypeSelector: FC<AccessOptionProps> = ({
   selectedOption,
   canEditInternal,
 }) => {
+  const uid = useId().replace(/:/g, "");
+  const anchorClass = `share-external-disabled-${uid}`;
+
+  const optionsWithExternalAnchor = useMemo(
+    () =>
+      options.map((opt) =>
+        opt.className === "share-external-disabled"
+          ? { ...opt, className: anchorClass }
+          : opt,
+      ),
+    [options, anchorClass],
+  );
+
+  const disabledExternalTooltip = optionsWithExternalAnchor.find(
+    (opt) => opt.disabled && opt.tooltip,
+  )?.tooltip;
+
   if (!canEditInternal) {
     return <IconDisplay option={selectedOption} />;
   }
 
   return (
-    <ComboBox
-      fillIcon
-      modernView
-      type="onlyIcon"
-      directionY="both"
-      manualWidth="auto"
-      withBackdrop={false}
-      scaled={false}
-      noSelect={false}
-      options={options}
-      scaledOptions={false}
-      className={styles.internalCombobox}
-      size={ComboBoxSize.content}
-      selectedOption={selectedOption}
-      onSelect={onSelect}
-      showDisabledItems
-      isDisabled={isLoaded}
-      useImageIcon
-    />
+    <>
+      <ComboBox
+        fillIcon
+        modernView
+        type="onlyIcon"
+        directionY="both"
+        manualWidth="auto"
+        withBackdrop={false}
+        scaled={false}
+        noSelect={false}
+        options={optionsWithExternalAnchor}
+        scaledOptions={false}
+        className={styles.internalCombobox}
+        size={ComboBoxSize.content}
+        selectedOption={selectedOption}
+        onSelect={onSelect}
+        showDisabledItems
+        isDisabled={isLoaded}
+        useImageIcon
+      />
+      {disabledExternalTooltip ? (
+        <Tooltip
+          id={`share-link-type-tooltip-${uid}`}
+          anchorSelect={`.${anchorClass}`}
+          place="bottom-start"
+        >
+          {disabledExternalTooltip}
+        </Tooltip>
+      ) : null}
+    </>
   );
 };

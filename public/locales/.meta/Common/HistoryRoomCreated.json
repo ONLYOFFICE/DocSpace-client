@@ -3,7 +3,7 @@
   "content": "<1>«{{roomTitle}}»</1> room created",
   "content_en_sha1_hash": "1730e3bd2fac6570d2cc51d49c0b449d6a7f5d92",
   "created_at": "2025-05-19T21:30:54.880Z",
-  "updated_at": "2026-05-24T17:27:49.126Z",
+  "updated_at": "2026-06-09T09:43:10.875Z",
   "comment": {
     "text": "This is a history feed message indicating a new room has been created. `{{roomTitle}}` is the name of the created room.",
     "is_auto": true,
@@ -26,12 +26,12 @@
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/info-panel/views/history.tsx",
       "line_number": 65,
-      "context": "return t(\"InfoPanel:AgentRenamed\", {\n oldRoomTitle: oldTitle,\n roomTitle: title,\n });\n case FeedActionKeys.RoomCreated:\n return t(\"Common:HistoryRoomCreated\", { roomTitle: title });\n case FeedActionKeys.RoomRenamed:\n return t(\"Common:RoomRenamed\", {\n oldRoomTitle: oldTitle,\n roomTitle: title,\n });",
+      "context": "return t(\"Common:AgentRenamed\", {\n oldRoomTitle: oldTitle,\n roomTitle: title,\n });\n case FeedActionKeys.RoomCreated:\n return t(\"Common:HistoryRoomCreated\", { roomTitle: title });\n case FeedActionKeys.RoomRenamed:\n return t(\"Common:RoomRenamed\", {\n oldRoomTitle: oldTitle,\n roomTitle: title,\n });",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
-      "line_number": 101,
+      "line_number": 187,
       "context": "const title = (feed.data as TFeedData).title;\n return (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"HistoryRoomCreated\"\n values={{ roomTitle: title }}\n components={{ 1: <HistoryText key=\"1\" title={title ?? \"\"} /> }}\n />\n );\n }",
       "module": "/packages/sdk"
     }
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

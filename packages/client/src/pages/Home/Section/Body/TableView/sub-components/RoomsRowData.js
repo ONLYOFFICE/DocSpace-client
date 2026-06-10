@@ -74,6 +74,8 @@ const RoomsRowDataComponent = (props) => {
     tableStorageName,
     index,
     t,
+    isExternalShareRestricted,
+    blockExistingLinksOnRestrict,
   } = props;
 
   const storageColumns = localStorage.getItem(tableStorageName);
@@ -132,6 +134,8 @@ const RoomsRowDataComponent = (props) => {
             t={t}
             item={item}
             sideColor={theme.filesSection.tableView.row.sideColor}
+            isExternalShareRestricted={isExternalShareRestricted}
+            blockExistingLinksOnRestrict={blockExistingLinksOnRestrict}
           />
           {lastColumn === "Type" ? quickButtonsComponentNode : null}
         </TableCell>
@@ -227,24 +231,34 @@ const RoomsRowDataComponent = (props) => {
   );
 };
 
-export default inject(({ currentQuotaStore, tableStore }) => {
-  const {
-    roomColumnTypeIsEnabled,
-    roomColumnOwnerIsEnabled,
-    roomColumnTagsIsEnabled,
-    roomColumnActivityIsEnabled,
-    roomQuotaColumnIsEnable,
-    tableStorageName,
-  } = tableStore;
+export default inject(
+  ({ currentQuotaStore, tableStore, filesSettingsStore }) => {
+    const {
+      roomColumnTypeIsEnabled,
+      roomColumnOwnerIsEnabled,
+      roomColumnTagsIsEnabled,
+      roomColumnActivityIsEnabled,
+      roomQuotaColumnIsEnable,
+      tableStorageName,
+    } = tableStore;
 
-  const { showStorageInfo } = currentQuotaStore;
-  return {
-    roomQuotaColumnIsEnable,
-    roomColumnTypeIsEnabled,
-    roomColumnOwnerIsEnabled,
-    roomColumnTagsIsEnabled,
-    roomColumnActivityIsEnabled,
-    showStorageInfo,
-    tableStorageName,
-  };
-})(observer(RoomsRowDataComponent));
+    const { showStorageInfo } = currentQuotaStore;
+
+    const {
+      isExternalShareRestricted: isShareRestricted,
+      externalShareApplyToRooms,
+      blockExistingLinksOnRestrict,
+    } = filesSettingsStore;
+    return {
+      roomQuotaColumnIsEnable,
+      roomColumnTypeIsEnabled,
+      roomColumnOwnerIsEnabled,
+      roomColumnTagsIsEnabled,
+      roomColumnActivityIsEnabled,
+      showStorageInfo,
+      tableStorageName,
+      isExternalShareRestricted: isShareRestricted && externalShareApplyToRooms,
+      blockExistingLinksOnRestrict,
+    };
+  },
+)(observer(RoomsRowDataComponent));

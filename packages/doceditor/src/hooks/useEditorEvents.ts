@@ -455,8 +455,14 @@ const useEditorEvents = ({
 
   const onSDKRequestClose = React.useCallback(() => {
     const editorGoBack = sdkConfig?.editorGoBack;
+    const returnUrl = sdkConfig?.returnUrl;
 
-    if (editorGoBack === "event") {
+    // Editor opened at the top level (broken out of an SDK iframe): return
+    // to the originating listing instead of emitting a close event (which
+    // only works inside the SDK editor frame).
+    if (returnUrl) {
+      window.location.replace(returnUrl);
+    } else if (editorGoBack === "event") {
       frameCallEvent({ event: "onEditorCloseCallback" });
     } else {
       const backUrl = config?.editorConfig?.customization?.goback?.url;
@@ -465,6 +471,7 @@ const useEditorEvents = ({
     }
   }, [
     sdkConfig?.editorGoBack,
+    sdkConfig?.returnUrl,
     config?.editorConfig?.customization?.goback?.url,
   ]);
 

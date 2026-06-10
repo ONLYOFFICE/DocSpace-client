@@ -718,6 +718,7 @@
   --room-type-list-item-background: none;
   --room-type-list-item-border: #{$gray-light-mid};
   --room-type-list-item-hover-background: #{$gray-light};
+  --room-type-list-item-disabled-background: #{$gray-light};
   --room-type-list-item-description-text: #{$gray};
 
   --room-type-dropdown-button-background: none;
@@ -738,6 +739,7 @@
   --room-type-list-item-background: none;
   --room-type-list-item-border: #{$gray-dark-strong};
   --room-type-list-item-hover-background: #{$dark-gray-light};
+  --room-type-list-item-disabled-background: #{$dark-gray-light};
   --room-type-list-item-description-text: #{$gray};
 
   --room-type-dropdown-button-background: none;
@@ -789,6 +791,7 @@
   --info-panel-border: #{$gray-light-mid};
   --info-panel-avatar-color: #{$gray-text};
   --info-panel-link-expired: #{$gray};
+  --info-panel-link-blocked: #{$light-status-warning};
   --info-panel-links-color: #{$light-blue-main};
   --info-panel-links-primary-color: #{$gray-text};
   --info-panel-members-create-link: #{$black};
@@ -801,6 +804,7 @@
   --info-panel-border: #{$gray-dark-strong};
   --info-panel-avatar-color: #{$gray};
   --info-panel-link-expired: #{$gray};
+  --info-panel-link-blocked: #{$light-status-warning};
   --info-panel-links-color: #{$light-blue-main};
   --info-panel-links-primary-color: #{$dark-gray-dark};
   --info-panel-members-create-link: #{$gray-dark};
@@ -1495,7 +1499,7 @@
   --tile-icon-button-color: #{$gray};
   --tile-icon-button-hover-color: #{$light-blue-main};
 
-  --ai-settings-description:#{$gray};
+  --ai-settings-description: #{$gray};
 }
 
 .dark {

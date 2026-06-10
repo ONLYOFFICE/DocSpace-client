@@ -3,7 +3,7 @@
   "content": "All files in this room will be encrypted",
   "content_en_sha1_hash": "51563aa98d63f7e6b70e10ede514f7f837acd0f3",
   "created_at": "2026-05-24T17:27:35.766Z",
-  "updated_at": "2026-05-24T17:40:03.452Z",
+  "updated_at": "2026-06-09T09:43:10.827Z",
   "comment": {
     "text": "Tooltip for a title icon that appears when viewing an encrypted room to inform the user about the encryption status of the files.",
     "is_auto": true,
@@ -12,10 +12,28 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/PermanentSettings/index.tsx",
+      "line_number": 98,
+      "context": "<PermanentSetting\n type=\"privacy\"\n icon={PrivateRoomSvgUrl}\n title={t(\"Common:PrivateRoomTitle\")}\n isFull={false}\n content={t(\"Common:PrivateRoomDescription\")}\n />\n ) : null}\n </div>\n );\n };",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 579,
+      "line_number": 612,
       "context": "]);\n \n const titleIconTooltip = React.useMemo(() => {\n if (sharedType) return t(\"Files:RecentlyOpenedTooltip\");\n \n if (isEncryptedRoom) return t(\"Common:PrivateRoomDescription\");\n \n if (lifetime)\n return `${t(\"Files:RoomFilesLifetime\", {\n days: lifetime.value,\n period: getLifetimePeriodTranslation(lifetime.period, t),",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_components/private-room-header/index.tsx",
+      "line_number": 64,
+      "context": "const PrivateRoomHeader: React.FC<PrivateRoomHeaderProps> = (props) => {\n const { t } = useTranslation([\"Common\"]);\n const isEncrypted = props.current?.private === true;\n \n const titleIcon = isEncrypted ? EncryptedRoomIconUrl : \"\";\n const titleIconTooltip = isEncrypted ? t(\"Common:PrivateRoomDescription\") : \"\";\n \n return (\n <Header\n {...props}\n titleIcon={titleIcon}",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
+      "line_number": 553,
+      "context": "<div className={styles.privacyText}>\n <Text fontWeight={600} fontSize=\"13px\">\n {t(\"Common:PrivateRoomTitle\")}\n </Text>\n <Text fontSize=\"12px\" className={styles.privacyDescription}>\n {t(\"Common:PrivateRoomDescription\")}\n </Text>\n </div>\n </div>\n ) : null}",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",

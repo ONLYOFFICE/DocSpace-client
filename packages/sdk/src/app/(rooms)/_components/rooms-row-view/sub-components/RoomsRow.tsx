@@ -31,6 +31,7 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
+
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import {
   FilesRow,
@@ -38,17 +39,19 @@ import {
 } from "@docspace/shared/components/files-row";
 import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
 import Badges from "@docspace/shared/components/badges";
+
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/ui-kit/components/toast";
-
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import { generateFilesItemValue } from "@/app/(docspace)/(files)/_utils";
 
 import useRoomContextMenuModel from "../../../_hooks/useRoomContextMenuModel";
+import useCopyRoomPrimaryLink from "../../../_hooks/useCopyRoomPrimaryLink";
 import { RoomsRefreshContext } from "../../../_contexts/RoomsRefreshContext";
 
 import { RoomsRowContent } from "./RoomsRowContent";
@@ -76,6 +79,7 @@ const RoomsRow = observer(
     onInfoRoom,
     onInviteRoom,
     isArchive,
+    hasEncryptionKeys,
   }: RoomsRowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const filesListStore = useFilesListStore();
@@ -130,15 +134,30 @@ const RoomsRow = observer(
       }
     }, [canMute, item.id, onRoomChanged, t]);
 
+    const isPrivateRoom = (item as { private?: boolean }).private === true;
+
+    // Private rooms render like every other room — the literal letter/cover
+    // icon — with the encrypted state shown via the green shield badge from
+    // EncryptedItemIconWrapper (intentional divergence from the main client,
+    // which swaps the whole icon for private.svg).
     const element = (
-      <RoomIcon
-        logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
-        color={"isRoom" in item && item.isRoom ? item.roomIconColor : undefined}
-        title={item.title}
-        showDefault={
-          "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
-        }
-      />
+      <EncryptedItemIconWrapper
+        encrypted={isPrivateRoom}
+        hasEncryptionKeys={!!hasEncryptionKeys}
+        isRoom
+      >
+        <RoomIcon
+          logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
+          color={
+            "isRoom" in item && item.isRoom ? item.roomIconColor : undefined
+          }
+          title={item.title}
+          showDefault={
+            "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
+          }
+          imgClassName="react-svg-icon"
+        />
+      </EncryptedItemIconWrapper>
     );
 
     const badgesComponent = (
@@ -154,8 +173,15 @@ const RoomsRow = observer(
       />
     );
 
+    const onCopyPrimaryLink = useCopyRoomPrimaryLink(observableItem, t);
+
     const quickButtonsComponent = (
-      <QuickButtons t={t} item={observableItem} viewAs="row" />
+      <QuickButtons
+        t={t}
+        item={observableItem}
+        viewAs="row"
+        onCopyPrimaryLink={onCopyPrimaryLink}
+      />
     );
 
     const onContextClick = () => {
@@ -220,7 +246,6 @@ const RoomsRow = observer(
               item={item}
               filterSortBy={filterSortBy}
               timezone={timezone}
-              badgesComponent={badgesComponent}
             />
           </FilesRow>
         </DragAndDrop>
@@ -230,3 +255,4 @@ const RoomsRow = observer(
 );
 
 export { RoomsRow };
+

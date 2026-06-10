@@ -2,6 +2,5 @@
   "ConversionMessage": "Všetky vami nahrané dokumenty budú konvertované do formátu Office Open XML (docx, xlsx alebo pptx) pre rýchlejšie úpravy.",
   "ConvertedFileDestination": "Kópia súboru sa vytvorí v priečinku <strong>{{folderTitle}}</strong>.",
   "FileUploadTitle": "Nahranie súboru",
-  "HideMessage": "Túto správu viac nezobrazovať",
   "InfoCreateFileIn": "Nový '{{fileTitle}}' súbor je vytvorený v '{{folderTitle}}'"
 }

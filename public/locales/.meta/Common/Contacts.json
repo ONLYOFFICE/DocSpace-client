@@ -3,7 +3,7 @@
   "content": "Contacts",
   "content_en_sha1_hash": "b0dd615cbbdcbf21ffb72115599ca915634fcb85",
   "created_at": "2025-05-19T21:30:43.662Z",
-  "updated_at": "2026-06-01T21:20:44.374Z",
+  "updated_at": "2026-06-09T14:03:10.811Z",
   "comment": {
     "text": "This is a header label for a people selector or invitation panel, identifying the section as \"Contacts\".",
     "is_auto": true,
@@ -19,14 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/components/AppsSidebar/FooterMenu.tsx",
-      "line_number": 70,
-      "context": "return (\n <>\n {showContacts && (\n <ArticleItem\n key=\"contacts\"\n text={t(\"Common:Contacts\")}\n title={t(\"Common:Contacts\")}\n icon={ContactsIconUrl}\n showText={showText}\n linkData={EMPTY_LINK}\n onClick={() => navigate(\"/accounts/people\")}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/AppsSidebar/FooterMenu.tsx",
-      "line_number": 70,
-      "context": "return (\n <>\n {showContacts && (\n <ArticleItem\n key=\"contacts\"\n text={t(\"Common:Contacts\")}\n title={t(\"Common:Contacts\")}\n icon={ContactsIconUrl}\n showText={showText}\n linkData={EMPTY_LINK}\n onClick={() => navigate(\"/accounts/people\")}",
+      "line_number": 80,
+      "context": "const items: NavMenuItem[] = [];\n \n if (showContacts) {\n items.push({\n id: CONTACTS_ID,\n label: t(\"Common:Contacts\"),\n icon: ContactsIconUrl,\n onClick: () => navigate(\"/accounts/people\"),\n });\n }\n if (showBilling) {",
       "module": "/packages/client"
     },
     {
@@ -49,8 +43,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/headerGeneral.tsx",
-      "line_number": 115,
-      "context": ": (availableTabs[0] ?? InfoPanelView.infoDetails);\n \n const tabItems = availableTabs.map((id) => {\n let name: string;\n if (id === InfoPanelView.infoMembers) {\n name = isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\");\n } else if (id === InfoPanelView.infoHistory) {\n name = t(\"Common:SubmenuHistory\");\n } else if (id === InfoPanelView.infoDetails) {\n name = t(\"Common:SubmenuDetails\");\n } else if (id === InfoPanelView.infoShare) {",
+      "line_number": 118,
+      "context": ": (availableTabs[0] ?? InfoPanelView.infoDetails);\n \n const tabItems = availableTabs.map((id) => {\n const name = match(id)\n .with(InfoPanelView.infoMembers, () =>\n isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\"),\n )\n .with(InfoPanelView.infoShare, () => t(\"Common:Share\"))\n .with(InfoPanelView.infoHistory, () => t(\"Common:SubmenuHistory\"))\n .with(InfoPanelView.infoDetails, () => t(\"Common:SubmenuDetails\"))\n .with(InfoPanelView.infoAIChat, () => t(\"InfoPanel:SubmenuAIChat\"))",
       "module": "/packages/client"
     },
     {
@@ -61,7 +55,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 825,
+      "line_number": 858,
       "context": "const accountsNavigationPath = React.useMemo(() => {\n if (isContactsInsideGroupPage) {\n return [\n {\n id: 0,\n title: t(\"Common:Contacts\"),\n isRoom: false,\n isRootRoom: true,\n },\n ];\n }",
       "module": "/packages/client"
     },
@@ -127,19 +121,19 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/index.tsx",
-      "line_number": 825,
+      "line_number": 878,
       "context": "disableInvitedUsers={invitedUsersArray}\n withGuests={showGuestsTab}\n withHeader\n data-test-id=\"invite_panel_people_selector\"\n headerProps={{\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick: closeUsersPanel,\n onCloseClick: () => {",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/index.tsx",
-      "line_number": 825,
+      "line_number": 878,
       "context": "disableInvitedUsers={invitedUsersArray}\n withGuests={showGuestsTab}\n withHeader\n data-test-id=\"invite_panel_people_selector\"\n headerProps={{\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick: closeUsersPanel,\n onCloseClick: () => {",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/useRoomsFilter.tsx",
-      "line_number": 245,
+      "line_number": 277,
       "context": "const subjectOptions: unknown[] = [\n {\n key: FilterGroups.roomFilterSubject,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:Contacts\"),\n isHeader: true,\n isLast: !tags.length,\n withMultiItems: true,\n },\n {",
       "module": "/packages/sdk"
     },

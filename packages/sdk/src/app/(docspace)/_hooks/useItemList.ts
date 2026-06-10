@@ -42,6 +42,7 @@ import { FileStatus } from "@docspace/shared/enums";
 import type { TLogo } from "@docspace/ui-kit/types";
 
 import getItemUrl from "../_utils/get-item-url";
+import { normalizeRoomLogo } from "../_utils/getRoomIconLogo";
 
 import useItemIcon from "./useItemIcon";
 import useItemContextMenu from "./useItemContextMenu";
@@ -54,6 +55,20 @@ type useItemListProps = {
   isDocsSection?: boolean;
   isShareSection?: boolean;
   withoutFavorite?: boolean;
+  /** Filters per-item contextOptions to this whitelist (applies to files). */
+  allowedContextOptions?: ReadonlySet<string>;
+  /**
+   * Separate whitelist for folder context options. When provided it overrides
+   * `allowedContextOptions` for folders, allowing callers to give files and
+   * folders different action sets (e.g. private rooms hide 'duplicate' from
+   * folders but keep it for files).
+   */
+  allowedFolderContextOptions?: ReadonlySet<string>;
+  /**
+   * When true, enables private-room-specific context options (e.g.
+   * download-encrypted for folders). Passed down to useItemContextMenu.
+   */
+  isPrivate?: boolean;
 
   getIcon: ReturnType<typeof useItemIcon>["getIcon"];
 };
@@ -67,6 +82,9 @@ export default function useItemList({
   isDocsSection,
   isShareSection,
   withoutFavorite,
+  allowedContextOptions,
+  allowedFolderContextOptions,
+  isPrivate,
 }: useItemListProps) {
   const { getFilesContextMenu, getFoldersContextMenu } = useItemContextMenu({
     isFavoritesSection,
@@ -75,6 +93,7 @@ export default function useItemList({
     isDocsSection,
     isShareSection,
     withoutFavorite,
+    isPrivate,
   });
 
   const getFilesContextMenuRef = useRef(getFilesContextMenu);
@@ -106,9 +125,12 @@ export default function useItemList({
 
       const isForm = file.isForm || file.fileExst === ".oform";
 
-      const contextOptions = overrides
+      const rawContextOptions = overrides
         ? getFilesContextMenuRef.current(file, overrides)
         : getFilesContextMenuRef.current(file);
+      const contextOptions = allowedContextOptions
+        ? rawContextOptions.filter((k) => allowedContextOptions.has(k))
+        : rawContextOptions;
 
       return {
         ...file,
@@ -123,7 +145,7 @@ export default function useItemList({
         contextOptions,
       };
     },
-    [getIcon, shareKey],
+    [getIcon, shareKey, allowedContextOptions],
   );
 
   const convertFolderToItem = useCallback(
@@ -134,13 +156,19 @@ export default function useItemList({
 
       const icon = getIcon();
 
-      const contextOptions = getFoldersContextMenu(folder);
+      const rawContextOptions = getFoldersContextMenu(folder);
+      // Use the folder-specific whitelist when provided; fall back to the
+      // shared one so callers that only pass allowedContextOptions still work.
+      const folderAllowed =
+        allowedFolderContextOptions ?? allowedContextOptions;
+      const contextOptions = folderAllowed
+        ? rawContextOptions.filter((k) => folderAllowed.has(k))
+        : rawContextOptions;
 
       const rawLogo = (folder as unknown as { logo?: TLogo }).logo;
       const isRoom = folder.roomType !== undefined;
-      const hasRoomImage = !!(rawLogo?.medium || rawLogo?.large || rawLogo?.cover);
-      const roomLogo = hasRoomImage ? rawLogo : undefined;
-      const roomIconColor = rawLogo?.color?.replace("#", "") ?? undefined;
+      const { roomLogo, roomIconColor, hasRoomImage } =
+        normalizeRoomLogo(rawLogo);
 
       return {
         ...folder,
@@ -154,7 +182,12 @@ export default function useItemList({
         hasRoomImage,
       };
     },
-    [getFoldersContextMenu, getIcon],
+    [
+      getFoldersContextMenu,
+      getIcon,
+      allowedContextOptions,
+      allowedFolderContextOptions,
+    ],
   );
 
   return { convertFileToItem, convertFolderToItem };

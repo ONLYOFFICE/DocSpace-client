@@ -36,5 +36,20 @@
       "!webpack.config.js",
       "!tests/*"
     ]
-  }
+  },
+  "overrides": [
+    {
+      "includes": [
+        "src/app/(private)/**",
+        "!src/app/(private)/_utils/parity-check.ts"
+      ],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsole": "error"
+          }
+        }
+      }
+    }
+  ]
 }

@@ -37,7 +37,7 @@ import { http } from "msw";
 import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 import { BASE64_LOGO } from "./base64logo";
 
-export const PATH_OAUTH_CLIENTS = `clients/consents`;
+export const PATH_OAUTH_CLIENTS = `oauth2/clients/consents`;
 
 const clientsEmptySuccess = {
   data: [],

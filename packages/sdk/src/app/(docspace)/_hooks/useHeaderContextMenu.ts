@@ -172,7 +172,15 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
     if (isRoom && currentFolderItem) {
       // Use the room-specific context menu and remove items that make no sense
       // when the user is already inside the room.
-      const ROOM_HEADER_EXCLUDED = new Set(["select", "open", "pin", "unpin"]);
+      const ROOM_HEADER_EXCLUDED = new Set([
+        "select",
+        "open",
+        "pin",
+        "unpin",
+        "mute-room",
+        "unmute-room",
+        "separator-mute",
+      ]);
       const model = getRoomContextModel(currentFolderItem, true);
       const filtered = model.filter(
         (item) => !(item.key && ROOM_HEADER_EXCLUDED.has(String(item.key))),

@@ -1,4 +1,13 @@
-const EXCLUDED_KEYS = new Set(["open", "select", "room-info"]);
+const EXCLUDED_KEYS = new Set([
+  "open",
+  "select",
+  "room-info",
+  "pin",
+  "unpin",
+  "mute-room",
+  "unmute-room",
+  "separator-mute",
+]);
 
 const filterInfoPanelModel = (
   model: ContextMenuModel[],

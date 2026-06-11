@@ -52,6 +52,8 @@ import { ShareAccessRights } from "@docspace/ui-kit/enums";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
+import { useNavigationStore } from "@/app/(docspace)/_store/NavigationStore";
+import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
 import type { TFolderItem } from "@/app/(docspace)/_hooks/useItemList";
 
@@ -66,6 +68,8 @@ const LeaveRoomDialog = observer(
     const dialogsStore = useDialogsStore();
     const filesListStore = useFilesListStore();
     const filesSelectionStore = useFilesSelectionStore();
+    const navigationStore = useNavigationStore();
+    const { openFolder } = useFolderActions({ t });
 
     const visible = dialogsStore.isDialogOpen(SDKDialogs.LeaveRoom);
 
@@ -99,6 +103,7 @@ const LeaveRoomDialog = observer(
       if (!currentUserId) return;
 
       const roomId = room.id as number;
+      const isInsideRoom = filesListStore.currentFolder?.id === roomId;
       setIsLoading(true);
       try {
         await api.rooms.updateRoomMemberRole(roomId, {
@@ -110,6 +115,10 @@ const LeaveRoomDialog = observer(
         filesSelectionStore.setBufferSelection(null);
         toastr.success(t("Common:YouLeftTheRoom"));
         onClose();
+        if (isInsideRoom) {
+          const parent = navigationStore.navigationItems?.[0];
+          if (parent) openFolder(parent.id, parent.title);
+        }
       } catch (e) {
         toastr.error(e as Error);
       } finally {

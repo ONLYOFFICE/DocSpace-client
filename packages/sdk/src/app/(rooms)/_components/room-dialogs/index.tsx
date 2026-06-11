@@ -28,6 +28,7 @@
 
 import React from "react";
 import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
 import type { TFolder } from "@docspace/shared/api/files/types";
@@ -38,6 +39,7 @@ import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useNavigationStore } from "@/app/(docspace)/_store/NavigationStore";
 import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
+import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import { normalizeRoomLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
 import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
 
@@ -53,15 +55,26 @@ import useRoomActions from "../../_hooks/useRoomActions";
  * active-rooms list keeps its own copies (see RoomsList).
  */
 const RoomDialogs = observer(() => {
+  const { t } = useTranslation(["Common"]);
   const dialogsStore = useDialogsStore();
   const infoPanelStore = useInfoPanelStore();
   const filesListStore = useFilesListStore();
   const navigationStore = useNavigationStore();
   const docsUserStore = useDocsUserStore();
+  const { openFolder } = useFolderActions({ t });
   const { roomChanged } = useRoomActions();
 
   const { editingRoomData, invitingRoomData, changingOwnerRoomData } =
     dialogsStore;
+
+  const navigateToRoomsList = React.useCallback(
+    (roomId: number) => {
+      if (filesListStore.currentFolder?.id !== roomId) return;
+      const parent = navigationStore.navigationItems?.[0];
+      if (parent) openFolder(parent.id, parent.title);
+    },
+    [filesListStore, navigationStore, openFolder],
+  );
 
   const onRoomEdited = React.useCallback(
     async (roomId: number) => {
@@ -118,6 +131,7 @@ const RoomDialogs = observer(() => {
           roomOwnerId={changingOwnerRoomData.roomOwnerId}
           currentUserId={docsUserStore.user?.id}
           onChanged={roomChanged}
+          onLeave={navigateToRoomsList}
         />
       ) : null}
     </>

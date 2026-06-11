@@ -52,6 +52,7 @@ type ChangeRoomOwnerDialogProps = {
   roomOwnerId?: string;
   currentUserId?: string;
   onChanged?: (roomId: number) => void;
+  onLeave?: (roomId: number) => void;
 };
 
 const ChangeRoomOwnerDialog = ({
@@ -61,6 +62,7 @@ const ChangeRoomOwnerDialog = ({
   roomOwnerId,
   currentUserId,
   onChanged,
+  onLeave,
 }: ChangeRoomOwnerDialogProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -83,6 +85,7 @@ const ChangeRoomOwnerDialog = ({
     const newOwnerId = users[0]?.id;
     if (!newOwnerId || typeof newOwnerId !== "string") return;
 
+    let didLeave = false;
     try {
       await api.files.setFileOwner(newOwnerId, [roomId]);
 
@@ -91,6 +94,7 @@ const ChangeRoomOwnerDialog = ({
           invitations: [{ id: currentUserId!, access: ShareAccessRights.None }],
           force: false,
         });
+        didLeave = true;
         toastr.success(t("Common:LeftAndAppointNewOwner"));
       } else {
         toastr.success(t("Common:AppointNewOwner"));
@@ -101,6 +105,7 @@ const ChangeRoomOwnerDialog = ({
       toastr.error(e as Error);
     }
     onClose();
+    if (didLeave) onLeave?.(roomId);
   };
 
   const checkboxProps = ownerIsCurrentUser

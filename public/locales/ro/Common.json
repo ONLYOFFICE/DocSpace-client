@@ -73,6 +73,7 @@
   "AgentManager": "Administrator de agent",
   "AgentName": "Nume de agent",
   "AgentOwner": "Proprietar agent",
+  "AgentProfileDescription": "Selectați modelul AI care va fi utilizat în chat-urile acestui agent.",
   "AgentRemoved": "Agentul a fost șters",
   "AgentRenamed": "Sala <1>«{{oldRoomTitle}}»</1> a agentului a fost redenumită <2>«{{roomTitle}}»</2>",
   "AgentsRemoved": "Agenții au fost șterse",

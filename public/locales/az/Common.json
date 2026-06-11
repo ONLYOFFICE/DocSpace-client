@@ -73,6 +73,7 @@
   "AgentManager": "Agent meneceri",
   "AgentName": "Agentin adı",
   "AgentOwner": "Agent sahibi",
+  "AgentProfileDescription": "Bu agentin söhbətlərində istifadə olunacaq süni intellekt modelini seçin.",
   "AgentRemoved": "Agent silinləşdirilib",
   "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> adını <2>«{{roomTitle}}»</2> adınadək dəyişdi",
   "AgentsRemoved": "Agentlər silinib",

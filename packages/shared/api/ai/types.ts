@@ -175,6 +175,18 @@ export type TGetAgents = {
 
 export type TEditAgentData = Partial<TCreateAgentData>;
 
+// Payload of the new agent-creation endpoint (POST /new-ai/agents, Node AI
+// service). The service forwards everything except `profileId`/`prompt` to
+// the .NET endpoint and binds the profile to the created agent itself, so
+// `chatSettings` must not be sent by the caller.
+export type TCreateAgentWithProfileData = Omit<
+  TCreateAgentData,
+  "chatSettings"
+> & {
+  profileId: string;
+  prompt: string;
+};
+
 export type TDefaultProvider = {
   providerId: TAiProvider["id"];
   providerTitle: TAiProvider["title"];

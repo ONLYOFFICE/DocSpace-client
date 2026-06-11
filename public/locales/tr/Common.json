@@ -73,6 +73,7 @@
   "AgentManager": "Ajan yöneticisi",
   "AgentName": "Temsilci adı",
   "AgentOwner": "Acente sahibi",
+  "AgentProfileDescription": "Bu acentenin sohbetlerinde kullanılacak yapay zeka modelini seçin.",
   "AgentRemoved": "Ajan kaldırıldı",
   "AgentRenamed": "Temsilci <1>«{{oldRoomTitle}}»</1> adını <2>«{{roomTitle}}»</2> olarak değiştirdi",
   "AgentsRemoved": "Ajanlar kaldırıldı",

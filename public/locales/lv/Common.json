@@ -73,6 +73,7 @@
   "AgentManager": "Aģenta vadītājs",
   "AgentName": "Aģenta vārds",
   "AgentOwner": "Aģenta īpašnieks",
+  "AgentProfileDescription": "Izvēlieties AI modeli, kas tiks izmantots šī aģenta sarunās.",
   "AgentRemoved": "Aģents izņemts",
   "AgentRenamed": "Aģents <1>«{{oldRoomTitle}}»</1> pārdēvēts par <2>«{{roomTitle}}»</2>",
   "AgentsRemoved": "Aģenti izņemti",

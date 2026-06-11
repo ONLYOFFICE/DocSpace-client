@@ -73,6 +73,7 @@
   "AgentManager": "Upravljanje agentov",
   "AgentName": "Ime agenta",
   "AgentOwner": "Lastnik agenta",
+  "AgentProfileDescription": "Izberite model AI, ki se bo uporabljal v pogovorih tega agenta.",
   "AgentRemoved": "Agent odstranjen",
   "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> je preimenovan v <2>«{{roomTitle}}»</2>",
   "AgentsRemoved": "Agenti odstranjeni",

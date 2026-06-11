@@ -61,6 +61,7 @@ import type {
   TAIConfig,
   TAgent,
   TCreateAgentData,
+  TCreateAgentWithProfileData,
   TEditAgentData,
   TGetAgents,
   TDefaultProvider,
@@ -637,6 +638,20 @@ export const updateKnowledgeConfig = async (
 
 export const createAIAgent = async (data: TCreateAgentData) => {
   const res = await request({ method: "POST", url: `${baseUrl}/agents`, data });
+
+  return res as TAgent;
+};
+
+// New agent creation flow: the Node AI service (mounted at /new-ai) creates
+// the agent via the .NET endpoint and binds the selected AI profile to it.
+export const createAIAgentWithProfile = async (
+  data: TCreateAgentWithProfileData,
+) => {
+  const res = await request({
+    method: "POST",
+    url: `/new-ai/agents`,
+    data,
+  });
 
   return res as TAgent;
 };

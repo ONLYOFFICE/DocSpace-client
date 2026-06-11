@@ -72,6 +72,7 @@
   "AgentManager": "Manažér agenta",
   "AgentName": "Zámeno agenta",
   "AgentOwner": "Majiteľ agent",
+  "AgentProfileDescription": "Vyberte model AI, ktorý sa bude používať v chatoch tohto agenta.",
   "AgentRemoved": "Agent odstránený",
   "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> premenovaný na <2>«{{roomTitle}}»</2>",
   "AgentsRemoved": "Odstránení agenti",

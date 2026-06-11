@@ -112,8 +112,6 @@ const EditAgentDialog = ({
           currentParams.icon.uploadedFile === undefined)) ||
         prevParams.icon.uploadedFile === currentParams.icon.uploadedFile) &&
       prevParams.quota === currentParams.quota &&
-      prevParams.modelId === currentParams.modelId &&
-      prevParams.providerId === currentParams.providerId &&
       prevParams.prompt === currentParams.prompt &&
       currentParams.mcpServers?.every((id) =>
         currentParams.mcpServersInitial?.includes(id),
@@ -122,8 +120,6 @@ const EditAgentDialog = ({
         currentParams.mcpServersInitial?.length
     );
   };
-
-  const isModelSelected = !!agentParams?.modelId;
 
   const setAgentParamsAction = React.useCallback(
     (newParams: Partial<TAgentParams>) => {
@@ -232,8 +228,7 @@ const EditAgentDialog = ({
           isDisabled={
             !hasCover
               ? isWrongTitle ||
-                compareRoomParams(prevRoomParams.current, agentParams) ||
-                !isModelSelected
+                compareRoomParams(prevRoomParams.current, agentParams)
               : false
           }
           isLoading={isLoading}

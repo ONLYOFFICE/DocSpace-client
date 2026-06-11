@@ -53,7 +53,7 @@ import {
 
 import RoomQuota from "../../room-quota";
 import ChangeRoomOwner from "../../change-room-owner";
-import ModelSettings from "./Model";
+import ProfileSettings from "./Profile";
 import InstructionsSettings from "./Instructions";
 import MCPSettings from "./MCP";
 
@@ -418,10 +418,13 @@ const SetAgentParams = ({
         />
       ) : null}
 
-      <ModelSettings
-        agentParams={agentParams}
-        setAgentParams={setAgentParams}
-      />
+      {/* Profile rebinding is not supported by the API yet — create only. */}
+      {!isEdit ? (
+        <ProfileSettings
+          agentParams={agentParams}
+          setAgentParams={setAgentParams}
+        />
+      ) : null}
 
       <InstructionsSettings
         agentParams={agentParams}

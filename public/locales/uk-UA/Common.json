@@ -73,6 +73,7 @@
   "AgentManager": "Менеджер агента",
   "AgentName": "Ім'я агента",
   "AgentOwner": "Власник агента",
+  "AgentProfileDescription": "Виберіть модель ШІ, яка буде використовуватися в чатах цього агента.",
   "AgentRemoved": "Агент видалено",
   "AgentRenamed": "Агент <1>«{{oldRoomTitle}}»</1> перейменовано на <2>«{{roomTitle}}»</2>",
   "AgentsRemoved": "Агентів вилучено",

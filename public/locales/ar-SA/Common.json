@@ -73,6 +73,7 @@
   "AgentManager": "مدير الوكلاء",
   "AgentName": "اسم الوكيل",
   "AgentOwner": "مالك الوكيل",
+  "AgentProfileDescription": "حدد نموذج الذكاء الاصطناعي الذي سيتم استخدامه في محادثات هذا الوكيل.",
   "AgentRemoved": "تمت إزالة الوكيل",
   "AgentRenamed": "تمت إعادة تسمية الوكيل <1>«{{oldRoomTitle}}»</1> إلى <2>«{{roomTitle}}»</2>",
   "AgentsRemoved": "تمت إزالة الوكلاء",

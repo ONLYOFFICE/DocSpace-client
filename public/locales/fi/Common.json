@@ -73,6 +73,7 @@
   "AgentManager": "Agentin hallinta",
   "AgentName": "Agentin nimi",
   "AgentOwner": "Agentin omistaja",
+  "AgentProfileDescription": "Valitse tekoälymalli, jota käytetään tämän agentin chateissa.",
   "AgentRemoved": "Agentti poistettu",
   "AgentRenamed": "Agentti <1>«{{oldRoomTitle}}»</1> nimennettiin uudelleen <2>«{{roomTitle}}»</2>",
   "AgentsRemoved": "Agentit poistettu",

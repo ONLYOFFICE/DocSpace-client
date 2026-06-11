@@ -73,6 +73,7 @@
   "AgentManager": "නියෝජිත කළමනාකරු",
   "AgentName": "නියෝජිතයාගේ නම",
   "AgentOwner": "නියෝජිත හිමිකරු",
+  "AgentProfileDescription": "මෙම නියෝජිතයාගේ සංවාද සඳහා භාවිතා කිරීමට අවශ්‍ය AI මාදිලිය තෝරන්න.",
   "AgentRemoved": "නියෝජිතයා ඉවත් කරන ලදී",
   "AgentRenamed": "නියෝජිතයා <1>«{{oldRoomTitle}}»</1><2>«{{roomTitle}}»</2> ලෙස නැවත නම් කරන ලදී",
   "AgentsRemoved": "නියෝජිතයන් ඉවත් කරන ලදී",

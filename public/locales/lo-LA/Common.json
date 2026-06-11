@@ -73,6 +73,7 @@
   "AgentManager": "ຜູ້ຈັດການຕົວແທນ",
   "AgentName": "ຊື່ຕົວແທນ",
   "AgentOwner": "ເຈົ້າຂອງຕົວແທນ",
+  "AgentProfileDescription": "ກະລຸນາເລືອກໂມເດລ AI ທີ່ຈະໃຊ້ໃນການສົນທະນາຂອງຕົວແທນນີ້.",
   "AgentRemoved": "ຕົວແທນຖືກລຶບອອກແລ້ວ",
   "AgentRenamed": "ຕົວແທນ <1>«{{oldRoomTitle}}»</1> ໄດ້ປ່ຽນຊື່ເປັນ <2>«{{roomTitle}}»</2>",
   "AgentsRemoved": "ຕົວແທນຖືກລຶບອອກແລ້ວ",

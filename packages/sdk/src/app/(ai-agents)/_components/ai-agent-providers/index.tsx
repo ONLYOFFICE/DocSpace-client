@@ -31,7 +31,9 @@ import { useParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import { useTheme } from "@docspace/ui-kit";
-import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
+import AiAgentProviders, {
+  useStores,
+} from "@docspace/ui-kit/ai-agent/providers";
 import {
   PORTAL_BASE_THEME_ID,
   PORTAL_DARK_THEME_ID,
@@ -39,7 +41,7 @@ import {
 
 import { useAiChatComposerActions } from "@/components/ai-chat-composer";
 
-import { useAiRoomStore } from "../../_store";
+import { useAgentsAIConfigStore, useAiRoomStore } from "../../_store";
 import { useAgentsCommonData } from "../../_store/AgentsCommonDataContext";
 import useOpenResultFile from "../../_hooks/useOpenResultFile";
 
@@ -62,6 +64,23 @@ type AiAgentsAiChatProvidersProps = {
 //   - an agent route → a provider scoped to that agent, remounted on switch.
 // `getAgentRoomId` is currently inert in the chat lib (AgentRoomIdSync is a
 // no-op), wired here only for forward-compat.
+// Mirrors the chat lib's profiles presence into the MobX
+// AgentsAIConfigStore so layout-level observers that live OUTSIDE this
+// provider subtree (RootFilter / quick actions in the section filter bar)
+// can gate on `aiReady`. Must be mounted inside <AiAgentProviders> —
+// useStores() reads its StoresProvider context.
+const ProfilesBridge = () => {
+  const aiConfigStore = useAgentsAIConfigStore();
+  const stores = useStores();
+  const profiles = stores.useProfilesStore((s) => s.profiles);
+
+  React.useEffect(() => {
+    aiConfigStore.setHasProfiles(profiles.length > 0);
+  }, [aiConfigStore, profiles]);
+
+  return null;
+};
+
 const AiAgentsAiChatProviders = ({ children }: AiAgentsAiChatProvidersProps) => {
   const { i18n } = useTranslation(["Common"]);
   const { isBase } = useTheme();
@@ -103,6 +122,7 @@ const AiAgentsAiChatProviders = ({ children }: AiAgentsAiChatProvidersProps) => 
       closeEditorPanel={closeEditorPanel}
       composerActions={composerActions}
     >
+      <ProfilesBridge />
       {children}
       {attachDialogs}
     </AiAgentProviders>

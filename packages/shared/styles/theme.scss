@@ -1509,6 +1509,7 @@
   --payment-error-color: #{$light-error-status};
   --warning-color: #{$light-error-status};
   --background-service-color: #{$light-gray-hover};
+  --background-cards-color: #{$gray-light};
   --border-service-color: #{$gray-light-mid};
   --services-additional-info: #{$gray};
   --services-link-color: #{$gray};
@@ -1532,6 +1533,7 @@
   --payment-error-color: #{$dark-error-status};
   --warning-color: #{$dark-error-status};
   --background-service-color: #{$light-dark-gray-hover};
+  --background-cards-color: #{$dark-gray-light};
   --border-service-color: #{$gray-dark-strong};
   --modal-dialog-border-color: #{$gray-dark-strong};
   --services-additional-info: #{$gray-dark};

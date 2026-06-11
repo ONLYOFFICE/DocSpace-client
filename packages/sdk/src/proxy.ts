@@ -147,10 +147,14 @@ export async function proxy(request: NextRequest) {
       ? "script-src 'self' 'unsafe-eval' 'unsafe-inline' 'wasm-unsafe-eval'"
       : "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'";
 
-    // connect-src in dev needs ws: for HMR. Production stays same-origin.
+    // connect-src in dev needs ws: for HMR.
+    // Production allows https: to avoid blocking S3/CloudFront fetches for
+    // encrypted files — the backend's CSP header (served alongside this one)
+    // already restricts connect-src to specific storage domains, so the
+    // effective policy is their intersection.
     const connectSrc = isDev
       ? "connect-src 'self' ws: wss: http: https:"
-      : "connect-src 'self'";
+      : "connect-src 'self' https:";
 
     const csp = [
       "default-src 'self'",

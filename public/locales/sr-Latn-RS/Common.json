@@ -533,7 +533,6 @@
   "EnableAutomaticBackup": "Omogući automatsku rezervnu kopiju.",
   "EnableAutomaticBackupDescription": "Koristite ovu opciju da napravite rezervnu kopiju podataka o prostoru.",
   "EnableBackupConfirm": "Omogućavanje servisa za bekap će omogućiti svim {{productName}} administratorima da kreiraju bekape u bilo kom trenutku, sve dok je stanje na novčaniku dovoljno. Da li si siguran da želiš da nastaviš?",
-  "EnablePaidBackup": "Omogući plaćeno rezervno kopiranje",
   "EnableThirdPartyIntegration": "Molimo vas da zamolite vlasnika ili administratora {{productName}} da omogući odgovarajuću uslugu u odeljku za integraciju u Podešavanjima {{productName}}.",
   "EncryptingFile": "Šifrovanje datoteke",
   "EncryptionFilePreparing": "Pripremanje datoteke za šifrovanje",

@@ -533,7 +533,6 @@
   "EnableAutomaticBackup": "Aktivizoni rezervimin automatik.",
   "EnableAutomaticBackupDescription": "Përdoreni këtë opsion për të rezervuar të dhënat e hapësirës.",
   "EnableBackupConfirm": "Aktivizimi i shërbimit të backup-it do t’i lejojë të gjithë administratorët e {{productName}} të krijojnë backup-e në çdo kohë, për sa kohë ka fonde në portofol. Jeni të sigurt që doni të vazhdoni?",
-  "EnablePaidBackup": "Aktivizoni mbështetjen e paguar të backup-ut",
   "EnableThirdPartyIntegration": "Ju lutemi, kërkoni nga një pronar ose administrator i {{productName}} të aktivizojë shërbimin përkatës në seksionin e Integrimit të cilësimeve të {{productName}}.",
   "EncryptingFile": "Skedari duke enkriptuar",
   "EncryptionFilePreparing": "Përgatitja e skedarit për enkriptim",

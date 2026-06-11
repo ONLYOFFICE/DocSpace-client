@@ -533,7 +533,6 @@
   "EnableAutomaticBackup": "Povoliť automatické zálohovanie údajov.",
   "EnableAutomaticBackupDescription": "Použiť túto voľbu na zálohovanie údajov priestoru.",
   "EnableBackupConfirm": "Aktivácia služby Zálohovanie umožní všetkým administrátorom {{productName}} vytvárať zálohy kedykoľvek, pokiaľ bude dostatočný zostatok na peňaženke. Ste si istí, že chcete pokračovať?",
-  "EnablePaidBackup": "Zapnúť platené záložné kopie",
   "EnableThirdPartyIntegration": "Požiadajte vlastníka alebo administrátora {{productName}}, aby povolil príslušnú funkciu v časti Integrácia v nastaveniach {{productName}}.",
   "EncryptingFile": "Šifrovanie súboru",
   "EncryptionFilePreparing": "Príprava súboru na šifrovanie",

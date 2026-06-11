@@ -533,7 +533,6 @@
   "EnableAutomaticBackup": "启用自动备份",
   "EnableAutomaticBackupDescription": "使用该选项备份协作空间的数据。",
   "EnableBackupConfirm": "启用备份服务后，所有 {{productName}} 管理员均可随时创建备份（需钱包余额充足）。是否确认继续？",
-  "EnablePaidBackup": "启用付费备份",
   "EnableThirdPartyIntegration": "请让{{productName}}所有者或管理员在{{productName}}的集成设置中启用相应服务。",
   "EncryptingFile": "加密文件",
   "EncryptionFilePreparing": "准备加密文件",

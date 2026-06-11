@@ -533,7 +533,6 @@
   "EnableAutomaticBackup": "قم بتمكين النسخ الاحتياطي التلقائي.",
   "EnableAutomaticBackupDescription": "استخدم هذا الخيار لعمل نسخة احتياطية من بيانات المساحة.",
   "EnableBackupConfirm": "سيسمح تمكين خدمة النسخ الاحتياطي لجميع مسؤولي {{productName}} بإنشاء نسخ احتياطية في أي وقت، طالما كان رصيد المحفظة كافيًا. هل أنتم متأكدون من رغبتكم في المتابعة؟",
-  "EnablePaidBackup": "تفعيل النسخ الاحتياطي المدفوع",
   "EnableThirdPartyIntegration": "يرجى من مالك {{productName}} أو المسؤول تمكين الخدمة المطلوبة في قسم التكامل ضمن إعدادات {{productName}}.",
   "EncryptingFile": "تشفير الملف",
   "EncryptionFilePreparing": "تحضير الملف للتشفير",

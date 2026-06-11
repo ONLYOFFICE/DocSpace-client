@@ -533,7 +533,6 @@
   "EnableAutomaticBackup": "Activează copiere de rezervă automată.",
   "EnableAutomaticBackupDescription": "Utilizați această opțiune pentru a crea o copie de rezervă a datelor din spațiu.",
   "EnableBackupConfirm": "Activarea serviciului de copiere de rezervă va permite tuturor administratorilor {{productName}} să creeze copii de rezervă oricând, atâta timp cât există soldul portofelului suficient. Sigur doriţi să continuați?",
-  "EnablePaidBackup": "Activare backup plătit",
   "EnableThirdPartyIntegration": "Cereți proprietarului sau administratorului {{productName}} să activați serviciul necesar în secțiunea Integrare din Setările {{productName}}.",
   "EncryptingFile": "Criptare fișier",
   "EncryptionFilePreparing": "Pregătirea fișierului pentru criptare",

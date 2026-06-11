@@ -567,7 +567,6 @@
   "EnableAutomaticBackup": "Enable automatic backup.",
   "EnableAutomaticBackupDescription": "Use this option to back up the space data.",
   "EnableBackupConfirm": "Enabling the Backup service will allow all {{productName}} administrators to create backups anytime, as long as the wallet balance is sufficient. Are you sure you want to continue?",
-  "EnablePaidBackup": "Enable paid backup",
   "EnableThirdPartyIntegration": "Please ask a {{productName}} owner or administrator to enable the corresponding service in the Integration section of the {{productName}} Settings.",
   "EncryptingFile": "Encrypting file",
   "EncryptionFilePreparing": "Preparing file for encryption",

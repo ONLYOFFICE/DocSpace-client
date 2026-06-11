@@ -533,7 +533,6 @@
   "EnableAutomaticBackup": "Ota automaattinen varmuuskopiointi käyttöön.",
   "EnableAutomaticBackupDescription": "Tämän vaihtoehdon avulla voit varmuuskopioida tilan tiedot.",
   "EnableBackupConfirm": "Varmuuskopiointipalvelun ottaminen käyttöön sallii kaikkien {{productName}}-järjestelmänvalvojien luoda varmuuskopioita milloin tahansa, kunhan lompakon saldo on riittävä. Haluatko varmasti jatkaa?",
-  "EnablePaidBackup": "Varmista maksullinen varmuuskopiointi",
   "EnableThirdPartyIntegration": "Ole hyvä ja pyydä {{productName}} omistajaa tai pääkäyttäjää ottamaan käyttöön vastaava palvelu  {{productName}}:n asetusten integraatio-osiossa. ",
   "EncryptingFile": "Tiedoston salaaminen",
   "EncryptionFilePreparing": "Valmistellaan tiedostoa salausta varten",

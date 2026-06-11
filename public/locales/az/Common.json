@@ -533,7 +533,6 @@
   "EnableAutomaticBackup": "Avtomatik yedəkləməni aktivləşdirin.",
   "EnableAutomaticBackupDescription": "Sahə məlumatlarını yedəkləmək üçün bu seçimdən istifadə edin.",
   "EnableBackupConfirm": "Backup xidməti aktiv edildikdə, bütün {{productName}} administratorları, əgər hesab balansında kifayət qədər vəsait varsa, hər zaman ehtiyat nüsxələrini yarada biləcəklər. Davam etmək istəyirsinizmi?",
-  "EnablePaidBackup": "Ödənişli ehtiyat nüsxəsini aktiv etmək",
   "EnableThirdPartyIntegration": "Lütfən, {{productName}} sahibindən və ya administratordan {{productName}} Parametrlərinin İnteqrasiya bölməsində müvafiq xidməti aktivləşdirməsini xahiş edin.",
   "EncryptingFile": "Fayl şifrələnir",
   "EncryptionFilePreparing": "Fayl şifrələnmə üçün hazırlanır",

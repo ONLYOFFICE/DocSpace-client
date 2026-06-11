@@ -533,7 +533,6 @@
   "EnableAutomaticBackup": "Otomatik yedeklemeyi etkinleştir.",
   "EnableAutomaticBackupDescription": "Alan verilerini yedeklemek için bu seçeneği kullanın.",
   "EnableBackupConfirm": "Yedekleme hizmetini etkinleştirmek, cüzdan bakiyesi yeterli olduğu sürece tüm {{productName}} yöneticilerinin istediği zaman yedek oluşturmasına izin verecektir. Devam etmek istediğinizden emin misiniz?",
-  "EnablePaidBackup": "Ücretli yedeklemeyi etkinleştirin",
   "EnableThirdPartyIntegration": "Lütfen {{productName}} sahibi veya yöneticisinden {{productName}} ayarlarının Entegrasyon bölümünde ilgili hizmeti etkinleştirmesini isteyin.",
   "EncryptingFile": "Dosya şifreleme",
   "EncryptionFilePreparing": "Dosya şifreleme için hazırlanıyor",

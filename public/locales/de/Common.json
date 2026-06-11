@@ -533,7 +533,6 @@
   "EnableAutomaticBackup": "Automatische Datensicherung aktivieren.",
   "EnableAutomaticBackupDescription": "Verwenden Sie diese Option, um die Bereichsdaten zu sichern.",
   "EnableBackupConfirm": "Durch die Aktivierung des Backup-Dienstes können alle {{productName}}-Administratoren jederzeit Backups erstellen, solange das Guthaben im Wallet ausreicht. Möchten Sie wirklich fortfahren?",
-  "EnablePaidBackup": "Abonnierten Backup aktivieren",
   "EnableThirdPartyIntegration": "Bitten Sie einen {{productName}}-Besitzer oder -Administrator, den entsprechenden Dienst im Abschnitt \"Integration\" der {{productName}}-Einstellungen zu aktivieren.",
   "EncryptingFile": "Datei wird verschlüsselt",
   "EncryptionFilePreparing": "Die Datei wird auf Verschlüsselung vorbereitet",

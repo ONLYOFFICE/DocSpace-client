@@ -533,7 +533,6 @@
   "EnableAutomaticBackup": "Omogoči samodejno varnostno kopiranje.",
   "EnableAutomaticBackupDescription": "Uporabite to možnost za varnostno kopiranje podatkov prostora.",
   "EnableBackupConfirm": "Omogočanje storitve varnostnih kopij bo omogočilo vsem skrbnikom {{productName}} ustvarjanje varnostnih kopij kadarkoli, dokler je stanje denarnice zadostno. Ste prepričani, da želite nadaljevati?",
-  "EnablePaidBackup": "Omogočite plačljivo kopiranje oziroma rezervno kopiranje",
   "EnableThirdPartyIntegration": "Prosite lastnika ali skrbnika {{productName}}, da omogoči ustrezno storitev v razdelku Integracija v nastavitvah za {{productName}}.",
   "EncryptingFile": "Šifriranje datoteke",
   "EncryptionFilePreparing": "Priprava datoteke za šifriranje",

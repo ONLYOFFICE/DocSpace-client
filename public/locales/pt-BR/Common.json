@@ -533,7 +533,6 @@
   "EnableAutomaticBackup": "Ativar backup automático.",
   "EnableAutomaticBackupDescription": "Use esta opção para fazer backup dos dados do espaço.",
   "EnableBackupConfirm": "A ativação do serviço de backup permitirá que todos os administradores do {{productName}} criem backups a qualquer momento, desde que o saldo da carteira seja suficiente. Tem certeza de que deseja continuar?",
-  "EnablePaidBackup": "Ativar backup pago",
   "EnableThirdPartyIntegration": "Solicite ao proprietário ou administrador do {{productName}} que ative o serviço correspondente na seção Integração das {{productName}} Configurações.",
   "EncryptingFile": "Criptografando arquivo",
   "EncryptionFilePreparing": "Preparando o arquivo para a criptografia",

@@ -533,7 +533,6 @@
   "EnableAutomaticBackup": "Włącz automatyczne tworzenie kopii zapasowych.",
   "EnableAutomaticBackupDescription": "Użyj tej opcji, aby tworzyć kopie zapasowe danych przestrzeni.",
   "EnableBackupConfirm": "Włączenie usługi kopii zapasowych pozwoli wszystkim administratorom {{productName}} tworzyć kopie zapasowe w dowolnym momencie, o ile saldo portfela jest wystarczające. Czy na pewno chcesz kontynuować?",
-  "EnablePaidBackup": "Włącz kopie zapasowe płatne",
   "EnableThirdPartyIntegration": "Poproś właściciela lub administratora {{productName}} o włączenie odpowiedniej usługi w sekcji Integracja, w ustawieniach {{productName}}.",
   "EncryptingFile": "Szyfrowanie pliku",
   "EncryptionFilePreparing": "Przygotowywanie pliku do szyfrowania",

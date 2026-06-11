@@ -533,7 +533,6 @@
   "EnableAutomaticBackup": "Iespējojiet automātisko dublēšanu.",
   "EnableAutomaticBackupDescription": "Izmantojiet šo opciju, lai dublētu portāla datus.",
   "EnableBackupConfirm": "Iespējot Backup pakalpojums ļaus visiem {{productName}} administratoriem veidot rezerves kopijas jebkurā laikā, kamēr mokaņa ir pietiekama. Vai Jūs vēlaties turpināt?",
-  "EnablePaidBackup": "Iespējot maksas atsargotību",
   "EnableThirdPartyIntegration": "Lūdziet {{productName}} īpašniekam vai administratoram iespējot atbilstošo pakalpojumu {{productName}} iestatījumu sadaļā Integrācija.",
   "EncryptingFile": "Šifrē failu",
   "EncryptionFilePreparing": "Sagatavo failu šifrēšanai",

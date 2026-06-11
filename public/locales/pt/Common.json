@@ -533,7 +533,6 @@
   "EnableAutomaticBackup": "Ativar Criação Automática de Cópias de Segurança.",
   "EnableAutomaticBackupDescription": "Utilize esta opção para criar cópias de segurança dos dados do espaço.",
   "EnableBackupConfirm": "Habilitar o serviço de Backup permitirá que todos os administradores do {{productName}} criem backups a qualquer momento, desde que o saldo da carteira seja suficiente. Tem certeza de que deseja continuar?",
-  "EnablePaidBackup": "Ativar backup pago",
   "EnableThirdPartyIntegration": "Peça a um proprietário ou administrador de {{productName}} para ativar o serviço correspondente na seção Integração das Configurações de {{productName}}.",
   "EncryptingFile": "A encriptar o ficheiro",
   "EncryptionFilePreparing": "A preparar o ficheiro para encriptação",

@@ -533,7 +533,6 @@
   "EnableAutomaticBackup": "Bật sao lưu tự động.",
   "EnableAutomaticBackupDescription": "Sử dụng tùy chọn này để sao lưu dữ liệu không gian.",
   "EnableBackupConfirm": "Kích hoạt dịch vụ Sao lưu sẽ cho phép tất cả người quản trị {{productName}} tạo bản sao lưu bất cứ lúc nào, miễn là số dư ví đủ. Bạn có chắc chắn muốn tiếp tục không?",
-  "EnablePaidBackup": "Bật sao lưu trả phí",
   "EnableThirdPartyIntegration": "Vui lòng yêu cầu chủ sở hữu hoặc quản trị viên {{productName}} bật dịch vụ tương ứng trong phần Tích hợp của Cài đặt {{productName}}.",
   "EncryptingFile": "Mã hóa tệp",
   "EncryptionFilePreparing": "Đang chuẩn bị tệp để mã hóa",

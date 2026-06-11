@@ -214,7 +214,6 @@
   "BackupsAvailable": "バックアップが利用可能です — バックアップあたり{{currency}}",
   "BackupServiceEnabled": "バックアップサービスが正常に有効になりました。",
   "BackupsNotAvailable": "バックアップは利用できません — ウォレットにチャージする",
-  "BackupTitle": "<1>バックアップ</1> (1バックアップあたり{{currency}})",
   "BadgeAlertDescription": "このフォームには複数の役割が指定されています。複数の役割が指定されたフォームは、このタイプのルームでは入力できません。",
   "BadgeCompletedTitle": "すべてのメンバーによってフォームが完全に記入されています",
   "BadgeDraftTitle": "フォームを入力するためにユーザーを役割に割り当てます",

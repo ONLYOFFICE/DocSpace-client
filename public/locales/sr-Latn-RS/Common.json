@@ -214,7 +214,6 @@
   "BackupsAvailable": "Dostupni backupi — {{currency}} po backupu",
   "BackupServiceEnabled": "Servis za bekap je uspešno omogućen.",
   "BackupsNotAvailable": "Rezervne kopije nisu dostupne — dopunite novčanik",
-  "BackupTitle": "<1>Rezervna kopija</1> ({{currency}} po 1 rezervnoj kopiji)",
   "BadgeAlertDescription": "U ovom obrascu je navedeno nekoliko uloga. Obrasci sa više uloga nisu dostupni za popunjavanje ove vrste soba",
   "BadgeCompletedTitle": "Obrazac je potpuno popunjen od strane svih članova",
   "BadgeDraftTitle": "Dodelite korisnike u uloge da počnu da popunjavaju obrazac",

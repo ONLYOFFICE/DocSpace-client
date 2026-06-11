@@ -214,7 +214,6 @@
   "BackupsAvailable": "Ieglabāšanas kopijas pieejamas — {{currency}} par kopiju",
   "BackupServiceEnabled": "Rezerves pakalpojums veiksmīgi aktivēts.",
   "BackupsNotAvailable": "Pagaidu nepieejami — papildiet makdienas mājokļa apmaksinājumu",
-  "BackupTitle": "<1>Rezerves kopija</1> ({{currency}} par 1 rezerves kopiju)",
   "BadgeAlertDescription": "Šajā veidlapā ir norādītas vairākas lomas. Veidlapas ar vairākām lomām nav pieejamas šāda veida telpu aizpildīšanai",
   "BadgeCompletedTitle": "Veidlapu ir pilnībā aizpildījuši visi dalībnieki",
   "BadgeDraftTitle": "Piešķiriet lietotājiem lomas, lai sāktu aizpildīt veidlapu",

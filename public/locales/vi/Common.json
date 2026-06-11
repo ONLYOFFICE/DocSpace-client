@@ -214,7 +214,6 @@
   "BackupsAvailable": "Sao lưu có sẵn — {{currency}} mỗi bản sao lưu",
   "BackupServiceEnabled": "Đã kích hoạt thành công dịch vụ sao lưu.",
   "BackupsNotAvailable": "Sao lưu không khả dụng — nạp tiền vào ví",
-  "BackupTitle": "<1>Sao lưu</1> ({{currency}} cho 1 lần sao lưu)",
   "BadgeAlertDescription": "Một số vai trò được chỉ định trong biểu mẫu này. Không có biểu mẫu có nhiều vai trò để điền trong loại phòng này",
   "BadgeCompletedTitle": "Biểu mẫu được tất cả các thành viên điền đầy đủ",
   "BadgeDraftTitle": "Chỉ định người dùng vào các vai trò để bắt đầu điền vào biểu mẫu",

@@ -214,7 +214,6 @@
   "BackupsAvailable": "Copias de seguridad disponibles — {{currency}} por copia de seguridad",
   "BackupServiceEnabled": "El servicio de copia de seguridad se ha habilitado correctamente.",
   "BackupsNotAvailable": "Copias de seguridad no disponibles — recargar cartera",
-  "BackupTitle": "<1>Copia de seguridad</1> ({{currency}} por 1 copia de seguridad)",
   "BadgeAlertDescription": "En este formulario se especifican varios roles. Los formularios con roles múltiples no están disponibles para rellenar en este tipo de sala",
   "BadgeCompletedTitle": "El formulario ha sido completamente rellenado por todos los miembros",
   "BadgeDraftTitle": "Asigne usuarios a los roles para comenzar a rellenar el formulario",

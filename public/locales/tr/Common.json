@@ -214,7 +214,6 @@
   "BackupsAvailable": "Yedeklemeler mevcut — yedekleme başına {{currency}}",
   "BackupServiceEnabled": "Yedekleme hizmeti başarıyla etkinleştirildi.",
   "BackupsNotAvailable": "Yedeklemeler kullanılamıyor — cüzdanı yükle",
-  "BackupTitle": "<1>Yedekleme</1> (1 yedekleme başına {{currency}})",
   "BadgeAlertDescription": "Bu formda birkaç rol belirtilmiştir. Birden fazla role sahip formlar bu oda türünde doldurulamaz",
   "BadgeCompletedTitle": "Form tüm üyeler tarafından tamamen dolduruldu",
   "BadgeDraftTitle": "Formu doldurmaya başlamak için kullanıcılara roller atayın",

@@ -214,7 +214,6 @@
   "BackupsAvailable": "Back-ups beschikbaar — {{currency}} per back-up",
   "BackupServiceEnabled": "Back-upservice succesvol ingeschakeld.",
   "BackupsNotAvailable": "Back-ups niet beschikbaar — voer saldo aan",
-  "BackupTitle": "<1>Back-up</1> ({{currency}} per 1 back-up)",
   "BadgeAlertDescription": "Er worden verschillende rollen gespecificeerd in dit formulier. Formulieren met meerdere rollen kunnen niet worden ingevuld in dit type kamer",
   "BadgeCompletedTitle": "Het formulier is volledig ingevuld door alle leden",
   "BadgeDraftTitle": "Gebruikers aan rollen toewijzen om te beginnen met het invullen van het formulier",

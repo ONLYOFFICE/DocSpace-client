@@ -214,7 +214,6 @@
   "BackupsAvailable": "Backup disponibili — {{currency}} per backup",
   "BackupServiceEnabled": "Servizio di backup abilitato con successo.",
   "BackupsNotAvailable": "Backup non disponibili — ricarica portafoglio",
-  "BackupTitle": "<1>Backup</1> ({{currency}} per 1 backup)",
   "BadgeAlertDescription": "In questo modulo sono specificati diversi ruoli. I moduli con più ruoli non sono disponibili per la compilazione in questa tipologia di stanze",
   "BadgeCompletedTitle": "Il modulo è stato completamente compilato da tutti i membri",
   "BadgeDraftTitle": "Assegna utenti ai ruoli per iniziare la compilazione del modulo",

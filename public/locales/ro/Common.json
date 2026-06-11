@@ -214,7 +214,6 @@
   "BackupsAvailable": "備care-uri disponibile — {{currency}} per backup",
   "BackupServiceEnabled": "Serviciul de copiere de rezervă a fost activat cu succes.",
   "BackupsNotAvailable": "Copii de rezervă indisponibile — reîncărcați portofelul",
-  "BackupTitle": "<1>Backup</1> ({{currency}} pe 1 backup)",
   "BadgeAlertDescription": "Pentru acest formular sunt atribuite mai multe roluri. Formulare cu roluri multiple nu sunt disponibile spre completare în acest tip de sală",
   "BadgeCompletedTitle": "Formularul a fost completat în întregime de toți membrii",
   "BadgeDraftTitle": "Atribuiți utilizatorii unor roluri pentru a începe completarea formularului",

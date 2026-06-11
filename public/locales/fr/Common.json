@@ -214,7 +214,6 @@
   "BackupsAvailable": "Sauvegardes disponibles — {{currency}} par sauvegarde",
   "BackupServiceEnabled": "Service de sauvegarde activé avec succès.",
   "BackupsNotAvailable": "Sauvegardes indisponibles — créditer le portefeuille",
-  "BackupTitle": "<1>Sauvegarde</1> ({{currency}} par 1 sauvegarde)",
   "BadgeAlertDescription": "Plusieurs rôles sont spécifiés dans ce formulaire. Les formulaires avec des rôles multiples ne sont pas disponibles pour le remplissage dans ce type de salle.",
   "BadgeCompletedTitle": "Le formulaire est entièrement rempli par tous les membres",
   "BadgeDraftTitle": "Attribuez des rôles aux utilisateurs pour commencer à remplir le formulaire",

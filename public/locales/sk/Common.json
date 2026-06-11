@@ -214,7 +214,6 @@
   "BackupsAvailable": "Dostupné zálohy — {{currency}} za zálohu",
   "BackupServiceEnabled": "Zálohová služba bola úspešne povolená.",
   "BackupsNotAvailable": "Nasazdie fašímatické zálohy — doplniť portfélio",
-  "BackupTitle": "<1>Záloha</1> ({{currency}} za 1 zálohu)",
   "BadgeAlertDescription": "V tomto formulári je zadaných niekoľko rolí. Formuláre s viacerými rolami nie sú dostupné na vyplnenie v tomto type miestnosti",
   "BadgeCompletedTitle": "Formulár je úplne vyplnený všetkými členmi",
   "BadgeDraftTitle": "Prideľte používateľom roly, aby mohli začať vypĺňať formulár",

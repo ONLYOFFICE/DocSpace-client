@@ -214,7 +214,6 @@
   "BackupsAvailable": "Kopie zapaszy dostępne — {{currency}} za kopię zapaszy",
   "BackupServiceEnabled": "Usługa kopii zapasowych została pomyślnie włączona.",
   "BackupsNotAvailable": "Kopie zapasowe niedostępne — doładowanie portfela",
-  "BackupTitle": "<1>Kopia zapasowa</1> ({{currency}} za 1 kopię zapasową)",
   "BadgeAlertDescription": "W danym formularzu określono kilka ról. Formularze z wieloma rolami nie są dostępne do wypełnienia w tym rodzaju pokoju",
   "BadgeCompletedTitle": "Formularz został całkowicie wypełniony przez wszystkich członków",
   "BadgeDraftTitle": "Przypisz użytkowników do ról, aby rozpocząć wypełnianie formularza",

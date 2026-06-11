@@ -38,6 +38,7 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 import type {
   TFile,
   TFilesSettings,
@@ -566,7 +567,10 @@ const DocsLayoutCore = observer(
                         <ConvertContext.Provider value={requestConvert}>
                           <AskAIContext.Provider value={ai?.onAskAI ?? null}>
                             <div
-                              className={styles.root}
+                              className={classNames(styles.root, {
+                                [styles.infoPanelVisible]:
+                                  infoPanelStore.isVisible,
+                              })}
                               style={frameHeaderVars}
                               data-layout-mode={layoutMode}
                             >

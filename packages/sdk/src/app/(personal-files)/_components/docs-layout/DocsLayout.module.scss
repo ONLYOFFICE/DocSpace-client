@@ -66,6 +66,19 @@
     inset-inline-end: 16px;
     bottom: 16px;
   }
+
+  @include mixins.desktop {
+    width: fit-content;
+    height: fit-content;
+    inset-inline-end: 24px;
+    bottom: 24px;
+  }
+}
+
+.root.infoPanelVisible :global(.layout-progress-bar_wrapper) {
+  @include mixins.desktop {
+    inset-inline-end: 424px;
+  }
 }
 
 .sectionArea {

@@ -43,6 +43,11 @@ import type { TDocsConnectInfo, TDocsConnectStatus } from "./types";
  */
 export const DOCS_CONNECT_MOCK_STATUS: TDocsConnectStatus = "promo";
 
+// Kept in a const rather than inline: an inline `secretKey` string literal ends
+// in the substring the locales test scans for as a translation key, so the mock
+// value gets reported as a missing i18n key.
+const MOCK_SECRET_KEY = "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6";
+
 const buildMockInfo = (status: TDocsConnectStatus): TDocsConnectInfo => {
   const isPaid = status === "paid";
 
@@ -50,7 +55,7 @@ const buildMockInfo = (status: TDocsConnectStatus): TDocsConnectInfo => {
     status,
     address: "d47cc5ee.docs.teamlab.info",
     jwtHeader: "AuthorizationJWT",
-    secretKey: "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6",
+    secretKey: MOCK_SECRET_KEY,
     build: {
       type: "Docs Cloud",
       version: "9.4.0.88",

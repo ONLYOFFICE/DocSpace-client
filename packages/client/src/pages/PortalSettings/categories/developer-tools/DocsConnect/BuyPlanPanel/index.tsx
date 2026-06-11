@@ -111,10 +111,10 @@ const BuyPlanPanel = ({
             <div className={styles.iconPlaceholder} aria-hidden />
             <div>
               <Text fontSize="14px" fontWeight={600}>
-                {t("DocsConnect:Wallet")}
+                {t("Common:Wallet")}
               </Text>
               <Text fontSize="13px" className={styles.muted}>
-                {t("DocsConnect:AvailableCredits")}{" "}
+                {t("Common:AvailableCredits")}{" "}
                 <Text
                   as="span"
                   fontSize="13px"
@@ -139,7 +139,7 @@ const BuyPlanPanel = ({
             showSlider
             showPlusSign
             title={t("DocsConnect:NumberOfUsers")}
-            subtitle={t("DocsConnect:PerUserMonth", {
+            subtitle={t("DocsConnect:PerUserPerMonth", {
               price: `${currency}${plan.pricePerUser.toFixed(2)}`,
             })}
             onChange={setUsers}
@@ -155,7 +155,7 @@ const BuyPlanPanel = ({
                   </Text>
                 </Text>
                 <Text fontSize="13px" className={styles.muted}>
-                  {t("DocsConnect:PerUserMonth", {
+                  {t("DocsConnect:PerUserPerMonth", {
                     price: `${currency}${plan.devPackPrice}`,
                   })}
                 </Text>
@@ -192,10 +192,10 @@ const BuyPlanPanel = ({
           </div>
 
           <Text fontSize="16px" fontWeight={600}>
-            {t("DocsConnect:OrderSummary")}
+            {t("Common:OrderSummary")}
           </Text>
           <div className={styles.summaryCard}>
-            {summaryRow(t("DocsConnect:Users"), `${users}`)}
+            {summaryRow(t("DocsConnect:PlanUsers"), `${users}`)}
             {summaryRow(
               t("DocsConnect:BasePricePerUser"),
               `${currency}${plan.pricePerUser.toFixed(2)}`,

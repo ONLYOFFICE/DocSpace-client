@@ -101,7 +101,7 @@ const PromoPage = ({ startTrial }: PromoPageProps) => {
       title: t("DocsConnect:FeatureCompatibilityTitle"),
       description: t("DocsConnect:FeatureCompatibilityDescription"),
       Icon: MsOfficeSvg,
-      color: "#13B7EC",
+      color: globalColors.mainBlueLight,
     },
     {
       title: t("DocsConnect:FeatureCollaborationTitle"),

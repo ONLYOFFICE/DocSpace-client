@@ -109,7 +109,7 @@ const TenantPanel = ({
       name: t("DocsConnect:TabSettings"),
       content: (
         <div className={styles.stubTab}>
-          <Text className={styles.muted}>{t("DocsConnect:ComingSoon")}</Text>
+          <Text className={styles.muted}>{t("Common:ComingSoon")}</Text>
         </div>
       ),
     },
@@ -118,7 +118,7 @@ const TenantPanel = ({
       name: t("DocsConnect:TabPreview"),
       content: (
         <div className={styles.stubTab}>
-          <Text className={styles.muted}>{t("DocsConnect:ComingSoon")}</Text>
+          <Text className={styles.muted}>{t("Common:ComingSoon")}</Text>
         </div>
       ),
     },
@@ -133,7 +133,7 @@ const TenantPanel = ({
           </Text>
           {isTrial ? (
             <Badge
-              label={t("DocsConnect:FreeDaysLeft", {
+              label={t("Common:FreeDaysLeft", {
                 count: info.trial.daysLeft,
               })}
               backgroundColor={globalColors.alphaGreenLight}

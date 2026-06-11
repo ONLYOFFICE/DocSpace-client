@@ -132,7 +132,7 @@ const UsageBlock = ({
       </div>
       <ProgressBar percent={percent} />
       <div className={styles.statRow}>
-        <StatColumn value={usage.active} label={t("DocsConnect:Active")} />
+        <StatColumn value={usage.active} label={t("Common:Active")} />
         <StatColumn value={usage.internal} label={t("DocsConnect:Internal")} />
         <StatColumn value={usage.external} label={t("DocsConnect:External")} />
         <StatColumn
@@ -189,7 +189,7 @@ const Statistics = ({
       </Heading>
       <div className={styles.overviewGrid}>
         <InfoField
-          label={t("DocsConnect:Address")}
+          label={t("Common:Address")}
           value={info.address}
           onCopy={onCopy}
           copyTitle={t("Common:CopyToClipboard")}
@@ -201,7 +201,7 @@ const Statistics = ({
           copyTitle={t("Common:CopyToClipboard")}
         />
         <InfoField
-          label={t("DocsConnect:SecretKey")}
+          label={t("DocsConnect:SecretKeyLabel")}
           value={info.secretKey}
           displayValue={"•".repeat(24)}
           onCopy={onCopy}
@@ -213,15 +213,15 @@ const Statistics = ({
         {isTrial ? (
           <div className={styles.detailCard}>
             <Text fontSize="16px" fontWeight={600}>
-              {t("DocsConnect:License")}
+              {t("DocsConnect:LicenseTitle")}
             </Text>
             <div className={styles.detailRow}>
-              <Text className={styles.muted}>{t("DocsConnect:Start")}</Text>
+              <Text className={styles.muted}>{t("Common:Start")}</Text>
               <Text fontWeight={600}>{info.trial.start}</Text>
             </div>
             <div className={styles.detailRow}>
               <Text className={styles.muted}>
-                {t("DocsConnect:ValidUntil")}
+                {t("Common:ValidUntil")}
               </Text>
               <Text fontWeight={600}>{info.trial.validUntil}</Text>
             </div>
@@ -229,14 +229,16 @@ const Statistics = ({
               percent={Math.max(0, ((30 - info.trial.daysLeft) / 30) * 100)}
             />
             <Text fontSize="12px" className={styles.muted}>
-              {t("DocsConnect:DaysRemaining", { count: info.trial.daysLeft })}
+              {t("DocsConnect:TrialDaysRemaining", {
+                count: info.trial.daysLeft,
+              })}
             </Text>
           </div>
         ) : (
           <div className={styles.detailCard}>
             <div className={styles.detailCardHeader}>
               <Text fontSize="16px" fontWeight={600}>
-                {t("DocsConnect:TariffPlan")}{" "}
+                {t("Common:TariffPlan")}{" "}
                 <Text as="span" fontSize="12px" className={styles.muted}>
                   {t("DocsConnect:RenewsOn", { date: info.plan.renewsOn })}
                 </Text>
@@ -252,7 +254,7 @@ const Statistics = ({
               </Link>
             </div>
             <div className={styles.detailRow}>
-              <Text className={styles.muted}>{t("DocsConnect:Users")}</Text>
+              <Text className={styles.muted}>{t("DocsConnect:PlanUsers")}</Text>
               <Text fontWeight={600}>{info.plan.users}</Text>
             </div>
             <div className={styles.detailRow}>
@@ -283,7 +285,7 @@ const Statistics = ({
             <Text fontWeight={600}>{info.build.type}</Text>
           </div>
           <div className={styles.detailRow}>
-            <Text className={styles.muted}>{t("DocsConnect:Version")}</Text>
+            <Text className={styles.muted}>{t("Common:Version")}</Text>
             <Text fontWeight={600}>{info.build.version}</Text>
           </div>
           <div className={styles.detailRow}>
@@ -350,7 +352,7 @@ const Statistics = ({
                   fontSize="13px"
                   fontWeight={600}
                 >
-                  {t("DocsConnect:Connect")}
+                  {t("Common:Connect")}
                 </Link>
               </a>
             ))}

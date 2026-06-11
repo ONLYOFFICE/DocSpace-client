@@ -41,6 +41,18 @@ type TFunction = (key: string, options?: Record<string, unknown>) => string;
 
 export type AgentsViewAs = "tile" | "row" | "table";
 
+// SSR payload the layout passes into the store constructor so the very
+// first render already has the agents list — no client fetch on mount, no
+// loader flash, and (critically) no observable mutation during render: a
+// render-phase hydration notified already-mounted observers (section
+// header/filter) and tripped React's "setState while rendering" error.
+export type AgentsListStoreInit = {
+  agents: TAgent[];
+  total: number;
+  rootFolderId: number | null;
+  search?: string;
+};
+
 class AgentsListStore {
   agents: TAgent[] = [];
 
@@ -84,9 +96,30 @@ class AgentsListStore {
   // Per-agent in-flight set for mute toggles — same reasoning as pin.
   private muteInFlight = new Set<TAgent["id"]>();
 
-  constructor() {
+  // True until the root list page consumes the SSR-provided data (see
+  // consumeSSRHydration) — lets it skip the initial client fetch exactly
+  // once and refetch on subsequent mounts (client-side nav back to the
+  // list) so the data doesn't go stale.
+  private ssrHydrationPending = false;
+
+  constructor(init?: AgentsListStoreInit) {
+    if (init) {
+      this.agents = init.agents;
+      this.total = init.total;
+      this.rootFolderId = init.rootFolderId;
+      if (init.search) this.filter.filterValue = init.search;
+      this.filter.total = init.total;
+      this.isLoading = false;
+      this.ssrHydrationPending = true;
+    }
     makeAutoObservable(this);
   }
+
+  consumeSSRHydration = () => {
+    const pending = this.ssrHydrationPending;
+    this.ssrHydrationPending = false;
+    return pending;
+  };
 
   // Selection API — mirrors client `FilesStore.setSelection` /
   // `toggleSelection`. Pure state mutators; consumers handle navigation.
@@ -318,10 +351,18 @@ const Ctx = React.createContext<AgentsListStore | null>(null);
 
 export const AgentsListStoreContextProvider = ({
   children,
+  initialData,
 }: {
   children: React.ReactNode;
+  initialData?: AgentsListStoreInit | null;
 }) => {
-  const store = React.useMemo(() => new AgentsListStore(), []);
+  // initialData is a creation-time snapshot — deliberately not a dep; the
+  // store lives for the whole (ai-agents) segment and later updates come
+  // through fetchAgents / sockets.
+  const store = React.useMemo(
+    () => new AgentsListStore(initialData ?? undefined),
+    [],
+  );
   return <Ctx.Provider value={store}>{children}</Ctx.Provider>;
 };
 

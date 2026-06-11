@@ -21,7 +21,10 @@ import SocketHelper, {
 import type { TFilesSettings } from "@docspace/shared/api/files/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TSettings } from "@docspace/shared/api/settings/types";
-import type { TDefaultProvider } from "@docspace/shared/api/ai/types";
+import type {
+  TAIConfig,
+  TDefaultProvider,
+} from "@docspace/shared/api/ai/types";
 import type { TViewAs } from "@docspace/shared/types";
 
 import { Layout as DocspaceFilesLayout } from "@/app/(docspace)/_components/layout";
@@ -31,6 +34,7 @@ import useFrameHeaderConfig from "@/hooks/useFrameHeaderConfig";
 
 import {
   AiAgentsStoreProviders,
+  type AgentsListStoreInit,
   useAgentInfoPanelStore,
   useAgentDialogsStore,
   useAgentsListStore,
@@ -72,6 +76,9 @@ export type AiAgentsCommonData = {
   defaultProvider: TDefaultProvider | undefined;
   portalSettings: TSettings | undefined;
   initialViewAs: TViewAs;
+  // SSR snapshots for store construction — see AiAgentsStoreProviders.
+  initialAIConfig: TAIConfig | null;
+  initialAgentsData: AgentsListStoreInit | null;
 };
 
 type Props = {
@@ -310,7 +317,11 @@ const FrameBridgeHost = observer(() => {
 export default function AiAgentsRootLayout({ commonData, children }: Props) {
   return (
     <main style={{ width: "100%", height: "100%", overflow: "hidden" }}>
-      <AiAgentsStoreProviders initialUser={commonData.user ?? null}>
+      <AiAgentsStoreProviders
+        initialUser={commonData.user ?? null}
+        initialAgentsData={commonData.initialAgentsData}
+        initialAIConfig={commonData.initialAIConfig}
+      >
         <DocspaceFilesLayout
           initSettingsStoreData={{ viewAs: commonData.initialViewAs }}
         >

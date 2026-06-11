@@ -36,9 +36,15 @@ export function parseLocaleConstants(rawData: Record<string, string>) {
   function get(key: string, locale?: string): string {
     const entry = parsed[key];
     if (!entry) return key;
+
+    if (!locale) {
+      locale = window?.i18n?.instance?.language || undefined;
+    }
+
     if (locale && entry.overrides[locale]) return entry.overrides[locale];
     return entry.defaultValue;
   }
 
   return { get, keys, parsed };
 }
+

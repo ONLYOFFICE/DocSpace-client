@@ -33,54 +33,94 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-// @ts-nocheck
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
-import Filter from "./people/filter";
-import FilesFilter from "./files/filter";
-import RoomsFilter from "./rooms/filter";
-import OformsFilter from "./oforms/filter";
-import * as people from "./people";
-import * as user from "./user";
-import * as settings from "./settings";
-import * as modules from "./modules";
-import * as portal from "./portal";
-import * as groups from "./groups";
-import * as files from "./files";
-import * as rooms from "./rooms";
-import * as plugins from "./plugins";
-import * as management from "./management";
-import * as oforms from "./oforms";
-import * as oauth from "./oauth";
-import * as debuginfo from "./debuginfo";
-import * as apiKeys from "./api-keys";
-import * as backup from "./backup";
-import * as ai from "./ai";
-import * as apps from "./apps";
-import * as privacy from "./privacy";
-import * as docsConnect from "./docs-connect";
+.muted {
+  color: var(--text-color);
+  opacity: 0.7;
+}
 
-export default {
-  Filter,
-  FilesFilter,
-  RoomsFilter,
-  OformsFilter,
-  people,
-  user,
-  settings,
-  modules,
-  portal,
-  backup,
-  groups,
-  files,
-  rooms,
-  plugins,
-  oforms,
-  oauth,
-  management,
-  debuginfo,
-  apiKeys,
-  ai,
-  apps,
-  privacy,
-  docsConnect,
-};
+.accent {
+  color: var(--accent-main);
+}
+
+.walletCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 12px;
+  background-color: var(--dev-tools-card-divider);
+}
+
+.iconPlaceholder {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: var(--background-color);
+}
+
+.iconPlaceholderSmall {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background-color: var(--dev-tools-card-divider);
+}
+
+.devPackCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 12px;
+  background-color: var(--dev-tools-card-divider);
+}
+
+.devPackHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.devPackFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.devPackFeature {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.summaryCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 12px;
+  background-color: var(--dev-tools-card-divider);
+}
+
+.summaryRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.summaryDivider {
+  margin: 4px 0;
+  width: 100%;
+  height: 1px;
+  border: none;
+  background-color: var(--background-color);
+}

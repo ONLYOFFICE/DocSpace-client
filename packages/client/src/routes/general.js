@@ -127,6 +127,13 @@ export const generalClientRoutes = [
           ).then((m) => ({ Component: m.default })),
       },
       {
+        path: "docs-connect",
+        lazy: () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/developer-tools/DocsConnect"
+          ).then((m) => ({ Component: m.default })),
+      },
+      {
         path: "api-keys",
         lazy: () =>
           import(

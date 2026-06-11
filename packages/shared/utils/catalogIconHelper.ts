@@ -56,6 +56,7 @@ import CatalogSettingsRestoreReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalo
 import CatalogSettingsIntegrationReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
 import CatalogSettingsDataReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.import.react.svg?url";
 import CatalogSettingsDeveloperReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.developer.react.svg?url";
+import CatalogDevToolsDocsConnectReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.devtools-docs-connect.react.svg?url";
 import CatalogDevToolsJavascriptSdkReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.devtools-javascript-sdk.react.svg?url";
 import CatalogDevToolsPluginSdkReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.devtools-plugin-sdk.react.svg?url";
 import CatalogDevToolsWebhooksReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.devtools-webhooks.react.svg?url";
@@ -87,6 +88,7 @@ import CatalogSettingsRestore20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/cata
 import CatalogSettingsIntegration20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-integration.svg?url";
 import CatalogSettingsData20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-import.svg?url";
 import CatalogSettingsDeveloper20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-developer.svg?url";
+import CatalogDevToolsDocsConnect20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.devtools-docs-connect.react.svg?url";
 import CatalogDevToolsJavascriptSdk20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.devtools-javascript-sdk.react.svg?url";
 import CatalogDevToolsPluginSdk20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.devtools-plugin-sdk.react.svg?url";
 import CatalogDevToolsWebhooks20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.devtools-webhooks.react.svg?url";
@@ -138,6 +140,7 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [PageType.dataImport]: CatalogSettingsDataReactSvgUrl,
     [PageType.developerTools]: CatalogSettingsDeveloperReactSvgUrl,
     [PageType.devToolsOverview]: CatalogSettingsIntegrationReactSvgUrl,
+    [PageType.devToolsDocsConnect]: CatalogDevToolsDocsConnectReactSvgUrl,
     [PageType.devToolsJavascriptSdk]: CatalogDevToolsJavascriptSdkReactSvgUrl,
     [PageType.devToolsPluginSdk]: CatalogDevToolsPluginSdkReactSvgUrl,
     [PageType.devToolsWebhooks]: CatalogDevToolsWebhooksReactSvgUrl,
@@ -174,6 +177,7 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [PageType.dataImport]: CatalogSettingsData20ReactSvgUrl,
     [PageType.developerTools]: CatalogSettingsDeveloper20ReactSvgUrl,
     [PageType.devToolsOverview]: CatalogSettingsIntegration20ReactSvgUrl,
+    [PageType.devToolsDocsConnect]: CatalogDevToolsDocsConnect20ReactSvgUrl,
     [PageType.devToolsJavascriptSdk]: CatalogDevToolsJavascriptSdk20ReactSvgUrl,
     [PageType.devToolsPluginSdk]: CatalogDevToolsPluginSdk20ReactSvgUrl,
     [PageType.devToolsWebhooks]: CatalogDevToolsWebhooks20ReactSvgUrl,

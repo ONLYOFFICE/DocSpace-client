@@ -95,6 +95,7 @@ import EditGroupStore from "./contacts/EditGroupStore";
 import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 
 import OAuthStore from "./OAuthStore";
+import DocsConnectStore from "./DocsConnectStore";
 import AiRoomStore from "./AiRoomStore";
 import AppsStore from "./AppsStore";
 
@@ -392,6 +393,8 @@ const storageManagement = new StorageManagement(
 
 const oauthStore = new OAuthStore(userStore, settingsStore);
 
+const docsConnectStore = new DocsConnectStore(settingsStore);
+
 const campaignsStore = new CampaignsStore(settingsStore, userStore);
 
 const editGroupStore = new EditGroupStore(peopleStore);
@@ -455,6 +458,7 @@ const store = {
   publicRoomStore,
 
   oauthStore,
+  docsConnectStore,
   pluginStore,
   storageManagement,
   campaignsStore,

@@ -33,54 +33,60 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-// @ts-nocheck
+export type TDocsConnectStatus = "promo" | "trial" | "paid";
 
-import Filter from "./people/filter";
-import FilesFilter from "./files/filter";
-import RoomsFilter from "./rooms/filter";
-import OformsFilter from "./oforms/filter";
-import * as people from "./people";
-import * as user from "./user";
-import * as settings from "./settings";
-import * as modules from "./modules";
-import * as portal from "./portal";
-import * as groups from "./groups";
-import * as files from "./files";
-import * as rooms from "./rooms";
-import * as plugins from "./plugins";
-import * as management from "./management";
-import * as oforms from "./oforms";
-import * as oauth from "./oauth";
-import * as debuginfo from "./debuginfo";
-import * as apiKeys from "./api-keys";
-import * as backup from "./backup";
-import * as ai from "./ai";
-import * as apps from "./apps";
-import * as privacy from "./privacy";
-import * as docsConnect from "./docs-connect";
+export type TDocsConnectBuild = {
+  type: string;
+  version: string;
+  released: string;
+};
 
-export default {
-  Filter,
-  FilesFilter,
-  RoomsFilter,
-  OformsFilter,
-  people,
-  user,
-  settings,
-  modules,
-  portal,
-  backup,
-  groups,
-  files,
-  rooms,
-  plugins,
-  oforms,
-  oauth,
-  management,
-  debuginfo,
-  apiKeys,
-  ai,
-  apps,
-  privacy,
-  docsConnect,
+export type TDocsConnectTrial = {
+  start: string;
+  validUntil: string;
+  daysLeft: number;
+};
+
+export type TDocsConnectPlan = {
+  users: number;
+  pricePerUser: number;
+  devPackEnabled: boolean;
+  devPackPrice: number;
+  monthlyCharge: number;
+  renewsOn: string;
+};
+
+export type TDocsConnectUsage = {
+  active: number;
+  internal: number;
+  external: number;
+  remaining: number;
+  limit: number;
+};
+
+export type TDocsConnectWallet = {
+  availableCredits: number;
+  currency: string;
+};
+
+export type TDocsConnectConnector = {
+  key: string;
+  label: string;
+  url: string;
+};
+
+export type TDocsConnectInfo = {
+  status: TDocsConnectStatus;
+  address: string;
+  jwtHeader: string;
+  secretKey: string;
+  build: TDocsConnectBuild;
+  trial: TDocsConnectTrial;
+  plan: TDocsConnectPlan;
+  usage: {
+    editors: TDocsConnectUsage;
+    viewer: TDocsConnectUsage;
+  };
+  wallet: TDocsConnectWallet;
+  connectors: TDocsConnectConnector[];
 };

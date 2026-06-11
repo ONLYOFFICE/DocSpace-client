@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>Këshirja e faqes</1> — IA viziton dhe nxjerr përmbajtje nga faqe specifike të internetit për t'u analizuar ose përdorur në kërkesën tuaj.",
   "AIPricingAdditionalTooltipWebSearch": "<1>Kërkimi në Internet</1> — IA merr informacione në kohë reale nga interneti kur është e nevojshme për kërkesën tuaj.",
   "AIPricingAndBilling": "Çmimet dhe fakturimi",
-  "AIPricingAvailableCreditsLowBalance": "Kredite të disponueshme: {{price}}. Balans i ulët",
   "AIPricingFeeNoteUsage": "* <1>Çmimet e OpenRouter</1> + 20% tarifë shërbimi zbatohet në përdorim",
   "AIPricingFeeNoteWithoutLink": "* + 20% tarifë shërbimi aplikohet në përdorim",
   "AIPricingInputTokens": "Tokene hyrëse",

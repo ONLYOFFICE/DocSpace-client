@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>웹 크롤링</1> — AI가 특정 웹 페이지를 방문하여 콘텐츠를 추출하고 요청에 분석하거나 사용합니다.",
   "AIPricingAdditionalTooltipWebSearch": "<1>웹 검색</1> — 요청에 필요한 경우 AI가 웹에서 실시간 정보를 가져옵니다.",
   "AIPricingAndBilling": "가격 책정 및 청구",
-  "AIPricingAvailableCreditsLowBalance": "사용 가능한 크레딧: {{price}}. 잔액 부족",
   "AIPricingFeeNoteUsage": "<1>OpenRouter 가격</1> + 사용량에 따라 20% 서비스 수수료가 부과됩니다.",
   "AIPricingFeeNoteWithoutLink": "사용 시 20% 서비스 수수료가 부과됩니다.",
   "AIPricingInputTokens": "입력 토큰",

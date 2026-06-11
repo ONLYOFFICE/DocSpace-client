@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>Webcrawlen</1> — AI bezoekt en extraheert inhoud van specifieke webpagina's om deze te analyseren of te gebruiken in uw verzoek.",
   "AIPricingAdditionalTooltipWebSearch": "<1>Webzoekmachine</1> — AI haalt realtime informatie van het web op wanneer dit nodig is voor uw verzoek.",
   "AIPricingAndBilling": "Prijzen en facturering",
-  "AIPricingAvailableCreditsLowBalance": "Beschikbare credits: {{price}}. Laag saldo",
   "AIPricingFeeNoteUsage": "* <1>OpenRouter prijzen</1> + 20% servicekosten zijn van toepassing bij gebruik",
   "AIPricingFeeNoteWithoutLink": "* + 20% servicekosten bij gebruik",
   "AIPricingInputTokens": "Invoer tokens",

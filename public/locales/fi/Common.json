@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>Web crawling</1> — AI käy läpi ja poimii sisältöä tietyiltä verkkosivuilta analysoitavaksi tai käytettäväksi pyynnössäsi.",
   "AIPricingAdditionalTooltipWebSearch": "<1>Verkkohaku</1> — AI hakee reaaliaikaista tietoa verkosta tarvittaessa pyyntösi osalta.",
   "AIPricingAndBilling": "Hinnoittelu ja laskutus",
-  "AIPricingAvailableCreditsLowBalance": "Saatavilla krediittejä: {{price}}. Matala saldo",
   "AIPricingFeeNoteUsage": "* <1>OpenRouterin hinnoittelu</1> + 20% palvelumaksu sovelletaan käytön yhteydessä",
   "AIPricingFeeNoteWithoutLink": "* + 20 % palvelumaksu sovelletaan käytössä",
   "AIPricingInputTokens": "Syötetyt tokenit",

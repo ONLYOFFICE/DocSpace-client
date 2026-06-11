@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>الزحف على الويب</1> — يقوم الذكاء الاصطناعي بزيارة واستخراج المحتوى من صفحات ويب محددة لتحليله أو استخدامه في طلبك.",
   "AIPricingAdditionalTooltipWebSearch": "<1>بحث الويب</1> — يسترد الذكاء الاصطناعي معلومات في الوقت الفعلي من الويب عند الحاجة لطلبك.",
   "AIPricingAndBilling": "التسعير و الفوترة",
-  "AIPricingAvailableCreditsLowBalance": "الرصيد المتاح: {{price}}. رصيد منخفض",
   "AIPricingFeeNoteUsage": "* <1>OpenRouter pricing</1> + تُطبق رسوم خدمة بنسبة 20% عند الاستخدام",
   "AIPricingFeeNoteWithoutLink": "* + 20% من رسوم الخدمة تُطبق عند الاستخدام",
   "AIPricingInputTokens": "وحدات الإدخال",

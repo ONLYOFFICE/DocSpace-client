@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>Web-Crawling</1> — KI besucht und extrahiert Inhalte von spezifischen Webseiten, um sie zu analysieren oder in Ihrer Anfrage zu verwenden.",
   "AIPricingAdditionalTooltipWebSearch": "<1>Websuche</1> — KI ruft Echtzeitinformationen aus dem Web ab, wenn sie für Ihre Anfrage benötigt werden.",
   "AIPricingAndBilling": "Preise und Abrechnung",
-  "AIPricingAvailableCreditsLowBalance": "Verfügbare Credits: {{price}}. Geringer Saldo",
   "AIPricingFeeNoteUsage": "* <1>OpenRouter pricing</1> + 20% Servicegebühr wird bei Nutzung erhoben",
   "AIPricingFeeNoteWithoutLink": "* + 20% Servicegebühr wird bei Nutzung erhoben",
   "AIPricingInputTokens": "Eingabe-Tokens",

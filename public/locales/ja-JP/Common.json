@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>ウェブクローリング</1> — AIが特定のウェブページを訪問し、コンテンツを抽出して、リクエストの分析や利用を行います。",
   "AIPricingAdditionalTooltipWebSearch": "<1>ウェブ検索</1> — ご要望に応じて、AIがウェブからリアルタイムの情報を取得します。",
   "AIPricingAndBilling": "価格設定と請求",
-  "AIPricingAvailableCreditsLowBalance": "利用可能なクレジット: {{price}}。残高が低いです",
   "AIPricingFeeNoteUsage": "<1>OpenRouterの料金</1>に20%のサービス料が利用時に適用されます",
   "AIPricingFeeNoteWithoutLink": "ご利用の場合、20%のサービス料が適用されます",
   "AIPricingInputTokens": "入力トークン",

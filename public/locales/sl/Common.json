@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>Web spletno kopanje</1> — AI obišče in izroni vsebino z specifičnih spletnih strani za analizo ali uporabo v vašem zahtevku.",
   "AIPricingAdditionalTooltipWebSearch": "<1>Iskliški iskalnik</1> — AI pridobi informacije v realnem času iz spletja, ko so potrebne za vaš zahtev.",
   "AIPricingAndBilling": "Cenik in obračun",
-  "AIPricingAvailableCreditsLowBalance": "Razpoložljivi krediti: {{price}}. Nizk raven",
   "AIPricingFeeNoteUsage": "* <1>Cenik OpenRouter</1> + 20% stroškov za storitev se nanaša na uporabo",
   "AIPricingFeeNoteWithoutLink": "* + 20% stroški storitve se nanašajo na uporabo",
   "AIPricingInputTokens": "Tokenji vstopanja",

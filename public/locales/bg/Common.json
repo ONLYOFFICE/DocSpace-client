@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>Краулинг на уеб</1> — AI посещава и извлича съдържание от специфични уеб страници, за да го анализира или използва в заявката ви.",
   "AIPricingAdditionalTooltipWebSearch": "<1>Уебно търсене</1> — AI извлича информация в реално време от уеба, когато е необходимо за вашия запитване.",
   "AIPricingAndBilling": "Ценообразуване и фактуриране",
-  "AIPricingAvailableCreditsLowBalance": "Налични кредити: {{price}}. Ниско равно",
   "AIPricingFeeNoteUsage": "* <1>OpenRouter ценообразуване</1> + 20% такса за услуга се прилага при използване",
   "AIPricingFeeNoteWithoutLink": "* + 20% такса за услуга се прилага при използване",
   "AIPricingInputTokens": "Токени за вход",

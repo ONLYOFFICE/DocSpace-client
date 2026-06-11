@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>Vēb-krāulings</1> — MI apmeklē un izextract kontentu no konkrētām tīmekļa lapām, lai to analizētu vai izmantotu jūsu pieprasījumā.",
   "AIPricingAdditionalTooltipWebSearch": "<1>Vēbmesoja</1> — MI izgūst real-time informāciju no tīmekļa, kad tas ir nepieciešams jūsu pieprasīšanai.",
   "AIPricingAndBilling": "Cenas un fakturēšana",
-  "AIPricingAvailableCreditsLowBalance": "Pieejami kredīti: {{price}}. Minimāls balansu",
   "AIPricingFeeNoteUsage": "* <1>OpenRouter cenotne</1> + 20% pakalpojuma maksa piemīt lietojumā",
   "AIPricingFeeNoteWithoutLink": "* + 20% pakalpojuma maksa par lietošanu",
   "AIPricingInputTokens": "Ievietot tokenus",

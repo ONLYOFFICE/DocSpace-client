@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>网络爬取</1> — AI 访问并从特定网页提取内容，以用于分析或满足您的请求。",
   "AIPricingAdditionalTooltipWebSearch": "<1>网络搜索</1> — 当需要时，AI 会从网络获取实时信息来处理您的请求。",
   "AIPricingAndBilling": "定价与账单",
-  "AIPricingAvailableCreditsLowBalance": "可用积分：{{price}}。余额不足",
   "AIPricingFeeNoteUsage": "* <1>OpenRouter 定价</1> + 20% 服务费，按使用量计费",
   "AIPricingFeeNoteWithoutLink": "使用时需支付 20% 的服务费",
   "AIPricingInputTokens": "输入令牌",

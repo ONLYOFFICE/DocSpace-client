@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>Web crawling</1> — Η AI επισκέπτεται και εξάγει περιεχόμενο από συγκεκριμένες ιστοσελίδες για να το αναλύσει ή να το χρησιμοποιήσει στην αίτησή σας.",
   "AIPricingAdditionalTooltipWebSearch": "<1>Αναζήτηση στο Web</1> — Το AI ανακτά πληροφορίες σε πραγματικό χρόνο από το web όταν χρειάζεται για την αίτησή σας.",
   "AIPricingAndBilling": "Τιμολόγηση & τιμολόγηση",
-  "AIPricingAvailableCreditsLowBalance": "Διαθέσιμα πιστώματα: {{price}}. Χαμηλό υπόλοιπο",
   "AIPricingFeeNoteUsage": "* <1>OpenRouter τιμολόγηση</1> + εφαρμόζεται τέλος υπηρεσίας 20% κατά τη χρήση",
   "AIPricingFeeNoteWithoutLink": "* + 20% τέλη υπηρεσίας εφαρμόζονται κατά τη χρήση",
   "AIPricingInputTokens": "Tokens Εισόδου",

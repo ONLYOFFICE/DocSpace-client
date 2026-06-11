@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>Crawling web</1> — L'IA visita ed estrae contenuti da pagine web specifiche per analizzarli o utilizzarli nella tua richiesta.",
   "AIPricingAdditionalTooltipWebSearch": "<1>Ricerca web</1> — L'IA recupera informazioni in tempo reale dal web quando necessario per la tua richiesta.",
   "AIPricingAndBilling": "Prezzi e fatturazione",
-  "AIPricingAvailableCreditsLowBalance": "Crediti disponibili: {{price}}. Saldo basso",
   "AIPricingFeeNoteUsage": "* <1>Prezzi di OpenRouter</1> + una commissione di servizio del 20% si applica all'utilizzo",
   "AIPricingFeeNoteWithoutLink": "Viene applicata una commissione di servizio del 20% sull'utilizzo",
   "AIPricingInputTokens": "Token di input",

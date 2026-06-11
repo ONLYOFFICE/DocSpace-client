@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>Веб-краулинг</1> — ИИ посещает конкретные веб-страницы и извлекает из них контент для анализа или использования в вашем запросе.",
   "AIPricingAdditionalTooltipWebSearch": "<1>Веб-поиск</1> — ИИ получает информацию в режиме реального времени из Интернета, когда это необходимо для вашего запроса.",
   "AIPricingAndBilling": "Цены и биллинг",
-  "AIPricingAvailableCreditsLowBalance": "Доступные кредиты: {{price}}. Низкий баланс",
   "AIPricingFeeNoteUsage": "* <1>Тарифы OpenRouter</1> + сервисный сбор в размере 20% (взимается по факту использования)",
   "AIPricingFeeNoteWithoutLink": "* При использовании взимается сервисный сбор в размере 20%",
   "AIPricingInputTokens": "Входные токены",

@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>Веб-краулінг</1> — AI відвідує та витягує вміст із певних веб-сторінок для аналізу або використання у вашому запиті.",
   "AIPricingAdditionalTooltipWebSearch": "<1>Пошук у вебі</1> — AI отримує інформацію в реальному часі з веб-сторінок, коли це необхідно для вашого запиту.",
   "AIPricingAndBilling": "Ціни та оплата",
-  "AIPricingAvailableCreditsLowBalance": "Доступні кредити: {{price}}. Низький баланс",
   "AIPricingFeeNoteUsage": "* <1>Ціни OpenRouter</1> + 20% комісія за послуги застосовується при використанні",
   "AIPricingFeeNoteWithoutLink": "* + 20% комісія за послуги застосовується при використанні",
   "AIPricingInputTokens": "Введення токенів",

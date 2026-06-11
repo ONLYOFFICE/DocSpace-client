@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>Crawlare web</1> — IA vizitează și extrage conținut de pe pagini web specifice pentru a analiza sau a folosi în cererea dumneavoastră.",
   "AIPricingAdditionalTooltipWebSearch": "<1>Căutare pe web</1> — IA extrage informații în timp real de pe web atunci când este necesar pentru cererea dumneavoastră.",
   "AIPricingAndBilling": "Prețuri și facturare",
-  "AIPricingAvailableCreditsLowBalance": "Credite disponibile: {{price}}. Soldi redus",
   "AIPricingFeeNoteUsage": "* Se aplică o taxă de serviciu de 20% la <1>prețurile OpenRouter</1> în funcție de utilizare",
   "AIPricingFeeNoteWithoutLink": "* Se aplică o taxă de serviciu de 20% la utilizare",
   "AIPricingInputTokens": "Tokeni de intrare",

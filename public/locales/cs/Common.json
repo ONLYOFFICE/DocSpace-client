@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>Web crawling</1> — AI navštívil a extrahuje obsah ze specifických webových stránek k analýze nebo použití ve vašem požadavku.",
   "AIPricingAdditionalTooltipWebSearch": "<1>Web vyhledávání</1> — AI získává informace v reálném čase z webu, když jsou pro váš požadavek nutné.",
   "AIPricingAndBilling": "Ceník a fakturace",
-  "AIPricingAvailableCreditsLowBalance": "Dostupné kredity: {{price}}. Nízká rovnováha",
   "AIPricingFeeNoteUsage": "* <1>OpenRouter pricing</1> + 20% poplatek za službu platí při využívání",
   "AIPricingFeeNoteWithoutLink": "* + 20% poplatek za službu platí při použití",
   "AIPricingInputTokens": "Tokeny vstupu",

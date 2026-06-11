@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>Veb qabaqlama</1> — Yapay Zeka (AI) müəyyən veb səhifələri ziyarət edir və məzmunu təhlil etmək və ya sorğunuzda istifadə etmək üçün çıxarır.",
   "AIPricingAdditionalTooltipWebSearch": "<1>Veb axtarış</1> — AI, sorğunuz üçün lazım olduqda vebdən real vaxt məlumatı əldə edir.",
   "AIPricingAndBilling": "Qiymətləndirmə və fakturalaşdırma",
-  "AIPricingAvailableCreditsLowBalance": "Mövcud kreditlər: {{price}}. Aşağı balans",
   "AIPricingFeeNoteUsage": "* <1>OpenRouter qiymətləndirməsi</1> + 20% xidmət haqqı istifadə zamanı tətbiq olunur",
   "AIPricingFeeNoteWithoutLink": "* + 20% xidmət rüsumu istifadə zamanı tətbiq edilir",
   "AIPricingInputTokens": "Giriş tokenləri",

@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>Rastreo web</1> — La IA visita y extrae contenido de páginas web específicas para analizar o usar en su solicitud.",
   "AIPricingAdditionalTooltipWebSearch": "<1>Búsqueda web</1> — La IA recupera información en tiempo real de la web cuando es necesario para su solicitud.",
   "AIPricingAndBilling": "Precios y facturación",
-  "AIPricingAvailableCreditsLowBalance": "Créditos disponibles: {{price}}. Saldo bajo",
   "AIPricingFeeNoteUsage": "* <1>Precios de OpenRouter</1> + se aplica una tarifa de servicio del 20% en el uso",
   "AIPricingFeeNoteWithoutLink": "* + 20% de tarifa de servicio aplica en el uso",
   "AIPricingInputTokens": "Tokens de entrada",

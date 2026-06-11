@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>Web crawling</1> — AI посећује и извлачи садржај са одређених веб страница како би га анализирао или искористио у вашем захтеву.",
   "AIPricingAdditionalTooltipWebSearch": "<1>Претрага на Вебу</1> — AI прикупља реално време информација са веба када је потребно за ваш захтев.",
   "AIPricingAndBilling": "Цене и наплата",
-  "AIPricingAvailableCreditsLowBalance": "Доступни кредити: {{price}}. Низак биланс",
   "AIPricingFeeNoteUsage": "<1>Цененик OpenRouter-а</1> + 20% сервисна накнада се apply-ују при коришћењу",
   "AIPricingFeeNoteWithoutLink": "* + 20% услуга налог при употребим",
   "AIPricingInputTokens": "Улазни токени",

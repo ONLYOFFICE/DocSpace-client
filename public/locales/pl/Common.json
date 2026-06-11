@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>Robots przeglądające strony</1> — AI odwiedza i wyodrębnia treści ze stron internetowych, aby je przeanalizować lub wykorzystać w Twoim zapytaniu.",
   "AIPricingAdditionalTooltipWebSearch": "<1>Wyszukiwanie w sieci</1> — AI pobiera informacje w czasie rzeczywistym z sieci, gdy jest to potrzebne do Twojego zapytania.",
   "AIPricingAndBilling": "Cennik i rozliczenia",
-  "AIPricingAvailableCreditsLowBalance": "Dostępne kredyty: {{price}}. Niski stan konta",
   "AIPricingFeeNoteUsage": "* <1>Cennik OpenRouter</1> + 20% opłaty usługowej naliczane są na podstawie zużycia",
   "AIPricingFeeNoteWithoutLink": "* + 20% opłaty usługowej naliczane przy użyciu",
   "AIPricingInputTokens": "Tokeny wejściowe",

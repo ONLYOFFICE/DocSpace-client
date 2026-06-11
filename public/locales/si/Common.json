@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>වෙබ් ක්‍රෝලිං</1> — AI මඟින් විශ්ලේෂණය කිරීමට හෝ ඔබේ ඉල්ලීම සඳහා භාවිතා කිරීමට නිශ්චිත වෙබ් පිටු වෙත පිවිස අන්තර්ගතය ලබා ගනී.",
   "AIPricingAdditionalTooltipWebSearch": "<1>වෙබ් සෙවුම</1> — ඔබගේ ඉල්ලීම සඳහා අවශ්‍ය වූ විට AI මගින් වෙබ් අඩවියෙන් තත්‍ය කාලීන තොරතුරු ලබා ගනී.",
   "AIPricingAndBilling": "මිලකරණය සහ බිල්පත්කරණය",
-  "AIPricingAvailableCreditsLowBalance": "ලබාගත හැකි ක්‍රෙඩිට්: {{price}}. ශේෂය අඩුයි",
   "AIPricingFeeNoteUsage": "* <1>OpenRouter මිලකරණය</1> සමඟ භාවිතය මත 20% සේවා ගාස්තුවක් අදාළ වේ",
   "AIPricingFeeNoteWithoutLink": "* + 20% සේවා ගාස්තුව භාවිතයේදී අදාළ වේ",
   "AIPricingInputTokens": "ආදාන ටෝකන",

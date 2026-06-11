@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>ການຂຸດຄົ້ນເວັບ</1> — AI ເຂົ້າເບິ່ງ ແລະ ສະກັດເນື້ອຫາຈາກໜ້າເວັບສະເພາະເພື່ອວິເຄາະ ຫຼື ນຳໃຊ້ໃນຄຳຮ້ອງຂໍຂອງທ່ານ.",
   "AIPricingAdditionalTooltipWebSearch": "<1>ການຄົ້ນຫາໃນເວັບ</1> — AI ເອົາຂໍ້ມູນແບບສົດຈາກເວັບໄຊທ໌ເມື່ອຈຳເປັນສຳລັບຄຳຮ້ອງຂໍຂອງທ່ານ.",
   "AIPricingAndBilling": "ລາຄາ ແລະ ການຊຳລະເງິນ",
-  "AIPricingAvailableCreditsLowBalance": "ເຄຣດິດທີ່ມີ: {{price}}. ຍອດເງິນຕໍ່າ",
   "AIPricingFeeNoteUsage": "* <1>ລາຄາ OpenRouter</1> + ຄ່າບໍລິການ 20% ຖືກນຳໃຊ້ໃນການນຳໃຊ້",
   "AIPricingFeeNoteWithoutLink": "* + ຄ່າບໍລິການ 20% ຖືກນຳໃຊ້ເມື່ອໃຊ້ງານ",
   "AIPricingInputTokens": "ໂຕ້ເຄນທີ່ປ້ອນເຂົ້າ",

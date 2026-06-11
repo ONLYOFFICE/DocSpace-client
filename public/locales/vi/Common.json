@@ -118,7 +118,6 @@
   "AIPricingAdditionalTooltipWebCrawling": "<1>Thu thập dữ liệu web</1> — AI truy cập và trích xuất nội dung từ các trang web cụ thể để phân tích hoặc sử dụng trong yêu cầu của bạn.",
   "AIPricingAdditionalTooltipWebSearch": "<1>Tìm kiếm trên Web</1> — AI tự động lấy thông tin thời gian thực từ web khi cần thiết cho yêu cầu của bạn.",
   "AIPricingAndBilling": "Giá cả & Thanh toán",
-  "AIPricingAvailableCreditsLowBalance": "Số tín dụng còn lại: {{price}}. Số dư thấp",
   "AIPricingFeeNoteUsage": "* <1>Giá OpenRouter</1> + phí dịch vụ 20% áp dụng khi sử dụng",
   "AIPricingFeeNoteWithoutLink": "* + Phí dịch vụ 20% áp dụng khi sử dụng",
   "AIPricingInputTokens": "Tokens đầu vào",

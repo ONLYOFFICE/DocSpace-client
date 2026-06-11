@@ -30,4 +30,3 @@ export {
   type InstallStep,
 } from "./InstallModuleDialog";
 export { InstallAiFormsDialog } from "./InstallAiFormsDialog";
-export { InstallDocsCloudDialog } from "./InstallDocsCloudDialog";

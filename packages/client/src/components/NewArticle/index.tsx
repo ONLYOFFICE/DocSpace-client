@@ -37,15 +37,11 @@ import type {
 import { DeviceType } from "@docspace/shared/enums";
 import type { TUser } from "@docspace/shared/api/people/types";
 
-import {
-  InstallAiFormsDialog,
-  InstallDocsCloudDialog,
-} from "SRC_DIR/pages/Dashboard/InstallModuleDialog";
+import { InstallAiFormsDialog } from "SRC_DIR/pages/Dashboard/InstallModuleDialog";
 import { InstallAiArbiterDialog } from "SRC_DIR/pages/Dashboard/InstallAiArbiterDialog";
 import { EnableAiRoomsDialog } from "SRC_DIR/pages/Dashboard/EnableAiRoomsDialog";
 
 import CatalogOverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
-import CatalogDocumentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
 import CatalogAiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
@@ -66,7 +62,6 @@ import AppsSidebar from "../AppsSidebar";
 import { useSidebarShowText } from "../AppsSidebar/useSidebarShowText";
 
 const OVERVIEW_ID = "overview";
-const DOCS_CLOUD_ID = "docs-cloud";
 const AI_FILES_ID = "ai-files";
 const AI_FORMS_ID = "ai-forms";
 const AI_ROOMS_ID = "ai-rooms";
@@ -75,7 +70,6 @@ const AI_ARBITER_ID = "ai-arbiter";
 const E2E_ROOMS_ID = "e2e-rooms";
 
 const PATH_TO_PARENT_ID: Record<string, string> = {
-  "/docs-cloud": DOCS_CLOUD_ID,
   "/ai-files": AI_FILES_ID,
   "/ai-forms": AI_FORMS_ID,
   "/ai-arbiter": AI_ARBITER_ID,
@@ -120,7 +114,6 @@ type NewArticleProps = {
   currentDeviceType: DeviceType;
   articleOpen: boolean;
   isNotPaidPeriod: boolean;
-  docsCloudEnabled: boolean;
   aiFilesEnabled: boolean;
   aiFormsEnabled: boolean;
   aiRoomsEnabled: boolean;
@@ -140,7 +133,6 @@ const NewArticle = ({
   currentDeviceType,
   articleOpen,
   isNotPaidPeriod,
-  docsCloudEnabled,
   aiFilesEnabled,
   aiFormsEnabled,
   aiRoomsEnabled,
@@ -159,8 +151,6 @@ const NewArticle = ({
   const navigate = useNavigate();
   const [installDialogVisible, setInstallDialogVisible] = React.useState(false);
   const [arbiterDialogVisible, setArbiterDialogVisible] = React.useState(false);
-  const [installDocsCloudVisible, setInstallDocsCloudVisible] =
-    React.useState(false);
   const [enableAiRoomsVisible, setEnableAiRoomsVisible] = React.useState(false);
   const [enableAiRoomsLoading, setEnableAiRoomsLoading] = React.useState(false);
 
@@ -219,14 +209,6 @@ const NewArticle = ({
     return undefined;
   }, [location.pathname, location.search]);
 
-  const handleDocsCloudClick = React.useCallback(() => {
-    if (docsCloudEnabled) {
-      navigate("/docs-cloud");
-    } else {
-      setInstallDocsCloudVisible(true);
-    }
-  }, [docsCloudEnabled, navigate]);
-
   const groups = React.useMemo<NavMenuGroup[]>(() => {
     // const underDevelopment = () => toastr.info(t("Common:UnderDevelopment"));
 
@@ -235,13 +217,6 @@ const NewArticle = ({
       label: t("Common:Overview"),
       icon: CatalogOverviewReactSvgUrl,
       onClick: () => navigate("/dashboard"),
-    };
-
-    const docsCloudItem: NavMenuItem = {
-      id: DOCS_CLOUD_ID,
-      label: t("Common:DocsCloud"),
-      icon: CatalogDocumentsReactSvgUrl,
-      onClick: handleDocsCloudClick,
     };
 
     const sharedWithMeHasNew =
@@ -526,7 +501,6 @@ const NewArticle = ({
       { item: aiAgentsItem, enabled: aiAgentsEnabled },
       { item: aiArbiterItem, enabled: aiArbiterEnabled },
       { item: e2eRoomsItem, enabled: e2eRoomsEnabled },
-      { item: docsCloudItem, enabled: docsCloudEnabled },
     ];
 
     const enabled = all.filter((x) => x.enabled).map((x) => x.item);
@@ -561,7 +535,6 @@ const NewArticle = ({
     isGuest,
     canCreateForms,
     canManageAgents,
-    docsCloudEnabled,
     aiFilesEnabled,
     aiFormsEnabled,
     aiRoomsEnabled,
@@ -570,7 +543,6 @@ const NewArticle = ({
     e2eRoomsEnabled,
     sharedWithMeFolderId,
     sharedWithMeNewItems,
-    handleDocsCloudClick,
     activate,
     enable,
     setArbiterDialogVisible,
@@ -605,14 +577,6 @@ const NewArticle = ({
           navigate("/ai-arbiter");
         }}
       />
-      <InstallDocsCloudDialog
-        visible={installDocsCloudVisible}
-        onClose={() => setInstallDocsCloudVisible(false)}
-        onInstalled={() => {
-          setInstallDocsCloudVisible(false);
-          navigate("/docs-cloud");
-        }}
-      />
       <EnableAiRoomsDialog
         visible={enableAiRoomsVisible}
         isLoading={enableAiRoomsLoading}
@@ -636,7 +600,6 @@ const NewArticleConnected = inject<TStore>(
     articleOpen: settingsStore.articleOpen,
     toggleArticleOpen: settingsStore.toggleArticleOpen,
     isNotPaidPeriod: currentTariffStatusStore.isNotPaidPeriod,
-    docsCloudEnabled: appsStore.isEnabled("docs-cloud"),
     aiFilesEnabled: appsStore.isEnabled("ai-files"),
     aiFormsEnabled: appsStore.isEnabled("ai-forms"),
     aiRoomsEnabled: appsStore.isEnabled("ai-rooms"),

@@ -32,10 +32,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 
 import type { AppId } from "SRC_DIR/helpers/apps-catalog";
 
-import {
-  InstallAiFormsDialog,
-  InstallDocsCloudDialog,
-} from "../InstallModuleDialog";
+import { InstallAiFormsDialog } from "../InstallModuleDialog";
 import { InstallAiArbiterDialog } from "../InstallAiArbiterDialog";
 import { EnableAiRoomsDialog } from "../EnableAiRoomsDialog";
 
@@ -65,8 +62,6 @@ export const useModuleLauncher = ({
 
   const [aiFormsDialogVisible, setAiFormsDialogVisible] = React.useState(false);
   const [arbiterDialogVisible, setArbiterDialogVisible] = React.useState(false);
-  const [docsCloudDialogVisible, setDocsCloudDialogVisible] =
-    React.useState(false);
   const [enableAiRoomsVisible, setEnableAiRoomsVisible] = React.useState(false);
   const [enableAiRoomsLoading, setEnableAiRoomsLoading] = React.useState(false);
 
@@ -115,13 +110,6 @@ export const useModuleLauncher = ({
           console.error("Failed to activate ai-agents", err);
           toastr.error(t("Common:SomethingWentWrong"));
         }
-        return;
-      }
-
-      if (modId === "docs-cloud") {
-        await activateOrSetup("docs-cloud", "/docs-cloud", () =>
-          setDocsCloudDialogVisible(true),
-        );
         return;
       }
 
@@ -184,14 +172,6 @@ export const useModuleLauncher = ({
         onInstalled={() => {
           setArbiterDialogVisible(false);
           navigate("/ai-arbiter");
-        }}
-      />
-      <InstallDocsCloudDialog
-        visible={docsCloudDialogVisible}
-        onClose={() => setDocsCloudDialogVisible(false)}
-        onInstalled={() => {
-          setDocsCloudDialogVisible(false);
-          navigate("/docs-cloud");
         }}
       />
       <EnableAiRoomsDialog

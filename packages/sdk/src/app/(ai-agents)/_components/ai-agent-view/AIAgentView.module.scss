@@ -11,4 +11,8 @@
   flex: 1 1 0;
   min-height: 0;
   height: 100%;
+  // Agent mode renders the chat full-section, where ChatToolbar's own 16px
+  // side paddings double the section's — drop them (the side panel keeps
+  // the ui-kit default).
+  --chat-toolbar-padding: 16px 0;
 }

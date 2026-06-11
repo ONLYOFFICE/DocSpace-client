@@ -14,6 +14,11 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
+    // Fill the whole param row so full-width controls inside (the scaled
+    // profile ComboBox) actually span the dialog width instead of
+    // shrinking to content.
+    flex: 1 1 auto;
+    min-width: 0;
 
     :global(.set_room_params-info-title) {
       display: flex;

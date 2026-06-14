@@ -8,19 +8,29 @@ import {
 } from "@docspace/ui-kit/components/filter/Filter.types";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { frameCallEvent } from "@docspace/shared/utils/common";
-import { getFilterType } from "@docspace/ui-kit/components/filter/Filter.utils";
+import {
+  getFilterType,
+  getAuthorType,
+} from "@docspace/ui-kit/components/filter/Filter.utils";
 import {
   FilterGroups,
   FilterType,
+  FilterKeys,
   SortByFieldName,
 } from "@docspace/shared/enums";
+import { getUser as _getUser } from "@docspace/shared/api/people";
 import { TSortBy, type TViewAs } from "@docspace/shared/types";
 import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 
 import ViewRowsReactSvg from "PUBLIC_DIR/images/view-rows.react.svg";
 import ViewTilesReactSvg from "PUBLIC_DIR/images/view-tiles.react.svg";
 
+import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
 import { PAGE_COUNT } from "@/utils/constants";
+
+const getUser = _getUser as unknown as (id: string) => Promise<{
+  displayName?: string;
+} | null>;
 
 type useFilesFiltersProps = {
   filesFilter: string;
@@ -42,6 +52,11 @@ export default function useFilesFilter({
   const { t } = useTranslation(["Common"]);
   const searchParams = useSearchParams();
   const pathname = usePathname();
+
+  const userStore = useDocsUserStore();
+  const userId = userStore.user?.id;
+  const isCollaborator = userStore.user?.isCollaborator ?? false;
+  const isVisitor = userStore.user?.isVisitor ?? false;
 
   const parseFromLocation = React.useCallback(
     (loc: Pick<Location, "search" | "pathname">) => {
@@ -164,35 +179,70 @@ export default function useFilesFilter({
 
       newFilter.filterType = filterType;
 
+      const authorId = getAuthorType(data);
+      if (authorId) {
+        newFilter.authorType =
+          authorId === FilterKeys.me && userId
+            ? `user_${userId}`
+            : `user_${authorId}`;
+      } else {
+        newFilter.authorType = null;
+      }
+
       setFilter(newFilter);
 
       const urlFilter = newFilter.toUrlParams();
 
       window.history.pushState(null, "", `?${urlFilter}`);
     },
-    [filter],
+    [filter, userId],
   );
 
   const getFilterData = React.useCallback(async () => {
-    const typeOptions = [
+    // By Author group — mirrors client `Home/Section/Filter/getAuthorFilter`.
+    // "Me" + a person selector are always offered; the "Other" bucket is
+    // hidden for collaborators/visitors who can only see their own items.
+    const authorOptions: TItem[] = [
+      {
+        key: FilterGroups.filterAuthor,
+        group: FilterGroups.filterAuthor,
+        label: t("Common:ByAuthor"),
+        isHeader: true,
+      },
+      {
+        id: "filter_author-me",
+        key: FilterKeys.me,
+        group: FilterGroups.filterAuthor,
+        label: t("Common:MeLabel"),
+      },
+      {
+        id: "filter_author-user",
+        key: FilterKeys.user,
+        group: FilterGroups.filterAuthor,
+        label: "",
+        displaySelectorType: "link",
+      },
+    ];
+
+    if (!isCollaborator && !isVisitor) {
+      authorOptions.push({
+        id: "filter_author-other",
+        key: FilterKeys.other,
+        group: FilterGroups.filterAuthor,
+        label: t("Common:OtherLabel"),
+      });
+    }
+
+    // Type group. This filter is hardcoded to the Recent folder, so it omits
+    // the Folders / Files / Archives buckets (recent lists files only) —
+    // matching the client's `!isRecentFolder` gate in Home/Section/Filter.
+    const typeOptions: TItem[] = [
       {
         key: FilterGroups.filterType,
         group: FilterGroups.filterType,
         label: t("Common:Type"),
         isHeader: true,
         isLast: true,
-      },
-      {
-        id: "filter_type-folders",
-        key: FilterType.FoldersOnly.toString(),
-        group: FilterGroups.filterType,
-        label: t("Common:Folders"),
-      },
-      {
-        id: "filter_type-all-files",
-        key: FilterType.FilesOnly.toString(),
-        group: FilterGroups.filterType,
-        label: t("Common:Files"),
       },
       {
         id: "filter_type-documents",
@@ -213,28 +263,22 @@ export default function useFilesFilter({
         label: t("Common:Presentations"),
       },
       {
-        id: "filter_type-forms",
-        key: FilterType.PDFForm.toString(),
-        group: FilterGroups.filterType,
-        label: getManyPDFTitle(t, true),
-      },
-      {
         id: "filter_type-pdf",
         key: FilterType.Pdf.toString(),
         group: FilterGroups.filterType,
         label: getManyPDFTitle(t, false),
       },
       {
+        id: "filter_type-forms",
+        key: FilterType.PDFForm.toString(),
+        group: FilterGroups.filterType,
+        label: getManyPDFTitle(t, true),
+      },
+      {
         id: "filter_type-diagrams",
         key: FilterType.DiagramsOnly.toString(),
         group: FilterGroups.filterType,
         label: t("Common:Diagrams"),
-      },
-      {
-        id: "filter_type-archive",
-        key: FilterType.ArchiveOnly.toString(),
-        group: FilterGroups.filterType,
-        label: t("Common:Archives"),
       },
       {
         id: "filter_type-images",
@@ -250,10 +294,16 @@ export default function useFilesFilter({
       },
     ];
 
-    return [...typeOptions];
-  }, [t]);
+    return [...authorOptions, ...typeOptions];
+  }, [t, isCollaborator, isVisitor]);
 
-  const getSelectedFilterData = React.useCallback(() => {
+  const parseAuthorId = React.useCallback((raw: string | null) => {
+    if (!raw) return null;
+    const m = /^(?:user|group)_(.+)$/.exec(raw);
+    return m ? m[1] : raw;
+  }, []);
+
+  const getSelectedFilterData = React.useCallback(async () => {
     const filterValues: TItem[] = [];
 
     const sp = new URLSearchParams(window.location.search);
@@ -273,6 +323,28 @@ export default function useFilesFilter({
       } catch {
         // ignore
       }
+    }
+
+    // By Author chip — resolve the stored `user_<id>` back to a label:
+    // "Me" for the current user, otherwise the person's display name.
+    const authorRaw = parseAuthorId(filter.authorType);
+    if (authorRaw) {
+      const isMe = userId === authorRaw;
+      let label = isMe ? t("Common:MeLabel") : authorRaw;
+      if (!isMe) {
+        try {
+          const user = await getUser(authorRaw);
+          label = user?.displayName ?? authorRaw;
+        } catch {
+          // fall back to the raw id
+        }
+      }
+      filterValues.push({
+        key: isMe ? FilterKeys.me : authorRaw,
+        group: FilterGroups.filterAuthor,
+        label,
+        selectedLabel: `${t("Common:ByAuthor")}: ${label}`,
+      });
     }
 
     if (filter.filterType) {
@@ -324,12 +396,42 @@ export default function useFilesFilter({
     }
 
     return filterValues;
-  }, [filter.filterType, t, searchParams]);
+  }, [
+    filter.filterType,
+    filter.authorType,
+    parseAuthorId,
+    userId,
+    t,
+    searchParams,
+  ]);
 
-  const initSelectedFilterData = React.useMemo(
-    () => getSelectedFilterData(),
-    [], // should be calculated once
-  );
+  const initSelectedFilterData = React.useMemo<TItem[]>(() => {
+    const filterValues: TItem[] = [];
+
+    const authorRaw = parseAuthorId(filter.authorType);
+    if (authorRaw) {
+      const isMe = userId === authorRaw;
+      const label = isMe ? t("Common:MeLabel") : authorRaw;
+      filterValues.push({
+        key: isMe ? FilterKeys.me : authorRaw,
+        group: FilterGroups.filterAuthor,
+        label,
+        selectedLabel: `${t("Common:ByAuthor")}: ${label}`,
+      });
+    }
+
+    if (filter.filterType) {
+      filterValues.push({
+        key: `${filter.filterType}`,
+        label: "",
+        group: FilterGroups.filterType,
+      });
+    }
+
+    return filterValues;
+    // initSelectedFilterData should snapshot mount-time state only.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const getViewSettingsData = React.useCallback(() => {
     const viewSettings = [

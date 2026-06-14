@@ -88,7 +88,13 @@ const List = ({
   const { setIsEmptyList, filesViewAs, setFilesViewAs, currentDeviceType } =
     useSettingsStore();
   const filesListStore = useFilesListStore();
-  const { setItems, setRootFolderType, setPathParts, setCurrentFolder } = filesListStore;
+  const {
+    setItems,
+    setRootFolderType,
+    setPathParts,
+    setCurrentFolder,
+    setHighlightFileId,
+  } = filesListStore;
   const { setSelection, setBufferSelection } = useFilesSelectionStore();
   const navigationStore = useNavigationStore();
 
@@ -316,6 +322,20 @@ const List = ({
   React.useEffect(() => {
     setItems(filesList);
   }, [filesList, setItems]);
+
+  // "Open location" that crossed into this frame carries the target file id in
+  // the URL (?highlight=). Apply it once the row is actually in the list, so
+  // the 2s highlight doesn't expire before the item renders.
+  const consumedHighlightRef = React.useRef<string | null>(null);
+  React.useEffect(() => {
+    const highlight = searchParams.get("highlight");
+    if (!highlight || consumedHighlightRef.current === highlight) return;
+    const numericId = Number(highlight);
+    const targetId = Number.isNaN(numericId) ? highlight : numericId;
+    if (!filesList.some((item) => item.id === targetId)) return;
+    consumedHighlightRef.current = highlight;
+    setHighlightFileId(targetId);
+  }, [searchParams, filesList, setHighlightFileId]);
 
   React.useEffect(() => {
     setRootFolderType(current.rootFolderType);

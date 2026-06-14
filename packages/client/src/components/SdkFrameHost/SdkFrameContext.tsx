@@ -31,6 +31,7 @@ import type { SdkIframeHandle } from "SRC_DIR/components/SdkIframe";
 export type SdkNavigateExtra = {
   pathname?: string;
   search?: string;
+  highlight?: string;
 };
 
 export type SdkFrameCallbacks = {

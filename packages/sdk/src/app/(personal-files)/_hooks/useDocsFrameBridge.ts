@@ -47,6 +47,7 @@ import {
 import { FolderType } from "@docspace/shared/enums";
 
 import { DocsSection, DOCS_SECTION_FOLDER_ALIAS } from "@/types/docs";
+import { RoomsSection } from "@/types/rooms";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { PAGE_COUNT } from "@/utils/constants";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
@@ -60,9 +61,7 @@ type UseDocsFrameBridgeParams = {
 const PERSONAL_BASE_PATH = "/personal-files";
 const SETTINGS_PATH = "/personal-files/settings";
 
-const VALID_SECTIONS: ReadonlySet<string> = new Set(
-  Object.values(DocsSection),
-);
+const VALID_SECTIONS: ReadonlySet<string> = new Set(Object.values(DocsSection));
 
 const sectionFromRootFolderType = (
   rootFolderType: FolderType | null,
@@ -78,6 +77,10 @@ const sectionFromRootFolderType = (
       return DocsSection.SharedWithMe;
     case FolderType.TRASH:
       return DocsSection.Trash;
+    case FolderType.Rooms:
+      return RoomsSection.Rooms;
+    case FolderType.Archive:
+      return RoomsSection.Archive;
     default:
       return null;
   }
@@ -139,9 +142,11 @@ export const useDocsFrameBridge = ({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { rootFolderType } = useFilesListStore();
+  const filesListStore = useFilesListStore();
+  const { rootFolderType } = filesListStore;
 
   const rootFolder = searchParams.get("folder");
+  const searchValue = searchParams.get("search");
   const activeSection =
     sectionFromRootFolderType(rootFolderType) ??
     sectionFromPathnameAndFolder(pathname, rootFolder);
@@ -160,12 +165,30 @@ export const useDocsFrameBridge = ({
     if (!enabled) return;
     if (prevSection.current !== activeSection && activeSection) {
       prevSection.current = activeSection;
-      frameCallEvent({
-        event: "onNavigate",
-        data: { section: activeSection },
-      });
+      const data: {
+        section: string;
+        pathname?: string;
+        search?: string;
+        highlight?: string;
+      } = {
+        section: activeSection,
+      };
+      if (
+        (activeSection === RoomsSection.Rooms ||
+          activeSection === RoomsSection.Archive) &&
+        rootFolder
+      ) {
+        data.pathname = `/${activeSection}/${rootFolder}`;
+        if (searchValue) data.search = searchValue;
+        // Carry the "open location" target across the frame swap so the
+        // freshly-mounted rooms frame can re-highlight the file — the source
+        // frame's in-memory highlight dies with it.
+        const highlight = filesListStore.highlightFileId;
+        if (highlight != null) data.highlight = String(highlight);
+      }
+      frameCallEvent({ event: "onNavigate", data });
     }
-  }, [activeSection, enabled]);
+  }, [activeSection, enabled, rootFolder, searchValue, filesListStore]);
 
   const uploadRef = React.useRef(uploadFilesToFolder);
   React.useEffect(() => {
@@ -220,8 +243,7 @@ export const useDocsFrameBridge = ({
               event: "onUploadError",
               data: {
                 fileName,
-                message:
-                  error instanceof Error ? error.message : String(error),
+                message: error instanceof Error ? error.message : String(error),
                 ...(uploadId !== undefined && { uploadId }),
               },
             });

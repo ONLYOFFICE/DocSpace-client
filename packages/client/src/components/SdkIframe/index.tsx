@@ -39,6 +39,7 @@ export type SdkIframeHandle = {
 type SdkNavigateExtra = {
   pathname?: string;
   search?: string;
+  highlight?: string;
 };
 
 type SdkIframeProps = {
@@ -129,7 +130,12 @@ export const SdkIframe = ({
       if (eventData?.event !== "onNavigate") return;
 
       const data = eventData.data as
-        | { section?: string | null; pathname?: string; search?: string }
+        | {
+            section?: string | null;
+            pathname?: string;
+            search?: string;
+            highlight?: string;
+          }
         | undefined;
       const section = typeof data?.section === "string" ? data.section : "";
       // ai-agents may emit onNavigate without a `section` (the section
@@ -143,7 +149,11 @@ export const SdkIframe = ({
         // won't re-fire).
         setLoading(false);
         window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
-        onNavigate?.(section, { pathname: data?.pathname, search: data?.search });
+        onNavigate?.(section, {
+          pathname: data?.pathname,
+          search: data?.search,
+          highlight: data?.highlight,
+        });
       }
     };
 

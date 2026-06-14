@@ -36,24 +36,28 @@ import {
   getFrameId,
 } from "@docspace/shared/utils/common";
 
+import { RoomsSection } from "@/types/rooms";
+
 // Sections that live inside the (rooms) route group. The host can switch
 // between these via `navigateSection` without reloading the iframe.
 // Personal-files-backed sections (recent/favorites/trash) live in a
 // different Next.js route group and are intentionally NOT handled here —
 // the host reloads the iframe `src` for those.
 const SECTION_TO_PATH: Record<string, string> = {
-  rooms: "/rooms",
-  archive: "/archive",
+  [RoomsSection.Rooms]: "/rooms",
+  [RoomsSection.Archive]: "/archive",
 };
 
-const VALID_SECTIONS: ReadonlySet<string> = new Set(["rooms", "archive"]);
+const VALID_SECTIONS: ReadonlySet<string> = new Set(
+  Object.values(RoomsSection),
+);
 
 const sectionFromPathname = (pathname: string): string | null => {
   if (pathname === "/archive" || pathname.startsWith("/archive/")) {
-    return "archive";
+    return RoomsSection.Archive;
   }
   if (pathname === "/rooms" || pathname.startsWith("/rooms/")) {
-    return "rooms";
+    return RoomsSection.Rooms;
   }
   return null;
 };

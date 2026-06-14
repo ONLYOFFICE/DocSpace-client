@@ -73,6 +73,31 @@ const getPersonalSrc = (
   }
 };
 
+const applySectionParam = (
+  prev: URLSearchParams,
+  sdkSection: string,
+): URLSearchParams => {
+  const next = new URLSearchParams(prev);
+  if (sdkSection && sdkSection !== "rooms" && sdkSection !== "my-documents") {
+    next.set("section", sdkSection);
+  } else {
+    next.delete("section");
+  }
+  return next;
+};
+
+const getGroupDeepLink = (
+  sdkSection: string,
+  extra?: { pathname?: string; search?: string; highlight?: string },
+): string | null => {
+  if (!GROUP_SECTIONS.has(sdkSection) || !extra?.pathname) return null;
+  const params = new URLSearchParams();
+  if (extra.search) params.set("search", extra.search);
+  if (extra.highlight) params.set("highlight", extra.highlight);
+  const query = params.toString();
+  return `/sdk${extra.pathname}${query ? `?${query}` : ""}`;
+};
+
 const AiRooms = ({ roomsFolderId }: AiRoomsProps) => {
   const { t } = useTranslation(["Common"]);
   useDocumentTitle("Common:DashboardRoomsTitle");
@@ -94,26 +119,34 @@ const AiRooms = ({ roomsFolderId }: AiRoomsProps) => {
   targetRef.current = target;
   const roomsFolderIdRef = React.useRef(roomsFolderId);
   roomsFolderIdRef.current = roomsFolderId;
+  const appIdRef = React.useRef(appId);
+  appIdRef.current = appId;
+  // "Open location" from recent: deep link to the room/archive folder,
+  // consumed once when the rooms-group frame mounts.
+  const pendingGroupSrcRef = React.useRef<string | null>(null);
 
   // Iframe -> parent: the SDK reports its section on internal navigation.
   // The rooms bridge emits `rooms`/`archive`; the personal-files bridge
   // emits `recent`/`favorites`/`trash`. Both map straight onto the host
   // `?section=` (`rooms` clears it to match the sidebar default).
-  const handleSdkNavigate = React.useCallback((sdkSection: string) => {
-    lastSdkSectionRef.current = sdkSection;
-    setSearchParamsRef.current(
-      (prev) => {
-        const next = new URLSearchParams(prev);
-        if (sdkSection && sdkSection !== "rooms" && sdkSection !== "my-documents") {
-          next.set("section", sdkSection);
-        } else {
-          next.delete("section");
-        }
-        return next;
-      },
-      { replace: true },
-    );
-  }, []);
+  const handleSdkNavigate = React.useCallback(
+    (
+      sdkSection: string,
+      extra?: { pathname?: string; search?: string; highlight?: string },
+    ) => {
+      if (appIdRef.current === PERSONAL_FRAME_ID) {
+        const deepLink = getGroupDeepLink(sdkSection, extra);
+        if (deepLink) pendingGroupSrcRef.current = deepLink;
+      }
+
+      lastSdkSectionRef.current = sdkSection;
+      setSearchParamsRef.current(
+        (prev) => applySectionParam(prev, sdkSection),
+        { replace: true },
+      );
+    },
+    [],
+  );
 
   // The host owns the frame and freezes `src` per appId. The "ai-rooms"
   // frame is always the rooms-group root; the "ai-rooms-personal" frame is
@@ -123,10 +156,17 @@ const AiRooms = ({ roomsFolderId }: AiRoomsProps) => {
     appId,
     enabled: true,
     title: t("Common:DashboardRoomsTitle"),
-    getSrc: () =>
-      isGroup
-        ? getGroupSrc(targetRef.current)
-        : getPersonalSrc(targetRef.current, roomsFolderIdRef.current),
+    getSrc: () => {
+      if (!isGroup) {
+        return getPersonalSrc(targetRef.current, roomsFolderIdRef.current);
+      }
+      if (pendingGroupSrcRef.current) {
+        const src = pendingGroupSrcRef.current;
+        pendingGroupSrcRef.current = null;
+        return src;
+      }
+      return getGroupSrc(targetRef.current);
+    },
     onNavigate: handleSdkNavigate,
   });
 
@@ -156,4 +196,3 @@ const AiRoomsConnected = inject<TStore>(({ treeFoldersStore }) => ({
 
 export { AiRoomsConnected as AiRooms };
 export default AiRoomsConnected;
-

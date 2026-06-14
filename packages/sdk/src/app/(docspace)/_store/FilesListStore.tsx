@@ -36,7 +36,7 @@
 "use client";
 
 import React from "react";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 import { FolderType } from "@docspace/shared/enums";
 import { TPathParts } from "@docspace/shared/types";
@@ -92,8 +92,10 @@ class FilesListStore {
     if (id == null) return;
 
     this.highlightTimerId = setTimeout(() => {
-      this.highlightFileId = null;
-      this.highlightTimerId = null;
+      runInAction(() => {
+        this.highlightFileId = null;
+        this.highlightTimerId = null;
+      });
     }, 2000);
   };
 
@@ -109,7 +111,8 @@ class FilesListStore {
 
   updateItemCustomFilter = (id: number | string, enabled: boolean) => {
     const item = this.items.find((i) => i.id === id);
-    if (item && "customFilterEnabled" in item) item.customFilterEnabled = enabled;
+    if (item && "customFilterEnabled" in item)
+      item.customFilterEnabled = enabled;
   };
 
   updateItemEditing = (id: number | string, isEditing: boolean) => {

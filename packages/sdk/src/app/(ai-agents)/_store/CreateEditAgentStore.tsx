@@ -38,7 +38,7 @@ import {
   addServersForRoom,
   createAIAgentWithProfile,
   deleteServersForRoom,
-  editAIAgent,
+  editNewAiAgent,
 } from "@docspace/shared/api/ai";
 import type {
   TAgent,
@@ -191,7 +191,10 @@ class CreateEditAgentStore {
     const { dialogsStore, avatarEditorStore } = deps;
     const isDefaultAIAgentsQuotaSet = !!deps.isDefaultAgentsQuotaSet;
 
-    const { title, icon, agentId, prompt, agentOwner, quota } = newParams;
+    const { title, icon, agentId, prompt, agentOwner, quota, profileId } =
+      newParams;
+
+    const isProfileChanged = !!profileId && profileId !== agent.profileId;
 
     const quotaLimit = quota ?? agent.quotaLimit;
     const isQuotaChanged = quotaLimit !== agent.quotaLimit;
@@ -217,6 +220,9 @@ class CreateEditAgentStore {
       ...(prompt && {
         chatSettings: { prompt } satisfies TChatSettings,
       }),
+      // new-ai service rebinds the agent's Chat-action profile when a
+      // profileId is sent; only include it when actually changed.
+      ...(isProfileChanged && { profileId }),
     };
 
     const isDeleteLogo = !!agent.logo.original && !icon.uploadedFile;
@@ -243,7 +249,7 @@ class CreateEditAgentStore {
 
     try {
       if (Object.keys(editAgentParams).length) {
-        await editAIAgent(agent.id, editAgentParams);
+        await editNewAiAgent(agent.id, editAgentParams);
       }
 
       const requests: Promise<unknown>[] = [];

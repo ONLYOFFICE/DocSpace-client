@@ -113,6 +113,7 @@ const EditAgentDialog = ({
         prevParams.icon.uploadedFile === currentParams.icon.uploadedFile) &&
       prevParams.quota === currentParams.quota &&
       prevParams.prompt === currentParams.prompt &&
+      prevParams.profileId === currentParams.profileId &&
       currentParams.mcpServers?.every((id) =>
         currentParams.mcpServersInitial?.includes(id),
       ) &&
@@ -226,10 +227,11 @@ const EditAgentDialog = ({
           scale
           onClick={onEditRoom}
           isDisabled={
-            !hasCover
+            !agentParams.profileId ||
+            (!hasCover
               ? isWrongTitle ||
                 compareRoomParams(prevRoomParams.current, agentParams)
-              : false
+              : false)
           }
           isLoading={isLoading}
         />

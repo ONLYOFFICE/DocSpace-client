@@ -418,13 +418,12 @@ const SetAgentParams = ({
         />
       ) : null}
 
-      {/* Profile rebinding is not supported by the API yet — create only. */}
-      {!isEdit ? (
-        <ProfileSettings
-          agentParams={agentParams}
-          setAgentParams={setAgentParams}
-        />
-      ) : null}
+      {/* Profile selection on both create and edit — the new-ai service
+          rebinds the agent's profile on PUT when profileId changes. */}
+      <ProfileSettings
+        agentParams={agentParams}
+        setAgentParams={setAgentParams}
+      />
 
       <InstructionsSettings
         agentParams={agentParams}

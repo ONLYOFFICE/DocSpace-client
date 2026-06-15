@@ -61,12 +61,14 @@ interface TenantPanelProps {
   info?: TDocsConnectInfo;
   openBuyPlan?: (mode: "trial" | "edit") => void;
   copySecretKey?: (t: TTranslation) => void;
+  buyTenant?: () => void;
 }
 
 const TenantPanel = ({
   info,
   openBuyPlan,
   copySecretKey,
+  buyTenant,
 }: TenantPanelProps) => {
   const { t } = useTranslation(["DocsConnect", "Common"]);
   const [selectedTab, setSelectedTab] = useState<string>("statistics");
@@ -92,7 +94,10 @@ const TenantPanel = ({
       key: "buy-tenant",
       label: t("DocsConnect:BuyTenant"),
       icon: PlusReactSvgUrl,
-      onClick: () => toastr.info(t("DocsConnect:BuyTenantInProgress")),
+      onClick: () => {
+        buyTenant?.();
+        toastr.info(t("DocsConnect:BuyTenantInProgress"));
+      },
     },
   ];
 
@@ -157,4 +162,5 @@ export default inject(({ docsConnectStore }: TStore) => ({
   info: docsConnectStore.info,
   openBuyPlan: docsConnectStore.openBuyPlan,
   copySecretKey: docsConnectStore.copySecretKey,
+  buyTenant: docsConnectStore.buyTenant,
 }))(observer(TenantPanel));

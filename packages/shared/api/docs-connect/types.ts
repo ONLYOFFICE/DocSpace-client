@@ -45,6 +45,7 @@ export type TDocsConnectTrial = {
   start: string;
   validUntil: string;
   daysLeft: number;
+  totalDays: number;
 };
 
 export type TDocsConnectPlan = {

@@ -55,7 +55,7 @@
   "TabSettings": "Settings",
   "TabPreview": "Preview",
   "TrialBannerTitle": "You are using a free trial of Docs Connect",
-  "TrialBannerDescription": "Your trial period expires in 30 days—subscribe to maintain uninterrupted access.",
+  "TrialBannerDescription": "Your trial period expires in {{count}} days—subscribe to maintain uninterrupted access.",
   "TrialBannerDescriptionSecond": "If you pay today, your data is saved, and the first charge occurs after the trial period expires.",
   "BuyAPlan": "Buy a plan",
   "SystemOverview": "System overview",

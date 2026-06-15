@@ -234,7 +234,9 @@ const Statistics = ({
               {t("DocsConnect:TrialBannerTitle")}
             </Text>
             <Text fontSize="12px" className={styles.muted}>
-              {t("DocsConnect:TrialBannerDescription")}
+              {t("DocsConnect:TrialBannerDescription", {
+                count: info.trial.daysLeft,
+              })}
             </Text>
             <Text fontSize="12px" className={styles.muted}>
               {t("DocsConnect:TrialBannerDescriptionSecond")}
@@ -302,7 +304,12 @@ const Statistics = ({
             </div>
             <div className={styles.licenseProgress}>
               <ProgressBar
-                percent={Math.max(0, ((30 - info.trial.daysLeft) / 30) * 100)}
+                percent={Math.max(
+                  0,
+                  ((info.trial.totalDays - info.trial.daysLeft) /
+                    info.trial.totalDays) *
+                    100,
+                )}
               />
               <Text fontSize="12px" className={styles.muted}>
                 {t("DocsConnect:TrialDaysRemaining", {

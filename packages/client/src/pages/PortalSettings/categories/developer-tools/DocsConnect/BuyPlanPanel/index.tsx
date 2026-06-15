@@ -90,8 +90,8 @@ const BuyPlanPanel = ({
 
   const formatCurrency = (amount: number) => `${currency}${amount.toFixed(2)}`;
 
-  const onBuy = () => {
-    buyPlan?.({ users, devPack });
+  const onBuy = async () => {
+    await buyPlan?.({ users, devPack });
     toastr.success(t("DocsConnect:PlanPurchased"));
   };
 

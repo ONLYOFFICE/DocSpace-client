@@ -33,15 +33,26 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { request } from "../client";
 import type { TDocsConnectInfo, TDocsConnectStatus } from "./types";
 
 /**
- * Dev-only switch used to force the initial Docs Connect state while there is no
- * backend yet. Change this to "trial" or "paid" to render those states directly.
- * Once the real endpoint exists, `getDocsConnectInfo` should call it instead of
- * returning the mock below.
+ * Master switch: while there is no backend, every call below is served from the
+ * in-memory mock. Flip to `false` (one toggle) once the endpoints exist — the
+ * request paths and payloads are already wired, see `docs-connect/BACKEND_API.en.md`.
+ */
+export const DOCS_CONNECT_USE_MOCK = true;
+
+/**
+ * Dev-only switch used to force the initial Docs Connect state in mock mode.
+ * Change this to "trial" or "paid" to render those states directly.
  */
 export const DOCS_CONNECT_MOCK_STATUS: TDocsConnectStatus = "promo";
+
+export type BuyDocsConnectPlanData = {
+  users: number;
+  devPackEnabled: boolean;
+};
 
 // Kept in a const rather than inline: an inline `secretKey` string literal ends
 // in the substring the locales test scans for as a translation key, so the mock
@@ -65,6 +76,7 @@ const buildMockInfo = (status: TDocsConnectStatus): TDocsConnectInfo => {
       start: "20.05.2026",
       validUntil: "19.06.2026",
       daysLeft: 30,
+      totalDays: 30,
     },
     plan: {
       users: 50,
@@ -91,7 +103,7 @@ const buildMockInfo = (status: TDocsConnectStatus): TDocsConnectInfo => {
       },
     },
     wallet: {
-      availableCredits: 1000,
+      availableCredits: 0,
       currency: "$",
     },
     connectors: [
@@ -106,10 +118,77 @@ const buildMockInfo = (status: TDocsConnectStatus): TDocsConnectInfo => {
   };
 };
 
+// In-memory mock state. Lets the trial → paid transitions persist across calls
+// while there is no backend (each action mutates and returns this object).
+let mockInfo: TDocsConnectInfo = buildMockInfo(DOCS_CONNECT_MOCK_STATUS);
+
 /**
- * FAKE API — returns the whole Docs Connect configuration in a single request.
- * Replace the body with a real `request(...)` call once the backend is ready.
+ * GET /docs-connect — whole tenant page state in one request.
  */
-export const getDocsConnectInfo = (): Promise<TDocsConnectInfo> => {
-  return Promise.resolve(buildMockInfo(DOCS_CONNECT_MOCK_STATUS));
+export const getDocsConnectInfo = async (): Promise<TDocsConnectInfo> => {
+  if (DOCS_CONNECT_USE_MOCK) return mockInfo;
+
+  return (await request({
+    method: "get",
+    url: "/docs-connect",
+  })) as TDocsConnectInfo;
+};
+
+/**
+ * POST /docs-connect/trial — start the free trial. Returns the updated state.
+ */
+export const startDocsConnectTrial = async (): Promise<TDocsConnectInfo> => {
+  if (DOCS_CONNECT_USE_MOCK) {
+    mockInfo = { ...mockInfo, status: "trial" };
+    return mockInfo;
+  }
+
+  return (await request({
+    method: "post",
+    url: "/docs-connect/trial",
+  })) as TDocsConnectInfo;
+};
+
+/**
+ * POST /docs-connect/plan — buy/update the plan. The backend is the source of
+ * truth for pricing and limits; in mock mode we recompute them locally.
+ */
+export const buyDocsConnectPlan = async (
+  data: BuyDocsConnectPlanData,
+): Promise<TDocsConnectInfo> => {
+  if (DOCS_CONNECT_USE_MOCK) {
+    const { users, devPackEnabled } = data;
+    const { pricePerUser, devPackPrice } = mockInfo.plan;
+    const monthlyCharge =
+      users * (pricePerUser + (devPackEnabled ? devPackPrice : 0));
+
+    mockInfo = {
+      ...mockInfo,
+      status: "paid",
+      plan: { ...mockInfo.plan, users, devPackEnabled, monthlyCharge },
+      usage: {
+        editors: { ...mockInfo.usage.editors, remaining: users, limit: users },
+        viewer: { ...mockInfo.usage.viewer, remaining: users, limit: users },
+      },
+    };
+    return mockInfo;
+  }
+
+  return (await request({
+    method: "post",
+    url: "/docs-connect/plan",
+    data,
+  })) as TDocsConnectInfo;
+};
+
+/**
+ * POST /docs-connect/tenant — "Buy tenant" action. Returns the updated state.
+ */
+export const buyDocsConnectTenant = async (): Promise<TDocsConnectInfo> => {
+  if (DOCS_CONNECT_USE_MOCK) return mockInfo;
+
+  return (await request({
+    method: "post",
+    url: "/docs-connect/tenant",
+  })) as TDocsConnectInfo;
 };

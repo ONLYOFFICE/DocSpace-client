@@ -36,7 +36,12 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import copy from "copy-to-clipboard";
 
-import { getDocsConnectInfo } from "@docspace/shared/api/docs-connect";
+import {
+  getDocsConnectInfo,
+  startDocsConnectTrial,
+  buyDocsConnectPlan,
+  buyDocsConnectTenant,
+} from "@docspace/shared/api/docs-connect";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -95,37 +100,44 @@ class DocsConnectStore {
     this.buyPlanPanelVisible = false;
   };
 
-  startTrial = () => {
-    if (!this.info) return;
-
-    this.info = {
-      ...this.info,
-      status: "trial",
-    };
+  startTrial = async () => {
+    try {
+      const info = await startDocsConnectTrial();
+      runInAction(() => {
+        this.info = info;
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.error = error as Error;
+      });
+    }
   };
 
-  buyPlan = ({ users, devPack }: { users: number; devPack: boolean }) => {
-    if (!this.info) return;
+  buyPlan = async ({ users, devPack }: { users: number; devPack: boolean }) => {
+    try {
+      const info = await buyDocsConnectPlan({ users, devPackEnabled: devPack });
+      runInAction(() => {
+        this.info = info;
+      });
+      this.closeBuyPlan();
+    } catch (error) {
+      runInAction(() => {
+        this.error = error as Error;
+      });
+    }
+  };
 
-    const { pricePerUser, devPackPrice } = this.info.plan;
-    const monthlyCharge = users * (pricePerUser + (devPack ? devPackPrice : 0));
-
-    this.info = {
-      ...this.info,
-      status: "paid",
-      plan: {
-        ...this.info.plan,
-        users,
-        devPackEnabled: devPack,
-        monthlyCharge,
-      },
-      usage: {
-        editors: { ...this.info.usage.editors, remaining: users, limit: users },
-        viewer: { ...this.info.usage.viewer, remaining: users, limit: users },
-      },
-    };
-
-    this.closeBuyPlan();
+  buyTenant = async () => {
+    try {
+      const info = await buyDocsConnectTenant();
+      runInAction(() => {
+        this.info = info;
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.error = error as Error;
+      });
+    }
   };
 
   copyToClipboard = (value: string, t: TTranslation) => {

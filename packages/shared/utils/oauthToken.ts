@@ -138,7 +138,7 @@ export const requestAuthToken = (
 };
 
 export const __resetOAuthTokenForTests = () => {
-  for (const entry of pending.values()) clearTimeout(entry.timer);
+  pending.forEach((entry) => clearTimeout(entry.timer));
   pending.clear();
   nextCallId = 1;
   if (listenerInstalled && typeof window !== "undefined") {

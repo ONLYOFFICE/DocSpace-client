@@ -735,6 +735,8 @@
   "DropzoneTitleSecondary": "或将文件拖至此处",
   "DueToday": "今日到期",
   "Duplicate": "创建副本",
+  "DuplicateFolderItem": "文件夹<2>{{title}}</2>已成功创建副本",
+  "DuplicateItem": "<2>{{title}}</2>已成功创建副本",
   "EditAccessInfo": "我们规定了多少用户可以访问并编辑文档",
   "EditAdditionalLink": "编辑附加链接",
   "EditAgent": "编辑智能体",
@@ -825,9 +827,9 @@
   "EnableAiRoomsTitle": "启用 AI 房间？",
   "EnableAutomaticBackup": "启用自动备份",
   "EnableAutomaticBackupDescription": "使用该选项备份协作空间的数据。",
+  "EnableBackupConfirm": "启用备份服务后，所有{{productName}}管理员均可随时创建备份（需钱包余额充足）。是否确认继续？",
   "EnabledApps": "已启用的应用",
   "EnableNotifications": "启用消息通知",
-  "EnableBackupConfirm": "启用备份服务后，所有{{productName}}管理员均可随时创建备份（需钱包余额充足）。是否确认继续？",
   "EnableOrganizationAI": "启用 {{organizationName}} AI",
   "EnablePaidBackup": "启用付费备份",
   "EnableThirdPartyIntegration": "请让{{productName}}所有者或管理员在{{productName}}的集成设置中启用相应服务。",
@@ -2290,7 +2292,5 @@
   "YourName": "您的姓名",
   "YourPrice": "您的价格",
   "YourTurn": "轮到您了",
-  "YouWillBeContacted": "创建请求后销售团队将与您取得联系。",
-  "DuplicateFolderItem": "文件夹<2>{{title}}</2>已成功创建副本",
-  "DuplicateItem": "<2>{{title}}</2>已成功创建副本"
+  "YouWillBeContacted": "创建请求后销售团队将与您取得联系。"
 }

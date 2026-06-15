@@ -724,6 +724,8 @@
   "DropzoneTitleSecondary": "of plaats het bestand hier",
   "DueToday": "Vandaag ingeleverd",
   "Duplicate": "Dupliceren",
+  "DuplicateFolderItem": "De map <2>{{title}}</2> met succes gedupliceerd",
+  "DuplicateItem": "<2>{{title}}</2> met succes gedupliceerd",
   "EditAccessInfo": "We hebben gespecificeerd hoeveel gebruikers toegang kunnen hebben tot het bewerken van documenten.",
   "EditAdditionalLink": "Bewerk aanvullende link",
   "EditAgent": "Bewerk Agent",
@@ -2267,7 +2269,5 @@
   "YourName": "Uw naam",
   "YourPrice": "Uw prijs",
   "YourTurn": "Uw beurt",
-  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag.",
-  "DuplicateFolderItem": "De map <2>{{title}}</2> met succes gedupliceerd",
-  "DuplicateItem": "<2>{{title}}</2> met succes gedupliceerd"
+  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag."
 }

@@ -724,6 +724,8 @@
   "DropzoneTitleSecondary": "ali odloži datoteko tule",
   "DueToday": "Rok za oddajo je danes.",
   "Duplicate": "Duplikat",
+  "DuplicateFolderItem": "Mapa <2>{{title}}</2> je bila uspešno podvojena",
+  "DuplicateItem": "<2>{{title}}</2> uspešno podvojen",
   "EditAccessInfo": "Določili smo, koliko uporabnikov lahko dostopa do urejanja dokumentov.",
   "EditAdditionalLink": "Uredi dodatno povezavo",
   "EditAgent": "Uredi agenta",
@@ -2267,7 +2269,5 @@
   "YourName": "Vaše ime",
   "YourPrice": "Vaša cena",
   "YourTurn": "Vi ste na vrsti",
-  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala.",
-  "DuplicateFolderItem": "Mapa <2>{{title}}</2> je bila uspešno podvojena",
-  "DuplicateItem": "<2>{{title}}</2> uspešno podvojen"
+  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala."
 }

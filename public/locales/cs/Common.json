@@ -724,6 +724,8 @@
   "DropzoneTitleSecondary": "nebo sem vložte soubor",
   "DueToday": "Zralé dnes",
   "Duplicate": "Duplikovat",
+  "DuplicateFolderItem": "Složka <2>{{title}}</2> úspěšně duplikována",
+  "DuplicateItem": "<2>{{title}}</2> úspěšně duplikováno",
   "EditAccessInfo": "Určili jsme, kolik uživatelů může mít přístup ke upravování dokumentů.",
   "EditAdditionalLink": "Upravit další odkaz",
   "EditAgent": "Upravit Agenta",
@@ -2267,7 +2269,5 @@
   "YourName": "Vaše jméno",
   "YourPrice": "Vaše cena",
   "YourTurn": "Jste na řadě",
-  "YouWillBeContacted": "Po vytvoření požadavku vás bude kontaktovat prodejní tým.",
-  "DuplicateFolderItem": "Složka <2>{{title}}</2> úspěšně duplikována",
-  "DuplicateItem": "<2>{{title}}</2> úspěšně duplikováno"
+  "YouWillBeContacted": "Po vytvoření požadavku vás bude kontaktovat prodejní tým."
 }

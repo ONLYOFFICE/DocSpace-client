@@ -724,6 +724,8 @@
   "DropzoneTitleSecondary": "أو قم بإسقاط الملف هنا",
   "DueToday": "مستحق اليوم",
   "Duplicate": "تكرار",
+  "DuplicateFolderItem": "تم تكرار المجلد <2>{{title}}</2> بنجاح",
+  "DuplicateItem": "تم تكرار <2>{{title}}</2> بنجاح",
   "EditAccessInfo": "لقد حددنا عدد المستخدمين الذين يمكنهم الوصول إلى تحرير المستندات. ",
   "EditAdditionalLink": "تعديل الرابط الإضافي",
   "EditAgent": "تعديل العميل",
@@ -2267,7 +2269,5 @@
   "YourName": "اسمك",
   "YourPrice": "سعرك",
   "YourTurn": "دوركم الآن",
-  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب.",
-  "DuplicateFolderItem": "تم تكرار المجلد <2>{{title}}</2> بنجاح",
-  "DuplicateItem": "تم تكرار <2>{{title}}</2> بنجاح"
+  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب."
 }

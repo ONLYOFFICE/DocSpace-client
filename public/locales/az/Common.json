@@ -724,6 +724,8 @@
   "DropzoneTitleSecondary": "və ya faylı buraya buraxın",
   "DueToday": "Bugün çatdırılmalı",
   "Duplicate": "Dublikat",
+  "DuplicateFolderItem": "<2>{{title}}</2> qovluğu uğurla kopyalandı",
+  "DuplicateItem": "<2>{{title}}</2> uğurla kopyalandı",
   "EditAccessInfo": "Sənədlərə redaktəyə girişə sahib olan istifadəçilərinin sayını biz müəyyən etdik.",
   "EditAdditionalLink": "Əlavə linki redaktə edin",
   "EditAgent": "Agenti redaktə et",
@@ -2267,7 +2269,5 @@
   "YourName": "Adınız",
   "YourPrice": "Qiymətiniz",
   "YourTurn": "Sizin növbəniz",
-  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq.",
-  "DuplicateFolderItem": "<2>{{title}}</2> qovluğu uğurla kopyalandı",
-  "DuplicateItem": "<2>{{title}}</2> uğurla kopyalandı"
+  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq."
 }

@@ -735,6 +735,8 @@
   "DropzoneTitleSecondary": "ou déposez le fichier ici",
   "DueToday": "À remettre aujourd'hui",
   "Duplicate": "Dupliquer",
+  "DuplicateFolderItem": "Le dossier <2>{{title}}</2> a été dupliqué avec succès",
+  "DuplicateItem": "<2>{{title}}</2> dupliqué avec succès",
   "EditAccessInfo": "Nous avons spécifié combien d'utilisateurs peuvent avoir accès à la modification des documents.",
   "EditAdditionalLink": "Modifier le lien supplémentaire",
   "EditAgent": "Modifier l'agent",
@@ -2290,7 +2292,5 @@
   "YourName": "Votre nom",
   "YourPrice": "Votre prix",
   "YourTurn": "Votre tour",
-  "YouWillBeContacted": "L’équipe de vente vous contactera après avoir créé la demande.",
-  "DuplicateFolderItem": "Le dossier <2>{{title}}</2> a été dupliqué avec succès",
-  "DuplicateItem": "<2>{{title}}</2> dupliqué avec succès"
+  "YouWillBeContacted": "L’équipe de vente vous contactera après avoir créé la demande."
 }

@@ -724,6 +724,8 @@
   "DropzoneTitleSecondary": "tai raahaa tiedosto tähän",
   "DueToday": "Erääntynyt tänään",
   "Duplicate": "Duplikaatti",
+  "DuplicateFolderItem": "Kansio <2>{{title}}</2> onnistuneesti monistettu",
+  "DuplicateItem": "<2>{{title}}</2> onnistuneesti monistettu",
   "EditAccessInfo": "Määritimme, kuinka monta käyttäjää voi päästä muokkaamaan dokumentteja.",
   "EditAdditionalLink": "Muokkaa lisälinkkiä",
   "EditAgent": "Muokkaa agenttia",
@@ -2267,7 +2269,5 @@
   "YourName": "Nimesi",
   "YourPrice": "Hintasi",
   "YourTurn": "Sinun vuorosi",
-  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen.",
-  "DuplicateFolderItem": "Kansio <2>{{title}}</2> onnistuneesti monistettu",
-  "DuplicateItem": "<2>{{title}}</2> onnistuneesti monistettu"
+  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen."
 }

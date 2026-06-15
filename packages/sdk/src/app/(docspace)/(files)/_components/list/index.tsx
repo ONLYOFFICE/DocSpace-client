@@ -45,6 +45,7 @@ import { PAGE_COUNT } from "@/utils/constants";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useNavigationStore } from "@/app/(docspace)/_store/NavigationStore";
+import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
 
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 import useItemList, {
@@ -97,6 +98,7 @@ const List = ({
   } = filesListStore;
   const { setSelection, setBufferSelection } = useFilesSelectionStore();
   const navigationStore = useNavigationStore();
+  const infoPanelStore = useInfoPanelStore();
 
   useResetSelectionClick({ setSelection, setBufferSelection });
 
@@ -312,6 +314,17 @@ const List = ({
 
     fetchCurrentFolder();
   }, [searchParams, fetchCurrentFolder]);
+
+  React.useEffect(() => {
+    setSelection([]);
+    setBufferSelection(null);
+  }, [searchParams, setSelection, setBufferSelection]);
+
+  React.useEffect(() => {
+    setSelection([]);
+    setBufferSelection(null);
+    infoPanelStore.close();
+  }, [current.id, setSelection, setBufferSelection, infoPanelStore]);
 
   useFilesSocket(
     portalSettings.socketUrl ?? "",

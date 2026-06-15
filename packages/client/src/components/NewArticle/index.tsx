@@ -465,12 +465,6 @@ const NewArticle = ({
               onClick: () => navigate("/agents?section=trash"),
               withTopSeparator: true,
             },
-            {
-              id: "ai-agents-settings",
-              label: t("Common:Settings"),
-              icon: CatalogSettingsReactSvgUrl,
-              onClick: () => navigate("/agents?section=settings"),
-            },
           ]
         : undefined,
     };

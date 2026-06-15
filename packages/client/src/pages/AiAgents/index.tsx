@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useSearchParams } from "react-router";
+import { useSearchParams, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -43,6 +43,13 @@ import SdkIframe, {
 // Sub-sections inside the iframe that the host URL exposes via
 // `?section=...`. Agent detail lives under `?agentId=N&tab=T` instead.
 const VALID_SECTIONS = new Set(["recent", "favorites", "trash", "settings"]);
+
+// The AI Agents settings section was moved out of the (iframe-bound) SDK app
+// into DocSpace portal settings. Any navigation that resolves to the agents
+// "settings" section — host deep link, sidebar, or an "Open settings" action
+// the SDK reports back — is redirected here instead of rendered in the frame.
+const AI_SETTINGS_URL = "/portal-settings/ai-settings";
+const SETTINGS_NAV_KEY = "section:settings";
 
 // Translate the parent's query string into the SDK navigation key the
 // frame bridge understands. Returns a stable string we can dedupe on so
@@ -109,6 +116,7 @@ const AiAgentsComponent = ({ canManageAgents, theme }: AiAgentsProps) => {
   const { t } = useTranslation(["Common"]);
   useDocumentTitle("Common:DashboardAIChatAgentsTitle");
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const iframeRef = React.useRef<SdkIframeHandle | null>(null);
   const lastSdkKeyRef = React.useRef<string | null>(null);
   const initialSrcRef = React.useRef<string | null>(null);
@@ -127,6 +135,15 @@ const AiAgentsComponent = ({ canManageAgents, theme }: AiAgentsProps) => {
         extra?.pathname,
         extra?.search,
       );
+
+      // The SDK navigated to its (now removed) settings section — e.g. an
+      // "Open settings" / "Add AI provider" action. Send the user to the
+      // portal AI settings page instead of mirroring it into the host URL.
+      if (key === SETTINGS_NAV_KEY) {
+        navigate(AI_SETTINGS_URL);
+        return;
+      }
+
       lastSdkKeyRef.current = key;
 
       const sp = searchParamsRef.current;
@@ -147,9 +164,16 @@ const AiAgentsComponent = ({ canManageAgents, theme }: AiAgentsProps) => {
   // that's the iframe-driven case echoing back.
   const navKey = buildNavKey(searchParams);
   React.useEffect(() => {
+    // Host URL resolves to the agents "settings" section (sidebar click or
+    // deep link) — redirect to the portal AI settings page rather than
+    // forwarding it into the iframe.
+    if (navKey.key === SETTINGS_NAV_KEY) {
+      navigate(AI_SETTINGS_URL, { replace: true });
+      return;
+    }
     if (lastSdkKeyRef.current === navKey.key) return;
     iframeRef.current?.call("navigateSection", navKey.payload);
-  }, [navKey.key, navKey.payload]);
+  }, [navKey.key, navKey.payload, navigate]);
 
   if (!canManageAgents) {
     return (
@@ -178,7 +202,7 @@ const AiAgentsComponent = ({ canManageAgents, theme }: AiAgentsProps) => {
       initialSrcRef.current = `/sdk/ai-agents/${payload.agentId}?tab=${encodeURIComponent(
         payload.tab ?? "chat",
       )}`;
-    } else if (payload.section) {
+    } else if (payload.section && navKey.key !== SETTINGS_NAV_KEY) {
       initialSrcRef.current = `/sdk/ai-agents/${payload.section}`;
     } else {
       initialSrcRef.current = "/sdk/ai-agents";

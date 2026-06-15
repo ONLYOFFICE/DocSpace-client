@@ -233,7 +233,7 @@ class ProfileActionsStore {
 
     zendeskAPI.addChanges("webWidget", isShow ? "show" : "hide");
 
-    toastr.success(isShow ? t("LiveChatOn") : t("LiveChatOff"));
+    toastr.success(isShow ? t("Common:LiveChatOn") : t("Common:LiveChatOff"));
   };
 
   onSupportClick = () => {

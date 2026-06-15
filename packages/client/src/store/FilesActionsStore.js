@@ -2143,10 +2143,10 @@ class FilesActionStore {
       }
 
       if (tag.roomType) {
-        if (!!newFilter.type && +newFilter.type === tag.roomType) return;
+        if (newFilter.type && +newFilter.type === tag.roomType) return;
         newFilter.type = tag.roomType;
       } else if (tag.providerType) {
-        if (!!newFilter.provider && +newFilter.provider === tag.providerType)
+        if (newFilter.provider && +newFilter.provider === tag.providerType)
           return;
         newFilter.provider = tag.providerType;
       } else {
@@ -3087,12 +3087,12 @@ class FilesActionStore {
       .set("downloadAs", downloadAs)
       .set("copy", copy)
       /* .set("delete", {
-        label: t("RemoveFromFavorites"),
-        alt: t("RemoveFromFavorites"),
+        label: t("Common:RemoveFromFavorites"),
+        alt: t("Common:RemoveFromFavorites"),
         iconUrl: FavoritesFillReactSvgUrl,
         onClick: () => {
           this.setFavoriteAction("remove", selection)
-            .then(() => toastr.success(t("RemovedFromFavorites")))
+            .then(() => toastr.success(t("Common:RemovedFromFavorites")))
             .catch((err) => toastr.error(err));
         },
       }) */

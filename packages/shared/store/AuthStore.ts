@@ -198,7 +198,7 @@ class AuthStore {
 
     if (
       this.settingsStore?.isLoaded &&
-      !!this.settingsStore?.socketUrl &&
+      this.settingsStore?.socketUrl &&
       !isPortalDeactivated &&
       !isPortalEncryption &&
       !isPublicRoom() &&

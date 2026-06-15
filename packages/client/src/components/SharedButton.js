@@ -68,7 +68,7 @@ const SharedButton = ({
 		<Text
 			className="share-button"
 			as="span"
-			title={t("Share")}
+			title={t("Common:Share")}
 			fontSize="12px"
 			fontWeight={600}
 			color={color}
@@ -82,7 +82,7 @@ const SharedButton = ({
 				size={isSmallIcon ? 12 : 16}
 				iconName={icon}
 			/>
-			{t("Share")}
+			{t("Common:Share")}
 		</Text>
 	);
 };

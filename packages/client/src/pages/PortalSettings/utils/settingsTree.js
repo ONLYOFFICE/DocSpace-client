@@ -56,7 +56,7 @@ export const settingsTree = [
         key: "0-0",
         icon: "",
         link: "general",
-        tKey: "SettingsGeneral",
+        tKey: "Common:SettingsGeneral",
         isCategory: true,
         children: [
           {
@@ -277,7 +277,7 @@ export const settingsTree = [
         key: "1-1",
         icon: "",
         link: "access-rights",
-        tKey: "AccessRights",
+        tKey: "Common:AccessRights",
         isCategory: true,
         children: [
           {
@@ -311,7 +311,7 @@ export const settingsTree = [
     key: "2",
     type: PageType.backup,
     link: "backup",
-    tKey: "Backup",
+    tKey: "Common:Backup",
     isHeader: true,
     children: [
       {
@@ -319,7 +319,7 @@ export const settingsTree = [
         key: "2-0",
         icon: "",
         link: "data-backup",
-        tKey: "Backup",
+        tKey: "Common:Backup",
         isCategory: true,
       },
       {
@@ -327,7 +327,7 @@ export const settingsTree = [
         key: "2-1",
         icon: "",
         link: "auto-backup",
-        tKey: "AutoBackup",
+        tKey: "Common:AutoBackup",
         isCategory: true,
       },
     ],
@@ -418,7 +418,7 @@ export const settingsTree = [
         key: "4-3",
         icon: "",
         link: "plugins",
-        tKey: "Plugins",
+        tKey: "Common:Plugins",
         isCategory: true,
       },
       {
@@ -625,7 +625,7 @@ export const settingsTree = [
         key: "10-1",
         icon: "",
         link: "payment-method",
-        tKey: "PaymentMethod",
+        tKey: "Common:PaymentMethod",
         isCategory: true,
       },
       {
@@ -633,7 +633,7 @@ export const settingsTree = [
         key: "10-2",
         icon: "",
         link: "wallet",
-        tKey: "Wallet",
+        tKey: "Common:Wallet",
         isCategory: true,
       },
       {

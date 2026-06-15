@@ -151,7 +151,7 @@ const Gallery = ({ gallerySelected, culture }: GalleryProps) => {
         data-testid="info_panel_gallery_description_header"
       >
         <Text fontWeight="600" fontSize="14px">
-          {t("DescriptionLabel")}
+          {t("Common:DescriptionLabel")}
         </Text>
       </div>
       <Text

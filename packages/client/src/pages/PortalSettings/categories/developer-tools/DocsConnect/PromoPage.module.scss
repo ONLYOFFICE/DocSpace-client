@@ -160,16 +160,42 @@
   width: 32px;
   height: 32px;
   border-radius: 6px;
+  background-color: color-mix(in srgb, var(--feature-color) 10%, transparent);
 }
 
 .featureIconInner {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--feature-color);
 
   svg path {
     fill: currentColor;
   }
+}
+
+.featureBlue {
+  --feature-color: #{$light-blue-main};
+}
+
+.featureCyan {
+  --feature-color: #{$main-blue-light};
+}
+
+.featureGreen {
+  --feature-color: #{$second-green};
+}
+
+.featureIndigo {
+  --feature-color: #4f6bed;
+}
+
+.featurePurple {
+  --feature-color: #{$purple};
+}
+
+.featureRed {
+  --feature-color: #{$main-red};
 }
 
 .cardDivider {

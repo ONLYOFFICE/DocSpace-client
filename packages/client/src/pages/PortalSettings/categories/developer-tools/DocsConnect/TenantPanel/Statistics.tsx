@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState, type CSSProperties } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -59,10 +59,27 @@ import type { TTranslation } from "@docspace/shared/types";
 
 import styles from "./TenantPanel.module.scss";
 
-// Usage / license progress bars are green (vs the default blue).
-const greenProgressStyle = {
-  "--progress-bar-percent-background": "var(--dev-tools-status-positive)",
-} as CSSProperties;
+// Capacity health bands based on the share of remaining capacity:
+// green by default, yellow when running low, red when nearly exhausted.
+const WARNING_REMAINING_RATIO = 0.25; // yellow at 25% or less remaining
+const LOW_REMAINING_RATIO = 0.1; // red at 10% or less remaining
+
+type UsageLevel = "positive" | "warning" | "negative";
+
+const usageLevelClass: Record<UsageLevel, string> = {
+  positive: styles.usagePositive,
+  warning: styles.usageWarning,
+  negative: styles.usageNegative,
+};
+
+const getUsageLevel = (usage: TDocsConnectUsage): UsageLevel => {
+  if (usage.limit <= 0) return "positive";
+
+  const remainingRatio = usage.remaining / usage.limit;
+  if (remainingRatio <= LOW_REMAINING_RATIO) return "negative";
+  if (remainingRatio <= WARNING_REMAINING_RATIO) return "warning";
+  return "positive";
+};
 
 interface StatisticsProps {
   info?: TDocsConnectInfo;
@@ -154,9 +171,10 @@ const UsageBlock = ({
   t: TTranslation;
 }) => {
   const percent = usage.limit > 0 ? (usage.active / usage.limit) * 100 : 0;
+  const level = getUsageLevel(usage);
 
   return (
-    <div className={styles.usageBlock}>
+    <div className={`${styles.usageBlock} ${usageLevelClass[level]}`}>
       <Text fontSize="16px" fontWeight={700}>
         {title}
       </Text>
@@ -165,9 +183,11 @@ const UsageBlock = ({
       </Text>
       <div className={styles.usageBarRow}>
         <Text fontSize="13px">{usageLabel}</Text>
-        <Text fontSize="13px">{`${usage.active} / ${usage.limit}`}</Text>
+        <Text fontSize="13px" fontWeight={600} className={styles.usageCount}>
+          {`${usage.active} / ${usage.limit}`}
+        </Text>
       </div>
-      <ProgressBar percent={percent} style={greenProgressStyle} />
+      <ProgressBar percent={percent} />
       <div className={styles.statRow}>
         <StatColumn value={usage.active} label={t("Common:Active")} />
         <StatColumn value={usage.internal} label={t("DocsConnect:Internal")} />
@@ -283,7 +303,6 @@ const Statistics = ({
             <div className={styles.licenseProgress}>
               <ProgressBar
                 percent={Math.max(0, ((30 - info.trial.daysLeft) / 30) * 100)}
-                style={greenProgressStyle}
               />
               <Text fontSize="12px" className={styles.muted}>
                 {t("DocsConnect:TrialDaysRemaining", {

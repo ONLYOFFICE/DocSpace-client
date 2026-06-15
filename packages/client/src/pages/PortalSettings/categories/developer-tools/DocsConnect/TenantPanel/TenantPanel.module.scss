@@ -229,6 +229,7 @@
   flex-direction: column;
   gap: 6px;
   margin-top: 9px;
+  --progress-bar-percent-background: var(--dev-tools-status-positive);
 }
 
 .usageBlock {
@@ -239,6 +240,27 @@
   border-radius: 12px;
   border: var(--dev-tools-card-border);
   background-color: var(--background-color);
+  --progress-bar-percent-background: var(--usage-color);
+}
+
+.usagePositive {
+  --usage-color: var(--dev-tools-status-positive);
+}
+
+.usageWarning {
+  --usage-color: var(--dev-tools-status-warning);
+}
+
+.usageNegative {
+  --usage-color: var(--dev-tools-status-negative);
+}
+
+.usageCount {
+  color: var(--usage-color);
+}
+
+.statValueHighlight {
+  color: var(--usage-color);
 }
 
 .usageBarRow {
@@ -261,10 +283,6 @@
   flex-direction: column;
   align-items: center;
   gap: 2px;
-}
-
-.statValueHighlight {
-  color: var(--dev-tools-status-positive);
 }
 
 .downloadReport {

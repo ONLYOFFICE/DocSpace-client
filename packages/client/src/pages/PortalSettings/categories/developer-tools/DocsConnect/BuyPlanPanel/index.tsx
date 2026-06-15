@@ -34,7 +34,7 @@
  */
 
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
@@ -44,6 +44,10 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import QuantityPicker from "@docspace/ui-kit/components/quantity-picker";
+
+import WalletSvg from "PUBLIC_DIR/images/icons/16/wallet.react.svg";
+import AutomationApiSvg from "PUBLIC_DIR/images/icons/16/docs-connect.automation-api.react.svg";
+import RebrandingSvg from "PUBLIC_DIR/images/icons/16/docs-connect.rebranding.react.svg";
 
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 
@@ -80,6 +84,11 @@ const BuyPlanPanel = ({
   const devPackPerUser = devPack ? plan.devPackPrice : 0;
   const totalMonthly = users * (plan.pricePerUser + devPackPerUser);
   const remainingCredits = wallet.availableCredits - totalMonthly;
+  const insufficientFunds = remainingCredits < 0;
+  // Top-up amounts are rounded up to the next whole dollar.
+  const topUpRequired = Math.ceil(totalMonthly - wallet.availableCredits);
+
+  const formatCurrency = (amount: number) => `${currency}${amount.toFixed(2)}`;
 
   const onBuy = () => {
     buyPlan?.({ users, devPack });
@@ -88,10 +97,10 @@ const BuyPlanPanel = ({
 
   const summaryRow = (label: string, value: string) => (
     <div className={styles.summaryRow}>
-      <Text fontSize="13px" className={styles.muted}>
+      <Text fontSize="14px" fontWeight={400} className={styles.summaryLabel}>
         {label}
       </Text>
-      <Text fontSize="13px" fontWeight={600}>
+      <Text fontSize="14px" fontWeight={600} className={styles.summaryValue}>
         {value}
       </Text>
     </div>
@@ -103,87 +112,123 @@ const BuyPlanPanel = ({
       displayType={ModalDialogType.aside}
       onClose={() => closeBuyPlan?.()}
       withBodyScroll
+      withFooterBorder
+      isDoubleFooterLine={insufficientFunds}
     >
       <ModalDialog.Header>{t("DocsConnect:DocsConnect")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.body}>
           <div className={styles.walletCard}>
-            <div className={styles.iconPlaceholder} aria-hidden />
+            <div className={styles.walletIcon} aria-hidden>
+              <WalletSvg />
+            </div>
             <div>
               <Text fontSize="14px" fontWeight={600}>
                 {t("Common:Wallet")}
               </Text>
-              <Text fontSize="13px" className={styles.muted}>
-                {t("Common:AvailableCredits")}{" "}
+              {insufficientFunds ? (
                 <Text
-                  as="span"
                   fontSize="13px"
-                  fontWeight={600}
-                  className={styles.accent}
+                  fontWeight={400}
+                  className={styles.errorText}
                 >
-                  {`${currency}${wallet.availableCredits.toFixed(2)}`}
+                  {t("DocsConnect:WalletInsufficient", {
+                    amount: formatCurrency(wallet.availableCredits),
+                  })}
                 </Text>
-              </Text>
+              ) : (
+                <Text fontSize="13px" className={styles.secondaryText}>
+                  {t("Common:AvailableCredits")}{" "}
+                  <Text
+                    as="span"
+                    fontSize="13px"
+                    fontWeight={600}
+                    className={styles.accent}
+                  >
+                    {formatCurrency(wallet.availableCredits)}
+                  </Text>
+                </Text>
+              )}
             </div>
           </div>
 
-          <Text fontSize="16px" fontWeight={600}>
+          <Text
+            fontSize="16px"
+            fontWeight={700}
+            className={styles.calculateTitle}
+          >
             {t("DocsConnect:CalculateYourPlan")}
           </Text>
 
-          <QuantityPicker
-            value={users}
-            minValue={MIN_USERS}
-            maxValue={MAX_USERS}
-            step={1}
-            showSlider
-            showPlusSign
-            title={t("DocsConnect:NumberOfUsers")}
-            subtitle={t("DocsConnect:PerUserPerMonth", {
-              price: `${currency}${plan.pricePerUser.toFixed(2)}`,
-            })}
-            onChange={setUsers}
-          />
+          <div className={styles.usersBlock}>
+            <Text fontSize="13px" className={styles.usersTitle}>
+              {t("DocsConnect:NumberOfUsers")}
+            </Text>
+            <QuantityPicker
+              className={styles.quantityPicker}
+              value={users}
+              minValue={MIN_USERS}
+              maxValue={MAX_USERS}
+              step={1}
+              showSlider
+              showPlusSign
+              underContorlsTitle={t("DocsConnect:PerUserPerMonth", {
+                price: formatCurrency(plan.pricePerUser),
+              })}
+              onChange={setUsers}
+            />
+          </div>
 
           <div className={styles.devPackCard}>
             <div className={styles.devPackHeader}>
               <div>
-                <Text fontSize="14px" fontWeight={600}>
+                <Text fontSize="13px" fontWeight={600}>
                   {t("DocsConnect:DevPack")}{" "}
-                  <Text as="span" fontSize="12px" className={styles.muted}>
+                  <Text
+                    as="span"
+                    fontSize="13px"
+                    fontWeight={400}
+                    className={styles.secondaryText}
+                  >
                     {t("DocsConnect:OptionalAddOn")}
                   </Text>
                 </Text>
-                <Text fontSize="13px" className={styles.muted}>
+                <Text fontSize="13px">
                   {t("DocsConnect:PerUserPerMonth", {
                     price: `${currency}${plan.devPackPrice}`,
                   })}
                 </Text>
               </div>
               <ToggleButton
+                className={styles.toggleButton}
                 isChecked={devPack}
                 onChange={() => setDevPack((prev) => !prev)}
               />
             </div>
+            <hr className={styles.devPackDivider} />
             <div className={styles.devPackFeatures}>
               <div className={styles.devPackFeature}>
-                <div className={styles.iconPlaceholderSmall} aria-hidden />
+                <div className={styles.devPackFeatureIcon} aria-hidden>
+                  <AutomationApiSvg />
+                </div>
                 <div>
-                  <Text fontSize="13px" fontWeight={600}>
+                  <Text fontSize="12px" fontWeight={600}>
                     {t("DocsConnect:AutomationApi")}
                   </Text>
-                  <Text fontSize="12px" className={styles.muted}>
+                  <Text fontSize="12px" className={styles.secondaryText}>
                     {t("DocsConnect:AutomationApiDescription")}
                   </Text>
                 </div>
               </div>
               <div className={styles.devPackFeature}>
-                <div className={styles.iconPlaceholderSmall} aria-hidden />
+                <div className={styles.devPackFeatureIcon} aria-hidden>
+                  <RebrandingSvg />
+                </div>
                 <div>
-                  <Text fontSize="13px" fontWeight={600}>
+                  <Text fontSize="12px" fontWeight={600}>
                     {t("DocsConnect:Rebranding")}
                   </Text>
-                  <Text fontSize="12px" className={styles.muted}>
+                  <Text fontSize="12px" className={styles.secondaryText}>
                     {t("DocsConnect:RebrandingDescription")}
                   </Text>
                 </div>
@@ -191,50 +236,98 @@ const BuyPlanPanel = ({
             </div>
           </div>
 
-          <Text fontSize="16px" fontWeight={600}>
+          <Text
+            fontSize="16px"
+            fontWeight={700}
+            className={styles.orderSummaryTitle}
+          >
             {t("Common:OrderSummary")}
           </Text>
           <div className={styles.summaryCard}>
             {summaryRow(t("DocsConnect:PlanUsers"), `${users}`)}
             {summaryRow(
               t("DocsConnect:BasePricePerUser"),
-              `${currency}${plan.pricePerUser.toFixed(2)}`,
+              formatCurrency(plan.pricePerUser),
             )}
             {summaryRow(
               t("DocsConnect:DevPackPerUser"),
-              `${currency}${(devPack ? plan.devPackPrice : 0).toFixed(2)}`,
+              formatCurrency(devPack ? plan.devPackPrice : 0),
             )}
             <hr className={styles.summaryDivider} />
             <div className={styles.summaryRow}>
-              <Text fontSize="14px" fontWeight={700}>
+              <Text
+                fontSize="14px"
+                fontWeight={600}
+                className={styles.summaryValue}
+              >
                 {t("DocsConnect:TotalMonthly")}
               </Text>
-              <Text fontSize="14px" fontWeight={700}>
-                {`${currency}${totalMonthly.toFixed(2)}`}
+              <Text
+                fontSize="14px"
+                fontWeight={600}
+                className={styles.summaryValue}
+              >
+                {formatCurrency(totalMonthly)}
               </Text>
             </div>
           </div>
-          <Text fontSize="12px" className={styles.muted} textAlign="right">
-            {t("DocsConnect:RemainingCreditsAfter", {
-              amount: `${currency}${remainingCredits.toFixed(2)}`,
-            })}
-          </Text>
+          {insufficientFunds ? (
+            <Text
+              fontSize="12px"
+              className={styles.errorText}
+              textAlign="right"
+            >
+              {t("Common:WalletTopUpRequired", {
+                currency: formatCurrency(topUpRequired),
+              })}
+            </Text>
+          ) : (
+            <Text
+              fontSize="12px"
+              className={styles.secondaryText}
+              textAlign="right"
+            >
+              {t("DocsConnect:RemainingCreditsAfter", {
+                amount: formatCurrency(remainingCredits),
+              })}
+            </Text>
+          )}
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
-        <Button
-          primary
-          scale
-          size={ButtonSize.normal}
-          label={t("DocsConnect:BuyAPlan")}
-          onClick={onBuy}
-        />
-        <Button
-          scale
-          size={ButtonSize.normal}
-          label={t("Common:CancelButton")}
-          onClick={() => closeBuyPlan?.()}
-        />
+        {insufficientFunds ? (
+          <Text
+            fontSize="13px"
+            fontWeight={400}
+            className={styles.footerHint}
+          >
+            <Trans
+              ns="DocsConnect"
+              i18nKey="TopUpHint"
+              values={{ amount: formatCurrency(topUpRequired) }}
+              components={{ 1: <Text as="span" fontWeight={600} /> }}
+            />
+          </Text>
+        ) : null}
+        <div className={styles.footerButtons}>
+          <Button
+            primary
+            scale
+            size={ButtonSize.normal}
+            label={
+              insufficientFunds
+                ? t("DocsConnect:TopUpAndBuy")
+                : t("DocsConnect:BuyAPlan")
+            }
+            onClick={onBuy}
+          />
+          <Button
+            scale
+            size={ButtonSize.normal}
+            label={t("Common:CancelButton")}
+            onClick={() => closeBuyPlan?.()}
+          />
+        </div>
       </ModalDialog.Footer>
     </ModalDialog>
   );

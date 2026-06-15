@@ -56,7 +56,6 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Link, LinkType, LinkTarget } from "@docspace/ui-kit/components/link";
-import { globalColors } from "@docspace/ui-kit/providers";
 
 import { getBrandName } from "@docspace/shared/constants/brands";
 
@@ -66,13 +65,13 @@ const API_DOCS_URL = "https://api.onlyoffice.com/";
 
 const FeatureIcon = ({
   Icon,
-  color,
+  colorClass,
 }: {
   Icon: React.FC<React.SVGProps<SVGSVGElement>>;
-  color: string;
+  colorClass: string;
 }) => (
-  <div className={styles.featureIcon} style={{ backgroundColor: `${color}1a` }}>
-    <span className={styles.featureIconInner} style={{ color }}>
+  <div className={`${styles.featureIcon} ${colorClass}`}>
+    <span className={styles.featureIconInner}>
       <Icon />
     </span>
   </div>
@@ -95,19 +94,19 @@ const PromoPage = ({ startTrial }: PromoPageProps) => {
       title: t("DocsConnect:FeatureEditorsTitle"),
       description: t("DocsConnect:FeatureEditorsDescription"),
       Icon: EditorsSvg,
-      color: globalColors.lightBlueMain,
+      colorClass: styles.featureBlue,
     },
     {
       title: t("DocsConnect:FeatureCompatibilityTitle"),
       description: t("DocsConnect:FeatureCompatibilityDescription"),
       Icon: MsOfficeSvg,
-      color: globalColors.mainBlueLight,
+      colorClass: styles.featureCyan,
     },
     {
       title: t("DocsConnect:FeatureCollaborationTitle"),
       description: t("DocsConnect:FeatureCollaborationDescription"),
       Icon: CollaborationSvg,
-      color: globalColors.secondGreen,
+      colorClass: styles.featureGreen,
     },
     {
       title: t("DocsConnect:FeatureIntegrationTitle"),
@@ -115,19 +114,19 @@ const PromoPage = ({ startTrial }: PromoPageProps) => {
         editorsName,
       }),
       Icon: EmbedSvg,
-      color: globalColors.indigoBlue,
+      colorClass: styles.featureIndigo,
     },
     {
       title: t("DocsConnect:FeatureExtensibleTitle"),
       description: t("DocsConnect:FeatureExtensibleDescription"),
       Icon: PluginSvg,
-      color: globalColors.purple,
+      colorClass: styles.featurePurple,
     },
     {
       title: t("DocsConnect:FeatureSecureTitle"),
       description: t("DocsConnect:FeatureSecureDescription"),
       Icon: OAuthSvg,
-      color: globalColors.mainRed,
+      colorClass: styles.featureRed,
     },
   ];
 
@@ -159,19 +158,19 @@ const PromoPage = ({ startTrial }: PromoPageProps) => {
       title: t("DocsConnect:WhyCloudTitle"),
       description: t("DocsConnect:WhyCloudDescription"),
       Icon: CloudSvg,
-      color: globalColors.lightBlueMain,
+      colorClass: styles.featureBlue,
     },
     {
       title: t("DocsConnect:WhyKeysTitle"),
       description: t("DocsConnect:WhyKeysDescription"),
       Icon: KeySvg,
-      color: globalColors.indigoBlue,
+      colorClass: styles.featureIndigo,
     },
     {
       title: t("DocsConnect:WhyPanelTitle"),
       description: t("DocsConnect:WhyPanelDescription"),
       Icon: OAuthSvg,
-      color: globalColors.secondGreen,
+      colorClass: styles.featureGreen,
     },
   ];
 
@@ -216,9 +215,9 @@ const PromoPage = ({ startTrial }: PromoPageProps) => {
           {t("DocsConnect:EverythingSubtitle")}
         </Text>
         <div className={styles.grid3}>
-          {features.map(({ title, description, Icon, color }) => (
+          {features.map(({ title, description, Icon, colorClass }) => (
             <div key={title} className={styles.featureCard}>
-              <FeatureIcon Icon={Icon} color={color} />
+              <FeatureIcon Icon={Icon} colorClass={colorClass} />
               <Text fontSize="14px" fontWeight={600}>
                 {title}
               </Text>
@@ -315,9 +314,9 @@ const PromoPage = ({ startTrial }: PromoPageProps) => {
           {t("DocsConnect:WhySubtitle", { productName: docsName })}
         </Text>
         <div className={styles.grid3}>
-          {why.map(({ title, description, Icon, color }) => (
+          {why.map(({ title, description, Icon, colorClass }) => (
             <div key={title} className={styles.featureCard}>
-              <FeatureIcon Icon={Icon} color={color} />
+              <FeatureIcon Icon={Icon} colorClass={colorClass} />
               <Text fontSize="14px" fontWeight={600}>
                 {title}
               </Text>

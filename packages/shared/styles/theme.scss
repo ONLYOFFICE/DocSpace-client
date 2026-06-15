@@ -2889,13 +2889,25 @@
 .light {
   --dev-tools-card-border: 1px solid #{$light-gray-selected};
   --dev-tools-card-divider: #{$gray-light-mid};
+  --dev-tools-card-bg: #{$gray-light};
+  --dev-tools-border-color: #{$light-gray-selected};
+  --dev-tools-text-secondary: #{$gray};
+  --dev-tools-icon-color: #{$light-gray-dark};
   --dev-tools-status-positive: #{$light-status-positive};
+  --dev-tools-status-warning: #{$light-status-warning};
+  --dev-tools-status-negative: #{$light-error-status};
 }
 
 .dark {
   --dev-tools-card-border: 1px solid #{$gray-dark-strong};
   --dev-tools-card-divider: #{$gray-dark-strong};
+  --dev-tools-card-bg: #{$gray-dark-mid};
+  --dev-tools-border-color: #{$gray-dark-strong};
+  --dev-tools-text-secondary: #{$gray-dark};
+  --dev-tools-icon-color: #{$dark-gray-dark};
   --dev-tools-status-positive: #{$dark-status-positive};
+  --dev-tools-status-warning: #{$dark-status-warning};
+  --dev-tools-status-negative: #{$dark-error-status};
 }
 
 .light {

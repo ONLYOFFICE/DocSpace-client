@@ -1598,9 +1598,9 @@ class FilesActionStore {
     return enableCustomFilter(item.id, !item.customFilterEnabled)
       .then((res) => {
         if (res.customFilterEnabled) {
-          toastr.success(t("CustomFilterEnabled"));
+          toastr.success(t("Common:CustomFilterEnabled"));
         } else {
-          toastr.success(t("CustomFilterDisabled"));
+          toastr.success(t("Common:CustomFilterDisabled"));
         }
       })
       .catch((err) => {
@@ -1833,11 +1833,11 @@ class FilesActionStore {
 
       if (isAIAgent) {
         translationForOneItem = isPin
-          ? t("AIAgentPinned", { aiAgent: t("Common:AIAgent") })
-          : t("AIAgentUnpinned", { aiAgent: t("Common:AIAgent") });
+          ? t("Common:AIAgentPinned", { aiAgent: t("Common:AIAgent") })
+          : t("Common:AIAgentUnpinned", { aiAgent: t("Common:AIAgent") });
         translationForSeverals = isPin
-          ? t("AIAgentsPinned", { aiAgents: t("Common:AIAgents") })
-          : t("AIAgentsUnpinned", { aiAgents: t("Common:AIAgents") });
+          ? t("Common:AIAgentsPinned", { aiAgents: t("Common:AIAgents") })
+          : t("Common:AIAgentsUnpinned", { aiAgents: t("Common:AIAgents") });
       } else {
         translationForOneItem = isPin
           ? t("Common:RoomPinned")
@@ -1875,7 +1875,7 @@ class FilesActionStore {
       if (isError) {
         isAIAgent
           ? toastr.error(
-              t("AIAgentPinLimitMessage", { aiAgents: t("Common:AIAgents") }),
+              t("Common:AIAgentPinLimitMessage", { aiAgents: t("Common:AIAgents") }),
             )
           : toastr.error(t("Common:RoomsPinLimitMessage"));
       }

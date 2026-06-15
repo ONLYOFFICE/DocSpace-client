@@ -159,7 +159,7 @@ const BasicBlock = ({
                   t,
                   serverFieldErrors?.["name"] ?? "ErrorName",
                 )
-              : t("ThisRequiredField")
+              : t("Common:ThisRequiredField")
           }
           onChange={onChange}
           isRequired
@@ -170,7 +170,7 @@ const BasicBlock = ({
         <InputGroup
           label={t("WebsiteUrl")}
           name="website_url"
-          placeholder={t("EnterURL")}
+          placeholder={t("Common:EnterURL")}
           value={websiteUrlValue}
           error={
             isWebsiteError
@@ -178,7 +178,7 @@ const BasicBlock = ({
                   t,
                   serverFieldErrors?.["website_url"] ?? "ErrorWrongURL",
                 )
-              : t("ThisRequiredField")
+              : t("Common:ThisRequiredField")
           }
           onChange={onChange}
           disabled={isEdit}
@@ -190,7 +190,7 @@ const BasicBlock = ({
         <FieldContainer
           isVertical
           labelVisible={false}
-          errorMessage={t("ThisRequiredField")}
+          errorMessage={t("Common:ThisRequiredField")}
           hasError={isLogoRequiredError}
           className="icon-field"
           dataTestId="app_icon_field"
@@ -198,7 +198,7 @@ const BasicBlock = ({
           <SelectGroup
             label={t("AppIcon")}
             value={logoValue}
-            selectLabel={t("SelectNewImage")}
+            selectLabel={t("Common:SelectNewImage")}
             description={t("IconDescription")}
             onSelect={onSelect}
             dataTestId="select_new_image_container"
@@ -208,7 +208,7 @@ const BasicBlock = ({
         <TextAreaGroup
           label={t("Common:DescriptionLabel")}
           name="description"
-          placeholder={t("EnterDescription")}
+          placeholder={t("Common:EnterDescription")}
           value={descriptionValue}
           onChange={onChange}
           increaseHeight={isLogoRequiredError}
@@ -217,7 +217,7 @@ const BasicBlock = ({
         <InputGroup
           label={t("AuthenticationMethod")}
           name="auth_method"
-          placeholder={t("EnterURL")}
+          placeholder={t("Common:EnterURL")}
           value={websiteUrlValue}
           error=""
           onChange={() => {}}

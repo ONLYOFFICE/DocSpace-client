@@ -164,7 +164,7 @@ const NoAccessContainer = (props: Props) => {
                 icon: <AIAgentsIcon />,
                 onClick: onGoTo,
                 key: "empty-view-goto-agents",
-                description: t("GoToSection", {
+                description: t("Common:GoToSection", {
                   sectionName: t("Common:AIAgents"),
                 }),
               },

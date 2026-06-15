@@ -108,7 +108,7 @@ const ClientBlock = ({
           onChange={onChange}
           withCopy
           isPassword
-          buttonLabel={t("Reset")}
+          buttonLabel={t("Common:Reset")}
           onButtonClick={onResetClick}
           onCopyClick={() => onCopyClick("secret")}
           dataTestId="secret_input_group"

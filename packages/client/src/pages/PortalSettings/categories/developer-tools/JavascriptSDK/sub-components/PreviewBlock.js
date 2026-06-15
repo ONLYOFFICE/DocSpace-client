@@ -92,7 +92,7 @@ export const PreviewBlock = ({
     },
     {
       id: "code",
-      name: t("Code"),
+      name: t("Common:Code"),
       content: code,
       iconName: CodeReactSvgUrl,
     },

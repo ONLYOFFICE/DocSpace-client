@@ -90,7 +90,7 @@ const SupportBlock = ({
         <InputGroup
           label={t("PrivacyPolicyURL")}
           name="policy_url"
-          placeholder={t("EnterURL")}
+          placeholder={t("Common:EnterURL")}
           value={policyUrlValue}
           error={
             policyError
@@ -98,7 +98,7 @@ const SupportBlock = ({
                   t,
                   serverFieldErrors?.["policy_url"] ?? "ErrorWrongURL",
                 )
-              : t("ThisRequiredField")
+              : t("Common:ThisRequiredField")
           }
           onChange={onChange}
           helpButtonText={t("PrivacyPolicyURLHelpButton")}
@@ -111,7 +111,7 @@ const SupportBlock = ({
         <InputGroup
           label={t("TermsOfServiceURL")}
           name="terms_url"
-          placeholder={t("EnterURL")}
+          placeholder={t("Common:EnterURL")}
           value={termsUrlValue}
           error={
             termsError
@@ -119,7 +119,7 @@ const SupportBlock = ({
                   t,
                   serverFieldErrors?.["terms_url"] ?? "ErrorWrongURL",
                 )
-              : t("ThisRequiredField")
+              : t("Common:ThisRequiredField")
           }
           onChange={onChange}
           helpButtonText={t("TermsOfServiceURLHelpButton")}

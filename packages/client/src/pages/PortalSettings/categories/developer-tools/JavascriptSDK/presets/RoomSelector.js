@@ -302,7 +302,7 @@ const RoomSelector = (props) => {
           </ControlsSection>
 
           <ControlsSection>
-            <Label className="label">{t("InterfaceElements")}</Label>
+            <Label className="label">{t("Common:InterfaceElements")}</Label>
             <Checkbox
               className="checkbox"
               label={t("Common:Search")}

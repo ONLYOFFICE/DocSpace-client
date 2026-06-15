@@ -2697,7 +2697,7 @@ class ContextOptionsStore {
       {
         id: "option_open-location",
         key: "open-location",
-        label: t("OpenLocation"),
+        label: t("Common:OpenLocation"),
         icon: FolderLocationReactSvgUrl,
         onClick: () => this.onOpenLocation(item),
         disabled: !!item.requestToken,
@@ -2810,7 +2810,7 @@ class ContextOptionsStore {
       {
         id: "option_leave-room",
         key: "leave-room",
-        label: isAIAgent ? t("LeaveTheAgent") : t("Common:LeaveTheRoom"),
+        label: isAIAgent ? t("Common:LeaveTheAgent") : t("Common:LeaveTheRoom"),
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
         disabled: isKnowledgeOrResult

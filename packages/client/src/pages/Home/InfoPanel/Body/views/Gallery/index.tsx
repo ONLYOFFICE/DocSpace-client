@@ -169,7 +169,7 @@ const Gallery = ({ gallerySelected, culture }: GalleryProps) => {
         data-testid="info_panel_gallery_properties_header"
       >
         <Text fontWeight="600" fontSize="14px">
-          {t("Properties")}
+          {t("Common:Properties")}
         </Text>
       </div>
       <div

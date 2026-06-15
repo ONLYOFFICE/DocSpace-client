@@ -50,6 +50,8 @@ import type { TThemeProvider } from "@docspace/ui-kit/providers/theme";
 import { ApiProvider } from "@docspace/ui-kit/providers/api";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
+import { getAuthToken } from "@docspace/shared/api/client";
 
 import ErrorProvider from "./ErrorProvider";
 
@@ -90,7 +92,9 @@ const Providers = ({ children, contextData }: TProviders) => {
   } = contextData;
 
   const apiUrl = getApiUrl();
-  const apiKey = getCookie("asc_auth_key") || "";
+  const apiKey = isOAuthFrame()
+    ? (getAuthToken() ?? "")
+    : getCookie("asc_auth_key") || "";
 
   return (
     <ApiProvider url={apiUrl} apiKey={apiKey} initSocket={false}>

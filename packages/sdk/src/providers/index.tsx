@@ -56,6 +56,14 @@ import type { TThemeProvider } from "@docspace/ui-kit/providers/theme";
 import { ApiProvider } from "@docspace/ui-kit/providers/api";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import {
+  isOAuthFrame,
+  requestAuthToken,
+} from "@docspace/shared/utils/oauthToken";
+import {
+  setAuthToken,
+  setWithCredentialsStatus,
+} from "@docspace/shared/api/client";
 import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
 
 import {
@@ -142,8 +150,37 @@ const Providers = ({ children, contextData }: TProviders) => {
     document.body.classList.add(themeClass);
   }, []);
 
+  const oauthActive = typeof window !== "undefined" && isOAuthFrame();
+
+  const [oauthToken, setOauthToken] = React.useState<string | null>(
+    oauthActive ? null : "",
+  );
+
+  React.useEffect(() => {
+    if (!oauthActive) return undefined;
+
+    let cancelled = false;
+    setWithCredentialsStatus(false);
+
+    requestAuthToken().then((token) => {
+      if (cancelled) return;
+      if (token) setAuthToken(token);
+      setOauthToken(token ?? "");
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [oauthActive]);
+
   const apiUrl = getApiUrl();
-  const apiKey = getCookie("asc_auth_key") || contextData.authToken || "";
+  const apiKey = oauthActive
+    ? (oauthToken ?? "")
+    : getCookie("asc_auth_key") || contextData.authToken || "";
+
+  if (oauthActive && oauthToken === null) {
+    return null;
+  }
 
   return (
     <ApiProvider url={apiUrl} apiKey={apiKey} initSocket={false}>

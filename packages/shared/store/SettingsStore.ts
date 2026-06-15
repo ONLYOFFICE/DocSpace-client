@@ -36,6 +36,7 @@
 import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
 
+import { connectFrameSocket } from "../utils/oauthFrameSocket";
 import SocketHelper, {
   SocketCommands,
   SocketCommandsRoomParts,
@@ -1471,7 +1472,7 @@ class SettingsStore {
     const socketUrl =
       isPublicRoom() && !this.publicRoomKey ? "" : this.socketUrl;
 
-    SocketHelper?.connect(socketUrl, this.publicRoomKey);
+    void connectFrameSocket(socketUrl, this.publicRoomKey);
   };
 
   setPublicRoomKey = (key: string) => {
@@ -1479,7 +1480,7 @@ class SettingsStore {
 
     const socketUrl = isPublicRoom() && !key ? "" : this.socketUrl;
 
-    SocketHelper?.connect(socketUrl, key);
+    void connectFrameSocket(socketUrl, key);
   };
 
   getBuildVersionInfo = async () => {

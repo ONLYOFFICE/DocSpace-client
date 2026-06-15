@@ -44,6 +44,8 @@ import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
 import { combineUrl } from "./combineUrl";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { isOAuthFrame, requestAuthToken } from "./oauthToken";
+import { frameCallEvent } from "./common";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix, timeout: apiTimeout } = apiConf;
@@ -90,6 +92,8 @@ class AxiosClient {
   client: AxiosInstance | null = null;
 
   authToken: string | null = null;
+
+  private oauthReady: Promise<void> | null = null;
 
   constructor() {
     if (typeof window !== "undefined") this.initCSR();
@@ -145,6 +149,17 @@ class AxiosClient {
         const urlParams = new URLSearchParams(window.location.search);
         const publicRoomKey = urlParams.get("key") || urlParams.get("share");
 
+        if (isOAuthFrame()) {
+          config.withCredentials = false;
+          return this.ensureOAuthToken().then(() => {
+            if (this.authToken) {
+              config.headers = config.headers || {};
+              config.headers["Authorization"] = `Bearer ${this.authToken}`;
+            }
+            return config;
+          });
+        }
+
         if (publicRoomKey) {
           config.headers = config.headers || {};
           config.headers["Request-Token"] = publicRoomKey;
@@ -193,6 +208,21 @@ class AxiosClient {
 
   setAuthToken = (token: string | null) => {
     this.authToken = token;
+  };
+
+  private ensureOAuthToken = (): Promise<void> => {
+    if (this.authToken) return Promise.resolve();
+    if (this.oauthReady !== null) return this.oauthReady;
+
+    this.oauthReady = requestAuthToken()
+      .then((token) => {
+        if (token) this.authToken = token;
+      })
+      .finally(() => {
+        this.oauthReady = null;
+      });
+
+    return this.oauthReady;
   };
 
   setWithCredentialsStatus = (state: boolean) => {
@@ -294,6 +324,36 @@ class AxiosClient {
             if (options.skipUnauthorized) return Promise.resolve();
 
             if (options.skipLogout) return Promise.reject(error);
+
+            if (isOAuthFrame()) {
+              const opts = options as TReqOption &
+                AxiosRequestConfig & { _oauthRetried?: boolean };
+
+              const signalAuthError = (): Promise<void> => {
+                frameCallEvent({
+                  event: "onAuthError",
+                  data: { message: "unauthorized" },
+                });
+                return Promise.reject(error);
+              };
+
+              if (opts._oauthRetried) return signalAuthError();
+
+              opts._oauthRetried = true;
+              this.authToken = null;
+              this.oauthReady = null;
+
+              return this.ensureOAuthToken().then(() => {
+                if (this.authToken)
+                  return this.request<T>(
+                    opts,
+                    skipRedirect,
+                    isOAuth,
+                  ) as unknown as Promise<void>;
+
+                return signalAuthError();
+              });
+            }
 
             console.log("debug is SDK frame", window?.ClientConfig?.isFrame);
 

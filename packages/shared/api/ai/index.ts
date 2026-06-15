@@ -36,6 +36,7 @@
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { checkFilterInstance } from "../../utils/common";
+import { isOAuthFrame } from "../../utils/oauthToken";
 
 import { request, getAuthToken } from "../client";
 import type { TFile } from "../files/types";
@@ -187,6 +188,11 @@ export const getProviderAvailabilityStatus = async (
 
 const getAuthHeaders = (): Record<string, string> => {
   if (typeof window === "undefined") return {};
+
+  if (isOAuthFrame()) {
+    const oauthToken = getAuthToken();
+    return oauthToken ? { Authorization: `Bearer ${oauthToken}` } : {};
+  }
 
   const cookie = getCookie("asc_auth_key");
   if (cookie) return { Authorization: cookie };

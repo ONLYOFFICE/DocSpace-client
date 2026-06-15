@@ -82,6 +82,7 @@ class DialogsStore {
   coversLoaded = false;
 
   editingRoomData: TEditableRoom | null = null;
+  createRoomInitialTitle: string | null = null;
   archivingRoomData: TRoomTarget | null = null;
   deletingRoomData: TRoomTarget | null = null;
   invitingRoomData: TInviteTarget | null = null;
@@ -101,6 +102,16 @@ class DialogsStore {
 
   isDialogOpen = (name: SDKDialogs) => {
     return this.dialogs.get(name) || false;
+  };
+
+  openCreateRoomDialog = (initialTitle?: string) => {
+    this.createRoomInitialTitle = initialTitle ?? null;
+    this.openDialog(SDKDialogs.CreateRoom);
+  };
+
+  closeCreateRoomDialog = () => {
+    this.closeDialog(SDKDialogs.CreateRoom);
+    this.createRoomInitialTitle = null;
   };
 
   openEditRoomDialog = (room: TEditableRoom) => {

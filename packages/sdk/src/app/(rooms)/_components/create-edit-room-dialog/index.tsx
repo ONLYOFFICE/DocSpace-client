@@ -92,10 +92,12 @@ export type CreateEditRoomDialogProps = {
   onClose: () => void;
   room?: TEditableRoom;
   onRoomEdited?: (roomId: number) => void;
-  onRoomCreated?: (roomId: number) => void;
+  onRoomCreated?: (roomId: number, roomTitle: string) => void;
   isPrivate?: boolean;
   hasEncryptionKeys?: boolean;
   onRequestCreateKeys?: () => void;
+  /** Pre-fill the room name when creating from a folder (My Documents context menu). */
+  initialTitle?: string;
 };
 
 const CreateEditRoomDialog = ({
@@ -107,6 +109,7 @@ const CreateEditRoomDialog = ({
   isPrivate = false,
   hasEncryptionKeys = true,
   onRequestCreateKeys,
+  initialTitle,
 }: CreateEditRoomDialogProps) => {
   const { t } = useTranslation(["Common", "Files"]);
   const refreshRooms = React.useContext(RoomsRefreshContext);
@@ -114,7 +117,7 @@ const CreateEditRoomDialog = ({
 
   const isEdit = !!room;
 
-  const [name, setName] = React.useState(room?.title ?? "");
+  const [name, setName] = React.useState(room?.title ?? initialTitle ?? "");
   const [tags, setTags] = React.useState<string[]>(room?.tags ?? []);
   const [tagInputValue, setTagInputValue] = React.useState("");
   const [cropperImage, setCropperImage] = React.useState<TImage>({
@@ -383,7 +386,7 @@ const CreateEditRoomDialog = ({
         }
 
         if (onRoomCreated && newRoom?.id != null) {
-          onRoomCreated(newRoom.id);
+          onRoomCreated(newRoom.id, trimmedName);
         } else {
           refreshRooms?.();
         }

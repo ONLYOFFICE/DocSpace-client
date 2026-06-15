@@ -57,6 +57,7 @@ import useHeaderMenu from "../../_hooks/useHeaderMenu";
 import { DeleteContext } from "../../_contexts/DeleteContext";
 import { FileOperationsContext } from "../../_contexts/FileOperationsContext";
 import { RoomActionsContext } from "@/app/(rooms)/_contexts/RoomActionsContext";
+import { CreateRoomContext } from "../../_contexts/CreateRoomContext";
 import { useHeaderContextMenu } from "../../_hooks/useHeaderContextMenu";
 import useContextMenuModel from "../../_hooks/useContextMenuModel";
 import LeaveRoomDialog from "@/app/(rooms)/_components/leave-room-dialog";
@@ -94,12 +95,14 @@ const Header = ({
   const deleteCtx = React.useContext(DeleteContext);
   const fileOpsCtx = React.useContext(FileOperationsContext);
   const roomActionsCtx = React.useContext(RoomActionsContext);
+  const onCreateRoom = React.useContext(CreateRoomContext);
   const isTrashSection = filesListStore.rootFolderType === FolderType.TRASH;
 
   const { getContextOptionsFolder, isRoom, changeOwner, user } =
     useHeaderContextMenu(filesListStore.currentFolder ?? current);
 
   const { getHeaderContextMenuModel } = useContextMenuModel({
+    onCreateRoom: onCreateRoom ?? undefined,
     onDeleteClick: deleteCtx?.deleteItem,
     onDeleteSelectedClick:
       roomActionsCtx?.deleteSelected ?? deleteCtx?.deleteItems,

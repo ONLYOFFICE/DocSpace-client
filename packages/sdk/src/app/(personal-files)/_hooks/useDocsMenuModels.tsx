@@ -52,6 +52,7 @@ import ActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentati
 import FormBlankReactSvgUrl from "PUBLIC_DIR/images/form.blank.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
+import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
 
 import type { CreateFileDialogType } from "../_components/create-file-dialog";
 
@@ -59,12 +60,16 @@ type MenuActions = {
   openCreateDialog: (type: CreateFileDialogType) => void;
   onUploadFiles: () => void;
   onUploadFolder: () => void;
+  onCreateRoom?: () => void;
+  isRoomsEnabled?: boolean;
 };
 
 export function useDocsMenuModels({
   openCreateDialog,
   onUploadFiles,
   onUploadFolder,
+  onCreateRoom,
+  isRoomsEnabled = false,
 }: MenuActions) {
   const { t } = useTranslation(["Common"]);
 
@@ -105,6 +110,17 @@ export function useDocsMenuModels({
         icon: CatalogFolderReactSvgUrl,
         onClick: () => openCreateDialog("folder"),
       },
+      ...(isRoomsEnabled
+        ? [
+            {
+              id: "actions_create-room",
+              key: "create-room",
+              label: t("Common:CreateRoom"),
+              icon: CatalogRoomsReactSvgUrl,
+              onClick: () => onCreateRoom?.(),
+            },
+          ]
+        : []),
       {
         key: "separator-1",
         isSeparator: true,
@@ -124,7 +140,14 @@ export function useDocsMenuModels({
         onClick: onUploadFolder,
       },
     ],
-    [t, openCreateDialog, onUploadFiles, onUploadFolder],
+    [
+      t,
+      openCreateDialog,
+      onUploadFiles,
+      onUploadFolder,
+      onCreateRoom,
+      isRoomsEnabled,
+    ],
   );
 
   const actionOptions = React.useMemo<ActionOption[]>(
@@ -234,3 +257,4 @@ export function useDocsMenuModels({
     privateQuickActionItems,
   };
 }
+

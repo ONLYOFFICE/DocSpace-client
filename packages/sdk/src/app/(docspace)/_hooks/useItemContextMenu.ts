@@ -224,6 +224,9 @@ export default function useItemContextMenu({
         model.add(AVAILABLE_CONTEXT_ITEMS.vectorization);
       }
 
+      if (isDocsSection && file.security?.CreateRoomFrom)
+        model.add(AVAILABLE_CONTEXT_ITEMS.createRoom);
+
       if (file.security.Delete) model.add(AVAILABLE_CONTEXT_ITEMS.delete);
 
       return Array.from(model);
@@ -305,6 +308,9 @@ export default function useItemContextMenu({
       if (folder.security.Move) items.push(AVAILABLE_CONTEXT_ITEMS.moveTo);
 
       items.push(AVAILABLE_CONTEXT_ITEMS.showInfo);
+
+      if (isDocsSection && (folder as TFolder).security?.CreateRoomFrom)
+        items.push(AVAILABLE_CONTEXT_ITEMS.createRoom);
 
       if (folder.security.Delete) items.push(AVAILABLE_CONTEXT_ITEMS.delete);
 

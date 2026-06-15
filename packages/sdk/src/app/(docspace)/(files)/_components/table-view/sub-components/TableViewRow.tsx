@@ -71,6 +71,7 @@ import { RenameContext } from "../../../../_contexts/RenameContext";
 import { VersionHistoryContext } from "../../../../_contexts/VersionHistoryContext";
 import { ConvertContext } from "../../../../_contexts/ConvertContext";
 import { AskAIContext } from "../../../../_contexts/AskAIContext";
+import { CreateRoomContext } from "../../../../_contexts/CreateRoomContext";
 import type { TFileItem, TFolderItem } from "../../../../_hooks/useItemList";
 import { useDecryptedFilename } from "@/app/(docspace)/_hooks/useDecryptedFilename";
 import { generateFilesItemValue } from "../../../_utils";
@@ -125,6 +126,7 @@ const TableViewRow = observer(
     const onShowVersionHistory = React.useContext(VersionHistoryContext);
     const onConvert = React.useContext(ConvertContext);
     const onAskAI = React.useContext(AskAIContext);
+    const onCreateRoom = React.useContext(CreateRoomContext);
 
     const { getContextMenuModel } = useContextMenuModel({
       item: observableItem,
@@ -138,6 +140,7 @@ const TableViewRow = observer(
       onRenameClick: renameCtx?.renameItem,
       onShowVersionHistoryClick: onShowVersionHistory ?? undefined,
       onAskAI: onAskAI ?? undefined,
+      onCreateRoom: onCreateRoom ?? undefined,
     });
 
     const dragCtx = React.useContext(DragContext);

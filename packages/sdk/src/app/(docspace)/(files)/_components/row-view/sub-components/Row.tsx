@@ -71,6 +71,7 @@ import { RenameContext } from "../../../../_contexts/RenameContext";
 import { VersionHistoryContext } from "../../../../_contexts/VersionHistoryContext";
 import { ConvertContext } from "../../../../_contexts/ConvertContext";
 import { AskAIContext } from "../../../../_contexts/AskAIContext";
+import { CreateRoomContext } from "../../../../_contexts/CreateRoomContext";
 import type { TFileItem, TFolderItem } from "../../../../_hooks/useItemList";
 import { generateFilesItemValue } from "../../../_utils";
 import { DragContext } from "../../../../_contexts/DragContext";
@@ -126,6 +127,7 @@ const Row = observer(
     const onShowVersionHistory = React.useContext(VersionHistoryContext);
     const onConvert = React.useContext(ConvertContext);
     const onAskAI = React.useContext(AskAIContext);
+    const onCreateRoom = React.useContext(CreateRoomContext);
 
     const { getContextMenuModel } = useContextMenuModel({
       item: observableItem,
@@ -139,6 +141,7 @@ const Row = observer(
       onRenameClick: renameCtx?.renameItem,
       onShowVersionHistoryClick: onShowVersionHistory ?? undefined,
       onAskAI: onAskAI ?? undefined,
+      onCreateRoom: onCreateRoom ?? undefined,
     });
 
     const element = (

@@ -86,6 +86,7 @@ import { RenameContext } from "@/app/(docspace)/_contexts/RenameContext";
 import { VersionHistoryContext } from "@/app/(docspace)/_contexts/VersionHistoryContext";
 import { ConvertContext } from "@/app/(docspace)/_contexts/ConvertContext";
 import { AskAIContext } from "@/app/(docspace)/_contexts/AskAIContext";
+import { CreateRoomContext } from "@/app/(docspace)/_contexts/CreateRoomContext";
 import type {
   TFileItem,
   TFolderItem,
@@ -94,6 +95,7 @@ import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import RoomDialogs from "@/app/(rooms)/_components/room-dialogs";
 import useRoomActions from "@/app/(rooms)/_hooks/useRoomActions";
+import CreateEditRoomDialog from "@/app/(rooms)/_components/create-edit-room-dialog";
 import {
   InfoPanelBody as DocsInfoPanelBody,
   InfoPanelHeader as DocsInfoPanelHeader,
@@ -107,6 +109,9 @@ import {
 import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
+import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
+import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
+import { getApps } from "@docspace/shared/api/apps";
 
 import ConvertDialog from "../convert-dialog";
 import CreateFileDialog from "../create-file-dialog";
@@ -116,6 +121,7 @@ import { useVersionHistoryStore } from "../../_store/VersionHistoryStore";
 
 import useDocsActions from "../../_hooks/useDocsActions";
 import { useDocsMenuModels } from "../../_hooks/useDocsMenuModels";
+import useCreateRoomWithCopy from "../../_hooks/useCreateRoomWithCopy";
 import useTrashActions from "../../_hooks/useTrashActions";
 import useFileOperations from "../../_hooks/useFileOperations";
 import useRenameActions from "../../_hooks/useRenameActions";
@@ -280,6 +286,46 @@ const DocsLayoutCore = observer(
     const isAiChatPanelVisible = ai?.isChatPanelVisible ?? false;
     const isAiChatPanelFullscreen = ai?.isChatPanelFullscreen ?? false;
 
+    const dialogsStore = useDialogsStore();
+    const { snapshotSelection, copyItemsToRoom, copyProgress: roomCopyProgress } =
+      useCreateRoomWithCopy();
+
+    // Rooms module availability: same check as rooms-layout (user role) +
+    // lazy getApps() fetch mirroring useFileOperations selector pattern.
+    const canCreateRooms = !!(
+      docsUserStore.user?.isAdmin ||
+      docsUserStore.user?.isOwner ||
+      docsUserStore.user?.isRoomAdmin
+    );
+    const [aiRoomsEnabled, setAiRoomsEnabled] = React.useState(false);
+
+    React.useEffect(() => {
+      if (!isMyDocuments || !canCreateRooms) return;
+      getApps()
+        .then((apps) => {
+          setAiRoomsEnabled(
+            Array.isArray(apps) &&
+              apps.some((a) => a.id === "ai-rooms" && a.enabled),
+          );
+        })
+        .catch(() => {});
+    }, [isMyDocuments, canCreateRooms]);
+
+    const isRoomsEnabled = isMyDocuments && canCreateRooms && aiRoomsEnabled;
+
+    const onCreateRoom = React.useCallback(
+      (item: TFileItem | TFolderItem) => {
+        snapshotSelection();
+        dialogsStore.openCreateRoomDialog(item.title);
+      },
+      [dialogsStore, snapshotSelection],
+    );
+
+    const onCreateRoomFromButton = React.useCallback(() => {
+      snapshotSelection();
+      dialogsStore.openCreateRoomDialog();
+    }, [dialogsStore, snapshotSelection]);
+
     const {
       desktopModel: defaultDesktopModel,
       quickActionItems: defaultQuickActionItems,
@@ -288,6 +334,8 @@ const DocsLayoutCore = observer(
       openCreateDialog,
       onUploadFiles,
       onUploadFolder,
+      onCreateRoom: isRoomsEnabled ? onCreateRoomFromButton : undefined,
+      isRoomsEnabled,
     });
 
     const desktopModel = React.useMemo(() => {
@@ -565,7 +613,10 @@ const DocsLayoutCore = observer(
                         value={versionHistoryHandler}
                       >
                         <ConvertContext.Provider value={requestConvert}>
-                          <AskAIContext.Provider value={ai?.onAskAI ?? null}>
+                          <CreateRoomContext.Provider
+                            value={isRoomsEnabled ? onCreateRoom : null}
+                          >
+                            <AskAIContext.Provider value={ai?.onAskAI ?? null}>
                             <div
                               className={classNames(styles.root, {
                                 [styles.infoPanelVisible]:
@@ -927,8 +978,30 @@ const DocsLayoutCore = observer(
                                 onConfirm={confirmConvert}
                               />
                               <DragTooltip />
+                              {isRoomsEnabled && (
+                                <CreateEditRoomDialog
+                                  visible={dialogsStore.isDialogOpen(
+                                    SDKDialogs.CreateRoom,
+                                  )}
+                                  onClose={dialogsStore.closeCreateRoomDialog}
+                                  initialTitle={
+                                    dialogsStore.createRoomInitialTitle ??
+                                    undefined
+                                  }
+                                  onRoomCreated={copyItemsToRoom}
+                                />
+                              )}
+                              {roomCopyProgress && (
+                                <FloatingButton
+                                  icon={roomCopyProgress.icon}
+                                  percent={roomCopyProgress.percent}
+                                  completed={roomCopyProgress.completed}
+                                  alert={roomCopyProgress.alert}
+                                />
+                              )}
                             </div>
-                          </AskAIContext.Provider>
+                            </AskAIContext.Provider>
+                          </CreateRoomContext.Provider>
                         </ConvertContext.Provider>
                       </VersionHistoryContext.Provider>
                     </FileOperationsContext.Provider>

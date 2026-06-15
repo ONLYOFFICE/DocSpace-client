@@ -76,6 +76,7 @@ import { RenameContext } from "@/app/(docspace)/_contexts/RenameContext";
 import { VersionHistoryContext } from "@/app/(docspace)/_contexts/VersionHistoryContext";
 import { ConvertContext } from "@/app/(docspace)/_contexts/ConvertContext";
 import { AskAIContext } from "@/app/(docspace)/_contexts/AskAIContext";
+import { CreateRoomContext } from "@/app/(docspace)/_contexts/CreateRoomContext";
 
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import type { TileProps } from "../TileView.types";
@@ -134,6 +135,7 @@ const Tile = ({
   const onShowVersionHistory = React.useContext(VersionHistoryContext);
   const onConvert = React.useContext(ConvertContext);
   const onAskAI = React.useContext(AskAIContext);
+  const onCreateRoom = React.useContext(CreateRoomContext);
   const { getContextMenuModel } = useContextMenuModel({
     item: observableItem,
     onShareClick: onShareClick ?? undefined,
@@ -146,6 +148,7 @@ const Tile = ({
     onRenameClick: renameCtx?.renameItem,
     onShowVersionHistoryClick: onShowVersionHistory ?? undefined,
     onAskAI: onAskAI ?? undefined,
+    onCreateRoom: onCreateRoom ?? undefined,
   });
   const { downloadAction } = useDownloadActions();
   const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });

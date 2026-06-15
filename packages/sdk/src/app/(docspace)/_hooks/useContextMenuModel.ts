@@ -36,6 +36,7 @@ import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.s
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import AISvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
 import DotsHorizontalReactSvgUrl from "PUBLIC_DIR/images/icons/16/dots-horizontal.react.svg?url";
+import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
 
 import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
 import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
@@ -96,6 +97,12 @@ type UseContextMenuModelProps = {
    */
   onDownloadEncryptedClick?: (item: TFileItem | TFolderItem) => void;
   /**
+   * Handler for "Create room" — opens the create-room dialog seeded with the
+   * item's title. Shown for files and folders when the rooms module is enabled
+   * and security.CreateRoomFrom is true.
+   */
+  onCreateRoom?: (item: TFileItem | TFolderItem) => void;
+  /**
    * Switches `getHeaderContextMenuModel` to the rooms branch (pin/unpin,
    * archive, delete-room) instead of the generic file actions. Set by
    * `RoomsLayout` for the active-rooms section.
@@ -124,6 +131,7 @@ export default function useContextMenuModel({
   onRetryVectorization,
   onAskAI,
   onDownloadEncryptedClick,
+  onCreateRoom,
   isRoomsFolder,
   isArchiveRoomsFolder,
   onArchiveSelectedClick,
@@ -262,6 +270,20 @@ export default function useContextMenuModel({
       disabled: false,
     };
   }, [downloadAsAction, t]);
+
+  const getCreateRoomItem = useCallback(
+    (i: TFileItem | TFolderItem) => {
+      return {
+        id: "option_create-room",
+        key: "create-room",
+        label: t("Common:CreateRoom"),
+        icon: CatalogRoomsReactSvgUrl,
+        onClick: () => onCreateRoom?.(i),
+        disabled: !onCreateRoom,
+      };
+    },
+    [t, onCreateRoom],
+  );
 
   // "Download without decryption": downloads the raw encrypted ciphertext.
   // For files: navigates to item.viewUrl with UrlActionType.Download (no
@@ -702,10 +724,19 @@ export default function useContextMenuModel({
   const getGroupContextMenuModel = useCallback(() => {
     const items = [];
 
+    const canCreateRoom = filesSelectionStore.selection.some(
+      (k) => k.security?.CreateRoomFrom,
+    );
+    if (onCreateRoom && canCreateRoom) {
+      items.push(getCreateRoomItem(filesSelectionStore.selection[0]));
+    }
+
     items.push(getDownloadItem());
 
     if (
-      filesSelectionStore.selection.some((i) => "fileExst" in i && i.fileExst) &&
+      filesSelectionStore.selection.some(
+        (i) => "fileExst" in i && i.fileExst,
+      ) &&
       !filesSelectionStore.selection.some(
         (i) => (i as TFileItem).encrypted === true,
       )
@@ -738,6 +769,8 @@ export default function useContextMenuModel({
     getGroupMoveItem,
     getGroupRestoreItem,
     getGroupDeleteItem,
+    getCreateRoomItem,
+    onCreateRoom,
     onCopySelectedClick,
     onMoveSelectedClick,
     onRestoreSelectedClick,
@@ -804,6 +837,7 @@ export default function useContextMenuModel({
     getMarkAsFavoriteItem,
     getRemoveFromFavoritesItem,
     getRemoveFromRecentItem,
+    getCreateRoomItem,
     filesSelectionStore.selection,
   ]);
 
@@ -827,6 +861,7 @@ export default function useContextMenuModel({
       const openGroup: ContextMenuModel[] = [];
       const aiGroup: ContextMenuModel[] = [];
       const actionGroup: ContextMenuModel[] = [];
+      const createRoomGroup: ContextMenuModel[] = [];
       const favoritesGroup: ContextMenuModel[] = [];
       const deleteGroup: ContextMenuModel[] = [];
 
@@ -871,14 +906,22 @@ export default function useContextMenuModel({
       const hasCopyLink = contextOptions.includes(
         AVAILABLE_CONTEXT_ITEMS.copyLink,
       );
+      const hasCreateRoom = contextOptions.includes(
+        AVAILABLE_CONTEXT_ITEMS.createRoom,
+      );
 
       if (hasShare && hasCopyLink) {
+        const shareItems: ContextMenuModel[] = [
+          getShareItem(item!),
+          getLinkForRoomMembersItem(item!),
+        ];
+        if (hasCreateRoom) shareItems.push(getCreateRoomItem(item!));
         actionGroup.push({
           id: "option_share",
           key: "share",
           label: t("Common:Share"),
           icon: ShareReactSvgUrl,
-          items: [getShareItem(item!), getLinkForRoomMembersItem(item!)],
+          items: shareItems,
         });
       } else {
         if (hasShare) actionGroup.push(getShareItem(item!));
@@ -1000,6 +1043,10 @@ export default function useContextMenuModel({
       )
         deleteGroup.push(getRemoveFromSharedWithMeItem(item!));
 
+      // If already nested inside the Share submenu, don't repeat it here.
+      if (hasCreateRoom && !(hasShare && hasCopyLink))
+        createRoomGroup.push(getCreateRoomItem(item!));
+
       if (
         contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.delete) ||
         contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.deletePermanently)
@@ -1010,6 +1057,7 @@ export default function useContextMenuModel({
         openGroup,
         aiGroup,
         actionGroup,
+        createRoomGroup,
         favoritesGroup,
         restoreGroup,
         deleteGroup,
@@ -1060,6 +1108,7 @@ export default function useContextMenuModel({
       getVectorizationItem,
       getAIFeaturesItem,
       onAskAI,
+      getCreateRoomItem,
       getHeaderContextMenuModel,
       getGroupContextMenuModel,
 

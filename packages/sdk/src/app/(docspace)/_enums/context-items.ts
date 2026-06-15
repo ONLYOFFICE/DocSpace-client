@@ -30,4 +30,5 @@ export enum AVAILABLE_CONTEXT_ITEMS {
   restore = "restore",
   rename = "rename",
   vectorization = "vectorization",
+  createRoom = "create-room",
 }

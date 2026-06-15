@@ -20,6 +20,18 @@
   min-height: 0;
 }
 
+// Drop the section's side padding for the chat only. The chat tab's
+// `.section-wrapper` is the one with a direct `.theme-portal-dark` child
+// (withBodyScroll off); file tabs keep the wrapper under
+// `.section-wrapper-content`, so they're not matched and keep their padding.
+// Studio mode otherwise leaves `padding-inline: 20px 7px` on the wrapper.
+// `!important` is required: the studio padding comes from
+// `.common:not(.withScroll).isStudio .section-wrapper` (specificity 0,4,0),
+// which outweighs this `:has` selector otherwise.
+:global(.section-wrapper):has(> :global(.theme-portal-dark)) {
+  padding-inline: 0 !important;
+}
+
 .aiAgentChat {
   display: flex;
   flex-direction: column;

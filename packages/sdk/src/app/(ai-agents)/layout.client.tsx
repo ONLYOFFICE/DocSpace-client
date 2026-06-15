@@ -174,7 +174,12 @@ const SectionShell = observer(
             if (!visible) infoPanel.hide();
           }}
           canDisplay={isInfoVisible}
-          withBodyScroll
+          // The chat owns its own scroll viewport, so the section-level
+          // Scrollbar (wrapped by SectionContainer when withBodyScroll is on)
+          // must be off on the chat tab — otherwise the chat lives inside an
+          // auto-height scroll body and sizes to its content instead of the
+          // section height. File tabs keep it on for their list scroll.
+          withBodyScroll={!isAgentChat}
           uploadFiles={false}
           settingsStudio={isAgentChat}
           // Section's `fullHeightBody` turns section-wrapper /

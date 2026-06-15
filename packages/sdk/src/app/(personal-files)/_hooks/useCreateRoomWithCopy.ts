@@ -113,7 +113,7 @@ export default function useCreateRoomWithCopy() {
       // contents (content: true); mixed/file selections copy the items directly.
       const oneFolder = items.length === 1 && items[0].isFolder;
 
-      let itemsToCopy = items;
+      const itemsToCopy = items;
 
       if (oneFolder) {
         // Peek inside to get the actual count (for toast); bail if empty.

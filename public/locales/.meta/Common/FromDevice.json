@@ -3,7 +3,7 @@
   "content": "From device",
   "content_en_sha1_hash": "f831ef2d6cdd62d96cf8dc302c9a04f09962e594",
   "created_at": "2025-05-19T21:30:45.577Z",
-  "updated_at": "2026-06-11T14:18:13.697Z",
+  "updated_at": "2026-06-15T19:31:55.927Z",
   "comment": {
     "text": "This is a button label that allows users to upload files from their local device.",
     "is_auto": true,
@@ -13,15 +13,21 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 343,
+      "line_number": 327,
       "context": "const uploadFormDevice = {\n id: \"actions_upload-from-device\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:FromDevice\"),\n key: \"actions_upload-from-device\",\n onClick: onUploadPDFFilesClick,\n disabled: false,\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3685,
+      "line_number": 3723,
       "context": "},\n {\n id: \"personal_upload-from-device\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:FromDevice\"),\n key: \"personal_upload-from-device\",\n onClick: () => this.onUploadAction(\"pdf\"),\n },\n ],\n };",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-navigation/index.tsx",
+      "line_number": 207,
+      "context": "onClick: onUploadFromDocSpace,\n },\n {\n id: \"knowledge-upload-from-device\",\n key: \"knowledge-upload-from-device\",\n label: t(\"Common:FromDevice\", { defaultValue: \"From device\" }),\n icon: ActionsUploadReactSvgUrl,\n onClick: onUploadFromDevice,\n },\n ],\n [t, onUploadFromDocSpace, onUploadFromDevice],",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

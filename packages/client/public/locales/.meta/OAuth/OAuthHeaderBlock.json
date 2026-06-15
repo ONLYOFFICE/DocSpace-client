@@ -3,7 +3,7 @@
   "content": "OAuth URLs",
   "content_en_sha1_hash": "10052a758cb15640d31b764178fe5d223c38a090",
   "created_at": "2025-05-19T21:30:53.961Z",
-  "updated_at": "2026-05-15T15:37:40.262Z",
+  "updated_at": "2026-06-15T19:31:56.106Z",
   "comment": {
     "text": "This is a section header in the OAuth client settings. It labels the group of input fields where OAuth URLs are configured.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/OAuthBlock.tsx",
       "line_number": 73,
-      "context": "requiredErrorFields,\n isEdit,\n }: OAuthBlockProps) => {\n return (\n <div className={styles.styledBlock}>\n <BlockHeader header={t(\"OAuthHeaderBlock\")} />\n <div className={styles.styledInputBlock}>\n <MultiInputGroup\n t={t}\n label={t(\"RedirectsURLS\")}\n placeholder={t(\"EnterURL\")}",
+      "context": "requiredErrorFields,\n isEdit,\n }: OAuthBlockProps) => {\n return (\n <div className={styles.styledBlock}>\n <BlockHeader header={t(\"OAuthHeaderBlock\")} />\n <div className={styles.styledInputBlock}>\n <MultiInputGroup\n t={t}\n label={t(\"RedirectsURLS\")}\n placeholder={t(\"Common:EnterURL\")}",
       "module": "/packages/client"
     }
   ],

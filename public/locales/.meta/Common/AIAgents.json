@@ -3,7 +3,7 @@
   "content": "AI agents",
   "content_en_sha1_hash": "2b51b10f658502a5ad4e50a7005f9bddf67f44c0",
   "created_at": "2025-09-26T15:20:53.940Z",
-  "updated_at": "2026-06-09T09:43:10.791Z",
+  "updated_at": "2026-06-15T19:31:55.937Z",
   "comment": {
     "text": "This is a label for a feature or service related to artificial intelligence. It appears in billing panels and selectors.",
     "is_auto": true,
@@ -110,7 +110,7 @@
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/NoAgentItem.tsx",
       "line_number": 69,
-      "context": "src={imageSrc}\n alt={t(\"NoAgent\", { aiAgent: t(\"Common:AIAgent\") })}\n />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">\n {t(\"AIAgentsEmptyScreenTent\", { aiAgents: t(\"Common:AIAgents\") })}\n </Text>\n </div>\n );\n };",
+      "context": "src={imageSrc}\n alt={t(\"Common:NoAgent\", { aiAgent: t(\"Common:AIAgent\") })}\n />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">\n {t(\"Common:AIAgentsEmptyScreenTent\", { aiAgents: t(\"Common:AIAgents\") })}\n </Text>\n </div>\n );\n };",
       "module": "/packages/client"
     },
     {
@@ -182,19 +182,19 @@
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
       "line_number": 1839,
-      "context": "if (isAIAgent) {\n translationForOneItem = isPin\n ? t(\"AIAgentPinned\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"AIAgentUnpinned\", { aiAgent: t(\"Common:AIAgent\") });\n translationForSeverals = isPin\n ? t(\"AIAgentsPinned\", { aiAgents: t(\"Common:AIAgents\") })\n : t(\"AIAgentsUnpinned\", { aiAgents: t(\"Common:AIAgents\") });\n } else {\n translationForOneItem = isPin\n ? t(\"Common:RoomPinned\")\n : t(\"Common:RoomUnpinned\");",
+      "context": "if (isAIAgent) {\n translationForOneItem = isPin\n ? t(\"Common:AIAgentPinned\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"Common:AIAgentUnpinned\", { aiAgent: t(\"Common:AIAgent\") });\n translationForSeverals = isPin\n ? t(\"Common:AIAgentsPinned\", { aiAgents: t(\"Common:AIAgents\") })\n : t(\"Common:AIAgentsUnpinned\", { aiAgents: t(\"Common:AIAgents\") });\n } else {\n translationForOneItem = isPin\n ? t(\"Common:RoomPinned\")\n : t(\"Common:RoomUnpinned\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
       "line_number": 1839,
-      "context": "if (isAIAgent) {\n translationForOneItem = isPin\n ? t(\"AIAgentPinned\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"AIAgentUnpinned\", { aiAgent: t(\"Common:AIAgent\") });\n translationForSeverals = isPin\n ? t(\"AIAgentsPinned\", { aiAgents: t(\"Common:AIAgents\") })\n : t(\"AIAgentsUnpinned\", { aiAgents: t(\"Common:AIAgents\") });\n } else {\n translationForOneItem = isPin\n ? t(\"Common:RoomPinned\")\n : t(\"Common:RoomUnpinned\");",
+      "context": "if (isAIAgent) {\n translationForOneItem = isPin\n ? t(\"Common:AIAgentPinned\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"Common:AIAgentUnpinned\", { aiAgent: t(\"Common:AIAgent\") });\n translationForSeverals = isPin\n ? t(\"Common:AIAgentsPinned\", { aiAgents: t(\"Common:AIAgents\") })\n : t(\"Common:AIAgentsUnpinned\", { aiAgents: t(\"Common:AIAgents\") });\n } else {\n translationForOneItem = isPin\n ? t(\"Common:RoomPinned\")\n : t(\"Common:RoomUnpinned\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
       "line_number": 1839,
-      "context": "if (isAIAgent) {\n translationForOneItem = isPin\n ? t(\"AIAgentPinned\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"AIAgentUnpinned\", { aiAgent: t(\"Common:AIAgent\") });\n translationForSeverals = isPin\n ? t(\"AIAgentsPinned\", { aiAgents: t(\"Common:AIAgents\") })\n : t(\"AIAgentsUnpinned\", { aiAgents: t(\"Common:AIAgents\") });\n } else {\n translationForOneItem = isPin\n ? t(\"Common:RoomPinned\")\n : t(\"Common:RoomUnpinned\");",
+      "context": "if (isAIAgent) {\n translationForOneItem = isPin\n ? t(\"Common:AIAgentPinned\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"Common:AIAgentUnpinned\", { aiAgent: t(\"Common:AIAgent\") });\n translationForSeverals = isPin\n ? t(\"Common:AIAgentsPinned\", { aiAgents: t(\"Common:AIAgents\") })\n : t(\"Common:AIAgentsUnpinned\", { aiAgents: t(\"Common:AIAgents\") });\n } else {\n translationForOneItem = isPin\n ? t(\"Common:RoomPinned\")\n : t(\"Common:RoomUnpinned\");",
       "module": "/packages/client"
     },
     {

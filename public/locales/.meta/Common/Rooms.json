@@ -3,7 +3,7 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:48.236Z",
-  "updated_at": "2026-06-09T09:43:10.792Z",
+  "updated_at": "2026-06-15T19:31:55.938Z",
   "comment": {
     "text": "This is a label for a section or category within the file selector, representing a collection of collaborative workspaces.",
     "is_auto": true,
@@ -73,19 +73,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 883,
+      "line_number": 886,
       "context": "});\n }\n \n if (filter.location) {\n const locationLabels = {\n [FilterLocation.Rooms]: t(\"Common:Rooms\"),\n [FilterLocation.Documents]: t(\"Common:Documents\"),\n [FilterLocation.Link]: t(\"Common:AccessibleViaLink\"),\n };\n \n filterValues.push({",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 883,
+      "line_number": 886,
       "context": "});\n }\n \n if (filter.location) {\n const locationLabels = {\n [FilterLocation.Rooms]: t(\"Common:Rooms\"),\n [FilterLocation.Documents]: t(\"Common:Documents\"),\n [FilterLocation.Link]: t(\"Common:AccessibleViaLink\"),\n };\n \n filterValues.push({",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 883,
+      "line_number": 886,
       "context": "});\n }\n \n if (filter.location) {\n const locationLabels = {\n [FilterLocation.Rooms]: t(\"Common:Rooms\"),\n [FilterLocation.Documents]: t(\"Common:Documents\"),\n [FilterLocation.Link]: t(\"Common:AccessibleViaLink\"),\n };\n \n filterValues.push({",
       "module": "/packages/client"
     },

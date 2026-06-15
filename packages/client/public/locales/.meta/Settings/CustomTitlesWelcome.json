@@ -3,7 +3,7 @@
   "content": "Welcome Page Settings",
   "content_en_sha1_hash": "087c1337487e8e7c3390215fdbb3d1c85858045c",
   "created_at": "2025-05-19T21:30:51.034Z",
-  "updated_at": "2026-06-03T09:30:05.063Z",
+  "updated_at": "2026-06-15T19:31:56.071Z",
   "comment": {
     "text": "This is a page title and a navigation item label. It refers to the settings section where administrators can customize the welcome page of ONLYOFFICE DocSpace.",
     "is_auto": true,
@@ -32,7 +32,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
       "line_number": 208,
-      "context": "return t(\"Customization\");\n case \"SettingsGeneral\":\n return t(\"SettingsGeneral\");\n case \"StudioTimeLanguageSettings\":\n return t(\"StudioTimeLanguageSettings\");\n case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: getBrandName(\"ProductName\") });",
+      "context": "return t(\"Customization\");\n case \"SettingsGeneral\":\n return t(\"Common:SettingsGeneral\");\n case \"StudioTimeLanguageSettings\":\n return t(\"StudioTimeLanguageSettings\");\n case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: getBrandName(\"ProductName\") });",
       "module": "/packages/client"
     },
     {

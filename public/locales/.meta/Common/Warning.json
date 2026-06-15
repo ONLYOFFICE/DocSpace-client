@@ -3,7 +3,7 @@
   "content": "Warning",
   "content_en_sha1_hash": "e9c45563358e813f157ba81b33143542165ba84e",
   "created_at": "2025-05-19T21:30:49.575Z",
-  "updated_at": "2026-05-28T15:46:18.471Z",
+  "updated_at": "2026-06-15T19:31:55.923Z",
   "comment": {
     "text": "This is a dialog title or a warning text displayed within a dialog. It alerts the user to an important issue, such as a deactivated storage tariff or unavailable service management.",
     "is_auto": true,
@@ -130,6 +130,12 @@
       "line_number": 127,
       "context": "</ModalDialog.Header>\n <ModalDialog.Body>\n {isWizardCompleted ? (\n <>\n <Text className=\"warning-text\" fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:Warning\")}!\n </Text>\n <Trans\n i18nKey=\"DeleteSetupPortalText\"\n ns=\"Management\"\n values={{",
       "module": "/packages/management"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/quota-warning-dialog/index.tsx",
+      "line_number": 208,
+      "context": "visible={visible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {isGracePeriod ? gracePeriodContent : roomsLimitContent}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",

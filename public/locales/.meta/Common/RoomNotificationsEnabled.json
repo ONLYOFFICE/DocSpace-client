@@ -3,7 +3,7 @@
   "content": "Room notifications enabled",
   "content_en_sha1_hash": "adb84d67ce76ed3d465ff82c4794d196b48c9f28",
   "created_at": "2025-05-19T21:30:56.105Z",
-  "updated_at": "2026-06-09T09:43:10.940Z",
+  "updated_at": "2026-06-15T19:31:56.153Z",
   "comment": {
     "text": "This is a toast message indicating that notifications for the current room have been successfully enabled.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 130,
+      "line_number": 142,
       "context": "const handleMute = async () => {\n try {\n await api.settings.muteRoomNotification(room.id, !room.mute);\n toastr.success(\n room.mute\n ? t(\"Common:RoomNotificationsEnabled\")\n : t(\"Common:RoomNotificationsDisabled\"),\n );\n onRoomChanged?.(room.id);\n } catch (e) {\n toastr.error(e as Error);",
       "module": "/packages/sdk"
     }

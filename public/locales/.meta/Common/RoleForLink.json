@@ -3,7 +3,7 @@
   "content": "Role for link",
   "content_en_sha1_hash": "69c2c795dae8fa5a3e6f70b13ed8b5690d284d62",
   "created_at": "2025-08-26T11:15:03.689Z",
-  "updated_at": "2026-05-15T15:37:40.211Z",
+  "updated_at": "2026-06-15T19:31:56.022Z",
   "comment": {
     "text": "This is a label for a dropdown menu or selection field that allows users to choose a role or permission level for a shared link. It appears in panels related to link settings or editing.",
     "is_auto": true,
@@ -16,6 +16,12 @@
       "line_number": 182,
       "context": "<Text\n fontSize=\"16px\"\n fontWeight={700}\n className={styles.linkSettingsText}\n >\n {t(\"Common:RoleForLink\")}\n </Text>\n <LinkRolesDropdown\n currentAccess={currentAccess}\n accesses={filteredAccesses}\n linkSelectedAccess={linkSelectedAccess}",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/link-settings-panel/index.tsx",
+      "line_number": 175,
+      "context": "<Text\n fontSize=\"16px\"\n fontWeight={700}\n className={styles.linkSettingsText}\n >\n {t(\"Common:RoleForLink\")}\n </Text>\n <LinkRolesDropdown\n currentAccess={currentAccess}\n accesses={filteredAccesses}\n linkSelectedAccess={linkSelectedAccess}",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/RoleLinkBlock/RoleLinkBlock.tsx",

@@ -3,7 +3,7 @@
   "content": "Installation cancelled",
   "content_en_sha1_hash": "2bbde2bd34ba14dcd0e4a5a3e8cb5909eadd2235",
   "created_at": "2026-05-19T19:03:13.849Z",
-  "updated_at": "2026-05-24T17:27:49.116Z",
+  "updated_at": "2026-06-15T19:31:56.037Z",
   "comment": {
     "text": "Informational toast message that appears when a module installation process is cancelled.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallModuleDialog.tsx",
-      "line_number": 120,
+      "line_number": 126,
       "context": "try {\n await onCleanup();\n } catch (err) {\n console.error(\"Module cleanup after cancel failed\", err);\n }\n toastr.info(t(\"Common:DashboardInstallCancelled\"));\n onClose();\n }, [onClose, onCleanup, t]);\n \n React.useEffect(() => {\n if (!visible) {",
       "module": "/packages/client"
     }

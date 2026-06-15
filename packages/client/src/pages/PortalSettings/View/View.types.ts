@@ -46,7 +46,6 @@ export type TView =
   | "bonus"
   | "services"
   | "ai-settings"
-  | "new-ai-settings"
   | "ai-services"
   | "backup-service"
   | "disk-storage"
@@ -80,9 +79,4 @@ export type ViewProps = {
   currentTariffStatusStore: TStore["currentTariffStatusStore"];
   defaultTemplatesStore: TStore["defaultTemplatesStore"];
   clearAbortControllerArr: TStore["settingsStore"]["clearAbortControllerArr"];
-  fetchAIProviders: TStore["aiSettingsStore"]["fetchAIProviders"];
-  fetchMCPServers: TStore["aiSettingsStore"]["fetchMCPServers"];
-  fetchWebSearch: TStore["aiSettingsStore"]["fetchWebSearch"];
-  fetchKnowledge: TStore["aiSettingsStore"]["fetchKnowledge"];
-  initDefaultProvider: TStore["aiSettingsStore"]["initDefaultProvider"];
 };

@@ -248,7 +248,7 @@ export const useOptions = (
   }, []);
 
   const onGoToAIProviderSettings = useCallback(() => {
-    return navigate("/portal-settings/ai-settings/providers");
+    return navigate("/portal-settings/ai-settings/ai-models");
   }, []);
 
   const onGoToPersonal = useCallback((): LinkProps => {

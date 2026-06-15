@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { useState, type CSSProperties } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -42,9 +43,13 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
+import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
+import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
+import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
+import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg";
 
 import type {
   TDocsConnectInfo,
@@ -53,6 +58,11 @@ import type {
 import type { TTranslation } from "@docspace/shared/types";
 
 import styles from "./TenantPanel.module.scss";
+
+// Usage / license progress bars are green (vs the default blue).
+const greenProgressStyle = {
+  "--progress-bar-percent-background": "var(--dev-tools-status-positive)",
+} as CSSProperties;
 
 interface StatisticsProps {
   info?: TDocsConnectInfo;
@@ -63,38 +73,65 @@ interface StatisticsProps {
 const InfoField = ({
   label,
   value,
-  displayValue,
+  isSecret,
   onCopy,
   copyTitle,
 }: {
   label: string;
   value: string;
-  displayValue?: string;
+  isSecret?: boolean;
   onCopy: (value: string) => void;
   copyTitle: string;
-}) => (
-  <div className={styles.infoCard}>
-    <Text fontSize="13px" fontWeight={600} className={styles.muted}>
-      {label}
-    </Text>
-    <div className={styles.infoValueRow}>
-      <Text fontSize="13px" truncate>
-        {displayValue ?? value}
-      </Text>
-      <IconButton
-        iconName={CopyReactSvgUrl}
-        size={16}
-        onClick={() => onCopy(value)}
-        title={copyTitle}
-        className={styles.copyIcon}
-      />
-    </div>
-  </div>
-);
+}) => {
+  const [revealed, setRevealed] = useState(false);
+  const displayValue = isSecret && !revealed ? "•".repeat(24) : value;
 
-const StatColumn = ({ value, label }: { value: number; label: string }) => (
+  return (
+    <div className={styles.infoCard}>
+      <div className={styles.infoLabelRow}>
+        <Text fontSize="16px" fontWeight={700}>
+          {label}
+        </Text>
+        {isSecret ? (
+          <IconButton
+            iconName={revealed ? EyeReactSvgUrl : EyeOffReactSvgUrl}
+            size={16}
+            onClick={() => setRevealed((prev) => !prev)}
+            className={styles.eyeIcon}
+          />
+        ) : null}
+      </div>
+      <div className={styles.infoValueRow}>
+        <Text fontSize="14px" fontWeight={600} truncate>
+          {displayValue}
+        </Text>
+        <IconButton
+          iconName={CopyReactSvgUrl}
+          size={16}
+          onClick={() => onCopy(value)}
+          title={copyTitle}
+          className={styles.copyIcon}
+        />
+      </div>
+    </div>
+  );
+};
+
+const StatColumn = ({
+  value,
+  label,
+  highlight,
+}: {
+  value: number;
+  label: string;
+  highlight?: boolean;
+}) => (
   <div className={styles.statColumn}>
-    <Text fontSize="18px" fontWeight={700}>
+    <Text
+      fontSize="18px"
+      fontWeight={700}
+      className={highlight ? styles.statValueHighlight : undefined}
+    >
       {value}
     </Text>
     <Text fontSize="12px" className={styles.muted}>
@@ -120,7 +157,7 @@ const UsageBlock = ({
 
   return (
     <div className={styles.usageBlock}>
-      <Text fontSize="16px" fontWeight={600}>
+      <Text fontSize="16px" fontWeight={700}>
         {title}
       </Text>
       <Text fontSize="12px" className={styles.muted}>
@@ -130,7 +167,7 @@ const UsageBlock = ({
         <Text fontSize="13px">{usageLabel}</Text>
         <Text fontSize="13px">{`${usage.active} / ${usage.limit}`}</Text>
       </div>
-      <ProgressBar percent={percent} />
+      <ProgressBar percent={percent} style={greenProgressStyle} />
       <div className={styles.statRow}>
         <StatColumn value={usage.active} label={t("Common:Active")} />
         <StatColumn value={usage.internal} label={t("DocsConnect:Internal")} />
@@ -138,6 +175,7 @@ const UsageBlock = ({
         <StatColumn
           value={usage.remaining}
           label={t("DocsConnect:Remaining")}
+          highlight
         />
       </div>
     </div>
@@ -155,6 +193,10 @@ const Statistics = ({
 
   const isTrial = info.status === "trial";
   const { wallet } = info;
+
+  // Integration block is shown in every state for now.
+  // Real condition (once backend defines it): info.status === "paid".
+  const showIntegrations = true;
 
   const onCopy = (value: string) => copyToClipboard?.(value, t);
 
@@ -174,9 +216,13 @@ const Statistics = ({
             <Text fontSize="12px" className={styles.muted}>
               {t("DocsConnect:TrialBannerDescription")}
             </Text>
+            <Text fontSize="12px" className={styles.muted}>
+              {t("DocsConnect:TrialBannerDescriptionSecond")}
+            </Text>
           </div>
           <Button
             primary
+            className={styles.bannerButton}
             size={ButtonSize.small}
             label={t("DocsConnect:BuyAPlan")}
             onClick={() => openBuyPlan?.("trial")}
@@ -184,7 +230,12 @@ const Statistics = ({
         </div>
       ) : null}
 
-      <Heading level={HeadingLevel.h2} className={styles.sectionTitle}>
+      <Heading
+        level={HeadingLevel.h2}
+        className={styles.sectionTitle}
+        fontSize="18px"
+        fontWeight={700}
+      >
         {t("DocsConnect:SystemOverview")}
       </Heading>
       <div className={styles.overviewGrid}>
@@ -203,7 +254,7 @@ const Statistics = ({
         <InfoField
           label={t("DocsConnect:SecretKeyLabel")}
           value={info.secretKey}
-          displayValue={"•".repeat(24)}
+          isSecret
           onCopy={onCopy}
           copyTitle={t("Common:CopyToClipboard")}
         />
@@ -212,32 +263,39 @@ const Statistics = ({
       <div className={styles.twoCards}>
         {isTrial ? (
           <div className={styles.detailCard}>
-            <Text fontSize="16px" fontWeight={600}>
+            <Text
+              className={styles.detailCardTitle}
+              fontSize="16px"
+              fontWeight={700}
+            >
               {t("DocsConnect:LicenseTitle")}
             </Text>
-            <div className={styles.detailRow}>
-              <Text className={styles.muted}>{t("Common:Start")}</Text>
-              <Text fontWeight={600}>{info.trial.start}</Text>
+            <div className={styles.detailRows}>
+              <div className={styles.detailRow}>
+                <Text className={styles.muted}>{t("Common:Start")}</Text>
+                <Text fontWeight={600}>{info.trial.start}</Text>
+              </div>
+              <div className={styles.detailRow}>
+                <Text className={styles.muted}>{t("Common:ValidUntil")}</Text>
+                <Text fontWeight={600}>{info.trial.validUntil}</Text>
+              </div>
             </div>
-            <div className={styles.detailRow}>
-              <Text className={styles.muted}>
-                {t("Common:ValidUntil")}
+            <div className={styles.licenseProgress}>
+              <ProgressBar
+                percent={Math.max(0, ((30 - info.trial.daysLeft) / 30) * 100)}
+                style={greenProgressStyle}
+              />
+              <Text fontSize="12px" className={styles.muted}>
+                {t("DocsConnect:TrialDaysRemaining", {
+                  count: info.trial.daysLeft,
+                })}
               </Text>
-              <Text fontWeight={600}>{info.trial.validUntil}</Text>
             </div>
-            <ProgressBar
-              percent={Math.max(0, ((30 - info.trial.daysLeft) / 30) * 100)}
-            />
-            <Text fontSize="12px" className={styles.muted}>
-              {t("DocsConnect:TrialDaysRemaining", {
-                count: info.trial.daysLeft,
-              })}
-            </Text>
           </div>
         ) : (
           <div className={styles.detailCard}>
             <div className={styles.detailCardHeader}>
-              <Text fontSize="16px" fontWeight={600}>
+              <Text fontSize="16px" fontWeight={700}>
                 {t("Common:TariffPlan")}{" "}
                 <Text as="span" fontSize="12px" className={styles.muted}>
                   {t("DocsConnect:RenewsOn", { date: info.plan.renewsOn })}
@@ -253,54 +311,71 @@ const Statistics = ({
                 {t("DocsConnect:EditPlan")}
               </Link>
             </div>
-            <div className={styles.detailRow}>
-              <Text className={styles.muted}>{t("DocsConnect:PlanUsers")}</Text>
-              <Text fontWeight={600}>{info.plan.users}</Text>
-            </div>
-            <div className={styles.detailRow}>
-              <Text className={styles.muted}>{t("DocsConnect:Price")}</Text>
-              <Text fontWeight={600}>
-                {t("DocsConnect:PricePerUser", {
-                  price: `${wallet.currency}${info.plan.pricePerUser}`,
-                })}
-              </Text>
-            </div>
-            <div className={styles.detailRow}>
-              <Text className={styles.muted}>
-                {t("DocsConnect:MonthlyCharge")}
-              </Text>
-              <Text fontWeight={600}>
-                {`${wallet.currency}${info.plan.monthlyCharge}`}
-              </Text>
+            <div className={styles.detailRows}>
+              <div className={styles.detailRow}>
+                <Text className={styles.muted}>
+                  {t("DocsConnect:PlanUsers")}
+                </Text>
+                <Text fontWeight={600}>{info.plan.users}</Text>
+              </div>
+              <div className={styles.detailRow}>
+                <Text className={styles.muted}>{t("DocsConnect:Price")}</Text>
+                <Text fontWeight={600}>
+                  {t("DocsConnect:PricePerUser", {
+                    price: `${wallet.currency}${info.plan.pricePerUser}`,
+                  })}
+                </Text>
+              </div>
+              <div className={styles.detailRow}>
+                <Text className={styles.muted}>
+                  {t("DocsConnect:MonthlyCharge")}
+                </Text>
+                <Text fontWeight={600}>
+                  {`${wallet.currency}${info.plan.monthlyCharge}`}
+                </Text>
+              </div>
             </div>
           </div>
         )}
 
         <div className={styles.detailCard}>
-          <Text fontSize="16px" fontWeight={600}>
+          <Text
+            className={styles.detailCardTitle}
+            fontSize="16px"
+            fontWeight={700}
+          >
             {t("DocsConnect:Build")}
           </Text>
-          <div className={styles.detailRow}>
-            <Text className={styles.muted}>{t("DocsConnect:BuildType")}</Text>
-            <Text fontWeight={600}>{info.build.type}</Text>
-          </div>
-          <div className={styles.detailRow}>
-            <Text className={styles.muted}>{t("Common:Version")}</Text>
-            <Text fontWeight={600}>{info.build.version}</Text>
-          </div>
-          <div className={styles.detailRow}>
-            <Text className={styles.muted}>{t("DocsConnect:Released")}</Text>
-            <Text fontWeight={600}>{info.build.released}</Text>
+          <div className={styles.detailRows}>
+            <div className={styles.detailRow}>
+              <Text className={styles.muted}>{t("DocsConnect:BuildType")}</Text>
+              <Text fontWeight={600}>{info.build.type}</Text>
+            </div>
+            <div className={styles.detailRow}>
+              <Text className={styles.muted}>{t("Common:Version")}</Text>
+              <Text fontWeight={600}>{info.build.version}</Text>
+            </div>
+            <div className={styles.detailRow}>
+              <Text className={styles.muted}>{t("DocsConnect:Released")}</Text>
+              <Text fontWeight={600}>{info.build.released}</Text>
+            </div>
           </div>
         </div>
       </div>
 
-      <Heading level={HeadingLevel.h2} className={styles.sectionTitle}>
-        {t("DocsConnect:UserActivity")}
-      </Heading>
-      <Text fontSize="12px" className={styles.muted}>
-        {t("DocsConnect:UserActivitySubtitle")}
-      </Text>
+      <div className={styles.activityHeader}>
+        <Heading
+          level={HeadingLevel.h2}
+          className={styles.sectionTitle}
+          fontSize="18px"
+          fontWeight={700}
+        >
+          {t("DocsConnect:UserActivity")}
+        </Heading>
+        <Text fontSize="12px" className={styles.muted}>
+          {t("DocsConnect:UserActivitySubtitle")}
+        </Text>
+      </div>
       <div className={styles.twoCards}>
         <UsageBlock
           title={t("DocsConnect:Editors")}
@@ -318,46 +393,55 @@ const Statistics = ({
         />
       </div>
 
-      <div>
+      <div className={styles.downloadReport}>
         <Button
-          size={ButtonSize.small}
+          className={styles.downloadButton}
+          size={ButtonSize.normal}
           label={t("DocsConnect:DownloadReport")}
           onClick={onDownloadReport}
         />
       </div>
 
-      {!isTrial ? (
-        <div className={styles.integrations}>
-          <Heading level={HeadingLevel.h2} className={styles.sectionTitle}>
-            {t("DocsConnect:IntegrationOptions")}
-          </Heading>
-          <Text fontSize="12px" className={styles.muted}>
-            {t("DocsConnect:IntegrationOptionsSubtitle")}
-          </Text>
-          <div className={styles.connectorsGrid}>
+      {showIntegrations ? (
+        <CollapsibleCard
+          title={t("DocsConnect:IntegrationOptions")}
+          description={t("DocsConnect:IntegrationOptionsSubtitle")}
+          defaultOpen
+        >
+          <div className={styles.integrationsGrid}>
             {info.connectors.map((connector) => (
               <a
                 key={connector.key}
-                className={styles.connectorCard}
+                className={styles.integrationTile}
                 href={connector.url}
                 target="_blank"
                 rel="noreferrer"
               >
-                <Text fontSize="13px" fontWeight={600}>
+                <Text as="p" className={styles.integrationName}>
                   {connector.label}
                 </Text>
-                <Link
-                  type={LinkType.action}
-                  color="accent"
-                  fontSize="13px"
-                  fontWeight={600}
-                >
+                <span className={styles.integrationLink}>
                   {t("Common:Connect")}
-                </Link>
+                  <ArrowSvg aria-hidden className={styles.integrationArrow} />
+                </span>
               </a>
             ))}
+            <a
+              className={`${styles.integrationTile} ${styles.integrationTileMore}`}
+              href="#"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Text as="p" className={styles.integrationName}>
+                {t("Common:PlusMore", { count: 20 })}
+              </Text>
+              <span className={styles.integrationLink}>
+                {t("Common:ViewAll")}
+                <ArrowSvg aria-hidden className={styles.integrationArrow} />
+              </span>
+            </a>
           </div>
-        </div>
+        </CollapsibleCard>
       ) : null}
     </div>
   );
@@ -368,3 +452,4 @@ export default inject(({ docsConnectStore }: TStore) => ({
   openBuyPlan: docsConnectStore.openBuyPlan,
   copyToClipboard: docsConnectStore.copyToClipboard,
 }))(observer(Statistics));
+

@@ -34,13 +34,15 @@
  */
 
 @use "@docspace/ui-kit/styles/mixins";
+@use "@docspace/ui-kit/styles/variables/colors" as *;
 
 .panel {
   display: flex;
   flex-direction: column;
+  align-self: stretch;
   width: 100%;
-  max-width: 1200px;
   gap: 16px;
+  padding-top: 20px;
 }
 
 .header {
@@ -55,21 +57,40 @@
   min-height: 32px;
 }
 
+.trialBadge {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--dev-tools-status-positive);
+  border: 1px solid
+    color-mix(in srgb, var(--dev-tools-status-positive) 40%, transparent);
+}
+
 .muted {
-  color: var(--text-color);
-  opacity: 0.7;
+  color: $gray-text;
 }
 
 .sectionTitle {
   font-size: 18px;
   font-weight: 700;
   margin-top: 8px;
+  margin-bottom: 4px;
+}
+
+.activityHeader {
+  margin-bottom: 7px;
 }
 
 .statistics {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
   padding-top: 16px;
   padding-bottom: 40px;
 }
@@ -78,6 +99,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
   padding: 64px 0;
 }
 
@@ -86,10 +108,11 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  box-sizing: border-box;
+  max-width: 660px;
   padding: 16px;
-  border-radius: 12px;
-  border: var(--dev-tools-card-border);
-  background-color: var(--background-color);
+  border-radius: 8px;
+  background-color: $gray-light;
 
   @include mixins.mobile {
     flex-direction: column;
@@ -101,6 +124,10 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+.bannerButton {
+  flex-shrink: 0;
 }
 
 .overviewGrid {
@@ -116,11 +143,21 @@
 .infoCard {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 16px;
+  gap: 14px;
+  padding: 15px;
   border-radius: 12px;
   border: var(--dev-tools-card-border);
   background-color: var(--background-color);
+}
+
+.infoLabelRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.eyeIcon {
+  cursor: pointer;
 }
 
 .infoValueRow {
@@ -148,11 +185,14 @@
 .detailCard {
   display: flex;
   flex-direction: column;
-  gap: 12px;
   padding: 16px;
   border-radius: 12px;
   border: var(--dev-tools-card-border);
   background-color: var(--background-color);
+}
+
+.detailCardTitle {
+  margin-bottom: 18px;
 }
 
 .detailCardHeader {
@@ -160,6 +200,12 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  margin-bottom: 20px;
+}
+
+.detailRows {
+  display: flex;
+  flex-direction: column;
 }
 
 .detailRow {
@@ -167,6 +213,22 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+}
+
+.detailRows .detailRow:not(:last-child) {
+  padding-bottom: 11px;
+  border-bottom: 1px solid var(--dev-tools-card-divider);
+}
+
+.detailRows .detailRow + .detailRow {
+  padding-top: 12px;
+}
+
+.licenseProgress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 9px;
 }
 
 .usageBlock {
@@ -188,8 +250,8 @@
 }
 
 .statRow {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  justify-content: space-between;
   gap: 8px;
   margin-top: 8px;
 }
@@ -201,20 +263,26 @@
   gap: 2px;
 }
 
-.integrations {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.statValueHighlight {
+  color: var(--dev-tools-status-positive);
 }
 
-.connectorsGrid {
+.downloadReport {
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+.downloadButton {
+  height: 40px;
+}
+
+.integrationsGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-top: 8px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
 
   @include mixins.tablet {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   @include mixins.mobile {
@@ -222,14 +290,55 @@
   }
 }
 
-.connectorCard {
+.integrationTile {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 16px;
+  justify-content: center;
+  gap: 11px;
+  padding: 21px;
   border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
   border: var(--dev-tools-card-border);
   background-color: var(--background-color);
-  text-decoration: none;
+  transition: border-color 0.15s ease;
+
+  &:hover {
+    border-color: var(--accent-main);
+  }
 }
+
+.integrationTileMore {
+  background-color: $gray-light;
+}
+
+.integrationName {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  margin: 0;
+}
+
+.integrationLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 15px;
+  color: var(--accent-main);
+  text-decoration: underline;
+}
+
+.integrationArrow {
+  width: 8px;
+  height: 9px;
+  flex-shrink: 0;
+
+  path {
+    fill: var(--accent-main);
+  }
+}
+

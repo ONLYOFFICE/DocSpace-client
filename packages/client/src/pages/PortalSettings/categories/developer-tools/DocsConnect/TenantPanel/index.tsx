@@ -38,7 +38,6 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Badge } from "@docspace/ui-kit/components/badge";
 import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import {
@@ -46,7 +45,6 @@ import {
   ContextMenuButtonDisplayType,
 } from "@docspace/ui-kit/components/context-menu-button";
 import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
-import { globalColors } from "@docspace/ui-kit/providers";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
@@ -128,22 +126,13 @@ const TenantPanel = ({
     <div className={styles.panel}>
       <div className={styles.header}>
         <div className={styles.titleRow}>
-          <Text fontSize="23px" fontWeight={700} lineHeight="28px">
+          <Text fontSize="18px" fontWeight={700} lineHeight="24px">
             {t("DocsConnect:DocsConnect")}
           </Text>
           {isTrial ? (
-            <Badge
-              label={t("Common:FreeDaysLeft", {
-                count: info.trial.daysLeft,
-              })}
-              backgroundColor={globalColors.alphaGreenLight}
-              color={globalColors.lightStatusPositive}
-              fontSize="11px"
-              fontWeight={700}
-              borderRadius="6px"
-              padding="2px 6px"
-              noHover
-            />
+            <span className={styles.trialBadge}>
+              {t("Common:FreeDaysLeft", { count: info.trial.daysLeft })}
+            </span>
           ) : (
             <ContextMenuButton
               displayType={ContextMenuButtonDisplayType.dropdown}

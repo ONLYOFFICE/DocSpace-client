@@ -2889,11 +2889,13 @@
 .light {
   --dev-tools-card-border: 1px solid #{$light-gray-selected};
   --dev-tools-card-divider: #{$gray-light-mid};
+  --dev-tools-status-positive: #{$light-status-positive};
 }
 
 .dark {
   --dev-tools-card-border: 1px solid #{$gray-dark-strong};
   --dev-tools-card-divider: #{$gray-dark-strong};
+  --dev-tools-status-positive: #{$dark-status-positive};
 }
 
 .light {

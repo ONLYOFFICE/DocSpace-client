@@ -34,7 +34,7 @@ import type {
   NavMenuGroup,
   NavMenuItem,
 } from "@docspace/ui-kit/components/nav-menu";
-import { DeviceType } from "@docspace/shared/enums";
+import { DeviceType, FolderType } from "@docspace/shared/enums";
 import type { TUser } from "@docspace/shared/api/people/types";
 
 import {
@@ -87,11 +87,35 @@ const E2E_ROOMS_SECTION_TO_ID: Record<string, string> = {
   archive: "e2e-rooms-archive",
 };
 
-const AI_FILES_SECTION_TO_ID: Record<string, string> = {
+// ai-files / ai-rooms use direct URLs that mirror the SDK pathname under the
+// host prefix (e.g. /ai-files/personal-files?folder=4567). The `folder` query
+// is the concrete folder id; it maps back to the sidebar child via the
+// per-app id->childId map built at render time (see `buildFolderToChildId`).
+const FILES_SECTION_TO_ID: Record<string, string> = {
   "shared-with-me": "ai-files-shared-with-me",
   recent: "ai-files-recent",
   favorites: "ai-files-favorites",
   trash: "ai-files-trash",
+};
+
+const ROOMS_SECTION_TO_ID: Record<string, string> = {
+  recent: "ai-rooms-recent",
+  favorites: "ai-rooms-favorites",
+  trash: "ai-rooms-trash",
+};
+
+// Direct-URL builder for a personal-files view. `folder` is the concrete
+// folder id. recent/favorites are scoped under "My documents", so they carry
+// `parentId` — mirrors the SDK's own alias resolution (personal-files page).
+// The SDK fills in default sort/page, so we don't duplicate that here.
+const personalFilesHref = (
+  hostPrefix: string,
+  folder: number,
+  parentId?: number | null,
+) => {
+  const params = new URLSearchParams({ folder: String(folder) });
+  if (parentId != null) params.set("parentId", String(parentId));
+  return `${hostPrefix}/personal-files?${params}`;
 };
 
 const AI_FORMS_SECTION_TO_ID: Record<string, string> = {
@@ -108,13 +132,6 @@ const AI_AGENTS_SECTION_TO_ID: Record<string, string> = {
   settings: "ai-agents-settings",
 };
 
-const AI_ROOMS_SECTION_TO_ID: Record<string, string> = {
-  recent: "ai-rooms-recent",
-  favorites: "ai-rooms-favorites",
-  archive: "ai-rooms-archive",
-  trash: "ai-rooms-trash",
-};
-
 type NewArticleProps = {
   user?: TUser | null;
   currentDeviceType: DeviceType;
@@ -129,6 +146,11 @@ type NewArticleProps = {
   e2eRoomsEnabled: boolean;
   sharedWithMeFolderId?: number | null;
   sharedWithMeNewItems?: number;
+  myFolderId?: number | null;
+  recentFolderId?: number | null;
+  favoritesFolderId?: number | null;
+  trashFolderId?: number | null;
+  fetchTreeFolders: () => Promise<unknown>;
   activate: (id: string) => Promise<boolean>;
   enable: (id: string, enabled: boolean) => Promise<unknown>;
   ensureAppsLoaded: () => void;
@@ -149,6 +171,11 @@ const NewArticle = ({
   e2eRoomsEnabled,
   sharedWithMeFolderId,
   sharedWithMeNewItems = 0,
+  myFolderId,
+  recentFolderId,
+  favoritesFolderId,
+  trashFolderId,
+  fetchTreeFolders,
   activate,
   enable,
   ensureAppsLoaded,
@@ -169,7 +196,7 @@ const NewArticle = ({
     try {
       await enable("ai-rooms", true);
       setEnableAiRoomsVisible(false);
-      navigate("/ai-rooms?section=rooms");
+      navigate("/ai-rooms/rooms");
     } catch (err) {
       console.error("Failed to enable ai-rooms", err);
       toastr.error(t("Common:SomethingWentWrong"));
@@ -181,6 +208,51 @@ const NewArticle = ({
   React.useEffect(() => {
     ensureAppsLoaded();
   }, [ensureAppsLoaded]);
+
+  // ai-files / ai-rooms build their personal-files links from concrete folder
+  // ids (recent/favorites/trash/...), so the tree must be loaded. The new
+  // client doesn't visit the main file list that would populate it, so fetch
+  // it here once if the ids aren't available yet.
+  React.useEffect(() => {
+    if (recentFolderId == null) fetchTreeFolders();
+  }, [recentFolderId, fetchTreeFolders]);
+
+  // Navigate to a personal-files folder identified by its root type. recent
+  // and favorites are scoped under "My documents", so they carry a parentId
+  // (mirrors the SDK's alias resolution). The mount effect above eagerly
+  // fetches the tree, so the id is normally already known; if a click beats
+  // that (id still null), fetch the tree and resolve from the result so we
+  // never navigate to a broken URL.
+  const goToFolder = React.useCallback(
+    async (
+      hostPrefix: string,
+      rootFolderType: FolderType,
+      folderId?: number | null,
+    ) => {
+      const scoped =
+        rootFolderType === FolderType.Recent ||
+        rootFolderType === FolderType.Favorites;
+
+      if (folderId != null) {
+        const parentId = scoped ? (myFolderId ?? null) : null;
+        navigate(personalFilesHref(hostPrefix, folderId, parentId));
+        return;
+      }
+
+      const tree = (await fetchTreeFolders()) as
+        | { id: number; rootFolderType: FolderType }[]
+        | undefined;
+      const byType = new Map((tree ?? []).map((f) => [f.rootFolderType, f]));
+      const folder = byType.get(rootFolderType);
+      if (!folder) {
+        navigate(`${hostPrefix}/personal-files`);
+        return;
+      }
+      const parentId = scoped ? (byType.get(FolderType.USER)?.id ?? null) : null;
+      navigate(personalFilesHref(hostPrefix, folder.id, parentId));
+    },
+    [navigate, fetchTreeFolders, myFolderId],
+  );
 
   const { showText, toggleShowText } = useSidebarShowText({
     storageKey: "home_showSidebarText",
@@ -194,12 +266,52 @@ const NewArticle = ({
   const canCreateForms = !isGuest && !(user?.isCollaborator ?? false);
 
   const activeId = React.useMemo(() => {
-    const section = new URLSearchParams(location.search).get("section") ?? "";
+    const params = new URLSearchParams(location.search);
+    const section = params.get("section") ?? "";
     if (location.pathname.startsWith("/dashboard")) {
       return OVERVIEW_ID;
     }
+    // The personal-files `folder` param is the concrete folder id (the sidebar
+    // links carry ids resolved from the tree). Map it to the section the
+    // sidebar highlights; the `@alias` cases are a defensive fallback in case
+    // the SDK ever reports an unresolved alias.
+    const folderSection = (folder: string): string => {
+      switch (folder) {
+        case "@share":
+          return "shared-with-me";
+        case "@recent":
+          return "recent";
+        case "@favorites":
+          return "favorites";
+        case "@trash":
+          return "trash";
+        case "@my":
+          return "my";
+        default:
+          break;
+      }
+      const id = Number(folder);
+      if (sharedWithMeFolderId != null && id === sharedWithMeFolderId)
+        return "shared-with-me";
+      if (recentFolderId != null && id === recentFolderId) return "recent";
+      if (favoritesFolderId != null && id === favoritesFolderId)
+        return "favorites";
+      if (trashFolderId != null && id === trashFolderId) return "trash";
+      return "my";
+    };
+
+    // ai-files / ai-rooms read the direct URL: the first SDK path segment
+    // (after the host prefix) names the view; a personal-files folder section
+    // selects the child; rooms/archive/room-detail fall back to the parent.
     if (location.pathname.startsWith("/ai-files")) {
-      return AI_FILES_SECTION_TO_ID[section] ?? AI_FILES_ID;
+      const sdkSegment = location.pathname.split("/")[2]; // /ai-files/<seg>
+      if (sdkSegment === "personal-files") {
+        return (
+          FILES_SECTION_TO_ID[folderSection(params.get("folder") ?? "")] ??
+          AI_FILES_ID
+        );
+      }
+      return AI_FILES_ID;
     }
     if (location.pathname.startsWith("/ai-forms")) {
       return AI_FORMS_SECTION_TO_ID[section] ?? AI_FORMS_ID;
@@ -208,7 +320,15 @@ const NewArticle = ({
       return AI_AGENTS_SECTION_TO_ID[section] ?? AI_AGENTS_ID;
     }
     if (location.pathname.startsWith("/ai-rooms")) {
-      return AI_ROOMS_SECTION_TO_ID[section] ?? AI_ROOMS_ID;
+      const sdkSegment = location.pathname.split("/")[2]; // /ai-rooms/<seg>
+      if (sdkSegment === "archive") return "ai-rooms-archive";
+      if (sdkSegment === "personal-files") {
+        return (
+          ROOMS_SECTION_TO_ID[folderSection(params.get("folder") ?? "")] ??
+          AI_ROOMS_ID
+        );
+      }
+      return AI_ROOMS_ID;
     }
     if (location.pathname.startsWith("/e2e-rooms")) {
       return E2E_ROOMS_SECTION_TO_ID[section] ?? E2E_ROOMS_ID;
@@ -217,7 +337,14 @@ const NewArticle = ({
       if (location.pathname.startsWith(path)) return id;
     }
     return undefined;
-  }, [location.pathname, location.search]);
+  }, [
+    location.pathname,
+    location.search,
+    sharedWithMeFolderId,
+    recentFolderId,
+    favoritesFolderId,
+    trashFolderId,
+  ]);
 
   const handleDocsCloudClick = React.useCallback(() => {
     if (docsCloudEnabled) {
@@ -251,14 +378,16 @@ const NewArticle = ({
       id: AI_FILES_ID,
       label: t("Common:DashboardFilesTitle"),
       icon: CatalogFolderReactSvgUrl,
-      onClick: () => navigate("/ai-files"),
+      // "My documents": the bare personal-files path; the SDK defaults to @my.
+      onClick: () => navigate("/ai-files/personal-files"),
       children: aiFilesEnabled
         ? [
             {
               id: "ai-files-shared-with-me",
               label: t("Common:SharedWithMe"),
               icon: CatalogSharedReactSvgUrl,
-              onClick: () => navigate("/ai-files?section=shared-with-me"),
+              onClick: () =>
+                goToFolder("/ai-files", FolderType.SHARE, sharedWithMeFolderId),
               showBadge: sharedWithMeHasNew,
               badgeComponent: sharedWithMeHasNew ? (
                 <NewFilesBadge
@@ -271,19 +400,26 @@ const NewArticle = ({
               id: "ai-files-recent",
               label: t("Common:Recent"),
               icon: CatalogRestoreReactSvgUrl,
-              onClick: () => navigate("/ai-files?section=recent"),
+              onClick: () =>
+                goToFolder("/ai-files", FolderType.Recent, recentFolderId),
             },
             {
               id: "ai-files-favorites",
               label: t("Common:Favorites"),
               icon: CatalogFavoritesReactSvgUrl,
-              onClick: () => navigate("/ai-files?section=favorites"),
+              onClick: () =>
+                goToFolder(
+                  "/ai-files",
+                  FolderType.Favorites,
+                  favoritesFolderId,
+                ),
             },
             {
               id: "ai-files-trash",
               label: t("Common:TrashSection"),
               icon: CatalogTrashReactSvgUrl,
-              onClick: () => navigate("/ai-files?section=trash"),
+              onClick: () =>
+                goToFolder("/ai-files", FolderType.TRASH, trashFolderId),
               withTopSeparator: true,
             },
           ]
@@ -376,7 +512,7 @@ const NewArticle = ({
       label: t("Common:DashboardRoomsTitle"),
       icon: CatalogRoomsReactSvgUrl,
       onClick: aiRoomsEnabled
-        ? () => navigate("/ai-rooms?section=rooms")
+        ? () => navigate("/ai-rooms/rooms")
         : () => setEnableAiRoomsVisible(true),
       children: aiRoomsEnabled
         ? [
@@ -384,26 +520,33 @@ const NewArticle = ({
               id: "ai-rooms-recent",
               label: t("Common:Recent"),
               icon: CatalogRestoreReactSvgUrl,
-              onClick: () => navigate("/ai-rooms?section=recent"),
+              onClick: () =>
+                goToFolder("/ai-rooms", FolderType.Recent, recentFolderId),
             },
             {
               id: "ai-rooms-favorites",
               label: t("Common:Favorites"),
               icon: CatalogFavoritesReactSvgUrl,
-              onClick: () => navigate("/ai-rooms?section=favorites"),
+              onClick: () =>
+                goToFolder(
+                  "/ai-rooms",
+                  FolderType.Favorites,
+                  favoritesFolderId,
+                ),
             },
             {
               id: "ai-rooms-archive",
               label: t("Common:Archive"),
               icon: CatalogArchiveReactSvgUrl,
-              onClick: () => navigate("/ai-rooms?section=archive"),
+              onClick: () => navigate("/ai-rooms/archive"),
               withTopSeparator: true,
             },
             {
               id: "ai-rooms-trash",
               label: t("Common:TrashSection"),
               icon: CatalogTrashReactSvgUrl,
-              onClick: () => navigate("/ai-rooms?section=trash"),
+              onClick: () =>
+                goToFolder("/ai-rooms", FolderType.TRASH, trashFolderId),
             },
           ]
         : undefined,
@@ -570,6 +713,10 @@ const NewArticle = ({
     e2eRoomsEnabled,
     sharedWithMeFolderId,
     sharedWithMeNewItems,
+    recentFolderId,
+    favoritesFolderId,
+    trashFolderId,
+    goToFolder,
     handleDocsCloudClick,
     activate,
     enable,
@@ -645,6 +792,11 @@ const NewArticleConnected = inject<TStore>(
     e2eRoomsEnabled: appsStore.isEnabled("e2e-rooms"),
     sharedWithMeFolderId: treeFoldersStore.sharedWithMeFolder?.id ?? null,
     sharedWithMeNewItems: treeFoldersStore.sharedWithMeFolder?.newItems ?? 0,
+    myFolderId: treeFoldersStore.myFolderId ?? null,
+    recentFolderId: treeFoldersStore.recentFolderId ?? null,
+    favoritesFolderId: treeFoldersStore.favoritesFolderId ?? null,
+    trashFolderId: treeFoldersStore.recycleBinFolderId ?? null,
+    fetchTreeFolders: treeFoldersStore.fetchTreeFolders,
     activate: appsStore.activate,
     enable: appsStore.enable,
     ensureAppsLoaded: appsStore.ensureLoaded,

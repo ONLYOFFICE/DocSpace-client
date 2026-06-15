@@ -27,30 +27,11 @@
 "use client";
 
 import React from "react";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
-import {
-  frameCallEvent,
-  frameCallbackData,
-  frameHandlePing,
-  getFrameId,
-} from "@docspace/shared/utils/common";
+import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
 
 import { RoomsSection } from "@/types/rooms";
-
-// Sections that live inside the (rooms) route group. The host can switch
-// between these via `navigateSection` without reloading the iframe.
-// Personal-files-backed sections (recent/favorites/trash) live in a
-// different Next.js route group and are intentionally NOT handled here —
-// the host reloads the iframe `src` for those.
-const SECTION_TO_PATH: Record<string, string> = {
-  [RoomsSection.Rooms]: "/rooms",
-  [RoomsSection.Archive]: "/archive",
-};
-
-const VALID_SECTIONS: ReadonlySet<string> = new Set(
-  Object.values(RoomsSection),
-);
+import { useBrowserLocation } from "@/app/(docspace)/_hooks/useBrowserLocation";
 
 const sectionFromPathname = (pathname: string): string | null => {
   if (pathname === "/archive" || pathname.startsWith("/archive/")) {
@@ -66,20 +47,18 @@ const sectionFromPathname = (pathname: string): string | null => {
  * Wires the (rooms) app to the sdk-js host via postMessage.
  *
  * - Fires `onAppReady` once when the layout mounts.
- * - Fires `onNavigate` on section changes so the host can mirror its
- *   address bar (`?section=`).
- * - Listens for host-side `navigateSection` calls and routes internally
- *   via `router.replace` (no iframe reload).
+ * - Fires `onNavigate` on EVERY location change (section, room, folder, sort,
+ *   search, pagination) carrying the full basePath-stripped `pathname` +
+ *   `search`, so the host can mirror the complete filter into its own direct
+ *   URL. Reads `window.location` via `useBrowserLocation` rather than Next's
+ *   navigation hooks because the SDK changes filter/folder via
+ *   `history.pushState`, which those hooks don't observe.
  *
- * Lives at the (rooms) layout level so the listener is installed
- * regardless of which sub-route (rooms/archive) is mounted.
+ * Lives at the (rooms) layout level so it stays installed regardless of which
+ * sub-route (rooms/archive) is mounted.
  */
 export const useRoomsFrameBridge = (isReady: boolean) => {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  const activeSection = sectionFromPathname(pathname);
+  const { pathname, search } = useBrowserLocation();
 
   const appReadySent = React.useRef(false);
   React.useEffect(() => {
@@ -92,68 +71,24 @@ export const useRoomsFrameBridge = (isReady: boolean) => {
     }
   }, [isReady]);
 
-  const prevSection = React.useRef<string | null>(activeSection);
+  // Mirror every settled location to the host. The first run (once ready)
+  // emits the canonical pathname+search so the host can adopt whatever
+  // defaults/aliases the SDK resolved; subsequent runs fire on any change.
+  const prevKey = React.useRef<string | null>(null);
   React.useEffect(() => {
-    if (prevSection.current !== activeSection && activeSection) {
-      prevSection.current = activeSection;
-      frameCallEvent({
-        event: "onNavigate",
-        data: {
-          section: activeSection,
-          pathname,
-          search: searchParams.toString(),
-        },
-      });
-    }
-  }, [activeSection, pathname, searchParams]);
-
-  React.useEffect(() => {
-    const handler = (e: MessageEvent) => {
-      // SDK iframes are embedded by arbitrary third-party origins, so we
-      // intentionally do not validate `event.origin` — same posture as the
-      // ai-agents / forms / personal-files bridges. We only filter by
-      // `e.source === window.parent`.
-      if (window.self === window.parent || e.source !== window.parent) return;
-
-      let eventData: Record<string, unknown> | undefined;
-      try {
-        eventData =
-          typeof e.data === "string"
-            ? JSON.parse(e.data)
-            : (e.data as Record<string, unknown>);
-      } catch {
-        return;
-      }
-
-      if (!eventData) return;
-      if (frameHandlePing(eventData)) return;
-
-      const dataEnvelope = eventData?.data as
-        | Record<string, unknown>
-        | undefined;
-      const methodName = dataEnvelope?.methodName as string | undefined;
-      const callId = dataEnvelope?.callId as number | undefined;
-      const payload = dataEnvelope?.data as Record<string, unknown> | undefined;
-
-      if (methodName === "navigateSection") {
-        const section = payload?.section as string | undefined;
-        if (section && VALID_SECTIONS.has(section)) {
-          router.replace(SECTION_TO_PATH[section]);
-          frameCallbackData({ section }, callId);
-        } else {
-          frameCallbackData(
-            { error: `Unknown section: ${String(section)}` },
-            callId,
-          );
-        }
-      }
-    };
-
-    window.addEventListener("message", handler, false);
-    return () => {
-      window.removeEventListener("message", handler, false);
-    };
-  }, [router]);
+    if (!isReady) return;
+    const key = `${pathname}?${search}`;
+    if (prevKey.current === key) return;
+    prevKey.current = key;
+    frameCallEvent({
+      event: "onNavigate",
+      data: {
+        section: sectionFromPathname(pathname) ?? "",
+        pathname,
+        search,
+      },
+    });
+  }, [isReady, pathname, search]);
 };
 
 export default useRoomsFrameBridge;

@@ -55,12 +55,12 @@ type DocsSettingsLayoutProps = {
   canSeeBilling?: boolean;
   // The (rooms) group reuses this settings layout but mounts its own
   // (rooms) frame bridge. Pass `false` there so the personal-files bridge
-  // doesn't also answer `navigateSection` and route out of the rooms group.
+  // doesn't also mirror location to the host and fight the rooms bridge.
   mountFrameBridge?: boolean;
 };
 
-// Isolated so the hook is only invoked when the personal-files bridge
-// should own `navigateSection` (keeps the rules-of-hooks contract while
+// Isolated so the hook is only invoked when the personal-files bridge should
+// own the host location mirror (keeps the rules-of-hooks contract while
 // allowing a conditional mount).
 const DocsFrameBridgeHost = () => {
   useDocsFrameBridge({ isReady: true });

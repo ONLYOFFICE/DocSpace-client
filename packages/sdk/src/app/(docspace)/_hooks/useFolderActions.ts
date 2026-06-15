@@ -78,7 +78,12 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
       setSelection([]);
 
       if (targetPath) {
-        router.push(`${targetPath}${filterUrl}`);
+        // Crossing into another route group (e.g. recent -> /rooms/:id)
+        // remounts the layout and its FilesListStore, so the in-memory
+        // highlight set below is lost. Carry the target file id in the URL;
+        // the destination list re-applies it once the row renders (see the
+        // `?highlight=` reader in (files)/_components/list).
+        router.push(`${targetPath}${filterUrl}&highlight=${fileId}`);
       } else {
         window.history.pushState(
           {},

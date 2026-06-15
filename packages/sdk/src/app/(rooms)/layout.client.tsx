@@ -28,8 +28,8 @@
 
 import { useRoomsFrameBridge } from "./_hooks/useRoomsFrameBridge";
 
-// Installs the rooms frame bridge once at the layout level so host-driven
-// `navigateSection` works for any (rooms) sub-route (rooms/archive/settings)
+// Installs the rooms frame bridge once at the layout level so location changes
+// from any (rooms) sub-route (rooms/archive/settings) are mirrored to the host
 // without re-mounting per-page client components. The server layout only
 // renders after its data fetch resolves, so the layout is "ready" at mount —
 // mirrors how the ai-agents / personal-files bridges pass `isReady: true`.

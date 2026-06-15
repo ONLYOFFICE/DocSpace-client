@@ -39,7 +39,6 @@ export type SdkIframeHandle = {
 type SdkNavigateExtra = {
   pathname?: string;
   search?: string;
-  highlight?: string;
 };
 
 type SdkIframeProps = {
@@ -70,6 +69,19 @@ export const SdkIframe = ({
   // white. Cleared when the SDK reports the new section is ready
   // (onNavigate / onAppReady).
   const [loading, setLoading] = React.useState(false);
+
+  // A `src` change re-points this same iframe element (the host keeps it
+  // mounted across the change, so React just updates the attribute and the
+  // browser reloads the document). Dim during the reload so it doesn't flash;
+  // the fresh document's `onAppReady` (or the 5s safety net) clears it. A
+  // no-op for frames whose src never changes (forms/agents).
+  const prevSrc = React.useRef(src);
+  React.useEffect(() => {
+    if (prevSrc.current !== src) {
+      prevSrc.current = src;
+      setLoading(true);
+    }
+  }, [src]);
 
   React.useEffect(() => {
     if (!apiRef) return undefined;
@@ -134,7 +146,6 @@ export const SdkIframe = ({
             section?: string | null;
             pathname?: string;
             search?: string;
-            highlight?: string;
           }
         | undefined;
       const section = typeof data?.section === "string" ? data.section : "";
@@ -152,7 +163,6 @@ export const SdkIframe = ({
         onNavigate?.(section, {
           pathname: data?.pathname,
           search: data?.search,
-          highlight: data?.highlight,
         });
       }
     };

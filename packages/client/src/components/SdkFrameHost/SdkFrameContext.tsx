@@ -31,7 +31,6 @@ import type { SdkIframeHandle } from "SRC_DIR/components/SdkIframe";
 export type SdkNavigateExtra = {
   pathname?: string;
   search?: string;
-  highlight?: string;
 };
 
 export type SdkFrameCallbacks = {
@@ -59,6 +58,7 @@ type HostState = {
 
 type Action =
   | { type: "show"; entry: FrameEntry }
+  | { type: "setSrc"; appId: string; src: string }
   | { type: "ready"; appId: string }
   | { type: "hide" };
 
@@ -87,6 +87,34 @@ const reducer = (state: HostState, action: Action): HostState => {
       return { current: entry, incoming: null };
     }
 
+    // Re-point a frame's src in place (same appId key = the iframe element
+    // survives, the browser just navigates it). Targets whichever slot holds
+    // the appId — the settled `current`, or the `incoming` one mid app-switch
+    // (so a navigation that lands before the transition settles is applied to
+    // the loading frame instead of being dropped). Only the files/rooms pages
+    // dispatch this; a no-op for the section-driven apps (forms/agents).
+    case "setSrc": {
+      if (
+        state.incoming?.appId === action.appId &&
+        state.incoming.src !== action.src
+      ) {
+        return {
+          ...state,
+          incoming: { ...state.incoming, src: action.src },
+        };
+      }
+      if (
+        state.current?.appId === action.appId &&
+        state.current.src !== action.src
+      ) {
+        return {
+          ...state,
+          current: { ...state.current, src: action.src },
+        };
+      }
+      return state;
+    }
+
     case "ready": {
       if (state.incoming && state.incoming.appId === action.appId) {
         return { current: state.incoming, incoming: null };
@@ -105,6 +133,7 @@ const reducer = (state: HostState, action: Action): HostState => {
 type SdkFrameContextValue = {
   state: HostState;
   showFrame: (entry: FrameEntry) => void;
+  setFrameSrc: (appId: string, src: string) => void;
   markReady: (appId: string) => void;
   hideFrame: () => void;
 };
@@ -131,6 +160,10 @@ export const SdkFrameProvider = ({
     (entry: FrameEntry) => dispatch({ type: "show", entry }),
     [],
   );
+  const setFrameSrc = React.useCallback(
+    (appId: string, src: string) => dispatch({ type: "setSrc", appId, src }),
+    [],
+  );
   const markReady = React.useCallback(
     (appId: string) => dispatch({ type: "ready", appId }),
     [],
@@ -148,8 +181,8 @@ export const SdkFrameProvider = ({
   }, [incomingId]);
 
   const value = React.useMemo(
-    () => ({ state, showFrame, markReady, hideFrame }),
-    [state, showFrame, markReady, hideFrame],
+    () => ({ state, showFrame, setFrameSrc, markReady, hideFrame }),
+    [state, showFrame, setFrameSrc, markReady, hideFrame],
   );
 
   return (

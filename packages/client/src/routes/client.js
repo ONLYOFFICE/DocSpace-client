@@ -329,7 +329,9 @@ const ClientRoutes = [
       },
       ...generalClientRoutes,
       {
-        path: "/ai-files",
+        // Splat: the SDK app's own pathname (e.g. /personal-files) is mirrored
+        // into the host path so the URL is a real direct filter URL.
+        path: "/ai-files/*",
         async lazy() {
           const { AiFiles } = await componentLoader(
             () => import("SRC_DIR/pages/AiFiles"),
@@ -407,7 +409,9 @@ const ClientRoutes = [
         },
       },
       {
-        path: "/ai-rooms",
+        // Splat: see /ai-files/* above. The SDK pathname (/rooms, /rooms/:id,
+        // /archive, /personal-files) is mirrored into the host path.
+        path: "/ai-rooms/*",
         async lazy() {
           const { AiRooms } = await componentLoader(
             () => import("SRC_DIR/pages/AiRooms"),

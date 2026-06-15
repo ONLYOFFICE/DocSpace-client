@@ -36,21 +36,18 @@
 "use client";
 
 import React from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import {
   frameCallEvent,
-  frameCallbackData,
   frameHandlePing,
   getFrameId,
 } from "@docspace/shared/utils/common";
 import { FolderType } from "@docspace/shared/enums";
 
-import { DocsSection, DOCS_SECTION_FOLDER_ALIAS } from "@/types/docs";
+import { DocsSection } from "@/types/docs";
 import { RoomsSection } from "@/types/rooms";
-import FilesFilter from "@docspace/shared/api/files/filter";
-import { PAGE_COUNT } from "@/utils/constants";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
+import { useBrowserLocation } from "@/app/(docspace)/_hooks/useBrowserLocation";
 
 type UseDocsFrameBridgeParams = {
   isReady: boolean;
@@ -60,8 +57,6 @@ type UseDocsFrameBridgeParams = {
 
 const PERSONAL_BASE_PATH = "/personal-files";
 const SETTINGS_PATH = "/personal-files/settings";
-
-const VALID_SECTIONS: ReadonlySet<string> = new Set(Object.values(DocsSection));
 
 const sectionFromRootFolderType = (
   rootFolderType: FolderType | null,
@@ -112,41 +107,31 @@ const sectionFromPathnameAndFolder = (
   }
 };
 
-const sectionToUrl = (section: string): string => {
-  if (section === DocsSection.Settings) {
-    return SETTINGS_PATH;
-  }
-
-  const folderAlias =
-    DOCS_SECTION_FOLDER_ALIAS[section as DocsSection] ?? "@my";
-  const filter = FilesFilter.getDefault();
-  filter.folder = folderAlias;
-  filter.pageCount = PAGE_COUNT;
-
-  return `${PERSONAL_BASE_PATH}?${filter.toUrlParams()}`;
-};
-
 /**
  * Wires the personal-files app to the sdk-js host via postMessage.
  *
  * - Fires `onAppReady` once when initialization completes.
- * - Fires `onNavigate` on section changes.
- * - Listens for host-side `navigateSection` method calls and for binary
- *   `uploadFileData` payloads (mirrors the Forms mode bridge).
+ * - Fires `onNavigate` on EVERY location change carrying the full
+ *   basePath-stripped `pathname` + `search`, so the host can mirror the
+ *   complete filter into its own direct URL. Reads `window.location` via
+ *   `useBrowserLocation` (not Next's navigation hooks) because the SDK changes
+ *   folder/sort/page/filter via `history.pushState`, which those hooks don't
+ *   observe.
+ * - Listens for binary `uploadFileData` payloads (mirrors the Forms bridge).
  */
 export const useDocsFrameBridge = ({
   isReady,
   uploadFilesToFolder,
   enabled = true,
 }: UseDocsFrameBridgeParams) => {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const router = useRouter();
+  const { pathname, search } = useBrowserLocation();
   const filesListStore = useFilesListStore();
   const { rootFolderType } = filesListStore;
 
-  const rootFolder = searchParams.get("folder");
-  const searchValue = searchParams.get("search");
+  const rootFolder = new URLSearchParams(search).get("folder");
+  // Section is still reported for backward visibility (the host now keys off
+  // pathname/search). Prefer the loaded folder's root type; fall back to the
+  // folder alias in the URL before the store settles.
   const activeSection =
     sectionFromRootFolderType(rootFolderType) ??
     sectionFromPathnameAndFolder(pathname, rootFolder);
@@ -160,35 +145,24 @@ export const useDocsFrameBridge = ({
     }
   }, [isReady, enabled]);
 
-  const prevSection = React.useRef<string | null>(activeSection);
+  // Mirror every settled location to the host. The first run (once ready)
+  // emits the canonical pathname+search so the host adopts whatever
+  // defaults/aliases the SDK resolved; subsequent runs fire on any change.
+  const prevKey = React.useRef<string | null>(null);
   React.useEffect(() => {
-    if (!enabled) return;
-    if (prevSection.current !== activeSection && activeSection) {
-      prevSection.current = activeSection;
-      const data: {
-        section: string;
-        pathname?: string;
-        search?: string;
-        highlight?: string;
-      } = {
-        section: activeSection,
-      };
-      if (
-        (activeSection === RoomsSection.Rooms ||
-          activeSection === RoomsSection.Archive) &&
-        rootFolder
-      ) {
-        data.pathname = `/${activeSection}/${rootFolder}`;
-        if (searchValue) data.search = searchValue;
-        // Carry the "open location" target across the frame swap so the
-        // freshly-mounted rooms frame can re-highlight the file — the source
-        // frame's in-memory highlight dies with it.
-        const highlight = filesListStore.highlightFileId;
-        if (highlight != null) data.highlight = String(highlight);
-      }
-      frameCallEvent({ event: "onNavigate", data });
-    }
-  }, [activeSection, enabled, rootFolder, searchValue, filesListStore]);
+    if (!enabled || !isReady) return;
+    const key = `${pathname}?${search}`;
+    if (prevKey.current === key) return;
+    prevKey.current = key;
+    frameCallEvent({
+      event: "onNavigate",
+      data: {
+        section: activeSection ?? "",
+        pathname,
+        search,
+      },
+    });
+  }, [enabled, isReady, pathname, search, activeSection]);
 
   const uploadRef = React.useRef(uploadFilesToFolder);
   React.useEffect(() => {
@@ -248,31 +222,10 @@ export const useDocsFrameBridge = ({
               },
             });
           });
-        return;
-      }
-
-      const dataEnvelope = eventData?.data as
-        | Record<string, unknown>
-        | undefined;
-      const methodName = dataEnvelope?.methodName as string | undefined;
-      const callId = dataEnvelope?.callId as number | undefined;
-      const payload = dataEnvelope?.data as Record<string, unknown> | undefined;
-
-      if (methodName === "navigateSection") {
-        const section = payload?.section as string | undefined;
-        if (section && VALID_SECTIONS.has(section)) {
-          router.replace(sectionToUrl(section));
-          frameCallbackData({ section }, callId);
-        } else {
-          frameCallbackData(
-            { error: `Unknown section: ${String(section)}` },
-            callId,
-          );
-        }
       }
     };
 
     window.addEventListener("message", handler);
     return () => window.removeEventListener("message", handler);
-  }, [router, enabled]);
+  }, [enabled]);
 };

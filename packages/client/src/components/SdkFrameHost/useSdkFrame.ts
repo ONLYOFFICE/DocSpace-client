@@ -43,6 +43,17 @@ type UseSdkFrameArgs = {
   enabled: boolean;
   // Called ONCE, only on the first show of this appId, to freeze the src.
   getSrc?: () => string;
+  // Direct-URL pages (ai-files / ai-rooms) drive the iframe from their own
+  // address bar: they pass the src they want shown on EVERY render. When it
+  // changes for a non-echo reason (sidebar click, deep link, Back) the host
+  // re-points the current frame in place. Section-driven apps (forms/agents)
+  // omit this and keep the frozen-`getSrc` behaviour.
+  src?: string;
+  // Echo guard: the src the SDK already navigated to itself (reported via
+  // onNavigate). When `src` equals it, the iframe is already there, so we
+  // adopt it silently instead of re-pointing (which would reload the page the
+  // SDK just navigated to).
+  sdkOwnedSrc?: string | null;
   title?: string;
   onNavigate?: SdkFrameCallbacks["onNavigate"];
   onFilterSearch?: SdkFrameCallbacks["onFilterSearch"];
@@ -65,12 +76,14 @@ export const useSdkFrame = ({
   appId,
   enabled,
   getSrc,
+  src,
+  sdkOwnedSrc,
   title = "",
   onNavigate,
   onFilterSearch,
   onAppReady,
 }: UseSdkFrameArgs): React.MutableRefObject<SdkIframeHandle | null> => {
-  const { showFrame, hideFrame } = useSdkFrameContext();
+  const { showFrame, setFrameSrc, hideFrame } = useSdkFrameContext();
 
   // Host-owned handle the page uses for its `navigateSection` effect.
   const apiRef = React.useRef<SdkIframeHandle | null>(null);
@@ -103,6 +116,19 @@ export const useSdkFrame = ({
     // outgoing frame and keeps it (dimmed) until the next page's showFrame
     // drives the transition. Hiding here would blank it -> white flash.
   }, [appId, enabled, title, showFrame, hideFrame]);
+
+  // Direct-URL pages: re-point the live frame when `src` changes for a
+  // non-echo reason. The freeze above seeds `lastSrcRef` to the first src so
+  // the very first render never triggers a redundant setFrameSrc.
+  const lastSrcRef = React.useRef<string | undefined>(srcRef.current?.src);
+  React.useEffect(() => {
+    if (!enabled || src == null) return;
+    if (src === lastSrcRef.current) return;
+    lastSrcRef.current = src;
+    // The SDK already navigated here itself — adopt without reloading it.
+    if (src === sdkOwnedSrc) return;
+    setFrameSrc(appId, src);
+  }, [appId, enabled, src, sdkOwnedSrc, setFrameSrc]);
 
   return apiRef;
 };

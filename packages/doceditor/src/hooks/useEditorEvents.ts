@@ -67,6 +67,7 @@ import type {
   TAiProvider,
   TDefaultProvider,
 } from "@docspace/shared/api/ai/types";
+import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import {
   CREATED_FORM_KEY,
   EDITOR_ID,
@@ -282,7 +283,7 @@ const useEditorEvents = ({
     const connector = docEditor?.createConnector?.();
     let provider: TAiProvider | undefined;
 
-    if (connector && successAuth) {
+    if (connector && successAuth && !isOAuthFrame()) {
       try {
         const defaultPortalProvider = (await getDefaultProvider()) as
           | TDefaultProvider

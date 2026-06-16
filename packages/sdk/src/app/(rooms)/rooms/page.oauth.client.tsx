@@ -24,24 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import SocketHelper from "@docspace/ui-kit/utils/socket";
+"use client";
 
-import { getAuthToken } from "../api/client";
-import { isOAuthFrame, requestAuthToken } from "./oauthToken";
+import { getSettingsFiles } from "@docspace/shared/api/files";
+import { getRooms } from "@docspace/shared/api/rooms";
+import { getSettings } from "@docspace/shared/api/settings";
+import { getUser } from "@docspace/shared/api/people";
 
-export const connectFrameSocket = async (
-  socketUrl: string,
-  publicRoomKey = "",
-) => {
-  if (!isOAuthFrame()) {
-    SocketHelper?.connect(socketUrl, publicRoomKey);
-    return;
-  }
+import { useOAuthSSRData } from "@/hooks/useOAuthSSRData";
 
-  try {
-    const token = getAuthToken() ?? (await requestAuthToken()) ?? undefined;
-    SocketHelper?.connect(socketUrl, publicRoomKey, token);
-  } catch (e) {
-    console.error("[OAuth] socket connect failed", e);
-  }
-};
+import RoomsPage from "./page.client";
+import { loadRoomsPageData, type RoomsPageDeps } from "./loadData";
+
+const clientDeps = {
+  getFilesSettings: getSettingsFiles,
+  getRooms,
+  getSettings,
+  getSelf: () => getUser(),
+} as unknown as RoomsPageDeps;
+
+export default function RoomsOAuth({
+  params,
+}: {
+  params: Record<string, string>;
+}) {
+  const data = useOAuthSSRData(() => loadRoomsPageData(clientDeps, params));
+
+  if (!data) return null;
+
+  return <RoomsPage authToken="" {...data} />;
+}

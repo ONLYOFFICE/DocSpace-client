@@ -54,6 +54,7 @@ import {
   isPublicPreview,
 } from "../utils/common";
 import { isRequestAborted } from "../utils/axios/isRequestAborted";
+import { isOAuthFrame } from "../utils/oauthToken";
 import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
 import { TenantStatus } from "../enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
@@ -208,7 +209,11 @@ class AuthStore {
         this.userStore
           ?.init(i18n, this.settingsStore.culture)
           .then(async () => {
-            if (!isPortalRestore) {
+            if (isOAuthFrame()) {
+              runInAction(() => {
+                this.isPortalInfoLoaded = true;
+              });
+            } else if (!isPortalRestore) {
               await this.getPaymentInfo();
 
               if (

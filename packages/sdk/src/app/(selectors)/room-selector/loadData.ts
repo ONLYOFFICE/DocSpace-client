@@ -33,51 +33,36 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { getFilesSettings, getFolder, getFoldersTree } from "@/api/files";
-import { getRooms } from "@/api/rooms";
-import { getSettings } from "@/api/settings";
+import { RoomSearchArea } from "@docspace/shared/enums";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import type { TGetRooms } from "@docspace/shared/api/rooms/types";
 
-import FilesSelectorClient from "./page.client";
-import FilesSelectorOAuth from "./page.oauth.client";
-import {
-  loadFilesSelectorProps,
-  type FilesSelectorBaseConfig,
-  type FilesSelectorDeps,
-} from "./loadData";
-import { logger } from "../../../../logger.mjs";
+import { PAGE_COUNT } from "@/utils/constants";
 
-const ssrDeps = {
-  getFoldersTree,
-  getFilesSettings,
-  getSettings,
-  getRooms,
-  getFolder,
-} as unknown as FilesSelectorDeps;
+export type RoomSelectorBaseConfig = Record<string, string | boolean>;
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string }>;
-}) {
-  logger.info("File-selector page");
+export type RoomSelectorData = {
+  roomList: TGetRooms;
+  pageCount: number;
+  baseConfig: RoomSelectorBaseConfig;
+};
 
-  const rawParams = await searchParams;
+export type RoomSelectorDeps = {
+  getRooms: (filter: RoomsFilter) => Promise<TGetRooms | undefined>;
+};
 
-  const baseConfig = Object.fromEntries(
-    Object.entries(rawParams).map(([k, v]) => {
-      if (v === "true") return [k, true];
-      if (v === "false") return [k, false];
-      if (k === "filter") return [k, Number.isNaN(+v) ? v : +v];
+export async function loadRoomSelectorData(
+  deps: RoomSelectorDeps,
+  baseConfig: RoomSelectorBaseConfig,
+): Promise<RoomSelectorData | null> {
+  const filter = RoomsFilter.getDefault();
+  filter.page = 0;
+  filter.pageCount = PAGE_COUNT;
+  filter.searchArea = RoomSearchArea.Active;
+  filter.type = (baseConfig.roomType as string | undefined) || null;
 
-      return [k, v];
-    }),
-  ) as FilesSelectorBaseConfig;
+  const roomList = await deps.getRooms(filter);
+  if (!roomList) return null;
 
-  if (rawParams.auth === "oauth") {
-    return <FilesSelectorOAuth baseConfig={baseConfig} />;
-  }
-
-  const clientProps = await loadFilesSelectorProps(ssrDeps, baseConfig);
-
-  return <FilesSelectorClient {...clientProps} />;
+  return { roomList, pageCount: PAGE_COUNT, baseConfig };
 }

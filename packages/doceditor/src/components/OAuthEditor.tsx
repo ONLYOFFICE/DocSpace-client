@@ -88,7 +88,8 @@ const OAuthEditor = ({
           : "";
         if (urlQuery) config.editorUrl = config.editorUrl.replace(urlQuery, "");
 
-        if (action === "view") config.editorConfig.mode = "view";
+        if (action === "view")
+          config.editorConfig = { ...config.editorConfig, mode: "view" };
 
         const user = await getUser().catch(() => undefined);
 

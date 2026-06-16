@@ -33,51 +33,31 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { getFilesSettings, getFolder, getFoldersTree } from "@/api/files";
-import { getRooms } from "@/api/rooms";
-import { getSettings } from "@/api/settings";
+"use client";
 
-import FilesSelectorClient from "./page.client";
-import FilesSelectorOAuth from "./page.oauth.client";
+import { getRooms } from "@docspace/shared/api/rooms";
+
+import { useOAuthSSRData } from "@/hooks/useOAuthSSRData";
+
+import RoomSelector from "./page.client";
 import {
-  loadFilesSelectorProps,
-  type FilesSelectorBaseConfig,
-  type FilesSelectorDeps,
+  loadRoomSelectorData,
+  type RoomSelectorBaseConfig,
+  type RoomSelectorDeps,
 } from "./loadData";
-import { logger } from "../../../../logger.mjs";
 
-const ssrDeps = {
-  getFoldersTree,
-  getFilesSettings,
-  getSettings,
-  getRooms,
-  getFolder,
-} as unknown as FilesSelectorDeps;
+const clientDeps = { getRooms } as unknown as RoomSelectorDeps;
 
-export default async function Page({
-  searchParams,
+export default function RoomSelectorOAuth({
+  baseConfig,
 }: {
-  searchParams: Promise<{ [key: string]: string }>;
+  baseConfig: RoomSelectorBaseConfig;
 }) {
-  logger.info("File-selector page");
+  const data = useOAuthSSRData(() =>
+    loadRoomSelectorData(clientDeps, baseConfig),
+  );
 
-  const rawParams = await searchParams;
+  if (!data) return null;
 
-  const baseConfig = Object.fromEntries(
-    Object.entries(rawParams).map(([k, v]) => {
-      if (v === "true") return [k, true];
-      if (v === "false") return [k, false];
-      if (k === "filter") return [k, Number.isNaN(+v) ? v : +v];
-
-      return [k, v];
-    }),
-  ) as FilesSelectorBaseConfig;
-
-  if (rawParams.auth === "oauth") {
-    return <FilesSelectorOAuth baseConfig={baseConfig} />;
-  }
-
-  const clientProps = await loadFilesSelectorProps(ssrDeps, baseConfig);
-
-  return <FilesSelectorClient {...clientProps} />;
+  return <RoomSelector {...data} />;
 }

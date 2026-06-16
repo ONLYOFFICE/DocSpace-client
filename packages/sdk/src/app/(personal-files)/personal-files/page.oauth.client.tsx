@@ -33,51 +33,42 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { getFilesSettings, getFolder, getFoldersTree } from "@/api/files";
-import { getRooms } from "@/api/rooms";
-import { getSettings } from "@/api/settings";
+"use client";
 
-import FilesSelectorClient from "./page.client";
-import FilesSelectorOAuth from "./page.oauth.client";
 import {
-  loadFilesSelectorProps,
-  type FilesSelectorBaseConfig,
-  type FilesSelectorDeps,
-} from "./loadData";
-import { logger } from "../../../../logger.mjs";
-
-const ssrDeps = {
-  getFoldersTree,
-  getFilesSettings,
-  getSettings,
-  getRooms,
+  getSettingsFiles,
   getFolder,
-} as unknown as FilesSelectorDeps;
+  getFoldersTree,
+} from "@docspace/shared/api/files";
+import { getSettings } from "@docspace/shared/api/settings";
+import { getUser } from "@docspace/shared/api/people";
 
-export default async function Page({
-  searchParams,
+import { useOAuthSSRData } from "@/hooks/useOAuthSSRData";
+
+import DocsPage from "./page.client";
+import {
+  loadPersonalFilesData,
+  type PersonalFilesDeps,
+} from "./loadData";
+
+const clientDeps = {
+  getFoldersTree,
+  getFolder,
+  getFilesSettings: getSettingsFiles,
+  getSettings,
+  getSelf: () => getUser(),
+} as unknown as PersonalFilesDeps;
+
+export default function DocsOAuth({
+  params,
 }: {
-  searchParams: Promise<{ [key: string]: string }>;
+  params: Record<string, string>;
 }) {
-  logger.info("File-selector page");
+  const result = useOAuthSSRData(() =>
+    loadPersonalFilesData(clientDeps, params, { canonicalize: false }),
+  );
 
-  const rawParams = await searchParams;
+  if (!result || "redirectTo" in result) return null;
 
-  const baseConfig = Object.fromEntries(
-    Object.entries(rawParams).map(([k, v]) => {
-      if (v === "true") return [k, true];
-      if (v === "false") return [k, false];
-      if (k === "filter") return [k, Number.isNaN(+v) ? v : +v];
-
-      return [k, v];
-    }),
-  ) as FilesSelectorBaseConfig;
-
-  if (rawParams.auth === "oauth") {
-    return <FilesSelectorOAuth baseConfig={baseConfig} />;
-  }
-
-  const clientProps = await loadFilesSelectorProps(ssrDeps, baseConfig);
-
-  return <FilesSelectorClient {...clientProps} />;
+  return <DocsPage authToken="" {...result.data} />;
 }

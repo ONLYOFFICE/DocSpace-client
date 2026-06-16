@@ -95,6 +95,8 @@ class AxiosClient {
 
   private oauthReady: Promise<void> | null = null;
 
+  private oauthUnavailable = false;
+
   constructor() {
     if (typeof window !== "undefined") this.initCSR();
   }
@@ -208,15 +210,22 @@ class AxiosClient {
 
   setAuthToken = (token: string | null) => {
     this.authToken = token;
+    if (token) this.oauthUnavailable = false;
   };
 
   private ensureOAuthToken = (): Promise<void> => {
     if (this.authToken) return Promise.resolve();
+    if (this.oauthUnavailable) return Promise.resolve();
     if (this.oauthReady !== null) return this.oauthReady;
 
     this.oauthReady = requestAuthToken()
       .then((token) => {
-        if (token) this.authToken = token;
+        if (token) {
+          this.authToken = token;
+          this.oauthUnavailable = false;
+        } else {
+          this.oauthUnavailable = true;
+        }
       })
       .finally(() => {
         this.oauthReady = null;
@@ -342,6 +351,7 @@ class AxiosClient {
               opts._oauthRetried = true;
               this.authToken = null;
               this.oauthReady = null;
+              this.oauthUnavailable = false;
 
               return this.ensureOAuthToken().then(() => {
                 if (this.authToken)

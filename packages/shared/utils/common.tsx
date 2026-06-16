@@ -1506,6 +1506,10 @@ export const getCategoryType = (location: { pathname: string }) => {
   if (pathname.startsWith("/rooms")) {
     if (pathname.indexOf("personal") > -1) {
       categoryType = CategoryType.Personal;
+    } else if (pathname.indexOf("recent") > -1) {
+      categoryType = CategoryType.Recent;
+    } else if (pathname.indexOf("favorite") > -1) {
+      categoryType = CategoryType.Favorite;
     } else if (pathname.indexOf("shared") > -1) {
       const regexp = /(rooms)\/shared\/(\d+)/;
 

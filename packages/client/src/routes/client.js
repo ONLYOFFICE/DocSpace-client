@@ -195,6 +195,38 @@ const ClientRoutes = [
             ),
           },
           {
+            path: "rooms/recent",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/recent/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/favorite",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/favorite/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
             path: "rooms/shared",
             element: (
               <PrivateRoute>

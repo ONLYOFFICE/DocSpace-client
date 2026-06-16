@@ -525,8 +525,7 @@ const SectionHeaderContent = (props) => {
   const lifetime = selectedFolder?.lifetime || infoPanelRoom?.lifetime;
   const sharedType =
     (location.state?.isExternal || selectedFolder?.external) && !isPublicRoom;
-  const isEncryptedRoom =
-    selectedFolder?.private === true || isPrivacyFolder;
+  const isEncryptedRoom = selectedFolder?.private === true || isPrivacyFolder;
 
   const titleIcon = React.useMemo(() => {
     if (sharedType) return SharedLinkSvgUrl;
@@ -1205,13 +1204,8 @@ export default inject(
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
 
-    const {
-      theme,
-      frameConfig,
-      isFrame,
-      currentDeviceType,
-      displayAbout,
-    } = settingsStore;
+    const { theme, frameConfig, isFrame, currentDeviceType, displayAbout } =
+      settingsStore;
 
     const isRoom = !!roomType;
 

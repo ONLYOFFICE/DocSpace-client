@@ -315,6 +315,30 @@ const ClientRoutes = [
               </PrivateRoute>
             ),
           },
+          {
+            path: "ai-agents/:id",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/:id/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/:id/chat",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
           ...contactsRoutes,
           ...profileClientRoutes,
         ],

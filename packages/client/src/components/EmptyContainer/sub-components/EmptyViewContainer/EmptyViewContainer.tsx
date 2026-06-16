@@ -140,9 +140,15 @@ const InjectedEmptyViewContainer = inject<
     settingsStore,
     authStore,
     currentTariffStatusStore,
+    uploadDataStore,
+    filesActionsStore,
+    aiRoomStore,
   }): InjectedEmptyViewContainerProps => {
     const { isWarningRoomsDialog } = currentQuotaStore;
     const { isGracePeriod } = currentTariffStatusStore;
+    const { startUpload } = uploadDataStore;
+    const { createFoldersTree } = filesActionsStore;
+    const { knowledgeId } = aiRoomStore;
 
     const { isPublicRoom } = publicRoomStore;
     const { isFrame, logoText, aiConfig, standalone, tenantAlias, baseDomain } =
@@ -225,6 +231,9 @@ const InjectedEmptyViewContainer = inject<
       baseDomain,
       socialAuthUser: userStore?.user,
       isGracePeriod,
+      knowledgeId,
+      startUpload,
+      createFoldersTree,
     };
   },
 )(EmptyViewContainer as React.FC<OutEmptyViewContainerProps>);

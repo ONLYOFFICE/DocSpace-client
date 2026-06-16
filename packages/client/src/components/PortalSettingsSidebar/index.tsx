@@ -49,6 +49,7 @@ type PortalSettingsSidebarProps = {
   isCommunity: boolean;
   baseDomain?: string;
   aiServicesEnabled: boolean;
+  setIsLoadedArticleBody: (value: boolean) => void;
 };
 
 const PortalSettingsSidebar = ({
@@ -58,10 +59,15 @@ const PortalSettingsSidebar = ({
   isCommunity,
   baseDomain,
   aiServicesEnabled,
+  setIsLoadedArticleBody,
 }: PortalSettingsSidebarProps) => {
-  const { t } = useTranslation(["Settings", "Ldap", "OAuth", "Common"]);
+  const { t, ready } = useTranslation(["Settings", "Ldap", "OAuth", "Common"]);
   const location = useLocation();
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (ready) setIsLoadedArticleBody(true);
+  }, [ready, setIsLoadedArticleBody]);
 
   const mapLabel = (tKey: string): string => {
     switch (tKey) {
@@ -177,13 +183,14 @@ const PortalSettingsSidebar = ({
 };
 
 export default inject<TStore>(
-  ({ settingsStore, userStore, currentTariffStatusStore }) => ({
+  ({ settingsStore, userStore, currentTariffStatusStore, common }) => ({
     isNotPaidPeriod: currentTariffStatusStore.isNotPaidPeriod,
     isCommunity: currentTariffStatusStore.isCommunity,
     isOwner: userStore.user?.isOwner ?? false,
     standalone: settingsStore.standalone,
     baseDomain: settingsStore.baseDomain,
     aiServicesEnabled: settingsStore.aiServicesEnabled,
+    setIsLoadedArticleBody: common.setIsLoadedArticleBody,
   }),
 )(observer(PortalSettingsSidebar));
 

@@ -122,6 +122,8 @@ const View = ({
   fetchWebSearch,
   fetchKnowledge,
   initDefaultProvider,
+  fetchAiPrices,
+  fetchAiModelRestrictions,
 }: ViewProps) => {
   const location = useLocation();
   const { t } = useTranslation();
@@ -176,6 +178,9 @@ const View = ({
     fetchMCPServers,
     fetchWebSearch,
     fetchKnowledge,
+    fetchAiPrices,
+    fetchAiModelRestrictions,
+    handleServiceQuota: paymentStore?.handleServiceQuota,
     standalone: true,
   });
 
@@ -370,6 +375,7 @@ export const ViewComponent = inject(
     paymentStore,
     currentTariffStatusStore,
     aiSettingsStore,
+    servicesStore,
     defaultTemplatesStore,
   }: TStore) => {
     const { initSettings: initSettingsCommon } = common;
@@ -423,6 +429,8 @@ export const ViewComponent = inject(
       fetchWebSearch: aiSettingsStore.fetchWebSearch,
       fetchKnowledge: aiSettingsStore.fetchKnowledge,
       initDefaultProvider: aiSettingsStore.initDefaultProvider,
+      fetchAiPrices: servicesStore.fetchAiPrices,
+      fetchAiModelRestrictions: servicesStore.fetchAiModelRestrictions,
     };
   },
 )(observer(View));

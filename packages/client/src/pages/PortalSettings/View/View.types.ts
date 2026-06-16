@@ -83,4 +83,6 @@ export type ViewProps = {
   fetchWebSearch: TStore["aiSettingsStore"]["fetchWebSearch"];
   fetchKnowledge: TStore["aiSettingsStore"]["fetchKnowledge"];
   initDefaultProvider: TStore["aiSettingsStore"]["initDefaultProvider"];
+  fetchAiPrices: TStore["servicesStore"]["fetchAiPrices"];
+  fetchAiModelRestrictions: TStore["servicesStore"]["fetchAiModelRestrictions"];
 };

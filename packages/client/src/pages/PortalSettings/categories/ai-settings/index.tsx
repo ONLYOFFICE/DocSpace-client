@@ -46,15 +46,21 @@ import { DeviceType } from "@docspace/shared/enums";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+
+import ModelSettingsTable from "./models";
 import AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
+import PaymentStore from "SRC_DIR/store/PaymentStore";
 
 import { AIProvider, ProvidersLoader } from "./providers";
 import { MCPServers, ServersLoader } from "./servers";
-import { Search, SearchLoader } from "./search";
-import { Knowledge, KnowledgeLoader } from "./knowledge";
+import { SearchLoader } from "./search";
+import WebSearch from "./search/WebSearch";
+import { KnowledgeLoader } from "./knowledge";
+import KnowledgeBase from "./knowledge/KnowledgeBase";
 
 import useAiSettings from "./useAiSettings";
+import AIFeaturesBanner from "./sub-components/AIFeaturesBanner";
 
 import styles from "./AISettings.module.scss";
 
@@ -62,6 +68,8 @@ const detectCurrentTabId = (standalone: boolean) => {
   const path = window.location.pathname;
 
   if (!standalone) return "servers";
+
+  if (path.includes("models")) return "models";
 
   if (path.includes("providers")) return "providers";
 
@@ -75,6 +83,7 @@ const detectCurrentTabId = (standalone: boolean) => {
 };
 
 const loaders: Record<string, React.ReactNode> = {
+  models: <RectangleSkeleton className={styles.tabsLoader} />,
   providers: <ProvidersLoader />,
   servers: <ServersLoader />,
   search: <SearchLoader />,
@@ -90,6 +99,11 @@ type TAiSettingsProps = {
   fetchMCPServers?: AISettingsStore["fetchMCPServers"];
   fetchWebSearch?: AISettingsStore["fetchWebSearch"];
   initDefaultProvider?: AISettingsStore["initDefaultProvider"];
+  fetchAiPrices?: () => Promise<void>;
+  fetchAiModelRestrictions?: () => Promise<void>;
+
+  isAiToolsServiceOn?: PaymentStore["isAiToolsServiceOn"];
+  isCardLinkedToPortal?: PaymentStore["isCardLinkedToPortal"];
 
   showPortalSettingsLoader?: ClientLoadingStore["showPortalSettingsLoader"];
 };
@@ -103,19 +117,30 @@ const AiSettings = ({
   fetchMCPServers,
   fetchWebSearch,
   initDefaultProvider,
+  fetchAiPrices,
+  fetchAiModelRestrictions,
+  isAiToolsServiceOn,
+  isCardLinkedToPortal,
   showPortalSettingsLoader,
 }: TAiSettingsProps) => {
   const { t, ready } = useTranslation(["Common", "AISettings", "AIRoom"]);
 
-  const { initAIProviders, initMCPServers, initWebSearch, initKnowledge } =
-    useAiSettings({
-      fetchAIProviders,
-      fetchMCPServers,
-      fetchWebSearch,
-      fetchKnowledge,
-      initDefaultProvider,
-      standalone,
-    });
+  const {
+    initAiModels,
+    initAIProviders,
+    initMCPServers,
+    initWebSearch,
+    initKnowledge,
+  } = useAiSettings({
+    fetchAIProviders,
+    fetchMCPServers,
+    fetchWebSearch,
+    fetchKnowledge,
+    initDefaultProvider,
+    fetchAiPrices,
+    fetchAiModelRestrictions,
+    standalone,
+  });
 
   const navigate = useNavigate();
 
@@ -157,13 +182,15 @@ const AiSettings = ({
 
   React.useEffect(() => {
     const title =
-      currentTabId === "providers"
-        ? t("Common:AIProvider")
-        : currentTabId === "search"
-          ? t("Common:WebSearchAI")
-          : currentTabId === "knowledge"
-            ? t("AIRoom:Knowledge")
-            : t("Common:MCPSettingTitle");
+      currentTabId === "models"
+        ? t("Common:AIModels")
+        : currentTabId === "providers"
+          ? t("Common:AIProvider")
+          : currentTabId === "search"
+            ? t("Common:WebSearchAI")
+            : currentTabId === "knowledge"
+              ? t("AIRoom:Knowledge")
+              : t("Common:MCPSettingTitle");
     setDocumentTitle(title);
   }, [t, currentTabId]);
 
@@ -179,6 +206,12 @@ const AiSettings = ({
   const data = standalone
     ? [
         {
+          id: "models",
+          name: t("Common:AIModels"),
+          content: <ModelSettingsTable />,
+          onClick: initAiModels,
+        },
+        {
           id: "providers",
           name: t("Common:AIProvider"),
           content: <AIProvider />,
@@ -188,13 +221,13 @@ const AiSettings = ({
         {
           id: "search",
           name: t("Common:WebSearchAI"),
-          content: <Search />,
+          content: <WebSearch />,
           onClick: initWebSearch,
         },
         {
           id: "knowledge",
           name: t("AIRoom:Knowledge"),
-          content: <Knowledge />,
+          content: <KnowledgeBase />,
           onClick: initKnowledge,
         },
       ]
@@ -235,7 +268,13 @@ const AiSettings = ({
 };
 
 export const Component = inject(
-  ({ settingsStore, aiSettingsStore, clientLoadingStore }: TStore) => {
+  ({
+    settingsStore,
+    aiSettingsStore,
+    servicesStore,
+    paymentStore,
+    clientLoadingStore,
+  }: TStore) => {
     const { currentDeviceType } = settingsStore;
 
     const {
@@ -246,6 +285,10 @@ export const Component = inject(
       initDefaultProvider,
     } = aiSettingsStore;
 
+    const { fetchAiPrices, fetchAiModelRestrictions } = servicesStore;
+
+    const { isAiToolsServiceOn, isCardLinkedToPortal } = paymentStore;
+
     const { showPortalSettingsLoader } = clientLoadingStore;
 
     return {
@@ -255,7 +298,12 @@ export const Component = inject(
       fetchWebSearch,
       fetchKnowledge,
       initDefaultProvider,
+      fetchAiPrices,
+      fetchAiModelRestrictions,
+      isAiToolsServiceOn,
+      isCardLinkedToPortal,
       showPortalSettingsLoader,
     };
   },
 )(observer(AiSettings));
+

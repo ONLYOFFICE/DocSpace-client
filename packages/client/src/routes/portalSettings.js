@@ -392,6 +392,14 @@ const PortalSettingsRoutes = {
       ),
     },
     {
+      path: "ai-settings/models",
+      element: (
+        <ProtectedAISettingsRoute>
+          <ViewComponent />
+        </ProtectedAISettingsRoute>
+      ),
+    },
+    {
       path: "ai-settings/providers",
       element: (
         <ProtectedAISettingsRoute>

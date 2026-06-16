@@ -30,9 +30,10 @@ import { useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import type { NavMenuGroup, NavMenuItem, NavSubItem } from "@docspace/ui-kit/components/nav-menu";
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { CategoryType } from "@docspace/shared/constants";
 import type { ValueOf } from "@docspace/shared/types";
 
@@ -50,6 +51,9 @@ type ClientArticleSidebarProps = FolderIds & {
   userId?: string;
   treeFolders: TTreeFolder[];
   isVisitor?: boolean;
+  // Room admins / admins only — gates the Rooms → Templates item, matching the
+  // former Rooms/Templates submenu (and the Use template quick action).
+  canUseTemplates?: boolean;
   onFolderNavigate: () => void;
 };
 
@@ -57,6 +61,7 @@ const ClientArticleSidebar = ({
   userId,
   treeFolders,
   isVisitor,
+  canUseTemplates,
   onFolderNavigate,
   ...folderIds
 }: ClientArticleSidebarProps) => {
@@ -101,9 +106,18 @@ const ClientArticleSidebar = ({
     [navigate, roomsFolderId],
   );
 
+  // Templates: the Rooms list scoped to the Templates search area. Replaces the
+  // former Rooms/Templates submenu tabs (searchArea=Templates on /rooms/shared).
+  const goTemplates = React.useCallback(() => {
+    onFolderNavigateRef.current?.();
+    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Templates);
+    filter.searchArea = RoomSearchArea.Templates;
+    navigate(`/rooms/shared/filter?${filter.toUrlParams(userId, false)}`);
+  }, [navigate, userId]);
+
   const activeId = React.useMemo(
-    () => getClientActiveId(location.pathname, folderIds),
-    [location.pathname, folderIds],
+    () => getClientActiveId(location.pathname, folderIds, location.search),
+    [location.pathname, location.search, folderIds],
   );
 
   const groups = React.useMemo<NavMenuGroup[]>(() => {
@@ -182,6 +196,16 @@ const ClientArticleSidebar = ({
             icon: getCatalogIconUrlByType(FolderType.Favorites),
             onClick: goRoomsScoped(CategoryType.Favorite, "/rooms/favorite"),
           },
+          ...(canUseTemplates
+            ? [
+                {
+                  id: "rooms-templates",
+                  label: t("Common:Templates"),
+                  icon: getCatalogIconUrlByType(FolderType.RoomTemplates),
+                  onClick: goTemplates,
+                },
+              ]
+            : []),
           ...(archiveFolder
             ? [navItem(archiveFolder, { withTopSeparator: true })]
             : []),
@@ -196,13 +220,22 @@ const ClientArticleSidebar = ({
       { id: "overview", items: [overview] },
       ...(mainItems.length > 0 ? [{ id: "main", items: mainItems }] : []),
     ];
-  }, [t, go, goFolder, goRoomsScoped, treeFolders, isVisitor]);
+  }, [
+    t,
+    go,
+    goFolder,
+    goRoomsScoped,
+    goTemplates,
+    treeFolders,
+    isVisitor,
+    canUseTemplates,
+  ]);
 
   return <AppsSidebar groups={groups} activeId={activeId} />;
 };
 
 const ClientArticleSidebarConnected = inject<TStore>(
-  ({ userStore, treeFoldersStore, filesStore, clientLoadingStore }) => ({
+  ({ authStore, userStore, treeFoldersStore, filesStore, clientLoadingStore }) => ({
     userId: userStore.user?.id,
     treeFolders: treeFoldersStore.treeFolders,
     roomsFolderId: treeFoldersStore.roomsFolderId,
@@ -214,6 +247,8 @@ const ClientArticleSidebarConnected = inject<TStore>(
     sharedWithMeFolderId: treeFoldersStore.sharedWithMeFolderId,
     aiAgentsFolderId: treeFoldersStore.aiAgentsFolderId,
     isVisitor: userStore.user?.isVisitor,
+    // Matches Home's canCreateRooms — room admins and admins can use templates.
+    canUseTemplates: authStore.isAdmin || authStore.isRoomAdmin,
     onFolderNavigate: () => {
       filesStore.setSelection?.([]);
       clientLoadingStore.setIsSectionBodyLoading(true, true);

@@ -240,6 +240,7 @@ const PureHome = (props) => {
     currentFolderId,
     canCreateFiles,
     canCreateRooms,
+    userId,
     isDocumentsFolder,
     isRoom,
     isRoomsFolder,

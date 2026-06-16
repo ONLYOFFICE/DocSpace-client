@@ -152,7 +152,7 @@ const TagInput = ({
         tagHandler={tagHandler}
         tagInputValue={tagInput}
         setTagInputValue={setTagInput}
-        createTagLabel={t("CreateTagOption")}
+        createTagLabel={t("Common:CreateTagOption")}
         closeDropdown={closeDropdown}
       />
 
@@ -162,3 +162,4 @@ const TagInput = ({
 };
 
 export default TagInput;
+

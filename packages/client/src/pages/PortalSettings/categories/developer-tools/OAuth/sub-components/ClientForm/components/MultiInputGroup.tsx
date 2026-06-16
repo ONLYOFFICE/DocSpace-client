@@ -186,7 +186,7 @@ const MultiInputGroup = ({
         error={
           isError
             ? `${t("ErrorWrongURL")}: ${window.location.origin}`
-            : t("ThisRequiredField")
+            : t("Common:ThisRequiredField")
         }
         isRequired
         isError={isError || hasError}

@@ -61,11 +61,64 @@ function copyAndMinifyLocales(src: string, dest: string) {
   }
 }
 
+// Mirror getLanguage() so combined files are keyed exactly like the runtime
+// lookup (en-US/en-GB → en, xx-Xx → xx).
+function normalizeLanguage(lng: string) {
+  let language = lng === "en-US" || lng === "en-GB" ? "en" : lng;
+  const splitted = lng.split("-");
+  if (splitted.length === 2 && splitted[0] === splitted[1].toLowerCase()) {
+    [language] = splitted;
+  }
+  return language;
+}
+
+// Merge every namespace of a language (from BOTH locale roots — the client's
+// own namespaces and the shared root that holds Common) into a single
+// `{lng}/_combined.json` file: { [namespace]: translations }. Loading this one
+// file gives i18next every namespace in a single request instead of ~15+.
+function buildCombinedLocales(srcRoots: string[], destDir: string) {
+  const byLanguage = new Map<string, Record<string, unknown>>();
+
+  for (const root of srcRoots) {
+    if (!fs.existsSync(root)) continue;
+    for (const dir of fs.readdirSync(root, { withFileTypes: true })) {
+      if (!dir.isDirectory() || dir.name.startsWith(".")) continue;
+      const language = normalizeLanguage(dir.name);
+      const bundle = byLanguage.get(language) ?? {};
+      const langDir = path.join(root, dir.name);
+      for (const file of fs.readdirSync(langDir)) {
+        if (!file.endsWith(".json")) continue;
+        const ns = file.slice(0, -".json".length);
+        try {
+          bundle[ns] = JSON.parse(
+            fs.readFileSync(path.join(langDir, file), "utf-8"),
+          );
+        } catch {
+          // skip malformed namespace, keep the rest of the bundle usable
+        }
+      }
+      byLanguage.set(language, bundle);
+    }
+  }
+
+  for (const [language, bundle] of byLanguage) {
+    const langDestDir = path.join(destDir, language);
+    fs.mkdirSync(langDestDir, { recursive: true });
+    fs.writeFileSync(
+      path.join(langDestDir, "_combined.json"),
+      JSON.stringify(bundle),
+      "utf-8",
+    );
+  }
+}
+
 export const copyLocalesPlugin = (): Plugin => ({
   name: "copy-locales",
   closeBundle() {
-    const srcDir = path.resolve(rootDir, "public/locales");
+    const clientLocales = path.resolve(rootDir, "public/locales");
+    const sharedLocales = path.resolve(rootDir, "../../public/locales");
     const destDir = path.resolve(rootDir, "dist/locales");
-    copyAndMinifyLocales(srcDir, destDir);
+    copyAndMinifyLocales(clientLocales, destDir);
+    buildCombinedLocales([clientLocales, sharedLocales], destDir);
   },
 });

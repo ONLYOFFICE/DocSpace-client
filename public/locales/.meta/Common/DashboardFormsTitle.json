@@ -3,7 +3,7 @@
   "content": "Forms",
   "content_en_sha1_hash": "4bec9575721b2739ed1e7c56eb6c8471084fcbcf",
   "created_at": "2026-06-01T21:20:14.484Z",
-  "updated_at": "2026-06-09T09:43:10.806Z",
+  "updated_at": "2026-06-15T19:31:55.957Z",
   "comment": {
     "text": "Navigation menu label, app catalog item title, and page title for the Forms section.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 315,
+      "line_number": 313,
       "context": "}\n };\n \n const aiFormsItem: NavMenuItem = {\n id: AI_FORMS_ID,\n label: t(\"Common:DashboardFormsTitle\"),\n icon: FormFileReactSvgUrl,\n onClick: handleAiFormsClick,\n children: aiFormsEnabled\n ? [\n {",
       "module": "/packages/client"
     },
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/AiForms/index.tsx",
-      "line_number": 76,
-      "context": "roomId,\n ensureAppsLoaded,\n fetchAppSettings,\n }: AiFormsProps) => {\n const { t } = useTranslation([\"Common\"]);\n useDocumentTitle(\"Common:DashboardFormsTitle\");\n const [searchParams, setSearchParams] = useSearchParams();\n const [settingsChecked, setSettingsChecked] = React.useState(false);\n const [showSetupDialog, setShowSetupDialog] = React.useState(false);\n const iframeRef = React.useRef<SdkIframeHandle | null>(null);\n const lastSdkSectionRef = React.useRef<string | null>(null);",
+      "line_number": 74,
+      "context": "roomId,\n ensureAppsLoaded,\n fetchAppSettings,\n }: AiFormsProps) => {\n const { t } = useTranslation([\"Common\"]);\n useDocumentTitle(\"Common:DashboardFormsTitle\");\n const [searchParams, setSearchParams] = useSearchParams();\n const [settingsChecked, setSettingsChecked] = React.useState(false);\n const [showSetupDialog, setShowSetupDialog] = React.useState(false);\n const lastSdkSectionRef = React.useRef<string | null>(null);",
       "module": "/packages/client"
     },
     {

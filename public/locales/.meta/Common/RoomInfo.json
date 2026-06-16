@@ -3,7 +3,7 @@
   "content": "Room info",
   "content_en_sha1_hash": "2a6cc5757e034713f73b7ed2b5d0ae68ba0b8ee4",
   "created_at": "2025-12-15T14:02:08.646Z",
-  "updated_at": "2026-06-09T09:43:10.932Z",
+  "updated_at": "2026-06-15T19:31:56.146Z",
   "comment": {
     "text": "This is a button label that opens a panel displaying information about the current room or agent.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 205,
-      "context": "disabled: true,\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: t(\"Common:RoomInfo\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => onInfoRoom?.(room),\n },\n {\n id: \"option_embedding-settings\",",
+      "line_number": 244,
+      "context": "disabled: !room.security?.Duplicate,\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: t(\"Common:RoomInfo\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => onInfoRoom?.(room),\n },\n {\n id: \"option_embedding-settings\",",
       "module": "/packages/sdk"
     }
   ],

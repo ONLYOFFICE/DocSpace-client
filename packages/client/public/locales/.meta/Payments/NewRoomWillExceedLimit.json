@@ -3,7 +3,7 @@
   "content": "Creating this room is not possible since the limit is reached for the number of rooms included in your current plan.",
   "content_en_sha1_hash": "a04a1156e2e2826b884b0b81d56586ced44b5f15",
   "created_at": "2025-05-19T21:30:53.704Z",
-  "updated_at": "2026-05-15T14:00:06.687Z",
+  "updated_at": "2026-06-15T19:31:55.999Z",
   "comment": {
     "text": "This is an error message displayed in a dialog. It informs the user that they cannot create a new room because their plan's room limit has been reached.",
     "is_auto": true,
@@ -16,6 +16,12 @@
       "line_number": 81,
       "context": "</Text>\n <br />\n <Text>\n {isArchiveFolderRoot\n ? t(\"NotPossibleRoomRestoring\")\n : t(\"NewRoomWillExceedLimit\")}\n </Text>\n <br />\n {chooseNewPlan}\n </>\n );",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/quota-warning-dialog/index.tsx",
+      "line_number": 180,
+      "context": "const roomsLimitContent = isRoomsTariffLimit ? (\n <>\n <Text fontWeight={600}>{t(\"CannotCreateNewRoom\")}</Text>\n <br />\n <Text>{t(\"NewRoomWillExceedLimit\")}</Text>\n <br />\n {chooseNewPlan}\n </>\n ) : (\n <>",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

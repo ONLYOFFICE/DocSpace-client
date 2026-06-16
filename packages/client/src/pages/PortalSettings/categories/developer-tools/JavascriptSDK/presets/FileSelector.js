@@ -404,7 +404,7 @@ const FileSelector = (props) => {
           </ControlsSection>
 
           <ControlsSection>
-            <Label className="label">{t("InterfaceElements")}</Label>
+            <Label className="label">{t("Common:InterfaceElements")}</Label>
 
             <LabelGroup>
               <Checkbox

@@ -724,6 +724,8 @@
   "DropzoneTitleSecondary": "lub upuść plik tutaj",
   "DueToday": "Zadanie do oddania dzisiaj",
   "Duplicate": "Duplikować",
+  "DuplicateFolderItem": "Pomyślnie zduplikowano katalog <2>{{title}}</2>",
+  "DuplicateItem": "Pomyślnie zduplikowano <2>{{title}}</2>",
   "EditAccessInfo": "Określiliśmy, ilu użytkowników może mieć dostęp do edycji dokumentów.",
   "EditAdditionalLink": "Edytuj link dodatkowy",
   "EditAgent": "Edytuj Agenta",
@@ -2267,7 +2269,5 @@
   "YourName": "Twoje imię",
   "YourPrice": "Twoja cena",
   "YourTurn": "Twoja kolej",
-  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby.",
-  "DuplicateFolderItem": "Pomyślnie zduplikowano katalog <2>{{title}}</2>",
-  "DuplicateItem": "Pomyślnie zduplikowano <2>{{title}}</2>"
+  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby."
 }

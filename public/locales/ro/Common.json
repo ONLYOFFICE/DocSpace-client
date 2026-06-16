@@ -735,6 +735,8 @@
   "DropzoneTitleSecondary": "sau lăsați fişierul aici",
   "DueToday": "Scadență astăzi",
   "Duplicate": "Duplicare",
+  "DuplicateFolderItem": "Folderul <2>{{title}}</2> s-a duplicat cu succes",
+  "DuplicateItem": "<2>{{title}}</2> s-a duplicat cu succes",
   "EditAccessInfo": "Am specificat câți utilizatori pot avea permisiunea la editare a documentelor.",
   "EditAdditionalLink": "Modificare link suplimentar",
   "EditAgent": "Modificare Agent",
@@ -2290,7 +2292,5 @@
   "YourName": "Numele dvs.",
   "YourPrice": "Preţul dvs.",
   "YourTurn": "Acum e rândul dvs.",
-  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării.",
-  "DuplicateFolderItem": "Folderul <2>{{title}}</2> s-a duplicat cu succes",
-  "DuplicateItem": "<2>{{title}}</2> s-a duplicat cu succes"
+  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării."
 }

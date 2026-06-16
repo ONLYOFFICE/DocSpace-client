@@ -3,7 +3,7 @@
   "content": "Install {{module}}",
   "content_en_sha1_hash": "eea17cdb3a93db18e8cb7a2f18d50acca1b2cedd",
   "created_at": "2026-05-19T19:03:14.033Z",
-  "updated_at": "2026-05-24T17:27:49.114Z",
+  "updated_at": "2026-06-15T19:31:56.034Z",
   "comment": {
     "text": "Dialog title for the module installation process, where {{module}} represents the name of the module.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallModuleDialog.tsx",
-      "line_number": 263,
+      "line_number": 269,
       "context": "const getHeader = () => {\n if (phase === \"confirm\")\n return t(\"Common:DashboardInstallConfirmTitle\", { module: moduleTitle });\n if (phase === \"done\")\n return t(\"Common:DashboardInstallDoneTitle\", { module: moduleTitle });\n return t(\"Common:DashboardInstallTitle\", { module: moduleTitle });\n };\n \n const handleModalClose = inProgress ? handleCancelInstalling : onClose;\n \n return (",
       "module": "/packages/client"
     }

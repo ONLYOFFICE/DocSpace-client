@@ -82,7 +82,7 @@ export const GreetingCreateUserContainer = ({
       return (
         <Trans
           {...commonProps}
-          i18nKey="InvitationToAgent"
+          i18nKey="Common:InvitationToAgent"
           defaults={DEFAULT_AGENT_TEXT}
           values={{
             displayName,
@@ -97,7 +97,7 @@ export const GreetingCreateUserContainer = ({
       return (
         <Trans
           {...commonProps}
-          i18nKey="InvitationToRoom"
+          i18nKey="Common:InvitationToRoom"
           defaults={DEFAULT_ROOM_TEXT}
           values={{
             displayName,
@@ -112,7 +112,7 @@ export const GreetingCreateUserContainer = ({
     return (
       <Trans
         {...commonProps}
-        i18nKey="InvitationToPortal"
+        i18nKey="Common:InvitationToPortal"
         defaults={DEFAULT_PORTAL_TEXT}
         values={{
           displayName,

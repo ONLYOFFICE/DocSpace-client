@@ -717,6 +717,8 @@
   "DropzoneTitleSecondary": "alebo súbor presuňte sem",
   "DueToday": "Dôležité dnes",
   "Duplicate": "Duplikát",
+  "DuplicateFolderItem": "Priečinok <2>{{title}}</2> úspešne duplikovaný",
+  "DuplicateItem": "<2>{{title}}</2> úspešne duplikovaný",
   "EditAccessInfo": "Určili sme, koľko používateľov môže mať prístup na úpravu dokumentov.",
   "EditAdditionalLink": "Upraviť dodatočný odkaz",
   "EditAgent": "Úprava agenta",
@@ -2237,7 +2239,5 @@
   "YourName": "Vaše meno",
   "YourPrice": "Vaša cena",
   "YourTurn": "Ste na rade",
-  "YouWillBeContacted": "Po vytvorení požiadavky vás bude kontaktovať predajný tím.",
-  "DuplicateFolderItem": "Priečinok <2>{{title}}</2> úspešne duplikovaný",
-  "DuplicateItem": "<2>{{title}}</2> úspešne duplikovaný"
+  "YouWillBeContacted": "Po vytvorení požiadavky vás bude kontaktovať predajný tím."
 }

@@ -239,7 +239,7 @@ class DetailsHelper {
         return this.t("InfoPanel:StorageType");
 
       case "File extension":
-        return this.t("FileExtension");
+        return this.t("Common:FileExtension");
 
       case "Content":
         return this.t("Common:Content");
@@ -248,11 +248,11 @@ class DetailsHelper {
       case "Resolution":
         return this.t("InfoPanel:Resolution");
       case "Date modified":
-        return this.t("DateModified");
+        return this.t("Common:DateModified");
       case "Last modified by":
-        return this.t("LastModifiedBy");
+        return this.t("Common:LastModifiedBy");
       case "Creation date":
-        return this.t("CreationDate");
+        return this.t("Common:CreationDate");
       case "Lifetime ends":
         return this.t("LifetimeEnds");
 

@@ -3,7 +3,7 @@
   "content": "Agent manager",
   "content_en_sha1_hash": "9eb4782eb2942928e3b10def6aee29e8e6780164",
   "created_at": "2025-11-03T12:10:13.383Z",
-  "updated_at": "2026-06-01T21:20:44.447Z",
+  "updated_at": "2026-06-15T19:31:56.056Z",
   "comment": {
     "text": "This is a label for a user role, \"Agent manager\". It appears in user role selection menus and describes a user with specific management permissions.",
     "is_auto": true,
@@ -26,7 +26,7 @@
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
       "line_number": 184,
-      "context": "access: isNone ? EmployeeType.RoomAdmin : ShareAccessRights.RoomManager,\n type: EmployeeType.RoomAdmin,\n },\n agentManager: {\n key: \"agentManager\",\n label: t(\"Common:AgentManager\"),\n description: getRoomAdminDescription(roomType, t),\n tooltip: t(\"UserAgentMaxAvailableRoleWarning\", {\n productName: getBrandName(\"ProductName\"),\n }),\n ...(!standalone && isNone && { quota: t(\"Common:Paid\") }),",
+      "context": "access: isNone ? EmployeeType.RoomAdmin : ShareAccessRights.RoomManager,\n type: EmployeeType.RoomAdmin,\n },\n agentManager: {\n key: \"agentManager\",\n label: t(\"Common:AgentManager\"),\n description: getRoomAdminDescription(roomType, t),\n tooltip: t(\"Common:UserAgentMaxAvailableRoleWarning\", {\n productName: getBrandName(\"ProductName\"),\n }),\n ...(!standalone && isNone && { quota: t(\"Common:Paid\") }),",
       "module": "/packages/shared"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "OK",
   "content_en_sha1_hash": "9ce3bd4224c8c1780db56b4125ecf3f24bf748b7",
   "created_at": "2025-06-05T23:02:58.880Z",
-  "updated_at": "2026-06-09T09:43:10.814Z",
+  "updated_at": "2026-06-15T19:31:55.969Z",
   "comment": {
     "text": "This is the label for an \"OK\" button, typically used to confirm an action or close a dialog box.",
     "is_auto": true,
@@ -183,6 +183,12 @@
       "file_path": "/packages/sdk/src/app/(rooms)/_components/move-to-archive-dialog/index.tsx",
       "line_number": 93,
       "context": "</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"archive\"\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={handleConfirm}\n testId=\"move_to_archive_dialog_submit\"",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/quota-warning-dialog/index.tsx",
+      "line_number": 218,
+      "context": "<Button\n key=\"OKButton\"\n label={\n isPaymentPageAvailable\n ? t(\"Common:UpgradePlan\")\n : t(\"Common:OKButton\")\n }\n size={ButtonSize.normal}\n primary\n onClick={isPaymentPageAvailable ? onUpgradePlan : onClose}\n scale",
       "module": "/packages/sdk"
     },
     {

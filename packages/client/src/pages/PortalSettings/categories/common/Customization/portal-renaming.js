@@ -278,28 +278,28 @@ const PortalRenamingComponent = (props) => {
 
     switch (true) {
       case value === "":
-        setErrorValue(t("PortalNameEmpty"));
-        saveToSessionStorage("errorValue", t("PortalNameEmpty"));
+        setErrorValue(t("Common:PortalNameEmpty"));
+        saveToSessionStorage("errorValue", t("Common:PortalNameEmpty"));
         break;
       case value.length < domainValidator.minLength ||
         value.length > domainValidator.maxLength:
         setErrorValue(
-          t("PortalNameLength", {
+          t("Common:PortalNameLength", {
             minLength: domainValidator.minLength,
             maxLength: domainValidator.maxLength,
           }),
         );
         saveToSessionStorage(
           "errorValue",
-          t("PortalNameLength", {
+          t("Common:PortalNameLength", {
             minLength: domainValidator.minLength,
             maxLength: domainValidator.maxLength,
           }),
         );
         break;
       case !validDomain.test(value):
-        setErrorValue(t("PortalNameIncorrect"));
-        saveToSessionStorage("errorValue", t("PortalNameIncorrect"));
+        setErrorValue(t("Common:PortalNameIncorrect"));
+        saveToSessionStorage("errorValue", t("Common:PortalNameIncorrect"));
         break;
       default:
         saveToSessionStorage("errorValue", null);

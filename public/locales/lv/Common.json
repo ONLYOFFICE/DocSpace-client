@@ -724,6 +724,8 @@
   "DropzoneTitleSecondary": "vai nometiet failu šeit",
   "DueToday": "Termiņš šodien",
   "Duplicate": "Dublikāts",
+  "DuplicateFolderItem": "Mape <2>{{title}}</2> veiksmīgi dublēta",
+  "DuplicateItem": "<2>{{title}}</2> veiksmīgi dublēta",
   "EditAccessInfo": "Mēs norādījām, cik lietotājiem var būt piekļuve dokumentu rediģēšanai.",
   "EditAdditionalLink": "Rediģēt papildu saiti",
   "EditAgent": "Rediģēt aģentu",
@@ -2267,7 +2269,5 @@
   "YourName": "Jūsu vārds",
   "YourPrice": "Jūsu cena",
   "YourTurn": "Jūsu kārta",
-  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides.",
-  "DuplicateFolderItem": "Mape <2>{{title}}</2> veiksmīgi dublēta",
-  "DuplicateItem": "<2>{{title}}</2> veiksmīgi dublēta"
+  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides."
 }

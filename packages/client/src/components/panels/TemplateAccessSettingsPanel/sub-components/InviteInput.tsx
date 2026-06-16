@@ -170,7 +170,7 @@ const InviteInput = ({
 
       const addUser = () => {
         if (shared) {
-          toastr.warning(t("UsersAlreadyAdded"));
+          toastr.warning(t("Common:UsersAlreadyAdded"));
         } else {
           setInviteItems([item, ...inviteItems] as TSelectorItem[]);
         }

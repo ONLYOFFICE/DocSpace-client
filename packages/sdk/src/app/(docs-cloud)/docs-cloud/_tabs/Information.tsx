@@ -135,7 +135,7 @@ const InformationTabContent = ({ info }: InformationTabProps) => {
     },
     {
       key: "active",
-      title: t("Active"),
+      title: t("Common:Active"),
       enable: true,
       resizable: true,
       minWidth: 60,
@@ -197,7 +197,7 @@ const InformationTabContent = ({ info }: InformationTabProps) => {
   ];
 
   const formatRowValues = (row: StatRow) => {
-    const parts: string[] = [`${t("Active")}: ${row.active ?? "—"}`];
+    const parts: string[] = [`${t("Common:Active")}: ${row.active ?? "—"}`];
     if (row.internal !== null)
       parts.push(`${t("DocsCloud:Internal")}: ${row.internal}`);
     if (row.external !== null)

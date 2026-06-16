@@ -2236,7 +2236,7 @@ class ContextOptionsStore {
       withOpen && {
         id: "option_open",
         key: "open",
-        label: t("Open"),
+        label: t("Common:Open"),
         icon: FolderReactSvgUrl,
         onClick: () => this.onOpenFolder(item, t),
         disabled:
@@ -2263,7 +2263,7 @@ class ContextOptionsStore {
       {
         id: "option_open-pdf",
         key: "open-pdf",
-        label: t("Open"),
+        label: t("Common:Open"),
         icon: EyeReactSvgUrl,
         onClick: () => this.gotoDocEditor(item, false),
         disabled: false,
@@ -2312,7 +2312,7 @@ class ContextOptionsStore {
         label:
           this.treeFoldersStore.isRecentFolder ||
           this.treeFoldersStore.isFavoritesFolder
-            ? t("Open")
+            ? t("Common:Open")
             : t("Common:Preview"),
         icon: EyeReactSvgUrl,
         onClick: () =>
@@ -2329,7 +2329,7 @@ class ContextOptionsStore {
         label:
           this.treeFoldersStore.isRecentFolder ||
           this.treeFoldersStore.isFavoritesFolder
-            ? t("Open")
+            ? t("Common:Open")
             : t("Common:View"),
         icon: EyeReactSvgUrl,
         onClick: (fileId) => this.onMediaFileClick(fileId, item),
@@ -2697,7 +2697,7 @@ class ContextOptionsStore {
       {
         id: "option_open-location",
         key: "open-location",
-        label: t("OpenLocation"),
+        label: t("Common:OpenLocation"),
         icon: FolderLocationReactSvgUrl,
         onClick: () => this.onOpenLocation(item),
         disabled: !!item.requestToken,
@@ -2810,7 +2810,7 @@ class ContextOptionsStore {
       {
         id: "option_leave-room",
         key: "leave-room",
-        label: isAIAgent ? t("LeaveTheAgent") : t("Common:LeaveTheRoom"),
+        label: isAIAgent ? t("Common:LeaveTheAgent") : t("Common:LeaveTheRoom"),
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
         disabled: isKnowledgeOrResult
@@ -3469,7 +3469,7 @@ class ContextOptionsStore {
     const options = [
       /* {
         key: "mark-as-favorite",
-        label: t("MarkAsFavorite"),
+        label: t("Common:MarkAsFavorite"),
         icon: FavoritesReactSvgUrl,
         onClick: (e) => this.onClickFavorite("mark", favoriteItems, t),
         disabled: !favoriteItems.length,
@@ -3544,7 +3544,7 @@ class ContextOptionsStore {
       },
       /* {
         key: "remove-from-favorites",
-        label: t("RemoveFromFavorites"),
+        label: t("Common:RemoveFromFavorites"),
         icon: FavoritesFillReactSvgUrl,
         onClick: (e) => this.onClickFavorite("remove", removeFromFavoriteItems, t),
         disabled: favoriteItems.length || !removeFromFavoriteItems.length,

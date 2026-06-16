@@ -17,12 +17,12 @@
       "approved_at": null
     }
   },
-  "updated_at": "2026-05-24T18:16:08.784Z",
+  "updated_at": "2026-06-15T19:31:55.992Z",
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
       "line_number": 274,
-      "context": "{isRoomDelete || isTemplate || isAIAgent ? (\n <Checkbox\n style={{ marginTop: \"16px\" }}\n label={\n isAIAgent\n ? t(\"DeleteAIAgentWarning\")\n : isTemplate\n ? t(\"DeleteTemplateWarning\")\n : t(\"Common:DeleteRoomWarning\")\n }\n dataTestId=\"delete_warning_checkbox\"",
+      "context": "{isRoomDelete || isTemplate || isAIAgent ? (\n <Checkbox\n style={{ marginTop: \"16px\" }}\n label={\n isAIAgent\n ? t(\"Common:DeleteAIAgentWarning\")\n : isTemplate\n ? t(\"DeleteTemplateWarning\")\n : t(\"Common:DeleteRoomWarning\")\n }\n dataTestId=\"delete_warning_checkbox\"",
       "module": "/packages/client"
     }
   ]

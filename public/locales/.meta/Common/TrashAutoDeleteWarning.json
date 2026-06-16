@@ -3,7 +3,7 @@
   "content": "Items in {{sectionName}} are automatically deleted after 30 days.",
   "content_en_sha1_hash": "72740d2f13fab9038a1cf3a73558f696ef70b1af",
   "created_at": "2026-06-03T09:30:00.163Z",
-  "updated_at": "2026-06-09T14:03:10.867Z",
+  "updated_at": "2026-06-15T19:31:56.069Z",
   "comment": {
     "text": "Warning text displayed in a warning component or header when viewing the trash section. The {{sectionName}} variable represents the name of the section.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/header/index.tsx",
-      "line_number": 151,
+      "line_number": 142,
       "context": "// on desktop. Mobile shows the same text via Section.SectionWarning.\n const navigationTitles = useMemo(\n () =>\n isTrashSection\n ? {\n warningText: t(\"Common:TrashAutoDeleteWarning\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n }\n : undefined,\n [isTrashSection, t],",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx",
-      "line_number": 634,
+      "line_number": 617,
       "context": "}\n sectionWarningContent={\n isTrash ? (\n <WarningComponent\n title={t(\n \"Common:TrashAutoDeleteWarning\",\n {\n sectionName: t(\n \"Common:TrashSection\",\n ),\n },",
       "module": "/packages/sdk"
     }

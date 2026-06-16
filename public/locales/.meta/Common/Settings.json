@@ -3,7 +3,7 @@
   "content": "Settings",
   "content_en_sha1_hash": "c7f73bb54d928922c3838bb789ee9fb8a5b1eb37",
   "created_at": "2025-05-19T21:30:48.587Z",
-  "updated_at": "2026-06-09T09:43:10.784Z",
+  "updated_at": "2026-06-15T19:31:55.925Z",
   "comment": {
     "text": "This is a label for a button or a title for a dialog, indicating a section or action related to configuration options.",
     "is_auto": true,
@@ -25,19 +25,13 @@
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 366,
+      "line_number": 364,
       "context": "},\n ...(isAdminOrOwner\n ? [\n {\n id: \"ai-forms-settings\",\n label: t(\"Common:Settings\"),\n icon: CatalogSettingsReactSvgUrl,\n onClick: () => navigate(\"/ai-forms?section=settings\"),\n },\n ]\n : []),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 366,
-      "context": "},\n ...(isAdminOrOwner\n ? [\n {\n id: \"ai-forms-settings\",\n label: t(\"Common:Settings\"),\n icon: CatalogSettingsReactSvgUrl,\n onClick: () => navigate(\"/ai-forms?section=settings\"),\n },\n ]\n : []),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 366,
+      "line_number": 364,
       "context": "},\n ...(isAdminOrOwner\n ? [\n {\n id: \"ai-forms-settings\",\n label: t(\"Common:Settings\"),\n icon: CatalogSettingsReactSvgUrl,\n onClick: () => navigate(\"/ai-forms?section=settings\"),\n },\n ]\n : []),",
       "module": "/packages/client"
     },
@@ -122,7 +116,7 @@
     {
       "file_path": "/packages/sdk/src/app/(docs-cloud)/docs-cloud/page.client.tsx",
       "line_number": 85,
-      "context": ".finally(() => setIsLoading(false));\n }, []);\n \n const tabs: TTabItem[] = [\n { id: \"information\", name: t(\"DocsCloud:Statistic\"), content: null },\n { id: \"settings\", name: t(\"Settings\"), content: null },\n ];\n \n if (isLoading) return <AppLoader />;\n if (!tenantInfo || !tenantConfig) return null;",
+      "context": ".finally(() => setIsLoading(false));\n }, []);\n \n const tabs: TTabItem[] = [\n { id: \"information\", name: t(\"DocsCloud:Statistic\"), content: null },\n { id: \"settings\", name: t(\"Common:Settings\"), content: null },\n ];\n \n if (isLoading) return <AppLoader />;\n if (!tenantInfo || !tenantConfig) return null;",
       "module": "/packages/sdk"
     },
     {
@@ -133,8 +127,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/DocsSettingsLayout.tsx",
-      "line_number": 71,
-      "context": "<RootScrollbar>\n <SectionWrapper\n sectionHeaderContent={\n <div style={{ padding: \"12px 0\" }}>\n <Text fontSize=\"18px\" fontWeight={700}>\n {t(\"Common:Settings\")}\n </Text>\n </div>\n }\n sectionFilterContent={<div />}\n sectionBodyContent={<Settings canSeeBilling={canSeeBilling} />}",
+      "line_number": 84,
+      "context": "<RootScrollbar>\n <SectionWrapper\n sectionHeaderContent={\n <div style={{ padding: \"12px 0\" }}>\n <Text fontSize=\"18px\" fontWeight={700}>\n {t(\"Common:Settings\")}\n </Text>\n </div>\n }\n sectionFilterContent={<div />}\n sectionBodyContent={",
       "module": "/packages/sdk"
     }
   ],

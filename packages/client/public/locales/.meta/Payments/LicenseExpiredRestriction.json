@@ -3,7 +3,7 @@
   "content": "Cannot add new users and create new rooms. License has expired.",
   "content_en_sha1_hash": "0d0302759df9a8da30ac2882fefe7d72fe65ed36",
   "created_at": "2026-02-18T14:56:32.703Z",
-  "updated_at": "2026-05-15T14:00:06.685Z",
+  "updated_at": "2026-06-15T19:31:55.997Z",
   "comment": {
     "text": "This is an error message displayed in a dialog box. It informs the user that their license has expired, preventing them from adding new users or creating new rooms.",
     "is_auto": true,
@@ -16,6 +16,12 @@
       "line_number": 125,
       "context": "const contentForGracePeriod = (\n <>\n <Text fontWeight={700}>\n {standalone\n ? t(\"LicenseExpiredRestriction\")\n : t(\"PlanPaymentOverdue\", {\n planName: currentTariffPlanTitle,\n })}\n </Text>\n <br />",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/quota-warning-dialog/index.tsx",
+      "line_number": 130,
+      "context": "const gracePeriodContent = (\n <>\n <Text fontWeight={700}>\n {standalone\n ? t(\"LicenseExpiredRestriction\")\n : t(\"PlanPaymentOverdue\", { planName: \"\" })}\n </Text>\n <br />\n <Text as=\"div\">\n {standalone ? (",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

@@ -50,7 +50,7 @@ import AIIcon from "@docspace/ui-kit/assets/icons/16/AI.svg";
 import PriceIcon from "@docspace/ui-kit/assets/icons/16/price.react.svg";
 import WalletIcon from "@docspace/ui-kit/assets/icons/16/wallet.react.svg";
 
-import { AI_TOOLS } from "@docspace/ui-kit/billing/constants";
+import { AI_ENUM, AI_TOOLS } from "@docspace/ui-kit/billing/constants";
 
 import InfoIcon from "PUBLIC_DIR/images/info.react.svg";
 import EnabledIcon from "PUBLIC_DIR/images/tick.rounded.svg";
@@ -81,7 +81,7 @@ const AIFeaturesBanner = ({
     if (!isEnabled) {
       route = isCardLinkedToPortal
         ? `${AI_SERVICES_ROUTE}?activate=${AI_TOOLS}`
-        : `${ALL_SERVICES_ROUTE}?activate=${AI_TOOLS}`;
+        : `${ALL_SERVICES_ROUTE}?actionType=${AI_ENUM}`;
     }
 
     navigate(

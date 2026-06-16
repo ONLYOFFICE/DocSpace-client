@@ -83,8 +83,8 @@ export const GreetingLoginContainer = ({
   const { type, roomName, displayName, spaceAddress } = invitationLinkData;
 
   const keyProp = roomName
-    ? { tKey: "InvitationToRoom" }
-    : { tKey: "InvitationToPortal" };
+    ? { tKey: "Common:InvitationToRoom" }
+    : { tKey: "Common:InvitationToPortal" };
 
   const renderEmailChangeContent = () => {
     if (!(emailChange && type !== "invitation")) return null;

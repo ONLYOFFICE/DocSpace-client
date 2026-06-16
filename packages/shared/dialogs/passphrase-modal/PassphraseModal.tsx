@@ -107,12 +107,9 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
     }
   }, [visible]);
 
-  const handleGeneratePassword = useCallback(
-    (e: React.MouseEvent) => {
-      inputRef.current?.onGeneratePassword(e);
-    },
-    [],
-  );
+  const handleGeneratePassword = useCallback((e: React.MouseEvent) => {
+    inputRef.current?.onGeneratePassword(e);
+  }, []);
 
   const handleSubmit = useCallback(() => {
     if (isNew && !isPassphraseAcceptable(passphrase)) {
@@ -244,11 +241,9 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
               isVertical
               labelVisible={false}
               removeMargin
-              hasError={
-                !!confirmPassphrase && passphrase !== confirmPassphrase
-              }
+              hasError={!!confirmPassphrase && passphrase !== confirmPassphrase}
               errorMessage={
-                !!confirmPassphrase && passphrase !== confirmPassphrase
+                confirmPassphrase && passphrase !== confirmPassphrase
                   ? t("Common:PassphraseMismatch")
                   : ""
               }
@@ -307,3 +302,4 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
 };
 
 export default PassphraseModal;
+

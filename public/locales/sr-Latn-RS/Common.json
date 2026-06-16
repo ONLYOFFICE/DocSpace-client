@@ -735,6 +735,8 @@
   "DropzoneTitleSecondary": "ili spusti datoteku ovde",
   "DueToday": "Dospelo danas",
   "Duplicate": "Dupliciraj",
+  "DuplicateFolderItem": "Folder <2>{{title}}</2> uspešno dupliran",
+  "DuplicateItem": "<2>{{title}}</2> uspešno dupliran",
   "EditAccessInfo": "Odredili smo koliko korisnika može imati pristup uređivanju dokumenata.",
   "EditAdditionalLink": "Uredi dodatni link",
   "EditAgent": "Uredite agente",
@@ -2290,7 +2292,5 @@
   "YourName": "Vaše ime",
   "YourPrice": "Vaša cena",
   "YourTurn": "Vaš red",
-  "YouWillBeContacted": "Prodajni tim će vas kontaktirati nakon kreiranja zahteva.",
-  "DuplicateFolderItem": "Folder <2>{{title}}</2> uspešno dupliran",
-  "DuplicateItem": "<2>{{title}}</2> uspešno dupliran"
+  "YouWillBeContacted": "Prodajni tim će vas kontaktirati nakon kreiranja zahteva."
 }

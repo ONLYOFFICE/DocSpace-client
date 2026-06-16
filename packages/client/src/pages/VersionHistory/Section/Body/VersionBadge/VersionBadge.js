@@ -77,7 +77,7 @@ const VersionBadge = ({
       >
         {isVersion ? (
           <>
-            <span>{t("VersionShort")}</span>
+            <span>{t("Common:VersionShort")}</span>
             <span>{versionGroup}</span>
           </>
         ) : null}

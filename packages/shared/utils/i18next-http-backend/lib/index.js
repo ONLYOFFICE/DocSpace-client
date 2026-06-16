@@ -41,6 +41,11 @@ const getDefaults = () => {
     loadPath: "/locales/{{lng}}/{{ns}}.json",
     addPath: "/locales/add/{{lng}}/{{ns}}",
     allowMultiLoading: false,
+    // When true, `loadPath` resolves to a single per-language bundle
+    // ({ [ns]: translations }) shared by every namespace. The backend fetches
+    // it once per language and serves each namespace its slice from cache, so
+    // N namespaces cost 1 request instead of N.
+    combinedNamespaces: false,
     parse: (data) => JSON.parse(data),
     stringify: JSON.stringify,
     parsePayload: (namespace, key, fallbackValue) => ({
@@ -85,6 +90,18 @@ class Backend {
   }
 
   read(language, namespace, callback) {
+    // In combined mode every namespace of a language maps to the same bundle
+    // URL, so loadUrl fetches it once and resolves the rest from cache. The
+    // cached payload is the whole `{ [ns]: translations }` object — hand each
+    // namespace only its own slice.
+    if (this.options.combinedNamespaces) {
+      const wrapped = (err, data) => {
+        if (err) return callback(err, data);
+        return callback(null, (data && data[namespace]) || {});
+      };
+      this._readAny([language], language, [namespace], namespace, wrapped);
+      return;
+    }
     this._readAny([language], language, [namespace], namespace, callback);
   }
 

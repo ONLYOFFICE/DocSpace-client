@@ -311,7 +311,7 @@ const Details = ({
       )}
       <div className={commonStyles.subtitle}>
         <Text fontWeight="600" fontSize="14px">
-          {t("Properties")}
+          {t("Common:Properties")}
         </Text>
       </div>
       <div className={commonStyles.properties}>

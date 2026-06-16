@@ -271,7 +271,7 @@ const DeleteDialogComponent = (props) => {
             style={{ marginTop: "16px" }}
             label={
               isAIAgent
-                ? t("DeleteAIAgentWarning")
+                ? t("Common:DeleteAIAgentWarning")
                 : isTemplate
                   ? t("DeleteTemplateWarning")
                   : t("Common:DeleteRoomWarning")

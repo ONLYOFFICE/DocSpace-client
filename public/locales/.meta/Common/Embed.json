@@ -3,7 +3,7 @@
   "content": "Embed",
   "content_en_sha1_hash": "ad02e14e2841dfbd22ab2caa12b5541c5b01a53a",
   "created_at": "2025-08-26T11:15:03.751Z",
-  "updated_at": "2026-06-09T09:43:10.881Z",
+  "updated_at": "2026-06-15T19:31:56.059Z",
   "comment": {
     "text": "This is a button label that, when clicked, opens settings related to embedding the current document or file into another web page.",
     "is_auto": true,
@@ -31,13 +31,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 212,
+      "line_number": 251,
       "context": "onClick: () => onInfoRoom?.(room),\n },\n {\n id: \"option_embedding-settings\",\n key: \"embedding-settings\",\n label: t(\"Common:Embed\"),\n icon: CodeReactSvgUrl,\n onClick: () => {\n infoPanelStore.setLinkParams(null);\n infoPanelStore.setEmbeddingPanelData({\n visible: true,",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
-      "line_number": 458,
+      "line_number": 464,
       "context": "icon: CopyToReactSvgUrl,\n onClick: () => onCopyLink(link),\n },\n {\n key: \"embedding-settings-key\",\n label: t(\"Common:Embed\"),\n icon: CodeReactSvgUrl,\n onClick: () => onEmbeddingClick(link),\n disabled: !infoPanelSelection.security.Embed,\n },\n {",
       "module": "/packages/shared"
     }

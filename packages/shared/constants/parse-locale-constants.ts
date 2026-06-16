@@ -40,7 +40,7 @@ export function parseLocaleConstants(rawData: Record<string, string>) {
     if (!locale && typeof window !== "undefined") {
       // `window?.` alone is not enough: referencing an undeclared global still
       // throws on the server, so guard with `typeof` for SSR safety.
-      locale = window.i18n?.instance?.language || undefined;
+      locale = window?.i18n?.instance?.language || undefined;
     }
 
     if (locale && entry.overrides[locale]) return entry.overrides[locale];
@@ -49,4 +49,3 @@ export function parseLocaleConstants(rawData: Record<string, string>) {
 
   return { get, keys, parsed };
 }
-

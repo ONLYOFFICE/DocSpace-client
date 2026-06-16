@@ -8,6 +8,6 @@
   "ManagePortal": "管理{{productName}}配置",
   "ManageUser": "管理用户账户",
   "NewPortalOwner": " 新{{productName}}所有者",
-  "PortalOwnerCan": " {{productName}}所有者可以：",
+  "PortalOwnerCan": "{{productName}}所有者可以：",
   "SetAccessRights": "设置访问权限"
 }

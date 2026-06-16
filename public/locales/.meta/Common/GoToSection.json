@@ -3,7 +3,7 @@
   "content": "Go to {{sectionName}}",
   "content_en_sha1_hash": "c1337f981bf1d4a2b8b5f06ade64c7b13617b7ef",
   "created_at": "2025-05-19T21:30:55.713Z",
-  "updated_at": "2026-06-03T11:46:06.795Z",
+  "updated_at": "2026-06-15T19:31:55.939Z",
   "comment": {
     "text": "This is a button label or link text that directs the user to a specific section of the application. `{{sectionName}}` will be replaced by the name of the target section (e.g., \"AI Agents\", \"My Documents\").",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/components/EmptyContainer/NoAccessContainer.tsx",
       "line_number": 167,
-      "context": "{\n to: \"\",\n icon: <AIAgentsIcon />,\n onClick: onGoTo,\n key: \"empty-view-goto-agents\",\n description: t(\"GoToSection\", {\n sectionName: t(\"Common:AIAgents\"),\n }),\n },\n ],\n };",
+      "context": "{\n to: \"\",\n icon: <AIAgentsIcon />,\n onClick: onGoTo,\n key: \"empty-view-goto-agents\",\n description: t(\"Common:GoToSection\", {\n sectionName: t(\"Common:AIAgents\"),\n }),\n },\n ],\n };",
       "module": "/packages/client"
     },
     {

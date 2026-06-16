@@ -693,7 +693,7 @@ const ArticleMainButtonContent = (props) => {
       {isMobileArticle ? (
         <MobileView
           t={t}
-          titleProp={t("Upload")}
+          titleProp={t("Common:Upload")}
           actionOptions={actions}
           buttonOptions={!isAccountsPage ? uploadActions : null}
           withoutButton={

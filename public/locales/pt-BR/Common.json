@@ -735,6 +735,8 @@
   "DropzoneTitleSecondary": "ou solte o arquivo aqui",
   "DueToday": "Vencido hoje",
   "Duplicate": "Duplicado",
+  "DuplicateFolderItem": "A pasta <2>{{title}}</2> foi duplicada com sucesso",
+  "DuplicateItem": "<2>{{title}}</2> duplicado com sucesso",
   "EditAccessInfo": "Especificamos quantos usuários podem ter acesso à edição de documentos.",
   "EditAdditionalLink": "Editar link adicional",
   "EditAgent": "Editar agente",
@@ -2290,7 +2292,5 @@
   "YourName": "Seu nome",
   "YourPrice": "Seu preço",
   "YourTurn": "Sua vez",
-  "YouWillBeContacted": "A equipe de vendas entrará em contato com você após a criação do pedido.",
-  "DuplicateFolderItem": "A pasta <2>{{title}}</2> foi duplicada com sucesso",
-  "DuplicateItem": "<2>{{title}}</2> duplicado com sucesso"
+  "YouWillBeContacted": "A equipe de vendas entrará em contato com você após a criação do pedido."
 }

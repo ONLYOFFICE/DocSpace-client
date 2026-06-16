@@ -3,7 +3,7 @@
   "content": "Room notifications disabled",
   "content_en_sha1_hash": "66e212657f39607ac6632eb53f57a7c8a6d38fe5",
   "created_at": "2025-05-19T21:30:56.101Z",
-  "updated_at": "2026-06-09T09:43:10.939Z",
+  "updated_at": "2026-06-15T19:31:56.152Z",
   "comment": {
     "text": "This is a toast message indicating that notifications for a room have been turned off. It appears briefly to confirm the action.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 131,
+      "line_number": 143,
       "context": "try {\n await api.settings.muteRoomNotification(room.id, !room.mute);\n toastr.success(\n room.mute\n ? t(\"Common:RoomNotificationsEnabled\")\n : t(\"Common:RoomNotificationsDisabled\"),\n );\n onRoomChanged?.(room.id);\n } catch (e) {\n toastr.error(e as Error);\n }",
       "module": "/packages/sdk"
     }

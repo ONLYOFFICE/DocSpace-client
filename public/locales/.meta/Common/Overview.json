@@ -3,7 +3,7 @@
   "content": "Overview",
   "content_en_sha1_hash": "0efc2e6be4c23b9a513d7ce0dcff8ed80e8912e7",
   "created_at": "2026-06-01T21:20:38.341Z",
-  "updated_at": "2026-06-09T09:43:10.785Z",
+  "updated_at": "2026-06-15T19:31:55.926Z",
   "comment": {
     "text": "Navigation menu label for the main overview section. It appears as a short title in sidebars or lists.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 237,
+      "line_number": 235,
       "context": "const groups = React.useMemo<NavMenuGroup[]>(() => {\n // const underDevelopment = () => toastr.info(t(\"Common:UnderDevelopment\"));\n \n const overviewItem: NavMenuItem = {\n id: OVERVIEW_ID,\n label: t(\"Common:Overview\"),\n icon: CatalogOverviewReactSvgUrl,\n onClick: () => navigate(\"/dashboard\"),\n };\n \n const docsCloudItem: NavMenuItem = {",
       "module": "/packages/client"
     }

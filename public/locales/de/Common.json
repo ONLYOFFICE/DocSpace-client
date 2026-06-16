@@ -735,6 +735,8 @@
   "DropzoneTitleSecondary": "oder Datei hier ablegen",
   "DueToday": "Heute fällig",
   "Duplicate": "Duplizieren",
+  "DuplicateFolderItem": "Der Ordner <2>{{title}}</2> wurde erfolgreich dupliziert",
+  "DuplicateItem": "<2>{{title}}</2> erfolgreich dupliziert",
   "EditAccessInfo": "Wir haben festgelegt, wie viele Nutzer Zugriff auf die Bearbeitung von Dokumenten haben dürfen.",
   "EditAdditionalLink": "Zusätzlichen Link bearbeiten",
   "EditAgent": "Agent bearbeiten",
@@ -2290,7 +2292,5 @@
   "YourName": "Ihr Name",
   "YourPrice": "Ihr Preis",
   "YourTurn": "Jetzt sind Sie dran",
-  "YouWillBeContacted": "Das Verkaufsteam wird Sie nach der Erstellung der Anfrage kontaktieren.",
-  "DuplicateFolderItem": "Der Ordner <2>{{title}}</2> wurde erfolgreich dupliziert",
-  "DuplicateItem": "<2>{{title}}</2> erfolgreich dupliziert"
+  "YouWillBeContacted": "Das Verkaufsteam wird Sie nach der Erstellung der Anfrage kontaktieren."
 }

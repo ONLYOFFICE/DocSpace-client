@@ -724,6 +724,8 @@
   "DropzoneTitleSecondary": "හෝ මෙතැනට ගොනුව දමන්න",
   "DueToday": "අද දින ගෙවිය යුතුය",
   "Duplicate": "අනුපිටපතක්",
+  "DuplicateFolderItem": "ෆෝල්ඩරය <2>{{title}}</2> සාර්ථකව ප්‍රතිලියනය කරන ලදී.",
+  "DuplicateItem": "<2>{{title}}</2> සාර්ථකව ප්‍රති duplicates කරන ලදී",
   "EditAccessInfo": "ලේඛන සංස්කරණය කිරීමට ප්‍රවේශ විය හැකි පරිශීලකයින් සංඛ්‍යාව අපි නිශ්චිත කළෙමු.",
   "EditAdditionalLink": "අතිරේක සබැඳිය සංස්කරණය",
   "EditAgent": "නියෝජිතයා සංස්කරණය කරන්න",
@@ -2267,7 +2269,5 @@
   "YourName": "ඔබගේ නම",
   "YourPrice": "ඔබගේ මිල",
   "YourTurn": "ඔබේ වාරය.",
-  "YouWillBeContacted": "ඉල්ලීම සෑදීමෙන් පසු අලෙවි කණ්ඩායම ඔබව සම්බන්ධ කර ගනු ඇත.",
-  "DuplicateFolderItem": "ෆෝල්ඩරය <2>{{title}}</2> සාර්ථකව ප්‍රතිලියනය කරන ලදී.",
-  "DuplicateItem": "<2>{{title}}</2> සාර්ථකව ප්‍රති duplicates කරන ලදී"
+  "YouWillBeContacted": "ඉල්ලීම සෑදීමෙන් පසු අලෙවි කණ්ඩායම ඔබව සම්බන්ධ කර ගනු ඇත."
 }

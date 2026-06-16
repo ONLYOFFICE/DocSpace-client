@@ -3,7 +3,7 @@
   "content": "Administration",
   "content_en_sha1_hash": "b8be3d1264310c3b8c848d4b90d5206179a40cc4",
   "created_at": "2026-06-01T21:20:31.256Z",
-  "updated_at": "2026-06-09T11:32:15.367Z",
+  "updated_at": "2026-06-15T19:31:56.230Z",
   "comment": {
     "text": "Section label in the info panel that identifies the list of room administrators.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/useMembers.ts",
-      "line_number": 104,
+      "line_number": 107,
       "context": "list: TMemberTuple;\n extra?: Partial<TTitleMember>;\n }[] = [\n {\n key: TInfoPanelMemberType.administrators,\n label: t(\"Common:RoomAdministration\"),\n list: administrators,\n },\n {\n key: TInfoPanelMemberType.groups,\n label: t(\"Common:Groups\"),",
       "module": "/packages/sdk"
     },

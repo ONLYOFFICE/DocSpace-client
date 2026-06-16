@@ -78,10 +78,10 @@ const HideButton = (props) => {
 				{value
 					? isAdditionalParameters
 						? t("HideAdditionalParameters")
-						: t("Hide")
+						: t("Common:Hide")
 					: isAdditionalParameters
 						? t("ShowAdditionalParameters")
-						: t("Show")}
+						: t("Common:Show")}
 			</Link>
 		</div>
 	);

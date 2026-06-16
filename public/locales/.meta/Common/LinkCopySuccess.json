@@ -3,7 +3,7 @@
   "content": "Link has been copied to the clipboard",
   "content_en_sha1_hash": "2254c41229de93951969596ba422451fa0eff387",
   "created_at": "2025-05-19T21:30:46.142Z",
-  "updated_at": "2026-06-09T09:43:10.822Z",
+  "updated_at": "2026-06-15T19:31:55.981Z",
   "comment": {
     "text": "This is a toast message that appears after a user successfully copies a link to their clipboard.",
     "is_auto": true,
@@ -79,7 +79,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedForm.tsx",
-      "line_number": 114,
+      "line_number": 115,
       "context": "const origin = window.location.origin;\n \n const url = `${origin}/doceditor?fileId=${completedForm.id}`;\n \n await copyShareLink(url);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n const handleDownload = () => {\n window.open(completedForm.viewUrl, \"_self\");\n };",
       "module": "/packages/doceditor"
     },
@@ -105,6 +105,12 @@
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useFolderActions.ts",
       "line_number": 107,
       "context": "const copyFolderLink = React.useCallback(\n async (itemId: number) => {\n const itemLink = await api.files.getFolderLink(itemId);\n copyShareLink(itemLink.sharedTo.shareLink);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n },\n [t],\n );\n \n return { openFolder, openLocation, copyFolderLink };",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
+      "line_number": 305,
+      "context": "const proxyURL =\n window.ClientConfig?.proxy?.url || window.location.origin;\n url = `${proxyURL}/rooms/shared/${room.id}/filter`;\n }\n copyShareLink(url);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n } catch (e) {\n toastr.error(e as Error);\n }\n },\n };",
       "module": "/packages/sdk"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Select date",
   "content_en_sha1_hash": "b84a6ecbc04c1f54b6fa504c6441ca78e07db586",
   "created_at": "2025-05-19T21:30:48.374Z",
-  "updated_at": "2026-06-01T21:20:44.428Z",
+  "updated_at": "2026-06-15T19:31:56.024Z",
   "comment": {
     "text": "This is the label for a date picker component, prompting the user to choose a specific date.",
     "is_auto": true,
@@ -34,6 +34,12 @@
       "line_number": 226,
       "context": ") : (\n <DatePicker\n outerDate={filters.deliveryDate}\n isMobile={isMobile()}\n onChange={onDateSet}\n selectDateText={t(\"Common:SelectDate\")}\n showCalendarIcon={false}\n locale={i18n.language}\n dataTestId=\"delivery_date_picker\"\n />\n )}",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/link-settings-panel/index.tsx",
+      "line_number": 315,
+      "context": "locale={locale}\n hasError={false}\n onChange={(value) => setLimitDate(value)}\n openDate={new Date()}\n className={styles.linkSettingsDatePicker}\n selectDateText={t(\"Common:SelectDate\")}\n initialDate={limitDate}\n minDate={subtractFromDate(now(), 1, \"days\") ?? undefined}\n maxDate={maxDate}\n useMaxTime={!activeLink.expirationDate}\n translations={{ AM: t(\"Common:AM\"), PM: getConstName(\"PM\") }}",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/LimitTimeBlock.tsx",

@@ -47,7 +47,7 @@ export const Months = memo(
         value={months}
         setValue={setMonths}
         dropDownMaxHeight={300}
-        placeholder={t("EveryMonth")}
+        placeholder={t("Common:EveryMonth")}
         isDisabled={isDisabled}
         dataTestId={dataTestId}
       />

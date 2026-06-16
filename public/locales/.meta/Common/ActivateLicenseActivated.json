@@ -3,7 +3,7 @@
   "content": "License activated",
   "content_en_sha1_hash": "576ed3bc179267c56642a371e93bad575e13aa61",
   "created_at": "2025-05-19T21:30:53.572Z",
-  "updated_at": "2026-05-15T14:00:06.896Z",
+  "updated_at": "2026-06-15T19:31:56.154Z",
   "comment": {
     "text": "Toast message. Appears after a license has been successfully activated.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
       "line_number": 361,
-      "context": "if (message) {\n toastr.error(message);\n return;\n }\n \n toastr.success(t(\"ActivateLicenseActivated\"));\n localStorage.removeItem(\"enterpriseAlertClose\");\n \n await getPaymentInfo();\n await this.settingsStore?.getSettings();\n } catch (e) {",
+      "context": "if (message) {\n toastr.error(message);\n return;\n }\n \n toastr.success(t(\"Common:ActivateLicenseActivated\"));\n localStorage.removeItem(\"enterpriseAlertClose\");\n \n await getPaymentInfo();\n await this.settingsStore?.getSettings();\n } catch (e) {",
       "module": "/packages/client"
     },
     {

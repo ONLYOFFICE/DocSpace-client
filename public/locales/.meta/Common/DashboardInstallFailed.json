@@ -3,7 +3,7 @@
   "content": "Installation failed",
   "content_en_sha1_hash": "346500a90ca20904b9a28e0cae2346c7195ccd78",
   "created_at": "2026-05-19T19:03:13.906Z",
-  "updated_at": "2026-05-24T17:27:49.113Z",
+  "updated_at": "2026-06-15T19:31:56.032Z",
   "comment": {
     "text": "Error toast message that appears when a module installation fails.",
     "is_auto": true,
@@ -25,14 +25,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallModuleDialog.tsx",
-      "line_number": 106,
-      "context": "setPhase(\"done\");\n } catch (err) {\n if (cancelledRef.current) return;\n console.error(\"Module install failed\", err);\n setPhase(\"failed\");\n toastr.error(t(\"Common:DashboardInstallFailed\"));\n } finally {\n abortRef.current = null;\n }\n }, [onInstall, steps, t]);",
+      "line_number": 112,
+      "context": "setPhase(\"done\");\n } catch (err) {\n if (cancelledRef.current) return;\n console.error(\"Module install failed\", err);\n setPhase(\"failed\");\n toastr.error(t(\"Common:DashboardInstallFailed\"));\n } finally {\n abortRef.current = null;\n }\n }, [onInstall, t]);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallModuleDialog.tsx",
-      "line_number": 106,
-      "context": "setPhase(\"done\");\n } catch (err) {\n if (cancelledRef.current) return;\n console.error(\"Module install failed\", err);\n setPhase(\"failed\");\n toastr.error(t(\"Common:DashboardInstallFailed\"));\n } finally {\n abortRef.current = null;\n }\n }, [onInstall, steps, t]);",
+      "line_number": 112,
+      "context": "setPhase(\"done\");\n } catch (err) {\n if (cancelledRef.current) return;\n console.error(\"Module install failed\", err);\n setPhase(\"failed\");\n toastr.error(t(\"Common:DashboardInstallFailed\"));\n } finally {\n abortRef.current = null;\n }\n }, [onInstall, t]);",
       "module": "/packages/client"
     }
   ],

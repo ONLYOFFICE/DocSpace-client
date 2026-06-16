@@ -492,6 +492,9 @@ const SectionFilterContent = ({
         newFilter.page = 0;
         newFilter.search = searchValue;
 
+        // Search must traverse the current folder and all nested subfolders.
+        if (searchValue) newFilter.withSubfolders = "true";
+
         const path = location.pathname.split("/filter")[0];
 
         onNavigate(path, newFilter);
@@ -1535,13 +1538,13 @@ const SectionFilterContent = ({
       {
         id: "view-switch_rows",
         value: "row",
-        label: t("ViewList"),
+        label: t("Common:ViewList"),
         icon: ViewRowsReactSvgUrl,
       },
       {
         id: "view-switch_tiles",
         value: "tile",
-        label: t("ViewTiles"),
+        label: t("Common:ViewTiles"),
         icon: ViewTilesReactSvgUrl,
         callback: createThumbnails,
       },
@@ -1880,7 +1883,7 @@ const SectionFilterContent = ({
       isRooms={isRooms}
       removeSelectedItem={removeSelectedItem}
       clearAll={clearAll}
-      filterTitle={t("Filter")}
+      filterTitle={t("Common:Filter")}
       sortByTitle={t("Common:SortBy")}
       clearSearch={clearSearch}
       setClearSearch={setClearSearch}

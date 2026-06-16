@@ -3,7 +3,7 @@
   "content": "Adjust the limit in settings or create a new link to enable new user registrations.",
   "content_en_sha1_hash": "d41275e578d0eb4604261be2c4adb26cc0916a11",
   "created_at": "2026-02-19T13:36:27.587Z",
-  "updated_at": "2026-05-24T17:27:49.107Z",
+  "updated_at": "2026-06-15T19:31:56.018Z",
   "comment": {
     "text": "This is a tooltip message that appears when a user tries to create a new link for user registrations but has reached a predefined limit. It advises the user to adjust settings or create a new link to proceed.",
     "is_auto": true,
@@ -14,12 +14,12 @@
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
       "line_number": 341,
-      "context": "iconNode={<ButtonAlertIcon />}\n tooltipContent={\n <>\n <Text>{t(\"LinkSettingsUsersLimitToast\")}</Text>\n <Text>\n {t(\"LinkSettingsUsersLimitToastDescription\")}\n </Text>\n </>\n }\n className={styles.inviteViaLinkSettingsWarning}\n tooltipMaxWidth=\"344px\"",
+      "context": "iconNode={<ButtonAlertIcon />}\n tooltipContent={\n <>\n <Text>{t(\"Common:LinkSettingsUsersLimitToast\")}</Text>\n <Text>\n {t(\"Common:LinkSettingsUsersLimitToastDescription\")}\n </Text>\n </>\n }\n className={styles.inviteViaLinkSettingsWarning}\n tooltipMaxWidth=\"344px\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/sub-components/ExternalLinks.tsx",
-      "line_number": 327,
+      "line_number": 335,
       "context": "iconNode={<ButtonAlertIcon />}\n tooltipContent={\n <>\n <Text>{t(\"LinkSettingsUsersLimitToast\")}</Text>\n <Text>\n {t(\"Common:LinkSettingsUsersLimitToastDescription\")}\n </Text>\n </>\n }\n className={styles.inviteViaLinkSettingsWarning}\n tooltipMaxWidth=\"344px\"",
       "module": "/packages/sdk"
     }

@@ -82,7 +82,7 @@ const DocsCloudPage = () => {
 
   const tabs: TTabItem[] = [
     { id: "information", name: t("DocsCloud:Statistic"), content: null },
-    { id: "settings", name: t("Settings"), content: null },
+    { id: "settings", name: t("Common:Settings"), content: null },
   ];
 
   if (isLoading) return <AppLoader />;

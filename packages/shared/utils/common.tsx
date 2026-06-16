@@ -1504,7 +1504,11 @@ export const getCategoryType = (location: { pathname: string }) => {
   const { pathname } = location;
 
   if (pathname.startsWith("/forms")) {
-    if (pathname.indexOf("/recent") > -1) {
+    const formRoomRegexp = /(forms)\/(\d+)/;
+
+    if (formRoomRegexp.test(pathname)) {
+      categoryType = CategoryType.Form;
+    } else if (pathname.indexOf("/recent") > -1) {
       categoryType = CategoryType.Recent;
     } else if (pathname.indexOf("/favorite") > -1) {
       categoryType = CategoryType.Favorite;

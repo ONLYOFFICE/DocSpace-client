@@ -203,6 +203,7 @@ const useFiles = ({
     } else if (
       (categoryType == CategoryType.Shared ||
         categoryType == CategoryType.SharedRoom ||
+        categoryType == CategoryType.Form ||
         categoryType == CategoryType.Archive ||
         isForms) &&
       !isRoomFolder

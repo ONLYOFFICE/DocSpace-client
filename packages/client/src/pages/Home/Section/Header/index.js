@@ -877,6 +877,7 @@ const SectionHeaderContent = (props) => {
 
   const insideTheRoom =
     (categoryType === CategoryType.SharedRoom ||
+      categoryType === CategoryType.Form ||
       categoryType === CategoryType.Archive) &&
     !isCurrentRoom;
 

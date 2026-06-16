@@ -168,6 +168,12 @@ export const getClientActiveId = (
     RoomSearchArea.Templates;
 
   if (pathname.startsWith("/dashboard")) return "dashboard";
+  if (pathname.startsWith("/forms")) {
+    if (pathname.includes("/recent")) return "forms-recent";
+    if (pathname.includes("/favorite")) return "forms-favorites";
+    if (pathname.includes("/trash")) return "forms-trash";
+    return "forms";
+  }
   if (pathname.includes("/ai-agents")) return match(ids.aiAgentsFolderId);
   if (pathname.includes("/rooms/recent")) return "rooms-recent";
   if (pathname.includes("/rooms/favorite")) return "rooms-favorites";

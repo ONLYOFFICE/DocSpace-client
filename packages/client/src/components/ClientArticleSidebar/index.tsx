@@ -29,15 +29,20 @@ import { inject, observer } from "mobx-react";
 import { useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import type { NavMenuGroup, NavMenuItem, NavSubItem } from "@docspace/ui-kit/components/nav-menu";
-import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
+import type {
+  NavMenuGroup,
+  NavMenuItem,
+  NavSubItem,
+} from "@docspace/ui-kit/components/nav-menu";
+import { FolderType, RoomSearchArea, FilterType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { CategoryType } from "@docspace/shared/constants";
 import type { ValueOf } from "@docspace/shared/types";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
 
 import CatalogOverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
+import CatalogFormsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 import AppsSidebar from "SRC_DIR/components/AppsSidebar";
 import {
@@ -86,11 +91,10 @@ const ClientArticleSidebar = ({
   );
 
   const goFolder = React.useCallback(
-    (folderId: number, rootFolderType: TTreeFolder["rootFolderType"]) =>
-      () => {
-        onFolderNavigateRef.current?.();
-        navigate(buildFolderUrl(folderId, rootFolderType, userId, myFolderId));
-      },
+    (folderId: number, rootFolderType: TTreeFolder["rootFolderType"]) => () => {
+      onFolderNavigateRef.current?.();
+      navigate(buildFolderUrl(folderId, rootFolderType, userId, myFolderId));
+    },
     [navigate, userId, myFolderId],
   );
 
@@ -116,6 +120,21 @@ const ClientArticleSidebar = ({
     [navigate, roomsFolderId],
   );
 
+  // Forms-scoped Recent/Favorites/Trash: same as goRoomsScoped, but the files
+  // list is additionally filtered to PDF forms only — the "Forms" counterpart
+  // of the Rooms subsections.
+  const goFormsScoped = React.useCallback(
+    (categoryType: ValueOf<typeof CategoryType>, basePath: string) => () => {
+      onFolderNavigateRef.current?.();
+      const filter = FilesFilter.getDefault({ categoryType });
+      filter.filterType = FilterType.PDFForm;
+      const parentSuffix =
+        roomsFolderId != null ? `&parentId=${roomsFolderId}` : "";
+      navigate(`${basePath}/filter?${filter.toUrlParams()}${parentSuffix}`);
+    },
+    [navigate, roomsFolderId],
+  );
+
   // Templates: the Rooms list scoped to the Templates search area. Replaces the
   // former Rooms/Templates submenu tabs (searchArea=Templates on /rooms/shared).
   const goTemplates = React.useCallback(() => {
@@ -126,8 +145,8 @@ const ClientArticleSidebar = ({
   }, [navigate, userId]);
 
   const activeId = React.useMemo(
-    () => getClientActiveId(location.pathname, folderIds, location.search),
-    [location.pathname, location.search, folderIds],
+    () => getClientActiveId(location.pathname, folderIds),
+    [location.pathname, folderIds],
   );
 
   const groups = React.useMemo<NavMenuGroup[]>(() => {
@@ -231,6 +250,42 @@ const ClientArticleSidebar = ({
       });
     }
 
+    // "Forms" is a top-level section backed by the same Rooms folder but scoped
+    // to Form Filling Rooms (FFR). It has no tree folder of its own, so it is a
+    // synthetic item pointing at the dedicated /forms route.
+    if (roomsFolder) {
+      const formsFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
+      formsFilter.searchArea = RoomSearchArea.Active;
+
+      mainItems.push({
+        id: "forms",
+        label: t("Common:Forms"),
+        icon: CatalogFormsReactSvgUrl,
+        onClick: go(`/forms/filter?${formsFilter.toUrlParams(userId, false)}`),
+        children: [
+          {
+            id: "forms-recent",
+            label: t("Common:Recent"),
+            icon: getCatalogIconUrlByType(FolderType.Recent),
+            onClick: goFormsScoped(CategoryType.Recent, "/forms/recent"),
+          },
+          {
+            id: "forms-favorites",
+            label: t("Common:Favorites"),
+            icon: getCatalogIconUrlByType(FolderType.Favorites),
+            onClick: goFormsScoped(CategoryType.Favorite, "/forms/favorites"),
+          },
+          {
+            id: "forms-trash",
+            label: t("Common:TrashSection"),
+            icon: getCatalogIconUrlByType(FolderType.TRASH),
+            onClick: goFormsScoped(CategoryType.Trash, "/forms/trash"),
+            withTopSeparator: true,
+          },
+        ],
+      });
+    }
+
     // AI Agents sits right after Rooms as a top-level item.
     if (aiAgentsFolder) mainItems.push(navItem(aiAgentsFolder));
 
@@ -243,19 +298,27 @@ const ClientArticleSidebar = ({
     go,
     goFolder,
     goRoomsScoped,
+    goFormsScoped,
     goTemplates,
     treeFolders,
     isVisitor,
     canUseTemplates,
     recentFolderId,
     favoritesFolderId,
+    userId,
   ]);
 
   return <AppsSidebar groups={groups} activeId={activeId} />;
 };
 
 const ClientArticleSidebarConnected = inject<TStore>(
-  ({ authStore, userStore, treeFoldersStore, filesStore, clientLoadingStore }) => ({
+  ({
+    authStore,
+    userStore,
+    treeFoldersStore,
+    filesStore,
+    clientLoadingStore,
+  }) => ({
     userId: userStore.user?.id,
     treeFolders: treeFoldersStore.treeFolders,
     roomsFolderId: treeFoldersStore.roomsFolderId,

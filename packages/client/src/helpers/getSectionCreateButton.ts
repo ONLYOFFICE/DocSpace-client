@@ -49,6 +49,7 @@ export type GetSectionCreateButtonParams = {
   isContactsGroupsPage: boolean;
   isRoomsFolder: boolean;
   isAIAgentsFolder: boolean;
+  isFormsSection: boolean;
 
   selectedFolderId?: number | string;
 
@@ -72,6 +73,7 @@ export const getSectionCreateButton = ({
   isContactsGroupsPage,
   isRoomsFolder,
   isAIAgentsFolder,
+  isFormsSection,
   selectedFolderId,
   getFolderModel,
   getContactsModel,
@@ -79,6 +81,24 @@ export const getSectionCreateButton = ({
   onCreateAgent,
   createGroup,
 }: GetSectionCreateButtonParams): SectionCreateButtonResult => {
+  // The "Forms" section reuses the Rooms folder, so check it before the
+  // generic rooms branch: it creates a Form Filling Room (onCreateRoom is
+  // wired to preset the FFR type when in the Forms route).
+  if (isFormsSection) {
+    const model = getFolderModel(t);
+    if (!model || model.length === 0) return HIDDEN;
+
+    return {
+      showMainButton: true,
+      mainButtonProps: {
+        text: t("Common:CreateFormSet"),
+        isDropdown: false,
+        model: [],
+        onAction: () => onCreateRoom(),
+      },
+    };
+  }
+
   if (isAIAgentsFolder) {
     const model = getFolderModel(t);
     if (!model || model.length === 0) return HIDDEN;

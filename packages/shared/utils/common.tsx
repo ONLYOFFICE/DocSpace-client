@@ -1503,7 +1503,17 @@ export const getCategoryType = (location: { pathname: string }) => {
   let categoryType: ValueOf<typeof CategoryType> = CategoryType.Shared;
   const { pathname } = location;
 
-  if (pathname.startsWith("/rooms")) {
+  if (pathname.startsWith("/forms")) {
+    if (pathname.indexOf("/recent") > -1) {
+      categoryType = CategoryType.Recent;
+    } else if (pathname.indexOf("/favorite") > -1) {
+      categoryType = CategoryType.Favorite;
+    } else if (pathname.indexOf("/trash") > -1) {
+      categoryType = CategoryType.Trash;
+    } else {
+      categoryType = CategoryType.Forms;
+    }
+  } else if (pathname.startsWith("/rooms")) {
     if (pathname.indexOf("personal") > -1) {
       categoryType = CategoryType.Personal;
     } else if (pathname.indexOf("recent") > -1) {

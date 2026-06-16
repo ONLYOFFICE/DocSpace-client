@@ -79,7 +79,10 @@ import {
 } from "SRC_DIR/helpers/info-panel";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 import TariffBar from "SRC_DIR/components/TariffBar";
-import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
+import {
+  getLifetimePeriodTranslation,
+  getCategoryType,
+} from "@docspace/shared/utils/common";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -227,6 +230,10 @@ const SectionHeaderContent = (props) => {
   const isContactsGroupsPage = contactsTab === "groups";
   const isContactsInsideGroupPage = contactsTab === "inside_group";
   const isProfile = currentClientView === "profile";
+
+  // The "Forms" section reuses the Rooms folder; detect it from the route to
+  // adjust section labels (title, create-button caption) accordingly.
+  const isFormsSection = getCategoryType(location) === CategoryType.Forms;
   const currentGroupName = currentGroup?.name;
 
   const addButtonRefCallback = React.useCallback(
@@ -744,6 +751,11 @@ const SectionHeaderContent = (props) => {
 
     if (isSettingsPage) return t("Common:Settings");
 
+    // The "Forms" section reuses the Rooms folder, so the selected folder title
+    // would otherwise read "Rooms"; force the section name instead.
+    if (getCategoryType(location) === CategoryType.Forms)
+      return t("Common:Forms");
+
     if (isContactsPage) {
       switch (contactsTab) {
         case "people":
@@ -773,6 +785,7 @@ const SectionHeaderContent = (props) => {
     insideGroupTempTitle,
     currentGroupName,
     title,
+    location,
   ]);
 
   const contextMenuHeader = React.useMemo(() => {
@@ -999,9 +1012,11 @@ const SectionHeaderContent = (props) => {
                 warningIcon: isRoomStorageQuotaExceeded
                   ? WarningQuotaExceededUrl
                   : undefined,
-                actions: isRoomsFolder
-                  ? t("Common:NewRoom")
-                  : t("Common:Actions"),
+                actions: isFormsSection
+                  ? t("Common:CreateFormSet")
+                  : isRoomsFolder
+                    ? t("Common:NewRoom")
+                    : t("Common:Actions"),
                 contextMenu: t("Common:TitleShowFolderActions"),
                 infoPanel: t("Common:InfoPanel"),
               }}

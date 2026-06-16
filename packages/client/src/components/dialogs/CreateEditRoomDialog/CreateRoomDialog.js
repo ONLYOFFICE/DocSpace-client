@@ -357,6 +357,7 @@ const CreateRoomDialog = ({
               setRoomType={setRoomType}
               disabledFormRoom={disabledFormRoom}
               isExternalShareRestricted={isExternalShareRestricted}
+              processCreatingRoomFromData={processCreatingRoomFromData}
               setTemplateDialogIsVisible={setTemplateDialogIsVisible}
             />
           ) : (

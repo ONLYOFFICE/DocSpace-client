@@ -50,6 +50,8 @@ import AIIcon from "@docspace/ui-kit/assets/icons/16/AI.svg";
 import PriceIcon from "@docspace/ui-kit/assets/icons/16/price.react.svg";
 import WalletIcon from "@docspace/ui-kit/assets/icons/16/wallet.react.svg";
 
+import { AI_TOOLS } from "@docspace/ui-kit/billing/constants";
+
 import InfoIcon from "PUBLIC_DIR/images/info.react.svg";
 import EnabledIcon from "PUBLIC_DIR/images/tick.rounded.svg";
 
@@ -57,6 +59,7 @@ import config from "PACKAGE_FILE";
 
 import styles from "./AIFeaturesBanner.module.scss";
 
+const ALL_SERVICES_ROUTE = "/portal-settings/payments/services";
 const AI_SERVICES_ROUTE = "/portal-settings/payments/services/ai-services";
 const OPENROUTER_PRICING_URL = "https://openrouter.ai/models";
 
@@ -73,12 +76,16 @@ const AIFeaturesBanner = ({
   const isEnabled = !!isAiToolsServiceOn;
 
   const onActivate = () => {
+    let route = AI_SERVICES_ROUTE;
+
+    if (!isEnabled) {
+      route = isCardLinkedToPortal
+        ? `${AI_SERVICES_ROUTE}?activate=${AI_TOOLS}`
+        : `${ALL_SERVICES_ROUTE}?activate=${AI_TOOLS}`;
+    }
+
     navigate(
-      combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
-        config.homepage,
-        AI_SERVICES_ROUTE,
-      ),
+      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, route),
     );
   };
 

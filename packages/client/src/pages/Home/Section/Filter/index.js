@@ -162,6 +162,24 @@ const SectionFilterContent = ({
   const location = useLocation();
   const navigate = useNavigate();
 
+  // The "Forms" section reuses the Rooms list (same folder) but is scoped to
+  // Form Filling Rooms only, so the room-type filter is not offered there.
+  const isFormsSection = location.pathname.startsWith("/forms");
+
+  // Base path for room-list navigation (sort/search/filter). The "Forms"
+  // section keeps its own route instead of falling back to "rooms/shared".
+  const getRoomsListBasePath = React.useCallback(
+    (searchArea) => {
+      if (isFormsSection) return "forms";
+
+      return searchArea === RoomSearchArea.Active ||
+        searchArea === RoomSearchArea.Templates
+        ? "rooms/shared"
+        : "rooms/archived";
+    },
+    [isFormsSection],
+  );
+
   const isContactsPage =
     currentClientView === "users" || currentClientView === "groups";
   const isContactsPeoplePage = contactsTab === "people";
@@ -286,11 +304,7 @@ const SectionFilterContent = ({
           newFilter.withoutTags = false;
         }
 
-        const path =
-          newFilter.searchArea === RoomSearchArea.Active ||
-          newFilter.searchArea === RoomSearchArea.Templates
-            ? "rooms/shared"
-            : "rooms/archived";
+        const path = getRoomsListBasePath(newFilter.searchArea);
         navigate(
           `${path}/filter?${newFilter.toUrlParams(userId)}&hash=${new Date().getTime()}`,
         );
@@ -404,11 +418,7 @@ const SectionFilterContent = ({
       const newFilter = RoomsFilter.clean();
       newFilter.searchArea = roomsFilter.searchArea;
 
-      const path =
-        roomsFilter.searchArea === RoomSearchArea.Active ||
-        roomsFilter.searchArea === RoomSearchArea.Templates
-          ? "rooms/shared"
-          : "rooms/archived";
+      const path = getRoomsListBasePath(roomsFilter.searchArea);
 
       navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
     } else if (isAIAgentsFolder) {
@@ -472,11 +482,7 @@ const SectionFilterContent = ({
         // Clear groupId when search is applied - grouping doesn't work with filters
         newFilter.groupId = null;
 
-        const path =
-          newFilter.searchArea === RoomSearchArea.Active ||
-          newFilter.searchArea === RoomSearchArea.Templates
-            ? "rooms/shared"
-            : "rooms/archived";
+        const path = getRoomsListBasePath(newFilter.searchArea);
 
         navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
       } else if (isAIAgentsFolder) {
@@ -536,11 +542,7 @@ const SectionFilterContent = ({
       newFilter.sortOrder = sortOrder;
 
       if (isRooms) {
-        const path =
-          newFilter.searchArea === RoomSearchArea.Active ||
-          newFilter.searchArea === RoomSearchArea.Templates
-            ? "rooms/shared"
-            : "rooms/archived";
+        const path = getRoomsListBasePath(newFilter.searchArea);
         setRoomsFilter(newFilter);
         navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
       } else if (isAIAgentsFolder) {
@@ -1107,6 +1109,12 @@ const SectionFilterContent = ({
       },
     ];
 
+    // Form Filling Rooms live in their own "Forms" section, so they are never
+    // offered as a room-type filter inside the "Rooms" section.
+    const roomTypeValues = RoomsTypeValues.filter(
+      (roomType) => roomType !== RoomsType.FormRoom,
+    );
+
     const typeOptions = isRooms
       ? [
           {
@@ -1116,7 +1124,7 @@ const SectionFilterContent = ({
             isHeader: true,
             isLast: isLastTypeOptionsRooms,
           },
-          ...RoomsTypeValues.map((roomType) => {
+          ...roomTypeValues.map((roomType) => {
             switch (roomType) {
               case RoomsType.FillingFormsRoom:
                 return {
@@ -1345,7 +1353,9 @@ const SectionFilterContent = ({
       filterOptions.push(...ownerOptions);
       filterOptions.push(...subjectOptions);
 
-      filterOptions.push(...typeOptions);
+      // The "Forms" section is already scoped to Form Filling Rooms — no
+      // room-type filter is shown there.
+      if (!isFormsSection) filterOptions.push(...typeOptions);
 
       if (tags?.length > 0) {
         const tagsOptions = tags.map((tag) => ({
@@ -1519,6 +1529,7 @@ const SectionFilterContent = ({
     t,
     isPersonalRoom,
     isRooms,
+    isFormsSection,
     isAIAgentsFolder,
     isContactsPage,
     isFavoritesFolder,
@@ -1717,11 +1728,7 @@ const SectionFilterContent = ({
 
         newFilter.page = 0;
 
-        const path =
-          newFilter.searchArea === RoomSearchArea.Active ||
-          newFilter.searchArea === RoomSearchArea.Templates
-            ? "rooms/shared"
-            : "rooms/archived";
+        const path = getRoomsListBasePath(newFilter.searchArea);
 
         navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
       } else if (isAIAgentsFolder) {
@@ -1821,11 +1828,7 @@ const SectionFilterContent = ({
         newFilter.searchArea = RoomSearchArea.Templates;
       }
 
-      const path =
-        newFilter.searchArea === RoomSearchArea.Active ||
-        newFilter.searchArea === RoomSearchArea.Templates
-          ? "rooms/shared"
-          : "rooms/archived";
+      const path = getRoomsListBasePath(newFilter.searchArea);
 
       navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
     } else if (isAIAgentsFolder) {
@@ -1853,7 +1856,7 @@ const SectionFilterContent = ({
     newFilter.page = 0;
     newFilter.groupId = groupId;
 
-    const path = "rooms/shared";
+    const path = getRoomsListBasePath(newFilter.searchArea);
 
     navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
   };
@@ -2082,4 +2085,3 @@ export default inject(
     ])(observer(SectionFilterContent)),
   ),
 );
-

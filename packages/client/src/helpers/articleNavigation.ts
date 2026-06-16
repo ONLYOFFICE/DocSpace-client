@@ -158,6 +158,7 @@ export const getClientActiveId = (
     folderId != null ? String(folderId) : undefined;
 
   if (pathname.startsWith("/dashboard")) return "dashboard";
+  if (pathname.startsWith("/forms")) return "forms";
   if (pathname.includes("/ai-agents")) return match(ids.aiAgentsFolderId);
   if (pathname.includes("/rooms/recent")) return "rooms-recent";
   if (pathname.includes("/rooms/favorite")) return "rooms-favorites";

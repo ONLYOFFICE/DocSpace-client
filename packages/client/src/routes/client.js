@@ -259,6 +259,22 @@ const ClientRoutes = [
             ),
           },
           {
+            path: "forms",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "forms/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
             path: "rooms/archived",
             element: (
               <PrivateRoute>

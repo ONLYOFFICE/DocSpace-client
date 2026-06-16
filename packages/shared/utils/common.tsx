@@ -1503,7 +1503,9 @@ export const getCategoryType = (location: { pathname: string }) => {
   let categoryType: ValueOf<typeof CategoryType> = CategoryType.Shared;
   const { pathname } = location;
 
-  if (pathname.startsWith("/rooms")) {
+  if (pathname.startsWith("/forms")) {
+    categoryType = CategoryType.Forms;
+  } else if (pathname.startsWith("/rooms")) {
     if (pathname.indexOf("personal") > -1) {
       categoryType = CategoryType.Personal;
     } else if (pathname.indexOf("recent") > -1) {

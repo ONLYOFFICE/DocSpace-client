@@ -236,7 +236,7 @@ const ClientArticleSidebar = ({
           },
           {
             id: "forms-trash",
-            label: t("Common:Trash"),
+            label: t("Common:TrashSection"),
             icon: getCatalogIconUrlByType(FolderType.TRASH),
             onClick: goFormsScoped(CategoryType.Trash, "/forms/trash"),
             withTopSeparator: true,

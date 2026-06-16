@@ -230,6 +230,10 @@ const SectionHeaderContent = (props) => {
   const isContactsGroupsPage = contactsTab === "groups";
   const isContactsInsideGroupPage = contactsTab === "inside_group";
   const isProfile = currentClientView === "profile";
+
+  // The "Forms" section reuses the Rooms folder; detect it from the route to
+  // adjust section labels (title, create-button caption) accordingly.
+  const isFormsSection = getCategoryType(location) === CategoryType.Forms;
   const currentGroupName = currentGroup?.name;
 
   const addButtonRefCallback = React.useCallback(
@@ -1008,9 +1012,11 @@ const SectionHeaderContent = (props) => {
                 warningIcon: isRoomStorageQuotaExceeded
                   ? WarningQuotaExceededUrl
                   : undefined,
-                actions: isRoomsFolder
-                  ? t("Common:NewRoom")
-                  : t("Common:Actions"),
+                actions: isFormsSection
+                  ? t("Common:CreateFormSet")
+                  : isRoomsFolder
+                    ? t("Common:NewRoom")
+                    : t("Common:Actions"),
                 contextMenu: t("Common:TitleShowFolderActions"),
                 infoPanel: t("Common:InfoPanel"),
               }}

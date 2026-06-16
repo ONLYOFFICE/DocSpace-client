@@ -306,7 +306,7 @@ const Item: React.FC<ItemProps> = ({
     if (searchRequestRunning) return;
 
     if (isSharedUser) {
-      return toastr.warning(t("UsersAlreadyAdded"));
+      return toastr.warning(t("Common:UsersAlreadyAdded"));
     }
 
     const value = inputValue === "" ? (name ?? "") : inputValue;
@@ -398,8 +398,8 @@ const Item: React.FC<ItemProps> = ({
             offsetRight={0}
             tooltipContent={
               hasNotFoundEmail
-                ? t("EmailErrorMessageUserNotFound")
-                : t("EmailErrorMessage")
+                ? t("Common:EmailErrorMessageUserNotFound")
+                : t("Common:EmailErrorMessage")
             }
             openOnClick={false}
             size={16}

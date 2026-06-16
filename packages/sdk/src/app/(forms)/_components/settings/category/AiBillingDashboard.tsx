@@ -66,15 +66,15 @@ const TAB_DEFS: {
 }[] = [
   {
     id: "ai",
-    titleKey: "OrganizationAI",
-    tKey: "BillingAICardDesc",
+    titleKey: "Common:OrganizationAI",
+    tKey: "Common:BillingAICardDesc",
     iconClass: cardStyles.billingIconAi,
     icon: <AiIcon />,
   },
   {
     id: "payment-method",
-    titleKey: "PaymentMethod",
-    tKey: "BillingPaymentMethodCardDesc",
+    titleKey: "Common:PaymentMethod",
+    tKey: "Common:BillingPaymentMethodCardDesc",
     iconClass: cardStyles.billingIconPayment,
     icon: <CardIcon />,
     nativeIcon: true,
@@ -120,4 +120,3 @@ const AiBillingDashboard = ({ integrationUrl }: AiBillingDashboardProps) => {
 };
 
 export default AiBillingDashboard;
-

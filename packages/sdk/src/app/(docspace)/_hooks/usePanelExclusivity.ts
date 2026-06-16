@@ -52,12 +52,17 @@ import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
  * calls across call sites. Closing the other store sets its `isVisible` to
  * false, firing the sibling reaction with `false` — a guarded no-op, so no
  * loop.
+ *
+ * `enabled` lets sections that don't host the AI Chat panel (e.g. private
+ * rooms) skip wiring the reactions while keeping the hook call unconditional.
  */
-export const usePanelExclusivity = () => {
+export const usePanelExclusivity = (enabled = true) => {
   const aiChatStore = useAiChatStore();
   const infoPanelStore = useInfoPanelStore();
 
   React.useEffect(() => {
+    if (!enabled) return undefined;
+
     const disposers = [
       reaction(
         () => aiChatStore.isVisible,
@@ -73,5 +78,5 @@ export const usePanelExclusivity = () => {
       ),
     ];
     return () => disposers.forEach((dispose) => dispose());
-  }, [aiChatStore, infoPanelStore]);
+  }, [enabled, aiChatStore, infoPanelStore]);
 };

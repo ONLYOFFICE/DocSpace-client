@@ -70,22 +70,22 @@ const TAB_DEFS: {
 }[] = [
   {
     id: "wallet",
-    titleKey: "Wallet",
-    tKey: "BillingWalletCardDesc",
+    titleKey: "Common:Wallet",
+    tKey: "Common:BillingWalletCardDesc",
     iconClass: cardStyles.billingIconWallet,
     icon: <WalletIcon />,
   },
   {
     id: "storage",
-    titleKey: "AdditionalDiskStorage",
-    tKey: "BillingAdditionalStorageCardDesc",
+    titleKey: "Common:AdditionalDiskStorage",
+    tKey: "Common:BillingAdditionalStorageCardDesc",
     iconClass: cardStyles.billingIconStorage,
     icon: <StorageIcon />,
   },
   {
     id: "payment-method",
-    titleKey: "PaymentMethod",
-    tKey: "BillingPaymentMethodCardDesc",
+    titleKey: "Common:PaymentMethod",
+    tKey: "Common:BillingPaymentMethodCardDesc",
     iconClass: cardStyles.billingIconPayment,
     icon: <CardIcon />,
     nativeIcon: true,
@@ -136,7 +136,7 @@ const BillingForm = ({ user }: BillingFormProps) => {
   return (
     <div className={styles.billingWrapper}>
       <Text fontSize="12px" lineHeight="16px" className={styles.billingNotice}>
-        {t("BillingPortalNotice")}{" "}
+        {t("Common:BillingPortalNotice")}{" "}
         <Link
           type={LinkType.action}
           fontSize="12px"
@@ -144,7 +144,7 @@ const BillingForm = ({ user }: BillingFormProps) => {
           className={styles.billingPortalLink}
           onClick={onOpenBilling}
         >
-          {t("OpenPortalBilling")}
+          {t("Common:OpenPortalBilling")}
         </Link>
       </Text>
 

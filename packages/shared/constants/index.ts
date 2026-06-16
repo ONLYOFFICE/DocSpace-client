@@ -258,6 +258,7 @@ export const CategoryType = Object.freeze({
   Guests: 14,
   AIAgents: 15,
   AIAgent: 16,
+  Forms: 17,
 });
 
 export const SHARED_MEMBERS_COUNT = 100;

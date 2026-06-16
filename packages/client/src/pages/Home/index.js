@@ -52,8 +52,11 @@ import Section from "@docspace/ui-kit/components/section";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { getCategoryType } from "@docspace/shared/utils/common";
+import { CategoryType } from "@docspace/shared/constants";
 
 import SectionWrapper from "SRC_DIR/components/Section";
+import ChooseFormSetBanner from "SRC_DIR/components/ChooseFormSetBanner";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 
@@ -281,6 +284,17 @@ const PureHome = observer((props) => {
     isSettingsPage,
   });
   const showQuickActions = quickActions.show && !isChat;
+
+  // The "Forms" section shows its own "Choose Form Set" plate instead of the
+  // quick-actions tiles. Dismissal is remembered across sessions.
+  const isFormsSection = getCategoryType(location) === CategoryType.Forms;
+  const [isFormSetBannerClosed, setIsFormSetBannerClosed] = React.useState(
+    () => localStorage.getItem("form-set-banner-closed") === "true",
+  );
+  const closeFormSetBanner = useCallback(() => {
+    localStorage.setItem("form-set-banner-closed", "true");
+    setIsFormSetBannerClosed(true);
+  }, []);
 
   const onDrop = useEventCallback((f, uploadToFolder) => {
     if (isContactsPage || isProfile) return;
@@ -623,7 +637,13 @@ const PureHome = observer((props) => {
             </Section.SectionFilter>
           ) : null}
 
-          {showQuickActions ? (
+          {isFormsSection ? (
+            !isFormSetBannerClosed ? (
+              <Section.SectionBanner>
+                <ChooseFormSetBanner onClose={closeFormSetBanner} />
+              </Section.SectionBanner>
+            ) : null
+          ) : showQuickActions ? (
             <Section.SectionBanner>
               <QuickActions
                 items={quickActions.items}

@@ -174,6 +174,10 @@ class ServicesStore {
     return currency.code ?? "USD";
   }
 
+  get aiModelsCurrencySymbol() {
+    return this.aiToolsPrices?.currency?.symbol ?? "$";
+  }
+
   formatAiModelsCurrency = (amount: number) => {
     const { language } = authStore;
 
@@ -214,6 +218,24 @@ class ServicesStore {
       console.error(error);
     }
   };
+
+  fetchAiPrices = async () => {
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
+
+    try {
+      const res = await getAiPrices(abortController.signal);
+
+      const prices = parseAiPrices(res);
+      if (!prices) return;
+
+      this.aiToolsPrices = prices;
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+      console.error(error);
+    }
+  };
+
 }
 
 export default ServicesStore;

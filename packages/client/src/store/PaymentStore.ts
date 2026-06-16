@@ -65,6 +65,11 @@ import {
 } from "@docspace/shared/api/portal/types";
 
 import { AI_ENUM, BACKUP_SERVICE } from "@docspace/ui-kit/billing/constants";
+import {
+  getCardLinkedOnFreeTariff,
+  getCardLinkedOnNonProfit,
+  getIsCardLinkedToPortal,
+} from "@docspace/ui-kit/billing/utils/cardStatus";
 import type { DateTime } from "luxon";
 import { formatDate as formatDateUtil } from "@docspace/ui-kit/utils/date";
 
@@ -149,23 +154,29 @@ class PaymentStore {
   get cardLinkedOnFreeTariff() {
     if (!this.currentQuotaStore || !this.currentTariffStatusStore) return false;
 
-    const { isFreeTariff } = this.currentQuotaStore;
-    const { walletCustomerEmail } = this.currentTariffStatusStore;
-
-    return isFreeTariff && !!walletCustomerEmail;
+    return getCardLinkedOnFreeTariff(
+      this.currentQuotaStore.isFreeTariff,
+      this.currentTariffStatusStore.walletCustomerEmail,
+    );
   }
 
   get cardLinkedOnNonProfit() {
     if (!this.currentQuotaStore || !this.currentTariffStatusStore) return false;
 
-    const { walletCustomerEmail } = this.currentTariffStatusStore;
-    const { isNonProfit } = this.currentQuotaStore;
+    return getCardLinkedOnNonProfit(
+      this.currentQuotaStore.isNonProfit,
+      this.currentTariffStatusStore.walletCustomerEmail,
+    );
+  }
 
-    if (!isNonProfit) return false;
+  get isCardLinkedToPortal() {
+    if (!this.currentQuotaStore || !this.currentTariffStatusStore) return false;
 
-    if (!walletCustomerEmail) return false;
-
-    return true;
+    return getIsCardLinkedToPortal({
+      isNonProfit: this.currentQuotaStore.isNonProfit,
+      isFreeTariff: this.currentQuotaStore.isFreeTariff,
+      walletCustomerEmail: this.currentTariffStatusStore.walletCustomerEmail,
+    });
   }
 
   get storageSizeIncrement() {

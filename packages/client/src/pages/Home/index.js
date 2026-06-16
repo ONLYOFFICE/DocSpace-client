@@ -528,6 +528,9 @@ const PureHome = observer((props) => {
   sectionProps.setIsChatPanelVisible = (visible) => {
     if (!visible) aiChatPanel.closeChatPanel();
   };
+  // In fullscreen the #section is collapsed to zero width but stays mounted, so
+  // mark it inert (drops its content from tab order / pointer interaction).
+  sectionProps.inert = isAiChatFullscreen;
 
   // Plugin operations
   sectionProps.pluginOperations = pluginOperations;

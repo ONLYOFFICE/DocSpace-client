@@ -1,0 +1,122 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@use "@docspace/ui-kit/styles/variables/colors";
+@use "@docspace/ui-kit/styles/mixins";
+
+.banner {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 660px;
+  padding: 16px;
+  border-radius: 6px;
+  background: var(--background-cards-color);
+
+  @include mixins.mobile {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  // flex-basis: 0 so the wrap decision uses min-width (not the content width):
+  // the button stays beside the text until the text block would shrink below
+  // 340px, then the button wraps below. min(100%, …) avoids overflow on narrow
+  // (mobile) widths. Mobile also stacks via the column rule on .banner.
+  flex: 1 1 0;
+  min-width: min(100%, 340px);
+  gap: 4px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.enabledIcon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+
+  path {
+    fill: var(--status-icon-color-positive);
+  }
+}
+
+.descriptionText{
+  max-width: 516px;
+  color: var(--settings-common-description-color)
+}
+
+.infoIcon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-inline-start: 4px;
+  cursor: pointer;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-block-start: 8px;
+}
+
+.featureRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.payIcon path {
+  fill: var(--payment-dialog-text);
+}
+
+.button {
+  flex-shrink: 0;
+}

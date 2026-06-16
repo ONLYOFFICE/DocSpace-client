@@ -189,13 +189,27 @@ const AiSettings = ({
   }
 
   return (
-    <Tabs
-      items={data}
-      withAnimation
-      selectedItemId={currentTabId}
-      onSelect={onSelect}
-      stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType!]}
-    />
+    <>
+      <div
+        ref={bannerRef}
+        className={styles.bannerSticky}
+        style={{ top: headerHeight }}
+      >
+        <AIFeaturesBanner
+          currentDeviceType={currentDeviceType}
+          isAiToolsServiceOn={isAiToolsServiceOn}
+          isCardLinkedToPortal={isCardLinkedToPortal}
+        />
+      </div>
+
+      <Tabs
+        items={data}
+        withAnimation
+        selectedItemId={currentTabId}
+        onSelect={onSelect}
+        stickyTop={tabsStickyTop}
+      />
+    </>
   );
 };
 

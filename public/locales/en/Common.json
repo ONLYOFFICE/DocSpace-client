@@ -1780,6 +1780,7 @@
   "RoomGroupAdded": "Groups added.",
   "RoomGroupAddedCount": "Groups added ({{count}}).",
   "RoomGroupRemove": "Group removed",
+  "RoomFilesLifetime": "The file lifetime is set to {{days}} {{period}} in this room",
   "RoomGroups": "Room groups",
   "RoomIndexExportLocation": "Export of the room index saved to {{sectionName}}",
   "RoomIndexingDisabled": "Automatic file indexing disabled in the room",

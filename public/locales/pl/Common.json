@@ -1757,6 +1757,7 @@
   "RoomGroupAdded": "Grupy zostały dodane.",
   "RoomGroupAddedCount": "Grupy dodane ({{count}}).",
   "RoomGroupRemove": "Grupa została usunięta",
+  "RoomFilesLifetime": "Okres ważności plików w tym pokoju jest ustawiony na {{days}} {{period}}",
   "RoomGroups": "Grupy pokoi",
   "RoomIndexExportLocation": "Eksport indeksu pokoju zapisany w {{sectionName}}",
   "RoomIndexingDisabled": "Automatyczne indeksowanie plików jest wyłączone w tym pokoju",

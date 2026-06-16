@@ -1757,6 +1757,7 @@
   "RoomGroupAdded": "Grupas ir pievienotas.",
   "RoomGroupAddedCount": "Grupas pievienotas ({{count}}).",
   "RoomGroupRemove": "Grupa ir noņemta",
+  "RoomFilesLifetime": "Šajā telpā faila kalpošanas laiks {{days}} {{period}} ir iestatīts uz",
   "RoomGroups": "Telpu grupas",
   "RoomIndexExportLocation": "Telpas indeksa eksports saglabāts {{sectionName}}",
   "RoomIndexingDisabled": "Automātiskā failu indeksēšana telpā ir atspējota",

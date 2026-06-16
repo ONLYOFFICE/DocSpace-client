@@ -1729,6 +1729,7 @@
   "RoomGroupAdded": "Skupiny pridané.",
   "RoomGroupAddedCount": "Skupiny pridané ({{count}}).",
   "RoomGroupRemove": "Skupina odstránená",
+  "RoomFilesLifetime": "Doba používania súborov v tejto miestnosti je nastavená na {{days}} {{period}} ",
   "RoomGroups": "Skupiny miestností",
   "RoomIndexExportLocation": "Export indexu miestnosti uložený do {{sectionName}}",
   "RoomIndexingDisabled": "Automatické indexovanie súborov v miestnosti je vypnuté",

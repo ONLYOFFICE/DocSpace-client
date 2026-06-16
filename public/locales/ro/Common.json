@@ -1780,6 +1780,7 @@
   "RoomGroupAdded": "Grupuri au fost adăugate.",
   "RoomGroupAddedCount": "Grupuri au fost adăugate ({{count}}).",
   "RoomGroupRemove": "Grupul a fost eliminat.",
+  "RoomFilesLifetime": "Durată de viață a fișierelor în acestă sală constituie {{days}} {{period}}",
   "RoomGroups": "Grupuri de camere",
   "RoomIndexExportLocation": "Fișierul cu index de săli exportat a fost salvat în secțiunea {{sectionName}}",
   "RoomIndexingDisabled": "Indexarea automată a fișierelor este dezactivată pentru această sală",

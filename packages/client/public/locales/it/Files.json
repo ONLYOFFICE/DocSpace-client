@@ -104,7 +104,6 @@
   "RoomAvailableViaSharedLink": "Stanza disponibile tramite il link condiviso",
   "RoomCreated": "La stanza è stata creata",
   "RoomEmptyContainerDescription": "Ti preghiamo di creare la prima stanza.",
-  "RoomFilesLifetime": "La durata del file è impostata su {{days}} {{period}} in questa stanza.",
   "RoomTagsLabel": "Tag della stanza",
   "RoomTagsTooltip": "I tag si applicheranno alla stanza che verrà creata in base a questo modello.",
   "RoomTemplate": "Modello di stanza",

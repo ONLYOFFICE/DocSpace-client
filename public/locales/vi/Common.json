@@ -1757,6 +1757,7 @@
   "RoomGroupAdded": "Đã thêm nhóm.",
   "RoomGroupAddedCount": "Đã thêm nhóm ({{count}}).",
   "RoomGroupRemove": "Đã xóa nhóm",
+  "RoomFilesLifetime": "Thời gian tồn tại của tập tin được đặt thành {{period}} {{days}} trong phòng này",
   "RoomGroups": "Nhóm phòng",
   "RoomIndexExportLocation": "Đã lưu xuất chỉ mục phòng vào {{sectionName}}",
   "RoomIndexingDisabled": "Tự động lập chỉ mục tập tin đã bị vô hiệu hóa trong phòng",

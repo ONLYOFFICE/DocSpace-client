@@ -1731,6 +1731,7 @@
   "RoomGroupAdded": "그룹이 추가되었습니다.",
   "RoomGroupAddedCount": "그룹 추가됨 ({{count}}).",
   "RoomGroupRemove": "그룹이 제거되었습니다",
+  "RoomFilesLifetime": "이 룸에서 파일 수명은 {{days}} {{period}}로 설정됩니다",
   "RoomGroups": "룸 그룹",
   "RoomIndexExportLocation": "채팅방 인덱스 내보내기가 {{sectionName}}(으)로 저장됨",
   "RoomIndexingDisabled": "룸에서 자동 파일 인덱싱이 비활성화되었습니다",

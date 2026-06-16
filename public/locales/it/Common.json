@@ -1780,6 +1780,7 @@
   "RoomGroupAdded": "Gruppi aggiunti.",
   "RoomGroupAddedCount": "Gruppi aggiunti ({{count}}).",
   "RoomGroupRemove": "Gruppo rimosso",
+  "RoomFilesLifetime": "La durata del file è impostata su {{days}} {{period}} in questa stanza.",
   "RoomGroups": "Gruppi di stanze",
   "RoomIndexExportLocation": "L’indice della stanza è stato esportato e salvato in {{sectionName}}",
   "RoomIndexingDisabled": "Indicizzazione automatica dei file disattivata nella stanza",

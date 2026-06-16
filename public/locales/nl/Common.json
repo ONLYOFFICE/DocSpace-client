@@ -1757,6 +1757,7 @@
   "RoomGroupAdded": "Groepen toegevoegd.",
   "RoomGroupAddedCount": "Groepen toegevoegd ({{count}}).",
   "RoomGroupRemove": "Groep verwijderd",
+  "RoomFilesLifetime": "De bestand levensduur is ingesteld op {{days}} {{period}} in deze kamer",
   "RoomGroups": "Kamergroepen",
   "RoomIndexExportLocation": "Export van ruimte-index opgeslagen in {{sectionName}}",
   "RoomIndexingDisabled": "Automatische indexeren van bestanden uitgeschakeld in de kamer",

@@ -1757,6 +1757,7 @@
   "RoomGroupAdded": "Qruplar əlavə edildi.",
   "RoomGroupAddedCount": "Qruplar əlavə edildi ({{count}}).",
   "RoomGroupRemove": "Qrup silindi",
+  "RoomFilesLifetime": "Bu otaqda faylın istifadə müddəti {{days}} {{period}} olaraq təyin edilib",
   "RoomGroups": "Otaq qrupları",
   "RoomIndexExportLocation": "Otaq indeksinin ixracı {{sectionName}} bölməsində qeyd edildi",
   "RoomIndexingDisabled": "Otaqda faylların avtomatik indeksləşdirilməsi deaktiv edilib",

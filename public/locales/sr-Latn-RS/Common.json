@@ -1780,6 +1780,7 @@
   "RoomGroupAdded": "Grupe dodate.",
   "RoomGroupAddedCount": "Grupe dodate ({{count}}).",
   "RoomGroupRemove": "Grupa uklonjena",
+  "RoomFilesLifetime": "Vek trajanja fajla postavljen je na {{days}} {{period}} u ovoj sobi",
   "RoomGroups": "Grupe soba",
   "RoomIndexExportLocation": "Izvoz indeksa sobe je sačuvan u {{sectionName}}",
   "RoomIndexingDisabled": "Automatsko indeksiranje fajlova onemogućeno u sobi",

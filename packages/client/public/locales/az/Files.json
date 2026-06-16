@@ -104,7 +104,6 @@
   "RoomAvailableViaSharedLink": "Otaq paylaşılan link vasitəsilə əlçatandır",
   "RoomCreated": "Otaq yaradıldı",
   "RoomEmptyContainerDescription": "Lütfən, ilk otağı yaradın.",
-  "RoomFilesLifetime": "Bu otaqda faylın istifadə müddəti {{days}} {{period}} olaraq təyin edilib",
   "RoomTagsLabel": "Otaq Teqləri",
   "RoomTagsTooltip": "Bu şablona uyğun olaraq yaradılmış otağa teqlər tətbiq olunacaq.",
   "RoomTemplate": "Otaq şablonu",

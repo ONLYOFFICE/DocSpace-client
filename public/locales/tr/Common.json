@@ -1757,6 +1757,7 @@
   "RoomGroupAdded": "Gruplar ekledi.",
   "RoomGroupAddedCount": "Gruplar eklendi ({{count}}).",
   "RoomGroupRemove": "Grup kaldırıldı",
+  "RoomFilesLifetime": "Bu odada dosya yaşam süresi {{days}} {{period}} olarak ayarlanmıştır",
   "RoomGroups": "Oda grupları",
   "RoomIndexExportLocation": "Oda indeksi dışa aktarımı {{sectionName}} bölümüne kaydedildi",
   "RoomIndexingDisabled": "Odada otomatik dosya dizinleme devre dışı bırakıldı",

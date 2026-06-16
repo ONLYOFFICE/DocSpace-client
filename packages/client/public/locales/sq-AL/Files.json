@@ -104,7 +104,6 @@
   "RoomAvailableViaSharedLink": "Dhoma në dispozicion përmes lidhjes së përbashkët",
   "RoomCreated": "Dhoma u krijua",
   "RoomEmptyContainerDescription": "Ju lutemi krijoni dhomën e parë.",
-  "RoomFilesLifetime": "Jetëgjatësia e skedarit është caktuar në {{days}} {{period}} në këtë dhomë",
   "RoomTagsLabel": "Etiketat e Dhomave",
   "RoomTagsTooltip": "Etiketat do të aplikohen dhomës që do të krijohet bazuar në këtë model.",
   "RoomTemplate": "Modelo i dhomës",

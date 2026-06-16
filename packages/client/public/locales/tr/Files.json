@@ -104,7 +104,6 @@
   "RoomAvailableViaSharedLink": "Oda paylaşımlı bağlantı üzerinden kullanılabilir",
   "RoomCreated": "Oda oluşturuldu",
   "RoomEmptyContainerDescription": "Lütfen ilk odayı oluşturun.",
-  "RoomFilesLifetime": "Bu odada dosya yaşam süresi {{days}} {{period}} olarak ayarlanmıştır",
   "RoomTagsLabel": "Oda Etiketleri",
   "RoomTagsTooltip": "Etiketler bu şablona göre oluşturulacak odaya uygulanacaktır.",
   "RoomTemplate": "Oda şablonu",

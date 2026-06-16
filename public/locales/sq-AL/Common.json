@@ -1757,6 +1757,7 @@
   "RoomGroupAdded": "Grupet u shtuan.",
   "RoomGroupAddedCount": "Grupet e shtuara ({{count}}).",
   "RoomGroupRemove": "Grupi u fshi",
+  "RoomFilesLifetime": "Jetëgjatësia e skedarit është caktuar në {{days}} {{period}} në këtë dhomë",
   "RoomGroups": "Grupet e dhomave",
   "RoomIndexExportLocation": "Eksportimi i indeksit të dhomës u ruajt në {{sectionName}}",
   "RoomIndexingDisabled": "Indeksimi automatik i skedarëve është çaktivizuar në dhomë",

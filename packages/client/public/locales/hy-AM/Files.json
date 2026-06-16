@@ -104,7 +104,6 @@
   "RoomAvailableViaSharedLink": "Սենյակը հասանելի է ընդհանուր հղման միջոցով",
   "RoomCreated": "Ստեղծվել է սենյակ",
   "RoomEmptyContainerDescription": "Խնդրում եմ ստեղծեք առաջին սենյակը :",
-  "RoomFilesLifetime": "Այս սենյակում ֆայլի գործողության ժամկետը սահմանված է {{days}} {{period}}",
   "RoomTagsLabel": "Սենյակի պիտակներ",
   "RoomTagsTooltip": "Պիտակները կկիրառվեն այս կաղապարի հիման վրա ստեղծվելիք սենյակի համար:",
   "RoomTemplate": "Սենյակի կաղապար",

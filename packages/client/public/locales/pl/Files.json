@@ -104,7 +104,6 @@
   "RoomAvailableViaSharedLink": "Pokój dostępny za pośrednictwem linku udostępniania",
   "RoomCreated": "Pokój został utworzony",
   "RoomEmptyContainerDescription": "Utwórz pierwszy pokój.",
-  "RoomFilesLifetime": "Okres ważności plików w tym pokoju jest ustawiony na {{days}} {{period}}",
   "RoomTagsLabel": "Tagi pokoju",
   "RoomTagsTooltip": "Tagi będą dotyczyły pokoju, który zostanie utworzony na podstawie tego szablonu.",
   "RoomTemplate": "Szablon pokoju",

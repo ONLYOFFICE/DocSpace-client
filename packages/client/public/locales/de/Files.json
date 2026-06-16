@@ -104,7 +104,6 @@
   "RoomAvailableViaSharedLink": "Raum über geteilten Link verfügbar",
   "RoomCreated": "Raum erstellt",
   "RoomEmptyContainerDescription": "Bitte erstellen Sie den ersten Raum.",
-  "RoomFilesLifetime": "Die Dateilebensdauer in diesem Raum ist auf {{days}} {{period}} festgelegt",
   "RoomTagsLabel": "Raum-Tags",
   "RoomTagsTooltip": "Auf den Raum, der auf Grundlage dieser Vorlage erstellt wird, werden Tags angewendet.",
   "RoomTemplate": "Raumvorlage",

@@ -1780,6 +1780,7 @@
   "RoomGroupAdded": "Grupos añadidos.",
   "RoomGroupAddedCount": "Grupos añadidos ({{count}}).",
   "RoomGroupRemove": "Grupo eliminado",
+  "RoomFilesLifetime": "La vida útil del archivo se establece en {{days}} {{period}} en esta sala",
   "RoomGroups": "Grupos de salas",
   "RoomIndexExportLocation": "La exportación del índice de salas se ha guardado en {{sectionName}}",
   "RoomIndexingDisabled": "Indización automática de archivos desactivada en la sala",

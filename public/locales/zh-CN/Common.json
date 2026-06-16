@@ -1780,6 +1780,7 @@
   "RoomGroupAdded": "组已添加。",
   "RoomGroupAddedCount": "组已添加 ({{count}})。",
   "RoomGroupRemove": "组已删除",
+  "RoomFilesLifetime": "此房间中的文件有效期设置为{{days}} {{period}}。",
   "RoomGroups": "房间组",
   "RoomIndexExportLocation": "导出的房间索引已保存至{{sectionName}}",
   "RoomIndexingDisabled": "房间内自动文件索引已禁用",

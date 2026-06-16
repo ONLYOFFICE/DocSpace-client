@@ -1757,6 +1757,7 @@
   "RoomGroupAdded": "Οι ομάδες προστέθηκαν.",
   "RoomGroupAddedCount": "Προσθήκη ομάδων ({{count}}).",
   "RoomGroupRemove": "Η ομάδα αφαιρέθηκε.",
+  "RoomFilesLifetime": "Η διάρκεια ζωής των αρχείων ορίζεται σε {{days}} {{period}} σε αυτό το δωμάτιο",
   "RoomGroups": "Ομάδες δωματίων",
   "RoomIndexExportLocation": "Ο δείκτης δωματίου εξήχθη στο {{sectionName}}",
   "RoomIndexingDisabled": "Έγινε απενεργοποίηση της αυτόματης ευρετηρίασης αρχείων στο δωμάτιο",

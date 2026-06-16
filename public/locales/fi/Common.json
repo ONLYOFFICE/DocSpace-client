@@ -1757,6 +1757,7 @@
   "RoomGroupAdded": "Ryhmät lisätty.",
   "RoomGroupAddedCount": "Ryhmät lisätty ({{count}}).",
   "RoomGroupRemove": "Ryhmät poistettu",
+  "RoomFilesLifetime": "Tiedoston käyttöikä tässä huoneessa on asetettu {{days}} {{period}}",
   "RoomGroups": "Huoneryhmät",
   "RoomIndexExportLocation": "Huoneen indeksi vietiin {{sectionName}}-osioon",
   "RoomIndexingDisabled": "Automaattinen tiedostojen indeksointi on poistettu käytöstä tässä huoneessa",

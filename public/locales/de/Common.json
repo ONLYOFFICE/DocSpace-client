@@ -1780,6 +1780,7 @@
   "RoomGroupAdded": "Gruppen hinzugefügt.",
   "RoomGroupAddedCount": "Gruppen hinzugefügt ({{count}}).",
   "RoomGroupRemove": "Gruppe entfernt",
+  "RoomFilesLifetime": "Die Dateilebensdauer in diesem Raum ist auf {{days}} {{period}} festgelegt",
   "RoomGroups": "Raumgruppen",
   "RoomIndexExportLocation": "Der Export des Raumindex wird in {{sectionName}} gespeichert",
   "RoomIndexingDisabled": "Automatische Dateiindizierung im Raum deaktiviert",

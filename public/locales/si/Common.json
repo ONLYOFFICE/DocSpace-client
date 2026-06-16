@@ -1757,6 +1757,7 @@
   "RoomGroupAdded": "කණ්ඩායම් එකතු කරන ලදි.",
   "RoomGroupAddedCount": "කණ්ඩායම් එකතු කරන ලදි ({{count}}).",
   "RoomGroupRemove": "කණ්ඩායම ඉවත් කරන ලදී",
+  "RoomFilesLifetime": "මෙම කාමරයේ ගොණුවේ කාලය {{days}} {{period}} දක්වා සකසා ඇත.",
   "RoomGroups": "කාමර කණ්ඩායම්",
   "RoomIndexExportLocation": "අංශයේ කාමර දර්ශකය සුරක්ෂිතව අපනයනය කරනු ලැබුවේ {{sectionName}} වෙත.",
   "RoomIndexingDisabled": "කාමරයේ ස්වයංක්‍රීය ගොනු දර්ශනය අක්‍රිය කර ඇත",

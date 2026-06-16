@@ -1780,6 +1780,7 @@
   "RoomGroupAdded": "グループが追加されました。",
   "RoomGroupAddedCount": "グループが追加されました ({{count}})。",
   "RoomGroupRemove": "グループが削除されました",
+  "RoomFilesLifetime": "このルームでは、ファイルの有効期間は{{days}}{{period}}に設定されています",
   "RoomGroups": "ルームグループ",
   "RoomIndexExportLocation": "ルームインデックスのエクスポートが {{sectionName}} に保存されました",
   "RoomIndexingDisabled": "ルーム内での自動ファイルインデックス作成が無効になりました",

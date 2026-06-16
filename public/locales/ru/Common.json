@@ -1780,6 +1780,7 @@
   "RoomGroupAdded": "Группы добавлены.",
   "RoomGroupAddedCount": "Группы добавлены ({{count}}).",
   "RoomGroupRemove": "Группа удалена",
+  "RoomFilesLifetime": "Срок действия файла в этой комнате установлен на {{days}} {{period}}",
   "RoomGroups": "Группы комнат",
   "RoomIndexExportLocation": "Экспорт индекса комнаты сохранен в раздел {{sectionName}}",
   "RoomIndexingDisabled": "В комнате отключена автоматическая индексация файлов",

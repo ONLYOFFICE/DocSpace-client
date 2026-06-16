@@ -1757,6 +1757,7 @@
   "RoomGroupAdded": "Групи додано.",
   "RoomGroupAddedCount": "Групи додано ({{count}}).",
   "RoomGroupRemove": "Групу видалено",
+  "RoomFilesLifetime": "У цій кімнаті встановлено період існування файлів {{days}} {{period}}",
   "RoomGroups": "Групи кімнат",
   "RoomIndexExportLocation": "Експорт індексу кімнати збережено у {{sectionName}}",
   "RoomIndexingDisabled": "У кімнаті вимкнено автоматичне індексування файлів",

@@ -1757,6 +1757,7 @@
   "RoomGroupAdded": "ກຸ່ມຖືກເພີ່ມເຂົ້າແລ້ວ.",
   "RoomGroupAddedCount": "ກຸ່ມຖືກເພີ່ມເຂົ້າແລ້ວ ({{count}}).",
   "RoomGroupRemove": "ກຸ່ມຖືກລົບອອກ",
+  "RoomFilesLifetime": "ໃນຫ້ອງນີ້ ກໍານົດໄລຍະເວລາຂອງໄຟລ໌ໄວ້ຄັ້ງລະ {{days}} {{period}}",
   "RoomGroups": "ກຸ່ມຫ້ອງ",
   "RoomIndexExportLocation": "ການສົ່ງອອກດອກສໍານວນຫ້ອງທີ່ບັນທຶກໄວ້ສູ່ {{sectionName}}",
   "RoomIndexingDisabled": "ການນໍາໃຊ້ການຄົ້ນຫາເອກະສານແບບອັດຕະໂນມັດຖືກປິດການນໍາໃຊ້ໃນຫ້ອງນີ້",

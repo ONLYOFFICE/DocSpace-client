@@ -1780,6 +1780,7 @@
   "RoomGroupAdded": "Խմբերն ավելացվել են։",
   "RoomGroupAddedCount": "Խմբերն ավելացվել են ({{count}})։",
   "RoomGroupRemove": "Խմբերը հեռացվել են։",
+  "RoomFilesLifetime": "Այս սենյակում ֆայլի գործողության ժամկետը սահմանված է {{days}} {{period}}",
   "RoomGroups": "Սենյակների խմբեր",
   "RoomIndexExportLocation": "Սենյակի ինդեքսի արտահանումը պահված է {{sectionName}}",
   "RoomIndexingDisabled": "Սենյակում ֆայլերի ավտոմատ ինդեքսավորումն անջատված է",

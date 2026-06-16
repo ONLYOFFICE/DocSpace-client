@@ -1757,6 +1757,7 @@
   "RoomGroupAdded": "تمت إضافة المجموعات.",
   "RoomGroupAddedCount": "تمت إضافة المجموعات ({{count}}).",
   "RoomGroupRemove": "تمت إزالة المجموعة",
+  "RoomFilesLifetime": "تم تعيين عمر الملف على {{days}} {{period}} في هذه الغرفة",
   "RoomGroups": "مجموعات الغرف",
   "RoomIndexExportLocation": "تم حفظ تصدير فهرس الغرفة في {{sectionName}}",
   "RoomIndexingDisabled": "تفعيل الفهرسة التلقائية للملفات معطل في الغرفة",

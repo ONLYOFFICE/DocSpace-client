@@ -33,11 +33,13 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+@use "@docspace/ui-kit/styles/variables/colors";
+
 .banner {
   max-width: 700px;
 }
 
 .banner > div:first-child svg path {
-  fill: #a3a9ae;
+  fill: colors.$gray;
 }
 

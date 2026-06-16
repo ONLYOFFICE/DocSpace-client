@@ -56,6 +56,9 @@ type ClientArticleSidebarProps = FolderIds & {
   userId?: string;
   treeFolders: TTreeFolder[];
   isVisitor?: boolean;
+  // Room admins / admins only — gates the Rooms → Templates item, matching the
+  // former Rooms/Templates submenu (and the Use template quick action).
+  canUseTemplates?: boolean;
   onFolderNavigate: () => void;
 };
 
@@ -63,6 +66,7 @@ const ClientArticleSidebar = ({
   userId,
   treeFolders,
   isVisitor,
+  canUseTemplates,
   onFolderNavigate,
   ...folderIds
 }: ClientArticleSidebarProps) => {
@@ -120,6 +124,15 @@ const ClientArticleSidebar = ({
     },
     [navigate, roomsFolderId],
   );
+
+  // Templates: the Rooms list scoped to the Templates search area. Replaces the
+  // former Rooms/Templates submenu tabs (searchArea=Templates on /rooms/shared).
+  const goTemplates = React.useCallback(() => {
+    onFolderNavigateRef.current?.();
+    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Templates);
+    filter.searchArea = RoomSearchArea.Templates;
+    navigate(`/rooms/shared/filter?${filter.toUrlParams(userId, false)}`);
+  }, [navigate, userId]);
 
   const activeId = React.useMemo(
     () => getClientActiveId(location.pathname, folderIds),
@@ -202,6 +215,16 @@ const ClientArticleSidebar = ({
             icon: getCatalogIconUrlByType(FolderType.Favorites),
             onClick: goRoomsScoped(CategoryType.Favorite, "/rooms/favorite"),
           },
+          ...(canUseTemplates
+            ? [
+                {
+                  id: "rooms-templates",
+                  label: t("Common:Templates"),
+                  icon: getCatalogIconUrlByType(FolderType.RoomTemplates),
+                  onClick: goTemplates,
+                },
+              ]
+            : []),
           ...(archiveFolder
             ? [navItem(archiveFolder, { withTopSeparator: true })]
             : []),
@@ -258,8 +281,10 @@ const ClientArticleSidebar = ({
     goFolder,
     goRoomsScoped,
     goFormsScoped,
+    goTemplates,
     treeFolders,
     isVisitor,
+    canUseTemplates,
     userId,
   ]);
 
@@ -267,7 +292,13 @@ const ClientArticleSidebar = ({
 };
 
 const ClientArticleSidebarConnected = inject<TStore>(
-  ({ userStore, treeFoldersStore, filesStore, clientLoadingStore }) => ({
+  ({
+    authStore,
+    userStore,
+    treeFoldersStore,
+    filesStore,
+    clientLoadingStore,
+  }) => ({
     userId: userStore.user?.id,
     treeFolders: treeFoldersStore.treeFolders,
     roomsFolderId: treeFoldersStore.roomsFolderId,
@@ -279,6 +310,8 @@ const ClientArticleSidebarConnected = inject<TStore>(
     sharedWithMeFolderId: treeFoldersStore.sharedWithMeFolderId,
     aiAgentsFolderId: treeFoldersStore.aiAgentsFolderId,
     isVisitor: userStore.user?.isVisitor,
+    // Matches Home's canCreateRooms — room admins and admins can use templates.
+    canUseTemplates: authStore.isAdmin || authStore.isRoomAdmin,
     onFolderNavigate: () => {
       filesStore.setSelection?.([]);
       clientLoadingStore.setIsSectionBodyLoading(true, true);

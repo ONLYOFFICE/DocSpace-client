@@ -73,7 +73,8 @@ const ClientArticleSidebar = ({
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
   const navigate = useNavigate();
-  const { myFolderId, roomsFolderId } = folderIds;
+  const { myFolderId, roomsFolderId, recentFolderId, favoritesFolderId } =
+    folderIds;
 
   // `onFolderNavigate` is re-created on every inject render; keep a stable ref
   // so the memoized onClick handlers below don't go stale (which made nested
@@ -97,16 +98,25 @@ const ClientArticleSidebar = ({
     [navigate, userId, myFolderId],
   );
 
-  // Rooms-scoped Recent/Favorites: the same special @recent/@favorites files
+  // Rooms-scoped Recent/Favorites: the same special recent/favorites files
   // view, but constrained to room content via `parentId=<roomsFolderId>`.
+  // The recent/favorites folder ids are known up front (from the tree), so we
+  // navigate with the concrete `folder=<id>` instead of the "@recent"/
+  // "@favorites" alias FilesFilter.getDefault would otherwise set.
   const goRoomsScoped = React.useCallback(
-    (categoryType: ValueOf<typeof CategoryType>, basePath: string) => () => {
-      onFolderNavigateRef.current?.();
-      const filter = FilesFilter.getDefault({ categoryType });
-      const parentSuffix =
-        roomsFolderId != null ? `&parentId=${roomsFolderId}` : "";
-      navigate(`${basePath}/filter?${filter.toUrlParams()}${parentSuffix}`);
-    },
+    (
+        categoryType: ValueOf<typeof CategoryType>,
+        basePath: string,
+        folderId?: number | null,
+      ) =>
+      () => {
+        onFolderNavigateRef.current?.();
+        const filter = FilesFilter.getDefault({ categoryType });
+        if (folderId != null) filter.folder = String(folderId);
+        const parentSuffix =
+          roomsFolderId != null ? `&parentId=${roomsFolderId}` : "";
+        navigate(`${basePath}/filter?${filter.toUrlParams()}${parentSuffix}`);
+      },
     [navigate, roomsFolderId],
   );
 
@@ -207,13 +217,21 @@ const ClientArticleSidebar = ({
             id: "rooms-recent",
             label: t("Common:Recent"),
             icon: getCatalogIconUrlByType(FolderType.Recent),
-            onClick: goRoomsScoped(CategoryType.Recent, "/rooms/recent"),
+            onClick: goRoomsScoped(
+              CategoryType.Recent,
+              "/rooms/recent",
+              recentFolderId,
+            ),
           },
           {
             id: "rooms-favorites",
             label: t("Common:Favorites"),
             icon: getCatalogIconUrlByType(FolderType.Favorites),
-            onClick: goRoomsScoped(CategoryType.Favorite, "/rooms/favorite"),
+            onClick: goRoomsScoped(
+              CategoryType.Favorite,
+              "/rooms/favorite",
+              favoritesFolderId,
+            ),
           },
           ...(canUseTemplates
             ? [
@@ -285,6 +303,8 @@ const ClientArticleSidebar = ({
     treeFolders,
     isVisitor,
     canUseTemplates,
+    recentFolderId,
+    favoritesFolderId,
     userId,
   ]);
 

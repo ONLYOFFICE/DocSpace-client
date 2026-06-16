@@ -79,7 +79,10 @@ import {
 } from "SRC_DIR/helpers/info-panel";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 import TariffBar from "SRC_DIR/components/TariffBar";
-import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
+import {
+  getLifetimePeriodTranslation,
+  getCategoryType,
+} from "@docspace/shared/utils/common";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -744,6 +747,11 @@ const SectionHeaderContent = (props) => {
 
     if (isSettingsPage) return t("Common:Settings");
 
+    // The "Forms" section reuses the Rooms folder, so the selected folder title
+    // would otherwise read "Rooms"; force the section name instead.
+    if (getCategoryType(location) === CategoryType.Forms)
+      return t("Common:Forms");
+
     if (isContactsPage) {
       switch (contactsTab) {
         case "people":
@@ -773,6 +781,7 @@ const SectionHeaderContent = (props) => {
     insideGroupTempTitle,
     currentGroupName,
     title,
+    location,
   ]);
 
   const contextMenuHeader = React.useMemo(() => {

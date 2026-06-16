@@ -34,10 +34,9 @@ import type {
   NavMenuItem,
   NavSubItem,
 } from "@docspace/ui-kit/components/nav-menu";
-import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
+import { FolderType, RoomSearchArea, FilterType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { CategoryType } from "@docspace/shared/constants";
 import type { ValueOf } from "@docspace/shared/types";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
@@ -57,9 +56,6 @@ type ClientArticleSidebarProps = FolderIds & {
   userId?: string;
   treeFolders: TTreeFolder[];
   isVisitor?: boolean;
-  // Room admins / admins only — gates the Rooms → Templates item, matching the
-  // former Rooms/Templates submenu (and the Use template quick action).
-  canUseTemplates?: boolean;
   onFolderNavigate: () => void;
 };
 
@@ -67,15 +63,13 @@ const ClientArticleSidebar = ({
   userId,
   treeFolders,
   isVisitor,
-  canUseTemplates,
   onFolderNavigate,
   ...folderIds
 }: ClientArticleSidebarProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
   const navigate = useNavigate();
-  const { myFolderId, roomsFolderId, recentFolderId, favoritesFolderId } =
-    folderIds;
+  const { myFolderId, roomsFolderId } = folderIds;
 
   // `onFolderNavigate` is re-created on every inject render; keep a stable ref
   // so the memoized onClick handlers below don't go stale (which made nested
@@ -99,40 +93,37 @@ const ClientArticleSidebar = ({
     [navigate, userId, myFolderId],
   );
 
-  // Rooms-scoped Recent/Favorites: the same special recent/favorites files
+  // Rooms-scoped Recent/Favorites: the same special @recent/@favorites files
   // view, but constrained to room content via `parentId=<roomsFolderId>`.
-  // The recent/favorites folder ids are known up front (from the tree), so we
-  // navigate with the concrete `folder=<id>` instead of the "@recent"/
-  // "@favorites" alias FilesFilter.getDefault would otherwise set.
   const goRoomsScoped = React.useCallback(
-    (
-        categoryType: ValueOf<typeof CategoryType>,
-        basePath: string,
-        folderId?: number | null,
-      ) =>
-      () => {
-        onFolderNavigateRef.current?.();
-        const filter = FilesFilter.getDefault({ categoryType });
-        if (folderId != null) filter.folder = String(folderId);
-        const parentSuffix =
-          roomsFolderId != null ? `&parentId=${roomsFolderId}` : "";
-        navigate(`${basePath}/filter?${filter.toUrlParams()}${parentSuffix}`);
-      },
+    (categoryType: ValueOf<typeof CategoryType>, basePath: string) => () => {
+      onFolderNavigateRef.current?.();
+      const filter = FilesFilter.getDefault({ categoryType });
+      const parentSuffix =
+        roomsFolderId != null ? `&parentId=${roomsFolderId}` : "";
+      navigate(`${basePath}/filter?${filter.toUrlParams()}${parentSuffix}`);
+    },
     [navigate, roomsFolderId],
   );
 
-  // Templates: the Rooms list scoped to the Templates search area. Replaces the
-  // former Rooms/Templates submenu tabs (searchArea=Templates on /rooms/shared).
-  const goTemplates = React.useCallback(() => {
-    onFolderNavigateRef.current?.();
-    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Templates);
-    filter.searchArea = RoomSearchArea.Templates;
-    navigate(`/rooms/shared/filter?${filter.toUrlParams(userId, false)}`);
-  }, [navigate, userId]);
+  // Forms-scoped Recent/Favorites/Trash: same as goRoomsScoped, but the files
+  // list is additionally filtered to PDF forms only — the "Forms" counterpart
+  // of the Rooms subsections.
+  const goFormsScoped = React.useCallback(
+    (categoryType: ValueOf<typeof CategoryType>, basePath: string) => () => {
+      onFolderNavigateRef.current?.();
+      const filter = FilesFilter.getDefault({ categoryType });
+      filter.filterType = FilterType.PDFForm;
+      const parentSuffix =
+        roomsFolderId != null ? `&parentId=${roomsFolderId}` : "";
+      navigate(`${basePath}/filter?${filter.toUrlParams()}${parentSuffix}`);
+    },
+    [navigate, roomsFolderId],
+  );
 
   const activeId = React.useMemo(
-    () => getClientActiveId(location.pathname, folderIds, location.search),
-    [location.pathname, location.search, folderIds],
+    () => getClientActiveId(location.pathname, folderIds),
+    [location.pathname, folderIds],
   );
 
   const groups = React.useMemo<NavMenuGroup[]>(() => {
@@ -203,32 +194,14 @@ const ClientArticleSidebar = ({
             id: "rooms-recent",
             label: t("Common:Recent"),
             icon: getCatalogIconUrlByType(FolderType.Recent),
-            onClick: goRoomsScoped(
-              CategoryType.Recent,
-              "/rooms/recent",
-              recentFolderId,
-            ),
+            onClick: goRoomsScoped(CategoryType.Recent, "/rooms/recent"),
           },
           {
             id: "rooms-favorites",
             label: t("Common:Favorites"),
             icon: getCatalogIconUrlByType(FolderType.Favorites),
-            onClick: goRoomsScoped(
-              CategoryType.Favorite,
-              "/rooms/favorite",
-              favoritesFolderId,
-            ),
+            onClick: goRoomsScoped(CategoryType.Favorite, "/rooms/favorite"),
           },
-          ...(canUseTemplates
-            ? [
-                {
-                  id: "rooms-templates",
-                  label: t("Common:Templates"),
-                  icon: getCatalogIconUrlByType(FolderType.RoomTemplates),
-                  onClick: goTemplates,
-                },
-              ]
-            : []),
           ...(archiveFolder
             ? [navItem(archiveFolder, { withTopSeparator: true })]
             : []),
@@ -248,6 +221,27 @@ const ClientArticleSidebar = ({
         label: t("Common:Forms"),
         icon: CatalogFormsReactSvgUrl,
         onClick: go(`/forms/filter?${formsFilter.toUrlParams(userId, false)}`),
+        children: [
+          {
+            id: "forms-recent",
+            label: t("Common:Recent"),
+            icon: getCatalogIconUrlByType(FolderType.Recent),
+            onClick: goFormsScoped(CategoryType.Recent, "/forms/recent"),
+          },
+          {
+            id: "forms-favorites",
+            label: t("Common:Favorites"),
+            icon: getCatalogIconUrlByType(FolderType.Favorites),
+            onClick: goFormsScoped(CategoryType.Favorite, "/forms/favorites"),
+          },
+          {
+            id: "forms-trash",
+            label: t("Common:Trash"),
+            icon: getCatalogIconUrlByType(FolderType.TRASH),
+            onClick: goFormsScoped(CategoryType.Trash, "/forms/trash"),
+            withTopSeparator: true,
+          },
+        ],
       });
     }
 
@@ -263,19 +257,17 @@ const ClientArticleSidebar = ({
     go,
     goFolder,
     goRoomsScoped,
-    goTemplates,
+    goFormsScoped,
     treeFolders,
     isVisitor,
-    canUseTemplates,
-    recentFolderId,
-    favoritesFolderId,
+    userId,
   ]);
 
   return <AppsSidebar groups={groups} activeId={activeId} />;
 };
 
 const ClientArticleSidebarConnected = inject<TStore>(
-  ({ authStore, userStore, treeFoldersStore, filesStore, clientLoadingStore }) => ({
+  ({ userStore, treeFoldersStore, filesStore, clientLoadingStore }) => ({
     userId: userStore.user?.id,
     treeFolders: treeFoldersStore.treeFolders,
     roomsFolderId: treeFoldersStore.roomsFolderId,
@@ -287,8 +279,6 @@ const ClientArticleSidebarConnected = inject<TStore>(
     sharedWithMeFolderId: treeFoldersStore.sharedWithMeFolderId,
     aiAgentsFolderId: treeFoldersStore.aiAgentsFolderId,
     isVisitor: userStore.user?.isVisitor,
-    // Matches Home's canCreateRooms — room admins and admins can use templates.
-    canUseTemplates: authStore.isAdmin || authStore.isRoomAdmin,
     onFolderNavigate: () => {
       filesStore.setSelection?.([]);
       clientLoadingStore.setIsSectionBodyLoading(true, true);

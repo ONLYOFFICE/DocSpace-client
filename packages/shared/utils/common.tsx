@@ -1504,7 +1504,15 @@ export const getCategoryType = (location: { pathname: string }) => {
   const { pathname } = location;
 
   if (pathname.startsWith("/forms")) {
-    categoryType = CategoryType.Forms;
+    if (pathname.indexOf("/recent") > -1) {
+      categoryType = CategoryType.Recent;
+    } else if (pathname.indexOf("/favorite") > -1) {
+      categoryType = CategoryType.Favorite;
+    } else if (pathname.indexOf("/trash") > -1) {
+      categoryType = CategoryType.Trash;
+    } else {
+      categoryType = CategoryType.Forms;
+    }
   } else if (pathname.startsWith("/rooms")) {
     if (pathname.indexOf("personal") > -1) {
       categoryType = CategoryType.Personal;

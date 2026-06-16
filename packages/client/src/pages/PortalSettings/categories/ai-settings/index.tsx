@@ -1,226 +1,183 @@
-/*
- * Copyright (C) Ascensio System SIA, 2009-2026
- *
- * This program is a free software product. You can redistribute it and/or
- * modify it under the terms of the GNU Affero General Public License (AGPL)
- * version 3 as published by the Free Software Foundation, together with the
- * additional terms provided in the LICENSE file.
- *
- * This program is distributed WITHOUT ANY WARRANTY; without even the implied
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
- * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
- *
- * You can contact Ascensio System SIA by email at info@onlyoffice.com
- * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
- * LV-1050, Latvia, European Union.
- *
- * The interactive user interfaces in modified versions of the Program
- * are required to display Appropriate Legal Notices in accordance with
- * Section 5 of the GNU AGPL version 3.
- *
- * No trademark rights are granted under this License.
- *
- * All non-code elements of the Product, including illustrations,
- * icon sets, and technical writing content, are licensed under the
- * Creative Commons Attribution-ShareAlike 4.0 International License:
- * https://creativecommons.org/licenses/by-sa/4.0/legalcode
- *
- * This license applies only to such non-code elements and does not
- * modify or replace the licensing terms applicable to the Program's
- * source code, which remains licensed under the GNU Affero General
- * Public License v3.
- *
- * SPDX-License-Identifier: AGPL-3.0-only
- */
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
-
-import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
+import { useNavigate, useLocation } from "react-router";
 
 import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
+import { useI18n, useStores } from "@docspace/ui-kit/ai-agent/providers";
+import {
+  AiModels,
+  ModelAssignment,
+  McpServers,
+  WebSearch,
+} from "@docspace/ui-kit/ai-agent/settings";
 
-import { DeviceType } from "@docspace/shared/enums";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
-import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
+import { Knowledge } from "./knowledge";
 
-import { AIProvider, ProvidersLoader } from "./providers";
-import { MCPServers, ServersLoader } from "./servers";
-import { Search, SearchLoader } from "./search";
-import { Knowledge, KnowledgeLoader } from "./knowledge";
+const BASE_PATH = "/portal-settings/ai-settings";
 
-import useAiSettings from "./useAiSettings";
+const TAB_IDS = {
+  AI_MODELS: "ai-models",
+  MODEL_ASSIGNMENT: "model-assignment",
+  MCP_SERVERS: "mcp-servers",
+  WEB_SEARCH: "web-search",
+  KNOWLEDGE: "knowledge",
+} as const;
 
-import styles from "./AISettings.module.scss";
-
-const detectCurrentTabId = (standalone: boolean) => {
-  const path = window.location.pathname;
-
-  if (!standalone) return "servers";
-
-  if (path.includes("providers")) return "providers";
-
-  if (path.includes("servers")) return "servers";
-
-  if (path.includes("search")) return "search";
-
-  if (path.includes("knowledge")) return "knowledge";
-
-  return "";
+const detectTabFromPath = (pathname: string) => {
+  if (pathname.includes("model-assignment")) return TAB_IDS.MODEL_ASSIGNMENT;
+  if (pathname.includes("mcp-servers")) return TAB_IDS.MCP_SERVERS;
+  if (pathname.includes("web-search")) return TAB_IDS.WEB_SEARCH;
+  if (pathname.includes("knowledge")) return TAB_IDS.KNOWLEDGE;
+  return TAB_IDS.AI_MODELS;
 };
 
-const loaders: Record<string, React.ReactNode> = {
-  providers: <ProvidersLoader />,
-  servers: <ServersLoader />,
-  search: <SearchLoader />,
-  knowledge: <KnowledgeLoader />,
-};
-
-type TAiSettingsProps = {
-  currentDeviceType?: DeviceType;
-  standalone?: boolean;
-
+type TAISettingsProps = {
   fetchKnowledge?: AISettingsStore["fetchKnowledge"];
   fetchAIProviders?: AISettingsStore["fetchAIProviders"];
-  fetchMCPServers?: AISettingsStore["fetchMCPServers"];
-  fetchWebSearch?: AISettingsStore["fetchWebSearch"];
-  initDefaultProvider?: AISettingsStore["initDefaultProvider"];
-
-  showPortalSettingsLoader?: ClientLoadingStore["showPortalSettingsLoader"];
 };
 
-// TODO: add standalone flag from store for hide ai providers
-const AiSettings = ({
-  currentDeviceType,
-  standalone = true,
-  fetchKnowledge,
-  fetchAIProviders,
-  fetchMCPServers,
-  fetchWebSearch,
-  initDefaultProvider,
-  showPortalSettingsLoader,
-}: TAiSettingsProps) => {
-  const { t, ready } = useTranslation(["Common"]);
-
-  const { initAIProviders, initMCPServers, initWebSearch, initKnowledge } =
-    useAiSettings({
-      fetchAIProviders,
-      fetchMCPServers,
-      fetchWebSearch,
-      fetchKnowledge,
-      initDefaultProvider,
-      standalone,
-    });
-
+const AISettings = ({ fetchKnowledge, fetchAIProviders }: TAISettingsProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { t: aiT } = useI18n();
+  const { t } = useTranslation(["Common"]);
 
-  const [currentTabId, setCurrentTabId] = React.useState(
-    detectCurrentTabId(standalone),
+  const initKnowledge = React.useCallback(async () => {
+    await Promise.all([fetchKnowledge?.(), fetchAIProviders?.()]);
+  }, [fetchKnowledge, fetchAIProviders]);
+
+  const { useProfilesStore } = useStores();
+  const profiles = useProfilesStore((s) => s.profiles);
+  const hasProfiles = profiles.length > 0;
+
+  const [currentTabId, setCurrentTabId] = React.useState(() =>
+    detectTabFromPath(location.pathname),
   );
 
-  const onSelect = (element: TTabItem) => {
-    setCurrentTabId(element.id);
-    navigate(`/portal-settings/ai-settings/${element.id}`);
+  React.useEffect(() => {
+    setCurrentTabId(detectTabFromPath(location.pathname));
+  }, [location.pathname]);
+
+  // If the user lands on a non-AI-Models tab while profiles are empty
+  // (e.g. last profile was deleted), bounce back to AI Models.
+  React.useEffect(() => {
+    if (!hasProfiles && currentTabId !== TAB_IDS.AI_MODELS) {
+      navigate(`${BASE_PATH}/${TAB_IDS.AI_MODELS}`, { replace: true });
+    }
+  }, [hasProfiles, currentTabId, navigate]);
+
+  // Load knowledge config when landing directly on the Knowledge tab.
+  // (Tab onClick only fires on tab switch, not on initial mount.)
+  React.useEffect(() => {
+    if (currentTabId === TAB_IDS.KNOWLEDGE) initKnowledge();
+  }, [currentTabId, initKnowledge]);
+
+  const navigateToTab = (id: string) => {
+    navigate(`${BASE_PATH}/${id}`);
   };
 
-  React.useEffect(() => {
-    const currentTab = detectCurrentTabId(standalone);
+  const onSelect = (element: TTabItem) => {
+    if (element.isDisabled) return;
+    setCurrentTabId(element.id as (typeof TAB_IDS)[keyof typeof TAB_IDS]);
+    navigate(`${BASE_PATH}/${element.id}`);
+  };
 
-    setCurrentTabId(currentTab);
-  }, [standalone]);
+  const makeOnClick = (id: string) => () => {
+    if (!hasProfiles && id !== TAB_IDS.AI_MODELS) return;
+    navigateToTab(id);
+  };
 
-  React.useEffect(() => {
-    const title =
-      currentTabId === "providers"
-        ? t("Common:AIProvider")
-        : currentTabId === "search"
-          ? t("Common:WebSearchAI")
-          : currentTabId === "knowledge"
-            ? t("Common:Knowledge")
-            : t("Common:MCPSettingTitle");
-    setDocumentTitle(title);
-  }, [t, currentTabId]);
+  const disableNonAiModels = !hasProfiles;
 
-  const serversData = [
+  const data: TTabItem[] = [
     {
-      id: "servers",
-      name: t("Common:MCPSettingTitle"),
-      content: <MCPServers standalone={standalone} />,
-      onClick: initMCPServers,
+      id: TAB_IDS.AI_MODELS,
+      name: aiT("AIModels"),
+      content: <AiModels />,
+      onClick: makeOnClick(TAB_IDS.AI_MODELS),
+    },
+    {
+      id: TAB_IDS.MODEL_ASSIGNMENT,
+      name: aiT("ModelAssignment"),
+      content: <ModelAssignment />,
+      onClick: makeOnClick(TAB_IDS.MODEL_ASSIGNMENT),
+      isDisabled: disableNonAiModels,
+    },
+    {
+      id: TAB_IDS.MCP_SERVERS,
+      name: aiT("MCPServers"),
+      content: <McpServers />,
+      onClick: makeOnClick(TAB_IDS.MCP_SERVERS),
+      isDisabled: disableNonAiModels,
+    },
+    {
+      id: TAB_IDS.WEB_SEARCH,
+      name: aiT("WebSearch"),
+      content: <WebSearch />,
+      onClick: makeOnClick(TAB_IDS.WEB_SEARCH),
+      isDisabled: disableNonAiModels,
+    },
+    {
+      id: TAB_IDS.KNOWLEDGE,
+      // Knowledge has no key in the @onlyoffice/ai-chat bundle (aiT), so its
+      // label comes from the DocSpace Common namespace instead. Intentional.
+      name: t("Knowledge"),
+      content: <Knowledge />,
+      onClick: () => {
+        if (!hasProfiles) return;
+        initKnowledge();
+        navigateToTab(TAB_IDS.KNOWLEDGE);
+      },
+      isDisabled: disableNonAiModels,
     },
   ];
 
-  const data = standalone
-    ? [
-        {
-          id: "providers",
-          name: t("Common:AIProvider"),
-          content: <AIProvider />,
-          onClick: initAIProviders,
-        },
-        ...serversData,
-        {
-          id: "search",
-          name: t("Common:WebSearchAI"),
-          content: <Search />,
-          onClick: initWebSearch,
-        },
-        {
-          id: "knowledge",
-          name: t("Common:Knowledge"),
-          content: <Knowledge />,
-          onClick: initKnowledge,
-        },
-      ]
-    : serversData;
-
-  if (showPortalSettingsLoader || !ready) {
-    return (
-      <>
-        <RectangleSkeleton className={styles.tabsLoader} />
-        {loaders[currentTabId]}
-      </>
-    );
-  }
-
   return (
-    <Tabs
-      items={data}
-      withAnimation
-      selectedItemId={currentTabId}
-      onSelect={onSelect}
-      stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType!]}
-    />
+    <div>
+      <Tabs
+        items={data}
+        withAnimation
+        selectedItemId={currentTabId}
+        onSelect={onSelect}
+      />
+    </div>
   );
 };
 
-export const Component = inject(
-  ({ settingsStore, aiSettingsStore, clientLoadingStore }: TStore) => {
-    const { currentDeviceType } = settingsStore;
+export const Component = inject(({ aiSettingsStore }: TStore) => {
+  const { fetchKnowledge, fetchAIProviders } = aiSettingsStore;
 
-    const {
-      fetchAIProviders,
-      fetchMCPServers,
-      fetchWebSearch,
-      fetchKnowledge,
-      initDefaultProvider,
-    } = aiSettingsStore;
-
-    const { showPortalSettingsLoader } = clientLoadingStore;
-
-    return {
-      currentDeviceType,
-      fetchAIProviders,
-      fetchMCPServers,
-      fetchWebSearch,
-      fetchKnowledge,
-      initDefaultProvider,
-      showPortalSettingsLoader,
-    };
-  },
-)(observer(AiSettings));
+  return {
+    fetchKnowledge,
+    fetchAIProviders,
+  };
+})(observer(AISettings));

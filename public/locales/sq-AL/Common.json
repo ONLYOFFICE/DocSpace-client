@@ -73,6 +73,7 @@
   "AgentManager": "Menaxher agjenti",
   "AgentName": "Emri i agjentit",
   "AgentOwner": "Pronari i agjentit",
+  "AgentProfileDescription": "Zgjidhni modelin e AI që do të përdoret në bisedat e këtij agjenti.",
   "AgentRemoved": "Agjenti u hoq",
   "AgentRenamed": "Agjenti <1>«{{oldRoomTitle}}»</1> u riemërua në <2>«{{roomTitle}}»</2>",
   "AgentsRemoved": "Agjentët u hoqën",

@@ -73,6 +73,7 @@
   "AgentManager": "Gestor de agentes",
   "AgentName": "Nombre del agente",
   "AgentOwner": "Propietario del agente",
+  "AgentProfileDescription": "Seleccione el modelo de IA que se utilizará en los chats de este agente.",
   "AgentRemoved": "Agente eliminado",
   "AgentRenamed": "Agente <1>«{{oldRoomTitle}}»</1> renombrado a <2>«{{roomTitle}}»</2>",
   "AgentsRemoved": "Agentes eliminados",

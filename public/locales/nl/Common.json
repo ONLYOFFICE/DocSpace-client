@@ -73,6 +73,7 @@
   "AgentManager": "Agentmanager",
   "AgentName": "Agent naam",
   "AgentOwner": "Agent eigenaar",
+  "AgentProfileDescription": "Selecteer het AI-model dat in de chats van deze agent gebruikt moet worden.",
   "AgentRemoved": "Agent verwijderd",
   "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> heeft de naam veranderd naar <2>«{{roomTitle}}»</2>",
   "AgentsRemoved": "Agenten verwijderd",

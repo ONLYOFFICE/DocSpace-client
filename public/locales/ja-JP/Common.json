@@ -73,6 +73,7 @@
   "AgentManager": "エージェント管理者",
   "AgentName": "エージェント名",
   "AgentOwner": "エージェント所有者",
+  "AgentProfileDescription": "このエージェントのチャットで使用するAIモデルを選択してください。",
   "AgentRemoved": "エージェントが削除されました",
   "AgentRenamed": "<1>«{{oldRoomTitle}}»</1>エージェントが<2>«{{roomTitle}}»</2>に名前変更されました",
   "AgentsRemoved": "エージェントが削除されました",

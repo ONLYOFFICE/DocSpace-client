@@ -73,6 +73,7 @@
   "AgentManager": "Agent manager",
   "AgentName": "Agent name",
   "AgentOwner": "Agent owner",
+  "AgentProfileDescription": "Select the AI model to be used in this agent's chats.",
   "AgentRemoved": "Agent removed",
   "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> renamed to <2>«{{roomTitle}}»</2>",
   "AgentsRemoved": "Agents removed",

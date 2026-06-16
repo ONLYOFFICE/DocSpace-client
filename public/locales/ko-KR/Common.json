@@ -72,6 +72,7 @@
   "AgentManager": "에이전트 관리자",
   "AgentName": "에이전트 이름",
   "AgentOwner": "에이전트 소유자",
+  "AgentProfileDescription": "이 에이전트의 채팅에서 사용할 AI 모델을 선택하십시오.",
   "AgentRemoved": "에이전트 제거됨",
   "AgentRenamed": "에이전트 <1>«{{oldRoomTitle}}»</1>을(를) <2>«{{roomTitle}}»</2>로 이름이 변경되었습니다.",
   "AgentsRemoved": "에이전트 제거 완료",

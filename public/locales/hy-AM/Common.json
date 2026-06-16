@@ -73,6 +73,7 @@
   "AgentManager": "Գործակալի մենեջեր",
   "AgentName": "Գործակալի անուն",
   "AgentOwner": "Գործակալի սեփականատեր",
+  "AgentProfileDescription": "Ընտրեք ԱԲ մոդելը, որն օգտագործվելու է այս գործակալի զրույցներում։",
   "AgentRemoved": "Գործակալը հեռացվել է",
   "AgentRenamed": "Գործակալ <1>«{{oldRoomTitle}}»-ը</1> վերանվանվել է <2>«{{roomTitle}}»-ի</2>",
   "AgentsRemoved": "Գործակալները հեռացվել են",

@@ -53,7 +53,7 @@ import {
 
 import RoomQuota from "../../room-quota";
 import ChangeRoomOwner from "../../change-room-owner";
-import ModelSettings from "./Model";
+import ProfileSettings from "./Profile";
 import InstructionsSettings from "./Instructions";
 import MCPSettings from "./MCP";
 
@@ -418,7 +418,9 @@ const SetAgentParams = ({
         />
       ) : null}
 
-      <ModelSettings
+      {/* Profile selection on both create and edit — the new-ai service
+          rebinds the agent's profile on PUT when profileId changes. */}
+      <ProfileSettings
         agentParams={agentParams}
         setAgentParams={setAgentParams}
       />

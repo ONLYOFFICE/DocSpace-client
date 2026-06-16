@@ -73,6 +73,7 @@
   "AgentManager": "Quản lý tác nhân",
   "AgentName": "Tên đại lý",
   "AgentOwner": "Chủ đại lý",
+  "AgentProfileDescription": "Chọn mô hình AI sẽ được sử dụng trong các cuộc trò chuyện của đại lý này.",
   "AgentRemoved": "Đại lý đã bị xóa",
   "AgentRenamed": "Tác nhân <1>«{{oldRoomTitle}}»</1> được đổi tên thành <2>«{{roomTitle}}»</2>",
   "AgentsRemoved": "Đại lý đã bị xóa",

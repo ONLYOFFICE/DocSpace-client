@@ -73,6 +73,7 @@
   "AgentManager": "智能体管理员",
   "AgentName": "智能体名称",
   "AgentOwner": "智能体所有者",
+  "AgentProfileDescription": "请选择此智能体聊天中使用的 AI 模型。",
   "AgentRemoved": "智能体已移除",
   "AgentRenamed": "智能体<1>«{{oldRoomTitle}}»</1>已重命名为<2>«{{roomTitle}}»</2>",
   "AgentsRemoved": "智能体已移除",

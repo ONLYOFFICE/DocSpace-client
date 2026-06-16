@@ -53,7 +53,6 @@ import { Component as StorageManagement } from "../categories/storage-management
 import { Component as Payments } from "../categories/payments";
 import { Component as Bonus } from "../../Bonus";
 import { Component as AISettings } from "../categories/ai-settings";
-import NewAISettings from "../categories/new-ai-settings";
 
 import useSecurity from "../categories/security/useSecurity";
 import useBackup from "../categories/data-management/backup/useBackup";
@@ -62,7 +61,6 @@ import useDeleteData from "../categories/delete-data/useDeleteData";
 import useCommon from "../categories/common/useCommon";
 import useDataImport from "../categories/data-import/useDataImport";
 import usePayments from "../categories/payments/usePayments";
-import useAiSettings from "../categories/ai-settings/useAiSettings";
 import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettingsProps";
 import { isMainSectionChange } from "../utils/isMainSectionChange";
 import { TView, ViewProps } from "./View.types";
@@ -86,7 +84,6 @@ const getViewFromPathname = (pathname: string): TView => {
 
   if (pathname.includes("bonus")) return "bonus";
 
-  if (pathname.includes("new-ai-settings")) return "new-ai-settings";
   if (pathname.includes("ai-settings")) return "ai-settings";
 
   return "";
@@ -118,12 +115,6 @@ const View = ({
   defaultTemplatesStore,
 
   clearAbortControllerArr,
-
-  fetchAIProviders,
-  fetchMCPServers,
-  fetchWebSearch,
-  fetchKnowledge,
-  initDefaultProvider,
 }: ViewProps) => {
   const location = useLocation();
   const { t } = useTranslation();
@@ -171,15 +162,6 @@ const View = ({
   const { getDataImportInitialValue } = useDataImport(defaultProps.dataImport);
   const { getDeleteDataInitialValue } = useDeleteData(defaultProps.deleteData);
   const { getPaymentsInitialValue } = usePayments(defaultProps.payment);
-
-  const { getAiSettingsInitialValue } = useAiSettings({
-    fetchAIProviders,
-    initDefaultProvider,
-    fetchMCPServers,
-    fetchWebSearch,
-    fetchKnowledge,
-    standalone: true,
-  });
 
   useEffect(() => {
     clearAbortControllerArrRef.current = clearAbortControllerArr;
@@ -303,10 +285,6 @@ const View = ({
             break;
 
           case "ai-settings":
-            await getAiSettingsInitialValue();
-            break;
-
-          case "new-ai-settings":
             break;
         }
 
@@ -344,7 +322,6 @@ const View = ({
       {currentView === "payments" ? <Payments /> : null}
       {currentView === "bonus" ? <Bonus /> : null}
       {currentView === "ai-settings" ? <AISettings /> : null}
-      {currentView === "new-ai-settings" ? <NewAISettings /> : null}
       {currentView === "ai-services" ||
       currentView === "backup-service" ||
       currentView === "disk-storage" ? (
@@ -375,7 +352,6 @@ export const ViewComponent = inject(
     ldapStore,
     paymentStore,
     currentTariffStatusStore,
-    aiSettingsStore,
     defaultTemplatesStore,
   }: TStore) => {
     const { initSettings: initSettingsCommon } = common;
@@ -423,12 +399,6 @@ export const ViewComponent = inject(
       loadBaseInfo,
 
       clearAbortControllerArr,
-
-      fetchAIProviders: aiSettingsStore.fetchAIProviders,
-      fetchMCPServers: aiSettingsStore.fetchMCPServers,
-      fetchWebSearch: aiSettingsStore.fetchWebSearch,
-      fetchKnowledge: aiSettingsStore.fetchKnowledge,
-      initDefaultProvider: aiSettingsStore.initDefaultProvider,
     };
   },
 )(observer(View));

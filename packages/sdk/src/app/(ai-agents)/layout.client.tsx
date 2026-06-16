@@ -21,7 +21,10 @@ import SocketHelper, {
 import type { TFilesSettings } from "@docspace/shared/api/files/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TSettings } from "@docspace/shared/api/settings/types";
-import type { TDefaultProvider } from "@docspace/shared/api/ai/types";
+import type {
+  TAIConfig,
+  TDefaultProvider,
+} from "@docspace/shared/api/ai/types";
 import type { TViewAs } from "@docspace/shared/types";
 
 import { Layout as DocspaceFilesLayout } from "@/app/(docspace)/_components/layout";
@@ -31,6 +34,7 @@ import useFrameHeaderConfig from "@/hooks/useFrameHeaderConfig";
 
 import {
   AiAgentsStoreProviders,
+  type AgentsListStoreInit,
   useAgentInfoPanelStore,
   useAgentDialogsStore,
   useAgentsListStore,
@@ -50,6 +54,7 @@ import {
   AgentsNavigationSubmenu,
 } from "./_components/agents-navigation";
 import KnowledgeUploadSelectorDialog from "./_components/knowledge-upload-selector-dialog";
+import AiAgentsAiChatProviders from "./_components/ai-agent-providers";
 import { AgentsCommonDataProvider } from "./_store/AgentsCommonDataContext";
 import useAiAgentsFrameBridge from "./_hooks/useAiAgentsFrameBridge";
 import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
@@ -71,6 +76,9 @@ export type AiAgentsCommonData = {
   defaultProvider: TDefaultProvider | undefined;
   portalSettings: TSettings | undefined;
   initialViewAs: TViewAs;
+  // SSR snapshots for store construction — see AiAgentsStoreProviders.
+  initialAIConfig: TAIConfig | null;
+  initialAgentsData: AgentsListStoreInit | null;
 };
 
 type Props = {
@@ -166,7 +174,12 @@ const SectionShell = observer(
             if (!visible) infoPanel.hide();
           }}
           canDisplay={isInfoVisible}
-          withBodyScroll
+          // The chat owns its own scroll viewport, so the section-level
+          // Scrollbar (wrapped by SectionContainer when withBodyScroll is on)
+          // must be off on the chat tab — otherwise the chat lives inside an
+          // auto-height scroll body and sizes to its content instead of the
+          // section height. File tabs keep it on for their list scroll.
+          withBodyScroll={!isAgentChat}
           uploadFiles={false}
           settingsStudio={isAgentChat}
           // Section's `fullHeightBody` turns section-wrapper /
@@ -191,7 +204,9 @@ const SectionShell = observer(
           <Section.SectionSubmenu>
             <AgentsNavigationSubmenu />
           </Section.SectionSubmenu>
-          <Section.SectionBody>{children}</Section.SectionBody>
+          <Section.SectionBody>
+            <AiAgentsAiChatProviders>{children}</AiAgentsAiChatProviders>
+          </Section.SectionBody>
           <Section.InfoPanelHeader>
             <AgentInfoPanelHeader />
           </Section.InfoPanelHeader>
@@ -307,7 +322,11 @@ const FrameBridgeHost = observer(() => {
 export default function AiAgentsRootLayout({ commonData, children }: Props) {
   return (
     <main style={{ width: "100%", height: "100%", overflow: "hidden" }}>
-      <AiAgentsStoreProviders initialUser={commonData.user ?? null}>
+      <AiAgentsStoreProviders
+        initialUser={commonData.user ?? null}
+        initialAgentsData={commonData.initialAgentsData}
+        initialAIConfig={commonData.initialAIConfig}
+      >
         <DocspaceFilesLayout
           initSettingsStoreData={{ viewAs: commonData.initialViewAs }}
         >

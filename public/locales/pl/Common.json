@@ -73,6 +73,7 @@
   "AgentManager": "Menedżer agentów",
   "AgentName": "Nazwa agenta",
   "AgentOwner": "Właściciel agenta",
+  "AgentProfileDescription": "Wybierz model AI, który ma być używany w czatach tego agenta.",
   "AgentRemoved": "Agent usunięty",
   "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> zmienił nazwę na <2>«{{roomTitle}}»</2>",
   "AgentsRemoved": "Agenci usunięci",

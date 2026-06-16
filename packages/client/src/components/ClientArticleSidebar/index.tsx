@@ -56,6 +56,9 @@ type ClientArticleSidebarProps = FolderIds & {
   userId?: string;
   treeFolders: TTreeFolder[];
   isVisitor?: boolean;
+  // Room admins / admins only — gates the Rooms → Templates item, matching the
+  // former Rooms/Templates submenu (and the Use template quick action).
+  canUseTemplates?: boolean;
   onFolderNavigate: () => void;
 };
 
@@ -63,13 +66,15 @@ const ClientArticleSidebar = ({
   userId,
   treeFolders,
   isVisitor,
+  canUseTemplates,
   onFolderNavigate,
   ...folderIds
 }: ClientArticleSidebarProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
   const navigate = useNavigate();
-  const { myFolderId, roomsFolderId } = folderIds;
+  const { myFolderId, roomsFolderId, recentFolderId, favoritesFolderId } =
+    folderIds;
 
   // `onFolderNavigate` is re-created on every inject render; keep a stable ref
   // so the memoized onClick handlers below don't go stale (which made nested
@@ -93,18 +98,36 @@ const ClientArticleSidebar = ({
     [navigate, userId, myFolderId],
   );
 
-  // Rooms-scoped Recent/Favorites: the same special @recent/@favorites files
+  // Rooms-scoped Recent/Favorites: the same special recent/favorites files
   // view, but constrained to room content via `parentId=<roomsFolderId>`.
+  // The recent/favorites folder ids are known up front (from the tree), so we
+  // navigate with the concrete `folder=<id>` instead of the "@recent"/
+  // "@favorites" alias FilesFilter.getDefault would otherwise set.
   const goRoomsScoped = React.useCallback(
-    (categoryType: ValueOf<typeof CategoryType>, basePath: string) => () => {
-      onFolderNavigateRef.current?.();
-      const filter = FilesFilter.getDefault({ categoryType });
-      const parentSuffix =
-        roomsFolderId != null ? `&parentId=${roomsFolderId}` : "";
-      navigate(`${basePath}/filter?${filter.toUrlParams()}${parentSuffix}`);
-    },
+    (
+        categoryType: ValueOf<typeof CategoryType>,
+        basePath: string,
+        folderId?: number | null,
+      ) =>
+      () => {
+        onFolderNavigateRef.current?.();
+        const filter = FilesFilter.getDefault({ categoryType });
+        if (folderId != null) filter.folder = String(folderId);
+        const parentSuffix =
+          roomsFolderId != null ? `&parentId=${roomsFolderId}` : "";
+        navigate(`${basePath}/filter?${filter.toUrlParams()}${parentSuffix}`);
+      },
     [navigate, roomsFolderId],
   );
+
+  // Templates: the Rooms list scoped to the Templates search area. Replaces the
+  // former Rooms/Templates submenu tabs (searchArea=Templates on /rooms/shared).
+  const goTemplates = React.useCallback(() => {
+    onFolderNavigateRef.current?.();
+    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Templates);
+    filter.searchArea = RoomSearchArea.Templates;
+    navigate(`/rooms/shared/filter?${filter.toUrlParams(userId, false)}`);
+  }, [navigate, userId]);
 
   const activeId = React.useMemo(
     () => getClientActiveId(location.pathname, folderIds),
@@ -179,14 +202,32 @@ const ClientArticleSidebar = ({
             id: "rooms-recent",
             label: t("Common:Recent"),
             icon: getCatalogIconUrlByType(FolderType.Recent),
-            onClick: goRoomsScoped(CategoryType.Recent, "/rooms/recent"),
+            onClick: goRoomsScoped(
+              CategoryType.Recent,
+              "/rooms/recent",
+              recentFolderId,
+            ),
           },
           {
             id: "rooms-favorites",
             label: t("Common:Favorites"),
             icon: getCatalogIconUrlByType(FolderType.Favorites),
-            onClick: goRoomsScoped(CategoryType.Favorite, "/rooms/favorite"),
+            onClick: goRoomsScoped(
+              CategoryType.Favorite,
+              "/rooms/favorite",
+              favoritesFolderId,
+            ),
           },
+          ...(canUseTemplates
+            ? [
+                {
+                  id: "rooms-templates",
+                  label: t("Common:Templates"),
+                  icon: getCatalogIconUrlByType(FolderType.RoomTemplates),
+                  onClick: goTemplates,
+                },
+              ]
+            : []),
           ...(archiveFolder
             ? [navItem(archiveFolder, { withTopSeparator: true })]
             : []),
@@ -242,8 +283,12 @@ const ClientArticleSidebar = ({
     go,
     goFolder,
     goRoomsScoped,
+    goTemplates,
     treeFolders,
     isVisitor,
+    canUseTemplates,
+    recentFolderId,
+    favoritesFolderId,
     userId,
   ]);
 
@@ -251,7 +296,13 @@ const ClientArticleSidebar = ({
 };
 
 const ClientArticleSidebarConnected = inject<TStore>(
-  ({ userStore, treeFoldersStore, filesStore, clientLoadingStore }) => ({
+  ({
+    authStore,
+    userStore,
+    treeFoldersStore,
+    filesStore,
+    clientLoadingStore,
+  }) => ({
     userId: userStore.user?.id,
     treeFolders: treeFoldersStore.treeFolders,
     roomsFolderId: treeFoldersStore.roomsFolderId,
@@ -263,6 +314,8 @@ const ClientArticleSidebarConnected = inject<TStore>(
     sharedWithMeFolderId: treeFoldersStore.sharedWithMeFolderId,
     aiAgentsFolderId: treeFoldersStore.aiAgentsFolderId,
     isVisitor: userStore.user?.isVisitor,
+    // Matches Home's canCreateRooms — room admins and admins can use templates.
+    canUseTemplates: authStore.isAdmin || authStore.isRoomAdmin,
     onFolderNavigate: () => {
       filesStore.setSelection?.([]);
       clientLoadingStore.setIsSectionBodyLoading(true, true);

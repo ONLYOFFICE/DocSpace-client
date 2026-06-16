@@ -3,7 +3,7 @@
   "content": "{{unit}}: {{count}}",
   "content_en_sha1_hash": "df646ff517dcc5bff3e00f6c38ae47a5148c11e6",
   "created_at": "2026-04-10T13:53:43.768Z",
-  "updated_at": "2026-05-15T14:00:07.023Z",
+  "updated_at": "2026-06-16T16:35:30.074Z",
   "comment": {
     "text": "This is a short label displaying a quantity and its unit. It appears in billing contexts, where `{{unit}}` is the service unit (e.g., \"GB\", \"users\") and `{{count}}` is the numerical quantity.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/libs/ui-kit/billing/wallet/utils/index.tsx",
       "line_number": 151,
-      "context": "t: TTranslation,\n quantity: number,\n serviceUnit?: string,\n ) => {\n if (!serviceUnit) return \"—\";\n return t(\"UnitCount\", { unit: serviceUnit, count: quantity });\n };",
+      "context": "t: TTranslation,\n quantity: number,\n serviceUnit?: string,\n ) => {\n if (!serviceUnit) return \"—\";\n return t(\"Common:UnitCount\", { unit: serviceUnit, count: quantity });\n };",
       "module": "/libs/ui-kit"
     }
   ],

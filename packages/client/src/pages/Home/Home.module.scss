@@ -1,0 +1,88 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@use "@docspace/ui-kit/styles/mixins";
+
+// Quick-actions banner above the files/rooms list (ported from the SDK
+// layouts). Centered, capped at four tiles wide.
+.quickActions {
+  margin: 4px auto 16px;
+  justify-content: center;
+  max-width: 736px; // 4 tiles * 172px + 3 gaps * 16px
+  width: 100%;
+  flex-shrink: 0;
+}
+
+// Geometry for the Section `stickyTableHeader` mode (ported verbatim from the
+// SDK RoomsLayout/DocsLayout). When the quick-actions banner is shown the
+// Section renders the banner first inside the scroll body, then the filter as
+// a sticky element, then the table header pins below it — so the banner sits
+// ABOVE the filter (matching the SDK). ui-kit needs only this geometry:
+//   --section-filter-top    where the filter sticks (= section header height)
+//   --section-filter-height min-height of the sticky filter block
+//   --section-filter-bottom resting bottom of the filter = the table header top
+// `display: contents` keeps this wrapper out of layout (it only cascades the
+// variables to the Section beneath it). The wrapper is always rendered with
+// `.sectionVarsHost` (so layout is unchanged whether or not the banner shows);
+// the geometry vars are layered on via `.stickyBannerVars` only when active.
+.sectionVarsHost {
+  display: contents;
+}
+
+.stickyBannerVars {
+  --section-filter-height: 60px;
+  --section-filter-top: var(
+    --section-header-size,
+    var(--section-header-height, 69px)
+  );
+
+  @include mixins.tablet-and-below {
+    --section-filter-top: var(
+      --section-header-tablet-size,
+      var(--section-header-height-tablet, 61px)
+    );
+  }
+
+  @include mixins.mobile {
+    --section-filter-top: var(
+      --section-header-mobile-size,
+      var(--section-header-height-mobile, 53px)
+    );
+  }
+
+  --section-filter-bottom: calc(
+    var(--section-filter-top) + var(--section-filter-height)
+  );
+}

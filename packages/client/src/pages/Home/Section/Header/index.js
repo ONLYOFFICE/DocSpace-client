@@ -78,6 +78,7 @@ import {
   hideInfoPanel as hideInfoPanelEvent,
 } from "SRC_DIR/helpers/info-panel";
 import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
+import { isFilesRoomsArea } from "SRC_DIR/helpers/quickActions";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
@@ -955,7 +956,19 @@ const SectionHeaderContent = (props) => {
     createGroup,
   ]);
 
+  // The quick-actions tiles replace creation across the whole Files/Rooms
+  // experience, so the redundant header `+` button is hidden there (ported
+  // from the SDK). Contacts / profile / settings / AI-agents keep their button.
+  const hidePlusForFilesRooms = isFilesRoomsArea({
+    isContactsPage,
+    isProfile,
+    isSettingsPage,
+    isAIAgentsFolder,
+  });
+
   const isPlusButtonVisible = React.useMemo(() => {
+    if (hidePlusForFilesRooms) return false;
+
     if (allowInvitingMembers) return true;
 
     if (!isContactsPage || isContactsGroupsPage) return true;
@@ -965,6 +978,7 @@ const SectionHeaderContent = (props) => {
 
     return true;
   }, [
+    hidePlusForFilesRooms,
     getContextOptionsPlus,
     isContactsPage,
     isContactsGroupsPage,

@@ -47,7 +47,8 @@ import {
   UseRoomTemplateIllustrationIcon,
 } from "@docspace/ui-kit/components/quick-actions/icons";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { Events } from "@docspace/shared/enums";
+import { Events, RoomSearchArea } from "@docspace/shared/enums";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { getConstName } from "@docspace/shared/constants/consts";
 
 import {
@@ -87,12 +88,23 @@ const dispatchCreateRoom = (parentId: number | string | null) => {
   );
 };
 
+// Opens the Templates list — the Rooms list scoped to the Templates search
+// area. Mirrors the sidebar's Templates item (ClientArticleSidebar.goTemplates).
+const goTemplates = (userId?: string) => {
+  const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Templates);
+  filter.searchArea = RoomSearchArea.Templates;
+  window.DocSpace.navigate(
+    `/rooms/shared/filter?${filter.toUrlParams(userId, false)}`,
+  );
+};
+
 export type UseQuickActionsProps = SectionFlags & {
   currentFolderId: number | string | null;
   // selectedFolderStore.security?.Create — folder-level create permission.
   canCreateFiles?: boolean;
   // SDK's canCreateRooms: admins / owners / room admins.
   canCreateRooms?: boolean;
+  userId?: string;
 };
 
 export type QuickActionsResult = {
@@ -108,8 +120,13 @@ export const useQuickActions = (
 ): QuickActionsResult => {
   const { t } = useTranslation(["Common"]);
 
-  const { currentFolderId, canCreateFiles, canCreateRooms, ...sectionFlags } =
-    props;
+  const {
+    currentFolderId,
+    canCreateFiles,
+    canCreateRooms,
+    userId,
+    ...sectionFlags
+  } = props;
 
   const section = getQuickActionsSection(sectionFlags);
 
@@ -151,16 +168,15 @@ export const useQuickActions = (
         label: t("Common:NewRoom"),
         onClick: () => dispatchCreateRoom(currentFolderId),
       },
-      // Matches the SDK: the use-template tile is shown but disabled (templates
-      // are not wired up here yet).
+      // Opens the Templates list (sidebar Rooms → Templates).
       {
         id: "quick-use-template",
         icon: <UseRoomTemplateIllustrationIcon />,
         label: t("Common:UseTemplate"),
-        disabled: true,
+        onClick: () => goTemplates(userId),
       },
     ],
-    [t, currentFolderId],
+    [t, currentFolderId, userId],
   );
 
   if (section === "files" && canCreateFiles)

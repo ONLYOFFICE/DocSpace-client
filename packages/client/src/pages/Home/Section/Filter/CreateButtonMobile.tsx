@@ -32,60 +32,36 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-import { inject, observer } from "mobx-react";
 
-import AiRoomTabs from "./AiRoomTabs";
+import { MainButtonMobile } from "@docspace/ui-kit/components/main-button-mobile";
+import type { ActionOption } from "@docspace/ui-kit/components/main-button-mobile/MainButtonMobile.types";
+import type { MainButtonProps } from "@docspace/ui-kit/components/main-button/MainButton.types";
 
-const SectionSubmenuContent = ({
-  isAIRoom,
-  allowInvitingGuests,
-  checkGuests,
-  currentClientView,
-  canUseChat,
-  showArticleLoader,
-  showTabsLoader,
-}) => {
-  const isContacts =
-    currentClientView === "users" || currentClientView === "groups";
-  const isProfile = currentClientView === "profile";
+import styles from "./CreateButtonMobile.module.scss";
 
-  if (isProfile) return null;
-
-  if (isContacts && allowInvitingGuests === false) checkGuests();
-
-  if (
-    (isAIRoom && canUseChat) ||
-    (currentClientView === "chat" && (showTabsLoader || showArticleLoader))
-  )
-    return <AiRoomTabs />;
-
-  // The Rooms/Templates submenu was replaced by the Templates item in the
-  // sidebar (ClientArticleSidebar → Rooms → Templates).
-  return null;
+type CreateButtonMobileProps = {
+  visible: boolean;
+  mainButtonProps?: MainButtonProps;
 };
 
-export default inject(
-  ({
-    settingsStore,
-    clientLoadingStore,
-    selectedFolderStore,
-    accessRightsStore,
-  }) => {
-    const { canUseChat } = accessRightsStore;
+const CreateButtonMobile = ({
+  visible,
+  mainButtonProps,
+}: CreateButtonMobileProps) => {
+  if (!visible || !mainButtonProps) return null;
 
-    const { allowInvitingGuests, checkGuests } = settingsStore;
+  const { text, isDropdown, model, onAction } = mainButtonProps;
 
-    const { currentClientView, showArticleLoader, showTabsLoader } =
-      clientLoadingStore;
+  return (
+    <MainButtonMobile
+      className={styles.createButtonMobile}
+      title={text}
+      withMenu={isDropdown}
+      withoutButton
+      actionOptions={isDropdown ? (model as unknown as ActionOption[]) : []}
+      onClick={isDropdown ? undefined : onAction}
+    />
+  );
+};
 
-    return {
-      isAIRoom: selectedFolderStore.isAIRoom,
-      allowInvitingGuests,
-      checkGuests,
-      currentClientView,
-      canUseChat,
-      showArticleLoader,
-      showTabsLoader,
-    };
-  },
-)(observer(SectionSubmenuContent));
+export default CreateButtonMobile;

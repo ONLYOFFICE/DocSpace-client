@@ -77,7 +77,7 @@ import {
   showInfoPanel,
   hideInfoPanel as hideInfoPanelEvent,
 } from "SRC_DIR/helpers/info-panel";
-import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
+import { getContactsView } from "SRC_DIR/helpers/contacts";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
@@ -164,11 +164,7 @@ const SectionHeaderContent = (props) => {
     onCreateAndCopySharedLink,
     showNavigationButton,
     startUpload,
-    getFolderModel,
-    getContactsModel,
     contactsCanCreate,
-    onCreateRoom,
-    onCreateAgent,
     onEmptyTrashAction,
     getHeaderOptions,
     setBufferSelection,
@@ -192,8 +188,6 @@ const SectionHeaderContent = (props) => {
     isPersonalReadOnly,
     isPrivacyFolder,
     showTemplateBadge,
-
-    allowInvitingMembers,
 
     isAIRoom,
     isAIAgent,
@@ -487,11 +481,6 @@ const SectionHeaderContent = (props) => {
       setIsLoading,
     ],
   );
-
-  const getContextOptionsPlus = React.useCallback(() => {
-    if (isContactsPage) return getContactsModel(t);
-    return getFolderModel(t);
-  }, [isContactsPage, getContactsModel, getFolderModel, t, contactsTab]);
 
   const onNavigationButtonClick = React.useCallback(() => {
     onCreateAndCopySharedLink(selectedFolder, t);
@@ -942,35 +931,6 @@ const SectionHeaderContent = (props) => {
     isRootFolder,
   ]);
 
-  const onPlusClick = React.useCallback(() => {
-    if (isAIAgentsFolder) return onCreateAgent();
-    if (!isContactsPage) return onCreateRoom();
-    if (isContactsGroupsPage) return createGroup(selectedFolder?.id, "sidebar");
-  }, [
-    isAIAgentsFolder,
-    isContactsPage,
-    isContactsGroupsPage,
-    onCreateAgent,
-    onCreateRoom,
-    createGroup,
-  ]);
-
-  const isPlusButtonVisible = React.useMemo(() => {
-    if (allowInvitingMembers) return true;
-
-    if (!isContactsPage || isContactsGroupsPage) return true;
-
-    const lengthList = getContextOptionsPlus()?.length;
-    if (!lengthList || lengthList === 0) return false;
-
-    return true;
-  }, [
-    getContextOptionsPlus,
-    isContactsPage,
-    isContactsGroupsPage,
-    allowInvitingMembers,
-  ]);
-
   const withMenu = !isRoomsFolder && !isContactsGroupsPage && !isAIAgentsFolder;
 
   if (showHeaderLoader) return <SectionHeaderSkeleton />;
@@ -1022,7 +982,6 @@ const SectionHeaderContent = (props) => {
                   ? navigationPath
                   : accountsNavigationPath
               }
-              getContextOptionsPlus={getContextOptionsPlus}
               getContextOptionsFolder={getContextOptionsFolder}
               onClose={onClose}
               onClickFolder={onClickFolder}
@@ -1048,7 +1007,6 @@ const SectionHeaderContent = (props) => {
                 infoPanel: t("Common:InfoPanel"),
               }}
               withMenu={withMenu}
-              onPlusClick={onPlusClick}
               isEmptyPage={isEmptyPage}
               isRoom={isCurrentRoom || isContactsPage || isProfile}
               hideInfoPanel={
@@ -1087,7 +1045,7 @@ const SectionHeaderContent = (props) => {
               guidAnimationVisible={guidAnimationVisible}
               setGuidAnimationVisible={setGuidAnimationVisible}
               isContextButtonVisible={isContextButtonVisible}
-              isPlusButtonVisible={isPlusButtonVisible}
+              isPlusButtonVisible={false}
               showBackButton={isProfile}
               contextMenuHeader={isProfile ? undefined : contextMenuHeader}
               analyzeResponsesButton={
@@ -1253,7 +1211,6 @@ export default inject(
       isFrame,
       currentDeviceType,
       displayAbout,
-      allowInvitingMembers,
     } = settingsStore;
 
     const isRoom = !!roomType;
@@ -1262,9 +1219,6 @@ export default inject(
       onClickEditRoom,
       onCopyLink,
       onCreateAndCopySharedLink,
-      getFolderModel,
-      onCreateRoom,
-      onCreateAgent,
       getHeaderOptions,
       onEmptyTrashAction,
     } = contextOptionsStore;
@@ -1304,8 +1258,7 @@ export default inject(
       getContactsHeaderMenu,
     } = headerMenuStore;
 
-    const { getContactsModel, contactsCanCreate } =
-      peopleStore.contextOptionsStore;
+    const { contactsCanCreate } = peopleStore.contextOptionsStore;
 
     const { setSelected: setUsersSelected, contactsTab } = usersStore;
 
@@ -1450,16 +1403,12 @@ export default inject(
       onCreateAndCopySharedLink,
       showNavigationButton,
       startUpload,
-      getFolderModel,
-      onCreateRoom,
-      onCreateAgent,
       onEmptyTrashAction,
       getHeaderOptions,
       setBufferSelection,
       setReorderDialogVisible,
       setGroupsBufferSelection,
       createFoldersTree,
-      getContactsModel,
       contactsCanCreate,
       revokeFilesOrder,
       saveIndexOfFiles,
@@ -1475,7 +1424,6 @@ export default inject(
       setRefMap,
       deleteRefMap,
       showTemplateBadge: isTemplate && !isRoot,
-      allowInvitingMembers,
 
       isAIRoom,
       isAIAgent,

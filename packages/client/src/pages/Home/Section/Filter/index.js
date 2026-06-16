@@ -80,6 +80,8 @@ import { ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
 import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
+import { createGroup } from "SRC_DIR/helpers/contacts";
+import { getSectionCreateButton } from "SRC_DIR/helpers/getSectionCreateButton";
 
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
@@ -89,6 +91,7 @@ import { FilterLoader } from "@docspace/ui-kit/components/filter/skeletons";
 import renderFilterSelector from "@docspace/shared/utils/renderFilterSelector";
 
 import { useContactsFilter } from "./useContacts";
+import CreateButtonMobile from "./CreateButtonMobile";
 
 const SectionFilterContent = ({
   t,
@@ -115,6 +118,7 @@ const SectionFilterContent = ({
   clearSearch,
   setClearSearch,
   setMainButtonMobileVisible,
+  setMainButtonVisible,
   isArchiveFolder,
 
   // contacts
@@ -149,6 +153,12 @@ const SectionFilterContent = ({
   currentClientView,
 
   getSelectedFolder,
+  selectedFolderId,
+
+  getFolderModel,
+  getContactsModel,
+  onCreateRoom,
+  onCreateAgent,
 
   filesStore,
   groupsStore,
@@ -168,6 +178,47 @@ const SectionFilterContent = ({
   const isContactsInsideGroupPage = contactsTab === "inside_group";
   const isContactsGroupsPage = contactsTab === "groups";
   const isContactsGuestsPage = contactsTab === "guests";
+
+  const { showMainButton, mainButtonProps } = React.useMemo(
+    () =>
+      getSectionCreateButton({
+        t,
+        isContactsPage,
+        isContactsGroupsPage,
+        isRoomsFolder,
+        isAIAgentsFolder,
+        selectedFolderId,
+        getFolderModel,
+        getContactsModel,
+        onCreateRoom,
+        onCreateAgent,
+        createGroup,
+      }),
+    [
+      t,
+      isContactsPage,
+      isContactsGroupsPage,
+      isRoomsFolder,
+      isAIAgentsFolder,
+      selectedFolderId,
+      getFolderModel,
+      getContactsModel,
+      onCreateRoom,
+      onCreateAgent,
+      createGroup,
+    ],
+  );
+
+  const isDesktopView = currentDeviceType === DeviceType.desktop;
+  const isCreateFabVisible = showMainButton && !isDesktopView;
+
+  React.useEffect(() => {
+    setMainButtonVisible(isCreateFabVisible);
+  }, [isCreateFabVisible, setMainButtonVisible]);
+
+  React.useEffect(() => {
+    return () => setMainButtonVisible(false);
+  }, [setMainButtonVisible]);
 
   // Check if any filter or search is active (excluding sorting and groupId)
   // Room grouping should be hidden when filters/search are active
@@ -1860,7 +1911,7 @@ const SectionFilterContent = ({
 
   if (showFilterLoader) return <FilterLoader />;
 
-  return (
+  const filterInput = (
     <FilterInput
       onFilter={onFilter}
       getFilterData={getFilterData}
@@ -1910,7 +1961,19 @@ const SectionFilterContent = ({
       isRoomsFolder={isRoomsFolder}
       organizeRoomsGrouping={organizeRoomsGrouping}
       isFilterOrSearchActive={isFilterOrSearchActive}
+      showMainButton={showMainButton && isDesktopView}
+      mainButtonProps={mainButtonProps}
     />
+  );
+
+  return (
+    <>
+      {filterInput}
+      <CreateButtonMobile
+        visible={isCreateFabVisible}
+        mainButtonProps={mainButtonProps}
+      />
+    </>
   );
 };
 
@@ -1931,6 +1994,7 @@ export default inject(
     indexingStore,
     selectedFolderStore,
     dialogsStore,
+    contextOptionsStore,
   }) => {
     const {
       filter,
@@ -1942,6 +2006,7 @@ export default inject(
       createThumbnails,
       setCurrentRoomsFilter,
       setMainButtonMobileVisible,
+      setMainButtonVisible,
       thirdPartyStore,
       clearSearch,
       setClearSearch,
@@ -1973,14 +2038,23 @@ export default inject(
     const { showStorageInfo, isDefaultRoomsQuotaSet } = currentQuotaStore;
 
     const { isIndexEditingMode } = indexingStore;
-    const { isIndexedFolder, getSelectedFolder } = selectedFolderStore;
+    const {
+      isIndexedFolder,
+      getSelectedFolder,
+      id: selectedFolderId,
+    } = selectedFolderStore;
+
+    const { getFolderModel, onCreateRoom, onCreateAgent } = contextOptionsStore;
 
     const {
       usersStore,
       groupsStore,
 
       viewAs: contactsViewAs,
+      contextOptionsStore: contactsContextOptionsStore,
     } = peopleStore;
+
+    const { getContactsModel } = contactsContextOptionsStore;
 
     const { groups, groupsFilter, setGroupsFilter } = groupsStore;
 
@@ -2007,6 +2081,12 @@ export default inject(
       isCollaborator: user?.isCollaborator,
       isVisitor: user?.isVisitor,
       getSelectedFolder,
+      selectedFolderId,
+
+      getFolderModel,
+      getContactsModel,
+      onCreateRoom,
+      onCreateAgent,
 
       filter,
       roomsFilter,
@@ -2043,6 +2123,7 @@ export default inject(
       setClearSearch,
 
       setMainButtonMobileVisible,
+      setMainButtonVisible,
 
       contactsViewAs,
       contactsTab,

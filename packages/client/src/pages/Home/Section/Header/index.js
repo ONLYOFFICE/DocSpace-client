@@ -607,7 +607,7 @@ const SectionHeaderContent = (props) => {
     if (isEncryptedRoom) return t("Common:PrivateRoomDescription");
 
     if (lifetime)
-      return `${t("Files:RoomFilesLifetime", {
+      return `${t("Common:RoomFilesLifetime", {
         days: lifetime.value,
         period: getLifetimePeriodTranslation(lifetime.period, t),
       })}. ${
@@ -1479,3 +1479,4 @@ export default inject(
     "GroupingRooms",
   ])(observer(SectionHeaderContent)),
 );
+

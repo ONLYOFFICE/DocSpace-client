@@ -1752,6 +1752,7 @@
   "RoomExternalLinkDeleted": "Ο σύνδεσμος <1>«{{linkTitle}}»</1> διαγράφηκε.",
   "RoomExternalLinkRenamed": "Ο σύνδεσμος <1>«{{oldLinkTitle}}»</1> μετονομάστηκε σε <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "Ο προηγούμενος σύνδεσμος <1>«{{linkTitle}}»</1> ανακλήθηκε <br/> Ο νέος σύνδεσμος <1>«{{linkTitle}}»</1> δημιουργήθηκε",
+  "RoomFilesLifetime": "Η διάρκεια ζωής των αρχείων ορίζεται σε {{days}} {{period}} σε αυτό το δωμάτιο",
   "RoomFormBarDescription": "Αυτό το δωμάτιο είναι διαθέσιμο σε οποιονδήποτε έχει τον σύνδεσμο. Οι εξωτερικοί χρήστες θα έχουν δικαίωμα Συμπλήρωσης Φορμών για όλα τα αρχεία.",
   "RoomFromArchiveRestore": "Χώρος αποκαταστάθηκε από το {{sectionName}}",
   "RoomGroupAdded": "Οι ομάδες προστέθηκαν.",

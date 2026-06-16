@@ -104,7 +104,6 @@
   "RoomAvailableViaSharedLink": "Phòng có sẵn thông qua liên kết được chia sẻ",
   "RoomCreated": "Đã tạo phòng",
   "RoomEmptyContainerDescription": "Xin vui lòng tạo phòng đầu tiên.",
-  "RoomFilesLifetime": "Thời gian tồn tại của tập tin được đặt thành {{period}} {{days}} trong phòng này",
   "RoomTagsLabel": "Thẻ tag (từ khóa) phòng",
   "RoomTagsTooltip": "Thẻ tag được sẽ áp dụng cho phòng được tạo dựa trên mẫu này.",
   "RoomTemplate": "Mẫu phòng",

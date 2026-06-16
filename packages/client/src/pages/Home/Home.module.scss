@@ -61,6 +61,36 @@
   display: contents;
 }
 
+.sectionVarsHost[data-layout-mode="ai-fullscreen"] {
+  :global(#section) {
+    flex: 0 0 0 !important;
+    min-width: 0 !important;
+    width: 0 !important;
+    overflow: hidden;
+  }
+
+  :global(.chat-panel) {
+    flex: 1 1 auto !important;
+    width: auto !important;
+    max-width: 100% !important;
+    border-inline-start: none;
+  }
+}
+
+@include mixins.tablet-and-below {
+  .sectionVarsHost :global(.chat-panel) {
+    inset-inline-start: auto;
+    max-width: calc(100vw - 69px);
+  }
+}
+
+@include mixins.mobile {
+  .sectionVarsHost :global(.chat-panel) {
+    inset-inline-start: 0;
+    max-width: 100vw;
+  }
+}
+
 .stickyBannerVars {
   --section-filter-height: 60px;
   --section-filter-top: var(

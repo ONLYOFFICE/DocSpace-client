@@ -559,7 +559,9 @@ const PASS_THROUGH_PREFIXES = [
 ];
 
 const HomeWithGuard = (props) => {
-  const isLegacyMode = localStorage.getItem("useDocSpace") === "old";
+  // Always treat as legacy mode — the new-design article is shown via
+  // ClientArticleSidebar regardless of this flag.
+  const isLegacyMode = true;
   const { pathname } = useLocation();
 
   if (

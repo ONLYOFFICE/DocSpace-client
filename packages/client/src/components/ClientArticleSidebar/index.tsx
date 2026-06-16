@@ -32,6 +32,9 @@ import { useTranslation } from "react-i18next";
 import type { NavMenuGroup, NavMenuItem, NavSubItem } from "@docspace/ui-kit/components/nav-menu";
 import { FolderType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { CategoryType } from "@docspace/shared/constants";
+import type { ValueOf } from "@docspace/shared/types";
 
 import CatalogOverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
@@ -60,7 +63,7 @@ const ClientArticleSidebar = ({
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
   const navigate = useNavigate();
-  const { myFolderId } = folderIds;
+  const { myFolderId, roomsFolderId } = folderIds;
 
   // `onFolderNavigate` is re-created on every inject render; keep a stable ref
   // so the memoized onClick handlers below don't go stale (which made nested
@@ -83,6 +86,19 @@ const ClientArticleSidebar = ({
         navigate(buildFolderUrl(folderId, rootFolderType, userId, myFolderId));
       },
     [navigate, userId, myFolderId],
+  );
+
+  // Rooms-scoped Recent/Favorites: the same special @recent/@favorites files
+  // view, but constrained to room content via `parentId=<roomsFolderId>`.
+  const goRoomsScoped = React.useCallback(
+    (categoryType: ValueOf<typeof CategoryType>, basePath: string) => () => {
+      onFolderNavigateRef.current?.();
+      const filter = FilesFilter.getDefault({ categoryType });
+      const parentSuffix =
+        roomsFolderId != null ? `&parentId=${roomsFolderId}` : "";
+      navigate(`${basePath}/filter?${filter.toUrlParams()}${parentSuffix}`);
+    },
+    [navigate, roomsFolderId],
   );
 
   const activeId = React.useMemo(
@@ -152,9 +168,20 @@ const ClientArticleSidebar = ({
       mainItems.push({
         ...navItem(roomsFolder),
         children: [
-          // Recent/Favorites under Rooms are placeholders for now (no target).
-          { id: "rooms-recent", label: t("Common:Recent"), icon: getCatalogIconUrlByType(FolderType.Recent) },
-          { id: "rooms-favorites", label: t("Common:Favorites"), icon: getCatalogIconUrlByType(FolderType.Favorites) },
+          // Recent/Favorites under Rooms reuse the @recent/@favorites files
+          // view, scoped to room content via parentId=roomsFolderId.
+          {
+            id: "rooms-recent",
+            label: t("Common:Recent"),
+            icon: getCatalogIconUrlByType(FolderType.Recent),
+            onClick: goRoomsScoped(CategoryType.Recent, "/rooms/recent"),
+          },
+          {
+            id: "rooms-favorites",
+            label: t("Common:Favorites"),
+            icon: getCatalogIconUrlByType(FolderType.Favorites),
+            onClick: goRoomsScoped(CategoryType.Favorite, "/rooms/favorite"),
+          },
           ...(archiveFolder
             ? [navItem(archiveFolder, { withTopSeparator: true })]
             : []),
@@ -169,7 +196,7 @@ const ClientArticleSidebar = ({
       { id: "overview", items: [overview] },
       ...(mainItems.length > 0 ? [{ id: "main", items: mainItems }] : []),
     ];
-  }, [t, go, goFolder, treeFolders, isVisitor]);
+  }, [t, go, goFolder, goRoomsScoped, treeFolders, isVisitor]);
 
   return <AppsSidebar groups={groups} activeId={activeId} />;
 };

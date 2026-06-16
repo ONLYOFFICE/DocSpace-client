@@ -92,7 +92,7 @@ const ModelSettingsRow: React.FC<ModelSettingsRowProps> = ({
             >
               {title}
             </Text>
-            {provider ? (
+            {/* {provider ? (
               <Text
                 fontSize="12px"
                 fontWeight={400}
@@ -101,7 +101,7 @@ const ModelSettingsRow: React.FC<ModelSettingsRowProps> = ({
               >
                 ({provider})
               </Text>
-            ) : null}
+            ) : null} */}
           </div>
         </div>
       </TableCell>
@@ -143,3 +143,4 @@ const ModelSettingsRow: React.FC<ModelSettingsRowProps> = ({
 };
 
 export default ModelSettingsRow;
+

@@ -41,7 +41,7 @@ import { RowContainer } from "@docspace/ui-kit/components/rows";
 import { Text } from "@docspace/ui-kit/components/text";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 
-import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.14.react.svg";
+import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.12.react.svg";
 
 import type ServicesStore from "SRC_DIR/store/ServicesStore";
 
@@ -92,7 +92,8 @@ const RowView = (props: ModelSettingsRowViewProps) => {
           const enabled = aiModelAvailabilityMap?.get(m.id) ?? true;
           const isUpdating = aiModelAvailabilityUpdatingSet?.has(m.id) ?? false;
           const inputPrice = formatAiModelsCurrency?.(m.price.prompt) ?? "";
-          const outputPrice = formatAiModelsCurrency?.(m.price.completion) ?? "";
+          const outputPrice =
+            formatAiModelsCurrency?.(m.price.completion) ?? "";
 
           const onRowClick = () => {
             if (m.link) window.open(m.link, "_blank", "noopener,noreferrer");
@@ -122,7 +123,7 @@ const RowView = (props: ModelSettingsRowViewProps) => {
                   >
                     {m.alias}
                   </Text>
-                  {m.provider ? (
+                  {/* {m.provider ? (
                     <Text
                       fontSize="12px"
                       fontWeight={400}
@@ -131,7 +132,7 @@ const RowView = (props: ModelSettingsRowViewProps) => {
                     >
                       ({m.provider})
                     </Text>
-                  ) : null}
+                  ) : null} */}
                   {m.link ? (
                     <ExternalLinkIcon className={styles.detailsIcon} />
                   ) : null}
@@ -181,3 +182,4 @@ export default inject<TStore>(({ servicesStore }) => {
     aiModelAvailabilityUpdatingSet,
   };
 })(observer(RowView));
+

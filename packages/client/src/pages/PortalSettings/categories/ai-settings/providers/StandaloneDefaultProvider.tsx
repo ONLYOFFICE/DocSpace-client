@@ -83,7 +83,7 @@ const getSelectedProviderOption = (
   return { key: provider.id, label: provider.title };
 };
 
-const DefaultProviderComponent = ({
+const StandaloneDefaultProviderComponent = ({
   aiConfig,
   aiProviders,
   defaultProviderModels,
@@ -482,7 +482,7 @@ const DefaultProviderComponent = ({
   );
 };
 
-export const DefaultProvider = inject(
+export const StandaloneDefaultProvider = inject(
   ({ aiSettingsStore, servicesStore }: TStore) => {
     return {
       defaultProviderModels: aiSettingsStore.defaultProviderModels,
@@ -498,4 +498,4 @@ export const DefaultProvider = inject(
       formatAiModelsCurrency: servicesStore.formatAiModelsCurrency,
     };
   },
-)(observer(DefaultProviderComponent));
+)(observer(StandaloneDefaultProviderComponent));

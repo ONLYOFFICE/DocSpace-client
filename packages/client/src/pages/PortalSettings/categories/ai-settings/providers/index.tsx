@@ -61,7 +61,8 @@ import { DeleteAIProviderDialog } from "./dialogs/delete";
 
 import { AiProviderTile } from "./Tile";
 import { ProvidersLoader } from "./ProvidersLoader";
-import { DefaultProvider } from "./DefaultProvider";
+import { StandaloneDefaultProvider } from "./StandaloneDefaultProvider";
+import { SaasDefaultProvider } from "./SaasDefaultProvider";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 type TDeleteDialogData =
@@ -88,27 +89,26 @@ type TUpdateDialogData =
       models: TModelSettingsDto[];
     };
 
-type AIProviderProps = {
+
+type StandaloneAIProviderProps = {
   aiProviders?: AISettingsStore["aiProviders"];
   aiProvidersInitied?: AISettingsStore["aiProvidersInitied"];
   checkUnavailableProviders?: AISettingsStore["checkUnavailableProviders"];
   isProviderAvailable?: AISettingsStore["isProviderAvailable"];
   cancelAvailabilityCheck?: AISettingsStore["cancelAvailabilityCheck"];
   aiProviderSettingsUrl?: SettingsStore["aiProviderSettingsUrl"];
-  hasAIProviders?: AISettingsStore["hasAIProviders"];
   aiConfig?: SettingsStore["aiConfig"];
 };
 
-const AIProviderComponent = ({
+const StandaloneAIProviderComponent = ({
   aiProviders,
   aiProvidersInitied,
   checkUnavailableProviders,
   isProviderAvailable,
   cancelAvailabilityCheck,
   aiProviderSettingsUrl,
-  hasAIProviders,
   aiConfig,
-}: AIProviderProps) => {
+}: StandaloneAIProviderProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addDialogVisible, setaddDialogVisible] = useState(false);
   const [updateDialogData, setUpdateDialogData] = useState<TUpdateDialogData>({
@@ -229,7 +229,7 @@ const AIProviderComponent = ({
       </div>
 
       {aiProviders && aiProviders.length > 0 ? (
-        <DefaultProvider aiConfig={aiConfig} />
+        <StandaloneDefaultProvider aiConfig={aiConfig} />
       ) : null}
 
       {addDialogVisible ? (
@@ -263,7 +263,7 @@ const AIProviderComponent = ({
   );
 };
 
-export const AIProvider = inject(
+const StandaloneAIProvider = inject(
   ({ aiSettingsStore, settingsStore }: TStore) => {
     return {
       aiProviders: aiSettingsStore.aiProviders,
@@ -273,10 +273,47 @@ export const AIProvider = inject(
       cancelAvailabilityCheck: aiSettingsStore.cancelAvailabilityCheck,
       aiProviderSettingsUrl: settingsStore.aiProviderSettingsUrl,
       aiConfig: settingsStore.aiConfig,
-      hasAIProviders: aiSettingsStore.hasAIProviders,
     };
   },
-)(observer(AIProviderComponent));
+)(observer(StandaloneAIProviderComponent));
+
+
+type SaasAIProviderProps = {
+  aiProvidersInitied?: AISettingsStore["aiProvidersInitied"];
+  aiConfig?: SettingsStore["aiConfig"];
+};
+
+const SaasAIProviderComponent = ({
+  aiProvidersInitied,
+  aiConfig,
+}: SaasAIProviderProps) => {
+  if (!aiProvidersInitied) return <ProvidersLoader />;
+
+  return (
+    <div className={styles.aiProvider}>
+      <SaasDefaultProvider aiConfig={aiConfig} />
+    </div>
+  );
+};
+
+const SaasAIProvider = inject(({ aiSettingsStore, settingsStore }: TStore) => {
+  return {
+    aiProvidersInitied: aiSettingsStore.aiProvidersInitied,
+    aiConfig: settingsStore.aiConfig,
+  };
+})(observer(SaasAIProviderComponent));
+
+type AIProviderProps = {
+  standalone?: SettingsStore["standalone"];
+};
+
+const AIProviderComponent = ({ standalone }: AIProviderProps) =>
+  standalone ? <StandaloneAIProvider /> : <SaasAIProvider />;
+
+export const AIProvider = inject(({ settingsStore }: TStore) => {
+  return {
+    standalone: settingsStore.standalone,
+  };
+})(observer(AIProviderComponent));
 
 export { ProvidersLoader };
-

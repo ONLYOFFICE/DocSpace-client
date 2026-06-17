@@ -137,7 +137,7 @@ export const getSectionCreateButton = ({
       return {
         showMainButton: true,
         mainButtonProps: {
-          text: t("Common:New"),
+          text: t("Common:Invite"),
           isDropdown: false,
           model: [],
           onAction: () => createGroup(selectedFolderId, "sidebar"),
@@ -148,7 +148,7 @@ export const getSectionCreateButton = ({
     return {
       showMainButton: true,
       mainButtonProps: {
-        text: t("Common:New"),
+        text: t("Common:Invite"),
         isDropdown: true,
         model,
       },

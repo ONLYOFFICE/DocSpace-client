@@ -825,7 +825,11 @@ class CreateEditRoomStore {
 
     setIsSectionBodyLoading(true);
 
-    const path = getCategoryUrl(CategoryType.SharedRoom, room.id);
+    const isFormRoom = room.roomType === RoomsType.FormRoom;
+    const path = getCategoryUrl(
+      isFormRoom ? CategoryType.Form : CategoryType.SharedRoom,
+      room.id,
+    );
 
     window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
 

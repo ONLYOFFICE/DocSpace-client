@@ -283,7 +283,7 @@ const PureHome = observer((props) => {
     isProfile,
     isSettingsPage,
   });
-  const showQuickActions = quickActions.show && !isChat;
+  const showQuickActions = quickActions.show && !isChat && !isEmptyPage;
 
   // The "Forms" section shows its own "Choose Form Set" plate instead of the
   // quick-actions tiles. Dismissal is remembered across sessions.

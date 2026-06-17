@@ -275,6 +275,22 @@ const ClientRoutes = [
             ),
           },
           {
+            path: "forms/:room",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "forms/:room/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
             path: "forms/recent",
             element: (
               <PrivateRoute>

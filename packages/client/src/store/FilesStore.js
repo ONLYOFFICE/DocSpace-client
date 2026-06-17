@@ -1698,6 +1698,7 @@ class FilesStore {
       )
       .with(
         CategoryType.SharedRoom,
+        CategoryType.Form,
         () => `${FILTER_ROOM_DOCUMENTS}=${this.userStore.user?.id}`,
       )
       .with(
@@ -3500,7 +3501,9 @@ class FilesStore {
         roomOptions = removeOptions(roomOptions, ["change-room-owner"]);
       }
 
-      if (!canArchiveRoom) {
+      const isFormsSection = window.location.pathname.startsWith("/forms");
+
+      if (!canArchiveRoom || isFormsSection) {
         roomOptions = removeOptions(roomOptions, [
           "archive-room",
           "unarchive-room",

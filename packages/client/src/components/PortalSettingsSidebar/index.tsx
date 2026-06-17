@@ -29,7 +29,10 @@ import { inject, observer } from "mobx-react";
 import { useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import type { NavMenuGroup, NavMenuItem } from "@docspace/ui-kit/components/nav-menu";
+import type {
+  NavMenuGroup,
+  NavMenuItem,
+} from "@docspace/ui-kit/components/nav-menu";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
@@ -46,6 +49,7 @@ type PortalSettingsSidebarProps = {
   isCommunity: boolean;
   baseDomain?: string;
   aiServicesEnabled: boolean;
+  setIsLoadedArticleBody: (value: boolean) => void;
 };
 
 const PortalSettingsSidebar = ({
@@ -55,27 +59,48 @@ const PortalSettingsSidebar = ({
   isCommunity,
   baseDomain,
   aiServicesEnabled,
+  setIsLoadedArticleBody,
 }: PortalSettingsSidebarProps) => {
-  const { t } = useTranslation(["Settings", "Common", "Ldap", "OAuth"]);
+  const { t, ready } = useTranslation(["Settings", "Ldap", "OAuth", "Common"]);
   const location = useLocation();
   const navigate = useNavigate();
 
+  React.useEffect(() => {
+    if (ready) setIsLoadedArticleBody(true);
+  }, [ready, setIsLoadedArticleBody]);
+
   const mapLabel = (tKey: string): string => {
     switch (tKey) {
-      case "Customization": return t("Settings:Customization");
-      case "ManagementCategorySecurity": return t("Settings:ManagementCategorySecurity");
-      case "Backup": return t("Common:Backup");
-      case "Common:RestoreBackup": return t("Common:RestoreBackup");
-      case "ManagementCategoryIntegration": return t("Settings:ManagementCategoryIntegration");
-      case "DataImport": return t("Settings:DataImport");
-      case "StorageManagement": return t("Settings:StorageManagement");
-      case "Services": return t("Settings:Services");
-      case "AISettings": return t("Settings:AISettings");
-      case "NewAISettings": return t("Settings:NewAISettings");
-      case "PortalDeletion": return t("Settings:PortalDeletion", { productName: getBrandName("ProductName") });
-      case "Common:PaymentsTitle": return standalone ? t("Common:PaymentsTitle") : t("Common:Billing");
-      case "Common:Bonus": return t("Common:Bonus");
-      default: return tKey;
+      case "Customization":
+        return t("Settings:Customization");
+      case "ManagementCategorySecurity":
+        return t("Settings:ManagementCategorySecurity");
+      case "Common:Backup":
+        return t("Common:Backup");
+      case "Common:RestoreBackup":
+        return t("Common:RestoreBackup");
+      case "ManagementCategoryIntegration":
+        return t("Settings:ManagementCategoryIntegration");
+      case "DataImport":
+        return t("Settings:DataImport");
+      case "StorageManagement":
+        return t("Settings:StorageManagement");
+      case "Services":
+        return t("Settings:Services");
+      case "AISettings":
+        return t("Settings:AISettings");
+      case "NewAISettings":
+        return t("Settings:NewAISettings");
+      case "PortalDeletion":
+        return t("Settings:PortalDeletion", {
+          productName: getBrandName("ProductName"),
+        });
+      case "Common:PaymentsTitle":
+        return standalone ? t("Common:PaymentsTitle") : t("Common:Billing");
+      case "Common:Bonus":
+        return t("Common:Bonus");
+      default:
+        return tKey;
     }
   };
 
@@ -83,8 +108,8 @@ const PortalSettingsSidebar = ({
     const { pathname } = location;
     if (pathname.includes("customization")) return "0";
     if (pathname.includes("security")) return "1";
-    if (pathname.includes("backup")) return "2";
     if (pathname.includes("restore")) return "3";
+    if (pathname.includes("backup")) return "2";
     if (pathname.includes("integration")) return "4";
     if (pathname.includes("data-import")) return "5";
     if (pathname.includes("storage-management")) return "6-1";
@@ -141,7 +166,16 @@ const PortalSettingsSidebar = ({
     });
 
     return [{ id: "portal-settings", items }];
-  }, [t, navigate, isNotPaidPeriod, isOwner, standalone, isCommunity, baseDomain, aiServicesEnabled]);
+  }, [
+    t,
+    navigate,
+    isNotPaidPeriod,
+    isOwner,
+    standalone,
+    isCommunity,
+    baseDomain,
+    aiServicesEnabled,
+  ]);
 
   return (
     <AppsSidebar groups={groups} activeId={activeId} variant="secondary" />
@@ -149,12 +183,14 @@ const PortalSettingsSidebar = ({
 };
 
 export default inject<TStore>(
-  ({ settingsStore, userStore, currentTariffStatusStore }) => ({
+  ({ settingsStore, userStore, currentTariffStatusStore, common }) => ({
     isNotPaidPeriod: currentTariffStatusStore.isNotPaidPeriod,
     isCommunity: currentTariffStatusStore.isCommunity,
     isOwner: userStore.user?.isOwner ?? false,
     standalone: settingsStore.standalone,
     baseDomain: settingsStore.baseDomain,
     aiServicesEnabled: settingsStore.aiServicesEnabled,
+    setIsLoadedArticleBody: common.setIsLoadedArticleBody,
   }),
 )(observer(PortalSettingsSidebar));
+

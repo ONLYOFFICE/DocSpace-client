@@ -34,7 +34,7 @@ import type {
   NavMenuItem,
   NavSubItem,
 } from "@docspace/ui-kit/components/nav-menu";
-import { FolderType, RoomSearchArea, FilterType } from "@docspace/shared/enums";
+import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { CategoryType } from "@docspace/shared/constants";
@@ -117,21 +117,6 @@ const ClientArticleSidebar = ({
           roomsFolderId != null ? `&parentId=${roomsFolderId}` : "";
         navigate(`${basePath}/filter?${filter.toUrlParams()}${parentSuffix}`);
       },
-    [navigate, roomsFolderId],
-  );
-
-  // Forms-scoped Recent/Favorites/Trash: same as goRoomsScoped, but the files
-  // list is additionally filtered to PDF forms only — the "Forms" counterpart
-  // of the Rooms subsections.
-  const goFormsScoped = React.useCallback(
-    (categoryType: ValueOf<typeof CategoryType>, basePath: string) => () => {
-      onFolderNavigateRef.current?.();
-      const filter = FilesFilter.getDefault({ categoryType });
-      filter.filterType = FilterType.PDFForm;
-      const parentSuffix =
-        roomsFolderId != null ? `&parentId=${roomsFolderId}` : "";
-      navigate(`${basePath}/filter?${filter.toUrlParams()}${parentSuffix}`);
-    },
     [navigate, roomsFolderId],
   );
 
@@ -267,19 +252,19 @@ const ClientArticleSidebar = ({
             id: "forms-recent",
             label: t("Common:Recent"),
             icon: getCatalogIconUrlByType(FolderType.Recent),
-            onClick: goFormsScoped(CategoryType.Recent, "/forms/recent"),
+            // onClick: goFormsScoped(CategoryType.Recent, "/forms/recent"),
           },
           {
             id: "forms-favorites",
             label: t("Common:Favorites"),
             icon: getCatalogIconUrlByType(FolderType.Favorites),
-            onClick: goFormsScoped(CategoryType.Favorite, "/forms/favorites"),
+            // onClick: goFormsScoped(CategoryType.Favorite, "/forms/favorites"),
           },
           {
             id: "forms-trash",
             label: t("Common:TrashSection"),
             icon: getCatalogIconUrlByType(FolderType.TRASH),
-            onClick: goFormsScoped(CategoryType.Trash, "/forms/trash"),
+            // onClick: goFormsScoped(CategoryType.Trash, "/forms/trash"),
             withTopSeparator: true,
           },
         ],
@@ -298,7 +283,6 @@ const ClientArticleSidebar = ({
     go,
     goFolder,
     goRoomsScoped,
-    goFormsScoped,
     goTemplates,
     treeFolders,
     isVisitor,

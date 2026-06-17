@@ -3443,7 +3443,11 @@ class FilesActionStore {
       return this.backToParentFolder();
     }
 
-    if (categoryType === CategoryType.SharedRoom || isArchivedRoom) {
+    if (
+      categoryType === CategoryType.SharedRoom ||
+      categoryType === CategoryType.Form ||
+      isArchivedRoom
+    ) {
       if (isRoom) {
         return this.moveToRoomsPage();
       }
@@ -3522,9 +3526,11 @@ class FilesActionStore {
       categoryType === CategoryType.SharedRoom ||
       categoryType === CategoryType.Chat
         ? CategoryType.Shared
-        : CategoryType.ArchivedRoom === categoryType
-          ? CategoryType.Archive
-          : categoryType;
+        : categoryType === CategoryType.Form
+          ? CategoryType.Forms
+          : CategoryType.ArchivedRoom === categoryType
+            ? CategoryType.Archive
+            : categoryType;
 
     const path = getCategoryUrl(correctCategoryType);
 

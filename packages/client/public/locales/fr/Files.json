@@ -104,7 +104,6 @@
   "RoomAvailableViaSharedLink": "Salle disponible via le lien partagé",
   "RoomCreated": "Salle créée",
   "RoomEmptyContainerDescription": "Veuillez créer la première salle.",
-  "RoomFilesLifetime": "La durée de vie des fichiers est fixée à {{days}} {{period}} dans cette salle",
   "RoomTagsLabel": "Étiquettes de salle",
   "RoomTagsTooltip": "Les étiquettes s'appliqueront à la salle qui sera créée à partir de ce modèle.",
   "RoomTemplate": "Modèle de salle",

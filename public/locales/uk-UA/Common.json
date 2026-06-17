@@ -1752,6 +1752,7 @@
   "RoomExternalLinkDeleted": "Посилання <1>«{{linkTitle}}»</1> видалено.",
   "RoomExternalLinkRenamed": "Посилання <1>«{{oldLinkTitle}}»</1> перейменовано в <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "Попереднє посилання <1>«{{linkTitle}}»</1> анульовано. <br/> Створено нове посилання <1>«{{linkTitle}}»</1>",
+  "RoomFilesLifetime": "У цій кімнаті встановлено період існування файлів {{days}} {{period}}",
   "RoomFormBarDescription": "Ця кімната доступна всім, хто має посилання. Зовнішні користувачі матимуть дозвіл на заповнення форм для всіх файлів.",
   "RoomFromArchiveRestore": "Кімната відновлена з {{sectionName}}",
   "RoomGroupAdded": "Групи додано.",

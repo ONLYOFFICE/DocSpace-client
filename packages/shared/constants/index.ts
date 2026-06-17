@@ -259,6 +259,7 @@ export const CategoryType = Object.freeze({
   AIAgents: 15,
   AIAgent: 16,
   Forms: 17,
+  Form: 18,
 });
 
 export const SHARED_MEMBERS_COUNT = 100;

@@ -58,7 +58,13 @@ const ChooseFormSetBanner = ({ onClose }: ChooseFormSetBannerProps) => {
       className={styles.banner}
       iconName={<InfoOutlineReactSvg />}
       headerText={t("Common:ChooseFormSet")}
-      bodyText={t("Common:ChooseFormSetDescription")}
+      bodyText={
+        <>
+          {t("Common:ChooseFormSetDescription")}
+          <br />
+          {t("Common:ChooseFormSetHint")}
+        </>
+      }
       onClose={onClose}
       barIsVisible
     />

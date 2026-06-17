@@ -104,7 +104,6 @@
   "RoomAvailableViaSharedLink": "共有リンクで利用可能なルーム",
   "RoomCreated": "ルームが作成されました",
   "RoomEmptyContainerDescription": "最初のルームを作成しましょう",
-  "RoomFilesLifetime": "このルームでは、ファイルの有効期間は{{days}}{{period}}に設定されています",
   "RoomTagsLabel": "ルームタグ",
   "RoomTagsTooltip": "このテンプレートに基づいて作成されるルームにはタグが適用されます。",
   "RoomTemplate": "ルームのテンプレート",

@@ -31,8 +31,14 @@ import { useTranslation } from "react-i18next";
 import type { NavMenuGroup, NavMenuItem } from "@docspace/ui-kit/components/nav-menu";
 import { PageType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
+import AccountsFilter from "@docspace/shared/api/people/filter";
 
 import AppsSidebar from "SRC_DIR/components/AppsSidebar";
+import {
+  PEOPLE_ROUTE_WITH_FILTER,
+  GROUPS_ROUTE_WITH_FILTER,
+  GUESTS_ROUTE_WITH_FILTER,
+} from "SRC_DIR/helpers/contacts";
 
 const MEMBERS_ID = "accounts-members";
 const GROUPS_ID = "accounts-groups";
@@ -52,29 +58,41 @@ const AccountsSidebar = () => {
     return undefined;
   }, [location]);
 
+  // Navigate straight to the `*/filter` routes with default filter params.
+  // Navigating to the bare routes (e.g. `/accounts/people`) forces an extra
+  // `<Navigate replace />` redirect hop, which remounts the view and shows the
+  // body skeleton on every section switch.
+  const goToFilterRoute = React.useCallback(
+    (route: string) => () => {
+      const params = AccountsFilter.getDefault().toUrlParams();
+      navigate(`/${route}?${params}`);
+    },
+    [navigate],
+  );
+
   const groups = React.useMemo<NavMenuGroup[]>(() => {
     const items: NavMenuItem[] = [
       {
         id: MEMBERS_ID,
         label: t("Common:Members"),
         icon: getCatalogIconUrlByType(PageType.account),
-        onClick: () => navigate("/accounts/people"),
+        onClick: goToFilterRoute(PEOPLE_ROUTE_WITH_FILTER),
       },
       {
         id: GROUPS_ID,
         label: t("Common:Groups"),
         icon: getCatalogIconUrlByType(PageType.groups),
-        onClick: () => navigate("/accounts/groups"),
+        onClick: goToFilterRoute(GROUPS_ROUTE_WITH_FILTER),
       },
       {
         id: GUESTS_ID,
         label: t("Common:Guests"),
         icon: getCatalogIconUrlByType(PageType.guests),
-        onClick: () => navigate("/accounts/guests"),
+        onClick: goToFilterRoute(GUESTS_ROUTE_WITH_FILTER),
       },
     ];
     return [{ id: "accounts", items }];
-  }, [t, navigate]);
+  }, [t, goToFilterRoute]);
 
   return (
     <AppsSidebar groups={groups} activeId={activeId} variant="secondary" />

@@ -66,6 +66,10 @@
   --text-color: #{$white};
   --text-disable-color: #{$gray-dark-text};
 
+  --checkbox-fill-color: #{$dark-gray-light};
+  --checkbox-border-color: #{$gray-dark-strong};
+  --checkbox-arrow-color: #{$white};
+
   --link-color: #{$white};
 
   --button-color-base: #{$white};
@@ -557,7 +561,7 @@
 .light {
   --status-warning: #{$light-status-warning};
   --main-button-mobile-text-color: #{$light-gray-dark};
-  --main-button-mobile-button-color: #{$light-status-warning};
+  --main-button-mobile-button-color: #{$light-blue-main};
   --main-button-mobile-icon-fill: #{$white};
   --main-button-mobile-circle-background: #{$white};
   --main-button-mobile-mobile-progress-bar-background: #{$gray-strong};
@@ -585,7 +589,7 @@
 .dark {
   --status-warning: #{$dark-status-warning};
   --main-button-mobile-text-color: #{$dark-gray-dark};
-  --main-button-mobile-button-color: #{$dark-status-warning};
+  --main-button-mobile-button-color: #{$light-blue-main};
   --main-button-mobile-icon-fill: #{$black};
   --main-button-mobile-circle-background: #{$black};
   --main-button-mobile-mobile-progress-bar-background: #{$gray-dark-strong};
@@ -1976,7 +1980,7 @@
   --input-block-icon-color: #{$gray-dark};
   --input-block-hover-icon-color: #{$white};
   --settings-common-white-label-border-img: 1px solid #{$gray-dark-strong};
-  --settings-common-white-label-not-available-background: #{$gray-dark};
+  --settings-common-white-label-not-available-background: #{$dark-gray-light};
   --settings-common-white-label-text-color: #{$white};
   --settings-common-backup-rectangle-bg-color: #{$light-dark-gray-hover};
   --settings-backup-text-disabled: #{$gray-dark-text};

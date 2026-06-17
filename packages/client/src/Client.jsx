@@ -53,54 +53,25 @@ import {
   ArticleMainButtonContent,
 } from "./components/Article";
 import ArticleWrapper from "./components/ArticleWrapper";
-import NewArticle from "./components/NewArticle";
+import ClientArticleSidebar from "./components/ClientArticleSidebar";
+import AccountsSidebar from "./components/AccountsSidebar";
+import DeveloperToolsSidebar from "./components/DeveloperToolsSidebar";
 import { SdkFrameProvider } from "./components/SdkFrameHost/SdkFrameContext";
 import SdkFrameHost from "./components/SdkFrameHost/SdkFrameHost";
 import sdkHostStyles from "./components/SdkFrameHost/SdkFrameHost.module.scss";
 
 const ClientArticle = React.memo(
   ({
-    withMainButton,
     showArticleLoader,
     isInfoPanelVisible,
     isAccountsArticle,
     isDeveloperToolsArticle,
-    forceNewArticle,
+    withMainButton,
   }) => {
-    const isLegacyMode = localStorage.getItem("useDocSpace") === "old";
-    const useLegacyArticle = isAccountsArticle || isDeveloperToolsArticle;
+    if (isAccountsArticle) return <AccountsSidebar />;
+    if (isDeveloperToolsArticle) return <DeveloperToolsSidebar />;
 
-    if (forceNewArticle && !useLegacyArticle) {
-      return <NewArticle />;
-    }
-
-    if (!isLegacyMode && !useLegacyArticle) {
-      return <NewArticle />;
-    }
-
-    return (
-      <ArticleWrapper
-        isInfoPanelVisible={isInfoPanelVisible}
-        withMainButton={withMainButton}
-        showArticleLoader={showArticleLoader && !isDeveloperToolsArticle}
-        showBackButton={isAccountsArticle || isDeveloperToolsArticle}
-      >
-        <Article.Header>
-          <ArticleHeaderContent />
-        </Article.Header>
-
-        <Article.MainButton>
-          <ArticleMainButtonContent />
-        </Article.MainButton>
-
-        <Article.Body>
-          <ArticleBodyContent
-            isAccountsArticle={isAccountsArticle}
-            isDeveloperToolsArticle={isDeveloperToolsArticle}
-          />
-        </Article.Body>
-      </ArticleWrapper>
-    );
+    return <ClientArticleSidebar />;
   },
 );
 
@@ -218,7 +189,6 @@ const ClientContent = (props) => {
             showArticleLoader={showArticleLoader}
             isAccountsArticle={isAccountsArticle}
             isDeveloperToolsArticle={isDeveloperToolsArticle}
-            forceNewArticle={isNewArticle}
           />
         )
       ) : (

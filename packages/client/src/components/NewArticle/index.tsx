@@ -62,7 +62,7 @@ import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url
 import CatalogAiArbiterReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-arbiter.react.svg?url";
 
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
-import AppsSidebar from "../AppsSidebar";
+import { AppsSidebarView } from "../AppsSidebar";
 import { useSidebarShowText } from "../AppsSidebar/useSidebarShowText";
 
 const OVERVIEW_ID = "overview";
@@ -578,7 +578,7 @@ const NewArticle = ({
 
   return (
     <>
-      <AppsSidebar
+      <AppsSidebarView
         groups={groups}
         activeId={activeId}
         showText={showText}

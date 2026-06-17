@@ -104,7 +104,6 @@
   "RoomAvailableViaSharedLink": "Sala este disponibilă pe link partajat",
   "RoomCreated": "Sala s-a creat",
   "RoomEmptyContainerDescription": "Creați prima sală.",
-  "RoomFilesLifetime": "Durată de viață a fișierelor în acestă sală constituie {{days}} {{period}}",
   "RoomTagsLabel": "Etichete sală",
   "RoomTagsTooltip": "Etichete sunt aplicate la sala care va fi creată cu ajutorul acestui șablon.",
   "RoomTemplate": "Șablon sală",

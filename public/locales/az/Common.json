@@ -1752,6 +1752,7 @@
   "RoomExternalLinkDeleted": "Link <1>«{{linkTitle}}»</1> silindi.",
   "RoomExternalLinkRenamed": "<1>«{{oldLinkTitle}}»</1> linkinin adı <1>«{{linkTitle}}»</1> olaraq dəyişdirildi",
   "RoomExternalLinkRevoked": "Əvvəlki link <1>«{{linkTitle}}»</1> ləğv edildi <br/> Yeni Link <1>«{{linkTitle}}»</1> yaradıldı",
+  "RoomFilesLifetime": "Bu otaqda faylın istifadə müddəti {{days}} {{period}} olaraq təyin edilib",
   "RoomFormBarDescription": "Bu otaq əlaqəsi olan hər kəs üçün əlçatandır. Xarici istifadəçilərin bütün fayllar üçün Forma Doldurma icazəsi olacaq.",
   "RoomFromArchiveRestore": "{{sectionName}} bölməsindən bərpa edilmiş otaq",
   "RoomGroupAdded": "Qruplar əlavə edildi.",

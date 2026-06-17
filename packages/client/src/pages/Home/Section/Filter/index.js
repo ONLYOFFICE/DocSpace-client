@@ -80,6 +80,8 @@ import { ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
 import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
+import { createGroup } from "SRC_DIR/helpers/contacts";
+import { getSectionCreateButton } from "SRC_DIR/helpers/getSectionCreateButton";
 
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
@@ -89,6 +91,7 @@ import { FilterLoader } from "@docspace/ui-kit/components/filter/skeletons";
 import renderFilterSelector from "@docspace/shared/utils/renderFilterSelector";
 
 import { useContactsFilter } from "./useContacts";
+import CreateButtonMobile from "./CreateButtonMobile";
 
 const SectionFilterContent = ({
   t,
@@ -115,6 +118,7 @@ const SectionFilterContent = ({
   clearSearch,
   setClearSearch,
   setMainButtonMobileVisible,
+  setMainButtonVisible,
   isArchiveFolder,
 
   // contacts
@@ -149,6 +153,12 @@ const SectionFilterContent = ({
   currentClientView,
 
   getSelectedFolder,
+  selectedFolderId,
+
+  getFolderModel,
+  getContactsModel,
+  onCreateRoom,
+  onCreateAgent,
 
   filesStore,
   groupsStore,
@@ -162,12 +172,73 @@ const SectionFilterContent = ({
   const location = useLocation();
   const navigate = useNavigate();
 
+  // The "Forms" section reuses the Rooms list (same folder) but is scoped to
+  // Form Filling Rooms only, so the room-type filter is not offered there.
+  const isFormsSection = location.pathname.startsWith("/forms");
+
+  // Base path for room-list navigation (sort/search/filter). The "Forms"
+  // section keeps its own route instead of falling back to "rooms/shared".
+  const getRoomsListBasePath = React.useCallback(
+    (searchArea) => {
+      if (isFormsSection) return "forms";
+
+      return searchArea === RoomSearchArea.Active ||
+        searchArea === RoomSearchArea.Templates
+        ? "rooms/shared"
+        : "rooms/archived";
+    },
+    [isFormsSection],
+  );
+
   const isContactsPage =
     currentClientView === "users" || currentClientView === "groups";
   const isContactsPeoplePage = contactsTab === "people";
   const isContactsInsideGroupPage = contactsTab === "inside_group";
   const isContactsGroupsPage = contactsTab === "groups";
   const isContactsGuestsPage = contactsTab === "guests";
+
+  const { showMainButton, mainButtonProps } = React.useMemo(
+    () =>
+      getSectionCreateButton({
+        t,
+        isContactsPage,
+        isContactsGroupsPage,
+        isRoomsFolder,
+        isAIAgentsFolder,
+        isFormsSection,
+        selectedFolderId,
+        getFolderModel,
+        getContactsModel,
+        onCreateRoom,
+        onCreateAgent,
+        createGroup,
+      }),
+    [
+      t,
+      isContactsPage,
+      isContactsGroupsPage,
+      isRoomsFolder,
+      isAIAgentsFolder,
+      isFormsSection,
+      selectedFolderId,
+      getFolderModel,
+      getContactsModel,
+      onCreateRoom,
+      onCreateAgent,
+      createGroup,
+    ],
+  );
+
+  const isDesktopView = currentDeviceType === DeviceType.desktop;
+  const isCreateFabVisible = showMainButton && !isDesktopView;
+
+  React.useEffect(() => {
+    setMainButtonVisible(isCreateFabVisible);
+  }, [isCreateFabVisible, setMainButtonVisible]);
+
+  React.useEffect(() => {
+    return () => setMainButtonVisible(false);
+  }, [setMainButtonVisible]);
 
   // Check if any filter or search is active (excluding sorting and groupId)
   // Room grouping should be hidden when filters/search are active
@@ -286,11 +357,7 @@ const SectionFilterContent = ({
           newFilter.withoutTags = false;
         }
 
-        const path =
-          newFilter.searchArea === RoomSearchArea.Active ||
-          newFilter.searchArea === RoomSearchArea.Templates
-            ? "rooms/shared"
-            : "rooms/archived";
+        const path = getRoomsListBasePath(newFilter.searchArea);
         navigate(
           `${path}/filter?${newFilter.toUrlParams(userId)}&hash=${new Date().getTime()}`,
         );
@@ -404,11 +471,7 @@ const SectionFilterContent = ({
       const newFilter = RoomsFilter.clean();
       newFilter.searchArea = roomsFilter.searchArea;
 
-      const path =
-        roomsFilter.searchArea === RoomSearchArea.Active ||
-        roomsFilter.searchArea === RoomSearchArea.Templates
-          ? "rooms/shared"
-          : "rooms/archived";
+      const path = getRoomsListBasePath(roomsFilter.searchArea);
 
       navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
     } else if (isAIAgentsFolder) {
@@ -472,11 +535,7 @@ const SectionFilterContent = ({
         // Clear groupId when search is applied - grouping doesn't work with filters
         newFilter.groupId = null;
 
-        const path =
-          newFilter.searchArea === RoomSearchArea.Active ||
-          newFilter.searchArea === RoomSearchArea.Templates
-            ? "rooms/shared"
-            : "rooms/archived";
+        const path = getRoomsListBasePath(newFilter.searchArea);
 
         navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
       } else if (isAIAgentsFolder) {
@@ -536,11 +595,7 @@ const SectionFilterContent = ({
       newFilter.sortOrder = sortOrder;
 
       if (isRooms) {
-        const path =
-          newFilter.searchArea === RoomSearchArea.Active ||
-          newFilter.searchArea === RoomSearchArea.Templates
-            ? "rooms/shared"
-            : "rooms/archived";
+        const path = getRoomsListBasePath(newFilter.searchArea);
         setRoomsFilter(newFilter);
         navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
       } else if (isAIAgentsFolder) {
@@ -1107,6 +1162,12 @@ const SectionFilterContent = ({
       },
     ];
 
+    // Form Filling Rooms live in their own "Forms" section, so they are never
+    // offered as a room-type filter inside the "Rooms" section.
+    const roomTypeValues = RoomsTypeValues.filter(
+      (roomType) => roomType !== RoomsType.FormRoom,
+    );
+
     const typeOptions = isRooms
       ? [
           {
@@ -1116,7 +1177,7 @@ const SectionFilterContent = ({
             isHeader: true,
             isLast: isLastTypeOptionsRooms,
           },
-          ...RoomsTypeValues.map((roomType) => {
+          ...roomTypeValues.map((roomType) => {
             switch (roomType) {
               case RoomsType.FillingFormsRoom:
                 return {
@@ -1345,7 +1406,9 @@ const SectionFilterContent = ({
       filterOptions.push(...ownerOptions);
       filterOptions.push(...subjectOptions);
 
-      filterOptions.push(...typeOptions);
+      // The "Forms" section is already scoped to Form Filling Rooms — no
+      // room-type filter is shown there.
+      if (!isFormsSection) filterOptions.push(...typeOptions);
 
       if (tags?.length > 0) {
         const tagsOptions = tags.map((tag) => ({
@@ -1519,6 +1582,7 @@ const SectionFilterContent = ({
     t,
     isPersonalRoom,
     isRooms,
+    isFormsSection,
     isAIAgentsFolder,
     isContactsPage,
     isFavoritesFolder,
@@ -1717,11 +1781,7 @@ const SectionFilterContent = ({
 
         newFilter.page = 0;
 
-        const path =
-          newFilter.searchArea === RoomSearchArea.Active ||
-          newFilter.searchArea === RoomSearchArea.Templates
-            ? "rooms/shared"
-            : "rooms/archived";
+        const path = getRoomsListBasePath(newFilter.searchArea);
 
         navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
       } else if (isAIAgentsFolder) {
@@ -1821,11 +1881,7 @@ const SectionFilterContent = ({
         newFilter.searchArea = RoomSearchArea.Templates;
       }
 
-      const path =
-        newFilter.searchArea === RoomSearchArea.Active ||
-        newFilter.searchArea === RoomSearchArea.Templates
-          ? "rooms/shared"
-          : "rooms/archived";
+      const path = getRoomsListBasePath(newFilter.searchArea);
 
       navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
     } else if (isAIAgentsFolder) {
@@ -1853,14 +1909,14 @@ const SectionFilterContent = ({
     newFilter.page = 0;
     newFilter.groupId = groupId;
 
-    const path = "rooms/shared";
+    const path = getRoomsListBasePath(newFilter.searchArea);
 
     navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
   };
 
   if (showFilterLoader) return <FilterLoader />;
 
-  return (
+  const filterInput = (
     <FilterInput
       onFilter={onFilter}
       getFilterData={getFilterData}
@@ -1910,7 +1966,19 @@ const SectionFilterContent = ({
       isRoomsFolder={isRoomsFolder}
       organizeRoomsGrouping={organizeRoomsGrouping}
       isFilterOrSearchActive={isFilterOrSearchActive}
+      showMainButton={showMainButton && isDesktopView}
+      mainButtonProps={mainButtonProps}
     />
+  );
+
+  return (
+    <>
+      {filterInput}
+      <CreateButtonMobile
+        visible={isCreateFabVisible}
+        mainButtonProps={mainButtonProps}
+      />
+    </>
   );
 };
 
@@ -1931,6 +1999,7 @@ export default inject(
     indexingStore,
     selectedFolderStore,
     dialogsStore,
+    contextOptionsStore,
   }) => {
     const {
       filter,
@@ -1942,6 +2011,7 @@ export default inject(
       createThumbnails,
       setCurrentRoomsFilter,
       setMainButtonMobileVisible,
+      setMainButtonVisible,
       thirdPartyStore,
       clearSearch,
       setClearSearch,
@@ -1973,14 +2043,23 @@ export default inject(
     const { showStorageInfo, isDefaultRoomsQuotaSet } = currentQuotaStore;
 
     const { isIndexEditingMode } = indexingStore;
-    const { isIndexedFolder, getSelectedFolder } = selectedFolderStore;
+    const {
+      isIndexedFolder,
+      getSelectedFolder,
+      id: selectedFolderId,
+    } = selectedFolderStore;
+
+    const { getFolderModel, onCreateRoom, onCreateAgent } = contextOptionsStore;
 
     const {
       usersStore,
       groupsStore,
 
       viewAs: contactsViewAs,
+      contextOptionsStore: contactsContextOptionsStore,
     } = peopleStore;
+
+    const { getContactsModel } = contactsContextOptionsStore;
 
     const { groups, groupsFilter, setGroupsFilter } = groupsStore;
 
@@ -2007,6 +2086,12 @@ export default inject(
       isCollaborator: user?.isCollaborator,
       isVisitor: user?.isVisitor,
       getSelectedFolder,
+      selectedFolderId,
+
+      getFolderModel,
+      getContactsModel,
+      onCreateRoom,
+      onCreateAgent,
 
       filter,
       roomsFilter,
@@ -2043,6 +2128,7 @@ export default inject(
       setClearSearch,
 
       setMainButtonMobileVisible,
+      setMainButtonVisible,
 
       contactsViewAs,
       contactsTab,
@@ -2082,4 +2168,3 @@ export default inject(
     ])(observer(SectionFilterContent)),
   ),
 );
-

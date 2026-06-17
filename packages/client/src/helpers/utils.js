@@ -159,6 +159,12 @@ export const getCategoryUrl = (categoryType, folderId) => {
     case CategoryType.Shared:
       return "/rooms/shared/filter";
 
+    case CategoryType.Forms:
+      return "/forms/filter";
+
+    case CategoryType.Form:
+      return `/forms/${folderId}/filter`;
+
     case CategoryType.SharedRoom:
       return `/rooms/shared/${folderId}/filter`;
 

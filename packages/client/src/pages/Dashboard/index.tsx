@@ -26,15 +26,19 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { Navigate, useSearchParams } from "react-router";
+import { Navigate, useNavigate, useSearchParams } from "react-router";
 import { useTranslation, Trans } from "react-i18next";
 
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
+import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 
-import { useAppsCatalog, type AppId } from "SRC_DIR/helpers/apps-catalog";
+import CatalogRoomsIcon from "@docspace/ui-kit/assets/icons/16/catalog.rooms.react.svg";
+import CatalogFolderIcon from "@docspace/ui-kit/assets/icons/16/catalog.folder.react.svg";
+import AiAgentsIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
+
 import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
 
 import { ModuleCard, type ModuleItem } from "./sub-components/ModuleCard";
@@ -45,47 +49,33 @@ import { Header } from "./sub-components/Header";
 import { useUploadToMyDocuments } from "./hooks/useUploadToMyDocuments";
 import { useCreateActions } from "./hooks/useCreateActions";
 import { useMyFolderId } from "./hooks/useMyFolderId";
-import { useModuleLauncher } from "./hooks/useModuleLauncher";
 import styles from "./Dashboard.module.scss";
 
 interface DashboardProps {
   isGuest: boolean;
-  isAppEnabled: (id: string) => boolean;
-  activate: (id: string) => Promise<boolean>;
-  enable: (id: string, enabled: boolean) => Promise<unknown>;
-  ensureAppsLoaded: () => void;
 }
 
-const Dashboard = ({
-  isGuest,
-  isAppEnabled,
-  activate,
-  enable,
-  ensureAppsLoaded,
-}: DashboardProps) => {
+const Dashboard = ({ isGuest }: DashboardProps) => {
   const { t } = useTranslation(["Common", "OAuth"]);
   useDocumentTitle("Common:Overview");
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const myFolderId = useMyFolderId();
   const { openUploadDialog } = useUploadToMyDocuments(myFolderId);
   const createItems = useCreateActions(myFolderId);
-  const { launchApp, dialogs } = useModuleLauncher({
-    activate,
-    enable,
-    isAppEnabled,
-  });
-
-  const appsCatalog = useAppsCatalog();
 
   // The dashboard renders its own content (no SDK iframe). Tell the
   // persistent host to drop the previous app's frame so it doesn't linger
   // behind the dashboard.
   useSdkFrame({ appId: "dashboard", enabled: false });
 
+  // The dashboard has no async content to load, so finish the sidebar's
+  // Overview item progress animation immediately (other pages dispatch this
+  // once their content is ready).
   React.useEffect(() => {
-    ensureAppsLoaded();
-  }, [ensureAppsLoaded]);
+    window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
+  }, []);
 
   const design = searchParams.get("design");
   if (design === "old") {
@@ -97,17 +87,32 @@ const Dashboard = ({
     return <Navigate to="/dashboard" replace />;
   }
 
-  const moduleItems: ModuleItem[] = appsCatalog
-    .filter((app) => !(isGuest && app.id === "ai-files"))
-    .map((app) => ({
-      id: app.id,
-      icon: app.icon,
-      title: app.title,
-      description: app.description,
-      installed: app.alwaysOn ? true : isAppEnabled(app.id),
-      href: app.href,
-    }))
-    .filter((mod) => mod.installed);
+  const moduleItems: ModuleItem[] = [
+    {
+      id: "ai-files",
+      icon: <CatalogFolderIcon />,
+      title: t("Common:DashboardFilesTitle"),
+      description: t("Common:DashboardFilesDescription"),
+      installed: !isGuest,
+      href: "/rooms/personal/filter",
+    },
+    {
+      id: "ai-rooms",
+      icon: <CatalogRoomsIcon />,
+      title: t("Common:DashboardRoomsTitle"),
+      description: t("Common:DashboardRoomsDescription"),
+      installed: true,
+      href: "/rooms/shared/filter",
+    },
+    {
+      id: "ai-agents",
+      icon: <AiAgentsIcon />,
+      title: t("Common:DashboardAIChatAgentsTitle"),
+      description: t("Common:DashboardAIChatAgentsDescription"),
+      installed: true,
+      href: "/rooms/shared/filter?type=AIAgents",
+    },
+  ].filter((mod) => mod.installed);
 
   return (
     <div className={styles.dashboard}>
@@ -147,7 +152,7 @@ const Dashboard = ({
                 <ModuleCard
                   key={mod.id}
                   mod={mod}
-                  onClick={() => launchApp(mod.id as AppId, mod.href)}
+                  onClick={() => mod.href && navigate(mod.href)}
                 />
               ))}
             </div>
@@ -158,17 +163,12 @@ const Dashboard = ({
         <DevToolsCard />
       </div>
 
-      {dialogs}
     </div>
   );
 };
 
-const DashboardConnected = inject<TStore>(({ userStore, appsStore }) => ({
+const DashboardConnected = inject<TStore>(({ userStore }) => ({
   isGuest: userStore.user?.isVisitor ?? false,
-  isAppEnabled: appsStore.isEnabled,
-  activate: appsStore.activate,
-  enable: appsStore.enable,
-  ensureAppsLoaded: appsStore.ensureLoaded,
 }))(observer(Dashboard));
 
 export { DashboardConnected as Dashboard };

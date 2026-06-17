@@ -281,7 +281,11 @@ export const useOptions = (
 
     const event = new CustomEvent(Events.ROOM_CREATE, {
       detail: { parentId: selectedFolder?.id, context: "empty_state" },
-    });
+    }) as CustomEvent & { payload?: { startRoomType: RoomsType } };
+    // In the "Forms" section only Form Filling Rooms can be created.
+    if (window.location.pathname.startsWith("/forms")) {
+      event.payload = { startRoomType: RoomsType.FormRoom };
+    }
     window.dispatchEvent(event);
   }, [isWarningRoomsDialog, setQuotaWarningDialogVisible, selectedFolder?.id]);
 

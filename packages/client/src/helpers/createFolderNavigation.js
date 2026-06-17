@@ -39,9 +39,20 @@ export const createFolderNavigation = async (
     ? CategoryType.Chat
     : CategoryType.AIAgent;
 
-  const path = isAiRoom
-    ? getCategoryUrl(aiAgentStartCategory, id)
-    : getCategoryUrl(getCategoryTypeByFolderType(rootFolderType, id), id);
+  // A Form Filling Room opened from the Forms section stays under `/forms/:room`
+  // so breadcrumbs and Back resolve to Forms, not the Rooms list.
+  const isFormRoom = itemRoomType === RoomsType.FormRoom;
+  const isFormsContext =
+    categoryType === CategoryType.Forms || categoryType === CategoryType.Form;
+
+  let path;
+  if (isAiRoom) {
+    path = getCategoryUrl(aiAgentStartCategory, id);
+  } else if (isFormRoom && isFormsContext) {
+    path = getCategoryUrl(CategoryType.Form, id);
+  } else {
+    path = getCategoryUrl(getCategoryTypeByFolderType(rootFolderType, id), id);
+  }
   const filter = FilesFilter.getDefault();
   const filterObj = FilesFilter.getFilter(window.location);
 

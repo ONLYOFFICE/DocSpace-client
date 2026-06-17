@@ -34,6 +34,7 @@
  */
 
 import React, { useCallback } from "react";
+import classnames from "classnames";
 import { useLocation, Outlet, Navigate } from "react-router";
 import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import { isMobile } from "react-device-detect";
@@ -47,10 +48,14 @@ import {
 } from "@docspace/shared/api/rooms";
 import { createFolder } from "@docspace/shared/api/files";
 import Section from "@docspace/ui-kit/components/section";
+import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { getCategoryType } from "@docspace/shared/utils/common";
+import { CategoryType } from "@docspace/shared/constants";
 
 import SectionWrapper from "SRC_DIR/components/Section";
+import ChooseFormSetBanner from "SRC_DIR/components/ChooseFormSetBanner";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 
@@ -74,7 +79,10 @@ import {
 import MediaViewer from "./MediaViewer";
 
 import { useSDK, useOperations, usePluginOperations } from "./Hooks";
+import { useQuickActions } from "./Hooks/useQuickActions";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
+
+import styles from "./Home.module.scss";
 
 const PureHome = (props) => {
   const {
@@ -186,6 +194,19 @@ const PureHome = (props) => {
     removePluginFloatingOperations,
     dispatchMessage,
     getPluginIconUrl,
+
+    currentFolderId,
+    canCreateFiles,
+    canCreateRooms,
+    isDocumentsFolder,
+    isRoom,
+    isRoomsFolder,
+    isPrivacyFolder,
+    isArchiveFolder,
+    isTemplatesFolder,
+    isFavoritesFolder,
+    isRecentFolder,
+    isAIAgentsFolder,
   } = props;
 
   const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
@@ -215,6 +236,41 @@ const PureHome = (props) => {
   const isContactsEmptyView =
     currentClientView === "groups" ? isEmptyGroups : isUsersEmptyView;
   const isChat = currentClientView === "chat";
+
+  // Quick-actions banner (ported from the SDK): create tiles above the
+  // files/rooms list. The hook resolves which tile set applies (or none) from
+  // the current section + create permission.
+  const quickActions = useQuickActions({
+    currentFolderId,
+    canCreateFiles,
+    canCreateRooms,
+    userId,
+    isDocumentsFolder,
+    isRoom,
+    isRoomsFolder,
+    isPrivacyFolder,
+    isArchiveFolder,
+    isRecycleBinFolder,
+    isTemplatesFolder,
+    isFavoritesFolder,
+    isRecentFolder,
+    isAIAgentsFolder,
+    isContactsPage,
+    isProfile,
+    isSettingsPage,
+  });
+  const showQuickActions = quickActions.show && !isChat;
+
+  // The "Forms" section shows its own "Choose Form Set" plate instead of the
+  // quick-actions tiles. Dismissal is remembered across sessions.
+  const isFormsSection = getCategoryType(location) === CategoryType.Forms;
+  const [isFormSetBannerClosed, setIsFormSetBannerClosed] = React.useState(
+    () => localStorage.getItem("form-set-banner-closed") === "true",
+  );
+  const closeFormSetBanner = useCallback(() => {
+    localStorage.setItem("form-set-banner-closed", "true");
+    setIsFormSetBannerClosed(true);
+  }, []);
 
   const onDrop = useEventCallback((f, uploadToFolder) => {
     if (isContactsPage || isProfile) return;
@@ -502,7 +558,21 @@ const PureHome = (props) => {
         </>
       )}
       <MediaViewer />
-      <SectionWrapper {...sectionProps} withoutFooter={isChat}>
+      {/* When the quick-actions banner shows, switch the Section to the SDK's
+          stickyTableHeader mode so the banner renders above the (now in-body,
+          sticky) filter. The host is always `display: contents` (no layout
+          impact); the geometry CSS vars are layered on only when active. */}
+      <div
+        className={classnames(styles.sectionVarsHost, {
+          [styles.stickyBannerVars]: showQuickActions,
+        })}
+      >
+      <SectionWrapper
+        {...sectionProps}
+        withoutFooter={isChat}
+        scrollableBanner={showQuickActions}
+        stickyTableHeader={showQuickActions}
+      >
         {!isErrorAvailable ||
         isContactsPage ||
         isProfile ||
@@ -533,6 +603,21 @@ const PureHome = (props) => {
           </Section.SectionFilter>
         ) : null}
 
+        {isFormsSection ? (
+          !isFormSetBannerClosed ? (
+            <Section.SectionBanner>
+              <ChooseFormSetBanner onClose={closeFormSetBanner} />
+            </Section.SectionBanner>
+          ) : null
+        ) : showQuickActions ? (
+          <Section.SectionBanner>
+            <QuickActions
+              items={quickActions.items}
+              className={styles.quickActions}
+            />
+          </Section.SectionBanner>
+        ) : null}
+
         <Section.SectionBody>
           <Outlet />
         </Section.SectionBody>
@@ -544,6 +629,7 @@ const PureHome = (props) => {
           <InfoPanelBodyContent />
         </Section.InfoPanelBody>
       </SectionWrapper>
+      </div>
       <InfoPanelActions />
     </>
   );
@@ -560,7 +646,9 @@ const PASS_THROUGH_PREFIXES = [
 ];
 
 const HomeWithGuard = (props) => {
-  const isLegacyMode = localStorage.getItem("useDocSpace") === "old";
+  // Always treat as legacy mode — the new-design article is shown via
+  // ClientArticleSidebar regardless of this flag.
+  const isLegacyMode = true;
   const { pathname } = useLocation();
 
   if (
@@ -674,6 +762,14 @@ export const Component = inject(
       isRoomsFolderRoot,
       isTemplatesFolder,
       isRoot,
+
+      // Quick-actions banner section classification.
+      isDocumentsFolder,
+      isRoom,
+      isPrivacyFolder,
+      isFavoritesFolder,
+      isRecentFolder,
+      isAIAgentsFolder,
     } = treeFoldersStore;
 
     const {
@@ -890,6 +986,19 @@ export const Component = inject(
       clearDropPreviewLocation,
       canCreateSecurity,
       startDropPreview,
+
+      // Quick-actions banner inputs. (isRoomsFolder / isArchiveFolder /
+      // isRecycleBinFolder are already returned above.)
+      currentFolderId: selectedFolderStore.id,
+      canCreateFiles: folderSecurity?.Create,
+      canCreateRooms: isAdmin || isRoomAdmin,
+      isDocumentsFolder,
+      isRoom,
+      isPrivacyFolder,
+      isTemplatesFolder,
+      isFavoritesFolder,
+      isRecentFolder,
+      isAIAgentsFolder,
 
       isErrorAIAgentNotAvailable,
       currentTab: aiRoomStore.currentTab,

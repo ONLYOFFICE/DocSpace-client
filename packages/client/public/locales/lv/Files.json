@@ -104,7 +104,6 @@
   "RoomAvailableViaSharedLink": "Telpa ir pieejama, izmantojot koplietošanas saiti",
   "RoomCreated": "Telpa ir izveidota",
   "RoomEmptyContainerDescription": "Lūdzu, izveidojiet pirmo telpu.",
-  "RoomFilesLifetime": "Šajā telpā faila kalpošanas laiks {{days}} {{period}} ir iestatīts uz",
   "RoomTagsLabel": "Telpu birkas",
   "RoomTagsTooltip": "Birkas tiks piemērotas telpai, kas tiks izveidota, pamatojoties uz šo veidni.",
   "RoomTemplate": "Telpas veidne",

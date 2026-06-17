@@ -167,6 +167,11 @@
             "tooltip": "🛠️ Start the \"frontend deploy\" task"
           },
           {
+            "label": "Deploy run",
+            "task": "Frontend | deploy run",
+            "tooltip": "🚀 Run the deployed build from ../publish/web — Next.js apps (login 5011, editor 5013, management 5015, sdk 5099) via node server.js + client via npx serve on 5001"
+          },
+          {
             "label": "Start storybook",
             "task": "Frontend | storybook",
             "tooltip": "🛠️ Start the \"frontend start storybook\" task"

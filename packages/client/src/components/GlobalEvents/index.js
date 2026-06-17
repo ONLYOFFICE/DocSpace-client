@@ -191,6 +191,9 @@ const GlobalEvents = ({
     );
     setCreateRoomDialogProps({
       ...startRoomParams,
+      // CreateRoomEvent reads `startRoomType` (not `type`) to open the dialog
+      // straight on a preset room type and lock the chooser.
+      startRoomType: e?.payload?.startRoomType,
       item: e.item,
       context: e.context || e.detail?.context || "",
       visible: true,

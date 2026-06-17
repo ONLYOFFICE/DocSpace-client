@@ -54,6 +54,7 @@ import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 import styles from "./BuyPlanPanel.module.scss";
 
 const MIN_USERS = 1;
+const DEVPACK_MIN_USERS = 10;
 const MAX_USERS = 999;
 
 interface BuyPlanPanelProps {
@@ -81,6 +82,16 @@ const BuyPlanPanel = ({
   const { wallet, plan } = info;
   const { currency } = wallet;
 
+  const minUsers = devPack ? DEVPACK_MIN_USERS : MIN_USERS;
+
+  const onToggleDevPack = () => {
+    setDevPack((prev) => {
+      const next = !prev;
+      if (next && users < DEVPACK_MIN_USERS) setUsers(DEVPACK_MIN_USERS);
+      return next;
+    });
+  };
+
   const devPackPerUser = devPack ? plan.devPackPrice : 0;
   const totalMonthly = users * (plan.pricePerUser + devPackPerUser);
   const remainingCredits = wallet.availableCredits - totalMonthly;
@@ -91,8 +102,12 @@ const BuyPlanPanel = ({
   const formatCurrency = (amount: number) => `${currency}${amount.toFixed(2)}`;
 
   const onBuy = async () => {
-    await buyPlan?.({ users, devPack });
-    toastr.success(t("DocsConnect:PlanPurchased"));
+    try {
+      await buyPlan?.({ users, devPack });
+      toastr.success(t("DocsConnect:PlanPurchased"));
+    } catch (error) {
+      toastr.error(error as Error);
+    }
   };
 
   const summaryRow = (label: string, value: string) => (
@@ -167,7 +182,7 @@ const BuyPlanPanel = ({
             <QuantityPicker
               className={styles.quantityPicker}
               value={users}
-              minValue={MIN_USERS}
+              minValue={minUsers}
               maxValue={MAX_USERS}
               step={1}
               showSlider
@@ -202,7 +217,7 @@ const BuyPlanPanel = ({
               <ToggleButton
                 className={styles.toggleButton}
                 isChecked={devPack}
-                onChange={() => setDevPack((prev) => !prev)}
+                onChange={onToggleDevPack}
               />
             </div>
             <hr className={styles.devPackDivider} />

@@ -41,6 +41,7 @@ import {
   startDocsConnectTrial,
   buyDocsConnectPlan,
   buyDocsConnectTenant,
+  getDocsConnectReportUrl,
 } from "@docspace/shared/api/docs-connect";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -124,6 +125,7 @@ class DocsConnectStore {
       runInAction(() => {
         this.error = error as Error;
       });
+      throw error;
     }
   };
 
@@ -138,6 +140,10 @@ class DocsConnectStore {
         this.error = error as Error;
       });
     }
+  };
+
+  downloadReport = () => {
+    window.open(getDocsConnectReportUrl(), "_self");
   };
 
   copyToClipboard = (value: string, t: TTranslation) => {

@@ -63,3 +63,7 @@ export const setAuthToken = (token: string | null) => {
 export const getAuthToken = (): string | null => {
   return client.authToken;
 };
+
+export const getApiBaseUrl = (): string => {
+  return client.client?.defaults.baseURL ?? "";
+};

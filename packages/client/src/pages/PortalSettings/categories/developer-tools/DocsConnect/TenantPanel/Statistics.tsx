@@ -44,7 +44,6 @@ import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
 import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
-import { toastr } from "@docspace/ui-kit/components/toast";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
@@ -59,32 +58,21 @@ import type { TTranslation } from "@docspace/shared/types";
 
 import styles from "./TenantPanel.module.scss";
 
-// Capacity health bands based on the share of remaining capacity:
-// green by default, yellow when running low, red when nearly exhausted.
-const WARNING_REMAINING_RATIO = 0.25; // yellow at 25% or less remaining
-const LOW_REMAINING_RATIO = 0.1; // red at 10% or less remaining
-
-type UsageLevel = "positive" | "warning" | "negative";
+type UsageLevel = "positive" | "negative";
 
 const usageLevelClass: Record<UsageLevel, string> = {
   positive: styles.usagePositive,
-  warning: styles.usageWarning,
   negative: styles.usageNegative,
 };
 
-const getUsageLevel = (usage: TDocsConnectUsage): UsageLevel => {
-  if (usage.limit <= 0) return "positive";
-
-  const remainingRatio = usage.remaining / usage.limit;
-  if (remainingRatio <= LOW_REMAINING_RATIO) return "negative";
-  if (remainingRatio <= WARNING_REMAINING_RATIO) return "warning";
-  return "positive";
-};
+const getUsageLevel = (usage: TDocsConnectUsage): UsageLevel =>
+  usage.criticalRemaining ? "negative" : "positive";
 
 interface StatisticsProps {
   info?: TDocsConnectInfo;
   openBuyPlan?: (mode: "trial" | "edit") => void;
   copyToClipboard?: (value: string, t: TTranslation) => void;
+  downloadReport?: () => void;
 }
 
 const InfoField = ({
@@ -206,6 +194,7 @@ const Statistics = ({
   info,
   openBuyPlan,
   copyToClipboard,
+  downloadReport,
 }: StatisticsProps) => {
   const { t } = useTranslation(["DocsConnect", "Common"]);
 
@@ -219,11 +208,6 @@ const Statistics = ({
   const showIntegrations = true;
 
   const onCopy = (value: string) => copyToClipboard?.(value, t);
-
-  const onDownloadReport = () => {
-    // TODO(docs-connect): wire to the real report download endpoint.
-    toastr.info(t("DocsConnect:ReportInProgress"));
-  };
 
   return (
     <div className={styles.statistics}>
@@ -424,7 +408,7 @@ const Statistics = ({
           className={styles.downloadButton}
           size={ButtonSize.normal}
           label={t("DocsConnect:DownloadReport")}
-          onClick={onDownloadReport}
+          onClick={downloadReport}
         />
       </div>
 
@@ -477,5 +461,5 @@ export default inject(({ docsConnectStore }: TStore) => ({
   info: docsConnectStore.info,
   openBuyPlan: docsConnectStore.openBuyPlan,
   copyToClipboard: docsConnectStore.copyToClipboard,
+  downloadReport: docsConnectStore.downloadReport,
 }))(observer(Statistics));
-

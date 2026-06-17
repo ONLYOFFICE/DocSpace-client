@@ -47,6 +47,12 @@ const ITEMS = [
     translationKey: "Common:Overview" as const,
   },
   {
+    id: "devtools-docs-connect",
+    path: "/developer-tools/docs-connect",
+    pageType: PageType.devToolsDocsConnect,
+    translationKey: "DocsConnect:DocsConnect" as const,
+  },
+  {
     id: "devtools-javascript-sdk",
     path: "/developer-tools/javascript-sdk",
     pageType: PageType.devToolsJavascriptSdk,
@@ -82,7 +88,14 @@ const ITEMS = [
 const DeveloperToolsSidebar = ({
   identityServerEnabled,
 }: DeveloperToolsSidebarProps) => {
-  const { t } = useTranslation(["Common", "Settings", "WebPlugins", "Webhooks", "OAuth"]);
+  const { t } = useTranslation([
+    "Common",
+    "Settings",
+    "WebPlugins",
+    "Webhooks",
+    "OAuth",
+    "DocsConnect",
+  ]);
   const location = useLocation();
   const navigate = useNavigate();
 

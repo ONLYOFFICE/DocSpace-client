@@ -44,7 +44,6 @@ import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
 import styles from "./PromoPage.module.scss";
 
-// Placeholder URLs — real links are TBD, see docs-connect/BACKEND_API.en.md (open items).
 const API_DOCS_URL = "https://api.onlyoffice.com/";
 const CONNECTORS_URL = "#";
 const EXAMPLES_URL = "#";

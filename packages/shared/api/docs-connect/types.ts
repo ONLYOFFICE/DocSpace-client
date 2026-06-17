@@ -63,6 +63,7 @@ export type TDocsConnectUsage = {
   external: number;
   remaining: number;
   limit: number;
+  criticalRemaining: boolean;
 };
 
 export type TDocsConnectWallet = {
@@ -79,8 +80,10 @@ export type TDocsConnectConnector = {
 export type TDocsConnectInfo = {
   status: TDocsConnectStatus;
   address: string;
+  tenantName: string;
   jwtHeader: string;
   secretKey: string;
+  isAnonymousSupport: boolean;
   build: TDocsConnectBuild;
   trial: TDocsConnectTrial;
   plan: TDocsConnectPlan;
@@ -90,4 +93,16 @@ export type TDocsConnectInfo = {
   };
   wallet: TDocsConnectWallet;
   connectors: TDocsConnectConnector[];
+};
+
+// Body for PUT /settings/docscloud/tenant/config (shape confirmed by backend).
+export type TDocsConnectConfigUpdate = {
+  tenantName: string;
+  security: {
+    secret: string;
+    header: string;
+  };
+  server: {
+    isAnonymousSupport: boolean;
+  };
 };

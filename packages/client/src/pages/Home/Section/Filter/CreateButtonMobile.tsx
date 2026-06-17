@@ -72,11 +72,12 @@ const splitItems = (items: ModelItem[]) => {
   const actionOptions = withoutSeparators(
     firstUploadIndex === -1 ? items : items.slice(0, firstUploadIndex),
   );
-  const buttonOptions = (
-    firstUploadIndex === -1
-      ? []
-      : withoutSeparators(items.slice(firstUploadIndex))
-  ) as unknown as ButtonOption[];
+  const buttonOptions = (firstUploadIndex === -1
+    ? []
+    : withoutSeparators(
+        items.slice(firstUploadIndex),
+      )) as unknown as ButtonOption[];
+
   return { actionOptions, buttonOptions, hasUpload: buttonOptions.length > 0 };
 };
 
@@ -85,6 +86,8 @@ type CreateButtonMobileProps = {
   mainButtonProps?: MainButtonProps;
   startUpload?: (files: File[], folderId: null, t: TTranslation) => void;
   createFoldersTree?: (t: TTranslation, files: File[]) => Promise<File[]>;
+  isAIRoom?: boolean;
+  extsFilesVectorized?: string[];
 };
 
 const CreateButtonMobile = ({
@@ -92,6 +95,8 @@ const CreateButtonMobile = ({
   mainButtonProps,
   startUpload,
   createFoldersTree,
+  isAIRoom,
+  extsFilesVectorized,
 }: CreateButtonMobileProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -136,7 +141,7 @@ const CreateButtonMobile = ({
           withMenu={isDropdown}
           withoutButton={!hasUpload}
           actionOptions={actionOptions as unknown as ActionOption[]}
-          buttonOptions={buttonOptions}
+          buttonOptions={buttonOptions.length > 0 ? buttonOptions : undefined}
           onClick={isDropdown ? undefined : onAction}
         />
       ) : null}
@@ -150,6 +155,9 @@ const CreateButtonMobile = ({
             style={{ display: "none" }}
             onChange={onFileChange}
             onClick={onInputClick}
+            {...(isAIRoom && extsFilesVectorized
+              ? { accept: extsFilesVectorized.join(",") }
+              : {})}
           />
           <input
             id="customPDFInput"
@@ -176,8 +184,17 @@ const CreateButtonMobile = ({
   );
 };
 
-export default inject(({ uploadDataStore, filesActionsStore }: TStore) => ({
-  startUpload: uploadDataStore.startUpload,
-  createFoldersTree: filesActionsStore.createFoldersTree,
-}))(observer(CreateButtonMobile));
+export default inject(
+  ({
+    uploadDataStore,
+    filesActionsStore,
+    selectedFolderStore,
+    filesSettingsStore,
+  }: TStore) => ({
+    startUpload: uploadDataStore.startUpload,
+    createFoldersTree: filesActionsStore.createFoldersTree,
+    isAIRoom: selectedFolderStore.isAIRoom,
+    extsFilesVectorized: filesSettingsStore.extsFilesVectorized,
+  }),
+)(observer(CreateButtonMobile));
 

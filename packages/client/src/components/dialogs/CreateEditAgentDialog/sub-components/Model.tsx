@@ -68,6 +68,7 @@ type ModelSettingsProps = {
   isAdmin?: boolean;
   openedFromChat?: boolean;
   setAgentParams: (value: Partial<TAgentParams>) => void;
+  isSeveralProviders?: boolean;
 };
 
 const ModelSettings = ({
@@ -77,6 +78,7 @@ const ModelSettings = ({
   isAdmin,
   openedFromChat,
   setAgentParams,
+  isSeveralProviders = false,
 }: ModelSettingsProps) => {
   const { t } = useTranslation(["AIRoom", "Common"]);
   const navigate = useNavigate();
@@ -436,12 +438,20 @@ const ModelSettings = ({
     !isProvidersLoading &&
     !isModelLoading;
 
+  const modelTitle = isSeveralProviders
+    ? t("AIProviderAndModel", { aiProvider: t("Common:AIProvider") })
+    : t("AIModelTitle");
+
+  const modelDescription = isSeveralProviders
+    ? t("ModelDescription", { aiProvider: t("Common:AIProvider") })
+    : t("AIModelDescription");
+
   return (
     <StyledParam increaseGap>
       <div className=" set_room_params-info">
         <div>
           <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
-            {t("AIModel")}
+            {modelTitle}
           </Text>
           <Text
             fontSize="12px"
@@ -450,7 +460,7 @@ const ModelSettings = ({
             className="set_room_params-info-description"
             noSelect
           >
-            {t("AIModelDescription")}
+            {modelDescription}
           </Text>
           <Text
             fontSize="12px"
@@ -486,30 +496,30 @@ const ModelSettings = ({
 
         {isProvidersLoading ? (
           <RectangleSkeleton width="100%" height="32px" />
-        ) : null
-        // <FieldContainer
-        //   isVertical
-        //   hasError={!!error}
-        //   errorMessage={error || ""}
-        //   errorMessageWidth="100%"
-        //   removeMargin
-        // >
-        //   <ComboBox
-        //     options={providerOptions}
-        //     selectedOption={providerSelectedOption}
-        //     onSelect={onSelectProvider}
-        //     scaled
-        //     scaledOptions
-        //     dropDownMaxHeight={providerOptions.length > 7 ? 300 : undefined}
-        //     noBorder={false}
-        //     className={classNames("ai-combobox provider-combobox", {
-        //       "has-error": !!error,
-        //     })}
-        //     displaySelectedOption
-        //     dataTestId="create_agent_provider_combobox"
-        //   />
-        // </FieldContainer>
-        }
+        ) : isSeveralProviders ? (
+          <FieldContainer
+            isVertical
+            hasError={!!error}
+            errorMessage={error || ""}
+            errorMessageWidth="100%"
+            removeMargin
+          >
+            <ComboBox
+              options={providerOptions}
+              selectedOption={providerSelectedOption}
+              onSelect={onSelectProvider}
+              scaled
+              scaledOptions
+              dropDownMaxHeight={providerOptions.length > 7 ? 300 : undefined}
+              noBorder={false}
+              className={classNames("ai-combobox provider-combobox", {
+                "has-error": !!error,
+              })}
+              displaySelectedOption
+              dataTestId="create_agent_provider_combobox"
+            />
+          </FieldContainer>
+        ) : null}
         <FieldContainer
           isVertical
           hasError={!!error}

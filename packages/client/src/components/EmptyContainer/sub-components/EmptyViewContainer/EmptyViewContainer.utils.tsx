@@ -211,7 +211,7 @@ const getAIAgentsAIDisabledTitle = (
       }),
     )
     .with([false, true], () =>
-      t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminTitle"),
+      t("EmptyView:EmptyAIAgentsNotActiveYetTitle"),
     )
     .otherwise(() =>
       t("EmptyView:EmptyAIAgentsAIDisabledUserTitle", {
@@ -232,12 +232,13 @@ const getAIAgentsAIDisabledDescription = (
         aiChats: t("Common:AIChats"),
       }),
     )
-    .with([false, true], () =>
-      t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminDescription", {
-        productName: getBrandName("ProductName"),
-        aiAgents: t("Common:AIAgents"),
-      }),
-    )
+    .with([false, true], () => (
+      <>
+        <span>{t("EmptyView:EmptyAIAgentsNotActiveYetDescription")}</span>
+        <br />
+        <span>{t("EmptyView:EmptyAIAgentsNotActiveYetDescriptionLine2")}</span>
+      </>
+    ))
     .otherwise(() =>
       t("EmptyView:EmptyAIAgentsAIDisabledDescription", {
         productName: getBrandName("ProductName"),
@@ -275,7 +276,7 @@ export const getRootDescription = (
       () =>
         aiReady
           ? getAIAgentsAIEnabledDescription(t, access)
-          : getAIAgentsAIDisabledDescription(t, true, isPortalAdmin), // NOTE: AI SaaS same as AI Standalone in v.4.0
+          : getAIAgentsAIDisabledDescription(t, standalone, isPortalAdmin),
     )
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
       t("Files:RoomEmptyContainerDescription"),
@@ -403,7 +404,7 @@ export const getRootTitle = (
       () =>
         aiReady
           ? getAIAgentsAIEnabledTitle(t, access)
-          : getAIAgentsAIDisabledTitle(t, true, isPortalAdmin), // NOTE: AI SaaS same as AI Standalone in v.4.0
+          : getAIAgentsAIDisabledTitle(t, standalone, isPortalAdmin),
     )
     .with(
       [

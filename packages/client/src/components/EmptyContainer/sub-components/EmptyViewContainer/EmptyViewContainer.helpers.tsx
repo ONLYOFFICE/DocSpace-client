@@ -270,6 +270,8 @@ export const getOptions = (
   aiReady: boolean = false,
   standalone: boolean = false,
   isPortalAdmin: boolean = false,
+  isCardLinkedToPortal: boolean = false,
+  isPayer?: boolean,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -424,6 +426,28 @@ export const getOptions = (
     onClick: actions.onGoToAIProviderSettings,
   } as const;
 
+  const activateOrTopUpAI = isCardLinkedToPortal
+    ? ({
+        type: "button",
+        title: t("Common:Activate"),
+        key: "activate-ai",
+        onClick: actions.onActivateAI,
+      } as const)
+    : ({
+        type: "button",
+        title: t("Common:TopUpAndActivate"),
+        key: "top-up-and-activate-ai",
+        onClick: actions.onTopUpAndActivateAI,
+      } as const);
+
+  const aiBenefits = {
+    type: "button",
+    title: t("Common:Benefits"),
+    key: "ai-benefits",
+    primary: false,
+    onClick: actions.onShowAIBenefits,
+  } as const;
+
   const uploadFromDeviceAnyFile = isMobile
     ? createUploadFromDeviceOption(
         t("EmptyView:UploadDeviceOptionTitle"),
@@ -508,15 +532,13 @@ export const getOptions = (
   if (isRootEmptyPage) {
     return match([rootFolderType, access, isVisitor])
       .returnType<EmptyViewOptionsType>()
-      .with([FolderType.AIAgents, P._, P._], () =>
-        match([aiReady, standalone, isPortalAdmin])
-          .with([true, P._, P.when(() => isAdmin(access))], () => [
-            createAIAgent,
-          ])
-          .with([false, P._, true], () => [goToAIProviderSettings]) // NOTE: AI SaaS same as AI Standalone in v.4.0
-          // .with([false, false, true], () => [goToServices])
-          .otherwise(() => []),
-      )
+      .with([FolderType.AIAgents, P._, P._], () => {
+        if (aiReady) return isPortalAdmin ? [createAIAgent] : [];
+        if (!isPortalAdmin) return [];
+        if (standalone) return [goToAIProviderSettings];
+        if (isCardLinkedToPortal && !isPayer) return [];
+        return [activateOrTopUpAI, aiBenefits];
+      })
       .with([FolderType.Rooms, ShareAccessRights.None, P._], () => [
         createRoom,
         inviteRootRoom,

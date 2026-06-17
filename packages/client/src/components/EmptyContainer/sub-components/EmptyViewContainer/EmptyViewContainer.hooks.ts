@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useMemo, useCallback } from "react";
+import { useMemo, useCallback, useState } from "react";
 import { useNavigate, LinkProps } from "react-router";
 import { isMobile } from "react-device-detect";
 
@@ -87,6 +87,7 @@ export const useEmptyView = (
     isPortalAdmin,
     aiReady,
     standalone,
+    isCardLinkedToPortal,
   }: EmptyViewContainerProps,
 
   t: TTranslation,
@@ -165,6 +166,9 @@ export const useEmptyView = (
     isAIRoom,
     isKnowledgeTab,
     isResultsTab,
+    aiReady,
+    standalone,
+    isPortalAdmin,
   ]);
 
   return emptyViewOptions;
@@ -207,6 +211,12 @@ export const useOptions = (
     aiReady,
     standalone,
     isPortalAdmin,
+    isCardLinkedToPortal,
+    isPayer,
+    enableAIService,
+    getAIConfig,
+    refreshCurrentFolder,
+    refreshPaymentInfo,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -245,6 +255,53 @@ export const useOptions = (
   const onGoToAIProviderSettings = useCallback(() => {
     return navigate("/portal-settings/ai-settings/providers");
   }, []);
+
+  const [aiFeaturesDialogVisible, setAiFeaturesDialogVisible] = useState(false);
+  const [simpleTopUpDialogVisible, setSimpleTopUpDialogVisible] = useState(false);
+
+  const onTopUpAndActivateAI = useCallback(
+    () => setSimpleTopUpDialogVisible(true),
+    [],
+  );
+
+  const onAIActivated = useCallback(async () => {
+    await Promise.all([
+      getAIConfig?.(),
+      refreshCurrentFolder?.(),
+      refreshPaymentInfo?.(),
+    ]);
+  }, [getAIConfig, refreshCurrentFolder, refreshPaymentInfo]);
+
+  const onActivateAI = useCallback(async () => {
+    await enableAIService?.(onAIActivated);
+    const event = new CustomEvent(Events.AGENT_CREATE, {
+      detail: { parentId: selectedFolder?.id, context: "empty_state" },
+    });
+    window.dispatchEvent(event);
+  }, [enableAIService, onAIActivated, selectedFolder?.id]);
+
+  const onShowAIBenefits = useCallback(
+    () => setAiFeaturesDialogVisible(true),
+    [],
+  );
+
+  const onCloseAIFeaturesDialog = useCallback(
+    () => setAiFeaturesDialogVisible(false),
+    [],
+  );
+
+  const onDialogActivate = useCallback(async () => {
+    setAiFeaturesDialogVisible(false);
+    if (isCardLinkedToPortal) {
+      await enableAIService?.(onAIActivated);
+      const event = new CustomEvent(Events.AGENT_CREATE, {
+        detail: { parentId: selectedFolder?.id, context: "empty_state" },
+      });
+      window.dispatchEvent(event);
+    } else {
+      setSimpleTopUpDialogVisible(true);
+    }
+  }, [isCardLinkedToPortal, enableAIService, onAIActivated, selectedFolder?.id]);
 
   const onGoToPersonal = useCallback((): LinkProps => {
     const newFilter = FilesFilter.getDefault();
@@ -386,6 +443,9 @@ export const useOptions = (
           onCreateAIAgent,
           onGoToServices,
           onGoToAIProviderSettings,
+          onTopUpAndActivateAI,
+          onActivateAI,
+          onShowAIBenefits,
         },
         logoText,
         isVisitor,
@@ -396,6 +456,8 @@ export const useOptions = (
         aiReady,
         standalone,
         isPortalAdmin,
+        isCardLinkedToPortal,
+        isPayer,
       ),
     [
       type,
@@ -427,9 +489,27 @@ export const useOptions = (
       isKnowledgeTab,
       isResultsTab,
       isAIRoom,
+      aiReady,
+      standalone,
+      isPortalAdmin,
+      isCardLinkedToPortal,
+      isPayer,
     ],
   );
 
-  return options;
+  const onCloseSimpleTopUpDialog = useCallback(
+    () => setSimpleTopUpDialogVisible(false),
+    [],
+  );
+
+  return {
+    options,
+    aiFeaturesDialogVisible,
+    onCloseAIFeaturesDialog,
+    onDialogActivate,
+    simpleTopUpDialogVisible,
+    onCloseSimpleTopUpDialog,
+    onAIActivated,
+  };
 };
 

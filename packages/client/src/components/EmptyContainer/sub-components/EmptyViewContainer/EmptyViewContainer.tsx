@@ -33,13 +33,16 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React from "react";
+import React, { useState, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
 import { FolderType } from "@docspace/shared/enums";
+import AIFeaturesDialog from "@docspace/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog";
+import { getFolderInfo } from "@docspace/shared/api/files";
+import ClientSimpleTopUpDialog from "./ClientSimpleTopUpDialog";
 
 import SocialAuthWelcomePanel from "./SocialAuthWelcomePanel";
 
@@ -70,9 +73,18 @@ const EmptyViewContainer = observer((props: EmptyViewContainerProps) => {
     tenantAlias,
     baseDomain,
     socialAuthUser,
+    isCardLinkedToPortal,
   } = props;
 
-  const options = useOptions(props, t);
+  const {
+    options,
+    aiFeaturesDialogVisible,
+    onCloseAIFeaturesDialog,
+    onDialogActivate,
+    simpleTopUpDialogVisible,
+    onCloseSimpleTopUpDialog,
+    onAIActivated,
+  } = useOptions(props, t);
   const emptyViewOptions = useEmptyView(props, t);
 
   const { description: baseDescription, title, icon } = emptyViewOptions;
@@ -106,13 +118,27 @@ const EmptyViewContainer = observer((props: EmptyViewContainerProps) => {
   ) : null;
 
   return (
-    <EmptyView
-      icon={icon}
-      title={title}
-      options={options}
-      description={description}
-      extraContent={extraContent}
-    />
+    <>
+      <EmptyView
+        icon={icon}
+        title={title}
+        options={options}
+        description={description}
+        extraContent={extraContent}
+      />
+      <AIFeaturesDialog
+        visible={aiFeaturesDialogVisible}
+        onClose={onCloseAIFeaturesDialog}
+        onActivate={onDialogActivate}
+        isCardLinkedToPortal={isCardLinkedToPortal ?? false}
+      />
+      <ClientSimpleTopUpDialog
+        visible={simpleTopUpDialogVisible}
+        onClose={onCloseSimpleTopUpDialog}
+        onConfirm={onAIActivated}
+        language={props.language}
+      />
+    </>
   );
 });
 
@@ -132,13 +158,15 @@ const InjectedEmptyViewContainer = inject<
     currentQuotaStore,
     publicRoomStore,
     peopleStore,
+    paymentStore,
     settingsStore,
     authStore,
   }): InjectedEmptyViewContainerProps => {
     const { isWarningRoomsDialog } = currentQuotaStore;
     const { isPublicRoom } = publicRoomStore;
-    const { isFrame, logoText, aiConfig, standalone, tenantAlias, baseDomain } =
+    const { isFrame, logoText, standalone, tenantAlias, baseDomain } =
       settingsStore;
+    const language = authStore.language ?? "en";
 
     const { myFolderId, myFolder, roomsFolder } = treeFoldersStore;
 
@@ -176,6 +204,12 @@ const InjectedEmptyViewContainer = inject<
 
     const userId = userStore?.user?.id;
 
+    const refreshCurrentFolder = async () => {
+      if (!selectedFolder?.id) return;
+      const updated = await getFolderInfo(selectedFolder.id);
+      if (updated.security) selectedFolderStore.setSecurity(updated.security);
+    };
+
     return {
       access,
       security,
@@ -204,8 +238,15 @@ const InjectedEmptyViewContainer = inject<
       isKnowledgeTab: isInsideKnowledge,
       isResultsTab: isInsideResultStorage,
       isPortalAdmin: authStore.isAdmin,
-      aiReady: aiConfig?.aiReady,
+      aiReady: paymentStore.isAIReady,
       standalone,
+      isCardLinkedToPortal: paymentStore.isCardLinkedToPortal,
+      isPayer: paymentStore.isPayer,
+      enableAIService: paymentStore.enableAIService,
+      getAIConfig: settingsStore.getAIConfig,
+      refreshCurrentFolder,
+      refreshPaymentInfo: authStore.getPaymentInfo,
+      language,
       socialAuthWelcomeVisible: socialAuthWelcomeDialogVisible,
       onSocialAuthWelcomeClose: () => {
         localStorage.removeItem("socialAuthWelcomeBar");

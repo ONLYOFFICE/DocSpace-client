@@ -117,6 +117,13 @@ export interface InjectedEmptyViewContainerProps
   isPortalAdmin: AuthStore["isAdmin"];
   aiReady?: boolean;
   standalone: SettingsStore["standalone"];
+  isCardLinkedToPortal?: boolean;
+  isPayer?: boolean;
+  enableAIService?: (onSuccess?: () => void | Promise<void>) => Promise<void>;
+  getAIConfig?: () => Promise<void>;
+  refreshCurrentFolder?: () => Promise<void>;
+  refreshPaymentInfo?: () => Promise<void>;
+  language?: string;
   socialAuthWelcomeVisible: boolean;
   onSocialAuthWelcomeClose: () => void;
   tenantAlias: string;
@@ -151,4 +158,7 @@ export type OptionActions = {
   onCreateAIAgent: VoidFunction;
   onGoToServices: VoidFunction;
   onGoToAIProviderSettings: VoidFunction;
+  onTopUpAndActivateAI: VoidFunction;
+  onActivateAI: VoidFunction;
+  onShowAIBenefits: VoidFunction;
 };

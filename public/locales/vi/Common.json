@@ -1753,6 +1753,7 @@
   "RoomExternalLinkDeleted": "Đã xóa liên kết <1>«{{linkTitle}}»</1>.",
   "RoomExternalLinkRenamed": "Liên kết <1>«{{oldLinkTitle}}»</1> được đổi tên thành <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "Liên kết trước <1>«{{linkTitle}}»</1> đã được hủy  <br/> Liên kết mới <1>«{{linkTitle}}»</1> đã được tạo",
+  "RoomFilesLifetime": "Thời gian tồn tại của tập tin được đặt thành {{period}} {{days}} trong phòng này",
   "RoomFormBarDescription": "Phòng này khả dụng cho bất kỳ ai có liên kết. Người dùng bên ngoài sẽ có quyền Điền Biểu Mẫu cho tất cả các tập tin.",
   "RoomFromArchiveRestore": "Phòng được phục hồi từ {{sectionName}}",
   "RoomGroupAdded": "Đã thêm nhóm.",

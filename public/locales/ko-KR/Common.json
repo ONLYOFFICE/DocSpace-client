@@ -1728,6 +1728,7 @@
   "RoomExternalLinkDeleted": "<1>«{{linkTitle}}»</1> 링크가 삭제되었습니다.",
   "RoomExternalLinkRenamed": "<1>«{{oldLinkTitle}}»</1> 링크의 이름이 <1>«{{linkTitle}}»</1> 링크로 변경되었습니다.",
   "RoomExternalLinkRevoked": "이전 <1>«{{linkTitle}}»</1> 링크가 취소되었습니다 <br/> 새로운 <1>«{{linkTitle}}»</1> 링크가 생성되었습니다",
+  "RoomFilesLifetime": "이 룸에서 파일 수명은 {{days}} {{period}}로 설정됩니다",
   "RoomFormBarDescription": "이 룸은 링크를 가진 누구나 이용할 수 있습니다. 외부 사용자는 모든 파일에 대한 양식 작성자 권한을 갖습니다.",
   "RoomGroupAdded": "그룹이 추가되었습니다.",
   "RoomGroupAddedCount": "그룹 추가됨 ({{count}}).",

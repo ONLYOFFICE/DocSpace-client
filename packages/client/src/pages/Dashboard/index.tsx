@@ -37,6 +37,7 @@ import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 
 import CatalogRoomsIcon from "@docspace/ui-kit/assets/icons/16/catalog.rooms.react.svg";
 import CatalogFolderIcon from "@docspace/ui-kit/assets/icons/16/catalog.folder.react.svg";
+import CatalogDocumentsIcon from "@docspace/ui-kit/assets/icons/16/catalog.documents.react.svg";
 import AiAgentsIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
 
 import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
@@ -103,6 +104,14 @@ const Dashboard = ({ isGuest }: DashboardProps) => {
       description: t("Common:DashboardRoomsDescription"),
       installed: true,
       href: "/rooms/shared/filter",
+    },
+    {
+      id: "ai-forms",
+      icon: <CatalogDocumentsIcon />,
+      title: t("Common:DashboardFormsTitle"),
+      description: t("Common:DashboardFormsDescription"),
+      installed: true,
+      href: "/forms/filter",
     },
     {
       id: "ai-agents",

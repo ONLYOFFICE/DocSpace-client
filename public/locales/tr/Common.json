@@ -1753,6 +1753,7 @@
   "RoomExternalLinkDeleted": "Bağlantı <1>«{{linkTitle}}»</1> silindi.",
   "RoomExternalLinkRenamed": "Bağlantı <1>«{{oldLinkTitle}}»</1> <1>«{{linkTitle}}»</1> olarak yeniden adlandırıldı",
   "RoomExternalLinkRevoked": "Önceki bağlantı <1>«{{linkTitle}}»</1> iptal edildi <br/> Yeni Bağlantı <1>«{{linkTitle}}»</1> oluşturuldu",
+  "RoomFilesLifetime": "Bu odada dosya yaşam süresi {{days}} {{period}} olarak ayarlanmıştır",
   "RoomFormBarDescription": "Bu oda, bağlantıya sahip olan herkes tarafından kullanılabilir. Harici kullanıcılar tüm dosyalar için Form Doldurma iznine sahip olacaktır.",
   "RoomFromArchiveRestore": "{{sectionName}}'den kurtarılan oda",
   "RoomGroupAdded": "Gruplar ekledi.",

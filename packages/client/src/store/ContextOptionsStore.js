@@ -3294,6 +3294,10 @@ class ContextOptionsStore {
     const { pinRooms, unpinRooms, deleteRooms } = this.filesActionsStore;
 
     if (isRoomsFolder || isArchiveFolder || isAIAgentsFolder) {
+      // The Forms section has no archive, so the group "Move to archive" action
+      // must not appear there even though it reuses the Rooms folder.
+      const isFormsSection = window.location.pathname.startsWith("/forms");
+
       const isPinOption = selection.filter((item) => !item.pinned).length > 0;
 
       let canDelete;
@@ -3329,7 +3333,7 @@ class ContextOptionsStore {
             disabled: false,
           };
 
-      if (canArchiveRoom) {
+      if (canArchiveRoom && !isFormsSection) {
         archiveOptions = {
           key: "archive-room",
           label: t("Common:MoveToArchive"),
@@ -3610,6 +3614,12 @@ class ContextOptionsStore {
 
     if (item && item.isFolder) {
       event.title = item.title;
+    }
+
+    // In the "Forms" section only Form Filling Rooms can be created, so the
+    // dialog opens straight into the FFR form (skipping the type chooser).
+    if (!fromItem && window.location.pathname.startsWith("/forms")) {
+      event.payload = { startRoomType: RoomsType.FormRoom };
     }
 
     window.dispatchEvent(event);

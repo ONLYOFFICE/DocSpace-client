@@ -1776,6 +1776,7 @@
   "RoomExternalLinkDeleted": "Ссылка <1>«{{linkTitle}}»</1> удалена.",
   "RoomExternalLinkRenamed": "Ссылка <1>«{{oldLinkTitle}}»</1> переименована в <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "Предыдущая ссылка <1>«{{linkTitle}}»</1> аннулирована. <br/> Создана новая ссылка <1>«{{linkTitle}}»</1>",
+  "RoomFilesLifetime": "Срок действия файла в этой комнате установлен на {{days}} {{period}}",
   "RoomFormBarDescription": "Эта комната доступна для всех, у кого есть ссылка. Для всех внешних пользователей будет установлен уровень доступа «Заполнение форм».",
   "RoomFromArchiveRestore": "Комната восстановлена из раздела {{sectionName}}",
   "RoomGroupAdded": "Группы добавлены.",

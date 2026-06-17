@@ -1753,6 +1753,7 @@
   "RoomExternalLinkDeleted": "Линкът <1>«{{linkTitle}}»</1> е изтрит.",
   "RoomExternalLinkRenamed": "Линкът <1>«{{oldLinkTitle}}»</1> е преименуван на <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "Предишният линк<1>«{{linkTitle}}»</1> е отменен <br/> Създаден е нов линк <1>«{{linkTitle}}»</1>",
+  "RoomFilesLifetime": "Продължителността на живота на файла е зададена на {{days}} {{period}} в тази стая",
   "RoomFormBarDescription": "Тази стая е достъпна за всеки с линк. Външни потребители ще имат Разрешение за попълване на формуляри за всички файлове.",
   "RoomFromArchiveRestore": "Стая възстановена от {{sectionName}}",
   "RoomGroupAdded": "Добавени групи.",

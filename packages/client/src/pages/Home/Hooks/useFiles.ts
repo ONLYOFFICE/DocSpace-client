@@ -190,6 +190,7 @@ const useFiles = ({
 
     const isRoomFolder = getObjectByLocation(location)?.folder;
     const isAIAgents = categoryType === CategoryType.AIAgents;
+    const isForms = categoryType === CategoryType.Forms;
 
     if (isAIAgents) {
       filterObj = RoomsFilter.getFilter(window.location);
@@ -202,7 +203,9 @@ const useFiles = ({
     } else if (
       (categoryType == CategoryType.Shared ||
         categoryType == CategoryType.SharedRoom ||
-        categoryType == CategoryType.Archive) &&
+        categoryType == CategoryType.Form ||
+        categoryType == CategoryType.Archive ||
+        isForms) &&
       !isRoomFolder
     ) {
       filterObj = RoomsFilter.getFilter(window.location);

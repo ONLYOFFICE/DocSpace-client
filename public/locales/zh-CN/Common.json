@@ -1776,6 +1776,7 @@
   "RoomExternalLinkDeleted": "链接<1>«{{linkTitle}}»</1>已删除。",
   "RoomExternalLinkRenamed": "链接<1>«{{oldLinkTitle}}»</1>重命名为<1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "上一个链接<1>«{{linkTitle}}»</1>已撤销<br/>新链接<1>«{{linkTitle}}»</1>已创建",
+  "RoomFilesLifetime": "此房间中的文件有效期设置为{{days}} {{period}}。",
   "RoomFormBarDescription": "任何有链接的人都能够访问此房间。外部用户拥有所有文件的填写权限。",
   "RoomFromArchiveRestore": "房间已从{{sectionName}}恢复",
   "RoomGroupAdded": "组已添加。",

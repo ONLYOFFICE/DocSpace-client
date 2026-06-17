@@ -162,13 +162,23 @@ export const buildFolderUrl = (
   return `${path}?${params}`;
 };
 
-/** Map the current pathname to the active NavMenu item id (a folder id). */
+/**
+ * Map the current location to the active NavMenu item id (a folder id).
+ *
+ * Templates share the `/rooms/shared` path with the Rooms list and are told
+ * apart only by `searchArea=Templates` in the query string, so the active-id
+ * check needs the search part too (defaults to the live `location.search`).
+ */
 export const getClientActiveId = (
   pathname: string,
   ids: FolderIds,
+  search: string = typeof window !== "undefined" ? window.location.search : "",
 ): string | undefined => {
   const match = (folderId?: number | null) =>
     folderId != null ? String(folderId) : undefined;
+
+  const isTemplates = new URLSearchParams(search).get("searchArea") ===
+    RoomSearchArea.Templates;
 
   if (pathname.startsWith("/dashboard")) return "dashboard";
   // Agent-scoped sections highlight their own sidebar sub-items (checked
@@ -177,8 +187,18 @@ export const getClientActiveId = (
   if (pathname.includes("/ai-agents/recent")) return "agents-recent";
   if (pathname.includes("/ai-agents/favorites")) return "agents-favorites";
   if (pathname.includes("/ai-agents/trash")) return "agents-trash";
+  if (pathname.startsWith("/forms")) {
+    if (pathname.includes("/recent")) return "forms-recent";
+    if (pathname.includes("/favorite")) return "forms-favorites";
+    if (pathname.includes("/trash")) return "forms-trash";
+    return "forms";
+  }
   if (pathname.includes("/ai-agents")) return match(ids.aiAgentsFolderId);
+  if (pathname.includes("/rooms/recent")) return "rooms-recent";
+  if (pathname.includes("/rooms/favorite")) return "rooms-favorites";
   if (pathname.includes("/recent")) return match(ids.recentFolderId);
+  if (pathname.includes("/rooms/templates")) return "rooms-templates";
+  if (pathname.includes("/rooms/shared") && isTemplates) return "rooms-templates";
   if (pathname.includes("/rooms/shared")) return match(ids.roomsFolderId);
   if (pathname.includes("/rooms/archived")) return match(ids.archiveFolderId);
   if (pathname.includes("/rooms/personal")) return match(ids.myFolderId);

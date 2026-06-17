@@ -104,7 +104,6 @@
   "RoomAvailableViaSharedLink": "Room available via shared link",
   "RoomCreated": "Room created",
   "RoomEmptyContainerDescription": "Please create the first room.",
-  "RoomFilesLifetime": "The file lifetime is set to {{days}} {{period}} in this room",
   "RoomTagsLabel": "Room Tags",
   "RoomTagsTooltip": "Tags will apply to the room that will be created based on this template.",
   "RoomTemplate": "Room template",

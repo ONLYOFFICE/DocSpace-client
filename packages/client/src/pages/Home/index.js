@@ -258,7 +258,7 @@ const PureHome = (props) => {
     isProfile,
     isSettingsPage,
   });
-  const showQuickActions = quickActions.show && !isChat;
+  const showQuickActions = quickActions.show && !isChat && !isEmptyPage;
 
   // The "Forms" section shows its own "Choose Form Set" plate instead of the
   // quick-actions tiles. Dismissal is remembered across sessions.
@@ -566,68 +566,68 @@ const PureHome = (props) => {
           [styles.stickyBannerVars]: showQuickActions,
         })}
       >
-      <SectionWrapper
-        {...sectionProps}
-        withoutFooter={isChat}
-        scrollableBanner={showQuickActions}
-        stickyTableHeader={showQuickActions}
-      >
-        {!isErrorAvailable ||
-        isContactsPage ||
-        isProfile ||
-        isSettingsPage ||
-        showHeaderLoader ? (
-          <Section.SectionHeader>
-            <SectionHeaderContent />
-          </Section.SectionHeader>
-        ) : null}
+        <SectionWrapper
+          {...sectionProps}
+          withoutFooter={isChat}
+          scrollableBanner={showQuickActions}
+          stickyTableHeader={showQuickActions}
+        >
+          {!isErrorAvailable ||
+          isContactsPage ||
+          isProfile ||
+          isSettingsPage ||
+          showHeaderLoader ? (
+            <Section.SectionHeader>
+              <SectionHeaderContent />
+            </Section.SectionHeader>
+          ) : null}
 
-        <Section.SectionSubmenu>
-          <SectionSubmenuContent />
-        </Section.SectionSubmenu>
+          <Section.SectionSubmenu>
+            <SectionSubmenuContent />
+          </Section.SectionSubmenu>
 
-        <Section.SectionWarning>
-          <SectionWarningContent />
-        </Section.SectionWarning>
+          <Section.SectionWarning>
+            <SectionWarningContent />
+          </Section.SectionWarning>
 
-        {!isChat &&
-        !isErrorAvailable &&
-        !isDisabledKnowledge &&
-        shouldShowFilter &&
-        !isProfile &&
-        !selectedResultFileId &&
-        (!isFrame || showFilter) ? (
-          <Section.SectionFilter>
-            <SectionFilterContent />
-          </Section.SectionFilter>
-        ) : null}
+          {!isChat &&
+          !isErrorAvailable &&
+          !isDisabledKnowledge &&
+          shouldShowFilter &&
+          !isProfile &&
+          !selectedResultFileId &&
+          (!isFrame || showFilter) ? (
+            <Section.SectionFilter>
+              <SectionFilterContent />
+            </Section.SectionFilter>
+          ) : null}
 
-        {isFormsSection ? (
-          !isFormSetBannerClosed ? (
+          {isFormsSection ? (
+            !isFormSetBannerClosed ? (
+              <Section.SectionBanner>
+                <ChooseFormSetBanner onClose={closeFormSetBanner} />
+              </Section.SectionBanner>
+            ) : null
+          ) : showQuickActions ? (
             <Section.SectionBanner>
-              <ChooseFormSetBanner onClose={closeFormSetBanner} />
+              <QuickActions
+                items={quickActions.items}
+                className={styles.quickActions}
+              />
             </Section.SectionBanner>
-          ) : null
-        ) : showQuickActions ? (
-          <Section.SectionBanner>
-            <QuickActions
-              items={quickActions.items}
-              className={styles.quickActions}
-            />
-          </Section.SectionBanner>
-        ) : null}
+          ) : null}
 
-        <Section.SectionBody>
-          <Outlet />
-        </Section.SectionBody>
+          <Section.SectionBody>
+            <Outlet />
+          </Section.SectionBody>
 
-        <Section.InfoPanelHeader>
-          <InfoPanelHeaderContent />
-        </Section.InfoPanelHeader>
-        <Section.InfoPanelBody>
-          <InfoPanelBodyContent />
-        </Section.InfoPanelBody>
-      </SectionWrapper>
+          <Section.InfoPanelHeader>
+            <InfoPanelHeaderContent />
+          </Section.InfoPanelHeader>
+          <Section.InfoPanelBody>
+            <InfoPanelBodyContent />
+          </Section.InfoPanelBody>
+        </SectionWrapper>
       </div>
       <InfoPanelActions />
     </>

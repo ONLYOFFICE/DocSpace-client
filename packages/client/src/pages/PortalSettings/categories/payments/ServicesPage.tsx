@@ -100,7 +100,19 @@ const ServicesPage = (props: ServicesPageProps) => {
   return (
     <BillingRoot config={paymentConfig}>
       {pathname.includes("ai-services") ? (
-        <AiPage getAIConfig={getAIConfig} withBottomMargin={true}/>
+        <AiPage
+          getAIConfig={getAIConfig}
+          withBottomMargin={true}
+          onOpenSupportedModels={() =>
+            navigate(
+              combineUrl(
+                window.ClientConfig?.proxy?.url,
+                config.homepage,
+                "/portal-settings/ai-settings/models",
+              ),
+            )
+          }
+        />
       ) : null}
       {pathname.includes("backup") ? (
         <BackupPage withBottomMargin={true} onViewMore={onViewUsage} />

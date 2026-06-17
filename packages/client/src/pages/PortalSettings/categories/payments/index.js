@@ -118,7 +118,14 @@ const PaymentsPage = (props) => {
     !isNotPaidPeriod && {
       id: TAB_IDS.ADDONS,
       name: t("Common:Addons"),
-      content: <ServicesList getAIConfig={getAIConfig} />,
+      content: (
+        <ServicesList
+          getAIConfig={getAIConfig}
+          onOpenSupportedModels={() =>
+            navigateToRoute("/portal-settings/ai-settings/models")
+          }
+        />
+      ),
       onClick: () => {
         clearAbortControllerArr();
       },

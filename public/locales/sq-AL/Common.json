@@ -88,7 +88,6 @@
   "AIModel": "Model",
   "AIModelListTitle": "Lista e modeleve",
   "AIModelPrice": "{{inputPrice}}/M tokenë hyrëse | {{outputPrice}}/M tokenë dalëse",
-  "AIModelsIntroduction": "Zgjidhni modelin e duhur për detyrën tuaj — nga ai me çmim të ulët deri te ai i avancuar. Çmimet e shfaqura janë <1>tarifat bazë të OpenRouter</1>. Një tarifë shërbimi prej 20% shtohet në çdo ngarkesë bazuar në konsumin e tokenëve.",
   "AINewChat": "Bisedë e re",
   "AIPaywallCallbackError": "Diçka shkoi keq",
   "AIPaywallCallbackErrorHint": "Karta juaj u ruajt, por nuk mundëm të rimbushim balancën tuaj të IA. Mund të provoni sërish nga shërbimet IA.",

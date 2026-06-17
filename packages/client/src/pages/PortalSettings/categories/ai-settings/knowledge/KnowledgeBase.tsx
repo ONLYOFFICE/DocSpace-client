@@ -94,7 +94,7 @@ const KnowledgeBase = ({
                 dangerouslySetInnerHTML={{ __html: item.image }}
               />
               <Text fontSize="13px" fontWeight={600}>
-                {t("Common:Vectorization")}
+                {t("Files:Vectorization")}
               </Text>
             </div>
 
@@ -128,3 +128,4 @@ export default inject<TStore>(({ servicesStore, settingsStore }) => {
 
   return { aiToolsPrices, formatAiModelsCurrency, knowledgeSettingsUrl };
 })(observer(KnowledgeBase));
+

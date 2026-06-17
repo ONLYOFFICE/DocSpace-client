@@ -88,7 +88,6 @@
   "AIModel": "Model",
   "AIModelListTitle": "Modelu saraksts",
   "AIModelPrice": "{{inputPrice}}/M ielietotājiem tokeniem | {{outputPrice}}/M izplatītiem tokeniem",
-  "AIModelsIntroduction": "Izvēlieties savam uzdevumam piemērotāko modeli — no ekonomiskā līdz uzlabotajam. Rādītās cenas ir <1>OpenRouter pamatlikmes</1>. Katrai maksai tiek pievienota 20% pakalpojuma maksa, pamatojoties uz tokenu patēriņu.",
   "AINewChat": "Jauns čats",
   "AIPaywallCallbackError": "Kaut kas nogāja greizi",
   "AIPaywallCallbackErrorHint": "Jūsu karte tika saglabāta, taču mēs nevarējām papildināt jūsu MI bilanci. Varat mēģināt vēlreiz no MI pakalpojumiem.",

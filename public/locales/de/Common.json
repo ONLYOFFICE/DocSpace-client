@@ -88,7 +88,6 @@
   "AIModel": "Modell",
   "AIModelListTitle": "Modellliste",
   "AIModelPrice": "{{inputPrice}}/M Input-Tokens | {{outputPrice}}/M Ausgabe-Tokens",
-  "AIModelsIntroduction": "Wählen Sie das richtige Modell für Ihre Aufgabe – von budgetfreundlich bis leistungsstark. Die angezeigten Preise sind <1>OpenRouter-Basispreise</1>. Auf jede auf Token-Verbrauch basierende Abrechnung wird eine Servicegebühr von 20 % erhoben.",
   "AINewChat": "Neuer Chat",
   "AIPaywallCallbackError": "Etwas ist schiefgelaufen",
   "AIPaywallCallbackErrorHint": "Ihre Karte wurde gespeichert, aber wir konnten Ihre KI-Balance nicht aufladen. Sie können es erneut über KI-Dienste versuchen.",

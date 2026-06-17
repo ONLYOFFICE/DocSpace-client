@@ -88,7 +88,6 @@
   "AIModel": "Model",
   "AIModelListTitle": "Seznam modelů",
   "AIModelPrice": "{{inputPrice}}/M vstupní tokeny | {{outputPrice}}/M výstupní tokeny",
-  "AIModelsIntroduction": "Vyberte vhodný model pro váš úkol — od ekonomického po pokročilý. Zobrazené ceny jsou <1>základní sazby OpenRouter</1>. Ke každému poplatku na základě spotřeby tokenů je přidán servisní poplatek 20 %.",
   "AINewChat": "Nová konverzace",
   "AIPaywallCallbackError": "Něco se pokazilo",
   "AIPaywallCallbackErrorHint": "Vaše karta byla uložena, ale nepodařilo se nám dobít váš AI zůstatek. Můžete to zkusit znovu ze služeb AI.",

@@ -88,7 +88,6 @@
   "AIModel": "Model",
   "AIModelListTitle": "Lista modeli",
   "AIModelPrice": "{{inputPrice}}/M tokenów wejściowych | {{outputPrice}}/M tokenów wyjściowych",
-  "AIModelsIntroduction": "Wybierz odpowiedni model do swojego zadania — od ekonomicznego po zaawansowany. Podane ceny to <1>stawki bazowe OpenRouter</1>. Do każdej opłaty opartej na zużyciu tokenów doliczana jest opłata serwisowa w wysokości 20%.",
   "AINewChat": "Nowa rozmowa",
   "AIPaywallCallbackError": "Coś poszło nie tak",
   "AIPaywallCallbackErrorHint": "Twoja karta została zapisana, ale nie udało się zasilić salda AI. Możesz spróbować ponownie w usługach AI.",

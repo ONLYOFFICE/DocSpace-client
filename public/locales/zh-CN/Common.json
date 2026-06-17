@@ -88,7 +88,6 @@
   "AIModel": "模型",
   "AIModelListTitle": "模型列表",
   "AIModelPrice": "{{inputPrice}}/M 输入令牌 | {{outputPrice}}/M 输出令牌",
-  "AIModelsIntroduction": "为您的任务选择合适的模型 — 从经济实惠到高性能应有尽有。显示的价格为 <1>OpenRouter 基准费率</1>。每次根据 token 消耗量计费时将额外收取 20% 的服务费。",
   "AINewChat": "新对话",
   "AIPaywallCallbackError": "出现了一些问题",
   "AIPaywallCallbackErrorHint": "您的卡已保存，但我们无法为您的 AI 余额充值。您可以从 AI 服务中重试。",

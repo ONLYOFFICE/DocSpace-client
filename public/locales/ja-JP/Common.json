@@ -88,7 +88,6 @@
   "AIModel": "モデル",
   "AIModelListTitle": "モデル一覧",
   "AIModelPrice": "{{inputPrice}}/M 入力トークン | {{outputPrice}}/M 出力トークン",
-  "AIModelsIntroduction": "タスクに最適なモデルを選択してください — リーズナブルなものから高性能なものまで。表示価格は <1>OpenRouterの基本料金</1>です。トークン消費に基づく各請求に20%のサービス料が加算されます。",
   "AINewChat": "新規チャット",
   "AIPaywallCallbackError": "問題が発生しました",
   "AIPaywallCallbackErrorHint": "カードは保存されましたが、AIバランスへのチャージができませんでした。AIサービスから再試行できます。",

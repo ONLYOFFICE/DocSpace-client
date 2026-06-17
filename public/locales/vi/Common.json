@@ -88,7 +88,6 @@
   "AIModel": "Mô hình",
   "AIModelListTitle": "Danh sách mô hình",
   "AIModelPrice": "{{inputPrice}}/Triệu token đầu vào | {{outputPrice}}/Triệu token đầu ra",
-  "AIModelsIntroduction": "Chọn mô hình phù hợp với công việc của bạn — từ tiết kiệm đến nâng cao. Giá hiển thị là <1>mức cơ bản của OpenRouter</1>. Phí dịch vụ 20% được cộng thêm vào mỗi khoản phí dựa trên lượng token tiêu thụ.",
   "AINewChat": "Trò chuyện mới",
   "AIPaywallCallbackError": "Đã xảy ra sự cố",
   "AIPaywallCallbackErrorHint": "Thẻ của bạn đã được lưu, nhưng chúng tôi không thể nạp tiền vào số dư AI. Bạn có thể thử lại từ dịch vụ AI.",

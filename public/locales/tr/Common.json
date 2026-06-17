@@ -88,7 +88,6 @@
   "AIModel": "Model",
   "AIModelListTitle": "Model list",
   "AIModelPrice": "{{inputPrice}}/M giriş belirteçleri | {{outputPrice}}/M çıkış belirteçleri",
-  "AIModelsIntroduction": "Göreviniz için doğru modeli seçin — ekonomikten gelişmişe kadar. Gösterilen fiyatlar <1>OpenRouter temel fiyatlarıdır</1>. Token tüketimine göre her ücretten %20 hizmet bedeli eklenir.",
   "AINewChat": "Yeni sohbet",
   "AIPaywallCallbackError": "Bir şeyler ters gitti",
   "AIPaywallCallbackErrorHint": "Kartınız kaydedildi ancak AI bakiyenizi dolduramadık. AI hizmetlerinden yeniden deneyebilirsiniz.",

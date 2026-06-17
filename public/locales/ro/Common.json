@@ -88,7 +88,6 @@
   "AIModel": "Model",
   "AIModelListTitle": "Lista de modele",
   "AIModelPrice": "{{inputPrice}}/M tokeni de intrare | {{outputPrice}}/M tokeni de ieșire",
-  "AIModelsIntroduction": "Alegeți modelul potrivit pentru sarcina dvs. — de la cele accesibile la cele avansate. Prețurile afișate sunt <1>tarifele de bază OpenRouter</1>. O taxă de serviciu de 20% se adaugă la fiecare facturare bazată pe consumul de tokenuri.",
   "AINewChat": "Chat nou",
   "AIPaywallCallbackError": "Ceva a mers greșit",
   "AIPaywallCallbackErrorHint": "Cardul dvs. a fost salvat, dar nu am putut reîncărca soldul IA. Puteți reîncerca din serviciile IA.",

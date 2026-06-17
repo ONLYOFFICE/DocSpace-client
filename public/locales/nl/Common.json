@@ -88,7 +88,6 @@
   "AIModel": "Model",
   "AIModelListTitle": "Modeloverzicht",
   "AIModelPrice": "{{inputPrice}}/M invoer-tokens | {{outputPrice}}/M uitvoer-tokens",
-  "AIModelsIntroduction": "Kies het juiste model voor uw taak — van budgetvriendelijk tot geavanceerd. De getoonde prijzen zijn <1>OpenRouter basistarieven</1>. Voor elke afschrijving op basis van tokenverbruik wordt een servicekosten van 20% toegevoegd.",
   "AINewChat": "Nieuw gesprek",
   "AIPaywallCallbackError": "Er is iets misgegaan",
   "AIPaywallCallbackErrorHint": "Uw kaart is opgeslagen, maar we konden uw AI-saldo niet aanvullen. U kunt het opnieuw proberen via AI-diensten.",

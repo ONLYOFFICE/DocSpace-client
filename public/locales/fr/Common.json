@@ -88,7 +88,6 @@
   "AIModel": "Modèle",
   "AIModelListTitle": "Liste des modèles",
   "AIModelPrice": "{{inputPrice}}/M tokens d'entrée | {{outputPrice}}/M tokens de sortie",
-  "AIModelsIntroduction": "Choisissez le modèle adapté à votre tâche — des options économiques aux plus avancées. Les prix indiqués sont les <1>tarifs de base OpenRouter</1>. Des frais de service de 20 % sont ajoutés à chaque facturation basée sur la consommation de tokens.",
   "AINewChat": "Nouvelle discussion",
   "AIPaywallCallbackError": "Une erreur s'est produite",
   "AIPaywallCallbackErrorHint": "Votre carte a été enregistrée, mais nous n'avons pas pu recharger votre solde IA. Vous pouvez réessayer depuis les services IA.",

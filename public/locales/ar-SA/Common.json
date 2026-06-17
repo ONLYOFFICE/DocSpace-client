@@ -88,7 +88,6 @@
   "AIModel": "نموذج",
   "AIModelListTitle": "قائمة النماذج",
   "AIModelPrice": "{{inputPrice}}/M رموز الإدخال | {{outputPrice}}/M رموز الإخراج",
-  "AIModelsIntroduction": "اختر النموذج المناسب لمهمتك — من الاقتصادي إلى المتقدم. الأسعار المعروضة هي <1>الأسعار الأساسية لـ OpenRouter</1>. تُضاف رسوم خدمة بنسبة 20% على كل رسوم استنادًا إلى استهلاك الرموز.",
   "AINewChat": "دردشة جديدة",
   "AIPaywallCallbackError": "حدث خطأ ما",
   "AIPaywallCallbackErrorHint": "تم حفظ بطاقتك، لكن لم نتمكن من شحن رصيد AI الخاص بك. يمكنك المحاولة مرة أخرى من خدمات AI.",

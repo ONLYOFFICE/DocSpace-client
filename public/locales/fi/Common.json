@@ -88,7 +88,6 @@
   "AIModel": "Malli",
   "AIModelListTitle": "Mallilista",
   "AIModelPrice": "{{inputPrice}}/M syöte-tokenit | {{outputPrice}}/M tulostokenit",
-  "AIModelsIntroduction": "Valitse tehtävällesi sopiva malli — edullisesta kehittyneeseen. Näytetyt hinnat ovat <1>OpenRouterin perushinnat</1>. Jokaiseen veloitukseen lisätään 20 % palvelumaksu tokenien kulutuksen perusteella.",
   "AINewChat": "Uusi chat",
   "AIPaywallCallbackError": "Jokin meni pieleen",
   "AIPaywallCallbackErrorHint": "Korttisi tallennettiin, mutta AI-saldosi lataaminen epäonnistui. Voit yrittää uudelleen AI-palveluista.",

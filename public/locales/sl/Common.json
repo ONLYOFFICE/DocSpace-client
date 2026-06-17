@@ -88,7 +88,6 @@
   "AIModel": "Model",
   "AIModelListTitle": "Modeli",
   "AIModelPrice": "{{inputPrice}}/M vstopnih tokenov | {{outputPrice}}/M izstopnih tokenov",
-  "AIModelsIntroduction": "Izberite pravi model za svojo nalogo — od ekonomičnega do naprednega. Prikazane cene so <1>osnovne cene OpenRouter</1>. Vsakemu zaračunavanju na podlagi porabe žetonov se doda storitvena provizija v višini 20 %.",
   "AINewChat": "Nova klepetalnica",
   "AIPaywallCallbackError": "Prišlo je do napake",
   "AIPaywallCallbackErrorHint": "Vaša kartica je bila shranjena, vendar nam ni uspelo napolniti vašega AI stanja. Poskusite znova v storitvah AI.",

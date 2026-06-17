@@ -18,8 +18,6 @@
   "CustomRoomEmptyTitle": "مرحبًا بك في الغرفة المخصصة",
   "DefaultFolderDescription": "قم بإسقاط الملفات هنا أو إنشاء ملفات جديدة.",
   "EmptyAIAgentsAIDisabledDescription": "يسمح هذا القسم للمستخدمين بالعمل مع {{aiAgents}} – المساعدون الذكيون لمعالجة المستندات والمهام الأخرى. \nلبدء استخدامهم، يجب تمكين خدمة ميزات الذكاء الاصطناعي بواسطة مسؤول {{productName}}.",
-  "EmptyAIAgentsAIDisabledSaasAdminDescription": "لإنشاء واستخدام {{aiAgents}}، قم بتوصيل محفظتك وتمكين خدمة ميزات الذكاء الاصطناعي في إعدادات {{productName}}. بمجرد الانتهاء من ذلك، ستتمكن من العمل مع {{aiAgents}} والتعاون مع فريقك.",
-  "EmptyAIAgentsAIDisabledSaasAdminTitle": "قوموا بتوصيل محفظتكم وتمكين ميزات الذكاء الاصطناعي",
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} غير متوفرة بعد",
   "EmptyAIAgentsAIEnabledUserDescription": "بمجرد أن يدعوك فريقك للتعاون، ستظهر {{aiAgents}} هنا، وجاهزة للمساعدة في المستندات، وإدارة المعرفة، والمهام اليومية.",
   "EmptyAIAgentsDescription": "قم بإعداد مساعد شخصي لفريقك عن طريق إضافة قاعدة معرفية، واختيار النموذج المثالي، وربط {{mcpServer}}. ادعُ زملائك للتعاون والاستفادة القصوى من قدرات الدردشة الخاصة بالوكيل.",

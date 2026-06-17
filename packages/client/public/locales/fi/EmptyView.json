@@ -18,8 +18,6 @@
   "CustomRoomEmptyTitle": "Tervetuloa Custom-huoneeseen",
   "DefaultFolderDescription": "Raahaa tiedostot tähän tai luo uusia.",
   "EmptyAIAgentsAIDisabledDescription": "\"{{aiAgents}}\"-osio antaa käyttäjille mahdollisuuden työskennellä älykkäiden avustajien kanssa asiakirjojen käsittelyyn ja muiden tehtävien suorittamiseen.\nAloittaaksesi niiden käytön, AI-ominaisuuksien palvelu on oltava käytössä {{productName}}-järjestelmänvalvojan toimesta.",
-  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Käyttääksesi \"{{aiAgents}}\"-osiota, yhdistä lompakkosi ja ota käyttöön tekoälyominaisuuksien palvelu {{productName}}-asetuksissa. Kun se on valmis, voit työskennellä \"{{aiAgents}}\"-osion kanssa ja tehdä yhteistyötä tiimisi kanssa.",
-  "EmptyAIAgentsAIDisabledSaasAdminTitle": "Yhdistä lompakkosi ja ota käyttöön tekoälyominaisuudet",
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}}: ei ole vielä saatavilla",
   "EmptyAIAgentsAIEnabledUserDescription": "Kun tiimisi kutsuu sinut yhteistyöhön, {{aiAgents}} ilmestyy tähän, valmiina auttamaan asiakirjoissa, tietopohjassa ja arjen tehtävissä.",
   "EmptyAIAgentsDescription": "Määritä henkilökohtainen avustaja tiimillesi lisäämällä tietopankin, valitsemalla ihanteellisen mallin ja yhdistämällä {{mcpServer}}:n. Kutsu kollegasi yhteistyöhön ja hyödynnä agentin chat-ominaisuudet parhaiten.",

@@ -18,8 +18,6 @@
   "CustomRoomEmptyTitle": "Dobrodošli v sobi po meri",
   "DefaultFolderDescription": "Tukaj spustite datoteke ali ustvarite nove.",
   "EmptyAIAgentsAIDisabledDescription": "Razdelek »{{aiAgents}}« uporabnikom omogoča delo z inteligentnimi pomočniki za obdelavo dokumentov in izvajanje drugih nalog.\nZa začetek njihove uporabe mora vaš {{productName}} skrbnik omogočiti storitev AI funkcij.",
-  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Če želite uporabljati razdelek »{{aiAgents}}«, povežite svojo denarnico in omogočite storitev AI funkcij v nastavitvah {{productName}}. Ko bo to zaključeno, boste lahko delali z razdelkom »{{aiAgents}}« in sodelovali s svojo ekipo.",
-  "EmptyAIAgentsAIDisabledSaasAdminTitle": "Povežite svojo denarnico in omogočite funkcije umetne inteligence.",
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} niso še na voljo",
   "EmptyAIAgentsAIEnabledUserDescription": "Ko vas vaš ekipa povabi k sodelovanju, se bo tukaj pojavil {{aiAgents}}, pripravljen za pomoč pri dokumentih, upravljanju znanja in vsakodnevnih nalogah.",
   "EmptyAIAgentsDescription": "Nastavite osebnega asistenta za svoj ekipo z dodajanjem zbirke znanja, izbiro idealnega modela in povezavo z {{mcpServer}}. Povabite kolege za sodelovanje in izkoristite klepnice asistenta.",

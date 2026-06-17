@@ -18,8 +18,6 @@
   "CustomRoomEmptyTitle": "Şəxsi otağa xoş gəlmisiniz",
   "DefaultFolderDescription": "Faylları bura atın və ya yenilərini yaradın.",
   "EmptyAIAgentsAIDisabledDescription": "\"{{aiAgents}}\" bölməsi istifadəçilərə sənədləri emal etmək və digər tapşırıqları yerinə yetirmək üçün ağıllı köməkçilərlə işləməyə imkan verir.\nOnlardan istifadə etməyə başlamaq üçün, AI funksiyaları xidməti sizin {{productName}} administratorunuz tərəfindən aktivləşdirilməlidir.",
-  "EmptyAIAgentsAIDisabledSaasAdminDescription": "\"{{aiAgents}}\" bölməsindən istifadə etmək üçün cüzdanınızı qoşun və {{productName}} parametrlərində AI funksiyaları xidmətini aktivləşdirin. Bu bitdikdən sonra \"{{aiAgents}}\" bölməsi ilə işləyə və komandanızla əməkdaşlıq edə biləcəksiniz.",
-  "EmptyAIAgentsAIDisabledSaasAdminTitle": "Cüzdanınızı qoşun və süni intellekt xüsusiyyətlərini aktivləşdirin",
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}}: hələ mövcud deyil",
   "EmptyAIAgentsAIEnabledUserDescription": "Komandanız sizi əməkdaşlıq etməyə dəvət etdikdən sonra, {{aiAgents}} burada görünəcək və sənədlər, bilik idarəetməsi və gündəlik tapşırıqlar sahəsində kömək etməyə hazır olacaq.",
   "EmptyAIAgentsDescription": "Bilik bazası əlavə etməklə, ideal modeli seçməklə və bir {{mcpServer}} qoşmaqla komandanız üçün şəxsi köməkçi qurun. Həmkarlarınızı əməkdaşlıq etməyə dəvət edin və agentin söhbət imkanlarından maksimum dərəcədə istifadə edin.",

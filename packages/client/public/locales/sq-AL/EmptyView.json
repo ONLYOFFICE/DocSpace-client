@@ -18,8 +18,6 @@
   "CustomRoomEmptyTitle": "Mirë se vini në dhomën e personalizimit",
   "DefaultFolderDescription": "Hidhni skedarët këtu ose krijoni të rinj.",
   "EmptyAIAgentsAIDisabledDescription": "Seksioni \"{{aiAgents}}\" u lejon përdoruesve të punojnë me asistentë inteligjentë për të përpunuar dokumente dhe për të kryer detyra të tjera. \nPër të filluar përdorimin e tyre, shërbimi i veçorive të IA duhet të aktivizohet nga administratori juaj i {{productName}}.",
-  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Për të përdorur seksionin \"{{aiAgents}}\", lidhni portofolin tuaj dhe mundësoni shërbimin e veçorive të IA në cilësimet e {{productName}}. Pasi të përfundohet, do të jeni në gjendje të punoni me seksionin \"{{aiAgents}}\" dhe të bashkëpunoni me ekipin tuaj.",
-  "EmptyAIAgentsAIDisabledSaasAdminTitle": "Lidh portofolin tënd dhe aktivizo veçoritë e inteligjencës artificiale",
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} nuk janë të disponueshëm ende",
   "EmptyAIAgentsAIEnabledUserDescription": "Pasi ekipi juaj të fton për të bashkëpunuar, {{aiAgents}} do të shfaqen këtu, të gatshëm për të ndihmuar me dokumente, menaxhimin e njohurive dhe detyrat e përditshme.",
   "EmptyAIAgentsDescription": "Krijoni një asistent të personalizuar për ekipin tuaj duke shtuar një bazë të dijeve, duke zgjedhur modelin ideal, dhe duke lidhur një {{mcpServer}}. Ftoni kolegët tuaj për të bashkëpunuar dhe për të përdorur më së miri aftësitë e chat-it të agjentit.",

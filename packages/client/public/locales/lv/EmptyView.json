@@ -18,8 +18,6 @@
   "CustomRoomEmptyTitle": "Laipni lūdzam pielāgotajā telpā",
   "DefaultFolderDescription": "Nometiet failus šeit vai izveidojiet jaunus.",
   "EmptyAIAgentsAIDisabledDescription": "Sadaļa “{{aiAgents}}” ļauj lietotājiem strādāt ar viedajiem palīgiem, lai apstrādātu dokumentus un veiktu citus uzdevumus.\nLai sāktu tos lietot, jūsu {{productName}} administratoram ir jāieslēdz MI funkciju pakalpojums.",
-  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Lai izmantotu sadaļu “{{aiAgents}}”, savienojiet savu maku un aktivizējiet MI funkciju pakalpojumu {{productName}} iestatījumos. Kad tas būs izdarīts, jūs varēsiet strādāt ar sadaļu “{{aiAgents}}” un sadarboties ar savu komandu.",
-  "EmptyAIAgentsAIDisabledSaasAdminTitle": "Pievienojiet savu maku un iespējojiet MI funkcijas",
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} vēl nav pieejami",
   "EmptyAIAgentsAIEnabledUserDescription": "Kad jūsu komanda jūs vietoikīs sadarbībai, šeit parādīsies {{aiAgents}}, gatavi palīdzēt ar dokumentiem, zināšanu pārvaldību un ikdienas uzdevumiem.",
   "EmptyAIAgentsDescription": "Izveidojiet personalizētu asistantu savai komandai, pievienojot zināšanu bāzi, izvēlot ideālo modeli un savienojot ar {{mcpServer}}. Ielietojiet savus kolēģus, lai sadarbotu un maksimāli izmantotu agenta sarunas spējas.",

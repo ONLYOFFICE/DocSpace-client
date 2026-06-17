@@ -18,8 +18,6 @@
   "CustomRoomEmptyTitle": "Bem-vindo à sala personalizada",
   "DefaultFolderDescription": "Solte arquivos aqui ou crie novos.",
   "EmptyAIAgentsAIDisabledDescription": "Esta seção permite que os usuários trabalhem com {{aiAgents}} — assistentes inteligentes para lidar com documentos e outras tarefas.\nPara começar a usá-los, o serviço de recursos de IA deve ser habilitado pelo administrador do seu {{productName}}.",
-  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Para criar e usar {{aiAgents}}, conecte sua carteira e ative o serviço de recursos de IA nas configurações do {{productName}}. Assim que isso for feito, você poderá trabalhar com {{aiAgents}} e colaborar com sua equipe.",
-  "EmptyAIAgentsAIDisabledSaasAdminTitle": "Conecte sua carteira e ative os recursos de IA",
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} não estão disponíveis ainda",
   "EmptyAIAgentsAIEnabledUserDescription": "Assim que sua equipe o convidar para colaborar, {{aiAgents}} aparecerá aqui, pronto para ajudar com documentos, gerenciamento de conhecimento e tarefas do dia a dia.",
   "EmptyAIAgentsDescription": "Configure um assistente personalizado para sua equipe adicionando uma base de conhecimento, selecionando o modelo ideal e conectando um {{mcpServer}}. Convide seus colegas para colaborar e aproveitar ao máximo os recursos de chat do agente.",

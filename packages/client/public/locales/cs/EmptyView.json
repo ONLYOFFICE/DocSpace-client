@@ -18,8 +18,6 @@
   "CustomRoomEmptyTitle": "Vítejte ve Vlastní místnosti",
   "DefaultFolderDescription": "Vložte sem soubory nebo vytvořte nové.",
   "EmptyAIAgentsAIDisabledDescription": "Sekce „{{aiAgents}}“ umožňuje uživatelům spolupracovat s inteligentními asistenty na zpracování dokumentů a provádění dalších úkolů. \nPro jejich používání musí být služba AI funkcí povolena administrátorem {{productName}}.",
-  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Chcete-li používat sekci „{{aiAgents}}“, propojte svou peněženku a povolte službu AI funkcí v nastavení {{productName}}. Jakmile to bude hotovo, budete moci pracovat se sekcí „{{aiAgents}}“ a spolupracovat se svým týmem.",
-  "EmptyAIAgentsAIDisabledSaasAdminTitle": "Připojte svou peněženku a povolte funkce AI.",
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} nejsou ještě dostupné",
   "EmptyAIAgentsAIEnabledUserDescription": "Jakmile vás váš tým pozve k spolupráci, se zde objeví {{aiAgents}}, připravený k pomoci s dokumenty, správou znalostí a každodenními úkoly.",
   "EmptyAIAgentsDescription": "Nastavte personalizovaného asistenta pro váš tým přidáním znalostní báze, výběrem ideálního modelu a připojením {{mcpServer}}. Pozvěte své kolegy na spolupráci a plně využijte chatovací schopnosti agenta.",

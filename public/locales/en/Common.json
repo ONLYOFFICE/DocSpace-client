@@ -1465,6 +1465,7 @@
   "Tools": "Tools",
   "ToppedUpWallet": "You have successfully topped up your wallet.",
   "TopUp": "Top up",
+  "TopUpAndActivate": "Top up & activate",
   "TopUpAndUpgrade": "Top up & Upgrade",
   "TopUpAndUpgradeHint": "Your wallet will be topped up by <1>{{currency}}</1> and the selected storage will be purchased automatically. Top-up amounts are rounded up to the next whole dollar.",
   "TopUpCredits": "Top up credits",

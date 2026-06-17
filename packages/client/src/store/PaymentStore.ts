@@ -67,13 +67,17 @@ import {
 } from "@docspace/shared/api/portal/types";
 
 import { AI_ENUM, BACKUP_SERVICE } from "@docspace/ui-kit/billing/constants";
+import { applyServiceQuotaToMap } from "@docspace/ui-kit/billing/utils/parsers";
 import {
   getCardLinkedOnFreeTariff,
   getCardLinkedOnNonProfit,
   getIsCardLinkedToPortal,
-} from "@docspace/ui-kit/billing/utils/cardStatus";
+  getIsPayer,
+  getWalletBalanceAmount,
+  getWalletBalanceCurrency,
+  formatPaymentDate,
+} from "@docspace/ui-kit/billing/utils/paymentSelectors";
 import type { DateTime } from "luxon";
-import { formatDate as formatDateUtil } from "@docspace/ui-kit/utils/date";
 
 // Constants for feature identifiers
 export const TOTAL_SIZE = "total_size";
@@ -100,15 +104,11 @@ class PaymentStore {
   walletBalanceData: TBalance | null = null;
 
   get walletBalance(): number {
-    const data = this.walletBalanceData;
-    if (!data || typeof data === "number") return 0;
-    return data.subAccounts?.[0]?.amount ?? 0;
+    return getWalletBalanceAmount(this.walletBalanceData);
   }
 
   get walletCodeCurrency(): string {
-    const data = this.walletBalanceData;
-    if (!data || typeof data === "number") return "USD";
-    return data.subAccounts?.[0]?.currency ?? "USD";
+    return getWalletBalanceCurrency(this.walletBalanceData);
   }
 
   fetchWalletBalance = async (isRefresh?: boolean) => {
@@ -159,14 +159,10 @@ class PaymentStore {
   }
 
   get isPayer() {
-    if (!this.userStore || !this.currentTariffStatusStore) return;
-
-    const { user } = this.userStore;
-    const { walletCustomerEmail } = this.currentTariffStatusStore;
-
-    if (!user || !walletCustomerEmail) return false;
-
-    return user.email === walletCustomerEmail;
+    return getIsPayer(
+      this.userStore?.user?.email,
+      this.currentTariffStatusStore?.walletCustomerEmail,
+    );
   }
 
   setIsUpdatingBasicSettings = (isUpdatingBasicSettings: boolean) => {
@@ -235,16 +231,8 @@ class PaymentStore {
     return Boolean(this.isAiToolsServiceOn) || Boolean(settingsStore.aiConfig?.aiReady);
   }
 
-  formatDate = (date: DateTime, timeType?: "start" | "end") => {
-    if (!timeType) {
-      return formatDateUtil(date, "yyyy-MM-dd'T'HH:mm:ss", { locale: "en" });
-    }
-
-    const dateStr = formatDateUtil(date, "yyyy-MM-dd", { locale: "en" });
-    const timeTypeValue = timeType === "start" ? "00:00:00" : "23:59:59";
-
-    return `${dateStr}T${timeTypeValue}`;
-  };
+  formatDate = (date: DateTime, timeType?: "start" | "end") =>
+    formatPaymentDate(date, timeType);
 
   handleServiceQuota = async (serviceName = BACKUP_SERVICE) => {
     const abortController = new AbortController();
@@ -252,26 +240,7 @@ class PaymentStore {
 
     const service = await getServiceQuota(serviceName, abortController.signal);
 
-    const feature = service.features[0];
-
-    const featureWithPrice = {
-      ...feature,
-      price: service.price,
-      serviceName: service.serviceName,
-    } as TServiceFeatureWithPrice;
-
-    const existingEntry = Array.from(
-      this.servicesQuotasFeatures.entries(),
-    ).find(
-      ([, value]) =>
-        (value as TServiceFeatureWithPrice).serviceName === service.serviceName,
-    );
-
-    const key = existingEntry
-      ? existingEntry[0]
-      : service.features[0].id.toString();
-
-    this.servicesQuotasFeatures.set(key, featureWithPrice);
+    applyServiceQuotaToMap(service, this.servicesQuotasFeatures as Parameters<typeof applyServiceQuotaToMap>[1]);
 
     return service.serviceName;
   };

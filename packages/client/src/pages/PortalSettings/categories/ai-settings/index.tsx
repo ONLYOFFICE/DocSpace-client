@@ -54,9 +54,9 @@ import PaymentStore from "SRC_DIR/store/PaymentStore";
 
 import { AIProvider, ProvidersLoader } from "./providers";
 import { MCPServers, ServersLoader } from "./servers";
-import { SearchLoader } from "./search";
+import { Search, SearchLoader } from "./search";
 import WebSearch from "./search/WebSearch";
-import { KnowledgeLoader } from "./knowledge";
+import { Knowledge, KnowledgeLoader } from "./knowledge";
 import KnowledgeBase from "./knowledge/KnowledgeBase";
 
 import useAiSettings from "./useAiSettings";
@@ -64,10 +64,8 @@ import AIFeaturesBanner from "./sub-components/AIFeaturesBanner";
 
 import styles from "./AISettings.module.scss";
 
-const detectCurrentTabId = (standalone: boolean) => {
+const detectCurrentTabId = () => {
   const path = window.location.pathname;
-
-  if (!standalone) return "servers";
 
   if (path.includes("models")) return "models";
 
@@ -108,10 +106,9 @@ type TAiSettingsProps = {
   showPortalSettingsLoader?: ClientLoadingStore["showPortalSettingsLoader"];
 };
 
-// TODO: add standalone flag from store for hide ai providers
 const AiSettings = ({
   currentDeviceType,
-  standalone = true,
+  standalone,
   fetchKnowledge,
   fetchAIProviders,
   fetchMCPServers,
@@ -149,7 +146,7 @@ const AiSettings = ({
 
   React.useLayoutEffect(() => {
     const el = bannerRef.current;
-    if (!standalone || !el) return undefined;
+    if (!el) return undefined;
 
     const update = () => setBannerHeight(el.offsetHeight);
     update();
@@ -158,16 +155,14 @@ const AiSettings = ({
     resizeObserver.observe(el);
 
     return () => resizeObserver.disconnect();
-  }, [standalone, ready]);
+  }, [ready, standalone]);
 
   const headerHeight = SECTION_HEADER_HEIGHT[currentDeviceType!];
   const tabsStickyTop = standalone
-    ? `calc(${headerHeight} + ${bannerHeight}px)`
-    : headerHeight;
+    ? headerHeight
+    : `calc(${headerHeight} + ${bannerHeight}px)`;
 
-  const [currentTabId, setCurrentTabId] = React.useState(
-    detectCurrentTabId(standalone),
-  );
+  const [currentTabId, setCurrentTabId] = React.useState(detectCurrentTabId());
 
   const onSelect = (element: TTabItem) => {
     setCurrentTabId(element.id);
@@ -175,10 +170,10 @@ const AiSettings = ({
   };
 
   React.useEffect(() => {
-    const currentTab = detectCurrentTabId(standalone);
+    const currentTab = detectCurrentTabId();
 
     setCurrentTabId(currentTab);
-  }, [standalone]);
+  }, []);
 
   React.useEffect(() => {
     const title =
@@ -203,35 +198,33 @@ const AiSettings = ({
     },
   ];
 
-  const data = standalone
-    ? [
-        {
-          id: "models",
-          name: t("Common:AIModels"),
-          content: <ModelSettingsTable />,
-          onClick: initAiModels,
-        },
-        {
-          id: "providers",
-          name: t("Common:AIProvider"),
-          content: <AIProvider />,
-          onClick: initAIProviders,
-        },
-        ...serversData,
-        {
-          id: "search",
-          name: t("Common:WebSearchAI"),
-          content: <WebSearch />,
-          onClick: initWebSearch,
-        },
-        {
-          id: "knowledge",
-          name: t("AIRoom:Knowledge"),
-          content: <KnowledgeBase />,
-          onClick: initKnowledge,
-        },
-      ]
-    : serversData;
+  const data = [
+    {
+      id: "models",
+      name: t("Common:AIModels"),
+      content: <ModelSettingsTable />,
+      onClick: initAiModels,
+    },
+    {
+      id: "providers",
+      name: t("Common:AIProvider"),
+      content: <AIProvider />,
+      onClick: initAIProviders,
+    },
+    ...serversData,
+    {
+      id: "search",
+      name: t("Common:WebSearchAI"),
+      content: standalone ? <Search /> : <WebSearch />,
+      onClick: initWebSearch,
+    },
+    {
+      id: "knowledge",
+      name: t("AIRoom:Knowledge"),
+      content: standalone ? <Knowledge /> : <KnowledgeBase />,
+      onClick: initKnowledge,
+    },
+  ];
 
   if (showPortalSettingsLoader || !ready) {
     return (
@@ -244,17 +237,19 @@ const AiSettings = ({
 
   return (
     <>
-      <div
-        ref={bannerRef}
-        className={styles.bannerSticky}
-        style={{ top: headerHeight }}
-      >
-        <AIFeaturesBanner
-          currentDeviceType={currentDeviceType}
-          isAiToolsServiceOn={isAiToolsServiceOn}
-          isCardLinkedToPortal={isCardLinkedToPortal}
-        />
-      </div>
+      {standalone ? null : (
+        <div
+          ref={bannerRef}
+          className={styles.bannerSticky}
+          style={{ top: headerHeight }}
+        >
+          <AIFeaturesBanner
+            currentDeviceType={currentDeviceType}
+            isAiToolsServiceOn={isAiToolsServiceOn}
+            isCardLinkedToPortal={isCardLinkedToPortal}
+          />
+        </div>
+      )}
 
       <Tabs
         items={data}
@@ -275,7 +270,7 @@ export const Component = inject(
     paymentStore,
     clientLoadingStore,
   }: TStore) => {
-    const { currentDeviceType } = settingsStore;
+    const { currentDeviceType, standalone } = settingsStore;
 
     const {
       fetchAIProviders,
@@ -303,6 +298,7 @@ export const Component = inject(
       isAiToolsServiceOn,
       isCardLinkedToPortal,
       showPortalSettingsLoader,
+      standalone,
     };
   },
 )(observer(AiSettings));

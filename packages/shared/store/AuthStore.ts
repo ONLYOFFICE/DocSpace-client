@@ -288,6 +288,7 @@ class AuthStore {
 
     if (!user) {
       request.push(this.currentQuotaStore?.fetchPortalQuota(refresh));
+      request.push(this.currentTariffStatusStore?.fetchPayerInfo(refresh));
     }
 
     await Promise.all(request);

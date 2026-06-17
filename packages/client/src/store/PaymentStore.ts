@@ -34,7 +34,7 @@
  */
 
 import axios from "axios";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 import {
   getPaymentSettings,
@@ -45,6 +45,8 @@ import {
   getServicesQuotas,
   getServiceQuota,
   getLicenseQuota,
+  setServiceState,
+  getWalletBalance,
 } from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { authStore, settingsStore } from "@docspace/shared/store";
@@ -94,6 +96,26 @@ class PaymentStore {
   settingsStore: SettingsStore | null = null;
 
   licenseQuota: TLicenseQuota | null = null;
+
+  walletBalanceData: TBalance | null = null;
+
+  get walletBalance(): number {
+    const data = this.walletBalanceData;
+    if (!data || typeof data === "number") return 0;
+    return data.subAccounts?.[0]?.amount ?? 0;
+  }
+
+  get walletCodeCurrency(): string {
+    const data = this.walletBalanceData;
+    if (!data || typeof data === "number") return "USD";
+    return data.subAccounts?.[0]?.currency ?? "USD";
+  }
+
+  fetchWalletBalance = async (isRefresh?: boolean) => {
+    const res = await getWalletBalance(isRefresh);
+    if (res) this.walletBalanceData = res;
+    return this.walletBalance;
+  };
 
   salesEmail = "";
 
@@ -209,6 +231,10 @@ class PaymentStore {
     return this.servicesQuotasFeatures.get(AI_ENUM)?.value;
   }
 
+  get isAIReady() {
+    return Boolean(this.isAiToolsServiceOn) || Boolean(settingsStore.aiConfig?.aiReady);
+  }
+
   formatDate = (date: DateTime, timeType?: "start" | "end") => {
     if (!timeType) {
       return formatDateUtil(date, "yyyy-MM-dd'T'HH:mm:ss", { locale: "en" });
@@ -248,6 +274,21 @@ class PaymentStore {
     this.servicesQuotasFeatures.set(key, featureWithPrice);
 
     return service.serviceName;
+  };
+
+  enableAIService = async (onSuccess?: () => void | Promise<void>) => {
+    const feature = this.servicesQuotasFeatures.get(AI_ENUM);
+    if (feature) {
+      this.servicesQuotasFeatures.set(AI_ENUM, { ...feature, value: true });
+    }
+    try {
+      await setServiceState({ service: AI_ENUM, enabled: true });
+      await onSuccess?.();
+    } catch {
+      if (feature) {
+        this.servicesQuotasFeatures.set(AI_ENUM, { ...feature, value: false });
+      }
+    }
   };
 
   standaloneBasicSettings = async (t: TTranslation) => {

@@ -101,7 +101,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
     : "";
 
   const confirmFieldError =
-    !!confirmPassphrase && newPassphrase !== confirmPassphrase
+    confirmPassphrase && newPassphrase !== confirmPassphrase
       ? t("Common:PassphraseMismatch")
       : "";
 
@@ -288,3 +288,4 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
     </ModalDialog>
   );
 };
+

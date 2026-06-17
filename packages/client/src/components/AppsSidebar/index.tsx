@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
@@ -38,15 +39,28 @@ import type { TUser } from "@docspace/shared/api/people/types";
 import type { ArticleProfileProps } from "@docspace/ui-kit/components/article";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
+import BackButton from "@docspace/ui-kit/components/article/sub-components/BackButton";
+import { useSectionNavigation } from "SRC_DIR/contexts/SectionNavigationContext";
 import CollapseButton from "./CollapseButton";
 import FooterMenu from "./FooterMenu";
 import ProfileBlock from "./ProfileBlock";
+import { useSidebarShowText } from "./useSidebarShowText";
 import styles from "./AppsSidebar.module.scss";
 
+// "primary" — main client sidebar (footer + no back button).
+// "secondary" — accounts / developer-tools / portal-settings (back button, no footer).
+export type SidebarVariant = "primary" | "secondary";
+
+// Props a caller provides. Common store data (user, device, article state) is
+// injected by the connected default export below, so sections only pass what
+// actually differs between them.
 export type AppsSidebarProps = {
   groups: NavMenuGroup[];
   activeId?: string;
-  defaultExpandedId?: string;
+  variant?: SidebarVariant;
+};
+
+type AppsSidebarViewProps = AppsSidebarProps & {
   showText: boolean;
   toggleShowText: () => void;
   currentDeviceType: DeviceType;
@@ -54,12 +68,13 @@ export type AppsSidebarProps = {
   isNotPaidPeriod?: boolean;
   articleOpen?: boolean;
   toggleArticleOpen?: () => void;
+  onBack?: () => void;
 };
 
-const AppsSidebar = ({
+export const AppsSidebarView = ({
   groups,
   activeId,
-  defaultExpandedId,
+  variant = "primary",
   showText,
   toggleShowText,
   currentDeviceType,
@@ -67,7 +82,10 @@ const AppsSidebar = ({
   isNotPaidPeriod = false,
   articleOpen = true,
   toggleArticleOpen,
-}: AppsSidebarProps) => {
+  onBack,
+}: AppsSidebarViewProps) => {
+  const showBackButton = variant === "secondary";
+  const hideFooter = variant === "secondary";
   const { t } = useTranslation(["Common"]);
   const { isBase } = useTheme();
   const isMobile = currentDeviceType === DeviceType.mobile;
@@ -162,10 +180,17 @@ const AppsSidebar = ({
           scrollClass="article-scroller"
           scrollBodyClassName={styles.scrollBody}
         >
+          {showBackButton && (
+            <BackButton
+              showText={showText}
+              currentDeviceType={currentDeviceType}
+              onBack={onBack}
+              toggleArticleOpen={toggleArticleOpen}
+            />
+          )}
           <NavMenu
             groups={groups}
             activeItemId={activeId}
-            defaultExpandedId={defaultExpandedId}
             iconOnly={!showText}
             withAnimation
           />
@@ -173,16 +198,18 @@ const AppsSidebar = ({
           {/* Footer menu lives inside the scroll body so it scrolls with the
               apps list when there is overflow, and stays pinned to the bottom
               (via margin-block-start: auto) when there is free space above. */}
-          <div className={styles.footer}>
-            <FooterMenu
-              showText={showText}
-              isAdmin={isAdmin}
-              isOwner={isOwner}
-              isVisitor={isVisitor}
-              isCollaborator={isCollaborator}
-              isNotPaidPeriod={isNotPaidPeriod}
-            />
-          </div>
+          {!hideFooter && (
+            <div className={styles.footer}>
+              <FooterMenu
+                showText={showText}
+                isAdmin={isAdmin}
+                isOwner={isOwner}
+                isVisitor={isVisitor}
+                isCollaborator={isCollaborator}
+                isNotPaidPeriod={isNotPaidPeriod}
+              />
+            </div>
+          )}
         </Scrollbar>
 
         {user && !isMobile ? (
@@ -206,5 +233,49 @@ const AppsSidebar = ({
   );
 };
 
-export default AppsSidebar;
+// Store-injected fields are optional here so the public type (what call sites
+// pass) stays just `AppsSidebarProps`; `inject` supplies the rest at runtime.
+type AppsSidebarConnectedProps = AppsSidebarProps & {
+  currentDeviceType?: DeviceType;
+  user?: TUser | null;
+  isNotPaidPeriod?: boolean;
+  articleOpen?: boolean;
+  toggleArticleOpen?: () => void;
+};
+
+const AppsSidebar = ({
+  variant = "primary",
+  currentDeviceType = DeviceType.desktop,
+  ...rest
+}: AppsSidebarConnectedProps) => {
+  const { showText, toggleShowText } = useSidebarShowText({
+    storageKey:
+      variant === "secondary"
+        ? "secondary_showSidebarText"
+        : "home_showSidebarText",
+    currentDeviceType,
+  });
+  const { navigateBack } = useSectionNavigation();
+
+  return (
+    <AppsSidebarView
+      {...rest}
+      variant={variant}
+      currentDeviceType={currentDeviceType}
+      showText={showText}
+      toggleShowText={toggleShowText}
+      onBack={variant === "secondary" ? navigateBack : undefined}
+    />
+  );
+};
+
+export default inject<TStore>(
+  ({ userStore, settingsStore, currentTariffStatusStore }) => ({
+    user: userStore.user,
+    currentDeviceType: settingsStore.currentDeviceType,
+    articleOpen: settingsStore.articleOpen,
+    toggleArticleOpen: settingsStore.toggleArticleOpen,
+    isNotPaidPeriod: currentTariffStatusStore.isNotPaidPeriod,
+  }),
+)(observer(AppsSidebar));
 

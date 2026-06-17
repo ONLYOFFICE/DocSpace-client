@@ -706,6 +706,8 @@
   "DropzoneTitleSecondary": "veya dosyayı buraya bırakın",
   "DueToday": "Bugün teslim",
   "Duplicate": "Çoğalt",
+  "DuplicateFolderItem": "<2>{{title}}</2> klasörü başarıyla kopyalandı",
+  "DuplicateItem": "<2>{{title}}</2> başarıyla kopyalandı",
   "EditAccessInfo": "Belgeleri düzenlemeye kaç kullanıcının erişebileceğini belirttik.",
   "EditAdditionalLink": "Ek bağlantıyı düzenle",
   "EditAgent": "Aracıyı Düzenle",
@@ -1732,6 +1734,7 @@
   "RoomExternalLinkDeleted": "Bağlantı <1>«{{linkTitle}}»</1> silindi.",
   "RoomExternalLinkRenamed": "Bağlantı <1>«{{oldLinkTitle}}»</1> <1>«{{linkTitle}}»</1> olarak yeniden adlandırıldı",
   "RoomExternalLinkRevoked": "Önceki bağlantı <1>«{{linkTitle}}»</1> iptal edildi <br/> Yeni Bağlantı <1>«{{linkTitle}}»</1> oluşturuldu",
+  "RoomFilesLifetime": "Bu odada dosya yaşam süresi {{days}} {{period}} olarak ayarlanmıştır",
   "RoomFormBarDescription": "Bu oda, bağlantıya sahip olan herkes tarafından kullanılabilir. Harici kullanıcılar tüm dosyalar için Form Doldurma iznine sahip olacaktır.",
   "RoomFromArchiveRestore": "{{sectionName}}'den kurtarılan oda",
   "RoomGroupAdded": "Gruplar ekledi.",
@@ -2249,7 +2252,5 @@
   "YourName": "Adınız",
   "YourPrice": "Ücret",
   "YourTurn": "Sıra sizde",
-  "YouWillBeContacted": "Satış ekibi, talebi oluşturduktan sonra sizinle iletişime geçecektir.",
-  "DuplicateFolderItem": "<2>{{title}}</2> klasörü başarıyla kopyalandı",
-  "DuplicateItem": "<2>{{title}}</2> başarıyla kopyalandı"
+  "YouWillBeContacted": "Satış ekibi, talebi oluşturduktan sonra sizinle iletişime geçecektir."
 }

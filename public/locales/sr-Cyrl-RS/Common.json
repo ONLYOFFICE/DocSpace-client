@@ -717,6 +717,8 @@
   "DropzoneTitleSecondary": "или спусти датотеку овде",
   "DueToday": "Доспело данас",
   "Duplicate": "Дуплицирај",
+  "DuplicateFolderItem": "Фолдер <2>{{title}}</2> успешно дуплиран",
+  "DuplicateItem": "<2>{{title}}</2> успешно дуплиран",
   "EditAccessInfo": "Одредили смо колико корисника може имати приступ уређивању докумената.",
   "EditAdditionalLink": "Уреди додатни линк",
   "EditAgent": "Уредите агенте",
@@ -1755,6 +1757,7 @@
   "RoomExternalLinkDeleted": "Линк <1>«{{linkTitle}}»</1 > обрисан.",
   "RoomExternalLinkRenamed": "Линк <1>«{{oldLinkTitle}}»</1> преименован на <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "Претходни линк <1>«{{linkTitle}}»</1> је опозван <br/> Нови линк <1>«{{linkTitle}}»</1> је креиран",
+  "RoomFilesLifetime": "Век трајања фајла постављен је на {{days}} {{period}} у овој соби",
   "RoomFormBarDescription": "Ова просторија је доступна за било кога са линком. Спољни корисници ће имати дозволу за попуњавање формулара за све датотеке.",
   "RoomFromArchiveRestore": "Соба опорављена из {{sectionName}}",
   "RoomGroupAdded": "Групе додате.",
@@ -2272,7 +2275,5 @@
   "YourName": "Ваше име",
   "YourPrice": "Ваша цена",
   "YourTurn": "Ваш ред",
-  "YouWillBeContacted": "Продајни тим ће вас контактирати након креирања захтева.",
-  "DuplicateFolderItem": "Фолдер <2>{{title}}</2> успешно дуплиран",
-  "DuplicateItem": "<2>{{title}}</2> успешно дуплиран"
+  "YouWillBeContacted": "Продајни тим ће вас контактирати након креирања захтева."
 }

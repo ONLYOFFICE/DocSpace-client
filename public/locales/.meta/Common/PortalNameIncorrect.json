@@ -203,18 +203,18 @@
       "approved_at": null
     }
   },
-  "updated_at": "2026-06-01T21:20:44.461Z",
+  "updated_at": "2026-06-15T19:31:56.086Z",
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
       "line_number": 301,
-      "context": "maxLength: domainValidator.maxLength,\n }),\n );\n break;\n case !validDomain.test(value):\n setErrorValue(t(\"PortalNameIncorrect\"));\n saveToSessionStorage(\"errorValue\", t(\"PortalNameIncorrect\"));\n break;\n default:\n saveToSessionStorage(\"errorValue\", null);\n setErrorValue(null);",
+      "context": "maxLength: domainValidator.maxLength,\n }),\n );\n break;\n case !validDomain.test(value):\n setErrorValue(t(\"Common:PortalNameIncorrect\"));\n saveToSessionStorage(\"errorValue\", t(\"Common:PortalNameIncorrect\"));\n break;\n default:\n saveToSessionStorage(\"errorValue\", null);\n setErrorValue(null);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
       "line_number": 301,
-      "context": "maxLength: domainValidator.maxLength,\n }),\n );\n break;\n case !validDomain.test(value):\n setErrorValue(t(\"PortalNameIncorrect\"));\n saveToSessionStorage(\"errorValue\", t(\"PortalNameIncorrect\"));\n break;\n default:\n saveToSessionStorage(\"errorValue\", null);\n setErrorValue(null);",
+      "context": "maxLength: domainValidator.maxLength,\n }),\n );\n break;\n case !validDomain.test(value):\n setErrorValue(t(\"Common:PortalNameIncorrect\"));\n saveToSessionStorage(\"errorValue\", t(\"Common:PortalNameIncorrect\"));\n break;\n default:\n saveToSessionStorage(\"errorValue\", null);\n setErrorValue(null);",
       "module": "/packages/client"
     },
     {

@@ -717,6 +717,8 @@
   "DropzoneTitleSecondary": "կամ թողնել ֆայլը այստեղ",
   "DueToday": "Վերջնաժամկետն այսօր է",
   "Duplicate": "Կրկնօրինակել",
+  "DuplicateFolderItem": "Պանակը <2>{{title}}</2> հաջողությամբ կրկնօրինակված է",
+  "DuplicateItem": "<2>{{title}}</2>ը հաջողությամբ կրկնօրինակված է",
   "EditAccessInfo": "Մենք նշել ենք, թե քանի օգտատեր կարող է մուտք ունենալ փաստաթղթերի խմբագրմանը։",
   "EditAdditionalLink": "Խմբագրել լրացուցիչ հղումը",
   "EditAgent": "Խմբագրել Գործակալը",
@@ -1755,6 +1757,7 @@
   "RoomExternalLinkDeleted": "Հղումը <1>«{{linkTitle}}»</1> ջնջված է։",
   "RoomExternalLinkRenamed": "Հղումը <1>«{{oldLinkTitle}}»</1> վերանվանվել է <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "Նախորդ հղումը <1>«{{linkTitle}}»</1> չեղարկվել է <br/> Ստեղծվել է նոր հղում <1>«{{linkTitle}}»</1>",
+  "RoomFilesLifetime": "Այս սենյակում ֆայլի գործողության ժամկետը սահմանված է {{days}} {{period}}",
   "RoomFormBarDescription": "Այս սենյակը հասանելի է բոլորին, ովքեր ունեն հղումը: Արտաքին օգտատերերը կունենան Ձևաթղթի Լրացման թույլտվություն բոլոր ֆայլերի համար:",
   "RoomFromArchiveRestore": "Սենյակը վերականգնվեց {{sectionName}} բաժնից",
   "RoomGroupAdded": "Խմբերն ավելացվել են։",
@@ -2272,7 +2275,5 @@
   "YourName": "Ձեր անունը",
   "YourPrice": "Ձեր գինը",
   "YourTurn": "Ձեր հերթն է",
-  "YouWillBeContacted": "Վաճառքի թիմը կկապվի ձեզ հետ հարցումը ստեղծելուց հետո:",
-  "DuplicateFolderItem": "Պանակը <2>{{title}}</2> հաջողությամբ կրկնօրինակված է",
-  "DuplicateItem": "<2>{{title}}</2>ը հաջողությամբ կրկնօրինակված է"
+  "YouWillBeContacted": "Վաճառքի թիմը կկապվի ձեզ հետ հարցումը ստեղծելուց հետո:"
 }

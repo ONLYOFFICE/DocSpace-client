@@ -717,6 +717,8 @@
   "DropzoneTitleSecondary": "oder Datei hier ablegen",
   "DueToday": "Heute fällig",
   "Duplicate": "Duplizieren",
+  "DuplicateFolderItem": "Der Ordner <2>{{title}}</2> wurde erfolgreich dupliziert",
+  "DuplicateItem": "<2>{{title}}</2> erfolgreich dupliziert",
   "EditAccessInfo": "Wir haben festgelegt, wie viele Nutzer Zugriff auf die Bearbeitung von Dokumenten haben dürfen.",
   "EditAdditionalLink": "Zusätzlichen Link bearbeiten",
   "EditAgent": "Agent bearbeiten",
@@ -1755,6 +1757,7 @@
   "RoomExternalLinkDeleted": "Link <1>«{{linkTitle}}»</1> gelöscht.",
   "RoomExternalLinkRenamed": "Link <1>«{{oldLinkTitle}}»</1> umbenannt in <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "Vorheriger Link <1>«{{linkTitle}}»</1> widerrufen <br/> Neuer Link <1>«{{linkTitle}}»</1> erstellt",
+  "RoomFilesLifetime": "Die Dateilebensdauer in diesem Raum ist auf {{days}} {{period}} festgelegt",
   "RoomFormBarDescription": "Dieser Raum ist für jeden zugänglich, der den Link hat. Externe Benutzer haben die Berechtigung zum Ausfüllen von Formularen für alle Dateien.",
   "RoomFromArchiveRestore": "Raum von {{sectionName}} wiederhergestellt",
   "RoomGroupAdded": "Gruppen hinzugefügt.",
@@ -2272,7 +2275,5 @@
   "YourName": "Ihr Name",
   "YourPrice": "Ihr Preis",
   "YourTurn": "Jetzt sind Sie dran",
-  "YouWillBeContacted": "Das Verkaufsteam wird Sie nach der Erstellung der Anfrage kontaktieren.",
-  "DuplicateFolderItem": "Der Ordner <2>{{title}}</2> wurde erfolgreich dupliziert",
-  "DuplicateItem": "<2>{{title}}</2> erfolgreich dupliziert"
+  "YouWillBeContacted": "Das Verkaufsteam wird Sie nach der Erstellung der Anfrage kontaktieren."
 }

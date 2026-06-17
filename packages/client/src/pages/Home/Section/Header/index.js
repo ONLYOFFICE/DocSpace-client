@@ -77,9 +77,12 @@ import {
   showInfoPanel,
   hideInfoPanel as hideInfoPanelEvent,
 } from "SRC_DIR/helpers/info-panel";
-import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
+import { getContactsView } from "SRC_DIR/helpers/contacts";
 import TariffBar from "SRC_DIR/components/TariffBar";
-import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
+import {
+  getLifetimePeriodTranslation,
+  getCategoryType,
+} from "@docspace/shared/utils/common";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -164,11 +167,7 @@ const SectionHeaderContent = (props) => {
     onCreateAndCopySharedLink,
     showNavigationButton,
     startUpload,
-    getFolderModel,
-    getContactsModel,
     contactsCanCreate,
-    onCreateRoom,
-    onCreateAgent,
     onEmptyTrashAction,
     getHeaderOptions,
     setBufferSelection,
@@ -192,8 +191,6 @@ const SectionHeaderContent = (props) => {
     isPersonalReadOnly,
     isPrivacyFolder,
     showTemplateBadge,
-
-    allowInvitingMembers,
 
     isAIRoom,
     isAIAgent,
@@ -233,6 +230,10 @@ const SectionHeaderContent = (props) => {
   const isContactsGroupsPage = contactsTab === "groups";
   const isContactsInsideGroupPage = contactsTab === "inside_group";
   const isProfile = currentClientView === "profile";
+
+  // The "Forms" section reuses the Rooms folder; detect it from the route to
+  // adjust section labels (title, create-button caption) accordingly.
+  const isFormsSection = getCategoryType(location) === CategoryType.Forms;
   const currentGroupName = currentGroup?.name;
 
   const addButtonRefCallback = React.useCallback(
@@ -488,11 +489,6 @@ const SectionHeaderContent = (props) => {
     ],
   );
 
-  const getContextOptionsPlus = React.useCallback(() => {
-    if (isContactsPage) return getContactsModel(t);
-    return getFolderModel(t);
-  }, [isContactsPage, getContactsModel, getFolderModel, t, contactsTab]);
-
   const onNavigationButtonClick = React.useCallback(() => {
     onCreateAndCopySharedLink(selectedFolder, t);
   }, [onCreateAndCopySharedLink, selectedFolder, t]);
@@ -536,8 +532,7 @@ const SectionHeaderContent = (props) => {
   const lifetime = selectedFolder?.lifetime || infoPanelRoom?.lifetime;
   const sharedType =
     (location.state?.isExternal || selectedFolder?.external) && !isPublicRoom;
-  const isEncryptedRoom =
-    selectedFolder?.private === true || isPrivacyFolder;
+  const isEncryptedRoom = selectedFolder?.private === true || isPrivacyFolder;
 
   const titleIcon = React.useMemo(() => {
     if (sharedType) return SharedLinkSvgUrl;
@@ -612,7 +607,7 @@ const SectionHeaderContent = (props) => {
     if (isEncryptedRoom) return t("Common:PrivateRoomDescription");
 
     if (lifetime)
-      return `${t("Files:RoomFilesLifetime", {
+      return `${t("Common:RoomFilesLifetime", {
         days: lifetime.value,
         period: getLifetimePeriodTranslation(lifetime.period, t),
       })}. ${
@@ -756,6 +751,11 @@ const SectionHeaderContent = (props) => {
 
     if (isSettingsPage) return t("Common:Settings");
 
+    // The "Forms" section reuses the Rooms folder, so the selected folder title
+    // would otherwise read "Rooms"; force the section name instead.
+    if (getCategoryType(location) === CategoryType.Forms)
+      return t("Common:Forms");
+
     if (isContactsPage) {
       switch (contactsTab) {
         case "people":
@@ -785,6 +785,7 @@ const SectionHeaderContent = (props) => {
     insideGroupTempTitle,
     currentGroupName,
     title,
+    location,
   ]);
 
   const contextMenuHeader = React.useMemo(() => {
@@ -876,6 +877,7 @@ const SectionHeaderContent = (props) => {
 
   const insideTheRoom =
     (categoryType === CategoryType.SharedRoom ||
+      categoryType === CategoryType.Form ||
       categoryType === CategoryType.Archive) &&
     !isCurrentRoom;
 
@@ -942,35 +944,6 @@ const SectionHeaderContent = (props) => {
     isRootFolder,
   ]);
 
-  const onPlusClick = React.useCallback(() => {
-    if (isAIAgentsFolder) return onCreateAgent();
-    if (!isContactsPage) return onCreateRoom();
-    if (isContactsGroupsPage) return createGroup(selectedFolder?.id, "sidebar");
-  }, [
-    isAIAgentsFolder,
-    isContactsPage,
-    isContactsGroupsPage,
-    onCreateAgent,
-    onCreateRoom,
-    createGroup,
-  ]);
-
-  const isPlusButtonVisible = React.useMemo(() => {
-    if (allowInvitingMembers) return true;
-
-    if (!isContactsPage || isContactsGroupsPage) return true;
-
-    const lengthList = getContextOptionsPlus()?.length;
-    if (!lengthList || lengthList === 0) return false;
-
-    return true;
-  }, [
-    getContextOptionsPlus,
-    isContactsPage,
-    isContactsGroupsPage,
-    allowInvitingMembers,
-  ]);
-
   const withMenu = !isRoomsFolder && !isContactsGroupsPage && !isAIAgentsFolder;
 
   if (showHeaderLoader) return <SectionHeaderSkeleton />;
@@ -1022,7 +995,6 @@ const SectionHeaderContent = (props) => {
                   ? navigationPath
                   : accountsNavigationPath
               }
-              getContextOptionsPlus={getContextOptionsPlus}
               getContextOptionsFolder={getContextOptionsFolder}
               onClose={onClose}
               onClickFolder={onClickFolder}
@@ -1041,14 +1013,15 @@ const SectionHeaderContent = (props) => {
                 warningIcon: isRoomStorageQuotaExceeded
                   ? WarningQuotaExceededUrl
                   : undefined,
-                actions: isRoomsFolder
-                  ? t("Common:NewRoom")
-                  : t("Common:Actions"),
+                actions: isFormsSection
+                  ? t("Common:CreateFormSet")
+                  : isRoomsFolder
+                    ? t("Common:NewRoom")
+                    : t("Common:Actions"),
                 contextMenu: t("Common:TitleShowFolderActions"),
                 infoPanel: t("Common:InfoPanel"),
               }}
               withMenu={withMenu}
-              onPlusClick={onPlusClick}
               isEmptyPage={isEmptyPage}
               isRoom={isCurrentRoom || isContactsPage || isProfile}
               hideInfoPanel={
@@ -1087,7 +1060,7 @@ const SectionHeaderContent = (props) => {
               guidAnimationVisible={guidAnimationVisible}
               setGuidAnimationVisible={setGuidAnimationVisible}
               isContextButtonVisible={isContextButtonVisible}
-              isPlusButtonVisible={isPlusButtonVisible}
+              isPlusButtonVisible={false}
               showBackButton={isProfile}
               contextMenuHeader={isProfile ? undefined : contextMenuHeader}
               analyzeResponsesButton={
@@ -1247,14 +1220,8 @@ export default inject(
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
 
-    const {
-      theme,
-      frameConfig,
-      isFrame,
-      currentDeviceType,
-      displayAbout,
-      allowInvitingMembers,
-    } = settingsStore;
+    const { theme, frameConfig, isFrame, currentDeviceType, displayAbout } =
+      settingsStore;
 
     const isRoom = !!roomType;
 
@@ -1262,9 +1229,6 @@ export default inject(
       onClickEditRoom,
       onCopyLink,
       onCreateAndCopySharedLink,
-      getFolderModel,
-      onCreateRoom,
-      onCreateAgent,
       getHeaderOptions,
       onEmptyTrashAction,
     } = contextOptionsStore;
@@ -1304,8 +1268,7 @@ export default inject(
       getContactsHeaderMenu,
     } = headerMenuStore;
 
-    const { getContactsModel, contactsCanCreate } =
-      peopleStore.contextOptionsStore;
+    const { contactsCanCreate } = peopleStore.contextOptionsStore;
 
     const { setSelected: setUsersSelected, contactsTab } = usersStore;
 
@@ -1315,7 +1278,7 @@ export default inject(
 
     let folderPath = navigationPath;
 
-    if (isFrame && !!pathParts) {
+    if (isFrame && pathParts) {
       folderPath = navigationPath.filter((item) => !item.isRootRoom);
     }
 
@@ -1450,16 +1413,12 @@ export default inject(
       onCreateAndCopySharedLink,
       showNavigationButton,
       startUpload,
-      getFolderModel,
-      onCreateRoom,
-      onCreateAgent,
       onEmptyTrashAction,
       getHeaderOptions,
       setBufferSelection,
       setReorderDialogVisible,
       setGroupsBufferSelection,
       createFoldersTree,
-      getContactsModel,
       contactsCanCreate,
       revokeFilesOrder,
       saveIndexOfFiles,
@@ -1475,7 +1434,6 @@ export default inject(
       setRefMap,
       deleteRefMap,
       showTemplateBadge: isTemplate && !isRoot,
-      allowInvitingMembers,
 
       isAIRoom,
       isAIAgent,
@@ -1521,3 +1479,4 @@ export default inject(
     "GroupingRooms",
   ])(observer(SectionHeaderContent)),
 );
+

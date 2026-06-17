@@ -1598,9 +1598,9 @@ class FilesActionStore {
     return enableCustomFilter(item.id, !item.customFilterEnabled)
       .then((res) => {
         if (res.customFilterEnabled) {
-          toastr.success(t("CustomFilterEnabled"));
+          toastr.success(t("Common:CustomFilterEnabled"));
         } else {
-          toastr.success(t("CustomFilterDisabled"));
+          toastr.success(t("Common:CustomFilterDisabled"));
         }
       })
       .catch((err) => {
@@ -1833,11 +1833,11 @@ class FilesActionStore {
 
       if (isAIAgent) {
         translationForOneItem = isPin
-          ? t("AIAgentPinned", { aiAgent: t("Common:AIAgent") })
-          : t("AIAgentUnpinned", { aiAgent: t("Common:AIAgent") });
+          ? t("Common:AIAgentPinned", { aiAgent: t("Common:AIAgent") })
+          : t("Common:AIAgentUnpinned", { aiAgent: t("Common:AIAgent") });
         translationForSeverals = isPin
-          ? t("AIAgentsPinned", { aiAgents: t("Common:AIAgents") })
-          : t("AIAgentsUnpinned", { aiAgents: t("Common:AIAgents") });
+          ? t("Common:AIAgentsPinned", { aiAgents: t("Common:AIAgents") })
+          : t("Common:AIAgentsUnpinned", { aiAgents: t("Common:AIAgents") });
       } else {
         translationForOneItem = isPin
           ? t("Common:RoomPinned")
@@ -1875,7 +1875,7 @@ class FilesActionStore {
       if (isError) {
         isAIAgent
           ? toastr.error(
-              t("AIAgentPinLimitMessage", { aiAgents: t("Common:AIAgents") }),
+              t("Common:AIAgentPinLimitMessage", { aiAgents: t("Common:AIAgents") }),
             )
           : toastr.error(t("Common:RoomsPinLimitMessage"));
       }
@@ -2143,10 +2143,10 @@ class FilesActionStore {
       }
 
       if (tag.roomType) {
-        if (!!newFilter.type && +newFilter.type === tag.roomType) return;
+        if (newFilter.type && +newFilter.type === tag.roomType) return;
         newFilter.type = tag.roomType;
       } else if (tag.providerType) {
-        if (!!newFilter.provider && +newFilter.provider === tag.providerType)
+        if (newFilter.provider && +newFilter.provider === tag.providerType)
           return;
         newFilter.provider = tag.providerType;
       } else {
@@ -3087,12 +3087,12 @@ class FilesActionStore {
       .set("downloadAs", downloadAs)
       .set("copy", copy)
       /* .set("delete", {
-        label: t("RemoveFromFavorites"),
-        alt: t("RemoveFromFavorites"),
+        label: t("Common:RemoveFromFavorites"),
+        alt: t("Common:RemoveFromFavorites"),
         iconUrl: FavoritesFillReactSvgUrl,
         onClick: () => {
           this.setFavoriteAction("remove", selection)
-            .then(() => toastr.success(t("RemovedFromFavorites")))
+            .then(() => toastr.success(t("Common:RemovedFromFavorites")))
             .catch((err) => toastr.error(err));
         },
       }) */
@@ -3443,7 +3443,11 @@ class FilesActionStore {
       return this.backToParentFolder();
     }
 
-    if (categoryType === CategoryType.SharedRoom || isArchivedRoom) {
+    if (
+      categoryType === CategoryType.SharedRoom ||
+      categoryType === CategoryType.Form ||
+      isArchivedRoom
+    ) {
       if (isRoom) {
         return this.moveToRoomsPage();
       }
@@ -3522,9 +3526,11 @@ class FilesActionStore {
       categoryType === CategoryType.SharedRoom ||
       categoryType === CategoryType.Chat
         ? CategoryType.Shared
-        : CategoryType.ArchivedRoom === categoryType
-          ? CategoryType.Archive
-          : categoryType;
+        : categoryType === CategoryType.Form
+          ? CategoryType.Forms
+          : CategoryType.ArchivedRoom === categoryType
+            ? CategoryType.Archive
+            : categoryType;
 
     const path = getCategoryUrl(correctCategoryType);
 

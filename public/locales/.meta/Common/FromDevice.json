@@ -3,7 +3,7 @@
   "content": "From device",
   "content_en_sha1_hash": "f831ef2d6cdd62d96cf8dc302c9a04f09962e594",
   "created_at": "2025-05-19T21:30:45.577Z",
-  "updated_at": "2026-06-09T09:43:10.786Z",
+  "updated_at": "2026-06-15T19:31:55.927Z",
   "comment": {
     "text": "This is a button label that allows users to upload files from their local device.",
     "is_auto": true,

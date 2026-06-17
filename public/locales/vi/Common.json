@@ -706,6 +706,8 @@
   "DropzoneTitleSecondary": "hoặc thả tập tin vào đây",
   "DueToday": "Hạn chót hôm nay",
   "Duplicate": "Nhân bản",
+  "DuplicateFolderItem": "Đã sao chép thành công thư mục <2>{{title}}</2>",
+  "DuplicateItem": "<2>{{title}}</2> đã được sao chép thành công",
   "EditAccessInfo": "Chúng tôi đã chỉ định số lượng người dùng có thể truy cập để chỉnh sửa tài liệu.",
   "EditAdditionalLink": "Chỉnh sửa liên kết bổ sung",
   "EditAgent": "Chỉnh sửa Đại lý",
@@ -1732,6 +1734,7 @@
   "RoomExternalLinkDeleted": "Đã xóa liên kết <1>«{{linkTitle}}»</1>.",
   "RoomExternalLinkRenamed": "Liên kết <1>«{{oldLinkTitle}}»</1> được đổi tên thành <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "Liên kết trước <1>«{{linkTitle}}»</1> đã được hủy  <br/> Liên kết mới <1>«{{linkTitle}}»</1> đã được tạo",
+  "RoomFilesLifetime": "Thời gian tồn tại của tập tin được đặt thành {{period}} {{days}} trong phòng này",
   "RoomFormBarDescription": "Phòng này khả dụng cho bất kỳ ai có liên kết. Người dùng bên ngoài sẽ có quyền Điền Biểu Mẫu cho tất cả các tập tin.",
   "RoomFromArchiveRestore": "Phòng được phục hồi từ {{sectionName}}",
   "RoomGroupAdded": "Đã thêm nhóm.",
@@ -2249,7 +2252,5 @@
   "YourName": "Tên của bạn",
   "YourPrice": "Giá của bạn",
   "YourTurn": "Phiên của bạn",
-  "YouWillBeContacted": "Đội ngũ kinh doanh sẽ liên hệ với bạn sau khi tạo yêu cầu.",
-  "DuplicateFolderItem": "Đã sao chép thành công thư mục <2>{{title}}</2>",
-  "DuplicateItem": "<2>{{title}}</2> đã được sao chép thành công"
+  "YouWillBeContacted": "Đội ngũ kinh doanh sẽ liên hệ với bạn sau khi tạo yêu cầu."
 }

@@ -45,6 +45,7 @@ import styles from "./RoomTypeList.module.scss";
 type RoomTypeListProps = {
   disabledFormRoom: boolean;
   isExternalShareRestricted?: boolean;
+  processCreatingRoomFromData?: boolean;
 
   setRoomType: (roomType: RoomsType) => void;
   setTemplateDialogIsVisible: (isVisible: boolean) => void;
@@ -53,11 +54,20 @@ type RoomTypeListProps = {
 const RoomTypeList = ({
   disabledFormRoom = true,
   isExternalShareRestricted,
+  processCreatingRoomFromData,
 
   setRoomType,
   setTemplateDialogIsVisible,
 }: RoomTypeListProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Files", "Common"]);
+
+  // Form Filling Rooms are created from the dedicated "Forms" section (which
+  // opens straight into the FFR form via startRoomType). The only place the
+  // FFR card still belongs in this generic chooser is the "create room from
+  // selected PDF data" flow.
+  const roomTypeValues = processCreatingRoomFromData
+    ? RoomsTypeValues
+    : RoomsTypeValues.filter((roomType) => roomType !== RoomsType.FormRoom);
 
   const handleClick = (roomType: RoomsType | "template") => {
     if (disabledFormRoom && roomType === RoomsType.FormRoom) return;
@@ -80,7 +90,7 @@ const RoomTypeList = ({
 
   return (
     <div className={styles.roomTypeList}>
-      {RoomsTypeValues.map((roomType) => {
+      {roomTypeValues.map((roomType) => {
         const isFormRoom = roomType === RoomsType.FormRoom;
         const isPublicRoom = roomType === RoomsType.PublicRoom;
 

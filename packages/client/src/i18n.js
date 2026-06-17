@@ -40,7 +40,14 @@ import config from "PACKAGE_FILE";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 
-import { loadLanguagePath } from "./helpers/language-helpers";
+import {
+  loadLanguagePath,
+  loadCombinedLanguagePath,
+} from "./helpers/language-helpers";
+
+// Combined per-language bundles are only emitted by the production build
+// (copy-locales plugin). In dev we keep per-namespace loading from public/.
+const useCombinedLocales = import.meta.env.PROD;
 
 const newInstance = i18n.createInstance();
 
@@ -95,8 +102,11 @@ newInstance
     ],
 
     backend: {
-      loadPath: loadLanguagePath(config.homepage),
+      loadPath: useCombinedLocales
+        ? loadCombinedLanguagePath()
+        : loadLanguagePath(config.homepage),
       allowMultiLoading: false,
+      combinedNamespaces: useCombinedLocales,
       crossDomain: false,
     },
 

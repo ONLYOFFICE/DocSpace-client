@@ -689,7 +689,7 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
       return unique;
     }, []);
 
-    if (items.length > filtered.length) toastr.warning(t("UsersAlreadyAdded"));
+    if (items.length > filtered.length) toastr.warning(t("Common:UsersAlreadyAdded"));
 
     return filtered;
   };

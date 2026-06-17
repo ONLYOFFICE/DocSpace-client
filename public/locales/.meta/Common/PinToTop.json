@@ -3,7 +3,7 @@
   "content": "Pin to top",
   "content_en_sha1_hash": "a94cf5385edad5e968827d91757ef6b07d571826",
   "created_at": "2025-05-19T21:30:55.964Z",
-  "updated_at": "2026-06-09T09:43:10.928Z",
+  "updated_at": "2026-06-15T19:31:56.143Z",
   "comment": {
     "text": "This is the label for a button that pins a room or item to the top of a list.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 255,
+      "line_number": 331,
       "context": "},\n { key: \"separator-pin\", isSeparator: true },\n {\n id: room.pinned ? \"option_unpin\" : \"option_pin\",\n key: room.pinned ? \"unpin\" : \"pin\",\n label: room.pinned ? t(\"Common:Unpin\") : t(\"Common:PinToTop\"),\n icon: room.pinned ? UnpinReactSvgUrl : PinReactSvgUrl,\n onClick: handlePin,\n disabled: !room.security?.Pin,\n },\n {",
       "module": "/packages/sdk"
     }

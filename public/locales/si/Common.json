@@ -706,6 +706,8 @@
   "DropzoneTitleSecondary": "හෝ මෙතැනට ගොනුව දමන්න",
   "DueToday": "අද දින ගෙවිය යුතුය",
   "Duplicate": "අනුපිටපතක්",
+  "DuplicateFolderItem": "ෆෝල්ඩරය <2>{{title}}</2> සාර්ථකව ප්‍රතිලියනය කරන ලදී.",
+  "DuplicateItem": "<2>{{title}}</2> සාර්ථකව ප්‍රති duplicates කරන ලදී",
   "EditAccessInfo": "ලේඛන සංස්කරණය කිරීමට ප්‍රවේශ විය හැකි පරිශීලකයින් සංඛ්‍යාව අපි නිශ්චිත කළෙමු.",
   "EditAdditionalLink": "අතිරේක සබැඳිය සංස්කරණය",
   "EditAgent": "නියෝජිතයා සංස්කරණය කරන්න",
@@ -1732,6 +1734,7 @@
   "RoomExternalLinkDeleted": "<1>«{{linkTitle}}»</1> සබැඳිය මකා දමන ලදී.",
   "RoomExternalLinkRenamed": "සබැඳිය <1>«{{oldLinkTitle}}»</1> ලෙස නැවත නම් කරන ලදී <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "පෙරමුණ සම්බන්ධතාව <1>«{{linkTitle}}»</1> අවලංගු කරන ලදි <br/> නව සම්බන්ධතාව <1>«{{linkTitle}}»</1> සාදා ගන්නා ලදි",
+  "RoomFilesLifetime": "මෙම කාමරයේ ගොණුවේ කාලය {{days}} {{period}} දක්වා සකසා ඇත.",
   "RoomFormBarDescription": "මෙම කාමරය සබැඳිය ඇති ඕනෑම කෙනෙකුට ලබා ගත හැකිය. සියලු ලිපි සඳහා පිටුපරදිශත පරිශීලකයින්ට ආකෘති පිරීමේ අවසර හිමි වනු ඇත.",
   "RoomFromArchiveRestore": "කාමරය {{sectionName}} වෙතින් ලබා ගන්නා ලදී",
   "RoomGroupAdded": "කණ්ඩායම් එකතු කරන ලදි.",
@@ -2249,7 +2252,5 @@
   "YourName": "ඔබගේ නම",
   "YourPrice": "ඔබගේ මිල",
   "YourTurn": "ඔබේ වාරය.",
-  "YouWillBeContacted": "ඉල්ලීම සෑදීමෙන් පසු අලෙවි කණ්ඩායම ඔබව සම්බන්ධ කර ගනු ඇත.",
-  "DuplicateFolderItem": "ෆෝල්ඩරය <2>{{title}}</2> සාර්ථකව ප්‍රතිලියනය කරන ලදී.",
-  "DuplicateItem": "<2>{{title}}</2> සාර්ථකව ප්‍රති duplicates කරන ලදී"
+  "YouWillBeContacted": "ඉල්ලීම සෑදීමෙන් පසු අලෙවි කණ්ඩායම ඔබව සම්බන්ධ කර ගනු ඇත."
 }

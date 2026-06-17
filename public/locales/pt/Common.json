@@ -706,6 +706,8 @@
   "DropzoneTitleSecondary": "ou arraste o ficheiro para aqui",
   "DueToday": "Prazo hoje",
   "Duplicate": "Duplicar",
+  "DuplicateFolderItem": "A pasta <2>{{title}}</2> foi duplicada com sucesso",
+  "DuplicateItem": "<2>{{title}}</2> duplicado com sucesso",
   "EditAccessInfo": "Especificamos quantos usuários podem ter acesso à edição de documentos.",
   "EditAdditionalLink": "Editar link adicional",
   "EditAgent": "Editar Agente",
@@ -1732,6 +1734,7 @@
   "RoomExternalLinkDeleted": "Link <1>«{{linkTitle}}»</1> excluído.",
   "RoomExternalLinkRenamed": "Link <1>«{{oldLinkTitle}}»</1> renomeado para <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "Link anterior <1>«{{linkTitle}}»</1> revogado <br/> Novo link <1>«{{linkTitle}}»</1> criado",
+  "RoomFilesLifetime": "O tempo de vida do arquivo é definido como {{days}} {{period}} nesta sala",
   "RoomFormBarDescription": "Esta sala está disponível para qualquer pessoa com o link. Os usuários externos terão permissão de preenchimento de formulário para todos os arquivos.",
   "RoomFromArchiveRestore": "Quarto recuperado de {{sectionName}}",
   "RoomGroupAdded": "Grupos adicionados.",
@@ -2249,7 +2252,5 @@
   "YourName": "O seu nome",
   "YourPrice": "O seu preço",
   "YourTurn": "A sua vez",
-  "YouWillBeContacted": "A equipa de vendas entrará em contacto consigo depois de criar o pedido.",
-  "DuplicateFolderItem": "A pasta <2>{{title}}</2> foi duplicada com sucesso",
-  "DuplicateItem": "<2>{{title}}</2> duplicado com sucesso"
+  "YouWillBeContacted": "A equipa de vendas entrará em contacto consigo depois de criar o pedido."
 }

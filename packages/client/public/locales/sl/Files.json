@@ -104,7 +104,6 @@
   "RoomAvailableViaSharedLink": "Soba je na voljo prek skupne povezave",
   "RoomCreated": "Soba ustvarjena",
   "RoomEmptyContainerDescription": "Prosimo, ustvarite prvo sobo.",
-  "RoomFilesLifetime": "Življenjska doba datoteke je v tej sobi nastavljena na {{days}} {{period}}",
   "RoomTagsLabel": "Oznake sob",
   "RoomTagsTooltip": "Oznake bodo veljale za sobo, ki bo ustvarjena na podlagi te predloge.",
   "RoomTemplate": "Predloga sobe",

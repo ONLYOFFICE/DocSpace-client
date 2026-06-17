@@ -3,7 +3,7 @@
   "content": "Room pinned",
   "content_en_sha1_hash": "81ef48bb3373a4abb09c637f8c7aeda4ee051e63",
   "created_at": "2025-05-19T21:30:56.115Z",
-  "updated_at": "2026-06-09T09:43:10.938Z",
+  "updated_at": "2026-06-15T19:31:56.151Z",
   "comment": {
     "text": "This is a toast message indicating that a single room has been successfully pinned.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
       "line_number": 1843,
-      "context": "translationForSeverals = isPin\n ? t(\"AIAgentsPinned\", { aiAgents: t(\"Common:AIAgents\") })\n : t(\"AIAgentsUnpinned\", { aiAgents: t(\"Common:AIAgents\") });\n } else {\n translationForOneItem = isPin\n ? t(\"Common:RoomPinned\")\n : t(\"Common:RoomUnpinned\");\n translationForSeverals = isPin\n ? t(\"Common:RoomsPinned\", { count: elems.length })\n : t(\"Common:RoomsUnpinned\", { count: elems.length });\n }",
+      "context": "translationForSeverals = isPin\n ? t(\"Common:AIAgentsPinned\", { aiAgents: t(\"Common:AIAgents\") })\n : t(\"Common:AIAgentsUnpinned\", { aiAgents: t(\"Common:AIAgents\") });\n } else {\n translationForOneItem = isPin\n ? t(\"Common:RoomPinned\")\n : t(\"Common:RoomUnpinned\");\n translationForSeverals = isPin\n ? t(\"Common:RoomsPinned\", { count: elems.length })\n : t(\"Common:RoomsUnpinned\", { count: elems.length });\n }",
       "module": "/packages/client"
     },
     {
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 116,
+      "line_number": 128,
       "context": "if (room.pinned) {\n await api.rooms.unpinRoom(room.id);\n toastr.success(t(\"Common:RoomUnpinned\"));\n } else {\n await api.rooms.pinRoom(room.id);\n toastr.success(t(\"Common:RoomPinned\"));\n }\n refreshRooms?.();\n } catch (e) {\n toastr.error(\n room.pinned ? (e as Error) : t(\"Common:RoomsPinLimitMessage\"),",
       "module": "/packages/sdk"
     }

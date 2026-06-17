@@ -2690,5 +2690,255 @@ describe("Locales Tests", () => {
 
     expect(duplicates.length, message).toBe(0);
   });
+
+  it("CommonNamespacePrefixTest: Verify that keys from the Common namespace are referenced with the 'Common:' prefix when the default namespace is not Common.", () => {
+    // Common is a shared namespace. Unlike a component-specific namespace, it is
+    // almost never the *default* namespace where a key is used: stores and helpers
+    // receive `t` from a caller whose default namespace is something else (e.g.
+    // "Files"), and most components declare their own namespace first in
+    // useTranslation([...]). i18next has no fallbackNS here, so an unprefixed
+    // `t("Open")` is looked up ONLY in that default namespace, never in Common.
+    // When it isn't found, i18next renders the raw key — which is exactly how the
+    // French context menu ended up showing "Open" instead of "Ouvrir".
+    //
+    // Every Common key is unique to Common (see DuplicateKeysAcrossNamespacesTest),
+    // so an unprefixed usage of a Common key is safe ONLY when the file's default
+    // namespace is itself Common. In every other case the key MUST be written as
+    // "Common:<Key>". The fix is always the same: add the "Common:" prefix.
+
+    const commonKeys = new Set(
+      translationFiles
+        .filter((file) => file.language === "en" && file.namespace === "Common")
+        .flatMap((file) => file.translations.map((t) => t.key)),
+    );
+
+    // App-level defaultNS per package, read from the i18n config files. Some apps
+    // (e.g. sdk) set `defaultNS: "Common"`, which makes unprefixed Common keys
+    // resolve correctly everywhere in that package — those must not be flagged.
+    const packageDefaultNs = {};
+    i18nFiles.forEach((i18nPath) => {
+      const content = fs.readFileSync(i18nPath, "utf8");
+      const nsMatch = content.match(
+        /defaultNS:\s*["'`]([A-Za-z0-9_]+)["'`]/,
+      );
+      const pkgMatch = i18nPath.match(
+        new RegExp(`(.*\\${path.sep}packages\\${path.sep}[^\\${path.sep}]+)\\${path.sep}`),
+      );
+      if (pkgMatch) packageDefaultNs[pkgMatch[1]] = nsMatch ? nsMatch[1] : null;
+    });
+
+    const getPackageDefaultNs = (filePath) => {
+      const pkg = Object.keys(packageDefaultNs).find((p) =>
+        filePath.startsWith(p + path.sep),
+      );
+      return pkg ? packageDefaultNs[pkg] : null;
+    };
+
+    // Determine a file's effective default translation namespace:
+    //  - useCommonTranslation / getCommonTranslation -> Common (ui-kit helpers)
+    //  - first namespace in useTranslation([...]) / withTranslation([...])
+    //  - otherwise the package's app-level defaultNS (e.g. "Common" in sdk)
+    //  - null when `t` is received externally (stores, helpers) in a package whose
+    //    defaultNS is not Common — prefix is then mandatory.
+    const getDefaultNamespace = (text, filePath) => {
+      if (/useCommonTranslation|getCommonTranslation/.test(text)) return "Common";
+      const useMatch = text.match(
+        /useTranslation\(\s*\[?\s*["'`]([A-Za-z0-9_]+)["'`]/,
+      );
+      if (useMatch) return useMatch[1];
+      const withMatch = text.match(
+        /withTranslation\(\s*\[?\s*["'`]([A-Za-z0-9_]+)["'`]/,
+      );
+      if (withMatch) return withMatch[1];
+      return getPackageDefaultNs(filePath);
+    };
+
+    // Extract translation keys used in a single file. Re-parsed here (instead of
+    // reusing jsFile.translationKeys) because that shared array is mutated per
+    // module in beforeAll and would attribute every module key to its first file.
+    // i18nKey is handled separately because <Trans i18nKey="X" ns="Common"> resolves
+    // X against the explicit ns prop — no "Common:" prefix is needed there.
+    const keyRegexps = [
+      /[.{\s(]t\??\.?\(\s*["'`]([a-zA-Z0-9_.:\s{}/-]+)["'`]\s*[),]/gm,
+      /tKey:\s"([a-zA-Z0-9_.:-]+)"/gm,
+      /getTitle\("([a-zA-Z0-9_.:-]+)"\)/gm,
+      /getCommonTranslation\(\s*"([a-zA-Z0-9_.:-]+)"[\s,)]/gm,
+      /titleKey:\s"([a-zA-Z0-9_.:-]+)"/gm,
+      /translationKey:\s"([a-zA-Z0-9_.:-]+)"/gm,
+      /labelKey:\s"([a-zA-Z0-9_.:-]+)"/gm,
+    ];
+
+    // Does the JSX opening tag containing the match at `index` carry an explicit
+    // `ns="..."` attribute? If so, the key is resolved against that namespace and
+    // a "Common:" prefix is not the relevant fix.
+    const hasExplicitNs = (text, index) => {
+      const tagStart = text.lastIndexOf("<", index);
+      const tagEnd = text.indexOf(">", index);
+      if (tagStart === -1 || tagEnd === -1) return false;
+      return /\bns=["'`][A-Za-z0-9_]+["'`]/.test(text.slice(tagStart, tagEnd));
+    };
+
+    const extractKeys = (text) => {
+      const keys = new Set();
+      keyRegexps.forEach((re) => {
+        for (const m of text.matchAll(re)) {
+          if (m[1]) keys.add(m[1]);
+        }
+      });
+      // i18nKey="X" — skip occurrences whose tag sets an explicit ns prop.
+      for (const m of text.matchAll(/i18nKey="([a-zA-Z0-9_.:-]+)"/gm)) {
+        if (m[1] && !hasExplicitNs(text, m.index)) keys.add(m[1]);
+      }
+      return keys;
+    };
+
+    const violations = [];
+
+    javascriptFiles.forEach((jsFile) => {
+      // ui-kit is a separate submodule with its own Common-bound translation hook.
+      if (jsFile.path.includes(convertPathToOS("libs/ui-kit"))) return;
+
+      const text = fs.readFileSync(jsFile.path, "utf8");
+
+      // When the file's default namespace is Common, unprefixed Common keys
+      // resolve correctly — no prefix required.
+      if (getDefaultNamespace(text, jsFile.path) === "Common") return;
+
+      const offendingKeys = [...extractKeys(text)]
+        .filter((key) => !key.includes(":")) // unprefixed usages only
+        .filter((key) => commonKeys.has(key)) // that belong to Common
+        .sort();
+
+      if (offendingKeys.length === 0) return;
+
+      violations.push({ path: jsFile.path, keys: offendingKeys });
+    });
+
+    let message =
+      "The following Common-namespace keys are used without the 'Common:' prefix.\r\n" +
+      "They will NOT resolve (i18next renders the raw key) unless the file's default\r\n" +
+      "namespace is Common. Prefix each key with 'Common:' (e.g. t(\"Common:Open\")):\r\n\r\n";
+
+    let i = 0;
+    violations.forEach((v) => {
+      message += `${++i}. File: ${v.path}\r\n   Keys: ${v.keys
+        .map((k) => `"${k}"`)
+        .join(", ")}\r\n\r\n`;
+    });
+
+    expect(violations.length, message).toBe(0);
+  });
+
+  it("UiKitCommonResolverPrefixTest: Verify that keys resolved through ui-kit's Common-default helpers carry an explicit namespace prefix.", () => {
+    // CommonNamespacePrefixTest skips libs/ui-kit (the submodule has its own
+    // Common-bound translation helpers). This test guards that blind spot.
+    //
+    // ui-kit resolves translations in two Common-defaulting ways:
+    //   1. getCommonTranslation(key) / useCommonTranslation() — look an unprefixed
+    //      key up ONLY in the Common namespace.
+    //   2. helpers shaped `const translate = t ?? getCommonTranslation` — `translate`
+    //      is EITHER getCommonTranslation (Common) OR a `t` the caller passed, whose
+    //      default namespace can be anything (e.g. a Files-bound `t`).
+    //
+    // An unprefixed key is therefore unsafe whenever:
+    //   (A) it is resolved in Common but the key lives in another namespace — e.g.
+    //       translate("RoomFilesLifetime") (Files). It is NEVER found and the raw key
+    //       is rendered.
+    //   (B) it flows through the `t ?? getCommonTranslation` fallback at all — even a
+    //       Common key like "Days" breaks once a non-Common `t` is supplied.
+    // The fix is always the same: prefix the key with its namespace
+    // ("Files:RoomFilesLifetime", "Common:Days").
+
+    // key -> Set(namespaces) across the English locale files.
+    const keyNamespaces = new Map();
+    translationFiles
+      .filter((file) => file.language === "en")
+      .forEach((file) => {
+        file.translations.forEach((t) => {
+          if (!keyNamespaces.has(t.key)) keyNamespaces.set(t.key, new Set());
+          keyNamespaces.get(t.key).add(file.namespace);
+        });
+      });
+    const isKnownKey = (k) => keyNamespaces.has(k);
+    const isCommonKey = (k) =>
+      keyNamespaces.has(k) && keyNamespaces.get(k).has("Common");
+
+    const uiKitFiles = getAllFiles(path.join(BASE_DIR, "libs", "ui-kit"), [
+      "node_modules",
+      convertPathToOS(".next"),
+      convertPathToOS("/dist"),
+      convertPathToOS(path.join("ui-kit", "locales")),
+    ]).filter(
+      (filePath) =>
+        filePath &&
+        /\.(ts|tsx)$/.test(filePath) &&
+        !filePath.includes(".test.") &&
+        !filePath.includes(".stories."),
+    );
+
+    const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const violations = [];
+
+    uiKitFiles.forEach((filePath) => {
+      const text = fs.readFileSync(filePath, "utf8");
+
+      // (A) Direct getCommonTranslation("Key"): resolves in Common only, so a bare
+      //     key that is defined in some OTHER namespace is always broken.
+      for (const m of text.matchAll(
+        /getCommonTranslation\(\s*["'`]([a-zA-Z0-9_.:-]+)["'`]/g,
+      )) {
+        const key = m[1];
+        if (key.includes(":")) continue;
+        if (isKnownKey(key) && !isCommonKey(key)) {
+          violations.push({
+            path: filePath,
+            key,
+            why: `resolved in Common but defined in [${[
+              ...keyNamespaces.get(key),
+            ].join(", ")}]`,
+          });
+        }
+      }
+
+      // (B) `const <alias> = ... ?? getCommonTranslation`: every key passed to
+      //     <alias> must be prefixed, because <alias> may be an external `t`.
+      //     [^;\n]* keeps the match on the assignment line so the alias name is the
+      //     variable, not an enclosing multi-line function declaration.
+      const aliases = new Set();
+      for (const m of text.matchAll(
+        /(?:const|let)\s+([A-Za-z_$][\w$]*)\s*=\s*[^;\n]*\?\?\s*getCommonTranslation\b/g,
+      )) {
+        aliases.add(m[1]);
+      }
+      aliases.forEach((alias) => {
+        const callRe = new RegExp(
+          `\\b${escapeRe(alias)}\\(\\s*["'\`]([a-zA-Z0-9_.:-]+)["'\`]`,
+          "g",
+        );
+        for (const m of text.matchAll(callRe)) {
+          const key = m[1];
+          if (key.includes(":")) continue;
+          if (isKnownKey(key)) {
+            violations.push({
+              path: filePath,
+              key,
+              why: `passed to \`${alias}\` (t ?? getCommonTranslation) without a namespace prefix`,
+            });
+          }
+        }
+      });
+    });
+
+    let message =
+      "The following keys are resolved through ui-kit Common-default helpers without\r\n" +
+      "a namespace prefix. They render as raw keys (always, for non-Common keys; or\r\n" +
+      "whenever a non-Common `t` is supplied to a `t ?? getCommonTranslation` helper).\r\n" +
+      'Prefix each with its namespace (e.g. "Files:RoomFilesLifetime", "Common:Days"):\r\n\r\n';
+    violations.forEach((v, i) => {
+      message += `${i + 1}. ${v.path}\r\n   "${v.key}" — ${v.why}\r\n\r\n`;
+    });
+
+    expect(violations.length, message).toBe(0);
+  });
 });
 

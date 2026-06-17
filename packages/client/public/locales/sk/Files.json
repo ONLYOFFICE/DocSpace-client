@@ -104,7 +104,6 @@
   "RoomAvailableViaSharedLink": "Miestnosť dostupná cez zdieľaný odkaz",
   "RoomCreated": "Miestnosť vytvorená",
   "RoomEmptyContainerDescription": "Prosím vytvorte prvú miestnosť.",
-  "RoomFilesLifetime": "Doba používania súborov v tejto miestnosti je nastavená na {{days}} {{period}} ",
   "RoomTagsLabel": "Štítky miestnosti",
   "RoomTagsTooltip": "Štítky sa použijú na miestnosť, ktorá bude vytvorená na základe tejto šablóny.",
   "RoomTemplate": "Šablóna miestnosti",

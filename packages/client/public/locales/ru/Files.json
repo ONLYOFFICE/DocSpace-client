@@ -104,7 +104,6 @@
   "RoomAvailableViaSharedLink": "Комната доступна по общей ссылке",
   "RoomCreated": "Комната создана",
   "RoomEmptyContainerDescription": "Пожалуйста, создайте первую комнату.",
-  "RoomFilesLifetime": "Срок действия файла в этой комнате установлен на {{days}} {{period}}",
   "RoomTagsLabel": "Тэги комнаты",
   "RoomTagsTooltip": "Теги будут применены к комнате, которая будет создана на основе этого шаблона.",
   "RoomTemplate": "Шаблон комнаты",

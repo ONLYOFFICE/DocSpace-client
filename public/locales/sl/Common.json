@@ -706,6 +706,8 @@
   "DropzoneTitleSecondary": "ali odloži datoteko tule",
   "DueToday": "Rok za oddajo je danes.",
   "Duplicate": "Duplikat",
+  "DuplicateFolderItem": "Mapa <2>{{title}}</2> je bila uspešno podvojena",
+  "DuplicateItem": "<2>{{title}}</2> uspešno podvojen",
   "EditAccessInfo": "Določili smo, koliko uporabnikov lahko dostopa do urejanja dokumentov.",
   "EditAdditionalLink": "Uredi dodatno povezavo",
   "EditAgent": "Uredi agenta",
@@ -1732,6 +1734,7 @@
   "RoomExternalLinkDeleted": "Povezava <1>«{{linkTitle}}»</1> izbrisana.",
   "RoomExternalLinkRenamed": "Povezava <1>«{{oldLinkTitle}}»</1> preimenovana v <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "Prejšnja povezava <1>«{{linkTitle}}»</1> preklicana <br/> Nova povezava <1>«{{linkTitle}}»</1> ustvarjena",
+  "RoomFilesLifetime": "Življenjska doba datoteke je v tej sobi nastavljena na {{days}} {{period}}",
   "RoomFormBarDescription": "Ta soba je na voljo vsem s povezavo. Zunanji uporabniki bodo imeli dovoljenje za izpolnjevanje obrazcev za vse datoteke.",
   "RoomFromArchiveRestore": "Soba pridobljena iz {{sectionName}}",
   "RoomGroupAdded": "Skupine dodane.",
@@ -2249,7 +2252,5 @@
   "YourName": "Vaše ime",
   "YourPrice": "Vaša cena",
   "YourTurn": "Vi ste na vrsti",
-  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala.",
-  "DuplicateFolderItem": "Mapa <2>{{title}}</2> je bila uspešno podvojena",
-  "DuplicateItem": "<2>{{title}}</2> uspešno podvojen"
+  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala."
 }

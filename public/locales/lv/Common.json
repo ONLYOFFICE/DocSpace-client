@@ -706,6 +706,8 @@
   "DropzoneTitleSecondary": "vai nometiet failu šeit",
   "DueToday": "Termiņš šodien",
   "Duplicate": "Dublikāts",
+  "DuplicateFolderItem": "Mape <2>{{title}}</2> veiksmīgi dublēta",
+  "DuplicateItem": "<2>{{title}}</2> veiksmīgi dublēta",
   "EditAccessInfo": "Mēs norādījām, cik lietotājiem var būt piekļuve dokumentu rediģēšanai.",
   "EditAdditionalLink": "Rediģēt papildu saiti",
   "EditAgent": "Rediģēt aģentu",
@@ -1732,6 +1734,7 @@
   "RoomExternalLinkDeleted": "Saite <1>«{{linkTitle}}»</1> ir izdzēsta.",
   "RoomExternalLinkRenamed": "Saite <1>«{{oldLinkTitle}}»</1> ir pārdēvēta par <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "Iepriekšējā saite <1>«{{linkTitle}}»</1> atsaukta <br/> Jauna saite <1>«{{linkTitle}}»</1> ir izveidota",
+  "RoomFilesLifetime": "Šajā telpā faila kalpošanas laiks {{days}} {{period}} ir iestatīts uz",
   "RoomFormBarDescription": "Šī telpa ir pieejama ikvienam, kam ir saite. Ārējiem lietotājiem būs veidlapu aizpildītāja atļauja visiem failiem.",
   "RoomFromArchiveRestore": "Istaba atgūta no {{sectionName}}",
   "RoomGroupAdded": "Grupas ir pievienotas.",
@@ -2249,7 +2252,5 @@
   "YourName": "Jūsu vārds",
   "YourPrice": "Jūsu cena",
   "YourTurn": "Jūsu kārta",
-  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides.",
-  "DuplicateFolderItem": "Mape <2>{{title}}</2> veiksmīgi dublēta",
-  "DuplicateItem": "<2>{{title}}</2> veiksmīgi dublēta"
+  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides."
 }

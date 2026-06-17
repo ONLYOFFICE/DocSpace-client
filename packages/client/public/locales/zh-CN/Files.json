@@ -104,7 +104,6 @@
   "RoomAvailableViaSharedLink": "可通过共享连接访问此房间",
   "RoomCreated": "房间已创建",
   "RoomEmptyContainerDescription": "请创建首个房间。",
-  "RoomFilesLifetime": "此房间中的文件有效期设置为{{days}} {{period}}。",
   "RoomTagsLabel": "房间标签",
   "RoomTagsTooltip": "标签将应用于基于此模板创建的房间。",
   "RoomTemplate": "房间模板",

@@ -706,6 +706,8 @@
   "DropzoneTitleSecondary": "أو قم بإسقاط الملف هنا",
   "DueToday": "مستحق اليوم",
   "Duplicate": "تكرار",
+  "DuplicateFolderItem": "تم تكرار المجلد <2>{{title}}</2> بنجاح",
+  "DuplicateItem": "تم تكرار <2>{{title}}</2> بنجاح",
   "EditAccessInfo": "لقد حددنا عدد المستخدمين الذين يمكنهم الوصول إلى تحرير المستندات. ",
   "EditAdditionalLink": "تعديل الرابط الإضافي",
   "EditAgent": "تعديل العميل",
@@ -1732,6 +1734,7 @@
   "RoomExternalLinkDeleted": "تم حذف الرابط <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRenamed": "تمت إعادة تسمية الرابط <1>«{{oldLinkTitle}}»</1> إلى <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "تم إلغاء الرابط السابق </1>«{{linkTitle}}»<1> <br/> وتم إنشاء رابط جديد </1>«{{linkTitle}}»<1>",
+  "RoomFilesLifetime": "تم تعيين عمر الملف على {{days}} {{period}} في هذه الغرفة",
   "RoomFormBarDescription": "هذه الغرفة متاحة لأي شخص لديه الرابط. سيكون لدى المستخدمين الخارجيين إذن تعبئة النموذج لجميع الملفات.",
   "RoomFromArchiveRestore": "تم استرداد الغرفة من {{sectionName}}",
   "RoomGroupAdded": "تمت إضافة المجموعات.",
@@ -2249,7 +2252,5 @@
   "YourName": "اسمك",
   "YourPrice": "سعرك",
   "YourTurn": "دوركم الآن",
-  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب.",
-  "DuplicateFolderItem": "تم تكرار المجلد <2>{{title}}</2> بنجاح",
-  "DuplicateItem": "تم تكرار <2>{{title}}</2> بنجاح"
+  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب."
 }

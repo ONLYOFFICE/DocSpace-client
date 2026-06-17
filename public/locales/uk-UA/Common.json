@@ -706,6 +706,8 @@
   "DropzoneTitleSecondary": "або перетягніть файли сюди",
   "DueToday": "Терміново сьогодні",
   "Duplicate": "Дублювати",
+  "DuplicateFolderItem": "Папку <2>{{title}}</2> успішно дубльовано",
+  "DuplicateItem": "<2>{{title}}</2> успішно дубльовано",
   "EditAccessInfo": "Ми вказали, скільки користувачів можуть мати доступ до редагування документів.",
   "EditAdditionalLink": "Редагувати додаткове посилання",
   "EditAgent": "Редагувати Агента",
@@ -1732,6 +1734,7 @@
   "RoomExternalLinkDeleted": "Посилання <1>«{{linkTitle}}»</1> видалено.",
   "RoomExternalLinkRenamed": "Посилання <1>«{{oldLinkTitle}}»</1> перейменовано в <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "Попереднє посилання <1>«{{linkTitle}}»</1> анульовано. <br/> Створено нове посилання <1>«{{linkTitle}}»</1>",
+  "RoomFilesLifetime": "У цій кімнаті встановлено період існування файлів {{days}} {{period}}",
   "RoomFormBarDescription": "Ця кімната доступна всім, хто має посилання. Зовнішні користувачі матимуть дозвіл на заповнення форм для всіх файлів.",
   "RoomFromArchiveRestore": "Кімната відновлена з {{sectionName}}",
   "RoomGroupAdded": "Групи додано.",
@@ -2249,7 +2252,5 @@
   "YourName": "Ваше ім’я",
   "YourPrice": "Ваша ціна",
   "YourTurn": "Ваша черга",
-  "YouWillBeContacted": "Після створення запиту з вами зв’яжеться відділ продажів.",
-  "DuplicateFolderItem": "Папку <2>{{title}}</2> успішно дубльовано",
-  "DuplicateItem": "<2>{{title}}</2> успішно дубльовано"
+  "YouWillBeContacted": "Після створення запиту з вами зв’яжеться відділ продажів."
 }

@@ -424,6 +424,9 @@
   "ChooseAnother": "Choose another",
   "ChooseExpirationDate": "Limit availability period for this link by setting an expiration date.",
   "ChooseFormatText": "Choose the format for each file to be downloaded",
+  "ChooseFormSet": "Choose Form Set",
+  "ChooseFormSetDescription": "Form Sets help you group related forms by process, department, country, or business case.",
+  "ChooseFormSetHint": "Select a Form Set to start working.",
   "ChooseFromList": "Choose from list",
   "ChooseNewPayerOrRefrashData": "<1>Choose a new Payer</1> or <2>Refresh data</2>",
   "ChooseYourCountry": "Choose your country",
@@ -525,6 +528,7 @@
   "CreateFileCopy": "Create file copy",
   "CreateFolderDescription": "There will be two different folders in the destination",
   "CreateFormFillingRoom": "Create Form filling room",
+  "CreateFormSet": "Create Form Set",
   "CreateGroup": "Create group",
   "CreateMasterFormFromFile": "Create PDF form from file",
   "CreateNewAIAgent": "Create a new agent",
@@ -717,6 +721,8 @@
   "DropzoneTitleSecondary": "or drop file here",
   "DueToday": "Due today",
   "Duplicate": "Duplicate",
+  "DuplicateFolderItem": "The folder <2>{{title}}</2> successfully duplicated",
+  "DuplicateItem": "<2>{{title}}</2> successfully duplicated",
   "EditAccessInfo": "We specified how many users can have access to editing docs.",
   "EditAdditionalLink": "Edit additional link",
   "EditAgent": "Edit Agent",
@@ -1755,6 +1761,7 @@
   "RoomExternalLinkDeleted": "Link <1>«{{linkTitle}}»</1> deleted.",
   "RoomExternalLinkRenamed": "Link <1>«{{oldLinkTitle}}»</1> renamed to <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "Previous link <1>«{{linkTitle}}»</1> revoked <br/> New Link <1>«{{linkTitle}}»</1> created",
+  "RoomFilesLifetime": "The file lifetime is set to {{days}} {{period}} in this room",
   "RoomFormBarDescription": "This room is available to anyone with the link. External users will have Form Filler permission for all the files.",
   "RoomFromArchiveRestore": "Room recovered from {{sectionName}}",
   "RoomGroupAdded": "Groups added.",
@@ -2272,7 +2279,5 @@
   "YourName": "Your name",
   "YourPrice": "Your price",
   "YourTurn": "Your turn",
-  "YouWillBeContacted": "The sales team will contact you after creating the request.",
-  "DuplicateFolderItem": "The folder <2>{{title}}</2> successfully duplicated",
-  "DuplicateItem": "<2>{{title}}</2> successfully duplicated"
+  "YouWillBeContacted": "The sales team will contact you after creating the request."
 }

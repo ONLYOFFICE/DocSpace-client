@@ -706,6 +706,8 @@
   "DropzoneTitleSecondary": "ose hidhni skedarin këtu",
   "DueToday": "Afati sot",
   "Duplicate": "Duplikimi",
+  "DuplicateFolderItem": "Folderi <2>{{title}}</2> është kopjuar me sukses",
+  "DuplicateItem": "<2>{{title}}</2> është kopjuar me sukses",
   "EditAccessInfo": "Ne kemi specifikuar sa përdorues mund të kenë akses për të redaktuar dokumente.",
   "EditAdditionalLink": "Redaktoni lidhjen shtesë",
   "EditAgent": "Modifiko Agjentin",
@@ -1732,6 +1734,7 @@
   "RoomExternalLinkDeleted": "Lidhja <1>«{{linkTitle}}»</1> u fshi.",
   "RoomExternalLinkRenamed": "Lidhja <1>«{{oldLinkTitle}}»</1> u riemërtua në <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "Lidhja e mëparshme<1>«{{linkTitle}}»</1> revokohet <br/> Lidhja e re <1>«{{linkTitle}}»</1> u krijua",
+  "RoomFilesLifetime": "Jetëgjatësia e skedarit është caktuar në {{days}} {{period}} në këtë dhomë",
   "RoomFormBarDescription": "Kjo dhomë është e disponueshme për këdo që ka lidhjen. Përdoruesit e jashtëm do të kenë lejen e Plotësuesit të formave për të gjithë skedarët.",
   "RoomFromArchiveRestore": "Dhoma u rikuperua nga {{sectionName}}",
   "RoomGroupAdded": "Grupet u shtuan.",
@@ -2249,7 +2252,5 @@
   "YourName": "Emri juaj",
   "YourPrice": "Çmimi juaj",
   "YourTurn": "Radha jote",
-  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës.",
-  "DuplicateFolderItem": "Folderi <2>{{title}}</2> është kopjuar me sukses",
-  "DuplicateItem": "<2>{{title}}</2> është kopjuar me sukses"
+  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës."
 }

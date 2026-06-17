@@ -282,7 +282,7 @@ const Editor = (props) => {
             />
 
             {/* <InterfaceElements>
-            <Label className="label">{t("InterfaceElements")}</Label>
+            <Label className="label">{t("Common:InterfaceElements")}</Label>
             <Checkbox
               className="checkbox"
               label={t("RightPanelCollapsed")}

@@ -3,7 +3,7 @@
   "content": "No AI agent",
   "content_en_sha1_hash": "8fec51905e0dd6abdafc7c7e3e6569839a73a45d",
   "created_at": "2026-06-02T22:17:47.998Z",
-  "updated_at": "2026-06-02T22:18:28.905Z",
+  "updated_at": "2026-06-15T19:31:56.040Z",
   "comment": {
     "text": "Alt text for an image in an empty state screen when no AI agents are present. It contains a variable representing the AI agent.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/NoAgentItem.tsx",
       "line_number": 65,
-      "context": ")}\n >\n <div className=\"no-thumbnail-img-wrapper\">\n <img\n src={imageSrc}\n alt={t(\"NoAgent\", { aiAgent: t(\"Common:AIAgent\") })}\n />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">\n {t(\"AIAgentsEmptyScreenTent\", { aiAgents: t(\"Common:AIAgents\") })}\n </Text>",
+      "context": ")}\n >\n <div className=\"no-thumbnail-img-wrapper\">\n <img\n src={imageSrc}\n alt={t(\"Common:NoAgent\", { aiAgent: t(\"Common:AIAgent\") })}\n />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">\n {t(\"Common:AIAgentsEmptyScreenTent\", { aiAgents: t(\"Common:AIAgents\") })}\n </Text>",
       "module": "/packages/client"
     },
     {

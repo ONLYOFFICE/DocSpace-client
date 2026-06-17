@@ -706,6 +706,8 @@
   "DropzoneTitleSecondary": "tai raahaa tiedosto tähän",
   "DueToday": "Erääntynyt tänään",
   "Duplicate": "Duplikaatti",
+  "DuplicateFolderItem": "Kansio <2>{{title}}</2> onnistuneesti monistettu",
+  "DuplicateItem": "<2>{{title}}</2> onnistuneesti monistettu",
   "EditAccessInfo": "Määritimme, kuinka monta käyttäjää voi päästä muokkaamaan dokumentteja.",
   "EditAdditionalLink": "Muokkaa lisälinkkiä",
   "EditAgent": "Muokkaa agenttia",
@@ -1732,6 +1734,7 @@
   "RoomExternalLinkDeleted": "Linkki <1>«{{linkTitle}}»</1> poistettu.",
   "RoomExternalLinkRenamed": "Linkki <1>«{{oldLinkTitle}}»</1> nimetty uudelleen <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "Edellinen linkki <1>«{{linkTitle}}»</1> peruutettu<br/> Uusi linkki <1>«{{linkTitle}}»</1> luotu",
+  "RoomFilesLifetime": "Tiedoston käyttöikä tässä huoneessa on asetettu {{days}} {{period}}",
   "RoomFormBarDescription": "Tämä huone on kenelle tahansa, jolla on linkki. Ulkoiset käyttäjät saavat lomakkeen täyttäjänoikeudet kaikkiin tiedostoihin.",
   "RoomFromArchiveRestore": "Huone palautettu {{sectionName}}-sta",
   "RoomGroupAdded": "Ryhmät lisätty.",
@@ -2249,7 +2252,5 @@
   "YourName": "Nimesi",
   "YourPrice": "Hintasi",
   "YourTurn": "Sinun vuorosi",
-  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen.",
-  "DuplicateFolderItem": "Kansio <2>{{title}}</2> onnistuneesti monistettu",
-  "DuplicateItem": "<2>{{title}}</2> onnistuneesti monistettu"
+  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen."
 }

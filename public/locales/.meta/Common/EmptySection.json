@@ -3,7 +3,7 @@
   "content": "Empty {{sectionName}}",
   "content_en_sha1_hash": "a8c3ee9d97173f47924959f3cbc240a5d756184d",
   "created_at": "2026-06-03T09:30:00.178Z",
-  "updated_at": "2026-06-09T09:43:10.785Z",
+  "updated_at": "2026-06-15T19:31:55.926Z",
   "comment": {
     "text": "Action label for a menu item or badge title used to clear the contents of a specific area. `{{sectionName}}` is a noun representing the section being emptied (e.g., \"Trash\").",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useHeaderContextMenu.ts",
-      "line_number": 202,
+      "line_number": 154,
       "context": "return [\n {\n id: \"header_option_empty-trash\",\n key: \"empty-trash\",\n label: t(\"Common:EmptySection\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n icon: ClearTrashReactSvgUrl,\n disabled: isEmpty || !deleteCtx?.emptyTrash,\n onClick: () => deleteCtx?.emptyTrash?.(),",
       "module": "/packages/sdk"
     }

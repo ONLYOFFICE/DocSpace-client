@@ -44,6 +44,7 @@ const SECTION_PREFIXES = [
   "/developer-tools",
   "/accounts",
   "/dashboard",
+  "/forms",
   "/ai-files",
   "/ai-forms",
   "/ai-arbiter",

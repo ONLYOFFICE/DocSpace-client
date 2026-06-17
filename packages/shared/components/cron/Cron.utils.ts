@@ -531,15 +531,15 @@ export const getUnits = (locale?: string) => {
 export const getLabel = (period: PeriodType, t: TFunction) => {
   switch (period) {
     case "Year":
-      return t("EveryYear");
+      return t("Common:EveryYear");
     case "Month":
-      return t("EveryMonth");
+      return t("Common:EveryMonth");
     case "Week":
-      return t("EveryWeek");
+      return t("Common:EveryWeek");
     case "Day":
-      return t("EveryDay");
+      return t("Common:EveryDay");
     case "Hour":
-      return t("EveryHour");
+      return t("Common:EveryHour");
     default:
       return "";
   }
@@ -564,6 +564,6 @@ export const getOptions = (t: TFunction): PeriodOptionType[] => [
   },
   {
     key: "Hour",
-    label: getLabel("Hour", t), // t("Hour"), - "Skip useless issue in UselessTranslationKeysTest"
+    label: getLabel("Hour", t), // t("Common:Hour"), - "Skip useless issue in UselessTranslationKeysTest"
   },
 ];

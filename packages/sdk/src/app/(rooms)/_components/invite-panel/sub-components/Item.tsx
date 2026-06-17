@@ -348,7 +348,7 @@ const Item: React.FC<ItemProps> = ({
     changeInviteItem({ id, access: selected.access ?? access });
   };
 
-  const textProps = !!avatar || isGroup ? {} : { onClick: onEdit };
+  const textProps = avatar || isGroup ? {} : { onClick: onEdit };
 
   const availableAccess = getFreeUsersRoleArray();
 
@@ -498,3 +498,4 @@ const Item: React.FC<ItemProps> = ({
 };
 
 export default Item;
+

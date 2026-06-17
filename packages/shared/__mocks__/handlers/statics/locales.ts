@@ -37,6 +37,44 @@ import path from "path";
 import { http } from "msw";
 import fs from "fs";
 
+// Source locale roots, mirroring the production copy-locales plugin: the
+// client owns most namespaces, the repo-root public holds the shared ones
+// (Common, etc.). `__dirname` is .../packages/shared/__mocks__/handlers/statics.
+const CLIENT_LOCALES_ROOT = path.join(
+  __dirname,
+  "../../../../client/public/locales",
+);
+const SHARED_LOCALES_ROOT = path.join(__dirname, "../../../../../public/locales");
+
+// Build the `{ [namespace]: translations }` bundle for a language by merging
+// every namespace file from both source roots. Mirrors `buildCombinedLocales`
+// in config/plugins/copy-locales.ts so the mock serves the same shape the
+// production build emits (the `_combined.json` file only exists in `dist`, not
+// in the source tree the rest of this handler reads from).
+const buildCombinedBundle = (language: string) => {
+  const bundle: Record<string, unknown> = {};
+
+  for (const root of [CLIENT_LOCALES_ROOT, SHARED_LOCALES_ROOT]) {
+    let langDir = path.join(root, language);
+    if (!fs.existsSync(langDir)) langDir = path.join(root, "en");
+    if (!fs.existsSync(langDir)) continue;
+
+    for (const file of fs.readdirSync(langDir)) {
+      if (!file.endsWith(".json") || file === "_combined.json") continue;
+      const ns = file.slice(0, -".json".length);
+      try {
+        bundle[ns] = JSON.parse(
+          fs.readFileSync(path.join(langDir, file), "utf-8"),
+        );
+      } catch {
+        // skip malformed namespace, keep the rest of the bundle usable
+      }
+    }
+  }
+
+  return bundle;
+};
+
 export const localesHandler = () => {
   return http.get("*/**/locales/**", async ({ request }) => {
     try {
@@ -49,6 +87,19 @@ export const localesHandler = () => {
 
       const hasStatic = url.includes("static");
       const local = url.split("/locales/").at(-1)!.split("?")[0];
+
+      // Production builds bundle every namespace into one `_combined.json` per
+      // language. That file is emitted only into `dist`, so assemble it from the
+      // source namespace files here instead of returning the empty `{}` fallback.
+      if (local.endsWith("/_combined.json")) {
+        const language = local.split("/")[0];
+        return new Response(JSON.stringify(buildCombinedBundle(language)), {
+          status: 200,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      }
 
       const localePath = hasStatic
         ? `../../../../../public/locales/${local}`

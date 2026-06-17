@@ -357,6 +357,7 @@ const CreateRoomDialog = ({
               setRoomType={setRoomType}
               disabledFormRoom={disabledFormRoom}
               isExternalShareRestricted={isExternalShareRestricted}
+              processCreatingRoomFromData={processCreatingRoomFromData}
               setTemplateDialogIsVisible={setTemplateDialogIsVisible}
             />
           ) : (
@@ -387,7 +388,7 @@ const CreateRoomDialog = ({
           )}
         </ModalDialog.Body>
 
-        {!!roomParams.type && !isTemplate ? (
+        {roomParams.type && !isTemplate ? (
           <ModalDialog.Footer>
             <Button
               id="shared_create-room-modal_submit"

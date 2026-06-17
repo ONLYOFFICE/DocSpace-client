@@ -706,6 +706,8 @@
   "DropzoneTitleSecondary": "of plaats het bestand hier",
   "DueToday": "Vandaag ingeleverd",
   "Duplicate": "Dupliceren",
+  "DuplicateFolderItem": "De map <2>{{title}}</2> met succes gedupliceerd",
+  "DuplicateItem": "<2>{{title}}</2> met succes gedupliceerd",
   "EditAccessInfo": "We hebben gespecificeerd hoeveel gebruikers toegang kunnen hebben tot het bewerken van documenten.",
   "EditAdditionalLink": "Bewerk aanvullende link",
   "EditAgent": "Bewerk Agent",
@@ -1732,6 +1734,7 @@
   "RoomExternalLinkDeleted": "Link <1>«{{linkTitle}}»</1> verwijderd.",
   "RoomExternalLinkRenamed": "Link <1>«{{oldLinkTitle}}»</1> hernoemd naar <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "Eerdere link <1>«{{linkTitle}}»</1> ingetrokken <br/> Nieuwe Link <1>«{{linkTitle}}»</1> aangemaakt",
+  "RoomFilesLifetime": "De bestand levensduur is ingesteld op {{days}} {{period}} in deze kamer",
   "RoomFormBarDescription": "Deze kamer is voor iedereen met de link beschikbaar. Externe gebruikers hebben rechten voor het invullen van formulieren voor alle bestanden.",
   "RoomFromArchiveRestore": "Ruimte teruggevonden uit {{sectionName}}",
   "RoomGroupAdded": "Groepen toegevoegd.",
@@ -2249,7 +2252,5 @@
   "YourName": "Uw naam",
   "YourPrice": "Uw prijs",
   "YourTurn": "Uw beurt",
-  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag.",
-  "DuplicateFolderItem": "De map <2>{{title}}</2> met succes gedupliceerd",
-  "DuplicateItem": "<2>{{title}}</2> met succes gedupliceerd"
+  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag."
 }

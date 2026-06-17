@@ -699,6 +699,8 @@
   "DropzoneTitleSecondary": "alebo súbor presuňte sem",
   "DueToday": "Dôležité dnes",
   "Duplicate": "Duplikát",
+  "DuplicateFolderItem": "Priečinok <2>{{title}}</2> úspešne duplikovaný",
+  "DuplicateItem": "<2>{{title}}</2> úspešne duplikovaný",
   "EditAccessInfo": "Určili sme, koľko používateľov môže mať prístup na úpravu dokumentov.",
   "EditAdditionalLink": "Upraviť dodatočný odkaz",
   "EditAgent": "Úprava agenta",
@@ -1704,6 +1706,7 @@
   "RoomExternalLinkDeleted": "Odkaz <1>«{{linkTitle}}»</1> odstránený.",
   "RoomExternalLinkRenamed": "Odkaz <1>«{{oldLinkTitle}}»</1> premenovaný na <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "Predchádzajúci odkaz <1>«{{linkTitle}}»</1> zrušený <br/> Nový odkaz <1>«{{linkTitle}}»</1> vytvorený",
+  "RoomFilesLifetime": "Doba používania súborov v tejto miestnosti je nastavená na {{days}} {{period}} ",
   "RoomFormBarDescription": "Táto miestnosť je dostupná každému, kto má k dispozícii odkaz. Externí používatelia budú mať oprávnenie na vyplnenie pre všetky súbory.",
   "RoomFromArchiveRestore": "Miestnosť obnovená z {{sectionName}}",
   "RoomGroupAdded": "Skupiny pridané.",
@@ -2219,7 +2222,5 @@
   "YourName": "Vaše meno",
   "YourPrice": "Vaša cena",
   "YourTurn": "Ste na rade",
-  "YouWillBeContacted": "Po vytvorení požiadavky vás bude kontaktovať predajný tím.",
-  "DuplicateFolderItem": "Priečinok <2>{{title}}</2> úspešne duplikovaný",
-  "DuplicateItem": "<2>{{title}}</2> úspešne duplikovaný"
+  "YouWillBeContacted": "Po vytvorení požiadavky vás bude kontaktovať predajný tím."
 }

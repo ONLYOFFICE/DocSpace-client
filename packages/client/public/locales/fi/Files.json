@@ -104,7 +104,6 @@
   "RoomAvailableViaSharedLink": "Pääsy huoneeeen jaetun linkin kautta ",
   "RoomCreated": "Huone luotu",
   "RoomEmptyContainerDescription": "Ole hyvä ja luo ensimmäinen huone.",
-  "RoomFilesLifetime": "Tiedoston käyttöikä tässä huoneessa on asetettu {{days}} {{period}}",
   "RoomTagsLabel": "Huonetunnisteet",
   "RoomTagsTooltip": "Tunnisteet koskevat huonetta, joka luodaan tämän mallin perusteella.",
   "RoomTemplate": "Huonemalli",

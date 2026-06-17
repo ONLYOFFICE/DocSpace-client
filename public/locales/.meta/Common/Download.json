@@ -3,7 +3,7 @@
   "content": "Download",
   "content_en_sha1_hash": "a479c9c34e878d07b4d67a73a48f432ad7dc53c8",
   "created_at": "2025-05-19T21:30:44.645Z",
-  "updated_at": "2026-06-09T14:03:10.872Z",
+  "updated_at": "2026-06-15T19:31:56.087Z",
   "comment": {
     "text": "This is a button label that allows users to download a file or a document version.",
     "is_auto": true,
@@ -49,7 +49,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedForm.tsx",
-      "line_number": 236,
+      "line_number": 242,
       "context": "scale\n primary\n size={ButtonSize.medium}\n label={\n isAnonym\n ? t(\"Common:Download\")\n : t(\"CompletedForm:CheckReadyForms\")\n }\n onClick={isAnonym ? handleDownload : gotoCompleteFolder}\n testId={\n isAnonym",
       "module": "/packages/doceditor"
     },
@@ -91,19 +91,19 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 163,
+      "line_number": 201,
       "context": "},\n { key: \"separator-download\", isSeparator: true },\n {\n id: \"option_download\",\n key: \"download\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => downloadAction(item),\n disabled: !room.security?.Download,\n },\n { key: \"separator-restore\", isSeparator: true },",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 163,
+      "line_number": 201,
       "context": "},\n { key: \"separator-download\", isSeparator: true },\n {\n id: \"option_download\",\n key: \"download\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => downloadAction(item),\n disabled: !room.security?.Download,\n },\n { key: \"separator-restore\", isSeparator: true },",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 163,
+      "line_number": 201,
       "context": "},\n { key: \"separator-download\", isSeparator: true },\n {\n id: \"option_download\",\n key: \"download\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => downloadAction(item),\n disabled: !room.security?.Download,\n },\n { key: \"separator-restore\", isSeparator: true },",
       "module": "/packages/sdk"
     },

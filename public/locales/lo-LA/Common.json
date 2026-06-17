@@ -706,6 +706,8 @@
   "DropzoneTitleSecondary": "ຫຼືວາງໄຟລ໌ທີ່ນີ້",
   "DueToday": "ໝວດມື້ນີ້",
   "Duplicate": "ກ໋ອບປີ້",
+  "DuplicateFolderItem": "ເອກະສານ <2>{{title}}</2> ສຳເລັດການຜະລິດສຳເນົາແລ້ວ",
+  "DuplicateItem": "<2>{{title}}</2> ສໍາເລັດການສໍາເນົາແລ້ວ",
   "EditAccessInfo": "ພວກ​ເຮົາ​ໄດ້​ລະ​ບຸ​ວ່າ​ຜູ້​ໃຊ້​ສາ​ມາດ​ເຂົ້າ​ເຖິງ​ການ​ແກ້​ໄຂ​ເອ​ກະ​ສານ​ໄດ້​ຈັກ​ຄົນ.",
   "EditAdditionalLink": "ແກ້ໄຂລິ້ງເພີ່ມເຕີມ",
   "EditAgent": "ແກ້ໄຂຕົວແທນ",
@@ -1732,6 +1734,7 @@
   "RoomExternalLinkDeleted": "ເຊື່ອມຕໍ່ <1>«{{linkTitle}}»</1> ຖືກລົບອອກແລ້ວ.",
   "RoomExternalLinkRenamed": "ເຊື່ອມຕໍ່ <1>«{{oldLinkTitle}}»</1> ຖືກປ່ຽນຊື່ເປັນ <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "ເຊື່ອມຕໍ່ກ່ອນໜ້າ <1>«{{linkTitle}}»</1> ຖືກຍົກເລີກແລ້ວ <br/> ເຊື່ອມຕໍ່ໃໝ່ <1>«{{linkTitle}}»</1> ສ້າງຂຶ້ນແລ້ວ",
+  "RoomFilesLifetime": "ໃນຫ້ອງນີ້ ກໍານົດໄລຍະເວລາຂອງໄຟລ໌ໄວ້ຄັ້ງລະ {{days}} {{period}}",
   "RoomFormBarDescription": "ຫ້ອງນີ້ມີໃຫ້ທຸກຄົນທີ່ມີລິ້ງ. ຜູ້ໃຊ້ພາຍນອກຈະມີສິດອະນຸຍາດເບິ່ງພຽງແຕ່ສໍາລັບໄຟລ໌ທັງຫມົດ.",
   "RoomFromArchiveRestore": "ຟື້ນຄືນຫ້ອງຈາກ {{sectionName}}",
   "RoomGroupAdded": "ກຸ່ມຖືກເພີ່ມເຂົ້າແລ້ວ.",
@@ -2249,7 +2252,5 @@
   "YourName": "ຊື່​ຂອງ​ເຈົ້າ",
   "YourPrice": "ລາຄາຂອງເຈົ້າ",
   "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
-  "YouWillBeContacted": "ທີມງານຂາຍຈະຕິດຕໍ່ທ່ານຫຼັງຈາກສ້າງຄໍາຮ້ອງຂໍ.",
-  "DuplicateFolderItem": "ເອກະສານ <2>{{title}}</2> ສຳເລັດການຜະລິດສຳເນົາແລ້ວ",
-  "DuplicateItem": "<2>{{title}}</2> ສໍາເລັດການສໍາເນົາແລ້ວ"
+  "YouWillBeContacted": "ທີມງານຂາຍຈະຕິດຕໍ່ທ່ານຫຼັງຈາກສ້າງຄໍາຮ້ອງຂໍ."
 }

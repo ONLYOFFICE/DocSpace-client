@@ -33,49 +33,24 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import EditorsSvg from "PUBLIC_DIR/images/icons/16/docs-connect.editors.react.svg";
-import MsOfficeSvg from "PUBLIC_DIR/images/icons/16/docs-connect.ms-office.react.svg";
-import CollaborationSvg from "PUBLIC_DIR/images/icons/16/docs-connect.collaboration.react.svg";
-import CloudSvg from "PUBLIC_DIR/images/icons/16/docs-connect.cloud.react.svg";
-import EmbedSvg from "PUBLIC_DIR/images/icons/16/catalog.devtools-javascript-sdk.react.svg";
-import PluginSvg from "PUBLIC_DIR/images/icons/16/catalog.devtools-plugin-sdk.react.svg";
-import OAuthSvg from "PUBLIC_DIR/images/icons/16/catalog.devtools-oauth.react.svg";
-import KeySvg from "PUBLIC_DIR/images/icons/16/catalog.devtools-api-keys.react.svg";
-
-import WordSvg from "PUBLIC_DIR/images/icons/32/word.svg";
-import CellSvg from "PUBLIC_DIR/images/icons/32/cell.svg";
-import SlideSvg from "PUBLIC_DIR/images/icons/32/slide.svg";
-import PdfSvg from "PUBLIC_DIR/images/icons/32/pdf.svg";
-
-import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg";
-
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Link, LinkType, LinkTarget } from "@docspace/ui-kit/components/link";
-
-import { getBrandName } from "@docspace/shared/constants/brands";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
 import styles from "./PromoPage.module.scss";
 
+// Placeholder URLs — real links are TBD, see docs-connect/BACKEND_API.en.md (open items).
 const API_DOCS_URL = "https://api.onlyoffice.com/";
+const CONNECTORS_URL = "#";
+const EXAMPLES_URL = "#";
 
-const FeatureIcon = ({
-  Icon,
-  colorClass,
-}: {
-  Icon: React.FC<React.SVGProps<SVGSVGElement>>;
-  colorClass: string;
-}) => (
-  <div className={`${styles.featureIcon} ${colorClass}`}>
-    <span className={styles.featureIconInner}>
-      <Icon />
-    </span>
-  </div>
-);
+// Anchor for the "Automation API" hover tooltip.
+const AUTOMATION_API_ANCHOR = "docs-connect-automation-api";
 
 interface PromoPageProps {
   startTrial?: () => void;
@@ -84,259 +59,87 @@ interface PromoPageProps {
 const PromoPage = ({ startTrial }: PromoPageProps) => {
   const { t } = useTranslation(["DocsConnect", "Common"]);
 
-  const editorsName = getBrandName("ProductEditorsName");
-  const docsName = `${getBrandName("OrganizationName")} ${editorsName}`;
-
-  // Colors drive the tinted icon box; the glyphs themselves are currentColor.
-  // t() keys are static literals so the translation-usage scanner can see them.
-  const features = [
-    {
-      title: t("DocsConnect:FeatureEditorsTitle"),
-      description: t("DocsConnect:FeatureEditorsDescription"),
-      Icon: EditorsSvg,
-      colorClass: styles.featureBlue,
-    },
-    {
-      title: t("DocsConnect:FeatureCompatibilityTitle"),
-      description: t("DocsConnect:FeatureCompatibilityDescription"),
-      Icon: MsOfficeSvg,
-      colorClass: styles.featureCyan,
-    },
-    {
-      title: t("DocsConnect:FeatureCollaborationTitle"),
-      description: t("DocsConnect:FeatureCollaborationDescription"),
-      Icon: CollaborationSvg,
-      colorClass: styles.featureGreen,
-    },
-    {
-      title: t("DocsConnect:FeatureIntegrationTitle"),
-      description: t("DocsConnect:FeatureIntegrationDescription", {
-        editorsName,
-      }),
-      Icon: EmbedSvg,
-      colorClass: styles.featureIndigo,
-    },
-    {
-      title: t("DocsConnect:FeatureExtensibleTitle"),
-      description: t("DocsConnect:FeatureExtensibleDescription"),
-      Icon: PluginSvg,
-      colorClass: styles.featurePurple,
-    },
-    {
-      title: t("DocsConnect:FeatureSecureTitle"),
-      description: t("DocsConnect:FeatureSecureDescription"),
-      Icon: OAuthSvg,
-      colorClass: styles.featureRed,
-    },
-  ];
-
-  const editors = [
-    {
-      title: t("DocsConnect:EditorDocumentTitle"),
-      description: t("DocsConnect:EditorDocumentDescription"),
-      Icon: WordSvg,
-    },
-    {
-      title: t("DocsConnect:EditorSpreadsheetTitle"),
-      description: t("DocsConnect:EditorSpreadsheetDescription"),
-      Icon: CellSvg,
-    },
-    {
-      title: t("DocsConnect:EditorPresentationTitle"),
-      description: t("DocsConnect:EditorPresentationDescription"),
-      Icon: SlideSvg,
-    },
-    {
-      title: t("DocsConnect:EditorPdfTitle"),
-      description: t("DocsConnect:EditorPdfDescription"),
-      Icon: PdfSvg,
-    },
-  ];
-
-  const why = [
-    {
-      title: t("DocsConnect:WhyCloudTitle"),
-      description: t("DocsConnect:WhyCloudDescription"),
-      Icon: CloudSvg,
-      colorClass: styles.featureBlue,
-    },
-    {
-      title: t("DocsConnect:WhyKeysTitle"),
-      description: t("DocsConnect:WhyKeysDescription"),
-      Icon: KeySvg,
-      colorClass: styles.featureIndigo,
-    },
-    {
-      title: t("DocsConnect:WhyPanelTitle"),
-      description: t("DocsConnect:WhyPanelDescription"),
-      Icon: OAuthSvg,
-      colorClass: styles.featureGreen,
-    },
-  ];
-
-  const onViewApiDocs = () => {
-    // TODO(docs-connect): point to the real API documentation URL.
-    window.open(API_DOCS_URL, "_blank");
-  };
-
-  const renderCtaButtons = () => (
-    <div className={styles.ctaButtons}>
-      <Button
-        primary
-        size={ButtonSize.normal}
-        label={t("DocsConnect:StartFreeTrial")}
-        onClick={() => startTrial?.()}
-      />
-      <Button
-        size={ButtonSize.normal}
-        label={t("DocsConnect:ViewApiDocs")}
-        onClick={onViewApiDocs}
-      />
-    </div>
-  );
+  const onReadApiDocs = () => window.open(API_DOCS_URL, "_blank");
 
   return (
     <div className={styles.promo}>
-      <section className={styles.hero}>
-        <Heading level={HeadingLevel.h1} className={styles.heroTitle}>
-          {t("DocsConnect:DocsConnect")}
-        </Heading>
-        <Text className={styles.heroSubtitle}>
-          {t("DocsConnect:PromoSubtitle", { productName: docsName })}
-        </Text>
-        {renderCtaButtons()}
-      </section>
+      <Heading level={HeadingLevel.h1} className={styles.title}>
+        {t("DocsConnect:DocsConnect")}
+      </Heading>
 
-      <section className={styles.section}>
-        <Heading level={HeadingLevel.h2} className={styles.sectionTitle}>
-          {t("DocsConnect:EverythingTitle")}
-        </Heading>
-        <Text className={styles.sectionSubtitle}>
-          {t("DocsConnect:EverythingSubtitle")}
-        </Text>
-        <div className={styles.grid3}>
-          {features.map(({ title, description, Icon, colorClass }) => (
-            <div key={title} className={styles.featureCard}>
-              <FeatureIcon Icon={Icon} colorClass={colorClass} />
-              <Text fontSize="14px" fontWeight={600}>
-                {title}
-              </Text>
-              <Text fontSize="12px" className={styles.sectionSubtitle}>
-                {description}
-              </Text>
-            </div>
-          ))}
+      <Text as="p" className={styles.description}>
+        <Trans
+          t={t}
+          i18nKey="PromoDescription"
+          ns="DocsConnect"
+          components={{
+            1: (
+              <Link
+                className={styles.link}
+                type={LinkType.page}
+                href={CONNECTORS_URL}
+                target={LinkTarget.blank}
+                color="accent"
+              />
+            ),
+            2: (
+              <Link
+                className={styles.link}
+                id={AUTOMATION_API_ANCHOR}
+                type={LinkType.action}
+                color="accent"
+              />
+            ),
+          }}
+        />
+      </Text>
+
+      <Text as="p" className={styles.trialNote}>
+        {t("DocsConnect:TrialAvailable")}
+      </Text>
+
+      <div className={styles.actions}>
+        <Button
+          primary
+          size={ButtonSize.small}
+          label={t("DocsConnect:CreateTenant")}
+          onClick={() => startTrial?.()}
+        />
+        <Link
+          className={styles.link}
+          type={LinkType.action}
+          color="accent"
+          fontSize="13px"
+          fontWeight={600}
+          onClick={onReadApiDocs}
+        >
+          {t("DocsConnect:ReadApiDocumentation")}
+        </Link>
+      </div>
+
+      <Tooltip
+        anchorSelect={`#${AUTOMATION_API_ANCHOR}`}
+        place="bottom-start"
+        clickable
+        maxWidth="280px"
+      >
+        <div className={styles.tooltipBox}>
+          <Text fontSize="12px" lineHeight="16px">
+            {t("DocsConnect:AutomationApiTooltip")}
+          </Text>
+          <Link
+            type={LinkType.page}
+            href={EXAMPLES_URL}
+            target={LinkTarget.blank}
+            color="accent"
+            fontSize="13px"
+            fontWeight={600}
+            isHovered
+          >
+            {t("DocsConnect:CheckExamples")}
+          </Link>
         </div>
-      </section>
-
-      <section className={styles.section}>
-        <Heading level={HeadingLevel.h2} className={styles.sectionTitle}>
-          {t("DocsConnect:EditorsTitle")}
-        </Heading>
-        <Text className={styles.sectionSubtitle}>
-          {t("DocsConnect:EditorsSubtitle")}
-        </Text>
-        <div className={styles.grid4}>
-          {editors.map(({ title, description, Icon }) => (
-            <div key={title} className={styles.featureCard}>
-              <Icon width="32" height="32" />
-              <Text fontSize="14px" fontWeight={600}>
-                {title}
-              </Text>
-              <Text fontSize="12px" className={styles.sectionSubtitle}>
-                {description}
-              </Text>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className={styles.section}>
-        <Heading level={HeadingLevel.h2} className={styles.sectionTitle}>
-          {t("DocsConnect:IntegrateTitle")}
-        </Heading>
-        <Text className={styles.sectionSubtitle}>
-          {t("DocsConnect:IntegrateSubtitle")}
-        </Text>
-        <div className={styles.grid2}>
-          <div className={styles.featureCard}>
-            <Text fontSize="14px" fontWeight={600}>
-              {t("DocsConnect:IntegrateConnectorsTitle")}
-            </Text>
-            <Text fontSize="12px" className={styles.sectionSubtitle}>
-              {t("DocsConnect:IntegrateConnectorsDescription", {
-                productName: docsName,
-              })}
-            </Text>
-            <hr className={styles.cardDivider} />
-            <Link
-              className={styles.cardLink}
-              type={LinkType.page}
-              color="accent"
-              fontSize="13px"
-              fontWeight={600}
-              onClick={onViewApiDocs}
-            >
-              {t("DocsConnect:BrowseAllConnectors")} {/*  */}
-              <ArrowSvg />
-            </Link>
-          </div>
-          <div className={styles.featureCard}>
-            <Text fontSize="14px" fontWeight={600}>
-              {t("DocsConnect:IntegrateApiTitle")}
-            </Text>
-            <Text fontSize="12px" className={styles.sectionSubtitle}>
-              {t("DocsConnect:IntegrateApiDescription", { editorsName })}
-            </Text>
-            <hr className={styles.cardDivider} />
-            <Link
-              className={styles.cardLink}
-              type={LinkType.page}
-              target={LinkTarget.blank}
-              href={API_DOCS_URL}
-              color="accent"
-              fontSize="13px"
-              fontWeight={600}
-            >
-              {t("DocsConnect:ReadApiDocs")}
-              {/*  */}
-              <ArrowSvg />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.section}>
-        <Heading level={HeadingLevel.h2} className={styles.sectionTitle}>
-          {t("DocsConnect:WhyTitle", { productName: docsName })}
-        </Heading>
-        <Text className={styles.sectionSubtitle}>
-          {t("DocsConnect:WhySubtitle", { productName: docsName })}
-        </Text>
-        <div className={styles.grid3}>
-          {why.map(({ title, description, Icon, colorClass }) => (
-            <div key={title} className={styles.featureCard}>
-              <FeatureIcon Icon={Icon} colorClass={colorClass} />
-              <Text fontSize="14px" fontWeight={600}>
-                {title}
-              </Text>
-              <Text fontSize="12px" className={styles.sectionSubtitle}>
-                {description}
-              </Text>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className={styles.ctaBand}>
-        <Heading level={HeadingLevel.h2} className={styles.sectionTitle}>
-          {t("DocsConnect:StartBuildingTitle")}
-        </Heading>
-        <Text className={styles.ctaSubtitle}>
-          {t("DocsConnect:StartBuildingSubtitle")}
-        </Text>
-        {renderCtaButtons()}
-      </section>
+      </Tooltip>
     </div>
   );
 };

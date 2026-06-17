@@ -310,6 +310,12 @@ class CreateEditRoomStore {
   };
 
   onCreateAgent = async (t: TFunction, successToast: Element | null = null) => {
+    // Re-entry guard: the create dialog can fire this twice in one click
+    // (submit button is both `type="submit"` and has an onClick), which would
+    // POST two agents. `isLoading` is set synchronously below before the first
+    // await, so the second call bails here.
+    if (this.isLoading) return;
+
     const agentParams = this.agentParams!;
 
     const { attachDefaultTools } = agentParams;

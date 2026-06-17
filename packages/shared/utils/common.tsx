@@ -1535,7 +1535,17 @@ export const getCategoryType = (location: { pathname: string }) => {
     const agentRegexp = /(ai-agents)\/(\d+)/;
     const chatRegexp = /(ai-agents)\/(\d+)\/chat/;
 
-    if (chatRegexp.test(location.pathname)) {
+    // Agent-scoped alias sections reuse the file recent/favorites/trash data
+    // (same as the global sections), but live under /ai-agents/* so the
+    // sidebar keeps them under AI Agents. Detect them before the agent-detail
+    // patterns.
+    if (pathname.startsWith("/ai-agents/recent")) {
+      categoryType = CategoryType.Recent;
+    } else if (pathname.startsWith("/ai-agents/favorites")) {
+      categoryType = CategoryType.Favorite;
+    } else if (pathname.startsWith("/ai-agents/trash")) {
+      categoryType = CategoryType.Trash;
+    } else if (chatRegexp.test(location.pathname)) {
       categoryType = CategoryType.Chat;
     } else if (agentRegexp.test(location.pathname)) {
       categoryType = CategoryType.AIAgent;

@@ -146,7 +146,10 @@ const CreateAgentDialog = ({
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const tagInput = event.currentTarget.tagInput;
 
-    if (!tagInput) onCreateAgent();
+    if (!tagInput) {
+      onCreateAgent();
+      return;
+    }
 
     const value = tagInput.value ?? "";
     const hasFocus = tagInput === document.activeElement;
@@ -214,7 +217,6 @@ const CreateAgentDialog = ({
           isDisabled={isAgentTitleChanged || isWrongTitle || !isProfileSelected}
           isLoading={isLoading}
           type="submit"
-          onClick={onCreateAgent}
           testId="create_agent_dialog_save"
         />
         <Button

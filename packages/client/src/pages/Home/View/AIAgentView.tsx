@@ -143,7 +143,7 @@ const AIAgentViewComponent = ({
   }, [navigate]);
 
   const goToAISettings = useCallback(() => {
-    navigate("/portal-settings/ai-settings/providers");
+    navigate("/portal-settings/ai-settings/models");
   }, [navigate]);
 
   const onOpenEdit = useCallback(async () => {

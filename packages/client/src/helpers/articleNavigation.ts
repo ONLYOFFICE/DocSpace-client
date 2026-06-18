@@ -82,6 +82,10 @@ export const buildFolderUrl = (
   rootFolderType: FolderRootType,
   userId?: string,
   myFolderId?: number | null,
+  // When true, the Recent/Favorites/Trash sections are routed under
+  // /ai-agents/* (agent-scoped) instead of their global file paths, so the
+  // sidebar keeps them selected under AI Agents. Same data, different prefix.
+  agentScoped = false,
 ): string => {
   const fileParams = (
     categoryType: (typeof CategoryType)[keyof typeof CategoryType],
@@ -105,14 +109,19 @@ export const buildFolderUrl = (
     return filter.toUrlParams(userId, false);
   };
 
-  const parentSuffix = myFolderId != null ? `&parentId=${myFolderId}` : "";
+  // Agent-scoped sections aren't nested under My Documents, so they carry no
+  // parentId; the global sections keep it for back-navigation scoping.
+  const parentSuffix =
+    !agentScoped && myFolderId != null ? `&parentId=${myFolderId}` : "";
 
   let path = "";
   let params = "";
 
   switch (rootFolderType) {
     case FolderType.Recent:
-      path = getCategoryUrl(CategoryType.Recent);
+      path = agentScoped
+        ? "/ai-agents/recent/filter"
+        : getCategoryUrl(CategoryType.Recent);
       params = fileParams(CategoryType.Recent, FILTER_RECENT) + parentSuffix;
       break;
     case FolderType.USER:
@@ -124,11 +133,15 @@ export const buildFolderUrl = (
       params = fileParams(CategoryType.SharedWithMe, FILTER_SHARE);
       break;
     case FolderType.Favorites:
-      path = getCategoryUrl(CategoryType.Favorite);
+      path = agentScoped
+        ? "/ai-agents/favorites/filter"
+        : getCategoryUrl(CategoryType.Favorite);
       params = fileParams(CategoryType.Favorite, FILTER_FAVORITES) + parentSuffix;
       break;
     case FolderType.TRASH:
-      path = getCategoryUrl(CategoryType.Trash);
+      path = agentScoped
+        ? "/ai-agents/trash/filter"
+        : getCategoryUrl(CategoryType.Trash);
       params = fileParams(CategoryType.Trash, FILTER_TRASH) + parentSuffix;
       break;
     case FolderType.Archive:
@@ -168,6 +181,12 @@ export const getClientActiveId = (
     RoomSearchArea.Templates;
 
   if (pathname.startsWith("/dashboard")) return "dashboard";
+  // Agent-scoped sections highlight their own sidebar sub-items (checked
+  // before the generic /ai-agents and the global /recent matchers — note
+  // "/ai-agents/recent" also contains the "/recent" substring).
+  if (pathname.includes("/ai-agents/recent")) return "agents-recent";
+  if (pathname.includes("/ai-agents/favorites")) return "agents-favorites";
+  if (pathname.includes("/ai-agents/trash")) return "agents-trash";
   if (pathname.startsWith("/forms")) {
     if (pathname.includes("/recent")) return "forms-recent";
     if (pathname.includes("/favorite")) return "forms-favorites";

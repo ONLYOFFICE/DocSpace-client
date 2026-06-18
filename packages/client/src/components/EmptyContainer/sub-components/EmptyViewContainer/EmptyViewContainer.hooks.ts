@@ -50,6 +50,7 @@ import {
 } from "@docspace/shared/enums";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import type { TTranslation } from "@docspace/shared/types";
 import { CategoryType } from "@docspace/shared/constants";
 
@@ -148,6 +149,8 @@ export const useEmptyView = (
       rootFolderType,
       security,
       isResultsTab,
+      isKnowledgeTab,
+      isAIRoom,
     );
 
     return { description, title, icon };
@@ -209,6 +212,9 @@ export const useOptions = (
     standalone,
     isPortalAdmin,
     isGracePeriod,
+    knowledgeId,
+    startUpload,
+    createFoldersTree,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -248,7 +254,7 @@ export const useOptions = (
   }, []);
 
   const onGoToAIProviderSettings = useCallback(() => {
-    return navigate("/portal-settings/ai-settings/providers");
+    return navigate("/portal-settings/ai-settings/ai-models");
   }, []);
 
   const onGoToPersonal = useCallback((): LinkProps => {
@@ -336,6 +342,35 @@ export const useOptions = (
     setSelectFileAiKnowledgeDialogVisible?.(true);
   }, [setSelectFileAiKnowledgeDialogVisible]);
 
+  // Device upload for the agent knowledge tab. The new-concept client has no
+  // article main button (its hidden `.custom-file-input-article` that
+  // `onUploadAction` relies on), so build a transient file input and upload
+  // straight into the knowledge folder (`knowledgeId`) — same target the SDK
+  // knowledge device upload uses.
+  const uploadFromDeviceAiKnowledge = useCallback(() => {
+    if (!knowledgeId) return;
+
+    const input = document.createElement("input");
+    input.type = "file";
+    input.multiple = true;
+    input.style.display = "none";
+
+    input.onchange = async (e) => {
+      try {
+        const files = await getFilesFromEvent(e);
+        const tree = await createFoldersTree(t, files);
+        if (tree.length > 0) startUpload(tree, knowledgeId, t);
+      } catch (err) {
+        toastr.error(err as string, undefined, 0, true);
+      } finally {
+        input.remove();
+      }
+    };
+
+    document.body.appendChild(input);
+    input.click();
+  }, [knowledgeId, createFoldersTree, startUpload, t]);
+
   const onCreate = useCallback(
     (extension: ExtensionType, withoutDialog?: boolean) => {
       const event: CreateEvent = new Event(Events.CREATE);
@@ -388,6 +423,7 @@ export const useOptions = (
           onCreate,
           uploadFromDocspace,
           uploadFromDocspaceAiKnowledge,
+          uploadFromDeviceAiKnowledge,
           onUploadAction,
           createAndCopySharedLink,
           openInfoPanel,
@@ -427,6 +463,7 @@ export const useOptions = (
       onOpenAccessSettings,
       uploadFromDocspace,
       uploadFromDocspaceAiKnowledge,
+      uploadFromDeviceAiKnowledge,
       onUploadAction,
       createAndCopySharedLink,
       onCreate,

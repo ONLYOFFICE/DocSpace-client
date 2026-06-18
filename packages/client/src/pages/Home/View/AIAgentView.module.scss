@@ -1,5 +1,18 @@
 @use "@docspace/ui-kit/styles/mixins";
 
+// Remove the section body's side padding for the active chat view ONLY, so
+// the chat sits edge-to-edge. Anchored on the `[data-chat-active]` marker the
+// chat wrapper carries only while it's the visible section view (the chat
+// stays mounted but hidden on agent file tabs, so the wrapper class alone is
+// not view-specific). `withBodyScroll` stays ON, so the section's own scroll
+// container keeps clipping any horizontal overflow — dropping the padding here
+// does NOT reintroduce a page scrollbar. `!important` is required: the studio
+// padding comes from `.common.isStudio .section-wrapper-content`
+// (specificity 0,3,0), which outweighs this `:has` selector otherwise.
+:global(.section-wrapper-content):has([data-chat-active]) {
+  padding-inline: 0 !important;
+}
+
 .aiAgentChat {
   display: flex;
   flex: 1;
@@ -14,14 +27,6 @@
 
   @include mixins.mobile {
     --chat-header-top: calc(var(--section-header-height-mobile) + var(--section-submenu-height));
-  }
-
-  :global(.chat-message-body) {
-    margin: 0 -20px;
-
-    @include mixins.tablet-and-below {
-      margin: 0 -16px;
-    }
   }
 
   :global(div:has(> div > [style*="--chat-welcome-color"])) {

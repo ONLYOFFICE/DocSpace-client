@@ -34,67 +34,62 @@
  */
 
 import React from "react";
-import { useNavigate } from "react-router";
-import { Trans, useTranslation } from "react-i18next";
-import { useStores } from "@docspace/ui-kit/ai-agent/providers";
-import type { Profile } from "@docspace/ui-kit/ai-agent/providers";
+import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
+import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
 
 import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 
-type ModelSettingsProps = {
+type ProfileSettingsProps = {
   agentParams: TAgentParams;
   setAgentParams: (value: Partial<TAgentParams>) => void;
 };
 
-const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
+// Single combobox with the AI profiles configured in the chat library
+// (provider + model pairs). Replaces the previous provider/model pair of
+// comboboxes: the new agent-creation endpoint (POST /new-ai/agents) takes a
+// `profileId` and binds the profile to the created agent server-side.
+const ProfileSettings = ({
+  agentParams,
+  setAgentParams,
+}: ProfileSettingsProps) => {
   const { t } = useTranslation(["Common"]);
   const { useProfilesStore } = useStores();
+
   const profiles = useProfilesStore((s) => s.profiles);
+  const chatProfile = useProfilesStore((s) => s.chatProfile);
   const defaultProfile = useProfilesStore((s) => s.defaultProfile);
 
-  const [selectedProfile, setSelectedProfile] = React.useState<Profile | null>(
-    null,
-  );
-  const isInitializedRef = React.useRef(false);
-  const prevModelIdRef = React.useRef<string | undefined>(undefined);
+  const selectedProfileId = agentParams.profileId;
 
+  // Preselect the chat (or default, or first) profile once profiles arrive.
+  // Only write to agentParams when the value actually changes — an
+  // unconditional set produces a fresh state object every run and can
+  // ping-pong with other agentParams effects into an infinite update loop.
   React.useEffect(() => {
-    if (isInitializedRef.current || profiles.length === 0) return;
-    isInitializedRef.current = true;
+    if (!profiles.length) return;
+    if (selectedProfileId && profiles.some((p) => p.id === selectedProfileId))
+      return;
 
-    if (agentParams.modelId) {
-      const match = profiles.find((p) => p.modelId === agentParams.modelId);
-      if (match) {
-        setSelectedProfile(match);
-        return;
-      }
-    }
-
-    setSelectedProfile(defaultProfile ?? profiles[0] ?? null);
-  }, [profiles, defaultProfile, agentParams.modelId]);
-
-  React.useEffect(() => {
-    if (!selectedProfile) return;
-    if (prevModelIdRef.current === selectedProfile.modelId) return;
-
-    prevModelIdRef.current = selectedProfile.modelId;
-    setAgentParams({
-      modelId: selectedProfile.modelId,
-      providerId: undefined,
-      profileId: selectedProfile.id,
-    });
-  }, [selectedProfile, setAgentParams]);
+    const preferred = chatProfile ?? defaultProfile ?? profiles[0];
+    if (preferred && preferred.id !== selectedProfileId)
+      setAgentParams({ profileId: preferred.id });
+  }, [profiles, chatProfile, defaultProfile, selectedProfileId, setAgentParams]);
 
   const options = React.useMemo<TOption[]>(
-    () => profiles.map((p) => ({ key: p.id, value: p.id, label: p.name })),
+    () =>
+      profiles.map((profile) => ({
+        key: profile.id,
+        value: profile.id,
+        label: profile.name,
+      })),
     [profiles],
   );
 
-  const hasNoProfiles = profiles.length === 0;
+  const selectedProfile = profiles.find((p) => p.id === selectedProfileId);
 
   const selectedOption = React.useMemo<TOption>(
     () =>
@@ -106,27 +101,29 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
           }
         : {
             key: "empty-selected-option",
-            label: hasNoProfiles ? t("Common:NoModelsFound") : "",
+            label: profiles.length ? "" : t("Common:NoModelsFound"),
           },
-    [selectedProfile, hasNoProfiles, t],
+    [selectedProfile, profiles.length, t],
   );
 
-  const onSelect = React.useCallback(
+  const onSelectProfile = React.useCallback(
     (option: TOption) => {
       const profile = profiles.find((p) => p.id === option.key);
-      if (profile) setSelectedProfile(profile);
+      if (!profile) return;
+      setAgentParams({ profileId: profile.id });
     },
-    [profiles],
+    [profiles, setAgentParams],
   );
 
   return (
     <StyledParam increaseGap>
-      <div className=" set_room_params-info">
+      {/* width:100% so the scaled ComboBox spans the dialog width instead of
+          shrinking to its content (the shared StyledParam info block sizes to
+          content by default). */}
+      <div className=" set_room_params-info" style={{ width: "100%" }}>
         <div>
           <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
-            {t("AIProviderAndModel", {
-              aiProvider: t("Common:AIProvider"),
-            })}
+            {t("Common:AIAgentModel", { defaultValue: "Model" })}
           </Text>
           <Text
             fontSize="12px"
@@ -135,44 +132,32 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
             className="set_room_params-info-description"
             noSelect
           >
-            {t("ModelDescription", {
-              aiProvider: t("Common:AIProvider"),
+            {t("Common:AgentProfileDescription", {
+              defaultValue:
+                "Select the AI model to be used in this agent's chats.",
             })}
-          </Text>
-          <Text
-            fontSize="12px"
-            lineHeight="16px"
-            fontWeight={400}
-            className="set_room_params-info-description"
-            noSelect
-          >
-            <Trans
-              t={t}
-              i18nKey="ResponseQualityNode"
-              ns="Common"
-              components={{
-                1: <span key="1" style={{ fontWeight: 600 }} />,
-              }}
-            />
           </Text>
         </div>
         <ComboBox
           options={options}
           selectedOption={selectedOption}
-          onSelect={onSelect}
+          onSelect={onSelectProfile}
           scaled
           scaledOptions
           dropDownMaxHeight={options.length > 7 ? 300 : undefined}
-          noBorder={false}
+          isDefaultMode
           className="ai-combobox"
           displaySelectedOption
-          isDisabled={profiles.length === 0}
-          dataTestId="create_agent_model_combobox"
+          isDisabled={!profiles.length}
+          dataTestId="create_agent_profile_combobox"
         />
       </div>
     </StyledParam>
   );
 };
 
-export default ModelSettings;
-
+// Intentionally not wrapped in mobx `observer`: the component reads only
+// zustand stores (useSyncExternalStore) and local props; mixing observer's
+// reaction-driven re-renders with external-store subscriptions is what made
+// the preselect loop surface as a mobx "Maximum update depth" crash.
+export default ProfileSettings;

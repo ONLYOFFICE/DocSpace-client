@@ -42,6 +42,11 @@ import { withTranslation } from "react-i18next";
 import { isMobile, isTablet } from "@docspace/shared/utils";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import FilterInput from "@docspace/ui-kit/components/filter";
+import {
+  QuickActions,
+  CreateAgentIcon,
+} from "@docspace/ui-kit/components/quick-actions";
+import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import { withLayoutSize } from "@docspace/shared/HOC/withLayoutSize";
 import { getUser } from "@docspace/shared/api/people";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
@@ -65,6 +70,7 @@ import {
 
 import {
   DeviceType,
+  Events,
   FilterGroups,
   FilterKeys,
   FilterLocation,
@@ -92,6 +98,8 @@ import renderFilterSelector from "@docspace/shared/utils/renderFilterSelector";
 
 import { useContactsFilter } from "./useContacts";
 import CreateButtonMobile from "./CreateButtonMobile";
+
+import styles from "./Filter.module.scss";
 
 const SectionFilterContent = ({
   t,
@@ -149,6 +157,10 @@ const SectionFilterContent = ({
   isTemplatesFolder,
   isSharedWithMeFolder,
   isAIAgentsFolder,
+  aiReady,
+  isUserAdmin,
+  isOwner,
+  currentFolderId,
 
   currentClientView,
 
@@ -1916,6 +1928,52 @@ const SectionFilterContent = ({
     navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
   };
 
+  // AI agents list — quick-action tile + primary "New agent" button in the
+  // filter bar. Mirrors the SDK RootFilter: both are shown only on the
+  // agents root, when AI is ready and the user can manage agents. Creation
+  // goes through the existing client AGENT_CREATE event.
+  // `aiReady` (portal /ai/config) can lag behind the chat-lib profiles, so
+  // treat the presence of profiles as ready too — same signal the agents
+  // EmptyView uses to decide whether to offer agent creation.
+  const { useProfilesStore } = useStores();
+  const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
+  const canManageAgents = !!(isUserAdmin || isOwner || isRoomAdmin);
+  const showAgentsCreate =
+    isAIAgentsFolder && (aiReady || hasAiProfiles) && canManageAgents;
+
+  // Local "create agent" action used by the AI Agents quick-action bar and its
+  // main button. Distinct from the `onCreateAgent` prop (from
+  // contextOptionsStore, consumed by getSectionCreateButton): this one
+  // dispatches an inline AGENT_CREATE event scoped to the current folder.
+  const onCreateAgentFromFilter = useCallback(() => {
+    const event = new CustomEvent(Events.AGENT_CREATE, {
+      detail: { parentId: currentFolderId, context: "filter" },
+    });
+    window.dispatchEvent(event);
+  }, [currentFolderId]);
+
+  const agentsMainButtonProps = React.useMemo(
+    () => ({
+      isDropdown: false,
+      model: [],
+      onAction: onCreateAgentFromFilter,
+      text: t("Common:NewAgent"),
+    }),
+    [t, onCreateAgentFromFilter],
+  );
+
+  const agentsQuickActionItems = React.useMemo(
+    () => [
+      {
+        id: "quick-new-agent",
+        icon: <CreateAgentIcon />,
+        label: t("Common:NewAgent"),
+        onClick: onCreateAgentFromFilter,
+      },
+    ],
+    [t, onCreateAgentFromFilter],
+  );
+
   if (showFilterLoader) return <FilterLoader />;
 
   const filterInput = (
@@ -1968,10 +2026,22 @@ const SectionFilterContent = ({
       isRoomsFolder={isRoomsFolder}
       organizeRoomsGrouping={organizeRoomsGrouping}
       isFilterOrSearchActive={isFilterOrSearchActive}
-      showMainButton={showMainButton && isDesktopView}
-      mainButtonProps={mainButtonProps}
+      showMainButton={showAgentsCreate || (showMainButton && isDesktopView)}
+      mainButtonProps={showAgentsCreate ? agentsMainButtonProps : mainButtonProps}
     />
   );
+
+  if (showAgentsCreate) {
+    return (
+      <>
+        <QuickActions
+          items={agentsQuickActionItems}
+          className={styles.quickActions}
+        />
+        {filterInput}
+      </>
+    );
+  }
 
   return (
     <>
@@ -2026,7 +2096,7 @@ export default inject(
     const { fetchTags } = tagsStore;
     const { isRoomAdmin } = authStore;
     const { user } = userStore;
-    const { standalone, currentDeviceType } = settingsStore;
+    const { standalone, currentDeviceType, aiConfig } = settingsStore;
     const {
       isFavoritesFolder,
       isRecentFolder,
@@ -2050,6 +2120,7 @@ export default inject(
       getSelectedFolder,
       id: selectedFolderId,
     } = selectedFolderStore;
+    const currentFolderId = selectedFolderId;
 
     const { getFolderModel, onCreateRoom, onCreateAgent } = contextOptionsStore;
 
@@ -2109,6 +2180,10 @@ export default inject(
       isIndexEditingMode,
       isSharedWithMeFolder,
       isAIAgentsFolder,
+      aiReady: aiConfig?.aiReady,
+      isUserAdmin: user?.isAdmin,
+      isOwner: user?.isOwner,
+      currentFolderId,
 
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
       showFilterLoader: clientLoadingStore.showFilterLoader,

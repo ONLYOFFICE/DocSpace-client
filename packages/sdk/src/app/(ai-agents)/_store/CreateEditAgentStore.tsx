@@ -36,17 +36,15 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import type { Nullable } from "@docspace/shared/types";
 import {
   addServersForRoom,
-  createAIAgent,
+  createAIAgentWithProfile,
   deleteServersForRoom,
-  editAIAgent,
-  getDefaultProvider,
-  getModels,
+  editNewAiAgent,
 } from "@docspace/shared/api/ai";
 import type {
   TAgent,
   TAgentLogo,
   TChatSettings,
-  TCreateAgentData,
+  TCreateAgentWithProfileData,
   TEditAgentData,
 } from "@docspace/shared/api/ai/types";
 import type {
@@ -193,16 +191,10 @@ class CreateEditAgentStore {
     const { dialogsStore, avatarEditorStore } = deps;
     const isDefaultAIAgentsQuotaSet = !!deps.isDefaultAgentsQuotaSet;
 
-    const {
-      title,
-      icon,
-      agentId,
-      prompt,
-      providerId,
-      modelId,
-      agentOwner,
-      quota,
-    } = newParams;
+    const { title, icon, agentId, prompt, agentOwner, quota, profileId } =
+      newParams;
+
+    const isProfileChanged = !!profileId && profileId !== agent.profileId;
 
     const quotaLimit = quota ?? agent.quotaLimit;
     const isQuotaChanged = quotaLimit !== agent.quotaLimit;
@@ -225,9 +217,12 @@ class CreateEditAgentStore {
         cover: dialogsStore.cover.cover,
         color: dialogsStore.cover.color,
       }),
-      ...((prompt || providerId || modelId) && {
+      ...(prompt && {
         chatSettings: { prompt } satisfies TChatSettings,
       }),
+      // new-ai service rebinds the agent's Chat-action profile when a
+      // profileId is sent; only include it when actually changed.
+      ...(isProfileChanged && { profileId }),
     };
 
     const isDeleteLogo = !!agent.logo.original && !icon.uploadedFile;
@@ -254,7 +249,7 @@ class CreateEditAgentStore {
 
     try {
       if (Object.keys(editAgentParams).length) {
-        await editAIAgent(agent.id, editAgentParams);
+        await editNewAiAgent(agent.id, editAgentParams);
       }
 
       const requests: Promise<unknown>[] = [];
@@ -301,8 +296,12 @@ class CreateEditAgentStore {
     const { attachDefaultTools } = agentParams;
     const cover = dialogsStore.cover;
 
-    const { tags, title, icon, logo, prompt, providerId, modelId, quota } =
-      agentParams;
+    const { tags, title, icon, logo, prompt, profileId, quota } = agentParams;
+
+    if (!profileId) {
+      toastr.error(t("Common:RequiredField"));
+      return null;
+    }
 
     const quotaLimit = isDefaultRoomsQuotaSet ? quota : null;
     const tagsToAddList = tags.map((tag) => tag.name);
@@ -316,42 +315,19 @@ class CreateEditAgentStore {
           }
         : null;
 
-    const createAgentData: TCreateAgentData = {
+    const createAgentData: TCreateAgentWithProfileData = {
       title: title || t("Common:NewAgent"),
+      profileId,
+      prompt: prompt ?? "",
       ...(quotaLimit && { quota: Number(quotaLimit) }),
       ...logoCover,
       ...(tagsToAddList.length && { tags: tagsToAddList }),
-      ...((prompt || modelId || providerId) && {
-        chatSettings: { prompt, modelId, providerId } satisfies TChatSettings,
-      }),
       ...(typeof attachDefaultTools === "boolean" && { attachDefaultTools }),
     };
 
     this.setIsLoading(true);
 
     try {
-      // Resolve provider/model when not explicitly set (library profile flow).
-      if (!providerId) {
-        try {
-          const defaultProvider = await getDefaultProvider();
-          if (defaultProvider?.providerId) {
-            const activeModels = await getModels(defaultProvider.providerId);
-            const resolvedModelId = activeModels.some(
-              (m) => m.modelId === modelId,
-            )
-              ? modelId
-              : defaultProvider.defaultModel;
-            createAgentData.chatSettings = {
-              ...(createAgentData.chatSettings as TChatSettings | undefined),
-              providerId: defaultProvider.providerId,
-              modelId: resolvedModelId,
-            };
-          }
-        } catch {
-          /* createAIAgent may still succeed without chatSettings */
-        }
-      }
-
       if (icon.uploadedFile && typeof icon.uploadedFile !== "string") {
         const agentLogo = await this.getAgentLogo(icon);
         if (!agentLogo) {
@@ -362,7 +338,7 @@ class CreateEditAgentStore {
         createAgentData.logo = agentLogo;
       }
 
-      const agent = await createAIAgent(createAgentData);
+      const agent = await createAIAgentWithProfile(createAgentData);
       if ((agent as unknown as { errorMsg?: string }).errorMsg) {
         toastr.error((agent as unknown as { errorMsg: string }).errorMsg);
         return null;

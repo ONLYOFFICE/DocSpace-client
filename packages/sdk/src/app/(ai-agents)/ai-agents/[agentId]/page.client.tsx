@@ -79,11 +79,16 @@ const AiAgentDetailPage = ({
 
   React.useEffect(() => {
     if (roomId) aiRoomStore.setRoomId(roomId);
-    // Guard against re-entrant tab writes: if the bridge or AiRoomTabs
-    // already pushed a new URL, `initialTab` flips and this effect would
-    // otherwise stomp the latest tab. Treat the write as idempotent.
-    if (aiRoomStore.currentTab !== initialTab)
-      aiRoomStore.setCurrentTab(initialTab);
+    // Read the tab from the LIVE URL, not the SSR `initialTab` prop. AiRoomTabs
+    // keeps `?tab=` in sync via history.replaceState on every tab click, but
+    // the SSR prop is frozen at mount. Under dev StrictMode / concurrent
+    // AiAgentProviders mounts this effect re-runs on a second instance with the
+    // stale prop (e.g. "chat") and would otherwise stomp the user's current
+    // tab back. The live URL always reflects the latest selection.
+    const liveTab = new URLSearchParams(window.location.search).get("tab");
+    const tab: AiRoomTab =
+      liveTab === "knowledge" || liveTab === "result" ? liveTab : "chat";
+    if (aiRoomStore.currentTab !== tab) aiRoomStore.setCurrentTab(tab);
     if (initialResultFileId)
       aiRoomStore.setSelectedResultFileId(initialResultFileId);
   }, [roomId, initialTab, initialResultFileId, aiRoomStore]);

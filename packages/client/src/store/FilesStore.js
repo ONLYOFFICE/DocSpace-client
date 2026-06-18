@@ -2549,7 +2549,7 @@ class FilesStore {
 
     const request = () =>
       api.ai
-        .getAIAgents(filterData, this.aiAgentsController.signal)
+        .getNewAiAgents(filterData, this.aiAgentsController.signal)
         .then(async (data) => {
           if (!folderId) setSelectedNode([`${data.current.id}`]);
 
@@ -2707,7 +2707,7 @@ class FilesStore {
     inAgent = false,
     filter = null,
   ) => {
-    const agents = await api.ai.setCustomAIAgentQuota(itemsIDs, +quotaSize);
+    const agents = await api.ai.setNewAiAgentQuota(itemsIDs, +quotaSize);
 
     if (!inAgent) {
       await this.fetchAgents(null, filter, false, false);
@@ -2733,7 +2733,7 @@ class FilesStore {
   };
 
   resetAIAgentQuota = async (itemsIDs, inAgent = false, filter = null) => {
-    const agents = await api.ai.resetAIAgentQuota(itemsIDs);
+    const agents = await api.ai.resetNewAiAgentQuota(itemsIDs);
 
     if (!inAgent) {
       await this.fetchAgents(null, filter, false, false);
@@ -3961,7 +3961,7 @@ class FilesStore {
       (newFilter.page + 1) * newFilter.pageCount - deleteCount;
     newFilter.pageCount = deleteCount;
     if (isRooms) {
-      const req = isAIAgentsFolder ? api.ai.getAIAgents : api.rooms.getRooms;
+      const req = isAIAgentsFolder ? api.ai.getNewAiAgents : api.rooms.getRooms;
       return req(newFilter)
         .then((res) => {
           const folders = folderIds
@@ -5241,7 +5241,7 @@ class FilesStore {
     const newFilesData = isRooms
       ? await api.rooms.getRooms(newFilter)
       : isAIAgentsFolder
-        ? await api.ai.getAIAgents(newFilter)
+        ? await api.ai.getNewAiAgents(newFilter)
         : await api.files.getFolder(newFilter.folder, newFilter);
 
     const newFiles = [...this.files, ...newFilesData.files].filter(

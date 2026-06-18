@@ -247,8 +247,6 @@ const ArticleBodyContent = (props) => {
         return t("Services");
       case "AISettings":
         return t("Settings:AISettings");
-      case "NewAISettings":
-        return t("Settings:NewAISettings");
       case "OAuth:Apps":
         return t("OAuth:Apps");
       default:

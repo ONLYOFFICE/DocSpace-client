@@ -319,8 +319,8 @@ const CreateRoomDialog = ({
         isScrollLocked={isScrollLocked}
         hideContent={isOauthWindowOpen}
         isTemplate={isTemplate}
-        isBackButton={roomParams.type}
-        onBackClick={roomParams.type ? goBack : null}
+        isBackButton={roomParams.type && !startRoomType}
+        onBackClick={roomParams.type && !startRoomType ? goBack : null}
         onSubmit={handleSubmit}
         withForm
         containerVisible={isTemplate ? templateDialogIsVisible : false}

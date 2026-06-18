@@ -130,6 +130,7 @@ const Shell = ({ page = "home", ...rest }) => {
     isGuest,
     setSocialAuthWelcomeDialogVisible,
     getAIConfig,
+    agentEntityId,
     getAgentRoomId,
     openResultFile,
     closeEditorPanel,
@@ -604,6 +605,7 @@ const Shell = ({ page = "home", ...rest }) => {
           locale={language}
           theme={isBase ? PORTAL_BASE_THEME_ID : PORTAL_DARK_THEME_ID}
           isStandalone={standalone}
+          entityId={agentEntityId}
           getAgentRoomId={getAgentRoomId}
           openResultFile={openResultFile}
           closeEditorPanel={closeEditorPanel}
@@ -736,6 +738,13 @@ const ShellWrapper = inject(
       standalone,
       setSocialAuthWelcomeDialogVisible,
       getAIConfig,
+      // Scope the chat to the current agent only when we're inside an AI agent
+      // room (or one of its subfolders). Anywhere else — including the AI Agents
+      // root listing and non-agent contexts — the chat stays unscoped
+      // (entityId === undefined).
+      agentEntityId: selectedFolderStore.isAIRoom
+        ? String(selectedFolderStore.rootRoomId || selectedFolderStore.id)
+        : undefined,
       getAgentRoomId: () => {
         const id = selectedFolderStore.rootRoomId;
         return id ? Number(id) : null;

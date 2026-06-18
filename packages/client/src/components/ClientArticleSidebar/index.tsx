@@ -73,8 +73,13 @@ const ClientArticleSidebar = ({
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
   const navigate = useNavigate();
-  const { myFolderId, roomsFolderId, recentFolderId, favoritesFolderId } =
-    folderIds;
+  const {
+    myFolderId,
+    roomsFolderId,
+    recentFolderId,
+    favoritesFolderId,
+    recycleBinFolderId,
+  } = folderIds;
 
   // `onFolderNavigate` is re-created on every inject render; keep a stable ref
   // so the memoized onClick handlers below don't go stale (which made nested
@@ -105,10 +110,10 @@ const ClientArticleSidebar = ({
   // "@favorites" alias FilesFilter.getDefault would otherwise set.
   const goRoomsScoped = React.useCallback(
     (
-        categoryType: ValueOf<typeof CategoryType>,
-        basePath: string,
-        folderId?: number | null,
-      ) =>
+      categoryType: ValueOf<typeof CategoryType>,
+      basePath: string,
+      folderId?: number | null,
+    ) =>
       () => {
         onFolderNavigateRef.current?.();
         const filter = FilesFilter.getDefault({ categoryType });
@@ -231,6 +236,16 @@ const ClientArticleSidebar = ({
           ...(archiveFolder
             ? [navItem(archiveFolder, { withTopSeparator: true })]
             : []),
+          {
+            id: "rooms-trash",
+            label: t("Common:TrashSection"),
+            icon: getCatalogIconUrlByType(FolderType.TRASH),
+            onClick: goRoomsScoped(
+              CategoryType.Trash,
+              "/rooms/trash",
+              recycleBinFolderId,
+            ),
+          },
         ],
       });
     }
@@ -289,6 +304,7 @@ const ClientArticleSidebar = ({
     canUseTemplates,
     recentFolderId,
     favoritesFolderId,
+    recycleBinFolderId,
     userId,
   ]);
 
@@ -324,3 +340,4 @@ const ClientArticleSidebarConnected = inject<TStore>(
 )(observer(ClientArticleSidebar));
 
 export default ClientArticleSidebarConnected;
+

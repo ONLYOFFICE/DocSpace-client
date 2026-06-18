@@ -227,6 +227,22 @@ const ClientRoutes = [
             ),
           },
           {
+            path: "rooms/trash",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/trash/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
             path: "rooms/shared",
             element: (
               <PrivateRoute>

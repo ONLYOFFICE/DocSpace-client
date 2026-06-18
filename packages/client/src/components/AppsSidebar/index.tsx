@@ -26,6 +26,7 @@
 
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
 
 import { useMemo } from "react";
 
@@ -46,9 +47,9 @@ import type { ArticleProfileProps } from "@docspace/ui-kit/components/article";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import BackButton from "@docspace/ui-kit/components/article/sub-components/BackButton";
+import ArticleDevToolsBar from "@docspace/ui-kit/components/article/sub-components/DevToolsBar";
 import { useSectionNavigation } from "SRC_DIR/contexts/SectionNavigationContext";
 import CollapseButton from "./CollapseButton";
-import FooterMenu from "./FooterMenu";
 import ProfileBlock from "./ProfileBlock";
 import { useSidebarShowText } from "./useSidebarShowText";
 import styles from "./AppsSidebar.module.scss";
@@ -85,7 +86,6 @@ export const AppsSidebarView = ({
   toggleShowText,
   currentDeviceType,
   user,
-  isNotPaidPeriod = false,
   articleOpen = true,
   toggleArticleOpen,
   onBack,
@@ -93,6 +93,7 @@ export const AppsSidebarView = ({
   const showBackButton = variant === "secondary";
   const hideFooter = variant === "secondary";
   const { t } = useTranslation(["Common"]);
+  const navigate = useNavigate();
   const { isBase } = useTheme();
   const isMobile = currentDeviceType === DeviceType.mobile;
   const collapseLabel = showText
@@ -116,8 +117,10 @@ export const AppsSidebarView = ({
 
   const isAdmin = user?.isAdmin ?? false;
   const isOwner = user?.isOwner ?? false;
-  const isVisitor = user?.isVisitor ?? false;
-  const isCollaborator = user?.isCollaborator ?? false;
+  // Developer Tools banner mirrors the former footer item gating: admins/owners
+  // only. Hidden entirely on the secondary sidebars (accounts/dev-tools/settings)
+  // via `hideFooter`.
+  const showDevTools = isAdmin || isOwner;
 
   const handleBackdropClick = () => {
     toggleArticleOpen?.();
@@ -228,18 +231,20 @@ export const AppsSidebarView = ({
             withAnimation
           />
 
-          {/* Footer menu lives inside the scroll body so it scrolls with the
-              apps list when there is overflow, and stays pinned to the bottom
-              (via margin-block-start: auto) when there is free space above. */}
-          {!hideFooter && (
+          {/* Developer Tools banner lives inside the scroll body so it scrolls
+              with the apps list on overflow, and stays pinned to the bottom
+              (via margin-block-start: auto) when there is free space above.
+              Collapses to an icon-only button on tablet (`!showText`). */}
+          {!hideFooter && showDevTools && (
             <div className={styles.footer}>
-              <FooterMenu
+              <ArticleDevToolsBar
                 showText={showText}
-                isAdmin={isAdmin}
-                isOwner={isOwner}
-                isVisitor={isVisitor}
-                isCollaborator={isCollaborator}
-                isNotPaidPeriod={isNotPaidPeriod}
+                articleOpen={articleOpen}
+                withCustomSlot={false}
+                currentDeviceType={currentDeviceType}
+                toggleArticleOpen={toggleArticleOpen ?? (() => {})}
+                path="/developer-tools/overview"
+                navigate={navigate}
               />
             </div>
           )}

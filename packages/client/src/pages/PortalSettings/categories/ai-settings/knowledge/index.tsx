@@ -43,6 +43,7 @@ import { PasswordInput } from "@docspace/ui-kit/components/password-input";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { inject, observer } from "mobx-react";
@@ -59,7 +60,6 @@ type TKnowledgeProps = {
   knowledgeInitied?: AISettingsStore["knowledgeInitied"];
   knowledgeConfig?: AISettingsStore["knowledgeConfig"];
   updateKnowledge?: AISettingsStore["updateKnowledge"];
-  hasAIProviders?: AISettingsStore["hasAIProviders"];
   aiProviders?: AISettingsStore["aiProviders"];
   getAIConfig?: SettingsStore["getAIConfig"];
   aiConfig?: SettingsStore["aiConfig"];
@@ -72,13 +72,18 @@ const KnowledgeComponent = ({
   knowledgeInitied,
   knowledgeConfig,
   updateKnowledge,
-  hasAIProviders,
   aiProviders,
   getAIConfig,
   aiConfig,
   knowledgeSettingsUrl,
 }: TKnowledgeProps) => {
   const { t } = useTranslation(["Common"]);
+
+  // Gate the Knowledge base on the AI chat profiles (the same signal the AI
+  // settings tabs use), not the legacy /ai providers list. "Connected" means
+  // at least one AI model profile is configured in the AI chat.
+  const { useProfilesStore } = useStores();
+  const hasAIProviders = useProfilesStore((s) => s.profiles.length > 0);
 
   const [resetDialogVisible, setResetDialogVisible] =
     React.useState<boolean>(false);
@@ -394,7 +399,6 @@ export const Knowledge = inject(
       knowledgeInitied: aiSettingsStore.knowledgeInitied,
       knowledgeConfig: aiSettingsStore.knowledgeConfig,
       updateKnowledge: aiSettingsStore.updateKnowledge,
-      hasAIProviders: aiSettingsStore.hasAIProviders,
       aiProviders: aiSettingsStore.aiProviders,
       getAIConfig: settingsStore.getAIConfig,
       aiConfig: settingsStore.aiConfig,

@@ -61,6 +61,7 @@ import type {
   TAIConfig,
   TAgent,
   TCreateAgentData,
+  TCreateAgentWithProfileData,
   TEditAgentData,
   TGetAgents,
   TDefaultProvider,
@@ -641,6 +642,20 @@ export const createAIAgent = async (data: TCreateAgentData) => {
   return res as TAgent;
 };
 
+// New agent creation flow: the Node AI service (mounted at /new-ai) creates
+// the agent via the .NET endpoint and binds the selected AI profile to it.
+export const createAIAgentWithProfile = async (
+  data: TCreateAgentWithProfileData,
+) => {
+  const res = await request({
+    method: "POST",
+    url: `/new-ai/agents`,
+    data,
+  });
+
+  return res as TAgent;
+};
+
 export const editAIAgent = async (id: TAgent["id"], data: TEditAgentData) => {
   const res = await request({
     method: "PUT",
@@ -649,6 +664,78 @@ export const editAIAgent = async (id: TAgent["id"], data: TEditAgentData) => {
   });
 
   return res as TAgent;
+};
+
+// --- new-ai (profile-based) agent flow -------------------------------------
+// The Node AI service (mounted at /new-ai) owns the profile<->agent binding.
+// These mirror the /ai functions above but go through /new-ai/agents so the
+// service can inject `profileId` (GET :id), rebind the profile (PUT) and keep
+// the prompt in `chatSettings`. Only the ai-agents product uses these; the
+// legacy /ai flow (forms/arbiter/old client) stays on the functions above.
+const newAiBaseUrl = "/new-ai/agents";
+
+export const getNewAiAgent = async (id: TAgent["id"]) => {
+  const res = await request({ method: "GET", url: `${newAiBaseUrl}/${id}` });
+
+  return res as TAgent;
+};
+
+export const getNewAiAgents = async (
+  filter: RoomsFilter,
+  signal?: AbortSignal,
+) => {
+  let params: string = "";
+
+  if (filter) {
+    checkFilterInstance(filter, RoomsFilter);
+
+    params = `?${filter.toApiUrlParams()}`;
+  }
+
+  const res = await request({
+    method: "GET",
+    url: `${newAiBaseUrl}${params}`,
+    signal,
+  });
+
+  return res as TGetAgents;
+};
+
+export const editNewAiAgent = async (
+  id: TAgent["id"],
+  data: TEditAgentData,
+) => {
+  const res = await request({
+    method: "PUT",
+    url: `${newAiBaseUrl}/${id}`,
+    data,
+  });
+
+  return res as TAgent;
+};
+
+export const deleteNewAiAgent = async (id: TAgent["id"]) => {
+  await request({ method: "DELETE", url: `${newAiBaseUrl}/${id}`, data: {} });
+};
+
+export const resetNewAiAgentQuota = async (roomIds: TAgent["id"]) => {
+  return request({
+    method: "put",
+    url: `${newAiBaseUrl}/resetquota`,
+    data: { roomIds },
+  });
+};
+
+export const setNewAiAgentQuota = (roomIds: TAgent["id"], quota: number) => {
+  return request({
+    method: "put",
+    url: `${newAiBaseUrl}/agentquota`,
+    data: { roomIds, quota },
+  });
+};
+
+export const getNewAiAgentsNews = async () => {
+  return request({ method: "GET", url: `${newAiBaseUrl}/news` });
 };
 
 export const getAIAgent = async (id: TAgent["id"]) => {

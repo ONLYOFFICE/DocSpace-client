@@ -163,7 +163,7 @@ export const AICard = ({
           as={Link}
           icon={<SettingsSvg />}
           label={t("Common:GoToSettings")}
-          to="/portal-settings/ai-settings/providers"
+          to="/portal-settings/ai-settings/ai-models"
         />
       );
     }

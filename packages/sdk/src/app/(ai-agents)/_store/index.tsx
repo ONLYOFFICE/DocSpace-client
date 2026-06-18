@@ -37,6 +37,10 @@
 import React from "react";
 
 import type { TUser } from "@docspace/shared/api/people/types";
+import type { TAIConfig } from "@docspace/shared/api/ai/types";
+import type { Nullable } from "@docspace/shared/types";
+
+import type { AgentsListStoreInit } from "./AgentsListStore";
 
 import { AgentLoadingStoreContextProvider } from "./AgentLoadingStore";
 import { AgentTagsStoreContextProvider } from "./AgentTagsStore";
@@ -60,9 +64,16 @@ import { UploadStoreContextProvider } from "@/app/(docspace)/_store/UploadStore"
 export const AiAgentsStoreProviders = ({
   children,
   initialUser,
+  initialAgentsData,
+  initialAIConfig,
 }: {
   children: React.ReactNode;
   initialUser?: TUser | null;
+  // SSR snapshots fetched by the (ai-agents) server layout — stores are
+  // constructed already hydrated so the first render needs no client fetch
+  // and no render-phase observable writes.
+  initialAgentsData?: AgentsListStoreInit | null;
+  initialAIConfig?: Nullable<TAIConfig>;
 }) => {
   return (
     <AgentLoadingStoreContextProvider>
@@ -73,7 +84,9 @@ export const AiAgentsStoreProviders = ({
               <CreateEditAgentStoreContextProvider>
                 <AgentsUserStoreContextProvider initialUser={initialUser}>
                   <AgentsQuotaStoreContextProvider>
-                    <AgentsAIConfigStoreContextProvider>
+                    <AgentsAIConfigStoreContextProvider
+                      initialConfig={initialAIConfig}
+                    >
                       <AISettingsStoreContextProvider>
                         <RecentFilesStoreContextProvider>
                           <FavoritesFilesStoreContextProvider>
@@ -81,7 +94,9 @@ export const AiAgentsStoreProviders = ({
                               <KnowledgeFilesStoreContextProvider>
                                 <ResultFilesStoreContextProvider>
                                   <AgentInfoPanelStoreContextProvider>
-                                    <AgentsListStoreContextProvider>
+                                    <AgentsListStoreContextProvider
+                                      initialData={initialAgentsData}
+                                    >
                                       <UploadStoreContextProvider>
                                         {children}
                                       </UploadStoreContextProvider>
@@ -113,7 +128,7 @@ export { useAiRoomStore } from "./AiRoomStore";
 export type { AiRoomTab } from "./AiRoomStore";
 export { useCreateEditAgentStore } from "./CreateEditAgentStore";
 export { useAgentsListStore } from "./AgentsListStore";
-export type { AgentsViewAs } from "./AgentsListStore";
+export type { AgentsViewAs, AgentsListStoreInit } from "./AgentsListStore";
 export { useAgentsUserStore } from "./AgentsUserStore";
 export { useAgentsQuotaStore } from "./AgentsQuotaStore";
 export { useAgentsAIConfigStore } from "./AgentsAIConfigStore";

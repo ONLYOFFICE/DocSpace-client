@@ -83,10 +83,7 @@ export const getSectionCreateButton = ({
   onCreateAgent,
   createGroup,
 }: GetSectionCreateButtonParams): SectionCreateButtonResult => {
-  // The "Forms" section reuses the Rooms folder, so check it before the
-  // generic rooms branch: it creates a Form Filling Room (onCreateRoom is
-  // wired to preset the FFR type when in the Forms route).
-  if (isFormsSection) {
+  if (isFormsSection && isRoomsFolder) {
     const model = getFolderModel(t);
     if (!model || model.length === 0) return HIDDEN;
 

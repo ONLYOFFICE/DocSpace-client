@@ -2919,6 +2919,10 @@ class FilesActionStore {
     let pinName = "unpin";
     const { selection } = this.filesStore;
 
+    const hasFormRoom = selection.some(
+      (item) => item.roomType === RoomsType.FormRoom,
+    );
+
     selection.forEach((item) => {
       if (!item.pinned) pinName = "pin";
     });
@@ -2927,7 +2931,6 @@ class FilesActionStore {
     const createGroup = this.getOption("create-group", t);
     const addToGroup = this.getOption("add-to-group", t);
     const removeFromGroup = this.getOption("remove-from-group", t);
-    const archive = this.getOption("archive", t);
     const changeQuota = this.getOption("change-quota", t);
     const disableQuota = this.getOption("disable-quota", t);
     const defaultQuota = this.getOption("default-quota", t);
@@ -2939,8 +2942,9 @@ class FilesActionStore {
       .set("add-to-group", addToGroup)
       .set("remove-from-group", removeFromGroup);
 
+    if (!hasFormRoom) itemsCollection.set("archive", this.getOption("archive", t));
+
     itemsCollection
-      .set("archive", archive)
       .set("change-quota", changeQuota)
       .set("default-quota", defaultQuota)
       .set("disable-quota", disableQuota)

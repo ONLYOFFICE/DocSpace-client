@@ -3501,13 +3501,15 @@ class FilesStore {
         roomOptions = removeOptions(roomOptions, ["change-room-owner"]);
       }
 
-      const isFormsSection = window.location.pathname.startsWith("/forms");
-
-      if (!canArchiveRoom || isFormsSection) {
+      if (!canArchiveRoom) {
         roomOptions = removeOptions(roomOptions, [
           "archive-room",
           "unarchive-room",
         ]);
+      }
+
+      if (item.roomType === RoomsType.FormRoom) {
+        roomOptions = removeOptions(roomOptions, ["archive-room"]);
       }
 
       if (!canRemoveRoom) {

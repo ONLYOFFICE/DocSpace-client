@@ -97,7 +97,6 @@ import { FilterLoader } from "@docspace/ui-kit/components/filter/skeletons";
 import renderFilterSelector from "@docspace/shared/utils/renderFilterSelector";
 
 import { useContactsFilter } from "./useContacts";
-import CreateButtonMobile from "./CreateButtonMobile";
 
 import styles from "./Filter.module.scss";
 
@@ -126,7 +125,6 @@ const SectionFilterContent = ({
   clearSearch,
   setClearSearch,
   setMainButtonMobileVisible,
-  setMainButtonVisible,
   isArchiveFolder,
 
   // contacts
@@ -244,15 +242,6 @@ const SectionFilterContent = ({
   );
 
   const isDesktopView = currentDeviceType === DeviceType.desktop;
-  const isCreateFabVisible = showMainButton && !isDesktopView;
-
-  React.useEffect(() => {
-    setMainButtonVisible(isCreateFabVisible);
-  }, [isCreateFabVisible, setMainButtonVisible]);
-
-  React.useEffect(() => {
-    return () => setMainButtonVisible(false);
-  }, [setMainButtonVisible]);
 
   // Check if any filter or search is active (excluding sorting and groupId)
   // Room grouping should be hidden when filters/search are active
@@ -2027,7 +2016,9 @@ const SectionFilterContent = ({
       organizeRoomsGrouping={organizeRoomsGrouping}
       isFilterOrSearchActive={isFilterOrSearchActive}
       showMainButton={showAgentsCreate || (showMainButton && isDesktopView)}
-      mainButtonProps={showAgentsCreate ? agentsMainButtonProps : mainButtonProps}
+      mainButtonProps={
+        showAgentsCreate ? agentsMainButtonProps : mainButtonProps
+      }
     />
   );
 
@@ -2043,15 +2034,7 @@ const SectionFilterContent = ({
     );
   }
 
-  return (
-    <>
-      {filterInput}
-      <CreateButtonMobile
-        visible={isCreateFabVisible}
-        mainButtonProps={mainButtonProps}
-      />
-    </>
-  );
+  return filterInput;
 };
 
 export default inject(
@@ -2083,7 +2066,6 @@ export default inject(
       createThumbnails,
       setCurrentRoomsFilter,
       setMainButtonMobileVisible,
-      setMainButtonVisible,
       thirdPartyStore,
       clearSearch,
       setClearSearch,
@@ -2205,7 +2187,6 @@ export default inject(
       setClearSearch,
 
       setMainButtonMobileVisible,
-      setMainButtonVisible,
 
       contactsViewAs,
       contactsTab,

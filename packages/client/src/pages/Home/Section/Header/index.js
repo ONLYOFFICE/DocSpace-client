@@ -78,7 +78,7 @@ import {
   showInfoPanel,
   hideInfoPanel as hideInfoPanelEvent,
 } from "SRC_DIR/helpers/info-panel";
-import { getContactsView } from "SRC_DIR/helpers/contacts";
+import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import {
   getLifetimePeriodTranslation,
@@ -152,6 +152,8 @@ const SectionHeaderContent = (props) => {
     setGroupsSelected,
     isRoomAdmin,
     isEmptyPage,
+    isGroupsEmpty,
+    groupsIsFiltered,
 
     isLoading,
 
@@ -168,7 +170,10 @@ const SectionHeaderContent = (props) => {
     onCreateAndCopySharedLink,
     showNavigationButton,
     startUpload,
+    getFolderModel,
     contactsCanCreate,
+    onCreateRoom,
+    onCreateAgent,
     onEmptyTrashAction,
     getHeaderOptions,
     setBufferSelection,
@@ -495,6 +500,21 @@ const SectionHeaderContent = (props) => {
       setIsLoading,
     ],
   );
+
+  const getContextOptionsPlus = React.useCallback(
+    () => getFolderModel(t),
+    [getFolderModel, t],
+  );
+
+  const onPlusClick = React.useCallback(() => {
+    if (isContactsGroupsPage) return createGroup();
+    if (isAIAgentsFolder) return onCreateAgent();
+    return onCreateRoom();
+  }, [isContactsGroupsPage, isAIAgentsFolder, onCreateAgent, onCreateRoom]);
+
+  const isPlusButtonVisible =
+    (isEmptyPage && !isContactsPage) ||
+    (isContactsGroupsPage && isGroupsEmpty && !groupsIsFiltered);
 
   const onNavigationButtonClick = React.useCallback(() => {
     onCreateAndCopySharedLink(selectedFolder, t);
@@ -1002,6 +1022,7 @@ const SectionHeaderContent = (props) => {
                   ? navigationPath
                   : accountsNavigationPath
               }
+              getContextOptionsPlus={getContextOptionsPlus}
               getContextOptionsFolder={getContextOptionsFolder}
               onClose={onClose}
               onClickFolder={onClickFolder}
@@ -1029,6 +1050,7 @@ const SectionHeaderContent = (props) => {
                 infoPanel: t("Common:InfoPanel"),
               }}
               withMenu={withMenu}
+              onPlusClick={onPlusClick}
               isEmptyPage={isEmptyPage}
               isRoom={isCurrentRoom || isContactsPage || isProfile}
               hideInfoPanel={
@@ -1067,7 +1089,7 @@ const SectionHeaderContent = (props) => {
               guidAnimationVisible={guidAnimationVisible}
               setGuidAnimationVisible={setGuidAnimationVisible}
               isContextButtonVisible={isContextButtonVisible}
-              isPlusButtonVisible={false}
+              isPlusButtonVisible={isPlusButtonVisible}
               showBackButton={isProfile}
               contextMenuHeader={isProfile ? undefined : contextMenuHeader}
               analyzeResponsesButton={
@@ -1237,6 +1259,9 @@ export default inject(
       onClickEditRoom,
       onCopyLink,
       onCreateAndCopySharedLink,
+      getFolderModel,
+      onCreateRoom,
+      onCreateAgent,
       getHeaderOptions,
       onEmptyTrashAction,
     } = contextOptionsStore;
@@ -1261,6 +1286,8 @@ export default inject(
       setSelected: setGroupsSelected,
       setBufferSelection: setGroupsBufferSelection,
       insideGroupTempTitle,
+      groups,
+      groupsIsFiltered,
     } = groupsStore;
 
     const {
@@ -1408,6 +1435,8 @@ export default inject(
       isCollaborator,
       isVisitor,
       isEmptyPage,
+      isGroupsEmpty: groups?.length === 0,
+      groupsIsFiltered,
       categoryType,
       theme,
       isFrame,
@@ -1421,6 +1450,9 @@ export default inject(
       onCreateAndCopySharedLink,
       showNavigationButton,
       startUpload,
+      getFolderModel,
+      onCreateRoom,
+      onCreateAgent,
       onEmptyTrashAction,
       getHeaderOptions,
       setBufferSelection,

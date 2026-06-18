@@ -34,6 +34,7 @@
  */
 
 import React, { useCallback } from "react";
+import { inject, observer } from "mobx-react";
 
 import { TableCell, TableRow } from "@docspace/ui-kit/components/table";
 import { Text } from "@docspace/ui-kit/components/text";
@@ -55,6 +56,7 @@ type ModelSettingsRowProps = {
   isUpdating: boolean;
   link?: string;
   onToggle: (modelId: string, enabled: boolean) => Promise<void>;
+  isAiToolsServiceOn?: boolean;
 };
 
 const ModelSettingsRow: React.FC<ModelSettingsRowProps> = ({
@@ -68,6 +70,7 @@ const ModelSettingsRow: React.FC<ModelSettingsRowProps> = ({
   link,
   onToggle,
   image,
+  isAiToolsServiceOn,
 }) => {
   const onChange = useCallback(() => {
     void onToggle(modelId, !enabled);
@@ -121,7 +124,7 @@ const ModelSettingsRow: React.FC<ModelSettingsRowProps> = ({
             <ToggleButton
               isChecked={enabled}
               onChange={onChange}
-              isDisabled={isUpdating}
+              isDisabled={isUpdating || !isAiToolsServiceOn}
               dataTestId={`ai_model_toggle_${modelId}`}
             />
           </div>
@@ -142,5 +145,11 @@ const ModelSettingsRow: React.FC<ModelSettingsRowProps> = ({
   );
 };
 
-export default ModelSettingsRow;
+export default inject<TStore>(({ paymentStore }) => {
+  const { isAiToolsServiceOn } = paymentStore;
+
+  return {
+    isAiToolsServiceOn,
+  };
+})(observer(ModelSettingsRow));
 

@@ -55,6 +55,7 @@ type ModelSettingsRowViewProps = {
   setAiModelAvailability?: ServicesStore["setAiModelAvailability"];
   aiModelAvailabilityMap?: ServicesStore["aiModelAvailabilityMap"];
   aiModelAvailabilityUpdatingSet?: ServicesStore["aiModelAvailabilityUpdatingSet"];
+  isAiToolsServiceOn?: boolean;
 };
 
 const RowView = (props: ModelSettingsRowViewProps) => {
@@ -64,6 +65,7 @@ const RowView = (props: ModelSettingsRowViewProps) => {
     setAiModelAvailability,
     aiModelAvailabilityMap,
     aiModelAvailabilityUpdatingSet,
+    isAiToolsServiceOn,
   } = props;
 
   const models = aiToolsPrices?.chat ?? [];
@@ -153,7 +155,7 @@ const RowView = (props: ModelSettingsRowViewProps) => {
                 <ToggleButton
                   isChecked={enabled}
                   onChange={() => onToggle(m.id, !enabled)}
-                  isDisabled={isUpdating}
+                  isDisabled={isUpdating || !isAiToolsServiceOn}
                   dataTestId={`ai_model_toggle_${m.id}`}
                 />
               </div>
@@ -165,7 +167,7 @@ const RowView = (props: ModelSettingsRowViewProps) => {
   );
 };
 
-export default inject<TStore>(({ servicesStore }) => {
+export default inject<TStore>(({ servicesStore, paymentStore }) => {
   const {
     aiToolsPrices,
     formatAiModelsCurrency,
@@ -173,6 +175,7 @@ export default inject<TStore>(({ servicesStore }) => {
     aiModelAvailabilityMap,
     aiModelAvailabilityUpdatingSet,
   } = servicesStore;
+  const { isAiToolsServiceOn } = paymentStore;
 
   return {
     aiToolsPrices,
@@ -180,6 +183,7 @@ export default inject<TStore>(({ servicesStore }) => {
     setAiModelAvailability,
     aiModelAvailabilityMap,
     aiModelAvailabilityUpdatingSet,
+    isAiToolsServiceOn,
   };
 })(observer(RowView));
 

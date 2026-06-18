@@ -38,6 +38,7 @@ import { inject, observer } from "mobx-react";
 
 import classNames from "classnames";
 import { Row, RowContent } from "@docspace/ui-kit/components/rows";
+import type { TData } from "@docspace/ui-kit/components/rows/row/Row.types";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import {
   Avatar,
@@ -91,7 +92,6 @@ const GroupsRowComponent = ({
   };
 
   const onOpenGroup = (e: React.MouseEvent) => {
-    console.log("open", item.id, true, item.name, e);
     openGroupAction!(item.id, true, item.name, e);
   };
 
@@ -113,8 +113,11 @@ const GroupsRowComponent = ({
       <div className="group-item">
         <Row
           key={item.id}
+          data={item as unknown as TData}
           onContextClick={onRowContextClick}
           onSelect={onSelect}
+          onRowClick={() => {}}
+          checked={isChecked}
           isIndexEditingMode={false}
           element={
             <Avatar

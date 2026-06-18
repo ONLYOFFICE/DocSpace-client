@@ -422,6 +422,21 @@
       }
     },
     {
+      "label": "Frontend | deploy run",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/../publish/web ; trap 'kill 0' EXIT ; (cd login && node server.js) & (cd editor && node server.js) & (cd management && node server.js) & (cd sdk && node server.js) & npx serve client -s -l 5001",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Frontend | storybook (ui-kit)",
       "type": "shell",
       "command": "cd ${workspaceFolder}/libs/ui-kit ; pnpm run storybook",

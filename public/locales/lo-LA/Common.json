@@ -1152,6 +1152,7 @@
   "RoomAdmin": "ຜູ້ເບິ່ງແຍງຫ້ອງ",
   "RoomCreateUser": "ເພີ່ມຜູ້ໃຊ້ແລ້ວ",
   "RoomEmptyAtTheMoment": "ຫ້ອງນີ້ຫວ່າງເປົ່າໃນຂະນະນີ້.",
+  "RoomFilesLifetime": "ໃນຫ້ອງນີ້ ກໍານົດໄລຍະເວລາຂອງໄຟລ໌ໄວ້ຄັ້ງລະ {{days}} {{period}}",
   "RoomGroups": "ກຸ່ມຫ້ອງ",
   "RoomInfo": "ຂໍ້ມູນຫ້ອງ",
   "RoomLinkExpired": "ລິ້ງຫ້ອງທີ່ທ່ານພະຍາຍາມເປີດນັ້ນບໍ່ມີຢູ່ ຫຼື ໝົດອາຍຸແລ້ວ.",

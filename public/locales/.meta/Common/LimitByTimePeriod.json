@@ -3,7 +3,7 @@
   "content": "Limit by time period",
   "content_en_sha1_hash": "03e40a5e784a8aec64ccc72778ffd126b2588b86",
   "created_at": "2025-08-26T11:15:03.626Z",
-  "updated_at": "2026-05-28T15:46:18.560Z",
+  "updated_at": "2026-06-05T11:04:11.801Z",
   "comment": {
     "text": "This is a section header or dialog title. It indicates that the following settings allow the user to restrict access or availability based on a specific time frame.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
-      "line_number": 582,
+      "line_number": 595,
       "context": "bodyText={expiredLinkText}\n setIsExpired={setIsExpired}\n expirationDate={expirationDate}\n setExpirationDate={setExpirationDate}\n canChangeLifetime={canChangeLifetime}\n headerText={t(\"Common:LimitByTimePeriod\")}\n />\n </StyledEditLinkBodyContent>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/shared"
     }

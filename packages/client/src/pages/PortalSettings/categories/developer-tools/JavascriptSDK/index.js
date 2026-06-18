@@ -111,7 +111,7 @@ const PortalIntegration = (props) => {
       handleOnClick: navigateToEditor,
     },
     {
-      title: t("Viewer"),
+      title: t("Common:Viewer"),
       description: t("ViewerDescription"),
       image: theme.isBase ? ViewerImg : ViewerImgDark,
       handleOnClick: navigateToViewer,

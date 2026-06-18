@@ -1152,6 +1152,7 @@
   "RoomAdmin": "Amministratore della stanza",
   "RoomCreateUser": "Utenti aggiunti.",
   "RoomEmptyAtTheMoment": "Questa stanza è vuota al momento.",
+  "RoomFilesLifetime": "La durata del file è impostata su {{days}} {{period}} in questa stanza.",
   "RoomGroups": "Gruppi di stanze",
   "RoomInfo": "Informazioni sulla stanza",
   "RoomLinkExpired": "Il link alla stanza che si sta cercando di aprire non esiste o è scaduto",

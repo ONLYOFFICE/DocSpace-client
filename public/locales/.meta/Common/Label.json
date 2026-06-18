@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.029Z",
-  "updated_at": "2026-05-28T15:46:18.491Z",
+  "updated_at": "2026-06-05T11:04:11.777Z",
   "comment": {
     "text": "This is a label for an input field. It prompts the user to enter a name for a group or a room.",
     "is_auto": true,
@@ -97,7 +97,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
-      "line_number": 480,
+      "line_number": 483,
       "context": "isDisabled={variant === \"update\" || isRequestRunning}\n dataTestId=\"provider-type-combobox\"\n />\n </FieldContainer>\n <FieldContainer\n labelText={t(\"Common:Label\")}\n labelVisible\n isVertical\n removeMargin\n isRequired\n >",
       "module": "/packages/client"
     },

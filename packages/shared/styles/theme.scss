@@ -62,6 +62,10 @@
   --text-color: #{$white};
   --text-disable-color: #{$gray-dark-text};
 
+  --checkbox-fill-color: #{$dark-gray-light};
+  --checkbox-border-color: #{$gray-dark-strong};
+  --checkbox-arrow-color: #{$white};
+
   --link-color: #{$white};
 
   --button-color-base: #{$white};
@@ -1841,7 +1845,7 @@
   --input-block-icon-color: #{$gray-dark};
   --input-block-hover-icon-color: #{$white};
   --settings-common-white-label-border-img: 1px solid #{$gray-dark-strong};
-  --settings-common-white-label-not-available-background: #{$gray-dark};
+  --settings-common-white-label-not-available-background: #{$dark-gray-light};
   --settings-common-white-label-text-color: #{$white};
   --settings-common-backup-rectangle-bg-color: #{$light-dark-gray-hover};
   --settings-backup-text-disabled: #{$gray-dark-text};

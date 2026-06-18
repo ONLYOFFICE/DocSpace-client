@@ -1152,6 +1152,7 @@
   "RoomAdmin": "Quản trị viên phòng",
   "RoomCreateUser": "Người dùng đã được thêm vào.",
   "RoomEmptyAtTheMoment": "Phòng này hiện đang trống.",
+  "RoomFilesLifetime": "Thời gian tồn tại của tập tin được đặt thành {{period}} {{days}} trong phòng này",
   "RoomGroups": "Nhóm phòng",
   "RoomInfo": "Thông tin phòng",
   "RoomLinkExpired": "Liên kết phòng bạn đang cố gắng mở không tồn tại hoặc đã hết hạn.",

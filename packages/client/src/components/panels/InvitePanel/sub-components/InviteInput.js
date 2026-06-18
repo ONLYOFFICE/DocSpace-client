@@ -557,7 +557,7 @@ const InviteInput = ({
       return prevDropDownContent.current;
     }
 
-    if (partsLength === 1 && !!usersList.length) {
+    if (partsLength === 1 && usersList.length) {
       prevDropDownContent.current = usersList.map((user) =>
         getItemContent(user),
       );

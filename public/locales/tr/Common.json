@@ -1152,6 +1152,7 @@
   "RoomAdmin": "Oda yöneticisi",
   "RoomCreateUser": "Kullanıcılar eklendi.",
   "RoomEmptyAtTheMoment": "Bu oda şu anda boş.",
+  "RoomFilesLifetime": "Bu odada dosya yaşam süresi {{days}} {{period}} olarak ayarlanmıştır",
   "RoomGroups": "Oda grupları",
   "RoomInfo": "Oda Bilgisi",
   "RoomLinkExpired": "Açmaya çalıştığınız oda bağlantısı mevcut değil veya süresi dolmuş.",

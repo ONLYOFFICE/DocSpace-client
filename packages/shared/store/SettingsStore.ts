@@ -95,6 +95,7 @@ import { isRequestAborted } from "../utils/axios/isRequestAborted";
 import {
   frameCallEvent,
   getShowText,
+  insertDataLayer,
   insertTagManager,
   isManagement,
   isPublicRoom,
@@ -351,7 +352,6 @@ class SettingsStore {
   scrollToSettings: boolean = false;
 
   displayBanners: boolean = false;
-
 
   aiServicesEnabled: boolean = true;
 
@@ -1075,6 +1075,10 @@ class SettingsStore {
     }
 
     if (origSettings?.tagManagerId) {
+      if (origSettings?.ownerId) {
+        insertDataLayer(origSettings.ownerId);
+      }
+
       insertTagManager(origSettings.tagManagerId);
     }
   };

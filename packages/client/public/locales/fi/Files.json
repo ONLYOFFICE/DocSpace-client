@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "Pääsy huoneeeen jaetun linkin kautta ",
   "RoomCreated": "Huone luotu",
   "RoomEmptyContainerDescription": "Ole hyvä ja luo ensimmäinen huone.",
-  "RoomFilesLifetime": "Tiedoston käyttöikä tässä huoneessa on asetettu {{days}} {{period}}",
   "RoomNotificationsDisabled": "Huoneen ilmoitukset pois käytöstä",
   "RoomNotificationsEnabled": "Huoneen ilmoitukset käytössä",
   "RoomOwner": "Huoneen omistaja",

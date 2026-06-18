@@ -316,7 +316,7 @@ const Item = ({
 		changeInviteItem({ id, access: selected.access });
 	};
 
-	const textProps = !!avatar || isGroup ? {} : { onClick: onEdit };
+	const textProps = avatar || isGroup ? {} : { onClick: onEdit };
 
 	const availableAccess =
 		roomId === -1 ? getFreeUsersTypeArray() : getFreeUsersRoleArray();

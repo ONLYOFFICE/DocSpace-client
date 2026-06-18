@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "可通过共享连接访问此房间",
   "RoomCreated": "房间已创建",
   "RoomEmptyContainerDescription": "请创建首个房间。",
-  "RoomFilesLifetime": "此房间中的文件有效期设置为{{days}} {{period}}。",
   "RoomNotificationsDisabled": "房间通知禁用",
   "RoomNotificationsEnabled": "房间通知启用",
   "RoomOwner": "房间所有者",

@@ -1152,6 +1152,7 @@
   "RoomAdmin": "Administratori i dhomës",
   "RoomCreateUser": "Përdoruesit u shtuan.",
   "RoomEmptyAtTheMoment": "Kjo dhomë është bosh për momentin.",
+  "RoomFilesLifetime": "Jetëgjatësia e skedarit është caktuar në {{days}} {{period}} në këtë dhomë",
   "RoomGroups": "Grupet e dhomave",
   "RoomInfo": "Informacion i dhomës",
   "RoomLinkExpired": "Lidhja e dhomës që po përpiqeni të hapni nuk ekziston ose ka skaduar.",

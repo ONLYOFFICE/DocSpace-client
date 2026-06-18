@@ -72,11 +72,11 @@ const ConvertDialogComponent = (props) => {
 
   const options = [
     {
-      label: t("Document"),
+      label: t("Common:Document"),
       value: ".docx",
     },
     {
-      label: t("Spreadsheet"),
+      label: t("Common:Spreadsheet"),
       value: ".xlsx",
     },
   ];

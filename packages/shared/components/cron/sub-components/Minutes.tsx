@@ -58,7 +58,7 @@ export const Minutes = memo(
         value={minutes}
         setValue={setMinutes}
         dropDownMaxHeight={300}
-        placeholder={t("EveryMinute")}
+        placeholder={t("Common:EveryMinute")}
         isDisabled={isDisabled}
         dataTestId={dataTestId}
       />

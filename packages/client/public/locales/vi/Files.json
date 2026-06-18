@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "Phòng có sẵn thông qua liên kết được chia sẻ",
   "RoomCreated": "Đã tạo phòng",
   "RoomEmptyContainerDescription": "Xin vui lòng tạo phòng đầu tiên.",
-  "RoomFilesLifetime": "Thời gian tồn tại của tập tin được đặt thành {{period}} {{days}} trong phòng này",
   "RoomNotificationsDisabled": "Đã tắt thông báo phòng",
   "RoomNotificationsEnabled": "Đã bật thông báo phòng",
   "RoomOwner": "Chủ sở hữu phòng",

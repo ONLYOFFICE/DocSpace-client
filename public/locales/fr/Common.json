@@ -1152,6 +1152,7 @@
   "RoomAdmin": "Administrateur de salle",
   "RoomCreateUser": "Utilisateurs ajoutés.",
   "RoomEmptyAtTheMoment": "Cette salle est vide pour le moment.",
+  "RoomFilesLifetime": "La durée de vie des fichiers est fixée à {{days}} {{period}} dans cette salle",
   "RoomGroups": "Groupes de salles",
   "RoomInfo": "Informations de la salle",
   "RoomLinkExpired": "Le lien de la salle que vous essayez d'ouvrir n'existe pas ou a expiré.",

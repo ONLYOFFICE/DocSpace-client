@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "Kamer beschikbaar via gedeelde link",
   "RoomCreated": "Kamer aangemaakt",
   "RoomEmptyContainerDescription": "Maak de eerste kamer aan.",
-  "RoomFilesLifetime": "De bestand levensduur is ingesteld op {{days}} {{period}} in deze kamer",
   "RoomNotificationsDisabled": "Kamer meldingen uitgeschakeld",
   "RoomNotificationsEnabled": "Kamer meldingen ingeschakeld",
   "RoomOwner": "Kamer eigenaar",

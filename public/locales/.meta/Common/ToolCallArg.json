@@ -3,7 +3,7 @@
   "content": "Tool call arguments:",
   "content_en_sha1_hash": "110e03f58b1b1fbd0eceebf15972282c7f9490fd",
   "created_at": "2025-10-27T16:14:24.087Z",
-  "updated_at": "2026-05-15T14:00:06.989Z",
+  "updated_at": "2026-06-05T11:04:11.883Z",
   "comment": {
     "text": "This is a label displayed above the arguments of a tool call in the AI chat interface. It indicates the parameters passed to the tool.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallBody/code-view/index.tsx",
       "line_number": 95,
-      "context": "<div\n className={styles.toolCallCodeViewItem}\n data-testid=\"tool-call-code-view-item-arg\"\n >\n <Text fontSize=\"15px\" lineHeight=\"16px\" fontWeight={600}>\n {t(\"ToolCallArg\")}\n </Text>\n <MarkdownField\n chatMessage={formatJsonWithMarkdown(content.arguments)}\n successCopyMessage={t(\"ToolCallArgCopied\")}\n />",
+      "context": "<div\n className={styles.toolCallCodeViewItem}\n data-testid=\"tool-call-code-view-item-arg\"\n >\n <Text fontSize=\"15px\" lineHeight=\"16px\" fontWeight={600}>\n {t(\"ToolCallArg\")}\n </Text>\n <MarkdownField\n chatMessage={formatJsonWithMarkdown(content.arguments ?? {})}\n successCopyMessage={t(\"ToolCallArgCopied\")}\n />",
       "module": "/libs/ui-kit"
     }
   ],

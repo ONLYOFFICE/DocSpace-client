@@ -1152,6 +1152,7 @@
   "RoomAdmin": "කාමරයේ පරිපාලක",
   "RoomCreateUser": "පරිශීලකයින් එකතු කරන ලදි.",
   "RoomEmptyAtTheMoment": "දැනට මෙම කාමරය හිස්ය",
+  "RoomFilesLifetime": "මෙම කාමරයේ ගොණුවේ කාලය {{days}} {{period}} දක්වා සකසා ඇත.",
   "RoomGroups": "කාමර කණ්ඩායම්",
   "RoomInfo": "කාමර තොරතුරු",
   "RoomLinkExpired": "ඔබ විවෘත කිරීමට උත්සාහ කරන කාමර සබැඳිය නොපවතී හෝ කල් ඉකුත් වී ඇත.",

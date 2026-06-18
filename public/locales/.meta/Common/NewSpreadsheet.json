@@ -3,7 +3,7 @@
   "content": "New spreadsheet",
   "content_en_sha1_hash": "6bde054ddba34bfc0975daa6211434db38bf5b6f",
   "created_at": "2025-05-19T21:30:46.791Z",
-  "updated_at": "2026-06-02T08:43:27.485Z",
+  "updated_at": "2026-06-05T11:04:11.803Z",
   "comment": {
     "text": "This string is used as the default file name for a new spreadsheet and as a label for a button that creates a new spreadsheet.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3741,
+      "line_number": 3746,
       "context": "};\n \n const createNewSpreadsheet = {\n id: \"personal_new-spreadsheet\",\n key: \"new-spreadsheet\",\n label: t(\"Common:NewSpreadsheet\"),\n onClick: () => this.onCreate(\"xlsx\"),\n icon: SpreadsheetReactSvgUrl,\n };\n \n const createNewPresentation = {",
       "module": "/packages/client"
     },

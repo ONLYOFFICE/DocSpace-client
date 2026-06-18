@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "Սենյակը հասանելի է ընդհանուր հղման միջոցով",
   "RoomCreated": "Ստեղծվել է սենյակ",
   "RoomEmptyContainerDescription": "Խնդրում եմ ստեղծեք առաջին սենյակը :",
-  "RoomFilesLifetime": "Այս սենյակում ֆայլի գործողության ժամկետը սահմանված է {{days}} {{period}}",
   "RoomNotificationsDisabled": "Սենյակի ծանուցումներն անջատված են",
   "RoomNotificationsEnabled": "Սենյակի ծանուցումներն միացված են",
   "RoomOwner": "Սենյակի սեփականատեր",

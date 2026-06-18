@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "Soba je na voljo prek skupne povezave",
   "RoomCreated": "Soba ustvarjena",
   "RoomEmptyContainerDescription": "Prosimo, ustvarite prvo sobo.",
-  "RoomFilesLifetime": "Življenjska doba datoteke je v tej sobi nastavljena na {{days}} {{period}}",
   "RoomNotificationsDisabled": "Obvestila sobe onemogočena",
   "RoomNotificationsEnabled": "Obvestila sobe omogočena",
   "RoomOwner": "Lastnik sobe",

@@ -379,7 +379,7 @@ class PaymentStore {
         return;
       }
 
-      toastr.success(t("ActivateLicenseActivated"));
+      toastr.success(t("Common:ActivateLicenseActivated"));
       localStorage.removeItem("enterpriseAlertClose");
 
       await getPaymentInfo();

@@ -3,7 +3,7 @@
   "content": "Who has access",
   "content_en_sha1_hash": "b82540c6a77efe28089091e2a93027edf47bac9e",
   "created_at": "2025-08-26T11:15:03.431Z",
-  "updated_at": "2026-05-15T14:00:06.937Z",
+  "updated_at": "2026-06-05T11:04:11.866Z",
   "comment": {
     "text": "This is a section title in sharing dialogs, indicating the area where users can view or manage who has access to a shared item.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/AccessSelectorBlock/AccessSelectorBlock.tsx",
-      "line_number": 56,
-      "context": "const { t } = useTranslation(\"Common\");\n \n return (\n <div className={styles.accessSelectorBlock}>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:WhoHasAccess\")}\n </Text>\n <ComboBox\n options={options}\n selectedOption={selectedOption}\n scaledOptions",
+      "line_number": 71,
+      "context": ")?.tooltip;\n \n return (\n <div className={styles.accessSelectorBlock}>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:WhoHasAccess\")}\n </Text>\n <ComboBox\n options={optionsWithAnchor}\n selectedOption={selectedOption}\n scaledOptions",
       "module": "/packages/shared"
     }
   ],

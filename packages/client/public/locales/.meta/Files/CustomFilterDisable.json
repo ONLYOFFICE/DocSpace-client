@@ -3,7 +3,7 @@
   "content": "Disable Custom filter",
   "content_en_sha1_hash": "598157d6d4873c7b214960264722b2388f27f0ee",
   "created_at": "2025-05-19T21:30:55.390Z",
-  "updated_at": "2026-06-02T08:43:27.547Z",
+  "updated_at": "2026-06-05T11:04:11.851Z",
   "comment": {
     "text": "This is a button label that appears in a menu. It allows users to disable a custom filter that has been applied to a file or folder.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2645,
+      "line_number": 2650,
       "context": "...versionActions,\n {\n id: \"option_custom-filter\",\n key: \"custom-filter\",\n label: item.customFilterEnabled\n ? t(\"Files:CustomFilterDisable\")\n : t(\"Files:CustomFilterEnable\"),\n icon: CustomFilterReactSvgUrl,\n onClick: () => this.onSetUpCustomFilter(item, t),\n disabled: Boolean(\n !isRoomAdmin &&",
       "module": "/packages/client"
     }

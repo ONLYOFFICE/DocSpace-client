@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "Dhoma në dispozicion përmes lidhjes së përbashkët",
   "RoomCreated": "Dhoma u krijua",
   "RoomEmptyContainerDescription": "Ju lutemi krijoni dhomën e parë.",
-  "RoomFilesLifetime": "Jetëgjatësia e skedarit është caktuar në {{days}} {{period}} në këtë dhomë",
   "RoomNotificationsDisabled": "Njoftimet e dhomës janë çaktivizuar",
   "RoomNotificationsEnabled": "Njoftimet e dhomës janë aktivizuar",
   "RoomOwner": "Pronari i dhomës",

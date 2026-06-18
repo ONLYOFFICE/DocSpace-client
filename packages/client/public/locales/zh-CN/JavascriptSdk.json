@@ -116,7 +116,7 @@
   "RoomTypeDisplay": "房间类型显示",
   "Rotate": "旋转",
   "Scale": "缩放",
-  "SDKDescription": "嵌入式 SDK 允许您将整个 {{productName}} 或其部分嵌入到您的 Web 界面中。选择预定义参数的开箱即用模式或自定义模式进行手动配置。要了解有关 SDK 的更多信息，请参阅",
+  "SDKDescription": "嵌入式 SDK 允许您将整个{{productName}}或其部分嵌入到您的 Web 界面中。选择预定义参数的开箱即用模式或自定义模式进行手动配置。要了解有关 SDK 的更多信息，请参阅",
   "SdkPackageVersionInfo": "连接时默认使用最新包版本",
   "SearchBlock": "搜索板块",
   "SearchByNameEmail": "按名称或电子邮件搜索",

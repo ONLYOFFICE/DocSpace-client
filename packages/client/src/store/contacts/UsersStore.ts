@@ -586,7 +586,7 @@ class UsersStore {
 
     const needReset = this.needResetUserSelection || !getInfoPanelOpen();
 
-    if (!!removedGuests && !needReset) {
+    if (removedGuests && !needReset) {
       this.updateSelection();
     }
 

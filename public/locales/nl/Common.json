@@ -1152,6 +1152,7 @@
   "RoomAdmin": "Kamer beheerder",
   "RoomCreateUser": "Gebruikers toegevoegd.",
   "RoomEmptyAtTheMoment": "Deze kamer is op dit moment leeg.",
+  "RoomFilesLifetime": "De bestand levensduur is ingesteld op {{days}} {{period}} in deze kamer",
   "RoomGroups": "Kamergroepen",
   "RoomInfo": "Kamerinfo",
   "RoomLinkExpired": "De link naar de kamer die u probeert te openen bestaat niet of is verlopen.",

@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "Sala este disponibilă pe link partajat",
   "RoomCreated": "Sala s-a creat",
   "RoomEmptyContainerDescription": "Creați prima sală.",
-  "RoomFilesLifetime": "Durată de viață a fișierelor în acestă sală constituie {{days}} {{period}}",
   "RoomNotificationsDisabled": "Notificările pentru sala sunt dezactivate",
   "RoomNotificationsEnabled": "Notificările pentru sala sunt activate",
   "RoomOwner": "Proprietarul sălii",

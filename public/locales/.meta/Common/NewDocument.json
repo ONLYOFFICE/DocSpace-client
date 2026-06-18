@@ -3,7 +3,7 @@
   "content": "New document",
   "content_en_sha1_hash": "762b84690217181b9f127d2cfc1991e0892e844a",
   "created_at": "2025-05-19T21:30:46.732Z",
-  "updated_at": "2026-06-02T08:43:27.485Z",
+  "updated_at": "2026-06-05T11:04:11.803Z",
   "comment": {
     "text": "This is the default title for a newly created document, appearing in file lists and as a button label for creating new documents.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3733,
+      "line_number": 3738,
       "context": "(parentRoomType === FolderType.FormRoom && isFolder);\n \n const createNewDoc = {\n id: \"personal_new-document\",\n key: \"new-document\",\n label: t(\"Common:NewDocument\"),\n onClick: () => this.onCreate(\"docx\"),\n icon: ActionsDocumentsReactSvgUrl,\n };\n \n const createNewSpreadsheet = {",
       "module": "/packages/client"
     },

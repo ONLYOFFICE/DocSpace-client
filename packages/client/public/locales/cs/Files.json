@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "Místnost je k dispozici přes sdílený odkaz",
   "RoomCreated": "Místnost vytvořena",
   "RoomEmptyContainerDescription": "Vytvořte první místnost.",
-  "RoomFilesLifetime": "Životnost souboru je v této místnosti nastavena na {{days}} {{period}}",
   "RoomNotificationsDisabled": "Oznámení o místnosti vypnuta",
   "RoomNotificationsEnabled": "Oznámení o místnosti povolena",
   "RoomOwner": "Majitel místnosti",

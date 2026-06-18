@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2026-06-02T08:43:27.451Z",
+  "updated_at": "2026-06-05T11:04:11.771Z",
   "comment": {
     "text": "Button label or dialog header. It confirms and applies changes, such as renaming a chat or saving export settings.",
     "is_auto": true,
@@ -145,7 +145,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
-      "line_number": 620,
+      "line_number": 623,
       "context": "? \"shared_create-ai-provider-modal_submit\"\n : undefined\n }\n primary\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n scale\n onClick={handleSubmitClick}\n isLoading={isRequestRunning}\n isDisabled={!canSubmit}\n testId=\"provider-save-button\"",
       "module": "/packages/client"
     },
@@ -415,7 +415,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
-      "line_number": 592,
+      "line_number": 605,
       "context": "<Button\n scale\n primary\n onClick={onSave}\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n isDisabled={isDisabledSaveButton}\n testId=\"edit_link_panel_save_button\"\n />\n <Button\n scale",
       "module": "/packages/shared"
     },

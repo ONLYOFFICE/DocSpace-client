@@ -310,7 +310,7 @@ const CreateRoomDialog = ({
         )}
       </ModalDialog.Body>
 
-      {!!roomParams.type && !isTemplate ? (
+      {roomParams.type && !isTemplate ? (
         <ModalDialog.Footer>
           <Button
             id="shared_create-room-modal_submit"

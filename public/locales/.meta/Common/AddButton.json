@@ -3,7 +3,7 @@
   "content": "Add",
   "content_en_sha1_hash": "61cc55aa0453184734c3fa0b621eda6fa874bd83",
   "created_at": "2025-05-19T21:30:42.915Z",
-  "updated_at": "2026-05-15T14:00:06.622Z",
+  "updated_at": "2026-06-05T11:04:11.776Z",
   "comment": {
     "text": "This is a button label that initiates an \"add\" action, such as adding a file, a server, or an item to a selection.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/attachment/index.tsx",
-      "line_number": 145,
+      "line_number": 146,
       "context": "withCreate={false}\n withSubFolders={false}\n withFooterCheckbox={false}\n withFooterInput={false}\n cancelButtonLabel={t(\"CancelButton\")}\n submitButtonLabel={t(\"AddButton\")}\n disabledItems={[]}\n isRoomsOnly={false}\n isThirdParty={false}\n currentFolderId=\"\"\n rootFolderType={FolderType.Rooms}",
       "module": "/libs/ui-kit"
     },

@@ -563,7 +563,7 @@ class DialogsStore {
 
     itemList.forEach((item) => {
       if (item.checked) {
-        if (!!item.fileExst || item.contentLength) {
+        if (item.fileExst || item.contentLength) {
           const format =
             !item.format || item.format === t("Common:OriginalFormat")
               ? item.fileExst

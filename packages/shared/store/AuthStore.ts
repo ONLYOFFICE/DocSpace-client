@@ -50,7 +50,6 @@ import { logout as logoutDesktop } from "../utils/desktop";
 import {
   frameCallEvent,
   isAdmin,
-  insertDataLayer,
   isPublicRoom,
   isPublicPreview,
 } from "../utils/common";
@@ -199,7 +198,7 @@ class AuthStore {
 
     if (
       this.settingsStore?.isLoaded &&
-      !!this.settingsStore?.socketUrl &&
+      this.settingsStore?.socketUrl &&
       !isPortalDeactivated &&
       !isPortalEncryption &&
       !isPublicRoom() &&
@@ -238,10 +237,6 @@ class AuthStore {
     return Promise.all(requests)
       .then(() => {
         const user = this.userStore?.user;
-
-        if (user?.id) {
-          insertDataLayer(user.id);
-        }
 
         if (this.isAuthenticated && !skipRequest) {
           if (!this.settingsStore?.passwordSettings) {

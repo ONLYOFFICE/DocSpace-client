@@ -1152,6 +1152,7 @@
   "RoomAdmin": "Huoneen järjestelmänvalvoja",
   "RoomCreateUser": "Käyttäjät lisätty.",
   "RoomEmptyAtTheMoment": "Tämä huone on tällä hetkellä tyhjä.",
+  "RoomFilesLifetime": "Tiedoston käyttöikä tässä huoneessa on asetettu {{days}} {{period}}",
   "RoomGroups": "Huoneryhmät",
   "RoomInfo": "Huoneen tiedot",
   "RoomLinkExpired": "Huoneen linkki, jota yrität avata ei ole olemassa tai on vanhentunut.",

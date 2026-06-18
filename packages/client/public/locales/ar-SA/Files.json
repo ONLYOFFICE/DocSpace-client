@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "الغرفة متاحة عبر الرابط المشترك",
   "RoomCreated": "تم إنشاء الغرفة",
   "RoomEmptyContainerDescription": "الرجاء إنشاء الغرفة الأولى.",
-  "RoomFilesLifetime": "تم تعيين عمر الملف على {{days}} {{period}} في هذه الغرفة",
   "RoomNotificationsDisabled": "تم تعطيل إشعارات الغرفة",
   "RoomNotificationsEnabled": "تم تفعيل إشعارات الغرفة",
   "RoomOwner": "مالك الغرفة",

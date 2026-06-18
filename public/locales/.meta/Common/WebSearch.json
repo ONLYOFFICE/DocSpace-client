@@ -3,7 +3,7 @@
   "content": "Web search",
   "content_en_sha1_hash": "381ceddd75a893f19764c7e4cf9cd12c0f6e88c3",
   "created_at": "2025-10-27T16:14:24.651Z",
-  "updated_at": "2026-05-15T14:00:06.990Z",
+  "updated_at": "2026-06-05T11:04:11.884Z",
   "comment": {
     "text": "This is a button label that initiates a web search. It appears within the AI assistant chat interface.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallHeader/search-tool-content/index.tsx",
-      "line_number": 118,
+      "line_number": 128,
       "context": "<UniverseIcon\n className={styles.searchToolIcon}\n data-testid=\"universe-icon\"\n />\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} truncate>\n {t(\"WebSearch\")} |{\" \"}\n <span title={toolInfo}>{toolInfo}</span>\n </Text>\n </>\n );\n };",
       "module": "/libs/ui-kit"
     }

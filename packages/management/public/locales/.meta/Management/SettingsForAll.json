@@ -3,7 +3,7 @@
   "content": "These settings will be effective for all of your spaces.",
   "content_en_sha1_hash": "0dc145fa179494f0647bea48dab8b51aaa7889b8",
   "created_at": "2025-05-19T21:30:57.474Z",
-  "updated_at": "2026-05-15T14:00:06.974Z",
+  "updated_at": "2026-06-05T11:04:11.878Z",
   "comment": {
     "text": "This is a bar title displayed when a user navigates to the settings page. It informs the user that the settings they are viewing will apply to all their spaces.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/management/src/components/section/index.tsx",
       "line_number": 67,
-      "context": "const router = useRouter();\n const { t } = useTranslation([\"Management\", \"Common\"]);\n const { tenants } = portals;\n const showBar = pathname.includes(\"settings\");\n const barTitle =\n tenants?.length > 1 ? t(\"SettingsForAll\") : t(\"SettingsDisabled\");\n \n const onBack = () => {\n router.back();\n };",
+      "context": "const router = useRouter();\n const { t } = useTranslation([\"Management\", \"Common\"]);\n const tenants = portals?.tenants;\n const showBar = pathname.includes(\"settings\");\n const barTitle =\n (tenants?.length ?? 0) > 1 ? t(\"SettingsForAll\") : t(\"SettingsDisabled\");\n \n const onBack = () => {\n router.back();\n };",
       "module": "/packages/management"
     }
   ],

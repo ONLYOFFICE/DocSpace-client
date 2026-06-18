@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "Pokój dostępny za pośrednictwem linku udostępniania",
   "RoomCreated": "Pokój został utworzony",
   "RoomEmptyContainerDescription": "Utwórz pierwszy pokój.",
-  "RoomFilesLifetime": "Okres ważności plików w tym pokoju jest ustawiony na {{days}} {{period}}",
   "RoomNotificationsDisabled": "Powiadomienia dla pokoju zostały wyłączone",
   "RoomNotificationsEnabled": "Powiadomienia dla pokoju zostały włączone",
   "RoomOwner": "Właściciel pokoju",

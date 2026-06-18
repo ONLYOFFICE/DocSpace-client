@@ -213,10 +213,10 @@ const ButtonContainer = (props: ButtonContainerProps) => {
               {
                 label:
                   downloadingProgress === 100
-                    ? t("Backup")
+                    ? t("Common:Backup")
                     : downloadingProgress === 0
-                      ? t("PreparingBackup")
-                      : t("BackupProgress", { progress: downloadingProgress }),
+                      ? t("Common:PreparingBackup")
+                      : t("Common:BackupProgress", { progress: downloadingProgress }),
                 percent: downloadingProgress,
                 operation: OPERATIONS_NAME.backup,
                 alert: false,

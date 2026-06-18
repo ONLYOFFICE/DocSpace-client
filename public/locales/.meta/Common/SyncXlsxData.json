@@ -3,7 +3,7 @@
   "content": "Sync responses to XLSX",
   "content_en_sha1_hash": "d3cb9220ca7500d93b03c5b3bc7cabad9327fa45",
   "created_at": "2026-04-23T17:23:53.385Z",
-  "updated_at": "2026-06-02T08:43:27.544Z",
+  "updated_at": "2026-06-05T11:04:11.849Z",
   "comment": {
     "text": "Menu item label that triggers the synchronization of form responses to an Excel file. Appears in the context menu when managing form data.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2225,
+      "line_number": 2230,
       "context": "Boolean(item.external && item.isLinkExpired),\n },\n {\n id: \"option_sync_xlsx_data\",\n key: \"update-xlsx-data\",\n label: t(\"Common:SyncXlsxData\"),\n icon: spreadsheetUrl,\n onClick: () => this.onSyncXlsxData(item, t),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },

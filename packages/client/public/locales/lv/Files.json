@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "Telpa ir pieejama, izmantojot koplietošanas saiti",
   "RoomCreated": "Telpa ir izveidota",
   "RoomEmptyContainerDescription": "Lūdzu, izveidojiet pirmo telpu.",
-  "RoomFilesLifetime": "Šajā telpā faila kalpošanas laiks {{days}} {{period}} ir iestatīts uz",
   "RoomNotificationsDisabled": "Telpas paziņojumi ir atspējoti",
   "RoomNotificationsEnabled": "Telpas paziņojumi ir aktīvi",
   "RoomOwner": "Telpas īpašnieks",

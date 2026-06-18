@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "Просторија доступна преко подељеног линка",
   "RoomCreated": "Соба креирана",
   "RoomEmptyContainerDescription": "Молимо вас креирајте прву собу.",
-  "RoomFilesLifetime": "Век трајања фајла постављен је на {{days}} {{period}} у овој соби",
   "RoomNotificationsDisabled": "Нотификације собе онемогућене",
   "RoomNotificationsEnabled": "Нотификације собе омогућене",
   "RoomOwner": "Власник собе",

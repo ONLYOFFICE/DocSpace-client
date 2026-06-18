@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "Otaq paylaşılan link vasitəsilə əlçatandır",
   "RoomCreated": "Otaq yaradıldı",
   "RoomEmptyContainerDescription": "Lütfən, ilk otağı yaradın.",
-  "RoomFilesLifetime": "Bu otaqda faylın istifadə müddəti {{days}} {{period}} olaraq təyin edilib",
   "RoomNotificationsDisabled": "Otaq bildirişləri deaktiv edildi",
   "RoomNotificationsEnabled": "Otaq bildirişləri aktiv edildi",
   "RoomOwner": "Otaq sahibi",

@@ -46,6 +46,11 @@ export const getBuildConfig = (
   // an SVG placeholder instead of the PNG.  Inlining turns the URL into a
   // data-URI which breaks this detection.
   assetsInlineLimit: 0,
+  // Emit a single stylesheet instead of one CSS file per chunk. The lazy
+  // route styles are tiny next to shared.css (which already loads eagerly),
+  // so bundling all CSS adds only ~34KB gzip up front while collapsing 16
+  // CSS files into 1 — far fewer CloudFront requests.
+  cssCodeSplit: false,
   rollupOptions: {
     onwarn(warning, warn) {
       // react-virtualized ships a Flow directive that Rollup doesn't understand
@@ -81,21 +86,47 @@ export const getBuildConfig = (
         }
         return "static/[name].[hash][extname]";
       },
-      manualChunks(id: string) {
-        if (id.includes("node_modules")) {
-          if (id.includes("firebase")) return "vendor-firebase";
-          if (id.includes("mobx")) return "vendor-mobx";
-          if (
-            id.includes("react-dom") ||
-            id.includes("react-router") ||
-            id.includes("react-i18next") ||
-            id.includes("scheduler")
-          )
-            return "vendor-react";
-          if (id.includes("styled-components")) return "vendor-styled";
-          if (id.includes("lodash")) return "vendor-lodash";
-          if (id.includes("docspace-api-sdk")) return "vendor-docspace-api-sdk";
-        }
+      // Compact chunking to minimise the number of files fetched on the
+      // initial load. Rolldown otherwise emits dozens of tiny shared chunks
+      // (every reused @docspace/shared module → its own file) and preloads
+      // them all from the entry HTML, which multiplies CloudFront requests.
+      // `codeSplitting` groups dependencies and merges small chunks so the
+      // browser fetches a handful of files instead of ~100.
+      codeSplitting: {
+        // Merge any chunk below this size into a larger neighbour.
+        minSize: 160_000,
+        // Pull a module into its group as soon as it is referenced (1+),
+        // instead of leaving lightly-shared modules as their own tiny chunks.
+        minShareCount: 1,
+        groups: [
+          // Firebase is large and only needed for push/remote-config — keep
+          // it isolated so it can stay lazy.
+          {
+            name: "vendor-firebase",
+            test: /[\\/]node_modules[\\/].*firebase/,
+            priority: 100,
+          },
+          // Core framework used on every page.
+          {
+            name: "vendor-react",
+            test: /[\\/]node_modules[\\/](react|react-dom|react-router|react-i18next|scheduler|mobx|mobx-react|styled-components)/,
+            priority: 90,
+          },
+          // Everything else from node_modules in a single vendor chunk.
+          {
+            name: "vendor",
+            test: /[\\/]node_modules[\\/]/,
+            priority: 10,
+          },
+          // Our shared package + the ui-kit submodule (libs/ui-kit) reused
+          // across routes — one chunk instead of dozens of tiny per-component
+          // files (color-picker, slider, table, icon SVGs, …).
+          {
+            name: "shared",
+            test: /([\\/]packages[\\/]shared|[\\/]libs[\\/]ui-kit)[\\/]/,
+            priority: 5,
+          },
+        ],
       },
     },
   },

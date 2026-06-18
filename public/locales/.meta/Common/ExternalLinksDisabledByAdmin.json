@@ -3,7 +3,7 @@
   "content": "External links are disabled by your administrator.",
   "content_en_sha1_hash": "855c36dafcaa542418200c05db7369abd5fc7863",
   "created_at": "2026-06-02T08:43:21.562Z",
-  "updated_at": "2026-06-02T08:44:38.187Z",
+  "updated_at": "2026-06-05T11:04:11.866Z",
   "comment": {
     "text": "Tooltip appearing when an external link option is disabled in the sharing settings due to administrator restrictions.",
     "is_auto": true,
@@ -15,6 +15,12 @@
       "file_path": "/packages/shared/components/share/sub-components/LinkRow.tsx",
       "line_number": 105,
       "context": "...opt,\n icon: ExternalLinkWarningIconUrl,\n fillIcon: false,\n disabled: true,\n className: \"share-external-disabled\",\n tooltip: t(\"Common:ExternalLinksDisabledByAdmin\"),\n }\n : opt,\n );\n }, [t, baseShareOptions, isExternalShareRestricted]);",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
+      "line_number": 173,
+      "context": "return options.map((opt) =>\n !opt.internal\n ? {\n ...opt,\n disabled: true,\n tooltip: t(\"Common:ExternalLinksDisabledByAdmin\"),\n }\n : opt,\n );\n }, [t, isExternalShareRestricted]);\n const [unsavedChangesDialogVisible, setUnsavedChangesDialog] =",
       "module": "/packages/shared"
     }
   ],

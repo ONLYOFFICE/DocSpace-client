@@ -3,7 +3,7 @@
   "content": "Delete template",
   "content_en_sha1_hash": "399bf72aa291de43b5c1c104b4f9d4aacf6ea977",
   "created_at": "2025-05-19T21:30:55.439Z",
-  "updated_at": "2026-06-02T08:43:27.472Z",
+  "updated_at": "2026-06-05T11:04:11.790Z",
   "comment": {
     "text": "This is a button label or part of a dialog title. It appears when a user is prompted to confirm the deletion of a template.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2823,
+      "line_number": 2828,
       "context": "label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : isAIAgent\n ? t(\"DeleteAgent\")\n : item.isTemplate\n ? t(\"Files:DeleteTemplateAction\")\n : item.isRoom\n ? t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),\n icon:\n item.isRoom && !isAIAgent ? RemoveOutlineSvgUrl : TrashReactSvgUrl,",
       "module": "/packages/client"
     }

@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "공유 링크를 통해 이용 가능한 룸",
   "RoomCreated": "방이 생성되었습니다",
   "RoomEmptyContainerDescription": "서 첫 번째 방을 만드세요.",
-  "RoomFilesLifetime": "이 룸에서 파일 수명은 {{days}} {{period}}로 설정됩니다",
   "RoomNotificationsDisabled": "방 알림이 비활성화되었습니다",
   "RoomNotificationsEnabled": "방 알림이 활성화되었습니다",
   "RoomOwner": "방 소유자",

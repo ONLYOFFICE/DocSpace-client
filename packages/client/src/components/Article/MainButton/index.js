@@ -154,6 +154,7 @@ const ArticleMainButtonContent = (props) => {
     allowInvitingMembers,
 
     aiConfig,
+    isGracePeriod,
   } = props;
 
   const location = useLocation();
@@ -216,11 +217,16 @@ const ArticleMainButtonContent = (props) => {
   }, [isWarningRoomsDialog, currentFolderId]);
 
   const onCreateAgent = React.useCallback(() => {
+    if (isGracePeriod) {
+      setQuotaWarningDialogVisible(true);
+      return;
+    }
+
     const event = new CustomEvent(Events.AGENT_CREATE, {
       detail: { parentId: currentFolderId, context: "sidebar" },
     });
     window.dispatchEvent(event);
-  }, [isWarningRoomsDialog, currentFolderId]);
+  }, [isGracePeriod, currentFolderId]);
 
   const onShowSelectFileDialog = React.useCallback(() => {
     if (isMobile) {
@@ -712,7 +718,7 @@ const ArticleMainButtonContent = (props) => {
       {isMobileArticle ? (
         <MobileView
           t={t}
-          titleProp={t("Upload")}
+          titleProp={t("Common:Upload")}
           actionOptions={actions}
           buttonOptions={!isAccountsPage ? uploadActions : null}
           withoutButton={
@@ -828,6 +834,7 @@ export default inject(
     guidanceStore,
     aiRoomStore,
     filesSettingsStore,
+    currentTariffStatusStore,
   }) => {
     const { isChatTab, isResultTab, isKnowledgeTab } = aiRoomStore;
     const { showArticleLoader } = clientLoadingStore;
@@ -880,6 +887,7 @@ export default inject(
     const { isAdmin, isOwner, isRoomAdmin, isCollaborator } = userStore.user;
 
     const { showWarningDialog, isWarningRoomsDialog } = currentQuotaStore;
+    const { isGracePeriod } = currentTariffStatusStore;
 
     const { setOformFromFolderId, oformsFilter, setTemplateGalleryVisible } =
       oformsStore;
@@ -965,6 +973,8 @@ export default inject(
       allowInvitingMembers,
 
       aiConfig,
+
+      isGracePeriod,
     };
   },
 )(

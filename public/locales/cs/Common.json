@@ -1152,6 +1152,7 @@
   "RoomAdmin": "Administrátor místnosti",
   "RoomCreateUser": "Přidáno uživatelů.",
   "RoomEmptyAtTheMoment": "Tato místnost je momentálně prázdná.",
+  "RoomFilesLifetime": "Životnost souboru je v této místnosti nastavena na {{days}} {{period}}",
   "RoomGroups": "Skupiny místností",
   "RoomInfo": "Informace o místnosti",
   "RoomLinkExpired": "Odkaz na místnost, který se snažíte otevřít, neexistuje nebo jeho platnost vypršela.",

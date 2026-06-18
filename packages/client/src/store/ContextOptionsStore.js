@@ -645,7 +645,9 @@ class ContextOptionsStore {
       if (item.isRoom || !item.isFolder) {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
-          event: item.isRoom ? AnalyticsEvents.RoomShared : AnalyticsEvents.FileShared,
+          event: item.isRoom
+            ? AnalyticsEvents.RoomShared
+            : AnalyticsEvents.FileShared,
           id: item.id,
           parentId: item.isRoom ? item.parentId : item.folderId,
         });
@@ -1909,7 +1911,9 @@ class ContextOptionsStore {
       if (item.isRoom || !item.isFolder) {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
-          event: item.isRoom ? AnalyticsEvents.RoomShared : AnalyticsEvents.FileShared,
+          event: item.isRoom
+            ? AnalyticsEvents.RoomShared
+            : AnalyticsEvents.FileShared,
           id: item.id,
           parentId: item.isRoom ? item.parentId : item.folderId,
         });
@@ -2216,7 +2220,7 @@ class ContextOptionsStore {
       withOpen && {
         id: "option_open",
         key: "open",
-        label: t("Open"),
+        label: t("Common:Open"),
         icon: FolderReactSvgUrl,
         onClick: () => this.onOpenFolder(item, t),
         disabled:
@@ -2243,7 +2247,7 @@ class ContextOptionsStore {
       {
         id: "option_open-pdf",
         key: "open-pdf",
-        label: t("Open"),
+        label: t("Common:Open"),
         icon: EyeReactSvgUrl,
         onClick: () => this.gotoDocEditor(item, false),
         disabled: false,
@@ -2292,7 +2296,7 @@ class ContextOptionsStore {
         label:
           this.treeFoldersStore.isRecentFolder ||
           this.treeFoldersStore.isFavoritesFolder
-            ? t("Open")
+            ? t("Common:Open")
             : t("Common:Preview"),
         icon: EyeReactSvgUrl,
         onClick: () =>
@@ -2309,7 +2313,7 @@ class ContextOptionsStore {
         label:
           this.treeFoldersStore.isRecentFolder ||
           this.treeFoldersStore.isFavoritesFolder
-            ? t("Open")
+            ? t("Common:Open")
             : t("Common:View"),
         icon: EyeReactSvgUrl,
         onClick: (fileId) => this.onMediaFileClick(fileId, item),
@@ -3431,7 +3435,7 @@ class ContextOptionsStore {
     const options = [
       /* {
         key: "mark-as-favorite",
-        label: t("MarkAsFavorite"),
+        label: t("Common:MarkAsFavorite"),
         icon: FavoritesReactSvgUrl,
         onClick: (e) => this.onClickFavorite("mark", favoriteItems, t),
         disabled: !favoriteItems.length,
@@ -3506,7 +3510,7 @@ class ContextOptionsStore {
       },
       /* {
         key: "remove-from-favorites",
-        label: t("RemoveFromFavorites"),
+        label: t("Common:RemoveFromFavorites"),
         icon: FavoritesFillReactSvgUrl,
         onClick: (e) => this.onClickFavorite("remove", removeFromFavoriteItems, t),
         disabled: favoriteItems.length || !removeFromFavoriteItems.length,
@@ -3935,3 +3939,4 @@ class ContextOptionsStore {
 }
 
 export default ContextOptionsStore;
+

@@ -603,7 +603,7 @@ const SectionHeaderContent = (props) => {
     if (sharedType) return t("Files:RecentlyOpenedTooltip");
 
     if (lifetime)
-      return `${t("Files:RoomFilesLifetime", {
+      return `${t("Common:RoomFilesLifetime", {
         days: lifetime.value,
         period: getLifetimePeriodTranslation(lifetime.period, t),
       })}. ${
@@ -1302,7 +1302,7 @@ export default inject(
 
     let folderPath = navigationPath;
 
-    if (isFrame && !!pathParts) {
+    if (isFrame && pathParts) {
       folderPath = navigationPath.filter((item) => !item.isRootRoom);
     }
 
@@ -1507,3 +1507,4 @@ export default inject(
     "GroupingRooms",
   ])(observer(SectionHeaderContent)),
 );
+

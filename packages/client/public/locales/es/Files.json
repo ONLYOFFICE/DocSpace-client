@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "Sala disponible a través de enlace compartido",
   "RoomCreated": "La sala se ha creado",
   "RoomEmptyContainerDescription": "Por favor, cree la primera sala.",
-  "RoomFilesLifetime": "La vida útil del archivo se establece en {{days}} {{period}} en esta sala",
   "RoomNotificationsDisabled": "Las notificaciones de la sala están desactivadas",
   "RoomNotificationsEnabled": "Las notificaciones de la sala están activadas",
   "RoomOwner": "Propietario de la sala",

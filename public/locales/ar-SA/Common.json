@@ -1152,6 +1152,7 @@
   "RoomAdmin": "مسؤول الغرفة",
   "RoomCreateUser": "تمت إضافة المستخدمين.",
   "RoomEmptyAtTheMoment": "هذه الغرفة  فارغة حاليًا.",
+  "RoomFilesLifetime": "تم تعيين عمر الملف على {{days}} {{period}} في هذه الغرفة",
   "RoomGroups": "مجموعات الغرف",
   "RoomInfo": "معلومات الغرفة",
   "RoomLinkExpired": "الرابط الخاص بالغرفة الذي تحاول فتحه غير موجود أو منتهي الصلاحية.",

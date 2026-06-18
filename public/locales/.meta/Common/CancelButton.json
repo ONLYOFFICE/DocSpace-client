@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2026-06-02T15:03:00.307Z",
+  "updated_at": "2026-06-05T11:04:11.773Z",
   "comment": {
     "text": "This is the label for a button that dismisses a dialog or cancels an action, such as deleting a chat, renaming a chat, or adding an attachment.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/attachment/index.tsx",
-      "line_number": 144,
+      "line_number": 145,
       "context": "withCancelButton\n withCreate={false}\n withSubFolders={false}\n withFooterCheckbox={false}\n withFooterInput={false}\n cancelButtonLabel={t(\"CancelButton\")}\n submitButtonLabel={t(\"AddButton\")}\n disabledItems={[]}\n isRoomsOnly={false}\n isThirdParty={false}\n currentFolderId=\"\"",
       "module": "/libs/ui-kit"
     },
@@ -619,7 +619,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
-      "line_number": 634,
+      "line_number": 637,
       "context": "variant === \"add\"\n ? \"shared_create-ai-provider-modal_cancel\"\n : undefined\n }\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={isRequestRunning}\n testId=\"provider-cancel-button\"\n />",
       "module": "/packages/client"
     },
@@ -631,7 +631,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/delete/index.tsx",
-      "line_number": 132,
+      "line_number": 139,
       "context": "isLoading={loading}\n testId=\"delete-provider-button\"\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={loading}\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
@@ -1147,7 +1147,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
-      "line_number": 601,
+      "line_number": 614,
       "context": "<Button\n scale\n onClick={onClose}\n isDisabled={isLoading}\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n testId=\"edit_link_panel_cancel_button\"\n />\n </ModalDialog.Footer>\n </ModalDialog>\n </>",
       "module": "/packages/shared"
     },

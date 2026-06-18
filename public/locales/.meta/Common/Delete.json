@@ -3,7 +3,7 @@
   "content": "Delete",
   "content_en_sha1_hash": "f6fdbe48dc54dd86f63097a03bd24094dedd713a",
   "created_at": "2025-05-19T21:30:44.452Z",
-  "updated_at": "2026-06-02T08:43:27.458Z",
+  "updated_at": "2026-06-05T11:04:11.778Z",
   "comment": {
     "text": "This is a button label or tooltip text. It allows users to remove a selected item, such as a chat or an image.",
     "is_auto": true,
@@ -85,7 +85,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/delete/index.tsx",
-      "line_number": 124,
+      "line_number": 131,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:Delete\")}\n scale\n onClick={onSubmit}\n isLoading={loading}\n testId=\"delete-provider-button\"\n />",
       "module": "/packages/client"
     },
@@ -199,19 +199,19 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2826,
+      "line_number": 2831,
       "context": "? t(\"DeleteAgent\")\n : item.isTemplate\n ? t(\"Files:DeleteTemplateAction\")\n : item.isRoom\n ? t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),\n icon:\n item.isRoom && !isAIAgent ? RemoveOutlineSvgUrl : TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2826,
+      "line_number": 2831,
       "context": "? t(\"DeleteAgent\")\n : item.isTemplate\n ? t(\"Files:DeleteTemplateAction\")\n : item.isRoom\n ? t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),\n icon:\n item.isRoom && !isAIAgent ? RemoveOutlineSvgUrl : TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2826,
+      "line_number": 2831,
       "context": "? t(\"DeleteAgent\")\n : item.isTemplate\n ? t(\"Files:DeleteTemplateAction\")\n : item.isRoom\n ? t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),\n icon:\n item.isRoom && !isAIAgent ? RemoveOutlineSvgUrl : TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,\n },",
       "module": "/packages/client"
     },
@@ -331,13 +331,13 @@
     },
     {
       "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
-      "line_number": 433,
+      "line_number": 442,
       "context": "key: \"delete-link-separator\",\n isSeparator: true,\n },\n {\n key: \"delete-link-key\",\n label: link.canRevoke ? t(\"Common:RevokeLink\") : t(\"Common:Delete\"),\n icon: link.canRevoke ? OutlineReactSvgUrl : TrashReactSvgUrl,\n onClick: () => removeLink(link),\n },\n ];\n }",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
-      "line_number": 433,
+      "line_number": 442,
       "context": "key: \"delete-link-separator\",\n isSeparator: true,\n },\n {\n key: \"delete-link-key\",\n label: link.canRevoke ? t(\"Common:RevokeLink\") : t(\"Common:Delete\"),\n icon: link.canRevoke ? OutlineReactSvgUrl : TrashReactSvgUrl,\n onClick: () => removeLink(link),\n },\n ];\n }",
       "module": "/packages/shared"
     },

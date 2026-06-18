@@ -1227,6 +1227,7 @@
   "RoomAdmin": "Room admin",
   "RoomCreateUser": "Users added.",
   "RoomEmptyAtTheMoment": "This room is empty at the moment.",
+  "RoomFilesLifetime": "The file lifetime is set to {{days}} {{period}} in this room",
   "RoomGroups": "Room groups",
   "RoomInfo": "Room info",
   "RoomLinkExpired": "The room link you are trying to open does not exist or has expired.",

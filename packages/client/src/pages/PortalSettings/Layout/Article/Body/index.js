@@ -202,7 +202,7 @@ const ArticleBodyContent = (props) => {
       case "Customization":
         return t("Customization");
       case "SettingsGeneral":
-        return t("SettingsGeneral");
+        return t("Common:SettingsGeneral");
       case "StudioTimeLanguageSettings":
         return t("StudioTimeLanguageSettings");
       case "CustomTitlesWelcome":
@@ -219,7 +219,7 @@ const ArticleBodyContent = (props) => {
         return t("ThirdPartyAuthorization");
       case "Migration":
         return t("Migration");
-      case "Backup":
+      case "Common:Backup":
         return t("Common:Backup");
       case "Common:PaymentsTitle":
         return standalone ? t("Common:PaymentsTitle") : t("Common:Billing");
@@ -262,7 +262,7 @@ const ArticleBodyContent = (props) => {
     if (isNotPaidPeriod) {
       resultTree = resultTree.filter((e) => {
         return (
-          e.tKey === "Backup" ||
+          e.tKey === "Common:Backup" ||
           e.tKey === "Common:PaymentsTitle" ||
           (isOwner && e.tKey === "PortalDeletion")
         );

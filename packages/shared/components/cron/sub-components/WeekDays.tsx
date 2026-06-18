@@ -53,7 +53,7 @@ export const WeekDays = memo(
     const placeholder = useMemo(() => {
       const isEmpty = monthDays.length === 0;
 
-      return isEmpty || isWeek ? t("EveryDayOfTheWeek") : t("DayOfTheWeek");
+      return isEmpty || isWeek ? t("Common:EveryDayOfTheWeek") : t("Common:DayOfTheWeek");
     }, [monthDays.length, isWeek, t]);
 
     return (

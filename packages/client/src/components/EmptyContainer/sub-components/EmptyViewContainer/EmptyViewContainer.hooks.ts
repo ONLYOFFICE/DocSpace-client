@@ -211,6 +211,7 @@ export const useOptions = (
     aiReady,
     standalone,
     isPortalAdmin,
+    isGracePeriod,
     isCardLinkedToPortal,
     isPayer,
     enableAIService,
@@ -257,7 +258,8 @@ export const useOptions = (
   }, []);
 
   const [aiFeaturesDialogVisible, setAiFeaturesDialogVisible] = useState(false);
-  const [simpleTopUpDialogVisible, setSimpleTopUpDialogVisible] = useState(false);
+  const [simpleTopUpDialogVisible, setSimpleTopUpDialogVisible] =
+    useState(false);
 
   const onTopUpAndActivateAI = useCallback(
     () => setSimpleTopUpDialogVisible(true),
@@ -301,7 +303,12 @@ export const useOptions = (
     } else {
       setSimpleTopUpDialogVisible(true);
     }
-  }, [isCardLinkedToPortal, enableAIService, onAIActivated, selectedFolder?.id]);
+  }, [
+    isCardLinkedToPortal,
+    enableAIService,
+    onAIActivated,
+    selectedFolder?.id,
+  ]);
 
   const onGoToPersonal = useCallback((): LinkProps => {
     const newFilter = FilesFilter.getDefault();
@@ -338,11 +345,16 @@ export const useOptions = (
   }, [isWarningRoomsDialog, setQuotaWarningDialogVisible, selectedFolder?.id]);
 
   const onCreateAIAgent = useCallback(() => {
+    if (isGracePeriod) {
+      setQuotaWarningDialogVisible(true);
+      return;
+    }
+
     const event = new CustomEvent(Events.AGENT_CREATE, {
       detail: { parentId: selectedFolder?.id, context: "empty_state" },
     });
     window.dispatchEvent(event);
-  }, [isWarningRoomsDialog, setQuotaWarningDialogVisible, selectedFolder?.id]);
+  }, [isGracePeriod, setQuotaWarningDialogVisible, selectedFolder?.id]);
 
   const openInfoPanel = useCallback(() => {
     if (!isVisibleInfoPanel) setVisibleInfoPanel?.(true);

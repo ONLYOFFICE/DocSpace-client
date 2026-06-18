@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "共有リンクで利用可能なルーム",
   "RoomCreated": "ルームが作成されました",
   "RoomEmptyContainerDescription": "最初のルームを作成しましょう",
-  "RoomFilesLifetime": "このルームでは、ファイルの有効期間は{{days}}{{period}}に設定されています",
   "RoomNotificationsDisabled": "ルームの通知が無効",
   "RoomNotificationsEnabled": "ルームの通知が有効",
   "RoomOwner": "ルームの所有者",

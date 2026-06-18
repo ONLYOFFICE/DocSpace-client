@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "Δωμάτιο διαθέσιμο μέσω κοινόχρηστου συνδέσμου",
   "RoomCreated": "Το δωμάτιο δημιουργήθηκε",
   "RoomEmptyContainerDescription": "Δημιουργήστε το πρώτο δωμάτιο.",
-  "RoomFilesLifetime": "Η διάρκεια ζωής των αρχείων ορίζεται σε {{days}} {{period}} σε αυτό το δωμάτιο",
   "RoomNotificationsDisabled": "Απενεργοποίηση ειδοποιήσεων δωματίου",
   "RoomNotificationsEnabled": "Ενεργοποίηση ειδοποιήσεων δωματίου",
   "RoomOwner": "Ιδιοκτήτης δωματίου",

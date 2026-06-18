@@ -3,7 +3,7 @@
   "content": "Maximum number of external links created",
   "content_en_sha1_hash": "f2bb6f59b405402c64e0664aa39c4df21c8d83ab",
   "created_at": "2025-05-19T21:30:46.376Z",
-  "updated_at": "2026-06-02T08:43:27.493Z",
+  "updated_at": "2026-06-05T11:04:11.809Z",
   "comment": {
     "text": "This is a tooltip text that appears when a user hovers over an icon, indicating that the maximum number of external links has been reached.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
-      "line_number": 498,
-      "context": "const blockLinkCreation = !!isExternalShareRestricted && isInRoomContext;\n \n const getTextTooltip = () => {\n return (\n <Text fontSize=\"12px\" noSelect>\n {t(\"Common:MaximumNumberOfExternalLinksCreated\")}\n </Text>\n );\n };\n \n const getLinkElements = () => {",
+      "line_number": 506,
+      "context": "infoPanelSelection.parentRoomType === FolderType.PublicRoom;\n \n const getTextTooltip = () => {\n return (\n <Text fontSize=\"12px\" noSelect>\n {t(\"Common:MaximumNumberOfExternalLinksCreated\")}\n </Text>\n );\n };\n \n const getLinkElements = () => {",
       "module": "/packages/shared"
     }
   ],

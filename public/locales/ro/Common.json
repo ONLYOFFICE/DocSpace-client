@@ -1152,6 +1152,7 @@
   "RoomAdmin": "Administratorul sălii",
   "RoomCreateUser": "Utilizatorii au fost adăugați.",
   "RoomEmptyAtTheMoment": "Această cameră este goală în acest moment.",
+  "RoomFilesLifetime": "Durată de viață a fișierelor în acestă sală constituie {{days}} {{period}}",
   "RoomGroups": "Grupuri de camere",
   "RoomInfo": "Informații despre cameră",
   "RoomLinkExpired": "Link-ul de sală pe care încercați să-l deschideți nu există sau a expirat.",

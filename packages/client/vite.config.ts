@@ -42,7 +42,10 @@ import { jsxInJsPlugin } from "./config/plugins/jsx-in-js";
 import { staticUrlPlugin } from "./config/plugins/static-url";
 import { htmlTransformPlugin } from "./config/plugins/html-transform";
 import { bannerPlugin } from "./config/plugins/banner";
-import { copyLocalesPlugin } from "./config/plugins/copy-locales";
+import {
+  copyLocalesPlugin,
+  computeCombinedLocaleHashes,
+} from "./config/plugins/copy-locales";
 import { copyFontsPlugin } from "./config/plugins/copy-fonts";
 import { serveRootPublicPlugin } from "./config/plugins/serve-root-public";
 import { resolve } from "./config/resolve";
@@ -67,6 +70,11 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
       VERSION: JSON.stringify(pkg.version),
       BUILD_AT: JSON.stringify(getBuildDate()),
       "process.env.NODE_ENV": JSON.stringify(mode),
+      // Per-language ?hash= cache-busters for the combined locale bundle.
+      // Only the production build emits _combined.json, so dev gets {}.
+      COMBINED_LOCALE_HASHES: JSON.stringify(
+        isProduction ? computeCombinedLocaleHashes() : {},
+      ),
     },
 
     plugins: [

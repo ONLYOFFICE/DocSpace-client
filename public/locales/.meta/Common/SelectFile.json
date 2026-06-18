@@ -3,7 +3,7 @@
   "content": "Select file",
   "content_en_sha1_hash": "63f72dce85635b76fe31d3931ae500471aa30d71",
   "created_at": "2025-05-19T21:30:48.410Z",
-  "updated_at": "2026-05-15T14:00:06.610Z",
+  "updated_at": "2026-06-05T11:04:11.771Z",
   "comment": {
     "text": "This is a button label or dialog title. It prompts the user to choose a file, appearing in contexts like attaching a file to a chat message or selecting a file within a file selector.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/attachment/index.tsx",
-      "line_number": 132,
+      "line_number": 133,
       "context": "toggleAttachment();\n }}\n onSelectItem={onSelectItem}\n withHeader\n headerProps={{\n headerLabel: t(\"SelectFile\"),\n isCloseable: true,\n onCloseClick: toggleAttachment,\n }}\n withSearch\n withBreadCrumbs",
       "module": "/libs/ui-kit"
     },

@@ -171,7 +171,7 @@ const ItemTitle = ({
 						<Badges withoutPaid statusType={userSelection.statusType} />
 					) : null}
 				</div>
-				{!isPending && !!displayName ? (
+				{!isPending && displayName ? (
 					<Text
 						tooltipFitToContent
 						className={styles.infoTextEmail}

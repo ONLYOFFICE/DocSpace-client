@@ -1152,6 +1152,7 @@
   "RoomAdmin": "ルームの管理者",
   "RoomCreateUser": "ユーザーが追加されました。",
   "RoomEmptyAtTheMoment": "このルームは今、何も入っていません。",
+  "RoomFilesLifetime": "このルームでは、ファイルの有効期間は{{days}}{{period}}に設定されています",
   "RoomGroups": "ルームグループ",
   "RoomInfo": "ルーム情報",
   "RoomLinkExpired": "開こうとしているルームリンクは存在しないか、または期限切れです。",

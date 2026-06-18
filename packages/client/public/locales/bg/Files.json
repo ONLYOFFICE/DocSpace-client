@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "Стаята е достъпна чрез споделен линк",
   "RoomCreated": "Стаята е създадена",
   "RoomEmptyContainerDescription": "Моля, създайте първата стая.",
-  "RoomFilesLifetime": "Продължителността на живота на файла е зададена на {{days}} {{period}} в тази стая",
   "RoomNotificationsDisabled": "Известията в стаята са деактивирани",
   "RoomNotificationsEnabled": "Известията за стаите са активирани",
   "RoomOwner": "Собственик на стая",

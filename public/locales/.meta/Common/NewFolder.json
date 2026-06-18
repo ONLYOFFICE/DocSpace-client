@@ -3,7 +3,7 @@
   "content": "New folder",
   "content_en_sha1_hash": "a711999b72aaf4c3d8e7523718231bf1c8d7cb4d",
   "created_at": "2025-05-19T21:30:46.744Z",
-  "updated_at": "2026-06-02T08:43:27.485Z",
+  "updated_at": "2026-06-05T11:04:11.803Z",
   "comment": {
     "text": "This is a button label or menu item text. It allows users to create a new folder within the file browser.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3783,
+      "line_number": 3788,
       "context": "// };\n \n const createNewFolder = {\n id: \"personal_new-folder\",\n key: \"new-folder\",\n label: t(\"Common:NewFolder\"),\n onClick: () => this.onCreate(),\n icon: CatalogFolderReactSvgUrl,\n };\n \n const uploadFiles = {",
       "module": "/packages/client"
     },

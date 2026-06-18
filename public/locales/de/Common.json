@@ -1152,6 +1152,7 @@
   "RoomAdmin": "Raum-Admin",
   "RoomCreateUser": "Benutzer hinzugefügt.",
   "RoomEmptyAtTheMoment": "Dieser Raum ist derzeit leer.",
+  "RoomFilesLifetime": "Die Dateilebensdauer in diesem Raum ist auf {{days}} {{period}} festgelegt",
   "RoomGroups": "Raumgruppen",
   "RoomInfo": "Raum-Informationen",
   "RoomLinkExpired": "Der Raumlink, den Sie zu öffnen versuchen, existiert nicht oder ist abgelaufen.",

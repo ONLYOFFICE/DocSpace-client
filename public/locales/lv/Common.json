@@ -1152,6 +1152,7 @@
   "RoomAdmin": "Telpas administrators",
   "RoomCreateUser": "Lietotāji ir pievienoti.",
   "RoomEmptyAtTheMoment": "Šī telpa pašlaik ir tukša.",
+  "RoomFilesLifetime": "Šajā telpā faila kalpošanas laiks {{days}} {{period}} ir iestatīts uz",
   "RoomGroups": "Telpu grupas",
   "RoomInfo": "Informācija par telpām",
   "RoomLinkExpired": "Telpas saite, kuru mēģināt atvērt, nepastāv vai tās derīguma termiņš ir beidzies.",

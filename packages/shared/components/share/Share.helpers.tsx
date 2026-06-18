@@ -198,7 +198,7 @@ export const getRoomLinkAccessOptions = (
       access: ShareAccessRights.Comment,
       description: t("Common:RoleCommentatorDescription"),
       key: "commenting",
-      label: t("Commentator"),
+      label: t("Common:Commentator"),
       icon: AccessCommentReactSvgUrl,
     },
     [ShareRights.Read]: {

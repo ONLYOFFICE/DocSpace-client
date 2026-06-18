@@ -202,8 +202,12 @@ function WizardForm(props: WizardFormProps) {
   };
 
   const onLanguageSelect = (lang: TOption) => {
-    setLanguageForUnauthorized(lang.key.toString(), false);
-    i18n.changeLanguage(lang.key.toString());
+    // The login app's TranslationProvider has no client backend — only the
+    // current locale's bundles are loaded (SSR), so i18n.changeLanguage() can't
+    // fetch another language and t() would fall back to English. Persist the
+    // choice in the cookie and reload so the server re-renders in the new
+    // language (same approach as LanguageCombobox).
+    setLanguageForUnauthorized(lang.key.toString());
   };
 
   const onTimezoneSelect = (timezone: TOption) => {

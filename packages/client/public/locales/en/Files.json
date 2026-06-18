@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "Room available via shared link",
   "RoomCreated": "Room created",
   "RoomEmptyContainerDescription": "Please create the first room.",
-  "RoomFilesLifetime": "The file lifetime is set to {{days}} {{period}} in this room",
   "RoomNotificationsDisabled": "Room notifications disabled",
   "RoomNotificationsEnabled": "Room notifications enabled",
   "RoomOwner": "Room owner",

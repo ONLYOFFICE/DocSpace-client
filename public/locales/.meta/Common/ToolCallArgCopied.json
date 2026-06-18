@@ -3,7 +3,7 @@
   "content": "Tool call arguments successfully copied to clipboard",
   "content_en_sha1_hash": "c996f9eb60ffb9439e6cc614f771b12df0f12c2f",
   "created_at": "2025-11-25T11:52:53.747Z",
-  "updated_at": "2026-05-15T14:00:06.989Z",
+  "updated_at": "2026-06-05T11:04:11.884Z",
   "comment": {
     "text": "This is a toast message that appears briefly to confirm that the arguments of a tool call have been successfully copied to the user's clipboard.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallBody/code-view/index.tsx",
       "line_number": 99,
-      "context": "<Text fontSize=\"15px\" lineHeight=\"16px\" fontWeight={600}>\n {t(\"ToolCallArg\")}\n </Text>\n <MarkdownField\n chatMessage={formatJsonWithMarkdown(content.arguments)}\n successCopyMessage={t(\"ToolCallArgCopied\")}\n />\n </div>\n {showResult ? (\n <div\n className={styles.toolCallCodeViewItem}",
+      "context": "<Text fontSize=\"15px\" lineHeight=\"16px\" fontWeight={600}>\n {t(\"ToolCallArg\")}\n </Text>\n <MarkdownField\n chatMessage={formatJsonWithMarkdown(content.arguments ?? {})}\n successCopyMessage={t(\"ToolCallArgCopied\")}\n />\n </div>\n {showResult ? (\n <div\n className={styles.toolCallCodeViewItem}",
       "module": "/libs/ui-kit"
     }
   ],

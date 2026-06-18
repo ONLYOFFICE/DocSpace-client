@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "අසුරැකියාංගයක් බෙදාගත් සම්බන්ධතාව හරහා ලබාගත හැකිය.",
   "RoomCreated": "කාමරය සෑදිණි",
   "RoomEmptyContainerDescription": "පළමු කාමරය සාදන්න.",
-  "RoomFilesLifetime": "මෙම කාමරයේ ගොණුවේ කාලය {{days}} {{period}} දක්වා සකසා ඇත.",
   "RoomNotificationsDisabled": "කාමරයේ දැනුම්දීම් අබලයි",
   "RoomNotificationsEnabled": "කාමරයේ දැනුම්දීම් සබලයි",
   "RoomOwner": "කාමරයේ හිමිකරු",

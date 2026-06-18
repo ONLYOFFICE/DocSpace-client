@@ -3,7 +3,7 @@
   "content": "My documents",
   "content_en_sha1_hash": "143f7ba1fed6d88c5657c9a23c89975723c9f700",
   "created_at": "2025-09-02T08:31:42.199Z",
-  "updated_at": "2026-06-02T08:43:27.445Z",
+  "updated_at": "2026-06-05T11:04:11.766Z",
   "comment": {
     "text": "This is a label for the user's personal document storage. It appears in various contexts, such as a download report location or a section title within dialogs.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/selectors/Files/hooks/useRootHelper.tsx",
-      "line_number": 140,
+      "line_number": 168,
       "context": ") {\n let title = \"\";\n \n switch (folder.rootFolderType) {\n case FolderType.USER:\n title = t(\"MyDocuments\");\n break;\n case FolderType.VirtualRooms:\n title = t(\"Rooms\");\n break;\n case FolderType.Favorites:",
       "module": "/libs/ui-kit"
     },

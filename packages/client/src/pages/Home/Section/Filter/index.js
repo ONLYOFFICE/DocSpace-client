@@ -492,6 +492,9 @@ const SectionFilterContent = ({
         newFilter.page = 0;
         newFilter.search = searchValue;
 
+        // Search must traverse the current folder and all nested subfolders.
+        if (searchValue) newFilter.withSubfolders = "true";
+
         const path = location.pathname.split("/filter")[0];
 
         onNavigate(path, newFilter);

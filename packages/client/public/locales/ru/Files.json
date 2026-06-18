@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "Комната доступна по общей ссылке",
   "RoomCreated": "Комната создана",
   "RoomEmptyContainerDescription": "Пожалуйста, создайте первую комнату.",
-  "RoomFilesLifetime": "Срок действия файла в этой комнате установлен на {{days}} {{period}}",
   "RoomNotificationsDisabled": "Уведомления комнаты отключены",
   "RoomNotificationsEnabled": "Уведомления комнаты включены",
   "RoomOwner": "Владелец комнаты",

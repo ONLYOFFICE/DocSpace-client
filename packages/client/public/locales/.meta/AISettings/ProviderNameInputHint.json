@@ -3,7 +3,7 @@
   "content": "Use any name that is convenient for you to identify this connection",
   "content_en_sha1_hash": "31f2233533a619051503d74dd63eff2f6b1122fc",
   "created_at": "2025-11-07T13:41:03.790Z",
-  "updated_at": "2026-05-28T15:46:18.582Z",
+  "updated_at": "2026-06-05T11:04:11.815Z",
   "comment": {
     "text": "This is a hint text for an input field where the user enters a name for an AI provider connection. It guides the user to choose a memorable name. It also appears as an error message when the input contains invalid characters.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
-      "line_number": 498,
+      "line_number": 501,
       "context": "placeholder={t(\"AISettings:EnterLabel\")}\n isDisabled={isRequestRunning}\n testId=\"provider-title-input\"\n />\n <Text className={styles.fieldHint}>\n {t(\"AISettings:ProviderNameInputHint\")}\n </Text>\n </FieldContainer>\n \n <FieldContainer\n labelText={t(\"AISettings:ProviderURL\")}",
       "module": "/packages/client"
     },

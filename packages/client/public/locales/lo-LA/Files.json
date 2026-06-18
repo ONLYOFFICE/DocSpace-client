@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "ຫ້ອງຫວ່າງຜ່ານລິ້ງສາແບ່ງຮ່ວມ",
   "RoomCreated": "ຫ້ອງຖືກສ້າງແລ້ວ",
   "RoomEmptyContainerDescription": "ກະລຸນາສ້າງຫ້ອງທໍາອິດ.",
-  "RoomFilesLifetime": "ໃນຫ້ອງນີ້ ກໍານົດໄລຍະເວລາຂອງໄຟລ໌ໄວ້ຄັ້ງລະ {{days}} {{period}}",
   "RoomNotificationsDisabled": "ປິດການແຈ້ງເຕືອນຫ້ອງແລ້ວ",
   "RoomNotificationsEnabled": "ເປີດການແຈ້ງເຕືອນຫ້ອງແລ້ວ",
   "RoomOwner": "ເຈົ້າຂອງຫ້ອງ",

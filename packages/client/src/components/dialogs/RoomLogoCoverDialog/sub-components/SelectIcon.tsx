@@ -163,7 +163,7 @@ export const SelectIcon = ({
           isSelected={withoutIcon}
           data-testid="room_logo_cover_without_icon"
         >
-          {t("WithoutIcon")}
+          {t("Common:WithoutIcon")}
         </StyledWithoutIcon>
       </div>
 

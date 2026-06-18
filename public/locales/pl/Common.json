@@ -1152,6 +1152,7 @@
   "RoomAdmin": "Administrator pokoju",
   "RoomCreateUser": "Użytkownicy zostali dodani.",
   "RoomEmptyAtTheMoment": "Dany pokój jest aktualnie pusty.",
+  "RoomFilesLifetime": "Okres ważności plików w tym pokoju jest ustawiony na {{days}} {{period}}",
   "RoomGroups": "Grupy pokoi",
   "RoomInfo": "Informacje o sali",
   "RoomLinkExpired": "Link do pokoju, który próbujesz otworzyć, nie istnieje lub wygasł.",

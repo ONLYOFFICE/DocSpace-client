@@ -3,7 +3,7 @@
   "content": "New general link created successfully",
   "content_en_sha1_hash": "58f4db47be46603e5a6da54723f845b9713e485d",
   "created_at": "2025-08-26T11:15:03.764Z",
-  "updated_at": "2026-06-02T08:43:27.473Z",
+  "updated_at": "2026-06-05T11:04:11.790Z",
   "comment": {
     "text": "This is a toast message confirming that a new general link has been successfully created after a previous one was revoked. It appears when a public room or form room link is updated.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
-      "line_number": 321,
+      "line_number": 327,
       "context": "? newLink\n : l,\n ),\n );\n if (!isReactivate)\n toastr.success(t(\"Common:GeneralLinkRevokedAndCreatedSuccessfully\"));\n } else {\n deleteLink(link.sharedTo.id);\n toastr.success(t(\"Common:LinkRemoved\"));\n }\n } catch (error) {",
       "module": "/packages/shared"
     }

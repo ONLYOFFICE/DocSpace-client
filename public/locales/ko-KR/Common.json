@@ -1152,6 +1152,7 @@
   "RoomAdmin": "방 관리자",
   "RoomCreateUser": "사용자가 추가되었습니다.",
   "RoomEmptyAtTheMoment": "현재 이 방은 비어 있습니다.",
+  "RoomFilesLifetime": "이 룸에서 파일 수명은 {{days}} {{period}}로 설정됩니다",
   "RoomGroups": "룸 그룹",
   "RoomInfo": "룸 정보",
   "RoomLinkExpired": "열려고 하는 룸 링크가 존재하지 않거나 만료되었습니다.",

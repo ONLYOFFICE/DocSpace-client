@@ -1152,6 +1152,7 @@
   "RoomAdmin": "Skrbnik sobe",
   "RoomCreateUser": "Uporabniki dodani.",
   "RoomEmptyAtTheMoment": "Ta soba je trenutno prazna.",
+  "RoomFilesLifetime": "Življenjska doba datoteke je v tej sobi nastavljena na {{days}} {{period}}",
   "RoomGroups": "Skupine sob",
   "RoomInfo": "Informacije o sobi",
   "RoomLinkExpired": "Povezava do sobe, ki jo poskušate odpreti, ne obstaja ali pa je potekla.",

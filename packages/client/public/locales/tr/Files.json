@@ -165,7 +165,6 @@
   "RoomAvailableViaSharedLink": "Oda paylaşımlı bağlantı üzerinden kullanılabilir",
   "RoomCreated": "Oda oluşturuldu",
   "RoomEmptyContainerDescription": "Lütfen ilk odayı oluşturun.",
-  "RoomFilesLifetime": "Bu odada dosya yaşam süresi {{days}} {{period}} olarak ayarlanmıştır",
   "RoomNotificationsDisabled": "Oda bildirimleri devre dışı bırakıldı",
   "RoomNotificationsEnabled": "Oda bildirimleri etkinleştirildi",
   "RoomOwner": "Oda sahibi",

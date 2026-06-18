@@ -3,7 +3,7 @@
   "content": "Create",
   "content_en_sha1_hash": "6e157c5da4410b7e9de85f5c93026b9176e69064",
   "created_at": "2025-05-19T21:30:43.828Z",
-  "updated_at": "2026-06-02T08:43:27.452Z",
+  "updated_at": "2026-06-11T14:18:13.707Z",
   "comment": {
     "text": "This is a dialog title for creating various entities like agents, groups, or rooms. It appears at the top of the respective creation dialogs.",
     "is_auto": true,
@@ -32,7 +32,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
       "line_number": 318,
-      "context": "{!!roomParams.type && !isTemplate ? (\n <ModalDialog.Footer>\n <Button\n id=\"shared_create-room-modal_submit\"\n tabIndex={5}\n label={t(\"Common:Create\")}\n size=\"normal\"\n primary\n scale\n isDisabled={isRoomTitleChanged || isWrongTitle}\n isLoading={isLoading}",
+      "context": "{roomParams.type && !isTemplate ? (\n <ModalDialog.Footer>\n <Button\n id=\"shared_create-room-modal_submit\"\n tabIndex={5}\n label={t(\"Common:Create\")}\n size=\"normal\"\n primary\n scale\n isDisabled={isRoomTitleChanged || isWrongTitle}\n isLoading={isLoading}",
       "module": "/packages/client"
     },
     {

@@ -36,6 +36,7 @@ import {
   type EmptyViewOptionsType,
 } from "@docspace/shared/components/empty-view";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 import EmptyAIAgentsLightIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
@@ -43,7 +44,6 @@ import EmptyAIAgentsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.i
 import CreateAIAgentIcon from "PUBLIC_DIR/images/emptyview/create.ai-agent.svg";
 
 import {
-  useAgentsAIConfigStore,
   useAgentsUserStore,
   useAgentDialogsStore,
 } from "../../_store";
@@ -70,13 +70,19 @@ const AgentsEmptyView = () => {
   const useLightIcon = !mounted || isBase;
 
   const userStore = useAgentsUserStore();
-  const aiConfigStore = useAgentsAIConfigStore();
   const dialogsStore = useAgentDialogsStore();
+
+  // AI readiness for the empty view is driven by whether any AI *profile*
+  // exists in the new chat library (read from the section-wide
+  // AiAgentProviders zustand stores), not by the legacy portal AI-provider
+  // config. No profiles → show the "AI provider is not available yet" stub.
+  const hasProfiles =
+    useStores().useProfilesStore((s) => s.profiles).length > 0;
+  const aiReady = hasProfiles;
 
   const user = userStore.user;
   const isVisitor = user?.isVisitor ?? false;
   const isAdminOrOwner = !!(user?.isAdmin || user?.isOwner);
-  const aiReady = aiConfigStore.aiReady;
   // SDK is embedded and always behaves as standalone w.r.t. AI configuration.
   const standalone = true;
 

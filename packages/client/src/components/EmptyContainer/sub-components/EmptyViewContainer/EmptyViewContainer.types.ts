@@ -126,6 +126,13 @@ export interface InjectedEmptyViewContainerProps
   baseDomain: string | null;
   socialAuthUser: TStore["userStore"]["user"];
   isGracePeriod: boolean;
+  knowledgeId: number | null;
+  startUpload: (
+    uploadFiles: unknown,
+    folderId: number | null,
+    t: TTranslation,
+  ) => void;
+  createFoldersTree: (t: TTranslation, files: unknown) => Promise<unknown[]>;
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &
@@ -145,6 +152,7 @@ export type OptionActions = {
     openRoot?: boolean,
   ) => void;
   uploadFromDocspaceAiKnowledge: VoidFunction;
+  uploadFromDeviceAiKnowledge: VoidFunction;
   onUploadAction: (type: UploadType) => void;
   createAndCopySharedLink: VoidFunction;
   openInfoPanel: VoidFunction;

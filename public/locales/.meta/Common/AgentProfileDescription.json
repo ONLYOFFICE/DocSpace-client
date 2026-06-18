@@ -1,0 +1,10 @@
+{
+  "comment": {
+    "text": "Description under the 'Model' field in the Create Agent dialog (SDK ai-agents). Shown above a single combobox listing the user's configured AI profiles (provider + model pairs); the selected profile is bound to the agent on creation."
+  },
+  "usage": [
+    {
+      "context": "t(\"Common:AgentProfileDescription\", { defaultValue: \"Select the AI model to be used in this agent's chats.\" })"
+    }
+  ]
+}

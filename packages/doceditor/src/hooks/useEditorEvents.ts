@@ -63,6 +63,8 @@ import {
   getModels,
   getDefaultProvider,
 } from "@docspace/shared/api/ai";
+import { DEFAULT_SERVER_API_ROUTES } from "@docspace/ui-kit/ai-agent/providers";
+import type { ServerAPIConfig } from "@docspace/ui-kit/ai-agent/providers";
 import type {
   TAiProvider,
   TDefaultProvider,
@@ -344,6 +346,18 @@ const useEditorEvents = ({
               connector.sendEvent("ai_onCustomInit", {
                 settingsLock: undefined,
                 actionsOverride: true,
+                // Server-mode API config — mirrors the ai-chat widget's
+                // buildServerApiConfig. The backend is mounted at the same
+                // origin under /api/2.0/new-ai; routes come from the
+                // shared ai-chat defaults (re-exported via ui-kit).
+                apiConfig: {
+                  origin:
+                    typeof window === "undefined"
+                      ? ""
+                      : window.location.origin,
+                  baseUrl: "/api/2.0/new-ai",
+                  routes: DEFAULT_SERVER_API_ROUTES,
+                } satisfies ServerAPIConfig,
                 actions: {
                   Chat: { model },
                   Summarization: { model },
@@ -397,8 +411,17 @@ const useEditorEvents = ({
 
     // Active whenever connector exists — does not require successAuth or a configured provider.
     if (connector) {
+      // The editor may be hosted either in an iframe (host is `window.parent`)
+      // or in a new tab opened via `window.open` (host is `window.opener`,
+      // while `window.parent` === self). Resolve the real host window so the
+      // ready signal and tool results reach the opener in both cases.
+      const hostWindow =
+        window.opener && window.opener !== window
+          ? (window.opener as Window)
+          : window.parent;
+
       const onParentMessage = (event: MessageEvent) => {
-        if (event.source !== window.parent) return;
+        if (event.source !== hostWindow) return;
         const payload = event.data;
         if (
           !payload ||
@@ -416,20 +439,21 @@ const useEditorEvents = ({
 
         if (provider) {
           connector.sendEvent("ai_onCallTool", { name, arguments: args ?? {} });
-          window.parent?.postMessage(
+          hostWindow?.postMessage(
             { type: "editorToolResult", callId, result: "" },
             "*",
           );
         } else {
-          window.parent?.postMessage(
+          hostWindow?.postMessage(
             { type: "editorToolResult", callId, result: JSON.stringify({ error: "AI provider not configured" }) },
             "*",
           );
         }
       };
       window.addEventListener("message", onParentMessage);
-      // Signal parent that this window is ready to receive callEditorTool messages.
-      window.parent?.postMessage({ type: "editorDocumentReady" }, "*");
+      // Signal the host (iframe parent or popup opener) that this window is
+      // ready to receive callEditorTool messages.
+      hostWindow?.postMessage({ type: "editorDocumentReady" }, "*");
     }
 
     // Do not remove: it's for Back button on Mobile App

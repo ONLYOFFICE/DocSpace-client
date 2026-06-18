@@ -764,12 +764,16 @@ export const helperOptions = (
     title: string,
     description: string,
     uploadType: UploadType,
+    isKnowledge?: boolean,
   ) => ({
     title,
     description,
     icon: <UploadDevicePDFFormIcon />,
     key: "create-form",
-    onClick: () => actions.onUploadAction(uploadType),
+    onClick: () =>
+      isKnowledge
+        ? actions.uploadFromDeviceAiKnowledge()
+        : actions.onUploadAction(uploadType),
     disabled: !security?.Create,
   });
 

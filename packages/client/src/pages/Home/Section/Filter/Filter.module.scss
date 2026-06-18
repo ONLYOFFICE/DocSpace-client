@@ -33,55 +33,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-@use "@docspace/ui-kit/styles/variables";
-
-.body {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  padding-top: 24px;
+.quickActions {
+  margin: 0 auto 16px;
+  justify-content: center;
+  max-width: 736px; // 4 tiles * 172px + 3 gaps * 16px
+  width: 100%;
 }
-
-.hint {
-  font-size: 12px;
-  line-height: 16px;
-  margin-top: 4px;
-  color: variables.$gray;
-}
-
-.capabilitiesField {
-  label {
-    font-weight: 700 !important;
-    font-size: 16px;
-
-    height: auto;
-    padding-bottom: 2px;
-
-    span {
-      line-height: 22px !important ;
-    }
-  }
-}
-
-.capabilitiesDescription {
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 20px;
-  color: variables.$gray;
-  margin-bottom: 16px;
-}
-
-.checkboxList {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-
-  label {
-    padding-bottom: 0px;
-  }
-
-  svg {
-    margin-inline-end: 8px !important;
-  }
-}
-

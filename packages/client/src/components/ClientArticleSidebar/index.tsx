@@ -103,6 +103,19 @@ const ClientArticleSidebar = ({
     [navigate, userId, myFolderId],
   );
 
+  // Agent-scoped Recent/Favorites/Trash: same alias data, routed under
+  // /ai-agents/* so the sidebar keeps the selection under AI Agents.
+  const goFolderAgent = React.useCallback(
+    (folderId: number, rootFolderType: TTreeFolder["rootFolderType"]) =>
+      () => {
+        onFolderNavigateRef.current?.();
+        navigate(
+          buildFolderUrl(folderId, rootFolderType, userId, myFolderId, true),
+        );
+      },
+    [navigate, userId, myFolderId],
+  );
+
   // Rooms-scoped Recent/Favorites: the same special recent/favorites files
   // view, but constrained to room content via `parentId=<roomsFolderId>`.
   // The recent/favorites folder ids are known up front (from the tree), so we
@@ -133,6 +146,14 @@ const ClientArticleSidebar = ({
     filter.searchArea = RoomSearchArea.Templates;
     navigate(`/rooms/shared/filter?${filter.toUrlParams(userId, false)}`);
   }, [navigate, userId]);
+
+  const goFormsTrash = React.useCallback(() => {
+    onFolderNavigateRef.current?.();
+    const filter = FilesFilter.getDefault({ categoryType: CategoryType.Trash });
+    if (recycleBinFolderId != null) filter.folder = String(recycleBinFolderId);
+    filter.folderType = FolderType.FormRoom;
+    navigate(`/forms/trash/filter?${filter.toUrlParams()}`);
+  }, [navigate, recycleBinFolderId]);
 
   const activeId = React.useMemo(
     () => getClientActiveId(location.pathname, folderIds),
@@ -279,15 +300,45 @@ const ClientArticleSidebar = ({
             id: "forms-trash",
             label: t("Common:TrashSection"),
             icon: getCatalogIconUrlByType(FolderType.TRASH),
-            // onClick: goFormsScoped(CategoryType.Trash, "/forms/trash"),
+            onClick: goFormsTrash,
             withTopSeparator: true,
           },
         ],
       });
     }
 
-    // AI Agents sits right after Rooms as a top-level item.
-    if (aiAgentsFolder) mainItems.push(navItem(aiAgentsFolder));
+    // AI Agents sits right after Rooms as a top-level item, with the
+    // Recent/Favorites/Trash sections nested beneath it. These reuse the
+    // portal-wide aliases (@recent/@favorites/@trash) — the same targets as
+    // the My Documents sections — mirroring the SDK agents sections. Unique
+    // sidebar ids keep them distinct from the My Documents entries.
+    if (aiAgentsFolder) {
+      const agentChildren: NavSubItem[] = [];
+      if (recentFolder)
+        agentChildren.push({
+          ...navItem(recentFolder, { id: "agents-recent" }),
+          onClick: goFolderAgent(recentFolder.id, recentFolder.rootFolderType),
+        });
+      if (favFolder)
+        agentChildren.push({
+          ...navItem(favFolder, { id: "agents-favorites" }),
+          onClick: goFolderAgent(favFolder.id, favFolder.rootFolderType),
+        });
+      if (trashFolder)
+        agentChildren.push({
+          ...navItem(trashFolder, {
+            id: "agents-trash",
+            withTopSeparator: true,
+          }),
+          onClick: goFolderAgent(trashFolder.id, trashFolder.rootFolderType),
+        });
+
+      mainItems.push(
+        agentChildren.length > 0
+          ? { ...navItem(aiAgentsFolder), children: agentChildren }
+          : navItem(aiAgentsFolder),
+      );
+    }
 
     return [
       { id: "overview", items: [overview] },
@@ -297,8 +348,10 @@ const ClientArticleSidebar = ({
     t,
     go,
     goFolder,
+    goFolderAgent,
     goRoomsScoped,
     goTemplates,
+    goFormsTrash,
     treeFolders,
     isVisitor,
     canUseTemplates,

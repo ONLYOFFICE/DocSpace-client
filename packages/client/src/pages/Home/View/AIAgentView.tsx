@@ -80,7 +80,10 @@ const AIAgentViewComponent = ({
     <>
       {shouldRenderChat ? (
         <Activity mode={currentView === "chat" ? "visible" : "hidden"}>
-          <div className={styles.aiAgentChat}>
+          <div
+            className={styles.aiAgentChat}
+            data-chat-active={currentView === "chat" ? "" : undefined}
+          >
             <NewChat />
           </div>
         </Activity>

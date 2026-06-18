@@ -6,9 +6,11 @@ import { headers, cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import type { TViewAs } from "@docspace/shared/types";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import { RoomSearchArea } from "@docspace/shared/enums";
 
 import { getFilesSettings } from "@/api/files";
-import { getDefaultProvider } from "@/api/ai";
+import { getAIAgents, getAIConfig, getDefaultProvider } from "@/api/ai";
 import { getSelf } from "@/api/people";
 import { getSettings } from "@/api/settings";
 import {
@@ -45,13 +47,37 @@ export default async function AiAgentsServerLayout({ children }: SlotProps) {
   const emplType = filterParams.get("emplType") || "";
   const uid = filterParams.get("uid") || "";
 
-  const [filesSettings, user, defaultProvider, portalSettings] =
-    await Promise.all([
-      getFilesSettings(),
-      getSelf(),
-      getDefaultProvider(),
-      getSettings().catch(() => undefined),
-    ]);
+  // SSR data for the agents list / AI config stores — fetched here (not in
+  // the page) so the store providers below can construct the MobX stores
+  // already hydrated. Hydrating during the page's render mutated observables
+  // that mounted observers (section header/filter) were already tracking and
+  // crashed with "Cannot update a component while rendering". The agents
+  // list itself is only needed on the root list route; aiConfig is used by
+  // every (ai-agents) route. On failure (e.g. 401) we pass null and the
+  // client-side fallback fetches take over.
+  const isRootList = pathname === "/ai-agents";
+  const initialSearch = filterParams.get("search") ?? "";
+  const agentsFilter = RoomsFilter.getDefault(
+    undefined,
+    RoomSearchArea.AIAgents,
+  );
+  if (initialSearch) agentsFilter.filterValue = initialSearch;
+
+  const [
+    filesSettings,
+    user,
+    defaultProvider,
+    portalSettings,
+    aiConfig,
+    agentsData,
+  ] = await Promise.all([
+    getFilesSettings(),
+    getSelf(),
+    getDefaultProvider(),
+    getSettings().catch(() => undefined),
+    getAIConfig().catch(() => null),
+    isRootList ? getAIAgents(agentsFilter).catch(() => null) : null,
+  ]);
 
   if (!user && providerName) {
     const proto = hdrs.get("x-forwarded-proto") || "https";
@@ -91,6 +117,15 @@ export default async function AiAgentsServerLayout({ children }: SlotProps) {
       portalSettings && typeof portalSettings !== "string"
         ? portalSettings
         : undefined,
+    initialAIConfig: aiConfig ?? null,
+    initialAgentsData: agentsData
+      ? {
+          agents: agentsData.folders ?? [],
+          total: agentsData.total ?? 0,
+          rootFolderId: agentsData.current?.id ?? null,
+          search: initialSearch || undefined,
+        }
+      : null,
   };
 
   return (

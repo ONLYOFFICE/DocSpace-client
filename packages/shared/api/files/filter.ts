@@ -97,6 +97,7 @@ const TAGS = "tags";
 const LOCATION = "location";
 const AREA = "area";
 const PARENT_ID = "parentId";
+const FOLDER_TYPE = "folderType";
 
 // TODO: add next params
 // subjectGroup bool
@@ -129,6 +130,7 @@ const getOtherSearchParams = () => {
     LOCATION,
     AREA,
     PARENT_ID,
+    FOLDER_TYPE,
   ];
 
   filterSearchParams.forEach((param) => {
@@ -203,6 +205,8 @@ class FilesFilter {
   location: FilterLocation | null = null;
 
   parentId: number | string | null;
+
+  folderType: number | string | null = null;
 
   static getDefault(
     options: {
@@ -312,6 +316,7 @@ class FilesFilter {
     );
 
     if (urlFilter[PARENT_ID]) newFilter.parentId = urlFilter[PARENT_ID];
+    if (urlFilter[FOLDER_TYPE]) newFilter.folderType = urlFilter[FOLDER_TYPE];
 
     return newFilter;
   }
@@ -429,6 +434,7 @@ class FilesFilter {
       location,
       sharedBy,
       parentId: this.parentId,
+      folderType: this.folderType,
     };
 
     const str = toUrlParams(dtoFilter, true);
@@ -480,6 +486,7 @@ class FilesFilter {
     if (key) dtoFilter[KEY] = key;
     if (location) dtoFilter[LOCATION] = location;
     if (this.parentId != null) dtoFilter[PARENT_ID] = this.parentId;
+    if (this.folderType != null) dtoFilter[FOLDER_TYPE] = this.folderType;
 
     dtoFilter[PAGE] = page + 1;
     dtoFilter[SORT_BY] = sortBy;
@@ -513,7 +520,7 @@ class FilesFilter {
   }
 
   clone() {
-    return new FilesFilter(
+    const filter = new FilesFilter(
       this.page,
       this.pageCount,
       this.total,
@@ -536,6 +543,10 @@ class FilesFilter {
       this.sharedBy,
       this.parentId,
     );
+
+    filter.folderType = this.folderType;
+
+    return filter;
   }
 
   equals(filter: FilesFilter) {

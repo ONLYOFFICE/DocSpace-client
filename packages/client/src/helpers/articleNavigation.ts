@@ -177,6 +177,7 @@ export const getClientActiveId = (
   if (pathname.includes("/ai-agents")) return match(ids.aiAgentsFolderId);
   if (pathname.includes("/rooms/recent")) return "rooms-recent";
   if (pathname.includes("/rooms/favorite")) return "rooms-favorites";
+  if (pathname.includes("/rooms/trash")) return "rooms-trash";
   if (pathname.includes("/recent")) return match(ids.recentFolderId);
   if (pathname.includes("/rooms/templates")) return "rooms-templates";
   if (pathname.includes("/rooms/shared") && isTemplates) return "rooms-templates";

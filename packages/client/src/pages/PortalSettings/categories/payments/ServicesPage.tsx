@@ -103,6 +103,7 @@ const ServicesPage = (props: ServicesPageProps) => {
         <AiPage
           getAIConfig={getAIConfig}
           withBottomMargin={true}
+          onViewMore={onViewUsage}
           onOpenSupportedModels={() =>
             navigate(
               combineUrl(

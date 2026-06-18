@@ -27,9 +27,15 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
+import { useMemo } from "react";
+
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { NavMenu } from "@docspace/ui-kit/components/nav-menu";
-import type { NavMenuGroup } from "@docspace/ui-kit/components/nav-menu";
+import type {
+  NavMenuGroup,
+  NavMenuItem,
+  NavSubItem,
+} from "@docspace/ui-kit/components/nav-menu";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import { getLogoUrl } from "@docspace/ui-kit/utils/getLogoUrl";
 import { WhiteLabelLogoType } from "@docspace/ui-kit/enums";
@@ -117,6 +123,33 @@ export const AppsSidebarView = ({
     toggleArticleOpen?.();
   };
 
+  // On mobile the article overlays the content, so it must close itself after a
+  // navigation click. Wrap every item/sub-item onClick to run its own handler
+  // first (navigate) and then close the article. Off mobile the article is
+  // pinned, so handlers pass through untouched.
+  const mobileGroups = useMemo(() => {
+    if (!isMobile) return groups;
+
+    const closeAfter =
+      <T,>(handler?: (item: T) => void) =>
+      (item: T) => {
+        handler?.(item);
+        toggleArticleOpen?.();
+      };
+
+    return groups.map((group) => ({
+      ...group,
+      items: group.items.map((item: NavMenuItem) => ({
+        ...item,
+        onClick: closeAfter(item.onClick),
+        children: item.children?.map((sub: NavSubItem) => ({
+          ...sub,
+          onClick: closeAfter(sub.onClick),
+        })),
+      })),
+    }));
+  }, [groups, isMobile, toggleArticleOpen]);
+
   return (
     <>
       <div
@@ -189,7 +222,7 @@ export const AppsSidebarView = ({
             />
           )}
           <NavMenu
-            groups={groups}
+            groups={mobileGroups}
             activeItemId={activeId}
             iconOnly={!showText}
             withAnimation

@@ -51,7 +51,7 @@ const isUploadItem = (option: ModelItem) =>
   /upload/i.test(option.key ?? "") || /upload/i.test(option.id ?? "");
 
 const withoutSeparators = (list: ModelItem[]) =>
-  list.filter((option) => !option.isSeparator);
+  list.filter((option) => option && !option.isSeparator);
 
 const splitItems = (items: ModelItem[]) => {
   const firstUploadIndex = items.findIndex(isUploadItem);

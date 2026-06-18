@@ -42,8 +42,7 @@ export const createFolderNavigation = async (
   // A Form Filling Room opened from the Forms section stays under `/forms/:room`
   // so breadcrumbs and Back resolve to Forms, not the Rooms list.
   const isFormRoom = itemRoomType === RoomsType.FormRoom;
-  const isFormsContext =
-    categoryType === CategoryType.Forms || categoryType === CategoryType.Form;
+  const isFormsContext = window.location.pathname.startsWith("/forms");
 
   let path;
   if (isAiRoom) {

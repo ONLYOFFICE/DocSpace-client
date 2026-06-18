@@ -91,7 +91,6 @@ export type LinkRowProps = {
   onCloseContextMenu: () => void;
 
   isShareLink?: boolean;
-  blockExistingLinksOnRestrict?: boolean;
   hideLinkTypeSelector?: boolean;
   isExternalShareRestricted?: boolean;
 } & (

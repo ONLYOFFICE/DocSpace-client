@@ -134,6 +134,14 @@ const ClientArticleSidebar = ({
     navigate(`/rooms/shared/filter?${filter.toUrlParams(userId, false)}`);
   }, [navigate, userId]);
 
+  const goFormsTrash = React.useCallback(() => {
+    onFolderNavigateRef.current?.();
+    const filter = FilesFilter.getDefault({ categoryType: CategoryType.Trash });
+    if (recycleBinFolderId != null) filter.folder = String(recycleBinFolderId);
+    filter.folderType = FolderType.FormRoom;
+    navigate(`/forms/trash/filter?${filter.toUrlParams()}`);
+  }, [navigate, recycleBinFolderId]);
+
   const activeId = React.useMemo(
     () => getClientActiveId(location.pathname, folderIds),
     [location.pathname, folderIds],
@@ -279,7 +287,7 @@ const ClientArticleSidebar = ({
             id: "forms-trash",
             label: t("Common:TrashSection"),
             icon: getCatalogIconUrlByType(FolderType.TRASH),
-            // onClick: goFormsScoped(CategoryType.Trash, "/forms/trash"),
+            onClick: goFormsTrash,
             withTopSeparator: true,
           },
         ],
@@ -299,6 +307,7 @@ const ClientArticleSidebar = ({
     goFolder,
     goRoomsScoped,
     goTemplates,
+    goFormsTrash,
     treeFolders,
     isVisitor,
     canUseTemplates,

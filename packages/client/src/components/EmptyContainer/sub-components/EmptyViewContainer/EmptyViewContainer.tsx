@@ -245,6 +245,8 @@ const InjectedEmptyViewContainer = inject<
       standalone,
       isCardLinkedToPortal: paymentStore.isCardLinkedToPortal,
       isPayer: paymentStore.isPayer,
+      walletCustomerEmail: currentTariffStatusStore.walletCustomerEmail,
+      walletCustomerDisplayName: currentTariffStatusStore.walletCustomerInfo?.displayName,
       enableAIService: paymentStore.enableAIService,
       getAIConfig: settingsStore.getAIConfig,
       refreshCurrentFolder,

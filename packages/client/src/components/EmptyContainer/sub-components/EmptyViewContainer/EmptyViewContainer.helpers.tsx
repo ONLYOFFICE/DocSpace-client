@@ -117,6 +117,9 @@ export const getDescription = (
   aiReady: boolean = false,
   standalone: boolean = false,
   isPortalAdmin: boolean = false,
+  isPayer?: boolean,
+  walletCustomerEmail?: string | null,
+  walletCustomerDisplayName?: string | null,
 ): React.ReactNode => {
   const isNotAdmin = isUser(access);
 
@@ -157,6 +160,9 @@ export const getDescription = (
       standalone,
       aiReady,
       isPortalAdmin,
+      isPayer,
+      walletCustomerEmail,
+      walletCustomerDisplayName,
     );
 
   if (isFolder)

@@ -88,6 +88,9 @@ export const useEmptyView = (
     aiReady,
     standalone,
     isCardLinkedToPortal,
+    isPayer,
+    walletCustomerEmail,
+    walletCustomerDisplayName,
   }: EmptyViewContainerProps,
 
   t: TTranslation,
@@ -118,6 +121,9 @@ export const useEmptyView = (
       aiReady,
       standalone,
       isPortalAdmin,
+      isPayer,
+      walletCustomerEmail,
+      walletCustomerDisplayName,
     );
     const title = getTitle(
       type,
@@ -169,6 +175,9 @@ export const useEmptyView = (
     aiReady,
     standalone,
     isPortalAdmin,
+    isPayer,
+    walletCustomerEmail,
+    walletCustomerDisplayName,
   ]);
 
   return emptyViewOptions;

@@ -141,26 +141,8 @@ const AiSettings = ({
 
   const navigate = useNavigate();
 
-  const bannerRef = React.useRef<HTMLDivElement>(null);
-  const [bannerHeight, setBannerHeight] = React.useState(0);
-
-  React.useLayoutEffect(() => {
-    const el = bannerRef.current;
-    if (!el) return undefined;
-
-    const update = () => setBannerHeight(el.offsetHeight);
-    update();
-
-    const resizeObserver = new ResizeObserver(update);
-    resizeObserver.observe(el);
-
-    return () => resizeObserver.disconnect();
-  }, [ready, standalone]);
-
   const headerHeight = SECTION_HEADER_HEIGHT[currentDeviceType!];
-  const tabsStickyTop = standalone
-    ? headerHeight
-    : `calc(${headerHeight} + ${bannerHeight}px)`;
+  const tabsStickyTop = headerHeight;
 
   const [currentTabId, setCurrentTabId] = React.useState(detectCurrentTabId());
 
@@ -237,26 +219,21 @@ const AiSettings = ({
 
   return (
     <>
-      {standalone ? null : (
-        <div
-          ref={bannerRef}
-          className={styles.bannerSticky}
-          style={{ top: headerHeight }}
-        >
-          <AIFeaturesBanner
-            currentDeviceType={currentDeviceType}
-            isAiToolsServiceOn={isAiToolsServiceOn}
-            isCardLinkedToPortal={isCardLinkedToPortal}
-          />
-        </div>
-      )}
-
       <Tabs
         items={data}
         withAnimation
         selectedItemId={currentTabId}
         onSelect={onSelect}
         stickyTop={tabsStickyTop}
+        stickyHeader={
+          standalone ? undefined : (
+            <AIFeaturesBanner
+              currentDeviceType={currentDeviceType}
+              isAiToolsServiceOn={isAiToolsServiceOn}
+              isCardLinkedToPortal={isCardLinkedToPortal}
+            />
+          )
+        }
       />
     </>
   );

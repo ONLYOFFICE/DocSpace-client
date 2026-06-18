@@ -140,14 +140,7 @@ const buildMockInfo = (status: TDocsConnectStatus): TDocsConnectInfo => {
   };
 };
 
-// Monetization (plan/wallet) and connectors have no backend endpoint — merged into
-// the real info from here so the tenant panel / Buy-a-plan UI still render.
-const MOCK_TEMPLATE = buildMockInfo("trial");
-const MOCK_MONETIZATION = {
-  plan: MOCK_TEMPLATE.plan,
-  wallet: MOCK_TEMPLATE.wallet,
-  connectors: MOCK_TEMPLATE.connectors,
-};
+const MOCK_CONNECTORS = buildMockInfo("trial").connectors;
 
 // Last state returned (mock or real). Lets the mock-only Buy-a-plan flow mutate and
 // persist a simulated "paid" state across calls until the backend provides it.
@@ -265,8 +258,6 @@ const buildEmptyInfo = (status: TDocsConnectStatus): TDocsConnectInfo => ({
   connectors: [],
 });
 
-// Maps the real DocsCloud responses (GET /tenant + /tenant/config + /tenant/info)
-// into the UI's TDocsConnectInfo. Monetization fields come from the mock (no backend).
 const mapRealInfo = (
   tenant: TTenantResponse,
   config: TConfigResponse,
@@ -276,18 +267,19 @@ const mapRealInfo = (
   const validUntilMs = validUntil ? new Date(validUntil).getTime() : Number.NaN;
   const status: TDocsConnectStatus =
     info?.license?.trial === false ? "paid" : "trial";
+  const base = buildEmptyInfo(status);
 
   return {
-    ...buildEmptyInfo(status),
-    ...MOCK_MONETIZATION,
+    ...base,
+    connectors: MOCK_CONNECTORS,
     plan: {
-      ...MOCK_MONETIZATION.plan,
-      users: tenant?.payment?.quantity ?? MOCK_MONETIZATION.plan.users,
-      renewsOn: formatDate(tenant?.endDate) || MOCK_MONETIZATION.plan.renewsOn,
+      ...base.plan,
+      users: tenant?.payment?.quantity ?? base.plan.users,
+      renewsOn: formatDate(tenant?.endDate) || base.plan.renewsOn,
     },
     wallet: {
-      ...MOCK_MONETIZATION.wallet,
-      currency: tenant?.payment?.currency || MOCK_MONETIZATION.wallet.currency,
+      ...base.wallet,
+      currency: tenant?.payment?.currency || base.wallet.currency,
     },
     address: tenant?.address ?? "",
     tenantName: config.tenantName ?? "",

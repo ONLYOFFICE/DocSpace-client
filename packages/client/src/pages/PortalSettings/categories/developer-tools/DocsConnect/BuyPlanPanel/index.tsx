@@ -60,7 +60,7 @@ const MAX_USERS = 999;
 interface BuyPlanPanelProps {
   visible?: boolean;
   info?: TDocsConnectInfo;
-  buyPlan?: (opts: { users: number; devPack: boolean }) => void;
+  buyPlan?: (opts: { users: number; devPack: boolean }) => Promise<void>;
   closeBuyPlan?: () => void;
 }
 
@@ -76,6 +76,7 @@ const BuyPlanPanel = ({
   const [devPack, setDevPack] = useState<boolean>(
     info?.plan.devPackEnabled ?? false,
   );
+  const [submitting, setSubmitting] = useState(false);
 
   if (!info) return null;
 
@@ -102,11 +103,15 @@ const BuyPlanPanel = ({
   const formatCurrency = (amount: number) => `${currency}${amount.toFixed(2)}`;
 
   const onBuy = async () => {
+    if (submitting) return;
+    setSubmitting(true);
     try {
       await buyPlan?.({ users, devPack });
       toastr.success(t("DocsConnect:PlanPurchased"));
     } catch (error) {
       toastr.error(error as Error);
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -335,12 +340,15 @@ const BuyPlanPanel = ({
                 : t("DocsConnect:BuyAPlan")
             }
             onClick={onBuy}
+            isLoading={submitting}
+            isDisabled={submitting}
           />
           <Button
             scale
             size={ButtonSize.normal}
             label={t("Common:CancelButton")}
             onClick={() => closeBuyPlan?.()}
+            isDisabled={submitting}
           />
         </div>
       </ModalDialog.Footer>

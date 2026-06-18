@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -41,6 +42,7 @@ import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Link, LinkType, LinkTarget } from "@docspace/ui-kit/components/link";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import styles from "./PromoPage.module.scss";
 
@@ -52,13 +54,27 @@ const EXAMPLES_URL = "#";
 const AUTOMATION_API_ANCHOR = "docs-connect-automation-api";
 
 interface PromoPageProps {
-  startTrial?: () => void;
+  startTrial?: () => Promise<void>;
 }
 
 const PromoPage = ({ startTrial }: PromoPageProps) => {
   const { t } = useTranslation(["DocsConnect", "Common"]);
 
+  const [submitting, setSubmitting] = useState(false);
+
   const onReadApiDocs = () => window.open(API_DOCS_URL, "_blank");
+
+  const onCreateTenant = async () => {
+    if (submitting) return;
+    setSubmitting(true);
+    try {
+      await startTrial?.();
+    } catch (error) {
+      toastr.error(error as Error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div className={styles.promo}>
@@ -102,7 +118,9 @@ const PromoPage = ({ startTrial }: PromoPageProps) => {
           primary
           size={ButtonSize.small}
           label={t("DocsConnect:CreateTenant")}
-          onClick={() => startTrial?.()}
+          onClick={onCreateTenant}
+          isLoading={submitting}
+          isDisabled={submitting}
         />
         <Link
           className={styles.link}

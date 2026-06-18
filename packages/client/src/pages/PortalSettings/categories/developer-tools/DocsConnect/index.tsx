@@ -38,10 +38,12 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { EmptyServerErrorContainer } from "SRC_DIR/components/EmptyContainer/EmptyServerErrorContainer";
 
 import PromoPage from "./PromoPage";
 import TenantPanel from "./TenantPanel";
 import BuyPlanPanel from "./BuyPlanPanel";
+import TenantPanelLoader from "./TenantPanel/Loader";
 
 interface DocsConnectProps {
   docsConnectStore?: TStore["docsConnectStore"];
@@ -51,6 +53,7 @@ const DocsConnect = ({ docsConnectStore }: DocsConnectProps) => {
   const { t, ready } = useTranslation(["DocsConnect", "Common"]);
 
   const info = docsConnectStore?.info;
+  const error = docsConnectStore?.error;
   const buyPlanPanelVisible = docsConnectStore?.buyPlanPanelVisible;
 
   useEffect(() => {
@@ -77,7 +80,12 @@ const DocsConnect = ({ docsConnectStore }: DocsConnectProps) => {
     };
   }, []);
 
-  if (!ready || !info) return null;
+  if (!ready) return null;
+
+  if (!info) {
+    if (error) return <EmptyServerErrorContainer />;
+    return <TenantPanelLoader />;
+  }
 
   const isPromo = info.status === "promo";
 

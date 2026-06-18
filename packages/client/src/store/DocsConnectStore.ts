@@ -79,6 +79,7 @@ class DocsConnectStore {
   fetchInfo = async () => {
     try {
       this.setIsLoading(true);
+      this.setError(null);
       const info = await getDocsConnectInfo();
       runInAction(() => {
         this.info = info;
@@ -111,6 +112,7 @@ class DocsConnectStore {
       runInAction(() => {
         this.error = error as Error;
       });
+      throw error;
     }
   };
 

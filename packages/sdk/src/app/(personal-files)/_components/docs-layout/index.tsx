@@ -150,8 +150,10 @@ import {
   type AiChatPanelBindings,
 } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
 import { usePanelExclusivity } from "@/app/(docspace)/_hooks/usePanelExclusivity";
-import { getOnlyofficeFileType } from "../ai-agent-providers/onlyoffice-file-type";
-import { attachFilesToChat } from "../ai-agent-providers/attach-files";
+import {
+  getOnlyofficeFileType,
+  attachFilesToChat,
+} from "@docspace/ui-kit/ai-agent/providers/files";
 
 import styles from "./DocsLayout.module.scss";
 

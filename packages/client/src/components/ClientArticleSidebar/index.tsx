@@ -138,6 +138,22 @@ const ClientArticleSidebar = ({
     [navigate, roomsFolderId],
   );
 
+  const goFormsScoped = React.useCallback(
+    (
+      categoryType: ValueOf<typeof CategoryType>,
+      basePath: string,
+      folderId?: number | null,
+    ) =>
+      () => {
+        onFolderNavigateRef.current?.();
+        const filter = FilesFilter.getDefault({ categoryType });
+        if (folderId != null) filter.folder = String(folderId);
+        filter.folderType = FolderType.FormRoom;
+        navigate(`${basePath}/filter?${filter.toUrlParams()}`);
+      },
+    [navigate],
+  );
+
   // Templates: the Rooms list scoped to the Templates search area. Replaces the
   // former Rooms/Templates submenu tabs (searchArea=Templates on /rooms/shared).
   const goTemplates = React.useCallback(() => {
@@ -146,14 +162,6 @@ const ClientArticleSidebar = ({
     filter.searchArea = RoomSearchArea.Templates;
     navigate(`/rooms/shared/filter?${filter.toUrlParams(userId, false)}`);
   }, [navigate, userId]);
-
-  const goFormsTrash = React.useCallback(() => {
-    onFolderNavigateRef.current?.();
-    const filter = FilesFilter.getDefault({ categoryType: CategoryType.Trash });
-    if (recycleBinFolderId != null) filter.folder = String(recycleBinFolderId);
-    filter.folderType = FolderType.FormRoom;
-    navigate(`/forms/trash/filter?${filter.toUrlParams()}`);
-  }, [navigate, recycleBinFolderId]);
 
   const activeId = React.useMemo(
     () => getClientActiveId(location.pathname, folderIds),
@@ -288,19 +296,31 @@ const ClientArticleSidebar = ({
             id: "forms-recent",
             label: t("Common:Recent"),
             icon: getCatalogIconUrlByType(FolderType.Recent),
-            // onClick: goFormsScoped(CategoryType.Recent, "/forms/recent"),
+            onClick: goFormsScoped(
+              CategoryType.Recent,
+              "/forms/recent",
+              recentFolderId,
+            ),
           },
           {
             id: "forms-favorites",
             label: t("Common:Favorites"),
             icon: getCatalogIconUrlByType(FolderType.Favorites),
-            // onClick: goFormsScoped(CategoryType.Favorite, "/forms/favorites"),
+            onClick: goFormsScoped(
+              CategoryType.Favorite,
+              "/forms/favorites",
+              favoritesFolderId,
+            ),
           },
           {
             id: "forms-trash",
             label: t("Common:TrashSection"),
             icon: getCatalogIconUrlByType(FolderType.TRASH),
-            onClick: goFormsTrash,
+            onClick: goFormsScoped(
+              CategoryType.Trash,
+              "/forms/trash",
+              recycleBinFolderId,
+            ),
             withTopSeparator: true,
           },
         ],
@@ -351,7 +371,7 @@ const ClientArticleSidebar = ({
     goFolderAgent,
     goRoomsScoped,
     goTemplates,
-    goFormsTrash,
+    goFormsScoped,
     treeFolders,
     isVisitor,
     canUseTemplates,

@@ -3294,10 +3294,6 @@ class ContextOptionsStore {
     const { pinRooms, unpinRooms, deleteRooms } = this.filesActionsStore;
 
     if (isRoomsFolder || isArchiveFolder || isAIAgentsFolder) {
-      // The Forms section has no archive, so the group "Move to archive" action
-      // must not appear there even though it reuses the Rooms folder.
-      const isFormsSection = window.location.pathname.startsWith("/forms");
-
       const isPinOption = selection.filter((item) => !item.pinned).length > 0;
 
       let canDelete;
@@ -3333,7 +3329,7 @@ class ContextOptionsStore {
             disabled: false,
           };
 
-      if (canArchiveRoom && !isFormsSection) {
+      if (canArchiveRoom) {
         archiveOptions = {
           key: "archive-room",
           label: t("Common:MoveToArchive"),

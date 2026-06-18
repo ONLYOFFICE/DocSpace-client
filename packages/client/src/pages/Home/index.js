@@ -66,6 +66,7 @@ import {
 } from "./Section";
 import AccountsDialogs from "./Section/ContactsBody/Dialogs";
 import UploadFileInputs from "SRC_DIR/components/UploadInputs";
+import CreateButtonMobile from "SRC_DIR/components/CreateButtonMobile";
 
 import FilesSelectionArea from "./SelectionArea/FilesSelectionArea";
 import ContactsSelectionArea from "./SelectionArea/ContactsSelectionArea";
@@ -559,6 +560,7 @@ const PureHome = (props) => {
       )}
       <MediaViewer />
       <UploadFileInputs />
+      <CreateButtonMobile />
       {/* When the quick-actions banner shows, switch the Section to the SDK's
           stickyTableHeader mode so the banner renders above the (now in-body,
           sticky) filter. The host is always `display: contents` (no layout

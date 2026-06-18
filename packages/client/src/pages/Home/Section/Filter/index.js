@@ -91,7 +91,6 @@ import { FilterLoader } from "@docspace/ui-kit/components/filter/skeletons";
 import renderFilterSelector from "@docspace/shared/utils/renderFilterSelector";
 
 import { useContactsFilter } from "./useContacts";
-import CreateButtonMobile from "./CreateButtonMobile";
 
 const SectionFilterContent = ({
   t,
@@ -118,7 +117,6 @@ const SectionFilterContent = ({
   clearSearch,
   setClearSearch,
   setMainButtonMobileVisible,
-  setMainButtonVisible,
   isArchiveFolder,
 
   // contacts
@@ -232,15 +230,6 @@ const SectionFilterContent = ({
   );
 
   const isDesktopView = currentDeviceType === DeviceType.desktop;
-  const isCreateFabVisible = showMainButton && !isDesktopView;
-
-  React.useEffect(() => {
-    setMainButtonVisible(isCreateFabVisible);
-  }, [isCreateFabVisible, setMainButtonVisible]);
-
-  React.useEffect(() => {
-    return () => setMainButtonVisible(false);
-  }, [setMainButtonVisible]);
 
   // Check if any filter or search is active (excluding sorting and groupId)
   // Room grouping should be hidden when filters/search are active
@@ -1918,7 +1907,7 @@ const SectionFilterContent = ({
 
   if (showFilterLoader) return <FilterLoader />;
 
-  const filterInput = (
+  return (
     <FilterInput
       onFilter={onFilter}
       getFilterData={getFilterData}
@@ -1972,16 +1961,6 @@ const SectionFilterContent = ({
       mainButtonProps={mainButtonProps}
     />
   );
-
-  return (
-    <>
-      {filterInput}
-      <CreateButtonMobile
-        visible={isCreateFabVisible}
-        mainButtonProps={mainButtonProps}
-      />
-    </>
-  );
 };
 
 export default inject(
@@ -2013,7 +1992,6 @@ export default inject(
       createThumbnails,
       setCurrentRoomsFilter,
       setMainButtonMobileVisible,
-      setMainButtonVisible,
       thirdPartyStore,
       clearSearch,
       setClearSearch,
@@ -2130,7 +2108,6 @@ export default inject(
       setClearSearch,
 
       setMainButtonMobileVisible,
-      setMainButtonVisible,
 
       contactsViewAs,
       contactsTab,

@@ -66,12 +66,15 @@ const splitItems = (items: ModelItem[]) => {
   return { actionOptions, buttonOptions, hasUpload: buttonOptions.length > 0 };
 };
 
-type CreateButtonMobileProps = {
+type CreateButtonMobileViewProps = {
   visible: boolean;
   mainButtonProps?: MainButtonProps;
 };
 
-const CreateButtonMobile = ({ visible, mainButtonProps }: CreateButtonMobileProps) => {
+const CreateButtonMobileView = ({
+  visible,
+  mainButtonProps,
+}: CreateButtonMobileViewProps) => {
   if (!visible || !mainButtonProps) return null;
 
   const { text, isDropdown, model, onAction } = mainButtonProps;
@@ -92,4 +95,4 @@ const CreateButtonMobile = ({ visible, mainButtonProps }: CreateButtonMobileProp
   );
 };
 
-export default CreateButtonMobile;
+export default CreateButtonMobileView;

@@ -47,6 +47,7 @@ export type GetSectionCreateButtonParams = {
 
   isContactsPage: boolean;
   isContactsGroupsPage: boolean;
+  isContactsGuestsPage: boolean;
   isRoomsFolder: boolean;
   isAIAgentsFolder: boolean;
   isFormsSection: boolean;
@@ -71,6 +72,7 @@ export const getSectionCreateButton = ({
   t,
   isContactsPage,
   isContactsGroupsPage,
+  isContactsGuestsPage,
   isRoomsFolder,
   isAIAgentsFolder,
   isFormsSection,
@@ -130,6 +132,8 @@ export const getSectionCreateButton = ({
   }
 
   if (isContactsPage) {
+    if (isContactsGuestsPage) return HIDDEN;
+
     const model = getContactsModel(t);
     if (!model || model.length === 0) return HIDDEN;
 
@@ -137,7 +141,7 @@ export const getSectionCreateButton = ({
       return {
         showMainButton: true,
         mainButtonProps: {
-          text: t("Common:Invite"),
+          text: t("Common:New"),
           isDropdown: false,
           model: [],
           onAction: () => createGroup(selectedFolderId, "sidebar"),

@@ -77,7 +77,7 @@ import {
   showInfoPanel,
   hideInfoPanel as hideInfoPanelEvent,
 } from "SRC_DIR/helpers/info-panel";
-import { getContactsView } from "SRC_DIR/helpers/contacts";
+import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import {
   getLifetimePeriodTranslation,
@@ -151,6 +151,8 @@ const SectionHeaderContent = (props) => {
     setGroupsSelected,
     isRoomAdmin,
     isEmptyPage,
+    isGroupsEmpty,
+    groupsIsFiltered,
 
     isLoading,
 
@@ -498,11 +500,14 @@ const SectionHeaderContent = (props) => {
   );
 
   const onPlusClick = React.useCallback(() => {
+    if (isContactsGroupsPage) return createGroup();
     if (isAIAgentsFolder) return onCreateAgent();
     return onCreateRoom();
-  }, [isAIAgentsFolder, onCreateAgent, onCreateRoom]);
+  }, [isContactsGroupsPage, isAIAgentsFolder, onCreateAgent, onCreateRoom]);
 
-  const isPlusButtonVisible = isEmptyPage && !isContactsPage;
+  const isPlusButtonVisible =
+    (isEmptyPage && !isContactsPage) ||
+    (isContactsGroupsPage && isGroupsEmpty && !groupsIsFiltered);
 
   const onNavigationButtonClick = React.useCallback(() => {
     onCreateAndCopySharedLink(selectedFolder, t);
@@ -1273,6 +1278,8 @@ export default inject(
       setSelected: setGroupsSelected,
       setBufferSelection: setGroupsBufferSelection,
       insideGroupTempTitle,
+      groups,
+      groupsIsFiltered,
     } = groupsStore;
 
     const {
@@ -1420,6 +1427,8 @@ export default inject(
       isCollaborator,
       isVisitor,
       isEmptyPage,
+      isGroupsEmpty: groups?.length === 0,
+      groupsIsFiltered,
       categoryType,
       theme,
       isFrame,

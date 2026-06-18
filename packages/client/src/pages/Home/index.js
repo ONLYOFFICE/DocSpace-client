@@ -235,7 +235,7 @@ const PureHome = (props) => {
     currentClientView === "users" || currentClientView === "groups";
   const isProfile = currentClientView === "profile";
   const isContactsEmptyView =
-    currentClientView === "groups" ? isEmptyGroups : isUsersEmptyView;
+    contactsTab === "groups" ? isEmptyGroups : isUsersEmptyView;
   const isChat = currentClientView === "chat";
 
   // Quick-actions banner (ported from the SDK): create tiles above the
@@ -531,7 +531,8 @@ const PureHome = (props) => {
   const isValidContactsContent = !isContactsEmptyView && isContactsPage;
 
   const shouldRenderSectionFilter =
-    (isValidMainContent || isValidContactsContent) && !isSettingsPage;
+    (isContactsPage ? isValidContactsContent : isValidMainContent) &&
+    !isSettingsPage;
 
   React.useEffect(() => {
     if (isChangePageRequestRunning) return;

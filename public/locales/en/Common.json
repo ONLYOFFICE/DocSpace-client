@@ -423,7 +423,7 @@
   "CurrencyPerMonth": "{{currency}}/month",
   "CurrentBalance": "Current balance: <1>{{balance}}</1>",
   "CurrentDate": "Current Date",
-  "CurrentMonthToDateSpendForMonth": "<1>Current month-to-date spend</1> {{spend}} <2>for {{month}}</2>",
+  "CurrentMonthToDateSpend": "Current month-to-date spend",
   "CurrentPaymentMonth": "Current payment: {{price}}/month ({{size}})",
   "CurrentSubscription": "Current subscription",
   "Custom": "Custom",

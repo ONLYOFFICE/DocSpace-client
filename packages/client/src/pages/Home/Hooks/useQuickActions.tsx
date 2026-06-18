@@ -43,10 +43,14 @@ import {
   CreateDocumentIcon,
   CreatePresentationIcon,
   CreateSpreadsheetIcon,
-  CreateCustomRoomIllustrationIcon,
   UseRoomTemplateIllustrationIcon,
+  QuickVdrRoomIcon,
+  QuickCollaborationRoomIcon,
+  QuickPublicRoomIcon,
+  QuickCustomRoomIcon,
 } from "@docspace/ui-kit/components/quick-actions/icons";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { RoomsType } from "@docspace/ui-kit/enums";
 import { Events, RoomSearchArea } from "@docspace/shared/enums";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { getConstName } from "@docspace/shared/constants/consts";
@@ -80,12 +84,20 @@ const dispatchCreate = (
   window.dispatchEvent(event);
 };
 
-const dispatchCreateRoom = (parentId: number | string | null) => {
-  window.dispatchEvent(
-    new CustomEvent(Events.ROOM_CREATE, {
-      detail: { parentId, context: "sidebar" },
-    }),
-  );
+// Opens the create-room dialog. When `startRoomType` is passed, GlobalEvents'
+// onCreateRoom reads it off `event.payload.startRoomType` to open the dialog on
+// that preset type and lock the type chooser (see CreateRoomEvent). Without it,
+// the dialog opens on its default type chooser.
+const dispatchCreateRoom = (
+  parentId: number | string | null,
+  startRoomType?: RoomsType,
+) => {
+  const event = new CustomEvent(Events.ROOM_CREATE, {
+    detail: { parentId, context: "sidebar" },
+  });
+  // @ts-expect-error custom payload consumed by GlobalEvents/onCreateRoom
+  event.payload = { startRoomType };
+  window.dispatchEvent(event);
 };
 
 // Opens the Templates list — the Rooms list scoped to the Templates search
@@ -118,7 +130,7 @@ export type QuickActionsResult = {
 export const useQuickActions = (
   props: UseQuickActionsProps,
 ): QuickActionsResult => {
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Files", "Common"]);
 
   const {
     currentFolderId,
@@ -163,16 +175,38 @@ export const useQuickActions = (
   const roomItems = React.useMemo<QuickActionItem[]>(
     () => [
       {
+        id: "quick-vdr-room",
+        icon: <QuickVdrRoomIcon />,
+        label: t("Common:VirtualDataRoom"),
+        onClick: () =>
+          dispatchCreateRoom(currentFolderId, RoomsType.VirtualDataRoom),
+      },
+      {
+        id: "quick-collaboration-room",
+        icon: <QuickCollaborationRoomIcon />,
+        label: t("Common:CollaborationRoomTitle"),
+        onClick: () =>
+          dispatchCreateRoom(currentFolderId, RoomsType.EditingRoom),
+      },
+      {
+        id: "quick-public-room",
+        icon: <QuickPublicRoomIcon />,
+        label: t("Common:PublicRoom"),
+        onClick: () =>
+          dispatchCreateRoom(currentFolderId, RoomsType.PublicRoom),
+      },
+      {
         id: "quick-custom-room",
-        icon: <CreateCustomRoomIllustrationIcon />,
-        label: t("Common:NewRoom"),
-        onClick: () => dispatchCreateRoom(currentFolderId),
+        icon: <QuickCustomRoomIcon />,
+        label: t("Common:CustomRoomTitle"),
+        onClick: () =>
+          dispatchCreateRoom(currentFolderId, RoomsType.CustomRoom),
       },
       // Opens the Templates list (sidebar Rooms → Templates).
       {
         id: "quick-use-template",
         icon: <UseRoomTemplateIllustrationIcon />,
-        label: t("Common:UseTemplate"),
+        label: t("Files:RoomTemplate"),
         onClick: () => goTemplates(userId),
       },
     ],
@@ -191,3 +225,4 @@ export const useQuickActions = (
 };
 
 export default useQuickActions;
+

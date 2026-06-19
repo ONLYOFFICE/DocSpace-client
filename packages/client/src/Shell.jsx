@@ -52,6 +52,10 @@ import SocketHelper, {
   SocketEvents,
   SocketCommands,
 } from "@docspace/ui-kit/utils/socket";
+import {
+  PORTAL_BASE_THEME_ID,
+  PORTAL_DARK_THEME_ID,
+} from "@docspace/ui-kit/ai-agent/providers/themes";
 import { Portal } from "@docspace/ui-kit/components/portal";
 import { SnackBar } from "@docspace/ui-kit/components/snackbar";
 import { Toast, toastr, ToastType } from "@docspace/ui-kit/components/toast";
@@ -599,7 +603,7 @@ const Shell = ({ page = "home", ...rest }) => {
       {isLoaded ? (
         <AiAgentProviders
           locale={language}
-          theme={isBase ? "theme-portal-base" : "theme-portal-dark"}
+          theme={isBase ? PORTAL_BASE_THEME_ID : PORTAL_DARK_THEME_ID}
           isStandalone={standalone}
           entityId={agentEntityId}
           getAgentRoomId={getAgentRoomId}
@@ -777,4 +781,3 @@ const Root = () => (
 );
 
 export default Root;
-

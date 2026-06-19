@@ -30,72 +30,32 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { useTheme } from "@docspace/ui-kit";
-import AiAgentProviders, {
-  type SaveAsFileHandler,
-} from "@docspace/ui-kit/ai-agent/providers";
 import {
   PORTAL_BASE_THEME_ID,
   PORTAL_DARK_THEME_ID,
 } from "@docspace/ui-kit/ai-agent/providers/themes";
-
-import { useAiChatComposerActions } from "@/components/ai-chat-composer";
-
-import DocSpaceFilesSaveDialog from "./docspace-files-save-dialog";
+import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
 
 type PersonalFilesAiAgentProvidersProps = {
   myFolderId?: number | string;
   children: React.ReactNode;
 };
 
+// Host glue for the SDK personal-files surface: derives the chat theme from the
+// portal theme and the locale from i18n, then delegates to the shared
+// AiAgentProviders (which owns the attach/save/upload behavior).
 const PersonalFilesAiAgentProviders = ({
   children,
 }: PersonalFilesAiAgentProvidersProps) => {
   const { i18n } = useTranslation(["Common"]);
   const { isBase } = useTheme();
 
-  const { composerActions, attachDialogs } = useAiChatComposerActions();
-
-  // Pending message-save request: holds the markdown content, default name, and
-  // the resolver for the library's awaiting saveAsFile promise. Set when the
-  // user clicks a message's Save button, cleared once they save or cancel.
-  const [saveRequest, setSaveRequest] = React.useState<{
-    content: string;
-    defaultName: string;
-    resolve: () => void;
-  } | null>(null);
-
-  const handleSaveAsFile = React.useCallback<SaveAsFileHandler>(
-    (content, defaultName) =>
-      new Promise<void>((resolve) => {
-        setSaveRequest({ content, defaultName, resolve });
-      }),
-    [],
-  );
-
-  const finishSave = React.useCallback(() => {
-    setSaveRequest((prev) => {
-      prev?.resolve();
-      return null;
-    });
-  }, []);
-
   return (
     <AiAgentProviders
       theme={isBase ? PORTAL_BASE_THEME_ID : PORTAL_DARK_THEME_ID}
       locale={i18n.language}
-      composerActions={composerActions}
-      onSaveAsFile={handleSaveAsFile}
-      // entityId={myFolderId !== undefined ? String(myFolderId) : undefined}
     >
       {children}
-      {attachDialogs}
-      {saveRequest ? (
-        <DocSpaceFilesSaveDialog
-          content={saveRequest.content}
-          defaultName={saveRequest.defaultName}
-          onFinish={finishSave}
-        />
-      ) : null}
     </AiAgentProviders>
   );
 };

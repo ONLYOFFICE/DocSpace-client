@@ -39,8 +39,6 @@ import {
   PORTAL_DARK_THEME_ID,
 } from "@docspace/ui-kit/ai-agent/providers/themes";
 
-import { useAiChatComposerActions } from "@/components/ai-chat-composer";
-
 import { useAgentsAIConfigStore, useAiRoomStore } from "../../_store";
 import { useAgentsCommonData } from "../../_store/AgentsCommonDataContext";
 import useOpenResultFile from "../../_hooks/useOpenResultFile";
@@ -81,14 +79,14 @@ const ProfilesBridge = () => {
   return null;
 };
 
-const AiAgentsAiChatProviders = ({ children }: AiAgentsAiChatProvidersProps) => {
+const AiAgentsAiChatProviders = ({
+  children,
+}: AiAgentsAiChatProvidersProps) => {
   const { i18n } = useTranslation(["Common"]);
   const { isBase } = useTheme();
   const aiRoomStore = useAiRoomStore();
   const { portalSettings } = useAgentsCommonData();
   const openResultFile = useOpenResultFile();
-
-  const { composerActions, attachDialogs } = useAiChatComposerActions();
 
   const params = useParams();
   const rawAgentId = params?.agentId;
@@ -120,11 +118,9 @@ const AiAgentsAiChatProviders = ({ children }: AiAgentsAiChatProvidersProps) => 
       getAgentRoomId={getAgentRoomId}
       openResultFile={openResultFile}
       closeEditorPanel={closeEditorPanel}
-      composerActions={composerActions}
     >
       <ProfilesBridge />
       {children}
-      {attachDialogs}
     </AiAgentProviders>
   );
 };

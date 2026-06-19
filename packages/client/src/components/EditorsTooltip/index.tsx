@@ -101,7 +101,7 @@ const EditorsTooltip = ({ item, currentUserId }: EditorsTooltipProps) => {
       >
         <Scrollbar autoHide={false}>
           <div className={styles.tooltipHeader}>
-            {t("FileCurrentlyEditedBy")}
+            {t("Common:FileCurrentlyEditedBy")}
           </div>
           <EditorsList editors={editors} avatarSize={AvatarSize.extraSmall} />
         </Scrollbar>

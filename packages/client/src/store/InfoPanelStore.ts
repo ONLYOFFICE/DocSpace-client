@@ -373,8 +373,10 @@ class InfoPanelStore {
 
   getIsRooms = () => {
     const pathname = window.location.pathname.toLowerCase();
+    const isForms = pathname.startsWith("/forms");
     return (
-      pathname.indexOf("rooms") !== -1 && !(pathname.indexOf("personal") !== -1)
+      (pathname.indexOf("rooms") !== -1 || isForms) &&
+      !(pathname.indexOf("personal") !== -1)
     );
   };
 

@@ -208,6 +208,8 @@ const ModelAssignmentComponent = ({
 
   const shouldLimitDropDownHeight = (defaultProviderModels?.length ?? 0) > 5;
 
+  const isModelSelectionLocked = (defaultProviderModels?.length ?? 0) <= 1;
+
   return (
     <div className={styles.aiProvider}>
       <div
@@ -242,6 +244,8 @@ const ModelAssignmentComponent = ({
               advancedOptionsCount={defaultProviderModels?.length ?? 0}
               selectedOption={selectedModelOption}
               displayArrow
+              withoutArrow={isModelSelectionLocked}
+              disableItemClick={isModelSelectionLocked}
               scaledOptions
               dataTestId="default-model-combobox"
               dropDownTestId="default-model-dropdown"
@@ -261,6 +265,8 @@ const ModelAssignmentComponent = ({
               options={getModelOptions()}
               selectedOption={selectedModelOption}
               displayArrow
+              withoutArrow={isModelSelectionLocked}
+              disableItemClick={isModelSelectionLocked}
               onSelect={onSelectModel}
               displaySelectedOption
               dataTestId="default-model-combobox"

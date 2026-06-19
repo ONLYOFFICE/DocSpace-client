@@ -84,6 +84,7 @@ const EmptyViewContainer = observer((props: EmptyViewContainerProps) => {
     simpleTopUpDialogVisible,
     onCloseSimpleTopUpDialog,
     onAIActivated,
+    isActivating,
   } = useOptions(props, t);
   const emptyViewOptions = useEmptyView(props, t);
 
@@ -131,6 +132,7 @@ const EmptyViewContainer = observer((props: EmptyViewContainerProps) => {
         onClose={onCloseAIFeaturesDialog}
         onActivate={onDialogActivate}
         isCardLinkedToPortal={isCardLinkedToPortal ?? false}
+        isActivating={isActivating}
       />
       <ClientSimpleTopUpDialog
         visible={simpleTopUpDialogVisible}

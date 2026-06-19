@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useMemo, useCallback, useState } from "react";
+import { useMemo, useCallback } from "react";
 import { useNavigate, LinkProps } from "react-router";
 import { isMobile } from "react-device-detect";
 
@@ -54,6 +54,7 @@ import { CategoryType } from "@docspace/shared/constants";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
+import { useAIActivation } from "SRC_DIR/hooks/useAIActivation";
 
 import {
   getDescription,
@@ -266,58 +267,26 @@ export const useOptions = (
     return navigate("/portal-settings/ai-settings/providers");
   }, []);
 
-  const [aiFeaturesDialogVisible, setAiFeaturesDialogVisible] = useState(false);
-  const [simpleTopUpDialogVisible, setSimpleTopUpDialogVisible] =
-    useState(false);
-
-  const onTopUpAndActivateAI = useCallback(
-    () => setSimpleTopUpDialogVisible(true),
-    [],
-  );
-
-  const onAIActivated = useCallback(async () => {
-    await Promise.all([
-      getAIConfig?.(),
-      refreshCurrentFolder?.(),
-      refreshPaymentInfo?.(),
-    ]);
-  }, [getAIConfig, refreshCurrentFolder, refreshPaymentInfo]);
-
-  const onActivateAI = useCallback(async () => {
-    await enableAIService?.(onAIActivated);
-    const event = new CustomEvent(Events.AGENT_CREATE, {
-      detail: { parentId: selectedFolder?.id, context: "empty_state" },
-    });
-    window.dispatchEvent(event);
-  }, [enableAIService, onAIActivated, selectedFolder?.id]);
-
-  const onShowAIBenefits = useCallback(
-    () => setAiFeaturesDialogVisible(true),
-    [],
-  );
-
-  const onCloseAIFeaturesDialog = useCallback(
-    () => setAiFeaturesDialogVisible(false),
-    [],
-  );
-
-  const onDialogActivate = useCallback(async () => {
-    setAiFeaturesDialogVisible(false);
-    if (isCardLinkedToPortal) {
-      await enableAIService?.(onAIActivated);
-      const event = new CustomEvent(Events.AGENT_CREATE, {
-        detail: { parentId: selectedFolder?.id, context: "empty_state" },
-      });
-      window.dispatchEvent(event);
-    } else {
-      setSimpleTopUpDialogVisible(true);
-    }
-  }, [
-    isCardLinkedToPortal,
-    enableAIService,
+  const {
+    onActivateAI,
+    onTopUpAndActivateAI,
+    onShowAIBenefits,
+    onDialogActivate,
     onAIActivated,
-    selectedFolder?.id,
-  ]);
+    isActivating,
+    aiFeaturesDialogVisible,
+    onCloseAIFeaturesDialog,
+    simpleTopUpDialogVisible,
+    onCloseSimpleTopUpDialog,
+  } = useAIActivation({
+    enableAIService,
+    getAIConfig,
+    refreshCurrentFolder,
+    refreshPaymentInfo,
+    isCardLinkedToPortal,
+    parentId: selectedFolder?.id,
+    context: "empty_state",
+  });
 
   const onGoToPersonal = useCallback((): LinkProps => {
     const newFilter = FilesFilter.getDefault();
@@ -518,11 +487,6 @@ export const useOptions = (
     ],
   );
 
-  const onCloseSimpleTopUpDialog = useCallback(
-    () => setSimpleTopUpDialogVisible(false),
-    [],
-  );
-
   return {
     options,
     aiFeaturesDialogVisible,
@@ -531,6 +495,7 @@ export const useOptions = (
     simpleTopUpDialogVisible,
     onCloseSimpleTopUpDialog,
     onAIActivated,
+    isActivating,
   };
 };
 

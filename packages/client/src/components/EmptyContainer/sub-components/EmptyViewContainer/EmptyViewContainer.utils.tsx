@@ -272,7 +272,7 @@ const getAIAgentsAIDisabledDescription = (
       );
     })
     .with([true, false], () =>
-      t("EmptyView:EmptyAIAgentsAIDisabledDescription", {
+      t("Common:EmptyAIAgentsAIDisabledDescription", {
         productName: getBrandName("ProductName"),
         aiAgents: t("Common:AIAgents"),
       }),
@@ -280,12 +280,12 @@ const getAIAgentsAIDisabledDescription = (
     .otherwise(() => (
       <>
         <Text as="span">
-          {t("EmptyView:EmptyAIAgentsAIDisabledDescriptionLine1", {
+          {t("Common:EmptyAIAgentsAIDisabledDescriptionLine1", {
             aiAgents: t("Common:AIAgents"),
           })}
         </Text>
         <Text as="span" style={{ display: "block", marginTop: "8px" }}>
-          {t("EmptyView:EmptyAIAgentsAIDisabledDescriptionLine2", {
+          {t("Common:EmptyAIAgentsAIDisabledDescriptionLine2", {
             productName: getBrandName("ProductName"),
           })}
         </Text>

@@ -777,10 +777,10 @@ const SectionHeaderContent = (props) => {
 
     if (isSettingsPage) return t("Common:Settings");
 
-    // The "Forms" section reuses the Rooms folder, so the selected folder title
-    // would otherwise read "Rooms"; force the section name instead.
     if (getCategoryType(location) === CategoryType.Forms)
-      return t("Common:Forms");
+      return selectedFolder?.rootFolderType === FolderType.RoomTemplates
+        ? t("Common:Templates")
+        : t("Common:Forms");
 
     if (isContactsPage) {
       switch (contactsTab) {
@@ -812,6 +812,7 @@ const SectionHeaderContent = (props) => {
     currentGroupName,
     title,
     location,
+    selectedFolder?.rootFolderType,
   ]);
 
   const contextMenuHeader = React.useMemo(() => {

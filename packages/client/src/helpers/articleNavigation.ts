@@ -173,12 +173,14 @@ export const getClientActiveId = (
   pathname: string,
   ids: FolderIds,
   search: string = typeof window !== "undefined" ? window.location.search : "",
+  isTemplatesContext = false,
 ): string | undefined => {
   const match = (folderId?: number | null) =>
     folderId != null ? String(folderId) : undefined;
 
-  const isTemplates = new URLSearchParams(search).get("searchArea") ===
-    RoomSearchArea.Templates;
+  const isTemplates =
+    isTemplatesContext ||
+    new URLSearchParams(search).get("searchArea") === RoomSearchArea.Templates;
 
   if (pathname.startsWith("/dashboard")) return "dashboard";
   // Agent-scoped sections highlight their own sidebar sub-items (checked
@@ -191,6 +193,7 @@ export const getClientActiveId = (
     if (pathname.includes("/recent")) return "forms-recent";
     if (pathname.includes("/favorite")) return "forms-favorites";
     if (pathname.includes("/trash")) return "forms-trash";
+    if (isTemplates) return "forms-templates";
     return "forms";
   }
   if (pathname.includes("/ai-agents")) return match(ids.aiAgentsFolderId);

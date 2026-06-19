@@ -3613,10 +3613,8 @@ class ContextOptionsStore {
       event.title = item.title;
     }
 
-    // In the "Forms" section only Form Filling Rooms can be created, so the
-    // dialog opens straight into the FFR form (skipping the type chooser).
     if (!fromItem && window.location.pathname.startsWith("/forms")) {
-      event.payload = { startRoomType: RoomsType.FormRoom };
+      event.payload = { isFormsCreate: true };
     }
 
     window.dispatchEvent(event);

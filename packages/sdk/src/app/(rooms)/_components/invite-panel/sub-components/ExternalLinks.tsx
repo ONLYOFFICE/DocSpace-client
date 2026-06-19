@@ -330,7 +330,7 @@ const ExternalLinks: React.FC<ExternalLinksProps> = ({
                       iconNode={<ButtonAlertIcon />}
                       tooltipContent={
                         <>
-                          <Text>{t("LinkSettingsUsersLimitToast")}</Text>
+                          <Text>{t("Common:LinkSettingsUsersLimitToast")}</Text>
                           <Text>
                             {t("Common:LinkSettingsUsersLimitToastDescription")}
                           </Text>

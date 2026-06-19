@@ -51,6 +51,7 @@ import { useLocation } from "react-router";
 
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import Navigation from "@docspace/ui-kit/components/navigation";
+import { AiChatTrigger } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import {
@@ -286,6 +287,12 @@ const SectionHeaderContent = (props) => {
   });
 
   const isSettingsPage = location.pathname.includes("/settings");
+  const isChat = currentClientView === "chat";
+
+  // Mirror Home's gating: the AI chat trigger appears only on file/room/
+  // document views, not on contacts, profile, settings, or the chat view.
+  const isAiChatAvailable =
+    !isContactsPage && !isProfile && !isSettingsPage && !isChat;
 
   const onFileChange = React.useCallback(
     async (e) => {
@@ -1090,6 +1097,7 @@ const SectionHeaderContent = (props) => {
                   className={styles.analyzeResponsesButton}
                 />
               }
+              aiChatButton={isAiChatAvailable ? <AiChatTrigger /> : undefined}
             />
             {showSignInButton ? (
               <Button

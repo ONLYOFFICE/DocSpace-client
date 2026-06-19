@@ -97,7 +97,7 @@ export const makeFreeRole = <T extends InviteItemBase>(
 
   item.access = (freeRole as { access: number }).access;
   item.warning = item.isGroup
-    ? t("GroupMaxAvailableRoleWarning", {
+    ? t("Common:GroupMaxAvailableRoleWarning", {
         roleName: (freeRole as { label: string }).label,
       })
     : t("Common:UserMaxAvailableRoleWarning", {
@@ -115,10 +115,10 @@ export const makeViewerRole = <T extends InviteItemBase>(
 
   item.warning =
     item.access === ShareAccessRights.RoomManager
-      ? t("UserAgentMaxAvailableRoleWarning", {
+      ? t("Common:UserAgentMaxAvailableRoleWarning", {
           productName: getBrandName("ProductName"),
         })
-      : t("GuestAgentMaxAvailableRoleWarning", {
+      : t("Common:GuestAgentMaxAvailableRoleWarning", {
           productName: getBrandName("ProductName"),
         });
   item.access = (viewerRole as { access: number }).access;

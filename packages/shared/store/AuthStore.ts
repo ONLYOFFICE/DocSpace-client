@@ -276,6 +276,8 @@ class AuthStore {
       refresh = true;
     }
     const user = this.userStore?.user?.isVisitor;
+    const isAdmin =
+      this.userStore?.user?.isAdmin || this.userStore?.user?.isOwner;
 
     const request = [];
 
@@ -283,6 +285,9 @@ class AuthStore {
 
     if (!user) {
       request.push(this.currentQuotaStore?.fetchPortalQuota(refresh));
+    }
+
+    if (isAdmin) {
       request.push(this.currentTariffStatusStore?.fetchPayerInfo(refresh));
     }
 

@@ -215,11 +215,14 @@ const getAIAgentsAIDisabledTitle = (
       }),
     )
     .with([false, true], () => t("Common:EmptyAIAgentsNotActiveYetTitle"))
-    .otherwise(() =>
+    // standalone user
+    .with([true, false], () =>
       t("EmptyView:EmptyAIAgentsAIDisabledUserTitle", {
         aiAgents: t("Common:AIAgents"),
       }),
-    );
+    )
+    // saas user
+    .otherwise(() => t("Common:AIFeaturesNotActive"));
 };
 
 const getAIAgentsAIDisabledDescription = (
@@ -277,20 +280,11 @@ const getAIAgentsAIDisabledDescription = (
         aiAgents: t("Common:AIAgents"),
       }),
     )
-    .otherwise(() => (
-      <>
-        <Text as="span">
-          {t("Common:EmptyAIAgentsAIDisabledDescriptionLine1", {
-            aiAgents: t("Common:AIAgents"),
-          })}
-        </Text>
-        <Text as="span" style={{ display: "block", marginTop: "8px" }}>
-          {t("Common:EmptyAIAgentsAIDisabledDescriptionLine2", {
-            productName: getBrandName("ProductName"),
-          })}
-        </Text>
-      </>
-    ));
+    .otherwise(() =>
+      t("Common:EmptyAIAgentsAIDisabledContactAdminDescription", {
+        productName: getBrandName("ProductName"),
+      }),
+    );
 };
 
 const getAIAgentsAIEnabledDescription = (

@@ -33,9 +33,16 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+@use "@docspace/ui-kit/styles/mixins";
+
 .createButtonMobile {
   position: fixed;
   z-index: 200;
   inset-inline-end: 24px;
   bottom: 24px;
+
+  @include mixins.mobile {
+    inset-inline-end: 16px;
+    bottom: 16px;
+  }
 }

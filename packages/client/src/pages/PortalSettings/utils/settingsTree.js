@@ -520,6 +520,13 @@ export const settingsTree = [
         isCategory: true,
       },
       {
+        id: "portal-settings_catalog-ai-settings-model-assignment",
+        key: "7-5",
+        link: "model-assignment",
+        tKey: "AISettings",
+        isCategory: true,
+      },
+      {
         id: "portal-settings_catalog-ai-settings-servers",
         key: "7-2",
         link: "servers",

@@ -62,7 +62,6 @@ import { DeleteAIProviderDialog } from "./dialogs/delete";
 import { AiProviderTile } from "./Tile";
 import { ProvidersLoader } from "./ProvidersLoader";
 import { StandaloneDefaultProvider } from "./StandaloneDefaultProvider";
-import { SaasDefaultProvider } from "./SaasDefaultProvider";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 type TDeleteDialogData =
@@ -263,7 +262,7 @@ const StandaloneAIProviderComponent = ({
   );
 };
 
-const StandaloneAIProvider = inject(
+export const AIProvider = inject(
   ({ aiSettingsStore, settingsStore }: TStore) => {
     return {
       aiProviders: aiSettingsStore.aiProviders,
@@ -276,44 +275,5 @@ const StandaloneAIProvider = inject(
     };
   },
 )(observer(StandaloneAIProviderComponent));
-
-
-type SaasAIProviderProps = {
-  aiProvidersInitied?: AISettingsStore["aiProvidersInitied"];
-  aiConfig?: SettingsStore["aiConfig"];
-};
-
-const SaasAIProviderComponent = ({
-  aiProvidersInitied,
-  aiConfig,
-}: SaasAIProviderProps) => {
-  if (!aiProvidersInitied) return <ProvidersLoader />;
-
-  return (
-    <div className={styles.aiProvider}>
-      <SaasDefaultProvider aiConfig={aiConfig} />
-    </div>
-  );
-};
-
-const SaasAIProvider = inject(({ aiSettingsStore, settingsStore }: TStore) => {
-  return {
-    aiProvidersInitied: aiSettingsStore.aiProvidersInitied,
-    aiConfig: settingsStore.aiConfig,
-  };
-})(observer(SaasAIProviderComponent));
-
-type AIProviderProps = {
-  standalone?: SettingsStore["standalone"];
-};
-
-const AIProviderComponent = ({ standalone }: AIProviderProps) =>
-  standalone ? <StandaloneAIProvider /> : <SaasAIProvider />;
-
-export const AIProvider = inject(({ settingsStore }: TStore) => {
-  return {
-    standalone: settingsStore.standalone,
-  };
-})(observer(AIProviderComponent));
 
 export { ProvidersLoader };

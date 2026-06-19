@@ -53,6 +53,7 @@ import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import PaymentStore from "SRC_DIR/store/PaymentStore";
 
 import { AIProvider, ProvidersLoader } from "./providers";
+import { ModelAssignment } from "./providers/ModelAssignment";
 import { MCPServers, ServersLoader } from "./servers";
 import { Search, SearchLoader } from "./search";
 import WebSearch from "./search/WebSearch";
@@ -71,6 +72,8 @@ const detectCurrentTabId = () => {
 
   if (path.includes("providers")) return "providers";
 
+  if (path.includes("model-assignment")) return "model-assignment";
+
   if (path.includes("servers")) return "servers";
 
   if (path.includes("search")) return "search";
@@ -83,6 +86,7 @@ const detectCurrentTabId = () => {
 const loaders: Record<string, React.ReactNode> = {
   models: <RectangleSkeleton className={styles.tabsLoader} />,
   providers: <ProvidersLoader />,
+  "model-assignment": <ProvidersLoader />,
   servers: <ServersLoader />,
   search: <SearchLoader />,
   knowledge: <KnowledgeLoader />,
@@ -163,6 +167,8 @@ const AiSettings = ({
         ? t("Common:AIModels")
         : currentTabId === "providers"
           ? t("Common:AIProvider")
+          : currentTabId === "model-assignment"
+            ? t("Common:ModelAssignment")
           : currentTabId === "search"
             ? t("Common:WebSearchAI")
             : currentTabId === "knowledge"
@@ -187,12 +193,19 @@ const AiSettings = ({
       content: <ModelSettingsTable />,
       onClick: initAiModels,
     },
-    {
-      id: "providers",
-      name: t("Common:AIProvider"),
-      content: <AIProvider />,
-      onClick: initAIProviders,
-    },
+    standalone
+      ? {
+          id: "providers",
+          name: t("Common:AIProvider"),
+          content: <AIProvider />,
+          onClick: initAIProviders,
+        }
+      : {
+          id: "model-assignment",
+          name: t("Common:ModelAssignment"),
+          content: <ModelAssignment />,
+          onClick: initAIProviders,
+        },
     ...serversData,
     {
       id: "search",

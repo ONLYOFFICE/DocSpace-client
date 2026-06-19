@@ -52,6 +52,7 @@ const InfoPanelBodyContent: React.FC<InfoPanelBodyContentProps> = ({
     fileView,
     getIsFiles,
     getIsRooms,
+    getIsForms,
     maxImageUploadSize,
     editRoomDialogProps,
     createRoomDialogProps,
@@ -79,6 +80,7 @@ const InfoPanelBodyContent: React.FC<InfoPanelBodyContentProps> = ({
       fileView={fileView}
       getIsFiles={getIsFiles}
       getIsRooms={getIsRooms}
+      getIsForms={getIsForms}
       maxImageUploadSize={maxImageUploadSize}
       editRoomDialogProps={editRoomDialogProps}
       createRoomDialogProps={createRoomDialogProps}
@@ -122,6 +124,7 @@ export default inject(
 
       getIsFiles,
       getIsRooms,
+      getIsForms,
       getIsAIAgent,
       getIsTrash,
     } = infoPanelStore;
@@ -154,6 +157,7 @@ export default inject(
       fileView,
       getIsFiles,
       getIsRooms,
+      getIsForms,
       getIsAIAgent,
       getIsTrash,
 

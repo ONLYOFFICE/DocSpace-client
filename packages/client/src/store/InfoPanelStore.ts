@@ -348,16 +348,22 @@ class InfoPanelStore {
     const isAIAgent = this.getIsAIAgent();
     const isFiles = this.getIsFiles();
     const isRooms = this.getIsRooms();
+    const isForms = this.getIsForms();
     const isAccounts =
       this.peopleStore.usersStore.contactsTab !== false ||
       getContactsView(window.location) !== false;
 
-    return isRooms || isFiles || isAccounts || isAIAgent;
+    return isRooms || isFiles || isForms || isAccounts || isAIAgent;
   };
 
   getIsAIAgent = () => {
     const pathname = window.location.pathname.toLowerCase();
     return pathname.indexOf("ai-agent") !== -1;
+  };
+
+  getIsForms = () => {
+    const pathname = window.location.pathname.toLowerCase();
+    return pathname.indexOf("forms") !== -1;
   };
 
   getIsFiles = () => {
@@ -373,10 +379,8 @@ class InfoPanelStore {
 
   getIsRooms = () => {
     const pathname = window.location.pathname.toLowerCase();
-    const isForms = pathname.startsWith("/forms");
     return (
-      (pathname.indexOf("rooms") !== -1 || isForms) &&
-      !(pathname.indexOf("personal") !== -1)
+      pathname.indexOf("rooms") !== -1 && !(pathname.indexOf("personal") !== -1)
     );
   };
 

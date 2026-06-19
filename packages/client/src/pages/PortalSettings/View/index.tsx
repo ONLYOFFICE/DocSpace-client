@@ -300,6 +300,7 @@ const View = ({
         }
 
         if (requestId === activeRequestIdRef.current) {
+          setCurrentView(getViewFromPathname(location.pathname));
           setIsPortalSettingsLoading(false);
           setIsLoading(false);
         }

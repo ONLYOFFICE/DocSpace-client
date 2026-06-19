@@ -1483,6 +1483,7 @@
   "PaymentsTitle": "결제",
   "PDFs": "PDFs",
   "People": "사람들",
+  "PeopleSelectorInfo": "방 관리자 또는 {{productName}} 관리자만 방 소유자가 될 수 있습니다",
   "PerBackup": "{{currency}} 1개당",
   "Permissions": "권한",
   "PerStorage": "{{currency}}당 {{amount}}/월",

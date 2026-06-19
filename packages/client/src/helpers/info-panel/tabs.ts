@@ -61,7 +61,6 @@ export type TGetAvailableInfoPanelTabsParams = {
   isRecentFolder: boolean;
   enablePlugins: boolean;
   infoPanelItemsList: TPluginItem[];
-  selectedResultFileId?: number | null;
 };
 
 export type TInfoPanelTabsResult = {
@@ -82,7 +81,6 @@ export function getAvailableInfoPanelTabs({
   isRecentFolder,
   enablePlugins,
   infoPanelItemsList,
-  selectedResultFileId,
 }: TGetAvailableInfoPanelTabsParams): TInfoPanelTabsResult {
   const detailsOnly: TInfoPanelTabsResult = {
     tabs: [InfoPanelView.infoDetails],
@@ -142,12 +140,6 @@ export function getAvailableInfoPanelTabs({
   }
 
   tabs.push(InfoPanelView.infoHistory, InfoPanelView.infoDetails);
-
-  const showAIChatTab = !isAIAgents() || !!selectedResultFileId;
-
-  if (showAIChatTab) {
-    tabs.push(InfoPanelView.infoAIChat);
-  }
 
   if (!isAIAgentsSection && enablePlugins && infoPanelItemsList.length > 0) {
     const hasRoomType = "roomType" in selection && !!selection.roomType;

@@ -55,8 +55,6 @@ export type HeaderProps = {
   enablePlugins: SettingsStore["enablePlugins"];
 
   isRecentFolder: TreeFoldersStore["isRecentFolder"];
-
-  selectedResultFileId?: AiRoomStore["selectedResultFileId"];
 };
 
 export type InfoPanelHeaderContentProps =

@@ -161,7 +161,6 @@ export default inject(
 
       enablePlugins: settingsStore.enablePlugins,
       isRecentFolder: treeFoldersStore.isRecentFolder,
-      selectedResultFileId: aiRoomStore.selectedResultFileId,
 
       maxImageUploadSize: settingsStore.maxImageUploadSize,
 

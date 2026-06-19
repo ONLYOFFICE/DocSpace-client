@@ -71,7 +71,6 @@ const InfoPanelBodyGeneral = ({
   infoPanelItemsList,
   enablePlugins,
   isRecentFolder,
-  selectedResultFileId,
 
   maxImageUploadSize,
 
@@ -125,21 +124,15 @@ const InfoPanelBodyGeneral = ({
         isRecentFolder,
         enablePlugins,
         infoPanelItemsList,
-        selectedResultFileId,
       }),
-    [
-      selection,
-      isTrash,
-      isRecentFolder,
-      enablePlugins,
-      infoPanelItemsList,
-      selectedResultFileId,
-    ],
+    [selection, isTrash, isRecentFolder, enablePlugins, infoPanelItemsList],
   );
 
   const currentView = useMemo(() => {
     const raw = useRoomsView ? roomsView : fileView;
-    return availableTabs.includes(raw) ? raw : availableTabs[0] ?? InfoPanelView.infoDetails;
+    return availableTabs.includes(raw)
+      ? raw
+      : (availableTabs[0] ?? InfoPanelView.infoDetails);
   }, [availableTabs, useRoomsView, roomsView, fileView]);
 
   const deferredCurrentView = React.useDeferredValue(currentView);
@@ -187,9 +180,7 @@ const InfoPanelBodyGeneral = ({
                 ? "members"
                 : currentView === InfoPanelView.infoHistory
                   ? "history"
-                  : currentView === InfoPanelView.infoAIChat
-                    ? "aiChat"
-                    : "details"
+                  : "details"
             }
           />
         }
@@ -203,12 +194,8 @@ const InfoPanelBodyGeneral = ({
     );
   };
 
-  const isAIChat = currentView === InfoPanelView.infoAIChat;
-
   return (
-    <div
-      className={`${commonStyles.infoPanelBody}${isAIChat ? ` ${commonStyles.aiChat}` : ""}`}
-    >
+    <div className={commonStyles.infoPanelBody}>
       {!isNoItem &&
       !Array.isArray(selection) &&
       (isUsers || isGuests || isGroups) ? (

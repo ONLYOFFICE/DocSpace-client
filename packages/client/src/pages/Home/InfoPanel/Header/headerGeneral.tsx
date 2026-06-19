@@ -62,7 +62,6 @@ const InfoPanelHeaderGeneral = ({
   enablePlugins,
 
   isRecentFolder,
-  selectedResultFileId,
 }: HeaderProps) => {
   const { t } = useTranslation(["Common", "InfoPanel"]);
 
@@ -104,7 +103,6 @@ const InfoPanelHeaderGeneral = ({
     isRecentFolder,
     enablePlugins,
     infoPanelItemsList,
-    selectedResultFileId,
   });
 
   const rawView = useRoomsView ? roomsView : fileView;
@@ -120,7 +118,6 @@ const InfoPanelHeaderGeneral = ({
       .with(InfoPanelView.infoShare, () => t("Common:Share"))
       .with(InfoPanelView.infoHistory, () => t("Common:SubmenuHistory"))
       .with(InfoPanelView.infoDetails, () => t("Common:SubmenuDetails"))
-      .with(InfoPanelView.infoAIChat, () => t("InfoPanel:SubmenuAIChat"))
       .otherwise(() => {
         const key = id.replace("info_plugin-", "");
         return (

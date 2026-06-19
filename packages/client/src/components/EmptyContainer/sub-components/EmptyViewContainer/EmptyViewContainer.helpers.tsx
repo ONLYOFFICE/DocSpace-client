@@ -282,6 +282,7 @@ export const getOptions = (
   aiReady: boolean = false,
   standalone: boolean = false,
   isPortalAdmin: boolean = false,
+  trashSection: "personal" | "rooms" | "forms" | "agents" = "personal",
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -556,16 +557,41 @@ export const getOptions = (
           key: "empty-view-goto-shared",
         },
       ])
-      .with([FolderType.TRASH, P._, P.when((item) => !item)], () => [
-        {
-          ...actions.onGoToPersonal(),
-          icon: <PersonIcon />,
-          description: t("Common:GoToSection", {
+      .with([FolderType.TRASH, P._, P.when((item) => !item)], () => {
+        const trashOrigin = {
+          rooms: {
+            link: actions.onGoToShared(),
+            icon: <FolderIcon />,
+            sectionName: t("Common:Rooms"),
+          },
+          forms: {
+            link: actions.onGoToForms(),
+            icon: <FolderIcon />,
+            sectionName: t("Common:Forms"),
+          },
+          agents: {
+            link: actions.onGoToAgents(),
+            icon: <FolderIcon />,
+            sectionName: t("Common:AIAgents"),
+          },
+          personal: {
+            link: actions.onGoToPersonal(),
+            icon: <PersonIcon />,
             sectionName: t("Common:MyDocuments"),
-          }),
-          key: "empty-view-trash-goto-personal",
-        },
-      ])
+          },
+        }[trashSection];
+
+        return [
+          {
+            ...trashOrigin.link,
+            icon: trashOrigin.icon,
+            description: t("Common:GoToSection", {
+              sectionName: trashOrigin.sectionName,
+            }),
+            key: "empty-view-trash-goto-origin",
+          },
+        ];
+      })
       .otherwise(() => []);
   }
 

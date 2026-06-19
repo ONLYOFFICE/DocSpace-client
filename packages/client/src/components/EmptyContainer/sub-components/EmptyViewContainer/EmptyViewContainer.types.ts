@@ -160,6 +160,8 @@ export type OptionActions = {
   inviteRootUser: ContactsConextOptionsStore["inviteUser"];
   onGoToPersonal: () => LinkProps;
   onGoToShared: () => LinkProps;
+  onGoToForms: () => LinkProps;
+  onGoToAgents: () => LinkProps;
   onCreateAIAgent: VoidFunction;
   onGoToServices: VoidFunction;
   onGoToAIProviderSettings: VoidFunction;

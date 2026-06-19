@@ -33,8 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useMemo, useCallback } from "react";
-import { useNavigate, LinkProps } from "react-router";
+import { useMemo, useCallback, useRef } from "react";
+import { useNavigate, useLocation, LinkProps } from "react-router";
 import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import { isMobile } from "react-device-detect";
 
@@ -219,6 +219,20 @@ export const useOptions = (
   t: TTranslation,
 ) => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const getTrashSection = () => {
+    if (pathname.includes("/ai-agents/trash")) return "agents";
+    if (pathname.includes("/forms/trash")) return "forms";
+    if (pathname.includes("/rooms/trash")) return "rooms";
+    return "personal";
+  };
+
+  const trashSectionRef = useRef<"personal" | "rooms" | "forms" | "agents">(
+    "personal",
+  );
+  if (pathname.includes("/trash")) trashSectionRef.current = getTrashSection();
+  const trashSection = trashSectionRef.current;
 
   const { useProfilesStore } = useStores();
   const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
@@ -248,6 +262,30 @@ export const useOptions = (
       state,
     };
   }, [roomsFolder?.rootFolderType, roomsFolder?.title, userId]);
+
+  const onGoToForms = useCallback((): LinkProps => {
+    const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
+    newFilter.searchArea = RoomSearchArea.Active;
+
+    return {
+      to: {
+        pathname: "/forms/filter",
+        search: newFilter.toUrlParams(userId, false),
+      },
+    };
+  }, [userId]);
+
+  const onGoToAgents = useCallback((): LinkProps => {
+    const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.AIAgents);
+    newFilter.searchArea = RoomSearchArea.AIAgents;
+
+    return {
+      to: {
+        pathname: getCategoryUrl(CategoryType.AIAgents),
+        search: newFilter.toUrlParams(userId, false),
+      },
+    };
+  }, [userId]);
 
   const onGoToServices = useCallback(() => {
     return navigate("/portal-settings/payments/services");
@@ -432,6 +470,8 @@ export const useOptions = (
           navigate,
           onGoToPersonal,
           onGoToShared,
+          onGoToForms,
+          onGoToAgents,
           onOpenAccessSettings,
           onCreateAIAgent,
           onGoToServices,
@@ -446,6 +486,7 @@ export const useOptions = (
         aiReady || hasAiProfiles,
         standalone,
         isPortalAdmin,
+        trashSection,
       ),
     [
       type,
@@ -473,6 +514,9 @@ export const useOptions = (
       navigate,
       onGoToPersonal,
       onGoToShared,
+      onGoToForms,
+      onGoToAgents,
+      trashSection,
       isVisitor,
       isFrame,
       logoText,
@@ -484,4 +528,3 @@ export const useOptions = (
 
   return options;
 };
-

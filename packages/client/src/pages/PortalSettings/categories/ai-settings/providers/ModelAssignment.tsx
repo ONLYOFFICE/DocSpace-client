@@ -206,6 +206,8 @@ const ModelAssignmentComponent = ({
   const isComboBoxLoading =
     isDefaultProviderModelsLoading || isSaveRequestRunning;
 
+  const shouldLimitDropDownHeight = (defaultProviderModels?.length ?? 0) > 5;
+
   return (
     <div className={styles.aiProvider}>
       <div
@@ -246,8 +248,8 @@ const ModelAssignmentComponent = ({
               isLoading={isComboBoxLoading}
               isDisabled={isDisabled || !defaultProviderModels}
               directionY="both"
-              dropDownMaxHeight={260}
-              isNoFixedHeightOptions
+              dropDownMaxHeight={shouldLimitDropDownHeight ? 260 : undefined}
+              isNoFixedHeightOptions={shouldLimitDropDownHeight}
               displaySelectedOption
               hideMobileView={false}
               isDefaultMode

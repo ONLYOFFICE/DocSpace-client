@@ -90,6 +90,8 @@ const useAISettings = ({
   const getAiSettingsInitialValue = React.useCallback(async () => {
     const isModels = window.location.pathname.includes("models");
     const isProviders = window.location.pathname.includes("providers");
+    const isModelAssignment =
+      window.location.pathname.includes("model-assignment");
     const isServers = window.location.pathname.includes("servers");
     const isSearch = window.location.pathname.includes("search");
     const isKnowledge = window.location.pathname.includes("knowledge");
@@ -104,7 +106,7 @@ const useAISettings = ({
     await handleServiceQuota?.(AI_ENUM);
 
     if (isModels) await initAiModels();
-    if (isProviders) await initAIProviders();
+    if (isProviders || isModelAssignment) await initAIProviders();
     if (isServers) await initMCPServers();
     if (isSearch) await initWebSearch();
     if (isKnowledge) await initKnowledge();

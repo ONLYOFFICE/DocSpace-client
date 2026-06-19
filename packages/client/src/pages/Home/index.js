@@ -41,6 +41,7 @@ import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { useAiChatPanel } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
+import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers";
 
 import {
   addTagsToRoom,
@@ -252,9 +253,9 @@ const PureHome = observer((props) => {
     contactsTab === "groups" ? isEmptyGroups : isUsersEmptyView;
   const isChat = currentClientView === "chat";
 
-  // AI chat is offered only on file/room/document views — not on contacts,
-  // profile, settings, or the embedded chat view.
-  const isAiChatAvailable = !isProfile && !isSettingsPage && !isChat;
+  // Availability is computed once by the host (Shell) and shared through
+  // AiAgentProviders' context.
+  const isAiChatAvailable = useIsAiChatAvailable();
 
   usePanelExclusivity(infoPanelStore, isAiChatAvailable);
 

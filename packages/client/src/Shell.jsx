@@ -65,6 +65,7 @@ import { updateTempContent } from "@docspace/shared/utils/common";
 import {
   AnalyticsEvents,
   DeviceType,
+  FolderType,
   IndexedDBStores,
   InfoPanelEvents,
   SearchArea,
@@ -134,6 +135,8 @@ const Shell = ({ page = "home", ...rest }) => {
     getAgentRoomId,
     openResultFile,
     closeEditorPanel,
+    currentClientView,
+    selectedFolderType,
   } = rest;
 
   useCreateFileError({
@@ -563,6 +566,25 @@ const Shell = ({ page = "home", ...rest }) => {
     );
   const location = useLocation();
 
+  // Single source of truth for AI chat availability: computed once here in the
+  // host and handed to AiAgentProviders, which shares it with descendants
+  // (Home page, section header) via context / `useIsAiChatAvailable()`. The
+  // chat is offered only on file/room/document views — never on contacts,
+  // profile, settings, the embedded chat view, or the Knowledge /
+  // ResultStorage system folders.
+  const isSettingsPage =
+    location.pathname.includes("settings") &&
+    !location.pathname.includes("settings/plugins");
+
+  const isAiChatAvailable =
+    currentClientView !== "users" &&
+    currentClientView !== "groups" &&
+    currentClientView !== "profile" &&
+    currentClientView !== "chat" &&
+    !isSettingsPage &&
+    selectedFolderType !== FolderType.Knowledge &&
+    selectedFolderType !== FolderType.ResultStorage;
+
   const withoutNavMenu =
     isEditor ||
     pagesWithoutNavMenu ||
@@ -605,6 +627,7 @@ const Shell = ({ page = "home", ...rest }) => {
           locale={language}
           theme={isBase ? PORTAL_BASE_THEME_ID : PORTAL_DARK_THEME_ID}
           isStandalone={standalone}
+          isAvailable={isAiChatAvailable}
           entityId={agentEntityId}
           getAgentRoomId={getAgentRoomId}
           openResultFile={openResultFile}
@@ -738,6 +761,8 @@ const ShellWrapper = inject(
       standalone,
       setSocialAuthWelcomeDialogVisible,
       getAIConfig,
+      currentClientView: clientLoadingStore.currentClientView,
+      selectedFolderType: selectedFolderStore.type,
       // Scope the chat to the current agent only when we're inside an AI agent
       // room (or one of its subfolders). Anywhere else — including the AI Agents
       // root listing and non-agent contexts — the chat stays unscoped

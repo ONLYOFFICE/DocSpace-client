@@ -1282,9 +1282,7 @@ class FilesStore {
       }
 
       if (this.userStore?.getEncryptionKeys) {
-        requests.push(
-          this.userStore.getEncryptionKeys().catch(() => {}),
-        );
+        requests.push(this.userStore.getEncryptionKeys().catch(() => {}));
       }
     }
     requests.push(getFilesSettings());
@@ -1889,15 +1887,12 @@ class FilesStore {
         if (data.current.private) {
           const keys = this.userStore?.encryptionKeys;
           if (!Array.isArray(keys) || keys.length === 0) {
-            toastr.warning(
-              getI18n().t("Common:EncryptionKeysNotConfigured"),
-            );
+            toastr.warning(getI18n().t("Common:EncryptionKeysNotConfigured"));
           }
 
           // The room id may differ from data.current.id when navigating into
           // a sub-folder: pathParts[1] is the room, current is the sub-folder.
-          const resolvedRoomId =
-            data.pathParts?.[1]?.id ?? data.current.id;
+          const resolvedRoomId = data.pathParts?.[1]?.id ?? data.current.id;
           // Backfill envelopes for members who registered their keypair after
           // being invited (their old files are otherwise locked out).
           this.maybeBackfillEncryptedRoom(
@@ -2092,6 +2087,7 @@ class FilesStore {
               UseChat: aiRoom.security.UseChat,
             },
             isRoom: true,
+            type: currentFolder.type,
           };
         } else if (currentFolder.roomType === RoomsType.AIRoom) {
           isChatTab = true;
@@ -2367,8 +2363,7 @@ class FilesStore {
     // type. This scoping is request-only — it is applied to a clone and never
     // stored in filterData, so the displayed filter (type chip, "clear filter"
     // state, URL) stays clean. A user-selected type takes precedence.
-    const isFormsSection =
-      window.location.pathname.startsWith("/forms");
+    const isFormsSection = window.location.pathname.startsWith("/forms");
     const sectionTypes = filterData.type
       ? null
       : getRoomsSectionTypes(isFormsSection, filterData.searchArea);
@@ -4124,11 +4119,7 @@ class FilesStore {
       })
       .catch((error) => {
         this._backfilledEncryptedRooms.delete(roomId);
-        console.error(
-          "[ENCRYPTION] Backfill failed for room",
-          roomId,
-          error,
-        );
+        console.error("[ENCRYPTION] Backfill failed for room", roomId, error);
       });
   };
 

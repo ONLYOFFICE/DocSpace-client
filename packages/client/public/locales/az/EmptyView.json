@@ -17,7 +17,6 @@
   "CreateSpreadsheetDescription": "Minimum səylə dəqiq hesablamalar aparın.",
   "CustomRoomEmptyTitle": "Şəxsi otağa xoş gəlmisiniz",
   "DefaultFolderDescription": "Faylları bura atın və ya yenilərini yaradın.",
-  "EmptyAIAgentsAIDisabledDescription": "\"{{aiAgents}}\" bölməsi istifadəçilərə sənədləri emal etmək və digər tapşırıqları yerinə yetirmək üçün ağıllı köməkçilərlə işləməyə imkan verir.\nOnlardan istifadə etməyə başlamaq üçün, AI funksiyaları xidməti sizin {{productName}} administratorunuz tərəfindən aktivləşdirilməlidir.",
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}}: hələ mövcud deyil",
   "EmptyAIAgentsAIEnabledUserDescription": "Komandanız sizi əməkdaşlıq etməyə dəvət etdikdən sonra, {{aiAgents}} burada görünəcək və sənədlər, bilik idarəetməsi və gündəlik tapşırıqlar sahəsində kömək etməyə hazır olacaq.",
   "EmptyAIAgentsDescription": "Bilik bazası əlavə etməklə, ideal modeli seçməklə və bir {{mcpServer}} qoşmaqla komandanız üçün şəxsi köməkçi qurun. Həmkarlarınızı əməkdaşlıq etməyə dəvət edin və agentin söhbət imkanlarından maksimum dərəcədə istifadə edin.",

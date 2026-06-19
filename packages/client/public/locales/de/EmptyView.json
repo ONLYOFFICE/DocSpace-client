@@ -17,7 +17,6 @@
   "CreateSpreadsheetDescription": "Führen Sie präzise Berechnungen mit minimalem Aufwand durch.",
   "CustomRoomEmptyTitle": "Willkommen im benutzerdefinierten Raum",
   "DefaultFolderDescription": "Dateien hier ablegen oder neue erstellen.",
-  "EmptyAIAgentsAIDisabledDescription": "Dieser Abschnitt ermöglicht es Benutzern, mit {{aiAgents}} zu arbeiten — intelligenten Assistenten für die Verarbeitung von Dokumenten und anderen Aufgaben.\nUm sie nutzen zu können, muss der KI-Funktionsdienst von Ihrem {{productName}}-Administrator aktiviert werden.",
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} sind noch nicht verfügbar",
   "EmptyAIAgentsAIEnabledUserDescription": "Sobald Ihr Team Sie zur Zusammenarbeit einlädt, werden {{aiAgents}} hier erscheinen und stehen bereit, um bei Dokumenten, im Wissensmanagement und bei alltäglichen Aufgaben zu unterstützen.",
   "EmptyAIAgentsDescription": "Richten Sie einen personalisierten Assistenten für Ihr Team ein, indem Sie eine Wissensdatenbank hinzufügen, das ideale Modell auswählen und ein {{mcpServer}} verbinden. Laden Sie Ihre Kollegen ein, zusammenzuarbeiten und die Chat-Funktionen des Agenten optimal zu nutzen.",

@@ -17,7 +17,6 @@
   "CreateSpreadsheetDescription": "Wykonuj precyzyjne obliczenia przy minimalnym wysiłku.",
   "CustomRoomEmptyTitle": "Witaj w pokoju Niestandardowym",
   "DefaultFolderDescription": "Upuść pliki tutaj lub utwórz nowe.",
-  "EmptyAIAgentsAIDisabledDescription": "Sekcja „{{aiAgents}}” umożliwia użytkownikom współpracę z inteligentnymi asystentami w celu przetwarzania dokumentów i wykonywania innych zadań.. \nAby zacząć z nich korzystać, funkcja AI musi zostać włączona przez administratora {{productName}}.",
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} nie są jeszcze dostępne",
   "EmptyAIAgentsAIEnabledUserDescription": "Gdy Twój zespół zaprosi Cię do współpracy, {{aiAgents}} pojawi się tutaj i będzie gotowy do pomocy przy dokumentach, zarządzaniu wiedzą i codziennych zadaniach.",
   "EmptyAIAgentsDescription": "Ustaw spersonalisanego asystenta dla swojego zespołu, dodając bazę wiedzy, wybierając idealny model i łącząc {{mcpServer}}. Zaproś swoich współpracowników do współpracy i zmaksymalizuj możliwości czatu agenta.",

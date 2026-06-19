@@ -73,9 +73,6 @@
   "AIChatOfferHelp": "Size nasıl yardımcı olabilirim?",
   "AIChats": "Yapay zeka sohbetleri",
   "AICreditsHelper": "Herhangi bir tutarla yükleme yapın — krediler asla sona ermez. Krediler, fiili kullanıma göre otomatik olarak düşülür.",
-  "AIDisabledInfoBlockAdminSaasDescription": "AI yetenekleri şu anda kapalı durumda, bu da bu aracın sohbetleri veya görevleri işleyemediği anlamına gelir. Tam işlevselliği geri yüklemek için {{productName}} ayarlarında AI özelliklerini etkinleştirin.",
-  "AIDisabledInfoBlockAdminStandaloneDescription": "AI yetenekleri şu anda kapalı durumda, bu da bu aracın sohbetleri veya görevleri işleyemediği anlamına gelir. Gelişmiş özellikleri açmak için kendi AI hizmetinizi {{productName}} ile bağlayın.",
-  "AIDisabledInfoBlockUserDescription": "AI yetenekleri şu anda kapalı durumda, bu da bu aracın sohbetleri veya görevleri işleyemediği anlamına gelir. Sorunu gidermek için {{productName}} yöneticinizden AI özelliklerini etkinleştirmesini isteyin.",
   "AIFeature": "Yapay zeka özelliği",
   "AIFeaturesAreCurrentlyDisabled": "AI özellikleri şu anda devre dışıdır",
   "AIGenerateDocumentDescription": "Yeni bir belge oluşturulacak ve editörde açılacak. AI ardından oluşturulan içeriği doğrudan belgeye yazacak.",
@@ -97,8 +94,6 @@
   "AIPaywallCallbackProcessingFooter": "Stripe tarafından güvenli işlem.",
   "AIPaywallCallbackProcessingHint": "Kredi yüklüyor ve AI özelliklerini etkinleştiriyoruz. Bu genellikle birkaç saniye sürer.",
   "AIPaywallCallbackStepActivate": "AI özellikleri etkinleştiriliyor",
-  "AIPaywallCallbackStepLinkCard": "Kartınız güvenli şekilde bağlanıyor",
-  "AIPaywallCallbackStepTopUp": "AI bakiyeniz yükleniyor",
   "AIPaywallCallbackSuccess": "Hazırsınız",
   "AIPaywallCallbackSuccessHint": "{{price}} değerinde kredi AI bakiyenizde hazır. AI kullanmaya başlamak için çalışma alanınıza dönün.",
   "AIPaywallCompletedHint": "Kullanım, işlemler ve hizmet kontrolleri yükleniyor...",
@@ -499,8 +494,6 @@
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Kendi yapay zeka hizmetinizi {{productName}} içinde gelişmiş özelliklerin kilidini açmak için bağlayın. Eklendikten sonra, tüm kullanıcılar için {{aiChats}} içinde erişilebilir olacaktır.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} henüz mevcut değil",
   "EmptyBackupList": "Henüz hiçbir yedekleme yapılmadı. Listede yer alması için bir veya daha fazla yedekleme yapın.",
-  "EmptyChatAIDisabledSaasAdminDescription": "AI servisi devre dışı bırakıldığı için bu ajan sohbetleri işleyemiyor veya görevleri yerine getiremiyor. Tam işlevselliği geri yüklemek için {{productName}} ayarlarında AI özelliklerini etkinleştirin.",
-  "EmptyChatAIDisabledUserDescription": "AI yetenekleri şu anda kapalı durumda, bu da bu aracın sohbetleri veya görevleri işleyemediği anlamına gelir. Sorunu gidermek için {{productName}} yöneticinizden AI özelliklerini etkinleştirmesini isteyin.",
   "EmptyCompletedForms": "Henüz tamamlanmış herhangi bir form bulunmamaktadır.",
   "EmptyDescription": "Daha önce {{productName}}'e veya ayrı odalara davet edilen kullanıcıların listesi burada görünecektir. Bu kullanıcıları istediğiniz zaman iş birliği için davet edebileceksiniz.",
   "EmptyEmail": "Hiçbir e-posta ayrıştırılmadı",
@@ -1552,5 +1545,6 @@
   "YourName": "Adınız",
   "YourPrice": "Ücret",
   "YourTurn": "Sıra sizde",
-  "YouWillBeContacted": "Satış ekibi, talebi oluşturduktan sonra sizinle iletişime geçecektir."
+  "YouWillBeContacted": "Satış ekibi, talebi oluşturduktan sonra sizinle iletişime geçecektir.",
+  "EmptyAIAgentsAIDisabledDescription": "Bu bölüm, kullanıcıların {{aiAgents}} ile — belgeleri ve diğer görevleri yönetmek için akıllı asistanlarla — çalışmasına olanak tanır.\nBunları kullanmaya başlamak için, AI özellik hizmeti {{productName}} yöneticiniz tarafından etkinleştirilmelidir."
 }

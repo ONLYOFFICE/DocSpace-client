@@ -73,9 +73,6 @@
   "AIChatOfferHelp": "Ako môžem pomôcť?",
   "AIChats": "AI chaty",
   "AICreditsHelper": "Doplňte akúkoľvek sumu — kredity nikdy neplynú. Kredity sa odpočítajú automaticky na základe skutočného používania.",
-  "AIDisabledInfoBlockAdminSaasDescription": "AI funkcie sú momentálne vypnuté, čo znamená, že tento agent nemôže spracovávať chaty ani úlohy. Aby ste obnovili plnú funkčnosť, povoľte AI funkcie v nastaveniach {{productName}}.",
-  "AIDisabledInfoBlockAdminStandaloneDescription": "AI funkcie sú momentálne vypnuté, čo znamená, že tento agent nemôže spracovávať chaty ani úlohy. Pripojte si vlastnú AI službu a odomknite pokročilé funkcie v {{productName}}.",
-  "AIDisabledInfoBlockUserDescription": "AI funkcie sú momentálne vypnuté, čo znamená, že tento agent nemôže spracovávať chaty ani úlohy. Aby ste mohli pokračovať v práci, požiadajte administrátora {{productName}} o zapnutie AI funkcií.",
   "AIFeature": "Funkcia AI",
   "AIFeaturesAreCurrentlyDisabled": "AI funkcie sú momentálne vypnuté.",
   "AIGenerateDocumentDescription": "Vytvorí sa nový dokument a otvorí sa v editore. AI následne zapíše vygenerovaný obsah priamo do dokumentu.",
@@ -97,8 +94,6 @@
   "AIPaywallCallbackProcessingFooter": "Zabezpečená transakcia prostredníctvom Stripe.",
   "AIPaywallCallbackProcessingHint": "Načítavame kredity a aktivujeme funkcie AI. Zvyčajne to trvá len niekoľko sekúnd.",
   "AIPaywallCallbackStepActivate": "Aktivácia funkcií AI",
-  "AIPaywallCallbackStepLinkCard": "Bezpečné prepojenie vašej karty",
-  "AIPaywallCallbackStepTopUp": "Dobíjanie vášho AI zostatku",
   "AIPaywallCallbackSuccess": "Všetko je pripravené",
   "AIPaywallCallbackSuccessHint": "{{price}} kreditov je pripravených na vašom AI zostatku. Vráťte sa do pracovného priestoru a začnite používať AI.",
   "AIPaywallCompletedHint": "Načítavame vaše využitie, transakcie a správu služby...",
@@ -499,8 +494,6 @@
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Pripojte svoju vlastnú AI službu, aby ste odblokovali pokročilé funkcie v {{productName}}. Po pridaní bude pre všetkých používateľov v {{aiChats}} dostupné.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} nie je ešte dostupné",
   "EmptyBackupList": "Zatiaľ neboli vytvorené žiadne zálohy. Vytvorte jednu alebo viac záloh, aby sa v tomto zozname zobrazili.",
-  "EmptyChatAIDisabledSaasAdminDescription": "Služba AI je vypnutá, čo zabraňuje tomuto agentovi spracovávať chaty alebo vykonávať úlohy. Aby ste obnovili plnú funkčnosť, povoľte funkcie AI v nastaveniach {{productName}}.",
-  "EmptyChatAIDisabledUserDescription": "AI funkcie sú momentálne vypnuté, čo znamená, že tento agent nemôže spracovávať chaty ani úlohy. Aby ste mohli pokračovať, požiadajte administrátora {{productName}} o zapnutie AI funkcií.",
   "EmptyCompletedForms": "Ešte nie sú žiadne dokončené formuláre.",
   "EmptyDescription": "Tu sa zobrazí zoznam používateľov, ktorí boli predtým pozvaní do {{productName}} alebo samostatných miestností. Týchto používateľov budete môcť kedykoľvek pozvať na spoluprácu.",
   "EmptyEmail": "Žiadny e-mail nebol analyzovaný",
@@ -1552,5 +1545,6 @@
   "YourName": "Vaše meno",
   "YourPrice": "Vaša cena",
   "YourTurn": "Ste na rade",
-  "YouWillBeContacted": "Po vytvorení požiadavky vás bude kontaktovať predajný tím."
+  "YouWillBeContacted": "Po vytvorení požiadavky vás bude kontaktovať predajný tím.",
+  "EmptyAIAgentsAIDisabledDescription": "Sekcia „{{aiAgents}}“ umožňuje používateľom spolupracovať s inteligentnými asistentmi na spracovaní dokumentov a vykonávaní ďalších úloh.\nNa začatie ich používania musí váš {{productName}} administrátor povoliť službu AI funkcie."
 }

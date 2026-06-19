@@ -73,9 +73,6 @@
   "AIChatOfferHelp": "Kā es varu palīdzēt?",
   "AIChats": "MI čati",
   "AICreditsHelper": "Iespaugsin ar jebkuru summu — kredīti nekad neexpirē. Kredīti tiek apturēti automātiski, pamatojoties uz faktisko lietojumu.",
-  "AIDisabledInfoBlockAdminSaasDescription": "MI iespējas šobrīd ir izslēgtas, kas nozīmē, ka šis aģents nevar apstrādāt sarunas vai uzdevumus. Lai atjaunotu pilnu funkcionalitāti, iespējojiet MI funkcijas {{productName}} iestatējumos.",
-  "AIDisabledInfoBlockAdminStandaloneDescription": "MI iespējas šobrīd ir izslēgtas, kas nozīmē, ka šis aģents nevar apstrādāt sarunas vai uzdevumus. Pievienojiet savu MI pakalpojumu, lai atbloķētu papildu funkcijas {{productName}}.",
-  "AIDisabledInfoBlockUserDescription": "MI iespējas šobrīd ir izslēgtas, kas nozīmē, ka šis aģents nevar apstrādāt tērzēšanu vai uzdevumus. Lai atgrieztos darba ritē, lūdziet savu {{productName}} administratoru iespējot MI funkcijas.",
   "AIFeature": "MI funkcija",
   "AIFeaturesAreCurrentlyDisabled": "MI funkcijas šobrīd ir atslēgtas",
   "AIGenerateDocumentDescription": "Tiks izveidots jauns dokuments un atvērts redaktorā. MI pēc tam ierakstīs ģenerēto saturu tieši dokumentā.",
@@ -97,8 +94,6 @@
   "AIPaywallCallbackProcessingFooter": "Drošs darījums, ko nodrošina Stripe.",
   "AIPaywallCallbackProcessingHint": "Ielādējam kredītus un aktivizējam MI funkcijas. Parasti tas aizņem dažas sekundes.",
   "AIPaywallCallbackStepActivate": "MI funkciju aktivizēšana",
-  "AIPaywallCallbackStepLinkCard": "Jūsu kartes drošā saistīšana",
-  "AIPaywallCallbackStepTopUp": "Jūsu MI bilances papildināšana",
   "AIPaywallCallbackSuccess": "Viss ir gatavs",
   "AIPaywallCallbackSuccessHint": "{{price}} kredītu ir gatavi jūsu MI bilancē. Atgriezieties savā darba vietā, lai sāktu izmantot MI.",
   "AIPaywallCompletedHint": "Ielādē lietojuma datus, darījumus un pakalpojumu vadīklas...",
@@ -499,8 +494,6 @@
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Pievienojiet savu MI pakalpojumu, lai atbloķētu papildu funkcijas {{productName}}ā. Pēc pievienošanas tas būs pieejams visiem lietotājiem {{aiChats}}ā.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} ir vēl nav pieejams",
   "EmptyBackupList": "Vēl nav izveidotas rezerves kopijas. Izveidojiet vismaz vienu rezerves kopiju, lai tā parādītos šajā sarakstā.",
-  "EmptyChatAIDisabledSaasAdminDescription": "MI pakalpojums ir izslēgts, kas neļauj šim aģentam apstrādāt tērzēšanu vai veikt uzdevumus. Lai atjaunotu pilnu funkcionalitāti, iespējojiet MI funkcijas {{productName}} iestatējumos.",
-  "EmptyChatAIDisabledUserDescription": "MI iespējas šobrīd ir izslēgtas, kas nozīmē, ka šis aģents nevar apstrādāt tērzēšanu vai uzdevumus. Lai atgrieztos darba ritē, lūdziet savu {{productName}} administratoru iespējot MI funkcijas.",
   "EmptyCompletedForms": "Nav piepildītu formu vēl.",
   "EmptyDescription": "Šeit tiks parādīts to lietotāju saraksts, kas iepriekš uzaicināti uz {{productName}} vai atsevišķām telpām. Jūs varēsiet uzaicināt šos lietotājus sadarboties jebkurā laikā.",
   "EmptyEmail": "Neviens e-pasts nav parsēts",
@@ -1552,5 +1545,6 @@
   "YourName": "Jūsu vārds",
   "YourPrice": "Jūsu cena",
   "YourTurn": "Jūsu kārta",
-  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides."
+  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides.",
+  "EmptyAIAgentsAIDisabledDescription": "Sadaļa “{{aiAgents}}” ļauj lietotājiem strādāt ar viedajiem palīgiem, lai apstrādātu dokumentus un veiktu citus uzdevumus.\nLai sāktu tos lietot, jūsu {{productName}} administratoram ir jāieslēdz MI funkciju pakalpojums."
 }

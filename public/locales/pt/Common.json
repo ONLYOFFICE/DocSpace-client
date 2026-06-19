@@ -73,9 +73,6 @@
   "AIChatOfferHelp": "Como posso ajudar?",
   "AIChats": "Chats de IA",
   "AICreditsHelper": "Recarregue com qualquer valor — os créditos nunca expiram. Os créditos são deduzidos automaticamente com base no uso real.",
-  "AIDisabledInfoBlockAdminSaasDescription": "As capacidades de IA estão atualmente desativadas, o que significa que este agente não pode processar chats ou tarefas. Para restaurar a funcionalidade total, ative os recursos de IA nas configurações do {{productName}}.",
-  "AIDisabledInfoBlockAdminStandaloneDescription": "As capacidades de IA estão atualmente desativadas, o que significa que este agente não pode processar chats ou tarefas. Conecte seu próprio serviço de IA para desbloquear recursos avançados em {{productName}}.",
-  "AIDisabledInfoBlockUserDescription": "As capacidades de IA estão atualmente desativadas, o que significa que este agente não pode processar chats ou tarefas. Para voltar ao normal, peça ao administrador do seu {{productName}} para ativar os recursos de IA.",
   "AIFeature": "Recurso de IA",
   "AIFeaturesAreCurrentlyDisabled": "Os recursos de IA estão atualmente desativados.",
   "AIGenerateDocumentDescription": "Será criado um novo documento e aberto no editor. A IA escreverá então o conteúdo gerado diretamente no documento.",
@@ -97,8 +94,6 @@
   "AIPaywallCallbackProcessingFooter": "Transação segura powered by Stripe.",
   "AIPaywallCallbackProcessingHint": "Estamos a carregar créditos e a ativar as funcionalidades de IA. Isto geralmente demora apenas alguns segundos.",
   "AIPaywallCallbackStepActivate": "A ativar funcionalidades de IA",
-  "AIPaywallCallbackStepLinkCard": "A associar o seu cartão de forma segura",
-  "AIPaywallCallbackStepTopUp": "A recarregar o seu saldo de IA",
   "AIPaywallCallbackSuccess": "Está tudo pronto",
   "AIPaywallCallbackSuccessHint": "{{price}} em créditos está disponível no seu saldo de IA. Volte à sua área de trabalho para começar a utilizar a IA.",
   "AIPaywallCompletedHint": "A carregar a sua utilização, transações e controlos do serviço...",
@@ -499,8 +494,6 @@
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Conecte seu próprio serviço de IA para desbloquear recursos avançados em {{productName}}. Uma vez adicionado, ele estará acessível a todos os usuários em {{aiChats}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} ainda não está disponível",
   "EmptyBackupList": "Ainda não foi criada nenhuma cópia de segurança. Crie uma ou mais cópias de segurança para que elas apareçam na lista.",
-  "EmptyChatAIDisabledSaasAdminDescription": "O serviço de IA está desativado, impedindo que este agente processe chats ou execute tarefas. Para restaurar a funcionalidade total, habilite os recursos de IA nas configurações do {{productName}}.",
-  "EmptyChatAIDisabledUserDescription": "As capacidades de IA estão atualmente desativadas, o que significa que este agente não pode processar chats ou tarefas. Para voltar ao normal, peça ao administrador do seu {{productName}} para ativar os recursos de IA.",
   "EmptyCompletedForms": "Não há formulários concluídos ainda.",
   "EmptyDescription": "A lista de utilizadores previamente convidados para o {{productName}} ou salas separadas aparecerá aqui. Poderá convidar estes utilizadores para colaborar consigo em qualquer altura.",
   "EmptyEmail": "Nenhum endereço de e-mail identificado",
@@ -1552,5 +1545,6 @@
   "YourName": "O seu nome",
   "YourPrice": "O seu preço",
   "YourTurn": "A sua vez",
-  "YouWillBeContacted": "A equipa de vendas entrará em contacto consigo depois de criar o pedido."
+  "YouWillBeContacted": "A equipa de vendas entrará em contacto consigo depois de criar o pedido.",
+  "EmptyAIAgentsAIDisabledDescription": "Esta seção permite que os usuários trabalhem com {{aiAgents}} — assistentes inteligentes para lidar com documentos e outras tarefas.\nPara começar a usá-los, o serviço de recursos de IA deve ser habilitado pelo administrador do seu {{productName}}."
 }

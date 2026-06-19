@@ -73,9 +73,6 @@
   "AIChatOfferHelp": "Tôi có thể giúp gì cho bạn?",
   "AIChats": "Trò chuyện AI",
   "AICreditsHelper": "Nạp tiền với bất kỳ số tiền nào — tín dụng không bao giờ hết hạn. Tín dụng sẽ được khấu trừ tự động dựa trên mức sử dụng thực tế.",
-  "AIDisabledInfoBlockAdminSaasDescription": "Các khả năng AI hiện đang bị tắt, điều này có nghĩa là agent này không thể xử lý các cuộc trò chuyện hoặc tác vụ. Để khôi phục đầy đủ chức năng, hãy bật các tính năng AI trong cài đặt {{productName}}.",
-  "AIDisabledInfoBlockAdminStandaloneDescription": "Các khả năng AI hiện đang bị tắt, điều này có nghĩa là agent này không thể xử lý các cuộc trò chuyện hoặc tác vụ. Kết nối dịch vụ AI của riêng bạn để mở khóa các tính năng nâng cao trong {{productName}}.",
-  "AIDisabledInfoBlockUserDescription": "Các khả năng AI hiện đang bị tắt, điều này có nghĩa là agent này không thể xử lý các cuộc trò chuyện hoặc tác vụ. Để quay trở lại hoạt động, hãy yêu cầu quản trị viên {{productName}} của bạn bật lại các tính năng AI.",
   "AIFeature": "Tính năng AI",
   "AIFeaturesAreCurrentlyDisabled": "Các tính năng AI hiện đang bị tắt.",
   "AIGenerateDocumentDescription": "Một tài liệu mới sẽ được tạo và mở trong trình soạn thảo. AI sau đó sẽ viết nội dung được tạo trực tiếp vào tài liệu.",
@@ -97,8 +94,6 @@
   "AIPaywallCallbackProcessingFooter": "Giao dịch bảo mật được cung cấp bởi Stripe.",
   "AIPaywallCallbackProcessingHint": "Chúng tôi đang tải tín dụng và kích hoạt các tính năng AI. Thường chỉ mất vài giây.",
   "AIPaywallCallbackStepActivate": "Đang kích hoạt tính năng AI",
-  "AIPaywallCallbackStepLinkCard": "Đang liên kết thẻ của bạn một cách an toàn",
-  "AIPaywallCallbackStepTopUp": "Đang nạp tiền vào số dư AI",
   "AIPaywallCallbackSuccess": "Bạn đã sẵn sàng",
   "AIPaywallCallbackSuccessHint": "{{price}} tín dụng đã sẵn sàng trong số dư AI của bạn. Quay lại không gian làm việc để bắt đầu sử dụng AI.",
   "AIPaywallCompletedHint": "Đang tải lịch sử sử dụng, giao dịch và điều khiển dịch vụ...",
@@ -499,8 +494,6 @@
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Kết nối dịch vụ AI của riêng bạn để mở khóa các tính năng nâng cao trong {{productName}}. Sau khi thêm, nó sẽ khả dụng cho tất cả người dùng trong {{aiChats}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} hiện chưa khả dụng",
   "EmptyBackupList": "Chưa có bản sao lưu nào được tạo. Tạo một hoặc nhiều bản sao lưu để chúng xuất hiện trong danh sách này.",
-  "EmptyChatAIDisabledSaasAdminDescription": "Dịch vụ AI đã bị tắt, ngăn chặn agent này xử lý các cuộc trò chuyện hoặc thực hiện các tác vụ. Để khôi phục đầy đủ chức năng, hãy bật các tính năng AI trong cài đặt {{productName}}.",
-  "EmptyChatAIDisabledUserDescription": "Các khả năng AI hiện đang bị tắt, điều này có nghĩa là agent này không thể xử lý các cuộc trò chuyện hoặc tác vụ. Để quay trở lại hoạt động, hãy yêu cầu quản trị viên {{productName}} của bạn bật lại các tính năng AI.",
   "EmptyCompletedForms": "Hiện chưa có biểu mẫu nào được hoàn thành.",
   "EmptyDescription": "Danh sách người dùng trước đây được mời đến {{productName}} hoặc các phòng riêng biệt sẽ xuất hiện ở đây. Bạn sẽ có thể mời những người dùng này cộng tác bất cứ lúc nào.",
   "EmptyEmail": "Không có email nào được phân tích",
@@ -1552,5 +1545,6 @@
   "YourName": "Tên của bạn",
   "YourPrice": "Giá của bạn",
   "YourTurn": "Phiên của bạn",
-  "YouWillBeContacted": "Đội ngũ kinh doanh sẽ liên hệ với bạn sau khi tạo yêu cầu."
+  "YouWillBeContacted": "Đội ngũ kinh doanh sẽ liên hệ với bạn sau khi tạo yêu cầu.",
+  "EmptyAIAgentsAIDisabledDescription": "Phần này cho phép người dùng làm việc với {{aiAgents}} — các trợ lý thông minh để xử lý tài liệu và các tác vụ khác.\nĐể bắt đầu sử dụng chúng, dịch vụ tính năng AI phải được bật bởi quản trị viên {{productName}} của bạn."
 }

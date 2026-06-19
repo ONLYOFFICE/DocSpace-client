@@ -73,9 +73,6 @@
   "AIChatOfferHelp": "Comment puis-je vous aider ?",
   "AIChats": "Chats IA",
   "AICreditsHelper": "Rechargez avec n'importe quel montant — les crédits n'expirent jamais. Les crédits sont déduits automatiquement en fonction de l'utilisation réelle.",
-  "AIDisabledInfoBlockAdminSaasDescription": "Les fonctionnalités d'IA sont actuellement désactivées, ce qui signifie que cet agent ne peut pas traiter les chats ni les tâches. Pour rétablir toutes les fonctionnalités, activez les fonctionnalités d'IA dans les paramètres {{productName}}.",
-  "AIDisabledInfoBlockAdminStandaloneDescription": "Les fonctionnalités d'IA sont actuellement désactivées, ce qui signifie que cet agent ne peut pas traiter les chats ni les tâches. Connectez votre propre service d'IA pour débloquer les fonctionnalités avancées dans {{productName}}.",
-  "AIDisabledInfoBlockUserDescription": "Les fonctionnalités d'IA sont actuellement désactivées, ce qui signifie que cet agent ne peut pas traiter les chats ni les tâches. Pour revenir à la normale, demandez à votre administrateur {{productName}} d'activer les fonctionnalités d'IA.",
   "AIFeature": "Fonctionnalité IA",
   "AIFeaturesAreCurrentlyDisabled": "Les fonctionnalités d'IA sont actuellement désactivées",
   "AIGenerateDocumentDescription": "Un nouveau document sera créé et ouvert dans l'éditeur. L'IA écrira ensuite le contenu généré directement dans le document.",
@@ -97,8 +94,6 @@
   "AIPaywallCallbackProcessingFooter": "Transaction sécurisée powered by Stripe.",
   "AIPaywallCallbackProcessingHint": "Nous chargeons les crédits et activons les fonctionnalités d'IA. Cela prend habituellement quelques secondes.",
   "AIPaywallCallbackStepActivate": "Activation des fonctionnalités d'IA",
-  "AIPaywallCallbackStepLinkCard": "Association sécurisée de votre carte",
-  "AIPaywallCallbackStepTopUp": "Rechargement de votre solde IA",
   "AIPaywallCallbackSuccess": "Tout est prêt",
   "AIPaywallCallbackSuccessHint": "{{price}} en crédits est disponible sur votre solde IA. Retournez à votre espace de travail pour commencer à utiliser l'IA.",
   "AIPaywallCompletedHint": "Chargement de votre utilisation, de vos transactions et des paramètres de service...",
@@ -499,8 +494,6 @@
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Connectez votre propre service d'IA pour débloquer des fonctionnalités avancées dans {{productName}}. Une fois ajouté, il sera accessible à tous les utilisateurs dans {{aiChats}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} n'est pas encore disponible",
   "EmptyBackupList": "Aucune sauvegarde n'a encore été créée. Créez une ou plusieurs sauvegardes pour qu'elles apparaissent dans cette liste.",
-  "EmptyChatAIDisabledSaasAdminDescription": "Le service d'IA est désactivé, ce qui empêche cet agent de traiter les chats ou d'effectuer des tâches. Pour rétablir toutes les fonctionnalités, activez les fonctionnalités d'IA dans les paramètres {{productName}}.",
-  "EmptyChatAIDisabledUserDescription": "Les fonctionnalités d'IA sont actuellement désactivées, ce qui signifie que cet agent ne peut pas traiter les chats ni les tâches. Pour rétablir le fonctionnement, demandez à votre administrateur {{productName}} d'activer les fonctionnalités d'IA.",
   "EmptyCompletedForms": "Il n'y a pas encore de formulaires complétés.",
   "EmptyDescription": "La liste des utilisateurs précédemment invités à {{productName}} ou à des espaces séparés apparaît ici. Vous pourrez à tout moment inviter ces utilisateurs à collaborer.",
   "EmptyEmail": "Aucun e-mail n'a été analysé",
@@ -1552,5 +1545,6 @@
   "YourName": "Votre nom",
   "YourPrice": "Votre prix",
   "YourTurn": "Votre tour",
-  "YouWillBeContacted": "L’équipe de vente vous contactera après avoir créé la demande."
+  "YouWillBeContacted": "L’équipe de vente vous contactera après avoir créé la demande.",
+  "EmptyAIAgentsAIDisabledDescription": "Cette section permet aux utilisateurs de travailler avec les {{aiAgents}} — assistants intelligents pour gérer les documents et autres tâches.\nPour commencer à les utiliser, le service de fonctionnalités IA doit être activé par votre administrateur {{productName}}."
 }

@@ -73,9 +73,6 @@
   "AIChatOfferHelp": "Sizə necə kömək edə bilərəm?",
   "AIChats": "Süni İntellekt söhbətləri",
   "AICreditsHelper": "Hər hansı bir məbləğlə yükləyin — kreditlər heç vaxt bitmir. Kreditlər faktiki istifadəyə əsasən avtomatik olaraq endirilir.",
-  "AIDisabledInfoBlockAdminSaasDescription": "Süni İntellekt (SI) funksiyaları hazırda söndürülmüşdür, bu da agentin söhbətləri və tapşırıqları işləyə bilmədiyini deməkdir. Tam funksionaliyyəti bərpa etmək üçün {{productName}} parametrlərində SI xüsusiyyətlərini aktiv edin.",
-  "AIDisabledInfoBlockAdminStandaloneDescription": "Süni intellekt funksiyaları hazırda söndürülmüşdür, bu da agentin söhbətləri və tapşırıqları işləməyə bilməsi deməkdir. Təkmilləşdirilmiş funksiyaları açmaq üçün öz SI xidmətinizi {{productName}} ilə qoşun.",
-  "AIDisabledInfoBlockUserDescription": "S.İ. (Süni İntellekt) funksiyaları hazırda söndürülüb, bu o deməkdir ki, bu agent söhbətləri və ya tapşırıqları emal edə bilməz. Yenidən işə düşmək üçün {{productName}} administratorundan S.İ. funksiyalarını aktiv etməsini xahiş edin.",
   "AIFeature": "Süni intellekt funksiyası",
   "AIFeaturesAreCurrentlyDisabled": "Süni intellekt funksiyaları hazırda işlənmir.",
   "AIGenerateDocumentDescription": "Yeni sənəd yaradılıb redaktorda açılacaq. AI daha sonra yaradılan məzmunu birbaşa sənədə yazacaq.",
@@ -97,8 +94,6 @@
   "AIPaywallCallbackProcessingFooter": "Stripe tərəfindən dəstəklənən təhlükəsiz əməliyyat.",
   "AIPaywallCallbackProcessingHint": "Kreditlər yüklənir və AI funksiyaları aktivləşdirilir. Bu adətən bir neçə saniyə çəkir.",
   "AIPaywallCallbackStepActivate": "AI funksiyaları aktivləşdirilir",
-  "AIPaywallCallbackStepLinkCard": "Kartınız təhlükəsiz şəkildə bağlanır",
-  "AIPaywallCallbackStepTopUp": "AI balansınız doldurulur",
   "AIPaywallCallbackSuccess": "Hər şey hazırdır",
   "AIPaywallCallbackSuccessHint": "{{price}} kredit AI balansınızda hazırdır. AI-dan istifadə etməyə başlamaq üçün iş sahənizə qayıdın.",
   "AIPaywallCompletedHint": "İstifadə, əməliyyatlar və xidmət nəzarəti yüklənir...",
@@ -499,8 +494,6 @@
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Kendi AI xidmətinizlə qoşun və {{productName}} içərisində daha inkişaf etmiş funksionallıqları açın. Əlavə edildikdən sonra, o, {{aiChats}} içində bütün istifadəçilərə əlçatan olacaq.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} hələ mövcud deyil",
   "EmptyBackupList": "Hələ heç bir ehtiyat nüsxəsi yaradılmayıb. Onların bu siyahıda görünməsi üçün bir və ya bir neçə ehtiyat nüsxəsi yaradın.",
-  "EmptyChatAIDisabledSaasAdminDescription": "Süni İntellekt xidməti söndürülüb, bu agentin söhbətləri işləməsinə və tapşırıqları yerinə yetirməsinə mane olur. Tam funksionaliyyəti bərpa etmək üçün {{productName}} parametrlərində Süni İntellekt funksiyalarını aktiv edin.",
-  "EmptyChatAIDisabledUserDescription": "S.İ. (Süni İntellekt) funksiyaları hazırda söndürülü, bu o deməkdir ki, bu agent söhbətləri və ya tapşırıqları emal edə bilməz. Yenidən işə başlamak üçün, {{productName}} administratorundan S.İ. funksiyalarını aktiv etməsini xahiş edin.",
   "EmptyCompletedForms": "Hələ tamamlanmış formalar yoxdur.",
   "EmptyDescription": "Əvvəllər {{productName}} və ya fərdi otaqlara dəvət edilmiş istifadəçilərin siyahısı burada görünəcək. Siz istənilən vaxt bu istifadəçiləri əməkdaşlığa dəvət edə biləcəksiniz.",
   "EmptyEmail": "Elektron poçt ünvanı oxunmadı",
@@ -1552,5 +1545,6 @@
   "YourName": "Adınız",
   "YourPrice": "Qiymətiniz",
   "YourTurn": "Sizin növbəniz",
-  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq."
+  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq.",
+  "EmptyAIAgentsAIDisabledDescription": "\"{{aiAgents}}\" bölməsi istifadəçilərə sənədləri emal etmək və digər tapşırıqları yerinə yetirmək üçün ağıllı köməkçilərlə işləməyə imkan verir.\nOnlardan istifadə etməyə başlamaq üçün, AI funksiyaları xidməti sizin {{productName}} administratorunuz tərəfindən aktivləşdirilməlidir."
 }

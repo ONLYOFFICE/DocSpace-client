@@ -73,9 +73,6 @@
   "AIChatOfferHelp": "何かお手伝いできることがありますか？",
   "AIChats": "AI チャット",
   "AICreditsHelper": "任意の金額でチャージ — クレジットは失効しません。クレジットは実際の使用量に基づいて自動的に差し引かれます。",
-  "AIDisabledInfoBlockAdminSaasDescription": "AI機能は現在無効化されています。これにより、このエージェントはチャットやタスクを処理できません。完全な機能を復元するには、{{productName}}の設定でAI機能を有効にしてください。",
-  "AIDisabledInfoBlockAdminStandaloneDescription": "AI機能は現在無効化されています。これにより、このエージェントはチャットやタスクを処理できません。{{productName}}の高度な機能を有効にするには、ご自身のAIサービスを接続してください。",
-  "AIDisabledInfoBlockUserDescription": "AI機能は現在無効化されています。これにより、このエージェントはチャットやタスクを処理できません。正常に機能させるには、{{productName}}の管理者までAI機能を有効化するようにご連絡ください。",
   "AIFeature": "AI機能",
   "AIFeaturesAreCurrentlyDisabled": "AI機能は現在無効化されています",
   "AIGenerateDocumentDescription": "新しいドキュメントが作成され、エディタで開かれます。その後、AIが生成されたコンテンツをドキュメントに直接書き込みます。",
@@ -97,8 +94,6 @@
   "AIPaywallCallbackProcessingFooter": "Stripeによる安全な取引。",
   "AIPaywallCallbackProcessingHint": "クレジットを読み込み、AI機能を有効化しています。通常、数秒で完了します。",
   "AIPaywallCallbackStepActivate": "AI機能を有効化中",
-  "AIPaywallCallbackStepLinkCard": "カードを安全に連携中",
-  "AIPaywallCallbackStepTopUp": "AIバランスにチャージ中",
   "AIPaywallCallbackSuccess": "準備が整いました",
   "AIPaywallCallbackSuccessHint": "{{price}}分のクレジットがAIバランスに追加されました。ワークスペースに戻ってAIをご利用ください。",
   "AIPaywallCompletedHint": "ご利用状況、取引履歴、サービス管理を読み込んでいます...",
@@ -499,8 +494,6 @@
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "{{productName}}で高度な機能を利用するには、独自のAIサービスを接続してください。追加後は、{{aiChats}}のすべてのユーザーがアクセスできるようになります。",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} は、まだご利用いただけません",
   "EmptyBackupList": "バックアップはまだ作成されていません。バックアップを作成すると、このリストに表示されるようになります。",
-  "EmptyChatAIDisabledSaasAdminDescription": "AI機能は現在無効化されているため、このエージェントはチャットの処理やタスクの実行ができません。完全な機能を復元するには、{{productName}}の設定でAI機能を有効にしてください。",
-  "EmptyChatAIDisabledUserDescription": "AI機能は現在無効化されています。これにより、このエージェントはチャットやタスクを処理できません。正常に機能させるには、{{productName}}の管理者までAI機能を有効化するようにご連絡ください。",
   "EmptyCompletedForms": "完了したフォームはまだありません。",
   "EmptyDescription": "以前に{{productName}}や別室に招待したユーザーのリストがここに表示されます。これらのユーザーをいつでもコラボレーションのために招待することができるようになります。",
   "EmptyEmail": "メールアドレスを解析できませんでした",
@@ -1552,5 +1545,6 @@
   "YourName": "お名前",
   "YourPrice": "価格",
   "YourTurn": "あなたの番です",
-  "YouWillBeContacted": "リクエスト作成後、営業担当よりご連絡させていただきます。"
+  "YouWillBeContacted": "リクエスト作成後、営業担当よりご連絡させていただきます。",
+  "EmptyAIAgentsAIDisabledDescription": "このセクションでは、ユーザーは{{aiAgents}} — ドキュメントやその他のタスクを処理するためのスマートアシスタント — を使用できます。\nそれらを使用するには、{{productName}}管理者によってAI機能サービスが有効になっている必要があります。"
 }

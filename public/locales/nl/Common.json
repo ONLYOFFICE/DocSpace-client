@@ -73,9 +73,6 @@
   "AIChatOfferHelp": "Hoe kan ik helpen?",
   "AIChats": "AI-chats",
   "AICreditsHelper": "Laad op met elk bedrag — credits verlopen nooit. Credits worden automatisch afgeschreven op basis van het daadwerkelijke gebruik.",
-  "AIDisabledInfoBlockAdminSaasDescription": "AI-mogelijkheden zijn momenteel uitgeschakeld, wat betekent dat deze agent geen chats of taken kan verwerken. Om de volledige functionaliteit te herstellen, schakel AI-functies in de {{productName}}-instellingen in.",
-  "AIDisabledInfoBlockAdminStandaloneDescription": "AI-mogelijkheden zijn momenteel uitgeschakeld, wat betekent dat deze agent geen chats of taken kan verwerken. Verbind uw eigen AI-dienst om geavanceerde functies te ontgrendelen in {{productName}}.",
-  "AIDisabledInfoBlockUserDescription": "AI-mogelijkheden zijn momenteel uitgeschakeld, wat betekent dat deze agent geen chats of taken kan verwerken. Om weer op de rails te komen, vraag je {{productName}}-beheerder om AI-functies in te schakelen.",
   "AIFeature": "AI-functie",
   "AIFeaturesAreCurrentlyDisabled": "AI-functies zijn momenteel uitgeschakeld",
   "AIGenerateDocumentDescription": "Er wordt een nieuw document aangemaakt en geopend in de editor. AI schrijft vervolgens de gegenereerde inhoud rechtstreeks in het document.",
@@ -97,8 +94,6 @@
   "AIPaywallCallbackProcessingFooter": "Beveiligde transactie via Stripe.",
   "AIPaywallCallbackProcessingHint": "We laden credits en activeren AI-functies. Dit duurt meestal een paar seconden.",
   "AIPaywallCallbackStepActivate": "AI-functies activeren",
-  "AIPaywallCallbackStepLinkCard": "Uw kaart veilig koppelen",
-  "AIPaywallCallbackStepTopUp": "Uw AI-saldo aanvullen",
   "AIPaywallCallbackSuccess": "U bent klaar",
   "AIPaywallCallbackSuccessHint": "{{price}} aan credits staat klaar op uw AI-saldo. Ga terug naar uw werkruimte om AI te gebruiken.",
   "AIPaywallCompletedHint": "Gebruik, transacties en servicebeheer worden geladen...",
@@ -499,8 +494,6 @@
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Verbind uw eigen AI-service om geavanceerde functies in {{productName}} te ontgrendelen. Zodra deze is toegevoegd, is deze toegankelijk voor alle gebruikers in {{aiChats}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} is momenteel niet beschikbaar",
   "EmptyBackupList": "Er zijn nog geen back-ups gemaakt. Maak een of meer back-ups om ze in de lijst te laten zien.",
-  "EmptyChatAIDisabledSaasAdminDescription": "De AI-service is uitgeschakeld, waardoor deze agent geen chats kan verwerken of taken kan uitvoeren. Om de volledige functionaliteit te herstellen, schakel AI-functies in de {{productName}} instellingen in.",
-  "EmptyChatAIDisabledUserDescription": "AI-mogelijkheden zijn momenteel uitgeschakeld, wat betekent dat deze agent geen chats of taken kan verwerken. Om weer op de rails te komen, vraag je {{productName}}-beheerder om AI-functies in te schakelen.",
   "EmptyCompletedForms": "Er zijn nog geen voltooide formulieren.",
   "EmptyDescription": "Hier verschijnt de lijst met gebruikers die eerder zijn uitgenodigd voor {{productName}} of aparte kamers. U kunt deze gebruikers te allen tijde uitnodigen om samen te werken.",
   "EmptyEmail": "Geen enkele e-mail verwerkt",
@@ -1552,5 +1545,6 @@
   "YourName": "Uw naam",
   "YourPrice": "Uw prijs",
   "YourTurn": "Uw beurt",
-  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag."
+  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag.",
+  "EmptyAIAgentsAIDisabledDescription": "Deze sectie stelt gebruikers in staat om met {{aiAgents}} te werken – slimme assistenten voor het verwerken van documenten en andere taken.\nOm ze te gaan gebruiken, moet de AI-functieservice worden ingeschakeld door uw {{productName}}-beheerder."
 }

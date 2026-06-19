@@ -17,7 +17,6 @@
   "CreateSpreadsheetDescription": "Vykonávajte presné výpočty s minimálnym úsilím.",
   "CustomRoomEmptyTitle": "Vitajte vo Vlastnej miestnosti",
   "DefaultFolderDescription": "Vložte sem súbory alebo vytvorte nové.",
-  "EmptyAIAgentsAIDisabledDescription": "Sekcia „{{aiAgents}}“ umožňuje používateľom spolupracovať s inteligentnými asistentmi na spracovaní dokumentov a vykonávaní ďalších úloh.\nNa začatie ich používania musí váš {{productName}} administrátor povoliť službu AI funkcie.",
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} nie sú ešte dostupné",
   "EmptyAIAgentsAIEnabledUserDescription": "Poďte, keď vás váš tím pozýva na spoluprácu, {{aiAgents}} sa tu zobrazí a bude pripravený na pomoc s dokumentmi, správou znalostí a každodennými úlohami.",
   "EmptyAIAgentsDescription": "Nastavte personalizovaného asistentu pre váš tím pridaním základnej znalosti, výberom ideálneho modelu a pripojením {{mcpServer}}. Zapínačte svojich kolegov na spoluprácu a využite chatové možnosti agenta na maximum.",

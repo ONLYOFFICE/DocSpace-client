@@ -73,9 +73,6 @@
   "AIChatOfferHelp": "Cu ce vă pot ajuta?",
   "AIChats": "Chat-uri IA",
   "AICreditsHelper": "Încărcați cu orice sumă — creditele nu expiră niciodată. Creditele sunt deduse automat în funcție de utilizarea efectivă.",
-  "AIDisabledInfoBlockAdminSaasDescription": "Capacitățile de IA sunt actualmente dezactivate, ceea ce înseamnă că acest agent nu poate procesa conversații sau sarcini. Pentru a recupera funcționalitatea completă, activați funcțiile de IA în secțiunea cu setările {{productName}}.",
-  "AIDisabledInfoBlockAdminStandaloneDescription": "Capacitățile de IA sunt actualmente dezactivate, ceea ce înseamnă că acest agent nu poate procesa conversații sau sarcini. Conectați serviciu de IA propriu pentru a activa caracteristicile avansate în {{productName}}.",
-  "AIDisabledInfoBlockUserDescription": "Capacitățile de IA sunt actualmente dezactivate, ceea ce înseamnă că acest agent nu poate procesa conversații sau sarcini. Pentru a remedia această situație, solicitați administratorului {{productName}} să activeze funcțiile de IA.",
   "AIFeature": "Funcție IA",
   "AIFeaturesAreCurrentlyDisabled": "Funcțiile de IA sunt momentan dezactivate",
   "AIGenerateDocumentDescription": "Va fi creat un document nou și deschis în editor. IA va scrie apoi conținutul generat direct în document.",
@@ -97,8 +94,6 @@
   "AIPaywallCallbackProcessingFooter": "Tranzacție securizată powered by Stripe.",
   "AIPaywallCallbackProcessingHint": "Încărcăm creditele și activăm funcționalitățile IA. De obicei durează doar câteva secunde.",
   "AIPaywallCallbackStepActivate": "Activarea funcționalităților IA",
-  "AIPaywallCallbackStepLinkCard": "Asocierea securizată a cardului dvs.",
-  "AIPaywallCallbackStepTopUp": "Reîncărcarea soldului dvs. IA",
   "AIPaywallCallbackSuccess": "Totul este gata",
   "AIPaywallCallbackSuccessHint": "{{price}} în credite este disponibil în soldul dvs. IA. Reveniți la spațiul de lucru pentru a începe să utilizați IA.",
   "AIPaywallCompletedHint": "Se încarcă utilizarea, tranzacțiile și controalele serviciului...",
@@ -499,8 +494,6 @@
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Integrați serviciul dvs. de IA propriu pentru a debloca funcționalități avansate în {{productName}}. Odată adăugat, acesta va fi accesibil tuturor utilizatorilor în {{aiChats}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} nu este încă disponibil",
   "EmptyBackupList": "Nu există nicio copie de rezervă salvată. Creați una sau mai multe copii de rezervă pentru ca acestea să apară în lista.",
-  "EmptyChatAIDisabledSaasAdminDescription": "Serviciul IA este dezactivat, ceea ce împiedică agentului să proceseze conversații sau să execute sarcini. Pentru a recupera funcționalitatea completă, activați funcțiile de IA în secțiunea cu setările {{productName}}.",
-  "EmptyChatAIDisabledUserDescription": "Capacitățile de IA sunt actualmente dezactivate, ceea ce înseamnă că acest agent nu poate procesa conversații sau sarcini. Pentru a remedia această situație, solicitați administratorului {{productName}} să activeze funcțiile de IA.",
   "EmptyCompletedForms": "Nu există formulare completate încă.",
   "EmptyDescription": "Lista de utilizatori invitaţi anterior în {{productName}} sau în săli separate va fi afişată aici. Puteţi invita aceşti utilizatori să colaboreze în orice moment.",
   "EmptyEmail": "Niciun e-mail nu a fost extras",
@@ -1552,5 +1545,6 @@
   "YourName": "Numele dvs.",
   "YourPrice": "Preţul dvs.",
   "YourTurn": "Acum e rândul dvs.",
-  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării."
+  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării.",
+  "EmptyAIAgentsAIDisabledDescription": "Această secțiune permite utilizatorilor să lucreze cu {{aiAgents}} — asistenți inteligenți pentru gestionarea documentelor și a altor sarcini.\nPentru a începe să îi utilizați, serviciul de funcții IA trebuie activat de administratorul {{productName}}."
 }

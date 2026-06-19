@@ -73,9 +73,6 @@
   "AIChatOfferHelp": "어떻게 도와드릴까요?",
   "AIChats": "AI 채팅",
   "AICreditsHelper": "원하는 금액만큼 충전하세요. 크레딧은 만료되지 않습니다. 크레딧은 실제 사용량에 따라 자동으로 차감됩니다.",
-  "AIDisabledInfoBlockAdminSaasDescription": "AI 기능은 현재 꺼져 있어, 이 에이전트는 채팅이나 작업을 처리할 수 없습니다. 모든 기능을 복원하려면 {{productName}} 설정에서 AI 기능을 활성화하세요.",
-  "AIDisabledInfoBlockAdminStandaloneDescription": "AI 기능은 현재 꺼져 있어, 이 에이전트는 채팅이나 작업을 처리할 수 없습니다. {{productName}}에서 고급 기능을 사용하려면 AI 서비스를 연결하세요.",
-  "AIDisabledInfoBlockUserDescription": "AI 기능은 현재 꺼져 있습니다. 즉, 이 에이전트는 채팅이나 작업을 처리할 수 없습니다. 다시 시작하려면 {{productName}} 관리자에게 AI 기능을 활성화해 달라고 요청하세요.",
   "AIFeature": "AI 기능",
   "AIFeaturesAreCurrentlyDisabled": "AI 기능은 현재 비활성화되어 있습니다.",
   "AIGenerateDocumentDescription": "새 문서가 생성되어 편집기에서 열립니다. 그런 다음 AI가 생성된 콘텐츠를 문서에 직접 작성합니다.",
@@ -97,8 +94,6 @@
   "AIPaywallCallbackProcessingFooter": "Stripe가 제공하는 안전한 거래.",
   "AIPaywallCallbackProcessingHint": "크레딧을 로드하고 AI 기능을 활성화하고 있습니다. 보통 몇 초 정도 걸립니다.",
   "AIPaywallCallbackStepActivate": "AI 기능 활성화 중",
-  "AIPaywallCallbackStepLinkCard": "카드를 안전하게 연결 중",
-  "AIPaywallCallbackStepTopUp": "AI 잔액 충전 중",
   "AIPaywallCallbackSuccess": "준비가 완료되었습니다",
   "AIPaywallCallbackSuccessHint": "{{price}}의 크레딧이 AI 잔액에 준비되었습니다. 워크스페이스로 돌아가 AI를 사용해 보세요.",
   "AIPaywallCompletedHint": "사용량, 거래 내역 및 서비스 제어를 불러오는 중...",
@@ -499,8 +494,6 @@
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "{{productName}}의 고급 기능을 사용하려면 자체 AI 서비스를 연결하세요. 추가되면, {{aiChats}}의 모든 사용자가 이용할 수 있습니다.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}}는 아직 이용할 수 없습니다",
   "EmptyBackupList": "아직 백업이 생성되지 않았습니다. 이 목록에 표시될 하나 이상의 백업을 생성하세요.",
-  "EmptyChatAIDisabledSaasAdminDescription": "AI 서비스가 종료되어 이 에이전트가 채팅을 처리하거나 작업을 수행할 수 없습니다. 모든 기능을 복원하려면 {{productName}} 설정에서 AI 기능을 활성화하세요.",
-  "EmptyChatAIDisabledUserDescription": "AI 기능은 현재 꺼져 있습니다. 즉, 이 에이전트는 채팅이나 작업을 처리할 수 없습니다. 다시 시작하려면 {{productName}} 관리자에게 AI 기능을 활성화해 달라고 요청하세요.",
   "EmptyCompletedForms": "아직 완료된 양식이 없습니다.",
   "EmptyDescription": "이전에 {{productName}} 또는 별도의 방에 초대된 사용자 목록이 여기에 표시됩니다. 언제든지 공동 작업을 위해 이러한 사용자를 초대할 수 있습니다.",
   "EmptyEmail": "파싱된 이메일이 하나도 없습니다",
@@ -1552,5 +1545,6 @@
   "YourName": "당신의 이름",
   "YourPrice": "귀하의 요금",
   "YourTurn": "고객님의 차례입니다",
-  "YouWillBeContacted": "요청을 생성하면 영업팀에서 연락을 드릴 것입니다."
+  "YouWillBeContacted": "요청을 생성하면 영업팀에서 연락을 드릴 것입니다.",
+  "EmptyAIAgentsAIDisabledDescription": "이 섹션을 통해 사용자는 {{aiAgents}}와 함께 작업할 수 있습니다 — 문서 처리 및 기타 작업을 위한 스마트 어시스턴트입니다.\n사용을 시작하려면 {{productName}} 관리자가 AI 기능 서비스를 활성화해야 합니다."
 }

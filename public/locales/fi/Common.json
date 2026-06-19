@@ -73,9 +73,6 @@
   "AIChatOfferHelp": "Miten voin auttaa?",
   "AIChats": "AI-keskustelut",
   "AICreditsHelper": "Täydennä mitä tahansa määrällä — luottoja ei koskaan vanhene. Luotot vähenevät automaattisesti käytön mukaan.",
-  "AIDisabledInfoBlockAdminSaasDescription": "Tekoälyominaisuudet ovat tällä hetkellä pois käytöstä, mikä tarkoittaa, että tämä agentti ei voi käsitellä keskusteluja tai tehtäviä. Palauttaaksesi täyden toiminnallisuuden, ota tekoälyominaisuudet käyttöön {{productName}}-asetuksissa.",
-  "AIDisabledInfoBlockAdminStandaloneDescription": "AI-ominaisuudet ovat tällä hetkellä pois päältä, mikä tarkoittaa, että tämä agentti ei voi käsitellä keskusteluja tai tehtäviä. Yhdistä oma AI-palvelusi avataksesi edistyneitä ominaisuuksia {{productName}}-palvelussa.",
-  "AIDisabledInfoBlockUserDescription": "Tekoälyominaisuudet ovat tällä hetkellä pois käytöstä, mikä tarkoittaa, että tämä agentti ei voi käsitellä keskusteluja tai tehtäviä. Jotta pääset takaisin raiteille, pyydä {{productName}}-järjestelmän ylläpitäjää ottamaan tekoälyominaisuudet käyttöön.",
   "AIFeature": "Tekoälyominaisuus",
   "AIFeaturesAreCurrentlyDisabled": "AI-ominaisuudet on tällä hetkellä poissa käytöstä",
   "AIGenerateDocumentDescription": "Uusi asiakirja luodaan ja avataan editorissa. Tämän jälkeen AI kirjoittaa luodun sisällön suoraan asiakirjaan.",
@@ -97,8 +94,6 @@
   "AIPaywallCallbackProcessingFooter": "Stripen suojaama suojattu tapahtuma.",
   "AIPaywallCallbackProcessingHint": "Ladataan krediittejä ja aktivoidaan AI-ominaisuuksia. Tämä kestää yleensä muutaman sekunnin.",
   "AIPaywallCallbackStepActivate": "AI-ominaisuuksien aktivointi",
-  "AIPaywallCallbackStepLinkCard": "Korttisi suojattu yhdistäminen",
-  "AIPaywallCallbackStepTopUp": "AI-saldosi lataaminen",
   "AIPaywallCallbackSuccess": "Kaikki on valmista",
   "AIPaywallCallbackSuccessHint": "{{price}} krediittejä on valmiina AI-saldollasi. Palaa työtilaan aloittaaksesi AI:n käytön.",
   "AIPaywallCompletedHint": "Ladataan käyttötietoja, tapahtumia ja palvelinhallintaa...",
@@ -499,8 +494,6 @@
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Liitä oma tekoälypalvelimesi avataksesi edistyneitä ominaisuuksia {{productName}}:ssa. Kun se on lisätty, se on käytettävissä kaikille käyttäjille {{aiChats}}:ssa.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} ei ole vielä saatavilla",
   "EmptyBackupList": "Ei varmuuskopioita. Luo yksi tai useampi varmuuskopio ja ne näkyvät tässä listassa.",
-  "EmptyChatAIDisabledSaasAdminDescription": "Tekoälypalvelu on poissa käytöstä, mikä estää tätä agenttia käsittelemästä keskusteluja tai suorittamasta tehtäviä. Palauttaaksesi täyden toiminnallisuuden, ota tekoälyominaisuudet käyttöön {{productName}}-asetuksissa.",
-  "EmptyChatAIDisabledUserDescription": "Teknologian tekoälyominaisuudet ovat tällä hetkellä pois käytöstä, mikä tarkoittaa, että tämä agentti ei voi käsitellä keskusteluja tai tehtäviä. Jotta pääset takaisin raiteille, pyydä {{productName}}-järjestelmän ylläpitäjää ottamaan tekoälyominaisuudet käyttöön.",
   "EmptyCompletedForms": "Ei täytettyjä lomakkeita vielä.",
   "EmptyDescription": "Luettelo käyttäjistä, jotka on aiemmin kutsuttu {{productName}} tai erillisiin huoneisiin, ilmestyy tähän. Voit kutsua näitä käyttäjiä yhteistyöhön milloin tahansa.",
   "EmptyEmail": "Yhtään sähköpostia ei ole jäsennelty",
@@ -1552,5 +1545,6 @@
   "YourName": "Nimesi",
   "YourPrice": "Hintasi",
   "YourTurn": "Sinun vuorosi",
-  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen."
+  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen.",
+  "EmptyAIAgentsAIDisabledDescription": "\"{{aiAgents}}\"-osio antaa käyttäjille mahdollisuuden työskennellä älykkäiden avustajien kanssa asiakirjojen käsittelyyn ja muiden tehtävien suorittamiseen.\nAloittaaksesi niiden käytön, AI-ominaisuuksien palvelu on oltava käytössä {{productName}}-järjestelmänvalvojan toimesta."
 }

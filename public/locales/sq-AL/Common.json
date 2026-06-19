@@ -73,9 +73,6 @@
   "AIChatOfferHelp": "Si mund të ju ndihmoj?",
   "AIChats": "Bisedime IA",
   "AICreditsHelper": "Shtoni me çdo shumë — kreditet nuk skadojnë kurrë. Kreditet zbriten automatikisht bazuar në përdorimin real.",
-  "AIDisabledInfoBlockAdminSaasDescription": "Aftësitë e inteligjencës artificiale janë aktualisht të çaktivizuara, që do të thotë se ky agjent nuk mund të përpunojë biseda ose detyra. Për të rivendosur funksionalitetin e plotë, aktivizoni veçoritë e inteligjencës artificiale në cilësimet e {{productName}}.",
-  "AIDisabledInfoBlockAdminStandaloneDescription": "Aftësitë e inteligjencës artificiale janë aktualisht të çaktivizuara, që do të thotë se ky agjent nuk mund të përpunojë biseda ose detyra. Lidh shërbimin tënd të inteligjencës artificiale për të zhbllokuar veçori të përparuara në {{productName}}.",
-  "AIDisabledInfoBlockUserDescription": "Aftësitë e inteligjencës artificiale janë aktualisht të çaktivizuara, që do të thotë se ky agjent nuk mund të përpunojë biseda ose detyra. Për t'u rikthyer në rrugën e duhur, kërkojini administratorit tuaj të {{productName}} të aktivizojë veçoritë e inteligjencës artificiale.",
   "AIFeature": "Veçori i IA",
   "AIFeaturesAreCurrentlyDisabled": "Funksionet e inteligjencës artificiale janë aktualisht të çaktivizuara",
   "AIGenerateDocumentDescription": "Do të krijohet një dokument i ri dhe do të hapet në editor. IA do të shkruajë më pas përmbajtjen e gjeneruar direkt në dokument.",
@@ -97,8 +94,6 @@
   "AIPaywallCallbackProcessingFooter": "Transaksion i sigurt i mundësuar nga Stripe.",
   "AIPaywallCallbackProcessingHint": "Po ngarkojmë kredite dhe po aktivizojmë funksionet IA. Kjo zakonisht zgjat disa sekonda.",
   "AIPaywallCallbackStepActivate": "Aktivizimi i funksioneve IA",
-  "AIPaywallCallbackStepLinkCard": "Lidhja e sigurt e kartës suaj",
-  "AIPaywallCallbackStepTopUp": "Rimbushja e balancës suaj IA",
   "AIPaywallCallbackSuccess": "Jeni gati",
   "AIPaywallCallbackSuccessHint": "{{price}} në kredite është gati në balancën tuaj IA. Kthehuni në hapësirën tuaj të punës për të filluar përdorimin e IA.",
   "AIPaywallCompletedHint": "Po ngarkon përdorimin, transaksionet dhe kontrollet e shërbimit...",
@@ -499,8 +494,6 @@
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Lidhni shërbimin tuaj të IA-së për të zhbllokuar funksionalitetet e avancuara në {{productName}}. Pasi të shtohet, do të jetë i aksesueshëm për të gjithë përdoruesit në {{aiChats}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} nuk është në dispozicion ende",
   "EmptyBackupList": "Asnjë kopje rezervë nuk është krijuar ende. Krijoni një ose më shumë kopje rezervë që ato të shfaqen në këtë listë.",
-  "EmptyChatAIDisabledSaasAdminDescription": "Shërbimi i IA-së është i çaktivizuar, duke e penguar këtë agjent të përpunojë biseda ose të kryejë detyra. Për të rivendosur funksionalitetin e plotë, aktivizoni veçoritë e IA-së në cilësimet e {{productName}}.",
-  "EmptyChatAIDisabledUserDescription": "Aftësitë e inteligjencës artificiale janë aktualisht të çaktivizuara, që do të thotë se ky agjent nuk mund të përpunojë biseda ose detyra. Për t'u rikthyer në rrugën e duhur, kërkojini administratorit tuaj të {{productName}} të aktivizojë veçoritë e inteligjencës artificiale.",
   "EmptyCompletedForms": "Nuk ka formularë të plotësuara ende.",
   "EmptyDescription": "Lista e përdoruesve të ftuar më parë në {{productName}} ose dhoma të veçanta do të shfaqet këtu. Ju do të mund t'i ftoni këta përdorues për bashkëpunim në çdo kohë.",
   "EmptyEmail": "Asnjë adresë emaili e analizuar",
@@ -1552,5 +1545,6 @@
   "YourName": "Emri juaj",
   "YourPrice": "Çmimi juaj",
   "YourTurn": "Radha jote",
-  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës."
+  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës.",
+  "EmptyAIAgentsAIDisabledDescription": "Seksioni \"{{aiAgents}}\" u lejon përdoruesve të punojnë me asistentë inteligjentë për të përpunuar dokumente dhe për të kryer detyra të tjera. \nPër të filluar përdorimin e tyre, shërbimi i veçorive të IA duhet të aktivizohet nga administratori juaj i {{productName}}."
 }

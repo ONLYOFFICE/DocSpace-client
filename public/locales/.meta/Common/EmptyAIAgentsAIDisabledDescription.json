@@ -1,21 +1,21 @@
 {
-  "key_path": "EmptyChatAIDisabledSaasAdminDescription",
-  "content": "The AI service is turned off, preventing this agent from processing chats or performing tasks. To restore full functionality, enable AI features in the {{productName}} settings.",
-  "content_en_sha1_hash": "3701608d9d13b0f9a0ae4b7a8e7ac16d12d3d769",
-  "created_at": "2025-11-03T12:10:17.296Z",
-  "updated_at": "2026-05-15T14:00:06.991Z",
+  "key_path": "EmptyAIAgentsAIDisabledDescription",
+  "content": "This section allows users to work with {{aiAgents}} — smart assistants for handling documents and other tasks. \nTo start using them, the AI features service must be enabled by your {{productName}} admin.",
+  "content_en_sha1_hash": "39dc95677251273fcbab3dcdd56d62e7720a6e59",
+  "created_at": "2025-12-19T13:03:52.163Z",
+  "updated_at": "2026-05-15T14:00:06.603Z",
   "comment": {
-    "text": "This is an error message displayed to a SaaS administrator when the AI service is disabled, explaining that the AI agent cannot process chats or perform tasks. It includes the `{{productName}}` variable for the product's brand name.",
+    "text": "This is a description displayed in an empty state for the AI Agents section. It informs users that AI features are disabled and need to be enabled by an administrator. `{{aiAgents}}` refers to AI assistants, and `{{productName}}` is the name of the product.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:54:07.025Z",
+    "updated_at": "2026-04-11T21:07:13.062Z",
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-no-access-screen/index.tsx",
-      "line_number": 89,
-      "context": "},\n ),\n )\n // saas admin\n .with([false, true], () =>\n t(\"EmptyChatAIDisabledSaasAdminDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n )\n // standalone/saas user\n .with([P._, false], () =>",
-      "module": "/libs/ui-kit"
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 242,
+      "context": "productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n }),\n )\n .otherwise(() =>\n t(\"EmptyView:EmptyAIAgentsAIDisabledDescription\", {\n productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n }),\n );\n };",
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

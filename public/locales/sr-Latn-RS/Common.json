@@ -73,9 +73,6 @@
   "AIChatOfferHelp": "Kako mogu da pomognem?",
   "AIChats": "AI ćatovi",
   "AICreditsHelper": "Napunite bilo kojim iznosom — krediti nikada ne isteknu. Krediti se automatski odbijaju na osnovu stvarnog korišćenja.",
-  "AIDisabledInfoBlockAdminSaasDescription": "AI funkcionalnosti su trenutno isključene, što znači da ovaj agent ne može obrađivati razgovore ni zadatke. Da biste vratili punu funkcionalnost, omogućite AI funkcije u podešavanjima {{productName}}.",
-  "AIDisabledInfoBlockAdminStandaloneDescription": "AI funkcionalnosti su trenutno isključene, što znači da ovaj agent ne može obrađivati razgovore ni zadatke. Povežite sopstveni AI servis da biste otključali napredne funkcije u {{productName}}.",
-  "AIDisabledInfoBlockUserDescription": "AI funkcionalnosti su trenutno isključene, što znači da ovaj agent ne može obrađivati razgovore ni zadatke. Da biste nastavili sa radom, zamolite svog {{productName}} administratora da omogući AI funkcije.",
   "AIFeature": "AI funkcija",
   "AIFeaturesAreCurrentlyDisabled": "AI funkcije su trenutno onemogućene",
   "AIGenerateDocumentDescription": "Biće kreiran novi dokument i otvoren u uređivaču. AI će zatim upisati generisani sadržaj direktno u dokument.",
@@ -97,8 +94,6 @@
   "AIPaywallCallbackProcessingFooter": "Bezbedna transakcija putem Stripe.",
   "AIPaywallCallbackProcessingHint": "Učitavamo kredite i aktiviramo AI funkcije. Obično traje samo nekoliko sekundi.",
   "AIPaywallCallbackStepActivate": "Aktiviranje AI funkcija",
-  "AIPaywallCallbackStepLinkCard": "Bezbedno povezivanje vaše kartice",
-  "AIPaywallCallbackStepTopUp": "Dopunjavanje vašeg AI balansa",
   "AIPaywallCallbackSuccess": "Sve je spremno",
   "AIPaywallCallbackSuccessHint": "{{price}} kredita je spremno na vašem AI balansu. Vratite se u radni prostor da biste počeli da koristite AI.",
   "AIPaywallCompletedHint": "Učitavamo vašu upotrebu, transakcije i kontrolu usluge...",
@@ -499,8 +494,6 @@
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Povežite vašu sopstvenu AI uslugu da biste otključali napredne funkcije u {{productName}}. Nakon dodavanja, biće dostupna svim korisnicima u {{aiChats}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} još nije dostupan",
   "EmptyBackupList": "Još uvek nije kreirana nijedna rezervna kopija. Kreirajte jednu ili više rezervnih kopija da bi se pojavile na ovoj listi.",
-  "EmptyChatAIDisabledSaasAdminDescription": "AI usluga je isključena, sprečavajući ovog agenta da obrađuje ćaskanja ili obavlja zadatke. Da biste vratili punu funkcionalnost, omogućite AI funkcije u podešavanjima {{productName}}.",
-  "EmptyChatAIDisabledUserDescription": "AI mogućnosti su trenutno isključene, što znači da ovaj agent ne može da obrađuje razgovore ili zadatke. Da biste se vratili na pravi put, zamolite svog {{productName}} administratora da omogući AI funkcije.",
   "EmptyCompletedForms": "Nema još završenih formulara.",
   "EmptyDescription": "Lista korisnika koji su prethodno pozvani u {{productName}} ili odvojene sobe pojaviće se ovde. Moći ćete da pozovete ove korisnike za saradnju u bilo koje vreme.",
   "EmptyEmail": "Nema obrađene email adrese",
@@ -1552,5 +1545,6 @@
   "YourName": "Vaše ime",
   "YourPrice": "Vaša cena",
   "YourTurn": "Vaš red",
-  "YouWillBeContacted": "Prodajni tim će vas kontaktirati nakon kreiranja zahteva."
+  "YouWillBeContacted": "Prodajni tim će vas kontaktirati nakon kreiranja zahteva.",
+  "EmptyAIAgentsAIDisabledDescription": "Odeljak „{{aiAgents}}“ omogućava korisnicima da rade sa inteligentnim asistentima kako bi obrađivali dokumente i obavljali druge zadatke. \nDa biste počeli da ih koristite, AI funkcionalnost mora biti omogućena od strane {{productName}} administratora."
 }

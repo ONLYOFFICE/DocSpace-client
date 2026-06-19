@@ -217,12 +217,14 @@ export const AppsSidebarView = ({
           scrollBodyClassName={styles.scrollBody}
         >
           {showBackButton && (
-            <BackButton
-              showText={showText}
-              currentDeviceType={currentDeviceType}
-              onBack={onBack}
-              toggleArticleOpen={toggleArticleOpen}
-            />
+            <div className={styles.backButtonWrapper}>
+              <BackButton
+                showText={showText}
+                currentDeviceType={currentDeviceType}
+                onBack={onBack}
+                toggleArticleOpen={toggleArticleOpen}
+              />
+            </div>
           )}
           <NavMenu
             groups={mobileGroups}

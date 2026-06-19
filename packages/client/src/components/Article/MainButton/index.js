@@ -744,6 +744,8 @@ const ArticleMainButtonContent = (props) => {
 
     if (isAIAgentsFolder && aiConfig?.aiReadyNeedReset) visibilityValue = false;
 
+    if (showActivateAIDialog && isMobileArticle) visibilityValue = true;
+
     return visibilityValue;
   };
 
@@ -754,7 +756,7 @@ const ArticleMainButtonContent = (props) => {
   }, [mainButtonVisible]);
 
   const onMainButtonClick = () => {
-    if (isAIAgentsFolder) return onCreateAgent();
+    if (isAIAgentsFolder) return onMainButtonAgentClick();
     if (!isAccountsPage) return onCreateRoom();
     if (isContactsGroupsPage) return createGroup(currentFolderId, "sidebar");
   };

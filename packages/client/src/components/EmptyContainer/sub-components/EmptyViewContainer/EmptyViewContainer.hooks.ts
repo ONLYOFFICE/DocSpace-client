@@ -54,7 +54,7 @@ import { CategoryType } from "@docspace/shared/constants";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
-import { useAIActivation } from "SRC_DIR/hooks/useAIActivation";
+import { useAIActivation } from "SRC_DIR/Hooks/useAIActivation";
 
 import {
   getDescription,

@@ -66,7 +66,7 @@ import type ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
 import MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
 import AiRoomStore from "SRC_DIR/store/AiRoomStore";
-import { useAIActivation } from "SRC_DIR/hooks/useAIActivation";
+import { useAIActivation } from "SRC_DIR/Hooks/useAIActivation";
 import ClientSimpleTopUpDialog from "SRC_DIR/components/EmptyContainer/sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
 import { useScroll } from "./useScroll";
 import styles from "./AIAgentView.module.scss";

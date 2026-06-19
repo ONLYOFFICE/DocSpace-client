@@ -47,7 +47,7 @@ import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import AIFeaturesDialog from "@docspace/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
-import { useAIActivation } from "SRC_DIR/hooks/useAIActivation";
+import { useAIActivation } from "SRC_DIR/Hooks/useAIActivation";
 import ClientSimpleTopUpDialog from "./sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
 
 const KnowledgeDisabledContainer = (props) => {

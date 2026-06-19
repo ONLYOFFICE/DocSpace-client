@@ -210,9 +210,8 @@ const ArticleMainButtonContent = (props) => {
     const event = new CustomEvent(Events.ROOM_CREATE, {
       detail: { parentId: currentFolderId, context: "sidebar" },
     });
-    // In the "Forms" section only Form Filling Rooms can be created.
     if (window.location.pathname.startsWith("/forms")) {
-      event.payload = { startRoomType: RoomsType.FormRoom };
+      event.payload = { isFormsCreate: true };
     }
     window.dispatchEvent(event);
   }, [isWarningRoomsDialog, currentFolderId]);

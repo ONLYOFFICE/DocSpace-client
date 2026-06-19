@@ -418,16 +418,8 @@ class CreateEditRoomStore {
 
     setRoomCreated(true);
 
-    const {
-      title,
-      icon,
-      tags,
-      invitations,
-      roomType,
-      isAvailable,
-      quota,
-      logo,
-    } = roomParams;
+    const { title, icon, tags, invitations, isAvailable, quota, logo } =
+      roomParams;
 
     const logoCover = cover
       ? {
@@ -524,7 +516,7 @@ class CreateEditRoomStore {
       await this.onOpenNewRoom({
         id: progressData.templateId,
         title,
-        roomType,
+        roomType: item.roomType,
         rootFolderType: FolderType.RoomTemplates,
       } as unknown as TRoom);
     }

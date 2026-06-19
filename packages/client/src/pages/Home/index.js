@@ -642,7 +642,7 @@ const PureHome = observer((props) => {
             </Section.SectionFilter>
           ) : null}
 
-          {isFormsSection ? (
+          {isFormsSection && !isTemplatesFolder ? (
             !isFormSetBannerClosed ? (
               <Section.SectionBanner>
                 <ChooseFormSetBanner onClose={closeFormSetBanner} />

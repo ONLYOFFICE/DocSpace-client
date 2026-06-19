@@ -90,6 +90,9 @@ type Props = {
   canEditAgent?: boolean;
   aiConfig?: SettingsStore["aiConfig"];
   canUseChat?: AccessRightsStore["canUseChat"];
+  isPayer?: boolean;
+  walletCustomerEmail?: string | null;
+  walletCustomerDisplayName?: string | null;
 
   setMediaViewerVisible?: MediaViewerDataStore["setMediaViewerVisible"];
   setAiPlaylistImages?: AiRoomStore["setAiPlaylistImages"];
@@ -118,6 +121,10 @@ const AIAgentViewComponent = ({
   canUseChat,
   setMediaViewerVisible,
   setAiPlaylistImages,
+  standalone,
+  isPayer,
+  walletCustomerEmail,
+  walletCustomerDisplayName,
 }: Props) => {
   const navigate = useNavigate();
   const scrollRef = useScroll();
@@ -198,7 +205,10 @@ const AIAgentViewComponent = ({
             aiReady={aiConfig?.aiReady || false}
             modelAliases={aiConfig?.modelAliases}
             recommendedModelForForms={aiConfig?.recommendedModelForForms}
-            standalone // NOTE: AI SaaS same as AI Standalone in v.4.0
+            standalone={standalone}
+            isPayer={isPayer}
+            walletCustomerEmail={walletCustomerEmail}
+            walletCustomerDisplayName={walletCustomerDisplayName}
             getResultStorageId={getResultStorageId}
             multimodal={
               chatSettings?.capabilities?.vision !== false
@@ -236,6 +246,8 @@ export const AIAgentView = inject(
     accessRightsStore,
     mediaViewerDataStore,
     aiRoomStore,
+    paymentStore,
+    currentTariffStatusStore,
   }: TStore) => {
     const { isErrorAIAgentNotAvailable } = filesStore;
 
@@ -254,11 +266,14 @@ export const AIAgentView = inject(
 
     const canEditAgent = !!security?.EditRoom;
 
-    const { aiConfig } = settingsStore;
+    const { aiConfig, standalone } = settingsStore;
 
     const { canUseChat } = accessRightsStore;
 
     const { setAiPlaylistImages } = aiRoomStore;
+
+    const { isPayer } = paymentStore;
+    const { walletCustomerEmail, walletCustomerInfo } = currentTariffStatusStore;
 
     return {
       isErrorAIAgentNotAvailable,
@@ -272,7 +287,10 @@ export const AIAgentView = inject(
       canEditAgent,
       aiConfig,
       canUseChat,
-
+      standalone,
+      isPayer,
+      walletCustomerEmail,
+      walletCustomerDisplayName: walletCustomerInfo?.displayName,
       setMediaViewerVisible,
       setAiPlaylistImages,
     };

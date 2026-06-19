@@ -214,7 +214,7 @@ const getAIAgentsAIDisabledTitle = (
         aiProvider: t("Common:AIProvider"),
       }),
     )
-    .with([false, true], () => t("EmptyView:EmptyAIAgentsNotActiveYetTitle"))
+    .with([false, true], () => t("Common:EmptyAIAgentsNotActiveYetTitle"))
     .otherwise(() =>
       t("EmptyView:EmptyAIAgentsAIDisabledUserTitle", {
         aiAgents: t("Common:AIAgents"),
@@ -243,15 +243,15 @@ const getAIAgentsAIDisabledDescription = (
       return (
         <>
           <Text as="span">
-            {t("EmptyView:EmptyAIAgentsNotActiveYetDescription")}
+            {t("Common:EmptyAIAgentsNotActiveYetDescription")}
           </Text>
           <Text as="span" style={{ display: "block", marginTop: "8px" }}>
-            {t("EmptyView:EmptyAIAgentsNotActiveYetDescriptionLine2")}
+            {t("Common:EmptyAIAgentsNotActiveYetDescriptionLine2")}
           </Text>
           {!isPayer && payerLabel ? (
             <Text as="span" style={{ display: "block", marginTop: "8px" }}>
               <Trans
-                i18nKey="EmptyView:EmptyAIAgentsNotActiveYetContactPayer"
+                i18nKey="Common:EmptyAIAgentsNotActiveYetContactPayer"
                 values={{ payerContact: payerLabel }}
                 components={{
                   1:

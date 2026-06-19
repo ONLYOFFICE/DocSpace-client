@@ -3416,7 +3416,8 @@ class ContextOptionsStore {
 
       const pluginOptions = this.onMultiLoadPlugins(selection);
 
-      options.push(archiveOptions, ...pluginOptions);
+      if (archiveOptions) options.push(archiveOptions);
+      options.push(...pluginOptions);
 
       canDelete &&
         options.push({

@@ -51,8 +51,10 @@ import ArticleDevToolsBar from "@docspace/ui-kit/components/article/sub-componen
 import { useSectionNavigation } from "SRC_DIR/contexts/SectionNavigationContext";
 import CollapseButton from "./CollapseButton";
 import ProfileBlock from "./ProfileBlock";
+import AppsPluginItems from "./AppsPluginItems/AppsPluginItems";
 import { useSidebarShowText } from "./useSidebarShowText";
 import styles from "./AppsSidebar.module.scss";
+import type { AppsPluginsItems } from "./AppsPluginItems/AppsPluginItems.types";
 
 // "primary" — main client sidebar (footer + no back button).
 // "secondary" — accounts / developer-tools / portal-settings (back button, no footer).
@@ -74,6 +76,7 @@ type AppsSidebarViewProps = AppsSidebarProps & {
   user?: TUser | null;
   isNotPaidPeriod?: boolean;
   articleOpen?: boolean;
+  articleButtonItems?: AppsPluginsItems | null;
   toggleArticleOpen?: () => void;
   onBack?: () => void;
 };
@@ -89,9 +92,12 @@ export const AppsSidebarView = ({
   articleOpen = true,
   toggleArticleOpen,
   onBack,
+  articleButtonItems,
 }: AppsSidebarViewProps) => {
   const showBackButton = variant === "secondary";
   const hideFooter = variant === "secondary";
+
+  const hasPluginItems = !!articleButtonItems && articleButtonItems.length > 0;
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
   const { isBase } = useTheme();
@@ -233,21 +239,26 @@ export const AppsSidebarView = ({
             withAnimation
           />
 
-          {/* Developer Tools banner lives inside the scroll body so it scrolls
-              with the apps list on overflow, and stays pinned to the bottom
-              (via margin-block-start: auto) when there is free space above.
-              Collapses to an icon-only button on tablet (`!showText`). */}
-          {!hideFooter && showDevTools && (
+          {(hasPluginItems || (showDevTools && !hideFooter)) && (
             <div className={styles.footer}>
-              <ArticleDevToolsBar
-                showText={showText}
-                articleOpen={articleOpen}
-                withCustomSlot={false}
-                currentDeviceType={currentDeviceType}
-                toggleArticleOpen={toggleArticleOpen ?? (() => {})}
-                path="/developer-tools/overview"
-                navigate={navigate}
-              />
+              {articleButtonItems && articleButtonItems.length > 0 ? (
+                <AppsPluginItems
+                  items={articleButtonItems}
+                  showText={showText}
+                  withDevTools={showDevTools && !hideFooter}
+                />
+              ) : null}
+              {showDevTools && !hideFooter && (
+                <ArticleDevToolsBar
+                  showText={showText}
+                  articleOpen={articleOpen}
+                  withCustomSlot={hasPluginItems}
+                  currentDeviceType={currentDeviceType}
+                  toggleArticleOpen={toggleArticleOpen ?? (() => {})}
+                  path="/developer-tools/overview"
+                  navigate={navigate}
+                />
+              )}
             </div>
           )}
         </Scrollbar>
@@ -281,6 +292,7 @@ type AppsSidebarConnectedProps = AppsSidebarProps & {
   isNotPaidPeriod?: boolean;
   articleOpen?: boolean;
   toggleArticleOpen?: () => void;
+  articleButtonItems?: AppsPluginsItems | null;
 };
 
 const AppsSidebar = ({
@@ -310,12 +322,12 @@ const AppsSidebar = ({
 };
 
 export default inject<TStore>(
-  ({ userStore, settingsStore, currentTariffStatusStore }) => ({
+  ({ userStore, settingsStore, currentTariffStatusStore, pluginStore }) => ({
     user: userStore.user,
     currentDeviceType: settingsStore.currentDeviceType,
     articleOpen: settingsStore.articleOpen,
     toggleArticleOpen: settingsStore.toggleArticleOpen,
     isNotPaidPeriod: currentTariffStatusStore.isNotPaidPeriod,
+    articleButtonItems: pluginStore?.articleButtonItemsList,
   }),
 )(observer(AppsSidebar));
-

@@ -985,6 +985,7 @@
   "PaymentsTitle": "Płatności",
   "PDFs": "PDFs",
   "People": "Ludzie",
+  "PeopleSelectorInfo": "Tylko administrator pokoju lub administrator {{productName}} może zostać właścicielem pokoju",
   "PerBackup": "{{currency}} za 1 kopię zapasową",
   "Permissions": "Uprawnienia",
   "PerStorage": "{{currency}} za {{amount}}/miesiąc",

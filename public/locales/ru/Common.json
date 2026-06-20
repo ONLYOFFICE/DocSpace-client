@@ -985,6 +985,7 @@
   "PaymentsTitle": "Платежи",
   "PDFs": "PDF-файлы",
   "People": "Люди",
+  "PeopleSelectorInfo": "Владельцем комнаты может стать только администратор комнаты или администратор {{productName}}.",
   "PerBackup": "{{currency}} за 1 резервную копию",
   "Permissions": "Права доступа",
   "PerStorage": "{{currency}} за {{amount}}/месяц",

@@ -24,7 +24,6 @@
   "NeedMoreIntegrationsDescription": "Use webhooks to send data to your own system, or connect forms to thousands of services via Zapier.",
   "NoDatabaseConnections": "No database connections configured",
   "NoDatabaseConnectionsRoomAdmin": "Database connections are configured by an administrator. Once a database is set up, you’ll be able to enable export here.",
-  "PeopleSelectorInfo": "Only a room admin or a {{productName}} admin can become the owner of the room",
   "Position": "Position",
   "PublicRoomBarDescription": "This room is available to anyone with the link. Access for external users is provided depending on the selected type of access rights.",
   "PublicRoomSystemFoldersDescription": "System folders store copies of forms at different stages of completion. Forms that are being filled are stored in the In progress folder, and completed forms are stored in the Complete folder.",

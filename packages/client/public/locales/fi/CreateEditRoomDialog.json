@@ -24,7 +24,6 @@
   "NeedMoreIntegrationsDescription": "Käytä webhooks-tekniikkaa lähettämään tiedot omalle järjestelmällesi, tai yhdistä lomakkeet tuhansiin palveluihin Zapierin kautta.",
   "NoDatabaseConnections": "Ei määritettyjä tietokantayhteyksiä",
   "NoDatabaseConnectionsRoomAdmin": "Tietokantayhteydet määritetään ylläpitäjän toimesta. Kun tietokanta on määritetty, voit ottaa viennin käyttöön tässä.",
-  "PeopleSelectorInfo": "Vain huoneen järjestelmänvalvojasta tai {{productName}}:n järjestelmänvalvojasta voi tulla huoneen omistaja.",
   "Position": "Asema",
   "PublicRoomBarDescription": "Tämä huone on kaikille, joilla on linkki. Ulkoisilla käyttäjillä on pääsy riippuen valituista pääsyoikeuksista. ",
   "PublicRoomSystemFoldersDescription": "Järjestelmäkansiot säilyttävät lomakkeiden kopioita niiden eri täyttövaiheissa. Lomakkeita, joita täytetään, säilytetään Keskeneräiset-kansiossa, ja valmiita lomakkeita säilytetään Valmiit-kansiossa.",

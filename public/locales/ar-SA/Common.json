@@ -985,6 +985,7 @@
   "PaymentsTitle": "المدفوعات",
   "PDFs": "ملفات PDF",
   "People": "الأشخاص",
+  "PeopleSelectorInfo": "يمكن فقط لمسؤول الغرفة أو مسؤول {{productName}} أن يصبح مالك الغرفة",
   "PerBackup": "{{currency}} لكل نسخة احتياطية واحدة",
   "Permissions": "الصلاحيات",
   "PerStorage": "{{currency}} لكل {{amount}}/شهر",

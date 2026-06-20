@@ -985,6 +985,7 @@
   "PaymentsTitle": "Zahlungen",
   "PDFs": "PDFs",
   "People": "Personen",
+  "PeopleSelectorInfo": "Nur ein Raumadministrator oder ein {{productName}}-Administrator kann Besitzer des Raums werden",
   "PerBackup": "{{currency}} pro 1 Backup",
   "Permissions": "Berechtigungen",
   "PerStorage": "{{currency}} pro {{amount}}/Monat",

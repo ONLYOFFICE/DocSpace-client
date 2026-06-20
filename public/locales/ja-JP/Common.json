@@ -985,6 +985,7 @@
   "PaymentsTitle": "お支払い",
   "PDFs": "PDFs",
   "People": "方々",
+  "PeopleSelectorInfo": "ルーム管理者または{{productName}}管理者のみがルーム所有者になることができます。",
   "PerBackup": "1 バックアップごとに {{currency}} ",
   "Permissions": "権限",
   "PerStorage": "{{currency}}　{{amount}}/月",

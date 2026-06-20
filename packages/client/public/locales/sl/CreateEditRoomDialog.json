@@ -24,7 +24,6 @@
   "NeedMoreIntegrationsDescription": "Uporabite webhooks za pošiljanje podatkov v vašo lastno sistemo ali povežite obrazce z tisoči storitev preko Zapier.",
   "NoDatabaseConnections": "Ni konfiguriranih povezav z bazama podatkov",
   "NoDatabaseConnectionsRoomAdmin": "Povezave z bazo konfigurira administrator. Ko bo baza nastavljena, boste tukaj lahko omogočili izvoz.",
-  "PeopleSelectorInfo": "Samo skrbnik sobe ali skrbnik {{productName}} lahko postaneta lastnika sobe",
   "Position": "Pozicija",
   "PublicRoomBarDescription": "Ta soba je na voljo vsem s povezavo. Dostop za zunanje uporabnike je zagotovljen v skladu z izbrano vrsto pravic za dostop.",
   "PublicRoomSystemFoldersDescription": "Sistemske mape hranijo kopije obrazcev z različnimi stopnjami dokončanja. Obrazci, ki se izpolnjujejo, so shranjeni v mapi V teku, izpolnjeni obrazci pa v mapi »Dokončano«.",

@@ -985,6 +985,7 @@
   "PaymentsTitle": "Plăți",
   "PDFs": "PDFs",
   "People": "Persoane",
+  "PeopleSelectorInfo": "Numai administratorul sălii sau administratorul spaţiului {{productName}} poate deveni proprietar al sălii",
   "PerBackup": "{{currency}} pentru o copie de rezervă",
   "Permissions": "Permisiuni",
   "PerStorage": "{{currency}} pentru {{amount}}/lună",

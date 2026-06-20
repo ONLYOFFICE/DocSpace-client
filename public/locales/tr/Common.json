@@ -985,6 +985,7 @@
   "PaymentsTitle": "Ödemeler",
   "PDFs": "PDF'ler",
   "People": "Kişiler",
+  "PeopleSelectorInfo": "Sadece bir oda yöneticisi veya bir {{productName}} yöneticisi odanın sahibi olabilir",
   "PerBackup": "{{currency}} başına 1 yedekleme",
   "Permissions": "İzinler",
   "PerStorage": "{{currency}} başına {{amount}}/ay",

@@ -985,6 +985,7 @@
   "PaymentsTitle": "Плащания",
   "PDFs": "PDFs",
   "People": "Хора",
+  "PeopleSelectorInfo": "Само администратор на стая или {{productName}} администратор може да стане собственик на стаята",
   "PerBackup": "{{currency}} на 1 резервно копие",
   "Permissions": "Разрешения",
   "PerStorage": "{{currency}} на {{amount}}/месец",

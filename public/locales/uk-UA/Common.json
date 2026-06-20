@@ -985,6 +985,7 @@
   "PaymentsTitle": "Платежі",
   "PDFs": "PDFs",
   "People": "Люди",
+  "PeopleSelectorInfo": "Власником кімнати може стати лише адміністратор кімнати або адміністратор простору  {{productName}}",
   "PerBackup": "{{currency}} за 1 резервну копію",
   "Permissions": "Дозволи",
   "PerStorage": "{{currency}} за {{amount}}/місяць",

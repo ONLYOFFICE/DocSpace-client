@@ -985,6 +985,7 @@
   "PaymentsTitle": "Վճարումներ",
   "PDFs": "PDFs",
   "People": "Մարդիկ",
+  "PeopleSelectorInfo": "Սենյակի սեփականատեր կարող է դառնալ միայն սենյակի ադմինը կամ {{productName}}-ի ադմինը",
   "PerBackup": "{{currency}} մեկ պահուստավորման համար",
   "Permissions": "Թույլտվություններ",
   "PerStorage": "{{currency}} յուրաքանչյուր {{amount}}/ամիս",

@@ -24,7 +24,6 @@
   "NeedMoreIntegrationsDescription": "Použite webhooks na odoslanie údajov do vlastného systému alebo pripojte formuláre k tisícom službami cez Zapier.",
   "NoDatabaseConnections": "Nie je nakonfigurované žiadne pripojenie k databáze",
   "NoDatabaseConnectionsRoomAdmin": "Pripojenia k databáze konfiguruje administrátor. Po nastavení databázy si tu budete môcť povoliť export.",
-  "PeopleSelectorInfo": "Vlastníkom miestnosti sa môže stať iba administrátor miestnosti alebo administrátor priestoru {{productName}}.",
   "Position": "Pozícia",
   "PublicRoomBarDescription": "Táto miestnosť je dostupná každému, kto má odkaz. Prístup pre externých používateľov sa udeľuje v závislosti od zvoleného typu prístupových práv.",
   "PublicRoomSystemFoldersDescription": "V systémových priečinkoch sa uchovávajú kópie formulárov v rôznych štádiách dokončenia. Vypĺňané formuláre sa ukladajú do priečinka V procese a dokončené formuláre sa ukladajú do priečinka Vyplnené.",

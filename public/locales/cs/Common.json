@@ -985,6 +985,7 @@
   "PaymentsTitle": "Platby",
   "PDFs": "PDFy",
   "People": "Lidé",
+  "PeopleSelectorInfo": "Vlastníkem místnosti se může stát pouze správce místnosti nebo správce prostoru {{productName}}",
   "PerBackup": "{{currency}} za 1 zálohu",
   "Permissions": "Oprávnění",
   "PerStorage": "{{currency}} za {{amount}}/měsíc",

@@ -985,6 +985,7 @@
   "PaymentsTitle": "ගෙවීම්",
   "PDFs": "PDFs",
   "People": "පුද්ගලයින්",
+  "PeopleSelectorInfo": "පමණක් රූම් පරිපාලක හෝ {{productName}} පරිපාලකයෙකුට කාමරයේ හිමිකරුවෙකු විය හැක.",
   "PerBackup": "උපස්ථ 1කට {{currency}}",
   "Permissions": "අවසර",
   "PerStorage": "{{currency}} කට {{amount}}/මාසයක",

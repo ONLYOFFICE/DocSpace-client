@@ -985,6 +985,7 @@
   "PaymentsTitle": "Thanh toán",
   "PDFs": "PDFs",
   "People": "Người",
+  "PeopleSelectorInfo": "Chỉ quản trị viên phòng hoặc quản trị viên {{productName}} mới có thể trở thành chủ sở hữu của phòng",
   "PerBackup": "{{currency}} mỗi 1 bản sao lưu",
   "Permissions": "Sự cho phép",
   "PerStorage": "{{currency}} mỗi {{amount}}/tháng",

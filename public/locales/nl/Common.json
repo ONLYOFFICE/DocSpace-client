@@ -985,6 +985,7 @@
   "PaymentsTitle": "Betalingen",
   "PDFs": "PDFs",
   "People": "Mensen",
+  "PeopleSelectorInfo": "Alleen een kamer beheerder of een {{productName}} beheerder kan de eigenaar van de kamer worden.",
   "PerBackup": "{{currency}} per 1 back-up",
   "Permissions": "Rechten",
   "PerStorage": "{{currency}} per {{amount}}/maand",

@@ -348,6 +348,10 @@ const useEditorEvents = ({
                     ...generationToolCallState.parameters,
                   },
                 });
+
+                const url = new URL(window.location.href);
+                url.searchParams.delete("withTool");
+                window.history.replaceState(null, "", url.toString());
               }
             };
 

@@ -24,7 +24,6 @@
   "NeedMoreIntegrationsDescription": "Përdorni webhook-e për të dërguar të dhëna në sistemin tuaj, ose lidhni formularët me mijëra shërbime përmes Zapier.",
   "NoDatabaseConnections": "Nuk ka lidhje me bazë të dhënash të konfiguruar",
   "NoDatabaseConnectionsRoomAdmin": "Lidhjet me bazën e të dhënave konfigurohen nga një administrator. Sapo të konfigurohet një bazë të dhënash, do të mund të aktivizoni eksportin këtu.",
-  "PeopleSelectorInfo": "Vetëm një administrator i dhomës ose një administrator {{productName}} mund të bëhet pronari i dhomës.",
   "Position": "Pozicion",
   "PublicRoomBarDescription": "Kjo dhomë është e disponueshme për këdo me lidhjen. Qasja për përdoruesit e jashtëm ofrohet sipas llojit të të drejtave të aksesit të zgjedhur.",
   "PublicRoomSystemFoldersDescription": "Folderet e sistemit ruajnë kopje të formularëve në faza të ndryshme të plotësimit. Formularët që po plotësohen ruhen në folderin \"Në proces\", ndërsa formularët e kompletuar ruhen në folderin \"I kompletuar\".",

@@ -985,6 +985,7 @@
   "PaymentsTitle": "Plaćanja",
   "PDFs": "PDF-ovi",
   "People": "Ljudi",
+  "PeopleSelectorInfo": "Samo admin sobe ili {{productName}} admin mogu da postanu vlasnici sobe",
   "PerBackup": "{{currency}} po 1 bekapu",
   "Permissions": "Dozvole",
   "PerStorage": "{{currency}} po {{amount}}/mesečno",

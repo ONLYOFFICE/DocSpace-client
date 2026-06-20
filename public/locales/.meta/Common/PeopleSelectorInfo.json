@@ -20,7 +20,7 @@
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
       "line_number": 108,
-      "context": "const infoText = isAIAgent\n ? t(\"Files:ChangeAgentOwnerSelectorInfo\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"CreateEditRoomDialog:PeopleSelectorInfo\", {\n productName: getBrandName(\"ProductName\"),\n });\n \n const footerCheckboxLabel = isAIAgent\n ? t(\"Files:LeaveTheAgent\")",
+      "context": "const infoText = isAIAgent\n ? t(\"Files:ChangeAgentOwnerSelectorInfo\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"Common:PeopleSelectorInfo\", {\n productName: getBrandName(\"ProductName\"),\n });\n \n const footerCheckboxLabel = isAIAgent\n ? t(\"Files:LeaveTheAgent\")",
       "module": "/packages/client"
     }
   ],

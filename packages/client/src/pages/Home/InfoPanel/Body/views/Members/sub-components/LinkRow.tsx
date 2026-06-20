@@ -70,7 +70,6 @@ const LinkRow = (props: LinkRowProps) => {
     setDeleteLinkDialogVisible,
     setEmbeddingPanelData,
     isArchiveFolder,
-    blockExistingLinksOnRestrict,
 
     setIsScrollLocked,
     setExternalLink,
@@ -78,6 +77,7 @@ const LinkRow = (props: LinkRowProps) => {
     item,
     isExternalShareRestricted,
     isLinkBlockedByAdmin,
+    isLinkRestrictedByAdmin,
   } = props;
 
   const availableShareRights = item.availableShareRights;
@@ -144,9 +144,9 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const getData = () => {
-    const isBlockedByAdmin = isLinkBlockedByAdmin!(item, link);
+    const isRestrictedByAdmin = isLinkRestrictedByAdmin!(item, link);
 
-    if (isBlockedByAdmin) {
+    if (isRestrictedByAdmin) {
       return [
         {
           key: "copy-link-settings-key",
@@ -318,7 +318,6 @@ const LinkRow = (props: LinkRowProps) => {
       loadingLinks={loadingLinks}
       isArchiveFolder={isArchiveFolder!}
       isExternalShareRestricted={isExternalShareRestricted}
-      blockExistingLinksOnRestrict={blockExistingLinksOnRestrict}
       changeShareOption={changeShareOption}
       onOpenContextMenu={onOpenContextMenu}
       onCloseContextMenu={onCloseContextMenu}
@@ -357,7 +356,6 @@ export default inject<TStore, Pick<LinkRowProps, "item">>(
       isExternalShareRestricted: isShareRestricted,
       externalShareApplyToDocuments,
       externalShareApplyToRooms,
-      blockExistingLinksOnRestrict,
     } = filesSettingsStore;
 
     const isExternalShareRestricted =
@@ -370,8 +368,8 @@ export default inject<TStore, Pick<LinkRowProps, "item">>(
       isArchiveFolder: isArchiveFolderRoot,
 
       isExternalShareRestricted,
-      blockExistingLinksOnRestrict,
       isLinkBlockedByAdmin: filesSettingsStore.isLinkBlockedByAdmin,
+      isLinkRestrictedByAdmin: filesSettingsStore.isLinkRestrictedByAdmin,
 
       setLinkParams,
       setEditLinkPanelIsVisible,

@@ -230,7 +230,8 @@ beforeAll(() => {
 
   i18nFiles = javascripts.filter(
     (filePath) =>
-      filePath.endsWith("/i18n.js") || filePath.endsWith("/i18n.ts"),
+      filePath.endsWith(convertPathToOS("/i18n.js")) ||
+      filePath.endsWith(convertPathToOS("/i18n.ts")),
   );
 
   console.log(
@@ -1369,7 +1370,7 @@ describe("Locales Tests", () => {
           .filter((ns) => ns && ns !== "");
 
         // Find the corresponding public/locales directory for this i18n file
-        const packagePath = i18nFile.replace(/\/src\/.*$/, "");
+        const packagePath = i18nFile.replace(/[\\/]src[\\/].*$/, "");
         const packageLocalesPath = path.join(
           packagePath,
           "public",

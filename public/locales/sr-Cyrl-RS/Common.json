@@ -985,6 +985,7 @@
   "PaymentsTitle": "Плаћања",
   "PDFs": "PDF-ови",
   "People": "Људи",
+  "PeopleSelectorInfo": "Само админ собе или {{productName}} админ могу да постану власници собе",
   "PerBackup": "{{currency}} по 1 бекапу",
   "Permissions": "Дозволе",
   "PerStorage": "{{currency}} по {{amount}}/месечно",

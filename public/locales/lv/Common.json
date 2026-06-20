@@ -985,6 +985,7 @@
   "PaymentsTitle": "Maksājumi",
   "PDFs": "PDFs",
   "People": "Cilvēki",
+  "PeopleSelectorInfo": "Par telpas īpašnieku var kļūt tikai telpas administrators vai {{productName}} administrators",
   "PerBackup": "{{currency}} par 1 rezerves kopiju",
   "Permissions": "Atļaujas",
   "PerStorage": "{{currency}} par {{amount}}/mēn",

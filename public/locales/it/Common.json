@@ -985,6 +985,7 @@
   "PaymentsTitle": "Pagamenti",
   "PDFs": "PDFs",
   "People": "Persone",
+  "PeopleSelectorInfo": "Solo un amministratore della stanza o un amministratore di {{productName}} può diventare il proprietario della stanza",
   "PerBackup": "{{currency}} per 1 backup",
   "Permissions": "Permessi",
   "PerStorage": "{{currency}} per {{amount}}/mese",

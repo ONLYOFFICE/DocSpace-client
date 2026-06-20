@@ -57,6 +57,23 @@
       this.browser = (function () {
         const agent = navigator.userAgent;
         let temp = [];
+
+        const iosMatch = agent.match(/\b(CriOS|FxiOS|EdgiOS|OPiOS)\/(\d+)/);
+        if (iosMatch) {
+          const iosNames = {
+            CriOS: "Chrome",
+            FxiOS: "Firefox",
+            EdgiOS: "Edge",
+            OPiOS: "Opera",
+          };
+          return {
+            name: iosNames[iosMatch[1]],
+            version: iosMatch[2],
+            chromeVersion: iosMatch[2],
+            isIOSWebKit: true,
+          };
+        }
+
         let match =
           agent.match(
             /(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i
@@ -114,6 +131,8 @@
     }
 
     isSupported() {
+      if (this.browser.isIOSWebKit) return true;
+
       if (this.unsupportedBrowsers.hasOwnProperty(this.browser.name)) {
         if (
           this.browser.name === "AscDesktopEditor" &&

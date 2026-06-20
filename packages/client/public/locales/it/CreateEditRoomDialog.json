@@ -24,7 +24,6 @@
   "NeedMoreIntegrationsDescription": "Utilizza gli webhook per inviare dati al tuo sistema o collega i moduli a migliaia di servizi tramite Zapier.",
   "NoDatabaseConnections": "Nessuna connessione al database configurata",
   "NoDatabaseConnectionsRoomAdmin": "Le connessioni al database vengono configurate da un amministratore. Una volta configurato un database, potrai abilitare l'esportazione qui.",
-  "PeopleSelectorInfo": "Solo un amministratore della stanza o un amministratore di {{productName}} può diventare il proprietario della stanza",
   "Position": "Posizione",
   "PublicRoomBarDescription": "Questa stanza è disponibile per chiunque abbia il link. L'accesso per gli utenti esterni è previsto in base al tipo di diritti di accesso selezionati.",
   "PublicRoomSystemFoldersDescription": "Le cartelle di sistema archiviano copie dei moduli in diverse fasi di compilazione. I moduli in fase di compilazione vengono archiviati nella cartella In corso, mentre i moduli compilati vengono archiviati nella cartella Compilati.",

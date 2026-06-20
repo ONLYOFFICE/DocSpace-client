@@ -24,7 +24,6 @@
   "NeedMoreIntegrationsDescription": "Web kancaları kullanarak verileri kendi sisteminize gönderebilir veya Zapier aracılığıyla binlerce hizmete formu bağlayabilirsiniz.",
   "NoDatabaseConnections": "Veritabanı bağlantısı yapılandırılmadı",
   "NoDatabaseConnectionsRoomAdmin": "Veritabanı bağlantıları bir yönetici tarafından yapılandırılır. Bir veritabanı kurulduğunda, burada dışa aktarmayı etkinleştirebileceksiniz.",
-  "PeopleSelectorInfo": "Sadece bir oda yöneticisi veya bir {{productName}} yöneticisi odanın sahibi olabilir",
   "Position": "Pozisyon",
   "PublicRoomBarDescription": "Bu oda, bağlantıya sahip herkes tarafından kullanılabilir. Harici kullanıcılara erişim, seçilen erişim hakları türüne bağlı olarak sağlanır.",
   "PublicRoomSystemFoldersDescription": "Sistem klasörleri, formların farklı tamamlanma aşamalarındaki kopyalarını saklar. Doldurulmakta olan formlar Devam ediyor klasöründe, tamamlanan formlar ise Tamamlandı klasöründe saklanır.",

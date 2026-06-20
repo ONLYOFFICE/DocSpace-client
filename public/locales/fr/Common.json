@@ -985,6 +985,7 @@
   "PaymentsTitle": "Paiements",
   "PDFs": "PDFs",
   "People": "Personnes",
+  "PeopleSelectorInfo": "Seul l'administrateur d'une salle ou l'administrateur de {{productName}} peut devenir le propriétaire d'une salle",
   "PerBackup": "{{currency}} par sauvegarde",
   "Permissions": "Permissions",
   "PerStorage": "{{currency}} par {{amount}}/mois",

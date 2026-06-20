@@ -985,6 +985,7 @@
   "PaymentsTitle": "Πληρωμές",
   "PDFs": "PDFs",
   "People": "Άτομα",
+  "PeopleSelectorInfo": "Μόνο ένας διαχειριστής του δωματίου ή ένας διαχειριστής του {{productName}} μπορεί να γίνει ιδιοκτήτης του δωματίου",
   "PerBackup": "{{currency}} ανά αντίγραφο ασφαλείας",
   "Permissions": "Δικαιώματα",
   "PerStorage": "{{currency}} ανά {{amount}}/μήνα",

@@ -985,6 +985,7 @@
   "PaymentsTitle": "Maksut",
   "PDFs": "PDF:t",
   "People": "Ihmiset",
+  "PeopleSelectorInfo": "Vain huoneen järjestelmänvalvojasta tai {{productName}}:n järjestelmänvalvojasta voi tulla huoneen omistaja.",
   "PerBackup": "{{currency}} per 1 varmuuskopio",
   "Permissions": "Oikeudet",
   "PerStorage": "{{currency}} per {{amount}}/kuukausi",

@@ -165,8 +165,8 @@ export type LinkRowProps = {
   isArchiveFolder?: boolean;
   isShareLink?: boolean;
   isExternalShareRestricted?: boolean;
-  blockExistingLinksOnRestrict?: boolean;
   isLinkBlockedByAdmin?: (item: TRoom, link: TFileLink) => boolean;
+  isLinkRestrictedByAdmin?: (item: TRoom, link: TFileLink) => boolean;
   setIsScrollLocked?: InfoPanelStore["setIsScrollLocked"];
   isPublicRoomType: boolean;
   isFormRoom: boolean;

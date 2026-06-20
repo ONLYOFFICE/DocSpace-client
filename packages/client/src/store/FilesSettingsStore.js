@@ -221,7 +221,7 @@ class FilesSettingsStore {
     return !this.externalShare;
   }
 
-  isLinkBlockedByAdmin = (item, link) => {
+  isLinkRestrictedByAdmin = (item, link) => {
     const isInRoom = item.rootFolderType === FolderType.Rooms;
     const appliesToItem = isInRoom
       ? this.externalShareApplyToRooms
@@ -230,7 +230,13 @@ class FilesSettingsStore {
     return (
       this.isExternalShareRestricted &&
       appliesToItem &&
-      !link.sharedTo.internal &&
+      !link.sharedTo.internal
+    );
+  };
+
+  isLinkBlockedByAdmin = (item, link) => {
+    return (
+      this.isLinkRestrictedByAdmin(item, link) &&
       this.blockExistingLinksOnRestrict
     );
   };

@@ -985,6 +985,7 @@
   "PaymentsTitle": "付款",
   "PDFs": "PDF",
   "People": "人员",
+  "PeopleSelectorInfo": "只有房间管理员或{{productName}}管理员才能成为房间的所有者",
   "PerBackup": "{{currency}}每 1 次备份",
   "Permissions": "权限",
   "PerStorage": "{{currency}}/{{amount}}/月",

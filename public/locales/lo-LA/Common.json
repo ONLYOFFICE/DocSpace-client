@@ -985,6 +985,7 @@
   "PaymentsTitle": "ການຊຳລະເງິນ",
   "PDFs": "PDFs",
   "People": "ຄົນ",
+  "PeopleSelectorInfo": "ພຽງແຕ່ຜູ້ບໍລິຫານຫ້ອງ ຫຼື ຜູ້ບໍລິຫານ {{productName}} ເທົ່ານັ້ນທີ່ຈະສາມາດກາຍເປັນເຈົ້າຂອງຫ້ອງໄດ້",
   "PerBackup": "{{currency}} ຕໍ່ 1 ການສຳຮອງຂໍ້ມູນ",
   "Permissions": "ສິດອະນຸຍາດ",
   "PerStorage": "{{currency}} ຕໍ່ {{amount}}/ເດືອນ",

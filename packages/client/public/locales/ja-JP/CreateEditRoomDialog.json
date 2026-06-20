@@ -24,7 +24,6 @@
   "NeedMoreIntegrationsDescription": "Webhookを使用してデータを独自のシステムに送信するか、Zapier経由で数千のサービスにフォームを接続します。",
   "NoDatabaseConnections": "データベース接続が設定されていません",
   "NoDatabaseConnectionsRoomAdmin": "データベース接続は管理者によって設定されます。データベースの設定が完了すると、こちらでエクスポートを有効にできるようになります。",
-  "PeopleSelectorInfo": "ルーム管理者または{{productName}}管理者のみがルーム所有者になることができます。",
   "Position": "ポジション",
   "PublicRoomBarDescription": "このルームはリンクがあれば誰でも利用できます。外部ユーザーのアクセスは、選択されたアクセス権の種類に応じて提供されます。",
   "PublicRoomSystemFoldersDescription": "システムフォルダには、さまざまな完成段階にあるフォームのコピーが保存されます。入力中のフォームは「入力中」フォルダーに、完成したフォームは「記入済み」フォルダーに保存されます。",

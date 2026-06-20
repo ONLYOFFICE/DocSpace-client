@@ -985,6 +985,7 @@
   "PaymentsTitle": "Pagesat",
   "PDFs": "PDF-ë",
   "People": "Njerëzit",
+  "PeopleSelectorInfo": "Vetëm një administrator i dhomës ose një administrator {{productName}} mund të bëhet pronari i dhomës.",
   "PerBackup": "{{currency}} për 1 backup",
   "Permissions": "Leje",
   "PerStorage": "{{currency}} për {{amount}}/muaj",

@@ -985,6 +985,7 @@
   "PaymentsTitle": "Plačila",
   "PDFs": "PDF-i",
   "People": "Ljudje",
+  "PeopleSelectorInfo": "Samo skrbnik sobe ali skrbnik {{productName}} lahko postaneta lastnika sobe",
   "PerBackup": "{{currency}} na 1 varnostno kopijo",
   "Permissions": "Dovoljenja",
   "PerStorage": "{{currency}} na {{amount}}/mesec",

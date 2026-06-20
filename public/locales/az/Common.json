@@ -985,6 +985,7 @@
   "PaymentsTitle": "Ödənişlər",
   "PDFs": "PDFs",
   "People": "İnsanlar",
+  "PeopleSelectorInfo": "Yalnız otaq administratoru və ya {{productName}} administratoru otağın sahibi ola bilər",
   "PerBackup": "{{currency}} per 1 ehtiyat nüsxə",
   "Permissions": "İcazələr",
   "PerStorage": "{{currency}} hər {{amount}}/ay",

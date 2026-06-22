@@ -80,12 +80,20 @@ const useAISettings = ({
   }, [fetchMCPServers, fetchAIProviders]);
 
   const initWebSearch = React.useCallback(async () => {
+    if (standalone) {
+      await Promise.all([fetchWebSearch?.(), fetchAIProviders?.()]);
+      return;
+    }
     await fetchAiPrices?.();
-  }, [fetchWebSearch, fetchAIProviders, fetchAiPrices]);
+  }, [standalone, fetchWebSearch, fetchAIProviders, fetchAiPrices]);
 
   const initKnowledge = React.useCallback(async () => {
-    await Promise.all([fetchAiPrices?.()]);
-  }, [fetchKnowledge, fetchAIProviders, fetchAiPrices]);
+    if (standalone) {
+      await Promise.all([fetchKnowledge?.(), fetchAIProviders?.()]);
+      return;
+    }
+    await fetchAiPrices?.();
+  }, [standalone, fetchKnowledge, fetchAIProviders, fetchAiPrices]);
 
   const getAiSettingsInitialValue = React.useCallback(async () => {
     const isModels = window.location.pathname.includes("models");
@@ -103,7 +111,7 @@ const useAISettings = ({
       return;
     }
 
-    await handleServiceQuota?.(AI_ENUM);
+    if (!standalone) await handleServiceQuota?.(AI_ENUM);
 
     if (isModels) await initAiModels();
     if (isProviders || isModelAssignment) await initAIProviders();
@@ -111,6 +119,7 @@ const useAISettings = ({
     if (isSearch) await initWebSearch();
     if (isKnowledge) await initKnowledge();
   }, [
+    standalone,
     initAiModels,
     initAIProviders,
     initMCPServers,

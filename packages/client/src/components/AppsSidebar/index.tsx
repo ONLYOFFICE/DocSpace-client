@@ -26,10 +26,17 @@
 
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
+
+import { useMemo } from "react";
 
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { NavMenu } from "@docspace/ui-kit/components/nav-menu";
-import type { NavMenuGroup } from "@docspace/ui-kit/components/nav-menu";
+import type {
+  NavMenuGroup,
+  NavMenuItem,
+  NavSubItem,
+} from "@docspace/ui-kit/components/nav-menu";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import { getLogoUrl } from "@docspace/ui-kit/utils/getLogoUrl";
 import { WhiteLabelLogoType } from "@docspace/ui-kit/enums";
@@ -40,12 +47,14 @@ import type { ArticleProfileProps } from "@docspace/ui-kit/components/article";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import BackButton from "@docspace/ui-kit/components/article/sub-components/BackButton";
+import ArticleDevToolsBar from "@docspace/ui-kit/components/article/sub-components/DevToolsBar";
 import { useSectionNavigation } from "SRC_DIR/contexts/SectionNavigationContext";
 import CollapseButton from "./CollapseButton";
-import FooterMenu from "./FooterMenu";
 import ProfileBlock from "./ProfileBlock";
+import AppsPluginItems from "./AppsPluginItems/AppsPluginItems";
 import { useSidebarShowText } from "./useSidebarShowText";
 import styles from "./AppsSidebar.module.scss";
+import type { AppsPluginsItems } from "./AppsPluginItems/AppsPluginItems.types";
 
 // "primary" — main client sidebar (footer + no back button).
 // "secondary" — accounts / developer-tools / portal-settings (back button, no footer).
@@ -67,6 +76,7 @@ type AppsSidebarViewProps = AppsSidebarProps & {
   user?: TUser | null;
   isNotPaidPeriod?: boolean;
   articleOpen?: boolean;
+  articleButtonItems?: AppsPluginsItems | null;
   toggleArticleOpen?: () => void;
   onBack?: () => void;
 };
@@ -79,14 +89,17 @@ export const AppsSidebarView = ({
   toggleShowText,
   currentDeviceType,
   user,
-  isNotPaidPeriod = false,
   articleOpen = true,
   toggleArticleOpen,
   onBack,
+  articleButtonItems,
 }: AppsSidebarViewProps) => {
   const showBackButton = variant === "secondary";
   const hideFooter = variant === "secondary";
+
+  const hasPluginItems = !!articleButtonItems && articleButtonItems.length > 0;
   const { t } = useTranslation(["Common"]);
+  const navigate = useNavigate();
   const { isBase } = useTheme();
   const isMobile = currentDeviceType === DeviceType.mobile;
   const collapseLabel = showText
@@ -110,12 +123,41 @@ export const AppsSidebarView = ({
 
   const isAdmin = user?.isAdmin ?? false;
   const isOwner = user?.isOwner ?? false;
-  const isVisitor = user?.isVisitor ?? false;
-  const isCollaborator = user?.isCollaborator ?? false;
+  // Developer Tools banner mirrors the former footer item gating: admins/owners
+  // only. Hidden entirely on the secondary sidebars (accounts/dev-tools/settings)
+  // via `hideFooter`.
+  const showDevTools = isAdmin || isOwner;
 
   const handleBackdropClick = () => {
     toggleArticleOpen?.();
   };
+
+  // On mobile the article overlays the content, so it must close itself after a
+  // navigation click. Wrap every item/sub-item onClick to run its own handler
+  // first (navigate) and then close the article. Off mobile the article is
+  // pinned, so handlers pass through untouched.
+  const mobileGroups = useMemo(() => {
+    if (!isMobile) return groups;
+
+    const closeAfter =
+      <T,>(handler?: (item: T) => void) =>
+      (item: T) => {
+        handler?.(item);
+        toggleArticleOpen?.();
+      };
+
+    return groups.map((group) => ({
+      ...group,
+      items: group.items.map((item: NavMenuItem) => ({
+        ...item,
+        onClick: closeAfter(item.onClick),
+        children: item.children?.map((sub: NavSubItem) => ({
+          ...sub,
+          onClick: closeAfter(sub.onClick),
+        })),
+      })),
+    }));
+  }, [groups, isMobile, toggleArticleOpen]);
 
   return (
     <>
@@ -181,33 +223,42 @@ export const AppsSidebarView = ({
           scrollBodyClassName={styles.scrollBody}
         >
           {showBackButton && (
-            <BackButton
-              showText={showText}
-              currentDeviceType={currentDeviceType}
-              onBack={onBack}
-              toggleArticleOpen={toggleArticleOpen}
-            />
+            <div className={styles.backButtonWrapper}>
+              <BackButton
+                showText={showText}
+                currentDeviceType={currentDeviceType}
+                onBack={onBack}
+                toggleArticleOpen={toggleArticleOpen}
+              />
+            </div>
           )}
           <NavMenu
-            groups={groups}
+            groups={mobileGroups}
             activeItemId={activeId}
             iconOnly={!showText}
             withAnimation
           />
 
-          {/* Footer menu lives inside the scroll body so it scrolls with the
-              apps list when there is overflow, and stays pinned to the bottom
-              (via margin-block-start: auto) when there is free space above. */}
-          {!hideFooter && (
+          {(hasPluginItems || (showDevTools && !hideFooter)) && (
             <div className={styles.footer}>
-              <FooterMenu
-                showText={showText}
-                isAdmin={isAdmin}
-                isOwner={isOwner}
-                isVisitor={isVisitor}
-                isCollaborator={isCollaborator}
-                isNotPaidPeriod={isNotPaidPeriod}
-              />
+              {articleButtonItems && articleButtonItems.length > 0 ? (
+                <AppsPluginItems
+                  items={articleButtonItems}
+                  showText={showText}
+                  withDevTools={showDevTools && !hideFooter}
+                />
+              ) : null}
+              {showDevTools && !hideFooter && (
+                <ArticleDevToolsBar
+                  showText={showText}
+                  articleOpen={articleOpen}
+                  withCustomSlot={hasPluginItems}
+                  currentDeviceType={currentDeviceType}
+                  toggleArticleOpen={toggleArticleOpen ?? (() => {})}
+                  path="/developer-tools/overview"
+                  navigate={navigate}
+                />
+              )}
             </div>
           )}
         </Scrollbar>
@@ -241,6 +292,7 @@ type AppsSidebarConnectedProps = AppsSidebarProps & {
   isNotPaidPeriod?: boolean;
   articleOpen?: boolean;
   toggleArticleOpen?: () => void;
+  articleButtonItems?: AppsPluginsItems | null;
 };
 
 const AppsSidebar = ({
@@ -270,12 +322,12 @@ const AppsSidebar = ({
 };
 
 export default inject<TStore>(
-  ({ userStore, settingsStore, currentTariffStatusStore }) => ({
+  ({ userStore, settingsStore, currentTariffStatusStore, pluginStore }) => ({
     user: userStore.user,
     currentDeviceType: settingsStore.currentDeviceType,
     articleOpen: settingsStore.articleOpen,
     toggleArticleOpen: settingsStore.toggleArticleOpen,
     isNotPaidPeriod: currentTariffStatusStore.isNotPaidPeriod,
+    articleButtonItems: pluginStore?.articleButtonItemsList,
   }),
 )(observer(AppsSidebar));
-

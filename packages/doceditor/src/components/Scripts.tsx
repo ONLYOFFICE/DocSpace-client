@@ -52,6 +52,27 @@ const Scripts = () => {
         {`
           console.log("It's DocEditor INIT");
 
+          (function () {
+            if (typeof Node !== "function" || !Node.prototype) return;
+
+            var originalRemoveChild = Node.prototype.removeChild;
+            Node.prototype.removeChild = function (child) {
+              if (child && child.parentNode !== this) {
+                if (child.parentNode) return child.parentNode.removeChild(child);
+                return child;
+              }
+              return originalRemoveChild.apply(this, arguments);
+            };
+
+            var originalInsertBefore = Node.prototype.insertBefore;
+            Node.prototype.insertBefore = function (newNode, referenceNode) {
+              if (referenceNode && referenceNode.parentNode !== this) {
+                return originalInsertBefore.call(this, newNode, null);
+              }
+              return originalInsertBefore.apply(this, arguments);
+            };
+          })();
+
           // Mark as frame when loaded with a share/key token so the
           // axiosClient 401 handler does not redirect to login.
           (function() {

@@ -108,8 +108,6 @@ import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/fi
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
-  getNewViewUrlByFolderType,
-  isNewProductView,
 } from "SRC_DIR/helpers/utils";
 import { muteRoomNotification } from "@docspace/shared/api/settings";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
@@ -2318,24 +2316,6 @@ class FilesActionStore {
       rootFolderType,
     };
 
-    if (isNewProductView()) {
-      const newViewBase = getNewViewUrlByFolderType(
-        rootFolderTypeItem ?? rootFolderType,
-      );
-
-      const newViewParams = new URLSearchParams(
-        newViewBase.includes("?") ? newViewBase.split("?")[1] : "",
-      );
-      if (title) newViewParams.set("search", title);
-      if (parentId) newViewParams.set("folder", String(parentId));
-
-      const newViewUrl = `${newViewBase.split("?")[0]}?${newViewParams.toString()}`;
-
-      if (!isDesktop()) hideInfoPanel();
-      window.DocSpace.navigate(newViewUrl, { state });
-      return;
-    }
-
     const url = getCategoryUrl(
       getCategoryTypeByFolderType(rootFolderTypeItem ?? rootFolderType, id),
       id,
@@ -2919,6 +2899,10 @@ class FilesActionStore {
     let pinName = "unpin";
     const { selection } = this.filesStore;
 
+    const hasFormRoom = selection.some(
+      (item) => item.roomType === RoomsType.FormRoom,
+    );
+
     selection.forEach((item) => {
       if (!item.pinned) pinName = "pin";
     });
@@ -2927,7 +2911,6 @@ class FilesActionStore {
     const createGroup = this.getOption("create-group", t);
     const addToGroup = this.getOption("add-to-group", t);
     const removeFromGroup = this.getOption("remove-from-group", t);
-    const archive = this.getOption("archive", t);
     const changeQuota = this.getOption("change-quota", t);
     const disableQuota = this.getOption("disable-quota", t);
     const defaultQuota = this.getOption("default-quota", t);
@@ -2939,8 +2922,9 @@ class FilesActionStore {
       .set("add-to-group", addToGroup)
       .set("remove-from-group", removeFromGroup);
 
+    if (!hasFormRoom) itemsCollection.set("archive", this.getOption("archive", t));
+
     itemsCollection
-      .set("archive", archive)
       .set("change-quota", changeQuota)
       .set("default-quota", defaultQuota)
       .set("disable-quota", disableQuota)

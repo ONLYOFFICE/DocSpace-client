@@ -52,6 +52,10 @@ import SocketHelper, {
   SocketEvents,
   SocketCommands,
 } from "@docspace/ui-kit/utils/socket";
+import {
+  PORTAL_BASE_THEME_ID,
+  PORTAL_DARK_THEME_ID,
+} from "@docspace/ui-kit/ai-agent/providers/themes";
 import { Portal } from "@docspace/ui-kit/components/portal";
 import { SnackBar } from "@docspace/ui-kit/components/snackbar";
 import { Toast, toastr, ToastType } from "@docspace/ui-kit/components/toast";
@@ -61,6 +65,7 @@ import { updateTempContent } from "@docspace/shared/utils/common";
 import {
   AnalyticsEvents,
   DeviceType,
+  FolderType,
   IndexedDBStores,
   InfoPanelEvents,
   SearchArea,
@@ -126,9 +131,12 @@ const Shell = ({ page = "home", ...rest }) => {
     isGuest,
     setSocialAuthWelcomeDialogVisible,
     getAIConfig,
+    agentEntityId,
     getAgentRoomId,
     openResultFile,
     closeEditorPanel,
+    currentClientView,
+    selectedFolderType,
   } = rest;
 
   useCreateFileError({
@@ -558,6 +566,25 @@ const Shell = ({ page = "home", ...rest }) => {
     );
   const location = useLocation();
 
+  // Single source of truth for AI chat availability: computed once here in the
+  // host and handed to AiAgentProviders, which shares it with descendants
+  // (Home page, section header) via context / `useIsAiChatAvailable()`. The
+  // chat is offered only on file/room/document views — never on contacts,
+  // profile, settings, the embedded chat view, or the Knowledge /
+  // ResultStorage system folders.
+  const isSettingsPage =
+    location.pathname.includes("settings") &&
+    !location.pathname.includes("settings/plugins");
+
+  const isAiChatAvailable =
+    currentClientView !== "users" &&
+    currentClientView !== "groups" &&
+    currentClientView !== "profile" &&
+    currentClientView !== "chat" &&
+    !isSettingsPage &&
+    selectedFolderType !== FolderType.Knowledge &&
+    selectedFolderType !== FolderType.ResultStorage;
+
   const withoutNavMenu =
     isEditor ||
     pagesWithoutNavMenu ||
@@ -598,8 +625,10 @@ const Shell = ({ page = "home", ...rest }) => {
       {isLoaded ? (
         <AiAgentProviders
           locale={language}
-          theme={isBase ? "theme-portal-base" : "theme-portal-dark"}
+          theme={isBase ? PORTAL_BASE_THEME_ID : PORTAL_DARK_THEME_ID}
           isStandalone={standalone}
+          isAvailable={isAiChatAvailable}
+          entityId={agentEntityId}
           getAgentRoomId={getAgentRoomId}
           openResultFile={openResultFile}
           closeEditorPanel={closeEditorPanel}
@@ -732,6 +761,15 @@ const ShellWrapper = inject(
       standalone,
       setSocialAuthWelcomeDialogVisible,
       getAIConfig,
+      currentClientView: clientLoadingStore.currentClientView,
+      selectedFolderType: selectedFolderStore.type,
+      // Scope the chat to the current agent only when we're inside an AI agent
+      // room (or one of its subfolders). Anywhere else — including the AI Agents
+      // root listing and non-agent contexts — the chat stays unscoped
+      // (entityId === undefined).
+      agentEntityId: selectedFolderStore.isAIRoom
+        ? String(selectedFolderStore.rootRoomId || selectedFolderStore.id)
+        : undefined,
       getAgentRoomId: () => {
         const id = selectedFolderStore.rootRoomId;
         return id ? Number(id) : null;
@@ -768,4 +806,3 @@ const Root = () => (
 );
 
 export default Root;
-

@@ -90,7 +90,7 @@ const AiBillingContent = observer(
         } catch (e) {
           console.error("[ai-billing-content] bootstrap failed", e);
           if (!cancelled) {
-            toastr.error(t("UnexpectedError"));
+            toastr.error(t("Common:UnexpectedError"));
             setRenderTarget("paywall");
           }
         }

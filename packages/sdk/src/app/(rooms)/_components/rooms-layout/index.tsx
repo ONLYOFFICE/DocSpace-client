@@ -89,6 +89,8 @@ import {
   InfoPanelEmbeddingDialog,
 } from "@/app/(docspace)/_components/info-panel";
 import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
+import { useAiChatPanel } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
+import { usePanelExclusivity } from "@/app/(docspace)/_hooks/usePanelExclusivity";
 
 import styles from "./RoomsLayout.module.scss";
 
@@ -151,6 +153,13 @@ const RoomsLayout = observer(
     const infoPanelStore = useInfoPanelStore();
     const filesListStore = useFilesListStore();
     const tagsStore = useRoomsTagsStore();
+
+    // Private rooms skip AI entirely (parity with Personal Files). Active and
+    // archived rooms both get the panel; the hook returns undefined when off.
+    const ai = useAiChatPanel(!isPrivate);
+    // Info-panel exclusivity is host policy (owns InfoPanelStore), kept beside
+    // the shared ui-kit panel hook and gated on the same condition.
+    usePanelExclusivity(!isPrivate);
 
     // Re-fetch the room after tags are bound/unbound inside the info panel and
     // update both the panel's selection (so Tags row refreshes) and the room
@@ -271,9 +280,21 @@ const RoomsLayout = observer(
       return items;
     }, [t, createCustomRoom, isArchive, canCreateRooms, isPrivate]);
 
+    // When the AI chat panel is fullscreen, switch the layout so the panel
+    // takes over the viewport and the rooms section collapses (see the
+    // `ai-fullscreen` rules in RoomsLayout.module.scss).
+    const layoutMode =
+      ai?.isChatPanelVisible && ai?.isChatPanelFullscreen
+        ? "ai-fullscreen"
+        : undefined;
+
     return (
       <RoomActionsContext.Provider value={roomActionsHandler}>
-        <div className={styles.root} style={frameHeaderVars}>
+        <div
+          className={styles.root}
+          style={frameHeaderVars}
+          data-layout-mode={layoutMode}
+        >
           <RootScrollbar>
             <SectionWrapper
               sectionHeaderContent={
@@ -284,6 +305,7 @@ const RoomsLayout = observer(
                   headerOffset={headerOffset}
                   isInfoPanelVisible={infoPanelStore.isVisible}
                   onToggleInfoPanel={infoPanelStore.toggle}
+                  aiChatButton={ai?.chatButton}
                 />
               }
               stickyTableHeader
@@ -331,10 +353,14 @@ const RoomsLayout = observer(
                   hasEncryptionKeys={isPrivate ? hasEncryptionKeys : undefined}
                   onPrivateInviteRoom={onPrivateInviteRoom}
                   onPrivateChangeOwner={onPrivateChangeOwner}
-                  infoPanelVisible={infoPanelStore.isVisible}
+                  infoPanelVisible={
+                    infoPanelStore.isVisible || !!ai?.isChatPanelVisible
+                  }
                 />
               }
-              infoPanelHeaderContent={infoPanelHeader ?? <DocsInfoPanelHeader />}
+              infoPanelHeaderContent={
+                infoPanelHeader ?? <DocsInfoPanelHeader />
+              }
               infoPanelBodyContent={
                 infoPanelBody ?? (
                   <RoomsRefreshContext.Provider value={refreshRooms}>
@@ -344,6 +370,11 @@ const RoomsLayout = observer(
               }
               isInfoPanelVisible={infoPanelStore.isVisible}
               setIsInfoPanelVisible={infoPanelStore.setVisible}
+              chatPanelContent={ai?.chatPanelContent}
+              isChatPanelVisible={ai?.isChatPanelVisible}
+              setIsChatPanelVisible={(v: boolean) => {
+                if (!v) ai?.closeChatPanel();
+              }}
               isEmptyPage={isEmptyList}
               filesFilter={filesFilter}
             />

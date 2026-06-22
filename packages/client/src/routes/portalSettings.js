@@ -384,39 +384,15 @@ const PortalSettingsRoutes = {
       },
     },
     {
-      path: "new-ai-settings",
-      element: <Navigate to="/portal-settings/new-ai-settings/ai-models" replace />,
-    },
-    {
-      path: "new-ai-settings/ai-models",
-      element: <ViewComponent />,
-    },
-    {
-      path: "new-ai-settings/model-assignment",
-      element: <ViewComponent />,
-    },
-    {
-      path: "new-ai-settings/mcp-servers",
-      element: <ViewComponent />,
-    },
-    {
-      path: "new-ai-settings/web-search",
-      element: <ViewComponent />,
-    },
-    {
-      path: "new-ai-settings/knowledge",
-      element: <ViewComponent />,
-    },
-    {
       path: "ai-settings",
       element: (
         <ProtectedAISettingsRoute>
-          <Navigate to="ai-settings/providers" replace />
+          <Navigate to="/portal-settings/ai-settings/ai-models" replace />
         </ProtectedAISettingsRoute>
       ),
     },
     {
-      path: "ai-settings/providers",
+      path: "ai-settings/ai-models",
       element: (
         <ProtectedAISettingsRoute>
           <ViewComponent />
@@ -424,7 +400,7 @@ const PortalSettingsRoutes = {
       ),
     },
     {
-      path: "ai-settings/servers",
+      path: "ai-settings/model-assignment",
       element: (
         <ProtectedAISettingsRoute>
           <ViewComponent />
@@ -432,7 +408,15 @@ const PortalSettingsRoutes = {
       ),
     },
     {
-      path: "ai-settings/search",
+      path: "ai-settings/mcp-servers",
+      element: (
+        <ProtectedAISettingsRoute>
+          <ViewComponent />
+        </ProtectedAISettingsRoute>
+      ),
+    },
+    {
+      path: "ai-settings/web-search",
       element: (
         <ProtectedAISettingsRoute>
           <ViewComponent />

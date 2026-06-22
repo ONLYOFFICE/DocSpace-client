@@ -33,8 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useMemo, useCallback } from "react";
-import { useNavigate, LinkProps } from "react-router";
+import { useMemo, useCallback, useRef } from "react";
+import { useNavigate, useLocation, LinkProps } from "react-router";
 import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import { isMobile } from "react-device-detect";
 
@@ -50,6 +50,7 @@ import {
 } from "@docspace/shared/enums";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import type { TTranslation } from "@docspace/shared/types";
 import { CategoryType } from "@docspace/shared/constants";
 
@@ -148,6 +149,8 @@ export const useEmptyView = (
       rootFolderType,
       security,
       isResultsTab,
+      isKnowledgeTab,
+      isAIRoom,
     );
 
     return { description, title, icon };
@@ -209,10 +212,27 @@ export const useOptions = (
     standalone,
     isPortalAdmin,
     isGracePeriod,
+    knowledgeId,
+    startUpload,
+    createFoldersTree,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const getTrashSection = () => {
+    if (pathname.includes("/ai-agents/trash")) return "agents";
+    if (pathname.includes("/forms/trash")) return "forms";
+    if (pathname.includes("/rooms/trash")) return "rooms";
+    return "personal";
+  };
+
+  const trashSectionRef = useRef<"personal" | "rooms" | "forms" | "agents">(
+    "personal",
+  );
+  if (pathname.includes("/trash")) trashSectionRef.current = getTrashSection();
+  const trashSection = trashSectionRef.current;
 
   const { useProfilesStore } = useStores();
   const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
@@ -243,12 +263,36 @@ export const useOptions = (
     };
   }, [roomsFolder?.rootFolderType, roomsFolder?.title, userId]);
 
+  const onGoToForms = useCallback((): LinkProps => {
+    const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
+    newFilter.searchArea = RoomSearchArea.Active;
+
+    return {
+      to: {
+        pathname: "/forms/filter",
+        search: newFilter.toUrlParams(userId, false),
+      },
+    };
+  }, [userId]);
+
+  const onGoToAgents = useCallback((): LinkProps => {
+    const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.AIAgents);
+    newFilter.searchArea = RoomSearchArea.AIAgents;
+
+    return {
+      to: {
+        pathname: getCategoryUrl(CategoryType.AIAgents),
+        search: newFilter.toUrlParams(userId, false),
+      },
+    };
+  }, [userId]);
+
   const onGoToServices = useCallback(() => {
     return navigate("/portal-settings/payments/services");
   }, []);
 
   const onGoToAIProviderSettings = useCallback(() => {
-    return navigate("/portal-settings/ai-settings/providers");
+    return navigate("/portal-settings/ai-settings/ai-models");
   }, []);
 
   const onGoToPersonal = useCallback((): LinkProps => {
@@ -336,6 +380,35 @@ export const useOptions = (
     setSelectFileAiKnowledgeDialogVisible?.(true);
   }, [setSelectFileAiKnowledgeDialogVisible]);
 
+  // Device upload for the agent knowledge tab. The new-concept client has no
+  // article main button (its hidden `.custom-file-input-article` that
+  // `onUploadAction` relies on), so build a transient file input and upload
+  // straight into the knowledge folder (`knowledgeId`) — same target the SDK
+  // knowledge device upload uses.
+  const uploadFromDeviceAiKnowledge = useCallback(() => {
+    if (!knowledgeId) return;
+
+    const input = document.createElement("input");
+    input.type = "file";
+    input.multiple = true;
+    input.style.display = "none";
+
+    input.onchange = async (e) => {
+      try {
+        const files = await getFilesFromEvent(e);
+        const tree = await createFoldersTree(t, files);
+        if (tree.length > 0) startUpload(tree, knowledgeId, t);
+      } catch (err) {
+        toastr.error(err as string, undefined, 0, true);
+      } finally {
+        input.remove();
+      }
+    };
+
+    document.body.appendChild(input);
+    input.click();
+  }, [knowledgeId, createFoldersTree, startUpload, t]);
+
   const onCreate = useCallback(
     (extension: ExtensionType, withoutDialog?: boolean) => {
       const event: CreateEvent = new Event(Events.CREATE);
@@ -388,6 +461,7 @@ export const useOptions = (
           onCreate,
           uploadFromDocspace,
           uploadFromDocspaceAiKnowledge,
+          uploadFromDeviceAiKnowledge,
           onUploadAction,
           createAndCopySharedLink,
           openInfoPanel,
@@ -396,6 +470,8 @@ export const useOptions = (
           navigate,
           onGoToPersonal,
           onGoToShared,
+          onGoToForms,
+          onGoToAgents,
           onOpenAccessSettings,
           onCreateAIAgent,
           onGoToServices,
@@ -410,6 +486,7 @@ export const useOptions = (
         aiReady || hasAiProfiles,
         standalone,
         isPortalAdmin,
+        trashSection,
       ),
     [
       type,
@@ -427,6 +504,7 @@ export const useOptions = (
       onOpenAccessSettings,
       uploadFromDocspace,
       uploadFromDocspaceAiKnowledge,
+      uploadFromDeviceAiKnowledge,
       onUploadAction,
       createAndCopySharedLink,
       onCreate,
@@ -436,6 +514,9 @@ export const useOptions = (
       navigate,
       onGoToPersonal,
       onGoToShared,
+      onGoToForms,
+      onGoToAgents,
+      trashSection,
       isVisitor,
       isFrame,
       logoText,
@@ -447,4 +528,3 @@ export const useOptions = (
 
   return options;
 };
-

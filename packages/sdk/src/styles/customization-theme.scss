@@ -141,7 +141,7 @@ body.light {
   --badge-bg: var(--color-primary-element);
 
   // ── Link ───────────────────────────────────────────────────────────────────
-  --link-color: var(--color-primary-element);
+  --link-text-color: var(--color-primary-element);
 
   // ── Avatar ─────────────────────────────────────────────────────────────────
   --avatar-bg: var(--color-background-dark);
@@ -390,7 +390,7 @@ body.dark {
   --badge-bg: var(--color-primary-element);
 
   // ── Link ───────────────────────────────────────────────────────────────────
-  --link-color: var(--color-primary-element);
+  --link-text-color: var(--color-primary-element);
 
   // ── Avatar ─────────────────────────────────────────────────────────────────
   --avatar-bg: var(--color-background-hover);

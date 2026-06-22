@@ -65,13 +65,19 @@ const RoomType = ({
   disabledPublicRoom,
   isTemplate,
   isTemplateRoom,
+  isFormSection,
 }: RoomTypeProps) => {
   const { t } = useTranslation(["Common"]);
 
   const room = {
     type: roomType,
-    title: getRoomTypeTitleTranslation(t, roomType, isTemplate),
-    description: getRoomTypeDescriptionTranslation(t, roomType, isTemplate),
+    title: getRoomTypeTitleTranslation(t, roomType, isTemplate, isFormSection),
+    description: getRoomTypeDescriptionTranslation(
+      t,
+      roomType,
+      isTemplate,
+      isFormSection,
+    ),
   };
 
   const isFormRoom = roomType === RoomsType.FormRoom;

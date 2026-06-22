@@ -118,6 +118,12 @@
   object-fit: contain;
 }
 
+.backButtonWrapper {
+  @include mixins.mobile {
+    margin-block-end: 16px;
+  }
+}
+
 .scrollbar {
   flex: 1;
   min-height: 0;

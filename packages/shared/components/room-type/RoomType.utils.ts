@@ -5,7 +5,11 @@ export const getRoomTypeTitleTranslation = (
   t: TTranslation,
   roomType: RoomsType = 1,
   isTemplate: boolean = false,
+  isFormSection: boolean = false,
 ) => {
+  if (isFormSection)
+    return isTemplate ? t("Common:SetTemplateTitle") : t("Common:FormSetTitle");
+
   if (isTemplate) return t("Common:FromTemplate");
 
   switch (roomType) {
@@ -32,7 +36,13 @@ export const getRoomTypeDescriptionTranslation = (
   t: TTranslation,
   roomType: RoomsType = 1,
   isTemplate: boolean = false,
+  isFormSection: boolean = false,
 ) => {
+  if (isFormSection)
+    return isTemplate
+      ? t("Common:SetTemplateDescription")
+      : t("Common:FormSetDescription");
+
   if (isTemplate) return t("Common:FromTemplateRoomInfo");
 
   switch (roomType) {

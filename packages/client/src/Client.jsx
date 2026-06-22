@@ -178,19 +178,7 @@ const ClientContent = (props) => {
     <>
       <FilesPanels />
       <GlobalEvents />
-      {isFrame ? (
-        showMenu && (
-          <ClientArticle
-            isInfoPanelVisible={isInfoPanelVisible}
-            withMainButton={withMainButton}
-            setIsHeaderLoading={setIsHeaderLoading}
-            setIsFilterLoading={setIsFilterLoading}
-            showArticleLoader={showArticleLoader}
-            isAccountsArticle={isAccountsArticle}
-            isDeveloperToolsArticle={isDeveloperToolsArticle}
-          />
-        )
-      ) : (
+      {(!isFrame || showMenu) && (
         <ClientArticle
           isInfoPanelVisible={isInfoPanelVisible}
           withMainButton={withMainButton}
@@ -199,7 +187,7 @@ const ClientContent = (props) => {
           showArticleLoader={showArticleLoader}
           isAccountsArticle={isAccountsArticle}
           isDeveloperToolsArticle={isDeveloperToolsArticle}
-          forceNewArticle={isNewArticle}
+          forceNewArticle={!isFrame && isNewArticle}
         />
       )}
       {isNewArticle ? (

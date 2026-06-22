@@ -51,6 +51,8 @@ import { useLocation } from "react-router";
 
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import Navigation from "@docspace/ui-kit/components/navigation";
+import { AiChatTrigger } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
+import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import {
@@ -77,7 +79,7 @@ import {
   showInfoPanel,
   hideInfoPanel as hideInfoPanelEvent,
 } from "SRC_DIR/helpers/info-panel";
-import { getContactsView } from "SRC_DIR/helpers/contacts";
+import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import {
   getLifetimePeriodTranslation,
@@ -151,6 +153,8 @@ const SectionHeaderContent = (props) => {
     setGroupsSelected,
     isRoomAdmin,
     isEmptyPage,
+    isGroupsEmpty,
+    groupsIsFiltered,
 
     isLoading,
 
@@ -167,7 +171,10 @@ const SectionHeaderContent = (props) => {
     onCreateAndCopySharedLink,
     showNavigationButton,
     startUpload,
+    getFolderModel,
     contactsCanCreate,
+    onCreateRoom,
+    onCreateAgent,
     onEmptyTrashAction,
     getHeaderOptions,
     setBufferSelection,
@@ -281,6 +288,10 @@ const SectionHeaderContent = (props) => {
   });
 
   const isSettingsPage = location.pathname.includes("/settings");
+
+  // Shared from AiAgentProviders' context (host-computed). The trigger button
+  // mirrors the panel's gating.
+  const isAiChatAvailable = useIsAiChatAvailable();
 
   const onFileChange = React.useCallback(
     async (e) => {
@@ -488,6 +499,21 @@ const SectionHeaderContent = (props) => {
       setIsLoading,
     ],
   );
+
+  const getContextOptionsPlus = React.useCallback(
+    () => getFolderModel(t),
+    [getFolderModel, t],
+  );
+
+  const onPlusClick = React.useCallback(() => {
+    if (isContactsGroupsPage) return createGroup();
+    if (isAIAgentsFolder) return onCreateAgent();
+    return onCreateRoom();
+  }, [isContactsGroupsPage, isAIAgentsFolder, onCreateAgent, onCreateRoom]);
+
+  const isPlusButtonVisible =
+    (isEmptyPage && !isContactsPage) ||
+    (isContactsGroupsPage && isGroupsEmpty && !groupsIsFiltered);
 
   const onNavigationButtonClick = React.useCallback(() => {
     onCreateAndCopySharedLink(selectedFolder, t);
@@ -751,10 +777,10 @@ const SectionHeaderContent = (props) => {
 
     if (isSettingsPage) return t("Common:Settings");
 
-    // The "Forms" section reuses the Rooms folder, so the selected folder title
-    // would otherwise read "Rooms"; force the section name instead.
     if (getCategoryType(location) === CategoryType.Forms)
-      return t("Common:Forms");
+      return selectedFolder?.rootFolderType === FolderType.RoomTemplates
+        ? t("Common:Templates")
+        : t("Common:Forms");
 
     if (isContactsPage) {
       switch (contactsTab) {
@@ -786,6 +812,7 @@ const SectionHeaderContent = (props) => {
     currentGroupName,
     title,
     location,
+    selectedFolder?.rootFolderType,
   ]);
 
   const contextMenuHeader = React.useMemo(() => {
@@ -995,6 +1022,7 @@ const SectionHeaderContent = (props) => {
                   ? navigationPath
                   : accountsNavigationPath
               }
+              getContextOptionsPlus={getContextOptionsPlus}
               getContextOptionsFolder={getContextOptionsFolder}
               onClose={onClose}
               onClickFolder={onClickFolder}
@@ -1022,6 +1050,7 @@ const SectionHeaderContent = (props) => {
                 infoPanel: t("Common:InfoPanel"),
               }}
               withMenu={withMenu}
+              onPlusClick={onPlusClick}
               isEmptyPage={isEmptyPage}
               isRoom={isCurrentRoom || isContactsPage || isProfile}
               hideInfoPanel={
@@ -1060,7 +1089,7 @@ const SectionHeaderContent = (props) => {
               guidAnimationVisible={guidAnimationVisible}
               setGuidAnimationVisible={setGuidAnimationVisible}
               isContextButtonVisible={isContextButtonVisible}
-              isPlusButtonVisible={false}
+              isPlusButtonVisible={isPlusButtonVisible}
               showBackButton={isProfile}
               contextMenuHeader={isProfile ? undefined : contextMenuHeader}
               analyzeResponsesButton={
@@ -1068,6 +1097,7 @@ const SectionHeaderContent = (props) => {
                   className={styles.analyzeResponsesButton}
                 />
               }
+              aiChatButton={isAiChatAvailable ? <AiChatTrigger /> : undefined}
             />
             {showSignInButton ? (
               <Button
@@ -1229,6 +1259,9 @@ export default inject(
       onClickEditRoom,
       onCopyLink,
       onCreateAndCopySharedLink,
+      getFolderModel,
+      onCreateRoom,
+      onCreateAgent,
       getHeaderOptions,
       onEmptyTrashAction,
     } = contextOptionsStore;
@@ -1253,6 +1286,8 @@ export default inject(
       setSelected: setGroupsSelected,
       setBufferSelection: setGroupsBufferSelection,
       insideGroupTempTitle,
+      groups,
+      groupsIsFiltered,
     } = groupsStore;
 
     const {
@@ -1400,6 +1435,8 @@ export default inject(
       isCollaborator,
       isVisitor,
       isEmptyPage,
+      isGroupsEmpty: groups?.length === 0,
+      groupsIsFiltered,
       categoryType,
       theme,
       isFrame,
@@ -1413,6 +1450,9 @@ export default inject(
       onCreateAndCopySharedLink,
       showNavigationButton,
       startUpload,
+      getFolderModel,
+      onCreateRoom,
+      onCreateAgent,
       onEmptyTrashAction,
       getHeaderOptions,
       setBufferSelection,
@@ -1479,4 +1519,3 @@ export default inject(
     "GroupingRooms",
   ])(observer(SectionHeaderContent)),
 );
-

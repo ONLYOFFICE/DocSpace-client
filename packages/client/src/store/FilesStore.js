@@ -1282,9 +1282,7 @@ class FilesStore {
       }
 
       if (this.userStore?.getEncryptionKeys) {
-        requests.push(
-          this.userStore.getEncryptionKeys().catch(() => {}),
-        );
+        requests.push(this.userStore.getEncryptionKeys().catch(() => {}));
       }
     }
     requests.push(getFilesSettings());
@@ -1889,15 +1887,12 @@ class FilesStore {
         if (data.current.private) {
           const keys = this.userStore?.encryptionKeys;
           if (!Array.isArray(keys) || keys.length === 0) {
-            toastr.warning(
-              getI18n().t("Common:EncryptionKeysNotConfigured"),
-            );
+            toastr.warning(getI18n().t("Common:EncryptionKeysNotConfigured"));
           }
 
           // The room id may differ from data.current.id when navigating into
           // a sub-folder: pathParts[1] is the room, current is the sub-folder.
-          const resolvedRoomId =
-            data.pathParts?.[1]?.id ?? data.current.id;
+          const resolvedRoomId = data.pathParts?.[1]?.id ?? data.current.id;
           // Backfill envelopes for members who registered their keypair after
           // being invited (their old files are otherwise locked out).
           this.maybeBackfillEncryptedRoom(
@@ -2092,6 +2087,7 @@ class FilesStore {
               UseChat: aiRoom.security.UseChat,
             },
             isRoom: true,
+            type: currentFolder.type,
           };
         } else if (currentFolder.roomType === RoomsType.AIRoom) {
           isChatTab = true;
@@ -2367,8 +2363,7 @@ class FilesStore {
     // type. This scoping is request-only — it is applied to a clone and never
     // stored in filterData, so the displayed filter (type chip, "clear filter"
     // state, URL) stays clean. A user-selected type takes precedence.
-    const isFormsSection =
-      window.location.pathname.startsWith("/forms");
+    const isFormsSection = window.location.pathname.startsWith("/forms");
     const sectionTypes = filterData.type
       ? null
       : getRoomsSectionTypes(isFormsSection, filterData.searchArea);
@@ -2549,7 +2544,7 @@ class FilesStore {
 
     const request = () =>
       api.ai
-        .getAIAgents(filterData, this.aiAgentsController.signal)
+        .getNewAiAgents(filterData, this.aiAgentsController.signal)
         .then(async (data) => {
           if (!folderId) setSelectedNode([`${data.current.id}`]);
 
@@ -2707,7 +2702,7 @@ class FilesStore {
     inAgent = false,
     filter = null,
   ) => {
-    const agents = await api.ai.setCustomAIAgentQuota(itemsIDs, +quotaSize);
+    const agents = await api.ai.setNewAiAgentQuota(itemsIDs, +quotaSize);
 
     if (!inAgent) {
       await this.fetchAgents(null, filter, false, false);
@@ -2733,7 +2728,7 @@ class FilesStore {
   };
 
   resetAIAgentQuota = async (itemsIDs, inAgent = false, filter = null) => {
-    const agents = await api.ai.resetAIAgentQuota(itemsIDs);
+    const agents = await api.ai.resetNewAiAgentQuota(itemsIDs);
 
     if (!inAgent) {
       await this.fetchAgents(null, filter, false, false);
@@ -3501,13 +3496,15 @@ class FilesStore {
         roomOptions = removeOptions(roomOptions, ["change-room-owner"]);
       }
 
-      const isFormsSection = window.location.pathname.startsWith("/forms");
-
-      if (!canArchiveRoom || isFormsSection) {
+      if (!canArchiveRoom) {
         roomOptions = removeOptions(roomOptions, [
           "archive-room",
           "unarchive-room",
         ]);
+      }
+
+      if (item.roomType === RoomsType.FormRoom) {
+        roomOptions = removeOptions(roomOptions, ["archive-room"]);
       }
 
       if (!canRemoveRoom) {
@@ -3961,7 +3958,7 @@ class FilesStore {
       (newFilter.page + 1) * newFilter.pageCount - deleteCount;
     newFilter.pageCount = deleteCount;
     if (isRooms) {
-      const req = isAIAgentsFolder ? api.ai.getAIAgents : api.rooms.getRooms;
+      const req = isAIAgentsFolder ? api.ai.getNewAiAgents : api.rooms.getRooms;
       return req(newFilter)
         .then((res) => {
           const folders = folderIds
@@ -4122,11 +4119,7 @@ class FilesStore {
       })
       .catch((error) => {
         this._backfilledEncryptedRooms.delete(roomId);
-        console.error(
-          "[ENCRYPTION] Backfill failed for room",
-          roomId,
-          error,
-        );
+        console.error("[ENCRYPTION] Backfill failed for room", roomId, error);
       });
   };
 
@@ -5241,7 +5234,7 @@ class FilesStore {
     const newFilesData = isRooms
       ? await api.rooms.getRooms(newFilter)
       : isAIAgentsFolder
-        ? await api.ai.getAIAgents(newFilter)
+        ? await api.ai.getNewAiAgents(newFilter)
         : await api.files.getFolder(newFilter.folder, newFilter);
 
     const newFiles = [...this.files, ...newFilesData.files].filter(

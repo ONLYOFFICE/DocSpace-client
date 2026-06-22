@@ -108,8 +108,8 @@ const PortalSettingsSidebar = ({
     const { pathname } = location;
     if (pathname.includes("customization")) return "0";
     if (pathname.includes("security")) return "1";
-    if (pathname.includes("backup")) return "2";
     if (pathname.includes("restore")) return "3";
+    if (pathname.includes("backup")) return "2";
     if (pathname.includes("integration")) return "4";
     if (pathname.includes("data-import")) return "5";
     if (pathname.includes("storage-management")) return "6-1";

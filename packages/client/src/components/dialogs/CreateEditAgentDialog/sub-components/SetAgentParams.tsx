@@ -51,7 +51,7 @@ import AvatarEditorDialog from "../../AvatarEditorDialog";
 import TagInput from "../../../TagInput";
 import InputParam from "../../../CreateEditDialogParams/InputParam";
 
-import ModelSettings from "../sub-components/Model";
+import ProfileSettings from "../sub-components/Profile";
 import InstructionsSettings from "../sub-components/Instructions";
 import MCPSettings from "../sub-components/MCP";
 import {
@@ -486,9 +486,8 @@ const setAgentParams = ({
         />
       ) : null}
 
-      <ModelSettings
+      <ProfileSettings
         agentParams={agentParams}
-        //systemAiEnabled={systemAiEnabled}
         setAgentParams={setAgentParams}
       />
       <InstructionsSettings

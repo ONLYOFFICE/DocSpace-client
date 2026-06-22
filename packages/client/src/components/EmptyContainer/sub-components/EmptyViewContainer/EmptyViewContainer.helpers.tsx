@@ -53,6 +53,8 @@ import CreateNewSpreadsheetIcon from "PUBLIC_DIR/images/emptyview/create.new.spr
 import CreateNewPresentation from "PUBLIC_DIR/images/emptyview/create.new.presentation.svg";
 import CreateRoom from "PUBLIC_DIR/images/emptyview/create.room.svg";
 import CreateAIAgentIcon from "PUBLIC_DIR/images/emptyview/create.ai-agent.svg";
+import DefaultFolderUserDark from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.dark.svg";
+import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.light.svg";
 import InviteUserFormIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
 import UploadDevicePDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.device.pdf.form.svg";
 import PersonIcon from "PUBLIC_DIR/images/icons/12/person.svg";
@@ -235,8 +237,18 @@ export const getIcon = (
   rootFolderType: Nullable<FolderType>,
   security: Nullable<TFolderSecurity | TRoomSecurity>,
   isResultsTab?: boolean,
+  isKnowledgeTab?: boolean,
+  isAIRoom?: boolean,
 ): JSX.Element => {
   if (isRootEmptyPage) return getRootIcon(rootFolderType, access, isBaseTheme);
+
+  // The knowledge tab shows a folder whose `folderType` isn't a default-folder
+  // type, so `getFolderIcon` would fall through to its empty `<div />` and the
+  // empty screen would render with no illustration. Use the same default
+  // folder icon the SDK agents knowledge empty view uses.
+  if (isAIRoom && isKnowledgeTab)
+    return isBaseTheme ? <DefaultFolderUserLight /> : <DefaultFolderUserDark />;
+
   return isFolder
     ? getFolderIcon(
         parentRoomType,
@@ -270,6 +282,7 @@ export const getOptions = (
   aiReady: boolean = false,
   standalone: boolean = false,
   isPortalAdmin: boolean = false,
+  trashSection: "personal" | "rooms" | "forms" | "agents" = "personal",
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -506,7 +519,14 @@ export const getOptions = (
     ],
   };
 
-  if (isRootEmptyPage) {
+  // The knowledge/results tabs view the agent room itself, which lives at the
+  // section root (`parentId === 0`) and so trips `isRootEmptyPage`. Without
+  // this guard the root branch below (FolderType.AIAgents → create-agent)
+  // would win and the knowledge/results upload actions never render. Title and
+  // description already special-case `isAIRoom` first, so options must too.
+  const isAIAliasTab = !!(isAIRoom && (isKnowledgeTab || isResultsTab));
+
+  if (isRootEmptyPage && !isAIAliasTab) {
     return match([rootFolderType, access, isVisitor])
       .returnType<EmptyViewOptionsType>()
       .with([FolderType.AIAgents, P._, P._], () =>
@@ -537,16 +557,41 @@ export const getOptions = (
           key: "empty-view-goto-shared",
         },
       ])
-      .with([FolderType.TRASH, P._, P.when((item) => !item)], () => [
-        {
-          ...actions.onGoToPersonal(),
-          icon: <PersonIcon />,
-          description: t("Common:GoToSection", {
+      .with([FolderType.TRASH, P._, P.when((item) => !item)], () => {
+        const trashOrigin = {
+          rooms: {
+            link: actions.onGoToShared(),
+            icon: <FolderIcon />,
+            sectionName: t("Common:Rooms"),
+          },
+          forms: {
+            link: actions.onGoToForms(),
+            icon: <FolderIcon />,
+            sectionName: t("Common:Forms"),
+          },
+          agents: {
+            link: actions.onGoToAgents(),
+            icon: <FolderIcon />,
+            sectionName: t("Common:AIAgents"),
+          },
+          personal: {
+            link: actions.onGoToPersonal(),
+            icon: <PersonIcon />,
             sectionName: t("Common:MyDocuments"),
-          }),
-          key: "empty-view-trash-goto-personal",
-        },
-      ])
+          },
+        }[trashSection];
+
+        return [
+          {
+            ...trashOrigin.link,
+            icon: trashOrigin.icon,
+            description: t("Common:GoToSection", {
+              sectionName: trashOrigin.sectionName,
+            }),
+            key: "empty-view-trash-goto-origin",
+          },
+        ];
+      })
       .otherwise(() => []);
   }
 
@@ -570,6 +615,7 @@ export const getOptions = (
         t("EmptyView:UploadDeviceOptionTitle"),
         t("Common:UploadFilesDevice"),
         "file",
+        true,
       );
 
       return [uploadFilesFromDocSpace, uploadFilesFromDevice];

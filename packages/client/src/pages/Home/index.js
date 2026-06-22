@@ -40,6 +40,9 @@ import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
+import { useAiChatPanel } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
+import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers";
+
 import {
   addTagsToRoom,
   removeTagsFromRoom,
@@ -65,6 +68,8 @@ import {
   SectionWarningContent,
 } from "./Section";
 import AccountsDialogs from "./Section/ContactsBody/Dialogs";
+import UploadFileInputs from "SRC_DIR/components/UploadInputs";
+import CreateButtonMobile from "SRC_DIR/components/CreateButtonMobile";
 
 import FilesSelectionArea from "./SelectionArea/FilesSelectionArea";
 import ContactsSelectionArea from "./SelectionArea/ContactsSelectionArea";
@@ -77,13 +82,21 @@ import {
 
 import MediaViewer from "./MediaViewer";
 
-import { useSDK, useOperations, usePluginOperations } from "./Hooks";
+import {
+  useSDK,
+  useOperations,
+  usePluginOperations,
+  usePanelExclusivity,
+} from "./Hooks";
 import { useQuickActions } from "./Hooks/useQuickActions";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
 import styles from "./Home.module.scss";
 
-const PureHome = (props) => {
+// `observer` is required because we read MobX observables from the shared
+// AiChatStore directly here (via `useAiChatPanel`): without it, the AI chat
+// panel's visibility changes (e.g. closing) would not re-render Home.
+const PureHome = observer((props) => {
   const {
     currentClientView,
     isChangePageRequestRunning,
@@ -206,11 +219,15 @@ const PureHome = (props) => {
     isFavoritesFolder,
     isRecentFolder,
     isAIAgentsFolder,
+
+    infoPanelStore,
   } = props;
 
   const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
 
   const location = useLocation();
+
+  const aiChatPanel = useAiChatPanel();
 
   React.useEffect(() => {
     if (location.state?.openAboutDialog && setIsAboutDialogVisible) {
@@ -233,8 +250,19 @@ const PureHome = (props) => {
     currentClientView === "users" || currentClientView === "groups";
   const isProfile = currentClientView === "profile";
   const isContactsEmptyView =
-    currentClientView === "groups" ? isEmptyGroups : isUsersEmptyView;
+    contactsTab === "groups" ? isEmptyGroups : isUsersEmptyView;
   const isChat = currentClientView === "chat";
+
+  // Availability is computed once by the host (Shell) and shared through
+  // AiAgentProviders' context.
+  const isAiChatAvailable = useIsAiChatAvailable();
+
+  usePanelExclusivity(infoPanelStore, isAiChatAvailable);
+
+  const isAiChatFullscreen =
+    isAiChatAvailable &&
+    aiChatPanel.isChatPanelVisible &&
+    aiChatPanel.isChatPanelFullscreen;
 
   // Quick-actions banner (ported from the SDK): create tiles above the
   // files/rooms list. The hook resolves which tile set applies (or none) from
@@ -258,7 +286,7 @@ const PureHome = (props) => {
     isProfile,
     isSettingsPage,
   });
-  const showQuickActions = quickActions.show && !isChat;
+  const showQuickActions = quickActions.show && !isChat && !isEmptyPage;
 
   // The "Forms" section shows its own "Choose Form Set" plate instead of the
   // quick-actions tiles. Dismissal is remembered across sessions.
@@ -512,6 +540,15 @@ const PureHome = (props) => {
   sectionProps.dragging = dragging;
   sectionProps.startDropPreview = startDropPreview;
 
+  sectionProps.isChatPanelAvailable = isAiChatAvailable;
+  sectionProps.isChatPanelVisible = aiChatPanel.isChatPanelVisible;
+  sectionProps.setIsChatPanelVisible = (visible) => {
+    if (!visible) aiChatPanel.closeChatPanel();
+  };
+  // In fullscreen the #section is collapsed to zero width but stays mounted, so
+  // mark it inert (drops its content from tab order / pointer interaction).
+  sectionProps.inert = isAiChatFullscreen;
+
   // Plugin operations
   sectionProps.pluginOperations = pluginOperations;
   sectionProps.pluginOperationsCompleted = pluginOperationsCompleted;
@@ -529,7 +566,8 @@ const PureHome = (props) => {
   const isValidContactsContent = !isContactsEmptyView && isContactsPage;
 
   const shouldRenderSectionFilter =
-    (isValidMainContent || isValidContactsContent) && !isSettingsPage;
+    (isContactsPage ? isValidContactsContent : isValidMainContent) &&
+    !isSettingsPage;
 
   React.useEffect(() => {
     if (isChangePageRequestRunning) return;
@@ -557,6 +595,8 @@ const PureHome = (props) => {
         </>
       )}
       <MediaViewer />
+      <UploadFileInputs />
+      <CreateButtonMobile />
       {/* When the quick-actions banner shows, switch the Section to the SDK's
           stickyTableHeader mode so the banner renders above the (now in-body,
           sticky) filter. The host is always `display: contents` (no layout
@@ -565,74 +605,76 @@ const PureHome = (props) => {
         className={classnames(styles.sectionVarsHost, {
           [styles.stickyBannerVars]: showQuickActions,
         })}
+        data-layout-mode={isAiChatFullscreen ? "ai-fullscreen" : undefined}
       >
-      <SectionWrapper
-        {...sectionProps}
-        withoutFooter={isChat}
-        scrollableBanner={showQuickActions}
-        stickyTableHeader={showQuickActions}
-      >
-        {!isErrorAvailable ||
-        isContactsPage ||
-        isProfile ||
-        isSettingsPage ||
-        showHeaderLoader ? (
-          <Section.SectionHeader>
-            <SectionHeaderContent />
-          </Section.SectionHeader>
-        ) : null}
+        <SectionWrapper
+          {...sectionProps}
+          withoutFooter={isChat}
+          scrollableBanner={showQuickActions}
+          stickyTableHeader={showQuickActions}
+        >
+          {!isErrorAvailable ||
+          isContactsPage ||
+          isProfile ||
+          isSettingsPage ||
+          showHeaderLoader ? (
+            <Section.SectionHeader>
+              <SectionHeaderContent />
+            </Section.SectionHeader>
+          ) : null}
 
-        <Section.SectionSubmenu>
-          <SectionSubmenuContent />
-        </Section.SectionSubmenu>
+          <Section.SectionSubmenu>
+            <SectionSubmenuContent />
+          </Section.SectionSubmenu>
 
-        <Section.SectionWarning>
-          <SectionWarningContent />
-        </Section.SectionWarning>
+          <Section.SectionWarning>
+            <SectionWarningContent />
+          </Section.SectionWarning>
 
-        {!isChat &&
-        !isErrorAvailable &&
-        !isDisabledKnowledge &&
-        shouldShowFilter &&
-        !isProfile &&
-        !selectedResultFileId &&
-        (!isFrame || showFilter) ? (
-          <Section.SectionFilter>
-            <SectionFilterContent />
-          </Section.SectionFilter>
-        ) : null}
+          {!isChat &&
+          !isErrorAvailable &&
+          !isDisabledKnowledge &&
+          shouldShowFilter &&
+          !isProfile &&
+          !selectedResultFileId &&
+          (!isFrame || showFilter) ? (
+            <Section.SectionFilter>
+              <SectionFilterContent />
+            </Section.SectionFilter>
+          ) : null}
 
-        {isFormsSection ? (
-          !isFormSetBannerClosed ? (
+          {isFormsSection && !isTemplatesFolder ? (
+            !isFormSetBannerClosed ? (
+              <Section.SectionBanner>
+                <ChooseFormSetBanner onClose={closeFormSetBanner} />
+              </Section.SectionBanner>
+            ) : null
+          ) : showQuickActions ? (
             <Section.SectionBanner>
-              <ChooseFormSetBanner onClose={closeFormSetBanner} />
+              <QuickActions
+                items={quickActions.items}
+                className={styles.quickActions}
+              />
             </Section.SectionBanner>
-          ) : null
-        ) : showQuickActions ? (
-          <Section.SectionBanner>
-            <QuickActions
-              items={quickActions.items}
-              className={styles.quickActions}
-            />
-          </Section.SectionBanner>
-        ) : null}
+          ) : null}
 
-        <Section.SectionBody>
-          <Outlet />
-        </Section.SectionBody>
+          <Section.SectionBody>
+            <Outlet />
+          </Section.SectionBody>
 
-        <Section.InfoPanelHeader>
-          <InfoPanelHeaderContent />
-        </Section.InfoPanelHeader>
-        <Section.InfoPanelBody>
-          <InfoPanelBodyContent />
-        </Section.InfoPanelBody>
-      </SectionWrapper>
+          <Section.InfoPanelHeader>
+            <InfoPanelHeaderContent />
+          </Section.InfoPanelHeader>
+          <Section.InfoPanelBody>
+            <InfoPanelBodyContent />
+          </Section.InfoPanelBody>
+          <Section.ChatPanel>{aiChatPanel.chatPanelContent}</Section.ChatPanel>
+        </SectionWrapper>
       </div>
       <InfoPanelActions />
     </>
   );
-};
+});
 
 const Home = withTranslation(["UploadPanel", "Files", "People"])(PureHome);
 
@@ -679,6 +721,7 @@ export const Component = inject(
     aiRoomStore,
     profileActionsStore,
     pluginStore,
+    infoPanelStore,
   }) => {
     const {
       setSelectedFolder,
@@ -1009,7 +1052,8 @@ export const Component = inject(
       removePluginFloatingOperations,
       dispatchMessage,
       getPluginIconUrl,
+
+      infoPanelStore,
     };
   },
 )(observer(HomeWithGuard));
-

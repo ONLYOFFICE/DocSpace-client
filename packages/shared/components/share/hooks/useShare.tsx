@@ -420,12 +420,10 @@ export const useShare = ({
   };
 
   const getData = (link: TFileLink): ContextMenuModel[] => {
-    const isBlockedByAdmin =
-      isExternalShareRestricted &&
-      !link.sharedTo.internal &&
-      blockExistingLinksOnRestrict;
+    const isRestrictedByAdmin =
+      isExternalShareRestricted && !link.sharedTo.internal;
 
-    if (isBlockedByAdmin) {
+    if (isRestrictedByAdmin) {
       return [
         {
           key: "copy-link-settings-key",
@@ -574,7 +572,6 @@ export const useShare = ({
           onCloseContextMenu={onCloseContextMenu}
           changeExpirationOption={changeExpirationOption}
           availableShareRights={availableShareRights}
-          blockExistingLinksOnRestrict={blockExistingLinksOnRestrict}
           hideLinkTypeSelector={hideLinkTypeSelector}
           isExternalShareRestricted={isExternalShareRestricted}
         />

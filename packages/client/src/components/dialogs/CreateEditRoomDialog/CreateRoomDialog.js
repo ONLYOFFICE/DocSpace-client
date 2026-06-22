@@ -44,7 +44,11 @@ import { Button } from "@docspace/ui-kit/components/button";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import RoomSelector from "@docspace/ui-kit/selectors/Room";
-import { FolderType, RoomsTypePrivate } from "@docspace/shared/enums";
+import {
+  FolderType,
+  RoomsType,
+  RoomsTypePrivate,
+} from "@docspace/shared/enums";
 import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 
 import TagHandler from "../../../helpers/TagHandler";
@@ -68,6 +72,7 @@ const CreateRoomDialog = ({
   fetchThirdPartyProviders,
   enableThirdParty,
   startRoomType,
+  isFormsCreate,
   processCreatingRoomFromData,
   setProcessCreatingRoomFromData,
   selectionItems,
@@ -83,7 +88,8 @@ const CreateRoomDialog = ({
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isOauthWindowOpen, setIsOauthWindowOpen] = useState(false);
   const [isWrongTitle, setIsWrongTitle] = useState(false);
-  const [templateDialogIsVisible, setTemplateDialogIsVisible] = useState(false);
+  const [templateDialogIsVisible, setTemplateDialogIsVisible] =
+    useState(false);
   const [keyConfirmVisible, setKeyConfirmVisible] = useState(false);
   const isMountRef = React.useRef(true);
   const onCloseRef = useRef(onClose);
@@ -319,8 +325,8 @@ const CreateRoomDialog = ({
         isScrollLocked={isScrollLocked}
         hideContent={isOauthWindowOpen}
         isTemplate={isTemplate}
-        isBackButton={roomParams.type}
-        onBackClick={roomParams.type ? goBack : null}
+        isBackButton={roomParams.type && !startRoomType}
+        onBackClick={roomParams.type && !startRoomType ? goBack : null}
         onSubmit={handleSubmit}
         withForm
         containerVisible={isTemplate ? templateDialogIsVisible : false}
@@ -331,6 +337,7 @@ const CreateRoomDialog = ({
               className="template-body_selector"
               onSubmit={onSubmitRoom}
               searchArea="Templates"
+              roomType={isFormsCreate ? RoomsType.FormRoom : undefined}
               isMultiSelect={false}
               withHeader
               headerProps={{
@@ -358,6 +365,7 @@ const CreateRoomDialog = ({
               disabledFormRoom={disabledFormRoom}
               isExternalShareRestricted={isExternalShareRestricted}
               processCreatingRoomFromData={processCreatingRoomFromData}
+              isFormsCreate={isFormsCreate}
               setTemplateDialogIsVisible={setTemplateDialogIsVisible}
             />
           ) : (

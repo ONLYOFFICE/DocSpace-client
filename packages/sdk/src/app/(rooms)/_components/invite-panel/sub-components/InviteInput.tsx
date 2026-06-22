@@ -248,9 +248,9 @@ const InviteInput: React.FC<InviteInputProps> = ({
     const isDisabled = status === EmployeeStatus.Disabled;
 
     if (isDisabled) {
-      toastr.warning(t("UsersCannotBeAdded"));
+      toastr.warning(t("Common:UsersCannotBeAdded"));
     } else if (shared) {
-      toastr.warning(t("UsersAlreadyAdded"));
+      toastr.warning(t("Common:UsersAlreadyAdded"));
     } else {
       let mutableItem = { ...item };
 
@@ -443,7 +443,7 @@ const InviteInput: React.FC<InviteInputProps> = ({
       });
 
     if (filteredItems.length !== items.length) {
-      toastr.warning(t("UsersAlreadyAdded"));
+      toastr.warning(t("Common:UsersAlreadyAdded"));
     }
 
     if (!filteredItems.length) {

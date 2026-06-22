@@ -47,6 +47,7 @@ export type GetSectionCreateButtonParams = {
 
   isContactsPage: boolean;
   isContactsGroupsPage: boolean;
+  isContactsGuestsPage: boolean;
   isRoomsFolder: boolean;
   isAIAgentsFolder: boolean;
   isFormsSection: boolean;
@@ -71,6 +72,7 @@ export const getSectionCreateButton = ({
   t,
   isContactsPage,
   isContactsGroupsPage,
+  isContactsGuestsPage,
   isRoomsFolder,
   isAIAgentsFolder,
   isFormsSection,
@@ -81,10 +83,7 @@ export const getSectionCreateButton = ({
   onCreateAgent,
   createGroup,
 }: GetSectionCreateButtonParams): SectionCreateButtonResult => {
-  // The "Forms" section reuses the Rooms folder, so check it before the
-  // generic rooms branch: it creates a Form Filling Room (onCreateRoom is
-  // wired to preset the FFR type when in the Forms route).
-  if (isFormsSection) {
+  if (isFormsSection && isRoomsFolder) {
     const model = getFolderModel(t);
     if (!model || model.length === 0) return HIDDEN;
 
@@ -130,6 +129,8 @@ export const getSectionCreateButton = ({
   }
 
   if (isContactsPage) {
+    if (isContactsGuestsPage) return HIDDEN;
+
     const model = getContactsModel(t);
     if (!model || model.length === 0) return HIDDEN;
 
@@ -137,7 +138,7 @@ export const getSectionCreateButton = ({
       return {
         showMainButton: true,
         mainButtonProps: {
-          text: t("Common:Invite"),
+          text: t("Common:New"),
           isDropdown: false,
           model: [],
           onAction: () => createGroup(selectedFolderId, "sidebar"),

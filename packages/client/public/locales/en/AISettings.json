@@ -11,6 +11,8 @@
   "CapabilityVision": "Vision",
   "ConnectProductToYourDataAndTools": "Connect {{productName}} to your data and tools.",
   "CustomMCPListTitle": "Custom",
+  "DefaultAISetupDescription": "Choose which model will be used by default in chats and agents.",
+  "DefaultAISetupTitle": "Default AI setup",
   "DefaultProviderDescription": "Select the default {{aiProvider}} and model for all features across {{productName}} ({{aiAgents}}, document editors, etc.)",
   "DefaultProviderSetSuccess": "Default provider successfully set",
   "DefaultProviderTitle": "Default provider",

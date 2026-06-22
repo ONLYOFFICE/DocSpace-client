@@ -42,6 +42,7 @@ import type useToolsSettings from "@docspace/ui-kit/ai-agent/chat/hooks/useTools
 import type useInitChats from "@docspace/ui-kit/ai-agent/chat/hooks/useInitChats";
 import type useInitMessages from "@docspace/ui-kit/ai-agent/chat/hooks/useInitMessages";
 import Chat from "@docspace/ui-kit/ai-agent/chat";
+import AIFeaturesDialog from "@docspace/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog";
 import {
   getAIAgent,
   getAIUserConfig,
@@ -65,6 +66,8 @@ import type ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
 import MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
 import AiRoomStore from "SRC_DIR/store/AiRoomStore";
+import { useAIActivation } from "SRC_DIR/Hooks/useAIActivation";
+import ClientSimpleTopUpDialog from "SRC_DIR/components/EmptyContainer/sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
 import { useScroll } from "./useScroll";
 import styles from "./AIAgentView.module.scss";
 
@@ -90,6 +93,16 @@ type Props = {
   canEditAgent?: boolean;
   aiConfig?: SettingsStore["aiConfig"];
   canUseChat?: AccessRightsStore["canUseChat"];
+  standalone?: SettingsStore["standalone"];
+  isPayer?: boolean;
+  walletCustomerEmail?: string | null;
+  walletCustomerDisplayName?: string | null;
+  isCardLinkedToPortal?: boolean;
+  enableAIService?: (onSuccess?: () => void | Promise<void>) => Promise<void>;
+  getAIConfig?: SettingsStore["getAIConfig"];
+  refreshPaymentInfo?: () => Promise<void>;
+  language?: string;
+  currentFolderId?: string | number;
 
   setMediaViewerVisible?: MediaViewerDataStore["setMediaViewerVisible"];
   setAiPlaylistImages?: AiRoomStore["setAiPlaylistImages"];
@@ -118,9 +131,40 @@ const AIAgentViewComponent = ({
   canUseChat,
   setMediaViewerVisible,
   setAiPlaylistImages,
+  standalone,
+  isPayer,
+  walletCustomerEmail,
+  walletCustomerDisplayName,
+  isCardLinkedToPortal,
+  enableAIService,
+  getAIConfig,
+  refreshPaymentInfo,
+  language,
+  currentFolderId,
 }: Props) => {
   const navigate = useNavigate();
   const scrollRef = useScroll();
+
+  const {
+    onActivateAI,
+    onTopUpAndActivateAI,
+    onShowAIBenefits,
+    onDialogActivate,
+    onAIActivated,
+    isActivating,
+    aiFeaturesDialogVisible,
+    onCloseAIFeaturesDialog,
+    simpleTopUpDialogVisible,
+    onCloseSimpleTopUpDialog,
+  } = useAIActivation({
+    enableAIService,
+    getAIConfig,
+    refreshPaymentInfo,
+    isCardLinkedToPortal,
+    parentId: currentFolderId,
+    context: "chat",
+    createAgentOnActivate: false,
+  });
 
   const [chatRecommendedModelVisible, setChatRecommendedModelVisible] =
     useState<boolean | undefined>(undefined);
@@ -143,7 +187,7 @@ const AIAgentViewComponent = ({
   }, [navigate]);
 
   const goToAISettings = useCallback(() => {
-    navigate("/portal-settings/ai-settings/providers");
+    navigate("/portal-settings/ai-settings/models");
   }, [navigate]);
 
   const onOpenEdit = useCallback(async () => {
@@ -198,7 +242,15 @@ const AIAgentViewComponent = ({
             aiReady={aiConfig?.aiReady || false}
             modelAliases={aiConfig?.modelAliases}
             recommendedModelForForms={aiConfig?.recommendedModelForForms}
-            standalone // NOTE: AI SaaS same as AI Standalone in v.4.0
+            standalone={standalone}
+            isPayer={isPayer}
+            isCardLinkedToPortal={isCardLinkedToPortal}
+            walletCustomerEmail={walletCustomerEmail}
+            walletCustomerDisplayName={walletCustomerDisplayName}
+            onActivateAI={onActivateAI}
+            onTopUpAndActivateAI={onTopUpAndActivateAI}
+            onShowAIBenefits={onShowAIBenefits}
+            isActivatingAI={isActivating}
             getResultStorageId={getResultStorageId}
             multimodal={
               chatSettings?.capabilities?.vision !== false
@@ -219,6 +271,20 @@ const AIAgentViewComponent = ({
       ) : null}
 
       {shouldRenderFiles ? <SectionBodyContent /> : null}
+
+      <AIFeaturesDialog
+        visible={aiFeaturesDialogVisible}
+        onClose={onCloseAIFeaturesDialog}
+        onActivate={onDialogActivate}
+        isCardLinkedToPortal={isCardLinkedToPortal ?? false}
+        isActivating={isActivating}
+      />
+      <ClientSimpleTopUpDialog
+        visible={simpleTopUpDialogVisible}
+        onClose={onCloseSimpleTopUpDialog}
+        onConfirm={onAIActivated}
+        language={language}
+      />
     </>
   );
 };
@@ -236,6 +302,8 @@ export const AIAgentView = inject(
     accessRightsStore,
     mediaViewerDataStore,
     aiRoomStore,
+    paymentStore,
+    currentTariffStatusStore,
   }: TStore) => {
     const { isErrorAIAgentNotAvailable } = filesStore;
 
@@ -254,11 +322,15 @@ export const AIAgentView = inject(
 
     const canEditAgent = !!security?.EditRoom;
 
-    const { aiConfig } = settingsStore;
+    const { aiConfig, standalone, getAIConfig } = settingsStore;
 
     const { canUseChat } = accessRightsStore;
 
     const { setAiPlaylistImages } = aiRoomStore;
+
+    const { isPayer, isCardLinkedToPortal, enableAIService } = paymentStore;
+    const { walletCustomerEmail, walletCustomerInfo } =
+      currentTariffStatusStore;
 
     return {
       isErrorAIAgentNotAvailable,
@@ -272,7 +344,16 @@ export const AIAgentView = inject(
       canEditAgent,
       aiConfig,
       canUseChat,
-
+      standalone,
+      isPayer,
+      walletCustomerEmail,
+      walletCustomerDisplayName: walletCustomerInfo?.displayName,
+      isCardLinkedToPortal,
+      enableAIService,
+      getAIConfig,
+      refreshPaymentInfo: authStore.getPaymentInfo,
+      language: authStore.language ?? "en",
+      currentFolderId: selectedFolderStore.id,
       setMediaViewerVisible,
       setAiPlaylistImages,
     };

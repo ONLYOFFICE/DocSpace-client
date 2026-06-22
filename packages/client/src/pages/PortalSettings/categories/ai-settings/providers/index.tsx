@@ -61,7 +61,7 @@ import { DeleteAIProviderDialog } from "./dialogs/delete";
 
 import { AiProviderTile } from "./Tile";
 import { ProvidersLoader } from "./ProvidersLoader";
-import { DefaultProvider } from "./DefaultProvider";
+import { StandaloneDefaultProvider } from "./StandaloneDefaultProvider";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 type TDeleteDialogData =
@@ -88,27 +88,26 @@ type TUpdateDialogData =
       models: TModelSettingsDto[];
     };
 
-type AIProviderProps = {
+
+type StandaloneAIProviderProps = {
   aiProviders?: AISettingsStore["aiProviders"];
   aiProvidersInitied?: AISettingsStore["aiProvidersInitied"];
   checkUnavailableProviders?: AISettingsStore["checkUnavailableProviders"];
   isProviderAvailable?: AISettingsStore["isProviderAvailable"];
   cancelAvailabilityCheck?: AISettingsStore["cancelAvailabilityCheck"];
   aiProviderSettingsUrl?: SettingsStore["aiProviderSettingsUrl"];
-  hasAIProviders?: AISettingsStore["hasAIProviders"];
   aiConfig?: SettingsStore["aiConfig"];
 };
 
-const AIProviderComponent = ({
+const StandaloneAIProviderComponent = ({
   aiProviders,
   aiProvidersInitied,
   checkUnavailableProviders,
   isProviderAvailable,
   cancelAvailabilityCheck,
   aiProviderSettingsUrl,
-  hasAIProviders,
   aiConfig,
-}: AIProviderProps) => {
+}: StandaloneAIProviderProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addDialogVisible, setaddDialogVisible] = useState(false);
   const [updateDialogData, setUpdateDialogData] = useState<TUpdateDialogData>({
@@ -229,7 +228,7 @@ const AIProviderComponent = ({
       </div>
 
       {aiProviders && aiProviders.length > 0 ? (
-        <DefaultProvider aiConfig={aiConfig} />
+        <StandaloneDefaultProvider aiConfig={aiConfig} />
       ) : null}
 
       {addDialogVisible ? (
@@ -273,10 +272,8 @@ export const AIProvider = inject(
       cancelAvailabilityCheck: aiSettingsStore.cancelAvailabilityCheck,
       aiProviderSettingsUrl: settingsStore.aiProviderSettingsUrl,
       aiConfig: settingsStore.aiConfig,
-      hasAIProviders: aiSettingsStore.hasAIProviders,
     };
   },
-)(observer(AIProviderComponent));
+)(observer(StandaloneAIProviderComponent));
 
 export { ProvidersLoader };
-

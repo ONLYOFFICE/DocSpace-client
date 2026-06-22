@@ -68,6 +68,7 @@ type ModelSettingsProps = {
   isAdmin?: boolean;
   openedFromChat?: boolean;
   setAgentParams: (value: Partial<TAgentParams>) => void;
+  isSeveralProviders?: boolean;
 };
 
 const ModelSettings = ({
@@ -77,6 +78,7 @@ const ModelSettings = ({
   isAdmin,
   openedFromChat,
   setAgentParams,
+  isSeveralProviders = false,
 }: ModelSettingsProps) => {
   const { t } = useTranslation(["AIRoom", "Common"]);
   const navigate = useNavigate();
@@ -436,14 +438,20 @@ const ModelSettings = ({
     !isProvidersLoading &&
     !isModelLoading;
 
+  const modelTitle = isSeveralProviders
+    ? t("AIProviderAndModel", { aiProvider: t("Common:AIProvider") })
+    : t("AIModelTitle");
+
+  const modelDescription = isSeveralProviders
+    ? t("ModelDescription", { aiProvider: t("Common:AIProvider") })
+    : t("AIModelDescription");
+
   return (
     <StyledParam increaseGap>
       <div className=" set_room_params-info">
         <div>
           <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
-            {t("AIProviderAndModel", {
-              aiProvider: t("Common:AIProvider"),
-            })}
+            {modelTitle}
           </Text>
           <Text
             fontSize="12px"
@@ -452,9 +460,7 @@ const ModelSettings = ({
             className="set_room_params-info-description"
             noSelect
           >
-            {t("ModelDescription", {
-              aiProvider: t("Common:AIProvider"),
-            })}
+            {modelDescription}
           </Text>
           <Text
             fontSize="12px"
@@ -490,7 +496,7 @@ const ModelSettings = ({
 
         {isProvidersLoading ? (
           <RectangleSkeleton width="100%" height="32px" />
-        ) : (
+        ) : isSeveralProviders ? (
           <FieldContainer
             isVertical
             hasError={!!error}
@@ -513,22 +519,30 @@ const ModelSettings = ({
               dataTestId="create_agent_provider_combobox"
             />
           </FieldContainer>
-        )}
-        <ComboBox
-          options={modelOptions}
-          selectedOption={modelSelectedOptions}
-          onSelect={onSelectModel}
-          scaled
-          scaledOptions
-          dropDownMaxHeight={modelOptions.length > 7 ? 300 : undefined}
-          isDefaultMode
-          className="ai-combobox"
-          displaySelectedOption
-          dropDownClassName="not-selectable"
-          isDisabled={!!error || isModelLoading || !models.length}
-          isLoading={isModelLoading}
-          dataTestId="create_agent_model_combobox"
-        />
+        ) : null}
+        <FieldContainer
+          isVertical
+          hasError={!!error}
+          errorMessage={error || ""}
+          errorMessageWidth="100%"
+          removeMargin
+        >
+          <ComboBox
+            options={modelOptions}
+            selectedOption={modelSelectedOptions}
+            onSelect={onSelectModel}
+            scaled
+            scaledOptions
+            dropDownMaxHeight={modelOptions.length > 7 ? 300 : undefined}
+            isDefaultMode
+            className="ai-combobox"
+            displaySelectedOption
+            dropDownClassName="not-selectable"
+            isDisabled={!!error || isModelLoading || !models.length}
+            isLoading={isModelLoading}
+            dataTestId="create_agent_model_combobox"
+          />
+        </FieldContainer>
       </div>
     </StyledParam>
   );

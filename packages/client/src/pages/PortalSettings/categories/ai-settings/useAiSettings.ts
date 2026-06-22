@@ -34,9 +34,12 @@
  */
 
 import React from "react";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
+
+import { AI_ENUM } from "@docspace/ui-kit/billing/constants";
 
 import AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
+import PaymentStore from "SRC_DIR/store/PaymentStore";
 
 type UseAiSettingsProps = {
   standalone?: boolean;
@@ -45,6 +48,9 @@ type UseAiSettingsProps = {
   fetchWebSearch?: AISettingsStore["fetchWebSearch"];
   fetchKnowledge?: AISettingsStore["fetchKnowledge"];
   initDefaultProvider?: AISettingsStore["initDefaultProvider"];
+  fetchAiPrices?: () => Promise<void>;
+  fetchAiModelRestrictions?: () => Promise<void>;
+  handleServiceQuota?: PaymentStore["handleServiceQuota"];
 };
 
 const useAISettings = ({
@@ -53,47 +59,71 @@ const useAISettings = ({
   fetchMCPServers,
   fetchWebSearch,
   fetchKnowledge,
+  fetchAiPrices,
+  fetchAiModelRestrictions,
+  handleServiceQuota,
   standalone,
 }: UseAiSettingsProps) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const initAIProviders = React.useCallback(async () => {
     await fetchAIProviders?.();
     await initDefaultProvider?.();
   }, [fetchAIProviders, initDefaultProvider]);
 
+  const initAiModels = React.useCallback(async () => {
+    await Promise.all([fetchAiPrices?.(), fetchAiModelRestrictions?.()]);
+  }, [fetchAiPrices, fetchAiModelRestrictions]);
+
   const initMCPServers = React.useCallback(async () => {
     await Promise.all([fetchMCPServers?.(), fetchAIProviders?.()]);
   }, [fetchMCPServers, fetchAIProviders]);
 
   const initWebSearch = React.useCallback(async () => {
-    await Promise.all([fetchWebSearch?.(), fetchAIProviders?.()]);
-  }, [fetchWebSearch, fetchAIProviders]);
+    if (standalone) {
+      await Promise.all([fetchWebSearch?.(), fetchAIProviders?.()]);
+      return;
+    }
+    await fetchAiPrices?.();
+  }, [standalone, fetchWebSearch, fetchAIProviders, fetchAiPrices]);
 
   const initKnowledge = React.useCallback(async () => {
-    await Promise.all([fetchKnowledge?.(), fetchAIProviders?.()]);
-  }, [fetchKnowledge, fetchAIProviders]);
+    if (standalone) {
+      await Promise.all([fetchKnowledge?.(), fetchAIProviders?.()]);
+      return;
+    }
+    await fetchAiPrices?.();
+  }, [standalone, fetchKnowledge, fetchAIProviders, fetchAiPrices]);
 
   const getAiSettingsInitialValue = React.useCallback(async () => {
+    const isModels = window.location.pathname.includes("models");
     const isProviders = window.location.pathname.includes("providers");
+    const isModelAssignment =
+      window.location.pathname.includes("model-assignment");
     const isServers = window.location.pathname.includes("servers");
     const isSearch = window.location.pathname.includes("search");
     const isKnowledge = window.location.pathname.includes("knowledge");
 
-    if (!standalone && !isServers) {
-      navigate("/portal-settings/ai-settings/servers");
-      await initMCPServers();
+    if (!standalone) await handleServiceQuota?.(AI_ENUM);
 
-      return;
-    }
-
-    if (isProviders) await initAIProviders();
+    if (isModels) await initAiModels();
+    if (isProviders || isModelAssignment) await initAIProviders();
     if (isServers) await initMCPServers();
     if (isSearch) await initWebSearch();
     if (isKnowledge) await initKnowledge();
-  }, [initAIProviders, initMCPServers, initWebSearch, initKnowledge, navigate]);
+  }, [
+    standalone,
+    initAiModels,
+    initAIProviders,
+    initMCPServers,
+    initWebSearch,
+    initKnowledge,
+    handleServiceQuota,
+    // navigate,
+  ]);
 
   return {
+    initAiModels,
     initAIProviders,
     initMCPServers,
     initWebSearch,
@@ -103,3 +133,4 @@ const useAISettings = ({
 };
 
 export default useAISettings;
+

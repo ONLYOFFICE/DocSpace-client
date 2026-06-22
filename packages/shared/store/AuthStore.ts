@@ -166,7 +166,7 @@ class AuthStore {
 
     const user = this.userStore?.user;
 
-    if (user && isAdmin(user)) {
+    if (user && isAdmin(user) && !this.settingsStore?.standalone) {
       await this.currentTariffStatusStore?.fetchPayerInfo();
     }
 
@@ -276,6 +276,8 @@ class AuthStore {
       refresh = true;
     }
     const user = this.userStore?.user?.isVisitor;
+    const isAdmin =
+      this.userStore?.user?.isAdmin || this.userStore?.user?.isOwner;
 
     const request = [];
 
@@ -283,6 +285,10 @@ class AuthStore {
 
     if (!user) {
       request.push(this.currentQuotaStore?.fetchPortalQuota(refresh));
+    }
+
+    if (isAdmin && !this.settingsStore?.standalone) {
+      request.push(this.currentTariffStatusStore?.fetchPayerInfo(refresh));
     }
 
     await Promise.all(request);

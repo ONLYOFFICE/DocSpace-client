@@ -60,49 +60,10 @@ import {
   BACKUP_SERVICE,
   STORAGE_ENUM,
 } from "@docspace/ui-kit/billing/constants";
+import { parseAiPrices } from "@docspace/ui-kit/billing/utils/parsers";
+import type { TAiToolsPrices } from "@docspace/ui-kit/billing/types";
 
-type TAiToolsChatPrice = {
-  prompt: number;
-  completion: number;
-};
-
-type TAiToolsEmbeddingPrice = {
-  prompt: number;
-};
-
-type TAiToolsChatModelPrice = {
-  id: string;
-  alias: string;
-  provider: string;
-  image: string;
-  price: TAiToolsChatPrice;
-};
-
-type TAiToolsEmbeddingModelPrice = {
-  id: string;
-  alias: string;
-  provider: string;
-  image: string;
-  price: TAiToolsEmbeddingPrice;
-};
-
-type TAiToolsWebSearchPrice = {
-  id: string;
-  alias: string;
-  provider: string;
-  image: string;
-  price: number;
-};
-
-export type TAiToolsPrices = {
-  currency?: {
-    code: string;
-    symbol: string;
-  };
-  chat?: TAiToolsChatModelPrice[];
-  embedding?: TAiToolsEmbeddingModelPrice[];
-  webSearch?: TAiToolsWebSearchPrice[];
-};
+export type { TAiToolsPrices };
 
 class ServicesStore {
   currentTariffStatusStore: CurrentTariffStatusStore | null = null;
@@ -174,6 +135,10 @@ class ServicesStore {
     return currency.code ?? "USD";
   }
 
+  get aiModelsCurrencySymbol() {
+    return this.aiToolsPrices?.currency?.symbol ?? "$";
+  }
+
   formatAiModelsCurrency = (amount: number) => {
     const { language } = authStore;
 
@@ -212,6 +177,85 @@ class ServicesStore {
     } catch (error) {
       if (axios.isCancel(error)) return;
       console.error(error);
+    }
+  };
+
+  fetchAiPrices = async () => {
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
+
+    try {
+      const res = await getAiPrices(abortController.signal);
+
+      const prices = parseAiPrices(res);
+      if (!prices) return;
+
+      this.aiToolsPrices = prices;
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+      console.error(error);
+    }
+  };
+
+  fetchAiModelRestrictions = async () => {
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
+
+    try {
+      const res = await getAiModelRestrictions(abortController.signal);
+
+      const models = Array.isArray(res) ? [] : (res?.models ?? []);
+
+      const nextMap = new Map<string, boolean>();
+      models.forEach((id) => {
+        if (id) nextMap.set(String(id), false);
+      });
+
+      this.aiModelAvailabilityMap = nextMap;
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+      console.error(error);
+    }
+  };
+
+  setAiModelAvailability = async (modelId: string, enabled: boolean) => {
+    if (!modelId || this.aiModelAvailabilityUpdatingSet.has(modelId)) return;
+
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
+
+    this.aiModelAvailabilityUpdatingSet = new Set([
+      ...this.aiModelAvailabilityUpdatingSet,
+      modelId,
+    ]);
+
+    try {
+      const restrictedModels: string[] = Array.from(
+        this.aiModelAvailabilityMap.keys(),
+      );
+
+      const idx = restrictedModels.indexOf(modelId);
+
+      if (enabled && idx >= 0) {
+        restrictedModels.splice(idx, 1);
+      }
+      if (!enabled && idx < 0) {
+        restrictedModels.push(modelId);
+      }
+
+      await setAiModelRestrictions(restrictedModels, abortController.signal);
+
+      const nextMap = new Map(this.aiModelAvailabilityMap);
+      if (enabled) nextMap.delete(modelId);
+      else nextMap.set(modelId, false);
+      this.aiModelAvailabilityMap = nextMap;
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+      console.error(error);
+    } finally {
+      const nextSet = new Set(this.aiModelAvailabilityUpdatingSet);
+      nextSet.delete(modelId);
+      this.aiModelAvailabilityUpdatingSet = nextSet;
     }
   };
 }

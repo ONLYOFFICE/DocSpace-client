@@ -122,6 +122,9 @@ const View = ({
   fetchWebSearch,
   fetchKnowledge,
   initDefaultProvider,
+  fetchAiPrices,
+  fetchAiModelRestrictions,
+  standalone,
 }: ViewProps) => {
   const location = useLocation();
   const { t } = useTranslation();
@@ -176,7 +179,10 @@ const View = ({
     fetchMCPServers,
     fetchWebSearch,
     fetchKnowledge,
-    standalone: true,
+    fetchAiPrices,
+    fetchAiModelRestrictions,
+    handleServiceQuota: paymentStore?.handleServiceQuota, //handleServicesQuotas
+    standalone,
   });
 
   useEffect(() => {
@@ -370,11 +376,12 @@ export const ViewComponent = inject(
     paymentStore,
     currentTariffStatusStore,
     aiSettingsStore,
+    servicesStore,
     defaultTemplatesStore,
   }: TStore) => {
     const { initSettings: initSettingsCommon } = common;
 
-    const { clearAbortControllerArr } = settingsStore;
+    const { clearAbortControllerArr, standalone } = settingsStore;
 
     const { setIsPortalSettingsLoading } = clientLoadingStore;
 
@@ -417,12 +424,15 @@ export const ViewComponent = inject(
       loadBaseInfo,
 
       clearAbortControllerArr,
+      standalone,
 
       fetchAIProviders: aiSettingsStore.fetchAIProviders,
       fetchMCPServers: aiSettingsStore.fetchMCPServers,
       fetchWebSearch: aiSettingsStore.fetchWebSearch,
       fetchKnowledge: aiSettingsStore.fetchKnowledge,
       initDefaultProvider: aiSettingsStore.initDefaultProvider,
+      fetchAiPrices: servicesStore.fetchAiPrices,
+      fetchAiModelRestrictions: servicesStore.fetchAiModelRestrictions,
     };
   },
 )(observer(View));

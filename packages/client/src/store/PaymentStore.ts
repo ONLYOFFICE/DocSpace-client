@@ -253,10 +253,11 @@ class PaymentStore {
     try {
       await setServiceState({ service: AI_ENUM, enabled: true });
       await onSuccess?.();
-    } catch {
+    } catch (e) {
       if (feature) {
         this.servicesQuotasFeatures.set(AI_ENUM, { ...feature, value: false });
       }
+      toastr.error(e as Error);
     }
   };
 

@@ -60,7 +60,7 @@ const KnowledgeBase = ({
   formatAiModelsCurrency,
   knowledgeSettingsUrl,
 }: KnowledgeBaseProps) => {
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Files", "Common"]);
 
   const items = aiToolsPrices?.embedding ?? [];
 

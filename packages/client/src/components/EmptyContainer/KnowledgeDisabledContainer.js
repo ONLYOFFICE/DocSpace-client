@@ -74,7 +74,7 @@ const KnowledgeDisabledContainer = (props) => {
   const {
     onActivateAI,
     onTopUpAndActivateAI,
-    onShowAIBenefits,
+    // onShowAIBenefits,
     onDialogActivate,
     onAIActivated,
     isActivating,

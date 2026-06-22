@@ -180,6 +180,7 @@ type setAgentParamsProps = {
   recommendedModelForForms?: TAIConfig["recommendedModelForForms"];
   isUserAdmin?: boolean;
   openContext?: CreateEditAgentStore["openContext"];
+  standalone?: SettingsStore["standalone"];
 };
 
 const setAgentParams = ({
@@ -220,6 +221,7 @@ const setAgentParams = ({
   recommendedModelForForms,
   isUserAdmin,
   openContext,
+  standalone,
 }: setAgentParamsProps) => {
   const { t } = useTranslation([
     "CreateEditRoomDialog",
@@ -549,6 +551,7 @@ const setAgentParams = ({
         isAdmin={!!isUserAdmin}
         openedFromChat={openContext === AgentDialogContext.Chat}
         setAgentParams={setAgentParams}
+        isSeveralProviders={!!standalone}
       />
       <InstructionsSettings
         agentParams={agentParams}
@@ -610,7 +613,7 @@ export default inject(
   }: TStore) => {
     const { isDefaultAIAgentsQuotaSet } = currentQuotaStore;
     const { openContext } = createEditAgentStore;
-    const { folderFormValidation, maxImageUploadSize, aiConfig } =
+    const { folderFormValidation, maxImageUploadSize, aiConfig, standalone } =
       settingsStore;
 
     const { bufferSelection } = filesStore;
@@ -660,6 +663,7 @@ export default inject(
       isUserAdmin:
         !!userStore?.user && (userStore.user.isOwner || userStore.user.isAdmin),
       openContext,
+      standalone,
     };
   },
 )(observer(setAgentParams));

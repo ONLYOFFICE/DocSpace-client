@@ -85,7 +85,7 @@ const AIFeaturesBanner = ({
     }
 
     navigate(
-      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, route),
+      combineUrl(window.ClientConfig?.proxy?.url, config.homepage, route),
     );
   };
 

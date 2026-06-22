@@ -173,13 +173,13 @@ const PaymentsPage = (props) => {
       : `/portal-settings/payments/${e.id}`;
 
     navigate(
-      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url),
+      combineUrl(window.ClientConfig?.proxy?.url, config.homepage, url),
     );
   };
 
   const navigateToRoute = (route) => {
     navigate(
-      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, route),
+      combineUrl(window.ClientConfig?.proxy?.url, config.homepage, route),
     );
   };
 

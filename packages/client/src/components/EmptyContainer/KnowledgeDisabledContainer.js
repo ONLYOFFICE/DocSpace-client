@@ -149,10 +149,9 @@ const KnowledgeDisabledContainer = (props) => {
   } else {
     // saas user — same text as the empty AI agents view
     titleRoomNoAccess = t("Common:AIFeaturesNotActive");
-    descriptionRoomNoAccess = t(
-      "Common:EmptyAIDisabledContactAdminDesc",
-      { productName },
-    );
+    descriptionRoomNoAccess = t("Common:EmptyAIDisabledContactAdminDesc", {
+      productName,
+    });
   }
 
   const goToSettings = (event) => {
@@ -198,13 +197,13 @@ const KnowledgeDisabledContainer = (props) => {
 
     return [
       activateOrTopUpAI,
-      {
-        type: "button",
-        title: t("Common:Benefits"),
-        key: "ai-benefits",
-        primary: false,
-        onClick: onShowAIBenefits,
-      },
+      // {
+      //   type: "button",
+      //   title: t("Common:Benefits"),
+      //   key: "ai-benefits",
+      //   primary: false,
+      //   onClick: onShowAIBenefits,
+      // },
     ];
   };
 

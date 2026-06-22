@@ -446,13 +446,13 @@ export const getOptions = (
         onClick: actions.onTopUpAndActivateAI,
       } as const);
 
-  const aiBenefits = {
-    type: "button",
-    title: t("Common:Benefits"),
-    key: "ai-benefits",
-    primary: false,
-    onClick: actions.onShowAIBenefits,
-  } as const;
+  // const aiBenefits = {
+  //   type: "button",
+  //   title: t("Common:Benefits"),
+  //   key: "ai-benefits",
+  //   primary: false,
+  //   onClick: actions.onShowAIBenefits,
+  // } as const;
 
   const uploadFromDeviceAnyFile = isMobile
     ? createUploadFromDeviceOption(
@@ -543,7 +543,7 @@ export const getOptions = (
         if (!isPortalAdmin) return [];
         if (standalone) return [goToAIProviderSettings];
         if (isCardLinkedToPortal && !isPayer) return [];
-        return [activateOrTopUpAI, aiBenefits];
+        return [activateOrTopUpAI];
       })
       .with([FolderType.Rooms, ShareAccessRights.None, P._], () => [
         createRoom,
@@ -724,3 +724,4 @@ export const getOptions = (
       return [];
   }
 };
+

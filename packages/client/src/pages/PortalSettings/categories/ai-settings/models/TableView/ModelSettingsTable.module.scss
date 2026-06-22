@@ -33,6 +33,7 @@
   top: auto !important;
   left: auto !important;
   right: auto !important;
+  z-index: 0 !important; 
 }
 
 .tableContainer :global([class*="emptyTableContainer"]) {

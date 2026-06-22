@@ -150,7 +150,7 @@ const KnowledgeDisabledContainer = (props) => {
     // saas user — same text as the empty AI agents view
     titleRoomNoAccess = t("Common:AIFeaturesNotActive");
     descriptionRoomNoAccess = t(
-      "Common:EmptyAIAgentsAIDisabledContactAdminDescription",
+      "Common:EmptyAIDisabledContactAdminDesc",
       { productName },
     );
   }

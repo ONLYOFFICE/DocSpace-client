@@ -281,7 +281,7 @@ const getAIAgentsAIDisabledDescription = (
       }),
     )
     .otherwise(() =>
-      t("Common:EmptyAIAgentsAIDisabledContactAdminDescription", {
+      t("Common:EmptyAIDisabledContactAdminDesc", {
         productName: getBrandName("ProductName"),
       }),
     );

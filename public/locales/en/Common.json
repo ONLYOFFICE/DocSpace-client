@@ -542,7 +542,7 @@
   "EffectiveDate": "Effective date",
   "Email": "Email",
   "Embed": "Embed",
-  "EmptyAIAgentsAIDisabledContactAdminDescription": "Contact the {{productName}} admin to activate AI features and create agents with their own knowledge base, share them with your team, and let them run tasks across your apps.",
+  "EmptyAIDisabledContactAdminDesc": "Contact the {{productName}} admin to activate AI features and create agents with their own knowledge base, share them with your team, and let them run tasks across your apps.",
   "EmptyAIAgentsAIDisabledDescription": "This section allows users to work with {{aiAgents}} — smart assistants for handling documents and other tasks. \nTo start using them, the AI features service must be enabled by your {{productName}} admin.",
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Connect your own AI service to unlock advanced features in {{productName}}. Once added, it will be accessible to all users in {{aiChats}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} is not available yet",

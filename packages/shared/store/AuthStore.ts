@@ -287,7 +287,7 @@ class AuthStore {
       request.push(this.currentQuotaStore?.fetchPortalQuota(refresh));
     }
 
-    if (isAdmin) {
+    if (isAdmin && !this.settingsStore?.standalone) {
       request.push(this.currentTariffStatusStore?.fetchPayerInfo(refresh));
     }
 

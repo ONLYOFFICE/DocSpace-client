@@ -166,7 +166,7 @@ class AuthStore {
 
     const user = this.userStore?.user;
 
-    if (user && isAdmin(user)) {
+    if (user && isAdmin(user) && !this.settingsStore?.standalone) {
       await this.currentTariffStatusStore?.fetchPayerInfo();
     }
 

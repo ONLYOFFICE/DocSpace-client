@@ -228,7 +228,10 @@ class PaymentStore {
   }
 
   get isAIReady() {
-    return Boolean(this.isAiToolsServiceOn) || Boolean(settingsStore.aiConfig?.aiReady);
+    return (
+      Boolean(this.isAiToolsServiceOn) ||
+      Boolean(settingsStore.aiConfig?.aiReady)
+    );
   }
 
   formatDate = (date: DateTime, timeType?: "start" | "end") =>
@@ -240,7 +243,14 @@ class PaymentStore {
 
     const service = await getServiceQuota(serviceName, abortController.signal);
 
-    applyServiceQuotaToMap(service, this.servicesQuotasFeatures as Parameters<typeof applyServiceQuotaToMap>[1]);
+    runInAction(() => {
+      applyServiceQuotaToMap(
+        service,
+        this.servicesQuotasFeatures as Parameters<
+          typeof applyServiceQuotaToMap
+        >[1],
+      );
+    });
 
     return service.serviceName;
   };

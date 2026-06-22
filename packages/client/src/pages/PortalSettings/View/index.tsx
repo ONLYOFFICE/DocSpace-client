@@ -124,6 +124,7 @@ const View = ({
   initDefaultProvider,
   fetchAiPrices,
   fetchAiModelRestrictions,
+  standalone,
 }: ViewProps) => {
   const location = useLocation();
   const { t } = useTranslation();
@@ -180,8 +181,8 @@ const View = ({
     fetchKnowledge,
     fetchAiPrices,
     fetchAiModelRestrictions,
-    handleServiceQuota: paymentStore?.handleServiceQuota,
-    standalone: true,
+    handleServiceQuota: paymentStore?.handleServiceQuota, //handleServicesQuotas
+    standalone,
   });
 
   useEffect(() => {
@@ -380,7 +381,7 @@ export const ViewComponent = inject(
   }: TStore) => {
     const { initSettings: initSettingsCommon } = common;
 
-    const { clearAbortControllerArr } = settingsStore;
+    const { clearAbortControllerArr, standalone } = settingsStore;
 
     const { setIsPortalSettingsLoading } = clientLoadingStore;
 
@@ -423,6 +424,7 @@ export const ViewComponent = inject(
       loadBaseInfo,
 
       clearAbortControllerArr,
+      standalone,
 
       fetchAIProviders: aiSettingsStore.fetchAIProviders,
       fetchMCPServers: aiSettingsStore.fetchMCPServers,

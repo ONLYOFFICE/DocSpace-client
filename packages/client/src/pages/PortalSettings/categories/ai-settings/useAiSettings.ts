@@ -34,7 +34,7 @@
  */
 
 import React from "react";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 
 import { AI_ENUM } from "@docspace/ui-kit/billing/constants";
 
@@ -64,7 +64,7 @@ const useAISettings = ({
   handleServiceQuota,
   standalone,
 }: UseAiSettingsProps) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const initAIProviders = React.useCallback(async () => {
     await fetchAIProviders?.();
@@ -104,13 +104,6 @@ const useAISettings = ({
     const isSearch = window.location.pathname.includes("search");
     const isKnowledge = window.location.pathname.includes("knowledge");
 
-    if (!standalone && !isServers) {
-      navigate("/portal-settings/ai-settings/servers");
-      await initMCPServers();
-
-      return;
-    }
-
     if (!standalone) await handleServiceQuota?.(AI_ENUM);
 
     if (isModels) await initAiModels();
@@ -126,7 +119,7 @@ const useAISettings = ({
     initWebSearch,
     initKnowledge,
     handleServiceQuota,
-    navigate,
+    // navigate,
   ]);
 
   return {

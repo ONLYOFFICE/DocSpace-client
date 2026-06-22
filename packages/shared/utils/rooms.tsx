@@ -60,8 +60,8 @@ export const ROOMS_SECTION_TYPES = RoomsTypeValues.filter(
  * Room types a rooms-list request should be scoped to, splitting the unified
  * Rooms folder into the "Rooms" and "Forms" sections.
  *
- * Returns `null` when no scoping applies (archive, templates, a specific room),
- * so the caller leaves the request untouched. Applied to the API request only —
+ * Returns `null` when no scoping applies (archive, a specific room), so the
+ * caller leaves the request untouched. Applied to the API request only —
  * never stored in the displayed filter, so the type chip / "clear filter" state
  * stay clean.
  */
@@ -71,7 +71,10 @@ export const getRoomsSectionTypes = (
 ): string[] | null => {
   if (isFormsSection) return FORMS_SECTION_TYPES.map(String);
 
-  if (searchArea === RoomSearchArea.Active)
+  if (
+    searchArea === RoomSearchArea.Active ||
+    searchArea === RoomSearchArea.Templates
+  )
     return ROOMS_SECTION_TYPES.map(String);
 
   return null;

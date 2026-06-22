@@ -60,6 +60,7 @@ type ClientArticleSidebarProps = FolderIds & {
   // former Rooms/Templates submenu (and the Use template quick action).
   canUseTemplates?: boolean;
   isTemplatesFolderRoot?: boolean;
+  isNavLoading?: boolean;
   onFolderNavigate: () => void;
 };
 
@@ -69,6 +70,7 @@ const ClientArticleSidebar = ({
   isVisitor,
   canUseTemplates,
   isTemplatesFolderRoot,
+  isNavLoading,
   onFolderNavigate,
   ...folderIds
 }: ClientArticleSidebarProps) => {
@@ -407,7 +409,13 @@ const ClientArticleSidebar = ({
     userId,
   ]);
 
-  return <AppsSidebar groups={groups} activeId={activeId} />;
+  return (
+    <AppsSidebar
+      groups={groups}
+      activeId={activeId}
+      isNavLoading={isNavLoading}
+    />
+  );
 };
 
 const ClientArticleSidebarConnected = inject<TStore>(
@@ -432,6 +440,8 @@ const ClientArticleSidebarConnected = inject<TStore>(
     // Matches Home's canCreateRooms — room admins and admins can use templates.
     canUseTemplates: authStore.isAdmin || authStore.isRoomAdmin,
     isTemplatesFolderRoot: treeFoldersStore.isTemplatesFolderRoot,
+    // Same signal the old article used to show <ArticleFolderLoader />.
+    isNavLoading: clientLoadingStore.showArticleLoader,
     onFolderNavigate: () => {
       filesStore.setSelection?.([]);
       clientLoadingStore.setIsSectionBodyLoading(true, true);

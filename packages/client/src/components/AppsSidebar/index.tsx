@@ -52,6 +52,7 @@ import { useSectionNavigation } from "SRC_DIR/contexts/SectionNavigationContext"
 import CollapseButton from "./CollapseButton";
 import ProfileBlock from "./ProfileBlock";
 import AppsPluginItems from "./AppsPluginItems/AppsPluginItems";
+import { NavMenuLoader } from "./SidebarLoader";
 import { useSidebarShowText } from "./useSidebarShowText";
 import styles from "./AppsSidebar.module.scss";
 import type { AppsPluginsItems } from "./AppsPluginItems/AppsPluginItems.types";
@@ -67,6 +68,7 @@ export type AppsSidebarProps = {
   groups: NavMenuGroup[];
   activeId?: string;
   variant?: SidebarVariant;
+  isNavLoading?: boolean;
 };
 
 type AppsSidebarViewProps = AppsSidebarProps & {
@@ -93,6 +95,7 @@ export const AppsSidebarView = ({
   toggleArticleOpen,
   onBack,
   articleButtonItems,
+  isNavLoading,
 }: AppsSidebarViewProps) => {
   const showBackButton = variant === "secondary";
   const hideFooter = variant === "secondary";
@@ -232,12 +235,16 @@ export const AppsSidebarView = ({
               />
             </div>
           )}
-          <NavMenu
-            groups={mobileGroups}
-            activeItemId={activeId}
-            iconOnly={!showText}
-            withAnimation
-          />
+          {isNavLoading ? (
+            <NavMenuLoader showText={showText} />
+          ) : (
+            <NavMenu
+              groups={mobileGroups}
+              activeItemId={activeId}
+              iconOnly={!showText}
+              withAnimation
+            />
+          )}
 
           {(hasPluginItems || (showDevTools && !hideFooter)) && (
             <div className={styles.footer}>
@@ -331,3 +338,4 @@ export default inject<TStore>(
     articleButtonItems: pluginStore?.articleButtonItemsList,
   }),
 )(observer(AppsSidebar));
+

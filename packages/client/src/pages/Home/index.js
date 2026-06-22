@@ -654,6 +654,7 @@ const PureHome = observer((props) => {
               <QuickActions
                 items={quickActions.items}
                 className={styles.quickActions}
+                isLoading={showFilterLoader}
               />
             </Section.SectionBanner>
           ) : null}

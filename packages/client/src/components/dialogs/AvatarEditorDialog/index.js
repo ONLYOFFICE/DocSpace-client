@@ -77,7 +77,7 @@ const AvatarEditorDialog = (props) => {
     ? t("Ldap:LdapAvatar")
     : isAIAgentsFolderRoot
       ? t("RoomLogoCover:AgentCover")
-      : t("RoomLogoCover:RoomCover");
+      : t("Common:RoomCover");
 
   const onCloseModal = () => {
     onChangeImage({ x: 0.5, y: 0.5, zoom: 1, uploadedFile: null });

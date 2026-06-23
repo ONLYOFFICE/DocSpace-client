@@ -42,12 +42,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
-import {
-  isMobile,
-  isDesktop,
-  isTablet,
-  size,
-} from "@docspace/shared/utils";
+import { isMobile, isDesktop, isTablet, size } from "@docspace/shared/utils";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import RoomLogoCover from "./sub-components/RoomLogoCover";
 import { CoverDialogProps, ILogoCover } from "./RoomLogoCoverDialog.types";
@@ -254,7 +249,7 @@ const RoomLogoCoverDialog = ({
       <ModalDialog.Header>
         {isAIAgentsFolderRoot
           ? t("RoomLogoCover:AgentCover")
-          : t("RoomLogoCover:RoomCover")}
+          : t("Common:RoomCover")}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <RoomLogoCover
@@ -342,3 +337,4 @@ export default inject<TStore>(
     };
   },
 )(observer(RoomLogoCoverDialog));
+

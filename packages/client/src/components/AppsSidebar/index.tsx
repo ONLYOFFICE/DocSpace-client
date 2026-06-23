@@ -38,6 +38,7 @@ import type {
   NavSubItem,
 } from "@docspace/ui-kit/components/nav-menu";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
+import { Portal } from "@docspace/ui-kit/components/portal";
 import { getLogoUrl } from "@docspace/ui-kit/utils/getLogoUrl";
 import { WhiteLabelLogoType } from "@docspace/ui-kit/enums";
 import articleStyles from "@docspace/ui-kit/components/article/Article.module.scss";
@@ -162,7 +163,7 @@ export const AppsSidebarView = ({
     }));
   }, [groups, isMobile, toggleArticleOpen]);
 
-  return (
+  const articleContent = (
     <>
       <div
         id="article-container"
@@ -289,6 +290,22 @@ export const AppsSidebarView = ({
       )}
     </>
   );
+
+  if (isMobile) {
+    return (
+      <Portal
+        visible
+        element={articleContent}
+        appendTo={
+          (typeof document !== "undefined" &&
+            document.getElementById("root")) ||
+          undefined
+        }
+      />
+    );
+  }
+
+  return articleContent;
 };
 
 // Store-injected fields are optional here so the public type (what call sites

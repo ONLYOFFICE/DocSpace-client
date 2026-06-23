@@ -148,7 +148,7 @@ export const getStepsData = (
             icon: UserSolidIcon,
           }}
           personalExportDetails={{
-            name: t("Common:MyDocuments"),
+            name: t("Common:Files"),
             icon: UserSolidIcon,
           }}
           sharedFilesAndFoldersExportDetails={{

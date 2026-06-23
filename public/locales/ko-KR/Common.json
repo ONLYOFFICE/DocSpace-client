@@ -1332,7 +1332,6 @@
   "MoveToTrashItem": "이 항목은 휴지통으로 이동됩니다.",
   "MoveToTrashItems": "{{itemCount}}개의 항목이 휴지통으로 이동됩니다.",
   "MultiplyOverwrite": "여러 폴더가 하나의 폴더로 병합되고, 파일은 버전 업데이트로 덮어쓰기됩니다",
-  "MyDocuments": "내 문서",
   "Name": "이름",
   "NeedMoreGoToServices": "더 필요하신가요? <1>서비스</1>로 가세요.",
   "NeedPassword": "방에 접속하려면 비밀번호가 필요합니다",

@@ -68,7 +68,7 @@ const MobileQuotasComponent = ({ isDisabled }) => {
         url="/portal-settings/management/disk-space/quota-per-user"
         subtitle={t("UserDefaultQuotaDescription", {
           productName: getBrandName("ProductName"),
-          sectionName: t("Common:MyDocuments"),
+          sectionName: t("Common:Files"),
         })}
         isDisabled={isDisabled}
       />

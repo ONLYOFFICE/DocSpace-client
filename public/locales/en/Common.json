@@ -1371,7 +1371,6 @@
   "MoveToTrashItem": "This item will be moved to Trash.",
   "MoveToTrashItems": "These {{itemCount}} items will be moved to Trash.",
   "MultiplyOverwrite": "Several folders will be merged into one, files will be overwritten with the version update",
-  "MyDocuments": "My documents",
   "Name": "Name",
   "NeedMoreGoToServices": "Need more? Go to the <1>Services</1>",
   "NeedPassword": "You need a password to access the room",

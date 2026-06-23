@@ -185,7 +185,7 @@ const ImportStep = (props: ImportStepProps) => {
             ns="Settings"
             values={{
               serviceName,
-              sectionName: t("Common:MyDocuments"),
+              sectionName: t("Common:Files"),
             }}
             components={{
               1: <span />,
@@ -198,7 +198,7 @@ const ImportStep = (props: ImportStepProps) => {
           sectionIcon: personalExportDetails.icon,
         }}
         importSection={{
-          sectionName: t("Common:MyDocuments"),
+          sectionName: t("Common:Files"),
           workspace: getBrandName("ProductName"),
           sectionIcon: DocumentsIcon,
         }}

@@ -75,7 +75,7 @@ const StartPageSettingComponent = ({
         key: FolderType.AIAgents,
       },
       {
-        label: t("Common:MyDocuments"),
+        label: t("Common:Files"),
         key: FolderType.USER,
       },
       {

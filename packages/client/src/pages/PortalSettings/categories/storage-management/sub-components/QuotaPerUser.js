@@ -61,7 +61,7 @@ const QuotaPerUserComponent = (props) => {
       dataTestId="quota_user"
       toggleDescription={t("UserDefaultQuotaDescription", {
         productName: getBrandName("ProductName"),
-        sectionName: t("Common:MyDocuments"),
+        sectionName: t("Common:Files"),
       })}
     />
   );

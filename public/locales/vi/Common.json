@@ -491,6 +491,7 @@
   "EffectiveDate": "Ngày hiệu lực",
   "Email": "Email",
   "Embed": "Nhúng",
+  "EmptyAIAgentsAIDisabledDescription": "Phần này cho phép người dùng làm việc với {{aiAgents}} — các trợ lý thông minh để xử lý tài liệu và các tác vụ khác.\nĐể bắt đầu sử dụng chúng, dịch vụ tính năng AI phải được bật bởi quản trị viên {{productName}} của bạn.",
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Kết nối dịch vụ AI của riêng bạn để mở khóa các tính năng nâng cao trong {{productName}}. Sau khi thêm, nó sẽ khả dụng cho tất cả người dùng trong {{aiChats}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} hiện chưa khả dụng",
   "EmptyBackupList": "Chưa có bản sao lưu nào được tạo. Tạo một hoặc nhiều bản sao lưu để chúng xuất hiện trong danh sách này.",
@@ -1546,6 +1547,5 @@
   "YourName": "Tên của bạn",
   "YourPrice": "Giá của bạn",
   "YourTurn": "Phiên của bạn",
-  "YouWillBeContacted": "Đội ngũ kinh doanh sẽ liên hệ với bạn sau khi tạo yêu cầu.",
-  "EmptyAIAgentsAIDisabledDescription": "Phần này cho phép người dùng làm việc với {{aiAgents}} — các trợ lý thông minh để xử lý tài liệu và các tác vụ khác.\nĐể bắt đầu sử dụng chúng, dịch vụ tính năng AI phải được bật bởi quản trị viên {{productName}} của bạn."
+  "YouWillBeContacted": "Đội ngũ kinh doanh sẽ liên hệ với bạn sau khi tạo yêu cầu."
 }

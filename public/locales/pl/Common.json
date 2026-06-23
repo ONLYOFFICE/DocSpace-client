@@ -491,6 +491,7 @@
   "EffectiveDate": "Data wejścia w życie",
   "Email": "E-mail",
   "Embed": "Osadź",
+  "EmptyAIAgentsAIDisabledDescription": "Sekcja „{{aiAgents}}” umożliwia użytkownikom współpracę z inteligentnymi asystentami w celu przetwarzania dokumentów i wykonywania innych zadań.. \nAby zacząć z nich korzystać, funkcja AI musi zostać włączona przez administratora {{productName}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Podłącz własną usługę AI, aby odblokować zaawansowane funkcje w {{productName}}. Po dodaniu, będą one dostępne dla wszystkich użytkowników w {{aiChats}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} nie jest jeszcze dostępny",
   "EmptyBackupList": "Nie utworzono jeszcze kopii zapasowych. Utwórz jedną lub więcej kopii zapasowych, aby je wyświetlić na tej liście.",
@@ -1546,6 +1547,5 @@
   "YourName": "Twoje imię",
   "YourPrice": "Twoja cena",
   "YourTurn": "Twoja kolej",
-  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby.",
-  "EmptyAIAgentsAIDisabledDescription": "Sekcja „{{aiAgents}}” umożliwia użytkownikom współpracę z inteligentnymi asystentami w celu przetwarzania dokumentów i wykonywania innych zadań.. \nAby zacząć z nich korzystać, funkcja AI musi zostać włączona przez administratora {{productName}}."
+  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby."
 }

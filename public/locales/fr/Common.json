@@ -491,6 +491,7 @@
   "EffectiveDate": "Date d'effet",
   "Email": "E-mail",
   "Embed": "Intégrer",
+  "EmptyAIAgentsAIDisabledDescription": "Cette section permet aux utilisateurs de travailler avec les {{aiAgents}} — assistants intelligents pour gérer les documents et autres tâches.\nPour commencer à les utiliser, le service de fonctionnalités IA doit être activé par votre administrateur {{productName}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Connectez votre propre service d'IA pour débloquer des fonctionnalités avancées dans {{productName}}. Une fois ajouté, il sera accessible à tous les utilisateurs dans {{aiChats}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} n'est pas encore disponible",
   "EmptyBackupList": "Aucune sauvegarde n'a encore été créée. Créez une ou plusieurs sauvegardes pour qu'elles apparaissent dans cette liste.",
@@ -1479,7 +1480,7 @@
   "ViaLink": "Via le lien",
   "Video": "Vidéo",
   "View": "Afficher",
-  "Viewer": "Visualiseur",
+  "Viewer": "Lecteur",
   "ViewOnly": "lecture seule",
   "ViewOnlyRooms": "Lecture seule",
   "VirtualDataRoom": "Salle de données virtuelle",
@@ -1546,6 +1547,5 @@
   "YourName": "Votre nom",
   "YourPrice": "Votre prix",
   "YourTurn": "Votre tour",
-  "YouWillBeContacted": "L’équipe de vente vous contactera après avoir créé la demande.",
-  "EmptyAIAgentsAIDisabledDescription": "Cette section permet aux utilisateurs de travailler avec les {{aiAgents}} — assistants intelligents pour gérer les documents et autres tâches.\nPour commencer à les utiliser, le service de fonctionnalités IA doit être activé par votre administrateur {{productName}}."
+  "YouWillBeContacted": "L’équipe de vente vous contactera après avoir créé la demande."
 }

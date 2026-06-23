@@ -491,6 +491,7 @@
   "EffectiveDate": "Datum stupanja na snagu",
   "Email": "Email",
   "Embed": "Ugradi",
+  "EmptyAIAgentsAIDisabledDescription": "Odeljak „{{aiAgents}}“ omogućava korisnicima da rade sa inteligentnim asistentima kako bi obrađivali dokumente i obavljali druge zadatke. \nDa biste počeli da ih koristite, AI funkcionalnost mora biti omogućena od strane {{productName}} administratora.",
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Povežite vašu sopstvenu AI uslugu da biste otključali napredne funkcije u {{productName}}. Nakon dodavanja, biće dostupna svim korisnicima u {{aiChats}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} još nije dostupan",
   "EmptyBackupList": "Još uvek nije kreirana nijedna rezervna kopija. Kreirajte jednu ili više rezervnih kopija da bi se pojavile na ovoj listi.",
@@ -1546,6 +1547,5 @@
   "YourName": "Vaše ime",
   "YourPrice": "Vaša cena",
   "YourTurn": "Vaš red",
-  "YouWillBeContacted": "Prodajni tim će vas kontaktirati nakon kreiranja zahteva.",
-  "EmptyAIAgentsAIDisabledDescription": "Odeljak „{{aiAgents}}“ omogućava korisnicima da rade sa inteligentnim asistentima kako bi obrađivali dokumente i obavljali druge zadatke. \nDa biste počeli da ih koristite, AI funkcionalnost mora biti omogućena od strane {{productName}} administratora."
+  "YouWillBeContacted": "Prodajni tim će vas kontaktirati nakon kreiranja zahteva."
 }

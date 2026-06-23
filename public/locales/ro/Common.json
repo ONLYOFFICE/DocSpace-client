@@ -491,6 +491,7 @@
   "EffectiveDate": "Data efectivă",
   "Email": "Email",
   "Embed": "Încorporare",
+  "EmptyAIAgentsAIDisabledDescription": "Această secțiune permite utilizatorilor să lucreze cu {{aiAgents}} — asistenți inteligenți pentru gestionarea documentelor și a altor sarcini.\nPentru a începe să îi utilizați, serviciul de funcții IA trebuie activat de administratorul {{productName}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Integrați serviciul dvs. de IA propriu pentru a debloca funcționalități avansate în {{productName}}. Odată adăugat, acesta va fi accesibil tuturor utilizatorilor în {{aiChats}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} nu este încă disponibil",
   "EmptyBackupList": "Nu există nicio copie de rezervă salvată. Creați una sau mai multe copii de rezervă pentru ca acestea să apară în lista.",
@@ -1546,6 +1547,5 @@
   "YourName": "Numele dvs.",
   "YourPrice": "Preţul dvs.",
   "YourTurn": "Acum e rândul dvs.",
-  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării.",
-  "EmptyAIAgentsAIDisabledDescription": "Această secțiune permite utilizatorilor să lucreze cu {{aiAgents}} — asistenți inteligenți pentru gestionarea documentelor și a altor sarcini.\nPentru a începe să îi utilizați, serviciul de funcții IA trebuie activat de administratorul {{productName}}."
+  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării."
 }

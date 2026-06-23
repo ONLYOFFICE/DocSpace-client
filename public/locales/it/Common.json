@@ -491,6 +491,7 @@
   "EffectiveDate": "Data di efficacia",
   "Email": "Email",
   "Embed": "Incorpora",
+  "EmptyAIAgentsAIDisabledDescription": "Questa sezione consente agli utenti di lavorare con {{aiAgents}} — assistenti intelligenti per la gestione di documenti e altre attività.\nPer iniziare a utilizzarli, il servizio funzionalità IA deve essere abilitato dall'amministratore {{productName}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Collega il tuo servizio IA personale per sbloccare funzionalità avanzate in {{productName}}. Una volta aggiunto, sarà accessibile a tutti gli utenti in {{aiChats}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} non è ancora disponibile",
   "EmptyBackupList": "Nessun backup creato. Crea almeno una copia di backup per visualizzarla in questo elenco.",
@@ -1546,6 +1547,5 @@
   "YourName": "Il tuo nome",
   "YourPrice": "Il tuo prezzo",
   "YourTurn": "Il tuo turno",
-  "YouWillBeContacted": "Il team di vendita ti contatterà dopo aver creato la richiesta.",
-  "EmptyAIAgentsAIDisabledDescription": "Questa sezione consente agli utenti di lavorare con {{aiAgents}} — assistenti intelligenti per la gestione di documenti e altre attività.\nPer iniziare a utilizzarli, il servizio funzionalità IA deve essere abilitato dall'amministratore {{productName}}."
+  "YouWillBeContacted": "Il team di vendita ti contatterà dopo aver creato la richiesta."
 }

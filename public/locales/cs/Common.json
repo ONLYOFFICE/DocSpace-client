@@ -491,6 +491,7 @@
   "EffectiveDate": "Datum účinnosti",
   "Email": "E-mail",
   "Embed": "Vložit",
+  "EmptyAIAgentsAIDisabledDescription": "Sekce „{{aiAgents}}“ umožňuje uživatelům spolupracovat s inteligentními asistenty na zpracování dokumentů a provádění dalších úkolů. \nPro jejich používání musí být služba AI funkcí povolena administrátorem {{productName}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Připojte vlastní AI službu, abyste odemkli pokročilé funkce v {{productName}}. Po přidání bude dostupná všem uživatelům v {{aiChats}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} není zatím k dispozici",
   "EmptyBackupList": "Zatím nebyly vytvořeny žádné zálohy. Vytvořte jednu nebo více záloh, aby byly zobrazeny v seznamu.",
@@ -1546,6 +1547,5 @@
   "YourName": "Vaše jméno",
   "YourPrice": "Vaše cena",
   "YourTurn": "Jste na řadě",
-  "YouWillBeContacted": "Po vytvoření požadavku vás bude kontaktovat prodejní tým.",
-  "EmptyAIAgentsAIDisabledDescription": "Sekce „{{aiAgents}}“ umožňuje uživatelům spolupracovat s inteligentními asistenty na zpracování dokumentů a provádění dalších úkolů. \nPro jejich používání musí být služba AI funkcí povolena administrátorem {{productName}}."
+  "YouWillBeContacted": "Po vytvoření požadavku vás bude kontaktovat prodejní tým."
 }

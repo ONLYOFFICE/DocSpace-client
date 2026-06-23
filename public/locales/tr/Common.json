@@ -491,6 +491,7 @@
   "EffectiveDate": "Yürürlük tarihi",
   "Email": "E-posta",
   "Embed": "Yerleştir",
+  "EmptyAIAgentsAIDisabledDescription": "Bu bölüm, kullanıcıların {{aiAgents}} ile — belgeleri ve diğer görevleri yönetmek için akıllı asistanlarla — çalışmasına olanak tanır.\nBunları kullanmaya başlamak için, AI özellik hizmeti {{productName}} yöneticiniz tarafından etkinleştirilmelidir.",
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Kendi yapay zeka hizmetinizi {{productName}} içinde gelişmiş özelliklerin kilidini açmak için bağlayın. Eklendikten sonra, tüm kullanıcılar için {{aiChats}} içinde erişilebilir olacaktır.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} henüz mevcut değil",
   "EmptyBackupList": "Henüz hiçbir yedekleme yapılmadı. Listede yer alması için bir veya daha fazla yedekleme yapın.",
@@ -1546,6 +1547,5 @@
   "YourName": "Adınız",
   "YourPrice": "Ücret",
   "YourTurn": "Sıra sizde",
-  "YouWillBeContacted": "Satış ekibi, talebi oluşturduktan sonra sizinle iletişime geçecektir.",
-  "EmptyAIAgentsAIDisabledDescription": "Bu bölüm, kullanıcıların {{aiAgents}} ile — belgeleri ve diğer görevleri yönetmek için akıllı asistanlarla — çalışmasına olanak tanır.\nBunları kullanmaya başlamak için, AI özellik hizmeti {{productName}} yöneticiniz tarafından etkinleştirilmelidir."
+  "YouWillBeContacted": "Satış ekibi, talebi oluşturduktan sonra sizinle iletişime geçecektir."
 }

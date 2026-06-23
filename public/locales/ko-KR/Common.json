@@ -491,6 +491,7 @@
   "EffectiveDate": "효력 발생일",
   "Email": "이메일",
   "Embed": "임베드",
+  "EmptyAIAgentsAIDisabledDescription": "이 섹션을 통해 사용자는 {{aiAgents}}와 함께 작업할 수 있습니다 — 문서 처리 및 기타 작업을 위한 스마트 어시스턴트입니다.\n사용을 시작하려면 {{productName}} 관리자가 AI 기능 서비스를 활성화해야 합니다.",
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "{{productName}}의 고급 기능을 사용하려면 자체 AI 서비스를 연결하세요. 추가되면, {{aiChats}}의 모든 사용자가 이용할 수 있습니다.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}}는 아직 이용할 수 없습니다",
   "EmptyBackupList": "아직 백업이 생성되지 않았습니다. 이 목록에 표시될 하나 이상의 백업을 생성하세요.",
@@ -1546,6 +1547,5 @@
   "YourName": "당신의 이름",
   "YourPrice": "귀하의 요금",
   "YourTurn": "고객님의 차례입니다",
-  "YouWillBeContacted": "요청을 생성하면 영업팀에서 연락을 드릴 것입니다.",
-  "EmptyAIAgentsAIDisabledDescription": "이 섹션을 통해 사용자는 {{aiAgents}}와 함께 작업할 수 있습니다 — 문서 처리 및 기타 작업을 위한 스마트 어시스턴트입니다.\n사용을 시작하려면 {{productName}} 관리자가 AI 기능 서비스를 활성화해야 합니다."
+  "YouWillBeContacted": "요청을 생성하면 영업팀에서 연락을 드릴 것입니다."
 }

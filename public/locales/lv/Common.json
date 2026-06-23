@@ -491,6 +491,7 @@
   "EffectiveDate": "Efektīvā datums",
   "Email": "E-pasts",
   "Embed": "Iembedding",
+  "EmptyAIAgentsAIDisabledDescription": "Sadaļa “{{aiAgents}}” ļauj lietotājiem strādāt ar viedajiem palīgiem, lai apstrādātu dokumentus un veiktu citus uzdevumus.\nLai sāktu tos lietot, jūsu {{productName}} administratoram ir jāieslēdz MI funkciju pakalpojums.",
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Pievienojiet savu MI pakalpojumu, lai atbloķētu papildu funkcijas {{productName}}ā. Pēc pievienošanas tas būs pieejams visiem lietotājiem {{aiChats}}ā.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} ir vēl nav pieejams",
   "EmptyBackupList": "Vēl nav izveidotas rezerves kopijas. Izveidojiet vismaz vienu rezerves kopiju, lai tā parādītos šajā sarakstā.",
@@ -1546,6 +1547,5 @@
   "YourName": "Jūsu vārds",
   "YourPrice": "Jūsu cena",
   "YourTurn": "Jūsu kārta",
-  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides.",
-  "EmptyAIAgentsAIDisabledDescription": "Sadaļa “{{aiAgents}}” ļauj lietotājiem strādāt ar viedajiem palīgiem, lai apstrādātu dokumentus un veiktu citus uzdevumus.\nLai sāktu tos lietot, jūsu {{productName}} administratoram ir jāieslēdz MI funkciju pakalpojums."
+  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides."
 }

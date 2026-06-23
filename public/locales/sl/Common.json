@@ -491,6 +491,7 @@
   "EffectiveDate": "Trenutno dejstvo",
   "Email": "Email",
   "Embed": "Vdelaj",
+  "EmptyAIAgentsAIDisabledDescription": "Razdelek »{{aiAgents}}« uporabnikom omogoča delo z inteligentnimi pomočniki za obdelavo dokumentov in izvajanje drugih nalog.\nZa začetek njihove uporabe mora vaš {{productName}} skrbnik omogočiti storitev AI funkcij.",
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Povežite vašo AI storitev, da odključite napredne funkcije v {{productName}}. Ko je dodana, bo bila dostopna vseh uporabnikom v {{aiChats}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} ni še na voljo",
   "EmptyBackupList": "Varnostno kopiranje še ni bilo ustvarjeno. Ustvarite eno ali več varnostnih kopiranj, če želite, da se prikažejo na seznamu.",
@@ -1546,6 +1547,5 @@
   "YourName": "Vaše ime",
   "YourPrice": "Vaša cena",
   "YourTurn": "Vi ste na vrsti",
-  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala.",
-  "EmptyAIAgentsAIDisabledDescription": "Razdelek »{{aiAgents}}« uporabnikom omogoča delo z inteligentnimi pomočniki za obdelavo dokumentov in izvajanje drugih nalog.\nZa začetek njihove uporabe mora vaš {{productName}} skrbnik omogočiti storitev AI funkcij."
+  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala."
 }

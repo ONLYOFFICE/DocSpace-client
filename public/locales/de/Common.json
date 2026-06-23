@@ -491,6 +491,7 @@
   "EffectiveDate": "Wirksames Datum",
   "Email": "E-Mail",
   "Embed": "Einbetten",
+  "EmptyAIAgentsAIDisabledDescription": "Dieser Abschnitt ermöglicht es Benutzern, mit {{aiAgents}} zu arbeiten — intelligenten Assistenten für die Verarbeitung von Dokumenten und anderen Aufgaben.\nUm sie nutzen zu können, muss der KI-Funktionsdienst von Ihrem {{productName}}-Administrator aktiviert werden.",
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Verbinden Sie Ihren eigenen KI-Dienst, um erweiterte Funktionen in {{productName}} freizuschalten. Sobald er hinzugefügt wurde, ist er allen Benutzern in {{aiChats}} zugänglich.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} ist momentan nicht verfügbar",
   "EmptyBackupList": "Keine Sicherungskopien wurden noch erstellt. Erstellen Sie eine oder mehrere Sicherungskopien, damit sie in dieser Liste erscheint.",
@@ -1546,6 +1547,5 @@
   "YourName": "Ihr Name",
   "YourPrice": "Ihr Preis",
   "YourTurn": "Jetzt sind Sie dran",
-  "YouWillBeContacted": "Das Verkaufsteam wird Sie nach der Erstellung der Anfrage kontaktieren.",
-  "EmptyAIAgentsAIDisabledDescription": "Dieser Abschnitt ermöglicht es Benutzern, mit {{aiAgents}} zu arbeiten — intelligenten Assistenten für die Verarbeitung von Dokumenten und anderen Aufgaben.\nUm sie nutzen zu können, muss der KI-Funktionsdienst von Ihrem {{productName}}-Administrator aktiviert werden."
+  "YouWillBeContacted": "Das Verkaufsteam wird Sie nach der Erstellung der Anfrage kontaktieren."
 }

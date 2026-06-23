@@ -491,6 +491,7 @@
   "EffectiveDate": "Data de vigência",
   "Email": "Email",
   "Embed": "Embutir",
+  "EmptyAIAgentsAIDisabledDescription": "Esta seção permite que os usuários trabalhem com {{aiAgents}} — assistentes inteligentes para lidar com documentos e outras tarefas.\nPara começar a usá-los, o serviço de recursos de IA deve ser habilitado pelo administrador do seu {{productName}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Conecte seu próprio serviço de IA para desbloquear recursos avançados em {{productName}}. Uma vez adicionado, ele estará acessível a todos os usuários em {{aiChats}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} ainda não está disponível",
   "EmptyBackupList": "Ainda não foi criada nenhuma cópia de segurança. Crie uma ou mais cópias de segurança para que elas apareçam na lista.",
@@ -1546,6 +1547,5 @@
   "YourName": "O seu nome",
   "YourPrice": "O seu preço",
   "YourTurn": "A sua vez",
-  "YouWillBeContacted": "A equipa de vendas entrará em contacto consigo depois de criar o pedido.",
-  "EmptyAIAgentsAIDisabledDescription": "Esta seção permite que os usuários trabalhem com {{aiAgents}} — assistentes inteligentes para lidar com documentos e outras tarefas.\nPara começar a usá-los, o serviço de recursos de IA deve ser habilitado pelo administrador do seu {{productName}}."
+  "YouWillBeContacted": "A equipa de vendas entrará em contacto consigo depois de criar o pedido."
 }

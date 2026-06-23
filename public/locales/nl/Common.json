@@ -491,6 +491,7 @@
   "EffectiveDate": "Ingangsdatum",
   "Email": "E-mail",
   "Embed": "Insluiten",
+  "EmptyAIAgentsAIDisabledDescription": "Deze sectie stelt gebruikers in staat om met {{aiAgents}} te werken – slimme assistenten voor het verwerken van documenten en andere taken.\nOm ze te gaan gebruiken, moet de AI-functieservice worden ingeschakeld door uw {{productName}}-beheerder.",
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Verbind uw eigen AI-service om geavanceerde functies in {{productName}} te ontgrendelen. Zodra deze is toegevoegd, is deze toegankelijk voor alle gebruikers in {{aiChats}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} is momenteel niet beschikbaar",
   "EmptyBackupList": "Er zijn nog geen back-ups gemaakt. Maak een of meer back-ups om ze in de lijst te laten zien.",
@@ -1546,6 +1547,5 @@
   "YourName": "Uw naam",
   "YourPrice": "Uw prijs",
   "YourTurn": "Uw beurt",
-  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag.",
-  "EmptyAIAgentsAIDisabledDescription": "Deze sectie stelt gebruikers in staat om met {{aiAgents}} te werken – slimme assistenten voor het verwerken van documenten en andere taken.\nOm ze te gaan gebruiken, moet de AI-functieservice worden ingeschakeld door uw {{productName}}-beheerder."
+  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag."
 }

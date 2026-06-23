@@ -491,6 +491,7 @@
   "EffectiveDate": "Voimaantuloaika",
   "Email": "Sähköposti",
   "Embed": "Upota",
+  "EmptyAIAgentsAIDisabledDescription": "\"{{aiAgents}}\"-osio antaa käyttäjille mahdollisuuden työskennellä älykkäiden avustajien kanssa asiakirjojen käsittelyyn ja muiden tehtävien suorittamiseen.\nAloittaaksesi niiden käytön, AI-ominaisuuksien palvelu on oltava käytössä {{productName}}-järjestelmänvalvojan toimesta.",
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Liitä oma tekoälypalvelimesi avataksesi edistyneitä ominaisuuksia {{productName}}:ssa. Kun se on lisätty, se on käytettävissä kaikille käyttäjille {{aiChats}}:ssa.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} ei ole vielä saatavilla",
   "EmptyBackupList": "Ei varmuuskopioita. Luo yksi tai useampi varmuuskopio ja ne näkyvät tässä listassa.",
@@ -1546,6 +1547,5 @@
   "YourName": "Nimesi",
   "YourPrice": "Hintasi",
   "YourTurn": "Sinun vuorosi",
-  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen.",
-  "EmptyAIAgentsAIDisabledDescription": "\"{{aiAgents}}\"-osio antaa käyttäjille mahdollisuuden työskennellä älykkäiden avustajien kanssa asiakirjojen käsittelyyn ja muiden tehtävien suorittamiseen.\nAloittaaksesi niiden käytön, AI-ominaisuuksien palvelu on oltava käytössä {{productName}}-järjestelmänvalvojan toimesta."
+  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen."
 }

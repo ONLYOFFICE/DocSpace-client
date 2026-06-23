@@ -491,6 +491,7 @@
   "EffectiveDate": "生效日期",
   "Email": "电子邮件",
   "Embed": "嵌入",
+  "EmptyAIAgentsAIDisabledDescription": "本部分允许用户使用 {{aiAgents}} — 用于处理文档和其他任务的智能助手。\n要开始使用它们，您的{{productName}}管理员必须启用 AI 功能服务。",
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "连接您自己的 AI 服务，以解锁{{productName}}中的高级功能。添加后，所有用户在 {{aiChats}} 中都可以访问它。",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} 尚未可用",
   "EmptyBackupList": "尚未创建任何备份。请创建一个或多个备份，使其显示在此列表中。",
@@ -1546,6 +1547,5 @@
   "YourName": "您的姓名",
   "YourPrice": "您的价格",
   "YourTurn": "轮到您了",
-  "YouWillBeContacted": "创建请求后销售团队将与您取得联系。",
-  "EmptyAIAgentsAIDisabledDescription": "本部分允许用户使用 {{aiAgents}} — 用于处理文档和其他任务的智能助手。\n要开始使用它们，您的{{productName}}管理员必须启用 AI 功能服务。"
+  "YouWillBeContacted": "创建请求后销售团队将与您取得联系。"
 }

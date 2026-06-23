@@ -491,6 +491,7 @@
   "EffectiveDate": "تاريخ السريان",
   "Email": "البريد الالكتروني",
   "Embed": "إدراج",
+  "EmptyAIAgentsAIDisabledDescription": "يسمح هذا القسم للمستخدمين بالعمل مع {{aiAgents}} – المساعدون الذكيون لمعالجة المستندات والمهام الأخرى. \nلبدء استخدامهم، يجب تمكين خدمة ميزات الذكاء الاصطناعي بواسطة مسؤول {{productName}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "قم بربط خدمة الذكاء الاصطناعي الخاصة بك لفتح الميزات المتقدمة في {{productName}}. وبمجرد إضافتها، ستكون متاحة لجميع المستخدمين في {{aiChats}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} غير متاح حاليًا",
   "EmptyBackupList": "لم يتم إنشاء نسخ احتياطية حتى الآن. قم بإنشاء نسخة احتياطية واحدة أو أكثر لكي تظهر في هذه القائمة.",
@@ -1546,6 +1547,5 @@
   "YourName": "اسمك",
   "YourPrice": "سعرك",
   "YourTurn": "دوركم الآن",
-  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب.",
-  "EmptyAIAgentsAIDisabledDescription": "يسمح هذا القسم للمستخدمين بالعمل مع {{aiAgents}} – المساعدون الذكيون لمعالجة المستندات والمهام الأخرى. \nلبدء استخدامهم، يجب تمكين خدمة ميزات الذكاء الاصطناعي بواسطة مسؤول {{productName}}."
+  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب."
 }

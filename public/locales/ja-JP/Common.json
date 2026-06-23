@@ -491,6 +491,7 @@
   "EffectiveDate": "発効日",
   "Email": "メール",
   "Embed": "埋め込み",
+  "EmptyAIAgentsAIDisabledDescription": "このセクションでは、ユーザーは{{aiAgents}} — ドキュメントやその他のタスクを処理するためのスマートアシスタント — を使用できます。\nそれらを使用するには、{{productName}}管理者によってAI機能サービスが有効になっている必要があります。",
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "{{productName}}で高度な機能を利用するには、独自のAIサービスを接続してください。追加後は、{{aiChats}}のすべてのユーザーがアクセスできるようになります。",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} は、まだご利用いただけません",
   "EmptyBackupList": "バックアップはまだ作成されていません。バックアップを作成すると、このリストに表示されるようになります。",
@@ -1546,6 +1547,5 @@
   "YourName": "お名前",
   "YourPrice": "価格",
   "YourTurn": "あなたの番です",
-  "YouWillBeContacted": "リクエスト作成後、営業担当よりご連絡させていただきます。",
-  "EmptyAIAgentsAIDisabledDescription": "このセクションでは、ユーザーは{{aiAgents}} — ドキュメントやその他のタスクを処理するためのスマートアシスタント — を使用できます。\nそれらを使用するには、{{productName}}管理者によってAI機能サービスが有効になっている必要があります。"
+  "YouWillBeContacted": "リクエスト作成後、営業担当よりご連絡させていただきます。"
 }

@@ -491,6 +491,7 @@
   "EffectiveDate": "Data e vlefshme",
   "Email": "Email",
   "Embed": "Ngjit",
+  "EmptyAIAgentsAIDisabledDescription": "Seksioni \"{{aiAgents}}\" u lejon përdoruesve të punojnë me asistentë inteligjentë për të përpunuar dokumente dhe për të kryer detyra të tjera. \nPër të filluar përdorimin e tyre, shërbimi i veçorive të IA duhet të aktivizohet nga administratori juaj i {{productName}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Lidhni shërbimin tuaj të IA-së për të zhbllokuar funksionalitetet e avancuara në {{productName}}. Pasi të shtohet, do të jetë i aksesueshëm për të gjithë përdoruesit në {{aiChats}}.",
   "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "{{aiProvider}} nuk është në dispozicion ende",
   "EmptyBackupList": "Asnjë kopje rezervë nuk është krijuar ende. Krijoni një ose më shumë kopje rezervë që ato të shfaqen në këtë listë.",
@@ -1546,6 +1547,5 @@
   "YourName": "Emri juaj",
   "YourPrice": "Çmimi juaj",
   "YourTurn": "Radha jote",
-  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës.",
-  "EmptyAIAgentsAIDisabledDescription": "Seksioni \"{{aiAgents}}\" u lejon përdoruesve të punojnë me asistentë inteligjentë për të përpunuar dokumente dhe për të kryer detyra të tjera. \nPër të filluar përdorimin e tyre, shërbimi i veçorive të IA duhet të aktivizohet nga administratori juaj i {{productName}}."
+  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës."
 }

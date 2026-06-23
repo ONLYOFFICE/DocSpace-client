@@ -125,9 +125,10 @@ const useDevTools = (props: DevToolsCardProps): DevTool[] => {
 };
 
 const DevToolsCardComponent = (props: DevToolsCardProps) => {
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common", "DocsConnect"]);
   const tools = useDevTools(props);
   const organizationName = getBrandName("OrganizationName");
+  const docsName = `${organizationName} ${getBrandName("ProductEditorsName")}`;
 
   return (
     <CollapsibleCard
@@ -136,6 +137,21 @@ const DevToolsCardComponent = (props: DevToolsCardProps) => {
       defaultOpen
     >
       <div className={styles.devToolsGrid}>
+        <a
+          className={`${styles.devToolTile} ${styles.devToolTileFeatured}`}
+          href="/developer-tools/docs-connect"
+        >
+          <Text as="p" className={styles.devToolTitle}>
+            {t("DocsConnect:DocsConnect")}
+          </Text>
+          <Text as="p" className={styles.devToolDescription}>
+            {t("DocsConnect:CardDescription", { productName: docsName })}
+          </Text>
+          <span className={styles.devToolLink}>
+            {t("DocsConnect:GetStarted")}
+            <ArrowIcon aria-hidden="true" className={styles.integrationArrow} />
+          </span>
+        </a>
         {tools.map((tool) => (
           <a
             key={tool.id}

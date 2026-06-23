@@ -71,6 +71,19 @@
     color-mix(in srgb, var(--dev-tools-status-positive) 40%, transparent);
 }
 
+.trialBadgeExpired {
+  color: var(--dev-tools-status-negative);
+  border-color: color-mix(
+    in srgb,
+    var(--dev-tools-status-negative) 40%,
+    transparent
+  );
+}
+
+.trialExpiredTitle {
+  color: var(--dev-tools-status-negative);
+}
+
 .muted {
   color: $gray-text;
 }
@@ -229,7 +242,12 @@
   flex-direction: column;
   gap: 6px;
   margin-top: 9px;
-  --progress-bar-percent-background: var(--dev-tools-status-positive);
+  --progress-bar-size: 8px;
+  --progress-bar-fill: var(--dev-tools-status-positive);
+}
+
+.licenseProgressExpired {
+  --progress-bar-fill: var(--dev-tools-status-negative);
 }
 
 .usageBlock {
@@ -240,7 +258,8 @@
   border-radius: 12px;
   border: var(--dev-tools-card-border);
   background-color: var(--background-color);
-  --progress-bar-percent-background: var(--usage-color);
+  --progress-bar-size: 8px;
+  --progress-bar-fill: var(--usage-color);
 }
 
 .usagePositive {

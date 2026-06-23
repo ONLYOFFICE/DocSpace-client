@@ -39,7 +39,6 @@ import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
-import { toastr } from "@docspace/ui-kit/components/toast";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
@@ -48,7 +47,6 @@ import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu"
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
-import PlusReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
 
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 import type { TTranslation } from "@docspace/shared/types";
@@ -61,14 +59,12 @@ interface TenantPanelProps {
   info?: TDocsConnectInfo;
   openBuyPlan?: (mode: "trial" | "edit") => void;
   copySecretKey?: (t: TTranslation) => void;
-  buyTenant?: () => void;
 }
 
 const TenantPanel = ({
   info,
   openBuyPlan,
   copySecretKey,
-  buyTenant,
 }: TenantPanelProps) => {
   const { t } = useTranslation(["DocsConnect", "Common"]);
   const [selectedTab, setSelectedTab] = useState<string>("statistics");
@@ -89,15 +85,6 @@ const TenantPanel = ({
       label: t("DocsConnect:EditPlan"),
       icon: SettingsReactSvgUrl,
       onClick: () => openBuyPlan?.("edit"),
-    },
-    {
-      key: "buy-tenant",
-      label: t("DocsConnect:BuyTenant"),
-      icon: PlusReactSvgUrl,
-      onClick: () => {
-        buyTenant?.();
-        toastr.info(t("DocsConnect:BuyTenantInProgress"));
-      },
     },
   ];
 
@@ -135,8 +122,14 @@ const TenantPanel = ({
             {t("DocsConnect:DocsConnect")}
           </Text>
           {isTrial ? (
-            <span className={styles.trialBadge}>
-              {t("Common:FreeDaysLeft", { count: info.trial.daysLeft })}
+            <span
+              className={`${styles.trialBadge} ${
+                info.trial.expired ? styles.trialBadgeExpired : ""
+              }`}
+            >
+              {info.trial.expired
+                ? t("DocsConnect:TrialExpired")
+                : t("Common:FreeDaysLeft", { count: info.trial.daysLeft })}
             </span>
           ) : (
             <ContextMenuButton
@@ -162,5 +155,4 @@ export default inject(({ docsConnectStore }: TStore) => ({
   info: docsConnectStore.info,
   openBuyPlan: docsConnectStore.openBuyPlan,
   copySecretKey: docsConnectStore.copySecretKey,
-  buyTenant: docsConnectStore.buyTenant,
 }))(observer(TenantPanel));

@@ -56,7 +56,7 @@ export const DOCS_CONNECT_FORCE_MOCK = false;
 /** Real backend base path (DocsCloudController). */
 const BASE = "/settings/docscloud";
 
-const PRICES_URL = "/portal/payment/prices";
+const WALLET_SERVICES_URL = "/portal/payment/walletservices";
 const BALANCE_URL = "/portal/payment/customer/balance";
 const WALLET_UPDATE_URL = "/portal/payment/updatewallet";
 const DOCS_CLOUD_PRODUCT = "docscloud";
@@ -97,6 +97,7 @@ const buildMockInfo = (status: TDocsConnectStatus): TDocsConnectInfo => {
       validUntil: "19.06.2026",
       daysLeft: 30,
       totalDays: 30,
+      expired: false,
     },
     plan: {
       users: 50,
@@ -126,7 +127,7 @@ const buildMockInfo = (status: TDocsConnectStatus): TDocsConnectInfo => {
     },
     wallet: {
       availableCredits: 0,
-      currency: "$",
+      currency: "USD",
     },
     connectors: [
       { key: "nextcloud", label: "Nextcloud", url: "#" },
@@ -244,7 +245,7 @@ const buildEmptyInfo = (status: TDocsConnectStatus): TDocsConnectInfo => ({
   secretKey: "",
   isAnonymousSupport: false,
   build: { type: "", version: "", released: "" },
-  trial: { start: "", validUntil: "", daysLeft: 0, totalDays: 30 },
+  trial: { start: "", validUntil: "", daysLeft: 0, totalDays: 30, expired: false },
   plan: {
     users: 0,
     pricePerUser: 0,
@@ -254,7 +255,7 @@ const buildEmptyInfo = (status: TDocsConnectStatus): TDocsConnectInfo => ({
     renewsOn: "",
   },
   usage: { editors: emptyUsage(), viewer: emptyUsage() },
-  wallet: { availableCredits: 0, currency: "$" },
+  wallet: { availableCredits: 0, currency: "USD" },
   connectors: [],
 });
 
@@ -298,6 +299,7 @@ const mapRealInfo = (
       validUntil: formatDate(validUntil),
       daysLeft: daysUntil(validUntil),
       totalDays: DEFAULT_TRIAL_DAYS,
+      expired: !Number.isNaN(validUntilMs) && validUntilMs < Date.now(),
     },
     usage: {
       editors: mapStat(info?.stats?.editor, info?.usersLimit?.edit ?? 0),
@@ -306,7 +308,11 @@ const mapRealInfo = (
   };
 };
 
-type TPricesResponse = Record<string, number> | null;
+type TWalletService = {
+  serviceName?: string;
+  price?: { value?: number };
+};
+type TWalletServicesResponse = TWalletService[] | null;
 type TBalanceResponse = {
   subAccounts?: { currency?: string; amount?: number }[];
 } | null;
@@ -316,15 +322,18 @@ const fetchPlanPrices = async (): Promise<{
   devPackPrice: number;
 } | null> => {
   try {
-    const prices = (await request({
+    const services = (await request({
       method: "get",
-      url: PRICES_URL,
-    })) as TPricesResponse;
+      url: WALLET_SERVICES_URL,
+    })) as TWalletServicesResponse;
 
-    const base = prices?.[DOCS_CLOUD_PRODUCT];
+    const priceOf = (name: string) =>
+      services?.find((service) => service.serviceName === name)?.price?.value;
+
+    const base = priceOf(DOCS_CLOUD_PRODUCT);
     if (base == null) return null;
 
-    const devpack = prices?.[DOCS_CLOUD_DEVPACK_PRODUCT];
+    const devpack = priceOf(DOCS_CLOUD_DEVPACK_PRODUCT);
     return {
       pricePerUser: base,
       devPackPrice: devpack == null ? 0 : Math.max(0, devpack - base),
@@ -347,7 +356,10 @@ const fetchWallet = async (): Promise<{
     const sub = balance?.subAccounts?.[0];
     if (!sub) return null;
 
-    return { availableCredits: sub.amount ?? 0, currency: sub.currency ?? "$" };
+    return {
+      availableCredits: sub.amount ?? 0,
+      currency: sub.currency ?? "USD",
+    };
   } catch {
     return null;
   }
@@ -489,9 +501,5 @@ export const buyDocsConnectPlan = async (
       viewer: { ...lastInfo.usage.viewer, remaining: users, limit: users },
     },
   };
-  return lastInfo;
-};
-
-export const buyDocsConnectTenant = async (): Promise<TDocsConnectInfo> => {
   return lastInfo;
 };

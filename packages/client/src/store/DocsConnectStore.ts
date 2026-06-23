@@ -40,7 +40,6 @@ import {
   getDocsConnectInfo,
   startDocsConnectTrial,
   buyDocsConnectPlan,
-  buyDocsConnectTenant,
   getDocsConnectReportUrl,
 } from "@docspace/shared/api/docs-connect";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
@@ -128,19 +127,6 @@ class DocsConnectStore {
         this.error = error as Error;
       });
       throw error;
-    }
-  };
-
-  buyTenant = async () => {
-    try {
-      const info = await buyDocsConnectTenant();
-      runInAction(() => {
-        this.info = info;
-      });
-    } catch (error) {
-      runInAction(() => {
-        this.error = error as Error;
-      });
     }
   };
 

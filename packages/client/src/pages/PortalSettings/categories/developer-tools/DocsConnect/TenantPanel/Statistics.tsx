@@ -50,6 +50,7 @@ import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
 import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg";
 
+import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import type {
   TDocsConnectInfo,
   TDocsConnectUsage,
@@ -196,7 +197,7 @@ const Statistics = ({
   copyToClipboard,
   downloadReport,
 }: StatisticsProps) => {
-  const { t } = useTranslation(["DocsConnect", "Common"]);
+  const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
 
   if (!info) return null;
 
@@ -214,17 +215,34 @@ const Statistics = ({
       {isTrial ? (
         <div className={styles.trialBanner}>
           <div className={styles.trialBannerText}>
-            <Text fontSize="13px" fontWeight={600}>
-              {t("DocsConnect:TrialBannerTitle")}
-            </Text>
-            <Text fontSize="12px" className={styles.muted}>
-              {t("DocsConnect:TrialBannerDescription", {
-                count: info.trial.daysLeft,
-              })}
-            </Text>
-            <Text fontSize="12px" className={styles.muted}>
-              {t("DocsConnect:TrialBannerDescriptionSecond")}
-            </Text>
+            {info.trial.expired ? (
+              <>
+                <Text
+                  fontSize="13px"
+                  fontWeight={600}
+                  className={styles.trialExpiredTitle}
+                >
+                  {t("DocsConnect:TrialExpiredTitle")}
+                </Text>
+                <Text fontSize="12px" className={styles.muted}>
+                  {t("DocsConnect:TrialExpiredDescription")}
+                </Text>
+              </>
+            ) : (
+              <>
+                <Text fontSize="13px" fontWeight={600}>
+                  {t("DocsConnect:TrialBannerTitle")}
+                </Text>
+                <Text fontSize="12px" className={styles.muted}>
+                  {t("DocsConnect:TrialBannerDescription", {
+                    count: info.trial.daysLeft,
+                  })}
+                </Text>
+                <Text fontSize="12px" className={styles.muted}>
+                  {t("DocsConnect:TrialBannerDescriptionSecond")}
+                </Text>
+              </>
+            )}
           </div>
           <Button
             primary
@@ -286,7 +304,11 @@ const Statistics = ({
                 <Text fontWeight={600}>{info.trial.validUntil}</Text>
               </div>
             </div>
-            <div className={styles.licenseProgress}>
+            <div
+              className={`${styles.licenseProgress} ${
+                info.trial.expired ? styles.licenseProgressExpired : ""
+              }`}
+            >
               <ProgressBar
                 percent={Math.max(
                   0,
@@ -332,7 +354,12 @@ const Statistics = ({
                 <Text className={styles.muted}>{t("DocsConnect:Price")}</Text>
                 <Text fontWeight={600}>
                   {t("DocsConnect:PricePerUser", {
-                    price: `${wallet.currency}${info.plan.pricePerUser}`,
+                    price: formatCurrencyValue(
+                      i18n.language,
+                      info.plan.pricePerUser,
+                      wallet.currency,
+                      2,
+                    ),
                   })}
                 </Text>
               </div>
@@ -341,7 +368,12 @@ const Statistics = ({
                   {t("DocsConnect:MonthlyCharge")}
                 </Text>
                 <Text fontWeight={600}>
-                  {`${wallet.currency}${info.plan.monthlyCharge}`}
+                  {formatCurrencyValue(
+                    i18n.language,
+                    info.plan.monthlyCharge,
+                    wallet.currency,
+                    2,
+                  )}
                 </Text>
               </div>
             </div>

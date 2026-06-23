@@ -46,6 +46,7 @@ export type TDocsConnectTrial = {
   validUntil: string;
   daysLeft: number;
   totalDays: number;
+  expired: boolean;
 };
 
 export type TDocsConnectPlan = {

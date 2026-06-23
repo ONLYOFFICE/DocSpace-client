@@ -49,6 +49,7 @@ import WalletSvg from "PUBLIC_DIR/images/icons/16/wallet.react.svg";
 import AutomationApiSvg from "PUBLIC_DIR/images/icons/16/docs-connect.automation-api.react.svg";
 import RebrandingSvg from "PUBLIC_DIR/images/icons/16/docs-connect.rebranding.react.svg";
 
+import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 
 import styles from "./BuyPlanPanel.module.scss";
@@ -70,7 +71,7 @@ const BuyPlanPanel = ({
   buyPlan,
   closeBuyPlan,
 }: BuyPlanPanelProps) => {
-  const { t } = useTranslation(["DocsConnect", "Common"]);
+  const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
 
   const [users, setUsers] = useState<number>(info?.plan.users ?? 50);
   const [devPack, setDevPack] = useState<boolean>(
@@ -100,7 +101,8 @@ const BuyPlanPanel = ({
   // Top-up amounts are rounded up to the next whole dollar.
   const topUpRequired = Math.ceil(totalMonthly - wallet.availableCredits);
 
-  const formatCurrency = (amount: number) => `${currency}${amount.toFixed(2)}`;
+  const formatCurrency = (amount: number) =>
+    formatCurrencyValue(i18n.language, amount, currency, 2);
 
   const onBuy = async () => {
     if (submitting) return;
@@ -215,7 +217,7 @@ const BuyPlanPanel = ({
                 </Text>
                 <Text fontSize="13px">
                   {t("DocsConnect:PerUserPerMonth", {
-                    price: `${currency}${plan.devPackPrice}`,
+                    price: formatCurrency(plan.devPackPrice),
                   })}
                 </Text>
               </div>
@@ -316,11 +318,7 @@ const BuyPlanPanel = ({
       </ModalDialog.Body>
       <ModalDialog.Footer>
         {insufficientFunds ? (
-          <Text
-            fontSize="13px"
-            fontWeight={400}
-            className={styles.footerHint}
-          >
+          <Text fontSize="13px" fontWeight={400} className={styles.footerHint}>
             <Trans
               ns="DocsConnect"
               i18nKey="TopUpHint"

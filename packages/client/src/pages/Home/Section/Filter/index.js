@@ -2014,7 +2014,7 @@ const SectionFilterContent = ({
       isRoomsFolder={isRoomsFolder}
       organizeRoomsGrouping={organizeRoomsGrouping}
       isFilterOrSearchActive={isFilterOrSearchActive}
-      showMainButton={showAgentsCreate || (showMainButton && isDesktopView)}
+      showMainButton={(showAgentsCreate || showMainButton) && isDesktopView}
       mainButtonProps={
         showAgentsCreate ? agentsMainButtonProps : mainButtonProps
       }

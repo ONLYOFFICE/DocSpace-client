@@ -131,7 +131,7 @@ const RoomLogoEditableIcon = observer(
         <AvatarEditorDialog
           t={t}
           visible={editor.cropper.visible}
-          title={t("RoomLogoCover:RoomCover")}
+          title={t("Common:RoomCover")}
           image={editor.cropper.image}
           isLoading={editor.isSaving}
           onClose={editor.cropper.onClose}
@@ -158,3 +158,4 @@ const RoomLogoEditableIcon = observer(
 );
 
 export default RoomLogoEditableIcon;
+

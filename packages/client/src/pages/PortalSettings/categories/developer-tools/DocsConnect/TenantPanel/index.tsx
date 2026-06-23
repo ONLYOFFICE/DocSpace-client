@@ -128,7 +128,7 @@ const TenantPanel = ({
               }`}
             >
               {info.trial.expired
-                ? t("DocsConnect:TrialExpired")
+                ? t("Common:TrialExpired")
                 : t("Common:FreeDaysLeft", { count: info.trial.daysLeft })}
             </span>
           ) : (

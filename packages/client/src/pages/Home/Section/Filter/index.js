@@ -40,7 +40,7 @@ import { useLocation, useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
 
 import { isMobile, isTablet } from "@docspace/shared/utils";
-import { RoomsTypeValues } from "@docspace/shared/utils/common";
+import { ROOMS_SECTION_TYPES } from "@docspace/shared/utils/rooms";
 import FilterInput from "@docspace/ui-kit/components/filter";
 import {
   QuickActions,
@@ -1165,11 +1165,10 @@ const SectionFilterContent = ({
       },
     ];
 
-    // Form Filling Rooms live in their own "Forms" section, so they are never
-    // offered as a room-type filter inside the "Rooms" section.
-    const roomTypeValues = RoomsTypeValues.filter(
-      (roomType) => roomType !== RoomsType.FormRoom,
-    );
+    // Room types offered in the "Rooms" section filter. Form Filling Rooms live
+    // in their own "Forms" section, and RoomsTypePrivate is a client-only
+    // synthetic value, so both are excluded by ROOMS_SECTION_TYPES.
+    const roomTypeValues = ROOMS_SECTION_TYPES;
 
     const typeOptions = isRooms
       ? [

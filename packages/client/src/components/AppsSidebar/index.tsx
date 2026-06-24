@@ -131,6 +131,10 @@ export const AppsSidebarView = ({
   // only. Hidden entirely on the secondary sidebars (accounts/dev-tools/settings)
   // via `hideFooter`.
   const showDevTools = isAdmin || isOwner;
+  const showDevToolsBar = showDevTools && !hideFooter;
+  // While the nav skeleton is up, the footer (plugin slots + banner) stays
+  // hidden so it doesn't appear ahead of the navigation it sits under.
+  const showFooter = !isNavLoading && (hasPluginItems || showDevToolsBar);
 
   const handleBackdropClick = () => {
     toggleArticleOpen?.();
@@ -247,16 +251,16 @@ export const AppsSidebarView = ({
             />
           )}
 
-          {(hasPluginItems || (showDevTools && !hideFooter)) && (
+          {showFooter && (
             <div className={styles.footer}>
-              {articleButtonItems && articleButtonItems.length > 0 ? (
+              {articleButtonItems?.length ? (
                 <AppsPluginItems
                   items={articleButtonItems}
                   showText={showText}
-                  withDevTools={showDevTools && !hideFooter}
+                  withDevTools={showDevToolsBar}
                 />
               ) : null}
-              {showDevTools && !hideFooter && (
+              {showDevToolsBar && (
                 <ArticleDevToolsBar
                   showText={showText}
                   articleOpen={articleOpen}

@@ -28,6 +28,41 @@ import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import styles from "./SidebarLoader.module.scss";
 
+// Header skeleton: logo + collapse-button placeholders. Rendered inside the
+// real header wrapper, so it inherits its flex layout — logo/collapse spaced
+// apart when expanded, a centered burger square when collapsed.
+export const HeaderLoader = ({ showText }: { showText: boolean }) =>
+  showText ? (
+    <>
+      <RectangleSkeleton width="180px" height="24px" borderRadius="3px" />
+      <RectangleSkeleton width="20px" height="20px" borderRadius="3px" />
+    </>
+  ) : (
+    <RectangleSkeleton width="28px" height="28px" borderRadius="3px" />
+  );
+
+// Back-button skeleton for the secondary sidebars: an arrow placeholder plus a
+// short label when expanded, arrow-only when collapsed. Takes the real
+// BackButton row className so margins, gap and collapsed centering line up.
+export const BackButtonLoader = ({
+  showText,
+  className,
+}: {
+  showText: boolean;
+  className?: string;
+}) => (
+  <div className={className} data-show-article={showText ? "true" : "false"}>
+    <RectangleSkeleton
+      width={showText ? "16px" : "20px"}
+      height={showText ? "16px" : "20px"}
+      borderRadius="3px"
+    />
+    {showText ? (
+      <RectangleSkeleton width="40px" height="14px" borderRadius="3px" />
+    ) : null}
+  </div>
+);
+
 // Mirrors the NavMenu geometry: a 36px-tall row per item with a 16px icon and,
 // when text is shown, a label rectangle filling the remaining width.
 const NavItemSkeleton = ({ showText }: { showText: boolean }) => (

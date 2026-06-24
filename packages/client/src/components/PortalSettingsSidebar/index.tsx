@@ -50,6 +50,8 @@ type PortalSettingsSidebarProps = {
   baseDomain?: string;
   aiServicesEnabled: boolean;
   setIsLoadedArticleBody: (value: boolean) => void;
+  showPortalSettingsLoader?: boolean;
+  showProfileLoader?: boolean;
 };
 
 const PortalSettingsSidebar = ({
@@ -60,6 +62,8 @@ const PortalSettingsSidebar = ({
   baseDomain,
   aiServicesEnabled,
   setIsLoadedArticleBody,
+  showPortalSettingsLoader,
+  showProfileLoader,
 }: PortalSettingsSidebarProps) => {
   const { t, ready } = useTranslation(["Settings", "Ldap", "OAuth", "Common"]);
   const location = useLocation();
@@ -177,13 +181,28 @@ const PortalSettingsSidebar = ({
     aiServicesEnabled,
   ]);
 
+  const isNavLoading = location.pathname.includes("/profile")
+    ? showProfileLoader
+    : showPortalSettingsLoader;
+
   return (
-    <AppsSidebar groups={groups} activeId={activeId} variant="secondary" />
+    <AppsSidebar
+      groups={groups}
+      activeId={activeId}
+      variant="secondary"
+      isNavLoading={isNavLoading}
+    />
   );
 };
 
 export default inject<TStore>(
-  ({ settingsStore, userStore, currentTariffStatusStore, common }) => ({
+  ({
+    settingsStore,
+    userStore,
+    currentTariffStatusStore,
+    common,
+    clientLoadingStore,
+  }) => ({
     isNotPaidPeriod: currentTariffStatusStore.isNotPaidPeriod,
     isCommunity: currentTariffStatusStore.isCommunity,
     isOwner: userStore.user?.isOwner ?? false,
@@ -191,6 +210,8 @@ export default inject<TStore>(
     baseDomain: settingsStore.baseDomain,
     aiServicesEnabled: settingsStore.aiServicesEnabled,
     setIsLoadedArticleBody: common.setIsLoadedArticleBody,
+    showPortalSettingsLoader: clientLoadingStore.showPortalSettingsLoader,
+    showProfileLoader: clientLoadingStore.showProfileLoader,
   }),
 )(observer(PortalSettingsSidebar));
 

@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { inject, observer } from "mobx-react";
 import { useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
@@ -44,7 +45,11 @@ const MEMBERS_ID = "accounts-members";
 const GROUPS_ID = "accounts-groups";
 const GUESTS_ID = "accounts-guests";
 
-const AccountsSidebar = () => {
+type AccountsSidebarProps = {
+  isNavLoading?: boolean;
+};
+
+const AccountsSidebar = ({ isNavLoading }: AccountsSidebarProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
   const navigate = useNavigate();
@@ -95,8 +100,15 @@ const AccountsSidebar = () => {
   }, [t, goToFilterRoute]);
 
   return (
-    <AppsSidebar groups={groups} activeId={activeId} variant="secondary" />
+    <AppsSidebar
+      groups={groups}
+      activeId={activeId}
+      variant="secondary"
+      isNavLoading={isNavLoading}
+    />
   );
 };
 
-export default AccountsSidebar;
+export default inject<TStore>(({ clientLoadingStore }) => ({
+  isNavLoading: clientLoadingStore.showBodyLoader,
+}))(observer(AccountsSidebar));

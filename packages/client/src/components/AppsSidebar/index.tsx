@@ -49,11 +49,12 @@ import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import BackButton from "@docspace/ui-kit/components/article/sub-components/BackButton";
 import ArticleDevToolsBar from "@docspace/ui-kit/components/article/sub-components/DevToolsBar";
+import { ArticleProfileLoader } from "@docspace/ui-kit/components/article/skeletons";
 import { useSectionNavigation } from "SRC_DIR/contexts/SectionNavigationContext";
 import CollapseButton from "./CollapseButton";
 import ProfileBlock from "./ProfileBlock";
 import AppsPluginItems from "./AppsPluginItems/AppsPluginItems";
-import { NavMenuLoader } from "./SidebarLoader";
+import { BackButtonLoader, HeaderLoader, NavMenuLoader } from "./SidebarLoader";
 import { useSidebarShowText } from "./useSidebarShowText";
 import styles from "./AppsSidebar.module.scss";
 import type { AppsPluginsItems } from "./AppsPluginItems/AppsPluginItems.types";
@@ -182,7 +183,9 @@ export const AppsSidebarView = ({
             className={`${articleStyles.articleHeader} ${styles.header}`}
             data-show-text={showText ? "true" : "false"}
           >
-            {showText ? (
+            {isNavLoading ? (
+              <HeaderLoader showText={showText} />
+            ) : showText ? (
               <>
                 <a href="/" className={styles.logoWrapper}>
                   <img
@@ -232,12 +235,19 @@ export const AppsSidebarView = ({
         >
           {showBackButton && (
             <div className={styles.backButtonWrapper}>
-              <BackButton
-                showText={showText}
-                currentDeviceType={currentDeviceType}
-                onBack={onBack}
-                toggleArticleOpen={toggleArticleOpen}
-              />
+              {isNavLoading ? (
+                <BackButtonLoader
+                  showText={showText}
+                  className={articleStyles.backButton}
+                />
+              ) : (
+                <BackButton
+                  showText={showText}
+                  currentDeviceType={currentDeviceType}
+                  onBack={onBack}
+                  toggleArticleOpen={toggleArticleOpen}
+                />
+              )}
             </div>
           )}
           {isNavLoading ? (
@@ -275,12 +285,16 @@ export const AppsSidebarView = ({
           )}
         </Scrollbar>
 
-        {user && !isMobile ? (
+        {!isMobile && (isNavLoading || user) ? (
           <div className={styles.profileBlockWrapper}>
-            <ProfileBlock
-              user={user as unknown as ArticleProfileProps["user"]}
-              showText={showText}
-            />
+            {isNavLoading ? (
+              <ArticleProfileLoader showText={showText} />
+            ) : (
+              <ProfileBlock
+                user={user as unknown as ArticleProfileProps["user"]}
+                showText={showText}
+              />
+            )}
           </div>
         ) : null}
       </div>

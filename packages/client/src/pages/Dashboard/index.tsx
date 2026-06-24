@@ -126,7 +126,7 @@ const Dashboard = ({ isGuest }: DashboardProps) => {
       title: t("Common:DashboardAIChatAgentsTitle"),
       description: t("Common:DashboardAIChatAgentsDescription"),
       installed: true,
-      href: "/rooms/shared/filter?type=AIAgents",
+      href: "/ai-agents/filter",
     },
   ].filter((mod) => mod.installed);
 

@@ -57,7 +57,6 @@ import { getCategoryType } from "@docspace/shared/utils/common";
 import { CategoryType } from "@docspace/shared/constants";
 
 import SectionWrapper from "SRC_DIR/components/Section";
-import ChooseFormSetBanner from "SRC_DIR/components/ChooseFormSetBanner";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 
@@ -264,6 +263,10 @@ const PureHome = observer((props) => {
     aiChatPanel.isChatPanelVisible &&
     aiChatPanel.isChatPanelFullscreen;
 
+  // The "Forms" section root gets its own quick-actions tile set (collect
+  // forms + from template), resolved by the hook below.
+  const isFormsSection = getCategoryType(location) === CategoryType.Forms;
+
   // Quick-actions banner (ported from the SDK): create tiles above the
   // files/rooms list. The hook resolves which tile set applies (or none) from
   // the current section + create permission.
@@ -282,22 +285,12 @@ const PureHome = observer((props) => {
     isFavoritesFolder,
     isRecentFolder,
     isAIAgentsFolder,
+    isFormsSection,
     isContactsPage,
     isProfile,
     isSettingsPage,
   });
   const showQuickActions = quickActions.show && !isChat && !isEmptyPage;
-
-  // The "Forms" section shows its own "Choose Form Set" plate instead of the
-  // quick-actions tiles. Dismissal is remembered across sessions.
-  const isFormsSection = getCategoryType(location) === CategoryType.Forms;
-  const [isFormSetBannerClosed, setIsFormSetBannerClosed] = React.useState(
-    () => localStorage.getItem("form-set-banner-closed") === "true",
-  );
-  const closeFormSetBanner = useCallback(() => {
-    localStorage.setItem("form-set-banner-closed", "true");
-    setIsFormSetBannerClosed(true);
-  }, []);
 
   const onDrop = useEventCallback((f, uploadToFolder) => {
     if (isContactsPage || isProfile) return;
@@ -643,13 +636,7 @@ const PureHome = observer((props) => {
             </Section.SectionFilter>
           ) : null}
 
-          {isFormsSection && !isTemplatesFolder ? (
-            !isFormSetBannerClosed ? (
-              <Section.SectionBanner>
-                <ChooseFormSetBanner onClose={closeFormSetBanner} />
-              </Section.SectionBanner>
-            ) : null
-          ) : showQuickActions ? (
+          {showQuickActions ? (
             <Section.SectionBanner>
               <QuickActions
                 items={quickActions.items}

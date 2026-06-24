@@ -45,6 +45,8 @@ export type QuickActionsSection =
   | "files"
   // Rooms list root: offer the create-room tile (+ disabled use-template tile).
   | "rooms"
+  // Forms section root: offer the collect-forms tile + from-template tile.
+  | "forms"
   // Encrypted/private room: the SDK shows folder + upload tiles here, but the
   // matching illustrations are not bundled in the client package, so we render
   // no banner for now (the `+` button is still hidden — see isFilesRoomsArea).
@@ -66,6 +68,7 @@ export type SectionFlags = {
   isRecentFolder?: boolean;
   isAIAgentsFolder?: boolean;
   // View-level flags (already computed in Home/Header).
+  isFormsSection?: boolean; // the "Forms" section root (CategoryType.Forms)
   isContactsPage?: boolean;
   isProfile?: boolean;
   isSettingsPage?: boolean;
@@ -86,6 +89,7 @@ export const getQuickActionsSection = (
     isFavoritesFolder,
     isRecentFolder,
     isAIAgentsFolder,
+    isFormsSection,
     isContactsPage,
     isProfile,
     isSettingsPage,
@@ -102,6 +106,9 @@ export const getQuickActionsSection = (
     isAIAgentsFolder
   )
     return null;
+
+  // Forms section root → collect-forms + from-template tiles.
+  if (isFormsSection) return "forms";
 
   // Rooms list root → room tiles.
   if (isRoomsFolder) return "rooms";

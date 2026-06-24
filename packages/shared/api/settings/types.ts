@@ -168,6 +168,7 @@ export type TApiEntries = {
   docspace: string;
   "javascript-sdk": string;
   "plugins-sdk": string;
+  "docs-connect": string;
 };
 
 export type TSupportEntries = {

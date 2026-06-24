@@ -788,6 +788,12 @@ class SettingsStore {
       : this.apiDomain;
   }
 
+  get docsConnectUrl() {
+    return this.apiDomain && this.apiEntries?.["docs-connect"]
+      ? `${this.apiDomain}${this.apiEntries["docs-connect"]}`
+      : this.apiDomain;
+  }
+
   get forEnterprisesUrl() {
     return this.siteDomain && this.siteEntries?.forenterprises
       ? `${this.siteDomain}${this.siteEntries.forenterprises}`

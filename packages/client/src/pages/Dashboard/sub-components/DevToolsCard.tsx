@@ -49,6 +49,7 @@ interface DevToolsCardProps {
   webhooksGuideUrl?: string;
   apiOAuthLink?: string;
   apiKeysUrl?: string;
+  docsConnectUrl?: string;
 }
 
 const useDevTools = (props: DevToolsCardProps): DevTool[] => {
@@ -139,7 +140,10 @@ const DevToolsCardComponent = (props: DevToolsCardProps) => {
       <div className={styles.devToolsGrid}>
         <a
           className={`${styles.devToolTile} ${styles.devToolTileFeatured}`}
-          href="/developer-tools/docs-connect"
+          href={props.docsConnectUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-disabled={!props.docsConnectUrl}
         >
           <Text as="p" className={styles.devToolTitle}>
             {t("DocsConnect:DocsConnect")}
@@ -188,6 +192,7 @@ export const DevToolsCard = inject<TStore>(({ settingsStore }) => ({
   webhooksGuideUrl: settingsStore.webhooksGuideUrl,
   apiOAuthLink: settingsStore.apiOAuthLink,
   apiKeysUrl: settingsStore.apiKeysUrl,
+  docsConnectUrl: settingsStore.docsConnectUrl,
 }))(observer(DevToolsCardComponent));
 
 export default DevToolsCard;

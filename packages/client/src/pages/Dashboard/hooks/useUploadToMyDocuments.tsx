@@ -25,9 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
+import { TFunction } from "i18next";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { createChunks, runWithConcurrency } from "@docspace/ui-kit/uploader";
 import {
   getSettingsFiles,
@@ -36,19 +39,77 @@ import {
   finalizeUploadSession,
 } from "@docspace/shared/api/files";
 
-// Opens a native file picker and uploads the selected files to the user's
-// "My documents" folder. Mirrors the chunked-upload pipeline used by the SDK
-// (a `startUploadSession` per file, parallel `uploadChunkParallel` calls gated
-// by `maxUploadThreadCount`, then `finalizeUploadSession`).
-//
-// The new Dashboard has no floating upload panel, so progress is surfaced via
-// toasts instead of the legacy UploadPanel.
 const DEFAULT_CHUNK_SIZE = 10 * 1024 * 1024;
 const DEFAULT_UPLOAD_THREADS = 3;
 
-export const useUploadToMyDocuments = (folderId: number | null) => {
+export type UploadProgress = {
+  isUploading: boolean;
+  percent: number;
+  completed: boolean;
+  alert: boolean;
+};
+
+const INITIAL_PROGRESS: UploadProgress = {
+  isUploading: false,
+  percent: 0,
+  completed: false,
+  alert: false,
+};
+
+const showSuccessToast = (
+  t: TFunction,
+  uploaded: number,
+  title: string,
+  folderName: string,
+  onOpenFiles: () => void,
+) => {
+  const components = {
+    1: (
+      <Link
+        tag="a"
+        onClick={onOpenFiles}
+        target={LinkTarget.self}
+        color="accent"
+      />
+    ),
+    2: <Text as="span" fontWeight={600} />,
+  };
+
+  const toastMessage =
+    uploaded === 1 ? (
+      <Trans
+        t={t}
+        ns="Common"
+        i18nKey="Common:FileSuccessfullyUploadedToFolder"
+        values={{ title, qty: uploaded, folderName }}
+        components={components}
+      />
+    ) : (
+      <Trans
+        t={t}
+        ns="Common"
+        i18nKey="Common:FilesSuccessfullyUploadedToFolder"
+        values={{ title, qty: uploaded, folderName }}
+        components={components}
+      />
+    );
+
+  toastr.success(toastMessage);
+};
+
+export const useUploadToMyDocuments = (
+  folderId: number | null,
+  onOpenFiles: () => void,
+) => {
   const { t } = useTranslation(["Common"]);
   const inputRef = React.useRef<HTMLInputElement | null>(null);
+
+  const [progress, setProgress] =
+    React.useState<UploadProgress>(INITIAL_PROGRESS);
+
+  const clearProgress = React.useCallback(() => {
+    setProgress(INITIAL_PROGRESS);
+  }, []);
 
   const uploadFiles = React.useCallback(
     async (files: FileList | File[]) => {
@@ -67,11 +128,22 @@ export const useUploadToMyDocuments = (folderId: number | null) => {
         console.error("Failed to load files settings, using defaults", err);
       }
 
+      const totalBytes = fileArray.reduce(
+        (sum, file) => sum + Math.max(1, file.size),
+        0,
+      );
+      let uploadedBytes = 0;
       let uploaded = 0;
       let failed = 0;
+      const firstFileName = fileArray[0]?.name ?? "";
 
-      // Per-file concurrency is kept low (2) — the inner chunks already
-      // saturate the network up to `maxUploadThreadCount`.
+      setProgress({
+        isUploading: true,
+        percent: 0,
+        completed: false,
+        alert: false,
+      });
+
       await runWithConcurrency(fileArray, 2, async (file) => {
         try {
           const session = await startUploadSession(
@@ -93,6 +165,13 @@ export const useUploadToMyDocuments = (folderId: number | null) => {
               chunk.index,
               chunk.data,
             );
+
+            uploadedBytes += Math.max(1, chunk.size);
+            const percent = Math.min(
+              99,
+              Math.round((uploadedBytes / totalBytes) * 100),
+            );
+            setProgress((prev) => ({ ...prev, percent }));
           });
 
           await finalizeUploadSession(folderId, session.id);
@@ -103,16 +182,27 @@ export const useUploadToMyDocuments = (folderId: number | null) => {
         }
       });
 
+      setProgress({
+        isUploading: true,
+        percent: 100,
+        completed: failed === 0,
+        alert: failed > 0,
+      });
+
       if (uploaded > 0) {
-        toastr.success(
-          t("Common:ItemsSuccessfullyUploaded", { count: uploaded }),
+        showSuccessToast(
+          t as TFunction,
+          uploaded,
+          firstFileName,
+          t("Common:Files"),
+          onOpenFiles,
         );
       }
       if (failed > 0) {
         toastr.error(t("Common:ErrorUploadingFiles", { count: failed }));
       }
     },
-    [folderId, t],
+    [folderId, t, onOpenFiles],
   );
 
   const openUploadDialog = React.useCallback(() => {
@@ -148,7 +238,7 @@ export const useUploadToMyDocuments = (folderId: number | null) => {
     };
   }, []);
 
-  return { openUploadDialog };
+  return { openUploadDialog, progress, clearProgress };
 };
 
 export default useUploadToMyDocuments;

@@ -562,7 +562,7 @@ const ManualBackup = ({
           )}
         >
           {t("Common:RoomsModuleDescription", {
-            roomName: t("Common:MyDocuments"),
+            roomName: t("Common:Files"),
           })}
         </Text>
         {isCheckedDocuments ? (

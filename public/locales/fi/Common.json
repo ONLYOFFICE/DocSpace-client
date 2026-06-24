@@ -1352,7 +1352,6 @@
   "MoveToTrashItem": "Tämä kohde siirretään Roskakoriin.",
   "MoveToTrashItems": "Nämä {{itemCount}} kohdetta siirretään Roskakoriin.",
   "MultiplyOverwrite": "Useat kansiot yhdistetään, tiedostot korvataan versiopäivityksen myötä",
-  "MyDocuments": "Asiakirjani",
   "Name": "Nimi",
   "NeedMoreGoToServices": "Tarvitsetko lisää? Siirry <1>Palvelut</1> -osioon.",
   "NeedPassword": "Tarvitset salasanan päästäksesi huoneeseen",

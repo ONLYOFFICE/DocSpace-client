@@ -95,7 +95,7 @@ const RoomsActionsContainer = ({
         {t("ActionsWithFilesDescription", {
           rooms: t("Common:Rooms"),
           shared: t("Common:SharedWithMe"),
-          documents: t("Common:MyDocuments"),
+          documents: t("Common:Files"),
           aiAgents: t("Common:AIAgents"),
         })}
       </Text>

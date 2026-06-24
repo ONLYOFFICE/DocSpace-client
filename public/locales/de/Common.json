@@ -1365,7 +1365,6 @@
   "MoveToTrashItem": "Dieser Eintrag wird in den Papierkorb verschoben.",
   "MoveToTrashItems": "Diese {{itemCount}} Elemente werden in den Papierkorb verschoben.",
   "MultiplyOverwrite": "Mehrere Ordner werden zu einem zusammengeführt, Dateien werden mit dem Versionsupdate überschrieben.",
-  "MyDocuments": "Meine Dokumente",
   "Name": "Name",
   "NeedMoreGoToServices": "Benötigen Sie mehr? Gehen Sie zu den <1>Services</1>",
   "NeedPassword": "Für den Zugang zum Raum benötigen Sie ein Passwort",

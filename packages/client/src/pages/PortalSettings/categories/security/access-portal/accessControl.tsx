@@ -377,7 +377,7 @@ const AccessControl = ({
                   isChecked={applyToDocuments}
                   onChange={() => setApplyToDocuments(!applyToDocuments)}
                   label={t("Settings:AppliesToDocuments", {
-                    myDocuments: t("Common:MyDocuments"),
+                    myDocuments: t("Common:Files"),
                   })}
                 />
                 <div
@@ -385,7 +385,7 @@ const AccessControl = ({
                 >
                   <Text fontSize="13px" fontWeight="400" lineHeight="20px">
                     {t("Settings:AppliesToDocumentsDescription", {
-                      myDocuments: t("Common:MyDocuments"),
+                      myDocuments: t("Common:Files"),
                       productName: getBrandName("ProductName"),
                     })}
                   </Text>

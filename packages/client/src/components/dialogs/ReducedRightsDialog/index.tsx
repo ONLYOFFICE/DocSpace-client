@@ -61,7 +61,7 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
             t={t}
             ns="Files"
             i18nKey="PersonalContentRemovalNotice"
-            values={{ sectionName: t("Common:MyDocuments") }}
+            values={{ sectionName: t("Common:Files") }}
             components={{ 1: <span style={{ fontWeight: 600 }} /> }}
           />
         </Text>
@@ -82,7 +82,7 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
         />
         <Button
           key="RedirectButton"
-          label={t("Common:MyDocuments")}
+          label={t("Common:Files")}
           size={ButtonSize.normal}
           onClick={onRedirect}
           scale={currentDeviceType === DeviceType.mobile}

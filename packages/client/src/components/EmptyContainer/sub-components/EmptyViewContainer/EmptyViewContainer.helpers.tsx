@@ -318,7 +318,7 @@ export const getOptions = (
       productName: getBrandName("ProductName"),
     }),
     t("EmptyView:SectionsUploadDescription", {
-      sectionNameFirst: t("Common:MyDocuments"),
+      sectionNameFirst: t("Common:Files"),
       sectionNameSecond: t("Common:Rooms"),
     }),
     // TODO: need fix selector
@@ -577,7 +577,7 @@ export const getOptions = (
           personal: {
             link: actions.onGoToPersonal(),
             icon: <PersonIcon />,
-            sectionName: t("Common:MyDocuments"),
+            sectionName: t("Common:Files"),
           },
         }[trashSection];
 
@@ -604,7 +604,7 @@ export const getOptions = (
           productName: getBrandName("ProductName"),
         }),
         t("Common:UploadFilesPortal", {
-          sectionNameFirst: t("Common:MyDocuments"),
+          sectionNameFirst: t("Common:Files"),
           sectionNameSecond: t("Common:Rooms"),
         }),
         "",

@@ -1365,7 +1365,6 @@
   "MoveToTrashItem": "本项目将移至回收站。",
   "MoveToTrashItems": "这些 {{itemCount}} 个项目将被移动到垃圾箱。",
   "MultiplyOverwrite": "多个文件夹将合并为一个文件夹，文件将被新版本重写",
-  "MyDocuments": "我的文档",
   "Name": "姓名",
   "NeedMoreGoToServices": "需要更多？前往<1>服务</1>",
   "NeedPassword": "请输入密码，以进入房间",

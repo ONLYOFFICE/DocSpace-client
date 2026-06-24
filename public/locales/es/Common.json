@@ -1365,7 +1365,6 @@
   "MoveToTrashItem": "Este elemento se moverá a la Papelera.",
   "MoveToTrashItems": "Estos {{itemCount}} elementos se moverán a la Papelera.",
   "MultiplyOverwrite": "Varias carpetas se combinarán en una, los archivos se sobrescribirán con la actualización de la versión",
-  "MyDocuments": "Mis documentos",
   "Name": "Nombre",
   "NeedMoreGoToServices": "¿Necesita más? Vaya a <1>Servicios</1>",
   "NeedPassword": "Usted necesita una contraseña para acceder a la sala",

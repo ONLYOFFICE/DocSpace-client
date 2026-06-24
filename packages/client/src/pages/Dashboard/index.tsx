@@ -32,6 +32,7 @@ import { useTranslation, Trans } from "react-i18next";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 
@@ -63,7 +64,13 @@ const Dashboard = ({ isGuest }: DashboardProps) => {
   const navigate = useNavigate();
 
   const myFolderId = useMyFolderId();
-  const { openUploadDialog } = useUploadToMyDocuments(myFolderId);
+  const openFiles = React.useCallback(() => {
+    navigate("/rooms/personal/filter");
+  }, [navigate]);
+  const { openUploadDialog, progress, clearProgress } = useUploadToMyDocuments(
+    myFolderId,
+    openFiles,
+  );
   const createItems = useCreateActions(myFolderId);
 
   // The dashboard renders its own content (no SDK iframe). Tell the
@@ -172,6 +179,16 @@ const Dashboard = ({ isGuest }: DashboardProps) => {
         <DevToolsCard />
       </div>
 
+      {progress.isUploading ? (
+        <FloatingButton
+          icon="upload"
+          percent={progress.percent}
+          completed={progress.completed}
+          alert={progress.alert}
+          showCancelButton={progress.completed || progress.alert}
+          clearUploadedFilesHistory={clearProgress}
+        />
+      ) : null}
     </div>
   );
 };

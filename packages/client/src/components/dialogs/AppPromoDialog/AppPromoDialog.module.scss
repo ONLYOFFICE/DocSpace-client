@@ -56,7 +56,7 @@
   // feature list instead of overflowing it and leaving empty space below.
   align-items: stretch;
 
-  @include mixins.tablet {
+  @include mixins.tablet-and-below {
     grid-template-columns: 1fr;
     row-gap: 24px;
     align-items: flex-start;
@@ -154,12 +154,10 @@
   // so the illustration never grows taller than the content beside it.
   overflow: hidden;
 
-  @include mixins.tablet {
-    order: -1;
-    // No sibling to match height to in the single-column layout — fall back to
-    // the natural aspect ratio.
-    height: auto;
-    aspect-ratio: 3 / 2;
+  // Tablet and mobile: drop the illustration entirely, keep only the
+  // feature list.
+  @include mixins.tablet-and-below {
+    display: none;
   }
 }
 
@@ -174,10 +172,4 @@
   width: 100%;
   height: auto;
   display: block;
-
-  @include mixins.tablet {
-    // Single column: no height to match, show the whole illustration.
-    position: static;
-    aspect-ratio: auto;
-  }
 }

@@ -33,7 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import type { TEditorAIEvent, TEditorConnector } from "@/types";
 
 const requests: Record<string, { controller: AbortController }> = {};
@@ -53,7 +52,7 @@ const sendEvent = (
 const externalAIFetch = async (
   connector: TEditorConnector,
   e: TEditorAIEvent,
-  providerId: number,
+  modelProfileMap: Map<string, string>,
 ) => {
   const { id, type } = e;
 
@@ -69,18 +68,31 @@ const externalAIFetch = async (
   let reader: ReadableStreamDefaultReader<Uint8Array> | null = null;
 
   try {
+    let profileId: string | undefined;
+    try {
+      const body = e.options.body;
+      if (typeof body === "string") {
+        const model = (JSON.parse(body) as { model?: string })?.model;
+        if (model) profileId = modelProfileMap.get(model);
+      }
+    } catch {
+      profileId = undefined;
+    }
+
+    if (!profileId) {
+      throw new Error("No AI profile resolved for the requested model");
+    }
+
     const url = e.url.replace(
       "[external]",
-      `/api/2.0/ai/openai/${providerId}/v1`,
+      `/doceditor/api/ai/passthrough/${profileId}`,
     );
-    const authToken = getCookie("asc_auth_key");
 
     const options = {
       ...e.options,
       signal: abortController.signal,
       headers: {
         ...e.options.headers,
-        ...(authToken && { Authorization: authToken }),
       },
     };
 

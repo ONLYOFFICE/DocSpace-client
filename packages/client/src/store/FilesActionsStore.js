@@ -109,6 +109,7 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
+import { getSectionTrashTarget } from "SRC_DIR/helpers/articleNavigation";
 import { muteRoomNotification } from "@docspace/shared/api/settings";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import UsersFilter from "@docspace/shared/api/people/filter";
@@ -141,6 +142,15 @@ import { FileOperationStatus } from "@docspace/shared/enums";
 import i18n from "../i18n";
 import FilesHeaderOptionStore from "./FilesHeaderOptionStore";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
+
+const SECTION_ROOT_FOLDER_TYPES = [
+  FolderType.Archive,
+  FolderType.USER,
+  FolderType.Rooms,
+  FolderType.SHARE,
+  FolderType.Favorites,
+  FolderType.Recent,
+];
 
 class FilesActionStore {
   settingsStore;
@@ -2294,10 +2304,13 @@ class FilesActionStore {
       setIsSectionBodyLoading(param);
     };
 
-    const { title, fileExst, id, rootFolderType: rootFolderTypeItem } = item;
+    const { title, fileExst, rootFolderType: rootFolderTypeItem } = item;
     const parentId =
       item.parentId || item.toFolderId || item.folderId || recycleBinFolderId;
     const parentTitle = item.parentTitle || item.toFolderTitle;
+
+    const isTrashDestination =
+      parentId === recycleBinFolderId || item.parentType === FolderType.TRASH;
 
     const isRoot = [
       myRoomsId,
@@ -2316,15 +2329,30 @@ class FilesActionStore {
       rootFolderType,
     };
 
-    const url = getCategoryUrl(
-      getCategoryTypeByFolderType(rootFolderTypeItem ?? rootFolderType, id),
-      id,
-    );
-
     const newFilter = FilesFilter.getDefault();
 
     newFilter.search = title;
     newFilter.folder = parentId;
+
+    let url;
+    if (isTrashDestination) {
+      const trashTarget = getSectionTrashTarget(
+        window.DocSpace.location.pathname,
+      );
+      newFilter.folderType = trashTarget.folderType;
+      url = trashTarget.path;
+    } else {
+      const destinationFolderType = SECTION_ROOT_FOLDER_TYPES.includes(
+        item.parentType,
+      )
+        ? item.parentType
+        : (rootFolderTypeItem ?? rootFolderType);
+
+      url = getCategoryUrl(
+        getCategoryTypeByFolderType(destinationFolderType, parentId),
+        parentId,
+      );
+    }
 
     setIsLoading(
       window.DocSpace.location.search !== `?${newFilter.toUrlParams()}` ||

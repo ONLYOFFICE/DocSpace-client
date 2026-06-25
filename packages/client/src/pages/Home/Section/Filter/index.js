@@ -60,7 +60,6 @@ import {
   getFilterContent,
   getTags,
   getQuotaFilter,
-  getFilterLocation,
   getSharedBy,
 } from "@docspace/ui-kit/components/filter/Filter.utils";
 
@@ -69,7 +68,6 @@ import {
   Events,
   FilterGroups,
   FilterKeys,
-  FilterLocation,
   FilterSubject,
   FilterType,
   FolderType,
@@ -418,8 +416,6 @@ const SectionFilterContent = ({
         newFilter.page = 0;
 
         newFilter.filterType = filterType;
-
-        newFilter.location = getFilterLocation(data);
 
         if (authorType === FilterKeys.me || authorType === FilterKeys.other) {
           newFilter.authorType = `user_${userId}`;
@@ -932,20 +928,6 @@ const SectionFilterContent = ({
           label,
         });
       }
-
-      if (filter.location) {
-        const locationLabels = {
-          [FilterLocation.Rooms]: t("Common:Rooms"),
-          [FilterLocation.Documents]: t("Common:Documents"),
-          [FilterLocation.Link]: t("Common:AccessibleViaLink"),
-        };
-
-        filterValues.push({
-          key: filter.location.toString(),
-          group: FilterGroups.filterLocation,
-          label: locationLabels[filter.location],
-        });
-      }
     }
 
     return filterValues;
@@ -955,7 +937,6 @@ const SectionFilterContent = ({
     filter.roomId,
     filter.filterType,
     filter.excludeSubject,
-    filter.location,
     roomsFilter.provider,
     roomsFilter.type,
     roomsFilter.subjectId,
@@ -1248,7 +1229,7 @@ const SectionFilterContent = ({
             group: FilterGroups.filterType,
             label: t("Common:Type"),
             isHeader: true,
-            isLast: !isTrash && !isRecentFolder,
+            isLast: !isTrash,
           },
           ...folders,
           ...files,
@@ -1510,68 +1491,6 @@ const SectionFilterContent = ({
         ];
         filterOptions.push(...roomOption);
       }
-
-      if (isRecentFolder) {
-        const locationOption = [
-          {
-            key: FilterGroups.filterLocation,
-            group: FilterGroups.filterLocation,
-            label: t("Common:Location"),
-            isHeader: true,
-            isLast: true,
-          },
-          {
-            id: "filter_location-rooms",
-            key: FilterLocation.Rooms.toString(),
-            group: FilterGroups.filterLocation,
-            label: t("Common:Rooms"),
-          },
-        ];
-
-        if (!isVisitor) {
-          locationOption.push({
-            id: "filter_location-documents",
-            key: FilterLocation.Documents.toString(),
-            group: FilterGroups.filterLocation,
-            label: t("Common:Documents"),
-          });
-        }
-
-        locationOption.push({
-          id: "filter_location-accessible-via-link",
-          key: FilterLocation.Link.toString(),
-          group: FilterGroups.filterLocation,
-          label: t("Common:AccessibleViaLink"),
-        });
-
-        filterOptions.push(...locationOption);
-      }
-
-      if (isFavoritesFolder) {
-        const locationOption = [
-          {
-            key: FilterGroups.filterLocation,
-            group: FilterGroups.filterLocation,
-            label: t("Common:Location"),
-            isHeader: true,
-            isLast: true,
-          },
-          {
-            id: "filter_location-documents",
-            key: FilterLocation.Documents.toString(),
-            group: FilterGroups.filterLocation,
-            label: t("Common:Documents"),
-          },
-          {
-            id: "filter_location-rooms",
-            key: FilterLocation.Rooms.toString(),
-            group: FilterGroups.filterLocation,
-            label: t("Common:Rooms"),
-          },
-        ];
-
-        filterOptions.push(...locationOption);
-      }
     }
     return filterOptions;
   }, [
@@ -1581,7 +1500,6 @@ const SectionFilterContent = ({
     isFormsSection,
     isAIAgentsFolder,
     isContactsPage,
-    isFavoritesFolder,
     isRecentFolder,
     isTrash,
     isPublicRoom,
@@ -1832,9 +1750,6 @@ const SectionFilterContent = ({
 
         if (group === FilterGroups.filterRoom) {
           newFilter.roomId = null;
-        }
-        if (group === FilterGroups.filterLocation) {
-          newFilter.location = null;
         }
 
         newFilter.page = 0;

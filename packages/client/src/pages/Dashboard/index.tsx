@@ -48,6 +48,7 @@ import { ProfileCard } from "./sub-components/ProfileCard";
 import { IntegrationsCard } from "./sub-components/IntegrationsCard";
 import { DevToolsCard } from "./sub-components/DevToolsCard";
 import { Header } from "./sub-components/Header";
+import { DashboardLoader } from "./sub-components/DashboardLoader";
 import { useUploadToMyDocuments } from "./hooks/useUploadToMyDocuments";
 import { useCreateActions } from "./hooks/useCreateActions";
 import { useMyFolderId } from "./hooks/useMyFolderId";
@@ -55,9 +56,10 @@ import styles from "./Dashboard.module.scss";
 
 interface DashboardProps {
   isGuest: boolean;
+  showLoader: boolean;
 }
 
-const Dashboard = ({ isGuest }: DashboardProps) => {
+const Dashboard = ({ isGuest, showLoader }: DashboardProps) => {
   const { t } = useTranslation(["Common", "OAuth"]);
   useDocumentTitle("Common:Overview");
   const [searchParams] = useSearchParams();
@@ -94,6 +96,11 @@ const Dashboard = ({ isGuest }: DashboardProps) => {
     localStorage.setItem("useDocSpace", "new");
     return <Navigate to="/dashboard" replace />;
   }
+
+  // On first app load the sidebar shows its nav skeleton until initFiles
+  // resolves; render the matching body skeleton so the Overview doesn't pop in
+  // ahead of the navigation it sits next to.
+  if (showLoader) return <DashboardLoader />;
 
   const moduleItems: ModuleItem[] = [
     {
@@ -193,9 +200,12 @@ const Dashboard = ({ isGuest }: DashboardProps) => {
   );
 };
 
-const DashboardConnected = inject<TStore>(({ userStore }) => ({
-  isGuest: userStore.user?.isVisitor ?? false,
-}))(observer(Dashboard));
+const DashboardConnected = inject<TStore>(
+  ({ userStore, clientLoadingStore }) => ({
+    isGuest: userStore.user?.isVisitor ?? false,
+    showLoader: clientLoadingStore.showArticleLoader,
+  }),
+)(observer(Dashboard));
 
 export { DashboardConnected as Dashboard };
 

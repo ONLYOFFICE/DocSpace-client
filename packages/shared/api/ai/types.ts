@@ -97,6 +97,21 @@ export type TModel = {
 
 export type TModelList = TModel[];
 
+export type TProfile = {
+  id: string;
+  name: string;
+  providerType: ProviderType;
+  baseUrl: string;
+  modelId: string;
+  key?: string | null;
+  headers?: Record<string, string>;
+  reasoning?: boolean;
+  capabilities?: number;
+  createdAt?: number;
+};
+
+export type TProfilesList = TProfile[];
+
 export type TVectorizeOperation = {
   error: string;
   id: string;

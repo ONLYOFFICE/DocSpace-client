@@ -166,6 +166,18 @@ export const buildFolderUrl = (
   return `${path}?${params}`;
 };
 
+export const getSectionTrashTarget = (
+  pathname: string,
+): { path: string; folderType: FolderRootType } => {
+  if (pathname.startsWith("/forms"))
+    return { path: "/forms/trash/filter", folderType: FolderType.FormRoom };
+  if (pathname.startsWith("/ai-agents"))
+    return { path: "/ai-agents/trash/filter", folderType: FolderType.AIAgents };
+  if (pathname.startsWith("/rooms") && !pathname.startsWith("/rooms/personal"))
+    return { path: "/rooms/trash/filter", folderType: FolderType.Rooms };
+  return { path: getCategoryUrl(CategoryType.Trash), folderType: FolderType.USER };
+};
+
 /**
  * Map the current location to the active NavMenu item id (a folder id).
  *

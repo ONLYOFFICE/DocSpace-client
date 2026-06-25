@@ -142,7 +142,7 @@ test.describe("AI chat", () => {
       const goToSettingsBtn = emptyView.getByRole("button");
       await goToSettingsBtn.click();
 
-      await expect(page).toHaveURL("/portal-settings/ai-settings/providers");
+      await expect(page).toHaveURL("/portal-settings/ai-settings/models");
     });
 
     test("should render chat header with empty screen if ai not ready and there are chats (admin)", async ({
@@ -180,7 +180,7 @@ test.describe("AI chat", () => {
       const goToSettingsBtn = emptyView.getByRole("button");
       await goToSettingsBtn.click();
 
-      await expect(page).toHaveURL("/portal-settings/ai-settings/providers");
+      await expect(page).toHaveURL("/portal-settings/ai-settings/models");
     });
 
     test("should render chat with info block, disabled chat input and new chat button if ai not ready (admin)", async ({
@@ -775,7 +775,9 @@ test.describe("AI chat", () => {
 
       await removeItem.click();
 
-      const dialog = page.getByRole("dialog").filter({ hasNotText: "Synchronization with database" });
+      const dialog = page
+        .getByRole("dialog")
+        .filter({ has: page.getByTestId("delete-chat-confirm-button") });
       await expect(dialog).toBeVisible();
 
       const confirmButton = dialog.getByTestId("delete-chat-confirm-button");
@@ -835,7 +837,9 @@ test.describe("AI chat", () => {
 
       await renameItem.click();
 
-      const dialog = page.getByRole("dialog").filter({ hasNotText: "Synchronization with database" });
+      const dialog = page
+        .getByRole("dialog")
+        .filter({ has: page.getByTestId("confirm-button") });
       await expect(dialog).toBeVisible();
 
       const input = dialog.getByRole("textbox");
@@ -1209,7 +1213,9 @@ test.describe("AI chat", () => {
       await expect(sendButton).toHaveAttribute("aria-disabled", "false");
       await sendButton.click();
 
-      const dialog = page.getByRole("dialog").filter({ hasNotText: "Synchronization with database" });
+      const dialog = page
+        .getByRole("dialog")
+        .filter({ has: page.getByTestId("tool-call-header") });
       await expect(dialog).toBeVisible();
 
       const toolCallHeader = dialog.getByTestId("tool-call-header");

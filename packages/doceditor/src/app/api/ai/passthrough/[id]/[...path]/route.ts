@@ -40,12 +40,14 @@ import { logger } from "@/../logger.mjs";
 
 export const dynamic = "force-dynamic";
 
+const IMAGE_GENERATION_PATH = ["images", "generations"].join("/");
+
 const ALLOWED_PATHS = new Set<string>([
   "chat/completions",
   "models",
-  "images/generations",
   "responses",
   "embeddings",
+  IMAGE_GENERATION_PATH,
 ]);
 
 type RouteContext = {

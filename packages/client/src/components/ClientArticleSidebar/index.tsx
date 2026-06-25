@@ -42,7 +42,6 @@ import type { ValueOf } from "@docspace/shared/types";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 
 import CatalogOverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
-import CatalogFormsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 import AppsSidebar from "SRC_DIR/components/AppsSidebar";
 import { useAppPromo } from "SRC_DIR/components/dialogs/AppPromoDialog";
@@ -354,7 +353,7 @@ const ClientArticleSidebar = ({
       mainItems.push({
         id: "forms",
         label: t("Common:Forms"),
-        icon: CatalogFormsReactSvgUrl,
+        icon: getCatalogIconUrlByType(FolderType.FormRoom),
         onClick: withPromo(
           "ai-forms",
           go(`/forms/filter?${formsFilter.toUrlParams(userId, false)}`),

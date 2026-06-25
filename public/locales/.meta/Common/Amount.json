@@ -3,7 +3,7 @@
   "content": "Amount",
   "content_en_sha1_hash": "43dc8532f7e57be250d7397de3d14085d51516f0",
   "created_at": "2026-04-10T13:53:41.848Z",
-  "updated_at": "2026-05-27T14:11:50.774Z",
+  "updated_at": "2026-06-25T11:55:07.227Z",
   "comment": {
     "text": "This is a table header or input field label indicating a monetary value. It appears in billing sections, such as when topping up a balance or viewing transaction history.",
     "is_auto": true,
@@ -21,6 +21,12 @@
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TableView/TableHeader.tsx",
       "line_number": 100,
       "context": "enable: true,\n resizable: true,\n minWidth: 150,\n },\n {\n key: \"Amount\",\n title: t(\"Amount\"),\n enable: true,\n resizable: true,\n minWidth: 120,\n },",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/wallet/sub-components/UpcomingPayments/TableView/TableHeader.tsx",
+      "line_number": 78,
+      "context": "enable: true,\n resizable: true,\n minWidth: 140,\n },\n {\n key: \"Amount\",\n title: t(\"Amount\"),\n enable: true,\n resizable: true,\n minWidth: 120,\n },",
       "module": "/libs/ui-kit"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "<1>{{displayName}}</1> invites you to join the AI agent <1>{{agentName}}</1>.",
   "content_en_sha1_hash": "219914f391293ff45a679d1db1a94472c58701ce",
   "created_at": "2026-05-25T18:26:08.331Z",
-  "updated_at": "2026-05-25T18:32:09.613Z",
+  "updated_at": "2026-06-25T11:55:07.174Z",
   "comment": {
     "text": "A message in the greeting container shown when a user is invited to an AI agent room, where `{{displayName}}` is the inviter and `{{agentName}}` is the AI agent.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingCreateUserContainer/index.tsx",
       "line_number": 85,
-      "context": "if (roomData?.isAgent) {\n return (\n <Trans\n {...commonProps}\n i18nKey=\"InvitationToAgent\"\n defaults={DEFAULT_AGENT_TEXT}\n values={{\n displayName,\n agentName: roomData.title,\n aiAgent: t(\"Common:AIAgent\"),",
+      "context": "if (roomData?.isAgent) {\n return (\n <Trans\n {...commonProps}\n i18nKey=\"Common:InvitationToAgent\"\n defaults={DEFAULT_AGENT_TEXT}\n values={{\n displayName,\n agentName: roomData.title,\n aiAgent: t(\"Common:AIAgent\"),",
       "module": "/packages/login"
     }
   ],

@@ -1,0 +1,29 @@
+{
+  "key_path": "LastMonthWithHint",
+  "content": "Last month <1>({{month}})</1>",
+  "content_en_sha1_hash": "43a744fc9bb2e8abb59e8af182272920dba6ad9b",
+  "created_at": "2026-06-25T11:54:51.773Z",
+  "updated_at": "2026-06-25T12:07:38.776Z",
+  "comment": {
+    "text": "Selection item label in a period picker displaying the previous month with its name as a styled hint; the `<1>` tag wraps the `{{month}}` variable representing the name of the preceding month.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:07:38.776Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/usage/sub-components/PeriodSelect.tsx",
+      "line_number": 76,
+      "context": "/>\n );\n case \"lastMonth\":\n return (\n <CommonTrans\n i18nKey=\"LastMonthWithHint\"\n values={{ month: current.minus({ months: 1 }).toFormat(\"LLLL\") }}\n components={{ 1: hintSpan }}\n />\n );\n case \"thisYear\":",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

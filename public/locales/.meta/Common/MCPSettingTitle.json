@@ -3,7 +3,7 @@
   "content": "MCP servers",
   "content_en_sha1_hash": "8d9a304fd985232ade488e1913e41a3d9a502b09",
   "created_at": "2025-11-21T08:21:51.274Z",
-  "updated_at": "2026-05-15T14:00:06.654Z",
+  "updated_at": "2026-06-25T11:55:07.055Z",
   "comment": {
     "text": "This is a noun phrase used as a label for a setting or a section related to managing \"MCP servers.\" It appears in tooltips and as part of longer sentences in empty state messages.",
     "is_auto": true,
@@ -43,14 +43,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 145,
-      "context": "? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);\n \n const serversData = [\n {",
+      "line_number": 176,
+      "context": "? t(\"Common:ModelAssignment\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);\n \n const serversData = [\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 145,
-      "context": "? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);\n \n const serversData = [\n {",
+      "line_number": 176,
+      "context": "? t(\"Common:ModelAssignment\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);\n \n const serversData = [\n {",
       "module": "/packages/client"
     },
     {

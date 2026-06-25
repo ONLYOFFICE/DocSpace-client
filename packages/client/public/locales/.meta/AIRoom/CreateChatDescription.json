@@ -3,7 +3,7 @@
   "content": "Go to the {{aiChat}} tab to get started.",
   "content_en_sha1_hash": "ca9912b97d9fe6919f5e155bec852d385ffc9523",
   "created_at": "2025-12-23T10:30:51.130Z",
-  "updated_at": "2026-05-15T14:00:06.601Z",
+  "updated_at": "2026-06-25T11:55:07.013Z",
   "comment": {
     "text": "This is a description displayed in an empty state for a new AI chat. It instructs the user to navigate to the AI Chat tab to begin. `{{aiChat}}` is a variable representing the localized name of the AI Chat tab.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 592,
+      "line_number": 620,
       "context": "const path = getCategoryUrl(CategoryType.Chat, filesFilter.folder);\n \n window.DocSpace.navigate(`${path}?${filesFilter.toUrlParams()}`);\n },\n description: t(\"AIRoom:CreateChatDescription\", {\n aiChat: t(\"AIRoom:AIChat\"),\n }),\n disabled: !canUseChat,\n },\n ];",
       "module": "/packages/client"
     }

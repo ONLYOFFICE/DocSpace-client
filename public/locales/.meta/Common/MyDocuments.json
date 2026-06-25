@@ -3,7 +3,7 @@
   "content": "My documents",
   "content_en_sha1_hash": "143f7ba1fed6d88c5657c9a23c89975723c9f700",
   "created_at": "2025-09-02T08:31:42.199Z",
-  "updated_at": "2026-06-05T11:04:11.766Z",
+  "updated_at": "2026-06-25T11:55:07.006Z",
   "comment": {
     "text": "This is a label for the user's personal document storage. It appears in various contexts, such as a download report location or a section title within dialogs.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 597,
+      "line_number": 596,
       "context": "scale={isMobile}\n testId=\"download_report_button\"\n />\n <Text as=\"span\" className={styles.downloadReportDescription}>\n {t(\"ReportSaveLocation\", {\n sectionName: t(\"MyDocuments\"),\n })}\n </Text>\n </div>\n </>\n ) : null}",
       "module": "/libs/ui-kit"
     },
@@ -79,19 +79,19 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 308,
+      "line_number": 316,
       "context": "const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:MyDocuments\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 308,
+      "line_number": 316,
       "context": "const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:MyDocuments\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 308,
+      "line_number": 316,
       "context": "const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:MyDocuments\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
@@ -181,7 +181,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1878,
+      "line_number": 1880,
       "context": "},\n {\n id: \"header_option_empty-section\",\n key: \"empty-section\",\n label: t(\"Files:EmptySection\", {\n sectionName: t(\"Common:MyDocuments\"),\n }),\n onClick: this.onEmptyPersonalAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,\n },",
       "module": "/packages/client"
     },

@@ -3,7 +3,7 @@
   "content": "Every year",
   "content_en_sha1_hash": "cea537cd72239840db0466ba29562d222299f7ce",
   "created_at": "2025-05-19T21:30:45.196Z",
-  "updated_at": "2026-05-15T14:00:06.927Z",
+  "updated_at": "2026-06-25T11:55:07.180Z",
   "comment": {
     "text": "This is a short label indicating a yearly recurrence. It appears in a dropdown or selection list for scheduling recurring events.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/shared/components/cron/Cron.utils.ts",
       "line_number": 534,
-      "context": "};\n \n export const getLabel = (period: PeriodType, t: TFunction) => {\n switch (period) {\n case \"Year\":\n return t(\"EveryYear\");\n case \"Month\":\n return t(\"EveryMonth\");\n case \"Week\":\n return t(\"EveryWeek\");\n case \"Day\":",
+      "context": "};\n \n export const getLabel = (period: PeriodType, t: TFunction) => {\n switch (period) {\n case \"Year\":\n return t(\"Common:EveryYear\");\n case \"Month\":\n return t(\"Common:EveryMonth\");\n case \"Week\":\n return t(\"Common:EveryWeek\");\n case \"Day\":",
       "module": "/packages/shared"
     }
   ],

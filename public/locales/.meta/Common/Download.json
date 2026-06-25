@@ -3,7 +3,7 @@
   "content": "Download",
   "content_en_sha1_hash": "a479c9c34e878d07b4d67a73a48f432ad7dc53c8",
   "created_at": "2025-05-19T21:30:44.645Z",
-  "updated_at": "2026-06-05T11:04:11.820Z",
+  "updated_at": "2026-06-25T11:55:07.120Z",
   "comment": {
     "text": "This is a button label that allows users to download a file or a document version.",
     "is_auto": true,
@@ -25,19 +25,19 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1806,
+      "line_number": 1808,
       "context": "isSeparator: true,\n disabled: !item.security?.Download || this.settingsStore.isFrame,\n },\n {\n key: \"public-room_edit\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => {\n this.onClickDownload(item, t);\n },\n disabled: !item.security?.Download,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1806,
+      "line_number": 1808,
       "context": "isSeparator: true,\n disabled: !item.security?.Download || this.settingsStore.isFrame,\n },\n {\n key: \"public-room_edit\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => {\n this.onClickDownload(item, t);\n },\n disabled: !item.security?.Download,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1806,
+      "line_number": 1808,
       "context": "isSeparator: true,\n disabled: !item.security?.Download || this.settingsStore.isFrame,\n },\n {\n key: \"public-room_edit\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => {\n this.onClickDownload(item, t);\n },\n disabled: !item.security?.Download,",
       "module": "/packages/client"
     },

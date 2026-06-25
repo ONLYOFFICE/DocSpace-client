@@ -85,6 +85,7 @@ const ClientArticleSidebar = ({
     recentFolderId,
     favoritesFolderId,
     recycleBinFolderId,
+    aiAgentsFolderId,
   } = folderIds;
 
   // `onFolderNavigate` is re-created on every inject render; keep a stable ref
@@ -136,13 +137,21 @@ const ClientArticleSidebar = ({
   // Agent-scoped Recent/Favorites/Trash: same alias data, routed under
   // /ai-agents/* so the sidebar keeps the selection under AI Agents.
   const goFolderAgent = React.useCallback(
-    (folderId: number, rootFolderType: TTreeFolder["rootFolderType"]) => () => {
-      onFolderNavigateRef.current?.();
-      navigate(
-        buildFolderUrl(folderId, rootFolderType, userId, myFolderId, true),
-      );
-    },
-    [navigate, userId, myFolderId],
+    (folderId: number, rootFolderType: TTreeFolder["rootFolderType"]) =>
+      () => {
+        onFolderNavigateRef.current?.();
+        navigate(
+          buildFolderUrl(
+            folderId,
+            rootFolderType,
+            userId,
+            myFolderId,
+            true,
+            aiAgentsFolderId,
+          ),
+        );
+      },
+    [navigate, userId, myFolderId, aiAgentsFolderId],
   );
 
   // Rooms-scoped Recent/Favorites: the same special recent/favorites files
@@ -160,6 +169,11 @@ const ClientArticleSidebar = ({
         onFolderNavigateRef.current?.();
         const filter = FilesFilter.getDefault({ categoryType });
         if (folderId != null) filter.folder = String(folderId);
+        if (categoryType === CategoryType.Trash) {
+          filter.folderType = FolderType.Rooms;
+          navigate(`${basePath}/filter?${filter.toUrlParams()}`);
+          return;
+        }
         const parentSuffix =
           roomsFolderId != null ? `&parentId=${roomsFolderId}` : "";
         navigate(`${basePath}/filter?${filter.toUrlParams()}${parentSuffix}`);

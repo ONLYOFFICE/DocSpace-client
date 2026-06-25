@@ -42,10 +42,6 @@ import { withTranslation } from "react-i18next";
 import { isMobile, isTablet } from "@docspace/shared/utils";
 import { ROOMS_SECTION_TYPES } from "@docspace/shared/utils/rooms";
 import FilterInput from "@docspace/ui-kit/components/filter";
-import {
-  QuickActions,
-  CreateAgentIcon,
-} from "@docspace/ui-kit/components/quick-actions";
 import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import { withLayoutSize } from "@docspace/shared/HOC/withLayoutSize";
 import { getUser } from "@docspace/shared/api/people";
@@ -97,8 +93,6 @@ import { FilterLoader } from "@docspace/ui-kit/components/filter/skeletons";
 import renderFilterSelector from "@docspace/shared/utils/renderFilterSelector";
 
 import { useContactsFilter } from "./useContacts";
-
-import styles from "./Filter.module.scss";
 
 const SectionFilterContent = ({
   t,
@@ -1916,10 +1910,10 @@ const SectionFilterContent = ({
     navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
   };
 
-  // AI agents list — quick-action tile + primary "New agent" button in the
-  // filter bar. Mirrors the SDK RootFilter: both are shown only on the
-  // agents root, when AI is ready and the user can manage agents. Creation
-  // goes through the existing client AGENT_CREATE event.
+  // AI agents list — primary "New agent" button in the filter bar. Shown only
+  // on the agents root, when AI is ready and the user can manage agents.
+  // (The create-agent quick-action tile is rendered by the shared
+  // quick-actions banner — see useQuickActions / getQuickActionsSection.)
   // `aiReady` (portal /ai/config) can lag behind the chat-lib profiles, so
   // treat the presence of profiles as ready too — same signal the agents
   // EmptyView uses to decide whether to offer agent creation.
@@ -1929,10 +1923,10 @@ const SectionFilterContent = ({
   const showAgentsCreate =
     isAIAgentsFolder && (aiReady || hasAiProfiles) && canManageAgents;
 
-  // Local "create agent" action used by the AI Agents quick-action bar and its
-  // main button. Distinct from the `onCreateAgent` prop (from
-  // contextOptionsStore, consumed by getSectionCreateButton): this one
-  // dispatches an inline AGENT_CREATE event scoped to the current folder.
+  // Local "create agent" action used by the AI Agents filter main button.
+  // Distinct from the `onCreateAgent` prop (from contextOptionsStore, consumed
+  // by getSectionCreateButton): this one dispatches an inline AGENT_CREATE
+  // event scoped to the current folder.
   const onCreateAgentFromFilter = useCallback(() => {
     const event = new CustomEvent(Events.AGENT_CREATE, {
       detail: { parentId: currentFolderId, context: "filter" },
@@ -1947,18 +1941,6 @@ const SectionFilterContent = ({
       onAction: onCreateAgentFromFilter,
       text: t("Common:NewAgent"),
     }),
-    [t, onCreateAgentFromFilter],
-  );
-
-  const agentsQuickActionItems = React.useMemo(
-    () => [
-      {
-        id: "quick-new-agent",
-        icon: <CreateAgentIcon />,
-        label: t("Common:NewAgent"),
-        onClick: onCreateAgentFromFilter,
-      },
-    ],
     [t, onCreateAgentFromFilter],
   );
 
@@ -2020,18 +2002,6 @@ const SectionFilterContent = ({
       }
     />
   );
-
-  if (showAgentsCreate) {
-    return (
-      <>
-        <QuickActions
-          items={agentsQuickActionItems}
-          className={styles.quickActions}
-        />
-        {filterInput}
-      </>
-    );
-  }
 
   return filterInput;
 };

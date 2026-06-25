@@ -3,7 +3,7 @@
   "content": "Renaming encrypted files is not supported yet.",
   "content_en_sha1_hash": "32dcda9bfe5e9b56926afeb5852b9cda6768f4eb",
   "created_at": "2026-06-09T09:42:54.607Z",
-  "updated_at": "2026-06-15T19:31:56.241Z",
+  "updated_at": "2026-06-25T19:31:03.057Z",
   "comment": {
     "text": "An information toast message that appears when a user attempts to rename an encrypted file within a private room.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx",
-      "line_number": 410,
+      "line_number": 413,
       "context": ");\n \n const guardedRename = React.useCallback(\n (item: TFileItem | TFolderItem) => {\n if (isPrivate && !item.isFolder && (item as TFileItem).encrypted) {\n toastr.info(t(\"Common:PrivateRoomRenameNotSupported\"));\n return;\n }\n requestRename(item);\n },\n [requestRename, isPrivate, t],",
       "module": "/packages/sdk"
     }

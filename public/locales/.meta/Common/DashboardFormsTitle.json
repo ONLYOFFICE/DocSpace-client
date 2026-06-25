@@ -3,7 +3,7 @@
   "content": "Forms",
   "content_en_sha1_hash": "4bec9575721b2739ed1e7c56eb6c8471084fcbcf",
   "created_at": "2026-06-01T21:20:14.484Z",
-  "updated_at": "2026-06-15T19:31:55.957Z",
+  "updated_at": "2026-06-25T19:31:02.884Z",
   "comment": {
     "text": "Navigation menu label, app catalog item title, and page title for the Forms section.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "gemma4:26b"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
+      "line_number": 128,
+      "context": "openLabel: t(\"Common:Open\"),\n githubLabel: t(\"Common:ViewOnGithub\"),\n githubUrl: \"https://github.com/ONLYOFFICE/DocSpace\",\n },\n \"ai-forms\": {\n title: t(\"Common:DashboardFormsTitle\"),\n subtitle: t(\"Common:FormsPromoSubtitle\"),\n description: t(\"Common:FormsPromoDescription\"),\n features: [\n {\n Icon: AIPoweredIcon,",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
       "line_number": 313,
@@ -27,6 +33,12 @@
       "file_path": "/packages/client/src/pages/AiForms/index.tsx",
       "line_number": 74,
       "context": "roomId,\n ensureAppsLoaded,\n fetchAppSettings,\n }: AiFormsProps) => {\n const { t } = useTranslation([\"Common\"]);\n useDocumentTitle(\"Common:DashboardFormsTitle\");\n const [searchParams, setSearchParams] = useSearchParams();\n const [settingsChecked, setSettingsChecked] = React.useState(false);\n const [showSetupDialog, setShowSetupDialog] = React.useState(false);\n const lastSdkSectionRef = React.useRef<string | null>(null);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
+      "line_number": 135,
+      "context": "href: \"/rooms/shared/filter\",\n },\n {\n id: \"ai-forms\",\n icon: <CatalogDocumentsIcon />,\n title: t(\"Common:DashboardFormsTitle\"),\n description: t(\"Common:DashboardFormsDescription\"),\n installed: true,\n href: \"/forms/filter\",\n },\n {",
       "module": "/packages/client"
     },
     {

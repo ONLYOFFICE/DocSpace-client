@@ -3,7 +3,7 @@
   "content": "Type",
   "content_en_sha1_hash": "3deb7456519697ecf4eefc455516c969a3681bae",
   "created_at": "2025-05-19T21:30:49.370Z",
-  "updated_at": "2026-06-15T19:31:56.041Z",
+  "updated_at": "2026-06-25T19:31:02.950Z",
   "comment": {
     "text": "This is a table column header or a filter option label. It refers to the kind or category of an item, such as a transaction or a file.",
     "is_auto": true,
@@ -91,20 +91,20 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1115,
-      "context": "const typeOptions = isRooms\n ? [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: isLastTypeOptionsRooms,\n },\n ...RoomsTypeValues.map((roomType) => {\n switch (roomType) {",
+      "line_number": 1153,
+      "context": "const typeOptions = isRooms\n ? [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: isLastTypeOptionsRooms,\n },\n ...roomTypeValues.map((roomType) => {\n switch (roomType) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1115,
-      "context": "const typeOptions = isRooms\n ? [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: isLastTypeOptionsRooms,\n },\n ...RoomsTypeValues.map((roomType) => {\n switch (roomType) {",
+      "line_number": 1153,
+      "context": "const typeOptions = isRooms\n ? [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: isLastTypeOptionsRooms,\n },\n ...roomTypeValues.map((roomType) => {\n switch (roomType) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1115,
-      "context": "const typeOptions = isRooms\n ? [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: isLastTypeOptionsRooms,\n },\n ...RoomsTypeValues.map((roomType) => {\n switch (roomType) {",
+      "line_number": 1153,
+      "context": "const typeOptions = isRooms\n ? [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: isLastTypeOptionsRooms,\n },\n ...roomTypeValues.map((roomType) => {\n switch (roomType) {",
       "module": "/packages/client"
     },
     {

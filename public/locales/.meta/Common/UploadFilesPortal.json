@@ -3,7 +3,7 @@
   "content": "Upload files from  {{sectionNameFirst}} or {{sectionNameSecond}}",
   "content_en_sha1_hash": "999378b1fec3d96479479987437a554a9464d2ac",
   "created_at": "2025-10-27T16:14:31.672Z",
-  "updated_at": "2026-06-03T11:46:06.799Z",
+  "updated_at": "2026-06-25T19:31:02.864Z",
   "comment": {
     "text": "This is a descriptive text displayed in an empty container, prompting the user to upload files. It appears when a folder or section is empty, offering two sources for file uploads, represented by `{{sectionNameFirst}}` and `{{sectionNameSecond}}`.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 561,
-      "context": "if (isKnowledgeTab) {\n const uploadFilesFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"Common:UploadFilesPortal\", {\n sectionNameFirst: t(\"Common:MyDocuments\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n \"\",\n true,",
+      "line_number": 606,
+      "context": "if (isKnowledgeTab) {\n const uploadFilesFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"Common:UploadFilesPortal\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n \"\",\n true,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/index.tsx",
       "line_number": 117,
-      "context": "key: \"knowledge-empty-upload-from-docspace\",\n title: t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n defaultValue: \"Upload from {{productName}}\",\n }),\n description: t(\"Common:UploadFilesPortal\", {\n sectionNameFirst: t(\"Common:MyDocuments\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n defaultValue:\n \"Pick files from {{sectionNameFirst}} or {{sectionNameSecond}}.\",\n }),",
+      "context": "key: \"knowledge-empty-upload-from-docspace\",\n title: t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n defaultValue: \"Upload from {{productName}}\",\n }),\n description: t(\"Common:UploadFilesPortal\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n defaultValue:\n \"Pick files from {{sectionNameFirst}} or {{sectionNameSecond}}.\",\n }),",
       "module": "/packages/sdk"
     }
   ],

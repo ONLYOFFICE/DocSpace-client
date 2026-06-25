@@ -3,7 +3,7 @@
   "content": "Guests cannot be assigned as Content creator.\nOnly Room admins, {{productName}} admins and Users are eligible for this role.",
   "content_en_sha1_hash": "bacaf2f76e9af70543835bf7fba7c43feaf4363e",
   "created_at": "2025-11-20T14:21:54.083Z",
-  "updated_at": "2026-06-15T19:31:56.022Z",
+  "updated_at": "2026-06-25T19:31:02.939Z",
   "comment": {
     "text": "This is a tooltip or warning message that appears when attempting to assign a guest user the \"Content creator\" role. It explains that guests cannot be assigned this role and lists the eligible user types. The `{{productName}}` variable will be replaced with the product's brand name.",
     "is_auto": true,
@@ -32,7 +32,7 @@
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/utils/index.ts",
       "line_number": 121,
-      "context": "item.warning =\n item.access === ShareAccessRights.RoomManager\n ? t(\"UserAgentMaxAvailableRoleWarning\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"GuestAgentMaxAvailableRoleWarning\", {\n productName: getBrandName(\"ProductName\"),\n });\n item.access = (viewerRole as { access: number }).access;\n \n return item;",
+      "context": "item.warning =\n item.access === ShareAccessRights.RoomManager\n ? t(\"Common:UserAgentMaxAvailableRoleWarning\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"Common:GuestAgentMaxAvailableRoleWarning\", {\n productName: getBrandName(\"ProductName\"),\n });\n item.access = (viewerRole as { access: number }).access;\n \n return item;",
       "module": "/packages/sdk"
     },
     {

@@ -3,7 +3,7 @@
   "content": "Unsupported file type: {{files}}",
   "content_en_sha1_hash": "51562347309df26f484820d14c47196bc45cabe2",
   "created_at": "2026-06-03T11:45:59.394Z",
-  "updated_at": "2026-06-09T18:54:46.094Z",
+  "updated_at": "2026-06-25T19:31:03.060Z",
   "comment": {
     "text": "Error toast message appearing when files are skipped due to incompatible formats. The {{files}} variable contains a comma-separated list of the skipped file names.",
     "is_auto": true,
@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/packages/sdk/src/app/(personal-files)/_components/ai-agent-providers/index.tsx",
-      "line_number": 287,
+      "file_path": "/libs/ui-kit/ai-agent/providers/files/device-uploader.tsx",
+      "line_number": 129,
       "context": "),\n );\n \n if (skipped.length > 0) {\n toastr.error(\n t(\"Common:UnsupportedFileType\", {\n files: skipped.join(\", \"),\n defaultValue: \"Unsupported file type: {{files}}\",\n }),\n );\n }",
-      "module": "/packages/sdk"
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {

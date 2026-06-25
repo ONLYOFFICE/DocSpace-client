@@ -3,7 +3,7 @@
   "content": "If you block this server, it will no longer be available to users, but its settings will remain intact. \nUnblocking it later may require users to reauthorize, depending on the provider's requirements.",
   "content_en_sha1_hash": "785067b622f7ecd29c2c98692bcd6fc214f3d25f",
   "created_at": "2025-10-27T16:14:31.651Z",
-  "updated_at": "2026-05-24T17:27:49.143Z",
+  "updated_at": "2026-06-25T19:31:03.050Z",
   "comment": {
     "text": "This is the body text of a confirmation dialog that appears when an administrator chooses to disable an AI server. It explains the consequences of disabling the server.",
     "is_auto": true,
@@ -11,12 +11,6 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/disable/index.tsx",
-      "line_number": 87,
-      "context": "<ModalDialog.Header>\n {t(\"Common:DisableMCPServer\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n <Trans t={t} i18nKey=\"DisableServerDescription\" ns=\"Common\" />\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/dialogs/disable/index.tsx",
       "line_number": 74,

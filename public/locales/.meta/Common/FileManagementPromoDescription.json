@@ -1,0 +1,29 @@
+{
+  "key_path": "FileManagementPromoDescription",
+  "content": "Keep documents structured with folders, versions, and metadata in one place.",
+  "content_en_sha1_hash": "18a6536447792743cc6d641af67008b6a56037d2",
+  "created_at": "2026-06-25T19:30:57.104Z",
+  "updated_at": "2026-06-25T19:40:11.496Z",
+  "comment": {
+    "text": "Description text within a promotional dialog explaining the features and benefits of the file management system.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T19:40:11.496Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
+      "line_number": 71,
+      "context": "description: t(\"Common:FilesPromoDescription\"),\n features: [\n {\n Icon: FilesManagementIcon,\n title: t(\"Common:FileManagementPromoTitle\"),\n description: t(\"Common:FileManagementPromoDescription\"),\n },\n {\n Icon: FilesSearchIcon,\n title: t(\"Common:FilesQuickSearchTitle\"),\n description: t(\"Common:FilesQuickSearchDescription\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

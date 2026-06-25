@@ -90,9 +90,11 @@ export const buildFolderUrl = (
   const fileParams = (
     categoryType: (typeof CategoryType)[keyof typeof CategoryType],
     filterKey: string,
+    folderType?: FolderType,
   ) => {
     const filter = FilesFilter.getDefault({ categoryType });
     filter.folder = String(folderId);
+    if (folderType != null) filter.folderType = folderType;
     if (userId) {
       const stored = getUserFilter(`${filterKey}=${userId}`);
       if (stored?.sortBy) filter.sortBy = stored.sortBy;
@@ -142,7 +144,9 @@ export const buildFolderUrl = (
       path = agentScoped
         ? "/ai-agents/trash/filter"
         : getCategoryUrl(CategoryType.Trash);
-      params = fileParams(CategoryType.Trash, FILTER_TRASH) + parentSuffix;
+      params = agentScoped
+        ? fileParams(CategoryType.Trash, FILTER_TRASH)
+        : fileParams(CategoryType.Trash, FILTER_TRASH, FolderType.USER);
       break;
     case FolderType.Archive:
       path = getCategoryUrl(CategoryType.Archive);

@@ -135,6 +135,11 @@ const ClientArticleSidebar = ({
         onFolderNavigateRef.current?.();
         const filter = FilesFilter.getDefault({ categoryType });
         if (folderId != null) filter.folder = String(folderId);
+        if (categoryType === CategoryType.Trash) {
+          filter.folderType = FolderType.Rooms;
+          navigate(`${basePath}/filter?${filter.toUrlParams()}`);
+          return;
+        }
         const parentSuffix =
           roomsFolderId != null ? `&parentId=${roomsFolderId}` : "";
         navigate(`${basePath}/filter?${filter.toUrlParams()}${parentSuffix}`);

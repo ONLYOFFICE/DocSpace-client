@@ -42,6 +42,8 @@ import CatalogDocumentsIcon from "@docspace/ui-kit/assets/icons/16/catalog.docum
 import AiAgentsIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
 
 import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
+import { useAppPromo } from "SRC_DIR/components/dialogs/AppPromoDialog";
+import type { AppId } from "SRC_DIR/helpers/apps-catalog";
 
 import { ModuleCard, type ModuleItem } from "./sub-components/ModuleCard";
 import { ProfileCard } from "./sub-components/ProfileCard";
@@ -74,6 +76,14 @@ const Dashboard = ({ isGuest, showLoader }: DashboardProps) => {
     openFiles,
   );
   const createItems = useCreateActions(myFolderId);
+
+  // First-run "introduce this app" promo. The clicked card's href is stashed in
+  // a ref so the promo's confirm callback can navigate to it after the user
+  // sees the promo. Apps without promo content fall straight through to navigate.
+  const promoHrefRef = React.useRef<string | undefined>(undefined);
+  const { maybeShowPromo, promoDialog } = useAppPromo(() => {
+    if (promoHrefRef.current) navigate(promoHrefRef.current);
+  });
 
   // The dashboard renders its own content (no SDK iframe). Tell the
   // persistent host to drop the previous app's frame so it doesn't linger
@@ -175,7 +185,13 @@ const Dashboard = ({ isGuest, showLoader }: DashboardProps) => {
                 <ModuleCard
                   key={mod.id}
                   mod={mod}
-                  onClick={() => mod.href && navigate(mod.href)}
+                  onClick={() => {
+                    promoHrefRef.current = mod.href;
+                    // Show the app's promo on first open; it navigates on
+                    // confirm. Already-seen / no-promo apps navigate directly.
+                    if (maybeShowPromo(mod.id as AppId)) return;
+                    if (mod.href) navigate(mod.href);
+                  }}
                 />
               ))}
             </div>
@@ -196,6 +212,8 @@ const Dashboard = ({ isGuest, showLoader }: DashboardProps) => {
           clearUploadedFilesHistory={clearProgress}
         />
       ) : null}
+
+      {promoDialog}
     </div>
   );
 };

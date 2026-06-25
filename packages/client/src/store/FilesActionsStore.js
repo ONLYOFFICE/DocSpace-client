@@ -2348,10 +2348,19 @@ class FilesActionStore {
         ? item.parentType
         : (rootFolderTypeItem ?? rootFolderType);
 
-      url = getCategoryUrl(
-        getCategoryTypeByFolderType(destinationFolderType, parentId),
+      let categoryType = getCategoryTypeByFolderType(
+        destinationFolderType,
         parentId,
       );
+
+      if (
+        window.DocSpace.location.pathname.startsWith("/forms") &&
+        categoryType === CategoryType.SharedRoom
+      ) {
+        categoryType = CategoryType.Form;
+      }
+
+      url = getCategoryUrl(categoryType, parentId);
     }
 
     setIsLoading(

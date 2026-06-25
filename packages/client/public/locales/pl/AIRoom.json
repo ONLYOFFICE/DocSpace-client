@@ -3,6 +3,8 @@
   "AIAgentAccessRedirectNote": "Zostaniesz automatycznie przekierowany do sekcji {{sectionName}} za 5 sekund.",
   "AIChat": "AI-Chat",
   "AIInstructions": "Instrukcje AI",
+  "AIModelDescription": "Wybierz model AI, który ma być używany w czatach tego pokoju. To ustawienie jest obowiązkowe i dotyczy wszystkich uczestników.",
+  "AIModelTitle": "Model AI",
   "AIProviderAndModel": "{{aiProvider}} i model",
   "CreateChat": "Utwórz czat",
   "CreateChatDescription": "Przejdź do zakładki {{aiChat}}, aby rozpocząć.",

@@ -3,6 +3,8 @@
   "AIAgentAccessRedirectNote": "Դուք կվերահուշվեք {{sectionName}} բաժնում 5 վայրկյանում։",
   "AIChat": "ԱԲ-Չատ",
   "AIInstructions": "ԱԲ հրահանգներ",
+  "AIModelDescription": "Ընտրեք ԱԲ մոդելը, որն օգտագործվելու է այս սենյակի չատերում: Այս կարգավորումը պարտադիր է և վերաբերում է բոլոր մասնակիցներին:",
+  "AIModelTitle": "ԱԲ մոդել",
   "AIProviderAndModel": "{{aiProvider}} և մոդել",
   "CreateChat": "Ստեղծել չատ",
   "CreateChatDescription": "«{{aiChat}}» ներդիրը ստանալու համար։",

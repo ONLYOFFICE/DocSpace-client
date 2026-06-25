@@ -11,6 +11,8 @@
   "CapabilityVision": "ການເບິ່ງເຫັນ",
   "ConnectProductToYourDataAndTools": "ເຊື່ອມຕໍ່ {{productName}} ກັບຂໍ້ມູນ ແລະ ເຄື່ອງມືຂອງທ່ານ.",
   "CustomMCPListTitle": "ກຳນົດເອງ",
+  "DefaultAISetupDescription": "ເລືອກວ່າຮູບແບບໃດຈະຖືກໃຊ້ເປັນຄ່າເລີ່ມຕົ້ນໃນການສົນທະນາ ແລະ ຕົວແທນ.",
+  "DefaultAISetupTitle": "ການຕັ້ງຄ່າ AI ເລີ່ມຕົ້ນ",
   "DefaultProviderDescription": "ເລືອກ {{aiProvider}} ແລະ ຮູບແບບເລີ່ມຕົ້ນສຳລັບທຸກຄຸນສົມບັດໃນ {{productName}} ({{aiAgents}}, ເດັດແຈງເອກະສານ, ແລະ ອື່ນໆ)",
   "DefaultProviderSetSuccess": "ຕັ້ງຄ່າຜູ້ໃຫ້ບໍລິການເລີ່ມຕົ້ນສຳເລັດແລ້ວ",
   "DefaultProviderTitle": "ຜູ້ໃຫ້ບໍລິການເລີ່ມຕົ້ນ",

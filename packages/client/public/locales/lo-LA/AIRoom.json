@@ -3,6 +3,8 @@
   "AIAgentAccessRedirectNote": "ທ່ານຈະຖືກປ່ຽນເສັ້ນທາງໄປຫາພາກສ່ວນ {{sectionName}} ໂດຍອັດຕະໂນມັດພາຍໃນ 5 ວິນາທີ.",
   "AIChat": "AI-Chat",
   "AIInstructions": "ຄຳແນະນຳກ່ຽວກັບ AI",
+  "AIModelDescription": "ເລືອກຮູບແບບ AI ທີ່ຈະໃຊ້ໃນການສົນທະນາຂອງຫ້ອງນີ້. ການຕັ້ງຄ່ານີ້ແມ່ນສິ່ງຈຳເປັນ ແລະ ນຳໃຊ້ກັບຜູ້ເຂົ້າຮ່ວມທຸກຄົນ.",
+  "AIModelTitle": "ຮູບແບບ AI",
   "AIProviderAndModel": "{{aiProvider}} ແລະ model",
   "CreateChat": "ສ້າງການສົນທະນາ",
   "CreateChatDescription": "ໄປທີ່ແຖບ {{aiChat}} ເພື່ອເລີ່ມຕົ້ນ.",

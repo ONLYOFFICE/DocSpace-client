@@ -11,6 +11,8 @@
   "CapabilityVision": "Redzespēja",
   "ConnectProductToYourDataAndTools": "Pievienojiet {{productName}} pie jūsu datu un instrumentu.",
   "CustomMCPListTitle": "Pielāgoti",
+  "DefaultAISetupDescription": "Izvēlieties, kurš modelis pēc noklusējuma tiks izmantots tērzēšanās un aģentos.",
+  "DefaultAISetupTitle": "Noklusējuma MI iestatīšana",
   "DefaultProviderDescription": "Izvēlēties default {{aiProvider}} un modeli visām funkcijām visā {{productName}} ({{aiAgents}}, dokumentu redaktori utt.)",
   "DefaultProviderSetSuccess": "Noklusējuma pakalpojumu sniedzējs veiksmīgi iestatīts",
   "DefaultProviderTitle": "Noklusējuma nodrošinātājs",

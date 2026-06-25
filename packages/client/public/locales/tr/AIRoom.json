@@ -3,6 +3,8 @@
   "AIAgentAccessRedirectNote": "5 saniye içinde {{sectionName}} bölümüne otomatik olarak yönlendirileceksiniz.",
   "AIChat": "Yapay Zeka Sohbeti",
   "AIInstructions": "AI Talimatları",
+  "AIModelDescription": "Bu odadaki sohbetlerde kullanılacak AI modelini seçin. Bu ayar zorunludur ve tüm katılımcılar için geçerlidir.",
+  "AIModelTitle": "AI modeli",
   "AIProviderAndModel": "{{aiProvider}} ve model",
   "CreateChat": "Sohbet oluştur",
   "CreateChatDescription": "Başlamak için {{aiChat}} sekmesine gidin.",

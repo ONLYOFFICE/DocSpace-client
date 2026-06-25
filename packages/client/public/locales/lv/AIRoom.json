@@ -3,6 +3,8 @@
   "AIAgentAccessRedirectNote": "Jūs tiksiet automātiski novirzīts uz {{sectionName}} sadaļu 5 sekundēs.",
   "AIChat": "MI-Čats",
   "AIInstructions": "MI instrukcijas",
+  "AIModelDescription": "Atlasiet MI modeli, kas tiks izmantots šīs telpas tērzēšanās. Šis iestatījums ir obligāts un attiecas uz visiem dalībniekiem.",
+  "AIModelTitle": "MI modelis",
   "AIProviderAndModel": "{{aiProvider}} un modelis",
   "CreateChat": "Izveidot tērzēšanu",
   "CreateChatDescription": "Atraugot uz {{aiChat}} lapu, lai sāktu.",

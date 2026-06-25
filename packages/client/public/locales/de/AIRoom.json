@@ -3,6 +3,8 @@
   "AIAgentAccessRedirectNote": "Sie werden in 5 Sekunden automatisch zum Abschnitt {{sectionName}} weitergeleitet.",
   "AIChat": "KI-Chat",
   "AIInstructions": "KI-Anweisungen",
+  "AIModelDescription": "Wählen Sie das KI-Modell aus, das in den Chats dieses Raumes verwendet werden soll. Diese Einstellung ist zwingend erforderlich und gilt für alle Teilnehmer.",
+  "AIModelTitle": "KI-Modell",
   "AIProviderAndModel": "{{aiProvider}} und Modell",
   "CreateChat": "Chat erstellen",
   "CreateChatDescription": "Gehen Sie zur Registerkarte {{aiChat}}, um zu beginnen.",

@@ -11,6 +11,8 @@
   "CapabilityVision": "Όραση",
   "ConnectProductToYourDataAndTools": "Συνδέστε το {{productName}} στα δεδομένα και τα εργαλεία σας.",
   "CustomMCPListTitle": "Προσαρμοσμένες",
+  "DefaultAISetupDescription": "Επιλέξτε ποιο μοντέλο θα χρησιμοποιείται από προεπιλογή στις συνομιλίες και τους πράκτορες.",
+  "DefaultAISetupTitle": "Προεπιλεγμένη ρύθμιση AI",
   "DefaultProviderDescription": "Επιλέξτε τον προεπιλεγμένο {{aiProvider}} και το μοντέλο για όλες τις λειτουργίες σε όλο το {{productName}} ({{aiAgents}}, επεξεργαστές εγγράφων, κ.λπ.).",
   "DefaultProviderSetSuccess": "Ο προεπιλεγμένος πάροχος ορίστηκε επιτυχώς",
   "DefaultProviderTitle": "Προεπιλεγμένος πάροχος",

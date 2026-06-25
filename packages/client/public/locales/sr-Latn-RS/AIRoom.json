@@ -3,6 +3,8 @@
   "AIAgentAccessRedirectNote": "Automatski ćete biti vraćeni na {{sectionName}} odeljak za 5 sekundi.",
   "AIChat": "AI razgovor",
   "AIInstructions": "AI instrukcije",
+  "AIModelDescription": "Izaberite AI model koji će se koristiti u ćaskanjima ove sobe. Ovo podešavanje je obavezno i primenjuje se na sve učesnike.",
+  "AIModelTitle": "AI model",
   "AIProviderAndModel": "{{aiProvider}} i model",
   "CreateChat": "Kreirajte ćaskanje",
   "CreateChatDescription": "Idite na karticu {{aiChat}} da započnete.",

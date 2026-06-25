@@ -11,6 +11,8 @@
   "CapabilityVision": "Vízia",
   "ConnectProductToYourDataAndTools": "Pripojte {{productName}} k svojim dátam a nástrojom.",
   "CustomMCPListTitle": "Vlastné",
+  "DefaultAISetupDescription": "Vyberte, ktorý model sa bude predvolene používať v chatoch a agentoch.",
+  "DefaultAISetupTitle": "Predvolené nastavenie AI",
   "DefaultProviderDescription": "Vyberte predvolený {{aiProvider}} a model pre všetky funkcie v {{productName}} ({{aiAgents}}, editori dokumentov atď.).",
   "DefaultProviderSetSuccess": "Predvolený poskytovateľ bol úspešne nastavený.",
   "DefaultProviderTitle": "Predvolený poskytovateľ",

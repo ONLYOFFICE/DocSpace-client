@@ -3,6 +3,8 @@
   "AIAgentAccessRedirectNote": "5 saniyədən sonra siz {{sectionName}} bölməsinə avtomatik olaraq yönləndiriləcəksiniz.",
   "AIChat": "Süni İntellekt-Çat",
   "AIInstructions": "Süni İntellekt Təlimatları",
+  "AIModelDescription": "Bu otağın söhbətlərində istifadə ediləcək AI modelini seçin. Bu ayar məcburidir və bütün iştirakçılar üçün tətbiq edilir.",
+  "AIModelTitle": "AI modeli",
   "AIProviderAndModel": "{{aiProvider}} və model",
   "CreateChat": "Söhbət yarat",
   "CreateChatDescription": "Başlamaq üçün {{aiChat}} tabına keçin.",

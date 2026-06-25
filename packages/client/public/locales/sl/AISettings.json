@@ -11,6 +11,8 @@
   "CapabilityVision": "Vizija",
   "ConnectProductToYourDataAndTools": "Povežite {{productName}} z vašimi podatki in orodji.",
   "CustomMCPListTitle": "Prilagojene",
+  "DefaultAISetupDescription": "Izberite, kateri model se bo privzeto uporabljal v klepetih in agentih.",
+  "DefaultAISetupTitle": "Privzeta nastavitev umetne inteligence",
   "DefaultProviderDescription": "Izberite podnapetost {{aiProvider}} in model za vse funkcije v celoti {{productName}} ({{aiAgents}}, uredniki dokumentov itd.).",
   "DefaultProviderSetSuccess": "Privzeti ponudnik uspešno nastavljen",
   "DefaultProviderTitle": "Privzeti ponudnik",

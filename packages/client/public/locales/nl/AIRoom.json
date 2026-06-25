@@ -3,6 +3,8 @@
   "AIAgentAccessRedirectNote": "U wordt automatisch doorgestuurd naar de {{sectionName}} sectie in 5 seconden.",
   "AIChat": "AI-Chat",
   "AIInstructions": "AI Instructies",
+  "AIModelDescription": "Selecteer het AI-model dat in de chats van deze ruimte gebruikt moet worden. Deze instelling is verplicht en geldt voor alle deelnemers.",
+  "AIModelTitle": "AI-model",
   "AIProviderAndModel": "{{aiProvider}} en model",
   "CreateChat": "Maak chat",
   "CreateChatDescription": "Ga naar de {{aiChat}} tab om te beginnen.",

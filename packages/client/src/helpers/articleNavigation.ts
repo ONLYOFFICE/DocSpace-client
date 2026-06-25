@@ -83,9 +83,10 @@ export const buildFolderUrl = (
   userId?: string,
   myFolderId?: number | null,
   // When true, the Recent/Favorites/Trash sections are routed under
-  // /ai-agents/* (agent-scoped) instead of their global file paths, so the
-  // sidebar keeps them selected under AI Agents. Same data, different prefix.
+  // /ai-agents/* (agent-scoped) instead of their global file paths, scoped to
+  // AI Agents content via agentsFolderId (Recent/Favorites) or folderType (Trash).
   agentScoped = false,
+  agentsFolderId?: number | null,
 ): string => {
   const fileParams = (
     categoryType: (typeof CategoryType)[keyof typeof CategoryType],
@@ -111,10 +112,9 @@ export const buildFolderUrl = (
     return filter.toUrlParams(userId, false);
   };
 
-  // Agent-scoped sections aren't nested under My Documents, so they carry no
-  // parentId; the global sections keep it for back-navigation scoping.
+  const scopeFolderId = agentScoped ? agentsFolderId : myFolderId;
   const parentSuffix =
-    !agentScoped && myFolderId != null ? `&parentId=${myFolderId}` : "";
+    scopeFolderId != null ? `&parentId=${scopeFolderId}` : "";
 
   let path = "";
   let params = "";
@@ -145,7 +145,7 @@ export const buildFolderUrl = (
         ? "/ai-agents/trash/filter"
         : getCategoryUrl(CategoryType.Trash);
       params = agentScoped
-        ? fileParams(CategoryType.Trash, FILTER_TRASH)
+        ? fileParams(CategoryType.Trash, FILTER_TRASH, FolderType.AIAgents)
         : fileParams(CategoryType.Trash, FILTER_TRASH, FolderType.USER);
       break;
     case FolderType.Archive:

@@ -83,6 +83,7 @@ const ClientArticleSidebar = ({
     recentFolderId,
     favoritesFolderId,
     recycleBinFolderId,
+    aiAgentsFolderId,
   } = folderIds;
 
   // `onFolderNavigate` is re-created on every inject render; keep a stable ref
@@ -114,10 +115,17 @@ const ClientArticleSidebar = ({
       () => {
         onFolderNavigateRef.current?.();
         navigate(
-          buildFolderUrl(folderId, rootFolderType, userId, myFolderId, true),
+          buildFolderUrl(
+            folderId,
+            rootFolderType,
+            userId,
+            myFolderId,
+            true,
+            aiAgentsFolderId,
+          ),
         );
       },
-    [navigate, userId, myFolderId],
+    [navigate, userId, myFolderId, aiAgentsFolderId],
   );
 
   // Rooms-scoped Recent/Favorites: the same special recent/favorites files

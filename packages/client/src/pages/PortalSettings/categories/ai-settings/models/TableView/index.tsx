@@ -39,9 +39,15 @@ import { useTranslation } from "react-i18next";
 
 import { TableBody, TableContainer } from "@docspace/ui-kit/components/table";
 import { Text } from "@docspace/ui-kit/components/text";
+import { EmptyView } from "@docspace/shared/components/empty-view";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import type ServicesStore from "SRC_DIR/store/ServicesStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
+
+import EmptyScreenServerErrorLightSvg from "PUBLIC_DIR/images/emptyview/empty.server.error.light.svg";
+import EmptyScreenServerErrorDarkSvg from "PUBLIC_DIR/images/emptyview/empty.server.error.dark.svg";
+import ReloadArrowsSvg from "PUBLIC_DIR/images/icons/10/reload.arrows.svg";
 
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
@@ -74,6 +80,7 @@ const TableView = (props: ModelSettingsTableViewProps) => {
   } = props;
 
   const { t } = useTranslation(["Common"]);
+  const { isBase } = useTheme();
 
   const models = aiToolsPrices?.chat ?? [];
 
@@ -84,6 +91,34 @@ const TableView = (props: ModelSettingsTableViewProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
+
+  if (models.length === 0) {
+    const icon = isBase ? (
+      <EmptyScreenServerErrorLightSvg />
+    ) : (
+      <EmptyScreenServerErrorDarkSvg />
+    );
+
+    const options = [
+      {
+        to: "",
+        key: "reload",
+        title: t("Common:ReloadPage"),
+        description: t("Common:ReloadPage"),
+        icon: <ReloadArrowsSvg />,
+        onClick: () => window.location.reload(),
+      },
+    ];
+
+    return (
+      <EmptyView
+        icon={icon}
+        title={t("Common:SomethingWentWrong")}
+        description={t("Common:ServerErrorEmptyDescription")}
+        options={options}
+      />
+    );
+  }
 
   return (
     <div className={styles.tableWrapper}>

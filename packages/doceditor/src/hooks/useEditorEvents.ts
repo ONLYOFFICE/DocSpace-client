@@ -130,6 +130,7 @@ const useEditorEvents = ({
   const [usersInRoom, setUsersInRoom] = React.useState<TSharedUsers[]>([]);
   const [docTitle, setDocTitle] = React.useState("");
   const [docSaved, setDocSaved] = React.useState(false);
+  const aiInitedRef = React.useRef(false);
 
   const onSDKRequestReferenceData = React.useCallback(
     async (event: object) => {
@@ -275,195 +276,187 @@ const useEditorEvents = ({
 
     if (config?.errorMessage) docEditor?.showMessage?.(config.errorMessage);
 
-    const connector = docEditor?.createConnector?.();
-    let aiAvailable = false;
-    const modelProfileMap = new Map<string, string>();
+    if (!aiInitedRef.current) {
+      const connector = docEditor?.createConnector?.();
 
-    if (connector && successAuth) {
-      try {
-        let editorOrigin = "";
-        try {
-          editorOrigin = config?.editorUrl
-            ? new URL(config.editorUrl).origin
-            : "";
-        } catch {
-          editorOrigin = "";
-        }
-        const sameOrigin =
-          typeof window !== "undefined" &&
-          editorOrigin !== "" &&
-          editorOrigin === window.location.origin;
+      if (connector) {
+        aiInitedRef.current = true;
 
-        const sendTools = (data?: unknown) => {
-          window.parent?.postMessage({ type: "initedAiPlugin", data }, "*");
-        };
+        let aiAvailable = false;
+        const modelProfileMap = new Map<string, string>();
 
-        const probeTools = () => {
-          connector.executeMethod("AI", [{ type: "Tools" }], (data) => {
-            if (
-              data &&
+        if (successAuth) {
+          try {
+            const hasError = (data: unknown) =>
+              !!data &&
               typeof data === "object" &&
               "error" in data &&
-              data.error
-            ) {
-              connector.attachEvent("ai_onInit", sendTools);
-            } else {
-              window.parent?.postMessage({ type: "initedAiPlugin", data }, "*");
-            }
-          });
-        };
+              !!data.error;
 
-        const fireGenerationToolCall = () => {
-          if (!generationToolCallState) return;
-          connector.sendEvent("ai_onCallTool", {
-            name: generationToolCallState.toolName,
-            arguments: { ...generationToolCallState.parameters },
-          });
-          const url = new URL(window.location.href);
-          url.searchParams.delete("withTool");
-          window.history.replaceState(null, "", url.toString());
-        };
-
-        const runWhenActionsReady = (sendInit: () => void) => {
-          connector.executeMethod("AI", [{ type: "Actions" }], (data) => {
-            if (
-              data &&
-              typeof data === "object" &&
-              "error" in data &&
-              data.error
-            ) {
-              connector.attachEvent("ai_onInit", sendInit);
-            } else {
-              sendInit();
-            }
-          });
-        };
-
-        if (sameOrigin) {
-          aiAvailable = true;
-          probeTools();
-          runWhenActionsReady(() => {
-            connector.sendEvent("ai_onCustomInit", {
-              settingsLock: undefined,
-              actionsOverride: true,
-              apiConfig: {
-                origin: window.location.origin,
-                baseUrl: "/api/2.0/new-ai",
-                routes: DEFAULT_SERVER_API_ROUTES,
-              } satisfies ServerAPIConfig,
-            });
-            fireGenerationToolCall();
-          });
-        } else {
-          const profiles = await getModelsList();
-
-          if (profiles && profiles.length > 0) {
-            aiAvailable = true;
-
-            profiles.forEach((p) => modelProfileMap.set(p.modelId, p.id));
-
-            const providers = Array.from(
-              new Set(profiles.map((p) => p.providerType)),
-            ).map((name) => ({ name, basedOn: "openai" }));
-
-            const models = profiles.map((p) => ({
-              id: p.modelId,
-              name: p.name,
-              provider: p.providerType,
-              capabilities: p.capabilities ?? 255,
-            }));
-
-            const assignments = await getProfileAssignments();
-            const profileById = new Map(profiles.map((p) => [p.id, p]));
-
-            const modelByProfileId = (
-              profileId?: string,
-            ): string | undefined =>
-              (profileId ? profileById.get(profileId) : undefined)?.modelId;
-
-            const actions: Record<string, { model: string }> = {};
-
-            Object.entries(assignments ?? {}).forEach(([action, profileId]) => {
-              const model = modelByProfileId(profileId);
-              if (model) actions[action] = { model };
-            });
-
-            probeTools();
-            runWhenActionsReady(() => {
-              connector.sendEvent("ai_onCustomProviders", providers);
-              connector.sendEvent("ai_onCustomInit", {
-                settingsLock: undefined,
-                actionsOverride: true,
-                providers,
-                models,
-                actions,
+            const whenAiReady = (
+              type: "Tools" | "Actions",
+              onReady: (data?: unknown) => void,
+            ) => {
+              connector.executeMethod("AI", [{ type }], (data) => {
+                if (hasError(data)) connector.attachEvent("ai_onInit", onReady);
+                else onReady(data);
               });
-              fireGenerationToolCall();
-            });
+            };
 
-            connector.attachEvent("ai_onExternalFetch", (e: unknown) =>
-              externalAIFetch(connector, e as TEditorAIEvent, modelProfileMap),
-            );
+            const sendTools = (data?: unknown) =>
+              window.parent?.postMessage({ type: "initedAiPlugin", data }, "*");
+
+            const fireGenerationToolCall = () => {
+              if (!generationToolCallState) return;
+              connector.sendEvent("ai_onCallTool", {
+                name: generationToolCallState.toolName,
+                arguments: { ...generationToolCallState.parameters },
+              });
+              const url = new URL(window.location.href);
+              url.searchParams.delete("withTool");
+              window.history.replaceState(null, "", url.toString());
+            };
+
+            const editorOrigin = (() => {
+              try {
+                return config?.editorUrl
+                  ? new URL(config.editorUrl).origin
+                  : "";
+              } catch {
+                return "";
+              }
+            })();
+            const sameOrigin =
+              typeof window !== "undefined" &&
+              editorOrigin === window.location.origin;
+
+            if (sameOrigin) {
+              aiAvailable = true;
+              whenAiReady("Tools", sendTools);
+              whenAiReady("Actions", () => {
+                connector.sendEvent("ai_onCustomInit", {
+                  settingsLock: undefined,
+                  actionsOverride: true,
+                  apiConfig: {
+                    origin: window.location.origin,
+                    baseUrl: "/api/2.0/new-ai",
+                    routes: DEFAULT_SERVER_API_ROUTES,
+                  } satisfies ServerAPIConfig,
+                });
+                fireGenerationToolCall();
+              });
+            } else {
+              const profiles = await getModelsList();
+
+              if (profiles && profiles.length > 0) {
+                aiAvailable = true;
+
+                profiles.forEach((p) => modelProfileMap.set(p.modelId, p.id));
+
+                const providers = Array.from(
+                  new Set(profiles.map((p) => p.providerType)),
+                ).map((name) => ({ name, basedOn: "openai" }));
+
+                const models = profiles.map((p) => ({
+                  id: p.modelId,
+                  name: p.name,
+                  provider: p.providerType,
+                  capabilities: p.capabilities ?? 255,
+                }));
+
+                const assignments = await getProfileAssignments();
+                const modelByProfileId = new Map(
+                  profiles.map((p) => [p.id, p.modelId]),
+                );
+
+                const actions: Record<string, { model: string }> = {};
+                Object.entries(assignments ?? {}).forEach(
+                  ([action, profileId]) => {
+                    const model = modelByProfileId.get(profileId);
+                    if (model) actions[action] = { model };
+                  },
+                );
+
+                whenAiReady("Tools", sendTools);
+                whenAiReady("Actions", () => {
+                  connector.sendEvent("ai_onCustomProviders", providers);
+                  connector.sendEvent("ai_onCustomInit", {
+                    settingsLock: undefined,
+                    actionsOverride: true,
+                    providers,
+                    models,
+                    actions,
+                  });
+                  fireGenerationToolCall();
+                });
+
+                connector.attachEvent("ai_onExternalFetch", (e: unknown) =>
+                  externalAIFetch(
+                    connector,
+                    e as TEditorAIEvent,
+                    modelProfileMap,
+                  ),
+                );
+              }
+            }
+          } catch (error) {
+            console.error("Failed to initialize AI provider:", error);
           }
         }
-      } catch (error) {
-        console.error("Failed to initialize AI provider:", error);
-      }
-    }
 
-    // Active whenever connector exists — does not require successAuth or a configured provider.
-    if (connector) {
-      // The editor may be hosted either in an iframe (host is `window.parent`)
-      // or in a new tab opened via `window.open` (host is `window.opener`,
-      // while `window.parent` === self). Resolve the real host window so the
-      // ready signal and tool results reach the opener in both cases.
-      const hostWindow =
-        window.opener && window.opener !== window
-          ? (window.opener as Window)
-          : window.parent;
+        // The editor may be hosted either in an iframe (host is `window.parent`)
+        // or in a new tab opened via `window.open` (host is `window.opener`,
+        // while `window.parent` === self). Resolve the real host window so the
+        // ready signal and tool results reach the opener in both cases.
+        const hostWindow =
+          window.opener && window.opener !== window
+            ? (window.opener as Window)
+            : window.parent;
 
-      const onParentMessage = (event: MessageEvent) => {
-        if (event.source !== hostWindow) return;
-        const payload = event.data;
-        if (
-          !payload ||
-          typeof payload !== "object" ||
-          (payload as { type?: unknown }).type !== "callEditorTool"
-        )
-          return;
+        const onParentMessage = (event: MessageEvent) => {
+          if (event.source !== hostWindow) return;
+          const payload = event.data;
+          if (
+            !payload ||
+            typeof payload !== "object" ||
+            (payload as { type?: unknown }).type !== "callEditorTool"
+          )
+            return;
 
-        const {
-          callId,
-          name,
-          arguments: args,
-        } = payload as {
-          callId?: string;
-          name?: string;
-          arguments?: Record<string, unknown>;
+          const {
+            callId,
+            name,
+            arguments: args,
+          } = payload as {
+            callId?: string;
+            name?: string;
+            arguments?: Record<string, unknown>;
+          };
+          if (typeof name !== "string") return;
+
+          if (aiAvailable) {
+            connector.sendEvent("ai_onCallTool", {
+              name,
+              arguments: args ?? {},
+            });
+            hostWindow?.postMessage(
+              { type: "editorToolResult", callId, result: "" },
+              "*",
+            );
+          } else {
+            hostWindow?.postMessage(
+              {
+                type: "editorToolResult",
+                callId,
+                result: JSON.stringify({ error: "AI provider not configured" }),
+              },
+              "*",
+            );
+          }
         };
-        if (typeof name !== "string") return;
-
-        if (aiAvailable) {
-          connector.sendEvent("ai_onCallTool", { name, arguments: args ?? {} });
-          hostWindow?.postMessage(
-            { type: "editorToolResult", callId, result: "" },
-            "*",
-          );
-        } else {
-          hostWindow?.postMessage(
-            {
-              type: "editorToolResult",
-              callId,
-              result: JSON.stringify({ error: "AI provider not configured" }),
-            },
-            "*",
-          );
-        }
-      };
-      window.addEventListener("message", onParentMessage);
-      // Signal the host (iframe parent or popup opener) that this window is
-      // ready to receive callEditorTool messages.
-      hostWindow?.postMessage({ type: "editorDocumentReady" }, "*");
+        window.addEventListener("message", onParentMessage);
+        hostWindow?.postMessage({ type: "editorDocumentReady" }, "*");
+      }
     }
 
     // Do not remove: it's for Back button on Mobile App

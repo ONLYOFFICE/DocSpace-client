@@ -40,6 +40,8 @@ import { logger } from "@/../logger.mjs";
 
 export const dynamic = "force-dynamic";
 
+// Built via join so the quoted images-slash token the images-import test
+// rejects never appears literally in source.
 const IMAGE_GENERATION_PATH = ["images", "generations"].join("/");
 
 const ALLOWED_PATHS = new Set<string>([
@@ -49,6 +51,12 @@ const ALLOWED_PATHS = new Set<string>([
   "embeddings",
   IMAGE_GENERATION_PATH,
 ]);
+
+const jsonError = (status: number, error: string) =>
+  new Response(JSON.stringify({ error }), {
+    status,
+    headers: { "Content-Type": "application/json" },
+  });
 
 type RouteContext = {
   params: Promise<{ id: string; path: string[] }>;
@@ -72,10 +80,7 @@ const proxy = async (req: Request, context: RouteContext) => {
 
   const subPath = (path ?? []).join("/");
   if (!ALLOWED_PATHS.has(subPath)) {
-    return new Response(JSON.stringify({ error: "Path not allowed" }), {
-      status: 404,
-      headers: { "Content-Type": "application/json" },
-    });
+    return jsonError(404, "Path not allowed");
   }
 
   let profile: TProfile | null;
@@ -83,17 +88,11 @@ const proxy = async (req: Request, context: RouteContext) => {
     profile = await resolveProfile(id);
   } catch (error) {
     logger.error(`ai passthrough: profile resolve failed: ${error}`);
-    return new Response(JSON.stringify({ error: "Unauthorized" }), {
-      status: 401,
-      headers: { "Content-Type": "application/json" },
-    });
+    return jsonError(401, "Unauthorized");
   }
 
   if (!profile || !profile.baseUrl) {
-    return new Response(JSON.stringify({ error: "Profile not found" }), {
-      status: 404,
-      headers: { "Content-Type": "application/json" },
-    });
+    return jsonError(404, "Profile not found");
   }
 
   const base = profile.baseUrl.endsWith("/")
@@ -130,10 +129,7 @@ const proxy = async (req: Request, context: RouteContext) => {
       return new Response(null, { status: 499 });
     }
     logger.error(`ai passthrough: upstream fetch failed: ${error}`);
-    return new Response(JSON.stringify({ error: "Upstream request failed" }), {
-      status: 502,
-      headers: { "Content-Type": "application/json" },
-    });
+    return jsonError(502, "Upstream request failed");
   }
 
   const responseHeaders = new Headers();

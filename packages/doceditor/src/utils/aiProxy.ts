@@ -69,14 +69,14 @@ const externalAIFetch = async (
 
   try {
     let profileId: string | undefined;
-    try {
-      const body = e.options.body;
-      if (typeof body === "string") {
+    const body = e.options.body;
+    if (typeof body === "string") {
+      try {
         const model = (JSON.parse(body) as { model?: string })?.model;
         if (model) profileId = modelProfileMap.get(model);
+      } catch {
+        /* leave profileId undefined */
       }
-    } catch {
-      profileId = undefined;
     }
 
     if (!profileId) {
@@ -91,9 +91,6 @@ const externalAIFetch = async (
     const options = {
       ...e.options,
       signal: abortController.signal,
-      headers: {
-        ...e.options.headers,
-      },
     };
 
     const result = await fetch(url, options);

@@ -3,7 +3,7 @@
   "content": "Room cover",
   "content_en_sha1_hash": "629fe77eb87170248f519263ffdf53af11eb35b4",
   "created_at": "2025-05-19T21:30:53.318Z",
-  "updated_at": "2026-06-09T11:32:15.260Z",
+  "updated_at": "2026-06-25T19:31:02.904Z",
   "comment": {
     "text": "This is a dialog title for uploading or editing the cover image for a room. It appears when a user wants to customize the visual representation of a room.",
     "is_auto": true,
@@ -13,32 +13,32 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/components/room-logo-cover-dialog/index.tsx",
-      "line_number": 166,
-      "context": "withBodyScroll\n withBodyScrollForcibly={!!scrollBodyHeight}\n isScrollLocked={openColorPicker}\n dataTestId=\"room_logo_cover_dialog\"\n >\n <ModalDialog.Header>{t(\"RoomLogoCover:RoomCover\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <RoomLogoCover\n key={visible ? \"open\" : \"closed\"}\n t={t}\n covers={covers}",
+      "line_number": 171,
+      "context": "withBodyScroll\n withBodyScrollForcibly={!!scrollBodyHeight}\n isScrollLocked={openColorPicker}\n dataTestId=\"room_logo_cover_dialog\"\n >\n <ModalDialog.Header>{t(\"Common:RoomCover\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <RoomLogoCover\n key={visible ? \"open\" : \"closed\"}\n t={t}\n covers={covers}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/AvatarEditorDialog/index.js",
       "line_number": 80,
-      "context": "const avatarTitle = isProfileUpload\n ? t(\"Ldap:LdapAvatar\")\n : isAIAgentsFolderRoot\n ? t(\"RoomLogoCover:AgentCover\")\n : t(\"RoomLogoCover:RoomCover\");\n \n const onCloseModal = () => {\n onChangeImage({ x: 0.5, y: 0.5, zoom: 1, uploadedFile: null });\n setPreview && setPreview(\"\");\n onClose && onClose();",
+      "context": "const avatarTitle = isProfileUpload\n ? t(\"Ldap:LdapAvatar\")\n : isAIAgentsFolderRoot\n ? t(\"RoomLogoCover:AgentCover\")\n : t(\"Common:RoomCover\");\n \n const onCloseModal = () => {\n onChangeImage({ x: 0.5, y: 0.5, zoom: 1, uploadedFile: null });\n setPreview && setPreview(\"\");\n onClose && onClose();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/index.tsx",
-      "line_number": 257,
-      "context": "dataTestId=\"room_logo_cover_dialog\"\n >\n <ModalDialog.Header>\n {isAIAgentsFolderRoot\n ? t(\"RoomLogoCover:AgentCover\")\n : t(\"RoomLogoCover:RoomCover\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <RoomLogoCover\n forwardedRef={contentRef}\n scrollHeight={scrollH}",
+      "line_number": 252,
+      "context": "dataTestId=\"room_logo_cover_dialog\"\n >\n <ModalDialog.Header>\n {isAIAgentsFolderRoot\n ? t(\"RoomLogoCover:AgentCover\")\n : t(\"Common:RoomCover\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <RoomLogoCover\n forwardedRef={contentRef}\n scrollHeight={scrollH}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
       "line_number": 611,
-      "context": "</ModalDialog>\n \n <AvatarEditorDialog\n t={t}\n visible={cropperVisible}\n title={t(\"RoomLogoCover:RoomCover\")}\n image={cropperImage}\n onClose={onCropperClose}\n onSave={onCropperSave}\n onChangeImage={onChangeImage}\n onChangeFile={onCropperChangeFile}",
+      "context": "</ModalDialog>\n \n <AvatarEditorDialog\n t={t}\n visible={cropperVisible}\n title={t(\"Common:RoomCover\")}\n image={cropperImage}\n onClose={onCropperClose}\n onSave={onCropperSave}\n onChangeImage={onChangeImage}\n onChangeFile={onCropperChangeFile}",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/room-logo-editor/index.tsx",
       "line_number": 134,
-      "context": "/>\n \n <AvatarEditorDialog\n t={t}\n visible={editor.cropper.visible}\n title={t(\"RoomLogoCover:RoomCover\")}\n image={editor.cropper.image}\n isLoading={editor.isSaving}\n onClose={editor.cropper.onClose}\n onSave={editor.cropper.onSave}\n onChangeImage={editor.cropper.onChangeImage}",
+      "context": "/>\n \n <AvatarEditorDialog\n t={t}\n visible={editor.cropper.visible}\n title={t(\"Common:RoomCover\")}\n image={editor.cropper.image}\n isLoading={editor.isSaving}\n onClose={editor.cropper.onClose}\n onSave={editor.cropper.onSave}\n onChangeImage={editor.cropper.onChangeImage}",
       "module": "/packages/sdk"
     }
   ],

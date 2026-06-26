@@ -3,7 +3,7 @@
   "content": "History",
   "content_en_sha1_hash": "90ccd6497400b5576aeca1bd94af74aae1e0a250",
   "created_at": "2026-05-19T19:03:25.019Z",
-  "updated_at": "2026-06-03T11:46:06.846Z",
+  "updated_at": "2026-06-25T19:31:02.960Z",
   "comment": {
     "text": "Tab label or section heading used to identify the history view within the info panel or webhook settings.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/headerGeneral.tsx",
-      "line_number": 121,
-      "context": "const name = match(id)\n .with(InfoPanelView.infoMembers, () =>\n isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\"),\n )\n .with(InfoPanelView.infoShare, () => t(\"Common:Share\"))\n .with(InfoPanelView.infoHistory, () => t(\"Common:SubmenuHistory\"))\n .with(InfoPanelView.infoDetails, () => t(\"Common:SubmenuDetails\"))\n .with(InfoPanelView.infoAIChat, () => t(\"InfoPanel:SubmenuAIChat\"))\n .otherwise(() => {\n const key = id.replace(\"info_plugin-\", \"\");\n return (",
+      "line_number": 119,
+      "context": "const name = match(id)\n .with(InfoPanelView.infoMembers, () =>\n isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\"),\n )\n .with(InfoPanelView.infoShare, () => t(\"Common:Share\"))\n .with(InfoPanelView.infoHistory, () => t(\"Common:SubmenuHistory\"))\n .with(InfoPanelView.infoDetails, () => t(\"Common:SubmenuDetails\"))\n .otherwise(() => {\n const key = id.replace(\"info_plugin-\", \"\");\n return (\n infoPanelItemsList.find((item) => item.key === key)?.value.subMenu",
       "module": "/packages/client"
     },
     {

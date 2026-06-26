@@ -3,7 +3,7 @@
   "content": "Favorites",
   "content_en_sha1_hash": "07b3e447db02b7cc20a78a57c316febae22ed72b",
   "created_at": "2025-08-29T14:33:19.030Z",
-  "updated_at": "2026-06-15T19:31:55.957Z",
+  "updated_at": "2026-06-25T19:31:02.852Z",
   "comment": {
     "text": "This is a label for a folder or section in the file management interface, indicating items that have been marked as favorites. It appears in navigation menus and settings for default page display.",
     "is_auto": true,
@@ -12,10 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/selectors/Files/hooks/useRootHelper.tsx",
-      "line_number": 174,
-      "context": "break;\n case FolderType.VirtualRooms:\n title = t(\"Rooms\");\n break;\n case FolderType.Favorites:\n title = t(\"Favorites\");\n break;\n case FolderType.Recent:\n title = t(\"Recent\");\n break;\n case FolderType.AiAgents:",
+      "file_path": "/libs/ui-kit/selectors/utils/index.ts",
+      "line_number": 312,
+      "context": "items.push(\n build(\n \"favorites\",\n favoritesFolder,\n CatalogFavoritesSvg,\n t(\"Favorites\"),\n FolderType.Favorites,\n ),\n );\n \n if (items.length && withSeparator)",
       "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
+      "line_number": 311,
+      "context": "recentFolderId,\n ),\n },\n {\n id: \"rooms-favorites\",\n label: t(\"Common:Favorites\"),\n icon: getCatalogIconUrlByType(FolderType.Favorites),\n onClick: goRoomsScoped(\n CategoryType.Favorite,\n \"/rooms/favorite\",\n favoritesFolderId,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
+      "line_number": 311,
+      "context": "recentFolderId,\n ),\n },\n {\n id: \"rooms-favorites\",\n label: t(\"Common:Favorites\"),\n icon: getCatalogIconUrlByType(FolderType.Favorites),\n onClick: goRoomsScoped(\n CategoryType.Favorite,\n \"/rooms/favorite\",\n favoritesFolderId,",
+      "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",

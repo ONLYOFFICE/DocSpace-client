@@ -3,7 +3,7 @@
   "content": "Files",
   "content_en_sha1_hash": "6ce6c512ea433a7fc5c8841628e7696cd0ff7f2b",
   "created_at": "2026-06-01T21:20:14.454Z",
-  "updated_at": "2026-06-15T19:31:55.956Z",
+  "updated_at": "2026-06-25T19:31:02.883Z",
   "comment": {
     "text": "Title for a navigation menu item, an app catalog entry, and the page title for the AI Files section. It is a noun used as a short label.",
     "is_auto": true,
@@ -27,6 +27,12 @@
       "file_path": "/packages/client/src/pages/AiFiles/index.tsx",
       "line_number": 95,
       "context": "}\n };\n \n const AiFiles = ({ myFolderId }: AiFilesProps) => {\n const { t } = useTranslation([\"Common\"]);\n useDocumentTitle(\"Common:DashboardFilesTitle\");\n const [searchParams, setSearchParams] = useSearchParams();\n const section = searchParams.get(\"section\") ?? \"\";\n const lastSdkSectionRef = React.useRef<string | null>(null);\n \n const searchParamsRef = React.useRef(searchParams);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
+      "line_number": 119,
+      "context": "const moduleItems: ModuleItem[] = [\n {\n id: \"ai-files\",\n icon: <CatalogFolderIcon />,\n title: t(\"Common:DashboardFilesTitle\"),\n description: t(\"Common:DashboardFilesDescription\"),\n installed: !isGuest,\n href: \"/rooms/personal/filter\",\n },\n {",
       "module": "/packages/client"
     }
   ],

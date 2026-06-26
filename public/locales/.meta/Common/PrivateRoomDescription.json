@@ -3,7 +3,7 @@
   "content": "All files in this room will be encrypted",
   "content_en_sha1_hash": "51563aa98d63f7e6b70e10ede514f7f837acd0f3",
   "created_at": "2026-05-24T17:27:35.766Z",
-  "updated_at": "2026-06-16T16:35:29.969Z",
+  "updated_at": "2026-06-25T19:31:02.916Z",
   "comment": {
     "text": "Tooltip for a title icon that appears when viewing an encrypted room to inform the user about the encryption status of the files.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 612,
+      "line_number": 633,
       "context": "]);\n \n const titleIconTooltip = React.useMemo(() => {\n if (sharedType) return t(\"Files:RecentlyOpenedTooltip\");\n \n if (isEncryptedRoom) return t(\"Common:PrivateRoomDescription\");\n \n if (lifetime)\n return `${t(\"Common:RoomFilesLifetime\", {\n days: lifetime.value,\n period: getLifetimePeriodTranslation(lifetime.period, t),",
       "module": "/packages/client"
     },
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
-      "line_number": 52,
+      "line_number": 62,
       "context": "case RoomsType.PublicRoom:\n return t(\"Common:PublicRoomInfo\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomInfo\");\n case RoomsTypePrivate:\n return t(\"Common:PrivateRoomDescription\");\n default:\n return \"\";\n }\n };",
       "module": "/packages/shared"
     }

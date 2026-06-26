@@ -3,7 +3,7 @@
   "content": "Add a tag",
   "content_en_sha1_hash": "a8212f9bf639eb29d1e9572a9b9325ec8febbb76",
   "created_at": "2025-05-19T21:30:56.838Z",
-  "updated_at": "2026-06-15T19:31:55.964Z",
+  "updated_at": "2026-06-25T19:31:02.892Z",
   "comment": {
     "text": "This is a placeholder text for an input field where users can type to add a tag. It appears when the input field is empty.",
     "is_auto": true,
@@ -20,7 +20,7 @@
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/tag-input/index.tsx",
       "line_number": 137,
-      "context": ">\n <InputParam\n ref={inputRef}\n id=\"shared_tags-input\"\n title={title ? `${title}:` : `${t(\"Common:Tags\")}:`}\n placeholder={t(\"TagsPlaceholder\")}\n value={tagInput}\n onChange={onTagInputChange}\n onFocus={handleFocus}\n onBlur={handleBlur}\n isDisabled={isDisabled}",
+      "context": ">\n <InputParam\n ref={inputRef}\n id=\"shared_tags-input\"\n title={title ? `${title}:` : `${t(\"Common:Tags\")}:`}\n placeholder={t(\"Common:TagsPlaceholder\")}\n value={tagInput}\n onChange={onTagInputChange}\n onFocus={handleFocus}\n onBlur={handleBlur}\n isDisabled={isDisabled}",
       "module": "/packages/sdk"
     }
   ],

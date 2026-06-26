@@ -1,0 +1,29 @@
+{
+  "key_path": "CentralizedData",
+  "content": "Centralized data collection",
+  "content_en_sha1_hash": "24d9ee9e3dcbff4c06e17e9325a4e86df0ec47a4",
+  "created_at": "2026-06-25T19:30:57.480Z",
+  "updated_at": "2026-06-25T19:44:07.421Z",
+  "comment": {
+    "text": "Feature title in the promotional dialog (AppPromoDialog) describing a platform capability; appears as a short heading for a list item accompanied by an icon.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T19:44:07.421Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
+      "line_number": 144,
+      "context": "title: t(\"Common:EasySharing\"),\n description: t(\"Common:EasySharingDescription\"),\n },\n {\n Icon: DataIcon,\n title: t(\"Common:CentralizedData\"),\n description: t(\"Common:CentralizedDataDescription\"),\n },\n {\n Icon: BuiltInIcon,\n title: t(\"Common:BuiltInInsights\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

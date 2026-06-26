@@ -3,7 +3,7 @@
   "content": "Model settings",
   "content_en_sha1_hash": "d96087de9dbc0b37ecd0f1abf73e0b437acf2d75",
   "created_at": "2026-04-10T13:53:45.363Z",
-  "updated_at": "2026-05-24T17:27:49.140Z",
+  "updated_at": "2026-06-25T19:31:03.046Z",
   "comment": {
     "text": "This is a section heading or title for a page where users can configure settings related to AI models.",
     "is_auto": true,
@@ -16,12 +16,6 @@
       "line_number": 287,
       "context": "</div>\n ),\n },\n {\n id: \"model-settings\",\n name: t(\"ModelSettings\"),\n content: <ModelSettingsTable isDisabled={isDisabled} />,\n },\n ];\n \n if (!isInitServicesData) return <AiPageLoader />;",
       "module": "/libs/ui-kit"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/ModelSettingsPanel.tsx",
-      "line_number": 109,
-      "context": "backdropVisible={false}\n isBackButton\n onBackClick={onClose}\n zIndex={451}\n >\n <ModalDialog.Header>{t(\"Common:ModelSettings\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.body}>\n <FieldContainer\n labelText={t(\"Common:ModelName\")}",
-      "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/dialogs/add-update/ModelSettingsPanel.tsx",

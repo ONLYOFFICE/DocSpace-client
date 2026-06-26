@@ -1,0 +1,29 @@
+{
+  "key_path": "CustomRoomsTitle",
+  "content": "Custom rooms",
+  "content_en_sha1_hash": "942ba7c698b4ca5c735e5c0d3c423efad84ad1a8",
+  "created_at": "2026-06-25T19:30:57.348Z",
+  "updated_at": "2026-06-25T19:41:46.914Z",
+  "comment": {
+    "text": "Title for a feature item within the app promotion dialog.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T19:41:46.914Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
+      "line_number": 117,
+      "context": "title: t(\"Common:VDRRooms\"),\n description: t(\"Common:VDRRoomsDescription\"),\n },\n {\n Icon: CustomRoomIcon,\n title: t(\"Common:CustomRoomsTitle\"),\n description: t(\"Common:CustomRoomsDesctiprion\"),\n },\n ],\n IllustrationLight: RoomsPreviewLight,\n IllustrationDark: RoomsPreviewLight,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "No {{aiAgents}} available yet",
   "content_en_sha1_hash": "4331963c254d9449870c6ee9b9137fa979134fc7",
   "created_at": "2025-12-19T13:03:52.836Z",
-  "updated_at": "2026-06-01T21:20:44.383Z",
+  "updated_at": "2026-06-25T19:31:02.865Z",
   "comment": {
     "text": "This is a message displayed when no AI agents are configured for the current user. It appears in an empty state view and includes a variable `{{aiAgents}}` which will be replaced by the localized term for \"AI Agents\".",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
-      "line_number": 85,
+      "line_number": 91,
       "context": "// SDK is embedded and always behaves as standalone w.r.t. AI configuration.\n const standalone = true;\n \n const title = aiReady\n ? isVisitor\n ? t(\"Common:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n defaultValue: \"No {{aiAgents}} yet\",\n })\n : t(\"Common:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\", { defaultValue: \"AI Agent\" }),",
       "module": "/packages/sdk"
     }

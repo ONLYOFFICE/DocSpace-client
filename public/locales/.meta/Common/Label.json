@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.029Z",
-  "updated_at": "2026-06-15T19:31:55.966Z",
+  "updated_at": "2026-06-25T19:31:02.893Z",
   "comment": {
     "text": "This is a label for an input field. It prompts the user to enter a name for a group or a room.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
-      "line_number": 435,
+      "line_number": 436,
       "context": "const tagsTitle = isTemplateSelected || isTemplate ? t(\"Files:RoomTagsLabel\") : \"\";\n \n const inputTitle =\n isTemplateSelected || isTemplate\n ? `${t(\"Files:TemplateName\")}:`\n : `${t(\"Common:Label\")}:`;\n \n return (\n <div\n className={`${styles.setRoomParams}${disableImageRescaling ? ` ${styles.disableImageRescaling}` : \"\"}`}\n >",
       "module": "/packages/client"
     },
@@ -91,14 +91,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1564,
+      "line_number": 1542,
       "context": "const commonOptions = [];\n \n const name = {\n id: \"sort-by_name\",\n key: SortByFieldName.Name,\n label: t(\"Common:Label\"),\n default: true,\n };\n const modifiedDate = {\n id: \"sort-by_modified\",\n key: SortByFieldName.ModifiedDate,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
-      "line_number": 483,
-      "context": "isDisabled={variant === \"update\" || isRequestRunning}\n dataTestId=\"provider-type-combobox\"\n />\n </FieldContainer>\n <FieldContainer\n labelText={t(\"Common:Label\")}\n labelVisible\n isVertical\n removeMargin\n isRequired\n >",
       "module": "/packages/client"
     },
     {

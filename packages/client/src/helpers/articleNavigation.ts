@@ -83,16 +83,19 @@ export const buildFolderUrl = (
   userId?: string,
   myFolderId?: number | null,
   // When true, the Recent/Favorites/Trash sections are routed under
-  // /ai-agents/* (agent-scoped) instead of their global file paths, so the
-  // sidebar keeps them selected under AI Agents. Same data, different prefix.
+  // /ai-agents/* (agent-scoped) instead of their global file paths, scoped to
+  // AI Agents content via agentsFolderId (Recent/Favorites) or folderType (Trash).
   agentScoped = false,
+  agentsFolderId?: number | null,
 ): string => {
   const fileParams = (
     categoryType: (typeof CategoryType)[keyof typeof CategoryType],
     filterKey: string,
+    folderType?: FolderType,
   ) => {
     const filter = FilesFilter.getDefault({ categoryType });
     filter.folder = String(folderId);
+    if (folderType != null) filter.folderType = folderType;
     if (userId) {
       const stored = getUserFilter(`${filterKey}=${userId}`);
       if (stored?.sortBy) filter.sortBy = stored.sortBy;
@@ -109,10 +112,9 @@ export const buildFolderUrl = (
     return filter.toUrlParams(userId, false);
   };
 
-  // Agent-scoped sections aren't nested under My Documents, so they carry no
-  // parentId; the global sections keep it for back-navigation scoping.
+  const scopeFolderId = agentScoped ? agentsFolderId : myFolderId;
   const parentSuffix =
-    !agentScoped && myFolderId != null ? `&parentId=${myFolderId}` : "";
+    scopeFolderId != null ? `&parentId=${scopeFolderId}` : "";
 
   let path = "";
   let params = "";
@@ -142,7 +144,9 @@ export const buildFolderUrl = (
       path = agentScoped
         ? "/ai-agents/trash/filter"
         : getCategoryUrl(CategoryType.Trash);
-      params = fileParams(CategoryType.Trash, FILTER_TRASH) + parentSuffix;
+      params = agentScoped
+        ? fileParams(CategoryType.Trash, FILTER_TRASH, FolderType.AIAgents)
+        : fileParams(CategoryType.Trash, FILTER_TRASH, FolderType.USER);
       break;
     case FolderType.Archive:
       path = getCategoryUrl(CategoryType.Archive);
@@ -160,6 +164,18 @@ export const buildFolderUrl = (
 
   if (params.at(-1) === "&") params = params.slice(0, -1);
   return `${path}?${params}`;
+};
+
+export const getSectionTrashTarget = (
+  pathname: string,
+): { path: string; folderType: FolderRootType } => {
+  if (pathname.startsWith("/forms"))
+    return { path: "/forms/trash/filter", folderType: FolderType.FormRoom };
+  if (pathname.startsWith("/ai-agents"))
+    return { path: "/ai-agents/trash/filter", folderType: FolderType.AIAgents };
+  if (pathname.startsWith("/rooms") && !pathname.startsWith("/rooms/personal"))
+    return { path: "/rooms/trash/filter", folderType: FolderType.Rooms };
+  return { path: getCategoryUrl(CategoryType.Trash), folderType: FolderType.USER };
 };
 
 /**

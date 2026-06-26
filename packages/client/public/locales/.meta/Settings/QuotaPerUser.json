@@ -3,7 +3,7 @@
   "content": "Quota per user",
   "content_en_sha1_hash": "34fbae11ee29d4cda07c3fec52be82daaf84c7c0",
   "created_at": "2025-05-19T21:30:52.346Z",
-  "updated_at": "2026-06-02T08:43:27.536Z",
+  "updated_at": "2026-06-25T19:31:02.997Z",
   "comment": {
     "text": "This is a label for a setting that allows administrators to define the storage limit for each user. It appears as a title in the settings menu and as a heading on the \"Quota per user\" configuration page.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
       "line_number": 66,
-      "context": "productName: getBrandName(\"ProductName\"),\n })}\n isDisabled={isDisabled}\n />\n <CategoryItem\n title={t(\"QuotaPerUser\")}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-user\"\n subtitle={t(\"UserDefaultQuotaDescription\", {\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),",
+      "context": "productName: getBrandName(\"ProductName\"),\n })}\n isDisabled={isDisabled}\n />\n <CategoryItem\n title={t(\"QuotaPerUser\")}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-user\"\n subtitle={t(\"UserDefaultQuotaDescription\", {\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:Files\"),",
       "module": "/packages/client"
     },
     {

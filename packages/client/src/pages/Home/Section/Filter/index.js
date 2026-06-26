@@ -178,6 +178,11 @@ const SectionFilterContent = ({
   // Form Filling Rooms only, so the room-type filter is not offered there.
   const isFormsSection = location.pathname.startsWith("/forms");
 
+  // Trash is a single, centralized folder reached from several sections
+  // (/files/trash, /rooms/trash, /forms/trash, ...). The "Room" filter only
+  // makes sense for Trash opened from the Rooms section.
+  const isRoomsTrash = location.pathname.startsWith("/rooms/trash");
+
   // Base path for room-list navigation (sort/search/filter). The "Forms"
   // section keeps its own route instead of falling back to "rooms/shared".
   const getRoomsListBasePath = React.useCallback(
@@ -433,7 +438,7 @@ const SectionFilterContent = ({
         newFilter.searchInContent = withContent === "true" ? "true" : null;
 
         const path = location.pathname.split("/filter")[0];
-        if (isTrash) {
+        if (isRoomsTrash) {
           newFilter.roomId = roomId;
         }
 
@@ -444,6 +449,7 @@ const SectionFilterContent = ({
       isRooms,
       isAIAgentsFolder,
       isTrash,
+      isRoomsTrash,
       setIsLoading,
       roomsFilter,
       filter,
@@ -1469,7 +1475,7 @@ const SectionFilterContent = ({
       filterOptions.push(...sharedByOption);
       filterOptions.push(...typeOptions);
 
-      if (isTrash) {
+      if (isRoomsTrash) {
         const roomOption = [
           {
             id: "filter_search-by-room-content-header",
@@ -1502,6 +1508,7 @@ const SectionFilterContent = ({
     isContactsPage,
     isRecentFolder,
     isTrash,
+    isRoomsTrash,
     isPublicRoom,
     isTemplatesFolder,
     isCollaborator,

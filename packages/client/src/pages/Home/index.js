@@ -221,6 +221,9 @@ const PureHome = observer((props) => {
     isFavoritesFolder,
     isRecentFolder,
     isAIAgentsFolder,
+    templateGalleryAvailable,
+    setTemplateGalleryVisible,
+    setOformFromFolderId,
 
     infoPanelStore,
   } = props;
@@ -270,6 +273,14 @@ const PureHome = observer((props) => {
   // forms + from template), resolved by the hook below.
   const isFormsSection = getCategoryType(location) === CategoryType.Forms;
 
+  // Inside a Form Filling room (or its subfolders) we offer the form-only tile
+  // set. Derive this from the URL (CategoryType.Form ⇔ `/forms/{id}`) rather
+  // than the selected-folder store: the store's roomType/parentRoomType load
+  // asynchronously, so during navigation `isRoom` flips true before the form
+  // type is known and the banner briefly flashes the regular-room file tiles.
+  // The pathname changes atomically with the route, so this never lags.
+  const isFormRoom = getCategoryType(location) === CategoryType.Form;
+
   // AI-agents create gating: AI must be ready and the user able to manage
   // agents (admins / owners / room admins — same set as canCreateRooms).
   // `aiReady` (portal /ai/config) can lag behind the chat-lib profiles, so
@@ -289,8 +300,12 @@ const PureHome = observer((props) => {
     canCreateRooms,
     canCreateAgents,
     userId,
+    templateGalleryAvailable,
+    setTemplateGalleryVisible,
+    setOformFromFolderId,
     isDocumentsFolder,
     isRoom,
+    isFormRoom,
     isRoomsFolder,
     isPrivacyFolder,
     isArchiveFolder,
@@ -724,6 +739,7 @@ export const Component = inject(
     profileActionsStore,
     pluginStore,
     infoPanelStore,
+    oformsStore,
   }) => {
     const {
       setSelectedFolder,
@@ -1042,6 +1058,9 @@ export const Component = inject(
       isFavoritesFolder,
       isRecentFolder,
       isAIAgentsFolder,
+      templateGalleryAvailable: settingsStore.templateGalleryAvailable,
+      setTemplateGalleryVisible: oformsStore.setTemplateGalleryVisible,
+      setOformFromFolderId: oformsStore.setOformFromFolderId,
 
       isErrorAIAgentNotAvailable,
       currentTab: aiRoomStore.currentTab,

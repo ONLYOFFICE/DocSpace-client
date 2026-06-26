@@ -49,6 +49,7 @@ import {
   QuickPublicRoomIcon,
   QuickCustomRoomIcon,
   QuickFormRoomIcon,
+  CreateFromTemplateIcon,
   CreateAgentIcon,
 } from "@docspace/ui-kit/components/quick-actions/icons";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -142,6 +143,13 @@ export type UseQuickActionsProps = SectionFlags & {
   // AI is ready and the user can manage agents (admins / owners / room admins).
   canCreateAgents?: boolean;
   userId?: string;
+  // Whether the OForms template gallery is reachable (settingsStore). The
+  // FormRoom "from template" tile is only offered when it is.
+  templateGalleryAvailable?: boolean;
+  // OformsStore actions used to open the template gallery scoped to the current
+  // folder (mirrors MainButton.onShowTemplateGallery).
+  setTemplateGalleryVisible?: (visible: boolean) => void;
+  setOformFromFolderId?: (id: number | string | null) => void;
 };
 
 export type QuickActionsResult = {
@@ -155,7 +163,7 @@ export type QuickActionsResult = {
 export const useQuickActions = (
   props: UseQuickActionsProps,
 ): QuickActionsResult => {
-  const { t } = useTranslation(["Files", "Common"]);
+  const { t } = useTranslation(["Files", "Common", "Translations"]);
 
   const {
     currentFolderId,
@@ -163,6 +171,9 @@ export const useQuickActions = (
     canCreateRooms,
     canCreateAgents,
     userId,
+    templateGalleryAvailable,
+    setTemplateGalleryVisible,
+    setOformFromFolderId,
     ...sectionFlags
   } = props;
 
@@ -259,6 +270,42 @@ export const useQuickActions = (
     [t, currentFolderId, userId],
   );
 
+  // Inside a Form Filling room only PDF forms can be created. A blank PDF form
+  // is the same `pdf` create flow as the personal-files PDF tile (dispatchCreate
+  // carries `edit: true` for PDF, opening the form editor). When the OForms
+  // template gallery is available, also offer a "from template" tile that opens
+  // it scoped to the current folder (mirrors MainButton's FormRoom gallery item).
+  const formRoomItems = React.useMemo<QuickActionItem[]>(() => {
+    const items: QuickActionItem[] = [
+      {
+        id: "quick-blank-pdf-form",
+        icon: <BlankPdfIcon />,
+        label: t("Translations:NewForm"),
+        onClick: () => dispatchCreate(currentFolderId, "pdf", t),
+      },
+    ];
+
+    if (templateGalleryAvailable) {
+      items.push({
+        id: "quick-form-template",
+        icon: <CreateFromTemplateIcon />,
+        label: t("Common:FromTemplate"),
+        onClick: () => {
+          setTemplateGalleryVisible?.(true);
+          setOformFromFolderId?.(currentFolderId);
+        },
+      });
+    }
+
+    return items;
+  }, [
+    t,
+    currentFolderId,
+    templateGalleryAvailable,
+    setTemplateGalleryVisible,
+    setOformFromFolderId,
+  ]);
+
   const agentItems = React.useMemo<QuickActionItem[]>(
     () => [
       {
@@ -279,6 +326,9 @@ export const useQuickActions = (
 
   if (section === "forms" && canCreateRooms)
     return { show: true, items: formItems };
+
+  if (section === "form-room" && canCreateFiles)
+    return { show: true, items: formRoomItems };
 
   if (section === "ai-agents" && canCreateAgents)
     return { show: true, items: agentItems };

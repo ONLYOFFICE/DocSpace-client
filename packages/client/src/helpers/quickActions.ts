@@ -47,6 +47,9 @@ export type QuickActionsSection =
   | "rooms"
   // Forms section root: offer the collect-forms tile + from-template tile.
   | "forms"
+  // Inside a Form Filling room (or its subfolders): only PDF forms can be
+  // created here, so offer the single blank-PDF-form tile.
+  | "form-room"
   // AI-agents list root: offer the create-agent tile.
   | "ai-agents"
   // Encrypted/private room: the SDK shows folder + upload tiles here, but the
@@ -61,6 +64,7 @@ export type SectionFlags = {
   // Folder-type getters from TreeFoldersStore (current selected folder).
   isDocumentsFolder?: boolean; // rootFolderType === USER ("My documents" tree)
   isRoom?: boolean; // anywhere inside the Rooms tree
+  isFormRoom?: boolean; // inside a Form Filling room (root or its subfolders)
   isRoomsFolder?: boolean; // exactly the rooms list root
   isPrivacyFolder?: boolean; // inside an encrypted/private room
   isArchiveFolder?: boolean;
@@ -83,6 +87,7 @@ export const getQuickActionsSection = (
   const {
     isDocumentsFolder,
     isRoom,
+    isFormRoom,
     isRoomsFolder,
     isPrivacyFolder,
     isArchiveFolder,
@@ -119,6 +124,11 @@ export const getQuickActionsSection = (
 
   // Encrypted/private room → handled separately (no banner for now).
   if (isPrivacyFolder) return "private";
+
+  // Inside a Form Filling room → only PDF forms can be created, so this must
+  // be checked before the generic room/files fallback (a FormRoom is also a
+  // `isRoom`, which would otherwise show the regular file-creation tiles).
+  if (isFormRoom) return "form-room";
 
   // "My documents" tree or inside a regular room → file tiles.
   if (isDocumentsFolder || isRoom) return "files";

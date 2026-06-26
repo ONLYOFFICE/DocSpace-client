@@ -83,7 +83,7 @@ const KnowledgeBase = ({
         key: "reload",
         title: t("Common:ReloadPage"),
         description: t("Common:ReloadPage"),
-        icon: <ReloadArrowsSvg />,
+        icon: <ReloadArrowsSvg className={styles.reloadIcon} />,
         onClick: () => window.location.reload(),
       },
     ];

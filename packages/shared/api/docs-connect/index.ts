@@ -50,8 +50,10 @@ const BASE = "/settings/docscloud";
 const WALLET_SERVICES_URL = "/portal/payment/walletservices";
 const BALANCE_URL = "/portal/payment/customer/balance";
 const WALLET_UPDATE_URL = "/portal/payment/updatewallet";
+const PAYMENT_QUOTA_URL = "/portal/payment/quota";
 const DOCS_CLOUD_PRODUCT = "docscloud";
-const DOCS_CLOUD_DEVPACK_PRODUCT = "docscloud-devpack";
+const DOCS_CLOUD_DEVPACK_SERVICE = "docscloud-devpack";
+const DOCS_CLOUD_DEVPACK_PRODUCT = "docsclouddevpack";
 const QUANTITY_TYPE_SET = 0;
 const QUANTITY_TYPE_ADD = 1;
 
@@ -82,7 +84,7 @@ const fetchPlanPrices = async (): Promise<TDocsConnectPrices | null> => {
     const base = priceOf(DOCS_CLOUD_PRODUCT);
     if (base == null) return null;
 
-    const devpack = priceOf(DOCS_CLOUD_DEVPACK_PRODUCT);
+    const devpack = priceOf(DOCS_CLOUD_DEVPACK_SERVICE);
     return {
       pricePerUser: base,
       devPackPrice: devpack == null ? 0 : Math.max(0, devpack - base),
@@ -111,6 +113,26 @@ const fetchWallet = async (): Promise<TDocsConnectWallet | null> => {
   }
 };
 
+type TPaymentQuotaResponse = {
+  features?: { id?: string; value?: unknown }[];
+} | null;
+
+const fetchDevPackEnabled = async (): Promise<boolean> => {
+  try {
+    const quota = (await request({
+      method: "get",
+      url: PAYMENT_QUOTA_URL,
+    })) as TPaymentQuotaResponse;
+
+    return (quota?.features ?? []).some(
+      (feature) =>
+        feature.id === DOCS_CLOUD_DEVPACK_PRODUCT && feature.value === true,
+    );
+  } catch {
+    return false;
+  }
+};
+
 let lastInfo: TDocsConnectInfo | null = null;
 
 export const getDocsConnectInfo =
@@ -135,12 +157,13 @@ export const getDocsConnectInfo =
       request({ method: "get", url: `${BASE}/tenant/info` }),
     ])) as [TDocsConnectConfig, TDocsConnectTenantInfo];
 
-    const [prices, wallet] = await Promise.all([
+    const [prices, wallet, devPackEnabled] = await Promise.all([
       fetchPlanPrices(),
       fetchWallet(),
+      fetchDevPackEnabled(),
     ]);
 
-    lastInfo = { tenant, config, tenantInfo, prices, wallet };
+    lastInfo = { tenant, config, tenantInfo, prices, wallet, devPackEnabled };
     return lastInfo;
   };
 
@@ -169,8 +192,12 @@ export const buyDocsConnectPlan = async (
     ? DOCS_CLOUD_DEVPACK_PRODUCT
     : DOCS_CLOUD_PRODUCT;
 
-  const isPaid = lastInfo?.tenantInfo.license.trial === false;
-  const currentUsers = isPaid ? (lastInfo?.tenant.payment?.quantity ?? 0) : 0;
+  const sameProduct =
+    lastInfo?.tenantInfo.license.trial === false &&
+    lastInfo?.devPackEnabled === devPackEnabled;
+  const currentUsers = sameProduct
+    ? (lastInfo?.tenant.payment?.quantity ?? 0)
+    : 0;
   const isDecrease = users < currentUsers;
 
   const ok = (await request({

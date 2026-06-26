@@ -81,6 +81,7 @@ export type TDocsConnectInfo = {
   tenantInfo: TDocsConnectTenantInfo;
   prices: TDocsConnectPrices | null;
   wallet: TDocsConnectWallet | null;
+  devPackEnabled: boolean;
 };
 
 export type TDocsConnectConfigUpdate = {

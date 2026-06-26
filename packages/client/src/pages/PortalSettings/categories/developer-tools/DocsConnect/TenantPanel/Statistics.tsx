@@ -224,7 +224,9 @@ const Statistics = ({
   const trialPercent = getDocsConnectTrialPercent(trialStart, trialEnd);
 
   const currency = wallet?.currency ?? "USD";
-  const pricePerUser = prices?.pricePerUser ?? 0;
+  const { devPackEnabled } = info;
+  const pricePerUser =
+    (prices?.pricePerUser ?? 0) + (devPackEnabled ? (prices?.devPackPrice ?? 0) : 0);
   const planUsers = tenant.payment?.quantity ?? 0;
   const monthlyCharge = planUsers * pricePerUser;
 
@@ -366,14 +368,23 @@ const Statistics = ({
               <div className={styles.detailRow}>
                 <Text className={styles.muted}>{t("DocsConnect:Price")}</Text>
                 <Text fontWeight={600}>
-                  {t("DocsConnect:PricePerUser", {
-                    price: formatCurrencyValue(
-                      i18n.language,
-                      pricePerUser,
-                      currency,
-                      2,
-                    ),
-                  })}
+                  {devPackEnabled
+                    ? t("DocsConnect:PricePerUserDevPack", {
+                        price: formatCurrencyValue(
+                          i18n.language,
+                          pricePerUser,
+                          currency,
+                          2,
+                        ),
+                      })
+                    : t("DocsConnect:PricePerUser", {
+                        price: formatCurrencyValue(
+                          i18n.language,
+                          pricePerUser,
+                          currency,
+                          2,
+                        ),
+                      })}
                 </Text>
               </div>
               <div className={styles.detailRow}>

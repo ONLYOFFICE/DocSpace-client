@@ -76,7 +76,9 @@ const BuyPlanPanel = ({
   const [users, setUsers] = useState<number>(
     info?.tenant.payment?.quantity ?? 50,
   );
-  const [devPack, setDevPack] = useState<boolean>(false);
+  const [devPack, setDevPack] = useState<boolean>(
+    info?.devPackEnabled ?? false,
+  );
   const [submitting, setSubmitting] = useState(false);
 
   if (!info) return null;

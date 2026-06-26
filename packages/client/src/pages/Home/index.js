@@ -41,7 +41,10 @@ import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { useAiChatPanel } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
-import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers";
+import {
+  useIsAiChatAvailable,
+  useStores,
+} from "@docspace/ui-kit/ai-agent/providers";
 
 import {
   addTagsToRoom,
@@ -57,7 +60,6 @@ import { getCategoryType } from "@docspace/shared/utils/common";
 import { CategoryType } from "@docspace/shared/constants";
 
 import SectionWrapper from "SRC_DIR/components/Section";
-import ChooseFormSetBanner from "SRC_DIR/components/ChooseFormSetBanner";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 
@@ -264,6 +266,20 @@ const PureHome = observer((props) => {
     aiChatPanel.isChatPanelVisible &&
     aiChatPanel.isChatPanelFullscreen;
 
+  // The "Forms" section root gets its own quick-actions tile set (collect
+  // forms + from template), resolved by the hook below.
+  const isFormsSection = getCategoryType(location) === CategoryType.Forms;
+
+  // AI-agents create gating: AI must be ready and the user able to manage
+  // agents (admins / owners / room admins — same set as canCreateRooms).
+  // `aiReady` (portal /ai/config) can lag behind the chat-lib profiles, so
+  // treat the presence of profiles as ready too — same signal the agents
+  // EmptyView uses to decide whether to offer agent creation.
+  const { useProfilesStore } = useStores();
+  const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
+  const canCreateAgents =
+    (aiConfig?.aiReady || hasAiProfiles) && canCreateRooms;
+
   // Quick-actions banner (ported from the SDK): create tiles above the
   // files/rooms list. The hook resolves which tile set applies (or none) from
   // the current section + create permission.
@@ -271,6 +287,7 @@ const PureHome = observer((props) => {
     currentFolderId,
     canCreateFiles,
     canCreateRooms,
+    canCreateAgents,
     userId,
     isDocumentsFolder,
     isRoom,
@@ -282,22 +299,12 @@ const PureHome = observer((props) => {
     isFavoritesFolder,
     isRecentFolder,
     isAIAgentsFolder,
+    isFormsSection,
     isContactsPage,
     isProfile,
     isSettingsPage,
   });
   const showQuickActions = quickActions.show && !isChat && !isEmptyPage;
-
-  // The "Forms" section shows its own "Choose Form Set" plate instead of the
-  // quick-actions tiles. Dismissal is remembered across sessions.
-  const isFormsSection = getCategoryType(location) === CategoryType.Forms;
-  const [isFormSetBannerClosed, setIsFormSetBannerClosed] = React.useState(
-    () => localStorage.getItem("form-set-banner-closed") === "true",
-  );
-  const closeFormSetBanner = useCallback(() => {
-    localStorage.setItem("form-set-banner-closed", "true");
-    setIsFormSetBannerClosed(true);
-  }, []);
 
   const onDrop = useEventCallback((f, uploadToFolder) => {
     if (isContactsPage || isProfile) return;
@@ -643,17 +650,12 @@ const PureHome = observer((props) => {
             </Section.SectionFilter>
           ) : null}
 
-          {isFormsSection && !isTemplatesFolder ? (
-            !isFormSetBannerClosed ? (
-              <Section.SectionBanner>
-                <ChooseFormSetBanner onClose={closeFormSetBanner} />
-              </Section.SectionBanner>
-            ) : null
-          ) : showQuickActions ? (
+          {showQuickActions ? (
             <Section.SectionBanner>
               <QuickActions
                 items={quickActions.items}
                 className={styles.quickActions}
+                isLoading={showFilterLoader}
               />
             </Section.SectionBanner>
           ) : null}

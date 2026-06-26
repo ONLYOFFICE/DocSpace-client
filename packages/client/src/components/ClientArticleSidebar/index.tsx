@@ -42,9 +42,10 @@ import type { ValueOf } from "@docspace/shared/types";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 
 import CatalogOverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
-import CatalogFormsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 import AppsSidebar from "SRC_DIR/components/AppsSidebar";
+import { useAppPromo } from "SRC_DIR/components/dialogs/AppPromoDialog";
+import type { AppId } from "SRC_DIR/helpers/apps-catalog";
 import {
   buildFolderUrl,
   getClientActiveId,
@@ -60,6 +61,7 @@ type ClientArticleSidebarProps = FolderIds & {
   // former Rooms/Templates submenu (and the Use template quick action).
   canUseTemplates?: boolean;
   isTemplatesFolderRoot?: boolean;
+  isNavLoading?: boolean;
   onFolderNavigate: () => void;
 };
 
@@ -69,6 +71,7 @@ const ClientArticleSidebar = ({
   isVisitor,
   canUseTemplates,
   isTemplatesFolderRoot,
+  isNavLoading,
   onFolderNavigate,
   ...folderIds
 }: ClientArticleSidebarProps) => {
@@ -81,6 +84,7 @@ const ClientArticleSidebar = ({
     recentFolderId,
     favoritesFolderId,
     recycleBinFolderId,
+    aiAgentsFolderId,
   } = folderIds;
 
   // `onFolderNavigate` is re-created on every inject render; keep a stable ref
@@ -105,6 +109,30 @@ const ClientArticleSidebar = ({
     [navigate, userId, myFolderId],
   );
 
+  // First-run "introduce this app" promo. Shown the first time the user opens a
+  // top-level app section (Files, Rooms, Forms, AI Agents) from this sidebar; on
+  // confirm it runs the same navigation the item would have performed. The
+  // clicked item's navigation is stashed in a ref so the promo's confirm
+  // callback can replay it after the user sees the promo. Generic across apps —
+  // a section opts in by wrapping its onClick with `withPromo(appId, run)`.
+  const promoNavRef = React.useRef<(() => void) | undefined>(undefined);
+  const { maybeShowPromo, promoDialog } = useAppPromo(() => {
+    promoNavRef.current?.();
+  });
+
+  // Wrap a section's onClick so the first open shows that app's promo (which
+  // navigates on confirm); already-seen / no-promo apps navigate immediately.
+  // The clicked item is forwarded so wrapped handlers keep their signature.
+  const withPromo = React.useCallback(
+    <T,>(appId: AppId, run: (item: T) => void) =>
+      (item: T) => {
+        promoNavRef.current = () => run(item);
+        if (maybeShowPromo(appId)) return;
+        run(item);
+      },
+    [maybeShowPromo],
+  );
+
   // Agent-scoped Recent/Favorites/Trash: same alias data, routed under
   // /ai-agents/* so the sidebar keeps the selection under AI Agents.
   const goFolderAgent = React.useCallback(
@@ -112,10 +140,17 @@ const ClientArticleSidebar = ({
       () => {
         onFolderNavigateRef.current?.();
         navigate(
-          buildFolderUrl(folderId, rootFolderType, userId, myFolderId, true),
+          buildFolderUrl(
+            folderId,
+            rootFolderType,
+            userId,
+            myFolderId,
+            true,
+            aiAgentsFolderId,
+          ),
         );
       },
-    [navigate, userId, myFolderId],
+    [navigate, userId, myFolderId, aiAgentsFolderId],
   );
 
   // Rooms-scoped Recent/Favorites: the same special recent/favorites files
@@ -133,6 +168,11 @@ const ClientArticleSidebar = ({
         onFolderNavigateRef.current?.();
         const filter = FilesFilter.getDefault({ categoryType });
         if (folderId != null) filter.folder = String(folderId);
+        if (categoryType === CategoryType.Trash) {
+          filter.folderType = FolderType.Rooms;
+          navigate(`${basePath}/filter?${filter.toUrlParams()}`);
+          return;
+        }
         const parentSuffix =
           roomsFolderId != null ? `&parentId=${roomsFolderId}` : "";
         navigate(`${basePath}/filter?${filter.toUrlParams()}${parentSuffix}`);
@@ -238,12 +278,21 @@ const ClientArticleSidebar = ({
       if (trashFolder)
         children.push(navItem(trashFolder, { withTopSeparator: true }));
 
-      mainItems.push({ ...navItem(myDocsFolder), children });
+      // Intercept the Files entry point with the first-run promo; the promo
+      // replays the item's own navigation on confirm. Sub-items navigate
+      // directly.
+      const filesItem = navItem(myDocsFolder);
+      const openMyDocs = filesItem.onClick;
+      filesItem.onClick = withPromo("ai-files", (item) => openMyDocs?.(item));
+      mainItems.push({ ...filesItem, children });
     }
 
     if (roomsFolder) {
+      const roomsItem = navItem(roomsFolder);
+      const openRooms = roomsItem.onClick;
       mainItems.push({
-        ...navItem(roomsFolder),
+        ...roomsItem,
+        onClick: withPromo("ai-rooms", (item) => openRooms?.(item)),
         children: [
           // Recent/Favorites under Rooms reuse the @recent/@favorites files
           // view, scoped to room content via parentId=roomsFolderId.
@@ -304,8 +353,11 @@ const ClientArticleSidebar = ({
       mainItems.push({
         id: "forms",
         label: t("Common:Forms"),
-        icon: CatalogFormsReactSvgUrl,
-        onClick: go(`/forms/filter?${formsFilter.toUrlParams(userId, false)}`),
+        icon: getCatalogIconUrlByType(FolderType.FormRoom),
+        onClick: withPromo(
+          "ai-forms",
+          go(`/forms/filter?${formsFilter.toUrlParams(userId, false)}`),
+        ),
         children: [
           {
             id: "forms-recent",
@@ -378,10 +430,13 @@ const ClientArticleSidebar = ({
           onClick: goFolderAgent(trashFolder.id, trashFolder.rootFolderType),
         });
 
+      const agentsItem = navItem(aiAgentsFolder);
+      const openAgents = agentsItem.onClick;
+      agentsItem.onClick = withPromo("ai-agents", (item) => openAgents?.(item));
       mainItems.push(
         agentChildren.length > 0
-          ? { ...navItem(aiAgentsFolder), children: agentChildren }
-          : navItem(aiAgentsFolder),
+          ? { ...agentsItem, children: agentChildren }
+          : agentsItem,
       );
     }
 
@@ -398,6 +453,7 @@ const ClientArticleSidebar = ({
     goTemplates,
     goFormsTemplates,
     goFormsScoped,
+    withPromo,
     treeFolders,
     isVisitor,
     canUseTemplates,
@@ -407,7 +463,16 @@ const ClientArticleSidebar = ({
     userId,
   ]);
 
-  return <AppsSidebar groups={groups} activeId={activeId} />;
+  return (
+    <>
+      <AppsSidebar
+        groups={groups}
+        activeId={activeId}
+        isNavLoading={isNavLoading}
+      />
+      {promoDialog}
+    </>
+  );
 };
 
 const ClientArticleSidebarConnected = inject<TStore>(
@@ -432,6 +497,8 @@ const ClientArticleSidebarConnected = inject<TStore>(
     // Matches Home's canCreateRooms — room admins and admins can use templates.
     canUseTemplates: authStore.isAdmin || authStore.isRoomAdmin,
     isTemplatesFolderRoot: treeFoldersStore.isTemplatesFolderRoot,
+    // Same signal the old article used to show <ArticleFolderLoader />.
+    isNavLoading: clientLoadingStore.showArticleLoader,
     onFolderNavigate: () => {
       filesStore.setSelection?.([]);
       clientLoadingStore.setIsSectionBodyLoading(true, true);

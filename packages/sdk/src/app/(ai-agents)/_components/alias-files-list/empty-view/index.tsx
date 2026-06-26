@@ -115,7 +115,7 @@ const EmptyView = ({
         defaultValue: "Upload from {{productName}}",
       }),
       description: t("Common:UploadFilesPortal", {
-        sectionNameFirst: t("Common:MyDocuments"),
+        sectionNameFirst: t("Common:Files"),
         sectionNameSecond: t("Common:Rooms"),
         defaultValue:
           "Pick files from {{sectionNameFirst}} or {{sectionNameSecond}}.",

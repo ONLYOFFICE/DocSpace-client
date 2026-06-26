@@ -69,6 +69,7 @@ import type {
   TModelSettingsDto,
   TPreviewModelsRequest,
   TAIUserConfig,
+  TProfilesList,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -819,6 +820,39 @@ export const getDefaultProvider = async () => {
   return res as TDefaultProvider;
 };
 
+export const getModelsList = async () => {
+  const response = await fetch(`/api/2.0/new-ai/profiles/list`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      ...getAuthHeaders(),
+    },
+  });
+
+  if (!response.ok) return [] as TProfilesList;
+
+  return (await response.json()) as TProfilesList;
+};
+
+export const getProfileAssignments = async (entityId?: string) => {
+  const params = entityId ? `?entityId=${encodeURIComponent(entityId)}` : "";
+
+  const response = await fetch(
+    `/api/2.0/new-ai/assignments/get-all-assignments${params}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        ...getAuthHeaders(),
+      },
+    },
+  );
+
+  if (!response.ok) return {} as Record<string, string>;
+
+  return (await response.json()) as Record<string, string>;
+};
+
 export const updateDefaultProvider = async ({
   providerId,
   defaultModel,
@@ -856,4 +890,3 @@ export const updateAIUserConfig = async (data: TAIUserConfig) => {
 
   return res as TAIUserConfig;
 };
-

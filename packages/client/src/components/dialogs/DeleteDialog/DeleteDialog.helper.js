@@ -92,6 +92,7 @@ export const getDialogContent = (
           i18nKey="DeleteAIAgentDescription"
           ns="Common"
           values={{ agentName: selection[0]?.title }}
+          components={{ 1: <Text fontWeight={600} as="span" /> }}
         />{" "}
         {t("Common:WantToContinue")}
       </>

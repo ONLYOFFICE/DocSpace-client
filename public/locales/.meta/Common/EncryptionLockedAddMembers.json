@@ -3,7 +3,7 @@
   "content": "Encryption is locked — new members cannot access existing files until you unlock your key.",
   "content_en_sha1_hash": "5d791272ebbe4c70f921c5888c4e36faaed3fbae",
   "created_at": "2026-05-24T17:27:26.662Z",
-  "updated_at": "2026-06-09T09:43:10.850Z",
+  "updated_at": "2026-06-25T19:31:02.937Z",
   "comment": {
     "text": "Error toast message that appears when attempting to add new members to a private space while the user's encryption key is locked.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1723,
+      "line_number": 1731,
       "context": "const userId = user?.id;\n if (!userId) return;\n \n const identity = await requireUnlock(String(userId));\n if (!identity) {\n toastr.error(i18n.t(\"Common:EncryptionLockedAddMembers\"));\n return;\n }\n \n const sameRoomRoot =\n destInfo?.private === true &&",
       "module": "/packages/client"
     },

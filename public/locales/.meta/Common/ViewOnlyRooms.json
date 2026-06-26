@@ -3,7 +3,7 @@
   "content": "View-only",
   "content_en_sha1_hash": "bd0aae2579470d5e5f8f929445ef59305e61809b",
   "created_at": "2025-05-19T21:30:49.539Z",
-  "updated_at": "2026-06-15T19:31:56.028Z",
+  "updated_at": "2026-06-25T19:31:02.941Z",
   "comment": {
     "text": "This text labels a room type in the interface, specifically for rooms where content can only be viewed, not edited. It appears as a short label in filters and room type displays.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1147,
+      "line_number": 1185,
       "context": "case RoomsType.ReadOnlyRoom:\n return {\n id: \"filter_type-view-only\",\n key: RoomsType.ReadOnlyRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:ViewOnlyRooms\"),\n };\n case RoomsType.FormRoom:\n return {\n id: \"filter_type-form\",\n key: RoomsType.FormRoom,",
       "module": "/packages/client"
     }

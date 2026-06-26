@@ -3,7 +3,7 @@
   "content": "New presentation",
   "content_en_sha1_hash": "2f9d6210592804df00fdbb934945bcb6ee2accb8",
   "created_at": "2025-05-19T21:30:46.772Z",
-  "updated_at": "2026-06-09T14:03:10.853Z",
+  "updated_at": "2026-06-25T19:31:02.942Z",
   "comment": {
     "text": "This is a label for creating a new presentation file. It appears in menus and as a default file name.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3792,
+      "line_number": 3797,
       "context": "};\n \n const createNewPresentation = {\n id: \"personal_new-presentation\",\n key: \"new-presentation\",\n label: t(\"Common:NewPresentation\"),\n onClick: () => this.onCreate(\"pptx\"),\n icon: ActionsPresentationReactSvgUrl,\n };\n \n const createTemplateForm = {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/hooks/useEditorEvents.ts",
-      "line_number": 498,
+      "line_number": 532,
       "context": "switch (fileExt) {\n case \"xlsx\":\n fileName = t(\"Common:NewSpreadsheet\");\n break;\n case \"pptx\":\n fileName = t(\"Common:NewPresentation\");\n break;\n case \"pdf\":\n fileName = t(\"Common:NewPDFForm\");\n break;\n default:",
       "module": "/packages/doceditor"
     },

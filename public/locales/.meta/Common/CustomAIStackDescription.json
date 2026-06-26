@@ -1,0 +1,29 @@
+{
+  "key_path": "CustomAIStackDescription",
+  "content": "Optimize costs and keep full control over your data and models.",
+  "content_en_sha1_hash": "0e0082989bbd6688b9a0a2d9d6fbde7c06a0aacc",
+  "created_at": "2026-06-25T19:30:57.693Z",
+  "updated_at": "2026-06-25T19:42:18.198Z",
+  "comment": {
+    "text": "Subtext in a promotional dialog describing the benefits of using a custom AI stack.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T19:42:18.198Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
+      "line_number": 182,
+      "context": "description: t(\"Common:SharedAgentsDescription\"),\n },\n {\n Icon: CustomStackIcon,\n title: t(\"Common:CustomAIStack\"),\n description: t(\"Common:CustomAIStackDescription\"),\n },\n {\n Icon: MCPIcon,\n title: t(\"Common:MCPIntegration\"),\n description: t(\"Common:MCPIntegrationDescription\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

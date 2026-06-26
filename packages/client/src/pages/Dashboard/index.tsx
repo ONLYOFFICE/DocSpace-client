@@ -32,6 +32,7 @@ import { useTranslation, Trans } from "react-i18next";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 
@@ -41,12 +42,15 @@ import CatalogDocumentsIcon from "@docspace/ui-kit/assets/icons/16/catalog.docum
 import AiAgentsIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
 
 import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
+import { useAppPromo } from "SRC_DIR/components/dialogs/AppPromoDialog";
+import type { AppId } from "SRC_DIR/helpers/apps-catalog";
 
 import { ModuleCard, type ModuleItem } from "./sub-components/ModuleCard";
 import { ProfileCard } from "./sub-components/ProfileCard";
 import { IntegrationsCard } from "./sub-components/IntegrationsCard";
 import { DevToolsCard } from "./sub-components/DevToolsCard";
 import { Header } from "./sub-components/Header";
+import { DashboardLoader } from "./sub-components/DashboardLoader";
 import { useUploadToMyDocuments } from "./hooks/useUploadToMyDocuments";
 import { useCreateActions } from "./hooks/useCreateActions";
 import { useMyFolderId } from "./hooks/useMyFolderId";
@@ -54,17 +58,32 @@ import styles from "./Dashboard.module.scss";
 
 interface DashboardProps {
   isGuest: boolean;
+  showLoader: boolean;
 }
 
-const Dashboard = ({ isGuest }: DashboardProps) => {
+const Dashboard = ({ isGuest, showLoader }: DashboardProps) => {
   const { t } = useTranslation(["Common", "OAuth"]);
   useDocumentTitle("Common:Overview");
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const myFolderId = useMyFolderId();
-  const { openUploadDialog } = useUploadToMyDocuments(myFolderId);
+  const openFiles = React.useCallback(() => {
+    navigate("/rooms/personal/filter");
+  }, [navigate]);
+  const { openUploadDialog, progress, clearProgress } = useUploadToMyDocuments(
+    myFolderId,
+    openFiles,
+  );
   const createItems = useCreateActions(myFolderId);
+
+  // First-run "introduce this app" promo. The clicked card's href is stashed in
+  // a ref so the promo's confirm callback can navigate to it after the user
+  // sees the promo. Apps without promo content fall straight through to navigate.
+  const promoHrefRef = React.useRef<string | undefined>(undefined);
+  const { maybeShowPromo, promoDialog } = useAppPromo(() => {
+    if (promoHrefRef.current) navigate(promoHrefRef.current);
+  });
 
   // The dashboard renders its own content (no SDK iframe). Tell the
   // persistent host to drop the previous app's frame so it doesn't linger
@@ -87,6 +106,11 @@ const Dashboard = ({ isGuest }: DashboardProps) => {
     localStorage.setItem("useDocSpace", "new");
     return <Navigate to="/dashboard" replace />;
   }
+
+  // On first app load the sidebar shows its nav skeleton until initFiles
+  // resolves; render the matching body skeleton so the Overview doesn't pop in
+  // ahead of the navigation it sits next to.
+  if (showLoader) return <DashboardLoader />;
 
   const moduleItems: ModuleItem[] = [
     {
@@ -119,7 +143,7 @@ const Dashboard = ({ isGuest }: DashboardProps) => {
       title: t("Common:DashboardAIChatAgentsTitle"),
       description: t("Common:DashboardAIChatAgentsDescription"),
       installed: true,
-      href: "/rooms/shared/filter?type=AIAgents",
+      href: "/ai-agents/filter",
     },
   ].filter((mod) => mod.installed);
 
@@ -161,7 +185,13 @@ const Dashboard = ({ isGuest }: DashboardProps) => {
                 <ModuleCard
                   key={mod.id}
                   mod={mod}
-                  onClick={() => mod.href && navigate(mod.href)}
+                  onClick={() => {
+                    promoHrefRef.current = mod.href;
+                    // Show the app's promo on first open; it navigates on
+                    // confirm. Already-seen / no-promo apps navigate directly.
+                    if (maybeShowPromo(mod.id as AppId)) return;
+                    if (mod.href) navigate(mod.href);
+                  }}
                 />
               ))}
             </div>
@@ -172,13 +202,28 @@ const Dashboard = ({ isGuest }: DashboardProps) => {
         <DevToolsCard />
       </div>
 
+      {progress.isUploading ? (
+        <FloatingButton
+          icon="upload"
+          percent={progress.percent}
+          completed={progress.completed}
+          alert={progress.alert}
+          showCancelButton={progress.completed || progress.alert}
+          clearUploadedFilesHistory={clearProgress}
+        />
+      ) : null}
+
+      {promoDialog}
     </div>
   );
 };
 
-const DashboardConnected = inject<TStore>(({ userStore }) => ({
-  isGuest: userStore.user?.isVisitor ?? false,
-}))(observer(Dashboard));
+const DashboardConnected = inject<TStore>(
+  ({ userStore, clientLoadingStore }) => ({
+    isGuest: userStore.user?.isVisitor ?? false,
+    showLoader: clientLoadingStore.showArticleLoader,
+  }),
+)(observer(Dashboard));
 
 export { DashboardConnected as Dashboard };
 

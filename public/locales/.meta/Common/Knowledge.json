@@ -3,7 +3,7 @@
   "content": "Knowledge base",
   "content_en_sha1_hash": "70cd2e748fd8d867b9e8c7a55f97c1f3930136f7",
   "created_at": "2025-12-17T07:49:06.312Z",
-  "updated_at": "2026-06-03T11:46:06.817Z",
+  "updated_at": "2026-06-25T19:31:02.910Z",
   "comment": {
     "text": "This is a tab label or section title. It refers to a knowledge base feature within the AI Room or Portal Settings.",
     "is_auto": true,
@@ -25,32 +25,20 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 144,
-      "context": "currentTabId === \"providers\"\n ? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"Common:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);\n \n const serversData = [",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 144,
-      "context": "currentTabId === \"providers\"\n ? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"Common:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);\n \n const serversData = [",
+      "line_number": 153,
+      "context": "},\n {\n id: TAB_IDS.KNOWLEDGE,\n // Knowledge has no key in the @onlyoffice/ai-chat bundle (aiT), so its\n // label comes from the DocSpace Common namespace instead. Intentional.\n name: t(\"Knowledge\"),\n content: <Knowledge />,\n onClick: () => {\n if (!hasProfiles) return;\n initKnowledge();\n navigateToTab(TAB_IDS.KNOWLEDGE);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 263,
+      "line_number": 268,
       "context": "className={generalStyles.search}\n data-tooltip-id={tooltipId}\n data-tooltip-content={\n !hasAIProviders\n ? t(\"Common:ToUseAddProvider\", {\n value: t(\"Common:Knowledge\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }\n >",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/new-ai-settings/index.tsx",
-      "line_number": 134,
-      "context": "},\n {\n id: TAB_IDS.KNOWLEDGE,\n // Knowledge has no key in the @onlyoffice/ai-chat bundle (aiT), so its\n // label comes from the DocSpace Common namespace instead. Intentional.\n name: t(\"Knowledge\"),\n content: <Knowledge />,\n onClick: makeOnClick(TAB_IDS.KNOWLEDGE),\n isDisabled: disableNonAiModels,\n },\n ];",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 578,
-      "context": "},\n {\n id: \"portal-settings_catalog-ai-settings-knowledge\",\n key: \"7-3\",\n link: \"knowledge\",\n tKey: \"Common:Knowledge\",\n isCategory: true,\n },\n ],\n },\n {",
+      "line_number": 540,
+      "context": "},\n {\n id: \"portal-settings_catalog-ai-settings-knowledge\",\n key: \"7-4\",\n link: \"knowledge\",\n tKey: \"Common:Knowledge\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     },
     {

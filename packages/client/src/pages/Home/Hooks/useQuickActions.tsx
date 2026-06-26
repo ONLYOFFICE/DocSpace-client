@@ -48,6 +48,8 @@ import {
   QuickCollaborationRoomIcon,
   QuickPublicRoomIcon,
   QuickCustomRoomIcon,
+  QuickFormRoomIcon,
+  CreateAgentIcon,
 } from "@docspace/ui-kit/components/quick-actions/icons";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { RoomsType } from "@docspace/ui-kit/enums";
@@ -110,12 +112,35 @@ const goTemplates = (userId?: string) => {
   );
 };
 
+// Opens the create-agent dialog scoped to the current folder, via the same
+// AGENT_CREATE event the agents header button fires (consumed by GlobalEvents
+// / CreateAgentEvent).
+const dispatchCreateAgent = (parentId: number | string | null) => {
+  const event = new CustomEvent(Events.AGENT_CREATE, {
+    detail: { parentId, context: "sidebar" },
+  });
+  window.dispatchEvent(event);
+};
+
+// Opens the form templates list — the Templates search area scoped to the
+// Forms section. Mirrors the sidebar's Forms → Templates item
+// (ClientArticleSidebar.goFormsTemplates).
+const goFormsTemplates = (userId?: string) => {
+  const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Templates);
+  filter.searchArea = RoomSearchArea.Templates;
+  window.DocSpace.navigate(
+    `/forms/filter?${filter.toUrlParams(userId, false)}`,
+  );
+};
+
 export type UseQuickActionsProps = SectionFlags & {
   currentFolderId: number | string | null;
   // selectedFolderStore.security?.Create — folder-level create permission.
   canCreateFiles?: boolean;
   // SDK's canCreateRooms: admins / owners / room admins.
   canCreateRooms?: boolean;
+  // AI is ready and the user can manage agents (admins / owners / room admins).
+  canCreateAgents?: boolean;
   userId?: string;
 };
 
@@ -136,6 +161,7 @@ export const useQuickActions = (
     currentFolderId,
     canCreateFiles,
     canCreateRooms,
+    canCreateAgents,
     userId,
     ...sectionFlags
   } = props;
@@ -213,11 +239,49 @@ export const useQuickActions = (
     [t, currentFolderId, userId],
   );
 
+  const formItems = React.useMemo<QuickActionItem[]>(
+    () => [
+      // Collect forms → create a Form Filling Room.
+      {
+        id: "quick-form-room",
+        icon: <QuickFormRoomIcon />,
+        label: t("Common:FormSetTitle"),
+        onClick: () => dispatchCreateRoom(currentFolderId, RoomsType.FormRoom),
+      },
+      // Opens the form templates list (sidebar Forms → Templates).
+      {
+        id: "quick-form-template",
+        icon: <UseRoomTemplateIllustrationIcon />,
+        label: t("Common:FromTemplate"),
+        onClick: () => goFormsTemplates(userId),
+      },
+    ],
+    [t, currentFolderId, userId],
+  );
+
+  const agentItems = React.useMemo<QuickActionItem[]>(
+    () => [
+      {
+        id: "quick-new-agent",
+        icon: <CreateAgentIcon />,
+        label: t("Common:NewAgent"),
+        onClick: () => dispatchCreateAgent(currentFolderId),
+      },
+    ],
+    [t, currentFolderId],
+  );
+
   if (section === "files" && canCreateFiles)
     return { show: true, items: fileItems };
 
   if (section === "rooms" && canCreateRooms)
     return { show: true, items: roomItems };
+
+  if (section === "forms" && canCreateRooms)
+    return { show: true, items: formItems };
+
+  if (section === "ai-agents" && canCreateAgents)
+    return { show: true, items: agentItems };
 
   // "private" rooms and every other section render no banner (see
   // getQuickActionsSection for why private rooms are skipped).

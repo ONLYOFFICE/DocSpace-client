@@ -38,6 +38,7 @@ import type {
   NavSubItem,
 } from "@docspace/ui-kit/components/nav-menu";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
+import { Portal } from "@docspace/ui-kit/components/portal";
 import { getLogoUrl } from "@docspace/ui-kit/utils/getLogoUrl";
 import { WhiteLabelLogoType } from "@docspace/ui-kit/enums";
 import articleStyles from "@docspace/ui-kit/components/article/Article.module.scss";
@@ -48,10 +49,12 @@ import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import BackButton from "@docspace/ui-kit/components/article/sub-components/BackButton";
 import ArticleDevToolsBar from "@docspace/ui-kit/components/article/sub-components/DevToolsBar";
+import { ArticleProfileLoader } from "@docspace/ui-kit/components/article/skeletons";
 import { useSectionNavigation } from "SRC_DIR/contexts/SectionNavigationContext";
 import CollapseButton from "./CollapseButton";
 import ProfileBlock from "./ProfileBlock";
 import AppsPluginItems from "./AppsPluginItems/AppsPluginItems";
+import { BackButtonLoader, HeaderLoader, NavMenuLoader } from "./SidebarLoader";
 import { useSidebarShowText } from "./useSidebarShowText";
 import styles from "./AppsSidebar.module.scss";
 import type { AppsPluginsItems } from "./AppsPluginItems/AppsPluginItems.types";
@@ -67,6 +70,7 @@ export type AppsSidebarProps = {
   groups: NavMenuGroup[];
   activeId?: string;
   variant?: SidebarVariant;
+  isNavLoading?: boolean;
 };
 
 type AppsSidebarViewProps = AppsSidebarProps & {
@@ -93,6 +97,7 @@ export const AppsSidebarView = ({
   toggleArticleOpen,
   onBack,
   articleButtonItems,
+  isNavLoading,
 }: AppsSidebarViewProps) => {
   const showBackButton = variant === "secondary";
   const hideFooter = variant === "secondary";
@@ -127,6 +132,10 @@ export const AppsSidebarView = ({
   // only. Hidden entirely on the secondary sidebars (accounts/dev-tools/settings)
   // via `hideFooter`.
   const showDevTools = isAdmin || isOwner;
+  const showDevToolsBar = showDevTools && !hideFooter;
+  // While the nav skeleton is up, the footer (plugin slots + banner) stays
+  // hidden so it doesn't appear ahead of the navigation it sits under.
+  const showFooter = !isNavLoading && (hasPluginItems || showDevToolsBar);
 
   const handleBackdropClick = () => {
     toggleArticleOpen?.();
@@ -159,7 +168,7 @@ export const AppsSidebarView = ({
     }));
   }, [groups, isMobile, toggleArticleOpen]);
 
-  return (
+  const articleContent = (
     <>
       <div
         id="article-container"
@@ -174,7 +183,9 @@ export const AppsSidebarView = ({
             className={`${articleStyles.articleHeader} ${styles.header}`}
             data-show-text={showText ? "true" : "false"}
           >
-            {showText ? (
+            {isNavLoading ? (
+              <HeaderLoader showText={showText} />
+            ) : showText ? (
               <>
                 <a href="/" className={styles.logoWrapper}>
                   <img
@@ -224,31 +235,42 @@ export const AppsSidebarView = ({
         >
           {showBackButton && (
             <div className={styles.backButtonWrapper}>
-              <BackButton
-                showText={showText}
-                currentDeviceType={currentDeviceType}
-                onBack={onBack}
-                toggleArticleOpen={toggleArticleOpen}
-              />
+              {isNavLoading ? (
+                <BackButtonLoader
+                  showText={showText}
+                  className={articleStyles.backButton}
+                />
+              ) : (
+                <BackButton
+                  showText={showText}
+                  currentDeviceType={currentDeviceType}
+                  onBack={onBack}
+                  toggleArticleOpen={toggleArticleOpen}
+                />
+              )}
             </div>
           )}
-          <NavMenu
-            groups={mobileGroups}
-            activeItemId={activeId}
-            iconOnly={!showText}
-            withAnimation
-          />
+          {isNavLoading ? (
+            <NavMenuLoader showText={showText} />
+          ) : (
+            <NavMenu
+              groups={mobileGroups}
+              activeItemId={activeId}
+              iconOnly={!showText}
+              withAnimation
+            />
+          )}
 
-          {(hasPluginItems || (showDevTools && !hideFooter)) && (
+          {showFooter && (
             <div className={styles.footer}>
-              {articleButtonItems && articleButtonItems.length > 0 ? (
+              {articleButtonItems?.length ? (
                 <AppsPluginItems
                   items={articleButtonItems}
                   showText={showText}
-                  withDevTools={showDevTools && !hideFooter}
+                  withDevTools={showDevToolsBar}
                 />
               ) : null}
-              {showDevTools && !hideFooter && (
+              {showDevToolsBar && (
                 <ArticleDevToolsBar
                   showText={showText}
                   articleOpen={articleOpen}
@@ -263,12 +285,16 @@ export const AppsSidebarView = ({
           )}
         </Scrollbar>
 
-        {user && !isMobile ? (
+        {!isMobile && (isNavLoading || user) ? (
           <div className={styles.profileBlockWrapper}>
-            <ProfileBlock
-              user={user as unknown as ArticleProfileProps["user"]}
-              showText={showText}
-            />
+            {isNavLoading ? (
+              <ArticleProfileLoader showText={showText} />
+            ) : (
+              <ProfileBlock
+                user={user as unknown as ArticleProfileProps["user"]}
+                showText={showText}
+              />
+            )}
           </div>
         ) : null}
       </div>
@@ -282,6 +308,22 @@ export const AppsSidebarView = ({
       )}
     </>
   );
+
+  if (isMobile) {
+    return (
+      <Portal
+        visible
+        element={articleContent}
+        appendTo={
+          (typeof document !== "undefined" &&
+            document.getElementById("root")) ||
+          undefined
+        }
+      />
+    );
+  }
+
+  return articleContent;
 };
 
 // Store-injected fields are optional here so the public type (what call sites
@@ -331,3 +373,4 @@ export default inject<TStore>(
     articleButtonItems: pluginStore?.articleButtonItemsList,
   }),
 )(observer(AppsSidebar));
+

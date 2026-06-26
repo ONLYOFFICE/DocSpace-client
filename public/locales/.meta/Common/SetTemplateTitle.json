@@ -1,0 +1,35 @@
+{
+  "key_path": "SetTemplateTitle",
+  "content": "Set template",
+  "content_en_sha1_hash": "dd2a162a3d8f5732a90ed462826c2f56681c6190",
+  "created_at": "2026-06-25T19:30:50.958Z",
+  "updated_at": "2026-06-25T19:32:51.733Z",
+  "comment": {
+    "text": "Dialog title or section header appearing when configuring a template within a form.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T19:32:51.733Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/components/room-type/RoomType.utils.ts",
+      "line_number": 11,
+      "context": "roomType: RoomsType = 1,\n isTemplate: boolean = false,\n isFormSection: boolean = false,\n ) => {\n if (isFormSection)\n return isTemplate ? t(\"Common:SetTemplateTitle\") : t(\"Common:FormSetTitle\");\n \n if (isTemplate) return t(\"Common:FromTemplate\");\n \n switch (roomType) {\n case RoomsType.EditingRoom:",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
+      "line_number": 11,
+      "context": "roomType: RoomsType = 1,\n isTemplate: boolean = false,\n isFormSection: boolean = false,\n ) => {\n if (isFormSection)\n return isTemplate ? t(\"Common:SetTemplateTitle\") : t(\"Common:FormSetTitle\");\n \n if (isTemplate) return t(\"Common:FromTemplate\");\n \n switch (roomType) {\n case RoomsType.EditingRoom:",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

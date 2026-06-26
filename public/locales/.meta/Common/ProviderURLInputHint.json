@@ -3,7 +3,7 @@
   "content": "Enter the API endpoint URL provided by your AI service",
   "content_en_sha1_hash": "eb45fcaf61601475fc1d5f0dbafbdd8ae8d000e6",
   "created_at": "2025-11-07T13:41:03.792Z",
-  "updated_at": "2026-06-09T09:43:10.890Z",
+  "updated_at": "2026-06-25T19:31:03.047Z",
   "comment": {
     "text": "This is a placeholder text for an input field where the user should enter the API endpoint URL for their AI service.",
     "is_auto": true,
@@ -11,12 +11,6 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
-      "line_number": 527,
-      "context": "selectedOption.key !== ProviderType.OpenAiCompatible\n }\n testId=\"provider-url-input\"\n />\n <Text className={styles.fieldHint}>\n {t(\"Common:ProviderURLInputHint\")}\n </Text>\n </FieldContainer>\n <FieldContainer\n labelText={t(\"Common:ProviderKey\")}\n labelVisible",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/dialogs/add-update/index.tsx",
       "line_number": 513,

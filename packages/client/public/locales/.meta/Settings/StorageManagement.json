@@ -3,7 +3,7 @@
   "content": "Storage management",
   "content_en_sha1_hash": "aee08f8d5281c4277ee7ebdfe0a0f452865e73b5",
   "created_at": "2025-05-19T21:30:52.780Z",
-  "updated_at": "2026-06-03T11:46:06.852Z",
+  "updated_at": "2026-06-25T19:31:02.889Z",
   "comment": {
     "text": "This is a section title in the portal settings. It refers to the management of storage space within ONLYOFFICE DocSpace.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/PortalSettingsSidebar/index.tsx",
+      "line_number": 91,
+      "context": "case \"ManagementCategoryIntegration\":\n return t(\"Settings:ManagementCategoryIntegration\");\n case \"DataImport\":\n return t(\"Settings:DataImport\");\n case \"StorageManagement\":\n return t(\"Settings:StorageManagement\");\n case \"Services\":\n return t(\"Settings:Services\");\n case \"AISettings\":\n return t(\"Settings:AISettings\");\n case \"NewAISettings\":",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/index.js",
       "line_number": 67,

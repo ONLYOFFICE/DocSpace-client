@@ -3,7 +3,7 @@
   "content": "Server removed successfully",
   "content_en_sha1_hash": "2534ef8dc4cd80a0cf9f6d58cf579643bfdfd510",
   "created_at": "2025-10-27T16:14:31.650Z",
-  "updated_at": "2026-05-24T17:27:49.143Z",
+  "updated_at": "2026-06-25T19:31:03.049Z",
   "comment": {
     "text": "This is a toast message confirming that a server has been successfully removed from the AI settings. It appears briefly after the user initiates the deletion of a server.",
     "is_auto": true,
@@ -11,12 +11,6 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/delete/index.tsx",
-      "line_number": 69,
-      "context": "const [loading, setLoading] = React.useState(false);\n \n const onSubmitAction = async () => {\n try {\n await deleteMCP?.(serverId);\n toastr.success(t(\"Common:ServerRemovedSuccess\"));\n } catch (error) {\n console.error(error);\n toastr.error(error as string);\n } finally {\n setLoading(false);",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/dialogs/delete/index.tsx",
       "line_number": 55,

@@ -38,6 +38,7 @@ import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.
 import CatalogDocumentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
 import CatalogTemplateReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.template.react.svg?url";
+import CatalogFormReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.form.react.svg?url";
 import CatalogArchiveReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.archive.react.svg?url";
 import CatalogSharedReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.shared.outline.svg?url";
 import CatalogPortfolioReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.portfolio.react.svg?url";
@@ -71,6 +72,7 @@ import CatalogFolder20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.folde
 import CatalogDocuments20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.documents.react.svg?url";
 import CatalogRooms20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.rooms.react.svg?url";
 import CatalogTemplate20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.template.react.svg?url";
+import CatalogForm20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.form.react.svg?url";
 import CatalogArchive20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.archive.react.svg?url";
 import CatalogShared20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.shared.outline.svg?url";
 import CatalogPortfolio20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.portfolio.react.svg?url";
@@ -118,10 +120,11 @@ const defaultIcon: Record<SizeType, string> = {
 
 const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
   16: {
-    [FolderType.USER]: CatalogDocumentsReactSvgUrl,
+    [FolderType.USER]: CatalogFolderReactSvgUrl,
     [FolderType.Rooms]: CatalogRoomsReactSvgUrl,
     [FolderType.RoomTemplates]: CatalogTemplateReactSvgUrl,
     [FolderType.Templates]: CatalogTemplateReactSvgUrl,
+    [FolderType.FormRoom]: CatalogFormReactSvgUrl,
     [FolderType.Archive]: CatalogArchiveReactSvgUrl,
     [FolderType.SHARE]: CatalogSharedReactSvgUrl,
     [FolderType.COMMON]: CatalogPortfolioReactSvgUrl,
@@ -157,10 +160,11 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [PageType.newAISettings]: CatalogSettingsAIReactSvgUrl,
   },
   20: {
-    [FolderType.USER]: CatalogDocuments20ReactSvgUrl,
+    [FolderType.USER]: CatalogFolder20ReactSvgUrl,
     [FolderType.Rooms]: CatalogRooms20ReactSvgUrl,
     [FolderType.RoomTemplates]: CatalogTemplate20ReactSvgUrl,
     [FolderType.Templates]: CatalogTemplate20ReactSvgUrl,
+    [FolderType.FormRoom]: CatalogForm20ReactSvgUrl,
     [FolderType.Archive]: CatalogArchive20ReactSvgUrl,
     [FolderType.SHARE]: CatalogShared20ReactSvgUrl,
     [FolderType.COMMON]: CatalogPortfolio20ReactSvgUrl,

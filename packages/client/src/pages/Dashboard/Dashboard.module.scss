@@ -507,3 +507,90 @@
   text-decoration: underline;
   padding-top: 12px;
 }
+
+// Loaders — skeleton boxes mirroring the cards above (no interactivity), so the
+// Overview skeleton lines up with the real content and there's no layout shift.
+.loaderModuleCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 12px;
+
+  :global(.light) & {
+    border: 1px solid $gray-light-mid;
+  }
+
+  :global(.dark) & {
+    border: 1px solid $light-dark-gray-hover;
+  }
+}
+
+.loaderModuleHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.loaderCollapsibleCard {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+
+  :global(.light) & {
+    background-color: $gray-light;
+  }
+
+  :global(.dark) & {
+    background-color: $dark-gray-light;
+  }
+}
+
+.loaderCollapsibleHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 24px;
+}
+
+.loaderCollapsibleBody {
+  padding: 0 24px 20px;
+}
+
+.loaderIntegrationTile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px;
+  border-radius: 12px;
+
+  :global(.light) & {
+    background-color: $white;
+    border: 1px solid $gray-light-mid;
+  }
+
+  :global(.dark) & {
+    background-color: $dark-gray-light;
+    border: 1px solid $light-dark-gray-hover;
+  }
+}
+
+.loaderDevToolTile {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 12px;
+
+  :global(.light) & {
+    background-color: $white;
+    border: 1px solid $gray-light-mid;
+  }
+
+  :global(.dark) & {
+    background-color: $dark-gray-light;
+    border: 1px solid $light-dark-gray-hover;
+  }
+}

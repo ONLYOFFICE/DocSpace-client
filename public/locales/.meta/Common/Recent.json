@@ -3,7 +3,7 @@
   "content": "Recent",
   "content_en_sha1_hash": "76eec760c9b6e63eda7e9834fa40bc26d6f58eef",
   "created_at": "2025-08-27T10:14:14.891Z",
-  "updated_at": "2026-06-15T19:31:55.957Z",
+  "updated_at": "2026-06-25T19:31:02.852Z",
   "comment": {
     "text": "This is a label for a folder or category in the file management system. It refers to recently accessed files or documents.",
     "is_auto": true,
@@ -12,10 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/selectors/Files/hooks/useRootHelper.tsx",
-      "line_number": 177,
-      "context": "break;\n case FolderType.Favorites:\n title = t(\"Favorites\");\n break;\n case FolderType.Recent:\n title = t(\"Recent\");\n break;\n case FolderType.AiAgents:\n title = t(\"AIAgents\");\n break;\n default:",
+      "file_path": "/libs/ui-kit/selectors/utils/index.ts",
+      "line_number": 301,
+      "context": "items.push(\n build(\n \"recent\",\n recentFolder,\n CatalogRecentSvg,\n t(\"Recent\"),\n FolderType.Recent,\n ),\n );\n \n if (withFavorites && favoritesFolder)",
       "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
+      "line_number": 301,
+      "context": "children: [\n // Recent/Favorites under Rooms reuse the @recent/@favorites files\n // view, scoped to room content via parentId=roomsFolderId.\n {\n id: \"rooms-recent\",\n label: t(\"Common:Recent\"),\n icon: getCatalogIconUrlByType(FolderType.Recent),\n onClick: goRoomsScoped(\n CategoryType.Recent,\n \"/rooms/recent\",\n recentFolderId,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
+      "line_number": 301,
+      "context": "children: [\n // Recent/Favorites under Rooms reuse the @recent/@favorites files\n // view, scoped to room content via parentId=roomsFolderId.\n {\n id: \"rooms-recent\",\n label: t(\"Common:Recent\"),\n icon: getCatalogIconUrlByType(FolderType.Recent),\n onClick: goRoomsScoped(\n CategoryType.Recent,\n \"/rooms/recent\",\n recentFolderId,",
+      "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",

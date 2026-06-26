@@ -3,7 +3,7 @@
   "content": "Open",
   "content_en_sha1_hash": "cf9b77061f7b3126b49d50a6fa68f7ca8c26b7a3",
   "created_at": "2026-03-20T09:07:38.471Z",
-  "updated_at": "2026-06-15T19:31:56.033Z",
+  "updated_at": "2026-06-25T19:31:02.899Z",
   "comment": {
     "text": "This is a button label that allows users to open a file or folder. It appears in various contexts, such as confirming an AI agent's action or within a version history context menu.",
     "is_auto": true,
@@ -16,6 +16,30 @@
       "line_number": 337,
       "context": "href={folderUrl}\n target=\"_blank\"\n rel=\"noopener noreferrer\"\n className={styles.toastLink}\n >\n {getCommonTranslation(\"Open\")}\n </a>\n </>\n )}\n </>,\n getCommonTranslation(\"Done\"),",
       "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
+      "line_number": 91,
+      "context": "description: t(\"Common:AccessControlDescription\"),\n },\n ],\n IllustrationLight: FilesPreviewLight,\n IllustrationDark: FilesPreviewLight,\n openLabel: t(\"Common:Open\"),\n githubLabel: t(\"Common:ViewOnGithub\"),\n githubUrl: \"https://github.com/ONLYOFFICE/DocSpace\",\n },\n \"ai-rooms\": {\n title: t(\"Common:Rooms\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
+      "line_number": 91,
+      "context": "description: t(\"Common:AccessControlDescription\"),\n },\n ],\n IllustrationLight: FilesPreviewLight,\n IllustrationDark: FilesPreviewLight,\n openLabel: t(\"Common:Open\"),\n githubLabel: t(\"Common:ViewOnGithub\"),\n githubUrl: \"https://github.com/ONLYOFFICE/DocSpace\",\n },\n \"ai-rooms\": {\n title: t(\"Common:Rooms\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
+      "line_number": 91,
+      "context": "description: t(\"Common:AccessControlDescription\"),\n },\n ],\n IllustrationLight: FilesPreviewLight,\n IllustrationDark: FilesPreviewLight,\n openLabel: t(\"Common:Open\"),\n githubLabel: t(\"Common:ViewOnGithub\"),\n githubUrl: \"https://github.com/ONLYOFFICE/DocSpace\",\n },\n \"ai-rooms\": {\n title: t(\"Common:Rooms\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
+      "line_number": 91,
+      "context": "description: t(\"Common:AccessControlDescription\"),\n },\n ],\n IllustrationLight: FilesPreviewLight,\n IllustrationDark: FilesPreviewLight,\n openLabel: t(\"Common:Open\"),\n githubLabel: t(\"Common:ViewOnGithub\"),\n githubUrl: \"https://github.com/ONLYOFFICE/DocSpace\",\n },\n \"ai-rooms\": {\n title: t(\"Common:Rooms\"),",
+      "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/InstallAiArbiterDialog/index.tsx",

@@ -52,6 +52,7 @@ type CreateButtonMobileProps = {
   isAIAgentsFolder?: boolean;
   selectedFolderId?: number | string;
   currentDeviceType?: DeviceType;
+  showBodyLoader?: boolean;
   getFolderModel: GetCreateModel;
   getContactsModel: GetCreateModel;
   onCreateRoom: () => void;
@@ -66,6 +67,7 @@ const CreateButtonMobile = ({
   isAIAgentsFolder,
   selectedFolderId,
   currentDeviceType,
+  showBodyLoader,
   getFolderModel,
   getContactsModel,
   onCreateRoom,
@@ -115,7 +117,7 @@ const CreateButtonMobile = ({
   );
 
   const isDesktopView = currentDeviceType === DeviceType.desktop;
-  const isCreateFabVisible = showMainButton && !isDesktopView;
+  const isCreateFabVisible = showMainButton && !isDesktopView && !showBodyLoader;
 
   React.useEffect(() => {
     setMainButtonVisible?.(isCreateFabVisible);
@@ -149,6 +151,7 @@ export default inject(
     isAIAgentsFolder: treeFoldersStore.isAIAgentsFolder,
     selectedFolderId: selectedFolderStore.id,
     currentDeviceType: settingsStore.currentDeviceType,
+    showBodyLoader: clientLoadingStore.showBodyLoader,
     getFolderModel: contextOptionsStore.getFolderModel,
     getContactsModel: peopleStore.contextOptionsStore.getContactsModel,
     onCreateRoom: contextOptionsStore.onCreateRoom,

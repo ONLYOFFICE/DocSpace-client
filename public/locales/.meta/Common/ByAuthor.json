@@ -3,7 +3,7 @@
   "content": "Author",
   "content_en_sha1_hash": "5fda23d62015b99fb2a9f86b38bcdf2bdf7609c8",
   "created_at": "2025-05-19T21:30:55.305Z",
-  "updated_at": "2026-06-15T19:31:56.006Z",
+  "updated_at": "2026-06-25T19:31:02.932Z",
   "comment": {
     "text": "This is a short label indicating the author of a file or plugin. It appears in file details, plugin information, and as a column header in tables.",
     "is_auto": true,
@@ -61,13 +61,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 967,
+      "line_number": 1000,
       "context": "return [\n {\n key: FilterGroups.filterAuthor,\n group: FilterGroups.filterAuthor,\n label: t(\"Common:ByAuthor\"),\n isHeader: true,\n },\n {\n id: \"filter_author-user-button\",\n key: FilterKeys.user,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 967,
+      "line_number": 1000,
       "context": "return [\n {\n key: FilterGroups.filterAuthor,\n group: FilterGroups.filterAuthor,\n label: t(\"Common:ByAuthor\"),\n isHeader: true,\n },\n {\n id: \"filter_author-user-button\",\n key: FilterKeys.user,",
       "module": "/packages/client"
     },

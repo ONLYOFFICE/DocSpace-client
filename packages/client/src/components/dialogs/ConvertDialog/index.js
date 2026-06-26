@@ -90,7 +90,7 @@ const ConvertDialogComponent = (props) => {
 
   if (convertSingleFile && sortedFolder) {
     rootFolderTitle = isSharedWithMeFolder
-      ? t("Common:MyDocuments")
+      ? t("Common:Files")
       : rootFoldersTitles[convertItem.rootFolderType]?.title;
   }
 

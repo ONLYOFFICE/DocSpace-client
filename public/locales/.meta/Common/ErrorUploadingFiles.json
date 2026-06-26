@@ -3,7 +3,7 @@
   "content": "Error uploading files: {{count}}",
   "content_en_sha1_hash": "58de59ef14082ec9957dcf4b46c13ec933ca7a05",
   "created_at": "2025-05-19T21:30:55.637Z",
-  "updated_at": "2026-06-01T21:20:44.435Z",
+  "updated_at": "2026-06-25T19:31:02.946Z",
   "comment": {
     "text": "This is an error message displayed within a button label, indicating that some files failed to upload. `{{count}}` represents the number of files that encountered an error.",
     "is_auto": true,
@@ -24,9 +24,9 @@
       "module": "/libs/ui-kit"
     },
     {
-      "file_path": "/packages/client/src/pages/Dashboard/hooks/useUploadToMyDocuments.ts",
-      "line_number": 112,
-      "context": "toastr.success(\n t(\"Common:ItemsSuccessfullyUploaded\", { count: uploaded }),\n );\n }\n if (failed > 0) {\n toastr.error(t(\"Common:ErrorUploadingFiles\", { count: failed }));\n }\n },\n [folderId, t],\n );",
+      "file_path": "/packages/client/src/pages/Dashboard/hooks/useUploadToMyDocuments.tsx",
+      "line_number": 202,
+      "context": "t(\"Common:Files\"),\n onOpenFiles,\n );\n }\n if (failed > 0) {\n toastr.error(t(\"Common:ErrorUploadingFiles\", { count: failed }));\n }\n },\n [folderId, t, onOpenFiles],\n );",
       "module": "/packages/client"
     }
   ],

@@ -45,12 +45,16 @@ export type QuickActionsSection =
   | "files"
   // Rooms list root: offer the create-room tile (+ disabled use-template tile).
   | "rooms"
+  // Forms section root: offer the collect-forms tile + from-template tile.
+  | "forms"
+  // AI-agents list root: offer the create-agent tile.
+  | "ai-agents"
   // Encrypted/private room: the SDK shows folder + upload tiles here, but the
   // matching illustrations are not bundled in the client package, so we render
   // no banner for now (the `+` button is still hidden — see isFilesRoomsArea).
   | "private"
-  // Archive / trash / templates / favorites / recent / AI-agents / contacts /
-  // profile / settings: no quick-actions banner.
+  // Archive / trash / templates / favorites / recent / contacts / profile /
+  // settings: no quick-actions banner.
   | null;
 
 export type SectionFlags = {
@@ -66,6 +70,7 @@ export type SectionFlags = {
   isRecentFolder?: boolean;
   isAIAgentsFolder?: boolean;
   // View-level flags (already computed in Home/Header).
+  isFormsSection?: boolean; // the "Forms" section root (CategoryType.Forms)
   isContactsPage?: boolean;
   isProfile?: boolean;
   isSettingsPage?: boolean;
@@ -86,6 +91,7 @@ export const getQuickActionsSection = (
     isFavoritesFolder,
     isRecentFolder,
     isAIAgentsFolder,
+    isFormsSection,
     isContactsPage,
     isProfile,
     isSettingsPage,
@@ -98,10 +104,15 @@ export const getQuickActionsSection = (
     isRecycleBinFolder ||
     isTemplatesFolder ||
     isFavoritesFolder ||
-    isRecentFolder ||
-    isAIAgentsFolder
+    isRecentFolder
   )
     return null;
+
+  // AI-agents list root → create-agent tile.
+  if (isAIAgentsFolder) return "ai-agents";
+
+  // Forms section root → collect-forms + from-template tiles.
+  if (isFormsSection) return "forms";
 
   // Rooms list root → room tiles.
   if (isRoomsFolder) return "rooms";

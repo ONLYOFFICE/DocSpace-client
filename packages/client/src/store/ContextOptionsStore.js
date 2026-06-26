@@ -1893,7 +1893,7 @@ class ContextOptionsStore {
           id: "header_option_empty-section",
           key: "empty-section",
           label: t("Common:EmptySection", {
-            sectionName: t("Common:MyDocuments"),
+            sectionName: t("Common:Files"),
           }),
           onClick: this.onEmptyPersonalAction,
           icon: ClearTrashReactSvgUrl,

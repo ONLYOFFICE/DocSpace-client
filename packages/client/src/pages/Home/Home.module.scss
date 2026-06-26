@@ -70,13 +70,33 @@
     min-width: 0 !important;
     width: 0 !important;
     overflow: hidden;
+    visibility: hidden;
   }
 
   :global(.chat-panel) {
     flex: 1 1 auto !important;
-    width: auto !important;
     max-width: 100% !important;
     border-inline-start: none;
+
+    @include mixins.not-mobile {
+      width: calc(100% - var(--ai-sidebar-width, 0px)) !important;
+    }
+  }
+}
+
+@include mixins.not-mobile {
+  :global(.main-container) {
+    --ai-sidebar-width: 0px;
+  }
+
+  :global(.main-container):has(:global(#article-container)) {
+    --ai-sidebar-width: var(--article-desktop-width, 252px);
+  }
+
+  :global(.main-container):has(
+    :global(#article-container[data-show-text="false"])
+  ) {
+    --ai-sidebar-width: var(--article-tablet-width-collapsed, 60px);
   }
 }
 
@@ -100,6 +120,13 @@
     --section-header-size,
     var(--section-header-height, 69px)
   );
+  // `var()` is resolved lazily at use-time, so this picks up whichever
+  // `--section-filter-top` the cascade applies (incl. the responsive
+  // overrides below). Declared before the nested `@media` rules to avoid
+  // Sass's mixed-declarations deprecation warning.
+  --section-filter-bottom: calc(
+    var(--section-filter-top) + var(--section-filter-height)
+  );
 
   @include mixins.tablet-and-below {
     --section-filter-top: var(
@@ -114,8 +141,4 @@
       var(--section-header-height-mobile, 53px)
     );
   }
-
-  --section-filter-bottom: calc(
-    var(--section-filter-top) + var(--section-filter-height)
-  );
 }

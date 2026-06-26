@@ -3,7 +3,7 @@
   "content": "Connect your own AI service to unlock advanced features in {{productName}}. Once added, it will be accessible to all users in {{aiChats}}.",
   "content_en_sha1_hash": "a65fbd5865591bc45637f4aadcb15bfb36b35fad",
   "created_at": "2025-12-22T14:24:24.511Z",
-  "updated_at": "2026-06-01T21:20:44.384Z",
+  "updated_at": "2026-06-25T19:31:02.867Z",
   "comment": {
     "text": "Description text displayed to a standalone portal administrator when no AI agents are configured. It explains how to enable AI features by connecting an AI service, which will then be available to all users in the AI Chats section. `{{productName}}` is the product's brand name (e.g., \"DocSpace\"), and `{{aiChats}}` refers to the \"AI Chats\" feature.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
-      "line_number": 122,
+      "line_number": 128,
       "context": "mcpServer: t(\"Common:MCPServer\", { defaultValue: \"MCP server\" }),\n defaultValue:\n \"Set up an agent with model, instructions and an {{mcpServer}} to get started.\",\n })\n : standalone && isAdminOrOwner\n ? t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: getBrandName(\"ProductName\"),\n aiChats: t(\"Common:AIChats\", { defaultValue: \"AI Chats\" }),\n defaultValue:\n \"Configure an AI provider in {{productName}} settings to unlock {{aiChats}}.\",\n })",
       "module": "/packages/sdk"
     }

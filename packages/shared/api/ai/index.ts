@@ -835,9 +835,7 @@ export const getModelsList = async () => {
 };
 
 export const getProfileAssignments = async (entityId?: string) => {
-  const params = entityId
-    ? `?entityId=${encodeURIComponent(entityId)}`
-    : "";
+  const params = entityId ? `?entityId=${encodeURIComponent(entityId)}` : "";
 
   const response = await fetch(
     `/api/2.0/new-ai/assignments/get-all-assignments${params}`,

@@ -88,7 +88,7 @@
   "MaximumFolderSizePerFolder": "Taille maximale du dossier par dossier",
   "MaximumFoldersSizeDescription": "Les dossiers de cette taille ne pourront pas être téléversés.",
   "MaximumTotalUploadSize": "Taille totale de téléchargement maximale",
-  "MaximumTotalUploadSizeDescription": "Limite la taille totale de tous les fichiers téléchargés simultanément. Si le total dépasse la limite, le téléversement ne démarrera pas.",
+  "MaximumTotalUploadSizeDescription": "Limite la taille totale de tous les fichiers téléchargés simultanément. Si le total dépasse la limite, le téléchargement ne démarrera pas.",
   "Menu": "Menu gauche",
   "MenuDescription": "Vous pouvez désactiver le menu de gauche, si les utilisateurs n'ont pas besoin de naviguer vers d'autres sections.",
   "MobileOnly": "uniquement les appareils mobiles",
@@ -147,7 +147,7 @@
   "UploaderPresetInfo": "Intégrer le téléchargeur afin que les utilisateurs puissent télécharger des documents dans votre espace sans inscription. Choisissez les types de fichiers autorisés pour le téléchargement.",
   "UploadFilesDescription": "Les utilisateurs peuvent télécharger des fichiers individuels.",
   "UploadFoldersDescription": "Les utilisateurs peuvent télécharger des dossiers entiers en conservant leur structure.",
-  "UploadLimits": "Limites de téléversement",
+  "UploadLimits": "Limites de téléchargement",
   "UploadMode": "Mode de téléchargement",
   "ViewerDescription": "Intégrez le lecteur pour permettre aux utilisateurs d'ouvrir un fichier en lecture seule à partir d'une salle.",
   "VoidReturn": "Vide"

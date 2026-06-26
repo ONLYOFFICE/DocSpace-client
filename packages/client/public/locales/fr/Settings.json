@@ -49,7 +49,7 @@
   "AuthorizationKeysInfo": "Grâce aux clés d'autorisation, vous pouvez connecter des services tiers à votre espace. Connectez-vous facilement avec Facebook, Google ou LinkedIn. Ajoutez Dropbox, OneDrive et d'autres comptes pour travailler avec les fichiers qui y sont stockés.",
   "BackupCreatedError": "Une erreur s'est produite. S'il vous plaît contactez votre administrateur.",
   "BackupFile": "Fichier de sauvegarde",
-  "BackupFileUploading": "Le fichier de sauvegarde est en cours de téléversement sur le serveur. Veuillez patienter.",
+  "BackupFileUploading": "Le fichier de sauvegarde est en cours de téléchargement sur le serveur. Veuillez patienter.",
   "BlankDocument": "Document vierge",
   "BlankForm": "Formulaire vide",
   "BlankPresentation": "Présentation vierge",
@@ -335,7 +335,7 @@
   "UseSpecialChar": "Utiliser symboles spéciaux",
   "UseUpperCase": "Utiliser majuscules",
   "WantToCancelDataImport": "Voulez-vous annuler l'importation des données?",
-  "WantToCancelUpload": "Voulez-vous annuler le téléversement ?",
+  "WantToCancelUpload": "Voulez-vous annuler le téléchargement ?",
   "WantToContinueQuota": "Voulez-vous continuer ou modifier le quota de stockage de l'utilisateur ?",
   "WebhooksDescription": "Exécuter des actions personnalisées pour toute application ou site web que vous utilisez, en fonction de divers événements dans {{organizationName}} {{productName}}.",
   "WithoutEmailHint": "Vous n'avez aucun utilisateur sans adresse e-mail. Veuillez passer à l'étape suivante."

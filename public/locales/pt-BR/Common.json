@@ -404,7 +404,6 @@
   "DecryptionPortalTitle": "O processo de descriptografia está em andamento",
   "Default": "Padrão",
   "DefaultQuota": "Cota padrão",
-  "DelayedPayment": "Pagamento atrasado do plano {{planName}} datado de {{date}}",
   "Delete": "Excluir",
   "DeleteAIAgentChatTitle": "Apagar chat?",
   "DeleteAIChatDescription": "Você está prestes a excluir <strong>{{chatName}}<1>.</1></strong>\n Todas as mensagens e o histórico do chat serão removidos permanentemente e não poderão ser restaurados.",

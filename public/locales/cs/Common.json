@@ -404,7 +404,6 @@
   "DecryptionPortalTitle": "Proces dešifrování probíhá",
   "Default": "Výchozí",
   "DefaultQuota": "Výchozí kvóta",
-  "DelayedPayment": "Opožděná platba tarifu {{planName}} ze dne {{date}}",
   "Delete": "Smazat",
   "DeleteAIAgentChatTitle": "Smazat chat?",
   "DeleteAIChatDescription": "Mazat se chystáte <strong>{{chatName}}<1>.</1></strong>\n Všechny zprávy a historie chatu budou trvale smazány a nelze je obnovit.",

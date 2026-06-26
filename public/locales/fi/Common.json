@@ -404,7 +404,6 @@
   "DecryptionPortalTitle": "Salauksen purku on käynnissä",
   "Default": "Oletus",
   "DefaultQuota": "Oletuskiintiö",
-  "DelayedPayment": "{{planName}} maksu myöhässä ohjelman päiväys {{date}}",
   "Delete": "Poista",
   "DeleteAIAgentChatTitle": "Poista keskustelu?",
   "DeleteAIChatDescription": "Olet aikeissa poistaa <strong>{{chatName}}<1>.</1></strong>\n Kaikki viestit ja chat-historia poistetaan pysyvästi, eikä niitä voida palauttaa.",

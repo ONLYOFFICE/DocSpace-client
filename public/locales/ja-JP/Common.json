@@ -404,7 +404,6 @@
   "DecryptionPortalTitle": "復号プロセスが進行中です",
   "Default": "デフォルト",
   "DefaultQuota": "デフォルトな容量制限",
-  "DelayedPayment": "{{planName}}プランの{{date}}までのお支払いを確認できませんでした",
   "Delete": "削除",
   "DeleteAIAgentChatTitle": "チャットを削除しますか？",
   "DeleteAIChatDescription": "削除しようとしています：<strong>{{chatName}}<1>.</1></strong>\nすべてのメッセージとチャット履歴が完全に削除され、復元できません。",

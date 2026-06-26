@@ -404,7 +404,6 @@
   "DecryptionPortalTitle": "Processus de déchiffrement en cours",
   "Default": "Par défaut",
   "DefaultQuota": "Quota par défaut",
-  "DelayedPayment": "Retard de paiement du plan {{planName}} daté du {{date}}",
   "Delete": "Supprimer",
   "DeleteAIAgentChatTitle": "Supprimer le chat ?",
   "DeleteAIChatDescription": "Vous êtes sur le point de supprimer <strong>{{chatName}}<1>.</1></strong> Tous les messages et l'historique du chat seront définitivement supprimés et ne pourront pas être restaurés.",

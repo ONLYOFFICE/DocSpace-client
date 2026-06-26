@@ -404,7 +404,6 @@
   "DecryptionPortalTitle": "Processo di decrittazione in corso",
   "Default": "Predefinito",
   "DefaultQuota": "Quota predefinita",
-  "DelayedPayment": "Pagamento posticipato del piano {{planName}} in data {{date}}",
   "Delete": "Elimina",
   "DeleteAIAgentChatTitle": "Elimina chat?",
   "DeleteAIChatDescription": "Sta per eliminare <strong>{{chatName}}<1>.</1></strong>\n Tutti i messaggi e la cronologia della chat verranno rimossi definitivamente e non potranno essere ripristinati.",

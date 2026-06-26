@@ -404,7 +404,6 @@
   "DecryptionPortalTitle": "正在解密中",
   "Default": "默认",
   "DefaultQuota": "默认配额",
-  "DelayedPayment": "{{planName}}版本延迟付款日期{{date}}",
   "Delete": "删除",
   "DeleteAIAgentChatTitle": "删除聊天？",
   "DeleteAIChatDescription": "您将要删除<strong>{{chatName}}<1>.</1></strong>\n所有消息和聊天记录将被永久删除，且无法恢复。",

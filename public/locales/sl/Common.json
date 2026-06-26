@@ -404,7 +404,6 @@
   "DecryptionPortalTitle": "Proces dešifriranja je v teku",
   "Default": "Privzeto",
   "DefaultQuota": "Privzeta kvota",
-  "DelayedPayment": "Zamuda pri plačilu paketa {{planName}} z datumom {{date}}",
   "Delete": "Izbriši",
   "DeleteAIAgentChatTitle": "Izbrisiti klepetal?",
   "DeleteAIChatDescription": "Brišete <strong>{{chatName}}<1>.</1></strong>\n Vse objave in zgodovina klepeta bodo trajno izbrisane in jih ne bo mogoče obnoviti.",

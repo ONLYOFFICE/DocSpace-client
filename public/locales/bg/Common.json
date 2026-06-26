@@ -404,7 +404,6 @@
   "DecryptionPortalTitle": "Процесът на декриптиране е в ход",
   "Default": "По подразбиране",
   "DefaultQuota": "Квота по подразбиране",
-  "DelayedPayment": "Забавено плащане на {{planName}} плана с дата {{date}}",
   "Delete": "Изтрий",
   "DeleteAIAgentChatTitle": "Изтриване на чата?",
   "DeleteAIChatDescription": "Ще изтриете <strong>{{chatName}}<1>.</1></strong>\n Всички съобщения и история на чата ще бъдат трайно премахнати и не могат да бъдат възстановени.",

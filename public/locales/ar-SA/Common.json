@@ -404,7 +404,6 @@
   "DecryptionPortalTitle": "عملية فك التشفير قيد التنفيذ ",
   "Default": "افتراضي",
   "DefaultQuota": "الحصة الافتراضية",
-  "DelayedPayment": "تأجيل دفع الخطة {{planName}} المؤرخة في {{date}}.",
   "Delete": "حذف",
   "DeleteAIAgentChatTitle": "حذف الدردشة؟",
   "DeleteAIChatDescription": "أنت على وشك حذف <strong>{{chatName}}<1>.</1></strong> ستتم إزالة جميع الرسائل وسجل الدردشة نهائيًا ولا يمكن استعادتها.",

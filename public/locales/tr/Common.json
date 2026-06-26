@@ -404,7 +404,6 @@
   "DecryptionPortalTitle": "Şifre çözme işlemi devam ediyor",
   "Default": "Varsayılan",
   "DefaultQuota": "Varsayılan kota",
-  "DelayedPayment": "{{date}} tarihli {{planName}} planının gecikmiş ödemesi",
   "Delete": "Sil",
   "DeleteAIAgentChatTitle": "Sohbeti sil?",
   "DeleteAIChatDescription": "<strong>{{chatName}}<1>.</1></strong> silmek üzeresiniz.\nTüm mesajlar ve sohbet geçmişi kalıcı olarak silinecek ve geri yüklenemeyecektir.",

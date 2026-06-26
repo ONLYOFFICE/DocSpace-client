@@ -404,7 +404,6 @@
   "DecryptionPortalTitle": "Proces deszyfrowania w toku",
   "Default": "Domyślne",
   "DefaultQuota": "Domyślny limit",
-  "DelayedPayment": "Opóźniona płatność dla planu {{planName}} z dnia {{date}}",
   "Delete": "Usuń",
   "DeleteAIAgentChatTitle": "Usuń czat?",
   "DeleteAIChatDescription": "Oznaczysz do usunięcia <strong>{{chatName}}<1>.</1></strong>\n Wszystkie wiadomości i historia czatu zostaną trwale usunięte i nie można ich odzyskać.",

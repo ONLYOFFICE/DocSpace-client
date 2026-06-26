@@ -404,7 +404,6 @@
   "DecryptionPortalTitle": "විකේතන ක්‍රියාවලිය සිදුවෙමින් පවතී",
   "Default": "ප්‍රවර්ධිත",
   "DefaultQuota": "පෙරනිමි කෝටාව",
-  "DelayedPayment": "{{date}} වන {{planName}} සැලසුමට ගෙවීම ප්‍රමාදයි",
   "Delete": "මකන්න",
   "DeleteAIAgentChatTitle": "කතාබහ මකන්නද?",
   "DeleteAIChatDescription": "ඔබ <strong>{{chatName}}<1>.</1></strong> මකා දැමීමට ආසන්නයි. සියලුම පණිවිඩ සහ කතාබස් ඉතිහාසය ස්ථිරවම ඉවත් කරනු ලබන අතර ප්‍රතිසාධනය කළ නොහැක.",

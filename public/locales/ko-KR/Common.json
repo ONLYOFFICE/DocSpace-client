@@ -404,7 +404,6 @@
   "DecryptionPortalTitle": "복호화 프로세스 진행 중",
   "Default": "기본",
   "DefaultQuota": "기본 할당량",
-  "DelayedPayment": "{{date}} 날짜의 {{planName}} 요금제 지불 지연",
   "Delete": "삭제",
   "DeleteAIAgentChatTitle": "채팅 삭제하시겠습니까?",
   "DeleteAIChatDescription": "<strong>{{chatName}}<1>.</1></strong> 삭제하시려고 합니다.\n 모든 메시지와 채팅 기록이 영구적으로 삭제되며 복구할 수 없습니다.",

@@ -404,7 +404,6 @@
   "DecryptionPortalTitle": "Proces dešifrovanja u toku",
   "Default": "Podrazumevano",
   "DefaultQuota": "Podrazumevana kvota",
-  "DelayedPayment": "Zakasnelo plaćanje {{planName}} plana datiranog {{date}}",
   "Delete": "Obriši",
   "DeleteAIAgentChatTitle": "Briši čat?",
   "DeleteAIChatDescription": "Predstoji brisanje <strong>{{chatName}}<1>.</1></strong>\nSve poruke i istorija chata biće trajno obrisane i neće moći da budu vraćene.",

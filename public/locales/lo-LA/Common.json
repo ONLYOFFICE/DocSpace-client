@@ -404,7 +404,6 @@
   "DecryptionPortalTitle": "ຂະບວນການຖອດລະຫັດພວມດຳເນີນຢູ່",
   "Default": "ຄ່າເລີ່ມຕົ້ນ",
   "DefaultQuota": "ໂຄຕ້າເລີ່ມຕົ້ນ",
-  "DelayedPayment": "ການຈ່າຍເງິນຊ້າຂອງແຜນ {{planName}} ລົງວັນທີ {{date}}",
   "Delete": "ລົບ",
   "DeleteAIAgentChatTitle": "ລຶບການສົນທະນາບໍ?",
   "DeleteAIChatDescription": "ທ່ານກຳລັງຈະລຶບ <strong>{{chatName}}<1>.</1></strong>\nຂໍ້ຄວາມ ແລະ ປະຫວັດການສົນທະນາທັງໝົດຈະຖືກລຶບອອກຢ່າງຖາວອນ ແລະ ບໍ່ສາມາດກູ້ຄືນໄດ້.",

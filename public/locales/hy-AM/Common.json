@@ -404,7 +404,6 @@
   "DecryptionPortalTitle": "Ապակոդավորման գործընթացը կատարվում է",
   "Default": "Լռելյայն",
   "DefaultQuota": "Կանխադրված քվոտա",
-  "DelayedPayment": "{{planName}} -ի հետաձգված վճարումը պլանը թվագրված է{{date}}",
   "Delete": "Ջնջել",
   "DeleteAIAgentChatTitle": "Հեռացնել զրույցը։",
   "DeleteAIChatDescription": "Դուք այժմ ջնջելու եք <strong>{{chatName}}<1>.</1></strong> Բոլոր հաղորդագրություններն ու խոսակցության պատմությունը կջնջվեն մշտականօրինաբար և չեն կարող վերականգնվել։",

@@ -404,7 +404,6 @@
   "DecryptionPortalTitle": "Het decryptieproces is aan de gang.",
   "Default": "Standaard",
   "DefaultQuota": "Standaard quota",
-  "DelayedPayment": "Uitgestelde betaling van het {{planName}} plan op {{date}}",
   "Delete": "Verwijder",
   "DeleteAIAgentChatTitle": "Chat wissen?",
   "DeleteAIChatDescription": "U gaat <strong>{{chatName}}<1>.</1></strong> verwijderen.\nAlle berichten en chatgeschiedenis worden permanent verwijderd en kunnen niet worden hersteld.",

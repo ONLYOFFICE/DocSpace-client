@@ -404,7 +404,6 @@
   "DecryptionPortalTitle": "Der Entschlüsselungsprozess läuft",
   "Default": "Standard",
   "DefaultQuota": "Standard-Quota",
-  "DelayedPayment": "Aufgehaltene Bezahlung des {{planName}}-Plans vom {{date}}",
   "Delete": "Löschen",
   "DeleteAIAgentChatTitle": "Chat löschen?",
   "DeleteAIChatDescription": "Sie sind im Begriff, <strong>{{chatName}}<1>.</1></strong> zu löschen. Alle Nachrichten und der gesamte Chatverlauf werden endgültig gelöscht und können nicht wiederhergestellt werden.\n",

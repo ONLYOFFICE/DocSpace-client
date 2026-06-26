@@ -404,7 +404,6 @@
   "DecryptionPortalTitle": "Decriptarea în desfășurare",
   "Default": "Implicit",
   "DefaultQuota": "Cotă implicită",
-  "DelayedPayment": "Plata abonament {{planName}} cu întârziere din {{date}}",
   "Delete": "Ștergere",
   "DeleteAIAgentChatTitle": "Șterge conversație?",
   "DeleteAIChatDescription": "Aveți intenția să ștergeți <strong>{{chatName}}<1>.</1></strong>\nToate mesajele și istoricul conversației vor fi șterse permanent și nu pot fi recuperate.",

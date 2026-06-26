@@ -404,7 +404,6 @@
   "DecryptionPortalTitle": "Выполняется процесс расшифровки",
   "Default": "По умолчанию",
   "DefaultQuota": "Квота по умолчанию",
-  "DelayedPayment": "Просрочка платежа по тарифному плану {{planName}} от {{date}}",
   "Delete": "Удалить",
   "DeleteAIAgentChatTitle": "Удалить чат?",
   "DeleteAIChatDescription": "Вы собираетесь удалить <strong>{{chatName}}<1>.</1></strong>  Все сообщения и история чата будут удалены без возможности восстановления.",

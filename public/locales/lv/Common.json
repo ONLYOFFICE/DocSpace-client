@@ -404,7 +404,6 @@
   "DecryptionPortalTitle": "Decodēšanas process notiek",
   "Default": "Standarta",
   "DefaultQuota": "Noklusējuma kvota",
-  "DelayedPayment": "Novēlots {{planName}} plāna maksājums datēts {{date}}",
   "Delete": "Dzēst",
   "DeleteAIAgentChatTitle": "Dzēst sarunu?",
   "DeleteAIChatDescription": "Jūs gatavojaties dzēst <strong>{{chatName}}<1>.</1></strong>\n Visi ziņojumi un tērzēšanas vēsture tiks neatgriežami izdzēsta un to nevarēs atjaunot.",

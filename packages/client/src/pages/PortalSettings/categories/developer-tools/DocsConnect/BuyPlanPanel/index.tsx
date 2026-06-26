@@ -73,16 +73,18 @@ const BuyPlanPanel = ({
 }: BuyPlanPanelProps) => {
   const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
 
-  const [users, setUsers] = useState<number>(info?.plan.users ?? 50);
-  const [devPack, setDevPack] = useState<boolean>(
-    info?.plan.devPackEnabled ?? false,
+  const [users, setUsers] = useState<number>(
+    info?.tenant.payment?.quantity ?? 50,
   );
+  const [devPack, setDevPack] = useState<boolean>(false);
   const [submitting, setSubmitting] = useState(false);
 
   if (!info) return null;
 
-  const { wallet, plan } = info;
-  const { currency } = wallet;
+  const currency = info.wallet?.currency ?? "USD";
+  const availableCredits = info.wallet?.availableCredits ?? 0;
+  const pricePerUser = info.prices?.pricePerUser ?? 0;
+  const devPackPrice = info.prices?.devPackPrice ?? 0;
 
   const minUsers = devPack ? DEVPACK_MIN_USERS : MIN_USERS;
 
@@ -94,12 +96,11 @@ const BuyPlanPanel = ({
     });
   };
 
-  const devPackPerUser = devPack ? plan.devPackPrice : 0;
-  const totalMonthly = users * (plan.pricePerUser + devPackPerUser);
-  const remainingCredits = wallet.availableCredits - totalMonthly;
+  const devPackPerUser = devPack ? devPackPrice : 0;
+  const totalMonthly = users * (pricePerUser + devPackPerUser);
+  const remainingCredits = availableCredits - totalMonthly;
   const insufficientFunds = remainingCredits < 0;
-  // Top-up amounts are rounded up to the next whole dollar.
-  const topUpRequired = Math.ceil(totalMonthly - wallet.availableCredits);
+  const topUpRequired = Math.ceil(totalMonthly - availableCredits);
 
   const formatCurrency = (amount: number) =>
     formatCurrencyValue(i18n.language, amount, currency, 2);
@@ -155,7 +156,7 @@ const BuyPlanPanel = ({
                   className={styles.errorText}
                 >
                   {t("DocsConnect:WalletInsufficient", {
-                    amount: formatCurrency(wallet.availableCredits),
+                    amount: formatCurrency(availableCredits),
                   })}
                 </Text>
               ) : (
@@ -167,7 +168,7 @@ const BuyPlanPanel = ({
                     fontWeight={600}
                     className={styles.accent}
                   >
-                    {formatCurrency(wallet.availableCredits)}
+                    {formatCurrency(availableCredits)}
                   </Text>
                 </Text>
               )}
@@ -195,7 +196,7 @@ const BuyPlanPanel = ({
               showSlider
               showPlusSign
               underContorlsTitle={t("DocsConnect:PerUserPerMonth", {
-                price: formatCurrency(plan.pricePerUser),
+                price: formatCurrency(pricePerUser),
               })}
               onChange={setUsers}
             />
@@ -217,7 +218,7 @@ const BuyPlanPanel = ({
                 </Text>
                 <Text fontSize="13px">
                   {t("DocsConnect:PerUserPerMonth", {
-                    price: formatCurrency(plan.devPackPrice),
+                    price: formatCurrency(devPackPrice),
                   })}
                 </Text>
               </div>
@@ -269,11 +270,11 @@ const BuyPlanPanel = ({
             {summaryRow(t("DocsConnect:PlanUsers"), `${users}`)}
             {summaryRow(
               t("DocsConnect:BasePricePerUser"),
-              formatCurrency(plan.pricePerUser),
+              formatCurrency(pricePerUser),
             )}
             {summaryRow(
               t("DocsConnect:DevPackPerUser"),
-              formatCurrency(devPack ? plan.devPackPrice : 0),
+              formatCurrency(devPack ? devPackPrice : 0),
             )}
             <hr className={styles.summaryDivider} />
             <div className={styles.summaryRow}>

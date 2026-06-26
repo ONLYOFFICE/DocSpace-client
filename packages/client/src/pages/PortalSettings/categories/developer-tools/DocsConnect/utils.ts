@@ -33,63 +33,36 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export type TDocsConnectTenant = {
-  address?: string;
-  modifiedDate?: string;
-  endDate?: string;
-  payment?: { quantity?: number; currency?: string };
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+export const formatDocsConnectDate = (iso?: string): string => {
+  if (!iso) return "";
+  const ms = new Date(iso).getTime();
+  if (Number.isNaN(ms)) return "";
+  const date = new Date(ms);
+  const dd = String(date.getDate()).padStart(2, "0");
+  const mm = String(date.getMonth() + 1).padStart(2, "0");
+  return `${dd}.${mm}.${date.getFullYear()}`;
 };
 
-export type TDocsConnectConfig = {
-  tenantName: string;
-  security: { secret: string; header: string };
-  server: { isAnonymousSupport: boolean };
+export const getDocsConnectDaysLeft = (endDate: string): number => {
+  const target = new Date(endDate).getTime();
+  if (Number.isNaN(target)) return 0;
+  return Math.max(0, Math.ceil((target - Date.now()) / DAY_MS));
 };
 
-export type TDocsConnectStat = {
-  active: number;
-  internal: number;
-  external: number;
-  remaining: number;
-  criticalRemaining: boolean;
+export const isDocsConnectTrialExpired = (endDate: string): boolean => {
+  const target = new Date(endDate).getTime();
+  return !Number.isNaN(target) && target < Date.now();
 };
 
-export type TDocsConnectTenantInfo = {
-  license: { valid: string; trial: boolean; buildDate: string };
-  server: { version: string; packageType: string; date: string };
-  usersLimit: { edit: number; view: number };
-  stats: {
-    periodDay: number;
-    editor: TDocsConnectStat;
-    viewer: TDocsConnectStat;
-  };
-};
-
-export type TDocsConnectPrices = {
-  pricePerUser: number;
-  devPackPrice: number;
-};
-
-export type TDocsConnectWallet = {
-  availableCredits: number;
-  currency: string;
-};
-
-export type TDocsConnectInfo = {
-  tenant: TDocsConnectTenant;
-  config: TDocsConnectConfig;
-  tenantInfo: TDocsConnectTenantInfo;
-  prices: TDocsConnectPrices | null;
-  wallet: TDocsConnectWallet | null;
-};
-
-export type TDocsConnectConfigUpdate = {
-  tenantName: string;
-  security: {
-    secret: string;
-    header: string;
-  };
-  server: {
-    isAnonymousSupport: boolean;
-  };
+export const getDocsConnectTrialPercent = (
+  startDate: string,
+  endDate: string,
+): number => {
+  const start = new Date(startDate).getTime();
+  const end = new Date(endDate).getTime();
+  if (Number.isNaN(start) || Number.isNaN(end) || end <= start) return 0;
+  const elapsed = ((Date.now() - start) / (end - start)) * 100;
+  return Math.min(100, Math.max(0, elapsed));
 };

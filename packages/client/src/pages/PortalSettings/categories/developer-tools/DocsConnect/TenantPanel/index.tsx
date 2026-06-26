@@ -51,6 +51,11 @@ import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.rea
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 import type { TTranslation } from "@docspace/shared/types";
 
+import {
+  getDocsConnectDaysLeft,
+  isDocsConnectTrialExpired,
+} from "../utils";
+
 import Statistics from "./Statistics";
 
 import styles from "./TenantPanel.module.scss";
@@ -71,7 +76,10 @@ const TenantPanel = ({
 
   if (!info) return null;
 
-  const isTrial = info.status === "trial";
+  const isTrial = info.tenantInfo.license.trial;
+  const trialEnd = info.tenant.endDate ?? "";
+  const expired = isDocsConnectTrialExpired(trialEnd);
+  const daysLeft = getDocsConnectDaysLeft(trialEnd);
 
   const getContextMenuItems = (): ContextMenuModel[] => [
     {
@@ -124,12 +132,12 @@ const TenantPanel = ({
           {isTrial ? (
             <span
               className={`${styles.trialBadge} ${
-                info.trial.expired ? styles.trialBadgeExpired : ""
+                expired ? styles.trialBadgeExpired : ""
               }`}
             >
-              {info.trial.expired
+              {expired
                 ? t("Common:TrialExpired")
-                : t("Common:FreeDaysLeft", { count: info.trial.daysLeft })}
+                : t("Common:FreeDaysLeft", { count: daysLeft })}
             </span>
           ) : (
             <ContextMenuButton

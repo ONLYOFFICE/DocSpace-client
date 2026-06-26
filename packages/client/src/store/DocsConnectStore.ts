@@ -54,7 +54,7 @@ class DocsConnectStore {
 
   info: Nullable<TDocsConnectInfo> = null;
 
-  isLoading: boolean = false;
+  isLoading: boolean = true;
 
   error: Nullable<Error> = null;
 
@@ -84,6 +84,7 @@ class DocsConnectStore {
         this.info = info;
       });
     } catch (error) {
+      toastr.error(error as Error);
       runInAction(() => {
         this.error = error as Error;
       });
@@ -102,32 +103,18 @@ class DocsConnectStore {
   };
 
   startTrial = async () => {
-    try {
-      const info = await startDocsConnectTrial();
-      runInAction(() => {
-        this.info = info;
-      });
-    } catch (error) {
-      runInAction(() => {
-        this.error = error as Error;
-      });
-      throw error;
-    }
+    const info = await startDocsConnectTrial();
+    runInAction(() => {
+      this.info = info;
+    });
   };
 
   buyPlan = async ({ users, devPack }: { users: number; devPack: boolean }) => {
-    try {
-      const info = await buyDocsConnectPlan({ users, devPackEnabled: devPack });
-      runInAction(() => {
-        this.info = info;
-      });
-      this.closeBuyPlan();
-    } catch (error) {
-      runInAction(() => {
-        this.error = error as Error;
-      });
-      throw error;
-    }
+    const info = await buyDocsConnectPlan({ users, devPackEnabled: devPack });
+    runInAction(() => {
+      this.info = info;
+    });
+    this.closeBuyPlan();
   };
 
   downloadReport = () => {
@@ -142,9 +129,10 @@ class DocsConnectStore {
   };
 
   copySecretKey = (t: TTranslation) => {
-    if (!this.info?.secretKey) return;
+    const secret = this.info?.config.security.secret;
+    if (!secret) return;
 
-    this.copyToClipboard(this.info.secretKey, t);
+    this.copyToClipboard(secret, t);
   };
 }
 

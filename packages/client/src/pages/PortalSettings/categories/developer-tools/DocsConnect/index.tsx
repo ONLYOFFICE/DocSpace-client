@@ -40,25 +40,33 @@ import { inject, observer } from "mobx-react";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { EmptyServerErrorContainer } from "SRC_DIR/components/EmptyContainer/EmptyServerErrorContainer";
 
+import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
+
 import PromoPage from "./PromoPage";
 import TenantPanel from "./TenantPanel";
 import BuyPlanPanel from "./BuyPlanPanel";
 import TenantPanelLoader from "./TenantPanel/Loader";
 
 interface DocsConnectProps {
-  docsConnectStore?: TStore["docsConnectStore"];
+  info?: TDocsConnectInfo;
+  isLoading?: boolean;
+  error?: Error | null;
+  buyPlanPanelVisible?: boolean;
+  fetchInfo?: () => void;
 }
 
-const DocsConnect = ({ docsConnectStore }: DocsConnectProps) => {
+const DocsConnect = ({
+  info,
+  isLoading,
+  error,
+  buyPlanPanelVisible,
+  fetchInfo,
+}: DocsConnectProps) => {
   const { t, ready } = useTranslation(["DocsConnect", "Common"]);
 
-  const info = docsConnectStore?.info;
-  const error = docsConnectStore?.error;
-  const buyPlanPanelVisible = docsConnectStore?.buyPlanPanelVisible;
-
   useEffect(() => {
-    docsConnectStore?.fetchInfo();
-  }, [docsConnectStore]);
+    fetchInfo?.();
+  }, [fetchInfo]);
 
   useEffect(() => {
     if (ready) setDocumentTitle(t("DocsConnect:DocsConnect"));
@@ -82,21 +90,24 @@ const DocsConnect = ({ docsConnectStore }: DocsConnectProps) => {
 
   if (!ready) return null;
 
-  if (!info) {
-    if (error) return <EmptyServerErrorContainer />;
-    return <TenantPanelLoader />;
-  }
+  if (isLoading) return <TenantPanelLoader />;
 
-  const isPromo = info.status === "promo";
+  if (error) return <EmptyServerErrorContainer />;
+
+  if (!info) return <PromoPage />;
 
   return (
     <>
-      {isPromo ? <PromoPage /> : <TenantPanel />}
+      <TenantPanel />
       {buyPlanPanelVisible ? <BuyPlanPanel /> : null}
     </>
   );
 };
 
 export default inject(({ docsConnectStore }: TStore) => ({
-  docsConnectStore,
+  info: docsConnectStore.info,
+  isLoading: docsConnectStore.isLoading,
+  error: docsConnectStore.error,
+  buyPlanPanelVisible: docsConnectStore.buyPlanPanelVisible,
+  fetchInfo: docsConnectStore.fetchInfo,
 }))(observer(DocsConnect));

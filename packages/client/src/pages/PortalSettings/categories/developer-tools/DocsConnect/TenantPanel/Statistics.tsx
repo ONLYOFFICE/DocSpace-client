@@ -53,9 +53,16 @@ import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg";
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import type {
   TDocsConnectInfo,
-  TDocsConnectUsage,
+  TDocsConnectStat,
 } from "@docspace/shared/api/docs-connect/types";
 import type { TTranslation } from "@docspace/shared/types";
+
+import {
+  formatDocsConnectDate,
+  getDocsConnectDaysLeft,
+  isDocsConnectTrialExpired,
+  getDocsConnectTrialPercent,
+} from "../utils";
 
 import styles from "./TenantPanel.module.scss";
 
@@ -66,7 +73,11 @@ const usageLevelClass: Record<UsageLevel, string> = {
   negative: styles.usageNegative,
 };
 
-const getUsageLevel = (usage: TDocsConnectUsage): UsageLevel =>
+type Connector = { key: string; label: string; url: string };
+
+const CONNECTORS: Connector[] = [];
+
+const getUsageLevel = (usage: TDocsConnectStat): UsageLevel =>
   usage.criticalRemaining ? "negative" : "positive";
 
 interface StatisticsProps {
@@ -151,15 +162,17 @@ const UsageBlock = ({
   subtitle,
   usageLabel,
   usage,
+  limit,
   t,
 }: {
   title: string;
   subtitle: string;
   usageLabel: string;
-  usage: TDocsConnectUsage;
+  usage: TDocsConnectStat;
+  limit: number;
   t: TTranslation;
 }) => {
-  const percent = usage.limit > 0 ? (usage.active / usage.limit) * 100 : 0;
+  const percent = limit > 0 ? (usage.active / limit) * 100 : 0;
   const level = getUsageLevel(usage);
 
   return (
@@ -173,7 +186,7 @@ const UsageBlock = ({
       <div className={styles.usageBarRow}>
         <Text fontSize="13px">{usageLabel}</Text>
         <Text fontSize="13px" fontWeight={600} className={styles.usageCount}>
-          {`${usage.active} / ${usage.limit}`}
+          {`${usage.active} / ${limit}`}
         </Text>
       </div>
       <ProgressBar percent={percent} />
@@ -201,12 +214,18 @@ const Statistics = ({
 
   if (!info) return null;
 
-  const isTrial = info.status === "trial";
-  const { wallet } = info;
+  const { tenant, config, tenantInfo, prices, wallet } = info;
+  const isTrial = tenantInfo.license.trial;
+  const trialStart = tenant.modifiedDate ?? "";
+  const trialEnd = tenant.endDate ?? "";
+  const daysLeft = getDocsConnectDaysLeft(trialEnd);
+  const expired = isDocsConnectTrialExpired(trialEnd);
+  const trialPercent = getDocsConnectTrialPercent(trialStart, trialEnd);
 
-  // Integration block is shown in every state for now.
-  // Real condition (once backend defines it): info.status === "paid".
-  const showIntegrations = true;
+  const currency = wallet?.currency ?? "USD";
+  const pricePerUser = prices?.pricePerUser ?? 0;
+  const planUsers = tenant.payment?.quantity ?? 0;
+  const monthlyCharge = planUsers * pricePerUser;
 
   const onCopy = (value: string) => copyToClipboard?.(value, t);
 
@@ -215,7 +234,7 @@ const Statistics = ({
       {isTrial ? (
         <div className={styles.trialBanner}>
           <div className={styles.trialBannerText}>
-            {info.trial.expired ? (
+            {expired ? (
               <>
                 <Text
                   fontSize="13px"
@@ -235,7 +254,7 @@ const Statistics = ({
                 </Text>
                 <Text fontSize="12px" className={styles.muted}>
                   {t("DocsConnect:TrialBannerDescription", {
-                    count: info.trial.daysLeft,
+                    count: daysLeft,
                   })}
                 </Text>
                 <Text fontSize="12px" className={styles.muted}>
@@ -265,19 +284,19 @@ const Statistics = ({
       <div className={styles.overviewGrid}>
         <InfoField
           label={t("Common:Address")}
-          value={info.address}
+          value={tenant.address ?? ""}
           onCopy={onCopy}
           copyTitle={t("Common:CopyToClipboard")}
         />
         <InfoField
           label={t("DocsConnect:JwtHeader")}
-          value={info.jwtHeader}
+          value={config.security.header}
           onCopy={onCopy}
           copyTitle={t("Common:CopyToClipboard")}
         />
         <InfoField
           label={t("DocsConnect:SecretKeyLabel")}
-          value={info.secretKey}
+          value={config.security.secret}
           isSecret
           onCopy={onCopy}
           copyTitle={t("Common:CopyToClipboard")}
@@ -297,30 +316,21 @@ const Statistics = ({
             <div className={styles.detailRows}>
               <div className={styles.detailRow}>
                 <Text className={styles.muted}>{t("Common:Start")}</Text>
-                <Text fontWeight={600}>{info.trial.start}</Text>
+                <Text fontWeight={600}>{formatDocsConnectDate(trialStart)}</Text>
               </div>
               <div className={styles.detailRow}>
                 <Text className={styles.muted}>{t("Common:ValidUntil")}</Text>
-                <Text fontWeight={600}>{info.trial.validUntil}</Text>
+                <Text fontWeight={600}>{formatDocsConnectDate(trialEnd)}</Text>
               </div>
             </div>
             <div
               className={`${styles.licenseProgress} ${
-                info.trial.expired ? styles.licenseProgressExpired : ""
+                expired ? styles.licenseProgressExpired : ""
               }`}
             >
-              <ProgressBar
-                percent={Math.max(
-                  0,
-                  ((info.trial.totalDays - info.trial.daysLeft) /
-                    info.trial.totalDays) *
-                    100,
-                )}
-              />
+              <ProgressBar percent={trialPercent} />
               <Text fontSize="12px" className={styles.muted}>
-                {t("DocsConnect:TrialDaysRemaining", {
-                  count: info.trial.daysLeft,
-                })}
+                {t("DocsConnect:TrialDaysRemaining", { count: daysLeft })}
               </Text>
             </div>
           </div>
@@ -330,7 +340,9 @@ const Statistics = ({
               <Text fontSize="16px" fontWeight={700}>
                 {t("Common:TariffPlan")}{" "}
                 <Text as="span" fontSize="12px" className={styles.muted}>
-                  {t("DocsConnect:RenewsOn", { date: info.plan.renewsOn })}
+                  {t("DocsConnect:RenewsOn", {
+                    date: formatDocsConnectDate(tenant.endDate),
+                  })}
                 </Text>
               </Text>
               <Link
@@ -348,7 +360,7 @@ const Statistics = ({
                 <Text className={styles.muted}>
                   {t("DocsConnect:PlanUsers")}
                 </Text>
-                <Text fontWeight={600}>{info.plan.users}</Text>
+                <Text fontWeight={600}>{planUsers}</Text>
               </div>
               <div className={styles.detailRow}>
                 <Text className={styles.muted}>{t("DocsConnect:Price")}</Text>
@@ -356,8 +368,8 @@ const Statistics = ({
                   {t("DocsConnect:PricePerUser", {
                     price: formatCurrencyValue(
                       i18n.language,
-                      info.plan.pricePerUser,
-                      wallet.currency,
+                      pricePerUser,
+                      currency,
                       2,
                     ),
                   })}
@@ -370,8 +382,8 @@ const Statistics = ({
                 <Text fontWeight={600}>
                   {formatCurrencyValue(
                     i18n.language,
-                    info.plan.monthlyCharge,
-                    wallet.currency,
+                    monthlyCharge,
+                    currency,
                     2,
                   )}
                 </Text>
@@ -391,15 +403,17 @@ const Statistics = ({
           <div className={styles.detailRows}>
             <div className={styles.detailRow}>
               <Text className={styles.muted}>{t("DocsConnect:BuildType")}</Text>
-              <Text fontWeight={600}>{info.build.type}</Text>
+              <Text fontWeight={600}>{tenantInfo.server.packageType}</Text>
             </div>
             <div className={styles.detailRow}>
               <Text className={styles.muted}>{t("Common:Version")}</Text>
-              <Text fontWeight={600}>{info.build.version}</Text>
+              <Text fontWeight={600}>{tenantInfo.server.version}</Text>
             </div>
             <div className={styles.detailRow}>
               <Text className={styles.muted}>{t("DocsConnect:Released")}</Text>
-              <Text fontWeight={600}>{info.build.released}</Text>
+              <Text fontWeight={600}>
+                {formatDocsConnectDate(tenantInfo.license.buildDate)}
+              </Text>
             </div>
           </div>
         </div>
@@ -423,14 +437,16 @@ const Statistics = ({
           title={t("DocsConnect:Editors")}
           subtitle={t("DocsConnect:EditorsSubtitleStat")}
           usageLabel={t("DocsConnect:EditorUsage")}
-          usage={info.usage.editors}
+          usage={tenantInfo.stats.editor}
+          limit={tenantInfo.usersLimit.edit}
           t={t}
         />
         <UsageBlock
           title={t("DocsConnect:LiveViewer")}
           subtitle={t("DocsConnect:LiveViewerSubtitle")}
           usageLabel={t("DocsConnect:ViewerUsage")}
-          usage={info.usage.viewer}
+          usage={tenantInfo.stats.viewer}
+          limit={tenantInfo.usersLimit.view}
           t={t}
         />
       </div>
@@ -444,47 +460,45 @@ const Statistics = ({
         />
       </div>
 
-      {showIntegrations ? (
-        <CollapsibleCard
-          title={t("DocsConnect:IntegrationOptions")}
-          description={t("DocsConnect:IntegrationOptionsSubtitle")}
-          defaultOpen
-        >
-          <div className={styles.integrationsGrid}>
-            {info.connectors.map((connector) => (
-              <a
-                key={connector.key}
-                className={styles.integrationTile}
-                href={connector.url}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Text as="p" className={styles.integrationName}>
-                  {connector.label}
-                </Text>
-                <span className={styles.integrationLink}>
-                  {t("Common:Connect")}
-                  <ArrowSvg aria-hidden className={styles.integrationArrow} />
-                </span>
-              </a>
-            ))}
+      <CollapsibleCard
+        title={t("DocsConnect:IntegrationOptions")}
+        description={t("DocsConnect:IntegrationOptionsSubtitle")}
+        defaultOpen
+      >
+        <div className={styles.integrationsGrid}>
+          {CONNECTORS.map((connector) => (
             <a
-              className={`${styles.integrationTile} ${styles.integrationTileMore}`}
-              href="#"
+              key={connector.key}
+              className={styles.integrationTile}
+              href={connector.url}
               target="_blank"
               rel="noreferrer"
             >
               <Text as="p" className={styles.integrationName}>
-                {t("Common:PlusMore", { count: 20 })}
+                {connector.label}
               </Text>
               <span className={styles.integrationLink}>
-                {t("Common:ViewAll")}
+                {t("Common:Connect")}
                 <ArrowSvg aria-hidden className={styles.integrationArrow} />
               </span>
             </a>
-          </div>
-        </CollapsibleCard>
-      ) : null}
+          ))}
+          <a
+            className={`${styles.integrationTile} ${styles.integrationTileMore}`}
+            href="#"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Text as="p" className={styles.integrationName}>
+              {t("Common:PlusMore", { count: 20 })}
+            </Text>
+            <span className={styles.integrationLink}>
+              {t("Common:ViewAll")}
+              <ArrowSvg aria-hidden className={styles.integrationArrow} />
+            </span>
+          </a>
+        </div>
+      </CollapsibleCard>
     </div>
   );
 };

@@ -504,6 +504,8 @@
   "TariffActivationDetails": "Admins: {{admins}} | Storage: {{storage}}",
   "TariffDowngradeScheduled": "Change scheduled: Plan adjustment, {{fromCount}} → {{toCount}} admins",
   "TariffDowngradeWarning": "You will keep your current {{admins}} admins and {{storage}} storage until the end of your paid billing period.",
+  "TariffAdminAdjustmentScheduled": "Change scheduled: Admin adjustment, {{fromCount}} → {{toCount}}",
+  "TariffAdminAdjustmentWarning": "Your current {{admins}}-admin limit remains until the end of your billing period. If you exceed the new limit, charges will be based on your assigned admins.",
   "Download": "Download",
   "DownloadAndOpenReport": "Download and open the report",
   "DownloadApps": "Download applications",

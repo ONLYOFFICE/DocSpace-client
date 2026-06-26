@@ -33,7 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
+
 const DAY_MS = 24 * 60 * 60 * 1000;
+
+export const isDocsConnectPaid = (info: TDocsConnectInfo): boolean =>
+  info.tenantInfo.license.trial === false;
 
 export const formatDocsConnectDate = (iso?: string): string => {
   if (!iso) return "";

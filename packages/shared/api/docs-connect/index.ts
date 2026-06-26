@@ -51,7 +51,7 @@ const WALLET_SERVICES_URL = "/portal/payment/walletservices";
 const BALANCE_URL = "/portal/payment/customer/balance";
 const WALLET_UPDATE_URL = "/portal/payment/updatewallet";
 const DOCS_CLOUD_PRODUCT = "docscloud";
-const DOCS_CLOUD_DEVPACK_PRODUCT = "docsclouddevpack";
+const DOCS_CLOUD_DEVPACK_PRODUCT = "docscloud-devpack";
 const QUANTITY_TYPE_SET = 0;
 const QUANTITY_TYPE_ADD = 1;
 
@@ -112,7 +112,6 @@ const fetchWallet = async (): Promise<TDocsConnectWallet | null> => {
 };
 
 let lastInfo: TDocsConnectInfo | null = null;
-let lastPurchasedDevPack: boolean | null = null;
 
 export const getDocsConnectInfo =
   async (): Promise<TDocsConnectInfo | null> => {
@@ -128,7 +127,6 @@ export const getDocsConnectInfo =
 
     if (!tenant) {
       lastInfo = null;
-      lastPurchasedDevPack = null;
       return null;
     }
 
@@ -171,20 +169,20 @@ export const buyDocsConnectPlan = async (
     ? DOCS_CLOUD_DEVPACK_PRODUCT
     : DOCS_CLOUD_PRODUCT;
 
-  const priorUsers = lastInfo?.tenant.payment?.quantity ?? 0;
-  const samePaidProduct =
-    lastInfo?.tenantInfo.license.trial === false &&
-    lastPurchasedDevPack === devPackEnabled;
-  const isIncrease = samePaidProduct && users > priorUsers;
+  const isPaid = lastInfo?.tenantInfo.license.trial === false;
+  const currentUsers = isPaid ? (lastInfo?.tenant.payment?.quantity ?? 0) : 0;
+  const isDecrease = users < currentUsers;
 
   const ok = (await request({
     method: "put",
     url: WALLET_UPDATE_URL,
     data: {
       quantity: {
-        [product]: isIncrease ? users - priorUsers : users,
+        [product]: isDecrease ? users : users - currentUsers,
       },
-      productQuantityType: isIncrease ? QUANTITY_TYPE_ADD : QUANTITY_TYPE_SET,
+      productQuantityType: isDecrease
+        ? QUANTITY_TYPE_SET
+        : QUANTITY_TYPE_ADD,
     },
   })) as boolean;
 
@@ -192,6 +190,5 @@ export const buyDocsConnectPlan = async (
     throw new Error("Docs Connect plan purchase failed");
   }
 
-  lastPurchasedDevPack = devPackEnabled;
   return getDocsConnectInfo();
 };

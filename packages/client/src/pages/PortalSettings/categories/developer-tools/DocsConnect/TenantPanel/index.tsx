@@ -54,6 +54,7 @@ import type { TTranslation } from "@docspace/shared/types";
 import {
   getDocsConnectDaysLeft,
   isDocsConnectTrialExpired,
+  isDocsConnectPaid,
 } from "../utils";
 
 import Statistics from "./Statistics";
@@ -76,7 +77,7 @@ const TenantPanel = ({
 
   if (!info) return null;
 
-  const isTrial = info.tenantInfo.license.trial;
+  const isTrial = !isDocsConnectPaid(info);
   const trialEnd = info.tenant.endDate ?? "";
   const expired = isDocsConnectTrialExpired(trialEnd);
   const daysLeft = getDocsConnectDaysLeft(trialEnd);

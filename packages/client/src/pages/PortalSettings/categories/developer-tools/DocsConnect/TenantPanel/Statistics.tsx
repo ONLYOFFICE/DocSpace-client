@@ -62,6 +62,7 @@ import {
   getDocsConnectDaysLeft,
   isDocsConnectTrialExpired,
   getDocsConnectTrialPercent,
+  isDocsConnectPaid,
 } from "../utils";
 
 import styles from "./TenantPanel.module.scss";
@@ -215,7 +216,7 @@ const Statistics = ({
   if (!info) return null;
 
   const { tenant, config, tenantInfo, prices, wallet } = info;
-  const isTrial = tenantInfo.license.trial;
+  const isTrial = !isDocsConnectPaid(info);
   const trialStart = tenant.modifiedDate ?? "";
   const trialEnd = tenant.endDate ?? "";
   const daysLeft = getDocsConnectDaysLeft(trialEnd);

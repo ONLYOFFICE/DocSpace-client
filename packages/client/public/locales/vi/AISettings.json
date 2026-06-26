@@ -11,6 +11,8 @@
   "CapabilityVision": "Thị giác",
   "ConnectProductToYourDataAndTools": "Kết nối {{productName}} với dữ liệu và các công cụ của bạn.",
   "CustomMCPListTitle": "Tùy chỉnh",
+  "DefaultAISetupDescription": "Chọn mô hình nào sẽ được sử dụng theo mặc định trong các cuộc trò chuyện và các tác nhân.",
+  "DefaultAISetupTitle": "Thiết lập AI mặc định",
   "DefaultProviderDescription": "Chọn {{aiProvider}} và mô hình mặc định cho tất cả các tính năng trên {{productName}} ({{aiAgents}}, trình soạn thảo tài liệu, v.v.)",
   "DefaultProviderSetSuccess": "Đã thiết lập nhà cung cấp mặc định thành công",
   "DefaultProviderTitle": "Nhà cung cấp mặc định",

@@ -1,0 +1,29 @@
+{
+  "key_path": "AIAgentsCardDescription",
+  "content": "Set up AI helpers that know your files. Share them with your team and use them across rooms to answer questions or run tasks on your behalf.",
+  "content_en_sha1_hash": "1ff1c54789ec45586ef262d5e4e13d8dfb314a1e",
+  "created_at": "2026-06-25T11:54:43.828Z",
+  "updated_at": "2026-06-25T12:34:23.774Z",
+  "comment": {
+    "text": "Card description within the AI features dialog that explains the functionality and benefits of setting up and sharing AI agents.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:34:23.774Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
+      "line_number": 98,
+      "context": "<div className={styles.cardIcon}>\n <AIAgentsIcon />\n </div>\n ),\n title: t(\"AIAgents\"),\n description: t(\"AIAgentsCardDescription\"),\n },\n {\n id: \"mcp\",\n icon: (\n <div className={styles.mcpIcon}>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

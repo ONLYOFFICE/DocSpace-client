@@ -3,6 +3,8 @@
   "AIAgentAccessRedirectNote": "Vous serez automatiquement redirigé vers la section {{sectionName}} dans 5 secondes.",
   "AIChat": "Chat IA",
   "AIInstructions": "Instructions IA",
+  "AIModelDescription": "Sélectionnez le modèle IA à utiliser dans les discussions de cette salle. Ce paramètre est obligatoire et s'applique à tous les participants.",
+  "AIModelTitle": "Modèle IA",
   "AIProviderAndModel": "{{aiProvider}} et modèle",
   "CreateChat": "Créer une discussion",
   "CreateChatDescription": "Rendez-vous sur l'onglet {{aiChat}} pour commencer.",

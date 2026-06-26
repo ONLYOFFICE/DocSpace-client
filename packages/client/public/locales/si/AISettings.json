@@ -11,6 +11,8 @@
   "CapabilityVision": "දෘශ්‍යතාව",
   "ConnectProductToYourDataAndTools": "{{productName}} ඔබගේ දත්ත සහ මෙවලම් වෙත සම්බන්ධ කරන්න.",
   "CustomMCPListTitle": "අභිරුචි",
+  "DefaultAISetupDescription": "කතාබහ සහ නියෝජිතයන් තුළ පෙරනිමියෙන් භාවිතා කරන මාදිලිය තෝරන්න.",
+  "DefaultAISetupTitle": "පෙරනිමි AI සැකසුම",
   "DefaultProviderDescription": "සියලුම {{productName}} හි අංග සඳහා පෙරනිමි {{aiProvider}} සහ මාදිලිය තෝරන්න ({{aiAgents}}, ලේඛන සංස්කාරකවරු, ආදිය).",
   "DefaultProviderSetSuccess": "පෙරනිමි සැපයුම්කරු සාර්ථකව සකසා ඇත",
   "DefaultProviderTitle": "පෙරනිමි සැපයුම්කරු",

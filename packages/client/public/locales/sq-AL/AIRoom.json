@@ -3,6 +3,8 @@
   "AIAgentAccessRedirectNote": "Ju do të ridrehtoheni automatikisht në seksionin {{sectionName}} në 5 sekonda.",
   "AIChat": "Bisedë - IA",
   "AIInstructions": "Udhëzimet e IA",
+  "AIModelDescription": "Zgjidhni modelin e IA që do të përdoret në bisedat e kësaj dhome. Kjo cilësim është i detyrueshëm dhe i zbatohet të gjithë pjesëmarrësve.",
+  "AIModelTitle": "Modeli i IA",
   "AIProviderAndModel": "{{aiProvider}} dhe modeli",
   "CreateChat": "Krijoni bisedë",
   "CreateChatDescription": "Shkoni te tab-i {{aiChat}} për të filluar.",

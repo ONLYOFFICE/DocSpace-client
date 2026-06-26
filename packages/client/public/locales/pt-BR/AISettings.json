@@ -11,6 +11,8 @@
   "CapabilityVision": "Visão",
   "ConnectProductToYourDataAndTools": "Conecte {{productName}} aos seus dados e ferramentas.",
   "CustomMCPListTitle": "Personalizado",
+  "DefaultAISetupDescription": "Escolha qual modelo será usado por padrão nos chats e agentes.",
+  "DefaultAISetupTitle": "Configuração padrão de IA",
   "DefaultProviderDescription": "Selecione o {{aiProvider}} e o modelo padrão para todos os recursos em {{productName}} ({{aiAgents}}, editores de documentos, etc.)",
   "DefaultProviderSetSuccess": "Provedor padrão configurado com sucesso",
   "DefaultProviderTitle": "Provedor padrão",

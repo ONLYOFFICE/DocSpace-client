@@ -1,0 +1,29 @@
+{
+  "key_path": "AIModelDescription",
+  "content": "Select the AI model to be used in this room’s chats. This setting is mandatory and applies to all participants.",
+  "content_en_sha1_hash": "83dc7cdd4748aa6d59283dc37363f68c9e63f3b2",
+  "created_at": "2026-06-25T11:55:05.895Z",
+  "updated_at": "2026-06-25T12:35:08.029Z",
+  "comment": {
+    "text": "Informational text in the Create/Edit Agent dialog explaining that selecting an AI model is a required setting for all room participants.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:35:08.029Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Model.tsx",
+      "line_number": 447,
+      "context": "? t(\"AIProviderAndModel\", { aiProvider: t(\"Common:AIProvider\") })\n : t(\"AIModelTitle\");\n \n const modelDescription = isSeveralProviders\n ? t(\"ModelDescription\", { aiProvider: t(\"Common:AIProvider\") })\n : t(\"AIModelDescription\");\n \n return (\n <StyledParam increaseGap>\n <div className=\" set_room_params-info\">\n <div>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

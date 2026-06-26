@@ -11,6 +11,8 @@
   "CapabilityVision": "الرؤية",
   "ConnectProductToYourDataAndTools": "قوموا بتوصيل {{productName}} ببياناتكم وأدواتكم.",
   "CustomMCPListTitle": "مخصص",
+  "DefaultAISetupDescription": "اختر النموذج الذي سيتم استخدامه افتراضيًا في الدردشات والوكلاء.",
+  "DefaultAISetupTitle": "إعداد الذكاء الاصطناعي الافتراضي",
   "DefaultProviderDescription": "حدد {{aiProvider}} الافتراضي ونموذجه لجميع الميزات عبر {{productName}} ({{aiAgents}}، ومحررات المستندات، إلخ).",
   "DefaultProviderSetSuccess": "تم تعيين المزود الافتراضي بنجاح",
   "DefaultProviderTitle": "المزود الافتراضي",

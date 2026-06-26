@@ -1,0 +1,29 @@
+{
+  "key_path": "StorageAdded",
+  "content": "Storage added",
+  "content_en_sha1_hash": "94e826d1eeb044c53234c0272d25c13ceff7a879",
+  "created_at": "2026-06-25T11:54:58.256Z",
+  "updated_at": "2026-06-25T12:00:36.041Z",
+  "comment": {
+    "text": "Label in a summary card on the additional storage page, serving as a heading for the current storage plan's total capacity.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:00:36.041Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "line_number": 329,
+      "context": "})}\n </Text>\n </div>\n \n <div className={styles.summaryCard}>\n <Text className={styles.cardLabel}>{t(\"StorageAdded\")}</Text>\n <Text className={styles.cardValue}>\n {`${currentStoragePlanSize} ${t(\"Gigabyte\")}`}\n </Text>\n <Text className={styles.cardCaption}>\n {t(\"AdditionalDiskSpace\")}",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

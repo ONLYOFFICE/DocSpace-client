@@ -11,6 +11,8 @@
   "CapabilityVision": "Տեսողություն",
   "ConnectProductToYourDataAndTools": "Միացրեք {{productName}}-ը ձեր տվյալների և գործիքների հետ։",
   "CustomMCPListTitle": "Հարմարեցված",
+  "DefaultAISetupDescription": "Ընտրեք, թե որ մոդելը կօգտագործվի լռելյայն չատերում և գործակալներում:",
+  "DefaultAISetupTitle": "Լռելյայն ԱԲ կարգավորում",
   "DefaultProviderDescription": "Ընտրեք լռակայական {{aiProvider}}-ը և մոդելը բոլոր հնարավորությունների համար {{productName}}-ում ({{aiAgents}}, փաստաթղթերի խմբագիրներ և այլն)։",
   "DefaultProviderSetSuccess": "Լռելյայն մատակարարը հաջողությամբ սահմանվեց",
   "DefaultProviderTitle": "Լռելյայն մատակարար",

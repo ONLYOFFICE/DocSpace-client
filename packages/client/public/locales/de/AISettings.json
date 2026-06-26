@@ -11,6 +11,8 @@
   "CapabilityVision": "Vision",
   "ConnectProductToYourDataAndTools": "Verbinden Sie {{productName}} mit Ihren Daten und Tools.",
   "CustomMCPListTitle": "Benutzerdefiniert",
+  "DefaultAISetupDescription": "Wählen Sie, welches Modell standardmäßig in Chats und Agenten verwendet wird.",
+  "DefaultAISetupTitle": "Standard-KI-Setup",
   "DefaultProviderDescription": "Wählen Sie den Standard-{{aiProvider}} und das Modell für alle Funktionen in {{productName}} ({{aiAgents}}, Dokumenten-Editoren usw.).",
   "DefaultProviderSetSuccess": "Standardanbieter erfolgreich festgelegt",
   "DefaultProviderTitle": "Standardanbieter",

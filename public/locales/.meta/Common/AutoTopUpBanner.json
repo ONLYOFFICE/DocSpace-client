@@ -1,0 +1,29 @@
+{
+  "key_path": "AutoTopUpBanner",
+  "content": "<1>Auto top-up.</1> When credits drop below {{min}}, your wallet will automatically refill to {{max}}.",
+  "content_en_sha1_hash": "110b1a53866269f25cba632c33389ef3715855fc",
+  "created_at": "2026-06-25T11:54:45.586Z",
+  "updated_at": "2026-06-25T12:22:50.996Z",
+  "comment": {
+    "text": "Informational banner in the wallet section explaining the automatic refill feature. It includes a bolded prefix and uses {{min}} and {{max}} to represent specific currency amounts for the threshold and refill limit.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:22:50.996Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/wallet/sub-components/AutoPaymentInfo.tsx",
+      "line_number": 63,
+      "context": "fontSize=\"12px\"\n lineHeight=\"16px\"\n className={styles.autoPaymentBannerText}\n >\n <CommonTrans\n i18nKey=\"AutoTopUpBanner\"\n values={{\n min: formatWalletCurrency!(minBalance, 0),\n max: formatWalletCurrency!(upToBalance, 0),\n }}\n components={{",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

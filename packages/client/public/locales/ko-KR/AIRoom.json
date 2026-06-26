@@ -3,6 +3,8 @@
   "AIAgentAccessRedirectNote": "5초 후에 {{sectionName}} 섹션으로 자동 리디렉션됩니다.",
   "AIChat": "AI-채팅",
   "AIInstructions": "AI 지침",
+  "AIModelDescription": "이 룸의 채팅에서 사용할 AI 모델을 선택하세요. 이 설정은 필수이며 모든 참가자에게 적용됩니다.",
+  "AIModelTitle": "AI 모델",
   "AIProviderAndModel": "{{aiProvider}} 및 모델",
   "CreateChat": "채팅 만들기",
   "CreateChatDescription": "{{aiChat}} 탭으로 이동하여 시작하세요.",

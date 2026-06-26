@@ -1,0 +1,29 @@
+{
+  "key_path": "ConnectMCPServersCardDescription",
+  "content": "Plug in MCP servers from the apps your team uses. AI agents can read data and run actions across your whole toolchain from a single chat.",
+  "content_en_sha1_hash": "a832965d209237691c8e8f7784bf85929d9a6f25",
+  "created_at": "2026-06-25T11:54:47.175Z",
+  "updated_at": "2026-06-25T12:18:08.546Z",
+  "comment": {
+    "text": "Description text on a feature card within the AI features dialog, explaining how MCP server integration enables AI agents to access data and perform actions across external applications.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:18:08.546Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
+      "line_number": 108,
+      "context": "<div className={styles.mcpIcon}>\n <McpToolIcon />\n </div>\n ),\n title: t(\"ConnectMCPServersTitle\"),\n description: t(\"ConnectMCPServersCardDescription\"),\n },\n ];\n \n const tags = [\n { label: t(\"AIFeatureWriteRewriteTranslate\"), icon: <WriteTagIcon /> },",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

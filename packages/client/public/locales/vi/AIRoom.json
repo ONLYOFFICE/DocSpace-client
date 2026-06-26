@@ -3,6 +3,8 @@
   "AIAgentAccessRedirectNote": "Bạn sẽ tự động chuyển đến phần {{sectionName}} trong 5 giây.",
   "AIChat": "Trò chuyện AI",
   "AIInstructions": "Hướng dẫn AI",
+  "AIModelDescription": "Chọn mô hình AI sẽ được sử dụng trong các cuộc trò chuyện của phòng này. Cài đặt này là bắt buộc và áp dụng cho tất cả người tham gia.",
+  "AIModelTitle": "Mô hình AI",
   "AIProviderAndModel": "{{aiProvider}} và mô hình",
   "CreateChat": "Tạo cuộc trò chuyện",
   "CreateChatDescription": "Truy cập tab {{aiChat}} để bắt đầu.",

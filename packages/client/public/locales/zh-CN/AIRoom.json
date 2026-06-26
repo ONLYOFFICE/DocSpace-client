@@ -3,6 +3,8 @@
   "AIAgentAccessRedirectNote": "系统将在5秒后自动跳转至{{sectionName}}模块。",
   "AIChat": "AI 对话",
   "AIInstructions": "AI 指令",
+  "AIModelDescription": "选择此房间聊天中使用的 AI 模型。此设置是强制性的，并适用于所有参与者。",
+  "AIModelTitle": "AI 模型",
   "AIProviderAndModel": "{{aiProvider}} 和模型",
   "CreateChat": "创建对话",
   "CreateChatDescription": "请转到 {{aiChat}} 选项卡开始使用。",

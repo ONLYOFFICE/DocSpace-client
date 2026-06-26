@@ -3,7 +3,7 @@
   "content": "Web search",
   "content_en_sha1_hash": "381ceddd75a893f19764c7e4cf9cd12c0f6e88c3",
   "created_at": "2025-11-21T08:21:51.294Z",
-  "updated_at": "2026-05-15T14:00:06.759Z",
+  "updated_at": "2026-06-25T11:55:07.109Z",
   "comment": {
     "text": "This is a noun used in various contexts, such as a tooltip, a page title, and a toast message, referring to the web search functionality within the AI settings.",
     "is_auto": true,
@@ -19,14 +19,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 142,
-      "context": "React.useEffect(() => {\n const title =\n currentTabId === \"providers\"\n ? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);",
+      "line_number": 173,
+      "context": ": currentTabId === \"providers\"\n ? t(\"Common:AIProvider\")\n : currentTabId === \"model-assignment\"\n ? t(\"Common:ModelAssignment\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 142,
-      "context": "React.useEffect(() => {\n const title =\n currentTabId === \"providers\"\n ? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);",
+      "line_number": 173,
+      "context": ": currentTabId === \"providers\"\n ? t(\"Common:AIProvider\")\n : currentTabId === \"model-assignment\"\n ? t(\"Common:ModelAssignment\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);",
       "module": "/packages/client"
     },
     {

@@ -11,6 +11,8 @@
   "CapabilityVision": "Vizija",
   "ConnectProductToYourDataAndTools": "Povežite {{productName}} sa svojim podacima i alatkama.",
   "CustomMCPListTitle": "Prilagođeno",
+  "DefaultAISetupDescription": "Izaberite koji će se model podrazumevano koristiti u ćaskanjima i agentima.",
+  "DefaultAISetupTitle": "Podrazumevana AI postavka",
   "DefaultProviderDescription": "Izaberite podrazumevani {{aiProvider}} i model za sve funkcije u {{productName}} ({{aiAgents}}, uređivači dokumenata, itd.).",
   "DefaultProviderSetSuccess": "Podrazumeseni provajder uspešno postavljen",
   "DefaultProviderTitle": "Podrazumevani provajder",

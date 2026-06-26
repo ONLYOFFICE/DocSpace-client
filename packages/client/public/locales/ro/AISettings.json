@@ -11,6 +11,8 @@
   "CapabilityVision": "Viziune",
   "ConnectProductToYourDataAndTools": "Conectați {{productName}} la datele și instrumentele dvs.",
   "CustomMCPListTitle": "Particularizare",
+  "DefaultAISetupDescription": "Alegeți ce model va fi utilizat în mod implicit în chat-uri și agenți.",
+  "DefaultAISetupTitle": "Configurare IA implicită",
   "DefaultProviderDescription": "Selectați {{aiProvider}} și modelul implicit pentru toate funcțiile din {{productName}} ({{aiAgents}}, editoare de documente etc.)",
   "DefaultProviderSetSuccess": "Furnizorul implicit a fost setat cu succes.",
   "DefaultProviderTitle": "Furnizor implicit",

@@ -3,7 +3,7 @@
   "content": "Learn more",
   "content_en_sha1_hash": "824d76b124e6289f372e2ff6bcba91e8939343bd",
   "created_at": "2025-05-19T21:30:46.111Z",
-  "updated_at": "2026-06-02T08:43:27.501Z",
+  "updated_at": "2026-06-25T11:55:07.109Z",
   "comment": {
     "text": "This is a link label that, when clicked, directs the user to a help page or settings page for more information about the current feature or setting.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
-      "line_number": 188,
-      "context": "fontWeight={600}\n href={walletHelpUrl}\n className={styles.learnMoreLink}\n dataTestId=\"wallet_learn_more_link\"\n >\n {t(\"LearnMore\")}\n </Link>\n ) : null}\n \n <div className={styles.balanceWrapper}>\n <BalanceAmount",
+      "line_number": 223,
+      "context": "fontWeight={600}\n href={walletHelpUrl}\n className={styles.learnMoreLink}\n dataTestId=\"wallet_learn_more_link\"\n >\n {t(\"LearnMore\")}\n </Link>\n ) : null}\n \n <div className={styles.summaryGrid}>\n <div className={`${styles.summaryCard} ${styles.summaryCardBalance}`}>",
       "module": "/libs/ui-kit"
     },
     {
@@ -24,8 +24,14 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/KnowledgeBase.tsx",
+      "line_number": 83,
+      "context": "color=\"accent\"\n href={knowledgeSettingsUrl}\n target={LinkTarget.blank}\n textDecoration=\"underline\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n \n <div className={styles.list}>\n {items.map((item) => (",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/index.tsx",
-      "line_number": 201,
+      "line_number": 200,
       "context": "fontWeight={600}\n isHovered\n href={aiProviderSettingsUrl}\n color=\"accent\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n <Button\n testId=\"add-provider-button\"\n primary",
       "module": "/packages/client"
     },
@@ -33,6 +39,12 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
       "line_number": 236,
       "context": "fontWeight={600}\n isHovered\n href={webSearchSettingsUrl}\n color=\"accent\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n <div className={styles.searchForm} data-testid=\"web-search-form\">\n <FieldContainer\n labelVisible",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/WebSearch.tsx",
+      "line_number": 83,
+      "context": "color=\"accent\"\n href={webSearchSettingsUrl}\n target={LinkTarget.blank}\n textDecoration=\"underline\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n \n <div className={styles.list}>\n {items.map((ws) => (",
       "module": "/packages/client"
     },
     {

@@ -11,6 +11,8 @@
   "CapabilityVision": "Görüntü",
   "ConnectProductToYourDataAndTools": "{{productName}}'i veri ve araçlarınıza bağlayın.",
   "CustomMCPListTitle": "Özel",
+  "DefaultAISetupDescription": "Sohbetlerde ve ajanlarda varsayılan olarak hangi modelin kullanılacağını seçin.",
+  "DefaultAISetupTitle": "Varsayılan AI kurulumu",
   "DefaultProviderDescription": "Tüm özellikler için varsayılan {{aiProvider}} ve modeli {{productName}} genelinde ({{aiAgents}}, belge düzenleyicileri vb.) seçiniz.",
   "DefaultProviderSetSuccess": "Varsayılan sağlayıcı başarıyla ayarlandı",
   "DefaultProviderTitle": "Varsayılan sağlayıcı",

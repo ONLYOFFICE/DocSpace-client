@@ -11,6 +11,8 @@
   "CapabilityVision": "Зір",
   "ConnectProductToYourDataAndTools": "Підключіть {{productName}} до ваших даних та інструментів.",
   "CustomMCPListTitle": "Користувацькі",
+  "DefaultAISetupDescription": "Виберіть, яка модель використовуватиметься за замовчуванням у чатах та агентах.",
+  "DefaultAISetupTitle": "Налаштування ШІ за замовчуванням",
   "DefaultProviderDescription": "Виберіть значення за замовчуванням {{aiProvider}} та модель для всіх функцій у {{productName}} ({{aiAgents}}, редактори документів тощо).",
   "DefaultProviderSetSuccess": "Постачальника за замовчуванням успішно встановлено",
   "DefaultProviderTitle": "Постачальник за замовчуванням",

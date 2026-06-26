@@ -11,6 +11,8 @@
   "CapabilityVision": "Görmə",
   "ConnectProductToYourDataAndTools": "{{productName}} ilə məlumatlarınızı və alətlərinizi birləşdirin.",
   "CustomMCPListTitle": "Xüsusi",
+  "DefaultAISetupDescription": "Söhbətlərdə və agentlərdə standart olaraq hansı modelin istifadə ediləcəyini seçin.",
+  "DefaultAISetupTitle": "Standart AI quruluşu",
   "DefaultProviderDescription": "Bütün {{productName}} xüsusiyyətləri üçün varsayılan {{aiProvider}} və modelini seçin ({{aiAgents}}, sənəd redaktorları və s.).",
   "DefaultProviderSetSuccess": "Standart provayder uğurla təyin edildi",
   "DefaultProviderTitle": "Standart provayder",

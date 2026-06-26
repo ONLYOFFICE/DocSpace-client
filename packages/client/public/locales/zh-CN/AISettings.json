@@ -11,6 +11,8 @@
   "CapabilityVision": "视觉",
   "ConnectProductToYourDataAndTools": "将{{productName}}连接到您的数据和工具。",
   "CustomMCPListTitle": "自定义",
+  "DefaultAISetupDescription": "选择在聊天和智能体中默认使用的模型。",
+  "DefaultAISetupTitle": "默认 AI 设置",
   "DefaultProviderDescription": "选择{{productName}}（{{aiAgents}}、文档编辑器等）所有功能的默认 {{aiProvider}} 和模型",
   "DefaultProviderSetSuccess": "默认提供商已成功设置",
   "DefaultProviderTitle": "默认提供商",

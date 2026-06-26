@@ -11,6 +11,8 @@
   "CapabilityVision": "Зрение",
   "ConnectProductToYourDataAndTools": "Свържете {{productName}} с вашите данни и инструменти.",
   "CustomMCPListTitle": "Персонализирани",
+  "DefaultAISetupDescription": "Изберете кой модел ще се използва по подразбиране в чатовете и агентите.",
+  "DefaultAISetupTitle": "Настройка на ИИ по подразбиране",
   "DefaultProviderDescription": "Изберете стандартния {{aiProvider}} и модела за всички функции в {{productName}} ({{aiAgents}}, редактори на документи, и т.н.).",
   "DefaultProviderSetSuccess": "По подразбиране доставчикът е настроен успешно",
   "DefaultProviderTitle": "По подразбиране доставчик",

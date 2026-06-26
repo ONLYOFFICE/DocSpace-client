@@ -3,7 +3,7 @@
   "content": "The link has expired.",
   "content_en_sha1_hash": "ef3fc8d140fe94ebbb33acc6c724acb2c51a4cb9",
   "created_at": "2025-05-19T21:30:46.180Z",
-  "updated_at": "2026-06-05T11:04:11.799Z",
+  "updated_at": "2026-06-25T11:55:07.082Z",
   "comment": {
     "text": "This is an error message displayed as a toast notification or on an error page, indicating that a shared link is no longer valid because its expiration date has passed.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1897,
+      "line_number": 1899,
       "context": "const primaryLink = await ShareLinkService.getPrimaryLink(item);\n \n if (primaryLink) {\n if (primaryLink.sharedTo?.isExpired) {\n toastr.error(t(\"Common:LinkExpired\"));\n return;\n }\n \n if (this.filesSettingsStore.isLinkBlockedByAdmin(item, primaryLink)) {\n toastr.error(t(\"Common:LinkBlockedByAdminWarning\"));",
       "module": "/packages/client"
     },
@@ -55,7 +55,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/sub-components/LinkRow.tsx",
-      "line_number": 193,
+      "line_number": 190,
       "context": "isExpiredLink={isExpiredLink}\n disabledCopy={isArchiveFolder}\n isBlockedByAdmin={isBlockedByAdmin}\n onCopyLink={() =>\n isExpiredLink\n ? toastr.error(t(\"Common:LinkExpired\"))\n : onCopyLink(link)\n }\n />\n {isBlockedByAdmin ? null : (\n <LinkExpiration",
       "module": "/packages/shared"
     }

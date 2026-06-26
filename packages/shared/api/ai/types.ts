@@ -100,13 +100,15 @@ export type TModelList = TModel[];
 export type TProfile = {
   id: string;
   name: string;
-  providerType: ProviderType;
+  providerType: string;
   baseUrl: string;
   modelId: string;
   key?: string | null;
   headers?: Record<string, string>;
   reasoning?: boolean;
   capabilities?: number;
+  canUseTool?: boolean;
+  useResponsesApi?: boolean;
   createdAt?: number;
 };
 

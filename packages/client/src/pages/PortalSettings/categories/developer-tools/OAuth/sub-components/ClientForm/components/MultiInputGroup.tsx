@@ -94,7 +94,7 @@ const MultiInputGroup = ({
   // const withoutSearch = name === "redirect_uris";
   const withoutSearch = true;
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const v = e.target.value;
+    const v = e.target.value.trim();
 
     setValue(v);
 
@@ -127,11 +127,18 @@ const MultiInputGroup = ({
   const onAddAction = React.useCallback(() => {
     if (isDisabled || isError) return;
 
-    onAdd(name as keyof IClientReqDTO, value);
+    const trimmedValue = value.trim();
+
+    if (!isValidUrl(trimmedValue, withoutSearch)) {
+      setIsError(true);
+      return;
+    }
+
+    onAdd(name as keyof IClientReqDTO, trimmedValue);
     setIsAddVisible(false);
     setIsError(false);
     setValue("");
-  }, [isDisabled, isError, name, onAdd, value]);
+  }, [isDisabled, isError, name, onAdd, value, withoutSearch]);
 
   React.useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {

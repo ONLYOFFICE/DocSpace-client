@@ -895,6 +895,115 @@ describe("Locales Tests", () => {
     expect(errorsCount, message).toBe(0);
   });
 
+  it("WrongCreditsTermTest: Verify that billing 'credits' (prepaid wallet balance) is not translated with a bank-loan word.", () => {
+    // In billing / wallet / AI-payment strings, English "credit"/"credits" means
+    // prepaid money the user topped up into their wallet (a monetary account balance) —
+    // NOT a bank loan / borrowed credit. In many languages the literal cognate of
+    // "credit" primarily means a *loan* (ru "кредит", de "Kredit", tr "kredi", ...),
+    // so a literal translation is wrong. This test flags every non-English value whose
+    // English source contains "credit" but whose translation uses the loan word.
+    //
+    // Scope: only keys whose EN value contains "credit" (and not "credit card", a
+    // legitimate payment-method term). Untranslated values (still equal to EN) are
+    // skipped — NotTranslatedOnBaseLanguages covers those.
+
+    // language -> { stems: loan-word stems to forbid, boundary: word-boundary match,
+    //               use: recommended balance/funds term for the fix hint }
+    const CREDIT_LOAN_TERMS = {
+      ru: { stems: ["кредит"], boundary: true, use: "средства / баланс" },
+      "uk-UA": { stems: ["кредит"], boundary: true, use: "кошти / баланс" },
+      bg: { stems: ["кредит"], boundary: true, use: "средства / баланс" },
+      "sr-Cyrl-RS": { stems: ["кредит"], boundary: true, use: "средства / стање" },
+      "sr-Latn-RS": { stems: ["kredit"], boundary: true, use: "sredstva / stanje" },
+      de: { stems: ["kredit"], boundary: true, use: "Guthaben" },
+      nl: { stems: ["krediet", "kredit"], boundary: true, use: "tegoed / saldo" },
+      fr: { stems: ["crédit", "credit"], boundary: true, use: "solde / fonds" },
+      es: { stems: ["crédit", "credit"], boundary: true, use: "saldo / fondos" },
+      it: { stems: ["credit"], boundary: true, use: "saldo / fondi" },
+      pt: { stems: ["crédit", "credit"], boundary: true, use: "saldo / fundos" },
+      "pt-BR": { stems: ["crédit", "credit"], boundary: true, use: "saldo / fundos" },
+      ro: { stems: ["credit"], boundary: true, use: "sold / fonduri" },
+      pl: { stems: ["kredyt"], boundary: true, use: "środki / saldo" },
+      cs: { stems: ["úvěr", "uver", "kredit"], boundary: true, use: "zůstatek / prostředky" },
+      sk: { stems: ["úver", "uver"], boundary: true, use: "zostatok / prostriedky" },
+      sl: { stems: ["kredit"], boundary: true, use: "stanje / dobroimetje" },
+      fi: { stems: ["luotto", "luoto"], boundary: true, use: "saldo / varat" },
+      lv: { stems: ["kredīt", "kredit"], boundary: true, use: "atlikums / līdzekļi" },
+      az: { stems: ["kredit"], boundary: true, use: "balans / vəsait" },
+      "sq-AL": { stems: ["kredi"], boundary: true, use: "balanca / fondet" },
+      tr: { stems: ["kredi"], boundary: true, use: "bakiye" },
+      "el-GR": { stems: ["πίστωσ", "δάνει", "δανει"], boundary: true, use: "υπόλοιπο" },
+      "hy-AM": { stems: ["վարկ"], boundary: true, use: "մնացորդ / միջոցներ" },
+      "ar-SA": { stems: ["ائتمان", "قرض"], boundary: false, use: "الرصيد" },
+      "ja-JP": { stems: ["クレジット", "ローン"], boundary: false, use: "残高" },
+      "ko-KR": { stems: ["크레딧", "대출"], boundary: false, use: "잔액" },
+      "zh-CN": { stems: ["信用", "信贷", "贷款"], boundary: false, use: "余额" },
+      vi: { stems: ["tín dụng"], boundary: false, use: "số dư" },
+      "lo-LA": { stems: ["ສິນເຊື່ອ"], boundary: false, use: "ຍອດເງິນ" },
+      si: { stems: ["ණය"], boundary: false, use: "ශේෂය" },
+    };
+
+    // Compile one matcher per language. Boundary languages match the stem at a left
+    // word boundary plus any trailing letters (to catch inflections: "кредиты",
+    // "krediniz", "creditare"), which avoids mid-word hits like ro "acreditare".
+    const matchers = {};
+    Object.entries(CREDIT_LOAN_TERMS).forEach(([lng, { stems, boundary }]) => {
+      const group = stems.join("|");
+      matchers[lng] = boundary
+        ? new RegExp(`(?<!\\p{L})(?:${group})\\p{L}*`, "iu")
+        : new RegExp(`(?:${group})`, "iu");
+    });
+
+    // EN value lookup: "namespace|key" -> English value.
+    const enByKey = new Map();
+    translationFiles.forEach((file) => {
+      if (file.language !== "en") return;
+      file.translations.forEach((t) => {
+        enByKey.set(`${file.namespace}|${t.key}`, t.value);
+      });
+    });
+
+    const isCreditKey = (enVal) =>
+      typeof enVal === "string" &&
+      /credit/i.test(enVal) &&
+      !/card/i.test(enVal); // skip "credit card" payment-method strings
+
+    let message =
+      "Next keys translate billing 'credits' (a prepaid wallet balance) with a " +
+      "bank-loan word. 'credits' here is money the user topped up, NOT a loan — " +
+      "use the language's word for balance / funds:\r\n\r\n";
+    let errorsCount = 0;
+    let i = 0;
+    const wrongEntries = [];
+
+    translationFiles.forEach((file) => {
+      const matcher = matchers[file.language];
+      if (!matcher) return; // language has no defined loan-word / is English
+
+      file.translations.forEach((translation) => {
+        if (!translation.value) return;
+
+        const enVal = enByKey.get(`${file.namespace}|${translation.key}`);
+        if (!isCreditKey(enVal)) return; // not a billing-credits key
+        if (translation.value.trim() === enVal.trim()) return; // untranslated — other test
+
+        if (!matcher.test(translation.value)) return;
+
+        message +=
+          `${++i}. lang='${file.language}' path='${file.path}' key='${translation.key}'\r\n` +
+          `  EN:    '${enVal.substring(0, 120)}'\r\n` +
+          `  Value: '${translation.value.substring(0, 120)}'\r\n` +
+          `  Use:   ${CREDIT_LOAN_TERMS[file.language].use}\r\n\r\n`;
+        errorsCount++;
+        wrongEntries.push({ filePath: file.path, key: translation.key });
+      });
+    });
+
+    clearWrongKeys(wrongEntries, "loan-word 'credits' translations");
+
+    expect(errorsCount, message).toBe(0);
+  });
+
   it("ForbiddenValueElementsTest: Verify that certain forbidden values are not present in the translation strings across different languages.", () => {
     let message = `Next keys have forbidden values \`${forbiddenElements.join(
       ",",

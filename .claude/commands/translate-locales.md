@@ -89,6 +89,51 @@ Frame each translation as:
 - `Ask AI` — keep exactly as "Ask AI" in all languages
 - Folder name `Complete` — keep as "Complete" (it is a UI label, not a word to translate)
 
+**Billing / wallet "credits" → prepaid balance, NOT a loan:**
+
+In billing, wallet and AI-payment strings, "credit"/"credits" means **prepaid money the user has topped up into their wallet — a monetary account balance**. It is **never** a bank loan, borrowed credit or financing, and it is **not** a separate metered "AI-unit" currency.
+
+The danger: in many languages the literal cognate of "credit" primarily means a *loan* (ru `кредит`, de `Kredit`, fr `crédit`, tr `kredi`, …). Translating it literally is wrong. Instead use the target language's word for **prepaid balance / funds / account balance**. Apply this to every form — the balance label ("Available credits"), countable actions ("Add credits", "Top up credits") and verbs ("credits are deducted").
+
+| Lang | Use (balance / funds) | ❌ Never use (loan word) |
+|------|----------------------|--------------------------|
+| `ru` | средства / баланс | кредит(ы) |
+| `uk-UA` | кошти / баланс | кредит |
+| `bg` | средства / баланс | кредит |
+| `sr-Cyrl-RS` | средства / стање | кредит |
+| `sr-Latn-RS` | sredstva / stanje | kredit |
+| `de` | Guthaben | Kredit |
+| `nl` | tegoed / saldo | krediet |
+| `fr` | solde / fonds | crédit |
+| `es` | saldo / fondos | crédito |
+| `it` | saldo / fondi | credito |
+| `pt`, `pt-BR` | saldo / fundos | crédito |
+| `ro` | sold / fonduri | credit |
+| `pl` | środki / saldo | kredyt |
+| `cs` | zůstatek / prostředky | úvěr / kredit |
+| `sk` | zostatok / prostriedky | úver |
+| `sl` | stanje / dobroimetje | kredit |
+| `fi` | saldo / varat | luotto |
+| `lv` | atlikums / līdzekļi | kredīts |
+| `az` | balans / vəsait | kredit |
+| `sq-AL` | balanca / fondet | kredi |
+| `tr` | bakiye | kredi |
+| `el-GR` | υπόλοιπο | πίστωση / δάνειο |
+| `hy-AM` | մնացորդ / միջոցներ | վարկ |
+| `ar-SA` | الرصيد | ائتمان |
+| `ja-JP` | 残高 | クレジット / ローン |
+| `ko-KR` | 잔액 | 크레딧 / 대출 |
+| `zh-CN` | 余额 | 信用 / 信贷 / 贷款 |
+| `vi` | số dư | tín dụng |
+| `lo-LA` | ຍອດເງິນ | ສິນເຊື່ອ |
+| `si` | ශේෂය | ණය |
+
+For any language not in the table, pick the standard term a bank or e-wallet uses for a **prepaid/available balance**, and confirm it does not also mean "loan".
+
+> ⚠️ The auto-generated `.meta` `comment.text` (`"is_auto": true`) is unreliable for these keys — it often describes credits as a separate "AI service credits" unit, which misleads the loan-vs-balance choice. When the comment frames credits this way, override it with the balance interpretation above. The preferred wording for such a comment is:
+>
+> > Wallet balance label shown when the available funds are not enough to cover the purchase. Here "credits" means prepaid money the user has topped up into their wallet (a monetary balance), NOT a loan or financing — translate it as account balance / prepaid funds, not as borrowed credit.
+
 **Consistent terminology — before translating, grep the same namespace file for similar keys to match existing word choices** (e.g. the word used for "room", "form", "database", "integration" in that language).
 
 **Placeholders and markup — preserve exactly:**

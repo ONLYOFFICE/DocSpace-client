@@ -168,7 +168,7 @@ const SectionHeaderContent = (props) => {
 
     const serviceSubPageHeaders = {
       backup: isFreeTariff ? "Common:Backup" : t("Common:AdditionalBackup"),
-      "ai-services": "Common:OrganizationAI",
+      "ai-services": "Common:AIFeatures",
       "disk-storage": "Common:AdditionalDiskStorage",
     };
 

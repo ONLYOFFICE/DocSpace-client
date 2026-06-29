@@ -1,0 +1,29 @@
+{
+  "key_path": "AndMuchMore",
+  "content": "and much more",
+  "content_en_sha1_hash": "4de57831efff20409bd56cdbdc85a3830be875e9",
+  "created_at": "2026-06-25T11:54:45.234Z",
+  "updated_at": "2026-06-25T12:23:13.438Z",
+  "comment": {
+    "text": "A concluding text fragment in the AI features dialog that follows a list of features to indicate additional unlisted capabilities.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:23:13.438Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
+      "line_number": 188,
+      "context": "</Text>\n {tag.label}\n </Text>\n ))}\n <Text as=\"span\" fontWeight={600} className={styles.andMore}>\n {t(\"AndMuchMore\")}\n </Text>\n </div>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

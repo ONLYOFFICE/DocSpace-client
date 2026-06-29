@@ -1,0 +1,29 @@
+{
+  "key_path": "AIOpenRouterPricingNote",
+  "content": "<1>OpenRouter pricing</1> + 20% service fee applies to usage",
+  "content_en_sha1_hash": "f7b743f7575725a6c402aca9abeb55073adf8cc8",
+  "created_at": "2026-06-25T11:54:44.284Z",
+  "updated_at": "2026-06-25T12:27:48.365Z",
+  "comment": {
+    "text": "Informational label in the AI features banner notifying users of an extra service fee; the <1> tag wraps a clickable link.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:27:48.365Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
+      "line_number": 95,
+      "context": "};\n \n const openRouterPricingNote = (\n <Text as=\"div\" fontSize=\"12px\" fontWeight={600}>\n <CommonTrans\n i18nKey=\"AIOpenRouterPricingNote\"\n namespaces={[\"Common\"]}\n components={{\n 1: (\n <Link\n type={LinkType.page}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

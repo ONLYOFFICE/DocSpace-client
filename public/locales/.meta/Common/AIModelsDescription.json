@@ -1,0 +1,35 @@
+{
+  "key_path": "AIModelsDescription",
+  "content": "Access a wide range of AI models through OpenRouter integration",
+  "content_en_sha1_hash": "e00976345b438fa41be4a0aac757d8580d578f4e",
+  "created_at": "2026-06-25T11:54:44.250Z",
+  "updated_at": "2026-06-25T12:28:21.837Z",
+  "comment": {
+    "text": "Introductory text in the AI models settings section that informs users about the OpenRouter integration.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:28:21.837Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/RowView/index.tsx",
+      "line_number": 83,
+      "context": "if (!models.length) return null;\n \n return (\n <div className={styles.rowContainer}>\n <Text className={styles.introText}>\n {t(\"Common:AIModelsDescription\")}\n </Text>\n <RowContainer\n useReactWindow\n fetchMoreFiles={() => Promise.resolve()}\n hasMoreFiles={false}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/TableView/index.tsx",
+      "line_number": 91,
+      "context": "const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;\n \n return (\n <div className={styles.tableWrapper}>\n <Text className={styles.introText}>\n {t(\"Common:AIModelsDescription\")}\n </Text>\n \n <TableContainer\n forwardedRef={ref as React.RefObject<HTMLDivElement>}\n useReactWindow={false}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

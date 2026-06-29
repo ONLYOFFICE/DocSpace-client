@@ -1,0 +1,29 @@
+{
+  "key_path": "UpcomingPaymentsDescription",
+  "content": "Review your active subscriptions and upcoming renewals.",
+  "content_en_sha1_hash": "33532d49726adb8c67f92740cf9144374f005079",
+  "created_at": "2026-06-25T11:54:59.789Z",
+  "updated_at": "2026-06-25T11:57:02.219Z",
+  "comment": {
+    "text": "Introductory text for the Upcoming Payments section in the billing/wallet area, providing context for the list of subscriptions and renewals.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T11:57:02.219Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/wallet/sub-components/UpcomingPayments/index.tsx",
+      "line_number": 90,
+      "context": "})}\n >\n {upcomingPayments.length ? (\n <>\n <div className={styles.introText}>\n <Text>{t(\"UpcomingPaymentsDescription\")}</Text>\n <Text>{t(\"UpcomingPaymentsAutoChargeNote\")}</Text>\n </div>\n <Consumer>\n {(context) =>\n viewAs === \"table\" ? (",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

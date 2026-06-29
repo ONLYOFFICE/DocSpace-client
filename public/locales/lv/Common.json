@@ -285,7 +285,6 @@
   "BuiltInAIService": "Iegrīkotais MI dienests",
   "BuiltInAIServiceDisabled": "Iebūvēts MI dienests, kas ir aktivizēts <1>Services</1> lapā",
   "BusinessExpired": "Jūsu {{planName}} plāna derīguma termiņš ir beidzies {{date}}",
-  "BusinessFinalDateInfo": "Abonements tiks automātiski atjaunots {{finalDate}} ar atjauninātām cenām un specifikācijām. Varat to atcelt vai mainīt norēķinu informāciju Stripe klientu portālā.",
   "BusinessRequestDescription": "Cenu plāni ar vairāk {{peopleNumber}} administratoriem ir pieejami tikai pēc pieprasījuma.",
   "BusinessSuggestion": "Pielāgot savu {{planName}} plānu",
   "BusinessTitle": "Jūs izmantojat {{planName}} plānu",

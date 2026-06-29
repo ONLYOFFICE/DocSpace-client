@@ -285,7 +285,6 @@
   "BuiltInAIService": "Vstroyený AI servis",
   "BuiltInAIServiceDisabled": "Vstavaný AI servis, zapnutý na stránke <1>Services</1>",
   "BusinessExpired": "Platnosť vášho plánu {{planName}} vypršala dňa {{date}}",
-  "BusinessFinalDateInfo": "Predplatné bude automaticky obnovené dňa {{finalDate}} s aktualizovanými cenami a špecifikáciami. Môžete ho zrušiť alebo zmeniť svoje fakturačné údaje na zákazníckom portáli Stripe.",
   "BusinessRequestDescription": "Cenové plány s viac ako {{peopleNumber}} administrátormi sú dostupné len na požiadanie.",
   "BusinessSuggestion": "Prispôsobte si svoj plán {{planName}}",
   "BusinessTitle": "Používate plán {{planName}}",

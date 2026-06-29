@@ -285,7 +285,6 @@
   "BuiltInAIService": "Sisäänrakennettu tekoälypalvelu",
   "BuiltInAIServiceDisabled": "Sisäänrakennettu tekoälypalvelu, käytössä <1>Palvelut</1> sivulla",
   "BusinessExpired": "{{planName}} on vanhentunut {{date}}",
-  "BusinessFinalDateInfo": "Tilaus uusitaan automaattisesti {{finalDate}} päivitetyllä hinnalla ja teknisillä tiedoilla. Voit peruuttaa sen tai vaihtaa maksutietojasi Stripe-asiakasportaalissa.",
   "BusinessRequestDescription": "Hinnoitteluohjelmat, jotka sisältävät enemmän {{peopleNumber}} ylläpitäjät ovat saatavilla vain pyynnöstä.",
   "BusinessSuggestion": "Mukauta {{planName}} ohjelmaa",
   "BusinessTitle": "Käytät {{planName}}-ohjelmaa",

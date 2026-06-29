@@ -285,7 +285,6 @@
   "BuiltInAIService": "Serviciu de IA integrat",
   "BuiltInAIServiceDisabled": "Serviciul IA integrat, activat pe pagina <1>Services</1>",
   "BusinessExpired": "Abonamentul dvs {{planName}} a expirat la {{date}}",
-  "BusinessFinalDateInfo": "Abonamentul va fi reînnoit automat la {{finalDate}} la preţuri şi cu specificaţii aplicabile după actualizarea. Puteţi să anulaţi sau să schimbaţi informaţiile de facturare pe portalul dvs. de client Stripe.",
   "BusinessRequestDescription": "Abonamente cu mai mult de {{peopleNumber}} administratori sunt disponibile doar la cerere.",
   "BusinessSuggestion": "Gestionați abonamentul dvs {{planName}}",
   "BusinessTitle": "Utilizaţi abonamentul {{planName}}",

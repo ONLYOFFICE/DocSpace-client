@@ -285,7 +285,6 @@
   "BuiltInAIService": "අභ්‍යන්තර AI සේවාව",
   "BuiltInAIServiceDisabled": "අභ්‍යන්තර AI සේවාව, <1>Services</1> පිටුවේ සක්‍රිය කර ඇත",
   "BusinessExpired": "ඔබගේ {{planName}} සැලසුම {{date}} දී ඉකුත් වී ඇත",
-  "BusinessFinalDateInfo": "යාවත්කාලීන මිලකරණය සහ පිරිවිතර සමඟ දායකත්‍වය {{finalDate}} දී ස්වයංක්‍රීයව අළුත් වේ. ඔබට එය අවලංගු කිරීමට හෝ ස්ට්‍රයිප් පාරිභෝගික ද්වාරයෙහි ඔබගේ ලදුපත් තොරතුරු වෙනස් කිරීමට හැකිය.",
   "BusinessRequestDescription": "වැඩි {{peopleNumber}} පරිපාලකයන් සිටින මිල සැලසුම් ඉල්ලීම මත පමණක් ලබාගත හැකිය.",
   "BusinessSuggestion": "ඔබගේ {{planName}} සැලසුම අභිරුචිකරණය",
   "BusinessTitle": "ඔබ {{planName}} සැලසුම භාවිතා කරයි",

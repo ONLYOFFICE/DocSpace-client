@@ -285,7 +285,6 @@
   "BuiltInAIService": "Servizio IA integrato",
   "BuiltInAIServiceDisabled": "Servizio IA integrato, abilitato sulla pagina <1>Services</1>",
   "BusinessExpired": "Il tuo piano {{planName}} è scaduto il {{date}}",
-  "BusinessFinalDateInfo": "L’abbonamento si rinnoverà automaticamente il giorno {{finalDate}} con prezzi e specifiche aggiornati. Puoi annullarlo o modificare i tuoi dati di fatturazione sul tuo portale clienti Stripe.",
   "BusinessRequestDescription": "I piani tariffari con più {{peopleNumber}} amministratori sono disponibili solo su richiesta.",
   "BusinessSuggestion": "Personalizza il tuo piano {{planName}}",
   "BusinessTitle": "Stai utilizzando il piano {{planName}}",

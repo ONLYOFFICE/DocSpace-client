@@ -1,0 +1,24 @@
+{
+  "key_path": "BusinessRenewalNotice",
+  "content": "Subscription will be automatically renewed on {{finalDate}} with updated pricing and specifications.",
+  "comment": {
+    "text": "Informational text displayed below the payment details, informing the user about the automatic renewal of their subscription. `{{finalDate}}` is the date of the renewal.",
+    "is_auto": false
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
+      "line_number": 297,
+      "context": "<CommonTrans\n i18nKey=\"BusinessRenewalNotice\"\n values={{ finalDate: paymentDate }}\n />",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

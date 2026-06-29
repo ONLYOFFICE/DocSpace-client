@@ -285,7 +285,6 @@
   "BuiltInAIService": "Dịch vụ AI tích hợp",
   "BuiltInAIServiceDisabled": "Dịch vụ AI tích hợp sẵn, được kích hoạt trên trang <1>Services</1>",
   "BusinessExpired": "Gói dịch vụ {{planName}} của bạn đã hết hạn vào ngày {{date}}",
-  "BusinessFinalDateInfo": "Gói dịch vụ đăng ký sẽ được tự động gia hạn vào ngày {{finalDate}} với mức phí và tính năng được cập nhật. Bạn có thể hủy nó hoặc thay đổi thông tin thanh toán của bạn trên cổng thông tin khách hàng Stripe của bạn.",
   "BusinessRequestDescription": "Các gói dịch vụ với thêm {{peopleNumber}} quản trị viên chỉ có theo yêu cầu.",
   "BusinessSuggestion": "Tùy chỉnh gói dịch vụ {{planName}} của bạn",
   "BusinessTitle": "Bạn đang sử dụng gói dịch vụ {{planName}}",

@@ -285,7 +285,6 @@
   "BuiltInAIService": "内置AI服务",
   "BuiltInAIServiceDisabled": "内置 AI 服务，在 <1>Services</1> 页面启用",
   "BusinessExpired": "您的{{planName}}版本已于{{date}}过期",
-  "BusinessFinalDateInfo": "订阅将于 {{finalDate}} 自动按照更新后的定价和规格续期。您可在 Stripe 客户门户中取消或更改计费信息。",
   "BusinessRequestDescription": "拥有更多{{peopleNumber}}名管理员的定价计划仅在请求时提供。",
   "BusinessSuggestion": "自定义您的{{planName}}版本",
   "BusinessTitle": "您正在使用{{planName}}版本",

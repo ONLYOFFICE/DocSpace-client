@@ -285,7 +285,6 @@
   "BuiltInAIService": "Daxili AI xidməti",
   "BuiltInAIServiceDisabled": "Yerleşik süni intellekt xidməti, <1>Xidmətlər</1> səhifəsində aktivləşdirilib",
   "BusinessExpired": "{{planName}} planınızın müddəti {{date}} tarixində başa çatıb",
-  "BusinessFinalDateInfo": "Abunəlik {{finalDate}} tarixində yenilənmiş qiymət və spesifikasiyalarla avtomatik yenilənəcək. Siz Stripe müştəri portalınızda faktura məlumatlarınızı ləğv edə və ya dəyişə bilərsiniz.",
   "BusinessRequestDescription": "Daha çox {{peopleNumber}} admin olan qiymət planları yalnız sorğu əsasında mümkündür.",
   "BusinessSuggestion": "{{planName}} planınızı fərdiləşdirin",
   "BusinessTitle": "Siz {{planName}} planından istifadə edirsiniz",

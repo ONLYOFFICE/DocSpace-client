@@ -285,7 +285,6 @@
   "BuiltInAIService": "組み込みAIサービス",
   "BuiltInAIServiceDisabled": "内蔵AIサービス。この機能は<1>Services</1>ページで有効化できます。",
   "BusinessExpired": "{{planName}}プランは{{date}}で期限切れとなりました。",
-  "BusinessFinalDateInfo": "サブスクリプションは、価格と仕様を更新して{{finalDate}}日に自動更新されます。Stripeカスタマーポータルでキャンセルまたは請求先情報を変更することができます。",
   "BusinessRequestDescription": "{{peopleNumber}}人以上の管理者がいる料金プランは、リクエストに応じてのみご利用いただけます。",
   "BusinessSuggestion": "{{planName}}のプランをカスタマイズする",
   "BusinessTitle": "{{planName}}プランをご利用いただいています。",

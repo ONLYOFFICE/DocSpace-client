@@ -285,7 +285,6 @@
   "BuiltInAIService": "Вградена AI услуга",
   "BuiltInAIServiceDisabled": "Вградена AI услуга, активирана на страницата <1>Services</1>",
   "BusinessExpired": "Вашият абонаментен план {{planName}} е изтекъл на {{date}}",
-  "BusinessFinalDateInfo": "Абонаментът ще бъде автоматично подновен на {{finalDate}} с актуализирани цени и спецификации. Можете да го анулирате или да промените информацията си за фактуриране в портала за клиенти на Stripe",
   "BusinessRequestDescription": "Ценовите планове с повече от {{peopleNumber}} администратори са достъпни само при заявка.",
   "BusinessSuggestion": "Персонализирайте плана си {{planName}}",
   "BusinessTitle": "Използвате план {{planName}}",

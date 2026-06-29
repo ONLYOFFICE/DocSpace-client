@@ -285,7 +285,6 @@
   "BuiltInAIService": "Вбудований сервіс AI",
   "BuiltInAIServiceDisabled": "Вбудований сервіс AI, увімкнено на сторінці <1>Services</1>",
   "BusinessExpired": "Термін дії вашого плану {{planName}} закінчився {{date}}",
-  "BusinessFinalDateInfo": "Підписку буде автоматично поновлено {{finalDate}} з оновленими тарифами та специфікаціями. Ви можете скасувати її або змінити платіжну інформацію на порталі клієнтів Stripe.",
   "BusinessRequestDescription": "Тарифні плани з кількістю адміністраторів більше {{peopleNumber}} доступні лише за запитом.",
   "BusinessSuggestion": "Налаштуйте свій план {{planName}}",
   "BusinessTitle": "Ви використовуєте план {{planName}}",

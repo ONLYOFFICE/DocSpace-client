@@ -285,7 +285,6 @@
   "BuiltInAIService": "Ingebouwde AI-dienst",
   "BuiltInAIServiceDisabled": "Ingebouwde AI-service, ingeschakeld op de <1>Services</1> pagina",
   "BusinessExpired": "Uw {{planName}} plan is verlopen op {{date}}",
-  "BusinessFinalDateInfo": "Het abonnement wordt automatisch verlengd op {{finalDate}} met bijgewerkte prijzen en specificaties. U kunt deze opzeggen of uw facturatiegegevens wijzigen op uw Stripe klantenportaal.",
   "BusinessRequestDescription": "De prijsplannen met meer {{peopleNumber}} beheerders zijn alleen beschikbaar op aanvraag.",
   "BusinessSuggestion": "Pas uw {{planName}} plan aan",
   "BusinessTitle": "U gebruikt {{planName}} plan",

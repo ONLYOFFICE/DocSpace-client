@@ -285,7 +285,6 @@
   "BuiltInAIService": "Integrierter KI-Dienst",
   "BuiltInAIServiceDisabled": "Eingebauter KI-Dienst, aktiviert auf der <1>Services</1> Seite",
   "BusinessExpired": "Ihr {{planName}}-Plan ist am {{date}} abgelaufen",
-  "BusinessFinalDateInfo": "Das Abonnement wird automatisch am {{finalDate}} mit aktualisierten Preisen und Spezifikationen verlängert. Sie können es kündigen oder Ihre Rechnungsdaten in Ihrem Stripe-Kundenportal ändern.",
   "BusinessRequestDescription": "Die Preispläne mit mehr {{peopleNumber}} Admins sind nur auf Anfrage erhältlich.",
   "BusinessSuggestion": "Passen Sie Ihren {{planName}}-Plan an",
   "BusinessTitle": "Sie verwenden den {{planName}}-Plan",

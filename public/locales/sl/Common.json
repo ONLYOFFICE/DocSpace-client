@@ -285,7 +285,6 @@
   "BuiltInAIService": "Vgrajena AI storitev",
   "BuiltInAIServiceDisabled": "Vgrajena AI storitev, omogočena na strani <1>Storitve</1>",
   "BusinessExpired": "Vaš {{planName}} paket je potekel dne {{date}}",
-  "BusinessFinalDateInfo": "Naročnina bo samodejno podaljšana dne {{finalDate}} s posodobljenimi cenami in specifikacijami. Lahko jo prekličete ali spremenite podatke za obračun na portalu za stranke Stripe.",
   "BusinessRequestDescription": "Cenovni paket z več {{peopleNumber}} skrbniki je na voljo le na zahtevo.",
   "BusinessSuggestion": "Prilagodi svoj {{planName}} paket",
   "BusinessTitle": "Uporabljate paket {{planName}}",

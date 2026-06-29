@@ -285,7 +285,6 @@
   "BuiltInAIService": "Ներկառուցված ԱԲ ծառայություն",
   "BuiltInAIServiceDisabled": "Ներկառուցված ԱԲ ծառայություն՝ ակտիվացված <1>Services</1> էջում",
   "BusinessExpired": "Ձեր {{planName}} պլանի ժամկետը սպառվել է {{date}}-ին",
-  "BusinessFinalDateInfo": "Բաժանորդագրությունն ավտոմատ կերպով կերկարաձգվի {{finalDate}}-ին՝ թարմացված գնով և բնութագրերով: Դուք կարող եք չեղարկել այն կամ փոխել ձեր վճարային տվյալները ձեր Stripe հաճախորդների պորտալում:",
   "BusinessRequestDescription": "Ավելի շատ {{peopleNumber}} ադմինների հետ սակագնային պլանները հասանելի են միայն ըստ պահանջի:",
   "BusinessSuggestion": "Հարմարեցրեք ձեր {{planName}} պլանը",
   "BusinessTitle": "Դուք օգտագործում եք {{planName}} պլանը",

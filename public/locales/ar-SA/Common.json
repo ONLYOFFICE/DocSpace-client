@@ -285,7 +285,6 @@
   "BuiltInAIService": "خدمة الذكاء الاصطناعي المدمجة",
   "BuiltInAIServiceDisabled": "خدمة الذكاء الاصطناعي المدمجة، مُفعَّلة في صفحة <1>Services</1>",
   "BusinessExpired": "انتهت صلاحية خطتك {{planName}} في {{date}}",
-  "BusinessFinalDateInfo": "سيتم تجديد الاشتراك تلقائيًا في {{finalDate}} بالأسعار والمواصفات المحدّثة. يمكنك إلغاؤه أو تغيير معلومات الفواتير الخاصة بك على بوابة عملاء Stripe.",
   "BusinessRequestDescription": "تتوفر خطط الأسعار مع المزيد من {{peopleNumber}} مشرفين عند الطلب فقط.",
   "BusinessSuggestion": "قم بتخصيص خطة {{planName}} الخاصة بك",
   "BusinessTitle": "أنت تستخدم خطة {{planName}}",

@@ -285,7 +285,6 @@
   "BuiltInAIService": "Yerleşik Yapay Zeka hizmeti",
   "BuiltInAIServiceDisabled": "Yerleşik yapay zeka hizmeti, <1>Hizmetler</1> sayfasından etkinleştirilebilir",
   "BusinessExpired": "{{planName}} planınızın süresi {{date}} tarihinde doldu",
-  "BusinessFinalDateInfo": "Abonelik, güncellenmiş fiyatlandırma ve spesifikasyonlarla {{finalDate}} tarihinde otomatik olarak yenilenecektir. Stripe müşteri portalınızda aboneliği iptal edebilir veya fatura bilgilerinizi değiştirebilirsiniz.",
   "BusinessRequestDescription": "{{peopleNumber}} yönetici sayısından daha fazlasını içeren fiyatlandırma planları yalnızca istek üzerine sunulur.",
   "BusinessSuggestion": "{{planName}} planınızı özelleştirin",
   "BusinessTitle": "{{planName}} planını kullanıyorsunuz",

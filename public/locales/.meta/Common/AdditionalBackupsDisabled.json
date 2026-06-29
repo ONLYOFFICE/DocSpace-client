@@ -1,0 +1,29 @@
+{
+  "key_path": "AdditionalBackupsDisabled",
+  "content": "Additional backups disabled",
+  "content_en_sha1_hash": "3c730882b7f400916d9ee0b99709445070f2610c",
+  "created_at": "2026-06-25T11:54:43.415Z",
+  "updated_at": "2026-06-25T12:24:45.540Z",
+  "comment": {
+    "text": "Status label on the Backup page indicating the inactive state of the additional backups feature, appearing above an \"Enable\" button.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:24:45.540Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
+      "line_number": 260,
+      "context": "})}\n </Text>\n </>\n ) : (\n <>\n <Text fontWeight={600}>{t(\"AdditionalBackupsDisabled\")}</Text>\n <Button\n className={styles.cardEnableButton}\n size={ButtonSize.small}\n label={t(\"Enable\")}\n onClick={onConfirm}",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

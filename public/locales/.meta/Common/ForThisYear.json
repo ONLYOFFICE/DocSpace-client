@@ -1,0 +1,29 @@
+{
+  "key_path": "ForThisYear",
+  "content": "For this year <1>({{startDate}} — {{endDate}})</1>",
+  "content_en_sha1_hash": "04d393cc78089ddd33a38a0e5e0e3d16a296fb4a",
+  "created_at": "2026-06-25T11:54:50.713Z",
+  "updated_at": "2026-06-25T12:10:37.874Z",
+  "comment": {
+    "text": "Label in the billing usage section displaying the current year's timeframe, where the tagged part contains the {{startDate}} and {{endDate}}.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:10:37.874Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/usage/index.tsx",
+      "line_number": 151,
+      "context": "components={{ 1: dateRangeSpan }}\n />\n ),\n thisYear: (\n <CommonTrans\n i18nKey=\"ForThisYear\"\n values={{ startDate, endDate }}\n components={{ 1: dateRangeSpan }}\n />\n ),\n lastYear: (",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

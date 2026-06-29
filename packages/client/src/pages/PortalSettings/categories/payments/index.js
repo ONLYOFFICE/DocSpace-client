@@ -48,11 +48,28 @@ import PaymentsEnterprise from "./Standalone";
 import {
   MainTariff,
   Wallet,
+  Usage,
   PaymentMethod,
   ServicesList,
   BillingRoot,
 } from "@docspace/ui-kit/billing";
 import { getBrandName } from "@docspace/shared/constants/brands";
+
+const TAB_IDS = {
+  MAIN_TARIFF: "portal-payments",
+  ADDONS: "services",
+  WALLET: "wallet",
+  PAYMENT_METHOD: "payment-method",
+  USAGE: "usage",
+};
+
+const TAB_ORDER = [
+  TAB_IDS.MAIN_TARIFF,
+  TAB_IDS.ADDONS,
+  TAB_IDS.WALLET,
+  TAB_IDS.PAYMENT_METHOD,
+  TAB_IDS.USAGE,
+];
 
 const PaymentsPage = (props) => {
   const {
@@ -68,9 +85,9 @@ const PaymentsPage = (props) => {
     isNotPaidPeriod,
   } = props;
   const location = useLocation();
-  const tabIds = ["portal-payments", "payment-method", "wallet", "services"];
   const [currentTabId, setCurrentTabId] = useState(
-    () => tabIds.find((id) => location.pathname.includes(id)) || tabIds[0],
+    () =>
+      TAB_ORDER.find((id) => location.pathname.includes(id)) || TAB_ORDER[0],
   );
   const navigate = useNavigate();
   const { t } = useTranslation(["Payments", "Settings", "Common"]);
@@ -89,7 +106,7 @@ const PaymentsPage = (props) => {
 
   const data = [
     {
-      id: "portal-payments",
+      id: TAB_IDS.MAIN_TARIFF,
       name: t("Common:TariffPlan", {
         productName: getBrandName("ProductName"),
       }),
@@ -99,7 +116,35 @@ const PaymentsPage = (props) => {
       },
     },
     !isNotPaidPeriod && {
-      id: "payment-method",
+      id: TAB_IDS.ADDONS,
+      name: t("Common:Addons"),
+      content: (
+        <ServicesList
+          getAIConfig={getAIConfig}
+          onOpenSupportedModels={() =>
+            navigateToRoute("/portal-settings/ai-settings/models")
+          }
+        />
+      ),
+      onClick: () => {
+        clearAbortControllerArr();
+      },
+    },
+    {
+      id: TAB_IDS.WALLET,
+      name: t("Common:Wallet"),
+      content: (
+        <Wallet
+          onViewUsage={() => onSelect({ id: TAB_IDS.USAGE })}
+          onAddonsClick={() => onSelect({ id: TAB_IDS.ADDONS })}
+        />
+      ),
+      onClick: () => {
+        clearAbortControllerArr();
+      },
+    },
+    !isNotPaidPeriod && {
+      id: TAB_IDS.PAYMENT_METHOD,
       name: t("Common:PaymentMethod"),
       content: <PaymentMethod />,
       onClick: () => {
@@ -107,17 +152,15 @@ const PaymentsPage = (props) => {
       },
     },
     {
-      id: "wallet",
-      name: t("Common:Wallet"),
-      content: <Wallet />,
-      onClick: () => {
-        clearAbortControllerArr();
-      },
-    },
-    !isNotPaidPeriod && {
-      id: "services",
-      name: t("Settings:Services"),
-      content: <ServicesList getAIConfig={getAIConfig} />,
+      id: TAB_IDS.USAGE,
+      name: t("Common:Usage"),
+      content: (
+        <Usage
+          onDiskStorageClick={() => navigateToRoute(PAYMENT_ROUTES.diskStorage)}
+          onBackupClick={() => navigateToRoute(PAYMENT_ROUTES.backup)}
+          onAIServicesClick={() => navigateToRoute(PAYMENT_ROUTES.aiServices)}
+        />
+      ),
       onClick: () => {
         clearAbortControllerArr();
       },
@@ -130,7 +173,13 @@ const PaymentsPage = (props) => {
       : `/portal-settings/payments/${e.id}`;
 
     navigate(
-      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url),
+      combineUrl(window.ClientConfig?.proxy?.url, config.homepage, url),
+    );
+  };
+
+  const navigateToRoute = (route) => {
+    navigate(
+      combineUrl(window.ClientConfig?.proxy?.url, config.homepage, route),
     );
   };
 

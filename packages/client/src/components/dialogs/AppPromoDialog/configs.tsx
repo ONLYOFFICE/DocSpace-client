@@ -38,24 +38,28 @@ import FilesSearchIcon from "PUBLIC_DIR/images/search.react.svg";
 import FilesPermissionsIcon from "PUBLIC_DIR/images/edit.index.react.svg";
 import FilesAccessIcon from "PUBLIC_DIR/images/security.react.svg";
 import FilesPreviewLight from "PUBLIC_DIR/images/app-promo/files.preview.light.svg";
+import FilesPreviewDark from "PUBLIC_DIR/images/app-promo/files.preview.dark.svg";
 
 import CollaborationRoomIcon from "PUBLIC_DIR/images/pencil.react.svg";
 import PublicRoomIcon from "PUBLIC_DIR/images/universe.react.svg";
 import VDRRoomIcon from "PUBLIC_DIR/images/vdr.room.react.svg";
 import CustomRoomIcon from "PUBLIC_DIR/images/icons/16/catalog.favorites.react.svg";
 import RoomsPreviewLight from "PUBLIC_DIR/images/app-promo/rooms.preview.light.svg";
+import RoomsPreviewDark from "PUBLIC_DIR/images/app-promo/rooms.preview.dark.svg";
 
 import AIPoweredIcon from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg";
 import SharingIcon from "PUBLIC_DIR/images/icons/16/catalog.shared.outline.svg";
 import DataIcon from "PUBLIC_DIR/images/data.icon.react.svg";
 import BuiltInIcon from "PUBLIC_DIR/images/stats.react.svg";
 import FormsPreviewLight from "PUBLIC_DIR/images/app-promo/forms.preview.light.svg";
+import FormsPreviewDark from "PUBLIC_DIR/images/app-promo/forms.preview.dark.svg";
 
 import GenerateIcon from "PUBLIC_DIR/images/form.fill.rect.svg";
 import SharedAgentsIcon from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg";
 import CustomStackIcon from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg";
 import MCPIcon from "PUBLIC_DIR/images/icons/16/catalog.devtools-api.react.svg";
 import AgentsPreviewLight from "PUBLIC_DIR/images/app-promo/agents.preview.light.svg";
+import AgentsPreviewDark from "PUBLIC_DIR/images/app-promo/agents.preview.dark.svg";
 
 import type { AppPromoContentMap } from "./AppPromoDialog.types";
 
@@ -87,7 +91,7 @@ export const getAppPromoContent = (t: TTranslation): AppPromoContentMap => ({
       },
     ],
     IllustrationLight: FilesPreviewLight,
-    IllustrationDark: FilesPreviewLight,
+    IllustrationDark: FilesPreviewDark,
     openLabel: t("Common:Open"),
     githubLabel: t("Common:ViewOnGithub"),
     githubUrl: "https://github.com/ONLYOFFICE/DocSpace",
@@ -119,7 +123,7 @@ export const getAppPromoContent = (t: TTranslation): AppPromoContentMap => ({
       },
     ],
     IllustrationLight: RoomsPreviewLight,
-    IllustrationDark: RoomsPreviewLight,
+    IllustrationDark: RoomsPreviewDark,
     openLabel: t("Common:Open"),
     githubLabel: t("Common:ViewOnGithub"),
     githubUrl: "https://github.com/ONLYOFFICE/DocSpace",
@@ -151,7 +155,7 @@ export const getAppPromoContent = (t: TTranslation): AppPromoContentMap => ({
       },
     ],
     IllustrationLight: FormsPreviewLight,
-    IllustrationDark: FormsPreviewLight,
+    IllustrationDark: FormsPreviewDark,
     openLabel: t("Common:Open"),
     githubLabel: t("Common:ViewOnGithub"),
     githubUrl: "https://github.com/ONLYOFFICE/DocSpace",
@@ -188,7 +192,7 @@ export const getAppPromoContent = (t: TTranslation): AppPromoContentMap => ({
       },
     ],
     IllustrationLight: AgentsPreviewLight,
-    IllustrationDark: AgentsPreviewLight,
+    IllustrationDark: AgentsPreviewDark,
     openLabel: t("Common:Open"),
     githubLabel: t("Common:ViewOnGithub"),
     githubUrl: "https://github.com/ONLYOFFICE/DocSpace",

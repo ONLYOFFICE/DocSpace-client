@@ -56,6 +56,7 @@ import { CategoryType } from "@docspace/shared/constants";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
+import { useAIActivation } from "SRC_DIR/Hooks/useAIActivation";
 
 import {
   getDescription,
@@ -89,6 +90,10 @@ export const useEmptyView = (
     isPortalAdmin,
     aiReady,
     standalone,
+    isCardLinkedToPortal,
+    isPayer,
+    walletCustomerEmail,
+    walletCustomerDisplayName,
   }: EmptyViewContainerProps,
 
   t: TTranslation,
@@ -119,6 +124,9 @@ export const useEmptyView = (
       aiReady,
       standalone,
       isPortalAdmin,
+      isPayer,
+      walletCustomerEmail,
+      walletCustomerDisplayName,
     );
     const title = getTitle(
       type,
@@ -169,6 +177,12 @@ export const useEmptyView = (
     isAIRoom,
     isKnowledgeTab,
     isResultsTab,
+    aiReady,
+    standalone,
+    isPortalAdmin,
+    isPayer,
+    walletCustomerEmail,
+    walletCustomerDisplayName,
   ]);
 
   return emptyViewOptions;
@@ -215,6 +229,12 @@ export const useOptions = (
     knowledgeId,
     startUpload,
     createFoldersTree,
+    isCardLinkedToPortal,
+    isPayer,
+    enableAIService,
+    getAIConfig,
+    refreshCurrentFolder,
+    refreshPaymentInfo,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -294,6 +314,27 @@ export const useOptions = (
   const onGoToAIProviderSettings = useCallback(() => {
     return navigate("/portal-settings/ai-settings/ai-models");
   }, []);
+
+  const {
+    onActivateAI,
+    onTopUpAndActivateAI,
+    onShowAIBenefits,
+    onDialogActivate,
+    onAIActivated,
+    isActivating,
+    aiFeaturesDialogVisible,
+    onCloseAIFeaturesDialog,
+    simpleTopUpDialogVisible,
+    onCloseSimpleTopUpDialog,
+  } = useAIActivation({
+    enableAIService,
+    getAIConfig,
+    refreshCurrentFolder,
+    refreshPaymentInfo,
+    isCardLinkedToPortal,
+    parentId: selectedFolder?.id,
+    context: "empty_state",
+  });
 
   const onGoToPersonal = useCallback((): LinkProps => {
     const newFilter = FilesFilter.getDefault();
@@ -476,6 +517,9 @@ export const useOptions = (
           onCreateAIAgent,
           onGoToServices,
           onGoToAIProviderSettings,
+          onTopUpAndActivateAI,
+          onActivateAI,
+          onShowAIBenefits,
         },
         logoText,
         isVisitor,
@@ -487,6 +531,8 @@ export const useOptions = (
         standalone,
         isPortalAdmin,
         trashSection,
+        isCardLinkedToPortal,
+        isPayer,
       ),
     [
       type,
@@ -523,8 +569,22 @@ export const useOptions = (
       isKnowledgeTab,
       isResultsTab,
       isAIRoom,
+      aiReady,
+      standalone,
+      isPortalAdmin,
+      isCardLinkedToPortal,
+      isPayer,
     ],
   );
 
-  return options;
+  return {
+    options,
+    aiFeaturesDialogVisible,
+    onCloseAIFeaturesDialog,
+    onDialogActivate,
+    simpleTopUpDialogVisible,
+    onCloseSimpleTopUpDialog,
+    onAIActivated,
+    isActivating,
+  };
 };

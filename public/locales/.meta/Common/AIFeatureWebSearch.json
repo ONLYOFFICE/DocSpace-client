@@ -1,0 +1,29 @@
+{
+  "key_path": "AIFeatureWebSearch",
+  "content": "Search the web",
+  "content_en_sha1_hash": "7f5d6925dad12de1fbccbb126c55bae20af95292",
+  "created_at": "2026-06-25T11:54:44.107Z",
+  "updated_at": "2026-06-25T12:31:07.419Z",
+  "comment": {
+    "text": "Feature label within the AI capabilities list in the AIFeaturesDialog, appearing alongside a specific icon.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:31:07.419Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
+      "line_number": 119,
+      "context": "{ label: t(\"AIFeatureSummarizeDocuments\"), icon: <SummarizeTagIcon /> },\n { label: getConstName(\"OCR\"), icon: <OcrTagIcon /> },\n { label: t(\"AIFeaturePDFForms\"), icon: <PdfFormTagIcon /> },\n { label: t(\"AIFeatureCheckGrammar\"), icon: <GrammarTagIcon /> },\n { label: t(\"AIFeatureFormInsights\"), icon: <InsightsTagIcon /> },\n { label: t(\"AIFeatureWebSearch\"), icon: <WebSearchTagIcon /> },\n ];\n \n return (\n <ModalDialog\n visible={visible}",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

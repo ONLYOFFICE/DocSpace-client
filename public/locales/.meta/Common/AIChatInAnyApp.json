@@ -1,0 +1,29 @@
+{
+  "key_path": "AIChatInAnyApp",
+  "content": "Chat with AI in any app",
+  "content_en_sha1_hash": "f8a58b82c2274668bf9b251d03f8e81df1b00e17",
+  "created_at": "2026-06-25T11:54:43.896Z",
+  "updated_at": "2026-06-25T12:34:04.980Z",
+  "comment": {
+    "text": "Feature card title in the AI services dialog, describing the availability of AI chat across all applications.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:34:04.980Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
+      "line_number": 87,
+      "context": "icon: (\n <div className={styles.cardIcon}>\n <AIChatIcon />\n </div>\n ),\n title: t(\"AIChatInAnyApp\"),\n description: t(\"AIChatInAnyAppDescription\"),\n },\n {\n id: \"agents\",\n icon: (",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

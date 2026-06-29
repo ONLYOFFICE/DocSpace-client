@@ -252,8 +252,6 @@
   "BadgeMyDraftTitle": "Můj návrh",
   "BadgeStoppedTitle": "Vyplňování formuláře bylo vynuceně zastaveno",
   "BadgeYourTurnTitle": "Tento formulář vyžaduje vyplnění",
-  "Balance": "Zůstatek: <1>{{balance}}</1>",
-  "BalanceInsufficient": "Zůstatek: <1>{{balance}}</1> | Nedostatek prostředků",
   "BarMaintenanceDescription": "Omlouváme se za případné krátkodobé technické problémy ve fungování služby, které se mohou objevit dne {{targetDate}} během aktualizace {{productName}}.",
   "BarMaintenanceDisclaimer": "Ujistěte se prosím, že všechny změny byly během tohoto dne úspěšně uloženy.",
   "Benefits": "Výhody",

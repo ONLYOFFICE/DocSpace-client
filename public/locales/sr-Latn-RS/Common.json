@@ -252,8 +252,6 @@
   "BadgeMyDraftTitle": "Moj nacrt",
   "BadgeStoppedTitle": "Popunjavanje obrasca je nasilno zaustavljeno",
   "BadgeYourTurnTitle": "Ovaj obrazac zahteva vaše popunjavanje",
-  "Balance": "Stanje računa: <1>{{balance}}</1>",
-  "BalanceInsufficient": "Stanje računa: <1>{{balance}}</1> | Nedovoljno sredstava",
   "BarMaintenanceDescription": "Izvinjavamo se zbog eventualnih kratkotrajnih tehničkih problema u funkcionisanju usluge koji se mogu pojaviti {{targetDate}} tokom ažuriranja {{productName}}.",
   "BarMaintenanceDisclaimer": "Molimo vas, uverite se da su sve izmene uspešno sačuvane u toku ovog dana.",
   "Benefits": "Prednosti",

@@ -252,8 +252,6 @@
   "BadgeMyDraftTitle": "Schița mea",
   "BadgeStoppedTitle": "Completarea formularului a fost oprită cu forță",
   "BadgeYourTurnTitle": "Trebuie să completați acest formular",
-  "Balance": "Sold: <1>{{balance}}</1>",
-  "BalanceInsufficient": "Sold: <1>{{balance}}</1> | Fonduri insuficiente",
   "BarMaintenanceDescription": "Ne cerem scuze pentru orice problemă tehnică pe termen scurt care poate apărea în funcționarea serviciului la data de {{targetDate}} pe parcursul actualizării {{productName}}.",
   "BarMaintenanceDisclaimer": "Vă rugăm să vă asigurați că toate modificările sunt salvate cu succes pe parcursul acestei zile.",
   "Benefits": "Avantaje",

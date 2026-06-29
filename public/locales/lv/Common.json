@@ -252,8 +252,6 @@
   "BadgeMyDraftTitle": "Mans melnraksts",
   "BadgeStoppedTitle": "Veidlapas aizpildīšana tika piespiedu kārtā pārtraukta",
   "BadgeYourTurnTitle": "Jums ir nepieciešams aizpildīt šo veidlapu",
-  "Balance": "Atlikums: <1>{{balance}}</1>",
-  "BalanceInsufficient": "Atlikums: <1>{{balance}}</1> | Pārskaitīšanas fondos nav pietiekami līdzekļu",
   "BarMaintenanceDescription": "Mēs atvainojamies par jebkādām īslaicīgām tehniskām problēmām pakalpojuma darbībā, kas var būt šajā datumā: {{targetDate}} {{productName}} atjaunināšanas laikā.",
   "BarMaintenanceDisclaimer": "Lūdzu, pārliecinieties, vai visas izmaiņas ir veiksmīgi saglabātas šīs dienas laikā.",
   "Benefits": "Ieguvumi",

@@ -252,8 +252,6 @@
   "BadgeMyDraftTitle": "Meu rascunho",
   "BadgeStoppedTitle": "O preenchimento do formulário foi interrompido à força",
   "BadgeYourTurnTitle": "Este formulário requer sua conclusão",
-  "Balance": "Saldo: <1>{{balance}}</1>",
-  "BalanceInsufficient": "Saldo: <1>{{balance}}</1> | Fundos insuficientes",
   "BarMaintenanceDescription": "Pedimos desculpas por quaisquer problemas técnicos de curto prazo no funcionamento do serviço, que podem aparecer em {{targetDate}} durante a atualização do {{productName}}.",
   "BarMaintenanceDisclaimer": "Certifique-se de que todas as alterações tenham sido salvas com sucesso durante este dia.",
   "Benefits": "Benefícios",

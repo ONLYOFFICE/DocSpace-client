@@ -252,8 +252,6 @@
   "BadgeMyDraftTitle": "Mi borrador",
   "BadgeStoppedTitle": "El rellenado del formulario se ha detenido de manera forzosa",
   "BadgeYourTurnTitle": "Este formulario requiere que lo complete",
-  "Balance": "Saldo: <1>{{balance}}</1>",
-  "BalanceInsufficient": "Saldo: <1>{{balance}}</1> | Fondos insuficientes",
   "BarMaintenanceDescription": "Pedimos disculpas por cualquier problema técnico de corta duración en el funcionamiento del servicio que pueda aparecer el día {{targetDate}} durante la actualización de {{productName}}.",
   "BarMaintenanceDisclaimer": "Por favor, asegúrese de que todos los cambios se guardan correctamente durante este día.",
   "Benefits": "Beneficios",

@@ -252,8 +252,6 @@
   "BadgeMyDraftTitle": "මාගේ කටුපිටපත්",
   "BadgeStoppedTitle": "පෝරමය පිරවීම බලහත්කාරයෙන් නතර කරන ලදී",
   "BadgeYourTurnTitle": "මෙම පෝරමය ඔබගේ සම්පූර්ණ කිරීම අවශ්‍ය වේ",
-  "Balance": "බාලන්ස්: <1>{{balance}}</1>",
-  "BalanceInsufficient": "ශේෂය: <1>{{balance}}</1> | ප්‍රමාණවත් අරමුදල් නොමැත",
   "BarMaintenanceDescription": "{{productName}} යාවත්කාලීන කිරීමේදී {{targetDate}} දින දිස්විය හැකි සේවා ක්‍රියාකාරිත්වයේ කෙටි කාලීන තාක්‍ෂණික ගැටළු පිළිබඳව අප සමාව අයද සිටිමු.",
   "BarMaintenanceDisclaimer": "කරුණාකර මෙම දිනයේ සියලු වෙනස්කම් සාර්ථකව සුරැකී ඇති බවට වගබලා ගන්න.",
   "Benefits": "ප්‍රතිලාභ",

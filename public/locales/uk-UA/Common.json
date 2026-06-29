@@ -252,8 +252,6 @@
   "BadgeMyDraftTitle": "Моя чернетка",
   "BadgeStoppedTitle": "Заповнення форми було примусово припинено",
   "BadgeYourTurnTitle": "Ви повинні заповнити цю форму",
-  "Balance": "Баланс: <1>{{balance}}</1>",
-  "BalanceInsufficient": "Баланс: <1>{{balance}}</1> | Недостатньо коштів",
   "BarMaintenanceDescription": "Просимо вибачення за короткочасні технічні проблеми в роботі служби, які можуть виникнути {{targetDate}} під час оновлення {{productName}}.",
   "BarMaintenanceDisclaimer": "Будь ласка, переконайтеся, що всі зміни, зроблені в цей день, успішно збережено.",
   "Benefits": "Переваги",

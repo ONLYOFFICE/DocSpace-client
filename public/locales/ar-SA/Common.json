@@ -252,8 +252,6 @@
   "BadgeMyDraftTitle": "مسودتي",
   "BadgeStoppedTitle": "تم إيقاف تعبئة النموذج قسرًا",
   "BadgeYourTurnTitle": "يتطلب هذا النموذج تعبئتكم",
-  "Balance": "الرصيد: <1>{{balance}}</1>",
-  "BalanceInsufficient": "الرصيد: <1>{{balance}}</1> | الرصيد غير كافٍ",
   "BarMaintenanceDescription": "نعتذر عن أي مشكلات فنية قصيرة الأمد في الخدمة التي قد تظهر في {{targetDate}} أثناء تحديث {{productName}}.",
   "BarMaintenanceDisclaimer": "يرجى التأكد من حفظ جميع التغييرات بنجاح خلال هذا اليوم.",
   "Benefits": "فوائد",

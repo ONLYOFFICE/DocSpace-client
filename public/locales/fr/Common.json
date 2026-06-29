@@ -252,8 +252,6 @@
   "BadgeMyDraftTitle": "Mon brouillon",
   "BadgeStoppedTitle": "Le remplissage du formulaire a été interrompu",
   "BadgeYourTurnTitle": "Ce formulaire doit être rempli par vous",
-  "Balance": "Solde : <1>{{balance}}</1>",
-  "BalanceInsufficient": "Solde : <1>{{balance}}</1> | Montant insuffisant",
   "BarMaintenanceDescription": "Nous vous prions de bien vouloir nous excuser pour tout problème technique de courte durée dans le fonctionnement du service, qui pourrait apparaître le {{targetDate}} lors de la mise à jour de {{productName}}.",
   "BarMaintenanceDisclaimer": "Veuillez vous assurer que tous les changements sont bien sauvegardés pendant cette journée.",
   "Benefits": "Avantages",

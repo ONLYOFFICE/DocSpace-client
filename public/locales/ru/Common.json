@@ -252,8 +252,6 @@
   "BadgeMyDraftTitle": "Черновик",
   "BadgeStoppedTitle": "Заполнение формы принудительно остановлено",
   "BadgeYourTurnTitle": "Эта форма требует заполнения текущим пользователем",
-  "Balance": "Баланс: <1>{{balance}}</1>",
-  "BalanceInsufficient": "Баланс: <1>{{balance}}</1> | Недостаточно средств",
   "BarMaintenanceDescription": "Приносим извинения за временные неполадки в работе сервиса, которые могут возникнуть {{targetDate}} в процессе обновления {{productName}}.",
   "BarMaintenanceDisclaimer": "В течение дня убедитесь, что все изменения успешно сохранены.",
   "Benefits": "Преимущества",

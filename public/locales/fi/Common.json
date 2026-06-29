@@ -252,8 +252,6 @@
   "BadgeMyDraftTitle": "Luonnokseni",
   "BadgeStoppedTitle": "Lomakkeen täyttäminen keskeytettiin pakotetusti",
   "BadgeYourTurnTitle": "Tämä lomake vaatii sinun täyttävän sen",
-  "Balance": "Saldo: <1>{{balance}}</1>",
-  "BalanceInsufficient": "Saldo: <1>{{balance}}</1> | Riittämättömät varat",
   "BarMaintenanceDescription": "Pahoittelemme palvelun toiminnassa ilmenevien lyhyen aikavälin teknisiä ongelmia, jotka saattavat näkyä {{targetDate}}, {{productName}} päivityksen aikana.",
   "BarMaintenanceDisclaimer": "Varmista, että kaikki muutokset on tallennettu onnistuneesti tämän päivän aikana.",
   "Benefits": "Edut",

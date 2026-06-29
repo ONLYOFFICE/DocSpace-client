@@ -252,8 +252,6 @@
   "BadgeMyDraftTitle": "Moj osnutek",
   "BadgeStoppedTitle": "Izpolnjevanje obrazca je bilo prisilno ustavljeno",
   "BadgeYourTurnTitle": "Ta obrazec zahteva vašo izpolnitev",
-  "Balance": "Stanje: <1>{{balance}}</1>",
-  "BalanceInsufficient": "Stanje: <1>{{balance}}</1> | Nedovolj sredstev",
   "BarMaintenanceDescription": "Opravičujemo se za morebitne kratkotrajne tehnične težave pri delovanju storitve, ki se lahko pojavijo na {{targetDate}} med posodobitvijo {{productName}}.",
   "BarMaintenanceDisclaimer": "Prosimo, poskrbite, da bodo vse spremembe čez celotno obdobje uspešno shranjene.",
   "Benefits": "Prednosti",

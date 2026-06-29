@@ -252,8 +252,6 @@
   "BadgeMyDraftTitle": "Drafti im",
   "BadgeStoppedTitle": "Plotësimi i formularit u ndërpre me detyrim",
   "BadgeYourTurnTitle": "Ky formular kërkon plotësimin tënd",
-  "Balance": "Bilanci: <1>{{balance}}</1>",
-  "BalanceInsufficient": "Bilanci: <1>{{balance}}</1> | Fonde të pamjaftueshme",
   "BarMaintenanceDescription": "Kërkojmë ndjesë për çdo problem teknik afatshkurtër në funksionimin e shërbimit që mund të shfaqet në {{targetDate}} gjatë përditësimit të {{productName}}.",
   "BarMaintenanceDisclaimer": "Ju lutemi, sigurohuni që të gjitha ndryshimet të ruhen me sukses gjatë kësaj dite.",
   "Benefits": "Benefitet",

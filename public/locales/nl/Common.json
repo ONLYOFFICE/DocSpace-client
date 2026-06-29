@@ -252,8 +252,6 @@
   "BadgeMyDraftTitle": "Mijn concept",
   "BadgeStoppedTitle": "Het invullen van het formulier werd gedwongen tegengehouden",
   "BadgeYourTurnTitle": "Dit formulier moet u invullen",
-  "Balance": "Saldo: <1>{{balance}}</1>",
-  "BalanceInsufficient": "Saldo: <1>{{balance}}</1> | Onvoldoende saldo",
   "BarMaintenanceDescription": "Onze excuses voor eventuele kortstondige technische problemen in het functioneren van de dienst die kunnen optreden op {{targetDate}} tijdens de update van {{productName}}.",
   "BarMaintenanceDisclaimer": "Zorg ervoor dat alle wijzigingen deze dag succesvol worden opgeslagen.",
   "Benefits": "Voordelen",

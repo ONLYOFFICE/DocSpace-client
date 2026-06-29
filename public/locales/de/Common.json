@@ -252,8 +252,6 @@
   "BadgeMyDraftTitle": "Mein Entwurf",
   "BadgeStoppedTitle": "Das Ausfüllen des Formulars wurde zwangsweise gestoppt",
   "BadgeYourTurnTitle": "Dieses Formular muss von Ihnen ausgefüllt werden",
-  "Balance": "Kontostand: <1>{{balance}}</1>",
-  "BalanceInsufficient": "Kontostand: <1>{{balance}}</1> | Nicht genügend Guthaben",
   "BarMaintenanceDescription": "Bitte entschuldigen Sie alle möglichen kurzfristigen Unannehmlichkeiten beim Funktionieren des Dienstes, die am {{targetDate}} während des Updates von {{productName}} erscheinen können.",
   "BarMaintenanceDisclaimer": "Stellen Sie sicher, dass alle Änderungen an diesem Tag erfolgreich gespeichert werden.",
   "Benefits": "Vorteile",

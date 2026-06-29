@@ -252,8 +252,6 @@
   "BadgeMyDraftTitle": "Moja wersja robocza",
   "BadgeStoppedTitle": "Wypełniania formularza zostało przymusowo zatrzymane",
   "BadgeYourTurnTitle": "Dany formularz wymaga wypełnienia przez Ciebie",
-  "Balance": "Stan konta: <1>{{balance}}</1>",
-  "BalanceInsufficient": "Stan konta: <1>{{balance}}</1> | Brak wystarczających środków",
   "BarMaintenanceDescription": "Przepraszamy za wszelkie chwilowe problemy techniczne w funkcjonowaniu usługi, które mogą zaistnieć  {{targetDate}} podczas aktualizowania {{productName}}.",
   "BarMaintenanceDisclaimer": "Upewnij się, że wszystkie zmiany zostały zapisane tego dnia pomyślnie.",
   "Benefits": "Korzyści",

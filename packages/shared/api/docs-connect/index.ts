@@ -34,6 +34,7 @@
  */
 
 import { request, getApiBaseUrl } from "../client";
+import { saveDeposite } from "../portal";
 import { combineUrl } from "../../utils/combineUrl";
 import type {
   TDocsConnectInfo,
@@ -60,6 +61,7 @@ const QUANTITY_TYPE_ADD = 1;
 export type BuyDocsConnectPlanData = {
   users: number;
   devPackEnabled: boolean;
+  topUp?: number;
 };
 
 type TWalletService = {
@@ -186,7 +188,11 @@ export const getDocsConnectReportUrl = (): string =>
 export const buyDocsConnectPlan = async (
   data: BuyDocsConnectPlanData,
 ): Promise<TDocsConnectInfo | null> => {
-  const { users, devPackEnabled } = data;
+  const { users, devPackEnabled, topUp } = data;
+
+  if (topUp && topUp > 0) {
+    await saveDeposite(topUp, lastInfo?.wallet?.currency ?? "USD");
+  }
 
   const product = devPackEnabled
     ? DOCS_CLOUD_DEVPACK_PRODUCT

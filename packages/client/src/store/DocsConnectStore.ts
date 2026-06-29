@@ -109,8 +109,20 @@ class DocsConnectStore {
     });
   };
 
-  buyPlan = async ({ users, devPack }: { users: number; devPack: boolean }) => {
-    const info = await buyDocsConnectPlan({ users, devPackEnabled: devPack });
+  buyPlan = async ({
+    users,
+    devPack,
+    topUp,
+  }: {
+    users: number;
+    devPack: boolean;
+    topUp?: number;
+  }) => {
+    const info = await buyDocsConnectPlan({
+      users,
+      devPackEnabled: devPack,
+      topUp,
+    });
     runInAction(() => {
       this.info = info;
     });

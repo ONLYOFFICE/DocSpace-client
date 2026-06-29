@@ -61,7 +61,11 @@ const MAX_USERS = 999;
 interface BuyPlanPanelProps {
   visible?: boolean;
   info?: TDocsConnectInfo;
-  buyPlan?: (opts: { users: number; devPack: boolean }) => Promise<void>;
+  buyPlan?: (opts: {
+    users: number;
+    devPack: boolean;
+    topUp?: number;
+  }) => Promise<void>;
   closeBuyPlan?: () => void;
 }
 
@@ -111,7 +115,11 @@ const BuyPlanPanel = ({
     if (submitting) return;
     setSubmitting(true);
     try {
-      await buyPlan?.({ users, devPack });
+      await buyPlan?.({
+        users,
+        devPack,
+        topUp: insufficientFunds ? topUpRequired : 0,
+      });
       toastr.success(t("DocsConnect:PlanPurchased"));
     } catch (error) {
       toastr.error(error as Error);

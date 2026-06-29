@@ -33,7 +33,7 @@
   "Build": "Build",
   "BuildType": "Type",
   "Released": "Released",
-  "UserActivity": "User activity in the last month",
+  "ActivityForPeriod": "User activity in the last {{day}} days",
   "UserActivitySubtitle": "Track unique user activity",
   "Editors": "Editors",
   "EditorsSubtitleStat": "Document editors with full permissions",

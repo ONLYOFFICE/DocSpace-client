@@ -74,9 +74,7 @@ const usageLevelClass: Record<UsageLevel, string> = {
   negative: styles.usageNegative,
 };
 
-type Connector = { key: string; label: string; url: string };
-
-const CONNECTORS: Connector[] = [];
+type Connector = { key: string; label: string; url?: string };
 
 const getUsageLevel = (usage: TDocsConnectStat): UsageLevel =>
   usage.criticalRemaining ? "negative" : "positive";
@@ -86,6 +84,13 @@ interface StatisticsProps {
   openBuyPlan?: (mode: "trial" | "edit") => void;
   copyToClipboard?: (value: string, t: TTranslation) => void;
   downloadReport?: () => void;
+  nextcloudUrl?: string;
+  owncloudUrl?: string;
+  confluenceUrl?: string;
+  alfrescoUrl?: string;
+  moodleUrl?: string;
+  odooUrl?: string;
+  allConnectorsUrl?: string;
 }
 
 const InfoField = ({
@@ -210,6 +215,13 @@ const Statistics = ({
   openBuyPlan,
   copyToClipboard,
   downloadReport,
+  nextcloudUrl,
+  owncloudUrl,
+  confluenceUrl,
+  alfrescoUrl,
+  moodleUrl,
+  odooUrl,
+  allConnectorsUrl,
 }: StatisticsProps) => {
   const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
 
@@ -222,6 +234,16 @@ const Statistics = ({
   const daysLeft = getDocsConnectDaysLeft(trialEnd);
   const expired = isDocsConnectTrialExpired(trialEnd);
   const trialPercent = getDocsConnectTrialPercent(trialStart, trialEnd);
+
+  const connectors: Connector[] = [
+    { key: "nextcloud", label: "Nextcloud", url: nextcloudUrl },
+    { key: "owncloud", label: "ownCloud", url: owncloudUrl },
+    { key: "confluence", label: "Confluence", url: confluenceUrl },
+    { key: "alfresco", label: "Alfresco", url: alfrescoUrl },
+    { key: "moodle", label: "Moodle", url: moodleUrl },
+    { key: "seafile", label: "Seafile", url: allConnectorsUrl },
+    { key: "odoo", label: "Odoo", url: odooUrl },
+  ];
 
   const currency = wallet?.currency ?? "USD";
   const { devPackEnabled } = info;
@@ -438,7 +460,9 @@ const Statistics = ({
           fontSize="18px"
           fontWeight={700}
         >
-          {t("DocsConnect:UserActivity")}
+          {t("DocsConnect:ActivityForPeriod", {
+            day: tenantInfo.stats.periodDay,
+          })}
         </Heading>
         <Text fontSize="12px" className={styles.muted}>
           {t("DocsConnect:UserActivitySubtitle")}
@@ -478,7 +502,7 @@ const Statistics = ({
         defaultOpen
       >
         <div className={styles.integrationsGrid}>
-          {CONNECTORS.map((connector) => (
+          {connectors.map((connector) => (
             <a
               key={connector.key}
               className={styles.integrationTile}
@@ -497,7 +521,7 @@ const Statistics = ({
           ))}
           <a
             className={`${styles.integrationTile} ${styles.integrationTileMore}`}
-            href="#"
+            href={allConnectorsUrl}
             target="_blank"
             rel="noreferrer"
           >
@@ -515,9 +539,16 @@ const Statistics = ({
   );
 };
 
-export default inject(({ docsConnectStore }: TStore) => ({
+export default inject(({ docsConnectStore, settingsStore }: TStore) => ({
   info: docsConnectStore.info,
   openBuyPlan: docsConnectStore.openBuyPlan,
   copyToClipboard: docsConnectStore.copyToClipboard,
   downloadReport: docsConnectStore.downloadReport,
+  nextcloudUrl: settingsStore.nextcloudUrl,
+  owncloudUrl: settingsStore.owncloudUrl,
+  confluenceUrl: settingsStore.confluenceUrl,
+  alfrescoUrl: settingsStore.alfrescoUrl,
+  moodleUrl: settingsStore.moodleUrl,
+  odooUrl: settingsStore.odooUrl,
+  allConnectorsUrl: settingsStore.allConnectorsUrl,
 }))(observer(Statistics));

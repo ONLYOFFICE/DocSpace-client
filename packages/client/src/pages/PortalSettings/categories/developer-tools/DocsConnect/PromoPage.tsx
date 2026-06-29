@@ -46,23 +46,24 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 
 import styles from "./PromoPage.module.scss";
 
-const API_DOCS_URL = "https://api.onlyoffice.com/";
-const CONNECTORS_URL = "#";
-const EXAMPLES_URL = "#";
-
-// Anchor for the "Automation API" hover tooltip.
 const AUTOMATION_API_ANCHOR = "docs-connect-automation-api";
 
 interface PromoPageProps {
   startTrial?: () => Promise<void>;
+  docsConnectUrl?: string;
+  allConnectorsUrl?: string;
 }
 
-const PromoPage = ({ startTrial }: PromoPageProps) => {
+const PromoPage = ({
+  startTrial,
+  docsConnectUrl,
+  allConnectorsUrl,
+}: PromoPageProps) => {
   const { t } = useTranslation(["DocsConnect", "Common"]);
 
   const [submitting, setSubmitting] = useState(false);
 
-  const onReadApiDocs = () => window.open(API_DOCS_URL, "_blank");
+  const onReadApiDocs = () => window.open(docsConnectUrl, "_blank");
 
   const onCreateTenant = async () => {
     if (submitting) return;
@@ -92,7 +93,7 @@ const PromoPage = ({ startTrial }: PromoPageProps) => {
               <Link
                 className={styles.link}
                 type={LinkType.page}
-                href={CONNECTORS_URL}
+                href={allConnectorsUrl}
                 target={LinkTarget.blank}
                 color="accent"
               />
@@ -146,7 +147,7 @@ const PromoPage = ({ startTrial }: PromoPageProps) => {
           </Text>
           <Link
             type={LinkType.page}
-            href={EXAMPLES_URL}
+            href={docsConnectUrl}
             target={LinkTarget.blank}
             color="accent"
             fontSize="13px"
@@ -161,7 +162,9 @@ const PromoPage = ({ startTrial }: PromoPageProps) => {
   );
 };
 
-export default inject(({ docsConnectStore }: TStore) => ({
+export default inject(({ docsConnectStore, settingsStore }: TStore) => ({
   startTrial: docsConnectStore.startTrial,
+  docsConnectUrl: settingsStore.docsConnectUrl,
+  allConnectorsUrl: settingsStore.allConnectorsUrl,
 }))(observer(PromoPage));
 

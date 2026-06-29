@@ -77,9 +77,11 @@ const BuyPlanPanel = ({
 }: BuyPlanPanelProps) => {
   const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
 
-  const [users, setUsers] = useState<number>(
-    info?.tenant.payment?.quantity ?? 50,
-  );
+  const [users, setUsers] = useState<number>(() => {
+    const initial = info?.tenant.payment?.quantity ?? 50;
+    const min = info?.devPackEnabled ? DEVPACK_MIN_USERS : MIN_USERS;
+    return Math.max(initial, min);
+  });
   const [devPack, setDevPack] = useState<boolean>(
     info?.devPackEnabled ?? false,
   );

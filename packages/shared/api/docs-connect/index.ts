@@ -48,10 +48,6 @@ import type {
 
 const BASE = "/settings/docscloud";
 
-const WALLET_SERVICES_URL = "/portal/payment/walletservices";
-const BALANCE_URL = "/portal/payment/customer/balance";
-const WALLET_UPDATE_URL = "/portal/payment/updatewallet";
-const PAYMENT_QUOTA_URL = "/portal/payment/quota";
 const DOCS_CLOUD_PRODUCT = "docscloud";
 const DOCS_CLOUD_DEVPACK_SERVICE = "docscloud-devpack";
 const DOCS_CLOUD_DEVPACK_PRODUCT = "docsclouddevpack";
@@ -77,7 +73,7 @@ const fetchPlanPrices = async (): Promise<TDocsConnectPrices | null> => {
   try {
     const services = (await request({
       method: "get",
-      url: WALLET_SERVICES_URL,
+      url: "/portal/payment/walletservices",
     })) as TWalletServicesResponse;
 
     const priceOf = (name: string) =>
@@ -100,7 +96,7 @@ const fetchWallet = async (): Promise<TDocsConnectWallet | null> => {
   try {
     const balance = (await request({
       method: "get",
-      url: BALANCE_URL,
+      url: "/portal/payment/customer/balance",
     })) as TBalanceResponse;
 
     const sub = balance?.subAccounts?.[0];
@@ -123,7 +119,7 @@ const fetchDevPackEnabled = async (): Promise<boolean> => {
   try {
     const quota = (await request({
       method: "get",
-      url: PAYMENT_QUOTA_URL,
+      url: "/portal/payment/quota",
     })) as TPaymentQuotaResponse;
 
     return (quota?.features ?? []).some(
@@ -198,9 +194,8 @@ export const buyDocsConnectPlan = async (
     ? DOCS_CLOUD_DEVPACK_PRODUCT
     : DOCS_CLOUD_PRODUCT;
 
-  const sameProduct =
-    lastInfo?.tenantInfo.license.trial === false &&
-    lastInfo?.devPackEnabled === devPackEnabled;
+  const sameProduct = lastInfo?.devPackEnabled === devPackEnabled;
+
   const currentUsers = sameProduct
     ? (lastInfo?.tenant.payment?.quantity ?? 0)
     : 0;
@@ -208,14 +203,12 @@ export const buyDocsConnectPlan = async (
 
   const ok = (await request({
     method: "put",
-    url: WALLET_UPDATE_URL,
+    url: "/portal/payment/updatewallet",
     data: {
       quantity: {
         [product]: isDecrease ? users : users - currentUsers,
       },
-      productQuantityType: isDecrease
-        ? QUANTITY_TYPE_SET
-        : QUANTITY_TYPE_ADD,
+      productQuantityType: isDecrease ? QUANTITY_TYPE_SET : QUANTITY_TYPE_ADD,
     },
   })) as boolean;
 

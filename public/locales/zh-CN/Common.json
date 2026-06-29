@@ -1177,7 +1177,6 @@
   "Rename": "重命名",
   "RenewalDate": "续订日期",
   "RenewsOnDate": "于 {{date}} 续订",
-  "RenewSubscriptionPlanName": "将订阅更新至{{planName}}版本",
   "RenewTheLicense": "续订许可证",
   "RepeatInvitation": "重复邀请",
   "ReportSaveLocation": "报告将保存至{{sectionName}}",

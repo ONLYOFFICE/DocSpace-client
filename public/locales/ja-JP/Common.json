@@ -1177,7 +1177,6 @@
   "Rename": "名前の変更",
   "RenewalDate": "更新日",
   "RenewsOnDate": "{{date}}に更新",
-  "RenewSubscriptionPlanName": "{{planName}}プランの契約を更新する",
   "RenewTheLicense": "ライセンスを更新する",
   "RepeatInvitation": "もう一度招待する",
   "ReportSaveLocation": "レポートは {{sectionName}} に保存されます",

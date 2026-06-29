@@ -1177,7 +1177,6 @@
   "Rename": "Переименовать",
   "RenewalDate": "Дата продления",
   "RenewsOnDate": "Продлевается {{date}}",
-  "RenewSubscriptionPlanName": "Продлить подписку на тарифный план {{planName}}",
   "RenewTheLicense": "Возобновить лицензию",
   "RepeatInvitation": "Повторное приглашение",
   "ReportSaveLocation": "Отчет будет сохранен в {{sectionName}}",

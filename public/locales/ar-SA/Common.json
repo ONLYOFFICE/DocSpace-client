@@ -1177,7 +1177,6 @@
   "Rename": "إعادة التسمية",
   "RenewalDate": "تاريخ التجديد",
   "RenewsOnDate": "يتجدد في {{date}}",
-  "RenewSubscriptionPlanName": "تجديد الاشتراك في خطة {{planName}}",
   "RenewTheLicense": "تجديد الترخيص",
   "RepeatInvitation": "تكرار الدعوة",
   "ReportSaveLocation": "سيتم حفظ التقرير في {{sectionName}}",

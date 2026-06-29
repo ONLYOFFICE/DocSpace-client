@@ -1207,7 +1207,6 @@
   "Rename": "Rename",
   "RenewalDate": "Renewal date",
   "RenewsOnDate": "Renews on {{date}}",
-  "RenewSubscriptionPlanName": "Renew subscription to {{planName}} plan",
   "RenewTheLicense": "Renew the license",
   "RepeatInvitation": "Repeat invitation",
   "ReportSaveLocation": "The report will be saved to {{sectionName}}",

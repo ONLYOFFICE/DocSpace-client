@@ -1177,7 +1177,6 @@
   "Rename": "Přejmenovat",
   "RenewalDate": "Datum obnovení",
   "RenewsOnDate": "Obnovuje se {{date}}",
-  "RenewSubscriptionPlanName": "Obnovit předplatné tarifu {{planName}}",
   "RenewTheLicense": "```\nObnovit licenci\n```",
   "RepeatInvitation": "Zopakovat pozvání",
   "ReportSaveLocation": "Zpráva bude uložena do {{sectionName}}",

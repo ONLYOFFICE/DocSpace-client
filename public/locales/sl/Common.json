@@ -1177,7 +1177,6 @@
   "Rename": "Preimenuj",
   "RenewalDate": "Datum obnovitve",
   "RenewsOnDate": "Obnovi se {{date}}",
-  "RenewSubscriptionPlanName": "Obnovi naročnino na {{planName}} paket",
   "RenewTheLicense": "Obnovite licenco",
   "RepeatInvitation": "Ponovi povabilo",
   "ReportSaveLocation": "Poročilo bo shranjeno v {{sectionName}}",

@@ -1177,7 +1177,6 @@
   "Rename": "Hernoemen",
   "RenewalDate": "Verlengingsdatum",
   "RenewsOnDate": "Verlengt op {{date}}",
-  "RenewSubscriptionPlanName": "Verleng abonnement op {{planName}} plan",
   "RenewTheLicense": "Verleng de licentie",
   "RepeatInvitation": "Uitnodiging herhalen",
   "ReportSaveLocation": "Het rapport wordt opgeslagen in {{sectionName}}",

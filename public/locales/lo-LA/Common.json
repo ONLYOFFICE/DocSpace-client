@@ -1177,7 +1177,6 @@
   "Rename": "ປ່ຽນຊື່",
   "RenewalDate": "ວັນທີຕໍ່ອາຍຸ",
   "RenewsOnDate": "ຕໍ່ອາຍຸໃນວັນທີ {{date}}",
-  "RenewSubscriptionPlanName": "ຕໍ່ອາຍຸການສະໝັກໃຊ້ແຜນການ {{planName}}",
   "RenewTheLicense": "ຕໍ່ອາຍຸໃບອະນຸຍາດ",
   "RepeatInvitation": "ເຊີນຊ້ຳ",
   "ReportSaveLocation": "ບົດລາຍງານຈະຖືກບັນທຶກໄວ້ໃນ {{sectionName}}",

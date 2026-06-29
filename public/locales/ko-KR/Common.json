@@ -1177,7 +1177,6 @@
   "Rename": "이름 변경",
   "RenewalDate": "갱신 날짜",
   "RenewsOnDate": "{{date}}에 갱신됨",
-  "RenewSubscriptionPlanName": "{{planName}} 요금제 구독 갱신",
   "RenewTheLicense": "라이선스 갱신",
   "RepeatInvitation": "초대 반복",
   "ReportSaveLocation": "보고서가 {{sectionName}}(으)로 저장됩니다",

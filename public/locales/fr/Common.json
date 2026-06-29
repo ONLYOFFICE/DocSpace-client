@@ -1177,7 +1177,6 @@
   "Rename": "Renommer",
   "RenewalDate": "Date de renouvellement",
   "RenewsOnDate": "Se renouvelle le {{date}}",
-  "RenewSubscriptionPlanName": "Renouveler l’abonnement au plan tarifaire {{planName}}",
   "RenewTheLicense": "Renouveler la licence",
   "RepeatInvitation": "Renouveler l’invitation",
   "ReportSaveLocation": "Le rapport sera enregistré dans {{sectionName}}",

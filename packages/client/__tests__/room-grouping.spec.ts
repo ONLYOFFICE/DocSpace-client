@@ -798,7 +798,9 @@ test.describe("Room grouping", () => {
         await deleteIcon.click();
 
         // Delete confirmation dialog should appear
-        const confirmDialog = page.getByTestId("modal-dialog").last();
+        const confirmDialog = page
+          .getByTestId("modal-dialog")
+          .filter({ hasText: "Remove group" });
         await expect(confirmDialog).toBeVisible();
 
         // Screenshot: Delete group confirmation dialog
@@ -844,8 +846,16 @@ test.describe("Room grouping", () => {
       if (await deleteIcon.isVisible()) {
         await deleteIcon.click();
 
-        // Click Cancel in the confirmation dialog
-        const cancelButton = page.locator('button:has-text("Cancel")').last();
+        // Click Cancel in the delete confirmation dialog (scope to it so we
+        // don't match Cancel buttons in other mounted dialogs)
+        const confirmDialog = page
+          .getByTestId("modal-dialog")
+          .filter({ hasText: "Remove group" });
+        await expect(confirmDialog).toBeVisible();
+
+        const cancelButton = confirmDialog.getByRole("button", {
+          name: "Cancel",
+        });
         await expect(cancelButton).toBeVisible();
         await cancelButton.click();
 

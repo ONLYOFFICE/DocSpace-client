@@ -1,0 +1,29 @@
+{
+  "key_path": "UnlockAIDescription",
+  "content": "Turn on AI features to chat with AI, run agents, and connect external tools — across editors and apps. Powered by OpenRouter.",
+  "content_en_sha1_hash": "aac3e545c4227b32e01db42f65f627e2bfc305d8",
+  "created_at": "2026-06-25T11:54:59.736Z",
+  "updated_at": "2026-06-25T11:58:02.096Z",
+  "comment": {
+    "text": "Introductory description text in the AI features dialog explaining the functionality available upon enabling AI capabilities.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T11:58:02.096Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
+      "line_number": 143,
+      "context": "className={styles.introTitle}\n >\n {t(\"UnlockAIAcrossWorkspace\")}\n </Text>\n <Text fontSize=\"13px\" className={styles.introDescription}>\n {t(\"UnlockAIDescription\")}\n </Text>\n </div>\n \n <div className={styles.cards}>\n {cards.map((card) => (",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

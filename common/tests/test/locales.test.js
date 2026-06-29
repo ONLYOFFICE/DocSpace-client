@@ -242,9 +242,13 @@ beforeAll(() => {
   const pattern6 = 'titleKey:\\s"([a-zA-Z0-9_.:-]+)"';
   const pattern7 = 'translationKey:\\s"([a-zA-Z0-9_.:-]+)"';
   const pattern8 = 'labelKey:\\s"([a-zA-Z0-9_.:-]+)"';
+  // aiT — alias for the i18n `t` from the @onlyoffice/ai-chat bundle
+  // (e.g. `const { t: aiT } = useI18n()`).
+  const pattern9 =
+    "aiT\\(\\s*[\"'`]([a-zA-Z0-9_.:\\s{}/-]+)[\"'`]\\s*[\\),]";
 
   const regexp = new RegExp(
-    `(${pattern1})|(${pattern2})|(${pattern3})|(${pattern4})|(${pattern5})|(${pattern6})|(${pattern7})|(${pattern8})`,
+    `(${pattern1})|(${pattern2})|(${pattern3})|(${pattern4})|(${pattern5})|(${pattern6})|(${pattern7})|(${pattern8})|(${pattern9})`,
     "gm",
   );
 
@@ -289,7 +293,18 @@ beforeAll(() => {
     const matches = [...jsFileText.matchAll(regexp)];
 
     const translationKeys = matches
-      .map((m) => m[2] || m[4] || m[6] || m[8] || m[10] || m[12] || m[14] || m[16])
+      .map(
+        (m) =>
+          m[2] ||
+          m[4] ||
+          m[6] ||
+          m[8] ||
+          m[10] ||
+          m[12] ||
+          m[14] ||
+          m[16] ||
+          m[18],
+      )
       .filter((m) => m != null);
 
     if (translationKeys.length === 0) return;

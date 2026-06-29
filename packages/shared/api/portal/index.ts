@@ -439,6 +439,20 @@ export function getPaymentTariff() {
   return request({ method: "get", url: "/portal/payment/tariff" });
 }
 
+export async function getWalletBalance(
+  refresh?: boolean,
+  signal?: AbortSignal,
+) {
+  const params = refresh ? { refresh: true } : {};
+
+  return request({
+    method: "get",
+    url: `/portal/payment/customer/balance`,
+    params,
+    signal,
+  }) as TBalance;
+}
+
 export async function getServiceQuotaBalance(
   refresh?: boolean,
   signal?: AbortSignal,

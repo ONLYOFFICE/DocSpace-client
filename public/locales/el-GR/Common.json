@@ -1412,6 +1412,8 @@
   "MigratePlanLine": "Διαχειριστές: {{count}} × {{price}}",
   "MigrateRefundToWallet": "Επιστροφή στο πορτοφόλι",
   "MigrateStep1Title": "Η χρέωση μέσω Stripe σταματά σήμερα",
+  "MigrateUnusedValueRefund": "Επιστροφή αχρησιμοποίητης αξίας",
+  "MigrateWalletCurrencyNote": "Οι επιστροφές πιστώνονται στο πορτοφόλι σας σε {{currency}}.",
   "MinCurrency": "Ελάχιστο {{currency}}",
   "MobileAndroid": "Αποκτήστε το {{organizationName}} Documents στο Google Play",
   "MobileEditPdfNotAvailableInfo": "Μη υποστηριζόμενη ενέργεια. Μεταβείτε στην κατάσταση εργασίας για να μπορείτε να επεξεργαστείτε PDF ή να δημιουργήσετε φόρμες PDF.",

@@ -1412,6 +1412,8 @@
   "MigratePlanLine": "Адміністратори: {{count}} × {{price}}",
   "MigrateRefundToWallet": "Повернення до гаманця",
   "MigrateStep1Title": "Білінг через Stripe припиняється сьогодні",
+  "MigrateUnusedValueRefund": "Повернення невикористаної суми",
+  "MigrateWalletCurrencyNote": "Повернення зараховуються на ваш гаманець у валюті {{currency}}.",
   "MinCurrency": "мін. {{currency}}",
   "MobileAndroid": "Отримати {{organizationName}} Documents в Google Play",
   "MobileEditPdfNotAvailableInfo": "Непідтримувана дія. Перемкніться на настільний режим, щоб мати можливість редагувати PDF-файли та створювати PDF-форми.",

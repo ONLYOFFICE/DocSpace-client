@@ -1426,6 +1426,8 @@
   "MigratePlanLine": "Admins: {{count}} × {{price}}",
   "MigrateRefundToWallet": "Rückerstattung auf Wallet",
   "MigrateStep1Title": "Abrechnung über Stripe endet heute",
+  "MigrateUnusedValueRefund": "Erstattung des ungenutzten Guthabens",
+  "MigrateWalletCurrencyNote": "Erstattungen werden Ihrer Wallet in {{currency}} gutgeschrieben.",
   "MinCurrency": "Min. {{currency}}",
   "MobileAndroid": "Laden Sie {{organizationName}} Documents im Google Play Store herunter",
   "MobileEditPdfNotAvailableInfo": "Nicht unterstützte Aktion. Bitte wechseln Sie in den Desktopmodus, um PDFs bearbeiten oder PDF-Formulare erstellen zu können.",

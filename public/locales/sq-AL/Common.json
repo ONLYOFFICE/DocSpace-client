@@ -1412,6 +1412,8 @@
   "MigratePlanLine": "Administratorë: {{count}} × {{price}}",
   "MigrateRefundToWallet": "Rimbursim në portofol",
   "MigrateStep1Title": "Faturimi përmes Stripe ndalon sot",
+  "MigrateUnusedValueRefund": "Rimbursimi i vlerës së papërdorur",
+  "MigrateWalletCurrencyNote": "Rimbursimet kreditohen në portofolin tuaj në {{currency}}.",
   "MinCurrency": "min {{currency}}",
   "MobileAndroid": "Merrni dokumente {{organizationName}} në Google Play",
   "MobileEditPdfNotAvailableInfo": "Veprim i pambështetur. Ju lutem, kaloni në modalitetin e desktopit për të qenë në gjendje të modifikoni PDF ose të krijoni formularë PDF.",

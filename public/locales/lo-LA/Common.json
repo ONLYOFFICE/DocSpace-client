@@ -1412,6 +1412,8 @@
   "MigratePlanLine": "ຜູ້ເບິ່ງແຍງ: {{count}} × {{price}}",
   "MigrateRefundToWallet": "ຄືນເງິນເຂົ້າກະເປົ໋າເງິນ",
   "MigrateStep1Title": "ການຮຽກເກັບເງິນຜ່ານ Stripe ຢຸດໃນມື້ນີ້",
+  "MigrateUnusedValueRefund": "ຄືນເງິນມູນຄ່າທີ່ຍັງບໍ່ໄດ້ໃຊ້",
+  "MigrateWalletCurrencyNote": "ການຄືນເງິນຈະຖືກໂອນເຂົ້າກະເປົ໋າເງິນຂອງທ່ານເປັນສະກຸນເງິນ {{currency}}.",
   "MinCurrency": "ຂວມ {{currency}}",
   "MobileAndroid": "ຮັບເອົາເອກະສານ {{organizationName}} ຢູ່ Google Play",
   "MobileEditPdfNotAvailableInfo": "ການດຳເນີນການທີ່ບໍ່ຮອງຮັບ. ກະລຸນາປ່ຽນເປັນໂໝດເດັສທັອບ ເພື່ອໃຫ້ສາມາດແກ້ໄຂ PDF ຫຼື ສ້າງແບບຟອມ PDF ໄດ້.",

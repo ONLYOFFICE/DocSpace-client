@@ -1426,6 +1426,8 @@
   "MigratePlanLine": "Amministratori: {{count}} × {{price}}",
   "MigrateRefundToWallet": "Rimborso sul portafoglio",
   "MigrateStep1Title": "La fatturazione tramite Stripe termina oggi",
+  "MigrateUnusedValueRefund": "Rimborso del valore non utilizzato",
+  "MigrateWalletCurrencyNote": "I rimborsi vengono accreditati sul tuo portafoglio in {{currency}}.",
   "MinCurrency": "min {{currency}}",
   "MobileAndroid": "Ottieni {{organizationName}} Documents da Google Play",
   "MobileEditPdfNotAvailableInfo": "Azione non supportata. Passa alla modalità desktop per poter modificare i PDF o creare moduli PDF.",

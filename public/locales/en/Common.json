@@ -1426,6 +1426,8 @@
   "MigratePlanLine": "Admins: {{count}} × {{price}}",
   "MigrateRefundToWallet": "Refund to wallet",
   "MigrateStep1Title": "Billing via Stripe stops today",
+  "MigrateUnusedValueRefund": "Unused value refund",
+  "MigrateWalletCurrencyNote": "Refunds are credited to your wallet in {{currency}}.",
   "MinCurrency": "min {{currency}}",
   "MobileAndroid": "Get {{organizationName}} Documents on Google Play",
   "MobileEditPdfNotAvailableInfo": "Unsupported action. Please switch to the desktop mode to be able to edit PDFs or create PDF forms.",

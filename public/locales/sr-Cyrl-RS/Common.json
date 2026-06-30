@@ -1426,6 +1426,8 @@
   "MigratePlanLine": "Администратори: {{count}} × {{price}}",
   "MigrateRefundToWallet": "Поврат на новчаник",
   "MigrateStep1Title": "Наплата преко Stripe престаје данас",
+  "MigrateUnusedValueRefund": "Поврат неискоришћеног износа",
+  "MigrateWalletCurrencyNote": "Поврати се уплаћују на ваш новчаник у валути {{currency}}.",
   "MinCurrency": "мин {{currency}}",
   "MobileAndroid": "Набави {{organizationName}} Документа на Google Play-у",
   "MobileEditPdfNotAvailableInfo": "Неподржана акција. Молимо Вас да пређете на десктоп режим да бисте могли да уређујете PDF-ове или креирате PDF обрасце.",

@@ -3,7 +3,7 @@
   "content": "Rooms removed",
   "content_en_sha1_hash": "b7f6fbe672117d78dda530804dc9a74efcd4e510",
   "created_at": "2025-05-19T21:30:56.133Z",
-  "updated_at": "2026-06-02T08:43:27.472Z",
+  "updated_at": "2026-06-25T11:55:07.064Z",
   "comment": {
     "text": "This is a toast message confirming the successful removal of multiple rooms. It appears after a user deletes several rooms.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 909,
+      "line_number": 911,
       "context": "let translations;\n \n if (isRoom) {\n translations = {\n successRemoveRoom: t(\"Files:RoomRemoved\"),\n successRemoveRooms: t(\"Files:RoomsRemoved\"),\n };\n \n deleteRoomsAction([selectedFolderId], translations).catch((err) =>\n toastr.error(err),\n );",
       "module": "/packages/client"
     },

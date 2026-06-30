@@ -3,6 +3,8 @@
   "AIAgentAccessRedirectNote": "Ohjaat automaattisesti {{sectionName}}-osioon 5 sekunnissa.",
   "AIChat": "AI-Chat",
   "AIInstructions": "AI Ohjeet",
+  "AIModelDescription": "Valitse AI-malli, jota käytetään tämän huoneen chateissa. Tämä asetus on pakollinen ja koskee kaikkia osallistujia.",
+  "AIModelTitle": "AI-malli",
   "AIProviderAndModel": "{{aiProvider}} ja malli",
   "CreateChat": "Luo chat",
   "CreateChatDescription": "Siirry {{aiChat}}-välilehdelle aloittaaksesi.",

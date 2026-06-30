@@ -3,7 +3,7 @@
   "content": "The account name must be between {{minLength}} and {{maxLength}} characters long",
   "content_en_sha1_hash": "fc3643edea764dc1006d640f4f99f132b319f558",
   "created_at": "2025-05-26T07:15:46.250Z",
-  "updated_at": "2026-05-26T17:09:24.682Z",
+  "updated_at": "2026-06-25T11:55:07.120Z",
   "comment": {
     "text": "This is an error message displayed when a user attempts to rename their portal to a name that is too short or too long. It informs the user about the required minimum ({{minLength}}) and maximum ({{maxLength}}) character limits for the portal name.",
     "is_auto": true,
@@ -14,13 +14,13 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
       "line_number": 287,
-      "context": "saveToSessionStorage(\"errorValue\", t(\"PortalNameEmpty\"));\n break;\n case value.length < domainValidator.minLength ||\n value.length > domainValidator.maxLength:\n setErrorValue(\n t(\"PortalNameLength\", {\n minLength: domainValidator.minLength,\n maxLength: domainValidator.maxLength,\n }),\n );\n saveToSessionStorage(",
+      "context": "saveToSessionStorage(\"errorValue\", t(\"Common:PortalNameEmpty\"));\n break;\n case value.length < domainValidator.minLength ||\n value.length > domainValidator.maxLength:\n setErrorValue(\n t(\"Common:PortalNameLength\", {\n minLength: domainValidator.minLength,\n maxLength: domainValidator.maxLength,\n }),\n );\n saveToSessionStorage(",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
       "line_number": 287,
-      "context": "saveToSessionStorage(\"errorValue\", t(\"PortalNameEmpty\"));\n break;\n case value.length < domainValidator.minLength ||\n value.length > domainValidator.maxLength:\n setErrorValue(\n t(\"PortalNameLength\", {\n minLength: domainValidator.minLength,\n maxLength: domainValidator.maxLength,\n }),\n );\n saveToSessionStorage(",
+      "context": "saveToSessionStorage(\"errorValue\", t(\"Common:PortalNameEmpty\"));\n break;\n case value.length < domainValidator.minLength ||\n value.length > domainValidator.maxLength:\n setErrorValue(\n t(\"Common:PortalNameLength\", {\n minLength: domainValidator.minLength,\n maxLength: domainValidator.maxLength,\n }),\n );\n saveToSessionStorage(",
       "module": "/packages/client"
     },
     {

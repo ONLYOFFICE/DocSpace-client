@@ -3,7 +3,7 @@
   "content": "Shared by",
   "content_en_sha1_hash": "a5fe3b3e382690e112e5d06a9d9588409cdd93a3",
   "created_at": "2025-11-13T07:58:01.497Z",
-  "updated_at": "2026-05-15T14:00:06.726Z",
+  "updated_at": "2026-06-25T11:55:07.090Z",
   "comment": {
     "text": "This is a label indicating who shared a file or folder. It appears in file details, table headers, and filter options.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 934,
+      "line_number": 937,
       "context": "return [\n {\n key: FilterGroups.filterSharedBy,\n group: FilterGroups.filterSharedBy,\n label: t(\"Files:SharedBy\"),\n isHeader: true,\n },\n {\n id: \"filter_author-user-button\",\n key: FilterKeys.user,",
       "module": "/packages/client"
     }

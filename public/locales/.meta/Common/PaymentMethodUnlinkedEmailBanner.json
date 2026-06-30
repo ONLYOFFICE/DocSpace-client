@@ -1,0 +1,29 @@
+{
+  "key_path": "PaymentMethodUnlinkedEmailBanner",
+  "content": "<1>Payment method unlinked.</1> To add one, please contact the payer <2>{{email}}</2>",
+  "content_en_sha1_hash": "5c15018acd037a8b73de0d577051dd5403833eee",
+  "created_at": "2026-06-25T11:54:54.744Z",
+  "updated_at": "2026-06-25T12:02:17.130Z",
+  "comment": {
+    "text": "Informational banner in the billing section notifying that a payment method is unlinked; contains a bolded sentence `<1>` and a clickable email address variable `<2>{{email}}</2>`.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:02:17.130Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/unlinked-card-banner/index.tsx",
+      "line_number": 82,
+      "context": "),\n }}\n />\n ) : (\n <CommonTrans\n i18nKey=\"PaymentMethodUnlinkedEmailBanner\"\n values={{ email: walletCustomerEmail }}\n components={{\n 1: <Text as=\"span\" fontWeight={600} />,\n 2: (\n <Link",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

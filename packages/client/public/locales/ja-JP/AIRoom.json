@@ -3,6 +3,8 @@
   "AIAgentAccessRedirectNote": "5秒後に自動的に{{sectionName}}セクションにリダイレクトされます。",
   "AIChat": "AIチャット",
   "AIInstructions": "AIの使い方",
+  "AIModelDescription": "このルームのチャットで使用するAIモデルを選択してください。この設定は必須であり、すべての参加者に適用されます。",
+  "AIModelTitle": "AIモデル",
   "AIProviderAndModel": "{{aiProvider}} およびモデル",
   "CreateChat": "チャットを作成",
   "CreateChatDescription": "{{aiChat}} タブに移動して開始してください。",

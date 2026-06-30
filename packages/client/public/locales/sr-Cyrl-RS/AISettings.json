@@ -11,6 +11,8 @@
   "CapabilityVision": "Визија",
   "ConnectProductToYourDataAndTools": "Повежите {{productName}} са својим подацима и алаткама.",
   "CustomMCPListTitle": "Прилагођено",
+  "DefaultAISetupDescription": "Изаберите који ће се модел подразумевано користити у ћаскањима и агентима.",
+  "DefaultAISetupTitle": "Подразумевано подешавање АИ",
   "DefaultProviderDescription": "Изберите подразреден {{aiProvider}} и модел за све своје функције кроз {{productName}} ({{aiAgents}}, уредници докумената, итд.).",
   "DefaultProviderSetSuccess": "Подразумевани провајдер успешно подешен",
   "DefaultProviderTitle": "Подразумевани провајдер",

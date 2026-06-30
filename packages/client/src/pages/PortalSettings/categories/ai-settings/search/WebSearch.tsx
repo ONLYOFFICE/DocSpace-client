@@ -40,8 +40,13 @@ import classNames from "classnames";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
+import { EmptyView } from "@docspace/shared/components/empty-view";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.14.react.svg";
+import EmptyScreenServerErrorLightSvg from "PUBLIC_DIR/images/emptyview/empty.server.error.light.svg";
+import EmptyScreenServerErrorDarkSvg from "PUBLIC_DIR/images/emptyview/empty.server.error.dark.svg";
+import ReloadArrowsSvg from "PUBLIC_DIR/images/icons/10/reload.arrows.svg";
 
 import type ServicesStore from "SRC_DIR/store/ServicesStore";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -61,8 +66,37 @@ const WebSearch = ({
   webSearchSettingsUrl,
 }: WebSearchProps) => {
   const { t } = useTranslation(["Common"]);
+  const { isBase } = useTheme();
 
   const items = aiToolsPrices?.webSearch ?? [];
+
+  if (items.length === 0) {
+    const icon = isBase ? (
+      <EmptyScreenServerErrorLightSvg />
+    ) : (
+      <EmptyScreenServerErrorDarkSvg />
+    );
+
+    const options = [
+      {
+        to: "",
+        key: "reload",
+        title: t("Common:ReloadPage"),
+        description: t("Common:ReloadPage"),
+        icon: <ReloadArrowsSvg className={styles.reloadIcon} />,
+        onClick: () => window.location.reload(),
+      },
+    ];
+
+    return (
+      <EmptyView
+        icon={icon}
+        title={t("Common:SomethingWentWrong")}
+        description={t("Common:ServerErrorEmptyDescription")}
+        options={options}
+      />
+    );
+  }
 
   return (
     <div className={styles.wrapper}>

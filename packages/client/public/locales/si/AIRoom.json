@@ -3,6 +3,8 @@
   "AIAgentAccessRedirectNote": "තත්පර 5 කින් ඔබව ස්වයංක්‍රීයව {{sectionName}} කොටසට හරවා යවනු ලැබේ.",
   "AIChat": "AI-චැට්",
   "AIInstructions": "AI උපදෙස්",
+  "AIModelDescription": "මෙම කාමරයේ කතාබහ සඳහා භාවිතා කිරීමට AI මාදිලිය තෝරන්න. මෙම සැකසුම අනිවාර්ය වන අතර සියලුම සහභාගිවන්නන්ට අදාළ වේ.",
+  "AIModelTitle": "AI මාදිලිය",
   "AIProviderAndModel": "{{aiProvider}} සහ මාදිලිය",
   "CreateChat": "කතාබහ සාදන්න",
   "CreateChatDescription": "ආරම්භ කිරීමට, {{aiChat}} ටැබයට යන්න.",

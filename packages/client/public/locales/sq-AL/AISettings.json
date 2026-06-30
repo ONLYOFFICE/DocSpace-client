@@ -11,6 +11,8 @@
   "CapabilityVision": "Vizioni",
   "ConnectProductToYourDataAndTools": "Lidh {{productName}} me të dhënat dhe mjetet e tua.",
   "CustomMCPListTitle": "Personalizuar",
+  "DefaultAISetupDescription": "Zgjidhni cili model do të përdoret si parazgjedhje në biseda dhe agjentë.",
+  "DefaultAISetupTitle": "Konfigurimi i parazgjedhur i IA",
   "DefaultProviderDescription": "Zgjidhni {{aiProvider}} dhe modelin e paracaktuar për të gjitha funksionet në {{productName}} ({{aiAgents}}, redaktorët e dokumenteve, etj.).",
   "DefaultProviderSetSuccess": "Ofruesi i parazgjedhur u caktua me sukses",
   "DefaultProviderTitle": "Ofruesi i parazgjedhur",

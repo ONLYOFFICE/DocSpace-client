@@ -11,6 +11,8 @@
   "CapabilityVision": "Kuvantunnistus",
   "ConnectProductToYourDataAndTools": "Yhdistä {{productName}} datasi ja työkalujesi kanssa.",
   "CustomMCPListTitle": "Mukautetut",
+  "DefaultAISetupDescription": "Valitse, mitä mallia käytetään oletuksena chateissa ja agenteissa.",
+  "DefaultAISetupTitle": "Oletus-AI-asetus",
   "DefaultProviderDescription": "Valitse oletus {{aiProvider}} ja malli kaikille ominaisuuksille {{productName}}:ssä ({{aiAgents}}, dokumenttinhoitimet jne.)",
   "DefaultProviderSetSuccess": "Oletuspalveluntarjoaja asetettu onnistuneesti",
   "DefaultProviderTitle": "Oletuspalveluntarjoaja",

@@ -11,6 +11,8 @@
   "CapabilityVision": "Vision",
   "ConnectProductToYourDataAndTools": "Verbind {{productName}} met uw gegevens en tools.",
   "CustomMCPListTitle": "Aangepaste",
+  "DefaultAISetupDescription": "Kies welk model standaard wordt gebruikt in chats en agenten.",
+  "DefaultAISetupTitle": "Standaard AI-configuratie",
   "DefaultProviderDescription": "Selecteer de standaard {{aiProvider}} en model voor alle functies in {{productName}} ({{aiAgents}}, documenteditors, enz.)",
   "DefaultProviderSetSuccess": "Standaard provider succesvol ingesteld",
   "DefaultProviderTitle": "Standaard provider",

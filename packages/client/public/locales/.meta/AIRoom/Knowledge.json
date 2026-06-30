@@ -3,7 +3,7 @@
   "content": "Knowledge base",
   "content_en_sha1_hash": "70cd2e748fd8d867b9e8c7a55f97c1f3930136f7",
   "created_at": "2025-12-17T07:49:06.312Z",
-  "updated_at": "2026-06-02T08:43:27.464Z",
+  "updated_at": "2026-06-25T11:55:07.054Z",
   "comment": {
     "text": "This is a tab label or section title. It refers to a knowledge base feature within the AI Room or Portal Settings.",
     "is_auto": true,
@@ -25,14 +25,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 144,
-      "context": "currentTabId === \"providers\"\n ? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);\n \n const serversData = [",
+      "line_number": 175,
+      "context": ": currentTabId === \"model-assignment\"\n ? t(\"Common:ModelAssignment\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);\n \n const serversData = [",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 144,
-      "context": "currentTabId === \"providers\"\n ? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);\n \n const serversData = [",
+      "line_number": 175,
+      "context": ": currentTabId === \"model-assignment\"\n ? t(\"Common:ModelAssignment\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);\n \n const serversData = [",
       "module": "/packages/client"
     },
     {
@@ -43,8 +43,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 533,
-      "context": "},\n {\n id: \"portal-settings_catalog-ai-settings-knowledge\",\n key: \"7-3\",\n link: \"knowledge\",\n tKey: \"AIRoom:Knowledge\",\n isCategory: true,\n },\n ],\n },\n {",
+      "line_number": 547,
+      "context": "},\n {\n id: \"portal-settings_catalog-ai-settings-knowledge\",\n key: \"7-4\",\n link: \"knowledge\",\n tKey: \"AIRoom:Knowledge\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     }
   ],

@@ -11,6 +11,8 @@
   "CapabilityVision": "ビジョン",
   "ConnectProductToYourDataAndTools": "{{productName}}をデータやツールに接続します。",
   "CustomMCPListTitle": "カスタム",
+  "DefaultAISetupDescription": "チャットとエージェントでデフォルトとして使用するモデルを選択してください。",
+  "DefaultAISetupTitle": "デフォルトのAI設定",
   "DefaultProviderDescription": "すべての機能におけるデフォルトの {{aiProvider}} およびモデルを {{productName}} ({{aiAgents}}、ドキュメントエディタなど) で選択します。",
   "DefaultProviderSetSuccess": "デフォルトプロバイダを正常に設定しました。",
   "DefaultProviderTitle": "デフォルトプロバイダー",

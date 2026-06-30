@@ -1,0 +1,47 @@
+{
+  "key_path": "EmptyAIAgentsNotActiveYetContactPayer",
+  "content": "Contact the Payer (<1>{{payerContact}}</1>) to activate the AI features.",
+  "content_en_sha1_hash": "f7da0db3a9d9957835028fa66338f7580a30b57b",
+  "created_at": "2026-06-25T11:54:49.057Z",
+  "updated_at": "2026-06-25T12:15:27.650Z",
+  "comment": {
+    "text": "Instruction text in an empty state or info block appearing when AI features are inactive; contains a clickable link with the payer's contact details ({{payerContact}}).",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:15:27.650Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-info-block/index.tsx",
+      "line_number": 125,
+      "context": ") : (\n <>\n {activateIntro}\n {payerLabel ? (\n <Trans\n i18nKey=\"Common:EmptyAIAgentsNotActiveYetContactPayer\"\n values={{ payerContact: payerLabel }}\n components={{\n 1:\n walletCustomerEmail && !walletCustomerDisplayName ? (\n <Link",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-no-access-screen/index.tsx",
+      "line_number": 121,
+      "context": "{t(\"EmptyAIAgentsNotActiveYetDescriptionLine2\")}\n </Text>\n {!isPayer && payerLabel ? (\n <Text as=\"span\" style={{ display: \"block\", marginTop: \"8px\" }}>\n <Trans\n i18nKey=\"Common:EmptyAIAgentsNotActiveYetContactPayer\"\n values={{ payerContact: payerLabel }}\n components={{\n 1:\n walletCustomerEmail && !walletCustomerDisplayName ? (\n <Link",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/KnowledgeDisabledContainer.js",
+      "line_number": 125,
+      "context": "{t(\"Common:EmptyAIAgentsNotActiveYetDescriptionLine2\")}\n </Text>\n {!isPayer && payerLabel ? (\n <Text as=\"span\" style={{ display: \"block\", marginTop: \"8px\" }}>\n <Trans\n i18nKey=\"Common:EmptyAIAgentsNotActiveYetContactPayer\"\n values={{ payerContact: payerLabel }}\n components={{\n 1:\n walletCustomerEmail && !walletCustomerDisplayName ? (\n <Link",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 257,
+      "context": "{t(\"Common:EmptyAIAgentsNotActiveYetDescriptionLine2\")}\n </Text>\n {!isPayer && payerLabel ? (\n <Text as=\"span\" style={{ display: \"block\", marginTop: \"8px\" }}>\n <Trans\n i18nKey=\"Common:EmptyAIAgentsNotActiveYetContactPayer\"\n values={{ payerContact: payerLabel }}\n components={{\n 1:\n walletCustomerEmail && !walletCustomerDisplayName ? (\n <Link",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

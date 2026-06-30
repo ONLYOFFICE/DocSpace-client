@@ -1,0 +1,29 @@
+{
+  "key_path": "AIFeatureSummarizeDocuments",
+  "content": "Summarize long documents",
+  "content_en_sha1_hash": "bcf0442036e8ca5d540747f8ad65e12fcd5263e5",
+  "created_at": "2026-06-25T11:54:44.096Z",
+  "updated_at": "2026-06-25T12:31:21.330Z",
+  "comment": {
+    "text": "Short label for a feature tag within the AI services dialog, representing the document summarization capability.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:31:21.330Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
+      "line_number": 114,
+      "context": "},\n ];\n \n const tags = [\n { label: t(\"AIFeatureWriteRewriteTranslate\"), icon: <WriteTagIcon /> },\n { label: t(\"AIFeatureSummarizeDocuments\"), icon: <SummarizeTagIcon /> },\n { label: getConstName(\"OCR\"), icon: <OcrTagIcon /> },\n { label: t(\"AIFeaturePDFForms\"), icon: <PdfFormTagIcon /> },\n { label: t(\"AIFeatureCheckGrammar\"), icon: <GrammarTagIcon /> },\n { label: t(\"AIFeatureFormInsights\"), icon: <InsightsTagIcon /> },\n { label: t(\"AIFeatureWebSearch\"), icon: <WebSearchTagIcon /> },",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

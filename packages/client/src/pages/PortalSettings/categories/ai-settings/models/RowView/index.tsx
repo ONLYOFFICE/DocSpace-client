@@ -40,8 +40,13 @@ import { useTranslation } from "react-i18next";
 import { RowContainer } from "@docspace/ui-kit/components/rows";
 import { Text } from "@docspace/ui-kit/components/text";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { EmptyView } from "@docspace/shared/components/empty-view";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.12.react.svg";
+import EmptyScreenServerErrorLightSvg from "PUBLIC_DIR/images/emptyview/empty.server.error.light.svg";
+import EmptyScreenServerErrorDarkSvg from "PUBLIC_DIR/images/emptyview/empty.server.error.dark.svg";
+import ReloadArrowsSvg from "PUBLIC_DIR/images/icons/10/reload.arrows.svg";
 
 import type ServicesStore from "SRC_DIR/store/ServicesStore";
 
@@ -70,12 +75,39 @@ const RowView = (props: ModelSettingsRowViewProps) => {
 
   const models = aiToolsPrices?.chat ?? [];
   const { t } = useTranslation(["Common"]);
+  const { isBase } = useTheme();
 
   const onToggle = async (modelId: string, enabled: boolean) => {
     await setAiModelAvailability?.(modelId, enabled);
   };
 
-  if (!models.length) return null;
+  if (!models.length) {
+    const icon = isBase ? (
+      <EmptyScreenServerErrorLightSvg />
+    ) : (
+      <EmptyScreenServerErrorDarkSvg />
+    );
+
+    const options = [
+      {
+        to: "",
+        key: "reload",
+        title: t("Common:ReloadPage"),
+        description: t("Common:ReloadPage"),
+        icon: <ReloadArrowsSvg className={styles.reloadIcon} />,
+        onClick: () => window.location.reload(),
+      },
+    ];
+
+    return (
+      <EmptyView
+        icon={icon}
+        title={t("Common:SomethingWentWrong")}
+        description={t("Common:ServerErrorEmptyDescription")}
+        options={options}
+      />
+    );
+  }
 
   return (
     <div className={styles.rowContainer}>

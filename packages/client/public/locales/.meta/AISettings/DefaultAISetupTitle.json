@@ -1,0 +1,29 @@
+{
+  "key_path": "DefaultAISetupTitle",
+  "content": "Default AI setup",
+  "content_en_sha1_hash": "b517427029201e8904190b59c2a94b146cc3a267",
+  "created_at": "2026-06-25T11:55:05.741Z",
+  "updated_at": "2026-06-25T12:35:28.213Z",
+  "comment": {
+    "text": "Section heading in the Portal Settings (AI settings category) that introduces the configuration for the default AI model assignment.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:35:28.213Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/ModelAssignment.tsx",
+      "line_number": 226,
+      "context": "level={3}\n fontWeight={700}\n lineHeight=\"22px\"\n fontSize=\"16px\"\n >\n {t(\"AISettings:DefaultAISetupTitle\")}\n </Heading>\n <Text className={styles.description} lineHeight=\"20px\">\n {t(\"AISettings:DefaultAISetupDescription\")}\n </Text>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

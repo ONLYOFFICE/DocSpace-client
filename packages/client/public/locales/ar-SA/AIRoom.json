@@ -3,6 +3,8 @@
   "AIAgentAccessRedirectNote": "ستتم إعادة توجيهك تلقائيًا إلى قسم {{sectionName}} خلال 5 ثوانٍ.",
   "AIChat": "دردشة الذكاء الاصطناعي",
   "AIInstructions": "تعليمات الذكاء الاصطناعي",
+  "AIModelDescription": "حدد نموذج الذكاء الاصطناعي المراد استخدامه في محادثات هذه الغرفة. هذا الإعداد إلزامي وينطبق على جميع المشاركين.",
+  "AIModelTitle": "نموذج الذكاء الاصطناعي",
   "AIProviderAndModel": "{{aiProvider}} و نموذج",
   "CreateChat": "إنشاء دردشة",
   "CreateChatDescription": "انتقل إلى علامة التبويب {{aiChat}} للبدء.",

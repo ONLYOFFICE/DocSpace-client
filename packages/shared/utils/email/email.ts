@@ -265,7 +265,7 @@ const checkErrors = (
     options.allowStrictLocalPart &&
     "local" in parsedAddress &&
     (!/^[\x00-\x7F]+$/.test(parsedAddress.local) ||
-      !/^[_]?([a-zA-Z0-9]+)([_\-\.\+][a-zA-Z0-9]+)*[_]?$/.test(
+      !/^[_]?([a-zA-Z0-9]+)([_\-\.\+]+[a-zA-Z0-9]+)*[_]?$/.test(
         parsedAddress.local,
       ))
   ) {

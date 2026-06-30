@@ -3,6 +3,8 @@
   "AIAgentAccessRedirectNote": "Θα ανακατευθυνθείτε αυτόματα στην ενότητα {{sectionName}} σε 5 δευτερόλεπτα.",
   "AIChat": "AI-Chat",
   "AIInstructions": "Οδηγίες τεχνητής νοημοσύνης",
+  "AIModelDescription": "Επιλέξτε το μοντέλο AI που θα χρησιμοποιηθεί στις συνομιλίες αυτού του δωματίου. Αυτή η ρύθμιση είναι υποχρεωτική και ισχύει για όλους τους συμμετέχοντες.",
+  "AIModelTitle": "Μοντέλο AI",
   "AIProviderAndModel": "{{aiProvider}} και μοντέλο",
   "CreateChat": "Δημιουργία συνομιλίας",
   "CreateChatDescription": "Πηγαίνετε στην καρτέλα {{aiChat}} για να ξεκινήσετε.",

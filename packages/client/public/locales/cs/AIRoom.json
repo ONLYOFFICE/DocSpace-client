@@ -3,6 +3,8 @@
   "AIAgentAccessRedirectNote": "Budete automaticky přesměrováni do sekce {{sectionName}} za 5 sekund.",
   "AIChat": "AI-Chat",
   "AIInstructions": "Pokyny pro AI",
+  "AIModelDescription": "Vyberte AI model, který se bude používat v chatech této místnosti. Toto nastavení je povinné a platí pro všechny účastníky.",
+  "AIModelTitle": "AI model",
   "AIProviderAndModel": "{{aiProvider}} a model",
   "CreateChat": "Vytvořit chat",
   "CreateChatDescription": "Přejděte na záložku {{aiChat}}, abyste zahájili.",

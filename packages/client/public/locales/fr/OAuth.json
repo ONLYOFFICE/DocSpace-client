@@ -29,7 +29,7 @@
   "DeleteApplicationDescription": "Si vous supprimez cette application, tous les consentements et autorisations actifs seront révoqués. Si un utilisateur tente d'ouvrir l'écran de consentement pour cette application, une erreur se produira dans l'espace documentaire et l'utilisateur sera redirigé vers l'URL de redirection spécifiée.",
   "DeleteApplications": "Supprimer les applications",
   "DeleteApplicationsDescription": "Si vous supprimez ces applications, tous les consentements et autorisations actifs seront révoqués. Si un utilisateur tente d'ouvrir l'écran de consentement pour cette application, une erreur se produira dans l'espace documentaire et l'utilisateur sera redirigé vers l'URL de redirection spécifiée.",
-  "DeveloperTokenCopied": "Le jeton du développeur a été copié avec succès dans le presse-papiers\\",
+  "DeveloperTokenCopied": "Le jeton du développeur a été copié avec succès dans le presse-papiers",
   "DisableApplication": "Désactiver l'application",
   "DisableApplicationDescription": "Si vous désactivez cette application, tous les consentements et autorisations actifs seront révoqués. Si nécessaire, vous pouvez activer l'application désactivée ultérieurement.",
   "DisableApplicationNote": "<strong>Remarque : </strong> Tous les utilisateurs doivent à nouveau remplir l'écran de consentement",

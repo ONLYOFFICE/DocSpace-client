@@ -121,27 +121,27 @@ const AISettings = ({ fetchKnowledge, fetchAIProviders }: TAISettingsProps) => {
   const data: TTabItem[] = [
     {
       id: TAB_IDS.AI_MODELS,
-      name: aiT("AIModels"),
+      name: aiT("Common:AIModels"),
       content: <AiModels />,
       onClick: makeOnClick(TAB_IDS.AI_MODELS),
     },
     {
       id: TAB_IDS.MODEL_ASSIGNMENT,
-      name: aiT("ModelAssignment"),
+      name: aiT("Common:ModelAssignment"),
       content: <ModelAssignment />,
       onClick: makeOnClick(TAB_IDS.MODEL_ASSIGNMENT),
       isDisabled: disableNonAiModels,
     },
     {
       id: TAB_IDS.MCP_SERVERS,
-      name: aiT("MCPServers"),
+      name: aiT("Common:MCPServers"),
       content: <McpServers />,
       onClick: makeOnClick(TAB_IDS.MCP_SERVERS),
       isDisabled: disableNonAiModels,
     },
     {
       id: TAB_IDS.WEB_SEARCH,
-      name: aiT("WebSearch"),
+      name: aiT("Common:WebSearch"),
       content: <WebSearch />,
       onClick: makeOnClick(TAB_IDS.WEB_SEARCH),
       isDisabled: disableNonAiModels,
@@ -150,7 +150,7 @@ const AISettings = ({ fetchKnowledge, fetchAIProviders }: TAISettingsProps) => {
       id: TAB_IDS.KNOWLEDGE,
       // Knowledge has no key in the @onlyoffice/ai-chat bundle (aiT), so its
       // label comes from the DocSpace Common namespace instead. Intentional.
-      name: t("Knowledge"),
+      name: t("Common:Knowledge"),
       content: <Knowledge />,
       onClick: () => {
         if (!hasProfiles) return;
@@ -181,3 +181,4 @@ export const Component = inject(({ aiSettingsStore }: TStore) => {
     fetchAIProviders,
   };
 })(observer(AISettings));
+

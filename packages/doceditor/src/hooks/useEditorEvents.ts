@@ -34,7 +34,7 @@
  */
 
 import React, { useCallback } from "react";
-import { match, Pattern } from "ts-pattern";
+import { match } from "ts-pattern";
 import isUndefined from "lodash/isUndefined";
 import { useSearchParams } from "next/navigation";
 
@@ -59,7 +59,7 @@ import type {
   TSharedUsers,
 } from "@docspace/shared/api/files/types";
 import {
-  getModelsList,
+  getProfilesList,
   getProfileAssignments,
 } from "@docspace/shared/api/ai";
 import { DEFAULT_SERVER_API_ROUTES } from "@docspace/ui-kit/ai-agent/providers";
@@ -335,7 +335,6 @@ const useEditorEvents = ({
               whenAiReady("Tools", sendTools);
               whenAiReady("Actions", () => {
                 connector.sendEvent("ai_onCustomInit", {
-                  settingsLock: undefined,
                   actionsOverride: true,
                   apiConfig: {
                     origin: window.location.origin,
@@ -346,45 +345,50 @@ const useEditorEvents = ({
                 fireGenerationToolCall();
               });
             } else {
-              const profiles = await getModelsList();
+              const profiles = await getProfilesList();
 
               if (profiles && profiles.length > 0) {
                 aiAvailable = true;
 
-                profiles.forEach((p) => modelProfileMap.set(p.modelId, p.id));
+                profiles.forEach((p) => {
+                  if (modelProfileMap.has(p.modelId)) {
+                    console.warn(
+                      `Duplicate modelId "${p.modelId}" across AI profiles; external fetch may resolve to the wrong profile.`,
+                    );
+                  }
+                  modelProfileMap.set(p.modelId, p.id);
+                });
 
-                const providers = Array.from(
-                  new Set(profiles.map((p) => p.providerType)),
-                ).map((name) => ({ name, basedOn: "openai" }));
-
-                const models = profiles.map((p) => ({
-                  id: p.modelId,
+                const aiProfiles = profiles.map((p) => ({
+                  id: p.id,
                   name: p.name,
-                  provider: p.providerType,
-                  capabilities: p.capabilities ?? 255,
+                  modelId: p.modelId,
+                  headers: p.headers,
+                  reasoning: p.reasoning,
+                  capabilities: p.capabilities,
+                  canUseTool: p.canUseTool ?? false,
+                  useResponsesApi: p.useResponsesApi,
+                  providerType: p.providerType,
+                  basedOn: "openai",
                 }));
 
+                const validProfileIds = new Set(profiles.map((p) => p.id));
+
                 const assignments = await getProfileAssignments();
-                const modelByProfileId = new Map(
-                  profiles.map((p) => [p.id, p.modelId]),
-                );
 
                 const actions: Record<string, { model: string }> = {};
                 Object.entries(assignments ?? {}).forEach(
                   ([action, profileId]) => {
-                    const model = modelByProfileId.get(profileId);
-                    if (model) actions[action] = { model };
+                    if (validProfileIds.has(profileId))
+                      actions[action] = { model: profileId };
                   },
                 );
 
                 whenAiReady("Tools", sendTools);
                 whenAiReady("Actions", () => {
-                  connector.sendEvent("ai_onCustomProviders", providers);
                   connector.sendEvent("ai_onCustomInit", {
-                    settingsLock: undefined,
                     actionsOverride: true,
-                    providers,
-                    models,
+                    profiles: aiProfiles,
                     actions,
                   });
                   fireGenerationToolCall();

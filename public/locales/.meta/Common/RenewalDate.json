@@ -1,0 +1,29 @@
+{
+  "key_path": "RenewalDate",
+  "content": "Renewal date",
+  "content_en_sha1_hash": "d65ee41bf6c89e6e07621b9bfca1ad8ee69b63eb",
+  "created_at": "2026-06-25T11:54:55.962Z",
+  "updated_at": "2026-06-25T12:01:30.544Z",
+  "comment": {
+    "text": "Column header in the Upcoming Payments table indicating the date of the next scheduled renewal.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:01:30.544Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/wallet/sub-components/UpcomingPayments/TableView/TableHeader.tsx",
+      "line_number": 55,
+      "context": "const UpcomingPaymentsTableHeader = (props: TableHeaderProps) => {\n const t = useCommonTranslation();\n \n const defaultColumns = [\n {\n key: \"RenewalDate\",\n title: t(\"RenewalDate\"),\n enable: true,\n resizable: true,\n default: true,\n active: true,",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

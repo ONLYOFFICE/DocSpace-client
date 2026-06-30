@@ -55,6 +55,7 @@ type InjectedProps = {
   isInited?: boolean;
   isBackupServiceOn?: boolean;
   isNotPaidPeriod?: boolean;
+  isCardLinkedToPortal?: boolean;
 };
 
 const Warning = ({
@@ -69,6 +70,7 @@ const Warning = ({
   isInited,
   isBackupServiceOn,
   isNotPaidPeriod,
+  isCardLinkedToPortal,
 }: InjectedProps) => {
   const { t, ready } = useTranslation(["Common", "Payments"]);
   const { pathname } = useLocation();
@@ -217,7 +219,8 @@ const Warning = ({
 
   if (
     (isPortalPaymentsRoute || isWalletRoute || isPaymentsServiceRoute) &&
-    !isPayer
+    !isPayer &&
+    isCardLinkedToPortal
   ) {
     if (!isPayerInfoLoaded) return null;
 
@@ -261,6 +264,7 @@ export default inject(
       cardLinkedOnNonProfit,
       cardLinkedOnFreeTariff,
       isBackupServiceOn,
+      isCardLinkedToPortal,
     } = paymentStore;
     const { walletCustomerEmail, isNotPaidPeriod, isPayerInfoLoaded } =
       currentTariffStatusStore;
@@ -278,6 +282,7 @@ export default inject(
       isBackupServiceOn,
       maxFreeBackups,
       isNotPaidPeriod,
+      isCardLinkedToPortal,
     };
   },
 )(observer(Warning));

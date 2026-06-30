@@ -1,0 +1,29 @@
+{
+  "key_path": "AutomaticallyAddCredits",
+  "content": "Automatically add credits when available credits drop below a specified amount",
+  "content_en_sha1_hash": "b46e1f416af22506fd5f94f8c8d3ab8928e00d75",
+  "created_at": "2026-06-25T11:54:45.532Z",
+  "updated_at": "2026-06-25T12:22:05.010Z",
+  "comment": {
+    "text": "Description text for the automatic payments setting in the billing section, explaining the trigger for automatic credit top-ups.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:22:05.010Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
+      "line_number": 353,
+      "context": "dataTestId=\"auto_payments_toggle_button\"\n />\n </div>\n \n <Text fontSize=\"12px\" className={styles.autoPaymentDescription}>\n {t(\"AutomaticallyAddCredits\")}\n </Text>\n \n {isAutomaticPaymentsEnabled\n ? isCurrentSettings\n ? renderCurrentSettings()",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

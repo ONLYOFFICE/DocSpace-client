@@ -1,0 +1,29 @@
+{
+  "key_path": "UpcomingPaymentsAutoChargeNote",
+  "content": "All scheduled payments are automatically charged from your credits.",
+  "content_en_sha1_hash": "23ce80598a4f44c817d1d3fd2656af914117352c",
+  "created_at": "2026-06-25T11:54:59.800Z",
+  "updated_at": "2026-06-25T11:57:22.415Z",
+  "comment": {
+    "text": "Informational note in the Upcoming Payments section of the billing wallet, explaining that scheduled payments are automatically deducted from available credits.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T11:57:22.415Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/wallet/sub-components/UpcomingPayments/index.tsx",
+      "line_number": 91,
+      "context": ">\n {upcomingPayments.length ? (\n <>\n <div className={styles.introText}>\n <Text>{t(\"UpcomingPaymentsDescription\")}</Text>\n <Text>{t(\"UpcomingPaymentsAutoChargeNote\")}</Text>\n </div>\n <Consumer>\n {(context) =>\n viewAs === \"table\" ? (\n <TableView sectionWidth={context.sectionWidth || 0} />",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

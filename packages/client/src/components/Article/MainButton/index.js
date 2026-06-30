@@ -77,7 +77,11 @@ import {
 
 import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
 
+import { getFolderInfo } from "@docspace/shared/api/files";
+
 import MobileView from "./MobileView";
+import ActivateAIDialog from "../../dialogs/ActivateAIDialog";
+import ClientSimpleTopUpDialog from "../../EmptyContainer/sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
 
 import styles from "./main-button.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
@@ -152,6 +156,15 @@ const ArticleMainButtonContent = (props) => {
 
     aiConfig,
     isGracePeriod,
+
+    isAIReady,
+    isCardLinkedToPortal,
+    enableAIService,
+    getAIConfig,
+    refreshPaymentInfo,
+    setSecurity,
+    isEmptyFilesList,
+    language,
   } = props;
 
   const location = useLocation();
@@ -227,6 +240,59 @@ const ArticleMainButtonContent = (props) => {
     });
     window.dispatchEvent(event);
   }, [isGracePeriod, currentFolderId]);
+
+  const [aiFeaturesDialogVisible, setAiFeaturesDialogVisible] =
+    React.useState(false);
+  const [simpleTopUpDialogVisible, setSimpleTopUpDialogVisible] =
+    React.useState(false);
+  const [isActivatingAI, setIsActivatingAI] = React.useState(false);
+
+  const showActivateAIDialog =
+    isAIAgentsFolder && !isAIReady && !isEmptyFilesList;
+
+  const refreshCurrentFolder = React.useCallback(async () => {
+    if (!currentFolderId) return;
+    const updated = await getFolderInfo(currentFolderId);
+    if (updated.security) setSecurity?.(updated.security);
+  }, [currentFolderId, setSecurity]);
+
+  const onAIActivated = React.useCallback(async () => {
+    await Promise.all([
+      getAIConfig?.(),
+      refreshCurrentFolder(),
+      refreshPaymentInfo?.(),
+    ]);
+  }, [getAIConfig, refreshCurrentFolder, refreshPaymentInfo]);
+
+  const onDialogActivate = React.useCallback(async () => {
+    if (!isCardLinkedToPortal) {
+      setAiFeaturesDialogVisible(false);
+      setSimpleTopUpDialogVisible(true);
+      return;
+    }
+
+    try {
+      setIsActivatingAI(true);
+      await enableAIService?.(onAIActivated);
+
+      const event = new CustomEvent(Events.AGENT_CREATE, {
+        detail: { parentId: currentFolderId, context: "sidebar" },
+      });
+      window.dispatchEvent(event);
+      setAiFeaturesDialogVisible(false);
+    } finally {
+      setIsActivatingAI(false);
+    }
+  }, [isCardLinkedToPortal, enableAIService, onAIActivated, currentFolderId]);
+
+  const onMainButtonAgentClick = React.useCallback(() => {
+    if (showActivateAIDialog) {
+      setAiFeaturesDialogVisible(true);
+      return;
+    }
+
+    onCreateAgent();
+  }, [showActivateAIDialog, onCreateAgent]);
 
   const onShowSelectFileDialog = React.useCallback(() => {
     if (isMobile) {
@@ -656,6 +722,8 @@ const ArticleMainButtonContent = (props) => {
 
     if (isAIAgentsFolder && aiConfig?.aiReadyNeedReset) visibilityValue = false;
 
+    if (showActivateAIDialog && isMobileArticle) visibilityValue = true;
+
     return visibilityValue;
   };
 
@@ -666,7 +734,7 @@ const ArticleMainButtonContent = (props) => {
   }, [mainButtonVisible]);
 
   const onMainButtonClick = () => {
-    if (isAIAgentsFolder) return onCreateAgent();
+    if (isAIAgentsFolder) return onMainButtonAgentClick();
     if (!isAccountsPage) return onCreateRoom();
     if (isContactsGroupsPage) return createGroup(currentFolderId, "sidebar");
   };
@@ -682,6 +750,8 @@ const ArticleMainButtonContent = (props) => {
     isDisabled = (isFrame && disableActionButton) || !contactsCanCreate;
   } else if ((isChatTab || isResultTab) && isAIRoom) {
     isDisabled = true;
+  } else if (showActivateAIDialog) {
+    isDisabled = isFrame && disableActionButton;
   } else {
     isDisabled = (isFrame && disableActionButton) || !security?.Create;
   }
@@ -731,7 +801,7 @@ const ArticleMainButtonContent = (props) => {
           className={classNames(styles.mainButton, "create-agent-button")}
           id="rooms-shared_create-agent-button"
           label={t("Common:NewAgent")}
-          onClick={onCreateAgent}
+          onClick={onMainButtonAgentClick}
           $currentColorScheme={currentColorScheme}
           isDisabled={isDisabled || aiConfig?.aiReadyNeedReset}
           size="small"
@@ -789,6 +859,19 @@ const ArticleMainButtonContent = (props) => {
         ref={inputFolderElement}
         style={{ display: "none" }}
       />
+
+      <ActivateAIDialog
+        visible={aiFeaturesDialogVisible}
+        onClose={() => setAiFeaturesDialogVisible(false)}
+        onActivate={onDialogActivate}
+        isActivating={isActivatingAI}
+      />
+      <ClientSimpleTopUpDialog
+        visible={simpleTopUpDialogVisible}
+        onClose={() => setSimpleTopUpDialogVisible(false)}
+        onConfirm={onAIActivated}
+        language={language}
+      />
     </>
   );
 };
@@ -813,6 +896,8 @@ export default inject(
     aiRoomStore,
     filesSettingsStore,
     currentTariffStatusStore,
+    paymentStore,
+    authStore,
   }) => {
     const { isChatTab, isResultTab, isKnowledgeTab } = aiRoomStore;
     const { showArticleLoader } = clientLoadingStore;
@@ -855,7 +940,8 @@ export default inject(
 
     const { security } = selectedFolderStore;
 
-    const { mainButtonMobileVisible, setMainButtonVisible } = filesStore;
+    const { mainButtonMobileVisible, setMainButtonVisible, isEmptyFilesList } =
+      filesStore;
 
     const currentFolderId = selectedFolderStore.id;
     const currentRoomType = selectedFolderStore.roomType;
@@ -953,6 +1039,15 @@ export default inject(
       aiConfig,
 
       isGracePeriod,
+
+      isAIReady: paymentStore.isAIReady,
+      isCardLinkedToPortal: paymentStore.isCardLinkedToPortal,
+      enableAIService: paymentStore.enableAIService,
+      getAIConfig: settingsStore.getAIConfig,
+      refreshPaymentInfo: authStore.getPaymentInfo,
+      setSecurity: selectedFolderStore.setSecurity,
+      isEmptyFilesList,
+      language: authStore.language ?? "en",
     };
   },
 )(

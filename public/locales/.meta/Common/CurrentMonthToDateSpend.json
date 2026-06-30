@@ -1,0 +1,29 @@
+{
+  "key_path": "CurrentMonthToDateSpend",
+  "content": "Current month-to-date spend",
+  "content_en_sha1_hash": "83a5f8fd5443170557469547774252591937bf0e",
+  "created_at": "2026-06-25T11:54:47.759Z",
+  "updated_at": "2026-06-25T12:16:32.440Z",
+  "comment": {
+    "text": "A label in the billing wallet section indicating total expenditure from the start of the current month to the present day.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:16:32.440Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
+      "line_number": 274,
+      "context": "fontSize=\"12px\"\n lineHeight=\"16px\"\n fontWeight={600}\n className={styles.spendTitle}\n >\n {t(\"CurrentMonthToDateSpend\")}\n </Text>\n <BalanceAmount\n showRefresh={false}\n amount={walletMonthToDateSpend}\n currency={walletCodeCurrency}",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

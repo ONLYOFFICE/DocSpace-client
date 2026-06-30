@@ -820,7 +820,7 @@ export const getDefaultProvider = async () => {
   return res as TDefaultProvider;
 };
 
-export const getModelsList = async () => {
+export const getProfilesList = async () => {
   const response = await fetch(`/api/2.0/new-ai/profiles/list`, {
     method: "GET",
     headers: {

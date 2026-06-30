@@ -1,0 +1,29 @@
+{
+  "key_path": "AutomaticTopUps",
+  "content": "Automatic top-ups",
+  "content_en_sha1_hash": "9ca60d0154606d68069cbc1a95bffb18b32d1bf5",
+  "created_at": "2026-06-25T11:54:45.543Z",
+  "updated_at": "2026-06-25T12:22:26.288Z",
+  "comment": {
+    "text": "Section header title for the automatic balance replenishment settings.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:22:26.288Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
+      "line_number": 341,
+      "context": "[styles.noMargin]: noMargin,\n })}\n >\n <div className={styles.autoPaymentHeader}>\n <Text isBold fontSize=\"16px\">\n {t(\"AutomaticTopUps\")}\n </Text>\n <ToggleButton\n isChecked={isAutomaticPaymentsEnabled}\n onChange={onToggleClick}\n className={styles.toggleButton}",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "key_path": "MigrateNewPlanTitle",
+  "content": "New plan starts, billed from your wallet",
+  "content_en_sha1_hash": "e2bfb8b62b978ffdaf99bbd2485bb61b0e061d4f",
+  "created_at": "2026-06-30T07:32:34.277Z",
+  "updated_at": "2026-06-30T11:38:22.655Z",
+  "comment": {
+    "text": "Dialog title for the second step of the migration process, informing users that the new plan will be charged from their wallet balance.",
+    "is_auto": true,
+    "updated_at": "2026-06-30T07:37:17.791Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "line_number": 305,
+      "context": "</>,\n )}\n \n {renderStep(\n 2,\n t(\"MigrateNewPlanTitle\"),\n <div className={styles.card}>\n {renderRow(\n t(\"MigratePlanLine\", {\n count: newAdmins,\n price: formatFuturePaymentCurrency(futurePricePerAdmin),",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

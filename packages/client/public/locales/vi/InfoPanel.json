@@ -1,8 +1,8 @@
 {
-  "Administration": "Quản lý ",
+  "Administration": "Quản lý",
   "AndMoreLabel": "và  <1>{{count}} hơn thế nữa</1>",
   "Data": "Dữ liệu",
-  "ExpectUsers": "Người dùng được mong chờ ",
+  "ExpectUsers": "Người dùng được mong chờ",
   "FeedLinkWasDeleted": "Liên kết đã bị xóa",
   "FeedLocationLabel": "Thư mục «{{folderTitle}}»",
   "FeedLocationLabelFrom": "từ «{{folderTitle}}»",

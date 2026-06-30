@@ -5,6 +5,6 @@
   "Ready": "Effectué",
   "RetryAfterQuotaUpgrade": "Réessayer après la mise à niveau du quota",
   "RetryUpload": "Réessayer",
-  "UploadingAndConversion": "Téléversement et conversion",
-  "UploadingError": "Erreur de téléversement"
+  "UploadingAndConversion": "Téléchargement et conversion",
+  "UploadingError": "Erreur de téléchargement"
 }

@@ -3,7 +3,7 @@
   "content": "Create a new agent",
   "content_en_sha1_hash": "e02d71d126c05b100799deb5bc50df3c5e7033e3",
   "created_at": "2025-10-27T16:14:30.946Z",
-  "updated_at": "2026-06-25T19:31:02.862Z",
+  "updated_at": "2026-06-30T10:18:29.510Z",
   "comment": {
     "text": "This is the label for a button that creates a new AI agent.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 405,
+      "line_number": 413,
       "context": "onClick: actions.onCreateRoom,\n disabled: false,\n };\n \n const createAIAgent = {\n title: t(\"Common:CreateNewAIAgent\"),\n description: t(\"Common:CreateAIAgentDescription\", {\n aiAgent: t(\"Common:AIAgent\"),\n }),\n icon: <CreateAIAgentIcon />,\n key: \"create-ai-agent\",",
       "module": "/packages/client"
     },

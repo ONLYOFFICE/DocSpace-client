@@ -1,0 +1,29 @@
+{
+  "key_path": "AvailableCreditsInsufficient",
+  "content": "Available credits: <1>{{balance}}</1> | Insufficient funds",
+  "content_en_sha1_hash": "55d9811b6bac2084f7cbe9a3267fe39f234e7bbb",
+  "created_at": "2026-06-30T07:32:26.313Z",
+  "updated_at": "2026-06-30T07:43:03.603Z",
+  "comment": {
+    "text": "Status label in the wallet info component shown when funds are inadequate, featuring the current balance via {{balance}} inside <1> tags.",
+    "is_auto": true,
+    "updated_at": "2026-06-30T07:43:03.603Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/WalletInfo.tsx",
+      "line_number": 75,
+      "context": "} = props;\n const t = useCommonTranslation();\n const { isPayer } = usePaymentStore();\n \n const keyProp = isBalanceInsufficient\n ? { tKey: \"AvailableCreditsInsufficient\" }\n : { tKey: \"AvailableCreditsAmount\" };\n \n return (\n <div\n className={classNames(styles.walletInfoContainer, {",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

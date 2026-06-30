@@ -1,0 +1,29 @@
+{
+  "key_path": "PaymentDelayActive",
+  "content": "Payment delay is activated",
+  "content_en_sha1_hash": "2f9bee0cfcd1e4de7ff61e4ec01a05dad37bbc6d",
+  "created_at": "2026-06-30T07:32:36.136Z",
+  "updated_at": "2026-06-30T07:35:10.327Z",
+  "comment": {
+    "text": "Status label in the billing container that appears when a payment grace period has been triggered.",
+    "is_auto": true,
+    "updated_at": "2026-06-30T07:35:10.327Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
+      "line_number": 240,
+      "context": "fontSize=\"16px\"\n isBold\n className={styles.paymentInfoGracePeriod}\n color=\"var(--settings-payment-warning-color)\"\n >\n {t(\"PaymentDelayActive\")}\n </Text>\n );\n }\n };",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

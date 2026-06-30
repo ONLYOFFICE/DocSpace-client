@@ -20,7 +20,7 @@
   "AuthorizeLink": "Autorizovať odkaz",
   "BasicInfo": "Základné informácie",
   "Client": "Klient",
-  "ClientCopy": "ID klienta úspešne skopírované do schránky ",
+  "ClientCopy": "ID klienta úspešne skopírované do schránky",
   "ClientHelpButton": "Oprávnenia na používanie OAuth 2.0 ako vášho spôsobu autorizácie. <br/> <strong> Poznámka: </strong> Každý firemný administrátor, ktorý pozná ID klienta aplikácie, bude môcť získať informácie o aplikácii vrátane názvu aplikácie, spôsobu autorizácie, rozsahu aplikácie a URI presmerovania.",
   "ClientSecretResetSuccessfully": "Klientsky tajný kód bol úspešne obnovený",
   "CodeVerifier": "Overovač kódu",
@@ -56,7 +56,7 @@
   "OAuthAppDescription": "Použite OAuth 2.0 na prístup k {{organizationName}} {{productName}} API na autorizáciu a ďalšie úkony, ako je prístup k súborom atď. Tu môžete zaregistrovať novú aplikáciu, spravovať svoje vytvorené aplikácie v zozname, deaktivovať alebo aktivovať ich.",
   "OAuthHeaderBlock": "Adresy URL OAuth",
   "PrivacyPolicy": "Zásady ochrany osobných údajov",
-  "PrivacyPolicyURL": "URL adresa pre Zásady ochrany osobných údajov ",
+  "PrivacyPolicyURL": "URL adresa pre Zásady ochrany osobných údajov",
   "PrivacyPolicyURLHelpButton": "Uveďte URL odkaz na vaše Zásady ochrany osobných údajov, ktoré musia byť v súlade s platnými zákonmi a predpismi a ktoré objasňujú, ako zhromažďujete, používate, zdieľate, uchovávate a inak spracúvate osobné údaje.",
   "ProfileDescription": "Tu môžete skontrolovať informácie o aplikáciách, ktorým ste udelili autorizačný prístup, a v prípade potreby súhlas odvolať.",
   "Read": "Čítať",
@@ -86,6 +86,6 @@
   "TermsOfServiceURLHelpButton": "Všeobecné podmienky, ktoré musia používatelia dodržiavať pri používaní tejto aplikácie.",
   "Token": "Token",
   "TokenRevokedSuccessfully": "Token bol úspešne odvolaný",
-  "WebsiteUrl": "URL adresa webových stránok ",
+  "WebsiteUrl": "URL adresa webových stránok",
   "Write": "Napísať"
 }

@@ -6,7 +6,7 @@
   "ErrorPassword": "Passwort erfüllt Anforderungen nicht",
   "ErrorUploadLicenseFile": "Bitte Lizenzdatei auswählen",
   "License": "Akzeptieren",
-  "LicenseLink": "Lizenzvereinbarung ",
+  "LicenseLink": "Lizenzvereinbarung",
   "PlaceholderLicense": "Ihre Lizenzdatei",
   "Timezone": "Zeitzone:",
   "WelcomeTitle": "Willkommen auf Ihrem {{productName}}!"

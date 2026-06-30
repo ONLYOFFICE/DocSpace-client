@@ -14,7 +14,7 @@
   "RecoverTextBody": "Si vous ne pouvez pas vous connecter avec votre compte existant ou que vous souhaitez en créer un nouveau, merci de contacter l'administrateur du portail.",
   "Register": "Inscription",
   "RegisterTextBodyAfterDomainsList": "Pour vous inscrire, merci de saisir votre adresse e-mail et de cliquer sur Envoyer une demande. Un message avec un lien pour activer votre compte sera envoyé à cette adresse.",
-  "RegisterTextBodyBeforeDomainsList": "L'inscription est accessible aux utilisateurs avec une adresse de messagerie à ",
+  "RegisterTextBodyBeforeDomainsList": "L'inscription est accessible aux utilisateurs avec une adresse de messagerie à",
   "RegisterTitle": "Demande d'inscription",
   "RegistrationEmailWatermark": "Adresse de courriel",
   "RememberHelper": "Par défaut, la durée de validité de la session est de 20 minutes. Cochez cette option pour la définir sur 1 an. Vous pouvez définir votre propre valeur en accédant aux paramètres.",

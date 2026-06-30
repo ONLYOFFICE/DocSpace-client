@@ -17,7 +17,7 @@
   "RoomQuotaHeaderLimit": "Достигнут лимит количества комнат: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Лимит объема хранилища и количества комнат скоро будет превышен",
   "StorageAndRoomLimitHeader": "Достигнут лимит объема хранилища и количества комнат",
-  "StorageAndUserHeader": "Объем дискового пространства и количество администраторов скоро будут превышены ",
+  "StorageAndUserHeader": "Объем дискового пространства и количество администраторов скоро будут превышены",
   "StorageAndUserTariffLimitHeader": "Достигнут лимит объема хранилища и количества администраторов",
   "StorageLimitHeader": "Достигнут лимит объема хранилища: {{currentValue}} / {{maxValue}}",
   "StorageQuotaHeader": "Объем дискового пространства скоро будет превышен: {{currentValue}} / {{maxValue}}",

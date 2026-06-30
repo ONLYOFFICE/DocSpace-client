@@ -3,7 +3,7 @@
   "content": "Here you'll find files and folders that other {{productName}} members shared with you. Your own files and room content are not shown here.",
   "content_en_sha1_hash": "2aef8b08e9d492f61ad3f0f7c19cf8ea28f3e27a",
   "created_at": "2026-05-19T19:03:15.595Z",
-  "updated_at": "2026-05-24T17:27:49.061Z",
+  "updated_at": "2026-06-30T10:18:29.514Z",
   "comment": {
     "text": "Placeholder text shown in an empty view when the \"Shared\" folder contains no items. It includes the {{productName}} variable representing the product's brand name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 300,
+      "line_number": 349,
       "context": "))\n .with([FolderType.USER, P.when(() => security?.Create)], () =>\n t(\"Common:DefaultFolderDescription\"),\n )\n .with([FolderType.SHARE, P._], () =>\n t(\"Common:EmptyShareDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n )\n .with([FolderType.Recent, P._], () => t(\"Common:EmptyRecentDescription\"))\n .with([FolderType.Favorites, P._], () =>",
       "module": "/packages/client"
     },

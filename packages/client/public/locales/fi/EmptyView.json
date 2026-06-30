@@ -1,6 +1,6 @@
 {
   "CollaborationRoomEmptyTitle": "Tervetuloa yhteistyöhuoneseen",
-  "CollaboratorEmptyTitle": "Huone on tyhjä. ",
+  "CollaboratorEmptyTitle": "Huone on tyhjä.",
   "CreateDocument": "Luo uusi asiakirja",
   "CreateDocumentDescription": "Hyödynnä laaja tekstinkäsittelytoiminto.",
   "CreateForm": "Luo uusi PDF-lomake",
@@ -27,7 +27,7 @@
   "FormFolderDefaultUserDescription": "Pääkäyttäjien lataamat lomakkeet ilmestyvät tänne.",
   "FormFolderDefaultUserTitle": "Tässä kansiossa ei ole vielä lomakkeita",
   "FormRoomEmptyTitle": "Tervetuloa Lomakkeen täyttöhuoneeseen",
-  "InviteNewUsers": "Kutsu uusia käyttäjiä ",
+  "InviteNewUsers": "Kutsu uusia käyttäjiä",
   "InviteRootRoomDescription": "Lähetä kutsu lisätäksesi uusia jäseniä {{productName}}",
   "InviteUsersOptionDescription": "Lisää jäseniä huoneeseen yhteistä muokkausta varten",
   "ManageAccess": "Hallitse pääsyä",

@@ -17,7 +17,7 @@
   "idpCertificatesTooltip": "Certificatele publice ale furnizorului de identitate care sunt utilizate fie pentru verificarea, fie pentru decriptarea (sau ambele) solicitărilor şi răspunsurilor de la furnizorul de identitate.",
   "IdpEntityId": "ID-ul de entitate al furnizorului de identitate (IdP)",
   "idpSignExitRequest": "Verificarea semnăturii solicitărilor de deconectare",
-  "idpSigningAlgorithm": "Algoritm implicit de verificare a semnături ",
+  "idpSigningAlgorithm": "Algoritm implicit de verificare a semnături",
   "idpSignResponseRequest": "Verificarea semnăturii răspunsului de deconectare",
   "LogoutEndpointUrl": "URL punct final de deconectare unică al furnizorului de identitate (IdP)",
   "LogoutEndpointUrlTooltip": "Adresa URL utilizată pentru deconectarea unică pe partea de furnizor de serviciu",

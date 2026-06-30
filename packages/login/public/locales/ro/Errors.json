@@ -3,7 +3,7 @@
   "ErrorExpiredActivationLink": "Link-ul a expirat",
   "ErrorInvalidActivationLink": "Link-ul de activare invalid",
   "ErrorNotAllowedOption": "Planul tarifar al dvs nu include această opțiune",
-  "ErrorUserNotFound": "Imposibil de găsit utilizatorul ",
+  "ErrorUserNotFound": "Imposibil de găsit utilizatorul",
   "InvalidUsernameOrPassword": "Nume de utilizator sau parolă incorectă.",
   "LoginWithAccountNotFound": "Imposibil de găsit contul asociat de la terți Mai întâi, trebuie să conectați contul dvs din reţelele sociale pe pagina de editare profil.",
   "LoginWithBruteForce": "Autorizarea este temporar blocată",

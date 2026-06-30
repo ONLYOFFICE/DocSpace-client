@@ -1,0 +1,29 @@
+{
+  "key_path": "MigratePlanLine",
+  "content": "Admins: {{count}} × {{price}}",
+  "content_en_sha1_hash": "d8005c51017229fa6ef9bc3167c30c679255fe67",
+  "created_at": "2026-06-30T07:32:34.313Z",
+  "updated_at": "2026-06-30T11:38:22.655Z",
+  "comment": {
+    "text": "Line item in the migration dialog showing a cost calculation, where {{count}} represents the number of admins and {{price}} is the unit price.",
+    "is_auto": true,
+    "updated_at": "2026-06-30T07:36:26.161Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "line_number": 308,
+      "context": "{renderStep(\n 2,\n t(\"MigrateNewPlanTitle\"),\n <div className={styles.card}>\n {renderRow(\n t(\"MigratePlanLine\", {\n count: newAdmins,\n price: formatFuturePaymentCurrency(futurePricePerAdmin),\n }),\n t(\"MigratePerMonth\", {\n price: formatFuturePaymentCurrency(newSubscriptionAmount),",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

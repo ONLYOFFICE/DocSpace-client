@@ -5,7 +5,7 @@
   "GroupMaxAvailableRoleWarning": "يمكن إضافة المجموعات إلى غرفة مع وظيفة {{roleName}} كحد أقصى. ومع ذلك، يمكنك تغيير وظائف المستخدمين الفرديين في المجموعة بعد إضافتها بنجاح.",
   "GuestAgentMaxAvailableRoleWarning": "لا يمكن تعيين الضيوف كمنشئي محتوى.\nفقط مسؤولي الغرفة ومسؤولي {{productName}} والمستخدمين مؤهلون لهذا الدور.",
   "InvitationLanguage": "لغة الدعوة",
-  "InviteMembersManuallyDescription": " قم بدعوة أعضاء جدد إلى {{productName}} شخصيًا عبر البريد الإلكتروني",
+  "InviteMembersManuallyDescription": "قم بدعوة أعضاء جدد إلى {{productName}} شخصيًا عبر البريد الإلكتروني",
   "InviteMembersSearchPlaceholder": "دعوة الأعضاء عن طريق البريد الإلكتروني",
   "InviteToRoomAddPlaceholder": "أضف الأشخاص حسب الاسم أو البريد الإلكتروني",
   "InviteToRoomManuallyInfoGuest": "أضف جهات اتصال {{productName}} الموجودة. أو قم بدعوة مستخدمين جدد شخصيًا عبر البريد الإلكتروني. سيتم إضافة مستخدمين جدد إلى قائمة ضيوفك.",

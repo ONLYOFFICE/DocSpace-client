@@ -3,7 +3,7 @@
   "content": "Some users have already been added",
   "content_en_sha1_hash": "11ba705efbb4050c93a4d4827ad25f4eb90bb39d",
   "created_at": "2025-05-19T21:30:54.741Z",
-  "updated_at": "2026-05-28T15:46:18.505Z",
+  "updated_at": "2026-06-30T07:32:49.105Z",
   "comment": {
     "text": "This is a toast message that appears when a user attempts to add individuals who are already members of a group or have already been invited.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/Item.js",
-      "line_number": 273,
+      "line_number": 274,
       "context": "const saveEdit = async () => {\n if (searchRequestRunning) return;\n \n if (isSharedUser) {\n return toastr.warning(t(\"UsersAlreadyAdded\"));\n }\n \n const value = inputValue === \"\" ? name : inputValue;\n \n setEdit(false);",
       "module": "/packages/client"
     },

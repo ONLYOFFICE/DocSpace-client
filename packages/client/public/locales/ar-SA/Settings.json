@@ -251,7 +251,7 @@
   "ResetToDefault": "إعادة تعيين إلى الافتراضي",
   "RestAPI": "REST API",
   "RestAPIDescription": "أنشئ منصة الإنتاجية الخاصة بك بناءً على {{organizationName}} {{productName}} وتعاون على المستندات مع الفرق والعملاء والشركاء.",
-  "RestoreToDefault": "العودة إلى الإعدادات الإفتراضية ",
+  "RestoreToDefault": "العودة إلى الإعدادات الإفتراضية",
   "RolesAreSet": "الأدوار التي تم تعيينها بالفعل للمستخدمين المحددين.",
   "RoomQuotaDisabled": "تم تعطيل حصة الغرفة بنجاح.",
   "RoomQuotaEnabled": "تم تفعيل حصة الغرفة بنجاح.",

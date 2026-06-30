@@ -1,7 +1,7 @@
 {
   "LdapAddCertificateToStoreConfirmation": "이 인증서를 인증서 저장소에 추가하고 사용자 가져오기를 계속 하시겠습니까?",
   "LdapAdvancedSettings": "고급 설정",
-  "LdapAdvancedSettingsTooltip": "LDAP 서버와 동기화하려는 사용자 속성을 선택합니다. ",
+  "LdapAdvancedSettingsTooltip": "LDAP 서버와 동기화하려는 사용자 속성을 선택합니다.",
   "LdapAttributeMapping": "속성 매핑",
   "LdapAuthenticationTooltip": "현재 사용자에게 LDAP 서버에서 읽을 권한이 없는 경우 이 옵션을 활성화하고, 읽기 권한이 있는 다른 사용자의 자격 증명을 입력하세요.",
   "LdapAutoSyncToggle": "자동 동기화",
@@ -69,7 +69,7 @@
   "LdapUserDNTooltip": "추가하려는 사용자가 포함된 디렉토리의 고유 이름을 입력하세요.",
   "LdapUserFilter": "사용자 필터",
   "LdapUserFilterTooltip": "검색 LDAP 필터를 사용하여 가져오기 해야 하는 사용자를 선택하세요.",
-  "LdapUserQuotaTooltip": "사용자에 대한 스토리지 할당량을 설정하려면 LDAP 디렉토리에 속성을 추가하고(예: UsersQuotaLimit) 이 속성에 대한 정수 값을 입력하세요. 할당량이 바이트 단위로 표시됩니다. 여기에서 속성 이름만 지정하세요. 이 속성은 첫 번째 설정 중에만 적용되며 나중에 {{contactsName}} 섹션에서 수동으로 변경할 수 있습니다. ",
+  "LdapUserQuotaTooltip": "사용자에 대한 스토리지 할당량을 설정하려면 LDAP 디렉토리에 속성을 추가하고(예: UsersQuotaLimit) 이 속성에 대한 정수 값을 입력하세요. 할당량이 바이트 단위로 표시됩니다. 여기에서 속성 이름만 지정하세요. 이 속성은 첫 번째 설정 중에만 적용되며 나중에 {{contactsName}} 섹션에서 수동으로 변경할 수 있습니다.",
   "LdapUsersType": "사용자 유형",
   "LdapUserTypeTooltip": "모든 사용자가 선택한 유형으로 {{productName}}에 추가됩니다."
 }

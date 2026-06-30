@@ -78,7 +78,7 @@
   "HistoryEmptyScreenText": "Toimintahistoria näytetään tässä",
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> huone kopioitu",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> huone luotu",
-  "HistoryThirdParty": "Historian näyttö ei ole saatavilla julkisiin huoneisiin, jotka ovat yhteydessä kolmansien osapuolien muisteihin. ",
+  "HistoryThirdParty": "Historian näyttö ei ole saatavilla julkisiin huoneisiin, jotka ovat yhteydessä kolmansien osapuolien muisteihin.",
   "IndexChanged": "Hakemisto muutettu",
   "ItemsSelected": "Valitut kohteet",
   "LastModifiedBy": "Viimeksi muokannut",

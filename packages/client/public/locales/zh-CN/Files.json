@@ -25,7 +25,7 @@
   "AppointNewOwner": "您已指定一个新的所有者。",
   "ArchiveAction": "清空存档",
   "ArchivedRoomsAction": "房间已存档",
-  "ArchiveEmptyScreen": " 您可以随时存档不使用的房间并在{{productName}}中恢复它们，也可以永久删除它们。这些房间将显示在此处。",
+  "ArchiveEmptyScreen": "您可以随时存档不使用的房间并在{{productName}}中恢复它们，也可以永久删除它们。这些房间将显示在此处。",
   "ArchiveEmptyScreenHeader": "暂无已存档房间",
   "ArchiveEmptyScreenUser": "已存档房间将出现在此处。",
   "AreYouSureWantLeaveRoom": "您确定要离开此房间吗？",

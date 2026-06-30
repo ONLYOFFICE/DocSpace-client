@@ -76,7 +76,7 @@
   "GuestsEmptyScreenText": "ゲストの詳細はこちらでご確認いただけます",
   "HistoryAgentCreated": "<1>«{{roomTitle}}»</1>用エージェントが作成されました",
   "HistoryEmptyScreenText": "アクティビティ履歴はこちらに表示されます",
-  "HistoryRoomCopied": "<1>「{{roomTitle}}」</1>ルームがコピーされました ",
+  "HistoryRoomCopied": "<1>「{{roomTitle}}」</1>ルームがコピーされました",
   "HistoryRoomCreated": "<1>「{{roomTitle}}」</1>ルームが作成されました。",
   "HistoryThirdParty": "サードパーティストレージが接続されているパブリックルームでは、履歴表示は利用できません。",
   "IndexChanged": "インデックスの変更",

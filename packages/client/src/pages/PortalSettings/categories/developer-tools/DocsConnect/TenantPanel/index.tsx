@@ -91,7 +91,7 @@ const TenantPanel = ({
     },
     {
       key: "edit-plan",
-      label: t("DocsConnect:EditPlan"),
+      label: t("Common:EditPlan"),
       icon: SettingsReactSvgUrl,
       onClick: () => openBuyPlan?.("edit"),
     },

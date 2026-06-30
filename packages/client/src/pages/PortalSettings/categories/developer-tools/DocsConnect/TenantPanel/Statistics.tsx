@@ -248,7 +248,8 @@ const Statistics = ({
   const currency = wallet?.currency ?? "USD";
   const { devPackEnabled } = info;
   const pricePerUser =
-    (prices?.pricePerUser ?? 0) + (devPackEnabled ? (prices?.devPackPrice ?? 0) : 0);
+    (prices?.pricePerUser ?? 0) +
+    (devPackEnabled ? (prices?.devPackPrice ?? 0) : 0);
   const planUsers = tenant.payment?.quantity ?? 0;
   const monthlyCharge = planUsers * pricePerUser;
 
@@ -341,7 +342,9 @@ const Statistics = ({
             <div className={styles.detailRows}>
               <div className={styles.detailRow}>
                 <Text className={styles.muted}>{t("Common:Start")}</Text>
-                <Text fontWeight={600}>{formatDocsConnectDate(trialStart)}</Text>
+                <Text fontWeight={600}>
+                  {formatDocsConnectDate(trialStart)}
+                </Text>
               </div>
               <div className={styles.detailRow}>
                 <Text className={styles.muted}>{t("Common:ValidUntil")}</Text>
@@ -377,7 +380,7 @@ const Statistics = ({
                 fontWeight={600}
                 onClick={() => openBuyPlan?.("edit")}
               >
-                {t("DocsConnect:EditPlan")}
+                {t("Common:EditPlan")}
               </Link>
             </div>
             <div className={styles.detailRows}>
@@ -411,7 +414,7 @@ const Statistics = ({
               </div>
               <div className={styles.detailRow}>
                 <Text className={styles.muted}>
-                  {t("DocsConnect:MonthlyCharge")}
+                  {t("Common:MonthlyCharge")}
                 </Text>
                 <Text fontWeight={600}>
                   {formatCurrencyValue(

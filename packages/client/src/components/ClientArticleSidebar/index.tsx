@@ -127,7 +127,7 @@ const ClientArticleSidebar = ({
     <T,>(appId: AppId, run: (item: T) => void) =>
       (item: T) => {
         promoNavRef.current = () => run(item);
-        if (maybeShowPromo(appId)) return;
+        if (maybeShowPromo(appId)) return false;
         run(item);
       },
     [maybeShowPromo],
@@ -136,20 +136,19 @@ const ClientArticleSidebar = ({
   // Agent-scoped Recent/Favorites/Trash: same alias data, routed under
   // /ai-agents/* so the sidebar keeps the selection under AI Agents.
   const goFolderAgent = React.useCallback(
-    (folderId: number, rootFolderType: TTreeFolder["rootFolderType"]) =>
-      () => {
-        onFolderNavigateRef.current?.();
-        navigate(
-          buildFolderUrl(
-            folderId,
-            rootFolderType,
-            userId,
-            myFolderId,
-            true,
-            aiAgentsFolderId,
-          ),
-        );
-      },
+    (folderId: number, rootFolderType: TTreeFolder["rootFolderType"]) => () => {
+      onFolderNavigateRef.current?.();
+      navigate(
+        buildFolderUrl(
+          folderId,
+          rootFolderType,
+          userId,
+          myFolderId,
+          true,
+          aiAgentsFolderId,
+        ),
+      );
+    },
     [navigate, userId, myFolderId, aiAgentsFolderId],
   );
 

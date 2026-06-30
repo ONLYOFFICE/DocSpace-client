@@ -3,7 +3,7 @@
   "content": "An unexpected error occurred. Try again later or contact support.",
   "content_en_sha1_hash": "25ad5a8afd50db67da636bee026c36dbe54b15d6",
   "created_at": "2025-05-19T21:30:49.388Z",
-  "updated_at": "2026-06-30T11:38:22.582Z",
+  "updated_at": "2026-06-30T15:41:51.737Z",
   "comment": {
     "text": "This is an error message that appears as a toast notification when an unexpected issue occurs, for example, when trying to update a tariff plan or link a payment card.",
     "is_auto": true,
@@ -163,19 +163,19 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1177,
+      "line_number": 1178,
       "context": "try {\n await Promise.all(requests);\n this.setRangeStepByQuota();\n this.setBasicTariffContainer();\n } catch (error) {\n toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n return;\n }\n \n this.setIsInitPaymentPage(true);",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1177,
+      "line_number": 1178,
       "context": "try {\n await Promise.all(requests);\n this.setRangeStepByQuota();\n this.setBasicTariffContainer();\n } catch (error) {\n toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n return;\n }\n \n this.setIsInitPaymentPage(true);",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1177,
+      "line_number": 1178,
       "context": "try {\n await Promise.all(requests);\n this.setRangeStepByQuota();\n this.setBasicTariffContainer();\n } catch (error) {\n toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n return;\n }\n \n this.setIsInitPaymentPage(true);",
       "module": "/libs/ui-kit"
     },

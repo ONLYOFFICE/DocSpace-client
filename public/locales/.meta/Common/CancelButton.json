@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2026-06-30T11:38:22.556Z",
+  "updated_at": "2026-06-30T15:41:51.710Z",
   "comment": {
     "text": "This is the label for a button that dismisses a dialog or cancels an action, such as deleting a chat, renaming a chat, or adding an attachment.",
     "is_auto": true,
@@ -61,13 +61,13 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
-      "line_number": 258,
+      "line_number": 226,
       "context": "onClick={onConfirm}\n testId=\"price_details_pay_button\"\n />\n <Button\n key=\"cancel\"\n label={t(\"CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n testId=\"price_details_cancel_button\"\n />",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
-      "line_number": 392,
+      "line_number": 325,
       "context": "scale\n onClick={onUpdateTariff}\n testId=\"confirm_payment_button\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n testId=\"cancel_payment_button\"",
       "module": "/libs/ui-kit"
     },

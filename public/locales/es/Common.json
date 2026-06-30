@@ -1427,7 +1427,7 @@
   "MigrateRefundToWallet": "Reembolso al monedero",
   "MigrateStep1Title": "La facturación a través de Stripe finaliza hoy",
   "MigrateUnusedValueRefund": "Reembolso del valor no utilizado",
-  "MigrateWalletCurrencyNote": "Los reembolsos se abonan en su monedero en {{currency}}.",
+  "MigrateWalletCurrencyNote": "Los créditos del monedero se almacenan y utilizan en {{currency}}",
   "MinCurrency": "min {{currency}}",
   "MobileAndroid": "Obtener {{organizationName}} Documents en el Google Play",
   "MobileEditPdfNotAvailableInfo": "Acción no admitida. Cambie al modo de escritorio para poder editar archivos PDF o crear formularios PDF.",

@@ -1413,7 +1413,7 @@
   "MigrateRefundToWallet": "Възстановяване към портфейла",
   "MigrateStep1Title": "Фактурирането чрез Stripe спира днес",
   "MigrateUnusedValueRefund": "Възстановяване на неизползваната сума",
-  "MigrateWalletCurrencyNote": "Възстановените суми се начисляват в портфейла ви в {{currency}}.",
+  "MigrateWalletCurrencyNote": "Кредитите в портфейла се съхраняват и използват в {{currency}}",
   "MinCurrency": "мин {{currency}}",
   "MobileAndroid": "Вземете {{organizationName}} Documents в Google Play",
   "MobileEditPdfNotAvailableInfo": "Неподдържано действие. Моля, превключете на настолен режим, за да можете да редактирате PDF файлове и да създавате PDF формуляри.",

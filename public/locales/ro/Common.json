@@ -1427,7 +1427,7 @@
   "MigrateRefundToWallet": "Rambursare în portofel",
   "MigrateStep1Title": "Facturarea prin Stripe se oprește astăzi",
   "MigrateUnusedValueRefund": "Rambursarea valorii neutilizate",
-  "MigrateWalletCurrencyNote": "Rambursările sunt creditate în portofelul dvs. în {{currency}}.",
+  "MigrateWalletCurrencyNote": "Creditele din portofel sunt stocate și utilizate în {{currency}}",
   "MinCurrency": "{{currency}} min",
   "MobileAndroid": "Descarcă {{organizationName}} Documents din Google Play",
   "MobileEditPdfNotAvailableInfo": "Acțiunea nu este acceptată. Treceți la modul desktop pentru a putea modifica fișiere PDF sau crea formulare PDF.",

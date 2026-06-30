@@ -1413,7 +1413,7 @@
   "MigrateRefundToWallet": "Reembolso para a carteira",
   "MigrateStep1Title": "A faturação via Stripe termina hoje",
   "MigrateUnusedValueRefund": "Reembolso do valor não utilizado",
-  "MigrateWalletCurrencyNote": "Os reembolsos são creditados na sua carteira em {{currency}}.",
+  "MigrateWalletCurrencyNote": "Os créditos da carteira são armazenados e utilizados em {{currency}}",
   "MinCurrency": "min {{currency}}",
   "MobileAndroid": "Obtenha o {{organizationName}} Documents na Google Play",
   "MobileEditPdfNotAvailableInfo": "Ação sem suporte. Mude para o modo desktop para poder editar PDFs ou criar formulários PDF.",

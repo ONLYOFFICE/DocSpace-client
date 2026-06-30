@@ -1391,7 +1391,7 @@
   "MigrateRefundToWallet": "Vrátiť do peňaženky",
   "MigrateStep1Title": "Fakturácia cez Stripe sa dnes končí",
   "MigrateUnusedValueRefund": "Vrátenie nevyužitej sumy",
-  "MigrateWalletCurrencyNote": "Vrátené sumy sa pripisujú do vašej peňaženky v mene {{currency}}.",
+  "MigrateWalletCurrencyNote": "Kredity v peňaženke sa ukladajú a používajú v {{currency}}",
   "MinCurrency": "min {{currency}}",
   "MobileAndroid": "Stiahnite si {{organizationName}} Documents na Google Play",
   "MobileEditPdfNotAvailableInfo": "Nepodporovaná akcia. Prepnite sa do režimu pracovnej plochy, aby ste mohli upravovať súbory PDF alebo vytvárať PDF formuláre.",

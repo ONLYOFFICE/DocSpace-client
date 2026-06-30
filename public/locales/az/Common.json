@@ -1413,7 +1413,7 @@
   "MigrateRefundToWallet": "Cüzdana qaytarılma",
   "MigrateStep1Title": "Stripe vasitəsilə fakturalaşdırma bu gün dayanır",
   "MigrateUnusedValueRefund": "İstifadə olunmamış məbləğin qaytarılması",
-  "MigrateWalletCurrencyNote": "Geri ödəmələr cüzdanınıza {{currency}} valyutasında köçürülür.",
+  "MigrateWalletCurrencyNote": "Cüzdan kreditləri {{currency}} ilə saxlanılır və istifadə olunur",
   "MinCurrency": "min {{currency}}",
   "MobileAndroid": "Google Play-dən {{organizationName}} Sənədlərini əldə edin",
   "MobileEditPdfNotAvailableInfo": "Dəstəklənməyən əməliyyat. Lütfən, PDF sənədlərini redaktə edə və ya PDF formaları yarada bilmək üçün iş masası rejiminə keçin.",

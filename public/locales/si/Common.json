@@ -1413,7 +1413,7 @@
   "MigrateRefundToWallet": "පසුම්බියට ආපසු ගෙවීම",
   "MigrateStep1Title": "Stripe හරහා බිල්පත්කරණය අද දින නවතී",
   "MigrateUnusedValueRefund": "භාවිත නොකළ වටිනාකම ආපසු ගෙවීම",
-  "MigrateWalletCurrencyNote": "ආපසු ගෙවීම් ඔබගේ පසුම්බියට {{currency}} මුදලින් බැර කෙරේ.",
+  "MigrateWalletCurrencyNote": "පසුම්බියේ ණය {{currency}} වලින් ගබඩා කර භාවිත කෙරේ",
   "MinCurrency": "{{currency}} මීටරයක්",
   "MobileAndroid": "Google Play හි {{organizationName}} ලේඛන ලබා ගන්න",
   "MobileEditPdfNotAvailableInfo": "මෙවැනි ක්‍රියාවලියකට අපි සහායෝගය දක්වන්නේ නැත. PDF සංස්කරණය කිරීමට හෝ PDF ආකෘති නිර්මාණය කිරීමට නම් කරුණාකර ඩෙස්ක්ටොප් මාදිලියට (desktop mode) මාරු වන්න.",

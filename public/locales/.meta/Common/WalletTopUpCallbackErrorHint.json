@@ -3,7 +3,7 @@
   "content": "Your card was saved successfully. Please try topping up your wallet again.",
   "content_en_sha1_hash": "880bce25507dd94c1ef8a1de290335a07b434069",
   "created_at": "2026-06-02T15:02:53.683Z",
-  "updated_at": "2026-06-25T11:55:07.216Z",
+  "updated_at": "2026-06-30T07:32:49.213Z",
   "comment": {
     "text": "Error text displayed on the AI paywall completion page when a wallet top-up fails after a card has been successfully saved.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
-      "line_number": 386,
+      "line_number": 448,
       "context": ": t(\"AIPaywallCallbackError\")}\n </Text>\n \n <Text fontSize=\"13px\" lineHeight=\"18px\">\n {isWalletOnly\n ? t(\"WalletTopUpCallbackErrorHint\")\n : t(\"AIPaywallCallbackErrorHint\")}\n </Text>\n </div>\n \n <div className={styles.actions}>",
       "module": "/libs/ui-kit"
     }

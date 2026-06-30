@@ -1,0 +1,29 @@
+{
+  "key_path": "MigrateAgree",
+  "content": "I understand and agree to switch my billing to the {{organizationName}} wallet",
+  "content_en_sha1_hash": "e919aa4404c23448cb2dd7b8b6b9f4ec9663ea6e",
+  "created_at": "2026-06-30T07:32:34.175Z",
+  "updated_at": "2026-06-30T07:40:08.854Z",
+  "comment": {
+    "text": "Checkbox label in a migration dialog used to confirm agreement to switch billing; includes the {{organizationName}} variable representing the target organization's name.",
+    "is_auto": true,
+    "updated_at": "2026-06-30T07:40:08.854Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "line_number": 329,
+      "context": "<ModalDialog.Footer>\n <div className={styles.footer}>\n <Checkbox\n isChecked={isAgreed}\n onChange={() => setIsAgreed((v) => !v)}\n label={t(\"MigrateAgree\", { organizationName })}\n dataTestId=\"migrate_to_wallet_agree_checkbox\"\n />\n <div className={styles.footerButtons}>\n <Button\n key=\"confirm\"",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

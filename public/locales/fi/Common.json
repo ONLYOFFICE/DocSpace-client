@@ -929,6 +929,8 @@
   "MigratePlanLine": "Ylläpitäjät: {{count}} × {{price}}",
   "MigrateRefundToWallet": "Hyvitys lompakkoon",
   "MigrateStep1Title": "Laskutus Stripen kautta päättyy tänään",
+  "MigrateUnusedValueRefund": "Käyttämättömän arvon hyvitys",
+  "MigrateWalletCurrencyNote": "Lompakon hyvitykset tallennetaan ja käytetään valuutassa {{currency}}",
   "MinCurrency": "min {{currency}}",
   "MobileAndroid": "Hanki {{organizationName}}-dokumentteja Google Playsta",
   "MobileEditPdfNotAvailableInfo": "Tätä toimintoa ei tueta. Ole hyvä ja vaihda työpöytätilaan voidaksesi muokata tai luoda PDF-lomakkeita.",

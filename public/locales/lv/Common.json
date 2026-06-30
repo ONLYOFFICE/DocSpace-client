@@ -929,6 +929,8 @@
   "MigratePlanLine": "Administratori: {{count}} × {{price}}",
   "MigrateRefundToWallet": "Atmaksa makā",
   "MigrateStep1Title": "Fakturēšana caur Stripe beidzas šodien",
+  "MigrateUnusedValueRefund": "Neizmantotās vērtības atmaksa",
+  "MigrateWalletCurrencyNote": "Maka krediti tiek glabāti un izmantoti valūtā {{currency}}",
   "MinCurrency": "vis mazāk par {{currency}}",
   "MobileAndroid": "Iegūt {{organizationName}} dokumentus pakalpojumā Google Play",
   "MobileEditPdfNotAvailableInfo": "Neatbalstīta darbība. Lai varētu rediģēt PDF failus vai izveidot PDF veidlapas, pārslēdzieties uz darbvirsmas režīmu.",

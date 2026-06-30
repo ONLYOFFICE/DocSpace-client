@@ -929,6 +929,8 @@
   "MigratePlanLine": "Ադմիններ՝ {{count}} × {{price}}",
   "MigrateRefundToWallet": "Վերադարձ դրամապանակ",
   "MigrateStep1Title": "Stripe-ի միջոցով հաշվարկն ավարտվում է այսօր",
+  "MigrateUnusedValueRefund": "Չօգտագործված գումարի վերադարձ",
+  "MigrateWalletCurrencyNote": "Դրամապանակի կրեդիտները պահվում և օգտագործվում են {{currency}}-ով",
   "MinCurrency": "Ընվազագույն {{currency}}",
   "MobileAndroid": "Ստացեք {{organizationName}} փաստաթղթերը Google Play-ում",
   "MobileEditPdfNotAvailableInfo": "Չաջակցվող գործողություն: Խնդրում ենք անցնել համակարգչային ռեժիմին՝ PDF ֆայլերը խմբագրելու կամ PDF ձևաթղթեր ստեղծելու համար:",

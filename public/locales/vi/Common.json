@@ -929,6 +929,8 @@
   "MigratePlanLine": "Quản trị viên: {{count}} × {{price}}",
   "MigrateRefundToWallet": "Hoàn tiền vào ví",
   "MigrateStep1Title": "Thanh toán qua Stripe dừng lại hôm nay",
+  "MigrateUnusedValueRefund": "Hoàn tiền giá trị chưa sử dụng",
+  "MigrateWalletCurrencyNote": "Tín dụng trong ví được lưu trữ và sử dụng bằng {{currency}}",
   "MinCurrency": "Tối thiểu {{currency}}",
   "MobileAndroid": "Nhận {{organizationName}} Documents trên Google Play",
   "MobileEditPdfNotAvailableInfo": "Hành động không được hỗ trợ. Vui lòng chuyển sang chế độ máy tính để có thể chỉnh sửa tập tin PDF hoặc tạo biểu mẫu PDF.",

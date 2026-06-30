@@ -929,6 +929,8 @@
   "MigratePlanLine": "Administrateurs : {{count}} × {{price}}",
   "MigrateRefundToWallet": "Remboursement sur le Wallet",
   "MigrateStep1Title": "La facturation via Stripe s'arrête aujourd'hui",
+  "MigrateUnusedValueRefund": "Remboursement du montant non utilisé",
+  "MigrateWalletCurrencyNote": "Les crédits du Wallet sont stockés et utilisés en {{currency}}",
   "MinCurrency": "min {{currency}}",
   "MobileAndroid": "Télécharger {{organizationName}} Documents sur Google Play",
   "MobileEditPdfNotAvailableInfo": "Action non prise en charge. Veuillez passer en mode desktop pour pouvoir éditer des PDF ou créer des formulaires PDF.",

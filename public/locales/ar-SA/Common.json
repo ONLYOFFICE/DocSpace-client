@@ -929,6 +929,8 @@
   "MigratePlanLine": "المسؤولون: {{count}} × {{price}}",
   "MigrateRefundToWallet": "استرداد إلى المحفظة",
   "MigrateStep1Title": "تتوقف الفوترة عبر Stripe اليوم",
+  "MigrateUnusedValueRefund": "استرداد القيمة غير المستخدمة",
+  "MigrateWalletCurrencyNote": "يتم تخزين أرصدة المحفظة واستخدامها بعملة {{currency}}",
   "MinCurrency": "الحد الأدنى {{currency}}",
   "MobileAndroid": "احصل على {{organizationName}} Documents على Google Play",
   "MobileEditPdfNotAvailableInfo": "إجراء غير معتمد. يرجى التبديل إلى وضع سطح المكتب لتتمكن من تحرير ملفات PDF أو إنشاء نماذج PDF.",

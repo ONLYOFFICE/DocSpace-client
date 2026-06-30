@@ -929,6 +929,8 @@
   "MigratePlanLine": "Beheerders: {{count}} × {{price}}",
   "MigrateRefundToWallet": "Terugbetaling naar portemonnee",
   "MigrateStep1Title": "Facturering via Stripe stopt vandaag",
+  "MigrateUnusedValueRefund": "Terugbetaling van ongebruikt tegoed",
+  "MigrateWalletCurrencyNote": "Wallet-tegoeden worden opgeslagen en gebruikt in {{currency}}",
   "MinCurrency": "min {{currency}}",
   "MobileAndroid": "Download {{organizationName}} Documenten op Google Play",
   "MobileEditPdfNotAvailableInfo": "Niet-ondersteunde handeling. Schakel over naar de desktopmodus om PDF's te bewerken of PDF formulieren te maken.",

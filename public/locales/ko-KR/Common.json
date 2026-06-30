@@ -929,6 +929,8 @@
   "MigratePlanLine": "관리자: {{count}} × {{price}}",
   "MigrateRefundToWallet": "지갑으로 환불",
   "MigrateStep1Title": "오늘 Stripe를 통한 청구가 중단됩니다",
+  "MigrateUnusedValueRefund": "미사용 금액 환불",
+  "MigrateWalletCurrencyNote": "지갑 크레딧은 {{currency}}(으)로 저장 및 사용됩니다",
   "MinCurrency": "최소 {{currency}}",
   "MobileAndroid": "Google Play에서 {{organizationName}} Documents를 받으세요",
   "MobileEditPdfNotAvailableInfo": "지원되지 않는 작업입니다. PDF를 편집하거나 PDF 양식을 만들려면 데스크탑 모드로 전환하세요.",

@@ -929,6 +929,8 @@
   "MigratePlanLine": "Administradores: {{count}} × {{price}}",
   "MigrateRefundToWallet": "Reembolso para a carteira",
   "MigrateStep1Title": "O faturamento via Stripe é encerrado hoje",
+  "MigrateUnusedValueRefund": "Reembolso do valor não utilizado",
+  "MigrateWalletCurrencyNote": "Os créditos da carteira são armazenados e usados em {{currency}}",
   "MinCurrency": "min {{currency}}",
   "MobileAndroid": "Obter {{organizationName}} Documents no Google Play",
   "MobileEditPdfNotAvailableInfo": "Ação sem suporte. Alterne para o modo de área de trabalho para poder editar PDFs ou criar formulários PDF.",

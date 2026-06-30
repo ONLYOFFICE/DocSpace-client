@@ -929,6 +929,8 @@
   "MigratePlanLine": "管理者：{{count}}人 × {{price}}",
   "MigrateRefundToWallet": "ウォレットへの返金",
   "MigrateStep1Title": "本日Stripeによる請求が停止します",
+  "MigrateUnusedValueRefund": "未使用分の返金",
+  "MigrateWalletCurrencyNote": "ウォレットのクレジットは{{currency}}で保存・使用されます",
   "MinCurrency": "{{currency}} の最小値",
   "MobileAndroid": "GooglePlayで{{organizationName}} Documentsを入手する",
   "MobileEditPdfNotAvailableInfo": "サポートされていない操作。PDFを編集したり、PDFフォームを作成したりするには、デスクトップモードに切り替えてください。",

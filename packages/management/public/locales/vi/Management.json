@@ -25,7 +25,7 @@
   "MoreDetails": "Để biết thêm chi tiết về cách dừng các dịch vụ, xin vui lòng tham khảo <1>{{link}} </1> của chúng tôi.",
   "NewSpace": "Không gian mới",
   "NotifyUsers": "Thông báo cho người dùng rằng không gian sẽ không khả dụng",
-  "PortalDeleted": "Đã xóa vĩnh viễn {{productName}} ",
+  "PortalDeleted": "Đã xóa vĩnh viễn {{productName}}",
   "PortalName": "Tên {{productName}}",
   "PortalStats": "Phòng: {{roomCount}} | Người dùng: {{userCount}} | Không gian lưu trữ đã sử dụng: {{storageSpace}}",
   "RestrictAccess": "Hạn chế quyền truy cập vào không gian quản lý",

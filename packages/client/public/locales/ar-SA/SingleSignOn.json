@@ -9,7 +9,7 @@
   "CustomEntryTooltip": "التسمية المستخدمة للزر الذي يُستخدم لتسجيل الدخول إلى المساحة باستخدام خدمة تسجيل الدخول الموحدة",
   "DownloadMetadataXML": "تنزيل ملف XML لبيانات SP",
   "Encryption": "التشفير",
-  "GenerateCertificate": "إنشاء شهادة جديدة موقعة ذاتيًا ",
+  "GenerateCertificate": "إنشاء شهادة جديدة موقعة ذاتيًا",
   "HideAdditionalParameters": "إخفاء الإعدادات المتقدمة",
   "HideAuthPage": "إخفاء صفحة المصادقة",
   "idpAuthRequest": "التحقق من توقيع استجابات المصادقة",

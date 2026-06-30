@@ -1,6 +1,6 @@
 {
-  "InvitationLanguage": "Idioma de la invitación ",
-  "InviteMembersManuallyDescription": "Invitar a nuevos miembros a {{productName}} personalmente por correo electrónico ",
-  "InviteMembersSearchPlaceholder": "Invitar a miembros por correo electrónico ",
+  "InvitationLanguage": "Idioma de la invitación",
+  "InviteMembersManuallyDescription": "Invitar a nuevos miembros a {{productName}} personalmente por correo electrónico",
+  "InviteMembersSearchPlaceholder": "Invitar a miembros por correo electrónico",
   "InviteViaLinkDescriptionAccounts": "Cree un enlace universal para la autorización en {{productName}}"
 }

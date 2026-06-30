@@ -3,7 +3,7 @@
   "content": "Reload page",
   "content_en_sha1_hash": "37614e96d9e32dc327e92508fa0e8ec4ca3d2c51",
   "created_at": "2025-05-19T21:30:47.790Z",
-  "updated_at": "2026-05-15T14:00:06.592Z",
+  "updated_at": "2026-06-30T10:18:29.503Z",
   "comment": {
     "text": "This is a button label that reloads the current page, typically used in error states or when content needs to be refreshed.",
     "is_auto": true,

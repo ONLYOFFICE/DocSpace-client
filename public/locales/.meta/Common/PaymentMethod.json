@@ -3,7 +3,7 @@
   "content": "Payment method",
   "content_en_sha1_hash": "0e55fb3b04e225d83af1a64ec1cedc121fb61c32",
   "created_at": "2026-04-10T13:53:42.955Z",
-  "updated_at": "2026-06-25T19:31:02.993Z",
+  "updated_at": "2026-06-30T10:18:29.599Z",
   "comment": {
     "text": "This is a label for a section or option related to how payments are made. It appears in billing interfaces, such as when managing payment settings or topping up a balance.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/index.js",
-      "line_number": 103,
-      "context": "clearAbortControllerArr();\n },\n },\n !isNotPaidPeriod && {\n id: \"payment-method\",\n name: t(\"Common:PaymentMethod\"),\n content: <PaymentMethod />,\n onClick: () => {\n clearAbortControllerArr();\n },\n },",
+      "line_number": 148,
+      "context": "clearAbortControllerArr();\n },\n },\n !isNotPaidPeriod && {\n id: TAB_IDS.PAYMENT_METHOD,\n name: t(\"Common:PaymentMethod\"),\n content: <PaymentMethod />,\n onClick: () => {\n clearAbortControllerArr();\n },\n },",
       "module": "/packages/client"
     },
     {

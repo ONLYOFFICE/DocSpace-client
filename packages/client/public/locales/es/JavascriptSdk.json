@@ -58,7 +58,7 @@
   "FrameId": "Id del marco",
   "GetCodeToInsert": "Obtener código para insertar",
   "HelperText": "Texto de ayuda",
-  "HtmlCodeDescription": "Incrustación de {{productName}} o parte de él utilizando la etiqueta <script>. Copie el código HTML siguiente e insértelo en su archivo HTML. ",
+  "HtmlCodeDescription": "Incrustación de {{productName}} o parte de él utilizando la etiqueta <script>. Copie el código HTML siguiente e insértelo en su archivo HTML.",
   "InitializeSDK": "Seleccione uno de los modos sugeridos o use Personalizado para configurar todos los parámetros manualmente.",
   "InLeftPanel": "en el panel izquierdo",
   "IntegrationDescription": "Compruebe las integraciones de {{productName}} listas para usar",

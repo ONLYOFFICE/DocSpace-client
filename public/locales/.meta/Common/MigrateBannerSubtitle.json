@@ -1,0 +1,29 @@
+{
+  "key_path": "MigrateBannerSubtitle",
+  "content": "Here's what happens when you confirm",
+  "content_en_sha1_hash": "f4bfac39c0a4544507ea5caef7076c3e1c350cc0",
+  "created_at": "2026-06-30T07:32:34.198Z",
+  "updated_at": "2026-06-30T07:39:27.078Z",
+  "comment": {
+    "text": "Subtitle in the migration confirmation banner that introduces the subsequent list of steps or consequences.",
+    "is_auto": true,
+    "updated_at": "2026-06-30T07:39:27.078Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "line_number": 246,
+      "context": "className={styles.bannerTitle}\n >\n {t(\"MigrateBannerTitle\")}\n </Text>\n <Text fontSize=\"13px\" className={styles.muted}>\n {t(\"MigrateBannerSubtitle\")}\n </Text>\n </div>\n </div>\n \n <ol className={styles.steps}>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -13,7 +13,7 @@
   "OAuthClientEmpty": "لم يتم العثور على معرّف العميل",
   "RecaptchaInvalid": "التحقق غير صالح",
   "SsoAttributesNotFound": "فشلت المصادقة (لم يتم العثور على سمات التأكيد)",
-  "SsoAuthFailed": " فشلت المصادقة ",
+  "SsoAuthFailed": "فشلت المصادقة",
   "SsoError": "خطأ في الخادم الداخلي",
   "SsoSettingsCantCreateUser": "تعذر إنشاء حساب للمستخدم برمز المصادقة المميز",
   "SsoSettingsDisabled": "تسجيل الدخول الأحادي غير مفعل",

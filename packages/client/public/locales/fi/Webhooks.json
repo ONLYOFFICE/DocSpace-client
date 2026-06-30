@@ -74,7 +74,7 @@
   "SelectDeliveryTime": "Valitse toimitusaika",
   "SendEverything": "Lähetä kaikki",
   "SettingsWebhook": "Webhook-asetukset",
-  "SSLHint": "Varmennamme SSL-sertifikaatit oletuksena tietosisältöjä toimitettaessa. ",
+  "SSLHint": "Varmennamme SSL-sertifikaatit oletuksena tietosisältöjä toimitettaessa.",
   "SSLVerification": "SSL-varmennus",
   "State": "Tila",
   "TargetId": "Kohdetunnus",

@@ -3,7 +3,7 @@
   "content": "There are no shared items yet",
   "content_en_sha1_hash": "dac07abada8d42d6c3b1c99a7db931c609c4aba1",
   "created_at": "2026-05-19T19:03:15.607Z",
-  "updated_at": "2026-05-24T17:27:49.062Z",
+  "updated_at": "2026-06-30T10:18:29.516Z",
   "comment": {
     "text": "Heading for the empty state view in the \"Shared\" section, appearing when no shared files or folders are available.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 433,
+      "line_number": 480,
       "context": "t(\"EmptyView:EmptyTemplatesTitle\"),\n )\n .with([FolderType.USER, ShareAccessRights.None], () =>\n t(\"Common:EmptyScreenFolder\"),\n )\n .with([FolderType.SHARE, P._], () => t(\"Common:EmptyShareTitle\"))\n .with([FolderType.Favorites, P._], () => t(\"Common:EmptyFavoritesTitle\"))\n .with([FolderType.Recent, P._], () => t(\"Common:NoRecentFilesHereYet\"))\n .with([FolderType.Archive, P._], () => t(\"Common:ArchiveEmptyScreenHeader\"))\n .with([FolderType.TRASH, P._], () => t(\"Common:EmptyScreenFolder\"))\n .otherwise(() => \"\");",
       "module": "/packages/client"
     },

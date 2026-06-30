@@ -3,7 +3,7 @@
   "content": "The agent <1>\"{{agentName}}\"</1> will be permanently deleted. All data and user accesses will be lost.",
   "content_en_sha1_hash": "33c2e980bc6260bd79c8768b0f141e3c68b6509a",
   "created_at": "2026-06-02T22:17:37.877Z",
-  "updated_at": "2026-06-02T22:18:49.513Z",
+  "updated_at": "2026-06-30T10:18:29.540Z",
   "comment": {
     "text": "Body text in a confirmation dialog for deleting an AI agent, warning of permanent data loss. The `agentName` variable is wrapped in a tag for bold formatting.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
       "line_number": 92,
-      "context": "if (isAIAgent) {\n return (\n <>\n <Trans\n t={t}\n i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>",
+      "context": "if (isAIAgent) {\n return (\n <>\n <Trans\n t={t}\n i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n components={{ 1: <Text fontWeight={600} as=\"span\" /> }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}",
       "module": "/packages/client"
     },
     {

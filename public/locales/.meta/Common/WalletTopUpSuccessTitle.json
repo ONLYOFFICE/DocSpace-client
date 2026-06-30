@@ -3,7 +3,7 @@
   "content": "Wallet topped up",
   "content_en_sha1_hash": "51e6fe04d32757cfcdced4a3aa3c554a8451b094",
   "created_at": "2026-06-02T15:02:53.820Z",
-  "updated_at": "2026-06-25T11:55:07.215Z",
+  "updated_at": "2026-06-30T07:32:49.212Z",
   "comment": {
     "text": "Title of a success card displayed after a user successfully adds funds to their wallet.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
-      "line_number": 325,
-      "context": "</div>\n \n <div className={styles.cardBody}>\n <Text fontSize=\"16px\" fontWeight={600} className={styles.title}>\n {isWalletOnly\n ? t(\"WalletTopUpSuccessTitle\")\n : t(\"AIPaywallCallbackSuccess\")}\n </Text>\n <div className={styles.successAmount}>\n <Text as=\"span\" fontSize=\"28px\" fontWeight={700}>\n +",
+      "line_number": 369,
+      "context": "<div className={styles.cardBody}>\n <Text fontSize=\"16px\" fontWeight={600} className={styles.title}>\n {admins\n ? t(\"PlanActivated\", { planName: plan })\n : isWalletOnly\n ? t(\"WalletTopUpSuccessTitle\")\n : t(\"AIPaywallCallbackSuccess\")}\n </Text>\n {admins ? (\n <>\n <Text as=\"span\" className={styles.adminsAmount}>",
       "module": "/libs/ui-kit"
     }
   ],

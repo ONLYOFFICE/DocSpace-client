@@ -929,6 +929,8 @@
   "MigratePlanLine": "管理员：{{count}} × {{price}}",
   "MigrateRefundToWallet": "退款至钱包",
   "MigrateStep1Title": "通过 Stripe 的账单今天停止",
+  "MigrateUnusedValueRefund": "未使用金额退款",
+  "MigrateWalletCurrencyNote": "钱包信用点以 {{currency}} 存储和使用",
   "MinCurrency": "最低 {{currency}}",
   "MobileAndroid": "在Google Play上下载{{organizationName}} Documents",
   "MobileEditPdfNotAvailableInfo": "不支持该操作。切换到桌面模式才能编辑 PDF 或创建 PDF 表单。",

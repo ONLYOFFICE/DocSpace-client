@@ -929,6 +929,8 @@
   "MigratePlanLine": "Administratorzy: {{count}} × {{price}}",
   "MigrateRefundToWallet": "Zwrot do portfela",
   "MigrateStep1Title": "Rozliczenia przez Stripe kończą się dzisiaj",
+  "MigrateUnusedValueRefund": "Zwrot niewykorzystanej kwoty",
+  "MigrateWalletCurrencyNote": "Kredyty w portfelu są przechowywane i wykorzystywane w {{currency}}",
   "MinCurrency": "min {{currency}}",
   "MobileAndroid": "Pobierz {{organizationName}} Documents z Google Play",
   "MobileEditPdfNotAvailableInfo": "Nieobsługiwane działanie. Włącz tryb pulpitu, aby móc edytować pliki PDF lub tworzyć formularze PDF.",

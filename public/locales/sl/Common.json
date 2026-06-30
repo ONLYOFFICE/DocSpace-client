@@ -929,6 +929,8 @@
   "MigratePlanLine": "Skrbniki: {{count}} × {{price}}",
   "MigrateRefundToWallet": "Vračilo v denarnico",
   "MigrateStep1Title": "Obračun prek storitve Stripe se danes ustavi",
+  "MigrateUnusedValueRefund": "Vračilo neporabljene vrednosti",
+  "MigrateWalletCurrencyNote": "Dobropisi v denarnici se shranjujejo in uporabljajo v {{currency}}",
   "MinCurrency": "min {{currency}}",
   "MobileAndroid": "Pridobite dokumente {{organizationName}} na Google Play",
   "MobileEditPdfNotAvailableInfo": "Nepodprto dejanje. Preklopite v namizni način, da boste lahko urejali datoteke PDF ali ustvarjali obrazce PDF.",

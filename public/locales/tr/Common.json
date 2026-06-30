@@ -929,6 +929,8 @@
   "MigratePlanLine": "Yöneticiler: {{count}} × {{price}}",
   "MigrateRefundToWallet": "Cüzdana iade",
   "MigrateStep1Title": "Stripe üzerinden faturalandırma bugün sona eriyor",
+  "MigrateUnusedValueRefund": "Kullanılmayan tutarın iadesi",
+  "MigrateWalletCurrencyNote": "Cüzdan kredileri {{currency}} cinsinden saklanır ve kullanılır",
   "MinCurrency": "min {{currency}}",
   "MobileAndroid": "Google Play'de {{organizationName}} Belgelerini Alın",
   "MobileEditPdfNotAvailableInfo": "Desteklenmeyen işlem. PDF'leri düzenleyebilmek veya PDF formları oluşturabilmek için lütfen masaüstü moduna geçin.",

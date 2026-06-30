@@ -14,7 +14,7 @@
   "DisableRoomQuota": "이 방에 대한 할당량 비활성화",
   "DisableRoomQuotaAgent": "이 에이전트에 대한 할당량 비활성화",
   "FileLifetime": "파일 수명",
-  "FileLifetimeDescription": "정해진 기간 후에 이 룸의 파일을 자동으로 삭제하도록 파일 수명을 설정하세요. 수명은 파일을 업로드/생성한 날짜부터 시작됩니다. ",
+  "FileLifetimeDescription": "정해진 기간 후에 이 룸의 파일을 자동으로 삭제하도록 파일 수명을 설정하세요. 수명은 파일을 업로드/생성한 날짜부터 시작됩니다.",
   "FilesOlderThan": "다음 기간보다 오래된 파일:",
   "FormRoomBarDescription": "이 룸은 링크를 가진 누구나 이용할 수 있습니다. 외부 사용자는 모든 파일에 대한 양식 작성자 권한을 갖습니다.",
   "GoToIntegrations": "통합 기능으로 이동",
@@ -26,7 +26,7 @@
   "NoDatabaseConnectionsRoomAdmin": "데이터베이스 연결은 관리자가 구성합니다. 데이터베이스가 설정되면 여기서 내보내기를 활성화할 수 있습니다.",
   "Position": "위치",
   "PublicRoomBarDescription": "이 룸은 링크를 가진 누구나 사용할 수 있습니다. 외부 사용자에 대한 액세스는 선택한 액세스 권한 유형에 따라 제공됩니다.",
-  "PublicRoomSystemFoldersDescription": "시스템 폴더는 다양한 완료 단계에서 양식 사본을 저장합니다. 작성 중인 양식은 진행 중 폴더에 저장되고 완료된 양식은 완료 폴더에 저장됩니다. ",
+  "PublicRoomSystemFoldersDescription": "시스템 폴더는 다양한 완료 단계에서 양식 사본을 저장합니다. 작성 중인 양식은 진행 중 폴더에 저장되고 완료된 양식은 완료 폴더에 저장됩니다.",
   "PublicRoomSystemFoldersTitle": "시스템 폴더",
   "RestrictCopyAndDownload": "복사 및 다운로드 제한",
   "RestrictCopyAndDownloadDescription": "\"{{role}}\" 역할의 사용자에 대한 콘텐츠 다운로드 및 복사를 비활성화하려면 이 설정을 활성화하세요.",
@@ -44,5 +44,5 @@
   "UserName": "사용자 이름",
   "ViewerInfo": "뷰어 정보",
   "WatermarkPreview": "워터마크 미리보기",
-  "WatermarkPreviewHelp": "이 이미지 미리보기는 워터마크가 파일에 어떻게 표시되는지 대략적으로 보여줍니다. "
+  "WatermarkPreviewHelp": "이 이미지 미리보기는 워터마크가 파일에 어떻게 표시되는지 대략적으로 보여줍니다."
 }

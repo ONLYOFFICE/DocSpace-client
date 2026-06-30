@@ -17,7 +17,7 @@
   "AIAgentNotificationsEnabled": "Powiadomienia agenta AI włączone",
   "AIAgentPinLimitMessage": "Nie możesz przypiąć więcej niż 10 elementów w sekcji „{{aiAgents}}” do góry. Odpięć niektóre, które są obecnie przypięte.",
   "AIAgentPinned": "Agent AI przypięty",
-  "AIAgentsPinned": "{{aiAgents}}: przypięte ",
+  "AIAgentsPinned": "{{aiAgents}}: przypięte",
   "AIAgentsUnpinned": "{{aiAgents}}: nieprzypięte",
   "AIAgentUnpinned": "Agent AI odczepiony",
   "AllLinksAreDisabled": "Wszystkie linki są wyłączone",

@@ -71,7 +71,7 @@
   "FormRoomResultsFolderNote": "Le dossier des résultats apparaîtra après la première soumission du formulaire.",
   "FormStartedToFill": "Remplissage commencé.",
   "FormStoppedNotify": "Formulaire arrêté.",
-  "GalleryEmptyScreenText": " Voir les détails du modèle de formulaire ici",
+  "GalleryEmptyScreenText": "Voir les détails du modèle de formulaire ici",
   "GroupsEmptyScreenText": "Voir les détails des groupes ici",
   "GuestsEmptyScreenText": "Voir les détails des invités ici",
   "HistoryAgentCreated": "Agent créé <1>«{{roomTitle}}»</1>",

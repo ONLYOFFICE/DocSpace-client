@@ -9,7 +9,7 @@
   "AccountsWithoutEmails": "Nous avons trouvé <1>{{users}} utilisateurs</1> sans adresse e-mail. Vous pouvez remplir leurs adresses e-mail ou continuer sans cette action.",
   "AddAllowedIP": "Ajouter une adresse IP autorisée",
   "AddEmail": "Ajouter un e-mail",
-  "AddEmails": "Ajouter les adresses e-mail aux profils incomplets ",
+  "AddEmails": "Ajouter les adresses e-mail aux profils incomplets",
   "AddEmailsDescription": "Vérifiez la liste des utilisateurs non importés à importer dans {{organizationName}} {{productName}}.",
   "AddEmailsWarning": "Il n'y a aucun utilisateur avec une adresse e-mail. Veuillez passer à l'étape suivante pour les ajouter.",
   "AddTrustedDomain": "Ajouter domaine autorisé",

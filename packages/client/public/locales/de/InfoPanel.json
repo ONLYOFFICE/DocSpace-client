@@ -77,7 +77,7 @@
   "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> Agent erstellt",
   "HistoryEmptyScreenText": "Aktivitätsverlauf wird hier angezeigt",
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> Raum kopiert",
-  "HistoryRoomCreated": " <1>«{{roomTitle}}»</1> Raum erstellt",
+  "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> Raum erstellt",
   "HistoryThirdParty": "Die Verlaufsanzeige ist für öffentliche Räume mit angeschlossenen Drittanbieterspeichern nicht verfügbar",
   "IndexChanged": "Index geändert",
   "ItemsSelected": "Ausgewählte Elemente",

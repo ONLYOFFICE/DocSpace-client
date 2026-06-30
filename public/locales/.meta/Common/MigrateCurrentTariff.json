@@ -1,0 +1,29 @@
+{
+  "key_path": "MigrateCurrentTariff",
+  "content": "Current tariff",
+  "content_en_sha1_hash": "ef221f68b731d8e04a44f5a0b0e752331388c194",
+  "created_at": "2026-06-30T07:32:34.221Z",
+  "updated_at": "2026-06-30T07:38:44.070Z",
+  "comment": {
+    "text": "Label for a row in the migration dialog that identifies the user's existing subscription plan, appearing alongside its monthly cost.",
+    "is_auto": true,
+    "updated_at": "2026-06-30T07:38:44.070Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "line_number": 257,
+      "context": "{renderStep(\n 1,\n t(\"MigrateStep1Title\"),\n <div className={styles.card}>\n {renderRow(\n t(\"MigrateCurrentTariff\"),\n t(\"MigratePerMonth\", {\n price: formatPaymentCurrency(currentTariffCost),\n }),\n )}\n {renderRow(",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

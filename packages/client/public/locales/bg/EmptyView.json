@@ -21,7 +21,7 @@
   "EmptyAIAgentsAIEnabledUserDescription": "След като екипът Ви Вие бъде поканен за сътрудничество, {{aiAgents}} ще се появят тук, готови да помогнат с документи, управление на знания и ежедневни задачи.",
   "EmptyAIAgentsDescription": "Настройте персонализиран асистент за вашия екип, като добавите база знания, изберете идеалния модел и свържете {{mcpServer}}. Повикайте колегите си да сътрудничат и да извлечете максимум от чат възможностите на агента.",
   "EmptyAIAgentsTitle": "Създайте своя AI агент",
-  "EmptyAIAgentsUserTitle": " {{aiAgents}}: няма налични",
+  "EmptyAIAgentsUserTitle": "{{aiAgents}}: няма налични",
   "EmptyFavoritesDescription": "Задайте звездички на файлове и папки, за да ги направите лесно достъпни и под ръка.",
   "EmptyFavoritesTitle": "Още няма любими",
   "EmptyGroupAddedUserOptionDescription": "Добавете членове на групата и задайте главата",

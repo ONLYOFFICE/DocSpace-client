@@ -3,7 +3,7 @@
   "content": "{{price}} / 1M, {{provider}}",
   "content_en_sha1_hash": "2e1e2209a3486e7c302a0f64f39a0377eab89f25",
   "created_at": "2026-06-25T11:54:44.493Z",
-  "updated_at": "2026-06-25T12:27:20.329Z",
+  "updated_at": "2026-06-30T07:32:49.134Z",
   "comment": {
     "text": "Text label in the AI settings displaying the cost per 1M tokens, consisting of a formatted currency value ({{price}}) and the service provider's name ({{provider}}).",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/KnowledgeBase.tsx",
-      "line_number": 103,
+      "line_number": 137,
       "context": "</Text>\n </div>\n \n <div className={styles.rowRight}>\n <Text fontSize=\"13px\" className={styles.price}>\n {t(\"Common:AIPricePer1MNote\", {\n price: formatAiModelsCurrency?.(item.price.prompt) ?? \"\",\n provider: item.provider,\n })}\n </Text>\n {item.link ? (",
       "module": "/packages/client"
     }

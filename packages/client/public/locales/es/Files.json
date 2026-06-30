@@ -121,7 +121,7 @@
   "LinkSettingsLimitExceeded": "El registro a través del enlace ya no está disponible ya que se ha excedido el límite.",
   "LinkSettingsUsersLimitToast": "El registro a través del enlace ya no está disponible ya que se ha excedido el límite.",
   "LinkSettingsUsersLimitToastDescription": "Ajuste el límite en la configuración o cree un nuevo enlace para habilitar nuevos registros de usuarios.",
-  "LinkSuccessfullyCreatedAndCopied": "El enlace se ha creado y copiado correctamente en el portapapeles ",
+  "LinkSuccessfullyCreatedAndCopied": "El enlace se ha creado y copiado correctamente en el portapapeles",
   "MarkAsRevision": "Marcar como revisión",
   "MarkAsVersion": "Marcar como versión",
   "MarkingRead": "Marcando como leído",

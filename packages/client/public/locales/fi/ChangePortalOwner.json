@@ -6,7 +6,7 @@
   "ChangeUser": "Vaihda käyttäjä",
   "DoTheSame": "Tee sama kuin järjestelmänvalvojat",
   "ManagePortal": "Hallitse {{productName}}-n asetuksia",
-  "ManageUser": " Hallitse käyttäjätilejä",
+  "ManageUser": "Hallitse käyttäjätilejä",
   "NewPortalOwner": "Uusi {{productName}}-omistaja",
   "PortalOwnerCan": "{{productName}} omistaja voi:",
   "SetAccessRights": "Aseta pääsyoikeudet"

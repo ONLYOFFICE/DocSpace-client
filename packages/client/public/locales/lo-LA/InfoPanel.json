@@ -33,7 +33,7 @@
   "FilesTrashMoveCompleted": "ໄຟລ໌ຖືກຍ້າຍໄປ {{sectionName}} ແລ້ວ.",
   "FilesTrashMoveCompletedCount": "ໄຟລ໌ຖືກຍ້າຍໄປ {{sectionName}} ({{count}}).",
   "FileUploadedCount": "ເອກະສານເພີ່ມເຕີມ ({{count}}).",
-  "FileVersionRemoved": "ເວີຊັນໄຟລ໌ຖືກລຶບແລ້ວ: V.{{version}}. ",
+  "FileVersionRemoved": "ເວີຊັນໄຟລ໌ຖືກລຶບແລ້ວ: V.{{version}}.",
   "FilledOutForm": "ແບບຟອມຖືກຕື່ນຂໍ້ມູນແລ້ວ",
   "FolderCopiedCount": "ເອກະບົກຖືກຜະລິດສຳເນົາ ({{count}}).",
   "FolderCreatedNotify": "ໂຟນເດີຖືກສ້າງແລ້ວ.",

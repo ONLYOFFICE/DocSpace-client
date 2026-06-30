@@ -77,7 +77,7 @@
   "HistoryAgentCreated": "Agente <1>«{{roomTitle}}»</1> creato",
   "HistoryEmptyScreenText": "La cronologia delle attività verrà visualizzata qui",
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> stanza copiata",
-  "HistoryRoomCreated": " <1>«{{roomTitle}}»</1> stanza creata",
+  "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> stanza creata",
   "HistoryThirdParty": "La visualizzazione della cronologia non è disponibile per le stanze pubbliche con archivi di terze parti collegati",
   "IndexChanged": "Indice cambiato",
   "ItemsSelected": "Elementi selezionati",

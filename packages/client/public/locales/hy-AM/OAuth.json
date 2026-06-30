@@ -70,7 +70,7 @@
   "ResetHeader": "Վերականգնել հաճախորդի գաղտնի բանալին",
   "Revoke": "Չեղյալ համարել",
   "RevokeConsent": "Չեղյալ համարել համաձայնությունը",
-  "RevokeConsentDescription": "Երբ չեղարկեք {{organizationName}} {{productName}} վավերացման տվյալները {{name}} ծառայությունում օգտագործելու համաձայնությունը, {{organizationName}} {{productName}} ավտոմատ կերպով կդադարեցնի մուտքը {{name}}։ Ձեր հաշիվը {{name}}-ում չի ջնջվի: ",
+  "RevokeConsentDescription": "Երբ չեղարկեք {{organizationName}} {{productName}} վավերացման տվյալները {{name}} ծառայությունում օգտագործելու համաձայնությունը, {{organizationName}} {{productName}} ավտոմատ կերպով կդադարեցնի մուտքը {{name}}։ Ձեր հաշիվը {{name}}-ում չի ջնջվի:",
   "RevokeConsentDescriptionGroup": "Երբ չեղարկեք ծառայություններում {{organizationName}} {{productName}} վավերացման տվյալները օգտագործելու համաձայնությունը, {{organizationName}} {{productName}}-ն ավտոմատ կերպով կդադարեցնի գրանցումը: Ձեր հաշիվները չեն ջնջվի:",
   "RevokeConsentLogin": "Եթե ցանկանում եք թարմացնել ավտոմատ մուտքը {{name}}՝ օգտագործելով {{organizationName}} {{productName}}, ձեզանից կպահանջվի մուտքի թույլտվություն տալ ձեր {{productName}} հաշվի տվյալներին:",
   "RevokeConsentLoginGroup": "Եթե ցանկանում եք թարմացնել ավտոմատ մուտքը՝ օգտագործելով {{organizationName}} {{productName}}, ձեզանից կպահանջվի մուտք գործել ձեր {{productName}} հաշվի տվյալները:",

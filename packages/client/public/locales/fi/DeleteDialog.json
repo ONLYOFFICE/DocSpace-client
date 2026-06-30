@@ -21,7 +21,7 @@
   "DeleteRoomTitle": "Poistetaanko tämä huone?",
   "DeleteRoomWarning": "Ymmärrän seuraukset ja haluan poistaa huoneen.",
   "DeleteTemplate": "Haluatko todella poistaa mallihuoneen <1>«{{templateName}}»</1>? Mallia ei voida palauttaa.",
-  "DeleteTemplates": "Haluatko todella poistaa valitun huoneen mallit? Niitä ei voi palauttaa. ",
+  "DeleteTemplates": "Haluatko todella poistaa valitun huoneen mallit? Niitä ei voi palauttaa.",
   "DeleteTemplateWarning": "Ymmärrän seuraukset ja haluan poistaa mallipohjan.",
   "FileDeletedAfter": "Tiedosto poistetaan pysyvästi 30 päivän päästä.",
   "FilePermanentlyDeleted": "Tiedosto poistetaan pysyvästi {{trashSection}}-osiosta.",

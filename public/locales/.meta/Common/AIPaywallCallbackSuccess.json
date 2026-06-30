@@ -3,7 +3,7 @@
   "content": "You're all set",
   "content_en_sha1_hash": "0efcdd2e7fb2715ae81736d899d68ddadef56183",
   "created_at": "2026-05-15T13:59:46.008Z",
-  "updated_at": "2026-06-25T11:55:07.215Z",
+  "updated_at": "2026-06-30T07:32:49.212Z",
   "comment": {
     "text": "Page title on the AI tools subscription completion screen, appearing after a successful payment callback.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
-      "line_number": 326,
-      "context": "<div className={styles.cardBody}>\n <Text fontSize=\"16px\" fontWeight={600} className={styles.title}>\n {isWalletOnly\n ? t(\"WalletTopUpSuccessTitle\")\n : t(\"AIPaywallCallbackSuccess\")}\n </Text>\n <div className={styles.successAmount}>\n <Text as=\"span\" fontSize=\"28px\" fontWeight={700}>\n +\n </Text>",
+      "line_number": 370,
+      "context": "<Text fontSize=\"16px\" fontWeight={600} className={styles.title}>\n {admins\n ? t(\"PlanActivated\", { planName: plan })\n : isWalletOnly\n ? t(\"WalletTopUpSuccessTitle\")\n : t(\"AIPaywallCallbackSuccess\")}\n </Text>\n {admins ? (\n <>\n <Text as=\"span\" className={styles.adminsAmount}>\n {t(\"AdminsAddedAmount\", { admins })}",
       "module": "/libs/ui-kit"
     }
   ],

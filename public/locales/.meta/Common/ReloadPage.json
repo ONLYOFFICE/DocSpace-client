@@ -3,7 +3,7 @@
   "content": "Reload page",
   "content_en_sha1_hash": "37614e96d9e32dc327e92508fa0e8ec4ca3d2c51",
   "created_at": "2025-05-19T21:30:47.790Z",
-  "updated_at": "2026-05-15T14:00:06.592Z",
+  "updated_at": "2026-06-30T07:32:49.086Z",
   "comment": {
     "text": "This is a button label that reloads the current page, typically used in error states or when content needs to be refreshed.",
     "is_auto": true,
@@ -21,6 +21,54 @@
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyServerErrorContainer.tsx",
       "line_number": 59,
       "context": "const options = [\n {\n to: \"\",\n key: \"reload\",\n title: t(\"Common:ReloadPage\"),\n description: t(\"Common:ReloadPage\"),\n icon: <ReloadArrowsSvg />,\n onClick: () => window.location.reload(),\n },\n ];",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/KnowledgeBase.tsx",
+      "line_number": 84,
+      "context": "const options = [\n {\n to: \"\",\n key: \"reload\",\n title: t(\"Common:ReloadPage\"),\n description: t(\"Common:ReloadPage\"),\n icon: <ReloadArrowsSvg className={styles.reloadIcon} />,\n onClick: () => window.location.reload(),\n },\n ];",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/KnowledgeBase.tsx",
+      "line_number": 84,
+      "context": "const options = [\n {\n to: \"\",\n key: \"reload\",\n title: t(\"Common:ReloadPage\"),\n description: t(\"Common:ReloadPage\"),\n icon: <ReloadArrowsSvg className={styles.reloadIcon} />,\n onClick: () => window.location.reload(),\n },\n ];",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/RowView/index.tsx",
+      "line_number": 95,
+      "context": "const options = [\n {\n to: \"\",\n key: \"reload\",\n title: t(\"Common:ReloadPage\"),\n description: t(\"Common:ReloadPage\"),\n icon: <ReloadArrowsSvg className={styles.reloadIcon} />,\n onClick: () => window.location.reload(),\n },\n ];",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/RowView/index.tsx",
+      "line_number": 95,
+      "context": "const options = [\n {\n to: \"\",\n key: \"reload\",\n title: t(\"Common:ReloadPage\"),\n description: t(\"Common:ReloadPage\"),\n icon: <ReloadArrowsSvg className={styles.reloadIcon} />,\n onClick: () => window.location.reload(),\n },\n ];",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/TableView/index.tsx",
+      "line_number": 106,
+      "context": "const options = [\n {\n to: \"\",\n key: \"reload\",\n title: t(\"Common:ReloadPage\"),\n description: t(\"Common:ReloadPage\"),\n icon: <ReloadArrowsSvg className={styles.reloadIcon} />,\n onClick: () => window.location.reload(),\n },\n ];",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/TableView/index.tsx",
+      "line_number": 106,
+      "context": "const options = [\n {\n to: \"\",\n key: \"reload\",\n title: t(\"Common:ReloadPage\"),\n description: t(\"Common:ReloadPage\"),\n icon: <ReloadArrowsSvg className={styles.reloadIcon} />,\n onClick: () => window.location.reload(),\n },\n ];",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/WebSearch.tsx",
+      "line_number": 84,
+      "context": "const options = [\n {\n to: \"\",\n key: \"reload\",\n title: t(\"Common:ReloadPage\"),\n description: t(\"Common:ReloadPage\"),\n icon: <ReloadArrowsSvg className={styles.reloadIcon} />,\n onClick: () => window.location.reload(),\n },\n ];",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/WebSearch.tsx",
+      "line_number": 84,
+      "context": "const options = [\n {\n to: \"\",\n key: \"reload\",\n title: t(\"Common:ReloadPage\"),\n description: t(\"Common:ReloadPage\"),\n icon: <ReloadArrowsSvg className={styles.reloadIcon} />,\n onClick: () => window.location.reload(),\n },\n ];",
       "module": "/packages/client"
     },
     {

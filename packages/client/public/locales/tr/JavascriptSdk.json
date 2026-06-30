@@ -97,7 +97,7 @@
   "MultipleFolders": "Çoklu klasörler",
   "MultipleFoldersDescription": "Kullanıcılar tek bir işlemle birden fazla klasör yükleyebilir.",
   "NoEventsYet": "Henüz etkinlik yok.",
-  "NPMCodeConfigStep": "Gerekli parametrelerle config nesneleri oluşturun:  ",
+  "NPMCodeConfigStep": "Gerekli parametrelerle config nesneleri oluşturun:",
   "NPMCodeCreateStep": "Config içindeki kimliğe sahip bir HTML öğesi oluşturun ve SDK çerçevesini yerleştirmek için belge gövdesine ekleyin:",
   "NPMCodeDescription": "NPM paketi açıklaması",
   "NPMCodeImportStep": "Paketi projenize aktarın:",

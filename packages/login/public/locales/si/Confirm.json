@@ -6,7 +6,7 @@
   "ConnectAppDescription": "ඔබගේ සත්‍යාපක යෙදුම භාවිතයෙන් සපයා ඇති QR කේතය ස්කෑන් කරන්න. විකල්පයක් ලෙස, ලබා දී ඇති රහස් යතුර ඔබගේ යෙදුමට අතින් ඇතුළත් කරන්න: <1>{{ secretKey }}</1>",
   "CurrentNumber": "ඔබගේ වත්මන් ජංගම දු.ක. අංකය",
   "DeleteProfileBtn": "මාගේ ගිණුම මකන්න",
-  "DeleteProfileConfirmation": "අවධානය! ඔබගේ ගිණුම මැකීමට සැරසෙමින් සිටියි. ",
+  "DeleteProfileConfirmation": "අවධානය! ඔබගේ ගිණුම මැකීමට සැරසෙමින් සිටියි.",
   "DeleteProfileConfirmationInfo": "\"මාගේ ගිණුම මකන්න\" එබීමෙන් ඔබ අපගේ <1>රහස්‍යතා ප්‍රතිපත්තියට</1> එකඟ වේ.",
   "DeleteProfileSuccessDescription": "ඔබගේ {{productName}} ගිණුම සාර්ථකව අබල කර ඇත. {{productName}} හිමිකරුට හෝ පරිපාලකයාට ඔබගේ අබල කළ ගිණුම ස්ථිරවම මකා දැමිය හැක.",
   "DeleteProfileSuccessMessage": "ඔබගේ ගිණුම සාර්ථකව මකා ඇත.",

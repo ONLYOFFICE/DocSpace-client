@@ -5,7 +5,7 @@
   "GroupMaxAvailableRoleWarning": "Qruplar maksimum {{roleName}} rolu olan otağa əlavə edilə bilər. Bununla belə, qrup uğurla əlavə edildikdən sonra qrupdakı fərdi istifadəçilərin rolunu dəyişə bilərsiniz.",
   "GuestAgentMaxAvailableRoleWarning": "Qonaqlar Təcrübə yaradıcısı kimi təyin edilə bilməzlər.\nBu rola yalnız Otaq administratorları, {{productName}} administratorları və İstifadəçiləri layiqdir.",
   "InvitationLanguage": "Dəvət dili",
-  "InviteMembersManuallyDescription": "E-poçt vasitəsilə {{productName}} məhsuluna yeni üzvləri şəxsən dəvət edin ",
+  "InviteMembersManuallyDescription": "E-poçt vasitəsilə {{productName}} məhsuluna yeni üzvləri şəxsən dəvət edin",
   "InviteMembersSearchPlaceholder": "Üzvləri e-poçtla dəvət edin",
   "InviteToRoomAddPlaceholder": "Ad şəxsiyyətləri adları və ya e-poçt ünvanları ilə əlavə edin.",
   "InviteToRoomManuallyInfoGuest": "Mövcud {{productName}} kontaktlarını əlavə edin. Və ya yeni istifadəçiləri şəxsən e-poçt vasitəsi ilə dəvət edin. Yeni istifadəçilər sizə aid Qonaqlar siyahısına əlavə ediləcəkdir.",

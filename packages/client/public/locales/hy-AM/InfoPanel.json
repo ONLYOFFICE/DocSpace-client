@@ -110,7 +110,7 @@
   "RoomLogoChanged": "Պատկերակը փոխվել է",
   "RoomRemoveUser": "Օգտատերը հեռացվել է:",
   "RoomRenamed": "Սենյակը <1>«{{oldRoomTitle}}»</1> վերանվանվել է <2>«{{roomTitle}}»</2>",
-  "RoomsEmptyScreenTent": "Սենյակների մանրամասները տես ",
+  "RoomsEmptyScreenTent": "Սենյակների մանրամասները տես",
   "RoomToArchiveMove": "Սենյակը տեղափոխվեց {{sectionName}}։",
   "RoomUpdateAccess": "նշանակվել է",
   "RoomWatermarkDisabled": "Ջրանշանը սենյակում գտնվող ֆայլերի համար անջատված է",

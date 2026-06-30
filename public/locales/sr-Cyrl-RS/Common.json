@@ -500,7 +500,6 @@
   "DontAskAgain": "Не питај поново за име датотеке приликом креирања",
   "DontShowAgain": "Не приказуј поново",
   "DontShowMessage": "Немој више приказивати ову поруку",
-  "DowngradeNow": "Смањи ниво сада",
   "DowngradeScheduled": "Промена расписања: Прилагођавање меморије, {{fromSize}} → {{toSize}}",
   "Download": "Преузми",
   "DownloadAndOpenReport": "Преузми и отвори извештај",

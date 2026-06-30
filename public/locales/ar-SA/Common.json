@@ -500,7 +500,6 @@
   "DontAskAgain": "لا تسأل عن اسم الملف مرة أخرى عند إنشائه",
   "DontShowAgain": "لا تعرض مرة أخرى",
   "DontShowMessage": "عدم عرض هذه الرسالة مرة أخرى",
-  "DowngradeNow": "الرجوع إلى إصدار سابق الآن",
   "DowngradeScheduled": "التغيير المجدول: تعديل التخزين، {{fromSize}} → {{toSize}}",
   "Download": "تنزيل",
   "DownloadAndOpenReport": "تنزيل وفتح التقرير",

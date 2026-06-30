@@ -500,7 +500,6 @@
   "DontAskAgain": "Don't ask file name again on creation",
   "DontShowAgain": "Don't show again",
   "DontShowMessage": "Don't show this message again",
-  "DowngradeNow": "Downgrade now",
   "DowngradeScheduled": "Change scheduled: Storage adjustment, {{fromSize}} → {{toSize}}",
   "Download": "Download",
   "DownloadAndOpenReport": "Download and open the report",

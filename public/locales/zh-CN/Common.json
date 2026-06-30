@@ -500,7 +500,6 @@
   "DontAskAgain": "创建时不再询问文件名",
   "DontShowAgain": "不再显示",
   "DontShowMessage": "不再显示此消息",
-  "DowngradeNow": "立即降级",
   "DowngradeScheduled": "计划更改：存储调整，{{fromSize}} → {{toSize}}",
   "Download": "下载",
   "DownloadAndOpenReport": "下载并打开报告",

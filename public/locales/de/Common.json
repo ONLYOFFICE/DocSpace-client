@@ -500,7 +500,6 @@
   "DontAskAgain": "Bei der Erstellung nicht mehr nach dem Dateinamen fragen",
   "DontShowAgain": "Nicht mehr anzeigen",
   "DontShowMessage": "Diese Nachricht nicht mehr anzeigen",
-  "DowngradeNow": "Jetzt herabstufen",
   "DowngradeScheduled": "Geplante Änderung: Speicheranpassung, {{fromSize}} → {{toSize}}",
   "Download": "Herunterladen",
   "DownloadAndOpenReport": "Bericht herunterladen und öffnen",

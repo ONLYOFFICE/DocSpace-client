@@ -500,7 +500,6 @@
   "DontAskAgain": "생성 시 파일 이름을 다시 묻지 않음",
   "DontShowAgain": "다시 표시 안함",
   "DontShowMessage": "이 메시지를 다시 표시하지 않음",
-  "DowngradeNow": "지금 다운그레이드",
   "DowngradeScheduled": "예정된 변경: 스토리지 조정, {{fromSize}} → {{toSize}}",
   "Download": "다운로드",
   "DownloadAndOpenReport": "보고서를 다운로드하고 엽니다.",

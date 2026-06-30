@@ -500,7 +500,6 @@
   "DontAskAgain": "Älä kysy enää tiedostonimeä luonnin yhteydessä",
   "DontShowAgain": "Älä näytä uudelleen",
   "DontShowMessage": "Älä näytä tätä viestiä enää",
-  "DowngradeNow": "Alenna ohjelman tasoa nyt",
   "DowngradeScheduled": "Muutos aikataulutettu: Tallennustilan säätö, {{fromSize}} → {{toSize}}",
   "Download": "Lataa",
   "DownloadAndOpenReport": "Lataa ja avaa raportti",

@@ -500,7 +500,6 @@
   "DontAskAgain": "Больше не запрашивать имя файла при создании",
   "DontShowAgain": "Больше не показывать",
   "DontShowMessage": "Больше не показывать это сообщение",
-  "DowngradeNow": "Понизить прямо сейчас",
   "DowngradeScheduled": "Запланировано изменение: корректировка объема хранилища {{fromSize}} → {{toSize}}",
   "Download": "Скачать",
   "DownloadAndOpenReport": "Скачать и открыть отчет",

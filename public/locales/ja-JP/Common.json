@@ -500,7 +500,6 @@
   "DontAskAgain": "作成時にファイル名を再度聞かない",
   "DontShowAgain": "再表示しない",
   "DontShowMessage": "このメッセージを再表示しない",
-  "DowngradeNow": "今すぐダウングレードする",
   "DowngradeScheduled": "スケジュール変更：ストレージ調整、{{fromSize}} → {{toSize}}",
   "Download": "ダウンロード",
   "DownloadAndOpenReport": "レポートをダウンロードして開く",

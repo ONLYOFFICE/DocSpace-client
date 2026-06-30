@@ -500,7 +500,6 @@
   "DontAskAgain": "No volver a preguntar por el nombre del archivo al crearlo",
   "DontShowAgain": "No volver a mostrar",
   "DontShowMessage": "No volver a mostrar este mensaje",
-  "DowngradeNow": "Cambiar al plan anterior ahora",
   "DowngradeScheduled": "Cambio programado: Ajuste de almacenamiento, {{fromSize}} → {{toSize}}",
   "Download": "Descargar",
   "DownloadAndOpenReport": "Descargar y abrir el informe",

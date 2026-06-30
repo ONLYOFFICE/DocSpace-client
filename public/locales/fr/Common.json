@@ -500,7 +500,6 @@
   "DontAskAgain": "Ne plus demander le nom du fichier lors de la création",
   "DontShowAgain": "Ne plus afficher",
   "DontShowMessage": "Ne plus afficher ce message",
-  "DowngradeNow": "Passer à une version antérieure maintenant",
   "DowngradeScheduled": "Changement planifié : Ajustement de stockage, {{fromSize}} → {{toSize}}",
   "Download": "Télécharger",
   "DownloadAndOpenReport": "Télécharger et ouvrir le rapport",

@@ -52,6 +52,7 @@ import { useLocation } from "react-router";
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import Navigation from "@docspace/ui-kit/components/navigation";
 import { AiChatTrigger } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
+import NewChatButton from "@docspace/ui-kit/ai-agent/new-chat-button";
 import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
@@ -237,6 +238,7 @@ const SectionHeaderContent = (props) => {
   const isContactsGroupsPage = contactsTab === "groups";
   const isContactsInsideGroupPage = contactsTab === "inside_group";
   const isProfile = currentClientView === "profile";
+  const isAiChatView = currentClientView === "chat";
 
   // The "Forms" section reuses the Rooms folder; detect it from the route to
   // adjust section labels (title, create-button caption) accordingly.
@@ -1098,6 +1100,7 @@ const SectionHeaderContent = (props) => {
                 />
               }
               aiChatButton={isAiChatAvailable ? <AiChatTrigger /> : undefined}
+              newChatButton={isAiChatView ? <NewChatButton /> : undefined}
             />
             {showSignInButton ? (
               <Button

@@ -3365,7 +3365,7 @@ class FilesActionStore {
       if ((fileStatus & FileStatus.IsNew) === FileStatus.IsNew)
         await this.onMarkAsRead(item);
 
-      if ((canWebEdit || canViewedDocs) && !item.encrypted) {
+      if (canWebEdit || canViewedDocs) {
         let shareKey = item.requestToken;
 
         if (webUrl) {

@@ -51,6 +51,8 @@ import { ApiProvider } from "@docspace/ui-kit/providers/api";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
+import EncryptionProviderWrapper from "@/components/EncryptionProviderWrapper";
+
 import ErrorProvider from "./ErrorProvider";
 
 export type TContextData = {
@@ -107,7 +109,9 @@ const Providers = ({ children, contextData }: TProviders) => {
           locale={locale}
         >
           <ErrorProvider {...contextData}>
-            {children}
+            <EncryptionProviderWrapper user={user}>
+              {children}
+            </EncryptionProviderWrapper>
             <Toast isSSR />
           </ErrorProvider>
         </ThemeProvider>

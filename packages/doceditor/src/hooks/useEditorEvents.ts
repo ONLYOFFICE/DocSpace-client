@@ -285,7 +285,9 @@ const useEditorEvents = ({
         let aiAvailable = false;
         const modelProfileMap = new Map<string, string>();
 
-        if (successAuth) {
+        const isEncrypted = !!config?.file?.encrypted;
+
+        if (successAuth && !isEncrypted) {
           try {
             const hasError = (data: unknown) =>
               !!data &&
@@ -369,7 +371,6 @@ const useEditorEvents = ({
                   canUseTool: p.canUseTool ?? false,
                   useResponsesApi: p.useResponsesApi,
                   providerType: p.providerType,
-                  basedOn: "openai",
                 }));
 
                 const validProfileIds = new Set(profiles.map((p) => p.id));
@@ -473,6 +474,7 @@ const useEditorEvents = ({
     }
   }, [
     config?.errorMessage,
+    config?.file?.encrypted,
     sdkConfig?.frameId,
     checkAndRequestRoles,
     t,

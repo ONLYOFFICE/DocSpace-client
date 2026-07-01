@@ -43,10 +43,12 @@ import { DeviceType } from "@docspace/shared/enums";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 import type PaymentStore from "SRC_DIR/store/PaymentStore";
-import type ServicesStore from "SRC_DIR/store/ServicesStore";
 
 import { Knowledge } from "./knowledge";
+// SaaS variants (informational/pricing cards); the ui-kit WebSearch above and
+// the local Knowledge are the functional components used on standalone.
 import WebSearchSaaS from "./search/WebSearch";
+import KnowledgeBase from "./knowledge/KnowledgeBase";
 import AIFeaturesBanner from "./sub-components/AIFeaturesBanner";
 
 const BASE_PATH = "/portal-settings/ai-settings";
@@ -169,15 +171,9 @@ const AISettings = ({
     },
     {
       id: TAB_IDS.KNOWLEDGE,
-      // Knowledge has no key in the @onlyoffice/ai-chat bundle (aiT), so its
-      // label comes from the DocSpace Common namespace instead. Intentional.
       name: t("Common:Knowledge"),
-      content: <Knowledge />,
-      onClick: () => {
-        if (!hasProfiles) return;
-        initKnowledge();
-        navigateToTab(TAB_IDS.KNOWLEDGE);
-      },
+      content: standalone ? <Knowledge /> : <KnowledgeBase />,
+      onClick: makeOnClick(TAB_IDS.KNOWLEDGE),
       isDisabled: disableNonAiModels,
     },
   ];

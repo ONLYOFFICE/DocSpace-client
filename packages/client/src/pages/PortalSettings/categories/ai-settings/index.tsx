@@ -30,6 +30,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router";
 
 import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
+import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
 import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import {
   AiModels,
@@ -38,9 +39,13 @@ import {
   WebSearch,
 } from "@docspace/ui-kit/ai-agent/settings";
 
+import { DeviceType } from "@docspace/shared/enums";
+
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
+import type PaymentStore from "SRC_DIR/store/PaymentStore";
 
 import { Knowledge } from "./knowledge";
+import AIFeaturesBanner from "./sub-components/AIFeaturesBanner";
 
 const BASE_PATH = "/portal-settings/ai-settings";
 
@@ -63,9 +68,20 @@ const detectTabFromPath = (pathname: string) => {
 type TAISettingsProps = {
   fetchKnowledge?: AISettingsStore["fetchKnowledge"];
   fetchAIProviders?: AISettingsStore["fetchAIProviders"];
+  currentDeviceType?: DeviceType;
+  standalone?: boolean;
+  isAiToolsServiceOn?: PaymentStore["isAiToolsServiceOn"];
+  isCardLinkedToPortal?: PaymentStore["isCardLinkedToPortal"];
 };
 
-const AISettings = ({ fetchKnowledge, fetchAIProviders }: TAISettingsProps) => {
+const AISettings = ({
+  fetchKnowledge,
+  fetchAIProviders,
+  currentDeviceType,
+  standalone,
+  isAiToolsServiceOn,
+  isCardLinkedToPortal,
+}: TAISettingsProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation(["Common"]);
@@ -160,6 +176,8 @@ const AISettings = ({ fetchKnowledge, fetchAIProviders }: TAISettingsProps) => {
     },
   ];
 
+  const tabsStickyTop = SECTION_HEADER_HEIGHT[currentDeviceType!];
+
   return (
     <div>
       <Tabs
@@ -167,17 +185,35 @@ const AISettings = ({ fetchKnowledge, fetchAIProviders }: TAISettingsProps) => {
         withAnimation
         selectedItemId={currentTabId}
         onSelect={onSelect}
+        stickyTop={tabsStickyTop}
+        stickyHeader={
+          standalone ? undefined : (
+            <AIFeaturesBanner
+              currentDeviceType={currentDeviceType}
+              isAiToolsServiceOn={isAiToolsServiceOn}
+              isCardLinkedToPortal={isCardLinkedToPortal}
+            />
+          )
+        }
       />
     </div>
   );
 };
 
-export const Component = inject(({ aiSettingsStore }: TStore) => {
-  const { fetchKnowledge, fetchAIProviders } = aiSettingsStore;
+export const Component = inject(
+  ({ aiSettingsStore, settingsStore, paymentStore }: TStore) => {
+    const { fetchKnowledge, fetchAIProviders } = aiSettingsStore;
+    const { currentDeviceType, standalone } = settingsStore;
+    const { isAiToolsServiceOn, isCardLinkedToPortal } = paymentStore;
 
-  return {
-    fetchKnowledge,
-    fetchAIProviders,
-  };
-})(observer(AISettings));
+    return {
+      fetchKnowledge,
+      fetchAIProviders,
+      currentDeviceType,
+      standalone,
+      isAiToolsServiceOn,
+      isCardLinkedToPortal,
+    };
+  },
+)(observer(AISettings));
 

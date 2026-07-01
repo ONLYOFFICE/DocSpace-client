@@ -62,6 +62,7 @@ import {
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
 import useGoBackAndClose from "@/hooks/useGoBackAndClose";
+import useFileEncryptionKeys from "@/hooks/useFileEncryptionKeys";
 import { isPDFDocument } from "@/utils";
 
 import Bar from "./Bar";
@@ -173,6 +174,8 @@ const Editor = ({
     config,
   );
 
+  const encryption = useFileEncryptionKeys(config, user);
+
   const newConfig: IConfig = useMemo(() => {
     return config
       ? {
@@ -227,6 +230,16 @@ const Editor = ({
       goback: { ...goBack },
       close,
     };
+  }
+
+  if (
+    encryption.status === "ready" &&
+    encryption.encryptionKeys &&
+    newConfig.editorConfig
+  ) {
+    Object.assign(newConfig.editorConfig, {
+      encryptionKeys: encryption.encryptionKeys,
+    });
   }
 
   newConfig.events = {
@@ -322,6 +335,50 @@ const Editor = ({
 
   if (config?.fillingStatus) {
     newConfig.events.onRequestFillingStatus = onRequestFillingStatus;
+  }
+
+  const isEncryptionGating =
+    !!config?.file?.encrypted &&
+    !errorMessage &&
+    !isSkipError &&
+    encryption.status !== "ready";
+
+  if (isEncryptionGating) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          height: "100%",
+          width: "100%",
+        }}
+      >
+        <div
+          style={{
+            height: "auto",
+            overflow: "visible",
+            position: "relative",
+            zIndex: 1000,
+          }}
+        >
+          <Bar quotaExceededScope={config?.quotaExceededScope} />
+        </div>
+        <div
+          style={{
+            flex: 1,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+            padding: "24px",
+          }}
+        >
+          {encryption.status === "error"
+            ? t("Common:SomethingWentWrong")
+            : t("Common:LoadingProcessing")}
+        </div>
+      </div>
+    );
   }
 
   return (

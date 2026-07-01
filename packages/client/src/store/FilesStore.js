@@ -3159,12 +3159,7 @@ class FilesStore {
           "show-version-history",
           "finalize-version",
           "version",
-          // Document editor / PDF flows do not support encrypted files yet.
-          "preview",
           "fill-form",
-          "edit",
-          "open-pdf",
-          "edit-pdf",
           "filling-status",
           "start-filling",
           "reset-and-start-filling",
@@ -3184,6 +3179,10 @@ class FilesStore {
             "view",
             "pdf-view",
             "download",
+            "preview",
+            "edit",
+            "open-pdf",
+            "edit-pdf",
           ]);
         }
       }

@@ -2922,7 +2922,10 @@ class FilesStore {
         "stop-filling",
       ];
 
-      if (!item?.security?.AskAi) {
+      const noAskAi =
+        !item?.security?.AskAi || isPrivacyFolder || item.private || isEncrypted;
+
+      if (noAskAi) {
         fileOptions = removeOptions(fileOptions, ["ask-ai", "separator6"]);
       }
 

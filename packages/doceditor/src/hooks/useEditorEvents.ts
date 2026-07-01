@@ -285,7 +285,9 @@ const useEditorEvents = ({
         let aiAvailable = false;
         const modelProfileMap = new Map<string, string>();
 
-        if (successAuth) {
+        const isEncrypted = !!config?.file?.encrypted;
+
+        if (successAuth && !isEncrypted) {
           try {
             const hasError = (data: unknown) =>
               !!data &&
@@ -472,6 +474,7 @@ const useEditorEvents = ({
     }
   }, [
     config?.errorMessage,
+    config?.file?.encrypted,
     sdkConfig?.frameId,
     checkAndRequestRoles,
     t,

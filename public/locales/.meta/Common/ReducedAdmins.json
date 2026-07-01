@@ -1,13 +1,13 @@
 {
-  "key_path": "AdditionalAdmins",
-  "content": "Additional admins",
-  "content_en_sha1_hash": "0ae476600e6fe2b9a24716ca4360ef1e846af35e",
-  "created_at": "2026-06-30T07:32:23.909Z",
-  "updated_at": "2026-06-30T15:41:51.815Z",
+  "key_path": "ReducedAdmins",
+  "content": "Reduced admins",
+  "content_en_sha1_hash": "9900538e2a3639c549342caa09f5ab1539c70130",
+  "created_at": "2026-06-30T15:41:39.474Z",
+  "updated_at": "2026-06-30T15:42:37.946Z",
   "comment": {
-    "text": "A label in a summary row within the price details dialog, appearing next to a count of extra administrators.",
+    "text": "A label in a price details dialog row that appears during a plan downgrade to indicate the number of administrator accounts being removed.",
     "is_auto": true,
-    "updated_at": "2026-06-30T07:44:11.729Z",
+    "updated_at": "2026-06-30T15:42:37.946Z",
     "model": "gemma4:26b"
   },
   "usage": [

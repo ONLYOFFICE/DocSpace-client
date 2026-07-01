@@ -49,6 +49,7 @@ import type { TPaymentUser } from "@docspace/ui-kit/billing/types";
 import config from "PACKAGE_FILE";
 
 import { PAYMENT_ROUTES } from "./utils";
+import DocsConnectPage from "./SaaS/DocsConnectPage";
 
 interface ServicesPageProps {
   language?: string;
@@ -119,6 +120,7 @@ const ServicesPage = (props: ServicesPageProps) => {
         <BackupPage withBottomMargin={true} onViewMore={onViewUsage} />
       ) : null}
       {pathname.includes("disk-storage") ? <AdditionalStoragePage withBottomMargin={true}/> : null}
+      {pathname.includes("docs-connect") ? <DocsConnectPage /> : null}
     </BillingRoot>
   );
 };

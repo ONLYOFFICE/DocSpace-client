@@ -45,6 +45,7 @@ import { PAYMENT_ROUTES } from "./utils";
 
 import config from "../../../../../package.json";
 import PaymentsEnterprise from "./Standalone";
+import DocsConnectGetStartedModal from "./SaaS/DocsConnectGetStartedModal";
 import {
   MainTariff,
   Wallet,
@@ -83,6 +84,11 @@ const PaymentsPage = (props) => {
     getAIConfig,
     openOnNewPage,
     isNotPaidPeriod,
+    docsConnectInfo,
+    getStartedVisible,
+    openGetStarted,
+    closeGetStarted,
+    fetchDocsConnectInfo,
   } = props;
   const location = useLocation();
   const [currentTabId, setCurrentTabId] = useState(
@@ -92,6 +98,20 @@ const PaymentsPage = (props) => {
   const navigate = useNavigate();
   const { t } = useTranslation(["Payments", "Settings", "Common"]);
 
+  const onDocsConnectClick = () => {
+    if (docsConnectInfo) {
+      navigate(
+        combineUrl(
+          window.ClientConfig?.proxy?.url,
+          config.homepage,
+          PAYMENT_ROUTES.docsConnect,
+        ),
+      );
+      return;
+    }
+    openGetStarted?.();
+  };
+
   const paymentConfig = useMemo(
     () => ({
       language,
@@ -100,8 +120,9 @@ const PaymentsPage = (props) => {
       user,
       openOnNewPage,
       routes: PAYMENT_ROUTES,
+      onServicesInit: fetchDocsConnectInfo,
     }),
-    [language, logoText, walletHelpUrl, user, openOnNewPage],
+    [language, logoText, walletHelpUrl, user, openOnNewPage, fetchDocsConnectInfo],
   );
 
   const data = [
@@ -121,6 +142,7 @@ const PaymentsPage = (props) => {
       content: (
         <ServicesList
           getAIConfig={getAIConfig}
+          onDocsConnectClick={onDocsConnectClick}
           onOpenSupportedModels={() =>
             navigateToRoute("/portal-settings/ai-settings/models")
           }
@@ -200,6 +222,10 @@ const PaymentsPage = (props) => {
         stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
         withAnimation
       />
+      <DocsConnectGetStartedModal
+        visible={getStartedVisible}
+        onClose={closeGetStarted}
+      />
     </BillingRoot>
   );
 };
@@ -211,6 +237,7 @@ export const Component = inject(
     userStore,
     filesSettingsStore,
     currentTariffStatusStore,
+    docsConnectStore,
   }) => {
     const {
       standalone,
@@ -234,6 +261,11 @@ export const Component = inject(
       getAIConfig,
       openOnNewPage,
       isNotPaidPeriod,
+      docsConnectInfo: docsConnectStore?.info,
+      getStartedVisible: docsConnectStore?.getStartedVisible,
+      openGetStarted: docsConnectStore?.openGetStarted,
+      closeGetStarted: docsConnectStore?.closeGetStarted,
+      fetchDocsConnectInfo: docsConnectStore?.fetchInfo,
       language: authStore?.language,
       user: user
         ? {

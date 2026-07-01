@@ -38,11 +38,15 @@ import copy from "copy-to-clipboard";
 
 import {
   getDocsConnectInfo,
+  getDocsConnectPrices,
   startDocsConnectTrial,
   buyDocsConnectPlan,
   getDocsConnectReportUrl,
 } from "@docspace/shared/api/docs-connect";
-import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
+import type {
+  TDocsConnectInfo,
+  TDocsConnectPrices,
+} from "@docspace/shared/api/docs-connect/types";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { Nullable, TTranslation } from "@docspace/shared/types";
@@ -54,11 +58,15 @@ class DocsConnectStore {
 
   info: Nullable<TDocsConnectInfo> = null;
 
+  prices: Nullable<TDocsConnectPrices> = null;
+
   isLoading: boolean = true;
 
   error: Nullable<Error> = null;
 
   buyPlanPanelVisible: boolean = false;
+
+  getStartedVisible: boolean = false;
 
   buyPlanMode: BuyPlanMode = "trial";
 
@@ -93,6 +101,13 @@ class DocsConnectStore {
     }
   };
 
+  fetchPrices = async () => {
+    const prices = await getDocsConnectPrices();
+    runInAction(() => {
+      this.prices = prices;
+    });
+  };
+
   openBuyPlan = (mode: BuyPlanMode) => {
     this.buyPlanMode = mode;
     this.buyPlanPanelVisible = true;
@@ -100,6 +115,14 @@ class DocsConnectStore {
 
   closeBuyPlan = () => {
     this.buyPlanPanelVisible = false;
+  };
+
+  openGetStarted = () => {
+    this.getStartedVisible = true;
+  };
+
+  closeGetStarted = () => {
+    this.getStartedVisible = false;
   };
 
   startTrial = async () => {

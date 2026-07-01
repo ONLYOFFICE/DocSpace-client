@@ -69,7 +69,8 @@ type TBalanceResponse = {
   subAccounts?: { currency?: string; amount?: number }[];
 } | null;
 
-const fetchPlanPrices = async (): Promise<TDocsConnectPrices | null> => {
+export const getDocsConnectPrices =
+  async (): Promise<TDocsConnectPrices | null> => {
   try {
     const services = (await request({
       method: "get",
@@ -156,7 +157,7 @@ export const getDocsConnectInfo =
     ])) as [TDocsConnectConfig, TDocsConnectTenantInfo];
 
     const [prices, wallet, devPackEnabled] = await Promise.all([
-      fetchPlanPrices(),
+      getDocsConnectPrices(),
       fetchWallet(),
       fetchDevPackEnabled(),
     ]);

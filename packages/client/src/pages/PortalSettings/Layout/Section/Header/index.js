@@ -67,6 +67,11 @@ import { getBrandName } from "@docspace/shared/constants/brands";
 
 import classNames from "classnames";
 
+import {
+  getDocsConnectDaysLeft,
+  isDocsConnectTrialExpired,
+} from "SRC_DIR/pages/PortalSettings/categories/developer-tools/DocsConnect/utils";
+
 import styles from "./Header.module.scss";
 
 export const HeaderContainer = ({ children, className = "", ...props }) => (
@@ -99,6 +104,7 @@ const SectionHeaderContent = (props) => {
     isNotPaidPeriod,
     isBackupPaid,
     isFreeTariff,
+    docsConnectInfo,
   } = props;
 
   const navigate = useNavigate();
@@ -170,10 +176,15 @@ const SectionHeaderContent = (props) => {
       backup: isFreeTariff ? "Common:Backup" : t("Common:AdditionalBackup"),
       "ai-services": "Common:AIFeatures",
       "disk-storage": "Common:AdditionalDiskStorage",
+      "docs-connect": "DocsConnect:DocsConnect",
     };
 
     let number = 1;
-    if (window.location.href.includes("disk-storage")) number = 2;
+    if (
+      window.location.href.includes("disk-storage") ||
+      window.location.href.includes("docs-connect")
+    )
+      number = 2;
     const serviceSubPageHeader = serviceSubPageHeaders[arrayOfParams[number]];
 
     if (serviceSubPageHeader) {
@@ -235,7 +246,8 @@ const SectionHeaderContent = (props) => {
     const isServicesSubPage =
       location.pathname.includes("/services/disk-storage") ||
       location.pathname.includes("/services/backup") ||
-      location.pathname.includes("/services/ai-services");
+      location.pathname.includes("/services/ai-services") ||
+      location.pathname.includes("/services/docs-connect");
 
     if (isServicesSubPage && location.key === "default") {
       navigate("/portal-settings/payments/services");
@@ -329,6 +341,14 @@ const SectionHeaderContent = (props) => {
             aiServices: t("Common:AIServices"),
           });
 
+  const isDocsConnectServicePage = location.pathname.includes(
+    "/services/docs-connect",
+  );
+  const docsConnectEndDate = docsConnectInfo?.tenant?.endDate ?? "";
+  const docsConnectExpired = isDocsConnectTrialExpired(docsConnectEndDate);
+  const docsConnectDaysLeft = getDocsConnectDaysLeft(docsConnectEndDate);
+  const docsConnectTrialLow = !docsConnectExpired && docsConnectDaysLeft <= 14;
+
   return (
     <StyledContainer>
       {isHeaderVisible ? (
@@ -352,6 +372,7 @@ const SectionHeaderContent = (props) => {
             window.location.href.indexOf("/javascript-sdk/") > -1 ||
             window.location.href.indexOf("/ai-services") > -1 ||
             window.location.href.indexOf("/services/backup") > -1 ||
+            window.location.href.indexOf("/services/docs-connect") > -1 ||
             window.location.href.indexOf("disk-storage") > -1) ? (
             <IconButton
               iconName={ArrowPathReactSvgUrl}
@@ -365,6 +386,18 @@ const SectionHeaderContent = (props) => {
           <Heading type="content" truncate>
             <div className="settings-section_header">
               <div className="header">{translatedHeader}</div>
+              {isDocsConnectServicePage && docsConnectEndDate ? (
+                <span
+                  className={classNames(styles.docsConnectTrialBadge, {
+                    [styles.docsConnectTrialBadgeWarning]: docsConnectTrialLow,
+                    [styles.docsConnectTrialBadgeExpired]: docsConnectExpired,
+                  })}
+                >
+                  {docsConnectExpired
+                    ? t("Common:TrialExpired")
+                    : t("Common:FreeDaysLeft", { count: docsConnectDaysLeft })}
+                </span>
+              ) : null}
               {isNeedPaidIcon ? (
                 <Badge
                   backgroundColor={
@@ -418,6 +451,7 @@ export default inject(
     settingsStore,
     oauthStore,
     currentTariffStatusStore,
+    docsConnectStore,
   }) => {
     const {
       isCustomizationAvailable,
@@ -475,6 +509,7 @@ export default inject(
       isNotPaidPeriod,
       isBackupPaid,
       isFreeTariff,
+      docsConnectInfo: docsConnectStore?.info,
     };
   },
 )(

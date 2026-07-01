@@ -498,6 +498,10 @@ const PortalSettingsRoutes = {
       element: <ViewComponent />,
     },
     {
+      path: "payments/services/docs-connect",
+      element: <ViewComponent />,
+    },
+    {
       path: "management/disk-space",
       element: <ViewComponent />,
     },

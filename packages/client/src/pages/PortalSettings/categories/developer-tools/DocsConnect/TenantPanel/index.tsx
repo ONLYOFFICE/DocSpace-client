@@ -36,6 +36,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { useNavigate } from "react-router";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
@@ -47,6 +48,7 @@ import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu"
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
+import HistoryReactSvgUrl from "PUBLIC_DIR/images/history.react.svg?url";
 
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 import type { TTranslation } from "@docspace/shared/types";
@@ -73,6 +75,7 @@ const TenantPanel = ({
   copySecretKey,
 }: TenantPanelProps) => {
   const { t } = useTranslation(["DocsConnect", "Common"]);
+  const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState<string>("statistics");
 
   if (!info) return null;
@@ -94,6 +97,13 @@ const TenantPanel = ({
       label: t("Common:EditPlan"),
       icon: SettingsReactSvgUrl,
       onClick: () => openBuyPlan?.("edit"),
+    },
+    {
+      key: "transaction-history",
+      label: t("Common:TransactionHistory"),
+      icon: HistoryReactSvgUrl,
+      onClick: () =>
+        navigate("/portal-settings/payments/services/docs-connect"),
     },
   ];
 

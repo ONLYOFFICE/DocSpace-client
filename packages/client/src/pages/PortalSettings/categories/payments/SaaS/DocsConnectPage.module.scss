@@ -1,0 +1,182 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+@use "@docspace/ui-kit/styles/mixins";
+@use "@docspace/ui-kit/styles/variables/colors" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+.walletCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-sizing: border-box;
+  max-width: 660px;
+  padding: 16px;
+  border-radius: 6px;
+  border: var(--dev-tools-card-border);
+  background-color: var(--background-color);
+
+  @include mixins.mobile {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.walletLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.walletIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: var(--color-scheme-main-buttons);
+  background: color-mix(in srgb, var(--color-scheme-main-buttons) 15%, transparent);
+
+  svg path {
+    fill: currentColor;
+  }
+}
+
+.walletText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.walletTitle {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.walletCredits {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--payment-text-color);
+}
+
+.creditsValue {
+  font-weight: 600;
+  color: $light-second-main;
+}
+
+.sectionTitle {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+  margin-top: 4px;
+}
+
+.trialCard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-sizing: border-box;
+  max-width: 460px;
+  padding: 16px;
+  border-radius: 6px;
+  border: var(--dev-tools-card-border);
+  background-color: var(--background-color);
+}
+
+.trialLabel {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--payment-text-color);
+}
+
+.trialDays {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.trialTotal {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--payment-text-color);
+}
+
+.progress {
+  margin-top: 10px;
+  --progress-bar-size: 8px;
+
+  :global([data-testid="progress-bar-percent"]) {
+    background-image: linear-gradient(
+      to right,
+      #{$light-status-positive},
+      #{$light-status-warning},
+      #{$light-error-status}
+    );
+    background-repeat: no-repeat;
+    background-size: calc(100% / var(--dc-trial-fraction, 1)) 100%;
+  }
+}
+
+.actionsRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.trialEnds {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--text-color);
+}
+
+.history {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 8px;
+}

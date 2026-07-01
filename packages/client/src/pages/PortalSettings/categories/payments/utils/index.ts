@@ -45,6 +45,7 @@ export const PAYMENT_ROUTES = {
   aiServices: `/portal-settings/payments/services/ai-services`,
   backup: `/portal-settings/payments/services/backup`,
   diskStorage: `/portal-settings/payments/services/disk-storage`,
+  docsConnect: `/portal-settings/payments/services/docs-connect`,
 } as const;
 
 export function getTwoDotsReplacing(translation: string) {

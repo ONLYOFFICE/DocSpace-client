@@ -43,8 +43,10 @@ import { DeviceType } from "@docspace/shared/enums";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 import type PaymentStore from "SRC_DIR/store/PaymentStore";
+import type ServicesStore from "SRC_DIR/store/ServicesStore";
 
 import { Knowledge } from "./knowledge";
+import WebSearchSaaS from "./search/WebSearch";
 import AIFeaturesBanner from "./sub-components/AIFeaturesBanner";
 
 const BASE_PATH = "/portal-settings/ai-settings";
@@ -86,6 +88,9 @@ const AISettings = ({
   const location = useLocation();
   const { t } = useTranslation(["Common"]);
 
+  const initWebSearch = React.useCallback(async () => {
+    if (!standalone) await fetchAiPrices?.();
+  }, [standalone, fetchAiPrices]);
   const initKnowledge = React.useCallback(async () => {
     await Promise.all([fetchKnowledge?.(), fetchAIProviders?.()]);
   }, [fetchKnowledge, fetchAIProviders]);
@@ -110,11 +115,12 @@ const AISettings = ({
     }
   }, [hasProfiles, currentTabId, navigate]);
 
-  // Load knowledge config when landing directly on the Knowledge tab.
-  // (Tab onClick only fires on tab switch, not on initial mount.)
+  // Load the data each tab needs when it becomes active (also on direct
+  // landing — tab onClick only fires on switch, not on initial mount).
   React.useEffect(() => {
-    if (currentTabId === TAB_IDS.KNOWLEDGE) initKnowledge();
-  }, [currentTabId, initKnowledge]);
+    if (currentTabId === TAB_IDS.WEB_SEARCH) initWebSearch();
+    else if (currentTabId === TAB_IDS.KNOWLEDGE) initKnowledge();
+  }, [currentTabId, hasProfiles, initAiModels, initWebSearch, initKnowledge]);
 
   const navigateToTab = (id: string) => {
     navigate(`${BASE_PATH}/${id}`);

@@ -81,7 +81,7 @@ const AIFeaturesBanner = ({
     if (!isEnabled) {
       route = isCardLinkedToPortal
         ? `${AI_SERVICES_ROUTE}?activate=${AI_TOOLS}`
-        : `${ALL_SERVICES_ROUTE}?actionType=${AI_ENUM}`;
+        : `${ALL_SERVICES_ROUTE}`; // ?actionType=${AI_ENUM}
     }
 
     navigate(

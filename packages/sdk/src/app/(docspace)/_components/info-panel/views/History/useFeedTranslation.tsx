@@ -331,7 +331,7 @@ export const useFeedTranslation = (
         return t("Common:RoomDenyDownloadDisabled");
       case FeedActionKeys.RoomIndexExportSaved:
         return t("Common:RoomIndexExportLocation", {
-          sectionName: t("Common:MyDocuments"),
+          sectionName: t("Common:Files"),
         });
       case FeedActionKeys.FormSubmit:
         return t("Common:FilledOutForm");

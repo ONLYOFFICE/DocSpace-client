@@ -45,18 +45,26 @@ export type QuickActionsSection =
   | "files"
   // Rooms list root: offer the create-room tile (+ disabled use-template tile).
   | "rooms"
+  // Forms section root: offer the collect-forms tile + from-template tile.
+  | "forms"
+  // Inside a Form Filling room (or its subfolders): only PDF forms can be
+  // created here, so offer the single blank-PDF-form tile.
+  | "form-room"
+  // AI-agents list root: offer the create-agent tile.
+  | "ai-agents"
   // Encrypted/private room: the SDK shows folder + upload tiles here, but the
   // matching illustrations are not bundled in the client package, so we render
   // no banner for now (the `+` button is still hidden — see isFilesRoomsArea).
   | "private"
-  // Archive / trash / templates / favorites / recent / AI-agents / contacts /
-  // profile / settings: no quick-actions banner.
+  // Archive / trash / templates / favorites / recent / contacts / profile /
+  // settings: no quick-actions banner.
   | null;
 
 export type SectionFlags = {
   // Folder-type getters from TreeFoldersStore (current selected folder).
   isDocumentsFolder?: boolean; // rootFolderType === USER ("My documents" tree)
   isRoom?: boolean; // anywhere inside the Rooms tree
+  isFormRoom?: boolean; // inside a Form Filling room (root or its subfolders)
   isRoomsFolder?: boolean; // exactly the rooms list root
   isPrivacyFolder?: boolean; // inside an encrypted/private room
   isArchiveFolder?: boolean;
@@ -66,6 +74,7 @@ export type SectionFlags = {
   isRecentFolder?: boolean;
   isAIAgentsFolder?: boolean;
   // View-level flags (already computed in Home/Header).
+  isFormsSection?: boolean; // the "Forms" section root (CategoryType.Forms)
   isContactsPage?: boolean;
   isProfile?: boolean;
   isSettingsPage?: boolean;
@@ -78,6 +87,7 @@ export const getQuickActionsSection = (
   const {
     isDocumentsFolder,
     isRoom,
+    isFormRoom,
     isRoomsFolder,
     isPrivacyFolder,
     isArchiveFolder,
@@ -86,6 +96,7 @@ export const getQuickActionsSection = (
     isFavoritesFolder,
     isRecentFolder,
     isAIAgentsFolder,
+    isFormsSection,
     isContactsPage,
     isProfile,
     isSettingsPage,
@@ -98,16 +109,26 @@ export const getQuickActionsSection = (
     isRecycleBinFolder ||
     isTemplatesFolder ||
     isFavoritesFolder ||
-    isRecentFolder ||
-    isAIAgentsFolder
+    isRecentFolder
   )
     return null;
+
+  // AI-agents list root → create-agent tile.
+  if (isAIAgentsFolder) return "ai-agents";
+
+  // Forms section root → collect-forms + from-template tiles.
+  if (isFormsSection) return "forms";
 
   // Rooms list root → room tiles.
   if (isRoomsFolder) return "rooms";
 
   // Encrypted/private room → handled separately (no banner for now).
   if (isPrivacyFolder) return "private";
+
+  // Inside a Form Filling room → only PDF forms can be created, so this must
+  // be checked before the generic room/files fallback (a FormRoom is also a
+  // `isRoom`, which would otherwise show the regular file-creation tiles).
+  if (isFormRoom) return "form-room";
 
   // "My documents" tree or inside a regular room → file tiles.
   if (isDocumentsFolder || isRoom) return "files";

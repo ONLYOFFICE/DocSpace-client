@@ -36,7 +36,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useApi, useStores } from "@docspace/ui-kit/ai-agent/providers";
 
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
@@ -93,25 +92,7 @@ const CreateRoomEvent = ({
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
   const [fetchedTags, setFetchedTags] = useState<string[]>([]);
 
-  const { useProfilesStore, useThreadsStore } = useStores();
-  const api = useApi();
-  const profiles = useProfilesStore((s) => s.profiles);
-  const insertThread = useThreadsStore((s) => s.insertThread);
-
   const onCreate = async (agentParams: TAgentParams) => {
-    const baseProfile = agentParams.profileId
-      ? profiles.find((p) => p.id === agentParams.profileId)
-      : profiles.find((p) => p.modelId === agentParams.modelId);
-
-    const title = agentParams.title || t("Common:NewAgent");
-    const thread = await api.threads.create({
-      title,
-      profileId: baseProfile?.id,
-    });
-    await insertThread(thread.threadId, title, {
-      profileId: baseProfile?.id,
-    });
-
     const itemLogo = agentParams.logo
       ? agentParams.logo
       : selectionItems.length

@@ -1,0 +1,29 @@
+{
+  "key_path": "PublicRoomsDescription",
+  "content": "Share via secure links with controlled access, no accounts required.",
+  "content_en_sha1_hash": "51b0464ae32f4e1585130aae96f77b9f0f457daa",
+  "created_at": "2026-06-25T19:30:57.301Z",
+  "updated_at": "2026-06-25T19:34:14.528Z",
+  "comment": {
+    "text": "Description text within a promotional dialog explaining the functionality of the Public Rooms feature.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T19:34:14.528Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
+      "line_number": 108,
+      "context": "description: t(\"Common:ColloborationRoomsDescription\"),\n },\n {\n Icon: PublicRoomIcon,\n title: t(\"Common:PublicRooms\"),\n description: t(\"Common:PublicRoomsDescription\"),\n },\n {\n Icon: VDRRoomIcon,\n title: t(\"Common:VDRRooms\"),\n description: t(\"Common:VDRRoomsDescription\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

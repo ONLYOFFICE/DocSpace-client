@@ -76,7 +76,7 @@ class TreeFoldersStore {
           folder.title = i18n.t("Common:AIAgents");
           break;
         case FolderType.USER:
-          folder.title = i18n.t("Common:MyDocuments");
+          folder.title = i18n.t("Common:Files");
           break;
         case FolderType.SHARE:
           folder.title = i18n.t("Common:SharedWithMe");

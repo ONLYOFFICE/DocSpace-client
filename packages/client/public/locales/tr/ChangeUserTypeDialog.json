@@ -1,5 +1,5 @@
 {
-  "ChangeContactType": "İletişim türünü değiştir  ",
+  "ChangeContactType": "İletişim türünü değiştir",
   "ChangeGuestsTypeMessage": "Konuk <strong>{{userName}}</strong>, {{membersSection}} bölümüne taşınacak ve Kullanıcı türüne atanacaktır. Kullanıcıların kendi «{{documentsSection}} » bölümü vardır, dosya oluşturabilir ve düzenleyebilirler fakat oda oluşturamazlar.",
   "ChangeGuestsTypeMessageMulti": "Seçilen konuklar {{membersSection}} bölümüne taşınacak ve Kullanıcı türü atanacaktır. Kullanıcıların kendi {{documentsSection}} bölümü vardır, dosya oluşturabilir ve düzenleyebilirler fakat oda oluşturamazlar.",
   "ChangeGuestsTypeToAdmin": "Konuk <strong>{{userName}}</strong>, {{membersSection}} bölümüne taşınacak ve <strong>'{{ secondType }}'</strong> türüne atanacaktır. {{productName}} yöneticileri, {{productName}} ayarlarına erişebilir, odaları yönetebilir ve arşivleyebilir, yeni kullanıcılar davet edebilir ve kendi seviyelerinin altındaki rolleri atayabilir. {{productName}} yöneticileri, {{documentsSection}} bölümüne erişebilir.",

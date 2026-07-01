@@ -40,9 +40,21 @@ class AgentsAIConfigStore {
 
   isLoaded = false;
 
+  // Mirror of the chat lib's `useProfilesStore` presence flag, bridged by
+  // ProfilesBridge (ai-agent-providers). `null` = not reported yet — until
+  // then `aiReady` falls back to the legacy portal `/ai/config` flag.
+  // Profiles are the authoritative "AI is configured" signal since the
+  // new-chat switch (the legacy config reports aiReady=false on the new
+  // stack, which used to hide the list filter/quick actions and the chat).
+  hasProfiles: boolean | null = null;
+
   private inflight: Promise<unknown> | null = null;
 
-  constructor() {
+  constructor(initialConfig?: Nullable<TAIConfig>) {
+    if (initialConfig) {
+      this.aiConfig = initialConfig;
+      this.isLoaded = true;
+    }
     makeAutoObservable(this);
   }
 
@@ -51,8 +63,12 @@ class AgentsAIConfigStore {
     this.isLoaded = true;
   };
 
+  setHasProfiles = (value: boolean) => {
+    this.hasProfiles = value;
+  };
+
   get aiReady(): boolean {
-    return this.aiConfig?.aiReady ?? false;
+    return this.hasProfiles ?? this.aiConfig?.aiReady ?? false;
   }
 
   fetchAIConfig = async (options?: { force?: boolean }): Promise<void> => {
@@ -88,10 +104,12 @@ const AgentsAIConfigStoreContext =
 
 export const AgentsAIConfigStoreContextProvider = ({
   children,
+  initialConfig,
 }: {
   children: React.ReactNode;
+  initialConfig?: Nullable<TAIConfig>;
 }) => {
-  const store = React.useMemo(() => new AgentsAIConfigStore(), []);
+  const store = React.useMemo(() => new AgentsAIConfigStore(initialConfig), []);
   return (
     <AgentsAIConfigStoreContext.Provider value={store}>
       {children}

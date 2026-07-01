@@ -108,9 +108,8 @@ import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/fi
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
-  getNewViewUrlByFolderType,
-  isNewProductView,
 } from "SRC_DIR/helpers/utils";
+import { getSectionTrashTarget } from "SRC_DIR/helpers/articleNavigation";
 import { muteRoomNotification } from "@docspace/shared/api/settings";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import UsersFilter from "@docspace/shared/api/people/filter";
@@ -143,6 +142,15 @@ import { FileOperationStatus } from "@docspace/shared/enums";
 import i18n from "../i18n";
 import FilesHeaderOptionStore from "./FilesHeaderOptionStore";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
+
+const SECTION_ROOT_FOLDER_TYPES = [
+  FolderType.Archive,
+  FolderType.USER,
+  FolderType.Rooms,
+  FolderType.SHARE,
+  FolderType.Favorites,
+  FolderType.Recent,
+];
 
 class FilesActionStore {
   settingsStore;
@@ -2296,10 +2304,13 @@ class FilesActionStore {
       setIsSectionBodyLoading(param);
     };
 
-    const { title, fileExst, id, rootFolderType: rootFolderTypeItem } = item;
+    const { title, fileExst, rootFolderType: rootFolderTypeItem } = item;
     const parentId =
       item.parentId || item.toFolderId || item.folderId || recycleBinFolderId;
     const parentTitle = item.parentTitle || item.toFolderTitle;
+
+    const isTrashDestination =
+      parentId === recycleBinFolderId || item.parentType === FolderType.TRASH;
 
     const isRoot = [
       myRoomsId,
@@ -2318,33 +2329,39 @@ class FilesActionStore {
       rootFolderType,
     };
 
-    if (isNewProductView()) {
-      const newViewBase = getNewViewUrlByFolderType(
-        rootFolderTypeItem ?? rootFolderType,
-      );
-
-      const newViewParams = new URLSearchParams(
-        newViewBase.includes("?") ? newViewBase.split("?")[1] : "",
-      );
-      if (title) newViewParams.set("search", title);
-      if (parentId) newViewParams.set("folder", String(parentId));
-
-      const newViewUrl = `${newViewBase.split("?")[0]}?${newViewParams.toString()}`;
-
-      if (!isDesktop()) hideInfoPanel();
-      window.DocSpace.navigate(newViewUrl, { state });
-      return;
-    }
-
-    const url = getCategoryUrl(
-      getCategoryTypeByFolderType(rootFolderTypeItem ?? rootFolderType, id),
-      id,
-    );
-
     const newFilter = FilesFilter.getDefault();
 
     newFilter.search = title;
     newFilter.folder = parentId;
+
+    let url;
+    if (isTrashDestination) {
+      const trashTarget = getSectionTrashTarget(
+        window.DocSpace.location.pathname,
+      );
+      newFilter.folderType = trashTarget.folderType;
+      url = trashTarget.path;
+    } else {
+      const destinationFolderType = SECTION_ROOT_FOLDER_TYPES.includes(
+        item.parentType,
+      )
+        ? item.parentType
+        : (rootFolderTypeItem ?? rootFolderType);
+
+      let categoryType = getCategoryTypeByFolderType(
+        destinationFolderType,
+        parentId,
+      );
+
+      if (
+        window.DocSpace.location.pathname.startsWith("/forms") &&
+        categoryType === CategoryType.SharedRoom
+      ) {
+        categoryType = CategoryType.Form;
+      }
+
+      url = getCategoryUrl(categoryType, parentId);
+    }
 
     setIsLoading(
       window.DocSpace.location.search !== `?${newFilter.toUrlParams()}` ||
@@ -2919,6 +2936,10 @@ class FilesActionStore {
     let pinName = "unpin";
     const { selection } = this.filesStore;
 
+    const hasFormRoom = selection.some(
+      (item) => item.roomType === RoomsType.FormRoom,
+    );
+
     selection.forEach((item) => {
       if (!item.pinned) pinName = "pin";
     });
@@ -2927,7 +2948,6 @@ class FilesActionStore {
     const createGroup = this.getOption("create-group", t);
     const addToGroup = this.getOption("add-to-group", t);
     const removeFromGroup = this.getOption("remove-from-group", t);
-    const archive = this.getOption("archive", t);
     const changeQuota = this.getOption("change-quota", t);
     const disableQuota = this.getOption("disable-quota", t);
     const defaultQuota = this.getOption("default-quota", t);
@@ -2939,8 +2959,9 @@ class FilesActionStore {
       .set("add-to-group", addToGroup)
       .set("remove-from-group", removeFromGroup);
 
+    if (!hasFormRoom) itemsCollection.set("archive", this.getOption("archive", t));
+
     itemsCollection
-      .set("archive", archive)
       .set("change-quota", changeQuota)
       .set("default-quota", defaultQuota)
       .set("disable-quota", disableQuota)
@@ -3344,7 +3365,7 @@ class FilesActionStore {
       if ((fileStatus & FileStatus.IsNew) === FileStatus.IsNew)
         await this.onMarkAsRead(item);
 
-      if ((canWebEdit || canViewedDocs) && !item.encrypted) {
+      if (canWebEdit || canViewedDocs) {
         let shareKey = item.requestToken;
 
         if (webUrl) {

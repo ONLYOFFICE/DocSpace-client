@@ -62,6 +62,7 @@ type CreateRoomEventProps = {
   title: string;
   visible: boolean;
   startRoomType: RoomsType;
+  isFormsCreate?: boolean;
   item: TFolder;
   context: string;
   onClose: VoidFunction;
@@ -128,6 +129,7 @@ const CreateRoomEvent = ({
   enableThirdParty,
   deleteThirdParty,
   startRoomType,
+  isFormsCreate,
   isCorrectWatermark,
   processCreatingRoomFromData,
   setProcessCreatingRoomFromData,
@@ -221,6 +223,7 @@ const CreateRoomEvent = ({
       onClose={onClose}
       onCreate={onCreate}
       startRoomType={startRoomType}
+      isFormsCreate={isFormsCreate}
       fetchedTags={fetchedTags}
       isLoading={isLoading}
       setIsLoading={setIsLoading}

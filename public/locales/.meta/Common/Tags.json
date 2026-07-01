@@ -3,7 +3,7 @@
   "content": "Tags",
   "content_en_sha1_hash": "848eed0fbd5429f556b2982dec3ea87136e33e44",
   "created_at": "2025-05-19T21:30:49.252Z",
-  "updated_at": "2026-06-15T19:31:55.964Z",
+  "updated_at": "2026-06-30T10:18:29.524Z",
   "comment": {
     "text": "This is a label for a column header in a table, a section in an information panel, or a field for entering tags. It refers to keywords or labels associated with an item.",
     "is_auto": true,
@@ -43,19 +43,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1363,
+      "line_number": 1409,
       "context": "const isLast = connectedThirdParty.length === 0;\n \n filterOptions.push({\n key: FilterGroups.roomFilterTags,\n group: FilterGroups.roomFilterTags,\n label: t(\"Common:Tags\"),\n isHeader: true,\n isLast,\n });\n \n filterOptions.push(...tagsOptions);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1363,
+      "line_number": 1409,
       "context": "const isLast = connectedThirdParty.length === 0;\n \n filterOptions.push({\n key: FilterGroups.roomFilterTags,\n group: FilterGroups.roomFilterTags,\n label: t(\"Common:Tags\"),\n isHeader: true,\n isLast,\n });\n \n filterOptions.push(...tagsOptions);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1363,
+      "line_number": 1409,
       "context": "const isLast = connectedThirdParty.length === 0;\n \n filterOptions.push({\n key: FilterGroups.roomFilterTags,\n group: FilterGroups.roomFilterTags,\n label: t(\"Common:Tags\"),\n isHeader: true,\n isLast,\n });\n \n filterOptions.push(...tagsOptions);",
       "module": "/packages/client"
     },
@@ -74,7 +74,7 @@
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/tag-input/index.tsx",
       "line_number": 136,
-      "context": "})}\n >\n <InputParam\n ref={inputRef}\n id=\"shared_tags-input\"\n title={title ? `${title}:` : `${t(\"Common:Tags\")}:`}\n placeholder={t(\"TagsPlaceholder\")}\n value={tagInput}\n onChange={onTagInputChange}\n onFocus={handleFocus}\n onBlur={handleBlur}",
+      "context": "})}\n >\n <InputParam\n ref={inputRef}\n id=\"shared_tags-input\"\n title={title ? `${title}:` : `${t(\"Common:Tags\")}:`}\n placeholder={t(\"Common:TagsPlaceholder\")}\n value={tagInput}\n onChange={onTagInputChange}\n onFocus={handleFocus}\n onBlur={handleBlur}",
       "module": "/packages/sdk"
     },
     {

@@ -114,6 +114,7 @@ export const getFetchedAgentParams = (
     previewIcon: null,
     agentOwner: item.createdBy,
     canChangeAgentOwner: item?.security?.ChangeOwner || false,
+    profileId: item.profileId,
     prompt: item.chatSettings?.prompt,
     providerId: item.chatSettings?.providerId,
     modelId: item.chatSettings?.modelId,

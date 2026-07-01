@@ -36,7 +36,6 @@ import SocketHelper, {
   SocketEvents,
   type TOptSocket,
 } from "@docspace/ui-kit/utils/socket";
-import type { TAgent, TAIConfig } from "@docspace/shared/api/ai/types";
 
 import {
   useAgentsListStore,
@@ -60,56 +59,29 @@ const EditAgentEvent = dynamic(
 type Props = {
   initialSearch: string;
   section?: AgentsListSection;
-  initialAgents?: TAgent[];
-  initialTotal?: number;
-  initialRootFolderId?: number | null;
-  initialAIConfig?: TAIConfig | null;
 };
 
 export type { AgentsListSection };
 
-const AgentsListPage = ({
-  initialSearch,
-  section,
-  initialAgents,
-  initialTotal,
-  initialRootFolderId,
-  initialAIConfig,
-}: Props) => {
+const AgentsListPage = ({ initialSearch, section }: Props) => {
   const store = useAgentsListStore();
   const dialogsStore = useAgentDialogsStore();
   const aiConfigStore = useAgentsAIConfigStore();
 
   useAiAgentsPageInit();
 
-  // Synchronously hydrate the list + AI config stores from SSR data so the
-  // first render already has everything — no client fetch on mount, no
-  // loader flash. Subsequent updates are driven by AgentsFilter callbacks
-  // (which call store.fetchAgents) and socket-driven refetches below.
-  //
-  // If SSR data is missing (e.g. the server-side fetch failed / 401), we
-  // fall through to the client-side fetch in the useEffect below — keeps
-  // the page usable even when SSR can't authenticate.
-  const ssrHydrated = React.useRef(false);
-  if (!ssrHydrated.current && initialAgents !== undefined && initialAIConfig) {
-    ssrHydrated.current = true;
-    const filter = store.filter.clone();
-    if (initialSearch) filter.filterValue = initialSearch;
-    filter.total = initialTotal ?? 0;
-    store.setFilter(filter);
-    store.setAgents(initialAgents, initialTotal ?? 0);
-    if (initialRootFolderId != null) store.setRootFolderId(initialRootFolderId);
-    store.setIsLoading(false);
-    aiConfigStore.setAIConfig(initialAIConfig);
-  }
-
-  // Fallback client-side initial fetch — runs only if SSR didn't hydrate
-  // (initialAgents/initialAIConfig undefined or null). Same behavior as
-  // before SSR was added.
+  // Initial fetch. The store is usually constructed already hydrated with
+  // SSR data (the server layout fetches agents + aiConfig and hands them to
+  // the store providers), so the very first mount consumes that snapshot and
+  // skips the client fetch — no loader flash, and no render-phase observable
+  // writes (the old in-render hydration crashed React by notifying mounted
+  // observers mid-render). On later mounts (client-side nav back to the
+  // list) or when the SSR fetch failed (e.g. 401), fetch as before.
   const didInit = React.useRef(false);
   React.useEffect(() => {
-    if (didInit.current || ssrHydrated.current) return;
+    if (didInit.current) return;
     didInit.current = true;
+    if (store.consumeSSRHydration()) return;
     const filter = store.filter.clone();
     if (initialSearch) filter.filterValue = initialSearch;
     void Promise.all([

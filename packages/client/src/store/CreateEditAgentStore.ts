@@ -49,11 +49,9 @@ import { Nullable } from "@docspace/shared/types";
 import { TWatermark } from "@docspace/shared/api/rooms/types";
 import {
   addServersForRoom,
-  createAIAgent,
+  createAIAgentWithProfile,
   deleteServersForRoom,
-  editAIAgent,
-  getDefaultProvider,
-  getModels,
+  editNewAiAgent,
 } from "@docspace/shared/api/ai";
 import {
   TAgentIconParams,
@@ -63,6 +61,8 @@ import {
   TAgent,
   TAgentLogo,
   TChatSettings,
+  TCreateAgentWithProfileData,
+  TEditAgentData,
 } from "@docspace/shared/api/ai/types";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 
@@ -182,16 +182,12 @@ class CreateEditRoomStore {
     const { uploadedFile, getUploadedLogoData } = this.avatarEditorDialogStore!;
     const { changeRoomOwner } = this.filesActionsStore!;
 
-    const {
-      title,
-      icon,
-      agentId,
-      prompt,
-      providerId,
-      modelId,
-      agentOwner,
-      quota,
-    } = newParams;
+    const { title, icon, agentId, prompt, agentOwner, quota, profileId } =
+      newParams;
+
+    // new-ai service rebinds the agent's Chat-action profile when a
+    // profileId is sent; only include it when actually changed.
+    const isProfileChanged = !!profileId && profileId !== agent.profileId;
 
     const quotaLimit = quota || agent.quotaLimit;
     const isQuotaChanged = quotaLimit !== agent.quotaLimit;
@@ -203,7 +199,7 @@ class CreateEditRoomStore {
     const currTags = newParams.tags.map((p) => p.name).sort();
     const isTagsChanged = !isEqual(prevTags, currTags);
 
-    const editAgentParams = {
+    const editAgentParams: TEditAgentData = {
       ...(isTitleChanged && {
         title: title || t("Common:NewRoom"),
       }),
@@ -224,11 +220,11 @@ class CreateEditRoomStore {
 
       logo: undefined as TAgentLogo | undefined,
 
-      ...((prompt || providerId || modelId) && {
-        chatSettings: {
-          prompt,
-        },
+      ...(prompt && {
+        chatSettings: { prompt } satisfies TChatSettings,
       }),
+
+      ...(isProfileChanged && { profileId }),
     };
 
     const isDeleteLogo = !!agent.logo.original && !icon.uploadedFile;
@@ -261,7 +257,7 @@ class CreateEditRoomStore {
 
     try {
       if (Object.keys(editAgentParams).length) {
-        await editAIAgent(agent.id, editAgentParams);
+        await editNewAiAgent(agent.id, editAgentParams);
       }
 
       if (isOwnerChanged) {
@@ -314,6 +310,12 @@ class CreateEditRoomStore {
   };
 
   onCreateAgent = async (t: TFunction, successToast: Element | null = null) => {
+    // Re-entry guard: the create dialog can fire this twice in one click
+    // (submit button is both `type="submit"` and has an onClick), which would
+    // POST two agents. `isLoading` is set synchronously below before the first
+    // await, so the second call bails here.
+    if (this.isLoading) return;
+
     const agentParams = this.agentParams!;
 
     const { attachDefaultTools } = agentParams;
@@ -321,8 +323,14 @@ class CreateEditRoomStore {
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore!;
     const { cover, clearCoverProps } = this.dialogsStore!;
 
-    const { tags, title, icon, logo, prompt, providerId, modelId, quota } =
-      agentParams;
+    const { tags, title, icon, logo, prompt, profileId, quota } = agentParams;
+
+    // The new-ai create endpoint binds the agent to a chat-lib profile
+    // server-side; a profile must be selected before we can create.
+    if (!profileId) {
+      toastr.error(t("Common:RequiredField"));
+      return;
+    }
 
     const quotaLimit = isDefaultRoomsQuotaSet ? quota : null;
 
@@ -340,8 +348,10 @@ class CreateEditRoomStore {
           }
         : null;
 
-    const createAgentData = {
+    const createAgentData: TCreateAgentWithProfileData = {
       title: title || t("Common:NewAgent"),
+      profileId,
+      prompt: prompt ?? "",
 
       ...(quotaLimit && {
         quota: +quotaLimit,
@@ -355,10 +365,6 @@ class CreateEditRoomStore {
 
       logo: undefined as TAgentLogo | undefined,
 
-      ...((prompt || modelId) && {
-        chatSettings: { prompt, modelId } as TChatSettings,
-      }),
-
       ...(typeof attachDefaultTools === "boolean" && {
         attachDefaultTools,
       }),
@@ -367,35 +373,12 @@ class CreateEditRoomStore {
     this.setIsLoading(true);
 
     try {
-      // If providerId is not set (library profile flow), resolve it from the backend.
-      // Also validate modelId against backend's active models — fall back to defaultModel if not found.
-      if (!providerId) {
-        try {
-          const defaultProvider = await getDefaultProvider();
-          if (defaultProvider?.providerId) {
-            const activeModels = await getModels(defaultProvider.providerId);
-            const resolvedModelId = activeModels.some(
-              (m) => m.modelId === modelId,
-            )
-              ? modelId
-              : defaultProvider.defaultModel;
-            createAgentData.chatSettings = {
-              ...createAgentData.chatSettings,
-              providerId: defaultProvider.providerId,
-              modelId: resolvedModelId,
-            };
-          }
-        } catch {
-          // ignore — createAIAgent may still succeed without chatSettings
-        }
-      }
-
       if (icon.uploadedFile && typeof icon.uploadedFile !== "string") {
         const agentLogo = await this.getAgentLogo(icon);
         createAgentData.logo = agentLogo;
       }
 
-      const agent = await createAIAgent(createAgentData);
+      const agent = await createAIAgentWithProfile(createAgentData);
       if ((agent as unknown as { errorMsg: string }).errorMsg) {
         return toastr.error(
           (agent as unknown as { errorMsg: string }).errorMsg,

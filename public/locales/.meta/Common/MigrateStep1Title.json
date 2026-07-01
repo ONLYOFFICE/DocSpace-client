@@ -1,0 +1,29 @@
+{
+  "key_path": "MigrateStep1Title",
+  "content": "Billing via Stripe stops today",
+  "content_en_sha1_hash": "ff41bb2c83d3a6228a32bb106e4bd017f9cd95f3",
+  "created_at": "2026-06-30T07:32:34.337Z",
+  "updated_at": "2026-06-30T11:38:22.654Z",
+  "comment": {
+    "text": "Step title within the migration dialog notifying users that Stripe-based billing ends today.",
+    "is_auto": true,
+    "updated_at": "2026-06-30T07:35:40.635Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "line_number": 259,
+      "context": "</div>\n \n <ol className={styles.steps}>\n {renderStep(\n 1,\n t(\"MigrateStep1Title\"),\n <>\n <div className={styles.card}>\n {renderRow(\n t(\"MigrateCurrentTariff\"),\n t(\"MigratePerMonth\", {",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

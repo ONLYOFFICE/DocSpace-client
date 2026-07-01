@@ -107,6 +107,37 @@ function clearWrongKeys(entries, label) {
 }
 
 /**
+ * Trim leading/trailing whitespace from translation values when
+ * TRIM_WRONG_VALUES=true. Accepts entries already resolved to { filePath, key }.
+ *
+ * @param {Array<{filePath: string, key: string}>} entries
+ * @param {string} label - Description for console output (e.g. "whitespace values")
+ */
+function trimWrongValues(entries, label) {
+  if (process.env.TRIM_WRONG_VALUES !== "true" || entries.length === 0) return;
+
+  const grouped = {};
+  entries.forEach(({ filePath, key }) => {
+    if (!grouped[filePath]) grouped[filePath] = [];
+    grouped[filePath].push(key);
+  });
+
+  let total = 0;
+  Object.entries(grouped).forEach(([fp, keys]) => {
+    const content = JSON.parse(fs.readFileSync(fp, "utf8"));
+    keys.forEach((k) => {
+      if (typeof content[k] === "string" && content[k] !== content[k].trim()) {
+        content[k] = content[k].trim();
+        total += 1;
+      }
+    });
+    fs.writeFileSync(fp, `${JSON.stringify(content, null, 2)}\n`);
+  });
+
+  console.log(`Trimmed ${total} ${label}.`);
+}
+
+/**
  * Resolve wrongKeys array of { language, key } (where key = "namespace:actualKey")
  * into { filePath, key } entries suitable for clearWrongKeys().
  * Deduplicates by language:key.
@@ -225,7 +256,8 @@ beforeAll(() => {
 
   i18nFiles = javascripts.filter(
     (filePath) =>
-      filePath.endsWith("/i18n.js") || filePath.endsWith("/i18n.ts"),
+      filePath.endsWith(convertPathToOS("/i18n.js")) ||
+      filePath.endsWith(convertPathToOS("/i18n.ts")),
   );
 
   console.log(
@@ -241,9 +273,13 @@ beforeAll(() => {
   const pattern6 = 'titleKey:\\s"([a-zA-Z0-9_.:-]+)"';
   const pattern7 = 'translationKey:\\s"([a-zA-Z0-9_.:-]+)"';
   const pattern8 = 'labelKey:\\s"([a-zA-Z0-9_.:-]+)"';
+  // aiT — alias for the i18n `t` from the @onlyoffice/ai-chat bundle
+  // (e.g. `const { t: aiT } = useI18n()`).
+  const pattern9 =
+    "aiT\\(\\s*[\"'`]([a-zA-Z0-9_.:\\s{}/-]+)[\"'`]\\s*[\\),]";
 
   const regexp = new RegExp(
-    `(${pattern1})|(${pattern2})|(${pattern3})|(${pattern4})|(${pattern5})|(${pattern6})|(${pattern7})|(${pattern8})`,
+    `(${pattern1})|(${pattern2})|(${pattern3})|(${pattern4})|(${pattern5})|(${pattern6})|(${pattern7})|(${pattern8})|(${pattern9})`,
     "gm",
   );
 
@@ -288,7 +324,18 @@ beforeAll(() => {
     const matches = [...jsFileText.matchAll(regexp)];
 
     const translationKeys = matches
-      .map((m) => m[2] || m[4] || m[6] || m[8] || m[10] || m[12] || m[14] || m[16])
+      .map(
+        (m) =>
+          m[2] ||
+          m[4] ||
+          m[6] ||
+          m[8] ||
+          m[10] ||
+          m[12] ||
+          m[14] ||
+          m[16] ||
+          m[18],
+      )
       .filter((m) => m != null);
 
     if (translationKeys.length === 0) return;
@@ -1029,6 +1076,46 @@ describe("Locales Tests", () => {
     expect(exists, message).toBe(false);
   });
 
+  it("TrailingWhitespaceTest: Verify that translation values have no leading or trailing whitespace that the English source does not have.", () => {
+    // Some English values intentionally end with a space because an inline
+    // element (link, button) is concatenated after them (e.g. SDKDescription:
+    // "...refer to the "). Those translations legitimately keep the whitespace.
+    // So we only flag a translation when its English counterpart is itself
+    // free of surrounding whitespace — i.e. the whitespace was added by mistake.
+    const enValues = new Map();
+    translationFiles
+      .filter((file) => file.language === "en")
+      .forEach((file) => {
+        file.translations.forEach((t) => {
+          enValues.set(`${file.namespace}:${t.key}`, t.value);
+        });
+      });
+
+    let message =
+      "Next translation values have leading/trailing whitespace absent from the English source:\r\n\r\n";
+    let i = 0;
+    const whitespaceEntries = [];
+
+    translationFiles.forEach((file) => {
+      file.translations.forEach((t) => {
+        if (typeof t.value !== "string" || !t.value.length) return;
+        if (t.value === t.value.trim()) return;
+
+        const enValue = enValues.get(`${file.namespace}:${t.key}`);
+        // No English counterpart, or English itself has surrounding
+        // whitespace (intentional concatenation) — skip.
+        if (enValue === undefined || enValue !== enValue.trim()) return;
+
+        message += `${++i}. Language '${file.language}' key '${file.namespace}:${t.key}' (Path '${file.path}')\r\n  Value: '${t.value}'\r\n\r\n`;
+        whitespaceEntries.push({ filePath: file.path, key: t.key });
+      });
+    });
+
+    trimWrongValues(whitespaceEntries, "whitespace translation values");
+
+    expect(whitespaceEntries.length, message).toBe(0);
+  });
+
   it("NotFoundEnKey: No English key variants: Verify that there are no translation keys in languages other than English that are not present in the English translation files.", () => {
     let message = `Next keys are not found in 'en' language:\r\n\r\n`;
 
@@ -1358,7 +1445,7 @@ describe("Locales Tests", () => {
           .filter((ns) => ns && ns !== "");
 
         // Find the corresponding public/locales directory for this i18n file
-        const packagePath = i18nFile.replace(/\/src\/.*$/, "");
+        const packagePath = i18nFile.replace(/[\\/]src[\\/].*$/, "");
         const packageLocalesPath = path.join(
           packagePath,
           "public",

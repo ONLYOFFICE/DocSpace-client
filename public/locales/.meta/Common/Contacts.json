@@ -3,7 +3,7 @@
   "content": "Contacts",
   "content_en_sha1_hash": "b0dd615cbbdcbf21ffb72115599ca915634fcb85",
   "created_at": "2025-05-19T21:30:43.662Z",
-  "updated_at": "2026-06-15T19:31:55.924Z",
+  "updated_at": "2026-06-30T10:18:29.525Z",
   "comment": {
     "text": "This is a header label for a people selector or invitation panel, identifying the section as \"Contacts\".",
     "is_auto": true,
@@ -16,12 +16,6 @@
       "line_number": 573,
       "context": "const headerSelectorProps: TSelectorHeader = withHeader\n ? {\n withHeader,\n headerProps: {\n ...headerProps,\n headerLabel: headerProps.headerLabel || t(\"Contacts\"),\n },\n }\n : ({} as TSelectorHeader);\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton",
       "module": "/libs/ui-kit"
-    },
-    {
-      "file_path": "/packages/client/src/components/AppsSidebar/FooterMenu.tsx",
-      "line_number": 80,
-      "context": "const items: NavMenuItem[] = [];\n \n if (showContacts) {\n items.push({\n id: CONTACTS_ID,\n label: t(\"Common:Contacts\"),\n icon: ContactsIconUrl,\n onClick: () => navigate(\"/accounts/people\"),\n });\n }\n if (showBilling) {",
-      "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
@@ -43,19 +37,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/headerGeneral.tsx",
-      "line_number": 118,
-      "context": ": (availableTabs[0] ?? InfoPanelView.infoDetails);\n \n const tabItems = availableTabs.map((id) => {\n const name = match(id)\n .with(InfoPanelView.infoMembers, () =>\n isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\"),\n )\n .with(InfoPanelView.infoShare, () => t(\"Common:Share\"))\n .with(InfoPanelView.infoHistory, () => t(\"Common:SubmenuHistory\"))\n .with(InfoPanelView.infoDetails, () => t(\"Common:SubmenuDetails\"))\n .with(InfoPanelView.infoAIChat, () => t(\"InfoPanel:SubmenuAIChat\"))",
+      "line_number": 116,
+      "context": ": (availableTabs[0] ?? InfoPanelView.infoDetails);\n \n const tabItems = availableTabs.map((id) => {\n const name = match(id)\n .with(InfoPanelView.infoMembers, () =>\n isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\"),\n )\n .with(InfoPanelView.infoShare, () => t(\"Common:Share\"))\n .with(InfoPanelView.infoHistory, () => t(\"Common:SubmenuHistory\"))\n .with(InfoPanelView.infoDetails, () => t(\"Common:SubmenuDetails\"))\n .otherwise(() => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1243,
+      "line_number": 1287,
       "context": "const subjectOptions = [\n {\n key: FilterGroups.roomFilterSubject,\n group: FilterGroups.roomFilterSubject,\n label: isTemplatesFolder ? t(\"TemplateOwner\") : t(\"Common:Contacts\"),\n isHeader: true,\n isLast: isAIAgentsFolder && !tags?.length,\n withMultiItems: true,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 858,
+      "line_number": 886,
       "context": "const accountsNavigationPath = React.useMemo(() => {\n if (isContactsInsideGroupPage) {\n return [\n {\n id: 0,\n title: t(\"Common:Contacts\"),\n isRoom: false,\n isRootRoom: true,\n },\n ];\n }",
       "module": "/packages/client"
     },

@@ -3,7 +3,7 @@
   "content": "MCP servers",
   "content_en_sha1_hash": "8d9a304fd985232ade488e1913e41a3d9a502b09",
   "created_at": "2025-11-21T08:21:51.274Z",
-  "updated_at": "2026-06-01T21:20:44.406Z",
+  "updated_at": "2026-06-25T19:31:02.910Z",
   "comment": {
     "text": "This is a noun phrase used as a label for a setting or a section related to managing \"MCP servers.\" It appears in tooltips and as part of longer sentences in empty state messages.",
     "is_auto": true,
@@ -39,24 +39,6 @@
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/MCP.tsx",
       "line_number": 85,
       "context": "fontWeight={400}\n className=\"set_room_params-info-description\"\n noSelect\n >\n {t(\"MCPDescriptionServers\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n })}\n </Text>\n </div>\n <div className=\"ai-mcp-group\">\n <AddButton onClick={onClickAction} />",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 145,
-      "context": "? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"Common:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);\n \n const serversData = [\n {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 145,
-      "context": "? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"Common:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);\n \n const serversData = [\n {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/index.tsx",
-      "line_number": 237,
-      "context": "return (\n <div className={styles.mcpServers}>\n <Text className={styles.description}>\n {t(\"Common:MCPSettingsDescription\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n aiChats: t(\"Common:AIChats\"),\n })}\n </Text>\n {mcpServersSettingsUrl ? (\n <Link",
       "module": "/packages/client"
     },
     {

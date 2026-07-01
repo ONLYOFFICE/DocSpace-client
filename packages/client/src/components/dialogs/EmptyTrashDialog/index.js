@@ -60,7 +60,7 @@ const EmptyTrashDialogComponent = (props) => {
   const sectionName = isArchiveFolder
     ? t("Common:Archive")
     : isPersonalReadOnly
-      ? t("Common:MyDocuments")
+      ? t("Common:Files")
       : t("Common:TrashSection");
 
   const onEmptyTrash = () => {

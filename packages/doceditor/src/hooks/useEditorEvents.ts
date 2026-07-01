@@ -34,7 +34,7 @@
  */
 
 import React, { useCallback } from "react";
-import { match, Pattern } from "ts-pattern";
+import { match } from "ts-pattern";
 import isUndefined from "lodash/isUndefined";
 import { useSearchParams } from "next/navigation";
 
@@ -59,14 +59,11 @@ import type {
   TSharedUsers,
 } from "@docspace/shared/api/files/types";
 import {
-  getProviders,
-  getModels,
-  getDefaultProvider,
+  getProfilesList,
+  getProfileAssignments,
 } from "@docspace/shared/api/ai";
-import type {
-  TAiProvider,
-  TDefaultProvider,
-} from "@docspace/shared/api/ai/types";
+import { DEFAULT_SERVER_API_ROUTES } from "@docspace/ui-kit/ai-agent/providers";
+import type { ServerAPIConfig } from "@docspace/ui-kit/ai-agent/providers";
 import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import {
   CREATED_FORM_KEY,
@@ -106,7 +103,6 @@ import type {
 } from "@/types";
 import { onSDKInfo } from "@/utils/events";
 import externalAIFetch, { abortAllRequests } from "@/utils/aiProxy";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 let docEditor: TDocEditor | null = null;
 
@@ -135,6 +131,7 @@ const useEditorEvents = ({
   const [usersInRoom, setUsersInRoom] = React.useState<TSharedUsers[]>([]);
   const [docTitle, setDocTitle] = React.useState("");
   const [docSaved, setDocSaved] = React.useState(false);
+  const aiInitedRef = React.useRef(false);
 
   const onSDKRequestReferenceData = React.useCallback(
     async (event: object) => {
@@ -280,157 +277,192 @@ const useEditorEvents = ({
 
     if (config?.errorMessage) docEditor?.showMessage?.(config.errorMessage);
 
-    const connector = docEditor?.createConnector?.();
-    let provider: TAiProvider | undefined;
+    if (!aiInitedRef.current) {
+      const connector = docEditor?.createConnector?.();
 
-    if (connector && successAuth && !isOAuthFrame()) {
-      try {
-        const defaultPortalProvider = (await getDefaultProvider()) as
-          | TDefaultProvider
-          | undefined;
+      if (connector && !isOAuthFrame()) {
+        aiInitedRef.current = true;
 
-        if (defaultPortalProvider) {
-          const DEFAULT_MODEL = "gpt-5.2";
-          let model = defaultPortalProvider.defaultModel || DEFAULT_MODEL;
+        let aiAvailable = false;
+        const modelProfileMap = new Map<string, string>();
 
-          if (defaultPortalProvider.providerId === -1) {
-            provider = {
-              id: defaultPortalProvider.providerId,
-              title: defaultPortalProvider.providerTitle,
-            } as TAiProvider;
-          } else {
-            const providers = await getProviders();
+        const isEncrypted = !!config?.file?.encrypted;
 
-            provider = providers.find(
-              (p: TAiProvider) =>
-                p.id === defaultPortalProvider?.providerId && !p.needReset,
-            );
-
-            if (provider) {
-              const models = await getModels(provider.id);
-              provider.title = `${getBrandName("ProductName")} [${provider.title}]`;
-              model = models[0]?.modelId || model;
-            }
-          }
-
-          const sendTools = (data?: unknown) => {
-            console.log("send");
-            window.parent?.postMessage({ type: "initedAiPlugin", data }, "*");
-          };
-
-          connector.executeMethod("AI", [{ type: "Tools" }], (data) => {
-            console.log("AI Tools data:", data);
-            if (
-              data &&
+        if (successAuth && !isEncrypted) {
+          try {
+            const hasError = (data: unknown) =>
+              !!data &&
               typeof data === "object" &&
               "error" in data &&
-              data.error
-            ) {
-              connector.attachEvent("ai_onInit", sendTools);
-            } else {
-              window.parent?.postMessage({ type: "initedAiPlugin", data }, "*");
-            }
-          });
+              !!data.error;
 
-          if (provider) {
-            const providerTitle = provider.title;
-            const modelName = `${providerTitle} [${model}]`;
-            const providerId = provider.id;
-
-            const sendProviders = () => {
-              connector.sendEvent("ai_onCustomProviders", [
-                { name: providerTitle },
-              ]);
-
-              connector.sendEvent("ai_onCustomInit", {
-                settingsLock: undefined,
-                actionsOverride: true,
-                actions: {
-                  Chat: { model },
-                  Summarization: { model },
-                  Translation: { model },
-                  TextAnalyze: { model },
-                },
-                models: [
-                  {
-                    capabilities: 255,
-                    provider: providerTitle,
-                    name: modelName,
-                    id: model,
-                  },
-                ],
+            const whenAiReady = (
+              type: "Tools" | "Actions",
+              onReady: (data?: unknown) => void,
+            ) => {
+              connector.executeMethod("AI", [{ type }], (data) => {
+                if (hasError(data)) connector.attachEvent("ai_onInit", onReady);
+                else onReady(data);
               });
-
-              if (generationToolCallState) {
-                connector.sendEvent("ai_onCallTool", {
-                  name: generationToolCallState.toolName,
-                  arguments: {
-                    ...generationToolCallState.parameters,
-                  },
-                });
-              }
             };
 
-            connector.executeMethod("AI", [{ type: "Actions" }], (data) => {
-              if (
-                data &&
-                typeof data === "object" &&
-                "error" in data &&
-                data.error
-              ) {
-                connector.attachEvent("ai_onInit", sendProviders);
-              } else {
-                sendProviders();
+            const sendTools = (data?: unknown) =>
+              window.parent?.postMessage({ type: "initedAiPlugin", data }, "*");
+
+            const fireGenerationToolCall = () => {
+              if (!generationToolCallState) return;
+              connector.sendEvent("ai_onCallTool", {
+                name: generationToolCallState.toolName,
+                arguments: { ...generationToolCallState.parameters },
+              });
+              const url = new URL(window.location.href);
+              url.searchParams.delete("withTool");
+              window.history.replaceState(null, "", url.toString());
+            };
+
+            const editorOrigin = (() => {
+              try {
+                return config?.editorUrl
+                  ? new URL(config.editorUrl).origin
+                  : "";
+              } catch {
+                return "";
               }
-            });
+            })();
+            const sameOrigin =
+              typeof window !== "undefined" &&
+              editorOrigin === window.location.origin;
 
-            connector.attachEvent("ai_onExternalFetch", (e: unknown) =>
-              externalAIFetch(connector, e as TEditorAIEvent, providerId),
-            );
+            if (sameOrigin) {
+              aiAvailable = true;
+              whenAiReady("Tools", sendTools);
+              whenAiReady("Actions", () => {
+                connector.sendEvent("ai_onCustomInit", {
+                  actionsOverride: true,
+                  apiConfig: {
+                    origin: window.location.origin,
+                    baseUrl: "/api/2.0/new-ai",
+                    routes: DEFAULT_SERVER_API_ROUTES,
+                  } satisfies ServerAPIConfig,
+                });
+                fireGenerationToolCall();
+              });
+            } else {
+              const profiles = await getProfilesList();
 
+              if (profiles && profiles.length > 0) {
+                aiAvailable = true;
+
+                profiles.forEach((p) => {
+                  if (modelProfileMap.has(p.modelId)) {
+                    console.warn(
+                      `Duplicate modelId "${p.modelId}" across AI profiles; external fetch may resolve to the wrong profile.`,
+                    );
+                  }
+                  modelProfileMap.set(p.modelId, p.id);
+                });
+
+                const aiProfiles = profiles.map((p) => ({
+                  id: p.id,
+                  name: p.name,
+                  modelId: p.modelId,
+                  headers: p.headers,
+                  reasoning: p.reasoning,
+                  capabilities: p.capabilities,
+                  canUseTool: p.canUseTool ?? false,
+                  useResponsesApi: p.useResponsesApi,
+                  providerType: p.providerType,
+                }));
+
+                const validProfileIds = new Set(profiles.map((p) => p.id));
+
+                const assignments = await getProfileAssignments();
+
+                const actions: Record<string, { model: string }> = {};
+                Object.entries(assignments ?? {}).forEach(
+                  ([action, profileId]) => {
+                    if (validProfileIds.has(profileId))
+                      actions[action] = { model: profileId };
+                  },
+                );
+
+                whenAiReady("Tools", sendTools);
+                whenAiReady("Actions", () => {
+                  connector.sendEvent("ai_onCustomInit", {
+                    actionsOverride: true,
+                    profiles: aiProfiles,
+                    actions,
+                  });
+                  fireGenerationToolCall();
+                });
+
+                connector.attachEvent("ai_onExternalFetch", (e: unknown) =>
+                  externalAIFetch(
+                    connector,
+                    e as TEditorAIEvent,
+                    modelProfileMap,
+                  ),
+                );
+              }
+            }
+          } catch (error) {
+            console.error("Failed to initialize AI provider:", error);
           }
         }
 
-      } catch (error) {
-        console.error("Failed to initialize AI provider:", error);
-      }
-    }
+        // The editor may be hosted either in an iframe (host is `window.parent`)
+        // or in a new tab opened via `window.open` (host is `window.opener`,
+        // while `window.parent` === self). Resolve the real host window so the
+        // ready signal and tool results reach the opener in both cases.
+        const hostWindow =
+          window.opener && window.opener !== window
+            ? (window.opener as Window)
+            : window.parent;
 
-    // Active whenever connector exists — does not require successAuth or a configured provider.
-    if (connector) {
-      const onParentMessage = (event: MessageEvent) => {
-        if (event.source !== window.parent) return;
-        const payload = event.data;
-        if (
-          !payload ||
-          typeof payload !== "object" ||
-          (payload as { type?: unknown }).type !== "callEditorTool"
-        )
-          return;
+        const onParentMessage = (event: MessageEvent) => {
+          if (event.source !== hostWindow) return;
+          const payload = event.data;
+          if (
+            !payload ||
+            typeof payload !== "object" ||
+            (payload as { type?: unknown }).type !== "callEditorTool"
+          )
+            return;
 
-        const { callId, name, arguments: args } = payload as {
-          callId?: string;
-          name?: string;
-          arguments?: Record<string, unknown>;
+          const {
+            callId,
+            name,
+            arguments: args,
+          } = payload as {
+            callId?: string;
+            name?: string;
+            arguments?: Record<string, unknown>;
+          };
+          if (typeof name !== "string") return;
+
+          if (aiAvailable) {
+            connector.sendEvent("ai_onCallTool", {
+              name,
+              arguments: args ?? {},
+            });
+            hostWindow?.postMessage(
+              { type: "editorToolResult", callId, result: "" },
+              "*",
+            );
+          } else {
+            hostWindow?.postMessage(
+              {
+                type: "editorToolResult",
+                callId,
+                result: JSON.stringify({ error: "AI provider not configured" }),
+              },
+              "*",
+            );
+          }
         };
-        if (typeof name !== "string") return;
-
-        if (provider) {
-          connector.sendEvent("ai_onCallTool", { name, arguments: args ?? {} });
-          window.parent?.postMessage(
-            { type: "editorToolResult", callId, result: "" },
-            "*",
-          );
-        } else {
-          window.parent?.postMessage(
-            { type: "editorToolResult", callId, result: JSON.stringify({ error: "AI provider not configured" }) },
-            "*",
-          );
-        }
-      };
-      window.addEventListener("message", onParentMessage);
-      // Signal parent that this window is ready to receive callEditorTool messages.
-      window.parent?.postMessage({ type: "editorDocumentReady" }, "*");
+        window.addEventListener("message", onParentMessage);
+        hostWindow?.postMessage({ type: "editorDocumentReady" }, "*");
+      }
     }
 
     // Do not remove: it's for Back button on Mobile App
@@ -443,6 +475,7 @@ const useEditorEvents = ({
     }
   }, [
     config?.errorMessage,
+    config?.file?.encrypted,
     sdkConfig?.frameId,
     checkAndRequestRoles,
     t,
@@ -1100,4 +1133,3 @@ const useEditorEvents = ({
 };
 
 export default useEditorEvents;
-

@@ -9,8 +9,8 @@
   "ChangeUserTypeButton": "유형 변경",
   "ChangeUserTypeMessage": "<strong>'{{ firstType }}'</strong> 유형 사용자가 <strong>'{{ secondType }}'</strong> 유형으로 이동됩니다.",
   "ChangeUserTypeNote": "<1>참고:</1> {{productName}} 관리자와 본인에 대한 유형은 변경할 수 없습니다.",
-  "DataReassignmentInfo": "이 사용자가 생성한 룸은 자동으로 고객님에게 할당됩니다. 해당 룸을 다른 사람에게 다시 할당하려면 아래에서 해당 링크를 클릭하세요. ",
-  "DataReassignmentWithFilesDeletion": "이 연락처가 생성한 모든 공유 파일은 <1>30일 후에 자동으로 고객님에게 할당됩니다</1>. 해당 룸/공유 파일을 다른 사람에게 다시 할당하려면 아래에서 해당 링크를 클릭하세요. ",
+  "DataReassignmentInfo": "이 사용자가 생성한 룸은 자동으로 고객님에게 할당됩니다. 해당 룸을 다른 사람에게 다시 할당하려면 아래에서 해당 링크를 클릭하세요.",
+  "DataReassignmentWithFilesDeletion": "이 연락처가 생성한 모든 공유 파일은 <1>30일 후에 자동으로 고객님에게 할당됩니다</1>. 해당 룸/공유 파일을 다른 사람에게 다시 할당하려면 아래에서 해당 링크를 클릭하세요.",
   "PersonalDataDeletion": "이 연락처의 {{sectionName}} 섹션의 모든 파일 및 폴더는 <1>30일 후에 영구적으로 삭제됩니다</1>.",
   "SuccessChangeGuestType": "게스트 유형이 변경되었습니다",
   "SuccessChangeUserType": "사용자 유형이 성공적으로 변경되었습니다"

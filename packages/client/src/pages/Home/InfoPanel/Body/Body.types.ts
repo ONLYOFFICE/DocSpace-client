@@ -48,6 +48,7 @@ export type BodyProps = {
   fileView: InfoPanelStore["fileView"];
   getIsFiles: InfoPanelStore["getIsFiles"];
   getIsRooms: InfoPanelStore["getIsRooms"];
+  getIsForms: InfoPanelStore["getIsForms"];
   getIsAIAgent: InfoPanelStore["getIsAIAgent"];
   getIsTrash: InfoPanelStore["getIsTrash"];
 

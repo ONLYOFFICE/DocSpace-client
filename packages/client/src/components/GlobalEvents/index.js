@@ -194,6 +194,7 @@ const GlobalEvents = ({
       // CreateRoomEvent reads `startRoomType` (not `type`) to open the dialog
       // straight on a preset room type and lock the chooser.
       startRoomType: e?.payload?.startRoomType,
+      isFormsCreate: e?.payload?.isFormsCreate,
       item: e.item,
       context: e.context || e.detail?.context || "",
       visible: true,
@@ -202,6 +203,7 @@ const GlobalEvents = ({
           visible: false,
           onClose: null,
           startRoomType: undefined,
+          isFormsCreate: undefined,
         }),
     });
   }, []);

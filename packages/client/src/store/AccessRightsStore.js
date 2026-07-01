@@ -66,7 +66,9 @@ class AccessRightsStore {
   }
 
   get canUseChat() {
-    const { security } = this.selectedFolderStore;
+    const { security, private: isPrivate } = this.selectedFolderStore;
+
+    if (isPrivate) return false;
 
     return !!security && "UseChat" in security && security.UseChat;
   }

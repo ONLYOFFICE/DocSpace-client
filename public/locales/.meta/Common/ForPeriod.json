@@ -1,0 +1,47 @@
+{
+  "key_path": "ForPeriod",
+  "content": "For {{period}}",
+  "content_en_sha1_hash": "6fa271e32aa734f72825fb69453a3519528879e0",
+  "created_at": "2026-06-25T11:54:50.691Z",
+  "updated_at": "2026-06-30T11:38:22.659Z",
+  "comment": {
+    "text": "Caption for billing cards and usage summaries specifying the timeframe for displayed data; {{period}} represents a specific month or time range name.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:11:01.254Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
+      "line_number": 303,
+      "context": "<Text className={styles.cardLabel}>{t(\"MonthSpend\")}</Text>\n <Text className={styles.cardValue}>\n {formatWalletCurrency(monthSpend, 2)}\n </Text>\n <Text className={styles.cardCaption}>\n {t(\"ForPeriod\", { period: monthLabel })}\n </Text>\n </div>\n \n <div className={styles.card}>\n <Text className={styles.cardLabel}>{t(\"MonthUsage\")}</Text>",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/usage/index.tsx",
+      "line_number": 129,
+      "context": "});\n \n const dateRangeSpan = <Text as=\"span\" className={styles.totalRange} />;\n \n const periodCaption: Record<TUsagePeriodKey, ReactNode> = {\n thisMonth: t(\"ForPeriod\", { period: monthText }),\n lastMonth: t(\"ForPeriod\", { period: monthText }),\n last3Months: (\n <CommonTrans\n i18nKey=\"ForLast3Months\"\n values={{ startDate, endDate }}",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/usage/index.tsx",
+      "line_number": 129,
+      "context": "});\n \n const dateRangeSpan = <Text as=\"span\" className={styles.totalRange} />;\n \n const periodCaption: Record<TUsagePeriodKey, ReactNode> = {\n thisMonth: t(\"ForPeriod\", { period: monthText }),\n lastMonth: t(\"ForPeriod\", { period: monthText }),\n last3Months: (\n <CommonTrans\n i18nKey=\"ForLast3Months\"\n values={{ startDate, endDate }}",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
+      "line_number": 287,
+      "context": "fractionFontSize=\"12px\"\n withoutMargin\n className={styles.spendAmount}\n />\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"ForPeriod\", { period: monthLabel })}\n </Text>\n {onViewUsage ? (\n <Link\n onClick={onViewUsage}\n textDecoration=\"underline\"",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

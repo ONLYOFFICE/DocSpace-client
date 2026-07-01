@@ -1,0 +1,53 @@
+{
+  "key_path": "TopUpAndActivate",
+  "content": "Top up & activate",
+  "content_en_sha1_hash": "ad8813e3f5fc908a32a1f58a4373b845115c0a91",
+  "created_at": "2026-06-25T11:54:59.138Z",
+  "updated_at": "2026-06-30T10:18:29.505Z",
+  "comment": {
+    "text": "Button label or link text prompting the user to add funds and enable AI features.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T11:59:07.555Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-info-block/index.tsx",
+      "line_number": 106,
+      "context": "textDecoration={\"underline\"}\n onClick={\n isCardLinkedToPortal ? onActivateAI : onTopUpAndActivateAI\n }\n >\n {isCardLinkedToPortal ? t(\"Activate\") : t(\"TopUpAndActivate\")}\n </Link>\n {/* {\" | \"}\n <Link\n type={LinkType.action}\n color=\"accent\"",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-no-access-screen/index.tsx",
+      "line_number": 179,
+      "context": "onClick: onActivateAI,\n isLoading: isActivating,\n } as const)\n : ({\n type: \"button\",\n title: t(\"TopUpAndActivate\"),\n key: \"top-up-and-activate-ai\",\n onClick: onTopUpAndActivateAI,\n } as const);\n \n // const aiBenefits = {",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
+      "line_number": 197,
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={\n !isCardLinkedToPortal\n ? t(\"TopUpAndActivate\")\n : t(\"ActivateAIFeatures\")\n }\n size={ButtonSize.normal}\n onClick={onActivate}\n primary",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/KnowledgeDisabledContainer.js",
+      "line_number": 193,
+      "context": "onClick: onActivateAI,\n isLoading: isActivating,\n }\n : {\n type: \"button\",\n title: t(\"Common:TopUpAndActivate\"),\n key: \"top-up-and-activate-ai\",\n onClick: onTopUpAndActivateAI,\n };\n \n return [",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 458,
+      "context": "key: \"activate-ai\",\n onClick: actions.onActivateAI,\n } as const)\n : ({\n type: \"button\",\n title: t(\"Common:TopUpAndActivate\"),\n key: \"top-up-and-activate-ai\",\n onClick: actions.onTopUpAndActivateAI,\n } as const);\n \n // const aiBenefits = {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -28,7 +28,7 @@
   "FormFolderDefaultUserTitle": "Bu klasörde henüz form yok",
   "FormRoomEmptyTitle": "Form doldurma odasına hoş geldiniz",
   "InviteNewUsers": "Yeni kullanıcıları davet edin",
-  "InviteRootRoomDescription": "{{productName}} ürününüze yeni üyeler eklemek için bir davetiye gönderin ",
+  "InviteRootRoomDescription": "{{productName}} ürününüze yeni üyeler eklemek için bir davetiye gönderin",
   "InviteUsersOptionDescription": "Odada ortak düzenleme için üyeleri ekleyin",
   "ManageAccess": "İzini Yönet",
   "MigrationDataDescription": "{{productName}}'e {{organizationName}} Workspace, Google Workspace veya Nextcloud'dan verilerinizi aktarın.",

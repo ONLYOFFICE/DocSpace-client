@@ -71,7 +71,7 @@ export const DocsStoreProviders = ({
       <FilesSettingsStoreContextProvider>
         <FilesListStoreContextProvider>
           <FilesSelectionStoreContextProvider>
-<DragStoreContextProvider>
+            <DragStoreContextProvider>
               <NavigationStoreContextProvider>
                 <MediaViewerStoreContextProvider>
                   <DialogsStoreContextProvider>

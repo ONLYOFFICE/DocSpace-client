@@ -1,0 +1,35 @@
+{
+  "key_path": "MigratePerMonth",
+  "content": "{{price}} /mo",
+  "content_en_sha1_hash": "619b6ab33acebad32e6d19594f54ca1c1b1e5ce0",
+  "created_at": "2026-06-30T07:32:34.301Z",
+  "updated_at": "2026-06-30T11:38:22.654Z",
+  "comment": {
+    "text": "Short label within a migration dialog row displaying the monthly cost, where {{price}} represents the formatted currency amount.",
+    "is_auto": true,
+    "updated_at": "2026-06-30T07:36:43.444Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "line_number": 264,
+      "context": "t(\"MigrateStep1Title\"),\n <>\n <div className={styles.card}>\n {renderRow(\n t(\"MigrateCurrentTariff\"),\n t(\"MigratePerMonth\", {\n price: formatPaymentCurrency(currentTariffCost),\n }),\n )}\n {renderRow(\n t(\"RemainingPeriod\"),",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "line_number": 264,
+      "context": "t(\"MigrateStep1Title\"),\n <>\n <div className={styles.card}>\n {renderRow(\n t(\"MigrateCurrentTariff\"),\n t(\"MigratePerMonth\", {\n price: formatPaymentCurrency(currentTariffCost),\n }),\n )}\n {renderRow(\n t(\"RemainingPeriod\"),",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

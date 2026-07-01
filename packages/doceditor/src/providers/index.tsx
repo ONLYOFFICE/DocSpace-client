@@ -53,6 +53,8 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import { getAuthToken } from "@docspace/shared/api/client";
 
+import EncryptionProviderWrapper from "@/components/EncryptionProviderWrapper";
+
 import ErrorProvider from "./ErrorProvider";
 
 export type TContextData = {
@@ -111,7 +113,9 @@ const Providers = ({ children, contextData }: TProviders) => {
           locale={locale}
         >
           <ErrorProvider {...contextData}>
-            {children}
+            <EncryptionProviderWrapper user={user}>
+              {children}
+            </EncryptionProviderWrapper>
             <Toast isSSR />
           </ErrorProvider>
         </ThemeProvider>

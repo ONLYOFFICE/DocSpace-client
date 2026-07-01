@@ -608,7 +608,7 @@ const CreateEditRoomDialog = ({
       <AvatarEditorDialog
         t={t}
         visible={cropperVisible}
-        title={t("RoomLogoCover:RoomCover")}
+        title={t("Common:RoomCover")}
         image={cropperImage}
         onClose={onCropperClose}
         onSave={onCropperSave}

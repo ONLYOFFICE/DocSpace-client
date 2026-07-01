@@ -33,7 +33,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import React from "react";
 import { match, P } from "ts-pattern";
+import { Trans } from "react-i18next";
 
 import InviteUserFormIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
 import UploadPDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.pdf.form.svg";
@@ -122,6 +124,8 @@ import type {
   UploadType,
 } from "./EmptyViewContainer.types";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import { Text } from "@docspace/ui-kit/components";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 
 export const isUser = (access: AccessType) => {
   return (
@@ -210,20 +214,24 @@ const getAIAgentsAIDisabledTitle = (
         aiProvider: t("Common:AIProvider"),
       }),
     )
-    .with([false, true], () =>
-      t("Common:EmptyAIAgentsAIDisabledSaasAdminTitle"),
-    )
-    .otherwise(() =>
+    .with([false, true], () => t("Common:EmptyAIAgentsNotActiveYetTitle"))
+    // standalone user
+    .with([true, false], () =>
       t("Common:EmptyAIAgentsAIDisabledUserTitle", {
         aiAgents: t("Common:AIAgents"),
       }),
-    );
+    )
+    // saas user
+    .otherwise(() => t("Common:AIFeaturesNotActive"));
 };
 
 const getAIAgentsAIDisabledDescription = (
   t: TTranslation,
   standalone: boolean,
   isPortalAdmin: boolean,
+  isPayer?: boolean,
+  walletCustomerEmail?: string | null,
+  walletCustomerDisplayName?: string | null,
 ) => {
   return match([standalone, isPortalAdmin])
     .with([true, true], () =>
@@ -232,16 +240,49 @@ const getAIAgentsAIDisabledDescription = (
         aiChats: t("Common:AIChats"),
       }),
     )
-    .with([false, true], () =>
-      t("Common:EmptyAIAgentsAIDisabledSaasAdminDescription", {
+    .with([false, true], () => {
+      const payerLabel = walletCustomerDisplayName || walletCustomerEmail;
+
+      return (
+        <>
+          <Text as="span">
+            {t("Common:EmptyAIAgentsNotActiveYetDescription")}
+          </Text>
+          <Text as="span" style={{ display: "block", marginTop: "8px" }}>
+            {t("Common:EmptyAIAgentsNotActiveYetDescriptionLine2")}
+          </Text>
+          {!isPayer && payerLabel ? (
+            <Text as="span" style={{ display: "block", marginTop: "8px" }}>
+              <Trans
+                i18nKey="Common:EmptyAIAgentsNotActiveYetContactPayer"
+                values={{ payerContact: payerLabel }}
+                components={{
+                  1:
+                    walletCustomerEmail && !walletCustomerDisplayName ? (
+                      <Link
+                        type={LinkType.action}
+                        href={`mailto:${walletCustomerEmail}`}
+                        color="accent"
+                      />
+                    ) : (
+                      <Text as="span" />
+                    ),
+                }}
+              />
+            </Text>
+          ) : null}
+        </>
+      );
+    })
+    .with([true, false], () =>
+      t("Common:EmptyAIAgentsAIDisabledDescription", {
         productName: getBrandName("ProductName"),
         aiAgents: t("Common:AIAgents"),
       }),
     )
     .otherwise(() =>
-      t("Common:EmptyAIAgentsAIDisabledDescription", {
+      t("Common:EmptyAIDisabledContactAdminDesc", {
         productName: getBrandName("ProductName"),
-        aiAgents: t("Common:AIAgents"),
       }),
     );
 };
@@ -268,14 +309,22 @@ export const getRootDescription = (
   standalone: boolean,
   aiReady: boolean,
   isPortalAdmin: boolean,
+  isPayer?: boolean,
+  walletCustomerEmail?: string | null,
+  walletCustomerDisplayName?: string | null,
 ) => {
   return match([rootFolderType, access])
-    .with(
-      [FolderType.AIAgents, P._],
-      () =>
-        aiReady
-          ? getAIAgentsAIEnabledDescription(t, access)
-          : getAIAgentsAIDisabledDescription(t, true, isPortalAdmin), // NOTE: AI SaaS same as AI Standalone in v.4.0
+    .with([FolderType.AIAgents, P._], () =>
+      aiReady
+        ? getAIAgentsAIEnabledDescription(t, access)
+        : getAIAgentsAIDisabledDescription(
+            t,
+            standalone,
+            isPortalAdmin,
+            isPayer,
+            walletCustomerEmail,
+            walletCustomerDisplayName,
+          ),
     )
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
       t("Files:RoomEmptyContainerDescription"),
@@ -398,12 +447,10 @@ export const getRootTitle = (
   isPortalAdmin: boolean,
 ) => {
   return match([rootFolderType, access])
-    .with(
-      [FolderType.AIAgents, P._],
-      () =>
-        aiReady
-          ? getAIAgentsAIEnabledTitle(t, access)
-          : getAIAgentsAIDisabledTitle(t, true, isPortalAdmin), // NOTE: AI SaaS same as AI Standalone in v.4.0
+    .with([FolderType.AIAgents, P._], () =>
+      aiReady
+        ? getAIAgentsAIEnabledTitle(t, access)
+        : getAIAgentsAIDisabledTitle(t, standalone, isPortalAdmin),
     )
     .with(
       [
@@ -764,12 +811,16 @@ export const helperOptions = (
     title: string,
     description: string,
     uploadType: UploadType,
+    isKnowledge?: boolean,
   ) => ({
     title,
     description,
     icon: <UploadDevicePDFFormIcon />,
     key: "create-form",
-    onClick: () => actions.onUploadAction(uploadType),
+    onClick: () =>
+      isKnowledge
+        ? actions.uploadFromDeviceAiKnowledge()
+        : actions.onUploadAction(uploadType),
     disabled: !security?.Create,
   });
 

@@ -74,7 +74,9 @@ export async function getDefaultProvider(): Promise<
 export async function getAIAgents(
   filter: RoomsFilter,
 ): Promise<TGetAgents | undefined> {
-  const path = `/ai/agents?${filter.toApiUrlParams()}`;
+  // new-ai service: returns the same DocSpace envelope as /ai/agents but
+  // injects profile bindings; product (ai-agents) reads agents from here.
+  const path = `/new-ai/agents?${filter.toApiUrlParams()}`;
   logger.debug(`Start GET ${path}`);
 
   try {

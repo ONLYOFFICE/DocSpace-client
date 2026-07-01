@@ -27,10 +27,12 @@
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 
+import { FolderType } from "@docspace/ui-kit/enums";
 import type { TViewAs } from "@docspace/shared/types";
 
 import { getSelf } from "@/api/people";
 import { FILTER_HEADER, PATHNAME_HEADER } from "@/utils/constants";
+import { getFoldersTree } from "@/api/files";
 
 import { DocsStoreProviders } from "../(personal-files)/_store";
 import RoomsQueryProvider from "./_components/query-provider";
@@ -103,10 +105,19 @@ export default async function RoomsLayout({
 
   const initViewAs = (cookieStore.get("viewAs")?.value || "row") as TViewAs;
 
+  let roomsId: number | string | undefined;
+  try {
+    const tree = await getFoldersTree();
+    roomsId = tree.find((f) => f.rootFolderType === FolderType.Rooms)?.id;
+  } catch {
+    roomsId = undefined;
+  }
+
+
   return (
     <main style={{ width: "100%", height: "100%" }}>
       <RoomsQueryProvider>
-        <DocsStoreProviders initViewAs={initViewAs}>
+        <DocsStoreProviders initViewAs={initViewAs} myFolderId={roomsId}>
           <RoomsQuotaStoreContextProvider>
             <RoomsOperationsStoreContextProvider>
               <RoomsTagsStoreContextProvider>

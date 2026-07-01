@@ -42,7 +42,7 @@ import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/16/cross.react.svg?url";
 
 import styles from "../Dashboard.module.scss";
 
-const PROFILE_CARD_HIDDEN_KEY = "dashboard_profile_card_hidden";
+export const PROFILE_CARD_HIDDEN_KEY = "dashboard_profile_card_hidden";
 
 interface ProfileCardProps {
   portalName?: string;

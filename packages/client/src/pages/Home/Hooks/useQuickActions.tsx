@@ -43,10 +43,17 @@ import {
   CreateDocumentIcon,
   CreatePresentationIcon,
   CreateSpreadsheetIcon,
-  CreateCustomRoomIllustrationIcon,
   UseRoomTemplateIllustrationIcon,
+  QuickVdrRoomIcon,
+  QuickCollaborationRoomIcon,
+  QuickPublicRoomIcon,
+  QuickCustomRoomIcon,
+  QuickFormRoomIcon,
+  CreateFromTemplateIcon,
+  CreateAgentIcon,
 } from "@docspace/ui-kit/components/quick-actions/icons";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { RoomsType } from "@docspace/ui-kit/enums";
 import { Events, RoomSearchArea } from "@docspace/shared/enums";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { getConstName } from "@docspace/shared/constants/consts";
@@ -80,12 +87,20 @@ const dispatchCreate = (
   window.dispatchEvent(event);
 };
 
-const dispatchCreateRoom = (parentId: number | string | null) => {
-  window.dispatchEvent(
-    new CustomEvent(Events.ROOM_CREATE, {
-      detail: { parentId, context: "sidebar" },
-    }),
-  );
+// Opens the create-room dialog. When `startRoomType` is passed, GlobalEvents'
+// onCreateRoom reads it off `event.payload.startRoomType` to open the dialog on
+// that preset type and lock the type chooser (see CreateRoomEvent). Without it,
+// the dialog opens on its default type chooser.
+const dispatchCreateRoom = (
+  parentId: number | string | null,
+  startRoomType?: RoomsType,
+) => {
+  const event = new CustomEvent(Events.ROOM_CREATE, {
+    detail: { parentId, context: "sidebar" },
+  });
+  // @ts-expect-error custom payload consumed by GlobalEvents/onCreateRoom
+  event.payload = { startRoomType };
+  window.dispatchEvent(event);
 };
 
 // Opens the Templates list — the Rooms list scoped to the Templates search
@@ -98,13 +113,43 @@ const goTemplates = (userId?: string) => {
   );
 };
 
+// Opens the create-agent dialog scoped to the current folder, via the same
+// AGENT_CREATE event the agents header button fires (consumed by GlobalEvents
+// / CreateAgentEvent).
+const dispatchCreateAgent = (parentId: number | string | null) => {
+  const event = new CustomEvent(Events.AGENT_CREATE, {
+    detail: { parentId, context: "sidebar" },
+  });
+  window.dispatchEvent(event);
+};
+
+// Opens the form templates list — the Templates search area scoped to the
+// Forms section. Mirrors the sidebar's Forms → Templates item
+// (ClientArticleSidebar.goFormsTemplates).
+const goFormsTemplates = (userId?: string) => {
+  const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Templates);
+  filter.searchArea = RoomSearchArea.Templates;
+  window.DocSpace.navigate(
+    `/forms/filter?${filter.toUrlParams(userId, false)}`,
+  );
+};
+
 export type UseQuickActionsProps = SectionFlags & {
   currentFolderId: number | string | null;
   // selectedFolderStore.security?.Create — folder-level create permission.
   canCreateFiles?: boolean;
   // SDK's canCreateRooms: admins / owners / room admins.
   canCreateRooms?: boolean;
+  // AI is ready and the user can manage agents (admins / owners / room admins).
+  canCreateAgents?: boolean;
   userId?: string;
+  // Whether the OForms template gallery is reachable (settingsStore). The
+  // FormRoom "from template" tile is only offered when it is.
+  templateGalleryAvailable?: boolean;
+  // OformsStore actions used to open the template gallery scoped to the current
+  // folder (mirrors MainButton.onShowTemplateGallery).
+  setTemplateGalleryVisible?: (visible: boolean) => void;
+  setOformFromFolderId?: (id: number | string | null) => void;
 };
 
 export type QuickActionsResult = {
@@ -118,13 +163,17 @@ export type QuickActionsResult = {
 export const useQuickActions = (
   props: UseQuickActionsProps,
 ): QuickActionsResult => {
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Files", "Common", "Translations"]);
 
   const {
     currentFolderId,
     canCreateFiles,
     canCreateRooms,
+    canCreateAgents,
     userId,
+    templateGalleryAvailable,
+    setTemplateGalleryVisible,
+    setOformFromFolderId,
     ...sectionFlags
   } = props;
 
@@ -163,20 +212,110 @@ export const useQuickActions = (
   const roomItems = React.useMemo<QuickActionItem[]>(
     () => [
       {
+        id: "quick-vdr-room",
+        icon: <QuickVdrRoomIcon />,
+        label: t("Common:VirtualDataRoom"),
+        onClick: () =>
+          dispatchCreateRoom(currentFolderId, RoomsType.VirtualDataRoom),
+      },
+      {
+        id: "quick-collaboration-room",
+        icon: <QuickCollaborationRoomIcon />,
+        label: t("Common:CollaborationRoomTitle"),
+        onClick: () =>
+          dispatchCreateRoom(currentFolderId, RoomsType.EditingRoom),
+      },
+      {
+        id: "quick-public-room",
+        icon: <QuickPublicRoomIcon />,
+        label: t("Common:PublicRoom"),
+        onClick: () =>
+          dispatchCreateRoom(currentFolderId, RoomsType.PublicRoom),
+      },
+      {
         id: "quick-custom-room",
-        icon: <CreateCustomRoomIllustrationIcon />,
-        label: t("Common:NewRoom"),
-        onClick: () => dispatchCreateRoom(currentFolderId),
+        icon: <QuickCustomRoomIcon />,
+        label: t("Common:CustomRoomTitle"),
+        onClick: () =>
+          dispatchCreateRoom(currentFolderId, RoomsType.CustomRoom),
       },
       // Opens the Templates list (sidebar Rooms → Templates).
       {
         id: "quick-use-template",
         icon: <UseRoomTemplateIllustrationIcon />,
-        label: t("Common:UseTemplate"),
+        label: t("Files:RoomTemplate"),
         onClick: () => goTemplates(userId),
       },
     ],
     [t, currentFolderId, userId],
+  );
+
+  const formItems = React.useMemo<QuickActionItem[]>(
+    () => [
+      // Collect forms → create a Form Filling Room.
+      {
+        id: "quick-form-room",
+        icon: <QuickFormRoomIcon />,
+        label: t("Common:FormSetTitle"),
+        onClick: () => dispatchCreateRoom(currentFolderId, RoomsType.FormRoom),
+      },
+      // Opens the form templates list (sidebar Forms → Templates).
+      {
+        id: "quick-form-template",
+        icon: <UseRoomTemplateIllustrationIcon />,
+        label: t("Common:FromTemplate"),
+        onClick: () => goFormsTemplates(userId),
+      },
+    ],
+    [t, currentFolderId, userId],
+  );
+
+  // Inside a Form Filling room only PDF forms can be created. A blank PDF form
+  // is the same `pdf` create flow as the personal-files PDF tile (dispatchCreate
+  // carries `edit: true` for PDF, opening the form editor). When the OForms
+  // template gallery is available, also offer a "from template" tile that opens
+  // it scoped to the current folder (mirrors MainButton's FormRoom gallery item).
+  const formRoomItems = React.useMemo<QuickActionItem[]>(() => {
+    const items: QuickActionItem[] = [
+      {
+        id: "quick-blank-pdf-form",
+        icon: <BlankPdfIcon />,
+        label: t("Translations:NewForm"),
+        onClick: () => dispatchCreate(currentFolderId, "pdf", t),
+      },
+    ];
+
+    if (templateGalleryAvailable) {
+      items.push({
+        id: "quick-form-template",
+        icon: <CreateFromTemplateIcon />,
+        label: t("Common:FromTemplate"),
+        onClick: () => {
+          setTemplateGalleryVisible?.(true);
+          setOformFromFolderId?.(currentFolderId);
+        },
+      });
+    }
+
+    return items;
+  }, [
+    t,
+    currentFolderId,
+    templateGalleryAvailable,
+    setTemplateGalleryVisible,
+    setOformFromFolderId,
+  ]);
+
+  const agentItems = React.useMemo<QuickActionItem[]>(
+    () => [
+      {
+        id: "quick-new-agent",
+        icon: <CreateAgentIcon />,
+        label: t("Common:NewAgent"),
+        onClick: () => dispatchCreateAgent(currentFolderId),
+      },
+    ],
+    [t, currentFolderId],
   );
 
   if (section === "files" && canCreateFiles)
@@ -185,9 +324,19 @@ export const useQuickActions = (
   if (section === "rooms" && canCreateRooms)
     return { show: true, items: roomItems };
 
+  if (section === "forms" && canCreateRooms)
+    return { show: true, items: formItems };
+
+  if (section === "form-room" && canCreateFiles)
+    return { show: true, items: formRoomItems };
+
+  if (section === "ai-agents" && canCreateAgents)
+    return { show: true, items: agentItems };
+
   // "private" rooms and every other section render no banner (see
   // getQuickActionsSection for why private rooms are skipped).
   return { show: false, items: [] };
 };
 
 export default useQuickActions;
+

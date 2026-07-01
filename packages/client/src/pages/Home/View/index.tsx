@@ -484,9 +484,17 @@ const View = ({
     if (isLoading || currentView === "chat" || currentView === "profile")
       return;
 
+    // Don't steal focus while the user is typing (e.g. the search input)
+    const activeElement = document.activeElement as HTMLElement | null;
+    const isEditingText =
+      !!activeElement &&
+      (activeElement.tagName === "INPUT" ||
+        activeElement.tagName === "TEXTAREA" ||
+        activeElement.isContentEditable);
+
     const scroll = document.getElementsByClassName("section-body");
 
-    if (scroll && scroll[0]) {
+    if (scroll && scroll[0] && !isEditingText) {
       const firstChild = scroll[0] as HTMLElement;
       firstChild.focus();
       setHotkeyCaret(null);

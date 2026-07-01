@@ -46,6 +46,7 @@ type RoomTypeListProps = {
   disabledFormRoom: boolean;
   isExternalShareRestricted?: boolean;
   processCreatingRoomFromData?: boolean;
+  isFormsCreate?: boolean;
 
   setRoomType: (roomType: RoomsType) => void;
   setTemplateDialogIsVisible: (isVisible: boolean) => void;
@@ -55,6 +56,7 @@ const RoomTypeList = ({
   disabledFormRoom = true,
   isExternalShareRestricted,
   processCreatingRoomFromData,
+  isFormsCreate,
 
   setRoomType,
   setTemplateDialogIsVisible,
@@ -87,6 +89,31 @@ const RoomTypeList = ({
   });
 
   const publicRoomTooltipContent = t("Common:PublicRoomCreationDisabled");
+
+  if (isFormsCreate) {
+    return (
+      <div className={styles.roomTypeList}>
+        <RoomType
+          id={RoomsType.FormRoom.toString()}
+          roomType={RoomsType.FormRoom}
+          type="listItem"
+          isFormSection
+          onClick={() => handleClick(RoomsType.FormRoom)}
+          isOpen={false}
+          selectedId={RoomsType.FormRoom.toString()}
+        />
+        <RoomType
+          id="Template"
+          isTemplate
+          isFormSection
+          type="listItem"
+          onClick={() => handleClick("template")}
+          isOpen={false}
+          selectedId="Template"
+        />
+      </div>
+    );
+  }
 
   return (
     <div className={styles.roomTypeList}>

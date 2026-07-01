@@ -3,7 +3,7 @@
   "content": "Members",
   "content_en_sha1_hash": "1cb449c1126609b4b41e1d87f65f0d7cd19b49b9",
   "created_at": "2025-05-19T21:30:46.449Z",
-  "updated_at": "2026-06-09T09:43:10.784Z",
+  "updated_at": "2026-06-25T19:31:02.844Z",
   "comment": {
     "text": "This is a label for a section or item, referring to the users associated with a particular account or room.",
     "is_auto": true,
@@ -16,6 +16,12 @@
       "line_number": 689,
       "context": "? {\n withTabs: true,\n tabsData: [\n {\n id: PEOPLE_TAB_ID,\n name: t(\"Members\"),\n onClick: () => changeActiveTab(PEOPLE_TAB_ID),\n content: null,\n },\n ...[\n withGroups && {",
       "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/components/AccountsSidebar/index.tsx",
+      "line_number": 82,
+      "context": "const groups = React.useMemo<NavMenuGroup[]>(() => {\n const items: NavMenuItem[] = [\n {\n id: MEMBERS_ID,\n label: t(\"Common:Members\"),\n icon: getCatalogIconUrlByType(PageType.account),\n onClick: goToFilterRoute(PEOPLE_ROUTE_WITH_FILTER),\n },\n {\n id: GROUPS_ID,",
+      "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/Article/Body/AccountsItems.tsx",
@@ -32,7 +38,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
       "line_number": 100,
-      "context": "const { t } = useTranslation([\"ChangeUserTypeDialog\", \"People\", \"Common\"]);\n \n const isSingleUser = userNames.length === 1;\n const translationValues = {\n userName: isSingleUser ? userNames[0] : undefined,\n membersSection: t(\"Common:Members\"),\n documentsSection: t(\"Common:MyDocuments\"),\n productName: getBrandName(\"ProductName\"),\n secondType,\n };\n const translationKey = getChangeTypeKey(",
+      "context": "const { t } = useTranslation([\"ChangeUserTypeDialog\", \"People\", \"Common\"]);\n \n const isSingleUser = userNames.length === 1;\n const translationValues = {\n userName: isSingleUser ? userNames[0] : undefined,\n membersSection: t(\"Common:Members\"),\n documentsSection: t(\"Common:Files\"),\n productName: getBrandName(\"ProductName\"),\n secondType,\n };\n const translationKey = getChangeTypeKey(",
       "module": "/packages/client"
     },
     {
@@ -49,14 +55,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 762,
-      "context": "if (isSettingsPage) return t(\"Common:Settings\");\n \n if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");\n case \"groups\":\n return t(\"Common:Groups\");\n case \"inside_group\": {\n return isLoading && insideGroupTempTitle\n ? insideGroupTempTitle",
+      "line_number": 788,
+      "context": ": t(\"Common:Forms\");\n \n if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");\n case \"groups\":\n return t(\"Common:Groups\");\n case \"inside_group\": {\n return isLoading && insideGroupTempTitle\n ? insideGroupTempTitle",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 762,
-      "context": "if (isSettingsPage) return t(\"Common:Settings\");\n \n if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");\n case \"groups\":\n return t(\"Common:Groups\");\n case \"inside_group\": {\n return isLoading && insideGroupTempTitle\n ? insideGroupTempTitle",
+      "line_number": 788,
+      "context": ": t(\"Common:Forms\");\n \n if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");\n case \"groups\":\n return t(\"Common:Groups\");\n case \"inside_group\": {\n return isLoading && insideGroupTempTitle\n ? insideGroupTempTitle",
       "module": "/packages/client"
     },
     {

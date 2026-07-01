@@ -40,8 +40,9 @@ import { useLocation, useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
 
 import { isMobile, isTablet } from "@docspace/shared/utils";
-import { RoomsTypeValues } from "@docspace/shared/utils/common";
+import { ROOMS_SECTION_TYPES } from "@docspace/shared/utils/rooms";
 import FilterInput from "@docspace/ui-kit/components/filter";
+import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import { withLayoutSize } from "@docspace/shared/HOC/withLayoutSize";
 import { getUser } from "@docspace/shared/api/people";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
@@ -59,15 +60,14 @@ import {
   getFilterContent,
   getTags,
   getQuotaFilter,
-  getFilterLocation,
   getSharedBy,
 } from "@docspace/ui-kit/components/filter/Filter.utils";
 
 import {
   DeviceType,
+  Events,
   FilterGroups,
   FilterKeys,
-  FilterLocation,
   FilterSubject,
   FilterType,
   FolderType,
@@ -91,7 +91,6 @@ import { FilterLoader } from "@docspace/ui-kit/components/filter/skeletons";
 import renderFilterSelector from "@docspace/shared/utils/renderFilterSelector";
 
 import { useContactsFilter } from "./useContacts";
-import CreateButtonMobile from "./CreateButtonMobile";
 
 const SectionFilterContent = ({
   t,
@@ -118,7 +117,6 @@ const SectionFilterContent = ({
   clearSearch,
   setClearSearch,
   setMainButtonMobileVisible,
-  setMainButtonVisible,
   isArchiveFolder,
 
   // contacts
@@ -149,6 +147,10 @@ const SectionFilterContent = ({
   isTemplatesFolder,
   isSharedWithMeFolder,
   isAIAgentsFolder,
+  aiReady,
+  isUserAdmin,
+  isOwner,
+  currentFolderId,
 
   currentClientView,
 
@@ -175,6 +177,11 @@ const SectionFilterContent = ({
   // The "Forms" section reuses the Rooms list (same folder) but is scoped to
   // Form Filling Rooms only, so the room-type filter is not offered there.
   const isFormsSection = location.pathname.startsWith("/forms");
+
+  // Trash is a single, centralized folder reached from several sections
+  // (/files/trash, /rooms/trash, /forms/trash, ...). The "Room" filter only
+  // makes sense for Trash opened from the Rooms section.
+  const isRoomsTrash = location.pathname.startsWith("/rooms/trash");
 
   // Base path for room-list navigation (sort/search/filter). The "Forms"
   // section keeps its own route instead of falling back to "rooms/shared".
@@ -203,6 +210,7 @@ const SectionFilterContent = ({
         t,
         isContactsPage,
         isContactsGroupsPage,
+        isContactsGuestsPage,
         isRoomsFolder,
         isAIAgentsFolder,
         isFormsSection,
@@ -217,6 +225,7 @@ const SectionFilterContent = ({
       t,
       isContactsPage,
       isContactsGroupsPage,
+      isContactsGuestsPage,
       isRoomsFolder,
       isAIAgentsFolder,
       isFormsSection,
@@ -230,15 +239,6 @@ const SectionFilterContent = ({
   );
 
   const isDesktopView = currentDeviceType === DeviceType.desktop;
-  const isCreateFabVisible = showMainButton && !isDesktopView;
-
-  React.useEffect(() => {
-    setMainButtonVisible(isCreateFabVisible);
-  }, [isCreateFabVisible, setMainButtonVisible]);
-
-  React.useEffect(() => {
-    return () => setMainButtonVisible(false);
-  }, [setMainButtonVisible]);
 
   // Check if any filter or search is active (excluding sorting and groupId)
   // Room grouping should be hidden when filters/search are active
@@ -422,8 +422,6 @@ const SectionFilterContent = ({
 
         newFilter.filterType = filterType;
 
-        newFilter.location = getFilterLocation(data);
-
         if (authorType === FilterKeys.me || authorType === FilterKeys.other) {
           newFilter.authorType = `user_${userId}`;
           newFilter.excludeSubject = authorType === FilterKeys.other;
@@ -440,7 +438,7 @@ const SectionFilterContent = ({
         newFilter.searchInContent = withContent === "true" ? "true" : null;
 
         const path = location.pathname.split("/filter")[0];
-        if (isTrash) {
+        if (isRoomsTrash) {
           newFilter.roomId = roomId;
         }
 
@@ -451,6 +449,7 @@ const SectionFilterContent = ({
       isRooms,
       isAIAgentsFolder,
       isTrash,
+      isRoomsTrash,
       setIsLoading,
       roomsFilter,
       filter,
@@ -935,20 +934,6 @@ const SectionFilterContent = ({
           label,
         });
       }
-
-      if (filter.location) {
-        const locationLabels = {
-          [FilterLocation.Rooms]: t("Common:Rooms"),
-          [FilterLocation.Documents]: t("Common:Documents"),
-          [FilterLocation.Link]: t("Common:AccessibleViaLink"),
-        };
-
-        filterValues.push({
-          key: filter.location.toString(),
-          group: FilterGroups.filterLocation,
-          label: locationLabels[filter.location],
-        });
-      }
     }
 
     return filterValues;
@@ -958,7 +943,6 @@ const SectionFilterContent = ({
     filter.roomId,
     filter.filterType,
     filter.excludeSubject,
-    filter.location,
     roomsFilter.provider,
     roomsFilter.type,
     roomsFilter.subjectId,
@@ -1162,11 +1146,10 @@ const SectionFilterContent = ({
       },
     ];
 
-    // Form Filling Rooms live in their own "Forms" section, so they are never
-    // offered as a room-type filter inside the "Rooms" section.
-    const roomTypeValues = RoomsTypeValues.filter(
-      (roomType) => roomType !== RoomsType.FormRoom,
-    );
+    // Room types offered in the "Rooms" section filter. Form Filling Rooms live
+    // in their own "Forms" section, and RoomsTypePrivate is a client-only
+    // synthetic value, so both are excluded by ROOMS_SECTION_TYPES.
+    const roomTypeValues = ROOMS_SECTION_TYPES;
 
     const typeOptions = isRooms
       ? [
@@ -1252,7 +1235,7 @@ const SectionFilterContent = ({
             group: FilterGroups.filterType,
             label: t("Common:Type"),
             isHeader: true,
-            isLast: !isTrash && !isRecentFolder,
+            isLast: !isTrash,
           },
           ...folders,
           ...files,
@@ -1492,7 +1475,7 @@ const SectionFilterContent = ({
       filterOptions.push(...sharedByOption);
       filterOptions.push(...typeOptions);
 
-      if (isTrash) {
+      if (isRoomsTrash) {
         const roomOption = [
           {
             id: "filter_search-by-room-content-header",
@@ -1514,68 +1497,6 @@ const SectionFilterContent = ({
         ];
         filterOptions.push(...roomOption);
       }
-
-      if (isRecentFolder) {
-        const locationOption = [
-          {
-            key: FilterGroups.filterLocation,
-            group: FilterGroups.filterLocation,
-            label: t("Common:Location"),
-            isHeader: true,
-            isLast: true,
-          },
-          {
-            id: "filter_location-rooms",
-            key: FilterLocation.Rooms.toString(),
-            group: FilterGroups.filterLocation,
-            label: t("Common:Rooms"),
-          },
-        ];
-
-        if (!isVisitor) {
-          locationOption.push({
-            id: "filter_location-documents",
-            key: FilterLocation.Documents.toString(),
-            group: FilterGroups.filterLocation,
-            label: t("Common:Documents"),
-          });
-        }
-
-        locationOption.push({
-          id: "filter_location-accessible-via-link",
-          key: FilterLocation.Link.toString(),
-          group: FilterGroups.filterLocation,
-          label: t("Common:AccessibleViaLink"),
-        });
-
-        filterOptions.push(...locationOption);
-      }
-
-      if (isFavoritesFolder) {
-        const locationOption = [
-          {
-            key: FilterGroups.filterLocation,
-            group: FilterGroups.filterLocation,
-            label: t("Common:Location"),
-            isHeader: true,
-            isLast: true,
-          },
-          {
-            id: "filter_location-documents",
-            key: FilterLocation.Documents.toString(),
-            group: FilterGroups.filterLocation,
-            label: t("Common:Documents"),
-          },
-          {
-            id: "filter_location-rooms",
-            key: FilterLocation.Rooms.toString(),
-            group: FilterGroups.filterLocation,
-            label: t("Common:Rooms"),
-          },
-        ];
-
-        filterOptions.push(...locationOption);
-      }
     }
     return filterOptions;
   }, [
@@ -1585,9 +1506,9 @@ const SectionFilterContent = ({
     isFormsSection,
     isAIAgentsFolder,
     isContactsPage,
-    isFavoritesFolder,
     isRecentFolder,
     isTrash,
+    isRoomsTrash,
     isPublicRoom,
     isTemplatesFolder,
     isCollaborator,
@@ -1837,9 +1758,6 @@ const SectionFilterContent = ({
         if (group === FilterGroups.filterRoom) {
           newFilter.roomId = null;
         }
-        if (group === FilterGroups.filterLocation) {
-          newFilter.location = null;
-        }
 
         newFilter.page = 0;
 
@@ -1914,6 +1832,40 @@ const SectionFilterContent = ({
     navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
   };
 
+  // AI agents list — primary "New agent" button in the filter bar. Shown only
+  // on the agents root, when AI is ready and the user can manage agents.
+  // (The create-agent quick-action tile is rendered by the shared
+  // quick-actions banner — see useQuickActions / getQuickActionsSection.)
+  // `aiReady` (portal /ai/config) can lag behind the chat-lib profiles, so
+  // treat the presence of profiles as ready too — same signal the agents
+  // EmptyView uses to decide whether to offer agent creation.
+  const { useProfilesStore } = useStores();
+  const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
+  const canManageAgents = !!(isUserAdmin || isOwner || isRoomAdmin);
+  const showAgentsCreate =
+    isAIAgentsFolder && (aiReady || hasAiProfiles) && canManageAgents;
+
+  // Local "create agent" action used by the AI Agents filter main button.
+  // Distinct from the `onCreateAgent` prop (from contextOptionsStore, consumed
+  // by getSectionCreateButton): this one dispatches an inline AGENT_CREATE
+  // event scoped to the current folder.
+  const onCreateAgentFromFilter = useCallback(() => {
+    const event = new CustomEvent(Events.AGENT_CREATE, {
+      detail: { parentId: currentFolderId, context: "filter" },
+    });
+    window.dispatchEvent(event);
+  }, [currentFolderId]);
+
+  const agentsMainButtonProps = React.useMemo(
+    () => ({
+      isDropdown: false,
+      model: [],
+      onAction: onCreateAgentFromFilter,
+      text: t("Common:NewAgent"),
+    }),
+    [t, onCreateAgentFromFilter],
+  );
+
   if (showFilterLoader) return <FilterLoader />;
 
   const filterInput = (
@@ -1966,20 +1918,14 @@ const SectionFilterContent = ({
       isRoomsFolder={isRoomsFolder}
       organizeRoomsGrouping={organizeRoomsGrouping}
       isFilterOrSearchActive={isFilterOrSearchActive}
-      showMainButton={showMainButton && isDesktopView}
-      mainButtonProps={mainButtonProps}
+      showMainButton={(showAgentsCreate || showMainButton) && isDesktopView}
+      mainButtonProps={
+        showAgentsCreate ? agentsMainButtonProps : mainButtonProps
+      }
     />
   );
 
-  return (
-    <>
-      {filterInput}
-      <CreateButtonMobile
-        visible={isCreateFabVisible}
-        mainButtonProps={mainButtonProps}
-      />
-    </>
-  );
+  return filterInput;
 };
 
 export default inject(
@@ -2011,7 +1957,6 @@ export default inject(
       createThumbnails,
       setCurrentRoomsFilter,
       setMainButtonMobileVisible,
-      setMainButtonVisible,
       thirdPartyStore,
       clearSearch,
       setClearSearch,
@@ -2024,7 +1969,7 @@ export default inject(
     const { fetchTags } = tagsStore;
     const { isRoomAdmin } = authStore;
     const { user } = userStore;
-    const { standalone, currentDeviceType } = settingsStore;
+    const { standalone, currentDeviceType, aiConfig } = settingsStore;
     const {
       isFavoritesFolder,
       isRecentFolder,
@@ -2048,6 +1993,7 @@ export default inject(
       getSelectedFolder,
       id: selectedFolderId,
     } = selectedFolderStore;
+    const currentFolderId = selectedFolderId;
 
     const { getFolderModel, onCreateRoom, onCreateAgent } = contextOptionsStore;
 
@@ -2107,6 +2053,10 @@ export default inject(
       isIndexEditingMode,
       isSharedWithMeFolder,
       isAIAgentsFolder,
+      aiReady: aiConfig?.aiReady,
+      isUserAdmin: user?.isAdmin,
+      isOwner: user?.isOwner,
+      currentFolderId,
 
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
       showFilterLoader: clientLoadingStore.showFilterLoader,
@@ -2128,7 +2078,6 @@ export default inject(
       setClearSearch,
 
       setMainButtonMobileVisible,
-      setMainButtonVisible,
 
       contactsViewAs,
       contactsTab,

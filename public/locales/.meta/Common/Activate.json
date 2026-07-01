@@ -3,7 +3,7 @@
   "content": "Activate",
   "content_en_sha1_hash": "92ef08325a4813563a3110359906076374683282",
   "created_at": "2025-05-19T21:30:42.888Z",
-  "updated_at": "2026-05-15T14:00:06.956Z",
+  "updated_at": "2026-06-30T10:18:29.505Z",
   "comment": {
     "text": "This is the label for a button. Clicking it activates a license after a file has been uploaded.",
     "is_auto": true,
@@ -11,6 +11,36 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-info-block/index.tsx",
+      "line_number": 106,
+      "context": "textDecoration={\"underline\"}\n onClick={\n isCardLinkedToPortal ? onActivateAI : onTopUpAndActivateAI\n }\n >\n {isCardLinkedToPortal ? t(\"Activate\") : t(\"TopUpAndActivate\")}\n </Link>\n {/* {\" | \"}\n <Link\n type={LinkType.action}\n color=\"accent\"",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-no-access-screen/index.tsx",
+      "line_number": 172,
+      "context": "// saas admin: activate AI right away (or top up first) + show benefits.\n // The actual logic lives on the client and is passed in via callbacks.\n const activateOrTopUpAI = isCardLinkedToPortal\n ? ({\n type: \"button\",\n title: t(\"Activate\"),\n key: \"activate-ai\",\n onClick: onActivateAI,\n isLoading: isActivating,\n } as const)\n : ({",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/ActivateAIDialog/index.tsx",
+      "line_number": 177,
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n {canActivate ? (\n <>\n <Button\n label={t(\"Common:Activate\")}\n size={ButtonSize.normal}\n onClick={onActivate}\n primary\n scale\n isLoading={isActivating}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/KnowledgeDisabledContainer.js",
+      "line_number": 186,
+      "context": "if (isCardLinkedToPortal && !isPayer) return [];\n \n const activateOrTopUpAI = isCardLinkedToPortal\n ? {\n type: \"button\",\n title: t(\"Common:Activate\"),\n key: \"activate-ai\",\n onClick: onActivateAI,\n isLoading: isActivating,\n }\n : {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 452,
+      "context": "} as const;\n \n const activateOrTopUpAI = isCardLinkedToPortal\n ? ({\n type: \"button\",\n title: t(\"Common:Activate\"),\n key: \"activate-ai\",\n onClick: actions.onActivateAI,\n } as const)\n : ({\n type: \"button\",",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/LicenseContainer.tsx",
       "line_number": 130,

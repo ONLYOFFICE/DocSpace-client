@@ -6,7 +6,7 @@
   "HeaderSubmitting": "Vastausten lähettäminen",
   "HeaderUploading": "Helppo lomakkeen lataus",
   "TitleComplete": "Tarkista täytetyt lomakkeet ja analysoi automaattisesti taulukkoon kerättyjä tietoja. Kaikki – yhdessä huoneessa.",
-  "TitleSharing": "Kutsu muita {{productName}}-jäseniä ryhmään täyttämään ladattuja PDF-lomakkeita. Kopioi julkinen pääsylinkki jakaaksesi huoneen ulkoisten käyttäjien kanssa. ",
+  "TitleSharing": "Kutsu muita {{productName}}-jäseniä ryhmään täyttämään ladattuja PDF-lomakkeita. Kopioi julkinen pääsylinkki jakaaksesi huoneen ulkoisten käyttäjien kanssa.",
   "TitleStarting": "Kun lomake avataan täytettäväksi, jokaiselle vastaajalla luodaan automaattisesti uusi kopio, joka tallennetaan Käynnissä-kansioon. Tämä tarkoittaa, että lomakkeen täyttäminen on aloitettu, mutta se ei ole vielä valmis.",
   "TitleSubmitting": "Kun Valmis & Lähetä-painiketta klikataan avatussa lomakekopiossa, se siirretään Valmis-kansioon.",
   "WelcomeFillingForm": "Tervetuloa lomakkeen täyttöhuoneeseen!",

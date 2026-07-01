@@ -14,4 +14,5 @@ export type RoomTypeProps = {
   disabledPublicRoom?: boolean;
   isTemplate?: boolean;
   isTemplateRoom?: boolean;
+  isFormSection?: boolean;
 };

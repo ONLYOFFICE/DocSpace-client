@@ -121,11 +121,9 @@ import useRenameActions from "../../_hooks/useRenameActions";
 import useConvertActions from "../../_hooks/useConvertActions";
 import { useDocsSettingsStore } from "../../_store/DocsSettingsStore";
 import { useDocsUserStore } from "../../_store/DocsUserStore";
-import { useAiChatStore } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
 import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import type { SelectorMode } from "../../_hooks/useFileOperations";
 import { useDocsFrameBridge } from "../../_hooks/useDocsFrameBridge";
-import { usePanelExclusivity } from "../../_hooks/usePanelExclusivity";
 
 import DropZone from "../drop-zone";
 import ConflictResolveDialog from "../conflict-resolve-dialog";
@@ -147,13 +145,15 @@ import {
 } from "../../_constants/private-context-options";
 
 import {
-  AiChatTrigger,
-  DocsChatBodyPanel,
-  DocsChatHeaderPanel,
   useOpenAiChat,
-} from "../ai-chat-panel";
-import { getOnlyofficeFileType } from "../ai-agent-providers/onlyoffice-file-type";
-import { attachFilesToChat } from "../ai-agent-providers/attach-files";
+  useAiChatPanel,
+  type AiChatPanelBindings,
+} from "@docspace/ui-kit/ai-agent/ai-chat-panel";
+import { usePanelExclusivity } from "@/app/(docspace)/_hooks/usePanelExclusivity";
+import {
+  getOnlyofficeFileType,
+  attachFilesToChat,
+} from "@docspace/ui-kit/ai-agent/providers/files";
 
 import styles from "./DocsLayout.module.scss";
 
@@ -190,12 +190,9 @@ type DocsLayoutProps = {
   hasEncryptionKeys?: boolean;
 };
 
-type DocsLayoutAiBindings = {
-  isChatPanelVisible: boolean;
-  isChatPanelFullscreen: boolean;
-  chatButton: React.ReactNode;
-  chatPanelContent: React.ReactNode;
-  closeChatPanel: () => void;
+// Shared panel bindings (button/content/visibility) plus the Personal
+// Files-specific "Ask AI" file-attach handler layered on top.
+type DocsLayoutAiBindings = AiChatPanelBindings & {
   onAskAI: (item: TFileItem) => void;
 };
 
@@ -292,7 +289,9 @@ const DocsLayoutCore = observer(
     const desktopModel = React.useMemo(() => {
       if (!isPrivate) return defaultDesktopModel;
       const allowed = new Set(["new-folder", "separator-1", "upload-files"]);
-      return defaultDesktopModel.filter((item) => allowed.has(String(item.key)));
+      return defaultDesktopModel.filter((item) =>
+        allowed.has(String(item.key)),
+      );
     }, [isPrivate, defaultDesktopModel]);
     // Private rooms swap the document/PDF tiles for the encrypted-room set
     // (new folder + upload). Archived private rooms are read-only, so the
@@ -333,7 +332,11 @@ const DocsLayoutCore = observer(
       );
     }, [isPrivate, isActionButtonEnabled, handleCreateFolder, onUploadFiles]);
 
-    useDocsFrameBridge({ isReady: true, uploadFilesToFolder, enabled: !isPrivate });
+    useDocsFrameBridge({
+      isReady: true,
+      uploadFilesToFolder,
+      enabled: !isPrivate,
+    });
 
     const uploadStore = useUploadStore();
 
@@ -673,9 +676,7 @@ const DocsLayoutCore = observer(
                                     infoPanelBodyContent={
                                       infoPanelBody ?? (
                                         <DocsInfoPanelBody
-                                          onTagsChanged={
-                                            onInfoPanelRoomUpdated
-                                          }
+                                          onTagsChanged={onInfoPanelRoomUpdated}
                                         />
                                       )
                                     }
@@ -772,7 +773,9 @@ const DocsLayoutCore = observer(
                                       FilesSelectorProps["filesSettings"]
                                     >
                                   }
-                                  isUserOnly={!hasRooms && selectorMode !== "restore"}
+                                  isUserOnly={
+                                    !hasRooms && selectorMode !== "restore"
+                                  }
                                   isRoomsOnly={false}
                                   isThirdParty={false}
                                   openRoot={selectorMode === "restore"}
@@ -940,10 +943,12 @@ const DocsLayoutCore = observer(
 );
 
 const DocsLayoutAi = observer((props: DocsLayoutProps) => {
-  const aiChatStore = useAiChatStore();
   const { useAttachmentsStore } = useStores();
   const openChat = useOpenAiChat();
 
+  const aiChatPanel = useAiChatPanel();
+  // Info-panel exclusivity is host policy (it owns the InfoPanelStore), so it
+  // stays here rather than inside the shared ui-kit panel hook.
   usePanelExclusivity();
 
   const askAIHandler = React.useCallback(
@@ -960,24 +965,15 @@ const DocsLayoutAi = observer((props: DocsLayoutProps) => {
       const imageIndices =
         item.fileType === FileType.Image ? new Set([0]) : new Set<number>();
 
-      attachFilesToChat(useAttachmentsStore, [input], imageIndices).catch(
-        (e) => toastr.error(e as string),
+      attachFilesToChat(useAttachmentsStore, [input], imageIndices).catch((e) =>
+        toastr.error(e as string),
       );
     },
     [openChat, useAttachmentsStore],
   );
 
   const ai: DocsLayoutAiBindings = {
-    isChatPanelVisible: aiChatStore.isVisible,
-    isChatPanelFullscreen: aiChatStore.effectiveFullscreen,
-    chatButton: <AiChatTrigger />,
-    chatPanelContent: (
-      <>
-        <DocsChatHeaderPanel />
-        <DocsChatBodyPanel />
-      </>
-    ),
-    closeChatPanel: () => aiChatStore.close(),
+    ...aiChatPanel,
     onAskAI: askAIHandler,
   };
 
@@ -985,10 +981,6 @@ const DocsLayoutAi = observer((props: DocsLayoutProps) => {
 });
 
 const DocsLayout = (props: DocsLayoutProps) =>
-  props.isPrivate ? (
-    <DocsLayoutCore {...props} />
-  ) : (
-    <DocsLayoutAi {...props} />
-  );
+  props.isPrivate ? <DocsLayoutCore {...props} /> : <DocsLayoutAi {...props} />;
 
 export default DocsLayout;

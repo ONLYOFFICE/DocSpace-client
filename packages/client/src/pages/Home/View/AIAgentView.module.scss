@@ -6,6 +6,16 @@
   flex-direction: column;
   min-height: 0;
 
+  margin-inline: -20px -3px;
+
+  @include mixins.tablet-and-below {
+    margin-inline: -24px 0;
+  }
+
+  @include mixins.mobile {
+    margin-inline: -16px -8px;
+  }
+
   --chat-header-top: calc(var(--section-header-height) + var(--section-submenu-height));
 
   @include mixins.tablet-and-below {
@@ -14,14 +24,6 @@
 
   @include mixins.mobile {
     --chat-header-top: calc(var(--section-header-height-mobile) + var(--section-submenu-height));
-  }
-
-  :global(.chat-message-body) {
-    margin: 0 -20px;
-
-    @include mixins.tablet-and-below {
-      margin: 0 -16px;
-    }
   }
 
   :global(div:has(> div > [style*="--chat-welcome-color"])) {

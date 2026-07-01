@@ -98,7 +98,6 @@ const SectionHeaderContent = (props) => {
     deviceType,
     isNotPaidPeriod,
     isBackupPaid,
-    isFreeTariff,
   } = props;
 
   const navigate = useNavigate();
@@ -166,31 +165,6 @@ const SectionHeaderContent = (props) => {
 
     const arrayOfParams = getArrayOfParams();
 
-    const serviceSubPageHeaders = {
-      backup: isFreeTariff ? "Common:Backup" : t("Common:AdditionalBackup"),
-      "ai-services": "Common:AIFeatures",
-      "disk-storage": "Common:AdditionalDiskStorage",
-    };
-
-    let number = 1;
-    if (window.location.href.includes("disk-storage")) number = 2;
-    const serviceSubPageHeader = serviceSubPageHeaders[arrayOfParams[number]];
-
-    if (serviceSubPageHeader) {
-      const header = serviceSubPageHeader;
-      const isCategoryOrHeader = false;
-
-      setState((val) => {
-        if (
-          val.header === header &&
-          val.isCategoryOrHeader === isCategoryOrHeader
-        )
-          return val;
-        return { ...val, header, isCategoryOrHeader };
-      });
-      return;
-    }
-
     const key = getKeyByLink(arrayOfParams, settingsTree);
 
     const keysCollection = key.split("-");
@@ -228,7 +202,6 @@ const SectionHeaderContent = (props) => {
     getArrayOfParams,
     isAvailableSettings,
     location.pathname,
-    isFreeTariff,
   ]);
 
   const onBackToParent = () => {
@@ -424,7 +397,6 @@ export default inject(
       isRestoreAndAutoBackupAvailable,
       isSSOAvailable,
       isBackupPaid,
-      isFreeTariff,
     } = currentQuotaStore;
     const { isNotPaidPeriod } = currentTariffStatusStore;
     const { addUsers, removeAdmins } = setup.headerAction;
@@ -474,7 +446,6 @@ export default inject(
       deviceType,
       isNotPaidPeriod,
       isBackupPaid,
-      isFreeTariff,
     };
   },
 )(

@@ -171,7 +171,7 @@ const DocsConnectGetStartedModal = ({
                 {label}
               </span>
             ))}
-            <span className={styles.andMore}>{t("DocsConnect:AndMuchMore")}</span>
+            <span className={styles.andMore}>{t("Common:AndMuchMore")}</span>
           </div>
         </div>
       </ModalDialog.Body>

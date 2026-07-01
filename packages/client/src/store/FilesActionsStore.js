@@ -3571,6 +3571,10 @@ class FilesActionStore {
       filter.searchArea = RoomSearchArea.Archive;
     }
 
+    if (correctCategoryType === CategoryType.Forms) {
+      filter.searchArea = RoomSearchArea.Forms;
+    }
+
     if (
       this.selectedFolderStore?.navigationPath &&
       this.selectedFolderStore?.navigationPath.length > 0 &&

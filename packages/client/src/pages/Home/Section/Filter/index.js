@@ -169,6 +169,7 @@ const SectionFilterContent = ({
   getAllRoomGroups,
   roomGroups,
   isRoomsFolder,
+  isFormsFolder,
   organizeRoomsGrouping,
 }) => {
   const location = useLocation();
@@ -214,6 +215,7 @@ const SectionFilterContent = ({
         isRoomsFolder,
         isAIAgentsFolder,
         isFormsSection,
+        isFormsFolder,
         selectedFolderId,
         getFolderModel,
         getContactsModel,
@@ -229,6 +231,7 @@ const SectionFilterContent = ({
       isRoomsFolder,
       isAIAgentsFolder,
       isFormsSection,
+      isFormsFolder,
       selectedFolderId,
       getFolderModel,
       getContactsModel,
@@ -1980,6 +1983,7 @@ export default inject(
       isTemplatesFolder,
       isSharedWithMeFolder,
       isAIAgentsFolder,
+      isFormsFolder,
     } = treeFoldersStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
@@ -2101,6 +2105,7 @@ export default inject(
       getAllRoomGroups,
       roomGroups,
       isRoomsFolder,
+      isFormsFolder,
       organizeRoomsGrouping,
     };
   },

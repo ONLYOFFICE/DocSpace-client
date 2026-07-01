@@ -829,6 +829,7 @@ export const Component = inject(
       isFavoritesFolder,
       isRecentFolder,
       isAIAgentsFolder,
+      isFormsFolder,
     } = treeFoldersStore;
 
     const {
@@ -941,6 +942,7 @@ export const Component = inject(
 
       isErrorRoomNotAvailable,
       isRoomsFolder,
+      isFormsFolder,
       isArchiveFolder,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
 

@@ -157,6 +157,16 @@ const useFiles = ({
     navigate(`${url}?${filter.toUrlParams()}`);
   };
 
+  const fetchDefaultForms = () => {
+    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Forms);
+
+    const categoryType = getCategoryType(location) as number;
+
+    const url = getCategoryUrl(categoryType);
+
+    navigate(`${url}?${filter.toUrlParams()}`);
+  };
+
   const getFiles = React.useCallback(async () => {
     if (isPublicRoom()) return;
 
@@ -200,12 +210,21 @@ const useFiles = ({
 
         return;
       }
+    } else if (isForms && !isRoomFolder) {
+      filterObj = RoomsFilter.getFilter(window.location);
+
+      isRooms = true;
+
+      if (!filterObj) {
+        fetchDefaultForms();
+
+        return;
+      }
     } else if (
       (categoryType == CategoryType.Shared ||
         categoryType == CategoryType.SharedRoom ||
         categoryType == CategoryType.Form ||
-        categoryType == CategoryType.Archive ||
-        isForms) &&
+        categoryType == CategoryType.Archive) &&
       !isRoomFolder
     ) {
       filterObj = RoomsFilter.getFilter(window.location);

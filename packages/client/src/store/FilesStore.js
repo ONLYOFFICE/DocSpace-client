@@ -66,7 +66,6 @@ import {
 } from "@docspace/shared/utils";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
 import { isSameEntity } from "@docspace/shared/utils/isSameEntity";
-import { getRoomsSectionTypes } from "@docspace/shared/utils/rooms";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
@@ -2359,21 +2358,13 @@ class FilesStore {
     this.aiRoomStore.setResultId(null);
     this.aiRoomStore.setCurrentTab(null);
 
-    // Split the unified Rooms folder into "Rooms" and "Forms" sections by room
-    // type. This scoping is request-only — it is applied to a clone and never
-    // stored in filterData, so the displayed filter (type chip, "clear filter"
-    // state, URL) stays clean. A user-selected type takes precedence.
-    const isFormsSection = window.location.pathname.startsWith("/forms");
-    const sectionTypes = filterData.type
-      ? null
-      : getRoomsSectionTypes(isFormsSection, filterData.searchArea);
-
-    const requestData = sectionTypes ? filterData.clone() : filterData;
-    if (sectionTypes) requestData.type = sectionTypes;
-
+    // The Rooms/Forms split is enforced server-side by the room's folder type:
+    // `searchArea=Active` never returns Form Filling Rooms, and the Forms
+    // section requests `searchArea=Forms`. The filter (carrying searchArea)
+    // maps directly to the request — no client-side room-type scoping needed.
     const request = () =>
       api.rooms
-        .getRooms(requestData, this.roomsController.signal)
+        .getRooms(filterData, this.roomsController.signal)
         .then(async (data) => {
           if (!folderId) setSelectedNode([`${data.current.id}`]);
 
@@ -5190,12 +5181,16 @@ class FilesStore {
       isTemplatesFolder,
       isRecentFolder,
       isAIAgentsFolder,
+      isFormsFolder,
     } = this.treeFoldersStore;
 
     // Only 100 files on recent page should be shown
     if (isRecentFolder) return false;
 
-    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
+    // The Forms section is a rooms listing (served via searchArea=Forms), so
+    // its pagination total lives on roomsFilter, not the files filter.
+    const isRooms =
+      isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder;
     const filterTotal =
       isRooms || isAIAgentsFolder ? this.roomsFilter.total : this.filter.total;
 
@@ -5215,10 +5210,10 @@ class FilesStore {
     )
       return;
 
-    const { isRoomsFolder, isArchiveFolder, isAIAgentsFolder } =
+    const { isRoomsFolder, isArchiveFolder, isAIAgentsFolder, isFormsFolder } =
       this.treeFoldersStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
 
     this.setFilesIsLoading(true);
     // console.log("fetchMoreFiles");

@@ -156,6 +156,10 @@ export const buildFolderUrl = (
       path = getCategoryUrl(CategoryType.AIAgents);
       params = roomParams(RoomSearchArea.AIAgents);
       break;
+    case FolderType.Forms:
+      path = getCategoryUrl(CategoryType.Forms);
+      params = roomParams(RoomSearchArea.Forms);
+      break;
     default:
       path = getCategoryUrl(CategoryType.Shared);
       params = roomParams(RoomSearchArea.Active);

@@ -277,6 +277,7 @@ class FilesActionStore {
       isArchiveFolderRoot,
       isTemplatesFolder,
       isAIAgentsFolder,
+      isFormsFolder,
     } = this.treeFoldersStore;
 
     let newFilter;
@@ -301,7 +302,8 @@ class FilesActionStore {
         isRoomsFolder ||
         isArchiveFolder ||
         isArchiveFolderRoot ||
-        isTemplatesFolder
+        isTemplatesFolder ||
+        isFormsFolder
       ) {
         await fetchRooms(
           updatedFolder,

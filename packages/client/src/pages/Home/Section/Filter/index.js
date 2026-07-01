@@ -1802,6 +1802,10 @@ const SectionFilterContent = ({
         newFilter.searchArea = RoomSearchArea.Templates;
       }
 
+      if (isFormsFolder) {
+        newFilter.searchArea = RoomSearchArea.Forms;
+      }
+
       const path = getRoomsListBasePath(newFilter.searchArea);
 
       navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
@@ -1986,7 +1990,8 @@ export default inject(
       isFormsFolder,
     } = treeFoldersStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
+    const isRooms =
+      isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { showStorageInfo, isDefaultRoomsQuotaSet } = currentQuotaStore;

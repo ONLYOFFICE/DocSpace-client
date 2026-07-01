@@ -3857,10 +3857,15 @@ class FilesStore {
       isArchiveFolder,
       isTemplatesFolder,
       isAIAgentsFolder,
+      isFormsFolder,
     } = this.treeFoldersStore;
 
     const isRooms =
-      isRoomsFolder || isArchiveFolder || isTemplatesFolder || isAIAgentsFolder;
+      isRoomsFolder ||
+      isArchiveFolder ||
+      isTemplatesFolder ||
+      isAIAgentsFolder ||
+      isFormsFolder;
 
     let deleteCount = 0;
 
@@ -5441,7 +5446,7 @@ class FilesStore {
   };
 
   get isFiltered() {
-    const { isRoomsFolder, isArchiveFolder, isAIAgentsFolder } =
+    const { isRoomsFolder, isArchiveFolder, isAIAgentsFolder, isFormsFolder } =
       this.treeFoldersStore;
 
     const {
@@ -5468,7 +5473,7 @@ class FilesStore {
     } = this.filter;
 
     const isFiltered =
-      isRoomsFolder || isArchiveFolder || isAIAgentsFolder
+      isRoomsFolder || isArchiveFolder || isAIAgentsFolder || isFormsFolder
         ? filterValue ||
           type ||
           provider ||

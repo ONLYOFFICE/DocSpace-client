@@ -371,12 +371,13 @@ export default inject(
     const isHighlight =
       highlightFile.id == item?.id && highlightFile.isExst === !item?.fileExst;
 
-    const { isRoomsFolder, isArchiveFolder, isTemplatesFolder } =
+    const { isRoomsFolder, isArchiveFolder, isTemplatesFolder, isFormsFolder } =
       treeFoldersStore;
 
     const { showStorageInfo } = currentQuotaStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
+    const isRooms =
+      isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder;
 
     return {
       getIcon,

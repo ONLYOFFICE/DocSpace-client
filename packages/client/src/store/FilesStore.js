@@ -4064,6 +4064,17 @@ class FilesStore {
     );
   };
 
+  syncEncryptedRoom = () => {
+    this.recoverEncryptedFilenamesForCurrentView();
+
+    const roomId =
+      this.selectedFolderStore.navigationPath.find((r) => r.isRoom)?.id ??
+      (this.selectedFolderStore.isRoom ? this.selectedFolderStore.id : null);
+    if (roomId) {
+      this.maybeBackfillEncryptedRoom(roomId, this.selectedFolderStore.security);
+    }
+  };
+
   maybeBackfillEncryptedRoom = (roomId, security) => {
     if (!roomId) return;
     // Only room managers/admins backfill — they're the likely "inviter" with

@@ -39,6 +39,7 @@ import { useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
+import { AI_ENUM } from "@docspace/ui-kit/billing/constants";
 import { DeviceType } from "@docspace/shared/enums";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 
@@ -285,6 +286,8 @@ const View = ({
             break;
 
           case "ai-settings":
+            if (!settingsStore.standalone)
+              await paymentStore.handleServiceQuota(AI_ENUM);
             break;
         }
 

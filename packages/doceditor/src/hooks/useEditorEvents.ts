@@ -369,7 +369,6 @@ const useEditorEvents = ({
                   canUseTool: p.canUseTool ?? false,
                   useResponsesApi: p.useResponsesApi,
                   providerType: p.providerType,
-                  basedOn: "openai",
                 }));
 
                 const validProfileIds = new Set(profiles.map((p) => p.id));

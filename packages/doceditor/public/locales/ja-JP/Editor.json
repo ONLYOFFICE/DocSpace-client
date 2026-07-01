@@ -5,6 +5,6 @@
   "FileLocation": "ファイルの場所を開く",
   "ImageFileType": "画像",
   "MailMergeFileType": "XLSX形式のファイルを選択する",
-  "SelectFilesType": " {{fileType}}タイプのファイルの選択",
+  "SelectFilesType": "{{fileType}}タイプのファイルの選択",
   "UsersWithoutAccess": "言及したいユーザーの中には、ルームにアクセスできない人がいます：{{users}}"
 }

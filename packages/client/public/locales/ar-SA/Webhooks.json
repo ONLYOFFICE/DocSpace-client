@@ -74,7 +74,7 @@
   "SelectDeliveryTime": "تحديد وقت التسليم",
   "SendEverything": "أرسل كل شيء",
   "SettingsWebhook": "إعدادات ويب هوك",
-  "SSLHint": "بشكل افتراضي، نتحقق من شهادات SSL عند تسليم الحمولات. ",
+  "SSLHint": "بشكل افتراضي، نتحقق من شهادات SSL عند تسليم الحمولات.",
   "SSLVerification": "التحقق من SSL",
   "State": "الحالة",
   "TargetId": "معرّف الهدف",

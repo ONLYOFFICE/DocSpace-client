@@ -13,7 +13,7 @@
   "DeleteItemForeverConfirm": "Olet aikeissa poistaa <strong>{{name}}</strong>.",
   "DeleteItemsSharedNote": "Ole hyvä ja huomioi, että jos olet jakanut tiedot jonkun kanssa, ne tiedot eivät ole enää saatavilla.",
   "DeleteTemplate": "Haluatko todella poistaa mallihuoneen <1>«{{templateName}}»</1>? Mallia ei voida palauttaa.",
-  "DeleteTemplates": "Haluatko todella poistaa valitun huoneen mallit? Niitä ei voi palauttaa. ",
+  "DeleteTemplates": "Haluatko todella poistaa valitun huoneen mallit? Niitä ei voi palauttaa.",
   "DeleteTemplateWarning": "Ymmärrän seuraukset ja haluan poistaa mallipohjan.",
   "FileDeletedAfter": "Tiedosto poistetaan pysyvästi 30 päivän päästä.",
   "FilePermanentlyDeleted": "Tiedosto poistetaan pysyvästi {{trashSection}}-osiosta.",

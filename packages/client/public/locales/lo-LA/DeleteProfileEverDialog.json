@@ -17,6 +17,6 @@
   "ReassignDataToAnotherUser": "ມອບໝາຍຂໍ້ມູນຄືນໃໝ່ໃຫ້ຜູ້ໃຊ້ອື່ນ",
   "SuccessfullyDeleteGuestInfoMessage": "ແຂກຖືກລົບອອກສຳເລັດແລ້ວ",
   "SuccessfullyDeleteUserInfoMessage": "ຜູ້ໃຊ້ຖືກລຶບອອກແລ້ວ",
-  "ToBeAbleToReassignData": "ເພື່ອສາມາດມອບໝາຍຂໍ້ມູນຄືນໃໝ່ໄດ້, ໃຫ້ລຶບຜູ້ໃຊ້ເທື່ອລະຄົນອອກ.\n",
+  "ToBeAbleToReassignData": "ເພື່ອສາມາດມອບໝາຍຂໍ້ມູນຄືນໃໝ່ໄດ້, ໃຫ້ລຶບຜູ້ໃຊ້ເທື່ອລະຄົນອອກ.",
   "UserFilesRemovalScope": "ຂໍ້ມູນສ່ວນຕົວ, ເອກະສານ ແລະ ໂຟນເດີທັງໝົດໃນພື້ນທີ່ {{sectionNameFirst}} ແລະ {{sectionNameSecond}} ຂອງຜູ້ໃຊ້ນີ້ ຈະຖືກລົບຖິ້ມຖາວອນ."
 }

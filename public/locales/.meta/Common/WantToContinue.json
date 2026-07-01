@@ -3,7 +3,7 @@
   "content": "Are you sure you want to continue?",
   "content_en_sha1_hash": "8de6e73ba7b7e7a2c5f18e2bc38d0a44a17be1d3",
   "created_at": "2025-05-19T21:30:49.566Z",
-  "updated_at": "2026-06-01T21:20:44.397Z",
+  "updated_at": "2026-06-30T10:18:29.528Z",
   "comment": {
     "text": "This is a confirmation message displayed in a modal dialog, asking the user if they wish to proceed with an action. It appears in various contexts, such as before deleting a chat or when confirming an action related to AI tools or billing.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 237,
-      "context": "body: [\n t(\"AIToolsDescription\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n }),\n t(\"WantToContinue\"),\n ],\n };\n \n const onOpenPricingBilling = () => {\n setIsPricingBillingVisible(true);",
+      "line_number": 223,
+      "context": "body: [\n t(\"AIToolsDescription\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n }),\n t(\"WantToContinue\"),\n ],\n };\n \n const onOpenTopUp = () => {\n // if (!isAiToolsServiceOn && !simpleTopUp) {",
       "module": "/libs/ui-kit"
     },
     {
@@ -43,68 +43,68 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 96,
-      "context": "t={t}\n i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isTemplate) {",
+      "line_number": 97,
+      "context": "i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n components={{ 1: <Text fontWeight={600} as=\"span\" /> }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isTemplate) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 96,
-      "context": "t={t}\n i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isTemplate) {",
+      "line_number": 97,
+      "context": "i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n components={{ 1: <Text fontWeight={600} as=\"span\" /> }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isTemplate) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 96,
-      "context": "t={t}\n i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isTemplate) {",
+      "line_number": 97,
+      "context": "i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n components={{ 1: <Text fontWeight={600} as=\"span\" /> }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isTemplate) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 96,
-      "context": "t={t}\n i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isTemplate) {",
+      "line_number": 97,
+      "context": "i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n components={{ 1: <Text fontWeight={600} as=\"span\" /> }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isTemplate) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 96,
-      "context": "t={t}\n i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isTemplate) {",
+      "line_number": 97,
+      "context": "i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n components={{ 1: <Text fontWeight={600} as=\"span\" /> }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isTemplate) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 96,
-      "context": "t={t}\n i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isTemplate) {",
+      "line_number": 97,
+      "context": "i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n components={{ 1: <Text fontWeight={600} as=\"span\" /> }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isTemplate) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 96,
-      "context": "t={t}\n i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isTemplate) {",
+      "line_number": 97,
+      "context": "i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n components={{ 1: <Text fontWeight={600} as=\"span\" /> }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isTemplate) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 96,
-      "context": "t={t}\n i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isTemplate) {",
+      "line_number": 97,
+      "context": "i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n components={{ 1: <Text fontWeight={600} as=\"span\" /> }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isTemplate) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 96,
-      "context": "t={t}\n i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isTemplate) {",
+      "line_number": 97,
+      "context": "i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n components={{ 1: <Text fontWeight={600} as=\"span\" /> }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isTemplate) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 96,
-      "context": "t={t}\n i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isTemplate) {",
+      "line_number": 97,
+      "context": "i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n components={{ 1: <Text fontWeight={600} as=\"span\" /> }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isTemplate) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 96,
-      "context": "t={t}\n i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isTemplate) {",
+      "line_number": 97,
+      "context": "i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName: selection[0]?.title }}\n components={{ 1: <Text fontWeight={600} as=\"span\" /> }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isTemplate) {",
       "module": "/packages/client"
     },
     {

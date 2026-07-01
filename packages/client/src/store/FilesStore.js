@@ -3159,12 +3159,7 @@ class FilesStore {
           "show-version-history",
           "finalize-version",
           "version",
-          // Document editor / PDF flows do not support encrypted files yet.
-          "preview",
           "fill-form",
-          "edit",
-          "open-pdf",
-          "edit-pdf",
           "filling-status",
           "start-filling",
           "reset-and-start-filling",
@@ -3184,6 +3179,10 @@ class FilesStore {
             "view",
             "pdf-view",
             "download",
+            "preview",
+            "edit",
+            "open-pdf",
+            "edit-pdf",
           ]);
         }
       }
@@ -4063,6 +4062,17 @@ class FilesStore {
       identity,
       roomId,
     );
+  };
+
+  syncEncryptedRoom = () => {
+    this.recoverEncryptedFilenamesForCurrentView();
+
+    const roomId =
+      this.selectedFolderStore.navigationPath.find((r) => r.isRoom)?.id ??
+      (this.selectedFolderStore.isRoom ? this.selectedFolderStore.id : null);
+    if (roomId) {
+      this.maybeBackfillEncryptedRoom(roomId, this.selectedFolderStore.security);
+    }
   };
 
   maybeBackfillEncryptedRoom = (roomId, security) => {

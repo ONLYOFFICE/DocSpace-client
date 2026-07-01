@@ -66,6 +66,37 @@ const FilenameRecoveryEffect = inject(({ filesStore }) => ({
   }),
 );
 
+const RoomUnlockEffect = inject(({ selectedFolderStore, filesStore }) => ({
+  isPrivate: selectedFolderStore?.private,
+  folderId: selectedFolderStore?.id,
+  sync: filesStore?.syncEncryptedRoom,
+}))(
+  observer(({ isPrivate, folderId, sync }) => {
+    const { isUnlocked, hasConfiguredKey, requireIdentity } = useEncryption();
+    const promptedIdRef = React.useRef(null);
+
+    React.useEffect(() => {
+      if (!isPrivate) {
+        promptedIdRef.current = null;
+        return undefined;
+      }
+      if (isUnlocked || !hasConfiguredKey || folderId == null) return undefined;
+      if (promptedIdRef.current === folderId) return undefined;
+      promptedIdRef.current = folderId;
+
+      let cancelled = false;
+      requireIdentity().then((identity) => {
+        if (!cancelled && identity) sync?.();
+      });
+      return () => {
+        cancelled = true;
+      };
+    }, [isPrivate, isUnlocked, hasConfiguredKey, folderId, requireIdentity, sync]);
+
+    return null;
+  }),
+);
+
 const GhostStateToastEffect = () => {
   const { t } = useTranslation(["Common"]);
   React.useEffect(() => {
@@ -169,22 +200,9 @@ const PassphraseUnlockAdapter = ({
   );
 };
 
-const EncryptionProviderWrapper = ({ userKeys, children }) => {
-  return (
-    <EncryptionProvider
-      userKeys={userKeys}
-      PassphraseDialog={PassphraseUnlockAdapter}
-      KeyChangeDialog={KeyChangeDialog}
-    >
-      <FilenameRecoveryEffect />
-      <DeviceSetupHintEffect />
-      <GhostStateToastEffect />
-      {children}
-    </EncryptionProvider>
-  );
-};
-
-export default inject(({ userStore }) => {
+// Read encryptionKeys in render (observer), not the inject mapper, so userKeys
+// tracks the async keys load — otherwise it stays a stale null.
+const EncryptionProviderWrapper = observer(({ userStore, children }) => {
   const keys = userStore?.encryptionKeys;
   const ownerId = userStore?.user?.id;
   const ownerIdStr = ownerId ? String(ownerId) : undefined;
@@ -200,7 +218,21 @@ export default inject(({ userStore }) => {
         }
       : null;
 
-  return {
-    userKeys,
-  };
-})(observer(EncryptionProviderWrapper));
+  return (
+    <EncryptionProvider
+      userKeys={userKeys}
+      PassphraseDialog={PassphraseUnlockAdapter}
+      KeyChangeDialog={KeyChangeDialog}
+    >
+      <FilenameRecoveryEffect />
+      <RoomUnlockEffect />
+      <DeviceSetupHintEffect />
+      <GhostStateToastEffect />
+      {children}
+    </EncryptionProvider>
+  );
+});
+
+export default inject(({ userStore }) => ({ userStore }))(
+  EncryptionProviderWrapper,
+);

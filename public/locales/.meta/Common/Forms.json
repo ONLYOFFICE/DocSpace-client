@@ -3,7 +3,7 @@
   "content": "Forms",
   "content_en_sha1_hash": "4bec9575721b2739ed1e7c56eb6c8471084fcbcf",
   "created_at": "2025-05-19T21:30:45.530Z",
-  "updated_at": "2026-06-25T19:31:02.853Z",
+  "updated_at": "2026-06-30T10:18:29.502Z",
   "comment": {
     "text": "This is a label for a section in a download dialog, indicating that the files being downloaded are forms. It also appears as part of a generated PDF filename.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 570,
+      "line_number": 598,
       "context": "sectionName: t(\"Common:Rooms\"),\n },\n forms: {\n link: actions.onGoToForms(),\n icon: <FolderIcon />,\n sectionName: t(\"Common:Forms\"),\n },\n agents: {\n link: actions.onGoToAgents(),\n icon: <FolderIcon />,\n sectionName: t(\"Common:AIAgents\"),",
       "module": "/packages/client"
     },

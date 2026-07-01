@@ -3,7 +3,7 @@
   "content": "Additional backup",
   "content_en_sha1_hash": "3be5f6277c495e226621e6f71c3b7588ddc62c06",
   "created_at": "2026-05-27T14:11:28.342Z",
-  "updated_at": "2026-06-01T21:20:44.454Z",
+  "updated_at": "2026-06-30T10:18:29.574Z",
   "comment": {
     "text": "Section header label in the Portal Settings used to identify the additional backup service for paid tariffs.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
       "line_number": 170,
-      "context": "if (tReady) setIsLoadedSectionHeader(true);\n \n const arrayOfParams = getArrayOfParams();\n \n const serviceSubPageHeaders = {\n backup: isFreeTariff ? \"Common:Backup\" : t(\"Common:AdditionalBackup\"),\n \"ai-services\": \"Common:OrganizationAI\",\n \"disk-storage\": \"Common:AdditionalDiskStorage\",\n };\n \n let number = 1;",
+      "context": "if (tReady) setIsLoadedSectionHeader(true);\n \n const arrayOfParams = getArrayOfParams();\n \n const serviceSubPageHeaders = {\n backup: isFreeTariff ? \"Common:Backup\" : t(\"Common:AdditionalBackup\"),\n \"ai-services\": \"Common:AIFeatures\",\n \"disk-storage\": \"Common:AdditionalDiskStorage\",\n };\n \n let number = 1;",
       "module": "/packages/client"
     }
   ],

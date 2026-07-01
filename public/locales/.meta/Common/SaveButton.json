@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2026-06-25T19:31:02.876Z",
+  "updated_at": "2026-06-30T10:18:29.518Z",
   "comment": {
     "text": "Button label or dialog header. It confirms and applies changes, such as renaming a chat or saving export settings.",
     "is_auto": true,
@@ -43,7 +43,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/wallet/WalletRefilledModal.tsx",
-      "line_number": 137,
+      "line_number": 142,
       "context": "</div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"EnableButton\"\n label={t(\"SaveButton\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onAdditionalSave}\n isDisabled={",
       "module": "/libs/ui-kit"
     },

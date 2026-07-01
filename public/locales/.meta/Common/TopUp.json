@@ -3,7 +3,7 @@
   "content": "Top up",
   "content_en_sha1_hash": "91d42a8b742abdae628f62177ef45374076d645e",
   "created_at": "2026-04-10T13:53:43.578Z",
-  "updated_at": "2026-06-25T11:55:07.224Z",
+  "updated_at": "2026-06-30T07:32:49.217Z",
   "comment": {
     "text": "This is a button label that allows users to add funds to their account or balance.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
-      "line_number": 324,
+      "line_number": 337,
       "context": "<ModalDialog.Footer>\n <div className={styles.footerButtons}>\n <Button\n key=\"ContinueToStripeButton\"\n label={isStripeFlow ? t(\"ContinueToStripe\") : t(\"TopUp\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onContinue}\n isLoading={isLoading}",
       "module": "/libs/ui-kit"
     },

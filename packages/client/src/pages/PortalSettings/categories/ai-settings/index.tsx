@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router";
 
 import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
-import { useI18n, useStores } from "@docspace/ui-kit/ai-agent/providers";
+import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import {
   AiModels,
   ModelAssignment,
@@ -68,7 +68,6 @@ type TAISettingsProps = {
 const AISettings = ({ fetchKnowledge, fetchAIProviders }: TAISettingsProps) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { t: aiT } = useI18n();
   const { t } = useTranslation(["Common"]);
 
   const initKnowledge = React.useCallback(async () => {
@@ -121,27 +120,27 @@ const AISettings = ({ fetchKnowledge, fetchAIProviders }: TAISettingsProps) => {
   const data: TTabItem[] = [
     {
       id: TAB_IDS.AI_MODELS,
-      name: aiT("Common:AIModels"),
+      name: t("Common:AIModels"),
       content: <AiModels />,
       onClick: makeOnClick(TAB_IDS.AI_MODELS),
     },
     {
       id: TAB_IDS.MODEL_ASSIGNMENT,
-      name: aiT("Common:ModelAssignment"),
+      name: t("Common:ModelAssignment"),
       content: <ModelAssignment />,
       onClick: makeOnClick(TAB_IDS.MODEL_ASSIGNMENT),
       isDisabled: disableNonAiModels,
     },
     {
       id: TAB_IDS.MCP_SERVERS,
-      name: aiT("Common:MCPServers"),
+      name: t("Common:MCPServers"),
       content: <McpServers />,
       onClick: makeOnClick(TAB_IDS.MCP_SERVERS),
       isDisabled: disableNonAiModels,
     },
     {
       id: TAB_IDS.WEB_SEARCH,
-      name: aiT("Common:WebSearch"),
+      name: t("Common:WebSearch"),
       content: <WebSearch />,
       onClick: makeOnClick(TAB_IDS.WEB_SEARCH),
       isDisabled: disableNonAiModels,

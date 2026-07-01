@@ -1,0 +1,29 @@
+{
+  "key_path": "AdditionalAdmins",
+  "content": "Additional admins",
+  "content_en_sha1_hash": "0ae476600e6fe2b9a24716ca4360ef1e846af35e",
+  "created_at": "2026-06-30T07:32:23.909Z",
+  "updated_at": "2026-06-30T15:41:51.815Z",
+  "comment": {
+    "text": "A label in a summary row within the price details dialog, appearing next to a count of extra administrators.",
+    "is_auto": true,
+    "updated_at": "2026-06-30T07:44:11.729Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
+      "line_number": 139,
+      "context": "{renderRow(\n t(\"AdminAdjustment\"),\n `${currentAdmins} → ${newAdmins}`,\n )}\n {renderRow(\n isDowngradePlan ? t(\"ReducedAdmins\") : t(\"AdditionalAdmins\"),\n isDowngradePlan\n ? `${additionalAdmins}`\n : `+${additionalAdmins}`,\n )}\n {renderRow(",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

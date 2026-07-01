@@ -3,7 +3,7 @@
   "content": "Custom",
   "content_en_sha1_hash": "081ae3fdc403609cf6e760849ebb14117b7a50cb",
   "created_at": "2025-05-19T21:30:44.377Z",
-  "updated_at": "2026-06-25T19:31:02.940Z",
+  "updated_at": "2026-06-30T10:18:29.556Z",
   "comment": {
     "text": "This is a label for a custom room type, used in filters and room type displays. It appears as a short, standalone word.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1221,
+      "line_number": 1227,
       "context": "default:\n return {\n id: \"filter_type-custom\",\n key: RoomsType.CustomRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:CustomRooms\"),\n };\n }\n }),\n ]\n : [",
       "module": "/packages/client"
     },

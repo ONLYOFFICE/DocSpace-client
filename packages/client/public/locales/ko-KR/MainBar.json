@@ -10,7 +10,7 @@
   "PersonalUserQuotaDescription": "새 파일 및 폴더를 업로드하거나 생성하려면 디스크 공간을 확보하거나 {{productName}} 스토리지 할당량을 늘리세요.",
   "RemoveFilesOrClickToUpgrade": "불필요한 파일을 삭제하거나 <1>여기를 클릭</1>하여 요금제를 업그레이드하세요.",
   "RemoveFilesOrContactToUpgrade": "불필요한 파일을 삭제하거나 {{productName}} 관리자에게 연락하여 요금제를 업그레이드하세요.",
-  "RemoveFilesOrContactToUpgradeQuota": "불필요한 파일을 삭제하거나 {{productName}} 관리자에게 연락하여 스토리지 할당량을 늘리세요. ",
+  "RemoveFilesOrContactToUpgradeQuota": "불필요한 파일을 삭제하거나 {{productName}} 관리자에게 연락하여 스토리지 할당량을 늘리세요.",
   "RequestActivation": "다시 한 번 활성화 요청",
   "RoomQuotaDescription": "불필요한 룸을 아카이브하거나 <1>여기를 클릭</1>하여 {{productName}}에 더 적합한 요금제를 찾아보세요.",
   "RoomQuotaHeader": "방이 곧 초과될 예정입니다: {{currentValue}} / {{maxValue}}",

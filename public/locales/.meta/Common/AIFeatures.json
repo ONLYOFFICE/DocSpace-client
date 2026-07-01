@@ -3,7 +3,7 @@
   "content": "AI features",
   "content_en_sha1_hash": "59f0c687f2560552c920af9e6c0850fc4715bf49",
   "created_at": "2026-06-03T11:45:29.424Z",
-  "updated_at": "2026-06-09T14:03:10.932Z",
+  "updated_at": "2026-06-30T10:18:29.527Z",
   "comment": {
     "text": "Menu item label in the context menu that contains AI-related sub-options.",
     "is_auto": true,
@@ -11,6 +11,24 @@
     "model": "gemma4:26b"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
+      "line_number": 131,
+      "context": "displayType={ModalDialogType.modal}\n autoMaxWidth\n autoMaxHeight\n withBodyScroll\n >\n <ModalDialog.Header>{t(\"AIFeatures\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.content}>\n <div className={styles.intro}>\n <Text\n fontSize=\"16px\"",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/usage/sub-components/SpendingBreakdown.tsx",
+      "line_number": 153,
+      "context": "//     case DISK_STORAGE:\n //       return t(\"AdditionalStorageInfo\");\n //     case BACKUP_SERVICE:\n //       return t(\"Backups\");\n //     case AI_TOOLS:\n //       return t(\"AIFeatures\");\n //     default:\n //       return service;\n //   }\n // };",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/ActivateAIDialog/index.tsx",
+      "line_number": 167,
+      "context": "<ModalDialog\n visible={visible}\n onClose={isActivating ? () => {} : onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"Common:AIFeatures\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" lineHeight=\"20px\">\n {renderBody()}\n </Text>\n </ModalDialog.Body>",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
       "line_number": 587,

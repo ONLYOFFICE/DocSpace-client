@@ -1,0 +1,21 @@
+{
+  "key_path": "MCPServers",
+  "content": "MCP servers",
+  "content_en_sha1_hash": "8d9a304fd985232ade488e1913e41a3d9a502b09",
+  "created_at": "2026-06-30T10:18:07.854Z",
+  "updated_at": "2026-06-30T10:18:07.854Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

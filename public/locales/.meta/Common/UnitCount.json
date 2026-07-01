@@ -3,7 +3,7 @@
   "content": "{{unit}}: {{count}}",
   "content_en_sha1_hash": "df646ff517dcc5bff3e00f6c38ae47a5148c11e6",
   "created_at": "2026-04-10T13:53:43.768Z",
-  "updated_at": "2026-06-16T16:35:30.074Z",
+  "updated_at": "2026-06-30T10:18:29.657Z",
   "comment": {
     "text": "This is a short label displaying a quantity and its unit. It appears in billing contexts, where `{{unit}}` is the service unit (e.g., \"GB\", \"users\") and `{{count}}` is the numerical quantity.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/usage/sub-components/SpendingBreakdown.tsx",
+      "line_number": 167,
+      "context": "const getSubLabel = (item: (typeof serviceUsage)[number]) => {\n if (item.service === BACKUP_SERVICE)\n return t(\"BilledBackups\", { count: item.totalQuantity });\n \n if (item.service === AI_TOOLS)\n return t(\"UnitCount\", {\n unit: item.serviceUnit,\n count: formatCompactNumber(item.totalQuantity, language),\n });\n \n return getServiceQuantity(t, item.totalQuantity, item.serviceUnit);",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/libs/ui-kit/billing/wallet/utils/index.tsx",
       "line_number": 151,

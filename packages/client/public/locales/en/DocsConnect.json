@@ -1,8 +1,6 @@
 {
   "DocsConnect": "Docs Connect",
   "CardDescription": "Embed {{productName}} editors — documents, spreadsheets, presentations, forms, and PDFs — into your own platform. Spin up cloud tenants with your API keys and let users co-edit in real time on a flexible subscription.",
-  "ServicesCardDescription": "Embed {{productName}} editors into your app with cloud-hosted tenants and your own API keys.",
-  "ServicesCardPrice": "Free trial available | Then from {{price}} per user / month",
   "GetStartedTitle": "Run {{productName}} editors inside your app",
   "GetStartedDescription": "Embed cloud-hosted Document, Spreadsheet, Presentation and PDF editors — collaborative and MS Office-compatible, with your own keys. No server to install.",
   "FourEditorsTitle": "Four editors in one",
@@ -46,7 +44,6 @@
   "OfDays": "of {{count}} days",
   "GoToTenant": "Go to tenant",
   "TrialEndsOn": "Your trial ends on {{date}} — buy a plan to keep your tenant and data.",
-  "NoTransactions": "No transactions yet.",
   "TrialDaysRemaining": "~ {{count}} days remaining",
   "RenewsOn": "(Renews on {{date}})",
   "PlanUsers": "Users",

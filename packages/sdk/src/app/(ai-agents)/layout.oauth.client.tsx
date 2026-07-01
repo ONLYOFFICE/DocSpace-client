@@ -48,6 +48,10 @@ async function loadCommonData(): Promise<AiAgentsCommonData | null> {
       portalSettings && typeof portalSettings !== "string"
         ? portalSettings
         : undefined,
+    // No SSR snapshots in the OAuth frame path — the client-side fallback
+    // fetches hydrate the AI config / agents list stores. See layout.tsx.
+    initialAIConfig: null,
+    initialAgentsData: null,
   };
 }
 

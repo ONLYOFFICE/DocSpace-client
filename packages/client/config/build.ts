@@ -55,6 +55,10 @@ export const getBuildConfig = (
     onwarn(warning, warn) {
       // react-virtualized ships a Flow directive that Rollup doesn't understand
       if (warning.code === "MODULE_LEVEL_DIRECTIVE") return;
+      // @hpke/common places /* @__PURE__ */ annotations in positions Rolldown
+      // (Vite 8's bundler) can't interpret. Purely cosmetic — the bundle is
+      // unaffected. It's an upstream annotation quirk, not our code.
+      if (warning.code === "INVALID_ANNOTATION") return;
       // sjcl optionally imports Node "crypto" for PRNG seeding;
       // it falls back to window.crypto in the browser.
       if (warning.message?.includes("externalized for browser")) return;

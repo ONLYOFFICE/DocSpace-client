@@ -137,6 +137,7 @@ const Shell = ({ page = "home", ...rest }) => {
     closeEditorPanel,
     currentClientView,
     selectedFolderType,
+    isPrivacyFolder,
   } = rest;
 
   useCreateFileError({
@@ -582,6 +583,7 @@ const Shell = ({ page = "home", ...rest }) => {
     currentClientView !== "profile" &&
     currentClientView !== "chat" &&
     !isSettingsPage &&
+    !isPrivacyFolder &&
     selectedFolderType !== FolderType.Knowledge &&
     selectedFolderType !== FolderType.ResultStorage;
 
@@ -652,6 +654,7 @@ const ShellWrapper = inject(
     currentTariffStatusStore,
     dialogsStore,
     selectedFolderStore,
+    treeFoldersStore,
     aiRoomStore,
   }) => {
     const { i18n } = useTranslation();
@@ -763,6 +766,7 @@ const ShellWrapper = inject(
       getAIConfig,
       currentClientView: clientLoadingStore.currentClientView,
       selectedFolderType: selectedFolderStore.type,
+      isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
       // Scope the chat to the current agent only when we're inside an AI agent
       // room (or one of its subfolders). Anywhere else — including the AI Agents
       // root listing and non-agent contexts — the chat stays unscoped

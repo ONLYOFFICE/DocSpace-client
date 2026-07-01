@@ -57,9 +57,9 @@ import CloudIcon from "PUBLIC_DIR/images/icons/16/cloud.react.svg";
 import AutoUpdatesIcon from "PUBLIC_DIR/images/icons/16/auto-update.react.svg";
 import PluginsIcon from "PUBLIC_DIR/images/icons/16/catalog.devtools-plugin-sdk.react.svg";
 
-import styles from "./DocsConnectGetStartedModal.module.scss";
+import { DOCS_CONNECT_ROUTE } from "../../developer-tools/DocsConnect/constants";
 
-const DOCS_CONNECT_ROUTE = "/portal-settings/developer-tools/docs-connect";
+import styles from "./DocsConnectGetStartedModal.module.scss";
 
 interface DocsConnectGetStartedModalProps {
   visible: boolean;

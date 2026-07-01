@@ -33,25 +33,31 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-/**
- * Ensures the URL is absolute by prepending "/" if it has no scheme or leading slash.
- */
-export const toAbsoluteUrl = (url: string): string =>
-  url.startsWith("http") || url.startsWith("/") ? url : `/${url}`;
+import { Text } from "@docspace/ui-kit/components/text";
 
-export const PAYMENT_ROUTES = {
-  portalPayments: `/portal-settings/payments/portal-payments`,
-  services: `/portal-settings/payments/services`,
-  aiServices: `/portal-settings/payments/services/ai-services`,
-  backup: `/portal-settings/payments/services/backup`,
-  diskStorage: `/portal-settings/payments/services/disk-storage`,
-  docsConnect: `/portal-settings/payments/services/docs-connect`,
-  wallet: `/portal-settings/payments/wallet`,
-  usage: `/portal-settings/payments/usage`,
-} as const;
+import styles from "../TenantPanel.module.scss";
 
-export function getTwoDotsReplacing(translation: string) {
-  const newTranslation = translation;
+const StatColumn = ({
+  value,
+  label,
+  highlight,
+}: {
+  value: number;
+  label: string;
+  highlight?: boolean;
+}) => (
+  <div className={styles.statColumn}>
+    <Text
+      fontSize="18px"
+      fontWeight={700}
+      className={highlight ? styles.statValueHighlight : undefined}
+    >
+      {value}
+    </Text>
+    <Text fontSize="12px" className={styles.muted}>
+      {label}
+    </Text>
+  </div>
+);
 
-  return newTranslation.replace(/\..$/, ".");
-}
+export default StatColumn;

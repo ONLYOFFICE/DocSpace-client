@@ -67,11 +67,7 @@ import { getBrandName } from "@docspace/shared/constants/brands";
 
 import classNames from "classnames";
 
-import {
-  getDocsConnectDaysLeft,
-  isDocsConnectTrialExpired,
-  isDocsConnectPaid,
-} from "SRC_DIR/pages/PortalSettings/categories/developer-tools/DocsConnect/utils";
+import { getDocsConnectTrialState } from "SRC_DIR/pages/PortalSettings/categories/developer-tools/DocsConnect/utils";
 
 import styles from "./Header.module.scss";
 
@@ -345,12 +341,12 @@ const SectionHeaderContent = (props) => {
   const isDocsConnectServicePage = location.pathname.includes(
     "/services/docs-connect",
   );
-  const docsConnectEndDate = docsConnectInfo?.tenant?.endDate ?? "";
-  const docsConnectPaid = docsConnectInfo
-    ? isDocsConnectPaid(docsConnectInfo)
-    : false;
-  const docsConnectExpired = isDocsConnectTrialExpired(docsConnectEndDate);
-  const docsConnectDaysLeft = getDocsConnectDaysLeft(docsConnectEndDate);
+  const {
+    endDate: docsConnectEndDate,
+    isPaid: docsConnectPaid,
+    expired: docsConnectExpired,
+    daysLeft: docsConnectDaysLeft,
+  } = getDocsConnectTrialState(docsConnectInfo);
   const docsConnectTrialLow = !docsConnectExpired && docsConnectDaysLeft <= 14;
 
   return (

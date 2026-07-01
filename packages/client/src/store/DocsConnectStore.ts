@@ -38,15 +38,11 @@ import copy from "copy-to-clipboard";
 
 import {
   getDocsConnectInfo,
-  getDocsConnectPrices,
   startDocsConnectTrial,
   buyDocsConnectPlan,
   getDocsConnectReportUrl,
 } from "@docspace/shared/api/docs-connect";
-import type {
-  TDocsConnectInfo,
-  TDocsConnectPrices,
-} from "@docspace/shared/api/docs-connect/types";
+import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { Nullable, TTranslation } from "@docspace/shared/types";
@@ -57,8 +53,6 @@ class DocsConnectStore {
   settingsStore: Nullable<SettingsStore> = null;
 
   info: Nullable<TDocsConnectInfo> = null;
-
-  prices: Nullable<TDocsConnectPrices> = null;
 
   isLoading: boolean = true;
 
@@ -101,13 +95,6 @@ class DocsConnectStore {
     }
   };
 
-  fetchPrices = async () => {
-    const prices = await getDocsConnectPrices();
-    runInAction(() => {
-      this.prices = prices;
-    });
-  };
-
   openBuyPlan = (mode: BuyPlanMode) => {
     this.buyPlanMode = mode;
     this.buyPlanPanelVisible = true;
@@ -145,6 +132,9 @@ class DocsConnectStore {
       users,
       devPackEnabled: devPack,
       topUp,
+      currentUsers: this.info?.tenant.payment?.quantity ?? 0,
+      currentDevPackEnabled: this.info?.devPackEnabled ?? false,
+      currency: this.info?.wallet?.currency ?? "USD",
     });
     runInAction(() => {
       this.info = info;

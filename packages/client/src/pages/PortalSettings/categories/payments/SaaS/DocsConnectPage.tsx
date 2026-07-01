@@ -52,19 +52,15 @@ import WalletIcon from "PUBLIC_DIR/images/icons/16/wallet.react.svg";
 
 import {
   formatDocsConnectDate,
-  getDocsConnectDaysLeft,
-  isDocsConnectPaid,
+  getDocsConnectTrialState,
 } from "../../developer-tools/DocsConnect/utils";
+import { DOCS_CONNECT_ROUTE } from "../../developer-tools/DocsConnect/constants";
 import { default as BackupPageLoader } from "@docspace/ui-kit/billing/services/pages/backup/BackupPageLoader";
 import BuyPlanPanel from "../../developer-tools/DocsConnect/BuyPlanPanel";
 import PromoPage from "../../developer-tools/DocsConnect/PromoPage";
+import { PAYMENT_ROUTES } from "../utils";
 
 import styles from "./DocsConnectPage.module.scss";
-
-const WALLET_ROUTE = "/portal-settings/payments/wallet";
-const USAGE_ROUTE = "/portal-settings/payments/usage";
-const MANAGE_ROUTE = "/portal-settings/developer-tools/docs-connect";
-const TRIAL_TOTAL_DAYS = 30;
 
 interface DocsConnectPageProps {
   info?: TDocsConnectInfo | null;
@@ -97,17 +93,16 @@ const DocsConnectPage = ({
 
   if (!info) return <PromoPage />;
 
-  const endDate = info.tenant?.endDate ?? "";
-  const daysLeft = getDocsConnectDaysLeft(endDate);
-  const spentPercent = Math.min(
-    100,
-    Math.max(0, ((TRIAL_TOTAL_DAYS - daysLeft) / TRIAL_TOTAL_DAYS) * 100),
-  );
+  const {
+    endDate,
+    daysLeft,
+    totalDays,
+    percent: spentPercent,
+    isPaid,
+  } = getDocsConnectTrialState(info);
 
   const currency = info.wallet?.currency ?? "USD";
   const credits = info.wallet?.availableCredits ?? 0;
-
-  const isPaid = isDocsConnectPaid(info);
   const planUsers = info.tenant?.payment?.quantity ?? 0;
   const pricePerUser =
     (info.prices?.pricePerUser ?? 0) +
@@ -115,9 +110,9 @@ const DocsConnectPage = ({
   const monthlyCharge = planUsers * pricePerUser;
   const activeTenants = planUsers > 0 ? 1 : 0;
 
-  const onTopUp = () => navigate(WALLET_ROUTE);
-  const onViewMore = () => navigate(USAGE_ROUTE);
-  const onManage = () => navigate(MANAGE_ROUTE);
+  const onTopUp = () => navigate(PAYMENT_ROUTES.wallet);
+  const onViewMore = () => navigate(PAYMENT_ROUTES.usage);
+  const onManage = () => navigate(DOCS_CONNECT_ROUTE);
   const onBuyPlan = () => openBuyPlan?.("trial");
   const onGoToTenant = () => {
     const address = info.tenant?.address;
@@ -195,7 +190,7 @@ const DocsConnectPage = ({
             </Text>
             <Text className={styles.trialDays}>{daysLeft}</Text>
             <Text className={styles.trialTotal}>
-              {t("DocsConnect:OfDays", { count: TRIAL_TOTAL_DAYS })}
+              {t("DocsConnect:OfDays", { count: totalDays })}
             </Text>
             <div
               className={styles.progress}

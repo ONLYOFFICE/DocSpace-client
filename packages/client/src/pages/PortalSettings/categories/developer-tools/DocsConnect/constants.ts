@@ -33,25 +33,5 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-/**
- * Ensures the URL is absolute by prepending "/" if it has no scheme or leading slash.
- */
-export const toAbsoluteUrl = (url: string): string =>
-  url.startsWith("http") || url.startsWith("/") ? url : `/${url}`;
-
-export const PAYMENT_ROUTES = {
-  portalPayments: `/portal-settings/payments/portal-payments`,
-  services: `/portal-settings/payments/services`,
-  aiServices: `/portal-settings/payments/services/ai-services`,
-  backup: `/portal-settings/payments/services/backup`,
-  diskStorage: `/portal-settings/payments/services/disk-storage`,
-  docsConnect: `/portal-settings/payments/services/docs-connect`,
-  wallet: `/portal-settings/payments/wallet`,
-  usage: `/portal-settings/payments/usage`,
-} as const;
-
-export function getTwoDotsReplacing(translation: string) {
-  const newTranslation = translation;
-
-  return newTranslation.replace(/\..$/, ".");
-}
+export const DOCS_CONNECT_ROUTE =
+  "/portal-settings/developer-tools/docs-connect";

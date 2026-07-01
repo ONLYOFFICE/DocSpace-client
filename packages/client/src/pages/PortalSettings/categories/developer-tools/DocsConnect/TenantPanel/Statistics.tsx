@@ -33,7 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -41,43 +40,23 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
 import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
 
-import CopyReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
-import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
-import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
 import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg";
 
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
-import type {
-  TDocsConnectInfo,
-  TDocsConnectStat,
-} from "@docspace/shared/api/docs-connect/types";
+import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 import type { TTranslation } from "@docspace/shared/types";
 
-import {
-  formatDocsConnectDate,
-  getDocsConnectDaysLeft,
-  isDocsConnectTrialExpired,
-  getDocsConnectTrialPercent,
-  isDocsConnectPaid,
-} from "../utils";
+import { formatDocsConnectDate, getDocsConnectTrialState } from "../utils";
+
+import InfoField from "./sub-components/InfoField";
+import UsageBlock from "./sub-components/UsageBlock";
 
 import styles from "./TenantPanel.module.scss";
 
-type UsageLevel = "positive" | "negative";
-
-const usageLevelClass: Record<UsageLevel, string> = {
-  positive: styles.usagePositive,
-  negative: styles.usageNegative,
-};
-
 type Connector = { key: string; label: string; url?: string };
-
-const getUsageLevel = (usage: TDocsConnectStat): UsageLevel =>
-  usage.criticalRemaining ? "negative" : "positive";
 
 interface StatisticsProps {
   info?: TDocsConnectInfo;
@@ -92,123 +71,6 @@ interface StatisticsProps {
   odooUrl?: string;
   allConnectorsUrl?: string;
 }
-
-const InfoField = ({
-  label,
-  value,
-  isSecret,
-  onCopy,
-  copyTitle,
-}: {
-  label: string;
-  value: string;
-  isSecret?: boolean;
-  onCopy: (value: string) => void;
-  copyTitle: string;
-}) => {
-  const [revealed, setRevealed] = useState(false);
-  const displayValue = isSecret && !revealed ? "•".repeat(24) : value;
-
-  return (
-    <div className={styles.infoCard}>
-      <div className={styles.infoLabelRow}>
-        <Text fontSize="16px" fontWeight={700}>
-          {label}
-        </Text>
-        {isSecret ? (
-          <IconButton
-            iconName={revealed ? EyeReactSvgUrl : EyeOffReactSvgUrl}
-            size={16}
-            onClick={() => setRevealed((prev) => !prev)}
-            className={styles.eyeIcon}
-          />
-        ) : null}
-      </div>
-      <div className={styles.infoValueRow}>
-        <Text fontSize="14px" fontWeight={600} truncate>
-          {displayValue}
-        </Text>
-        <IconButton
-          iconName={CopyReactSvgUrl}
-          size={16}
-          onClick={() => onCopy(value)}
-          title={copyTitle}
-          className={styles.copyIcon}
-        />
-      </div>
-    </div>
-  );
-};
-
-const StatColumn = ({
-  value,
-  label,
-  highlight,
-}: {
-  value: number;
-  label: string;
-  highlight?: boolean;
-}) => (
-  <div className={styles.statColumn}>
-    <Text
-      fontSize="18px"
-      fontWeight={700}
-      className={highlight ? styles.statValueHighlight : undefined}
-    >
-      {value}
-    </Text>
-    <Text fontSize="12px" className={styles.muted}>
-      {label}
-    </Text>
-  </div>
-);
-
-const UsageBlock = ({
-  title,
-  subtitle,
-  usageLabel,
-  usage,
-  limit,
-  t,
-}: {
-  title: string;
-  subtitle: string;
-  usageLabel: string;
-  usage: TDocsConnectStat;
-  limit: number;
-  t: TTranslation;
-}) => {
-  const percent = limit > 0 ? (usage.active / limit) * 100 : 0;
-  const level = getUsageLevel(usage);
-
-  return (
-    <div className={`${styles.usageBlock} ${usageLevelClass[level]}`}>
-      <Text fontSize="16px" fontWeight={700}>
-        {title}
-      </Text>
-      <Text fontSize="12px" className={styles.muted}>
-        {subtitle}
-      </Text>
-      <div className={styles.usageBarRow}>
-        <Text fontSize="13px">{usageLabel}</Text>
-        <Text fontSize="13px" fontWeight={600} className={styles.usageCount}>
-          {`${usage.active} / ${limit}`}
-        </Text>
-      </div>
-      <ProgressBar percent={percent} />
-      <div className={styles.statRow}>
-        <StatColumn value={usage.active} label={t("Common:Active")} />
-        <StatColumn value={usage.internal} label={t("DocsConnect:Internal")} />
-        <StatColumn value={usage.external} label={t("DocsConnect:External")} />
-        <StatColumn
-          value={usage.remaining}
-          label={t("DocsConnect:Remaining")}
-          highlight
-        />
-      </div>
-    </div>
-  );
-};
 
 const Statistics = ({
   info,
@@ -228,12 +90,14 @@ const Statistics = ({
   if (!info) return null;
 
   const { tenant, config, tenantInfo, prices, wallet } = info;
-  const isTrial = !isDocsConnectPaid(info);
-  const trialStart = tenant.modifiedDate ?? "";
-  const trialEnd = tenant.endDate ?? "";
-  const daysLeft = getDocsConnectDaysLeft(trialEnd);
-  const expired = isDocsConnectTrialExpired(trialEnd);
-  const trialPercent = getDocsConnectTrialPercent(trialStart, trialEnd);
+  const {
+    isTrial,
+    startDate: trialStart,
+    endDate: trialEnd,
+    daysLeft,
+    expired,
+    percent: trialPercent,
+  } = getDocsConnectTrialState(info);
 
   const connectors: Connector[] = [
     { key: "nextcloud", label: "Nextcloud", url: nextcloudUrl },

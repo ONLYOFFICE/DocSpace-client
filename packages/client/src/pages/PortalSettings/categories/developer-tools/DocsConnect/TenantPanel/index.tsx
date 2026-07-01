@@ -53,11 +53,8 @@ import HistoryReactSvgUrl from "PUBLIC_DIR/images/history.react.svg?url";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 import type { TTranslation } from "@docspace/shared/types";
 
-import {
-  getDocsConnectDaysLeft,
-  isDocsConnectTrialExpired,
-  isDocsConnectPaid,
-} from "../utils";
+import { getDocsConnectTrialState } from "../utils";
+import { PAYMENT_ROUTES } from "../../../payments/utils";
 
 import Statistics from "./Statistics";
 
@@ -80,10 +77,7 @@ const TenantPanel = ({
 
   if (!info) return null;
 
-  const isTrial = !isDocsConnectPaid(info);
-  const trialEnd = info.tenant.endDate ?? "";
-  const expired = isDocsConnectTrialExpired(trialEnd);
-  const daysLeft = getDocsConnectDaysLeft(trialEnd);
+  const { isTrial, expired, daysLeft } = getDocsConnectTrialState(info);
 
   const getContextMenuItems = (): ContextMenuModel[] => [
     {
@@ -102,8 +96,7 @@ const TenantPanel = ({
       key: "transaction-history",
       label: t("Common:TransactionHistory"),
       icon: HistoryReactSvgUrl,
-      onClick: () =>
-        navigate("/portal-settings/payments/services/docs-connect"),
+      onClick: () => navigate(PAYMENT_ROUTES.docsConnect),
     },
   ];
 

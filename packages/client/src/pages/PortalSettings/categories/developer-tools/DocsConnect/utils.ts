@@ -37,6 +37,12 @@ import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
+const startOfDay = (ms: number): number => {
+  const date = new Date(ms);
+  date.setHours(0, 0, 0, 0);
+  return date.getTime();
+};
+
 export const isDocsConnectPaid = (info: TDocsConnectInfo): boolean =>
   info.tenantInfo.license.trial === false;
 
@@ -53,7 +59,10 @@ export const formatDocsConnectDate = (iso?: string): string => {
 export const getDocsConnectDaysLeft = (endDate: string): number => {
   const target = new Date(endDate).getTime();
   if (Number.isNaN(target)) return 0;
-  return Math.max(0, Math.ceil((target - Date.now()) / DAY_MS));
+  return Math.max(
+    0,
+    Math.round((startOfDay(target) - startOfDay(Date.now())) / DAY_MS),
+  );
 };
 
 export const isDocsConnectTrialExpired = (endDate: string): boolean => {
@@ -70,4 +79,41 @@ export const getDocsConnectTrialPercent = (
   if (Number.isNaN(start) || Number.isNaN(end) || end <= start) return 0;
   const elapsed = ((Date.now() - start) / (end - start)) * 100;
   return Math.min(100, Math.max(0, elapsed));
+};
+
+export type TDocsConnectTrialState = {
+  isPaid: boolean;
+  isTrial: boolean;
+  startDate: string;
+  endDate: string;
+  daysLeft: number;
+  totalDays: number;
+  expired: boolean;
+  percent: number;
+};
+
+export const getDocsConnectTrialState = (
+  info: TDocsConnectInfo | null,
+): TDocsConnectTrialState => {
+  const startDate = info?.tenant.modifiedDate ?? "";
+  const endDate = info?.tenant.endDate ?? "";
+  const isPaid = info ? isDocsConnectPaid(info) : false;
+
+  const start = new Date(startDate).getTime();
+  const end = new Date(endDate).getTime();
+  const totalDays =
+    Number.isNaN(start) || Number.isNaN(end) || end <= start
+      ? 0
+      : Math.round((startOfDay(end) - startOfDay(start)) / DAY_MS);
+
+  return {
+    isPaid,
+    isTrial: !isPaid,
+    startDate,
+    endDate,
+    daysLeft: getDocsConnectDaysLeft(endDate),
+    totalDays,
+    expired: isDocsConnectTrialExpired(endDate),
+    percent: getDocsConnectTrialPercent(startDate, endDate),
+  };
 };

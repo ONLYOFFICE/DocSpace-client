@@ -58,6 +58,9 @@ export type BuyDocsConnectPlanData = {
   users: number;
   devPackEnabled: boolean;
   topUp?: number;
+  currentUsers: number;
+  currentDevPackEnabled: boolean;
+  currency: string;
 };
 
 type TWalletService = {
@@ -132,8 +135,6 @@ const fetchDevPackEnabled = async (): Promise<boolean> => {
   }
 };
 
-let lastInfo: TDocsConnectInfo | null = null;
-
 export const getDocsConnectInfo =
   async (): Promise<TDocsConnectInfo | null> => {
     let tenant: TDocsConnectTenant | null = null;
@@ -147,7 +148,6 @@ export const getDocsConnectInfo =
     }
 
     if (!tenant) {
-      lastInfo = null;
       return null;
     }
 
@@ -162,8 +162,7 @@ export const getDocsConnectInfo =
       fetchDevPackEnabled(),
     ]);
 
-    lastInfo = { tenant, config, tenantInfo, prices, wallet, devPackEnabled };
-    return lastInfo;
+    return { tenant, config, tenantInfo, prices, wallet, devPackEnabled };
   };
 
 export const startDocsConnectTrial =
@@ -185,21 +184,26 @@ export const getDocsConnectReportUrl = (): string =>
 export const buyDocsConnectPlan = async (
   data: BuyDocsConnectPlanData,
 ): Promise<TDocsConnectInfo | null> => {
-  const { users, devPackEnabled, topUp } = data;
+  const {
+    users,
+    devPackEnabled,
+    topUp,
+    currentUsers: prevUsers,
+    currentDevPackEnabled,
+    currency,
+  } = data;
 
   if (topUp && topUp > 0) {
-    await saveDeposite(topUp, lastInfo?.wallet?.currency ?? "USD");
+    await saveDeposite(topUp, currency);
   }
 
   const product = devPackEnabled
     ? DOCS_CLOUD_DEVPACK_PRODUCT
     : DOCS_CLOUD_PRODUCT;
 
-  const sameProduct = lastInfo?.devPackEnabled === devPackEnabled;
+  const sameProduct = currentDevPackEnabled === devPackEnabled;
 
-  const currentUsers = sameProduct
-    ? (lastInfo?.tenant.payment?.quantity ?? 0)
-    : 0;
+  const currentUsers = sameProduct ? prevUsers : 0;
   const isDecrease = users < currentUsers;
 
   const ok = (await request({

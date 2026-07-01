@@ -70,6 +70,7 @@ import classNames from "classnames";
 import {
   getDocsConnectDaysLeft,
   isDocsConnectTrialExpired,
+  isDocsConnectPaid,
 } from "SRC_DIR/pages/PortalSettings/categories/developer-tools/DocsConnect/utils";
 
 import styles from "./Header.module.scss";
@@ -345,6 +346,9 @@ const SectionHeaderContent = (props) => {
     "/services/docs-connect",
   );
   const docsConnectEndDate = docsConnectInfo?.tenant?.endDate ?? "";
+  const docsConnectPaid = docsConnectInfo
+    ? isDocsConnectPaid(docsConnectInfo)
+    : false;
   const docsConnectExpired = isDocsConnectTrialExpired(docsConnectEndDate);
   const docsConnectDaysLeft = getDocsConnectDaysLeft(docsConnectEndDate);
   const docsConnectTrialLow = !docsConnectExpired && docsConnectDaysLeft <= 14;
@@ -386,7 +390,9 @@ const SectionHeaderContent = (props) => {
           <Heading type="content" truncate>
             <div className="settings-section_header">
               <div className="header">{translatedHeader}</div>
-              {isDocsConnectServicePage && docsConnectEndDate ? (
+              {isDocsConnectServicePage &&
+              docsConnectEndDate &&
+              !docsConnectPaid ? (
                 <span
                   className={classNames(styles.docsConnectTrialBadge, {
                     [styles.docsConnectTrialBadgeWarning]: docsConnectTrialLow,

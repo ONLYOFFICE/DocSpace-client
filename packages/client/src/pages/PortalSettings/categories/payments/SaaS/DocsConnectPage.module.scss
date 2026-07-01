@@ -114,7 +114,23 @@
   margin-top: 4px;
 }
 
-.trialCard {
+.usageHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  .sectionTitle {
+    margin-top: 0;
+  }
+}
+
+.viewMoreLink {
+  text-decoration: underline dashed !important;
+  -webkit-text-decoration: underline dashed !important;
+}
+
+.trialCard,
+.spendCard {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -126,16 +142,28 @@
   background-color: var(--background-color);
 }
 
-.trialLabel {
+.spendCard {
+  max-width: 322px;
+}
+
+.trialLabel,
+.spendLabel {
   font-size: 12px;
   line-height: 16px;
   color: var(--payment-text-color);
 }
 
-.trialDays {
+.trialDays,
+.spendValue {
   font-size: 28px;
   font-weight: 700;
   line-height: 32px;
+}
+
+.spendTenants {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--payment-text-color);
 }
 
 .trialTotal {
@@ -178,5 +206,9 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-top: 8px;
+  margin-top: 2px;
+
+  > :first-child {
+    margin-top: 0;
+  }
 }

@@ -43,6 +43,8 @@
   "DaysLeft": "Days left",
   "OfDays": "of {{count}} days",
   "GoToTenant": "Go to tenant",
+  "ManageDocsConnect": "Manage Docs Connect",
+  "ActiveTenants": "Active tenants: {{count}}",
   "TrialEndsOn": "Your trial ends on {{date}} — buy a plan to keep your tenant and data.",
   "TrialDaysRemaining": "~ {{count}} days remaining",
   "RenewsOn": "(Renews on {{date}})",

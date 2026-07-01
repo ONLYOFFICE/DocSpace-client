@@ -40,6 +40,7 @@ import { useNavigate } from "react-router";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
 import TransactionHistory from "@docspace/ui-kit/billing/shared/transaction-history";
 import { useServicesStore } from "@docspace/ui-kit/billing/store/ServicesStoreProvider";
@@ -52,6 +53,7 @@ import WalletIcon from "PUBLIC_DIR/images/icons/16/wallet.react.svg";
 import {
   formatDocsConnectDate,
   getDocsConnectDaysLeft,
+  isDocsConnectPaid,
 } from "../../developer-tools/DocsConnect/utils";
 import { default as BackupPageLoader } from "@docspace/ui-kit/billing/services/pages/backup/BackupPageLoader";
 import BuyPlanPanel from "../../developer-tools/DocsConnect/BuyPlanPanel";
@@ -60,6 +62,8 @@ import PromoPage from "../../developer-tools/DocsConnect/PromoPage";
 import styles from "./DocsConnectPage.module.scss";
 
 const WALLET_ROUTE = "/portal-settings/payments/wallet";
+const USAGE_ROUTE = "/portal-settings/payments/usage";
+const MANAGE_ROUTE = "/portal-settings/developer-tools/docs-connect";
 const TRIAL_TOTAL_DAYS = 30;
 
 interface DocsConnectPageProps {
@@ -103,7 +107,17 @@ const DocsConnectPage = ({
   const currency = info.wallet?.currency ?? "USD";
   const credits = info.wallet?.availableCredits ?? 0;
 
+  const isPaid = isDocsConnectPaid(info);
+  const planUsers = info.tenant?.payment?.quantity ?? 0;
+  const pricePerUser =
+    (info.prices?.pricePerUser ?? 0) +
+    (info.devPackEnabled ? (info.prices?.devPackPrice ?? 0) : 0);
+  const monthlyCharge = planUsers * pricePerUser;
+  const activeTenants = planUsers > 0 ? 1 : 0;
+
   const onTopUp = () => navigate(WALLET_ROUTE);
+  const onViewMore = () => navigate(USAGE_ROUTE);
+  const onManage = () => navigate(MANAGE_ROUTE);
   const onBuyPlan = () => openBuyPlan?.("trial");
   const onGoToTenant = () => {
     const address = info.tenant?.address;
@@ -134,46 +148,87 @@ const DocsConnectPage = ({
         />
       </div>
 
-      <Text className={styles.sectionTitle}>
-        {t("DocsConnect:FreeTrialTitle")}
-      </Text>
+      {isPaid ? (
+        <>
+          <div className={styles.usageHeader}>
+            <Text className={styles.sectionTitle}>{t("Common:Usage")}</Text>
+            <Link
+              type={LinkType.action}
+              color="accent"
+              fontSize="13px"
+              fontWeight={600}
+              className={styles.viewMoreLink}
+              onClick={onViewMore}
+            >
+              {t("Common:ViewMore")}
+            </Link>
+          </div>
 
-      <div className={styles.trialCard}>
-        <Text className={styles.trialLabel}>{t("DocsConnect:DaysLeft")}</Text>
-        <Text className={styles.trialDays}>{daysLeft}</Text>
-        <Text className={styles.trialTotal}>
-          {t("DocsConnect:OfDays", { count: TRIAL_TOTAL_DAYS })}
-        </Text>
-        <div
-          className={styles.progress}
-          style={
-            {
-              "--dc-trial-fraction": Math.max(spentPercent, 1) / 100,
-            } as CSSProperties
-          }
-        >
-          <ProgressBar percent={spentPercent} />
-        </div>
-      </div>
+          <div className={styles.spendCard}>
+            <Text className={styles.spendLabel}>{t("Common:MonthSpend")}</Text>
+            <Text className={styles.spendValue}>
+              {formatCurrencyValue(i18n.language, monthlyCharge, currency, 2)}
+            </Text>
+            <Text className={styles.spendTenants}>
+              {t("DocsConnect:ActiveTenants", { count: activeTenants })}
+            </Text>
+          </div>
 
-      <div className={styles.actionsRow}>
-        <Button
-          primary
-          size={ButtonSize.small}
-          label={t("DocsConnect:BuyAPlan")}
-          onClick={onBuyPlan}
-        />
-        <Button
-          size={ButtonSize.small}
-          label={t("DocsConnect:GoToTenant")}
-          onClick={onGoToTenant}
-        />
-        <Text className={styles.trialEnds}>
-          {t("DocsConnect:TrialEndsOn", {
-            date: formatDocsConnectDate(endDate),
-          })}
-        </Text>
-      </div>
+          <div className={styles.actionsRow}>
+            <Button
+              primary
+              size={ButtonSize.small}
+              label={t("DocsConnect:ManageDocsConnect")}
+              onClick={onManage}
+            />
+          </div>
+        </>
+      ) : (
+        <>
+          <Text className={styles.sectionTitle}>
+            {t("DocsConnect:FreeTrialTitle")}
+          </Text>
+
+          <div className={styles.trialCard}>
+            <Text className={styles.trialLabel}>
+              {t("DocsConnect:DaysLeft")}
+            </Text>
+            <Text className={styles.trialDays}>{daysLeft}</Text>
+            <Text className={styles.trialTotal}>
+              {t("DocsConnect:OfDays", { count: TRIAL_TOTAL_DAYS })}
+            </Text>
+            <div
+              className={styles.progress}
+              style={
+                {
+                  "--dc-trial-fraction": Math.max(spentPercent, 1) / 100,
+                } as CSSProperties
+              }
+            >
+              <ProgressBar percent={spentPercent} />
+            </div>
+          </div>
+
+          <div className={styles.actionsRow}>
+            <Button
+              primary
+              size={ButtonSize.small}
+              label={t("DocsConnect:BuyAPlan")}
+              onClick={onBuyPlan}
+            />
+            <Button
+              size={ButtonSize.small}
+              label={t("DocsConnect:GoToTenant")}
+              onClick={onGoToTenant}
+            />
+            <Text className={styles.trialEnds}>
+              {t("DocsConnect:TrialEndsOn", {
+                date: formatDocsConnectDate(endDate),
+              })}
+            </Text>
+          </div>
+        </>
+      )}
 
       <div className={styles.history}>
         <TransactionHistory serviceName={DOCS_CONNECT_SERVICE} hideTypeFilter />

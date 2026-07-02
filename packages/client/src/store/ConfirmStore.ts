@@ -44,11 +44,11 @@ class ConfirmStore {
     makeAutoObservable(this);
   }
 
-  setIsLoading = (isLoading) => {
+  setIsLoading = (isLoading: boolean) => {
     this.isLoading = isLoading;
   };
 
-  setIsLoaded = (isLoaded) => {
+  setIsLoaded = (isLoaded: boolean) => {
     this.isLoaded = isLoaded;
   };
 }

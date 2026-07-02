@@ -35,6 +35,8 @@
 
 import { makeAutoObservable } from "mobx";
 
+type TPathItem = { label: string };
+
 class SelectFolderDialogStore {
   newPath = "";
 
@@ -52,7 +54,7 @@ class SelectFolderDialogStore {
     this.isErrorPath = false;
   };
 
-  convertPath = (foldersArray, fileName) => {
+  convertPath = (foldersArray: TPathItem[], fileName?: string) => {
     let path = "";
 
     if (foldersArray.length === 0) {
@@ -62,13 +64,13 @@ class SelectFolderDialogStore {
     }
 
     if (foldersArray.length > 1) {
-      foldersArray.forEach((item) => {
+      foldersArray.forEach((item: TPathItem) => {
         if (!path) {
           path += `${item.label}`;
         } else path = `${path} / ${item.label}`;
       });
     } else {
-      foldersArray.forEach((item) => {
+      foldersArray.forEach((item: TPathItem) => {
         path = `${item.label}`;
       });
     }
@@ -86,17 +88,17 @@ class SelectFolderDialogStore {
     this.basePath = this.newPath;
   };
 
-  setNewPath = (folders, fileName) => {
+  setNewPath = (folders: TPathItem[], fileName?: string) => {
     this.newPath = this.convertPath(folders, fileName);
 
     this.setIsErrorPath(false);
   };
 
-  setBasePath = (folders) => {
+  setBasePath = (folders: TPathItem[]) => {
     this.basePath = this.convertPath(folders);
   };
 
-  setIsErrorPath = (isErrorPath) => {
+  setIsErrorPath = (isErrorPath: boolean) => {
     this.isErrorPath = isErrorPath;
   };
 }

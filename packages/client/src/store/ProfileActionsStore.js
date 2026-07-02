@@ -55,10 +55,13 @@ import { isMobile } from "react-device-detect";
 import axios from "axios";
 
 import { zendeskAPI } from "@docspace/shared/components/zendesk/Zendesk.utils";
+import { CategoryType } from "@docspace/shared/constants";
+
 import {
-  LIVE_CHAT_LOCAL_STORAGE_KEY,
-  CategoryType,
-} from "@docspace/shared/constants";
+  PersistenceKeys,
+  getPersistedString,
+  setPersistedString,
+} from "./utils/persistence";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { isDesktop, isTablet } from "@docspace/shared/utils";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
@@ -141,7 +144,8 @@ class ProfileActionsStore {
   }
 
   getStateLiveChat = () => {
-    const state = localStorage.getItem(LIVE_CHAT_LOCAL_STORAGE_KEY) === "true";
+    const state =
+      getPersistedString(PersistenceKeys.liveChatState) === "true";
 
     if (!state) return false;
 
@@ -151,7 +155,7 @@ class ProfileActionsStore {
   setStateLiveChat = (state) => {
     if (typeof state !== "boolean") return;
 
-    localStorage.setItem(LIVE_CHAT_LOCAL_STORAGE_KEY, state.toString());
+    setPersistedString(PersistenceKeys.liveChatState, state.toString());
 
     this.isShowLiveChat = state;
   };

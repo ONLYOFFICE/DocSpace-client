@@ -41,17 +41,55 @@ import {
   EmployeeType,
   FolderType,
 } from "@docspace/shared/enums";
+import type {
+  TFileSecurity,
+  TFolderSecurity,
+} from "@docspace/shared/api/files/types";
+import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
+import type { UserStore } from "@docspace/shared/store/UserStore";
+import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
+
+import type { TPeopleListItem } from "SRC_DIR/helpers/contacts";
+
+import type SelectedFolderStore from "./SelectedFolderStore";
+
+// FABLE5-REVIEW: `userStore` and `currentQuotaStore` are declared `private`
+// in the shared AuthStore class, but the original .js code reached into them
+// externally (this.authStore.userStore.user, this.authStore.currentQuotaStore).
+// This structural type mirrors that runtime access; replace with
+// `import type { AuthStore }` once those members are made public.
+type TAuthStore = {
+  userStore: Pick<UserStore, "user">;
+  currentQuotaStore: Pick<CurrentQuotasStore, "isDefaultUsersQuotaSet">;
+};
+
+// Minimal shape of the items FilesStore.js spreads into `canMoveItems`
+// (file/folder/room list item plus the injected `editing` flag).
+type TCanMoveItem = {
+  editing?: boolean;
+  security?: TFileSecurity | TFolderSecurity | TRoomSecurity | null;
+  rootFolderType?: FolderType;
+};
 
 class AccessRightsStore {
-  authStore = null;
+  // `null!` keeps the original runtime field initializer (null) while the
+  // constructor immediately assigns the real store.
+  authStore: TAuthStore = null!;
 
-  userStore = null;
+  userStore: UserStore = null!;
 
-  selectedFolderStore = null;
+  selectedFolderStore: SelectedFolderStore = null!;
 
-  treeFoldersStore = null;
+  // FABLE5-REVIEW: `treeFoldersStore` is never assigned (the constructor takes
+  // only three deps) and never read — it stays `null` forever. Kept as-is for
+  // a types-only conversion; candidate for removal.
+  treeFoldersStore: null = null;
 
-  constructor(authStore, selectedFolderStore, userStore) {
+  constructor(
+    authStore: TAuthStore,
+    selectedFolderStore: SelectedFolderStore,
+    userStore: UserStore,
+  ) {
     this.authStore = authStore;
     this.selectedFolderStore = selectedFolderStore;
     this.userStore = userStore;
@@ -73,7 +111,7 @@ class AccessRightsStore {
     return !!security && "UseChat" in security && security.UseChat;
   }
 
-  canMoveItems = (item) => {
+  canMoveItems = (item: TCanMoveItem) => {
     const { editing: fileEditing, security, rootFolderType } = item;
 
     if (rootFolderType === FolderType.TRASH || fileEditing) return false;
@@ -82,13 +120,16 @@ class AccessRightsStore {
   };
 
   canSubmitToFormGallery = () => {
-    const { isVisitor } = this.userStore.user;
+    // FABLE5-REVIEW: `user` is `TUser | null`; the original .js dereferenced it
+    // unconditionally (would throw if null), so `!` preserves that runtime.
+    // Same applies to every `.user!` below.
+    const { isVisitor } = this.userStore.user!;
 
     return !isVisitor;
   };
 
-  canChangeUserType = (user) => {
-    const { id, isCollaborator, isRoomAdmin, isOwner } = this.userStore.user;
+  canChangeUserType = (user: TPeopleListItem) => {
+    const { id, isCollaborator, isRoomAdmin, isOwner } = this.userStore.user!;
     if (isCollaborator || isRoomAdmin) return false;
 
     const { id: userId, statusType, role } = user;
@@ -116,8 +157,8 @@ class AccessRightsStore {
     }
   };
 
-  canMakeEmployeeUser = (user) => {
-    const { id, isOwner, isAdmin, isRoomAdmin } = this.userStore.user;
+  canMakeEmployeeUser = (user: TPeopleListItem) => {
+    const { id, isOwner, isAdmin, isRoomAdmin } = this.userStore.user!;
 
     const {
       status,
@@ -141,15 +182,15 @@ class AccessRightsStore {
     return false;
   };
 
-  canMakeUserType = (user) => {
+  canMakeUserType = (user: TPeopleListItem) => {
     const { isVisitor: userIsVisitor, isCollaborator: userIsCollaborator } =
       user;
 
     return userIsVisitor || userIsCollaborator;
   };
 
-  canActivateUser = (user) => {
-    const { id, isOwner, isAdmin } = this.userStore.user;
+  canActivateUser = (user: TPeopleListItem) => {
+    const { id, isOwner, isAdmin } = this.userStore.user!;
 
     const {
       status,
@@ -167,8 +208,8 @@ class AccessRightsStore {
     return false;
   };
 
-  canDisableUser = (user) => {
-    const { id, isOwner, isAdmin } = this.userStore.user;
+  canDisableUser = (user: TPeopleListItem) => {
+    const { id, isOwner, isAdmin } = this.userStore.user!;
 
     const {
       status,
@@ -191,8 +232,8 @@ class AccessRightsStore {
     return false;
   };
 
-  canInviteUser = (user) => {
-    const { id, isOwner } = this.userStore.user;
+  canInviteUser = (user: TPeopleListItem) => {
+    const { id, isOwner } = this.userStore.user!;
 
     const {
       activationStatus,
@@ -213,8 +254,8 @@ class AccessRightsStore {
     return needInvite && !userIsAdmin && !userIsOwner;
   };
 
-  canRemoveUser = (user) => {
-    const { id, isOwner, isAdmin } = this.userStore.user;
+  canRemoveUser = (user: TPeopleListItem) => {
+    const { id, isOwner, isAdmin } = this.userStore.user!;
 
     const {
       status,
@@ -233,7 +274,7 @@ class AccessRightsStore {
   };
 
   canChangeQuota = () => {
-    const { isOwner, isAdmin } = this.authStore.userStore.user;
+    const { isOwner, isAdmin } = this.authStore.userStore.user!;
     const { isDefaultUsersQuotaSet } = this.authStore.currentQuotaStore;
 
     if (!isOwner && !isAdmin) return false;
@@ -242,7 +283,7 @@ class AccessRightsStore {
   };
 
   canDisableQuota = () => {
-    const { isOwner, isAdmin } = this.authStore.userStore.user;
+    const { isOwner, isAdmin } = this.authStore.userStore.user!;
     const { isDefaultUsersQuotaSet } = this.authStore.currentQuotaStore;
 
     if (!isOwner && !isAdmin) return false;
@@ -250,8 +291,8 @@ class AccessRightsStore {
     return isDefaultUsersQuotaSet;
   };
 
-  caResetCustomQuota = (user) => {
-    const { isOwner, isAdmin } = this.authStore.userStore.user;
+  caResetCustomQuota = (user: TPeopleListItem) => {
+    const { isOwner, isAdmin } = this.authStore.userStore.user!;
     const { isDefaultUsersQuotaSet } = this.authStore.currentQuotaStore;
 
     if (!isDefaultUsersQuotaSet) return false;

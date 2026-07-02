@@ -75,6 +75,11 @@ export type TDocsConnectWallet = {
   currency: string;
 };
 
+export type TDocsConnectScheduledChange = {
+  nextUsers: number;
+  dueDate: string;
+};
+
 export type TDocsConnectInfo = {
   tenant: TDocsConnectTenant;
   config: TDocsConnectConfig;
@@ -82,6 +87,7 @@ export type TDocsConnectInfo = {
   prices: TDocsConnectPrices | null;
   wallet: TDocsConnectWallet | null;
   devPackEnabled: boolean;
+  scheduledChange: TDocsConnectScheduledChange | null;
 };
 
 export type TDocsConnectConfigUpdate = {

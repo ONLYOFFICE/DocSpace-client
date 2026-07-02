@@ -114,23 +114,63 @@
   margin-top: 4px;
 }
 
-.usageHeader {
+.tariffHeader {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 
   .sectionTitle {
     margin-top: 0;
   }
 }
 
-.viewMoreLink {
-  text-decoration: underline dashed !important;
-  -webkit-text-decoration: underline dashed !important;
+.summaryGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 660px;
+
+  @include mixins.mobile {
+    grid-template-columns: 1fr;
+  }
 }
 
-.trialCard,
-.spendCard {
+.summaryCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-sizing: border-box;
+  padding: 16px;
+  border-radius: 6px;
+  border: var(--dev-tools-card-border);
+  background-color: var(--background-color);
+}
+
+.cardLabel {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  color: var(--payment-inactive-color);
+}
+
+.cardValue {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.cardCaption {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.renewalText {
+  max-width: 660px;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.trialCard {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -142,29 +182,17 @@
   background-color: var(--background-color);
 }
 
-.trialLabel,
-.spendLabel {
-  font-size: 12px;
-  line-height: 16px;
-  color: var(--payment-text-color);
-}
-
 .trialLabel {
+  font-size: 12px;
   font-weight: 600;
+  line-height: 16px;
   color: var(--payment-inactive-color);
 }
 
-.trialDays,
-.spendValue {
+.trialDays {
   font-size: 28px;
   font-weight: 700;
   line-height: 32px;
-}
-
-.spendTenants {
-  font-size: 13px;
-  line-height: 18px;
-  color: var(--payment-text-color);
 }
 
 .trialTotal {

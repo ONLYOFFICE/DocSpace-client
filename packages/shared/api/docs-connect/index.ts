@@ -42,6 +42,7 @@ import type {
   TDocsConnectConfig,
   TDocsConnectTenantInfo,
   TDocsConnectPrices,
+  TDocsConnectScheduledChange,
   TDocsConnectWallet,
   TDocsConnectConfigUpdate,
 } from "./types";
@@ -64,6 +65,7 @@ export type BuyDocsConnectPlanData = {
 };
 
 type TWalletService = {
+  id?: number;
   serviceName?: string;
   price?: { value?: number };
 };
@@ -72,24 +74,79 @@ type TBalanceResponse = {
   subAccounts?: { currency?: string; amount?: number }[];
 } | null;
 
-export const getDocsConnectPrices =
-  async (): Promise<TDocsConnectPrices | null> => {
+const fetchWalletServices = async (): Promise<TWalletServicesResponse> => {
   try {
-    const services = (await request({
+    return (await request({
       method: "get",
       url: "/portal/payment/walletservices",
     })) as TWalletServicesResponse;
+  } catch {
+    return null;
+  }
+};
 
-    const priceOf = (name: string) =>
-      services?.find((service) => service.serviceName === name)?.price?.value;
+const extractPrices = (
+  services: TWalletServicesResponse,
+): TDocsConnectPrices | null => {
+  const priceOf = (name: string) =>
+    services?.find((service) => service.serviceName === name)?.price?.value;
 
-    const base = priceOf(DOCS_CLOUD_PRODUCT);
-    if (base == null) return null;
+  const base = priceOf(DOCS_CLOUD_PRODUCT);
+  if (base == null) return null;
 
-    const devpack = priceOf(DOCS_CLOUD_DEVPACK_SERVICE);
+  const devpack = priceOf(DOCS_CLOUD_DEVPACK_SERVICE);
+  return {
+    pricePerUser: base,
+    devPackPrice: devpack == null ? 0 : Math.max(0, devpack - base),
+  };
+};
+
+export const getDocsConnectPrices =
+  async (): Promise<TDocsConnectPrices | null> =>
+    extractPrices(await fetchWalletServices());
+
+type TTariffQuota = {
+  id?: number;
+  quantity?: number;
+  nextQuantity?: number | null;
+  dueDate?: string | null;
+  wallet?: boolean;
+};
+type TTariffResponse = { quotas?: TTariffQuota[] } | null;
+
+const fetchScheduledChange = async (
+  services: TWalletServicesResponse,
+): Promise<TDocsConnectScheduledChange | null> => {
+  try {
+    const ids = (services ?? [])
+      .filter(
+        (service) =>
+          service.serviceName === DOCS_CLOUD_PRODUCT ||
+          service.serviceName === DOCS_CLOUD_DEVPACK_SERVICE,
+      )
+      .map((service) => service.id)
+      .filter((id): id is number => id != null);
+
+    if (!ids.length) return null;
+
+    const tariff = (await request({
+      method: "get",
+      url: "/portal/tariff",
+    })) as TTariffResponse;
+
+    const quota = tariff?.quotas?.find(
+      (q) =>
+        q.wallet === true &&
+        q.id != null &&
+        ids.includes(q.id) &&
+        (q.nextQuantity ?? -1) >= 0,
+    );
+
+    if (!quota) return null;
+
     return {
-      pricePerUser: base,
-      devPackPrice: devpack == null ? 0 : Math.max(0, devpack - base),
+      nextUsers: quota.nextQuantity ?? 0,
+      dueDate: quota.dueDate ?? "",
     };
   } catch {
     return null;
@@ -156,13 +213,23 @@ export const getDocsConnectInfo =
       request({ method: "get", url: `${BASE}/tenant/info` }),
     ])) as [TDocsConnectConfig, TDocsConnectTenantInfo];
 
-    const [prices, wallet, devPackEnabled] = await Promise.all([
-      getDocsConnectPrices(),
+    const services = await fetchWalletServices();
+
+    const [wallet, devPackEnabled, scheduledChange] = await Promise.all([
       fetchWallet(),
       fetchDevPackEnabled(),
+      fetchScheduledChange(services),
     ]);
 
-    return { tenant, config, tenantInfo, prices, wallet, devPackEnabled };
+    return {
+      tenant,
+      config,
+      tenantInfo,
+      prices: extractPrices(services),
+      wallet,
+      devPackEnabled,
+      scheduledChange,
+    };
   };
 
 export const startDocsConnectTrial =
@@ -180,6 +247,52 @@ export const updateDocsConnectConfig = async (
 
 export const getDocsConnectReportUrl = (): string =>
   combineUrl(getApiBaseUrl(), `${BASE}/tenant/quota/download`);
+
+export const cancelDocsConnectPlan = async (
+  devPackEnabled: boolean,
+): Promise<TDocsConnectInfo | null> => {
+  const product = devPackEnabled
+    ? DOCS_CLOUD_DEVPACK_PRODUCT
+    : DOCS_CLOUD_PRODUCT;
+
+  const ok = (await request({
+    method: "put",
+    url: "/portal/payment/updatewallet",
+    data: {
+      quantity: { [product]: 0 },
+      productQuantityType: QUANTITY_TYPE_SET,
+    },
+  })) as boolean;
+
+  if (ok === false) {
+    throw new Error("Docs Connect plan cancellation failed");
+  }
+
+  return getDocsConnectInfo();
+};
+
+export const cancelDocsConnectScheduledChange = async (
+  devPackEnabled: boolean,
+): Promise<TDocsConnectInfo | null> => {
+  const product = devPackEnabled
+    ? DOCS_CLOUD_DEVPACK_PRODUCT
+    : DOCS_CLOUD_PRODUCT;
+
+  const ok = (await request({
+    method: "put",
+    url: "/portal/payment/updatewallet",
+    data: {
+      quantity: { [product]: null },
+      productQuantityType: QUANTITY_TYPE_SET,
+    },
+  })) as boolean;
+
+  if (ok === false) {
+    throw new Error("Docs Connect scheduled change cancellation failed");
+  }
+
+  return getDocsConnectInfo();
+};
 
 export const buyDocsConnectPlan = async (
   data: BuyDocsConnectPlanData,

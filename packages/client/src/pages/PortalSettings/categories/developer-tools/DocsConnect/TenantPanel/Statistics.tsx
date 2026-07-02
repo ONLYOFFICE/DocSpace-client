@@ -42,6 +42,9 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
 import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import StorageWarning from "@docspace/ui-kit/billing/services/panels/additional-storage/StorageWarning";
+import { formatDateLocalized } from "@docspace/ui-kit/utils/date";
 
 import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg";
 
@@ -61,6 +64,7 @@ type Connector = { key: string; label: string; url?: string };
 interface StatisticsProps {
   info?: TDocsConnectInfo;
   openBuyPlan?: (mode: "trial" | "edit") => void;
+  cancelScheduledChange?: () => Promise<void>;
   copyToClipboard?: (value: string, t: TTranslation) => void;
   downloadReport?: () => void;
   nextcloudUrl?: string;
@@ -75,6 +79,7 @@ interface StatisticsProps {
 const Statistics = ({
   info,
   openBuyPlan,
+  cancelScheduledChange,
   copyToClipboard,
   downloadReport,
   nextcloudUrl,
@@ -118,8 +123,17 @@ const Statistics = ({
     (devPackEnabled ? (prices?.devPackPrice ?? 0) : 0);
   const planUsers = tenant.payment?.quantity ?? 0;
   const monthlyCharge = planUsers * pricePerUser;
+  const scheduledChange = isTrial ? null : (info.scheduledChange ?? null);
 
   const onCopy = (value: string) => copyToClipboard?.(value, t);
+
+  const onCancelChange = async () => {
+    try {
+      await cancelScheduledChange?.();
+    } catch (e) {
+      toastr.error(e as Error);
+    }
+  };
 
   return (
     <div className={styles.statistics}>
@@ -163,6 +177,21 @@ const Statistics = ({
             onClick={() => openBuyPlan?.("trial")}
           />
         </div>
+      ) : null}
+
+      {scheduledChange ? (
+        <StorageWarning
+          title={t("Common:TariffUserAdjustmentScheduled", {
+            fromCount: planUsers,
+            toCount: scheduledChange.nextUsers,
+          })}
+          body={t("Common:ScheduledChangeBillingPeriodNote", {
+            date: formatDateLocalized(scheduledChange.dueDate, "DATE_MED", {
+              locale: i18n.language,
+            }),
+          })}
+          onCancelChange={onCancelChange}
+        />
       ) : null}
 
       <Heading
@@ -242,20 +271,37 @@ const Statistics = ({
               <Text fontSize="16px" fontWeight={700}>
                 {t("Common:TariffPlan")}{" "}
                 <Text as="span" fontSize="12px" className={styles.muted}>
-                  {t("DocsConnect:RenewsOn", {
-                    date: formatDocsConnectDate(tenant.endDate),
-                  })}
+                  {scheduledChange
+                    ? t("DocsConnect:RenewsOnWithUpdate", {
+                        date: formatDateLocalized(
+                          scheduledChange.dueDate,
+                          "DATE_MED",
+                          { locale: i18n.language },
+                        ),
+                        price: formatCurrencyValue(
+                          i18n.language,
+                          scheduledChange.nextUsers * pricePerUser,
+                          currency,
+                          2,
+                        ),
+                        count: scheduledChange.nextUsers,
+                      })
+                    : t("DocsConnect:RenewsOn", {
+                        date: formatDocsConnectDate(tenant.endDate),
+                      })}
                 </Text>
               </Text>
-              <Link
-                type={LinkType.action}
-                color="accent"
-                fontSize="13px"
-                fontWeight={600}
-                onClick={() => openBuyPlan?.("edit")}
-              >
-                {t("Common:EditPlan")}
-              </Link>
+              {scheduledChange ? null : (
+                <Link
+                  type={LinkType.action}
+                  color="accent"
+                  fontSize="13px"
+                  fontWeight={600}
+                  onClick={() => openBuyPlan?.("edit")}
+                >
+                  {t("Common:EditPlan")}
+                </Link>
+              )}
             </div>
             <div className={styles.detailRows}>
               <div className={styles.detailRow}>
@@ -417,6 +463,7 @@ const Statistics = ({
 export default inject(({ docsConnectStore, settingsStore }: TStore) => ({
   info: docsConnectStore.info,
   openBuyPlan: docsConnectStore.openBuyPlan,
+  cancelScheduledChange: docsConnectStore.cancelScheduledChange,
   copyToClipboard: docsConnectStore.copyToClipboard,
   downloadReport: docsConnectStore.downloadReport,
   nextcloudUrl: settingsStore.nextcloudUrl,

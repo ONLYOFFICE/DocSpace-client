@@ -33,22 +33,35 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { useEffect, useRef } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import {
+  ContextMenu,
+  type ContextMenuRefType,
+} from "@docspace/ui-kit/components/context-menu";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
 import TransactionHistory from "@docspace/ui-kit/billing/shared/transaction-history";
+import ServiceToggleSection from "@docspace/ui-kit/billing/services/sub-components/ServiceToggleSection";
+import StorageWarning from "@docspace/ui-kit/billing/services/panels/additional-storage/StorageWarning";
 import { useServicesStore } from "@docspace/ui-kit/billing/store/ServicesStoreProvider";
 import { DOCS_CONNECT_SERVICE } from "@docspace/ui-kit/billing/constants";
+import { formatDateLocalized } from "@docspace/ui-kit/utils/date";
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
+import { getBrandName } from "@docspace/shared/constants/brands";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 
 import WalletIcon from "PUBLIC_DIR/images/icons/16/wallet.react.svg";
+import SettingsIcon from "PUBLIC_DIR/images/icons/16/catalog-settings-common.svg";
+import PencilIcon from "PUBLIC_DIR/images/pencil.react.svg";
+import StatisticsIcon from "PUBLIC_DIR/images/icons/16/statistics.react.svg";
+import CircleCrossIcon from "PUBLIC_DIR/images/icons/16/circle.cross.svg";
 
 import {
   formatDocsConnectDate,
@@ -68,6 +81,8 @@ interface DocsConnectPageProps {
   buyPlanPanelVisible?: boolean;
   fetchInfo?: () => void;
   openBuyPlan?: (mode: "trial" | "edit") => void;
+  cancelPlan?: () => Promise<void>;
+  cancelScheduledChange?: () => Promise<void>;
 }
 
 const DocsConnectPage = ({
@@ -76,10 +91,13 @@ const DocsConnectPage = ({
   buyPlanPanelVisible,
   fetchInfo,
   openBuyPlan,
+  cancelPlan,
+  cancelScheduledChange,
 }: DocsConnectPageProps) => {
   const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
   const navigate = useNavigate();
   const { initServiceData } = useServicesStore();
+  const contextMenuRef = useRef<ContextMenuRefType>(null);
 
   useEffect(() => {
     if (!info) fetchInfo?.();
@@ -112,16 +130,92 @@ const DocsConnectPage = ({
     (info.prices?.pricePerUser ?? 0) +
     (info.devPackEnabled ? (info.prices?.devPackPrice ?? 0) : 0);
   const monthlyCharge = planUsers * pricePerUser;
-  const activeTenants = planUsers > 0 ? 1 : 0;
+  const scheduledChange = isPaid ? (info.scheduledChange ?? null) : null;
 
   const onTopUp = () => navigate(PAYMENT_ROUTES.wallet);
-  const onViewMore = () => navigate(PAYMENT_ROUTES.usage);
-  const onManage = () => navigate(DOCS_CONNECT_ROUTE);
+  const onViewUsage = () => navigate(PAYMENT_ROUTES.usage);
   const onBuyPlan = () => openBuyPlan?.("trial");
+  const onEditPlan = () => openBuyPlan?.("edit");
   const onGoToTenant = () => navigate(DOCS_CONNECT_ROUTE);
+
+  const onCancelPlan = async () => {
+    try {
+      await cancelPlan?.();
+    } catch (e) {
+      toastr.error(e as Error);
+    }
+  };
+
+  const onCancelChange = async () => {
+    try {
+      await cancelScheduledChange?.();
+    } catch (e) {
+      toastr.error(e as Error);
+    }
+  };
+
+  const contextMenuItems = [
+    {
+      key: "edit",
+      label: t("Common:EditPlan"),
+      iconNode: <PencilIcon />,
+      onClick: onEditPlan,
+    },
+    {
+      key: "usage",
+      label: t("Common:ViewUsage"),
+      iconNode: <StatisticsIcon />,
+      onClick: onViewUsage,
+    },
+    {
+      key: "separator",
+      isSeparator: true,
+    },
+    {
+      key: "cancel",
+      label: t("Common:CancelPlan"),
+      iconNode: <CircleCrossIcon />,
+      onClick: onCancelPlan,
+    },
+  ];
+
+  const docsName = `${getBrandName("OrganizationName")} ${getBrandName("ProductEditorsName")}`;
 
   return (
     <div className={styles.container}>
+      <ServiceToggleSection
+        isEnabled={isPaid || !expired}
+        isDisabled={!isPaid && !expired}
+        onToggle={isPaid ? onCancelPlan : onBuyPlan}
+        title={t("DocsConnect:DocsConnect")}
+        priceText={t("DocsConnect:FromPricePerUserMonth", {
+          price: formatCurrencyValue(
+            i18n.language,
+            info.prices?.pricePerUser ?? 0,
+            currency,
+            0,
+          ),
+        })}
+        description={t("DocsConnect:ServiceToggleDescription", {
+          productName: docsName,
+        })}
+      />
+
+      {scheduledChange ? (
+        <StorageWarning
+          title={t("Common:TariffUserAdjustmentScheduled", {
+            fromCount: planUsers,
+            toCount: scheduledChange.nextUsers,
+          })}
+          body={t("Common:ScheduledChangeBillingPeriodNote", {
+            date: formatDateLocalized(scheduledChange.dueDate, "DATE_MED", {
+              locale: i18n.language,
+            }),
+          })}
+          onCancelChange={onCancelChange}
+        />
+      ) : null}
+
       <div className={styles.walletCard}>
         <div className={styles.walletLeft}>
           <span className={styles.walletIcon} aria-hidden="true">
@@ -146,38 +240,105 @@ const DocsConnectPage = ({
 
       {isPaid ? (
         <>
-          <div className={styles.usageHeader}>
-            <Text className={styles.sectionTitle}>{t("Common:Usage")}</Text>
-            <Link
-              type={LinkType.action}
-              color="accent"
-              fontSize="13px"
-              fontWeight={600}
-              className={styles.viewMoreLink}
-              onClick={onViewMore}
-            >
-              {t("Common:ViewMore")}
-            </Link>
-          </div>
-
-          <div className={styles.spendCard}>
-            <Text className={styles.spendLabel}>{t("Common:MonthSpend")}</Text>
-            <Text className={styles.spendValue}>
-              {formatCurrencyValue(i18n.language, monthlyCharge, currency, 2)}
+          <div className={styles.tariffHeader}>
+            <Text className={styles.sectionTitle}>
+              {t("Common:CurrentTariffPlan")}
             </Text>
-            <Text className={styles.spendTenants}>
-              {t("DocsConnect:ActiveTenants", { count: activeTenants })}
-            </Text>
-          </div>
-
-          <div className={styles.actionsRow}>
-            <Button
-              primary
-              size={ButtonSize.small}
-              label={t("DocsConnect:ManageDocsConnect")}
-              onClick={onManage}
+            <IconButton
+              iconNode={<SettingsIcon />}
+              size={16}
+              onClick={(e) => contextMenuRef.current?.show(e)}
             />
+            <ContextMenu ref={contextMenuRef} model={contextMenuItems} />
           </div>
+
+          <div className={styles.summaryGrid}>
+            <div className={styles.summaryCard}>
+              <Text className={styles.cardLabel}>
+                {t("Common:MonthlyCharge")}
+              </Text>
+              <Text className={styles.cardValue}>
+                {formatCurrencyValue(i18n.language, monthlyCharge, currency, 2)}
+              </Text>
+              <Text className={styles.cardCaption}>
+                {info.devPackEnabled
+                  ? t("DocsConnect:PricePerUserDevPackShort", {
+                      price: formatCurrencyValue(
+                        i18n.language,
+                        pricePerUser,
+                        currency,
+                        0,
+                      ),
+                    })
+                  : t("DocsConnect:PricePerUserShort", {
+                      price: formatCurrencyValue(
+                        i18n.language,
+                        pricePerUser,
+                        currency,
+                        0,
+                      ),
+                    })}
+              </Text>
+            </div>
+
+            <div className={styles.summaryCard}>
+              <Text className={styles.cardLabel}>{t("Common:Quantity")}</Text>
+              <Text className={styles.cardValue}>{planUsers}</Text>
+              <Text className={styles.cardCaption}>
+                {t("DocsConnect:PlanUsers")}
+              </Text>
+            </div>
+          </div>
+
+          {scheduledChange ? (
+            <Text className={styles.renewalText}>
+              <Trans
+                t={t}
+                i18nKey="Common:SubscriptionAutoRenewedWithUpdate"
+                values={{
+                  finalDate: formatDateLocalized(
+                    scheduledChange.dueDate,
+                    "DATE_MED",
+                    { locale: i18n.language },
+                  ),
+                  price: formatCurrencyValue(
+                    i18n.language,
+                    scheduledChange.nextUsers * pricePerUser,
+                    currency,
+                    2,
+                  ),
+                  amount: `${t("DocsConnect:PlanUsers")}: ${scheduledChange.nextUsers}`,
+                }}
+                components={{ 1: <Text as="span" fontWeight={600} /> }}
+              />
+            </Text>
+          ) : (
+            <div className={styles.actionsRow}>
+              <Button
+                primary
+                size={ButtonSize.small}
+                label={t("Common:EditPlan")}
+                onClick={onEditPlan}
+              />
+              <Button
+                size={ButtonSize.small}
+                label={t("DocsConnect:GoToTenant")}
+                onClick={onGoToTenant}
+              />
+              <Text className={styles.renewalText}>
+                <Trans
+                  t={t}
+                  i18nKey="DocsConnect:TariffPlanAutoRenewed"
+                  values={{
+                    date: formatDateLocalized(endDate, "DATE_MED", {
+                      locale: i18n.language,
+                    }),
+                  }}
+                  components={{ 1: <Text as="span" fontWeight={600} /> }}
+                />
+              </Text>
+            </div>
+          )}
         </>
       ) : (
         <>
@@ -267,5 +428,7 @@ export default inject(({ docsConnectStore }: TStore) => ({
   buyPlanPanelVisible: docsConnectStore.buyPlanPanelVisible,
   fetchInfo: docsConnectStore.fetchInfo,
   openBuyPlan: docsConnectStore.openBuyPlan,
+  cancelPlan: docsConnectStore.cancelPlan,
+  cancelScheduledChange: docsConnectStore.cancelScheduledChange,
 }))(observer(DocsConnectPage));
 

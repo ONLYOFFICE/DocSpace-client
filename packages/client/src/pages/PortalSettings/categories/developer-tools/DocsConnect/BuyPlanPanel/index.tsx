@@ -106,9 +106,15 @@ const BuyPlanPanel = ({
 
   const devPackPerUser = devPack ? devPackPrice : 0;
   const totalMonthly = users * (pricePerUser + devPackPerUser);
-  const remainingCredits = availableCredits - totalMonthly;
+
+  const currentUsers = info.tenant.payment?.quantity ?? 0;
+  const sameProduct = devPack === (info.devPackEnabled ?? false);
+  const addedUsers = sameProduct ? Math.max(0, users - currentUsers) : users;
+  const chargeNow = addedUsers * (pricePerUser + devPackPerUser);
+
+  const remainingCredits = availableCredits - chargeNow;
   const insufficientFunds = remainingCredits < 0;
-  const topUpRequired = Math.ceil(totalMonthly - availableCredits);
+  const topUpRequired = Math.ceil(chargeNow - availableCredits);
 
   const formatCurrency = (amount: number) =>
     formatCurrencyValue(i18n.language, amount, currency, 2);

@@ -37,6 +37,9 @@
 @use "@docspace/ui-kit/styles/variables/colors" as *;
 
 .panel {
+  --payment-warning-color: var(--dev-tools-status-warning);
+  --payment-backgroud-color-warning: var(--dev-tools-card-bg);
+
   display: flex;
   flex-direction: column;
   align-self: stretch;

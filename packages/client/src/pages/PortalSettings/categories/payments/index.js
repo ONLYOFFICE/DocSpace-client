@@ -130,6 +130,10 @@ const PaymentsPage = (props) => {
         trialEndingSoon: false,
         trialExpired: false,
         trialEndDate: "",
+        tariffPrice: 0,
+        tariffUsers: 0,
+        scheduledUsers: null,
+        scheduledDate: "",
       };
 
     const { isTrial, daysLeft, totalDays, expired, endDate } =
@@ -138,6 +142,13 @@ const PaymentsPage = (props) => {
     const trialEndingSoon =
       isTrial && !expired && totalDays > 0 && daysLeft / totalDays < 0.5;
 
+    const tariffUsers = docsConnectInfo.tenant?.payment?.quantity ?? 0;
+    const pricePerUser =
+      (docsConnectInfo.prices?.pricePerUser ?? 0) +
+      (docsConnectInfo.devPackEnabled
+        ? (docsConnectInfo.prices?.devPackPrice ?? 0)
+        : 0);
+
     return {
       subscribed: true,
       isTrial,
@@ -145,6 +156,10 @@ const PaymentsPage = (props) => {
       trialEndingSoon,
       trialExpired,
       trialEndDate: endDate,
+      tariffPrice: tariffUsers * pricePerUser,
+      tariffUsers,
+      scheduledUsers: docsConnectInfo.scheduledChange?.nextUsers ?? null,
+      scheduledDate: docsConnectInfo.scheduledChange?.dueDate ?? "",
     };
   }, [docsConnectInfo]);
 
@@ -158,7 +173,14 @@ const PaymentsPage = (props) => {
       routes: PAYMENT_ROUTES,
       onServicesInit: fetchDocsConnectInfo,
     }),
-    [language, logoText, walletHelpUrl, user, openOnNewPage, fetchDocsConnectInfo],
+    [
+      language,
+      logoText,
+      walletHelpUrl,
+      user,
+      openOnNewPage,
+      fetchDocsConnectInfo,
+    ],
   );
 
   const data = [
@@ -231,9 +253,7 @@ const PaymentsPage = (props) => {
       ? `/management/payments/${e.id}`
       : `/portal-settings/payments/${e.id}`;
 
-    navigate(
-      combineUrl(window.ClientConfig?.proxy?.url, config.homepage, url),
-    );
+    navigate(combineUrl(window.ClientConfig?.proxy?.url, config.homepage, url));
   };
 
   const navigateToRoute = (route) => {
@@ -317,4 +337,3 @@ export const Component = inject(
     };
   },
 )(observer(PaymentsPage));
-

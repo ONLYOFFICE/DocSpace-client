@@ -40,6 +40,8 @@ import {
   getDocsConnectInfo,
   startDocsConnectTrial,
   buyDocsConnectPlan,
+  cancelDocsConnectPlan,
+  cancelDocsConnectScheduledChange,
   getDocsConnectReportUrl,
 } from "@docspace/shared/api/docs-connect";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
@@ -140,6 +142,24 @@ class DocsConnectStore {
       this.info = info;
     });
     this.closeBuyPlan();
+  };
+
+  cancelPlan = async () => {
+    const info = await cancelDocsConnectPlan(
+      this.info?.devPackEnabled ?? false,
+    );
+    runInAction(() => {
+      this.info = info;
+    });
+  };
+
+  cancelScheduledChange = async () => {
+    const info = await cancelDocsConnectScheduledChange(
+      this.info?.devPackEnabled ?? false,
+    );
+    runInAction(() => {
+      this.info = info;
+    });
   };
 
   downloadReport = () => {

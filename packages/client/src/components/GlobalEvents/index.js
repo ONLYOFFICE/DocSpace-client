@@ -50,6 +50,7 @@ import RenameEvent from "./RenameEvent";
 import CreateRoomEvent from "./CreateRoomEvent";
 import EditRoomEvent from "./EditRoomEvent";
 import CreateAgentEvent from "./AgentEvents/CreateAgentEvent";
+import ActivateAIEvent from "./AgentEvents/ActivateAIEvent";
 import EditAgentEvent from "./AgentEvents/EditAgentEvent";
 import CreateGroupEvent from "./GroupEvents/CreateGroupEvent";
 import EditGroupEvent from "./GroupEvents/EditGroupEvent";
@@ -76,6 +77,7 @@ const GlobalEvents = ({
   setCreatePDFFormFile,
   createPDFFormFileProps,
   userId,
+  getIsAIReady,
 }) => {
   const [createDialogProps, setCreateDialogProps] = useState({
     visible: false,
@@ -126,6 +128,8 @@ const GlobalEvents = ({
     props: null,
     onClose: null,
   });
+
+  const [activateAIProps, setActivateAIProps] = useState({ visible: false });
 
   const eventHandlersList = useRef([]);
 
@@ -227,11 +231,25 @@ const GlobalEvents = ({
   }, []);
 
   const onCreateAgent = useCallback((e) => {
+    const context = e.context || e.detail?.context || "";
+
+    if (!getIsAIReady()) {
+      setActivateAIProps({
+        visible: true,
+        parentId: e.detail?.parentId,
+        context,
+        onClose: () => setActivateAIProps({ visible: false }),
+      });
+      return;
+    }
+
+    setActivateAIProps({ visible: false });
+
     const startAgentParams = getStartAgentParams();
     setCreateAgentDialogProps({
       ...startAgentParams,
       item: e.item,
-      context: e.context || e.detail?.context || "",
+      context,
       visible: true,
       onClose: () => {
         setCreateAgentDialogProps({
@@ -513,6 +531,9 @@ const GlobalEvents = ({
     createAgentDialogProps.visible && (
       <CreateAgentEvent key={Events.AGENT_CREATE} {...createAgentDialogProps} />
     ),
+    activateAIProps.visible && (
+      <ActivateAIEvent key="activate-ai" {...activateAIProps} />
+    ),
     editAgentDialogProps.visible && (
       <EditAgentEvent key={Events.AGENT_EDIT} {...editAgentDialogProps} />
     ),
@@ -553,7 +574,7 @@ const GlobalEvents = ({
 };
 
 export default inject(
-  ({ settingsStore, pluginStore, dialogsStore, userStore }) => {
+  ({ settingsStore, pluginStore, dialogsStore, userStore, paymentStore }) => {
     const { enablePlugins } = settingsStore;
 
     const {
@@ -587,6 +608,7 @@ export default inject(
       setCreatePDFFormFile,
       createPDFFormFileProps,
       userId: userStore?.user?.id,
+      getIsAIReady: () => paymentStore.isAIReady,
     };
   },
 )(observer(GlobalEvents));

@@ -34,20 +34,52 @@
  */
 
 import { makeAutoObservable } from "mobx";
+
+import type { OPERATIONS_NAME } from "@docspace/shared/constants";
+
+// FABLE5-REVIEW: filesUtils is still .js — no types for
+// getOperationsProgressTitle until it is converted.
 import { getOperationsProgressTitle } from "SRC_DIR/helpers/filesUtils";
+
+import type SelectedFolderStore from "./SelectedFolderStore";
+
+type TOperationName = (typeof OPERATIONS_NAME)[keyof typeof OPERATIONS_NAME];
+
+export type TPrimaryProgressInfo = {
+  label?: string;
+  percent?: number;
+  alert?: boolean;
+  completed?: boolean;
+  canceled?: boolean;
+  withoutProgress?: boolean;
+  showPanel?: (visible: boolean) => void;
+  items?: TPrimaryProgressInfo[];
+};
+
+export type TPrimaryOperation = TPrimaryProgressInfo & {
+  operation: TOperationName;
+};
+
+// FABLE5-REVIEW: FilesStore is still .js (wave 3) — replace this structural
+// type with `import type` once it is converted.
+type TFilesStore = { startDrag: boolean };
 
 class PrimaryProgressDataStore {
   disableUploadPanelOpen = false;
 
-  needErrorChecking = [];
+  needErrorChecking: TOperationName[] = [];
 
-  primaryOperationsArray = [];
+  primaryOperationsArray: TPrimaryOperation[] = [];
 
-  dropTargetPreview = null;
+  dropTargetPreview: string | null = null;
 
   startDropPreview = true;
 
-  constructor(filesStore, selectedFolderStore) {
+  filesStore: TFilesStore;
+
+  selectedFolderStore: SelectedFolderStore;
+
+  constructor(filesStore: TFilesStore, selectedFolderStore: SelectedFolderStore) {
     this.filesStore = filesStore;
     this.selectedFolderStore = selectedFolderStore;
 
@@ -62,7 +94,7 @@ class PrimaryProgressDataStore {
     return this.primaryOperationsArray.length > 0;
   }
 
-  setPrimaryProgressBarData = (primaryProgressData) => {
+  setPrimaryProgressBarData = (primaryProgressData: TPrimaryOperation) => {
     const { operation, ...progressInfo } = primaryProgressData;
 
     const operationIndex = this.primaryOperationsArray.findIndex(
@@ -76,14 +108,16 @@ class PrimaryProgressDataStore {
         this.setNeedErrorChecking(true, operation);
       }
       if (!progressInfo.label && !operationObject.canceled) {
-        if (progressInfo.percent > 0 && !progressInfo.completed) {
+        const percent = progressInfo.percent ?? 0;
+
+        if (percent > 0 && !progressInfo.completed) {
           progressInfo.label = getOperationsProgressTitle(
             operation,
-            Math.trunc(progressInfo.percent),
+            Math.trunc(percent),
           );
         }
 
-        if (progressInfo.completed && progressInfo.percent > 0) {
+        if (progressInfo.completed && percent > 0) {
           progressInfo.label = getOperationsProgressTitle(operation);
         }
       }
@@ -108,7 +142,7 @@ class PrimaryProgressDataStore {
     }
   };
 
-  clearPrimaryProgressData = (operation) => {
+  clearPrimaryProgressData = (operation?: TOperationName) => {
     this.setNeedErrorChecking(false);
 
     if (!operation) {
@@ -159,7 +193,7 @@ class PrimaryProgressDataStore {
     return this.primaryOperationsArray.some((op) => op.alert);
   }
 
-  setNeedErrorChecking = (needErrorChecking, operation) => {
+  setNeedErrorChecking = (needErrorChecking: boolean, operation?: TOperationName) => {
     if (operation) {
       const existingErrorIndex = this.needErrorChecking.findIndex(
         (err) => err === operation,
@@ -177,13 +211,13 @@ class PrimaryProgressDataStore {
     }
   };
 
-  setStartDropPreview = (visible) => {
+  setStartDropPreview = (visible: boolean) => {
     if (this.startDropPreview === visible) return;
 
     this.startDropPreview = visible;
   };
 
-  setDropTargetPreview = (title) => {
+  setDropTargetPreview = (title: string | null) => {
     if (this.filesStore.startDrag && title === this.selectedFolderStore.title) {
       this.dropTargetPreview = null;
       return;

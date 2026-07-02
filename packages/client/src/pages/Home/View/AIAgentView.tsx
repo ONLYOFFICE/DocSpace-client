@@ -35,6 +35,7 @@
 
 import { Activity } from "react";
 import { inject, observer } from "mobx-react";
+import { useNavigate } from "react-router";
 
 import NewChat from "@docspace/ui-kit/ai-agent/new-chat";
 
@@ -44,9 +45,15 @@ import NoAccessContainer, {
   NoAccessContainerType,
 } from "SRC_DIR/components/EmptyContainer/NoAccessContainer";
 import { SectionBodyContent } from "SRC_DIR/pages/Home/Section";
+import { useAIActivation } from "SRC_DIR/Hooks/useAIActivation";
+import ClientSimpleTopUpDialog from "SRC_DIR/components/EmptyContainer/sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
 import type FilesStore from "SRC_DIR/store/FilesStore";
 import type ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
+import type PaymentStore from "SRC_DIR/store/PaymentStore";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+
+const AI_SETTINGS_URL = "/portal-settings/ai-settings";
 
 type Props = {
   currentView: string;
@@ -54,6 +61,17 @@ type Props = {
   showArticleLoader?: ClientLoadingStore["showArticleLoader"];
   showBodyLoader?: ClientLoadingStore["showBodyLoader"];
   canUseChat?: AccessRightsStore["canUseChat"];
+  standalone?: SettingsStore["standalone"];
+  isAdmin?: boolean;
+  isPayer?: PaymentStore["isPayer"];
+  isCardLinkedToPortal?: PaymentStore["isCardLinkedToPortal"];
+  isAIReady?: PaymentStore["isAIReady"];
+  enableAIService?: PaymentStore["enableAIService"];
+  getAIConfig?: SettingsStore["getAIConfig"];
+  refreshPaymentInfo?: () => Promise<void> | void;
+  walletCustomerEmail?: string | null;
+  walletCustomerDisplayName?: string | null;
+  language?: string;
 };
 
 const AIAgentViewComponent = ({
@@ -62,7 +80,36 @@ const AIAgentViewComponent = ({
   showArticleLoader,
   showBodyLoader,
   canUseChat,
+  standalone,
+  isAdmin,
+  isPayer,
+  isCardLinkedToPortal,
+  isAIReady,
+  enableAIService,
+  getAIConfig,
+  refreshPaymentInfo,
+  walletCustomerEmail,
+  walletCustomerDisplayName,
+  language,
 }: Props) => {
+  const navigate = useNavigate();
+
+  const {
+    onActivateAI,
+    onTopUpAndActivateAI,
+    onAIActivated,
+    isActivating,
+    simpleTopUpDialogVisible,
+    onCloseSimpleTopUpDialog,
+  } = useAIActivation({
+    enableAIService,
+    getAIConfig,
+    refreshPaymentInfo,
+    isCardLinkedToPortal,
+    context: "chat",
+    createAgentOnActivate: false,
+  });
+
   if (
     currentView === "chat" &&
     isErrorAIAgentNotAvailable &&
@@ -76,6 +123,20 @@ const AIAgentViewComponent = ({
     !hasNoAccessToChat && (!isErrorAIAgentNotAvailable || showArticleLoader);
   const shouldRenderFiles = currentView !== "chat";
 
+  const noAccessProps = {
+    aiReady: !!isAIReady,
+    standalone: !!standalone,
+    isPortalAdmin: !!isAdmin,
+    isPayer,
+    isCardLinkedToPortal,
+    walletCustomerEmail,
+    walletCustomerDisplayName,
+    onActivateAI,
+    onTopUpAndActivateAI,
+    isActivating,
+    goToAISettings: () => navigate(AI_SETTINGS_URL),
+  };
+
   return (
     <>
       {shouldRenderChat ? (
@@ -84,27 +145,59 @@ const AIAgentViewComponent = ({
             className={styles.aiAgentChat}
             data-chat-active={currentView === "chat" ? "" : undefined}
           >
-            <NewChat />
+            <NewChat aiReady={!!isAIReady} noAccessProps={noAccessProps} />
           </div>
         </Activity>
       ) : null}
 
       {shouldRenderFiles ? <SectionBodyContent /> : null}
+
+      <ClientSimpleTopUpDialog
+        visible={simpleTopUpDialogVisible}
+        onClose={onCloseSimpleTopUpDialog}
+        onConfirm={onAIActivated}
+        language={language}
+      />
     </>
   );
 };
 
 export const AIAgentView = inject(
-  ({ filesStore, clientLoadingStore, accessRightsStore }: TStore) => {
+  ({
+    filesStore,
+    clientLoadingStore,
+    accessRightsStore,
+    settingsStore,
+    userStore,
+    paymentStore,
+    currentTariffStatusStore,
+    authStore,
+  }: TStore) => {
     const { isErrorAIAgentNotAvailable } = filesStore;
     const { showArticleLoader, showBodyLoader } = clientLoadingStore;
     const { canUseChat } = accessRightsStore;
+    const { standalone, getAIConfig } = settingsStore;
+    const { isPayer, isCardLinkedToPortal, isAIReady, enableAIService } =
+      paymentStore;
+    const { walletCustomerEmail, walletCustomerInfo } =
+      currentTariffStatusStore;
 
     return {
       isErrorAIAgentNotAvailable,
       showArticleLoader,
       showBodyLoader,
       canUseChat,
+      standalone,
+      isAdmin: userStore?.user?.isAdmin || userStore?.user?.isOwner,
+      isPayer,
+      isCardLinkedToPortal,
+      isAIReady,
+      enableAIService,
+      getAIConfig,
+      refreshPaymentInfo: authStore?.getPaymentInfo,
+      walletCustomerEmail,
+      walletCustomerDisplayName: walletCustomerInfo?.displayName,
+      language: authStore?.language ?? "en",
     };
   },
 )(observer(AIAgentViewComponent));

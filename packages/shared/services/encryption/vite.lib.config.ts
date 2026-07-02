@@ -43,9 +43,12 @@
 // Web Crypto API is a browser/Node built-in - no polyfill is included.
 
 import { resolve } from "path";
-import { defineConfig } from "vite";
 
-export default defineConfig({
+// NOTE: no `import ... from "vite"` here on purpose — the @docspace/shared
+// package does not depend on vite directly, so the config must stay loadable
+// by whatever vite binary the monorepo provides (e.g. packages/client's).
+/** @type {import("vite").UserConfig} */
+export default {
   build: {
     // Write into a subdirectory so this build never clobbers the shared
     // package's regular TypeScript declaration output.
@@ -72,4 +75,4 @@ export default defineConfig({
       },
     },
   },
-});
+};

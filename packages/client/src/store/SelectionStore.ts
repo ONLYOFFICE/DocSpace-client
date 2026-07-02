@@ -35,25 +35,40 @@
 
 import { makeAutoObservable } from "mobx";
 
+import type { TUser } from "@docspace/shared/api/people/types";
+
+// FABLE5-REVIEW: SettingsSetupStore is still .js (wave 2) — replace this
+// structural type with `import type` once it is converted.
+type TSettingsSetupStore = {
+  security: { accessRight: { admins: TUser[] } };
+};
+
 class SelectionStore {
-  selection = [];
+  selection: TUser[] = [];
 
   selected = "none";
 
-  constructor(settingsSetupStore) {
+  settingsSetupStore: TSettingsSetupStore;
+
+  // FABLE5-REVIEW: peopleStore is never assigned anywhere — selectAll and
+  // selectByStatus would throw if called (no callers found in the repo).
+  // `declare` keeps the historical runtime shape (no own property).
+  declare peopleStore?: { usersStore: { peopleList: TUser[] } };
+
+  constructor(settingsSetupStore: TSettingsSetupStore) {
     this.settingsSetupStore = settingsSetupStore;
     makeAutoObservable(this);
   }
 
-  setSelection = (selection) => {
+  setSelection = (selection: TUser[]) => {
     this.selection = selection;
   };
 
-  selectUser = (user) => {
+  selectUser = (user: TUser) => {
     return this.selection.push(user);
   };
 
-  deselectUser = (user) => {
+  deselectUser = (user?: TUser) => {
     if (!user) {
       this.selected = "none";
       this.selection = [];
@@ -65,7 +80,7 @@ class SelectionStore {
   };
 
   selectAll = () => {
-    const list = this.peopleStore.usersStore.peopleList;
+    const list = this.peopleStore!.usersStore.peopleList;
     this.setSelection(list);
   };
 
@@ -73,8 +88,8 @@ class SelectionStore {
     return this.setSelection([]);
   };
 
-  selectByStatus = (status) => {
-    const list = this.peopleStore.usersStore.peopleList.filter(
+  selectByStatus = (status: TUser["status"]) => {
+    const list = this.peopleStore!.usersStore.peopleList.filter(
       (u) => u.status === status,
     );
 
@@ -90,8 +105,8 @@ class SelectionStore {
     }
   };
 
-  getUsersBySelected = (users) => {
-    const newSelection = [];
+  getUsersBySelected = (users: TUser[]) => {
+    const newSelection: TUser[] = [];
     users.forEach((user) => {
       const checked = this.getUserChecked();
 
@@ -101,11 +116,11 @@ class SelectionStore {
     return newSelection;
   };
 
-  isUserSelected = (userId) => {
+  isUserSelected = (userId: string) => {
     return this.selection.some((el) => el.id === userId);
   };
 
-  setSelected = (selected) => {
+  setSelected = (selected: string) => {
     const { admins } = this.settingsSetupStore.security.accessRight;
     this.selected = selected;
     this.setSelection(this.getUsersBySelected(admins));

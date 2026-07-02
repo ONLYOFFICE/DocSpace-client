@@ -34,10 +34,13 @@
  */
 
 import { makeAutoObservable } from "mobx";
+import type { NavigateFunction } from "react-router";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { RoomsType } from "@docspace/shared/enums";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import type FilesFilter from "@docspace/shared/api/files/filter";
+import type { TTranslation } from "@docspace/shared/types";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { isMobile, getCountTilesInRow } from "@docspace/shared/utils";
@@ -48,40 +51,138 @@ import config from "PACKAGE_FILE";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { TABLE_HEADER_HEIGHT } from "@docspace/ui-kit/components/table/Table.constants";
 
+import type FilesSettingsStore from "./FilesSettingsStore";
+import type IndexingStore from "./IndexingStore";
+import type SelectedFolderStore from "./SelectedFolderStore";
+import type { TSelectedFolder } from "./SelectedFolderStore";
+import type TreeFoldersStore from "./TreeFoldersStore";
+
+// FABLE5-REVIEW: FilesStore is still .js (wave 3) — items of `filesList`,
+// `selection` and `hotkeysClipboard` are file/folder view-models built inside
+// FilesStore; minimal structural type of the fields this store touches.
+// Replace with the real item type once FilesStore is converted.
+type TFilesItem = {
+  id: number | string;
+  title?: string;
+  fileExst?: string;
+  contentLength?: string | number;
+  parentId?: number | string;
+  isFolder?: boolean;
+  isEditing?: boolean;
+  security?: { Copy?: boolean; Move?: boolean };
+};
+
+type TOperationData = {
+  destFolderId: number | string | null;
+  destFolderInfo: TSelectedFolder;
+  folderIds: (number | string)[];
+  fileIds: (number | string)[];
+  deleteAfter: boolean;
+  isCopy: boolean;
+  itemsCount: number;
+  title?: string;
+  isFolder?: boolean;
+};
+
+// FABLE5-REVIEW: FilesStore is still .js (wave 3) — replace this structural
+// type with `import type` once it is converted.
+type TFilesStore = {
+  viewAs: string;
+  selection: TFilesItem[];
+  filesList: TFilesItem[];
+  files: TFilesItem[];
+  folders: TFilesItem[];
+  hotkeyCaret: TFilesItem | null;
+  hotkeyCaretStart: TFilesItem | null;
+  hotkeysClipboard: TFilesItem[];
+  // FABLE5-REVIEW: FilesStore.activeFiles/activeFolders hold either plain ids
+  // or `{ id, destFolderId }` objects depending on the code path, so
+  // `activeFiles.includes(item.id)` below only matches the id-shaped entries.
+  activeFiles: unknown[];
+  activeFolders: unknown[];
+  filter: FilesFilter;
+  categoryType: number;
+  setSelection: (selection: TFilesItem[]) => void;
+  setSelected: (selected: "all" | "none") => void;
+  setHotkeyCaret: (caret: TFilesItem | null) => void;
+  setHotkeyCaretStart: (caret: TFilesItem | null) => void;
+  setHotkeysClipboard: (clipboard?: TFilesItem[]) => void;
+  deselectFile: (file: TFilesItem | null) => void;
+};
+
+// FABLE5-REVIEW: DialogsStore is still .js (wave 3) — replace this structural
+// type with `import type` once it is converted.
+type TDialogsStore = {
+  setMoveToPublicRoomVisible: (
+    visible: boolean,
+    operationData: TOperationData,
+  ) => void;
+};
+
+// FABLE5-REVIEW: FilesActionsStore is still .js (wave 3) — replace this
+// structural type with `import type` once it is converted.
+type TFilesActionsStore = {
+  mediaViewerDataStore: { isViewerOpen: boolean };
+  openFileAction: (item: TFilesItem, t: TTranslation) => void;
+  revokeFilesOrder: () => void;
+  checkFileConflicts: (
+    destFolderId: number | string | null,
+    folderIds: (number | string)[],
+    fileIds: (number | string)[],
+  ) => Promise<unknown[]>;
+  setSelectedItems: (title: string | undefined, length: number) => void;
+  setConflictDialogData: (
+    conflicts: unknown[],
+    operationData: TOperationData,
+  ) => void;
+  createFoldersTree: (t: TTranslation, files: unknown[]) => Promise<unknown[]>;
+};
+
+// FABLE5-REVIEW: UploadDataStore is still .js (wave 3) — replace this
+// structural type with `import type` once it is converted.
+type TUploadDataStore = {
+  itemOperationToFolder: (operationData: TOperationData) => Promise<unknown>;
+  clearActiveOperations: (
+    fileIds: (number | string)[],
+    folderIds: (number | string)[],
+  ) => void;
+  startUpload: (files: unknown[], folderId: null, t: TTranslation) => void;
+};
+
 class HotkeyStore {
-  filesStore;
+  filesStore: TFilesStore;
 
-  dialogsStore;
+  dialogsStore: TDialogsStore;
 
-  filesSettingsStore;
+  filesSettingsStore: FilesSettingsStore;
 
-  filesActionsStore;
+  filesActionsStore: TFilesActionsStore;
 
-  treeFoldersStore;
+  treeFoldersStore: TreeFoldersStore;
 
-  uploadDataStore;
+  uploadDataStore: TUploadDataStore;
 
-  selectedFolderStore;
+  selectedFolderStore: SelectedFolderStore;
 
-  indexingStore;
+  indexingStore: IndexingStore;
 
   elemOffset = 0;
 
-  hotkeysClipboardAction = null;
+  hotkeysClipboardAction: "move" | "copy" | null = null;
 
   selectionAreaIsEnabled = true;
 
   withContentSelection = false;
 
   constructor(
-    filesStore,
-    dialogsStore,
-    filesSettingsStore,
-    filesActionsStore,
-    treeFoldersStore,
-    uploadDataStore,
-    selectedFolderStore,
-    indexingStore,
+    filesStore: TFilesStore,
+    dialogsStore: TDialogsStore,
+    filesSettingsStore: FilesSettingsStore,
+    filesActionsStore: TFilesActionsStore,
+    treeFoldersStore: TreeFoldersStore,
+    uploadDataStore: TUploadDataStore,
+    selectedFolderStore: SelectedFolderStore,
+    indexingStore: IndexingStore,
   ) {
     makeAutoObservable(this);
     this.filesStore = filesStore;
@@ -114,24 +215,28 @@ class HotkeyStore {
       const el = item[0];
       const rect = el.getBoundingClientRect();
 
+      // FABLE5-REVIEW: `scroll`/`scrollRect`/`offsetTop` can be
+      // null/undefined when the scroll container is not in the DOM — the
+      // original .js dereferenced them unguarded here; non-null assertions
+      // keep runtime identical.
       if (
-        scrollRect.top + scrollRect.height - rect.height > rect.top &&
-        scrollRect.top + stickySectionHeight + tableHeaderHeight < rect.top
+        scrollRect!.top + scrollRect!.height - rect.height > rect.top &&
+        scrollRect!.top + stickySectionHeight + tableHeaderHeight < rect.top
       ) {
         // console.log("element is visible");
       } else {
-        scroll.scrollTo(0, offsetTop - scrollRect.height / 2);
+        scroll!.scrollTo(0, offsetTop! - scrollRect!.height / 2);
         // console.log("element is not visible");
       }
     } else {
-      scroll?.scrollTo(0, this.elemOffset - scrollRect.height / 2);
+      scroll?.scrollTo(0, this.elemOffset - scrollRect!.height / 2);
     }
   };
 
-  activateHotkeys = (e) => {
+  activateHotkeys = (e: KeyboardEvent) => {
     const infiniteLoaderComponent = document.getElementsByClassName(
       "ReactVirtualized__List",
-    )[0];
+    )[0] as HTMLElement;
 
     if (infiniteLoaderComponent) {
       infiniteLoaderComponent.tabIndex = -1;
@@ -143,8 +248,9 @@ class HotkeyStore {
 
     if (
       someDialogIsOpen ||
-      (e.target?.tagName === "INPUT" && e.target.type !== "checkbox") ||
-      e.target?.tagName === "TEXTAREA"
+      ((e.target as HTMLInputElement)?.tagName === "INPUT" &&
+        (e.target as HTMLInputElement).type !== "checkbox") ||
+      (e.target as HTMLElement)?.tagName === "TEXTAREA"
     )
       return e;
 
@@ -164,7 +270,10 @@ class HotkeyStore {
 
     if (!hotkeyCaret) {
       const scroll = document.getElementsByClassName("section-scroll");
-      scroll && scroll[0] && scroll[0]?.firstChild.focus();
+      // FABLE5-REVIEW: `firstChild` is a nullable ChildNode — the original
+      // .js called `.focus()` on it unguarded; the cast keeps runtime
+      // identical.
+      scroll && scroll[0] && (scroll[0]?.firstChild as HTMLElement).focus();
     }
 
     if (!hotkeyCaret && selection.length) {
@@ -175,7 +284,7 @@ class HotkeyStore {
     if (!hotkeyCaret || isDefaultKeys) return e;
   };
 
-  setCaret = (caret, withScroll = true) => {
+  setCaret = (caret: TFilesItem, withScroll: boolean = true) => {
     // TODO: inf-scroll
     // const id = caret.isFolder ? `folder_${caret.id}` : `file_${caret.id}`;
     // const elem = document.getElementById(id);
@@ -191,25 +300,32 @@ class HotkeyStore {
   getItemOffset = () => {
     const { hotkeyCaret, viewAs } = this.filesStore;
 
-    const className = hotkeyCaret.fileExst
-      ? `${hotkeyCaret.id}_${hotkeyCaret.fileExst}`
-      : `${hotkeyCaret.id}`;
+    // FABLE5-REVIEW: `hotkeyCaret` can be null — the original .js read
+    // `.fileExst` on it unguarded (callers ensure a caret is set); the
+    // non-null assertion keeps runtime identical.
+    const className = hotkeyCaret!.fileExst
+      ? `${hotkeyCaret!.id}_${hotkeyCaret!.fileExst}`
+      : `${hotkeyCaret!.id}`;
 
-    let item = document.getElementsByClassName(className);
+    let item: HTMLCollectionOf<Element> | undefined =
+      document.getElementsByClassName(className);
 
     if (viewAs === "table") {
       item = item && item[0]?.getElementsByClassName("table-container_cell");
     }
 
     if (item && item[0]) {
-      const el = item[0];
+      const el = item[0] as HTMLElement;
 
-      const offset = el.closest(".window-item")?.offsetTop;
+      const offset = el.closest<HTMLElement>(".window-item")?.offsetTop;
 
+      // FABLE5-REVIEW: the `parentElement` chain is nullable — the original
+      // .js dereferenced it unguarded; non-null assertions keep runtime
+      // identical.
       const offsetTop =
         offset ||
         (viewAs === "tile"
-          ? el.parentElement.parentElement.offsetTop
+          ? el.parentElement!.parentElement!.offsetTop
           : el.offsetTop);
 
       return { offsetTop, item };
@@ -237,7 +353,7 @@ class HotkeyStore {
     }
   };
 
-  setSelectionWithCaret = (selection) => {
+  setSelectionWithCaret = (selection: TFilesItem[]) => {
     this.filesStore.setSelection(selection);
     this.setCaret(selection[0]);
     this.filesStore.setHotkeyCaretStart(selection[0]);
@@ -325,24 +441,27 @@ class HotkeyStore {
     }
     if (!hotkeyCaret && !selection.length) return this.selectFirstFile();
 
+    // FABLE5-REVIEW: `hotkeyCaret`/`hotkeyCaretStart`/`this.nextFile` are
+    // nullable — the original .js dereferenced them unguarded on these paths;
+    // non-null assertions keep runtime identical.
     if (viewAs === "tile") {
       if (
-        this.nextForTileDown.id === hotkeyCaret.id &&
-        this.nextForTileDown.isFolder === hotkeyCaret.isFolder
+        this.nextForTileDown.id === hotkeyCaret!.id &&
+        this.nextForTileDown.isFolder === hotkeyCaret!.isFolder
       )
         return;
 
       setSelection(this.selectionsDown);
       this.setCaret(this.nextForTileDown);
     } else if (this.nextFile) {
-      if (selection.findIndex((f) => f.id === this.nextFile.id) !== -1) {
+      if (selection.findIndex((f) => f.id === this.nextFile!.id) !== -1) {
         const startIndex = filesList.findIndex(
           (f) =>
-            f.id === hotkeyCaretStart.id &&
-            f.isFolder === hotkeyCaretStart.isFolder,
+            f.id === hotkeyCaretStart!.id &&
+            f.isFolder === hotkeyCaretStart!.isFolder,
         );
 
-        if (startIndex > this.caretIndex) {
+        if (startIndex > (this.caretIndex as number)) {
           deselectFile(hotkeyCaret);
         }
       } else {
@@ -369,10 +488,13 @@ class HotkeyStore {
     }
     if (!hotkeyCaret && !selection.length) this.selectFirstFile();
 
+    // FABLE5-REVIEW: `hotkeyCaret`/`hotkeyCaretStart`/`this.prevFile` are
+    // nullable — the original .js dereferenced them unguarded on these paths;
+    // non-null assertions keep runtime identical.
     if (viewAs === "tile") {
       if (
-        this.prevForTileUp.id === hotkeyCaret.id &&
-        this.prevForTileUp.isFolder === hotkeyCaret.isFolder
+        this.prevForTileUp.id === hotkeyCaret!.id &&
+        this.prevForTileUp.isFolder === hotkeyCaret!.isFolder
       )
         return;
 
@@ -382,16 +504,17 @@ class HotkeyStore {
       if (
         selection.findIndex(
           (f) =>
-            f.id === this.prevFile.id && f.isFolder === this.prevFile.isFolder,
+            f.id === this.prevFile!.id &&
+            f.isFolder === this.prevFile!.isFolder,
         ) !== -1
       ) {
         const startIndex = filesList.findIndex(
           (f) =>
-            f.id === hotkeyCaretStart.id &&
-            f.isFolder === hotkeyCaretStart.isFolder,
+            f.id === hotkeyCaretStart!.id &&
+            f.isFolder === hotkeyCaretStart!.isFolder,
         );
 
-        if (startIndex < this.caretIndex) {
+        if (startIndex < (this.caretIndex as number)) {
           deselectFile(hotkeyCaret);
         }
       } else {
@@ -424,7 +547,7 @@ class HotkeyStore {
         f.isFolder === hotkeyCaretStart?.isFolder,
     );
 
-    const nextCaretIndex = this.caretIndex + 1;
+    const nextCaretIndex = (this.caretIndex as number) + 1;
     let nextForTileRight = selection;
 
     let iNext = hotkeyCaretStartIndex;
@@ -451,9 +574,12 @@ class HotkeyStore {
       }
     }
 
-    if (this.caretIndex < hotkeyCaretStartIndex) {
+    if ((this.caretIndex as number) < hotkeyCaretStartIndex) {
+      // FABLE5-REVIEW: `hotkeyCaret` is nullable — the original .js
+      // dereferenced it unguarded here; non-null assertions keep runtime
+      // identical.
       const idx = nextForTileRight.findIndex(
-        (f) => f.id === hotkeyCaret.id && f.isFolder === hotkeyCaret.isFolder,
+        (f) => f.id === hotkeyCaret!.id && f.isFolder === hotkeyCaret!.isFolder,
       );
       nextForTileRight = nextForTileRight.filter((_, index) => index !== idx);
     }
@@ -485,7 +611,7 @@ class HotkeyStore {
         f.isFolder === hotkeyCaretStart?.isFolder,
     );
 
-    const prevCaretIndex = this.caretIndex - 1;
+    const prevCaretIndex = (this.caretIndex as number) - 1;
     let prevForTileLeft = selection;
 
     let iPrev = hotkeyCaretStartIndex;
@@ -512,9 +638,12 @@ class HotkeyStore {
       }
     }
 
-    if (this.caretIndex > hotkeyCaretStartIndex) {
+    if ((this.caretIndex as number) > hotkeyCaretStartIndex) {
+      // FABLE5-REVIEW: `hotkeyCaret` is nullable — the original .js
+      // dereferenced it unguarded here; non-null assertions keep runtime
+      // identical.
       const idx = prevForTileLeft.findIndex(
-        (f) => f.id === hotkeyCaret.id && f.isFolder === hotkeyCaret.isFolder,
+        (f) => f.id === hotkeyCaret!.id && f.isFolder === hotkeyCaret!.isFolder,
       );
       prevForTileLeft = prevForTileLeft.filter((_, index) => index !== idx);
     }
@@ -545,7 +674,7 @@ class HotkeyStore {
     if (this.nextFile) this.setCaret(this.nextFile);
   };
 
-  openItem = (t) => {
+  openItem = (t: TTranslation) => {
     const { selection } = this.filesStore;
 
     const someDialogIsOpen = checkDialogsOpen();
@@ -582,7 +711,7 @@ class HotkeyStore {
     setSelected("none");
   };
 
-  goToHomePage = (navigate) => {
+  goToHomePage = (navigate: NavigateFunction) => {
     const { filter, categoryType } = this.filesStore;
 
     const filterParamsStr = filter.toUrlParams();
@@ -598,7 +727,11 @@ class HotkeyStore {
     );
   };
 
-  uploadFile = (isFolder, navigate, t) => {
+  uploadFile = (
+    isFolder: boolean,
+    navigate: NavigateFunction,
+    t: TTranslation,
+  ) => {
     if (isFolder) {
       if (this.treeFoldersStore.isPrivacyFolder) return;
       const folderInput = document.getElementById("customFolderInput");
@@ -609,7 +742,7 @@ class HotkeyStore {
     }
   };
 
-  copyToClipboard = (t, isCut) => {
+  copyToClipboard = (t: TTranslation, isCut?: boolean) => {
     const { selection, setHotkeysClipboard } = this.filesStore;
 
     const canCopy = selection.every((s) => s.security?.Copy);
@@ -624,9 +757,9 @@ class HotkeyStore {
     toastr.success(copyText);
   };
 
-  moveFilesFromClipboard = (t) => {
-    const fileIds = [];
-    const folderIds = [];
+  moveFilesFromClipboard = (t: TTranslation) => {
+    const fileIds: (number | string)[] = [];
+    const folderIds: (number | string)[] = [];
 
     const {
       id: selectedItemId,
@@ -647,7 +780,10 @@ class HotkeyStore {
 
     if (!selections.length) return;
 
-    if (!security.CopyTo || !security.MoveTo) return;
+    // FABLE5-REVIEW: `security` is nullable on SelectedFolderStore — the
+    // original .js read `.CopyTo`/`.MoveTo` unguarded; non-null assertions
+    // keep runtime identical.
+    if (!security!.CopyTo || !security!.MoveTo) return;
 
     const isPublic = roomType === RoomsType.PublicRoom;
 
@@ -671,7 +807,7 @@ class HotkeyStore {
     const itemsLength = folderIds.length + fileIds.length;
 
     if (folderIds.length || fileIds.length) {
-      const operationData = {
+      const operationData: TOperationData = {
         destFolderId: selectedItemId,
         destFolderInfo: getSelectedFolder(),
         folderIds,
@@ -685,7 +821,15 @@ class HotkeyStore {
         }),
       };
 
-      if (isPublic && !selections.rootFolderType) {
+      // FABLE5-REVIEW: `selections` is an array, so `selections.rootFolderType`
+      // is always undefined at runtime (looks like a latent bug — probably
+      // meant `selections[0].rootFolderType`); the cast keeps the original
+      // runtime behavior.
+      if (
+        isPublic &&
+        !(selections as TFilesItem[] & { rootFolderType?: unknown })
+          .rootFolderType
+      ) {
         this.dialogsStore.setMoveToPublicRoomVisible(true, operationData);
         return;
       }
@@ -712,7 +856,7 @@ class HotkeyStore {
     }
   };
 
-  uploadClipboardFiles = async (t, event) => {
+  uploadClipboardFiles = async (t: TTranslation, event: ClipboardEvent) => {
     const { createFoldersTree } = this.filesActionsStore;
     const { startUpload } = this.uploadDataStore;
 
@@ -720,7 +864,8 @@ class HotkeyStore {
     if (
       event &&
       event.target &&
-      (event.target.tagName === "INPUT" || event.target.tagName === "TEXTAREA")
+      ((event.target as HTMLElement).tagName === "INPUT" ||
+        (event.target as HTMLElement).tagName === "TEXTAREA")
     ) {
       return;
     }
@@ -736,19 +881,19 @@ class HotkeyStore {
         if (f.length > 0) startUpload(f, null, t);
       })
       .catch((err) => {
-        toastr.error(err, null, 0, true);
+        toastr.error(err as string, null, 0, true);
       });
   };
 
-  setSelectionAreaIsEnabled = (selectionAreaIsEnabled) => {
+  setSelectionAreaIsEnabled = (selectionAreaIsEnabled: boolean) => {
     this.selectionAreaIsEnabled = selectionAreaIsEnabled;
   };
 
-  setWithContentSelection = (withContentSelection) => {
+  setWithContentSelection = (withContentSelection: boolean) => {
     this.withContentSelection = withContentSelection;
   };
 
-  enableSelection = (e) => {
+  enableSelection = (e: KeyboardEvent) => {
     if (e.type === "keydown" && this.selectionAreaIsEnabled) {
       clearTextSelection();
       this.setSelectionAreaIsEnabled(false);
@@ -759,13 +904,13 @@ class HotkeyStore {
     e.preventDefault();
   };
 
-  getTileItems = (item, itemId) => {
+  getTileItems = (item: Element, itemId: string) => {
     const tileItems = item.querySelectorAll(".tile-item");
-    let id = null;
+    let id: string | null = null;
 
     tileItems.forEach((tileItem) => {
-      if (tileItem.childNodes[0].id === itemId) {
-        id = tileItem.childNodes[0].id;
+      if ((tileItem.childNodes[0] as HTMLElement).id === itemId) {
+        id = (tileItem.childNodes[0] as HTMLElement).id;
       }
     });
 
@@ -788,7 +933,7 @@ class HotkeyStore {
     const windowItems = document.querySelectorAll(".window-item");
 
     windowItems.forEach((item) => {
-      let nodeId = item.childNodes[0].id;
+      let nodeId = (item.childNodes[0] as HTMLElement).id;
 
       if (viewAs === "tile") {
         nodeId = this.getTileItems(item, itemId) ?? nodeId;
@@ -832,11 +977,15 @@ class HotkeyStore {
     const { filesList } = this.filesStore;
 
     if (this.caretIndex !== -1) {
-      return filesList[this.caretIndex]?.isFolder;
+      return filesList[this.caretIndex as number]?.isFolder;
     }
     return false;
   }
 
+  // FABLE5-REVIEW: `caretIndex` returns null (never -1) when nothing is
+  // found, so the `!== -1` checks at the call sites are always true and the
+  // arithmetic there relies on JS null coercion (e.g. `null + 1 === 1`). The
+  // `as number` casts at those sites keep runtime identical.
   get caretIndex() {
     const { filesList, hotkeyCaret, selection } = this.filesStore;
 
@@ -856,11 +1005,11 @@ class HotkeyStore {
     return null;
   }
 
-  get nextFile() {
+  get nextFile(): TFilesItem | null {
     const { filesList } = this.filesStore;
 
     if (this.caretIndex !== -1) {
-      const nextCaretIndex = this.caretIndex + 1;
+      const nextCaretIndex = (this.caretIndex as number) + 1;
       return filesList[nextCaretIndex];
     }
     return null;
@@ -868,7 +1017,8 @@ class HotkeyStore {
 
   get nextForTileDown() {
     const { filesList, folders, files } = this.filesStore;
-    const nextTileFile = filesList[this.caretIndex + this.countTilesInRow];
+    const nextTileFile =
+      filesList[(this.caretIndex as number) + this.countTilesInRow];
     const foldersLength = folders.length;
 
     let nextForTileDown = nextTileFile || filesList[filesList.length - 1];
@@ -877,10 +1027,12 @@ class HotkeyStore {
 
     if (nextForTileDown.isFolder !== this.caretIsFolder) {
       const indexForNextTile =
-        this.caretIndex + this.countTilesInRow - this.countOfMissingFiles;
+        (this.caretIndex as number) +
+        this.countTilesInRow -
+        this.countOfMissingFiles;
 
       nextForTileDown =
-        foldersLength - this.caretIndex - 1 <= this.division ||
+        foldersLength - (this.caretIndex as number) - 1 <= this.division ||
         this.division === 0
           ? filesList[indexForNextTile]
             ? filesList[indexForNextTile]
@@ -900,11 +1052,11 @@ class HotkeyStore {
     return nextForTileDown;
   }
 
-  get prevFile() {
+  get prevFile(): TFilesItem | null {
     const { filesList } = this.filesStore;
 
     if (this.caretIndex !== -1) {
-      const prevCaretIndex = this.caretIndex - 1;
+      const prevCaretIndex = (this.caretIndex as number) - 1;
       return filesList[prevCaretIndex];
     }
     return null;
@@ -914,12 +1066,15 @@ class HotkeyStore {
     const { filesList, folders, hotkeyCaret } = this.filesStore;
     const foldersLength = folders.length;
 
-    const prevTileFile = filesList[this.caretIndex - this.countTilesInRow];
+    const prevTileFile =
+      filesList[(this.caretIndex as number) - this.countTilesInRow];
     let prevForTileUp = prevTileFile || filesList[0];
 
     if (prevForTileUp.isFolder !== this.caretIsFolder) {
       const indexForPrevTile =
-        this.caretIndex - this.countTilesInRow + this.countOfMissingFiles;
+        (this.caretIndex as number) -
+        this.countTilesInRow +
+        this.countOfMissingFiles;
 
       prevForTileUp = filesList[indexForPrevTile]
         ? filesList[indexForPrevTile].isFolder
@@ -927,7 +1082,10 @@ class HotkeyStore {
           : folders[foldersLength - 1]
         : folders[foldersLength - 1];
     } else if (!prevTileFile) {
-      prevForTileUp = hotkeyCaret;
+      // FABLE5-REVIEW: `hotkeyCaret` can be null — the original .js assigned
+      // it here and dereferenced `.isFolder` below unguarded; the non-null
+      // assertion keeps runtime identical.
+      prevForTileUp = hotkeyCaret!;
     }
 
     if (prevForTileUp.isFolder === undefined) {
@@ -939,7 +1097,7 @@ class HotkeyStore {
 
   get selectionsDown() {
     const { filesList, hotkeyCaretStart, viewAs, selection } = this.filesStore;
-    let selectionsDown = JSON.parse(JSON.stringify(selection));
+    let selectionsDown: TFilesItem[] = JSON.parse(JSON.stringify(selection));
 
     const hotkeyCaretStartIndex = filesList.findIndex(
       (f) =>
@@ -970,7 +1128,7 @@ class HotkeyStore {
         nextForTileDownItemIndex = itemIndexDown + this.countTilesInRow;
       }
 
-      let itemIndex = this.caretIndex;
+      let itemIndex = this.caretIndex as number;
 
       while (itemIndex !== nextForTileDownItemIndex) {
         const fileIndex = selectionsDown.findIndex(
@@ -1007,7 +1165,7 @@ class HotkeyStore {
   get selectionsUp() {
     const { filesList, viewAs, selection, hotkeyCaretStart } = this.filesStore;
 
-    let selectionsUp = JSON.parse(JSON.stringify(selection));
+    let selectionsUp: TFilesItem[] = JSON.parse(JSON.stringify(selection));
 
     const hotkeyCaretStartIndex = filesList.findIndex(
       (f) =>
@@ -1037,7 +1195,7 @@ class HotkeyStore {
         prevForTileUpItemIndex = itemIndexUp - this.countTilesInRow;
       }
 
-      let itemIndex = this.caretIndex;
+      let itemIndex = this.caretIndex as number;
 
       while (itemIndex !== prevForTileUpItemIndex) {
         const fileIndex = selectionsUp.findIndex(

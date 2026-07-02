@@ -52,6 +52,12 @@ import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
+import {
+  PersistenceKeys,
+  hasPersisted,
+  setPersistedString,
+} from "./utils/persistence";
+
 const myDocumentsFolderId = 2;
 
 class OformsStore {
@@ -95,8 +101,8 @@ class OformsStore {
 
   currentExtensionGallery = ".docx";
 
-  submitToGalleryTileIsVisible = !localStorage.getItem(
-    "submitToGalleryTileIsHidden",
+  submitToGalleryTileIsVisible = !hasPersisted(
+    PersistenceKeys.submitToGalleryTileIsHidden,
   );
 
   constructor(settingsStore, userStore, treeFoldersStore) {
@@ -414,7 +420,7 @@ class OformsStore {
   };
 
   hideSubmitToGalleryTile = () => {
-    localStorage.setItem("submitToGalleryTileIsHidden", true);
+    setPersistedString(PersistenceKeys.submitToGalleryTileIsHidden, "true");
     this.submitToGalleryTileIsVisible = false;
   };
 

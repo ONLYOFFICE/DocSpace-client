@@ -52,28 +52,28 @@ import type ServicesStore from "SRC_DIR/store/ServicesStore";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import generalStyles from "../AISettings.module.scss";
-import styles from "./WebSearch.module.scss";
-import { WebSearchLoader } from "./WebSearchLoader";
+import styles from "./WebSearchSaas.module.scss";
+import { WebSearchSaasLoader } from "./WebSearchSaasLoader";
 
-type WebSearchProps = {
+type WebSearchSaasProps = {
   aiToolsPrices?: ServicesStore["aiToolsPrices"];
   isAiToolsPricesLoading?: ServicesStore["isAiToolsPricesLoading"];
   formatAiModelsCurrency?: ServicesStore["formatAiModelsCurrency"];
   webSearchSettingsUrl?: SettingsStore["webSearchSettingsUrl"];
 };
 
-const WebSearch = ({
+const WebSearchSaas = ({
   aiToolsPrices,
   isAiToolsPricesLoading,
   formatAiModelsCurrency,
   webSearchSettingsUrl,
-}: WebSearchProps) => {
+}: WebSearchSaasProps) => {
   const { t } = useTranslation(["Common"]);
   const { isBase } = useTheme();
 
   // Pricing is loaded upstream in the settings View; show a skeleton while it
   // loads.
-  if (isAiToolsPricesLoading) return <WebSearchLoader />;
+  if (isAiToolsPricesLoading) return <WebSearchSaasLoader />;
 
   // Pricing failed to load — show a server-error screen with a reload action.
   if (!aiToolsPrices) {
@@ -173,5 +173,5 @@ export default inject<TStore>(({ servicesStore, settingsStore }) => {
     formatAiModelsCurrency,
     webSearchSettingsUrl,
   };
-})(observer(WebSearch));
+})(observer(WebSearchSaas));
 

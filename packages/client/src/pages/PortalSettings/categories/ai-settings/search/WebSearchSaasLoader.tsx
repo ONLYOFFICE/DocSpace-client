@@ -35,9 +35,9 @@
 
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-import styles from "./WebSearch.module.scss";
+import styles from "./WebSearchSaas.module.scss";
 
-export const WebSearchLoader = () => {
+export const WebSearchSaasLoader = () => {
   return (
     <div className={styles.wrapper}>
       <RectangleSkeleton width="100%" height="40px" />

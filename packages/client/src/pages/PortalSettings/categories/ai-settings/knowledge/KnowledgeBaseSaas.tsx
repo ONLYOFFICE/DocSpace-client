@@ -52,26 +52,26 @@ import type ServicesStore from "SRC_DIR/store/ServicesStore";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import generalStyles from "../AISettings.module.scss";
-import styles from "./KnowledgeBase.module.scss";
-import { KnowledgeBaseLoader } from "./KnowledgeBaseLoader";
+import styles from "./KnowledgeBaseSaas.module.scss";
+import { KnowledgeBaseSaasLoader } from "./KnowledgeBaseSaasLoader";
 
-type KnowledgeBaseProps = {
+type KnowledgeBaseSaasProps = {
   aiToolsPrices?: ServicesStore["aiToolsPrices"];
   isAiToolsPricesLoading?: ServicesStore["isAiToolsPricesLoading"];
   formatAiModelsCurrency?: ServicesStore["formatAiModelsCurrency"];
   knowledgeSettingsUrl?: SettingsStore["knowledgeSettingsUrl"];
 };
 
-const KnowledgeBase = ({
+const KnowledgeBaseSaas = ({
   aiToolsPrices,
   isAiToolsPricesLoading,
   formatAiModelsCurrency,
   knowledgeSettingsUrl,
-}: KnowledgeBaseProps) => {
+}: KnowledgeBaseSaasProps) => {
   const { t } = useTranslation(["Files", "Common"]);
   const { isBase } = useTheme();
 
-  if (isAiToolsPricesLoading) return <KnowledgeBaseLoader />;
+  if (isAiToolsPricesLoading) return <KnowledgeBaseSaasLoader />;
 
   if (!aiToolsPrices) {
     const icon = isBase ? (
@@ -170,5 +170,5 @@ export default inject<TStore>(({ servicesStore, settingsStore }) => {
     formatAiModelsCurrency,
     knowledgeSettingsUrl,
   };
-})(observer(KnowledgeBase));
+})(observer(KnowledgeBaseSaas));
 

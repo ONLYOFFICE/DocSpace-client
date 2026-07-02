@@ -3158,6 +3158,7 @@ class FilesActionStore {
       isRecentFolder,
       isTemplatesFolder,
       isAIAgentsFolder,
+      isFormsFolder,
     } = this.treeFoldersStore;
 
     const itemsCollection = new Map();
@@ -3178,7 +3179,8 @@ class FilesActionStore {
     if (isArchiveFolder)
       return this.getArchiveRoomsFolderOptions(itemsCollection, t);
 
-    if (isRoomsFolder) return this.getRoomsFolderOptions(itemsCollection, t);
+    if (isRoomsFolder || isFormsFolder)
+      return this.getRoomsFolderOptions(itemsCollection, t);
 
     if (isTemplatesFolder)
       return this.getTemplatesFolderOptions(itemsCollection, t);

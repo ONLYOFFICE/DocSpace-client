@@ -79,6 +79,8 @@ import {
 } from "@docspace/ui-kit/billing/utils/paymentSelectors";
 import type { DateTime } from "luxon";
 
+import { PersistenceKeys, removePersisted } from "./utils/persistence";
+
 // Constants for feature identifiers
 export const TOTAL_SIZE = "total_size";
 
@@ -391,7 +393,7 @@ class PaymentStore {
       }
 
       toastr.success(t("Common:ActivateLicenseActivated"));
-      localStorage.removeItem("enterpriseAlertClose");
+      removePersisted(PersistenceKeys.enterpriseAlertClose);
 
       await getPaymentInfo();
       await this.settingsStore?.getSettings();

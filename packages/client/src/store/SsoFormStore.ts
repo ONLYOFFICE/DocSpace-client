@@ -35,6 +35,7 @@
 
 import { makeAutoObservable } from "mobx";
 import axios from "axios";
+import type { AxiosResponse } from "axios";
 import isEqual from "lodash/isEqual";
 import {
   generateCerts,
@@ -45,9 +46,18 @@ import {
   uploadXmlMetadata,
   validateCerts,
 } from "@docspace/shared/api/settings";
+import type {
+  TGetSsoSettings,
+  TSsoCertificate,
+  TSsoIdpSettings,
+} from "@docspace/shared/api/settings/types";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { TTranslation } from "@docspace/shared/types";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import type { TOption } from "@docspace/ui-kit/components/combobox";
 import { EmployeeType } from "@docspace/shared/enums";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
+import type { ChangeEvent } from "react";
 import {
   BINDING_POST,
   BINDING_REDIRECT,
@@ -62,6 +72,27 @@ import {
   SSO_ENCRYPT,
   SSO_SIGNING_ENCRYPT,
 } from "../helpers/constants";
+
+// FABLE5-REVIEW: loadXmlMetadata/uploadXmlMetadata/validateCerts/generateCerts
+// in shared/api/settings are untyped (raw axios calls), so their responses are
+// cast at the call sites below.
+
+/** Endpoint entry of the parsed IdP XML metadata (binding/location pair). */
+type TSsoMetadataService = {
+  binding?: string;
+  location?: string;
+} & Record<string, unknown>;
+
+/** Shape of the parsed IdP XML metadata returned by /sso/loadmetadata and /sso/uploadmetadata. */
+type TUploadedXmlMetadata = {
+  entityID?: string;
+  singleSignOnService?: TSsoMetadataService | TSsoMetadataService[];
+  singleLogoutService?: TSsoMetadataService;
+  nameIDFormat?: string | string[];
+  certificate?: {
+    signing?: string | string[];
+  };
+};
 
 class SsoFormStore {
   isSsoEnabled = false;
@@ -93,11 +124,11 @@ class SsoFormStore {
 
   idpCertificate = "";
 
-  idpPrivateKey = null;
+  idpPrivateKey: string | null = null;
 
   idpAction = SSO_SIGNING;
 
-  idpCertificates = [];
+  idpCertificates: TSsoCertificate[] = [];
 
   // idpCertificateAdvanced
   idpDecryptAlgorithm = "http://www.w3.org/2001/04/xmlenc#aes128-cbc";
@@ -115,11 +146,11 @@ class SsoFormStore {
 
   spCertificate = "";
 
-  spPrivateKey = "";
+  spPrivateKey: string | null = "";
 
   spAction = SSO_SIGNING;
 
-  spCertificates = [];
+  spCertificates: TSsoCertificate[] = [];
 
   // spCertificateAdvanced
   // null for some reason and no checkbox
@@ -151,7 +182,7 @@ class SsoFormStore {
 
   phone = SSO_PHONE;
 
-  usersType = EmployeeType.User;
+  usersType: EmployeeType = EmployeeType.User;
 
   hideAuthPage = false;
 
@@ -209,7 +240,7 @@ class SsoFormStore {
   // error messages
   // uploadXmlUrlErrorMessage = null;
 
-  errorMessage = null;
+  errorMessage: string | null = null;
 
   isSubmitLoading = false;
 
@@ -217,7 +248,7 @@ class SsoFormStore {
 
   isCertificateLoading = false;
 
-  defaultSettings = null;
+  defaultSettings: TGetSsoSettings | null = null;
 
   editIndex = 0;
 
@@ -225,9 +256,9 @@ class SsoFormStore {
 
   isInit = false;
 
-  settingsStore = null;
+  settingsStore: SettingsStore | null = null;
 
-  constructor(settingsStore) {
+  constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
   }
@@ -237,13 +268,16 @@ class SsoFormStore {
     await this.load();
   };
 
-  setIsInit = (isInit) => {
+  setIsInit = (isInit: boolean) => {
     this.isInit = isInit;
   };
 
   load = async () => {
     const abortController = new AbortController();
-    this.settingsStore.addAbortControllers(abortController);
+    // FABLE5-REVIEW: settingsStore is assigned in the constructor and is never
+    // null in practice; `!` preserves the old JS behavior (which would also
+    // have thrown on null).
+    this.settingsStore!.addAbortControllers(abortController);
 
     try {
       const res = await getCurrentSsoSettings(abortController.signal);
@@ -259,7 +293,7 @@ class SsoFormStore {
     }
   };
 
-  ssoToggle = (t) => {
+  ssoToggle = (t: TTranslation) => {
     if (!this.enableSso) {
       this.enableSso = true;
       this.serviceProviderSettings = true;
@@ -270,27 +304,31 @@ class SsoFormStore {
     }
 
     Object.keys(this).forEach((key) => {
-      if (key.includes("ErrorMessage")) this[key] = null;
+      if (key.includes("ErrorMessage"))
+        (this as unknown as Record<string, unknown>)[key] = null;
     });
   };
 
-  setInput = (e) => {
-    this[e.target.name] = e.target.value;
+  setInput = (e: ChangeEvent<HTMLInputElement>) => {
+    (this as unknown as Record<string, unknown>)[e.target.name] =
+      e.target.value;
   };
 
-  setComboBox = (option, field) => {
-    this[field] = option.key;
+  setComboBox = (option: TOption, field: string) => {
+    (this as unknown as Record<string, unknown>)[field] = option.key;
   };
 
-  setHideLabel = (label) => {
-    this[label] = !this[label];
+  setHideLabel = (label: string) => {
+    const self = this as unknown as Record<string, unknown>;
+    self[label] = !self[label];
   };
 
-  setCheckbox = (e) => {
-    this[e.target.name] = e.target.checked;
+  setCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
+    (this as unknown as Record<string, unknown>)[e.target.name] =
+      e.target.checked;
   };
 
-  setUsersType = (usersType) => {
+  setUsersType = (usersType: EmployeeType) => {
     this.usersType = usersType;
   };
 
@@ -318,19 +356,19 @@ class SsoFormStore {
     this.isEdit = false;
   };
 
-  setComboBoxOption = (option) => {
-    this.spAction = option.key;
+  setComboBoxOption = (option: TOption) => {
+    this.spAction = option.key as string;
   };
 
-  setIsSsoEnabled = (isSsoEnabled) => {
+  setIsSsoEnabled = (isSsoEnabled: boolean) => {
     this.isSsoEnabled = isSsoEnabled;
   };
 
-  setSpMetadata = (spMetadata) => {
+  setSpMetadata = (spMetadata: boolean) => {
     this.spMetadata = spMetadata;
   };
 
-  setDefaultSettings = (defaultSettings) => {
+  setDefaultSettings = (defaultSettings: TGetSsoSettings) => {
     this.defaultSettings = defaultSettings;
   };
 
@@ -350,12 +388,14 @@ class SsoFormStore {
     this.confirmationResetModal = false;
   };
 
-  uploadByUrl = async (t) => {
+  uploadByUrl = async (t: TTranslation) => {
     const data = { url: this.uploadXmlUrl };
 
     try {
       this.isLoadingXml = true;
-      const response = await loadXmlMetadata(data);
+      const response = (await loadXmlMetadata(data)) as AxiosResponse<{
+        meta: TUploadedXmlMetadata;
+      }>;
       this.setFieldsFromMetaData(response.data.meta);
       this.hideErrors();
       this.isLoadingXml = false;
@@ -366,7 +406,7 @@ class SsoFormStore {
     }
   };
 
-  uploadXml = async (file) => {
+  uploadXml = async (file: File) => {
     if (!file.type.includes("text/xml")) return console.log("invalid format");
 
     const data = new FormData();
@@ -374,24 +414,27 @@ class SsoFormStore {
 
     try {
       this.isLoadingXml = true;
-      const response = await uploadXmlMetadata(data);
+      const response = (await uploadXmlMetadata(data)) as AxiosResponse<{
+        meta: TUploadedXmlMetadata;
+      }>;
       this.setFieldsFromMetaData(response.data.meta);
       this.hideErrors();
       this.isLoadingXml = false;
     } catch (err) {
       this.isLoadingXml = false;
-      toastr.error(err);
+      toastr.error(err as string);
       console.error(err);
     }
   };
 
-  validateCertificate = async (crts) => {
+  validateCertificate = async (crts: TSsoCertificate[]) => {
     const data = { certs: crts };
 
     try {
-      return await validateCerts(data);
+      return (await validateCerts(data)) as AxiosResponse<TSsoCertificate[]>;
     } catch (err) {
-      toastr.error(err?.response?.data || err);
+      const error = err as { response?: { data?: string } };
+      toastr.error(error?.response?.data || (err as string));
       console.error("validateCertificate failed", { err });
     }
   };
@@ -400,13 +443,13 @@ class SsoFormStore {
     try {
       this.isGeneratedCertificate = true;
 
-      const res = await generateCerts();
+      const res = (await generateCerts()) as AxiosResponse<TSsoCertificate>;
       this.setGeneratedCertificate(res.data);
 
       this.isGeneratedCertificate = false;
     } catch (err) {
       this.isGeneratedCertificate = false;
-      toastr.error(err);
+      toastr.error(err as string);
       console.error(err);
     }
   };
@@ -465,7 +508,7 @@ class SsoFormStore {
     };
   };
 
-  saveSsoSettings = async (t) => {
+  saveSsoSettings = async (t: TTranslation) => {
     this.checkRequiredFields();
 
     const settings = this.getSettings();
@@ -479,7 +522,7 @@ class SsoFormStore {
       this.isSubmitLoading = false;
       this.load();
     } catch (err) {
-      toastr.error(err);
+      toastr.error(err as string);
       console.error(err);
       this.isSubmitLoading = false;
     }
@@ -487,17 +530,20 @@ class SsoFormStore {
 
   resetForm = async () => {
     try {
-      const config = await resetSsoForm();
+      // FABLE5-REVIEW: resetSsoForm is untyped in shared/api (returns
+      // request(options) without a generic); the DELETE /settings/ssov2
+      // endpoint returns the default SSO settings object.
+      const config = (await resetSsoForm()) as TGetSsoSettings;
 
       this.setFields(config);
       this.hideErrors();
     } catch (err) {
-      toastr.error(err);
+      toastr.error(err as string);
       console.error(err);
     }
   };
 
-  setFields = (config) => {
+  setFields = (config: TGetSsoSettings) => {
     const {
       enableSso,
       idpSettings,
@@ -586,7 +632,7 @@ class SsoFormStore {
     this.usersType = usersType || EmployeeType.User;
   };
 
-  setSsoUrls = (o) => {
+  setSsoUrls = (o: TSsoIdpSettings) => {
     switch (o.ssoBinding) {
       case BINDING_POST:
         this.ssoUrlPost = o.ssoUrl;
@@ -599,7 +645,7 @@ class SsoFormStore {
     }
   };
 
-  setSloUrls = (o) => {
+  setSloUrls = (o: TSsoIdpSettings) => {
     switch (o.sloBinding) {
       case BINDING_POST:
         this.sloUrlPost = o.sloUrl;
@@ -612,24 +658,31 @@ class SsoFormStore {
     }
   };
 
-  getPropValue = (obj, propName) => {
+  getPropValue = (
+    obj: TSsoMetadataService | TSsoMetadataService[] | undefined,
+    propName: string,
+  ) => {
     let value = "";
 
     if (!obj) return value;
 
-    if (hasOwnProperty(obj, propName)) return obj[propName];
+    // FABLE5-REVIEW: parsed XML metadata values are untyped on the server
+    // side; the old JS returned whatever was stored under the property, the
+    // `as string` casts below preserve that behavior.
+    if (hasOwnProperty(obj, propName))
+      return (obj as Record<string, unknown>)[propName] as string;
 
     if (
       hasOwnProperty(obj, "binding") &&
       hasOwnProperty(obj, "location") &&
-      obj.binding == propName
+      (obj as TSsoMetadataService).binding == propName
     )
-      return obj.location;
+      return (obj as TSsoMetadataService).location as string;
 
     if (Array.isArray(obj)) {
       obj.forEach((item) => {
         if (hasOwnProperty(item, propName)) {
-          value = item[propName];
+          value = (item as Record<string, unknown>)[propName] as string;
           return;
         }
 
@@ -638,7 +691,7 @@ class SsoFormStore {
           hasOwnProperty(item, "location") &&
           item.binding == propName
         ) {
-          value = item.location;
+          value = item.location as string;
         }
       });
     }
@@ -646,15 +699,15 @@ class SsoFormStore {
     return value;
   };
 
-  includePropertyValue = (obj, value) => {
+  includePropertyValue = (obj: object, value: string) => {
     const props = Object.getOwnPropertyNames(obj);
     for (let i = 0; i < props.length; i++) {
-      if (obj[props[i]] === value) return true;
+      if ((obj as Record<string, unknown>)[props[i]] === value) return true;
     }
     return false;
   };
 
-  setFieldsFromMetaData = async (meta) => {
+  setFieldsFromMetaData = async (meta: TUploadedXmlMetadata) => {
     if (meta.entityID) {
       this.entityId = meta.entityID || "";
     }
@@ -703,7 +756,7 @@ class SsoFormStore {
     }
 
     if (meta.certificate) {
-      const data = [];
+      const data: TSsoCertificate[] = [];
 
       if (meta.certificate.signing) {
         if (Array.isArray(meta.certificate.signing)) {
@@ -729,8 +782,11 @@ class SsoFormStore {
       const newCertificates = await this.validateCertificate(data);
       this.idpCertificates = [];
 
-      newCertificates.data.forEach((cert) => {
-        if (newCertificates.data.length > 1) {
+      // FABLE5-REVIEW: validateCertificate returns undefined when validation
+      // fails; the old JS would throw on `.data` of undefined here — `!`
+      // preserves that behavior.
+      newCertificates!.data.forEach((cert) => {
+        if (newCertificates!.data.length > 1) {
           this.idpCertificates = [...this.idpCertificates, cert];
         } else {
           this.idpCertificates = [cert];
@@ -752,13 +808,17 @@ class SsoFormStore {
     }
   };
 
-  getUniqueItems = (inputArray) => {
+  getUniqueItems = <T,>(inputArray: T[]) => {
     return inputArray.filter(
       (item, index) => inputArray.indexOf(item) === index,
     );
   };
 
-  setSpCertificate = (certificate, index, isEdit) => {
+  setSpCertificate = (
+    certificate: TSsoCertificate,
+    index: number,
+    isEdit: boolean,
+  ) => {
     this.spCertificate = certificate.crt;
     this.spPrivateKey = certificate.key;
     this.spAction = certificate.action;
@@ -767,7 +827,11 @@ class SsoFormStore {
     this.spIsModalVisible = true;
   };
 
-  setIdpCertificate = (certificate, index, isEdit) => {
+  setIdpCertificate = (
+    certificate: TSsoCertificate,
+    index: number,
+    isEdit: boolean,
+  ) => {
     this.idpCertificate = certificate.crt;
     this.idpPrivateKey = certificate.key;
     this.idpAction = certificate.action;
@@ -776,7 +840,7 @@ class SsoFormStore {
     this.idpIsModalVisible = true;
   };
 
-  resetSpCheckboxes = (action) => {
+  resetSpCheckboxes = (action: string) => {
     if (action === SSO_SIGNING_ENCRYPT) {
       this.spSignAuthRequests = false;
       this.spSignLogoutRequests = false;
@@ -799,14 +863,14 @@ class SsoFormStore {
     this.idpVerifyLogoutResponsesSign = false;
   };
 
-  delSpCertificate = (action) => {
+  delSpCertificate = (action: string) => {
     this.resetSpCheckboxes(action);
     this.spCertificates = this.spCertificates.filter(
       (certificate) => certificate.action !== action,
     );
   };
 
-  delIdpCertificate = (cert) => {
+  delIdpCertificate = (cert: string) => {
     this.resetIdpCheckboxes();
     this.idpCertificates = this.idpCertificates.filter(
       (certificate) => certificate.crt !== cert,
@@ -829,7 +893,7 @@ class SsoFormStore {
     );
   };
 
-  addSpCertificate = async (t) => {
+  addSpCertificate = async (t: TTranslation) => {
     const data = [
       {
         crt: this.spCertificate,
@@ -866,12 +930,12 @@ class SsoFormStore {
       this.closeSpModal();
     } catch (err) {
       this.isCertificateLoading = false;
-      toastr.error(err);
+      toastr.error(err as string);
       console.error(err);
     }
   };
 
-  checkedSpBoxes = (cert) => {
+  checkedSpBoxes = (cert: TSsoCertificate) => {
     if (cert.action === SSO_SIGNING) {
       this.spSignAuthRequests = true;
       this.spSignLogoutRequests = true;
@@ -886,7 +950,7 @@ class SsoFormStore {
     }
   };
 
-  addIdpCertificate = async (t) => {
+  addIdpCertificate = async (t: TTranslation) => {
     const data = [
       {
         crt: this.idpCertificate,
@@ -926,12 +990,12 @@ class SsoFormStore {
       this.closeIdpModal();
     } catch (err) {
       this.isCertificateLoading = false;
-      toastr.error(err);
+      toastr.error(err as string);
       console.error(err);
     }
   };
 
-  checkedIdpBoxes = (cert) => {
+  checkedIdpBoxes = (cert: TSsoCertificate) => {
     if (cert.action === "verification") {
       this.idpVerifyAuthResponsesSign = true;
       this.idpVerifyLogoutRequestsSign = true;
@@ -946,48 +1010,49 @@ class SsoFormStore {
     }
   };
 
-  setGeneratedCertificate = (certificateObject) => {
+  setGeneratedCertificate = (certificateObject: TSsoCertificate) => {
     this.spCertificate = certificateObject.crt;
     this.spPrivateKey = certificateObject.key;
   };
 
-  getError = (field) => {
+  getError = (field: string) => {
     const fieldError = `${field}HasError`;
     console.log("getError", fieldError);
-    return this[fieldError] !== null;
+    return (this as unknown as Record<string, unknown>)[fieldError] !== null;
   };
 
-  setError = (field, value) => {
+  setError = (field: string, value: string | boolean) => {
     if (typeof value === "boolean") return;
 
     const fieldError = `${field}HasError`;
 
     try {
       this.validate(value);
-      this[fieldError] = false;
+      (this as unknown as Record<string, unknown>)[fieldError] = false;
       this.errorMessage = null;
     } catch (err) {
-      this[fieldError] = true;
-      this.errorMessage = err.message;
+      (this as unknown as Record<string, unknown>)[fieldError] = true;
+      this.errorMessage = (err as Error).message;
     }
   };
 
-  hideError = (field) => {
+  hideError = (field: string) => {
     const fieldError = `${field}HasError`;
-    this[fieldError] = false;
+    (this as unknown as Record<string, unknown>)[fieldError] = false;
     this.errorMessage = null;
   };
 
   hideErrors = () => {
     Object.keys(this).forEach((key) => {
-      if (key.includes("HasError") && this[key] !== false) {
+      const self = this as unknown as Record<string, unknown>;
+      if (key.includes("HasError") && self[key] !== false) {
         console.log("key", key);
-        this[key] = false;
+        self[key] = false;
       }
     });
   };
 
-  validate = (string) => {
+  validate = (string: string) => {
     if (string.trim().length === 0) throw new Error("EmptyFieldError");
     else return true;
   };
@@ -1018,7 +1083,9 @@ class SsoFormStore {
 
   get hasErrors() {
     return Object.keys(this).some(
-      (key) => key.includes("HasError") && this[key] !== false,
+      (key) =>
+        key.includes("HasError") &&
+        (this as unknown as Record<string, unknown>)[key] !== false,
     );
   }
 
@@ -1078,7 +1145,10 @@ class SsoFormStore {
 
   scrollToField = () => {
     Object.keys(this).every((key) => {
-      if (key.includes("HasError") && this[key] !== false) {
+      if (
+        key.includes("HasError") &&
+        (this as unknown as Record<string, unknown>)[key] !== false
+      ) {
         const name = key.replace("HasError", "");
         const element = document.getElementsByName(name)?.[0];
         if (element) {

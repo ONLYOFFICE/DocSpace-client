@@ -47,10 +47,31 @@ import resizeImage from "resize-image";
 import api from "@docspace/shared/api";
 import { calculateRoomLogoParams } from "@docspace/ui-kit/utils";
 
-class AvatarEditorDialogStore {
-  uploadedFile = null;
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { TTranslation } from "@docspace/shared/types";
 
-  image = {
+type TUploadedFile = File | null | undefined;
+
+export type TAvatarImage = {
+  uploadedFile: TUploadedFile;
+  x: number;
+  y: number;
+  zoom: number;
+};
+
+export type TIconCrop = { x: number; y: number; zoom: number };
+
+// FABLE5-REVIEW: FilesStore is still .js (wave 3) — replace this structural
+// type with `import type` once it is converted.
+type TFilesStore = {
+  setActiveFolders: (folders: unknown[]) => void;
+  updateRoom: (item: unknown, room: unknown) => void;
+};
+
+class AvatarEditorDialogStore {
+  uploadedFile: TUploadedFile = null;
+
+  image: TAvatarImage = {
     uploadedFile: this.uploadedFile,
     x: 0.5,
     y: 0.5,
@@ -59,18 +80,22 @@ class AvatarEditorDialogStore {
 
   avatarEditorDialogVisible = false;
 
-  constructor(filesStore, settingsStore) {
+  filesStore: TFilesStore;
+
+  settingsStore: SettingsStore;
+
+  constructor(filesStore: TFilesStore, settingsStore: SettingsStore) {
     makeAutoObservable(this);
 
     this.filesStore = filesStore;
     this.settingsStore = settingsStore;
   }
 
-  setAvatarEditorDialogVisible = (visible) => {
+  setAvatarEditorDialogVisible = (visible: boolean) => {
     this.avatarEditorDialogVisible = visible;
   };
 
-  setUploadedFile = (file) => {
+  setUploadedFile = (file: TUploadedFile) => {
     this.uploadedFile = file;
   };
 
@@ -78,21 +103,27 @@ class AvatarEditorDialogStore {
     this.uploadedFile = null;
   };
 
-  setImage = (image) => {
+  setImage = (image: TAvatarImage) => {
     this.image = { ...image, uploadedFile: this.uploadedFile };
   };
 
-  onChangeFile = async (e, t) => {
+  onChangeFile = async (e: unknown, t: TTranslation) => {
     const uploadedFile = await this.uploadFile(t, e);
     this.setImage({ ...this.image, uploadedFile });
   };
 
   getUploadedLogoData = async () => {
     const uploadLogoData = new FormData();
-    uploadLogoData.append(0, this.uploadedFile);
+    // FABLE5-REVIEW: historically append(0, file) relied on JS coercion of
+    // both arguments; uploadedFile is guarded non-null by the only caller.
+    uploadLogoData.append("0", this.uploadedFile as File);
 
-    const responseData = await api.rooms.uploadRoomLogo(uploadLogoData);
-    const url = URL.createObjectURL(this.uploadedFile);
+    // FABLE5-REVIEW: uploadRoomLogo is untyped in shared/api — cast until
+    // the api layer is typed.
+    const responseData = (await api.rooms.uploadRoomLogo(uploadLogoData)) as {
+      data: string;
+    };
+    const url = URL.createObjectURL(this.uploadedFile as File);
     const img = new Image();
 
     this.setImage({ uploadedFile: null, x: 0.5, y: 0.5, zoom: 1 });
@@ -105,8 +136,13 @@ class AvatarEditorDialogStore {
     };
   };
 
-  onSaveRoomLogo = async (roomId, icon, item, needUpdate = false) => {
-    let room;
+  onSaveRoomLogo = async (
+    roomId: number | string | undefined,
+    icon: TIconCrop,
+    item: unknown,
+    needUpdate = false,
+  ) => {
+    let room: unknown;
 
     if (!this.uploadedFile) return;
 
@@ -115,7 +151,7 @@ class AvatarEditorDialogStore {
     const data = await this.getUploadedLogoData();
     const { responseData, url, img } = data;
 
-    const promise = new Promise((resolve) => {
+    const promise = new Promise<void>((resolve) => {
       img.onload = async () => {
         const { x, y, zoom } = icon;
 
@@ -125,7 +161,7 @@ class AvatarEditorDialogStore {
             ...calculateRoomLogoParams(img, x, y, zoom),
           });
         } catch (e) {
-          toastr.error(e);
+          toastr.error(e as string);
         }
 
         needUpdate && updateRoom(item, room);
@@ -142,7 +178,7 @@ class AvatarEditorDialogStore {
     this.setAvatarEditorDialogVisible(false);
   };
 
-  uploadFile = async (t, e) => {
+  uploadFile = async (t: TTranslation, e: unknown) => {
     const file = await getFilesFromEvent(e);
     const uploadedFile = await this.uploadFileToImageEditor(t, file[0]);
 
@@ -154,11 +190,11 @@ class AvatarEditorDialogStore {
   };
 
   resizeRecursiveAsync = async (
-    img,
-    canvas,
-    compressionRatio = COMPRESSION_RATIO,
+    img: { width: number; height: number },
+    canvas: HTMLCanvasElement,
+    compressionRatio: number = COMPRESSION_RATIO,
     depth = 0,
-  ) => {
+  ): Promise<File> => {
     const data = resizeImage.resize(
       canvas,
       img.width / compressionRatio,
@@ -191,7 +227,10 @@ class AvatarEditorDialogStore {
     );
   };
 
-  uploadFileToImageEditor = async (t, file) => {
+  uploadFileToImageEditor = async (
+    t: TTranslation,
+    file: File,
+  ): Promise<File | undefined> => {
     try {
       const imageBitMap = await createImageBitmap(file);
 
@@ -207,6 +246,7 @@ class AvatarEditorDialogStore {
       )
         .then((f) => {
           if (f instanceof File) return f;
+          return undefined;
         })
         .catch((error) => {
           if (
@@ -215,6 +255,7 @@ class AvatarEditorDialogStore {
           ) {
             toastr.error(t("Common:SizeImageLarge"));
           }
+          return undefined;
         });
     } catch (error) {
       console.error(error);

@@ -268,7 +268,7 @@ const setAgentParams = ({
       iconWasUpdated: agentParams.iconWasUpdated,
     };
 
-    const uploadedFile = await uploadFile?.(t, e);
+    const uploadedFile = (await uploadFile?.(t, e)) as File | null;
 
     setAgentParams({
       ...agentParams,

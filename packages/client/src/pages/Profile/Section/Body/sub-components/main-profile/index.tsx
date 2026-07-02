@@ -85,6 +85,7 @@ import DialogStore from "SRC_DIR/store/contacts/DialogStore";
 import TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
 import CampaignsStore from "SRC_DIR/store/CampaignsStore";
 import PluginStore from "SRC_DIR/store/PluginStore";
+import type { TAvatarImage } from "SRC_DIR/store/AvatarEditorDialogStore";
 
 import styles from "./Profile.module.scss";
 import { getConstName } from "@docspace/shared/constants/consts";
@@ -296,7 +297,7 @@ const MainProfile = (props: MainProfileProps) => {
 	const model = getProfileModel?.(t);
 
 	const onChangeIcon = (icon: unknown) => {
-		setImage?.(icon);
+		setImage?.(icon as TAvatarImage);
 	};
 
 	const userAvatar =

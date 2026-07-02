@@ -41,6 +41,7 @@ import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
+import type { TIconCrop } from "SRC_DIR/store/AvatarEditorDialogStore";
 import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
 import { getAvailableInfoPanelTabs } from "SRC_DIR/helpers/info-panel/tabs";
 
@@ -221,7 +222,12 @@ const InfoPanelBodyGeneral = ({
           onClose={() => setAvatarEditorDialogVisible(false)}
           onSave={(img: unknown) =>
             !templateEventVisible
-              ? onSaveRoomLogo(selection?.id, img, selection, true)
+              ? onSaveRoomLogo(
+                  selection?.id,
+                  img as TIconCrop,
+                  selection,
+                  true,
+                )
               : setAvatarEditorDialogVisible(false)
           }
           onChangeFile={onChangeFile}

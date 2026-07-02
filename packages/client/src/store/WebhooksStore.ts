@@ -48,26 +48,71 @@ import {
   updateWebhook,
 } from "@docspace/shared/api/settings";
 
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { TTranslation } from "@docspace/shared/types";
+import type { DateTime } from "luxon";
+
+// FABLE5-REVIEW: the webhook API in shared/api/settings is untyped — these
+// shapes are inferred from server responses and component usage.
+export type TWebhook = {
+  id: number;
+  name: string;
+  uri: string;
+  secretKey?: string;
+  enabled: boolean;
+  ssl?: boolean;
+  status?: number;
+  triggers?: number;
+  createdBy?: string;
+  targetId?: string;
+};
+
+type TWebhookConfigData = {
+  configs: TWebhook;
+  status: number;
+};
+
+export type TWebhookHistoryItem = {
+  id: number;
+  configName?: string;
+} & Record<string, unknown>;
+
+export type TWebhookHistoryFilters = {
+  deliveryDate: DateTime | null;
+  deliveryFrom?: DateTime;
+  deliveryTo?: DateTime;
+  status: number[];
+};
+
+type TJournalParams = {
+  configId?: number;
+  eventId?: number;
+  count?: number;
+  startIndex?: number;
+} & Record<string, unknown>;
+
+type TJournalData = { items: TWebhookHistoryItem[]; total: number };
+
 class WebhooksStore {
-  settingsStore;
+  settingsStore: SettingsStore;
 
-  webhooks = [];
+  webhooks: TWebhook[] = [];
 
-  webhookTriggers = [];
+  webhookTriggers: unknown[] = [];
 
-  checkedEventIds = [];
+  checkedEventIds: number[] = [];
 
-  historyFilters = null;
+  historyFilters: TWebhookHistoryFilters | null = null;
 
-  historyItems = [];
+  historyItems: TWebhookHistoryItem[] = [];
 
   startIndex = 0;
 
   totalItems = 0;
 
-  currentWebhook = {};
+  currentWebhook: Partial<TWebhook> = {};
 
-  eventDetails = {};
+  eventDetails: Partial<TWebhookHistoryItem> | undefined = {};
 
   FETCH_COUNT = 100;
 
@@ -75,9 +120,9 @@ class WebhooksStore {
 
   configName = "";
 
-  errorWebhooks = null;
+  errorWebhooks: { error: string } | null = null;
 
-  constructor(settingsStore) {
+  constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
 
     this.settingsStore = settingsStore;
@@ -91,12 +136,12 @@ class WebhooksStore {
     this.isRetryPending = true;
   };
 
-  setCurrentWebhook = (webhook) => {
+  setCurrentWebhook = (webhook: TWebhook) => {
     this.currentWebhook = webhook;
   };
 
   loadWebhookTriggers = async () => {
-    const triggers = await getWebhookTriggers();
+    const triggers = (await getWebhookTriggers()) as unknown[];
     runInAction(() => {
       this.webhookTriggers = triggers;
     });
@@ -109,7 +154,9 @@ class WebhooksStore {
     this.settingsStore.addAbortControllers(abortController);
 
     try {
-      const webhooksData = await getAllWebhooks(abortController.signal);
+      const webhooksData = (await getAllWebhooks(
+        abortController.signal,
+      )) as TWebhookConfigData[];
       if (!passwordSettings) {
         await getPortalPasswordSettings();
       }
@@ -137,15 +184,15 @@ class WebhooksStore {
     }
   };
 
-  addWebhook = async (webhook) => {
-    const webhookData = await createWebhook(
+  addWebhook = async (webhook: TWebhook) => {
+    const webhookData = (await createWebhook(
       webhook.name,
       webhook.uri,
       webhook.secretKey,
       webhook.ssl,
       webhook.triggers,
       webhook.targetId,
-    );
+    )) as TWebhook;
 
     this.webhooks = [
       ...this.webhooks,
@@ -163,7 +210,7 @@ class WebhooksStore {
     ];
   };
 
-  toggleEnabled = async (desiredWebhook, t) => {
+  toggleEnabled = async (desiredWebhook: TWebhook, t: TTranslation) => {
     try {
       const res = await toggleEnabledWebhook(desiredWebhook);
       const index = this.webhooks.findIndex(
@@ -178,18 +225,18 @@ class WebhooksStore {
 
       return res;
     } catch (error) {
-      toastr.error(error);
+      toastr.error(error as string);
     }
   };
 
-  deleteWebhook = async (webhook) => {
+  deleteWebhook = async (webhook: TWebhook) => {
     await removeWebhook(webhook.id);
     this.webhooks = this.webhooks.filter(
       (currentWebhook) => currentWebhook.id !== webhook.id,
     );
   };
 
-  editWebhook = async (prevWebhook, webhookInfo) => {
+  editWebhook = async (prevWebhook: TWebhook, webhookInfo: TWebhook) => {
     await updateWebhook(
       prevWebhook.id,
       webhookInfo.name,
@@ -206,12 +253,12 @@ class WebhooksStore {
     );
   };
 
-  fetchConfigName = async (params) => {
-    const historyData = await getWebhooksJournal({
+  fetchConfigName = async (params: TJournalParams) => {
+    const historyData = (await getWebhooksJournal({
       ...params,
       startIndex: 0,
       count: 1,
-    });
+    })) as TJournalData;
 
     this.configName = historyData.items[0]?.configName || "";
   };
@@ -220,15 +267,15 @@ class WebhooksStore {
     this.configName = "";
   };
 
-  fetchHistoryItems = async (params) => {
+  fetchHistoryItems = async (params: TJournalParams) => {
     this.totalItems = 0;
     this.startIndex = 0;
     const count = params.count ? params.count : this.FETCH_COUNT;
-    const historyData = await getWebhooksJournal({
+    const historyData = (await getWebhooksJournal({
       ...params,
       startIndex: this.startIndex,
       count,
-    });
+    })) as TJournalData;
     runInAction(() => {
       this.startIndex = count;
       this.historyItems = historyData.items;
@@ -236,21 +283,21 @@ class WebhooksStore {
     });
   };
 
-  fetchMoreItems = async (params) => {
+  fetchMoreItems = async (params: TJournalParams) => {
     const count = params.count ? params.count : this.FETCH_COUNT;
-    const historyData = await getWebhooksJournal({
+    const historyData = (await getWebhooksJournal({
       ...params,
       startIndex: this.startIndex,
       count,
-    });
+    })) as TJournalData;
     runInAction(() => {
       this.startIndex += count;
       this.historyItems = [...this.historyItems, ...historyData.items];
     });
   };
 
-  fetchEventData = async (eventId) => {
-    const data = await getWebhooksJournal({ eventId });
+  fetchEventData = async (eventId: number) => {
+    const data = (await getWebhooksJournal({ eventId })) as TJournalData;
     this.eventDetails = data.items[0];
   };
 
@@ -262,7 +309,7 @@ class WebhooksStore {
     return this.webhooks.length === 0;
   }
 
-  setHistoryFilters = (filters) => {
+  setHistoryFilters = (filters: TWebhookHistoryFilters | null) => {
     this.historyFilters = filters;
   };
 
@@ -271,23 +318,27 @@ class WebhooksStore {
   };
 
   clearDate = () => {
-    this.historyFilters = { ...this.historyFilters, deliveryDate: null };
+    // FABLE5-REVIEW: historically spread a possibly-null historyFilters;
+    // non-null assertions keep the same runtime shape.
+    this.historyFilters = { ...this.historyFilters!, deliveryDate: null };
   };
 
-  unselectStatus = (statusCode) => {
+  unselectStatus = (statusCode: number) => {
     this.historyFilters = {
-      ...this.historyFilters,
-      status: this.historyFilters.status.filter((item) => item !== statusCode),
+      ...this.historyFilters!,
+      status: this.historyFilters!.status.filter(
+        (item) => item !== statusCode,
+      ),
     };
   };
 
-  toggleEventId = (id) => {
+  toggleEventId = (id: number) => {
     this.checkedEventIds = this.checkedEventIds.includes(id)
       ? this.checkedEventIds.filter((checkedId) => checkedId !== id)
       : [...this.checkedEventIds, id];
   };
 
-  isIdChecked = (id) => {
+  isIdChecked = (id: number) => {
     return this.checkedEventIds.includes(id);
   };
 

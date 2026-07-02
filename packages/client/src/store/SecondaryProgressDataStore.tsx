@@ -33,31 +33,93 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type { ReactNode } from "react";
+
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { terminateOperation } from "@docspace/shared/api/files";
+import type { TFolder } from "@docspace/shared/api/files/types";
+import type { TTranslation } from "@docspace/shared/types";
 
+import type { TFunction } from "i18next";
 import { makeAutoObservable } from "mobx";
 import { Trans } from "react-i18next";
 
 import { createFolderNavigation } from "SRC_DIR/helpers/createFolderNavigation";
+// FABLE5-REVIEW: filesUtils is still .js — no types for
+// getOperationsProgressTitle until it is converted.
 import { getOperationsProgressTitle } from "SRC_DIR/helpers/filesUtils";
 
 import i18n from "../i18n";
+
+import type MediaViewerDataStore from "./MediaViewerDataStore";
+import type TreeFoldersStore from "./TreeFoldersStore";
+
+type TOperationName = (typeof OPERATIONS_NAME)[keyof typeof OPERATIONS_NAME];
+
+type TOperationError = string | { message?: string; error?: string };
+
+export type TSecondaryProgressInfo = {
+  operationId?: string | number;
+  serverOperationId?: string;
+  operationIds?: (string | number)[];
+  alert?: boolean;
+  completed?: boolean;
+  stopped?: boolean;
+  skipToast?: boolean;
+  percent?: number;
+  label?: string;
+  title?: string;
+  itemsCount?: number;
+  isFolder?: boolean;
+  error?: TOperationError;
+  destFolderInfo?: TFolder;
+};
+
+export type TSecondaryProgressData = TSecondaryProgressInfo & {
+  operation: TOperationName;
+  showPanel?: ((visible: boolean) => void) | null;
+  description?: string;
+};
+
+export type TSecondaryOperation = {
+  operation: TOperationName;
+  showPanel?: ((visible: boolean) => void) | null;
+  description?: string;
+  alert?: boolean;
+  stopped?: boolean;
+  items: TSecondaryProgressInfo[];
+  label?: string;
+  completed?: boolean;
+  percent?: number;
+};
 
 class SecondaryProgressDataStore {
   percent = 0;
 
   itemsSelectionLength = 0;
 
-  itemsSelectionTitle = null;
+  itemsSelectionTitle: string | null = null;
 
   isDownload = false;
 
-  secondaryOperationsArray = [];
+  secondaryOperationsArray: TSecondaryOperation[] = [];
 
-  constructor(treeFoldersStore, mediaViewerDataStore) {
+  treeFoldersStore: TreeFoldersStore;
+
+  mediaViewerDataStore: MediaViewerDataStore;
+
+  // FABLE5-REVIEW: filesActionsStore is attached after construction in
+  // store/index.js (`secondaryProgressDataStore.filesActionsStore = ...`).
+  // FilesActionsStore is still .js (wave 3) and no members are used inside
+  // this store, so it is typed as unknown for now.
+  declare filesActionsStore?: unknown;
+
+  constructor(
+    treeFoldersStore: TreeFoldersStore,
+    mediaViewerDataStore: MediaViewerDataStore,
+  ) {
     this.treeFoldersStore = treeFoldersStore;
     this.mediaViewerDataStore = mediaViewerDataStore;
     makeAutoObservable(this);
@@ -73,7 +135,11 @@ class SecondaryProgressDataStore {
     return this.secondaryOperationsArray.length > 0;
   }
 
-  showToast = async (currentOperation, operation, isSuccess = true) => {
+  showToast = async (
+    currentOperation: TSecondaryProgressInfo,
+    operation: TOperationName,
+    isSuccess = true,
+  ) => {
     if (
       operation !== OPERATIONS_NAME.copy &&
       operation !== OPERATIONS_NAME.duplicate &&
@@ -96,21 +162,33 @@ class SecondaryProgressDataStore {
 
       if (typeof errorMessage === "string") return errorMessage;
 
-      if (errorMessage.message) return errorMessage?.message;
+      // FABLE5-REVIEW: the old JS threw here when `error` was nullish and
+      // isSuccess=false; the non-null assertions keep that runtime unchanged.
+      if (errorMessage!.message) return errorMessage?.message;
 
-      if (errorMessage.error) return errorMessage.error;
+      if (errorMessage!.error) return errorMessage!.error;
     };
 
     if (!isSuccess && !getError()) {
       return;
     }
 
-    const t = (key, options) =>
-      i18n.t(key, { ...options, ns: ["Files", "Common"] });
+    // FABLE5-REVIEW: the Trans `t` prop requires a branded i18next TFunction;
+    // this wrapper only injects default namespaces, so the cast is safe.
+    const t = ((key: string, options?: Record<string, unknown>) =>
+      i18n.t(key, { ...options, ns: ["Files", "Common"] })) as TTranslation &
+      TFunction<"Common", undefined> &
+      TFunction<"translation", undefined>;
 
-    let toastTranslation = "";
+    let toastTranslation: ReactNode = "";
 
-    const { url, state } = await createFolderNavigation(destFolderInfo);
+    // FABLE5-REVIEW: createFolderNavigation is still .js — the cast mirrors
+    // its real signature (trailing params are unused here, exactly as before).
+    const { url, state } = await (
+      createFolderNavigation as unknown as (
+        item?: TFolder,
+      ) => Promise<{ url: string; state: { title?: string } }>
+    )(destFolderInfo);
 
     const onClickLocation = () => {
       toastr.clear();
@@ -131,7 +209,7 @@ class SecondaryProgressDataStore {
         <Link
           tag="a"
           onClick={onClickLocation}
-          target="_blank"
+          target={LinkTarget.blank}
           textDecoration="underline"
           color="accent"
         />
@@ -236,7 +314,7 @@ class SecondaryProgressDataStore {
       }
     }
 
-    if (itemsCount > 1) {
+    if ((itemsCount ?? 0) > 1) {
       const commonProps = {
         qty: itemsCount,
         folderName: state.title,
@@ -299,7 +377,9 @@ class SecondaryProgressDataStore {
       : toastr.error(toastTranslation, null, 0, true);
   };
 
-  setSecondaryProgressBarData = (secondaryProgressData) => {
+  setSecondaryProgressBarData = (
+    secondaryProgressData: TSecondaryProgressData,
+  ) => {
     const { operation, showPanel, description, ...progressInfo } =
       secondaryProgressData;
 
@@ -378,15 +458,18 @@ class SecondaryProgressDataStore {
     }
   };
 
-  setItemsSelectionTitle = (itemsSelectionTitle) => {
+  setItemsSelectionTitle = (itemsSelectionTitle: string | null) => {
     this.itemsSelectionTitle = itemsSelectionTitle;
   };
 
-  setItemsSelectionLength = (itemsSelectionLength) => {
+  setItemsSelectionLength = (itemsSelectionLength: number) => {
     this.itemsSelectionLength = itemsSelectionLength;
   };
 
-  clearSecondaryProgressData = (operationId, operation) => {
+  clearSecondaryProgressData = (
+    operationId?: string | number,
+    operation?: TOperationName,
+  ) => {
     if (!operationId && !operation) {
       const incompleteOperations = this.secondaryOperationsArray.filter(
         (item) => !item.completed,
@@ -443,7 +526,13 @@ class SecondaryProgressDataStore {
     }
   };
 
-  findOperationById = (itemId) => {
+  findOperationById = (
+    itemId: string | number,
+  ): {
+    operation: TOperationName | "";
+    item?: TSecondaryProgressInfo;
+    label?: string;
+  } => {
     const operation = this.secondaryOperationsArray.find((process) => {
       return process.items.some(
         (item) => item.operationIds && item.operationIds.includes(itemId),
@@ -467,9 +556,14 @@ class SecondaryProgressDataStore {
     };
   };
 
-  terminateItem = async (operation, item) => {
+  terminateItem = async (
+    operation: TOperationName,
+    item: TSecondaryProgressInfo,
+  ) => {
     try {
-      await terminateOperation(item.serverOperationId);
+      // FABLE5-REVIEW: both call sites guard on item.serverOperationId before
+      // calling; the assertion keeps the unguarded runtime call identical.
+      await terminateOperation(item.serverOperationId!);
       this.setSecondaryProgressBarData({
         operation,
         operationId: item.operationId,
@@ -485,7 +579,10 @@ class SecondaryProgressDataStore {
     }
   };
 
-  cancelSecondaryOperationById = async (operation, operationId) => {
+  cancelSecondaryOperationById = async (
+    operation: TOperationName,
+    operationId: string | number,
+  ) => {
     const op = this.secondaryOperationsArray.find(
       (o) => o.operation === operation,
     );

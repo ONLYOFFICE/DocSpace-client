@@ -47,6 +47,7 @@ import { getDocsConnectTrialState } from "../developer-tools/DocsConnect/utils";
 import config from "../../../../../package.json";
 import PaymentsEnterprise from "./Standalone";
 import DocsConnectGetStartedModal from "./SaaS/DocsConnectGetStartedModal";
+import BuyPlanPanel from "../developer-tools/DocsConnect/BuyPlanPanel";
 import {
   MainTariff,
   Wallet,
@@ -90,6 +91,8 @@ const PaymentsPage = (props) => {
     openGetStarted,
     closeGetStarted,
     fetchDocsConnectInfo,
+    openBuyPlan,
+    buyPlanPanelVisible,
   } = props;
   const location = useLocation();
   const [currentTabId, setCurrentTabId] = useState(
@@ -101,6 +104,11 @@ const PaymentsPage = (props) => {
 
   const onDocsConnectClick = () => {
     if (docsConnectInfo) {
+      const { isTrial, expired } = getDocsConnectTrialState(docsConnectInfo);
+      if (isTrial && expired) {
+        openBuyPlan?.("trial");
+        return;
+      }
       navigate(
         combineUrl(
           window.ClientConfig?.proxy?.url,
@@ -121,9 +129,10 @@ const PaymentsPage = (props) => {
         trialDaysLeft: 0,
         trialEndingSoon: false,
         trialExpired: false,
+        trialEndDate: "",
       };
 
-    const { isTrial, daysLeft, totalDays, expired } =
+    const { isTrial, daysLeft, totalDays, expired, endDate } =
       getDocsConnectTrialState(docsConnectInfo);
     const trialExpired = isTrial && expired;
     const trialEndingSoon =
@@ -135,6 +144,7 @@ const PaymentsPage = (props) => {
       trialDaysLeft: daysLeft,
       trialEndingSoon,
       trialExpired,
+      trialEndDate: endDate,
     };
   }, [docsConnectInfo]);
 
@@ -253,6 +263,7 @@ const PaymentsPage = (props) => {
         visible={getStartedVisible}
         onClose={closeGetStarted}
       />
+      {buyPlanPanelVisible ? <BuyPlanPanel /> : null}
     </BillingRoot>
   );
 };
@@ -293,6 +304,8 @@ export const Component = inject(
       openGetStarted: docsConnectStore?.openGetStarted,
       closeGetStarted: docsConnectStore?.closeGetStarted,
       fetchDocsConnectInfo: docsConnectStore?.fetchInfo,
+      openBuyPlan: docsConnectStore?.openBuyPlan,
+      buyPlanPanelVisible: docsConnectStore?.buyPlanPanelVisible,
       language: authStore?.language,
       user: user
         ? {

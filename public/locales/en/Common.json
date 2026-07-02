@@ -732,6 +732,7 @@
   "DisplaySettings": "Display settings",
   "DocsConnectTrialAvailable": "Free trial available | Then from {{price}} per user / month",
   "DocsConnectTrialDaysLeft": "{{count}} Free days left",
+  "DocsConnectTrialToggleDisabled": "Free trial cannot be turned off. It will expire automatically on {{date}}.",
   "Document": "Document",
   "DocumentAwareAI": "Document-aware AI",
   "DocumentAwareAIDescription": "Get precise answers instantly without searching through files.",

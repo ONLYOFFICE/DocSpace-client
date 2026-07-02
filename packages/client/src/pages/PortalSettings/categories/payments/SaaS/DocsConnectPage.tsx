@@ -118,10 +118,7 @@ const DocsConnectPage = ({
   const onViewMore = () => navigate(PAYMENT_ROUTES.usage);
   const onManage = () => navigate(DOCS_CONNECT_ROUTE);
   const onBuyPlan = () => openBuyPlan?.("trial");
-  const onGoToTenant = () => {
-    const address = info.tenant?.address;
-    if (address) window.open(address, "_blank", "noopener,noreferrer");
-  };
+  const onGoToTenant = () => navigate(DOCS_CONNECT_ROUTE);
 
   return (
     <div className={styles.container}>
@@ -252,7 +249,11 @@ const DocsConnectPage = ({
       )}
 
       <div className={styles.history}>
-        <TransactionHistory serviceName={DOCS_CONNECT_SERVICE} hideTypeFilter />
+        <TransactionHistory
+          serviceName={DOCS_CONNECT_SERVICE}
+          hideTypeFilter
+          hideContactFilter
+        />
       </div>
 
       {buyPlanPanelVisible ? <BuyPlanPanel /> : null}

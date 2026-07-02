@@ -146,7 +146,7 @@ const Statistics = ({
                 </Text>
                 <Text fontSize="12px" className={styles.muted}>
                   {t("DocsConnect:TrialBannerDescription", {
-                    count: daysLeft,
+                    count: 30,
                   })}
                 </Text>
                 <Text fontSize="12px" className={styles.muted}>
@@ -229,7 +229,9 @@ const Statistics = ({
               <ProgressBar percent={trialPercent} />
               <Text fontSize="12px" className={styles.muted}>
                 {expired
-                  ? t("DocsConnect:DaysRemaining", { count: daysLeft })
+                  ? t("DocsConnect:TrialDaysRemainingExpired", {
+                      count: daysLeft,
+                    })
                   : t("DocsConnect:TrialDaysRemaining", { count: daysLeft })}
               </Text>
             </div>

@@ -76,9 +76,9 @@ const useRootInit = ({ documentType }: UseRootInitProps) => {
     }
 
     if (icon) {
-      const el = document.getElementById("favicon") as HTMLLinkElement;
+      const el = document.getElementById("favicon") as HTMLLinkElement | null;
 
-      el.href = icon;
+      if (el) el.href = icon;
     }
   }, [documentType]);
 

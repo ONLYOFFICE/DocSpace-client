@@ -50,6 +50,10 @@ import {
   TOAST_FOLDER_PUBLIC_KEY,
 } from "@docspace/shared/constants";
 
+import type { TFileLink } from "@docspace/shared/api/files/types";
+import type { TValidateShareRoom } from "@docspace/shared/api/rooms/types";
+import type { RoomsType } from "@docspace/shared/enums";
+
 import {
   PersistenceKeys,
   hasPersisted,
@@ -57,18 +61,23 @@ import {
 } from "./utils/persistence";
 import { match } from "ts-pattern";
 
+import type ClientLoadingStore from "./ClientLoadingStore";
+
 class PublicRoomStore {
-  externalLinks = [];
+  externalLinks: TFileLink[] = [];
 
-  roomTitle = null;
+  roomTitle: string | null = null;
 
-  roomId = null;
+  roomId: string | null = null;
 
-  roomStatus = null;
+  roomStatus: ValidationStatus | null = null;
 
-  roomType = null;
+  // FABLE5-REVIEW: `roomType` is read from the validate-share response in
+  // setRoomData, but TValidateShareRoom does not declare it — verify whether
+  // the server DTO actually returns it (it may always be undefined at runtime).
+  roomType: RoomsType | null | undefined = null;
 
-  publicRoomKey = null;
+  publicRoomKey: string | null = null;
 
   isLoaded = false;
 
@@ -76,32 +85,37 @@ class PublicRoomStore {
 
   windowIsOpen = false;
 
-  clientLoadingStore;
+  clientLoadingStore: ClientLoadingStore;
 
-  filesStore;
+  // FABLE5-REVIEW: FilesStore is still .js (wave 3) — attached
+  // post-construction in store/index.js (`publicRoomStore.filesStore = ...`)
+  // and no members are accessed inside this store; replace `unknown` with
+  // `import type` once FilesStore is converted.
+  declare filesStore?: unknown;
 
-  /**
-   * @type {import("@docspace/shared/api/rooms/types").TValidateShareRoom | null}
-   */
-  validationData = null;
+  validationData: TValidateShareRoom | null = null;
 
-  constructor(clientLoadingStore, filesStore) {
+  constructor(clientLoadingStore: ClientLoadingStore, filesStore?: unknown) {
     this.clientLoadingStore = clientLoadingStore;
     this.filesStore = filesStore;
     makeAutoObservable(this);
   }
 
-  setIsSectionLoading = (param) => {
+  setIsSectionLoading = (param: boolean) => {
     this.clientLoadingStore?.setIsSectionFilterLoading(param);
     this.clientLoadingStore?.setIsSectionBodyLoading(param);
   };
 
-  setIsLoading = (isLoading) => {
+  setIsLoading = (isLoading: boolean) => {
     this.isLoading = isLoading;
   };
 
-  setRoomData = (data) => {
-    const { id, roomType, status, title } = data;
+  setRoomData = (data: TValidateShareRoom) => {
+    // FABLE5-REVIEW: `roomType` is not declared on TValidateShareRoom (see
+    // the field note above) — cast keeps the original destructuring intact.
+    const { id, roomType, status, title } = data as TValidateShareRoom & {
+      roomType?: RoomsType;
+    };
 
     this.roomTitle = title;
     this.roomId = id;
@@ -112,18 +126,26 @@ class PublicRoomStore {
     if (status === ValidationStatus.Ok) this.isLoaded = true;
   };
 
-  fetchPublicRoom = (fetchFiles) => {
+  fetchPublicRoom = (
+    fetchFiles: (folderId: string, filter: FilesFilter) => Promise<unknown>,
+  ) => {
     const filterObj = FilesFilter.getFilter(window.location);
 
     if (!filterObj) return;
 
     if (filterObj.folder === "@my") {
-      filterObj.folder = this.roomId;
+      // FABLE5-REVIEW: `roomId` may still be null here; the original .js
+      // assigned it regardless — the assertion keeps the same runtime.
+      filterObj.folder = this.roomId!;
     }
 
     this.setIsSectionLoading(true);
 
-    let dataObj = { filter: filterObj };
+    let dataObj: {
+      filter: FilesFilter;
+      type?: string;
+      itemId?: string;
+    } = { filter: filterObj };
 
     if (filterObj && filterObj.authorType) {
       const authorType = filterObj.authorType;
@@ -156,17 +178,24 @@ class PublicRoomStore {
         Promise.resolve(FilesFilter.getDefault());
       })
       .then((data) => {
-        const resolvedFilter = data[0];
+        // FABLE5-REVIEW: if the catch above ran, `data` is undefined and the
+        // original .js crashed here — the assertion keeps the same runtime.
+        const resolvedFilter = data![0];
 
         if (resolvedFilter) {
           const folderId = resolvedFilter.folder;
-          return fetchFiles(folderId, resolvedFilter).catch((error) => {
-            if (error?.response?.status === 403) {
-              window.location.replace(
-                combineUrl(window.ClientConfig?.proxy?.url, "/login"),
-              );
-            }
-          });
+          return fetchFiles(folderId, resolvedFilter).catch(
+            (error: unknown) => {
+              if (
+                (error as { response?: { status?: number } })?.response
+                  ?.status === 403
+              ) {
+                window.location.replace(
+                  combineUrl(window.ClientConfig?.proxy?.url, "/login"),
+                );
+              }
+            },
+          );
         }
 
         return Promise.resolve();
@@ -176,18 +205,22 @@ class PublicRoomStore {
       });
   };
 
-  fetchExternalLinks = (roomId) => {
+  fetchExternalLinks = (roomId: number | string) => {
     const type = 1;
-    return api.rooms.getExternalLinks(roomId, type);
+    // FABLE5-REVIEW: getExternalLinks is untyped in shared/api/rooms (bare
+    // `request(...)`) — cast until it gets a proper return type.
+    return api.rooms.getExternalLinks(roomId, type) as Promise<TFileLink[]>;
   };
 
-  getExternalLinks = async (roomId) => {
+  getExternalLinks = async (roomId: number | string) => {
     const externalLinks = await this.fetchExternalLinks(roomId);
     this.externalLinks = externalLinks;
   };
 
-  deleteExternalLink = (link, linkId) => {
-    let externalLinks = JSON.parse(JSON.stringify(this.externalLinks));
+  deleteExternalLink = (link: TFileLink | null, linkId: string) => {
+    let externalLinks = JSON.parse(
+      JSON.stringify(this.externalLinks),
+    ) as TFileLink[];
 
     if (link) {
       const linkIndex = externalLinks.findIndex(
@@ -201,7 +234,7 @@ class PublicRoomStore {
     this.externalLinks = externalLinks;
   };
 
-  setExternalLink = (link) => {
+  setExternalLink = (link: TFileLink) => {
     const linkIndex = this.externalLinks.findIndex(
       (l) => l.sharedTo.id === link.sharedTo.id,
     );
@@ -215,13 +248,13 @@ class PublicRoomStore {
     }
   };
 
-  setExternalLinks = (links) => {
+  setExternalLinks = (links: TFileLink[]) => {
     const externalLinks = links.filter((t) => t.sharedTo.shareLink); // shareLink
 
     this.externalLinks = externalLinks;
   };
 
-  editExternalLink = (roomId, link) => {
+  editExternalLink = (roomId: number | string, link: TFileLink) => {
     const linkType = LinkType.External;
 
     const {
@@ -234,21 +267,28 @@ class PublicRoomStore {
       internal,
     } = link.sharedTo;
 
+    // FABLE5-REVIEW: `expirationDate` and `disabled` are optional on
+    // TFileLink.sharedTo; the original .js passed them through as-is
+    // (possibly undefined) — the casts keep the same runtime.
     return api.rooms.editExternalLink(
       roomId,
       id,
       title,
       link.access,
-      expirationDate,
+      expirationDate as string | null,
       linkType,
       password,
-      disabled,
+      disabled as boolean,
       denyDownload,
       internal,
     );
   };
 
-  gotoFolder = async (res) => {
+  // FABLE5-REVIEW: validatePublicRoomKey calls `gotoFolder(res, key)` with a
+  // second argument the original .js function never declared or used — the
+  // unused optional param keeps that call site type-correct without changing
+  // runtime behavior.
+  gotoFolder = async (res: TValidateShareRoom, _key?: string) => {
     const categoryType = await match(res)
       .when(
         (res) => res.isRoom || res.isRoomMember,
@@ -296,7 +336,7 @@ class PublicRoomStore {
     window.location.replace(`${url}?${filter.toUrlParams()}`);
   };
 
-  validatePublicRoomKey = (key) => {
+  validatePublicRoomKey = (key: string) => {
     this.setIsLoading(true);
 
     const searchParams = new URLSearchParams(window.location.search);
@@ -309,8 +349,14 @@ class PublicRoomStore {
     if (fileId) params.set("fileId", fileId);
     if (folderId) params.set("folderId", folderId);
 
-    api.rooms
-      .validatePublicRoomKey(key, params)
+    // FABLE5-REVIEW: request() in shared/api is typed `Promise<T> | undefined`;
+    // the original .js chained `.then` unconditionally (crashing if it were
+    // ever undefined) — the cast keeps the same runtime.
+    (
+      api.rooms.validatePublicRoomKey(key, params) as Promise<
+        TValidateShareRoom
+      >
+    )
       .then((res) => {
         const needPassword = res.status === ValidationStatus.Password;
 
@@ -330,12 +376,12 @@ class PublicRoomStore {
       .finally(() => this.setIsLoading(false));
   };
 
-  validatePublicRoomPassword = (key, passwordHash) => {
+  validatePublicRoomPassword = (key: string, passwordHash: string) => {
     return api.rooms.validatePublicRoomPassword(key, passwordHash);
   };
 
   getAuthWindow = () => {
-    return new Promise((res, rej) => {
+    return new Promise<Window>((res, rej) => {
       try {
         const path = combineUrl(
           window.ClientConfig?.proxy?.url,

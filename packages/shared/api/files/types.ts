@@ -470,6 +470,10 @@ export type TFileLink = {
     expirationDate?: string | null;
     internal: boolean;
     password?: string;
+    /** Whether the link is disabled (returned for room external links). */
+    disabled?: boolean;
+    /** Whether the link belongs to a room template (returned for room external links). */
+    isTemplate?: boolean;
   };
   subjectType: number;
 };

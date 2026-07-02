@@ -1190,7 +1190,7 @@ class SettingsStore {
   };
 
   setCultures = (cultures: string[]) => {
-    this.cultures = cultures;
+    this.cultures = cultures ?? [];
   };
 
   setAdditionalResourcesData = (data: TAdditionalResources) => {
@@ -1408,7 +1408,7 @@ class SettingsStore {
   };
 
   setTimezones = (timezones: TTimeZone[]) => {
-    this.timezones = timezones;
+    this.timezones = timezones ?? [];
   };
 
   getPortalTimezones = async (token = undefined) => {

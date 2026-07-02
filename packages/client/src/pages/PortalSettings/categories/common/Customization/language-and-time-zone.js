@@ -61,13 +61,13 @@ import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHook
 import BetaBadge from "../../../../../components/BetaBadgeWrapper";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
-const mapTimezonesToArray = (timezones) => {
+const mapTimezonesToArray = (timezones = []) => {
   return timezones.map((timezone) => {
     return { key: timezone.id, label: timezone.displayName };
   });
 };
 
-const mapCulturesToArray = (cultures) => {
+const mapCulturesToArray = (cultures = []) => {
   return cultures.map((culture) => {
     return {
       key: culture,

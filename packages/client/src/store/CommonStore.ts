@@ -41,12 +41,16 @@ import { setDNSSettings } from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { DeviceType } from "@docspace/shared/enums";
 
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+
+type TDNSObj = { dnsName?: string; enable?: boolean };
+
 class CommonStore {
-  settingsStore = null;
+  settingsStore: SettingsStore;
 
-  portalName = null;
+  portalName: string | null = null;
 
-  dnsSettings = {
+  dnsSettings: { defaultObj: TDNSObj; customObj: TDNSObj } = {
     defaultObj: {},
     customObj: {},
   };
@@ -81,9 +85,9 @@ class CommonStore {
 
   greetingSettingsIsDefault = true;
 
-  deepLinkSettings = null;
+  deepLinkSettings: number | null = null;
 
-  constructor(settingsStore) {
+  constructor(settingsStore: SettingsStore) {
     this.settingsStore = settingsStore;
     makeAutoObservable(this);
   }
@@ -93,7 +97,7 @@ class CommonStore {
     this.setIsLoaded(false);
   };
 
-  initSettings = async (page) => {
+  initSettings = async (page?: string) => {
     const isMobileView = this.settingsStore.deviceType === DeviceType.mobile;
 
     if (this.isInit) return;
@@ -102,7 +106,7 @@ class CommonStore {
 
     const { standalone } = this.settingsStore;
 
-    const requests = [];
+    const requests: Promise<unknown>[] = [];
 
     if (isMobileView) {
       switch (page) {
@@ -150,9 +154,10 @@ class CommonStore {
     this.settingsStore.addAbortControllers(abortController);
 
     try {
-      const isDefault = await api.settings.getGreetingSettingsIsDefault(
+      // FABLE5-REVIEW: getGreetingSettingsIsDefault is untyped in shared/api
+      const isDefault = (await api.settings.getGreetingSettingsIsDefault(
         abortController.signal,
-      );
+      )) as boolean;
 
       runInAction(() => {
         this.greetingSettingsIsDefault = isDefault;
@@ -172,19 +177,19 @@ class CommonStore {
     );
   }
 
-  setIsEnableDNS = (value) => {
+  setIsEnableDNS = (value: boolean) => {
     this.dnsSettings.customObj.enable = value;
   };
 
-  setDNSName = (value) => {
+  setDNSName = (value: string) => {
     this.dnsSettings.customObj.dnsName = value;
   };
 
-  setPortalName = (value) => {
+  setPortalName = (value: string) => {
     this.portalName = value;
   };
 
-  setDNSSettings = (data) => {
+  setDNSSettings = (data: TDNSObj) => {
     this.dnsSettings = { defaultObj: data, customObj: data };
   };
 
@@ -196,7 +201,7 @@ class CommonStore {
       const res = await api.portal.getPortal(abortController.signal);
       const { mappedDomain } = res;
 
-      const tempObject = {};
+      const tempObject: TDNSObj = {};
 
       tempObject.enable = !!mappedDomain;
 
@@ -220,7 +225,7 @@ class CommonStore {
     try {
       this.getMappedDomain();
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as string);
     }
   };
 
@@ -228,55 +233,59 @@ class CommonStore {
     this.getMappedDomain();
   };
 
-  setIsLoadedArticleBody = (isLoadedArticleBody) => {
+  setIsLoadedArticleBody = (isLoadedArticleBody: boolean) => {
     this.isLoadedArticleBody = isLoadedArticleBody;
   };
 
-  setIsLoadedSectionHeader = (isLoadedSectionHeader) => {
+  setIsLoadedSectionHeader = (isLoadedSectionHeader: boolean) => {
     this.isLoadedSectionHeader = isLoadedSectionHeader;
   };
 
-  setIsLoadedSubmenu = (isLoadedSubmenu) => {
+  setIsLoadedSubmenu = (isLoadedSubmenu: boolean) => {
     this.isLoadedSubmenu = isLoadedSubmenu;
   };
 
-  setIsLoadedLngTZSettings = (isLoadedLngTZSettings) => {
+  setIsLoadedLngTZSettings = (isLoadedLngTZSettings: boolean) => {
     this.isLoadedLngTZSettings = isLoadedLngTZSettings;
   };
 
-  setIsLoadedWelcomePageSettings = (isLoadedWelcomePageSettings) => {
+  setIsLoadedWelcomePageSettings = (isLoadedWelcomePageSettings: boolean) => {
     this.isLoadedWelcomePageSettings = isLoadedWelcomePageSettings;
   };
 
-  setIsLoadedPortalRenaming = (isLoadedPortalRenaming) => {
+  setIsLoadedPortalRenaming = (isLoadedPortalRenaming: boolean) => {
     this.isLoadedPortalRenaming = isLoadedPortalRenaming;
   };
 
-  setIsLoadedDNSSettings = (isLoadedDNSSettings) => {
+  setIsLoadedDNSSettings = (isLoadedDNSSettings: boolean) => {
     this.isLoadedDNSSettings = isLoadedDNSSettings;
   };
 
-  setIsLoadedAdManagement = (isLoadedAdManagement) => {
+  setIsLoadedAdManagement = (isLoadedAdManagement: boolean) => {
     this.isLoadedAdManagement = isLoadedAdManagement;
   };
 
-  setIsLoadedConfigureDeepLink = (isLoadedConfigureDeepLink) => {
+  setIsLoadedConfigureDeepLink = (isLoadedConfigureDeepLink: boolean) => {
     this.isLoadedConfigureDeepLink = isLoadedConfigureDeepLink;
   };
 
-  setIsLoadedAiServicesManagement = (isLoadedAiServicesManagement) => {
+  setIsLoadedAiServicesManagement = (
+    isLoadedAiServicesManagement: boolean,
+  ) => {
     this.isLoadedAiServicesManagement = isLoadedAiServicesManagement;
   };
 
-  setIsLoadedCustomization = (isLoadedCustomization) => {
+  setIsLoadedCustomization = (isLoadedCustomization: boolean) => {
     this.isLoadedCustomization = isLoadedCustomization;
   };
 
-  setIsLoadedCustomizationNavbar = (isLoadedCustomizationNavbar) => {
+  setIsLoadedCustomizationNavbar = (
+    isLoadedCustomizationNavbar: boolean,
+  ) => {
     this.isLoadedCustomizationNavbar = isLoadedCustomizationNavbar;
   };
 
-  setIsLoaded = (isLoaded) => {
+  setIsLoaded = (isLoaded: boolean) => {
     this.isLoaded = isLoaded;
   };
 
@@ -285,10 +294,11 @@ class CommonStore {
     this.settingsStore.addAbortControllers(abortController);
 
     try {
-      const res = await api.settings.getDeepLinkSettings(
+      // FABLE5-REVIEW: getDeepLinkSettings is untyped in shared/api
+      const res = (await api.settings.getDeepLinkSettings(
         abortController.signal,
-      );
-      this.deepLinkSettings = res?.handlingMode;
+      )) as { handlingMode: number } | undefined;
+      this.deepLinkSettings = res?.handlingMode ?? null;
     } catch (e) {
       if (axios.isCancel(e)) return;
       throw e;

@@ -46,10 +46,15 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 import { FolderType, ValidationStatus } from "@docspace/shared/enums";
 import {
-  PUBLIC_STORAGE_KEY,
   CategoryType,
   TOAST_FOLDER_PUBLIC_KEY,
 } from "@docspace/shared/constants";
+
+import {
+  PersistenceKeys,
+  hasPersisted,
+  removePersisted,
+} from "./utils/persistence";
 import { match } from "ts-pattern";
 
 class PublicRoomStore {
@@ -361,10 +366,10 @@ class PublicRoomStore {
     await this.getAuthWindow();
     this.windowIsOpen = false;
 
-    const isAuth = localStorage.getItem(PUBLIC_STORAGE_KEY);
+    const isAuth = hasPersisted(PersistenceKeys.publicAuth);
 
     if (isAuth) {
-      localStorage.removeItem(PUBLIC_STORAGE_KEY);
+      removePersisted(PersistenceKeys.publicAuth);
       window.location.reload();
     }
   };

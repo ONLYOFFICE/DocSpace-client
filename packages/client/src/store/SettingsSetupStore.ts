@@ -42,27 +42,103 @@ import {
   resetSMTPSettings,
   setSMTPSettings,
 } from "@docspace/shared/api/settings";
+import type { TCookieSettings } from "@docspace/shared/api/settings/types";
+import type TPeopleFilter from "@docspace/shared/api/people/filter";
+import type { TUser } from "@docspace/shared/api/people/types";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 import { isDesktop } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import type { AuthStore } from "@docspace/shared/store/AuthStore";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { TfaStore } from "@docspace/shared/store/TfaStore";
+import type { SelectedConsumer } from "SRC_DIR/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/sub-components/ExternalDbModal/ExternalDbModal.types";
 import SelectionStore from "./SelectionStore";
+import type { ThirdPartyStore } from "./ThirdPartyStore";
+import type FilesSettingsStore from "./FilesSettingsStore";
 
 const { Filter } = api;
 
+export type TSmtpSettingsValues = {
+  credentialsUserName: string;
+  credentialsUserPassword: string;
+  enableAuth: boolean;
+  enableSSL: boolean;
+  useNtlm: boolean;
+  host: string;
+  port: string;
+  senderAddress: string;
+  senderDisplayName: string;
+};
+
+// FABLE5-REVIEW: getSMTPSettings / resetSMTPSettings are untyped in
+// shared/api; the response mirrors the settings fields (possibly null) plus
+// an isDefaultSettings flag.
+export type TSmtpSettingsResult = {
+  [K in keyof TSmtpSettingsValues]?: TSmtpSettingsValues[K] | null;
+} & { isDefaultSettings?: boolean };
+
+type TSmtpSettingsValue = string | boolean;
+
+// FABLE5-REVIEW: getLoginHistory / getAuditTrail are untyped in shared/api;
+// the fields are the ones rendered by the login-history and audit-trail
+// views.
+export type TAuditEvent = {
+  id: number;
+  date: string;
+  user: string;
+  action: string;
+  context?: string;
+};
+
+// FABLE5-REVIEW: getLifetimeAuditSettings is untyped in shared/api, and the
+// shared setLifetimeAuditSettings is typed as TCookieSettings while the
+// actual payload used here is { loginHistoryLifeTime, auditTrailLifeTime }.
+export type TAuditLifetimeSettings = {
+  loginHistoryLifeTime?: string;
+  auditTrailLifeTime?: string;
+};
+
+// FABLE5-REVIEW: getAllActiveSessions is untyped in shared/api; the item
+// shape follows the /security/activeconnections response.
+export type TActiveSession = {
+  id: number;
+  platform: string;
+  browser: string;
+  mobile?: boolean;
+  ip?: string;
+  country?: string;
+  city?: string;
+  date?: string;
+  page?: string;
+  tenantId?: number;
+  userId?: string;
+};
+
+type TActiveSessionsResponse = {
+  items: TActiveSession[];
+  loginEvent: number;
+};
+
+// FABLE5-REVIEW: api.settings.getCommonThirdPartyList no longer exists in
+// shared/api/settings, so only the locally assigned `key` field is knowable.
+export type TCommonThirdParty = {
+  key?: string;
+};
+
 class SettingsSetupStore {
-  selectionStore = null;
+  selectionStore: SelectionStore;
 
-  authStore = null;
+  authStore: AuthStore;
 
-  settingsStore = null;
+  settingsStore: SettingsStore;
 
-  tfaStore = null;
+  tfaStore: TfaStore;
 
-  thirdPartyStore = null;
+  thirdPartyStore: ThirdPartyStore;
 
-  filesSettingsStore = null;
+  filesSettingsStore: FilesSettingsStore;
 
   isInit = false;
 
@@ -70,11 +146,31 @@ class SettingsSetupStore {
 
   logoutAllDialogVisible = false;
 
-  viewAs = isDesktop() ? "table" : "row";
+  viewAs: string = isDesktop() ? "table" : "row";
 
   isLoadingDownloadReport = false;
 
-  security = {
+  security: {
+    accessRight: {
+      // FABLE5-REVIEW: no callers of setOptions were found, so the option
+      // shape is unknowable.
+      options: unknown[];
+      users: TUser[];
+      admins: TUser[];
+      adminsTotal: number;
+      owner: Partial<TUser>;
+      filter: TPeopleFilter;
+      selectorIsOpen: boolean;
+      isLoading: boolean;
+    };
+    loginHistory: {
+      users: TAuditEvent[];
+    };
+    auditTrail: {
+      users: TAuditEvent[];
+    };
+    trailReport: string | never[];
+  } = {
     accessRight: {
       options: [],
       users: [],
@@ -94,12 +190,27 @@ class SettingsSetupStore {
     trailReport: [],
   };
 
-  headerAction = {
+  // FABLE5-REVIEW: no callers of setAddUsers / setRemoveAdmins were found;
+  // the initial values are empty strings while the setters store callbacks.
+  headerAction: {
+    addUsers: string | VoidFunction;
+    removeAdmins: string | VoidFunction;
+  } = {
     addUsers: "",
     removeAdmins: "",
   };
 
-  integration = {
+  integration: {
+    consumers: SelectedConsumer[];
+    selectedConsumer: Partial<SelectedConsumer>;
+    smtpSettings: {
+      initialSettings: Partial<TSmtpSettingsValues>;
+      settings: TSmtpSettingsValues;
+      isLoading: boolean;
+      isDefaultSettings: boolean;
+      errors: Record<string, boolean>;
+    };
+  } = {
     consumers: [],
     selectedConsumer: {},
     smtpSettings: {
@@ -121,28 +232,32 @@ class SettingsSetupStore {
     },
   };
 
-  dataManagement = {
+  dataManagement: {
+    commonThirdPartyList: TCommonThirdParty[];
+  } = {
     commonThirdPartyList: [],
   };
 
-  securityLifetime = [];
+  securityLifetime: TAuditLifetimeSettings | never[] = [];
 
   sessionsIsInit = false;
 
-  sessions = [];
+  sessions: TActiveSession[] = [];
 
-  currentSession = [];
+  currentSession: number | never[] = [];
 
-  platformModalData = {};
+  platformModalData: Partial<
+    Pick<TActiveSession, "id" | "platform" | "browser">
+  > = {};
 
   openThirdPartyModal = false;
 
   constructor(
-    tfaStore,
-    authStore,
-    settingsStore,
-    thirdPartyStore,
-    filesSettingsStore,
+    tfaStore: TfaStore,
+    authStore: AuthStore,
+    settingsStore: SettingsStore,
+    thirdPartyStore: ThirdPartyStore,
+    filesSettingsStore: FilesSettingsStore,
   ) {
     this.selectionStore = new SelectionStore(this);
     this.authStore = authStore;
@@ -173,7 +288,7 @@ class SettingsSetupStore {
     }
   };
 
-  setIsLoadingDownloadReport = (state) => {
+  setIsLoadingDownloadReport = (state: boolean) => {
     this.isLoadingDownloadReport = state;
   };
 
@@ -181,43 +296,43 @@ class SettingsSetupStore {
     this.isInit = false;
   };
 
-  setIsInit = (isInit) => {
+  setIsInit = (isInit: boolean) => {
     this.isInit = isInit;
   };
 
-  setIsLoading = (isLoading) => {
+  setIsLoading = (isLoading: boolean) => {
     this.security.accessRight.isLoading = isLoading;
   };
 
-  setOptions = (options) => {
+  setOptions = (options: unknown[]) => {
     this.security.accessRight.options = options;
   };
 
-  setUsers = (users) => {
+  setUsers = (users: TUser[]) => {
     this.security.accessRight.users = users;
   };
 
-  setAdmins = (admins) => {
+  setAdmins = (admins: TUser[]) => {
     this.security.accessRight.admins = admins;
   };
 
-  setTotalAdmins = (total) => {
+  setTotalAdmins = (total: number) => {
     this.security.accessRight.adminsTotal = total;
   };
 
-  setViewAs = (viewAs) => {
+  setViewAs = (viewAs: string) => {
     this.viewAs = viewAs;
   };
 
-  setOwner = (owner) => {
+  setOwner = (owner: TUser) => {
     this.security.accessRight.owner = owner;
   };
 
-  setFilter = (filter) => {
+  setFilter = (filter: TPeopleFilter) => {
     this.security.accessRight.filter = filter;
   };
 
-  setConsumers = (consumers) => {
+  setConsumers = (consumers: SelectedConsumer[]) => {
     this.integration.consumers = consumers;
   };
 
@@ -226,34 +341,48 @@ class SettingsSetupStore {
     const initialSettings = this.integration.smtpSettings.initialSettings;
 
     const fields = Object.keys(settings).filter(
-      (key) => settings[key] !== initialSettings[key],
+      (key) =>
+        settings[key as keyof TSmtpSettingsValues] !==
+        initialSettings[key as keyof TSmtpSettingsValues],
     );
 
     return fields.length === 0;
   }
 
-  setSMTPFields = (result) => {
+  setSMTPFields = (result: TSmtpSettingsResult) => {
     const { isDefaultSettings, ...settings } = result;
 
     const storeSettings = this.integration.smtpSettings.settings;
 
-    this.integration.smtpSettings.isDefaultSettings = isDefaultSettings;
+    // FABLE5-REVIEW: the original .js assigns isDefaultSettings even when
+    // the server omits it; `!` keeps the identical assignment.
+    this.integration.smtpSettings.isDefaultSettings = isDefaultSettings!;
 
     Object.keys(settings).forEach((key) => {
-      if (settings[key] === null) return;
-      storeSettings[key] = settings[key];
+      const value = (
+        settings as Record<string, TSmtpSettingsValue | null | undefined>
+      )[key];
+      if (value === null) return;
+      (
+        storeSettings as unknown as Record<
+          string,
+          TSmtpSettingsValue | undefined
+        >
+      )[key] = value;
     });
 
     this.integration.smtpSettings.errors = {};
     this.integration.smtpSettings.initialSettings = { ...storeSettings };
   };
 
-  setInitSMTPSettings = async (password) => {
+  setInitSMTPSettings = async (password?: string) => {
     const abortController = new AbortController();
     this.settingsStore.addAbortControllers(abortController);
 
     try {
-      const result = await getSMTPSettings(abortController.signal);
+      const result = (await getSMTPSettings(abortController.signal)) as
+        | TSmtpSettingsResult
+        | undefined;
 
       if (!result) return;
 
@@ -271,13 +400,18 @@ class SettingsSetupStore {
   };
 
   resetSMTPSettings = async () => {
-    const result = await resetSMTPSettings(
-      this.integration.smtpSettings.settings,
-    );
+    // FABLE5-REVIEW: shared resetSMTPSettings() is declared with no
+    // parameters; the legacy call passes the current settings (ignored at
+    // runtime) — preserved via cast.
+    const result = await (
+      resetSMTPSettings as unknown as (
+        settings: TSmtpSettingsValues,
+      ) => Promise<TSmtpSettingsResult | undefined> | undefined
+    )(this.integration.smtpSettings.settings);
 
     if (!result) return;
 
-    const resultSettingsDefault = {
+    const resultSettingsDefault: TSmtpSettingsResult = {
       credentialsUserName: "",
       credentialsUserPassword: "",
       enableAuth: false,
@@ -290,7 +424,10 @@ class SettingsSetupStore {
     };
 
     Object.keys(result).forEach(
-      (key) => (resultSettingsDefault[key] = result[key]),
+      (key) =>
+        ((resultSettingsDefault as Record<string, unknown>)[key] = (
+          result as Record<string, unknown>
+        )[key]),
     );
 
     this.setSMTPFields(resultSettingsDefault);
@@ -300,7 +437,9 @@ class SettingsSetupStore {
     const password =
       this.integration.smtpSettings.settings.credentialsUserPassword;
 
-    return setSMTPSettings(this.integration.smtpSettings.settings).then(
+    // FABLE5-REVIEW: setSMTPSettings is untyped in shared/api and may return
+    // undefined; `!` keeps the original unguarded .then chain.
+    return setSMTPSettings(this.integration.smtpSettings.settings)!.then(
       (result) => {
         this.setInitSMTPSettings(password);
         return result;
@@ -308,16 +447,16 @@ class SettingsSetupStore {
     );
   };
 
-  setSMTPSettings = (settings) => {
+  setSMTPSettings = (settings: TSmtpSettingsValues) => {
     this.integration.smtpSettings.settings = settings;
   };
 
-  setSMTPSettingsLoading = (loading) => {
+  setSMTPSettingsLoading = (loading: boolean) => {
     this.integration.smtpSettings.isLoading = loading;
   };
 
-  setSMTPErrors = (errorsArray) => {
-    let errors = {};
+  setSMTPErrors = (errorsArray: { name: string; hasError: boolean }[]) => {
+    let errors: Record<string, boolean> = {};
     errorsArray.forEach((elem) => {
       errors = {
         ...errors,
@@ -328,19 +467,19 @@ class SettingsSetupStore {
     this.integration.smtpSettings.errors = { ...errors };
   };
 
-  setAddUsers = (func) => {
+  setAddUsers = (func: VoidFunction) => {
     this.headerAction.addUsers = func;
   };
 
-  setRemoveAdmins = (func) => {
+  setRemoveAdmins = (func: VoidFunction) => {
     this.headerAction.removeAdmins = func;
   };
 
-  toggleSelector = (isOpen) => {
+  toggleSelector = (isOpen: boolean) => {
     this.security.accessRight.selectorIsOpen = isOpen;
   };
 
-  setCommonThirdPartyList = (commonThirdPartyList) => {
+  setCommonThirdPartyList = (commonThirdPartyList: TCommonThirdParty[]) => {
     commonThirdPartyList.forEach((_, index) => {
       commonThirdPartyList[index].key = `0-${index}`;
     });
@@ -348,13 +487,13 @@ class SettingsSetupStore {
     this.dataManagement.commonThirdPartyList = commonThirdPartyList;
   };
 
-  setSelectedConsumer = (selectedConsumerName) => {
+  setSelectedConsumer = (selectedConsumerName: string) => {
     this.integration.selectedConsumer =
       this.integration.consumers.find((c) => c.name === selectedConsumerName) ||
       {};
   };
 
-  setFilterUrl = (filter) => {
+  setFilterUrl = (filter: TPeopleFilter) => {
     window.history.replaceState(
       "",
       "",
@@ -366,12 +505,16 @@ class SettingsSetupStore {
     );
   };
 
-  setFilterParams = (data) => {
+  setFilterParams = (data: TPeopleFilter) => {
     this.setFilterUrl(data);
     this.setFilter(data);
   };
 
-  changeAdmins = async (userIds, productId, isAdmin) => {
+  changeAdmins = async (
+    userIds: string[],
+    productId: string,
+    isAdmin: boolean,
+  ) => {
     const requests = userIds.map((userId) =>
       api.people.changeProductAdmin(userId, productId, isAdmin),
     );
@@ -379,13 +522,13 @@ class SettingsSetupStore {
     await Promise.all(requests);
   };
 
-  getPortalOwner = async (userId) => {
+  getPortalOwner = async (userId: string) => {
     const owner = await api.people.getUserById(userId);
 
     this.setOwner(owner);
   };
 
-  getUsersByIds = async (Ids) => {
+  getUsersByIds = async (Ids: string[]) => {
     const users = Ids.map((id) => {
       return api.people.getUserById(id);
     });
@@ -393,25 +536,36 @@ class SettingsSetupStore {
     return Promise.all(users);
   };
 
-  fetchPeople = async (filter) => {
+  fetchPeople = async (filter?: TPeopleFilter | null) => {
     let filterData = filter && filter.clone();
     if (!filterData) {
       filterData = Filter.getDefault();
     }
 
-    const admins = await api.people.getListAdmins(filterData);
+    // FABLE5-REVIEW: api.people.getListAdmins is untyped in shared/api
+    const admins = (await api.people.getListAdmins(filterData)) as {
+      items: TUser[];
+      total: number;
+    };
 
     filterData.total = admins.total;
     this.setAdmins(admins.items);
     this.setFilter(filterData);
   };
 
-  updateListAdmins = async (filter, withoutOwner) => {
+  updateListAdmins = async (
+    filter?: TPeopleFilter | null,
+    withoutOwner?: boolean,
+  ) => {
     let filterData = filter && filter.clone();
     if (!filterData) {
       filterData = Filter.getDefault();
     }
-    const admins = await api.people.getListAdmins(filterData);
+    // FABLE5-REVIEW: api.people.getListAdmins is untyped in shared/api
+    const admins = (await api.people.getListAdmins(filterData)) as {
+      items: TUser[];
+      total: number;
+    };
 
     if (withoutOwner) {
       admins.items = admins.items.filter((admin) => {
@@ -430,28 +584,38 @@ class SettingsSetupStore {
     this.setFilter(filterData);
   };
 
-  setLanguageAndTime = async (lng, timeZoneID) => {
+  setLanguageAndTime = async (lng: string, timeZoneID: string) => {
     return api.settings.setLanguageAndTime(lng, timeZoneID);
   };
 
-  setPortalRename = async (alias) => {
+  setPortalRename = async (alias: string) => {
     return api.portal.setPortalRename(alias);
   };
 
-  setDNSSettings = async (dnsName, enable) => {
-    const res = await api.settings.setMailDomainSettings(dnsName, enable);
+  setDNSSettings = async (dnsName: string, enable: boolean) => {
+    // FABLE5-REVIEW: shared setMailDomainSettings takes a single
+    // TMailDomainSettings argument; the legacy call passes (dnsName, enable)
+    // where the second argument is ignored at runtime — preserved via cast.
+    const res = await (
+      api.settings.setMailDomainSettings as unknown as (
+        dnsName: string,
+        enable: boolean,
+      ) => Promise<unknown>
+    )(dnsName, enable);
     return res;
   };
 
-  getLifetimeAuditSettings = async (data) => {
+  getLifetimeAuditSettings = async (data?: unknown) => {
     const abortController = new AbortController();
     this.settingsStore.addAbortControllers(abortController);
 
     try {
-      const res = await api.settings.getLifetimeAuditSettings(
+      // FABLE5-REVIEW: api.settings.getLifetimeAuditSettings is untyped in
+      // shared/api
+      const res = (await api.settings.getLifetimeAuditSettings(
         data,
         abortController.signal,
-      );
+      )) as TAuditLifetimeSettings;
       this.setSecurityLifeTime(res);
     } catch (e) {
       if (axios.isCancel(e)) return;
@@ -459,20 +623,25 @@ class SettingsSetupStore {
     }
   };
 
-  setLifetimeAuditSettings = async (data) => {
-    await api.settings.setLifetimeAuditSettings(data);
+  setLifetimeAuditSettings = async (data: TAuditLifetimeSettings) => {
+    // FABLE5-REVIEW: shared setLifetimeAuditSettings is typed as
+    // TCookieSettings, but the payload passed here is
+    // { loginHistoryLifeTime, auditTrailLifeTime } — preserved via cast.
+    await api.settings.setLifetimeAuditSettings(
+      data as unknown as TCookieSettings,
+    );
     this.getLifetimeAuditSettings();
   };
 
-  setSecurityLifeTime = (lifetime) => {
+  setSecurityLifeTime = (lifetime: TAuditLifetimeSettings) => {
     this.securityLifetime = lifetime;
   };
 
-  setLoginHistoryUsers = (users) => {
+  setLoginHistoryUsers = (users: TAuditEvent[]) => {
     this.security.loginHistory.users = users;
   };
 
-  setAuditTrailUsers = (users) => {
+  setAuditTrailUsers = (users: TAuditEvent[]) => {
     this.security.auditTrail.users = users;
   };
 
@@ -481,7 +650,10 @@ class SettingsSetupStore {
     this.settingsStore.addAbortControllers(abortController);
 
     try {
-      const res = await api.settings.getLoginHistory(abortController.signal);
+      // FABLE5-REVIEW: api.settings.getLoginHistory is untyped in shared/api
+      const res = (await api.settings.getLoginHistory(
+        abortController.signal,
+      )) as TAuditEvent[];
       return this.setLoginHistoryUsers(res);
     } catch (e) {
       if (axios.isCancel(e)) return;
@@ -494,7 +666,10 @@ class SettingsSetupStore {
     this.settingsStore.addAbortControllers(abortController);
 
     try {
-      const res = await api.settings.getAuditTrail(abortController.signal);
+      // FABLE5-REVIEW: api.settings.getAuditTrail is untyped in shared/api
+      const res = (await api.settings.getAuditTrail(
+        abortController.signal,
+      )) as TAuditEvent[];
       return this.setAuditTrailUsers(res);
     } catch (e) {
       if (axios.isCancel(e)) return;
@@ -506,7 +681,9 @@ class SettingsSetupStore {
     const { openOnNewPage } = this.filesSettingsStore;
 
     try {
-      const res = await api.settings.getLoginHistoryReport();
+      // FABLE5-REVIEW: api.settings.getLoginHistoryReport is untyped in
+      // shared/api; it resolves to the report file URL.
+      const res = (await api.settings.getLoginHistoryReport()) as string;
       setTimeout(
         () => window.open(res, openOnNewPage ? "_blank" : "_self"),
         100,
@@ -514,7 +691,7 @@ class SettingsSetupStore {
       return this.setAuditTrailReport(res);
     } catch (error) {
       console.error(error);
-      toastr.error(error);
+      toastr.error(error as string);
     }
   };
 
@@ -522,7 +699,9 @@ class SettingsSetupStore {
     const { openOnNewPage } = this.filesSettingsStore;
     try {
       this.setIsLoadingDownloadReport(true);
-      const res = await api.settings.getAuditTrailReport();
+      // FABLE5-REVIEW: api.settings.getAuditTrailReport is untyped in
+      // shared/api; it resolves to the report file URL.
+      const res = (await api.settings.getAuditTrailReport()) as string;
       setTimeout(
         () => window.open(res, openOnNewPage ? "_blank" : "_self"),
         100,
@@ -530,34 +709,34 @@ class SettingsSetupStore {
       return this.setAuditTrailReport(res);
     } catch (error) {
       console.error(error);
-      toastr.error(error);
+      toastr.error(error as string);
     } finally {
       this.setIsLoadingDownloadReport(false);
     }
   };
 
-  setGreetingTitle = async (greetingTitle) => {
+  setGreetingTitle = async (greetingTitle: string) => {
     return api.settings.setGreetingSettings(greetingTitle);
   };
 
-  setAuditTrailReport = (report) => {
+  setAuditTrailReport = (report: string) => {
     this.security.trailReport = report;
   };
 
-  setCurrentSchema = async (id) => {
+  setCurrentSchema = async (id: string) => {
     return api.settings.setCurrentSchema(id);
   };
 
   setCustomSchema = async (
-    userCaption,
-    usersCaption,
-    groupCaption,
-    groupsCaption,
-    userPostCaption,
-    regDateCaption,
-    groupHeadCaption,
-    guestCaption,
-    guestsCaption,
+    userCaption: string,
+    usersCaption: string,
+    groupCaption: string,
+    groupsCaption: string,
+    userPostCaption: string,
+    regDateCaption: string,
+    groupHeadCaption: string,
+    guestCaption: string,
+    guestsCaption: string,
   ) => {
     return api.settings.setCustomSchema(
       userCaption,
@@ -581,7 +760,11 @@ class SettingsSetupStore {
       const abortController = new AbortController();
       this.settingsStore.addAbortControllers(abortController);
 
-      const res = await api.settings.getConsumersList(abortController.signal);
+      // FABLE5-REVIEW: api.settings.getConsumersList is untyped in
+      // shared/api
+      const res = (await api.settings.getConsumersList(
+        abortController.signal,
+      )) as SelectedConsumer[];
       this.setConsumers(res);
     } catch (e) {
       if (axios.isCancel(e)) return;
@@ -590,12 +773,19 @@ class SettingsSetupStore {
     }
   };
 
-  fetchAndSetConsumers = async (consumerName, isThirdPartyAvailable) => {
+  fetchAndSetConsumers = async (
+    consumerName: string,
+    isThirdPartyAvailable?: boolean,
+  ) => {
     const abortController = new AbortController();
     this.settingsStore.addAbortControllers(abortController);
 
     try {
-      const res = await api.settings.getConsumersList(abortController.signal);
+      // FABLE5-REVIEW: api.settings.getConsumersList is untyped in
+      // shared/api
+      const res = (await api.settings.getConsumersList(
+        abortController.signal,
+      )) as SelectedConsumer[];
       let consumer = res.find((c) => c.name === consumerName);
 
       const saveAvailable =
@@ -616,7 +806,7 @@ class SettingsSetupStore {
     }
   };
 
-  updateConsumerProps = async (newProps) => {
+  updateConsumerProps = async (newProps: unknown) => {
     await api.settings.updateConsumerProps(newProps);
 
     await this.getConsumers();
@@ -633,53 +823,68 @@ class SettingsSetupStore {
     });
   };
 
-  changePassword = (userId, hash, key) => {
+  changePassword = (userId: string, hash: string, key: string) => {
     return api.people.changePassword(userId, hash, key);
   };
 
-  sendOwnerChange = (id) => {
+  sendOwnerChange = (id: string) => {
     return api.settings.sendOwnerChange(id);
   };
 
-  dataReassignment = (fromUserId, toUserId, deleteProfile) => {
+  dataReassignment = (
+    fromUserId: string,
+    toUserId: string,
+    deleteProfile: boolean,
+  ) => {
     return api.settings.dataReassignment(fromUserId, toUserId, deleteProfile);
   };
 
-  dataReassignmentProgress = (id) => {
+  dataReassignmentProgress = (id: string) => {
     return api.settings.dataReassignmentProgress(id);
   };
 
-  dataReassignmentTerminate = (userId) => {
+  dataReassignmentTerminate = (userId: string) => {
     return api.settings.dataReassignmentTerminate(userId);
   };
 
   getCommonThirdPartyList = async () => {
-    const res = await api.settings.getCommonThirdPartyList();
+    // FABLE5-REVIEW: api.settings.getCommonThirdPartyList no longer exists
+    // in shared/api/settings — this call would throw at runtime (the
+    // original .js behaves the same); preserved via cast.
+    const res = await (
+      api.settings as unknown as {
+        getCommonThirdPartyList: () => Promise<TCommonThirdParty[]>;
+      }
+    ).getCommonThirdPartyList();
 
     this.setCommonThirdPartyList(res);
   };
 
   getAllSessions = () => {
-    return api.settings.getAllActiveSessions();
+    // FABLE5-REVIEW: api.settings.getAllActiveSessions is untyped in
+    // shared/api
+    return api.settings.getAllActiveSessions() as Promise<TActiveSessionsResponse>;
   };
 
   removeAllSessions = () => {
-    return api.settings.removeAllActiveSessions();
+    // FABLE5-REVIEW: api.settings.removeAllActiveSessions is untyped in
+    // shared/api; it resolves to the redirect URL.
+    return api.settings.removeAllActiveSessions() as Promise<string>;
   };
 
   removeAllExecptThis = () => {
     return api.settings.removeAllExceptThisSession();
   };
 
-  removeSession = (id) => {
+  removeSession = (id: number) => {
     return api.settings.removeActiveSession(id);
   };
 
-  setLogoutDialogVisible = (visible) => {
+  setLogoutDialogVisible = (visible: boolean) => {
     this.logoutDialogVisible = visible;
   };
 
-  setLogoutAllDialogVisible = (visible) => {
+  setLogoutAllDialogVisible = (visible: boolean) => {
     this.logoutAllDialogVisible = visible;
   };
 
@@ -691,11 +896,13 @@ class SettingsSetupStore {
     });
   };
 
-  setSessions = (sessions) => {
+  setSessions = (sessions: TActiveSession[]) => {
     this.sessions = sessions;
   };
 
-  setPlatformModalData = (data) => {
+  setPlatformModalData = (
+    data: Pick<TActiveSession, "id" | "platform" | "browser">,
+  ) => {
     this.platformModalData = {
       id: data.id,
       platform: data.platform,
@@ -703,7 +910,7 @@ class SettingsSetupStore {
     };
   };
 
-  setOpenThirdPartyModal = (state) => {
+  setOpenThirdPartyModal = (state: boolean) => {
     this.openThirdPartyModal = state;
   };
 }

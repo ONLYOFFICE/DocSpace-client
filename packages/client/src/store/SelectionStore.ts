@@ -37,25 +37,21 @@ import { makeAutoObservable } from "mobx";
 
 import type { TUser } from "@docspace/shared/api/people/types";
 
-// FABLE5-REVIEW: SettingsSetupStore is still .js (wave 2) — replace this
-// structural type with `import type` once it is converted.
-type TSettingsSetupStore = {
-  security: { accessRight: { admins: TUser[] } };
-};
+import type SettingsSetupStore from "./SettingsSetupStore";
 
 class SelectionStore {
   selection: TUser[] = [];
 
   selected = "none";
 
-  settingsSetupStore: TSettingsSetupStore;
+  settingsSetupStore: SettingsSetupStore;
 
   // FABLE5-REVIEW: peopleStore is never assigned anywhere — selectAll and
   // selectByStatus would throw if called (no callers found in the repo).
   // `declare` keeps the historical runtime shape (no own property).
   declare peopleStore?: { usersStore: { peopleList: TUser[] } };
 
-  constructor(settingsSetupStore: TSettingsSetupStore) {
+  constructor(settingsSetupStore: SettingsSetupStore) {
     this.settingsSetupStore = settingsSetupStore;
     makeAutoObservable(this);
   }

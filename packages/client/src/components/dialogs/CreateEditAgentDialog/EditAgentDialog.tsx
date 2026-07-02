@@ -119,6 +119,8 @@ const EditAgentDialog = ({
       prevParams.quota === currentParams.quota &&
       prevParams.prompt === currentParams.prompt &&
       prevParams.profileId === currentParams.profileId &&
+      prevParams.modelId === currentParams.modelId &&
+      prevParams.providerId === currentParams.providerId &&
       currentParams.mcpServers?.every((id) =>
         currentParams.mcpServersInitial?.includes(id),
       ) &&
@@ -258,7 +260,7 @@ const EditAgentDialog = ({
           scale
           onClick={onEditRoom}
           isDisabled={
-            !agentParams.profileId ||
+            (!agentParams.profileId && !agentParams.modelId) ||
             (!cover
               ? isWrongTitle ||
                 compareRoomParams(prevRoomParams.current, agentParams)

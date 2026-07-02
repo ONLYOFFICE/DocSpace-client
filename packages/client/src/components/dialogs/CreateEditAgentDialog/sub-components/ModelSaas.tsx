@@ -76,7 +76,7 @@ const ModelSaas = ({
   openedFromChat,
   setAgentParams,
 }: ModelSaasProps) => {
-  const { t } = useTranslation(["AIRoom", "Common"]);
+  const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
 
   const onOpenSettings = React.useCallback(() => {
@@ -273,7 +273,7 @@ const ModelSaas = ({
       <div className=" set_room_params-info">
         <div>
           <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
-            {t("AIModelTitle")}
+            {t("Common:AIModelTitle")}
           </Text>
           <Text
             fontSize="12px"
@@ -282,7 +282,7 @@ const ModelSaas = ({
             className="set_room_params-info-description"
             noSelect
           >
-            {t("AIModelDescription")}
+            {t("Common:AIModelDescription")}
           </Text>
           <Text
             fontSize="12px"
@@ -294,7 +294,7 @@ const ModelSaas = ({
             <Trans
               t={t}
               i18nKey="ResponseQualityNode"
-              ns="AIRoom"
+              ns="Common"
               components={{
                 1: <span style={{ fontWeight: 600 }} />,
               }}

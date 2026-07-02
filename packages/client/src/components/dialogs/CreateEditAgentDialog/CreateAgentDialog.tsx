@@ -124,7 +124,9 @@ const CreateAgentDialog = ({
 
   const isAgentTitleChanged = agentParams?.title?.trim() === "";
 
-  const isProfileSelected = !!agentParams?.profileId;
+  // Standalone binds a chat profile (profileId); SaaS binds a model (modelId).
+  const isProfileSelected =
+    !!agentParams?.profileId || !!agentParams?.modelId;
 
   const onCreateAgent = async () => {
     if (!agentParams?.title?.trim()) {

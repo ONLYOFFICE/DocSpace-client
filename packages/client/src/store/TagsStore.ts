@@ -37,19 +37,19 @@ import { makeAutoObservable } from "mobx";
 import api from "@docspace/shared/api";
 
 class TagsStore {
-  tags = [];
+  tags: string[] = [];
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setTags = (tags) => {
+  setTags = (tags: string[]) => {
     this.tags = tags;
   };
 
   fetchTags = () => {
     const request = () =>
-      api.rooms.getTags().then((res) => {
+      (api.rooms.getTags() as Promise<string[]>).then((res) => {
         this.setTags(res);
         return res;
       });

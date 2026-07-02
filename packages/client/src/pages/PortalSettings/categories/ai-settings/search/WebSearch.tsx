@@ -40,29 +40,69 @@ import classNames from "classnames";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
+import { EmptyView } from "@docspace/shared/components/empty-view";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.14.react.svg";
+import EmptyScreenServerErrorLightSvg from "PUBLIC_DIR/images/emptyview/empty.server.error.light.svg";
+import EmptyScreenServerErrorDarkSvg from "PUBLIC_DIR/images/emptyview/empty.server.error.dark.svg";
+import ReloadArrowsSvg from "PUBLIC_DIR/images/icons/10/reload.arrows.svg";
 
 import type ServicesStore from "SRC_DIR/store/ServicesStore";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import generalStyles from "../AISettings.module.scss";
 import styles from "./WebSearch.module.scss";
+import { WebSearchLoader } from "./WebSearchLoader";
 
 type WebSearchProps = {
   aiToolsPrices?: ServicesStore["aiToolsPrices"];
+  isAiToolsPricesLoading?: ServicesStore["isAiToolsPricesLoading"];
   formatAiModelsCurrency?: ServicesStore["formatAiModelsCurrency"];
   webSearchSettingsUrl?: SettingsStore["webSearchSettingsUrl"];
 };
 
 const WebSearch = ({
   aiToolsPrices,
+  isAiToolsPricesLoading,
   formatAiModelsCurrency,
   webSearchSettingsUrl,
 }: WebSearchProps) => {
   const { t } = useTranslation(["Common"]);
+  const { isBase } = useTheme();
 
-  const items = aiToolsPrices?.webSearch ?? [];
+  // Pricing is loaded upstream in the settings View; show a skeleton while it
+  // loads.
+  if (isAiToolsPricesLoading) return <WebSearchLoader />;
+
+  // Pricing failed to load — show a server-error screen with a reload action.
+  if (!aiToolsPrices) {
+    const icon = isBase ? (
+      <EmptyScreenServerErrorLightSvg />
+    ) : (
+      <EmptyScreenServerErrorDarkSvg />
+    );
+
+    return (
+      <EmptyView
+        icon={icon}
+        title={t("Common:SomethingWentWrong")}
+        description={t("Common:ServerErrorEmptyDescription")}
+        options={[
+          {
+            to: "",
+            key: "reload",
+            title: t("Common:ReloadPage"),
+            description: t("Common:ReloadPage"),
+            icon: <ReloadArrowsSvg />,
+            onClick: () => window.location.reload(),
+          },
+        ]}
+      />
+    );
+  }
+
+  const items = aiToolsPrices.webSearch ?? [];
 
   return (
     <div className={styles.wrapper}>
@@ -123,9 +163,15 @@ const WebSearch = ({
 };
 
 export default inject<TStore>(({ servicesStore, settingsStore }) => {
-  const { aiToolsPrices, formatAiModelsCurrency } = servicesStore;
+  const { aiToolsPrices, isAiToolsPricesLoading, formatAiModelsCurrency } =
+    servicesStore;
   const { webSearchSettingsUrl } = settingsStore;
 
-  return { aiToolsPrices, formatAiModelsCurrency, webSearchSettingsUrl };
+  return {
+    aiToolsPrices,
+    isAiToolsPricesLoading,
+    formatAiModelsCurrency,
+    webSearchSettingsUrl,
+  };
 })(observer(WebSearch));
 

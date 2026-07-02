@@ -111,3 +111,16 @@
     height: 14px;
   }
 }
+
+.listLoader {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.rowLoader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

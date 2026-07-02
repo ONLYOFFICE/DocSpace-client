@@ -33,94 +33,23 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 660px;
-}
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-.description {
-  line-height: 20px;
-  color: var(--settings-common-description-color);
-}
+import styles from "./KnowledgeBase.module.scss";
 
-.learnMore {
-  margin-top: 8px;
-}
+export const KnowledgeBaseLoader = () => {
+  return (
+    <div className={styles.wrapper}>
+      <RectangleSkeleton width="100%" height="40px" />
+      <div className={styles.listLoader}>
+        {["row-1", "row-2", "row-3"].map((key) => (
+          <div className={styles.rowLoader} key={key}>
+            <RectangleSkeleton width="180px" height="20px" />
+            <RectangleSkeleton width="120px" height="20px" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
-.list {
-  display: flex;
-  flex-direction: column;
-  margin-top: 16px;
-  border: 1px solid var(--payment-card-border-color);
-  border-radius: 6px;
-}
-
-.row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--payment-card-border-color);
-
-  &:last-child {
-    border-bottom: none;
-  }
-}
-
-.rowLeft {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 0;
-}
-
-.icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-
-  svg {
-    width: 16px;
-    height: 16px;
-  }
-}
-
-.rowRight {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-.price {
-  color: var(--payment-inactive-color);
-}
-
-.detailsLink {
-  display: inline-flex;
-  align-items: center;
-
-  svg {
-    width: 14px;
-    height: 14px;
-  }
-}
-
-.listLoader {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 16px;
-}
-
-.rowLoader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}

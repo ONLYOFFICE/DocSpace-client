@@ -49,7 +49,6 @@ type ModelSettingsRowProps = {
   modelId: string;
   image: string;
   title: string;
-  provider?: string;
   inputPrice: string;
   outputPrice?: string;
   enabled: boolean;
@@ -62,7 +61,6 @@ type ModelSettingsRowProps = {
 const ModelSettingsRow: React.FC<ModelSettingsRowProps> = ({
   modelId,
   title,
-  provider,
   inputPrice,
   outputPrice,
   enabled,
@@ -95,16 +93,6 @@ const ModelSettingsRow: React.FC<ModelSettingsRowProps> = ({
             >
               {title}
             </Text>
-            {/* {provider ? (
-              <Text
-                fontSize="12px"
-                fontWeight={400}
-                as="span"
-                className={styles.modelProvider}
-              >
-                ({provider})
-              </Text>
-            ) : null} */}
           </div>
         </div>
       </TableCell>

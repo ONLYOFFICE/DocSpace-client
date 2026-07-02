@@ -412,7 +412,7 @@ const GlobalEvents = ({
     });
   }, []);
 
-  const onSaveAsTemplate = (e) => {
+  const onSaveAsTemplate = useCallback((e) => {
     const visible = !!e.item;
 
     setSaveAsTemplateDialog({
@@ -426,7 +426,7 @@ const GlobalEvents = ({
         });
       },
     });
-  };
+  }, []);
 
   useEffect(() => {
     window.addEventListener(
@@ -483,7 +483,7 @@ const GlobalEvents = ({
       window.removeEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
       window.removeEventListener(Events.GROUP_CREATE, onCreateGroup);
       window.removeEventListener(Events.GROUP_EDIT, onEditGroup);
-      window.addEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
+      window.removeEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
 
       if (!isAIAgents() && enablePlugins) {
         window.removeEventListener(
@@ -511,6 +511,7 @@ const GlobalEvents = ({
     onCreateGroup,
     onEditGroup,
     onChangeUserType,
+    onSaveAsTemplate,
     onCreatePluginFileDialog,
     enablePlugins,
   ]);

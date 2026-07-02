@@ -118,7 +118,6 @@ const TableView = (props: ModelSettingsTableViewProps) => {
               key={m.id}
               modelId={m.id}
               title={m.alias}
-              provider={m.provider}
               inputPrice={formatAiModelsCurrency?.(m.price.prompt) ?? ""}
               outputPrice={formatAiModelsCurrency?.(m.price.completion) ?? ""}
               enabled={aiModelAvailabilityMap?.get(m.id) ?? true}

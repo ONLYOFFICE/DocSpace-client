@@ -125,16 +125,6 @@ const RowView = (props: ModelSettingsRowViewProps) => {
                   >
                     {m.alias}
                   </Text>
-                  {/* {m.provider ? (
-                    <Text
-                      fontSize="12px"
-                      fontWeight={400}
-                      as="span"
-                      className={styles.provider}
-                    >
-                      ({m.provider})
-                    </Text>
-                  ) : null} */}
                   {m.link ? (
                     <ExternalLinkIcon className={styles.detailsIcon} />
                   ) : null}

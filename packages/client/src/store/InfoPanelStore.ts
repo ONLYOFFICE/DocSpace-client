@@ -268,7 +268,14 @@ class InfoPanelStore {
       return item.logo?.cover ? item.logo : item.logo?.medium;
 
     if (isFolder(item))
-      return this.filesSettingsStore.getIconByFolderType(folderType, size);
+      // FABLE5-REVIEW: type-only cast — `folderType` is
+      // `false | FolderType | undefined` here and was passed to the untyped
+      // .js store unchanged; getIconPathByFolderType falls back to the
+      // default folder icon for non-FolderType values.
+      return this.filesSettingsStore.getIconByFolderType(
+        folderType as FolderType,
+        size,
+      );
 
     const fileExst = "fileExst" in item && item.fileExst;
 

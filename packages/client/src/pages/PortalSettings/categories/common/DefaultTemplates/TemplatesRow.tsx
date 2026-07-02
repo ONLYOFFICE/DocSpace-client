@@ -190,7 +190,10 @@ const TemplatesRow = ({
         onReset={() => onResetFile()}
         onClose={() => setIsDialogVisible(false)}
       />
-      <ReactSVG src={icon} className={styles.icon} />
+      {/* FABLE5-REVIEW: type-only assertion — `icon` is undefined only when
+          the optional getFileIcon prop is not injected, and the original code
+          passed it to ReactSVG unchanged. */}
+      <ReactSVG src={icon!} className={styles.icon} />
       <div className={styles.rowContent}>
         <div className={styles.mainContent}>
           <Text fontWeight={600} fontSize="13px" truncate>

@@ -35,7 +35,11 @@
 import { inject, observer } from "mobx-react";
 import { saveThirdParty as saveThirdPartyApi } from "@docspace/shared/api/files";
 import { ConnectDialog } from "@docspace/shared/dialogs/connect";
-import type { Nullable, ThirdPartyAccountType } from "@docspace/shared/types";
+import type {
+  ConnectingStoragesType,
+  Nullable,
+  ThirdPartyAccountType,
+} from "@docspace/shared/types";
 
 import type {
   ConnectDialogWrapperProps,
@@ -139,7 +143,12 @@ export default inject<
       roomCreation,
       saveThirdParty: saveThirdPartyApi,
       openConnectWindow,
-      connectingStorages,
+      // FABLE5-REVIEW: type-only cast — ThirdPartyStore.connectingStorages is
+      // typed with the raw TConnectingStorage shape, but
+      // fetchConnectingStorages enriches every entry with
+      // id/className/category at runtime, matching ConnectingStoragesType.
+      connectingStorages:
+        connectingStorages as unknown as ConnectingStoragesType[],
       selectedFolderId: id,
       folderFormValidation,
       saveAfterReconnectOAuth,

@@ -362,6 +362,12 @@ export type TFilesSettings = {
   openEditorInSameTab: boolean;
   displayFileExtension: boolean;
   organizeRoomsGrouping: boolean;
+  /** Whether the room lifetime confirmation dialog is hidden (see PUT files/hideconfirmroomlifetime). */
+  hideConfirmRoomLifetime?: boolean;
+  /** Whether the cancel-operation confirmation dialog is hidden (see PUT files/hideconfirmcanceloperation). */
+  hideConfirmCancelOperation?: boolean;
+  /** Extensions of files that can be vectorized (uploaded to AI rooms). */
+  extsFilesVectorized?: string[];
 };
 
 export type TPresignedUri = {
@@ -447,6 +453,8 @@ export type TDocServiceLocation = {
   docServiceSignatureSecret: string;
   isDefault: boolean;
   docServiceSslVerification: boolean;
+  /** URL of the document server preload frame (returned by GET files/docservice). */
+  docServicePreloadUrl?: string;
 };
 
 export type TFileLink = {

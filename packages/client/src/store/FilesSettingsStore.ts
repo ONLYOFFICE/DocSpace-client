@@ -39,6 +39,14 @@ import {
   setRecentSetting,
   setOrganizeGrouping,
 } from "@docspace/shared/api/files";
+import type { TAccessControlSettings } from "@docspace/shared/api/files";
+import type {
+  TDocServiceLocation,
+  TFileLink,
+  TFilesSettings,
+  TThirdParties,
+  TThirdPartyCapabilities,
+} from "@docspace/shared/api/files/types";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
@@ -58,49 +66,64 @@ import {
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
+import type { AuthStore } from "@docspace/shared/store/AuthStore";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import i18n from "../i18n";
+import type PluginStore from "./PluginStore";
+import type PublicRoomStore from "./PublicRoomStore";
+import type { ThirdPartyStore } from "./ThirdPartyStore";
+import type TreeFoldersStore from "./TreeFoldersStore";
+import type { TTreeFolder } from "./TreeFoldersStore";
+
+// FABLE5-REVIEW: api.files.storeForceSave and api.files.forceSave are
+// commented out in packages/shared/api/files/index.ts, so setStoreForceSave /
+// setForceSave below would throw at runtime if ever called (no consumers were
+// found). The structural cast keeps the original calls untouched.
+type TFilesApiWithForceSave = typeof api.files & {
+  storeForceSave: (data: boolean) => Promise<boolean>;
+  forceSave: (data: boolean) => Promise<boolean>;
+};
 
 class FilesSettingsStore {
-  thirdPartyStore;
+  thirdPartyStore: ThirdPartyStore;
 
-  treeFoldersStore;
+  treeFoldersStore: TreeFoldersStore;
 
-  publicRoomStore;
+  publicRoomStore: PublicRoomStore;
 
-  pluginStore;
+  pluginStore: PluginStore;
 
-  authStore;
+  authStore: AuthStore;
 
-  settingsStore;
+  settingsStore: SettingsStore;
 
-  /**
-   *  @type {import("@docspace/shared/api/files/types").TFilesSettings=}
-   */
-  filesSettings = null;
+  filesSettings: TFilesSettings | null = null;
 
-  isErrorSettings = null;
+  isErrorSettings: boolean | null = null;
 
-  expandedSetting = null;
+  // FABLE5-REVIEW: no consumers of expandedSetting / setExpandSettingsTree
+  // were found outside this store, so the value shape is unknowable.
+  expandedSetting: unknown = null;
 
-  confirmDelete = null;
+  confirmDelete: boolean | null = null;
 
-  enableThirdParty = null;
+  enableThirdParty: boolean | null = null;
 
-  forcesave = null;
+  forcesave: boolean | null = null;
 
-  storeForcesave = null;
+  storeForcesave: boolean | null = null;
 
-  storeOriginalFiles = null;
+  storeOriginalFiles: boolean | null = null;
 
-  favoritesSection = null;
+  favoritesSection: boolean | null = null;
 
-  recentSection = null;
+  recentSection: boolean | null = null;
 
-  hideConfirmConvertSave = null;
+  hideConfirmConvertSave: boolean | null = null;
 
-  keepNewFileName = null;
+  keepNewFileName: boolean | null = null;
 
-  openEditorInSameTab = null;
+  openEditorInSameTab: boolean | null = null;
 
   chunkUploadSize = 1024 * 1023; // 1024 * 1023; //~0.999mb
 
@@ -108,55 +131,57 @@ class FilesSettingsStore {
 
   maxUploadFilesCount = 5;
 
-  displayFileExtension = null;
+  displayFileExtension: boolean | null = null;
 
   settingsIsLoaded = false;
 
-  extsImagePreviewed = [];
+  extsImagePreviewed: string[] = [];
 
-  extsMediaPreviewed = [];
+  extsMediaPreviewed: string[] = [];
 
-  extsWebPreviewed = [];
+  extsWebPreviewed: string[] = [];
 
-  extsWebEdited = [];
+  extsWebEdited: string[] = [];
 
-  extsWebEncrypt = [];
+  extsWebEncrypt: string[] = [];
 
-  extsWebReviewed = [];
+  extsWebReviewed: string[] = [];
 
-  extsWebCustomFilterEditing = [];
+  extsWebCustomFilterEditing: string[] = [];
 
-  extsWebRestrictedEditing = [];
+  extsWebRestrictedEditing: string[] = [];
 
-  extsWebCommented = [];
+  extsWebCommented: string[] = [];
 
-  extsWebTemplate = [];
+  extsWebTemplate: string[] = [];
 
-  extsCoAuthoring = [];
+  extsCoAuthoring: string[] = [];
 
-  extsMustConvert = [];
+  extsMustConvert: string[] = [];
 
-  extsConvertible = [];
+  // The initial value is an empty array, but /files/settings replaces it with
+  // a map of source extension -> target extensions (see TFilesSettings).
+  extsConvertible: TFilesSettings["extsConvertible"] | string[] = [];
 
-  extsUploadable = [];
+  extsUploadable: string[] = [];
 
-  extsArchive = [];
+  extsArchive: string[] = [];
 
-  extsVideo = [];
+  extsVideo: string[] = [];
 
-  extsAudio = [];
+  extsAudio: string[] = [];
 
-  extsImage = [];
+  extsImage: string[] = [];
 
-  extsSpreadsheet = [];
+  extsSpreadsheet: string[] = [];
 
-  extsPresentation = [];
+  extsPresentation: string[] = [];
 
-  extsDocument = [];
+  extsDocument: string[] = [];
 
-  extsDiagram = [];
+  extsDiagram: string[] = [];
 
-  internalFormats = {};
+  internalFormats: Partial<TFilesSettings["internalFormats"]> = {};
 
   masterFormExtension = "";
 
@@ -168,7 +193,7 @@ class FilesSettingsStore {
 
   organizeRoomsGrouping = false;
 
-  extsFilesVectorized = [];
+  extsFilesVectorized: string[] = [];
 
   externalShare = true;
 
@@ -180,15 +205,18 @@ class FilesSettingsStore {
 
   blockExistingLinksOnRestrict = true;
 
-  documentServiceLocation = null;
+  // `undefined` is included because setDocumentServiceLocation is fed the
+  // result of getDocumentServiceLocation, which resolves to undefined when
+  // the request is cancelled.
+  documentServiceLocation: TDocServiceLocation | null | undefined = null;
 
   constructor(
-    thirdPartyStore,
-    treeFoldersStore,
-    publicRoomStore,
-    pluginStore,
-    authStore,
-    settingsStore,
+    thirdPartyStore: ThirdPartyStore,
+    treeFoldersStore: TreeFoldersStore,
+    publicRoomStore: PublicRoomStore,
+    pluginStore: PluginStore,
+    authStore: AuthStore,
+    settingsStore: SettingsStore,
   ) {
     makeAutoObservable(this);
 
@@ -199,17 +227,26 @@ class FilesSettingsStore {
     this.authStore = authStore;
     this.settingsStore = settingsStore;
 
-    SocketHelper?.on(SocketEvents.UpdateExternalShareSettings, (settings) => {
-      this.externalShare = settings.externalShare;
-      this.defaultShareLinkInternal = settings.defaultShareLinkInternal;
-      this.externalShareApplyToDocuments =
-        settings.externalShareApplyToDocuments;
-      this.externalShareApplyToRooms = settings.externalShareApplyToRooms;
-      this.blockExistingLinksOnRestrict = settings.blockExistingLinksOnRestrict;
-    });
+    SocketHelper?.on(
+      SocketEvents.UpdateExternalShareSettings,
+      // FABLE5-REVIEW: SocketEvents.UpdateExternalShareSettings is not listed
+      // in ui-kit's TListenEventCallbackMap, so `on` expects a zero-argument
+      // listener, while the server actually sends the access-control settings
+      // payload. The cast keeps the original callback untouched without
+      // modifying libs/ui-kit.
+      ((settings: TAccessControlSettings) => {
+        this.externalShare = settings.externalShare;
+        this.defaultShareLinkInternal = settings.defaultShareLinkInternal;
+        this.externalShareApplyToDocuments =
+          settings.externalShareApplyToDocuments;
+        this.externalShareApplyToRooms = settings.externalShareApplyToRooms;
+        this.blockExistingLinksOnRestrict =
+          settings.blockExistingLinksOnRestrict;
+      }) as () => void,
+    );
   }
 
-  setIsLoaded = (isLoaded) => {
+  setIsLoaded = (isLoaded: boolean) => {
     this.settingsIsLoaded = isLoaded;
   };
 
@@ -221,7 +258,10 @@ class FilesSettingsStore {
     return !this.externalShare;
   }
 
-  isLinkRestrictedByAdmin = (item, link) => {
+  isLinkRestrictedByAdmin = (
+    item: { rootFolderType: FolderType },
+    link: TFileLink,
+  ) => {
     const isInRoom = item.rootFolderType === FolderType.Rooms;
     const appliesToItem = isInRoom
       ? this.externalShareApplyToRooms
@@ -234,7 +274,10 @@ class FilesSettingsStore {
     );
   };
 
-  isLinkBlockedByAdmin = (item, link) => {
+  isLinkBlockedByAdmin = (
+    item: { rootFolderType: FolderType },
+    link: TFileLink,
+  ) => {
     return (
       this.isLinkRestrictedByAdmin(item, link) &&
       this.blockExistingLinksOnRestrict
@@ -251,19 +294,22 @@ class FilesSettingsStore {
     );
   }
 
-  setFilesSettings = (settings) => {
+  setFilesSettings = (settings: TFilesSettings) => {
     this.filesSettings = settings;
-    const settingsItems = Object.keys(settings);
+    const settingsItems = Object.keys(settings) as (keyof TFilesSettings)[];
     settingsItems.forEach((key) => {
-      this[key] = settings[key];
+      // The original .js copies every key of the server response onto the
+      // store instance, so the assignment stays dynamic.
+      (this as unknown as Record<keyof TFilesSettings, unknown>)[key] =
+        settings[key];
     });
   };
 
-  setIsErrorSettings = (isError) => {
+  setIsErrorSettings = (isError: boolean) => {
     this.isErrorSettings = isError;
   };
 
-  setExpandSettingsTree = (expandedSetting) => {
+  setExpandSettingsTree = (expandedSetting: unknown) => {
     this.expandedSetting = expandedSetting;
   };
 
@@ -285,17 +331,21 @@ class FilesSettingsStore {
           return;
 
         return axios
-          .all([
+          .all<TThirdPartyCapabilities | TThirdParties>([
             api.files.getThirdPartyCapabilities(),
             api.files.getThirdPartyList(),
           ])
           .then(([capabilities, providers]) => {
-            capabilities.forEach((item) => {
+            (capabilities as TThirdPartyCapabilities).forEach((item) => {
               item.splice(1, 1);
             });
 
-            this.thirdPartyStore.setThirdPartyCapabilities(capabilities); // TODO: Out of bounds read: 1
-            this.thirdPartyStore.setThirdPartyProviders(providers);
+            this.thirdPartyStore.setThirdPartyCapabilities(
+              capabilities as TThirdPartyCapabilities,
+            ); // TODO: Out of bounds read: 1
+            this.thirdPartyStore.setThirdPartyProviders(
+              providers as TThirdParties,
+            );
           });
       })
       .then(() => {
@@ -310,11 +360,11 @@ class FilesSettingsStore {
       .catch(() => this.setIsErrorSettings(true));
   };
 
-  setFilesSetting = (setting, val) => {
-    this[setting] = val;
+  setFilesSetting = (setting: string, val: unknown) => {
+    (this as unknown as Record<string, unknown>)[setting] = val;
   };
 
-  setAccessControlSettings = async (settings) => {
+  setAccessControlSettings = async (settings: TAccessControlSettings) => {
     const res = await api.files.setAccessControlSettings(settings);
     this.externalShare = res.externalShare;
     this.defaultShareLinkInternal = res.defaultShareLinkInternal;
@@ -324,52 +374,54 @@ class FilesSettingsStore {
     return res;
   };
 
-  setStoreOriginal = (data, setting) =>
+  setStoreOriginal = (data: boolean, setting: string) =>
     api.files
       .storeOriginal(data)
       .then((res) => this.setFilesSetting(setting, res))
-      .catch((e) => toastr.error(e));
+      .catch((e) => toastr.error(e as string));
 
-  setConfirmDelete = (data, setting) =>
+  setConfirmDelete = (data: boolean, setting: string) =>
     api.files
       .changeDeleteConfirm(data)
       .then((res) => this.setFilesSetting(setting, res))
-      .catch((e) => toastr.error(e));
+      .catch((e) => toastr.error(e as string));
 
-  setStoreForceSave = (data) =>
-    api.files.storeForceSave(data).then((res) => this.setStoreForcesave(res));
+  setStoreForceSave = (data: boolean) =>
+    (api.files as TFilesApiWithForceSave)
+      .storeForceSave(data)
+      .then((res) => this.setStoreForcesave(res));
 
-  setStoreForcesave = (val) => (this.storeForcesave = val);
+  setStoreForcesave = (val: boolean) => (this.storeForcesave = val);
 
-  setHideConfirmCancelOperation = (data) => {
+  setHideConfirmCancelOperation = (data: boolean) => {
     api.files
       .changeHideConfirmCancelOperation(data)
       .then((res) => this.setFilesSetting("hideConfirmCancelOperation", res))
-      .catch((e) => toastr.error(e));
+      .catch((e) => toastr.error(e as string));
   };
 
-  setKeepNewFileName = async (data) => {
+  setKeepNewFileName = async (data: boolean) => {
     return api.files
       .changeKeepNewFileName(data)
       .then((res) => this.setFilesSetting("keepNewFileName", res))
-      .catch((e) => toastr.error(e));
+      .catch((e) => toastr.error(e as string));
   };
 
-  setDisplayFileExtension = (data) => {
+  setDisplayFileExtension = (data: boolean) => {
     api.files
       .enableDisplayFileExtension(data)
       .then((res) => this.setFilesSetting("displayFileExtension", res))
-      .catch((e) => toastr.error(e));
+      .catch((e) => toastr.error(e as string));
   };
 
-  setOpenEditorInSameTab = (data) => {
+  setOpenEditorInSameTab = (data: boolean) => {
     api.files
       .changeOpenEditorInSameTab(data)
       .then((res) => this.setFilesSetting("openEditorInSameTab", res))
-      .catch((e) => toastr.error(e));
+      .catch((e) => toastr.error(e as string));
   };
 
-  setOrganizeRoomsGrouping = async (data) => {
+  setOrganizeRoomsGrouping = async (data: boolean) => {
     try {
       const res = await setOrganizeGrouping(data);
       this.setFilesSetting("organizeRoomsGrouping", res);
@@ -381,42 +433,51 @@ class FilesSettingsStore {
 
       return res;
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as string);
       throw e;
     }
   };
 
-  setEnableThirdParty = async (data, setting) => {
+  setEnableThirdParty = async (data: boolean, setting: string) => {
     const res = await api.files.enableThirdParty(data);
     this.setFilesSetting(setting, res);
 
     if (data) {
       return axios
-        .all([
+        .all<TThirdPartyCapabilities | TThirdParties>([
           api.files.getThirdPartyCapabilities(),
           api.files.getThirdPartyList(),
         ])
         .then(([capabilities, providers]) => {
-          capabilities.forEach((item) => {
+          (capabilities as TThirdPartyCapabilities).forEach((item) => {
             item.splice(1, 1);
           });
-          this.thirdPartyStore.setThirdPartyCapabilities(capabilities); // TODO: Out of bounds read: 1
-          this.thirdPartyStore.setThirdPartyProviders(providers);
+          this.thirdPartyStore.setThirdPartyCapabilities(
+            capabilities as TThirdPartyCapabilities,
+          ); // TODO: Out of bounds read: 1
+          this.thirdPartyStore.setThirdPartyProviders(
+            providers as TThirdParties,
+          );
         });
     }
     return Promise.resolve();
   };
 
-  setForceSave = (data) =>
-    api.files.forceSave(data).then((res) => this.setForcesave(res));
+  setForceSave = (data: boolean) =>
+    (api.files as TFilesApiWithForceSave)
+      .forceSave(data)
+      .then((res) => this.setForcesave(res));
 
   getDocumentServiceLocation = async () => {
     const abortController = new AbortController();
     this.settingsStore.addAbortControllers(abortController);
 
     try {
+      // FABLE5-REVIEW: the original .js passes null for the optional
+      // `version` argument (typed `number | string | undefined` in
+      // shared/api); the cast keeps the runtime argument identical.
       return await api.files.getDocumentServiceLocation(
-        null,
+        null as unknown as undefined,
         abortController.signal,
       );
     } catch (error) {
@@ -426,17 +487,19 @@ class FilesSettingsStore {
     }
   };
 
-  setDocumentServiceLocation = (data) => {
+  setDocumentServiceLocation = (
+    data: TDocServiceLocation | null | undefined,
+  ) => {
     this.documentServiceLocation = data;
   };
 
   changeDocumentServiceLocation = (
-    docServiceUrl,
-    secretKey,
-    authHeader,
-    internalUrl,
-    portalUrl,
-    sslVerification,
+    docServiceUrl: string,
+    secretKey: string,
+    authHeader: string,
+    internalUrl: string,
+    portalUrl: string,
+    sslVerification: boolean,
   ) =>
     api.files.changeDocumentServiceLocation(
       docServiceUrl,
@@ -447,21 +510,27 @@ class FilesSettingsStore {
       sslVerification,
     );
 
-  setForcesave = (val) => (this.forcesave = val);
+  setForcesave = (val: boolean) => (this.forcesave = val);
 
   updateRootTreeFolders = () => {
     const { getFoldersTree, setTreeFolders } = this.treeFoldersStore;
-    getFoldersTree().then((root) => setTreeFolders(root));
+    // FABLE5-REVIEW: treeFoldersStore.getFoldersTree() returns void (it does
+    // not return the api promise), so `.then` here throws a TypeError at
+    // runtime — the original .js has the same behavior. The cast keeps the
+    // original call untouched.
+    (getFoldersTree() as unknown as Promise<TTreeFolder[]>).then((root) =>
+      setTreeFolders(root),
+    );
   };
 
-  setFavoritesSetting = (set, setting) => {
+  setFavoritesSetting = (set: boolean, setting: string) => {
     return setFavoritesSetting(set).then((res) => {
       this.setFilesSetting(setting, res);
       this.updateRootTreeFolders();
     });
   };
 
-  setRecentSetting = (set, setting) => {
+  setRecentSetting = (set: boolean, setting: string) => {
     return setRecentSetting(set).then((res) => {
       this.setFilesSetting(setting, res);
       this.updateRootTreeFolders();
@@ -473,10 +542,11 @@ class FilesSettingsStore {
     this.hideConfirmConvertSave = hideConfirmConvertSave;
   };
 
-  canViewedDocs = (extension) =>
+  canViewedDocs = (extension: string) =>
     presentInArray(this.extsWebPreviewed, extension);
 
-  canConvert = (extension) => presentInArray(this.extsMustConvert, extension);
+  canConvert = (extension: string) =>
+    presentInArray(this.extsMustConvert, extension);
 
   // isMediaOrImage = (fileExst) => { TODO: no need, use the data from item
   //   if (
@@ -489,56 +559,54 @@ class FilesSettingsStore {
   //   return false;
   // };
 
-  isArchive = (extension) => presentInArray(this.extsArchive, extension);
+  isArchive = (extension: string) =>
+    presentInArray(this.extsArchive, extension);
 
-  isImage = (extension) => presentInArray(this.extsImage, extension);
+  isImage = (extension: string) => presentInArray(this.extsImage, extension);
 
-  isSound = (extension) => presentInArray(this.extsAudio, extension);
+  isSound = (extension: string) => presentInArray(this.extsAudio, extension);
 
-  isHtml = (extension) => presentInArray(HTML_EXST, extension);
+  isHtml = (extension: string) => presentInArray(HTML_EXST, extension);
 
-  isEbook = (extension) => presentInArray(EBOOK_EXST, extension);
+  isEbook = (extension: string) => presentInArray(EBOOK_EXST, extension);
 
-  isDocument = (extension) => presentInArray(this.extsDocument, extension);
+  isDocument = (extension: string) =>
+    presentInArray(this.extsDocument, extension);
 
-  isDiagram = (extension) => presentInArray(this.extsDiagram, extension);
+  isDiagram = (extension: string) =>
+    presentInArray(this.extsDiagram, extension);
 
-  isMasterFormExtension = (extension) => this.masterFormExtension === extension;
+  isMasterFormExtension = (extension: string) =>
+    this.masterFormExtension === extension;
 
-  isPresentation = (extension) =>
+  isPresentation = (extension: string) =>
     presentInArray(this.extsPresentation, extension);
 
-  isSpreadsheet = (extension) =>
+  isSpreadsheet = (extension: string) =>
     presentInArray(this.extsSpreadsheet, extension);
 
-  /**
-   * @param {number} size
-   * @param {string} fileExst
-   * @param {string} providerKey
-   * @param {*} contentLength
-   * @param {RoomsType} roomType
-   * @param {boolean } isArchive
-   * @param {FolderType} folderType
-   * @returns {string}
-   */
   getIcon = (
     size = 32,
-    fileExst = null,
-    providerKey = null,
-    contentLength = null,
-    roomType = null,
-    isArchive = null,
-    folderType = null,
-  ) => {
+    fileExst: string | null = null,
+    providerKey: string | null = null,
+    contentLength: string | null = null,
+    roomType: RoomsType | null = null,
+    isArchive: boolean | null = null,
+    folderType: FolderType | null = null,
+  ): string => {
     if (fileExst || contentLength) {
-      const isArchiveItem = this.isArchive(fileExst);
-      const isImageItem = this.isImage(fileExst);
-      const isSoundItem = this.isSound(fileExst);
-      const isHtmlItem = this.isHtml(fileExst);
-      const isEbookItem = this.isEbook(fileExst);
+      // FABLE5-REVIEW: when only contentLength is set, fileExst is null and
+      // was passed through to presentInArray unchanged in the original .js
+      // (presentInArray tolerates it); the non-null assertions keep that
+      // runtime intact.
+      const isArchiveItem = this.isArchive(fileExst!);
+      const isImageItem = this.isImage(fileExst!);
+      const isSoundItem = this.isSound(fileExst!);
+      const isHtmlItem = this.isHtml(fileExst!);
+      const isEbookItem = this.isEbook(fileExst!);
 
       const icon = this.getFileIcon(
-        fileExst,
+        fileExst!,
         size,
         isArchiveItem,
         isImageItem,
@@ -557,14 +625,18 @@ class FilesSettingsStore {
     return this.getFolderIcon(size);
   };
 
-  getIconByFolderType = (folderType, size = 32) => {
+  getIconByFolderType = (folderType: FolderType, size = 32) => {
     const path = getIconPathByFolderType(folderType);
     return this.getIconBySize(path, size);
   };
 
-  getIconBySize = (path, size = 32) => {
-    const getOrDefault = (container) =>
-      container.has(path) ? container.get(path) : container.get("file.svg");
+  getIconBySize = (path: string, size = 32) => {
+    // FABLE5-REVIEW: the "file.svg" fallback key is always present in the
+    // iconSize* maps (built from IconNames.File in
+    // shared/utils/image-helpers), so Map.get can never return undefined
+    // here; the non-null assertions only encode that invariant.
+    const getOrDefault = (container: Map<string, string>) =>
+      container.has(path) ? container.get(path)! : container.get("file.svg")!;
 
     switch (+size) {
       case 24:
@@ -580,7 +652,11 @@ class FilesSettingsStore {
     }
   };
 
-  getRoomsIcon = (roomType, isArchive, size = 32) => {
+  getRoomsIcon = (
+    roomType: RoomsType,
+    isArchive: boolean | null,
+    size = 32,
+  ) => {
     let path = "";
 
     if (isArchive) {
@@ -617,12 +693,12 @@ class FilesSettingsStore {
     return this.getIconBySize("folder.svg", size);
   };
 
-  getIconUrl = (extension, size) => {
+  getIconUrl = (extension: string, size?: number) => {
     const path = `${extension.replace(/^\./, "")}.svg`;
     return this.getIconBySize(path, size);
   };
 
-  getPluginFileIconUrl = (extension) => {
+  getPluginFileIconUrl = (extension: string) => {
     const { enablePlugins } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
 
@@ -637,7 +713,7 @@ class FilesSettingsStore {
   };
 
   getFileIcon = (
-    extension,
+    extension: string,
     size = 32,
     archive = false,
     image = false,
@@ -666,7 +742,7 @@ class FilesSettingsStore {
     return this.getIconUrl(extension, size);
   };
 
-  getIconSrc = (ext, size = 32) => {
+  getIconSrc = (ext: string, size = 32) => {
     let path = "";
 
     if (presentInArray(this.extsArchive, ext, true)) path = "archive.svg";
@@ -686,13 +762,14 @@ class FilesSettingsStore {
     return this.getIconUrl(extension, size);
   };
 
-  hideConfirmRoomLifetimeSetting = (set) => {
-    return api.rooms
-      .hideConfirmRoomLifetime(set)
+  hideConfirmRoomLifetimeSetting = (set: boolean) => {
+    // FABLE5-REVIEW: api.rooms.hideConfirmRoomLifetime is untyped in
+    // shared/api (returns request(options) without a generic).
+    return (api.rooms.hideConfirmRoomLifetime(set) as Promise<boolean>)
       .then((res) => {
         this.setFilesSetting("hideConfirmRoomLifetime", res);
       })
-      .catch((e) => toastr.error(e));
+      .catch((e) => toastr.error(e as string));
   };
 
   get openOnNewPage() {

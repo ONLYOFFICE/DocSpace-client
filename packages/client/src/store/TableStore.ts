@@ -34,6 +34,9 @@
  */
 
 import { makeAutoObservable } from "mobx";
+import type { AuthStore } from "@docspace/shared/store/AuthStore";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { UserStore } from "@docspace/shared/store/UserStore";
 import {
   TableVersions,
   TABLE_ROOMS_COLUMNS,
@@ -42,7 +45,14 @@ import {
 } from "SRC_DIR/helpers/constants";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 
+import type PeopleStore from "./contacts/PeopleStore";
+import type IndexingStore from "./IndexingStore";
+import type SelectedFolderStore from "./SelectedFolderStore";
+import type TreeFoldersStore from "./TreeFoldersStore";
 import { getPersistedString } from "./utils/persistence";
+
+/** Minimal shape of a table-header column that `getColumns` reads/writes. */
+type TTableColumn = { key: string; enable: boolean };
 
 const GUEST_ID = "guest";
 
@@ -89,17 +99,24 @@ const COLUMNS_SHARED_WITH_ME_INFO_PANEL_SIZE = `infoPanelSharedWithMeColumnsSize
 const COLUMNS_IN_SHARED_FOLDER_INFO_PANEL_SIZE = `infoPanelInSharedColumnsSize_ver-${TableVersions.InSharedFolder}`;
 
 class TableStore {
-  authStore;
+  authStore: AuthStore;
 
-  treeFoldersStore;
+  treeFoldersStore: TreeFoldersStore;
 
-  userStore;
+  userStore: UserStore;
 
-  settingsStore;
+  settingsStore: SettingsStore;
 
-  selectedFolderStore;
+  selectedFolderStore: SelectedFolderStore;
 
-  peopleStore;
+  peopleStore: PeopleStore;
+
+  // `declare` (no emitted field): in the original .js `indexingStore` was not
+  // declared as a class field, so it did not exist yet when
+  // makeAutoObservable ran — it is created by plain assignment in the
+  // constructor body and is intentionally NOT observable (unlike the
+  // declared deps above).
+  declare indexingStore: IndexingStore;
 
   roomColumnNameIsEnabled = true; // always true
 
@@ -228,13 +245,13 @@ class TableStore {
   templateRoomQuotaColumnIsEnable = false;
 
   constructor(
-    authStore,
-    treeFoldersStore,
-    userStore,
-    settingsStore,
-    indexingStore,
-    selectedFolderStore,
-    peopleStore,
+    authStore: AuthStore,
+    treeFoldersStore: TreeFoldersStore,
+    userStore: UserStore,
+    settingsStore: SettingsStore,
+    indexingStore: IndexingStore,
+    selectedFolderStore: SelectedFolderStore,
+    peopleStore: PeopleStore,
   ) {
     makeAutoObservable(this);
 
@@ -247,214 +264,214 @@ class TableStore {
     this.peopleStore = peopleStore;
   }
 
-  setRoomColumnType = (enable) => {
+  setRoomColumnType = (enable: boolean) => {
     this.roomColumnTypeIsEnabled = enable;
   };
 
-  setRoomColumnTags = (enable) => {
+  setRoomColumnTags = (enable: boolean) => {
     this.roomColumnTagsIsEnabled = enable;
   };
 
-  setTemplateRoomColumnTags = (enable) => {
+  setTemplateRoomColumnTags = (enable: boolean) => {
     this.templateRoomColumnTagsIsEnabled = enable;
   };
 
-  setRoomColumnOwner = (enable) => {
+  setRoomColumnOwner = (enable: boolean) => {
     this.roomColumnOwnerIsEnabled = enable;
   };
 
-  setRoomColumnActivity = (enable) => {
+  setRoomColumnActivity = (enable: boolean) => {
     this.roomColumnActivityIsEnabled = enable;
   };
 
-  setAIAgentColumnTags = (enable) => {
+  setAIAgentColumnTags = (enable: boolean) => {
     this.aiAgentColumnTagsIsEnabled = enable;
   };
 
-  setAIAgentColumnOwner = (enable) => {
+  setAIAgentColumnOwner = (enable: boolean) => {
     this.aiAgentColumnOwnerIsEnabled = enable;
   };
 
-  setAIAgentColumnActivity = (enable) => {
+  setAIAgentColumnActivity = (enable: boolean) => {
     this.aiAgentColumnActivityIsEnabled = enable;
   };
 
-  setAIAgentColumnQuota = (enable) => {
+  setAIAgentColumnQuota = (enable: boolean) => {
     this.aiAgentColumnQuotaIsEnable = enable;
   };
 
-  setTemplateRoomColumnActivity = (enable) => {
+  setTemplateRoomColumnActivity = (enable: boolean) => {
     this.templateRoomColumnActivityIsEnabled = enable;
   };
 
-  setRoomColumnQuota = (enable) => {
+  setRoomColumnQuota = (enable: boolean) => {
     this.roomQuotaColumnIsEnable = enable;
   };
 
-  setTemplateRoomColumnQuota = (enable) => {
+  setTemplateRoomColumnQuota = (enable: boolean) => {
     this.templateRoomQuotaColumnIsEnable = enable;
   };
 
-  setAuthorColumn = (enable) => {
+  setAuthorColumn = (enable: boolean) => {
     this.authorColumnIsEnabled = enable;
   };
 
-  setLocationRecentColumn = (enable) => {
+  setLocationRecentColumn = (enable: boolean) => {
     this.locationRecentColumnIsEnabled = enable;
   };
 
-  setAuthorRecentColumn = (enable) => {
+  setAuthorRecentColumn = (enable: boolean) => {
     this.authorRecentColumnIsEnabled = enable;
   };
 
-  setLocationFavoritesColumn = (enable) => {
+  setLocationFavoritesColumn = (enable: boolean) => {
     this.locationFavoritesColumnIsEnabled = enable;
   };
 
-  setAuthorFavoritesColumn = (enable) => {
+  setAuthorFavoritesColumn = (enable: boolean) => {
     this.authorFavoritesColumnIsEnabled = enable;
   };
 
-  setModifiedFavoritesColumn = (enable) => {
+  setModifiedFavoritesColumn = (enable: boolean) => {
     this.modifiedFavoritesColumnIsEnabled = enable;
   };
 
-  setSizeFavoritesColumn = (enable) => {
+  setSizeFavoritesColumn = (enable: boolean) => {
     this.sizeFavoritesColumnIsEnabled = enable;
   };
 
-  setTypeFavoritesColumn = (enable) => {
+  setTypeFavoritesColumn = (enable: boolean) => {
     this.typeFavoritesColumnIsEnabled = enable;
   };
 
-  setAuthorVDRColumn = (enable) => {
+  setAuthorVDRColumn = (enable: boolean) => {
     this.authorVDRColumnIsEnabled = enable;
   };
 
-  setOwnerTemplatesColumn = (enable) => {
+  setOwnerTemplatesColumn = (enable: boolean) => {
     this.templatesRoomColumnOwnerIsEnabled = enable;
   };
 
-  setCreatedColumn = (enable) => {
+  setCreatedColumn = (enable: boolean) => {
     this.createdColumnIsEnabled = enable;
   };
 
-  setCreatedVDRColumn = (enable) => {
+  setCreatedVDRColumn = (enable: boolean) => {
     this.createdVDRColumnIsEnabled = enable;
   };
 
-  setModifiedColumn = (enable) => {
+  setModifiedColumn = (enable: boolean) => {
     this.modifiedColumnIsEnabled = enable;
   };
 
-  setModifiedVDRColumn = (enable) => {
+  setModifiedVDRColumn = (enable: boolean) => {
     this.modifiedVDRColumnIsEnabled = enable;
   };
 
-  setLocationColumn = (enable) => {
+  setLocationColumn = (enable: boolean) => {
     this.locationColumnIsEnabled = enable;
   };
 
-  setErasureColumn = (enable) => {
+  setErasureColumn = (enable: boolean) => {
     this.erasureColumnIsEnabled = enable;
   };
 
-  setSizeColumn = (enable) => {
+  setSizeColumn = (enable: boolean) => {
     this.sizeColumnIsEnabled = enable;
   };
 
-  setSizeRecentColumn = (enable) => {
+  setSizeRecentColumn = (enable: boolean) => {
     this.sizeRecentColumnIsEnabled = enable;
   };
 
-  setSizeVDRColumn = (enable) => {
+  setSizeVDRColumn = (enable: boolean) => {
     this.sizeVDRColumnIsEnabled = enable;
   };
 
-  setTypeColumn = (enable) => {
+  setTypeColumn = (enable: boolean) => {
     this.typeColumnIsEnabled = enable;
   };
 
-  setTypeRecentColumn = (enable) => {
+  setTypeRecentColumn = (enable: boolean) => {
     this.typeRecentColumnIsEnabled = enable;
   };
 
-  setTypeVDRColumn = (enable) => {
+  setTypeVDRColumn = (enable: boolean) => {
     this.typeVDRColumnIsEnabled = enable;
   };
 
-  setTypeTemplatesColumn = (enable) => {
+  setTypeTemplatesColumn = (enable: boolean) => {
     this.templatesRoomColumnTypeIsEnabled = enable;
   };
 
-  setAuthorTrashColumn = (enable) => (this.authorTrashColumnIsEnabled = enable);
+  setAuthorTrashColumn = (enable: boolean) => (this.authorTrashColumnIsEnabled = enable);
 
-  setCreatedTrashColumn = (enable) =>
+  setCreatedTrashColumn = (enable: boolean) =>
     (this.createdTrashColumnIsEnabled = enable);
 
-  setSizeTrashColumn = (enable) => (this.sizeTrashColumnIsEnabled = enable);
+  setSizeTrashColumn = (enable: boolean) => (this.sizeTrashColumnIsEnabled = enable);
 
-  setTypeTrashColumn = (enable) => (this.typeTrashColumnIsEnabled = enable);
+  setTypeTrashColumn = (enable: boolean) => (this.typeTrashColumnIsEnabled = enable);
 
-  setAuthorShareWithMeColumn = (enable) =>
+  setAuthorShareWithMeColumn = (enable: boolean) =>
     (this.authorShareWithMeColumnIsEnabled = enable);
 
-  setAccessLevelShareWithMeColumn = (enable) => {
+  setAccessLevelShareWithMeColumn = (enable: boolean) => {
     this.accessLevelShareWithMeColumnIsEnabled = enable;
   };
 
-  setSharedByShareWithMeColumn = (enable) => {
+  setSharedByShareWithMeColumn = (enable: boolean) => {
     this.sharedByShareWithMeColumnIsEnabled = enable;
   };
 
-  setModifiedShareWithMeColumn = (enable) =>
+  setModifiedShareWithMeColumn = (enable: boolean) =>
     (this.modifiedShareWithMeColumnIsEnabled = enable);
 
-  setSizeShareWithMeColumn = (enable) =>
+  setSizeShareWithMeColumn = (enable: boolean) =>
     (this.sizeShareWithMeColumnIsEnabled = enable);
 
-  setTypeShareWithMeColumn = (enable) =>
+  setTypeShareWithMeColumn = (enable: boolean) =>
     (this.typeShareWithMeColumnIsEnabled = enable);
 
-  setLastOpenedRecentColumn = (enable) =>
+  setLastOpenedRecentColumn = (enable: boolean) =>
     (this.lastOpenedRecentColumnIsEnabled = enable);
 
-  setGroupsColumnPeople = (enable) =>
+  setGroupsColumnPeople = (enable: boolean) =>
     (this.peopleGroupsColumnIsEnabled = enable);
 
-  setGroupsColumnManager = (enable) =>
+  setGroupsColumnManager = (enable: boolean) =>
     (this.managerGroupsColumnIsEnabled = enable);
 
-  setPeopleColumnType = (enable) => (this.typePeopleColumnIsEnabled = enable);
+  setPeopleColumnType = (enable: boolean) => (this.typePeopleColumnIsEnabled = enable);
 
-  setPeopleColumnEmail = (enable) => (this.emailPeopleColumnIsEnabled = enable);
+  setPeopleColumnEmail = (enable: boolean) => (this.emailPeopleColumnIsEnabled = enable);
 
-  setPeopleColumnGroup = (enable) => (this.groupPeopleColumnIsEnabled = enable);
+  setPeopleColumnGroup = (enable: boolean) => (this.groupPeopleColumnIsEnabled = enable);
 
-  setPeopleColumnStorage = (enable) =>
+  setPeopleColumnStorage = (enable: boolean) =>
     (this.storagePeopleColumnIsEnabled = enable);
 
-  setGuestsColumnInviter = (enable) =>
+  setGuestsColumnInviter = (enable: boolean) =>
     (this.inviterGuestsColumnIsEnabled = enable);
 
-  setGuestsColumnEmail = (enable) => (this.emailGuestsColumnIsEnabled = enable);
+  setGuestsColumnEmail = (enable: boolean) => (this.emailGuestsColumnIsEnabled = enable);
 
-  setGuestsColumnInvitedDate = (enable) =>
+  setGuestsColumnInvitedDate = (enable: boolean) =>
     (this.invitedDateGuestsColumnIsEnabled = enable);
 
-  setInsideGroupColumnType = (enable) =>
+  setInsideGroupColumnType = (enable: boolean) =>
     (this.typeInsideGroupColumnIsEnabled = enable);
 
-  setInsideGroupColumnEmail = (enable) =>
+  setInsideGroupColumnEmail = (enable: boolean) =>
     (this.emailInsideGroupColumnIsEnabled = enable);
 
-  setInsideGroupColumnGroup = (enable) =>
+  setInsideGroupColumnGroup = (enable: boolean) =>
     (this.groupInsideGroupColumnIsEnabled = enable);
 
-  setInsideGroupColumnStorage = (enable) =>
+  setInsideGroupColumnStorage = (enable: boolean) =>
     (this.storageInsideGroupColumnIsEnabled = enable);
 
-  setColumnsEnable = (frameTableColumns) => {
+  setColumnsEnable = (frameTableColumns: string | null) => {
     const { contactsTab } = this.peopleStore.usersStore;
     const storageColumns = getPersistedString(this.tableStorageName);
     const splitColumns = storageColumns
@@ -633,7 +650,7 @@ class TableStore {
     }
   };
 
-  setColumnEnable = (key) => {
+  setColumnEnable = (key: string) => {
     const { isRoomsFolder, isArchiveFolder } = this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
@@ -870,13 +887,13 @@ class TableStore {
     }
   };
 
-  getColumns = (defaultColumns) => {
+  getColumns = <T extends TTableColumn>(defaultColumns: T[]): T[] => {
     const { isFrame, frameConfig } = this.settingsStore;
     const storageColumns = getPersistedString(this.tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
     const frameTableColumns = frameConfig?.viewTableColumns;
 
-    const columns = [];
+    const columns: T[] = [];
 
     if (splitColumns) {
       this.setColumnsEnable(null);
@@ -938,7 +955,7 @@ class TableStore {
     const isFrame = this.settingsStore.isFrame;
     const isDocumentsFolder = !isRooms && !isAIAgentsFolder;
 
-    let tableStorageName;
+    let tableStorageName: string;
 
     if (isTemplatesFolder)
       tableStorageName = `${TABLE_TEMPLATES_ROOM_COLUMNS}=${userId}`;
@@ -1010,7 +1027,7 @@ class TableStore {
     const isFrame = this.settingsStore.isFrame;
     const isDocumentsFolder = !isRooms && !isAIAgentsFolder;
 
-    let columnStorageName;
+    let columnStorageName: string;
 
     if (isTemplatesFolder)
       columnStorageName = `${COLUMNS_TEMPLATES_ROOM_SIZE}=${userId}`;
@@ -1082,7 +1099,7 @@ class TableStore {
     const isFrame = this.settingsStore.isFrame;
     const isDocumentsFolder = !isRooms && !isAIAgentsFolder;
 
-    let columnInfoPanelStorageName;
+    let columnInfoPanelStorageName: string;
 
     if (isTemplatesFolder)
       columnInfoPanelStorageName = `${COLUMNS_TEMPLATES_ROOM_SIZE_INFO_PANEL}=${userId}`;

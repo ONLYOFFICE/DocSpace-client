@@ -51,26 +51,50 @@ import { getUserList } from "@docspace/shared/api/people";
 import { SortByFieldName, RoomsProviderType } from "@docspace/shared/enums";
 import { getNewAiAgents } from "@docspace/shared/api/ai";
 
+import type { TPortal } from "@docspace/shared/api/portal/types";
+import type { TFilesUsedSpace } from "@docspace/shared/api/files/types";
+import type { TGetUserList } from "@docspace/shared/api/people/types";
+import type { TGetRooms } from "@docspace/shared/api/rooms/types";
+import type { TGetAgents } from "@docspace/shared/api/ai/types";
+import type { AuthStore } from "@docspace/shared/store/AuthStore";
+import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+
+import type PeopleStore from "./contacts/PeopleStore";
+import type UsersStore from "./contacts/UsersStore";
+
 const FILTER_COUNT = 6;
+
+// FABLE5-REVIEW: getQuotaSettings is untyped in shared/api — only the field
+// read here is described.
+type TQuotaSettings = { lastRecalculateDate?: string };
+
+type TPeopleListItem = ReturnType<UsersStore["getPeopleListItem"]>;
+
+// FABLE5-REVIEW: FilesStore is still .js (wave 3) — replace this structural
+// type with `import type` once it is converted.
+type TFilesStore = {
+  getFilesListItems: (items?: unknown[]) => unknown[];
+};
 
 class StorageManagement {
   isInit = false;
 
-  portalInfo = {};
+  portalInfo: Partial<TPortal> = {};
 
-  activeUsersCount = null;
+  activeUsersCount: number | null = null;
 
-  filesUsedSpace = {};
+  filesUsedSpace: Partial<TFilesUsedSpace> = {};
 
-  quotaSettings = {};
+  quotaSettings: TQuotaSettings = {};
 
-  intervalId = null;
+  intervalId: ReturnType<typeof setInterval> | null = null;
 
-  rooms = [];
+  rooms: unknown[] = [];
 
-  accounts = [];
+  accounts: TPeopleListItem[] = [];
 
-  aIAgents = [];
+  aIAgents: unknown[] = [];
 
   needRecalculating = false;
 
@@ -80,12 +104,22 @@ class StorageManagement {
 
   roomFilterData = RoomsFilter.getDefault();
 
+  filesStore: TFilesStore;
+
+  peopleStore: PeopleStore;
+
+  authStore: AuthStore;
+
+  currentQuotaStore: CurrentQuotasStore;
+
+  settingsStore: SettingsStore;
+
   constructor(
-    filesStore,
-    peopleStore,
-    authStore,
-    currentQuotaStore,
-    settingsStore,
+    filesStore: TFilesStore,
+    peopleStore: PeopleStore,
+    authStore: AuthStore,
+    currentQuotaStore: CurrentQuotasStore,
+    settingsStore: SettingsStore,
   ) {
     this.filesStore = filesStore;
     this.peopleStore = peopleStore;
@@ -95,7 +129,7 @@ class StorageManagement {
     makeAutoObservable(this);
   }
 
-  basicRequests = async (isInit) => {
+  basicRequests = async (isInit?: boolean) => {
     const { getFilesListItems } = this.filesStore;
     const { usersStore } = this.peopleStore;
     const { getPeopleListItem } = usersStore;
@@ -109,7 +143,9 @@ class StorageManagement {
     this.roomFilterData.pageCount = FILTER_COUNT;
     this.roomFilterData.sortBy = SortByFieldName.UsedSpace;
     this.roomFilterData.sortOrder = "descending";
-    this.roomFilterData.provider = RoomsProviderType.Storage;
+    // FABLE5-REVIEW: RoomsFilter.provider is typed Nullable<string> but has
+    // always been assigned the numeric RoomsProviderType.Storage here.
+    this.roomFilterData.provider = RoomsProviderType.Storage as unknown as string;
 
     const portalAbortRequests = new AbortController();
     const portalUsersCountAbortRequests = new AbortController();
@@ -139,22 +175,23 @@ class StorageManagement {
 
     try {
       if (isInit)
-        this.needRecalculating = await checkRecalculateQuota(
+        // FABLE5-REVIEW: checkRecalculateQuota is untyped in shared/api
+        this.needRecalculating = (await checkRecalculateQuota(
           checkRecalculateQuotaAbortRequests.signal,
-        );
+        )) as boolean;
 
       if (!this.needRecalculating && this.isRecalculating)
         this.setIsRecalculating(false);
 
-      let roomsList;
-      let accountsList;
-      let aIAgentsList;
+      let roomsList: TGetRooms | undefined;
+      let accountsList: TGetUserList | undefined;
+      let aIAgentsList: TGetAgents | undefined;
 
-      const requests = [
+      const requests: Promise<unknown>[] = [
         getPortal(portalAbortRequests.signal),
-        getPortalUsersCount(portalUsersCountAbortRequests.signal),
+        getPortalUsersCount(portalUsersCountAbortRequests.signal) as Promise<unknown>,
         getFilesUsedSpace(filesUsedSpaceAbortRequests.signal),
-        getQuotaSettings(quotaSettingsAbortRequests.signal),
+        getQuotaSettings(quotaSettingsAbortRequests.signal) as Promise<unknown>,
       ];
       if (!isFreeTariff || standalone) {
         requests.push(
@@ -172,7 +209,15 @@ class StorageManagement {
         accountsList,
         roomsList,
         aIAgentsList,
-      ] = await Promise.all(requests);
+      ] = (await Promise.all(requests)) as [
+        TPortal,
+        number,
+        TFilesUsedSpace,
+        TQuotaSettings,
+        TGetUserList | undefined,
+        TGetRooms | undefined,
+        TGetAgents | undefined,
+      ];
 
       if (roomsList) this.rooms = getFilesListItems(roomsList?.folders);
 
@@ -188,12 +233,14 @@ class StorageManagement {
         this.setIsRecalculating(true);
 
         try {
-          await recalculateQuota(recalculateQuotaAbortRequests.signal);
+          // recalculateQuota accepts no arguments; the signal passed
+          // historically was silently ignored.
+          await recalculateQuota();
 
           this.getIntervalCheckRecalculate();
         } catch (e) {
           if (axios.isCancel(e)) return;
-          toastr.error(e);
+          toastr.error(e as string);
 
           this.setIsRecalculating(false);
         }
@@ -207,7 +254,7 @@ class StorageManagement {
       }
     } catch (e) {
       if (axios.isCancel(e)) return;
-      toastr.error(e);
+      toastr.error(e as string);
     }
   };
 
@@ -217,11 +264,11 @@ class StorageManagement {
 
       this.isInit = true;
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as string);
     }
   };
 
-  updateQuotaInfo = async (type) => {
+  updateQuotaInfo = async (type: "user" | "agent" | "room") => {
     const { fetchPortalQuota } = this.currentQuotaStore;
     const { getFilesListItems } = this.filesStore;
     const { usersStore } = this.peopleStore;
@@ -233,7 +280,7 @@ class StorageManagement {
     const roomFilterData = RoomsFilter.getDefault();
     roomFilterData.pageCount = FILTER_COUNT;
 
-    const requests = [fetchPortalQuota()];
+    const requests: Promise<unknown>[] = [fetchPortalQuota()];
 
     type === "user"
       ? requests.push(getUserList(userFilterData))
@@ -245,22 +292,24 @@ class StorageManagement {
       const [, items] = await Promise.all(requests);
 
       if (type === "user") {
-        this.accounts = items.items.map((user) => getPeopleListItem(user));
+        this.accounts = (items as TGetUserList).items.map((user) =>
+          getPeopleListItem(user),
+        );
         return;
       }
       if (type === "agent") {
-        console.log("agent", items.folders);
-        this.aIAgents = getFilesListItems(items.folders);
+        console.log("agent", (items as TGetAgents).folders);
+        this.aIAgents = getFilesListItems((items as TGetAgents).folders);
         return;
       }
 
-      this.rooms = getFilesListItems(items.folders);
+      this.rooms = getFilesListItems((items as TGetRooms).folders);
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as string);
     }
   };
 
-  setIsRecalculating = (isRecalculating) => {
+  setIsRecalculating = (isRecalculating: boolean) => {
     this.isRecalculating = isRecalculating;
   };
 
@@ -277,7 +326,7 @@ class StorageManagement {
 
         isWaitRequest = true;
 
-        const result = await checkRecalculateQuota();
+        const result = (await checkRecalculateQuota()) as boolean;
         !this.isRecalculating && this.setIsRecalculating(true);
 
         if (result === false) {
@@ -288,14 +337,14 @@ class StorageManagement {
           try {
             await this.basicRequests();
           } catch (e) {
-            toastr.error(e);
+            toastr.error(e as string);
           }
           return;
         }
 
         isWaitRequest = false;
       } catch (e) {
-        toastr.error(e);
+        toastr.error(e as string);
 
         this.clearIntervalCheckRecalculate();
 

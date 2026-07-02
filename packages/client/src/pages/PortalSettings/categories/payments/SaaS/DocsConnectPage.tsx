@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect, type CSSProperties } from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
@@ -99,7 +99,11 @@ const DocsConnectPage = ({
     totalDays,
     percent: spentPercent,
     isPaid,
+    expired,
   } = getDocsConnectTrialState(info);
+
+  const trialLow =
+    !isPaid && !expired && totalDays > 0 && daysLeft / totalDays < 0.5;
 
   const currency = info.wallet?.currency ?? "USD";
   const credits = info.wallet?.availableCredits ?? 0;
@@ -180,9 +184,28 @@ const DocsConnectPage = ({
         </>
       ) : (
         <>
-          <Text className={styles.sectionTitle}>
-            {t("DocsConnect:FreeTrialTitle")}
-          </Text>
+          {expired ? (
+            <div className={styles.expiredBanner}>
+              <div className={styles.expiredBannerText}>
+                <Text className={styles.expiredTitle}>
+                  {t("DocsConnect:TrialExpiredTitle")}
+                </Text>
+                <Text className={styles.expiredDescription}>
+                  {t("DocsConnect:TrialExpiredDescription")}
+                </Text>
+              </div>
+              <Button
+                primary
+                size={ButtonSize.small}
+                label={t("DocsConnect:BuyAPlan")}
+                onClick={onBuyPlan}
+              />
+            </div>
+          ) : (
+            <Text className={styles.sectionTitle}>
+              {t("DocsConnect:FreeTrialTitle")}
+            </Text>
+          )}
 
           <div className={styles.trialCard}>
             <Text className={styles.trialLabel}>
@@ -193,35 +216,38 @@ const DocsConnectPage = ({
               {t("DocsConnect:OfDays", { count: totalDays })}
             </Text>
             <div
-              className={styles.progress}
-              style={
-                {
-                  "--dc-trial-fraction": Math.max(spentPercent, 1) / 100,
-                } as CSSProperties
-              }
+              className={`${styles.progress} ${
+                expired
+                  ? styles.progressExpired
+                  : trialLow
+                    ? styles.progressLow
+                    : ""
+              }`}
             >
               <ProgressBar percent={spentPercent} />
             </div>
           </div>
 
-          <div className={styles.actionsRow}>
-            <Button
-              primary
-              size={ButtonSize.small}
-              label={t("DocsConnect:BuyAPlan")}
-              onClick={onBuyPlan}
-            />
-            <Button
-              size={ButtonSize.small}
-              label={t("DocsConnect:GoToTenant")}
-              onClick={onGoToTenant}
-            />
-            <Text className={styles.trialEnds}>
-              {t("DocsConnect:TrialEndsOn", {
-                date: formatDocsConnectDate(endDate),
-              })}
-            </Text>
-          </div>
+          {expired ? null : (
+            <div className={styles.actionsRow}>
+              <Button
+                primary
+                size={ButtonSize.small}
+                label={t("DocsConnect:BuyAPlan")}
+                onClick={onBuyPlan}
+              />
+              <Button
+                size={ButtonSize.small}
+                label={t("DocsConnect:GoToTenant")}
+                onClick={onGoToTenant}
+              />
+              <Text className={styles.trialEnds}>
+                {t("DocsConnect:TrialEndsOn", {
+                  date: formatDocsConnectDate(endDate),
+                })}
+              </Text>
+            </div>
+          )}
         </>
       )}
 

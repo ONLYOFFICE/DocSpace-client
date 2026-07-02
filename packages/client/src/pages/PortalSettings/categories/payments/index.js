@@ -42,6 +42,7 @@ import { Tabs } from "@docspace/ui-kit/components/tabs";
 import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
 import { isManagement } from "@docspace/shared/utils/common";
 import { PAYMENT_ROUTES } from "./utils";
+import { getDocsConnectTrialState } from "../developer-tools/DocsConnect/utils";
 
 import config from "../../../../../package.json";
 import PaymentsEnterprise from "./Standalone";
@@ -112,6 +113,31 @@ const PaymentsPage = (props) => {
     openGetStarted?.();
   };
 
+  const docsConnectCardState = useMemo(() => {
+    if (!docsConnectInfo)
+      return {
+        subscribed: false,
+        isTrial: false,
+        trialDaysLeft: 0,
+        trialEndingSoon: false,
+        trialExpired: false,
+      };
+
+    const { isTrial, daysLeft, totalDays, expired } =
+      getDocsConnectTrialState(docsConnectInfo);
+    const trialExpired = isTrial && expired;
+    const trialEndingSoon =
+      isTrial && !expired && totalDays > 0 && daysLeft / totalDays < 0.5;
+
+    return {
+      subscribed: true,
+      isTrial,
+      trialDaysLeft: daysLeft,
+      trialEndingSoon,
+      trialExpired,
+    };
+  }, [docsConnectInfo]);
+
   const paymentConfig = useMemo(
     () => ({
       language,
@@ -143,6 +169,7 @@ const PaymentsPage = (props) => {
         <ServicesList
           getAIConfig={getAIConfig}
           onDocsConnectClick={onDocsConnectClick}
+          docsConnectState={docsConnectCardState}
           onOpenSupportedModels={() =>
             navigateToRoute("/portal-settings/ai-settings/models")
           }

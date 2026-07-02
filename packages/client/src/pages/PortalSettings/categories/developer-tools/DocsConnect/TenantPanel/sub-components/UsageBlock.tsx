@@ -81,7 +81,7 @@ const UsageBlock = ({
       </Text>
       <div className={styles.usageBarRow}>
         <Text fontSize="13px">{usageLabel}</Text>
-        <Text fontSize="13px" fontWeight={600} className={styles.usageCount}>
+        <Text fontSize="13px" fontWeight={600}>
           {`${usage.active} / ${limit}`}
         </Text>
       </div>

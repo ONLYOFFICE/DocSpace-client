@@ -95,9 +95,11 @@ const Statistics = ({
     startDate: trialStart,
     endDate: trialEnd,
     daysLeft,
+    totalDays,
     expired,
     percent: trialPercent,
   } = getDocsConnectTrialState(info);
+  const trialLow = !expired && totalDays > 0 && daysLeft / totalDays < 0.5;
 
   const connectors: Connector[] = [
     { key: "nextcloud", label: "Nextcloud", url: nextcloudUrl },
@@ -217,12 +219,18 @@ const Statistics = ({
             </div>
             <div
               className={`${styles.licenseProgress} ${
-                expired ? styles.licenseProgressExpired : ""
+                expired
+                  ? styles.licenseProgressExpired
+                  : trialLow
+                    ? styles.licenseProgressLow
+                    : ""
               }`}
             >
               <ProgressBar percent={trialPercent} />
               <Text fontSize="12px" className={styles.muted}>
-                {t("DocsConnect:TrialDaysRemaining", { count: daysLeft })}
+                {expired
+                  ? t("DocsConnect:DaysRemaining", { count: daysLeft })
+                  : t("DocsConnect:TrialDaysRemaining", { count: daysLeft })}
               </Text>
             </div>
           </div>
@@ -327,9 +335,7 @@ const Statistics = ({
           fontSize="18px"
           fontWeight={700}
         >
-          {t("DocsConnect:ActivityForPeriod", {
-            day: tenantInfo.stats.periodDay,
-          })}
+          {t("DocsConnect:ActivityForPeriod")}
         </Heading>
         <Text fontSize="12px" className={styles.muted}>
           {t("DocsConnect:UserActivitySubtitle")}

@@ -71,6 +71,15 @@
     color-mix(in srgb, var(--dev-tools-status-positive) 40%, transparent);
 }
 
+.trialBadgeWarning {
+  color: var(--dev-tools-status-warning);
+  border-color: color-mix(
+    in srgb,
+    var(--dev-tools-status-warning) 40%,
+    transparent
+  );
+}
+
 .trialBadgeExpired {
   color: var(--dev-tools-status-negative);
   border-color: color-mix(
@@ -246,6 +255,10 @@
   --progress-bar-fill: var(--dev-tools-status-positive);
 }
 
+.licenseProgressLow {
+  --progress-bar-fill: var(--dev-tools-status-warning);
+}
+
 .licenseProgressExpired {
   --progress-bar-fill: var(--dev-tools-status-negative);
 }
@@ -272,10 +285,6 @@
 
 .usageNegative {
   --usage-color: var(--dev-tools-status-negative);
-}
-
-.usageCount {
-  color: var(--usage-color);
 }
 
 .statValueHighlight {

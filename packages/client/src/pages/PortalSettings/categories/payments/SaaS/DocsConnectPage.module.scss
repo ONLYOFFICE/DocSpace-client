@@ -135,15 +135,11 @@
   flex-direction: column;
   gap: 4px;
   box-sizing: border-box;
-  max-width: 460px;
+  max-width: 322px;
   padding: 16px;
   border-radius: 6px;
   border: var(--dev-tools-card-border);
   background-color: var(--background-color);
-}
-
-.spendCard {
-  max-width: 322px;
 }
 
 .trialLabel,
@@ -151,6 +147,11 @@
   font-size: 12px;
   line-height: 16px;
   color: var(--payment-text-color);
+}
+
+.trialLabel {
+  font-weight: 600;
+  color: var(--payment-inactive-color);
 }
 
 .trialDays,
@@ -169,7 +170,6 @@
 .trialTotal {
   font-size: 13px;
   line-height: 18px;
-  color: var(--payment-text-color);
 }
 
 .progress {
@@ -177,15 +177,55 @@
   --progress-bar-size: 8px;
 
   :global([data-testid="progress-bar-percent"]) {
-    background-image: linear-gradient(
-      to right,
-      #{$light-status-positive},
-      #{$light-status-warning},
-      #{$light-error-status}
-    );
-    background-repeat: no-repeat;
-    background-size: calc(100% / var(--dc-trial-fraction, 1)) 100%;
+    background-image: none;
+    background-color: var(--payment-credit-color);
   }
+}
+
+.progressLow {
+  :global([data-testid="progress-bar-percent"]) {
+    background-color: var(--payment-warning-color);
+  }
+}
+
+.progressExpired {
+  :global([data-testid="progress-bar-percent"]) {
+    background-color: var(--payment-error-color);
+  }
+}
+
+.expiredBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-sizing: border-box;
+  max-width: 660px;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: $gray-light;
+
+  @include mixins.mobile {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.expiredBannerText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.expiredTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--payment-error-color);
+}
+
+.expiredDescription {
+  font-size: 12px;
+  color: var(--payment-text-color);
 }
 
 .actionsRow {

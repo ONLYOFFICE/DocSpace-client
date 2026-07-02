@@ -77,7 +77,9 @@ const TenantPanel = ({
 
   if (!info) return null;
 
-  const { isTrial, expired, daysLeft } = getDocsConnectTrialState(info);
+  const { isTrial, expired, daysLeft, totalDays } =
+    getDocsConnectTrialState(info);
+  const trialLow = !expired && totalDays > 0 && daysLeft / totalDays < 0.5;
 
   const getContextMenuItems = (): ContextMenuModel[] => [
     {
@@ -136,7 +138,11 @@ const TenantPanel = ({
           {isTrial ? (
             <span
               className={`${styles.trialBadge} ${
-                expired ? styles.trialBadgeExpired : ""
+                expired
+                  ? styles.trialBadgeExpired
+                  : trialLow
+                    ? styles.trialBadgeWarning
+                    : ""
               }`}
             >
               {expired

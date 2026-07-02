@@ -42,6 +42,8 @@ import {
 } from "SRC_DIR/helpers/constants";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 
+import { getPersistedString } from "./utils/persistence";
+
 const GUEST_ID = "guest";
 
 const TABLE_COLUMNS = `filesTableColumns_ver-${TableVersions.Files}`;
@@ -454,7 +456,7 @@ class TableStore {
 
   setColumnsEnable = (frameTableColumns) => {
     const { contactsTab } = this.peopleStore.usersStore;
-    const storageColumns = localStorage.getItem(this.tableStorageName);
+    const storageColumns = getPersistedString(this.tableStorageName);
     const splitColumns = storageColumns
       ? storageColumns.split(",")
       : frameTableColumns
@@ -870,7 +872,7 @@ class TableStore {
 
   getColumns = (defaultColumns) => {
     const { isFrame, frameConfig } = this.settingsStore;
-    const storageColumns = localStorage.getItem(this.tableStorageName);
+    const storageColumns = getPersistedString(this.tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
     const frameTableColumns = frameConfig?.viewTableColumns;
 

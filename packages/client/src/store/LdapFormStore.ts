@@ -7,11 +7,150 @@ import {
   saveCronLdap,
   getCronLdap,
 } from "@docspace/shared/api/settings";
-import { EmployeeType, LDAPOperation } from "@docspace/shared/enums";
+import {
+  EmployeeType,
+  LDAPOperation,
+  type LDAPCertificateProblem,
+} from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
 import isEqual from "lodash/isEqual";
 import delay from "lodash/delay";
 import { toastr } from "@docspace/ui-kit/components/toast";
+
+import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { TTranslation } from "@docspace/shared/types";
+
+// FABLE5-REVIEW: the LDAP endpoints in shared/api/settings (getLdapSettings,
+// getLdapDefaultSettings, getLdapStatus, syncLdap, saveLdapSettings,
+// getCronLdap, saveCronLdap) are untyped (`request(options)` without a
+// generic), so responses are cast at the call sites to the local types below.
+// Move these types to shared/api/settings/types.ts once the API is typed.
+
+type TLdapMapping = {
+  FirstNameAttribute: string;
+  SecondNameAttribute: string;
+  MailAttribute: string;
+  AvatarAttribute: string;
+  UserQuotaLimit: string | number;
+  LocationAttribute?: string;
+  MobilePhoneAttribute?: string;
+  TitleAttribute?: string;
+};
+
+type TLdapServerSettings = {
+  enableLdapAuthentication: boolean;
+  startTls: boolean;
+  ssl: boolean;
+  sendWelcomeEmail: boolean;
+  server: string;
+  userDN: string;
+  portNumber: string | number;
+  userFilter: string;
+  loginAttribute: string;
+  ldapMapping: TLdapMapping;
+  authentication: boolean;
+  acceptCertificate: boolean;
+  acceptCertificateHash: string | null;
+  groupMembership: boolean;
+  groupDN: string;
+  userAttribute: string;
+  groupFilter: string;
+  groupAttribute: string;
+  groupNameAttribute: string;
+  login: string;
+  password: string;
+  disableEmailVerification: boolean;
+};
+
+type TLdapRequiredSettings = {
+  server: string;
+  userDN: string;
+  loginAttribute: string;
+  portNumber: string | number;
+  userFilter: string;
+  firstName: string;
+  secondName: string;
+  mail: string;
+  avatarAttribute: string;
+  userQuotaLimit: string | number;
+  userType?: EmployeeType;
+};
+
+type TLdapCertificateConfirmRequest = {
+  Approved: boolean;
+  Requested: boolean;
+  SerialNumber: string;
+  IssuerName: string;
+  SubjectName: string;
+  ValidFrom: string;
+  ValidUntil: string;
+  Hash: string;
+  CertificateErrors?: LDAPCertificateProblem[];
+};
+
+type TLdapOperationStatus = {
+  id?: string | null;
+  completed?: boolean;
+  percents?: number;
+  error?: string | null;
+  warning?: string | null;
+  source?: string;
+  status?: string;
+  operationType?: LDAPOperation;
+  // raw server value is a JSON string; onGetStatus replaces it with the
+  // parsed object in place
+  certificateConfirmRequest?: TLdapCertificateConfirmRequest | string | null;
+};
+
+type TLdapCron = {
+  cron?: string | null;
+};
+
+type TLdapCertificateIssue = {
+  approved: boolean;
+  requested: boolean;
+  serialNumber: string;
+  issuerName: string;
+  subjectName: string;
+  validFrom: string;
+  validUntil: string;
+  uniqueHash: string;
+  errors: LDAPCertificateProblem[];
+};
+
+type TLdapSaveSettings = {
+  EnableLdapAuthentication: boolean;
+  AcceptCertificate: boolean;
+  acceptCertificateHash: string | null;
+  StartTls: boolean;
+  Ssl: boolean;
+  SendWelcomeEmail: boolean;
+  DisableEmailVerification: boolean;
+  Server: string;
+  UserDN: string;
+  PortNumber: string | number;
+  UserFilter: string;
+  LoginAttribute: string;
+  LdapMapping: {
+    firstNameAttribute: string;
+    secondNameAttribute: string;
+    mailAttribute: string;
+    avatarAttribute: string;
+    userQuotaLimit: string | number;
+  };
+  UsersType?: EmployeeType;
+  AccessRights: Record<string, unknown>;
+  GroupMembership: boolean;
+  GroupDN: string;
+  UserAttribute: string;
+  GroupFilter: string;
+  GroupAttribute: string;
+  GroupNameAttribute: string;
+  Authentication: boolean;
+  Login: string;
+  Password: string;
+};
 
 const constants = {
   SSL_LDAP_PORT: 636,
@@ -30,7 +169,7 @@ class LdapFormStore {
 
   isSslEnabled = false;
 
-  requiredSettings = {
+  requiredSettings: TLdapRequiredSettings = {
     server: "",
     userDN: "",
     loginAttribute: "uid",
@@ -51,13 +190,13 @@ class LdapFormStore {
 
   acceptCertificate = false;
 
-  acceptCertificateHash = null;
+  acceptCertificateHash: string | null = null;
 
   isSendWelcomeEmail = false;
 
   disableEmailVerification = false;
 
-  errors = {};
+  errors: Record<string, boolean> = {};
 
   groupMembership = false;
 
@@ -71,19 +210,19 @@ class LdapFormStore {
 
   groupNameAttribute = "cn";
 
-  cron = null;
+  cron: string | null = null;
 
-  serverCron = null;
+  serverCron: string | null = null;
 
   inProgress = false;
 
-  progressBarIntervalId = null;
+  progressBarIntervalId: ReturnType<typeof setInterval> | null = null;
 
   alreadyChecking = false;
 
   lastWarning = "";
 
-  progressStatus = {
+  progressStatus: TLdapOperationStatus = {
     percents: 0,
     completed: false,
     error: "",
@@ -93,7 +232,7 @@ class LdapFormStore {
 
   isCertificateDialogVisible = false;
 
-  cerficateIssue = {
+  cerficateIssue: TLdapCertificateIssue = {
     approved: false,
     requested: false,
     serialNumber: "",
@@ -105,26 +244,29 @@ class LdapFormStore {
     errors: [],
   };
 
-  defaultSettings = {};
+  defaultSettings: TLdapServerSettings | Record<string, never> = {};
 
-  serverData = {};
+  serverData: TLdapServerSettings | Record<string, never> = {};
 
-  serverSettings = {};
+  serverSettings: TLdapSaveSettings | Record<string, never> = {};
 
-  currentQuotaStore = null;
+  currentQuotaStore: CurrentQuotasStore | null = null;
 
-  settingsStore = null;
+  settingsStore: SettingsStore | null = null;
 
   confirmationResetModal = false;
 
-  constructor(currentQuotaStore, settingsStore) {
+  constructor(
+    currentQuotaStore: CurrentQuotasStore,
+    settingsStore: SettingsStore,
+  ) {
     makeAutoObservable(this);
 
     this.currentQuotaStore = currentQuotaStore;
     this.settingsStore = settingsStore;
   }
 
-  mapSettings = (data) => {
+  mapSettings = (data: TLdapServerSettings) => {
     // console.log("LDAP settings data", data);
     this.serverData = data;
 
@@ -197,7 +339,7 @@ class LdapFormStore {
     this.password = password || "";
   };
 
-  mapCron = (cron) => {
+  mapCron = (cron?: string | null) => {
     const cronWithoutSeconds = cron ? cron.replace("0 ", "") : null;
 
     this.setCron(cronWithoutSeconds);
@@ -205,20 +347,20 @@ class LdapFormStore {
     this.serverCron = cronWithoutSeconds;
   };
 
-  mapDefaultSettings = (data) => {
+  mapDefaultSettings = (data: TLdapServerSettings) => {
     delete data.ldapMapping.LocationAttribute;
     delete data.ldapMapping.MobilePhoneAttribute;
     delete data.ldapMapping.TitleAttribute;
     this.defaultSettings = data;
   };
 
-  load = async (t) => {
+  load = async (t: TTranslation) => {
     // if (this.isLoaded) return;
 
     const ldapSettingsAbortController = new AbortController();
     const cronLdapAbortController = new AbortController();
     const ldapDefaultAbortController = new AbortController();
-    this.settingsStore.addAbortControllers([
+    this.settingsStore!.addAbortControllers([
       ldapSettingsAbortController,
       cronLdapAbortController,
       ldapDefaultAbortController,
@@ -231,16 +373,16 @@ class LdapFormStore {
     ]);
 
     if (settingsRes.status == "fulfilled") {
-      this.mapSettings(settingsRes.value);
+      this.mapSettings(settingsRes.value as TLdapServerSettings);
       this.setServerSettings();
     }
 
     if (cronRes.status == "fulfilled") {
-      this.mapCron(cronRes.value?.cron);
+      this.mapCron((cronRes.value as TLdapCron | undefined)?.cron);
     }
 
     if (defaultRes.status == "fulfilled") {
-      this.mapDefaultSettings(defaultRes.value);
+      this.mapDefaultSettings(defaultRes.value as TLdapServerSettings);
     }
 
     runInAction(() => {
@@ -254,80 +396,80 @@ class LdapFormStore {
       defaultRes.status == "rejected"
     ) {
       if (
-        settingsRes?.reason?.message === "canceled" ||
-        cronRes?.reason?.message === "canceled" ||
-        defaultRes?.reason?.message === "canceled"
+        (settingsRes as { reason?: Error })?.reason?.message === "canceled" ||
+        (cronRes as { reason?: Error })?.reason?.message === "canceled" ||
+        (defaultRes as { reason?: Error })?.reason?.message === "canceled"
       ) {
         return;
       }
 
       console.error(
         "Error while loading LDAP settings",
-        settingsRes?.reason,
-        cronRes?.reason,
-        defaultRes?.reason,
+        (settingsRes as { reason?: Error })?.reason,
+        (cronRes as { reason?: Error })?.reason,
+        (defaultRes as { reason?: Error })?.reason,
       );
       toastr.error(t("Common:SomethingWentWrong"));
     }
   };
 
-  setServer = (server) => {
+  setServer = (server: string) => {
     this.requiredSettings.server = server;
   };
 
-  setUserDN = (userDN) => {
+  setUserDN = (userDN: string) => {
     this.requiredSettings.userDN = userDN;
   };
 
-  removeErrorField = (fieldName) => {
+  removeErrorField = (fieldName: string) => {
     delete this.errors[fieldName];
   };
 
-  setErrorField = (fieldName) => {
+  setErrorField = (fieldName: string) => {
     this.errors[fieldName] = true;
   };
 
-  setLoginAttribute = (loginAttribute) => {
+  setLoginAttribute = (loginAttribute: string) => {
     this.requiredSettings.loginAttribute = loginAttribute;
   };
 
-  setPortNumber = (portNumber) => {
+  setPortNumber = (portNumber: string | number) => {
     this.requiredSettings.portNumber = portNumber;
   };
 
-  setUserFilter = (userFilter) => {
+  setUserFilter = (userFilter: string) => {
     this.requiredSettings.userFilter = userFilter;
   };
 
-  setFirstName = (firstName) => {
+  setFirstName = (firstName: string) => {
     this.requiredSettings.firstName = firstName;
   };
 
-  setSecondName = (secondName) => {
+  setSecondName = (secondName: string) => {
     this.requiredSettings.secondName = secondName;
   };
 
-  setMail = (mail) => {
+  setMail = (mail: string) => {
     this.requiredSettings.mail = mail;
   };
 
-  setAvatarAttribute = (avatarAttribute) => {
+  setAvatarAttribute = (avatarAttribute: string) => {
     this.requiredSettings.avatarAttribute = avatarAttribute;
   };
 
-  setUserQuotaLimit = (userQuotaLimit) => {
+  setUserQuotaLimit = (userQuotaLimit: string | number) => {
     this.requiredSettings.userQuotaLimit = userQuotaLimit;
   };
 
-  setUserType = (userType) => {
+  setUserType = (userType: EmployeeType) => {
     this.requiredSettings.userType = userType;
   };
 
-  setLogin = (login) => {
+  setLogin = (login: string) => {
     this.login = login;
   };
 
-  setPassword = (password) => {
+  setPassword = (password: string) => {
     this.password = password;
   };
 
@@ -340,11 +482,11 @@ class LdapFormStore {
     }
   };
 
-  setIsSendWelcomeEmail = (sendWelcomeEmail) => {
+  setIsSendWelcomeEmail = (sendWelcomeEmail: boolean) => {
     this.isSendWelcomeEmail = sendWelcomeEmail;
   };
 
-  setDisableEmailVerification = (disableEmailVerification) => {
+  setDisableEmailVerification = (disableEmailVerification: boolean) => {
     this.disableEmailVerification = disableEmailVerification;
   };
 
@@ -352,28 +494,28 @@ class LdapFormStore {
     this.groupMembership = !this.groupMembership;
   };
 
-  setGroupDN = (groupDN) => {
+  setGroupDN = (groupDN: string) => {
     this.groupDN = groupDN;
   };
 
-  setUserAttribute = (userAttribute) => {
+  setUserAttribute = (userAttribute: string) => {
     this.userAttribute = userAttribute;
   };
 
-  setGroupFilter = (groupFilter) => {
+  setGroupFilter = (groupFilter: string) => {
     this.groupFilter = groupFilter;
   };
 
-  setGroupAttribute = (groupAttribute) => {
+  setGroupAttribute = (groupAttribute: string) => {
     this.groupAttribute = groupAttribute;
   };
 
-  setGroupNameAttribute = (groupNameAttribute) => {
+  setGroupNameAttribute = (groupNameAttribute: string) => {
     this.groupNameAttribute = groupNameAttribute;
   };
 
-  restoreToDefault = async (t) => {
-    const settingsRes = await getLdapDefaultSettings();
+  restoreToDefault = async (t: TTranslation) => {
+    const settingsRes = (await getLdapDefaultSettings()) as TLdapServerSettings;
     settingsRes.password = "";
 
     this.mapSettings(settingsRes);
@@ -381,7 +523,7 @@ class LdapFormStore {
     this.save(t, true);
   };
 
-  syncLdap = async (t) => {
+  syncLdap = async (t: TTranslation) => {
     this.inProgress = false;
     this.progressStatus = {
       percents: 0,
@@ -392,7 +534,7 @@ class LdapFormStore {
       operationType: LDAPOperation.Sync,
     };
 
-    const respose = await syncLdap();
+    const respose = (await syncLdap()) as TLdapOperationStatus | undefined;
 
     if (respose?.completed || !respose?.id) {
       this.onGetStatus(t, respose);
@@ -423,7 +565,7 @@ class LdapFormStore {
     }
   };
 
-  save = async (t, toDefault = false, turnOff = false) => {
+  save = async (t: TTranslation, toDefault = false, turnOff = false) => {
     this.inProgress = false;
     this.progressStatus = {
       percents: 0,
@@ -438,11 +580,13 @@ class LdapFormStore {
     this.errors = {};
 
     if (!toDefault && !turnOff) {
-      const requiredSettingsKeys = Object.keys(this.requiredSettings);
+      const requiredSettingsKeys = Object.keys(
+        this.requiredSettings,
+      ) as (keyof TLdapRequiredSettings)[];
       requiredSettingsKeys.forEach((key) => {
         if (
           typeof this.requiredSettings[key] === "string" &&
-          this.requiredSettings[key].trim() === ""
+          (this.requiredSettings[key] as string).trim() === ""
         ) {
           isErrorExist = true;
           this.errors[key] = true;
@@ -479,7 +623,9 @@ class LdapFormStore {
     }
 
     const settings = this.getSettings();
-    const respose = await saveLdapSettings(settings);
+    const respose = (await saveLdapSettings(settings)) as
+      | TLdapOperationStatus
+      | undefined;
     this.setServerSettings();
 
     if (turnOff) {
@@ -512,29 +658,33 @@ class LdapFormStore {
     });
   };
 
-  checkStatus = (t, toDefault = false) => {
+  checkStatus = (t: TTranslation, toDefault = false) => {
     if (this.alreadyChecking) {
       return;
     }
     this.alreadyChecking = true;
     this.inProgress = true;
 
-    getLdapStatus()
+    (getLdapStatus() as Promise<TLdapOperationStatus>)
       .then((data) => this.onGetStatus(t, data, toDefault))
-      .catch((e) => {
+      .catch((e: Error) => {
         console.error(e);
         this.alreadyChecking = false;
       });
   };
 
-  onGetStatus = async (t, data, toDefault) => {
+  onGetStatus = async (
+    t: TTranslation,
+    data?: TLdapOperationStatus,
+    toDefault?: boolean,
+  ) => {
     this.alreadyChecking = false;
     try {
       if (data?.error) {
         if (data.certificateConfirmRequest) {
           const certificateConfirmRequest = JSON.parse(
-            data.certificateConfirmRequest,
-          );
+            data.certificateConfirmRequest as string,
+          ) as TLdapCertificateConfirmRequest;
           data.certificateConfirmRequest = certificateConfirmRequest;
 
           this.cerficateIssue = {
@@ -553,7 +703,8 @@ class LdapFormStore {
         }
       }
 
-      let status = data;
+      // when data is undefined/empty it is replaced by the fallback below
+      let status = data as TLdapOperationStatus;
       if (
         !data ||
         (typeof data === "object" && Object.keys(data).length === 0)
@@ -584,31 +735,31 @@ class LdapFormStore {
         this.progressStatus.status = t("Common:SuccessfullyCompletedOperation");
 
         if (toDefault) {
-          const response = await getCronLdap();
+          const response = (await getCronLdap()) as TLdapCron | undefined;
           this.mapCron(response?.cron);
         }
 
         toastr.success(t("Common:SuccessfullyCompletedOperation"));
       }
     } catch (error) {
-      toastr.error(error);
+      toastr.error(error as string);
       this.endProcess();
     }
   };
 
-  setCertificateDialogVisible = (visible) => {
+  setCertificateDialogVisible = (visible: boolean) => {
     this.isCertificateDialogVisible = visible;
   };
 
-  setAcceptCertificate = (accept) => {
+  setAcceptCertificate = (accept: boolean) => {
     this.acceptCertificate = accept;
   };
 
-  setAcceptCertificateHash = (hash) => {
+  setAcceptCertificateHash = (hash: string | null) => {
     this.acceptCertificateHash = hash;
   };
 
-  setProgress = (status) => {
+  setProgress = (status: TLdapOperationStatus) => {
     this.progressStatus = status;
   };
 
@@ -622,15 +773,20 @@ class LdapFormStore {
     }, 3000);
   };
 
-  isCompleted = (status) => {
+  isCompleted = (status: TLdapOperationStatus) => {
     if (!status) return true;
 
     if (!status.completed) return false;
 
     if (
       status.error ||
+      // FABLE5-REVIEW: lowercase `requested` does not exist on the parsed
+      // certificateConfirmRequest (server sends PascalCase `Requested`) and
+      // the raw value may still be a JSON string here — kept as-is to
+      // preserve runtime behavior (evaluates to undefined, as in the old JS).
       (status.certificateConfirmRequest &&
-        status.certificateConfirmRequest.requested)
+        (status.certificateConfirmRequest as { requested?: boolean })
+          .requested)
     ) {
       return true;
     }
@@ -638,7 +794,7 @@ class LdapFormStore {
     return true;
   };
 
-  onChangeCron = (cron) => {
+  onChangeCron = (cron: string | null) => {
     this.setCron(cron);
   };
 
@@ -658,19 +814,19 @@ class LdapFormStore {
     }
   };
 
-  setIsSettingsShown = (shown) => {
+  setIsSettingsShown = (shown: boolean) => {
     this.isSettingsShown = shown;
   };
 
-  setIsTlsEnabled = (enabled) => {
+  setIsTlsEnabled = (enabled: boolean) => {
     this.isTlsEnabled = enabled;
   };
 
-  setCron = (cron) => {
+  setCron = (cron: string | null) => {
     this.cron = cron;
   };
 
-  setIsSslEnabled = (enabled) => {
+  setIsSslEnabled = (enabled: boolean) => {
     this.isSslEnabled = enabled;
 
     if (
@@ -696,7 +852,7 @@ class LdapFormStore {
     this.serverSettings = settings;
   };
 
-  getSettings = () => {
+  getSettings = (): TLdapSaveSettings => {
     const clearServer = this.requiredSettings.server.replace(
       /((https?|ldaps?):\/\/)/gi,
       "",
@@ -762,7 +918,10 @@ class LdapFormStore {
   }
 
   get isUIDisabled() {
-    return this.inProgress || !this.currentQuotaStore.isLdapAvailable;
+    // FABLE5-REVIEW: currentQuotaStore is assigned in the constructor and is
+    // never null in practice; `!` preserves the old JS behavior (which would
+    // also have thrown on null).
+    return this.inProgress || !this.currentQuotaStore!.isLdapAvailable;
   }
 }
 

@@ -35,29 +35,56 @@
 
 import { makeAutoObservable } from "mobx";
 import { getFoldersTree, getSubfolders } from "@docspace/shared/api/files";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
-import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import SocketHelper, {
+  SocketCommands,
+  type TOptSocket,
+} from "@docspace/ui-kit/utils/socket";
 
 import i18n from "../i18n";
 
+import type PublicRoomStore from "./PublicRoomStore";
+import type SelectedFolderStore from "./SelectedFolderStore";
+
+/**
+ * A root tree node as returned by `getFoldersTree` from shared/api/files:
+ * `TFolder` extended with the tree-specific fields the API helper
+ * synthesizes before casting its result to `TFolder`.
+ */
+export type TTreeFolder = TFolder & {
+  key?: string;
+  folderClassName?: string;
+  files?: TFile[];
+  folders?: TFolder[] | null;
+  newItems?: number;
+};
+
 class TreeFoldersStore {
-  selectedFolderStore;
+  selectedFolderStore: SelectedFolderStore;
 
-  settingsStore;
+  settingsStore: SettingsStore;
 
-  publicRoomStore;
+  publicRoomStore: PublicRoomStore;
 
-  treeFolders = [];
+  treeFolders: TTreeFolder[] = [];
 
-  selectedTreeNode = [];
+  selectedTreeNode: string[] = [];
 
-  expandedPanelKeys = null;
+  // FABLE5-REVIEW: no consumers of expandedPanelKeys were found outside this
+  // store; typed as string[] | null based on the tree expanded-keys shape.
+  expandedPanelKeys: string[] | null = null;
 
-  rootFoldersTitles = {};
+  rootFoldersTitles: Partial<Record<FolderType, TTreeFolder>> = {};
 
   isLoadingNodes = false;
 
-  constructor(selectedFolderStore, settingsStore, publicRoomStore) {
+  constructor(
+    selectedFolderStore: SelectedFolderStore,
+    settingsStore: SettingsStore,
+    publicRoomStore: PublicRoomStore,
+  ) {
     makeAutoObservable(this);
 
     this.selectedFolderStore = selectedFolderStore;
@@ -68,7 +95,11 @@ class TreeFoldersStore {
   fetchTreeFolders = async () => {
     if (this.publicRoomStore.isPublicRoom) return;
 
-    const treeFolders = await getFoldersTree();
+    // FABLE5-REVIEW: getFoldersTree is declared as returning TFolder[] in
+    // shared/api/files, but the objects it builds carry the extra tree
+    // fields (key, folderClassName, folders, newItems) captured by
+    // TTreeFolder.
+    const treeFolders = (await getFoldersTree()) as TTreeFolder[];
 
     treeFolders.forEach((folder) => {
       switch (folder.rootFolderType) {
@@ -107,7 +138,7 @@ class TreeFoldersStore {
     return treeFolders;
   };
 
-  listenTreeFolders = (treeFolders) => {
+  listenTreeFolders = (treeFolders: TTreeFolder[]) => {
     const roomParts = treeFolders
       .filter((f) => {
         return f.rootFolderType !== FolderType.Recent;
@@ -128,9 +159,12 @@ class TreeFoldersStore {
     }
   };
 
-  updateTreeFoldersItem = (opt) => {
+  updateTreeFoldersItem = (opt: TOptSocket) => {
     if (opt?.data && opt?.cmd === "create") {
-      const data = JSON.parse(opt.data);
+      // FABLE5-REVIEW: the socket payload is a file DTO when opt.type is
+      // "file" and a folder DTO otherwise; typed as an intersection so both
+      // branches can access their fields without changing the runtime.
+      const data = JSON.parse(opt.data) as TFile & TFolder;
 
       const parentId = opt?.type === "file" ? data.folderId : data.parentId;
 
@@ -162,7 +196,7 @@ class TreeFoldersStore {
     });
   };
 
-  setRootFoldersTitles = (treeFolders) => {
+  setRootFoldersTitles = (treeFolders: TTreeFolder[]) => {
     treeFolders.forEach((elem) => {
       this.rootFoldersTitles[elem.rootFolderType] = {
         ...elem,
@@ -176,21 +210,21 @@ class TreeFoldersStore {
     getFoldersTree();
   };
 
-  setTreeFolders = (treeFolders) => {
+  setTreeFolders = (treeFolders: TTreeFolder[]) => {
     this.treeFolders = treeFolders;
   };
 
-  setIsLoadingNodes = (isLoadingNodes) => {
+  setIsLoadingNodes = (isLoadingNodes: boolean) => {
     this.isLoadingNodes = isLoadingNodes;
   };
 
-  setSelectedNode = (node) => {
+  setSelectedNode = (node: string[]) => {
     if (node[0]) {
       this.selectedTreeNode = node;
     }
   };
 
-  setExpandedPanelKeys = (expandedPanelKeys) => {
+  setExpandedPanelKeys = (expandedPanelKeys: string[] | null) => {
     this.expandedPanelKeys = expandedPanelKeys;
   };
 
@@ -205,19 +239,19 @@ class TreeFoldersStore {
   //   });
   // };
 
-  isMy = (myType) => myType === FolderType.USER;
+  isMy = (myType: FolderType) => myType === FolderType.USER;
 
-  isCommon = (commonType) => commonType === FolderType.COMMON;
+  isCommon = (commonType: FolderType) => commonType === FolderType.COMMON;
 
-  isShare = (shareType) => shareType === FolderType.SHARE;
+  isShare = (shareType: FolderType) => shareType === FolderType.SHARE;
 
-  isRoomRoot = (type) => type === FolderType.Rooms;
+  isRoomRoot = (type: FolderType) => type === FolderType.Rooms;
 
-  getRootFolder = (rootFolderType) => {
+  getRootFolder = (rootFolderType: FolderType) => {
     return this.treeFolders.find((x) => x.rootFolderType === rootFolderType);
   };
 
-  getSubfolders = (folderId) => getSubfolders(folderId);
+  getSubfolders = (folderId: number) => getSubfolders(folderId);
 
   get myRoomsId() {
     return this.rootFoldersTitles[FolderType.Rooms]?.id;
@@ -243,9 +277,6 @@ class TreeFoldersStore {
     );
   }
 
-  /**
-   * @type {import("@docspace/shared/api/files/types").TFolder=}
-   */
   get myFolder() {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.USER);
   }
@@ -270,9 +301,6 @@ class TreeFoldersStore {
     );
   }
 
-  /**
-   * @type {import("@docspace/shared/api/rooms/types").TRoom=}
-   */
   get roomsFolder() {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.Rooms);
   }

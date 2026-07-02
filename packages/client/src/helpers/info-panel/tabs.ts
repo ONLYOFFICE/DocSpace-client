@@ -58,7 +58,9 @@ type TPluginItem = {
 export type TGetAvailableInfoPanelTabsParams = {
   selection: TSelection;
   isTrash: boolean;
-  isRecentFolder: boolean;
+  // `undefined` is allowed because TreeFoldersStore.isRecentFolder is
+  // `boolean | undefined`; the flag is only used for truthiness checks.
+  isRecentFolder: boolean | undefined;
   enablePlugins: boolean;
   infoPanelItemsList: TPluginItem[];
 };

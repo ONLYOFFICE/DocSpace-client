@@ -35,7 +35,7 @@
 
 import { getBackupProgress } from "@docspace/shared/api/portal";
 import { makeAutoObservable } from "mobx";
-import axios from "axios";
+import axios, { type AxiosResponse } from "axios";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { AutoBackupPeriod } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -46,46 +46,74 @@ import {
 } from "@docspace/shared/api/files";
 import { getErrorInfo, isManagement } from "@docspace/shared/utils/common";
 
+import type { ReactNode } from "react";
+import type {
+  TBackupProgress,
+  TBackupSchedule,
+} from "@docspace/shared/api/portal/types";
+import type {
+  TConnectingStorage,
+  TUploadBackup,
+} from "@docspace/shared/api/files/types";
+import type { TStorageBackup } from "@docspace/shared/api/settings/types";
+import type {
+  ConnectedThirdPartyAccountType,
+  Nullable,
+  Option,
+  SelectedStorageType,
+  StorageRegionsType,
+  ThirdPartyAccountType,
+  TTranslation,
+  TWeekdaysLabel,
+} from "@docspace/shared/types";
+import type { TOption } from "@docspace/ui-kit/components/combobox";
+import type { AuthStore } from "@docspace/shared/store/AuthStore";
+import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
+import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+
 import {
   saveToLocalStorage,
   getFromLocalStorage,
   removeLocalStorage,
 } from "../pages/PortalSettings/utils";
 import { connectedCloudsTypeTitleTranslation } from "../helpers/filesUtils";
+import type { ThirdPartyStore } from "./ThirdPartyStore";
+import type PaymentStore from "./PaymentStore";
+import type { TCommonThirdParty } from "./SettingsSetupStore";
 
-const { EveryDayType, EveryWeekType } = AutoBackupPeriod;
-
-async function* uploadBackupFile(requestsDataArray, url) {
+async function* uploadBackupFile(requestsDataArray: FormData[], url: string) {
   const length = requestsDataArray.length;
   for (let index = 0; index < length; index++) {
     yield uploadBackup(url, requestsDataArray[index]);
   }
 }
 
-/**
- * @typedef {import("@docspace/shared/types").ThirdPartyAccountType} ThirdPartyAccountType
- * @typedef {import("@docspace/shared/api/files/types").TConnectingStorage} TConnectingStorage
- */
-
 class BackupStore {
-  authStore = null;
+  // `null!` keeps the original runtime field initializer (null) while the
+  // constructor immediately assigns the real store.
+  authStore: AuthStore = null!;
 
-  currentQuotaStore = null;
+  currentQuotaStore: CurrentQuotasStore = null!;
 
-  currentTariffStatusStore = null;
+  currentTariffStatusStore: CurrentTariffStatusStore = null!;
 
-  settingsStore = null;
+  settingsStore: SettingsStore = null!;
 
-  paymentStore = null;
+  paymentStore: PaymentStore = null!;
 
-  /** @type {import("./ThirdPartyStore").default} */
-  thirdPartyStore = null;
+  thirdPartyStore: ThirdPartyStore = null!;
 
-  restoreResource = null;
+  restoreResource: Nullable<File | number | string> = null;
 
-  backupSchedule = {};
+  // FABLE5-REVIEW: initialized as `{}` in the original JS even though the
+  // schedule shape is TBackupSchedule; consumers set a real schedule (or
+  // deleteSchedule sets null) before the fields are read.
+  backupSchedule: Nullable<TBackupSchedule> = {} as TBackupSchedule;
 
-  backupStorage = {};
+  // FABLE5-REVIEW: `backupStorage` is never read or written anywhere
+  // (store or consumers) — candidate for removal.
+  backupStorage: Record<string, unknown> = {};
 
   defaultDay = "0";
 
@@ -97,13 +125,13 @@ class BackupStore {
 
   defaultMaxCopiesNumber = "10";
 
-  defaultWeekday = null;
+  defaultWeekday: Nullable<string> = null;
 
   defaultWeekdayLabel = "";
 
-  defaultStorageType = null;
+  defaultStorageType: Nullable<string> = null;
 
-  defaultFolderId = null;
+  defaultFolderId: Nullable<string | number> = null;
 
   defaultMonthDay = "1";
 
@@ -117,23 +145,23 @@ class BackupStore {
 
   selectedMaxCopiesNumber = "10";
 
-  selectedWeekday = null;
+  selectedWeekday: Nullable<string> = null;
 
   selectedWeekdayLabel = "";
 
-  selectedStorageType = null;
+  selectedStorageType: Nullable<string> = null;
 
-  selectedFolderId = null;
+  selectedFolderId: Nullable<string | number> = null;
 
   selectedMonthDay = "1";
 
-  selectedStorageId = null;
+  selectedStorageId: Nullable<string> = null;
 
-  defaultStorageId = null;
+  defaultStorageId: Nullable<string> = null;
 
-  thirdPartyStorage = [];
+  thirdPartyStorage: SelectedStorageType[] = [];
 
-  commonThirdPartyList = [];
+  commonThirdPartyList: TCommonThirdParty[] = [];
 
   preparationPortalDialogVisible = false;
 
@@ -141,37 +169,41 @@ class BackupStore {
 
   errorInformation = "";
 
-  temporaryLink = null;
+  temporaryLink: Nullable<string> = null;
 
-  timerId = null;
+  // FABLE5-REVIEW: `timerId` is never assigned in the store or consumers —
+  // it stays `null` forever; candidate for removal.
+  timerId: Nullable<number> = null;
 
   isThirdStorageChanged = false;
 
-  /** @type {Record<string, string>} */
-  formSettings = {};
+  formSettings: Record<string, string> = {};
 
-  requiredFormSettings = {};
+  // FABLE5-REVIEW: initialized as `{}` in the original JS, but every write
+  // (setRequiredFormSettings) stores a string[] and isValidForm calls
+  // `.some()` on it. Typed as string[] with a cast to keep the runtime
+  // default untouched.
+  requiredFormSettings: string[] = {} as unknown as string[];
 
-  defaultFormSettings = {};
+  defaultFormSettings: Record<string, string> = {};
 
-  /** @type {Record<string, boolean>} */
-  errorsFieldsBeforeSafe = {};
+  errorsFieldsBeforeSafe: Record<string, boolean> = {};
 
   selectedEnableSchedule = false;
 
   defaultEnableSchedule = false;
 
-  storageRegions = [];
+  storageRegions: StorageRegionsType[] = [];
 
-  /** @type {ThirdPartyAccountType | null} */
-  selectedThirdPartyAccount = null;
+  selectedThirdPartyAccount: Nullable<ThirdPartyAccountType> = null;
 
-  connectedThirdPartyAccount = null;
+  connectedThirdPartyAccount: Nullable<ConnectedThirdPartyAccountType> = null;
 
-  /** @type {ThirdPartyAccountType[]} */
-  accounts = [];
+  accounts: ThirdPartyAccountType[] = [];
 
-  connectedAccount = [];
+  // FABLE5-REVIEW: `connectedAccount` is never read or written anywhere
+  // (store or consumers) — candidate for removal.
+  connectedAccount: unknown[] = [];
 
   isBackupProgressVisible = false;
 
@@ -179,7 +211,7 @@ class BackupStore {
 
   backupProgressWarning = "";
 
-  backupsCount = null;
+  backupsCount: Nullable<number> = null;
 
   isInited = false;
 
@@ -187,13 +219,19 @@ class BackupStore {
 
   isInitialError = false;
 
+  // FABLE5-REVIEW: `chunkUploadSize` was never declared as a class field in
+  // the original JS (created on first setChunkUploadSize call, so it is not
+  // observable). `declare` keeps that runtime shape; setChunkUploadSize is
+  // never called by consumers — candidate for removal.
+  declare chunkUploadSize?: number;
+
   constructor(
-    authStore,
-    thirdPartyStore,
-    currentQuotaStore,
-    currentTariffStatusStore,
-    settingsStore,
-    paymentStore,
+    authStore: AuthStore,
+    thirdPartyStore: ThirdPartyStore,
+    currentQuotaStore: CurrentQuotasStore,
+    currentTariffStatusStore: CurrentTariffStatusStore,
+    settingsStore: SettingsStore,
+    paymentStore: PaymentStore,
   ) {
     makeAutoObservable(this);
 
@@ -205,21 +243,21 @@ class BackupStore {
     this.paymentStore = paymentStore;
   }
 
-  setIsInitialError = (isInitialError) => {
+  setIsInitialError = (isInitialError: boolean) => {
     this.isInitialError = isInitialError;
   };
 
-  setIsEmptyContentBeforeLoader = (isEmptyContentBeforeLoader) => {
+  setIsEmptyContentBeforeLoader = (isEmptyContentBeforeLoader: boolean) => {
     this.isEmptyContentBeforeLoader = isEmptyContentBeforeLoader;
   };
 
-  setBackupsCount = (counts) => {
+  setBackupsCount = (counts?: Nullable<number>) => {
     if (counts === undefined || counts === null) return;
 
     this.backupsCount = counts;
   };
 
-  setIsInited = (isInited) => {
+  setIsInited = (isInited: boolean) => {
     this.isInited = isInited;
   };
 
@@ -232,13 +270,19 @@ class BackupStore {
 
     if (maxFreeBackups === 0) return isBackupServiceOn;
 
-    if (this.backupsCount >= maxFreeBackups) return isBackupServiceOn;
+    // `?? 0` mirrors the original `null >= n` coercion (null -> 0).
+    const backupsCount = this.backupsCount ?? 0;
+
+    if (backupsCount >= maxFreeBackups) return isBackupServiceOn;
 
     return true;
   }
 
-  setConnectedThirdPartyAccount = (account) => {
-    this.connectedThirdPartyAccount = account;
+  setConnectedThirdPartyAccount = (
+    account: Nullable<ConnectedThirdPartyAccountType> | undefined,
+  ) => {
+    this.connectedThirdPartyAccount =
+      account as Nullable<ConnectedThirdPartyAccountType>;
   };
 
   get isTheSameThirdPartyAccount() {
@@ -250,7 +294,7 @@ class BackupStore {
     return true;
   }
 
-  deleteSchedule = (weekdayArr) => {
+  deleteSchedule = (weekdayArr: TWeekdaysLabel[]) => {
     this.backupSchedule = null;
 
     this.defaultDay = "0";
@@ -326,7 +370,7 @@ class BackupStore {
     return false;
   }
 
-  setThirdPartyAccountsInfo = async (t) => {
+  setThirdPartyAccountsInfo = async (t: TTranslation) => {
     const [connectedAccount, providers] = await Promise.all([
       getSettingsThirdParty(),
       this.thirdPartyStore.fetchConnectingStorages("excludewebdav=true"),
@@ -334,10 +378,8 @@ class BackupStore {
 
     this.setConnectedThirdPartyAccount(connectedAccount);
 
-    /** @type {ThirdPartyAccountType[]} */
-    let accounts = [];
-    /** @type {ThirdPartyAccountType} */
-    let selectedAccount = {};
+    let accounts: ThirdPartyAccountType[] = [];
+    let selectedAccount = {} as ThirdPartyAccountType;
 
     providers.forEach((item) => {
       const { account, isConnected } = this.getThirdPartyAccount(item, t);
@@ -364,16 +406,10 @@ class BackupStore {
     );
   };
 
-  /**
-   * @typedef {Object} GetThirdPartyAccountReturnType
-   * @property {ThirdPartyAccountType} account
-   * @property {boolean} isConnected
-   *
-   * @param {TConnectingStorage} provider
-   * @param {import("@docspace/shared/types").TTranslation} t
-   * @returns {GetThirdPartyAccountReturnType}
-   */
-  getThirdPartyAccount = (provider, t) => {
+  getThirdPartyAccount = (
+    provider: TConnectingStorage,
+    t: TTranslation,
+  ): { account: ThirdPartyAccountType; isConnected: boolean } => {
     const serviceTitle = connectedCloudsTypeTitleTranslation(provider.name, t);
     const serviceLabel = provider.connected
       ? serviceTitle
@@ -389,7 +425,7 @@ class BackupStore {
 
     const isDisabled = !provider.connected && !this.authStore.isAdmin;
 
-    const account = {
+    const account: ThirdPartyAccountType = {
       name: provider.name,
       label: serviceLabel,
       title: serviceLabel,
@@ -402,7 +438,9 @@ class BackupStore {
       connected: provider.connected,
       ...(isConnected && {
         provider_id: this.connectedThirdPartyAccount?.providerId,
-        id: this.connectedThirdPartyAccount.id,
+        // `!` — isConnected can only be true when connectedThirdPartyAccount
+        // is set (see the comparisons above), matching the original runtime.
+        id: this.connectedThirdPartyAccount!.id,
       }),
       disabled: isDisabled,
     };
@@ -410,15 +448,17 @@ class BackupStore {
     return { account, isConnected };
   };
 
-  setThirdPartyAccounts = (accounts) => {
+  setThirdPartyAccounts = (accounts: ThirdPartyAccountType[]) => {
     this.accounts = accounts;
   };
 
-  /**
-   * @param {Partial<ThirdPartyAccountType> | null} elem
-   */
-  setSelectedThirdPartyAccount = (elem) => {
-    this.selectedThirdPartyAccount = elem;
+  // FABLE5-REVIEW: the setter historically accepts Partial<…> (old JSDoc) or
+  // undefined while the field is Nullable<ThirdPartyAccountType>; the cast
+  // mirrors that pre-existing mismatch without changing runtime.
+  setSelectedThirdPartyAccount = (
+    elem: Nullable<Partial<ThirdPartyAccountType>> | undefined,
+  ) => {
+    this.selectedThirdPartyAccount = elem as Nullable<ThirdPartyAccountType>;
   };
 
   toDefault = () => {
@@ -448,7 +488,11 @@ class BackupStore {
     this.setIsThirdStorageChanged(false);
   };
 
-  setDefaultOptions = (periodObj, weekdayArr) => {
+  // FABLE5-REVIEW: params are TOption[] to match the shared
+  // AutomaticBackupProps contract; TOption.key is string | number and
+  // TOption.label is ReactNode, so the assignments below cast to string —
+  // backup period/weekday options always carry string labels at runtime.
+  setDefaultOptions = (periodObj: TOption[], weekdayArr: TOption[]) => {
     if (this.backupSchedule) {
       const { storageType, cronParams, backupsStored, storageParams } =
         this.backupSchedule;
@@ -456,10 +500,12 @@ class BackupStore {
       const { folderId, module } = storageParams;
       const { period, day, hour } = cronParams;
 
-      const defaultFormSettings = {};
+      const defaultFormSettings: Record<string, string> = {};
       Object.keys(storageParams).forEach((variable) => {
         if (variable !== "module") {
-          defaultFormSettings[variable] = storageParams[variable];
+          defaultFormSettings[variable] = (
+            storageParams as Record<string, string>
+          )[variable];
         }
       });
 
@@ -486,20 +532,21 @@ class BackupStore {
       this.selectedStorageType = this.defaultStorageType;
       this.selectedFolderId = module ? "" : this.defaultFolderId;
 
-      this.defaultPeriodLabel = periodObj[+this.defaultPeriodNumber].label;
+      this.defaultPeriodLabel = periodObj[+this.defaultPeriodNumber]
+        .label as string;
       this.selectedPeriodLabel = this.defaultPeriodLabel;
       if (module) this.selectedStorageId = this.defaultStorageId;
 
       this.defaultMonthDay =
-        +this.defaultPeriodNumber === +EveryWeekType ||
-        +this.defaultPeriodNumber === +EveryDayType
+        +this.defaultPeriodNumber === +AutoBackupPeriod.EveryWeekType ||
+        +this.defaultPeriodNumber === +AutoBackupPeriod.EveryDayType
           ? "1"
           : this.defaultDay;
 
       this.selectedMonthDay = this.defaultMonthDay;
 
-      if (+this.defaultPeriodNumber === +EveryWeekType) {
-        let weekDay;
+      if (+this.defaultPeriodNumber === +AutoBackupPeriod.EveryWeekType) {
+        let weekDay: number | undefined;
 
         if (this.defaultDay) {
           for (let i = 0; i < weekdayArr.length; i++) {
@@ -509,25 +556,30 @@ class BackupStore {
           }
         }
 
-        this.defaultWeekdayLabel =
-          weekdayArr[this.defaultDay ? weekDay : 0].label;
+        // FABLE5-REVIEW: `weekDay as number` — original JS would index with
+        // undefined (yielding a crash on .label) if no weekday matched;
+        // the cast keeps that runtime untouched.
+        this.defaultWeekdayLabel = weekdayArr[
+          this.defaultDay ? (weekDay as number) : 0
+        ].label as string;
         this.selectedWeekdayLabel = this.defaultWeekdayLabel;
 
         this.defaultWeekday = this.defaultDay;
         this.selectedWeekday = this.defaultWeekday;
       } else {
-        this.defaultWeekday = weekdayArr[0].key;
-        this.defaultWeekdayLabel = weekdayArr[0].label;
+        this.defaultWeekday = weekdayArr[0].key as string;
+        this.defaultWeekdayLabel = weekdayArr[0].label as string;
 
         this.selectedWeekdayLabel = this.defaultWeekdayLabel;
         this.selectedWeekday = this.defaultWeekday;
       }
     } else {
-      this.defaultPeriodLabel = periodObj[+this.defaultPeriodNumber].label;
+      this.defaultPeriodLabel = periodObj[+this.defaultPeriodNumber]
+        .label as string;
       this.selectedPeriodLabel = this.defaultPeriodLabel;
 
-      this.defaultWeekday = weekdayArr[0].key;
-      this.defaultWeekdayLabel = weekdayArr[0].label;
+      this.defaultWeekday = weekdayArr[0].key as string;
+      this.defaultWeekdayLabel = weekdayArr[0].label as string;
 
       this.selectedWeekdayLabel = this.defaultWeekdayLabel;
       this.selectedWeekday = this.defaultWeekday;
@@ -536,68 +588,68 @@ class BackupStore {
     this.setIsThirdStorageChanged(false);
   };
 
-  setDefaultFolderId = (id) => {
+  setDefaultFolderId = (id: Nullable<string | number>) => {
     this.defaultFolderId = id;
   };
 
-  setThirdPartyStorage = (list) => {
+  setThirdPartyStorage = (list: TStorageBackup[]) => {
     this.thirdPartyStorage = list;
   };
 
-  setPreparationPortalDialogVisible = (visible) => {
+  setPreparationPortalDialogVisible = (visible: boolean) => {
     this.preparationPortalDialogVisible = visible;
   };
 
-  setBackupSchedule = (backupSchedule) => {
+  setBackupSchedule = (backupSchedule: TBackupSchedule) => {
     this.backupSchedule = backupSchedule;
   };
 
-  setCommonThirdPartyList = (list) => {
+  setCommonThirdPartyList = (list: TCommonThirdParty[]) => {
     this.commonThirdPartyList = list;
   };
 
-  setPeriod = (options) => {
+  setPeriod = (options: TOption) => {
     const key = options.key;
     const label = options.label;
 
-    this.selectedPeriodLabel = label;
+    this.selectedPeriodLabel = label as string;
     this.selectedPeriodNumber = `${key}`;
   };
 
-  setWeekday = (options) => {
+  setWeekday = (options: TOption) => {
     const key = options.key;
     const label = options.label;
 
-    this.selectedWeekday = key;
-    this.selectedWeekdayLabel = label;
+    this.selectedWeekday = key as string;
+    this.selectedWeekdayLabel = label as string;
   };
 
-  setMonthNumber = (options) => {
+  setMonthNumber = (options: TOption) => {
     const label = options.label;
 
-    this.selectedMonthDay = label;
+    this.selectedMonthDay = label as string;
   };
 
-  setTime = (options) => {
+  setTime = (options: TOption) => {
     const label = options.label;
 
-    this.selectedHour = label;
+    this.selectedHour = label as string;
   };
 
-  setMaxCopies = (options) => {
+  setMaxCopies = (options: TOption) => {
     const key = options.key;
-    this.selectedMaxCopiesNumber = key;
+    this.selectedMaxCopiesNumber = key as string;
   };
 
-  seStorageType = (type) => {
+  seStorageType = (type: string) => {
     this.selectedStorageType = `${type}`;
   };
 
-  setSelectedFolder = (folderId) => {
+  setSelectedFolder = (folderId: Nullable<string | number>) => {
     if (folderId !== this.selectedFolderId) this.selectedFolderId = folderId;
   };
 
-  setStorageId = (selectedStorage) => {
+  setStorageId = (selectedStorage: Nullable<string>) => {
     this.selectedStorageId = selectedStorage;
   };
 
@@ -619,10 +671,10 @@ class BackupStore {
   };
 
   saveToLocalStorage = (
-    isStorage,
-    moduleName,
-    selectedId,
-    selectedStorageTitle,
+    isStorage: boolean,
+    moduleName: string,
+    selectedId: string | number | undefined,
+    selectedStorageTitle?: string,
   ) => {
     saveToLocalStorage("LocalCopyStorageType", moduleName);
 
@@ -638,19 +690,32 @@ class BackupStore {
     }
   };
 
-  setErrorInformation = (err, t, customText) => {
-    this.errorInformation = getErrorInfo(err, t, customText);
+  // FABLE5-REVIEW: getErrorInfo requires `t` and can return a ReactNode, but
+  // the original store calls it with t/customText omitted and stores the
+  // result in a string field; the casts keep that pre-existing runtime.
+  setErrorInformation = (
+    err: unknown,
+    t?: TTranslation,
+    customText?: string | ReactNode,
+  ) => {
+    this.errorInformation = getErrorInfo(
+      err,
+      t as TTranslation,
+      customText,
+    ) as string;
   };
 
-  getProgress = async (t) => {
+  getProgress = async (t: TTranslation) => {
     const abortController = new AbortController();
     this.settingsStore.addAbortControllers(abortController);
 
     try {
-      const response = await getBackupProgress(
+      // FABLE5-REVIEW: getBackupProgress is untyped in shared/api (request
+      // without a generic), cast to TBackupProgress at the call site.
+      const response = (await getBackupProgress(
         isManagement(),
         abortController.signal,
-      );
+      )) as TBackupProgress | undefined;
 
       if (response) {
         const { progress, link, error, warning } = response;
@@ -687,50 +752,47 @@ class BackupStore {
     }
   };
 
-  setIsBackupProgressVisible = (visible) => {
+  setIsBackupProgressVisible = (visible: boolean) => {
     this.isBackupProgressVisible = visible;
   };
 
-  setBackupProgressError = (error) => {
+  setBackupProgressError = (error: string) => {
     this.backupProgressError = error;
   };
 
-  setBackupProgressWarning = (warning) => {
+  setBackupProgressWarning = (warning: string) => {
     this.backupProgressWarning = warning;
   };
 
-  setDownloadingProgress = (progress) => {
+  setDownloadingProgress = (progress: number) => {
     if (progress !== this.downloadingProgress)
       this.downloadingProgress = progress;
   };
 
-  setTemporaryLink = (link) => {
+  setTemporaryLink = (link: string) => {
     this.temporaryLink = link;
   };
 
-  setFormSettings = (obj) => {
+  setFormSettings = (obj: Record<string, string>) => {
     this.formSettings = obj;
   };
 
-  addValueInFormSettings = (name, value) => {
+  addValueInFormSettings = (name: string, value: string) => {
     this.setFormSettings({ ...this.formSettings, [name]: value });
   };
 
-  deleteValueFormSetting = (key) => {
+  deleteValueFormSetting = (key: string) => {
     delete this.formSettings[key];
   };
 
-  /**
-   * @param { boolean } isCheckedThirdPartyStorage
-   * @param { null |string | number } selectedFolderId
-   * @param { string | null =} selectedStorageId
-   * @returns { import("@docspace/shared/types").Option[]}
-   */
+  // FABLE5-REVIEW: typed Option[] to match the shared backup page contracts
+  // (AutoBackup/RestoreBackup types), although the produced objects carry
+  // only { key, value } at runtime (no label) — pre-existing shape.
   getStorageParams = (
-    isCheckedThirdPartyStorage,
-    selectedFolderId,
-    selectedStorageId,
-  ) => {
+    isCheckedThirdPartyStorage: boolean,
+    selectedFolderId: Nullable<string | number>,
+    selectedStorageId?: Nullable<string>,
+  ): Option[] => {
     const storageParams = [
       {
         key: isCheckedThirdPartyStorage ? "module" : "folderId",
@@ -738,7 +800,7 @@ class BackupStore {
           ? selectedStorageId
           : selectedFolderId,
       },
-    ];
+    ] as Option[];
 
     if (isCheckedThirdPartyStorage) {
       const arraySettings = Object.entries(this.formSettings);
@@ -747,7 +809,7 @@ class BackupStore {
         const tmpObj = {
           key: arraySettings[i][0],
           value: arraySettings[i][1],
-        };
+        } as Option;
 
         storageParams.push(tmpObj);
       }
@@ -756,15 +818,15 @@ class BackupStore {
     return storageParams;
   };
 
-  setRequiredFormSettings = (array) => {
+  setRequiredFormSettings = (array: string[]) => {
     this.requiredFormSettings = array;
   };
 
-  setStorageRegions = (regions) => {
+  setStorageRegions = (regions: StorageRegionsType[]) => {
     this.storageRegions = regions;
   };
 
-  setDefaultFormSettings = (obj) => {
+  setDefaultFormSettings = (obj: Record<string, string>) => {
     this.defaultFormSettings = obj;
   };
 
@@ -779,7 +841,7 @@ class BackupStore {
   }
 
   isFormReady = () => {
-    const errors = {};
+    const errors: Record<string, boolean> = {};
     let firstError = false;
 
     Object.values(this.requiredFormSettings).forEach((key) => {
@@ -796,12 +858,15 @@ class BackupStore {
     return !firstError;
   };
 
-  setErrorsFormFields = (errors) => {
+  setErrorsFormFields = (errors: Record<string, boolean>) => {
     this.errorsFieldsBeforeSafe = errors;
   };
 
-  setCompletedFormFields = (values, module) => {
-    const formSettingsTemp = {};
+  setCompletedFormFields = (
+    values: Record<string, string>,
+    module?: string,
+  ) => {
+    const formSettingsTemp: Record<string, string> = {};
 
     if (module && module === this.defaultStorageId) {
       this.setFormSettings({ ...this.defaultFormSettings });
@@ -816,7 +881,7 @@ class BackupStore {
     this.setErrorsFormFields({});
   };
 
-  setIsThirdStorageChanged = (changed) => {
+  setIsThirdStorageChanged = (changed: boolean) => {
     if (changed !== this.isThirdStorageChanged) {
       this.isThirdStorageChanged = changed;
     }
@@ -827,11 +892,11 @@ class BackupStore {
     this.selectedEnableSchedule = !isEnable;
   };
 
-  setterSelectedEnableSchedule = (enable) => {
+  setterSelectedEnableSchedule = (enable: boolean) => {
     this.selectedEnableSchedule = enable;
   };
 
-  convertServiceName = (serviceName) => {
+  convertServiceName = (serviceName: string) => {
     // Docusign, OneDrive, Wordpress
     switch (serviceName) {
       case "GoogleDrive":
@@ -847,16 +912,16 @@ class BackupStore {
     }
   };
 
-  setRestoreResource = (value) => {
+  setRestoreResource = (value: Nullable<File | string | number>) => {
     this.restoreResource = value;
   };
 
-  setChunkUploadSize = (chunkUploadSize) => {
+  setChunkUploadSize = (chunkUploadSize: number) => {
     this.chunkUploadSize = chunkUploadSize;
   };
 
-  uploadFileChunks = async (requestsDataArray, url) => {
-    let res;
+  uploadFileChunks = async (requestsDataArray: FormData[], url: string) => {
+    let res: AxiosResponse<TUploadBackup> | undefined;
 
     const uploadUrl = combineUrl(
       window.ClientConfig?.proxy?.url,
@@ -879,20 +944,23 @@ class BackupStore {
     try {
       const url = "/backupFileUpload.ashx";
 
-      const getExst = (fileName) => {
+      const getExst = (fileName: string) => {
         if (fileName.endsWith(".tar.gz")) {
           return "tar.gz";
         }
         return fileName.substring(fileName.lastIndexOf(".") + 1);
       };
 
-      const extension = getExst(this.restoreResource.name);
+      // FABLE5-REVIEW: uploadLocalFile assumes restoreResource is a File
+      // (name/size/slice); the original JS would crash on other values,
+      // the casts keep that runtime untouched.
+      const extension = getExst((this.restoreResource as File).name);
 
       const res = await uploadBackup(
         combineUrl(
           window.ClientConfig?.proxy?.url,
           config.homepage,
-          `${url}?init=true&totalSize=${this.restoreResource.size}&extension=${extension}`,
+          `${url}?init=true&totalSize=${(this.restoreResource as File).size}&extension=${extension}`,
         ),
       );
 
@@ -902,12 +970,14 @@ class BackupStore {
 
       const chunkUploadSize = res.data.ChunkSize;
 
+      // FABLE5-REVIEW: the original JS passed a second argument to
+      // Math.ceil, which is ignored at runtime; removed for TS (no
+      // behavior change).
       const chunks = Math.ceil(
-        this.restoreResource.size / chunkUploadSize,
-        chunkUploadSize,
+        (this.restoreResource as File).size / chunkUploadSize,
       );
 
-      const requestsDataArray = [];
+      const requestsDataArray: FormData[] = [];
 
       let chunk = 0;
 
@@ -916,7 +986,10 @@ class BackupStore {
         const formData = new FormData();
         formData.append(
           "file",
-          this.restoreResource.slice(offset, offset + chunkUploadSize),
+          (this.restoreResource as File).slice(
+            offset,
+            offset + chunkUploadSize,
+          ),
         );
 
         requestsDataArray.push(formData);
@@ -925,11 +998,10 @@ class BackupStore {
 
       return await this.uploadFileChunks(requestsDataArray, url);
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as string);
       return null;
     }
   };
 }
 
 export default BackupStore;
-

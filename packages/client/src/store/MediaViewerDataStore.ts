@@ -43,6 +43,8 @@ import {
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import type { TFile } from "@docspace/shared/api/files/types";
+import type { PlaylistType } from "@docspace/shared/components/media-viewer/MediaViewer.types";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -52,28 +54,76 @@ import {
   isVideo,
 } from "@docspace/shared/components/media-viewer/MediaViewer.utils";
 
+import type PluginStore from "./PluginStore";
+import type PublicRoomStore from "./PublicRoomStore";
+
+// FABLE5-REVIEW: FilesStore is still .js (wave 3) — minimal structural type of
+// the members actually used here; replace with import type once converted.
+type TFilesStore = {
+  files: TFile[];
+  filter: FilesFilter;
+  categoryType: number;
+  getFileInfo: (id: number | string) => Promise<TFile>;
+  setIsPreview: (predicate: boolean) => void;
+  setBufferSelection: (bufferSelection: TFile) => void;
+  createThumbnails: (files?: TFile[] | null) => Promise<unknown>;
+};
+
+export type TPreviewFile = TFile & { canOpenPlayer: boolean };
+
+// FABLE5-REVIEW: currentItem is an UploadDataStore upload item (UploadDataStore
+// is still .js) — minimal shape of the members actually used here.
+type TCurrentItem = {
+  fileId: number;
+  fileInfo: TFile;
+};
+
+type TMediaViewerData = {
+  id: number | string | null;
+  visible: boolean;
+};
+
+// FABLE5-REVIEW: `pdfViewer` exists in public/scripts/config.json but is
+// missing from the duplicated Window.ClientConfig declarations
+// (packages/shared/types/index.ts and the libs/ui-kit submodule's
+// utils/openingNewTab/index.ts). Both declarations must be updated in sync
+// (TS2717) and ui-kit is a separate submodule, so a local cast is used here
+// until the field can be added to both.
+type TClientConfigWithPdfViewer = NonNullable<Window["ClientConfig"]> & {
+  pdfViewer?: boolean;
+};
+
 class MediaViewerDataStore {
-  filesStore;
+  filesStore: TFilesStore;
 
-  publicRoomStore;
+  publicRoomStore: PublicRoomStore;
 
-  filesActionsStore;
+  // FABLE5-REVIEW: store/index.js passes selectedFolderStore as the 3rd
+  // constructor arg, then overwrites this field post-construction with the
+  // real FilesActionsStore (.js). The field is never read inside this store,
+  // so it is typed as `unknown` until FilesActionsStore is converted.
+  filesActionsStore: unknown;
 
-  pluginStore;
+  pluginStore: PluginStore;
 
   autoPlay = true;
 
-  id = null;
+  id: number | string | null = null;
 
   visible = false;
 
-  previewFile = null;
+  previewFile: TPreviewFile | null = null;
 
-  currentItem = null;
+  currentItem: TCurrentItem | null = null;
 
   prevPostionIndex = 0;
 
-  constructor(filesStore, publicRoomStore, filesActionsStore, pluginStore) {
+  constructor(
+    filesStore: TFilesStore,
+    publicRoomStore: PublicRoomStore,
+    filesActionsStore: unknown,
+    pluginStore: PluginStore,
+  ) {
     makeAutoObservable(this);
     this.filesStore = filesStore;
     this.publicRoomStore = publicRoomStore;
@@ -81,15 +131,15 @@ class MediaViewerDataStore {
     this.pluginStore = pluginStore;
   }
 
-  setMediaViewerVisible = (value) => {
+  setMediaViewerVisible = (value: boolean) => {
     this.visible = value;
   };
 
-  setAutoPlay = (value) => {
+  setAutoPlay = (value: boolean) => {
     this.autoPlay = value;
   };
 
-  setMediaViewerData = (mediaData) => {
+  setMediaViewerData = (mediaData: TMediaViewerData) => {
     this.id = mediaData.id;
     this.visible = mediaData.visible;
     this.setAutoPlay(true);
@@ -97,7 +147,10 @@ class MediaViewerDataStore {
     if (!mediaData.visible) this.setCurrentItem(null);
   };
 
-  fetchPreviewMediaFile = (id, fetchDefaultFiles) => {
+  fetchPreviewMediaFile = (
+    id: number | string,
+    fetchDefaultFiles: () => void,
+  ) => {
     const isMediaViewer = window.location.pathname.includes(
       PUBLIC_MEDIA_VIEW_URL,
     );
@@ -115,7 +168,7 @@ class MediaViewerDataStore {
           this.filesStore.setIsPreview(true);
         })
         .catch((err) => {
-          toastr.error(err);
+          toastr.error(err as string);
           fetchDefaultFiles();
         });
       return true;
@@ -124,7 +177,7 @@ class MediaViewerDataStore {
     return false;
   };
 
-  setToPreviewFile = (file, visible) => {
+  setToPreviewFile = (file: TPreviewFile | null, visible: boolean) => {
     if (file === null) {
       this.previewFile = null;
       this.id = null;
@@ -134,8 +187,12 @@ class MediaViewerDataStore {
 
     if (
       !file.canOpenPlayer &&
-      !file.fileExst === ".pdf" &&
-      window.ClientConfig?.pdfViewer
+      // FABLE5-REVIEW: `!file.fileExst === ".pdf"` compares a boolean to a
+      // string and is always false (likely meant `file.fileExst !== ".pdf"`).
+      // Cast keeps the original runtime behavior unchanged.
+      (!file.fileExst as unknown as string) === ".pdf" &&
+      (window.ClientConfig as TClientConfigWithPdfViewer | undefined)
+        ?.pdfViewer
     )
       return;
 
@@ -145,15 +202,15 @@ class MediaViewerDataStore {
     this.visible = visible;
   };
 
-  setCurrentItem = (item) => {
+  setCurrentItem = (item: TCurrentItem | null) => {
     this.currentItem = item;
   };
 
-  setCurrentId = (id) => {
+  setCurrentId = (id: number | string | null) => {
     this.id = id;
   };
 
-  getUrl = (id) => {
+  getUrl = (id: number | string) => {
     if (this.publicRoomStore.isPublicRoom) {
       const key = this.publicRoomStore.publicRoomKey;
       const filterObj = FilesFilter.getFilter(window.location);
@@ -186,14 +243,17 @@ class MediaViewerDataStore {
 
     const queryParams = filter.toUrlParams();
 
-    const url = getCategoryUrl(this.filesStore.categoryType, filter.folder);
+    const url: string = getCategoryUrl(
+      this.filesStore.categoryType,
+      filter.folder,
+    );
 
     const pathname = `${url}?${queryParams}`;
 
     return pathname;
   };
 
-  changeUrl = (id) => {
+  changeUrl = (id: number | string) => {
     if (this.isPluginViewerActive) return;
 
     const url = this.getUrl(id);
@@ -308,7 +368,7 @@ class MediaViewerDataStore {
     );
   }
 
-  filterFilesByPluginCriteria = (files) => {
+  filterFilesByPluginCriteria = (files: TFile[]) => {
     if (!this.isPluginViewerActive) return files;
 
     const { pluginMediaViewerProps, getCurrentDevice, getUserRole } =
@@ -385,6 +445,9 @@ class MediaViewerDataStore {
       const pluginPlaylist = this.filterFilesByPluginCriteria(filesList);
 
       return pluginPlaylist.map((file, index) => {
+        // FABLE5-REVIEW: plugin playlist items genuinely lack `thumbnailUrl`
+        // at runtime although PlaylistType requires it — cast preserves the
+        // original runtime shape.
         return {
           id: index,
           fileId: file.id,
@@ -394,15 +457,18 @@ class MediaViewerDataStore {
           fileStatus: file.fileStatus,
           canShare: file.canShare,
           version: file.version,
-        };
+        } as PlaylistType;
       });
     }
 
-    const playlist = [];
-    const itemsWithoutThumb = [];
+    const playlist: PlaylistType[] = [];
+    const itemsWithoutThumb: TFile[] = [];
     let id = 0;
 
     if (this.currentItem) {
+      // FABLE5-REVIEW: this playlist item genuinely lacks `thumbnailUrl` and
+      // `version` at runtime although PlaylistType requires them — cast
+      // preserves the original runtime shape.
       playlist.push({
         id,
         fileId: this.currentItem.fileId,
@@ -412,7 +478,7 @@ class MediaViewerDataStore {
         fileStatus: this.currentItem.fileInfo.fileStatus,
         canShare: this.currentItem.fileInfo.canShare,
         encrypted: this.currentItem.fileInfo.encrypted || false,
-      });
+      } as unknown as PlaylistType);
 
       return playlist;
     }
@@ -422,7 +488,9 @@ class MediaViewerDataStore {
         const canOpenPlayer =
           (file.viewAccessibility?.ImageView ||
             file.viewAccessibility?.MediaView ||
-            (file.fileExst === ".pdf" && window.ClientConfig?.pdfViewer)) &&
+            (file.fileExst === ".pdf" &&
+              (window.ClientConfig as TClientConfigWithPdfViewer | undefined)
+                ?.pdfViewer)) &&
           !file.isLinkExpired;
 
         if (canOpenPlayer) {

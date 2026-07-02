@@ -52,24 +52,45 @@ import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
+import type { AxiosError, AxiosResponse } from "axios";
+import type {
+  TOformCategory,
+  TOformCategoryType,
+  TOformFile,
+  TOformLocale,
+  TOformsFilter,
+  TOformsListResponse,
+} from "@docspace/shared/api/oforms/types";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { UserStore } from "@docspace/shared/store/UserStore";
+
 import {
   PersistenceKeys,
   hasPersisted,
   setPersistedString,
 } from "./utils/persistence";
 
+// FABLE5-REVIEW: TreeFoldersStore is still .js (wave 3) — minimal structural
+// type covering only the member used here; replace with
+// `import type TreeFoldersStore from "./TreeFoldersStore"` once converted.
+type TTreeFoldersStore = {
+  isFormRoomRoot: boolean;
+};
+
 const myDocumentsFolderId = 2;
 
 class OformsStore {
-  settingsStore;
+  settingsStore: SettingsStore;
 
-  treeFoldersStore;
+  treeFoldersStore: TTreeFoldersStore;
 
-  userStore = null;
+  // `null!` keeps the original runtime field initializer (null) while the
+  // constructor immediately assigns the real store.
+  userStore: UserStore = null!;
 
-  oformFiles = null;
+  oformFiles: TOformFile[] | null = null;
 
-  gallerySelected = null;
+  gallerySelected: TOformFile | null = null;
 
   oformsIsLoading = false;
 
@@ -77,15 +98,15 @@ class OformsStore {
 
   oformsNetworkError = false;
 
-  oformsFilter = OformsFilter.getDefault();
+  oformsFilter: TOformsFilter = OformsFilter.getDefault();
 
-  oformFromFolderId = myDocumentsFolderId;
+  oformFromFolderId: number | string = myDocumentsFolderId;
 
-  currentCategory = null;
+  currentCategory: TOformCategory | null = null;
 
-  categoryTitles = [];
+  categoryTitles: string[] = [];
 
-  oformLocales = null;
+  oformLocales: string[] | null = null;
 
   filterOformsByLocaleIsLoading = false;
 
@@ -105,7 +126,11 @@ class OformsStore {
     PersistenceKeys.submitToGalleryTileIsHidden,
   );
 
-  constructor(settingsStore, userStore, treeFoldersStore) {
+  constructor(
+    settingsStore: SettingsStore,
+    userStore: UserStore,
+    treeFoldersStore: TTreeFoldersStore,
+  ) {
     this.settingsStore = settingsStore;
     this.userStore = userStore;
     this.treeFoldersStore = treeFoldersStore;
@@ -116,8 +141,10 @@ class OformsStore {
     const userLocale = getCookie(LANGUAGE) || this.userStore.user?.cultureName;
     const convertedLocale = convertToLanguage(userLocale);
 
-    const locale = this.oformLocales?.includes(convertedLocale)
-      ? convertedLocale
+    // `includes(convertedLocale)` is only true when `convertedLocale` is a
+    // string, so the assertions below are safe and keep the original logic.
+    const locale = this.oformLocales?.includes(convertedLocale as string)
+      ? (convertedLocale as string)
       : this.oformLocales?.includes(this.settingsStore.culture)
         ? this.settingsStore.culture
         : "en";
@@ -125,44 +152,49 @@ class OformsStore {
     return locale;
   }
 
-  setOformFiles = (oformFiles) => (this.oformFiles = oformFiles);
+  setOformFiles = (oformFiles: TOformFile[] | null) =>
+    (this.oformFiles = oformFiles);
 
-  setOformsFilter = (oformsFilter) => (this.oformsFilter = oformsFilter);
+  setOformsFilter = (oformsFilter: TOformsFilter) =>
+    (this.oformsFilter = oformsFilter);
 
-  setOformsCurrentCategory = (currentCategory) =>
+  setOformsCurrentCategory = (currentCategory: TOformCategory | null) =>
     (this.currentCategory = currentCategory);
 
-  setOformFromFolderId = (oformFromFolderId) => {
+  setOformFromFolderId = (oformFromFolderId: number | string) => {
     this.oformFromFolderId = oformFromFolderId;
   };
 
-  setOformsIsLoading = (oformsIsLoading) =>
+  setOformsIsLoading = (oformsIsLoading: boolean) =>
     (this.oformsIsLoading = oformsIsLoading);
 
-  setGallerySelected = (gallerySelected) => {
+  setGallerySelected = (gallerySelected: TOformFile | null) => {
     this.gallerySelected = gallerySelected;
   };
 
-  setOformLocales = (oformLocales) => (this.oformLocales = oformLocales);
+  setOformLocales = (oformLocales: string[] | null) =>
+    (this.oformLocales = oformLocales);
 
-  setFilterOformsByLocaleIsLoading = (filterOformsByLocaleIsLoading) => {
+  setFilterOformsByLocaleIsLoading = (
+    filterOformsByLocaleIsLoading: boolean,
+  ) => {
     this.filterOformsByLocaleIsLoading = filterOformsByLocaleIsLoading;
   };
 
-  setCategoryFilterLoaded = (categoryFilterLoaded) => {
+  setCategoryFilterLoaded = (categoryFilterLoaded: boolean) => {
     this.categoryFilterLoaded = categoryFilterLoaded;
   };
 
-  setLanguageFilterLoaded = (languageFilterLoaded) => {
+  setLanguageFilterLoaded = (languageFilterLoaded: boolean) => {
     this.languageFilterLoaded = languageFilterLoaded;
   };
 
-  setOformFilesLoaded = (oformFilesLoaded) => {
+  setOformFilesLoaded = (oformFilesLoaded: boolean) => {
     this.oformFilesLoaded = oformFilesLoaded;
   };
 
   setIsVisibleInfoPanelTemplateGallery = (
-    isVisibleInfoPanelTemplateGallery,
+    isVisibleInfoPanelTemplateGallery: boolean,
   ) => {
     this.isVisibleInfoPanelTemplateGallery = isVisibleInfoPanelTemplateGallery;
   };
@@ -173,17 +205,28 @@ class OformsStore {
     const url = combineUrl(uploadDomain, uploadDashboard, "/i18n/locales");
 
     try {
-      const fetchedLocales = await getOformLocales(url);
+      // FABLE5-REVIEW: the oforms API client (shared/api/oforms/index.js) is
+      // still untyped (@ts-nocheck) — response shapes are asserted here and
+      // at the other call sites below (getOforms, getCategoryById,
+      // getCategoryTypes, getCategoriesOfCategoryType, submitToGallery).
+      const fetchedLocales = (await getOformLocales(url)) as TOformLocale[];
       const localeKeys = fetchedLocales.map((locale) => locale.code);
       this.setOformLocales(localeKeys);
     } catch (err) {
       this.setOformLocales([]);
 
-      err?.message !== "Network Error" && toastr.error(err);
+      (err as AxiosError)?.message !== "Network Error" &&
+        toastr.error(err as string);
     }
   };
 
-  getOforms = async (filter = OformsFilter.getDefault()) => {
+  getOforms = async (
+    filter: TOformsFilter = OformsFilter.getDefault(),
+    // FABLE5-REVIEW: fetchMoreOforms always passed a second `true` argument
+    // that the original .js implementation never declared or read — typed as
+    // an ignored optional param to keep that call site untouched.
+    _fetchMore?: boolean,
+  ) => {
     const { domain, path } = this.settingsStore.formGallery;
 
     const formName = "&fields[0]=name_form";
@@ -200,13 +243,15 @@ class OformsStore {
     const apiUrl = combineUrl(domain, path, params);
 
     try {
-      const oforms = await getOforms(apiUrl);
+      const oforms = (await getOforms(
+        apiUrl,
+      )) as AxiosResponse<TOformsListResponse>;
       this.oformsLoadError = false;
       this.oformsNetworkError = false;
       return oforms;
     } catch (err) {
-      const status = err?.response?.status;
-      const isNetworkError = err?.code === "ERR_NETWORK";
+      const status = (err as AxiosError)?.response?.status;
+      const isNetworkError = (err as AxiosError)?.code === "ERR_NETWORK";
       const isApiError = status === 404 || status === 500;
 
       if (isApiError) {
@@ -214,14 +259,14 @@ class OformsStore {
       } else if (isNetworkError) {
         this.oformsNetworkError = true;
       } else {
-        toastr.error(err);
+        toastr.error(err as string);
       }
     }
 
     return null;
   };
 
-  fetchOforms = async (filter = OformsFilter.getDefault()) => {
+  fetchOforms = async (filter: TOformsFilter = OformsFilter.getDefault()) => {
     const oformData = await this.getOforms(filter);
 
     const paginationData = oformData?.data?.meta?.pagination;
@@ -253,7 +298,7 @@ class OformsStore {
     });
   };
 
-  getTypeOfCategory = (category) => {
+  getTypeOfCategory = (category: TOformCategory | null | undefined) => {
     if (!category) return;
 
     const [categoryType] = this.categoryTitles.filter(
@@ -263,29 +308,46 @@ class OformsStore {
     return categoryType;
   };
 
-  getCategoryTitle = (category, locale = this.oformsFilter.locale) => {
+  getCategoryTitle = (
+    category: TOformCategory | null | undefined,
+    locale: string | null = this.oformsFilter.locale,
+  ) => {
     if (!category) return "";
 
     const categoryType = this.getTypeOfCategory(category);
-    const categoryTitle = category.attributes[categoryType];
+    // FABLE5-REVIEW: the category title lives under a dynamic Strapi key
+    // named by `categoryType`; when no category type matches,
+    // `categoryType` is `undefined` and the original .js resolved
+    // `attributes[undefined]` to `undefined` — the assertions keep that
+    // exact runtime lookup (the method may still return `undefined`).
+    const categoryTitle = category.attributes[categoryType as string] as string;
 
     const localizations = category.attributes.localizations?.data || [];
     const [localizedCategory] = localizations.filter(
       (localization) => localization.attributes.locale === locale,
     );
-    return localizedCategory?.attributes[categoryType] || categoryTitle;
+    return (
+      (localizedCategory?.attributes[categoryType as string] as
+        | string
+        | undefined) || categoryTitle
+    );
   };
 
-  submitToFormGallery = async (file, formName, language, signal = null) => {
+  submitToFormGallery = async (
+    file: File,
+    formName: string,
+    language: string,
+    signal: AbortSignal | null = null,
+  ) => {
     const { uploadDomain, uploadPath } = this.settingsStore.formGallery;
 
-    const res = await submitToGallery(
+    const res = (await submitToGallery(
       combineUrl(uploadDomain, uploadPath),
       file,
       formName,
       language,
       signal,
-    );
+    )) as AxiosResponse<unknown>;
     return res;
   };
 
@@ -299,12 +361,12 @@ class OformsStore {
       return;
     }
 
-    const fetchedCategory = await getCategoryById(
+    const fetchedCategory = (await getCategoryById(
       combineUrl(uploadDomain, uploadDashboard),
       categorizeBy,
       categoryId,
       locale,
-    );
+    )) as TOformCategory | null;
 
     this.currentCategory = fetchedCategory;
   };
@@ -316,31 +378,37 @@ class OformsStore {
     const locale = this.defaultOformLocale;
 
     try {
-      const menuItems = await getCategoryTypes(url, locale);
+      const menuItems = (await getCategoryTypes(
+        url,
+        locale,
+      )) as TOformCategoryType[];
       this.categoryTitles = menuItems.map(
         (item) => item.attributes.categoryTitle,
       );
       return menuItems;
     } catch (err) {
-      err?.message !== "Network Error" && toastr.error(err);
+      (err as AxiosError)?.message !== "Network Error" &&
+        toastr.error(err as string);
     }
 
     return null;
   };
 
-  fetchCategoriesOfCategoryType = async (categoryTypeId) => {
+  fetchCategoriesOfCategoryType = async (categoryTypeId: string) => {
     const { uploadDomain, uploadDashboard } = this.settingsStore.formGallery;
 
     const url = combineUrl(uploadDomain, uploadDashboard, `/${categoryTypeId}`);
 
-    const categories = await getCategoriesOfCategoryType(
+    const categories = (await getCategoriesOfCategoryType(
       url,
-      this.oformsFilter.locale,
-    );
+      // the untyped API helper declares `locale = "en"`, but the original
+      // .js passed the (possibly null) filter locale through unchanged
+      this.oformsFilter.locale as string,
+    )) as TOformCategory[];
     return categories;
   };
 
-  filterOformsByCategory = (categorizeBy, categoryId) => {
+  filterOformsByCategory = (categorizeBy: string, categoryId: string) => {
     if (!categorizeBy || !categoryId) this.currentCategory = null;
 
     this.oformsFilter.page = 1;
@@ -351,7 +419,7 @@ class OformsStore {
     runInAction(() => this.fetchOforms(newOformsFilter));
   };
 
-  filterOformsByLocale = async (locale, icon) => {
+  filterOformsByLocale = async (locale: string, icon?: string) => {
     if (!locale) return;
 
     if (locale !== this.oformsFilter.locale)
@@ -369,7 +437,7 @@ class OformsStore {
     runInAction(() => this.fetchOforms(newOformsFilter));
   };
 
-  filterOformsBySearch = (search) => {
+  filterOformsBySearch = (search: string) => {
     this.oformsFilter.page = 1;
     this.oformsFilter.search = search;
     const newOformsFilter = this.oformsFilter.clone();
@@ -380,7 +448,7 @@ class OformsStore {
   initTemplateGallery = async () => {
     await this.fetchOformLocales();
 
-    const firstLoadFilter = this.treeFoldersStore.isFormRoomRoot
+    const firstLoadFilter: TOformsFilter = this.treeFoldersStore.isFormRoomRoot
       ? OformsFilter.getDefault()
       : OformsFilter.getDefaultDocx();
 
@@ -392,7 +460,7 @@ class OformsStore {
     ]);
   };
 
-  sortOforms = (sortBy, sortOrder) => {
+  sortOforms = (sortBy: string, sortOrder: string) => {
     if (!sortBy || !sortOrder) return;
 
     this.oformsFilter.page = 1;
@@ -403,10 +471,10 @@ class OformsStore {
     runInAction(() => this.fetchOforms(newOformsFilter));
   };
 
-  resetFilters = async (ext) => {
+  resetFilters = async (ext?: string) => {
     this.currentCategory = null;
 
-    const defaultFilter =
+    const defaultFilter: TOformsFilter =
       ext === ".docx"
         ? OformsFilter.getDefaultDocx()
         : ext === ".xlsx"
@@ -424,11 +492,11 @@ class OformsStore {
     this.submitToGalleryTileIsVisible = false;
   };
 
-  setTemplateGalleryVisible = (templateGalleryVisible) => {
+  setTemplateGalleryVisible = (templateGalleryVisible: boolean) => {
     this.templateGalleryVisible = templateGalleryVisible;
   };
 
-  setCurrentExtensionGallery = (extension) => {
+  setCurrentExtensionGallery = (extension: string) => {
     this.currentExtensionGallery = extension;
   };
 

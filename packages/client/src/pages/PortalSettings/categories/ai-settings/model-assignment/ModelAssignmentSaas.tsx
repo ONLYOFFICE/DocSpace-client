@@ -45,7 +45,6 @@ import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { DropDownItem } from "@docspace/ui-kit/components/drop-down-item";
 
 import { TModel } from "@docspace/shared/api/ai/types";
-import { ProviderType } from "@docspace/shared/api/ai/enums";
 import { TTranslation } from "@docspace/shared/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { getBrandName } from "@docspace/shared/constants/brands";
@@ -59,11 +58,11 @@ import { ModelAssignmentSaasLoader } from "./ModelAssignmentSaasLoader";
 
 type ModelAssignmentProps = {
   aiProvidersInitied?: AISettingsStore["aiProvidersInitied"];
-  aiProviders?: AISettingsStore["aiProviders"];
   defaultProviderModels?: AISettingsStore["defaultProviderModels"];
   defaultProvider?: AISettingsStore["defaultProvider"];
   isDefaultProviderModelsLoading?: AISettingsStore["isDefaultProviderModelsLoading"];
   changeDefaultProvider?: AISettingsStore["changeDefaultProvider"];
+  setAiProvidersInitied?: AISettingsStore["setAiProvidersInitied"];
   aiConfig?: SettingsStore["aiConfig"];
   formatAiModelsCurrency?: ServicesStore["formatAiModelsCurrency"];
 };
@@ -89,25 +88,18 @@ const getSelectedModelOption = (
 const ModelAssignmentSaas = ({
   aiProvidersInitied,
   aiConfig,
-  aiProviders,
   defaultProviderModels,
   defaultProvider,
   isDefaultProviderModelsLoading,
   changeDefaultProvider,
+  setAiProvidersInitied,
   formatAiModelsCurrency,
 }: ModelAssignmentProps) => {
   const { t } = useTranslation(["Common"]);
   const tooltipId = useId();
 
   const providerId = defaultProvider?.providerId || null;
-
-  const isOnlySystemProvider =
-    aiProviders?.length === 1 && aiProviders[0].type === ProviderType.PortalAi;
-  const isDisabled = isOnlySystemProvider && !aiConfig?.systemAiEnabled;
-
-  const isSystemProviderSelected = aiProviders?.some(
-    (p) => p.id === providerId && p.type === ProviderType.PortalAi,
-  );
+  const isDisabled = !aiConfig?.systemAiEnabled;
 
   const [selectedModelId, setSelectedModelId] = useState<string | null>(
     defaultProvider?.defaultModel || null,
@@ -140,7 +132,10 @@ const ModelAssignmentSaas = ({
     setIsSaveRequestRunning(true);
 
     try {
-      await changeDefaultProvider?.({ providerId, defaultModel: newModelId }, t);
+      await changeDefaultProvider?.(
+        { providerId, defaultModel: newModelId },
+        t,
+      );
     } catch {
       setSelectedModelId(prevModelId);
     } finally {
@@ -203,6 +198,8 @@ const ModelAssignmentSaas = ({
     selectedModelId,
   );
 
+  const hasModels = selectedModelOption.key !== "-2";
+
   const isComboBoxLoading =
     isDefaultProviderModelsLoading || isSaveRequestRunning;
 
@@ -236,7 +233,7 @@ const ModelAssignmentSaas = ({
           labelText={t("Common:Model")}
           removeMargin
         >
-          {isSystemProviderSelected ? (
+          {hasModels ? (
             <ComboBox
               onSelect={() => {}}
               options={[]}
@@ -300,9 +297,9 @@ export default inject(
       aiProvidersInitied,
       defaultProviderModels,
       defaultProvider,
-      aiProviders,
       isDefaultProviderModelsLoading,
       changeDefaultProvider,
+      setAiProvidersInitied,
     } = aiSettingsStore;
     const { aiConfig } = settingsStore;
     const { formatAiModelsCurrency } = servicesStore;
@@ -312,10 +309,11 @@ export default inject(
       aiConfig,
       defaultProviderModels,
       defaultProvider,
-      aiProviders,
       isDefaultProviderModelsLoading,
       changeDefaultProvider,
+      setAiProvidersInitied,
       formatAiModelsCurrency,
     };
   },
 )(observer(ModelAssignmentSaas));
+

@@ -138,8 +138,14 @@ import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
 import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
 
+import {
+  PersistenceKeys,
+  getPersistedString,
+  setPersistedString,
+} from "./utils/persistence";
+
 const { FilesFilter, RoomsFilter } = api;
-const storageViewAs = localStorage.getItem("viewAs");
+const storageViewAs = getPersistedString(PersistenceKeys.viewAs);
 
 let requestCounter = 0;
 
@@ -1146,7 +1152,7 @@ class FilesStore {
 
   setViewAs = (viewAs) => {
     this.privateViewAs = viewAs;
-    localStorage.setItem("viewAs", viewAs);
+    setPersistedString(PersistenceKeys.viewAs, viewAs);
     viewAs === "tile" && this.createThumbnails();
   };
 

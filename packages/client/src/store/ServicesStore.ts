@@ -197,6 +197,8 @@ class ServicesStore {
     } catch (error) {
       if (axios.isCancel(error)) return;
       console.error(error);
+    } finally {
+      this.isAiToolsPricesLoading = false;
     }
 
     this.isAiToolsPricesLoading = false;

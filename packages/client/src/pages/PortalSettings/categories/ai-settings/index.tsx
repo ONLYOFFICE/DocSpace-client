@@ -47,8 +47,10 @@ import type PaymentStore from "SRC_DIR/store/PaymentStore";
 import { Knowledge } from "./knowledge";
 // SaaS variants (informational/pricing cards); the ui-kit WebSearch above and
 // the local Knowledge are the functional components used on standalone.
-import WebSearchSaaS from "./search/WebSearch";
-import KnowledgeBase from "./knowledge/KnowledgeBase";
+import WebSearchSaas from "./search/WebSearchSaas";
+import KnowledgeBaseSaas from "./knowledge/KnowledgeBaseSaas";
+import AiModelsSaas from "./models/AiModelsSaas";
+import ModelAssignmentSaas from "./model-assignment/ModelAssignmentSaas";
 import AIFeaturesBanner from "./sub-components/AIFeaturesBanner";
 
 const BASE_PATH = "/portal-settings/ai-settings";
@@ -72,6 +74,7 @@ const detectTabFromPath = (pathname: string) => {
 type TAISettingsProps = {
   fetchKnowledge?: AISettingsStore["fetchKnowledge"];
   fetchAIProviders?: AISettingsStore["fetchAIProviders"];
+  initDefaultProvider?: AISettingsStore["initDefaultProvider"];
   currentDeviceType?: DeviceType;
   standalone?: boolean;
   isAiToolsServiceOn?: PaymentStore["isAiToolsServiceOn"];
@@ -81,6 +84,7 @@ type TAISettingsProps = {
 const AISettings = ({
   fetchKnowledge,
   fetchAIProviders,
+  initDefaultProvider,
   currentDeviceType,
   standalone,
   isAiToolsServiceOn,
@@ -90,16 +94,23 @@ const AISettings = ({
   const location = useLocation();
   const { t } = useTranslation(["Common"]);
 
-  const initWebSearch = React.useCallback(async () => {
-    if (!standalone) await fetchAiPrices?.();
-  }, [standalone, fetchAiPrices]);
   const initKnowledge = React.useCallback(async () => {
     await Promise.all([fetchKnowledge?.(), fetchAIProviders?.()]);
   }, [fetchKnowledge, fetchAIProviders]);
 
+  const initAIProviders = React.useCallback(async () => {
+    await fetchAIProviders?.();
+    await initDefaultProvider?.();
+  }, [fetchAIProviders, initDefaultProvider]);
+
   const { useProfilesStore } = useStores();
   const profiles = useProfilesStore((s) => s.profiles);
   const hasProfiles = profiles.length > 0;
+
+  // The profile requirement only applies to standalone installations, whose
+  // tabs render functional components that need an AI profile. On SaaS the
+  // non-AI-Models tabs render informational/pricing cards, so they stay open.
+  const gateNonAiModelsTabs = standalone && !hasProfiles;
 
   const [currentTabId, setCurrentTabId] = React.useState(() =>
     detectTabFromPath(location.pathname),
@@ -112,17 +123,26 @@ const AISettings = ({
   // If the user lands on a non-AI-Models tab while profiles are empty
   // (e.g. last profile was deleted), bounce back to AI Models.
   React.useEffect(() => {
-    if (!hasProfiles && currentTabId !== TAB_IDS.AI_MODELS) {
+    if (gateNonAiModelsTabs && currentTabId !== TAB_IDS.AI_MODELS) {
       navigate(`${BASE_PATH}/${TAB_IDS.AI_MODELS}`, { replace: true });
     }
-  }, [hasProfiles, currentTabId, navigate]);
+  }, [gateNonAiModelsTabs, currentTabId, navigate]);
 
-  // Load the data each tab needs when it becomes active (also on direct
-  // landing — tab onClick only fires on switch, not on initial mount).
+  // Load the data a tab needs when it becomes active. Standalone Knowledge is
+  // the only functional client tab; SaaS model assignment needs the providers.
   React.useEffect(() => {
-    if (currentTabId === TAB_IDS.WEB_SEARCH) initWebSearch();
-    else if (currentTabId === TAB_IDS.KNOWLEDGE) initKnowledge();
-  }, [currentTabId, hasProfiles, initAiModels, initWebSearch, initKnowledge]);
+    if (gateNonAiModelsTabs) return;
+
+    if (standalone && currentTabId === TAB_IDS.KNOWLEDGE) initKnowledge();
+    if (!standalone && currentTabId === TAB_IDS.MODEL_ASSIGNMENT)
+      initAIProviders();
+  }, [
+    standalone,
+    currentTabId,
+    gateNonAiModelsTabs,
+    initKnowledge,
+    initAIProviders,
+  ]);
 
   const navigateToTab = (id: string) => {
     navigate(`${BASE_PATH}/${id}`);
@@ -135,23 +155,23 @@ const AISettings = ({
   };
 
   const makeOnClick = (id: string) => () => {
-    if (!hasProfiles && id !== TAB_IDS.AI_MODELS) return;
+    if (gateNonAiModelsTabs && id !== TAB_IDS.AI_MODELS) return;
     navigateToTab(id);
   };
 
-  const disableNonAiModels = !hasProfiles;
+  const disableNonAiModels = gateNonAiModelsTabs;
 
   const data: TTabItem[] = [
     {
       id: TAB_IDS.AI_MODELS,
       name: t("Common:AIModels"),
-      content: <AiModels />,
+      content: standalone ? <AiModels /> : <AiModelsSaas />,
       onClick: makeOnClick(TAB_IDS.AI_MODELS),
     },
     {
       id: TAB_IDS.MODEL_ASSIGNMENT,
       name: t("Common:ModelAssignment"),
-      content: <ModelAssignment />,
+      content: standalone ? <ModelAssignment /> : <ModelAssignmentSaas />,
       onClick: makeOnClick(TAB_IDS.MODEL_ASSIGNMENT),
       isDisabled: disableNonAiModels,
     },
@@ -165,14 +185,14 @@ const AISettings = ({
     {
       id: TAB_IDS.WEB_SEARCH,
       name: t("Common:WebSearch"),
-      content: <WebSearch />,
+      content: standalone ? <WebSearch /> : <WebSearchSaas />,
       onClick: makeOnClick(TAB_IDS.WEB_SEARCH),
       isDisabled: disableNonAiModels,
     },
     {
       id: TAB_IDS.KNOWLEDGE,
       name: t("Common:Knowledge"),
-      content: standalone ? <Knowledge /> : <KnowledgeBase />,
+      content: standalone ? <Knowledge /> : <KnowledgeBaseSaas />,
       onClick: makeOnClick(TAB_IDS.KNOWLEDGE),
       isDisabled: disableNonAiModels,
     },
@@ -204,13 +224,15 @@ const AISettings = ({
 
 export const Component = inject(
   ({ aiSettingsStore, settingsStore, paymentStore }: TStore) => {
-    const { fetchKnowledge, fetchAIProviders } = aiSettingsStore;
+    const { fetchKnowledge, fetchAIProviders, initDefaultProvider } =
+      aiSettingsStore;
     const { currentDeviceType, standalone } = settingsStore;
     const { isAiToolsServiceOn, isCardLinkedToPortal } = paymentStore;
 
     return {
       fetchKnowledge,
       fetchAIProviders,
+      initDefaultProvider,
       currentDeviceType,
       standalone,
       isAiToolsServiceOn,

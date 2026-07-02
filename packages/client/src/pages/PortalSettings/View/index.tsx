@@ -112,6 +112,7 @@ const View = ({
   ldapStore,
   common,
   paymentStore,
+  servicesStore,
   currentTariffStatusStore,
   defaultTemplatesStore,
 
@@ -286,8 +287,11 @@ const View = ({
             break;
 
           case "ai-settings":
-            if (!settingsStore.standalone)
-              await paymentStore.handleServiceQuota(AI_ENUM);
+            if (!settingsStore.standalone) {
+              paymentStore.handleServiceQuota(AI_ENUM);
+              servicesStore.fetchAiPrices();
+              servicesStore.fetchAiModelRestrictions();
+            }
             break;
         }
 
@@ -355,6 +359,7 @@ export const ViewComponent = inject(
     storageManagement,
     ldapStore,
     paymentStore,
+    servicesStore,
     currentTariffStatusStore,
     defaultTemplatesStore,
   }: TStore) => {
@@ -394,6 +399,7 @@ export const ViewComponent = inject(
       ldapStore,
       common,
       paymentStore,
+      servicesStore,
       currentTariffStatusStore,
       ssoFormStore: ssoStore,
       defaultTemplatesStore,

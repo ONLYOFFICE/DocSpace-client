@@ -131,7 +131,7 @@ const KnowledgeBaseSaas = ({
                 dangerouslySetInnerHTML={{ __html: item.image }}
               />
               <Text fontSize="13px" fontWeight={600}>
-                {t("Files:Vectorization")}
+                {t("Common:Vectorization")}
               </Text>
             </div>
 

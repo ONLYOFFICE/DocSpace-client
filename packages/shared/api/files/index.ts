@@ -920,7 +920,12 @@ export async function moveToFolder(
   return res;
 }
 
-export async function getFileVersionInfo(fileId: number, shareKey?: string) {
+export async function getFileVersionInfo(
+  /** Callers pass both numeric and string ids (e.g. `${item.id}`); the id is
+   * only interpolated into the URL. */
+  fileId: number | string,
+  shareKey?: string,
+) {
   const res = (await request({
     method: "get",
     url: `/files/file/${fileId}/history`,

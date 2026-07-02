@@ -35,6 +35,7 @@
 
 import { makeAutoObservable, runInAction } from "mobx";
 import api from "@docspace/shared/api";
+import type { TFile } from "@docspace/shared/api/files/types";
 import { FileStatus, FileAction } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
@@ -43,32 +44,66 @@ import {
   subscribeFilenameCache,
 } from "@docspace/shared/services/encryption/filename-cache";
 
+// FABLE5-REVIEW: FilesStore is still .js (wave 3) — replace this structural
+// type with `import type` once it is converted.
+type TFilesStore = {
+  files: TFile[];
+  setFile: (file: TFile) => void;
+  ensureEncryptedFilenameForFile?: (file: TFile) => void;
+};
+
+// FABLE5-REVIEW: FilesActionsStore is still .js (wave 3) — replace this
+// structural type with `import type` once it is converted. Note that
+// store/index.js constructs this store as
+// `new VersionHistoryStore(filesStore, settingsStore)` (the second argument
+// is settingsStore, NOT filesActionsStore) and only later overwrites
+// `versionHistoryStore.filesActionsStore = filesActionsStore;`
+// post-construction, so at construction time this field briefly holds
+// SettingsStore.
+type TFilesActionsStore = {
+  completeAction: (selectedItem: TFile, type: FileAction) => Promise<void>;
+};
+
 class VersionHistoryStore {
   isVisible = false;
 
-  fileId = null;
+  fileId: number | string | null = null;
 
-  fileSecurity = null;
+  fileSecurity: TFile["security"] | null | undefined = null;
 
-  versions = null;
+  versions: TFile[] | null = null;
 
-  filesStore = null;
+  // `null!` keeps the original runtime field initializer (null) while the
+  // constructor immediately assigns the real store.
+  filesStore: TFilesStore = null!;
 
   showProgressBar = false;
 
-  timerId = null;
+  timerId: ReturnType<typeof setTimeout> | null = null;
 
   isEditing = false;
 
   deleteVersionDialogVisible = false;
 
-  versionSelectedForDeletion = null;
+  versionSelectedForDeletion: number | null = null;
 
   versionDeletionProcess = false;
 
   filenameCacheVersion = 0;
 
-  constructor(filesStore, filesActionsStore) {
+  // `declare` (no emitted field): in the original .js this property did not
+  // exist yet when makeAutoObservable ran — it is created by plain assignment
+  // in the constructor body (and re-assigned from store/index.js), so it is
+  // intentionally NOT observable.
+  declare filesActionsStore: TFilesActionsStore;
+
+  // FABLE5-REVIEW: `this.files` is referenced in the StopEditFile socket
+  // handler below but is never assigned anywhere in this store — most likely
+  // it should be `this.versions`. Declared (not initialized) to keep the
+  // runtime shape identical: no own property, `undefined` at access time.
+  declare files?: TFile[];
+
+  constructor(filesStore: TFilesStore, filesActionsStore: TFilesActionsStore) {
     makeAutoObservable(this);
     this.filesStore = filesStore;
     this.filesActionsStore = filesActionsStore;
@@ -85,7 +120,10 @@ class VersionHistoryStore {
       SocketHelper?.on(SocketEvents.StartEditFile, (data) => {
         const fileId = typeof data === "object" ? data.fileId : data;
         // console.log(`VERSION STORE Call s:start-edit-file (id=${fileId})`);
-        const verIndex = this.versions.findIndex((x) => x.id == fileId);
+        // FABLE5-REVIEW: `this.versions` may be null by the time the socket
+        // event fires — the original .js would throw here as well; `!` keeps
+        // that runtime unchanged.
+        const verIndex = this.versions!.findIndex((x) => x.id == fileId);
         if (verIndex == -1) return;
 
         runInAction(() => (this.isEditing = true));
@@ -94,7 +132,9 @@ class VersionHistoryStore {
       SocketHelper?.on(SocketEvents.StopEditFile, (data) => {
         const fileId = typeof data === "object" ? data.fileId : data;
         // console.log(`VERSION STORE Call s:stop-edit-file (id=${fileId})`);
-        const verIndex = this.files.findIndex((x) => x.id === fileId);
+        // FABLE5-REVIEW: `this.files` is always undefined (see field note
+        // above) — the original .js would throw here as well.
+        const verIndex = this.files!.findIndex((x) => x.id === fileId);
         if (verIndex == -1) return;
 
         runInAction(() => (this.isEditing = false));
@@ -110,7 +150,9 @@ class VersionHistoryStore {
 
   get isEditingVersion() {
     if (this.fileId && this.filesStore.files.length) {
-      const file = this.filesStore.files.find((x) => x.id === +this.fileId);
+      // `!` because the outer truthiness guard does not narrow inside the
+      // callback; fileId is known non-null here.
+      const file = this.filesStore.files.find((x) => x.id === +this.fileId!);
       return file
         ? (file.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing
         : false;
@@ -118,7 +160,7 @@ class VersionHistoryStore {
     return false;
   }
 
-  setIsVerHistoryPanel = (isVisible) => {
+  setIsVerHistoryPanel = (isVisible: boolean) => {
     this.isVisible = isVisible;
 
     if (!isVisible) {
@@ -127,28 +169,30 @@ class VersionHistoryStore {
     }
   };
 
-  setVerHistoryFileId = (fileId) => {
+  setVerHistoryFileId = (fileId: number | string | null) => {
     this.fileId = fileId;
   };
 
-  setVerHistoryFileSecurity = (security) => {
+  setVerHistoryFileSecurity = (
+    security: TFile["security"] | null | undefined,
+  ) => {
     this.fileSecurity = security;
   };
 
-  setVersions = (versions) => {
+  setVersions = (versions: TFile[] | null) => {
     this.versions = versions;
   };
 
-  setVersionSelectedForDeletion = (version) => {
+  setVersionSelectedForDeletion = (version: number | null) => {
     this.versionSelectedForDeletion = version;
   };
 
-  setVersionDeletionProcess = (process) => {
+  setVersionDeletionProcess = (process: boolean) => {
     this.versionDeletionProcess = process;
   };
 
   // setFileVersions
-  setVerHistoryFileVersions = (versions) => {
+  setVerHistoryFileVersions = (versions: TFile[]) => {
     const file = this.filesStore.files.find((item) => item.id == this.fileId);
 
     const currentVersion = versions.reduce((prev, current) => {
@@ -164,7 +208,11 @@ class VersionHistoryStore {
     //   versions[versions.length - currentVersionGroup].comment;
 
     const newFile = {
-      ...file,
+      // FABLE5-REVIEW: `file` may be undefined (e.g. on the standalone
+      // version-history page where filesStore is not initialized — see the
+      // TODO in the constructor). The original .js spread undefined the same
+      // way, producing a partial file object; the cast keeps that runtime.
+      ...file!,
       comment: currentVersion.comment,
       version: versions.length,
       versionGroup: currentVersion.versionGroup,
@@ -177,7 +225,12 @@ class VersionHistoryStore {
     this.filesStore.ensureEncryptedFilenameForFile?.(versions[0]);
   };
 
-  fetchFileVersions = (fileId, access, requestToken, update) => {
+  fetchFileVersions = (
+    fileId: number | string,
+    access?: TFile["security"] | null,
+    requestToken?: string,
+    update?: boolean,
+  ) => {
     if (this.fileId !== fileId || !this.versions || update) {
       if (!update) {
         this.setVerHistoryFileId(fileId);
@@ -191,13 +244,15 @@ class VersionHistoryStore {
     return Promise.resolve(this.versions);
   };
 
-  markAsVersion = (id, isVersion, version) => {
-    return api.files
-      .markAsVersion(id, isVersion, version)
-      .then((versions) => this.setVerHistoryFileVersions(versions));
+  markAsVersion = (id: number, isVersion: boolean, version: number) => {
+    // FABLE5-REVIEW: markAsVersion is untyped in shared/api (bare
+    // `request(...)`), cast until it gets a proper return type.
+    return (
+      api.files.markAsVersion(id, isVersion, version) as Promise<TFile[]>
+    ).then((versions) => this.setVerHistoryFileVersions(versions));
   };
 
-  restoreVersion = (id, version) => {
+  restoreVersion = (id: number, version: number) => {
     const { completeAction } = this.filesActionsStore;
 
     this.timerId = setTimeout(() => this.setShowProgressBar(true), 100);
@@ -205,29 +260,33 @@ class VersionHistoryStore {
     return api.files
       .versionRestore(id, version)
       .then((newVersion) => {
-        const updatedVersions = this.versions.slice();
+        // FABLE5-REVIEW: `this.versions` may be null here; the original .js
+        // would throw the same way (caught by the .catch below).
+        const updatedVersions = this.versions!.slice();
         updatedVersions.unshift(newVersion);
         this.setVerHistoryFileVersions(updatedVersions);
       })
       .then(() => {
-        const file = this.filesStore.files.find((x) => x.id === +this.fileId);
+        const file = this.filesStore.files.find((x) => x.id === +this.fileId!);
         if (file) {
           completeAction(file, FileAction.RestoreVersion);
         }
       })
-      .catch((e) => toastr.error(e))
+      .catch((e) => toastr.error(e as string))
       .finally(() => {
-        clearTimeout(this.timerId);
+        clearTimeout(this.timerId!);
         this.timerId = null;
         this.setShowProgressBar(false);
       });
   };
 
-  updateCommentVersion = (id, comment, version) => {
+  updateCommentVersion = (id: number, comment: string, version: number) => {
     return api.files
       .versionEditComment(id, comment, version)
       .then((updatedComment) => {
-        const copyVersions = this.versions.slice();
+        // FABLE5-REVIEW: `this.versions` may be null here; the original .js
+        // would throw the same way.
+        const copyVersions = this.versions!.slice();
         const updatedVersions = copyVersions.map((item) => {
           if (item.version === version) {
             item.comment = updatedComment;
@@ -238,11 +297,11 @@ class VersionHistoryStore {
       });
   };
 
-  setShowProgressBar = (show) => {
+  setShowProgressBar = (show: boolean) => {
     this.showProgressBar = show;
   };
 
-  onSetDeleteVersionDialogVisible = (deleteVersionDialogVisible) => {
+  onSetDeleteVersionDialogVisible = (deleteVersionDialogVisible: boolean) => {
     this.deleteVersionDialogVisible = deleteVersionDialogVisible;
   };
 }

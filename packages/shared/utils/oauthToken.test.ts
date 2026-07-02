@@ -108,12 +108,14 @@ describe("oauthToken", () => {
 
   describe("isOAuthFrame", () => {
     it("returns the cached ClientConfig flag when set", () => {
+      enterIframe();
       (window as unknown as { ClientConfig: { isOAuthFrame: boolean } }).ClientConfig =
         { isOAuthFrame: true };
       expect(isOAuthFrame()).toBe(true);
     });
 
     it("falls back to the ?auth=oauth URL param and caches it", () => {
+      enterIframe();
       (window as unknown as { ClientConfig: Record<string, unknown> }).ClientConfig =
         {};
       window.history.replaceState({}, "", "/?auth=oauth");
@@ -126,10 +128,19 @@ describe("oauthToken", () => {
     });
 
     it("is false without the param", () => {
+      enterIframe();
       (window as unknown as { ClientConfig: Record<string, unknown> }).ClientConfig =
         {};
       window.history.replaceState({}, "", "/");
       expect(isOAuthFrame()).toBe(false);
+    });
+
+    it("is false outside an iframe even with the param and cached flag", () => {
+      (window as unknown as { ClientConfig: { isOAuthFrame: boolean } }).ClientConfig =
+        { isOAuthFrame: true };
+      window.history.replaceState({}, "", "/?auth=oauth");
+      expect(isOAuthFrame()).toBe(false);
+      window.history.replaceState({}, "", "/");
     });
   });
 

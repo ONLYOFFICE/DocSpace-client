@@ -44,6 +44,7 @@ import { getSettings } from "@docspace/shared/api/settings";
 import { getUser } from "@docspace/shared/api/people";
 
 import { useOAuthSSRData } from "@/hooks/useOAuthSSRData";
+import OAuthPageLoader from "@/components/OAuthPageLoader";
 
 import DocsPage from "./page.client";
 import {
@@ -56,7 +57,7 @@ const clientDeps = {
   getFolder,
   getFilesSettings: getSettingsFiles,
   getSettings,
-  getSelf: () => getUser(),
+  getSelf: () => getUser().catch(() => undefined),
 } as unknown as PersonalFilesDeps;
 
 export default function DocsOAuth({
@@ -64,11 +65,14 @@ export default function DocsOAuth({
 }: {
   params: Record<string, string>;
 }) {
-  const result = useOAuthSSRData(() =>
-    loadPersonalFilesData(clientDeps, params, { canonicalize: false }),
+  const { data: result, error } = useOAuthSSRData(
+    () => loadPersonalFilesData(clientDeps, params, { canonicalize: false }),
+    JSON.stringify(params),
   );
 
-  if (!result || "redirectTo" in result) return null;
+  if (error) throw error;
+  if (!result) return <OAuthPageLoader />;
+  if ("redirectTo" in result) return null;
 
   return <DocsPage authToken="" {...result.data} />;
 }

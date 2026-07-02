@@ -32,6 +32,7 @@ import { getSettings } from "@docspace/shared/api/settings";
 import { getUser } from "@docspace/shared/api/people";
 
 import { useOAuthSSRData } from "@/hooks/useOAuthSSRData";
+import OAuthPageLoader from "@/components/OAuthPageLoader";
 
 import RoomsPage from "./page.client";
 import { loadRoomsPageData, type RoomsPageDeps } from "./loadData";
@@ -40,7 +41,7 @@ const clientDeps = {
   getFilesSettings: getSettingsFiles,
   getRooms,
   getSettings,
-  getSelf: () => getUser(),
+  getSelf: () => getUser().catch(() => undefined),
 } as unknown as RoomsPageDeps;
 
 export default function RoomsOAuth({
@@ -48,9 +49,13 @@ export default function RoomsOAuth({
 }: {
   params: Record<string, string>;
 }) {
-  const data = useOAuthSSRData(() => loadRoomsPageData(clientDeps, params));
+  const { data, error } = useOAuthSSRData(
+    () => loadRoomsPageData(clientDeps, params),
+    JSON.stringify(params),
+  );
 
-  if (!data) return null;
+  if (error) throw error;
+  if (!data) return <OAuthPageLoader />;
 
   return <RoomsPage authToken="" {...data} />;
 }

@@ -37,13 +37,53 @@
 
 import React from "react";
 
+import AppLoader from "@docspace/ui-kit/components/app-loader";
 import { request } from "@docspace/shared/api/client";
 import { getUser } from "@docspace/shared/api/people";
+import { getDocumentServiceLocation } from "@docspace/shared/api/files";
+import { EditorConfigErrorType } from "@docspace/shared/enums";
 import type { TFrameConfig } from "@docspace/shared/types/Frame";
 
-import type { TResponse, IInitialConfig } from "@/types";
+import type { TResponse, TError, IInitialConfig } from "@/types";
 import { REPLACED_URL_PATH } from "@/utils/constants";
 import Root from "./Root";
+
+const mapOpenEditError = async (e: unknown): Promise<TError> => {
+  const err = e as {
+    response?: {
+      status?: number;
+      data?: { error?: { type?: string; message?: string } };
+    };
+    message?: string;
+  };
+
+  const resStatus = err.response?.status;
+  const errorType = err.response?.data?.error?.type;
+
+  const status =
+    errorType === EditorConfigErrorType.NotFoundScope || resStatus === 404
+      ? "not-found"
+      : errorType === EditorConfigErrorType.AccessDeniedScope
+        ? "access-denied"
+        : errorType === EditorConfigErrorType.TenantQuotaException
+          ? "quota-exception"
+          : resStatus === 415
+            ? "not-supported"
+            : undefined;
+
+  const editorUrl = status
+    ? await getDocumentServiceLocation()
+        .then((location) => location?.docServiceUrl ?? "")
+        .catch(() => "")
+    : "";
+
+  return {
+    status,
+    editorUrl,
+    message:
+      err.response?.data?.error?.message ?? err.message ?? "unauthorized",
+  };
+};
 
 type OAuthEditorProps = {
   fileId: string;
@@ -105,11 +145,9 @@ const OAuthEditor = ({
           fileId: config.file?.id ? config.file.id.toString() : fileId,
         });
       } catch (e) {
+        const error = await mapOpenEditError(e);
         if (cancelled) return;
-        setData({
-          error: { message: (e as Error)?.message || "unauthorized" },
-          fileId,
-        });
+        setData({ error, fileId });
       }
     };
 
@@ -120,7 +158,7 @@ const OAuthEditor = ({
     };
   }, [fileId, version, doc, action, editorType]);
 
-  if (!data) return null;
+  if (!data) return <AppLoader />;
 
   return <Root {...data} baseSdkConfig={baseSdkConfig} />;
 };

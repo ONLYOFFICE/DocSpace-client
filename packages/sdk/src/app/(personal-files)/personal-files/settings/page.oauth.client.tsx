@@ -33,57 +33,48 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { cookies } from "next/headers";
+"use client";
 
+import { getSettingsFiles } from "@docspace/shared/api/files";
+import { getSettings } from "@docspace/shared/api/settings";
+import { getUser } from "@docspace/shared/api/people";
+import type { TFilesSettings } from "@docspace/shared/api/files/types";
 import type { TSettings } from "@docspace/shared/api/settings/types";
+import type { TUser } from "@docspace/shared/api/people/types";
 
-import { getFilesSettings } from "@/api/files";
-import { getSettings } from "@/api/settings";
-import { getSelf } from "@/api/people";
+import { useOAuthSSRData } from "@/hooks/useOAuthSSRData";
+import OAuthPageLoader from "@/components/OAuthPageLoader";
 
 import DocsSettingsPage from "./page.client";
-import DocsSettingsOAuth from "./page.oauth.client";
 
-export default async function DocsSettings({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string>>;
-}) {
-  const params = await searchParams;
+type SettingsPageData = {
+  filesSettings: TFilesSettings;
+  portalSettings: TSettings;
+  user?: TUser;
+};
 
-  if (params.auth === "oauth") {
-    return <DocsSettingsOAuth />;
-  }
+async function loadSettingsData(): Promise<SettingsPageData | null> {
+  const [filesSettings, portalSettings, user] = await Promise.all([
+    getSettingsFiles(),
+    getSettings(),
+    getUser().catch(() => undefined),
+  ]);
 
-  const cookieStore = await cookies();
-  const authToken = cookieStore.get("asc_auth_key")?.value || "";
+  if (!filesSettings || !portalSettings || typeof portalSettings === "string")
+    return null;
 
-  let filesSettings;
-  let portalSettings;
-  let user;
+  return {
+    filesSettings: filesSettings as TFilesSettings,
+    portalSettings: portalSettings as TSettings,
+    user,
+  };
+}
 
-  try {
-    [filesSettings, portalSettings, user] = await Promise.all([
-      getFilesSettings(),
-      getSettings(),
-      getSelf(),
-    ]);
-  } catch (error) {
-    throw new Error(
-      `Failed to load settings page data: ${error instanceof Error ? error.message : String(error)}`,
-    );
-  }
+export default function DocsSettingsOAuth() {
+  const { data, error } = useOAuthSSRData(loadSettingsData);
 
-  if (!filesSettings || !portalSettings) {
-    throw new Error("Failed to load required settings");
-  }
+  if (error) throw error;
+  if (!data) return <OAuthPageLoader />;
 
-  return (
-    <DocsSettingsPage
-      authToken={authToken}
-      filesSettings={filesSettings}
-      portalSettings={portalSettings as TSettings}
-      user={user}
-    />
-  );
+  return <DocsSettingsPage authToken="" {...data} />;
 }

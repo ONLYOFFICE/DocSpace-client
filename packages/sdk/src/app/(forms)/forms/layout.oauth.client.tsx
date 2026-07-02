@@ -44,6 +44,8 @@ import { getSettings } from "@docspace/shared/api/settings";
 import { getAppSettings } from "@docspace/shared/api/apps";
 
 import { useOAuthSSRData } from "@/hooks/useOAuthSSRData";
+import OAuthPageLoader from "@/components/OAuthPageLoader";
+import { PAGE_COUNT } from "@/utils/constants";
 import { FormsSection } from "@/types/forms";
 
 import FormsShell from "./layout.client";
@@ -55,6 +57,12 @@ const formsFolderFilter = (pageCount: number) => {
   const f = FilesFilter.getDefault();
   f.pageCount = pageCount;
   f.filterType = FilterType.PDFForm;
+  return f;
+};
+
+const virtualFolderFilter = () => {
+  const f = FilesFilter.getDefault();
+  f.pageCount = PAGE_COUNT;
   return f;
 };
 
@@ -128,7 +136,7 @@ async function loadCommonData(): Promise<FormsCommonData | null> {
       : undefined;
 
   const virtualFolderData = virtualFolderIdToPrefetch
-    ? await getFolder(virtualFolderIdToPrefetch, formsFolderFilter(25)).catch(
+    ? await getFolder(virtualFolderIdToPrefetch, virtualFolderFilter()).catch(
         () => undefined,
       )
     : undefined;
@@ -168,9 +176,10 @@ export default function FormsOAuthShell({
 }: {
   children: React.ReactNode;
 }) {
-  const commonData = useOAuthSSRData(loadCommonData);
+  const { data: commonData, error } = useOAuthSSRData(loadCommonData);
 
-  if (!commonData) return null;
+  if (error) throw error;
+  if (!commonData) return <OAuthPageLoader />;
 
   return <FormsShell commonData={commonData}>{children}</FormsShell>;
 }

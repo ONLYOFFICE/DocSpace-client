@@ -11,6 +11,7 @@ import { getSettings } from "@docspace/shared/api/settings";
 import type { TViewAs } from "@docspace/shared/types";
 
 import { useOAuthSSRData } from "@/hooks/useOAuthSSRData";
+import OAuthPageLoader from "@/components/OAuthPageLoader";
 
 import AiAgentsRootLayout, {
   type AiAgentsCommonData,
@@ -60,9 +61,10 @@ export default function AiAgentsOAuthLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const commonData = useOAuthSSRData(loadCommonData);
+  const { data: commonData, error } = useOAuthSSRData(loadCommonData);
 
-  if (!commonData) return null;
+  if (error) throw error;
+  if (!commonData) return <OAuthPageLoader />;
 
   return (
     <AiAgentsRootLayout commonData={commonData}>

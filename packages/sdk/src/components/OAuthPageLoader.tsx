@@ -33,57 +33,22 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { cookies } from "next/headers";
+"use client";
 
-import type { TSettings } from "@docspace/shared/api/settings/types";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
-import { getFilesSettings } from "@/api/files";
-import { getSettings } from "@/api/settings";
-import { getSelf } from "@/api/people";
-
-import DocsSettingsPage from "./page.client";
-import DocsSettingsOAuth from "./page.oauth.client";
-
-export default async function DocsSettings({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string>>;
-}) {
-  const params = await searchParams;
-
-  if (params.auth === "oauth") {
-    return <DocsSettingsOAuth />;
-  }
-
-  const cookieStore = await cookies();
-  const authToken = cookieStore.get("asc_auth_key")?.value || "";
-
-  let filesSettings;
-  let portalSettings;
-  let user;
-
-  try {
-    [filesSettings, portalSettings, user] = await Promise.all([
-      getFilesSettings(),
-      getSettings(),
-      getSelf(),
-    ]);
-  } catch (error) {
-    throw new Error(
-      `Failed to load settings page data: ${error instanceof Error ? error.message : String(error)}`,
-    );
-  }
-
-  if (!filesSettings || !portalSettings) {
-    throw new Error("Failed to load required settings");
-  }
-
+export default function OAuthPageLoader() {
   return (
-    <DocsSettingsPage
-      authToken={authToken}
-      filesSettings={filesSettings}
-      portalSettings={portalSettings as TSettings}
-      user={user}
-    />
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
+        height: "100%",
+      }}
+    >
+      <Loader type={LoaderTypes.dualRing} size="40px" />
+    </div>
   );
 }

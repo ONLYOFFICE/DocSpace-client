@@ -51,6 +51,8 @@ const isInIframe = (): boolean => {
 export const isOAuthFrame = (): boolean => {
   if (typeof window === "undefined") return false;
 
+  if (!isInIframe()) return false;
+
   const cfg = window.ClientConfig;
   if (cfg?.isOAuthFrame != null) return cfg.isOAuthFrame;
 
@@ -78,7 +80,13 @@ const onMessage = (e: MessageEvent) => {
   if (e.source !== window.parent) return;
 
   const expected = getExpectedHostOrigin();
-  if (expected && e.origin !== expected) return;
+  if (!expected) {
+    console.warn(
+      "[OAuth] cannot validate message origin — ancestorOrigins and referrer unavailable",
+    );
+  } else if (e.origin !== expected) {
+    return;
+  }
 
   let payload:
     | { type?: string; callId?: unknown; data?: { accessToken?: unknown } }

@@ -37,27 +37,52 @@
 
 import React from "react";
 
-export function useOAuthSSRData<T>(load: () => Promise<T | null>): T | null {
-  const [data, setData] = React.useState<T | null>(null);
+import { frameCallEvent } from "@docspace/shared/utils/common";
+
+export type TOAuthSSRDataState<T> = {
+  data: T | null;
+  error: Error | null;
+};
+
+export function useOAuthSSRData<T>(
+  load: () => Promise<T | null>,
+  refetchKey?: unknown,
+): TOAuthSSRDataState<T> {
+  const [state, setState] = React.useState<TOAuthSSRDataState<T>>({
+    data: null,
+    error: null,
+  });
   const loadRef = React.useRef(load);
   loadRef.current = load;
+  const refetchKeyRef = React.useRef(refetchKey);
 
   React.useEffect(() => {
     let cancelled = false;
 
+    if (!Object.is(refetchKeyRef.current, refetchKey)) {
+      refetchKeyRef.current = refetchKey;
+      setState({ data: null, error: null });
+    }
+
     void loadRef
       .current()
       .then((result) => {
-        if (!cancelled) setData(result);
+        if (cancelled) return;
+        if (result == null) throw new Error("Failed to load required settings");
+        setState({ data: result, error: null });
       })
-      .catch((e) => {
+      .catch((e: unknown) => {
         console.error("[OAuth] SSR data load failed", e);
+        if (cancelled) return;
+        const error = e instanceof Error ? e : new Error(String(e));
+        frameCallEvent({ event: "onAppError", data: error.message });
+        setState({ data: null, error });
       });
 
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [refetchKey]);
 
-  return data;
+  return state;
 }

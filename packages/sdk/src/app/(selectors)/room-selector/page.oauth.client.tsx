@@ -38,6 +38,7 @@
 import { getRooms } from "@docspace/shared/api/rooms";
 
 import { useOAuthSSRData } from "@/hooks/useOAuthSSRData";
+import OAuthPageLoader from "@/components/OAuthPageLoader";
 
 import RoomSelector from "./page.client";
 import {
@@ -53,11 +54,13 @@ export default function RoomSelectorOAuth({
 }: {
   baseConfig: RoomSelectorBaseConfig;
 }) {
-  const data = useOAuthSSRData(() =>
-    loadRoomSelectorData(clientDeps, baseConfig),
+  const { data, error } = useOAuthSSRData(
+    () => loadRoomSelectorData(clientDeps, baseConfig),
+    JSON.stringify(baseConfig),
   );
 
-  if (!data) return null;
+  if (error) throw error;
+  if (!data) return <OAuthPageLoader />;
 
   return <RoomSelector {...data} />;
 }

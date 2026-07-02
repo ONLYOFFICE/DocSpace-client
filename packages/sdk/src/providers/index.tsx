@@ -93,6 +93,7 @@ export type TContextData = {
 export type TProviders = {
   children: React.ReactNode;
   contextData: TContextData;
+  oauthFrame?: boolean;
 };
 
 const getApiUrl = () => {
@@ -105,7 +106,7 @@ const getApiUrl = () => {
   return combineUrl(origin, proxy);
 };
 
-const Providers = ({ children, contextData }: TProviders) => {
+const Providers = ({ children, contextData, oauthFrame }: TProviders) => {
   const { user, settings, systemTheme, colorTheme, locale } = contextData;
 
   const requestedLng =
@@ -150,7 +151,8 @@ const Providers = ({ children, contextData }: TProviders) => {
     document.body.classList.add(themeClass);
   }, []);
 
-  const oauthActive = typeof window !== "undefined" && isOAuthFrame();
+  const oauthActive =
+    oauthFrame ?? (typeof window !== "undefined" && isOAuthFrame());
 
   const [oauthToken, setOauthToken] = React.useState<string | null>(
     oauthActive ? null : "",

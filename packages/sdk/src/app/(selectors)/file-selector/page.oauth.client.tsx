@@ -44,6 +44,7 @@ import { getRooms } from "@docspace/shared/api/rooms";
 import { getSettings } from "@docspace/shared/api/settings";
 
 import { useOAuthSSRData } from "@/hooks/useOAuthSSRData";
+import OAuthPageLoader from "@/components/OAuthPageLoader";
 
 import FilesSelectorClient from "./page.client";
 import {
@@ -65,11 +66,13 @@ export default function FilesSelectorOAuth({
 }: {
   baseConfig: FilesSelectorBaseConfig;
 }) {
-  const clientProps = useOAuthSSRData(() =>
-    loadFilesSelectorProps(clientDeps, baseConfig),
+  const { data: clientProps, error } = useOAuthSSRData(
+    () => loadFilesSelectorProps(clientDeps, baseConfig),
+    JSON.stringify(baseConfig),
   );
 
-  if (!clientProps) return null;
+  if (error) throw error;
+  if (!clientProps) return <OAuthPageLoader />;
 
   return <FilesSelectorClient {...clientProps} />;
 }

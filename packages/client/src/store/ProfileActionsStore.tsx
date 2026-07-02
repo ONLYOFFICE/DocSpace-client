@@ -48,6 +48,12 @@ import SpacesReactSvgUrl from "PUBLIC_DIR/images/spaces.react.svg?url";
 import LampReactSvgUrl from "PUBLIC_DIR/images/lamp.react.svg?url";
 import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg?url";
 
+import type {
+  ComponentType,
+  MouseEvent as ReactMouseEvent,
+  ReactNode,
+} from "react";
+
 import { makeAutoObservable } from "mobx";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
@@ -56,6 +62,17 @@ import axios from "axios";
 
 import { zendeskAPI } from "@docspace/shared/components/zendesk/Zendesk.utils";
 import { CategoryType } from "@docspace/shared/constants";
+
+import type { AuthStore } from "@docspace/shared/store/AuthStore";
+import type { UserStore } from "@docspace/shared/store/UserStore";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
+import type {
+  ContextMenuModel,
+  ContextMenuType,
+  SeparatorType,
+  TContextMenuValueTypeOnClick,
+} from "@docspace/ui-kit/components/context-menu";
 
 import {
   PersistenceKeys,
@@ -68,10 +85,52 @@ import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 import AccountsFilter from "@docspace/shared/api/people/filter";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+// FABLE5-REVIEW: TariffBar (SRC_DIR/components/TariffBar/index.js) is still
+// .js — untyped component import; remove this note once it is converted.
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { PEOPLE_ROUTE_WITH_FILTER } from "SRC_DIR/helpers/contacts";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
+import type { IProfileMenuItemClient } from "SRC_DIR/helpers/plugins/types";
 import i18n from "SRC_DIR/i18n";
+
+import type ClientLoadingStore from "./ClientLoadingStore";
+import type InfoPanelStore from "./InfoPanelStore";
+import type PluginStore from "./PluginStore";
+import type SelectedFolderStore from "./SelectedFolderStore";
+import type TreeFoldersStore from "./TreeFoldersStore";
+
+// FABLE5-REVIEW: FilesStore is still .js (wave 3) — minimal structural type of
+// the members actually used here; replace with import type once converted.
+type TFilesStore = {
+  setSelection: (selection: unknown[]) => void;
+};
+
+/** Shape used to read `originalEvent` off context-menu click payloads. */
+type TClickEventObj = { originalEvent?: ReactMouseEvent };
+
+type TTranslationFn = (
+  key: string,
+  options?: Record<string, string | number>,
+) => string;
+
+/**
+ * Profile menu items are ContextMenuType entries extended with the extra
+ * fields consumed by DropDownItem (additionalElement, isButton) and by the
+ * management sub-menu (isPortal); `items` may also be null (old JS behavior).
+ */
+type TProfileActionType = Omit<ContextMenuType, "items"> & {
+  additionalElement?: ReactNode;
+  isButton?: boolean;
+  isPortal?: boolean;
+  items?: (TProfileActionType | SeparatorType)[] | null;
+};
+
+type TProfileAction = TProfileActionType | SeparatorType;
+
+// FABLE5-REVIEW: TariffBar is still .js — its inject()-inferred props are
+// spuriously required, so the prop-less `<TariffBar />` usage from the old JS
+// only typechecks through this type-only alias (same component at runtime).
+const TariffBarElement = TariffBar as unknown as ComponentType;
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/");
 const PROFILE_SELF_URL = combineUrl(PROXY_HOMEPAGE_URL, "/profile/login");
@@ -87,23 +146,29 @@ const PAYMENTS_URL = combineUrl(
 
 const SPACES_URL = combineUrl(PROXY_HOMEPAGE_URL, "/management");
 class ProfileActionsStore {
-  authStore = null;
+  // `null!` keeps the original runtime field initializer (null) while the
+  // constructor immediately assigns the real store.
+  authStore: AuthStore = null!;
 
-  userStore = null;
+  userStore: UserStore = null!;
 
-  infoPanelStore = null;
+  infoPanelStore: InfoPanelStore = null!;
 
-  settingsStore = null;
+  settingsStore: SettingsStore = null!;
 
-  filesStore = null;
+  filesStore: TFilesStore = null!;
 
-  treeFoldersStore = null;
+  treeFoldersStore: TreeFoldersStore = null!;
 
-  selectedFolderStore = null;
+  selectedFolderStore: SelectedFolderStore = null!;
 
-  pluginStore = null;
+  pluginStore: PluginStore = null!;
 
-  clientLoadingStore = null;
+  clientLoadingStore: ClientLoadingStore = null!;
+
+  // No class-field initializer in the original JS — `declare` keeps the
+  // runtime shape (the own property is created by the constructor assignment).
+  declare currentTariffStatusStore: CurrentTariffStatusStore;
 
   isAboutDialogVisible = false;
 
@@ -114,16 +179,16 @@ class ProfileActionsStore {
   profileClicked = false;
 
   constructor(
-    authStore,
-    filesStore,
-    treeFoldersStore,
-    selectedFolderStore,
-    pluginStore,
-    userStore,
-    settingsStore,
-    currentTariffStatusStore,
-    infoPanelStore,
-    clientLoadingStore,
+    authStore: AuthStore,
+    filesStore: TFilesStore,
+    treeFoldersStore: TreeFoldersStore,
+    selectedFolderStore: SelectedFolderStore,
+    pluginStore: PluginStore,
+    userStore: UserStore,
+    settingsStore: SettingsStore,
+    currentTariffStatusStore: CurrentTariffStatusStore,
+    infoPanelStore: InfoPanelStore,
+    clientLoadingStore: ClientLoadingStore,
   ) {
     this.authStore = authStore;
     this.filesStore = filesStore;
@@ -144,15 +209,14 @@ class ProfileActionsStore {
   }
 
   getStateLiveChat = () => {
-    const state =
-      getPersistedString(PersistenceKeys.liveChatState) === "true";
+    const state = getPersistedString(PersistenceKeys.liveChatState) === "true";
 
     if (!state) return false;
 
     return state;
   };
 
-  setStateLiveChat = (state) => {
+  setStateLiveChat = (state: boolean) => {
     if (typeof state !== "boolean") return;
 
     setPersistedString(PersistenceKeys.liveChatState, state.toString());
@@ -160,22 +224,24 @@ class ProfileActionsStore {
     this.isShowLiveChat = state;
   };
 
-  setIsAboutDialogVisible = (visible) => {
+  setIsAboutDialogVisible = (visible: boolean) => {
     this.isAboutDialogVisible = visible;
   };
 
-  setIsDebugDialogVisible = (visible) => {
+  setIsDebugDialogVisible = (visible: boolean) => {
     this.isDebugDialogVisible = visible;
   };
 
-  onProfileClick = (obj) => {
+  onProfileClick = (obj?: TContextMenuValueTypeOnClick) => {
     const prefix = window.DocSpace.location.pathname.includes("portal-settings")
       ? "/portal-settings"
       : "";
 
     const profileUrl = `${prefix}${PROFILE_SELF_URL}`;
 
-    if (openingNewTab(profileUrl, obj?.originalEvent)) return;
+    const originalEvent = (obj as TClickEventObj | undefined)?.originalEvent;
+
+    if (openingNewTab(profileUrl, originalEvent)) return;
 
     this.profileClicked = true;
 
@@ -190,16 +256,24 @@ class ProfileActionsStore {
     window.DocSpace.navigate(profileUrl, { state });
   };
 
-  onSettingsClick = (settingsUrl, obj) => {
-    if (openingNewTab(settingsUrl, obj.originalEvent)) return;
+  onSettingsClick = (
+    settingsUrl: string,
+    obj: TContextMenuValueTypeOnClick,
+  ) => {
+    if (openingNewTab(settingsUrl, (obj as TClickEventObj).originalEvent))
+      return;
 
     this.selectedFolderStore.setSelectedFolder(null);
 
     window.DocSpace.navigate(settingsUrl);
   };
 
-  onAccountsClick = (accountsUrl, obj) => {
-    if (openingNewTab(accountsUrl, obj.originalEvent)) return;
+  onAccountsClick = (
+    accountsUrl: string,
+    obj: TContextMenuValueTypeOnClick,
+  ) => {
+    if (openingNewTab(accountsUrl, (obj as TClickEventObj).originalEvent))
+      return;
 
     this.selectedFolderStore.setSelectedFolder(null);
     this.filesStore.setSelection([]);
@@ -217,8 +291,9 @@ class ProfileActionsStore {
     window.open(SPACES_URL, "_blank");
   };
 
-  onPaymentsClick = (obj) => {
-    if (openingNewTab(PAYMENTS_URL, obj.originalEvent)) return;
+  onPaymentsClick = (obj: TContextMenuValueTypeOnClick) => {
+    if (openingNewTab(PAYMENTS_URL, (obj as TClickEventObj).originalEvent))
+      return;
 
     this.selectedFolderStore.setSelectedFolder(null);
     window.DocSpace.navigate(PAYMENTS_URL);
@@ -230,7 +305,7 @@ class ProfileActionsStore {
     window.open(helpCenterDomain, "_blank");
   };
 
-  onLiveChatClick = (t) => {
+  onLiveChatClick = (t: TTranslationFn) => {
     const isShow = !this.isShowLiveChat;
 
     this.setStateLiveChat(isShow);
@@ -262,16 +337,18 @@ class ProfileActionsStore {
   //  window.open(VIDEO_GUIDES_URL, "_blank");
   // };
 
-  onHotkeysClick = (event) => {
-    if (event && event.originalEvent) {
-      event.originalEvent.preventDefault();
+  onHotkeysClick = (event?: TContextMenuValueTypeOnClick) => {
+    const e = event as TClickEventObj | undefined;
+    if (e && e.originalEvent) {
+      e.originalEvent.preventDefault();
     }
     this.settingsStore.setHotkeyPanelVisible(true);
   };
 
-  onAboutClick = (event) => {
-    if (event && event.originalEvent) {
-      event.originalEvent.preventDefault();
+  onAboutClick = (event?: TContextMenuValueTypeOnClick) => {
+    const e = event as TClickEventObj | undefined;
+    if (e && e.originalEvent) {
+      e.originalEvent.preventDefault();
     }
     if (isDesktop() || isTablet()) {
       this.setIsAboutDialogVisible(true);
@@ -280,7 +357,7 @@ class ProfileActionsStore {
     }
   };
 
-  onLogoutClick = async (t) => {
+  onLogoutClick = async (t: TTranslationFn) => {
     try {
       const ssoLogoutUrl = await this.authStore.logout(false);
       window.location.replace(
@@ -297,7 +374,9 @@ class ProfileActionsStore {
     this.setIsDebugDialogVisible(true);
   };
 
-  getActions = (t = i18n.t.bind(i18n)) => {
+  getActions = (
+    t: TTranslationFn = i18n.t.bind(i18n) as TTranslationFn,
+  ): ContextMenuModel[] => {
     const {
       enablePlugins,
       standalone,
@@ -310,7 +389,9 @@ class ProfileActionsStore {
     const isAdmin = this.authStore.isAdmin;
     const isCommunity = this.currentTariffStatusStore.isCommunity;
     const isNotPaidPeriod = this.currentTariffStatusStore.isNotPaidPeriod;
-    const { isVisitor, isCollaborator } = this.userStore.user;
+    // FABLE5-REVIEW: userStore.user is TUser | null; the old JS destructuring
+    // crashed here when user was null — the `!` keeps that runtime unchanged.
+    const { isVisitor, isCollaborator } = this.userStore.user!;
 
     // const settingsModule = modules.find((module) => module.id === "settings");
     // const peopleAvailable = modules.some((m) => m.appName === "people");
@@ -321,7 +402,7 @@ class ProfileActionsStore {
       debugInfo,
     } = this.settingsStore;
 
-    const settings =
+    const settings: TProfileActionType | null =
       isAdmin && !isNotPaidPeriod
         ? {
             key: "user-menu-settings",
@@ -335,7 +416,7 @@ class ProfileActionsStore {
 
     const protocol = window?.location?.protocol;
 
-    const managementItems =
+    const managementItems: TProfileActionType[] =
       portals?.map((portal) => {
         return {
           key: portal.tenantId,
@@ -347,7 +428,7 @@ class ProfileActionsStore {
         };
       }) ?? [];
 
-    const management =
+    const management: TProfileActionType | null =
       isAdmin && standalone && !limitedAccessSpace
         ? {
             key: "spaces-management-settings",
@@ -375,7 +456,7 @@ class ProfileActionsStore {
           }
         : null;
 
-    let hotkeys = null;
+    let hotkeys: TProfileActionType | null = null;
     // if (modules) {
     //   const moduleIndex = modules.findIndex((m) => m.appName === "files");
 
@@ -395,7 +476,7 @@ class ProfileActionsStore {
     }
     // }
 
-    let liveChat = null;
+    let liveChat: TProfileActionType | null = null;
 
     if (
       !isMobile &&
@@ -413,7 +494,7 @@ class ProfileActionsStore {
       };
     }
 
-    let bookTraining = null;
+    let bookTraining: TProfileActionType | null = null;
 
     if (!isMobile && this.authStore.isTeamTrainingAlertAvailable) {
       bookTraining = {
@@ -424,7 +505,7 @@ class ProfileActionsStore {
       };
     }
 
-    let about = null;
+    let about: TProfileActionType | null = null;
 
     if (displayAbout) {
       about = {
@@ -436,7 +517,7 @@ class ProfileActionsStore {
       };
     }
 
-    const accounts =
+    const accounts: TProfileActionType | null =
       !isNotPaidPeriod && !isVisitor && !isCollaborator
         ? {
             key: "user-menu-accounts",
@@ -457,7 +538,7 @@ class ProfileActionsStore {
       !this.settingsStore.isFrame ||
       this.settingsStore.frameConfig?.showSignOut;
 
-    const actions = [
+    const actions: (TProfileAction | boolean | null | undefined)[] = [
       !isNotPaidPeriod && {
         key: "user-menu-profile",
         icon: ProfileReactSvgUrl,
@@ -476,7 +557,7 @@ class ProfileActionsStore {
           icon: PaymentsReactSvgUrl,
           label: standalone ? t("Common:PaymentsTitle") : t("Common:Billing"),
           onClick: (obj) => this.onPaymentsClick(obj),
-          additionalElement: <TariffBar />,
+          additionalElement: <TariffBarElement />,
           url: PAYMENTS_URL,
           preventNewTab: true,
         },
@@ -549,14 +630,29 @@ class ProfileActionsStore {
       enablePlugins
     ) {
       this.pluginStore.profileMenuItemsList.forEach((option) => {
-        actions.splice(option.value.position, 0, {
+        // FABLE5-REVIEW: the plugin SDK's IProfileMenuItem has no `position`
+        // field; the old JS read option.value.position (undefined unless a
+        // plugin supplies it — Array.prototype.splice coerces undefined to 0).
+        // The cast keeps that runtime behavior unchanged.
+        const position = (
+          option.value as IProfileMenuItemClient & { position?: number }
+        ).position as number;
+
+        // The Omit<> cast is type-only: at runtime the spread still carries
+        // option.value.key which overwrites option.key, exactly as before
+        // (it silences TS2783 "key is specified more than once").
+        actions.splice(position, 0, {
           key: option.key,
-          ...option.value,
+          ...(option.value as Omit<IProfileMenuItemClient, "key">),
         });
       });
     }
 
-    return actions.filter(Boolean);
+    // FABLE5-REVIEW: the returned items carry extra DropDownItem-only fields
+    // (additionalElement, isButton, isPortal) and `items` may be null, which
+    // ContextMenuType does not model — the cast preserves the old JS contract
+    // expected by ArticleProfileProps.getActions.
+    return actions.filter(Boolean) as ContextMenuModel[];
   };
 
   checkUrlActions = () => {

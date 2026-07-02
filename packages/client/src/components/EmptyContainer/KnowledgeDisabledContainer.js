@@ -255,6 +255,7 @@ export default inject(
       isAdmin: userStore?.user?.isAdmin || userStore?.user?.isOwner,
       isPayer: paymentStore?.isPayer,
       isCardLinkedToPortal: paymentStore?.isCardLinkedToPortal,
+      isCardMissingOrInactive: paymentStore?.isCardMissingOrInactive,
       enableAIService: paymentStore?.enableAIService,
       getAIConfig,
       refreshPaymentInfo: authStore?.getPaymentInfo,

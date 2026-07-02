@@ -47,7 +47,7 @@ type ActivateAIEventProps = {
   enableAIService?: PaymentStore["enableAIService"];
   getAIConfig?: () => Promise<unknown> | void;
   refreshPaymentInfo?: () => Promise<void> | void;
-  isCardLinkedToPortal?: boolean;
+  isCardMissingOrInactive?: boolean;
   language?: string;
 };
 
@@ -61,11 +61,12 @@ const ActivateAIEvent = ({
   enableAIService,
   getAIConfig,
   refreshPaymentInfo,
-  isCardLinkedToPortal,
+  isCardMissingOrInactive,
   language,
 }: ActivateAIEventProps) => {
   const {
-    onDialogActivate,
+    onActivateAI,
+    onTopUpAndActivateAI,
     onAIActivated,
     isActivating,
     simpleTopUpDialogVisible,
@@ -74,18 +75,21 @@ const ActivateAIEvent = ({
     enableAIService,
     getAIConfig,
     refreshPaymentInfo,
-    isCardLinkedToPortal,
     parentId,
     context,
     createAgentOnActivate: true,
   });
+
+  const onActivate = isCardMissingOrInactive
+    ? onTopUpAndActivateAI
+    : onActivateAI;
 
   return (
     <>
       <ActivateAIDialog
         visible
         onClose={onClose}
-        onActivate={onDialogActivate}
+        onActivate={onActivate}
         isActivating={isActivating}
       />
       <ClientSimpleTopUpDialog
@@ -102,7 +106,7 @@ const ActivateAIEvent = ({
 };
 
 export default inject(({ paymentStore, settingsStore, authStore }: TStore) => {
-  const { enableAIService, isCardLinkedToPortal } = paymentStore;
+  const { enableAIService, isCardMissingOrInactive } = paymentStore;
   const { getAIConfig } = settingsStore;
   const { getPaymentInfo, language } = authStore;
 
@@ -110,7 +114,7 @@ export default inject(({ paymentStore, settingsStore, authStore }: TStore) => {
     enableAIService,
     getAIConfig,
     refreshPaymentInfo: getPaymentInfo,
-    isCardLinkedToPortal,
+    isCardMissingOrInactive,
     language: language ?? "en",
   };
 })(observer(ActivateAIEvent));

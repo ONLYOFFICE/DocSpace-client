@@ -178,7 +178,7 @@ import { XlsxUpdateService } from "@docspace/shared/services/xlsx-update.service
 import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import { getRoomInfo } from "@docspace/shared/api/rooms";
-import { SKIP_AI_MODAL_KEY } from "SRC_DIR/components/dialogs/AskAIConnectDialog";
+import { PersistenceKeys, getPersisted } from "./utils/persistence";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -1991,9 +1991,7 @@ class ContextOptionsStore {
   };
 
   askAI = async (item) => {
-    const skipAi = JSON.parse(
-      localStorage.getItem(SKIP_AI_MODAL_KEY) ?? "false",
-    );
+    const skipAi = getPersisted(PersistenceKeys.skipAiModal, false);
 
     if (item.parentRoomType !== FolderType.FormRoom || skipAi) {
       this.filesActionsStore.askAIAction(item);

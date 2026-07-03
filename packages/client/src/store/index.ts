@@ -202,7 +202,6 @@ publicRoomStore.filesStore = filesStore;
 const mediaViewerDataStore = new MediaViewerDataStore(
   filesStore,
   publicRoomStore,
-  selectedFolderStore,
   pluginStore,
 );
 
@@ -305,7 +304,6 @@ const filesActionsStore = new FilesActionsStore(
   aiRoomStore,
 );
 
-mediaViewerDataStore.filesActionsStore = filesActionsStore;
 secondaryProgressDataStore.filesActionsStore = filesActionsStore;
 versionHistoryStore.filesActionsStore = filesActionsStore;
 

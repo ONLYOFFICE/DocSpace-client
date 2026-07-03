@@ -89,12 +89,6 @@ class MediaViewerDataStore {
 
   publicRoomStore: PublicRoomStore;
 
-  // FABLE5-REVIEW: store/index.js passes selectedFolderStore as the 3rd
-  // constructor arg, then overwrites this field post-construction with the
-  // real FilesActionsStore (.js). The field is never read inside this store,
-  // so it is typed as `unknown` until FilesActionsStore is converted.
-  filesActionsStore: unknown;
-
   pluginStore: PluginStore;
 
   autoPlay = true;
@@ -112,13 +106,11 @@ class MediaViewerDataStore {
   constructor(
     filesStore: TFilesStore,
     publicRoomStore: PublicRoomStore,
-    filesActionsStore: unknown,
     pluginStore: PluginStore,
   ) {
     makeAutoObservable(this);
     this.filesStore = filesStore;
     this.publicRoomStore = publicRoomStore;
-    this.filesActionsStore = filesActionsStore;
     this.pluginStore = pluginStore;
   }
 

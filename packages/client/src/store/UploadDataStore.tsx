@@ -60,7 +60,6 @@ import {
   uploadChunkSequential,
   uploadChunkParallel,
   finalizeUploadSession,
-  getFileConversationProgress,
   copyToFolder,
   moveToFolder,
   fileCopyAs,
@@ -71,10 +70,7 @@ import {
 import { getRoomEncryptionKeys } from "@docspace/shared/api/privacy";
 import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
 import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
-import {
-  requireUnlock,
-  suspendAutoLock,
-} from "@docspace/shared/services/encryption/secret-storage";
+import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import {
   getActiveKeyId,
   selectActiveKey,
@@ -106,12 +102,26 @@ import type {
   TOperation,
 } from "@docspace/shared/api/files/types";
 import type FilesFilter from "@docspace/shared/api/files/filter";
-import type { ItemUploadContext } from "@docspace/shared/services/private-room/encrypted-upload";
 import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TConflictResolveDialogData } from "SRC_DIR/components/dialogs/ConflictResolveDialog/ConflictResolveDialog.types";
+
+import {
+  acquireUploadAutoLockSuspension,
+  getConversationProgress,
+  hasFileDek,
+  releaseUploadAutoLockSuspension,
+  removeDuplicate,
+  setFileDek,
+  takeFileDek,
+} from "./uploadDataStore/helpers";
+import type {
+  TConversionProgress,
+  TUploadBrowserFile,
+  TUploadFile,
+} from "./uploadDataStore/helpers";
 
 import type AiRoomStore from "./AiRoomStore";
 import type DialogsStore from "./DialogsStore";
@@ -122,43 +132,9 @@ import type SelectedFolderStore from "./SelectedFolderStore";
 import type TreeFoldersStore from "./TreeFoldersStore";
 import type FilesStore from "./FilesStore";
 
+export type { TUploadFile } from "./uploadDataStore/helpers";
+
 type TOperationName = (typeof OPERATIONS_NAME)[keyof typeof OPERATIONS_NAME];
-
-// FABLE5-REVIEW: upload items get their `file` from still-.js callers
-// (FilesActionsStore drag&drop, GlobalEvents); the extra members on the DOM
-// File object are a structural guess from the usage in this store.
-type TUploadBrowserFile = File & {
-  parentFolderId?: number | string;
-  encrypted?: boolean;
-  uploadContext?: ItemUploadContext;
-  lastModifiedDate?: Date;
-};
-
-export type TUploadFile = {
-  file: TUploadBrowserFile;
-  uniqueId: string;
-  fileId: number | null;
-  toFolderId?: number | string | null;
-  action?: "upload" | "uploaded" | "convert" | "converted";
-  error?: string | null;
-  fileInfo: TFile | null;
-  cancel?: boolean;
-  needConvert?: boolean;
-  encrypted?: boolean;
-  encryptionRoomId?: number | string | null;
-  percent: number;
-  inAction?: boolean;
-  inConversion?: boolean;
-  isQuotaError?: boolean;
-  errorShown?: boolean;
-  isCalculated?: boolean;
-  needPassword?: boolean;
-  convertProgress?: number;
-  path?: number[];
-  password?: string | null;
-  format?: string | null;
-  index?: number;
-};
 
 // FABLE5-REVIEW: conversion panel items are produced by still-.js callers
 // (ConvertDialog, files view context options); minimal structural type of
@@ -265,14 +241,6 @@ type TItemOperationData = {
   translations?: { [key: string]: string };
 };
 
-// FABLE5-REVIEW: getFileConversationProgress is untyped in shared/api
-// (raw request); shape observed from the usage in this store.
-type TConversionProgress = {
-  progress?: number;
-  result?: TFile | "password" | null;
-  error?: string | null;
-};
-
 type TAxiosLikeError = {
   response?: { data?: { error?: { message?: string } }; status?: number };
   statusText?: string;
@@ -280,69 +248,6 @@ type TAxiosLikeError = {
 };
 
 type TFilesStore = FilesStore;
-
-const removeDuplicate = <T extends { uniqueId?: string }>(items: T[]): T[] => {
-  const obj: Record<string, boolean> = {};
-  return items.filter((x) => {
-    if (obj[x.uniqueId as string]) return false;
-    obj[x.uniqueId as string] = true;
-    return true;
-  });
-};
-
-const dekByFileEntry = new WeakMap<object, Uint8Array | null>();
-
-let uploadAutoLockRelease: (() => void) | null = null;
-
-function setFileDek(
-  entry: TUploadFile | null | undefined,
-  dek: Uint8Array | null,
-) {
-  if (!entry) return;
-  const previous = dekByFileEntry.get(entry);
-  if (previous && previous !== dek) {
-    wipeDek(previous);
-  }
-  dekByFileEntry.set(entry, dek);
-}
-
-function takeFileDek(entry: TUploadFile | null | undefined) {
-  if (!entry) return null;
-  const dek = dekByFileEntry.get(entry);
-  if (dek) {
-    dekByFileEntry.delete(entry);
-    return dek;
-  }
-  return null;
-}
-
-function hasFileDek(entry: TUploadFile | null | undefined) {
-  return !!entry && dekByFileEntry.has(entry);
-}
-
-const getConversationProgress = async (fileId: number | null) => {
-  const promise = new Promise<TConversionProgress[]>((resolve, reject) => {
-    setTimeout(() => {
-      // FABLE5-REVIEW: getFileConversationProgress is untyped in shared/api;
-      // fileId is only null before the upload session has assigned one.
-      (
-        getFileConversationProgress(fileId as number) as Promise<
-          TConversionProgress[]
-        >
-      )
-        .then((res) => {
-          // console.log(`getFileConversationProgress fileId:${fileId}`, res);
-          resolve(res);
-        })
-        .catch((error) => {
-          // console.error("getFileConversationProgress error", error);
-          reject(error);
-        });
-    }, 1000);
-  });
-
-  return promise;
-};
 
 class UploadDataStore {
   settingsStore: SettingsStore;
@@ -688,25 +593,6 @@ class UploadDataStore {
     } catch {
       //
     }
-  };
-
-  acquireUploadAutoLockSuspension = () => {
-    if (uploadAutoLockRelease) return;
-    try {
-      uploadAutoLockRelease = suspendAutoLock();
-    } catch {
-      uploadAutoLockRelease = null;
-    }
-  };
-
-  releaseUploadAutoLockSuspension = () => {
-    if (!uploadAutoLockRelease) return;
-    try {
-      uploadAutoLockRelease();
-    } catch {
-      //
-    }
-    uploadAutoLockRelease = null;
   };
 
   prepareFileForEncryptedUpload = async (
@@ -2467,7 +2353,7 @@ class UploadDataStore {
     this.primaryProgressDataStore.setPrimaryProgressBarData(progressData);
 
     if (notUploadedFiles.some((f) => this.willEncryptItem(f))) {
-      this.acquireUploadAutoLockSuspension();
+      acquireUploadAutoLockSuspension();
     }
 
     this.parallelUploading(notUploadedFiles, t, createNewIfExist);
@@ -2905,7 +2791,7 @@ class UploadDataStore {
   };
 
   finishUploadFiles = (t: TTranslation, waitConversion?: boolean) => {
-    this.releaseUploadAutoLockSuspension();
+    releaseUploadAutoLockSuspension();
 
     const filesWithErrors = this.uploadedFilesHistory.filter(
       (f) => f.error && !f.errorShown,

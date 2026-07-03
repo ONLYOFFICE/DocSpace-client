@@ -433,6 +433,17 @@ function parseEnvelope(envelopeBase64: string): ParsedEnvelope {
   return { publicKey, flags, passphraseSlot, recoverySlot };
 }
 
+/**
+ * Extract the public key (base64) embedded in a serialized identity envelope
+ * without needing the passphrase. Validates magic/version/suite and throws on
+ * malformed input. Used by the legacy compat layer, where the old API passed
+ * only the encrypted-key string around (no separate public key).
+ */
+export function readEnvelopePublicKey(privateKeyEnc: string): string {
+  const env = parseEnvelope(privateKeyEnc);
+  return arrayBufferToBase64(env.publicKey);
+}
+
 export async function unlockWithPassphrase(
   serialized: SerializedIdentity,
   passphrase: string,

@@ -1,0 +1,29 @@
+{
+  "key_path": "WebSearchEngineDescription",
+  "content": "Use a Web search engine to enhance AI chats with real-time information from the internet",
+  "content_en_sha1_hash": "59594a8ed51efc0814ecd050ea5d123404441048",
+  "created_at": "2026-07-03T11:07:57.475Z",
+  "updated_at": "2026-07-03T11:08:42.311Z",
+  "comment": {
+    "text": "Description text in the AI settings section explaining the purpose of enabling a web search engine for AI chats.",
+    "is_auto": true,
+    "updated_at": "2026-07-03T11:08:42.311Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/WebSearchSaas.tsx",
+      "line_number": 110,
+      "context": "const items = aiToolsPrices.webSearch ?? [];\n \n return (\n <div className={styles.wrapper}>\n <Text className={styles.description}>\n {t(\"Common:WebSearchEngineDescription\")}\n </Text>\n \n {webSearchSettingsUrl ? (\n <Link\n className={classNames(generalStyles.learnMoreLink, styles.learnMore)}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

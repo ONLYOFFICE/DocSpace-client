@@ -3,7 +3,7 @@
   "content": "Create Form Set",
   "content_en_sha1_hash": "5c266be0e2451747828508884538e488e1806f2d",
   "created_at": "2026-06-25T19:30:28.607Z",
-  "updated_at": "2026-06-25T19:42:57.187Z",
+  "updated_at": "2026-07-03T11:08:02.850Z",
   "comment": {
     "text": "Button label in the Forms section header used to initiate the creation of a new collection of forms.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 1045,
+      "line_number": 1047,
       "context": "warningText,\n warningIcon: isRoomStorageQuotaExceeded\n ? WarningQuotaExceededUrl\n : undefined,\n actions: isFormsSection\n ? t(\"Common:CreateFormSet\")\n : isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Common:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),",
       "module": "/packages/client"
     }

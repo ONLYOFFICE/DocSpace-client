@@ -3,7 +3,7 @@
   "content": "Add-ons",
   "content_en_sha1_hash": "41b634ed241336cc8b5e03729fd92977c540cc02",
   "created_at": "2026-06-25T11:54:43.546Z",
-  "updated_at": "2026-06-25T12:23:32.546Z",
+  "updated_at": "2026-07-03T11:08:02.891Z",
   "comment": {
     "text": "Tab label in the Portal Settings services section representing available extensions or extra features.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/index.js",
       "line_number": 120,
-      "context": "clearAbortControllerArr();\n },\n },\n !isNotPaidPeriod && {\n id: TAB_IDS.ADDONS,\n name: t(\"Common:Addons\"),\n content: (\n <ServicesList\n getAIConfig={getAIConfig}\n onOpenSupportedModels={() =>\n navigateToRoute(\"/portal-settings/ai-settings/models\")",
+      "context": "clearAbortControllerArr();\n },\n },\n !isNotPaidPeriod && {\n id: TAB_IDS.ADDONS,\n name: t(\"Common:Addons\"),\n content: (\n <ServicesList\n getAIConfig={getAIConfig}\n onOpenSupportedModels={() =>\n navigateToRoute(\"/portal-settings/ai-settings/ai-models\")",
       "module": "/packages/client"
     }
   ],

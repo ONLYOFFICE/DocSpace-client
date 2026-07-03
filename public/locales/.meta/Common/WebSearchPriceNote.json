@@ -1,0 +1,29 @@
+{
+  "key_path": "WebSearchPriceNote",
+  "content": "{{price}} / request, {{provider}}",
+  "content_en_sha1_hash": "05c87c2f0063b899fb8d5f35afb21eaa79c8cb8e",
+  "created_at": "2026-07-03T11:07:57.527Z",
+  "updated_at": "2026-07-03T11:08:28.115Z",
+  "comment": {
+    "text": "Short informational label in the Web Search SaaS settings displaying the cost per request and the provider's name, where {{price}} is the formatted amount and {{provider}} is the service name.",
+    "is_auto": true,
+    "updated_at": "2026-07-03T11:08:28.115Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/WebSearchSaas.tsx",
+      "line_number": 143,
+      "context": "</Text>\n </div>\n \n <div className={styles.rowRight}>\n <Text fontSize=\"13px\" className={styles.price}>\n {t(\"Common:WebSearchPriceNote\", {\n price: formatAiModelsCurrency?.(ws.price) ?? \"\",\n provider: ws.provider,\n })}\n </Text>\n {ws.link ? (",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

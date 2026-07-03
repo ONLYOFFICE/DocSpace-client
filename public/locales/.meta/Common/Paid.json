@@ -3,7 +3,7 @@
   "content": "Paid",
   "content_en_sha1_hash": "dc9d4584a55464cd571719ee0066acb16d411f86",
   "created_at": "2025-05-19T21:30:47.223Z",
-  "updated_at": "2026-06-03T09:30:05.040Z",
+  "updated_at": "2026-07-03T11:08:02.843Z",
   "comment": {
     "text": "This is a short label indicating a paid status. It appears on a badge or as part of a user's status description.",
     "is_auto": true,
@@ -139,7 +139,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 375,
+      "line_number": 348,
       "context": "backgroundColor={\n isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n fontWeight=\"700\"\n className=\"settings-section_badge\"\n isPaidBadge\n />\n ) : (",
       "module": "/packages/client"
     },

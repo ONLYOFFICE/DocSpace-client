@@ -1,0 +1,29 @@
+{
+  "key_path": "AIModelTitle",
+  "content": "AI model",
+  "content_en_sha1_hash": "6572e8b822459f4123f8bd5345c958113acd72a2",
+  "created_at": "2026-07-03T11:07:19.047Z",
+  "updated_at": "2026-07-03T11:13:41.338Z",
+  "comment": {
+    "text": "Label for the AI model parameter within the Create/Edit Agent dialog.",
+    "is_auto": true,
+    "updated_at": "2026-07-03T11:13:41.338Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/ModelSaas.tsx",
+      "line_number": 276,
+      "context": "return (\n <StyledParam increaseGap>\n <div className=\" set_room_params-info\">\n <div>\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} noSelect>\n {t(\"Common:AIModelTitle\")}\n </Text>\n <Text\n fontSize=\"12px\"\n lineHeight=\"16px\"\n fontWeight={400}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

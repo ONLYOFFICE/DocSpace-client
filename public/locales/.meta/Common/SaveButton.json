@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2026-06-30T10:18:29.518Z",
+  "updated_at": "2026-07-03T11:08:02.806Z",
   "comment": {
     "text": "Button label or dialog header. It confirms and applies changes, such as renaming a chat or saving export settings.",
     "is_auto": true,
@@ -67,8 +67,8 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/EditAgentDialog.tsx",
-      "line_number": 256,
-      "context": "</ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n tabIndex={5}\n label={t(\"Common:SaveButton\")}\n primary\n scale\n onClick={onEditRoom}\n isDisabled={\n !agentParams.profileId ||",
+      "line_number": 262,
+      "context": "</ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n tabIndex={5}\n label={t(\"Common:SaveButton\")}\n primary\n scale\n onClick={onEditRoom}\n isDisabled={\n (!agentParams.profileId && !agentParams.modelId) ||",
       "module": "/packages/client"
     },
     {

@@ -3,7 +3,7 @@
   "content": "Activate",
   "content_en_sha1_hash": "92ef08325a4813563a3110359906076374683282",
   "created_at": "2025-05-19T21:30:42.888Z",
-  "updated_at": "2026-06-30T10:18:29.505Z",
+  "updated_at": "2026-07-03T11:08:02.792Z",
   "comment": {
     "text": "This is the label for a button. Clicking it activates a license after a file has been uploaded.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ActivateAIDialog/index.tsx",
-      "line_number": 177,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n {canActivate ? (\n <>\n <Button\n label={t(\"Common:Activate\")}\n size={ButtonSize.normal}\n onClick={onActivate}\n primary\n scale\n isLoading={isActivating}",
+      "line_number": 180,
+      "context": "<>\n <Button\n label={\n isCardMissingOrInactive\n ? t(\"Common:TopUpAndActivate\")\n : t(\"Common:Activate\")\n }\n size={ButtonSize.normal}\n onClick={onActivate}\n primary\n scale",
       "module": "/packages/client"
     },
     {
@@ -37,8 +37,8 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 452,
-      "context": "} as const;\n \n const activateOrTopUpAI = isCardLinkedToPortal\n ? ({\n type: \"button\",\n title: t(\"Common:Activate\"),\n key: \"activate-ai\",\n onClick: actions.onActivateAI,\n } as const)\n : ({\n type: \"button\",",
+      "line_number": 453,
+      "context": "} as const;\n \n const activateOrTopUpAI = isCardLinkedToPortal\n ? ({\n type: \"button\",\n title: t(\"Common:Activate\"),\n key: \"activate-ai\",\n onClick: actions.onActivateAI,\n isLoading: isActivating,\n } as const)\n : ({",
       "module": "/packages/client"
     },
     {

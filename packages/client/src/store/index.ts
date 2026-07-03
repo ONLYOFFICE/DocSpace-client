@@ -342,6 +342,10 @@ const tableStore = new TableStore(
   peopleStore,
 );
 
+// Track F note: InfoPanelStore's five dependencies are attached
+// post-construction because it is constructed before them (its fields are
+// typed in InfoPanelStore.ts). Candidate for constructor injection once the
+// construction order is revisited.
 infoPanelStore.selectedFolderStore = selectedFolderStore;
 infoPanelStore.filesStore = filesStore;
 infoPanelStore.filesSettingsStore = filesSettingsStore;

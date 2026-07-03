@@ -304,7 +304,6 @@ const filesActionsStore = new FilesActionsStore(
   aiRoomStore,
 );
 
-secondaryProgressDataStore.filesActionsStore = filesActionsStore;
 versionHistoryStore.filesActionsStore = filesActionsStore;
 
 const contextOptionsStore = new ContextOptionsStore(

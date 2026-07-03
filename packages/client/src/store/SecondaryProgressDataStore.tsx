@@ -113,12 +113,6 @@ class SecondaryProgressDataStore {
 
   mediaViewerDataStore: MediaViewerDataStore;
 
-  // FABLE5-REVIEW: filesActionsStore is attached after construction in
-  // store/index.js (`secondaryProgressDataStore.filesActionsStore = ...`).
-  // FilesActionsStore is still .js (wave 3) and no members are used inside
-  // this store, so it is typed as unknown for now.
-  declare filesActionsStore?: unknown;
-
   constructor(
     treeFoldersStore: TreeFoldersStore,
     mediaViewerDataStore: MediaViewerDataStore,

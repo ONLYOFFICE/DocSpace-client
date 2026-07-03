@@ -78,6 +78,12 @@ export type TDocsConnectWallet = {
 export type TDocsConnectScheduledChange = {
   nextUsers: number;
   dueDate: string;
+  devPackDisabled: boolean;
+};
+
+export type TDocsConnectTariffState = {
+  scheduledChange: TDocsConnectScheduledChange | null;
+  deactivated: boolean;
 };
 
 export type TDocsConnectInfo = {
@@ -88,6 +94,7 @@ export type TDocsConnectInfo = {
   wallet: TDocsConnectWallet | null;
   devPackEnabled: boolean;
   scheduledChange: TDocsConnectScheduledChange | null;
+  deactivated: boolean;
 };
 
 export type TDocsConnectConfigUpdate = {

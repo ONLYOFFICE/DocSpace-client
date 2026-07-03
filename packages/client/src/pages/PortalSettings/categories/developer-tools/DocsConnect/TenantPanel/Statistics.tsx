@@ -124,6 +124,15 @@ const Statistics = ({
   const planUsers = tenant.payment?.quantity ?? 0;
   const monthlyCharge = planUsers * pricePerUser;
   const scheduledChange = isTrial ? null : (info.scheduledChange ?? null);
+  const isCancellation =
+    scheduledChange != null && scheduledChange.nextUsers === 0;
+  const scheduledDevPackOff = scheduledChange?.devPackDisabled ?? false;
+  const scheduledUsersChanged =
+    scheduledChange != null && scheduledChange.nextUsers !== planUsers;
+  const scheduledPerUser = scheduledDevPackOff
+    ? (prices?.pricePerUser ?? 0)
+    : pricePerUser;
+  const deactivated = !isTrial && (info.deactivated ?? false);
 
   const onCopy = (value: string) => copyToClipboard?.(value, t);
 
@@ -134,6 +143,8 @@ const Statistics = ({
       toastr.error(e as Error);
     }
   };
+
+  const onTopUpAndPay = () => openBuyPlan?.("edit");
 
   return (
     <div className={styles.statistics}>
@@ -181,15 +192,38 @@ const Statistics = ({
 
       {scheduledChange ? (
         <StorageWarning
-          title={t("Common:TariffUserAdjustmentScheduled", {
-            fromCount: planUsers,
-            toCount: scheduledChange.nextUsers,
-          })}
-          body={t("Common:ScheduledChangeBillingPeriodNote", {
-            date: formatDateLocalized(scheduledChange.dueDate, "DATE_MED", {
-              locale: i18n.language,
-            }),
-          })}
+          title={
+            isCancellation
+              ? t("Common:PlanCancellation")
+              : scheduledDevPackOff && scheduledUsersChanged
+                ? t("Common:TariffDevPackUserAdjustmentScheduled", {
+                    fromCount: planUsers,
+                    toCount: scheduledChange.nextUsers,
+                  })
+                : scheduledDevPackOff
+                  ? t("Common:TariffDevPackDeactivationScheduled")
+                  : t("Common:TariffUserAdjustmentScheduled", {
+                      fromCount: planUsers,
+                      toCount: scheduledChange.nextUsers,
+                    })
+          }
+          body={
+            isCancellation
+              ? t("Common:PlanCancellationBillingPeriodNote", {
+                  date: formatDateLocalized(
+                    scheduledChange.dueDate,
+                    "DATE_MED",
+                    { locale: i18n.language },
+                  ),
+                })
+              : t("Common:ScheduledChangeBillingPeriodNote", {
+                  date: formatDateLocalized(
+                    scheduledChange.dueDate,
+                    "DATE_MED",
+                    { locale: i18n.language },
+                  ),
+                })
+          }
           onCancelChange={onCancelChange}
         />
       ) : null}
@@ -268,35 +302,70 @@ const Statistics = ({
         ) : (
           <div className={styles.detailCard}>
             <div className={styles.detailCardHeader}>
-              <Text fontSize="16px" fontWeight={700}>
-                {t("Common:TariffPlan")}{" "}
-                <Text as="span" fontSize="12px" className={styles.muted}>
-                  {scheduledChange
-                    ? t("DocsConnect:RenewsOnWithUpdate", {
-                        date: formatDateLocalized(
-                          scheduledChange.dueDate,
-                          "DATE_MED",
-                          { locale: i18n.language },
-                        ),
-                        price: formatCurrencyValue(
-                          i18n.language,
-                          scheduledChange.nextUsers * pricePerUser,
-                          currency,
-                          2,
-                        ),
-                        count: scheduledChange.nextUsers,
-                      })
-                    : t("DocsConnect:RenewsOn", {
-                        date: formatDocsConnectDate(tenant.endDate),
-                      })}
+              {deactivated ? (
+                <Text
+                  fontSize="16px"
+                  fontWeight={700}
+                  className={styles.deactivatedTitle}
+                >
+                  {t("Common:TariffPlanDeactivatedNonPayment")}
                 </Text>
-              </Text>
-              {scheduledChange ? null : (
+              ) : (
+                <Text fontSize="16px" fontWeight={700}>
+                  {t("Common:TariffPlan")}{" "}
+                  <Text
+                    as="span"
+                    fontSize="16px"
+                    fontWeight={400}
+                    className={styles.tariffNote}
+                  >
+                    {scheduledChange
+                      ? isCancellation
+                        ? t("DocsConnect:CancellationOn", {
+                            date: formatDateLocalized(
+                              scheduledChange.dueDate,
+                              "DATE_MED",
+                              { locale: i18n.language },
+                            ),
+                          })
+                        : t("DocsConnect:RenewsOnWithUpdate", {
+                            date: formatDateLocalized(
+                              scheduledChange.dueDate,
+                              "DATE_MED",
+                              { locale: i18n.language },
+                            ),
+                            price: formatCurrencyValue(
+                              i18n.language,
+                              scheduledChange.nextUsers * scheduledPerUser,
+                              currency,
+                              2,
+                            ),
+                            count: scheduledChange.nextUsers,
+                          })
+                      : t("Common:RenewsOnDate", {
+                          date: formatDocsConnectDate(tenant.endDate),
+                        })}
+                  </Text>
+                </Text>
+              )}
+              {deactivated ? (
                 <Link
                   type={LinkType.action}
                   color="accent"
                   fontSize="13px"
                   fontWeight={600}
+                  textDecoration="underline dashed"
+                  onClick={onTopUpAndPay}
+                >
+                  {t("Common:TopUpAndPay")}
+                </Link>
+              ) : scheduledChange ? null : (
+                <Link
+                  type={LinkType.action}
+                  color="accent"
+                  fontSize="13px"
+                  fontWeight={600}
+                  textDecoration="underline dashed"
                   onClick={() => openBuyPlan?.("edit")}
                 >
                   {t("Common:EditPlan")}
@@ -314,7 +383,7 @@ const Statistics = ({
                 <Text className={styles.muted}>{t("DocsConnect:Price")}</Text>
                 <Text fontWeight={600}>
                   {devPackEnabled
-                    ? t("DocsConnect:PricePerUserDevPack", {
+                    ? t("DocsConnect:PricePerUserDevPackShort", {
                         price: formatCurrencyValue(
                           i18n.language,
                           pricePerUser,
@@ -322,7 +391,7 @@ const Statistics = ({
                           2,
                         ),
                       })
-                    : t("DocsConnect:PricePerUser", {
+                    : t("DocsConnect:PricePerUserShort", {
                         price: formatCurrencyValue(
                           i18n.language,
                           pricePerUser,

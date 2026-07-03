@@ -161,6 +161,7 @@ const TenantPanel = ({
       </div>
 
       <Tabs
+        withoutStickyIntend
         items={tabs}
         selectedItemId={selectedTab}
         onSelect={(tab) => setSelectedTab(tab.id)}

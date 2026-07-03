@@ -100,10 +100,14 @@
   color: $gray-text;
 }
 
+.tariffNote {
+  color: var(--dev-tools-text-secondary);
+}
+
 .sectionTitle {
   font-size: 18px;
   font-weight: 700;
-  margin-top: 8px;
+  margin-top: 4px;
   margin-bottom: 4px;
 }
 
@@ -126,6 +130,10 @@
   justify-content: center;
   width: 100%;
   padding: 64px 0;
+}
+
+.deactivatedTitle {
+  color: var(--dev-tools-status-negative);
 }
 
 .trialBanner {
@@ -390,4 +398,3 @@
     fill: var(--accent-main);
   }
 }
-

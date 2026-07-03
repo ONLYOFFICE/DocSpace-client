@@ -131,6 +131,15 @@ const DocsConnectPage = ({
     (info.devPackEnabled ? (info.prices?.devPackPrice ?? 0) : 0);
   const monthlyCharge = planUsers * pricePerUser;
   const scheduledChange = isPaid ? (info.scheduledChange ?? null) : null;
+  const isCancellation =
+    scheduledChange != null && scheduledChange.nextUsers === 0;
+  const scheduledDevPackOff = scheduledChange?.devPackDisabled ?? false;
+  const scheduledUsersChanged =
+    scheduledChange != null && scheduledChange.nextUsers !== planUsers;
+  const scheduledPerUser = scheduledDevPackOff
+    ? (info.prices?.pricePerUser ?? 0)
+    : pricePerUser;
+  const deactivated = isPaid && (info.deactivated ?? false);
 
   const onTopUp = () => navigate(PAYMENT_ROUTES.wallet);
   const onViewUsage = () => navigate(PAYMENT_ROUTES.usage);
@@ -154,39 +163,48 @@ const DocsConnectPage = ({
     }
   };
 
-  const contextMenuItems = [
-    {
-      key: "edit",
-      label: t("Common:EditPlan"),
-      iconNode: <PencilIcon />,
-      onClick: onEditPlan,
-    },
-    {
-      key: "usage",
-      label: t("Common:ViewUsage"),
-      iconNode: <StatisticsIcon />,
-      onClick: onViewUsage,
-    },
-    {
-      key: "separator",
-      isSeparator: true,
-    },
-    {
-      key: "cancel",
-      label: t("Common:CancelPlan"),
-      iconNode: <CircleCrossIcon />,
-      onClick: onCancelPlan,
-    },
-  ];
+  const contextMenuItems = scheduledChange
+    ? [
+        {
+          key: "usage",
+          label: t("Common:ViewUsage"),
+          iconNode: <StatisticsIcon />,
+          onClick: onViewUsage,
+        },
+      ]
+    : [
+        {
+          key: "edit",
+          label: t("Common:EditPlan"),
+          iconNode: <PencilIcon />,
+          onClick: onEditPlan,
+        },
+        {
+          key: "usage",
+          label: t("Common:ViewUsage"),
+          iconNode: <StatisticsIcon />,
+          onClick: onViewUsage,
+        },
+        {
+          key: "separator",
+          isSeparator: true,
+        },
+        {
+          key: "cancel",
+          label: t("Common:CancelPlan"),
+          iconNode: <CircleCrossIcon />,
+          onClick: onCancelPlan,
+        },
+      ];
 
   const docsName = `${getBrandName("OrganizationName")} ${getBrandName("ProductEditorsName")}`;
 
   return (
     <div className={styles.container}>
       <ServiceToggleSection
-        isEnabled={isPaid || !expired}
-        isDisabled={!isPaid && !expired}
-        onToggle={isPaid ? onCancelPlan : onBuyPlan}
+        isEnabled={deactivated ? false : isPaid || !expired}
+        isDisabled={(!isPaid && !expired) || scheduledChange != null}
+        onToggle={deactivated ? onTopUp : isPaid ? onCancelPlan : onBuyPlan}
         title={t("DocsConnect:DocsConnect")}
         priceText={t("DocsConnect:FromPricePerUserMonth", {
           price: formatCurrencyValue(
@@ -203,15 +221,38 @@ const DocsConnectPage = ({
 
       {scheduledChange ? (
         <StorageWarning
-          title={t("Common:TariffUserAdjustmentScheduled", {
-            fromCount: planUsers,
-            toCount: scheduledChange.nextUsers,
-          })}
-          body={t("Common:ScheduledChangeBillingPeriodNote", {
-            date: formatDateLocalized(scheduledChange.dueDate, "DATE_MED", {
-              locale: i18n.language,
-            }),
-          })}
+          title={
+            isCancellation
+              ? t("Common:PlanCancellation")
+              : scheduledDevPackOff && scheduledUsersChanged
+                ? t("Common:TariffDevPackUserAdjustmentScheduled", {
+                    fromCount: planUsers,
+                    toCount: scheduledChange.nextUsers,
+                  })
+                : scheduledDevPackOff
+                  ? t("Common:TariffDevPackDeactivationScheduled")
+                  : t("Common:TariffUserAdjustmentScheduled", {
+                      fromCount: planUsers,
+                      toCount: scheduledChange.nextUsers,
+                    })
+          }
+          body={
+            isCancellation
+              ? t("Common:PlanCancellationBillingPeriodNote", {
+                  date: formatDateLocalized(
+                    scheduledChange.dueDate,
+                    "DATE_MED",
+                    { locale: i18n.language },
+                  ),
+                })
+              : t("Common:ScheduledChangeBillingPeriodNote", {
+                  date: formatDateLocalized(
+                    scheduledChange.dueDate,
+                    "DATE_MED",
+                    { locale: i18n.language },
+                  ),
+                })
+          }
           onCancelChange={onCancelChange}
         />
       ) : null}
@@ -241,9 +282,17 @@ const DocsConnectPage = ({
       {isPaid ? (
         <>
           <div className={styles.tariffHeader}>
-            <Text className={styles.sectionTitle}>
-              {t("Common:CurrentTariffPlan")}
-            </Text>
+            {deactivated ? (
+              <Text
+                className={`${styles.sectionTitle} ${styles.sectionTitleError}`}
+              >
+                {t("Common:TariffPlanDeactivatedNonPayment")}
+              </Text>
+            ) : (
+              <Text className={styles.sectionTitle}>
+                {t("Common:CurrentTariffPlan")}
+              </Text>
+            )}
             <IconButton
               iconNode={<SettingsIcon />}
               size={16}
@@ -290,27 +339,51 @@ const DocsConnectPage = ({
             </div>
           </div>
 
-          {scheduledChange ? (
-            <Text className={styles.renewalText}>
-              <Trans
-                t={t}
-                i18nKey="Common:SubscriptionAutoRenewedWithUpdate"
-                values={{
-                  finalDate: formatDateLocalized(
-                    scheduledChange.dueDate,
-                    "DATE_MED",
-                    { locale: i18n.language },
-                  ),
-                  price: formatCurrencyValue(
-                    i18n.language,
-                    scheduledChange.nextUsers * pricePerUser,
-                    currency,
-                    2,
-                  ),
-                  amount: `${t("DocsConnect:PlanUsers")}: ${scheduledChange.nextUsers}`,
-                }}
-                components={{ 1: <Text as="span" fontWeight={600} /> }}
+          {deactivated ? (
+            <div className={styles.actionsRow}>
+              <Button
+                primary
+                size={ButtonSize.small}
+                label={t("Common:TopUpAndPay")}
+                onClick={onEditPlan}
               />
+            </div>
+          ) : scheduledChange ? (
+            <Text className={styles.renewalText}>
+              {isCancellation ? (
+                <Trans
+                  t={t}
+                  i18nKey="DocsConnect:TariffPlanAutoCanceled"
+                  values={{
+                    date: formatDateLocalized(
+                      scheduledChange.dueDate,
+                      "DATE_MED",
+                      { locale: i18n.language },
+                    ),
+                  }}
+                  components={{ 1: <Text as="span" fontWeight={600} /> }}
+                />
+              ) : (
+                <Trans
+                  t={t}
+                  i18nKey="Common:SubscriptionAutoRenewedWithUpdate"
+                  values={{
+                    finalDate: formatDateLocalized(
+                      scheduledChange.dueDate,
+                      "DATE_MED",
+                      { locale: i18n.language },
+                    ),
+                    price: formatCurrencyValue(
+                      i18n.language,
+                      scheduledChange.nextUsers * scheduledPerUser,
+                      currency,
+                      2,
+                    ),
+                    amount: `${t("DocsConnect:PlanUsers")}: ${scheduledChange.nextUsers}`,
+                  }}
+                  components={{ 1: <Text as="span" fontWeight={600} /> }}
+                />
+              )}
             </Text>
           ) : (
             <div className={styles.actionsRow}>

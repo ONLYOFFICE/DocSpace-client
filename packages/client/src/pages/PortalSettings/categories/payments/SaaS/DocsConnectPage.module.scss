@@ -40,7 +40,6 @@
   flex-direction: column;
   gap: 16px;
   width: 100%;
-  padding-top: 20px;
   padding-bottom: 40px;
 }
 
@@ -77,7 +76,11 @@
   height: 40px;
   border-radius: 50%;
   color: var(--color-scheme-main-buttons);
-  background: color-mix(in srgb, var(--color-scheme-main-buttons) 15%, transparent);
+  background: color-mix(
+    in srgb,
+    var(--color-scheme-main-buttons) 15%,
+    transparent
+  );
 
   svg path {
     fill: currentColor;
@@ -112,6 +115,10 @@
   font-weight: 700;
   line-height: 22px;
   margin-top: 4px;
+}
+
+.sectionTitleError {
+  color: var(--payment-error-color);
 }
 
 .tariffHeader {

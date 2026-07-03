@@ -42,7 +42,7 @@ import type {
   TDocsConnectConfig,
   TDocsConnectTenantInfo,
   TDocsConnectPrices,
-  TDocsConnectScheduledChange,
+  TDocsConnectTariffState,
   TDocsConnectWallet,
   TDocsConnectConfigUpdate,
 } from "./types";
@@ -111,45 +111,86 @@ type TTariffQuota = {
   nextQuantity?: number | null;
   dueDate?: string | null;
   wallet?: boolean;
+  state?: number;
 };
 type TTariffResponse = { quotas?: TTariffQuota[] } | null;
 
-const fetchScheduledChange = async (
-  services: TWalletServicesResponse,
-): Promise<TDocsConnectScheduledChange | null> => {
-  try {
-    const ids = (services ?? [])
-      .filter(
-        (service) =>
-          service.serviceName === DOCS_CLOUD_PRODUCT ||
-          service.serviceName === DOCS_CLOUD_DEVPACK_SERVICE,
-      )
-      .map((service) => service.id)
-      .filter((id): id is number => id != null);
+const QUOTA_STATE_OVERDUE = 1;
 
-    if (!ids.length) return null;
+const EMPTY_TARIFF_STATE: TDocsConnectTariffState = {
+  scheduledChange: null,
+  deactivated: false,
+};
+
+const fetchTariffState = async (
+  services: TWalletServicesResponse,
+): Promise<TDocsConnectTariffState> => {
+  try {
+    const serviceId = (name: string) =>
+      (services ?? []).find((service) => service.serviceName === name)?.id;
+
+    const baseId = serviceId(DOCS_CLOUD_PRODUCT);
+    const devpackId = serviceId(DOCS_CLOUD_DEVPACK_SERVICE);
+
+    if (baseId == null && devpackId == null) return EMPTY_TARIFF_STATE;
 
     const tariff = (await request({
       method: "get",
       url: "/portal/tariff",
     })) as TTariffResponse;
 
-    const quota = tariff?.quotas?.find(
-      (q) =>
-        q.wallet === true &&
-        q.id != null &&
-        ids.includes(q.id) &&
-        (q.nextQuantity ?? -1) >= 0,
+    const quotaOf = (id?: number) =>
+      id == null
+        ? undefined
+        : tariff?.quotas?.find((q) => q.wallet === true && q.id === id);
+
+    const baseQuota = quotaOf(baseId);
+    const devpackQuota = quotaOf(devpackId);
+
+    if (
+      baseQuota?.state === QUOTA_STATE_OVERDUE ||
+      devpackQuota?.state === QUOTA_STATE_OVERDUE
+    ) {
+      return { scheduledChange: null, deactivated: true };
+    }
+
+    if (devpackQuota?.nextQuantity === 0) {
+      const baseNext = baseQuota?.nextQuantity ?? null;
+      const switchUsers =
+        baseNext != null && baseNext > 0
+          ? baseNext
+          : (baseQuota?.quantity ?? 0);
+
+      if (switchUsers > 0) {
+        return {
+          scheduledChange: {
+            nextUsers: switchUsers,
+            dueDate: devpackQuota.dueDate ?? "",
+            devPackDisabled: true,
+          },
+          deactivated: false,
+        };
+      }
+    }
+
+    const quotaWithChange = [devpackQuota, baseQuota].find(
+      (q) => q && (q.nextQuantity ?? -1) >= 0,
     );
 
-    if (!quota) return null;
+    if (quotaWithChange) {
+      return {
+        scheduledChange: {
+          nextUsers: quotaWithChange.nextQuantity ?? 0,
+          dueDate: quotaWithChange.dueDate ?? "",
+          devPackDisabled: false,
+        },
+        deactivated: false,
+      };
+    }
 
-    return {
-      nextUsers: quota.nextQuantity ?? 0,
-      dueDate: quota.dueDate ?? "",
-    };
+    return EMPTY_TARIFF_STATE;
   } catch {
-    return null;
+    return EMPTY_TARIFF_STATE;
   }
 };
 
@@ -215,10 +256,10 @@ export const getDocsConnectInfo =
 
     const services = await fetchWalletServices();
 
-    const [wallet, devPackEnabled, scheduledChange] = await Promise.all([
+    const [wallet, devPackEnabled, tariffState] = await Promise.all([
       fetchWallet(),
       fetchDevPackEnabled(),
-      fetchScheduledChange(services),
+      fetchTariffState(services),
     ]);
 
     return {
@@ -228,7 +269,8 @@ export const getDocsConnectInfo =
       prices: extractPrices(services),
       wallet,
       devPackEnabled,
-      scheduledChange,
+      scheduledChange: tariffState.scheduledChange,
+      deactivated: tariffState.deactivated,
     };
   };
 

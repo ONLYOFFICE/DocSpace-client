@@ -107,7 +107,9 @@ const BuyPlanPanel = ({
   const devPackPerUser = devPack ? devPackPrice : 0;
   const totalMonthly = users * (pricePerUser + devPackPerUser);
 
-  const currentUsers = info.tenant.payment?.quantity ?? 0;
+  const currentUsers = info.deactivated
+    ? 0
+    : (info.tenant.payment?.quantity ?? 0);
   const sameProduct = devPack === (info.devPackEnabled ?? false);
   const addedUsers = sameProduct ? Math.max(0, users - currentUsers) : users;
   const chargeNow = addedUsers * (pricePerUser + devPackPerUser);
@@ -353,7 +355,9 @@ const BuyPlanPanel = ({
             size={ButtonSize.normal}
             label={
               insufficientFunds
-                ? t("DocsConnect:TopUpAndBuy")
+                ? info.deactivated
+                  ? t("Common:TopUpAndPay")
+                  : t("DocsConnect:TopUpAndBuy")
                 : t("DocsConnect:BuyAPlan")
             }
             onClick={onBuy}

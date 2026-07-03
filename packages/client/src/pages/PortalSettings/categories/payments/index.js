@@ -39,6 +39,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Tabs } from "@docspace/ui-kit/components/tabs";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
 import { isManagement } from "@docspace/shared/utils/common";
 import { PAYMENT_ROUTES } from "./utils";
@@ -93,6 +94,7 @@ const PaymentsPage = (props) => {
     fetchDocsConnectInfo,
     openBuyPlan,
     buyPlanPanelVisible,
+    cancelDocsConnectPlan,
   } = props;
   const location = useLocation();
   const [currentTabId, setCurrentTabId] = useState(
@@ -121,6 +123,34 @@ const PaymentsPage = (props) => {
     openGetStarted?.();
   };
 
+  const onDocsConnectToggle = async () => {
+    if (!docsConnectInfo) {
+      openGetStarted?.();
+      return;
+    }
+
+    const { isTrial, expired, isPaid } =
+      getDocsConnectTrialState(docsConnectInfo);
+
+    if (isTrial && expired) {
+      openBuyPlan?.("trial");
+      return;
+    }
+
+    if (docsConnectInfo.deactivated) {
+      openBuyPlan?.("edit");
+      return;
+    }
+
+    if (isPaid) {
+      try {
+        await cancelDocsConnectPlan?.();
+      } catch (e) {
+        toastr.error(e);
+      }
+    }
+  };
+
   const docsConnectCardState = useMemo(() => {
     if (!docsConnectInfo)
       return {
@@ -134,6 +164,8 @@ const PaymentsPage = (props) => {
         tariffUsers: 0,
         scheduledUsers: null,
         scheduledDate: "",
+        scheduledDevPackDisabled: false,
+        deactivated: false,
       };
 
     const { isTrial, daysLeft, totalDays, expired, endDate } =
@@ -160,6 +192,9 @@ const PaymentsPage = (props) => {
       tariffUsers,
       scheduledUsers: docsConnectInfo.scheduledChange?.nextUsers ?? null,
       scheduledDate: docsConnectInfo.scheduledChange?.dueDate ?? "",
+      scheduledDevPackDisabled:
+        docsConnectInfo.scheduledChange?.devPackDisabled ?? false,
+      deactivated: docsConnectInfo.deactivated ?? false,
     };
   }, [docsConnectInfo]);
 
@@ -201,6 +236,7 @@ const PaymentsPage = (props) => {
         <ServicesList
           getAIConfig={getAIConfig}
           onDocsConnectClick={onDocsConnectClick}
+          onDocsConnectToggle={onDocsConnectToggle}
           docsConnectState={docsConnectCardState}
           onOpenSupportedModels={() =>
             navigateToRoute("/portal-settings/ai-settings/models")
@@ -326,6 +362,7 @@ export const Component = inject(
       fetchDocsConnectInfo: docsConnectStore?.fetchInfo,
       openBuyPlan: docsConnectStore?.openBuyPlan,
       buyPlanPanelVisible: docsConnectStore?.buyPlanPanelVisible,
+      cancelDocsConnectPlan: docsConnectStore?.cancelPlan,
       language: authStore?.language,
       user: user
         ? {

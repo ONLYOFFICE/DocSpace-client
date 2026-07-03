@@ -134,7 +134,9 @@ class DocsConnectStore {
       users,
       devPackEnabled: devPack,
       topUp,
-      currentUsers: this.info?.tenant.payment?.quantity ?? 0,
+      currentUsers: this.info?.deactivated
+        ? 0
+        : (this.info?.tenant.payment?.quantity ?? 0),
       currentDevPackEnabled: this.info?.devPackEnabled ?? false,
       currency: this.info?.wallet?.currency ?? "USD",
     });

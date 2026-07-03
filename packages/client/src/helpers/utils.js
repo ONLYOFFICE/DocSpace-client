@@ -120,6 +120,9 @@ export const getCategoryTypeByFolderType = (folderType, parentId) => {
     case FolderType.AIAgents:
       return parentId > 0 ? CategoryType.AIAgent : CategoryType.AIAgents;
 
+    case FolderType.Forms:
+      return parentId > 0 ? CategoryType.Form : CategoryType.Forms;
+
     case FolderType.Archive:
       return CategoryType.Archive;
 

@@ -214,10 +214,12 @@ export default inject(
       isTemplatesFolder,
       isPersonalReadOnly,
       isAIAgentsFolder,
+      isFormsFolder,
     } = treeFoldersStore;
     const { isIndexedFolder } = selectedFolderStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
+    const isRooms =
+      isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder;
     const filterSortBy =
       isRooms || isAIAgentsFolder ? roomsFilter.sortBy : filter.sortBy;
 

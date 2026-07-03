@@ -121,10 +121,10 @@ const FilesTileContent = ({
 };
 
 export default inject(({ settingsStore, treeFoldersStore }) => {
-	const { isRoomsFolder, isArchiveFolder, isTemplatesFolder } =
+	const { isRoomsFolder, isArchiveFolder, isTemplatesFolder, isFormsFolder } =
 		treeFoldersStore;
 
-	const isRooms = isRoomsFolder || isArchiveFolder;
+	const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
 
 	return {
 		theme: settingsStore.theme,

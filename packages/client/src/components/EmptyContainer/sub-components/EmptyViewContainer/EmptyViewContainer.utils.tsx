@@ -335,6 +335,9 @@ export const getRootDescription = (
     .with([FolderType.RoomTemplates, P._], () =>
       t("EmptyView:EmptyTemplatesDescription"),
     )
+    .with([FolderType.Forms, P._], () =>
+      t("Files:RoomEmptyContainerDescription"),
+    )
     .with([FolderType.Rooms, P.when(() => isPublicRoom)], () => (
       <>
         <span>{t("Common:RoomEmptyAtTheMoment")}</span>
@@ -473,6 +476,11 @@ export const getRootTitle = (
     )
     .with([FolderType.RoomTemplates, P._], () =>
       t("EmptyView:EmptyTemplatesTitle"),
+    )
+    .with([FolderType.Forms, P._], () =>
+      t("Common:EmptyRootRoomHeader", {
+        productName: getBrandName("ProductName"),
+      }),
     )
     .with([FolderType.USER, ShareAccessRights.None], () =>
       t("Common:EmptyScreenFolder"),
@@ -737,6 +745,9 @@ export const getRootIcon = (
       ) : (
         <EmptyRoomsRootUserDarkIcon />
       ),
+    )
+    .with([FolderType.Forms, P._], () =>
+      isBaseTheme ? <EmptyRoomsRootLightIcon /> : <EmptyRoomsRootDarkIcon />,
     )
     .with([FolderType.USER, ShareAccessRights.None], () =>
       isBaseTheme ? <DefaultFolderLight /> : <DefaultFolderDark />,

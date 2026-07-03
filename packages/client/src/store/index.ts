@@ -216,7 +216,16 @@ const primaryProgressDataStore = new PrimaryProgressDataStore(
   filesStore,
   selectedFolderStore,
 );
-const versionHistoryStore = new VersionHistoryStore(filesStore, settingsStore);
+// FABLE5-REVIEW: historical quirk (see VersionHistoryStore.ts) — the second
+// constructor argument has always been settingsStore, not the
+// filesActionsStore the parameter is named after; the real filesActionsStore
+// is attached below, after construction.
+const versionHistoryStore = new VersionHistoryStore(
+  filesStore,
+  settingsStore as unknown as ConstructorParameters<
+    typeof VersionHistoryStore
+  >[1],
+);
 
 const dialogsStore = new DialogsStore(
   authStore,
@@ -270,11 +279,15 @@ const uploadDataStore = new UploadDataStore(
   userStore,
 );
 
+// FABLE5-REVIEW: FilesActionsStore/ContextOptionsStore/HotkeyStore still
+// describe FilesStore/FilesActionsStore through hand-written structural types
+// (their internal member signatures predate the real .ts conversions).
+// The casts below are type-only; unifying the signatures is Track C work.
 const filesActionsStore = new FilesActionsStore(
   settingsStore,
   uploadDataStore,
   treeFoldersStore,
-  filesStore,
+  filesStore as unknown as ConstructorParameters<typeof FilesActionsStore>[3],
   selectedFolderStore,
   filesSettingsStore,
   dialogsStore,
@@ -299,8 +312,10 @@ versionHistoryStore.filesActionsStore = filesActionsStore;
 const contextOptionsStore = new ContextOptionsStore(
   settingsStore,
   dialogsStore,
-  filesActionsStore,
-  filesStore,
+  filesActionsStore as unknown as ConstructorParameters<
+    typeof ContextOptionsStore
+  >[2],
+  filesStore as unknown as ConstructorParameters<typeof ContextOptionsStore>[3],
   mediaViewerDataStore,
   treeFoldersStore,
   uploadDataStore,
@@ -320,12 +335,12 @@ const contextOptionsStore = new ContextOptionsStore(
 );
 
 const hotkeyStore = new HotkeyStore(
-  filesStore,
+  filesStore as unknown as ConstructorParameters<typeof HotkeyStore>[0],
   dialogsStore,
   filesSettingsStore,
-  filesActionsStore,
+  filesActionsStore as unknown as ConstructorParameters<typeof HotkeyStore>[3],
   treeFoldersStore,
-  uploadDataStore,
+  uploadDataStore as unknown as ConstructorParameters<typeof HotkeyStore>[5],
   selectedFolderStore,
   indexingStore,
 );
@@ -377,10 +392,11 @@ const createEditAgentStore = new CreateEditAgentStore(
 );
 
 const webhooksStore = new WebhooksStore(settingsStore);
+// ImportAccountsStore takes two arguments; the dialogsStore historically
+// passed third was silently ignored.
 const importAccountsStore = new ImportAccountsStore(
   currentQuotaStore,
   settingsStore,
-  dialogsStore,
 );
 const storageManagement = new StorageManagement(
   filesStore,
@@ -474,5 +490,7 @@ const store = {
   createEditAgentStore,
   defaultTemplatesStore,
 };
+
+export type RootStore = typeof store;
 
 export default store;

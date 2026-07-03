@@ -87,17 +87,10 @@ class PublicRoomStore {
 
   clientLoadingStore: ClientLoadingStore;
 
-  // FABLE5-REVIEW: FilesStore is still .js (wave 3) — attached
-  // post-construction in store/index.js (`publicRoomStore.filesStore = ...`)
-  // and no members are accessed inside this store; replace `unknown` with
-  // `import type` once FilesStore is converted.
-  declare filesStore?: unknown;
-
   validationData: TValidateShareRoom | null = null;
 
-  constructor(clientLoadingStore: ClientLoadingStore, filesStore?: unknown) {
+  constructor(clientLoadingStore: ClientLoadingStore) {
     this.clientLoadingStore = clientLoadingStore;
-    this.filesStore = filesStore;
     makeAutoObservable(this);
   }
 

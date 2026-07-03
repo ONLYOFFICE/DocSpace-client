@@ -197,8 +197,6 @@ const filesStore = new FilesStore(
 
 const guidanceStore = new GuidanceStore();
 
-publicRoomStore.filesStore = filesStore;
-
 const mediaViewerDataStore = new MediaViewerDataStore(
   filesStore,
   publicRoomStore,

@@ -38,6 +38,7 @@
 import { useLayoutEffect, useRef, useState } from "react";
 
 import { setAuthToken } from "@docspace/shared/api/client";
+import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 
 import type { ArbiterCommonData } from "@/types/arbiter";
 
@@ -60,7 +61,7 @@ export default function useInitArbiterStores(
       agentsStore.setActivePanel(commonData.activePanel);
     }
 
-    if (commonData.authToken) {
+    if (!isOAuthFrame() && commonData.authToken) {
       const secure =
         window.location.protocol === "https:" ? "; Secure" : "";
       document.cookie = `asc_auth_key=${commonData.authToken}; path=/; SameSite=Lax${secure}`;

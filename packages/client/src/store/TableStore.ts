@@ -404,14 +404,17 @@ class TableStore {
     this.templatesRoomColumnTypeIsEnabled = enable;
   };
 
-  setAuthorTrashColumn = (enable: boolean) => (this.authorTrashColumnIsEnabled = enable);
+  setAuthorTrashColumn = (enable: boolean) =>
+    (this.authorTrashColumnIsEnabled = enable);
 
   setCreatedTrashColumn = (enable: boolean) =>
     (this.createdTrashColumnIsEnabled = enable);
 
-  setSizeTrashColumn = (enable: boolean) => (this.sizeTrashColumnIsEnabled = enable);
+  setSizeTrashColumn = (enable: boolean) =>
+    (this.sizeTrashColumnIsEnabled = enable);
 
-  setTypeTrashColumn = (enable: boolean) => (this.typeTrashColumnIsEnabled = enable);
+  setTypeTrashColumn = (enable: boolean) =>
+    (this.typeTrashColumnIsEnabled = enable);
 
   setAuthorShareWithMeColumn = (enable: boolean) =>
     (this.authorShareWithMeColumnIsEnabled = enable);
@@ -442,11 +445,14 @@ class TableStore {
   setGroupsColumnManager = (enable: boolean) =>
     (this.managerGroupsColumnIsEnabled = enable);
 
-  setPeopleColumnType = (enable: boolean) => (this.typePeopleColumnIsEnabled = enable);
+  setPeopleColumnType = (enable: boolean) =>
+    (this.typePeopleColumnIsEnabled = enable);
 
-  setPeopleColumnEmail = (enable: boolean) => (this.emailPeopleColumnIsEnabled = enable);
+  setPeopleColumnEmail = (enable: boolean) =>
+    (this.emailPeopleColumnIsEnabled = enable);
 
-  setPeopleColumnGroup = (enable: boolean) => (this.groupPeopleColumnIsEnabled = enable);
+  setPeopleColumnGroup = (enable: boolean) =>
+    (this.groupPeopleColumnIsEnabled = enable);
 
   setPeopleColumnStorage = (enable: boolean) =>
     (this.storagePeopleColumnIsEnabled = enable);
@@ -454,7 +460,8 @@ class TableStore {
   setGuestsColumnInviter = (enable: boolean) =>
     (this.inviterGuestsColumnIsEnabled = enable);
 
-  setGuestsColumnEmail = (enable: boolean) => (this.emailGuestsColumnIsEnabled = enable);
+  setGuestsColumnEmail = (enable: boolean) =>
+    (this.emailGuestsColumnIsEnabled = enable);
 
   setGuestsColumnInvitedDate = (enable: boolean) =>
     (this.invitedDateGuestsColumnIsEnabled = enable);
@@ -492,6 +499,7 @@ class TableStore {
         isSharedWithMeFolder,
         isInSharedFolder,
         isAIAgentsFolder,
+        isFormsFolder,
       } = this.treeFoldersStore;
 
       const contactsView = getContactsView();
@@ -509,7 +517,7 @@ class TableStore {
         ? contactsView === "inside_group"
         : contactsTab === "inside_group";
 
-      const isRooms = isRoomsFolder || isArchiveFolder;
+      const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
 
       if (isTemplatesFolder) {
         this.setTypeTemplatesColumn(splitColumns.includes("TypeTemplates"));
@@ -651,7 +659,8 @@ class TableStore {
   };
 
   setColumnEnable = (key: string) => {
-    const { isRoomsFolder, isArchiveFolder } = this.treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isFormsFolder } =
+      this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
 
@@ -664,7 +673,7 @@ class TableStore {
       ? contactsView === "inside_group"
       : contactsTab === "inside_group";
 
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
 
     switch (key) {
       case "Location":
@@ -930,6 +939,7 @@ class TableStore {
       isSharedWithMeFolder,
       isInSharedFolder,
       isAIAgentsFolder,
+      isFormsFolder,
     } = this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
@@ -950,7 +960,7 @@ class TableStore {
       ? contactsView === "inside_group"
       : contactsTab === "inside_group";
 
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
     const userId = this.userStore.user?.id ?? GUEST_ID;
     const isFrame = this.settingsStore.isFrame;
     const isDocumentsFolder = !isRooms && !isAIAgentsFolder;
@@ -1002,6 +1012,7 @@ class TableStore {
       isSharedWithMeFolder,
       isInSharedFolder,
       isAIAgentsFolder,
+      isFormsFolder,
     } = this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
@@ -1022,7 +1033,7 @@ class TableStore {
       ? contactsView === "inside_group"
       : contactsTab === "inside_group";
 
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
     const userId = this.userStore.user?.id ?? GUEST_ID;
     const isFrame = this.settingsStore.isFrame;
     const isDocumentsFolder = !isRooms && !isAIAgentsFolder;
@@ -1074,6 +1085,7 @@ class TableStore {
       isSharedWithMeFolder,
       isInSharedFolder,
       isAIAgentsFolder,
+      isFormsFolder,
     } = this.treeFoldersStore;
 
     const { isIndexedFolder } = this.selectedFolderStore;
@@ -1094,7 +1106,7 @@ class TableStore {
       ? contactsView === "inside_group"
       : contactsTab === "inside_group";
 
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
     const userId = this.userStore.user?.id ?? GUEST_ID;
     const isFrame = this.settingsStore.isFrame;
     const isDocumentsFolder = !isRooms && !isAIAgentsFolder;
@@ -1138,3 +1150,4 @@ class TableStore {
 }
 
 export default TableStore;
+

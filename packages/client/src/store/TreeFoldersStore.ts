@@ -448,6 +448,17 @@ class TreeFoldersStore {
     return FolderType.AIAgents === this.selectedFolderStore.rootFolderType;
   }
 
+  get isFormsFolderRoot() {
+    return FolderType.Forms === this.selectedFolderStore.rootFolderType;
+  }
+
+  get isFormsFolder() {
+    return (
+      FolderType.Forms === this.selectedFolderStore.rootFolderType &&
+      this.selectedFolderStore.isRootFolder
+    );
+  }
+
   get isFormRoomRoot() {
     return (
       this.selectedFolderStore.roomType === RoomsType.FormRoom ||

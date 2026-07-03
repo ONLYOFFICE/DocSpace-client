@@ -51,6 +51,7 @@ export type GetSectionCreateButtonParams = {
   isRoomsFolder: boolean;
   isAIAgentsFolder: boolean;
   isFormsSection: boolean;
+  isFormsFolder: boolean;
 
   selectedFolderId?: number | string;
 
@@ -76,6 +77,7 @@ export const getSectionCreateButton = ({
   isRoomsFolder,
   isAIAgentsFolder,
   isFormsSection,
+  isFormsFolder,
   selectedFolderId,
   getFolderModel,
   getContactsModel,
@@ -83,7 +85,7 @@ export const getSectionCreateButton = ({
   onCreateAgent,
   createGroup,
 }: GetSectionCreateButtonParams): SectionCreateButtonResult => {
-  if (isFormsSection && isRoomsFolder) {
+  if (isFormsSection && isFormsFolder) {
     const model = getFolderModel(t);
     if (!model || model.length === 0) return HIDDEN;
 

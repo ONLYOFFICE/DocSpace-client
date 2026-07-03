@@ -445,7 +445,10 @@ type TFilesActionsStore = {
     selection: TSelectionItem[],
     t: TTranslation,
   ) => void;
-  onCreateRoomFromTemplate: (item: TContextItem, addSelection?: boolean) => void;
+  onCreateRoomFromTemplate: (
+    item: TContextItem,
+    addSelection?: boolean,
+  ) => void;
   setProcessCreatingRoomFromData: (value: boolean) => void;
   deleteAction: (
     translations: Record<string, string>,
@@ -2233,7 +2236,10 @@ class ContextOptionsStore {
     };
   };
 
-  getHeaderOptions = (t: TTranslation, item: TContextItem): ContextMenuModel[] => {
+  getHeaderOptions = (
+    t: TTranslation,
+    item: TContextItem,
+  ): ContextMenuModel[] => {
     const {
       isRecycleBinFolder,
       isArchiveFolder,
@@ -3772,15 +3778,16 @@ class ContextOptionsStore {
       isRoomsFolder,
       isArchiveFolder,
       isAIAgentsFolder,
+      isFormsFolder,
     } = this.treeFoldersStore;
 
     const { pinRooms, unpinRooms, deleteRooms } = this.filesActionsStore;
 
-    if (isRoomsFolder || isArchiveFolder || isAIAgentsFolder) {
+    if (isRoomsFolder || isArchiveFolder || isAIAgentsFolder || isFormsFolder) {
       const isPinOption = selection.filter((item) => !item.pinned).length > 0;
 
       let canDelete: boolean | undefined;
-      if (isRoomsFolder) {
+      if (isRoomsFolder || isFormsFolder) {
         canDelete = selection.every((k) => k.contextOptions.includes("delete"));
       } else if (isArchiveFolder) {
         canDelete = selection.some((k) => k.contextOptions.includes("delete"));
@@ -4180,7 +4187,8 @@ class ContextOptionsStore {
   };
 
   onShowFormRoomSelectFileDialog = (
-    filter: FilesSelectorFilterTypes | FilterType = FilesSelectorFilterTypes.DOCX,
+    filter:
+      FilesSelectorFilterTypes | FilterType = FilesSelectorFilterTypes.DOCX,
   ) => {
     this.dialogsStore.setSelectFileFormRoomDialogVisible(true, filter, true);
   };

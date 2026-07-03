@@ -84,7 +84,7 @@ const AIAgentViewComponent = ({
             className={styles.aiAgentChat}
             data-chat-active={currentView === "chat" ? "" : undefined}
           >
-            <NewChat />
+            <NewChat isAgent />
           </div>
         </Activity>
       ) : null}
@@ -108,4 +108,3 @@ export const AIAgentView = inject(
     };
   },
 )(observer(AIAgentViewComponent));
-

@@ -50,7 +50,7 @@ import { getFileLink } from "@docspace/shared/api/files";
 import type { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import type { Nullable } from "@docspace/shared/types";
-import SocketHelper from "@docspace/ui-kit/utils/socket";
+import { connectFrameSocket } from "@docspace/shared/utils/oauthFrameSocket";
 import type {
   TFile,
   TFilesSettings,
@@ -235,7 +235,7 @@ export default function FilesSelectorClient({
     if (isInit.current) return;
 
     isInit.current = true;
-    SocketHelper?.connect(socketUrl, "");
+    void connectFrameSocket(socketUrl, "");
   }, [socketUrl]);
 
   const getFilesArchiveError = useCallback(() => "", []);

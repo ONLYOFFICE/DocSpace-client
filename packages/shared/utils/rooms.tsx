@@ -37,48 +37,28 @@ import { TCreatedBy } from "../types";
 import { TRoom, TRoomLifetime, TWatermark } from "../api/rooms/types";
 import { TConnectingStorage } from "../api/files/types";
 
-import { RoomsType, RoomsTypePrivate, RoomSearchArea } from "../enums";
+import { RoomsType, RoomsTypePrivate } from "../enums";
 
 import { RoomsTypeValues } from "./common";
 
-/** Room types shown in the "Forms" section — Form Filling Rooms (FFR) only. */
-export const FORMS_SECTION_TYPES = [RoomsType.FormRoom];
-
 /**
- * Room types shown in the "Rooms" section — everything except Form Filling
- * Rooms, which live in their own "Forms" section.
+ * Room types offered as filter options in the "Rooms" section dropdown.
+ *
+ * Form Filling Rooms are excluded because they live in their own "Forms"
+ * section (the backend serves them via `searchArea=Forms` and never returns
+ * them in the Active rooms listing), so filtering the Rooms section by that
+ * type would never match anything.
  *
  * `RoomsTypePrivate` is excluded too: it is a client-only synthetic value used
  * by the create flow, not a real backend room type (the API rejects it). A
  * private room is stored under its real type, so it still shows via that type.
+ *
+ * This is a UI-options list only — it no longer scopes any API request; the
+ * Rooms/Forms split is enforced server-side by the room's folder type.
  */
 export const ROOMS_SECTION_TYPES = RoomsTypeValues.filter(
   (type) => type !== RoomsType.FormRoom && type !== RoomsTypePrivate,
 );
-
-/**
- * Room types a rooms-list request should be scoped to, splitting the unified
- * Rooms folder into the "Rooms" and "Forms" sections.
- *
- * Returns `null` when no scoping applies (archive, a specific room), so the
- * caller leaves the request untouched. Applied to the API request only —
- * never stored in the displayed filter, so the type chip / "clear filter" state
- * stay clean.
- */
-export const getRoomsSectionTypes = (
-  isFormsSection: boolean,
-  searchArea?: RoomSearchArea | string | number | null,
-): string[] | null => {
-  if (isFormsSection) return FORMS_SECTION_TYPES.map(String);
-
-  if (
-    searchArea === RoomSearchArea.Active ||
-    searchArea === RoomSearchArea.Templates
-  )
-    return ROOMS_SECTION_TYPES.map(String);
-
-  return null;
-};
 
 const getStartRoomParams = (startRoomType: RoomsType, title: string) => {
   const startRoomParams = {

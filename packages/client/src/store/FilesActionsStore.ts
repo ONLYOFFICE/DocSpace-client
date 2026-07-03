@@ -566,6 +566,7 @@ class FilesActionStore {
       isArchiveFolderRoot,
       isTemplatesFolder,
       isAIAgentsFolder,
+      isFormsFolder,
     } = this.treeFoldersStore;
 
     let newFilter: undefined;
@@ -590,7 +591,8 @@ class FilesActionStore {
         isRoomsFolder ||
         isArchiveFolder ||
         isArchiveFolderRoot ||
-        isTemplatesFolder
+        isTemplatesFolder ||
+        isFormsFolder
       ) {
         await fetchRooms(
           updatedFolder,
@@ -3707,6 +3709,7 @@ class FilesActionStore {
       isRecentFolder,
       isTemplatesFolder,
       isAIAgentsFolder,
+      isFormsFolder,
     } = this.treeFoldersStore;
 
     const itemsCollection = new Map();
@@ -3727,7 +3730,8 @@ class FilesActionStore {
     if (isArchiveFolder)
       return this.getArchiveRoomsFolderOptions(itemsCollection, t);
 
-    if (isRoomsFolder) return this.getRoomsFolderOptions(itemsCollection, t);
+    if (isRoomsFolder || isFormsFolder)
+      return this.getRoomsFolderOptions(itemsCollection, t);
 
     if (isTemplatesFolder)
       return this.getTemplatesFolderOptions(itemsCollection, t);
@@ -4156,6 +4160,10 @@ class FilesActionStore {
 
     if ((categoryType as TCategoryType) == CategoryType.Archive) {
       filter.searchArea = RoomSearchArea.Archive;
+    }
+
+    if (correctCategoryType === CategoryType.Forms) {
+      filter.searchArea = RoomSearchArea.Forms;
     }
 
     if (

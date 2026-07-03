@@ -1,0 +1,13 @@
+{
+  "name": "oauth-sdk-stand",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Self-configuring OAuth test stand for the DocSpace JS SDK (dev tool, zero deps)",
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

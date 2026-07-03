@@ -43,6 +43,7 @@ import {
   FILTER_HEADER,
   LIBRARY_ID_HEADER,
   LOCALE_HEADER,
+  OAUTH_FRAME_HEADER,
   PATHNAME_HEADER,
   ROOM_ID_HEADER,
   SHARE_KEY_HEADER,
@@ -61,6 +62,9 @@ export async function proxy(request: NextRequest) {
   const redirectUrl = `${proto}://${host}`;
 
   requestHeaders.set(PATHNAME_HEADER, request.nextUrl.pathname);
+
+  if (request.nextUrl.searchParams.get("auth") === "oauth")
+    requestHeaders.set(OAUTH_FRAME_HEADER, "1");
 
   if (request.nextUrl.pathname === "/health") {
     console.log("Get sdk health check for portal: ", redirectUrl);

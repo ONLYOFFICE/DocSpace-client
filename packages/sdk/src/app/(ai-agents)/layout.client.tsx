@@ -11,6 +11,7 @@ import { usePathname } from "next/navigation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { setAuthToken } from "@docspace/shared/api/client";
+import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import Section from "@docspace/ui-kit/components/section";
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
@@ -268,8 +269,10 @@ const AiAgentsBootstrap = ({
 
   const authTokenSet = React.useRef(false);
   React.useEffect(() => {
+    if (authTokenSet.current || isOAuthFrame()) return;
+
     const token = commonData.authToken;
-    if (token && !authTokenSet.current) {
+    if (token) {
       authTokenSet.current = true;
       const secure = window.location.protocol === "https:" ? "; Secure" : "";
       document.cookie = `asc_auth_key=${token}; path=/; SameSite=Lax${secure}`;

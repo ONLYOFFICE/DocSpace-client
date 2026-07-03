@@ -71,5 +71,7 @@ export default async function PersonalFilesDestination({
     if (value) out.set(key, value);
   }
 
+  if (sp.auth) out.set("auth", sp.auth);
+
   redirect(`/personal-files?${out.toString()}`);
 }

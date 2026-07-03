@@ -38,6 +38,7 @@ import { Navigate } from "react-router";
 
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { FolderType } from "@docspace/shared/enums";
+import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 
 import { getUrlByDefaultFolderType } from "SRC_DIR/helpers/utils";
 
@@ -48,7 +49,7 @@ type Props = {
 const DefaultPageRedirectComponent = ({ defaultFolderType }: Props) => {
   const val = localStorage.getItem("useDocSpace");
 
-  if (val === "old") {
+  if (val === "old" || isOAuthFrame()) {
     const defaultUrl = getUrlByDefaultFolderType(
       defaultFolderType || FolderType.Rooms,
     );

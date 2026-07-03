@@ -106,7 +106,6 @@ import AddToGroupReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?u
 import { makeAutoObservable, runInAction } from "mobx";
 import copy from "copy-to-clipboard";
 import { isMobile, isTablet } from "react-device-detect";
-import config from "PACKAGE_FILE";
 import { Trans } from "react-i18next";
 import type { TFunction } from "i18next";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -116,12 +115,9 @@ import type { TTranslation } from "@docspace/shared/types";
 import type {
   TFile,
   TFileLink,
-  TFileSecurity,
-  TFileViewAccessibility,
   TFolder,
-  TFolderSecurity,
 } from "@docspace/shared/api/files/types";
-import type { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";
+import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TOformFile } from "@docspace/shared/api/oforms/types";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
@@ -188,7 +184,6 @@ import {
   openMembersTab,
   openShareTab,
   setInfoPanelMobileHidden,
-  setView,
   showInfoPanel,
 } from "SRC_DIR/helpers/info-panel";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
@@ -198,6 +193,28 @@ import { getBrandName } from "@docspace/shared/constants/brands";
 import { getRoomInfo } from "@docspace/shared/api/rooms";
 import type { IContextMenuItemClient } from "SRC_DIR/helpers/plugins/types";
 import { PersistenceKeys, getPersisted } from "./utils/persistence";
+import {
+  createMenuGroup,
+  filterModel,
+  onClickEditAgent,
+  onClickEditRoom as onClickEditRoomHelper,
+  onClickLinkForPortal,
+  onEditRoomTemplate,
+  onShowEditingToast,
+  onShowInfoPanel as onShowInfoPanelHelper,
+  onShowWaitOperationToast,
+  onSuggestOformChanges,
+  onUploadAction,
+  placePlugins,
+  systemFolders,
+} from "./contextOptionsStore/helpers";
+import type {
+  TContextItem,
+  TContextItemSecurity,
+  TContextOption,
+  TMenuGroupConfig,
+  TStoreCustomEvent,
+} from "./contextOptionsStore/helpers";
 import type DialogsStore from "./DialogsStore";
 import type MediaViewerDataStore from "./MediaViewerDataStore";
 import type TreeFoldersStore from "./TreeFoldersStore";
@@ -213,127 +230,17 @@ import type IndexingStore from "./IndexingStore";
 import type ClientLoadingStore from "./ClientLoadingStore";
 import type GuidanceStore from "./GuidanceStore";
 
+export type { TContextItem } from "./contextOptionsStore/helpers";
+
 const LOADER_TIMER = 500;
 let loadingTime: Date | null | undefined;
 let timer: ReturnType<typeof setTimeout> | null | undefined;
-
-const systemFolders = [
-  FolderType.InProgress,
-  FolderType.Done,
-  FolderType.SubFolderDone,
-  FolderType.SubFolderInProgress,
-];
-
-type TContextItemSecurity = Partial<
-  TFileSecurity & TFolderSecurity & TRoomSecurity
->;
-
-// FABLE5-REVIEW: context-menu items are FilesStore filesList view-models and
-// FilesStore is still .js (wave 3) — this is a minimal structural type of the
-// members used in this store. TFile/TFolder/TRoom from typed consumers are
-// assignable to it. Replace with the real list-item type once FilesStore is
-// converted.
-export type TContextItem = {
-  id: number;
-  title: string;
-  access?: ShareAccessRights;
-  security?: TContextItemSecurity;
-  viewAccessibility?: TFileViewAccessibility;
-  contextOptions?: string[];
-  fileExst?: string;
-  exst?: string | null;
-  folderId?: number;
-  parentId?: number;
-  rootFolderId?: number;
-  rootFolderType?: FolderType;
-  parentRoomType?: FolderType;
-  roomType?: RoomsType;
-  type?: FolderType;
-  providerKey?: string;
-  providerId?: number;
-  external?: boolean;
-  isLinkExpired?: boolean;
-  passwordProtected?: boolean;
-  shared?: boolean;
-  canShare?: boolean;
-  href?: string;
-  webUrl?: string;
-  viewUrl?: string;
-  shortWebUrl?: string;
-  canOpenPlayer?: boolean;
-  locked?: boolean;
-  encrypted?: boolean;
-  isFolder?: boolean;
-  isRoom?: boolean;
-  isAIAgent?: boolean;
-  isTemplate?: boolean;
-  isEdit?: boolean;
-  isEditing?: boolean;
-  isPDFForm?: boolean;
-  startFilling?: boolean;
-  inRoom?: boolean;
-  pinned?: boolean;
-  requestToken?: string;
-  customFilterEnabled?: boolean;
-  customFilterEnabledBy?: string;
-  indexing?: boolean;
-  isInsideKnowledge?: boolean;
-  isInsideResultStorage?: boolean;
-  sendFormToExternalDB?: boolean;
-};
 
 // FABLE5-REVIEW: multi-select items always carry contextOptions/security in
 // the .js FilesStore filesList view-model.
 type TSelectionItem = TContextItem & {
   contextOptions: string[];
   security: TContextItemSecurity;
-};
-
-// FABLE5-REVIEW: the option shape this store builds is looser than ui-kit's
-// ContextMenuModel (store-specific onClick signatures, string-keyed
-// separators); results are cast to ContextMenuModel[] at the public
-// boundaries. Align with ContextMenuModel once the .js consumers are typed.
-type TContextOption = {
-  id?: string;
-  key: string;
-  label?: React.ReactNode;
-  icon?: string;
-  disabled?: boolean | string;
-  isSeparator?: boolean;
-  onClick?: (...args: never[]) => unknown;
-  items?: TContextOption[];
-  className?: string;
-  placement?: "top" | "topLast";
-};
-
-type TMenuGroupKey = string | { key: string };
-
-type TMenuGroupConfig = {
-  groupKey: string;
-  groupLabel: React.ReactNode;
-  groupIcon?: string;
-  itemKeys: TMenuGroupKey[] | { key: string }[][];
-  needsGrouping?: boolean;
-  minItemsCount?: number;
-};
-
-type TCreateEventPayload = {
-  extension?: string;
-  id?: number;
-  fromTemplate?: boolean;
-  title?: string;
-  openEditor?: boolean;
-  edit?: boolean;
-  isFormsCreate?: boolean;
-};
-
-// FABLE5-REVIEW: the still-.js GlobalEvents component reads these extra
-// fields off the dispatched CustomEvent.
-type TStoreCustomEvent = CustomEvent & {
-  item?: TContextItem;
-  cb?: (room: TRoom) => void;
-  payload?: TCreateEventPayload;
-  title?: string;
 };
 
 // FABLE5-REVIEW: matches the (unexported) GroupItem type of the plugin SDK's
@@ -831,23 +738,6 @@ class ContextOptionsStore {
       .catch((err: unknown) => {
         toastr.error(err as string);
       });
-  };
-
-  onClickLinkForPortal = (item: TContextItem, t: TTranslation) => {
-    const { fileExst, canOpenPlayer, webUrl, id } = item;
-
-    const isFile = !!fileExst;
-    // FABLE5-REVIEW: the original .js passed a possibly-undefined webUrl
-    // through to copy() unchecked — the cast keeps that behavior.
-    copy(
-      isFile
-        ? canOpenPlayer
-          ? `${window.location.href}&preview=${id}`
-          : (webUrl as string)
-        : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category
-    );
-
-    toastr.success(t("Common:LinkCopySuccess"));
   };
 
   onCopyLink = async (item: TContextItem, t: TTranslation) => {
@@ -1371,68 +1261,19 @@ class ContextOptionsStore {
   onDelete = (item: TContextItem, t: TTranslation) => {
     const { isGroupMenuBlocked } = this.filesActionsStore;
 
-    if (item.isEditing) return this.onShowEditingToast(t);
+    if (item.isEditing) return onShowEditingToast(t);
 
-    if (isGroupMenuBlocked) return this.onShowWaitOperationToast(t);
+    if (isGroupMenuBlocked) return onShowWaitOperationToast(t);
 
     this.onClickDelete(item, t);
   };
 
-  filterModel = (model: TContextOption[], filter: string[]) => {
-    const options: TContextOption[] = [];
-    let index = 0;
-    const last = model.length;
+  // Kept as a delegating member — external consumers (MediaViewer) call it.
+  onShowInfoPanel = (item?: TContextItem, view?: string) =>
+    onShowInfoPanelHelper(item, view);
 
-    // Keys that should preserve their items without filtering
-    const preserveItemsKeys = ["add-to-group"];
-
-    for (index; index < last; index++) {
-      if (filter.includes(model[index].key)) {
-        options[index] = model[index];
-        if (model[index].items) {
-          // Skip filtering items for keys that need to preserve dynamic items
-          if (!preserveItemsKeys.includes(model[index].key)) {
-            options[index].items = model[index].items!.filter((item) =>
-              filter.includes(item.key),
-            );
-
-            if (options[index].items!.length === 1) {
-              options[index] = options[index].items![0];
-            }
-          }
-        }
-      }
-    }
-
-    return options.filter((o) => !!o);
-  };
-
-  // FABLE5-REVIEW: every current call site passes only `item`, so `view` is
-  // undefined at runtime; the cast preserves that pre-existing behavior of
-  // calling setView(undefined).
-  onShowInfoPanel = (item?: TContextItem, view?: string) => {
-    showInfoPanel();
-
-    if (item) {
-      setView(view as string);
-    }
-  };
-
-  onClickEditRoom = (item: TContextItem) => {
-    const event: TStoreCustomEvent = new CustomEvent(Events.ROOM_EDIT, {
-      detail: { context: "context_menu" },
-    });
-    event.item = item;
-    window.dispatchEvent(event);
-  };
-
-  onClickEditAgent = (item: TContextItem) => {
-    const event: TStoreCustomEvent = new CustomEvent(Events.AGENT_EDIT, {
-      detail: { context: "context_menu" },
-    });
-    event.item = item;
-    window.dispatchEvent(event);
-  };
+  // Kept as a delegating member — external consumers (Section Header) call it.
+  onClickEditRoom = (item: TContextItem) => onClickEditRoomHelper(item);
 
   onSaveAsTemplate = (item: TContextItem) => {
     const event: TStoreCustomEvent = new CustomEvent(Events.SAVE_AS_TEMPLATE, {
@@ -1447,15 +1288,6 @@ class ContextOptionsStore {
 
   onCreateRoomTemplate = (item: TContextItem) => {
     this.filesActionsStore.onCreateRoomFromTemplate(item);
-  };
-
-  onEditRoomTemplate = (item: TContextItem, cb?: (room: TRoom) => void) => {
-    const event: TStoreCustomEvent = new CustomEvent(Events.ROOM_EDIT, {
-      detail: { context: "context_menu" },
-    });
-    event.item = { ...item, isEdit: true };
-    event.cb = cb;
-    window.dispatchEvent(event);
   };
 
   onOpenTemplateAccessOptions = () => {
@@ -1680,24 +1512,6 @@ class ContextOptionsStore {
     return pluginItems;
   };
 
-  placePlugins(result: TContextOption[], pluginItems: TContextOption[]) {
-    const newResult = [...result];
-    const placementPlugins = pluginItems.filter((p) => p.placement);
-
-    placementPlugins.forEach((option) => {
-      if (option.placement === "top") {
-        newResult.splice(0, 0, option);
-      }
-
-      if (option.placement === "topLast") {
-        const firstSepIdx = newResult.findIndex((o) => o.isSeparator);
-        const insertAt = firstSepIdx !== -1 ? firstSepIdx : newResult.length;
-        newResult.splice(insertAt, 0, option);
-      }
-    });
-    return newResult;
-  }
-
   // FABLE5-REVIEW: call sites may pass an undefined roomType which the
   // original .js forwarded as-is to getDefaultAccessUser — the cast keeps
   // that behavior.
@@ -1832,14 +1646,6 @@ class ContextOptionsStore {
     onSelectItem({ id: item.id, isFolder: item.isFolder }, true, false);
   };
 
-  onShowEditingToast = (t: TTranslation) => {
-    toastr.error(t("Files:DocumentEdited"));
-  };
-
-  onShowWaitOperationToast = (t: TTranslation) => {
-    toastr.warning(t("Files:WaitOperation"));
-  };
-
   onClickMute = (
     action: "mute" | "unmute",
     item: TContextItem,
@@ -1950,21 +1756,6 @@ class ContextOptionsStore {
     this.oformsStore.setGallerySelected(item);
   };
 
-  onSuggestOformChanges = (item: {
-    attributes?: { name_form: string };
-    title?: string;
-  }) => {
-    const formTitle = item.attributes ? item.attributes.name_form : item.title;
-
-    // FABLE5-REVIEW: assigning a string to window.location is valid at
-    // runtime (navigates) but lib.dom types the setter stricter — the cast
-    // keeps the original statement.
-    window.location = `mailto:marketing@onlyoffice.com
-    ?subject=Suggesting changes for ${formTitle}
-    &body=Suggesting changes for ${formTitle}.
-  ` as unknown as string & Location;
-  };
-
   // FABLE5-REVIEW: the Gallery ItemTitle consumer passes either a full
   // TOformFile or a minimal { attributes } shape (and forwards it as-is);
   // the casts below keep the original unchecked usage.
@@ -1991,7 +1782,7 @@ class ContextOptionsStore {
       {
         key: "suggest-changes",
         label: t("FormGallery:SuggestChanges"),
-        onClick: () => this.onSuggestOformChanges(item as TOformFile),
+        onClick: () => onSuggestOformChanges(item as TOformFile),
       },
     ];
   };
@@ -2154,86 +1945,6 @@ class ContextOptionsStore {
       toastr.error(error as string);
       console.error(error);
     }
-  };
-
-  createMenuGroup = (
-    options: TContextOption[],
-    groupConfig: TMenuGroupConfig,
-  ) => {
-    const {
-      groupKey,
-      groupLabel,
-      groupIcon,
-      itemKeys,
-      needsGrouping = false,
-      minItemsCount = 1,
-    } = groupConfig;
-
-    let groupItems: TContextOption[] = [];
-
-    if (needsGrouping) {
-      let lastNonEmptyGroupIndex = -1;
-
-      // FABLE5-REVIEW: needsGrouping callers always pass nested
-      // { key }[][] itemKeys — the cast reflects that contract.
-      (itemKeys as { key: string }[][]).forEach((group, groupIndex) => {
-        const groupSubItems = group
-          .map((groupItem) =>
-            options.find((option) => option.key === groupItem.key),
-          )
-          .filter((menuItem): menuItem is TContextOption =>
-            Boolean(menuItem && menuItem.disabled !== true),
-          );
-
-        if (groupSubItems.length > 0) {
-          if (lastNonEmptyGroupIndex !== -1) {
-            groupItems.push({
-              key: `separator-after-group-${lastNonEmptyGroupIndex}`,
-              isSeparator: true,
-            });
-          }
-
-          groupSubItems.forEach((menuItem) => groupItems.push(menuItem));
-          lastNonEmptyGroupIndex = groupIndex;
-        }
-      });
-    } else {
-      groupItems = (itemKeys as TMenuGroupKey[])
-        .map((item) =>
-          options.find(
-            (option) =>
-              option.key === (typeof item === "object" ? item.key : item),
-          ),
-        )
-        .filter((option): option is TContextOption =>
-          Boolean(option && option.disabled !== true),
-        );
-    }
-
-    const itemsCount = groupItems.filter(
-      (menuItem) => !menuItem.isSeparator && menuItem.disabled !== true,
-    ).length;
-
-    const shouldAddGroup = itemsCount > minItemsCount;
-
-    return {
-      group: shouldAddGroup
-        ? {
-            id: `option_${groupKey}`,
-            key: groupKey,
-            label: groupLabel,
-            icon: groupIcon,
-            items: groupItems,
-          }
-        : null,
-      keysToRemove: shouldAddGroup
-        ? needsGrouping
-          ? (itemKeys as { key: string }[][]).flat().map((item) => item.key)
-          : (itemKeys as TMenuGroupKey[]).map((item) =>
-              typeof item === "object" ? item.key : item,
-            )
-        : [],
-    };
   };
 
   getHeaderOptions = (
@@ -2480,7 +2191,7 @@ class ContextOptionsStore {
 
       this.dialogsStore.setAskAIConnectDialogVisible(true, (action) => {
         if (action === "connect") {
-          this.onEditRoomTemplate(room, this._syncInfoPanelRoom);
+          onEditRoomTemplate(room, this._syncInfoPanelRoom);
         } else if (action === "continue") {
           this.filesActionsStore.askAIAction(item);
         }
@@ -2588,7 +2299,7 @@ class ContextOptionsStore {
                 icon: HistoryFinalizedReactSvgUrl,
                 onClick: () =>
                   isEditing
-                    ? this.onShowEditingToast(t)
+                    ? onShowEditingToast(t)
                     : this.finalizeVersion(item.id, item.security),
                 disabled: false,
               },
@@ -2622,7 +2333,7 @@ class ContextOptionsStore {
             label: t("Common:MoveTo"),
             icon: MoveReactSvgUrl,
             onClick: isEditing
-              ? () => this.onShowEditingToast(t)
+              ? () => onShowEditingToast(t)
               : () => this.onMoveAction(item),
             disabled: false,
           },
@@ -2845,7 +2556,7 @@ class ContextOptionsStore {
         key: "edit-agent",
         label: t("Common:EditAgent"),
         icon: SettingsReactSvgUrl,
-        onClick: () => this.onClickEditAgent(item),
+        onClick: () => onClickEditAgent(item),
         disabled: false,
       },
       {
@@ -2931,7 +2642,7 @@ class ContextOptionsStore {
         key: "edit-template",
         label: t("EditTemplate"),
         icon: SettingsReactSvgUrl,
-        onClick: () => this.onEditRoomTemplate(item),
+        onClick: () => onEditRoomTemplate(item),
         disabled: !isTemplateOwner,
       },
       {
@@ -3116,7 +2827,7 @@ class ContextOptionsStore {
           productName: getBrandName("ProductName"),
         }),
         icon: InvitationLinkReactSvgUrl,
-        onClick: () => this.onClickLinkForPortal(item, t),
+        onClick: () => onClickLinkForPortal(item, t),
         disabled: false,
       },
       // {
@@ -3382,7 +3093,7 @@ class ContextOptionsStore {
     ];
     // FABLE5-REVIEW: `false` entries are skipped by filterModel's key lookup
     // exactly as in the original .js — the cast keeps that behavior.
-    const options = this.filterModel(
+    const options = filterModel(
       optionsModel as TContextOption[],
       contextOptions,
     );
@@ -3537,7 +3248,7 @@ class ContextOptionsStore {
     let keysToRemove: string[] = [];
 
     menuGroupsConfig.forEach((configItem) => {
-      const { group, keysToRemove: groupKeysToRemove } = this.createMenuGroup(
+      const { group, keysToRemove: groupKeysToRemove } = createMenuGroup(
         newOptions,
         configItem,
       );
@@ -3743,7 +3454,7 @@ class ContextOptionsStore {
       });
 
       // Insert plugin items according to their placement
-      const newResult = this.placePlugins(result, pluginItems);
+      const newResult = placePlugins(result, pluginItems);
 
       return trimSeparator(newResult as ContextMenuModel[]);
     }
@@ -3764,7 +3475,7 @@ class ContextOptionsStore {
       }
     }
 
-    const newResult = this.placePlugins(resultOptions, pluginItems);
+    const newResult = placePlugins(resultOptions, pluginItems);
 
     return trimSeparator(newResult as ContextMenuModel[]);
   };
@@ -4002,7 +3713,7 @@ class ContextOptionsStore {
         label: t("Common:MoveTo"),
         icon: MoveReactSvgUrl,
         onClick: allFilesIsEditing
-          ? () => this.onShowEditingToast(t)
+          ? () => onShowEditingToast(t)
           : this.onMoveAction,
         disabled: isRecycleBinFolder || !canMove,
       },
@@ -4045,7 +3756,7 @@ class ContextOptionsStore {
         label: t("Common:Delete"),
         icon: TrashReactSvgUrl,
         onClick: allFilesIsEditing
-          ? () => this.onShowEditingToast(t)
+          ? () => onShowEditingToast(t)
           : () => {
               if (this.filesSettingsStore.confirmDelete) {
                 setDeleteDialogVisible(true);
@@ -4175,17 +3886,6 @@ class ContextOptionsStore {
   };
 
   // TODO: add privacy room check for files
-  onUploadAction = (type: "file" | "pdf" | "folder") => {
-    const element =
-      type === "file"
-        ? document.getElementById("customFileInput")
-        : type === "pdf"
-          ? document.getElementById("customPDFInput")
-          : document.getElementById("customFolderInput");
-
-    element?.click();
-  };
-
   onShowFormRoomSelectFileDialog = (
     filter:
       FilesSelectorFilterTypes | FilterType = FilesSelectorFilterTypes.DOCX,
@@ -4233,7 +3933,7 @@ class ContextOptionsStore {
           icon: ActionsUploadReactSvgUrl,
           label: t("Common:FromDevice"),
           key: "personal_upload-from-device",
-          onClick: () => this.onUploadAction("pdf"),
+          onClick: () => onUploadAction("pdf"),
         },
       ],
     };
@@ -4346,14 +4046,14 @@ class ContextOptionsStore {
     const uploadFiles = {
       key: "upload-files",
       label: t("Common:UploadFiles"),
-      onClick: () => this.onUploadAction("file"),
+      onClick: () => onUploadAction("file"),
       icon: ActionsUploadReactSvgUrl,
     };
 
     const uploadFolder = {
       key: "upload-folder",
       label: t("Common:UploadFolder"),
-      onClick: () => this.onUploadAction("folder"),
+      onClick: () => onUploadAction("folder"),
       icon: ActionsUploadReactSvgUrl,
     };
 
@@ -4404,7 +4104,7 @@ class ContextOptionsStore {
           className: "main-button_drop-down",
           icon: ActionsUploadReactSvgUrl,
           label: t("EmptyView:UploadDeviceOptionTitle"),
-          onClick: () => this.onUploadAction("file"),
+          onClick: () => onUploadAction("file"),
           key: "upload-files",
         },
       ];

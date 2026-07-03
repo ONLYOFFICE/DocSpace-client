@@ -1,5 +1,5 @@
 import React from "react";
-import { inject, observer } from "mobx-react";
+import { observer } from "mobx-react";
 import { useTranslation, Trans } from "react-i18next";
 
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
@@ -9,19 +9,16 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { DeviceType } from "@docspace/shared/enums";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
-type ReducedRightsDialogProps = {
-  visible: boolean;
-  adminName: string;
-  currentDeviceType: DeviceType;
-  setReducedRightsData: (visible: boolean, admin?: string) => void;
-};
+import { useStores } from "SRC_DIR/store/useStore";
 
-const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
-  visible,
-  adminName,
-  currentDeviceType,
-  setReducedRightsData,
-}) => {
+// Track D reference example: store consumption via useStores() instead of
+// the inject() HOC; observer() is still required for reactivity.
+const ReducedRightsDialog: React.FC = () => {
+  const { dialogsStore, settingsStore } = useStores();
+  const { reducedRightsData, setReducedRightsData } = dialogsStore;
+  const { currentDeviceType } = settingsStore;
+  const { visible, adminName } = reducedRightsData;
+
   const { t } = useTranslation(["Common", "Files"]);
 
   const onCloseDialog = () => {
@@ -92,15 +89,5 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
   );
 };
 
-export default inject(({ dialogsStore, settingsStore }: TStore) => {
-  const { reducedRightsData, setReducedRightsData } = dialogsStore;
-  const { currentDeviceType } = settingsStore;
-
-  return {
-    visible: reducedRightsData.visible,
-    adminName: reducedRightsData.adminName,
-    currentDeviceType,
-    setReducedRightsData,
-  };
-})(observer(ReducedRightsDialog));
+export default observer(ReducedRightsDialog);
 

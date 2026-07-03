@@ -139,9 +139,277 @@ import { hideInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import { OPERATIONS_NAME, CategoryType } from "@docspace/shared/constants";
 import { FileOperationStatus } from "@docspace/shared/enums";
+
+import type { Nullable, TTranslation } from "@docspace/shared/types";
+import type { TFileConvertId } from "@docspace/shared/dialogs/download-dialog/DownloadDialog.types";
+import type {
+  TFile,
+  TFileSecurity,
+  TFileViewAccessibility,
+  TFolder,
+  TFolderSecurity,
+  TGetFolder,
+  TIndexItems,
+  TOperation,
+} from "@docspace/shared/api/files/types";
+import type { TExportRoomIndexTask } from "@docspace/shared/api/rooms/types";
+import type { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { UserStore } from "@docspace/shared/store/UserStore";
+import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
+import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
+
 import i18n from "../i18n";
 import FilesHeaderOptionStore from "./FilesHeaderOptionStore";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
+
+import type UploadDataStore from "./UploadDataStore";
+import type TreeFoldersStore from "./TreeFoldersStore";
+import type SelectedFolderStore from "./SelectedFolderStore";
+import type FilesSettingsStore from "./FilesSettingsStore";
+import type DialogsStore from "./DialogsStore";
+import type MediaViewerDataStore from "./MediaViewerDataStore";
+import type AccessRightsStore from "./AccessRightsStore";
+import type ClientLoadingStore from "./ClientLoadingStore";
+import type PublicRoomStore from "./PublicRoomStore";
+import type PluginStore from "./PluginStore";
+import type PeopleStore from "./contacts/PeopleStore";
+import type IndexingStore from "./IndexingStore";
+import type VersionHistoryStore from "./VersionHistoryStore";
+import type AiRoomStore from "./AiRoomStore";
+
+type TOperationName = (typeof OPERATIONS_NAME)[keyof typeof OPERATIONS_NAME];
+
+type TItemSecurity = Partial<TFileSecurity & TFolderSecurity & TRoomSecurity>;
+
+// FABLE5-REVIEW: items handled by this store are FilesStore filesList
+// view-models and FilesStore is still .js (wave 3) — this is a minimal
+// structural type of the members used in this store. TFile/TFolder/TRoom
+// from typed consumers are assignable to it. Replace with the real
+// list-item type once FilesStore is converted.
+export type TActionItem = {
+  id: number;
+  title: string;
+  security?: TItemSecurity;
+  viewAccessibility?: TFileViewAccessibility;
+  fileExst?: string;
+  contentLength?: string | null;
+  contentType?: string;
+  folderId?: number;
+  parentId?: number;
+  toFolderId?: number;
+  parentTitle?: string;
+  toFolderTitle?: string;
+  parentType?: FolderType;
+  rootFolderId?: number;
+  rootFolderType?: FolderType;
+  originRoomId?: number | string;
+  roomType?: RoomsType;
+  providerKey?: string;
+  isFolder?: boolean;
+  isRoom?: boolean;
+  isAIAgent?: boolean;
+  isTemplate?: boolean;
+  encrypted?: boolean;
+  external?: boolean;
+  isLinkExpired?: boolean;
+  requestToken?: string;
+  customFilterEnabled?: boolean;
+  pinned?: boolean;
+  new?: number;
+  order?: string;
+  fileStatus?: FileStatus;
+  isPDFForm?: boolean;
+  startFilling?: boolean;
+  quotaLimit?: number;
+  usedSpace?: number;
+  shared?: boolean;
+  viewUrl?: string;
+  webUrl?: string;
+};
+
+// FABLE5-REVIEW: drag&drop/upload entries are browser File objects decorated
+// by still-.js callers (Home/index.js, withFileActions.js) with a relative
+// path and folder markers.
+type TUploadTreeFile = File & {
+  path: string;
+  isEmptyDirectory?: boolean;
+  parentFolderId?: number | string;
+};
+
+type TTreeNode = {
+  name: string;
+  children: TTreeNode[];
+  isFile: boolean;
+  file: TUploadTreeFile;
+};
+
+type TTreeLevel = {
+  result: TTreeNode[];
+  [name: string]: TTreeLevel | TTreeNode[] | undefined;
+};
+
+// FABLE5-REVIEW: translation bundles come from still-.js callers
+// (files-related dialogs/components); only the keys read in this store are
+// declared.
+type TDeleteTranslations = { deleteFromTrash: string };
+type TSuccessTranslations = { successOperation: string };
+type TDownloadTranslations = {
+  label?: string;
+  error?: string;
+  passwordError?: string;
+};
+type TRemoveTranslations = {
+  successRemoveTemplate?: string;
+  successRemoveRoom?: string;
+  successRemoveRooms?: string;
+};
+
+// FABLE5-REVIEW: startEmptyPersonal/getEmptyPersonalProgress are cast to
+// TOperation[] in shared/api/people, but this store consumes a single
+// progress object with percentage/isCompleted (shape observed from usage).
+type TEmptyPersonalProgress = {
+  error?: unknown;
+  percentage?: number;
+  isCompleted?: boolean;
+};
+
+type TCategoryType = (typeof CategoryType)[keyof typeof CategoryType];
+
+type TPluginFileItem = NonNullable<
+  PluginStore["fileItemsList"]
+>[number]["value"];
+
+type THeaderMenuOption = ReturnType<FilesHeaderOptionStore["getOption"]>;
+
+type TItemsCollection = Map<string, THeaderMenuOption | object>;
+
+// FABLE5-REVIEW: the operation payload forwarded to
+// UploadDataStore.itemOperationToFolder; folderTitle/isAI are extra fields
+// carried along for still-.js consumers (ConflictResolveDialog reads them
+// from dialogsStore).
+type TOperationDataPayload = {
+  destFolderId: number | string | null | undefined;
+  destFolderInfo?: TFolder;
+  folderIds: number[];
+  fileIds: number[];
+  deleteAfter: boolean;
+  isCopy?: boolean;
+  content?: boolean;
+  isAI?: boolean;
+  title?: string;
+  folderTitle?: string;
+  itemsCount?: number;
+  isFolder?: boolean;
+};
+
+// FABLE5-REVIEW: FilesStore is still .js (wave 3) — minimal structural type
+// of the members used in this store; replace with `import type FilesStore`
+// once it is converted.
+type TFilesStore = {
+  files: TActionItem[];
+  folders: TActionItem[];
+  filesList: TActionItem[];
+  selection: TActionItem[];
+  bufferSelection: Nullable<TActionItem>;
+  selectionTitle: string | null;
+  activeFiles: { id: number | string }[];
+  activeFolders: { id: number | string }[];
+  roomsForDelete: TActionItem[];
+  filter: FilesFilter;
+  roomsFilter: RoomsFilter;
+  categoryType: number;
+  hasSelection: boolean;
+  allFilesIsEditing: boolean;
+  canConvertSelected: boolean;
+  hasRoomsToChangeQuota: boolean;
+  hasRoomsToDisableQuota: boolean;
+  hasRoomsToResetQuota: boolean;
+  hasAIAgentsToChangeQuota: boolean;
+  hasAIAgentsToDisableQuota: boolean;
+  hasAIAgentsToResetQuota: boolean;
+  fetchFiles: (
+    folderId: number | string | null,
+    filter: FilesFilter,
+    clearFilter?: boolean,
+    withSubfolders?: boolean,
+    clearSelection?: boolean | null,
+  ) => Promise<unknown>;
+  fetchRooms: (
+    folderId: number | string | null,
+    filter: RoomsFilter,
+    withSubfolders?: unknown,
+    clearFilter?: unknown,
+    withFilterLocalStorage?: unknown,
+  ) => Promise<unknown>;
+  fetchAgents: (
+    folderId: number | string | null,
+    filter: RoomsFilter,
+    withSubfolders?: boolean,
+    clearFilter?: boolean,
+  ) => Promise<unknown>;
+  fetchFavoritesFolder: (folderId: number | string) => Promise<unknown>;
+  scrollToTop: () => void;
+  setSelected: (selected: string, clearBuffer?: boolean) => void;
+  setSelection: (selection: TActionItem[]) => void;
+  setBufferSelection: (bufferSelection: Nullable<TActionItem>) => void;
+  setHotkeyCaret: (caret: Nullable<TActionItem>) => void;
+  setHotkeyCaretStart: (caretStart: Nullable<TActionItem>) => void;
+  setEnabledHotkeys: (enabledHotkeys: boolean) => void;
+  selectFile: (file: TActionItem) => void;
+  deselectFile: (file: TActionItem) => void;
+  addActiveItems: (
+    files?: (number | string)[] | null,
+    folders?: (number | string)[] | null,
+    destFolderId?: number | string | null,
+  ) => void;
+  setActiveFiles: (
+    activeFiles: (number | string)[],
+    destFolderId?: number | string,
+  ) => void;
+  getIsEmptyTrash: () => Promise<unknown>;
+  removeFiles: (
+    fileIds?: (number | string)[] | null,
+    folderIds?: (number | string)[] | null,
+    showToast?: (() => void) | null,
+    destFolderId?: number | string | null,
+  ) => void;
+  setFile: (file: TFile) => void;
+  setFolder: (folder: TFolder) => void;
+  setFiles: (files: TActionItem[]) => void;
+  setFolders: (folders: TActionItem[]) => void;
+  getFileIndex: (id: number | string) => number;
+  updateFileStatus: (index: number, status: number) => void;
+  updateRoomMute: (index: number, status: boolean) => void;
+  updateFileVectorizationStatus: (
+    fileId: number | string,
+    status: VectorizationStatus,
+  ) => void;
+  getFolderInfo: (id: number | string) => Promise<unknown>;
+  getFileInfo: (id: number | string) => Promise<unknown>;
+  getPrimaryLink: (
+    roomId: number | string,
+  ) => Promise<{ sharedTo?: { requestToken?: string } } | undefined>;
+  openDocEditor: (
+    id: number | string,
+    preview?: boolean,
+    shareKey?: string | null,
+    editForm?: boolean,
+  ) => unknown;
+  setCustomRoomQuota: (
+    ids: (number | string)[],
+    quota: number,
+  ) => Promise<unknown>;
+  setCustomAIAgentQuota: (
+    ids: (number | string)[],
+    quota: number,
+  ) => Promise<unknown>;
+  resetRoomQuota: (ids: (number | string)[]) => Promise<unknown>;
+  resetAIAgentQuota: (ids: (number | string)[]) => Promise<unknown>;
+  setInRoomFolder: (roomId: number | string, inRoom: boolean) => void;
+  refreshFiles: () => Promise<unknown>;
+  clearFiles: () => void;
+};
 
 const SECTION_ROOT_FOLDER_TYPES = [
   FolderType.Archive,
@@ -153,43 +421,54 @@ const SECTION_ROOT_FOLDER_TYPES = [
 ];
 
 class FilesActionStore {
-  settingsStore;
+  settingsStore: SettingsStore;
 
-  uploadDataStore;
+  uploadDataStore: UploadDataStore;
 
-  treeFoldersStore;
+  treeFoldersStore: TreeFoldersStore;
 
-  filesStore;
+  filesStore: TFilesStore;
 
-  selectedFolderStore;
+  selectedFolderStore: SelectedFolderStore;
 
-  filesSettingsStore;
+  filesSettingsStore: FilesSettingsStore;
 
-  dialogsStore;
+  dialogsStore: DialogsStore;
 
-  mediaViewerDataStore;
+  mediaViewerDataStore: MediaViewerDataStore;
 
-  accessRightsStore;
+  accessRightsStore: AccessRightsStore;
 
-  clientLoadingStore;
+  clientLoadingStore: ClientLoadingStore;
 
-  publicRoomStore;
+  publicRoomStore: PublicRoomStore;
 
-  peopleStore;
+  peopleStore: PeopleStore;
 
-  indexingStore;
+  indexingStore: IndexingStore;
 
-  versionHistoryStore;
+  versionHistoryStore: VersionHistoryStore;
 
-  aiRoomStore;
+  aiRoomStore: AiRoomStore;
 
-  filesHeaderOptionStore;
+  filesHeaderOptionStore: FilesHeaderOptionStore;
 
-  userStore = null;
+  // FABLE5-REVIEW: unlike the other stores, pluginStore had no class-field
+  // declaration in the old JS (it was created by the constructor assignment
+  // after makeAutoObservable, so it is not observable). `declare` keeps that
+  // runtime shape.
+  declare pluginStore: PluginStore;
 
-  currentTariffStatusStore = null;
+  // FABLE5-REVIEW: the next three fields are initialized to null before the
+  // constructor always assigns them; typed as the assigned store (with an
+  // erased cast on the initializer) so the many unguarded accesses below
+  // keep the exact old JS behavior.
+  userStore: UserStore = null as unknown as UserStore;
 
-  currentQuotaStore = null;
+  currentTariffStatusStore: CurrentTariffStatusStore =
+    null as unknown as CurrentTariffStatusStore;
+
+  currentQuotaStore: CurrentQuotasStore = null as unknown as CurrentQuotasStore;
 
   isLoadedSearchFiles = false;
 
@@ -204,25 +483,25 @@ class FilesActionStore {
   alreadyExportingRoomIndex = false;
 
   constructor(
-    settingsStore,
-    uploadDataStore,
-    treeFoldersStore,
-    filesStore,
-    selectedFolderStore,
-    filesSettingsStore,
-    dialogsStore,
-    mediaViewerDataStore,
-    accessRightsStore,
-    clientLoadingStore,
-    publicRoomStore,
-    pluginStore,
-    userStore,
-    currentTariffStatusStore,
-    peopleStore,
-    currentQuotaStore,
-    indexingStore,
-    versionHistoryStore,
-    aiRoomStore,
+    settingsStore: SettingsStore,
+    uploadDataStore: UploadDataStore,
+    treeFoldersStore: TreeFoldersStore,
+    filesStore: TFilesStore,
+    selectedFolderStore: SelectedFolderStore,
+    filesSettingsStore: FilesSettingsStore,
+    dialogsStore: DialogsStore,
+    mediaViewerDataStore: MediaViewerDataStore,
+    accessRightsStore: AccessRightsStore,
+    clientLoadingStore: ClientLoadingStore,
+    publicRoomStore: PublicRoomStore,
+    pluginStore: PluginStore,
+    userStore: UserStore,
+    currentTariffStatusStore: CurrentTariffStatusStore,
+    peopleStore: PeopleStore,
+    currentQuotaStore: CurrentQuotasStore,
+    indexingStore: IndexingStore,
+    versionHistoryStore: VersionHistoryStore,
+    aiRoomStore: AiRoomStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -245,18 +524,28 @@ class FilesActionStore {
     this.versionHistoryStore = versionHistoryStore;
     this.aiRoomStore = aiRoomStore;
 
+    // FABLE5-REVIEW: FilesHeaderOptionStore types filesStore via the .js
+    // inferred FilesStore class; this store only has the minimal structural
+    // TFilesStore until FilesStore is converted.
     this.filesHeaderOptionStore = new FilesHeaderOptionStore(
       this,
-      this.filesStore,
-      this.dialogsStore,
+      this.filesStore as unknown as ConstructorParameters<
+        typeof FilesHeaderOptionStore
+      >[1],
+      this.dialogsStore as ConstructorParameters<
+        typeof FilesHeaderOptionStore
+      >[2],
       this.currentQuotaStore,
     );
   }
 
   updateCurrentFolder = async (
-    clearSelection,
-    operationId,
-    operation,
+    clearSelection?: boolean | null,
+    operationId?: string,
+    // FABLE5-REVIEW: some callers (onLeaveRoom, reorderIndexOfFiles) omit
+    // `operation`; the old JS forwarded undefined into the progress-bar
+    // payload, the cast below keeps that behavior.
+    operation?: TOperationName,
     skipFetch = false,
   ) => {
     const { setSecondaryProgressBarData } =
@@ -279,7 +568,7 @@ class FilesActionStore {
       isAIAgentsFolder,
     } = this.treeFoldersStore;
 
-    let newFilter;
+    let newFilter: undefined;
 
     let updatedFolder = this.selectedFolderStore.id;
 
@@ -324,16 +613,16 @@ class FilesActionStore {
       this.dialogsStore.setIsFolderActions(false);
 
       setSecondaryProgressBarData({
-        operation,
+        operation: operation as TOperationName,
         completed: true,
         operationId,
       });
     }
   };
 
-  convertToTree = (folders) => {
-    const result = [];
-    const level = { result };
+  convertToTree = (folders: TUploadTreeFile[]) => {
+    const result: TTreeNode[] = [];
+    const level: TTreeLevel = { result };
     try {
       folders.forEach((folder) => {
         const folderPath = folder.path.split("/").filter((name) => name !== "");
@@ -343,13 +632,13 @@ class FilesActionStore {
             r[name] = { result: [] };
             r.result.push({
               name,
-              children: r[name].result,
+              children: (r[name] as TTreeLevel).result,
               isFile: folderPath.length - 1 === i && !folder.isEmptyDirectory,
               file: folder,
             });
           }
 
-          return r[name];
+          return r[name] as TTreeLevel;
         }, level);
       });
     } catch (e) {
@@ -358,7 +647,11 @@ class FilesActionStore {
     return result;
   };
 
-  createFolderTree = async (treeList, parentFolderId, filesList) => {
+  createFolderTree = async (
+    treeList: TTreeNode[],
+    parentFolderId: number | string,
+    filesList: TUploadTreeFile[],
+  ): Promise<TTreeNode[] | undefined> => {
     if (!treeList || !treeList.length) return;
 
     for (let i = 0; i < treeList.length; i++) {
@@ -390,7 +683,12 @@ class FilesActionStore {
     return treeList;
   };
 
-  createFoldersTree = async (t, files, folderId, dragged) => {
+  createFoldersTree = async (
+    t: TTranslation,
+    files: TUploadTreeFile[] | Record<string, TUploadTreeFile>,
+    folderId?: number | string | null,
+    dragged?: boolean,
+  ) => {
     //  console.log("createFoldersTree", files, folderId);
     const { uploaded, percent } = this.uploadDataStore;
 
@@ -418,7 +716,9 @@ class FilesActionStore {
     };
 
     if (roomFolder && roomFolder.quotaLimit && roomFolder.quotaLimit !== -1) {
-      const freeSpace = roomFolder.quotaLimit - roomFolder.usedSpace;
+      // FABLE5-REVIEW: usedSpace is optional on the folder snapshot; the old
+      // JS did unchecked arithmetic here.
+      const freeSpace = roomFolder.quotaLimit - roomFolder.usedSpace!;
 
       const filesSize = withoutHiddenFiles.reduce((acc, file) => {
         return acc + file.size;
@@ -453,8 +753,8 @@ class FilesActionStore {
 
     const tree = this.convertToTree(withoutHiddenFiles);
 
-    const filesList = [];
-    await this.createFolderTree(tree, toFolderId, filesList);
+    const filesList: TUploadTreeFile[] = [];
+    await this.createFolderTree(tree, toFolderId as number | string, filesList);
 
     if (withoutHiddenFiles.length) {
       setPrimaryProgressBarData({ ...pbData, completed: uploaded });
@@ -467,7 +767,7 @@ class FilesActionStore {
     return filesList;
   };
 
-  updateFilesAfterDelete = (operationId, operationName) => {
+  updateFilesAfterDelete = (operationId: string, operationName: TOperationName) => {
     const { setSelected } = this.filesStore;
     const { setSecondaryProgressBarData } =
       this.uploadDataStore.secondaryProgressDataStore;
@@ -483,7 +783,10 @@ class FilesActionStore {
     });
   };
 
-  deleteAction = async (translations, newSelection = null) => {
+  deleteAction = async (
+    translations: Nullable<TDeleteTranslations>,
+    newSelection: Nullable<TActionItem[]> = null,
+  ) => {
     const { isRecycleBinFolder, isPrivacyFolder, recycleBinFolderId } =
       this.treeFoldersStore;
 
@@ -517,8 +820,8 @@ class FilesActionStore {
     const deleteAfter = false; // Delete after finished TODO: get from settings
     const immediately = !!(isRecycleBinFolder || isPrivacyFolder); // Don't move to the Recycle Bin
 
-    const folderIds = [];
-    const fileIds = [];
+    const folderIds: number[] = [];
+    const fileIds: number[] = [];
 
     let i = 0;
     while (selection.length !== i) {
@@ -586,7 +889,10 @@ class FilesActionStore {
 
             const showToast = () => {
               if (isRecycleBinFolder) {
-                return toastr.success(translations.deleteFromTrash);
+                // FABLE5-REVIEW: `translations` may be null when called from
+                // runOperations; the old JS would throw here in that case
+                // (trash-only path), the `!` keeps that behavior.
+                return toastr.success(translations!.deleteFromTrash);
               }
             };
 
@@ -608,7 +914,10 @@ class FilesActionStore {
             }
 
             if (currentFolderId) {
-              SocketHelper?.emit(SocketCommands.RefreshFolder, currentFolderId);
+              SocketHelper?.emit(
+                SocketCommands.RefreshFolder,
+                currentFolderId as string,
+              );
             }
 
             if (fileIds.length) {
@@ -616,7 +925,7 @@ class FilesActionStore {
               selection
                 .filter((item) => fileIds.includes(item.id))
                 .forEach((file) => {
-                  window.dataLayer.push({
+                  window.dataLayer!.push({
                     event: AnalyticsEvents.FileDeleted,
                     id: file.id,
                     parentId: file.folderId,
@@ -635,7 +944,7 @@ class FilesActionStore {
           completed: true,
           alert: true,
           operationId,
-          error: err,
+          error: err as string,
         });
       } finally {
         this.setGroupMenuBlocked(false);
@@ -643,11 +952,14 @@ class FilesActionStore {
     }
   };
 
-  askAIAction = (item) => {
-    this.dialogsStore.setAiAgentSelectorDialogProps(true, item);
+  askAIAction = (item: TActionItem) => {
+    this.dialogsStore.setAiAgentSelectorDialogProps(
+      true,
+      item as unknown as TFile,
+    );
   };
 
-  emptyTrash = async (translations) => {
+  emptyTrash = async (translations: TSuccessTranslations) => {
     const {
       secondaryProgressDataStore,
       loopFilesOperations,
@@ -699,13 +1011,13 @@ class FilesActionStore {
         ...pbData,
       });
 
-      return toastr.error(err.message ? err.message : err, null, 0, true);
+      return toastr.error((err as Error).message ? (err as Error).message : (err as string), null, 0, true);
     } finally {
       this.emptyTrashInProgress = false;
     }
   };
 
-  emptyPersonalRoom = async (translations) => {
+  emptyPersonalRoom = async (translations: TSuccessTranslations) => {
     const { secondaryProgressDataStore, clearActiveOperations } =
       this.uploadDataStore;
     const { setSecondaryProgressBarData } = secondaryProgressDataStore;
@@ -733,7 +1045,14 @@ class FilesActionStore {
     });
 
     try {
-      await startEmptyPersonal().then(async (result) => {
+      // FABLE5-REVIEW: startEmptyPersonal/getEmptyPersonalProgress are cast
+      // to TOperation[] in shared/api/people, but the server returns a single
+      // progress object (see TEmptyPersonalProgress above).
+      await (
+        startEmptyPersonal() as unknown as Promise<
+          TEmptyPersonalProgress | undefined
+        >
+      ).then(async (result) => {
         if (result?.error) return Promise.reject(result.error);
         const data = result ?? null;
 
@@ -752,7 +1071,9 @@ class FilesActionStore {
         let finished = data.isCompleted;
 
         while (!finished) {
-          const item = await getEmptyPersonalProgress();
+          const item = (await getEmptyPersonalProgress()) as unknown as
+            | TEmptyPersonalProgress
+            | undefined;
 
           progress = item ? item.percentage : 100;
           finished = item ? item.isCompleted : true;
@@ -761,7 +1082,7 @@ class FilesActionStore {
             operation: pbData.operation,
             percent: progress,
             alert: false,
-            currentFile: item,
+            currentFile: item as unknown as TOperation,
             operationId: pbData.operationId,
           });
         }
@@ -786,13 +1107,13 @@ class FilesActionStore {
         ...pbData,
       });
 
-      return toastr.error(err.message ? err.message : err, null, 0, true);
+      return toastr.error((err as Error).message ? (err as Error).message : (err as string), null, 0, true);
     } finally {
       this.emptyPersonalRoomInProgress = false;
     }
   };
 
-  emptyArchive = async (translations) => {
+  emptyArchive = async (translations: TSuccessTranslations) => {
     const {
       secondaryProgressDataStore,
       loopFilesOperations,
@@ -838,11 +1159,18 @@ class FilesActionStore {
         ...pbData,
       });
 
-      return toastr.error(err.message ? err.message : err);
+      return toastr.error((err as Error).message ? (err as Error).message : (err as string));
     }
   };
 
-  downloadFiles = async (fileConvertIds, folderIds, translations) => {
+  downloadFiles = async (
+    fileConvertIds: (number | TFileConvertId)[],
+    folderIds: number[],
+    // FABLE5-REVIEW: downloadAction forwards its `label` string here as
+    // `translations`; destructuring a string yields undefined for both keys,
+    // exactly as the old JS did.
+    translations: TDownloadTranslations | string,
+  ) => {
     const { clearActiveOperations, secondaryProgressDataStore } =
       this.uploadDataStore;
 
@@ -850,7 +1178,7 @@ class FilesActionStore {
     const { openUrl } = this.settingsStore;
 
     const { addActiveItems } = this.filesStore;
-    const { label, passwordError } = translations;
+    const { label, passwordError } = translations as TDownloadTranslations;
     const {
       setDownloadItems,
       setDownloadDialogVisible,
@@ -866,16 +1194,25 @@ class FilesActionStore {
       operation: operationName,
       percent: 0,
       operationId,
-      operationIds: [...fileConvertIds, ...folderIds],
+      operationIds: [...fileConvertIds, ...folderIds] as (string | number)[],
     });
 
-    const fileIds = fileConvertIds.map((f) => f.key || f);
+    const fileIds = fileConvertIds.map(
+      (f) => (f as TFileConvertId).key || (f as number),
+    );
     addActiveItems(fileIds, folderIds);
 
     const shareKey = this.publicRoomStore.publicRoomKey;
 
     try {
-      await downloadFiles(fileConvertIds, folderIds, shareKey).then(
+      // FABLE5-REVIEW: the shared downloadFiles declares shareKey as a
+      // required string, but it is null outside of public rooms (the old JS
+      // passed null; the API helper only appends it when truthy).
+      await downloadFiles(
+        fileConvertIds as TFileConvertId[],
+        folderIds,
+        shareKey as string,
+      ).then(
         async (res) => {
           const result = res[0];
 
@@ -901,14 +1238,18 @@ class FilesActionStore {
 
           const isCanceled = item?.status === FileOperationStatus.Canceled;
 
-          if (item.url) {
-            openUrl(item.url, UrlActionType.Download, true);
+          // FABLE5-REVIEW: loopFilesOperations may resolve to undefined; the
+          // old JS crashed here in that case, the `!` keeps that behavior.
+          if (item!.url) {
+            openUrl(item!.url, UrlActionType.Download, true);
 
             if (fileConvertIds.length) {
               window.dataLayer = window.dataLayer || [];
               window.dataLayer.push({
                 event: AnalyticsEvents.FileDownloaded,
-                fileIds: fileConvertIds.map((f) => f.key ?? f),
+                fileIds: fileConvertIds.map(
+                  (f) => (f as TFileConvertId).key ?? (f as number),
+                ),
               });
             }
           }
@@ -916,19 +1257,26 @@ class FilesActionStore {
           if (!isCanceled) {
             setSecondaryProgressBarData({
               operation: operationName,
-              alert: !item.url,
+              alert: !item!.url,
               completed: true,
               operationId,
             });
 
-            !item.url && toastr.error(translations.error, null, 0, true);
+            !item!.url &&
+              toastr.error(
+                (translations as TDownloadTranslations).error,
+                null,
+                0,
+                true,
+              );
           }
         },
       );
     } catch (err) {
       clearActiveOperations(fileIds, folderIds);
 
-      const isCanceled = err?.status === FileOperationStatus.Canceled;
+      const isCanceled =
+        (err as TOperation)?.status === FileOperationStatus.Canceled;
 
       if (!isCanceled) {
         setSecondaryProgressBarData({
@@ -937,14 +1285,15 @@ class FilesActionStore {
           completed: true,
           operationId,
         });
-        const error = typeof err === "string" ? err : err?.error;
+        const error =
+          typeof err === "string" ? err : (err as { error?: string })?.error;
 
         if (error?.includes("password")) {
           const filesIds = error.match(/\d+/g)?.map(Number) ?? [
-            fileConvertIds[0].key,
+            (fileConvertIds[0] as TFileConvertId).key,
           ];
 
-          const passwordArray = [];
+          const passwordArray: typeof downloadItems = [];
 
           downloadItems.forEach((item) => {
             filesIds.forEach((id) => {
@@ -961,31 +1310,35 @@ class FilesActionStore {
         }
         setDownloadItems([]);
 
-        return toastr.error(err, null, 0, true);
+        return toastr.error(err as string, null, 0, true);
       }
     }
   };
 
-  downloadAction = async (label, item) => {
+  downloadAction = async (label: string, item?: Nullable<TActionItem>) => {
     const { bufferSelection } = this.filesStore;
     const { openUrl } = this.settingsStore;
     const { id, isFolder } = this.selectedFolderStore;
 
     const downloadAsArchive = id === item?.id && isFolder === item?.isFolder;
 
-    const selection = item
-      ? [item]
-      : this.filesStore.selection.length
-        ? this.filesStore.selection
-        : bufferSelection
-          ? [bufferSelection]
-          : null;
+    // FABLE5-REVIEW: with no selection at all the old JS crashed on
+    // `null.length` below; the erased cast keeps that behavior.
+    const selection = (
+      item
+        ? [item]
+        : this.filesStore.selection.length
+          ? this.filesStore.selection
+          : bufferSelection
+            ? [bufferSelection]
+            : null
+    ) as TActionItem[];
 
     if (!selection.length) return;
 
-    const fileIds = [];
-    const folderIds = [];
-    const items = [];
+    const fileIds: number[] = [];
+    const folderIds: number[] = [];
+    const items: { id: number; fileExst?: string }[] = [];
 
     if (selection.length === 1 && selection[0].fileExst && !downloadAsArchive) {
       const file = selection[0];
@@ -994,11 +1347,11 @@ class FilesActionStore {
         return this.downloadEncryptedFile(file);
       }
 
-      openUrl(file.viewUrl, UrlActionType.Download);
+      openUrl(file.viewUrl!, UrlActionType.Download);
       return Promise.resolve();
     }
 
-    const encryptedFiles = [];
+    const encryptedFiles: TActionItem[] = [];
 
     selection.forEach((elem) => {
       if (!elem.fileExst && elem.isFolder) {
@@ -1027,7 +1380,7 @@ class FilesActionStore {
     return Promise.all(promises).finally(() => this.setGroupMenuBlocked(false));
   };
 
-  resolveRoomIdForFile = (file) => {
+  resolveRoomIdForFile = (file?: Nullable<TActionItem>) => {
     if (file?.originRoomId) return file.originRoomId;
     const navRoom = this.selectedFolderStore.navigationPath?.find(
       (r) => r.isRoom,
@@ -1037,11 +1390,11 @@ class FilesActionStore {
     return null;
   };
 
-  loadRoomMemberKeysFor = async (roomId) => {
+  loadRoomMemberKeysFor = async (roomId: number | string | null | undefined) => {
     return loadRoomMemberKeysSafe(roomId);
   };
 
-  downloadEncryptedFile = async (file) => {
+  downloadEncryptedFile = async (file: TActionItem) => {
     const { encryptionKeys, user } = this.userStore;
 
     if (!encryptionKeys || encryptionKeys.length === 0) {
@@ -1085,8 +1438,11 @@ class FilesActionStore {
         operationId,
       });
 
+      // FABLE5-REVIEW: viewUrl is optional on the .js view-model; the old JS
+      // passed it through unchecked (fetch would fail at runtime), the `!`
+      // keeps that behavior.
       const result = await downloadAndDecryptFile({
-        downloadUrl: file.viewUrl,
+        downloadUrl: file.viewUrl!,
         fileId: file.id,
         fileKeys: encryptionInfo.fileKeys,
         roomMemberKeys,
@@ -1144,7 +1500,7 @@ class FilesActionStore {
     return Promise.resolve();
   };
 
-  downloadEncryptedFilesAsZip = async (encryptedFiles) => {
+  downloadEncryptedFilesAsZip = async (encryptedFiles: TActionItem[]) => {
     const { encryptionKeys, user } = this.userStore;
 
     if (!encryptionKeys || encryptionKeys.length === 0) {
@@ -1169,9 +1525,12 @@ class FilesActionStore {
         encryptedFiles.map((f) => f.title),
       );
       const totalFiles = encryptedFiles.length;
-      const results = [];
-      const failures = [];
-      const roomMemberKeysCache = new Map();
+      const results: { name: string; data: Uint8Array }[] = [];
+      const failures: string[] = [];
+      const roomMemberKeysCache = new Map<
+        string,
+        Awaited<ReturnType<typeof loadRoomMemberKeysSafe>>
+      >();
 
       setSecondaryProgressBarData({
         operation: OPERATIONS_NAME.download,
@@ -1215,8 +1574,10 @@ class FilesActionStore {
             roomMemberKeysCache.set(String(roomId), roomMemberKeys);
           }
 
+          // FABLE5-REVIEW: viewUrl is optional on the .js view-model; the
+          // old JS passed it through unchecked, the `!` keeps that behavior.
           const result = await downloadAndDecryptFileToBuffer({
-            downloadUrl: file.viewUrl,
+            downloadUrl: file.viewUrl!,
             fileId: file.id,
             fileKeys: encryptionInfo.fileKeys,
             roomMemberKeys,
@@ -1274,7 +1635,9 @@ class FilesActionStore {
       });
 
       const zipData = createZipFromBuffers(results);
-      const zipBlob = new Blob([zipData], { type: "application/zip" });
+      const zipBlob = new Blob([zipData as unknown as BlobPart], {
+        type: "application/zip",
+      });
 
       triggerFileDownload(zipBlob, "Files.zip");
 
@@ -1310,7 +1673,10 @@ class FilesActionStore {
     }
   };
 
-  completeAction = async (selectedItem, type) => {
+  completeAction = async (
+    selectedItem: { id: number; isFolder?: boolean },
+    type?: FileAction,
+  ) => {
     switch (type) {
       case FileAction.Rename:
         this.onSelectItem(
@@ -1338,7 +1704,7 @@ class FilesActionStore {
   };
 
   onSelectItem = (
-    { id, isFolder },
+    { id, isFolder }: { id?: number; isFolder?: boolean },
     withSelect = true,
     isContextItem = true,
     isSingleMenu = false,
@@ -1391,12 +1757,12 @@ class FilesActionStore {
   };
 
   deleteItemAction = async (
-    itemId,
-    itemTitle,
-    translations,
-    isFile,
-    isThirdParty,
-    isRoom,
+    itemId: number | number[],
+    itemTitle: string,
+    translations?: Nullable<TRemoveTranslations>,
+    isFile?: boolean | null,
+    isThirdParty?: boolean | string | null,
+    isRoom?: boolean | null,
   ) => {
     const { secondaryProgressDataStore } = this.uploadDataStore;
     const { setSecondaryProgressBarData } = secondaryProgressDataStore;
@@ -1406,7 +1772,7 @@ class FilesActionStore {
       isThirdParty ||
       isRoom
     ) {
-      this.dialogsStore.setIsRoomDelete(isRoom);
+      this.dialogsStore.setIsRoomDelete(isRoom as boolean);
       this.dialogsStore.setDeleteDialogVisible(true);
     } else {
       const operationId = uniqueid("operation_");
@@ -1439,19 +1805,19 @@ class FilesActionStore {
           completed: true,
           alert: true,
           operationId,
-          error: err,
+          error: err as string,
         });
       }
     }
   };
 
   deleteItemOperation = (
-    isFile,
-    itemId,
-    translations,
-    isRoom,
-    operationId,
-    operation,
+    isFile: boolean | null | undefined,
+    itemId: number | number[],
+    translations: Nullable<TRemoveTranslations> | undefined,
+    isRoom: boolean | null | undefined,
+    operationId: string,
+    operation: TOperationName,
   ) => {
     const { addActiveItems, getIsEmptyTrash } = this.filesStore;
     const { isRecycleBinFolder, recycleBinFolderId } = this.treeFoldersStore;
@@ -1464,8 +1830,14 @@ class FilesActionStore {
       const fileParentId = this.filesStore.files.find(
         (x) => x.id === itemId,
       )?.folderId;
-      addActiveItems([itemId], null, destFolderId);
-      return deleteFile(itemId).then(async (res) => {
+      addActiveItems([itemId as number], null, destFolderId);
+      // FABLE5-REVIEW: the shared deleteFile declares deleteAfter/immediately
+      // as required, but the old JS always called it with the id only
+      // (undefined is sent as-is at runtime); the erased cast keeps the call
+      // arity unchanged.
+      return (
+        deleteFile as unknown as (fileId: number | number[]) => Promise<TOperation[]>
+      )(itemId).then(async (res) => {
         const result = res[0];
 
         if (result?.error) return Promise.reject(result.error);
@@ -1477,8 +1849,8 @@ class FilesActionStore {
         });
 
         this.updateFilesAfterDelete(operationId, operation);
-        this.filesStore.removeFiles([itemId], null, null, destFolderId);
-        forgetEncryptedFilename(itemId);
+        this.filesStore.removeFiles([itemId as number], null, null, destFolderId);
+        forgetEncryptedFilename(itemId as number);
 
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
@@ -1530,7 +1902,7 @@ class FilesActionStore {
           });
 
           const currentFolderId = this.selectedFolderStore.id;
-          if (items.includes(currentFolderId)) {
+          if (items.includes(currentFolderId as number)) {
             if (isAgentDeletion) {
               this.moveToAIAgentsPage();
             } else {
@@ -1548,8 +1920,12 @@ class FilesActionStore {
         });
     }
 
-    addActiveItems(null, [itemId], destFolderId);
-    return deleteFolder(itemId).then(async (res) => {
+    addActiveItems(null, [itemId as number], destFolderId);
+    // FABLE5-REVIEW: same as deleteFile above — the old JS calls deleteFolder
+    // with the id only; the erased cast keeps the call arity unchanged.
+    return (
+      deleteFolder as unknown as (folderId: number | number[]) => Promise<TOperation[]>
+    )(itemId).then(async (res) => {
       const result = res[0];
 
       if (result?.error) return Promise.reject(result.error);
@@ -1560,7 +1936,7 @@ class FilesActionStore {
       });
 
       this.updateFilesAfterDelete(operationId, operation);
-      this.filesStore.removeFiles(null, [itemId], null, destFolderId);
+      this.filesStore.removeFiles(null, [itemId as number], null, destFolderId);
 
       window.dispatchEvent(
         new CustomEvent("folder_deleted", {
@@ -1572,38 +1948,50 @@ class FilesActionStore {
     });
   };
 
-  lockFileAction = async (id, locked) => {
+  lockFileAction = async (id: number, locked: boolean) => {
     const { setFile } = this.filesStore;
     try {
       const res = await lockFile(id, locked);
       setFile(res);
     } catch (err) {
-      throw new Error(err?.response?.data?.error?.message ?? err);
+      throw new Error(
+        ((err as { response?: { data?: { error?: { message?: string } } } })
+          ?.response?.data?.error?.message ?? err) as string,
+      );
     }
   };
 
-  finalizeVersionAction = async (id) => {
-    let timer = null;
+  finalizeVersionAction = async (id: number) => {
+    let timer: ReturnType<typeof setTimeout> | null = null;
     const { setFile } = this.filesStore;
     try {
       timer = setTimeout(() => {
         this.filesStore.setActiveFiles([id]);
       }, 200);
-      await finalizeVersion(id, 0, false).then((res) => {
-        if (res && res[0]) {
-          setFile(res[0]);
-          this.filesStore.setActiveFiles([]);
-        }
-      });
+      // FABLE5-REVIEW: finalizeVersion is untyped in shared/api (raw
+      // request); the old JS reads the finalized file from res[0].
+      await (finalizeVersion(id, 0, false) as Promise<TFile[] | undefined>).then(
+        (res) => {
+          if (res && res[0]) {
+            setFile(res[0]);
+            this.filesStore.setActiveFiles([]);
+          }
+        },
+      );
     } catch (err) {
-      toastr.error(err);
+      toastr.error(err as string);
     } finally {
-      clearTimeout(timer);
+      clearTimeout(timer!);
     }
   };
 
-  changeCustomFilter = async (item, t) => {
-    return enableCustomFilter(item.id, !item.customFilterEnabled)
+  changeCustomFilter = async (item: TActionItem, t: TTranslation) => {
+    // FABLE5-REVIEW: enableCustomFilter is cast to TOperation[] in
+    // shared/api/files, but the server returns the updated file (the old JS
+    // reads res.customFilterEnabled).
+    return (
+      enableCustomFilter(item.id, !item.customFilterEnabled) as unknown as Promise<TFile>
+    )
       .then((res) => {
         if (res.customFilterEnabled) {
           toastr.success(t("Common:CustomFilterEnabled"));
@@ -1612,11 +2000,11 @@ class FilesActionStore {
         }
       })
       .catch((err) => {
-        toastr.error(err);
+        toastr.error(err as string);
       });
   };
 
-  duplicateAction = async (item) => {
+  duplicateAction = async (item: TActionItem) => {
     if (item.fileExst && item.encrypted) {
       return this.duplicateEncryptedFile(item);
     }
@@ -1632,8 +2020,8 @@ class FilesActionStore {
 
     this.setSelectedItems();
 
-    const folderIds = [];
-    const fileIds = [];
+    const folderIds: number[] = [];
+    const fileIds: number[] = [];
     item.fileExst ? fileIds.push(item.id) : folderIds.push(item.id);
 
     const operationId = uniqueid("operation_");
@@ -1648,7 +2036,10 @@ class FilesActionStore {
       title: item.title,
       isFolder: item.isFolder,
       operationIds: [item.id],
-      destFolderInfo: selectedFolder,
+      // FABLE5-REVIEW: destFolderInfo is typed as TFolder but the old JS
+      // passes the selected-folder snapshot here; only navigation fields are
+      // read downstream.
+      destFolderInfo: selectedFolder as unknown as TFolder,
       alert: false,
     });
 
@@ -1698,7 +2089,7 @@ class FilesActionStore {
           operationId,
           alert: true,
           completed: true,
-          error: err,
+          error: err as string,
         });
       })
       .finally(() => {
@@ -1707,7 +2098,7 @@ class FilesActionStore {
       });
   };
 
-  duplicateEncryptedFile = async (item) => {
+  duplicateEncryptedFile = async (item: TActionItem) => {
     return this.copyEncryptedFilesToFolder([item], item.folderId, {
       private: true,
       rootFolderId: this.selectedFolderStore.rootFolderId,
@@ -1715,7 +2106,15 @@ class FilesActionStore {
     });
   };
 
-  copyEncryptedFilesToFolder = async (items, destFolderId, destInfo) => {
+  copyEncryptedFilesToFolder = async (
+    items: TActionItem[],
+    destFolderId: number | string | undefined,
+    destInfo?: {
+      private?: boolean;
+      rootFolderId?: number | string;
+      roomType?: Nullable<RoomsType>;
+    },
+  ) => {
     const { user, encryptionKeys } = this.userStore;
 
     if (!encryptionKeys || encryptionKeys.length === 0) {
@@ -1741,17 +2140,20 @@ class FilesActionStore {
       isPrivate: !!sameRoomRoot,
     };
 
-    const filesToUpload = [];
-    const failed = [];
+    const filesToUpload: ReturnType<typeof tagFileForCopy>[] = [];
+    const failed: string[] = [];
 
     for (const item of items) {
       try {
         const sourceRoomId = this.resolveRoomIdForFile(item);
+        // FABLE5-REVIEW: decryptEncryptedItemToFile declares viewUrl/roomId
+        // as required, but the old JS passed the loose view-model and a
+        // possibly-null room id through unchecked.
         const decryptedFile = await decryptEncryptedItemToFile(
-          item,
+          item as Parameters<typeof decryptEncryptedItemToFile>[0],
           String(userId),
           identity,
-          sourceRoomId,
+          sourceRoomId as number | string,
         );
 
         const newName = sameRoomRoot
@@ -1759,7 +2161,7 @@ class FilesActionStore {
           : decryptedFile.name;
         const tagged = tagFileForCopy(
           new File([decryptedFile], newName, { type: decryptedFile.type }),
-          destFolderId,
+          destFolderId as number | string,
           destContext,
         );
         filesToUpload.push(tagged);
@@ -1773,7 +2175,11 @@ class FilesActionStore {
     }
 
     if (filesToUpload.length > 0) {
-      this.uploadDataStore.startUpload(filesToUpload, destFolderId, i18n.t);
+      this.uploadDataStore.startUpload(
+        filesToUpload,
+        destFolderId as number | string,
+        i18n.t,
+      );
     }
 
     if (failed.length > 0) {
@@ -1786,7 +2192,7 @@ class FilesActionStore {
     }
   };
 
-  getItemsInfo = (items) => {
+  getItemsInfo = (items: TActionItem[]) => {
     const requests = items
       .map((item) => {
         if (isFolderCheck(item)) {
@@ -1802,23 +2208,25 @@ class FilesActionStore {
     return Promise.all(requests);
   };
 
-  setFavoriteAction = (action, items) => {
+  setFavoriteAction = (action: string, items: TActionItem[]) => {
     const { fetchFavoritesFolder, setSelected } = this.filesStore;
-    const { fileIds, folderIds } = splitFileAndFolderIds(items);
+    const { fileIds, folderIds } = splitFileAndFolderIds(
+      items as unknown as TFile[],
+    );
 
     switch (action) {
       case "mark":
         return api.files
-          .markAsFavorite(fileIds, folderIds)
+          .markAsFavorite(fileIds as number[], folderIds as number[])
           .then(() => this.getItemsInfo(items))
           .then(() => setSelected("close"));
 
       case "remove":
         return api.files
-          .removeFromFavorite(fileIds, folderIds)
+          .removeFromFavorite(fileIds as number[], folderIds as number[])
           .then(() => {
             return this.treeFoldersStore.isFavoritesFolder
-              ? fetchFavoritesFolder(this.selectedFolderStore.id)
+              ? fetchFavoritesFolder(this.selectedFolderStore.id as number)
               : this.getItemsInfo(items);
           })
           .then(() => setSelected("close"));
@@ -1826,14 +2234,19 @@ class FilesActionStore {
     }
   };
 
-  setPinAction = async (action, id, t, isAIAgent = false) => {
+  setPinAction = async (
+    action: string,
+    id: number | number[],
+    t: TTranslation,
+    isAIAgent = false,
+  ) => {
     const items = Array.isArray(id) ? id : [id];
 
-    const actions = [];
-    const withFinishedOperation = [];
+    const actions: Promise<unknown>[] = [];
+    const withFinishedOperation: unknown[] = [];
     let isError = false;
 
-    const updatingFolderList = (elems, isPin = false) => {
+    const updatingFolderList = (elems: unknown[], isPin = false) => {
       if (elems.length === 0) return;
 
       let translationForOneItem;
@@ -1863,7 +2276,13 @@ class FilesActionStore {
     const isPin = action === "pin";
 
     items.forEach((item) => {
-      actions.push(isPin ? api.rooms.pinRoom(item) : api.rooms.unpinRoom(item));
+      // FABLE5-REVIEW: pinRoom/unpinRoom are untyped in shared/api/rooms
+      // (@ts-nocheck file), the casts pin down the observed Promise result.
+      actions.push(
+        (isPin
+          ? api.rooms.pinRoom(item)
+          : api.rooms.unpinRoom(item)) as Promise<unknown>,
+      );
     });
 
     if (isPin) {
@@ -1872,10 +2291,14 @@ class FilesActionStore {
       if (!result) return;
 
       result.forEach((res) => {
-        if (res.value) {
-          withFinishedOperation.push(res.value);
+        // FABLE5-REVIEW: the old JS reads `.value` off rejected results too
+        // (undefined at runtime); the erased casts keep that behavior.
+        if ((res as PromiseFulfilledResult<unknown>).value) {
+          withFinishedOperation.push(
+            (res as PromiseFulfilledResult<unknown>).value,
+          );
         }
-        if (!res.value) isError = true;
+        if (!(res as PromiseFulfilledResult<unknown>).value) isError = true;
       });
 
       updatingFolderList(withFinishedOperation, isPin);
@@ -1896,17 +2319,26 @@ class FilesActionStore {
       if (!result) return;
 
       result.forEach((r) => {
-        if (r.value) {
-          withFinishedOperation.push(r.value);
+        if ((r as PromiseFulfilledResult<unknown>).value) {
+          withFinishedOperation.push(
+            (r as PromiseFulfilledResult<unknown>).value,
+          );
         }
-        if (!r.value) toastr.error(r.reason.response?.data?.error);
+        if (!(r as PromiseFulfilledResult<unknown>).value)
+          toastr.error(
+            (
+              r as PromiseRejectedResult & {
+                reason: { response?: { data?: { error?: string } } };
+              }
+            ).reason.response?.data?.error,
+          );
       });
 
       updatingFolderList(withFinishedOperation, isPin);
     }
   };
 
-  setMuteAction = (action, item, t) => {
+  setMuteAction = (action: string, item: TActionItem, t: TTranslation) => {
     const { id, new: newCount, rootFolderId, isAIAgent } = item;
     const { treeFolders } = this.treeFoldersStore;
     const { folders, updateRoomMute } = this.filesStore;
@@ -1919,9 +2351,17 @@ class FilesActionStore {
     const treeIndex = treeFolders.findIndex((x) => x.id == rootFolderId);
     const count = treeFolders[treeIndex].newItems;
     if (treeIndex) {
+      // FABLE5-REVIEW: `new`/`newItems` are optional on the view-models; the
+      // old JS did unchecked arithmetic (NaN when missing), the erased casts
+      // keep that behavior.
       if (muteStatus) {
-        treeFolders[treeIndex].newItems = newCount >= 0 ? count - newCount : 0;
-      } else treeFolders[treeIndex].newItems = count + newCount;
+        treeFolders[treeIndex].newItems =
+          (newCount as number) >= 0
+            ? (count as number) - (newCount as number)
+            : 0;
+      } else
+        treeFolders[treeIndex].newItems =
+          (count as number) + (newCount as number);
     }
 
     let notificationsDisabled = t("Common:RoomNotificationsDisabled");
@@ -1936,16 +2376,22 @@ class FilesActionStore {
       });
     }
 
-    muteRoomNotification(id, muteStatus)
+    // FABLE5-REVIEW: muteRoomNotification is untyped in shared/api/settings
+    // (@ts-nocheck file); the cast pins down the observed Promise result.
+    (muteRoomNotification(id, muteStatus) as Promise<unknown>)
       .then(() =>
         toastr.success(
           muteStatus ? notificationsDisabled : notificationsEnabled,
         ),
       )
-      .catch((e) => toastr.error(e));
+      .catch((e) => toastr.error(e as string));
   };
 
-  setArchiveAction = async (action, folders, t) => {
+  setArchiveAction = async (
+    action: string,
+    folders: TActionItem | TActionItem[],
+    t: TTranslation,
+  ) => {
     const { addActiveItems, setSelected } = this.filesStore;
 
     const { archiveRoomsId, myRoomsId } = this.treeFoldersStore;
@@ -1962,9 +2408,13 @@ class FilesActionStore {
 
     const operationId = uniqueid("operation_");
 
-    const items = Array.isArray(folders)
-      ? folders.map((x) => (x?.id ? x.id : x))
-      : [folders.id];
+    // FABLE5-REVIEW: still-.js callers pass rooms or plain ids; the erased
+    // cast mirrors the old JS.
+    const items = (
+      Array.isArray(folders)
+        ? folders.map((x) => (x?.id ? x.id : x))
+        : [folders.id]
+    ) as number[];
     const archiveParentId = Array.isArray(folders)
       ? folders[0]?.parentId
       : folders?.parentId;
@@ -1988,7 +2438,16 @@ class FilesActionStore {
     switch (action) {
       case "archive":
         this.setGroupMenuBlocked(true);
-        return moveToFolder(archiveRoomsId, items)
+        // FABLE5-REVIEW: the shared moveToFolder declares
+        // fileIds/conflictResolveType/deleteAfter as required, but the old JS
+        // always called it with two args (undefined is sent as-is at
+        // runtime); the erased cast keeps the call arity unchanged.
+        return (
+          moveToFolder as unknown as (
+            destFolderId: number | string | undefined,
+            folderIds: number[],
+          ) => Promise<TOperation[]>
+        )(archiveRoomsId, items)
           .then(async (res) => {
             const result = res[0];
 
@@ -2027,7 +2486,7 @@ class FilesActionStore {
 
           .then(() => {
             const successTranslation =
-              folders.length !== 1 && Array.isArray(folders)
+              (folders as TActionItem[]).length !== 1 && Array.isArray(folders)
                 ? t("Common:ArchivedRoomsAction")
                 : Array.isArray(folders)
                   ? t("Common:ArchivedRoomAction", { name: folders[0].title })
@@ -2058,7 +2517,11 @@ class FilesActionStore {
             });
 
             return toastr.error(
-              err.message ? err.message : err.error ? err.error : err,
+              (err as Error).message
+                ? (err as Error).message
+                : (err as { error?: string }).error
+                  ? (err as { error?: string }).error
+                  : (err as string),
               null,
               0,
               true,
@@ -2070,7 +2533,13 @@ class FilesActionStore {
           });
       case "unarchive":
         this.setGroupMenuBlocked(true);
-        return moveToFolder(myRoomsId, items)
+        // FABLE5-REVIEW: same reduced call arity as the "archive" case above.
+        return (
+          moveToFolder as unknown as (
+            destFolderId: number | string | undefined,
+            folderIds: number[],
+          ) => Promise<TOperation[]>
+        )(myRoomsId, items)
           .then(async (res) => {
             const result = res[0];
 
@@ -2078,7 +2547,9 @@ class FilesActionStore {
 
             const data = result ?? null;
 
-            console.log(pbData.label, { data, res });
+            // FABLE5-REVIEW: pbData never had a label; the old JS logged
+            // undefined here.
+            console.log((pbData as { label?: string }).label, { data, res });
 
             await this.uploadDataStore.loopFilesOperations(data, pbData);
 
@@ -2092,7 +2563,7 @@ class FilesActionStore {
 
           .then(() => {
             const successTranslation =
-              folders.length !== 1 && Array.isArray(folders)
+              (folders as TActionItem[]).length !== 1 && Array.isArray(folders)
                 ? t("Common:UnarchivedRoomsAction")
                 : Array.isArray(folders)
                   ? t("Common:UnarchivedRoomAction", { name: folders[0].title })
@@ -2111,7 +2582,11 @@ class FilesActionStore {
             });
 
             return toastr.error(
-              err.message ? err.message : err.error ? err.error : err,
+              (err as Error).message
+                ? (err as Error).message
+                : (err as { error?: string }).error
+                  ? (err as { error?: string }).error
+                  : (err as string),
               null,
               0,
               true,
@@ -2125,21 +2600,25 @@ class FilesActionStore {
     }
   };
 
-  selectTag = (tag) => {
+  selectTag = (tag: {
+    label: string;
+    roomType?: number;
+    providerType?: number;
+  }) => {
     const { roomsFilter } = this.filesStore;
 
     const { setIsSectionBodyLoading } = this.clientLoadingStore;
 
     const categoryType = getCategoryType(window.DocSpace.location);
 
-    const setIsLoading = (param) => {
+    const setIsLoading = (param: boolean) => {
       setIsSectionBodyLoading(param);
     };
 
     const newFilter = roomsFilter.clone();
 
     if (tag.label !== "no-tag") {
-      const tags = newFilter.tags ? [...newFilter.tags] : [];
+      const tags = newFilter.tags ? [...(newFilter.tags as string[])] : [];
 
       if (tags.length > 0) {
         const idx = tags.findIndex((item) => item === tag.label);
@@ -2150,13 +2629,16 @@ class FilesActionStore {
         }
       }
 
+      // FABLE5-REVIEW: RoomsFilter declares type/provider as strings but the
+      // old JS assigns the numeric tag ids directly; the erased casts keep
+      // that behavior.
       if (tag.roomType) {
         if (newFilter.type && +newFilter.type === tag.roomType) return;
-        newFilter.type = tag.roomType;
+        newFilter.type = tag.roomType as unknown as string;
       } else if (tag.providerType) {
         if (newFilter.provider && +newFilter.provider === tag.providerType)
           return;
-        newFilter.provider = tag.providerType;
+        newFilter.provider = tag.providerType as unknown as string;
       } else {
         tags.push(tag.label);
         newFilter.tags = [...tags];
@@ -2182,17 +2664,17 @@ class FilesActionStore {
     );
   };
 
-  selectOption = ({ option, value }) => {
+  selectOption = ({ option, value }: { option: string; value: string }) => {
     const { roomsFilter } = this.filesStore;
 
     const { setIsSectionBodyLoading } = this.clientLoadingStore;
 
-    const setIsLoading = (param) => {
+    const setIsLoading = (param: boolean) => {
       setIsSectionBodyLoading(param);
     };
 
     const newFilter = roomsFilter.clone();
-    const tags = newFilter.tags ? [...newFilter.tags] : [];
+    const tags = newFilter.tags ? [...(newFilter.tags as string[])] : [];
     newFilter.tags = [...tags];
 
     if (option === "defaultTypeRoom") {
@@ -2209,7 +2691,7 @@ class FilesActionStore {
     );
   };
 
-  selectRowAction = (checked, file) => {
+  selectRowAction = (checked: boolean, file: TActionItem) => {
     const {
       // selected,
       // setSelected,
@@ -2231,18 +2713,14 @@ class FilesActionStore {
     }
   };
 
-  /**
-   * @param {{
-   *  id: number | string,
-   *  isRoom?: boolean,
-   *  isTemplate?: boolean,
-   *  isAIAgent?: boolean,
-   *  title?: string,
-   *  rootFolderType : import("@docspace/ui-kit/enums/index").FolderType
-   * }} item
-   * @returns {void}
-   */
-  openLocationAction = async (item) => {
+  openLocationAction = async (item: {
+    id: number | string;
+    isRoom?: boolean;
+    isTemplate?: boolean;
+    isAIAgent?: boolean;
+    title?: string;
+    rootFolderType?: FolderType;
+  }) => {
     if (this.publicRoomStore.isPublicRoom)
       return this.moveToPublicRoom(item.id);
 
@@ -2255,7 +2733,9 @@ class FilesActionStore {
     const state = { title, rootFolderType, isRoot: false, isRoom };
     const filter = FilesFilter.getDefault();
 
-    filter.folder = id;
+    // FABLE5-REVIEW: FilesFilter.folder is declared as a string but the old
+    // JS assigns raw numeric ids; toUrlParams only serializes it.
+    filter.folder = id as string;
 
     if (!isAIAgent && (isRoom || isTemplate)) {
       if (this.userStore.user?.id) {
@@ -2276,7 +2756,7 @@ class FilesActionStore {
     window.DocSpace.navigate(`${url}?${filter.toUrlParams()}`, { state });
   };
 
-  nameWithoutExtension = (title) => {
+  nameWithoutExtension = (title?: string) => {
     if (!title) return "";
 
     const indexPoint = title.lastIndexOf(".");
@@ -2289,7 +2769,11 @@ class FilesActionStore {
     return titleWithoutExtension;
   };
 
-  checkAndOpenLocationAction = async (item) => {
+  // FABLE5-REVIEW: history feeds pass partial view-models here (old JS
+  // duck typing).
+  checkAndOpenLocationAction = async (
+    item: Partial<Omit<TActionItem, "id">> & { id?: number | string },
+  ) => {
     const {
       myRoomsId,
       myFolderId,
@@ -2300,7 +2784,7 @@ class FilesActionStore {
     const { setIsSectionBodyLoading } = this.clientLoadingStore;
     const { rootFolderType } = this.selectedFolderStore;
 
-    const setIsLoading = (param) => {
+    const setIsLoading = (param: boolean) => {
       setIsSectionBodyLoading(param);
     };
 
@@ -2331,24 +2815,29 @@ class FilesActionStore {
 
     const newFilter = FilesFilter.getDefault();
 
-    newFilter.search = title;
-    newFilter.folder = parentId;
+    // FABLE5-REVIEW: FilesFilter.folder is declared as a string but the old
+    // JS assigns raw numeric ids; toUrlParams only serializes it.
+    newFilter.search = title as string;
+    newFilter.folder = parentId as unknown as string;
 
     let url;
     if (isTrashDestination) {
       const trashTarget = getSectionTrashTarget(
         window.DocSpace.location.pathname,
       );
-      newFilter.folderType = trashTarget.folderType;
+      // FABLE5-REVIEW: FilesFilter.folderType is a narrower literal union
+      // than the article-navigation targets; the value is only serialized.
+      newFilter.folderType =
+        trashTarget.folderType as unknown as typeof newFilter.folderType;
       url = trashTarget.path;
     } else {
       const destinationFolderType = SECTION_ROOT_FOLDER_TYPES.includes(
-        item.parentType,
+        item.parentType as FolderType,
       )
         ? item.parentType
         : (rootFolderTypeItem ?? rootFolderType);
 
-      let categoryType = getCategoryTypeByFolderType(
+      let categoryType: TCategoryType = getCategoryTypeByFolderType(
         destinationFolderType,
         parentId,
       );
@@ -2373,13 +2862,15 @@ class FilesActionStore {
     window.DocSpace.navigate(`${url}?${newFilter.toUrlParams()}`, { state });
   };
 
-  setThirdpartyInfo = (providerKey) => {
+  setThirdpartyInfo = (providerKey?: string) => {
     const { setConnectDialogVisible, setConnectItem } = this.dialogsStore;
     const { providers, capabilities } = this.filesSettingsStore.thirdPartyStore;
     const provider = providers.find((x) => x.provider_key === providerKey);
     const capabilityItem = capabilities.find((x) => x[0] === providerKey);
     const capability = {
-      title: capabilityItem ? capabilityItem[0] : provider.customer_title,
+      // FABLE5-REVIEW: the old JS reads customer_title unchecked when no
+      // capability entry matched (crash when the provider is missing too).
+      title: capabilityItem ? capabilityItem[0] : provider!.customer_title,
       link: capabilityItem ? capabilityItem[1] : " ",
     };
 
@@ -2400,7 +2891,13 @@ class FilesActionStore {
   //   else updateFolderBadge(id, item.new);
   // };
 
-  markAsRead = (folderIds, fileIds, item) => {
+  markAsRead = (
+    folderIds: (number | string)[],
+    // FABLE5-REVIEW: NewFilesBadge calls this with folderIds only; the old
+    // JS forwarded undefined to the API payload.
+    fileIds?: (number | string)[],
+    item?: TActionItem,
+  ) => {
     const { setSecondaryProgressBarData } =
       this.uploadDataStore.secondaryProgressDataStore;
 
@@ -2412,7 +2909,9 @@ class FilesActionStore {
       ...pbData,
     });
 
-    return markAsRead(folderIds, fileIds)
+    // FABLE5-REVIEW: onMarkAsRead passes stringified file ids; the shared
+    // markAsRead declares number[] but only serializes them.
+    return markAsRead(folderIds as number[], fileIds as number[])
       .then(async (res) => {
         const data = res[0] ?? null;
 
@@ -2425,9 +2924,9 @@ class FilesActionStore {
         const { getFileIndex, updateFileStatus } = this.filesStore;
 
         const index = getFileIndex(item.id);
-        updateFileStatus(index, item.fileStatus & ~FileStatus.IsNew);
+        updateFileStatus(index, (item.fileStatus as number) & ~FileStatus.IsNew);
       })
-      .catch((err) => toastr.error(err, null, 0, true))
+      .catch((err) => toastr.error(err as string, null, 0, true))
       .finally(() =>
         setSecondaryProgressBarData({
           operation: OPERATIONS_NAME.markAsRead,
@@ -2437,7 +2936,14 @@ class FilesActionStore {
       );
   };
 
-  moveDragItems = (destFolderId, folderTitle, destFolderInfo) => {
+  moveDragItems = (
+    destFolderId: number | string,
+    folderTitle: string,
+    destFolderInfo: TFolder & {
+      private?: boolean;
+      rootFolderId?: number | string;
+    },
+  ) => {
     const sourceInPrivateRoom = this.treeFoldersStore.isPrivacyFolder;
     const isDestInsideSameRoom =
       sourceInPrivateRoom &&
@@ -2474,8 +2980,8 @@ class FilesActionStore {
       return;
     }
 
-    const folderIds = [];
-    const fileIds = [];
+    const folderIds: number[] = [];
+    const fileIds: number[] = [];
     const deleteAfter = false;
 
     const { bufferSelection } = this.filesStore;
@@ -2489,7 +2995,9 @@ class FilesActionStore {
       (el) => !el.isFolder || el.id !== destFolderId,
     );
 
-    const isCopy = selection.findIndex((f) => f.security.Move) === -1;
+    // FABLE5-REVIEW: security is optional on the .js view-model; the old JS
+    // read it unchecked.
+    const isCopy = selection.findIndex((f) => f.security!.Move) === -1;
 
     const operationData = {
       destFolderId,
@@ -2518,19 +3026,33 @@ class FilesActionStore {
     this.checkOperationConflict(operationData);
   };
 
-  checkFileConflicts = (destFolderId, folderIds, fileIds) => {
+  checkFileConflicts = (
+    destFolderId: number | string | null | undefined,
+    folderIds: number[],
+    fileIds: number[],
+  ) => {
     this.filesStore.addActiveItems(fileIds, null, destFolderId);
     this.filesStore.addActiveItems(null, folderIds, destFolderId);
-    return checkFileConflicts(destFolderId, folderIds, fileIds);
+    return checkFileConflicts(destFolderId as number | string, folderIds, fileIds);
   };
 
-  setConflictDialogData = (conflicts, operationData) => {
+  setConflictDialogData = (
+    conflicts: (TFile | TFolder)[],
+    operationData: TOperationDataPayload,
+  ) => {
     this.dialogsStore.setConflictResolveDialogItems(conflicts);
-    this.dialogsStore.setConflictResolveDialogData(operationData);
+    // FABLE5-REVIEW: TConflictResolveDialogData in DialogsStore is a
+    // structural type of what the still-.js dialog reads; this payload is a
+    // superset of it.
+    this.dialogsStore.setConflictResolveDialogData(
+      operationData as unknown as Parameters<
+        DialogsStore["setConflictResolveDialogData"]
+      >[0],
+    );
     this.dialogsStore.setConflictResolveDialogVisible(true);
   };
 
-  setSelectedItems = (title, length) => {
+  setSelectedItems = (title?: string, length?: number) => {
     const selectionLength = length || this.filesStore.selection.length;
     const selectionTitle = title || this.filesStore.selectionTitle;
 
@@ -2544,14 +3066,14 @@ class FilesActionStore {
     }
   };
 
-  checkOperationConflict = async (operationData) => {
+  checkOperationConflict = async (operationData: TOperationDataPayload) => {
     const { destFolderId, folderIds, fileIds } = operationData;
     const { setBufferSelection } = this.filesStore;
 
     this.setSelectedItems();
 
     this.filesStore.setSelected("none");
-    let conflicts;
+    let conflicts: (TFile | TFolder)[];
 
     try {
       conflicts = await this.checkFileConflicts(
@@ -2561,7 +3083,7 @@ class FilesActionStore {
       );
     } catch (err) {
       setBufferSelection(null);
-      return toastr.error(err.message ? err.message : err);
+      return toastr.error((err as Error).message ? (err as Error).message : (err as string));
     }
 
     if (conflicts.length) {
@@ -2576,7 +3098,7 @@ class FilesActionStore {
     }
   };
 
-  isAvailableOption = (option) => {
+  isAvailableOption = (option: string) => {
     const {
       canConvertSelected,
       hasSelection,
@@ -2694,7 +3216,7 @@ class FilesActionStore {
     }
   };
 
-  convertToArray = (itemsCollection) => {
+  convertToArray = (itemsCollection: TItemsCollection) => {
     const result = Array.from(itemsCollection.values()).filter((item) => {
       return item != null;
     });
@@ -2704,10 +3226,10 @@ class FilesActionStore {
     return result;
   };
 
-  pinRooms = (t) => {
+  pinRooms = (t: TTranslation) => {
     const { selection } = this.filesStore;
 
-    const items = [];
+    const items: number[] = [];
 
     const isAIAgent = selection.some((s) => s.isAIAgent);
 
@@ -2718,10 +3240,10 @@ class FilesActionStore {
     this.setPinAction("pin", items, t, isAIAgent);
   };
 
-  unpinRooms = (t) => {
+  unpinRooms = (t: TTranslation) => {
     const { selection } = this.filesStore;
 
-    const items = [];
+    const items: number[] = [];
 
     const isAIAgent = selection.some((s) => s.isAIAgent);
 
@@ -2732,7 +3254,7 @@ class FilesActionStore {
     this.setPinAction("unpin", items, t, isAIAgent);
   };
 
-  archiveRooms = (action) => {
+  archiveRooms = (action: string) => {
     const {
       setArchiveDialogVisible,
       setQuotaWarningDialogVisible,
@@ -2753,10 +3275,10 @@ class FilesActionStore {
     }
   };
 
-  deleteRooms = (t) => {
+  deleteRooms = (t: TTranslation) => {
     const { selection } = this.filesStore;
 
-    const items = [];
+    const items: number[] = [];
 
     selection.forEach((item) => {
       items.push(item.id);
@@ -2770,7 +3292,10 @@ class FilesActionStore {
     this.deleteItemAction(items, "", translations, null, null, true);
   };
 
-  deleteRoomsAction = async (itemId, translations) => {
+  deleteRoomsAction = async (
+    itemId: number | number[],
+    translations?: Nullable<TRemoveTranslations>,
+  ) => {
     const { secondaryProgressDataStore, clearActiveOperations } =
       this.uploadDataStore;
 
@@ -2806,33 +3331,39 @@ class FilesActionStore {
         ...pbData,
       });
 
-      return toastr.error(err.message ? err.message : err, null, 0, true);
+      return toastr.error((err as Error).message ? (err as Error).message : (err as string), null, 0, true);
     } finally {
       this.setGroupMenuBlocked(false);
       setTimeout(() => clearActiveOperations(null, id), TIMEOUT);
     }
   };
 
-  setProcessCreatingRoomFromData = (processCreatingRoomFromData) => {
+  setProcessCreatingRoomFromData = (processCreatingRoomFromData: boolean) => {
     this.processCreatingRoomFromData = processCreatingRoomFromData;
   };
 
-  onClickCreateRoom = (item, context = "sidebar") => {
+  onClickCreateRoom = (item?: TActionItem, context = "sidebar") => {
     this.setProcessCreatingRoomFromData(true);
     const event = new CustomEvent(Events.ROOM_CREATE, {
       detail: { parentId: this.selectedFolderStore.id, context },
     });
     if (item && item.isFolder) {
-      event.title = item.title;
+      // FABLE5-REVIEW: the still-.js GlobalEvents component reads this extra
+      // field off the dispatched CustomEvent.
+      (event as CustomEvent & { title?: string }).title = item.title;
     }
     window.dispatchEvent(event);
   };
 
-  changeRoomQuota = (items, successCallback, abortCallback) => {
+  changeRoomQuota = (
+    items: (TActionItem | number)[],
+    successCallback?: (...args: unknown[]) => unknown,
+    abortCallback?: (...args: unknown[]) => unknown,
+  ) => {
     const event = new Event(Events.CHANGE_QUOTA);
 
     const itemsIDs = items.map((item) => {
-      return item?.id ? item.id : item;
+      return (item as TActionItem)?.id ? (item as TActionItem).id : item;
     });
 
     const payload = {
@@ -2843,16 +3374,22 @@ class FilesActionStore {
       abortCallback,
     };
 
-    event.payload = payload;
+    // FABLE5-REVIEW: the still-.js GlobalEvents component reads this extra
+    // field off the dispatched Event.
+    (event as Event & { payload?: typeof payload }).payload = payload;
 
     window.dispatchEvent(event);
   };
 
-  changeAIAgentsQuota = (items, successCallback, abortCallback) => {
+  changeAIAgentsQuota = (
+    items: (TActionItem | number)[],
+    successCallback?: (...args: unknown[]) => unknown,
+    abortCallback?: (...args: unknown[]) => unknown,
+  ) => {
     const event = new Event(Events.CHANGE_QUOTA);
 
     const itemsIDs = items.map((item) => {
-      return item?.id ? item.id : item;
+      return (item as TActionItem)?.id ? (item as TActionItem).id : item;
     });
 
     const payload = {
@@ -2863,76 +3400,90 @@ class FilesActionStore {
       abortCallback,
     };
 
-    event.payload = payload;
+    // FABLE5-REVIEW: the still-.js GlobalEvents component reads this extra
+    // field off the dispatched Event.
+    (event as Event & { payload?: typeof payload }).payload = payload;
 
     window.dispatchEvent(event);
   };
 
-  disableRoomQuota = async (items, t) => {
+  disableRoomQuota = async (items: (TActionItem | number)[], t: TTranslation) => {
     const { setCustomRoomQuota } = this.filesStore;
 
     const userIDs = items.map((item) => {
-      return item?.id ? item.id : item;
-    });
+      return (item as TActionItem)?.id ? (item as TActionItem).id : item;
+    }) as number[];
 
     try {
       await setCustomRoomQuota(userIDs, -1);
       toastr.success(t("Common:StorageQuotaDisabled"));
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as string);
     }
   };
 
-  disableAIAgentQuota = async (items, t) => {
+  disableAIAgentQuota = async (
+    items: (TActionItem | number)[],
+    t: TTranslation,
+  ) => {
     const { setCustomAIAgentQuota } = this.filesStore;
 
     const agentIDs = items.map((item) => {
-      return item?.id ? item.id : item;
-    });
+      return (item as TActionItem)?.id ? (item as TActionItem).id : item;
+    }) as number[];
 
     try {
       await setCustomAIAgentQuota(agentIDs, -1);
       toastr.success(t("Common:StorageQuotaDisabled"));
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as string);
     }
   };
 
-  resetRoomQuota = async (items, t) => {
+  resetRoomQuota = async (items: (TActionItem | number)[], t: TTranslation) => {
     const { resetRoomQuota } = this.filesStore;
 
     const userIDs = items.map((item) => {
-      return item?.id ? item.id : item;
-    });
+      return (item as TActionItem)?.id ? (item as TActionItem).id : item;
+    }) as number[];
 
     try {
       await resetRoomQuota(userIDs);
       toastr.success(t("Common:StorageQuotaReset"));
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as string);
     }
   };
 
-  resetAIAgentQuota = async (items, t) => {
+  resetAIAgentQuota = async (
+    items: (TActionItem | number)[],
+    t: TTranslation,
+  ) => {
     const { resetAIAgentQuota } = this.filesStore;
 
     const userIDs = items.map((item) => {
-      return item?.id ? item.id : item;
-    });
+      return (item as TActionItem)?.id ? (item as TActionItem).id : item;
+    }) as number[];
 
     try {
       await resetAIAgentQuota(userIDs);
       toastr.success(t("Common:StorageQuotaReset"));
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as string);
     }
   };
 
-  getOption = (option, t) => {
-    return this.filesHeaderOptionStore.getOption(option, t);
+  getOption = (option: string, t: TTranslation) => {
+    // FABLE5-REVIEW: FilesHeaderOptionStore types `t` as the branded i18next
+    // TFunction; this store receives plain translation callbacks from
+    // still-.js callers, hence the erased cast.
+    return this.filesHeaderOptionStore.getOption(
+      option,
+      t as unknown as Parameters<FilesHeaderOptionStore["getOption"]>[1],
+    );
   };
 
-  getRoomsFolderOptions = (itemsCollection, t) => {
+  getRoomsFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
     let pinName = "unpin";
     const { selection } = this.filesStore;
 
@@ -2970,7 +3521,7 @@ class FilesActionStore {
     return this.convertToArray(itemsCollection);
   };
 
-  getAIAgentsFolderOptions = (itemsCollection, t) => {
+  getAIAgentsFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
     let pinName = "unpin";
     const { selection } = this.filesStore;
 
@@ -2994,7 +3545,7 @@ class FilesActionStore {
     return this.convertToArray(itemsCollection);
   };
 
-  getArchiveRoomsFolderOptions = (itemsCollection, t) => {
+  getArchiveRoomsFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
     const archive = this.getOption("unarchive", t);
     const deleteOption = this.getOption("delete-room", t);
     const showOption = this.getOption("show-info", t);
@@ -3007,7 +3558,7 @@ class FilesActionStore {
     return this.convertToArray(itemsCollection);
   };
 
-  getTemplatesFolderOptions = (itemsCollection, t) => {
+  getTemplatesFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
     const deleteOption = this.getOption("delete", t);
 
     itemsCollection.set("delete", deleteOption);
@@ -3015,7 +3566,7 @@ class FilesActionStore {
     return this.convertToArray(itemsCollection);
   };
 
-  getAnotherFolderOptions = (itemsCollection, t) => {
+  getAnotherFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
     const createRoom = this.getOption("create-room", t);
     const download = this.getOption("download", t);
     const downloadAs = this.getOption("downloadAs", t);
@@ -3038,7 +3589,7 @@ class FilesActionStore {
     return this.convertToArray(itemsCollection);
   };
 
-  getRecentFolderOptions = (itemsCollection, t) => {
+  getRecentFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
     const download = this.getOption("download", t);
     const downloadAs = this.getOption("downloadAs", t);
     const showInfo = this.getOption("show-info", t);
@@ -3053,7 +3604,7 @@ class FilesActionStore {
     return this.convertToArray(itemsCollection);
   };
 
-  getShareFolderOptions = (itemsCollection, t) => {
+  getShareFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
     const { setDeleteDialogVisible, setUnsubscribe } = this.dialogsStore;
 
     const download = this.getOption("download", t);
@@ -3081,7 +3632,7 @@ class FilesActionStore {
     return this.convertToArray(itemsCollection);
   };
 
-  getPrivacyFolderOption = (itemsCollection, t) => {
+  getPrivacyFolderOption = (itemsCollection: TItemsCollection, t: TTranslation) => {
     const moveTo = this.getOption("moveTo", t);
     const deleteOption = this.getOption("delete", t);
     const download = this.getOption("download", t);
@@ -3096,7 +3647,7 @@ class FilesActionStore {
     return this.convertToArray(itemsCollection);
   };
 
-  getFavoritesFolderOptions = (itemsCollection, t) => {
+  getFavoritesFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
     // const { selection } = this.filesStore;
     const download = this.getOption("download", t);
     const downloadAs = this.getOption("downloadAs", t);
@@ -3122,7 +3673,7 @@ class FilesActionStore {
     return this.convertToArray(itemsCollection);
   };
 
-  getRecycleBinFolderOptions = (itemsCollection, t) => {
+  getRecycleBinFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
     const { setRestorePanelVisible } = this.dialogsStore;
 
     const download = this.getOption("download", t);
@@ -3145,7 +3696,7 @@ class FilesActionStore {
     return this.convertToArray(itemsCollection);
   };
 
-  getHeaderMenu = (t) => {
+  getHeaderMenu = (t: TTranslation) => {
     const {
       isFavoritesFolder,
       isRecycleBinFolder,
@@ -3187,9 +3738,9 @@ class FilesActionStore {
     return this.getAnotherFolderOptions(itemsCollection, t);
   };
 
-  onMarkAsRead = (item) => this.markAsRead([], [`${item.id}`], item);
+  onMarkAsRead = (item: TActionItem) => this.markAsRead([], [`${item.id}`], item);
 
-  isExpiredLinkAsync = async (item, withLoader = false) => {
+  isExpiredLinkAsync = async (item: TActionItem, withLoader = false) => {
     if (item.isLinkExpired) return true;
     if (!item.external || !item.requestToken) return false;
 
@@ -3207,7 +3758,11 @@ class FilesActionStore {
           }),
         );
 
-      const response = await api.rooms.validatePublicRoomKey(item.requestToken);
+      // FABLE5-REVIEW: request() is typed as Promise<T> | undefined; the old
+      // JS read `.status` unchecked.
+      const response = (await api.rooms.validatePublicRoomKey(
+        item.requestToken,
+      ))!;
 
       const isExpired = response.status === ValidationStatus.Expired;
 
@@ -3255,7 +3810,11 @@ class FilesActionStore {
     }
   };
 
-  openFileAction = async (item, t, e) => {
+  openFileAction = async (
+    item: TActionItem,
+    t: TTranslation,
+    e?: Parameters<typeof openingNewTab>[1],
+  ) => {
     if (
       item.external &&
       (item.isLinkExpired || (await this.isExpiredLinkAsync(item, true)))
@@ -3278,13 +3837,22 @@ class FilesActionStore {
       return toastr.error(description, title);
     }
 
-    if (isLockedSharedRoom(item))
-      return this.dialogsStore.setPasswordEntryDialog(true, item);
+    if (isLockedSharedRoom(item as unknown as TRoom))
+      return this.dialogsStore.setPasswordEntryDialog(
+        true,
+        item as unknown as TRoom,
+      );
 
     this.openItemAction(item, t, e);
   };
 
-  openItemAction = async (item, t, e) => {
+  openItemAction = async (
+    item: TActionItem,
+    // FABLE5-REVIEW: NewFilesBadge/history callers invoke this with the item
+    // only; the old JS crashed on t() in the restricted-download branch.
+    t?: TTranslation,
+    e?: Parameters<typeof openingNewTab>[1],
+  ) => {
     const { openDocEditor, setSelection, categoryType } = this.filesStore;
     const { currentDeviceType, frameConfig, isFrame } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
@@ -3303,7 +3871,7 @@ class FilesActionStore {
       return this.moveToPublicRoom(item.id);
     }
 
-    const setIsLoading = (param) => {
+    const setIsLoading = (param: boolean) => {
       setIsSectionBodyLoading(param);
     };
 
@@ -3339,17 +3907,24 @@ class FilesActionStore {
       }
 
       if (!isAIAgents() && fileItemsList && enablePlugins) {
-        let currPluginItem = null;
+        // FABLE5-REVIEW: TS cannot track the assignment inside the forEach
+        // callback; the erased casts keep the old unchecked reads.
+        let currPluginItem: Nullable<TPluginFileItem> = null;
 
         fileItemsList.forEach((i) => {
           if (i.key === item.fileExst) currPluginItem = i.value;
         });
 
         if (currPluginItem) {
-          const correctDevice = currPluginItem.devices
-            ? currPluginItem.devices.includes(currentDeviceType)
+          const correctDevice = (currPluginItem as TPluginFileItem).devices
+            ? (
+                (currPluginItem as TPluginFileItem).devices as unknown as string[]
+              ).includes(currentDeviceType)
             : true;
-          if (correctDevice) return currPluginItem.onClick(item);
+          if (correctDevice)
+            return (currPluginItem as TPluginFileItem).onClick(
+              item as unknown as TFile,
+            );
         }
       }
 
@@ -3362,7 +3937,7 @@ class FilesActionStore {
         return;
       }
 
-      if ((fileStatus & FileStatus.IsNew) === FileStatus.IsNew)
+      if (((fileStatus as number) & FileStatus.IsNew) === FileStatus.IsNew)
         await this.onMarkAsRead(item);
 
       if (canWebEdit || canViewedDocs) {
@@ -3370,7 +3945,11 @@ class FilesActionStore {
 
         if (webUrl) {
           const shareWebUrl = new URL(webUrl);
-          shareKey = getObjectByLocation(shareWebUrl)?.share;
+          // FABLE5-REVIEW: getObjectByLocation expects a router Location but
+          // only reads `.search`, which URL also provides (old JS behavior).
+          shareKey = getObjectByLocation(
+            shareWebUrl as unknown as Parameters<typeof getObjectByLocation>[0],
+          )?.share as string | undefined;
         }
 
         const isPDF = item.fileExst === ".pdf";
@@ -3397,14 +3976,14 @@ class FilesActionStore {
         return;
       }
 
-      if (!item.security.Download) {
-        toastr.error(t("Files:FileDownloadingIsRestricted"));
+      if (!item.security!.Download) {
+        toastr.error(t!("Files:FileDownloadingIsRestricted"));
         return;
       }
 
       if (item.encrypted) {
         return this.downloadEncryptedFile(item).catch((err) =>
-          toastr.error(err),
+          toastr.error(err as string),
         );
       }
 
@@ -3430,7 +4009,9 @@ class FilesActionStore {
     const { roomType } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
     const { clearFiles, setBufferSelection, setSelection } = this.filesStore;
-    const { insideGroupBackUrl } = this.peopleStore.groupsStore;
+    // FABLE5-REVIEW: groupsStore is created in the PeopleStore constructor
+    // but typed as nullable; the old JS destructured it unchecked.
+    const { insideGroupBackUrl } = this.peopleStore.groupsStore!;
     const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
     if (isLoading) return;
 
@@ -3445,10 +4026,14 @@ class FilesActionStore {
 
     const isRoom = !!roomType;
 
-    const urlFilter = getObjectByLocation(window.DocSpace.location);
+    const urlFilter = getObjectByLocation(
+      window.DocSpace.location as unknown as Parameters<
+        typeof getObjectByLocation
+      >[0],
+    );
 
     const isArchivedRoom = !!(
-      CategoryType.Trash !== categoryType && urlFilter?.folder
+      CategoryType.Trash !== (categoryType as TCategoryType) && urlFilter?.folder
     );
 
     if (
@@ -3539,7 +4124,9 @@ class FilesActionStore {
   };
 
   moveToRoomsPage = () => {
-    const categoryType = getCategoryType(window.DocSpace.location);
+    const categoryType = getCategoryType(
+      window.DocSpace.location,
+    ) as TCategoryType;
 
     const filter = RoomsFilter.getDefault();
 
@@ -3567,7 +4154,7 @@ class FilesActionStore {
       rootFolderType: this.selectedFolderStore.rootFolderType,
     };
 
-    if (categoryType == CategoryType.Archive) {
+    if ((categoryType as TCategoryType) == CategoryType.Archive) {
       filter.searchArea = RoomSearchArea.Archive;
     }
 
@@ -3627,14 +4214,14 @@ class FilesActionStore {
     );
   };
 
-  moveToPublicRoom = (folderId) => {
+  moveToPublicRoom = (folderId?: number | string) => {
     const { navigationPath, rootFolderType } = this.selectedFolderStore;
     const { publicRoomKey } = this.publicRoomStore;
 
     const id = folderId || this.selectedFolderStore.parentId;
     const path = getCategoryUrl(CategoryType.PublicRoom);
     const filter = FilesFilter.getDefault();
-    filter.folder = id;
+    filter.folder = id as string;
 
     const state = {
       title: navigationPath[0]?.title || "",
@@ -3662,7 +4249,7 @@ class FilesActionStore {
     filter.sortBy = filterObj.sortBy;
     filter.sortOrder = filterObj.sortOrder;
 
-    filter.folder = id;
+    filter.folder = id as unknown as string;
 
     const categoryType = getCategoryType(window.DocSpace.location);
     const path = getCategoryUrl(categoryType, id);
@@ -3686,17 +4273,17 @@ class FilesActionStore {
     });
   };
 
-  setGroupMenuBlocked = (blocked) => {
+  setGroupMenuBlocked = (blocked: boolean) => {
     this.isGroupMenuBlocked = blocked;
   };
 
   preparingDataForCopyingToRoom = async (
-    destFolderId,
-    selections,
-    destFolderInfo,
+    destFolderId: number | string,
+    selections: TActionItem[],
+    destFolderInfo?: TFolder | TRoom,
   ) => {
-    const fileIds = [];
-    let folderIds = [];
+    const fileIds: number[] = [];
+    let folderIds: number[] = [];
 
     if (!selections.length) return;
     const oneFolder = selections.length === 1 && selections[0].isFolder;
@@ -3705,7 +4292,14 @@ class FilesActionStore {
       folderIds = [selections[0].id];
 
       try {
-        const selectedFolder = await getFolder(selections[0].id);
+        // FABLE5-REVIEW: the shared getFolder declares `filter` as required,
+        // but the old JS always called it with the id only; the erased cast
+        // keeps the call arity unchanged.
+        const selectedFolder = await (
+          getFolder as unknown as (
+            folderId: number | string,
+          ) => Promise<TGetFolder>
+        )(selections[0].id);
         const { folders, files, total } = selectedFolder;
 
         if (total === 0) {
@@ -3717,7 +4311,7 @@ class FilesActionStore {
         const title = folders.length ? folders[0].title : files[0].title;
         this.setSelectedItems(title, total);
       } catch (err) {
-        toastr.error(err);
+        toastr.error(err as string);
       }
     }
 
@@ -3733,7 +4327,7 @@ class FilesActionStore {
 
     const operationData = {
       destFolderId,
-      destFolderInfo,
+      destFolderInfo: destFolderInfo as TFolder,
       folderIds,
       fileIds,
       deleteAfter: false,
@@ -3746,20 +4340,26 @@ class FilesActionStore {
     return this.uploadDataStore.itemOperationToFolder(operationData);
   };
 
-  onLeaveRoom = (t, isOwner = false, force = false) => {
+  onLeaveRoom = (t: TTranslation, isOwner = false, force = false) => {
     const { selection, setSelected, bufferSelection } = this.filesStore;
     const { user } = this.userStore;
 
-    const room = selection.length
-      ? selection[0]
-      : bufferSelection
-        ? bufferSelection
-        : this.selectedFolderStore;
+    // FABLE5-REVIEW: the fallback is the selected-folder store snapshot; only
+    // id/isAIAgent are read from it, matching the old JS duck typing.
+    const room = (
+      selection.length
+        ? selection[0]
+        : bufferSelection
+          ? bufferSelection
+          : this.selectedFolderStore
+    ) as TActionItem;
 
     const roomId = room.id;
     const isAIAgent = room.isAIAgent;
 
-    const isAdmin = user.isOwner || user.isAdmin;
+    // FABLE5-REVIEW: user is nullable on UserStore; the old JS read the
+    // flags unchecked (crash when logged out), the `!` keeps that behavior.
+    const isAdmin = user!.isOwner || user!.isAdmin;
     const isRoot = this.selectedFolderStore.isRootFolder;
 
     const roomSuccessText = isOwner
@@ -3770,11 +4370,14 @@ class FilesActionStore {
       : t("Files:YouLeftTheAgent");
     const successText = isAIAgent ? agentSuccessText : roomSuccessText;
 
-    return api.rooms
-      .updateRoomMemberRole(roomId, {
+    // FABLE5-REVIEW: updateRoomMemberRole is untyped in shared/api/rooms
+    // (@ts-nocheck file); the cast pins down the observed Promise result.
+    return (
+      api.rooms.updateRoomMemberRole(roomId, {
         invitations: [{ id: user?.id, access: ShareAccessRights.None }],
         force,
-      })
+      }) as Promise<unknown>
+    )
       .then(() => {
         if (!isAdmin) {
           if (!isRoot) {
@@ -3801,7 +4404,7 @@ class FilesActionStore {
       });
   };
 
-  changeRoomOwner = (t, userId, isLeaveChecked = false) => {
+  changeRoomOwner = (t: TTranslation, userId: string, isLeaveChecked = false) => {
     const { setFolder, setSelected, selection, bufferSelection } =
       this.filesStore;
     const {
@@ -3820,7 +4423,7 @@ class FilesActionStore {
         : id;
 
     return api.files
-      .setFileOwner(userId, [roomId])
+      .setFileOwner(userId, [roomId] as number[])
       .then(async (res) => {
         if (isRootFolder) {
           setFolder(res[0]);
@@ -3829,27 +4432,29 @@ class FilesActionStore {
           setSecurity(res[0].security);
           setAccess(res[0].access);
 
-          const isMe = userId === this.userStore.user.id;
+          // FABLE5-REVIEW: user is nullable on UserStore; the old JS read
+          // `.id` unchecked, the `!` keeps that behavior.
+          const isMe = userId === this.userStore.user!.id;
           if (isMe) setInRoom(true);
         }
 
         if (isLeaveChecked) await this.onLeaveRoom(t);
         else toastr.success(t("Common:AppointNewOwner"));
       })
-      .catch((e) => toastr.error(e))
+      .catch((e) => toastr.error(e as string))
       .finally(() => {
         setSelected("none");
       });
   };
 
-  onClickRemoveFromRecent = (selection, t) => {
+  onClickRemoveFromRecent = (selection: TActionItem[], t: TTranslation) => {
     const { setSelected } = this.filesStore;
     const ids = selection.map((item) => item.id);
     this.removeFilesFromRecent(ids, t);
     setSelected("none");
   };
 
-  removeFilesFromRecent = async (fileIds, t) => {
+  removeFilesFromRecent = async (fileIds: number[], t: TTranslation) => {
     const { refreshFiles } = this.filesStore;
 
     await deleteFilesFromRecent(fileIds);
@@ -3857,17 +4462,19 @@ class FilesActionStore {
     toastr.success(t("Files:RemovedFromRecent"));
   };
 
-  onCreateRoomFromTemplate = (item, addSelection) => {
+  onCreateRoomFromTemplate = (item: TActionItem, addSelection?: boolean) => {
     const event = new CustomEvent(Events.ROOM_CREATE, {
       detail: { parentId: this.selectedFolderStore.id, context: "template" },
     });
-    event.item = item;
+    // FABLE5-REVIEW: the still-.js GlobalEvents component reads this extra
+    // field off the dispatched CustomEvent.
+    (event as CustomEvent & { item?: TActionItem }).item = item;
     window.dispatchEvent(event);
 
     if (addSelection) this.filesStore.setBufferSelection(item);
   };
 
-  copyFromTemplateForm = async (fileInfo) => {
+  copyFromTemplateForm = async (fileInfo: TFile) => {
     const selectedItemId = this.selectedFolderStore.id;
     const fileIds = [fileInfo.id];
 
@@ -3884,7 +4491,11 @@ class FilesActionStore {
       fileInfo.title,
     );
 
-    const conflicts = await checkFileConflicts(selectedItemId, [], fileIds);
+    const conflicts = await checkFileConflicts(
+      selectedItemId as number | string,
+      [],
+      fileIds,
+    );
 
     if (conflicts.length) {
       return this.setConflictDialogData(conflicts, operationData);
@@ -3895,7 +4506,7 @@ class FilesActionStore {
       .catch((error) => toastr.error(error));
   };
 
-  copyFileToAiKnowledge = async (filesInfo) => {
+  copyFileToAiKnowledge = async (filesInfo: TActionItem[]) => {
     const selectedItemId = this.aiRoomStore.knowledgeId;
     const fileIds = filesInfo.map((f) => f.id);
 
@@ -3918,19 +4529,31 @@ class FilesActionStore {
       .catch((error) => toastr.error(error));
   };
 
-  setListOrder = (startIndex, finalIndex, indexMovedFromBottom = false) => {
+  setListOrder = (
+    startIndex: number,
+    finalIndex: number,
+    indexMovedFromBottom = false,
+  ) => {
     const { setUpdateSelection } = this.indexingStore;
-    const newFilesList = JSON.parse(JSON.stringify(this.filesStore.filesList));
+    // FABLE5-REVIEW: in the indexing view every list item carries an order
+    // string; the old JS relied on that unchecked.
+    const newFilesList = JSON.parse(
+      JSON.stringify(this.filesStore.filesList),
+    ) as (TActionItem & { order: string })[];
 
     let i = startIndex;
     while (i !== finalIndex) {
       if (newFilesList[i].order.includes(".")) {
         const splitItem = newFilesList[i].order.split(".");
 
+        // FABLE5-REVIEW: the old JS stores numbers into the string[] before
+        // join(); the erased casts keep that behavior.
         if (indexMovedFromBottom) {
-          splitItem[splitItem.length - 1] = +splitItem.at(-1) + 1;
+          splitItem[splitItem.length - 1] = (+splitItem.at(-1)! +
+            1) as unknown as string;
         } else {
-          splitItem[splitItem.length - 1] = +splitItem.at(-1) - 1;
+          splitItem[splitItem.length - 1] = (+splitItem.at(-1)! -
+            1) as unknown as string;
         }
 
         newFilesList[i].order = splitItem.join(".");
@@ -3955,11 +4578,17 @@ class FilesActionStore {
     const newFolders = previousFilesList.filter((f) => f.isFolder);
     const newFiles = previousFilesList.filter((f) => !f.isFolder);
 
-    setFiles(newFiles);
-    setFolders(newFolders);
+    // FABLE5-REVIEW: previousFilesList holds the same .js filesList
+    // view-models this store works with; IndexingStore types them minimally.
+    setFiles(newFiles as unknown as TActionItem[]);
+    setFolders(newFolders as unknown as TActionItem[]);
   };
 
-  setFilesOrder = (currentItem, replaceableItem, indexMovedFromBottom) => {
+  setFilesOrder = (
+    currentItem: TActionItem,
+    replaceableItem: TActionItem,
+    indexMovedFromBottom?: boolean,
+  ) => {
     const { filesList, setFiles, setFolders } = this.filesStore;
     const { setPreviousFilesList, updateSelection, setUpdateSelection } =
       this.indexingStore;
@@ -3975,17 +4604,17 @@ class FilesActionStore {
       (f) => f.order === replaceableItem.order,
     );
 
-    let newFilesList;
+    let newFilesList: ReturnType<typeof this.setListOrder>;
     if (indexMovedFromBottom) {
       newFilesList = this.setListOrder(
         replaceableIndex,
         currentIndex,
         indexMovedFromBottom,
       );
-      newFilesList[currentIndex].order = replaceableItem.order;
+      newFilesList[currentIndex].order = replaceableItem.order!;
     } else {
       newFilesList = this.setListOrder(currentIndex, replaceableIndex + 1);
-      newFilesList[currentIndex].order = filesList[replaceableIndex].order;
+      newFilesList[currentIndex].order = filesList[replaceableIndex].order!;
     }
     setUpdateSelection([newFilesList[currentIndex]]);
 
@@ -3996,7 +4625,12 @@ class FilesActionStore {
     setFolders(newFolders);
   };
 
-  changeIndex = async (action, item, t, isLastItem = true) => {
+  changeIndex = async (
+    action: VDRIndexingAction,
+    item: TActionItem,
+    t: TTranslation,
+    isLastItem = true,
+  ) => {
     const { filesList, bufferSelection } = this.filesStore;
 
     const index = filesList.findIndex(
@@ -4010,11 +4644,15 @@ class FilesActionStore {
     )
       return;
 
-    const selection = this.filesStore.selection.length
-      ? this.filesStore.selection
-      : [bufferSelection];
+    // FABLE5-REVIEW: with no selection the old JS worked on [null] and
+    // crashed below; the erased cast keeps that behavior.
+    const selection = (
+      this.filesStore.selection.length
+        ? this.filesStore.selection
+        : [bufferSelection]
+    ) as TActionItem[];
 
-    let replaceable;
+    let replaceable: TActionItem | undefined;
     let current = item;
 
     switch (action) {
@@ -4035,11 +4673,11 @@ class FilesActionStore {
     if (!replaceable || current.order === replaceable.order) return;
 
     try {
-      let indexMovedFromBottom = +current.order > +replaceable.order;
-      if (current.order.includes(".")) {
+      let indexMovedFromBottom = +current.order! > +replaceable.order!;
+      if (current.order!.includes(".")) {
         indexMovedFromBottom =
-          +current.order.split(".").at(-1) >
-          +replaceable.order.split(".").at(-1);
+          +current.order!.split(".").at(-1)! >
+          +replaceable.order!.split(".").at(-1)!;
       }
 
       const newRepIndex = filesList.findIndex(
@@ -4059,14 +4697,17 @@ class FilesActionStore {
     }
   };
 
-  saveIndexOfFiles = async (t) => {
+  saveIndexOfFiles = async (t: TTranslation) => {
     const { getIndexingArray } = this.indexingStore;
 
     try {
       const items = getIndexingArray();
 
       if (items.length > 0) {
-        await changeIndex(items);
+        // FABLE5-REVIEW: the shared TIndexItems declares order as a string,
+        // but IndexingStore collects the raw (number|string) orders; the API
+        // only serializes them (old JS behavior).
+        await changeIndex(items as unknown as TIndexItems[]);
       }
     } catch (e) {
       console.error(e);
@@ -4074,7 +4715,7 @@ class FilesActionStore {
     }
   };
 
-  reorderIndexOfFiles = async (id, t) => {
+  reorderIndexOfFiles = async (id: number, t: TTranslation) => {
     const { setIsIndexEditingMode } = this.indexingStore;
 
     try {
@@ -4089,7 +4730,7 @@ class FilesActionStore {
     }
   };
 
-  checkExportRoomIndexProgress = async () => {
+  checkExportRoomIndexProgress = async (): Promise<TExportRoomIndexTask> => {
     return new Promise((resolve, reject) => {
       setTimeout(async () => {
         try {
@@ -4103,12 +4744,15 @@ class FilesActionStore {
     });
   };
 
-  loopExportRoomIndexStatusChecking = async (pbData) => {
+  loopExportRoomIndexStatusChecking = async (pbData: {
+    operation: TOperationName;
+    operationId: string;
+  }): Promise<TExportRoomIndexTask> => {
     const { setSecondaryProgressBarData } =
       this.uploadDataStore.secondaryProgressDataStore;
 
     let isCompleted = false;
-    let res;
+    let res: TExportRoomIndexTask | undefined;
 
     while (!isCompleted) {
       res = await this.checkExportRoomIndexProgress();
@@ -4127,7 +4771,9 @@ class FilesActionStore {
       }
     }
 
-    return res;
+    // FABLE5-REVIEW: the loop only exits once a progress response arrived;
+    // the `!` keeps the old unchecked return.
+    return res!;
   };
 
   checkPreviousExportRoomIndexInProgress = async () => {
@@ -4140,18 +4786,18 @@ class FilesActionStore {
 
       return previousExport && !previousExport.isCompleted;
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as string);
     }
   };
 
-  onSuccessExportRoomIndex = (t, fileName, fileUrl) => {
+  onSuccessExportRoomIndex = (t: TTranslation, fileName: string, fileUrl: string) => {
     const { openOnNewPage } = this.filesSettingsStore;
     const urlWithProxy = combineUrl(window.ClientConfig?.proxy?.url, fileUrl);
 
     showSuccessExportRoomIndexToast(t, fileName, urlWithProxy, openOnNewPage);
   };
 
-  exportRoomIndex = async (t, roomId) => {
+  exportRoomIndex = async (t: TTranslation, roomId: number) => {
     const previousExportInProgress =
       await this.checkPreviousExportRoomIndexInProgress();
 
@@ -4178,7 +4824,7 @@ class FilesActionStore {
     this.alreadyExportingRoomIndex = true;
 
     try {
-      let res = await api.rooms.exportRoomIndex(roomId);
+      let res: TExportRoomIndexTask = await api.rooms.exportRoomIndex(roomId);
 
       if (!res.isCompleted) {
         res = await this.loopExportRoomIndexStatusChecking(pbData);
@@ -4207,13 +4853,13 @@ class FilesActionStore {
         operationId: pbData.operationId,
       });
     } catch (e) {
-      toastr.error(e, null, 0, true);
+      toastr.error(e as string, null, 0, true);
     } finally {
       this.alreadyExportingRoomIndex = false;
     }
   };
 
-  getPublicKey = async (folder) => {
+  getPublicKey = async (folder: TActionItem | TFolder) => {
     if (folder.shared) {
       const filterObj = FilesFilter.getFilter(window.location);
 
@@ -4227,14 +4873,14 @@ class FilesActionStore {
 
         return key;
       } catch (error) {
-        toastr.error(error);
+        toastr.error(error as string);
       }
     }
 
     return null;
   };
 
-  onDeleteVersionFile = async (fileId, versions) => {
+  onDeleteVersionFile = async (fileId: number, versions: number[]) => {
     const { secondaryProgressDataStore, clearActiveOperations } =
       this.uploadDataStore;
 
@@ -4276,7 +4922,11 @@ class FilesActionStore {
           setVersionSelectedForDeletion(null);
           setVersionDeletionProcess(false);
 
-          if (isVisible) fetchFileVersions(fileId, null, null, true);
+          // FABLE5-REVIEW: fetchFileVersions declares requestToken as an
+          // optional string; the old JS passed null (only forwarded when
+          // truthy downstream).
+          if (isVisible)
+            fetchFileVersions(fileId, null, null as unknown as string, true);
 
           clearActiveOperations([fileId]);
 
@@ -4296,11 +4946,11 @@ class FilesActionStore {
 
       setVersionSelectedForDeletion(null);
       setVersionDeletionProcess(false);
-      return toastr.error(err.message ? err.message : err);
+      return toastr.error((err as Error).message ? (err as Error).message : (err as string));
     }
   };
 
-  runOperations = (operations = []) => {
+  runOperations = (operations: string[] = []) => {
     const { files, folders, activeFiles, activeFolders, addActiveItems } =
       this.filesStore;
 
@@ -4349,8 +4999,8 @@ class FilesActionStore {
     }
 
     let currentFileIndex = 0;
-    const operationResults = [];
-    let errorMessage = null;
+    const operationResults: string[] = [];
+    let errorMessage: string | null = null;
 
     operations.forEach((op) => {
       if (errorMessage) return;
@@ -4446,7 +5096,8 @@ class FilesActionStore {
 
           const operationData = {
             destFolderId: targetFolder.id,
-            destFolderInfo: targetFolder,
+            // FABLE5-REVIEW: same TFolder-vs-view-model mismatch as above.
+            destFolderInfo: targetFolder as unknown as TFolder,
             fileIds: [fileToProcess.id],
             folderIds: [],
             deleteAfter: false,
@@ -4508,7 +5159,7 @@ class FilesActionStore {
     return errorMessage || `Started ${operationResults.join(" and ")}`;
   };
 
-  retryVectorization = async (files) => {
+  retryVectorization = async (files: TActionItem[]) => {
     const { updateFileVectorizationStatus } = this.filesStore;
 
     const filteredFiles = files.filter((file) => file.security?.Vectorization);
@@ -4528,7 +5179,7 @@ class FilesActionStore {
         updateFileVectorizationStatus(fileId, VectorizationStatus.Failed),
       );
 
-      toastr.error(e);
+      toastr.error(e as string);
       console.error(e);
     }
   };

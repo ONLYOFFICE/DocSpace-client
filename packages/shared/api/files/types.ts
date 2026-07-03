@@ -286,6 +286,9 @@ export type TThirdParty = {
   providerKey: string;
   provider_id?: string;
   customer_title?: string;
+  /** Snake-case variant returned by the providers endpoint; read by
+   * FilesActionsStore.setThirdpartyInfo. */
+  provider_key?: string;
 };
 
 export type TThirdParties = TThirdParty[];

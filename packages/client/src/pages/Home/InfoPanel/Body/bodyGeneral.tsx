@@ -141,7 +141,11 @@ const InfoPanelBodyGeneral = ({
   const deferredCurrentView = React.useDeferredValue(currentView);
 
   const isExpiredLink = useEventCallback(() =>
-    checkIsExpiredLinkAsync(selection),
+    // FABLE5-REVIEW: type-only cast — isExpiredLinkAsync takes the .js
+    // view-model item type; the info-panel selection is compatible at runtime.
+    checkIsExpiredLinkAsync(
+      selection as unknown as Parameters<typeof checkIsExpiredLinkAsync>[0],
+    ),
   );
 
   useEffect(() => {

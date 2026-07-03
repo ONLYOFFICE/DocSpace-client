@@ -110,7 +110,7 @@ import type { ItemUploadContext } from "@docspace/shared/services/private-room/e
 import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
-import type { TTranslation } from "@docspace/shared/types";
+import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TConflictResolveDialogData } from "SRC_DIR/components/dialogs/ConflictResolveDialog/ConflictResolveDialog.types";
 
 import type AiRoomStore from "./AiRoomStore";
@@ -247,8 +247,9 @@ type TPbData = {
 
 type TItemOperationData = {
   // FABLE5-REVIEW: the copy/move API declares destFolderId as number, but
-  // still-.js/.tsx callers also pass string ids (third-party) or undefined.
-  destFolderId: number | string | undefined;
+  // still-.js/.tsx callers also pass string ids (third-party), null or
+  // undefined.
+  destFolderId: number | string | null | undefined;
   destFolderInfo?: TFolder;
   folderIds: number[];
   fileIds: number[];
@@ -316,7 +317,7 @@ type TFilesStore = {
     fileIds?: number[],
     folderIds?: number[],
     showToast?: (() => void) | null,
-    destFolderId?: number | string,
+    destFolderId?: number | string | null,
   ) => void;
   getIsEmptyTrash: () => Promise<void>;
 };
@@ -3016,7 +3017,7 @@ class UploadDataStore {
   };
 
   copyToAction = (
-    destFolderId: number | string | undefined,
+    destFolderId: number | string | null | undefined,
     folderIds: number[],
     fileIds: number[],
     conflictResolveType: ConflictResolveType,
@@ -3082,7 +3083,7 @@ class UploadDataStore {
   };
 
   moveToAction = (
-    destFolderId: number | string | undefined,
+    destFolderId: number | string | null | undefined,
     folderIds: number[],
     fileIds: number[],
     conflictResolveType: ConflictResolveType,
@@ -3224,7 +3225,9 @@ class UploadDataStore {
   };
 
   loopFilesOperations = async (
-    data: TOperation,
+    /** Callers (FilesActionsStore) pass `result ?? null`; the falsy case is
+     * handled right below. */
+    data: TOperation | null,
     pbData: TPbData,
   ): Promise<TOperation | undefined> => {
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
@@ -3356,7 +3359,7 @@ class UploadDataStore {
   };
 
   moveToCopyTo = (
-    destFolderId: number | string | undefined,
+    destFolderId: number | string | null | undefined,
     pbData: TPbData,
     isCopy: boolean,
     fileIds?: number[],
@@ -3389,8 +3392,9 @@ class UploadDataStore {
   };
 
   clearActiveOperations = (
-    fileIds: number[] = [],
-    folderIds: number[] = [],
+    /** FilesActionsStore passes null for the unaffected side. */
+    fileIds: Nullable<number[]> = [],
+    folderIds: Nullable<number[]> = [],
   ) => {
     const { activeFiles, activeFolders, setActiveFiles, setActiveFolders } =
       this.filesStore;

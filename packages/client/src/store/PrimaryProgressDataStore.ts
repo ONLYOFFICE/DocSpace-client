@@ -58,6 +58,10 @@ export type TPrimaryProgressInfo = {
   errorCount?: number;
   showPanel?: ((visible: boolean) => void) | null;
   items?: TPrimaryProgressInfo[];
+  /** Set by FilesActionsStore.createFoldersTree for drag&drop uploads. */
+  dragged?: string | null;
+  /** Set by FilesActionsStore.createFoldersTree while folders are created. */
+  disableUploadPanelOpen?: boolean;
 };
 
 export type TPrimaryOperation = TPrimaryProgressInfo & {

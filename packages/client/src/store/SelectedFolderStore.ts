@@ -76,6 +76,9 @@ export type TNavigationPath = {
   quotaLimit?: number;
   usedSpace?: number;
   private?: boolean;
+  /** Set by the .js FilesStore for template folders; read by
+   * FilesActionsStore.moveToRoomsPage. */
+  isTemplatesFolder?: boolean;
 };
 
 type ExcludeTypes = SettingsStore | CallableFunction;

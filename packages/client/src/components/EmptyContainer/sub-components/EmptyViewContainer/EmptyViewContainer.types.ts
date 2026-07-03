@@ -137,7 +137,7 @@ export interface InjectedEmptyViewContainerProps
   isGracePeriod: boolean;
   knowledgeId: number | null;
   startUpload: TStore["uploadDataStore"]["startUpload"];
-  createFoldersTree: (t: TTranslation, files: unknown) => Promise<unknown[]>;
+  createFoldersTree: TStore["filesActionsStore"]["createFoldersTree"];
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &

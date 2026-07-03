@@ -135,36 +135,15 @@ import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
 import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
 
-import type {
-  Nullable,
-  TCreatedBy,
-  TViewAs,
-  ValueOf,
-} from "@docspace/shared/types";
+import type { Nullable, TViewAs, ValueOf } from "@docspace/shared/types";
 import type {
   TFile,
-  TFileSecurity,
-  TFileViewAccessibility,
   TFolder,
-  TFolderSecurity,
   TGetFolder,
-  TShareSettings,
 } from "@docspace/shared/api/files/types";
-import type {
-  TAIRoomChatSettings,
-  TGetRooms,
-  TRoom,
-  TRoomLifetime,
-  TRoomSecurity,
-  TWatermark,
-} from "@docspace/shared/api/rooms/types";
-import type { TPathParts, TAvailableShareRights } from "@docspace/shared/types";
-import type {
-  FileFillingFormStatus,
-  ShareAccessRights,
-  VectorizationStatus,
-} from "@docspace/shared/enums";
-import type { TLogo } from "@docspace/ui-kit/types";
+import type { TGetRooms, TRoom } from "@docspace/shared/api/rooms/types";
+import type { TPathParts } from "@docspace/shared/types";
+import type { VectorizationStatus } from "@docspace/shared/enums";
 import type {
   TEditFileData,
   TOptSocket,
@@ -197,203 +176,30 @@ import {
   setPersistedString,
 } from "./utils/persistence";
 
-// FABLE5-REVIEW: `pdfViewer` exists in public/scripts/config.json but is
-// missing from the duplicated Window.ClientConfig declarations
-// (packages/shared/types/index.ts and the libs/ui-kit submodule); both must
-// be updated in sync (TS2717) and ui-kit is a separate submodule, so a local
-// cast type is used here (same approach as MediaViewerDataStore).
-type TClientConfigWithPdfViewer = NonNullable<Window["ClientConfig"]> & {
-  pdfViewer?: boolean;
-};
+import {
+  NotFoundHttpCode,
+  ForbiddenHttpCode,
+  PaymentRequiredHttpCode,
+  UnauthorizedHttpCode,
+  THUMBNAILS_CACHE,
+} from "./filesStore/constants";
+import type {
+  TActiveItem,
+  TClientConfigWithPdfViewer,
+  TCreatedItem,
+  THighlightFile,
+  THighlightState,
+  TItem,
+  TRemovedRoomsTypes,
+} from "./filesStore/types";
 
-// FABLE5-REVIEW: FilesStore.js reads `security.security?.X` in the AI
-// knowledge/result branch of fetchFiles — the nested member never exists at
-// runtime (always undefined); it is typed here so the read stays legal
-// without call-site casts. Candidate for cleanup.
-export type TItemSecurity = Partial<
-  TFileSecurity & TFolderSecurity & TRoomSecurity
-> & {
-  security?: Partial<TFileSecurity & TFolderSecurity & TRoomSecurity>;
-};
-
-// FABLE5-REVIEW: this store mixes three API entity families (files,
-// folders, rooms) and its own filesList view-models in the same collections.
-// TItem is an explicit structural merge of those shapes (every member
-// optional, conflicting `security` widened to TItemSecurity) plus the
-// view-model fields produced by getFilesListItems, so raw TFile/TFolder/
-// TRoom/TAgent entities and list items are all assignable to it. It is
-// deliberately written out field-by-field (not as a Partial<TFile & TFolder
-// & TRoom> intersection): Biome's type-aware noMisusedPromises rule
-// stack-overflows evaluating the large intersection across this file.
-export type TItem = {
-  security?: TItemSecurity;
-  /** Third-party provider entries carry string ids at runtime. */
-  id?: number | string;
-  access?: ShareAccessRights;
-  autoDelete?: string;
-  originTitle?: string;
-  comment?: string;
-  contentLength?: string;
-  created?: string;
-  createdBy?: TCreatedBy;
-  encrypted?: boolean;
-  fileExst?: string;
-  filesCount?: number;
-  fileStatus?: FileStatus;
-  fileType?: FileType;
-  folderId?: number;
-  foldersCount?: number;
-  logo?: TLogo;
-  locked?: boolean;
-  lockedBy?: string;
-  private?: boolean;
-  originId?: number;
-  originFolderId?: number | string;
-  originRoomId?: number | string;
-  originRoomTitle?: string;
-  parentId?: number;
-  pureContentLength?: number;
-  rootFolderType?: FolderType;
-  rootFolderId?: number;
-  shared?: boolean;
-  sharedBy?: TCreatedBy;
-  ownedBy?: TCreatedBy;
-  sharedForUser?: boolean;
-  title?: string;
-  type?: FolderType;
-  hasDraft?: boolean;
-  updated?: string;
-  updatedBy?: TCreatedBy;
-  version?: number;
-  versionGroup?: number;
-  viewUrl?: string;
-  webUrl?: string;
-  shortWebUrl?: string;
-  providerKey?: string;
-  providerId?: number;
-  providerItem?: boolean;
-  thumbnailUrl?: string;
-  thumbnailStatus?: number;
-  canShare?: boolean;
-  canEdit?: boolean;
-  roomType?: RoomsType;
-  rootRoomType?: RoomsType;
-  isArchive?: boolean;
-  tags?: string[];
-  pinned?: boolean;
-  viewAccessibility?: TFileViewAccessibility;
-  mute?: boolean;
-  inRoom?: boolean;
-  requestToken?: string;
-  indexing?: boolean;
-  lifetime?: TRoomLifetime;
-  denyDownload?: boolean;
-  denySharing?: boolean;
-  lastOpened?: string;
-  quotaLimit?: number;
-  usedSpace?: number;
-  isCustomQuota?: boolean;
-  order?: string;
-  startFilling?: boolean;
-  draftLocation?: unknown;
-  expired?: string;
-  expirationDate?: string;
-  external?: boolean;
-  isLinkExpired?: boolean;
-  passwordProtected?: boolean;
-  watermark?: TWatermark;
-  formFillingStatus?: FileFillingFormStatus;
-  customFilterEnabled?: boolean;
-  customFilterEnabledBy?: string;
-  chatSettings?: TAIRoomChatSettings;
-  location?: unknown;
-  new?: number;
-  isFolder?: boolean;
-  isRoom?: boolean;
-  isFile?: boolean;
-  isForm?: boolean;
-  isPDFForm?: boolean;
-  isFavorite?: boolean;
-  isTemplate?: boolean;
-  isAvailable?: boolean;
-  vectorizationStatus?: VectorizationStatus;
-  activeEditors?: Record<string, string>;
-  editingBy?: Record<string, string>;
-  fileEntryType?: number;
-  parentShared?: boolean;
-  parentRoomType?: FolderType;
-  path?: TPathParts[];
-  shareSettings?: TShareSettings;
-  availableShareRights?: TAvailableShareRights;
-  originalFormId?: number;
-  sendFormToExternalDB?: boolean;
-  saveFormAsXLSX?: boolean;
-  // view-model fields produced by getFilesListItems
-  daysRemaining?: string;
-  contextOptions?: string[];
-  icon?: string;
-  defaultRoomIcon?: string;
-  isPrivateRoom?: boolean;
-  canOpenPlayer?: boolean;
-  previewUrl?: Nullable<string>;
-  folderUrl?: Nullable<string> | false;
-  href?: Nullable<string> | false;
-  isThirdPartyFolder?: boolean | string;
-  isEditing?: boolean;
-  isAIAgent?: boolean;
-  thirdPartyIcon?: string;
-  providerType?: RoomsProviderType;
-  fileTypeName?: string;
-  isPlugin?: boolean;
-  fileTileIcon?: string;
-  // set by the sortedFiles getter on cloned selection items
-  checked?: boolean;
-  format?: Nullable<string>;
-};
-
-type TActiveItem = {
-  id: number | string;
-  destFolderId?: number | string | null;
-};
-
-type THighlightFile = {
-  id?: number | string;
-  isExst?: boolean;
-};
-
-type TCreatedItem = Nullable<{
-  id: number | string;
-  type?: string;
-}>;
-
-// FABLE5-REVIEW: FillingFormsRoom/ReviewRoom/ReadOnlyRoom were removed from
-// the ui-kit RoomsType enum ("TODO: Restore when certs will be done") — the
-// lookups below evaluate to undefined at runtime (producing "room-undefined"
-// switch keys), preserved verbatim via this cast type.
-type TRemovedRoomsTypes = {
-  FillingFormsRoom?: RoomsType;
-  ReviewRoom?: RoomsType;
-  ReadOnlyRoom?: RoomsType;
-};
-
-// FABLE5-REVIEW: window.DocSpace.location.state is `unknown` in the shared
-// Window declaration; only the members read by this store are asserted.
-type THighlightState = {
-  highlightFileId?: number | string;
-  isFileHasExst?: boolean;
-};
+export type { TItem, TItemSecurity } from "./filesStore/types";
 
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = getPersistedString(PersistenceKeys.viewAs);
 
 let requestCounter = 0;
 
-const NotFoundHttpCode = 404;
-const ForbiddenHttpCode = 403;
-const PaymentRequiredHttpCode = 402;
-const UnauthorizedHttpCode = 401;
-
-const THUMBNAILS_CACHE = 500;
 let timerId: ReturnType<typeof setTimeout> | null;
 
 class FilesStore {

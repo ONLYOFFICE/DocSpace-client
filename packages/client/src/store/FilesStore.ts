@@ -554,9 +554,9 @@ class FilesStore {
   // observed by makeAutoObservable before assignment).
   aiRoomStore: AiRoomStore = null as unknown as AiRoomStore;
 
-  // FABLE5-REVIEW: attached post-construction in store/index.js
-  // (`filesStore.dialogsStore = dialogsStore`); only `roomGroups` is read.
-  dialogsStore: Nullable<DialogsStore> = null;
+  // Narrow interface (Track F): attached post-construction in
+  // store/index.ts (mutual reference); only `roomGroups` is read here.
+  dialogsStore: Nullable<Pick<DialogsStore, "roomGroups">> = null;
 
   // FABLE5-REVIEW: only read by still-.js consumers (FilesPanels); never
   // written inside the store.

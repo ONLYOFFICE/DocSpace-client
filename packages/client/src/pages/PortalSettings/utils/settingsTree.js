@@ -632,7 +632,7 @@ export const settingsTree = [
             key: "10-3-3",
             icon: "",
             link: "ai-search",
-            tKey: "Common:EnableAISearch",
+            tKey: "Common:AISearch",
           },
         ],
       },

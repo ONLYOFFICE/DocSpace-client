@@ -44,6 +44,7 @@ import {
   frameHandlePing,
   getFrameId,
 } from "@docspace/shared/utils/common";
+import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import { FolderType } from "@docspace/shared/enums";
 
 import { DocsSection, DOCS_SECTION_FOLDER_ALIAS } from "@/types/docs";
@@ -109,9 +110,12 @@ const sectionFromPathnameAndFolder = (
   }
 };
 
+const withAuthParam = (url: string): string =>
+  isOAuthFrame() ? `${url}${url.includes("?") ? "&" : "?"}auth=oauth` : url;
+
 const sectionToUrl = (section: string): string => {
   if (section === DocsSection.Settings) {
-    return SETTINGS_PATH;
+    return withAuthParam(SETTINGS_PATH);
   }
 
   const folderAlias =
@@ -120,7 +124,7 @@ const sectionToUrl = (section: string): string => {
   filter.folder = folderAlias;
   filter.pageCount = PAGE_COUNT;
 
-  return `${PERSONAL_BASE_PATH}?${filter.toUrlParams()}`;
+  return withAuthParam(`${PERSONAL_BASE_PATH}?${filter.toUrlParams()}`);
 };
 
 /**

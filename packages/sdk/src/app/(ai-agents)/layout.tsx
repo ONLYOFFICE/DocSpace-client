@@ -15,6 +15,7 @@ import { getSelf } from "@/api/people";
 import { getSettings } from "@/api/settings";
 import {
   FILTER_HEADER,
+  OAUTH_FRAME_HEADER,
   PATHNAME_HEADER,
   ROOM_ID_HEADER,
 } from "@/utils/constants";
@@ -22,6 +23,7 @@ import {
 import AiAgentsRootLayout, {
   type AiAgentsCommonData,
 } from "./layout.client";
+import AiAgentsOAuthLayout from "./layout.oauth.client";
 
 export const dynamic = "force-dynamic";
 
@@ -31,6 +33,10 @@ type SlotProps = {
 
 export default async function AiAgentsServerLayout({ children }: SlotProps) {
   const hdrs = await headers();
+
+  if (hdrs.get(OAUTH_FRAME_HEADER) === "1")
+    return <AiAgentsOAuthLayout>{children}</AiAgentsOAuthLayout>;
+
   const cookieStore = await cookies();
 
   const authToken = cookieStore.get("asc_auth_key")?.value || "";

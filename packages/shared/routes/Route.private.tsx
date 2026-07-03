@@ -33,12 +33,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router";
 
 import AppLoader from "@docspace/ui-kit/components/app-loader";
 
 import { TenantStatus } from "../enums";
 import { combineUrl } from "../utils/combineUrl";
+import { AUTH_TOKEN_TIMEOUT_MS, isOAuthFrame } from "../utils/oauthToken";
 
 import type { PrivateRouteProps } from "./Routers.types";
 
@@ -74,6 +76,19 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
   } = props;
 
   const location = useLocation();
+
+  const [oauthGraceExpired, setOauthGraceExpired] = useState(false);
+
+  useEffect(() => {
+    if (!isOAuthFrame() || isAuthenticated) return undefined;
+
+    const timer = setTimeout(
+      () => setOauthGraceExpired(true),
+      AUTH_TOKEN_TIMEOUT_MS,
+    );
+
+    return () => clearTimeout(timer);
+  }, [isAuthenticated]);
 
   const renderComponent = () => {
     if (!user && isAuthenticated) {
@@ -156,6 +171,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     }
 
     if (isLoaded && !isAuthenticated) {
+      if (isOAuthFrame() && !oauthGraceExpired) {
+        return <AppLoader />;
+      }
+
       if (isPortalDeactivate) {
         window.location.replace(
           combineUrl(window.ClientConfig?.proxy?.url, "/unavailable"),

@@ -37,6 +37,7 @@
 
 import React from "react";
 
+import { connectFrameSocket } from "@docspace/shared/utils/oauthFrameSocket";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
@@ -56,7 +57,7 @@ const useSocketHelper = ({
   folderType,
 }: UseSocketHelperProps) => {
   React.useEffect(() => {
-    SocketHelper?.connect(socketUrl, shareKey ?? "");
+    void connectFrameSocket(socketUrl, shareKey ?? "");
   }, [shareKey, socketUrl]);
 
   React.useEffect(() => {

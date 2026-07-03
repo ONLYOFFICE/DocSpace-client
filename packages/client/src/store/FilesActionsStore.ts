@@ -54,7 +54,6 @@ import {
   changeIndex,
   reorderIndex,
   deleteVersionFile,
-  enableCustomFilter,
   getFileEncryptionAccess,
 } from "@docspace/shared/api/files";
 import { loadRoomMemberKeysSafe } from "@docspace/shared/services/private-room/room-member-keys";
@@ -162,6 +161,16 @@ import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStor
 import i18n from "../i18n";
 import FilesHeaderOptionStore from "./FilesHeaderOptionStore";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
+import {
+  SECTION_ROOT_FOLDER_TYPES,
+  changeCustomFilter as changeCustomFilterHelper,
+  checkExportRoomIndexProgress,
+  convertToArray,
+  convertToTree,
+  nameWithoutExtension as nameWithoutExtensionHelper,
+  setPinAction as setPinActionHelper,
+} from "./filesActionsStore/helpers";
+import type { TTreeNode, TUploadTreeFile } from "./filesActionsStore/helpers";
 
 import type UploadDataStore from "./UploadDataStore";
 import type TreeFoldersStore from "./TreeFoldersStore";
@@ -226,27 +235,6 @@ export type TActionItem = {
   shared?: boolean;
   viewUrl?: string;
   webUrl?: string;
-};
-
-// FABLE5-REVIEW: drag&drop/upload entries are browser File objects decorated
-// by still-.js callers (Home/index.js, withFileActions.js) with a relative
-// path and folder markers.
-type TUploadTreeFile = File & {
-  path: string;
-  isEmptyDirectory?: boolean;
-  parentFolderId?: number | string;
-};
-
-type TTreeNode = {
-  name: string;
-  children: TTreeNode[];
-  isFile: boolean;
-  file: TUploadTreeFile;
-};
-
-type TTreeLevel = {
-  result: TTreeNode[];
-  [name: string]: TTreeLevel | TTreeNode[] | undefined;
 };
 
 // FABLE5-REVIEW: translation bundles come from still-.js callers
@@ -410,15 +398,6 @@ type TFilesStore = {
   refreshFiles: () => Promise<unknown>;
   clearFiles: () => void;
 };
-
-const SECTION_ROOT_FOLDER_TYPES = [
-  FolderType.Archive,
-  FolderType.USER,
-  FolderType.Rooms,
-  FolderType.SHARE,
-  FolderType.Favorites,
-  FolderType.Recent,
-];
 
 class FilesActionStore {
   settingsStore: SettingsStore;
@@ -622,33 +601,6 @@ class FilesActionStore {
     }
   };
 
-  convertToTree = (folders: TUploadTreeFile[]) => {
-    const result: TTreeNode[] = [];
-    const level: TTreeLevel = { result };
-    try {
-      folders.forEach((folder) => {
-        const folderPath = folder.path.split("/").filter((name) => name !== "");
-
-        folderPath.reduce((r, name, i) => {
-          if (!r[name]) {
-            r[name] = { result: [] };
-            r.result.push({
-              name,
-              children: (r[name] as TTreeLevel).result,
-              isFile: folderPath.length - 1 === i && !folder.isEmptyDirectory,
-              file: folder,
-            });
-          }
-
-          return r[name] as TTreeLevel;
-        }, level);
-      });
-    } catch (e) {
-      console.error("convertToTree", e);
-    }
-    return result;
-  };
-
   createFolderTree = async (
     treeList: TTreeNode[],
     parentFolderId: number | string,
@@ -753,7 +705,7 @@ class FilesActionStore {
       setPrimaryProgressBarData({ ...pbData, disableUploadPanelOpen: true });
     }
 
-    const tree = this.convertToTree(withoutHiddenFiles);
+    const tree = convertToTree(withoutHiddenFiles);
 
     const filesList: TUploadTreeFile[] = [];
     await this.createFolderTree(tree, toFolderId as number | string, filesList);
@@ -1392,10 +1344,6 @@ class FilesActionStore {
     return null;
   };
 
-  loadRoomMemberKeysFor = async (roomId: number | string | null | undefined) => {
-    return loadRoomMemberKeysSafe(roomId);
-  };
-
   downloadEncryptedFile = async (file: TActionItem) => {
     const { encryptionKeys, user } = this.userStore;
 
@@ -1432,7 +1380,7 @@ class FilesActionStore {
       }
 
       const roomId = this.resolveRoomIdForFile(file);
-      const roomMemberKeys = await this.loadRoomMemberKeysFor(roomId);
+      const roomMemberKeys = await loadRoomMemberKeysSafe(roomId);
 
       setSecondaryProgressBarData({
         operation: OPERATIONS_NAME.download,
@@ -1572,7 +1520,7 @@ class FilesActionStore {
           const roomId = this.resolveRoomIdForFile(file);
           let roomMemberKeys = roomMemberKeysCache.get(String(roomId));
           if (!roomMemberKeys) {
-            roomMemberKeys = await this.loadRoomMemberKeysFor(roomId);
+            roomMemberKeys = await loadRoomMemberKeysSafe(roomId);
             roomMemberKeysCache.set(String(roomId), roomMemberKeys);
           }
 
@@ -1988,22 +1936,7 @@ class FilesActionStore {
   };
 
   changeCustomFilter = async (item: TActionItem, t: TTranslation) => {
-    // FABLE5-REVIEW: enableCustomFilter is cast to TOperation[] in
-    // shared/api/files, but the server returns the updated file (the old JS
-    // reads res.customFilterEnabled).
-    return (
-      enableCustomFilter(item.id, !item.customFilterEnabled) as unknown as Promise<TFile>
-    )
-      .then((res) => {
-        if (res.customFilterEnabled) {
-          toastr.success(t("Common:CustomFilterEnabled"));
-        } else {
-          toastr.success(t("Common:CustomFilterDisabled"));
-        }
-      })
-      .catch((err) => {
-        toastr.error(err as string);
-      });
+    return changeCustomFilterHelper(item, t);
   };
 
   duplicateAction = async (item: TActionItem) => {
@@ -2242,102 +2175,7 @@ class FilesActionStore {
     t: TTranslation,
     isAIAgent = false,
   ) => {
-    const items = Array.isArray(id) ? id : [id];
-
-    const actions: Promise<unknown>[] = [];
-    const withFinishedOperation: unknown[] = [];
-    let isError = false;
-
-    const updatingFolderList = (elems: unknown[], isPin = false) => {
-      if (elems.length === 0) return;
-
-      let translationForOneItem;
-      let translationForSeverals;
-
-      if (isAIAgent) {
-        translationForOneItem = isPin
-          ? t("Common:AIAgentPinned", { aiAgent: t("Common:AIAgent") })
-          : t("Common:AIAgentUnpinned", { aiAgent: t("Common:AIAgent") });
-        translationForSeverals = isPin
-          ? t("Common:AIAgentsPinned", { aiAgents: t("Common:AIAgents") })
-          : t("Common:AIAgentsUnpinned", { aiAgents: t("Common:AIAgents") });
-      } else {
-        translationForOneItem = isPin
-          ? t("Common:RoomPinned")
-          : t("Common:RoomUnpinned");
-        translationForSeverals = isPin
-          ? t("Common:RoomsPinned", { count: elems.length })
-          : t("Common:RoomsUnpinned", { count: elems.length });
-      }
-
-      toastr.success(
-        elems.length > 1 ? translationForSeverals : translationForOneItem,
-      );
-    };
-
-    const isPin = action === "pin";
-
-    items.forEach((item) => {
-      // FABLE5-REVIEW: pinRoom/unpinRoom are untyped in shared/api/rooms
-      // (@ts-nocheck file), the casts pin down the observed Promise result.
-      actions.push(
-        (isPin
-          ? api.rooms.pinRoom(item)
-          : api.rooms.unpinRoom(item)) as Promise<unknown>,
-      );
-    });
-
-    if (isPin) {
-      const result = await Promise.allSettled(actions);
-
-      if (!result) return;
-
-      result.forEach((res) => {
-        // FABLE5-REVIEW: the old JS reads `.value` off rejected results too
-        // (undefined at runtime); the erased casts keep that behavior.
-        if ((res as PromiseFulfilledResult<unknown>).value) {
-          withFinishedOperation.push(
-            (res as PromiseFulfilledResult<unknown>).value,
-          );
-        }
-        if (!(res as PromiseFulfilledResult<unknown>).value) isError = true;
-      });
-
-      updatingFolderList(withFinishedOperation, isPin);
-
-      if (isError) {
-        isAIAgent
-          ? toastr.error(
-              t("Common:AIAgentPinLimitMessage", { aiAgents: t("Common:AIAgents") }),
-            )
-          : toastr.error(t("Common:RoomsPinLimitMessage"));
-      }
-
-      return;
-    }
-
-    if (action === "unpin") {
-      const result = await Promise.allSettled(actions);
-      if (!result) return;
-
-      result.forEach((r) => {
-        if ((r as PromiseFulfilledResult<unknown>).value) {
-          withFinishedOperation.push(
-            (r as PromiseFulfilledResult<unknown>).value,
-          );
-        }
-        if (!(r as PromiseFulfilledResult<unknown>).value)
-          toastr.error(
-            (
-              r as PromiseRejectedResult & {
-                reason: { response?: { data?: { error?: string } } };
-              }
-            ).reason.response?.data?.error,
-          );
-      });
-
-      updatingFolderList(withFinishedOperation, isPin);
-    }
+    return setPinActionHelper(action, id, t, isAIAgent);
   };
 
   setMuteAction = (action: string, item: TActionItem, t: TTranslation) => {
@@ -2759,16 +2597,7 @@ class FilesActionStore {
   };
 
   nameWithoutExtension = (title?: string) => {
-    if (!title) return "";
-
-    const indexPoint = title.lastIndexOf(".");
-    const splitTitle = title.split(".");
-    const splitTitleLength = splitTitle.length;
-
-    const titleWithoutExtension =
-      splitTitleLength <= 2 ? splitTitle[0] : title.slice(0, indexPoint);
-
-    return titleWithoutExtension;
+    return nameWithoutExtensionHelper(title);
   };
 
   // FABLE5-REVIEW: history feeds pass partial view-models here (old JS
@@ -3218,16 +3047,6 @@ class FilesActionStore {
     }
   };
 
-  convertToArray = (itemsCollection: TItemsCollection) => {
-    const result = Array.from(itemsCollection.values()).filter((item) => {
-      return item != null;
-    });
-
-    itemsCollection.clear();
-
-    return result;
-  };
-
   pinRooms = (t: TTranslation) => {
     const { selection } = this.filesStore;
 
@@ -3520,7 +3339,7 @@ class FilesActionStore {
       .set("disable-quota", disableQuota)
       .set("delete", deleteOption);
 
-    return this.convertToArray(itemsCollection);
+    return convertToArray(itemsCollection);
   };
 
   getAIAgentsFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
@@ -3544,7 +3363,7 @@ class FilesActionStore {
       .set("disable-agent-quota", disableQuota)
       .set("delete", deleteOption);
 
-    return this.convertToArray(itemsCollection);
+    return convertToArray(itemsCollection);
   };
 
   getArchiveRoomsFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
@@ -3557,7 +3376,7 @@ class FilesActionStore {
       .set("show-info", showOption)
       .set("delete", deleteOption);
 
-    return this.convertToArray(itemsCollection);
+    return convertToArray(itemsCollection);
   };
 
   getTemplatesFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
@@ -3565,7 +3384,7 @@ class FilesActionStore {
 
     itemsCollection.set("delete", deleteOption);
 
-    return this.convertToArray(itemsCollection);
+    return convertToArray(itemsCollection);
   };
 
   getAnotherFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
@@ -3588,7 +3407,7 @@ class FilesActionStore {
       .set("delete", deleteOption)
       .set("showInfo", showInfo);
 
-    return this.convertToArray(itemsCollection);
+    return convertToArray(itemsCollection);
   };
 
   getRecentFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
@@ -3603,7 +3422,7 @@ class FilesActionStore {
       .set("showInfo", showInfo)
       .set("removeFromRecent", removeFromRecent);
 
-    return this.convertToArray(itemsCollection);
+    return convertToArray(itemsCollection);
   };
 
   getShareFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
@@ -3631,7 +3450,7 @@ class FilesActionStore {
       })
       .set("showInfo", showInfo);
 
-    return this.convertToArray(itemsCollection);
+    return convertToArray(itemsCollection);
   };
 
   getPrivacyFolderOption = (itemsCollection: TItemsCollection, t: TTranslation) => {
@@ -3646,7 +3465,7 @@ class FilesActionStore {
       .set("delete", deleteOption)
       .set("showInfo", showInfo);
 
-    return this.convertToArray(itemsCollection);
+    return convertToArray(itemsCollection);
   };
 
   getFavoritesFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
@@ -3672,7 +3491,7 @@ class FilesActionStore {
       }) */
       .set("showInfo", showInfo);
 
-    return this.convertToArray(itemsCollection);
+    return convertToArray(itemsCollection);
   };
 
   getRecycleBinFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
@@ -3695,7 +3514,7 @@ class FilesActionStore {
       .set("delete", deleteOption)
       .set("showInfo", showInfo);
 
-    return this.convertToArray(itemsCollection);
+    return convertToArray(itemsCollection);
   };
 
   getHeaderMenu = (t: TTranslation) => {
@@ -4738,20 +4557,6 @@ class FilesActionStore {
     }
   };
 
-  checkExportRoomIndexProgress = async (): Promise<TExportRoomIndexTask> => {
-    return new Promise((resolve, reject) => {
-      setTimeout(async () => {
-        try {
-          const res = await api.rooms.getExportRoomIndexProgress();
-
-          resolve(res);
-        } catch (e) {
-          reject(e);
-        }
-      }, 1000);
-    });
-  };
-
   loopExportRoomIndexStatusChecking = async (pbData: {
     operation: TOperationName;
     operationId: string;
@@ -4763,7 +4568,7 @@ class FilesActionStore {
     let res: TExportRoomIndexTask | undefined;
 
     while (!isCompleted) {
-      res = await this.checkExportRoomIndexProgress();
+      res = await checkExportRoomIndexProgress();
 
       if (res?.isCompleted) {
         isCompleted = true;

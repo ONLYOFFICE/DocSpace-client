@@ -423,8 +423,8 @@ class CreateEditRoomStore {
 
     const logoCover = cover
       ? {
-          cover: (cover as { cover: object }).cover,
-          color: (cover as { color: string }).color,
+          cover: cover.cover,
+          color: cover.color,
         }
       : logo
         ? {
@@ -593,8 +593,8 @@ class CreateEditRoomStore {
 
     const logoCover = cover
       ? {
-          cover: (cover as { cover: object }).cover,
-          color: (cover as { color: string }).color,
+          cover: cover.cover,
+          color: cover.color,
         }
       : logo
         ? {

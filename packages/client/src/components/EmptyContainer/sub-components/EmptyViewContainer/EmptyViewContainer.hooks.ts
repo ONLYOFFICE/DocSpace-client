@@ -412,7 +412,14 @@ export const useOptions = (
       filterParam: FilesSelectorFilterTypes | FilterType | string,
       openRoot: boolean = true,
     ) => {
-      setSelectFileFormRoomDialogVisible?.(true, filterParam, openRoot);
+      // FABLE5-REVIEW: type-only cast — this hook's signature also accepts a
+      // plain string; every actual caller passes a FilesSelectorFilterTypes /
+      // FilterType value, which is what the store expects.
+      setSelectFileFormRoomDialogVisible?.(
+        true,
+        filterParam as FilesSelectorFilterTypes | FilterType,
+        openRoot,
+      );
     },
     [setSelectFileFormRoomDialogVisible],
   );

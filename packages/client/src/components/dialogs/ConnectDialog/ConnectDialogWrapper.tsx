@@ -131,8 +131,11 @@ export default inject<
       setSaveAfterReconnectOAuth,
     } = dialogsStore;
 
+    // FABLE5-REVIEW: type-only cast — DialogsStore.connectItem is a partial
+    // ThirdPartyAccountType built by still-.js provider/capability spreads;
+    // the original .js passed it through unchanged.
     const item: Nullable<ThirdPartyAccountType> =
-      backupConnectionItem ?? connectItem;
+      backupConnectionItem ?? (connectItem as Nullable<ThirdPartyAccountType>);
 
     const isConnectionViaBackupModule = !!backupConnectionItem;
 

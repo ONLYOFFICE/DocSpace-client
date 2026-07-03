@@ -227,7 +227,9 @@ const setAgentParams = ({
 
   React.useEffect(() => {
     setRoomCoverDialogProps?.({
-      ...roomCoverDialogProps,
+      // FABLE5-REVIEW: type-only assertion — the prop is always injected
+      // alongside setRoomCoverDialogProps; the original .js spread it as-is.
+      ...roomCoverDialogProps!,
       title: previewTitle,
     });
   }, []);
@@ -312,7 +314,9 @@ const setAgentParams = ({
     }
 
     setRoomCoverDialogProps?.({
-      ...roomCoverDialogProps,
+      // FABLE5-REVIEW: type-only assertion — the prop is always injected
+      // alongside setRoomCoverDialogProps; the original .js spread it as-is.
+      ...roomCoverDialogProps!,
       title: newValue,
     });
 

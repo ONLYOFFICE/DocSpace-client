@@ -196,6 +196,8 @@ export const enum RoomSearchArea {
   Archive = "Archive",
   Templates = "Templates",
   AIAgents = "AiAgents",
+  Forms = "Forms",
+  FormTemplates = "FormTemplates",
 }
 export const enum RoomPrivacyFilter {
   None = 0,

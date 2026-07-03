@@ -3289,15 +3289,16 @@ class ContextOptionsStore {
       isRoomsFolder,
       isArchiveFolder,
       isAIAgentsFolder,
+      isFormsFolder,
     } = this.treeFoldersStore;
 
     const { pinRooms, unpinRooms, deleteRooms } = this.filesActionsStore;
 
-    if (isRoomsFolder || isArchiveFolder || isAIAgentsFolder) {
+    if (isRoomsFolder || isArchiveFolder || isAIAgentsFolder || isFormsFolder) {
       const isPinOption = selection.filter((item) => !item.pinned).length > 0;
 
       let canDelete;
-      if (isRoomsFolder) {
+      if (isRoomsFolder || isFormsFolder) {
         canDelete = selection.every((k) => k.contextOptions.includes("delete"));
       } else if (isArchiveFolder) {
         canDelete = selection.some((k) => k.contextOptions.includes("delete"));

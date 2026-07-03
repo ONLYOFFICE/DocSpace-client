@@ -574,6 +574,7 @@ export const getOptions = (
         inviteRootRoom,
         migrationData,
       ])
+      .with([FolderType.Forms, P._, P._], () => [createRoom])
       .with([FolderType.USER, ShareAccessRights.None, P._], () => [
         createDoc,
         createSpreadsheet,

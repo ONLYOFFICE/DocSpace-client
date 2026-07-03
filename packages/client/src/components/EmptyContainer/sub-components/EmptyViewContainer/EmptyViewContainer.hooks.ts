@@ -280,8 +280,8 @@ export const useOptions = (
   }, [roomsFolder?.rootFolderType, roomsFolder?.title, userId]);
 
   const onGoToForms = useCallback((): LinkProps => {
-    const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
-    newFilter.searchArea = RoomSearchArea.Active;
+    const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Forms);
+    newFilter.searchArea = RoomSearchArea.Forms;
 
     return {
       to: {

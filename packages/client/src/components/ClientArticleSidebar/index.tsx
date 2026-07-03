@@ -180,8 +180,11 @@ const ClientArticleSidebar = ({
 
   const goFormsTemplates = React.useCallback(() => {
     onFolderNavigateRef.current?.();
-    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Templates);
-    filter.searchArea = RoomSearchArea.Templates;
+    const filter = RoomsFilter.getDefault(
+      userId,
+      RoomSearchArea.FormTemplates,
+    );
+    filter.searchArea = RoomSearchArea.FormTemplates;
     navigate(`/forms/filter?${filter.toUrlParams(userId, false)}`);
   }, [navigate, userId]);
 
@@ -307,12 +310,13 @@ const ClientArticleSidebar = ({
       });
     }
 
-    // "Forms" is a top-level section backed by the same Rooms folder but scoped
-    // to Form Filling Rooms (FFR). It has no tree folder of its own, so it is a
-    // synthetic item pointing at the dedicated /forms route.
+    // "Forms" is a top-level section that surfaces Form Filling Rooms (FFR).
+    // The backend serves them via `searchArea=Forms` (they are excluded from the
+    // Active rooms listing), so the item points at the dedicated /forms route
+    // scoped to that search area.
     if (roomsFolder) {
-      const formsFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
-      formsFilter.searchArea = RoomSearchArea.Active;
+      const formsFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Forms);
+      formsFilter.searchArea = RoomSearchArea.Forms;
 
       mainItems.push({
         id: "forms",

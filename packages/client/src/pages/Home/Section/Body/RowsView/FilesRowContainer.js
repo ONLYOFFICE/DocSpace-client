@@ -160,8 +160,13 @@ export default inject(
     const { title: selectedFolderTitle, security } = selectedFolderStore;
     const { setRefMap, deleteRefMap } = guidanceStore;
     const { isVisible: infoPanelVisible } = infoPanelStore;
-    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isAIAgentsFolder } =
-      treeFoldersStore;
+    const {
+      isRoomsFolder,
+      isArchiveFolder,
+      isTrashFolder,
+      isAIAgentsFolder,
+      isFormsFolder,
+    } = treeFoldersStore;
     const { currentDeviceType } = settingsStore;
     const { isIndexEditingMode } = indexingStore;
     const { withContentSelection } = hotkeyStore;
@@ -169,7 +174,7 @@ export default inject(
     const { primaryProgressDataStore } = uploadDataStore;
     const { setDropTargetPreview } = primaryProgressDataStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
     const canCreateSecurity = security?.Create;
 
     return {

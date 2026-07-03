@@ -37,6 +37,7 @@ All configuration is optional — copy `.env-example` to `.env` to override:
 | `PORTAL_URL` | `http://localhost:8092` | portal to test against |
 | `PORT` | `8888` | stand's own port |
 | `DEFAULT_LOGIN` | *(empty)* | email prefilled on the sign-in form |
+| `EXTRA_CSP_ORIGINS` | `http://localhost:5001` | comma-separated origins registered in the portal CSP list besides the stand itself; the default is the Vite dev server the client SPA loads its scripts from — without it a CSP-enforcing portal blocks the `manager` mode in dev |
 
 ## What the wizard does
 
@@ -46,8 +47,10 @@ All configuration is optional — copy `.env-example` to `.env` to override:
    so the demo always runs the build the portal actually serves).
 2. **Portal sign-in** — `POST /api/2.0/authentication`, then a short-lived
    `x-signature` JWT (`GET /api/2.0/security/oauth2/token`) for the identity
-   API. Credentials never leave the stand backend. An admin account also
-   enables CSP auto-configuration; accounts with SMS/TFA are not supported.
+   API. Credentials never leave the stand backend. On an admin account the
+   stand immediately registers its CSP origins (the stand itself plus
+   `EXTRA_CSP_ORIGINS`) in the portal SDK CSP list; accounts with SMS/TFA
+   are not supported.
 3. **OAuth client** — the portal returns the client secret exactly once (at
    creation), so pre-existing clients are unusable for the confidential flow
    and the stand always works with its own: it creates a fully

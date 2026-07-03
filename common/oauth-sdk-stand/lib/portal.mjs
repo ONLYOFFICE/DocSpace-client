@@ -34,7 +34,12 @@
  */
 
 import { jsonRequest, rawRequest } from "./http.mjs";
-import { PORTAL_URL, REDIRECT_URI, STAND_ORIGIN } from "./config.mjs";
+import {
+  EXTRA_CSP_ORIGINS,
+  PORTAL_URL,
+  REDIRECT_URI,
+  STAND_ORIGIN,
+} from "./config.mjs";
 
 const SDK_VERSION = "2.2.0";
 const JWT_TTL_MS = 4 * 60 * 1000;
@@ -270,9 +275,12 @@ class PortalClient {
 
   async ensureCspOrigin() {
     const domains = await this.getCsp();
-    if (domains.includes(STAND_ORIGIN)) return "present";
+    const missing = [STAND_ORIGIN, ...EXTRA_CSP_ORIGINS].filter(
+      (origin) => !domains.includes(origin),
+    );
+    if (missing.length === 0) return "present";
     if (!this.user?.isAdmin) return "forbidden";
-    await this.setCsp([...domains, STAND_ORIGIN]);
+    await this.setCsp([...domains, ...missing]);
     return "added";
   }
 

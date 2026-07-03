@@ -61,6 +61,13 @@ export const DEFAULT_LOGIN = process.env.DEFAULT_LOGIN || "";
 export const STAND_ORIGIN = `http://localhost:${PORT}`;
 export const REDIRECT_URI = `${STAND_ORIGIN}/auth/callback`;
 
+export const EXTRA_CSP_ORIGINS = (
+  process.env.EXTRA_CSP_ORIGINS ?? "http://localhost:5001"
+)
+  .split(",")
+  .map((s) => s.trim().replace(/\/+$/, ""))
+  .filter(Boolean);
+
 export const SAME_HOST = new URL(PORTAL_URL).hostname === "localhost";
 
 export const PORTAL_COOKIES = [

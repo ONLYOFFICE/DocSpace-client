@@ -173,11 +173,12 @@ const renderLogin = () => {
 $("login-btn").addEventListener("click", async () => {
   try {
     $("login-btn").disabled = true;
-    const { user } = await api("/api/portal/login", {
+    const { user, csp } = await api("/api/portal/login", {
       method: "POST",
       body: JSON.stringify({ email: $("login-email").value.trim(), password: $("login-password").value }),
     });
     log(`portal sign-in ok: ${user?.displayName} (admin=${Boolean(user?.isAdmin)})`, "ok");
+    if (csp && csp !== "skipped") log(`CSP origins: ${csp}`, csp === "added" || csp === "present" ? "ok" : "err");
     manualStep = null;
     await refreshSession();
     await loadClients();

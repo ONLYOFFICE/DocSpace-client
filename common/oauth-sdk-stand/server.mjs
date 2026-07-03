@@ -189,7 +189,16 @@ const handler = async (req, res) => {
       if (!email || !password)
         return json(res, 400, { error: "email and password are required" });
       const user = await portal.login(email, password);
-      return json(res, 200, { user });
+      let csp = "skipped";
+      if (user?.isAdmin) {
+        try {
+          csp = await portal.ensureCspOrigin();
+          if (csp === "added") state.setCspOriginAdded(true);
+        } catch (e) {
+          csp = `error: ${e.message}`;
+        }
+      }
+      return json(res, 200, { user, csp });
     }
 
     if (req.method === "POST" && p === "/api/portal/logout") {
@@ -200,6 +209,21 @@ const handler = async (req, res) => {
 
     if (req.method === "GET" && p === "/api/scopes")
       return json(res, 200, { scopes: await portal.listScopes() });
+
+    if (req.method === "GET" && p === "/api/csp")
+      return json(res, 200, { domains: await portal.getCsp() });
+
+    if (req.method === "POST" && p === "/api/csp") {
+      const { origin } = await readBody(req);
+      if (!origin) return json(res, 400, { error: "origin is required" });
+      if (!portal.user?.isAdmin)
+        return json(res, 403, { error: "portal admin sign-in required" });
+      const domains = await portal.getCsp();
+      if (domains.includes(origin))
+        return json(res, 200, { domains, added: false });
+      const updated = await portal.setCsp([...domains, origin]);
+      return json(res, 200, { domains: updated, added: true });
+    }
 
     if (req.method === "GET" && p === "/api/clients") {
       const portalClients = await portal.listClients();

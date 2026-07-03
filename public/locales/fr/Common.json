@@ -1193,7 +1193,6 @@
   "InstructionsDescriptionAgentExample": "Exemple : « Vous êtes un assistant IA en relations publiques qui aide à rédiger et modifier des communiqués de presse. Maintenez un ton professionnel, confiant et adapté aux médias. Mettez en évidence les messages clés de manière claire, évitez le jargon et gardez le texte concis et engageant. »",
   "InsufficientFundsWithContact": "Votre wallet dispose de fonds insuffisants. Veuillez contacter le payeur (<1>{{email}}</1>) pour le recharger et réessayer l'achat.",
   "InsufficientFundsWithTopUp": "Votre wallet dispose de fonds insuffisants. Veuillez <1>recharger votre wallet</1> et réessayer l'achat.",
-  "InsufficientPermissionsMessage": "Vous ne disposez pas des permissions suffisantes. Veuillez contacter le payeur (<1>{{payerContact}}</1>) pour accéder et configurer les services.",
   "IntegrationName": "Nom de l'intégration",
   "IntegrationsDescription": "Connectez {{productName}} à n'importe quel écosystème (DMS, CMS, LMS, etc.) — sans code personnalisé, sans migration.",
   "IntegrationURL": "URL d'intégration",

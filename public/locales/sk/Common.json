@@ -1166,7 +1166,6 @@
   "InstanceId": "Zadajte svoje instance ID",
   "InsufficientFundsWithContact": "Vaša peňaženka nemá dostatočný zostatok. Prosím, kontaktujte platiteľa (<1>{{email}}</1>), aby ju doplnil a skúste nákup znova.",
   "InsufficientFundsWithTopUp": "Vaša peňaženka má nedostatočný zostatok. Prosím, <1>doplňte peňaženku</1> a skúste nakupovať znova.",
-  "InsufficientPermissionsMessage": "Nemáte dostatočné oprávnenia. Kontaktujte platebníka (<1>{{payerContact}}</1>) na prístup a konfiguráciu služieb.",
   "IntegrationName": "Názov integrácie",
   "IntegrationsDescription": "Prepojte {{productName}} s akýmkoľvek ekosystémom (DMS, CMS, LMS atď.) — žiadny vlastný kód, žiadna migrácia.",
   "IntegrationURL": "Integračná URL adresa",

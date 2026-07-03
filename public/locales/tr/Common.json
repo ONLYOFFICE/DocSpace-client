@@ -1180,7 +1180,6 @@
   "InstructionsDescriptionAgentExample": "Örnek: \"Basın bültenleri yazıp düzenlemeye yardımcı olan bir yapay zeka PR asistanısınız. Profesyonel, kendinden emin ve medyaya uygun bir ton koruyun. Ana mesajları açıkça vurgulayın, jargon kullanmaktan kaçının ve metni öz ve ilgi çekici tutun.\"",
   "InsufficientFundsWithContact": "Cüzdanınızda yetersiz bakiye bulunmaktadır. Lütfen bakiyesini artırmak için ödeyen kişiye (<1>{{email}}</1>) ulaşın ve satın almayı tekrar deneyin.",
   "InsufficientFundsWithTopUp": "Cüzdanınızda yetersiz bakiye bulunmaktadır. Lütfen <1>cüzdanınızı şarj edin</1> ve tekrar satın almayı deneyin.",
-  "InsufficientPermissionsMessage": "Yeterli izniniz yok. Hizmetlere erişmek ve yapılandırmak için lütfen ödeme yapan kişiyle (<1>{{payerContact}}</1>) iletişime geçin.",
   "IntegrationName": "Entegrasyon adı",
   "IntegrationsDescription": "{{productName}}'yi herhangi bir ekosisteme (DMS, CMS, LMS vb.) bağlayın — özel kod yok, geçiş yok.",
   "IntegrationURL": "Entegrasyon URL'si",

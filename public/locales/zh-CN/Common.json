@@ -1193,7 +1193,6 @@
   "InstructionsDescriptionAgentExample": "示例：“您是一位 AI 公关助理，负责撰写和编辑新闻稿。请保持专业、自信且媒体友好的语气。清晰突出关键信息，避免使用术语，并保持文本简洁明了且引人入胜。”",
   "InsufficientFundsWithContact": "您的钱包余额不足。请联系付款人 (<1>{{email}}</1>) 充值，然后重新尝试购买。",
   "InsufficientFundsWithTopUp": "您的钱包余额不足。请<1>充值</1>，然后重新尝试购买。",
-  "InsufficientPermissionsMessage": "您没有足够的权限。请联系付款人（<1>{{payerContact}}</1>）以访问和配置服务。",
   "IntegrationName": "集成名称",
   "IntegrationsDescription": "将 {{productName}} 接入任何生态系统（DMS、CMS、LMS 等）—— 无需自定义代码，无需迁移。",
   "IntegrationURL": "集成 URL",

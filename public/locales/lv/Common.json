@@ -1180,7 +1180,6 @@
   "InstructionsDescriptionAgentExample": "Piemērs: \"Jūs esat MI PR asistents, kas palīdz rakstīt un rediģēt preses paziņojumus. Saglabājiet profesionālu, pārliecinātu un plašsaziņas līdzekļiem draudzīgu toni. Skaidri izcelt galvenos ziņojumus, izvairieties no žargona un saglabājiet tekstu saīsinātu un saistošu.\"",
   "InsufficientFundsWithContact": "Jūsu e-talcī nav pietiekami līdzekļu. Lūdzu, sazinieties ar maksātāju (<1>{{email}}</1>), lai papildinātu to un mēģiniet vēlreiz veikt pirkumu.",
   "InsufficientFundsWithTopUp": "Jūsu maksa nepietiek līdzekļu. Lūdzu <1>papildiniet savu maku</1> un mēģiniet iegādāties vēlreiz.",
-  "InsufficientPermissionsMessage": "Jums nav pietiekami atļauju. Lūdzu, sazinācieties ar maksātāju (<1>{{payerContact}}</1>) lai piekļūtu un konfigurētu pakalpojumu.",
   "IntegrationName": "Integrācijas nosaukums",
   "IntegrationsDescription": "Savienojiet {{productName}} ar jebkuru ekosistēmu (DMS, CMS, LMS utt.) — bez pielāgota koda, bez migrācijas.",
   "IntegrationURL": "Integrācijas URL",

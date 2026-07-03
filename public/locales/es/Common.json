@@ -1193,7 +1193,6 @@
   "InstructionsDescriptionAgentExample": "Ejemplo: \"Eres un asistente de relaciones públicas de IA que ayuda a redactar y editar comunicados de prensa. Mantén un tono profesional, seguro y cercano a los medios de comunicación. Resalta claramente los mensajes clave, evita la jerga y mantén el texto conciso y atractivo.\"",
   "InsufficientFundsWithContact": "Su monedero no tiene fondos suficientes. Por favor, póngase en contacto con el pagador (<1>{{email}}</1>) para recargarlo e intente realizar la compra de nuevo.",
   "InsufficientFundsWithTopUp": "Su monedero no tiene fondos suficientes. Por favor, <1>recargue su monedero</1> e intente realizar la compra de nuevo.",
-  "InsufficientPermissionsMessage": "No tiene permisos suficientes. Por favor, contacte al pagador (<1>{{payerContact}}</1>) para acceder y configurar los servicios.",
   "IntegrationName": "Nombre de la integración",
   "IntegrationsDescription": "Conecte {{productName}} a cualquier ecosistema (DMS, CMS, LMS, etc.) — sin código personalizado ni migración.",
   "IntegrationURL": "URL de la integración",

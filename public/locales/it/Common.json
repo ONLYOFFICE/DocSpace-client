@@ -1193,7 +1193,6 @@
   "InstructionsDescriptionAgentExample": "Esempio: “Sei un assistente PR IA che aiuta a scrivere e modificare comunicati stampa. Mantieni un tono professionale, sicuro e adatto ai media. Evidenzia chiaramente i messaggi chiave, evita il gergo e rendi il testo conciso e coinvolgente.”",
   "InsufficientFundsWithContact": "Il tuo portafoglio non ha fondi sufficienti. Contatta il pagatore (<1>{{email}}</1>) per ricaricarlo e riprovare l’acquisto.",
   "InsufficientFundsWithTopUp": "Il tuo portafoglio non ha fondi sufficienti. Per favore <1>ricarica il portafoglio</1> e riprova ad acquistare.",
-  "InsufficientPermissionsMessage": "Non dispone dei permessi sufficienti. Si prega di contattare il pagatore (<1>{{payerContact}}</1>) per accedere e configurare i servizi.",
   "IntegrationName": "Nome integrazione",
   "IntegrationsDescription": "Collega {{productName}} a qualsiasi ecosistema (DMS, CMS, LMS, ecc.) — nessun codice personalizzato, nessuna migrazione.",
   "IntegrationURL": "URL integrazione",

@@ -49,13 +49,17 @@ import styles from "./PromoPage.module.scss";
 const AUTOMATION_API_ANCHOR = "docs-connect-automation-api";
 
 interface PromoPageProps {
+  canceled?: boolean;
   startTrial?: () => Promise<void>;
+  openBuyPlan?: (mode: "trial" | "edit") => void;
   docsConnectUrl?: string;
   allConnectorsUrl?: string;
 }
 
 const PromoPage = ({
+  canceled,
   startTrial,
+  openBuyPlan,
   docsConnectUrl,
   allConnectorsUrl,
 }: PromoPageProps) => {
@@ -110,19 +114,30 @@ const PromoPage = ({
         />
       </Text>
 
-      <Text as="p" className={styles.trialNote}>
-        {t("DocsConnect:TrialAvailable")}
-      </Text>
+      {canceled ? null : (
+        <Text as="p" className={styles.trialNote}>
+          {t("DocsConnect:TrialAvailable")}
+        </Text>
+      )}
 
       <div className={styles.actions}>
-        <Button
-          primary
-          size={ButtonSize.small}
-          label={t("DocsConnect:CreateTenant")}
-          onClick={onCreateTenant}
-          isLoading={submitting}
-          isDisabled={submitting}
-        />
+        {canceled ? (
+          <Button
+            primary
+            size={ButtonSize.small}
+            label={t("DocsConnect:BuyAPlan")}
+            onClick={() => openBuyPlan?.("edit")}
+          />
+        ) : (
+          <Button
+            primary
+            size={ButtonSize.small}
+            label={t("DocsConnect:CreateTenant")}
+            onClick={onCreateTenant}
+            isLoading={submitting}
+            isDisabled={submitting}
+          />
+        )}
         <Link
           className={styles.link}
           type={LinkType.action}
@@ -164,6 +179,7 @@ const PromoPage = ({
 
 export default inject(({ docsConnectStore, settingsStore }: TStore) => ({
   startTrial: docsConnectStore.startTrial,
+  openBuyPlan: docsConnectStore.openBuyPlan,
   docsConnectUrl: settingsStore.docsConnectUrl,
   allConnectorsUrl: settingsStore.allConnectorsUrl,
 }))(observer(PromoPage));

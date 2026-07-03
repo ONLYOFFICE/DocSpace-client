@@ -171,6 +171,23 @@
   line-height: 16px;
 }
 
+.noPlanCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+  max-width: 446px;
+  padding: 16px;
+  border-radius: 6px;
+  border: var(--dev-tools-card-border);
+  background-color: var(--background-color);
+}
+
+.noPlanTitle {
+  font-size: 14px;
+  line-height: 20px;
+}
+
 .renewalText {
   max-width: 660px;
   font-size: 13px;
@@ -274,7 +291,6 @@
   font-size: 13px;
   font-weight: 400;
   line-height: 18px;
-  color: var(--text-color);
 }
 
 .history {

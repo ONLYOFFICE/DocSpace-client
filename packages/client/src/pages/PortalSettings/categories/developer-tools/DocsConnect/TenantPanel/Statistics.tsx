@@ -171,7 +171,7 @@ const Statistics = ({
                 </Text>
                 <Text fontSize="12px" className={styles.muted}>
                   {t("DocsConnect:TrialBannerDescription", {
-                    count: 30,
+                    count: daysLeft,
                   })}
                 </Text>
                 <Text fontSize="12px" className={styles.muted}>
@@ -342,9 +342,9 @@ const Statistics = ({
                             ),
                             count: scheduledChange.nextUsers,
                           })
-                      : t("Common:RenewsOnDate", {
+                      : `(${t("Common:RenewsOnDate", {
                           date: formatDocsConnectDate(tenant.endDate),
-                        })}
+                        })})`}
                   </Text>
                 </Text>
               )}

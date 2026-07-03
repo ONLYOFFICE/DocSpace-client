@@ -43,7 +43,10 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import QuantityPicker from "@docspace/ui-kit/components/quantity-picker";
+import StorageWarning from "@docspace/ui-kit/billing/services/panels/additional-storage/StorageWarning";
+import { formatDateLocalized } from "@docspace/ui-kit/utils/date";
 
 import WalletSvg from "PUBLIC_DIR/images/icons/16/wallet.react.svg";
 import AutomationApiSvg from "PUBLIC_DIR/images/icons/16/docs-connect.automation-api.react.svg";
@@ -51,6 +54,8 @@ import RebrandingSvg from "PUBLIC_DIR/images/icons/16/docs-connect.rebranding.re
 
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
+
+import { getDocsConnectDaysLeft, isDocsConnectPaid } from "../utils";
 
 import styles from "./BuyPlanPanel.module.scss";
 
@@ -105,17 +110,42 @@ const BuyPlanPanel = ({
   };
 
   const devPackPerUser = devPack ? devPackPrice : 0;
-  const totalMonthly = users * (pricePerUser + devPackPerUser);
+  const perUser = pricePerUser + devPackPerUser;
+  const totalMonthly = users * perUser;
 
   const currentUsers = info.deactivated
     ? 0
     : (info.tenant.payment?.quantity ?? 0);
-  const sameProduct = devPack === (info.devPackEnabled ?? false);
-  const addedUsers = sameProduct ? Math.max(0, users - currentUsers) : users;
-  const chargeNow = addedUsers * (pricePerUser + devPackPerUser);
+  const currentDevPack = info.devPackEnabled ?? false;
+  const isEditActive = isDocsConnectPaid(info) && currentUsers > 0;
+
+  const usersChanged = users !== currentUsers;
+  const devPackChanged = devPack !== currentDevPack;
+  const hasChanges = usersChanged || devPackChanged;
+  const devPackTurnedOff = currentDevPack && !devPack;
+  const isScheduled =
+    isEditActive &&
+    (devPackTurnedOff || (!devPackChanged && users < currentUsers));
+  const isUpgrade = isEditActive && hasChanges && !isScheduled;
+
+  const periodEndDate = info.tenant.endDate ?? "";
+  const periodEndDateLocalized = formatDateLocalized(
+    periodEndDate,
+    "DATE_MED",
+    { locale: i18n.language },
+  );
+  const remainingDays = getDocsConnectDaysLeft(periodEndDate);
+  const prorationFactor = Math.min(1, remainingDays / 30);
+
+  const addedUsers = devPackChanged ? users : Math.max(0, users - currentUsers);
+  const chargeNow = isEditActive
+    ? isUpgrade
+      ? Math.round(addedUsers * perUser * prorationFactor * 100) / 100
+      : 0
+    : users * perUser;
 
   const remainingCredits = availableCredits - chargeNow;
-  const insufficientFunds = remainingCredits < 0;
+  const insufficientFunds = chargeNow > 0 && remainingCredits < 0;
   const topUpRequired = Math.ceil(chargeNow - availableCredits);
 
   const formatCurrency = (amount: number) =>
@@ -130,7 +160,11 @@ const BuyPlanPanel = ({
         devPack,
         topUp: insufficientFunds ? topUpRequired : 0,
       });
-      toastr.success(t("DocsConnect:PlanPurchased"));
+      toastr.success(
+        isScheduled
+          ? t("DocsConnect:ChangeScheduled")
+          : t("DocsConnect:PlanPurchased"),
+      );
     } catch (error) {
       toastr.error(error as Error);
     } finally {
@@ -138,7 +172,7 @@ const BuyPlanPanel = ({
     }
   };
 
-  const summaryRow = (label: string, value: string) => (
+  const summaryRow = (label: string, value: React.ReactNode) => (
     <div className={styles.summaryRow}>
       <Text fontSize="14px" fontWeight={400} className={styles.summaryLabel}>
         {label}
@@ -158,7 +192,9 @@ const BuyPlanPanel = ({
       withFooterBorder
       isDoubleFooterLine={insufficientFunds}
     >
-      <ModalDialog.Header>{t("DocsConnect:DocsConnect")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {isEditActive ? t("Common:EditPlan") : t("DocsConnect:DocsConnect")}
+      </ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.body}>
           <div className={styles.walletCard}>
@@ -239,7 +275,16 @@ const BuyPlanPanel = ({
                 <Text fontSize="13px">
                   {t("DocsConnect:PerUserPerMonth", {
                     price: formatCurrency(devPackPrice),
-                  })}
+                  })}{" "}
+                  <Text
+                    as="span"
+                    fontSize="13px"
+                    className={styles.secondaryText}
+                  >
+                    {t("DocsConnect:MinUsersNote", {
+                      count: DEVPACK_MIN_USERS,
+                    })}
+                  </Text>
                 </Text>
               </div>
               <ToggleButton
@@ -279,61 +324,179 @@ const BuyPlanPanel = ({
             </div>
           </div>
 
-          <Text
-            fontSize="16px"
-            fontWeight={700}
-            className={styles.orderSummaryTitle}
-          >
-            {t("Common:OrderSummary")}
-          </Text>
-          <div className={styles.summaryCard}>
-            {summaryRow(t("DocsConnect:PlanUsers"), `${users}`)}
-            {summaryRow(
-              t("DocsConnect:BasePricePerUser"),
-              formatCurrency(pricePerUser),
-            )}
-            {summaryRow(
-              t("DocsConnect:DevPackPerUser"),
-              formatCurrency(devPack ? devPackPrice : 0),
-            )}
-            <hr className={styles.summaryDivider} />
-            <div className={styles.summaryRow}>
+          {isEditActive && !hasChanges ? null : (
+            <>
               <Text
-                fontSize="14px"
-                fontWeight={600}
-                className={styles.summaryValue}
+                fontSize="16px"
+                fontWeight={700}
+                className={styles.orderSummaryTitle}
               >
-                {t("DocsConnect:TotalMonthly")}
+                {t("Common:OrderSummary")}
               </Text>
-              <Text
-                fontSize="14px"
-                fontWeight={600}
-                className={styles.summaryValue}
-              >
-                {formatCurrency(totalMonthly)}
-              </Text>
-            </div>
-          </div>
-          {insufficientFunds ? (
-            <Text
-              fontSize="12px"
-              className={styles.errorText}
-              textAlign="right"
-            >
-              {t("Common:WalletTopUpRequired", {
-                currency: formatCurrency(topUpRequired),
-              })}
-            </Text>
-          ) : (
-            <Text
-              fontSize="12px"
-              className={styles.secondaryText}
-              textAlign="right"
-            >
-              {t("DocsConnect:RemainingCreditsAfter", {
-                amount: formatCurrency(remainingCredits),
-              })}
-            </Text>
+              <div className={styles.summaryCard}>
+                {isEditActive ? (
+                  <>
+                    {devPackTurnedOff
+                      ? summaryRow(
+                          t("DocsConnect:DevPackDisabledLabel"),
+                          t("DocsConnect:MinusPricePerUser", {
+                            price: formatCurrency(devPackPrice),
+                          }),
+                        )
+                      : null}
+                    {usersChanged
+                      ? summaryRow(
+                          t("DocsConnect:UserAdjustmentLabel"),
+                          `${currentUsers} → ${users}`,
+                        )
+                      : summaryRow(t("DocsConnect:PlanUsers"), `${users}`)}
+                    {usersChanged && users > currentUsers
+                      ? summaryRow(
+                          t("DocsConnect:AdditionalUsers"),
+                          `+${users - currentUsers}`,
+                        )
+                      : null}
+                    {usersChanged && users < currentUsers
+                      ? summaryRow(
+                          t("DocsConnect:ReducedUsers"),
+                          `−${currentUsers - users}`,
+                        )
+                      : null}
+                    {summaryRow(
+                      t("DocsConnect:BasePricePerUser"),
+                      formatCurrency(pricePerUser),
+                    )}
+                    {devPack
+                      ? summaryRow(
+                          t("DocsConnect:DevPackPerUser"),
+                          formatCurrency(devPackPrice),
+                        )
+                      : null}
+                    {isUpgrade ? (
+                      summaryRow(
+                        t("Common:RemainingPeriod"),
+                        <>
+                          {t("DocsConnect:DaysCount", {
+                            count: remainingDays,
+                          })}{" "}
+                          <Text
+                            as="span"
+                            fontSize="14px"
+                            fontWeight={400}
+                            className={styles.secondaryText}
+                          >
+                            (
+                            {t("Common:UntilDate", {
+                              date: periodEndDateLocalized,
+                            })}
+                            )
+                          </Text>
+                        </>,
+                      )
+                    ) : (
+                      <>
+                        {summaryRow(
+                          t("Common:NewMonthlyPrice"),
+                          formatCurrency(totalMonthly),
+                        )}
+                        {summaryRow(
+                          t("Common:EffectiveDate"),
+                          periodEndDateLocalized,
+                        )}
+                      </>
+                    )}
+                    <hr className={styles.summaryDivider} />
+                    <div className={styles.summaryRow}>
+                      <div className={styles.totalLabel}>
+                        <Text
+                          fontSize="14px"
+                          fontWeight={600}
+                          className={styles.summaryValue}
+                        >
+                          {t("Common:TotalDueToday")}
+                        </Text>
+                        {isUpgrade ? (
+                          <HelpButton
+                            size={12}
+                            tooltipContent={t(
+                              "DocsConnect:TotalDueTodayTooltip",
+                            )}
+                            tooltipMaxWidth="320px"
+                          />
+                        ) : null}
+                      </div>
+                      <Text
+                        fontSize="14px"
+                        fontWeight={600}
+                        className={styles.summaryValue}
+                      >
+                        {formatCurrency(chargeNow)}
+                      </Text>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {summaryRow(t("DocsConnect:PlanUsers"), `${users}`)}
+                    {summaryRow(
+                      t("DocsConnect:BasePricePerUser"),
+                      formatCurrency(pricePerUser),
+                    )}
+                    {summaryRow(
+                      t("DocsConnect:DevPackPerUser"),
+                      formatCurrency(devPack ? devPackPrice : 0),
+                    )}
+                    <hr className={styles.summaryDivider} />
+                    <div className={styles.summaryRow}>
+                      <Text
+                        fontSize="14px"
+                        fontWeight={600}
+                        className={styles.summaryValue}
+                      >
+                        {t("DocsConnect:TotalMonthly")}
+                      </Text>
+                      <Text
+                        fontSize="14px"
+                        fontWeight={600}
+                        className={styles.summaryValue}
+                      >
+                        {formatCurrency(totalMonthly)}
+                      </Text>
+                    </div>
+                  </>
+                )}
+              </div>
+              {isScheduled ? (
+                <StorageWarning
+                  body={t("Common:ScheduledChangeBillingPeriodNote", {
+                    date: periodEndDateLocalized,
+                  })}
+                />
+              ) : insufficientFunds ? (
+                <Text
+                  fontSize="12px"
+                  className={styles.errorText}
+                  textAlign="right"
+                >
+                  {t("Common:WalletTopUpRequired", {
+                    currency: formatCurrency(topUpRequired),
+                  })}
+                </Text>
+              ) : (
+                <Text
+                  fontSize="12px"
+                  className={styles.secondaryText}
+                  textAlign="right"
+                >
+                  {isEditActive
+                    ? t("DocsConnect:RemainingBalanceAfter", {
+                        amount: formatCurrency(remainingCredits),
+                      })
+                    : t("DocsConnect:RemainingCreditsAfter", {
+                        amount: formatCurrency(remainingCredits),
+                      })}
+                </Text>
+              )}
+            </>
           )}
         </div>
       </ModalDialog.Body>
@@ -354,15 +517,21 @@ const BuyPlanPanel = ({
             scale
             size={ButtonSize.normal}
             label={
-              insufficientFunds
-                ? info.deactivated
-                  ? t("Common:TopUpAndPay")
-                  : t("DocsConnect:TopUpAndBuy")
-                : t("DocsConnect:BuyAPlan")
+              isEditActive
+                ? isScheduled
+                  ? t("Common:ScheduleChange")
+                  : insufficientFunds
+                    ? t("DocsConnect:TopUpAndBuy")
+                    : t("DocsConnect:Upgrade")
+                : insufficientFunds
+                  ? info.deactivated
+                    ? t("Common:TopUpAndPay")
+                    : t("DocsConnect:TopUpAndBuy")
+                  : t("DocsConnect:BuyAPlan")
             }
             onClick={onBuy}
             isLoading={submitting}
-            isDisabled={submitting}
+            isDisabled={submitting || (isEditActive && !hasChanges)}
           />
           <Button
             scale

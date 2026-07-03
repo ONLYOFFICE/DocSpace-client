@@ -45,13 +45,16 @@ import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 import PromoPage from "./PromoPage";
 import TenantPanel from "./TenantPanel";
 import BuyPlanPanel from "./BuyPlanPanel";
+import CancelPlanDialog from "./CancelPlanDialog";
 import TenantPanelLoader from "./TenantPanel/Loader";
+import { isDocsConnectCanceled } from "./utils";
 
 interface DocsConnectProps {
   info?: TDocsConnectInfo;
   isLoading?: boolean;
   error?: Error | null;
   buyPlanPanelVisible?: boolean;
+  cancelPlanDialogVisible?: boolean;
   fetchInfo?: () => void;
 }
 
@@ -60,6 +63,7 @@ const DocsConnect = ({
   isLoading,
   error,
   buyPlanPanelVisible,
+  cancelPlanDialogVisible,
   fetchInfo,
 }: DocsConnectProps) => {
   const { t, ready } = useTranslation(["DocsConnect", "Common"]);
@@ -96,10 +100,20 @@ const DocsConnect = ({
 
   if (!info) return <PromoPage />;
 
+  if (isDocsConnectCanceled(info)) {
+    return (
+      <>
+        <PromoPage canceled />
+        {buyPlanPanelVisible ? <BuyPlanPanel /> : null}
+      </>
+    );
+  }
+
   return (
     <>
       <TenantPanel />
       {buyPlanPanelVisible ? <BuyPlanPanel /> : null}
+      {cancelPlanDialogVisible ? <CancelPlanDialog /> : null}
     </>
   );
 };
@@ -109,5 +123,6 @@ export default inject(({ docsConnectStore }: TStore) => ({
   isLoading: docsConnectStore.isLoading,
   error: docsConnectStore.error,
   buyPlanPanelVisible: docsConnectStore.buyPlanPanelVisible,
+  cancelPlanDialogVisible: docsConnectStore.cancelPlanDialogVisible,
   fetchInfo: docsConnectStore.fetchInfo,
 }))(observer(DocsConnect));

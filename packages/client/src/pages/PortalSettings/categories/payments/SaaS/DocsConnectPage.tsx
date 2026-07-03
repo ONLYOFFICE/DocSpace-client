@@ -66,10 +66,12 @@ import CircleCrossIcon from "PUBLIC_DIR/images/icons/16/circle.cross.svg";
 import {
   formatDocsConnectDate,
   getDocsConnectTrialState,
+  isDocsConnectCanceled,
 } from "../../developer-tools/DocsConnect/utils";
 import { DOCS_CONNECT_ROUTE } from "../../developer-tools/DocsConnect/constants";
 import { default as BackupPageLoader } from "@docspace/ui-kit/billing/services/pages/backup/BackupPageLoader";
 import BuyPlanPanel from "../../developer-tools/DocsConnect/BuyPlanPanel";
+import CancelPlanDialog from "../../developer-tools/DocsConnect/CancelPlanDialog";
 import PromoPage from "../../developer-tools/DocsConnect/PromoPage";
 import { PAYMENT_ROUTES } from "../utils";
 
@@ -79,9 +81,10 @@ interface DocsConnectPageProps {
   info?: TDocsConnectInfo | null;
   isLoading?: boolean;
   buyPlanPanelVisible?: boolean;
+  cancelPlanDialogVisible?: boolean;
   fetchInfo?: () => void;
   openBuyPlan?: (mode: "trial" | "edit") => void;
-  cancelPlan?: () => Promise<void>;
+  openCancelPlanDialog?: () => void;
   cancelScheduledChange?: () => Promise<void>;
 }
 
@@ -89,9 +92,10 @@ const DocsConnectPage = ({
   info,
   isLoading,
   buyPlanPanelVisible,
+  cancelPlanDialogVisible,
   fetchInfo,
   openBuyPlan,
-  cancelPlan,
+  openCancelPlanDialog,
   cancelScheduledChange,
 }: DocsConnectPageProps) => {
   const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
@@ -140,6 +144,7 @@ const DocsConnectPage = ({
     ? (info.prices?.pricePerUser ?? 0)
     : pricePerUser;
   const deactivated = isPaid && (info.deactivated ?? false);
+  const canceled = isDocsConnectCanceled(info);
 
   const onTopUp = () => navigate(PAYMENT_ROUTES.wallet);
   const onViewUsage = () => navigate(PAYMENT_ROUTES.usage);
@@ -147,13 +152,7 @@ const DocsConnectPage = ({
   const onEditPlan = () => openBuyPlan?.("edit");
   const onGoToTenant = () => navigate(DOCS_CONNECT_ROUTE);
 
-  const onCancelPlan = async () => {
-    try {
-      await cancelPlan?.();
-    } catch (e) {
-      toastr.error(e as Error);
-    }
-  };
+  const onCancelPlan = () => openCancelPlanDialog?.();
 
   const onCancelChange = async () => {
     try {
@@ -202,11 +201,19 @@ const DocsConnectPage = ({
   return (
     <div className={styles.container}>
       <ServiceToggleSection
-        isEnabled={deactivated ? false : isPaid || !expired}
+        isEnabled={deactivated || canceled ? false : isPaid || !expired}
         isDisabled={(!isPaid && !expired) || scheduledChange != null}
-        onToggle={deactivated ? onTopUp : isPaid ? onCancelPlan : onBuyPlan}
+        onToggle={
+          canceled
+            ? onEditPlan
+            : deactivated
+              ? onTopUp
+              : isPaid
+                ? onCancelPlan
+                : onBuyPlan
+        }
         title={t("DocsConnect:DocsConnect")}
-        priceText={t("DocsConnect:FromPricePerUserMonth", {
+        priceText={t("DocsConnect:FromPricePerUserMonthNote", {
           price: formatCurrencyValue(
             i18n.language,
             info.prices?.pricePerUser ?? 0,
@@ -279,7 +286,25 @@ const DocsConnectPage = ({
         />
       </div>
 
-      {isPaid ? (
+      {isPaid && canceled ? (
+        <>
+          <Text className={styles.sectionTitle}>
+            {t("Common:CurrentTariffPlan")}
+          </Text>
+          <div className={styles.noPlanCard}>
+            <Text className={styles.noPlanTitle}>
+              {t("Common:NoActivePlan")}
+            </Text>
+            <Button
+              primary
+              scale
+              size={ButtonSize.normal}
+              label={t("DocsConnect:BuyAPlan")}
+              onClick={onEditPlan}
+            />
+          </div>
+        </>
+      ) : isPaid ? (
         <>
           <div className={styles.tariffHeader}>
             {deactivated ? (
@@ -491,6 +516,7 @@ const DocsConnectPage = ({
       </div>
 
       {buyPlanPanelVisible ? <BuyPlanPanel /> : null}
+      {cancelPlanDialogVisible ? <CancelPlanDialog /> : null}
     </div>
   );
 };
@@ -499,9 +525,10 @@ export default inject(({ docsConnectStore }: TStore) => ({
   info: docsConnectStore.info,
   isLoading: docsConnectStore.isLoading,
   buyPlanPanelVisible: docsConnectStore.buyPlanPanelVisible,
+  cancelPlanDialogVisible: docsConnectStore.cancelPlanDialogVisible,
   fetchInfo: docsConnectStore.fetchInfo,
   openBuyPlan: docsConnectStore.openBuyPlan,
-  cancelPlan: docsConnectStore.cancelPlan,
+  openCancelPlanDialog: docsConnectStore.openCancelPlanDialog,
   cancelScheduledChange: docsConnectStore.cancelScheduledChange,
 }))(observer(DocsConnectPage));
 

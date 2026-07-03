@@ -42,6 +42,8 @@
   min-width: 0;
   padding-bottom: 19px;
   overflow-x: clip;
+  --payment-warning-color: var(--dev-tools-status-warning);
+  --payment-backgroud-color-warning: var(--dev-tools-card-bg);
 }
 
 .footerHint {
@@ -190,6 +192,12 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+}
+
+.totalLabel {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .summaryLabel {

@@ -49,6 +49,7 @@ import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu"
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import HistoryReactSvgUrl from "PUBLIC_DIR/images/history.react.svg?url";
+import CircleCrossReactSvgUrl from "PUBLIC_DIR/images/icons/16/circle.cross.svg?url";
 
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 import type { TTranslation } from "@docspace/shared/types";
@@ -64,12 +65,14 @@ interface TenantPanelProps {
   info?: TDocsConnectInfo;
   openBuyPlan?: (mode: "trial" | "edit") => void;
   copySecretKey?: (t: TTranslation) => void;
+  openCancelPlanDialog?: () => void;
 }
 
 const TenantPanel = ({
   info,
   openBuyPlan,
   copySecretKey,
+  openCancelPlanDialog,
 }: TenantPanelProps) => {
   const { t } = useTranslation(["DocsConnect", "Common"]);
   const navigate = useNavigate();
@@ -81,6 +84,8 @@ const TenantPanel = ({
     getDocsConnectTrialState(info);
   const trialLow = !expired && totalDays > 0 && daysLeft / totalDays < 0.5;
 
+  const hasScheduledChange = info.scheduledChange != null;
+
   const getContextMenuItems = (): ContextMenuModel[] => [
     {
       key: "copy-secret-key",
@@ -88,18 +93,36 @@ const TenantPanel = ({
       icon: CopyReactSvgUrl,
       onClick: () => copySecretKey?.(t),
     },
-    {
-      key: "edit-plan",
-      label: t("Common:EditPlan"),
-      icon: SettingsReactSvgUrl,
-      onClick: () => openBuyPlan?.("edit"),
-    },
+    ...(hasScheduledChange
+      ? []
+      : ([
+          {
+            key: "edit-plan",
+            label: t("Common:EditPlan"),
+            icon: SettingsReactSvgUrl,
+            onClick: () => openBuyPlan?.("edit"),
+          },
+        ] as ContextMenuModel[])),
     {
       key: "transaction-history",
       label: t("Common:TransactionHistory"),
       icon: HistoryReactSvgUrl,
       onClick: () => navigate(PAYMENT_ROUTES.docsConnect),
     },
+    ...(hasScheduledChange
+      ? []
+      : ([
+          {
+            key: "separator",
+            isSeparator: true,
+          },
+          {
+            key: "cancel-plan",
+            label: t("Common:CancelPlan"),
+            icon: CircleCrossReactSvgUrl,
+            onClick: () => openCancelPlanDialog?.(),
+          },
+        ] as ContextMenuModel[])),
   ];
 
   const tabs: TTabItem[] = [
@@ -154,6 +177,7 @@ const TenantPanel = ({
               displayType={ContextMenuButtonDisplayType.dropdown}
               getData={getContextMenuItems}
               size={16}
+              directionX="right"
               testId="docs_connect_context_menu_button"
             />
           )}
@@ -174,4 +198,5 @@ export default inject(({ docsConnectStore }: TStore) => ({
   info: docsConnectStore.info,
   openBuyPlan: docsConnectStore.openBuyPlan,
   copySecretKey: docsConnectStore.copySecretKey,
+  openCancelPlanDialog: docsConnectStore.openCancelPlanDialog,
 }))(observer(TenantPanel));

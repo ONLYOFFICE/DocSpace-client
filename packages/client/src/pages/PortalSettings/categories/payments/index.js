@@ -39,16 +39,19 @@ import { useState, useEffect, useMemo } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Tabs } from "@docspace/ui-kit/components/tabs";
-import { toastr } from "@docspace/ui-kit/components/toast";
 import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
 import { isManagement } from "@docspace/shared/utils/common";
 import { PAYMENT_ROUTES } from "./utils";
-import { getDocsConnectTrialState } from "../developer-tools/DocsConnect/utils";
+import {
+  getDocsConnectTrialState,
+  isDocsConnectCanceled,
+} from "../developer-tools/DocsConnect/utils";
 
 import config from "../../../../../package.json";
 import PaymentsEnterprise from "./Standalone";
 import DocsConnectGetStartedModal from "./SaaS/DocsConnectGetStartedModal";
 import BuyPlanPanel from "../developer-tools/DocsConnect/BuyPlanPanel";
+import CancelPlanDialog from "../developer-tools/DocsConnect/CancelPlanDialog";
 import {
   MainTariff,
   Wallet,
@@ -94,7 +97,8 @@ const PaymentsPage = (props) => {
     fetchDocsConnectInfo,
     openBuyPlan,
     buyPlanPanelVisible,
-    cancelDocsConnectPlan,
+    openDocsConnectCancelDialog,
+    docsConnectCancelDialogVisible,
   } = props;
   const location = useLocation();
   const [currentTabId, setCurrentTabId] = useState(
@@ -123,7 +127,7 @@ const PaymentsPage = (props) => {
     openGetStarted?.();
   };
 
-  const onDocsConnectToggle = async () => {
+  const onDocsConnectToggle = () => {
     if (!docsConnectInfo) {
       openGetStarted?.();
       return;
@@ -137,18 +141,15 @@ const PaymentsPage = (props) => {
       return;
     }
 
-    if (docsConnectInfo.deactivated) {
+    if (
+      docsConnectInfo.deactivated ||
+      isDocsConnectCanceled(docsConnectInfo)
+    ) {
       openBuyPlan?.("edit");
       return;
     }
 
-    if (isPaid) {
-      try {
-        await cancelDocsConnectPlan?.();
-      } catch (e) {
-        toastr.error(e);
-      }
-    }
+    if (isPaid) openDocsConnectCancelDialog?.();
   };
 
   const docsConnectCardState = useMemo(() => {
@@ -166,6 +167,7 @@ const PaymentsPage = (props) => {
         scheduledDate: "",
         scheduledDevPackDisabled: false,
         deactivated: false,
+        canceled: false,
       };
 
     const { isTrial, daysLeft, totalDays, expired, endDate } =
@@ -195,6 +197,7 @@ const PaymentsPage = (props) => {
       scheduledDevPackDisabled:
         docsConnectInfo.scheduledChange?.devPackDisabled ?? false,
       deactivated: docsConnectInfo.deactivated ?? false,
+      canceled: isDocsConnectCanceled(docsConnectInfo),
     };
   }, [docsConnectInfo]);
 
@@ -320,6 +323,7 @@ const PaymentsPage = (props) => {
         onClose={closeGetStarted}
       />
       {buyPlanPanelVisible ? <BuyPlanPanel /> : null}
+      {docsConnectCancelDialogVisible ? <CancelPlanDialog /> : null}
     </BillingRoot>
   );
 };
@@ -362,7 +366,9 @@ export const Component = inject(
       fetchDocsConnectInfo: docsConnectStore?.fetchInfo,
       openBuyPlan: docsConnectStore?.openBuyPlan,
       buyPlanPanelVisible: docsConnectStore?.buyPlanPanelVisible,
-      cancelDocsConnectPlan: docsConnectStore?.cancelPlan,
+      openDocsConnectCancelDialog: docsConnectStore?.openCancelPlanDialog,
+      docsConnectCancelDialogVisible:
+        docsConnectStore?.cancelPlanDialogVisible,
       language: authStore?.language,
       user: user
         ? {

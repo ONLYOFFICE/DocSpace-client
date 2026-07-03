@@ -46,6 +46,12 @@ const startOfDay = (ms: number): number => {
 export const isDocsConnectPaid = (info: TDocsConnectInfo): boolean =>
   info.tenantInfo.license.trial === false;
 
+export const isDocsConnectCanceled = (info: TDocsConnectInfo): boolean =>
+  isDocsConnectPaid(info) &&
+  !info.deactivated &&
+  info.scheduledChange == null &&
+  (info.tenant.payment?.quantity ?? 0) === 0;
+
 export const formatDocsConnectDate = (iso?: string): string => {
   if (!iso) return "";
   const ms = new Date(iso).getTime();

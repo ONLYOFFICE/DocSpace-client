@@ -393,7 +393,11 @@ const storageManagement = new StorageManagement(
 
 const oauthStore = new OAuthStore(userStore, settingsStore);
 
-const docsConnectStore = new DocsConnectStore(settingsStore);
+const docsConnectStore = new DocsConnectStore(
+  settingsStore,
+  currentTariffStatusStore,
+  currentQuotaStore,
+);
 
 const campaignsStore = new CampaignsStore(settingsStore, userStore);
 

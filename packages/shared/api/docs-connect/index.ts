@@ -124,6 +124,7 @@ const EMPTY_TARIFF_STATE: TDocsConnectTariffState = {
 
 const fetchTariffState = async (
   services: TWalletServicesResponse,
+  refresh?: boolean,
 ): Promise<TDocsConnectTariffState> => {
   try {
     const serviceId = (name: string) =>
@@ -137,6 +138,7 @@ const fetchTariffState = async (
     const tariff = (await request({
       method: "get",
       url: "/portal/tariff",
+      params: refresh ? { refresh: true } : {},
     })) as TTariffResponse;
 
     const quotaOf = (id?: number) =>
@@ -194,11 +196,14 @@ const fetchTariffState = async (
   }
 };
 
-const fetchWallet = async (): Promise<TDocsConnectWallet | null> => {
+const fetchWallet = async (
+  refresh?: boolean,
+): Promise<TDocsConnectWallet | null> => {
   try {
     const balance = (await request({
       method: "get",
       url: "/portal/payment/customer/balance",
+      params: refresh ? { refresh: true } : {},
     })) as TBalanceResponse;
 
     const sub = balance?.subAccounts?.[0];
@@ -217,11 +222,12 @@ type TPaymentQuotaResponse = {
   features?: { id?: string; value?: unknown }[];
 } | null;
 
-const fetchDevPackEnabled = async (): Promise<boolean> => {
+const fetchDevPackEnabled = async (refresh?: boolean): Promise<boolean> => {
   try {
     const quota = (await request({
       method: "get",
       url: "/portal/payment/quota",
+      params: refresh ? { refresh: true } : {},
     })) as TPaymentQuotaResponse;
 
     return (quota?.features ?? []).some(
@@ -233,51 +239,52 @@ const fetchDevPackEnabled = async (): Promise<boolean> => {
   }
 };
 
-export const getDocsConnectInfo =
-  async (): Promise<TDocsConnectInfo | null> => {
-    let tenant: TDocsConnectTenant | null = null;
-    try {
-      tenant = (await request({
-        method: "get",
-        url: `${BASE}/tenant`,
-      })) as TDocsConnectTenant | null;
-    } catch {
-      tenant = null;
-    }
+export const getDocsConnectInfo = async (
+  refresh?: boolean,
+): Promise<TDocsConnectInfo | null> => {
+  let tenant: TDocsConnectTenant | null = null;
+  try {
+    tenant = (await request({
+      method: "get",
+      url: `${BASE}/tenant`,
+    })) as TDocsConnectTenant | null;
+  } catch {
+    tenant = null;
+  }
 
-    if (!tenant) {
-      return null;
-    }
+  if (!tenant) {
+    return null;
+  }
 
-    const [config, tenantInfo] = (await Promise.all([
-      request({ method: "get", url: `${BASE}/tenant/config` }),
-      request({ method: "get", url: `${BASE}/tenant/info` }),
-    ])) as [TDocsConnectConfig, TDocsConnectTenantInfo];
+  const [config, tenantInfo] = (await Promise.all([
+    request({ method: "get", url: `${BASE}/tenant/config` }),
+    request({ method: "get", url: `${BASE}/tenant/info` }),
+  ])) as [TDocsConnectConfig, TDocsConnectTenantInfo];
 
-    const services = await fetchWalletServices();
+  const services = await fetchWalletServices();
 
-    const [wallet, devPackEnabled, tariffState] = await Promise.all([
-      fetchWallet(),
-      fetchDevPackEnabled(),
-      fetchTariffState(services),
-    ]);
+  const [wallet, devPackEnabled, tariffState] = await Promise.all([
+    fetchWallet(refresh),
+    fetchDevPackEnabled(refresh),
+    fetchTariffState(services, refresh),
+  ]);
 
-    return {
-      tenant,
-      config,
-      tenantInfo,
-      prices: extractPrices(services),
-      wallet,
-      devPackEnabled,
-      scheduledChange: tariffState.scheduledChange,
-      deactivated: tariffState.deactivated,
-    };
+  return {
+    tenant,
+    config,
+    tenantInfo,
+    prices: extractPrices(services),
+    wallet,
+    devPackEnabled,
+    scheduledChange: tariffState.scheduledChange,
+    deactivated: tariffState.deactivated,
   };
+};
 
 export const startDocsConnectTrial =
   async (): Promise<TDocsConnectInfo | null> => {
     await request({ method: "post", url: `${BASE}/trial` });
-    return getDocsConnectInfo();
+    return getDocsConnectInfo(true);
   };
 
 export const updateDocsConnectConfig = async (
@@ -310,7 +317,7 @@ export const cancelDocsConnectPlan = async (
     throw new Error("Docs Connect plan cancellation failed");
   }
 
-  return getDocsConnectInfo();
+  return getDocsConnectInfo(true);
 };
 
 export const cancelDocsConnectScheduledChange = async (
@@ -333,7 +340,7 @@ export const cancelDocsConnectScheduledChange = async (
     throw new Error("Docs Connect scheduled change cancellation failed");
   }
 
-  return getDocsConnectInfo();
+  return getDocsConnectInfo(true);
 };
 
 export const buyDocsConnectPlan = async (
@@ -376,5 +383,5 @@ export const buyDocsConnectPlan = async (
     throw new Error("Docs Connect plan purchase failed");
   }
 
-  return getDocsConnectInfo();
+  return getDocsConnectInfo(true);
 };

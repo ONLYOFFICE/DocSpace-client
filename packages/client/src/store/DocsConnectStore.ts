@@ -47,12 +47,18 @@ import {
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
+import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 
 export type BuyPlanMode = "trial" | "edit";
 
 class DocsConnectStore {
   settingsStore: Nullable<SettingsStore> = null;
+
+  currentTariffStatusStore: Nullable<CurrentTariffStatusStore> = null;
+
+  currentQuotaStore: Nullable<CurrentQuotasStore> = null;
 
   info: Nullable<TDocsConnectInfo> = null;
 
@@ -66,10 +72,23 @@ class DocsConnectStore {
 
   buyPlanMode: BuyPlanMode = "trial";
 
-  constructor(settingsStore: SettingsStore) {
+  cancelPlanDialogVisible: boolean = false;
+
+  constructor(
+    settingsStore: SettingsStore,
+    currentTariffStatusStore: CurrentTariffStatusStore,
+    currentQuotaStore: CurrentQuotasStore,
+  ) {
     this.settingsStore = settingsStore;
+    this.currentTariffStatusStore = currentTariffStatusStore;
+    this.currentQuotaStore = currentQuotaStore;
     makeAutoObservable(this);
   }
+
+  refreshPortalState = () => {
+    this.currentTariffStatusStore?.fetchPortalTariff(true)?.catch(() => {});
+    this.currentQuotaStore?.fetchPortalQuota(true)?.catch(() => {});
+  };
 
   setIsLoading = (value: boolean) => {
     this.isLoading = value;
@@ -106,6 +125,14 @@ class DocsConnectStore {
     this.buyPlanPanelVisible = false;
   };
 
+  openCancelPlanDialog = () => {
+    this.cancelPlanDialogVisible = true;
+  };
+
+  closeCancelPlanDialog = () => {
+    this.cancelPlanDialogVisible = false;
+  };
+
   openGetStarted = () => {
     this.getStartedVisible = true;
   };
@@ -119,6 +146,7 @@ class DocsConnectStore {
     runInAction(() => {
       this.info = info;
     });
+    this.refreshPortalState();
   };
 
   buyPlan = async ({
@@ -144,6 +172,7 @@ class DocsConnectStore {
       this.info = info;
     });
     this.closeBuyPlan();
+    this.refreshPortalState();
   };
 
   cancelPlan = async () => {
@@ -153,6 +182,7 @@ class DocsConnectStore {
     runInAction(() => {
       this.info = info;
     });
+    this.refreshPortalState();
   };
 
   cancelScheduledChange = async () => {
@@ -162,6 +192,7 @@ class DocsConnectStore {
     runInAction(() => {
       this.info = info;
     });
+    this.refreshPortalState();
   };
 
   downloadReport = () => {

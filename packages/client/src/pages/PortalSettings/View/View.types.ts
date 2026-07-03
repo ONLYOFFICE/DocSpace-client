@@ -47,6 +47,7 @@ export type TView =
   | "services"
   | "ai-settings"
   | "ai-services"
+  | "ai-search"
   | "backup-service"
   | "disk-storage"
   | "apps"

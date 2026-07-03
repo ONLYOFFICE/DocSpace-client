@@ -33,7 +33,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect, useId, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -122,37 +129,40 @@ const ModelAssignmentSaas = ({
     </Text>
   );
 
-  const onSelectModel = async (option: TOption) => {
-    if (option.key === selectedModelId || !providerId) return;
+  const onSelectModel = useCallback(
+    async (option: TOption) => {
+      if (option.key === selectedModelId || !providerId) return;
 
-    const newModelId = option.key as string;
-    const prevModelId = selectedModelId;
+      const newModelId = option.key as string;
+      const prevModelId = selectedModelId;
 
-    setSelectedModelId(newModelId);
-    setIsSaveRequestRunning(true);
+      setSelectedModelId(newModelId);
+      setIsSaveRequestRunning(true);
 
-    try {
-      await changeDefaultProvider?.(
-        { providerId, defaultModel: newModelId },
-        t,
-      );
-    } catch {
-      setSelectedModelId(prevModelId);
-    } finally {
-      setIsSaveRequestRunning(false);
-    }
-  };
+      try {
+        await changeDefaultProvider?.(
+          { providerId, defaultModel: newModelId },
+          t,
+        );
+      } catch {
+        setSelectedModelId(prevModelId);
+      } finally {
+        setIsSaveRequestRunning(false);
+      }
+    },
+    [selectedModelId, providerId, changeDefaultProvider, t],
+  );
 
-  const getModelOptions = () => {
-    return (
+  const modelOptions = useMemo(
+    () =>
       defaultProviderModels?.map((m) => ({
         key: m.modelId,
         label: m.alias || m.modelId,
-      })) || []
-    );
-  };
+      })) || [],
+    [defaultProviderModels],
+  );
 
-  const getModelAdvancedOptions = () => {
+  const modelAdvancedOptions = useMemo(() => {
     if (!defaultProviderModels?.length) return undefined;
 
     return (
@@ -188,7 +198,7 @@ const ModelAssignmentSaas = ({
         })}
       </div>
     );
-  };
+  }, [defaultProviderModels, selectedModelId, formatAiModelsCurrency, t, onSelectModel]);
 
   if (!aiProvidersInitied) return <ModelAssignmentSaasLoader />;
 
@@ -237,7 +247,7 @@ const ModelAssignmentSaas = ({
             <ComboBox
               onSelect={() => {}}
               options={[]}
-              advancedOptions={getModelAdvancedOptions()}
+              advancedOptions={modelAdvancedOptions}
               advancedOptionsCount={defaultProviderModels?.length ?? 0}
               selectedOption={selectedModelOption}
               displayArrow
@@ -259,7 +269,7 @@ const ModelAssignmentSaas = ({
             />
           ) : (
             <ComboBox
-              options={getModelOptions()}
+              options={modelOptions}
               selectedOption={selectedModelOption}
               displayArrow
               withoutArrow={isModelSelectionLocked}

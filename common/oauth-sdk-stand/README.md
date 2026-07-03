@@ -24,9 +24,11 @@ Bearer token alone.
 ## Run
 
 ```bash
-node server.mjs
-# -> http://localhost:8888
+cd common/oauth-sdk-stand   # from the repo root
+node server.mjs             # or: npm start / pnpm start
 ```
+
+Then open `http://localhost:8888` and follow the wizard.
 
 All configuration is optional — copy `.env-example` to `.env` to override:
 

@@ -359,7 +359,9 @@ const BuyPlanPanel = ({
                     {usersChanged && users < currentUsers
                       ? summaryRow(
                           t("DocsConnect:ReducedUsers"),
-                          `−${currentUsers - users}`,
+                          t("DocsConnect:MinusCount", {
+                            count: currentUsers - users,
+                          }),
                         )
                       : null}
                     {summaryRow(

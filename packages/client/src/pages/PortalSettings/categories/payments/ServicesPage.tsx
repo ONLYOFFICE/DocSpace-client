@@ -79,9 +79,7 @@ const ServicesPage = (props: ServicesPageProps) => {
       ? "/management/payments/usage"
       : "/portal-settings/payments/usage";
 
-    navigate(
-      combineUrl(window.ClientConfig?.proxy?.url, config.homepage, url),
-    );
+    navigate(combineUrl(window.ClientConfig?.proxy?.url, config.homepage, url));
   };
 
   const paymentConfig = useMemo(
@@ -109,7 +107,7 @@ const ServicesPage = (props: ServicesPageProps) => {
               combineUrl(
                 window.ClientConfig?.proxy?.url,
                 config.homepage,
-                "/portal-settings/ai-settings/models",
+                "/portal-settings/ai-settings/ai-models",
               ),
             )
           }
@@ -118,7 +116,9 @@ const ServicesPage = (props: ServicesPageProps) => {
       {pathname.includes("backup") ? (
         <BackupPage withBottomMargin={true} onViewMore={onViewUsage} />
       ) : null}
-      {pathname.includes("disk-storage") ? <AdditionalStoragePage withBottomMargin={true}/> : null}
+      {pathname.includes("disk-storage") ? (
+        <AdditionalStoragePage withBottomMargin={true} />
+      ) : null}
     </BillingRoot>
   );
 };

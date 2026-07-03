@@ -122,7 +122,7 @@ const PaymentsPage = (props) => {
         <ServicesList
           getAIConfig={getAIConfig}
           onOpenSupportedModels={() =>
-            navigateToRoute("/portal-settings/ai-settings/models")
+            navigateToRoute("/portal-settings/ai-settings/ai-models")
           }
         />
       ),
@@ -172,9 +172,7 @@ const PaymentsPage = (props) => {
       ? `/management/payments/${e.id}`
       : `/portal-settings/payments/${e.id}`;
 
-    navigate(
-      combineUrl(window.ClientConfig?.proxy?.url, config.homepage, url),
-    );
+    navigate(combineUrl(window.ClientConfig?.proxy?.url, config.homepage, url));
   };
 
   const navigateToRoute = (route) => {

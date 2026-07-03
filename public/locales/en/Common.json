@@ -118,6 +118,7 @@
   "AIDisabledInfoBlockActivateWalletDescription": "Activate AI features to chat with your agents, access their knowledge base, and let them run tasks across your apps. AI usage is billed from your wallet balance.",
   "AIDisabledInfoBlockContactAdminDescription": "Contact the {{productName}} admin to activate AI features and chat with your agents, access their knowledge base, and let them run tasks across your apps.",
   "AIDisabledInfoBlockStandaloneDescription": "AI capabilities are currently turned off, which means this agent can’t process chats or tasks. Connect your own AI service to unlock advanced features in {{productName}}.",
+  "AIExaPricingNote": "<1>Exa pricing</1> + 20% service fee applies to usage",
   "AIFeature": "AI feature",
   "AIFeatureCheckGrammar": "Check grammar and style",
   "AIFeatureFormInsights": "Find insights in form data",

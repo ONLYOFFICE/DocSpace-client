@@ -875,6 +875,8 @@
   "EnableAIAgent": "Enable AI Agent",
   "EnableAIFeatures": "Enable AI features",
   "EnableAIFeaturesDescription": "AI usage is billed from your available credits. If available credits run too low, AI requests will not be processed.",
+  "EnableAIToolsForAISearchDescription": "AI search works only when AI tools are enabled. Enable AI tools to turn on AI search?",
+  "EnableAIToolsForAISearchTitle": "Enable AI tools",
   "EnableAiRoomsDescription": "Customizable workspaces for organizing files and collaborating with teams or clients. Set tailored access rights and environments for each project.",
   "EnableAiRoomsTitle": "Enable AI Rooms?",
   "EnableAutomaticBackup": "Enable automatic backup.",

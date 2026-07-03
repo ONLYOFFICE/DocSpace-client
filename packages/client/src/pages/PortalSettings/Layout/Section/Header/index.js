@@ -208,7 +208,8 @@ const SectionHeaderContent = (props) => {
     const isServicesSubPage =
       location.pathname.includes("/services/disk-storage") ||
       location.pathname.includes("/services/backup") ||
-      location.pathname.includes("/services/ai-services");
+      location.pathname.includes("/services/ai-services") ||
+      location.pathname.includes("/services/ai-search");
 
     if (isServicesSubPage && location.key === "default") {
       navigate("/portal-settings/payments/services");
@@ -322,6 +323,7 @@ const SectionHeaderContent = (props) => {
           {!isCategoryOrHeader &&
           arrayOfParams[0] &&
           (isMobile() ||
+            window.location.href.indexOf("/ai-search") > -1 ||
             window.location.href.indexOf("/javascript-sdk/") > -1 ||
             window.location.href.indexOf("/ai-services") > -1 ||
             window.location.href.indexOf("/services/backup") > -1 ||

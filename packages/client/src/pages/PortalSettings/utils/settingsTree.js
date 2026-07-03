@@ -627,6 +627,13 @@ export const settingsTree = [
             link: "disk-storage",
             tKey: "Common:AdditionalDiskStorage",
           },
+          {
+            id: "portal-settings_catalog-services-ai-search",
+            key: "10-3-3",
+            icon: "",
+            link: "ai-search",
+            tKey: "Common:EnableAISearch",
+          },
         ],
       },
     ],
@@ -775,3 +782,4 @@ export const settingsTreeFull = [
     link: "statistics",
   },
 ];
+

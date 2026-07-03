@@ -101,9 +101,14 @@ type TFilesStore = {
 // FABLE5-REVIEW: connectItem is filled by several still-.js code paths
 // (FilesActionsStore/ContextOptionsStore spread provider + capability
 // objects) and by ThirdPartyComboBox with a partial literal, so only a
-// partial ThirdPartyAccountType can be guaranteed here.
-type TConnectItem = Partial<ThirdPartyAccountType> & {
+// partial ThirdPartyAccountType can be guaranteed here. ContextOptionsStore
+// additionally fills `link`/`token` and a numeric `provider_id` from the
+// third-party provider list.
+type TConnectItem = Partial<Omit<ThirdPartyAccountType, "provider_id">> & {
   customer_title?: string;
+  provider_id?: string | number;
+  link?: string;
+  token?: string;
 };
 
 // FABLE5-REVIEW: download items are file view-models produced by the

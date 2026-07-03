@@ -484,7 +484,15 @@ export const useOptions = (
   const createAndCopySharedLink = useCallback(() => {
     if (!selectedFolder) return;
 
-    onCreateAndCopySharedLink?.(selectedFolder, t);
+    // FABLE5-REVIEW: TSelectedFolder (id: number | null) is consumed by the
+    // ContextOptionsStore item view-model type — the cast keeps the original
+    // unchecked call from the .js era.
+    onCreateAndCopySharedLink?.(
+      selectedFolder as unknown as Parameters<
+        NonNullable<typeof onCreateAndCopySharedLink>
+      >[0],
+      t,
+    );
   }, [selectedFolder, onCreateAndCopySharedLink, t]);
 
   const onOpenAccessSettings = () => {

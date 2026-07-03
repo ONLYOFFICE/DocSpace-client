@@ -37,48 +37,25 @@ import { inject, observer } from "mobx-react";
 
 import { ChatInfoBlock } from "@docspace/ui-kit/ai-agent/chat/components/chat-info-block";
 
-import { useAIActivation } from "SRC_DIR/Hooks/useAIActivation";
-import type ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
-import type PaymentStore from "SRC_DIR/store/PaymentStore";
-import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import {
+  useChatNoAccess,
+  mapChatNoAccessStores,
+  type ChatNoAccessStoreProps,
+} from "SRC_DIR/Hooks/useChatNoAccess";
 
-type Props = {
-  showBodyLoader?: ClientLoadingStore["showBodyLoader"];
-  standalone?: SettingsStore["standalone"];
-  isAdmin?: boolean;
-  isPayer?: PaymentStore["isPayer"];
-  isCardLinkedToPortal?: PaymentStore["isCardLinkedToPortal"];
-  isAIReady?: PaymentStore["isAIReady"];
-  enableAIService?: PaymentStore["enableAIService"];
-  getAIConfig?: SettingsStore["getAIConfig"];
-  refreshPaymentInfo?: () => Promise<void> | void;
-  walletCustomerEmail?: string | null;
-  walletCustomerDisplayName?: string | null;
-  language?: string;
-};
+const AIActivationBannerBase = (props: ChatNoAccessStoreProps) => {
+  const {
+    standalone,
+    isAdmin,
+    isPayer,
+    isAIReady,
+    walletCustomerEmail,
+    walletCustomerDisplayName,
+  } = props;
 
-const AIActivationBannerBase = ({
-  standalone,
-  isAdmin,
-  isPayer,
-  isCardLinkedToPortal,
-  isAIReady,
-  enableAIService,
-  getAIConfig,
-  refreshPaymentInfo,
-  walletCustomerEmail,
-  walletCustomerDisplayName,
-}: Props) => {
-  const { onActivateAI, onShowAIBenefits, isActivating } = useAIActivation({
-    enableAIService,
-    getAIConfig,
-    refreshPaymentInfo,
-    isCardLinkedToPortal,
-    context: "chat",
-    createAgentOnActivate: false,
-  });
+  const { activation } = useChatNoAccess(props);
 
-  if (standalone) return;
+  if (standalone) return null;
 
   if (isAIReady) return null;
 
@@ -89,40 +66,15 @@ const AIActivationBannerBase = ({
       isPayer={isPayer}
       walletCustomerEmail={walletCustomerEmail}
       walletCustomerDisplayName={walletCustomerDisplayName}
-      onActivateAI={onActivateAI}
-      onShowAIBenefits={onShowAIBenefits}
-      isActivating={isActivating}
+      onActivateAI={activation.onActivateAI}
+      onShowAIBenefits={activation.onShowAIBenefits}
+      isActivating={activation.isActivating}
     />
   );
 };
 
-export const AIActivationBanner = inject(
-  ({
-    settingsStore,
-    userStore,
-    paymentStore,
-    currentTariffStatusStore,
-    authStore,
-  }: TStore) => {
-    const { standalone, getAIConfig } = settingsStore;
-    const { isPayer, isCardLinkedToPortal, isAIReady, enableAIService } =
-      paymentStore;
-    const { walletCustomerEmail, walletCustomerInfo } =
-      currentTariffStatusStore;
-
-    return {
-      standalone,
-      isAdmin: userStore?.user?.isAdmin || userStore?.user?.isOwner,
-      isPayer,
-      isCardLinkedToPortal,
-      isAIReady,
-      enableAIService,
-      getAIConfig,
-      refreshPaymentInfo: authStore?.getPaymentInfo,
-      walletCustomerEmail,
-      walletCustomerDisplayName: walletCustomerInfo?.displayName,
-    };
-  },
+export const AIActivationBanner = inject((stores: TStore) =>
+  mapChatNoAccessStores(stores),
 )(observer(AIActivationBannerBase));
 
 export default AIActivationBanner;

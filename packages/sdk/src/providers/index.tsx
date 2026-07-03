@@ -64,6 +64,7 @@ import {
   setAuthToken,
   setWithCredentialsStatus,
 } from "@docspace/shared/api/client";
+import { installOAuthFetchInterceptor } from "@docspace/shared/utils/oauthFetchInterceptor";
 import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
 
 import {
@@ -163,6 +164,7 @@ const Providers = ({ children, contextData, oauthFrame }: TProviders) => {
 
     let cancelled = false;
     setWithCredentialsStatus(false);
+    installOAuthFetchInterceptor();
 
     requestAuthToken().then((token) => {
       if (cancelled) return;

@@ -95,6 +95,10 @@ class AxiosClient {
 
   private oauthReady: Promise<void> | null = null;
 
+  private oauthRefreshing: Promise<string | null> | null = null;
+
+  private oauthGeneration = 0;
+
   private oauthUnavailable = false;
 
   constructor() {
@@ -210,7 +214,40 @@ class AxiosClient {
 
   setAuthToken = (token: string | null) => {
     this.authToken = token;
+    this.oauthGeneration += 1;
     if (token) this.oauthUnavailable = false;
+  };
+
+  getOAuthToken = async (): Promise<string | null> => {
+    if (typeof window !== "undefined" && isOAuthFrame())
+      await this.ensureOAuthToken();
+    return this.authToken;
+  };
+
+  refreshOAuthToken = (): Promise<string | null> => {
+    if (typeof window === "undefined" || !isOAuthFrame())
+      return Promise.resolve(null);
+    if (this.oauthRefreshing !== null) return this.oauthRefreshing;
+
+    this.oauthGeneration += 1;
+    this.oauthRefreshing = requestAuthToken()
+      .then((token) => {
+        if (token) {
+          this.authToken = token;
+          this.oauthUnavailable = false;
+        } else {
+          frameCallEvent({
+            event: "onAuthError",
+            data: { message: "unauthorized" },
+          });
+        }
+        return token;
+      })
+      .finally(() => {
+        this.oauthRefreshing = null;
+      });
+
+    return this.oauthRefreshing;
   };
 
   private ensureOAuthToken = (): Promise<void> => {
@@ -218,20 +255,27 @@ class AxiosClient {
     if (this.oauthUnavailable) return Promise.resolve();
     if (this.oauthReady !== null) return this.oauthReady;
 
-    this.oauthReady = requestAuthToken()
+    const generation = this.oauthGeneration;
+    const ready = requestAuthToken()
       .then((token) => {
+        if (generation !== this.oauthGeneration) return;
         if (token) {
           this.authToken = token;
           this.oauthUnavailable = false;
         } else {
           this.oauthUnavailable = true;
+          frameCallEvent({
+            event: "onAuthError",
+            data: { message: "unauthorized" },
+          });
         }
       })
       .finally(() => {
-        this.oauthReady = null;
+        if (this.oauthReady === ready) this.oauthReady = null;
       });
 
-    return this.oauthReady;
+    this.oauthReady = ready;
+    return ready;
   };
 
   setWithCredentialsStatus = (state: boolean) => {
@@ -349,19 +393,16 @@ class AxiosClient {
               if (opts._oauthRetried) return signalAuthError();
 
               opts._oauthRetried = true;
-              this.authToken = null;
-              this.oauthReady = null;
-              this.oauthUnavailable = false;
 
-              return this.ensureOAuthToken().then(() => {
-                if (this.authToken)
+              return this.refreshOAuthToken().then((token) => {
+                if (token)
                   return this.request<T>(
                     opts,
                     skipRedirect,
                     isOAuth,
                   ) as unknown as Promise<void>;
 
-                return signalAuthError();
+                return Promise.reject(error);
               });
             }
 

@@ -38,7 +38,12 @@ import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { checkFilterInstance } from "../../utils/common";
 import { isOAuthFrame } from "../../utils/oauthToken";
 
-import { request, getAuthToken } from "../client";
+import {
+  request,
+  getAuthToken,
+  resolveOAuthToken,
+  refreshOAuthToken,
+} from "../client";
 import type { TFile } from "../files/types";
 import type { KnowledgeType, ToolsPermission, WebSearchType } from "./enums";
 import RoomsFilter from "../rooms/filter";
@@ -188,11 +193,11 @@ export const getProviderAvailabilityStatus = async (
     }));
 };
 
-const getAuthHeaders = (): Record<string, string> => {
+const getAuthHeaders = async (): Promise<Record<string, string>> => {
   if (typeof window === "undefined") return {};
 
   if (isOAuthFrame()) {
-    const oauthToken = getAuthToken();
+    const oauthToken = await resolveOAuthToken();
     return oauthToken ? { Authorization: `Bearer ${oauthToken}` } : {};
   }
 
@@ -214,17 +219,47 @@ const getAuthHeaders = (): Record<string, string> => {
   return {};
 };
 
+const authFetch = async (
+  url: string,
+  init: RequestInit = {},
+): Promise<Response> => {
+  const send = async () => {
+    const headers = new Headers(init.headers);
+    for (const [name, value] of Object.entries(await getAuthHeaders()))
+      headers.set(name, value);
+    return {
+      hadAuth: headers.has("Authorization"),
+      response: await fetch(url, { ...init, headers }),
+    };
+  };
+
+  const first = await send();
+  let { response } = first;
+
+  if (
+    response.status === 401 &&
+    first.hadAuth &&
+    typeof window !== "undefined" &&
+    isOAuthFrame() &&
+    !init.signal?.aborted &&
+    (await refreshOAuthToken())
+  ) {
+    ({ response } = await send());
+  }
+
+  return response;
+};
+
 export const startNewChat = async (
   roomId: number | string,
   message: string,
   files: string[],
   abortController?: AbortController,
 ) => {
-  const response = await fetch(`/api/2.0${baseUrl}/rooms/${roomId}/chats`, {
+  const response = await authFetch(`/api/2.0${baseUrl}/rooms/${roomId}/chats`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      ...getAuthHeaders(),
     },
     signal: abortController?.signal,
     body: JSON.stringify({ message, files }),
@@ -239,15 +274,17 @@ export const sendMessageToChat = async (
   files: string[],
   abortController?: AbortController,
 ) => {
-  const response = await fetch(`/api/2.0${baseUrl}/chats/${chatId}/messages`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      ...getAuthHeaders(),
+  const response = await authFetch(
+    `/api/2.0${baseUrl}/chats/${chatId}/messages`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      signal: abortController?.signal,
+      body: JSON.stringify({ message, files }),
     },
-    signal: abortController?.signal,
-    body: JSON.stringify({ message, files }),
-  });
+  );
 
   return response.body;
 };
@@ -827,11 +864,10 @@ export const getDefaultProvider = async () => {
 };
 
 export const getProfilesList = async () => {
-  const response = await fetch(`/api/2.0/new-ai/profiles/list`, {
+  const response = await authFetch(`/api/2.0/new-ai/profiles/list`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      ...getAuthHeaders(),
     },
   });
 
@@ -843,13 +879,12 @@ export const getProfilesList = async () => {
 export const getProfileAssignments = async (entityId?: string) => {
   const params = entityId ? `?entityId=${encodeURIComponent(entityId)}` : "";
 
-  const response = await fetch(
+  const response = await authFetch(
     `/api/2.0/new-ai/assignments/get-all-assignments${params}`,
     {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        ...getAuthHeaders(),
       },
     },
   );

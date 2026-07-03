@@ -48,6 +48,8 @@ const isInIframe = (): boolean => {
   }
 };
 
+let latchedFromUrl: boolean | null = null;
+
 export const isOAuthFrame = (): boolean => {
   if (typeof window === "undefined") return false;
 
@@ -55,9 +57,11 @@ export const isOAuthFrame = (): boolean => {
 
   const cfg = window.ClientConfig;
   if (cfg?.isOAuthFrame != null) return cfg.isOAuthFrame;
+  if (latchedFromUrl != null) return latchedFromUrl;
 
   const fromUrl =
     new URLSearchParams(window.location.search).get("auth") === "oauth";
+  latchedFromUrl = fromUrl;
   if (cfg) cfg.isOAuthFrame = fromUrl;
   return fromUrl;
 };
@@ -149,6 +153,7 @@ export const __resetOAuthTokenForTests = () => {
   pending.forEach((entry) => clearTimeout(entry.timer));
   pending.clear();
   nextCallId = 1;
+  latchedFromUrl = null;
   if (listenerInstalled && typeof window !== "undefined") {
     window.removeEventListener("message", onMessage, false);
     listenerInstalled = false;

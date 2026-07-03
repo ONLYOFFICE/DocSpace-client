@@ -44,6 +44,8 @@ import {
   subscribeFilenameCache,
 } from "@docspace/shared/services/encryption/filename-cache";
 
+import type FilesActionsStore from "./FilesActionsStore";
+
 // FABLE5-REVIEW: FilesStore is still .js (wave 3) — replace this structural
 // type with `import type` once it is converted.
 type TFilesStore = {
@@ -52,17 +54,10 @@ type TFilesStore = {
   ensureEncryptedFilenameForFile?: (file: TFile) => void;
 };
 
-// FABLE5-REVIEW: FilesActionsStore is still .js (wave 3) — replace this
-// structural type with `import type` once it is converted. Note that
-// store/index.js constructs this store as
-// `new VersionHistoryStore(filesStore, settingsStore)` (the second argument
-// is settingsStore, NOT filesActionsStore) and only later overwrites
-// `versionHistoryStore.filesActionsStore = filesActionsStore;`
-// post-construction, so at construction time this field briefly holds
-// SettingsStore.
-type TFilesActionsStore = {
-  completeAction: (selectedItem: TFile, type: FileAction) => Promise<void>;
-};
+// Narrow interface (Track F): the only member of FilesActionsStore this
+// store uses. The real store is attached post-construction in
+// store/index.ts because the two stores reference each other.
+type TFilesActionsStore = Pick<FilesActionsStore, "completeAction">;
 
 class VersionHistoryStore {
   isVisible = false;
@@ -103,10 +98,9 @@ class VersionHistoryStore {
   // runtime shape identical: no own property, `undefined` at access time.
   declare files?: TFile[];
 
-  constructor(filesStore: TFilesStore, filesActionsStore: TFilesActionsStore) {
+  constructor(filesStore: TFilesStore) {
     makeAutoObservable(this);
     this.filesStore = filesStore;
-    this.filesActionsStore = filesActionsStore;
 
     subscribeFilenameCache(() => {
       runInAction(() => {

@@ -213,16 +213,8 @@ const primaryProgressDataStore = new PrimaryProgressDataStore(
   filesStore,
   selectedFolderStore,
 );
-// FABLE5-REVIEW: historical quirk (see VersionHistoryStore.ts) — the second
-// constructor argument has always been settingsStore, not the
-// filesActionsStore the parameter is named after; the real filesActionsStore
-// is attached below, after construction.
-const versionHistoryStore = new VersionHistoryStore(
-  filesStore,
-  settingsStore as unknown as ConstructorParameters<
-    typeof VersionHistoryStore
-  >[1],
-);
+// filesActionsStore is attached post-construction below (mutual reference).
+const versionHistoryStore = new VersionHistoryStore(filesStore);
 
 const dialogsStore = new DialogsStore(
   authStore,

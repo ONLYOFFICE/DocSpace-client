@@ -35,6 +35,7 @@
 
 import { makeAutoObservable, runInAction } from "mobx";
 import { getI18n, Trans } from "react-i18next";
+import type { TFunction } from "i18next";
 import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 import uniqueid from "lodash/uniqueId";
 import sumBy from "lodash/sumBy";
@@ -99,20 +100,244 @@ import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { FileOperationStatus } from "@docspace/shared/enums";
 import { Link } from "@docspace/ui-kit/components/link";
 
-const removeDuplicate = (items) => {
-  const obj = {};
+import type {
+  TFile,
+  TFolder,
+  TOperation,
+} from "@docspace/shared/api/files/types";
+import type FilesFilter from "@docspace/shared/api/files/filter";
+import type { ItemUploadContext } from "@docspace/shared/services/private-room/encrypted-upload";
+import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { UserStore } from "@docspace/shared/store/UserStore";
+import type { TTranslation } from "@docspace/shared/types";
+import type { TConflictResolveDialogData } from "SRC_DIR/components/dialogs/ConflictResolveDialog/ConflictResolveDialog.types";
+
+import type AiRoomStore from "./AiRoomStore";
+import type DialogsStore from "./DialogsStore";
+import type FilesSettingsStore from "./FilesSettingsStore";
+import type PrimaryProgressDataStore from "./PrimaryProgressDataStore";
+import type SecondaryProgressDataStore from "./SecondaryProgressDataStore";
+import type SelectedFolderStore from "./SelectedFolderStore";
+import type TreeFoldersStore from "./TreeFoldersStore";
+
+type TOperationName = (typeof OPERATIONS_NAME)[keyof typeof OPERATIONS_NAME];
+
+// FABLE5-REVIEW: upload items get their `file` from still-.js callers
+// (FilesActionsStore drag&drop, GlobalEvents); the extra members on the DOM
+// File object are a structural guess from the usage in this store.
+type TUploadBrowserFile = File & {
+  parentFolderId?: number | string;
+  encrypted?: boolean;
+  uploadContext?: ItemUploadContext;
+  lastModifiedDate?: Date;
+};
+
+export type TUploadFile = {
+  file: TUploadBrowserFile;
+  uniqueId: string;
+  fileId: number | null;
+  toFolderId?: number | string | null;
+  action?: "upload" | "uploaded" | "convert" | "converted";
+  error?: string | null;
+  fileInfo: TFile | null;
+  cancel?: boolean;
+  needConvert?: boolean;
+  encrypted?: boolean;
+  encryptionRoomId?: number | string | null;
+  percent: number;
+  inAction?: boolean;
+  inConversion?: boolean;
+  isQuotaError?: boolean;
+  errorShown?: boolean;
+  isCalculated?: boolean;
+  needPassword?: boolean;
+  convertProgress?: number;
+  path?: number[];
+  password?: string | null;
+  format?: string | null;
+  index?: number;
+};
+
+// FABLE5-REVIEW: conversion panel items are produced by still-.js callers
+// (ConvertDialog, files view context options); minimal structural type of
+// the members used in this store.
+type TConversionFile = {
+  fileId: number | null;
+  fileInfo: TFile | null;
+  uniqueId?: string;
+  action?: string;
+  error?: string | null;
+  errorShown?: boolean;
+  inConversion?: boolean;
+  needPassword?: boolean;
+  convertProgress?: number;
+  password?: string | null;
+  format?: string | null;
+  index?: number;
+};
+
+type TUploadData = {
+  files?: TUploadFile[];
+  filesToConversion?: TUploadFile[];
+  filesSize?: number;
+  uploadedFiles?: number;
+  percent?: number;
+  uploaded?: boolean;
+  converted?: boolean;
+  currentUploadNumber?: number;
+  conversionPercent?: number;
+  totalErrorsCount?: number;
+  uploadedFilesHistory?: TUploadFile[];
+  newFilesWithoutConversion?: TUploadFile[];
+  allNewFiles?: TUploadFile[];
+  conversionFiles?: TUploadFile[];
+};
+
+type TStartUploadData = TUploadData & {
+  files: TUploadFile[];
+  filesSize: number;
+  uploadedFilesHistory: TUploadFile[];
+  newFilesWithoutConversion: TUploadFile[];
+  allNewFiles: TUploadFile[];
+};
+
+// FABLE5-REVIEW: the chunk upload endpoints (uploadChunkParallel,
+// uploadChunkSequential, finalizeUploadSession) are untyped in shared/api
+// (raw request); shape observed from the usage in this store.
+type TChunkUploadResponse = {
+  uploaded: boolean;
+  id: number;
+  file: TFile;
+};
+
+type TUploadChunk = {
+  isActive: boolean;
+  isFinished: boolean;
+  isFinalize: boolean;
+  onUpload: () => Promise<unknown>;
+};
+
+type TChunkData = {
+  operationId: string;
+  file: TUploadBrowserFile;
+  fileSize?: number;
+  indexOfFile: number;
+  path: number[];
+  length: number;
+};
+
+type TResolve = (value?: unknown) => void;
+
+type TCheckChunkUpload = {
+  t: TTranslation;
+  res: TChunkUploadResponse;
+  index: number;
+  indexOfFile: number;
+  path: number[];
+  chunksLength: number;
+  resolve: TResolve;
+  createNewIfExist?: boolean;
+};
+
+type TPbData = {
+  operation: TOperationName;
+  operationId: string;
+};
+
+type TItemOperationData = {
+  // FABLE5-REVIEW: the copy/move API declares destFolderId as number, but
+  // still-.js/.tsx callers also pass string ids (third-party) or undefined.
+  destFolderId: number | string | undefined;
+  destFolderInfo?: TFolder;
+  folderIds: number[];
+  fileIds: number[];
+  deleteAfter: boolean;
+  isCopy?: boolean;
+  content?: boolean;
+  title?: string;
+  itemsCount?: number;
+  isFolder?: boolean;
+  toFillOut?: boolean;
+  conflictResolveType?: ConflictResolveType;
+  translations?: { [key: string]: string };
+};
+
+// FABLE5-REVIEW: getFileConversationProgress is untyped in shared/api
+// (raw request); shape observed from the usage in this store.
+type TConversionProgress = {
+  progress?: number;
+  result?: TFile | "password" | null;
+  error?: string | null;
+};
+
+type TAxiosLikeError = {
+  response?: { data?: { error?: { message?: string } }; status?: number };
+  statusText?: string;
+  message?: string;
+};
+
+// FABLE5-REVIEW: FilesStore is still .js (wave 3) — replace this structural
+// type with `import type` once it is converted.
+type TFilesStore = {
+  files: TFile[];
+  folders: TFolder[];
+  filter: FilesFilter;
+  showNewFilesInList: boolean;
+  activeFiles: { id: number }[];
+  activeFolders: { id: number }[];
+  setFiles: (files: TFile[]) => void;
+  setFolders: (folders: TFolder[]) => void;
+  setFilter: (filter: FilesFilter) => void;
+  setActiveFiles: (
+    activeFiles: { id: number }[],
+    destFolderId?: number | string,
+  ) => void;
+  setActiveFolders: (
+    activeFolders: { id: number }[],
+    destFolderId?: number | string,
+  ) => void;
+  setHighlightFile: (highlightFile: {
+    highlightFileId: number | string;
+    isFileHasExst: boolean;
+  }) => void;
+  openDocEditor: (
+    id: number | string,
+    preview?: boolean,
+    shareKey?: string | null,
+  ) => void;
+  fetchFiles: (
+    folderId: number | string,
+    filter: FilesFilter | null,
+    clearFilter?: boolean,
+    withSubfolders?: boolean,
+  ) => Promise<unknown>;
+  removeFiles: (
+    fileIds?: number[],
+    folderIds?: number[],
+    showToast?: (() => void) | null,
+    destFolderId?: number | string,
+  ) => void;
+  getIsEmptyTrash: () => Promise<void>;
+};
+
+const removeDuplicate = <T extends { uniqueId?: string }>(items: T[]): T[] => {
+  const obj: Record<string, boolean> = {};
   return items.filter((x) => {
-    if (obj[x.uniqueId]) return false;
-    obj[x.uniqueId] = true;
+    if (obj[x.uniqueId as string]) return false;
+    obj[x.uniqueId as string] = true;
     return true;
   });
 };
 
-const dekByFileEntry = new WeakMap();
+const dekByFileEntry = new WeakMap<object, Uint8Array | null>();
 
-let uploadAutoLockRelease = null;
+let uploadAutoLockRelease: (() => void) | null = null;
 
-function setFileDek(entry, dek) {
+function setFileDek(
+  entry: TUploadFile | null | undefined,
+  dek: Uint8Array | null,
+) {
   if (!entry) return;
   const previous = dekByFileEntry.get(entry);
   if (previous && previous !== dek) {
@@ -121,7 +346,7 @@ function setFileDek(entry, dek) {
   dekByFileEntry.set(entry, dek);
 }
 
-function takeFileDek(entry) {
+function takeFileDek(entry: TUploadFile | null | undefined) {
   if (!entry) return null;
   const dek = dekByFileEntry.get(entry);
   if (dek) {
@@ -131,14 +356,20 @@ function takeFileDek(entry) {
   return null;
 }
 
-function hasFileDek(entry) {
+function hasFileDek(entry: TUploadFile | null | undefined) {
   return !!entry && dekByFileEntry.has(entry);
 }
 
-const getConversationProgress = async (fileId) => {
-  const promise = new Promise((resolve, reject) => {
+const getConversationProgress = async (fileId: number | null) => {
+  const promise = new Promise<TConversionProgress[]>((resolve, reject) => {
     setTimeout(() => {
-      getFileConversationProgress(fileId)
+      // FABLE5-REVIEW: getFileConversationProgress is untyped in shared/api;
+      // fileId is only null before the upload session has assigned one.
+      (
+        getFileConversationProgress(fileId as number) as Promise<
+          TConversionProgress[]
+        >
+      )
         .then((res) => {
           // console.log(`getFileConversationProgress fileId:${fileId}`, res);
           resolve(res);
@@ -154,45 +385,45 @@ const getConversationProgress = async (fileId) => {
 };
 
 class UploadDataStore {
-  settingsStore;
+  settingsStore: SettingsStore;
 
-  treeFoldersStore;
+  treeFoldersStore: TreeFoldersStore;
 
-  selectedFolderStore;
+  selectedFolderStore: SelectedFolderStore;
 
-  filesStore;
+  filesStore: TFilesStore;
 
-  secondaryProgressDataStore;
+  secondaryProgressDataStore: SecondaryProgressDataStore;
 
-  primaryProgressDataStore;
+  primaryProgressDataStore: PrimaryProgressDataStore;
 
-  dialogsStore;
+  dialogsStore: DialogsStore;
 
-  filesSettingsStore;
+  filesSettingsStore: FilesSettingsStore;
 
-  aiRoomStore;
+  aiRoomStore: AiRoomStore;
 
-  userStore;
+  userStore: UserStore;
 
   encryptionEnabled = false;
 
-  files = [];
+  files: TUploadFile[] = [];
 
-  uploadedFilesHistory = [];
+  uploadedFilesHistory: TUploadFile[] = [];
 
-  displayedConversionFiles = []; // Files shown in the conversion panel
+  displayedConversionFiles: TConversionFile[] = []; // Files shown in the conversion panel
 
   filesSize = 0;
 
-  tempConversionFiles = [];
+  tempConversionFiles: TUploadFile[] = [];
 
-  filesToConversion = [];
+  filesToConversion: TUploadFile[] = [];
 
-  activeConversionQueue = []; // Queue for files being converted from files view
+  activeConversionQueue: TConversionFile[] = []; // Queue for files being converted from files view
 
   convertFilesSize = 0;
 
-  uploadToFolder = null;
+  uploadToFolder: number | string | null = null;
 
   uploadedFiles = 0;
 
@@ -208,7 +439,7 @@ class UploadDataStore {
 
   uploadPanelVisible = false;
 
-  selectedUploadFile = [];
+  selectedUploadFile: TUploadFile[] = [];
 
   errors = 0;
 
@@ -222,7 +453,7 @@ class UploadDataStore {
 
   uploadedFilesSize = 0;
 
-  asyncUploadObj = {};
+  asyncUploadObj: Record<string, { chunksArray: TUploadChunk[] }> = {};
 
   conversionVisible = false;
 
@@ -233,16 +464,16 @@ class UploadDataStore {
   quotaErrorRaised = false;
 
   constructor(
-    settingsStore,
-    treeFoldersStore,
-    selectedFolderStore,
-    filesStore,
-    secondaryProgressDataStore,
-    primaryProgressDataStore,
-    dialogsStore,
-    filesSettingsStore,
-    aiRoomStore,
-    userStore,
+    settingsStore: SettingsStore,
+    treeFoldersStore: TreeFoldersStore,
+    selectedFolderStore: SelectedFolderStore,
+    filesStore: TFilesStore,
+    secondaryProgressDataStore: SecondaryProgressDataStore,
+    primaryProgressDataStore: PrimaryProgressDataStore,
+    dialogsStore: DialogsStore,
+    filesSettingsStore: FilesSettingsStore,
+    aiRoomStore: AiRoomStore,
+    userStore: UserStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -257,17 +488,17 @@ class UploadDataStore {
     this.userStore = userStore;
   }
 
-  setEncryptionEnabled = (enabled) => {
+  setEncryptionEnabled = (enabled: boolean) => {
     this.encryptionEnabled = enabled;
   };
 
   wrapForSelfThenRoom = async (
-    fileId,
-    currentUserId,
-    publicKeyBase64,
-    publicKeyId,
-    dek,
-    roomId,
+    fileId: number,
+    currentUserId: string,
+    publicKeyBase64: string,
+    publicKeyId: string,
+    dek: Uint8Array,
+    roomId: number | string | null,
   ) => {
     try {
       const identity = await requireUnlock(currentUserId);
@@ -303,11 +534,11 @@ class UploadDataStore {
   };
 
   encryptKeysForRoomMembers = async (
-    fileId,
-    currentUserId,
-    roomId,
-    dek,
-    identity,
+    fileId: number,
+    currentUserId: string,
+    roomId: number | string | null,
+    dek: Uint8Array,
+    identity: IdentityKeyPair,
   ) => {
     try {
       if (!roomId) {
@@ -334,7 +565,11 @@ class UploadDataStore {
         ),
       );
 
-      const recipients = [];
+      const recipients: {
+        userId: string;
+        publicKey: string;
+        publicKeyId: string;
+      }[] = [];
       if (Array.isArray(publicKeys)) {
         for (const pk of publicKeys) {
           if (!pk.publicKey || !pk.userId) continue;
@@ -379,7 +614,11 @@ class UploadDataStore {
     }
   };
 
-  getUserEncryptionKeys = () => {
+  getUserEncryptionKeys = (): {
+    publicKey: string | null;
+    userId: string | null;
+    publicKeyId: string | null;
+  } => {
     const keys = this.userStore?.encryptionKeys;
     const userId = this.userStore?.user?.id;
 
@@ -406,7 +645,14 @@ class UploadDataStore {
       ? RoomsType.CustomRoom
       : this.selectedFolderStore.roomType;
     const { publicKey, userId } = this.getUserEncryptionKeys();
-    return shouldEncryptUpload(roomType, isPrivate) && !!publicKey && !!userId;
+    // FABLE5-REVIEW: shouldEncryptUpload declares roomType: RoomsType, but the
+    // original .js passed selectedFolderStore.roomType which can be null
+    // (isEncryptableRoomType(null) is simply false at runtime).
+    return (
+      shouldEncryptUpload(roomType as RoomsType, isPrivate) &&
+      !!publicKey &&
+      !!userId
+    );
   };
 
   getUploadFolderContext = () => ({
@@ -414,14 +660,14 @@ class UploadDataStore {
     selectedRoomType: this.selectedFolderStore.roomType,
   });
 
-  getUploadEncryptionContext = (item) => {
+  getUploadEncryptionContext = (item: TUploadFile | null | undefined) => {
     return resolveItemRoomContext(
       item?.file?.uploadContext,
       this.getUploadFolderContext(),
     );
   };
 
-  willEncryptItem = (item) => {
+  willEncryptItem = (item: TUploadFile | null | undefined) => {
     if (!item) return false;
     const { publicKey, userId } = this.getUserEncryptionKeys();
     return willEncryptUploadItem(
@@ -503,7 +749,11 @@ class UploadDataStore {
     uploadAutoLockRelease = null;
   };
 
-  prepareFileForEncryptedUpload = async (file, folderId, onProgress) => {
+  prepareFileForEncryptedUpload = async (
+    file: TUploadBrowserFile,
+    folderId: number | string | null | undefined,
+    onProgress?: (progress: number) => void,
+  ) => {
     const overrideCtx = file?.uploadContext;
     const ancestorIsPrivate = this.treeFoldersStore.isPrivacyFolder;
     const roomType =
@@ -517,14 +767,17 @@ class UploadDataStore {
         : ancestorIsPrivate;
     return prepareEncryptedUpload({
       file,
-      folderId,
+      // FABLE5-REVIEW: UploadConfig.folderId is declared as number, but the
+      // original .js forwarded toFolderId which may be a string/null for
+      // third-party folders.
+      folderId: folderId as number,
       roomType: roomType || RoomsType.CustomRoom,
       isPrivate: isPrivate || false,
       onProgress,
     });
   };
 
-  removeFiles = (fileIds) => {
+  removeFiles = (fileIds: number[]) => {
     fileIds.forEach((id) => {
       this.files = this.files?.filter(
         (file) => !(file.action === "converted" && file.fileInfo?.id === id),
@@ -532,39 +785,43 @@ class UploadDataStore {
     });
   };
 
-  getActiveUploadCountForRoom = (roomId) => {
+  getActiveUploadCountForRoom = (
+    roomId: string | number | null | undefined,
+  ) => {
     return countActiveUploadsForRoom(this.files, roomId);
   };
 
-  selectUploadedFile = (file) => {
+  selectUploadedFile = (file: TUploadFile[]) => {
     this.selectedUploadFile = file;
   };
 
-  setUploadPanelVisible = (uploadPanelVisible) => {
+  setUploadPanelVisible = (uploadPanelVisible: boolean) => {
     this.uploadPanelVisible = uploadPanelVisible;
   };
 
-  setConversionPanelVisible = (conversionVisible) => {
+  setConversionPanelVisible = (conversionVisible: boolean) => {
     this.conversionVisible = conversionVisible;
   };
 
-  setUploadData = (uploadData) => {
+  setUploadData = (uploadData: TUploadData) => {
     const uploadDataItems = Object.keys(uploadData);
     uploadDataItems.forEach((key) => {
       if (key in this) {
-        this[key] = uploadData[key];
+        (this as unknown as Record<string, unknown>)[key] = (
+          uploadData as Record<string, unknown>
+        )[key];
       }
     });
   };
 
-  updateUploadedFile = (id, info) => {
+  updateUploadedFile = (id: number | string, info: TFile) => {
     const files = this.files.map((file) =>
       file.fileId === id ? { ...file, fileInfo: info } : file,
     );
     this.files = files;
   };
 
-  updateUploadedItem = async (id) => {
+  updateUploadedItem = async (id: number | string) => {
     const uploadedFileData = await getFileInfo(id);
     this.updateUploadedFile(id, uploadedFileData);
   };
@@ -602,7 +859,7 @@ class UploadDataStore {
     this.setUploadData(uploadData);
   };
 
-  getUploadedFile = (id) => {
+  getUploadedFile = (id: string) => {
     return this.files.filter((f) => f.uniqueId === id);
   };
 
@@ -630,7 +887,7 @@ class UploadDataStore {
       (el) => el.inConversion,
     );
 
-    const shouldCancelFile = (file) => {
+    const shouldCancelFile = (file: TUploadFile) => {
       return (
         file.action === "upload" ||
         (file.action === "convert" && !file.inConversion)
@@ -645,17 +902,20 @@ class UploadDataStore {
     this.uploadedFilesHistory = newHistory;
     this.quotaErrorRaised = false;
 
+    // FABLE5-REVIEW: the original .js referenced the bare global `i18n`
+    // (window.i18n populated by SRC_DIR/i18n.js); `window.i18n!.t!` keeps the
+    // exact runtime resolution.
     this.primaryProgressDataStore.setPrimaryProgressBarData({
       operation: OPERATIONS_NAME.upload,
       completed: true,
       canceled: true,
       alert: true,
-      label: i18n.t("Common:CanceledOperation", {
-        operationName: i18n.t("Common:Uploading"),
+      label: window.i18n!.t!("Common:CanceledOperation", {
+        operationName: window.i18n!.t!("Common:Uploading"),
       }),
     });
 
-    toastr.info(i18n.t("Common:CancelUpload"));
+    toastr.info(window.i18n!.t!("Common:CancelUpload"));
   };
 
   cancelConversion = () => {
@@ -688,13 +948,15 @@ class UploadDataStore {
     this.convertedFromFiles = true;
   };
 
-  cancelCurrentUpload = (id, t) => {
+  cancelCurrentUpload = (id: string, t: TTranslation) => {
     runInAction(() => {
       const uploadedFilesHistory = this.uploadedFilesHistory.filter(
         (el) => el.uniqueId !== id,
       );
 
-      const canceledFile = this.files.find((f) => f.uniqueId === id);
+      // FABLE5-REVIEW: the original .js assumed the canceled file is always
+      // found (would throw on undefined); the non-null assertion keeps that.
+      const canceledFile = this.files.find((f) => f.uniqueId === id)!;
       const newPercent = this.getFilesPercent(); // canceledFile.file.size
       canceledFile.cancel = true;
       canceledFile.percent = 100;
@@ -711,7 +973,7 @@ class UploadDataStore {
     });
   };
 
-  cancelCurrentFileConversion = (fileId) => {
+  cancelCurrentFileConversion = (fileId: string) => {
     const { convertItem, setConvertItem } = this.dialogsStore;
     convertItem && setConvertItem(null);
 
@@ -731,7 +993,11 @@ class UploadDataStore {
     this.setUploadData(newUploadData);
   };
 
-  convertFileFromFiles = (file, t, isOpen) => {
+  convertFileFromFiles = (
+    file: TConversionFile,
+    t: TTranslation,
+    isOpen?: boolean,
+  ) => {
     this.dialogsStore.setConvertItem(null);
     const fileIndex =
       file.index ??
@@ -750,7 +1016,10 @@ class UploadDataStore {
     this.primaryProgressDataStore.setPrimaryProgressBarData({
       operation: OPERATIONS_NAME.convert,
       alert: false,
-      completed: !this.activeConversionQueue.length === 0,
+      // FABLE5-REVIEW: the original .js expression `!length === 0` compares a
+      // boolean to a number and therefore always evaluates to false; the cast
+      // keeps the expression (and its result) unchanged.
+      completed: (!this.activeConversionQueue.length as unknown) === 0,
       showPanel: this.setConversionPanelVisible,
       withoutProgress: true,
     });
@@ -764,7 +1033,9 @@ class UploadDataStore {
     if (shouldUpdateExistingFile) {
       const updatedFile = this.displayedConversionFiles[fileIndex];
 
-      updatedFile.fileInfo.fileExst = file.fileInfo.fileExst;
+      // FABLE5-REVIEW: the original .js assumed fileInfo is set on both items
+      // in the "second conversion with password" flow (would throw otherwise).
+      updatedFile.fileInfo!.fileExst = file.fileInfo!.fileExst;
 
       this.displayedConversionFiles[fileIndex].action = "convert";
       this.displayedConversionFiles[fileIndex].error = null;
@@ -778,7 +1049,7 @@ class UploadDataStore {
     }
   };
 
-  convertFile = (file, t, isOpen) => {
+  convertFile = (file: TUploadFile, t: TTranslation, isOpen?: boolean) => {
     this.dialogsStore.setConvertItem(null);
 
     const fileHistoryIndex = this.uploadedFilesHistory.findIndex(
@@ -816,7 +1087,7 @@ class UploadDataStore {
     }
   };
 
-  getNewPercent = (uploadedSize, indexOfFile) => {
+  getNewPercent = (uploadedSize: number, indexOfFile: number) => {
     const newTotalSize = sumBy(this.files, (f) =>
       f.file && !this.uploaded ? f.file.size : 0,
     );
@@ -848,7 +1119,7 @@ class UploadDataStore {
     return newPercent;
   };
 
-  setConversionPercent = (percent, alert) => {
+  setConversionPercent = (percent: number, alert?: boolean) => {
     const data = {
       operation: OPERATIONS_NAME.upload,
       percent,
@@ -862,12 +1133,12 @@ class UploadDataStore {
     }
   };
 
-  getConversationPercent = (fileIndex) => {
+  getConversationPercent = (fileIndex: number) => {
     const length = this.files.filter((f) => f.needConvert).length;
     return (fileIndex / length) * 100;
   };
 
-  startConversionFromFiles = async (t, isOpen = false) => {
+  startConversionFromFiles = async (t: TTranslation, isOpen = false) => {
     const operationName = OPERATIONS_NAME.convert;
 
     runInAction(() => (this.convertedFromFiles = false));
@@ -881,6 +1152,9 @@ class UploadDataStore {
       const { fileId, password, format } = conversionItem;
       const itemPassword = password || null;
 
+      // FABLE5-REVIEW: `find` and `findIndex` use the same predicate on the
+      // same array, so after the `fileIndex === -1` break the original .js
+      // relied on historyFile being defined; the non-null assertions keep it.
       const historyFile = this.displayedConversionFiles.find(
         (f) => f.fileId === fileId,
       );
@@ -890,13 +1164,13 @@ class UploadDataStore {
 
       if (fileIndex === -1) break;
 
-      runInAction(() => (historyFile.inConversion = true));
+      runInAction(() => (historyFile!.inConversion = true));
 
       const res = convertFile(fileId, format, itemPassword).catch(() => {
         const error = t("Common:FailedToConvert");
 
         runInAction(() => {
-          historyFile.error = error;
+          historyFile!.error = error;
         });
 
         if (this.convertedFromFiles) {
@@ -915,16 +1189,18 @@ class UploadDataStore {
         break;
       }
 
-      let progress = data[0].progress;
-      let fileInfo = null;
-      let error = null;
+      let progress: number | undefined = data[0].progress;
+      let fileInfo: TFile | "password" | null | undefined = null;
+      let error: string | null | undefined = null;
 
-      while (progress < 100) {
+      // FABLE5-REVIEW: `(progress ?? 100) < 100` is runtime-identical to the
+      // original `progress < 100` (undefined < 100 is false, as is 100 < 100).
+      while ((progress ?? 100) < 100) {
         const response = await getConversationProgress(fileId);
         progress = response?.[0]?.progress;
         fileInfo = response?.[0]?.result;
 
-        historyFile.convertProgress = progress;
+        historyFile!.convertProgress = progress;
 
         error = response && response[0] && response[0].error;
 
@@ -935,9 +1211,9 @@ class UploadDataStore {
           });
 
           runInAction(() => {
-            historyFile.error = error;
-            historyFile.inConversion = false;
-            historyFile.needPassword = fileInfo === "password";
+            historyFile!.error = error;
+            historyFile!.inConversion = false;
+            historyFile!.needPassword = fileInfo === "password";
           });
 
           break;
@@ -948,27 +1224,34 @@ class UploadDataStore {
         if (!error) error = data[0].error;
 
         if (!error && isOpen && data && data[0]) {
-          this.filesStore.openDocEditor(fileInfo.id);
+          // FABLE5-REVIEW: the original .js read fileInfo.id without a guard
+          // (fileInfo is the conversion result; would throw on null).
+          this.filesStore.openDocEditor((fileInfo as TFile).id);
         }
 
         runInAction(() => {
-          historyFile.error = error;
-          historyFile.convertProgress = progress;
-          historyFile.inConversion = false;
+          historyFile!.error = error;
+          historyFile!.convertProgress = progress;
+          historyFile!.inConversion = false;
 
-          if (error.indexOf("password") !== -1) {
-            historyFile.needPassword = true;
-          } else historyFile.action = "converted";
+          // FABLE5-REVIEW: the original .js called error.indexOf without a
+          // guard (would throw when the conversion result has no error text).
+          if (error!.indexOf("password") !== -1) {
+            historyFile!.needPassword = true;
+          } else historyFile!.action = "converted";
 
           if (fileInfo && fileInfo !== "password") {
-            historyFile.fileInfo = fileInfo;
+            historyFile!.fileInfo = fileInfo;
           }
         });
 
-        if (!historyFile?.error && historyFile?.fileInfo?.version > 2) {
+        if (
+          !historyFile?.error &&
+          (historyFile?.fileInfo?.version ?? 0) > 2
+        ) {
           this.filesStore.setHighlightFile({
-            highlightFileId: historyFile.fileInfo.id,
-            isFileHasExst: !historyFile.fileInfo.fileExst,
+            highlightFileId: historyFile!.fileInfo!.id,
+            isFileHasExst: !historyFile!.fileInfo!.fileExst,
           });
         }
       }
@@ -990,7 +1273,7 @@ class UploadDataStore {
     });
   };
 
-  startConversion = async (t, isOpen = false) => {
+  startConversion = async (t: TTranslation, isOpen = false) => {
     const { isRecentFolder, isFavoritesFolder, isSharedWithMeFolder } =
       this.treeFoldersStore;
 
@@ -1058,19 +1341,22 @@ class UploadDataStore {
       const data = await res;
 
       if (data && data[0]) {
-        let progress = data[0].progress;
-        let fileInfo = null;
-        let error = null;
+        let progress: number | undefined = data[0].progress;
+        let fileInfo: TFile | "password" | null | undefined = null;
+        let error: string | null | undefined = null;
 
-        while (progress < 100) {
-          let response = null;
+        // FABLE5-REVIEW: `(progress ?? 100) < 100` is runtime-identical to
+        // the original `progress < 100` (undefined < 100 is false).
+        while ((progress ?? 100) < 100) {
+          let response: TConversionProgress[] | null = null;
           try {
             response = await getConversationProgress(fileId);
             progress = response?.[0]?.progress;
             fileInfo = response?.[0]?.result;
           } catch (err) {
             // console.log("Error in startConversion while loop:", fileId, err);
-            const conversionError = err.message || t("Common:FailedToConvert");
+            const conversionError =
+              (err as Error).message || t("Common:FailedToConvert");
 
             runInAction(() => {
               if (file) {
@@ -1147,7 +1433,9 @@ class UploadDataStore {
           if (!error) error = data[0].error;
 
           if (!error && isOpen && data && data[0]) {
-            this.filesStore.openDocEditor(fileInfo.id);
+            // FABLE5-REVIEW: the original .js read fileInfo.id without a
+            // guard (fileInfo is the conversion result; would throw on null).
+            this.filesStore.openDocEditor((fileInfo as TFile).id);
           }
 
           runInAction(() => {
@@ -1157,9 +1445,13 @@ class UploadDataStore {
               currentFile.error = error;
               currentFile.convertProgress = progress;
               currentFile.inConversion = false;
-              if (fileInfo) currentFile.fileInfo = fileInfo;
+              // FABLE5-REVIEW: the original .js could transiently store the
+              // "password" marker string here; the cast keeps that runtime.
+              if (fileInfo) currentFile.fileInfo = fileInfo as TFile;
 
-              if (error.indexOf("password") !== -1) {
+              // FABLE5-REVIEW: the original .js called error.indexOf without
+              // a guard (would throw when there is no error text).
+              if (error!.indexOf("password") !== -1) {
                 currentFile.needPassword = true;
               } else currentFile.action = "converted";
             }
@@ -1173,7 +1465,7 @@ class UploadDataStore {
               hFile.convertProgress = progress;
               hFile.inConversion = false;
 
-              if (error.indexOf("password") !== -1) {
+              if (error!.indexOf("password") !== -1) {
                 hFile.needPassword = true;
 
                 this.primaryProgressDataStore.setPrimaryProgressBarData({
@@ -1213,15 +1505,15 @@ class UploadDataStore {
                     }),
                   ),
                 )
-                .catch((err) => toastr.error(err));
+                .catch((err) => toastr.error(err as string));
           }
           const percent = this.getConversationPercent(index + 1);
           this.setConversionPercent(percent, !!error);
 
-          if (!file?.error && file?.fileInfo?.version > 2) {
+          if (!file?.error && (file?.fileInfo?.version ?? 0) > 2) {
             this.filesStore.setHighlightFile({
-              highlightFileId: file.fileInfo.id,
-              isFileHasExst: !file.fileInfo.fileExst,
+              highlightFileId: file!.fileInfo!.id,
+              isFileHasExst: !file!.fileInfo!.fileExst,
             });
           }
         }
@@ -1253,7 +1545,11 @@ class UploadDataStore {
     }
   };
 
-  parallelUploading = (notUploadedFiles, t, createNewIfExist) => {
+  parallelUploading = (
+    notUploadedFiles: TUploadFile[],
+    t: TTranslation,
+    createNewIfExist?: boolean,
+  ) => {
     const { maxUploadFilesCount } = this.filesSettingsStore;
 
     const countFiles =
@@ -1275,7 +1571,7 @@ class UploadDataStore {
     }
   };
 
-  convertUploadedFiles = (t, createNewIfExist = true) => {
+  convertUploadedFiles = (t: TTranslation, createNewIfExist = true) => {
     this.files = [...this.files, ...this.tempConversionFiles];
 
     if (!this.uploaded) {
@@ -1301,10 +1597,13 @@ class UploadDataStore {
     }
   };
 
-  cancelUploadAction = (items) => {
+  cancelUploadAction = (items?: { uniqueId: string }[]) => {
+    // FABLE5-REVIEW: the original .js read conflictResolveDialogData (and its
+    // allNewFiles) without a null guard — it is always set when the upload
+    // conflict dialog invokes this action.
     const files =
       items ??
-      this.dialogsStore.conflictResolveDialogData.newUploadData.allNewFiles;
+      this.dialogsStore.conflictResolveDialogData!.newUploadData.allNewFiles!;
 
     let i = files.length;
 
@@ -1331,20 +1630,36 @@ class UploadDataStore {
     }
   };
 
-  setConflictDialogData = (conflicts, operationData) => {
+  setConflictDialogData = (
+    conflicts: unknown[],
+    operationData: Partial<TConflictResolveDialogData>,
+  ) => {
     this.dialogsStore.setConflictResolveDialogItems(conflicts);
-    this.dialogsStore.setConflictResolveDialogData(operationData);
+    // FABLE5-REVIEW: upload conflicts fill only a subset of
+    // TConflictResolveDialogData (no folderIds/fileIds/translations/…); the
+    // cast keeps the original .js payload as-is.
+    this.dialogsStore.setConflictResolveDialogData(
+      operationData as TConflictResolveDialogData,
+    );
     this.dialogsStore.setConflictResolveDialogVisible(true);
   };
 
-  handleFilesUpload = (newUploadData, t, createNewIfExist = true) => {
+  handleFilesUpload = (
+    newUploadData: TStartUploadData,
+    t: TTranslation,
+    createNewIfExist = true,
+  ) => {
     this.uploadedFilesHistory = newUploadData.uploadedFilesHistory;
 
     this.setUploadData(newUploadData);
     this.startUploadFiles(t, createNewIfExist);
   };
 
-  handleUploadAndOptionalConversion = (uploadData, t, createNewIfExist) => {
+  handleUploadAndOptionalConversion = (
+    uploadData: TStartUploadData,
+    t: TTranslation,
+    createNewIfExist?: boolean,
+  ) => {
     const newUploadData = { ...uploadData };
     // newUploadData.files = newUploadData.filesWithoutConversion;
 
@@ -1377,11 +1692,19 @@ class UploadDataStore {
     }
   };
 
-  conflictDialogUploadHandler = (uploadData, t, createNewIfExist) => {
+  conflictDialogUploadHandler = (
+    uploadData: TStartUploadData,
+    t: TTranslation,
+    createNewIfExist?: boolean,
+  ) => {
     this.handleUploadAndOptionalConversion(uploadData, t, createNewIfExist);
   };
 
-  handleUploadConflicts = async (t, toFolderId, uploadData) => {
+  handleUploadConflicts = async (
+    t: TTranslation,
+    toFolderId: number | string | null,
+    uploadData: TStartUploadData,
+  ) => {
     const { isAIRoom } = this.selectedFolderStore;
     const filesArray = uploadData.files.map((fileInfo) => fileInfo.file.name);
 
@@ -1389,14 +1712,20 @@ class UploadDataStore {
       uploadData.files.findIndex((f) => f.toFolderId === toFolderId) > -1;
 
     try {
-      let conflicts =
+      // FABLE5-REVIEW: checkIsFileExist is untyped in shared/api and declares
+      // folderId: number, while the original .js also passes string ids for
+      // third-party folders.
+      let conflicts: (string | { title: string; isFile: boolean })[] =
         isAIRoom || !checkConflicts
           ? []
-          : await checkIsFileExist(toFolderId, filesArray);
-      const folderInfo = await getFolderInfo(toFolderId);
+          : ((await checkIsFileExist(
+              toFolderId as number,
+              filesArray,
+            )) as string[]);
+      const folderInfo = await getFolderInfo(toFolderId!);
 
       conflicts = conflicts.map((fileTitle) => ({
-        title: fileTitle,
+        title: fileTitle as string,
         isFile: true,
       }));
 
@@ -1413,13 +1742,14 @@ class UploadDataStore {
       let errorMessage = "";
 
       if (typeof err === "object") {
+        const axiosErr = err as TAxiosLikeError;
         errorMessage =
-          err?.response?.data?.error?.message ||
-          err?.statusText ||
-          err?.message ||
+          axiosErr?.response?.data?.error?.message ||
+          axiosErr?.statusText ||
+          axiosErr?.message ||
           "";
       } else {
-        errorMessage = err;
+        errorMessage = err as string;
       }
 
       toastr.error(errorMessage, null, 0, true);
@@ -1435,7 +1765,14 @@ class UploadDataStore {
     }
   };
 
-  startUpload = (uploadFiles, folderId, t) => {
+  // FABLE5-REVIEW: startUpload is called from still-.js code
+  // (FilesActionsStore, GlobalEvents) with a FileList-like collection of
+  // browser files decorated with parentFolderId/encrypted.
+  startUpload = (
+    uploadFiles: Record<string, TUploadBrowserFile> | unknown[],
+    folderId: number | string | null,
+    t: TTranslation,
+  ) => {
     const { canConvert } = this.filesSettingsStore;
 
     const { isAIRoom } = this.selectedFolderStore;
@@ -1463,21 +1800,21 @@ class UploadDataStore {
       this.asyncUploadObj = {};
     }
 
-    const newFiles = []; // this.files;
-    const allFiles = [];
+    const newFiles: TUploadFile[] = []; // this.files;
+    const allFiles: TUploadFile[] = [];
     let filesSize = 0;
     let convertSize = 0;
 
     const uploadFilesArray = Object.keys(uploadFiles);
 
     uploadFilesArray.forEach((index) => {
-      const file = uploadFiles[index];
+      const file = (uploadFiles as Record<string, TUploadBrowserFile>)[index];
 
       const parts = file.name.split(".");
       const ext = parts.length > 1 ? `.${parts.pop()}` : "";
       const needConvert = !isPrivateUpload && canConvert(ext);
 
-      const newFile = {
+      const newFile: TUploadFile = {
         file,
         uniqueId: uniqueid("download_row-key_"),
         fileId: null,
@@ -1546,7 +1883,7 @@ class UploadDataStore {
     }
   };
 
-  refreshFiles = async (currentFile) => {
+  refreshFiles = async (currentFile?: TUploadFile) => {
     const { files, setFiles, folders, setFolders, filter, setFilter } =
       this.filesStore;
 
@@ -1560,13 +1897,15 @@ class UploadDataStore {
         (x) => x.id === currentFile?.fileInfo?.id,
       );
 
-      const folderInfo = null;
+      // The assertion (instead of a plain null literal) keeps the historical
+      // TFolder|null typing: the assignment below is commented out.
+      const folderInfo = null as TFolder | null;
       const index = path.findIndex((x) => x === this.selectedFolderStore.id);
       const folderId = index !== -1 ? path[index + 1] : null;
       // if (folderId && folderId !== this.aiRoomStore.knowledgeId)
       //   folderInfo = await getFolderInfo(folderId);
 
-      const newPath = [];
+      const newPath: number[] = [];
       if (folderInfo || path[path.length - 1] === this.selectedFolderStore.id) {
         let i = 0;
         while (path[i] && path[i] !== folderId) {
@@ -1630,7 +1969,7 @@ class UploadDataStore {
     }
   };
 
-  checkChunkUpload = (chunkUploadObj) => {
+  checkChunkUpload = (chunkUploadObj: TCheckChunkUpload) => {
     const {
       t,
       res, // file response data
@@ -1720,9 +2059,10 @@ class UploadDataStore {
             String(userId),
             publicKey,
             publicKeyId || "",
-            dekForWrap,
+            // hasFileDek() above guarantees a DEK is stored for this entry.
+            dekForWrap!,
             roomIdForWrap,
-          ).catch((error) => {
+          ).catch((error: TAxiosLikeError) => {
             const wrapMessage = getI18n().t(
               "Common:EncryptionUploadWrapFailed",
             );
@@ -1806,7 +2146,13 @@ class UploadDataStore {
     return resolve();
   };
 
-  asyncUpload = async (t, chunkData, resolve, reject, createNewIfExist) => {
+  asyncUpload = async (
+    t: TTranslation,
+    chunkData: TChunkData,
+    resolve: TResolve,
+    reject: (reason?: unknown) => void,
+    createNewIfExist?: boolean,
+  ) => {
     const { operationId, file, indexOfFile, path, length } = chunkData;
 
     if (
@@ -1850,7 +2196,8 @@ class UploadDataStore {
 
         this.checkChunkUpload({
           t,
-          res,
+          // FABLE5-REVIEW: chunk upload endpoints are untyped in shared/api.
+          res: res as TChunkUploadResponse,
           index: activeLength,
           indexOfFile,
           path,
@@ -1882,7 +2229,7 @@ class UploadDataStore {
 
             this.checkChunkUpload({
               t,
-              res: finalizeRes,
+              res: finalizeRes as TChunkUploadResponse,
               index: finalizeIndex,
               indexOfFile,
               path,
@@ -1899,24 +2246,24 @@ class UploadDataStore {
   };
 
   uploadFileChunks = async (
-    sessionId,
-    folderId,
-    requestsDataArray,
-    fileSize,
-    indexOfFile,
-    file,
-    path,
-    t,
-    operationId,
-    toFolderId,
-    createNewIfExist,
+    sessionId: string,
+    folderId: number | string,
+    requestsDataArray: FormData[],
+    fileSize: number,
+    indexOfFile: number,
+    file: TUploadBrowserFile,
+    path: number[],
+    t: TTranslation,
+    operationId: string,
+    toFolderId: number | string | null | undefined,
+    createNewIfExist?: boolean,
   ) => {
     const { uploadThreadCount } = this.filesSettingsStore;
     const length = requestsDataArray.length;
 
     const isThirdPartyFolder = typeof toFolderId === "string";
     if (!isThirdPartyFolder) {
-      const chunksArray = [];
+      const chunksArray: TUploadChunk[] = [];
       for (let index = 0; index < length; index++) {
         chunksArray.push({
           isActive: false,
@@ -1943,7 +2290,7 @@ class UploadDataStore {
         this.asyncUploadObj[operationId].chunksArray = chunksArray;
       }
 
-      const promise = new Promise((resolve, reject) => {
+      const promise = new Promise<unknown>((resolve, reject) => {
         let i = length <= uploadThreadCount ? length : uploadThreadCount;
         while (i !== 0) {
           this.asyncUpload(
@@ -1973,11 +2320,11 @@ class UploadDataStore {
           sessionId,
           requestsDataArray[index],
         );
-        const resolve = (r) => Promise.resolve(r);
+        const resolve = (r?: unknown) => Promise.resolve(r);
 
         this.checkChunkUpload({
           t,
-          res,
+          res: res as TChunkUploadResponse,
           index,
           indexOfFile,
           path,
@@ -1991,7 +2338,7 @@ class UploadDataStore {
     }
   };
 
-  retryConvertFiles = (t, fileId) => {
+  retryConvertFiles = (t: TTranslation, fileId: number) => {
     const fileIndex = this.files.findIndex((f) => f.fileId === fileId);
     const fileConversionInxex = this.displayedConversionFiles.findIndex(
       (f) => f.fileId === fileId,
@@ -2012,7 +2359,7 @@ class UploadDataStore {
     this.convertFileFromFiles(retryFileConversion, t);
   };
 
-  retryUploadFiles = (t, uniqueId) => {
+  retryUploadFiles = (t: TTranslation, uniqueId: string) => {
     const fileIndex = this.files.findIndex((f) => f.uniqueId === uniqueId);
     const fileUploadedIndex = this.uploadedFilesHistory.findIndex(
       (f) => f.uniqueId === uniqueId,
@@ -2065,7 +2412,7 @@ class UploadDataStore {
     this.parallelUploading([retryFile], t);
   };
 
-  retryQuotaFailedFiles = (t) => {
+  retryQuotaFailedFiles = (t: TTranslation) => {
     const failed = this.files.filter((f) => f.isQuotaError);
     if (failed.length === 0) return;
 
@@ -2116,7 +2463,7 @@ class UploadDataStore {
     this.parallelUploading(retryFiles, t);
   };
 
-  startUploadFiles = async (t, createNewIfExist = true) => {
+  startUploadFiles = async (t: TTranslation, createNewIfExist = true) => {
     this.finishUploadFilesCalled = false;
 
     const files = this.files;
@@ -2166,7 +2513,11 @@ class UploadDataStore {
     this.parallelUploading(notUploadedFiles, t, createNewIfExist);
   };
 
-  startSessionFunc = async (indexOfFile, t, createNewIfExist = true) => {
+  startSessionFunc = async (
+    indexOfFile: number,
+    t: TTranslation,
+    createNewIfExist = true,
+  ) => {
     const { isAIRoom } = this.selectedFolderStore;
     const { knowledgeId } = this.aiRoomStore;
     if (!this.uploaded && this.files.length === 0) {
@@ -2207,12 +2558,16 @@ class UploadDataStore {
 
     const actualFolderId = isAIRoom ? knowledgeId : toFolderId;
 
-    let uploadDEK = null; // raw DEK for wrapping after upload
+    let uploadDEK: Uint8Array | null = null; // raw DEK for wrapping after upload
     let isEncrypted = file.encrypted || false;
 
     const { publicKey, userId } = this.getUserEncryptionKeys();
+    // FABLE5-REVIEW: shouldEncryptUpload declares roomType: RoomsType, but
+    // resolveItemRoomContext may return null/undefined (falsy at runtime).
     const shouldEncrypt =
-      shouldEncryptUpload(roomType, isPrivate) && !!publicKey && !!userId;
+      shouldEncryptUpload(roomType as RoomsType, isPrivate) &&
+      !!publicKey &&
+      !!userId;
 
     if (shouldEncrypt && !isEncrypted) {
       try {
@@ -2253,7 +2608,7 @@ class UploadDataStore {
       } catch (error) {
         console.error("[ENCRYPTION] prepareFileForEncryptedUpload failed", {
           uniqueId: this.files[indexOfFile]?.uniqueId,
-          message: error?.message,
+          message: (error as Error)?.message,
         });
         const orphanDek = takeFileDek(this.files[indexOfFile]);
         if (orphanDek) wipeDek(orphanDek);
@@ -2309,13 +2664,14 @@ class UploadDataStore {
     }
 
     const fileSize = fileToUpload.size;
-    const chunks =
-      fileSize === 0
-        ? 1
-        : Math.ceil(fileSize / chunkUploadSize, chunkUploadSize);
+    // FABLE5-REVIEW: the original .js passed a (silently ignored) second
+    // argument to Math.ceil; dropped because it has no runtime effect.
+    const chunks = fileSize === 0 ? 1 : Math.ceil(fileSize / chunkUploadSize);
 
     return startUploadSession(
-      actualFolderId,
+      // FABLE5-REVIEW: the original .js could pass null here when an AI room
+      // has no knowledgeId yet; the assertion keeps that runtime unchanged.
+      actualFolderId!,
       fileName,
       fileSize,
       "", // relativePath,
@@ -2359,7 +2715,7 @@ class UploadDataStore {
 
         return this.uploadFileChunks(
           sessionId,
-          folderId,
+          folderId!,
           requestsDataArray,
           fileSize,
           indexOfFile,
@@ -2371,7 +2727,7 @@ class UploadDataStore {
           createNewIfExist,
         );
       })
-      .catch((error) => {
+      .catch((error: unknown) => {
         const orphanDek = takeFileDek(this.files[indexOfFile]);
         if (orphanDek) wipeDek(orphanDek);
 
@@ -2385,13 +2741,14 @@ class UploadDataStore {
         }
         let errorMessage = "";
         if (typeof error === "object") {
+          const axiosErr = error as TAxiosLikeError;
           errorMessage =
-            error?.response?.data?.error?.message ||
-            error?.statusText ||
-            error?.message ||
+            axiosErr?.response?.data?.error?.message ||
+            axiosErr?.statusText ||
+            axiosErr?.message ||
             "";
         } else {
-          errorMessage = error;
+          errorMessage = error as string;
         }
 
         const isQuota = isQuotaError(error);
@@ -2493,11 +2850,11 @@ class UploadDataStore {
   };
 
   showFinishUploadToastr = (
-    t,
-    totalErrorsCount,
-    filesWithoutErrors,
-    filesWithErrors,
-    filesWithAllErrors,
+    t: TTranslation,
+    totalErrorsCount: number,
+    filesWithoutErrors: TUploadFile[],
+    filesWithErrors: TUploadFile[],
+    filesWithAllErrors: number,
   ) => {
     if (totalErrorsCount === 0) {
       toastr.success(
@@ -2524,7 +2881,7 @@ class UploadDataStore {
       toastr.error(
         <Trans
           i18nKey="UploadPanel:QuotaExceededDuringUpload"
-          t={t}
+          t={t as TTranslation & TFunction}
           values={{
             uploaded: filesWithoutErrors.length,
             total: filesWithoutErrors.length + filesWithAllErrors,
@@ -2555,7 +2912,9 @@ class UploadDataStore {
     }
 
     const errorItem = filesWithErrors[0];
-    const passwordErrorIndex = errorItem.error.indexOf("password");
+    // FABLE5-REVIEW: the original .js called error.indexOf without a guard —
+    // items in filesWithErrors always have a truthy error string.
+    const passwordErrorIndex = errorItem.error!.indexOf("password");
 
     if (passwordErrorIndex === -1) {
       toastr.error(errorItem.error);
@@ -2565,7 +2924,7 @@ class UploadDataStore {
     toastr.warning(
       <Trans
         i18nKey="Common:PasswordProtectedFiles"
-        t={t}
+        t={t as TTranslation & TFunction}
         components={[
           <Link
             key="a"
@@ -2585,7 +2944,7 @@ class UploadDataStore {
     );
   };
 
-  finishUploadFiles = (t, waitConversion) => {
+  finishUploadFiles = (t: TTranslation, waitConversion?: boolean) => {
     this.releaseUploadAutoLockSuspension();
 
     const filesWithErrors = this.uploadedFilesHistory.filter(
@@ -2614,7 +2973,7 @@ class UploadDataStore {
       return f;
     });
 
-    const uploadData = {
+    const uploadData: TUploadData = {
       filesSize: 0,
       uploadedFiles: 0,
       percent: 0,
@@ -2626,9 +2985,11 @@ class UploadDataStore {
       const toFolderId = this.files[0]?.toFolderId;
 
       if (toFolderId) {
+        // FABLE5-REVIEW: the socket typings declare the RefreshFolder payload
+        // as a string, but the original .js has always sent this object.
         SocketHelper?.emit(SocketCommands.RefreshFolder, {
           toFolderId,
-        });
+        } as unknown as string);
       }
     }
 
@@ -2639,7 +3000,13 @@ class UploadDataStore {
       });
 
     setTimeout(() => {
-      if (this.uploadPanelVisible || this.primaryProgressDataStore.alert) {
+      // FABLE5-REVIEW: PrimaryProgressDataStore has no `alert` member (it has
+      // primaryOperationsAlert); the original .js read an undefined property
+      // here, which the cast preserves without changing the runtime.
+      if (
+        this.uploadPanelVisible ||
+        (this.primaryProgressDataStore as { alert?: boolean }).alert
+      ) {
         uploadData.files = this.files;
         uploadData.filesToConversion = this.filesToConversion;
       }
@@ -2649,24 +3016,24 @@ class UploadDataStore {
   };
 
   copyToAction = (
-    destFolderId,
-    folderIds,
-    fileIds,
-    conflictResolveType,
-    deleteAfter,
-    operationId,
-    content,
-    toFillOut,
+    destFolderId: number | string | undefined,
+    folderIds: number[],
+    fileIds: number[],
+    conflictResolveType: ConflictResolveType,
+    deleteAfter: boolean,
+    operationId: string,
+    content?: boolean,
+    toFillOut?: boolean,
   ) => {
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
 
-    const pbData = {
+    const pbData: TPbData = {
       operation: OPERATIONS_NAME.copy,
       operationId,
     };
 
     return copyToFolder(
-      destFolderId,
+      destFolderId as number,
       folderIds,
       fileIds,
       conflictResolveType,
@@ -2675,7 +3042,7 @@ class UploadDataStore {
       toFillOut,
     )
       .then((res) => {
-        let data = null;
+        let data: TOperation | null = null;
         const operation = res[0];
 
         if (operation) {
@@ -2700,13 +3067,13 @@ class UploadDataStore {
               await this.filesStore.getIsEmptyTrash();
           });
       })
-      .catch((err) => {
+      .catch((err: unknown) => {
         setSecondaryProgressBarData({
           completed: true,
           alert: true,
           operationId,
           operation: pbData.operation,
-          error: err,
+          error: err as string,
         });
         this.clearActiveOperations(fileIds, folderIds);
 
@@ -2715,18 +3082,18 @@ class UploadDataStore {
   };
 
   moveToAction = (
-    destFolderId,
-    folderIds,
-    fileIds,
-    conflictResolveType,
-    deleteAfter,
-    operationId,
-    toFillOut,
+    destFolderId: number | string | undefined,
+    folderIds: number[],
+    fileIds: number[],
+    conflictResolveType: ConflictResolveType,
+    deleteAfter: boolean,
+    operationId: string,
+    toFillOut?: boolean,
   ) => {
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
-    const pbData = { operation: OPERATIONS_NAME.move, operationId };
+    const pbData: TPbData = { operation: OPERATIONS_NAME.move, operationId };
     return moveToFolder(
-      destFolderId,
+      destFolderId as number,
       folderIds,
       fileIds,
       conflictResolveType,
@@ -2734,7 +3101,7 @@ class UploadDataStore {
       toFillOut,
     )
       .then((res) => {
-        let data = null;
+        let data: TOperation | null = null;
 
         const operation = res[0];
         if (operation) {
@@ -2760,13 +3127,13 @@ class UploadDataStore {
               await this.filesStore.getIsEmptyTrash();
           });
       })
-      .catch((err) => {
+      .catch((err: unknown) => {
         setSecondaryProgressBarData({
           completed: true,
           alert: true,
           operationId,
           operation: pbData.operation,
-          error: err,
+          error: err as string,
         });
         this.clearActiveOperations(fileIds, folderIds);
 
@@ -2774,20 +3141,32 @@ class UploadDataStore {
       });
   };
 
-  copyAsAction = (fileId, title, folderId, enableExternalExt, password) => {
+  copyAsAction = (
+    fileId: number,
+    title: string,
+    folderId: number,
+    enableExternalExt?: boolean,
+    password?: string,
+  ) => {
     const { fetchFiles, filter } = this.filesStore;
 
-    return fileCopyAs(fileId, title, folderId, enableExternalExt, password)
+    // FABLE5-REVIEW: fileCopyAs declares enableExternalExt/password as
+    // required, but the original .js callers may omit them (undefined is
+    // sent as-is at runtime).
+    return fileCopyAs(
+      fileId,
+      title,
+      folderId,
+      enableExternalExt as boolean,
+      password as string,
+    )
       .then(() => fetchFiles(folderId, filter, true, true))
-      .catch((err) => {
+      .catch((err: unknown) => {
         return Promise.reject(err);
       });
   };
 
-  /**
-   * @returns {Promise<import("@docspace/shared/api/files/types").TOperation>}
-   */
-  itemOperationToFolder = (data) => {
+  itemOperationToFolder = (data: TItemOperationData) => {
     const {
       destFolderId,
       destFolderInfo,
@@ -2844,7 +3223,10 @@ class UploadDataStore {
         );
   };
 
-  loopFilesOperations = async (data, pbData) => {
+  loopFilesOperations = async (
+    data: TOperation,
+    pbData: TPbData,
+  ): Promise<TOperation | undefined> => {
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
 
     if (!data) {
@@ -2867,7 +3249,7 @@ class UploadDataStore {
 
     // let progress = data.progress;
 
-    let operationItem = data;
+    let operationItem: TOperation | undefined = data;
     let finished = data.finished;
 
     while (!finished) {
@@ -2931,7 +3313,8 @@ class UploadDataStore {
 
         const hasStatusCanceled =
           operationItem?.status === FileOperationStatus.Canceled ||
-          error?.status === FileOperationStatus.Canceled;
+          (error as { status?: FileOperationStatus })?.status ===
+            FileOperationStatus.Canceled;
 
         if (hasStatusCanceled) {
           return operationItem;
@@ -2950,13 +3333,15 @@ class UploadDataStore {
     return operationItem;
   };
 
-  navigateToNewFolderLocation = async (folderId) => {
+  navigateToNewFolderLocation = async (folderId: number | string | null) => {
     const { filter } = this.filesStore;
 
-    filter.folder = folderId;
+    // FABLE5-REVIEW: FilesFilter.folder is declared as string, but the
+    // original .js also assigns numeric folder ids here.
+    filter.folder = folderId as string;
 
     try {
-      const { rootFolderType, parentId } = await getFolderInfo(folderId);
+      const { rootFolderType, parentId } = await getFolderInfo(folderId!);
       const path = getCategoryUrl(
         getCategoryTypeByFolderType(rootFolderType, parentId),
         folderId,
@@ -2970,7 +3355,13 @@ class UploadDataStore {
     }
   };
 
-  moveToCopyTo = (destFolderId, pbData, isCopy, fileIds, folderIds) => {
+  moveToCopyTo = (
+    destFolderId: number | string | undefined,
+    pbData: TPbData,
+    isCopy: boolean,
+    fileIds?: number[],
+    folderIds?: number[],
+  ) => {
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
     const isMovingSelectedFolder =
       !isCopy && folderIds && this.selectedFolderStore.id === folderIds[0];
@@ -2997,7 +3388,10 @@ class UploadDataStore {
     });
   };
 
-  clearActiveOperations = (fileIds = [], folderIds = []) => {
+  clearActiveOperations = (
+    fileIds: number[] = [],
+    folderIds: number[] = [],
+  ) => {
     const { activeFiles, activeFolders, setActiveFiles, setActiveFolders } =
       this.filesStore;
 

@@ -52,7 +52,11 @@ export type TPrimaryProgressInfo = {
   completed?: boolean;
   canceled?: boolean;
   withoutProgress?: boolean;
-  showPanel?: (visible: boolean) => void;
+  /** UploadDataStore hides the status entry when the history is empty. */
+  withoutStatus?: boolean;
+  /** Number of failed items; set by UploadDataStore on finish with errors. */
+  errorCount?: number;
+  showPanel?: ((visible: boolean) => void) | null;
   items?: TPrimaryProgressInfo[];
 };
 

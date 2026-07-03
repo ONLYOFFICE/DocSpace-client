@@ -39,7 +39,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { terminateOperation } from "@docspace/shared/api/files";
-import type { TFolder } from "@docspace/shared/api/files/types";
+import type { TFolder, TOperation } from "@docspace/shared/api/files/types";
 import type { TTranslation } from "@docspace/shared/types";
 
 import type { TFunction } from "i18next";
@@ -75,6 +75,9 @@ export type TSecondaryProgressInfo = {
   isFolder?: boolean;
   error?: TOperationError;
   destFolderInfo?: TFolder;
+  /** Current server operation snapshot; set by UploadDataStore and
+   * FilesActionsStore while polling operation progress. */
+  currentFile?: TOperation;
 };
 
 export type TSecondaryProgressData = TSecondaryProgressInfo & {
@@ -467,7 +470,7 @@ class SecondaryProgressDataStore {
   };
 
   clearSecondaryProgressData = (
-    operationId?: string | number,
+    operationId?: string | number | null,
     operation?: TOperationName,
   ) => {
     if (!operationId && !operation) {

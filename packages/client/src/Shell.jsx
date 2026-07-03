@@ -140,6 +140,7 @@ const Shell = ({ page = "home", ...rest }) => {
     currentClientView,
     selectedFolderType,
     isPrivacyFolder,
+    isAIReady,
   } = rest;
 
   useCreateFileError({
@@ -639,6 +640,7 @@ const Shell = ({ page = "home", ...rest }) => {
           openResultFile={openResultFile}
           closeEditorPanel={closeEditorPanel}
           composerHeader={composerHeader}
+          composerDisabled={!isAIReady}
         >
           {layout}
         </AiAgentProviders>
@@ -661,6 +663,7 @@ const ShellWrapper = inject(
     selectedFolderStore,
     treeFoldersStore,
     aiRoomStore,
+    paymentStore,
   }) => {
     const { i18n } = useTranslation();
 
@@ -769,6 +772,7 @@ const ShellWrapper = inject(
       standalone,
       setSocialAuthWelcomeDialogVisible,
       getAIConfig,
+      isAIReady: paymentStore.isAIReady,
       currentClientView: clientLoadingStore.currentClientView,
       selectedFolderType: selectedFolderStore.type,
       isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
@@ -815,3 +819,4 @@ const Root = () => (
 );
 
 export default Root;
+

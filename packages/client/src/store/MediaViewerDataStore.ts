@@ -56,18 +56,9 @@ import {
 
 import type PluginStore from "./PluginStore";
 import type PublicRoomStore from "./PublicRoomStore";
+import type FilesStore from "./FilesStore";
 
-// FABLE5-REVIEW: FilesStore is still .js (wave 3) — minimal structural type of
-// the members actually used here; replace with import type once converted.
-type TFilesStore = {
-  files: TFile[];
-  filter: FilesFilter;
-  categoryType: number;
-  getFileInfo: (id: number | string) => Promise<TFile>;
-  setIsPreview: (predicate: boolean) => void;
-  setBufferSelection: (bufferSelection: TFile) => void;
-  createThumbnails: (files?: TFile[] | null) => Promise<unknown>;
-};
+type TFilesStore = FilesStore;
 
 export type TPreviewFile = TFile & { canOpenPlayer: boolean };
 

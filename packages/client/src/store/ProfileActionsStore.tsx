@@ -98,12 +98,9 @@ import type InfoPanelStore from "./InfoPanelStore";
 import type PluginStore from "./PluginStore";
 import type SelectedFolderStore from "./SelectedFolderStore";
 import type TreeFoldersStore from "./TreeFoldersStore";
+import type FilesStore from "./FilesStore";
 
-// FABLE5-REVIEW: FilesStore is still .js (wave 3) — minimal structural type of
-// the members actually used here; replace with import type once converted.
-type TFilesStore = {
-  setSelection: (selection: unknown[]) => void;
-};
+type TFilesStore = FilesStore;
 
 /** Shape used to read `originalEvent` off context-menu click payloads. */
 type TClickEventObj = { originalEvent?: ReactMouseEvent };

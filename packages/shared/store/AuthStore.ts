@@ -90,7 +90,9 @@ class AuthStore {
   isPortalInfoLoaded = false;
 
   constructor(
-    private userStore: UserStore,
+    /** Public: consumed as `authStore.userStore.user` by client stores
+     * (AccessRightsStore); was reached externally even while `private`. */
+    public userStore: UserStore,
     private currentTariffStatusStore: CurrentTariffStatusStore,
     /** Public: consumed as `authStore.currentQuotaStore` by client stores
      * (FilesStore quota getters). Visibility change only — the parameter

@@ -49,6 +49,8 @@ import { calculateRoomLogoParams } from "@docspace/ui-kit/utils";
 
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { TTranslation } from "@docspace/shared/types";
+import type FilesStore from "./FilesStore";
+import type { TItem } from "./FilesStore";
 
 type TUploadedFile = File | null | undefined;
 
@@ -61,12 +63,7 @@ export type TAvatarImage = {
 
 export type TIconCrop = { x: number; y: number; zoom: number };
 
-// FABLE5-REVIEW: FilesStore is still .js (wave 3) — replace this structural
-// type with `import type` once it is converted.
-type TFilesStore = {
-  setActiveFolders: (folders: unknown[]) => void;
-  updateRoom: (item: unknown, room: unknown) => void;
-};
+type TFilesStore = FilesStore;
 
 class AvatarEditorDialogStore {
   uploadedFile: TUploadedFile = null;
@@ -164,7 +161,8 @@ class AvatarEditorDialogStore {
           toastr.error(e as string);
         }
 
-        needUpdate && updateRoom(item, room);
+        needUpdate &&
+          updateRoom(item as TItem, room as Parameters<FilesStore["updateRoom"]>[1]);
         URL.revokeObjectURL(img.src);
         setActiveFolders([]);
         resolve();

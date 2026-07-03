@@ -62,6 +62,7 @@ import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import type PeopleStore from "./contacts/PeopleStore";
 import type UsersStore from "./contacts/UsersStore";
+import type FilesStore from "./FilesStore";
 
 const FILTER_COUNT = 6;
 
@@ -71,11 +72,7 @@ type TQuotaSettings = { lastRecalculateDate?: string };
 
 type TPeopleListItem = ReturnType<UsersStore["getPeopleListItem"]>;
 
-// FABLE5-REVIEW: FilesStore is still .js (wave 3) — replace this structural
-// type with `import type` once it is converted.
-type TFilesStore = {
-  getFilesListItems: (items?: unknown[]) => unknown[];
-};
+type TFilesStore = FilesStore;
 
 class StorageManagement {
   isInit = false;

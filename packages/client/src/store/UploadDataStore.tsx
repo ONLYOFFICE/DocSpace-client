@@ -120,6 +120,7 @@ import type PrimaryProgressDataStore from "./PrimaryProgressDataStore";
 import type SecondaryProgressDataStore from "./SecondaryProgressDataStore";
 import type SelectedFolderStore from "./SelectedFolderStore";
 import type TreeFoldersStore from "./TreeFoldersStore";
+import type FilesStore from "./FilesStore";
 
 type TOperationName = (typeof OPERATIONS_NAME)[keyof typeof OPERATIONS_NAME];
 
@@ -278,49 +279,7 @@ type TAxiosLikeError = {
   message?: string;
 };
 
-// FABLE5-REVIEW: FilesStore is still .js (wave 3) — replace this structural
-// type with `import type` once it is converted.
-type TFilesStore = {
-  files: TFile[];
-  folders: TFolder[];
-  filter: FilesFilter;
-  showNewFilesInList: boolean;
-  activeFiles: { id: number }[];
-  activeFolders: { id: number }[];
-  setFiles: (files: TFile[]) => void;
-  setFolders: (folders: TFolder[]) => void;
-  setFilter: (filter: FilesFilter) => void;
-  setActiveFiles: (
-    activeFiles: { id: number }[],
-    destFolderId?: number | string,
-  ) => void;
-  setActiveFolders: (
-    activeFolders: { id: number }[],
-    destFolderId?: number | string,
-  ) => void;
-  setHighlightFile: (highlightFile: {
-    highlightFileId: number | string;
-    isFileHasExst: boolean;
-  }) => void;
-  openDocEditor: (
-    id: number | string,
-    preview?: boolean,
-    shareKey?: string | null,
-  ) => void;
-  fetchFiles: (
-    folderId: number | string,
-    filter: FilesFilter | null,
-    clearFilter?: boolean,
-    withSubfolders?: boolean,
-  ) => Promise<unknown>;
-  removeFiles: (
-    fileIds?: number[],
-    folderIds?: number[],
-    showToast?: (() => void) | null,
-    destFolderId?: number | string | null,
-  ) => void;
-  getIsEmptyTrash: () => Promise<void>;
-};
+type TFilesStore = FilesStore;
 
 const removeDuplicate = <T extends { uniqueId?: string }>(items: T[]): T[] => {
   const obj: Record<string, boolean> = {};
@@ -3400,10 +3359,10 @@ class UploadDataStore {
       this.filesStore;
 
     const newActiveFiles = activeFiles.filter(
-      (el) => !fileIds?.includes(el.id),
+      (el) => !fileIds?.includes(el.id as number),
     );
     const newActiveFolders = activeFolders.filter(
-      (el) => !folderIds?.includes(el.id),
+      (el) => !folderIds?.includes(el.id as number),
     );
 
     setActiveFiles(newActiveFiles);

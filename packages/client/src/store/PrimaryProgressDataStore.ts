@@ -70,7 +70,9 @@ export type TPrimaryOperation = TPrimaryProgressInfo & {
 
 // FABLE5-REVIEW: FilesStore is still .js (wave 3) — replace this structural
 // type with `import type` once it is converted.
-type TFilesStore = { startDrag: boolean };
+import type FilesStore from "./FilesStore";
+
+type TFilesStore = FilesStore;
 
 class PrimaryProgressDataStore {
   disableUploadPanelOpen = false;

@@ -1207,7 +1207,6 @@
   "InstructionsDescriptionAgentExample": "Exemplo: “Você é um assistente de RP de IA que ajuda a escrever e editar comunicados de imprensa. Mantenha um tom profissional, confiante e adequado à mídia. Destaque as mensagens-chave com clareza, evite jargões e mantenha o texto conciso e envolvente.”",
   "InsufficientFundsWithContact": "Sua carteira não tem fundos suficientes. Entre em contato com o pagador (<1>{{email}}</1>) para recarregar e tente comprar novamente.",
   "InsufficientFundsWithTopUp": "Sua carteira não tem fundos suficientes. Por favor, <1>carregue sua carteira</1> e tente comprar novamente.",
-  "InsufficientPermissionsMessage": "Você não tem permissões suficientes. Por favor, contate o pagador (<1>{{payerContact}}</1>) para acessar e configurar os serviços.",
   "IntegrationName": "Nome da integração",
   "IntegrationsDescription": "Conecte {{productName}} a qualquer ecossistema (DMS, CMS, LMS, etc.) — sem código personalizado, sem migração.",
   "IntegrationURL": "URL de integração",

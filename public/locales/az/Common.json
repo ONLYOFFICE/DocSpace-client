@@ -1194,7 +1194,6 @@
   "InstructionsDescriptionAgentExample": "Misal: “Siz mətbuat açıqlamalarının yazılmasına və redaktə edilməsinə kömək edən süni intellektlə PR köməkçisisiniz. Peşəkar, özünəinamlı və mediaya uyğun bir tonda qalın. Əsas mesajları aydın şəkildə vurğulayın, terminlərdən çəkinin və mətnin qısa və cəlbedici olmasını təmin edin.”",
   "InsufficientFundsWithContact": "Cüzdanınızda kifayət qədər vəsait yoxdur. Xahiş edirik, ödəyicidən (<1>{{email}}</1>) əlaqə saxlayın və balansını doldurub yenidən cəhd edin.",
   "InsufficientFundsWithTopUp": "Cüzdanınızda kifayət qədər vəsait yoxdur. Xahiş edirik <1>cüzdanınızı doldurun</1> və yenidən satın almağa cəhd edin.",
-  "InsufficientPermissionsMessage": "Yeterli icazəniz yoxdur. Xidmətlərə daxil olmaq və konfiqurasiya etmək üçün ödəyici ilə (<1>{{payerContact}}</1>) əlaqə saxlayın.",
   "IntegrationName": "İnteqrasiya adı",
   "IntegrationsDescription": "{{productName}}-ni istənilən ekosistemə bağlayın (DMS, CMS, LMS, və s.) — xüsusi kod yoxdur, miqrasiya yoxdur.",
   "IntegrationURL": "İntegrasiya URL-i",

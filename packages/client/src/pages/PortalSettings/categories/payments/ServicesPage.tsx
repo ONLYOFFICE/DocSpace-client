@@ -42,6 +42,7 @@ import { isManagement } from "@docspace/shared/utils/common";
 
 import { BillingRoot } from "@docspace/ui-kit/billing";
 import { default as AiPage } from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPage";
+import { default as AiSearchPage } from "@docspace/ui-kit/billing/services/pages/ai-search/AiSearchPage";
 import { default as BackupPage } from "@docspace/ui-kit/billing/services/pages/backup/BackupPage";
 import { default as AdditionalStoragePage } from "@docspace/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage";
 import type { TPaymentUser } from "@docspace/ui-kit/billing/types";
@@ -111,6 +112,13 @@ const ServicesPage = (props: ServicesPageProps) => {
               ),
             )
           }
+        />
+      ) : null}
+      {pathname.includes("ai-search") ? (
+        <AiSearchPage
+          getAIConfig={getAIConfig}
+          withBottomMargin={true}
+          onViewMore={onViewUsage}
         />
       ) : null}
       {pathname.includes("backup") ? (

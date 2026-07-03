@@ -1194,7 +1194,6 @@
   "InstructionsDescriptionAgentExample": "Příklad: „Jste AI asistent pro PR, který pomáhá s psaním a úpravou tiskových zpráv. Udržujte profesionální, sebevědomý a pro média přívětivý tón. Jasně vyzdvihujte klíčová sdělení, vyhýbejte se žargonu a udržujte text stručný a poutavý.“",
   "InsufficientFundsWithContact": "Vaše peněženka má nedostatečný zůstatek. Prosím, kontaktujte platitele (<1>{{email}}</1>), aby ji doplnil a zkuste nákup znovu.",
   "InsufficientFundsWithTopUp": "Vaše peněženka má nedostatečný zůstatek. Prosím <1>doplňte zůstatek ve vaší peněžence</1> a zkuste nákup zopakovat.",
-  "InsufficientPermissionsMessage": "Nemáte dostatečné oprávnění. Kontaktujte platebníka (<1>{{payerContact}}</1>) pro přístup a konfiguraci služeb.",
   "IntegrationName": "Název integrace",
   "IntegrationsDescription": "Připojte {{productName}} k jakémukoli ekosystému (DMS, CMS, LMS atd.) — žádný vlastní kód, žádná migrace.",
   "IntegrationURL": "Integrační URL",

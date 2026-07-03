@@ -1177,7 +1177,6 @@
   "InstructionsDescriptionAgentExample": "예: “당신은 보도 자료 작성 및 편집을 돕는 AI PR 어시스턴트입니다. 전문적이고, 자신감 있으며, 언론 친화적인 어조를 유지하십시오. 핵심 메시지를 명확하게 강조하고, 전문 용어를 피하며, 텍스트를 간결하고 흥미롭게 유지하십시오.”",
   "InsufficientFundsWithContact": "지갑에 잔액이 부족합니다. 결제를 다시 시도하려면 지불자 (<1>{{email}}</1>)에게 연락하여 충전해 주시기 바랍니다.",
   "InsufficientFundsWithTopUp": "지갑 잔액이 부족합니다. <1>지갑을 충전</1>하여 다시 구매해 주십시오.",
-  "InsufficientPermissionsMessage": "권한이 충분하지 않습니다. 서비스에 액세스하고 구성하려면 지불자(<1>{{payerContact}}</1>)에게 문의하십시오.",
   "IntegrationName": "통합 이름",
   "IntegrationsDescription": "{{productName}}을 모든 에코시스템(DMS, CMS, LMS 등)에 연결하세요 — 맞춤 코드 없음, 마이그레이션 없음.",
   "IntegrationURL": "통합 URL",

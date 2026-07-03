@@ -80,7 +80,7 @@ const getViewFromPathname = (pathname: string): TView => {
   if (pathname.includes("backup")) return "backup-service";
   if (pathname.includes("disk-storage")) return "disk-storage";
   if (pathname.includes("ai-services")) return "ai-services";
-
+  if (pathname.includes("ai-search")) return "ai-search";
   if (pathname.includes("payments")) return "payments";
 
   if (pathname.includes("bonus")) return "bonus";
@@ -332,6 +332,7 @@ const View = ({
       {currentView === "ai-settings" ? <AISettings /> : null}
       {currentView === "ai-services" ||
       currentView === "backup-service" ||
+      currentView === "ai-search" ||
       currentView === "disk-storage" ? (
         <ServicesPage />
       ) : null}

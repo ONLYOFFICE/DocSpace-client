@@ -1207,7 +1207,6 @@
   "InstructionsDescriptionAgentExample": "例：あなたはプレスリリースの作成・編集を支援するAIのPRアシスタントです。プロフェッショナルで自信に満ちた、メディアに適したトーンを保ってください。主要メッセージを明確に伝え、専門用語を避け、簡潔で魅力的な文面にしてください。",
   "InsufficientFundsWithContact": "あなたのウォレットの残高が不足しています。支払い担当者（<1>{{email}}</1>）に連絡して残高を追加した後、再度購入を試みてください。",
   "InsufficientFundsWithTopUp": "あなたのウォレットの残高が不足しています。<1>ウォレットにチャージ</1>して、再度購入を試みてください。",
-  "InsufficientPermissionsMessage": "権限が不足しています。サービスにアクセスおよび設定するには、支払担当者（<1>{{payerContact}}</1>）にご連絡ください。",
   "IntegrationName": "連携の名前",
   "IntegrationsDescription": "{{productName}}をあらゆるエコシステム（DMS、CMS、LMSなど）に接続できます。カスタムコードも移行も不要です。",
   "IntegrationURL": "連携のURL",

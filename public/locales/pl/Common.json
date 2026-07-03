@@ -1194,7 +1194,6 @@
   "InstructionsDescriptionAgentExample": "Przykład: „Jesteś asystentem PR AI, który pomaga pisać i edytować komunikaty prasowe. Zachowaj profesjonalny, pewny siebie i przyjazny dla mediów ton. Wyraźnie podkreślaj kluczowe przekazy, unikaj żargonu oraz dbaj o to, aby tekst był zwięzły i angażujący”.",
   "InsufficientFundsWithContact": "Twój portfel nie ma wystarczających środków. Prosimy skontaktuj się z płatnikiem (<1>{{email}}</1>), aby doładować go i spróbuj ponownie dokonać zakupu.",
   "InsufficientFundsWithTopUp": "Na Twoim portfelu brakuje środków. Proszę <1>doładuj swój portfel</1> i spróbuj ponownie dokonać zakupu.",
-  "InsufficientPermissionsMessage": "Nie posiada Pan/Pani wystarczających uprawnień. Prosimy o kontakt z płatnikiem (<1>{{payerContact}}</1>) w celu uzyskania dostępu i skonfigurowania usług.",
   "IntegrationName": "Nazwa integracji",
   "IntegrationsDescription": "Podłącz {{productName}} do dowolnego ekosystemu (DMS, CMS, LMS itp.) — bez niestandardowego kodu, bez migracji.",
   "IntegrationURL": "Adres URL integracji",

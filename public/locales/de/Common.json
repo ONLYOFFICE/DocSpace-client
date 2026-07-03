@@ -1207,7 +1207,6 @@
   "InstructionsDescriptionAgentExample": "Beispiel: „Sie sind ein KI-PR-Assistent, der beim Schreiben und Bearbeiten von Pressemitteilungen hilft. Behalten Sie einen professionellen, selbstbewus und medienfreundlichen Ton bei. Heben Sie Kernbotschaften klar hervor, vermeiden Sie Fachjargon und halten Sie den Text prägnant und ansprechend.“",
   "InsufficientFundsWithContact": "Ihr Guthaben ist nicht ausreichend. Bitte wenden Sie sich an den Zahler (<1>{{email}}</1>), um das Guthaben aufzuladen und den Kauf erneut zu versuchen.",
   "InsufficientFundsWithTopUp": "Ihr Guthaben ist nicht ausreichend. Bitte <1>laden Sie Ihr Guthaben auf</1> und versuchen Sie den Kauf erneut.",
-  "InsufficientPermissionsMessage": "Sie verfügen nicht über ausreichende Berechtigungen. Bitte kontaktieren Sie den Zahler (<1>{{payerContact}}</1>), um auf die Dienste zuzugreifen und diese zu konfigurieren.",
   "IntegrationName": "Integrationsname",
   "IntegrationsDescription": "Verbinden Sie {{productName}} mit jedem Ökosystem (DMS, CMS, LMS usw.) — kein benutzerdefinierter Code, keine Migration.",
   "IntegrationURL": "Integrations-URL",

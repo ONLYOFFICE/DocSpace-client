@@ -1207,7 +1207,6 @@
   "InstructionsDescriptionAgentExample": "Primer: „Vi ste AI PR asistent koji pomaže u pisanju i uređivanju saopštenja za medije. Održavajte profesionalan, samouveren i medijski prikladan ton. Jasno istaknite ključne poruke, izbegavajte žargon i neka tekst bude koncizan i privlačan.“",
   "InsufficientFundsWithContact": "Tvoj novčanik nema dovoljno sredstava. Kontaktiraj platioca (<1>{{email}}</1>) da dopuni novčanik i pokušaj ponovo da izvršiš kupovinu.",
   "InsufficientFundsWithTopUp": "Tvoj novčanik nema dovoljno sredstava. Molimo te <1>doplati novčanik</1> i pokušaj ponovo da izvršiš kupovinu.",
-  "InsufficientPermissionsMessage": "Nema dovoljno dozvola. Molimo kontaktirajte plaćenika (<1>{{payerContact}}</1>) radi pristupa i konfigurisanja usluga.",
   "IntegrationName": "Ime integracije",
   "IntegrationsDescription": "Povežite {{productName}} sa bilo kojim ekosistemom (DMS, CMS, LMS itd.) — bez prilagođenog koda, bez migracije.",
   "IntegrationURL": "URL integracije",

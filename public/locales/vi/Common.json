@@ -1194,7 +1194,6 @@
   "InstructionsDescriptionAgentExample": "Ví dụ: “Bạn là một trợ lý PR AI giúp viết và chỉnh sửa các thông cáo báo chí. Hãy duy trì giọng văn chuyên nghiệp, tự tin và thân thiện với giới truyền thông. Làm nổi bật các thông điệp chính một cách rõ ràng, tránh biệt ngữ, và giữ cho văn bản ngắn gọn và hấp dẫn.”",
   "InsufficientFundsWithContact": "Ví của bạn không đủ tiền. Vui lòng liên hệ với người thanh toán (<1>{{email}}</1>) để nạp thêm tiền và thử lại giao dịch.",
   "InsufficientFundsWithTopUp": "Ví của bạn không đủ tiền. Vui lòng <1>nạp tiền vào ví</1> và thử mua lại.",
-  "InsufficientPermissionsMessage": "Bạn không có đủ quyền. Vui lòng liên hệ với bên thanh toán (<1>{{payerContact}}</1>) để truy cập và cấu hình các dịch vụ.",
   "IntegrationName": "Tên tích hợp",
   "IntegrationsDescription": "Kết nối {{productName}} với bất kỳ hệ sinh thái nào (DMS, CMS, LMS, v.v.) — không cần mã tùy chỉnh, không cần di chuyển.",
   "IntegrationURL": "Địa chỉ URL tích hợp",

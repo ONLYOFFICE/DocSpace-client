@@ -1194,7 +1194,6 @@
   "InstructionsDescriptionAgentExample": "Primer: \"Vi ste AI PR pomočnik, ki pomaga pri pisanju in urejanju obvestil za javnost. Ohranite profesionalen, samozloben in medijsko prijazen ton. Izpostavite ključne poudarke jasno, izogibajte se žargonu in ohranite besedilo jedrnato in privlačno.\"",
   "InsufficientFundsWithContact": "Vaša denarnica nima dovolj sredstev. Prosimo, obrnite se na plačnika (<1>{{email}}</1>), da jo napolni in poskusite ponovno izvesti nakup.",
   "InsufficientFundsWithTopUp": "Vaša denarnica nima dovolj sredstev. Prosim <1>nakladite denar na denarnico</1> in poskusite z nakupom znova.",
-  "InsufficientPermissionsMessage": "Nimate zadostitvih dovoljenj. Prosim povežite z plačilnikom (<1>{{payerContact}}</1>) za dostop in konfiguracijo storitev.",
   "IntegrationName": "Ime integracije",
   "IntegrationsDescription": "Povežite {{productName}} z vsakim ekosistemom (DMS, CMS, LMS itd.) — brez kode po meri, brez migracije.",
   "IntegrationURL": "Integracijska URL",

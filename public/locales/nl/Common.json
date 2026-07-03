@@ -1194,7 +1194,6 @@
   "InstructionsDescriptionAgentExample": "Voorbeeld: \"Je bent een AI-PR-assistent die helpt bij het schrijven en bewerken van persberichten. Handhaaf een professionele, zelfverzekerde en mediavriendelijke toon. Benadruk belangrijke boodschappen duidelijk, vermijd jargon en houd de tekst beknopt en boeiend.\"",
   "InsufficientFundsWithContact": "Uw portemonnee heeft onvoldoende saldo. Neem contact op met de betaler (<1>{{email}}</1>) om deze bij te vullen en probeer de aankoop opnieuw.",
   "InsufficientFundsWithTopUp": "Uw portemonnee heeft onvoldoende saldo. Vul alstublieft <1>uw portemonnee aan</1> en probeer de aankoop opnieuw.",
-  "InsufficientPermissionsMessage": "U heeft onvoldoende rechten. Neem contact op met de betaler (<1>{{payerContact}}</1>) om de diensten te bekijken en te configureren.",
   "IntegrationName": "Integratienaam",
   "IntegrationsDescription": "Verbind {{productName}} met elk ecosysteem (DMS, CMS, LMS, enz.) — geen aangepaste code, geen migratie.",
   "IntegrationURL": "Integratie URL",

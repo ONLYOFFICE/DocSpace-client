@@ -1207,7 +1207,6 @@
   "InstructionsDescriptionAgentExample": "Exemplu: „Ești un asistent IA de PR care ajută la scrierea și editarea comunicatelor de presă. Menține un ton profesional, încrezător și adaptat pentru media. Evidențiază clar mesajele cheie, evită jargonul și menține textul concis și captivant.”",
   "InsufficientFundsWithContact": "Fondurile din portofelul dvs sunt insuficiente. Vă rugăm să contactați plătitorul (<1>{{email}}</1>) pentru a-l alimenta și să încercați din nou.",
   "InsufficientFundsWithTopUp": "Fondurile din portofelul dvs sunt insuficiente. Vă rugăm să <1>vă alimentați portofelul</1> și să încercați din nou.",
-  "InsufficientPermissionsMessage": "Nu aveți permisiuni suficiente. Vă rugăm să contactați plataatorul (<1>{{payerContact}}</1>) pentru a accesa și configura serviciile.",
   "IntegrationName": "Nume de integrare",
   "IntegrationsDescription": "Conectați {{productName}} la orice ecosistem (DMS, CMS, LMS, etc.) — fără cod personalizat, fără migrare.",
   "IntegrationURL": "Adresa URL a integrării",

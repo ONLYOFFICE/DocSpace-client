@@ -1194,7 +1194,6 @@
   "InstructionsDescriptionAgentExample": "Shembull: “Ju jeni një asistent IA PR që ndihmon në shkrimin dhe redaktimin e komunikatave për media. Mbani një ton profesional, të sigurt dhe miqësor për mediat. Nxirrni qartë mesazhet kryesore, shmangni zhargonin dhe mbani tekstin të qartë dhe tërheqës.”",
   "InsufficientFundsWithContact": "Portofoli juaj nuk ka fonde të mjaftueshme. Ju lutem kontaktoni paguesin (<1>{{email}}</1>) për ta rimbushur dhe provoni sërish blerjen.",
   "InsufficientFundsWithTopUp": "Portofoli juaj nuk ka fonde të mjaftueshme. Ju lutem <1>mbushni portofolin tuaj</1> dhe provoni sërish blerjen.",
-  "InsufficientPermissionsMessage": "Ju nuk keni të drejta mjaftueshme. Ju lutemi kontaktoni paguesin (<1>{{payerContact}}</1>) për të aksesuar dhe konfiguruar shërbimet.",
   "IntegrationName": "Emri i integrimit",
   "IntegrationsDescription": "Lidhni {{productName}} me çdo ekosistem (DMS, CMS, LMS etj.) — pa kod të personalizuar, pa migrim.",
   "IntegrationURL": "URL-ja e integrimit",

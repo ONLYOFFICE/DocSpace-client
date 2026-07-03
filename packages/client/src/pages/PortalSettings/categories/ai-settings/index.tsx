@@ -50,7 +50,6 @@ import { Knowledge } from "./knowledge";
 import WebSearchSaas from "./search/WebSearchSaas";
 import KnowledgeBaseSaas from "./knowledge/KnowledgeBaseSaas";
 import AiModelsSaas from "./models/AiModelsSaas";
-import ModelAssignmentSaas from "./model-assignment/ModelAssignmentSaas";
 import AIFeaturesBanner from "./sub-components/AIFeaturesBanner";
 
 const BASE_PATH = "/portal-settings/ai-settings";
@@ -171,7 +170,7 @@ const AISettings = ({
     {
       id: TAB_IDS.MODEL_ASSIGNMENT,
       name: t("Common:ModelAssignment"),
-      content: standalone ? <ModelAssignment /> : <ModelAssignmentSaas />,
+      content: <ModelAssignment />,
       onClick: makeOnClick(TAB_IDS.MODEL_ASSIGNMENT),
       isDisabled: disableNonAiModels,
     },

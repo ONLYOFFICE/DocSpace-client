@@ -127,8 +127,8 @@ const dispatchCreateAgent = (parentId: number | string | null) => {
 // Forms section. Mirrors the sidebar's Forms → Templates item
 // (ClientArticleSidebar.goFormsTemplates).
 const goFormsTemplates = (userId?: string) => {
-  const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Templates);
-  filter.searchArea = RoomSearchArea.Templates;
+  const filter = RoomsFilter.getDefault(userId, RoomSearchArea.FormTemplates);
+  filter.searchArea = RoomSearchArea.FormTemplates;
   window.DocSpace.navigate(
     `/forms/filter?${filter.toUrlParams(userId, false)}`,
   );

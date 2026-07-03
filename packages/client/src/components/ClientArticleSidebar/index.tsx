@@ -180,8 +180,11 @@ const ClientArticleSidebar = ({
 
   const goFormsTemplates = React.useCallback(() => {
     onFolderNavigateRef.current?.();
-    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Templates);
-    filter.searchArea = RoomSearchArea.Templates;
+    const filter = RoomsFilter.getDefault(
+      userId,
+      RoomSearchArea.FormTemplates,
+    );
+    filter.searchArea = RoomSearchArea.FormTemplates;
     navigate(`/forms/filter?${filter.toUrlParams(userId, false)}`);
   }, [navigate, userId]);
 

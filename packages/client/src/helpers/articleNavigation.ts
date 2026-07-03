@@ -188,6 +188,8 @@ export const getSectionTrashTarget = (
  * Templates share the `/rooms/shared` path with the Rooms list and are told
  * apart only by `searchArea=Templates` in the query string, so the active-id
  * check needs the search part too (defaults to the live `location.search`).
+ * Form templates work the same way on `/forms`, keyed by
+ * `searchArea=FormTemplates`.
  */
 export const getClientActiveId = (
   pathname: string,
@@ -198,9 +200,12 @@ export const getClientActiveId = (
   const match = (folderId?: number | null) =>
     folderId != null ? String(folderId) : undefined;
 
+  const searchArea = new URLSearchParams(search).get("searchArea");
+
   const isTemplates =
-    isTemplatesContext ||
-    new URLSearchParams(search).get("searchArea") === RoomSearchArea.Templates;
+    isTemplatesContext || searchArea === RoomSearchArea.Templates;
+
+  const isFormTemplates = searchArea === RoomSearchArea.FormTemplates;
 
   if (pathname.startsWith("/dashboard")) return "dashboard";
   // Agent-scoped sections highlight their own sidebar sub-items (checked
@@ -213,7 +218,7 @@ export const getClientActiveId = (
     if (pathname.includes("/recent")) return "forms-recent";
     if (pathname.includes("/favorite")) return "forms-favorites";
     if (pathname.includes("/trash")) return "forms-trash";
-    if (isTemplates) return "forms-templates";
+    if (isFormTemplates) return "forms-templates";
     return "forms";
   }
   if (pathname.includes("/ai-agents")) return match(ids.aiAgentsFolderId);

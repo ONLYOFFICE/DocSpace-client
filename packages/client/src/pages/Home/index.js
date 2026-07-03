@@ -36,6 +36,7 @@
 import React, { useCallback } from "react";
 import classnames from "classnames";
 import { useLocation, Outlet, Navigate } from "react-router";
+import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -711,6 +712,7 @@ const HomeWithGuard = (props) => {
 
   if (
     !isLegacyMode &&
+    !isOAuthFrame() &&
     !PASS_THROUGH_PREFIXES.some((p) => pathname.startsWith(p))
   )
     return <Navigate to="/dashboard" replace />;
@@ -829,6 +831,7 @@ export const Component = inject(
       isFavoritesFolder,
       isRecentFolder,
       isAIAgentsFolder,
+      isFormsFolder,
     } = treeFoldersStore;
 
     const {
@@ -941,6 +944,7 @@ export const Component = inject(
 
       isErrorRoomNotAvailable,
       isRoomsFolder,
+      isFormsFolder,
       isArchiveFolder,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
 

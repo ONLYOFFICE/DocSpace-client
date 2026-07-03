@@ -169,6 +169,7 @@ const SectionFilterContent = ({
   getAllRoomGroups,
   roomGroups,
   isRoomsFolder,
+  isFormsFolder,
   organizeRoomsGrouping,
 }) => {
   const location = useLocation();
@@ -214,6 +215,7 @@ const SectionFilterContent = ({
         isRoomsFolder,
         isAIAgentsFolder,
         isFormsSection,
+        isFormsFolder,
         selectedFolderId,
         getFolderModel,
         getContactsModel,
@@ -229,6 +231,7 @@ const SectionFilterContent = ({
       isRoomsFolder,
       isAIAgentsFolder,
       isFormsSection,
+      isFormsFolder,
       selectedFolderId,
       getFolderModel,
       getContactsModel,
@@ -1799,6 +1802,10 @@ const SectionFilterContent = ({
         newFilter.searchArea = RoomSearchArea.Templates;
       }
 
+      if (isFormsFolder) {
+        newFilter.searchArea = RoomSearchArea.Forms;
+      }
+
       const path = getRoomsListBasePath(newFilter.searchArea);
 
       navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
@@ -1980,9 +1987,11 @@ export default inject(
       isTemplatesFolder,
       isSharedWithMeFolder,
       isAIAgentsFolder,
+      isFormsFolder,
     } = treeFoldersStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
+    const isRooms =
+      isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { showStorageInfo, isDefaultRoomsQuotaSet } = currentQuotaStore;
@@ -2101,6 +2110,7 @@ export default inject(
       getAllRoomGroups,
       roomGroups,
       isRoomsFolder,
+      isFormsFolder,
       organizeRoomsGrouping,
     };
   },

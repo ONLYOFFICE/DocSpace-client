@@ -48,6 +48,7 @@ import { getAppSettings } from "@/api/apps";
 import {
   FILTER_HEADER,
   LIBRARY_ID_HEADER,
+  OAUTH_FRAME_HEADER,
   PAGE_COUNT,
   ROOM_ID_HEADER,
   PATHNAME_HEADER,
@@ -55,6 +56,7 @@ import {
 import { FormsSection } from "@/types/forms";
 
 import FormsShell from "./layout.client";
+import FormsOAuthShell from "./layout.oauth.client";
 
 export const dynamic = "force-dynamic";
 
@@ -64,6 +66,10 @@ export default async function FormsServerLayout({
   children: React.ReactNode;
 }) {
   const hdrs = await headers();
+
+  if (hdrs.get(OAUTH_FRAME_HEADER) === "1")
+    return <FormsOAuthShell>{children}</FormsOAuthShell>;
+
   const cookieStore = await cookies();
 
   let roomId = hdrs.get(ROOM_ID_HEADER) || "";

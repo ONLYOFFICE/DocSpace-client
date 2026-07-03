@@ -63,3 +63,11 @@ export const setAuthToken = (token: string | null) => {
 export const getAuthToken = (): string | null => {
   return client.authToken;
 };
+
+export const resolveOAuthToken = (): Promise<string | null> => {
+  return client.getOAuthToken();
+};
+
+export const refreshOAuthToken = (): Promise<string | null> => {
+  return client.refreshOAuthToken();
+};

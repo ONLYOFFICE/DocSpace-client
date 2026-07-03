@@ -37,6 +37,7 @@
 
 import { useCallback, useEffect, useRef } from "react";
 
+import { connectFrameSocket } from "@docspace/shared/utils/oauthFrameSocket";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
@@ -63,7 +64,7 @@ export default function useFilesSocket(
     if (!socketUrl || isInit.current) return;
 
     isInit.current = true;
-    SocketHelper?.connect(socketUrl, "");
+    void connectFrameSocket(socketUrl, "");
   }, [socketUrl]);
 
   useEffect(() => {

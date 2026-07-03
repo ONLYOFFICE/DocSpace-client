@@ -26,108 +26,39 @@
 
 import { cookies } from "next/headers";
 
-import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { RoomsType } from "@docspace/shared/enums";
-import type { TFolder } from "@docspace/shared/api/files/types";
-import type { TSettings } from "@docspace/shared/api/settings/types";
-
 import { getFilesSettings } from "@/api/files";
 import { getRooms } from "@/api/rooms";
 import { getSettings } from "@/api/settings";
 import { getSelf } from "@/api/people";
-import { PAGE_COUNT } from "@/utils/constants";
 
 import RoomsPage from "./page.client";
+import RoomsOAuth from "./page.oauth.client";
+import { loadRoomsPageData, type RoomsPageDeps } from "./loadData";
 
-const serializeRoomsFilter = (filter: RoomsFilter) => {
-  const params = new URLSearchParams();
-
-  const entries: [string, string | number | null | undefined][] = [
-    ["page", filter.page],
-    ["pageCount", filter.pageCount],
-    ["sortBy", filter.sortBy],
-    ["sortOrder", filter.sortOrder],
-    ["filterValue", filter.filterValue],
-    ["subjectId", filter.subjectId],
-    ["subjectOwnerId", filter.subjectOwnerId],
-  ];
-
-  for (const [key, value] of entries) {
-    if (value !== undefined && value !== null && value !== "") {
-      params.set(key, String(value));
-    }
-  }
-
-  if (filter.tags && filter.tags.length > 0) {
-    params.set("tags", JSON.stringify(filter.tags));
-  }
-
-  return params.toString();
-};
+const ssrDeps = {
+  getFilesSettings,
+  getRooms,
+  getSettings,
+  getSelf,
+} as unknown as RoomsPageDeps;
 
 export default async function Rooms({
   searchParams,
 }: {
   searchParams: Promise<Record<string, string>>;
 }) {
-  const cookieStore = await cookies();
-  const authToken = cookieStore.get("asc_auth_key")?.value || "";
   const params = await searchParams;
 
-  const filter = RoomsFilter.getDefault();
-  filter.type = String(RoomsType.CustomRoom);
-  filter.pageCount = params.pageCount ? Number(params.pageCount) : PAGE_COUNT;
-  if (params.page) filter.page = Math.max(0, Number(params.page) - 1);
-  if (params.sortBy) filter.sortBy = params.sortBy as typeof filter.sortBy;
-  if (params.sortOrder)
-    filter.sortOrder = params.sortOrder as typeof filter.sortOrder;
-  if (params.filterValue) filter.filterValue = params.filterValue;
-  if (params.subjectId) filter.subjectId = params.subjectId;
-  if (params.subjectOwnerId) filter.subjectOwnerId = params.subjectOwnerId;
-  if (params.tags) {
-    try {
-      const parsed = JSON.parse(params.tags);
-      if (Array.isArray(parsed) && parsed.length > 0) filter.tags = parsed;
-    } catch {
-      // ignore malformed tags
-    }
+  if (params.auth === "oauth") {
+    return <RoomsOAuth params={params} />;
   }
 
-  const roomsFilter = serializeRoomsFilter(filter);
+  const cookieStore = await cookies();
+  const authToken = cookieStore.get("asc_auth_key")?.value || "";
 
-  let filesSettings;
-  let roomsData;
-  let portalSettings;
-  let user;
+  const data = await loadRoomsPageData(ssrDeps, params);
 
-  try {
-    [filesSettings, roomsData, portalSettings, user] = await Promise.all([
-      getFilesSettings(),
-      getRooms(filter),
-      getSettings(),
-      getSelf(),
-    ]);
-  } catch (error) {
-    throw new Error(
-      `Failed to load rooms page data: ${error instanceof Error ? error.message : String(error)}`,
-    );
-  }
+  if (!data) throw new Error("Failed to load required settings");
 
-  if (!filesSettings || !portalSettings || !roomsData) {
-    throw new Error("Failed to load required settings");
-  }
-
-  return (
-    <RoomsPage
-      authToken={authToken}
-      filesSettings={filesSettings}
-      folderData={{
-        ...roomsData,
-        folders: roomsData.folders as unknown as TFolder[],
-      }}
-      portalSettings={portalSettings as TSettings}
-      filesFilter={roomsFilter}
-      user={user}
-    />
-  );
+  return <RoomsPage authToken={authToken} {...data} />;
 }

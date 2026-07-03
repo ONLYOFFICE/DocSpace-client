@@ -93,7 +93,7 @@ const AIAgentViewComponent = (props: Props) => {
             className={styles.aiAgentChat}
             data-chat-active={currentView === "chat" ? "" : undefined}
           >
-            <NewChat aiReady={aiReady} noAccessProps={noAccessProps} />
+            <NewChat isAgent aiReady={aiReady} noAccessProps={noAccessProps} />
           </div>
         </Activity>
       ) : null}

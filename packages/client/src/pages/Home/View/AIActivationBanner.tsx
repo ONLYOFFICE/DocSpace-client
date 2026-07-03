@@ -57,7 +57,7 @@ type Props = {
   language?: string;
 };
 
-const AIChatComposerBannerComponent = ({
+const AIActivationBannerBase = ({
   standalone,
   isAdmin,
   isPayer,
@@ -78,6 +78,8 @@ const AIChatComposerBannerComponent = ({
     createAgentOnActivate: false,
   });
 
+  if (standalone) return;
+
   if (isAIReady) return null;
 
   return (
@@ -94,7 +96,7 @@ const AIChatComposerBannerComponent = ({
   );
 };
 
-export const AIChatComposerBanner = inject(
+export const AIActivationBanner = inject(
   ({
     settingsStore,
     userStore,
@@ -121,7 +123,7 @@ export const AIChatComposerBanner = inject(
       walletCustomerDisplayName: walletCustomerInfo?.displayName,
     };
   },
-)(observer(AIChatComposerBannerComponent));
+)(observer(AIActivationBannerBase));
 
-export default AIChatComposerBanner;
+export default AIActivationBanner;
 

@@ -62,7 +62,7 @@ import { Toast, toastr, ToastType } from "@docspace/ui-kit/components/toast";
 import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
 import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
 
-import { AIChatComposerBanner } from "SRC_DIR/pages/Home/View/AIChatComposerBanner";
+import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
 import { updateTempContent } from "@docspace/shared/utils/common";
 import {
   AnalyticsEvents,
@@ -620,7 +620,7 @@ const Shell = ({ page = "home", ...rest }) => {
     </Layout>
   );
 
-  const composerHeader = useMemo(() => <AIChatComposerBanner />, []);
+  const composerHeader = useMemo(() => <AIActivationBanner />, []);
 
   // Defer mounting AiAgentProviders until authStore is loaded — otherwise
   // `standalone` flips after the first render, the providers' useMemo

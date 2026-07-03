@@ -37,6 +37,7 @@ import type {
   TThirdParties,
   TThirdParty,
 } from "../../api/files/types";
+import type { TRoom } from "../../api/rooms/types";
 import type {
   ConnectingStoragesType,
   Nullable,
@@ -62,7 +63,7 @@ export interface ConnectDialogProps {
   >;
   providers: TThirdParty[];
   selectedFolderId: Nullable<string | number>;
-  selectedFolderFolders: Nullable<TFolder[]>;
+  selectedFolderFolders: Nullable<(TFolder | TRoom)[]>;
   folderFormValidation: RegExp;
   isConnectionViaBackupModule: boolean;
   roomCreation: boolean;

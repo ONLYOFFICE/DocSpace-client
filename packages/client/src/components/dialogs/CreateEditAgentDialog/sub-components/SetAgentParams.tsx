@@ -578,7 +578,9 @@ export default inject(
       setCover,
     } = dialogsStore;
 
-    setCoverSelection(bufferSelection);
+    // FABLE5-REVIEW: bufferSelection is a FilesStore view-model item
+    // (TItem); erased cast adapts it to the raw-entity dialog param.
+    setCoverSelection(bufferSelection as Nullable<TRoom>);
 
     return {
       folderFormValidation,

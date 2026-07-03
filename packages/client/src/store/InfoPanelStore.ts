@@ -283,11 +283,16 @@ class InfoPanelStore {
   };
 
   get infoPanelSelection(): TSelection {
-    const selection = this.filesStore.selection.length
+    // FABLE5-REVIEW: FilesStore selection/bufferSelection are filesList
+    // view-model items (TItem) and the fallback is a spread of the selected
+    // folder store; the erased casts keep the old JS values while this
+    // getter keeps its raw-entity TSelection facade.
+    const selection = (this.filesStore.selection.length
       ? this.filesStore.selection.length === 1
         ? this.filesStore.selection[0]
         : this.filesStore.selection
-      : (this.filesStore.bufferSelection ?? { ...this.selectedFolderStore });
+      : (this.filesStore.bufferSelection ??
+        { ...this.selectedFolderStore })) as unknown as TSelection;
 
     if (!selection) return null;
 
@@ -297,7 +302,7 @@ class InfoPanelStore {
 
     const icon = this.getInfoPanelItemIcon(selection, 32);
 
-    return { ...selection, icon };
+    return { ...selection, icon } as unknown as TSelection;
   }
 
   get infoPanelRoomSelection(): Nullable<TRoom> {

@@ -302,7 +302,10 @@ class UsersStore {
           id,
           isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
         );
-        fetchRooms(roomsFilter);
+        // FABLE5-REVIEW: fetchRooms(folderId, filter) — this caller has
+        // always passed the filter in the folderId slot (the filter argument
+        // falls back to the default); erased cast preserves that behavior.
+        fetchRooms(roomsFilter as unknown as string);
       }
     };
 

@@ -34,6 +34,7 @@
  */
 
 import React, { FC } from "react";
+import type { TFile } from "@docspace/shared/api/files/types";
 import { useTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
 
@@ -75,11 +76,21 @@ const CreatedPDFFormDialogComponent = ({
 		try {
 			const currentFile = await getFileInfo(file.id);
 
+			// FABLE5-REVIEW: getFilesListItems returns FilesStore view-model
+			// items (TItem); the erased casts adapt them to the raw-entity
+			// parameter types of the share helpers (type-only).
 			const [fileItem] = getFilesListItems([currentFile]);
 
-			const primaryLink = await ShareLinkService.getFilePrimaryLink(fileItem);
+			const primaryLink = await ShareLinkService.getFilePrimaryLink(
+				fileItem as TFile,
+			);
 
-			copyShareLink(fileItem, primaryLink, t, getManageLinkOptions(fileItem));
+			copyShareLink(
+				fileItem as TFile,
+				primaryLink,
+				t,
+				getManageLinkOptions(fileItem as TFile),
+			);
 		} catch (error) {
 			const url = getItemUrl(file.id, false, false, false);
 			if (url) {

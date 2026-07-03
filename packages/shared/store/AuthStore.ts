@@ -92,7 +92,10 @@ class AuthStore {
   constructor(
     private userStore: UserStore,
     private currentTariffStatusStore: CurrentTariffStatusStore,
-    private currentQuotaStore: CurrentQuotasStore,
+    /** Public: consumed as `authStore.currentQuotaStore` by client stores
+     * (FilesStore quota getters). Visibility change only — the parameter
+     * property assignment is identical at runtime. */
+    public currentQuotaStore: CurrentQuotasStore,
     public settingsStore: SettingsStore,
   ) {
     makeAutoObservable(this);

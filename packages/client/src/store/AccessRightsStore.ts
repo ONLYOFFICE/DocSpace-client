@@ -67,7 +67,9 @@ type TAuthStore = {
 // (file/folder/room list item plus the injected `editing` flag).
 type TCanMoveItem = {
   editing?: boolean;
-  security?: TFileSecurity | TFolderSecurity | TRoomSecurity | null;
+  // Only `Move` is read; FilesStore passes its merged (all-optional) item
+  // security shape as well as the raw API security objects.
+  security?: { Move?: boolean } | null;
   rootFolderType?: FolderType;
 };
 

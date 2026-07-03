@@ -47,7 +47,6 @@ import {
   FileStatus,
   RoomsType,
   RoomsProviderType,
-  Events,
   FilterKeys,
   RoomSearchArea,
   SearchArea,
@@ -93,7 +92,6 @@ import config from "PACKAGE_FILE";
 import {
   LOADER_TIMEOUT,
   MEDIA_VIEW_URL,
-  PDF_FORM_DIALOG_KEY,
   ROOMS_PROVIDER_TYPE_NAME,
   thumbnailStatuses,
   CategoryType,
@@ -137,11 +135,253 @@ import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
 import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
 
+import type {
+  Nullable,
+  TCreatedBy,
+  TViewAs,
+  ValueOf,
+} from "@docspace/shared/types";
+import type {
+  TFile,
+  TFileSecurity,
+  TFileViewAccessibility,
+  TFolder,
+  TFolderSecurity,
+  TGetFolder,
+  TShareSettings,
+} from "@docspace/shared/api/files/types";
+import type {
+  TAIRoomChatSettings,
+  TGetRooms,
+  TRoom,
+  TRoomLifetime,
+  TRoomSecurity,
+  TWatermark,
+} from "@docspace/shared/api/rooms/types";
+import type { TPathParts, TAvailableShareRights } from "@docspace/shared/types";
+import type {
+  FileFillingFormStatus,
+  ShareAccessRights,
+  VectorizationStatus,
+} from "@docspace/shared/enums";
+import type { TLogo } from "@docspace/ui-kit/types";
+import type {
+  TEditFileData,
+  TOptSocket,
+  TUnmappedSocketListener,
+} from "@docspace/ui-kit/utils/socket";
+import type { default as TFilesFilter } from "@docspace/shared/api/files/filter";
+import type { default as TRoomsFilter } from "@docspace/shared/api/rooms/filter";
+import type { AuthStore } from "@docspace/shared/store/AuthStore";
+import type { UserStore } from "@docspace/shared/store/UserStore";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
+import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
+
+import type SelectedFolderStore from "./SelectedFolderStore";
+import type { TNavigationPath } from "./SelectedFolderStore";
+import type TreeFoldersStore from "./TreeFoldersStore";
+import type FilesSettingsStore from "./FilesSettingsStore";
+import type { ThirdPartyStore } from "./ThirdPartyStore";
+import type AccessRightsStore from "./AccessRightsStore";
+import type ClientLoadingStore from "./ClientLoadingStore";
+import type PluginStore from "./PluginStore";
+import type PublicRoomStore from "./PublicRoomStore";
+import type IndexingStore from "./IndexingStore";
+import type AiRoomStore from "./AiRoomStore";
+import type DialogsStore from "./DialogsStore";
+
 import {
   PersistenceKeys,
   getPersistedString,
   setPersistedString,
 } from "./utils/persistence";
+
+// FABLE5-REVIEW: `pdfViewer` exists in public/scripts/config.json but is
+// missing from the duplicated Window.ClientConfig declarations
+// (packages/shared/types/index.ts and the libs/ui-kit submodule); both must
+// be updated in sync (TS2717) and ui-kit is a separate submodule, so a local
+// cast type is used here (same approach as MediaViewerDataStore).
+type TClientConfigWithPdfViewer = NonNullable<Window["ClientConfig"]> & {
+  pdfViewer?: boolean;
+};
+
+// FABLE5-REVIEW: FilesStore.js reads `security.security?.X` in the AI
+// knowledge/result branch of fetchFiles — the nested member never exists at
+// runtime (always undefined); it is typed here so the read stays legal
+// without call-site casts. Candidate for cleanup.
+export type TItemSecurity = Partial<
+  TFileSecurity & TFolderSecurity & TRoomSecurity
+> & {
+  security?: Partial<TFileSecurity & TFolderSecurity & TRoomSecurity>;
+};
+
+// FABLE5-REVIEW: this store mixes three API entity families (files,
+// folders, rooms) and its own filesList view-models in the same collections.
+// TItem is an explicit structural merge of those shapes (every member
+// optional, conflicting `security` widened to TItemSecurity) plus the
+// view-model fields produced by getFilesListItems, so raw TFile/TFolder/
+// TRoom/TAgent entities and list items are all assignable to it. It is
+// deliberately written out field-by-field (not as a Partial<TFile & TFolder
+// & TRoom> intersection): Biome's type-aware noMisusedPromises rule
+// stack-overflows evaluating the large intersection across this file.
+export type TItem = {
+  security?: TItemSecurity;
+  /** Third-party provider entries carry string ids at runtime. */
+  id?: number | string;
+  access?: ShareAccessRights;
+  autoDelete?: string;
+  originTitle?: string;
+  comment?: string;
+  contentLength?: string;
+  created?: string;
+  createdBy?: TCreatedBy;
+  encrypted?: boolean;
+  fileExst?: string;
+  filesCount?: number;
+  fileStatus?: FileStatus;
+  fileType?: FileType;
+  folderId?: number;
+  foldersCount?: number;
+  logo?: TLogo;
+  locked?: boolean;
+  lockedBy?: string;
+  private?: boolean;
+  originId?: number;
+  originFolderId?: number | string;
+  originRoomId?: number | string;
+  originRoomTitle?: string;
+  parentId?: number;
+  pureContentLength?: number;
+  rootFolderType?: FolderType;
+  rootFolderId?: number;
+  shared?: boolean;
+  sharedBy?: TCreatedBy;
+  ownedBy?: TCreatedBy;
+  sharedForUser?: boolean;
+  title?: string;
+  type?: FolderType;
+  hasDraft?: boolean;
+  updated?: string;
+  updatedBy?: TCreatedBy;
+  version?: number;
+  versionGroup?: number;
+  viewUrl?: string;
+  webUrl?: string;
+  shortWebUrl?: string;
+  providerKey?: string;
+  providerId?: number;
+  providerItem?: boolean;
+  thumbnailUrl?: string;
+  thumbnailStatus?: number;
+  canShare?: boolean;
+  canEdit?: boolean;
+  roomType?: RoomsType;
+  rootRoomType?: RoomsType;
+  isArchive?: boolean;
+  tags?: string[];
+  pinned?: boolean;
+  viewAccessibility?: TFileViewAccessibility;
+  mute?: boolean;
+  inRoom?: boolean;
+  requestToken?: string;
+  indexing?: boolean;
+  lifetime?: TRoomLifetime;
+  denyDownload?: boolean;
+  denySharing?: boolean;
+  lastOpened?: string;
+  quotaLimit?: number;
+  usedSpace?: number;
+  isCustomQuota?: boolean;
+  order?: string;
+  startFilling?: boolean;
+  draftLocation?: unknown;
+  expired?: string;
+  expirationDate?: string;
+  external?: boolean;
+  isLinkExpired?: boolean;
+  passwordProtected?: boolean;
+  watermark?: TWatermark;
+  formFillingStatus?: FileFillingFormStatus;
+  customFilterEnabled?: boolean;
+  customFilterEnabledBy?: string;
+  chatSettings?: TAIRoomChatSettings;
+  location?: unknown;
+  new?: number;
+  isFolder?: boolean;
+  isRoom?: boolean;
+  isFile?: boolean;
+  isForm?: boolean;
+  isPDFForm?: boolean;
+  isFavorite?: boolean;
+  isTemplate?: boolean;
+  isAvailable?: boolean;
+  vectorizationStatus?: VectorizationStatus;
+  activeEditors?: Record<string, string>;
+  editingBy?: Record<string, string>;
+  fileEntryType?: number;
+  parentShared?: boolean;
+  parentRoomType?: FolderType;
+  path?: TPathParts[];
+  shareSettings?: TShareSettings;
+  availableShareRights?: TAvailableShareRights;
+  originalFormId?: number;
+  sendFormToExternalDB?: boolean;
+  saveFormAsXLSX?: boolean;
+  // view-model fields produced by getFilesListItems
+  daysRemaining?: string;
+  contextOptions?: string[];
+  icon?: string;
+  defaultRoomIcon?: string;
+  isPrivateRoom?: boolean;
+  canOpenPlayer?: boolean;
+  previewUrl?: Nullable<string>;
+  folderUrl?: Nullable<string> | false;
+  href?: Nullable<string> | false;
+  isThirdPartyFolder?: boolean | string;
+  isEditing?: boolean;
+  isAIAgent?: boolean;
+  thirdPartyIcon?: string;
+  providerType?: RoomsProviderType;
+  fileTypeName?: string;
+  isPlugin?: boolean;
+  fileTileIcon?: string;
+  // set by the sortedFiles getter on cloned selection items
+  checked?: boolean;
+  format?: Nullable<string>;
+};
+
+type TActiveItem = {
+  id: number | string;
+  destFolderId?: number | string | null;
+};
+
+type THighlightFile = {
+  id?: number | string;
+  isExst?: boolean;
+};
+
+type TCreatedItem = Nullable<{
+  id: number | string;
+  type?: string;
+}>;
+
+// FABLE5-REVIEW: FillingFormsRoom/ReviewRoom/ReadOnlyRoom were removed from
+// the ui-kit RoomsType enum ("TODO: Restore when certs will be done") — the
+// lookups below evaluate to undefined at runtime (producing "room-undefined"
+// switch keys), preserved verbatim via this cast type.
+type TRemovedRoomsTypes = {
+  FillingFormsRoom?: RoomsType;
+  ReviewRoom?: RoomsType;
+  ReadOnlyRoom?: RoomsType;
+};
+
+// FABLE5-REVIEW: window.DocSpace.location.state is `unknown` in the shared
+// Window declaration; only the members read by this store are asserted.
+type THighlightState = {
+  highlightFileId?: number | string;
+  isFileHasExst?: boolean;
+};
 
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = getPersistedString(PersistenceKeys.viewAs);
@@ -154,42 +394,48 @@ const PaymentRequiredHttpCode = 402;
 const UnauthorizedHttpCode = 401;
 
 const THUMBNAILS_CACHE = 500;
-let timerId;
+let timerId: ReturnType<typeof setTimeout> | null;
 
 class FilesStore {
-  authStore;
+  authStore: AuthStore;
 
-  userStore;
+  userStore: UserStore;
 
-  currentTariffStatusStore;
+  currentTariffStatusStore: CurrentTariffStatusStore;
 
-  selectedFolderStore;
+  selectedFolderStore: SelectedFolderStore;
 
-  treeFoldersStore;
+  treeFoldersStore: TreeFoldersStore;
 
-  filesSettingsStore;
+  filesSettingsStore: FilesSettingsStore;
 
-  thirdPartyStore;
+  thirdPartyStore: ThirdPartyStore;
 
-  clientLoadingStore;
+  clientLoadingStore: ClientLoadingStore;
 
-  accessRightsStore;
+  accessRightsStore: AccessRightsStore;
 
-  publicRoomStore;
+  publicRoomStore: PublicRoomStore;
 
-  settingsStore;
+  settingsStore: SettingsStore;
 
-  currentQuotaStore;
+  // FABLE5-REVIEW: never assigned (the constructor does not receive it) —
+  // stays undefined forever; quota checks go through
+  // `this.authStore.currentQuotaStore` instead. Candidate for removal.
+  currentQuotaStore: CurrentQuotasStore | undefined;
 
-  indexingStore;
+  indexingStore: IndexingStore;
 
-  pluginStore;
+  pluginStore: PluginStore;
 
   // MobX dependency for getFilesListItems so a cache write triggers re-render.
   encryptedFilenameCacheVersion = 0;
 
-  privateViewAs =
-    !isDesktop() && storageViewAs !== "tile" ? "row" : storageViewAs || "table";
+  // FABLE5-REVIEW: the persisted view value is trusted to be a valid TViewAs
+  // (it is only ever written via setViewAs).
+  privateViewAs = (
+    !isDesktop() && storageViewAs !== "tile" ? "row" : storageViewAs || "table"
+  ) as TViewAs;
 
   dragging = false;
 
@@ -207,13 +453,13 @@ class FilesStore {
 
   alreadyFetchingRooms = false;
 
-  files = EMPTY_ARRAY;
+  files: TFile[] = EMPTY_ARRAY;
 
-  folders = EMPTY_ARRAY;
+  folders: (TFolder | TRoom)[] = EMPTY_ARRAY;
 
-  _selection = [];
+  _selection: TItem[] = [];
 
-  bufferSelection = null;
+  bufferSelection: Nullable<TItem> = null;
 
   selected = "close";
 
@@ -225,13 +471,13 @@ class FilesStore {
 
   loadTimeout = null;
 
-  hotkeyCaret = null;
+  hotkeyCaret: Nullable<TItem> = null;
 
-  hotkeyCaretStart = null;
+  hotkeyCaretStart: Nullable<TItem> = null;
 
-  activeFiles = EMPTY_ARRAY;
+  activeFiles: TActiveItem[] = EMPTY_ARRAY;
 
-  activeFolders = EMPTY_ARRAY;
+  activeFolders: TActiveItem[] = EMPTY_ARRAY;
 
   firstElemChecked = false;
 
@@ -239,15 +485,15 @@ class FilesStore {
 
   enabledHotkeys = true;
 
-  createdItem = null;
+  createdItem: TCreatedItem = null;
 
-  scrollToItem = null;
+  scrollToItem: TCreatedItem = null;
 
   roomCreated = false;
 
   isLoadingFilesFind = false;
 
-  pageItemsLength = null;
+  pageItemsLength: Nullable<number> = null;
 
   isHidePagination = false;
 
@@ -261,19 +507,19 @@ class FilesStore {
 
   isLoadedFetchFiles = false;
 
-  tempActionFilesIds = EMPTY_ARRAY;
+  tempActionFilesIds: (number | string)[] = EMPTY_ARRAY;
 
-  tempActionFoldersIds = EMPTY_ARRAY;
+  tempActionFoldersIds: (number | string)[] = EMPTY_ARRAY;
 
   isErrorRoomNotAvailable = false;
 
   isErrorAIAgentNotAvailable = false;
 
-  roomsController = null;
+  roomsController: Nullable<AbortController> = null;
 
-  filesController = null;
+  filesController: Nullable<AbortController> = null;
 
-  aiAgentsController = null;
+  aiAgentsController: Nullable<AbortController> = null;
 
   clearSearch = false;
 
@@ -283,13 +529,13 @@ class FilesStore {
 
   isPreview = false;
 
-  tempFilter = null;
+  tempFilter: Nullable<TFilesFilter> = null;
 
-  highlightFile = {};
+  highlightFile: THighlightFile = {};
 
-  thumbnails = new Set();
+  thumbnails: Set<string> = new Set();
 
-  _backfilledEncryptedRooms = new Set();
+  _backfilledEncryptedRooms: Set<number | string> = new Set();
 
   movingInProgress = false;
 
@@ -299,31 +545,48 @@ class FilesStore {
     start: true,
   });
 
-  hotkeysClipboard = EMPTY_ARRAY;
+  hotkeysClipboard: TItem[] = EMPTY_ARRAY;
 
   mainButtonVisible = false;
 
-  aiRoomStore = null;
+  // FABLE5-REVIEW: initialized null, always assigned in the constructor —
+  // the erased cast keeps the exact old JS runtime shape (own `null` field
+  // observed by makeAutoObservable before assignment).
+  aiRoomStore: AiRoomStore = null as unknown as AiRoomStore;
 
-  dialogsStore = null;
+  // FABLE5-REVIEW: attached post-construction in store/index.js
+  // (`filesStore.dialogsStore = dialogsStore`); only `roomGroups` is read.
+  dialogsStore: Nullable<DialogsStore> = null;
 
-  arrRoomGroups = [];
+  // FABLE5-REVIEW: only read by still-.js consumers (FilesPanels); never
+  // written inside the store.
+  arrRoomGroups: unknown[] = [];
+
+  // FABLE5-REVIEW: created by a constructor assignment before
+  // makeAutoObservable in the old JS (never a class field) — `declare`
+  // keeps that runtime shape.
+  declare isEditor: boolean;
+
+  // FABLE5-REVIEW: never assigned anywhere — `this.fileActionStore` is
+  // always undefined, so onCreateAddTempItem would throw if called (same as
+  // the old JS). Candidate for removal.
+  declare fileActionStore?: { extension?: string; title?: string };
 
   constructor(
-    authStore,
-    selectedFolderStore,
-    treeFoldersStore,
-    filesSettingsStore,
-    thirdPartyStore,
-    accessRightsStore,
-    clientLoadingStore,
-    pluginStore,
-    publicRoomStore,
-    userStore,
-    currentTariffStatusStore,
-    settingsStore,
-    indexingStore,
-    aiRoomStore,
+    authStore: AuthStore,
+    selectedFolderStore: SelectedFolderStore,
+    treeFoldersStore: TreeFoldersStore,
+    filesSettingsStore: FilesSettingsStore,
+    thirdPartyStore: ThirdPartyStore,
+    accessRightsStore: AccessRightsStore,
+    clientLoadingStore: ClientLoadingStore,
+    pluginStore: PluginStore,
+    publicRoomStore: PublicRoomStore,
+    userStore: UserStore,
+    currentTariffStatusStore: CurrentTariffStatusStore,
+    settingsStore: SettingsStore,
+    indexingStore: IndexingStore,
+    aiRoomStore: AiRoomStore,
   ) {
     const pathname = window.location.pathname.toLowerCase();
     this.isEditor = pathname.indexOf("doceditor") !== -1;
@@ -366,7 +629,7 @@ class FilesStore {
     });
 
     SocketHelper?.on(SocketEvents.ModifyFolder, async (opt) => {
-      const { socketSubscribers } = SocketHelper;
+      const { socketSubscribers } = SocketHelper!;
 
       if (opt && opt.data) {
         const data = JSON.parse(opt.data);
@@ -412,19 +675,20 @@ class FilesStore {
     });
 
     SocketHelper?.on(SocketEvents.MarkAsNewFolder, ({ folderId, count }) => {
-      const { socketSubscribers } = SocketHelper;
+      const { socketSubscribers } = SocketHelper!;
       const pathParts = `DIR-${folderId}`;
 
       if (!socketSubscribers.has(pathParts)) return;
 
       console.log(`[WS] markasnew-folder ${folderId}:${count}`);
 
-      const foundIndex =
-        folderId && this.folders.findIndex((x) => x.id === folderId);
+      const foundIndex = (folderId &&
+        this.folders.findIndex((x) => x.id === folderId)) as number;
 
-      const treeFoundIndex =
-        folderId &&
-        this.treeFoldersStore.treeFolders.findIndex((x) => x.id === folderId);
+      const treeFoundIndex = (folderId &&
+        this.treeFoldersStore.treeFolders.findIndex(
+          (x) => x.id === folderId,
+        )) as number;
       if (foundIndex === -1 && treeFoundIndex === -1) return;
 
       runInAction(() => {
@@ -435,14 +699,15 @@ class FilesStore {
     });
 
     SocketHelper?.on(SocketEvents.MarkAsNewFile, ({ fileId, count }) => {
-      const { socketSubscribers } = SocketHelper;
+      const { socketSubscribers } = SocketHelper!;
       const pathParts = `FILE-${fileId}`;
 
       if (!socketSubscribers.has(pathParts)) return;
 
       console.log(`[WS] markasnew-file ${fileId}:${count}`);
 
-      const foundIndex = fileId && this.files.findIndex((x) => x.id === fileId);
+      const foundIndex = (fileId &&
+        this.files.findIndex((x) => x.id === fileId)) as number;
 
       this.treeFoldersStore.fetchTreeFolders();
 
@@ -461,7 +726,7 @@ class FilesStore {
       const fileId = typeof data === "object" ? data.fileId : data;
       const editingBy = typeof data === "object" ? data.editingBy : undefined;
 
-      const { socketSubscribers } = SocketHelper;
+      const { socketSubscribers } = SocketHelper!;
       const pathParts = `FILE-${fileId}`;
 
       if (!socketSubscribers.has(pathParts)) return;
@@ -490,7 +755,10 @@ class FilesStore {
     });
 
     SocketHelper?.on(SocketEvents.ModifyRoom, (option) => {
-      switch (option.cmd) {
+      // FABLE5-REVIEW: the ui-kit TOptSocket.cmd union does not include
+      // "create-form" (ui-kit is a separate submodule); the erased cast
+      // keeps the original switch.
+      switch (option.cmd as string) {
         case "create-form":
           setTimeout(() => this.wsCreatedPDFForm(option), LOADER_TIMEOUT * 2);
           break;
@@ -500,14 +768,20 @@ class FilesStore {
       }
     });
 
-    SocketHelper?.on(SocketEvents.ChaneFolderAccessRights, (option) => {
-      this.wsChangeFolderAccessRights(option);
-    });
+    SocketHelper?.on(
+      SocketEvents.ChaneFolderAccessRights,
+      // FABLE5-REVIEW: ChaneFolderAccessRights is not mapped in the ui-kit
+      // TListenEventCallbackMap (falls back to a zero-arg listener type);
+      // the erased cast keeps the original payload-taking callback.
+      ((option: TOptSocket) => {
+        this.wsChangeFolderAccessRights(option);
+      }) as unknown as TUnmappedSocketListener,
+    );
 
     SocketHelper?.on(SocketEvents.StopEditFile, (data) => {
       const fileId = typeof data === "object" ? data.fileId : data;
 
-      const { socketSubscribers } = SocketHelper;
+      const { socketSubscribers } = SocketHelper!;
       const pathParts = `FILE-${fileId}`;
 
       if (!socketSubscribers.has(pathParts)) return;
@@ -543,13 +817,13 @@ class FilesStore {
     return this._selection;
   }
 
-  set selection(value) {
+  set selection(value: TItem[]) {
     if (equal(value, this._selection)) return;
 
     this._selection = value;
   }
 
-  onResolveNewFile = ({ fileInfo }) => {
+  onResolveNewFile = ({ fileInfo }: { fileInfo?: TFile }) => {
     if (!fileInfo) return;
 
     // console.log("onResolveNewFiles", { fileInfo });
@@ -592,11 +866,14 @@ class FilesStore {
     this.removeFiles(null, this.tempActionFoldersIds);
   }, 1000);
 
-  wsModifyFolderCreate = async (opt) => {
+  wsModifyFolderCreate = async (opt?: TOptSocket) => {
     if (opt?.type === "file" && opt?.id) {
       const foundIndex = this.getFileIndex(opt?.id);
 
-      const file = JSON.parse(opt?.data);
+      // FABLE5-REVIEW: several socket payload reads below keep the old
+      // unchecked-crash behavior via erased casts / non-null assertions
+      // (JSON.parse of possibly-undefined data, user possibly null).
+      const file = JSON.parse(opt?.data as string);
 
       if (
         this.selectedFolderStore.id !== file.folderId &&
@@ -651,7 +928,7 @@ class FilesStore {
           return null;
         }
 
-        this.createNewFilesQueue.enqueue(() => {
+        this.createNewFilesQueue.enqueue((() => {
           if (this.getFileIndex(file.id) > -1) {
             // console.log("Skip in queue");
             return null;
@@ -662,7 +939,7 @@ class FilesStore {
             .then((fileInfo) => ({
               fileInfo,
             }));
-        });
+        }) as unknown as () => Promise<unknown>);
       }, 300);
     } else if (opt?.type === "folder" && opt?.id) {
       this.selectedFolderStore.setFoldersCount(
@@ -673,7 +950,7 @@ class FilesStore {
 
       if (foundIndex > -1) return;
 
-      const folder = JSON.parse(opt?.data);
+      const folder = JSON.parse(opt?.data as string);
 
       if (this.selectedFolderStore.id != folder.parentId) {
         const movedToIndex = this.getFolderIndex(folder.parentId);
@@ -683,7 +960,7 @@ class FilesStore {
       if (
         this.selectedFolderStore.id != folder.parentId ||
         (folder.roomType &&
-          folder.createdBy.id === this.userStore.user.id &&
+          folder.createdBy.id === this.userStore.user!.id &&
           this.roomCreated)
       ) {
         return (this.roomCreated = false);
@@ -710,7 +987,7 @@ class FilesStore {
     }
   };
 
-  wsModifyFolderUpdate = async (opt) => {
+  wsModifyFolderUpdate = async (opt?: TOptSocket) => {
     if (opt?.type === "file" && opt?.data) {
       const file = JSON.parse(opt?.data);
 
@@ -730,7 +1007,7 @@ class FilesStore {
     }
   };
 
-  refreshFolder = (id) => {
+  refreshFolder = (id: number | string) => {
     api.files
       .getFolderInfo(id)
       .then((response) => {
@@ -770,7 +1047,7 @@ class FilesStore {
         const idx = navigationPath.findIndex((p) => p.id === newFolder.id);
 
         if (idx !== -1) {
-          navigationPath[idx].title = newFolder?.title;
+          navigationPath[idx].title = newFolder?.title as string;
         }
 
         if (folderInfo.id === this.selectedFolderStore.id) {
@@ -780,7 +1057,7 @@ class FilesStore {
             pathParts,
           });
 
-          setInfoPanelSelectedRoom(newFolder, true);
+          setInfoPanelSelectedRoom(newFolder as TRoom, true);
         }
 
         this.setFolder(folderInfo);
@@ -792,7 +1069,7 @@ class FilesStore {
       });
   };
 
-  wsModifyFolderDelete = (opt) => {
+  wsModifyFolderDelete = (opt?: TOptSocket) => {
     const { recentFolderId, favoritesFolderId } = this.treeFoldersStore;
     const data = opt?.data && JSON.parse(opt.data);
 
@@ -849,7 +1126,7 @@ class FilesStore {
         if (
           this.files.length === 0 &&
           this.folders.length === 0 &&
-          this.pageItemsLength > 1
+          this.pageItemsLength! > 1
         ) {
           this.isLoadingFilesFind = true;
         }
@@ -898,7 +1175,7 @@ class FilesStore {
         if (
           this.files.length === 0 &&
           this.folders.length === 0 &&
-          this.pageItemsLength > 1
+          this.pageItemsLength! > 1
         ) {
           this.isLoadingFilesFind = true;
         }
@@ -906,24 +1183,24 @@ class FilesStore {
     }
   };
 
-  wsCreatedPDFForm = (option) => {
+  wsCreatedPDFForm = (option: TOptSocket) => {
     if (!option.data) return;
 
     const file = JSON.parse(option.data);
 
     if (this.selectedFolderStore.id !== file.folderId) return;
 
-    showCreatedPDFFormDialog(file, this.userStore.user.id);
+    showCreatedPDFFormDialog(file, this.userStore.user!.id);
   };
 
-  wsChangeFolderAccessRights = (option) => {
+  wsChangeFolderAccessRights = (option: TOptSocket) => {
     if (!option.data || !option.id) return;
 
     const folderId = option.id;
     const memberAccess = JSON.parse(option.data);
 
     if (this.selectedFolderStore.id !== folderId) return;
-    if (!memberAccess[this.userStore.user.id]) return;
+    if (!memberAccess[this.userStore.user!.id]) return;
 
     console.log("[WS] change folder access rights for current user", {
       folderId,
@@ -934,7 +1211,13 @@ class FilesStore {
     this.refreshFiles();
   };
 
-  redirectToParent = (opt, pathParts, isRoom, isTemplate, rootFolderType) => {
+  redirectToParent = (
+    opt: TOptSocket,
+    pathParts: TPathParts[],
+    isRoom: boolean,
+    isTemplate: boolean,
+    rootFolderType: Nullable<FolderType>,
+  ) => {
     const removedId = opt.id;
 
     const includePathPartIndex = pathParts.findIndex(
@@ -957,22 +1240,25 @@ class FilesStore {
 
     switch (rootFolderType) {
       case FolderType.AIAgents: {
+        // FABLE5-REVIEW: RoomsFilter.getDefault/toUrlParams type userId as
+        // `string | undefined` but the old JS passes `null` when there is no
+        // user; erased casts keep the exact runtime value.
         const aiAgentsFilter = RoomsFilter.getDefault(
-          userId,
+          userId as string,
           RoomSearchArea.AIAgents,
         );
-        const params = aiAgentsFilter.toUrlParams(userId, true);
+        const params = aiAgentsFilter.toUrlParams(userId as string, true);
         const path = getCategoryUrl(CategoryType.AIAgents);
 
         return window.DocSpace.navigate(`${path}?${params}`);
       }
       case FolderType.Archive: {
         const archiveFilter = RoomsFilter.getDefault(
-          userId,
+          userId as string,
           RoomSearchArea.Archive,
         );
         archiveFilter.searchArea = RoomSearchArea.Archive;
-        const params = archiveFilter.toUrlParams(userId, true);
+        const params = archiveFilter.toUrlParams(userId as string, true);
         const path = getCategoryUrl(CategoryType.Archive);
 
         return window.DocSpace.navigate(`${path}?${params}`);
@@ -988,7 +1274,9 @@ class FilesStore {
 
         const filter = FilesFilter.getDefault();
 
-        filter.folder = pathPart.id;
+        // FABLE5-REVIEW: FilesFilter.folder is typed `string` but numeric
+        // folder ids are assigned at runtime; erased cast keeps the value.
+        filter.folder = pathPart.id as unknown as string;
 
         if (userId) {
           const filterObj = getUserFilter(`${FILTER_DOCUMENTS}=${userId}`);
@@ -1017,35 +1305,38 @@ class FilesStore {
     }
   };
 
-  setIsErrorRoomNotAvailable = (state) => {
+  setIsErrorRoomNotAvailable = (state: boolean) => {
     this.isErrorRoomNotAvailable = state;
   };
 
-  setIsErrorAIAgentNotAvailable = (state) => {
+  setIsErrorAIAgentNotAvailable = (state: boolean) => {
     this.isErrorAIAgentNotAvailable = state;
   };
 
-  setTempActionFilesIds = (tempActionFilesIds) => {
+  setTempActionFilesIds = (tempActionFilesIds: (number | string)[]) => {
     this.tempActionFilesIds = tempActionFilesIds;
   };
 
-  setTempActionFoldersIds = (tempActionFoldersIds) => {
+  setTempActionFoldersIds = (tempActionFoldersIds: (number | string)[]) => {
     this.tempActionFoldersIds = tempActionFoldersIds;
   };
 
-  setClearSearch = (clearSearch) => {
+  setClearSearch = (clearSearch: boolean) => {
     this.clearSearch = clearSearch;
   };
 
-  setIsPreview = (predicate) => {
+  setIsPreview = (predicate: boolean) => {
     this.isPreview = predicate;
   };
 
-  setTempFilter = (filter) => {
+  setTempFilter = (filter: Nullable<TFilesFilter>) => {
     this.tempFilter = filter;
   };
 
-  setHighlightFile = (highlightFile) => {
+  setHighlightFile = (highlightFile: {
+    highlightFileId?: number | string;
+    isFileHasExst?: boolean;
+  }) => {
     const { highlightFileId, isFileHasExst } = highlightFile;
 
     runInAction(() => {
@@ -1069,10 +1360,13 @@ class FilesStore {
     }, 1000);
   };
 
-  checkSelection = (file) => {
+  checkSelection = (file: TItem) => {
     if (this.selection) {
+      // FABLE5-REVIEW: isSameEntity is typed for raw TFile/TFolder/TRoom
+      // entities while this store passes filesList view-model items; the
+      // erased casts keep the calls unchanged.
       const foundIndex = this.selection?.findIndex((x) =>
-        isSameEntity(x, file),
+        isSameEntity(x as TFile, file as TFile),
       );
       if (foundIndex > -1) {
         runInAction(() => {
@@ -1081,14 +1375,18 @@ class FilesStore {
       }
     }
 
-    if (isSameEntity(this.bufferSelection, file)) {
+    if (isSameEntity(this.bufferSelection as TFile, file as TFile)) {
       runInAction(() => {
         this.bufferSelection = file;
       });
     }
   };
 
-  updateSelectionStatus = (id, status, isEditing) => {
+  updateSelectionStatus = (
+    id: number | string,
+    status: FileStatus,
+    isEditing: boolean,
+  ) => {
     const index = this.selection.findIndex((x) => x.id === id);
 
     if (index !== -1) {
@@ -1097,12 +1395,16 @@ class FilesStore {
     }
   };
 
-  removeActiveItem = (file) => {
+  removeActiveItem = (file: { id?: number | string }) => {
     this.activeFiles =
       this.activeFiles?.filter((item) => item.id !== file.id) ?? EMPTY_ARRAY;
   };
 
-  addActiveItems = (files, folders, destFolderId) => {
+  addActiveItems = (
+    files?: Nullable<(number | string)[]>,
+    folders?: Nullable<(number | string)[]>,
+    destFolderId?: Nullable<number | string>,
+  ) => {
     if (folders && folders.length) {
       if (!this.activeFolders.length) {
         this.setActiveFolders(folders, destFolderId);
@@ -1122,11 +1424,11 @@ class FilesStore {
     }
   };
 
-  updateActiveFiles = (items) => {
+  updateActiveFiles = (items: TActiveItem[]) => {
     this.activeFiles = items;
   };
 
-  updateActiveFolders = (items) => {
+  updateActiveFolders = (items: TActiveItem[]) => {
     this.activeFolders = items;
   };
 
@@ -1137,19 +1439,25 @@ class FilesStore {
     this.selectedFolderStore.setSelectedFolder(null);
   };
 
-  setActiveFiles = (activeFiles, destFolderId) => {
+  setActiveFiles = (
+    activeFiles: ((number | string) | TActiveItem)[],
+    destFolderId?: Nullable<number | string>,
+  ) => {
     const arrayFormation = mappingActiveItems(activeFiles, destFolderId);
 
     this.activeFiles = arrayFormation;
   };
 
-  setActiveFolders = (activeFolders, destFolderId) => {
+  setActiveFolders = (
+    activeFolders: ((number | string) | TActiveItem)[],
+    destFolderId?: Nullable<number | string>,
+  ) => {
     const arrayFormation = mappingActiveItems(activeFolders, destFolderId);
 
     this.activeFolders = arrayFormation;
   };
 
-  setViewAs = (viewAs) => {
+  setViewAs = (viewAs: TViewAs) => {
     this.privateViewAs = viewAs;
     setPersistedString(PersistenceKeys.viewAs, viewAs);
     viewAs === "tile" && this.createThumbnails();
@@ -1162,7 +1470,10 @@ class FilesStore {
       this.selectedFolderStore;
     const currentDeviceType = this.settingsStore.currentDeviceType;
 
-    return getViewForCurrentRoom(view, {
+    // FABLE5-REVIEW: getViewForCurrentRoom accepts only "row"|"table"|"tile"
+    // while the persisted value is the wider TViewAs; the erased cast keeps
+    // the original pass-through.
+    return getViewForCurrentRoom(view as "row" | "table" | "tile", {
       currentDeviceType,
       parentRoomType,
       roomType,
@@ -1182,31 +1493,31 @@ class FilesStore {
     return EMPTY_ARRAY;
   }
 
-  setPageItemsLength = (pageItemsLength) => {
+  setPageItemsLength = (pageItemsLength: number) => {
     this.pageItemsLength = pageItemsLength;
   };
 
-  setDragging = (dragging) => {
+  setDragging = (dragging: boolean) => {
     this.dragging = dragging;
   };
 
-  setTooltipPosition = (tooltipPageX, tooltipPageY) => {
+  setTooltipPosition = (tooltipPageX: number, tooltipPageY: number) => {
     this.tooltipPageX = tooltipPageX;
     this.tooltipPageY = tooltipPageY;
   };
 
-  setStartDrag = (startDrag) => {
+  setStartDrag = (startDrag: boolean) => {
     this.setSelection(
       this.selection.filter((x) => !x.providerKey || x.id !== x.rootFolderId), // removed root thirdparty folders
     );
     this.startDrag = startDrag;
   };
 
-  setIsEmptyPage = (isEmptyPage) => {
+  setIsEmptyPage = (isEmptyPage: boolean) => {
     this.isEmptyPage = isEmptyPage;
   };
 
-  setIsLoadedEmptyPage = (isLoadedEmptyPage) => {
+  setIsLoadedEmptyPage = (isLoadedEmptyPage: boolean) => {
     this.isLoadedEmptyPage = isLoadedEmptyPage;
   };
 
@@ -1244,6 +1555,10 @@ class FilesStore {
     const { isAuthenticated } = this.authStore;
     const { getFilesSettings } = this.filesSettingsStore;
 
+    // FABLE5-REVIEW: SettingsStore renamed getEncryptionKeys to
+    // getLegacyEncryptionKeys — this destructured member is undefined at
+    // runtime, so the desktop-client branch below would throw when calling
+    // it (same as the old JS). Candidate for a real fix.
     const {
       getPortalCultures,
       getIsEncryptionSupport,
@@ -1251,7 +1566,9 @@ class FilesStore {
       // setModuleInfo,
       isDesktopClient,
       getInvitationSettings,
-    } = this.settingsStore;
+    } = this.settingsStore as SettingsStore & {
+      getEncryptionKeys?: () => Promise<unknown>;
+    };
 
     // setModuleInfo(config.homepage, config.id);
 
@@ -1283,7 +1600,7 @@ class FilesStore {
       );
 
       if (isDesktopClient) {
-        requests.push(getIsEncryptionSupport(), getEncryptionKeys());
+        requests.push(getIsEncryptionSupport(), getEncryptionKeys!());
       }
 
       if (this.userStore?.getEncryptionKeys) {
@@ -1300,7 +1617,7 @@ class FilesStore {
     });
   };
 
-  setIsInit = (isInit) => {
+  setIsInit = (isInit: boolean) => {
     this.isInit = isInit;
   };
 
@@ -1328,7 +1645,7 @@ class FilesStore {
     this.setBufferSelection(null);
   };
 
-  setFiles = (files) => {
+  setFiles = (files: TFile[]) => {
     if (files.length === 0 && this.files.length === 0) return;
 
     const roomPartsToUnsub = this.files
@@ -1368,7 +1685,7 @@ class FilesStore {
     this.createThumbnails();
   };
 
-  setFolders = (folders) => {
+  setFolders = (folders: (TFolder | TRoom)[]) => {
     if (folders.length === 0 && this.folders.length === 0) return;
 
     const roomPartsToUnsub = this.folders
@@ -1401,36 +1718,42 @@ class FilesStore {
     }
   };
 
-  getFileIndex = (id) => {
+  getFileIndex = (id: number | string) => {
     const index = this.files.findIndex((x) => x.id === id);
     return index;
   };
 
-  updateFileStatus = (index, status) => {
+  updateFileStatus = (index: number, status: FileStatus) => {
     if (index < 0) return;
 
     this.files[index].fileStatus = status;
   };
 
-  updateFileLiveEditingBy = (index, activeEditors) => {
+  updateFileLiveEditingBy = (
+    index: number,
+    activeEditors?: Record<string, string>,
+  ) => {
     if (index < 0) return;
 
     this.files[index].activeEditors = activeEditors;
   };
 
-  updateFileVectorizationStatus = (fileId, status) => {
+  updateFileVectorizationStatus = (
+    fileId: number | string,
+    status: VectorizationStatus,
+  ) => {
     const foundIndex = this.files.findIndex((file) => file.id === fileId);
     if (foundIndex < 0) return;
 
     this.files[foundIndex].vectorizationStatus = status;
   };
 
-  updateRoomMute = (index, status) => {
+  updateRoomMute = (index: number, status: boolean) => {
     this.folders[index].mute = status;
     this.updateSelection(this.folders[index]);
   };
 
-  setFile = (file) => {
+  setFile = (file: TFile) => {
     const index = this.files.findIndex((x) => x.id === file.id);
 
     if (index !== -1) {
@@ -1440,7 +1763,7 @@ class FilesStore {
     }
   };
 
-  removeStaleItemFromSelection = (item) => {
+  removeStaleItemFromSelection = (item: TItem) => {
     if (!item.parentId) {
       if (this.activeFiles.some((elem) => elem.id === item.id)) return;
     } else if (this.activeFolders.some((elem) => elem.id === item.id)) return;
@@ -1458,12 +1781,12 @@ class FilesStore {
     this.setSelection(newSelection);
   };
 
-  updateSelection = (item) => {
+  updateSelection = (item: TItem) => {
     const indexFileList = this.filesList.findIndex((file) =>
-      isSameEntity(file, item),
+      isSameEntity(file as TFile, item as TFile),
     );
     const indexSelectedRoom = this.selection.findIndex((selectionItem) =>
-      isSameEntity(selectionItem, item),
+      isSameEntity(selectionItem as TFile, item as TFile),
     );
 
     if (~indexFileList && ~indexSelectedRoom) {
@@ -1472,7 +1795,7 @@ class FilesStore {
 
     if (this.bufferSelection) {
       const newBuffer = this.filesList.find((file) =>
-        isSameEntity(file, this.bufferSelection),
+        isSameEntity(file as TFile, this.bufferSelection as TFile),
       );
 
       if (!newBuffer) return;
@@ -1481,24 +1804,24 @@ class FilesStore {
     }
   };
 
-  getFolderIndex = (id) => {
+  getFolderIndex = (id: number | string) => {
     const index = this.folders.findIndex((x) => x.id === id);
     return index;
   };
 
-  updateFolder = (index, folder) => {
+  updateFolder = (index: number, folder: TFolder | TRoom) => {
     if (index !== -1) this.folders[index] = folder;
 
     this.updateSelection(folder);
   };
 
-  setFolder = (folder) => {
+  setFolder = (folder: TFolder | TRoom) => {
     const index = this.getFolderIndex(folder.id);
 
     this.updateFolder(index, folder);
   };
 
-  getFilesChecked = (file, selected) => {
+  getFilesChecked = (file: TItem, selected: string) => {
     if (!file.parentId) {
       if (this.activeFiles.find((elem) => elem.id === file.id)) return false;
     } else if (this.activeFolders.find((elem) => elem.id === file.id))
@@ -1526,18 +1849,18 @@ class FilesStore {
         return type === FileType.Archive;
       case FilterType.FilesOnly.toString():
         return type || !file.parentId;
-      case `room-${RoomsType.FillingFormsRoom}`:
-        return roomType === RoomsType.FillingFormsRoom;
+      case `room-${(RoomsType as TRemovedRoomsTypes).FillingFormsRoom}`:
+        return roomType === (RoomsType as TRemovedRoomsTypes).FillingFormsRoom;
       case `room-${RoomsType.CustomRoom}`:
         return roomType === RoomsType.CustomRoom;
       case `room-${RoomsType.AIRoom}`:
         return roomType === RoomsType.AIRoom;
       case `room-${RoomsType.EditingRoom}`:
         return roomType === RoomsType.EditingRoom;
-      case `room-${RoomsType.ReviewRoom}`:
-        return roomType === RoomsType.ReviewRoom;
-      case `room-${RoomsType.ReadOnlyRoom}`:
-        return roomType === RoomsType.ReadOnlyRoom;
+      case `room-${(RoomsType as TRemovedRoomsTypes).ReviewRoom}`:
+        return roomType === (RoomsType as TRemovedRoomsTypes).ReviewRoom;
+      case `room-${(RoomsType as TRemovedRoomsTypes).ReadOnlyRoom}`:
+        return roomType === (RoomsType as TRemovedRoomsTypes).ReadOnlyRoom;
       case `room-${RoomsType.FormRoom}`:
         return roomType === RoomsType.FormRoom;
       case `room-${RoomsType.PublicRoom}`:
@@ -1549,8 +1872,8 @@ class FilesStore {
     }
   };
 
-  getFilesBySelected = (files, selected) => {
-    const newSelection = [];
+  getFilesBySelected = (files: TItem[], selected: string) => {
+    const newSelection: TItem[] = [];
     files.forEach((file) => {
       const checked = this.getFilesChecked(file, selected);
 
@@ -1560,7 +1883,7 @@ class FilesStore {
     return newSelection;
   };
 
-  setSelected = (selected, clearBuffer = true) => {
+  setSelected = (selected: string, clearBuffer = true) => {
     if (selected === "close" || selected === "none") {
       clearBuffer && this.setBufferSelection(null);
 
@@ -1577,17 +1900,17 @@ class FilesStore {
     this.setSelection(this.getFilesBySelected(files, selected));
   };
 
-  setHotkeyCaret = (hotkeyCaret) => {
+  setHotkeyCaret = (hotkeyCaret: Nullable<TItem>) => {
     if (hotkeyCaret || this.hotkeyCaret) {
       this.hotkeyCaret = hotkeyCaret;
     }
   };
 
-  setHotkeyCaretStart = (hotkeyCaretStart) => {
+  setHotkeyCaretStart = (hotkeyCaretStart: Nullable<TItem>) => {
     this.hotkeyCaretStart = hotkeyCaretStart;
   };
 
-  setSelection = (selection) => {
+  setSelection = (selection: TItem[]) => {
     this.selection = selection;
   };
 
@@ -1595,12 +1918,12 @@ class FilesStore {
     return this.selection;
   };
 
-  setSelections = (added, removed, clear = false) => {
+  setSelections = (added: Element[], removed: Element[], clear = false) => {
     if (clear) {
       this.setSelection(EMPTY_ARRAY);
     }
 
-    let newSelections = JSON.parse(JSON.stringify(this.selection));
+    let newSelections: TItem[] = JSON.parse(JSON.stringify(this.selection));
 
     added.forEach((item) => {
       if (!item) return;
@@ -1615,7 +1938,7 @@ class FilesStore {
             : null;
 
       if (!value) return;
-      const splitValue = value && value.split("_");
+      const splitValue = (value && value.split("_")) as string[];
 
       const fileType = splitValue[0];
       const id = splitValue.slice(1, -3).join("_");
@@ -1655,7 +1978,10 @@ class FilesStore {
                 ?.getAttribute("value")
             : null;
 
-      const splitValue = value && value.split("_");
+      // FABLE5-REVIEW: unlike the `added` loop there is no `!value` guard
+      // here, so the old JS would throw on a null value; the erased cast
+      // keeps that behavior.
+      const splitValue = (value && value.split("_")) as string[];
 
       const fileType = splitValue[0];
       const id = splitValue.slice(1, -3).join("_");
@@ -1673,7 +1999,7 @@ class FilesStore {
       }
     });
 
-    const removeDuplicate = (items) => {
+    const removeDuplicate = (items: TItem[]) => {
       return items.filter(
         (x, index, self) =>
           index ===
@@ -1684,16 +2010,19 @@ class FilesStore {
     this.setSelection(removeDuplicate(newSelections));
   };
 
-  setBufferSelection = (bufferSelection) => {
+  setBufferSelection = (bufferSelection: Nullable<TItem>) => {
     // console.log("setBufferSelection", bufferSelection);
     this.bufferSelection = bufferSelection;
   };
 
-  setIsLoadedFetchFiles = (isLoadedFetchFiles) => {
+  setIsLoadedFetchFiles = (isLoadedFetchFiles: boolean) => {
     this.isLoadedFetchFiles = isLoadedFetchFiles;
   };
 
-  setFilesFilter = (filter, folderId = null) => {
+  setFilesFilter = (
+    filter: TFilesFilter,
+    folderId: Nullable<number | string> = null,
+  ) => {
     const key = match(this.categoryType)
       .with(
         CategoryType.Archive,
@@ -1717,7 +2046,8 @@ class FilesStore {
         () => `${FILTER_FAVORITES}=${this.userStore.user?.id}`,
       )
       .when(
-        () => +folderId === this.treeFoldersStore.recycleBinFolderId,
+        () =>
+          +(folderId as string) === this.treeFoldersStore.recycleBinFolderId,
         () => `${FILTER_TRASH}=${this.userStore.user?.id}`,
       )
       .when(
@@ -1749,10 +2079,12 @@ class FilesStore {
   };
 
   resetUrl = () => {
-    this.setFilesFilter(this.tempFilter);
+    // FABLE5-REVIEW: tempFilter may still be null here (old JS passed it
+    // through unchecked); the erased cast keeps the same runtime value.
+    this.setFilesFilter(this.tempFilter as TFilesFilter);
   };
 
-  setRoomsFilter = (filter) => {
+  setRoomsFilter = (filter: TRoomsFilter) => {
     filter.pageCount = 100;
 
     const isArchive = this.categoryType === CategoryType.Archive;
@@ -1786,7 +2118,7 @@ class FilesStore {
     });
   };
 
-  setFilter = (filter) => {
+  setFilter = (filter: TFilesFilter) => {
     filter.pageCount = 100;
     this.filter = filter;
   };
@@ -1797,19 +2129,21 @@ class FilesStore {
   };
 
   fetchFiles = (
-    folderId,
-    filter,
+    folderId: Nullable<number | string>,
+    filter?: Nullable<TFilesFilter>,
     clearFilter = true,
     withSubfolders = false,
     clearSelection = true,
-  ) => {
+  ): Promise<unknown> => {
     const { setSelectedNode } = this.treeFoldersStore;
     const { setIsIndexEditingMode } = this.indexingStore;
 
     setIsIndexEditingMode(false);
 
     const filterData = filter ? filter.clone() : FilesFilter.getDefault();
-    filterData.folder = folderId;
+    // FABLE5-REVIEW: FilesFilter.folder is typed `string` but folder ids are
+    // numbers or strings at runtime; erased casts keep the values.
+    filterData.folder = folderId as string;
 
     if (
       folderId === "@my" &&
@@ -1817,9 +2151,12 @@ class FilesStore {
       !this.userStore.user?.hasPersonalFolder
     ) {
       const url = getCategoryUrl(CategoryType.Shared);
+      // FABLE5-REVIEW: this early-return escapes with the void result of
+      // navigate() while the method is otherwise Promise-returning; the
+      // erased cast keeps the old JS value.
       return window.DocSpace.navigate(
         `${url}?${RoomsFilter.getDefault().toUrlParams()}`,
-      );
+      ) as unknown as Promise<unknown>;
     }
 
     this.setIsErrorAIAgentNotAvailable(false);
@@ -1848,7 +2185,11 @@ class FilesStore {
     if (!searchInContent)
       filterData.searchInContent = defaultFilter.searchInContent;
 
-    if (!Object.keys(FilterType).find((key) => FilterType[key] === filterType))
+    if (
+      !Object.keys(FilterType).find(
+        (key) => FilterType[key as keyof typeof FilterType] === filterType,
+      )
+    )
       filterData.filterType = defaultFilter.filterType;
 
     setSelectedNode([`${folderId}`]);
@@ -1861,10 +2202,10 @@ class FilesStore {
     this.roomsController = null;
     this.aiAgentsController = null;
 
-    let room = null;
+    let room: Nullable<TItem> = null;
 
     return api.files
-      .getFolder(folderId, filterData, this.filesController.signal)
+      .getFolder(folderId as string, filterData, this.filesController.signal)
       .then(async (data) => {
         let newTotal = data.total;
 
@@ -1947,12 +2288,17 @@ class FilesStore {
         const isPrivacyFolder =
           data.current.rootFolderType === FolderType.Privacy;
 
-        let currentFolder = data.current;
+        let currentFolder: TItem = data.current;
 
         let isChatTab = false;
 
         let navigationPath = await Promise.all(
           data.pathParts.map(async (folder, idx) => {
+            // FABLE5-REVIEW: FolderType is a ui-kit `const enum` and may
+            // not be destructured (TS2475); the runtime object exists in the
+            // babel/esbuild build, so the original statement is kept under a
+            // suppression.
+            // @ts-expect-error TS2475 — const enum destructuring, see above.
             const { Rooms, Archive, AIAgents } = FolderType;
 
             // if (
@@ -1969,7 +2315,8 @@ class FilesStore {
               ? data.current
               : { ...folder, id: folder.id };
 
-            const { title, roomType, folderType } = folderInfo;
+            const { title, roomType, folderType } = folderInfo as TFolder &
+              TPathParts;
 
             const isRootRoom =
               idx === 0 &&
@@ -1977,11 +2324,11 @@ class FilesStore {
                 data.current.rootFolderType === Archive ||
                 data.current.rootFolderType === AIAgents);
 
-            let shared;
-            let quotaLimit;
-            let usedSpace;
-            let external;
-            let isPrivate;
+            let shared: boolean | undefined;
+            let quotaLimit: number | undefined;
+            let usedSpace: number | undefined;
+            let external: boolean | undefined;
+            let isPrivate: boolean | undefined;
 
             room = data.current;
 
@@ -1994,7 +2341,10 @@ class FilesStore {
                 quotaLimit = room.quotaLimit;
                 usedSpace = room.usedSpace;
               } else {
-                setInfoPanelSelectedRoom({ ...data.current, isRoom: true });
+                setInfoPanelSelectedRoom({
+                  ...data.current,
+                  isRoom: true,
+                } as unknown as TRoom);
               }
 
               isPrivate = room.private;
@@ -2002,7 +2352,7 @@ class FilesStore {
               const { mute } = room;
 
               runInAction(() => {
-                this.isMuteCurrentRoomNotifications = mute;
+                this.isMuteCurrentRoomNotifications = mute as boolean;
               });
             }
 
@@ -2047,17 +2397,19 @@ class FilesStore {
           currentFolder.type === FolderType.Knowledge
         ) {
           if (currentFolder.type === FolderType.Knowledge) {
-            this.aiRoomStore.setKnowledgeId(currentFolder.id);
+            this.aiRoomStore.setKnowledgeId(currentFolder.id as number);
             this.aiRoomStore.setResultId(null);
           } else if (currentFolder.type === FolderType.ResultStorage) {
             this.aiRoomStore.setKnowledgeId(null);
-            this.aiRoomStore.setResultId(currentFolder.id);
+            this.aiRoomStore.setResultId(currentFolder.id as number);
           }
 
-          const aiRoom =
-            room.id === currentFolder.parentId
-              ? room
-              : await api.files.getFolderInfo(currentFolder.parentId);
+          // FABLE5-REVIEW: `room` is assigned inside the Promise.all map
+          // above; the non-null assertions keep the old unchecked access.
+          const aiRoom: TItem =
+            room!.id === currentFolder.parentId
+              ? room!
+              : await api.files.getFolderInfo(currentFolder.parentId as number);
 
           this.aiRoomStore.setCurrentTab(
             currentFolder.type === FolderType.Knowledge
@@ -2074,22 +2426,22 @@ class FilesStore {
             security: {
               ...currentFolder.security,
               Create:
-                currentFolder.security.Create &&
+                currentFolder.security!.Create &&
                 !this.settingsStore.aiConfig?.aiReadyNeedReset,
-              Download: aiRoom.security.Download,
+              Download: aiRoom.security!.Download,
               EditAccess:
-                currentFolder.security.security?.EditAccess &&
+                currentFolder.security!.security?.EditAccess &&
                 !this.settingsStore.aiConfig?.aiReadyNeedReset,
               EditRoom:
-                currentFolder.security.security?.EditRoom &&
+                currentFolder.security!.security?.EditRoom &&
                 !this.settingsStore.aiConfig?.aiReadyNeedReset,
               ChangeOwner:
-                currentFolder.security.security?.ChangeOwner &&
+                currentFolder.security!.security?.ChangeOwner &&
                 !this.settingsStore.aiConfig?.aiReadyNeedReset,
-              Delete: aiRoom.security.Delete,
+              Delete: aiRoom.security!.Delete,
 
-              Pin: aiRoom.security.Pin,
-              UseChat: aiRoom.security.UseChat,
+              Pin: aiRoom.security!.Pin,
+              UseChat: aiRoom.security!.UseChat,
             },
             isRoom: true,
             type: currentFolder.type,
@@ -2101,13 +2453,13 @@ class FilesStore {
           this.aiRoomStore.setResultId(null);
         } else if (currentFolder.rootFolderType === FolderType.AIAgents) {
           const parentId = navigationPath.find((item) => item.isRoom);
-          const aiRoom = await api.files.getFolderInfo(parentId.id);
+          const aiRoom: TItem = await api.files.getFolderInfo(parentId!.id);
 
           currentFolder = {
             ...currentFolder,
             security: {
               ...currentFolder.security,
-              UseChat: aiRoom.security.UseChat,
+              UseChat: aiRoom.security!.UseChat,
             },
           };
 
@@ -2140,7 +2492,7 @@ class FilesStore {
             navigationPath,
             rootRoomId: data.pathParts[1]
               ? data.pathParts[1].id
-              : currentFolder.id,
+              : (currentFolder.id as number),
             ...{ new: data.new },
             // type,
           });
@@ -2186,7 +2538,7 @@ class FilesStore {
             const tempBuffer =
               this.bufferSelection &&
               this.activeFiles.find(
-                (elem) => elem.id === this.bufferSelection.id,
+                (elem) => elem.id === this.bufferSelection!.id,
               ) == null
                 ? this.bufferSelection
                 : null;
@@ -2211,14 +2563,14 @@ class FilesStore {
 
         if (this.createdItem) {
           const newItem = this.filesList.find(
-            (item) => item.id === this.createdItem.id,
+            (item) => item.id === this.createdItem!.id,
           );
 
           if (newItem) {
             this.setBufferSelection(newItem);
             this.setScrollToItem({
-              id: newItem.id,
-              type: this.createdItem.type,
+              id: newItem.id as number,
+              type: this.createdItem!.type,
             });
           }
 
@@ -2231,10 +2583,17 @@ class FilesStore {
         return Promise.resolve(selectedFolder);
       })
       .catch((err) => {
+        // FABLE5-REVIEW: CurrentTariffStatusStore has no setPortalTariff
+        // member (renamed to fetchPortalTariff upstream) — the old JS throws
+        // here on a 402; the erased cast preserves that behavior.
         if (err?.response?.status === 402)
-          this.currentTariffStatusStore.setPortalTariff();
+          (
+            this.currentTariffStatusStore as unknown as {
+              setPortalTariff: () => void;
+            }
+          ).setPortalTariff();
 
-        const isThirdPartyError = Number.isNaN(+folderId);
+        const isThirdPartyError = Number.isNaN(+(folderId as string));
 
         const isUserError = [
           NotFoundHttpCode,
@@ -2285,7 +2644,8 @@ class FilesStore {
             const searchArea = window.DocSpace.location.pathname.includes(
               "shared",
             )
-              ? filter.searchArea === RoomSearchArea.Templates
+              ? (filter!.searchArea as unknown as RoomSearchArea) ===
+                RoomSearchArea.Templates
                 ? RoomSearchArea.Templates
                 : RoomSearchArea.Active
               : RoomSearchArea.Archive;
@@ -2302,22 +2662,27 @@ class FilesStore {
         this.clientLoadingStore.setIsSectionHeaderLoading(false);
         this.clientLoadingStore.setIsSectionFilterLoading(false);
 
-        if (window?.DocSpace?.location?.state?.highlightFileId) {
+        if (
+          (window?.DocSpace?.location?.state as THighlightState)
+            ?.highlightFileId
+        ) {
           this.setHighlightFile({
-            highlightFileId: window.DocSpace.location.state.highlightFileId,
-            isFileHasExst: window.DocSpace.location.state.isFileHasExst,
+            highlightFileId: (window.DocSpace.location.state as THighlightState)
+              .highlightFileId,
+            isFileHasExst: (window.DocSpace.location.state as THighlightState)
+              .isFileHasExst,
           });
         }
       });
   };
 
   fetchRooms = (
-    folderId,
-    filter,
+    folderId: Nullable<number | string>,
+    filter?: Nullable<TRoomsFilter>,
     clearFilter = true,
     withSubfolders = false,
     clearSelection = true,
-  ) => {
+  ): Promise<unknown> => {
     const { setSelectedNode } = this.treeFoldersStore;
 
     const { setIsIndexEditingMode } = this.indexingStore;
@@ -2342,7 +2707,12 @@ class FilesStore {
 
     const { provider, quotaFilter } = filterData;
 
-    if (!ROOMS_PROVIDER_TYPE_NAME[provider])
+    // FABLE5-REVIEW: ROOMS_PROVIDER_TYPE_NAME is keyed by RoomsProviderType
+    // while RoomsFilter.provider is a nullable string; the erased cast keeps
+    // the original lookup.
+    if (
+      !(ROOMS_PROVIDER_TYPE_NAME as Record<string, string>)[provider as string]
+    )
       filterData.provider = defaultFilter.provider;
 
     if (
@@ -2370,7 +2740,7 @@ class FilesStore {
     // maps directly to the request — no client-side room-type scoping needed.
     const request = () =>
       api.rooms
-        .getRooms(filterData, this.roomsController.signal)
+        .getRooms(filterData, this.roomsController!.signal)
         .then(async (data) => {
           if (!folderId) setSelectedNode([`${data.current.id}`]);
 
@@ -2461,14 +2831,14 @@ class FilesStore {
 
           if (this.createdItem) {
             const newItem = this.filesList.find(
-              (item) => item.id === this.createdItem.id,
+              (item) => item.id === this.createdItem!.id,
             );
 
             if (newItem) {
               this.setBufferSelection(newItem);
               this.setScrollToItem({
-                id: newItem.id,
-                type: this.createdItem.type,
+                id: newItem.id as number,
+                type: this.createdItem!.type,
               });
             }
 
@@ -2484,7 +2854,11 @@ class FilesStore {
         })
         .catch((err) => {
           if (err?.response?.status === 402)
-            this.currentTariffStatusStore.setPortalTariff();
+            (
+              this.currentTariffStatusStore as unknown as {
+                setPortalTariff: () => void;
+              }
+            ).setPortalTariff();
 
           if (axios.isCancel(err)) {
             console.log("Request canceled", err.message);
@@ -2502,11 +2876,11 @@ class FilesStore {
   };
 
   fetchAgents = (
-    folderId,
-    filter,
+    folderId: Nullable<number | string>,
+    filter?: Nullable<TRoomsFilter>,
     clearFilter = true,
     clearSelection = true,
-  ) => {
+  ): Promise<unknown> => {
     const { setSelectedNode } = this.treeFoldersStore;
 
     const filterData = filter
@@ -2541,7 +2915,7 @@ class FilesStore {
 
     const request = () =>
       api.ai
-        .getNewAiAgents(filterData, this.aiAgentsController.signal)
+        .getNewAiAgents(filterData, this.aiAgentsController!.signal)
         .then(async (data) => {
           if (!folderId) setSelectedNode([`${data.current.id}`]);
 
@@ -2632,14 +3006,14 @@ class FilesStore {
 
           if (this.createdItem) {
             const newItem = this.filesList.find(
-              (item) => item.id === this.createdItem.id,
+              (item) => item.id === this.createdItem!.id,
             );
 
             if (newItem) {
               this.setBufferSelection(newItem);
               this.setScrollToItem({
-                id: newItem.id,
-                type: this.createdItem.type,
+                id: newItem.id as number,
+                type: this.createdItem!.type,
               });
             }
 
@@ -2655,7 +3029,11 @@ class FilesStore {
         })
         .catch((err) => {
           if (err?.response?.status === 402)
-            this.currentTariffStatusStore.setPortalTariff();
+            (
+              this.currentTariffStatusStore as unknown as {
+                setPortalTariff: () => void;
+              }
+            ).setPortalTariff();
 
           if (axios.isCancel(err)) {
             console.log("Request canceled", err.message);
@@ -2673,12 +3051,17 @@ class FilesStore {
   };
 
   setCustomRoomQuota = async (
-    itemsIDs,
-    quotaSize,
+    itemsIDs: (number | string)[],
+    quotaSize: number | string,
     inRoom = false,
-    filter = null,
+    filter: Nullable<TRoomsFilter> = null,
   ) => {
-    const rooms = await api.rooms.setCustomRoomQuota(itemsIDs, +quotaSize);
+    // FABLE5-REVIEW: rooms quota endpoints are typed with numeric ids;
+    // string ids pass through unchanged at runtime.
+    const rooms = await api.rooms.setCustomRoomQuota(
+      itemsIDs as number[],
+      +quotaSize,
+    );
 
     if (!inRoom) {
       if (!filter && this.roomsFilter.searchArea === RoomSearchArea.Templates) {
@@ -2694,12 +3077,17 @@ class FilesStore {
   };
 
   setCustomAIAgentQuota = async (
-    itemsIDs,
-    quotaSize,
+    itemsIDs: (number | string)[],
+    quotaSize: number | string,
     inAgent = false,
-    filter = null,
+    filter: Nullable<TRoomsFilter> = null,
   ) => {
-    const agents = await api.ai.setNewAiAgentQuota(itemsIDs, +quotaSize);
+    // FABLE5-REVIEW: the AI quota endpoints are typed with numeric agent
+    // ids; string ids pass through unchanged at runtime.
+    const agents = await api.ai.setNewAiAgentQuota(
+      itemsIDs as number[],
+      +quotaSize,
+    );
 
     if (!inAgent) {
       await this.fetchAgents(null, filter, false, false);
@@ -2708,8 +3096,12 @@ class FilesStore {
     return agents;
   };
 
-  resetRoomQuota = async (itemsIDs, inRoom = false, filter = null) => {
-    const rooms = await api.rooms.resetRoomQuota(itemsIDs);
+  resetRoomQuota = async (
+    itemsIDs: (number | string)[],
+    inRoom = false,
+    filter: Nullable<TRoomsFilter> = null,
+  ) => {
+    const rooms = await api.rooms.resetRoomQuota(itemsIDs as number[]);
 
     if (!inRoom) {
       if (!filter && this.roomsFilter.searchArea === RoomSearchArea.Templates) {
@@ -2724,8 +3116,12 @@ class FilesStore {
     return rooms;
   };
 
-  resetAIAgentQuota = async (itemsIDs, inAgent = false, filter = null) => {
-    const agents = await api.ai.resetNewAiAgentQuota(itemsIDs);
+  resetAIAgentQuota = async (
+    itemsIDs: (number | string)[],
+    inAgent = false,
+    filter: Nullable<TRoomsFilter> = null,
+  ) => {
+    const agents = await api.ai.resetNewAiAgentQuota(itemsIDs as number[]);
 
     if (!inAgent) {
       await this.fetchAgents(null, filter, false, false);
@@ -2734,11 +3130,11 @@ class FilesStore {
     return agents;
   };
 
-  setAlreadyFetchingRooms = (alreadyFetchingRooms) => {
+  setAlreadyFetchingRooms = (alreadyFetchingRooms: boolean) => {
     this.alreadyFetchingRooms = alreadyFetchingRooms;
   };
 
-  isFileSelected = (fileId, parentId) => {
+  isFileSelected = (fileId?: number | string, parentId?: number | string) => {
     const item = this.selection.find(
       (x) => x.id === fileId && x.parentId === parentId,
     );
@@ -2746,13 +3142,13 @@ class FilesStore {
     return item !== undefined;
   };
 
-  selectFile = (file) => {
+  selectFile = (file: TItem) => {
     const { id, parentId } = file;
     const isFileSelected = this.isFileSelected(id, parentId);
     if (!isFileSelected) this.selection = [...this.selection, file];
   };
 
-  deselectFile = (file) => {
+  deselectFile = (file: TItem) => {
     const { id, parentId } = file;
     const isFileSelected = this.isFileSelected(id, parentId);
     if (isFileSelected) {
@@ -2768,7 +3164,7 @@ class FilesStore {
     }
   };
 
-  getFilesContextOptions = (item, optionsToRemove = []) => {
+  getFilesContextOptions = (item: TItem, optionsToRemove: string[] = []) => {
     const isFile = !!item.fileExst || item.contentLength;
     const isRoom = !!item.roomType;
     const isTemplate =
@@ -2777,8 +3173,14 @@ class FilesStore {
       item.rootFolderType === FolderType.AIAgents &&
       item.roomType === RoomsType.AIRoom;
 
+    // FABLE5-REVIEW: the non-null assertions in this method keep the old
+    // unchecked reads of optional item fields (new/fileStatus/security/
+    // viewAccessibility) — the original .js relied on them being present
+    // (or on JS falsy/NaN semantics) for the item kinds that reach each
+    // branch.
     const hasNew =
-      item.new > 0 || (item.fileStatus & FileStatus.IsNew) === FileStatus.IsNew;
+      item.new! > 0 ||
+      (item.fileStatus! & FileStatus.IsNew) === FileStatus.IsNew;
     const canConvert = item.viewAccessibility?.CanConvert;
     const mustConvert = item.viewAccessibility?.MustConvert;
     const isEncrypted = item.encrypted;
@@ -2800,7 +3202,7 @@ class FilesStore {
     const isThirdPartyFolder =
       item.providerKey && item.id === item.rootFolderId;
 
-    const isMyFolder = isMy(item.rootFolderType);
+    const isMyFolder = isMy(item.rootFolderType!);
 
     const { isDesktopClient } = this.settingsStore;
 
@@ -2816,12 +3218,13 @@ class FilesStore {
     const canCopy = item.security?.Copy;
     const canCopyLink = item.security?.CopyLink;
     const canDuplicate = item.security?.Duplicate;
-    const canDownload = item.security?.Download || isLockedSharedRoom(item);
+    const canDownload =
+      item.security?.Download || isLockedSharedRoom(item as TRoom);
     const canEmbed = item.security?.Embed;
     const canSetUpCustomFilter = item.security?.CustomFilter;
 
     if (isFile) {
-      const shouldFillForm = item.viewAccessibility.WebRestrictedEditing;
+      const shouldFillForm = item.viewAccessibility!.WebRestrictedEditing;
       const canLockFile = item.security?.Lock;
       const canChangeVersionFileHistory =
         !isEditing && item.security?.EditHistory;
@@ -2831,10 +3234,11 @@ class FilesStore {
 
       const canSubmitToFormGallery = item.security?.SubmitToFormGallery;
 
-      const canEditFile = item.security.Edit && item.viewAccessibility.WebEdit;
+      const canEditFile =
+        item.security!.Edit && item.viewAccessibility!.WebEdit;
       const canOpenPlayer =
-        item.viewAccessibility.ImageView || item.viewAccessibility.MediaView;
-      const canViewFile = item.viewAccessibility.WebView;
+        item.viewAccessibility!.ImageView || item.viewAccessibility!.MediaView;
+      const canViewFile = item.viewAccessibility!.WebView;
 
       const isOldForm =
         item.fileExst === ".docxf" || item.fileExst === ".oform"; // TODO: Remove after change security options
@@ -2844,8 +3248,8 @@ class FilesStore {
         this.filesSettingsStore?.extsWebCustomFilterEditing || EMPTY_ARRAY;
       const extsWebEdited =
         this.filesSettingsStore?.extsWebEdited || EMPTY_ARRAY;
-      const isExtsCustomFilter = extsCustomFilter.includes(item.fileExst);
-      const isExtsWebEdited = extsWebEdited.includes(item.fileExst);
+      const isExtsCustomFilter = extsCustomFilter.includes(item.fileExst!);
+      const isExtsWebEdited = extsWebEdited.includes(item.fileExst!);
       const canShowCustomFilter =
         canSetUpCustomFilter && isExtsCustomFilter && isExtsWebEdited;
 
@@ -3005,14 +3409,18 @@ class FilesStore {
 
       if (
         !isPdf ||
-        !item.security.EditForm ||
+        !item.security!.EditForm ||
         item.startFilling ||
         !item.isForm
       ) {
         fileOptions = removeOptions(fileOptions, ["edit-pdf"]);
       }
 
-      if (!isPdf || !window.ClientConfig?.pdfViewer || isRecycleBinFolder) {
+      if (
+        !isPdf ||
+        !(window.ClientConfig as TClientConfigWithPdfViewer)?.pdfViewer ||
+        isRecycleBinFolder
+      ) {
         fileOptions = removeOptions(fileOptions, ["pdf-view"]);
       }
 
@@ -3198,8 +3606,8 @@ class FilesStore {
 
         if (enablePlugins) {
           if (
-            !item.viewAccessibility.MediaView &&
-            !item.viewAccessibility.ImageView
+            !item.viewAccessibility!.MediaView &&
+            !item.viewAccessibility!.ImageView
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
               PluginFileType.file,
@@ -3214,8 +3622,8 @@ class FilesStore {
           }
 
           if (
-            !item.viewAccessibility.MediaView &&
-            item.viewAccessibility.ImageView
+            !item.viewAccessibility!.MediaView &&
+            item.viewAccessibility!.ImageView
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
               PluginFileType.image,
@@ -3230,8 +3638,8 @@ class FilesStore {
           }
 
           if (
-            item.viewAccessibility.MediaView &&
-            !item.viewAccessibility.ImageView
+            item.viewAccessibility!.MediaView &&
+            !item.viewAccessibility!.ImageView
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
               PluginFileType.video,
@@ -3398,7 +3806,8 @@ class FilesStore {
 
       const canEditRoom = item.security?.EditRoom;
 
-      const canViewRoomInfo = item.security?.Read || isLockedSharedRoom(item);
+      const canViewRoomInfo =
+        item.security?.Read || isLockedSharedRoom(item as TRoom);
       const canMuteRoom = item.security?.Mute && item.inRoom;
 
       const canChangeOwner = item.security?.ChangeOwner;
@@ -3547,7 +3956,9 @@ class FilesStore {
       }
 
       const { organizeRoomsGrouping } = this.filesSettingsStore;
-      const { roomGroups } = this.dialogsStore;
+      // FABLE5-REVIEW: dialogsStore is attached post-construction in
+      // store/index.js; the non-null assertion keeps the old unchecked read.
+      const { roomGroups } = this.dialogsStore!;
       const currentGroupId = this.roomsFilter?.groupId;
       if (
         !organizeRoomsGrouping ||
@@ -3827,20 +4238,25 @@ class FilesStore {
     return folderOptions;
   };
 
-  createFile = async (folderId, title, templateId, formId) => {
+  createFile = async (
+    folderId: number | string,
+    title: string,
+    templateId?: number,
+    formId?: number,
+  ) => {
     return api.files.createFile(folderId, title, templateId, formId);
   };
 
-  setRoomCreated = (roomCreated) => {
+  setRoomCreated = (roomCreated: boolean) => {
     this.roomCreated = roomCreated;
   };
 
-  createRoom = (roomParams) => {
+  createRoom = (roomParams: unknown) => {
     this.roomCreated = true;
     return api.rooms.createRoom(roomParams);
   };
 
-  updateRoomPin = (item) => {
+  updateRoomPin = (item: number | string) => {
     const idx = this.folders.findIndex((folder) => folder.id === item);
 
     if (idx === -1) return;
@@ -3857,7 +4273,12 @@ class FilesStore {
     scrollElm && scrollElm.scrollTo(0, 0);
   };
 
-  removeFiles = (fileIds, folderIds, showToast, destFolderId) => {
+  removeFiles = (
+    fileIds?: Nullable<(number | string)[]>,
+    folderIds?: Nullable<(number | string)[]>,
+    showToast?: Nullable<() => void>,
+    destFolderId?: Nullable<number | string>,
+  ) => {
     const {
       isRoomsFolder,
       isArchiveFolder,
@@ -3908,12 +4329,15 @@ class FilesStore {
         ? this.folders.filter((x) => !folderIds.includes(x.id))
         : this.folders;
 
+      // FABLE5-REVIEW: when only folderIds are passed the old JS still
+      // reads `fileIds.includes` lazily via the ternary branches — the
+      // non-null assertion below keeps the same unchecked access.
       const hotkeysClipboard = fileIds
         ? this.hotkeysClipboard.filter(
-            (f) => !fileIds.includes(f.id) && !f.isFolder,
+            (f) => !fileIds.includes(f.id!) && !f.isFolder,
           )
         : this.hotkeysClipboard.filter(
-            (f) => !folderIds.includes(f.id) && f.isFolder,
+            (f) => !folderIds!.includes(f.id!) && f.isFolder,
           );
 
       if (!this.isFiltered) {
@@ -3921,7 +4345,9 @@ class FilesStore {
       }
 
       runInAction(() => {
-        isRooms ? this.setRoomsFilter(newFilter) : this.setFilter(newFilter);
+        isRooms
+          ? this.setRoomsFilter(newFilter as TRoomsFilter)
+          : this.setFilter(newFilter as TFilesFilter);
         this.setFiles(files);
         this.setFolders(folders);
         this.setHotkeysClipboard(hotkeysClipboard);
@@ -3945,7 +4371,9 @@ class FilesStore {
         : this.folders;
 
       runInAction(() => {
-        isRooms ? this.setRoomsFilter(newFilter) : this.setFilter(newFilter);
+        isRooms
+          ? this.setRoomsFilter(newFilter as TRoomsFilter)
+          : this.setFilter(newFilter as TFilesFilter);
         this.setFiles(files);
         this.setFolders(folders);
         if (fileIds) this.setTempActionFilesIds(EMPTY_ARRAY);
@@ -3958,12 +4386,15 @@ class FilesStore {
       return;
     }
 
-    newFilter.startIndex =
+    // FABLE5-REVIEW: RoomsFilter has no declared startIndex/folder members
+    // but the old JS sets/reads them on either filter kind; the erased casts
+    // keep that dynamic behavior.
+    (newFilter as TFilesFilter).startIndex =
       (newFilter.page + 1) * newFilter.pageCount - deleteCount;
     newFilter.pageCount = deleteCount;
     if (isRooms) {
       const req = isAIAgentsFolder ? api.ai.getNewAiAgents : api.rooms.getRooms;
-      return req(newFilter)
+      return req(newFilter as TRoomsFilter)
         .then((res) => {
           const folders = folderIds
             ? this.folders.filter((x) => !folderIds.includes(x.id))
@@ -3991,7 +4422,7 @@ class FilesStore {
         });
     }
     api.files
-      .getFolder(newFilter.folder, newFilter)
+      .getFolder((newFilter as TFilesFilter).folder, newFilter as TFilesFilter)
       .then((res) => {
         const files = fileIds
           ? this.files.filter((x) => !fileIds.includes(x.id))
@@ -4024,7 +4455,7 @@ class FilesStore {
       });
   };
 
-  updateFile = (fileId, title) => {
+  updateFile = (fileId: number | string, title: string) => {
     return api.files
       .updateFile(fileId, title)
       .then((file) => this.setFile(file));
@@ -4051,7 +4482,7 @@ class FilesStore {
     );
   };
 
-  ensureEncryptedFilenameForFile = (file) => {
+  ensureEncryptedFilenameForFile = (file: TFile) => {
     if (!file?.encrypted || !file.id || !file.viewUrl) return;
     const userId = this.userStore?.user?.id;
     if (!userId) return;
@@ -4080,7 +4511,10 @@ class FilesStore {
     }
   };
 
-  maybeBackfillEncryptedRoom = (roomId, security) => {
+  maybeBackfillEncryptedRoom = (
+    roomId: Nullable<number | string>,
+    security?: Nullable<{ EditRoom?: boolean }>,
+  ) => {
     if (!roomId) return;
     // Only room managers/admins backfill — they're the likely "inviter" with
     // unwrap access. Regular members may not even have the DEK to re-share.
@@ -4111,7 +4545,9 @@ class FilesStore {
     this._backfilledEncryptedRooms.add(roomId);
     console.info("[ENCRYPTION] Starting backfill sweep for room", roomId);
 
-    void backfillEncryptedFilesForRoomMembers(roomId, {
+    // FABLE5-REVIEW: backfillEncryptedFilesForRoomMembers is typed with a
+    // numeric roomId; string ids pass through unchanged at runtime.
+    void backfillEncryptedFilesForRoomMembers(roomId as number, {
       currentUserId: String(userId),
       identity,
       // Background sweep: don't surprise the user with a TOFU prompt.
@@ -4138,15 +4574,22 @@ class FilesStore {
       });
   };
 
-  renameFolder = (folderId, title) => {
-    return api.files.renameFolder(folderId, title).then((folder) => {
+  renameFolder = (folderId: number | string, title: string) => {
+    // FABLE5-REVIEW: api.files.renameFolder is typed with a numeric
+    // folderId; the erased cast keeps the runtime pass-through of string ids.
+    return api.files.renameFolder(folderId as number, title).then((folder) => {
       this.setFolder(folder);
     });
   };
 
   getFilesCount = () => {
     const { filesCount, foldersCount } = this.selectedFolderStore;
-    return filesCount + this.folders ? this.folders.length : foldersCount;
+    // FABLE5-REVIEW: the original expression `filesCount + this.folders`
+    // coerces the array to a string (always truthy) — preserved verbatim
+    // with an erased cast; candidate for a real fix.
+    return (filesCount + (this.folders as unknown as number))
+      ? this.folders.length
+      : foldersCount;
   };
 
   getServiceFilesCount = () => {
@@ -4230,11 +4673,11 @@ class FilesStore {
     );
   }
 
-  setFirsElemChecked = (checked) => {
+  setFirsElemChecked = (checked: boolean) => {
     this.firstElemChecked = checked;
   };
 
-  setHeaderBorder = (headerBorder) => {
+  setHeaderBorder = (headerBorder: boolean) => {
     this.headerBorder = headerBorder;
   };
 
@@ -4263,9 +4706,11 @@ class FilesStore {
     }
   }
 
-  onCreateAddTempItem = (items) => {
+  onCreateAddTempItem = (items: TItem[]) => {
     const { getFileIcon, getFolderIcon } = this.filesSettingsStore;
-    const { extension, title } = this.fileActionStore;
+    // FABLE5-REVIEW: fileActionStore is never assigned — this destructuring
+    // throws if onCreateAddTempItem is ever called (same as the old JS).
+    const { extension, title } = this.fileActionStore!;
 
     if (items.length && items[0].id === -1) return; // TODO: if change media collection from state remove this;
 
@@ -4276,7 +4721,7 @@ class FilesStore {
     items.unshift({
       id: -1,
       title,
-      parentId: this.selectedFolderStore.id,
+      parentId: this.selectedFolderStore.id as number,
       fileExst: extension,
       icon,
     });
@@ -4291,12 +4736,12 @@ class FilesStore {
   }
 
   getItemUrl = (
-    id,
-    isFolder,
-    needConvert,
-    canOpenPlayer,
-    shareKey,
-    isAiRoom,
+    id: number | string | undefined,
+    isFolder: boolean | undefined,
+    needConvert: boolean | undefined,
+    canOpenPlayer: boolean | undefined,
+    shareKey?: string,
+    isAiRoom?: boolean,
   ) => {
     const proxyURL = window.ClientConfig?.proxy?.url || window.location.origin;
 
@@ -4339,7 +4784,7 @@ class FilesStore {
     return newUrl;
   };
 
-  getFilesListItems = (items) => {
+  getFilesListItems = (items: TItem[]): TItem[] => {
     const { fileItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
     const { getIcon } = this.filesSettingsStore;
@@ -4421,20 +4866,27 @@ class FilesStore {
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
-        item.providerKey,
+        item.providerKey!,
         "small",
       );
 
+      // FABLE5-REVIEW: RoomsProviderType is a ui-kit `const enum` and may
+      // not be enumerated/indexed dynamically (TS2475/TS2476); the runtime
+      // object exists in the babel/esbuild build, so the original lookup is
+      // kept under a suppression.
       const providerType =
         RoomsProviderType[
-          Object.keys(RoomsProviderType).find((key) => key === item.providerKey)
+          // @ts-expect-error TS2475/TS2476 — dynamic const enum access.
+          Object.keys(RoomsProviderType).find(
+            (key) => key === item.providerKey,
+          ) as keyof typeof RoomsProviderType
         ];
 
       const canOpenPlayer =
         item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
       const needConvert = item.viewAccessibility?.MustConvert;
       const isEditing =
-        (item.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
+        (item.fileStatus! & FileStatus.IsEditing) === FileStatus.IsEditing;
 
       const previewUrl = canOpenPlayer
         ? this.getItemUrl(id, false, needConvert, canOpenPlayer)
@@ -4521,7 +4973,11 @@ class FilesStore {
           )
         : undefined;
 
-      const pluginOptions = {};
+      const pluginOptions: {
+        fileTypeName?: string;
+        isPlugin?: boolean;
+        fileTileIcon?: string;
+      } = {};
 
       if (!isAIAgents() && enablePlugins && fileItemsList) {
         fileItemsList.forEach(({ value }) => {
@@ -4543,7 +4999,10 @@ class FilesStore {
 
       return {
         access,
-        daysRemaining: autoDelete && getDaysRemaining(autoDelete),
+        // FABLE5-REVIEW: getDaysRemaining is typed for Date but receives the
+        // API date string at runtime (getDaysLeft accepts both).
+        daysRemaining:
+          autoDelete && getDaysRemaining(autoDelete as unknown as Date),
         originTitle,
         // checked,
         comment,
@@ -4636,7 +5095,7 @@ class FilesStore {
         customFilterEnabledBy,
         location,
         ...rest,
-      };
+      } as TItem;
     });
   };
 
@@ -4644,7 +5103,9 @@ class FilesStore {
     // return [...this.folders, ...this.files];
 
     const newFolders = [...this.folders];
-    const orderItems = [...this.folders, ...this.files].filter((x) => x.order);
+    const orderItems = [...this.folders, ...this.files].filter(
+      (x: TItem) => x.order,
+    );
 
     const { isVDRRoomRoot, isRoot, isSharedWithMeFolderRoot } =
       this.treeFoldersStore;
@@ -4655,11 +5116,13 @@ class FilesStore {
     ) {
       this.isEmptyPage && this.setIsEmptyPage(false);
 
-      orderItems.sort((a, b) => {
-        if (a.order.includes(".")) {
+      // FABLE5-REVIEW: `order` is guaranteed by the `.filter((x) => x.order)`
+      // above; the non-null assertions keep the same unchecked access.
+      orderItems.sort((a: TItem, b: TItem) => {
+        if (a.order!.includes(".")) {
           return (
-            Number(a.order.split(".").at(-1)) -
-            Number(b.order.split(".").at(-1))
+            Number(a.order!.split(".").at(-1)) -
+            Number(b.order!.split(".").at(-1))
           );
         }
 
@@ -4690,8 +5153,8 @@ class FilesStore {
       this.filesSettingsStore;
     const { isRecentFolder } = this.treeFoldersStore;
 
-    let cbMenu = ["all"];
-    const filesItems = [...this.files, ...this.folders];
+    let cbMenu: (string | FilterType)[] = ["all"];
+    const filesItems: TItem[] = [...this.files, ...this.folders];
 
     if (this.folders.length) {
       this.folders.forEach((item) => {
@@ -4704,30 +5167,30 @@ class FilesStore {
     }
 
     filesItems.forEach((item) => {
-      if (isDocument(item.fileExst)) cbMenu.push(FilterType.DocumentsOnly);
-      else if (isPresentation(item.fileExst))
+      if (isDocument(item.fileExst!)) cbMenu.push(FilterType.DocumentsOnly);
+      else if (isPresentation(item.fileExst!))
         cbMenu.push(FilterType.PresentationsOnly);
-      else if (isSpreadsheet(item.fileExst))
+      else if (isSpreadsheet(item.fileExst!))
         cbMenu.push(FilterType.SpreadsheetsOnly);
       else if (item.viewAccessibility?.ImageView)
         cbMenu.push(FilterType.ImagesOnly);
       else if (item.viewAccessibility?.MediaView)
         cbMenu.push(FilterType.MediaOnly);
-      else if (isArchive(item.fileExst)) cbMenu.push(FilterType.ArchiveOnly);
-      else if (isDiagram(item.fileExst)) cbMenu.push(FilterType.DiagramsOnly);
+      else if (isArchive(item.fileExst!)) cbMenu.push(FilterType.ArchiveOnly);
+      else if (isDiagram(item.fileExst!)) cbMenu.push(FilterType.DiagramsOnly);
     });
 
     const hasFiles = cbMenu.some(
       (elem) =>
         elem !== "all" &&
         elem !== `room-${FilterType.FoldersOnly}` &&
-        elem !== `room-${RoomsType.FillingFormsRoom}` &&
+        elem !== `room-${(RoomsType as TRemovedRoomsTypes).FillingFormsRoom}` &&
         elem !== `room-${RoomsType.CustomRoom}` &&
         elem !== `room-${RoomsType.AIRoom}` &&
         elem !== `room-${RoomsType.EditingRoom}` &&
-        elem !== `room-${RoomsType.ReviewRoom}` &&
+        elem !== `room-${(RoomsType as TRemovedRoomsTypes).ReviewRoom}` &&
         elem !== `room-${RoomsType.FormRoom}` &&
-        elem !== `room-${RoomsType.ReadOnlyRoom}` &&
+        elem !== `room-${(RoomsType as TRemovedRoomsTypes).ReadOnlyRoom}` &&
         elem !== `room-${RoomsType.PublicRoom}` &&
         elem !== `room-${RoomsType.VirtualDataRoom}`,
     );
@@ -4748,7 +5211,15 @@ class FilesStore {
       isSpreadsheet,
     } = this.filesSettingsStore;
 
-    const sortedFiles = {
+    const sortedFiles: {
+      documents: TItem[];
+      spreadsheets: TItem[];
+      presentations: TItem[];
+      masterForms: TItem[];
+      pdfForms: TItem[];
+      diagrams: TItem[];
+      other: TItem[];
+    } = {
       documents: [],
       spreadsheets: [],
       presentations: [],
@@ -4758,7 +5229,7 @@ class FilesStore {
       other: [],
     };
 
-    let selection = this.selection.length
+    let selection: TItem[] = this.selection.length
       ? this.selection
       : this.bufferSelection
         ? [this.bufferSelection]
@@ -4876,7 +5347,7 @@ class FilesStore {
   }
 
   get hasRoomsToResetQuota() {
-    const canResetCustomQuota = (item) => {
+    const canResetCustomQuota = (item: TItem) => {
       const { isDefaultRoomsQuotaSet } = this.authStore.currentQuotaStore;
 
       if (!isDefaultRoomsQuotaSet) return false;
@@ -4894,7 +5365,7 @@ class FilesStore {
   }
 
   get hasAIAgentsToResetQuota() {
-    const canResetCustomQuota = (item) => {
+    const canResetCustomQuota = (item: TItem) => {
       const { isDefaultAIAgentsQuotaSet } = this.authStore.currentQuotaStore;
 
       if (!isDefaultAIAgentsQuotaSet) return false;
@@ -4910,7 +5381,7 @@ class FilesStore {
   get hasRoomsToDisableQuota() {
     const { isDefaultRoomsQuotaSet } = this.authStore.currentQuotaStore;
 
-    const canDisableQuota = (item) => {
+    const canDisableQuota = (item: TItem) => {
       if (!isDefaultRoomsQuotaSet) return false;
 
       return item.security?.EditRoom;
@@ -4926,7 +5397,7 @@ class FilesStore {
   get hasAIAgentsToDisableQuota() {
     const { isDefaultAIAgentsQuotaSet } = this.authStore.currentQuotaStore;
 
-    const canDisableQuota = (item) => {
+    const canDisableQuota = (item: TItem) => {
       if (!isDefaultAIAgentsQuotaSet) return false;
 
       return item.security?.EditRoom;
@@ -4940,7 +5411,7 @@ class FilesStore {
   get hasRoomsToChangeQuota() {
     const { isDefaultRoomsQuotaSet } = this.authStore.currentQuotaStore;
 
-    const canChangeQuota = (item) => {
+    const canChangeQuota = (item: TItem) => {
       if (!isDefaultRoomsQuotaSet) return false;
 
       return item.security?.EditRoom;
@@ -4956,7 +5427,7 @@ class FilesStore {
   get hasAIAgentsToChangeQuota() {
     const { isDefaultAIAgentsQuotaSet } = this.authStore.currentQuotaStore;
 
-    const canChangeQuota = (item) => {
+    const canChangeQuota = (item: TItem) => {
       if (!isDefaultAIAgentsQuotaSet) return false;
 
       return item.security?.EditRoom;
@@ -4986,7 +5457,8 @@ class FilesStore {
 
   get hasNew() {
     const newFiles = [...this.files, ...this.folders].filter(
-      (item) => (item.fileStatus & FileStatus.IsNew) === FileStatus.IsNew,
+      (item: TItem) =>
+        (item.fileStatus! & FileStatus.IsNew) === FileStatus.IsNew,
     );
     return newFiles.length > 0;
   }
@@ -5001,8 +5473,15 @@ class FilesStore {
     return false;
   }
 
-  fetchFavoritesFolder = async (folderId) => {
-    const favoritesFolder = await api.files.getFolder(folderId);
+  fetchFavoritesFolder = async (folderId: number | string) => {
+    // FABLE5-REVIEW: api.files.getFolder is typed with a mandatory filter
+    // param but the old JS calls it with the folder id only; the erased
+    // function cast keeps the reduced call arity.
+    const favoritesFolder = await (
+      api.files.getFolder as unknown as (
+        folderIdParam: number | string,
+      ) => Promise<TGetFolder>
+    )(folderId);
     this.setFolders(favoritesFolder.folders);
     this.setFiles(favoritesFolder.files);
 
@@ -5017,23 +5496,27 @@ class FilesStore {
     });
   };
 
-  getFileInfo = async (id, share, skipRedirect) => {
+  getFileInfo = async (
+    id: number | string,
+    share?: string,
+    skipRedirect?: boolean,
+  ) => {
     const fileInfo = await api.files.getFileInfo(id, share, skipRedirect);
     this.setFile(fileInfo);
 
     return fileInfo;
   };
 
-  getFolderInfo = async (id, skipRedirect) => {
+  getFolderInfo = async (id: number | string, skipRedirect?: boolean) => {
     const folderInfo = await api.files.getFolderInfo(id, skipRedirect);
     this.setFolder(folderInfo);
     return folderInfo;
   };
 
   openDocEditor = (
-    id,
+    id: number | string,
     preview = false,
-    shareKey = null,
+    shareKey: Nullable<string> = null,
     editForm = false,
     fillForm = false,
   ) => {
@@ -5049,12 +5532,15 @@ class FilesStore {
     const { isFrame, frameConfig } = this.settingsStore;
 
     const canShare =
-      share && (isPublic || !isFormRoom) && !isSystemFolder(folderType);
+      share && (isPublic || !isFormRoom) && !isSystemFolder(folderType!);
 
     const searchParams = new URLSearchParams();
 
-    searchParams.append("fileId", id);
-    if (canShare) searchParams.append("share", share);
+    // FABLE5-REVIEW: URLSearchParams.append is typed for strings while the
+    // old JS passes numeric ids / nullable share keys; erased casts keep
+    // the values (they are stringified by the browser API).
+    searchParams.append("fileId", id as string);
+    if (canShare) searchParams.append("share", share as string);
     if (preview) searchParams.append("action", "view");
     if (editForm) searchParams.append("action", "edit");
     if (fillForm) searchParams.append("action", "fill");
@@ -5083,7 +5569,7 @@ class FilesStore {
     return window.open(url, openOnNewPage ? "_blank" : "_self");
   };
 
-  createThumbnails = async (files = null) => {
+  createThumbnails = async (files: Nullable<TFile[]> = null) => {
     if ((this.viewAs !== "tile" || !this.files) && !files) return;
 
     const currentFiles = files || this.files;
@@ -5111,7 +5597,7 @@ class FilesStore {
     return res;
   };
 
-  createThumbnail = async (file) => {
+  createThumbnail = async (file?: TFile) => {
     if (
       this.viewAs !== "tile" ||
       !file ||
@@ -5134,19 +5620,19 @@ class FilesStore {
     return res;
   };
 
-  setIsUpdatingRowItem = (updating) => {
+  setIsUpdatingRowItem = (updating: boolean) => {
     this.isUpdatingRowItem = updating;
   };
 
-  setPasswordEntryProcess = (process) => {
+  setPasswordEntryProcess = (process: boolean) => {
     this.passwordEntryProcess = process;
   };
 
-  setEnabledHotkeys = (enabledHotkeys) => {
+  setEnabledHotkeys = (enabledHotkeys: boolean) => {
     this.enabledHotkeys = enabledHotkeys;
   };
 
-  setCreatedItem = (createdItem) => {
+  setCreatedItem = (createdItem: TCreatedItem) => {
     this.createdItem = createdItem;
 
     // if (createdItem?.type == "file") {
@@ -5163,7 +5649,7 @@ class FilesStore {
     // }
   };
 
-  setScrollToItem = (item) => {
+  setScrollToItem = (item: TCreatedItem) => {
     this.scrollToItem = item;
   };
 
@@ -5173,11 +5659,11 @@ class FilesStore {
     this.setTrashIsEmpty(items.length === 0);
   };
 
-  setTrashIsEmpty = (isEmpty) => {
+  setTrashIsEmpty = (isEmpty: boolean) => {
     this.trashIsEmpty = isEmpty;
   };
 
-  setMainButtonMobileVisible = (visible) => {
+  setMainButtonMobileVisible = (visible: boolean) => {
     this.mainButtonMobileVisible = visible;
   };
 
@@ -5222,7 +5708,7 @@ class FilesStore {
     return this.filesList.length < filterTotal;
   }
 
-  setFilesIsLoading = (filesIsLoading) => {
+  setFilesIsLoading = (filesIsLoading: boolean) => {
     this.filesIsLoading = filesIsLoading;
   };
 
@@ -5247,14 +5733,18 @@ class FilesStore {
         ? this.roomsFilter.clone()
         : this.filter.clone();
     newFilter.page += 1;
-    if (isRooms || isAIAgentsFolder) this.setRoomsFilter(newFilter);
-    else this.setFilter(newFilter);
+    if (isRooms || isAIAgentsFolder)
+      this.setRoomsFilter(newFilter as TRoomsFilter);
+    else this.setFilter(newFilter as TFilesFilter);
 
     const newFilesData = isRooms
-      ? await api.rooms.getRooms(newFilter)
+      ? await api.rooms.getRooms(newFilter as TRoomsFilter)
       : isAIAgentsFolder
-        ? await api.ai.getNewAiAgents(newFilter)
-        : await api.files.getFolder(newFilter.folder, newFilter);
+        ? await api.ai.getNewAiAgents(newFilter as TRoomsFilter)
+        : await api.files.getFolder(
+            (newFilter as TFilesFilter).folder,
+            newFilter as TFilesFilter,
+          );
 
     const newFiles = [...this.files, ...newFilesData.files].filter(
       (x, index, self) => index === self.findIndex((i) => i.id === x.id),
@@ -5270,7 +5760,7 @@ class FilesStore {
     });
   };
 
-  withCtrlSelect = (item) => {
+  withCtrlSelect = (item: TItem) => {
     this.setHotkeyCaret(item);
     this.setHotkeyCaretStart(item);
 
@@ -5284,7 +5774,7 @@ class FilesStore {
     }
   };
 
-  withShiftSelect = (item) => {
+  withShiftSelect = (item: TItem) => {
     const caretStart = this.hotkeyCaretStart
       ? this.hotkeyCaretStart
       : this.filesList[0];
@@ -5306,7 +5796,7 @@ class FilesStore {
 
     const isMoveDown = caretIndex < itemIndex;
 
-    let newSelection = JSON.parse(JSON.stringify(this.selection));
+    let newSelection: TItem[] = JSON.parse(JSON.stringify(this.selection));
     let index = caretIndex;
     const newItemIndex = isMoveDown ? itemIndex + 1 : itemIndex - 1;
 
@@ -5396,24 +5886,27 @@ class FilesStore {
     return this.folders.filter((f) => f.security.Delete);
   }
 
-  getRooms = async (filter) => {
+  getRooms = async (filter: Partial<TRoomsFilter>) => {
     const userId = this.userStore.user && this.userStore.user.id;
-    const newFilter = RoomsFilter.getDefault(userId);
+    // FABLE5-REVIEW: RoomsFilter.getDefault types userId as
+    // `string | undefined` but the old JS passes `null` when there is no
+    // user; the erased cast keeps the exact runtime value.
+    const newFilter = RoomsFilter.getDefault(userId as string);
     Object.assign(newFilter, filter);
 
     return api.rooms.getRooms(newFilter);
   };
 
-  setHotkeysClipboard = (hotkeysClipboard) => {
+  setHotkeysClipboard = (hotkeysClipboard?: TItem[]) => {
     this.hotkeysClipboard = hotkeysClipboard || this.selection;
   };
 
-  getPrimaryLink = async (roomId) => {
+  getPrimaryLink = async (roomId: number | string) => {
     const link = await api.rooms.getPrimaryLink(roomId);
     return link;
   };
 
-  setInRoomFolder = (roomId, inRoom) => {
+  setInRoomFolder = (roomId: number | string, inRoom: boolean) => {
     const newFolders = this.folders;
     const folderIndex = newFolders.findIndex((r) => r.id === roomId);
 
@@ -5436,10 +5929,10 @@ class FilesStore {
     }
   };
 
-  updateRoom = (oldRoom, newRoom) => {
+  updateRoom = (oldRoom: TItem, newRoom: TFolder | TRoom) => {
     // After rename of room with providerKey, it's id value changes too
     if (oldRoom.providerKey) {
-      let index = this.getFolderIndex(oldRoom.id);
+      let index = this.getFolderIndex(oldRoom.id!);
 
       if (index === -1) {
         index = this.getFolderIndex(newRoom.id);
@@ -5516,11 +6009,14 @@ class FilesStore {
     return true;
   }
 
-  setMainButtonVisible = (mainButtonVisible) => {
+  setMainButtonVisible = (mainButtonVisible: boolean) => {
     this.mainButtonVisible = mainButtonVisible;
   };
 
-  clearActiveOperations = (fileIds = EMPTY_ARRAY, folderIds = EMPTY_ARRAY) => {
+  clearActiveOperations = (
+    fileIds: Nullable<(number | string)[]> = EMPTY_ARRAY,
+    folderIds: Nullable<(number | string)[]> = EMPTY_ARRAY,
+  ) => {
     const newActiveFiles = this.activeFiles.filter(
       (el) => !fileIds?.includes(el.id),
     );

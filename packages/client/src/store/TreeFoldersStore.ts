@@ -159,7 +159,7 @@ class TreeFoldersStore {
     }
   };
 
-  updateTreeFoldersItem = (opt: TOptSocket) => {
+  updateTreeFoldersItem = (opt?: TOptSocket) => {
     if (opt?.data && opt?.cmd === "create") {
       // FABLE5-REVIEW: the socket payload is a file DTO when opt.type is
       // "file" and a folder DTO otherwise; typed as an intersection so both

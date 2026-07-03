@@ -112,7 +112,9 @@ export const getDescription = (
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
   isPublicRoom: boolean,
-  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  security: Nullable<
+    TFolderSecurity | TRoomSecurity | Partial<TFolderSecurity & TRoomSecurity>
+  >,
   isKnowledgeTab?: boolean,
   isResultsTab?: boolean,
   isAIRoom?: boolean,
@@ -190,7 +192,9 @@ export const getTitle = (
   isArchiveFolderRoot: boolean,
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
-  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  security: Nullable<
+    TFolderSecurity | TRoomSecurity | Partial<TFolderSecurity & TRoomSecurity>
+  >,
   isKnowledgeTab?: boolean,
   isResultsTab?: boolean,
   isAIRoom?: boolean,
@@ -241,7 +245,9 @@ export const getIcon = (
   parentRoomType: Nullable<FolderType>,
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
-  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  security: Nullable<
+    TFolderSecurity | TRoomSecurity | Partial<TFolderSecurity & TRoomSecurity>
+  >,
   isResultsTab?: boolean,
   isKnowledgeTab?: boolean,
   isAIRoom?: boolean,
@@ -269,7 +275,9 @@ export const getIcon = (
 
 export const getOptions = (
   type: RoomsType,
-  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  security: Nullable<
+    TFolderSecurity | TRoomSecurity | Partial<TFolderSecurity & TRoomSecurity>
+  >,
   t: TTranslation,
   access: AccessType,
   isFolder: boolean,

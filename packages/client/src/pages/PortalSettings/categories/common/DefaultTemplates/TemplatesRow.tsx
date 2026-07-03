@@ -128,7 +128,9 @@ const TemplatesRow = ({
         {
           key: "preview",
           label: t("Common:Preview"),
-          onClick: () => openDocEditor?.(item.id, true),
+          // FABLE5-REVIEW: item.id may be null in the row model; the erased
+          // cast keeps the old unchecked call.
+          onClick: () => openDocEditor?.(item.id as number, true),
           disabled: false,
           icon: EyeIcon,
         },

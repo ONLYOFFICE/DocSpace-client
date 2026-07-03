@@ -212,6 +212,10 @@ export type TFolder = {
   path?: TPathParts[];
   type?: FolderType;
   isFolder?: boolean;
+  /** Present on folders returned inside rooms listings (`GET /files/{id}`
+   * current); consumed by FilesStore (`data.current.inRoom`,
+   * `setInRoomFolder`). */
+  inRoom?: boolean;
   indexing: boolean;
   denyDownload: boolean;
   fileEntryType: number;

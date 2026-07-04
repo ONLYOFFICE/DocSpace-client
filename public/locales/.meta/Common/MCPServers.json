@@ -3,13 +3,21 @@
   "content": "MCP servers",
   "content_en_sha1_hash": "8d9a304fd985232ade488e1913e41a3d9a502b09",
   "created_at": "2026-06-30T10:18:07.854Z",
-  "updated_at": "2026-06-30T10:18:07.854Z",
+  "updated_at": "2026-07-03T11:10:19.189Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Tab label in the AI settings section used to navigate to MCP server configurations.",
+    "is_auto": true,
+    "updated_at": "2026-07-03T11:10:19.189Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
+      "line_number": 179,
+      "context": "onClick: makeOnClick(TAB_IDS.MODEL_ASSIGNMENT),\n isDisabled: disableNonAiModels,\n },\n {\n id: TAB_IDS.MCP_SERVERS,\n name: t(\"Common:MCPServers\"),\n content: <McpServers />,\n onClick: makeOnClick(TAB_IDS.MCP_SERVERS),\n isDisabled: disableNonAiModels,\n },\n {",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

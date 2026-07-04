@@ -3,7 +3,7 @@
   "content": "Reduced admins",
   "content_en_sha1_hash": "9900538e2a3639c549342caa09f5ab1539c70130",
   "created_at": "2026-06-30T15:41:39.474Z",
-  "updated_at": "2026-06-30T15:42:37.946Z",
+  "updated_at": "2026-07-03T11:08:02.941Z",
   "comment": {
     "text": "A label in a price details dialog row that appears during a plan downgrade to indicate the number of administrator accounts being removed.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
-      "line_number": 139,
+      "line_number": 149,
       "context": "{renderRow(\n t(\"AdminAdjustment\"),\n `${currentAdmins} → ${newAdmins}`,\n )}\n {renderRow(\n isDowngradePlan ? t(\"ReducedAdmins\") : t(\"AdditionalAdmins\"),\n isDowngradePlan\n ? `${additionalAdmins}`\n : `+${additionalAdmins}`,\n )}\n {renderRow(",
       "module": "/libs/ui-kit"
     }

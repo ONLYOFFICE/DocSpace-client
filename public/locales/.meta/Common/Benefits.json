@@ -3,7 +3,7 @@
   "content": "Benefits",
   "content_en_sha1_hash": "927f40673764a27aad14fdedb385b31e3b85f976",
   "created_at": "2026-04-10T13:53:42.036Z",
-  "updated_at": "2026-06-30T10:18:29.505Z",
+  "updated_at": "2026-07-04T11:30:21.778Z",
   "comment": {
     "text": "This is a section title in the billing interface, labeling a list of features or advantages included in a tariff plan.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-info-block/index.tsx",
-      "line_number": 115,
+      "line_number": 111,
       "context": "type={LinkType.action}\n color=\"accent\"\n onClick={onShowAIBenefits}\n textDecoration={\"underline\"}\n >\n {t(\"Benefits\")}\n </Link> */}\n </>\n )}\n </>\n ) : (",
       "module": "/libs/ui-kit"
     },
@@ -37,8 +37,8 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 465,
-      "context": "onClick: actions.onTopUpAndActivateAI,\n } as const);\n \n // const aiBenefits = {\n //   type: \"button\",\n //   title: t(\"Common:Benefits\"),\n //   key: \"ai-benefits\",\n //   primary: false,\n //   onClick: actions.onShowAIBenefits,\n // } as const;",
+      "line_number": 468,
+      "context": "isLoading: isActivating,\n } as const);\n \n // const aiBenefits = {\n //   type: \"button\",\n //   title: t(\"Common:Benefits\"),\n //   key: \"ai-benefits\",\n //   primary: false,\n //   onClick: actions.onShowAIBenefits,\n // } as const;",
       "module": "/packages/client"
     }
   ],

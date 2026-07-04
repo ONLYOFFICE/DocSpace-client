@@ -1,0 +1,29 @@
+{
+  "key_path": "DefaultAISetupTitle",
+  "content": "Default AI setup",
+  "content_en_sha1_hash": "b517427029201e8904190b59c2a94b146cc3a267",
+  "created_at": "2026-07-03T11:07:28.280Z",
+  "updated_at": "2026-07-03T11:11:37.720Z",
+  "comment": {
+    "text": "Section heading in the AI settings menu that introduces the configuration for the default AI model setup.",
+    "is_auto": true,
+    "updated_at": "2026-07-03T11:11:37.720Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/model-assignment/ModelAssignmentSaas.tsx",
+      "line_number": 233,
+      "context": "level={3}\n fontWeight={700}\n lineHeight=\"22px\"\n fontSize=\"16px\"\n >\n {t(\"Common:DefaultAISetupTitle\")}\n </Heading>\n <Text className={styles.description} lineHeight=\"20px\">\n {t(\"Common:DefaultAISetupDescription\")}\n </Text>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

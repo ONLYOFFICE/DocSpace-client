@@ -3,7 +3,7 @@
   "content": "Automate workflows across tools and save time on repetitive tasks.",
   "content_en_sha1_hash": "96220e7654eb77177e5b8e799c196d02723ee22d",
   "created_at": "2026-06-25T19:30:57.725Z",
-  "updated_at": "2026-06-25T19:34:54.262Z",
+  "updated_at": "2026-07-03T11:08:02.825Z",
   "comment": {
     "text": "Description text within the App Promo Dialog explaining the benefits of the MCP Integration feature.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
-      "line_number": 187,
-      "context": "description: t(\"Common:CustomAIStackDescription\"),\n },\n {\n Icon: MCPIcon,\n title: t(\"Common:MCPIntegration\"),\n description: t(\"Common:MCPIntegrationDescription\"),\n },\n ],\n IllustrationLight: AgentsPreviewLight,\n IllustrationDark: AgentsPreviewLight,\n openLabel: t(\"Common:Open\"),",
+      "line_number": 191,
+      "context": "description: t(\"Common:CustomAIStackDescription\"),\n },\n {\n Icon: MCPIcon,\n title: t(\"Common:MCPIntegration\"),\n description: t(\"Common:MCPIntegrationDescription\"),\n },\n ],\n IllustrationLight: AgentsPreviewLight,\n IllustrationDark: AgentsPreviewDark,\n openLabel: t(\"Common:Open\"),",
       "module": "/packages/client"
     }
   ],

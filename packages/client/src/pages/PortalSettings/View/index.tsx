@@ -39,6 +39,7 @@ import { useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
+import { AI_ENUM } from "@docspace/ui-kit/billing/constants";
 import { DeviceType } from "@docspace/shared/enums";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 
@@ -79,7 +80,7 @@ const getViewFromPathname = (pathname: string): TView => {
   if (pathname.includes("backup")) return "backup-service";
   if (pathname.includes("disk-storage")) return "disk-storage";
   if (pathname.includes("ai-services")) return "ai-services";
-
+  if (pathname.includes("ai-search")) return "ai-search";
   if (pathname.includes("payments")) return "payments";
 
   if (pathname.includes("bonus")) return "bonus";
@@ -111,6 +112,7 @@ const View = ({
   ldapStore,
   common,
   paymentStore,
+  servicesStore,
   currentTariffStatusStore,
   defaultTemplatesStore,
 
@@ -285,6 +287,11 @@ const View = ({
             break;
 
           case "ai-settings":
+            if (!settingsStore.standalone) {
+              paymentStore.handleServiceQuota(AI_ENUM);
+              servicesStore.fetchAiPrices();
+              servicesStore.fetchAiModelRestrictions();
+            }
             break;
         }
 
@@ -325,6 +332,7 @@ const View = ({
       {currentView === "ai-settings" ? <AISettings /> : null}
       {currentView === "ai-services" ||
       currentView === "backup-service" ||
+      currentView === "ai-search" ||
       currentView === "disk-storage" ? (
         <ServicesPage />
       ) : null}
@@ -352,6 +360,7 @@ export const ViewComponent = inject(
     storageManagement,
     ldapStore,
     paymentStore,
+    servicesStore,
     currentTariffStatusStore,
     defaultTemplatesStore,
   }: TStore) => {
@@ -391,6 +400,7 @@ export const ViewComponent = inject(
       ldapStore,
       common,
       paymentStore,
+      servicesStore,
       currentTariffStatusStore,
       ssoFormStore: ssoStore,
       defaultTemplatesStore,

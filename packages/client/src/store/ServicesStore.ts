@@ -94,6 +94,8 @@ class ServicesStore {
 
   aiToolsPrices: TAiToolsPrices | null = null;
 
+  isAiToolsPricesLoading = false;
+
   usedBackupsCount: number = 0;
 
   aiModelAvailabilityMap: Map<string, boolean> = new Map();
@@ -184,17 +186,22 @@ class ServicesStore {
     const abortController = new AbortController();
     this.settingsStore?.addAbortControllers(abortController);
 
+    this.isAiToolsPricesLoading = true;
+
     try {
       const res = await getAiPrices(abortController.signal);
 
       const prices = parseAiPrices(res);
-      if (!prices) return;
 
-      this.aiToolsPrices = prices;
+      if (prices) this.aiToolsPrices = prices;
     } catch (error) {
       if (axios.isCancel(error)) return;
       console.error(error);
+    } finally {
+      this.isAiToolsPricesLoading = false;
     }
+
+    this.isAiToolsPricesLoading = false;
   };
 
   fetchAiModelRestrictions = async () => {

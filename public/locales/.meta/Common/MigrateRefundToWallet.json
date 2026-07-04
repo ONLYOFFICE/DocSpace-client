@@ -3,7 +3,7 @@
   "content": "Refund to wallet",
   "content_en_sha1_hash": "f3b97831d400382a4a6218e6233a0baacea7b4b7",
   "created_at": "2026-06-30T07:32:34.325Z",
-  "updated_at": "2026-06-30T11:38:22.655Z",
+  "updated_at": "2026-07-03T11:08:02.940Z",
   "comment": {
     "text": "A label for a line item in the MigrateToWallet dialog, indicating that funds are being refunded to the user's wallet.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
-      "line_number": 288,
+      "line_number": 304,
       "context": "),\n ),\n )}\n <div className={styles.cardDivider} />\n {renderRow(\n t(\"MigrateRefundToWallet\"),\n withLoader(\n `+ ${formatWalletCurrency(walletCredit, 2, walletCurrency)}`,\n ),\n styles.positive,\n )}",
       "module": "/libs/ui-kit"
     }

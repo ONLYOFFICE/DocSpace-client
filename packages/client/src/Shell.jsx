@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import {
   now,
   parseToDateTime,
@@ -61,6 +61,8 @@ import { SnackBar } from "@docspace/ui-kit/components/snackbar";
 import { Toast, toastr, ToastType } from "@docspace/ui-kit/components/toast";
 import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
 import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
+
+import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
 import { updateTempContent } from "@docspace/shared/utils/common";
 import {
   AnalyticsEvents,
@@ -138,6 +140,7 @@ const Shell = ({ page = "home", ...rest }) => {
     currentClientView,
     selectedFolderType,
     isPrivacyFolder,
+    isAIReady,
   } = rest;
 
   useCreateFileError({
@@ -618,6 +621,8 @@ const Shell = ({ page = "home", ...rest }) => {
     </Layout>
   );
 
+  const composerHeader = useMemo(() => <AIActivationBanner />, []);
+
   // Defer mounting AiAgentProviders until authStore is loaded — otherwise
   // `standalone` flips after the first render, the providers' useMemo
   // rebuilds the chat stores, and StoresHydrator refires every fetch
@@ -634,6 +639,8 @@ const Shell = ({ page = "home", ...rest }) => {
           getAgentRoomId={getAgentRoomId}
           openResultFile={openResultFile}
           closeEditorPanel={closeEditorPanel}
+          composerHeader={composerHeader}
+          composerDisabled={!isAIReady}
         >
           {layout}
         </AiAgentProviders>
@@ -656,6 +663,7 @@ const ShellWrapper = inject(
     selectedFolderStore,
     treeFoldersStore,
     aiRoomStore,
+    paymentStore,
   }) => {
     const { i18n } = useTranslation();
 
@@ -764,6 +772,7 @@ const ShellWrapper = inject(
       standalone,
       setSocialAuthWelcomeDialogVisible,
       getAIConfig,
+      isAIReady: paymentStore.isAIReady,
       currentClientView: clientLoadingStore.currentClientView,
       selectedFolderType: selectedFolderStore.type,
       isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
@@ -810,3 +819,4 @@ const Root = () => (
 );
 
 export default Root;
+

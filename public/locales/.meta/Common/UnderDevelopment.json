@@ -3,7 +3,7 @@
   "content": "This feature is under development",
   "content_en_sha1_hash": "d0cf4ed9c9a0a0e3f159d3f5147e814bc0004e5c",
   "created_at": "2026-05-19T19:03:26.191Z",
-  "updated_at": "2026-06-15T19:31:55.956Z",
+  "updated_at": "2026-07-04T11:30:21.798Z",
   "comment": {
     "text": "An informational toast message shown when a user attempts to access or install a feature that is not yet available.",
     "is_auto": true,
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/forms/layout.client.tsx",
-      "line_number": 629,
+      "line_number": 632,
       "context": "},\n {\n id: \"quick-generate-ai\",\n icon: <GeneratePdfAiIcon />,\n label: t(\"Common:GenerateWithAI\"),\n onClick: () => toastr.info(t(\"Common:UnderDevelopment\")),\n },\n {\n id: \"quick-from-text\",\n icon: <CreateFromTextIcon />,\n label: t(\"Common:FromTextFile\"),",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/forms/layout.client.tsx",
-      "line_number": 629,
+      "line_number": 632,
       "context": "},\n {\n id: \"quick-generate-ai\",\n icon: <GeneratePdfAiIcon />,\n label: t(\"Common:GenerateWithAI\"),\n onClick: () => toastr.info(t(\"Common:UnderDevelopment\")),\n },\n {\n id: \"quick-from-text\",\n icon: <CreateFromTextIcon />,\n label: t(\"Common:FromTextFile\"),",
       "module": "/packages/sdk"
     }

@@ -3,7 +3,7 @@
   "content": "Knowledge base",
   "content_en_sha1_hash": "70cd2e748fd8d867b9e8c7a55f97c1f3930136f7",
   "created_at": "2025-12-17T07:49:06.312Z",
-  "updated_at": "2026-06-30T10:18:29.535Z",
+  "updated_at": "2026-07-03T11:08:02.831Z",
   "comment": {
     "text": "This is a tab label or section title. It refers to a knowledge base feature within the AI Room or Portal Settings.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 153,
-      "context": "},\n {\n id: TAB_IDS.KNOWLEDGE,\n // Knowledge has no key in the @onlyoffice/ai-chat bundle (aiT), so its\n // label comes from the DocSpace Common namespace instead. Intentional.\n name: t(\"Common:Knowledge\"),\n content: <Knowledge />,\n onClick: () => {\n if (!hasProfiles) return;\n initKnowledge();\n navigateToTab(TAB_IDS.KNOWLEDGE);",
+      "line_number": 193,
+      "context": "onClick: makeOnClick(TAB_IDS.WEB_SEARCH),\n isDisabled: disableNonAiModels,\n },\n {\n id: TAB_IDS.KNOWLEDGE,\n name: t(\"Common:Knowledge\"),\n content: standalone ? <Knowledge /> : <KnowledgeBaseSaas />,\n onClick: makeOnClick(TAB_IDS.KNOWLEDGE),\n isDisabled: disableNonAiModels,\n },\n ];",
       "module": "/packages/client"
     },
     {

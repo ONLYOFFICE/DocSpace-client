@@ -1,0 +1,29 @@
+{
+  "key_path": "ModelDetails",
+  "content": "Model details",
+  "content_en_sha1_hash": "0b10896875c7226460ad40ab307716ef6fd7281a",
+  "created_at": "2026-07-03T11:07:41.278Z",
+  "updated_at": "2026-07-03T11:09:57.616Z",
+  "comment": {
+    "text": "Table column header labeling the detailed information associated with an AI model.",
+    "is_auto": true,
+    "updated_at": "2026-07-03T11:09:57.616Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/TableView/TableHeader.tsx",
+      "line_number": 92,
+      "context": "resizable: true,\n minWidth: 76,\n },\n {\n key: \"Details\",\n title: t(\"Common:ModelDetails\"),\n enable: true,\n resizable: true,\n minWidth: 110,\n },\n ];",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

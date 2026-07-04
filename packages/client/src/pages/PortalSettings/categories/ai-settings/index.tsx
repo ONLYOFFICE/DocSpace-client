@@ -30,6 +30,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router";
 
 import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
+import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
 import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import {
   AiModels,
@@ -38,9 +39,18 @@ import {
   WebSearch,
 } from "@docspace/ui-kit/ai-agent/settings";
 
+import { DeviceType } from "@docspace/shared/enums";
+
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
+import type PaymentStore from "SRC_DIR/store/PaymentStore";
 
 import { Knowledge } from "./knowledge";
+// SaaS variants (informational/pricing cards); the ui-kit WebSearch above and
+// the local Knowledge are the functional components used on standalone.
+import WebSearchSaas from "./search/WebSearchSaas";
+import KnowledgeBaseSaas from "./knowledge/KnowledgeBaseSaas";
+import AiModelsSaas from "./models/AiModelsSaas";
+import AIFeaturesBanner from "./sub-components/AIFeaturesBanner";
 
 const BASE_PATH = "/portal-settings/ai-settings";
 
@@ -63,9 +73,22 @@ const detectTabFromPath = (pathname: string) => {
 type TAISettingsProps = {
   fetchKnowledge?: AISettingsStore["fetchKnowledge"];
   fetchAIProviders?: AISettingsStore["fetchAIProviders"];
+  initDefaultProvider?: AISettingsStore["initDefaultProvider"];
+  currentDeviceType?: DeviceType;
+  standalone?: boolean;
+  isAiToolsServiceOn?: PaymentStore["isAiToolsServiceOn"];
+  isCardLinkedToPortal?: PaymentStore["isCardLinkedToPortal"];
 };
 
-const AISettings = ({ fetchKnowledge, fetchAIProviders }: TAISettingsProps) => {
+const AISettings = ({
+  fetchKnowledge,
+  fetchAIProviders,
+  initDefaultProvider,
+  currentDeviceType,
+  standalone,
+  isAiToolsServiceOn,
+  isCardLinkedToPortal,
+}: TAISettingsProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation(["Common"]);
@@ -74,9 +97,19 @@ const AISettings = ({ fetchKnowledge, fetchAIProviders }: TAISettingsProps) => {
     await Promise.all([fetchKnowledge?.(), fetchAIProviders?.()]);
   }, [fetchKnowledge, fetchAIProviders]);
 
+  const initAIProviders = React.useCallback(async () => {
+    await fetchAIProviders?.();
+    await initDefaultProvider?.();
+  }, [fetchAIProviders, initDefaultProvider]);
+
   const { useProfilesStore } = useStores();
   const profiles = useProfilesStore((s) => s.profiles);
   const hasProfiles = profiles.length > 0;
+
+  // The profile requirement only applies to standalone installations, whose
+  // tabs render functional components that need an AI profile. On SaaS the
+  // non-AI-Models tabs render informational/pricing cards, so they stay open.
+  const gateNonAiModelsTabs = standalone && !hasProfiles;
 
   const [currentTabId, setCurrentTabId] = React.useState(() =>
     detectTabFromPath(location.pathname),
@@ -89,16 +122,26 @@ const AISettings = ({ fetchKnowledge, fetchAIProviders }: TAISettingsProps) => {
   // If the user lands on a non-AI-Models tab while profiles are empty
   // (e.g. last profile was deleted), bounce back to AI Models.
   React.useEffect(() => {
-    if (!hasProfiles && currentTabId !== TAB_IDS.AI_MODELS) {
+    if (gateNonAiModelsTabs && currentTabId !== TAB_IDS.AI_MODELS) {
       navigate(`${BASE_PATH}/${TAB_IDS.AI_MODELS}`, { replace: true });
     }
-  }, [hasProfiles, currentTabId, navigate]);
+  }, [gateNonAiModelsTabs, currentTabId, navigate]);
 
-  // Load knowledge config when landing directly on the Knowledge tab.
-  // (Tab onClick only fires on tab switch, not on initial mount.)
+  // Load the data a tab needs when it becomes active. Standalone Knowledge is
+  // the only functional client tab; SaaS model assignment needs the providers.
   React.useEffect(() => {
-    if (currentTabId === TAB_IDS.KNOWLEDGE) initKnowledge();
-  }, [currentTabId, initKnowledge]);
+    if (gateNonAiModelsTabs) return;
+
+    if (standalone && currentTabId === TAB_IDS.KNOWLEDGE) initKnowledge();
+    if (!standalone && currentTabId === TAB_IDS.MODEL_ASSIGNMENT)
+      initAIProviders();
+  }, [
+    standalone,
+    currentTabId,
+    gateNonAiModelsTabs,
+    initKnowledge,
+    initAIProviders,
+  ]);
 
   const navigateToTab = (id: string) => {
     navigate(`${BASE_PATH}/${id}`);
@@ -111,17 +154,17 @@ const AISettings = ({ fetchKnowledge, fetchAIProviders }: TAISettingsProps) => {
   };
 
   const makeOnClick = (id: string) => () => {
-    if (!hasProfiles && id !== TAB_IDS.AI_MODELS) return;
+    if (gateNonAiModelsTabs && id !== TAB_IDS.AI_MODELS) return;
     navigateToTab(id);
   };
 
-  const disableNonAiModels = !hasProfiles;
+  const disableNonAiModels = gateNonAiModelsTabs;
 
   const data: TTabItem[] = [
     {
       id: TAB_IDS.AI_MODELS,
       name: t("Common:AIModels"),
-      content: <AiModels />,
+      content: standalone ? <AiModels /> : <AiModelsSaas />,
       onClick: makeOnClick(TAB_IDS.AI_MODELS),
     },
     {
@@ -141,24 +184,20 @@ const AISettings = ({ fetchKnowledge, fetchAIProviders }: TAISettingsProps) => {
     {
       id: TAB_IDS.WEB_SEARCH,
       name: t("Common:WebSearch"),
-      content: <WebSearch />,
+      content: standalone ? <WebSearch /> : <WebSearchSaas />,
       onClick: makeOnClick(TAB_IDS.WEB_SEARCH),
       isDisabled: disableNonAiModels,
     },
     {
       id: TAB_IDS.KNOWLEDGE,
-      // Knowledge has no key in the @onlyoffice/ai-chat bundle (aiT), so its
-      // label comes from the DocSpace Common namespace instead. Intentional.
       name: t("Common:Knowledge"),
-      content: <Knowledge />,
-      onClick: () => {
-        if (!hasProfiles) return;
-        initKnowledge();
-        navigateToTab(TAB_IDS.KNOWLEDGE);
-      },
+      content: standalone ? <Knowledge /> : <KnowledgeBaseSaas />,
+      onClick: makeOnClick(TAB_IDS.KNOWLEDGE),
       isDisabled: disableNonAiModels,
     },
   ];
+
+  const tabsStickyTop = SECTION_HEADER_HEIGHT[currentDeviceType!];
 
   return (
     <div>
@@ -167,17 +206,37 @@ const AISettings = ({ fetchKnowledge, fetchAIProviders }: TAISettingsProps) => {
         withAnimation
         selectedItemId={currentTabId}
         onSelect={onSelect}
+        stickyTop={tabsStickyTop}
+        stickyHeader={
+          standalone ? undefined : (
+            <AIFeaturesBanner
+              currentDeviceType={currentDeviceType}
+              isAiToolsServiceOn={isAiToolsServiceOn}
+              isCardLinkedToPortal={isCardLinkedToPortal}
+            />
+          )
+        }
       />
     </div>
   );
 };
 
-export const Component = inject(({ aiSettingsStore }: TStore) => {
-  const { fetchKnowledge, fetchAIProviders } = aiSettingsStore;
+export const Component = inject(
+  ({ aiSettingsStore, settingsStore, paymentStore }: TStore) => {
+    const { fetchKnowledge, fetchAIProviders, initDefaultProvider } =
+      aiSettingsStore;
+    const { currentDeviceType, standalone } = settingsStore;
+    const { isAiToolsServiceOn, isCardLinkedToPortal } = paymentStore;
 
-  return {
-    fetchKnowledge,
-    fetchAIProviders,
-  };
-})(observer(AISettings));
+    return {
+      fetchKnowledge,
+      fetchAIProviders,
+      initDefaultProvider,
+      currentDeviceType,
+      standalone,
+      isAiToolsServiceOn,
+      isCardLinkedToPortal,
+    };
+  },
+)(observer(AISettings));
 

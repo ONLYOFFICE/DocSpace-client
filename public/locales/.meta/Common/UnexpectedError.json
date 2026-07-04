@@ -3,7 +3,7 @@
   "content": "An unexpected error occurred. Try again later or contact support.",
   "content_en_sha1_hash": "25ad5a8afd50db67da636bee026c36dbe54b15d6",
   "created_at": "2025-05-19T21:30:49.388Z",
-  "updated_at": "2026-07-03T11:08:02.849Z",
+  "updated_at": "2026-07-04T11:30:21.860Z",
   "comment": {
     "text": "This is an error message that appears as a toast notification when an unexpected issue occurs, for example, when trying to update a tariff plan or link a payment card.",
     "is_auto": true,
@@ -25,26 +25,38 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/index.tsx",
-      "line_number": 342,
-      "context": "await paymentApi.changeTenantWalletServiceState({\n changeWalletServiceStateRequestDto: raw,\n });\n } catch (error) {\n console.error(error);\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(id);\n }\n };\n \n const onCloseGracePeriodModal = () => {",
+      "line_number": 344,
+      "context": ") {\n changeServiceState(AI_SEARCH_ENUM);\n }\n } catch (error) {\n console.error(error);\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(id);\n }\n };\n \n const onCloseGracePeriodModal = () => {",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/index.tsx",
-      "line_number": 342,
-      "context": "await paymentApi.changeTenantWalletServiceState({\n changeWalletServiceStateRequestDto: raw,\n });\n } catch (error) {\n console.error(error);\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(id);\n }\n };\n \n const onCloseGracePeriodModal = () => {",
+      "line_number": 344,
+      "context": ") {\n changeServiceState(AI_SEARCH_ENUM);\n }\n } catch (error) {\n console.error(error);\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(id);\n }\n };\n \n const onCloseGracePeriodModal = () => {",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/index.tsx",
-      "line_number": 342,
-      "context": "await paymentApi.changeTenantWalletServiceState({\n changeWalletServiceStateRequestDto: raw,\n });\n } catch (error) {\n console.error(error);\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(id);\n }\n };\n \n const onCloseGracePeriodModal = () => {",
+      "line_number": 344,
+      "context": ") {\n changeServiceState(AI_SEARCH_ENUM);\n }\n } catch (error) {\n console.error(error);\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(id);\n }\n };\n \n const onCloseGracePeriodModal = () => {",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
       "line_number": 182,
       "context": "quantity: { storage: null },\n productQuantityType: 0,\n },\n });\n const res = walletRes?.data?.response;\n if (res === false) throw new Error(t(\"UnexpectedError\"));\n \n await Promise.all([fetchPortalTariff?.(), fetchBalance?.()]);\n \n toastr.success(t(\"StorageCapacityUpdated\"));\n } catch (e) {",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-search/AiSearchPage.tsx",
+      "line_number": 160,
+      "context": "const result = await paymentApi.changeTenantWalletServiceState({\n changeWalletServiceStateRequestDto: { service: walletService, enabled },\n });\n \n if (!result) {\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(enumId);\n return false;\n }\n \n if (enabled && enumId === AI_SEARCH_ENUM)",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-search/AiSearchPage.tsx",
+      "line_number": 160,
+      "context": "const result = await paymentApi.changeTenantWalletServiceState({\n changeWalletServiceStateRequestDto: { service: walletService, enabled },\n });\n \n if (!result) {\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(enumId);\n return false;\n }\n \n if (enabled && enumId === AI_SEARCH_ENUM)",
       "module": "/libs/ui-kit"
     },
     {
@@ -115,13 +127,13 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
-      "line_number": 250,
+      "line_number": 253,
       "context": "if (signal.aborted) return;\n \n onClose();\n } catch (error) {\n console.error(\"[first-topup] flow failed\", error);\n if (!signal.aborted) toastr.error(t(\"UnexpectedError\"));\n } finally {\n if (!signal.aborted) setIsLoading(false);\n }\n };",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
-      "line_number": 250,
+      "line_number": 253,
       "context": "if (signal.aborted) return;\n \n onClose();\n } catch (error) {\n console.error(\"[first-topup] flow failed\", error);\n if (!signal.aborted) toastr.error(t(\"UnexpectedError\"));\n } finally {\n if (!signal.aborted) setIsLoading(false);\n }\n };",
       "module": "/libs/ui-kit"
     },
@@ -145,13 +157,13 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 360,
+      "line_number": 364,
       "context": "const checkRes = await paymentApi.getCustomerOperationsReport();\n const response = checkRes?.data\n ?.response as unknown as TransactionHistoryReportResponse;\n \n if (!response) {\n reject(new Error(t(\"UnexpectedError\")));\n return;\n }\n \n if (response.error) {\n reject(new Error(response.error));",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 360,
+      "line_number": 364,
       "context": "const checkRes = await paymentApi.getCustomerOperationsReport();\n const response = checkRes?.data\n ?.response as unknown as TransactionHistoryReportResponse;\n \n if (!response) {\n reject(new Error(t(\"UnexpectedError\")));\n return;\n }\n \n if (response.error) {\n reject(new Error(response.error));",
       "module": "/libs/ui-kit"
     },
@@ -163,19 +175,19 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1182,
+      "line_number": 1188,
       "context": "try {\n await Promise.all(requests);\n this.setRangeStepByQuota();\n this.setBasicTariffContainer();\n } catch (error) {\n toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n return;\n }\n \n this.setIsInitPaymentPage(true);",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1182,
+      "line_number": 1188,
       "context": "try {\n await Promise.all(requests);\n this.setRangeStepByQuota();\n this.setBasicTariffContainer();\n } catch (error) {\n toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n return;\n }\n \n this.setIsInitPaymentPage(true);",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1182,
+      "line_number": 1188,
       "context": "try {\n await Promise.all(requests);\n this.setRangeStepByQuota();\n this.setBasicTariffContainer();\n } catch (error) {\n toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n return;\n }\n \n this.setIsInitPaymentPage(true);",
       "module": "/libs/ui-kit"
     },

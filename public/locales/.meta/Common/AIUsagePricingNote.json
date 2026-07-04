@@ -3,7 +3,7 @@
   "content": "<1>OpenRouter pricing</1> + 20% service fee applies to usage | <2>Supported AI models</2>",
   "content_en_sha1_hash": "03cca9754c323c3ddffdc9c4faef5f1021b1ff97",
   "created_at": "2026-06-25T11:54:44.945Z",
-  "updated_at": "2026-07-03T11:08:02.943Z",
+  "updated_at": "2026-07-04T11:30:22.051Z",
   "comment": {
     "text": "Informational text in the AI tools pricing row detailing usage fees, where <1> is a link to OpenRouter pricing and <2> is a link to supported models.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 347,
+      "line_number": 348,
       "context": "</div>\n </div>\n \n <Text as=\"span\" fontSize=\"13px\" className={styles.pricingRow}>\n <CommonTrans\n i18nKey=\"AIUsagePricingNote\"\n components={{\n 1: (\n <Link\n fontSize=\"13px\"\n fontWeight={600}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 242,
+      "line_number": 241,
       "context": ");\n }\n \n return (\n <CommonTrans\n i18nKey=\"AIUsagePricingNote\"\n components={{\n 1: (\n <Link\n fontSize=\"13px\"\n fontWeight={600}",
       "module": "/libs/ui-kit"
     }

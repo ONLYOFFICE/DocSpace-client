@@ -73,7 +73,9 @@ test.describe("Invite", () => {
     mockRequest.use(getEmptyPortalInvitationLink(TEST_PORT, EmployeeType.User));
     await menuItem.click();
 
-    const inviteDialog = page.getByTestId("modal-dialog").filter({ hasNotText: "Synchronization with database" });
+    const inviteDialog = page
+      .locator("#invite_panel_modal")
+      .getByTestId("modal-dialog");
     await expect(inviteDialog).toBeVisible();
 
     await expect(inviteDialog).toHaveScreenshot([
@@ -106,7 +108,9 @@ test.describe("Invite", () => {
     mockRequest.use(getPortalInvitationLink(TEST_PORT, EmployeeType.User));
     await menuItem.click();
 
-    const inviteDialog = page.getByTestId("modal-dialog").filter({ hasNotText: "Synchronization with database" });
+    const inviteDialog = page
+      .locator("#invite_panel_modal")
+      .getByTestId("modal-dialog");
     await expect(inviteDialog).toBeVisible();
 
     await expect(inviteDialog).toHaveScreenshot([
@@ -141,7 +145,9 @@ test.describe("Invite", () => {
     mockRequest.use(getPortalInvitationLink(TEST_PORT, EmployeeType.User));
     await menuItem.click();
 
-    const inviteDialog = page.getByTestId("modal-dialog").filter({ hasNotText: "Synchronization with database" });
+    const inviteDialog = page
+      .locator("#invite_panel_modal")
+      .getByTestId("modal-dialog");
     await expect(inviteDialog).toBeVisible();
 
     await expect(inviteDialog).toHaveScreenshot([
@@ -154,7 +160,9 @@ test.describe("Invite", () => {
     await expect(settingsIcon).toBeVisible();
     await settingsIcon.click();
 
-    const settingsDialog = page.getByTestId("modal-dialog").last();
+    const settingsDialog = page
+      .locator("#invite_panel_modal")
+      .getByTestId("modal-dialog");
     await expect(settingsDialog).toBeVisible();
 
     await expect(settingsDialog).toHaveScreenshot([
@@ -199,7 +207,9 @@ test.describe("Invite", () => {
     );
     await menuItem.click();
 
-    const settingsDialog = page.getByTestId("modal-dialog").last();
+    const settingsDialog = page
+      .locator("#invite_panel_modal")
+      .getByTestId("modal-dialog");
     await expect(settingsDialog).toBeVisible();
 
     await expect(settingsDialog).toHaveScreenshot([
@@ -238,7 +248,9 @@ test.describe("Invite", () => {
     );
     await menuItem.click();
 
-    const settingsDialog = page.getByTestId("modal-dialog").last();
+    const settingsDialog = page
+      .locator("#invite_panel_modal")
+      .getByTestId("modal-dialog");
     await expect(settingsDialog).toBeVisible();
 
     await expect(settingsDialog).toHaveScreenshot([

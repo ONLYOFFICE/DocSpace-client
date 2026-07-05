@@ -43,11 +43,11 @@ import type {
   NavMenuItem,
 } from "@docspace/ui-kit/components/nav-menu";
 
-import WalletReactSvgUrl from "PUBLIC_DIR/images/icons/16/wallet.react.svg?url";
-import TariffReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-payment.svg?url";
-import AddonsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-services.svg?url";
-import PaymentMethodReactSvgUrl from "PUBLIC_DIR/images/icons/16/card.react.svg?url";
-import UsageReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-storage-management.svg?url";
+import WalletReactSvgUrl from "PUBLIC_DIR/images/icons/16/billing/wallet.react.svg?url";
+import TariffReactSvgUrl from "PUBLIC_DIR/images/icons/16/billing/tariff-plan.react.svg?url";
+import AddonsReactSvgUrl from "PUBLIC_DIR/images/icons/16/billing/addons.react.svg?url";
+import PaymentMethodReactSvgUrl from "PUBLIC_DIR/images/icons/16/billing/payment-method.react.svg?url";
+import UsageReactSvgUrl from "PUBLIC_DIR/images/icons/16/billing/usage.react.svg?url";
 
 import AppsSidebar from "SRC_DIR/components/AppsSidebar";
 

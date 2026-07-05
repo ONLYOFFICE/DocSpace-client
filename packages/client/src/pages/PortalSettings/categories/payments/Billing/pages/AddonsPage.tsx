@@ -33,14 +33,39 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import PaymentsEnterprise from "./Standalone";
+import { inject, observer } from "mobx-react";
+import { useNavigate } from "react-router";
 
-// SaaS billing pages now live under the /billing article (see
-// pages/PortalSettings/categories/payments/Billing). This entry only serves
-// the standalone (enterprise) payments page under /portal-settings/payments.
-const PaymentsPage = () => {
-  return <PaymentsEnterprise />;
+import { ServicesList } from "@docspace/ui-kit/billing";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+
+import config from "PACKAGE_FILE";
+
+interface AddonsPageProps {
+  getAIConfig?: () => Promise<void>;
+}
+
+const AddonsPage = ({ getAIConfig }: AddonsPageProps) => {
+  const navigate = useNavigate();
+
+  return (
+    <ServicesList
+      getAIConfig={getAIConfig}
+      onOpenSupportedModels={() =>
+        navigate(
+          combineUrl(
+            window.ClientConfig?.proxy?.url,
+            config.homepage,
+            "/portal-settings/ai-settings/ai-models",
+          ),
+        )
+      }
+    />
+  );
 };
 
-export const Component = PaymentsPage;
+export const Component = inject(({ settingsStore }: TStore) => ({
+  getAIConfig: settingsStore.getAIConfig,
+}))(observer(AddonsPage));
 
+export default Component;

@@ -56,6 +56,7 @@ import ArticleWrapper from "./components/ArticleWrapper";
 import ClientArticleSidebar from "./components/ClientArticleSidebar";
 import AccountsSidebar from "./components/AccountsSidebar";
 import DeveloperToolsSidebar from "./components/DeveloperToolsSidebar";
+import BillingSidebar from "./components/BillingSidebar";
 import { SdkFrameProvider } from "./components/SdkFrameHost/SdkFrameContext";
 import SdkFrameHost from "./components/SdkFrameHost/SdkFrameHost";
 import sdkHostStyles from "./components/SdkFrameHost/SdkFrameHost.module.scss";
@@ -66,10 +67,12 @@ const ClientArticle = React.memo(
     isInfoPanelVisible,
     isAccountsArticle,
     isDeveloperToolsArticle,
+    isBillingArticle,
     withMainButton,
   }) => {
     if (isAccountsArticle) return <AccountsSidebar />;
     if (isDeveloperToolsArticle) return <DeveloperToolsSidebar />;
+    if (isBillingArticle) return <BillingSidebar />;
 
     return <ClientArticleSidebar />;
   },
@@ -162,6 +165,7 @@ const ClientContent = (props) => {
       location.state?.fromUrl?.includes("/accounts"));
   const isDeveloperToolsArticle =
     location.pathname.includes("/developer-tools");
+  const isBillingArticle = location.pathname.startsWith("/billing");
   const isNewArticle =
     location.pathname.startsWith("/ai-files") ||
     location.pathname.startsWith("/ai-rooms") ||
@@ -171,7 +175,7 @@ const ClientContent = (props) => {
     location.pathname.startsWith("/ai-arbiter") ||
     location.pathname.startsWith("/dashboard");
   const withMainButton =
-    isAccountsArticle || isDeveloperToolsArticle
+    isAccountsArticle || isDeveloperToolsArticle || isBillingArticle
       ? currentDeviceType !== DeviceType.desktop
       : true;
 
@@ -188,6 +192,7 @@ const ClientContent = (props) => {
           showArticleLoader={showArticleLoader}
           isAccountsArticle={isAccountsArticle}
           isDeveloperToolsArticle={isDeveloperToolsArticle}
+          isBillingArticle={isBillingArticle}
           forceNewArticle={!isFrame && isNewArticle}
         />
       )}

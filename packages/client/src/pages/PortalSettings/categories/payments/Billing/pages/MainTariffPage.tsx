@@ -33,14 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import PaymentsEnterprise from "./Standalone";
+import { MainTariff } from "@docspace/ui-kit/billing";
 
-// SaaS billing pages now live under the /billing article (see
-// pages/PortalSettings/categories/payments/Billing). This entry only serves
-// the standalone (enterprise) payments page under /portal-settings/payments.
-const PaymentsPage = () => {
-  return <PaymentsEnterprise />;
+const MainTariffPage = () => {
+  return <MainTariff />;
 };
 
-export const Component = PaymentsPage;
-
+export default MainTariffPage;

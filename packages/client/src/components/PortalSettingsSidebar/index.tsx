@@ -160,7 +160,12 @@ const PortalSettingsSidebar = ({
     }
 
     const items: NavMenuItem[] = resultTree.map((item) => {
-      const path = `/portal-settings${getSelectedLinkByKey(`${item.key}-0`, settingsTree)}`;
+      // SaaS billing lives under its own /billing article; standalone keeps
+      // the enterprise payments page under /portal-settings/payments.
+      const path =
+        item.tKey === "Common:PaymentsTitle" && !standalone
+          ? "/billing"
+          : `/portal-settings${getSelectedLinkByKey(`${item.key}-0`, settingsTree)}`;
       return {
         id: String(item.key),
         label: mapLabel(item.tKey),

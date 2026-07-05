@@ -283,6 +283,106 @@ export const generalClientRoutes = [
       },
     ],
   },
+  {
+    path: "billing/",
+    lazy: () =>
+      componentLoader(
+        () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/payments/Billing/Wrapper"
+          ),
+      ),
+    children: [
+      {
+        index: true,
+        Component: () => (
+          <Navigate
+            to="tariff-plan"
+            state={window.DocSpace?.location?.state}
+            replace
+          />
+        ),
+      },
+      {
+        path: "wallet",
+        lazy: () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/payments/Billing/pages/WalletPage"
+          ).then((m) => ({ Component: m.default })),
+      },
+      {
+        path: "tariff-plan",
+        lazy: () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/payments/Billing/pages/MainTariffPage"
+          ).then((m) => ({ Component: m.default })),
+      },
+      {
+        path: "addons",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/payments/Billing/pages/AddonsPage"
+              ),
+          ),
+      },
+      {
+        path: "addons/ai-services",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/payments/Billing/pages/ServicePage"
+              ),
+          ),
+      },
+      {
+        path: "addons/ai-search",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/payments/Billing/pages/ServicePage"
+              ),
+          ),
+      },
+      {
+        path: "addons/backup",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/payments/Billing/pages/ServicePage"
+              ),
+          ),
+      },
+      {
+        path: "addons/disk-storage",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/payments/Billing/pages/ServicePage"
+              ),
+          ),
+      },
+      {
+        path: "payment-method",
+        lazy: () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/payments/Billing/pages/PaymentMethodPage"
+          ).then((m) => ({ Component: m.default })),
+      },
+      {
+        path: "usage",
+        lazy: () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/payments/Billing/pages/UsagePage"
+          ).then((m) => ({ Component: m.default })),
+      },
+    ],
+  },
 ];
 
 const generalRoutes = [

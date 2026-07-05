@@ -33,14 +33,31 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import PaymentsEnterprise from "./Standalone";
+import { useNavigate } from "react-router";
 
-// SaaS billing pages now live under the /billing article (see
-// pages/PortalSettings/categories/payments/Billing). This entry only serves
-// the standalone (enterprise) payments page under /portal-settings/payments.
-const PaymentsPage = () => {
-  return <PaymentsEnterprise />;
+import { Usage } from "@docspace/ui-kit/billing";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+
+import config from "PACKAGE_FILE";
+
+import { PAYMENT_ROUTES } from "../../utils";
+
+const UsagePage = () => {
+  const navigate = useNavigate();
+
+  const navigateToRoute = (route: string) => {
+    navigate(
+      combineUrl(window.ClientConfig?.proxy?.url, config.homepage, route),
+    );
+  };
+
+  return (
+    <Usage
+      onDiskStorageClick={() => navigateToRoute(PAYMENT_ROUTES.diskStorage)}
+      onBackupClick={() => navigateToRoute(PAYMENT_ROUTES.backup)}
+      onAIServicesClick={() => navigateToRoute(PAYMENT_ROUTES.aiServices)}
+    />
+  );
 };
 
-export const Component = PaymentsPage;
-
+export default UsagePage;

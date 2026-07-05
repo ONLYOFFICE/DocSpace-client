@@ -33,14 +33,19 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import PaymentsEnterprise from "./Standalone";
+@use "@docspace/ui-kit/styles/mixins";
 
-// SaaS billing pages now live under the /billing article (see
-// pages/PortalSettings/categories/payments/Billing). This entry only serves
-// the standalone (enterprise) payments page under /portal-settings/payments.
-const PaymentsPage = () => {
-  return <PaymentsEnterprise />;
-};
+.styledHeader {
+  display: flex;
+  align-items: center;
+  max-width: calc(100vw - 32px);
 
-export const Component = PaymentsPage;
+  :global(.arrow-button) {
+    flex-shrink: 0;
+    margin-inline-end: 12px;
 
+    svg {
+      @include mixins.flip-in-rtl;
+    }
+  }
+}

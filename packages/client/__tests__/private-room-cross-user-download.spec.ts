@@ -173,6 +173,19 @@ test.describe("Private room — cross-user file exchange", () => {
     const row = page.getByTestId("table-row-0");
     await expect(row).toBeVisible({ timeout: 10000 });
 
+    // Entering the private room prompts to unlock the device key; that modal
+    // overlays the page and would intercept the context-menu click. Dismiss it
+    // — the download-decrypt flow below re-prompts for the passphrase.
+    const entryPrompt = page
+      .getByRole("dialog")
+      .filter({ hasText: "Enter passphrase" });
+    if (await entryPrompt.isVisible().catch(() => false)) {
+      await entryPrompt
+        .getByRole("button", { name: "Cancel", exact: true })
+        .click();
+      await expect(entryPrompt).toBeHidden();
+    }
+
     const roomAccessPromise = page.waitForRequest(
       (req) =>
         req.method() === "GET" &&

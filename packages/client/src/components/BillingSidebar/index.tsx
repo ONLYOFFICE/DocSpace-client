@@ -43,6 +43,7 @@ import type {
   NavMenuItem,
 } from "@docspace/ui-kit/components/nav-menu";
 
+import OverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
 import WalletReactSvgUrl from "PUBLIC_DIR/images/icons/16/billing/wallet.react.svg?url";
 import TariffReactSvgUrl from "PUBLIC_DIR/images/icons/16/billing/tariff-plan.react.svg?url";
 import AddonsReactSvgUrl from "PUBLIC_DIR/images/icons/16/billing/addons.react.svg?url";
@@ -56,6 +57,12 @@ type BillingSidebarProps = {
 };
 
 const ITEMS = [
+  {
+    id: "billing-overview",
+    path: "/billing/overview",
+    icon: OverviewReactSvgUrl,
+    translationKey: "Common:BillingOverview" as const,
+  },
   {
     id: "billing-wallet",
     path: "/billing/wallet",

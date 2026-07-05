@@ -297,11 +297,18 @@ export const generalClientRoutes = [
         index: true,
         Component: () => (
           <Navigate
-            to="tariff-plan"
+            to="overview"
             state={window.DocSpace?.location?.state}
             replace
           />
         ),
+      },
+      {
+        path: "overview",
+        lazy: () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/payments/Billing/pages/OverviewPage"
+          ).then((m) => ({ Component: m.default })),
       },
       {
         path: "wallet",

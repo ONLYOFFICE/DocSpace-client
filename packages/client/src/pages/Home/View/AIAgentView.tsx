@@ -44,11 +44,16 @@ import NoAccessContainer, {
   NoAccessContainerType,
 } from "SRC_DIR/components/EmptyContainer/NoAccessContainer";
 import { SectionBodyContent } from "SRC_DIR/pages/Home/Section";
+import {
+  useChatNoAccess,
+  mapChatNoAccessStores,
+  type ChatNoAccessStoreProps,
+} from "SRC_DIR/Hooks/useChatNoAccess";
 import type FilesStore from "SRC_DIR/store/FilesStore";
 import type ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
 
-type Props = {
+type Props = ChatNoAccessStoreProps & {
   currentView: string;
   isErrorAIAgentNotAvailable?: FilesStore["isErrorAIAgentNotAvailable"];
   showArticleLoader?: ClientLoadingStore["showArticleLoader"];
@@ -56,13 +61,17 @@ type Props = {
   canUseChat?: AccessRightsStore["canUseChat"];
 };
 
-const AIAgentViewComponent = ({
-  currentView,
-  isErrorAIAgentNotAvailable,
-  showArticleLoader,
-  showBodyLoader,
-  canUseChat,
-}: Props) => {
+const AIAgentViewComponent = (props: Props) => {
+  const {
+    currentView,
+    isErrorAIAgentNotAvailable,
+    showArticleLoader,
+    showBodyLoader,
+    canUseChat,
+  } = props;
+
+  const { aiReady, noAccessProps, topUpDialog } = useChatNoAccess(props);
+
   if (
     currentView === "chat" &&
     isErrorAIAgentNotAvailable &&
@@ -84,27 +93,30 @@ const AIAgentViewComponent = ({
             className={styles.aiAgentChat}
             data-chat-active={currentView === "chat" ? "" : undefined}
           >
-            <NewChat isAgent />
+            <NewChat isAgent aiReady={aiReady} noAccessProps={noAccessProps} />
           </div>
         </Activity>
       ) : null}
 
       {shouldRenderFiles ? <SectionBodyContent /> : null}
+
+      {topUpDialog}
     </>
   );
 };
 
-export const AIAgentView = inject(
-  ({ filesStore, clientLoadingStore, accessRightsStore }: TStore) => {
-    const { isErrorAIAgentNotAvailable } = filesStore;
-    const { showArticleLoader, showBodyLoader } = clientLoadingStore;
-    const { canUseChat } = accessRightsStore;
+export const AIAgentView = inject((stores: TStore) => {
+  const { filesStore, clientLoadingStore, accessRightsStore } = stores;
+  const { isErrorAIAgentNotAvailable } = filesStore;
+  const { showArticleLoader, showBodyLoader } = clientLoadingStore;
+  const { canUseChat } = accessRightsStore;
 
-    return {
-      isErrorAIAgentNotAvailable,
-      showArticleLoader,
-      showBodyLoader,
-      canUseChat,
-    };
-  },
-)(observer(AIAgentViewComponent));
+  return {
+    ...mapChatNoAccessStores(stores),
+    isErrorAIAgentNotAvailable,
+    showArticleLoader,
+    showBodyLoader,
+    canUseChat,
+  };
+})(observer(AIAgentViewComponent));
+

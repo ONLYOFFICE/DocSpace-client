@@ -72,6 +72,7 @@ import {
   getCardLinkedOnFreeTariff,
   getCardLinkedOnNonProfit,
   getIsCardLinkedToPortal,
+  getIsCardMissingOrInactive,
   getIsPayer,
   getWalletBalanceAmount,
   getWalletBalanceCurrency,
@@ -196,6 +197,18 @@ class PaymentStore {
       isNonProfit: this.currentQuotaStore.isNonProfit,
       isFreeTariff: this.currentQuotaStore.isFreeTariff,
       walletCustomerEmail: this.currentTariffStatusStore.walletCustomerEmail,
+    });
+  }
+
+  get isCardMissingOrInactive() {
+    if (!this.currentQuotaStore || !this.currentTariffStatusStore) return true;
+
+    return getIsCardMissingOrInactive({
+      isNonProfit: this.currentQuotaStore.isNonProfit,
+      isFreeTariff: this.currentQuotaStore.isFreeTariff,
+      walletCustomerEmail: this.currentTariffStatusStore.walletCustomerEmail,
+      walletCustomerStatusNotActive:
+        this.currentTariffStatusStore.walletCustomerStatusNotActive,
     });
   }
 

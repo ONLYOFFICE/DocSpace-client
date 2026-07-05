@@ -605,6 +605,36 @@ export const settingsTree = [
         link: "services",
         tKey: "Services",
         isCategory: true,
+        children: [
+          {
+            id: "portal-settings_catalog-services-ai-services",
+            key: "10-3-0",
+            icon: "",
+            link: "ai-services",
+            tKey: "Common:AIFeatures",
+          },
+          {
+            id: "portal-settings_catalog-services-backup",
+            key: "10-3-1",
+            icon: "",
+            link: "backup",
+            tKey: "Common:AdditionalBackup",
+          },
+          {
+            id: "portal-settings_catalog-services-disk-storage",
+            key: "10-3-2",
+            icon: "",
+            link: "disk-storage",
+            tKey: "Common:AdditionalDiskStorage",
+          },
+          {
+            id: "portal-settings_catalog-services-ai-search",
+            key: "10-3-3",
+            icon: "",
+            link: "ai-search",
+            tKey: "Common:AISearch",
+          },
+        ],
       },
     ],
   },
@@ -752,3 +782,4 @@ export const settingsTreeFull = [
     link: "statistics",
   },
 ];
+

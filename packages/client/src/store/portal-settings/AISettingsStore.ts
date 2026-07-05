@@ -419,8 +419,9 @@ class AISettingsStore {
   fetchDefaultProviderModels = async (providerId: TAiProvider["id"]) => {
     let models = null;
 
+    const hasModels = !!this.defaultProviderModels?.length;
     try {
-      this.setIsDefaultProviderModelsLoading(true);
+      if (!hasModels) this.setIsDefaultProviderModelsLoading(true);
       this.setDefaultProviderModelsError(null);
 
       models = await getModels(providerId);
@@ -520,3 +521,4 @@ class AISettingsStore {
 }
 
 export default AISettingsStore;
+

@@ -43,6 +43,10 @@ import { withTranslation } from "react-i18next";
 
 import { useAiChatPanel } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
 import {
+  useChatNoAccess,
+  mapChatNoAccessStores,
+} from "SRC_DIR/Hooks/useChatNoAccess";
+import {
   useIsAiChatAvailable,
   useStores,
 } from "@docspace/ui-kit/ai-agent/providers";
@@ -233,7 +237,16 @@ const PureHome = observer((props) => {
 
   const location = useLocation();
 
-  const aiChatPanel = useAiChatPanel();
+  const {
+    aiReady: aiChatReady,
+    noAccessProps: aiChatNoAccessProps,
+    topUpDialog: aiChatTopUpDialog,
+  } = useChatNoAccess(props.aiNoAccessStores);
+
+  const aiChatPanel = useAiChatPanel(true, {
+    aiReady: aiChatReady,
+    noAccessProps: aiChatNoAccessProps,
+  });
 
   React.useEffect(() => {
     if (location.state?.openAboutDialog && setIsAboutDialogVisible) {
@@ -690,6 +703,7 @@ const PureHome = observer((props) => {
         </SectionWrapper>
       </div>
       <InfoPanelActions />
+      {aiChatTopUpDialog}
     </>
   );
 });
@@ -742,6 +756,8 @@ export const Component = inject(
     pluginStore,
     infoPanelStore,
     oformsStore,
+    paymentStore,
+    currentTariffStatusStore,
   }) => {
     const {
       setSelectedFolder,
@@ -924,6 +940,13 @@ export const Component = inject(
     // }
 
     return {
+      aiNoAccessStores: mapChatNoAccessStores({
+        settingsStore,
+        userStore,
+        paymentStore,
+        currentTariffStatusStore,
+        authStore,
+      }),
       currentClientView,
       isChangePageRequestRunning,
       // homepage: config.homepage,
@@ -1082,3 +1105,4 @@ export const Component = inject(
     };
   },
 )(observer(HomeWithGuard));
+

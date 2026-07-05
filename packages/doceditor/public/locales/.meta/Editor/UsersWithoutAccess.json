@@ -3,7 +3,7 @@
   "content": "Some users whom you want to mention don't have access to the room: {{users}}",
   "content_en_sha1_hash": "0e74bc0626bcf6b856447b7dbe024abf390630fa",
   "created_at": "2025-05-19T21:30:57.136Z",
-  "updated_at": "2026-06-30T10:18:29.615Z",
+  "updated_at": "2026-07-04T11:30:21.961Z",
   "comment": {
     "text": "This is a toast message informing the user that some mentioned users lack access to the room. The `{{users}}` variable lists the names of these users.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/hooks/useEditorEvents.ts",
-      "line_number": 719,
+      "line_number": 722,
       "context": ");\n \n if (usersNotFound && usersNotFound.length > 0) {\n docEditor?.showMessage?.(\n t\n ? t(\"UsersWithoutAccess\", {\n users: usersNotFound,\n })\n : \"\",\n );\n }",
       "module": "/packages/doceditor"
     }

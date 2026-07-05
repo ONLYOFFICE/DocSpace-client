@@ -52,6 +52,7 @@ import TagInput from "../../../TagInput";
 import InputParam from "../../../CreateEditDialogParams/InputParam";
 
 import ProfileSettings from "../sub-components/Profile";
+import ModelSaas from "../sub-components/ModelSaas";
 import InstructionsSettings from "../sub-components/Instructions";
 import MCPSettings from "../sub-components/MCP";
 import {
@@ -123,6 +124,7 @@ type setAgentParamsProps = {
   recommendedModelForForms?: TAIConfig["recommendedModelForForms"];
   isUserAdmin?: boolean;
   openContext?: CreateEditAgentStore["openContext"];
+  standalone?: SettingsStore["standalone"];
 };
 
 const setAgentParams = ({
@@ -163,6 +165,7 @@ const setAgentParams = ({
   recommendedModelForForms,
   isUserAdmin,
   openContext,
+  standalone,
 }: setAgentParamsProps) => {
   const { t } = useTranslation([
     "CreateEditRoomDialog",
@@ -490,10 +493,21 @@ const setAgentParams = ({
         />
       ) : null}
 
-      <ProfileSettings
-        agentParams={agentParams}
-        setAgentParams={setAgentParams}
-      />
+      {standalone ? (
+        <ProfileSettings
+          agentParams={agentParams}
+          setAgentParams={setAgentParams}
+        />
+      ) : (
+        <ModelSaas
+          agentParams={agentParams}
+          systemAiEnabled={systemAiEnabled}
+          recommendedModelForForms={recommendedModelForForms}
+          isAdmin={!!isUserAdmin}
+          openedFromChat={openContext === AgentDialogContext.Chat}
+          setAgentParams={setAgentParams}
+        />
+      )}
       <InstructionsSettings
         agentParams={agentParams}
         setAgentParams={setAgentParams}
@@ -554,7 +568,7 @@ export default inject(
   }: TStore) => {
     const { isDefaultAIAgentsQuotaSet } = currentQuotaStore;
     const { openContext } = createEditAgentStore;
-    const { folderFormValidation, maxImageUploadSize, aiConfig } =
+    const { folderFormValidation, maxImageUploadSize, aiConfig, standalone } =
       settingsStore;
 
     const { bufferSelection } = filesStore;
@@ -606,6 +620,7 @@ export default inject(
       isUserAdmin:
         !!userStore?.user && (userStore.user.isOwner || userStore.user.isAdmin),
       openContext,
+      standalone,
     };
   },
 )(observer(setAgentParams));

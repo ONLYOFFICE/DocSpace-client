@@ -3,7 +3,7 @@
   "content": "Enter the amount of credits you want to add.",
   "content_en_sha1_hash": "9d1020a416664a43b35c31ef4c4f2ab0b7f6281a",
   "created_at": "2026-06-25T11:54:59.181Z",
-  "updated_at": "2026-06-30T07:32:49.218Z",
+  "updated_at": "2026-07-04T11:30:22.075Z",
   "comment": {
     "text": "Instructional description text within a top-up dialog prompting the user to enter a specific credit amount.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/top-up-balance/SimpleTopUpDialog.tsx",
-      "line_number": 310,
+      "line_number": 314,
       "context": "<ModalDialog.Body>\n <div className={styles.body}>\n <Text className={styles.description}>\n {isStripeFlow\n ? t(\"TopUpCreditsDescription\")\n : t(\"TopUpCreditsAmountDescription\")}\n </Text>\n \n <Amount\n formatWalletCurrency={formatWalletCurrency}\n isDisabled={isLoading}",
       "module": "/libs/ui-kit"
     }

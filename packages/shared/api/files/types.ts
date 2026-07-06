@@ -212,6 +212,10 @@ export type TFolder = {
   path?: TPathParts[];
   type?: FolderType;
   isFolder?: boolean;
+  /** Present on folders returned inside rooms listings (`GET /files/{id}`
+   * current); consumed by FilesStore (`data.current.inRoom`,
+   * `setInRoomFolder`). */
+  inRoom?: boolean;
   indexing: boolean;
   denyDownload: boolean;
   fileEntryType: number;
@@ -286,6 +290,9 @@ export type TThirdParty = {
   providerKey: string;
   provider_id?: string;
   customer_title?: string;
+  /** Snake-case variant returned by the providers endpoint; read by
+   * FilesActionsStore.setThirdpartyInfo. */
+  provider_key?: string;
 };
 
 export type TThirdParties = TThirdParty[];
@@ -362,6 +369,12 @@ export type TFilesSettings = {
   openEditorInSameTab: boolean;
   displayFileExtension: boolean;
   organizeRoomsGrouping: boolean;
+  /** Whether the room lifetime confirmation dialog is hidden (see PUT files/hideconfirmroomlifetime). */
+  hideConfirmRoomLifetime?: boolean;
+  /** Whether the cancel-operation confirmation dialog is hidden (see PUT files/hideconfirmcanceloperation). */
+  hideConfirmCancelOperation?: boolean;
+  /** Extensions of files that can be vectorized (uploaded to AI rooms). */
+  extsFilesVectorized?: string[];
 };
 
 export type TPresignedUri = {
@@ -447,6 +460,8 @@ export type TDocServiceLocation = {
   docServiceSignatureSecret: string;
   isDefault: boolean;
   docServiceSslVerification: boolean;
+  /** URL of the document server preload frame (returned by GET files/docservice). */
+  docServicePreloadUrl?: string;
 };
 
 export type TFileLink = {
@@ -470,6 +485,10 @@ export type TFileLink = {
     expirationDate?: string | null;
     internal: boolean;
     password?: string;
+    /** Whether the link is disabled (returned for room external links). */
+    disabled?: boolean;
+    /** Whether the link belongs to a room template (returned for room external links). */
+    isTemplate?: boolean;
   };
   subjectType: number;
 };

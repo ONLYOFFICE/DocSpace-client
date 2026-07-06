@@ -39,7 +39,11 @@ import axios from "axios";
 import api from "@docspace/shared/api";
 import { formatDate, parseToDateTime } from "@docspace/ui-kit/utils/date";
 import { RoomsType } from "@docspace/shared/enums";
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import {
+  TFile,
+  TFileLink,
+  TFolder,
+} from "@docspace/shared/api/files/types";
 import {
   RoomMember,
   TFeed,
@@ -178,7 +182,9 @@ export const useHistory = ({
 
         const historyWithLinks = addLinksToHistory(response, links);
 
-        setExternalLinks(links);
+        // getRoomMembers with filterType 2 (external links)
+        // returns link-shaped items, but its return type is RoomMember[].
+        setExternalLinks(links as unknown as TFileLink[]);
 
         setHistory(parseHistory(historyWithLinks.items));
 
@@ -251,7 +257,9 @@ export const useHistory = ({
 
         feedWithLinks = addLinksToHistory(data, links);
 
-        setExternalLinks(links);
+        // getRoomMembers with filterType 2 (external links)
+        // returns link-shaped items, but its return type is RoomMember[].
+        setExternalLinks(links as unknown as TFileLink[]);
       } else {
         setExternalLinks([]);
       }

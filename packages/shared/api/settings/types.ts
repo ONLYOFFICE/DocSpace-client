@@ -33,7 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { RecaptchaType, TenantStatus, EncryptionStatus } from "../../enums";
+import {
+  RecaptchaType,
+  TenantStatus,
+  EncryptionStatus,
+  EmployeeType,
+} from "../../enums";
 import { TColorScheme } from "@docspace/ui-kit/providers/theme";
 
 export type TTfaType = "sms" | "app" | "none";
@@ -45,8 +50,74 @@ export type TTfa = {
   available: boolean;
 };
 
+/** A single SSO certificate as returned by /sso/validatecerts and /settings/ssov2 */
+export type TSsoCertificate = {
+  /** PEM-encoded certificate body */
+  crt: string;
+  key: string | null;
+  action: string;
+  /** Present on certificates validated by the server */
+  domainName?: string;
+  /** Present on certificates validated by the server */
+  startDate?: string;
+  /** Present on certificates validated by the server */
+  expiredDate?: string;
+};
+
+export type TSsoIdpSettings = {
+  entityId: string;
+  ssoUrl: string;
+  ssoBinding: string;
+  sloUrl: string;
+  sloBinding: string;
+  nameIdFormat: string;
+};
+
+export type TSsoIdpCertificateAdvanced = {
+  verifyAlgorithm: string;
+  verifyAuthResponsesSign: boolean;
+  verifyLogoutRequestsSign: boolean;
+  verifyLogoutResponsesSign: boolean;
+  decryptAlgorithm: string;
+  decryptAssertions: boolean;
+};
+
+export type TSsoSpCertificateAdvanced = {
+  signingAlgorithm: string;
+  signAuthRequests: boolean;
+  signLogoutRequests: boolean;
+  signLogoutResponses: boolean;
+  encryptAlgorithm: string;
+  decryptAlgorithm: string;
+  encryptAssertions: boolean;
+};
+
+export type TSsoFieldMapping = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  title: string;
+  location: string;
+  phone: string;
+};
+
+/**
+ * Full SSO settings object returned by GET/DELETE /settings/ssov2
+ * (see client SsoFormStore, which reads all of these fields).
+ */
 export type TGetSsoSettings = {
+  enableSso: boolean;
+  spLoginLabel?: string;
+  uploadXmlUrl?: string;
+  idpSettings: TSsoIdpSettings;
+  idpCertificates: TSsoCertificate[];
+  idpCertificateAdvanced: TSsoIdpCertificateAdvanced;
+  spCertificates: TSsoCertificate[];
+  spCertificateAdvanced: TSsoSpCertificateAdvanced;
+  fieldMapping: TSsoFieldMapping;
   hideAuthPage: boolean;
+  disableEmailVerification: boolean;
+  usersType?: EmployeeType;
 };
 
 export type TGetCSPSettings = {

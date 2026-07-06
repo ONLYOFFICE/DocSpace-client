@@ -64,6 +64,7 @@ import type { TRoomGroup } from "@docspace/ui-kit/components/filter/Filter.types
 import { showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import type FilesActionsStore from "./FilesActionsStore";
+import type { TActionItem } from "./FilesActionsStore";
 import type FilesStore from "./FilesStore";
 import type DialogsStore from "./DialogsStore";
 
@@ -108,24 +109,41 @@ export default class FilesHeaderOptionStore {
   private unarchiveHandle = () =>
     this.filesActionsStore.archiveRooms("unarchive");
 
+  // FilesStore.selection holds filesList view-model items
+  // (TItem); FilesActionsStore still types its inputs with its own minimal
+  // TActionItem — the erased casts below adapt between the two (type-only)
+  // until FilesActionsStore is rewired to the real FilesStore types.
   private changeRoomQuotaHandle = () =>
-    this.filesActionsStore.changeRoomQuota(this.filesStore.selection);
+    this.filesActionsStore.changeRoomQuota(
+      this.filesStore.selection as unknown as TActionItem[],
+    );
 
   private changeAIAgentsQuotaHandle = () =>
-    this.filesActionsStore.changeAIAgentsQuota(this.filesStore.selection);
+    this.filesActionsStore.changeAIAgentsQuota(
+      this.filesStore.selection as unknown as TActionItem[],
+    );
 
   private resetRoomQuotaHandle = () =>
-    this.filesActionsStore.resetRoomQuota(this.filesStore.selection, this.t);
+    this.filesActionsStore.resetRoomQuota(
+      this.filesStore.selection as unknown as TActionItem[],
+      this.t,
+    );
 
   private resetAIAgentQuotaHandle = () =>
-    this.filesActionsStore.resetAIAgentQuota(this.filesStore.selection, this.t);
+    this.filesActionsStore.resetAIAgentQuota(
+      this.filesStore.selection as unknown as TActionItem[],
+      this.t,
+    );
 
   private disableRoomQuotaHandle = () =>
-    this.filesActionsStore.disableRoomQuota(this.filesStore.selection, this.t);
+    this.filesActionsStore.disableRoomQuota(
+      this.filesStore.selection as unknown as TActionItem[],
+      this.t,
+    );
 
   private disableAIAgentQuotaHandle = () =>
     this.filesActionsStore.disableAIAgentQuota(
-      this.filesStore.selection,
+      this.filesStore.selection as unknown as TActionItem[],
       this.t,
     );
 
@@ -141,7 +159,7 @@ export default class FilesHeaderOptionStore {
   };
 
   private addToGroupHandle = async (groupId: string, groupName: string) => {
-    const roomIds = this.filesStore.selection.map((room) => room.id);
+    const roomIds = this.filesStore.selection.map((room) => room.id!);
     try {
       await this.dialogsStore.updateRoomGroup(groupId, { roomsToAdd: roomIds });
       await this.dialogsStore.getAllRoomGroups();
@@ -170,7 +188,7 @@ export default class FilesHeaderOptionStore {
   };
 
   private removeFromGroupHandle = async () => {
-    const roomIds = this.filesStore.selection.map((room) => room.id);
+    const roomIds = this.filesStore.selection.map((room) => room.id!);
     const currentGroupId = this.filesStore.roomsFilter?.groupId;
     if (!currentGroupId) return;
 
@@ -236,12 +254,14 @@ export default class FilesHeaderOptionStore {
 
   private onClickRemoveFromRecent = (t: TFunction) =>
     this.filesActionsStore.onClickRemoveFromRecent(
-      this.filesStore.selection,
+      this.filesStore.selection as unknown as TActionItem[],
       t,
     );
 
   private retryVectorization = () =>
-    this.filesActionsStore.retryVectorization(this.filesStore.selection);
+    this.filesActionsStore.retryVectorization(
+      this.filesStore.selection as unknown as TActionItem[],
+    );
 
   public getOption = (option: string, t: TFunction) => {
     const { showStorageInfo } = this.currentQuotaStore;

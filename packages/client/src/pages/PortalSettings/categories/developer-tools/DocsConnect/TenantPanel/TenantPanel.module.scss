@@ -124,12 +124,159 @@
   padding-bottom: 40px;
 }
 
-.stubTab {
+.settings {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 660px;
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+.settingsRow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+
+  @include mixins.mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.settingsGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.settingsHint {
+  color: var(--dev-tools-text-secondary);
+}
+
+.wopiGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.wopiCard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  border-radius: 6px;
+  background-color: $gray-light;
+}
+
+.wopiToggle {
+  label {
+    position: relative;
+  }
+}
+
+.wopiDescription {
+  margin-inline-start: 36px;
+  color: $black;
+}
+
+.radioHint {
+  font-weight: 400;
+  color: $gray-text;
+}
+
+.radioGroup {
+  margin-top: 16px;
+}
+
+.secretField {
+  position: relative;
+}
+
+.secretInput {
+  padding-inline-end: 68px;
+}
+
+.secretIcons {
+  position: absolute;
+  inset-inline-end: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 64px 0;
+  gap: 8px;
+}
+
+.settingsButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.rulesList {
+  display: flex;
+  flex-direction: column;
+}
+
+.ruleRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--dev-tools-card-divider);
+}
+
+.ruleBadge {
+  display: inline-flex;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  color: var(--dev-tools-status-positive);
+  background-color: color-mix(
+    in srgb,
+    var(--dev-tools-status-positive) 12%,
+    transparent
+  );
+}
+
+.ruleBadgeDeny {
+  color: var(--dev-tools-status-negative);
+  background-color: color-mix(
+    in srgb,
+    var(--dev-tools-status-negative) 12%,
+    transparent
+  );
+}
+
+.ruleValue {
+  flex: 1;
+}
+
+.addRuleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkboxGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.checkboxItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  .settingsHint {
+    margin-inline-start: 28px;
+  }
+}
+
+.limitField {
+  max-width: 320px;
 }
 
 .preview {
@@ -240,7 +387,7 @@
 .infoValueRow {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  // justify-content: space-between;
   gap: 8px;
 }
 

@@ -109,7 +109,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
       isDefaultUsersQuotaSet ||
       isDefaultRoomsQuotaSet ||
       isTenantCustomQuotaSet;
-    // FABLE5-REVIEW: type-only cast — the quota flags can be undefined, which
+    // type-only cast — the quota flags can be undefined, which
     // the original .js store setter stored as-is (both are falsy).
     setWarningQuotaDialogVisible(isQuotaWarningVisible as boolean);
   }, [isDefaultUsersQuotaSet, isDefaultRoomsQuotaSet, isTenantCustomQuotaSet]);

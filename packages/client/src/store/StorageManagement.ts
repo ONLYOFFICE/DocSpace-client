@@ -66,8 +66,6 @@ import type FilesStore from "./FilesStore";
 
 const FILTER_COUNT = 6;
 
-// FABLE5-REVIEW: getQuotaSettings is untyped in shared/api — only the field
-// read here is described.
 type TQuotaSettings = { lastRecalculateDate?: string };
 
 type TPeopleListItem = ReturnType<UsersStore["getPeopleListItem"]>;
@@ -140,7 +138,7 @@ class StorageManagement {
     this.roomFilterData.pageCount = FILTER_COUNT;
     this.roomFilterData.sortBy = SortByFieldName.UsedSpace;
     this.roomFilterData.sortOrder = "descending";
-    // FABLE5-REVIEW: RoomsFilter.provider is typed Nullable<string> but has
+    // RoomsFilter.provider is typed Nullable<string> but has
     // always been assigned the numeric RoomsProviderType.Storage here.
     this.roomFilterData.provider = RoomsProviderType.Storage as unknown as string;
 
@@ -172,7 +170,6 @@ class StorageManagement {
 
     try {
       if (isInit)
-        // FABLE5-REVIEW: checkRecalculateQuota is untyped in shared/api
         this.needRecalculating = (await checkRecalculateQuota(
           checkRecalculateQuotaAbortRequests.signal,
         )) as boolean;

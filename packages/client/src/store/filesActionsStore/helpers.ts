@@ -42,7 +42,7 @@ import type { TTranslation } from "@docspace/shared/types";
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { TExportRoomIndexTask } from "@docspace/shared/api/rooms/types";
 
-// FABLE5-REVIEW: drag&drop/upload entries are browser File objects decorated
+// drag&drop/upload entries are browser File objects decorated
 // by still-.js callers (Home/index.js, withFileActions.js) with a relative
 // path and folder markers.
 export type TUploadTreeFile = File & {
@@ -103,9 +103,6 @@ export const changeCustomFilter = async (
   item: { id: number; customFilterEnabled?: boolean },
   t: TTranslation,
 ) => {
-  // FABLE5-REVIEW: enableCustomFilter is cast to TOperation[] in
-  // shared/api/files, but the server returns the updated file (the old JS
-  // reads res.customFilterEnabled).
   return (
     enableCustomFilter(item.id, !item.customFilterEnabled) as unknown as Promise<TFile>
   )
@@ -163,8 +160,6 @@ export const setPinAction = async (
   const isPin = action === "pin";
 
   items.forEach((item) => {
-    // FABLE5-REVIEW: pinRoom/unpinRoom are untyped in shared/api/rooms
-    // (@ts-nocheck file), the casts pin down the observed Promise result.
     actions.push(
       (isPin
         ? api.rooms.pinRoom(item)
@@ -178,7 +173,7 @@ export const setPinAction = async (
     if (!result) return;
 
     result.forEach((res) => {
-      // FABLE5-REVIEW: the old JS reads `.value` off rejected results too
+      // the old JS reads `.value` off rejected results too
       // (undefined at runtime); the erased casts keep that behavior.
       if ((res as PromiseFulfilledResult<unknown>).value) {
         withFinishedOperation.push(

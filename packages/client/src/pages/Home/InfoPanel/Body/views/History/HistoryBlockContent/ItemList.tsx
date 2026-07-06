@@ -158,7 +158,7 @@ const HistoryItemList = ({
 				});
 			}
 
-			// FABLE5-REVIEW: getFileInfo's second param is the share key; this
+			// getFileInfo's second param is the share key; this
 			// caller has always passed `true` (presumably meaning skipRedirect);
 			// erased cast preserves the existing call.
 			await getFileInfo?.(item.id, true as unknown as string).then((res) => {

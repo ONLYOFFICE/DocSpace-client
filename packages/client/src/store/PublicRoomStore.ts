@@ -72,7 +72,7 @@ class PublicRoomStore {
 
   roomStatus: ValidationStatus | null = null;
 
-  // FABLE5-REVIEW: `roomType` is read from the validate-share response in
+  // `roomType` is read from the validate-share response in
   // setRoomData, but TValidateShareRoom does not declare it — verify whether
   // the server DTO actually returns it (it may always be undefined at runtime).
   roomType: RoomsType | null | undefined = null;
@@ -104,7 +104,7 @@ class PublicRoomStore {
   };
 
   setRoomData = (data: TValidateShareRoom) => {
-    // FABLE5-REVIEW: `roomType` is not declared on TValidateShareRoom (see
+    // `roomType` is not declared on TValidateShareRoom (see
     // the field note above) — cast keeps the original destructuring intact.
     const { id, roomType, status, title } = data as TValidateShareRoom & {
       roomType?: RoomsType;
@@ -127,7 +127,7 @@ class PublicRoomStore {
     if (!filterObj) return;
 
     if (filterObj.folder === "@my") {
-      // FABLE5-REVIEW: `roomId` may still be null here; the original .js
+      // `roomId` may still be null here; the original .js
       // assigned it regardless — the assertion keeps the same runtime.
       filterObj.folder = this.roomId!;
     }
@@ -171,7 +171,7 @@ class PublicRoomStore {
         Promise.resolve(FilesFilter.getDefault());
       })
       .then((data) => {
-        // FABLE5-REVIEW: if the catch above ran, `data` is undefined and the
+        // if the catch above ran, `data` is undefined and the
         // original .js crashed here — the assertion keeps the same runtime.
         const resolvedFilter = data![0];
 
@@ -200,8 +200,6 @@ class PublicRoomStore {
 
   fetchExternalLinks = (roomId: number | string) => {
     const type = 1;
-    // FABLE5-REVIEW: getExternalLinks is untyped in shared/api/rooms (bare
-    // `request(...)`) — cast until it gets a proper return type.
     return api.rooms.getExternalLinks(roomId, type) as Promise<TFileLink[]>;
   };
 
@@ -260,7 +258,7 @@ class PublicRoomStore {
       internal,
     } = link.sharedTo;
 
-    // FABLE5-REVIEW: `expirationDate` and `disabled` are optional on
+    // `expirationDate` and `disabled` are optional on
     // TFileLink.sharedTo; the original .js passed them through as-is
     // (possibly undefined) — the casts keep the same runtime.
     return api.rooms.editExternalLink(
@@ -277,7 +275,7 @@ class PublicRoomStore {
     );
   };
 
-  // FABLE5-REVIEW: validatePublicRoomKey calls `gotoFolder(res, key)` with a
+  // validatePublicRoomKey calls `gotoFolder(res, key)` with a
   // second argument the original .js function never declared or used — the
   // unused optional param keeps that call site type-correct without changing
   // runtime behavior.
@@ -342,7 +340,7 @@ class PublicRoomStore {
     if (fileId) params.set("fileId", fileId);
     if (folderId) params.set("folderId", folderId);
 
-    // FABLE5-REVIEW: request() in shared/api is typed `Promise<T> | undefined`;
+    // request() in shared/api is typed `Promise<T> | undefined`;
     // the original .js chained `.then` unconditionally (crashing if it were
     // ever undefined) — the cast keeps the same runtime.
     (

@@ -70,9 +70,6 @@ import {
   setPersistedString,
 } from "./utils/persistence";
 
-// FABLE5-REVIEW: TreeFoldersStore is still .js (wave 3) — minimal structural
-// type covering only the member used here; replace with
-// `import type TreeFoldersStore from "./TreeFoldersStore"` once converted.
 type TTreeFoldersStore = {
   isFormRoomRoot: boolean;
 };
@@ -205,10 +202,6 @@ class OformsStore {
     const url = combineUrl(uploadDomain, uploadDashboard, "/i18n/locales");
 
     try {
-      // FABLE5-REVIEW: the oforms API client (shared/api/oforms/index.js) is
-      // still untyped (@ts-nocheck) — response shapes are asserted here and
-      // at the other call sites below (getOforms, getCategoryById,
-      // getCategoryTypes, getCategoriesOfCategoryType, submitToGallery).
       const fetchedLocales = (await getOformLocales(url)) as TOformLocale[];
       const localeKeys = fetchedLocales.map((locale) => locale.code);
       this.setOformLocales(localeKeys);
@@ -222,7 +215,7 @@ class OformsStore {
 
   getOforms = async (
     filter: TOformsFilter = OformsFilter.getDefault(),
-    // FABLE5-REVIEW: fetchMoreOforms always passed a second `true` argument
+    // fetchMoreOforms always passed a second `true` argument
     // that the original .js implementation never declared or read — typed as
     // an ignored optional param to keep that call site untouched.
     _fetchMore?: boolean,
@@ -315,7 +308,7 @@ class OformsStore {
     if (!category) return "";
 
     const categoryType = this.getTypeOfCategory(category);
-    // FABLE5-REVIEW: the category title lives under a dynamic Strapi key
+    // the category title lives under a dynamic Strapi key
     // named by `categoryType`; when no category type matches,
     // `categoryType` is `undefined` and the original .js resolved
     // `attributes[undefined]` to `undefined` — the assertions keep that

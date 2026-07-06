@@ -268,7 +268,7 @@ class InfoPanelStore {
       return item.logo?.cover ? item.logo : item.logo?.medium;
 
     if (isFolder(item))
-      // FABLE5-REVIEW: type-only cast — `folderType` is
+      // type-only cast — `folderType` is
       // `false | FolderType | undefined` here and was passed to the untyped
       // .js store unchanged; getIconPathByFolderType falls back to the
       // default folder icon for non-FolderType values.
@@ -283,7 +283,7 @@ class InfoPanelStore {
   };
 
   get infoPanelSelection(): TSelection {
-    // FABLE5-REVIEW: FilesStore selection/bufferSelection are filesList
+    // FilesStore selection/bufferSelection are filesList
     // view-model items (TItem) and the fallback is a spread of the selected
     // folder store; the erased casts keep the old JS values while this
     // getter keeps its raw-entity TSelection facade.

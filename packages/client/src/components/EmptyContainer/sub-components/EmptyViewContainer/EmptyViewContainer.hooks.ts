@@ -417,7 +417,7 @@ export const useOptions = (
       filterParam: FilesSelectorFilterTypes | FilterType | string,
       openRoot: boolean = true,
     ) => {
-      // FABLE5-REVIEW: type-only cast — this hook's signature also accepts a
+      // type-only cast — this hook's signature also accepts a
       // plain string; every actual caller passes a FilesSelectorFilterTypes /
       // FilterType value, which is what the store expects.
       setSelectFileFormRoomDialogVisible?.(
@@ -489,7 +489,7 @@ export const useOptions = (
   const createAndCopySharedLink = useCallback(() => {
     if (!selectedFolder) return;
 
-    // FABLE5-REVIEW: TSelectedFolder (id: number | null) is consumed by the
+    // TSelectedFolder (id: number | null) is consumed by the
     // ContextOptionsStore item view-model type — the cast keeps the original
     // unchecked call from the .js era.
     onCreateAndCopySharedLink?.(

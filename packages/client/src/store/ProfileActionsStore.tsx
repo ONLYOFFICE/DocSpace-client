@@ -85,8 +85,6 @@ import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 import AccountsFilter from "@docspace/shared/api/people/filter";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-// FABLE5-REVIEW: TariffBar (SRC_DIR/components/TariffBar/index.js) is still
-// .js — untyped component import; remove this note once it is converted.
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { PEOPLE_ROUTE_WITH_FILTER } from "SRC_DIR/helpers/contacts";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
@@ -124,7 +122,7 @@ type TProfileActionType = Omit<ContextMenuType, "items"> & {
 
 type TProfileAction = TProfileActionType | SeparatorType;
 
-// FABLE5-REVIEW: TariffBar is still .js — its inject()-inferred props are
+// TariffBar is still .js — its inject()-inferred props are
 // spuriously required, so the prop-less `<TariffBar />` usage from the old JS
 // only typechecks through this type-only alias (same component at runtime).
 const TariffBarElement = TariffBar as unknown as ComponentType;
@@ -386,7 +384,7 @@ class ProfileActionsStore {
     const isAdmin = this.authStore.isAdmin;
     const isCommunity = this.currentTariffStatusStore.isCommunity;
     const isNotPaidPeriod = this.currentTariffStatusStore.isNotPaidPeriod;
-    // FABLE5-REVIEW: userStore.user is TUser | null; the old JS destructuring
+    // userStore.user is TUser | null; the old JS destructuring
     // crashed here when user was null — the `!` keeps that runtime unchanged.
     const { isVisitor, isCollaborator } = this.userStore.user!;
 
@@ -627,7 +625,7 @@ class ProfileActionsStore {
       enablePlugins
     ) {
       this.pluginStore.profileMenuItemsList.forEach((option) => {
-        // FABLE5-REVIEW: the plugin SDK's IProfileMenuItem has no `position`
+        // the plugin SDK's IProfileMenuItem has no `position`
         // field; the old JS read option.value.position (undefined unless a
         // plugin supplies it — Array.prototype.splice coerces undefined to 0).
         // The cast keeps that runtime behavior unchanged.
@@ -645,7 +643,7 @@ class ProfileActionsStore {
       });
     }
 
-    // FABLE5-REVIEW: the returned items carry extra DropDownItem-only fields
+    // the returned items carry extra DropDownItem-only fields
     // (additionalElement, isButton, isPortal) and `items` may be null, which
     // ContextMenuType does not model — the cast preserves the old JS contract
     // expected by ArticleProfileProps.getActions.

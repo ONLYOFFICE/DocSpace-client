@@ -40,9 +40,6 @@ import { suspendAutoLock } from "@docspace/shared/services/encryption/secret-sto
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { ItemUploadContext } from "@docspace/shared/services/private-room/encrypted-upload";
 
-// FABLE5-REVIEW: upload items get their `file` from still-.js callers
-// (FilesActionsStore drag&drop, GlobalEvents); the extra members on the DOM
-// File object are a structural guess from the usage in this store.
 export type TUploadBrowserFile = File & {
   parentFolderId?: number | string;
   encrypted?: boolean;
@@ -76,8 +73,6 @@ export type TUploadFile = {
   index?: number;
 };
 
-// FABLE5-REVIEW: getFileConversationProgress is untyped in shared/api
-// (raw request); shape observed from the usage in this store.
 export type TConversionProgress = {
   progress?: number;
   result?: TFile | "password" | null;
@@ -147,7 +142,7 @@ export const releaseUploadAutoLockSuspension = () => {
 export const getConversationProgress = async (fileId: number | null) => {
   const promise = new Promise<TConversionProgress[]>((resolve, reject) => {
     setTimeout(() => {
-      // FABLE5-REVIEW: getFileConversationProgress is untyped in shared/api;
+      // getFileConversationProgress is untyped in shared/api;
       // fileId is only null before the upload session has assigned one.
       (
         getFileConversationProgress(fileId as number) as Promise<

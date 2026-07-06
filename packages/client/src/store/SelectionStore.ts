@@ -46,9 +46,6 @@ class SelectionStore {
 
   settingsSetupStore: SettingsSetupStore;
 
-  // FABLE5-REVIEW: peopleStore is never assigned anywhere — selectAll and
-  // selectByStatus would throw if called (no callers found in the repo).
-  // `declare` keeps the historical runtime shape (no own property).
   declare peopleStore?: { usersStore: { peopleList: TUser[] } };
 
   constructor(settingsSetupStore: SettingsSetupStore) {

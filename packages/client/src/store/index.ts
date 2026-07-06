@@ -268,7 +268,7 @@ const uploadDataStore = new UploadDataStore(
   userStore,
 );
 
-// FABLE5-REVIEW: FilesActionsStore/ContextOptionsStore/HotkeyStore still
+// FilesActionsStore/ContextOptionsStore/HotkeyStore still
 // describe FilesStore/FilesActionsStore through hand-written structural types
 // (their internal member signatures predate the real .ts conversions).
 // The casts below are type-only; unifying the signatures is Track C work.

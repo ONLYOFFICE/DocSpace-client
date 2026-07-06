@@ -53,7 +53,7 @@ import type { TPeopleListItem } from "SRC_DIR/helpers/contacts";
 
 import type SelectedFolderStore from "./SelectedFolderStore";
 
-// FABLE5-REVIEW: `userStore` and `currentQuotaStore` are declared `private`
+// `userStore` and `currentQuotaStore` are declared `private`
 // in the shared AuthStore class, but the original .js code reached into them
 // externally (this.authStore.userStore.user, this.authStore.currentQuotaStore).
 // This structural type mirrors that runtime access; replace with
@@ -82,9 +82,6 @@ class AccessRightsStore {
 
   selectedFolderStore: SelectedFolderStore = null!;
 
-  // FABLE5-REVIEW: `treeFoldersStore` is never assigned (the constructor takes
-  // only three deps) and never read — it stays `null` forever. Kept as-is for
-  // a types-only conversion; candidate for removal.
   treeFoldersStore: null = null;
 
   constructor(
@@ -122,7 +119,7 @@ class AccessRightsStore {
   };
 
   canSubmitToFormGallery = () => {
-    // FABLE5-REVIEW: `user` is `TUser | null`; the original .js dereferenced it
+    // `user` is `TUser | null`; the original .js dereferenced it
     // unconditionally (would throw if null), so `!` preserves that runtime.
     // Same applies to every `.user!` below.
     const { isVisitor } = this.userStore.user!;

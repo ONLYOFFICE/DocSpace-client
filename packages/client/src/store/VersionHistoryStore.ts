@@ -46,8 +46,6 @@ import {
 
 import type FilesActionsStore from "./FilesActionsStore";
 
-// FABLE5-REVIEW: FilesStore is still .js (wave 3) — replace this structural
-// type with `import type` once it is converted.
 type TFilesStore = {
   files: TFile[];
   setFile: (file: TFile) => void;
@@ -92,7 +90,7 @@ class VersionHistoryStore {
   // intentionally NOT observable.
   declare filesActionsStore: TFilesActionsStore;
 
-  // FABLE5-REVIEW: `this.files` is referenced in the StopEditFile socket
+  // `this.files` is referenced in the StopEditFile socket
   // handler below but is never assigned anywhere in this store — most likely
   // it should be `this.versions`. Declared (not initialized) to keep the
   // runtime shape identical: no own property, `undefined` at access time.
@@ -114,7 +112,7 @@ class VersionHistoryStore {
       SocketHelper?.on(SocketEvents.StartEditFile, (data) => {
         const fileId = typeof data === "object" ? data.fileId : data;
         // console.log(`VERSION STORE Call s:start-edit-file (id=${fileId})`);
-        // FABLE5-REVIEW: `this.versions` may be null by the time the socket
+        // `this.versions` may be null by the time the socket
         // event fires — the original .js would throw here as well; `!` keeps
         // that runtime unchanged.
         const verIndex = this.versions!.findIndex((x) => x.id == fileId);
@@ -126,7 +124,7 @@ class VersionHistoryStore {
       SocketHelper?.on(SocketEvents.StopEditFile, (data) => {
         const fileId = typeof data === "object" ? data.fileId : data;
         // console.log(`VERSION STORE Call s:stop-edit-file (id=${fileId})`);
-        // FABLE5-REVIEW: `this.files` is always undefined (see field note
+        // `this.files` is always undefined (see field note
         // above) — the original .js would throw here as well.
         const verIndex = this.files!.findIndex((x) => x.id === fileId);
         if (verIndex == -1) return;
@@ -202,7 +200,7 @@ class VersionHistoryStore {
     //   versions[versions.length - currentVersionGroup].comment;
 
     const newFile = {
-      // FABLE5-REVIEW: `file` may be undefined (e.g. on the standalone
+      // `file` may be undefined (e.g. on the standalone
       // version-history page where filesStore is not initialized — see the
       // TODO in the constructor). The original .js spread undefined the same
       // way, producing a partial file object; the cast keeps that runtime.
@@ -239,8 +237,6 @@ class VersionHistoryStore {
   };
 
   markAsVersion = (id: number, isVersion: boolean, version: number) => {
-    // FABLE5-REVIEW: markAsVersion is untyped in shared/api (bare
-    // `request(...)`), cast until it gets a proper return type.
     return (
       api.files.markAsVersion(id, isVersion, version) as Promise<TFile[]>
     ).then((versions) => this.setVerHistoryFileVersions(versions));
@@ -254,7 +250,7 @@ class VersionHistoryStore {
     return api.files
       .versionRestore(id, version)
       .then((newVersion) => {
-        // FABLE5-REVIEW: `this.versions` may be null here; the original .js
+        // `this.versions` may be null here; the original .js
         // would throw the same way (caught by the .catch below).
         const updatedVersions = this.versions!.slice();
         updatedVersions.unshift(newVersion);
@@ -278,7 +274,7 @@ class VersionHistoryStore {
     return api.files
       .versionEditComment(id, comment, version)
       .then((updatedComment) => {
-        // FABLE5-REVIEW: `this.versions` may be null here; the original .js
+        // `this.versions` may be null here; the original .js
         // would throw the same way.
         const copyVersions = this.versions!.slice();
         const updatedVersions = copyVersions.map((item) => {

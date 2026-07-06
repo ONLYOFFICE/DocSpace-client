@@ -109,7 +109,7 @@ export default class FilesHeaderOptionStore {
   private unarchiveHandle = () =>
     this.filesActionsStore.archiveRooms("unarchive");
 
-  // FABLE5-REVIEW: FilesStore.selection holds filesList view-model items
+  // FilesStore.selection holds filesList view-model items
   // (TItem); FilesActionsStore still types its inputs with its own minimal
   // TActionItem — the erased casts below adapt between the two (type-only)
   // until FilesActionsStore is rewired to the real FilesStore types.

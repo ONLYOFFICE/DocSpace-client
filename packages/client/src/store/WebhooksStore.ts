@@ -52,8 +52,6 @@ import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { TTranslation } from "@docspace/shared/types";
 import type { DateTime } from "luxon";
 
-// FABLE5-REVIEW: the webhook API in shared/api/settings is untyped — these
-// shapes are inferred from server responses and component usage.
 export type TWebhook = {
   id: number;
   name: string;
@@ -318,7 +316,7 @@ class WebhooksStore {
   };
 
   clearDate = () => {
-    // FABLE5-REVIEW: historically spread a possibly-null historyFilters;
+    // historically spread a possibly-null historyFilters;
     // non-null assertions keep the same runtime shape.
     this.historyFilters = { ...this.historyFilters!, deliveryDate: null };
   };

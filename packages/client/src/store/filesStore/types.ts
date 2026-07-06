@@ -63,7 +63,7 @@ import type {
 } from "@docspace/shared/api/rooms/types";
 import type { TLogo } from "@docspace/ui-kit/types";
 
-// FABLE5-REVIEW: `pdfViewer` exists in public/scripts/config.json but is
+// `pdfViewer` exists in public/scripts/config.json but is
 // missing from the duplicated Window.ClientConfig declarations
 // (packages/shared/types/index.ts and the libs/ui-kit submodule); both must
 // be updated in sync (TS2717) and ui-kit is a separate submodule, so a local
@@ -72,7 +72,7 @@ export type TClientConfigWithPdfViewer = NonNullable<Window["ClientConfig"]> & {
   pdfViewer?: boolean;
 };
 
-// FABLE5-REVIEW: FilesStore.js reads `security.security?.X` in the AI
+// FilesStore.js reads `security.security?.X` in the AI
 // knowledge/result branch of fetchFiles — the nested member never exists at
 // runtime (always undefined); it is typed here so the read stays legal
 // without call-site casts. Candidate for cleanup.
@@ -82,7 +82,7 @@ export type TItemSecurity = Partial<
   security?: Partial<TFileSecurity & TFolderSecurity & TRoomSecurity>;
 };
 
-// FABLE5-REVIEW: this store mixes three API entity families (files,
+// this store mixes three API entity families (files,
 // folders, rooms) and its own filesList view-models in the same collections.
 // TItem is an explicit structural merge of those shapes (every member
 // optional, conflicting `security` widened to TItemSecurity) plus the
@@ -232,7 +232,7 @@ export type TCreatedItem = Nullable<{
   type?: string;
 }>;
 
-// FABLE5-REVIEW: FillingFormsRoom/ReviewRoom/ReadOnlyRoom were removed from
+// FillingFormsRoom/ReviewRoom/ReadOnlyRoom were removed from
 // the ui-kit RoomsType enum ("TODO: Restore when certs will be done") — the
 // lookups below evaluate to undefined at runtime (producing "room-undefined"
 // switch keys), preserved verbatim via this cast type.
@@ -242,7 +242,7 @@ export type TRemovedRoomsTypes = {
   ReadOnlyRoom?: RoomsType;
 };
 
-// FABLE5-REVIEW: window.DocSpace.location.state is `unknown` in the shared
+// window.DocSpace.location.state is `unknown` in the shared
 // Window declaration; only the members read by this store are asserted.
 export type THighlightState = {
   highlightFileId?: number | string;

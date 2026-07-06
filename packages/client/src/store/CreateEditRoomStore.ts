@@ -722,7 +722,7 @@ class CreateEditRoomStore {
               ? [bufferSelection]
               : [];
 
-        // FABLE5-REVIEW: selections are FilesStore view-model items (TItem);
+        // selections are FilesStore view-model items (TItem);
         // FilesActionsStore still types this input with its own minimal
         // TActionItem — erased cast (type-only).
         preparingDataForCopyingToRoom(

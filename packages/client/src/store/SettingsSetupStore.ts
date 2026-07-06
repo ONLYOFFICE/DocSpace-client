@@ -72,18 +72,12 @@ export type TSmtpSettingsValues = {
   senderDisplayName: string;
 };
 
-// FABLE5-REVIEW: getSMTPSettings / resetSMTPSettings are untyped in
-// shared/api; the response mirrors the settings fields (possibly null) plus
-// an isDefaultSettings flag.
 export type TSmtpSettingsResult = {
   [K in keyof TSmtpSettingsValues]?: TSmtpSettingsValues[K] | null;
 } & { isDefaultSettings?: boolean };
 
 type TSmtpSettingsValue = string | boolean;
 
-// FABLE5-REVIEW: getLoginHistory / getAuditTrail are untyped in shared/api;
-// the fields are the ones rendered by the login-history and audit-trail
-// views.
 export type TAuditEvent = {
   id: number;
   date: string;
@@ -92,16 +86,11 @@ export type TAuditEvent = {
   context?: string;
 };
 
-// FABLE5-REVIEW: getLifetimeAuditSettings is untyped in shared/api, and the
-// shared setLifetimeAuditSettings is typed as TCookieSettings while the
-// actual payload used here is { loginHistoryLifeTime, auditTrailLifeTime }.
 export type TAuditLifetimeSettings = {
   loginHistoryLifeTime?: string;
   auditTrailLifeTime?: string;
 };
 
-// FABLE5-REVIEW: getAllActiveSessions is untyped in shared/api; the item
-// shape follows the /security/activeconnections response.
 export type TActiveSession = {
   id: number;
   platform: string;
@@ -121,8 +110,6 @@ type TActiveSessionsResponse = {
   loginEvent: number;
 };
 
-// FABLE5-REVIEW: api.settings.getCommonThirdPartyList no longer exists in
-// shared/api/settings, so only the locally assigned `key` field is knowable.
 export type TCommonThirdParty = {
   key?: string;
 };
@@ -152,8 +139,6 @@ class SettingsSetupStore {
 
   security: {
     accessRight: {
-      // FABLE5-REVIEW: no callers of setOptions were found, so the option
-      // shape is unknowable.
       options: unknown[];
       users: TUser[];
       admins: TUser[];
@@ -190,8 +175,6 @@ class SettingsSetupStore {
     trailReport: [],
   };
 
-  // FABLE5-REVIEW: no callers of setAddUsers / setRemoveAdmins were found;
-  // the initial values are empty strings while the setters store callbacks.
   headerAction: {
     addUsers: string | VoidFunction;
     removeAdmins: string | VoidFunction;
@@ -354,7 +337,7 @@ class SettingsSetupStore {
 
     const storeSettings = this.integration.smtpSettings.settings;
 
-    // FABLE5-REVIEW: the original .js assigns isDefaultSettings even when
+    // the original .js assigns isDefaultSettings even when
     // the server omits it; `!` keeps the identical assignment.
     this.integration.smtpSettings.isDefaultSettings = isDefaultSettings!;
 
@@ -400,7 +383,7 @@ class SettingsSetupStore {
   };
 
   resetSMTPSettings = async () => {
-    // FABLE5-REVIEW: shared resetSMTPSettings() is declared with no
+    // shared resetSMTPSettings() is declared with no
     // parameters; the legacy call passes the current settings (ignored at
     // runtime) — preserved via cast.
     const result = await (
@@ -437,7 +420,7 @@ class SettingsSetupStore {
     const password =
       this.integration.smtpSettings.settings.credentialsUserPassword;
 
-    // FABLE5-REVIEW: setSMTPSettings is untyped in shared/api and may return
+    // setSMTPSettings is untyped in shared/api and may return
     // undefined; `!` keeps the original unguarded .then chain.
     return setSMTPSettings(this.integration.smtpSettings.settings)!.then(
       (result) => {
@@ -542,7 +525,6 @@ class SettingsSetupStore {
       filterData = Filter.getDefault();
     }
 
-    // FABLE5-REVIEW: api.people.getListAdmins is untyped in shared/api
     const admins = (await api.people.getListAdmins(filterData)) as {
       items: TUser[];
       total: number;
@@ -561,7 +543,6 @@ class SettingsSetupStore {
     if (!filterData) {
       filterData = Filter.getDefault();
     }
-    // FABLE5-REVIEW: api.people.getListAdmins is untyped in shared/api
     const admins = (await api.people.getListAdmins(filterData)) as {
       items: TUser[];
       total: number;
@@ -593,7 +574,7 @@ class SettingsSetupStore {
   };
 
   setDNSSettings = async (dnsName: string, enable: boolean) => {
-    // FABLE5-REVIEW: shared setMailDomainSettings takes a single
+    // shared setMailDomainSettings takes a single
     // TMailDomainSettings argument; the legacy call passes (dnsName, enable)
     // where the second argument is ignored at runtime — preserved via cast.
     const res = await (
@@ -610,8 +591,6 @@ class SettingsSetupStore {
     this.settingsStore.addAbortControllers(abortController);
 
     try {
-      // FABLE5-REVIEW: api.settings.getLifetimeAuditSettings is untyped in
-      // shared/api
       const res = (await api.settings.getLifetimeAuditSettings(
         data,
         abortController.signal,
@@ -624,7 +603,7 @@ class SettingsSetupStore {
   };
 
   setLifetimeAuditSettings = async (data: TAuditLifetimeSettings) => {
-    // FABLE5-REVIEW: shared setLifetimeAuditSettings is typed as
+    // shared setLifetimeAuditSettings is typed as
     // TCookieSettings, but the payload passed here is
     // { loginHistoryLifeTime, auditTrailLifeTime } — preserved via cast.
     await api.settings.setLifetimeAuditSettings(
@@ -650,7 +629,6 @@ class SettingsSetupStore {
     this.settingsStore.addAbortControllers(abortController);
 
     try {
-      // FABLE5-REVIEW: api.settings.getLoginHistory is untyped in shared/api
       const res = (await api.settings.getLoginHistory(
         abortController.signal,
       )) as TAuditEvent[];
@@ -666,7 +644,6 @@ class SettingsSetupStore {
     this.settingsStore.addAbortControllers(abortController);
 
     try {
-      // FABLE5-REVIEW: api.settings.getAuditTrail is untyped in shared/api
       const res = (await api.settings.getAuditTrail(
         abortController.signal,
       )) as TAuditEvent[];
@@ -681,8 +658,6 @@ class SettingsSetupStore {
     const { openOnNewPage } = this.filesSettingsStore;
 
     try {
-      // FABLE5-REVIEW: api.settings.getLoginHistoryReport is untyped in
-      // shared/api; it resolves to the report file URL.
       const res = (await api.settings.getLoginHistoryReport()) as string;
       setTimeout(
         () => window.open(res, openOnNewPage ? "_blank" : "_self"),
@@ -699,8 +674,6 @@ class SettingsSetupStore {
     const { openOnNewPage } = this.filesSettingsStore;
     try {
       this.setIsLoadingDownloadReport(true);
-      // FABLE5-REVIEW: api.settings.getAuditTrailReport is untyped in
-      // shared/api; it resolves to the report file URL.
       const res = (await api.settings.getAuditTrailReport()) as string;
       setTimeout(
         () => window.open(res, openOnNewPage ? "_blank" : "_self"),
@@ -760,8 +733,6 @@ class SettingsSetupStore {
       const abortController = new AbortController();
       this.settingsStore.addAbortControllers(abortController);
 
-      // FABLE5-REVIEW: api.settings.getConsumersList is untyped in
-      // shared/api
       const res = (await api.settings.getConsumersList(
         abortController.signal,
       )) as SelectedConsumer[];
@@ -781,8 +752,6 @@ class SettingsSetupStore {
     this.settingsStore.addAbortControllers(abortController);
 
     try {
-      // FABLE5-REVIEW: api.settings.getConsumersList is untyped in
-      // shared/api
       const res = (await api.settings.getConsumersList(
         abortController.signal,
       )) as SelectedConsumer[];
@@ -848,7 +817,7 @@ class SettingsSetupStore {
   };
 
   getCommonThirdPartyList = async () => {
-    // FABLE5-REVIEW: api.settings.getCommonThirdPartyList no longer exists
+    // api.settings.getCommonThirdPartyList no longer exists
     // in shared/api/settings — this call would throw at runtime (the
     // original .js behaves the same); preserved via cast.
     const res = await (
@@ -861,14 +830,10 @@ class SettingsSetupStore {
   };
 
   getAllSessions = () => {
-    // FABLE5-REVIEW: api.settings.getAllActiveSessions is untyped in
-    // shared/api
     return api.settings.getAllActiveSessions() as Promise<TActiveSessionsResponse>;
   };
 
   removeAllSessions = () => {
-    // FABLE5-REVIEW: api.settings.removeAllActiveSessions is untyped in
-    // shared/api; it resolves to the redirect URL.
     return api.settings.removeAllActiveSessions() as Promise<string>;
   };
 

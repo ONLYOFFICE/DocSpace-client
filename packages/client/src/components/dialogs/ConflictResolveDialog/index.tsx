@@ -183,7 +183,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     onClosePanels();
     try {
       if (fromShareCollectSelector) {
-        // FABLE5-REVIEW: type-only cast — openFileAction takes the .js
+        // type-only cast — openFileAction takes the .js
         // view-model item type; TFolder is structurally compatible at runtime.
         openFileAction(
           selectedFolder as unknown as Parameters<typeof openFileAction>[0],

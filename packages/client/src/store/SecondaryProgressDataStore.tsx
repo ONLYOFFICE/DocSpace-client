@@ -47,8 +47,6 @@ import { makeAutoObservable } from "mobx";
 import { Trans } from "react-i18next";
 
 import { createFolderNavigation } from "SRC_DIR/helpers/createFolderNavigation";
-// FABLE5-REVIEW: filesUtils is still .js — no types for
-// getOperationsProgressTitle until it is converted.
 import { getOperationsProgressTitle } from "SRC_DIR/helpers/filesUtils";
 
 import i18n from "../i18n";
@@ -159,7 +157,7 @@ class SecondaryProgressDataStore {
 
       if (typeof errorMessage === "string") return errorMessage;
 
-      // FABLE5-REVIEW: the old JS threw here when `error` was nullish and
+      // the old JS threw here when `error` was nullish and
       // isSuccess=false; the non-null assertions keep that runtime unchanged.
       if (errorMessage!.message) return errorMessage?.message;
 
@@ -170,7 +168,7 @@ class SecondaryProgressDataStore {
       return;
     }
 
-    // FABLE5-REVIEW: the Trans `t` prop requires a branded i18next TFunction;
+    // the Trans `t` prop requires a branded i18next TFunction;
     // this wrapper only injects default namespaces, so the cast is safe.
     const t = ((key: string, options?: Record<string, unknown>) =>
       i18n.t(key, { ...options, ns: ["Files", "Common"] })) as TTranslation &
@@ -179,7 +177,7 @@ class SecondaryProgressDataStore {
 
     let toastTranslation: ReactNode = "";
 
-    // FABLE5-REVIEW: createFolderNavigation is still .js — the cast mirrors
+    // createFolderNavigation is still .js — the cast mirrors
     // its real signature (trailing params are unused here, exactly as before).
     const { url, state } = await (
       createFolderNavigation as unknown as (
@@ -558,7 +556,7 @@ class SecondaryProgressDataStore {
     item: TSecondaryProgressInfo,
   ) => {
     try {
-      // FABLE5-REVIEW: both call sites guard on item.serverOperationId before
+      // both call sites guard on item.serverOperationId before
       // calling; the assertion keeps the unguarded runtime call identical.
       await terminateOperation(item.serverOperationId!);
       this.setSecondaryProgressBarData({

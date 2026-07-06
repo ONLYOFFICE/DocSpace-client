@@ -111,12 +111,10 @@ class AvatarEditorDialogStore {
 
   getUploadedLogoData = async () => {
     const uploadLogoData = new FormData();
-    // FABLE5-REVIEW: historically append(0, file) relied on JS coercion of
+    // historically append(0, file) relied on JS coercion of
     // both arguments; uploadedFile is guarded non-null by the only caller.
     uploadLogoData.append("0", this.uploadedFile as File);
 
-    // FABLE5-REVIEW: uploadRoomLogo is untyped in shared/api — cast until
-    // the api layer is typed.
     const responseData = (await api.rooms.uploadRoomLogo(uploadLogoData)) as {
       data: string;
     };

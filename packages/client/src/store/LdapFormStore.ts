@@ -21,12 +21,6 @@ import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStor
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { TTranslation } from "@docspace/shared/types";
 
-// FABLE5-REVIEW: the LDAP endpoints in shared/api/settings (getLdapSettings,
-// getLdapDefaultSettings, getLdapStatus, syncLdap, saveLdapSettings,
-// getCronLdap, saveCronLdap) are untyped (`request(options)` without a
-// generic), so responses are cast at the call sites to the local types below.
-// Move these types to shared/api/settings/types.ts once the API is typed.
-
 type TLdapMapping = {
   FirstNameAttribute: string;
   SecondNameAttribute: string;
@@ -780,7 +774,7 @@ class LdapFormStore {
 
     if (
       status.error ||
-      // FABLE5-REVIEW: lowercase `requested` does not exist on the parsed
+      // lowercase `requested` does not exist on the parsed
       // certificateConfirmRequest (server sends PascalCase `Requested`) and
       // the raw value may still be a JSON string here — kept as-is to
       // preserve runtime behavior (evaluates to undefined, as in the old JS).
@@ -918,7 +912,7 @@ class LdapFormStore {
   }
 
   get isUIDisabled() {
-    // FABLE5-REVIEW: currentQuotaStore is assigned in the constructor and is
+    // currentQuotaStore is assigned in the constructor and is
     // never null in practice; `!` preserves the old JS behavior (which would
     // also have thrown on null).
     return this.inProgress || !this.currentQuotaStore!.isLdapAvailable;

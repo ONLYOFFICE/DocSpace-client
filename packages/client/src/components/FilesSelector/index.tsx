@@ -742,7 +742,7 @@ export default inject(
     const { isVisible: infoPanelIsVisible, infoPanelSelection } =
       infoPanelStore;
 
-    // FABLE5-REVIEW: FilesStore selection/filesList entries are view-model
+    // FilesStore selection/filesList entries are view-model
     // items (TItem); the erased cast keeps this component's raw-entity
     // annotation unchanged (type-only).
     const selections: (TFile | TFolder | TRoom) & { isEditing: boolean }[] = (

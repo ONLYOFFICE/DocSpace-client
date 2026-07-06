@@ -154,7 +154,6 @@ class CommonStore {
     this.settingsStore.addAbortControllers(abortController);
 
     try {
-      // FABLE5-REVIEW: getGreetingSettingsIsDefault is untyped in shared/api
       const isDefault = (await api.settings.getGreetingSettingsIsDefault(
         abortController.signal,
       )) as boolean;
@@ -294,7 +293,6 @@ class CommonStore {
     this.settingsStore.addAbortControllers(abortController);
 
     try {
-      // FABLE5-REVIEW: getDeepLinkSettings is untyped in shared/api
       const res = (await api.settings.getDeepLinkSettings(
         abortController.signal,
       )) as { handlingMode: number } | undefined;

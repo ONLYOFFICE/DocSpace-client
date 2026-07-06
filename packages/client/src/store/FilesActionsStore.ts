@@ -191,11 +191,6 @@ type TOperationName = (typeof OPERATIONS_NAME)[keyof typeof OPERATIONS_NAME];
 
 type TItemSecurity = Partial<TFileSecurity & TFolderSecurity & TRoomSecurity>;
 
-// FABLE5-REVIEW: items handled by this store are FilesStore filesList
-// view-models and FilesStore is still .js (wave 3) — this is a minimal
-// structural type of the members used in this store. TFile/TFolder/TRoom
-// from typed consumers are assignable to it. Replace with the real
-// list-item type once FilesStore is converted.
 export type TActionItem = {
   id: number;
   title: string;
@@ -237,9 +232,6 @@ export type TActionItem = {
   webUrl?: string;
 };
 
-// FABLE5-REVIEW: translation bundles come from still-.js callers
-// (files-related dialogs/components); only the keys read in this store are
-// declared.
 type TDeleteTranslations = { deleteFromTrash: string };
 type TSuccessTranslations = { successOperation: string };
 type TDownloadTranslations = {
@@ -253,9 +245,6 @@ type TRemoveTranslations = {
   successRemoveRooms?: string;
 };
 
-// FABLE5-REVIEW: startEmptyPersonal/getEmptyPersonalProgress are cast to
-// TOperation[] in shared/api/people, but this store consumes a single
-// progress object with percentage/isCompleted (shape observed from usage).
 type TEmptyPersonalProgress = {
   error?: unknown;
   percentage?: number;
@@ -272,7 +261,7 @@ type THeaderMenuOption = ReturnType<FilesHeaderOptionStore["getOption"]>;
 
 type TItemsCollection = Map<string, THeaderMenuOption | object>;
 
-// FABLE5-REVIEW: the operation payload forwarded to
+// the operation payload forwarded to
 // UploadDataStore.itemOperationToFolder; folderTitle/isAI are extra fields
 // carried along for still-.js consumers (ConflictResolveDialog reads them
 // from dialogsStore).
@@ -291,9 +280,6 @@ type TOperationDataPayload = {
   isFolder?: boolean;
 };
 
-// FABLE5-REVIEW: FilesStore is still .js (wave 3) — minimal structural type
-// of the members used in this store; replace with `import type FilesStore`
-// once it is converted.
 type TFilesStore = {
   files: TActionItem[];
   folders: TActionItem[];
@@ -432,13 +418,13 @@ class FilesActionStore {
 
   filesHeaderOptionStore: FilesHeaderOptionStore;
 
-  // FABLE5-REVIEW: unlike the other stores, pluginStore had no class-field
+  // unlike the other stores, pluginStore had no class-field
   // declaration in the old JS (it was created by the constructor assignment
   // after makeAutoObservable, so it is not observable). `declare` keeps that
   // runtime shape.
   declare pluginStore: PluginStore;
 
-  // FABLE5-REVIEW: the next three fields are initialized to null before the
+  // the next three fields are initialized to null before the
   // constructor always assigns them; typed as the assigned store (with an
   // erased cast on the initializer) so the many unguarded accesses below
   // keep the exact old JS behavior.
@@ -503,9 +489,6 @@ class FilesActionStore {
     this.versionHistoryStore = versionHistoryStore;
     this.aiRoomStore = aiRoomStore;
 
-    // FABLE5-REVIEW: FilesHeaderOptionStore types filesStore via the .js
-    // inferred FilesStore class; this store only has the minimal structural
-    // TFilesStore until FilesStore is converted.
     this.filesHeaderOptionStore = new FilesHeaderOptionStore(
       this,
       this.filesStore as unknown as ConstructorParameters<
@@ -521,7 +504,7 @@ class FilesActionStore {
   updateCurrentFolder = async (
     clearSelection?: boolean | null,
     operationId?: string,
-    // FABLE5-REVIEW: some callers (onLeaveRoom, reorderIndexOfFiles) omit
+    // some callers (onLeaveRoom, reorderIndexOfFiles) omit
     // `operation`; the old JS forwarded undefined into the progress-bar
     // payload, the cast below keeps that behavior.
     operation?: TOperationName,
@@ -670,7 +653,7 @@ class FilesActionStore {
     };
 
     if (roomFolder && roomFolder.quotaLimit && roomFolder.quotaLimit !== -1) {
-      // FABLE5-REVIEW: usedSpace is optional on the folder snapshot; the old
+      // usedSpace is optional on the folder snapshot; the old
       // JS did unchecked arithmetic here.
       const freeSpace = roomFolder.quotaLimit - roomFolder.usedSpace!;
 
@@ -843,7 +826,7 @@ class FilesActionStore {
 
             const showToast = () => {
               if (isRecycleBinFolder) {
-                // FABLE5-REVIEW: `translations` may be null when called from
+                // `translations` may be null when called from
                 // runOperations; the old JS would throw here in that case
                 // (trash-only path), the `!` keeps that behavior.
                 return toastr.success(translations!.deleteFromTrash);
@@ -999,9 +982,6 @@ class FilesActionStore {
     });
 
     try {
-      // FABLE5-REVIEW: startEmptyPersonal/getEmptyPersonalProgress are cast
-      // to TOperation[] in shared/api/people, but the server returns a single
-      // progress object (see TEmptyPersonalProgress above).
       await (
         startEmptyPersonal() as unknown as Promise<
           TEmptyPersonalProgress | undefined
@@ -1120,7 +1100,7 @@ class FilesActionStore {
   downloadFiles = async (
     fileConvertIds: (number | TFileConvertId)[],
     folderIds: number[],
-    // FABLE5-REVIEW: downloadAction forwards its `label` string here as
+    // downloadAction forwards its `label` string here as
     // `translations`; destructuring a string yields undefined for both keys,
     // exactly as the old JS did.
     translations: TDownloadTranslations | string,
@@ -1159,7 +1139,7 @@ class FilesActionStore {
     const shareKey = this.publicRoomStore.publicRoomKey;
 
     try {
-      // FABLE5-REVIEW: the shared downloadFiles declares shareKey as a
+      // the shared downloadFiles declares shareKey as a
       // required string, but it is null outside of public rooms (the old JS
       // passed null; the API helper only appends it when truthy).
       await downloadFiles(
@@ -1192,7 +1172,7 @@ class FilesActionStore {
 
           const isCanceled = item?.status === FileOperationStatus.Canceled;
 
-          // FABLE5-REVIEW: loopFilesOperations may resolve to undefined; the
+          // loopFilesOperations may resolve to undefined; the
           // old JS crashed here in that case, the `!` keeps that behavior.
           if (item!.url) {
             openUrl(item!.url, UrlActionType.Download, true);
@@ -1276,7 +1256,7 @@ class FilesActionStore {
 
     const downloadAsArchive = id === item?.id && isFolder === item?.isFolder;
 
-    // FABLE5-REVIEW: with no selection at all the old JS crashed on
+    // with no selection at all the old JS crashed on
     // `null.length` below; the erased cast keeps that behavior.
     const selection = (
       item
@@ -1388,7 +1368,7 @@ class FilesActionStore {
         operationId,
       });
 
-      // FABLE5-REVIEW: viewUrl is optional on the .js view-model; the old JS
+      // viewUrl is optional on the .js view-model; the old JS
       // passed it through unchecked (fetch would fail at runtime), the `!`
       // keeps that behavior.
       const result = await downloadAndDecryptFile({
@@ -1524,7 +1504,7 @@ class FilesActionStore {
             roomMemberKeysCache.set(String(roomId), roomMemberKeys);
           }
 
-          // FABLE5-REVIEW: viewUrl is optional on the .js view-model; the
+          // viewUrl is optional on the .js view-model; the
           // old JS passed it through unchecked, the `!` keeps that behavior.
           const result = await downloadAndDecryptFileToBuffer({
             downloadUrl: file.viewUrl!,
@@ -1781,7 +1761,7 @@ class FilesActionStore {
         (x) => x.id === itemId,
       )?.folderId;
       addActiveItems([itemId as number], null, destFolderId);
-      // FABLE5-REVIEW: the shared deleteFile declares deleteAfter/immediately
+      // the shared deleteFile declares deleteAfter/immediately
       // as required, but the old JS always called it with the id only
       // (undefined is sent as-is at runtime); the erased cast keeps the call
       // arity unchanged.
@@ -1871,7 +1851,7 @@ class FilesActionStore {
     }
 
     addActiveItems(null, [itemId as number], destFolderId);
-    // FABLE5-REVIEW: same as deleteFile above — the old JS calls deleteFolder
+    // same as deleteFile above — the old JS calls deleteFolder
     // with the id only; the erased cast keeps the call arity unchanged.
     return (
       deleteFolder as unknown as (folderId: number | number[]) => Promise<TOperation[]>
@@ -1918,8 +1898,6 @@ class FilesActionStore {
       timer = setTimeout(() => {
         this.filesStore.setActiveFiles([id]);
       }, 200);
-      // FABLE5-REVIEW: finalizeVersion is untyped in shared/api (raw
-      // request); the old JS reads the finalized file from res[0].
       await (finalizeVersion(id, 0, false) as Promise<TFile[] | undefined>).then(
         (res) => {
           if (res && res[0]) {
@@ -1971,7 +1949,7 @@ class FilesActionStore {
       title: item.title,
       isFolder: item.isFolder,
       operationIds: [item.id],
-      // FABLE5-REVIEW: destFolderInfo is typed as TFolder but the old JS
+      // destFolderInfo is typed as TFolder but the old JS
       // passes the selected-folder snapshot here; only navigation fields are
       // read downstream.
       destFolderInfo: selectedFolder as unknown as TFolder,
@@ -2081,7 +2059,7 @@ class FilesActionStore {
     for (const item of items) {
       try {
         const sourceRoomId = this.resolveRoomIdForFile(item);
-        // FABLE5-REVIEW: decryptEncryptedItemToFile declares viewUrl/roomId
+        // decryptEncryptedItemToFile declares viewUrl/roomId
         // as required, but the old JS passed the loose view-model and a
         // possibly-null room id through unchecked.
         const decryptedFile = await decryptEncryptedItemToFile(
@@ -2191,7 +2169,7 @@ class FilesActionStore {
     const treeIndex = treeFolders.findIndex((x) => x.id == rootFolderId);
     const count = treeFolders[treeIndex].newItems;
     if (treeIndex) {
-      // FABLE5-REVIEW: `new`/`newItems` are optional on the view-models; the
+      // `new`/`newItems` are optional on the view-models; the
       // old JS did unchecked arithmetic (NaN when missing), the erased casts
       // keep that behavior.
       if (muteStatus) {
@@ -2216,8 +2194,6 @@ class FilesActionStore {
       });
     }
 
-    // FABLE5-REVIEW: muteRoomNotification is untyped in shared/api/settings
-    // (@ts-nocheck file); the cast pins down the observed Promise result.
     (muteRoomNotification(id, muteStatus) as Promise<unknown>)
       .then(() =>
         toastr.success(
@@ -2248,7 +2224,7 @@ class FilesActionStore {
 
     const operationId = uniqueid("operation_");
 
-    // FABLE5-REVIEW: still-.js callers pass rooms or plain ids; the erased
+    // still-.js callers pass rooms or plain ids; the erased
     // cast mirrors the old JS.
     const items = (
       Array.isArray(folders)
@@ -2278,7 +2254,7 @@ class FilesActionStore {
     switch (action) {
       case "archive":
         this.setGroupMenuBlocked(true);
-        // FABLE5-REVIEW: the shared moveToFolder declares
+        // the shared moveToFolder declares
         // fileIds/conflictResolveType/deleteAfter as required, but the old JS
         // always called it with two args (undefined is sent as-is at
         // runtime); the erased cast keeps the call arity unchanged.
@@ -2373,7 +2349,7 @@ class FilesActionStore {
           });
       case "unarchive":
         this.setGroupMenuBlocked(true);
-        // FABLE5-REVIEW: same reduced call arity as the "archive" case above.
+        // same reduced call arity as the "archive" case above.
         return (
           moveToFolder as unknown as (
             destFolderId: number | string | undefined,
@@ -2387,7 +2363,7 @@ class FilesActionStore {
 
             const data = result ?? null;
 
-            // FABLE5-REVIEW: pbData never had a label; the old JS logged
+            // pbData never had a label; the old JS logged
             // undefined here.
             console.log((pbData as { label?: string }).label, { data, res });
 
@@ -2469,7 +2445,7 @@ class FilesActionStore {
         }
       }
 
-      // FABLE5-REVIEW: RoomsFilter declares type/provider as strings but the
+      // RoomsFilter declares type/provider as strings but the
       // old JS assigns the numeric tag ids directly; the erased casts keep
       // that behavior.
       if (tag.roomType) {
@@ -2573,7 +2549,7 @@ class FilesActionStore {
     const state = { title, rootFolderType, isRoot: false, isRoom };
     const filter = FilesFilter.getDefault();
 
-    // FABLE5-REVIEW: FilesFilter.folder is declared as a string but the old
+    // FilesFilter.folder is declared as a string but the old
     // JS assigns raw numeric ids; toUrlParams only serializes it.
     filter.folder = id as string;
 
@@ -2600,7 +2576,7 @@ class FilesActionStore {
     return nameWithoutExtensionHelper(title);
   };
 
-  // FABLE5-REVIEW: history feeds pass partial view-models here (old JS
+  // history feeds pass partial view-models here (old JS
   // duck typing).
   checkAndOpenLocationAction = async (
     item: Partial<Omit<TActionItem, "id">> & { id?: number | string },
@@ -2646,7 +2622,7 @@ class FilesActionStore {
 
     const newFilter = FilesFilter.getDefault();
 
-    // FABLE5-REVIEW: FilesFilter.folder is declared as a string but the old
+    // FilesFilter.folder is declared as a string but the old
     // JS assigns raw numeric ids; toUrlParams only serializes it.
     newFilter.search = title as string;
     newFilter.folder = parentId as unknown as string;
@@ -2656,7 +2632,7 @@ class FilesActionStore {
       const trashTarget = getSectionTrashTarget(
         window.DocSpace.location.pathname,
       );
-      // FABLE5-REVIEW: FilesFilter.folderType is a narrower literal union
+      // FilesFilter.folderType is a narrower literal union
       // than the article-navigation targets; the value is only serialized.
       newFilter.folderType =
         trashTarget.folderType as unknown as typeof newFilter.folderType;
@@ -2699,7 +2675,7 @@ class FilesActionStore {
     const provider = providers.find((x) => x.provider_key === providerKey);
     const capabilityItem = capabilities.find((x) => x[0] === providerKey);
     const capability = {
-      // FABLE5-REVIEW: the old JS reads customer_title unchecked when no
+      // the old JS reads customer_title unchecked when no
       // capability entry matched (crash when the provider is missing too).
       title: capabilityItem ? capabilityItem[0] : provider!.customer_title,
       link: capabilityItem ? capabilityItem[1] : " ",
@@ -2724,7 +2700,7 @@ class FilesActionStore {
 
   markAsRead = (
     folderIds: (number | string)[],
-    // FABLE5-REVIEW: NewFilesBadge calls this with folderIds only; the old
+    // NewFilesBadge calls this with folderIds only; the old
     // JS forwarded undefined to the API payload.
     fileIds?: (number | string)[],
     item?: TActionItem,
@@ -2740,7 +2716,7 @@ class FilesActionStore {
       ...pbData,
     });
 
-    // FABLE5-REVIEW: onMarkAsRead passes stringified file ids; the shared
+    // onMarkAsRead passes stringified file ids; the shared
     // markAsRead declares number[] but only serializes them.
     return markAsRead(folderIds as number[], fileIds as number[])
       .then(async (res) => {
@@ -2826,7 +2802,7 @@ class FilesActionStore {
       (el) => !el.isFolder || el.id !== destFolderId,
     );
 
-    // FABLE5-REVIEW: security is optional on the .js view-model; the old JS
+    // security is optional on the .js view-model; the old JS
     // read it unchecked.
     const isCopy = selection.findIndex((f) => f.security!.Move) === -1;
 
@@ -2872,7 +2848,7 @@ class FilesActionStore {
     operationData: TOperationDataPayload,
   ) => {
     this.dialogsStore.setConflictResolveDialogItems(conflicts);
-    // FABLE5-REVIEW: TConflictResolveDialogData in DialogsStore is a
+    // TConflictResolveDialogData in DialogsStore is a
     // structural type of what the still-.js dialog reads; this payload is a
     // superset of it.
     this.dialogsStore.setConflictResolveDialogData(
@@ -3169,7 +3145,7 @@ class FilesActionStore {
       detail: { parentId: this.selectedFolderStore.id, context },
     });
     if (item && item.isFolder) {
-      // FABLE5-REVIEW: the still-.js GlobalEvents component reads this extra
+      // the still-.js GlobalEvents component reads this extra
       // field off the dispatched CustomEvent.
       (event as CustomEvent & { title?: string }).title = item.title;
     }
@@ -3195,7 +3171,7 @@ class FilesActionStore {
       abortCallback,
     };
 
-    // FABLE5-REVIEW: the still-.js GlobalEvents component reads this extra
+    // the still-.js GlobalEvents component reads this extra
     // field off the dispatched Event.
     (event as Event & { payload?: typeof payload }).payload = payload;
 
@@ -3221,7 +3197,7 @@ class FilesActionStore {
       abortCallback,
     };
 
-    // FABLE5-REVIEW: the still-.js GlobalEvents component reads this extra
+    // the still-.js GlobalEvents component reads this extra
     // field off the dispatched Event.
     (event as Event & { payload?: typeof payload }).payload = payload;
 
@@ -3295,7 +3271,7 @@ class FilesActionStore {
   };
 
   getOption = (option: string, t: TTranslation) => {
-    // FABLE5-REVIEW: FilesHeaderOptionStore types `t` as the branded i18next
+    // FilesHeaderOptionStore types `t` as the branded i18next
     // TFunction; this store receives plain translation callbacks from
     // still-.js callers, hence the erased cast.
     return this.filesHeaderOptionStore.getOption(
@@ -3581,7 +3557,7 @@ class FilesActionStore {
           }),
         );
 
-      // FABLE5-REVIEW: request() is typed as Promise<T> | undefined; the old
+      // request() is typed as Promise<T> | undefined; the old
       // JS read `.status` unchecked.
       const response = (await api.rooms.validatePublicRoomKey(
         item.requestToken,
@@ -3671,7 +3647,7 @@ class FilesActionStore {
 
   openItemAction = async (
     item: TActionItem,
-    // FABLE5-REVIEW: NewFilesBadge/history callers invoke this with the item
+    // NewFilesBadge/history callers invoke this with the item
     // only; the old JS crashed on t() in the restricted-download branch.
     t?: TTranslation,
     e?: Parameters<typeof openingNewTab>[1],
@@ -3730,7 +3706,7 @@ class FilesActionStore {
       }
 
       if (!isAIAgents() && fileItemsList && enablePlugins) {
-        // FABLE5-REVIEW: TS cannot track the assignment inside the forEach
+        // TS cannot track the assignment inside the forEach
         // callback; the erased casts keep the old unchecked reads.
         let currPluginItem: Nullable<TPluginFileItem> = null;
 
@@ -3768,7 +3744,7 @@ class FilesActionStore {
 
         if (webUrl) {
           const shareWebUrl = new URL(webUrl);
-          // FABLE5-REVIEW: getObjectByLocation expects a router Location but
+          // getObjectByLocation expects a router Location but
           // only reads `.search`, which URL also provides (old JS behavior).
           shareKey = getObjectByLocation(
             shareWebUrl as unknown as Parameters<typeof getObjectByLocation>[0],
@@ -3832,7 +3808,7 @@ class FilesActionStore {
     const { roomType } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
     const { clearFiles, setBufferSelection, setSelection } = this.filesStore;
-    // FABLE5-REVIEW: groupsStore is created in the PeopleStore constructor
+    // groupsStore is created in the PeopleStore constructor
     // but typed as nullable; the old JS destructured it unchecked.
     const { insideGroupBackUrl } = this.peopleStore.groupsStore!;
     const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
@@ -4119,7 +4095,7 @@ class FilesActionStore {
       folderIds = [selections[0].id];
 
       try {
-        // FABLE5-REVIEW: the shared getFolder declares `filter` as required,
+        // the shared getFolder declares `filter` as required,
         // but the old JS always called it with the id only; the erased cast
         // keeps the call arity unchanged.
         const selectedFolder = await (
@@ -4171,7 +4147,7 @@ class FilesActionStore {
     const { selection, setSelected, bufferSelection } = this.filesStore;
     const { user } = this.userStore;
 
-    // FABLE5-REVIEW: the fallback is the selected-folder store snapshot; only
+    // the fallback is the selected-folder store snapshot; only
     // id/isAIAgent are read from it, matching the old JS duck typing.
     const room = (
       selection.length
@@ -4184,7 +4160,7 @@ class FilesActionStore {
     const roomId = room.id;
     const isAIAgent = room.isAIAgent;
 
-    // FABLE5-REVIEW: user is nullable on UserStore; the old JS read the
+    // user is nullable on UserStore; the old JS read the
     // flags unchecked (crash when logged out), the `!` keeps that behavior.
     const isAdmin = user!.isOwner || user!.isAdmin;
     const isRoot = this.selectedFolderStore.isRootFolder;
@@ -4197,8 +4173,6 @@ class FilesActionStore {
       : t("Files:YouLeftTheAgent");
     const successText = isAIAgent ? agentSuccessText : roomSuccessText;
 
-    // FABLE5-REVIEW: updateRoomMemberRole is untyped in shared/api/rooms
-    // (@ts-nocheck file); the cast pins down the observed Promise result.
     return (
       api.rooms.updateRoomMemberRole(roomId, {
         invitations: [{ id: user?.id, access: ShareAccessRights.None }],
@@ -4259,7 +4233,7 @@ class FilesActionStore {
           setSecurity(res[0].security);
           setAccess(res[0].access);
 
-          // FABLE5-REVIEW: user is nullable on UserStore; the old JS read
+          // user is nullable on UserStore; the old JS read
           // `.id` unchecked, the `!` keeps that behavior.
           const isMe = userId === this.userStore.user!.id;
           if (isMe) setInRoom(true);
@@ -4293,7 +4267,7 @@ class FilesActionStore {
     const event = new CustomEvent(Events.ROOM_CREATE, {
       detail: { parentId: this.selectedFolderStore.id, context: "template" },
     });
-    // FABLE5-REVIEW: the still-.js GlobalEvents component reads this extra
+    // the still-.js GlobalEvents component reads this extra
     // field off the dispatched CustomEvent.
     (event as CustomEvent & { item?: TActionItem }).item = item;
     window.dispatchEvent(event);
@@ -4362,7 +4336,7 @@ class FilesActionStore {
     indexMovedFromBottom = false,
   ) => {
     const { setUpdateSelection } = this.indexingStore;
-    // FABLE5-REVIEW: in the indexing view every list item carries an order
+    // in the indexing view every list item carries an order
     // string; the old JS relied on that unchecked.
     const newFilesList = JSON.parse(
       JSON.stringify(this.filesStore.filesList),
@@ -4373,7 +4347,7 @@ class FilesActionStore {
       if (newFilesList[i].order.includes(".")) {
         const splitItem = newFilesList[i].order.split(".");
 
-        // FABLE5-REVIEW: the old JS stores numbers into the string[] before
+        // the old JS stores numbers into the string[] before
         // join(); the erased casts keep that behavior.
         if (indexMovedFromBottom) {
           splitItem[splitItem.length - 1] = (+splitItem.at(-1)! +
@@ -4405,7 +4379,7 @@ class FilesActionStore {
     const newFolders = previousFilesList.filter((f) => f.isFolder);
     const newFiles = previousFilesList.filter((f) => !f.isFolder);
 
-    // FABLE5-REVIEW: previousFilesList holds the same .js filesList
+    // previousFilesList holds the same .js filesList
     // view-models this store works with; IndexingStore types them minimally.
     setFiles(newFiles as unknown as TActionItem[]);
     setFolders(newFolders as unknown as TActionItem[]);
@@ -4471,7 +4445,7 @@ class FilesActionStore {
     )
       return;
 
-    // FABLE5-REVIEW: with no selection the old JS worked on [null] and
+    // with no selection the old JS worked on [null] and
     // crashed below; the erased cast keeps that behavior.
     const selection = (
       this.filesStore.selection.length
@@ -4531,7 +4505,7 @@ class FilesActionStore {
       const items = getIndexingArray();
 
       if (items.length > 0) {
-        // FABLE5-REVIEW: the shared TIndexItems declares order as a string,
+        // the shared TIndexItems declares order as a string,
         // but IndexingStore collects the raw (number|string) orders; the API
         // only serializes them (old JS behavior).
         await changeIndex(items as unknown as TIndexItems[]);
@@ -4584,7 +4558,7 @@ class FilesActionStore {
       }
     }
 
-    // FABLE5-REVIEW: the loop only exits once a progress response arrived;
+    // the loop only exits once a progress response arrived;
     // the `!` keeps the old unchecked return.
     return res!;
   };
@@ -4735,7 +4709,7 @@ class FilesActionStore {
           setVersionSelectedForDeletion(null);
           setVersionDeletionProcess(false);
 
-          // FABLE5-REVIEW: fetchFileVersions declares requestToken as an
+          // fetchFileVersions declares requestToken as an
           // optional string; the old JS passed null (only forwarded when
           // truthy downstream).
           if (isVisible)
@@ -4909,7 +4883,7 @@ class FilesActionStore {
 
           const operationData = {
             destFolderId: targetFolder.id,
-            // FABLE5-REVIEW: same TFolder-vs-view-model mismatch as above.
+            // same TFolder-vs-view-model mismatch as above.
             destFolderInfo: targetFolder as unknown as TFolder,
             fileIds: [fileToProcess.id],
             folderIds: [],

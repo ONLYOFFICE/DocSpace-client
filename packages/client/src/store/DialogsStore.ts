@@ -90,20 +90,12 @@ import type SelectedFolderStore from "./SelectedFolderStore";
 import type TreeFoldersStore from "./TreeFoldersStore";
 import type VersionHistoryStore from "./VersionHistoryStore";
 
-// FABLE5-REVIEW: FilesStore is still .js (wave 3) — replace this structural
-// type with `import type` once it is converted.
 type TFilesStore = {
   hasSelection: boolean;
   hasBufferSelection: boolean;
   setSelected: (selected: "none") => void;
 };
 
-// FABLE5-REVIEW: connectItem is filled by several still-.js code paths
-// (FilesActionsStore/ContextOptionsStore spread provider + capability
-// objects) and by ThirdPartyComboBox with a partial literal, so only a
-// partial ThirdPartyAccountType can be guaranteed here. ContextOptionsStore
-// additionally fills `link`/`token` and a numeric `provider_id` from the
-// third-party provider list.
 type TConnectItem = Partial<Omit<ThirdPartyAccountType, "provider_id">> & {
   customer_title?: string;
   provider_id?: string | number;
@@ -111,9 +103,6 @@ type TConnectItem = Partial<Omit<ThirdPartyAccountType, "provider_id">> & {
   token?: string;
 };
 
-// FABLE5-REVIEW: download items are file view-models produced by the
-// still-.js DownloadDialog/FilesActionsStore; minimal structural type of
-// the members used in this store.
 type TDownloadItem = {
   id: number | string;
   checked?: boolean;
@@ -138,8 +127,6 @@ type TSortedDownloadFiles = {
   original?: TDownloadItem[];
 };
 
-// FABLE5-REVIEW: invite items are produced by the still-.js InvitePanel;
-// minimal structural type of the members used in this store.
 type TInviteItem = {
   id: number | string;
   access?: ShareAccessRights | EmployeeType;
@@ -153,8 +140,6 @@ type TInvitePanelOptions = {
   roomId?: number | string;
 };
 
-// FABLE5-REVIEW: `item`/`cb`/`context`/`startRoomType` extras are set by the
-// still-.js GlobalEvents component from CustomEvent payloads.
 type TEditRoomDialogProps = {
   visible: boolean;
   item: unknown;
@@ -193,8 +178,6 @@ type TCreatePDFFormFileProps = {
   onClose: Nullable<VoidFunction>;
 };
 
-// FABLE5-REVIEW: formItem is produced by still-.js code
-// (SubmitToGalleryDialog flow); only `title`/`fileExst` are used here.
 type TFormItem = {
   title: string;
   fileExst?: Nullable<string>;
@@ -257,9 +240,6 @@ class DialogsStore {
 
   convertDialogVisible = false;
 
-  // FABLE5-REVIEW: convertDialogData is produced/consumed only by still-.js
-  // code (ConvertDialog, UploadDataStore, FilesActionsStore, withBadges);
-  // shape unknown until those are converted.
   convertDialogData: unknown = null;
 
   selectFileDialogVisible = false;
@@ -274,8 +254,6 @@ class DialogsStore {
 
   moveToPublicRoomVisible = false;
 
-  // FABLE5-REVIEW: moveToPublicRoomData is an operation-data payload built by
-  // still-.js FilesActionsStore/HotkeyStore flows; shape unknown here.
   moveToPublicRoomData: unknown = null;
 
   backupToPublicRoomVisible = false;
@@ -309,8 +287,6 @@ class DialogsStore {
 
   deleteLinkDialogVisible = false;
 
-  // FABLE5-REVIEW: removeItem is produced/consumed only by still-.js code
-  // (DeleteThirdPartyDialog flow); shape unknown until those are converted.
   removeItem: unknown = null;
 
   connectItem: Nullable<TConnectItem> = null;
@@ -321,30 +297,18 @@ class DialogsStore {
 
   conflictResolveDialogData: Nullable<TConflictResolveDialogData> = null;
 
-  // FABLE5-REVIEW: conflict items are file/folder view-models set by the
-  // still-.js FilesActionsStore; ConflictResolveDialog casts them itself.
   conflictResolveDialogItems: Nullable<unknown[]> = null;
 
-  // FABLE5-REVIEW: removeMediaItem is produced/consumed only by still-.js
-  // code; shape unknown until those are converted.
   removeMediaItem: unknown = null;
 
-  // FABLE5-REVIEW: unsubscribe payload is produced/consumed only by still-.js
-  // code; shape unknown until those are converted.
   unsubscribe: unknown = null;
 
   isRoomDelete = false;
 
-  // FABLE5-REVIEW: convertItem is produced/consumed only by still-.js code
-  // (ConvertDialog flow); shape unknown until those are converted.
   convertItem: unknown = null;
 
-  // FABLE5-REVIEW: formCreationInfo is produced/consumed only by still-.js
-  // code (CreateEvent/ConvertPasswordDialog); shape unknown here.
   formCreationInfo: unknown = null;
 
-  // FABLE5-REVIEW: saveThirdpartyResponse is an untyped saveThirdParty API
-  // response (see ThirdPartyComboBox `.then((res: unknown) => ...)`).
   saveThirdpartyResponse: unknown = null;
 
   inviteItems: TInviteItem[] = [];
@@ -363,8 +327,6 @@ class DialogsStore {
 
   editLinkPanelIsVisible = false;
 
-  // FABLE5-REVIEW: embeddingPanelData.item is set by still-.js code paths
-  // (ContextOptionsStore, Members view); EmbeddingPanel casts it itself.
   embeddingPanelData: { visible: boolean; item?: unknown } = {
     visible: false,
     item: null,
@@ -416,7 +378,7 @@ class DialogsStore {
 
   isNewQuotaItemsByCurrentUser = false;
 
-  // FABLE5-REVIEW: isNewRoomByCurrentUser/isNewUserByCurrentUser are never
+  // isNewRoomByCurrentUser/isNewUserByCurrentUser are never
   // initialized in the class body or constructor — only assigned later via
   // their setters (so they are not observable). `declare` keeps that exact
   // runtime shape (no own property until the setter runs).
@@ -768,7 +730,7 @@ class DialogsStore {
               ? item.fileExst
               : item.format;
           if (!singleFileUrl) {
-            // FABLE5-REVIEW: viewUrl is optional on the still-.js download
+            // viewUrl is optional on the still-.js download
             // item view-model; the original code assigned it as-is.
             singleFileUrl = item.viewUrl!;
           }
@@ -804,7 +766,7 @@ class DialogsStore {
     password: string,
     type: keyof TSortedDownloadFiles,
   ) => {
-    // FABLE5-REVIEW: the original .js assumed `sortedDownloadFiles[type]` and
+    // the original .js assumed `sortedDownloadFiles[type]` and
     // `originItem` are always found; non-null assertions keep that exact
     // runtime behavior (crash on missing) without adding new guards.
     const currentType = this.sortedDownloadFiles[type]!;
@@ -841,7 +803,7 @@ class DialogsStore {
     fileExst: Nullable<string>,
     type: keyof TSortedDownloadFiles,
   ) => {
-    // FABLE5-REVIEW: same non-null assertions as in
+    // same non-null assertions as in
     // updateDownloadedFilePassword — keeps the original .js runtime.
     const currentType = this.sortedDownloadFiles[type]!;
 
@@ -883,7 +845,7 @@ class DialogsStore {
     const newFileIds = this.downloadItems.filter((item) => item.id !== id);
     this.downloadItems = [...newFileIds];
 
-    // FABLE5-REVIEW: same non-null assertions as in
+    // same non-null assertions as in
     // updateDownloadedFilePassword — keeps the original .js runtime.
     const currentType = this.sortedDownloadFiles[type]!;
 
@@ -1258,7 +1220,7 @@ class DialogsStore {
     }
 
     const newColor = color.replace("#", "");
-    // FABLE5-REVIEW: the original .js read `icon.id` without a guard — every
+    // the original .js read `icon.id` without a guard — every
     // caller passing a truthy color also passes an icon; `!` keeps that
     // runtime.
     const newIcon = typeof icon === "string" ? "" : icon!.id;
@@ -1297,7 +1259,7 @@ class DialogsStore {
 
   getLogoCoverModel = (
     t: TTranslation,
-    // FABLE5-REVIEW: callers pass truthy strings (logo urls) as well as
+    // callers pass truthy strings (logo urls) as well as
     // booleans — only truthiness is used here; the union keeps the original
     // call sites type-checking without runtime change.
     hasImage: boolean | string | undefined,
@@ -1308,7 +1270,7 @@ class DialogsStore {
         label: t("Common:UploadPicture"),
         icon: UploadSvgUrl,
         key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_UPLOAD,
-        // FABLE5-REVIEW: the original .js called `ref.current.click()`
+        // the original .js called `ref.current.click()`
         // without null guards; `!` keeps that runtime.
         onClick: (ref?: RefObject<Nullable<HTMLInputElement>>) =>
           ref!.current!.click(),
@@ -1331,9 +1293,6 @@ class DialogsStore {
   };
 
   getCovers = async () => {
-    // FABLE5-REVIEW: getRoomCovers/getRoomGroups/getGroupById are untyped in
-    // shared/api (they return `request(options)` without a generic) — cast
-    // at the call sites.
     const response = (await getRoomCovers()) as ICover[];
 
     this.setCovers(response);

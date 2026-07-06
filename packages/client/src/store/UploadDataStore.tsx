@@ -136,9 +136,6 @@ export type { TUploadFile } from "./uploadDataStore/helpers";
 
 type TOperationName = (typeof OPERATIONS_NAME)[keyof typeof OPERATIONS_NAME];
 
-// FABLE5-REVIEW: conversion panel items are produced by still-.js callers
-// (ConvertDialog, files view context options); minimal structural type of
-// the members used in this store.
 type TConversionFile = {
   fileId: number | null;
   fileInfo: TFile | null;
@@ -179,9 +176,6 @@ type TStartUploadData = TUploadData & {
   allNewFiles: TUploadFile[];
 };
 
-// FABLE5-REVIEW: the chunk upload endpoints (uploadChunkParallel,
-// uploadChunkSequential, finalizeUploadSession) are untyped in shared/api
-// (raw request); shape observed from the usage in this store.
 type TChunkUploadResponse = {
   uploaded: boolean;
   id: number;
@@ -223,9 +217,6 @@ type TPbData = {
 };
 
 type TItemOperationData = {
-  // FABLE5-REVIEW: the copy/move API declares destFolderId as number, but
-  // still-.js/.tsx callers also pass string ids (third-party), null or
-  // undefined.
   destFolderId: number | string | null | undefined;
   destFolderInfo?: TFolder;
   folderIds: number[];
@@ -510,7 +501,7 @@ class UploadDataStore {
       ? RoomsType.CustomRoom
       : this.selectedFolderStore.roomType;
     const { publicKey, userId } = this.getUserEncryptionKeys();
-    // FABLE5-REVIEW: shouldEncryptUpload declares roomType: RoomsType, but the
+    // shouldEncryptUpload declares roomType: RoomsType, but the
     // original .js passed selectedFolderStore.roomType which can be null
     // (isEncryptableRoomType(null) is simply false at runtime).
     return (
@@ -613,7 +604,7 @@ class UploadDataStore {
         : ancestorIsPrivate;
     return prepareEncryptedUpload({
       file,
-      // FABLE5-REVIEW: UploadConfig.folderId is declared as number, but the
+      // UploadConfig.folderId is declared as number, but the
       // original .js forwarded toFolderId which may be a string/null for
       // third-party folders.
       folderId: folderId as number,
@@ -748,7 +739,7 @@ class UploadDataStore {
     this.uploadedFilesHistory = newHistory;
     this.quotaErrorRaised = false;
 
-    // FABLE5-REVIEW: the original .js referenced the bare global `i18n`
+    // the original .js referenced the bare global `i18n`
     // (window.i18n populated by SRC_DIR/i18n.js); `window.i18n!.t!` keeps the
     // exact runtime resolution.
     this.primaryProgressDataStore.setPrimaryProgressBarData({
@@ -800,7 +791,7 @@ class UploadDataStore {
         (el) => el.uniqueId !== id,
       );
 
-      // FABLE5-REVIEW: the original .js assumed the canceled file is always
+      // the original .js assumed the canceled file is always
       // found (would throw on undefined); the non-null assertion keeps that.
       const canceledFile = this.files.find((f) => f.uniqueId === id)!;
       const newPercent = this.getFilesPercent(); // canceledFile.file.size
@@ -862,7 +853,7 @@ class UploadDataStore {
     this.primaryProgressDataStore.setPrimaryProgressBarData({
       operation: OPERATIONS_NAME.convert,
       alert: false,
-      // FABLE5-REVIEW: the original .js expression `!length === 0` compares a
+      // the original .js expression `!length === 0` compares a
       // boolean to a number and therefore always evaluates to false; the cast
       // keeps the expression (and its result) unchanged.
       completed: (!this.activeConversionQueue.length as unknown) === 0,
@@ -879,7 +870,7 @@ class UploadDataStore {
     if (shouldUpdateExistingFile) {
       const updatedFile = this.displayedConversionFiles[fileIndex];
 
-      // FABLE5-REVIEW: the original .js assumed fileInfo is set on both items
+      // the original .js assumed fileInfo is set on both items
       // in the "second conversion with password" flow (would throw otherwise).
       updatedFile.fileInfo!.fileExst = file.fileInfo!.fileExst;
 
@@ -998,7 +989,7 @@ class UploadDataStore {
       const { fileId, password, format } = conversionItem;
       const itemPassword = password || null;
 
-      // FABLE5-REVIEW: `find` and `findIndex` use the same predicate on the
+      // `find` and `findIndex` use the same predicate on the
       // same array, so after the `fileIndex === -1` break the original .js
       // relied on historyFile being defined; the non-null assertions keep it.
       const historyFile = this.displayedConversionFiles.find(
@@ -1039,7 +1030,7 @@ class UploadDataStore {
       let fileInfo: TFile | "password" | null | undefined = null;
       let error: string | null | undefined = null;
 
-      // FABLE5-REVIEW: `(progress ?? 100) < 100` is runtime-identical to the
+      // `(progress ?? 100) < 100` is runtime-identical to the
       // original `progress < 100` (undefined < 100 is false, as is 100 < 100).
       while ((progress ?? 100) < 100) {
         const response = await getConversationProgress(fileId);
@@ -1070,7 +1061,7 @@ class UploadDataStore {
         if (!error) error = data[0].error;
 
         if (!error && isOpen && data && data[0]) {
-          // FABLE5-REVIEW: the original .js read fileInfo.id without a guard
+          // the original .js read fileInfo.id without a guard
           // (fileInfo is the conversion result; would throw on null).
           this.filesStore.openDocEditor((fileInfo as TFile).id);
         }
@@ -1080,7 +1071,7 @@ class UploadDataStore {
           historyFile!.convertProgress = progress;
           historyFile!.inConversion = false;
 
-          // FABLE5-REVIEW: the original .js called error.indexOf without a
+          // the original .js called error.indexOf without a
           // guard (would throw when the conversion result has no error text).
           if (error!.indexOf("password") !== -1) {
             historyFile!.needPassword = true;
@@ -1191,7 +1182,7 @@ class UploadDataStore {
         let fileInfo: TFile | "password" | null | undefined = null;
         let error: string | null | undefined = null;
 
-        // FABLE5-REVIEW: `(progress ?? 100) < 100` is runtime-identical to
+        // `(progress ?? 100) < 100` is runtime-identical to
         // the original `progress < 100` (undefined < 100 is false).
         while ((progress ?? 100) < 100) {
           let response: TConversionProgress[] | null = null;
@@ -1279,7 +1270,7 @@ class UploadDataStore {
           if (!error) error = data[0].error;
 
           if (!error && isOpen && data && data[0]) {
-            // FABLE5-REVIEW: the original .js read fileInfo.id without a
+            // the original .js read fileInfo.id without a
             // guard (fileInfo is the conversion result; would throw on null).
             this.filesStore.openDocEditor((fileInfo as TFile).id);
           }
@@ -1291,11 +1282,11 @@ class UploadDataStore {
               currentFile.error = error;
               currentFile.convertProgress = progress;
               currentFile.inConversion = false;
-              // FABLE5-REVIEW: the original .js could transiently store the
+              // the original .js could transiently store the
               // "password" marker string here; the cast keeps that runtime.
               if (fileInfo) currentFile.fileInfo = fileInfo as TFile;
 
-              // FABLE5-REVIEW: the original .js called error.indexOf without
+              // the original .js called error.indexOf without
               // a guard (would throw when there is no error text).
               if (error!.indexOf("password") !== -1) {
                 currentFile.needPassword = true;
@@ -1444,7 +1435,7 @@ class UploadDataStore {
   };
 
   cancelUploadAction = (items?: { uniqueId: string }[]) => {
-    // FABLE5-REVIEW: the original .js read conflictResolveDialogData (and its
+    // the original .js read conflictResolveDialogData (and its
     // allNewFiles) without a null guard — it is always set when the upload
     // conflict dialog invokes this action.
     const files =
@@ -1481,7 +1472,7 @@ class UploadDataStore {
     operationData: Partial<TConflictResolveDialogData>,
   ) => {
     this.dialogsStore.setConflictResolveDialogItems(conflicts);
-    // FABLE5-REVIEW: upload conflicts fill only a subset of
+    // upload conflicts fill only a subset of
     // TConflictResolveDialogData (no folderIds/fileIds/translations/…); the
     // cast keeps the original .js payload as-is.
     this.dialogsStore.setConflictResolveDialogData(
@@ -1558,9 +1549,6 @@ class UploadDataStore {
       uploadData.files.findIndex((f) => f.toFolderId === toFolderId) > -1;
 
     try {
-      // FABLE5-REVIEW: checkIsFileExist is untyped in shared/api and declares
-      // folderId: number, while the original .js also passes string ids for
-      // third-party folders.
       let conflicts: (string | { title: string; isFile: boolean })[] =
         isAIRoom || !checkConflicts
           ? []
@@ -1611,9 +1599,6 @@ class UploadDataStore {
     }
   };
 
-  // FABLE5-REVIEW: startUpload is called from still-.js code
-  // (FilesActionsStore, GlobalEvents) with a FileList-like collection of
-  // browser files decorated with parentFolderId/encrypted.
   startUpload = (
     uploadFiles: Record<string, TUploadBrowserFile> | unknown[],
     folderId: number | string | null,
@@ -2042,7 +2027,6 @@ class UploadDataStore {
 
         this.checkChunkUpload({
           t,
-          // FABLE5-REVIEW: chunk upload endpoints are untyped in shared/api.
           res: res as TChunkUploadResponse,
           index: activeLength,
           indexOfFile,
@@ -2408,7 +2392,7 @@ class UploadDataStore {
     let isEncrypted = file.encrypted || false;
 
     const { publicKey, userId } = this.getUserEncryptionKeys();
-    // FABLE5-REVIEW: shouldEncryptUpload declares roomType: RoomsType, but
+    // shouldEncryptUpload declares roomType: RoomsType, but
     // resolveItemRoomContext may return null/undefined (falsy at runtime).
     const shouldEncrypt =
       shouldEncryptUpload(roomType as RoomsType, isPrivate) &&
@@ -2510,12 +2494,12 @@ class UploadDataStore {
     }
 
     const fileSize = fileToUpload.size;
-    // FABLE5-REVIEW: the original .js passed a (silently ignored) second
+    // the original .js passed a (silently ignored) second
     // argument to Math.ceil; dropped because it has no runtime effect.
     const chunks = fileSize === 0 ? 1 : Math.ceil(fileSize / chunkUploadSize);
 
     return startUploadSession(
-      // FABLE5-REVIEW: the original .js could pass null here when an AI room
+      // the original .js could pass null here when an AI room
       // has no knowledgeId yet; the assertion keeps that runtime unchanged.
       actualFolderId!,
       fileName,
@@ -2758,7 +2742,7 @@ class UploadDataStore {
     }
 
     const errorItem = filesWithErrors[0];
-    // FABLE5-REVIEW: the original .js called error.indexOf without a guard —
+    // the original .js called error.indexOf without a guard —
     // items in filesWithErrors always have a truthy error string.
     const passwordErrorIndex = errorItem.error!.indexOf("password");
 
@@ -2831,7 +2815,7 @@ class UploadDataStore {
       const toFolderId = this.files[0]?.toFolderId;
 
       if (toFolderId) {
-        // FABLE5-REVIEW: the socket typings declare the RefreshFolder payload
+        // the socket typings declare the RefreshFolder payload
         // as a string, but the original .js has always sent this object.
         SocketHelper?.emit(SocketCommands.RefreshFolder, {
           toFolderId,
@@ -2846,7 +2830,7 @@ class UploadDataStore {
       });
 
     setTimeout(() => {
-      // FABLE5-REVIEW: PrimaryProgressDataStore has no `alert` member (it has
+      // PrimaryProgressDataStore has no `alert` member (it has
       // primaryOperationsAlert); the original .js read an undefined property
       // here, which the cast preserves without changing the runtime.
       if (
@@ -2996,7 +2980,7 @@ class UploadDataStore {
   ) => {
     const { fetchFiles, filter } = this.filesStore;
 
-    // FABLE5-REVIEW: fileCopyAs declares enableExternalExt/password as
+    // fileCopyAs declares enableExternalExt/password as
     // required, but the original .js callers may omit them (undefined is
     // sent as-is at runtime).
     return fileCopyAs(
@@ -3184,7 +3168,7 @@ class UploadDataStore {
   navigateToNewFolderLocation = async (folderId: number | string | null) => {
     const { filter } = this.filesStore;
 
-    // FABLE5-REVIEW: FilesFilter.folder is declared as string, but the
+    // FilesFilter.folder is declared as string, but the
     // original .js also assigns numeric folder ids here.
     filter.folder = folderId as string;
 

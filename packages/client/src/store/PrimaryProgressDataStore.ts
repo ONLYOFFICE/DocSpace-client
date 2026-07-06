@@ -37,8 +37,6 @@ import { makeAutoObservable } from "mobx";
 
 import type { OPERATIONS_NAME } from "@docspace/shared/constants";
 
-// FABLE5-REVIEW: filesUtils is still .js — no types for
-// getOperationsProgressTitle until it is converted.
 import { getOperationsProgressTitle } from "SRC_DIR/helpers/filesUtils";
 
 import type SelectedFolderStore from "./SelectedFolderStore";
@@ -68,8 +66,6 @@ export type TPrimaryOperation = TPrimaryProgressInfo & {
   operation: TOperationName;
 };
 
-// FABLE5-REVIEW: FilesStore is still .js (wave 3) — replace this structural
-// type with `import type` once it is converted.
 import type FilesStore from "./FilesStore";
 
 type TFilesStore = FilesStore;

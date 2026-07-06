@@ -73,10 +73,6 @@ import {
   SSO_SIGNING_ENCRYPT,
 } from "../helpers/constants";
 
-// FABLE5-REVIEW: loadXmlMetadata/uploadXmlMetadata/validateCerts/generateCerts
-// in shared/api/settings are untyped (raw axios calls), so their responses are
-// cast at the call sites below.
-
 /** Endpoint entry of the parsed IdP XML metadata (binding/location pair). */
 type TSsoMetadataService = {
   binding?: string;
@@ -274,7 +270,7 @@ class SsoFormStore {
 
   load = async () => {
     const abortController = new AbortController();
-    // FABLE5-REVIEW: settingsStore is assigned in the constructor and is never
+    // settingsStore is assigned in the constructor and is never
     // null in practice; `!` preserves the old JS behavior (which would also
     // have thrown on null).
     this.settingsStore!.addAbortControllers(abortController);
@@ -530,9 +526,6 @@ class SsoFormStore {
 
   resetForm = async () => {
     try {
-      // FABLE5-REVIEW: resetSsoForm is untyped in shared/api (returns
-      // request(options) without a generic); the DELETE /settings/ssov2
-      // endpoint returns the default SSO settings object.
       const config = (await resetSsoForm()) as TGetSsoSettings;
 
       this.setFields(config);
@@ -666,7 +659,7 @@ class SsoFormStore {
 
     if (!obj) return value;
 
-    // FABLE5-REVIEW: parsed XML metadata values are untyped on the server
+    // parsed XML metadata values are untyped on the server
     // side; the old JS returned whatever was stored under the property, the
     // `as string` casts below preserve that behavior.
     if (hasOwnProperty(obj, propName))
@@ -782,7 +775,7 @@ class SsoFormStore {
       const newCertificates = await this.validateCertificate(data);
       this.idpCertificates = [];
 
-      // FABLE5-REVIEW: validateCertificate returns undefined when validation
+      // validateCertificate returns undefined when validation
       // fails; the old JS would throw on `.data` of undefined here — `!`
       // preserves that behavior.
       newCertificates!.data.forEach((cert) => {

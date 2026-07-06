@@ -266,7 +266,7 @@ export const useMembers = ({
 
     try {
       const [data, links] = await Promise.all(requests);
-      // FABLE5-REVIEW: getRoomMembers with filterType 2 (external links)
+      // getRoomMembers with filterType 2 (external links)
       // returns link-shaped items, but its return type is RoomMember[].
       if (links) setExternalLinks(links as unknown as TFileLink[]);
       else setExternalLinks([]);

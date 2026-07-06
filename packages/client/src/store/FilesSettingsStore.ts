@@ -75,10 +75,6 @@ import type { ThirdPartyStore } from "./ThirdPartyStore";
 import type TreeFoldersStore from "./TreeFoldersStore";
 import type { TTreeFolder } from "./TreeFoldersStore";
 
-// FABLE5-REVIEW: api.files.storeForceSave and api.files.forceSave are
-// commented out in packages/shared/api/files/index.ts, so setStoreForceSave /
-// setForceSave below would throw at runtime if ever called (no consumers were
-// found). The structural cast keeps the original calls untouched.
 type TFilesApiWithForceSave = typeof api.files & {
   storeForceSave: (data: boolean) => Promise<boolean>;
   forceSave: (data: boolean) => Promise<boolean>;
@@ -101,8 +97,6 @@ class FilesSettingsStore {
 
   isErrorSettings: boolean | null = null;
 
-  // FABLE5-REVIEW: no consumers of expandedSetting / setExpandSettingsTree
-  // were found outside this store, so the value shape is unknowable.
   expandedSetting: unknown = null;
 
   confirmDelete: boolean | null = null;
@@ -229,7 +223,7 @@ class FilesSettingsStore {
 
     SocketHelper?.on(
       SocketEvents.UpdateExternalShareSettings,
-      // FABLE5-REVIEW: SocketEvents.UpdateExternalShareSettings is not listed
+      // SocketEvents.UpdateExternalShareSettings is not listed
       // in ui-kit's TListenEventCallbackMap, so `on` expects a zero-argument
       // listener, while the server actually sends the access-control settings
       // payload. The cast keeps the original callback untouched without
@@ -473,7 +467,7 @@ class FilesSettingsStore {
     this.settingsStore.addAbortControllers(abortController);
 
     try {
-      // FABLE5-REVIEW: the original .js passes null for the optional
+      // the original .js passes null for the optional
       // `version` argument (typed `number | string | undefined` in
       // shared/api); the cast keeps the runtime argument identical.
       return await api.files.getDocumentServiceLocation(
@@ -514,7 +508,7 @@ class FilesSettingsStore {
 
   updateRootTreeFolders = () => {
     const { getFoldersTree, setTreeFolders } = this.treeFoldersStore;
-    // FABLE5-REVIEW: treeFoldersStore.getFoldersTree() returns void (it does
+    // treeFoldersStore.getFoldersTree() returns void (it does
     // not return the api promise), so `.then` here throws a TypeError at
     // runtime — the original .js has the same behavior. The cast keeps the
     // original call untouched.
@@ -595,7 +589,7 @@ class FilesSettingsStore {
     folderType: FolderType | null = null,
   ): string => {
     if (fileExst || contentLength) {
-      // FABLE5-REVIEW: when only contentLength is set, fileExst is null and
+      // when only contentLength is set, fileExst is null and
       // was passed through to presentInArray unchanged in the original .js
       // (presentInArray tolerates it); the non-null assertions keep that
       // runtime intact.
@@ -631,7 +625,7 @@ class FilesSettingsStore {
   };
 
   getIconBySize = (path: string, size = 32) => {
-    // FABLE5-REVIEW: the "file.svg" fallback key is always present in the
+    // the "file.svg" fallback key is always present in the
     // iconSize* maps (built from IconNames.File in
     // shared/utils/image-helpers), so Map.get can never return undefined
     // here; the non-null assertions only encode that invariant.
@@ -763,8 +757,6 @@ class FilesSettingsStore {
   };
 
   hideConfirmRoomLifetimeSetting = (set: boolean) => {
-    // FABLE5-REVIEW: api.rooms.hideConfirmRoomLifetime is untyped in
-    // shared/api (returns request(options) without a generic).
     return (api.rooms.hideConfirmRoomLifetime(set) as Promise<boolean>)
       .then((res) => {
         this.setFilesSetting("hideConfirmRoomLifetime", res);

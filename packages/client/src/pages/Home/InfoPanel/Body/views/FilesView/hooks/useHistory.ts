@@ -182,7 +182,7 @@ export const useHistory = ({
 
         const historyWithLinks = addLinksToHistory(response, links);
 
-        // FABLE5-REVIEW: getRoomMembers with filterType 2 (external links)
+        // getRoomMembers with filterType 2 (external links)
         // returns link-shaped items, but its return type is RoomMember[].
         setExternalLinks(links as unknown as TFileLink[]);
 
@@ -257,7 +257,7 @@ export const useHistory = ({
 
         feedWithLinks = addLinksToHistory(data, links);
 
-        // FABLE5-REVIEW: getRoomMembers with filterType 2 (external links)
+        // getRoomMembers with filterType 2 (external links)
         // returns link-shaped items, but its return type is RoomMember[].
         setExternalLinks(links as unknown as TFileLink[]);
       } else {

@@ -236,22 +236,20 @@ const LOADER_TIMER = 500;
 let loadingTime: Date | null | undefined;
 let timer: ReturnType<typeof setTimeout> | null | undefined;
 
-// FABLE5-REVIEW: multi-select items always carry contextOptions/security in
+// multi-select items always carry contextOptions/security in
 // the .js FilesStore filesList view-model.
 type TSelectionItem = TContextItem & {
   contextOptions: string[];
   security: TContextItemSecurity;
 };
 
-// FABLE5-REVIEW: matches the (unexported) GroupItem type of the plugin SDK's
+// matches the (unexported) GroupItem type of the plugin SDK's
 // IContextMenuItem["onGroupClick"].
 type TPluginGroupItem = {
   id: number | string;
   itemType: "file" | "folder" | "room";
 };
 
-// FABLE5-REVIEW: FilesStore is still .js (wave 3) — minimal structural type of
-// the members used here; replace with `import type FilesStore` once converted.
 type TFilesStore = {
   activeFiles: unknown[];
   activeFolders: unknown[];
@@ -301,8 +299,6 @@ type TFilesStore = {
   ) => string[];
 };
 
-// FABLE5-REVIEW: FilesActionsStore is still .js (wave 3) — minimal structural
-// type of the members used here; replace with import type once converted.
 type TFilesActionsStore = {
   uploadDataStore: UploadDataStore;
   isGroupMenuBlocked: boolean;
@@ -432,7 +428,7 @@ class ContextOptionsStore {
 
   guidanceStore: GuidanceStore;
 
-  // FABLE5-REVIEW: `this.onOwnerChange` is referenced by the "owner-change"
+  // `this.onOwnerChange` is referenced by the "owner-change"
   // option below but is not defined anywhere — the option gets
   // `onClick: undefined` at runtime. `declare` keeps that runtime shape
   // (no own property) while satisfying the type checker.
@@ -543,7 +539,7 @@ class ContextOptionsStore {
 
     setRoomCreation(true);
 
-    // FABLE5-REVIEW: the original .js assumed the provider is always found
+    // the original .js assumed the provider is always found
     // (crashed otherwise) — the non-null assertion keeps that behavior.
     const provider = connectItems.find(
       (connectItem) => connectItem.providerName === item.providerKey,
@@ -566,7 +562,7 @@ class ContextOptionsStore {
       await openConnectWindow(provider.providerName, authModal)
         .then(getOAuthToken)
         .then((token) => {
-          // FABLE5-REVIEW: the original .js assumed window.open succeeded
+          // the original .js assumed window.open succeeded
           // (crashed on null) — the non-null assertion keeps that behavior.
           authModal!.close();
           setConnectItem({
@@ -589,7 +585,7 @@ class ContextOptionsStore {
   onClickMakeForm = (item: TContextItem, t: TTranslation) => {
     const { setConvertPasswordDialogVisible, setFormCreationInfo } =
       this.dialogsStore;
-    // FABLE5-REVIEW: the original .js assumed a file item (fileExst/folderId
+    // the original .js assumed a file item (fileExst/folderId
     // always present) — the cast keeps identical runtime behavior.
     const { title, id, folderId, fileExst } = item as TContextItem & {
       fileExst: string;
@@ -600,7 +596,7 @@ class ContextOptionsStore {
       title.substring(0, title.length - fileExst.length) +
       this.filesSettingsStore.extsWebRestrictedEditing[0];
 
-    // FABLE5-REVIEW: copyAsAction rejections are untyped (axios error or
+    // copyAsAction rejections are untyped (axios error or
     // string) — the structural annotation mirrors the original .js handling.
     type TCopyAsError =
       | string
@@ -701,7 +697,7 @@ class ContextOptionsStore {
     setInfoPanelMobileHidden(true);
   };
 
-  // FABLE5-REVIEW: some call sites pass `item.security` as a second argument
+  // some call sites pass `item.security` as a second argument
   // which the original .js silently ignored — the optional parameter keeps
   // those calls type-correct without changing runtime behavior.
   finalizeVersion = (id: number | string, _security?: TContextItemSecurity) => {
@@ -840,7 +836,7 @@ class ContextOptionsStore {
   onOpenEmbeddingSettings = async (item: TContextItem) => {
     const { setLinkParams, setEmbeddingPanelData } = this.dialogsStore;
 
-    // FABLE5-REVIEW: the original .js sets linkParams without the `link`
+    // the original .js sets linkParams without the `link`
     // field required by LinkParamsType — the cast keeps that runtime shape.
     setLinkParams({
       item,
@@ -1012,7 +1008,7 @@ class ContextOptionsStore {
         toastr.error(err as string),
       );
     } else if (isFile) {
-      // FABLE5-REVIEW: the original .js passed viewUrl through unchecked
+      // the original .js passed viewUrl through unchecked
       // (files always carry it) — the non-null assertion keeps that behavior.
       openUrl(viewUrl!, UrlActionType.Download);
     } else {
@@ -1042,7 +1038,7 @@ class ContextOptionsStore {
     this.filesActionsStore.changeCustomFilter(item, t);
   };
 
-  // FABLE5-REVIEW: some call sites pass `t` as a second argument which the
+  // some call sites pass `t` as a second argument which the
   // original .js silently ignored — the optional parameter keeps those calls
   // type-correct without changing runtime behavior.
   onDuplicate = (item: TContextItem, _t?: TTranslation) => {
@@ -1071,7 +1067,7 @@ class ContextOptionsStore {
     this.filesActionsStore.setThirdpartyInfo(providerKey);
   };
 
-  // FABLE5-REVIEW: some call sites pass `item` which the original .js
+  // some call sites pass `item` which the original .js
   // silently ignored — the optional parameter keeps those calls type-correct
   // without changing runtime behavior.
   onFillingStatus = (_item?: TContextItem) => {
@@ -1097,7 +1093,7 @@ class ContextOptionsStore {
     try {
       await manageFormFilling(item.id, FormFillingManageAction.Start);
 
-      // FABLE5-REVIEW: the original .js assumed a signed-in user and a file
+      // the original .js assumed a signed-in user and a file
       // item here — the assertions/casts keep identical runtime behavior.
       showCreatedPDFFormDialog(item as TFile, this.userStore.user!.id);
     } catch (error) {
@@ -1105,7 +1101,7 @@ class ContextOptionsStore {
     }
   };
 
-  // FABLE5-REVIEW: the AssignRoles dialog calls this without `t` (only ever
+  // the AssignRoles dialog calls this without `t` (only ever
   // for form-room items, where `t` is unused) — the optional parameter and
   // cast keep the original .js behavior.
   onClickStartFilling = (item: TContextItem, t?: TTranslation) => {
@@ -1151,7 +1147,7 @@ class ContextOptionsStore {
     }
   };
 
-  // FABLE5-REVIEW: when used as a context-menu onClick the first argument is
+  // when used as a context-menu onClick the first argument is
   // the ui-kit click payload (an object), otherwise a media file id.
   onMediaFileClick = (fileId: number | string | object, item: TContextItem) => {
     const itemId = typeof fileId !== "object" ? fileId : item.id;
@@ -1174,7 +1170,7 @@ class ContextOptionsStore {
 
     if (confirmDelete || isThirdPartySelection) {
       setBufferSelection(selectedFolder);
-      // FABLE5-REVIEW: the original .js passes `undefined` through here when
+      // the original .js passes `undefined` through here when
       // the caller omits isRoom — the cast keeps the exact runtime value.
       setIsRoomDelete(isRoom as boolean);
       setDeleteDialogVisible(true);
@@ -1225,7 +1221,7 @@ class ContextOptionsStore {
     );
   };
 
-  // FABLE5-REVIEW: some call sites pass `item` which the original .js
+  // some call sites pass `item` which the original .js
   // silently ignored — the optional parameter keeps those calls type-correct
   // without changing runtime behavior.
   onClickShare = (_item?: TContextItem) => {
@@ -1366,7 +1362,7 @@ class ContextOptionsStore {
       this.pluginStore.contextMenuItemsList.forEach((option) => {
         const optionItem = option.value;
 
-        // FABLE5-REVIEW: the original .js returns undefined for unknown
+        // the original .js returns undefined for unknown
         // entries and passes it through to onGroupClick — the cast below
         // keeps that behavior.
         const resolveItemType = (
@@ -1391,7 +1387,7 @@ class ContextOptionsStore {
             itemType: resolveItemType(item),
           })) as TPluginGroupItem[];
 
-          // FABLE5-REVIEW: the original .js called onGroupClick without a
+          // the original .js called onGroupClick without a
           // presence check — the non-null assertions keep that behavior.
           const onClick = async () => {
             if (value.withActiveItem) {
@@ -1438,7 +1434,7 @@ class ContextOptionsStore {
 
   onLoadPlugins = (item: TContextItem): TContextOption[] => {
     if (isAIAgents()) return [];
-    // FABLE5-REVIEW: callers always pass an item enriched with
+    // callers always pass an item enriched with
     // contextOptions (see getFilesContextOptions) — the cast keeps the
     // original unchecked access.
     const { contextOptions } = item as TSelectionItem;
@@ -1455,7 +1451,7 @@ class ContextOptionsStore {
           if (!contextOptions.includes(value.key) || value.isGroupAction)
             return;
 
-          // FABLE5-REVIEW: the original .js called onClick without a
+          // the original .js called onClick without a
           // presence check — the non-null assertions keep that behavior.
           const onClick = async () => {
             if (value.withActiveItem) {
@@ -1512,7 +1508,7 @@ class ContextOptionsStore {
     return pluginItems;
   };
 
-  // FABLE5-REVIEW: call sites may pass an undefined roomType which the
+  // call sites may pass an undefined roomType which the
   // original .js forwarded as-is to getDefaultAccessUser — the cast keeps
   // that behavior.
   onClickInviteUsers = (roomId: number | string, roomType?: RoomsType) => {
@@ -1662,7 +1658,7 @@ class ContextOptionsStore {
     this.indexingStore.setIsIndexEditingMode(true);
   };
 
-  // FABLE5-REVIEW: call sites may pass an undefined roomType which the
+  // call sites may pass an undefined roomType which the
   // original .js forwarded as-is (getGuidanceConfig then returns []) — the
   // cast keeps that behavior.
   onEnableFormFillingGuid = (t: TTranslation, roomType?: RoomsType) => {
@@ -1719,7 +1715,7 @@ class ContextOptionsStore {
     cb && cb();
   };
 
-  // FABLE5-REVIEW: some call sites pass `navigate` which the original .js
+  // some call sites pass `navigate` which the original .js
   // silently ignored — the optional parameter keeps those calls type-correct
   // without changing runtime behavior.
   onCreateTemplate = async (_navigate?: unknown) => {
@@ -1739,7 +1735,7 @@ class ContextOptionsStore {
       extension,
       id: -1,
       fromTemplate: true,
-      // FABLE5-REVIEW: the original .js assumed a selected gallery template
+      // the original .js assumed a selected gallery template
       // here (crashed on null) — the non-null assertion keeps that behavior.
       title: this.oformsStore.gallerySelected!.attributes.name_form,
       openEditor: true,
@@ -1756,7 +1752,7 @@ class ContextOptionsStore {
     this.oformsStore.setGallerySelected(item);
   };
 
-  // FABLE5-REVIEW: the Gallery ItemTitle consumer passes either a full
+  // the Gallery ItemTitle consumer passes either a full
   // TOformFile or a minimal { attributes } shape (and forwards it as-is);
   // the casts below keep the original unchecked usage.
   getFormGalleryContextOptions = (
@@ -2124,7 +2120,7 @@ class ContextOptionsStore {
 
     const { infoPanelSelection } = this.infoPanelStore;
 
-    // FABLE5-REVIEW: canShowManageLink expects TFile | TFolder while items
+    // canShowManageLink expects TFile | TFolder while items
     // here are .js view-models — the casts keep the original unchecked call.
     return {
       canShowLink: canShowManageLink(
@@ -2145,7 +2141,7 @@ class ContextOptionsStore {
     const { infoPanelRoom } = this.infoPanelStore;
     const selectedFolder = this.selectedFolderStore.getSelectedFolder();
 
-    // FABLE5-REVIEW: rooms resolved here are TRoom/TSelectedFolder shapes
+    // rooms resolved here are TRoom/TSelectedFolder shapes
     // consumed as .js view-models — the casts keep the original duck typing.
     if (infoPanelRoom) return infoPanelRoom as unknown as TContextItem;
     if (selectedFolder.isRoom) return selectedFolder as unknown as TContextItem;
@@ -2222,7 +2218,7 @@ class ContextOptionsStore {
       );
       item = { ...item, contextOptions };
     } else {
-      // FABLE5-REVIEW: removeOptions lives in the untyped filesUtils.js
+      // removeOptions lives in the untyped filesUtils.js
       // helper — the cast restores the string[] type of the filtered list.
       item.contextOptions = removeOptions(
         item.contextOptions,
@@ -2232,7 +2228,7 @@ class ContextOptionsStore {
 
     const { isPublicRoom } = this.publicRoomStore;
 
-    // FABLE5-REVIEW: contextOptions is guaranteed by the branch above — the
+    // contextOptions is guaranteed by the branch above — the
     // cast keeps the original unchecked destructuring.
     const { contextOptions, isEditing } = item as TSelectionItem;
 
@@ -2651,7 +2647,7 @@ class ContextOptionsStore {
         label: t("SaveAsTemplate"),
         icon: CreateTemplateSvgUrl,
         onClick: () => this.onSaveAsTemplate(item),
-        // FABLE5-REVIEW: the original .js uses the providerKey string itself
+        // the original .js uses the providerKey string itself
         // as the truthy "disabled" value — TContextOption allows it.
         disabled: !item.security?.Create || item.providerKey,
       },
@@ -3091,7 +3087,7 @@ class ContextOptionsStore {
         disabled: false,
       },
     ];
-    // FABLE5-REVIEW: `false` entries are skipped by filterModel's key lookup
+    // `false` entries are skipped by filterModel's key lookup
     // exactly as in the original .js — the cast keeps that behavior.
     const options = filterModel(
       optionsModel as TContextOption[],
@@ -3311,7 +3307,7 @@ class ContextOptionsStore {
           resultOptions.find((o) => o.key === "more-options") ||
           resultOptions.find((o) => o.key === "info");
         if (moreOptionsGroup) {
-          // FABLE5-REVIEW: menu groups are always created with an items
+          // menu groups are always created with an items
           // array — the non-null assertions keep the original unchecked
           // access.
           moreOptionsGroup.items!.push({
@@ -3839,7 +3835,7 @@ class ContextOptionsStore {
     window.dispatchEvent(event);
   };
 
-  // FABLE5-REVIEW: `t` is omitted by non-PDF call sites; the original .js
+  // `t` is omitted by non-PDF call sites; the original .js
   // only dereferences it in the mobile-PDF branch where it is always passed —
   // the non-null assertion keeps that behavior.
   onCreate = (format?: FileExtensions | string, t?: TTranslation) => {
@@ -3880,7 +3876,7 @@ class ContextOptionsStore {
 
   onShowTemplateGallery = () => {
     this.oformsStore.setTemplateGalleryVisible(true);
-    // FABLE5-REVIEW: the original .js passed a possibly-null selected folder
+    // the original .js passed a possibly-null selected folder
     // id through unchecked — the non-null assertion keeps that behavior.
     this.oformsStore.setOformFromFolderId(this.selectedFolderStore.id!);
   };
@@ -3956,7 +3952,7 @@ class ContextOptionsStore {
       this.selectedFolderStore;
     const { isPublicRoom } = this.publicRoomStore;
 
-    // FABLE5-REVIEW: Window["DocSpace"]["location"]["state"] is declared as
+    // Window["DocSpace"]["location"]["state"] is declared as
     // `unknown` in shared types — the cast mirrors the original .js access.
     const stateCanCreate = (
       window?.DocSpace?.location?.state as { canCreate?: boolean } | undefined
@@ -4182,7 +4178,7 @@ class ContextOptionsStore {
       const pluginItems: TContextOption[] = [];
 
       mainButtonItemsList.forEach((option) => {
-        // FABLE5-REVIEW: identical to the original `{ key, ...value }` spread
+        // identical to the original `{ key, ...value }` spread
         // (value.key wins) — Object.assign avoids TS2783 on the literal.
         pluginItems.push(
           Object.assign({ key: option.key }, option.value) as TContextOption,

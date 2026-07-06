@@ -180,7 +180,7 @@ const useFiles = ({
       playlist.length < 1
     ) {
       setTimeout(() => {
-        // FABLE5-REVIEW: `id` comes from the media-view URL and may be
+        // `id` comes from the media-view URL and may be
         // undefined; the erased cast keeps the old unchecked call.
         getFileInfo(id as string)
           .then((data) => {

@@ -225,9 +225,6 @@ class FilesStore {
 
   settingsStore: SettingsStore;
 
-  // FABLE5-REVIEW: never assigned (the constructor does not receive it) —
-  // stays undefined forever; quota checks go through
-  // `this.authStore.currentQuotaStore` instead. Candidate for removal.
   currentQuotaStore: CurrentQuotasStore | undefined;
 
   indexingStore: IndexingStore;
@@ -237,7 +234,7 @@ class FilesStore {
   // MobX dependency for getFilesListItems so a cache write triggers re-render.
   encryptedFilenameCacheVersion = 0;
 
-  // FABLE5-REVIEW: the persisted view value is trusted to be a valid TViewAs
+  // the persisted view value is trusted to be a valid TViewAs
   // (it is only ever written via setViewAs).
   privateViewAs = (
     !isDesktop() && storageViewAs !== "tile" ? "row" : storageViewAs || "table"
@@ -355,7 +352,7 @@ class FilesStore {
 
   mainButtonVisible = false;
 
-  // FABLE5-REVIEW: initialized null, always assigned in the constructor —
+  // initialized null, always assigned in the constructor —
   // the erased cast keeps the exact old JS runtime shape (own `null` field
   // observed by makeAutoObservable before assignment).
   aiRoomStore: AiRoomStore = null as unknown as AiRoomStore;
@@ -364,18 +361,13 @@ class FilesStore {
   // store/index.ts (mutual reference); only `roomGroups` is read here.
   dialogsStore: Nullable<Pick<DialogsStore, "roomGroups">> = null;
 
-  // FABLE5-REVIEW: only read by still-.js consumers (FilesPanels); never
-  // written inside the store.
   arrRoomGroups: unknown[] = [];
 
-  // FABLE5-REVIEW: created by a constructor assignment before
+  // created by a constructor assignment before
   // makeAutoObservable in the old JS (never a class field) — `declare`
   // keeps that runtime shape.
   declare isEditor: boolean;
 
-  // FABLE5-REVIEW: never assigned anywhere — `this.fileActionStore` is
-  // always undefined, so onCreateAddTempItem would throw if called (same as
-  // the old JS). Candidate for removal.
   declare fileActionStore?: { extension?: string; title?: string };
 
   constructor(
@@ -561,7 +553,7 @@ class FilesStore {
     });
 
     SocketHelper?.on(SocketEvents.ModifyRoom, (option) => {
-      // FABLE5-REVIEW: the ui-kit TOptSocket.cmd union does not include
+      // the ui-kit TOptSocket.cmd union does not include
       // "create-form" (ui-kit is a separate submodule); the erased cast
       // keeps the original switch.
       switch (option.cmd as string) {
@@ -576,7 +568,7 @@ class FilesStore {
 
     SocketHelper?.on(
       SocketEvents.ChaneFolderAccessRights,
-      // FABLE5-REVIEW: ChaneFolderAccessRights is not mapped in the ui-kit
+      // ChaneFolderAccessRights is not mapped in the ui-kit
       // TListenEventCallbackMap (falls back to a zero-arg listener type);
       // the erased cast keeps the original payload-taking callback.
       ((option: TOptSocket) => {
@@ -676,7 +668,7 @@ class FilesStore {
     if (opt?.type === "file" && opt?.id) {
       const foundIndex = this.getFileIndex(opt?.id);
 
-      // FABLE5-REVIEW: several socket payload reads below keep the old
+      // several socket payload reads below keep the old
       // unchecked-crash behavior via erased casts / non-null assertions
       // (JSON.parse of possibly-undefined data, user possibly null).
       const file = JSON.parse(opt?.data as string);
@@ -1046,7 +1038,7 @@ class FilesStore {
 
     switch (rootFolderType) {
       case FolderType.AIAgents: {
-        // FABLE5-REVIEW: RoomsFilter.getDefault/toUrlParams type userId as
+        // RoomsFilter.getDefault/toUrlParams type userId as
         // `string | undefined` but the old JS passes `null` when there is no
         // user; erased casts keep the exact runtime value.
         const aiAgentsFilter = RoomsFilter.getDefault(
@@ -1080,7 +1072,7 @@ class FilesStore {
 
         const filter = FilesFilter.getDefault();
 
-        // FABLE5-REVIEW: FilesFilter.folder is typed `string` but numeric
+        // FilesFilter.folder is typed `string` but numeric
         // folder ids are assigned at runtime; erased cast keeps the value.
         filter.folder = pathPart.id as unknown as string;
 
@@ -1168,7 +1160,7 @@ class FilesStore {
 
   checkSelection = (file: TItem) => {
     if (this.selection) {
-      // FABLE5-REVIEW: isSameEntity is typed for raw TFile/TFolder/TRoom
+      // isSameEntity is typed for raw TFile/TFolder/TRoom
       // entities while this store passes filesList view-model items; the
       // erased casts keep the calls unchanged.
       const foundIndex = this.selection?.findIndex((x) =>
@@ -1276,7 +1268,7 @@ class FilesStore {
       this.selectedFolderStore;
     const currentDeviceType = this.settingsStore.currentDeviceType;
 
-    // FABLE5-REVIEW: getViewForCurrentRoom accepts only "row"|"table"|"tile"
+    // getViewForCurrentRoom accepts only "row"|"table"|"tile"
     // while the persisted value is the wider TViewAs; the erased cast keeps
     // the original pass-through.
     return getViewForCurrentRoom(view as "row" | "table" | "tile", {
@@ -1361,7 +1353,7 @@ class FilesStore {
     const { isAuthenticated } = this.authStore;
     const { getFilesSettings } = this.filesSettingsStore;
 
-    // FABLE5-REVIEW: SettingsStore renamed getEncryptionKeys to
+    // SettingsStore renamed getEncryptionKeys to
     // getLegacyEncryptionKeys — this destructured member is undefined at
     // runtime, so the desktop-client branch below would throw when calling
     // it (same as the old JS). Candidate for a real fix.
@@ -1784,7 +1776,7 @@ class FilesStore {
                 ?.getAttribute("value")
             : null;
 
-      // FABLE5-REVIEW: unlike the `added` loop there is no `!value` guard
+      // unlike the `added` loop there is no `!value` guard
       // here, so the old JS would throw on a null value; the erased cast
       // keeps that behavior.
       const splitValue = (value && value.split("_")) as string[];
@@ -1885,7 +1877,7 @@ class FilesStore {
   };
 
   resetUrl = () => {
-    // FABLE5-REVIEW: tempFilter may still be null here (old JS passed it
+    // tempFilter may still be null here (old JS passed it
     // through unchecked); the erased cast keeps the same runtime value.
     this.setFilesFilter(this.tempFilter as TFilesFilter);
   };
@@ -1947,7 +1939,7 @@ class FilesStore {
     setIsIndexEditingMode(false);
 
     const filterData = filter ? filter.clone() : FilesFilter.getDefault();
-    // FABLE5-REVIEW: FilesFilter.folder is typed `string` but folder ids are
+    // FilesFilter.folder is typed `string` but folder ids are
     // numbers or strings at runtime; erased casts keep the values.
     filterData.folder = folderId as string;
 
@@ -1957,7 +1949,7 @@ class FilesStore {
       !this.userStore.user?.hasPersonalFolder
     ) {
       const url = getCategoryUrl(CategoryType.Shared);
-      // FABLE5-REVIEW: this early-return escapes with the void result of
+      // this early-return escapes with the void result of
       // navigate() while the method is otherwise Promise-returning; the
       // erased cast keeps the old JS value.
       return window.DocSpace.navigate(
@@ -2100,7 +2092,7 @@ class FilesStore {
 
         let navigationPath = await Promise.all(
           data.pathParts.map(async (folder, idx) => {
-            // FABLE5-REVIEW: FolderType is a ui-kit `const enum` and may
+            // FolderType is a ui-kit `const enum` and may
             // not be destructured (TS2475); the runtime object exists in the
             // babel/esbuild build, so the original statement is kept under a
             // suppression.
@@ -2210,7 +2202,7 @@ class FilesStore {
             this.aiRoomStore.setResultId(currentFolder.id as number);
           }
 
-          // FABLE5-REVIEW: `room` is assigned inside the Promise.all map
+          // `room` is assigned inside the Promise.all map
           // above; the non-null assertions keep the old unchecked access.
           const aiRoom: TItem =
             room!.id === currentFolder.parentId
@@ -2389,7 +2381,7 @@ class FilesStore {
         return Promise.resolve(selectedFolder);
       })
       .catch((err) => {
-        // FABLE5-REVIEW: CurrentTariffStatusStore has no setPortalTariff
+        // CurrentTariffStatusStore has no setPortalTariff
         // member (renamed to fetchPortalTariff upstream) — the old JS throws
         // here on a 402; the erased cast preserves that behavior.
         if (err?.response?.status === 402)
@@ -2513,7 +2505,7 @@ class FilesStore {
 
     const { provider, quotaFilter } = filterData;
 
-    // FABLE5-REVIEW: ROOMS_PROVIDER_TYPE_NAME is keyed by RoomsProviderType
+    // ROOMS_PROVIDER_TYPE_NAME is keyed by RoomsProviderType
     // while RoomsFilter.provider is a nullable string; the erased cast keeps
     // the original lookup.
     if (
@@ -2862,7 +2854,7 @@ class FilesStore {
     inRoom = false,
     filter: Nullable<TRoomsFilter> = null,
   ) => {
-    // FABLE5-REVIEW: rooms quota endpoints are typed with numeric ids;
+    // rooms quota endpoints are typed with numeric ids;
     // string ids pass through unchanged at runtime.
     const rooms = await api.rooms.setCustomRoomQuota(
       itemsIDs as number[],
@@ -2888,7 +2880,7 @@ class FilesStore {
     inAgent = false,
     filter: Nullable<TRoomsFilter> = null,
   ) => {
-    // FABLE5-REVIEW: the AI quota endpoints are typed with numeric agent
+    // the AI quota endpoints are typed with numeric agent
     // ids; string ids pass through unchanged at runtime.
     const agents = await api.ai.setNewAiAgentQuota(
       itemsIDs as number[],
@@ -2979,7 +2971,7 @@ class FilesStore {
       item.rootFolderType === FolderType.AIAgents &&
       item.roomType === RoomsType.AIRoom;
 
-    // FABLE5-REVIEW: the non-null assertions in this method keep the old
+    // the non-null assertions in this method keep the old
     // unchecked reads of optional item fields (new/fileStatus/security/
     // viewAccessibility) — the original .js relied on them being present
     // (or on JS falsy/NaN semantics) for the item kinds that reach each
@@ -3762,7 +3754,7 @@ class FilesStore {
       }
 
       const { organizeRoomsGrouping } = this.filesSettingsStore;
-      // FABLE5-REVIEW: dialogsStore is attached post-construction in
+      // dialogsStore is attached post-construction in
       // store/index.js; the non-null assertion keeps the old unchecked read.
       const { roomGroups } = this.dialogsStore!;
       const currentGroupId = this.roomsFilter?.groupId;
@@ -4135,7 +4127,7 @@ class FilesStore {
         ? this.folders.filter((x) => !folderIds.includes(x.id))
         : this.folders;
 
-      // FABLE5-REVIEW: when only folderIds are passed the old JS still
+      // when only folderIds are passed the old JS still
       // reads `fileIds.includes` lazily via the ternary branches — the
       // non-null assertion below keeps the same unchecked access.
       const hotkeysClipboard = fileIds
@@ -4192,7 +4184,7 @@ class FilesStore {
       return;
     }
 
-    // FABLE5-REVIEW: RoomsFilter has no declared startIndex/folder members
+    // RoomsFilter has no declared startIndex/folder members
     // but the old JS sets/reads them on either filter kind; the erased casts
     // keep that dynamic behavior.
     (newFilter as TFilesFilter).startIndex =
@@ -4351,7 +4343,7 @@ class FilesStore {
     this._backfilledEncryptedRooms.add(roomId);
     console.info("[ENCRYPTION] Starting backfill sweep for room", roomId);
 
-    // FABLE5-REVIEW: backfillEncryptedFilesForRoomMembers is typed with a
+    // backfillEncryptedFilesForRoomMembers is typed with a
     // numeric roomId; string ids pass through unchanged at runtime.
     void backfillEncryptedFilesForRoomMembers(roomId as number, {
       currentUserId: String(userId),
@@ -4381,7 +4373,7 @@ class FilesStore {
   };
 
   renameFolder = (folderId: number | string, title: string) => {
-    // FABLE5-REVIEW: api.files.renameFolder is typed with a numeric
+    // api.files.renameFolder is typed with a numeric
     // folderId; the erased cast keeps the runtime pass-through of string ids.
     return api.files.renameFolder(folderId as number, title).then((folder) => {
       this.setFolder(folder);
@@ -4390,7 +4382,7 @@ class FilesStore {
 
   getFilesCount = () => {
     const { filesCount, foldersCount } = this.selectedFolderStore;
-    // FABLE5-REVIEW: the original expression `filesCount + this.folders`
+    // the original expression `filesCount + this.folders`
     // coerces the array to a string (always truthy) — preserved verbatim
     // with an erased cast; candidate for a real fix.
     return (filesCount + (this.folders as unknown as number))
@@ -4514,7 +4506,7 @@ class FilesStore {
 
   onCreateAddTempItem = (items: TItem[]) => {
     const { getFileIcon, getFolderIcon } = this.filesSettingsStore;
-    // FABLE5-REVIEW: fileActionStore is never assigned — this destructuring
+    // fileActionStore is never assigned — this destructuring
     // throws if onCreateAddTempItem is ever called (same as the old JS).
     const { extension, title } = this.fileActionStore!;
 
@@ -4676,7 +4668,7 @@ class FilesStore {
         "small",
       );
 
-      // FABLE5-REVIEW: RoomsProviderType is a ui-kit `const enum` and may
+      // RoomsProviderType is a ui-kit `const enum` and may
       // not be enumerated/indexed dynamically (TS2475/TS2476); the runtime
       // object exists in the babel/esbuild build, so the original lookup is
       // kept under a suppression.
@@ -4805,7 +4797,7 @@ class FilesStore {
 
       return {
         access,
-        // FABLE5-REVIEW: getDaysRemaining is typed for Date but receives the
+        // getDaysRemaining is typed for Date but receives the
         // API date string at runtime (getDaysLeft accepts both).
         daysRemaining:
           autoDelete && getDaysRemaining(autoDelete as unknown as Date),
@@ -4922,7 +4914,7 @@ class FilesStore {
     ) {
       this.isEmptyPage && this.setIsEmptyPage(false);
 
-      // FABLE5-REVIEW: `order` is guaranteed by the `.filter((x) => x.order)`
+      // `order` is guaranteed by the `.filter((x) => x.order)`
       // above; the non-null assertions keep the same unchecked access.
       orderItems.sort((a: TItem, b: TItem) => {
         if (a.order!.includes(".")) {
@@ -5280,7 +5272,7 @@ class FilesStore {
   }
 
   fetchFavoritesFolder = async (folderId: number | string) => {
-    // FABLE5-REVIEW: api.files.getFolder is typed with a mandatory filter
+    // api.files.getFolder is typed with a mandatory filter
     // param but the old JS calls it with the folder id only; the erased
     // function cast keeps the reduced call arity.
     const favoritesFolder = await (
@@ -5342,7 +5334,7 @@ class FilesStore {
 
     const searchParams = new URLSearchParams();
 
-    // FABLE5-REVIEW: URLSearchParams.append is typed for strings while the
+    // URLSearchParams.append is typed for strings while the
     // old JS passes numeric ids / nullable share keys; erased casts keep
     // the values (they are stringified by the browser API).
     searchParams.append("fileId", id as string);
@@ -5694,7 +5686,7 @@ class FilesStore {
 
   getRooms = async (filter: Partial<TRoomsFilter>) => {
     const userId = this.userStore.user && this.userStore.user.id;
-    // FABLE5-REVIEW: RoomsFilter.getDefault types userId as
+    // RoomsFilter.getDefault types userId as
     // `string | undefined` but the old JS passes `null` when there is no
     // user; the erased cast keeps the exact runtime value.
     const newFilter = RoomsFilter.getDefault(userId as string);

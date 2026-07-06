@@ -106,13 +106,11 @@ class BackupStore {
 
   restoreResource: Nullable<File | number | string> = null;
 
-  // FABLE5-REVIEW: initialized as `{}` in the original JS even though the
+  // initialized as `{}` in the original JS even though the
   // schedule shape is TBackupSchedule; consumers set a real schedule (or
   // deleteSchedule sets null) before the fields are read.
   backupSchedule: Nullable<TBackupSchedule> = {} as TBackupSchedule;
 
-  // FABLE5-REVIEW: `backupStorage` is never read or written anywhere
-  // (store or consumers) — candidate for removal.
   backupStorage: Record<string, unknown> = {};
 
   defaultDay = "0";
@@ -171,15 +169,13 @@ class BackupStore {
 
   temporaryLink: Nullable<string> = null;
 
-  // FABLE5-REVIEW: `timerId` is never assigned in the store or consumers —
-  // it stays `null` forever; candidate for removal.
   timerId: Nullable<number> = null;
 
   isThirdStorageChanged = false;
 
   formSettings: Record<string, string> = {};
 
-  // FABLE5-REVIEW: initialized as `{}` in the original JS, but every write
+  // initialized as `{}` in the original JS, but every write
   // (setRequiredFormSettings) stores a string[] and isValidForm calls
   // `.some()` on it. Typed as string[] with a cast to keep the runtime
   // default untouched.
@@ -201,8 +197,6 @@ class BackupStore {
 
   accounts: ThirdPartyAccountType[] = [];
 
-  // FABLE5-REVIEW: `connectedAccount` is never read or written anywhere
-  // (store or consumers) — candidate for removal.
   connectedAccount: unknown[] = [];
 
   isBackupProgressVisible = false;
@@ -219,7 +213,7 @@ class BackupStore {
 
   isInitialError = false;
 
-  // FABLE5-REVIEW: `chunkUploadSize` was never declared as a class field in
+  // `chunkUploadSize` was never declared as a class field in
   // the original JS (created on first setChunkUploadSize call, so it is not
   // observable). `declare` keeps that runtime shape; setChunkUploadSize is
   // never called by consumers — candidate for removal.
@@ -452,7 +446,7 @@ class BackupStore {
     this.accounts = accounts;
   };
 
-  // FABLE5-REVIEW: the setter historically accepts Partial<…> (old JSDoc) or
+  // the setter historically accepts Partial<…> (old JSDoc) or
   // undefined while the field is Nullable<ThirdPartyAccountType>; the cast
   // mirrors that pre-existing mismatch without changing runtime.
   setSelectedThirdPartyAccount = (
@@ -488,7 +482,7 @@ class BackupStore {
     this.setIsThirdStorageChanged(false);
   };
 
-  // FABLE5-REVIEW: params are TOption[] to match the shared
+  // params are TOption[] to match the shared
   // AutomaticBackupProps contract; TOption.key is string | number and
   // TOption.label is ReactNode, so the assignments below cast to string —
   // backup period/weekday options always carry string labels at runtime.
@@ -556,7 +550,7 @@ class BackupStore {
           }
         }
 
-        // FABLE5-REVIEW: `weekDay as number` — original JS would index with
+        // `weekDay as number` — original JS would index with
         // undefined (yielding a crash on .label) if no weekday matched;
         // the cast keeps that runtime untouched.
         this.defaultWeekdayLabel = weekdayArr[
@@ -690,7 +684,7 @@ class BackupStore {
     }
   };
 
-  // FABLE5-REVIEW: getErrorInfo requires `t` and can return a ReactNode, but
+  // getErrorInfo requires `t` and can return a ReactNode, but
   // the original store calls it with t/customText omitted and stores the
   // result in a string field; the casts keep that pre-existing runtime.
   setErrorInformation = (
@@ -710,8 +704,6 @@ class BackupStore {
     this.settingsStore.addAbortControllers(abortController);
 
     try {
-      // FABLE5-REVIEW: getBackupProgress is untyped in shared/api (request
-      // without a generic), cast to TBackupProgress at the call site.
       const response = (await getBackupProgress(
         isManagement(),
         abortController.signal,
@@ -785,7 +777,7 @@ class BackupStore {
     delete this.formSettings[key];
   };
 
-  // FABLE5-REVIEW: typed Option[] to match the shared backup page contracts
+  // typed Option[] to match the shared backup page contracts
   // (AutoBackup/RestoreBackup types), although the produced objects carry
   // only { key, value } at runtime (no label) — pre-existing shape.
   getStorageParams = (
@@ -951,7 +943,7 @@ class BackupStore {
         return fileName.substring(fileName.lastIndexOf(".") + 1);
       };
 
-      // FABLE5-REVIEW: uploadLocalFile assumes restoreResource is a File
+      // uploadLocalFile assumes restoreResource is a File
       // (name/size/slice); the original JS would crash on other values,
       // the casts keep that runtime untouched.
       const extension = getExst((this.restoreResource as File).name);
@@ -970,7 +962,7 @@ class BackupStore {
 
       const chunkUploadSize = res.data.ChunkSize;
 
-      // FABLE5-REVIEW: the original JS passed a second argument to
+      // the original JS passed a second argument to
       // Math.ceil, which is ignored at runtime; removed for TS (no
       // behavior change).
       const chunks = Math.ceil(

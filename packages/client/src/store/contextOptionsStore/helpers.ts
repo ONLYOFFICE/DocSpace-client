@@ -68,11 +68,6 @@ export type TContextItemSecurity = Partial<
   TFileSecurity & TFolderSecurity & TRoomSecurity
 >;
 
-// FABLE5-REVIEW: context-menu items are FilesStore filesList view-models and
-// FilesStore is still .js (wave 3) — this is a minimal structural type of the
-// members used in this store. TFile/TFolder/TRoom from typed consumers are
-// assignable to it. Replace with the real list-item type once FilesStore is
-// converted.
 export type TContextItem = {
   id: number;
   title: string;
@@ -122,7 +117,7 @@ export type TContextItem = {
   sendFormToExternalDB?: boolean;
 };
 
-// FABLE5-REVIEW: the option shape this store builds is looser than ui-kit's
+// the option shape this store builds is looser than ui-kit's
 // ContextMenuModel (store-specific onClick signatures, string-keyed
 // separators); results are cast to ContextMenuModel[] at the public
 // boundaries. Align with ContextMenuModel once the .js consumers are typed.
@@ -160,7 +155,7 @@ type TCreateEventPayload = {
   isFormsCreate?: boolean;
 };
 
-// FABLE5-REVIEW: the still-.js GlobalEvents component reads these extra
+// the still-.js GlobalEvents component reads these extra
 // fields off the dispatched CustomEvent.
 export type TStoreCustomEvent = CustomEvent & {
   item?: TContextItem;
@@ -173,7 +168,7 @@ export const onClickLinkForPortal = (item: TContextItem, t: TTranslation) => {
   const { fileExst, canOpenPlayer, webUrl, id } = item;
 
   const isFile = !!fileExst;
-  // FABLE5-REVIEW: the original .js passed a possibly-undefined webUrl
+  // the original .js passed a possibly-undefined webUrl
   // through to copy() unchecked — the cast keeps that behavior.
   copy(
     isFile
@@ -215,7 +210,7 @@ export const filterModel = (model: TContextOption[], filter: string[]) => {
   return options.filter((o) => !!o);
 };
 
-// FABLE5-REVIEW: every current call site passes only `item`, so `view` is
+// every current call site passes only `item`, so `view` is
 // undefined at runtime; the cast preserves that pre-existing behavior of
 // calling setView(undefined).
 export const onShowInfoPanel = (item?: TContextItem, view?: string) => {
@@ -289,7 +284,7 @@ export const onSuggestOformChanges = (item: {
 }) => {
   const formTitle = item.attributes ? item.attributes.name_form : item.title;
 
-  // FABLE5-REVIEW: assigning a string to window.location is valid at
+  // assigning a string to window.location is valid at
   // runtime (navigates) but lib.dom types the setter stricter — the cast
   // keeps the original statement.
   window.location = `mailto:marketing@onlyoffice.com
@@ -316,7 +311,7 @@ export const createMenuGroup = (
   if (needsGrouping) {
     let lastNonEmptyGroupIndex = -1;
 
-    // FABLE5-REVIEW: needsGrouping callers always pass nested
+    // needsGrouping callers always pass nested
     // { key }[][] itemKeys — the cast reflects that contract.
     (itemKeys as { key: string }[][]).forEach((group, groupIndex) => {
       const groupSubItems = group

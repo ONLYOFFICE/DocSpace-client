@@ -131,7 +131,7 @@ export default inject<
       setSaveAfterReconnectOAuth,
     } = dialogsStore;
 
-    // FABLE5-REVIEW: type-only cast — DialogsStore.connectItem is a partial
+    // type-only cast — DialogsStore.connectItem is a partial
     // ThirdPartyAccountType built by still-.js provider/capability spreads;
     // the original .js passed it through unchanged.
     const item: Nullable<ThirdPartyAccountType> =
@@ -146,7 +146,7 @@ export default inject<
       roomCreation,
       saveThirdParty: saveThirdPartyApi,
       openConnectWindow,
-      // FABLE5-REVIEW: type-only cast — ThirdPartyStore.connectingStorages is
+      // type-only cast — ThirdPartyStore.connectingStorages is
       // typed with the raw TConnectingStorage shape, but
       // fetchConnectingStorages enriches every entry with
       // id/className/category at runtime, matching ConnectingStoragesType.

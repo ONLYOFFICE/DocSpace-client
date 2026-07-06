@@ -230,7 +230,7 @@ const setAgentParams = ({
 
   React.useEffect(() => {
     setRoomCoverDialogProps?.({
-      // FABLE5-REVIEW: type-only assertion — the prop is always injected
+      // type-only assertion — the prop is always injected
       // alongside setRoomCoverDialogProps; the original .js spread it as-is.
       ...roomCoverDialogProps!,
       title: previewTitle,
@@ -317,7 +317,7 @@ const setAgentParams = ({
     }
 
     setRoomCoverDialogProps?.({
-      // FABLE5-REVIEW: type-only assertion — the prop is always injected
+      // type-only assertion — the prop is always injected
       // alongside setRoomCoverDialogProps; the original .js spread it as-is.
       ...roomCoverDialogProps!,
       title: newValue,
@@ -592,7 +592,7 @@ export default inject(
       setCover,
     } = dialogsStore;
 
-    // FABLE5-REVIEW: bufferSelection is a FilesStore view-model item
+    // bufferSelection is a FilesStore view-model item
     // (TItem); erased cast adapts it to the raw-entity dialog param.
     setCoverSelection(bufferSelection as Nullable<TRoom>);
 

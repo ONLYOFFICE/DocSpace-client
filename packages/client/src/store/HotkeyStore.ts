@@ -57,10 +57,6 @@ import type SelectedFolderStore from "./SelectedFolderStore";
 import type { TSelectedFolder } from "./SelectedFolderStore";
 import type TreeFoldersStore from "./TreeFoldersStore";
 
-// FABLE5-REVIEW: FilesStore is still .js (wave 3) — items of `filesList`,
-// `selection` and `hotkeysClipboard` are file/folder view-models built inside
-// FilesStore; minimal structural type of the fields this store touches.
-// Replace with the real item type once FilesStore is converted.
 type TFilesItem = {
   id: number | string;
   title?: string;
@@ -84,8 +80,6 @@ type TOperationData = {
   isFolder?: boolean;
 };
 
-// FABLE5-REVIEW: FilesStore is still .js (wave 3) — replace this structural
-// type with `import type` once it is converted.
 type TFilesStore = {
   viewAs: string;
   selection: TFilesItem[];
@@ -95,7 +89,7 @@ type TFilesStore = {
   hotkeyCaret: TFilesItem | null;
   hotkeyCaretStart: TFilesItem | null;
   hotkeysClipboard: TFilesItem[];
-  // FABLE5-REVIEW: FilesStore.activeFiles/activeFolders hold either plain ids
+  // FilesStore.activeFiles/activeFolders hold either plain ids
   // or `{ id, destFolderId }` objects depending on the code path, so
   // `activeFiles.includes(item.id)` below only matches the id-shaped entries.
   activeFiles: unknown[];
@@ -110,8 +104,6 @@ type TFilesStore = {
   deselectFile: (file: TFilesItem | null) => void;
 };
 
-// FABLE5-REVIEW: DialogsStore is still .js (wave 3) — replace this structural
-// type with `import type` once it is converted.
 type TDialogsStore = {
   setMoveToPublicRoomVisible: (
     visible: boolean,
@@ -119,8 +111,6 @@ type TDialogsStore = {
   ) => void;
 };
 
-// FABLE5-REVIEW: FilesActionsStore is still .js (wave 3) — replace this
-// structural type with `import type` once it is converted.
 type TFilesActionsStore = {
   mediaViewerDataStore: { isViewerOpen: boolean };
   openFileAction: (item: TFilesItem, t: TTranslation) => void;
@@ -138,8 +128,6 @@ type TFilesActionsStore = {
   createFoldersTree: (t: TTranslation, files: unknown[]) => Promise<unknown[]>;
 };
 
-// FABLE5-REVIEW: UploadDataStore is still .js (wave 3) — replace this
-// structural type with `import type` once it is converted.
 type TUploadDataStore = {
   itemOperationToFolder: (operationData: TOperationData) => Promise<unknown>;
   clearActiveOperations: (
@@ -215,7 +203,7 @@ class HotkeyStore {
       const el = item[0];
       const rect = el.getBoundingClientRect();
 
-      // FABLE5-REVIEW: `scroll`/`scrollRect`/`offsetTop` can be
+      // `scroll`/`scrollRect`/`offsetTop` can be
       // null/undefined when the scroll container is not in the DOM — the
       // original .js dereferenced them unguarded here; non-null assertions
       // keep runtime identical.
@@ -270,7 +258,7 @@ class HotkeyStore {
 
     if (!hotkeyCaret) {
       const scroll = document.getElementsByClassName("section-scroll");
-      // FABLE5-REVIEW: `firstChild` is a nullable ChildNode — the original
+      // `firstChild` is a nullable ChildNode — the original
       // .js called `.focus()` on it unguarded; the cast keeps runtime
       // identical.
       scroll && scroll[0] && (scroll[0]?.firstChild as HTMLElement).focus();
@@ -300,7 +288,7 @@ class HotkeyStore {
   getItemOffset = () => {
     const { hotkeyCaret, viewAs } = this.filesStore;
 
-    // FABLE5-REVIEW: `hotkeyCaret` can be null — the original .js read
+    // `hotkeyCaret` can be null — the original .js read
     // `.fileExst` on it unguarded (callers ensure a caret is set); the
     // non-null assertion keeps runtime identical.
     const className = hotkeyCaret!.fileExst
@@ -319,7 +307,7 @@ class HotkeyStore {
 
       const offset = el.closest<HTMLElement>(".window-item")?.offsetTop;
 
-      // FABLE5-REVIEW: the `parentElement` chain is nullable — the original
+      // the `parentElement` chain is nullable — the original
       // .js dereferenced it unguarded; non-null assertions keep runtime
       // identical.
       const offsetTop =
@@ -441,7 +429,7 @@ class HotkeyStore {
     }
     if (!hotkeyCaret && !selection.length) return this.selectFirstFile();
 
-    // FABLE5-REVIEW: `hotkeyCaret`/`hotkeyCaretStart`/`this.nextFile` are
+    // `hotkeyCaret`/`hotkeyCaretStart`/`this.nextFile` are
     // nullable — the original .js dereferenced them unguarded on these paths;
     // non-null assertions keep runtime identical.
     if (viewAs === "tile") {
@@ -488,7 +476,7 @@ class HotkeyStore {
     }
     if (!hotkeyCaret && !selection.length) this.selectFirstFile();
 
-    // FABLE5-REVIEW: `hotkeyCaret`/`hotkeyCaretStart`/`this.prevFile` are
+    // `hotkeyCaret`/`hotkeyCaretStart`/`this.prevFile` are
     // nullable — the original .js dereferenced them unguarded on these paths;
     // non-null assertions keep runtime identical.
     if (viewAs === "tile") {
@@ -575,7 +563,7 @@ class HotkeyStore {
     }
 
     if ((this.caretIndex as number) < hotkeyCaretStartIndex) {
-      // FABLE5-REVIEW: `hotkeyCaret` is nullable — the original .js
+      // `hotkeyCaret` is nullable — the original .js
       // dereferenced it unguarded here; non-null assertions keep runtime
       // identical.
       const idx = nextForTileRight.findIndex(
@@ -639,7 +627,7 @@ class HotkeyStore {
     }
 
     if ((this.caretIndex as number) > hotkeyCaretStartIndex) {
-      // FABLE5-REVIEW: `hotkeyCaret` is nullable — the original .js
+      // `hotkeyCaret` is nullable — the original .js
       // dereferenced it unguarded here; non-null assertions keep runtime
       // identical.
       const idx = prevForTileLeft.findIndex(
@@ -780,7 +768,7 @@ class HotkeyStore {
 
     if (!selections.length) return;
 
-    // FABLE5-REVIEW: `security` is nullable on SelectedFolderStore — the
+    // `security` is nullable on SelectedFolderStore — the
     // original .js read `.CopyTo`/`.MoveTo` unguarded; non-null assertions
     // keep runtime identical.
     if (!security!.CopyTo || !security!.MoveTo) return;
@@ -821,7 +809,7 @@ class HotkeyStore {
         }),
       };
 
-      // FABLE5-REVIEW: `selections` is an array, so `selections.rootFolderType`
+      // `selections` is an array, so `selections.rootFolderType`
       // is always undefined at runtime (looks like a latent bug — probably
       // meant `selections[0].rootFolderType`); the cast keeps the original
       // runtime behavior.
@@ -982,7 +970,7 @@ class HotkeyStore {
     return false;
   }
 
-  // FABLE5-REVIEW: `caretIndex` returns null (never -1) when nothing is
+  // `caretIndex` returns null (never -1) when nothing is
   // found, so the `!== -1` checks at the call sites are always true and the
   // arithmetic there relies on JS null coercion (e.g. `null + 1 === 1`). The
   // `as number` casts at those sites keep runtime identical.
@@ -1082,7 +1070,7 @@ class HotkeyStore {
           : folders[foldersLength - 1]
         : folders[foldersLength - 1];
     } else if (!prevTileFile) {
-      // FABLE5-REVIEW: `hotkeyCaret` can be null — the original .js assigned
+      // `hotkeyCaret` can be null — the original .js assigned
       // it here and dereferenced `.isFolder` below unguarded; the non-null
       // assertion keeps runtime identical.
       prevForTileUp = hotkeyCaret!;

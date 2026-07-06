@@ -62,8 +62,6 @@ type TFilesStore = FilesStore;
 
 export type TPreviewFile = TFile & { canOpenPlayer: boolean };
 
-// FABLE5-REVIEW: currentItem is an UploadDataStore upload item (UploadDataStore
-// is still .js) — minimal shape of the members actually used here.
 type TCurrentItem = {
   fileId: number;
   fileInfo: TFile;
@@ -74,7 +72,7 @@ type TMediaViewerData = {
   visible: boolean;
 };
 
-// FABLE5-REVIEW: `pdfViewer` exists in public/scripts/config.json but is
+// `pdfViewer` exists in public/scripts/config.json but is
 // missing from the duplicated Window.ClientConfig declarations
 // (packages/shared/types/index.ts and the libs/ui-kit submodule's
 // utils/openingNewTab/index.ts). Both declarations must be updated in sync
@@ -170,7 +168,7 @@ class MediaViewerDataStore {
 
     if (
       !file.canOpenPlayer &&
-      // FABLE5-REVIEW: `!file.fileExst === ".pdf"` compares a boolean to a
+      // `!file.fileExst === ".pdf"` compares a boolean to a
       // string and is always false (likely meant `file.fileExst !== ".pdf"`).
       // Cast keeps the original runtime behavior unchanged.
       (!file.fileExst as unknown as string) === ".pdf" &&
@@ -428,7 +426,7 @@ class MediaViewerDataStore {
       const pluginPlaylist = this.filterFilesByPluginCriteria(filesList);
 
       return pluginPlaylist.map((file, index) => {
-        // FABLE5-REVIEW: plugin playlist items genuinely lack `thumbnailUrl`
+        // plugin playlist items genuinely lack `thumbnailUrl`
         // at runtime although PlaylistType requires it — cast preserves the
         // original runtime shape.
         return {
@@ -449,7 +447,7 @@ class MediaViewerDataStore {
     let id = 0;
 
     if (this.currentItem) {
-      // FABLE5-REVIEW: this playlist item genuinely lacks `thumbnailUrl` and
+      // this playlist item genuinely lacks `thumbnailUrl` and
       // `version` at runtime although PlaylistType requires them — cast
       // preserves the original runtime shape.
       playlist.push({

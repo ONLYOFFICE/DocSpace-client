@@ -72,8 +72,6 @@ class TreeFoldersStore {
 
   selectedTreeNode: string[] = [];
 
-  // FABLE5-REVIEW: no consumers of expandedPanelKeys were found outside this
-  // store; typed as string[] | null based on the tree expanded-keys shape.
   expandedPanelKeys: string[] | null = null;
 
   rootFoldersTitles: Partial<Record<FolderType, TTreeFolder>> = {};
@@ -95,7 +93,7 @@ class TreeFoldersStore {
   fetchTreeFolders = async () => {
     if (this.publicRoomStore.isPublicRoom) return;
 
-    // FABLE5-REVIEW: getFoldersTree is declared as returning TFolder[] in
+    // getFoldersTree is declared as returning TFolder[] in
     // shared/api/files, but the objects it builds carry the extra tree
     // fields (key, folderClassName, folders, newItems) captured by
     // TTreeFolder.
@@ -161,7 +159,7 @@ class TreeFoldersStore {
 
   updateTreeFoldersItem = (opt?: TOptSocket) => {
     if (opt?.data && opt?.cmd === "create") {
-      // FABLE5-REVIEW: the socket payload is a file DTO when opt.type is
+      // the socket payload is a file DTO when opt.type is
       // "file" and a folder DTO otherwise; typed as an intersection so both
       // branches can access their fields without changing the runtime.
       const data = JSON.parse(opt.data) as TFile & TFolder;

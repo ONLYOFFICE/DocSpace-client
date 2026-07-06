@@ -76,7 +76,7 @@ const CreatedPDFFormDialogComponent = ({
 		try {
 			const currentFile = await getFileInfo(file.id);
 
-			// FABLE5-REVIEW: getFilesListItems returns FilesStore view-model
+			// getFilesListItems returns FilesStore view-model
 			// items (TItem); the erased casts adapt them to the raw-entity
 			// parameter types of the share helpers (type-only).
 			const [fileItem] = getFilesListItems([currentFile]);

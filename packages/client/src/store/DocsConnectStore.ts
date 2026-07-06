@@ -51,6 +51,8 @@ import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffSt
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 
+import { isDocsConnectPaid } from "SRC_DIR/pages/PortalSettings/categories/developer-tools/DocsConnect/utils";
+
 export type BuyPlanMode = "trial" | "edit";
 
 class DocsConnectStore {
@@ -158,14 +160,19 @@ class DocsConnectStore {
     devPack: boolean;
     topUp?: number;
   }) => {
+    const isPaid = this.info ? isDocsConnectPaid(this.info) : false;
+
     const info = await buyDocsConnectPlan({
       users,
       devPackEnabled: devPack,
       topUp,
-      currentUsers: this.info?.deactivated
-        ? 0
-        : (this.info?.tenant.payment?.quantity ?? 0),
-      currentDevPackEnabled: this.info?.devPackEnabled ?? false,
+      currentUsers:
+        !isPaid || this.info?.deactivated
+          ? 0
+          : (this.info?.tenant.payment?.quantity ?? 0),
+      currentDevPackEnabled: isPaid
+        ? (this.info?.devPackEnabled ?? false)
+        : false,
       currency: this.info?.wallet?.currency ?? "USD",
     });
     runInAction(() => {

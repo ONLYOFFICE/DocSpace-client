@@ -52,6 +52,41 @@ export const isDocsConnectCanceled = (info: TDocsConnectInfo): boolean =>
   info.scheduledChange == null &&
   (info.tenant.payment?.quantity ?? 0) === 0;
 
+const base64UrlEncode = (bytes: Uint8Array): string => {
+  let binary = "";
+  bytes.forEach((byte) => {
+    binary += String.fromCharCode(byte);
+  });
+  return btoa(binary)
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/, "");
+};
+
+export const signDocsConnectToken = async (
+  payload: object,
+  secret: string,
+): Promise<string> => {
+  const encoder = new TextEncoder();
+  const header = base64UrlEncode(
+    encoder.encode(JSON.stringify({ alg: "HS256", typ: "JWT" })),
+  );
+  const body = base64UrlEncode(encoder.encode(JSON.stringify(payload)));
+  const key = await crypto.subtle.importKey(
+    "raw",
+    encoder.encode(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"],
+  );
+  const signature = await crypto.subtle.sign(
+    "HMAC",
+    key,
+    encoder.encode(`${header}.${body}`),
+  );
+  return `${header}.${body}.${base64UrlEncode(new Uint8Array(signature))}`;
+};
+
 export const formatDocsConnectDate = (iso?: string): string => {
   if (!iso) return "";
   const ms = new Date(iso).getTime();

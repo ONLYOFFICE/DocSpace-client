@@ -104,5 +104,7 @@
   "TariffPlanCancellation": "Tariff plan cancellation",
   "CancelPlanConfirm": "Are you sure you want to cancel your {{service}} plan?",
   "YourCurrentPlanLabel": "Your current plan:",
-  "ChangeScheduled": "The change has been scheduled"
+  "ChangeScheduled": "The change has been scheduled",
+  "DemoCode": "Demo code",
+  "EditorPreviewFailed": "Failed to load the editor preview. Check the tenant address and secret key."
 }

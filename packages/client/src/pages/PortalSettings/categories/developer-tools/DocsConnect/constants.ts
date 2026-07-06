@@ -35,3 +35,10 @@
 
 export const DOCS_CONNECT_ROUTE =
   "/portal-settings/developer-tools/docs-connect";
+
+export const DOCS_CONNECT_PREVIEW = {
+  editorType: "word",
+  fileType: "docx",
+  title: "Sample.docx",
+  source: "https://static.onlyoffice.com/assets/docs/samples/demo.docx",
+} as const;

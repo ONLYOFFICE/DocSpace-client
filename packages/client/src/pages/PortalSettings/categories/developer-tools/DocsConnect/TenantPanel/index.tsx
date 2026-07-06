@@ -58,6 +58,7 @@ import { getDocsConnectTrialState } from "../utils";
 import { PAYMENT_ROUTES } from "../../../payments/utils";
 
 import Statistics from "./Statistics";
+import Preview from "./Preview";
 
 import styles from "./TenantPanel.module.scss";
 
@@ -143,11 +144,7 @@ const TenantPanel = ({
     {
       id: "preview",
       name: t("DocsConnect:TabPreview"),
-      content: (
-        <div className={styles.stubTab}>
-          <Text className={styles.muted}>{t("Common:ComingSoon")}</Text>
-        </div>
-      ),
+      content: <Preview />,
     },
   ];
 

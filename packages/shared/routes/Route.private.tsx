@@ -126,7 +126,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     const isEncryptionUrl = location.pathname === "/encryption-portal";
 
     const isPaymentsUrl =
-      location.pathname === "/portal-settings/payments/portal-payments";
+      location.pathname === "/portal-settings/payments/portal-payments" ||
+      location.pathname === "/billing/tariff-plan";
     const isBackupUrl =
       location.pathname === "/portal-settings/backup/data-backup";
 

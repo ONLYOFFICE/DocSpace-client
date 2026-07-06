@@ -71,6 +71,10 @@ export type AppsSidebarProps = {
   activeId?: string;
   variant?: SidebarVariant;
   isNavLoading?: boolean;
+  /** Hides the section "Back" button (secondary variant). */
+  hideBack?: boolean;
+  /** Overrides the default section "Back" handler (secondary variant). */
+  onBack?: () => void;
 };
 
 type AppsSidebarViewProps = AppsSidebarProps & {
@@ -96,10 +100,11 @@ export const AppsSidebarView = ({
   articleOpen = true,
   toggleArticleOpen,
   onBack,
+  hideBack,
   articleButtonItems,
   isNavLoading,
 }: AppsSidebarViewProps) => {
-  const showBackButton = variant === "secondary";
+  const showBackButton = variant === "secondary" && !hideBack;
   const hideFooter = variant === "secondary";
 
   const hasPluginItems = !!articleButtonItems && articleButtonItems.length > 0;
@@ -351,6 +356,9 @@ const AppsSidebar = ({
   });
   const { navigateBack } = useSectionNavigation();
 
+  const isSecondary = variant === "secondary";
+  const handleBack = rest.onBack ?? (isSecondary ? navigateBack : undefined);
+
   return (
     <AppsSidebarView
       {...rest}
@@ -358,7 +366,7 @@ const AppsSidebar = ({
       currentDeviceType={currentDeviceType}
       showText={showText}
       toggleShowText={toggleShowText}
-      onBack={variant === "secondary" ? navigateBack : undefined}
+      onBack={handleBack}
     />
   );
 };

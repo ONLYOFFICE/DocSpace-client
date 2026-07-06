@@ -135,7 +135,7 @@ const PortalSettingsSidebar = ({
     if (isNotPaidPeriod) {
       resultTree = resultTree.filter(
         (e) =>
-          e.tKey === "Backup" ||
+          e.tKey === "Common:Backup" ||
           e.tKey === "Common:PaymentsTitle" ||
           (isOwner && e.tKey === "PortalDeletion"),
       );
@@ -196,6 +196,7 @@ const PortalSettingsSidebar = ({
       activeId={activeId}
       variant="secondary"
       isNavLoading={isNavLoading}
+      hideBack={isNotPaidPeriod}
     />
   );
 };

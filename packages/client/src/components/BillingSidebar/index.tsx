@@ -62,6 +62,7 @@ const ITEMS = [
     path: "/billing/overview",
     icon: OverviewReactSvgUrl,
     translationKey: "Common:BillingOverview" as const,
+    hideWhenNotPaid: true,
   },
   {
     id: "billing-wallet",
@@ -94,6 +95,7 @@ const ITEMS = [
     path: "/billing/usage",
     icon: UsageReactSvgUrl,
     translationKey: "Common:Usage" as const,
+    hideWhenNotPaid: true,
   },
 ];
 
@@ -125,8 +127,17 @@ const BillingSidebar = ({ isNotPaidPeriod }: BillingSidebarProps) => {
     return [{ id: "billing", items }];
   }, [t, navigate, visibleItems]);
 
+  const onBack = isNotPaidPeriod
+    ? () => navigate("/portal-settings/backup/data-backup")
+    : undefined;
+
   return (
-    <AppsSidebar groups={groups} activeId={activeId} variant="secondary" />
+    <AppsSidebar
+      groups={groups}
+      activeId={activeId}
+      variant="secondary"
+      onBack={onBack}
+    />
   );
 };
 

@@ -42,6 +42,7 @@ import { getStartRoomParams } from "@docspace/shared/utils/rooms";
 import { getStartAgentParams } from "@docspace/shared/utils/aiAgents";
 import { PDF_FORM_DIALOG_KEY } from "@docspace/shared/constants";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 
 import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
 
@@ -78,6 +79,7 @@ const GlobalEvents = ({
   createPDFFormFileProps,
   userId,
   getIsAIReady,
+  standalone,
 }) => {
   const [createDialogProps, setCreateDialogProps] = useState({
     visible: false,
@@ -130,6 +132,9 @@ const GlobalEvents = ({
   });
 
   const [activateAIProps, setActivateAIProps] = useState({ visible: false });
+
+  const { useProfilesStore } = useStores();
+  const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
 
   const eventHandlersList = useRef([]);
 
@@ -230,35 +235,40 @@ const GlobalEvents = ({
     });
   }, []);
 
-  const onCreateAgent = useCallback((e) => {
-    const context = e.context || e.detail?.context || "";
+  const onCreateAgent = useCallback(
+    (e) => {
+      const context = e.context || e.detail?.context || "";
 
-    if (!getIsAIReady()) {
-      setActivateAIProps({
-        visible: true,
-        parentId: e.detail?.parentId,
-        context,
-        onClose: () => setActivateAIProps({ visible: false }),
-      });
-      return;
-    }
+      const isAIReady = standalone ? hasAiProfiles : getIsAIReady();
 
-    setActivateAIProps({ visible: false });
-
-    const startAgentParams = getStartAgentParams();
-    setCreateAgentDialogProps({
-      ...startAgentParams,
-      item: e.item,
-      context,
-      visible: true,
-      onClose: () => {
-        setCreateAgentDialogProps({
-          visible: false,
-          onClose: null,
+      if (!isAIReady) {
+        setActivateAIProps({
+          visible: true,
+          parentId: e.detail?.parentId,
+          context,
+          onClose: () => setActivateAIProps({ visible: false }),
         });
-      },
-    });
-  }, []);
+        return;
+      }
+
+      setActivateAIProps({ visible: false });
+
+      const startAgentParams = getStartAgentParams();
+      setCreateAgentDialogProps({
+        ...startAgentParams,
+        item: e.item,
+        context,
+        visible: true,
+        onClose: () => {
+          setCreateAgentDialogProps({
+            visible: false,
+            onClose: null,
+          });
+        },
+      });
+    },
+    [standalone, getIsAIReady, hasAiProfiles, setCreateAgentDialogProps],
+  );
 
   const onEditAgent = useCallback((e) => {
     const visible = !!e.item;
@@ -610,6 +620,7 @@ export default inject(
       createPDFFormFileProps,
       userId: userStore?.user?.id,
       getIsAIReady: () => paymentStore.isAIReady,
+      standalone: settingsStore.standalone,
     };
   },
 )(observer(GlobalEvents));

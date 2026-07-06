@@ -35,6 +35,7 @@
 
 import { useMemo, useCallback, useRef } from "react";
 import { useNavigate, useLocation, LinkProps } from "react-router";
+import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import { isMobile } from "react-device-detect";
 
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
@@ -99,6 +100,10 @@ export const useEmptyView = (
 ) => {
   const { isBase } = useTheme();
 
+  const { useProfilesStore } = useStores();
+  const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
+  const isAiReady = standalone ? hasAiProfiles : aiReady;
+
   const isAIRoom =
     selectedFolder?.roomType === RoomsType.AIRoom ||
     isKnowledgeTab ||
@@ -120,7 +125,7 @@ export const useEmptyView = (
       isKnowledgeTab,
       isResultsTab,
       isAIRoom,
-      aiReady,
+      isAiReady,
       standalone,
       isPortalAdmin,
       isPayer,
@@ -141,7 +146,7 @@ export const useEmptyView = (
       isKnowledgeTab,
       isResultsTab,
       isAIRoom,
-      aiReady,
+      isAiReady,
       standalone,
       isPortalAdmin,
     );
@@ -176,7 +181,7 @@ export const useEmptyView = (
     isAIRoom,
     isKnowledgeTab,
     isResultsTab,
-    aiReady,
+    isAiReady,
     standalone,
     isPortalAdmin,
     isPayer,
@@ -252,6 +257,10 @@ export const useOptions = (
   );
   if (pathname.includes("/trash")) trashSectionRef.current = getTrashSection();
   const trashSection = trashSectionRef.current;
+
+  const { useProfilesStore } = useStores();
+  const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
+  const isAiReady = standalone ? hasAiProfiles : aiReady;
 
   const isAIRoom =
     selectedFolder?.roomType === RoomsType.AIRoom ||
@@ -523,7 +532,7 @@ export const useOptions = (
         isKnowledgeTab,
         isResultsTab,
         isAIRoom,
-        aiReady,
+        isAiReady,
         standalone,
         isPortalAdmin,
         trashSection,
@@ -565,7 +574,7 @@ export const useOptions = (
       isKnowledgeTab,
       isResultsTab,
       isAIRoom,
-      aiReady,
+      isAiReady,
       standalone,
       isPortalAdmin,
       isCardLinkedToPortal,

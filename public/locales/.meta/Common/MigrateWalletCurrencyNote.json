@@ -3,7 +3,7 @@
   "content": "Wallet credits are stored and used in {{currency}}",
   "content_en_sha1_hash": "fdc24e37cec7f22d692704cc05ab34253f37fc7f",
   "created_at": "2026-06-30T11:38:08.351Z",
-  "updated_at": "2026-06-30T11:38:49.172Z",
+  "updated_at": "2026-07-03T11:08:02.940Z",
   "comment": {
     "text": "Informational note within the MigrateToWalletDialog explaining how wallet credits are handled; {{currency}} represents the specific currency code.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
-      "line_number": 296,
+      "line_number": 312,
       "context": "),\n styles.positive,\n )}\n </div>\n <Text fontSize=\"13px\" className={styles.muted}>\n {t(\"MigrateWalletCurrencyNote\", {\n currency: walletCodeCurrency,\n })}\n </Text>\n </>,\n )}",
       "module": "/libs/ui-kit"
     }

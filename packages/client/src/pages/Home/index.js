@@ -36,11 +36,16 @@
 import React, { useCallback } from "react";
 import classnames from "classnames";
 import { useLocation, Outlet, Navigate } from "react-router";
+import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { useAiChatPanel } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
+import {
+  useChatNoAccess,
+  mapChatNoAccessStores,
+} from "SRC_DIR/Hooks/useChatNoAccess";
 import {
   useIsAiChatAvailable,
   useStores,
@@ -232,7 +237,16 @@ const PureHome = observer((props) => {
 
   const location = useLocation();
 
-  const aiChatPanel = useAiChatPanel();
+  const {
+    aiReady: aiChatReady,
+    noAccessProps: aiChatNoAccessProps,
+    topUpDialog: aiChatTopUpDialog,
+  } = useChatNoAccess(props.aiNoAccessStores);
+
+  const aiChatPanel = useAiChatPanel(true, {
+    aiReady: aiChatReady,
+    noAccessProps: aiChatNoAccessProps,
+  });
 
   React.useEffect(() => {
     if (location.state?.openAboutDialog && setIsAboutDialogVisible) {
@@ -689,6 +703,7 @@ const PureHome = observer((props) => {
         </SectionWrapper>
       </div>
       <InfoPanelActions />
+      {aiChatTopUpDialog}
     </>
   );
 });
@@ -711,6 +726,7 @@ const HomeWithGuard = (props) => {
 
   if (
     !isLegacyMode &&
+    !isOAuthFrame() &&
     !PASS_THROUGH_PREFIXES.some((p) => pathname.startsWith(p))
   )
     return <Navigate to="/dashboard" replace />;
@@ -740,6 +756,8 @@ export const Component = inject(
     pluginStore,
     infoPanelStore,
     oformsStore,
+    paymentStore,
+    currentTariffStatusStore,
   }) => {
     const {
       setSelectedFolder,
@@ -829,6 +847,7 @@ export const Component = inject(
       isFavoritesFolder,
       isRecentFolder,
       isAIAgentsFolder,
+      isFormsFolder,
     } = treeFoldersStore;
 
     const {
@@ -921,6 +940,13 @@ export const Component = inject(
     // }
 
     return {
+      aiNoAccessStores: mapChatNoAccessStores({
+        settingsStore,
+        userStore,
+        paymentStore,
+        currentTariffStatusStore,
+        authStore,
+      }),
       currentClientView,
       isChangePageRequestRunning,
       // homepage: config.homepage,
@@ -941,6 +967,7 @@ export const Component = inject(
 
       isErrorRoomNotAvailable,
       isRoomsFolder,
+      isFormsFolder,
       isArchiveFolder,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
 
@@ -1078,3 +1105,4 @@ export const Component = inject(
     };
   },
 )(observer(HomeWithGuard));
+

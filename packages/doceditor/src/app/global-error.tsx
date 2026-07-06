@@ -55,11 +55,38 @@ import FirebaseHelper from "@docspace/shared/utils/firebase";
 
 import pkg from "../../package.json";
 
+const CHUNK_RELOAD_KEY = "retry-chunk-reload";
+
+const isChunkLoadError = (error: Error) =>
+  error?.name === "ChunkLoadError" ||
+  /Loading (CSS )?chunk/i.test(error?.message ?? "");
+
+const shouldReloadOnChunkError = (error: Error) => {
+  if (!isChunkLoadError(error)) return false;
+
+  try {
+    if (window.sessionStorage.getItem(CHUNK_RELOAD_KEY) === "true")
+      return false;
+
+    window.sessionStorage.setItem(CHUNK_RELOAD_KEY, "true");
+    return true;
+  } catch {
+    return false;
+  }
+};
+
 export default function GlobalError({ error }: { error: Error }) {
   const [user, setUser] = useState<TUser>();
   const [settings, setSettings] = useState<TSettings>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setError] = useState<boolean>(false);
+  const [isReloading] = useState<boolean>(() =>
+    shouldReloadOnChunkError(error),
+  );
+
+  useLayoutEffect(() => {
+    if (isReloading) window.location.reload();
+  }, [isReloading]);
 
   const { i18n } = useI18N({ settings, user });
   const { currentDeviceType } = useDeviceType();
@@ -89,6 +116,8 @@ export default function GlobalError({ error }: { error: Error }) {
   useLayoutEffect(() => {
     getData();
   }, [getData]);
+
+  if (isReloading) return null;
 
   if (isError) return;
 

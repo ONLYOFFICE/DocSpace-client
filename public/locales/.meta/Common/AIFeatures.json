@@ -3,7 +3,7 @@
   "content": "AI features",
   "content_en_sha1_hash": "59f0c687f2560552c920af9e6c0850fc4715bf49",
   "created_at": "2026-06-03T11:45:29.424Z",
-  "updated_at": "2026-06-30T10:18:29.527Z",
+  "updated_at": "2026-07-03T11:08:02.819Z",
   "comment": {
     "text": "Menu item label in the context menu that contains AI-related sub-options.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/usage/sub-components/SpendingBreakdown.tsx",
-      "line_number": 153,
+      "line_number": 156,
       "context": "//     case DISK_STORAGE:\n //       return t(\"AdditionalStorageInfo\");\n //     case BACKUP_SERVICE:\n //       return t(\"Backups\");\n //     case AI_TOOLS:\n //       return t(\"AIFeatures\");\n //     default:\n //       return service;\n //   }\n // };",
       "module": "/libs/ui-kit"
     },
@@ -27,6 +27,12 @@
       "file_path": "/packages/client/src/components/dialogs/ActivateAIDialog/index.tsx",
       "line_number": 167,
       "context": "<ModalDialog\n visible={visible}\n onClose={isActivating ? () => {} : onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"Common:AIFeatures\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" lineHeight=\"20px\">\n {renderBody()}\n </Text>\n </ModalDialog.Body>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 614,
+      "context": "{\n id: \"portal-settings_catalog-services-ai-services\",\n key: \"10-3-0\",\n icon: \"\",\n link: \"ai-services\",\n tKey: \"Common:AIFeatures\",\n },\n {\n id: \"portal-settings_catalog-services-backup\",\n key: \"10-3-1\",\n icon: \"\",",
       "module": "/packages/client"
     },
     {

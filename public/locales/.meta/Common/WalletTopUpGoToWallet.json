@@ -3,7 +3,7 @@
   "content": "Go to Wallet",
   "content_en_sha1_hash": "191c6941c88c570607c4ef6933e30be425f10f90",
   "created_at": "2026-05-27T14:11:44.250Z",
-  "updated_at": "2026-06-30T07:32:49.213Z",
+  "updated_at": "2026-07-04T11:30:22.061Z",
   "comment": {
     "text": "Button label used to navigate the user to the wallet page after completing an AI paywall process.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
-      "line_number": 419,
+      "line_number": 431,
       "context": "<Button\n size={ButtonSize.medium}\n primary\n scale\n label={\n admins ? t(\"GoToTariffPlan\") : t(\"WalletTopUpGoToWallet\")\n }\n onClick={onGoToBillingClick}\n testId=\"ai_paywall_go_to_wallet_button\"\n />\n </div>",
       "module": "/libs/ui-kit"
     }

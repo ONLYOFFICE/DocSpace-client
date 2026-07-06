@@ -55,7 +55,7 @@ type ActivateAIDialogOwnProps = {
 type ActivateAIDialogInjectedProps = {
   isAdmin?: boolean;
   isPayer?: boolean;
-  isCardLinkedToPortal?: boolean;
+  isCardMissingOrInactive?: boolean;
   payerEmail?: string | null;
   payerDisplayName?: string | null;
 };
@@ -70,14 +70,14 @@ const ActivateAIDialogComponent = ({
   isActivating,
   isAdmin,
   isPayer,
-  isCardLinkedToPortal,
+  isCardMissingOrInactive,
   payerEmail,
   payerDisplayName,
 }: ActivateAIDialogProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const canActivate = isCardLinkedToPortal && isPayer;
-  const canConnectTopayer = isCardLinkedToPortal && !isPayer && isAdmin;
+  const canActivate = isPayer;
+  const canConnectTopayer = !isCardMissingOrInactive && !isPayer && isAdmin;
 
   const payerLabel = payerDisplayName || payerEmail;
 
@@ -174,7 +174,11 @@ const ActivateAIDialogComponent = ({
         {canActivate ? (
           <>
             <Button
-              label={t("Common:Activate")}
+              label={
+                isCardMissingOrInactive
+                  ? t("Common:TopUpAndActivate")
+                  : t("Common:Activate")
+              }
               size={ButtonSize.normal}
               onClick={onActivate}
               primary
@@ -211,13 +215,13 @@ export default inject<
   ActivateAIDialogInjectedProps
 >(({ userStore, paymentStore, currentTariffStatusStore }) => {
   const { isAdmin } = userStore.user ?? {};
-  const { isPayer, isCardLinkedToPortal } = paymentStore;
+  const { isPayer, isCardMissingOrInactive } = paymentStore;
   const { walletCustomerEmail, walletCustomerInfo } = currentTariffStatusStore;
 
   return {
     isAdmin,
     isPayer,
-    isCardLinkedToPortal,
+    isCardMissingOrInactive,
     payerEmail: walletCustomerEmail,
     payerDisplayName: walletCustomerInfo?.displayName,
   };

@@ -67,3 +67,11 @@ export const getAuthToken = (): string | null => {
 export const getApiBaseUrl = (): string => {
   return client.client?.defaults.baseURL ?? "";
 };
+
+export const resolveOAuthToken = (): Promise<string | null> => {
+  return client.getOAuthToken();
+};
+
+export const refreshOAuthToken = (): Promise<string | null> => {
+  return client.refreshOAuthToken();
+};

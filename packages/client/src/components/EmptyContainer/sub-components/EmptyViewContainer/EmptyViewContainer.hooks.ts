@@ -35,7 +35,6 @@
 
 import { useMemo, useCallback, useRef } from "react";
 import { useNavigate, useLocation, LinkProps } from "react-router";
-import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import { isMobile } from "react-device-detect";
 
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
@@ -254,9 +253,6 @@ export const useOptions = (
   if (pathname.includes("/trash")) trashSectionRef.current = getTrashSection();
   const trashSection = trashSectionRef.current;
 
-  const { useProfilesStore } = useStores();
-  const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
-
   const isAIRoom =
     selectedFolder?.roomType === RoomsType.AIRoom ||
     isKnowledgeTab ||
@@ -284,8 +280,8 @@ export const useOptions = (
   }, [roomsFolder?.rootFolderType, roomsFolder?.title, userId]);
 
   const onGoToForms = useCallback((): LinkProps => {
-    const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
-    newFilter.searchArea = RoomSearchArea.Active;
+    const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Forms);
+    newFilter.searchArea = RoomSearchArea.Forms;
 
     return {
       to: {
@@ -527,18 +523,18 @@ export const useOptions = (
         isKnowledgeTab,
         isResultsTab,
         isAIRoom,
-        aiReady || hasAiProfiles,
+        aiReady,
         standalone,
         isPortalAdmin,
         trashSection,
         isCardLinkedToPortal,
         isPayer,
+        isActivating,
       ),
     [
       type,
       access,
       security,
-      hasAiProfiles,
       isFolder,
       folderType,
       parentRoomType,
@@ -574,6 +570,7 @@ export const useOptions = (
       isPortalAdmin,
       isCardLinkedToPortal,
       isPayer,
+      isActivating,
     ],
   );
 

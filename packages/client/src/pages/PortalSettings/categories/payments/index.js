@@ -242,7 +242,7 @@ const PaymentsPage = (props) => {
           onDocsConnectToggle={onDocsConnectToggle}
           docsConnectState={docsConnectCardState}
           onOpenSupportedModels={() =>
-            navigateToRoute("/portal-settings/ai-settings/models")
+            navigateToRoute("/portal-settings/ai-settings/ai-models")
           }
         />
       ),

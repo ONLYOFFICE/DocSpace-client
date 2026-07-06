@@ -3,7 +3,7 @@
   "content": "Document-aware AI",
   "content_en_sha1_hash": "e74bb9cfbf4f98db46c61424ae9876f0cc186d3f",
   "created_at": "2026-06-25T19:30:57.610Z",
-  "updated_at": "2026-06-25T19:41:26.595Z",
+  "updated_at": "2026-07-03T11:08:02.824Z",
   "comment": {
     "text": "Title of a feature within the promotional dialog, representing an AI capability that understands document content.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
-      "line_number": 171,
+      "line_number": 175,
       "context": "title: t(\"Common:GenerateAndSummarize\"),\n description: t(\"Common:GenerateAndSummarizeDescription\"),\n },\n {\n Icon: DataIcon,\n title: t(\"Common:DocumentAwareAI\"),\n description: t(\"Common:DocumentAwareAIDescription\"),\n },\n {\n Icon: SharedAgentsIcon,\n title: t(\"Common:SharedAgents\"),",
       "module": "/packages/client"
     }

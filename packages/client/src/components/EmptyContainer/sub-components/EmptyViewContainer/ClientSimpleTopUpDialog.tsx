@@ -88,7 +88,7 @@ const ClientSimpleTopUpDialog: React.FC<ClientSimpleTopUpDialogProps> = ({
       onClose={onClose}
       onConfirm={onConfirm}
       service="ai"
-      isFirstTopUp
+      isFirstTopUp={store.paymentStore.isCardMissingOrInactive}
       paymentApi={paymentApi}
       formatWalletCurrency={formatWalletCurrency}
       walletCodeCurrency={walletCodeCurrency}

@@ -3,7 +3,7 @@
   "content": "Presentation",
   "content_en_sha1_hash": "6e875951a6f9aa1374d93572de657c12ded57355",
   "created_at": "2025-05-19T21:30:47.449Z",
-  "updated_at": "2026-06-30T10:18:29.500Z",
+  "updated_at": "2026-07-03T11:08:02.786Z",
   "comment": {
     "text": "This is a label for a presentation file type or a button to create a new presentation. It appears in menus and file listings.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 532,
+      "line_number": 535,
       "context": "icon: SpreadsheetReactSvgUrl,\n onClick: () => actions.onCreate(\"xlsx\"),\n },\n {\n key: \"create-presentation\",\n label: t(\"Common:Presentation\"),\n icon: PresentationReactSvgUrl,\n onClick: () => actions.onCreate(\"pptx\"),\n },\n {\n key: \"create-pdf-form\",",
       "module": "/packages/client"
     },

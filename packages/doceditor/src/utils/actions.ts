@@ -801,6 +801,7 @@ export async function getData(
 
       if (response.config.file.encrypted) {
         response.config.editorConfig.canCoAuthoring = false;
+        response.generationToolCallState = undefined;
       }
 
       response.successAuth = successAuth;

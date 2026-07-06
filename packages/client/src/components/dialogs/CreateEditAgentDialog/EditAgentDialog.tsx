@@ -95,6 +95,10 @@ const EditAgentDialog = ({
     }),
   );
 
+  // Drop the provider/model cache when the dialog goes away by any path
+  // (not just the explicit close button), so a fresh session refetches.
+  React.useEffect(() => () => modelCache.clear(), []);
+
   const compareRoomParams = (
     prevParams: TAgentParams,
     currentParams: TAgentParams,
@@ -119,6 +123,8 @@ const EditAgentDialog = ({
       prevParams.quota === currentParams.quota &&
       prevParams.prompt === currentParams.prompt &&
       prevParams.profileId === currentParams.profileId &&
+      prevParams.modelId === currentParams.modelId &&
+      prevParams.providerId === currentParams.providerId &&
       currentParams.mcpServers?.every((id) =>
         currentParams.mcpServersInitial?.includes(id),
       ) &&
@@ -258,7 +264,7 @@ const EditAgentDialog = ({
           scale
           onClick={onEditRoom}
           isDisabled={
-            !agentParams.profileId ||
+            (!agentParams.profileId && !agentParams.modelId) ||
             (!cover
               ? isWrongTitle ||
                 compareRoomParams(prevRoomParams.current, agentParams)

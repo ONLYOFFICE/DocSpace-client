@@ -3,7 +3,7 @@
   "content": "Admin adjustment",
   "content_en_sha1_hash": "bc7e0d8bd98c64b3d2c4975efffc7d393ddcdc74",
   "created_at": "2026-06-30T07:32:24.178Z",
-  "updated_at": "2026-06-30T15:41:51.815Z",
+  "updated_at": "2026-07-03T11:08:02.941Z",
   "comment": {
     "text": "A label in an order summary row within the Price Details dialog, indicating a change in the number of administrators.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
-      "line_number": 135,
+      "line_number": 145,
       "context": "{t(\"OrderSummary\")}\n </Text>\n \n <div className={styles.summary}>\n {renderRow(\n t(\"AdminAdjustment\"),\n `${currentAdmins} → ${newAdmins}`,\n )}\n {renderRow(\n isDowngradePlan ? t(\"ReducedAdmins\") : t(\"AdditionalAdmins\"),\n isDowngradePlan",
       "module": "/libs/ui-kit"
     }

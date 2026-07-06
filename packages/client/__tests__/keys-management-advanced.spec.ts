@@ -162,13 +162,10 @@ test.describe("Keys management — advanced flows", () => {
     const handleRef: { current: PrivacyroomHandlerHandle | null } = {
       current: null,
     };
-    const envelope = {
-      id: "99",
-      userId: TEST_USER_ID,
-      publicKey: "FAKE_PUB_KEY_OK_FOR_DELETE_FLOW",
-      privateKeyEnc: "FAKE_PRIV_ENC_OK_FOR_DELETE_FLOW",
-      date: "2026-01-01T00:00:00.000Z",
-    };
+    // A real envelope is required: deletion now unlocks the key with the
+    // passphrase before issuing the DELETE, so the private material must be a
+    // genuine envelope serialized under KNOWN_PASSPHRASE.
+    const envelope = { ...(await realEnvelope()), id: "99" };
     mockRequest.use(
       ...privacyroomKeysHandlers(TEST_PORT, {
         initial: [envelope],
@@ -206,9 +203,23 @@ test.describe("Keys management — advanced flows", () => {
       (req) =>
         req.method() === "DELETE" &&
         req.url().endsWith("/privacyroom/keys/99"),
-      { timeout: 10000 },
+      { timeout: 30000 },
     );
     await deleteDialog.getByLabel("Confirm", { exact: true }).click();
+
+    // Confirming no longer deletes immediately: a passphrase-verification
+    // modal appears, and the DELETE fires only once the passphrase unlocks
+    // the envelope.
+    const verifyDialog = page
+      .getByRole("dialog")
+      .filter({ hasText: "Enter passphrase" });
+    await expect(verifyDialog).toBeVisible({ timeout: 5000 });
+    await verifyDialog
+      .locator('input[name="passphrase"]')
+      .fill(KNOWN_PASSPHRASE);
+    await verifyDialog
+      .getByRole("button", { name: "Continue", exact: true })
+      .click();
 
     await deletePromise;
     await expect
@@ -258,7 +269,7 @@ test.describe("Keys management — advanced flows", () => {
     );
     await page
       .getByRole("dialog")
-      .getByRole("button", { name: "Change passphrase", exact: true })
+      .getByRole("button", { name: "Save", exact: true })
       .click();
 
     const body = (await putPromise).postDataJSON() as {

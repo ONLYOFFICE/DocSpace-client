@@ -53,6 +53,7 @@ import "@/styles/globals.scss";
 import { getColorTheme, getPortalCultures, getSettings } from "@/api/settings";
 import {
   LOCALE_HEADER,
+  OAUTH_FRAME_HEADER,
   STYLES_URL_HEADER,
   THEME_HEADER,
 } from "@/utils/constants";
@@ -163,6 +164,7 @@ export default async function RootLayout({
           </style>
         )}
         <Providers
+          oauthFrame={hdrs.get(OAUTH_FRAME_HEADER) === "1"}
           contextData={{
             initialTheme: theme,
             user: self,

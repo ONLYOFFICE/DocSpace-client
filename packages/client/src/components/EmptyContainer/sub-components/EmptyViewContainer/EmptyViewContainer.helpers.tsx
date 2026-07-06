@@ -291,6 +291,7 @@ export const getOptions = (
   trashSection: "personal" | "rooms" | "forms" | "agents" = "personal",
   isCardLinkedToPortal: boolean = false,
   isPayer?: boolean,
+  isActivating: boolean = false,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -452,12 +453,14 @@ export const getOptions = (
         title: t("Common:Activate"),
         key: "activate-ai",
         onClick: actions.onActivateAI,
+        isLoading: isActivating,
       } as const)
     : ({
         type: "button",
         title: t("Common:TopUpAndActivate"),
         key: "top-up-and-activate-ai",
         onClick: actions.onTopUpAndActivateAI,
+        isLoading: isActivating,
       } as const);
 
   // const aiBenefits = {
@@ -571,6 +574,7 @@ export const getOptions = (
         inviteRootRoom,
         migrationData,
       ])
+      .with([FolderType.Forms, P._, P._], () => [createRoom])
       .with([FolderType.USER, ShareAccessRights.None, P._], () => [
         createDoc,
         createSpreadsheet,

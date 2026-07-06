@@ -3,7 +3,7 @@
   "content": "AI models",
   "content_en_sha1_hash": "220092c06f1f9360a057116ef150a29af9e15c34",
   "created_at": "2026-06-25T11:54:44.239Z",
-  "updated_at": "2026-06-25T12:28:38.134Z",
+  "updated_at": "2026-07-03T11:08:02.865Z",
   "comment": {
     "text": "Tab title and menu item label in the AI settings section that refers to the collection of available AI models.",
     "is_auto": true,
@@ -13,20 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 167,
-      "context": "}, []);\n \n React.useEffect(() => {\n const title =\n currentTabId === \"models\"\n ? t(\"Common:AIModels\")\n : currentTabId === \"providers\"\n ? t(\"Common:AIProvider\")\n : currentTabId === \"model-assignment\"\n ? t(\"Common:ModelAssignment\")\n : currentTabId === \"search\"",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 167,
-      "context": "}, []);\n \n React.useEffect(() => {\n const title =\n currentTabId === \"models\"\n ? t(\"Common:AIModels\")\n : currentTabId === \"providers\"\n ? t(\"Common:AIProvider\")\n : currentTabId === \"model-assignment\"\n ? t(\"Common:ModelAssignment\")\n : currentTabId === \"search\"",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 512,
-      "context": "children: [\n {\n id: \"portal-settings_catalog-ai-settings-models\",\n key: \"7-0\",\n link: \"models\",\n tKey: \"Common:AIModels\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-ai-settings-providers\",\n key: \"7-1\",",
+      "line_number": 166,
+      "context": "const disableNonAiModels = gateNonAiModelsTabs;\n \n const data: TTabItem[] = [\n {\n id: TAB_IDS.AI_MODELS,\n name: t(\"Common:AIModels\"),\n content: standalone ? <AiModels /> : <AiModelsSaas />,\n onClick: makeOnClick(TAB_IDS.AI_MODELS),\n },\n {\n id: TAB_IDS.MODEL_ASSIGNMENT,",
       "module": "/packages/client"
     }
   ],

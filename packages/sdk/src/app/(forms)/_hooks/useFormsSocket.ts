@@ -37,6 +37,7 @@
 
 import { useCallback, useEffect, useRef } from "react";
 
+import { connectFrameSocket } from "@docspace/shared/utils/oauthFrameSocket";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
@@ -61,7 +62,7 @@ export default function useFormsSocket(
 
     isInit.current = true;
 
-    const doConnect = () => SocketHelper?.connect(socketUrl, "");
+    const doConnect = () => void connectFrameSocket(socketUrl, "");
     const win = window as Window & {
       requestIdleCallback?: (
         cb: () => void,

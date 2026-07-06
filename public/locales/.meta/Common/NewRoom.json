@@ -3,7 +3,7 @@
   "content": "New room",
   "content_en_sha1_hash": "747a74c7041456888174f7ee810ae8966dccf372",
   "created_at": "2025-05-19T21:30:46.782Z",
-  "updated_at": "2026-06-30T10:18:29.501Z",
+  "updated_at": "2026-07-04T11:30:21.772Z",
   "comment": {
     "text": "This is a button label or menu item for creating a new room. It appears in various contexts where a user can initiate the creation of a new collaborative space.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/selectors/utils/hooks/useRoomsHelper.tsx",
-      "line_number": 236,
+      "line_number": 240,
       "context": "const createRoomType =\n createDefineRoomType ??\n (formsSection ? ApiRoomType.FillingFormsRoom : undefined);\n const createItem: TSelectorItem = {\n isCreateNewItem: true,\n label: createDefineRoomLabel ?? t(\"NewRoom\"),\n id: \"create-room-item\",\n key: \"create-room-item\",\n hotkey: \"r\",\n isRoomsOnly,\n createDefineRoomType: createRoomType,",
       "module": "/libs/ui-kit"
     },
@@ -49,25 +49,25 @@
     },
     {
       "file_path": "/packages/client/src/helpers/getSectionCreateButton.ts",
-      "line_number": 123,
+      "line_number": 125,
       "context": "if (!model || model.length === 0) return HIDDEN;\n \n return {\n showMainButton: true,\n mainButtonProps: {\n text: t(\"Common:NewRoom\"),\n isDropdown: false,\n model: [],\n onAction: () => onCreateRoom(),\n },\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 1047,
+      "line_number": 1049,
       "context": "? WarningQuotaExceededUrl\n : undefined,\n actions: isFormsSection\n ? t(\"Common:CreateFormSet\")\n : isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Common:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n }}\n withMenu={withMenu}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3926,
+      "line_number": 3927,
       "context": "? isFlowsFolder\n ? []\n : [\n {\n key: \"new-room\",\n label: t(\"Common:NewRoom\"),\n onClick: this.onCreateRoom,\n icon: CatalogRoomsReactSvgUrl,\n },\n ]\n : isPrivacyFolder",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/CreateEditAgentStore.ts",
-      "line_number": 204,
+      "line_number": 206,
       "context": "const currTags = newParams.tags.map((p) => p.name).sort();\n const isTagsChanged = !isEqual(prevTags, currTags);\n \n const editAgentParams: TEditAgentData = {\n ...(isTitleChanged && {\n title: title || t(\"Common:NewRoom\"),\n }),\n \n ...(isTagsChanged && {\n tags,\n }),",
       "module": "/packages/client"
     },

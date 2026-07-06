@@ -3,7 +3,7 @@
   "content": "New PDF form",
   "content_en_sha1_hash": "816b1bfcda481c3a942fc4c6236e3a5e93454429",
   "created_at": "2025-05-19T21:30:46.763Z",
-  "updated_at": "2026-06-30T10:18:29.558Z",
+  "updated_at": "2026-07-04T11:30:21.860Z",
   "comment": {
     "text": "This text labels a new PDF form, appearing as a default name in a creation dialog and when generating a new PDF form file.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/hooks/useEditorEvents.ts",
-      "line_number": 532,
+      "line_number": 535,
       "context": "break;\n case \"pptx\":\n fileName = t(\"Common:NewPresentation\");\n break;\n case \"pdf\":\n fileName = t(\"Common:NewPDFForm\");\n break;\n default:\n break;\n }",
       "module": "/packages/doceditor"
     },
@@ -43,13 +43,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/forms/layout.client.tsx",
-      "line_number": 597,
+      "line_number": 600,
       "context": "onClick: onUploadFiles,\n },\n {\n id: \"filter-create-blank-form\",\n key: \"create-blank-form\",\n label: t(\"Common:NewPDFForm\"),\n icon: FormPlusReactSvgUrl,\n onClick: onCreateBlankForm,\n },\n ],\n [t, onUploadFiles, onCreateBlankForm],",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/forms/layout.client.tsx",
-      "line_number": 597,
+      "line_number": 600,
       "context": "onClick: onUploadFiles,\n },\n {\n id: \"filter-create-blank-form\",\n key: \"create-blank-form\",\n label: t(\"Common:NewPDFForm\"),\n icon: FormPlusReactSvgUrl,\n onClick: onCreateBlankForm,\n },\n ],\n [t, onUploadFiles, onCreateBlankForm],",
       "module": "/packages/sdk"
     },

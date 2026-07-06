@@ -64,6 +64,7 @@ import {
 } from "@docspace/shared/api/ai";
 import { DEFAULT_SERVER_API_ROUTES } from "@docspace/ui-kit/ai-agent/providers";
 import type { ServerAPIConfig } from "@docspace/ui-kit/ai-agent/providers";
+import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import {
   CREATED_FORM_KEY,
   EDITOR_ID,
@@ -279,13 +280,15 @@ const useEditorEvents = ({
     if (!aiInitedRef.current) {
       const connector = docEditor?.createConnector?.();
 
-      if (connector) {
+      if (connector && !isOAuthFrame()) {
         aiInitedRef.current = true;
 
         let aiAvailable = false;
         const modelProfileMap = new Map<string, string>();
 
-        if (successAuth) {
+        const isEncrypted = !!config?.file?.encrypted;
+
+        if (successAuth && !isEncrypted) {
           try {
             const hasError = (data: unknown) =>
               !!data &&
@@ -369,7 +372,6 @@ const useEditorEvents = ({
                   canUseTool: p.canUseTool ?? false,
                   useResponsesApi: p.useResponsesApi,
                   providerType: p.providerType,
-                  basedOn: "openai",
                 }));
 
                 const validProfileIds = new Set(profiles.map((p) => p.id));
@@ -473,6 +475,7 @@ const useEditorEvents = ({
     }
   }, [
     config?.errorMessage,
+    config?.file?.encrypted,
     sdkConfig?.frameId,
     checkAndRequestRoles,
     t,

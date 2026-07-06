@@ -85,6 +85,10 @@ const CreateAgentDialog = ({
     };
   });
 
+  // Drop the provider/model cache when the dialog goes away by any path
+  // (not just the explicit close button), so a fresh session refetches.
+  React.useEffect(() => () => modelCache.clear(), []);
+
   const startAgentParams = getStartAgentParams(title);
 
   const [agentParams, setAgentParams] = useState({
@@ -124,7 +128,9 @@ const CreateAgentDialog = ({
 
   const isAgentTitleChanged = agentParams?.title?.trim() === "";
 
-  const isProfileSelected = !!agentParams?.profileId;
+  // Standalone binds a chat profile (profileId); SaaS binds a model (modelId).
+  const isProfileSelected =
+    !!agentParams?.profileId || !!agentParams?.modelId;
 
   const onCreateAgent = async () => {
     if (!agentParams?.title?.trim()) {

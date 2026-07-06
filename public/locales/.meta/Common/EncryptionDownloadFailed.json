@@ -3,7 +3,7 @@
   "content": "Could not download the encrypted file.",
   "content_en_sha1_hash": "f74ab9087d44c414fa12cd462a163ad7bdda895b",
   "created_at": "2026-05-24T17:27:26.463Z",
-  "updated_at": "2026-06-25T19:31:03.008Z",
+  "updated_at": "2026-07-04T11:30:21.948Z",
   "comment": {
     "text": "Error toast message appearing when an attempt to download an encrypted file fails.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1129,
+      "line_number": 1131,
       "context": "triggerFileDownload(result.file);\n } else {\n if (result.error) {\n console.error(\"[ENCRYPTION] downloadEncryptedFile:\", result.error);\n }\n toastr.error(i18n.t(\"Common:EncryptionDownloadFailed\"));\n }\n } catch (error) {\n setSecondaryProgressBarData({\n operation: OPERATIONS_NAME.download,\n percent: 100,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1129,
+      "line_number": 1131,
       "context": "triggerFileDownload(result.file);\n } else {\n if (result.error) {\n console.error(\"[ENCRYPTION] downloadEncryptedFile:\", result.error);\n }\n toastr.error(i18n.t(\"Common:EncryptionDownloadFailed\"));\n }\n } catch (error) {\n setSecondaryProgressBarData({\n operation: OPERATIONS_NAME.download,\n percent: 100,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1129,
+      "line_number": 1131,
       "context": "triggerFileDownload(result.file);\n } else {\n if (result.error) {\n console.error(\"[ENCRYPTION] downloadEncryptedFile:\", result.error);\n }\n toastr.error(i18n.t(\"Common:EncryptionDownloadFailed\"));\n }\n } catch (error) {\n setSecondaryProgressBarData({\n operation: OPERATIONS_NAME.download,\n percent: 100,",
       "module": "/packages/client"
     },

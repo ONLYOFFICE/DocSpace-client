@@ -15,6 +15,7 @@
     "test:images": "vitest run images.test.js",
     "test:colors": "vitest run colors.test.js",
     "test:ascii": "vitest run ascii.test.js",
+    "test:license": "vitest run license.test.js",
     "test:dependencies": "vitest run dependencies.test.js",
     "open-report": "open-cli reports/tests-report.html"
   },

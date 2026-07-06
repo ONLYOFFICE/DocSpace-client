@@ -155,7 +155,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     }
 
     updateActiveFiles(newActiveFiles);
-    updateActiveFolders(newActiveFiles);
+    updateActiveFolders(newActiveFolders);
     if (!newFolderIds.length && !newFileIds.length) {
       setSelected("none");
       onClosePanels();

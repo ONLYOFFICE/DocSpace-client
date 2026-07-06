@@ -3768,8 +3768,13 @@ class ContextOptionsStore {
     if (!canCreate || (isSectionMenu && (isMobile || someDialogIsOpen)))
       return null;
 
-    const { isRoomsFolder, isPrivacyFolder, isFlowsFolder, isAIAgentsFolder } =
-      this.treeFoldersStore;
+    const {
+      isRoomsFolder,
+      isPrivacyFolder,
+      isFlowsFolder,
+      isAIAgentsFolder,
+      isFormsFolder,
+    } = this.treeFoldersStore;
     const { mainButtonItemsList } = this.pluginStore;
     const { enablePlugins, templateGalleryAvailable } = this.settingsStore;
     const isFormRoomType =
@@ -3918,35 +3923,51 @@ class ContextOptionsStore {
             icon: CatalogAIAgentsReactSvgUrl,
           },
         ]
-      : isRoomsFolder
-        ? isFlowsFolder
-          ? []
-          : [
-              {
-                key: "new-room",
-                label: t("Common:NewRoom"),
-                onClick: this.onCreateRoom,
-                icon: CatalogRoomsReactSvgUrl,
-              },
-            ]
-        : isPrivacyFolder
-          ? privateFolderActions
-          : [
-              createNewDoc,
-              createNewSpreadsheet,
-              createNewPresentation,
-              ...formActions,
-              createNewFolder,
-              ...templateGallery,
-              { key: "separator", isSeparator: true },
-              uploadFiles,
-              showUploadFolder ? uploadFolder : null,
-            ];
+      : isFormsFolder
+        ? [
+            {
+              key: "create-form-set",
+              label: t("Common:CreateFormSet"),
+              onClick: this.onCreateRoom,
+              icon: CatalogRoomsReactSvgUrl,
+            },
+            {
+              key: "template-gallery",
+              label: t("Common:TemplateGallery"),
+              onClick: () => this.onShowTemplateGallery(),
+              icon: TemplateGalleryReactSvgUrl,
+            },
+          ]
+        : isRoomsFolder
+          ? isFlowsFolder
+            ? []
+            : [
+                {
+                  key: "new-room",
+                  label: t("Common:NewRoom"),
+                  onClick: this.onCreateRoom,
+                  icon: CatalogRoomsReactSvgUrl,
+                },
+              ]
+          : isPrivacyFolder
+            ? privateFolderActions
+            : [
+                createNewDoc,
+                createNewSpreadsheet,
+                createNewPresentation,
+                ...formActions,
+                createNewFolder,
+                ...templateGallery,
+                { key: "separator", isSeparator: true },
+                uploadFiles,
+                showUploadFolder ? uploadFolder : null,
+              ];
     if (
       !isAIAgents() &&
       mainButtonItemsList &&
       enablePlugins &&
       !isRoomsFolder &&
+      !isFormsFolder &&
       !isPrivacyFolder
     ) {
       const pluginItems = [];

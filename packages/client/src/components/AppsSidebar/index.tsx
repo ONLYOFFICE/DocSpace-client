@@ -75,6 +75,8 @@ export type AppsSidebarProps = {
   hideBack?: boolean;
   /** Overrides the default section "Back" handler (secondary variant). */
   onBack?: () => void;
+  /** Overrides the section "Back" button caption (secondary variant). */
+  backLabel?: string;
 };
 
 type AppsSidebarViewProps = AppsSidebarProps & {
@@ -87,6 +89,7 @@ type AppsSidebarViewProps = AppsSidebarProps & {
   articleButtonItems?: AppsPluginsItems | null;
   toggleArticleOpen?: () => void;
   onBack?: () => void;
+  backLabel?: string;
 };
 
 export const AppsSidebarView = ({
@@ -101,6 +104,7 @@ export const AppsSidebarView = ({
   toggleArticleOpen,
   onBack,
   hideBack,
+  backLabel,
   articleButtonItems,
   isNavLoading,
 }: AppsSidebarViewProps) => {
@@ -250,6 +254,7 @@ export const AppsSidebarView = ({
                   showText={showText}
                   currentDeviceType={currentDeviceType}
                   onBack={onBack}
+                  label={backLabel}
                   toggleArticleOpen={toggleArticleOpen}
                 />
               )}

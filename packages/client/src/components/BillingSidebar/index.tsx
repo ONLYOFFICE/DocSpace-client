@@ -130,6 +130,7 @@ const BillingSidebar = ({ isNotPaidPeriod }: BillingSidebarProps) => {
   const onBack = isNotPaidPeriod
     ? () => navigate("/portal-settings/backup/data-backup")
     : undefined;
+  const backLabel = isNotPaidPeriod ? t("Common:Settings") : undefined;
 
   return (
     <AppsSidebar
@@ -137,6 +138,7 @@ const BillingSidebar = ({ isNotPaidPeriod }: BillingSidebarProps) => {
       activeId={activeId}
       variant="secondary"
       onBack={onBack}
+      backLabel={backLabel}
     />
   );
 };

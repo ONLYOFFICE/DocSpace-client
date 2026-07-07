@@ -289,9 +289,12 @@ export const startDocsConnectTrial =
 
 export const updateDocsConnectConfig = async (
   data: TDocsConnectConfigUpdate,
-): Promise<TDocsConnectInfo | null> => {
-  await request({ method: "put", url: `${BASE}/tenant/config`, data });
-  return getDocsConnectInfo();
+): Promise<TDocsConnectConfig | null> => {
+  return (await request({
+    method: "put",
+    url: `${BASE}/tenant/config`,
+    data,
+  })) as TDocsConnectConfig | null;
 };
 
 export const getDocsConnectReportUrl = (): string =>

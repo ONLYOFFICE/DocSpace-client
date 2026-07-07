@@ -44,16 +44,21 @@ import { TextInput, InputType } from "@docspace/ui-kit/components/text-input";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
-import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
+import type {
+  TDocsConnectInfo,
+  TDocsConnectConfigUpdate,
+} from "@docspace/shared/api/docs-connect/types";
 import type { TTranslation } from "@docspace/shared/types";
+
+import AddRuleDialog from "./sub-components/AddRuleDialog";
 
 import styles from "./TenantPanel.module.scss";
 
@@ -73,77 +78,136 @@ type TGeneralState = {
 interface SettingsProps {
   info?: TDocsConnectInfo;
   copyToClipboard?: (value: string, t: TTranslation) => void;
+  updateConfig?: (data: TDocsConnectConfigUpdate) => Promise<void>;
 }
 
 const onlyDigits = (value: string) => value.replace(/\D/g, "");
 
-const Settings = ({ info, copyToClipboard }: SettingsProps) => {
+const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
   const { t } = useTranslation(["DocsConnect", "Common"]);
 
   const [baseline, setBaseline] = useState<TGeneralState>(() => ({
     header: info?.config.security.header ?? "",
     secret: info?.config.security.secret ?? "",
-    wopiEnabled: true,
+    wopiEnabled: info?.config.wopi?.enable ?? false,
     anonymous: info?.config.server.isAnonymousSupport ?? false,
   }));
   const [general, setGeneral] = useState<TGeneralState>(baseline);
   const [secretRevealed, setSecretRevealed] = useState(false);
+  const [isSavingGeneral, setIsSavingGeneral] = useState(false);
 
-  const [rules, setRules] = useState<TAccessRule[]>([]);
-  const [addingRule, setAddingRule] = useState(false);
-  const [newRuleType, setNewRuleType] = useState<"allow" | "deny">("allow");
-  const [newRuleValue, setNewRuleValue] = useState("");
+  const [rules, setRules] = useState<TAccessRule[]>(() =>
+    (info?.config.ipFilter ?? []).map((rule, index) => ({
+      key: `${index}-${rule.address ?? ""}`,
+      type: rule.allowed ? "allow" : "deny",
+      value: rule.address ?? "",
+    })),
+  );
+  const [addRuleDialogVisible, setAddRuleDialogVisible] = useState(false);
+  const [ipFilteringEnabled, setIpFilteringEnabled] = useState(
+    () => (info?.config.ipFilter ?? []).length > 0,
+  );
 
-  const [requestFiltering, setRequestFiltering] = useState({
-    useIpFiltering: false,
-    allowPrivateIp: false,
-    allowMetaIp: false,
-  });
-
-  const [limits, setLimits] = useState({
-    maxDownloadBytes: "104857600",
-    word: "100",
-    excel: "100",
-    powerPoint: "100",
-    visio: "100",
-  });
+  const [savedMaxDownload, setSavedMaxDownload] = useState(() =>
+    info?.config.server.fileSizeLimit != null
+      ? String(info.config.server.fileSizeLimit)
+      : "",
+  );
+  const [maxDownloadBytes, setMaxDownloadBytes] = useState(savedMaxDownload);
+  const [isSavingLimit, setIsSavingLimit] = useState(false);
+  const [isSavingRules, setIsSavingRules] = useState(false);
 
   if (!info) return null;
 
-  const hasChanges =
+  const isBusy = isSavingGeneral || isSavingLimit || isSavingRules;
+
+  const hasChangesGeneral =
     general.header !== baseline.header ||
     general.secret !== baseline.secret ||
     general.wopiEnabled !== baseline.wopiEnabled ||
     general.anonymous !== baseline.anonymous;
 
-  const onSave = () => {
-    setBaseline(general);
+  const hasChangesLimit = maxDownloadBytes !== savedMaxDownload;
+
+  const serverPayload = (anonymous: boolean, maxDownload: string) => ({
+    isAnonymousSupport: anonymous,
+    fileSizeLimit: Number(maxDownload) || 0,
+  });
+
+  const onSaveGeneral = async () => {
+    setIsSavingGeneral(true);
+    try {
+      await updateConfig?.({
+        security: { secret: general.secret, header: general.header },
+        wopi: { enable: general.wopiEnabled },
+        server: serverPayload(general.anonymous, savedMaxDownload),
+      });
+      setBaseline(general);
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
+    } catch (e) {
+      toastr.error(e as Error);
+    } finally {
+      setIsSavingGeneral(false);
+    }
   };
 
-  const onCancel = () => {
+  const onCancelGeneral = () => {
     setGeneral(baseline);
   };
 
-  const ruleTypeOptions = [
-    { key: "allow", label: t("DocsConnect:RuleAllow") },
-    { key: "deny", label: t("DocsConnect:RuleDeny") },
-  ];
+  const onSaveLimit = async () => {
+    setIsSavingLimit(true);
+    try {
+      await updateConfig?.({
+        server: serverPayload(baseline.anonymous, maxDownloadBytes),
+      });
+      setSavedMaxDownload(maxDownloadBytes);
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
+    } catch (e) {
+      toastr.error(e as Error);
+    } finally {
+      setIsSavingLimit(false);
+    }
+  };
 
-  const onAddRule = () => {
-    const value = newRuleValue.trim();
-    if (!value) return;
+  const onCancelLimit = () => {
+    setMaxDownloadBytes(savedMaxDownload);
+  };
 
-    setRules((prev) => [
-      ...prev,
-      { key: `${Date.now()}`, type: newRuleType, value },
-    ]);
-    setNewRuleValue("");
-    setNewRuleType("allow");
-    setAddingRule(false);
+  const persistRules = async (next: TAccessRule[]) => {
+    const prev = rules;
+    setRules(next);
+    setIsSavingRules(true);
+    try {
+      await updateConfig?.({
+        ipFilter: next.map((rule) => ({
+          address: rule.value,
+          allowed: rule.type === "allow",
+        })),
+      });
+    } catch (e) {
+      setRules(prev);
+      toastr.error(e as Error);
+    } finally {
+      setIsSavingRules(false);
+    }
+  };
+
+  const onAddRule = (type: "allow" | "deny", value: string) => {
+    persistRules([...rules, { key: `${Date.now()}`, type, value }]);
   };
 
   const onDeleteRule = (key: string) => {
-    setRules((prev) => prev.filter((rule) => rule.key !== key));
+    persistRules(rules.filter((rule) => rule.key !== key));
+  };
+
+  const onToggleIpFiltering = () => {
+    if (ipFilteringEnabled) {
+      setIpFilteringEnabled(false);
+      if (rules.length > 0) persistRules([]);
+    } else {
+      setIpFilteringEnabled(true);
+    }
   };
 
   const limitField = (
@@ -151,6 +215,7 @@ const Settings = ({ info, copyToClipboard }: SettingsProps) => {
     value: string,
     hint: string,
     onChange: (value: string) => void,
+    onBlur?: () => void,
   ) => (
     <FieldContainer
       isVertical
@@ -163,6 +228,8 @@ const Settings = ({ info, copyToClipboard }: SettingsProps) => {
         type={InputType.text}
         value={value}
         onChange={(e) => onChange(onlyDigits(e.target.value))}
+        onBlur={onBlur}
+        isDisabled={isBusy}
         scale
       />
       <Text fontSize="12px" className={styles.settingsHint}>
@@ -190,6 +257,7 @@ const Settings = ({ info, copyToClipboard }: SettingsProps) => {
             onChange={(e) =>
               setGeneral((prev) => ({ ...prev, header: e.target.value }))
             }
+            isDisabled={isBusy}
             scale
           />
         </FieldContainer>
@@ -206,6 +274,7 @@ const Settings = ({ info, copyToClipboard }: SettingsProps) => {
               onChange={(e) =>
                 setGeneral((prev) => ({ ...prev, secret: e.target.value }))
               }
+              isDisabled={isBusy}
               scale
               className={styles.secretInput}
             />
@@ -225,14 +294,15 @@ const Settings = ({ info, copyToClipboard }: SettingsProps) => {
         </FieldContainer>
       </div>
 
-      <div className={styles.wopiGroup}>
+      <div className={styles.toggleGroup}>
         <Text fontWeight={600}>{t("DocsConnect:Wopi")}</Text>
-        <div className={styles.wopiCard}>
-          <div className={styles.wopiToggle}>
+        <div className={styles.toggleCard}>
+          <div className={styles.toggleControl}>
             <ToggleButton
               label={t("DocsConnect:EnableWopi")}
               fontWeight={600}
               isChecked={general.wopiEnabled}
+              isDisabled={isBusy}
               onChange={() =>
                 setGeneral((prev) => ({
                   ...prev,
@@ -241,7 +311,7 @@ const Settings = ({ info, copyToClipboard }: SettingsProps) => {
               }
             />
           </div>
-          <Text fontSize="13px" className={styles.wopiDescription}>
+          <Text fontSize="13px" className={styles.toggleDescription}>
             {t("DocsConnect:EnableWopiDescription")}
           </Text>
         </div>
@@ -258,6 +328,7 @@ const Settings = ({ info, copyToClipboard }: SettingsProps) => {
           orientation="vertical"
           spacing="12px"
           fontWeight={600}
+          isDisabled={isBusy}
           selected={general.anonymous ? "yes" : "no"}
           onClick={(e) =>
             setGeneral((prev) => ({
@@ -292,158 +363,90 @@ const Settings = ({ info, copyToClipboard }: SettingsProps) => {
         />
       </div>
 
-      <div className={styles.settingsButtons}>
-        <Button
-          primary
-          size={ButtonSize.small}
-          label={t("Common:SaveButton")}
-          isDisabled={!hasChanges}
-          onClick={onSave}
-        />
-        <Button
-          size={ButtonSize.small}
-          label={t("Common:CancelButton")}
-          isDisabled={!hasChanges}
-          onClick={onCancel}
-        />
-      </div>
+      <SaveCancelButtons
+        className={styles.saveButtons}
+        onSaveClick={onSaveGeneral}
+        onCancelClick={onCancelGeneral}
+        showReminder={hasChangesGeneral}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
+        saveButtonLabel={t("Common:SaveButton")}
+        cancelButtonLabel={t("Common:CancelButton")}
+        isSaving={isSavingGeneral}
+        displaySettings
+      />
 
       <Text fontSize="16px" fontWeight={700}>
         {t("DocsConnect:IpFiltering")}
       </Text>
 
-      <div className={styles.settingsGroup}>
-        <Text fontWeight={600}>{t("DocsConnect:AccessRules")}</Text>
-        <Text fontSize="13px" className={styles.settingsHint}>
-          {t("DocsConnect:AccessRulesDescription")}
-        </Text>
-      </div>
-
-      {rules.length > 0 ? (
-        <div className={styles.rulesList}>
-          {rules.map((rule) => (
-            <div key={rule.key} className={styles.ruleRow}>
-              <span
-                className={`${styles.ruleBadge} ${
-                  rule.type === "deny" ? styles.ruleBadgeDeny : ""
-                }`}
-              >
-                {rule.type === "allow"
-                  ? t("DocsConnect:RuleAllow")
-                  : t("DocsConnect:RuleDeny")}
-              </span>
-              <Text className={styles.ruleValue}>{rule.value}</Text>
-              <IconButton
-                iconName={TrashReactSvgUrl}
-                size={16}
-                onClick={() => onDeleteRule(rule.key)}
-              />
-            </div>
-          ))}
-        </div>
-      ) : null}
-
-      {addingRule ? (
-        <div className={styles.addRuleRow}>
-          <ComboBox
-            options={ruleTypeOptions}
-            selectedOption={
-              ruleTypeOptions.find((option) => option.key === newRuleType) ??
-              ruleTypeOptions[0]
-            }
-            onSelect={(option) =>
-              setNewRuleType(option.key === "deny" ? "deny" : "allow")
-            }
-            scaled={false}
-          />
-          <TextInput
-            type={InputType.text}
-            value={newRuleValue}
-            onChange={(e) => setNewRuleValue(e.target.value)}
-            placeholder="192.168.1.0/24"
-            scale
-          />
-          <Button
-            primary
-            size={ButtonSize.small}
-            label={t("Common:AddButton")}
-            isDisabled={!newRuleValue.trim()}
-            onClick={onAddRule}
-          />
-          <Button
-            size={ButtonSize.small}
-            label={t("Common:CancelButton")}
-            onClick={() => {
-              setAddingRule(false);
-              setNewRuleValue("");
-            }}
-          />
-        </div>
-      ) : (
-        <div>
-          <Button
-            primary
-            size={ButtonSize.small}
-            label={t("DocsConnect:AddRule")}
-            onClick={() => setAddingRule(true)}
-          />
-        </div>
-      )}
-
-      <div className={styles.settingsGroup}>
-        <Text fontWeight={600}>{t("DocsConnect:RequestFiltering")}</Text>
-        <Text fontSize="13px" className={styles.settingsHint}>
-          {t("DocsConnect:RequestFilteringDescription")}
-        </Text>
-      </div>
-
-      <div className={styles.checkboxGroup}>
-        <div className={styles.checkboxItem}>
-          <Checkbox
+      <div className={styles.toggleCard}>
+        <div className={styles.toggleControl}>
+          <ToggleButton
             label={t("DocsConnect:UseIpFiltering")}
-            isChecked={requestFiltering.useIpFiltering}
-            onChange={() =>
-              setRequestFiltering((prev) => ({
-                ...prev,
-                useIpFiltering: !prev.useIpFiltering,
-              }))
-            }
+            fontWeight={600}
+            isChecked={ipFilteringEnabled}
+            isDisabled={isBusy}
+            onChange={onToggleIpFiltering}
           />
-          <Text fontSize="13px" className={styles.settingsHint}>
-            {t("DocsConnect:UseIpFilteringDescription")}
-          </Text>
         </div>
-        <div className={styles.checkboxItem}>
-          <Checkbox
-            label={t("DocsConnect:AllowPrivateIp")}
-            isChecked={requestFiltering.allowPrivateIp}
-            onChange={() =>
-              setRequestFiltering((prev) => ({
-                ...prev,
-                allowPrivateIp: !prev.allowPrivateIp,
-              }))
-            }
-          />
-          <Text fontSize="13px" className={styles.settingsHint}>
-            {t("DocsConnect:AllowPrivateIpDescription")}
-          </Text>
-        </div>
-        <div className={styles.checkboxItem}>
-          <Checkbox
-            label={t("DocsConnect:AllowMetaIp")}
-            isChecked={requestFiltering.allowMetaIp}
-            onChange={() =>
-              setRequestFiltering((prev) => ({
-                ...prev,
-                allowMetaIp: !prev.allowMetaIp,
-              }))
-            }
-          />
-          <Text fontSize="13px" className={styles.settingsHint}>
-            {t("DocsConnect:AllowMetaIpDescription")}
-          </Text>
-        </div>
+        <Text fontSize="13px" className={styles.toggleDescription}>
+          {t("DocsConnect:UseIpFilteringDescription")}
+        </Text>
       </div>
+
+      {ipFilteringEnabled ? (
+        <>
+          <div className={styles.settingsGroup}>
+            <Text fontWeight={600}>{t("DocsConnect:AccessRules")}</Text>
+            <Text fontSize="13px" className={styles.settingsHint}>
+              {t("DocsConnect:AccessRulesDescription")}
+            </Text>
+          </div>
+
+          {rules.length > 0 ? (
+            <div className={styles.rulesList}>
+              {rules.map((rule) => (
+                <div key={rule.key} className={styles.ruleRow}>
+                  <span
+                    className={`${styles.ruleBadge} ${
+                      rule.type === "deny" ? styles.ruleBadgeDeny : ""
+                    }`}
+                  >
+                    {rule.type === "allow"
+                      ? t("DocsConnect:RuleAllow")
+                      : t("DocsConnect:RuleDeny")}
+                  </span>
+                  <Text className={styles.ruleValue}>{rule.value}</Text>
+                  <IconButton
+                    iconName={TrashReactSvgUrl}
+                    size={16}
+                    isDisabled={isBusy}
+                    onClick={() => onDeleteRule(rule.key)}
+                  />
+                </div>
+              ))}
+            </div>
+          ) : null}
+
+          <div>
+            <Button
+              primary
+              size={ButtonSize.small}
+              label={t("DocsConnect:AddRule")}
+              isDisabled={isBusy}
+              onClick={() => setAddRuleDialogVisible(true)}
+            />
+          </div>
+
+          {addRuleDialogVisible ? (
+            <AddRuleDialog
+              visible
+              onClose={() => setAddRuleDialogVisible(false)}
+              onAdd={onAddRule}
+            />
+          ) : null}
+        </>
+      ) : null}
 
       <div className={styles.settingsGroup}>
         <Text fontSize="16px" fontWeight={700}>
@@ -458,42 +461,22 @@ const Settings = ({ info, copyToClipboard }: SettingsProps) => {
 
       {limitField(
         t("DocsConnect:MaxDownloadBytes"),
-        limits.maxDownloadBytes,
+        maxDownloadBytes,
         t("DocsConnect:MaxDownloadBytesDescription"),
-        (value) => setLimits((prev) => ({ ...prev, maxDownloadBytes: value })),
+        setMaxDownloadBytes,
       )}
 
-      <div className={styles.settingsGroup}>
-        <Text fontWeight={600}>{t("DocsConnect:InputFileSizeLimits")}</Text>
-        <Text fontSize="13px" className={styles.settingsHint}>
-          {t("DocsConnect:InputFileSizeLimitsDescription")}
-        </Text>
-      </div>
-
-      {limitField(
-        t("DocsConnect:WordDocumentsLimit"),
-        limits.word,
-        t("DocsConnect:MaxUncompressedSize", { type: "Word" }),
-        (value) => setLimits((prev) => ({ ...prev, word: value })),
-      )}
-      {limitField(
-        t("DocsConnect:ExcelDocumentsLimit"),
-        limits.excel,
-        t("DocsConnect:MaxUncompressedSize", { type: "Excel" }),
-        (value) => setLimits((prev) => ({ ...prev, excel: value })),
-      )}
-      {limitField(
-        t("DocsConnect:PowerPointDocumentsLimit"),
-        limits.powerPoint,
-        t("DocsConnect:MaxUncompressedSize", { type: "PowerPoint" }),
-        (value) => setLimits((prev) => ({ ...prev, powerPoint: value })),
-      )}
-      {limitField(
-        t("DocsConnect:VisioDocumentsLimit"),
-        limits.visio,
-        t("DocsConnect:MaxUncompressedSize", { type: "Visio" }),
-        (value) => setLimits((prev) => ({ ...prev, visio: value })),
-      )}
+      <SaveCancelButtons
+        className={styles.saveButtons}
+        onSaveClick={onSaveLimit}
+        onCancelClick={onCancelLimit}
+        showReminder={hasChangesLimit}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
+        saveButtonLabel={t("Common:SaveButton")}
+        cancelButtonLabel={t("Common:CancelButton")}
+        isSaving={isSavingLimit}
+        displaySettings
+      />
     </div>
   );
 };
@@ -501,4 +484,6 @@ const Settings = ({ info, copyToClipboard }: SettingsProps) => {
 export default inject(({ docsConnectStore }: TStore) => ({
   info: docsConnectStore.info,
   copyToClipboard: docsConnectStore.copyToClipboard,
+  updateConfig: docsConnectStore.updateConfig,
 }))(observer(Settings));
+

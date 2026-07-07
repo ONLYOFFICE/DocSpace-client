@@ -154,13 +154,13 @@
   color: var(--dev-tools-text-secondary);
 }
 
-.wopiGroup {
+.toggleGroup {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.wopiCard {
+.toggleCard {
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -169,13 +169,13 @@
   background-color: $gray-light;
 }
 
-.wopiToggle {
+.toggleControl {
   label {
     position: relative;
   }
 }
 
-.wopiDescription {
+.toggleDescription {
   margin-inline-start: 36px;
   color: $black;
 }
@@ -207,9 +207,9 @@
   gap: 8px;
 }
 
-.settingsButtons {
-  display: flex;
-  gap: 8px;
+.saveButtons {
+  position: static;
+  margin-top: 4px;
 }
 
 .rulesList {
@@ -253,26 +253,10 @@
   flex: 1;
 }
 
-.addRuleRow {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.checkboxGroup {
+.addRuleBody {
   display: flex;
   flex-direction: column;
   gap: 16px;
-}
-
-.checkboxItem {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-
-  .settingsHint {
-    margin-inline-start: 28px;
-  }
 }
 
 .limitField {

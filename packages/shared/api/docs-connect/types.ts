@@ -40,10 +40,17 @@ export type TDocsConnectTenant = {
   payment?: { quantity?: number; currency?: string };
 };
 
+export type TDocsConnectIpFilterRule = {
+  address?: string;
+  allowed?: boolean;
+};
+
 export type TDocsConnectConfig = {
   tenantName: string;
   security: { secret: string; header: string };
-  server: { isAnonymousSupport: boolean };
+  server: { isAnonymousSupport: boolean; fileSizeLimit?: number };
+  wopi?: { enable: boolean } | null;
+  ipFilter?: TDocsConnectIpFilterRule[] | null;
 };
 
 export type TDocsConnectStat = {
@@ -98,12 +105,17 @@ export type TDocsConnectInfo = {
 };
 
 export type TDocsConnectConfigUpdate = {
-  tenantName: string;
-  security: {
-    secret: string;
-    header: string;
+  tenantName?: string;
+  security?: {
+    secret?: string;
+    header?: string;
   };
-  server: {
-    isAnonymousSupport: boolean;
+  server?: {
+    isAnonymousSupport?: boolean;
+    fileSizeLimit?: number;
   };
+  wopi?: {
+    enable?: boolean;
+  };
+  ipFilter?: TDocsConnectIpFilterRule[];
 };

@@ -1,0 +1,22 @@
+{
+  "FeatureDocuments": "Kreirajte i uređujte dokumente, tabele, prezentacije i PDF obrasce direktno u pregledaču.",
+  "FeatureDocumentsTitle": "Radite sa dokumentima",
+  "FeatureOrganize": "Pronađite sve za nekoliko sekundi pomoću pretrage, filtera, omiljenih i liste nedavnih fajlova.",
+  "FeatureOrganizeTitle": "Sve na svom mestu",
+  "FeatureSecurity": "Fleksibilna prava pristupa štite vaše fajlove, a izbrisane stavke mogu se vratiti iz korpe.",
+  "FeatureSecurityTitle": "Čuvajte svoje podatke bezbedno",
+  "FeatureSharing": "Dodelite pristup svojim fajlovima i zajedno sa drugima uređujte dokumente u realnom vremenu.",
+  "FeatureSharingTitle": "Delite i sarađujte",
+  "TourActions": "Koristite pločice brzih akcija da jednim klikom kreirate nove dokumente, tabele, prezentacije i PDF obrasce.",
+  "TourActionsTitle": "Kreiranje i otpremanje",
+  "TourInfoPanel": "Otvorite info panel da biste videli detalje fajla, upravljali deljenjem i pratili istoriju izmena.",
+  "TourInfoPanelTitle": "Info panel",
+  "TourMyDocuments": "Ovo je vaš lični prostor. Fajlovi koji se ovde čuvaju vidljivi su samo vama dok ih ne podelite.",
+  "TourQuickAccess": "Datoteke podeljene sa vama, nedavni dokumenti, omiljeni i korpa uvek su vam pri ruci, odmah ispod odeljka Datoteke.",
+  "TourQuickAccessTitle": "Brzi pristup",
+  "TourSearch": "Pronađite potreban fajl za nekoliko sekundi: pretražujte po imenu ili primenite filtere po tipu i autoru.",
+  "TourSearchTitle": "Pretraga i filteri",
+  "TourView": "Prebacujte se između prikaza u redovima i pločicama — izaberite ono što vam više odgovara.",
+  "TourViewTitle": "Režim prikaza",
+  "TourWelcomeTitle": "Dobro došli u {{productName}}!"
+}

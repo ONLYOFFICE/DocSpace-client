@@ -1,0 +1,22 @@
+{
+  "FeatureDocuments": "Create and edit documents, spreadsheets, presentations, and PDF forms right in your browser.",
+  "FeatureDocumentsTitle": "Work with documents",
+  "FeatureOrganize": "Find anything in seconds with search, filters, favorites, and the list of recent files.",
+  "FeatureOrganizeTitle": "Stay organized",
+  "FeatureSecurity": "Flexible access rights protect your files, and deleted items can be restored from Trash.",
+  "FeatureSecurityTitle": "Keep your data safe",
+  "FeatureSharing": "Grant access to your files and co-edit documents with others in real time.",
+  "FeatureSharingTitle": "Share and collaborate",
+  "TourActions": "Use the quick action tiles to create new documents, spreadsheets, presentations, and PDF forms in one click.",
+  "TourActionsTitle": "Create and upload",
+  "TourInfoPanel": "Open the info panel to view file details, manage sharing, and track the history of changes.",
+  "TourInfoPanelTitle": "Info panel",
+  "TourMyDocuments": "This is your personal space. Files stored here are visible only to you until you share them.",
+  "TourQuickAccess": "Files shared with you, recent documents, favorites, and Trash are always at hand right under Files.",
+  "TourQuickAccessTitle": "Quick access",
+  "TourSearch": "Find the file you need in seconds: search by name or apply filters by type and author.",
+  "TourSearchTitle": "Search and filters",
+  "TourView": "Switch between the row and tile views — choose whichever is more convenient for you.",
+  "TourViewTitle": "View mode",
+  "TourWelcomeTitle": "Welcome to {{productName}}!"
+}

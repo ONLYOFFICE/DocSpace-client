@@ -1,0 +1,22 @@
+{
+  "FeatureDocuments": "ドキュメント、スプレッドシート、プレゼンテーション、PDFフォームをブラウザで直接作成・編集できます。",
+  "FeatureDocumentsTitle": "ドキュメントの操作",
+  "FeatureOrganize": "検索、フィルター、お気に入り、最近使ったファイルの一覧で、必要なものをすぐに見つけられます。",
+  "FeatureOrganizeTitle": "整理整頓",
+  "FeatureSecurity": "柔軟なアクセス権限でファイルを保護し、削除したアイテムはゴミ箱から復元できます。",
+  "FeatureSecurityTitle": "データの安全性",
+  "FeatureSharing": "ファイルへのアクセス権を付与し、他のユーザーとリアルタイムでドキュメントを共同編集できます。",
+  "FeatureSharingTitle": "共有と共同作業",
+  "TourActions": "クイックアクションのタイルを使えば、ドキュメント、スプレッドシート、プレゼンテーション、PDFフォームをワンクリックで新規作成できます。",
+  "TourActionsTitle": "作成とアップロード",
+  "TourInfoPanel": "情報パネルを開くと、ファイルの詳細の確認、共有の管理、変更履歴の追跡ができます。",
+  "TourInfoPanelTitle": "情報パネル",
+  "TourMyDocuments": "ここはあなたの個人スペースです。ここに保存されたファイルは、共有するまで自分だけが閲覧できます。",
+  "TourQuickAccess": "共有されたファイル、最近のドキュメント、お気に入り、ゴミ箱は、「ファイル」のすぐ下からいつでもアクセスできます。",
+  "TourQuickAccessTitle": "クイックアクセス",
+  "TourSearch": "名前で検索するか、種類や作成者でフィルターを適用して、必要なファイルをすぐに見つけられます。",
+  "TourSearchTitle": "検索とフィルター",
+  "TourView": "行表示とタイル表示を切り替えて、使いやすい方を選べます。",
+  "TourViewTitle": "表示モード",
+  "TourWelcomeTitle": "{{productName}}へようこそ！"
+}

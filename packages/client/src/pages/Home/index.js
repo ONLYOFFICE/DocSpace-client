@@ -66,6 +66,7 @@ import { CategoryType } from "@docspace/shared/constants";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
+import FilesTour from "SRC_DIR/components/FilesTour";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 
 import {
@@ -628,6 +629,7 @@ const PureHome = observer((props) => {
         <>
           <DragTooltip />
           <FilesSelectionArea />
+          <FilesTour />
         </>
       )}
       <MediaViewer />
@@ -685,6 +687,7 @@ const PureHome = observer((props) => {
                 items={quickActions.items}
                 className={styles.quickActions}
                 isLoading={showFilterLoader}
+                dataTestId="quick-actions"
               />
             </Section.SectionBanner>
           ) : null}

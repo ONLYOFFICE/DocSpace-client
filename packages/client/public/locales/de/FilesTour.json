@@ -1,0 +1,22 @@
+{
+  "FeatureDocuments": "Erstellen und bearbeiten Sie Dokumente, Tabellen, Präsentationen und PDF-Formulare direkt im Browser.",
+  "FeatureDocumentsTitle": "Mit Dokumenten arbeiten",
+  "FeatureOrganize": "Finden Sie alles in Sekunden mit Suche, Filtern, Favoriten und der Liste der zuletzt geöffneten Dateien.",
+  "FeatureOrganizeTitle": "Alles im Blick",
+  "FeatureSecurity": "Flexible Zugriffsrechte schützen Ihre Dateien, und gelöschte Elemente können aus dem Papierkorb wiederhergestellt werden.",
+  "FeatureSecurityTitle": "Ihre Daten in Sicherheit",
+  "FeatureSharing": "Gewähren Sie Zugriff auf Ihre Dateien und bearbeiten Sie Dokumente in Echtzeit gemeinsam mit anderen.",
+  "FeatureSharingTitle": "Teilen und zusammenarbeiten",
+  "TourActions": "Erstellen Sie mit den Schnellaktionskacheln neue Dokumente, Tabellen, Präsentationen und PDF-Formulare mit einem Klick.",
+  "TourActionsTitle": "Erstellen und hochladen",
+  "TourInfoPanel": "Öffnen Sie den Infobereich, um Dateidetails anzuzeigen, Freigaben zu verwalten und den Änderungsverlauf zu verfolgen.",
+  "TourInfoPanelTitle": "Infobereich",
+  "TourMyDocuments": "Dies ist Ihr persönlicher Bereich. Dateien hier sind nur für Sie sichtbar, bis Sie sie freigeben.",
+  "TourQuickAccess": "Mit Ihnen geteilte Dateien, zuletzt geöffnete Dokumente, Favoriten und der Papierkorb sind direkt unter „Dateien“ immer griffbereit.",
+  "TourQuickAccessTitle": "Schnellzugriff",
+  "TourSearch": "Finden Sie die gewünschte Datei in Sekunden: Suchen Sie nach dem Namen oder filtern Sie nach Typ und Autor.",
+  "TourSearchTitle": "Suche und Filter",
+  "TourView": "Wechseln Sie zwischen Zeilen- und Kachelansicht — wählen Sie, was für Sie bequemer ist.",
+  "TourViewTitle": "Ansichtsmodus",
+  "TourWelcomeTitle": "Willkommen bei {{productName}}!"
+}

@@ -1,0 +1,22 @@
+{
+  "FeatureDocuments": "Crea e modifica documenti, fogli di calcolo, presentazioni e moduli PDF direttamente nel browser.",
+  "FeatureDocumentsTitle": "Lavora con i documenti",
+  "FeatureOrganize": "Trova tutto in pochi secondi con la ricerca, i filtri, i preferiti e l'elenco dei file recenti.",
+  "FeatureOrganizeTitle": "Tutto in ordine",
+  "FeatureSecurity": "I diritti di accesso flessibili proteggono i tuoi file e gli elementi eliminati possono essere ripristinati dal cestino.",
+  "FeatureSecurityTitle": "Proteggi i tuoi dati",
+  "FeatureSharing": "Concedi l'accesso ai tuoi file e modifica i documenti insieme ad altri in tempo reale.",
+  "FeatureSharingTitle": "Condividi e collabora",
+  "TourActions": "Usa i riquadri delle azioni rapide per creare nuovi documenti, fogli di calcolo, presentazioni e moduli PDF con un solo clic.",
+  "TourActionsTitle": "Crea e carica",
+  "TourInfoPanel": "Apri il pannello informazioni per visualizzare i dettagli del file, gestire la condivisione e seguire la cronologia delle modifiche.",
+  "TourInfoPanelTitle": "Pannello informazioni",
+  "TourMyDocuments": "Questo è il tuo spazio personale. I file archiviati qui sono visibili solo a te finché non li condividi.",
+  "TourQuickAccess": "I file condivisi con te, i documenti recenti, i preferiti e il cestino sono sempre a portata di mano, proprio sotto File.",
+  "TourQuickAccessTitle": "Accesso rapido",
+  "TourSearch": "Trova il file che ti serve in pochi secondi: cerca per nome o applica filtri per tipo e autore.",
+  "TourSearchTitle": "Ricerca e filtri",
+  "TourView": "Passa dalla visualizzazione a righe a quella a riquadri — scegli quella più comoda per te.",
+  "TourViewTitle": "Modalità di visualizzazione",
+  "TourWelcomeTitle": "Benvenuto in {{productName}}!"
+}

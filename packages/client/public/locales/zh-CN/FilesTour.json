@@ -1,0 +1,22 @@
+{
+  "FeatureDocuments": "直接在浏览器中创建和编辑文档、电子表格、演示文稿和PDF表单。",
+  "FeatureDocumentsTitle": "处理文档",
+  "FeatureOrganize": "通过搜索、筛选器、收藏夹和最近文件列表，几秒钟内即可找到所需内容。",
+  "FeatureOrganizeTitle": "井然有序",
+  "FeatureSecurity": "灵活的访问权限可保护您的文件，已删除的项目可以从回收站恢复。",
+  "FeatureSecurityTitle": "保护您的数据",
+  "FeatureSharing": "授予他人访问您文件的权限，并与他人实时协同编辑文档。",
+  "FeatureSharingTitle": "共享与协作",
+  "TourActions": "使用快速操作磁贴，一键创建新的文档、电子表格、演示文稿和PDF表单。",
+  "TourActionsTitle": "创建和上传",
+  "TourInfoPanel": "打开信息面板，查看文件详情、管理共享并跟踪更改历史记录。",
+  "TourInfoPanelTitle": "信息面板",
+  "TourMyDocuments": "这是您的个人空间。存储在此处的文件在您共享之前仅对您可见。",
+  "TourQuickAccess": "与您共享的文件、最近的文档、收藏夹和回收站就在“文件”下方，随时可用。",
+  "TourQuickAccessTitle": "快速访问",
+  "TourSearch": "几秒钟内找到所需文件：按名称搜索，或按类型和作者应用筛选器。",
+  "TourSearchTitle": "搜索和筛选",
+  "TourView": "在行视图和磁贴视图之间切换——选择您更喜欢的方式。",
+  "TourViewTitle": "视图模式",
+  "TourWelcomeTitle": "欢迎使用{{productName}}！"
+}

@@ -1,0 +1,22 @@
+{
+  "FeatureDocuments": "Crie e edite documentos, planilhas, apresentações e formulários PDF diretamente no navegador.",
+  "FeatureDocumentsTitle": "Trabalhe com documentos",
+  "FeatureOrganize": "Encontre tudo em segundos com a pesquisa, os filtros, os favoritos e a lista de arquivos recentes.",
+  "FeatureOrganizeTitle": "Tudo organizado",
+  "FeatureSecurity": "Direitos de acesso flexíveis protegem seus arquivos, e itens excluídos podem ser restaurados da lixeira.",
+  "FeatureSecurityTitle": "Mantenha seus dados seguros",
+  "FeatureSharing": "Conceda acesso aos seus arquivos e edite documentos em conjunto com outras pessoas em tempo real.",
+  "FeatureSharingTitle": "Compartilhe e colabore",
+  "TourActions": "Use os blocos de ações rápidas para criar novos documentos, planilhas, apresentações e formulários PDF com um clique.",
+  "TourActionsTitle": "Criar e enviar",
+  "TourInfoPanel": "Abra o painel de informações para ver os detalhes do arquivo, gerenciar o compartilhamento e acompanhar o histórico de alterações.",
+  "TourInfoPanelTitle": "Painel de informações",
+  "TourMyDocuments": "Este é o seu espaço pessoal. Os arquivos armazenados aqui são visíveis apenas para você até que você os compartilhe.",
+  "TourQuickAccess": "Arquivos compartilhados com você, documentos recentes, favoritos e a lixeira estão sempre à mão, logo abaixo de Arquivos.",
+  "TourQuickAccessTitle": "Acesso rápido",
+  "TourSearch": "Encontre o arquivo de que você precisa em segundos: pesquise pelo nome ou aplique filtros por tipo e autor.",
+  "TourSearchTitle": "Pesquisa e filtros",
+  "TourView": "Alterne entre a exibição em linhas e em blocos — escolha a que for mais conveniente para você.",
+  "TourViewTitle": "Modo de exibição",
+  "TourWelcomeTitle": "Bem-vindo ao {{productName}}!"
+}

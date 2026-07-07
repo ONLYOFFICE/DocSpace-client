@@ -553,6 +553,9 @@ importers:
       react-i18next:
         specifier: 14.0.1
         version: 14.0.1(i18next@23.7.19)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react-joyride:
+        specifier: ^3.0.0
+        version: 3.1.0(@types/react@19.2.10)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-markdown:
         specifier: ^10.1.0
         version: 10.1.0(@types/react@19.2.10)(react@19.2.4)
@@ -647,6 +650,9 @@ importers:
       '@types/react':
         specifier: 19.2.10
         version: 19.2.10
+      '@types/react-dom':
+        specifier: 19.2.3
+        version: 19.2.3(@types/react@19.2.10)
       '@types/react-virtualized':
         specifier: 9.21.30
         version: 9.21.30

@@ -1,0 +1,22 @@
+{
+  "FeatureDocuments": "Creați și editați documente, foi de calcul, prezentări și formulare PDF direct în browser.",
+  "FeatureDocumentsTitle": "Lucrați cu documente",
+  "FeatureOrganize": "Găsiți orice în câteva secunde cu ajutorul căutării, filtrelor, favoritelor și listei de fișiere recente.",
+  "FeatureOrganizeTitle": "Totul organizat",
+  "FeatureSecurity": "Drepturile de acces flexibile vă protejează fișierele, iar elementele șterse pot fi restaurate din coșul de gunoi.",
+  "FeatureSecurityTitle": "Păstrați-vă datele în siguranță",
+  "FeatureSharing": "Acordați acces la fișierele dvs. și editați documente împreună cu alții în timp real.",
+  "FeatureSharingTitle": "Partajați și colaborați",
+  "TourActions": "Folosiți dalele de acțiuni rapide pentru a crea documente, foi de calcul, prezentări și formulare PDF noi cu un singur clic.",
+  "TourActionsTitle": "Creare și încărcare",
+  "TourInfoPanel": "Deschideți panoul de informații pentru a vedea detaliile fișierului, a gestiona partajarea și a urmări istoricul modificărilor.",
+  "TourInfoPanelTitle": "Panou de informații",
+  "TourMyDocuments": "Acesta este spațiul dvs. personal. Fișierele stocate aici sunt vizibile doar pentru dvs. până când le partajați.",
+  "TourQuickAccess": "Fișierele partajate cu dvs., documentele recente, favoritele și coșul de gunoi sunt mereu la îndemână, chiar sub Fișiere.",
+  "TourQuickAccessTitle": "Acces rapid",
+  "TourSearch": "Găsiți fișierul de care aveți nevoie în câteva secunde: căutați după nume sau aplicați filtre după tip și autor.",
+  "TourSearchTitle": "Căutare și filtre",
+  "TourView": "Comutați între vizualizarea pe rânduri și cea cu dale — alegeți varianta care vă este mai comodă.",
+  "TourViewTitle": "Mod de vizualizare",
+  "TourWelcomeTitle": "Bine ați venit la {{productName}}!"
+}

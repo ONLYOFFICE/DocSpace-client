@@ -1,0 +1,22 @@
+{
+  "FeatureDocuments": "Créez et modifiez des documents, des feuilles de calcul, des présentations et des formulaires PDF directement dans votre navigateur.",
+  "FeatureDocumentsTitle": "Travaillez avec des documents",
+  "FeatureOrganize": "Trouvez tout en quelques secondes grâce à la recherche, aux filtres, aux favoris et à la liste des fichiers récents.",
+  "FeatureOrganizeTitle": "Restez organisé",
+  "FeatureSecurity": "Des droits d'accès flexibles protègent vos fichiers, et les éléments supprimés peuvent être restaurés depuis la corbeille.",
+  "FeatureSecurityTitle": "Protégez vos données",
+  "FeatureSharing": "Accordez l'accès à vos fichiers et coéditez des documents avec d'autres en temps réel.",
+  "FeatureSharingTitle": "Partagez et collaborez",
+  "TourActions": "Utilisez les vignettes d'actions rapides pour créer de nouveaux documents, feuilles de calcul, présentations et formulaires PDF en un clic.",
+  "TourActionsTitle": "Créer et télécharger",
+  "TourInfoPanel": "Ouvrez le panneau d'informations pour consulter les détails du fichier, gérer le partage et suivre l'historique des modifications.",
+  "TourInfoPanelTitle": "Panneau d'informations",
+  "TourMyDocuments": "Ceci est votre espace personnel. Les fichiers stockés ici ne sont visibles que par vous tant que vous ne les partagez pas.",
+  "TourQuickAccess": "Les fichiers partagés avec vous, les documents récents, les favoris et la corbeille sont toujours à portée de main, juste sous Fichiers.",
+  "TourQuickAccessTitle": "Accès rapide",
+  "TourSearch": "Trouvez le fichier dont vous avez besoin en quelques secondes : recherchez par nom ou appliquez des filtres par type et par auteur.",
+  "TourSearchTitle": "Recherche et filtres",
+  "TourView": "Basculez entre l'affichage en lignes et en vignettes — choisissez celui qui vous convient le mieux.",
+  "TourViewTitle": "Mode d'affichage",
+  "TourWelcomeTitle": "Bienvenue dans {{productName}} !"
+}

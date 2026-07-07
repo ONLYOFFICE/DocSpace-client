@@ -51,6 +51,7 @@ import ConfirmStore from "./ConfirmStore";
 import BackupStore from "./BackupStore";
 import CommonStore from "./CommonStore";
 import GuidanceStore from "./GuidanceStore";
+import FilesTourStore from "./FilesTourStore";
 
 import ProfileActionsStore from "./ProfileActionsStore";
 import SsoFormStore from "./SsoFormStore";
@@ -196,6 +197,7 @@ const filesStore = new FilesStore(
 );
 
 const guidanceStore = new GuidanceStore();
+const filesTourStore = new FilesTourStore();
 
 publicRoomStore.filesStore = filesStore;
 
@@ -466,6 +468,7 @@ const store = {
   brandingStore,
 
   guidanceStore,
+  filesTourStore,
 
   aiRoomStore,
   appsStore,

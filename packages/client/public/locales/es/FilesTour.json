@@ -1,0 +1,22 @@
+{
+  "FeatureDocuments": "Cree y edite documentos, hojas de cálculo, presentaciones y formularios PDF directamente en su navegador.",
+  "FeatureDocumentsTitle": "Trabaje con documentos",
+  "FeatureOrganize": "Encuentre lo que necesita en segundos con la búsqueda, los filtros, los favoritos y la lista de archivos recientes.",
+  "FeatureOrganizeTitle": "Todo organizado",
+  "FeatureSecurity": "Los permisos de acceso flexibles protegen sus archivos, y los elementos eliminados se pueden restaurar desde la papelera.",
+  "FeatureSecurityTitle": "Proteja sus datos",
+  "FeatureSharing": "Conceda acceso a sus archivos y coedite documentos con otros en tiempo real.",
+  "FeatureSharingTitle": "Comparta y colabore",
+  "TourActions": "Use los mosaicos de acciones rápidas para crear nuevos documentos, hojas de cálculo, presentaciones y formularios PDF con un solo clic.",
+  "TourActionsTitle": "Crear y subir",
+  "TourInfoPanel": "Abra el panel de información para ver los detalles del archivo, gestionar el acceso y seguir el historial de cambios.",
+  "TourInfoPanelTitle": "Panel de información",
+  "TourMyDocuments": "Este es su espacio personal. Los archivos almacenados aquí solo son visibles para usted hasta que los comparta.",
+  "TourQuickAccess": "Los archivos compartidos con usted, los documentos recientes, los favoritos y la papelera están siempre a mano justo debajo de Archivos.",
+  "TourQuickAccessTitle": "Acceso rápido",
+  "TourSearch": "Encuentre el archivo que necesita en segundos: busque por nombre o aplique filtros por tipo y autor.",
+  "TourSearchTitle": "Búsqueda y filtros",
+  "TourView": "Cambie entre la vista de filas y la de mosaicos: elija la que le resulte más cómoda.",
+  "TourViewTitle": "Modo de vista",
+  "TourWelcomeTitle": "¡Bienvenido a {{productName}}!"
+}

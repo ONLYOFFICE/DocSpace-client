@@ -3,7 +3,7 @@
   "content": "Applying your portal preferences",
   "content_en_sha1_hash": "69c90cfec7979f7b5b76560c65d5b6e6af33cfd0",
   "created_at": "2026-05-24T17:27:23.325Z",
-  "updated_at": "2026-05-24T18:18:03.724Z",
+  "updated_at": "2026-07-07T08:59:21.786Z",
   "comment": {
     "text": "Description text for a step in the installation wizard, indicating that portal preferences are being applied during the editor configuration process.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallDocsCloudDialog.tsx",
-      "line_number": 76,
+      "line_number": 111,
       "context": "description: t(\"Common:DashboardInstallStepConnectCloudDescription\"),\n },\n {\n id: \"configure-editor\",\n label: t(\"Common:DashboardInstallStepConfigureEditor\"),\n description: t(\"Common:DashboardInstallStepConfigureEditorDescription\"),\n },\n {\n id: \"activate-features\",\n label: t(\"Common:DashboardInstallStepActivateFeatures\"),\n description: t(\"Common:DashboardInstallStepActivateFeaturesDescription\"),",
       "module": "/packages/client"
     }

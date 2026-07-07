@@ -53,6 +53,25 @@ const DevToolsRedirect = () => {
   return <Navigate to={newPath} replace />;
 };
 
+const PaymentsRedirect = inject(({ settingsStore }) => ({
+  standalone: settingsStore.standalone,
+}))(
+  observer(({ standalone }) => {
+    const location = useLocation();
+
+    if (standalone) return <ViewComponent />;
+
+    let newPath = location.pathname.replace(
+      /^\/portal-settings\/payments/,
+      "/billing",
+    );
+    newPath = newPath.replace(/^\/billing\/portal-payments/, "/billing/tariff-plan");
+    newPath = newPath.replace(/^\/billing\/services/, "/billing/addons");
+
+    return <Navigate to={`${newPath}${location.search}`} replace />;
+  }),
+);
+
 const ProtectedAISettingsRoute = inject(({ settingsStore }) => ({
   aiServicesEnabled: settingsStore.aiServicesEnabled,
 }))(
@@ -466,40 +485,8 @@ const PortalSettingsRoutes = {
       },
     },
     {
-      path: "payments/portal-payments",
-      element: <ViewComponent />,
-    },
-    {
-      path: "payments/wallet",
-      element: <ViewComponent />,
-    },
-    {
-      path: "payments/services",
-      element: <ViewComponent />,
-    },
-    {
-      path: "payments/payment-method",
-      element: <ViewComponent />,
-    },
-    {
-      path: "payments/usage",
-      element: <ViewComponent />,
-    },
-    {
-      path: "payments/services/ai-services",
-      element: <ViewComponent />,
-    },
-    {
-      path: "payments/services/ai-search",
-      element: <ViewComponent />,
-    },
-    {
-      path: "payments/services/backup",
-      element: <ViewComponent />,
-    },
-    {
-      path: "payments/services/disk-storage",
-      element: <ViewComponent />,
+      path: "payments/*",
+      element: <PaymentsRedirect />,
     },
     {
       path: "management/disk-space",

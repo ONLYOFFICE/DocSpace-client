@@ -3,7 +3,7 @@
   "content": "Spaces",
   "content_en_sha1_hash": "9b584b52b28402594628cea231d8d1cd0eb03d50",
   "created_at": "2025-05-19T21:30:48.971Z",
-  "updated_at": "2026-05-15T14:00:06.896Z",
+  "updated_at": "2026-07-07T08:59:21.924Z",
   "comment": {
     "text": "This is a label for a navigation item or a header. It refers to the \"Spaces\" section within the application, where users can manage different workspaces.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 352,
+      "file_path": "/packages/client/src/store/ProfileActionsStore.tsx",
+      "line_number": 437,
       "context": "isAdmin && standalone && !limitedAccessSpace\n ? {\n key: \"spaces-management-settings\",\n id: \"spaces\",\n icon: SpacesReactSvgUrl,\n label: t(\"Common:Spaces\"),\n onClick: this.onSpacesClick,\n url: SPACES_URL,\n preventNewTab: true,\n items:\n baseDomain && baseDomain !== \"localhost\"",
       "module": "/packages/client"
     },

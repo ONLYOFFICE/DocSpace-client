@@ -3,7 +3,7 @@
   "content": "Document",
   "content_en_sha1_hash": "e214b8a29923056887b7edf6635d90dcbb2abe88",
   "created_at": "2025-05-19T21:30:44.571Z",
-  "updated_at": "2026-07-03T11:08:02.785Z",
+  "updated_at": "2026-07-07T08:59:21.646Z",
   "comment": {
     "text": "This is a button label or option label for creating or converting a document. It appears in menus and dialogs where users can choose to create a new document or convert a file to a document format.",
     "is_auto": true,
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 523,
+      "line_number": 531,
       "context": "key: \"create-form-form\",\n disabled: !security?.Create,\n model: [\n {\n key: \"create-Document\",\n label: t(\"Common:Document\"),\n icon: DocumentsReactSvgUrl,\n onClick: () => actions.onCreate(\"docx\"),\n },\n {\n key: \"create-spreadsheet\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useCreateActions.tsx",
-      "line_number": 54,
+      "line_number": 89,
       "context": "return React.useMemo<QuickActionItem[]>(\n () => [\n {\n id: \"document\",\n icon: <CreateDocumentIcon />,\n label: t(\"Common:Document\"),\n onClick: () =>\n window.open(\n makeCreateUrl(NEW_FILE_NAMES.document, myFolderId),\n \"_blank\",\n ),",
       "module": "/packages/client"
     },
@@ -61,25 +61,25 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useDocsMenuModels.tsx",
-      "line_number": 76,
+      "line_number": 111,
       "context": "const desktopModel = React.useMemo<ContextMenuModel[]>(\n () => [\n {\n id: \"actions_new-document\",\n key: \"docx\",\n label: t(\"Common:Document\"),\n icon: ActionsDocumentsReactSvgUrl,\n onClick: () => openCreateDialog(\"docx\"),\n },\n {\n id: \"actions_new-spreadsheet\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useDocsMenuModels.tsx",
-      "line_number": 76,
+      "line_number": 111,
       "context": "const desktopModel = React.useMemo<ContextMenuModel[]>(\n () => [\n {\n id: \"actions_new-document\",\n key: \"docx\",\n label: t(\"Common:Document\"),\n icon: ActionsDocumentsReactSvgUrl,\n onClick: () => openCreateDialog(\"docx\"),\n },\n {\n id: \"actions_new-spreadsheet\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useDocsMenuModels.tsx",
-      "line_number": 76,
+      "line_number": 111,
       "context": "const desktopModel = React.useMemo<ContextMenuModel[]>(\n () => [\n {\n id: \"actions_new-document\",\n key: \"docx\",\n label: t(\"Common:Document\"),\n icon: ActionsDocumentsReactSvgUrl,\n onClick: () => openCreateDialog(\"docx\"),\n },\n {\n id: \"actions_new-spreadsheet\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/utils/getFileType.ts",
-      "line_number": 30,
+      "line_number": 65,
       "context": "return t(\"Common:Diagram\");\n case FileType.Document:\n case FileType.OFormTemplate:\n case FileType.OForm:\n case FileType.PDF:\n return t(\"Common:Document\");\n default:\n return t(\"Common:Folder\");\n }\n };",
       "module": "/packages/shared"
     },

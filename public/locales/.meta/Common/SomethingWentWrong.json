@@ -3,7 +3,7 @@
   "content": "Something went wrong.",
   "content_en_sha1_hash": "bee54c9cc30c539ab2ed15c0c936e055cf8ef67e",
   "created_at": "2025-05-19T21:30:48.934Z",
-  "updated_at": "2026-07-03T11:08:02.790Z",
+  "updated_at": "2026-07-07T08:59:21.653Z",
   "comment": {
     "text": "This is an error message displayed in a toast notification or as a title in an empty state view. It appears when an unexpected error occurs during an operation, such as submitting to a form gallery, server communication, or data import.",
     "is_auto": true,
@@ -25,67 +25,67 @@
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 175,
+      "line_number": 210,
       "context": "await enable(\"ai-rooms\", true);\n setEnableAiRoomsVisible(false);\n navigate(\"/ai-rooms?section=rooms\");\n } catch (err) {\n console.error(\"Failed to enable ai-rooms\", err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n } finally {\n setEnableAiRoomsLoading(false);\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 175,
+      "line_number": 210,
       "context": "await enable(\"ai-rooms\", true);\n setEnableAiRoomsVisible(false);\n navigate(\"/ai-rooms?section=rooms\");\n } catch (err) {\n console.error(\"Failed to enable ai-rooms\", err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n } finally {\n setEnableAiRoomsLoading(false);\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 175,
+      "line_number": 210,
       "context": "await enable(\"ai-rooms\", true);\n setEnableAiRoomsVisible(false);\n navigate(\"/ai-rooms?section=rooms\");\n } catch (err) {\n console.error(\"Failed to enable ai-rooms\", err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n } finally {\n setEnableAiRoomsLoading(false);\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 175,
+      "line_number": 210,
       "context": "await enable(\"ai-rooms\", true);\n setEnableAiRoomsVisible(false);\n navigate(\"/ai-rooms?section=rooms\");\n } catch (err) {\n console.error(\"Failed to enable ai-rooms\", err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n } finally {\n setEnableAiRoomsLoading(false);\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 175,
+      "line_number": 210,
       "context": "await enable(\"ai-rooms\", true);\n setEnableAiRoomsVisible(false);\n navigate(\"/ai-rooms?section=rooms\");\n } catch (err) {\n console.error(\"Failed to enable ai-rooms\", err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n } finally {\n setEnableAiRoomsLoading(false);\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 175,
+      "line_number": 210,
       "context": "await enable(\"ai-rooms\", true);\n setEnableAiRoomsVisible(false);\n navigate(\"/ai-rooms?section=rooms\");\n } catch (err) {\n console.error(\"Failed to enable ai-rooms\", err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n } finally {\n setEnableAiRoomsLoading(false);\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleLauncher.tsx",
-      "line_number": 83,
+      "line_number": 118,
       "context": "const activated = await activate(id);\n if (activated) navigate(href);\n else openDialog();\n } catch (err) {\n console.error(`Failed to activate ${id}`, err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n }\n },\n [activate, navigate, t],\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleLauncher.tsx",
-      "line_number": 83,
+      "line_number": 118,
       "context": "const activated = await activate(id);\n if (activated) navigate(href);\n else openDialog();\n } catch (err) {\n console.error(`Failed to activate ${id}`, err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n }\n },\n [activate, navigate, t],\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleLauncher.tsx",
-      "line_number": 83,
+      "line_number": 118,
       "context": "const activated = await activate(id);\n if (activated) navigate(href);\n else openDialog();\n } catch (err) {\n console.error(`Failed to activate ${id}`, err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n }\n },\n [activate, navigate, t],\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleLauncher.tsx",
-      "line_number": 83,
+      "line_number": 118,
       "context": "const activated = await activate(id);\n if (activated) navigate(href);\n else openDialog();\n } catch (err) {\n console.error(`Failed to activate ${id}`, err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n }\n },\n [activate, navigate, t],\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleLauncher.tsx",
-      "line_number": 83,
+      "line_number": 118,
       "context": "const activated = await activate(id);\n if (activated) navigate(href);\n else openDialog();\n } catch (err) {\n console.error(`Failed to activate ${id}`, err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n }\n },\n [activate, navigate, t],\n );",
       "module": "/packages/client"
     },
@@ -133,26 +133,26 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 131,
+      "line_number": 133,
       "context": "if (result.failedArchives.length > 0) {\n setIsFileError(true);\n }\n }\n \n toastr.error(message || t(\"Common:SomethingWentWrong\"));\n setLoadingStatus(\"none\");\n clearInterval(uploadInterval.current);\n },\n [t, setLoadingStatus],\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 131,
+      "line_number": 133,
       "context": "if (result.failedArchives.length > 0) {\n setIsFileError(true);\n }\n }\n \n toastr.error(message || t(\"Common:SomethingWentWrong\"));\n setLoadingStatus(\"none\");\n clearInterval(uploadInterval.current);\n },\n [t, setLoadingStatus],\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 131,
+      "line_number": 133,
       "context": "if (result.failedArchives.length > 0) {\n setIsFileError(true);\n }\n }\n \n toastr.error(message || t(\"Common:SomethingWentWrong\"));\n setLoadingStatus(\"none\");\n clearInterval(uploadInterval.current);\n },\n [t, setLoadingStatus],\n );",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/LdapFormStore.js",
-      "line_number": 270,
-      "context": "\"Error while loading LDAP settings\",\n settingsRes?.reason,\n cronRes?.reason,\n defaultRes?.reason,\n );\n toastr.error(t(\"Common:SomethingWentWrong\"));\n }\n };\n \n setServer = (server) => {\n this.requiredSettings.server = server;",
+      "file_path": "/packages/client/src/store/LdapFormStore.ts",
+      "line_number": 441,
+      "context": "\"Error while loading LDAP settings\",\n (settingsRes as { reason?: Error })?.reason,\n (cronRes as { reason?: Error })?.reason,\n (defaultRes as { reason?: Error })?.reason,\n );\n toastr.error(t(\"Common:SomethingWentWrong\"));\n }\n };\n \n setServer = (server: string) => {\n this.requiredSettings.server = server;",
       "module": "/packages/client"
     },
     {
@@ -181,7 +181,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/error.tsx",
-      "line_number": 71,
+      "line_number": 106,
       "context": "}, [error]);\n \n return (\n <div style={containerStyle}>\n <p style={{ margin: 0, fontSize: \"14px\" }}>\n {t(\"Common:SomethingWentWrong\")}\n </p>\n <button type=\"button\" style={buttonStyle} onClick={reset}>\n {t(\"Common:TryAgain\")}\n </button>\n </div>",
       "module": "/packages/sdk"
     },

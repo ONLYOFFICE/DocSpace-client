@@ -3,7 +3,7 @@
   "content": "Download as",
   "content_en_sha1_hash": "e10ee8f09efe43f28dc9a950ae25d485fde3ca5e",
   "created_at": "2025-05-19T21:30:44.663Z",
-  "updated_at": "2026-06-09T14:03:10.904Z",
+  "updated_at": "2026-07-07T08:59:21.914Z",
   "comment": {
     "text": "This is a button label that appears in context menus and file headers, allowing users to download a selected file in a different format.",
     "is_auto": true,
@@ -12,26 +12,26 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2747,
+      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
+      "line_number": 2935,
       "context": "!item.external,\n },\n {\n id: \"option_download-as\",\n key: \"download-as\",\n label: t(\"Common:DownloadAs\"),\n icon: DownloadAsReactSvgUrl,\n onClick: this.onClickDownloadAs,\n disabled: !item.security?.Download,\n },\n ...moveActions,",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2747,
+      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
+      "line_number": 2935,
       "context": "!item.external,\n },\n {\n id: \"option_download-as\",\n key: \"download-as\",\n label: t(\"Common:DownloadAs\"),\n icon: DownloadAsReactSvgUrl,\n onClick: this.onClickDownloadAs,\n disabled: !item.security?.Download,\n },\n ...moveActions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 292,
+      "line_number": 312,
       "context": "case \"downloadAs\":\n if (!this.isAvailableOption(\"downloadAs\")) return null;\n return {\n id: \"menu-download-as\",\n label: t(\"Common:DownloadAs\"),\n onClick: this.downloadAsHandle,\n iconUrl: DownloadAsReactSvgUrl,\n };\n \n case \"moveTo\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 259,
+      "line_number": 294,
       "context": ");\n \n const getDownloadAsItem = useCallback(() => {\n return {\n key: \"download-as\",\n label: t(\"Common:DownloadAs\"),\n icon: DownloadAsReactSvgUrl,\n onClick: downloadAsAction,\n disabled: false,\n };\n }, [downloadAsAction, t]);",
       "module": "/packages/sdk"
     },

@@ -40,12 +40,12 @@ export const toAbsoluteUrl = (url: string): string =>
   url.startsWith("http") || url.startsWith("/") ? url : `/${url}`;
 
 export const PAYMENT_ROUTES = {
-  portalPayments: `/portal-settings/payments/portal-payments`,
-  services: `/portal-settings/payments/services`,
-  aiServices: `/portal-settings/payments/services/ai-services`,
-  aiSearch: `/portal-settings/payments/services/ai-search`,
-  backup: `/portal-settings/payments/services/backup`,
-  diskStorage: `/portal-settings/payments/services/disk-storage`,
+  portalPayments: `/billing/tariff-plan`,
+  services: `/billing/addons`,
+  aiServices: `/billing/addons/ai-services`,
+  aiSearch: `/billing/addons/ai-search`,
+  backup: `/billing/addons/backup`,
+  diskStorage: `/billing/addons/disk-storage`,
 } as const;
 
 export function getTwoDotsReplacing(translation: string) {

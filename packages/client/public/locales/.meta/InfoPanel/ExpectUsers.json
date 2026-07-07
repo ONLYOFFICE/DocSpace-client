@@ -3,7 +3,7 @@
   "content": "Expect users",
   "content_en_sha1_hash": "a90ef1efac83c2fbe3c15d7bcf5318e2c517db33",
   "created_at": "2025-05-19T21:30:54.775Z",
-  "updated_at": "2026-06-01T21:20:44.442Z",
+  "updated_at": "2026-07-07T08:59:21.802Z",
   "comment": {
     "text": "This is a label for a list of users who have been invited to a shared item but have not yet accepted the invitation.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/FilesView/hooks/useMembers.ts",
-      "line_number": 129,
+      "line_number": 130,
       "context": "label: t(\"Common:Guests\"),\n list: guests,\n },\n {\n key: TInfoPanelMemberType.guests,\n label: t(\"InfoPanel:ExpectUsers\"),\n list: expectedMembers,\n extra: { isExpect: true },\n },\n ];",
       "module": "/packages/client"
     },

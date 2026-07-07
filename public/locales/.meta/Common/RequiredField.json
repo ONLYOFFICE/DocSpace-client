@@ -3,7 +3,7 @@
   "content": "Required field",
   "content_en_sha1_hash": "04148d61b0b7212b69dd8b267c98c74a3ae36942",
   "created_at": "2025-05-19T21:30:47.872Z",
-  "updated_at": "2026-07-03T11:08:02.827Z",
+  "updated_at": "2026-07-07T08:59:21.713Z",
   "comment": {
     "text": "Error text. This message appears when a required input field is left empty or invalid, indicating that the user must provide information to proceed.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/SetAgentParams.tsx",
-      "line_number": 466,
+      "line_number": 470,
       "context": "isValidTitle={isValidTitle}\n isWrongTitle={isWrongTitle}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_agent_input\"\n />",
       "module": "/packages/client"
     },
@@ -133,19 +133,19 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/sub-components/SetAgentParams.tsx",
-      "line_number": 396,
+      "line_number": 431,
       "context": "isValidTitle={isValidTitle}\n isWrongTitle={isWrongTitle}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_agent_input\"\n />",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_store/CreateEditAgentStore.tsx",
-      "line_number": 302,
+      "line_number": 337,
       "context": "const cover = dialogsStore.cover;\n \n const { tags, title, icon, logo, prompt, profileId, quota } = agentParams;\n \n if (!profileId) {\n toastr.error(t(\"Common:RequiredField\"));\n return null;\n }\n \n const quotaLimit = isDefaultRoomsQuotaSet ? quota : null;\n const tagsToAddList = tags.map((tag) => tag.name);",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
-      "line_number": 502,
+      "line_number": 537,
       "context": "isAutoFocussed\n isDisabled={isLoading}\n />\n {hasNameError ? (\n <Text className={styles.errorText} fontSize=\"11px\">\n {t(\"Common:RequiredField\")}\n </Text>\n ) : null}\n </div>\n </div>",
       "module": "/packages/sdk"
     },

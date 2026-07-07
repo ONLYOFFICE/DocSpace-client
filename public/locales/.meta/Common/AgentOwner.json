@@ -3,7 +3,7 @@
   "content": "Agent owner",
   "content_en_sha1_hash": "da658143e67eb58d6fd36ea0dabf552b942dc53c",
   "created_at": "2025-10-27T16:14:10.214Z",
-  "updated_at": "2026-05-24T17:27:49.052Z",
+  "updated_at": "2026-07-07T08:59:21.649Z",
   "comment": {
     "text": "This is a label identifying the owner of an agent, appearing in the interface for changing room ownership.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/change-room-owner/index.tsx",
-      "line_number": 77,
+      "line_number": 112,
       "context": "return (\n <div>\n <Text className=\"change-owner-label\" fontWeight={600} fontSize=\"13px\">\n {isAgent\n ? t(\"Common:AgentOwner\", { defaultValue: \"Agent owner\" })\n : t(\"Common:RoomOwner\", { defaultValue: \"Room owner\" })}\n </Text>\n \n <div className={styles.changeOwnerDisplayWrapper}>\n <div className={styles.changeOwnerDisplay}>",
       "module": "/packages/sdk"
     }

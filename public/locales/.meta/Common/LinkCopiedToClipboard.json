@@ -3,7 +3,7 @@
   "content": "Link copied to clipboard",
   "content_en_sha1_hash": "cf544a801cb0075732ebc8f8196db5c590adc7e6",
   "created_at": "2025-05-19T21:30:46.130Z",
-  "updated_at": "2026-06-15T19:31:56.016Z",
+  "updated_at": "2026-07-07T08:59:21.766Z",
   "comment": {
     "text": "Toast message. Appears briefly to confirm that a link has been successfully copied to the user's clipboard.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/index.tsx",
-      "line_number": 397,
+      "line_number": 432,
       "context": "i18nKey=\"LinkNoExpiration\"\n components={{ 1: <strong key=\"strong-link-valid\" /> }}\n />\n );\n \n toastr.success(toastTranslation, t(\"Common:LinkCopiedToClipboard\"));\n copyShareLink(link.shareLink);\n };\n \n const editLink = async (\n linkAccess: number | null = null,",
       "module": "/packages/sdk"
     },

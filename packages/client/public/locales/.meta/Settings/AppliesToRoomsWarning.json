@@ -3,7 +3,7 @@
   "content": "Public Rooms will also become internal-only and won’t be accessible to external users.",
   "content_en_sha1_hash": "c6d1852b8de55fa5f6f97d5e3cecba358f8d7ce4",
   "created_at": "2026-06-02T08:43:23.423Z",
-  "updated_at": "2026-06-02T08:50:50.351Z",
+  "updated_at": "2026-07-07T08:59:21.880Z",
   "comment": {
     "text": "Warning text in the Portal Settings security section that informs users about the consequences for Public Rooms when modifying access control settings.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
-      "line_number": 420,
+      "line_number": 455,
       "context": "</Text>\n <Text fontSize=\"13px\" fontWeight=\"400\" lineHeight=\"20px\">\n {t(\"Settings:LinkStopWorking\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"600\" lineHeight=\"20px\">\n {t(\"Settings:AppliesToRoomsWarning\")}\n </Text>\n </div>\n </div>\n </div>",
       "module": "/packages/client"
     }

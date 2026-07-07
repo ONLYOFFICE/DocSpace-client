@@ -3,7 +3,7 @@
   "content": "Room template",
   "content_en_sha1_hash": "fdbb1ce823b57a9b8c778f4202dca453bf47d748",
   "created_at": "2025-05-19T21:30:56.152Z",
-  "updated_at": "2026-06-30T10:18:29.562Z",
+  "updated_at": "2026-07-07T08:59:21.794Z",
   "comment": {
     "text": "This is a label identifying a room as a template. It appears in the information panel when viewing details of a room that has been designated as a template.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/index.tsx",
-      "line_number": 238,
+      "line_number": 241,
       "context": "<>\n {isTemplate ? (\n <div className={styles.publicRoomBar}>\n <PublicRoomBar\n className={styles.roomTemplateBar}\n headerText={t(\"Files:RoomTemplate\")}\n iconName={FormReactSvgUrl}\n bodyText={\n <>\n <Text\n fontSize=\"12px\"",
       "module": "/packages/client"
     }

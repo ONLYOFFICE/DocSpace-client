@@ -3,7 +3,7 @@
   "content": "Group removed",
   "content_en_sha1_hash": "587c704467c3ef25e9a2b18a68181777f6352ac6",
   "created_at": "2025-05-19T21:30:54.925Z",
-  "updated_at": "2026-06-09T11:32:15.293Z",
+  "updated_at": "2026-07-07T08:59:21.812Z",
   "comment": {
     "text": "This is a toast message displayed in the activity feed when a group has been removed from a room.",
     "is_auto": true,
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/info-panel/views/history.tsx",
-      "line_number": 83,
+      "line_number": 114,
       "context": "case FeedActionKeys.RoomUpdateAccessForGroup:\n return t(\"Common:RoomUpdateAccess\");\n case FeedActionKeys.RoomGroupAdded:\n return t(\"Common:RoomGroupAdded\");\n case FeedActionKeys.RoomGroupRemove:\n return t(\"Common:RoomGroupRemove\");\n case FeedActionKeys.AddedRoomTags:\n return t(\"Common:AddedRoomTags\");\n case FeedActionKeys.DeletedRoomTags:\n return t(\"Common:DeletedRoomTags\");\n case FeedActionKeys.RoomLogoCreated:",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
-      "line_number": 254,
+      "line_number": 289,
       "context": "case FeedActionKeys.RoomUpdateAccessForGroup:\n return t(\"Common:RoomUpdateAccess\");\n case FeedActionKeys.RoomInviteResend:\n return t(\"Common:RoomInviteResend\");\n case FeedActionKeys.RoomGroupRemove:\n return t(\"Common:RoomGroupRemove\");\n case FeedActionKeys.RoomExternalLinkCreated:\n return t(\"Common:RoomExternalLinkCreated\");\n case FeedActionKeys.RoomExternalLinkRenamed: {\n const title = (feed.data as TFeedData).title;\n const oldTitle = (feed.data as TFeedData).oldTitle;",
       "module": "/packages/sdk"
     }

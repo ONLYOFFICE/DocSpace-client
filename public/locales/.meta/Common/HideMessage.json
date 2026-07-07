@@ -3,7 +3,7 @@
   "content": "Do not show this message again",
   "content_en_sha1_hash": "afe501e83003a3a7a215ca5582ac910c0271fb9b",
   "created_at": "2025-05-19T21:30:56.887Z",
-  "updated_at": "2026-06-01T21:20:44.405Z",
+  "updated_at": "2026-07-07T08:59:21.723Z",
   "comment": {
     "text": "This is a checkbox label that appears in various dialogs, allowing users to prevent a specific message or dialog from appearing again in the future.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/LifetimeDialog/index.js",
-      "line_number": 76,
+      "line_number": 111,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <div className={styles.lifetimeFooterContainer}>\n <Checkbox\n className={styles.lifetimeCheckbox}\n label={t(\"Common:HideMessage\")}\n isChecked={isChecked}\n onChange={onChange}\n dataTestId=\"lifetime_dialog_hide_message_checkbox\"\n />\n <div className={styles.lifetimeButtons}>",
       "module": "/packages/client"
     },

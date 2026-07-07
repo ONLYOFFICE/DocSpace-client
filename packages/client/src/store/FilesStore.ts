@@ -155,7 +155,6 @@ import type { AuthStore } from "@docspace/shared/store/AuthStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
-import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 
 import type SelectedFolderStore from "./SelectedFolderStore";
 import type { TNavigationPath } from "./SelectedFolderStore";
@@ -231,8 +230,6 @@ class FilesStore {
   publicRoomStore: PublicRoomStore;
 
   settingsStore: SettingsStore;
-
-  currentQuotaStore: CurrentQuotasStore | undefined;
 
   indexingStore: IndexingStore;
 
@@ -374,8 +371,6 @@ class FilesStore {
   // makeAutoObservable in the old JS (never a class field) — `declare`
   // keeps that runtime shape.
   declare isEditor: boolean;
-
-  declare fileActionStore?: { extension?: string; title?: string };
 
   constructor(
     authStore: AuthStore,
@@ -3402,27 +3397,6 @@ class FilesStore {
         return false;
     }
   }
-
-  onCreateAddTempItem = (items: TItem[]) => {
-    const { getFileIcon, getFolderIcon } = this.filesSettingsStore;
-    // fileActionStore is never assigned — this destructuring
-    // throws if onCreateAddTempItem is ever called (same as the old JS).
-    const { extension, title } = this.fileActionStore!;
-
-    if (items.length && items[0].id === -1) return; // TODO: if change media collection from state remove this;
-
-    const icon = extension
-      ? getFileIcon(`.${extension}`, 32)
-      : getFolderIcon(32);
-
-    items.unshift({
-      id: -1,
-      title,
-      parentId: this.selectedFolderStore.id as number,
-      fileExst: extension,
-      icon,
-    });
-  };
 
   get filterType() {
     return this.filter.filterType;
